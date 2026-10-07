@@ -1,0 +1,207 @@
+{
+  "project": "DĀR AL TAWḤĪD – Exact Source & Early Šarḥ Audit",
+  "range": "HAD-3301-3325",
+  "series": "3251-3350",
+  "status": "completed-exact-source-early-sharh-audit",
+  "ruleVersion": 7,
+  "exactReferenceRule": {
+    "required": [
+      "sourceBook",
+      "sourceVolume",
+      "sourcePage",
+      "sourceChapter",
+      "sourceSection",
+      "sourceHadithNumber",
+      "sourceEdition",
+      "sharhBook",
+      "sharhVolume",
+      "sharhPage",
+      "sharhChapter",
+      "sharhSection",
+      "sharhEdition",
+      "sharhReference"
+    ],
+    "noEstimatedPages": true,
+    "nullPagesForbiddenForNewRecords": true
+  },
+  "sourceEdition": {
+    "book": "Ṣaḥīḥ Muslim",
+    "editor": "Muḥammad Fuʾād ʿAbd al-Bāqī",
+    "publisher": "Dār Iḥyāʾ at-Turāṯ al-ʿArabī",
+    "place": "Bayrūt",
+    "volume": "4",
+    "mapping": {
+      "Muslim 3014": "2308",
+      "Muslim 3018": "2313–2314",
+      "Muslim 3019": "2315",
+      "Muslim 3020": "2316",
+      "Muslim 3021": "2316",
+      "Muslim 3022": "2317",
+      "Muslim 3023": "2317–2318",
+      "Muslim 3024": "2318",
+      "Muslim 3025": "2319",
+      "Muslim 3026": "2319",
+      "Muslim 3027": "2319",
+      "Muslim 3028": "2320"
+    }
+  },
+  "sharhEdition": {
+    "scholar": "Qāḍī ʿIyāḍ",
+    "book": "Ikmāl al-Muʿlim bi-Fawāʾid Muslim",
+    "editor": "Yaḥyā Ismāʿīl",
+    "publisher": "Dār al-Wafāʾ",
+    "place": "al-Manṣūrah",
+    "edition": "1. Aufl.",
+    "year": "1419 H/1998",
+    "volume": "8",
+    "pagesUsed": [
+      "573",
+      "581",
+      "582",
+      "583",
+      "584",
+      "585",
+      "586",
+      "587",
+      "588",
+      "589"
+    ]
+  },
+  "reason": "HAD-3301–3325 setzt den fortlaufenden Muslim-Bestand mit dem Abschluss des langen Ǧābir-Berichts (Muslim 3014) sowie den Tafsīr-Berichten Muslim 3018–3028 fort. Muslim 3015–3017 wurden bewusst übersprungen, weil ihre exakten frühen Šarḥ-Druckseiten in diesem Arbeitsgang nicht ausreichend sicher fixiert wurden. Die Tafsīr-Aussagen von ʿĀʾišah, Ibn ʿAbbās, al-Barāʾ und Ibn Masʿūd wurden als Āṯār geführt. Beim strengen Ibn-ʿAbbās-Bericht zur vorsätzlichen Tötung wurde Qāḍī ʿIyāḍs Klarstellung aufgenommen, dass Ahl as-Sunnah die grundsätzliche Annahme aufrichtiger Tawbah bejahen. Keine Seite wurde geschätzt.",
+  "completionRequirement": {
+    "exactPrimaryBook": true,
+    "exactPrimaryVolume": true,
+    "exactPrimaryPage": true,
+    "exactPrimaryChapter": true,
+    "exactPrimarySection": true,
+    "exactPrimaryHadithNumber": true,
+    "exactPrimaryEdition": true,
+    "exactSharhBook": true,
+    "exactSharhVolume": true,
+    "exactSharhPage": true,
+    "exactSharhEdition": true,
+    "noEstimatedPages": true,
+    "noNullSourcePages": true,
+    "noNullSharhPages": true,
+    "duplicateCheckCompleted": true,
+    "semanticDuplicateCheckCompleted": true,
+    "recordTypeAuditCompleted": true,
+    "globalCatalogUpdated": true,
+    "appleTvScreensaverUpdated": true,
+    "webIosAndroidLibraryLoaderUpdated": true,
+    "seriesProgress": "75/100",
+    "globalPushCompleted": true
+  },
+  "recordTypeCounts": {
+    "hadith": 5,
+    "athar": 20
+  },
+  "skippedSourceNumbers": [
+    {
+      "number": "Muslim 3015–3017",
+      "reason": "not used until exact early-sharh print pages are fixed without uncertainty"
+    }
+  ],
+  "records": [
+    {
+      "id": "HAD-3301",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3302",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3303",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3304",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3305",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3306",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3307",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3308",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3309",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3310",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3311",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3312",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3313",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3314",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3315",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3316",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3317",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3318",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3319",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3320",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3321",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3322",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3323",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3324",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3325",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    }
+  ]
+}
