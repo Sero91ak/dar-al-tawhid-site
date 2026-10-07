@@ -127,10 +127,22 @@
   }
 
   function artMarkup(kind, extraClass) {
-    const k = artKind(kind);
-    return '<span class="duahub-3d ' + k + " " + (extraClass || "") + '" aria-hidden="true">' +
-      '<i class="duahub-3d-back"></i><i class="duahub-3d-main"></i><i class="duahub-3d-accent"></i><i class="duahub-3d-glow"></i>' +
-      "</span>";
+    const raw = String(kind || "");
+    const k = /^action-/.test(raw) ? raw : artKind(kind);
+    const file = ({
+      "action-library": "action-library-v1222.png",
+      "action-learn": "action-learn-v1222.png",
+      "action-random": "action-random-v1222.png",
+      moon: "sleep-v1222.jpg",
+      food: "food-v1222.jpg",
+      home: "home-v1222.jpg",
+      mosque: "mosque-v1222.jpg",
+      family: "family-v1222.jpg",
+      shield: "protection-v1222.jpg",
+      book: "knowledge-v1222.jpg"
+    })[k] || "knowledge-v1222.jpg";
+    return '<img class="duahub-3d ' + escapeHtml(k) + " " + (extraClass || "") +
+      '" src="/kids/assets/dua-premium/' + file + '?v=1222" alt="" aria-hidden="true" loading="lazy" decoding="async">';
   }
 
   function avatarSvg(gender, className) {
@@ -177,9 +189,9 @@
           '<div class="duahub-head-copy"><small>HÖREN · VERSTEHEN · LERNEN</small><h2>Duʿāʾ</h2><p>Was möchtest du heute machen?</p></div>' +
         '</header>' +
         '<div class="duahub-actions" aria-label="Duʿāʾ Bereiche">' +
-          '<button type="button" class="duahub-action select" data-duahub-action="library">' + artMarkup("knowledge", "duahub-action-art") + '<strong>Duʿāʾ auswählen</strong><span>Alle geprüften Duʿāʾ</span><i class="duahub-arrow">›</i></button>' +
-          '<button type="button" class="duahub-action learn" data-duahub-action="learn">' + artMarkup("book", "duahub-action-art") + '<strong>Duʿāʾ lernen</strong><span>Schritt für Schritt</span><i class="duahub-arrow">›</i></button>' +
-          '<button type="button" class="duahub-action random" data-duahub-action="random">' + artMarkup("protection", "duahub-action-art") + '<strong>Zufalls-Duʿāʾ</strong><span>Etwas entdecken</span><i class="duahub-arrow">›</i></button>' +
+          '<button type="button" class="duahub-action select" data-duahub-action="library">' + artMarkup("action-library", "duahub-action-art") + '<strong>Duʿāʾ auswählen</strong><span>Alle geprüften Duʿāʾ</span><i class="duahub-arrow">›</i></button>' +
+          '<button type="button" class="duahub-action learn" data-duahub-action="learn">' + artMarkup("action-learn", "duahub-action-art") + '<strong>Duʿāʾ lernen</strong><span>Schritt für Schritt</span><i class="duahub-arrow">›</i></button>' +
+          '<button type="button" class="duahub-action random" data-duahub-action="random">' + artMarkup("action-random", "duahub-action-art") + '<strong>Zufalls-Duʿāʾ</strong><span>Etwas entdecken</span><i class="duahub-arrow">›</i></button>' +
         '</div>' +
         '<section class="duahub-resume" id="duaHubResume"></section>' +
         '<section class="duahub-library" id="duaHubLibrary">' +
@@ -222,7 +234,7 @@
       btn = document.createElement("button");
       btn.className = "nav-btn duahub-nav";
       btn.dataset.target = "dua";
-      btn.innerHTML = '<span class="ico duahub-nav-ico" aria-hidden="true"><i></i></span><span class="lab">Duʿāʾ</span>';
+      btn.innerHTML = '<span class="ico duahub-nav-ico" aria-hidden="true"><img src="/kids/assets/dua-premium/nav-dua-v1222.png?v=1222" alt="" decoding="async"></span><span class="lab">Duʿāʾ</span>';
       const stories = q('.nav-btn[data-target="stories"]', nav);
       if (stories?.nextSibling) nav.insertBefore(btn, stories.nextSibling);
       else nav.appendChild(btn);
@@ -311,7 +323,7 @@
     }
     box.innerHTML = list.map(d => {
       const cat = categoryOf(d);
-      return '<button type="button" class="duahub-card" data-duahub-id="' + escapeHtml(d.id) + '">' +
+      return '<button type="button" class="duahub-card cat-' + cat + '" data-duahub-id="' + escapeHtml(d.id) + '">' +
         '<span class="duahub-card-art">' + artMarkup(cat) + '</span>' +
         '<span class="duahub-card-copy"><small>' + escapeHtml(categoryLabel(cat)) + '</small><strong>' + escapeHtml(d.title) + '</strong><em>' + escapeHtml(stageLabel(d)) + '</em></span>' +
         '<span class="duahub-card-go">›</span>' +
@@ -417,12 +429,29 @@
     return "scene-" + categoryOf(d);
   }
 
+  function clearDuaLocks() {
+    const shell = q(".shell");
+    const nav = q(".bottom-nav");
+    const home = q("#duaHubHome");
+    [shell, nav, home].forEach(el => {
+      if (!el) return;
+      el.removeAttribute("inert");
+      if (el === nav) el.removeAttribute("aria-hidden");
+    });
+    if (shell) {
+      shell.style.removeProperty("overflow");
+      shell.style.removeProperty("touch-action");
+    }
+    document.body?.style.removeProperty("overflow");
+  }
+
   function openDetail(d) {
     detailItem = d;
     setLast(d.id);
     const detail = q("#duaHubDetail");
     const home = q("#duaHubHome");
     if (!detail || !home) return;
+    clearDuaLocks();
     q("#duaHubDetailHero").className = "duahub-detail-hero " + heroSceneClass(d);
     q("#duaHubDetailHero").innerHTML = artMarkup(categoryOf(d), "duahub-detail-art");
     q("#duaHubDetailKicker").textContent = "✓ GEPRÜFT · " + categoryLabel(categoryOf(d)).toUpperCase();
@@ -436,36 +465,32 @@
       (d.sourceUrl ? '<a href="' + escapeHtml(d.sourceUrl) + '" target="_blank" rel="noopener">Nachweis öffnen</a>' : "");
     const shell = q(".shell");
     lastShellScroll = shell ? (Number(shell.scrollTop) || 0) : 0;
-    if (shell) {
-      try { shell.scrollTo({ top: 0, left: 0, behavior: "auto" }); } catch (_) { shell.scrollTop = 0; }
-    }
-    const bottomNav = q(".bottom-nav");
-    if (bottomNav) {
-      bottomNav.setAttribute("inert", "");
-      bottomNav.setAttribute("aria-hidden", "true");
-    }
-    home.setAttribute("inert", "");
+    home.hidden = true;
     home.setAttribute("aria-hidden", "true");
     detail.classList.add("open");
     detail.setAttribute("aria-hidden", "false");
-    detail.querySelector(".duahub-detail-scroll").scrollTop = 0;
     document.documentElement.classList.add("duahub-detail-open");
+    requestAnimationFrame(() => {
+      if (shell) {
+        try { shell.scrollTo({ top: 0, left: 0, behavior: "auto" }); } catch (_) { shell.scrollTop = 0; }
+      }
+    });
   }
 
   function closeDetail(restore = true) {
     stopAudio();
     const detail = q("#duaHubDetail");
     const home = q("#duaHubHome");
-    if (!detail || !home) return;
+    if (!detail || !home) {
+      clearDuaLocks();
+      document.documentElement.classList.remove("duahub-detail-open");
+      return;
+    }
     detail.classList.remove("open");
     detail.setAttribute("aria-hidden", "true");
-    const bottomNav = q(".bottom-nav");
-    if (bottomNav) {
-      bottomNav.removeAttribute("inert");
-      bottomNav.removeAttribute("aria-hidden");
-    }
-    home.removeAttribute("inert");
+    home.hidden = false;
     home.removeAttribute("aria-hidden");
+    clearDuaLocks();
     document.documentElement.classList.remove("duahub-detail-open");
     detailItem = null;
     if (restore) {
@@ -571,7 +596,13 @@
     });
     q("#duaHubLearn")?.addEventListener("click", () => smartLearnItem(detailItem));
     q("#duaHubGerman")?.addEventListener("click", () => playGerman(detailItem));
-    document.addEventListener("visibilitychange", () => { if (document.hidden) stopAudio(); }, { passive: true });
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) stopAudio();
+      else if (!q("#duaHubDetail")?.classList.contains("open")) clearDuaLocks();
+    }, { passive: true });
+    window.addEventListener("pageshow", () => {
+      if (!q("#duaHubDetail")?.classList.contains("open")) clearDuaLocks();
+    }, { passive: true });
   }
 
   function enhanceProfileRows() {
