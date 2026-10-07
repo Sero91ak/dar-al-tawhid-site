@@ -113,3 +113,13 @@ Verbindlich für `/kids/` und alle künftigen Kids-Erweiterungen.
 - Zwischen Zurück-Control und Titelblock liegt eine feine vertikale Akzentlinie. Titel bleibt primär, Untertitel sekundär.
 - Tiefe entsteht nur über einen dezenten unteren Schatten/Blur und eine feine Akzentkante; keine komplette Kartenumrandung.
 - Hero-/Bildbühnen, Detail-Heroes und deren Overlay-Navigation sind weiterhin ausdrücklich ausgeschlossen.
+
+
+## Interaktives Zurück-Wischen — `KIDS_INTERACTIVE_EDGE_SWIPE_V1246`
+
+- In geöffneten Unterseiten kann **von der rechten Displaykante nach links** gewischt werden, um den Bereich zu verlassen.
+- Zusätzlich bleibt die iOS-Gewohnheit **von der linken Kante nach rechts** erhalten.
+- Die aktive Fläche folgt dem Finger kontinuierlich; es gibt keinen harten Sprung am Ende der Geste.
+- Eine nicht abgeschlossene Geste federt weich in die Ausgangsposition zurück. Eine abgeschlossene Geste gleitet aus dem Viewport und aktiviert erst danach den vorherigen Zustand.
+- Vertikales Scrollen, Slider sowie Audio-/Qurʾān-Fortschrittsflächen dürfen nicht als Zurück-Geste übernommen werden.
+- Hero-/Bildbühnen werden durch diese Regel nicht optisch verändert.
