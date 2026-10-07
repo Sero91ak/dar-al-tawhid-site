@@ -1065,8 +1065,10 @@
     "deenReadTextWithoutAudio": true,
     "kidsQuizHomeEntryVisible": true,
     "kidsQuizHomeEntryRegressionGuard": "v1225",
-    "homeBrandVisibilityFix": "v1226-specificity"
+    "homeBrandVisibilityFix": "v1226-specificity",
+    "kidsDesignGuardTouchRail": "v12",
+    "kidsQuizHomeEntryDeployRetry": "v1225-live"
   },
-  "updatedAt": "2026-10-07",
+  "updatedAt": "2026-10-07T12:24:00+02:00",
   "deployTrigger": "2026-10-07T12:11:00+02:00"
 }
