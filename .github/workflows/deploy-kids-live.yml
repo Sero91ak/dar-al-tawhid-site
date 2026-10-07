@@ -2,24 +2,16 @@ name: Deploy Kids App Live
 # Dua audio asset deploy marker: 2026-10-07-fusha-v3-final
 
 on:
+  # Manual emergency/release path only.
+  # Automatic production deploys, including Kids changes, are owned by
+  # cloudflare-pages-deploy.yml so two workflows never race on one Worker.
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - "kids/**"
-      - "_headers"
-      - "cloudflare/site-router.js"
-      - "cloudflare/test-app-worker.js"
-      - "scripts/kids-prophet-release-guard.js"
-      - ".github/workflows/deploy-kids-live.yml"
 
 permissions:
   contents: read
 
 concurrency:
-  # Same production lock as the visitor deploy: both publish dar-al-tawhid-site.
-  # This prevents an older run from rolling back newer Kids/Duʿāʾ static assets.
+  # Manual emergency deploy still shares the production lock.
   group: dar-al-tawhid-production-worker-deploy
   cancel-in-progress: true
 
