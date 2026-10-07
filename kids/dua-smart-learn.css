@@ -254,3 +254,36 @@ html.dua-smart-open,body.dua-smart-open{
   .dsl-arabic{min-height:76px!important}
   .dsl-focus{padding-top:6px!important;padding-bottom:6px!important}
 }
+
+
+/* DUA ISOLATED WORD AUDIO V1234 */
+.dsl-focus-word{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:100%!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  color:inherit!important;
+  cursor:pointer!important;
+}
+.dsl-focus-word:active{transform:scale(.985)}
+.dsl-word[disabled],
+.dsl-play[disabled],
+.dsl-stepnav button[disabled]{
+  opacity:.48!important;
+  cursor:default!important;
+}
+.dsl.exact-ready .dsl-word,
+.dsl.exact-ready .dsl-focus-word{
+  -webkit-tap-highlight-color:rgba(238,202,111,.14)!important;
+}
+.dsl-word.active{
+  box-shadow:0 0 0 2px rgba(239,204,115,.34),0 0 22px rgba(239,204,115,.12)!important;
+}
+.dsl-speednote{
+  color:rgba(255,255,255,.58)!important;
+}
