@@ -319,7 +319,8 @@ jobs:
                       if target.stat().st_size<1200:
                           raise RuntimeError("Encoded clip too small")
                       d=duration(target)
-                      if not (0.25<=d<=120):
+                      min_duration=0.12 if profile=="dua_word" else 0.25
+                      if not (min_duration<=d<=120):
                           raise RuntimeError(f"Implausible duration: {d:.3f}s")
                       with lock:
                           serial["done"]+=1
@@ -588,7 +589,8 @@ jobs:
               out=[]
               for raw in norm(text).split():
                   token=raw.strip(AR_PUNCT)
-                  if token:
+                  # A standalone Qurʾānic pause/ornament mark is not a spoken word.
+                  if token and any("\u0621"<=ch<="\u064a" for ch in token):
                       out.append(token)
               return out
 
