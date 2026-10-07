@@ -14,6 +14,8 @@
 
   var path = String(global.location && global.location.pathname || "");
   if (!(path === "/test" || path.indexOf("/test/") === 0)) return;
+  if (global.__DAR_ADAPTIVE_NAV_V1325) return;
+  global.__DAR_ADAPTIVE_NAV_V1325 = true;
 
   var root = document.documentElement;
   var STORAGE_KEY = "darNavPositionV2";
