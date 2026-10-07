@@ -87,6 +87,8 @@ const APP_SHELL = [
   '/test/assets/adaptive-layout.css',
   '/test/assets/fold-split.js',
   '/test/assets/fold-split.css',
+  '/test/assets/fold-thumb-nav.js',
+  '/test/assets/fold-thumb-nav.css',
   '/test/assets/frauen/frauen-fiqh.js',
   '/test/assets/frauen/frauen-fiqh.css',
   '/test/assets/frauen/library-v1224/01-grundlagen-din.jpg',
