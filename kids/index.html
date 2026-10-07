@@ -3270,7 +3270,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v116-dua-learning1211";
+const KIDS_BUILD_ID="kids-shell-v117-dua-smart1212";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -4943,7 +4943,7 @@ function duaDailyIndex(list){
   return seed%list.length;
 }
 function fetchKidsDuas(){
-  return fetch("/kids/data/dua-kids.json?v=1211",{cache:"force-cache"})
+  return fetch("/kids/data/dua-kids.json?v=1212",{cache:"force-cache"})
     .then(function(r){if(!r.ok)throw new Error("dua-data");return r.json()})
     .then(function(data){
       kidsDuas=Array.isArray(data.items)?data.items.filter(function(x){return x.verification==="verified"}):[];
@@ -6397,7 +6397,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=6"></script>\n<script src="/kids/dua-smart-learn.js?v=1"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v116-dua-learning1211";
+  var KIDS_BUILD_ID="kids-shell-v117-dua-smart1212";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -6413,13 +6413,13 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1211",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1212",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
   }
   window.addEventListener("load",function(){
-    fetch("/kids/version.json?v=1211",{cache:"no-store"})
+    fetch("/kids/version.json?v=1212",{cache:"no-store"})
       .then(function(r){return r.ok?r.json():null})
       .then(function(v){
         var live=String(v&&v.buildId||"");
