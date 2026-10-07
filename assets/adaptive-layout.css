@@ -558,3 +558,153 @@ html[data-fold-capacity="single"]{
     min-width:0!important;
   }
 }
+
+
+/* v1330 · THREE SURFACE MODES: phone-landscape / workspace / reader */
+/* 1) PHONE LANDSCAPE
+   A phone turned sideways stays one coherent app page. Width is used for room,
+   not for desktop-like multi-column compression. */
+html[data-layout-surface="phone-landscape"] :is(
+  .app,#appRoot,#appShell,#appView,#appView.view,.view
+){
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin-inline:0!important;
+  box-sizing:border-box!important;
+}
+
+html[data-layout-surface="phone-landscape"] :is(
+  .qov-page,.quran-overview,.quran-topic-page,
+  .dua-hub,.topics-hub,.books-library-shell,.library-shell,
+  .more-page,.account-page,.scholars-index,.hadith-shell-pro
+){
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin-inline:0!important;
+  box-sizing:border-box!important;
+}
+
+/* Vertical lists remain vertical on short-edge phone landscape. */
+html[data-layout-surface="phone-landscape"] :is(
+  #quranSurahGrid,#quranSurahGrid.qov-surah-list,
+  .qov-surah-list,.dua-list,.topics-list,.books-library-list,
+  .scholar-list,.hadith-list
+){
+  display:flex!important;
+  flex-direction:column!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  grid-template-columns:none!important;
+}
+
+/* Phone-landscape cards may breathe horizontally, but never become tiny tiles. */
+html[data-layout-surface="phone-landscape"] :is(
+  .folder-grid,.latest-grid,.dua-theme-grid,.topics-theme-grid,.lib-grid
+){
+  display:grid!important;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))!important;
+  gap:10px!important;
+}
+
+/* 2) WORKSPACE
+   Real Fold/iPad/large panes may use master-detail. Master remains a vertical
+   chooser; reader/media owns the rest. */
+html[data-layout-surface="workspace"] .dar-fold[data-fold-mode="dual"]{
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+}
+html[data-layout-surface="workspace"] .dar-fold__rail :is(
+  .qov-surah-list,#quranSurahGrid,.dua-list,.topics-list,.books-library-list
+){
+  display:flex!important;
+  flex-direction:column!important;
+  grid-template-columns:none!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+}
+
+/* 3) READER
+   The background/pane may use all available width. Text keeps a controlled
+   reading measure; PDF/media can use the whole pane. */
+html[data-layout] :is(
+  .article,.post-reader,.post-body,
+  .quran-reader-shell,.quran-ayah-list,
+  .dua-detail-box,.hadith-detail,.lib-detail,.qsrc-detail
+){
+  max-inline-size:min(100%,52rem)!important;
+  margin-inline:auto!important;
+  min-width:0!important;
+  box-sizing:border-box!important;
+}
+
+html[data-layout-surface="phone-landscape"] :is(
+  .article,.post-reader,.post-body,
+  .quran-reader-shell,.quran-ayah-list,
+  .dua-detail-box,.hadith-detail,.lib-detail,.qsrc-detail
+){
+  max-inline-size:min(100%,58rem)!important;
+  padding-inline:clamp(12px,2.4vw,28px)!important;
+}
+
+html[data-layout-surface="workspace"] .dar-fold__pane :is(
+  .article,.post-reader,.post-body,
+  .quran-reader-shell,.quran-ayah-list,
+  .dua-detail-box,.hadith-detail,.lib-detail,.qsrc-detail
+){
+  max-inline-size:min(100%,48rem)!important;
+  margin-inline:auto!important;
+}
+
+/* PDF/media always center in their content pane and are never forced under
+   a side navigation rail. */
+html[data-layout] :is(
+  .pdf-viewer,.pdf-reader,.pdf-shell,[data-pdf-viewer],
+  iframe[src*=".pdf"],embed[type="application/pdf"],
+  .reader-media,.wide-media,.quran-page-canvas
+){
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin-inline:auto!important;
+  box-sizing:border-box!important;
+}
+
+/* Hero/home remains broad and compositionally aligned to the available app
+   surface; side navigation reservation is inherited from body. */
+html[data-layout-surface="phone-landscape"] body.is-home-route :is(
+  .top-shell,#appView,.home-v380-shell
+),
+html[data-layout-surface="workspace"] body.is-home-route :is(
+  .top-shell,#appView,.home-v380-shell
+){
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin-inline:0!important;
+}
+
+/* Long labels must wrap inside their assigned region, never expand tracks. */
+html[data-layout] :is(
+  .dar-fold__rail,.dar-fold__pane,.qov-row,.dua-card,.post-card,.lib-card,
+  .quran-surah-card,.settings-section
+){
+  min-width:0!important;
+}
+html[data-layout] :is(
+  .qov-row h3,.dua-card h3,.post-card h3,.lib-card h3,
+  .quran-surah-card h3,.view h1,.view h2,.view h3
+){
+  overflow-wrap:anywhere;
+}
+
+/* No geometry animation when crossing surface modes. */
+html[data-layout] :is(
+  .dar-fold,.dar-fold__rail,.dar-fold__pane,#appView,.view
+){
+  transition-property:opacity,color,background-color,border-color!important;
+}
