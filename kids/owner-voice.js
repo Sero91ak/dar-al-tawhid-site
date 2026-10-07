@@ -16,7 +16,7 @@
   player.volume=1;
 
   function normalize(text){
-    return String(text||"").replace(/\s+/g," ").trim();
+    return String(text||"").normalize("NFC").replace(/\s+/g," ").trim();
   }
   function stopNativeSpeech(){
     try{if(window.speechSynthesis)window.speechSynthesis.cancel()}catch(e){}
