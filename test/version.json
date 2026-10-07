@@ -1,6 +1,6 @@
 {
-  "buildId": "app-shell-v1323",
-  "appBuildId": "app-shell-v1323",
-  "note": "v1323 · Stabilitäts-Hotfix: die experimentellen dynamischen Vollseiten-Hintergrundebenen aus v1322 wurden vollständig entfernt. Startseite nutzt wieder die stabile v1321-Home-Struktur, damit Scrollen und Touch in iOS/PWA nicht blockiert werden. Keine Änderung an der Fünf-Tab-Leiste.",
-  "updatedAt": "2026-10-07T20:59:00+02:00"
+  "buildId": "app-shell-v1324",
+  "appBuildId": "app-shell-v1324",
+  "note": "v1324 · Mobile/Test-Startseite nutzt jetzt genau ein statisches Master-Hintergrund-Asset: Hero und Schreibtischmotiv sind bereits im Asset überblendet, darunter läuft das Motiv unter einem warmen Pergament-Schleier bis in den Footer aus. Alte zweite Hintergrundebenen, Masken und Naht-Washes sind auf Mobile deaktiviert. Keine Scroll-, Navigations- oder Bottom-Tab-Änderungen.",
+  "updatedAt": "2026-10-07T21:24:00+02:00"
 }
