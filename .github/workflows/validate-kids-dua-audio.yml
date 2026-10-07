@@ -48,7 +48,19 @@ jobs:
             assert len(entries)==expected,(path,len(entries),expected)
             assert data.get("modelId")=="eleven_v4",(path,data.get("modelId"))
             assert data.get("voiceProfileId")=="serhat-owner-voice-2026",(path,data.get("voiceProfileId"))
+            if path in {
+              "kids/data/dua-arabic-audio.json",
+              "kids/data/dua-arabic-slow-audio.json",
+              "kids/data/dua-word-audio.json"
+            }:
+              assert data.get("pronunciationDictionaryApplied") is False,(path,data.get("pronunciationDictionaryApplied"))
             for entry in entries.values():
+              if path in {
+                "kids/data/dua-arabic-audio.json",
+                "kids/data/dua-arabic-slow-audio.json",
+                "kids/data/dua-word-audio.json"
+              }:
+                assert entry.get("pronunciationDictionaryApplied") is False,(path,entry.get("pronunciationDictionaryApplied"))
               url=str(entry.get("url") or "").split("?",1)[0]
               p=root/url.lstrip("/")
               assert p.exists() and p.stat().st_size>1200,(path,url)
