@@ -161,7 +161,7 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;background:tran
 <script>
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const state={health:null,analysis:null,analysisText:"",analysisStyle:"",audioBlob:null,audioUrl:"",finalAudioName:"",livePreviewName:"",livePreviewDuration:0,livePreviewGeneration:0,liveChunks:[],liveChunkCursor:0,liveStreamActive:false,liveChunkUrls:new Map(),liveChunkFetches:new Map(),liveChunkEpoch:0,finalReady:false,activeJobId:"",previewTerm:"",catalogOffset:0,catalogQuery:"",catalogTotal:0,catalogRows:[],wordResultSerial:0,generating:false};
-const MOBILE_APP_VERSION="2.9.120";
+const MOBILE_APP_VERSION="2.9.121";
 const LOCAL_ENGINE_HOST=location.port==="8787"||location.hostname==="127.0.0.1"||location.hostname==="localhost"||/^192\.168\./.test(location.hostname)||/^10\./.test(location.hostname)||/^172\.(1[6-9]|2\d|3[01])\./.test(location.hostname);
 const REMOTE_ENGINE_API="/voice-studio/api/engine";
 const CLOUD_API_BASE="/voice-studio/api";
