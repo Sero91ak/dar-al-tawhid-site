@@ -1,16 +1,10 @@
 # smart-dua-rerun-v3-elevenlabs-production
-name: Force Align Dua Smart Learning
+name: Legacy Dua forced alignment (manual only)
 
 # exact-production-alignment-only
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - 'kids/data/dua-kids.json'
-      - 'kids/data/dua-arabic-audio.json'
-      - '.github/workflows/force-align-dua-smart-learning.yml'
 
 permissions:
   contents: write
