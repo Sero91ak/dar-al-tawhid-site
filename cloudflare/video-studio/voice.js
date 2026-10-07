@@ -48,7 +48,7 @@ export async function probeElevenAuth(env) {
       },
       body: JSON.stringify({
         text: "Test.",
-        model_id: String(env.ELEVENLABS_MODEL_ID || "eleven_multilingual_v2"),
+        model_id: String(env.ELEVENLABS_MODEL_ID || "eleven_v4"),
         voice_settings: {
           stability: 0.55,
           similarity_boost: 0.8
@@ -91,7 +91,7 @@ const DAR_VOICE_BOUNDARY_CLASS = String.raw`\s.,،;؛:!?؟…·()\[\]{}«»"'“
 let _darVoicePronunciationMatchers = null;
 
 function escapeRegExp(value) {
-  return String(value || "").replace(/[\\^$.*+?()[\]{}|]/g, "\\export async function synthesizeDarVoice(env, text, options = {}) {");
+  return String(value || "").replace(/[\\^$.*+?()[\]{}|]/g, "\\return String(value || "").replace(/[\\^$.*+?()[\]{}|]/g, "\\export async function synthesizeDarVoice(env, text, options = {}) {");");
 }
 
 function darVoicePronunciationMatchers() {
@@ -252,7 +252,7 @@ export async function synthesizeDarVoice(env, text, options = {}) {
   const ttsScript = dictionaryReady || withTimings ? script : prepareDarVoicePronunciation(script);
   const body = {
     text: ttsScript,
-    model_id: String(env.ELEVENLABS_MODEL_ID || "eleven_multilingual_v2"),
+    model_id: String(env.ELEVENLABS_MODEL_ID || "eleven_v4"),
     voice_settings: voiceSettings
   };
   if (dictionaryReady) {
