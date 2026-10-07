@@ -301,7 +301,7 @@ export async function synthesizeDarVoice(env, text, options = {}) {
     body.language_code = "ar";
     body.apply_text_normalization = "off";
   }
-  if (dictionaryReady && !arabicLearningProfile) {
+  if (dictionaryReady) {
     body.pronunciation_dictionary_locators = [{
       pronunciation_dictionary_id: dictionaryId,
       version_id: dictionaryVersionId
@@ -340,8 +340,8 @@ export async function synthesizeDarVoice(env, text, options = {}) {
       contentType: "audio/mpeg",
       voiceId,
       modelId,
-      pronunciationDictionaryId: arabicLearningProfile ? null : (dictionaryId || null),
-      pronunciationDictionaryVersionId: arabicLearningProfile ? null : (dictionaryVersionId || null),
+      pronunciationDictionaryId: dictionaryId || null,
+      pronunciationDictionaryVersionId: dictionaryVersionId || null,
       chars: script.length,
       timestamps: true,
       estimatedCostEur: Number(((script.length / 1000) * 0.18).toFixed(4))
@@ -355,8 +355,8 @@ export async function synthesizeDarVoice(env, text, options = {}) {
     contentType: "audio/mpeg",
     voiceId,
     modelId,
-    pronunciationDictionaryId: arabicLearningProfile ? null : (dictionaryId || null),
-    pronunciationDictionaryVersionId: arabicLearningProfile ? null : (dictionaryVersionId || null),
+    pronunciationDictionaryId: dictionaryId || null,
+    pronunciationDictionaryVersionId: dictionaryVersionId || null,
     chars: script.length,
     timestamps: false,
     estimatedCostEur: Number(((script.length / 1000) * 0.18).toFixed(4))
