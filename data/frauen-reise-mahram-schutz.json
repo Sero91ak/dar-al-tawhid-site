@@ -1,6 +1,6 @@
 {
-  "fassung": 1,
-  "aktualisiertAm": "2026-08-30",
+  "fassung": 2,
+  "aktualisiertAm": "2026-10-07",
   "bereich": "reise-mahram-schutz",
   "eintraege": [
     {
@@ -106,22 +106,28 @@
     },
     {
       "kennung": "reise-definition-mahram-001",
-      "titel": "Definition des Maḥram",
-      "bereich": "in-pruefung",
-      "thema": "in-pruefung",
-      "kurzvorschau": "Innere Vorbereitung.",
-      "vollstaendigeAussage": "",
-      "lehre": "",
-      "quellenart": "in-pruefung",
-      "quellenstatus": "nicht-anzeigen",
-      "quellenanzeige": "In Prüfung",
+      "titel": "Was ein Maḥram grundsätzlich ist",
+      "bereich": "mahram",
+      "thema": "definition-mahram",
+      "kurzvorschau": "Ein Maḥram ist nicht einfach ein vertrauter Mann, sondern eine Person, mit der eine Heirat dauerhaft verboten ist.",
+      "vollstaendigeAussage": "Sūrat an-Nisāʾ 4:23 nennt die dauerhaft verbotenen Verwandtschafts- und Verschwägerungsbeziehungen, darunter nahe Blutsverwandtschaft sowie bestimmte Beziehungen durch Ehe. Die Sunnah ergänzt ausdrücklich, dass durch bestätigte Milchverwandtschaft dieselben dauerhaften Eheverbote entstehen wie durch Abstammung. Darauf beruht der Fiqh-Begriff Maḥram. Ein bloßer Bekannter, Freund oder nicht dauerhaft eheverbotener Verwandter wird dadurch nicht zum Maḥram.",
+      "lehre": "Für Reise-, Khalwah- und ähnliche Regeln muss zuerst korrekt geklärt werden, ob tatsächlich eine dauerhafte Maḥram-Beziehung besteht.",
+      "quellenart": "quran",
+      "quellenstatus": "geprueft",
+      "quellenanzeige": "Quelle: Qurʾān, Sūrat an-Nisāʾ 4:23; Ṣaḥīḥ al-Bukhārī, Nr. 2645; Ṣaḥīḥ Muslim, Nr. 1445–1447.",
       "direktnachweisText": "→ Quelle öffnen",
-      "direktnachweisUrl": "",
+      "direktnachweisUrl": "https://www.islamweb.net/ar/library/content/50/1215/",
       "direktnachweisArt": "Webseite",
-      "freigabeDurchSerhat": false,
-      "schlagwoerter": [],
-      "hinweise": "Innere Vorbereitung. Unsichtbar, bis Quelle, Direktnachweis und Prüfung feststehen.",
-      "atharPruefung": "Bei der Endprüfung Ṣaḥābah-, Salaf- und Athar-Aussagen mit Direktnachweis prüfen."
+      "freigabeDurchSerhat": true,
+      "schlagwoerter": [
+        "Maḥram",
+        "Reise",
+        "Verwandtschaft",
+        "Milchverwandtschaft",
+        "an-Nisāʾ"
+      ],
+      "hinweise": "Konkrete Zweifelsfälle zu Verschwägerung oder Milchverwandtschaft separat prüfen. Der Eintrag ist eine Grunddefinition, keine vollständige Fallliste.",
+      "atharPruefung": "Qurʾān 4:23, Tafsīr aṭ-Ṭabarī und authentische Sunnah zur Milchverwandtschaft geprüft."
     },
     {
       "kennung": "reise-flug-001",
