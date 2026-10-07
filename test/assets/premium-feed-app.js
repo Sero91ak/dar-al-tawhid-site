@@ -3070,6 +3070,100 @@
     }, 3000);
   }
 
+  function feedShareText(value) {
+    return String(value == null ? "" : value).replace(/\s+/g, " ").trim();
+  }
+
+  function feedShareStandardPayload(item, card) {
+    item = item || {};
+    var title = feedShareText(item.title || item.headline || item.name);
+    if (!title && card) {
+      var titleEl = card.querySelector("h1,h2,h3,.sf-post__title,.feed-title");
+      title = feedShareText(titleEl && titleEl.textContent);
+    }
+    var body = feedShareText(item.statement || item.preview || item.text || item.caption || item.description);
+    if (!body && card) {
+      var bodyEl = card.querySelector(".feed-quote-panel,.sf-post__textpanel,.sf-post__caption,.statement");
+      body = feedShareText(bodyEl && bodyEl.textContent);
+    }
+    var source = feedShareText(item.sourceDetail || item.source || item.reference || item.work || "");
+    var url = item.postUrl || item.url || global.location.href;
+    return {
+      kind: item.type === "postFeed" ? "post" : "feed",
+      category: item.category || "Wissen",
+      title: title || "DĀR AL TAWḤĪD",
+      body: body || title || "DĀR AL TAWḤĪD",
+      source: source || "Quelle siehe Inhalt in der App.",
+      url: url
+    };
+  }
+
+  function ensureFeedShareStandardStyle() {
+    if (document.getElementById("sfGlobalShareStandardStyle")) return;
+    var style = document.createElement("style");
+    style.id = "sfGlobalShareStandardStyle";
+    style.textContent =
+      ".sf-global-share-overlay{position:fixed;inset:0;z-index:2147482500;display:flex;align-items:flex-end;justify-content:center;padding:18px;background:rgba(2,8,10,.62);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}" +
+      ".sf-global-share-sheet{width:min(680px,100%);max-height:min(90dvh,780px);overflow:auto;border-radius:26px 26px 20px 20px;background:var(--card,var(--bg,#fff));box-shadow:0 -18px 70px rgba(0,0,0,.32);padding:12px}" +
+      ".sf-global-share-close{display:grid;place-items:center;margin:0 0 8px auto;width:40px;height:40px;border-radius:50%;border:1px solid var(--line,rgba(255,255,255,.15));background:color-mix(in srgb,var(--card,#fff) 82%,transparent);color:var(--ink,var(--text,#111));font-size:23px;cursor:pointer}" +
+      ".sf-global-share-host>.dar-share-card{margin:0!important}" +
+      "@media(min-width:760px){.sf-global-share-overlay{align-items:center}.sf-global-share-sheet{border-radius:26px}}";
+    document.head.appendChild(style);
+  }
+
+  function closeFeedShareStandard() {
+    var overlay = document.getElementById("sfGlobalShareOverlay");
+    if (overlay) overlay.remove();
+  }
+
+  function openFeedShareStandard(item, options) {
+    options = options || {};
+    var api = global.DARGlobalShare;
+    if (!api || typeof api.mount !== "function") return false;
+    ensureFeedShareStandardStyle();
+    closeFeedShareStandard();
+
+    var overlay = document.createElement("div");
+    overlay.id = "sfGlobalShareOverlay";
+    overlay.className = "sf-global-share-overlay";
+    overlay.setAttribute("role", "dialog");
+    overlay.setAttribute("aria-modal", "true");
+    overlay.setAttribute("aria-label", "Wissen weitergeben");
+
+    var sheet = document.createElement("div");
+    sheet.className = "sf-global-share-sheet";
+    var close = document.createElement("button");
+    close.type = "button";
+    close.className = "sf-global-share-close";
+    close.setAttribute("aria-label", "Schließen");
+    close.textContent = "×";
+    var host = document.createElement("div");
+    host.className = "sf-global-share-host";
+
+    sheet.appendChild(close);
+    sheet.appendChild(host);
+    overlay.appendChild(sheet);
+    document.body.appendChild(overlay);
+
+    var payload = feedShareStandardPayload(item, options.card || null);
+    payload.imageHandler = typeof options.imageHandler === "function" ? function (instagram) {
+      return options.imageHandler(instagram);
+    } : null;
+    api.mount(host, payload);
+
+    close.onclick = closeFeedShareStandard;
+    overlay.addEventListener("click", function (ev) {
+      if (ev.target === overlay) closeFeedShareStandard();
+    });
+    var esc = function (ev) {
+      if (ev.key !== "Escape") return;
+      document.removeEventListener("keydown", esc);
+      closeFeedShareStandard();
+    };
+    document.addEventListener("keydown", esc);
+    return true;
+  }
+
   function setFeedShareLoading(feedItemId, isLoading) {
     var button = document.querySelector('[data-feed-share-id="' + feedItemId + '"]');
     if (!button) return;
@@ -3161,6 +3255,12 @@
     event.stopPropagation();
     var feedItemId = button.getAttribute('data-feed-share-id');
     if (!feedItemId) return false;
+    var item = state.visible.find(function (entry) { return entry && String(entry.uid || "") === String(feedItemId); });
+    var card = button.closest('[data-feed-card-id]');
+    if (openFeedShareStandard(item, {
+      card: card,
+      imageHandler: function () { return feedShareRun(feedItemId); }
+    })) return true;
     feedShareRun(feedItemId);
     return true;
   }
@@ -3193,17 +3293,34 @@
         return entry && entry.type === 'postFeed' && String(entry.postId || '') === postId;
       });
 
-      shareFreshPostFeedItem(item).then(function (shared) {
-        if (shared) {
-          global.setTimeout(function () { refreshFeedStatsSoon(feed.closest('.sf-app') ? feed : global.document.getElementById(MOUNT_ID)); }, 3000);
+      var opened = openFeedShareStandard(item, {
+        card: btn.closest('[data-feed-card-id]'),
+        imageHandler: function () {
+          btn.classList.add('is-loading');
+          return shareFreshPostFeedItem(item).then(function (shared) {
+            if (shared) global.setTimeout(function () { refreshFeedStatsSoon(feed.closest('.sf-app') ? feed : global.document.getElementById(MOUNT_ID)); }, 3000);
+            return shared;
+          }).catch(function (err) {
+            if (err && err.name === 'AbortError') return false;
+            console.error(err);
+            showToast(err && err.message ? String(err.message).slice(0, 180) : 'Bildbeitrag konnte nicht erstellt werden. Bitte erneut versuchen.');
+            return false;
+          }).finally(function () {
+            btn.classList.remove('is-loading');
+          });
         }
-      }).catch(function (err) {
-        if (err && err.name === 'AbortError') return;
-        console.error(err);
-        showToast(err && err.message ? String(err.message).slice(0, 180) : 'Bildbeitrag konnte nicht erstellt werden. Bitte erneut versuchen.');
-      }).finally(function () {
-        btn.classList.remove('is-loading');
       });
+      if (!opened) {
+        shareFreshPostFeedItem(item).catch(function (err) {
+          if (err && err.name === 'AbortError') return;
+          console.error(err);
+          showToast(err && err.message ? String(err.message).slice(0, 180) : 'Bildbeitrag konnte nicht erstellt werden. Bitte erneut versuchen.');
+        }).finally(function () {
+          btn.classList.remove('is-loading');
+        });
+      } else {
+        btn.classList.remove('is-loading');
+      }
     }, true);
   }
 
