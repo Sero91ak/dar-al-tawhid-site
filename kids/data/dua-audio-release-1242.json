@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "releasedAt": "2026-10-07T17:39:00Z",
+  "runtime": "1242",
+  "arabicPolicy": "Serhat Abu Malik – Master · eleven_v4 · native Fuṣḥā · language_code=ar · no pronunciation dictionary",
+  "fixes": [
+    "canonical Unicode audio-key matching for all 120 Duʿāʾ",
+    "Qurʾānic pause signs are not treated as spoken learning words",
+    "non-spoken pause signs removed from Arabic TTS input",
+    "German, normal Arabic, slow Arabic and isolated-word packs remain separate"
+  ],
+  "sourceAudioCommit": "4e1b2e6655925c5ccc7ade7df8c53bc7e681a53c",
+  "expected": {
+    "duaItems": 120,
+    "arabicFull": 120,
+    "arabicSlow": 120,
+    "isolatedWords": 696
+  }
+}
