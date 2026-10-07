@@ -37,16 +37,36 @@
     {
       "id": "HAD-0026",
       "status": "exact-primary-and-sharh-backfilled"
+    },
+    {
+      "id": "HAD-0012",
+      "status": "exact-primary-and-sharh-backfilled"
+    },
+    {
+      "id": "HAD-0038",
+      "status": "exact-primary-and-sharh-backfilled"
+    },
+    {
+      "id": "HAD-0045",
+      "status": "exact-primary-and-sharh-backfilled"
     }
   ],
-  "lastCompletedId": "HAD-0026",
-  "completedCount": 4,
+  "lastCompletedId": "HAD-0045",
+  "completedCount": 7,
   "nextPriority": [
     "HAD-0001",
     "HAD-0002",
-    "HAD-0012",
     "HAD-0014",
     "HAD-0023",
-    "HAD-0033"
-  ]
+    "HAD-0033",
+    "HAD-0049"
+  ],
+  "lastBatch": {
+    "completed": [
+      "HAD-0012",
+      "HAD-0038",
+      "HAD-0045"
+    ],
+    "note": "Only records with independently verified primary and early-sharh print pages were updated."
+  }
 }
