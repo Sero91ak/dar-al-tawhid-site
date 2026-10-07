@@ -728,3 +728,23 @@ html.duahub-detail-open .shell{overflow:hidden!important;overscroll-behavior:non
   .duahub-detail-scroll{padding-left:14px;padding-right:14px}
 }
 @media(prefers-reduced-motion:reduce){.duahub-touch{animation:none!important}}
+
+/* v1221 hard guard: the shared dock now has five tabs but must keep its original one-row form. */
+html[data-kids-age] body .bottom-nav{
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  grid-template-rows:1fr!important;
+  grid-auto-flow:column!important;
+  min-height:68px!important;
+  height:auto!important;
+}
+html[data-kids-age] body .bottom-nav .nav-btn{
+  min-width:0!important;
+  width:auto!important;
+  margin:0!important;
+}
+@media(max-width:430px){
+  html[data-kids-age] body .bottom-nav .nav-btn{padding:5px 2px!important;gap:2px!important}
+  html[data-kids-age] body .bottom-nav .nav-btn .ico{width:29px!important;height:29px!important}
+  html[data-kids-age] body .bottom-nav .nav-btn .lab{font-size:10px!important;white-space:nowrap!important}
+}
