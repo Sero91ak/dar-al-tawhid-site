@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Kids Dua audio live release marker",
+  "audioCommit": "ff6c2da90aed62120115f5691b13aaf0ade68b2b",
+  "releasedAt": "2026-10-07T19:35:21Z",
+  "modelId": "eleven_v4",
+  "voiceProfileId": "serhat-owner-voice-2026",
+  "arabicNormalRevision": "dua-arabic-native-fusha-v2-20261007",
+  "arabicSlowRevision": "dua-arabic-native-fusha-slow-v3-20261007",
+  "arabicWordRevision": "dua-arabic-native-fusha-word-v3-20261007",
+  "pronunciationDictionaryAppliedToArabic": false,
+  "coverage": {
+    "duaItems": 120,
+    "germanEntries": 122,
+    "arabicEntries": 120,
+    "arabicSlowEntries": 120,
+    "isolatedWordEntries": 696,
+    "wordPositions": 1366,
+    "runtimeKeyFailures": 0
+  },
+  "pacingQa": {
+    "allSlowLongerThanNormal": true,
+    "medianSlowToNormalRatio": 1.167,
+    "averageSlowToNormalRatio": 1.181
+  }
+}
