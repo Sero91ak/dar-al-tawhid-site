@@ -34073,7 +34073,6 @@
 <lexeme><grapheme>radiyallahu anhuma</grapheme><alias>رَضِيَ اللَّهُ عَنْهُمَا</alias></lexeme>
 <lexeme><grapheme>jalla jalāluhu</grapheme><alias>جَلَّ جَلَالُهُ</alias></lexeme>
 <lexeme><grapheme>jalla jalaluhu</grapheme><alias>جَلَّ جَلَالُهُ</alias></lexeme>
-<lexeme><grapheme>subhanahu wa ta&apos;ala</grapheme><alias>سُبْحَانَهُ وَتَعَالَى</alias></lexeme>
 <lexeme><grapheme>Moslem</grapheme><alias>مسلم</alias></lexeme>
 <lexeme><grapheme>Muslima</grapheme><alias>مسلمة</alias></lexeme>
 <lexeme><grapheme>Deen</grapheme><alias>الدين</alias></lexeme>
@@ -34081,7 +34080,6 @@
 <lexeme><grapheme>Niyah</grapheme><alias>النية</alias></lexeme>
 <lexeme><grapheme>Tawba</grapheme><alias>التوبة</alias></lexeme>
 <lexeme><grapheme>Tauba</grapheme><alias>التوبة</alias></lexeme>
-<lexeme><grapheme>Du&apos;a</grapheme><alias>الدعاء</alias></lexeme>
 <lexeme><grapheme>Rahma</grapheme><alias>الرحمة</alias></lexeme>
 <lexeme><grapheme>Baraka</grapheme><alias>البركة</alias></lexeme>
 <lexeme><grapheme>Maghfirah</grapheme><alias>المغفرة</alias></lexeme>
@@ -34098,7 +34096,6 @@
 <lexeme><grapheme>Fitna</grapheme><alias>الفتنة</alias></lexeme>
 <lexeme><grapheme>Balāʾ</grapheme><alias>البلاء</alias></lexeme>
 <lexeme><grapheme>Bala</grapheme><alias>البلاء</alias></lexeme>
-<lexeme><grapheme>Ni&apos;mah</grapheme><alias>النعمة</alias></lexeme>
 <lexeme><grapheme>Rizq</grapheme><alias>الرزق</alias></lexeme>
 <lexeme><grapheme>Sunna</grapheme><alias>السنة</alias></lexeme>
 <lexeme><grapheme>Mustahab</grapheme><alias>المستحب</alias></lexeme>
@@ -34137,7 +34134,6 @@
 <lexeme><grapheme>Ahl al Hadith</grapheme><alias>أهل الحديث</alias></lexeme>
 <lexeme><grapheme>Ahlul Hadith</grapheme><alias>أهل الحديث</alias></lexeme>
 <lexeme><grapheme>Salaf aṣ-Ṣāliḥ</grapheme><alias>السلف الصالح</alias></lexeme>
-<lexeme><grapheme>Qur&apos;an</grapheme><alias>القرآن</alias></lexeme>
 <lexeme><grapheme>Mus&apos;haf</grapheme><alias>المصحف</alias></lexeme>
 <lexeme><grapheme>Sure</grapheme><alias>سورة</alias></lexeme>
 <lexeme><grapheme>Qira&apos;a</grapheme><alias>القراءة</alias></lexeme>
@@ -34161,7 +34157,6 @@
 <lexeme><grapheme>Qalb</grapheme><alias>القلب</alias></lexeme>
 <lexeme><grapheme>Satan</grapheme><alias>الشيطان</alias></lexeme>
 <lexeme><grapheme>Shāfiʿī</grapheme><alias>شافعي</alias></lexeme>
-<lexeme><grapheme>Shafi&apos;i</grapheme><alias>شافعي</alias></lexeme>
 <lexeme><grapheme>Istinjāʾ</grapheme><alias>الاستنجاء</alias></lexeme>
 <lexeme><grapheme>Rakʿah</grapheme><alias>ركعة</alias></lexeme>
 <lexeme><grapheme>Rakah</grapheme><alias>ركعة</alias></lexeme>
@@ -34171,12 +34166,9 @@
 <lexeme><grapheme>Moschee</grapheme><alias>المسجد</alias></lexeme>
 <lexeme><grapheme>Duḥā</grapheme><alias>الضحى</alias></lexeme>
 <lexeme><grapheme>Sutrah</grapheme><alias>السترة</alias></lexeme>
-<lexeme><grapheme>Ma&apos;mum</grapheme><alias>المأموم</alias></lexeme>
 <lexeme><grapheme>Suhoor</grapheme><alias>السحور</alias></lexeme>
-<lexeme><grapheme>I&apos;tikaf</grapheme><alias>الاعتكاف</alias></lexeme>
 <lexeme><grapheme>Laylatul Qadr</grapheme><alias>ليلة القدر</alias></lexeme>
 <lexeme><grapheme>Nisāb</grapheme><alias>النصاب</alias></lexeme>
-<lexeme><grapheme>Sa&apos;y</grapheme><alias>السعي</alias></lexeme>
 <lexeme><grapheme>Arafa</grapheme><alias>عرفة</alias></lexeme>
 <lexeme><grapheme>Muzdalifa</grapheme><alias>مزدلفة</alias></lexeme>
 <lexeme><grapheme>Maqām Ibrāhīm</grapheme><alias>مقام إبراهيم</alias></lexeme>
@@ -34188,7 +34180,6 @@
 <lexeme><grapheme>Muḥaddith</grapheme><alias>المحدث</alias></lexeme>
 <lexeme><grapheme>Jarḥ wa-Taʿdīl</grapheme><alias>الجرح والتعديل</alias></lexeme>
 <lexeme><grapheme>Jarh wa-Tadil</grapheme><alias>الجرح والتعديل</alias></lexeme>
-<lexeme><grapheme>Jarh wa Ta&apos;dil</grapheme><alias>الجرح والتعديل</alias></lexeme>
 <lexeme><grapheme>Nabī</grapheme><alias>نبي</alias></lexeme>
 <lexeme><grapheme>Nabi</grapheme><alias>نبي</alias></lexeme>
 <lexeme><grapheme>Rasūl</grapheme><alias>رسول</alias></lexeme>
@@ -34202,7 +34193,6 @@
 <lexeme><grapheme>Tābiʿī</grapheme><alias>تابعي</alias></lexeme>
 <lexeme><grapheme>Tabii</grapheme><alias>تابعي</alias></lexeme>
 <lexeme><grapheme>Tabi&apos;i</grapheme><alias>تابعي</alias></lexeme>
-<lexeme><grapheme>Tabi&apos;un</grapheme><alias>التابعون</alias></lexeme>
 <lexeme><grapheme>Ahlul Bayt</grapheme><alias>أهل البيت</alias></lexeme>
 <lexeme><grapheme>Ahl al Bayt</grapheme><alias>أهل البيت</alias></lexeme>
 <lexeme><grapheme>Khulafāʾ ar-Rāshidūn</grapheme><alias>الخلفاء الراشدون</alias></lexeme>
@@ -34221,7 +34211,6 @@
 <lexeme><grapheme>Jakub</grapheme><alias>يعقوب</alias></lexeme>
 <lexeme><grapheme>David</grapheme><alias>داود</alias></lexeme>
 <lexeme><grapheme>Gabriel</grapheme><alias>جبريل</alias></lexeme>
-<lexeme><grapheme>Mika&apos;il</grapheme><alias>ميكائيل</alias></lexeme>
 <lexeme><grapheme>Omar ibn al Khattab</grapheme><alias>عمر بن الخطاب</alias></lexeme>
 <lexeme><grapheme>Usman ibn Affan</grapheme><alias>عثمان بن عفان</alias></lexeme>
 <lexeme><grapheme>Khadidscha</grapheme><alias>خديجة</alias></lexeme>
@@ -34234,7 +34223,6 @@
 <lexeme><grapheme>Musab ibn Umayr</grapheme><alias>مصعب بن عمير</alias></lexeme>
 <lexeme><grapheme>Hamzah ibn Abd al Muttalib</grapheme><alias>حمزة بن عبد المطلب</alias></lexeme>
 <lexeme><grapheme>Kaba</grapheme><alias>الكعبة</alias></lexeme>
-<lexeme><grapheme>Ka&apos;bah</grapheme><alias>الكعبة</alias></lexeme>
 <lexeme><grapheme>al-Masjid an-Nabawī</grapheme><alias>المسجد النبوي</alias></lexeme>
 <lexeme><grapheme>Al Aqsa</grapheme><alias>المسجد الأقصى</alias></lexeme>
 <lexeme><grapheme>Marwa</grapheme><alias>المروة</alias></lexeme>
@@ -34251,5539 +34239,5539 @@
 <lexeme><grapheme>Sham</grapheme><alias>الشام</alias></lexeme>
 <lexeme><grapheme>As Sham</grapheme><alias>الشام</alias></lexeme>
 <lexeme><grapheme>Yemen</grapheme><alias>اليمن</alias></lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Bismi llāhi r-Raḥmāni r-Raḥīm</grapheme>
     <alias>Bismillaahir-Rahmaanir-Rahiim</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>bismi llāhi r-raḥmāni r-raḥīm</grapheme>
     <alias>Bismillaahir-Rahmaanir-Rahiim</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Bismi llahi r-Rahmani r-Rahim</grapheme>
     <alias>Bismillaahir-Rahmaanir-Rahiim</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>bismi llahi r-rahmani r-rahim</grapheme>
     <alias>Bismillaahir-Rahmaanir-Rahiim</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</grapheme>
     <alias>Bismillaahir-Rahmaanir-Rahiim</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>al-Ḥamdu li-llāhi Rabbi l-ʿālamīn</grapheme>
     <alias>Alhamdu lillaahi Rabbil-aalamiin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>al-ḥamdu li-llāhi rabbi l-ʿālamīn</grapheme>
     <alias>Alhamdu lillaahi Rabbil-aalamiin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>al-Hamdu li-llahi Rabbi l-alamin</grapheme>
     <alias>Alhamdu lillaahi Rabbil-aalamiin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>al-hamdu li-llahi rabbi l-alamin</grapheme>
     <alias>Alhamdu lillaahi Rabbil-aalamiin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Alhamdulillahi Rabbil alamin</grapheme>
     <alias>Alhamdu lillaahi Rabbil-aalamiin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ</grapheme>
     <alias>Alhamdu lillaahi Rabbil-aalamiin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>الحمد لله رب العالمين</grapheme>
     <alias>Alhamdu lillaahi Rabbil-aalamiin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Subḥāna Rabbiyal-Aʿlā</grapheme>
     <alias>Subhaana Rabbiyal-A&apos;laa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>subḥāna rabbiyal-aʿlā</grapheme>
     <alias>Subhaana Rabbiyal-A&apos;laa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Subhana Rabbiyal-Ala</grapheme>
     <alias>Subhaana Rabbiyal-A&apos;laa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>subhana rabbiyal-ala</grapheme>
     <alias>Subhaana Rabbiyal-A&apos;laa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Subhana Rabbiyal Ala</grapheme>
     <alias>Subhaana Rabbiyal-A&apos;laa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>سُبْحَانَ رَبِّيَ الْأَعْلَى</grapheme>
     <alias>Subhaana Rabbiyal-A&apos;laa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>سبحان ربي الأعلى</grapheme>
     <alias>Subhaana Rabbiyal-A&apos;laa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Subḥāna Rabbiyal-ʿAẓīm</grapheme>
     <alias>Subhaana Rabbiyal-Aziim</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>subḥāna rabbiyal-ʿaẓīm</grapheme>
     <alias>Subhaana Rabbiyal-Aziim</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Subhana Rabbiyal-Azim</grapheme>
     <alias>Subhaana Rabbiyal-Aziim</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>subhana rabbiyal-azim</grapheme>
     <alias>Subhaana Rabbiyal-Aziim</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Subhana Rabbiyal Azim</grapheme>
     <alias>Subhaana Rabbiyal-Aziim</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>سُبْحَانَ رَبِّيَ الْعَظِيم</grapheme>
     <alias>Subhaana Rabbiyal-Aziim</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>سبحان ربي العظيم</grapheme>
     <alias>Subhaana Rabbiyal-Aziim</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Samia llāhu liman ḥamidah</grapheme>
     <alias>Sami-allaahu liman hamidah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>samia llāhu liman ḥamidah</grapheme>
     <alias>Sami-allaahu liman hamidah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Samia llahu liman hamidah</grapheme>
     <alias>Sami-allaahu liman hamidah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>samia llahu liman hamidah</grapheme>
     <alias>Sami-allaahu liman hamidah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Sami Allahu liman hamidah</grapheme>
     <alias>Sami-allaahu liman hamidah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>سَمِعَ اللَّهُ لِمَنْ حَمِدَهُ</grapheme>
     <alias>Sami-allaahu liman hamidah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>سمع الله لمن حمده</grapheme>
     <alias>Sami-allaahu liman hamidah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Rabbanā wa laka l-ḥamd</grapheme>
     <alias>Rabbanaa wa lakal-hamd</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>rabbanā wa laka l-ḥamd</grapheme>
     <alias>Rabbanaa wa lakal-hamd</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Rabbana wa laka l-hamd</grapheme>
     <alias>Rabbanaa wa lakal-hamd</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>rabbana wa laka l-hamd</grapheme>
     <alias>Rabbanaa wa lakal-hamd</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Rabbana wa lakal hamd</grapheme>
     <alias>Rabbanaa wa lakal-hamd</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رَبَّنَا وَلَكَ الْحَمْدُ</grapheme>
     <alias>Rabbanaa wa lakal-hamd</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ربنا ولك الحمد</grapheme>
     <alias>Rabbanaa wa lakal-hamd</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ</grapheme>
     <alias>Laa hawla wa laa quwwata illaa billaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Ḥasbunā llāhu wa niʿma l-wakīl</grapheme>
     <alias>Hasbunallaahu wa ni&apos;mal-wakiil</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ḥasbunā llāhu wa niʿma l-wakīl</grapheme>
     <alias>Hasbunallaahu wa ni&apos;mal-wakiil</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Hasbuna llahu wa nima l-wakil</grapheme>
     <alias>Hasbunallaahu wa ni&apos;mal-wakiil</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>hasbuna llahu wa nima l-wakil</grapheme>
     <alias>Hasbunallaahu wa ni&apos;mal-wakiil</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ</grapheme>
     <alias>Hasbunallaahu wa ni&apos;mal-wakiil</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Innā li-llāhi wa innā ilayhi rājiʿūn</grapheme>
     <alias>Innaa lillaahi wa innaa ilayhi raaji-uun</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>innā li-llāhi wa innā ilayhi rājiʿūn</grapheme>
     <alias>Innaa lillaahi wa innaa ilayhi raaji-uun</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Inna li-llahi wa inna ilayhi rajiun</grapheme>
     <alias>Innaa lillaahi wa innaa ilayhi raaji-uun</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>inna li-llahi wa inna ilayhi rajiun</grapheme>
     <alias>Innaa lillaahi wa innaa ilayhi raaji-uun</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>إِنَّا لِلَّهِ وَإِنَّا إِلَيْهِ رَاجِعُونَ</grapheme>
     <alias>Innaa lillaahi wa innaa ilayhi raaji-uun</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>بَارَكَ اللَّهُ فِيكَ</grapheme>
     <alias>Baarakallaahu fiik</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Bāraka llāhu fīkum</grapheme>
     <alias>Baarakallaahu fiikum</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Baraka llahu fikum</grapheme>
     <alias>Baarakallaahu fiikum</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Barakallahu fikum</grapheme>
     <alias>Baarakallaahu fiikum</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>بَارَكَ اللَّهُ فِيكُمْ</grapheme>
     <alias>Baarakallaahu fiikum</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>بارك الله فيكم</grapheme>
     <alias>Baarakallaahu fiikum</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>jazāka llāhu khayran</grapheme>
     <alias>Jazaakallaahu khayran</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>جَزَاكَ اللَّهُ خَيْرًا</grapheme>
     <alias>Jazaakallaahu khayran</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>جزاك الله خيرا</grapheme>
     <alias>Jazaakallaahu khayran</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Jazākumullāhu khayran</grapheme>
     <alias>Jazaakumullaahu khayran</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>jazākumullāhu khayran</grapheme>
     <alias>Jazaakumullaahu khayran</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Jazakumullahu khayran</grapheme>
     <alias>Jazaakumullaahu khayran</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>jazakumullahu khayran</grapheme>
     <alias>Jazaakumullaahu khayran</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Jazakumullahu khairan</grapheme>
     <alias>Jazaakumullaahu khayran</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>جَزَاكُمُ اللَّهُ خَيْرًا</grapheme>
     <alias>Jazaakumullaahu khayran</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>جزاكم الله خيرا</grapheme>
     <alias>Jazaakumullaahu khayran</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Raḥimahu llāh</grapheme>
     <alias>Rahimahullaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Rahimahu llah</grapheme>
     <alias>Rahimahullaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رَحِمَهُ اللَّهُ</grapheme>
     <alias>Rahimahullaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Raḥimahā llāh</grapheme>
     <alias>Rahimahallaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Rahimaha llah</grapheme>
     <alias>Rahimahallaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Rahimahallah</grapheme>
     <alias>Rahimahallaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رَحِمَهَا اللَّهُ</grapheme>
     <alias>Rahimahallaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Raḥimahumullāh</grapheme>
     <alias>Rahimahumullaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>raḥimahumullāh</grapheme>
     <alias>Rahimahumullaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Rahimahumullah</grapheme>
     <alias>Rahimahumullaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>rahimahumullah</grapheme>
     <alias>Rahimahumullaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رَحِمَهُمُ اللَّهُ</grapheme>
     <alias>Rahimahumullaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Raḍiya llāhu ʿanhu</grapheme>
     <alias>Radiyallaahu anhu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Radiya llahu anhu</grapheme>
     <alias>Radiyallaahu anhu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رَضِيَ اللَّهُ عَنْهُ</grapheme>
     <alias>Radiyallaahu anhu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Raḍiya llāhu ʿanhā</grapheme>
     <alias>Radiyallaahu anhaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Radiya llahu anha</grapheme>
     <alias>Radiyallaahu anhaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رَضِيَ اللَّهُ عَنْهَا</grapheme>
     <alias>Radiyallaahu anhaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Raḍiya llāhu ʿanhumā</grapheme>
     <alias>Radiyallaahu anhumaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Radiya llahu anhuma</grapheme>
     <alias>Radiyallaahu anhumaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Radiyallahu anhuma</grapheme>
     <alias>Radiyallaahu anhumaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رَضِيَ اللَّهُ عَنْهُمَا</grapheme>
     <alias>Radiyallaahu anhumaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Raḍiya llāhu ʿanhum</grapheme>
     <alias>Radiyallaahu anhum</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Radiya llahu anhum</grapheme>
     <alias>Radiyallaahu anhum</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رَضِيَ اللَّهُ عَنْهُمْ</grapheme>
     <alias>Radiyallaahu anhum</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Ṣallā llāhu ʿalayhi wa-sallam</grapheme>
     <alias>Sallallaahu alayhi wa sallam</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Salla llahu alayhi wa-sallam</grapheme>
     <alias>Sallallaahu alayhi wa sallam</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ</grapheme>
     <alias>Sallallaahu alayhi wa sallam</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ʿAlayhi s-salām</grapheme>
     <alias>Alayhis-salaam</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>عَلَيْهِ السَّلَامُ</grapheme>
     <alias>Alayhis-salaam</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ʿAlayhā s-salām</grapheme>
     <alias>Alayhas-salaam</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>عَلَيْهَا السَّلَامُ</grapheme>
     <alias>Alayhas-salaam</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>سُبْحَانَهُ وَتَعَالَى</grapheme>
     <alias>Subhaanahu wa ta-aalaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ʿAzza wa-jall</grapheme>
     <alias>Azza wa jall</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Azza wa-jall</grapheme>
     <alias>Azza wa jall</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Azza wa Jal</grapheme>
     <alias>Azza wa jall</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>عَزَّ وَجَلَّ</grapheme>
     <alias>Azza wa jall</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>عز وجل</grapheme>
     <alias>Azza wa jall</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Tabāraka wa taʿālā</grapheme>
     <alias>Tabaaraka wa ta-aalaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>tabāraka wa taʿālā</grapheme>
     <alias>Tabaaraka wa ta-aalaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Tabaraka wa taala</grapheme>
     <alias>Tabaaraka wa ta-aalaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>tabaraka wa taala</grapheme>
     <alias>Tabaaraka wa ta-aalaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Tabaraka wa ta&apos;ala</grapheme>
     <alias>Tabaaraka wa ta-aalaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تَبَارَكَ وَتَعَالَى</grapheme>
     <alias>Tabaaraka wa ta-aalaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تبارك وتعالى</grapheme>
     <alias>Tabaaraka wa ta-aalaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Allāhumma</grapheme>
     <alias>Allaahumma</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>allāhumma</grapheme>
     <alias>Allaahumma</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Allahumma</grapheme>
     <alias>Allaahumma</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>allahumma</grapheme>
     <alias>Allaahumma</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>اللَّهُمَّ</grapheme>
     <alias>Allaahumma</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>اللهم</grapheme>
     <alias>Allaahumma</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Āmīn</grapheme>
     <alias>Aamiin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>āmīn</grapheme>
     <alias>Aamiin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Amin</grapheme>
     <alias>Aamiin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>amin</grapheme>
     <alias>Aamiin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Ameen</grapheme>
     <alias>Aamiin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>آمِينَ</grapheme>
     <alias>Aamiin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>آمين</grapheme>
     <alias>Aamiin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أَسْتَغْفِرُ اللَّهَ</grapheme>
     <alias>Astaghfirullaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>InshaAllah</grapheme>
     <alias>In shaa-Allaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>إِنْ شَاءَ اللَّهُ</grapheme>
     <alias>In shaa-Allaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>MashaAllah</grapheme>
     <alias>Maa shaa-Allaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مَا شَاءَ اللَّهُ</grapheme>
     <alias>Maa shaa-Allaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Aʿūdhu bi-llāhi mina sh-shayṭāni r-rajīm</grapheme>
     <alias>A-uudhu billaahi minash-shaytaanir-rajiim</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>aʿūdhu bi-llāhi mina sh-shayṭāni r-rajīm</grapheme>
     <alias>A-uudhu billaahi minash-shaytaanir-rajiim</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Audhu bi-llahi mina sh-shaytani r-rajim</grapheme>
     <alias>A-uudhu billaahi minash-shaytaanir-rajiim</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>audhu bi-llahi mina sh-shaytani r-rajim</grapheme>
     <alias>A-uudhu billaahi minash-shaytaanir-rajiim</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>A&apos;udhu billahi minash shaytanir rajim</grapheme>
     <alias>A-uudhu billaahi minash-shaytaanir-rajiim</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ</grapheme>
     <alias>A-uudhu billaahi minash-shaytaanir-rajiim</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>As-salāmu ʿalaykum</grapheme>
     <alias>As-salaamu alaykum</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>As-salamu alaykum</grapheme>
     <alias>As-salaamu alaykum</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Salam alaikum</grapheme>
     <alias>As-salaamu alaykum</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>السَّلَامُ عَلَيْكُمْ</grapheme>
     <alias>As-salaamu alaykum</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>السلام عليكم</grapheme>
     <alias>As-salaamu alaykum</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa ʿalaykumu s-salām</grapheme>
     <alias>Wa alaykumus-salaam</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa alaykumu s-salam</grapheme>
     <alias>Wa alaykumus-salaam</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وَعَلَيْكُمُ السَّلَامُ</grapheme>
     <alias>Wa alaykumus-salaam</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وعليكم السلام</grapheme>
     <alias>Wa alaykumus-salaam</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Raḥmatullāhi</grapheme>
     <alias>Rahmatullaahi</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>raḥmatullāhi</grapheme>
     <alias>Rahmatullaahi</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Rahmatullahi</grapheme>
     <alias>Rahmatullaahi</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>rahmatullahi</grapheme>
     <alias>Rahmatullaahi</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رَحْمَةُ اللَّهِ</grapheme>
     <alias>Rahmatullaahi</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رحمة الله</grapheme>
     <alias>Rahmatullaahi</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Barakātuh</grapheme>
     <alias>Barakaatuh</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>barakātuh</grapheme>
     <alias>Barakaatuh</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Barakatuh</grapheme>
     <alias>Barakaatuh</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>barakatuh</grapheme>
     <alias>Barakaatuh</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>بَرَكَاتُهُ</grapheme>
     <alias>Barakaatuh</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>بركاته</grapheme>
     <alias>Barakaatuh</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تَوْحِيد</grapheme>
     <alias>Tauhiid</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>توحيد</grapheme>
     <alias>Tauhiid</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تَوْحِيدُ الرُّبُوبِيَّةِ</grapheme>
     <alias>Tauhiid ar-Rubuubiyyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>توحيد الربوبية</grapheme>
     <alias>Tauhiid ar-Rubuubiyyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تَوْحِيدُ الْأُلُوهِيَّةِ</grapheme>
     <alias>Tauhiid al-Uluuhiyyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>توحيد الألوهية</grapheme>
     <alias>Tauhiid al-Uluuhiyyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تَوْحِيدُ الْأَسْمَاءِ وَالصِّفَاتِ</grapheme>
     <alias>Tauhiid al-Asmaa wa-s-Sifaat</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>توحيد الأسماء والصفات</grapheme>
     <alias>Tauhiid al-Asmaa wa-s-Sifaat</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>عَقِيدَة</grapheme>
     <alias>Aqiidah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>عقيدة</grapheme>
     <alias>Aqiidah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>إِيمَان</grapheme>
     <alias>Iimaan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>إيمان</grapheme>
     <alias>Iimaan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>إِحْسَان</grapheme>
     <alias>Ihsaan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>إحسان</grapheme>
     <alias>Ihsaan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>إِخْلَاص</grapheme>
     <alias>Ikhlaas</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>إِسْلَام</grapheme>
     <alias>Islaam</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>إسلام</grapheme>
     <alias>Islaam</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>شِرْك</grapheme>
     <alias>Shirk</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>شرك</grapheme>
     <alias>Shirk</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>كُفْر</grapheme>
     <alias>Kufr</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>كفر</grapheme>
     <alias>Kufr</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>نِفَاق</grapheme>
     <alias>Nifaaq</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>نفاق</grapheme>
     <alias>Nifaaq</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>بِدْعَة</grapheme>
     <alias>Bid-ah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>بدعة</grapheme>
     <alias>Bid-ah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>سُنَّة</grapheme>
     <alias>Sunnah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Tāghūt</grapheme>
     <alias>Taaghuut</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>طَاغُوت</grapheme>
     <alias>Taaghuut</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>طاغوت</grapheme>
     <alias>Taaghuut</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>عِبَادَة</grapheme>
     <alias>Ibaadah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>دُعَاء</grapheme>
     <alias>Du-aa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تَوَكُّل</grapheme>
     <alias>Tawakkul</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>خَوْف</grapheme>
     <alias>Khawf</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رَجَاء</grapheme>
     <alias>Rajaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Mahabba</grapheme>
     <alias>Mahabbah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مَحَبَّة</grapheme>
     <alias>Mahabbah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>إِنَابَة</grapheme>
     <alias>Inaabah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>إنابة</grapheme>
     <alias>Inaabah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Khušūʿ</grapheme>
     <alias>Khushuu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>khušūʿ</grapheme>
     <alias>Khushuu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>خُشُوع</grapheme>
     <alias>Khushuu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>خشوع</grapheme>
     <alias>Khushuu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تَقْوَى</grapheme>
     <alias>Taqwaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>صَبْر</grapheme>
     <alias>Sabr</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>شُكْر</grapheme>
     <alias>Shukr</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تَوْبَة</grapheme>
     <alias>Tawbah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>اِسْتِغْفَار</grapheme>
     <alias>Istighfaar</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>قَدَر</grapheme>
     <alias>Qadar</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>قدر</grapheme>
     <alias>Qadar</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Qaḍāʾ wa-Qadar</grapheme>
     <alias>Qadaa wa Qadar</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Qada wa-Qadar</grapheme>
     <alias>Qadaa wa Qadar</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Qada wa Qadar</grapheme>
     <alias>Qadaa wa Qadar</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>قَضَاء وَقَدَر</grapheme>
     <alias>Qadaa wa Qadar</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>قضاء وقدر</grapheme>
     <alias>Qadaa wa Qadar</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Walāʾ wa-Barāʾ</grapheme>
     <alias>Walaa wa Baraa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>walāʾ wa-barāʾ</grapheme>
     <alias>Walaa wa Baraa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Wala wa-Bara</grapheme>
     <alias>Walaa wa Baraa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wala wa-bara</grapheme>
     <alias>Walaa wa Baraa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وَلَاء وَبَرَاء</grapheme>
     <alias>Walaa wa Baraa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ولاء وبراء</grapheme>
     <alias>Walaa wa Baraa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>فِتْنَة</grapheme>
     <alias>Fitnah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>فِطْرَة</grapheme>
     <alias>Fitrah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>آخِرَة</grapheme>
     <alias>Aakhirah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>آخرة</grapheme>
     <alias>Aakhirah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>قِيَامَة</grapheme>
     <alias>Qiyaamah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>قيامة</grapheme>
     <alias>Qiyaamah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>جَنَّة</grapheme>
     <alias>Jannah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>جنة</grapheme>
     <alias>Jannah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>جَهَنَّم</grapheme>
     <alias>Jahannam</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>بَرْزَخ</grapheme>
     <alias>Barzakh</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>برزخ</grapheme>
     <alias>Barzakh</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مِيزَان</grapheme>
     <alias>Miizaan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ميزان</grapheme>
     <alias>Miizaan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>صِرَاط</grapheme>
     <alias>Siraat</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>صراط</grapheme>
     <alias>Siraat</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Haud</grapheme>
     <alias>Hawd</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>حَوْض</grapheme>
     <alias>Hawd</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>حوض</grapheme>
     <alias>Hawd</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Shafaa</grapheme>
     <alias>Shafaa-ah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>شَفَاعَة</grapheme>
     <alias>Shafaa-ah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>شفاعة</grapheme>
     <alias>Shafaa-ah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مَلَائِكَة</grapheme>
     <alias>Malaa-ikah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ملائكة</grapheme>
     <alias>Malaa-ikah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>جِنّ</grapheme>
     <alias>Jinn</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>جن</grapheme>
     <alias>Jinn</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Shaitan</grapheme>
     <alias>Shaytaan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>شَيْطَان</grapheme>
     <alias>Shaytaan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>شيطان</grapheme>
     <alias>Shaytaan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>إِبْلِيس</grapheme>
     <alias>Ib liis</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>إبليس</grapheme>
     <alias>Ib liis</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وَحْي</grapheme>
     <alias>Wahy</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وحي</grapheme>
     <alias>Wahy</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رَبّ</grapheme>
     <alias>Rabb</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>إِلَه</grapheme>
     <alias>Ilaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أَسْمَاء</grapheme>
     <alias>Asmaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أسماء</grapheme>
     <alias>Asmaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>صِفَات</grapheme>
     <alias>Sifaat</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ʿUlūw</grapheme>
     <alias>Uluuw</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ʿulūw</grapheme>
     <alias>Uluuw</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>عُلُوّ</grapheme>
     <alias>Uluuw</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>علو</grapheme>
     <alias>Uluuw</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>اِسْتِوَاء</grapheme>
     <alias>Istiwaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>استواء</grapheme>
     <alias>Istiwaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>نُزُول</grapheme>
     <alias>Nuzuul</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>نزول</grapheme>
     <alias>Nuzuul</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>كَلَامُ اللَّه</grapheme>
     <alias>Kalaamullaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Ruʾyatullāh</grapheme>
     <alias>Ru-yatullaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ruʾyatullāh</grapheme>
     <alias>Ru-yatullaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Ruyatullah</grapheme>
     <alias>Ru-yatullaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ruyatullah</grapheme>
     <alias>Ru-yatullaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رُؤْيَةُ اللَّه</grapheme>
     <alias>Ru-yatullaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رؤية الله</grapheme>
     <alias>Ru-yatullaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>فِقْه</grapheme>
     <alias>Fiqh</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أُصُولُ الْفِقْه</grapheme>
     <alias>Usuul al-Fiqh</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>طَهَارَة</grapheme>
     <alias>Tahaara</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>طهارة</grapheme>
     <alias>Tahaara</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وُضُوء</grapheme>
     <alias>Wuduu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وضوء</grapheme>
     <alias>Wuduu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Ghusul</grapheme>
     <alias>Ghusl</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>غُسْل</grapheme>
     <alias>Ghusl</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>غسل</grapheme>
     <alias>Ghusl</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تَيَمُّم</grapheme>
     <alias>Tayammum</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تيمم</grapheme>
     <alias>Tayammum</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>نَجَاسَة</grapheme>
     <alias>Najaasah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>نجاسة</grapheme>
     <alias>Najaasah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>صَلَاة</grapheme>
     <alias>Salaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>صلاة</grapheme>
     <alias>Salaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>زَكَاة</grapheme>
     <alias>Zakaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>زكاة</grapheme>
     <alias>Zakaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Saum</grapheme>
     <alias>Sawm</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>صَوْم</grapheme>
     <alias>Sawm</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>صوم</grapheme>
     <alias>Sawm</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رَمَضَان</grapheme>
     <alias>Ramadaan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>حَجّ</grapheme>
     <alias>Hajj</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>حج</grapheme>
     <alias>Hajj</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>عُمْرَة</grapheme>
     <alias>Umrah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>عمرة</grapheme>
     <alias>Umrah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>إِحْرَام</grapheme>
     <alias>Ihraam</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>إحرام</grapheme>
     <alias>Ihraam</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مِيقَات</grapheme>
     <alias>Miiqaat</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ميقات</grapheme>
     <alias>Miiqaat</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>طَوَاف</grapheme>
     <alias>Tawaaf</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>طواف</grapheme>
     <alias>Tawaaf</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>سَعْي</grapheme>
     <alias>Sa-y</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>سعي</grapheme>
     <alias>Sa-y</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>عَرَفَة</grapheme>
     <alias>Arafah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مُزْدَلِفَة</grapheme>
     <alias>Muzdalifah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مِنًى</grapheme>
     <alias>Minaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Jamrah</grapheme>
     <alias>Jamrah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>jamrah</grapheme>
     <alias>Jamrah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>جَمْرَة</grapheme>
     <alias>Jamrah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>جمرة</grapheme>
     <alias>Jamrah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Udhiya</grapheme>
     <alias>Udh-hiyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أُضْحِيَة</grapheme>
     <alias>Udh-hiyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أضحية</grapheme>
     <alias>Udh-hiyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>عَقِيقَة</grapheme>
     <alias>Aqiiqah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>عقيقة</grapheme>
     <alias>Aqiiqah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أَذَان</grapheme>
     <alias>Adhaan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أذان</grapheme>
     <alias>Adhaan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>إِقَامَة</grapheme>
     <alias>Iqaamah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>إقامة</grapheme>
     <alias>Iqaamah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>rakʿah</grapheme>
     <alias>Rak-ah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>rakah</grapheme>
     <alias>Rak-ah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رَكْعَة</grapheme>
     <alias>Rak-ah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ركعة</grapheme>
     <alias>Rak-ah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>سُجُود</grapheme>
     <alias>Sujuud</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>سجود</grapheme>
     <alias>Sujuud</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رُكُوع</grapheme>
     <alias>Rukuu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ركوع</grapheme>
     <alias>Rukuu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Tashahud</grapheme>
     <alias>Tashahhud</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تَشَهُّد</grapheme>
     <alias>Tashahhud</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تشهد</grapheme>
     <alias>Tashahhud</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تَكْبِير</grapheme>
     <alias>Takbiir</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تكبير</grapheme>
     <alias>Takbiir</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Tasbīḥ</grapheme>
     <alias>Tasbiih</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>tasbīḥ</grapheme>
     <alias>Tasbiih</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Tasbih</grapheme>
     <alias>Tasbiih</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>tasbih</grapheme>
     <alias>Tasbiih</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تَسْبِيح</grapheme>
     <alias>Tasbiih</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تسبيح</grapheme>
     <alias>Tasbiih</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Taḥmīd</grapheme>
     <alias>Tahmiid</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>taḥmīd</grapheme>
     <alias>Tahmiid</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Tahmid</grapheme>
     <alias>Tahmiid</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>tahmid</grapheme>
     <alias>Tahmiid</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تَحْمِيد</grapheme>
     <alias>Tahmiid</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تحميد</grapheme>
     <alias>Tahmiid</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Tahlīl</grapheme>
     <alias>Tahliil</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>tahlīl</grapheme>
     <alias>Tahliil</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Tahlil</grapheme>
     <alias>Tahliil</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>tahlil</grapheme>
     <alias>Tahliil</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تَهْلِيل</grapheme>
     <alias>Tahliil</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تهليل</grapheme>
     <alias>Tahliil</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>قِيَام</grapheme>
     <alias>Qiyaam</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>قيام</grapheme>
     <alias>Qiyaam</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Qunūt</grapheme>
     <alias>Qunuut</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>qunūt</grapheme>
     <alias>Qunuut</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Qunut</grapheme>
     <alias>Qunuut</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>qunut</grapheme>
     <alias>Qunuut</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>قُنُوت</grapheme>
     <alias>Qunuut</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>قنوت</grapheme>
     <alias>Qunuut</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وِتْر</grapheme>
     <alias>Witr</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وتر</grapheme>
     <alias>Witr</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تَرَاوِيح</grapheme>
     <alias>Taraawiih</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تراويح</grapheme>
     <alias>Taraawiih</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>فَجْر</grapheme>
     <alias>Fajr</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>فجر</grapheme>
     <alias>Fajr</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ظُهْر</grapheme>
     <alias>Zuhr</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ظهر</grapheme>
     <alias>Zuhr</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>عَصْر</grapheme>
     <alias>Asr</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>عصر</grapheme>
     <alias>Asr</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مَغْرِب</grapheme>
     <alias>Maghrib</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مغرب</grapheme>
     <alias>Maghrib</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>عِشَاء</grapheme>
     <alias>Ishaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>عشاء</grapheme>
     <alias>Ishaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Jummah</grapheme>
     <alias>Jumu-ah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>جُمُعَة</grapheme>
     <alias>Jumu-ah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>جمعة</grapheme>
     <alias>Jumu-ah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Khutba</grapheme>
     <alias>Khutbah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>خُطْبَة</grapheme>
     <alias>Khutbah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>خطبة</grapheme>
     <alias>Khutbah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>قِبْلَة</grapheme>
     <alias>Qiblah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>قبلة</grapheme>
     <alias>Qiblah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مَسْجِد</grapheme>
     <alias>Masjid</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مسجد</grapheme>
     <alias>Masjid</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Muṣallā</grapheme>
     <alias>Musallaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>muṣallā</grapheme>
     <alias>Musallaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Musalla</grapheme>
     <alias>Musallaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>musalla</grapheme>
     <alias>Musallaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مُصَلَّى</grapheme>
     <alias>Musallaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مصلى</grapheme>
     <alias>Musallaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Sujūd as-Sahw</grapheme>
     <alias>Sujuud as-Sahw</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>sujūd as-sahw</grapheme>
     <alias>Sujuud as-Sahw</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>سُجُودُ السَّهْو</grapheme>
     <alias>Sujuud as-Sahw</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>صَدَقَة</grapheme>
     <alias>Sadaqah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>صدقة</grapheme>
     <alias>Sadaqah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>زَكَاةُ الْفِطْر</grapheme>
     <alias>Zakaat al-Fitr</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Ṣadaqat al-Fiṭr</grapheme>
     <alias>Sadaqat al-Fitr</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Sadaqat al-Fitr</grapheme>
     <alias>Sadaqat al-Fitr</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>صَدَقَةُ الْفِطْر</grapheme>
     <alias>Sadaqat al-Fitr</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>صدقة الفطر</grapheme>
     <alias>Sadaqat al-Fitr</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>سُحُور</grapheme>
     <alias>Suhuur</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>سحور</grapheme>
     <alias>Suhuur</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>إِفْطَار</grapheme>
     <alias>Iftaar</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>إفطار</grapheme>
     <alias>Iftaar</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>فِدْيَة</grapheme>
     <alias>Fidyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>فدية</grapheme>
     <alias>Fidyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>كَفَّارَة</grapheme>
     <alias>Kaffaarah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>كفارة</grapheme>
     <alias>Kaffaarah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>حَلَال</grapheme>
     <alias>Halaal</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>حَرَام</grapheme>
     <alias>Haraam</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مَكْرُوه</grapheme>
     <alias>Makruuh</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وَاجِب</grapheme>
     <alias>Waajib</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>فَرْض</grapheme>
     <alias>Fard</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مُسْتَحَبّ</grapheme>
     <alias>Mustahabb</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مُبَاح</grapheme>
     <alias>Mubaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>نِكَاح</grapheme>
     <alias>Nikaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>نكاح</grapheme>
     <alias>Nikaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>طَلَاق</grapheme>
     <alias>Talaaq</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>طلاق</grapheme>
     <alias>Talaaq</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Khula</grapheme>
     <alias>Khul</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>خُلْع</grapheme>
     <alias>Khul</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>خلع</grapheme>
     <alias>Khul</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Idda</grapheme>
     <alias>Iddah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>عِدَّة</grapheme>
     <alias>Iddah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>عدة</grapheme>
     <alias>Iddah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Haid</grapheme>
     <alias>Hayd</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>حَيْض</grapheme>
     <alias>Hayd</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>حيض</grapheme>
     <alias>Hayd</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>نِفَاس</grapheme>
     <alias>Nifaas</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>نفاس</grapheme>
     <alias>Nifaas</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>عَوْرَة</grapheme>
     <alias>Awrah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>عورة</grapheme>
     <alias>Awrah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Mahrem</grapheme>
     <alias>Mahram</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مَحْرَم</grapheme>
     <alias>Mahram</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رِبَا</grapheme>
     <alias>Ribaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ربا</grapheme>
     <alias>Ribaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>بَيْع</grapheme>
     <alias>Bay</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>بيع</grapheme>
     <alias>Bay</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أَمَانَة</grapheme>
     <alias>Amaanah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أمانة</grapheme>
     <alias>Amaanah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Wasiyah</grapheme>
     <alias>Wasiyyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وَصِيَّة</grapheme>
     <alias>Wasiyyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وصية</grapheme>
     <alias>Wasiyyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>نِصَاب</grapheme>
     <alias>Nisaab</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>نصاب</grapheme>
     <alias>Nisaab</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>قُرْآن</grapheme>
     <alias>Qur-aan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>قرآن</grapheme>
     <alias>Qur-aan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مُصْحَف</grapheme>
     <alias>Mushaf</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>سُورَة</grapheme>
     <alias>Suurah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>آيَة</grapheme>
     <alias>Aayah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>آيَات</grapheme>
     <alias>Aayaat</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تَفْسِير</grapheme>
     <alias>Tafsiir</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تفسير</grapheme>
     <alias>Tafsiir</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تَجْوِيد</grapheme>
     <alias>Tajwiid</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تجويد</grapheme>
     <alias>Tajwiid</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>tilāwah</grapheme>
     <alias>Tilaawah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>tilawah</grapheme>
     <alias>Tilaawah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تِلَاوَة</grapheme>
     <alias>Tilaawah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تلاوة</grapheme>
     <alias>Tilaawah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>حِفْظ</grapheme>
     <alias>Hifz</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>حفظ</grapheme>
     <alias>Hifz</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>قِرَاءَة</grapheme>
     <alias>Qiraa-ah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>قراءة</grapheme>
     <alias>Qiraa-ah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>قِرَاءَات</grapheme>
     <alias>Qiraa-aat</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>قراءات</grapheme>
     <alias>Qiraa-aat</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أَسْبَابُ النُّزُول</grapheme>
     <alias>Asbaab an-Nuzuul</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مُحْكَم</grapheme>
     <alias>Muhkam</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مُتَشَابِه</grapheme>
     <alias>Mutashaabih</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>نَاسِخ</grapheme>
     <alias>Naasikh</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مَنْسُوخ</grapheme>
     <alias>Mansuukh</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مَكِّيّ</grapheme>
     <alias>Makkiyy</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مَدَنِيّ</grapheme>
     <alias>Madaniyy</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>جُزْء</grapheme>
     <alias>Juz</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>حِزْب</grapheme>
     <alias>Hizb</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Rukūʿ al-Qurʾān</grapheme>
     <alias>Rukuu al-Qur-aan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>rukūʿ al-qurʾān</grapheme>
     <alias>Rukuu al-Qur-aan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Ruku al-Quran</grapheme>
     <alias>Rukuu al-Qur-aan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ruku al-quran</grapheme>
     <alias>Rukuu al-Qur-aan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رُكُوعُ الْقُرْآن</grapheme>
     <alias>Rukuu al-Qur-aan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ركوع القرآن</grapheme>
     <alias>Rukuu al-Qur-aan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>حَدِيث</grapheme>
     <alias>Hadiith</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أَحَادِيث</grapheme>
     <alias>Ahaadiith</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أحاديث</grapheme>
     <alias>Ahaadiith</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>إِسْنَاد</grapheme>
     <alias>Isnaad</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>إسناد</grapheme>
     <alias>Isnaad</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>سَنَد</grapheme>
     <alias>Sanad</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>سند</grapheme>
     <alias>Sanad</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مَتْن</grapheme>
     <alias>Matn</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>متن</grapheme>
     <alias>Matn</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>صَحِيح</grapheme>
     <alias>Sahiih</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>حَسَن</grapheme>
     <alias>Hasan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ضَعِيف</grapheme>
     <alias>Da-iif</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مَوْضُوع</grapheme>
     <alias>Mawduu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مَرْفُوع</grapheme>
     <alias>Marfuu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مَوْقُوف</grapheme>
     <alias>Mawquuf</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مَقْطُوع</grapheme>
     <alias>Maqtuu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مُتَوَاتِر</grapheme>
     <alias>Mutawaatir</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>آحَاد</grapheme>
     <alias>Aahaad</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رَاوِي</grapheme>
     <alias>Raawii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Riwāyah</grapheme>
     <alias>Riwaayah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>riwāyah</grapheme>
     <alias>Riwaayah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رِوَايَة</grapheme>
     <alias>Riwaayah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رواية</grapheme>
     <alias>Riwaayah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>jarḥ wa-taʿdīl</grapheme>
     <alias>Jarh wa Ta-diil</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>جَرْح وَتَعْدِيل</grapheme>
     <alias>Jarh wa Ta-diil</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>جرح وتعديل</grapheme>
     <alias>Jarh wa Ta-diil</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Muhaddis</grapheme>
     <alias>Muhaddith</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مُحَدِّث</grapheme>
     <alias>Muhaddith</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>محدث</grapheme>
     <alias>Muhaddith</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مُحَدِّثُون</grapheme>
     <alias>Muhaddithuun</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>محدثون</grapheme>
     <alias>Muhaddithuun</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Kutub as-Sittah</grapheme>
     <alias>Kutub as-Sittah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>kutub as-sittah</grapheme>
     <alias>Kutub as-Sittah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Kutub al-Sittah</grapheme>
     <alias>Kutub as-Sittah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>الْكُتُبُ السِّتَّة</grapheme>
     <alias>Kutub as-Sittah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>الكتب الستة</grapheme>
     <alias>Kutub as-Sittah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>سَلَف</grapheme>
     <alias>Salaf</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>سلف</grapheme>
     <alias>Salaf</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>salaf aṣ-ṣāliḥ</grapheme>
     <alias>Salaf as-Saalih</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>السَّلَفُ الصَّالِح</grapheme>
     <alias>Salaf as-Saalih</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>صَحَابَة</grapheme>
     <alias>Sahaabah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>صحابة</grapheme>
     <alias>Sahaabah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>صَحَابِي</grapheme>
     <alias>Sahaabii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ṣaḥābiyyah</grapheme>
     <alias>Sahaabiyyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>sahabiyyah</grapheme>
     <alias>Sahaabiyyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>صَحَابِيَّة</grapheme>
     <alias>Sahaabiyyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>صحابية</grapheme>
     <alias>Sahaabiyyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تَابِعُون</grapheme>
     <alias>Taabi-uun</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تابعون</grapheme>
     <alias>Taabi-uun</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Atbāʿ at-Tābiʿīn</grapheme>
     <alias>Atbaa at-Taabi-iin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>atbāʿ at-tābiʿīn</grapheme>
     <alias>Atbaa at-Taabi-iin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Atba at-Tabiin</grapheme>
     <alias>Atbaa at-Taabi-iin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>atba at-tabiin</grapheme>
     <alias>Atbaa at-Taabi-iin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أَتْبَاعُ التَّابِعِينَ</grapheme>
     <alias>Atbaa at-Taabi-iin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Ahl as-Sunnah wa-l-Jamāʿah</grapheme>
     <alias>Ahl as-Sunnah wal-Jamaa-ah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ahl as-sunnah wa-l-jamāʿah</grapheme>
     <alias>Ahl as-Sunnah wal-Jamaa-ah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أَهْلُ السُّنَّةِ وَالْجَمَاعَةِ</grapheme>
     <alias>Ahl as-Sunnah wal-Jamaa-ah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أَهْلُ الْحَدِيث</grapheme>
     <alias>Ahl al-Hadiith</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أهل الحديث</grapheme>
     <alias>Ahl al-Hadiith</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>إِجْمَاع</grapheme>
     <alias>Ijmaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>إجماع</grapheme>
     <alias>Ijmaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>قِيَاس</grapheme>
     <alias>Qiyaas</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>قياس</grapheme>
     <alias>Qiyaas</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>اِجْتِهَاد</grapheme>
     <alias>Ijtihad</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>اجتهاد</grapheme>
     <alias>Ijtihad</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>فَتْوَى</grapheme>
     <alias>Fatwaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مُفْتِي</grapheme>
     <alias>Muftii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Faqīh</grapheme>
     <alias>Faqiih</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>faqīh</grapheme>
     <alias>Faqiih</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Faqih</grapheme>
     <alias>Faqiih</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>faqih</grapheme>
     <alias>Faqiih</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>فَقِيه</grapheme>
     <alias>Faqiih</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>فقيه</grapheme>
     <alias>Faqiih</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مَذْهَب</grapheme>
     <alias>Madhhab</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>دَعْوَة</grapheme>
     <alias>Da-wah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>دعوة</grapheme>
     <alias>Da-wah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مَنْهَج</grapheme>
     <alias>Manhaj</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>منهج</grapheme>
     <alias>Manhaj</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ʿIlm</grapheme>
     <alias>Ilm</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ʿilm</grapheme>
     <alias>Ilm</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Ilm</grapheme>
     <alias>Ilm</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>عِلْم</grapheme>
     <alias>Ilm</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>علم</grapheme>
     <alias>Ilm</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ʿĀlim</grapheme>
     <alias>Aalim</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ʿālim</grapheme>
     <alias>Aalim</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Alim</grapheme>
     <alias>Aalim</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>alim</grapheme>
     <alias>Aalim</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>عَالِم</grapheme>
     <alias>Aalim</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>عالم</grapheme>
     <alias>Aalim</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ʿUlamāʾ</grapheme>
     <alias>Ulamaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ʿulamāʾ</grapheme>
     <alias>Ulamaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Ulama</grapheme>
     <alias>Ulamaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ulama</grapheme>
     <alias>Ulamaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>عُلَمَاء</grapheme>
     <alias>Ulamaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>علماء</grapheme>
     <alias>Ulamaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Ṭālib al-ʿIlm</grapheme>
     <alias>Taalib al-Ilm</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ṭālib al-ʿilm</grapheme>
     <alias>Taalib al-Ilm</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Talib al-Ilm</grapheme>
     <alias>Taalib al-Ilm</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>talib al-ilm</grapheme>
     <alias>Taalib al-Ilm</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>طَالِبُ الْعِلْم</grapheme>
     <alias>Taalib al-Ilm</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>طالب العلم</grapheme>
     <alias>Taalib al-Ilm</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أَدَب</grapheme>
     <alias>Adab</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أدب</grapheme>
     <alias>Adab</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أَخْلَاق</grapheme>
     <alias>Akhlaaq</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أخلاق</grapheme>
     <alias>Akhlaaq</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ḥikmah</grapheme>
     <alias>Hikmah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>hikmah</grapheme>
     <alias>Hikmah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>حِكْمَة</grapheme>
     <alias>Hikmah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>حكمة</grapheme>
     <alias>Hikmah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Naṣīḥah</grapheme>
     <alias>Nasiihah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>naṣīḥah</grapheme>
     <alias>Nasiihah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Nasihah</grapheme>
     <alias>Nasiihah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>nasihah</grapheme>
     <alias>Nasiihah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Nasiha</grapheme>
     <alias>Nasiihah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>نَصِيحَة</grapheme>
     <alias>Nasiihah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>نصيحة</grapheme>
     <alias>Nasiihah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>صِدْق</grapheme>
     <alias>Sidq</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>صدق</grapheme>
     <alias>Sidq</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Amr bi-l-Maʿrūf</grapheme>
     <alias>Amr bil-Ma-ruuf</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Amr bi-l-Maruf</grapheme>
     <alias>Amr bil-Ma-ruuf</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Amr bil Maruf</grapheme>
     <alias>Amr bil-Ma-ruuf</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>الْأَمْرُ بِالْمَعْرُوف</grapheme>
     <alias>Amr bil-Ma-ruuf</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>الأمر بالمعروف</grapheme>
     <alias>Amr bil-Ma-ruuf</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Nahy ʿani l-Munkar</grapheme>
     <alias>Nahy anil-Munkar</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>nahy ʿani l-munkar</grapheme>
     <alias>Nahy anil-Munkar</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Nahy ani l-Munkar</grapheme>
     <alias>Nahy anil-Munkar</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>nahy ani l-munkar</grapheme>
     <alias>Nahy anil-Munkar</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Nahy anil Munkar</grapheme>
     <alias>Nahy anil-Munkar</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>النَّهْيُ عَنِ الْمُنْكَر</grapheme>
     <alias>Nahy anil-Munkar</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>النهي عن المنكر</grapheme>
     <alias>Nahy anil-Munkar</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>سِيرَة</grapheme>
     <alias>Siirah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>سيرة</grapheme>
     <alias>Siirah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>هِجْرَة</grapheme>
     <alias>Hijrah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>هجرة</grapheme>
     <alias>Hijrah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مَكَّة</grapheme>
     <alias>Makkah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>الْمَدِينَة</grapheme>
     <alias>Madiinah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>الْكَعْبَة</grapheme>
     <alias>Ka-bah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>الْمَسْجِدُ الْحَرَام</grapheme>
     <alias>Al-Masjid al-Haraam</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>al-masjid an-nabawī</grapheme>
     <alias>Al-Masjid an-Nabawii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>الْمَسْجِدُ النَّبَوِي</grapheme>
     <alias>Al-Masjid an-Nabawii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Masjid Qubāʾ</grapheme>
     <alias>Masjid Qubaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>masjid qubāʾ</grapheme>
     <alias>Masjid Qubaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مَسْجِدُ قُبَاء</grapheme>
     <alias>Masjid Qubaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مسجد قباء</grapheme>
     <alias>Masjid Qubaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>حِرَاء</grapheme>
     <alias>Hiraa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>بَدْر</grapheme>
     <alias>Badr</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أُحُد</grapheme>
     <alias>Uhud</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>الْحُدَيْبِيَة</grapheme>
     <alias>Al-Hudaybiyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>قُرَيْش</grapheme>
     <alias>Quraysh</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أَنْصَار</grapheme>
     <alias>Ansaar</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أنصار</grapheme>
     <alias>Ansaar</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مُهَاجِرُون</grapheme>
     <alias>Muhaajiruun</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مهاجرون</grapheme>
     <alias>Muhaajiruun</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Bayʿat ar-Riḍwān</grapheme>
     <alias>Bay-at ar-Ridwaan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>bayʿat ar-riḍwān</grapheme>
     <alias>Bay-at ar-Ridwaan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Bayat ar-Ridwan</grapheme>
     <alias>Bay-at ar-Ridwaan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>bayat ar-ridwan</grapheme>
     <alias>Bay-at ar-Ridwaan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>بَيْعَةُ الرِّضْوَان</grapheme>
     <alias>Bay-at ar-Ridwaan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>بيعة الرضوان</grapheme>
     <alias>Bay-at ar-Ridwaan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>غَزْوَة</grapheme>
     <alias>Ghazwah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Sariyya</grapheme>
     <alias>Sariyyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>سَرِيَّة</grapheme>
     <alias>Sariyyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Khalīfah</grapheme>
     <alias>Khaliifah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>khalīfah</grapheme>
     <alias>Khaliifah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Khalifah</grapheme>
     <alias>Khaliifah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>khalifah</grapheme>
     <alias>Khaliifah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Khalifa</grapheme>
     <alias>Khaliifah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>خَلِيفَة</grapheme>
     <alias>Khaliifah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>خليفة</grapheme>
     <alias>Khaliifah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>khilāfah</grapheme>
     <alias>Khilaafah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>khilafah</grapheme>
     <alias>Khilaafah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>خِلَافَة</grapheme>
     <alias>Khilaafah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>خلافة</grapheme>
     <alias>Khilaafah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>amīr al-muʾminīn</grapheme>
     <alias>Amiir al-Mu-miniin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>amir al-muminin</grapheme>
     <alias>Amiir al-Mu-miniin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أَمِيرُ الْمُؤْمِنِينَ</grapheme>
     <alias>Amiir al-Mu-miniin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أمير المؤمنين</grapheme>
     <alias>Amiir al-Mu-miniin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Umm al-Muʾminīn</grapheme>
     <alias>Umm al-Mu-miniin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>umm al-muʾminīn</grapheme>
     <alias>Umm al-Mu-miniin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Umm al-Muminin</grapheme>
     <alias>Umm al-Mu-miniin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>umm al-muminin</grapheme>
     <alias>Umm al-Mu-miniin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أُمُّ الْمُؤْمِنِينَ</grapheme>
     <alias>Umm al-Mu-miniin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أم المؤمنين</grapheme>
     <alias>Umm al-Mu-miniin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أَهْلُ الْبَيْت</grapheme>
     <alias>Ahl al-Bayt</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أهل البيت</grapheme>
     <alias>Ahl al-Bayt</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Mubāššarūn bi-l-Jannah</grapheme>
     <alias>Mubashsharuun bil-Jannah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>mubāššarūn bi-l-jannah</grapheme>
     <alias>Mubashsharuun bil-Jannah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Mubashsharun bi-l-Jannah</grapheme>
     <alias>Mubashsharuun bil-Jannah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>mubashsharun bi-l-jannah</grapheme>
     <alias>Mubashsharuun bil-Jannah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Mubashshirun bil Jannah</grapheme>
     <alias>Mubashsharuun bil-Jannah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>الْمُبَشَّرُونَ بِالْجَنَّة</grapheme>
     <alias>Mubashsharuun bil-Jannah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>المبشرون بالجنة</grapheme>
     <alias>Mubashsharuun bil-Jannah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>al-ʿAšarah al-Mubaššarūn</grapheme>
     <alias>Al-Asharah al-Mubashsharuun</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>al-ʿašarah al-mubaššarūn</grapheme>
     <alias>Al-Asharah al-Mubashsharuun</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>al-Asharah al-Mubashsharun</grapheme>
     <alias>Al-Asharah al-Mubashsharuun</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>al-asharah al-mubashsharun</grapheme>
     <alias>Al-Asharah al-Mubashsharuun</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>al-Ashara al-Mubashsharun</grapheme>
     <alias>Al-Asharah al-Mubashsharuun</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>الْعَشَرَةُ الْمُبَشَّرُون</grapheme>
     <alias>Al-Asharah al-Mubashsharuun</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>العشرة المبشرون</grapheme>
     <alias>Al-Asharah al-Mubashsharuun</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مُحَرَّم</grapheme>
     <alias>Muharram</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>صَفَر</grapheme>
     <alias>Safar</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رَبِيعُ الْأَوَّل</grapheme>
     <alias>Rabii al-Awwal</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Rabīʿ ath-Thānī</grapheme>
     <alias>Rabii ath-Thaani</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>rabīʿ ath-thānī</grapheme>
     <alias>Rabii ath-Thaani</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Rabi ath-Thani</grapheme>
     <alias>Rabii ath-Thaani</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رَبِيعُ الثَّانِي</grapheme>
     <alias>Rabii ath-Thaani</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>جُمَادَى الْأُولَى</grapheme>
     <alias>Jumaadaa al-Uulaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>جُمَادَى الْآخِرَة</grapheme>
     <alias>Jumaadaa al-Aakhirah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رَجَب</grapheme>
     <alias>Rajab</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>شَعْبَان</grapheme>
     <alias>Sha-baan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>شَوَّال</grapheme>
     <alias>Shawwaal</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Dhū l-Qaʿdah</grapheme>
     <alias>Dhul-Qa-dah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>dhū l-qaʿdah</grapheme>
     <alias>Dhul-Qa-dah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Dhu l-Qadah</grapheme>
     <alias>Dhul-Qa-dah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>dhu l-qadah</grapheme>
     <alias>Dhul-Qa-dah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Dhul Qadah</grapheme>
     <alias>Dhul-Qa-dah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ذُو الْقَعْدَة</grapheme>
     <alias>Dhul-Qa-dah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Dhū l-Ḥijjah</grapheme>
     <alias>Dhul-Hijjah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>dhū l-ḥijjah</grapheme>
     <alias>Dhul-Hijjah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Dhu l-Hijjah</grapheme>
     <alias>Dhul-Hijjah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>dhu l-hijjah</grapheme>
     <alias>Dhul-Hijjah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ذُو الْحِجَّة</grapheme>
     <alias>Dhul-Hijjah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>لَيْلَةُ الْقَدْر</grapheme>
     <alias>Laylat al-Qadr</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>عِيدُ الْفِطْر</grapheme>
     <alias>Iid al-Fitr</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>عِيدُ الْأَضْحَى</grapheme>
     <alias>Iid al-Adhaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Yawm ʿArafah</grapheme>
     <alias>Yawm Arafah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>yawm ʿarafah</grapheme>
     <alias>Yawm Arafah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Yawm Arafah</grapheme>
     <alias>Yawm Arafah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>yawm arafah</grapheme>
     <alias>Yawm Arafah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Tag von Arafah</grapheme>
     <alias>Yawm Arafah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>يَوْمُ عَرَفَة</grapheme>
     <alias>Yawm Arafah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>يوم عرفة</grapheme>
     <alias>Yawm Arafah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Rabbi zidnī ʿilmā</grapheme>
     <alias>Rabbi zidnii ilmaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>rabbi zidnī ʿilmā</grapheme>
     <alias>Rabbi zidnii ilmaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Rabbi zidni ilma</grapheme>
     <alias>Rabbi zidnii ilmaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>rabbi zidni ilma</grapheme>
     <alias>Rabbi zidnii ilmaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رَبِّ زِدْنِي عِلْمًا</grapheme>
     <alias>Rabbi zidnii ilmaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رب زدني علما</grapheme>
     <alias>Rabbi zidnii ilmaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Rabbi</grapheme>
     <alias>Rabbi</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>rabbi</grapheme>
     <alias>Rabbi</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رَبِّ</grapheme>
     <alias>Rabbi</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>zidnī</grapheme>
     <alias>zidnii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>zidni</grapheme>
     <alias>zidnii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>زِدْنِي</grapheme>
     <alias>zidnii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>زدني</grapheme>
     <alias>zidnii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ʿilmā</grapheme>
     <alias>ilmaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ilma</grapheme>
     <alias>ilmaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>عِلْمًا</grapheme>
     <alias>ilmaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>علما</grapheme>
     <alias>ilmaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Rabbanā ighfir lī wa li-wālidayya wa li-l-muʾminīna yawma yaqūmu l-ḥisāb</grapheme>
     <alias>Rabbanaa ighfir lii wa li-waalidayya wa li-l-mu-miniina yawma yaquumu l-hisaab</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>rabbanā ighfir lī wa li-wālidayya wa li-l-muʾminīna yawma yaqūmu l-ḥisāb</grapheme>
     <alias>Rabbanaa ighfir lii wa li-waalidayya wa li-l-mu-miniina yawma yaquumu l-hisaab</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Rabbana ighfir li wa li-walidayya wa li-l-muminina yawma yaqumu l-hisab</grapheme>
     <alias>Rabbanaa ighfir lii wa li-waalidayya wa li-l-mu-miniina yawma yaquumu l-hisaab</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>rabbana ighfir li wa li-walidayya wa li-l-muminina yawma yaqumu l-hisab</grapheme>
     <alias>Rabbanaa ighfir lii wa li-waalidayya wa li-l-mu-miniina yawma yaquumu l-hisaab</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رَبَّنَا اغْفِرْ لِي وَلِوَالِدَيَّ وَلِلْمُؤْمِنِينَ يَوْمَ يَقُومُ الْحِسَابُ</grapheme>
     <alias>Rabbanaa ighfir lii wa li-waalidayya wa li-l-mu-miniina yawma yaquumu l-hisaab</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ربنا اغفر لي ولوالدي وللمؤمنين يوم يقوم الحساب</grapheme>
     <alias>Rabbanaa ighfir lii wa li-waalidayya wa li-l-mu-miniina yawma yaquumu l-hisaab</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Rabbanā</grapheme>
     <alias>Rabbanaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>rabbanā</grapheme>
     <alias>Rabbanaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Rabbana</grapheme>
     <alias>Rabbanaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>rabbana</grapheme>
     <alias>Rabbanaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رَبَّنَا</grapheme>
     <alias>Rabbanaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ربنا</grapheme>
     <alias>Rabbanaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ighfir</grapheme>
     <alias>ighfir</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>اغْفِرْ</grapheme>
     <alias>ighfir</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>اغفر</grapheme>
     <alias>ighfir</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>lī</grapheme>
     <alias>lii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>li</grapheme>
     <alias>lii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>لِي</grapheme>
     <alias>lii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>لي</grapheme>
     <alias>lii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa-li-wālidayya</grapheme>
     <alias>wa-li-waalidayya</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa-li-walidayya</grapheme>
     <alias>wa-li-waalidayya</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وَلِوَالِدَيَّ</grapheme>
     <alias>wa-li-waalidayya</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ولوالدي</grapheme>
     <alias>wa-li-waalidayya</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa-li-l-muʾminīna</grapheme>
     <alias>wa-li-l-mu-miniina</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa-li-l-muminina</grapheme>
     <alias>wa-li-l-mu-miniina</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وَلِلْمُؤْمِنِينَ</grapheme>
     <alias>wa-li-l-mu-miniina</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وللمؤمنين</grapheme>
     <alias>wa-li-l-mu-miniina</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>yawma</grapheme>
     <alias>yawma</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>يَوْمَ</grapheme>
     <alias>yawma</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>يوم</grapheme>
     <alias>yawma</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>yaqūmu</grapheme>
     <alias>yaquumu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>yaqumu</grapheme>
     <alias>yaquumu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>يَقُومُ</grapheme>
     <alias>yaquumu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>يقوم</grapheme>
     <alias>yaquumu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>l-ḥisāb</grapheme>
     <alias>l-hisaab</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>l-hisab</grapheme>
     <alias>l-hisaab</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>الْحِسَابُ</grapheme>
     <alias>l-hisaab</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Rabbi aʿūdhu bika min hamazāti sh-shayāṭīn, wa aʿūdhu bika rabbi an yaḥḍurūn</grapheme>
     <alias>Rabbi auudhu bika min hamazaati sh-shayaatiin, wa auudhu bika rabbi an yahduruun</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>rabbi aʿūdhu bika min hamazāti sh-shayāṭīn, wa aʿūdhu bika rabbi an yaḥḍurūn</grapheme>
     <alias>Rabbi auudhu bika min hamazaati sh-shayaatiin, wa auudhu bika rabbi an yahduruun</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Rabbi audhu bika min hamazati sh-shayatin, wa audhu bika rabbi an yahdurun</grapheme>
     <alias>Rabbi auudhu bika min hamazaati sh-shayaatiin, wa auudhu bika rabbi an yahduruun</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>rabbi audhu bika min hamazati sh-shayatin, wa audhu bika rabbi an yahdurun</grapheme>
     <alias>Rabbi auudhu bika min hamazaati sh-shayaatiin, wa auudhu bika rabbi an yahduruun</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رَبِّ أَعُوذُ بِكَ مِنْ هَمَزَاتِ الشَّيَاطِينِ وَأَعُوذُ بِكَ رَبِّ أَنْ يَحْضُرُونِ</grapheme>
     <alias>Rabbi auudhu bika min hamazaati sh-shayaatiin, wa auudhu bika rabbi an yahduruun</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رب أعوذ بك من همزات الشياطين وأعوذ بك رب أن يحضرون</grapheme>
     <alias>Rabbi auudhu bika min hamazaati sh-shayaatiin, wa auudhu bika rabbi an yahduruun</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>aʿūdhu</grapheme>
     <alias>auudhu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>audhu</grapheme>
     <alias>auudhu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أَعُوذُ</grapheme>
     <alias>auudhu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أعوذ</grapheme>
     <alias>auudhu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>bika</grapheme>
     <alias>bika</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>بِكَ</grapheme>
     <alias>bika</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>بك</grapheme>
     <alias>bika</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>min</grapheme>
     <alias>min</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مِنْ</grapheme>
     <alias>min</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>من</grapheme>
     <alias>min</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>hamazāti</grapheme>
     <alias>hamazaati</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>hamazati</grapheme>
     <alias>hamazaati</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>هَمَزَاتِ</grapheme>
     <alias>hamazaati</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>همزات</grapheme>
     <alias>hamazaati</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>sh-shayāṭīn</grapheme>
     <alias>sh-shayaatiin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>sh-shayatin</grapheme>
     <alias>sh-shayaatiin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>الشَّيَاطِينِ</grapheme>
     <alias>sh-shayaatiin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>الشياطين</grapheme>
     <alias>sh-shayaatiin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa-aʿūdhu</grapheme>
     <alias>wa-auudhu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa-audhu</grapheme>
     <alias>wa-auudhu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وَأَعُوذُ</grapheme>
     <alias>wa-auudhu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وأعوذ</grapheme>
     <alias>wa-auudhu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>an</grapheme>
     <alias>an</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أَنْ</grapheme>
     <alias>an</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أن</grapheme>
     <alias>an</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>yaḥḍurūn</grapheme>
     <alias>yahduruun</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>yahdurun</grapheme>
     <alias>yahduruun</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>يَحْضُرُونِ</grapheme>
     <alias>yahduruun</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>يحضرون</grapheme>
     <alias>yahduruun</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Allāhumma bismika aḥyā wa-amūt</grapheme>
     <alias>Allaahumma bismika ahyaa wa-amuut</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>allāhumma bismika aḥyā wa-amūt</grapheme>
     <alias>Allaahumma bismika ahyaa wa-amuut</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Allahumma bismika ahya wa-amut</grapheme>
     <alias>Allaahumma bismika ahyaa wa-amuut</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>allahumma bismika ahya wa-amut</grapheme>
     <alias>Allaahumma bismika ahyaa wa-amuut</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>اللَّهُمَّ بِاسْمِكَ أَحْيَا وَأَمُوتُ</grapheme>
     <alias>Allaahumma bismika ahyaa wa-amuut</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>اللهم باسمك أحيا وأموت</grapheme>
     <alias>Allaahumma bismika ahyaa wa-amuut</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>bismika</grapheme>
     <alias>bismika</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>بِاسْمِكَ</grapheme>
     <alias>bismika</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>باسمك</grapheme>
     <alias>bismika</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>aḥyā</grapheme>
     <alias>ahyaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ahya</grapheme>
     <alias>ahyaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أَحْيَا</grapheme>
     <alias>ahyaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أحيا</grapheme>
     <alias>ahyaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa-amūt</grapheme>
     <alias>wa-amuut</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa-amut</grapheme>
     <alias>wa-amuut</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وَأَمُوتُ</grapheme>
     <alias>wa-amuut</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وأموت</grapheme>
     <alias>wa-amuut</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Al-ḥamdu lillāhi lladhī aḥyānā baʿda mā amātanā wa ilayhi n-nushūr</grapheme>
     <alias>Al-hamdu lillaahi lladhii ahyaanaa bada maa amaatanaa wa ilayhi n-nushuur</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>al-ḥamdu lillāhi lladhī aḥyānā baʿda mā amātanā wa ilayhi n-nushūr</grapheme>
     <alias>Al-hamdu lillaahi lladhii ahyaanaa bada maa amaatanaa wa ilayhi n-nushuur</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Al-hamdu lillahi lladhi ahyana bada ma amatana wa ilayhi n-nushur</grapheme>
     <alias>Al-hamdu lillaahi lladhii ahyaanaa bada maa amaatanaa wa ilayhi n-nushuur</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>al-hamdu lillahi lladhi ahyana bada ma amatana wa ilayhi n-nushur</grapheme>
     <alias>Al-hamdu lillaahi lladhii ahyaanaa bada maa amaatanaa wa ilayhi n-nushuur</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ</grapheme>
     <alias>Al-hamdu lillaahi lladhii ahyaanaa bada maa amaatanaa wa ilayhi n-nushuur</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>الحمد لله الذي أحيانا بعد ما أماتنا وإليه النشور</grapheme>
     <alias>Al-hamdu lillaahi lladhii ahyaanaa bada maa amaatanaa wa ilayhi n-nushuur</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Al-ḥamdu</grapheme>
     <alias>Al-hamdu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>al-ḥamdu</grapheme>
     <alias>Al-hamdu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Al-hamdu</grapheme>
     <alias>Al-hamdu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>al-hamdu</grapheme>
     <alias>Al-hamdu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>الْحَمْدُ</grapheme>
     <alias>Al-hamdu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>الحمد</grapheme>
     <alias>Al-hamdu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>lillāhi</grapheme>
     <alias>lillaahi</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>lillahi</grapheme>
     <alias>lillaahi</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>لِلَّهِ</grapheme>
     <alias>lillaahi</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>لله</grapheme>
     <alias>lillaahi</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>lladhī</grapheme>
     <alias>lladhii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>lladhi</grapheme>
     <alias>lladhii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>الَّذِي</grapheme>
     <alias>lladhii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>الذي</grapheme>
     <alias>lladhii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>aḥyānā</grapheme>
     <alias>ahyaanaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ahyana</grapheme>
     <alias>ahyaanaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أَحْيَانَا</grapheme>
     <alias>ahyaanaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أحيانا</grapheme>
     <alias>ahyaanaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>baʿda</grapheme>
     <alias>bada</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>bada</grapheme>
     <alias>bada</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>بَعْدَ</grapheme>
     <alias>bada</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>بعد</grapheme>
     <alias>bada</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>mā</grapheme>
     <alias>maa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ma</grapheme>
     <alias>maa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مَا</grapheme>
     <alias>maa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ما</grapheme>
     <alias>maa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>amātanā</grapheme>
     <alias>amaatanaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>amatana</grapheme>
     <alias>amaatanaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أَمَاتَنَا</grapheme>
     <alias>amaatanaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أماتنا</grapheme>
     <alias>amaatanaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa-ilayhi</grapheme>
     <alias>wa-ilayhi</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وَإِلَيْهِ</grapheme>
     <alias>wa-ilayhi</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وإليه</grapheme>
     <alias>wa-ilayhi</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>n-nushūr</grapheme>
     <alias>n-nushuur</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>n-nushur</grapheme>
     <alias>n-nushuur</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>النُّشُورُ</grapheme>
     <alias>n-nushuur</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>النشور</grapheme>
     <alias>n-nushuur</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>بِسْمِ اللَّهِ</grapheme>
     <alias>Bismillaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Bismillāhi awwalahu wa ākhirahu</grapheme>
     <alias>Bismillaahi awwalahu wa aakhirahu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>bismillāhi awwalahu wa ākhirahu</grapheme>
     <alias>Bismillaahi awwalahu wa aakhirahu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Bismillahi awwalahu wa akhirahu</grapheme>
     <alias>Bismillaahi awwalahu wa aakhirahu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>bismillahi awwalahu wa akhirahu</grapheme>
     <alias>Bismillaahi awwalahu wa aakhirahu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>بِسْمِ اللَّهِ أَوَّلَهُ وَآخِرَهُ</grapheme>
     <alias>Bismillaahi awwalahu wa aakhirahu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>بسم الله أوله وآخره</grapheme>
     <alias>Bismillaahi awwalahu wa aakhirahu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Bismi</grapheme>
     <alias>Bismi</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>bismi</grapheme>
     <alias>Bismi</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>بِسْمِ</grapheme>
     <alias>Bismi</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>بسم</grapheme>
     <alias>Bismi</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>llāh</grapheme>
     <alias>llaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>llah</grapheme>
     <alias>llaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>اللَّهِ</grapheme>
     <alias>llaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Al-ḥamdu lillāhi lladhī aṭʿamanī hādhā wa razaqanīhi min ghayri ḥawlin minnī wa lā quwwah</grapheme>
     <alias>Al-hamdu lillaahi lladhii atamanii haadhaa wa razaqaniihi min ghayri hawlin minnii wa laa quwwah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>al-ḥamdu lillāhi lladhī aṭʿamanī hādhā wa razaqanīhi min ghayri ḥawlin minnī wa lā quwwah</grapheme>
     <alias>Al-hamdu lillaahi lladhii atamanii haadhaa wa razaqaniihi min ghayri hawlin minnii wa laa quwwah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Al-hamdu lillahi lladhi atamani hadha wa razaqanihi min ghayri hawlin minni wa la quwwah</grapheme>
     <alias>Al-hamdu lillaahi lladhii atamanii haadhaa wa razaqaniihi min ghayri hawlin minnii wa laa quwwah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>al-hamdu lillahi lladhi atamani hadha wa razaqanihi min ghayri hawlin minni wa la quwwah</grapheme>
     <alias>Al-hamdu lillaahi lladhii atamanii haadhaa wa razaqaniihi min ghayri hawlin minnii wa laa quwwah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنِي هَذَا وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلَا قُوَّةٍ</grapheme>
     <alias>Al-hamdu lillaahi lladhii atamanii haadhaa wa razaqaniihi min ghayri hawlin minnii wa laa quwwah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>الحمد لله الذي أطعمني هذا ورزقنيه من غير حول مني ولا قوة</grapheme>
     <alias>Al-hamdu lillaahi lladhii atamanii haadhaa wa razaqaniihi min ghayri hawlin minnii wa laa quwwah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>aṭʿamanī</grapheme>
     <alias>atamanii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>atamani</grapheme>
     <alias>atamanii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أَطْعَمَنِي</grapheme>
     <alias>atamanii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أطعمني</grapheme>
     <alias>atamanii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>hādhā</grapheme>
     <alias>haadhaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>hadha</grapheme>
     <alias>haadhaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>هَذَا</grapheme>
     <alias>haadhaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>هذا</grapheme>
     <alias>haadhaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa-razaqanīhi</grapheme>
     <alias>wa-razaqaniihi</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa-razaqanihi</grapheme>
     <alias>wa-razaqaniihi</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وَرَزَقَنِيهِ</grapheme>
     <alias>wa-razaqaniihi</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ورزقنيه</grapheme>
     <alias>wa-razaqaniihi</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ghayri</grapheme>
     <alias>ghayri</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>غَيْرِ</grapheme>
     <alias>ghayri</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>غير</grapheme>
     <alias>ghayri</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ḥawlin</grapheme>
     <alias>hawlin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>hawlin</grapheme>
     <alias>hawlin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>حَوْلٍ</grapheme>
     <alias>hawlin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>حول</grapheme>
     <alias>hawlin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>minnī</grapheme>
     <alias>minnii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>minni</grapheme>
     <alias>minnii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مِنِّي</grapheme>
     <alias>minnii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مني</grapheme>
     <alias>minnii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa-lā</grapheme>
     <alias>wa-laa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa-la</grapheme>
     <alias>wa-laa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وَلَا</grapheme>
     <alias>wa-laa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ولا</grapheme>
     <alias>wa-laa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>quwwah</grapheme>
     <alias>quwwah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>قُوَّةٍ</grapheme>
     <alias>quwwah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>قوة</grapheme>
     <alias>quwwah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Allāhumma innī aʿūdhu bika mina l-khubthi wa l-khabāʾith</grapheme>
     <alias>Allaahumma innii auudhu bika mina l-khubthi wa l-khabaa-ith</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>allāhumma innī aʿūdhu bika mina l-khubthi wa l-khabāʾith</grapheme>
     <alias>Allaahumma innii auudhu bika mina l-khubthi wa l-khabaa-ith</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Allahumma inni audhu bika mina l-khubthi wa l-khabaith</grapheme>
     <alias>Allaahumma innii auudhu bika mina l-khubthi wa l-khabaa-ith</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>allahumma inni audhu bika mina l-khubthi wa l-khabaith</grapheme>
     <alias>Allaahumma innii auudhu bika mina l-khubthi wa l-khabaa-ith</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ</grapheme>
     <alias>Allaahumma innii auudhu bika mina l-khubthi wa l-khabaa-ith</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>اللهم إني أعوذ بك من الخبث والخبائث</grapheme>
     <alias>Allaahumma innii auudhu bika mina l-khubthi wa l-khabaa-ith</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>innī</grapheme>
     <alias>innii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>inni</grapheme>
     <alias>innii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>إِنِّي</grapheme>
     <alias>innii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>إني</grapheme>
     <alias>innii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مِنَ</grapheme>
     <alias>mina</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>l-khubthi</grapheme>
     <alias>l-khubthi</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>الْخُبُثِ</grapheme>
     <alias>l-khubthi</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>الخبث</grapheme>
     <alias>l-khubthi</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa-l-khabāʾith</grapheme>
     <alias>wa-l-khabaa-ith</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa-l-khabaith</grapheme>
     <alias>wa-l-khabaa-ith</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وَالْخَبَائِثِ</grapheme>
     <alias>wa-l-khabaa-ith</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>والخبائث</grapheme>
     <alias>wa-l-khabaa-ith</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Ghufrānak</grapheme>
     <alias>Ghufraanak</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ghufrānak</grapheme>
     <alias>Ghufraanak</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Ghufranak</grapheme>
     <alias>Ghufraanak</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ghufranak</grapheme>
     <alias>Ghufraanak</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>غُفْرَانَكَ</grapheme>
     <alias>Ghufraanak</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>غفرانك</grapheme>
     <alias>Ghufraanak</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Bismillāh, tawakkaltu ʿalā Allāh, lā ḥawla wa lā quwwata illā billāh</grapheme>
     <alias>Bismillaah, tawakkaltu alaa Allaah, laa hawla wa laa quwwata illaa billaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>bismillāh, tawakkaltu ʿalā allāh, lā ḥawla wa lā quwwata illā billāh</grapheme>
     <alias>Bismillaah, tawakkaltu alaa Allaah, laa hawla wa laa quwwata illaa billaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Bismillah, tawakkaltu ala Allah, la hawla wa la quwwata illa billah</grapheme>
     <alias>Bismillaah, tawakkaltu alaa Allaah, laa hawla wa laa quwwata illaa billaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>bismillah, tawakkaltu ala allah, la hawla wa la quwwata illa billah</grapheme>
     <alias>Bismillaah, tawakkaltu alaa Allaah, laa hawla wa laa quwwata illaa billaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>بِسْمِ اللَّهِ، تَوَكَّلْتُ عَلَى اللَّهِ، لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ</grapheme>
     <alias>Bismillaah, tawakkaltu alaa Allaah, laa hawla wa laa quwwata illaa billaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>بسم الله، توكلت على الله، لا حول ولا قوة إلا بالله</grapheme>
     <alias>Bismillaah, tawakkaltu alaa Allaah, laa hawla wa laa quwwata illaa billaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>tawakkaltu</grapheme>
     <alias>tawakkaltu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تَوَكَّلْتُ</grapheme>
     <alias>tawakkaltu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>توكلت</grapheme>
     <alias>tawakkaltu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ʿalā</grapheme>
     <alias>alaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ala</grapheme>
     <alias>alaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>عَلَى</grapheme>
     <alias>alaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>على</grapheme>
     <alias>alaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>lā</grapheme>
     <alias>laa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>la</grapheme>
     <alias>laa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>لَا</grapheme>
     <alias>laa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>لا</grapheme>
     <alias>laa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ḥawla</grapheme>
     <alias>hawla</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>hawla</grapheme>
     <alias>hawla</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>حَوْلَ</grapheme>
     <alias>hawla</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>quwwata</grapheme>
     <alias>quwwata</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>قُوَّةَ</grapheme>
     <alias>quwwata</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>illā</grapheme>
     <alias>illaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>illa</grapheme>
     <alias>illaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>إِلَّا</grapheme>
     <alias>illaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>إلا</grapheme>
     <alias>illaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>billāh</grapheme>
     <alias>billaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>billah</grapheme>
     <alias>billaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>بِاللَّهِ</grapheme>
     <alias>billaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>بالله</grapheme>
     <alias>billaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Allāhumma iftaḥ lī abwāba raḥmatik</grapheme>
     <alias>Allaahumma iftah lii abwaaba rahmatik</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>allāhumma iftaḥ lī abwāba raḥmatik</grapheme>
     <alias>Allaahumma iftah lii abwaaba rahmatik</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Allahumma iftah li abwaba rahmatik</grapheme>
     <alias>Allaahumma iftah lii abwaaba rahmatik</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>allahumma iftah li abwaba rahmatik</grapheme>
     <alias>Allaahumma iftah lii abwaaba rahmatik</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ</grapheme>
     <alias>Allaahumma iftah lii abwaaba rahmatik</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>اللهم افتح لي أبواب رحمتك</grapheme>
     <alias>Allaahumma iftah lii abwaaba rahmatik</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>iftaḥ</grapheme>
     <alias>iftah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>iftah</grapheme>
     <alias>iftah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>افْتَحْ</grapheme>
     <alias>iftah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>افتح</grapheme>
     <alias>iftah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>abwāba</grapheme>
     <alias>abwaaba</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>abwaba</grapheme>
     <alias>abwaaba</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أَبْوَابَ</grapheme>
     <alias>abwaaba</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أبواب</grapheme>
     <alias>abwaaba</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>raḥmatik</grapheme>
     <alias>rahmatik</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>rahmatik</grapheme>
     <alias>rahmatik</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رَحْمَتِكَ</grapheme>
     <alias>rahmatik</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رحمتك</grapheme>
     <alias>rahmatik</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Allāhumma innī asʾaluka min faḍlik</grapheme>
     <alias>Allaahumma innii as-aluka min fadlik</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>allāhumma innī asʾaluka min faḍlik</grapheme>
     <alias>Allaahumma innii as-aluka min fadlik</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Allahumma inni asaluka min fadlik</grapheme>
     <alias>Allaahumma innii as-aluka min fadlik</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>allahumma inni asaluka min fadlik</grapheme>
     <alias>Allaahumma innii as-aluka min fadlik</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ</grapheme>
     <alias>Allaahumma innii as-aluka min fadlik</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>اللهم إني أسألك من فضلك</grapheme>
     <alias>Allaahumma innii as-aluka min fadlik</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>asʾaluka</grapheme>
     <alias>as-aluka</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>asaluka</grapheme>
     <alias>as-aluka</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أَسْأَلُكَ</grapheme>
     <alias>as-aluka</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أسألك</grapheme>
     <alias>as-aluka</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>faḍlik</grapheme>
     <alias>fadlik</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>fadlik</grapheme>
     <alias>fadlik</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>فَضْلِكَ</grapheme>
     <alias>fadlik</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>فضلك</grapheme>
     <alias>fadlik</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Allāhumma innī asʾaluka l-ʿafwa wa l-ʿāfiyata fī d-dunyā wa l-ākhirah</grapheme>
     <alias>Allaahumma innii as-aluka l-afwa wa l-aafiyata fii d-dunyaa wa l-aakhirah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>allāhumma innī asʾaluka l-ʿafwa wa l-ʿāfiyata fī d-dunyā wa l-ākhirah</grapheme>
     <alias>Allaahumma innii as-aluka l-afwa wa l-aafiyata fii d-dunyaa wa l-aakhirah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Allahumma inni asaluka l-afwa wa l-afiyata fi d-dunya wa l-akhirah</grapheme>
     <alias>Allaahumma innii as-aluka l-afwa wa l-aafiyata fii d-dunyaa wa l-aakhirah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>allahumma inni asaluka l-afwa wa l-afiyata fi d-dunya wa l-akhirah</grapheme>
     <alias>Allaahumma innii as-aluka l-afwa wa l-aafiyata fii d-dunyaa wa l-aakhirah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ</grapheme>
     <alias>Allaahumma innii as-aluka l-afwa wa l-aafiyata fii d-dunyaa wa l-aakhirah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>اللهم إني أسألك العفو والعافية في الدنيا والآخرة</grapheme>
     <alias>Allaahumma innii as-aluka l-afwa wa l-aafiyata fii d-dunyaa wa l-aakhirah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>l-ʿafwa</grapheme>
     <alias>l-afwa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>l-afwa</grapheme>
     <alias>l-afwa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>الْعَفْوَ</grapheme>
     <alias>l-afwa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>العفو</grapheme>
     <alias>l-afwa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa-l-ʿāfiyata</grapheme>
     <alias>wa-l-aafiyata</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa-l-afiyata</grapheme>
     <alias>wa-l-aafiyata</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وَالْعَافِيَةَ</grapheme>
     <alias>wa-l-aafiyata</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>والعافية</grapheme>
     <alias>wa-l-aafiyata</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>fī</grapheme>
     <alias>fii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>fi</grapheme>
     <alias>fii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>فِي</grapheme>
     <alias>fii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>في</grapheme>
     <alias>fii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>d-dunyā</grapheme>
     <alias>d-dunyaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>d-dunya</grapheme>
     <alias>d-dunyaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>الدُّنْيَا</grapheme>
     <alias>d-dunyaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa-l-ākhirah</grapheme>
     <alias>wa-l-aakhirah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa-l-akhirah</grapheme>
     <alias>wa-l-aakhirah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وَالْآخِرَةِ</grapheme>
     <alias>wa-l-aakhirah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>والآخرة</grapheme>
     <alias>wa-l-aakhirah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Rabbanā ātinā fī d-dunyā ḥasanatan wa fī l-ākhirati ḥasanatan wa qinā ʿadhāba n-nār</grapheme>
     <alias>Rabbanaa aatinaa fii d-dunyaa hasanatan wa fii l-aakhirati hasanatan wa qinaa adhaaba n-naar</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>rabbanā ātinā fī d-dunyā ḥasanatan wa fī l-ākhirati ḥasanatan wa qinā ʿadhāba n-nār</grapheme>
     <alias>Rabbanaa aatinaa fii d-dunyaa hasanatan wa fii l-aakhirati hasanatan wa qinaa adhaaba n-naar</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Rabbana atina fi d-dunya hasanatan wa fi l-akhirati hasanatan wa qina adhaba n-nar</grapheme>
     <alias>Rabbanaa aatinaa fii d-dunyaa hasanatan wa fii l-aakhirati hasanatan wa qinaa adhaaba n-naar</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>rabbana atina fi d-dunya hasanatan wa fi l-akhirati hasanatan wa qina adhaba n-nar</grapheme>
     <alias>Rabbanaa aatinaa fii d-dunyaa hasanatan wa fii l-aakhirati hasanatan wa qinaa adhaaba n-naar</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ</grapheme>
     <alias>Rabbanaa aatinaa fii d-dunyaa hasanatan wa fii l-aakhirati hasanatan wa qinaa adhaaba n-naar</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ربنا آتنا في الدنيا حسنة وفي الآخرة حسنة وقنا عذاب النار</grapheme>
     <alias>Rabbanaa aatinaa fii d-dunyaa hasanatan wa fii l-aakhirati hasanatan wa qinaa adhaaba n-naar</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ātinā</grapheme>
     <alias>aatinaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>atina</grapheme>
     <alias>aatinaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>آتِنَا</grapheme>
     <alias>aatinaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>آتنا</grapheme>
     <alias>aatinaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ḥasanatan</grapheme>
     <alias>hasanatan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>hasanatan</grapheme>
     <alias>hasanatan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>حَسَنَةً</grapheme>
     <alias>hasanatan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>حسنة</grapheme>
     <alias>hasanatan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa-fī</grapheme>
     <alias>wa-fii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa-fi</grapheme>
     <alias>wa-fii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وَفِي</grapheme>
     <alias>wa-fii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وفي</grapheme>
     <alias>wa-fii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>l-ākhirati</grapheme>
     <alias>l-aakhirati</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>l-akhirati</grapheme>
     <alias>l-aakhirati</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>الْآخِرَةِ</grapheme>
     <alias>l-aakhirati</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa-qinā</grapheme>
     <alias>wa-qinaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa-qina</grapheme>
     <alias>wa-qinaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وَقِنَا</grapheme>
     <alias>wa-qinaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وقنا</grapheme>
     <alias>wa-qinaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ʿadhāba</grapheme>
     <alias>adhaaba</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>adhaba</grapheme>
     <alias>adhaaba</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>عَذَابَ</grapheme>
     <alias>adhaaba</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>عذاب</grapheme>
     <alias>adhaaba</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>n-nār</grapheme>
     <alias>n-naar</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>n-nar</grapheme>
     <alias>n-naar</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>النَّارِ</grapheme>
     <alias>n-naar</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>النار</grapheme>
     <alias>n-naar</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Rabbanā ẓalamnā anfusanā wa in lam taghfir lanā wa tarḥamnā la-nakūnanna mina l-khāsirīn</grapheme>
     <alias>Rabbanaa zalamnaa anfusanaa wa in lam taghfir lanaa wa tarhamnaa la-nakuunanna mina l-khaasiriin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>rabbanā ẓalamnā anfusanā wa in lam taghfir lanā wa tarḥamnā la-nakūnanna mina l-khāsirīn</grapheme>
     <alias>Rabbanaa zalamnaa anfusanaa wa in lam taghfir lanaa wa tarhamnaa la-nakuunanna mina l-khaasiriin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Rabbana zalamna anfusana wa in lam taghfir lana wa tarhamna la-nakunanna mina l-khasirin</grapheme>
     <alias>Rabbanaa zalamnaa anfusanaa wa in lam taghfir lanaa wa tarhamnaa la-nakuunanna mina l-khaasiriin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>rabbana zalamna anfusana wa in lam taghfir lana wa tarhamna la-nakunanna mina l-khasirin</grapheme>
     <alias>Rabbanaa zalamnaa anfusanaa wa in lam taghfir lanaa wa tarhamnaa la-nakuunanna mina l-khaasiriin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رَبَّنَا ظَلَمْنَا أَنْفُسَنَا وَإِنْ لَمْ تَغْفِرْ لَنَا وَتَرْحَمْنَا لَنَكُونَنَّ مِنَ الْخَاسِرِينَ</grapheme>
     <alias>Rabbanaa zalamnaa anfusanaa wa in lam taghfir lanaa wa tarhamnaa la-nakuunanna mina l-khaasiriin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ربنا ظلمنا أنفسنا وإن لم تغفر لنا وترحمنا لنكونن من الخاسرين</grapheme>
     <alias>Rabbanaa zalamnaa anfusanaa wa in lam taghfir lanaa wa tarhamnaa la-nakuunanna mina l-khaasiriin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ẓalamnā</grapheme>
     <alias>zalamnaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>zalamna</grapheme>
     <alias>zalamnaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ظَلَمْنَا</grapheme>
     <alias>zalamnaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ظلمنا</grapheme>
     <alias>zalamnaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>anfusanā</grapheme>
     <alias>anfusanaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>anfusana</grapheme>
     <alias>anfusanaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أَنْفُسَنَا</grapheme>
     <alias>anfusanaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أنفسنا</grapheme>
     <alias>anfusanaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa-in</grapheme>
     <alias>wa-in</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وَإِنْ</grapheme>
     <alias>wa-in</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وإن</grapheme>
     <alias>wa-in</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>lam</grapheme>
     <alias>lam</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>لَمْ</grapheme>
     <alias>lam</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>لم</grapheme>
     <alias>lam</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>taghfir</grapheme>
     <alias>taghfir</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تَغْفِرْ</grapheme>
     <alias>taghfir</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تغفر</grapheme>
     <alias>taghfir</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>lanā</grapheme>
     <alias>lanaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>lana</grapheme>
     <alias>lanaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>لَنَا</grapheme>
     <alias>lanaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>لنا</grapheme>
     <alias>lanaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa-tarḥamnā</grapheme>
     <alias>wa-tarhamnaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa-tarhamna</grapheme>
     <alias>wa-tarhamnaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وَتَرْحَمْنَا</grapheme>
     <alias>wa-tarhamnaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وترحمنا</grapheme>
     <alias>wa-tarhamnaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>la-nakūnanna</grapheme>
     <alias>la-nakuunanna</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>la-nakunanna</grapheme>
     <alias>la-nakuunanna</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>لَنَكُونَنَّ</grapheme>
     <alias>la-nakuunanna</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>لنكونن</grapheme>
     <alias>la-nakuunanna</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>l-khāsirīn</grapheme>
     <alias>l-khaasiriin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>l-khasirin</grapheme>
     <alias>l-khaasiriin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>الْخَاسِرِينَ</grapheme>
     <alias>l-khaasiriin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>الخاسرين</grapheme>
     <alias>l-khaasiriin</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Rabbi ishraḥ lī ṣadrī wa yassir lī amrī wa-ḥlul ʿuqdatan min lisānī yafqahū qawlī</grapheme>
     <alias>Rabbi ishrah lii sadrii wa yassir lii amrii wa-hlul uqdatan min lisaanii yafqahuu qawlii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>rabbi ishraḥ lī ṣadrī wa yassir lī amrī wa-ḥlul ʿuqdatan min lisānī yafqahū qawlī</grapheme>
     <alias>Rabbi ishrah lii sadrii wa yassir lii amrii wa-hlul uqdatan min lisaanii yafqahuu qawlii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Rabbi ishrah li sadri wa yassir li amri wa-hlul uqdatan min lisani yafqahu qawli</grapheme>
     <alias>Rabbi ishrah lii sadrii wa yassir lii amrii wa-hlul uqdatan min lisaanii yafqahuu qawlii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>rabbi ishrah li sadri wa yassir li amri wa-hlul uqdatan min lisani yafqahu qawli</grapheme>
     <alias>Rabbi ishrah lii sadrii wa yassir lii amrii wa-hlul uqdatan min lisaanii yafqahuu qawlii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رَبِّ اشْرَحْ لِي صَدْرِي وَيَسِّرْ لِي أَمْرِي وَاحْلُلْ عُقْدَةً مِنْ لِسَانِي يَفْقَهُوا قَوْلِي</grapheme>
     <alias>Rabbi ishrah lii sadrii wa yassir lii amrii wa-hlul uqdatan min lisaanii yafqahuu qawlii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رب اشرح لي صدري ويسر لي أمري واحلل عقدة من لساني يفقهوا قولي</grapheme>
     <alias>Rabbi ishrah lii sadrii wa yassir lii amrii wa-hlul uqdatan min lisaanii yafqahuu qawlii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ishraḥ</grapheme>
     <alias>ishrah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ishrah</grapheme>
     <alias>ishrah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>اشْرَحْ</grapheme>
     <alias>ishrah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>اشرح</grapheme>
     <alias>ishrah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ṣadrī</grapheme>
     <alias>sadrii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>sadri</grapheme>
     <alias>sadrii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>صَدْرِي</grapheme>
     <alias>sadrii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>صدري</grapheme>
     <alias>sadrii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa-yassir</grapheme>
     <alias>wa-yassir</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وَيَسِّرْ</grapheme>
     <alias>wa-yassir</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ويسر</grapheme>
     <alias>wa-yassir</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>amrī</grapheme>
     <alias>amrii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>amri</grapheme>
     <alias>amrii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أَمْرِي</grapheme>
     <alias>amrii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أمري</grapheme>
     <alias>amrii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa-ḥlul</grapheme>
     <alias>wa-hlul</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa-hlul</grapheme>
     <alias>wa-hlul</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وَاحْلُلْ</grapheme>
     <alias>wa-hlul</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>واحلل</grapheme>
     <alias>wa-hlul</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ʿuqdatan</grapheme>
     <alias>uqdatan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>uqdatan</grapheme>
     <alias>uqdatan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>عُقْدَةً</grapheme>
     <alias>uqdatan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>عقدة</grapheme>
     <alias>uqdatan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>lisānī</grapheme>
     <alias>lisaanii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>lisani</grapheme>
     <alias>lisaanii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>لِسَانِي</grapheme>
     <alias>lisaanii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>لساني</grapheme>
     <alias>lisaanii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>yafqahū</grapheme>
     <alias>yafqahuu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>yafqahu</grapheme>
     <alias>yafqahuu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>يَفْقَهُوا</grapheme>
     <alias>yafqahuu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>يفقهوا</grapheme>
     <alias>yafqahuu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>qawlī</grapheme>
     <alias>qawlii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>qawli</grapheme>
     <alias>qawlii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>قَوْلِي</grapheme>
     <alias>qawlii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>قولي</grapheme>
     <alias>qawlii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Rabbanā taqabbal minnā innaka anta s-samīʿu l-ʿalīm</grapheme>
     <alias>Rabbanaa taqabbal minnaa innaka anta s-samiiu l-aliim</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>rabbanā taqabbal minnā innaka anta s-samīʿu l-ʿalīm</grapheme>
     <alias>Rabbanaa taqabbal minnaa innaka anta s-samiiu l-aliim</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Rabbana taqabbal minna innaka anta s-samiu l-alim</grapheme>
     <alias>Rabbanaa taqabbal minnaa innaka anta s-samiiu l-aliim</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>rabbana taqabbal minna innaka anta s-samiu l-alim</grapheme>
     <alias>Rabbanaa taqabbal minnaa innaka anta s-samiiu l-aliim</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رَبَّنَا تَقَبَّلْ مِنَّا إِنَّكَ أَنْتَ السَّمِيعُ الْعَلِيمُ</grapheme>
     <alias>Rabbanaa taqabbal minnaa innaka anta s-samiiu l-aliim</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ربنا تقبل منا إنك أنت السميع العليم</grapheme>
     <alias>Rabbanaa taqabbal minnaa innaka anta s-samiiu l-aliim</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>taqabbal</grapheme>
     <alias>taqabbal</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تَقَبَّلْ</grapheme>
     <alias>taqabbal</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تقبل</grapheme>
     <alias>taqabbal</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>minnā</grapheme>
     <alias>minnaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>minna</grapheme>
     <alias>minnaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مِنَّا</grapheme>
     <alias>minnaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>منا</grapheme>
     <alias>minnaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>innaka</grapheme>
     <alias>innaka</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>إِنَّكَ</grapheme>
     <alias>innaka</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>إنك</grapheme>
     <alias>innaka</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>anta</grapheme>
     <alias>anta</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أَنْتَ</grapheme>
     <alias>anta</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أنت</grapheme>
     <alias>anta</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>s-samīʿu</grapheme>
     <alias>s-samiiu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>s-samiu</grapheme>
     <alias>s-samiiu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>السَّمِيعُ</grapheme>
     <alias>s-samiiu</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>l-ʿalīm</grapheme>
     <alias>l-aliim</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>l-alim</grapheme>
     <alias>l-aliim</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>الْعَلِيمُ</grapheme>
     <alias>l-aliim</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Rabbanā lā tuzigh qulūbanā baʿda idh hadaytanā wa hab lanā min ladunka raḥmatan, innaka anta l-wahhāb</grapheme>
     <alias>Rabbanaa laa tuzigh quluubanaa bada idh hadaytanaa wa hab lanaa min ladunka rahmatan, innaka anta l-wahhaab</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>rabbanā lā tuzigh qulūbanā baʿda idh hadaytanā wa hab lanā min ladunka raḥmatan, innaka anta l-wahhāb</grapheme>
     <alias>Rabbanaa laa tuzigh quluubanaa bada idh hadaytanaa wa hab lanaa min ladunka rahmatan, innaka anta l-wahhaab</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Rabbana la tuzigh qulubana bada idh hadaytana wa hab lana min ladunka rahmatan, innaka anta l-wahhab</grapheme>
     <alias>Rabbanaa laa tuzigh quluubanaa bada idh hadaytanaa wa hab lanaa min ladunka rahmatan, innaka anta l-wahhaab</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>rabbana la tuzigh qulubana bada idh hadaytana wa hab lana min ladunka rahmatan, innaka anta l-wahhab</grapheme>
     <alias>Rabbanaa laa tuzigh quluubanaa bada idh hadaytanaa wa hab lanaa min ladunka rahmatan, innaka anta l-wahhaab</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِنْ لَدُنْكَ رَحْمَةً إِنَّكَ أَنْتَ الْوَهَّابُ</grapheme>
     <alias>Rabbanaa laa tuzigh quluubanaa bada idh hadaytanaa wa hab lanaa min ladunka rahmatan, innaka anta l-wahhaab</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ربنا لا تزغ قلوبنا بعد إذ هديتنا وهب لنا من لدنك رحمة إنك أنت الوهاب</grapheme>
     <alias>Rabbanaa laa tuzigh quluubanaa bada idh hadaytanaa wa hab lanaa min ladunka rahmatan, innaka anta l-wahhaab</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>tuzigh</grapheme>
     <alias>tuzigh</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تُزِغْ</grapheme>
     <alias>tuzigh</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>تزغ</grapheme>
     <alias>tuzigh</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>qulūbanā</grapheme>
     <alias>quluubanaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>qulubana</grapheme>
     <alias>quluubanaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>قُلُوبَنَا</grapheme>
     <alias>quluubanaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>قلوبنا</grapheme>
     <alias>quluubanaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>idh</grapheme>
     <alias>idh</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>إِذْ</grapheme>
     <alias>idh</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>إذ</grapheme>
     <alias>idh</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>hadaytanā</grapheme>
     <alias>hadaytanaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>hadaytana</grapheme>
     <alias>hadaytanaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>هَدَيْتَنَا</grapheme>
     <alias>hadaytanaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>هديتنا</grapheme>
     <alias>hadaytanaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa-hab</grapheme>
     <alias>wa-hab</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وَهَبْ</grapheme>
     <alias>wa-hab</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وهب</grapheme>
     <alias>wa-hab</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ladunka</grapheme>
     <alias>ladunka</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>لَدُنْكَ</grapheme>
     <alias>ladunka</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>لدنك</grapheme>
     <alias>ladunka</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>raḥmatan</grapheme>
     <alias>rahmatan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>rahmatan</grapheme>
     <alias>rahmatan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رَحْمَةً</grapheme>
     <alias>rahmatan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>رحمة</grapheme>
     <alias>rahmatan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>l-wahhāb</grapheme>
     <alias>l-wahhaab</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>l-wahhab</grapheme>
     <alias>l-wahhaab</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>الْوَهَّابُ</grapheme>
     <alias>l-wahhaab</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>الوهاب</grapheme>
     <alias>l-wahhaab</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Yā Muqalliba l-qulūb, thabbit qalbī ʿalā dīnik</grapheme>
     <alias>Yaa Muqalliba l-quluub, thabbit qalbii alaa diinik</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>yā muqalliba l-qulūb, thabbit qalbī ʿalā dīnik</grapheme>
     <alias>Yaa Muqalliba l-quluub, thabbit qalbii alaa diinik</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Ya Muqalliba l-qulub, thabbit qalbi ala dinik</grapheme>
     <alias>Yaa Muqalliba l-quluub, thabbit qalbii alaa diinik</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ya muqalliba l-qulub, thabbit qalbi ala dinik</grapheme>
     <alias>Yaa Muqalliba l-quluub, thabbit qalbii alaa diinik</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>يَا مُقَلِّبَ الْقُلُوبِ ثَبِّتْ قَلْبِي عَلَى دِينِكَ</grapheme>
     <alias>Yaa Muqalliba l-quluub, thabbit qalbii alaa diinik</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>يا مقلب القلوب ثبت قلبي على دينك</grapheme>
     <alias>Yaa Muqalliba l-quluub, thabbit qalbii alaa diinik</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Yā</grapheme>
     <alias>Yaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Ya</grapheme>
     <alias>Yaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>يَا</grapheme>
     <alias>Yaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>يا</grapheme>
     <alias>Yaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Muqalliba</grapheme>
     <alias>Muqalliba</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>muqalliba</grapheme>
     <alias>Muqalliba</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مُقَلِّبَ</grapheme>
     <alias>Muqalliba</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>مقلب</grapheme>
     <alias>Muqalliba</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>l-qulūb</grapheme>
     <alias>l-quluub</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>l-qulub</grapheme>
     <alias>l-quluub</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>الْقُلُوبِ</grapheme>
     <alias>l-quluub</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>القلوب</grapheme>
     <alias>l-quluub</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>thabbit</grapheme>
     <alias>thabbit</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ثَبِّتْ</grapheme>
     <alias>thabbit</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ثبت</grapheme>
     <alias>thabbit</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>qalbī</grapheme>
     <alias>qalbii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>qalbi</grapheme>
     <alias>qalbii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>قَلْبِي</grapheme>
     <alias>qalbii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>قلبي</grapheme>
     <alias>qalbii</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>dīnik</grapheme>
     <alias>diinik</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>dinik</grapheme>
     <alias>diinik</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>دِينِكَ</grapheme>
     <alias>diinik</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>دينك</grapheme>
     <alias>diinik</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Allāhumma innī asʾaluka l-hudā wa t-tuqā wa l-ʿafāfa wa l-ghinā</grapheme>
     <alias>Allaahumma innii as-aluka l-hudaa wa t-tuqaa wa l-afaafa wa l-ghinaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>allāhumma innī asʾaluka l-hudā wa t-tuqā wa l-ʿafāfa wa l-ghinā</grapheme>
     <alias>Allaahumma innii as-aluka l-hudaa wa t-tuqaa wa l-afaafa wa l-ghinaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Allahumma inni asaluka l-huda wa t-tuqa wa l-afafa wa l-ghina</grapheme>
     <alias>Allaahumma innii as-aluka l-hudaa wa t-tuqaa wa l-afaafa wa l-ghinaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>allahumma inni asaluka l-huda wa t-tuqa wa l-afafa wa l-ghina</grapheme>
     <alias>Allaahumma innii as-aluka l-hudaa wa t-tuqaa wa l-afaafa wa l-ghinaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>اللَّهُمَّ إِنِّي أَسْأَلُكَ الْهُدَى وَالتُّقَى وَالْعَفَافَ وَالْغِنَى</grapheme>
     <alias>Allaahumma innii as-aluka l-hudaa wa t-tuqaa wa l-afaafa wa l-ghinaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>اللهم إني أسألك الهدى والتقى والعفاف والغنى</grapheme>
     <alias>Allaahumma innii as-aluka l-hudaa wa t-tuqaa wa l-afaafa wa l-ghinaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>l-hudā</grapheme>
     <alias>l-hudaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>l-huda</grapheme>
     <alias>l-hudaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>الْهُدَى</grapheme>
     <alias>l-hudaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>الهدى</grapheme>
     <alias>l-hudaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa-t-tuqā</grapheme>
     <alias>wa-t-tuqaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa-t-tuqa</grapheme>
     <alias>wa-t-tuqaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وَالتُّقَى</grapheme>
     <alias>wa-t-tuqaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>والتقى</grapheme>
     <alias>wa-t-tuqaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa-l-ʿafāfa</grapheme>
     <alias>wa-l-afaafa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa-l-afafa</grapheme>
     <alias>wa-l-afaafa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وَالْعَفَافَ</grapheme>
     <alias>wa-l-afaafa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>والعفاف</grapheme>
     <alias>wa-l-afaafa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa-l-ghinā</grapheme>
     <alias>wa-l-ghinaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>wa-l-ghina</grapheme>
     <alias>wa-l-ghinaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>وَالْغِنَى</grapheme>
     <alias>wa-l-ghinaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>والغنى</grapheme>
     <alias>wa-l-ghinaa</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Dhū l-Kifl</grapheme>
     <alias>Dhuu l-Kifl</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>dhū l-kifl</grapheme>
     <alias>Dhuu l-Kifl</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أبو بكر الصدّيق</grapheme>
     <alias>Abuu Bakr as-Siddiiq</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أبو بكر الصديق</grapheme>
     <alias>Abuu Bakr as-Siddiiq</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>aṣ-Ṣiddīq</grapheme>
     <alias>as-Siddiiq</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>aṣ-ṣiddīq</grapheme>
     <alias>as-Siddiiq</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>as-Siddiq</grapheme>
     <alias>as-Siddiiq</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>as-siddiq</grapheme>
     <alias>as-Siddiiq</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ʿUmar ibn al-Ḫaṭṭāb</grapheme>
     <alias>Umar ibn al-Khattaab</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ʿumar ibn al-ḫaṭṭāb</grapheme>
     <alias>Umar ibn al-Khattaab</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>al-Ḫaṭṭāb</grapheme>
     <alias>al-Khattaab</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>al-ḫaṭṭāb</grapheme>
     <alias>al-Khattaab</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>al-Khattab</grapheme>
     <alias>al-Khattaab</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>al-khattab</grapheme>
     <alias>al-Khattaab</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ʿAffān</grapheme>
     <alias>Affaan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ʿaffān</grapheme>
     <alias>Affaan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Affan</grapheme>
     <alias>Affaan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>affan</grapheme>
     <alias>Affaan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Ṭālib</grapheme>
     <alias>Taalib</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ṭālib</grapheme>
     <alias>Taalib</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Talib</grapheme>
     <alias>Taalib</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>talib</grapheme>
     <alias>Taalib</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Ṭalḥah</grapheme>
     <alias>Talhah ibn Ubaydillaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ṭalḥah</grapheme>
     <alias>Talhah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Talhah</grapheme>
     <alias>Talhah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>talhah</grapheme>
     <alias>Talhah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ʿUbaydillāh</grapheme>
     <alias>Ubaydillaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ʿubaydillāh</grapheme>
     <alias>Ubaydillaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Ubaydillah</grapheme>
     <alias>Ubaydillaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ubaydillah</grapheme>
     <alias>Ubaydillaah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>az-Zubayr</grapheme>
     <alias>az-Zubayr ibn al-Awwaam</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>az-zubayr</grapheme>
     <alias>az-Zubayr</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>al-ʿAwwām</grapheme>
     <alias>al-Awwaam</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>al-ʿawwām</grapheme>
     <alias>al-Awwaam</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>al-Awwam</grapheme>
     <alias>al-Awwaam</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>al-awwam</grapheme>
     <alias>al-Awwaam</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ʿAbd ar-Raḥmān</grapheme>
     <alias>Abd ar-Rahmaan ibn Awf</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ʿabd ar-raḥmān</grapheme>
     <alias>Abd ar-Rahmaan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Abd ar-Rahman</grapheme>
     <alias>Abd ar-Rahmaan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>abd ar-rahman</grapheme>
     <alias>Abd ar-Rahmaan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Saʿd</grapheme>
     <alias>Sad ibn Abii Waqqaas</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>saʿd</grapheme>
     <alias>Sad</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Waqqāṣ</grapheme>
     <alias>Waqqaas</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>waqqāṣ</grapheme>
     <alias>Waqqaas</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Waqqas</grapheme>
     <alias>Waqqaas</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>waqqas</grapheme>
     <alias>Waqqaas</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Saʿīd</grapheme>
     <alias>Saiid ibn Zayd</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>saʿīd</grapheme>
     <alias>Saiid</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Said</grapheme>
     <alias>Saiid</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>said</grapheme>
     <alias>Saiid</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Abū ʿUbaydah</grapheme>
     <alias>Abuu Ubaydah ibn al-Jarraah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>abū ʿubaydah</grapheme>
     <alias>Abuu Ubaydah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Abu Ubaydah</grapheme>
     <alias>Abuu Ubaydah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>abu ubaydah</grapheme>
     <alias>Abuu Ubaydah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ʿUbaydah</grapheme>
     <alias>Ubaydah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ʿubaydah</grapheme>
     <alias>Ubaydah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Ubaydah</grapheme>
     <alias>Ubaydah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ubaydah</grapheme>
     <alias>Ubaydah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>al-Ǧarrāḥ</grapheme>
     <alias>al-Jarraah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>al-ǧarrāḥ</grapheme>
     <alias>al-Jarraah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>al-Jarrah</grapheme>
     <alias>al-Jarraah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>al-jarrah</grapheme>
     <alias>al-Jarraah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>خديجة بنت خويلد</grapheme>
     <alias>Khadiijah bint Khuwaylid</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>عائشة بنت أبي بكر</grapheme>
     <alias>Aa-ishah bint Abii Bakr</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ʿĀʾišah</grapheme>
     <alias>Aa-ishah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ʿāʾišah</grapheme>
     <alias>Aa-ishah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Fāṭimah bint Muḥammad</grapheme>
     <alias>Faatimah bint Muhammad</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>fāṭimah bint muḥammad</grapheme>
     <alias>Faatimah bint Muhammad</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Fatimah bint Muhammad</grapheme>
     <alias>Faatimah bint Muhammad</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>fatimah bint muhammad</grapheme>
     <alias>Faatimah bint Muhammad</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>فاطمة بنت محمد</grapheme>
     <alias>Faatimah bint Muhammad</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Umm Salamah Hind bint Abī Umayyah</grapheme>
     <alias>Umm Salamah Hind bint Abii Umayyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>umm salamah hind bint abī umayyah</grapheme>
     <alias>Umm Salamah Hind bint Abii Umayyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Umm Salamah Hind bint Abi Umayyah</grapheme>
     <alias>Umm Salamah Hind bint Abii Umayyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>umm salamah hind bint abi umayyah</grapheme>
     <alias>Umm Salamah Hind bint Abii Umayyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أم سلمة هند بنت أبي أمية</grapheme>
     <alias>Umm Salamah Hind bint Abii Umayyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>حفصة بنت عمر</grapheme>
     <alias>Hafsah bint Umar</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>سودة بنت زمعة</grapheme>
     <alias>Sawdah bint Zamah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Zamʿah</grapheme>
     <alias>Zamah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>zamʿah</grapheme>
     <alias>Zamah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Zamah</grapheme>
     <alias>Zamah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>zamah</grapheme>
     <alias>Zamah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>زينب بنت جحش</grapheme>
     <alias>Zaynab bint Jahsh</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أسماء بنت أبي بكر</grapheme>
     <alias>Asmaa- bint Abii Bakr</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Umm Sulaym ar-Rumayṣāʾ</grapheme>
     <alias>Umm Sulaym ar-Rumaysaa-</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>umm sulaym ar-rumayṣāʾ</grapheme>
     <alias>Umm Sulaym ar-Rumaysaa-</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Umm Sulaym ar-Rumaysa</grapheme>
     <alias>Umm Sulaym ar-Rumaysaa-</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>umm sulaym ar-rumaysa</grapheme>
     <alias>Umm Sulaym ar-Rumaysaa-</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أم سليم الرميصاء</grapheme>
     <alias>Umm Sulaym ar-Rumaysaa-</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ar-Rumayṣāʾ</grapheme>
     <alias>ar-Rumaysaa-</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ar-rumayṣāʾ</grapheme>
     <alias>ar-Rumaysaa-</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ar-Rumaysa</grapheme>
     <alias>ar-Rumaysaa-</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ar-rumaysa</grapheme>
     <alias>ar-Rumaysaa-</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Umm ʿAṭiyyah al-Anṣāriyyah</grapheme>
     <alias>Umm Atiyyah al-Ansaariyyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>umm ʿaṭiyyah al-anṣāriyyah</grapheme>
     <alias>Umm Atiyyah al-Ansaariyyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Umm Atiyyah al-Ansariyyah</grapheme>
     <alias>Umm Atiyyah al-Ansaariyyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>umm atiyyah al-ansariyyah</grapheme>
     <alias>Umm Atiyyah al-Ansaariyyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أم عطية الأنصارية</grapheme>
     <alias>Umm Atiyyah al-Ansaariyyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ʿAṭiyyah</grapheme>
     <alias>Atiyyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ʿaṭiyyah</grapheme>
     <alias>Atiyyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Atiyyah</grapheme>
     <alias>Atiyyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>atiyyah</grapheme>
     <alias>Atiyyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>al-Anṣāriyyah</grapheme>
     <alias>al-Ansaariyyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>al-anṣāriyyah</grapheme>
     <alias>al-Ansaariyyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>al-Ansariyyah</grapheme>
     <alias>al-Ansaariyyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>al-ansariyyah</grapheme>
     <alias>al-Ansaariyyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Umm Ḥabībah Ramlah bint Abī Sufyān</grapheme>
     <alias>Umm Habiibah Ramlah bint Abii Sufyaan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>umm ḥabībah ramlah bint abī sufyān</grapheme>
     <alias>Umm Habiibah Ramlah bint Abii Sufyaan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Umm Habibah Ramlah bint Abi Sufyan</grapheme>
     <alias>Umm Habiibah Ramlah bint Abii Sufyaan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>umm habibah ramlah bint abi sufyan</grapheme>
     <alias>Umm Habiibah Ramlah bint Abii Sufyaan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>أم حبيبة رملة بنت أبي سفيان</grapheme>
     <alias>Umm Habiibah Ramlah bint Abii Sufyaan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Ḥabībah</grapheme>
     <alias>Habiibah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ḥabībah</grapheme>
     <alias>Habiibah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Habibah</grapheme>
     <alias>Habiibah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>habibah</grapheme>
     <alias>Habiibah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Sufyān</grapheme>
     <alias>Sufyaan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>sufyān</grapheme>
     <alias>Sufyaan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Sufyan</grapheme>
     <alias>Sufyaan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>sufyan</grapheme>
     <alias>Sufyaan</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>جويرية بنت الحارث</grapheme>
     <alias>Juwayriyyah bint al-Haarith</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Ǧuwayriyyah</grapheme>
     <alias>Juwayriyyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ǧuwayriyyah</grapheme>
     <alias>Juwayriyyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Juwayriyyah</grapheme>
     <alias>Juwayriyyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>juwayriyyah</grapheme>
     <alias>Juwayriyyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>al-Ḥāriṯ</grapheme>
     <alias>al-Haarith</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>al-ḥāriṯ</grapheme>
     <alias>al-Haarith</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>al-Harith</grapheme>
     <alias>al-Haarith</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>al-harith</grapheme>
     <alias>al-Haarith</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>صفية بنت حيي</grapheme>
     <alias>Safiyyah bint Huyayy</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Ṣafiyyah</grapheme>
     <alias>Safiyyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ṣafiyyah</grapheme>
     <alias>Safiyyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Safiyyah</grapheme>
     <alias>Safiyyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>safiyyah</grapheme>
     <alias>Safiyyah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Ḥuyayy</grapheme>
     <alias>Huyayy</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ḥuyayy</grapheme>
     <alias>Huyayy</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Huyayy</grapheme>
     <alias>Huyayy</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>huyayy</grapheme>
     <alias>Huyayy</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>ميمونة بنت الحارث</grapheme>
     <alias>Maymuunah bint al-Haarith</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Maymūnah</grapheme>
     <alias>Maymuunah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>maymūnah</grapheme>
     <alias>Maymuunah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>Maymunah</grapheme>
     <alias>Maymuunah</alias>
   </lexeme>
-  <lexeme>
+<lexeme>
     <grapheme>maymunah</grapheme>
     <alias>Maymuunah</alias>
   </lexeme>
