@@ -326,9 +326,9 @@ export async function handleVoiceStudioWebRequest(request, env, cors) {
   if (request.method === "GET" && rest === "/mobile-release") {
     return json({
       ok: true,
-      version: "2.9.121",
+      version: "2.9.122",
       cache: "dar-voice-studio-v90",
-      installUrl: "https://dar-al-tawhid.de/voice-studio/mobile.html?app=1&cloud=1&v=29121",
+      installUrl: "https://dar-al-tawhid.de/voice-studio/mobile.html?app=1&cloud=1&v=29122",
       serviceWorker: "/voice-studio/sw-v11.js",
       forceRefresh: true,
       localEngineRequired: false
@@ -338,19 +338,46 @@ export async function handleVoiceStudioWebRequest(request, env, cors) {
   if (request.method === "GET" && rest === "/health") {
     const gpu = darVoiceGpuPublicStatus(env);
     const elevenConfigured = isVoiceConfigured(env);
-    const configured = darVoiceGpuConfigured(env) || elevenConfigured;
+    const modelId = String(env.ELEVENLABS_MODEL_ID || "eleven_v4").trim();
+    const dictionaryId = String(
+      env.ELEVENLABS_PRONUNCIATION_DICTIONARY_ID ||
+      env.DAR_VOICE_PRONUNCIATION_DICTIONARY_ID ||
+      ""
+    ).trim();
+    const dictionaryVersionId = String(
+      env.ELEVENLABS_PRONUNCIATION_DICTIONARY_VERSION_ID ||
+      env.DAR_VOICE_PRONUNCIATION_DICTIONARY_VERSION_ID ||
+      ""
+    ).trim();
+    const pronunciationDictionaryReady = Boolean(dictionaryId && dictionaryVersionId);
+    const elevenProductionReady = Boolean(
+      elevenConfigured &&
+      modelId === "eleven_v4" &&
+      pronunciationDictionaryReady
+    );
+    const configured = darVoiceGpuConfigured(env) || elevenProductionReady;
     return json({
       ok: configured,
       service: "dar-voice-studio-cloud",
-      provider: gpu.configured ? "DĀR Voice Remote GPU" : (elevenConfigured ? "ElevenLabs Cloud" : "Cloud Voice nicht konfiguriert"),
+      provider: gpu.configured
+        ? "DĀR Voice Remote GPU"
+        : (elevenProductionReady ? "ElevenLabs Cloud" : (elevenConfigured ? "ElevenLabs Cloud unvollständig" : "Cloud Voice nicht konfiguriert")),
       voiceConfigured: configured,
       elevenLabsConfigured: elevenConfigured,
-      mobileCloudRevision: "2.9.121",
+      elevenLabsProductionReady: elevenProductionReady,
+      elevenLabsModelId: modelId,
+      pronunciationDictionaryReady,
+      pronunciationDictionaryId: dictionaryId || null,
+      pronunciationDictionaryVersionId: dictionaryVersionId || null,
+      pronunciationRuleCount: Number(env.ELEVENLABS_PRONUNCIATION_RULE_COUNT || 0) || null,
+      mobileCloudRevision: "2.9.122",
       remoteGpu: gpu,
       localEngineRequired: false,
       output: gpu.configured ? "engine-native" : "audio/mpeg",
       ownerBatchEnabled: true,
-      storyAlignment: "elevenlabs-forced-alignment-v1"
+      storyAlignment: "elevenlabs-forced-alignment-v1",
+      estimatedTimingsAllowed: false,
+      quranSyntheticRecitationAllowed: false
     }, cors, configured ? 200 : 503);
   }
 
