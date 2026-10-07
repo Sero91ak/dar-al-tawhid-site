@@ -8,9 +8,9 @@ on:
   push:
     branches:
       - main
-    # Kids-only pushes are deployed by deploy-kids-live.yml.
-    # Do not subscribe this visitor workflow to kids/** as both workflows
-    # share one production worker lock and would otherwise cancel each other.
+    # Single automatic production lane: Kids changes are deployed here too.
+    # The dedicated Kids workflow is manual-only so one workflow owns
+    # the Cloudflare production worker and no Kids deploy gets cancelled.
     paths:
       - index.html
       - version.json
@@ -31,6 +31,7 @@ on:
       - wrangler.toml
       - _headers
       - _redirects
+      - kids/**
       - test/index.html
       - test/version.json
       - test/assets/**
