@@ -15,6 +15,9 @@ DAILY_PUSH_STATUS_PATH = "content/admin/daily-push-status.json"
 SHOTSTACK_HOST = "https://api.shotstack.io/edit/stage"
 SHOTSTACK_PROD_HOST = "https://api.shotstack.io/edit/v1"
 VIDEO_STUDIO_PUBLIC_BASE = "https://dar-admin-publisher.sero91ak.workers.dev"
+ELEVENLABS_MODEL_ID = "eleven_v4"
+ELEVENLABS_PRONUNCIATION_DICTIONARY_ID = "Q8w3SxtoVo8NSjsnlJEd"
+ELEVENLABS_PRONUNCIATION_DICTIONARY_VERSION_ID = "wSzgkGpAwEDiTak8DApc"
 
 [ai]
 binding = "AI"
