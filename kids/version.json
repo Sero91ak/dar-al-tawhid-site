@@ -2,7 +2,7 @@
   "buildId": "kids-shell-v143-subpage-nav1245",
   "label": "KIDS · V1.08.64",
   "releasedAt": "2026-10-07T22:22:00+02:00",
-  "note": "KIDS V1.08.64 mit interaktiver Swipe-Navigation V1246: Rechtskante nach links sowie iOS-typisch Linkskante nach rechts führen weich zurück; die Fläche folgt dem Finger, federt bei Abbruch zurück und gleitet bei Abschluss aus. Sonstige V1245-Inhalte bleiben unverändert.",
+  "note": "KIDS V1.08.64 · Globaler Karten-/Capsule-Glow auf den ruhigen Startseiten-Referenzglow vereinheitlicht (KIDS_HOME_GLOW_PARITY_V16): kein starkes Gold/Türkis-Neon mehr; Qurʾān, Duʿāʾ, Geschichten, Dīn, Propheten, Ṣaḥābah, Ṣaḥābiyyāt, Quiz und Eltern erben dieselbe zurückhaltende Touch-Intensität. Interaktive Swipe-Navigation V1246 bleibt erhalten.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -1183,7 +1183,21 @@
     "navigationGesturePhysics": "finger-tracking-spring-glide-v1246",
     "navigationRightEdgeBack": true,
     "navigationLeftEdgeBack": true,
-    "navigationSurfaceEntryTransition": "soft-slide-in-v1246"
+    "navigationSurfaceEntryTransition": "soft-slide-in-v1246",
+    "globalCardGlow": "home-reference-parity-v16",
+    "globalCardGlowStrongNeon": false,
+    "globalCardGlowCoverage": [
+      "today",
+      "stories",
+      "deen",
+      "prophets",
+      "sahaba",
+      "sahabiyyat",
+      "dua",
+      "quran",
+      "quiz",
+      "parents"
+    ]
   },
   "updatedAt": "2026-10-07T22:22:00+02:00",
   "deployTrigger": "2026-10-07T22:22:00+02:00-subpage-nav-v13"
