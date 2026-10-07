@@ -26,6 +26,7 @@
   var sideApplied = false;
   var rafId = 0;
   var idleTimer = 0;
+  var scrollFadeTimer = 0;
   var burstTimers = [];
   var observer = null;
   var restoringBottom = false;
@@ -130,30 +131,31 @@
     nav.classList.remove("is-adaptive-centered");
     nav.classList.add("is-adaptive-rail");
     nav.style.setProperty("position", "fixed", "important");
-    nav.style.setProperty("left", side === "left" ? "max(8px, env(safe-area-inset-left, 0px))" : "auto", "important");
-    nav.style.setProperty("right", side === "right" ? "max(8px, env(safe-area-inset-right, 0px))" : "auto", "important");
+    nav.style.setProperty("left", side === "left" ? "max(3px, calc(env(safe-area-inset-left, 0px) - 36px))" : "auto", "important");
+    nav.style.setProperty("right", side === "right" ? "max(3px, calc(env(safe-area-inset-right, 0px) - 36px))" : "auto", "important");
     nav.style.setProperty("top", "50%", "important");
     nav.style.setProperty("bottom", "auto", "important");
-    nav.style.setProperty("width", "70px", "important");
-    nav.style.setProperty("min-width", "70px", "important");
-    nav.style.setProperty("max-width", "70px", "important");
+    nav.style.setProperty("width", "60px", "important");
+    nav.style.setProperty("min-width", "60px", "important");
+    nav.style.setProperty("max-width", "60px", "important");
     nav.style.setProperty(
       "height",
-      "min(390px, calc(100dvh - max(18px, env(safe-area-inset-top, 0px)) - max(18px, env(safe-area-inset-bottom, 0px))))",
+      "min(352px, calc(100dvh - max(12px, env(safe-area-inset-top, 0px)) - max(12px, env(safe-area-inset-bottom, 0px))))",
       "important"
     );
-    nav.style.setProperty("min-height", "292px", "important");
-    nav.style.setProperty("max-height", "390px", "important");
+    nav.style.setProperty("min-height", "268px", "important");
+    nav.style.setProperty("max-height", "352px", "important");
     nav.style.setProperty("margin", "0", "important");
-    nav.style.setProperty("padding", "6px", "important");
+    nav.style.setProperty("padding", "4px", "important");
     nav.style.setProperty("flex-direction", "column", "important");
     nav.style.setProperty("justify-content", "space-between", "important");
-    nav.style.setProperty("align-items", "stretch", "important");
-    nav.style.setProperty("gap", "2px", "important");
-    nav.style.setProperty("border-radius", "26px", "important");
+    nav.style.setProperty("align-items", "center", "important");
+    nav.style.setProperty("gap", "0px", "important");
+    nav.style.setProperty("border-radius", "22px", "important");
     nav.style.setProperty("transform", "translate3d(0,-50%,0)", "important");
     nav.style.setProperty("-webkit-transform", "translate3d(0,-50%,0)", "important");
-    nav.style.setProperty("z-index", "80", "important");
+    nav.style.setProperty("z-index", "96", "important");
+    nav.style.setProperty("pointer-events", "auto", "important");
     nav.style.setProperty("transition", "opacity .22s cubic-bezier(.22,1,.36,1), background-color .22s ease, border-color .22s ease", "important");
     sideApplied = true;
   }
@@ -194,24 +196,29 @@
       global.clearTimeout(idleTimer);
       idleTimer = 0;
     }
+    if (scrollFadeTimer) {
+      global.clearTimeout(scrollFadeTimer);
+      scrollFadeTimer = 0;
+    }
   }
 
   function scheduleIdle() {
-    clearIdleTimer();
     root.classList.remove("dar-nav-reader-idle");
+  }
+
+  function onScrollActivity() {
     if (currentEffective !== "left" && currentEffective !== "right") return;
-    idleTimer = global.setTimeout(function () {
-      idleTimer = 0;
-      if ((currentEffective === "left" || currentEffective === "right") && isReadingContext()) {
-        root.classList.add("dar-nav-reader-idle");
-      }
-    }, 1100);
+    root.classList.add("dar-nav-scrolling");
+    if (scrollFadeTimer) global.clearTimeout(scrollFadeTimer);
+    scrollFadeTimer = global.setTimeout(function () {
+      scrollFadeTimer = 0;
+      root.classList.remove("dar-nav-scrolling");
+    }, 240);
   }
 
   function wakeNav() {
     if (currentEffective !== "left" && currentEffective !== "right") return;
-    root.classList.remove("dar-nav-reader-idle");
-    scheduleIdle();
+    root.classList.remove("dar-nav-scrolling");
   }
 
   function settingsHost() {
@@ -300,7 +307,7 @@
       applySidePosition(nav, effective);
     } else {
       clearSidePosition(nav);
-      root.classList.remove("dar-nav-reader-idle");
+      root.classList.remove("dar-nav-reader-idle","dar-nav-scrolling");
       clearIdleTimer();
     }
     updateSettingsControl(preference, effective);
@@ -332,7 +339,7 @@
 
   function scheduleBurst() {
     clearBurst();
-    [0, 120, 360, 720, 1220].forEach(function (delay) {
+    [0, 180, 520, 980].forEach(function (delay) {
       burstTimers.push(global.setTimeout(schedule, delay));
     });
   }
@@ -354,8 +361,8 @@
       global.visualViewport.addEventListener("resize", schedule, { passive: true });
     }
 
-    global.addEventListener("scroll", wakeNav, { passive: true });
-    global.addEventListener("wheel", wakeNav, { passive: true });
+    global.addEventListener("scroll", onScrollActivity, { passive: true });
+    global.addEventListener("wheel", onScrollActivity, { passive: true });
     global.addEventListener("pointerdown", wakeNav, { passive: true });
     global.addEventListener("touchstart", wakeNav, { passive: true });
     global.addEventListener("keydown", wakeNav);
