@@ -2300,3 +2300,151 @@ html.dar-home-v1194 body.is-home-route .footer{
   margin-top:0!important;
   padding-top:18px!important;
 }
+
+
+/* v1319 · ACTUAL ISNAD / TAWḤĪD IMAGE SEAM · TEST ONLY */
+/* v1318 tried to fade the Hero itself. The visible join is lower: after the
+   Ibn-Sīrīn/Isnād block and before DER KERN. Blend exactly there instead. */
+html[data-theme].dar-home-v1194 body.is-home-route
+.top-shell .header.theme-hero-surface::after{
+  content:none!important;
+  display:none!important;
+}
+
+html[data-theme].dar-home-v1194 body.is-home-route .top-shell>.isnad.dt-isnad{
+  position:relative!important;
+  isolation:isolate!important;
+  margin-bottom:0!important;
+  padding-bottom:42px!important;
+  border-bottom:0!important;
+  overflow:visible!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route .top-shell>.isnad.dt-isnad>*{
+  position:relative!important;
+  z-index:2!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route .top-shell>.isnad.dt-isnad::after{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  z-index:1!important;
+  pointer-events:none!important;
+  left:-8vw!important;
+  right:-8vw!important;
+  bottom:-74px!important;
+  height:172px!important;
+  background:
+    radial-gradient(72% 64% at 14% 26%,
+      color-mix(in srgb,var(--dt-page) 86%,var(--dt-accent) 14% / 36%),
+      transparent 73%),
+    radial-gradient(68% 62% at 86% 22%,
+      color-mix(in srgb,var(--dt-page) 90%,var(--dt-accent) 10% / 30%),
+      transparent 74%),
+    radial-gradient(54% 70% at 50% 62%,
+      color-mix(in srgb,var(--dt-page) 94%,var(--dt-accent) 6% / 20%),
+      transparent 78%),
+    linear-gradient(180deg,
+      color-mix(in srgb,var(--dt-page) 92%,var(--dt-accent) 8% / 30%) 0%,
+      color-mix(in srgb,var(--dt-page) 95%,var(--dt-accent) 5% / 18%) 52%,
+      transparent 100%)!important;
+  filter:blur(18px)!important;
+  opacity:.90!important;
+}
+
+html[data-theme].dar-home-v1194 body.is-home-route #appView.view{
+  position:relative!important;
+  isolation:isolate!important;
+  margin-top:0!important;
+  padding-top:0!important;
+  overflow:visible!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route #appView.view::before{
+  top:-146px!important;
+  height:clamp(820px,122vw,1010px)!important;
+  opacity:.74!important;
+  filter:saturate(.82) sepia(.06) brightness(1.015)!important;
+  -webkit-mask-image:
+    linear-gradient(to bottom,
+      transparent 0%,
+      rgba(0,0,0,.10) 7%,
+      rgba(0,0,0,.30) 15%,
+      rgba(0,0,0,.58) 25%,
+      rgba(0,0,0,.86) 36%,
+      #000 47%,
+      #000 75%,
+      rgba(0,0,0,.56) 89%,
+      transparent 100%)!important;
+  mask-image:
+    linear-gradient(to bottom,
+      transparent 0%,
+      rgba(0,0,0,.10) 7%,
+      rgba(0,0,0,.30) 15%,
+      rgba(0,0,0,.58) 25%,
+      rgba(0,0,0,.86) 36%,
+      #000 47%,
+      #000 75%,
+      rgba(0,0,0,.56) 89%,
+      transparent 100%)!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route #appView.view::after{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  z-index:0!important;
+  pointer-events:none!important;
+  left:-9vw!important;
+  right:-9vw!important;
+  top:-138px!important;
+  height:258px!important;
+  background:
+    radial-gradient(74% 58% at 10% 45%,
+      color-mix(in srgb,var(--dt-page) 90%,var(--dt-accent) 10% / 30%),
+      transparent 72%),
+    radial-gradient(70% 62% at 90% 38%,
+      color-mix(in srgb,var(--dt-page) 92%,var(--dt-accent) 8% / 26%),
+      transparent 74%),
+    radial-gradient(56% 64% at 52% 62%,
+      color-mix(in srgb,var(--dt-page) 96%,var(--dt-accent) 4% / 18%),
+      transparent 78%),
+    linear-gradient(180deg,
+      transparent 0%,
+      color-mix(in srgb,var(--dt-page) 92%,var(--dt-accent) 8% / 16%) 28%,
+      color-mix(in srgb,var(--dt-page) 94%,var(--dt-accent) 6% / 23%) 51%,
+      color-mix(in srgb,var(--dt-page) 97%,var(--dt-accent) 3% / 10%) 76%,
+      transparent 100%)!important;
+  filter:blur(22px)!important;
+  opacity:.92!important;
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 20%,#000 80%,transparent 100%)!important;
+  mask-image:linear-gradient(to bottom,transparent 0%,#000 20%,#000 80%,transparent 100%)!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route #appView.view>*{
+  position:relative!important;
+  z-index:1!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route .home-line-tawhid{
+  margin-top:0!important;
+  padding-top:32px!important;
+  border-top:0!important;
+  background:transparent!important;
+  background-image:none!important;
+}
+
+@media(max-width:430px){
+  html[data-theme].dar-home-v1194 body.is-home-route .top-shell>.isnad.dt-isnad{
+    padding-bottom:36px!important;
+  }
+  html[data-theme].dar-home-v1194 body.is-home-route .top-shell>.isnad.dt-isnad::after{
+    bottom:-66px!important;
+    height:154px!important;
+    filter:blur(16px)!important;
+  }
+  html[data-theme].dar-home-v1194 body.is-home-route #appView.view::before{
+    top:-128px!important;
+    height:800px!important;
+  }
+  html[data-theme].dar-home-v1194 body.is-home-route #appView.view::after{
+    top:-124px!important;
+    height:228px!important;
+    filter:blur(20px)!important;
+  }
+}
