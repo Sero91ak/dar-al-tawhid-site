@@ -4,7 +4,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1264';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1266-frauen-prod3';
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const OFFLINE_PREP_PENDING_KEY = '/__offline_prep_pending_v1__';
 const OFFLINE_PREP_PROGRESS_KEY = '/__offline_prep_progress_v1__';
@@ -65,6 +65,7 @@ const APP_SHELL = [
   '/data/frauen-privatsphaere-erlaubnis-haus-adab.json',
   '/data/frauen-verwandtschaft-nachbarschaft-gastrecht.json',
   '/data/frauen-tawhid-iman-ibadah.json',
+  '/data/frauen-vermoegen-besitz-erbrecht.json',
   '/data/frauen-gerechtigkeit-guter-umgang-schutz.json',
   '/data/frauen-dhikr-dua-ibadah.json',
   '/data/frauen-geprueftes-wissen-quellen-weitergabe.json',
