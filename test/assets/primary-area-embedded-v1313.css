@@ -1,0 +1,206 @@
+/* DĀR AL TAWḤĪD · Test-App · Primary Area Embedded Geometry v1313
+   2026-10-07
+   Shared geometry for Qurʾān, Themen/Wissen, Quiz and Mehr.
+   Design rule: no viewport-width hero, no calc(50% - 50vw) centering,
+   no double shell inset. Every hero is embedded and centered. */
+
+html[data-theme] body:is(
+  .is-quran-overview,
+  .is-topics-route,
+  .is-topic-route,
+  .is-quiz-route,
+  .is-more-route
+){
+  --dar-primary-gutter:10px;
+  overflow-x:hidden!important;
+}
+
+html[data-theme] body:is(
+  .is-quran-overview,
+  .is-topics-route,
+  .is-topic-route,
+  .is-quiz-route,
+  .is-more-route
+) #appView,
+html[data-theme] body:is(
+  .is-quran-overview,
+  .is-topics-route,
+  .is-topic-route,
+  .is-quiz-route,
+  .is-more-route
+) #appView.view{
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  padding-left:0!important;
+  padding-right:0!important;
+  box-sizing:border-box!important;
+  overflow-x:clip!important;
+}
+
+/* Embedded hero geometry. Background/art direction stays owned by each area stylesheet. */
+html[data-theme] body.is-quran-overview .qov-header,
+html[data-theme] body.is-topics-route .topics-hub > .view-head,
+html[data-theme] body.is-topic-route .topic-collection-page > .view-head,
+html[data-theme] body.is-quiz-route #appView > .view-head,
+html[data-theme] body.is-more-route #appView > .view-head{
+  position:relative!important;
+  inset:auto!important;
+  left:auto!important;
+  right:auto!important;
+  translate:none!important;
+  transform:none!important;
+  width:calc(100% - (var(--dar-primary-gutter) * 2))!important;
+  max-width:1120px!important;
+  min-width:0!important;
+  margin:8px auto 18px!important;
+  padding:24px 18px 22px!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+  border-radius:26px!important;
+}
+
+/* Keep hero copy inside the same calm editorial measure. */
+html[data-theme] body.is-quran-overview .qov-header-row,
+html[data-theme] body.is-topics-route .topics-hub > .view-head > *,
+html[data-theme] body.is-topic-route .topic-collection-page > .view-head > *,
+html[data-theme] body.is-quiz-route #appView > .view-head > *,
+html[data-theme] body.is-more-route #appView > .view-head > *{
+  width:min(650px,88%)!important;
+  max-width:100%!important;
+  min-width:0!important;
+  box-sizing:border-box!important;
+}
+
+/* Shared content measure directly below the hero. */
+html[data-theme] body.is-quran-overview .qov-main,
+html[data-theme] body.is-topics-route .topics-hub > .search-panel,
+html[data-theme] body.is-topics-route .topics-hub > [class*="search"],
+html[data-theme] body.is-topics-route #homeSearchBlock,
+html[data-theme] body.is-topics-route .topics-hub__label,
+html[data-theme] body.is-topics-route .topics-hub > .dua-theme-grid,
+html[data-theme] body.is-topic-route .topic-collection-page > .topic-collection,
+html[data-theme] body.is-quiz-route .quiz-shell.quiz-shell-home,
+html[data-theme] body.is-more-route :is(
+  .more-quick-access,
+  #adaptiveNavPanel,
+  .zakat-home-teaser,
+  .feature-section,
+  .more-group
+){
+  width:calc(100% - 28px)!important;
+  max-width:980px!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  box-sizing:border-box!important;
+}
+
+/* Main content always clears the floating bottom navigation. */
+html[data-theme] body:is(
+  .is-quran-overview,
+  .is-topics-route,
+  .is-topic-route,
+  .is-quiz-route,
+  .is-more-route
+) #appView{
+  padding-bottom:calc(142px + env(safe-area-inset-bottom,0px))!important;
+}
+
+/* Remove generic outer shell cards around the first content level. */
+html[data-theme] body.is-quran-overview .qov-page,
+html[data-theme] body.is-topics-route .topics-hub,
+html[data-theme] body.is-topic-route .topic-collection-page,
+html[data-theme] body.is-quiz-route .quiz-shell.quiz-shell-home,
+html[data-theme] body.is-more-route .more-page{
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+
+/* On narrow phones, do not let any primary section become wider than its hero. */
+@media(max-width:699px){
+  html[data-theme] body:is(
+    .is-quran-overview,
+    .is-topics-route,
+    .is-topic-route,
+    .is-quiz-route,
+    .is-more-route
+  ){
+    --dar-primary-gutter:10px;
+  }
+
+  html[data-theme] body.is-quran-overview .qov-header,
+  html[data-theme] body.is-topics-route .topics-hub > .view-head,
+  html[data-theme] body.is-topic-route .topic-collection-page > .view-head,
+  html[data-theme] body.is-quiz-route #appView > .view-head,
+  html[data-theme] body.is-more-route #appView > .view-head{
+    width:calc(100% - 20px)!important;
+    max-width:none!important;
+    min-height:238px!important;
+    margin:6px auto 16px!important;
+    padding:24px 18px 22px!important;
+    border-radius:24px!important;
+  }
+
+  html[data-theme] body.is-topic-route .topic-collection-page > .view-head{
+    min-height:210px!important;
+  }
+
+  html[data-theme] body.is-quran-overview .qov-main,
+  html[data-theme] body.is-topics-route .topics-hub > .search-panel,
+  html[data-theme] body.is-topics-route .topics-hub > [class*="search"],
+  html[data-theme] body.is-topics-route #homeSearchBlock,
+  html[data-theme] body.is-topics-route .topics-hub__label,
+  html[data-theme] body.is-topics-route .topics-hub > .dua-theme-grid,
+  html[data-theme] body.is-topic-route .topic-collection-page > .topic-collection,
+  html[data-theme] body.is-quiz-route .quiz-shell.quiz-shell-home,
+  html[data-theme] body.is-more-route :is(
+    .more-quick-access,
+    #adaptiveNavPanel,
+    .zakat-home-teaser,
+    .feature-section,
+    .more-group
+  ){
+    width:calc(100% - 28px)!important;
+    max-width:none!important;
+  }
+}
+
+@media(min-width:700px){
+  html[data-theme] body:is(
+    .is-quran-overview,
+    .is-topics-route,
+    .is-topic-route,
+    .is-quiz-route,
+    .is-more-route
+  ){
+    --dar-primary-gutter:18px;
+  }
+
+  html[data-theme] body.is-quran-overview .qov-header,
+  html[data-theme] body.is-topics-route .topics-hub > .view-head,
+  html[data-theme] body.is-topic-route .topic-collection-page > .view-head,
+  html[data-theme] body.is-quiz-route #appView > .view-head,
+  html[data-theme] body.is-more-route #appView > .view-head{
+    min-height:300px!important;
+    padding:30px 26px 28px!important;
+    border-radius:30px!important;
+  }
+}
+
+@media(min-width:1000px){
+  html[data-theme] body.is-quran-overview .qov-header,
+  html[data-theme] body.is-topics-route .topics-hub > .view-head,
+  html[data-theme] body.is-topic-route .topic-collection-page > .view-head,
+  html[data-theme] body.is-quiz-route #appView > .view-head,
+  html[data-theme] body.is-more-route #appView > .view-head{
+    min-height:332px!important;
+    padding:36px 32px 32px!important;
+  }
+
+  html[data-theme] body.is-topic-route .topic-collection-page > .view-head{
+    min-height:278px!important;
+  }
+}
