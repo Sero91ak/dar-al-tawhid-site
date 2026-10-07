@@ -2514,10 +2514,7 @@
           '<p class="frauen-library-hero__eyebrow" style="color:#f0d896!important;-webkit-text-fill-color:#f0d896!important;opacity:1!important;text-shadow:0 2px 10px rgba(0,0,0,.78)!important">' + esc(eyebrow || "DĀR AL TAWḤĪD · WISSENSBIBLIOTHEK") + '</p>' +
           '<h2 style="color:#fffaf0!important;-webkit-text-fill-color:#fffaf0!important;opacity:1!important;text-shadow:0 3px 16px rgba(0,0,0,.76)!important">' + esc(title) + '</h2>' +
           '<p class="frauen-library-hero__subtitle" style="color:rgba(255,250,240,.98)!important;-webkit-text-fill-color:rgba(255,250,240,.98)!important;opacity:1!important;text-shadow:0 2px 12px rgba(0,0,0,.74)!important">' + esc(subtitle || "") + '</p>' +
-          '<div class="frauen-library-hero__stats">' +
-            (statLeft ? '<span style="color:#fff1c8!important;-webkit-text-fill-color:#fff1c8!important;opacity:1!important;background:rgba(4,18,17,.64)!important;border-color:rgba(239,214,151,.52)!important;text-shadow:0 1px 7px rgba(0,0,0,.62)!important">' + esc(statLeft) + '</span>' : "") +
-            (statRight ? '<span style="color:#fff1c8!important;-webkit-text-fill-color:#fff1c8!important;opacity:1!important;background:rgba(4,18,17,.64)!important;border-color:rgba(239,214,151,.52)!important;text-shadow:0 1px 7px rgba(0,0,0,.62)!important">' + esc(statRight) + '</span>' : "") +
-          '</div>' +
+          '<div class="frauen-library-hero__stats" hidden></div>' +
         '</div>' +
       '</section>'
     );
@@ -2534,7 +2531,7 @@
           '<p class="frauen-library-card__kicker">' + esc(group.kicker) + '</p>' +
           '<h3>' + esc(group.title) + '</h3>' +
           '<p class="frauen-library-card__desc">' + esc(group.desc) + '</p>' +
-          '<p class="frauen-library-card__meta">' + group.areas.length + ' Kapitel' + (count ? ' · ' + count + ' geprüfte Inhalte' : '') + '</p>' +
+          '<p class="frauen-library-card__meta">' + group.areas.length + ' Kapitel' + (count ? ' · ' + count + ' Inhalte' : '') + '</p>' +
         '</div>' +
         '<span class="frauen-library-card__arrow" aria-hidden="true">›</span>' +
       '</article>'
@@ -2581,7 +2578,7 @@
         '<div class="frauen-library-area-card__copy">' +
           '<h3>' + esc(area.title) + '</h3>' +
           '<p>' + esc(areaFallbackLede(area)) + '</p>' +
-          '<span class="frauen-library-area-card__meta">' + (pending ? "In Prüfung" : n + (n === 1 ? " geprüfter Inhalt" : " geprüfte Inhalte")) + '</span>' +
+          '<span class="frauen-library-area-card__meta">' + (pending ? "In Prüfung" : n + (n === 1 ? " Inhalt" : " Inhalte")) + '</span>' +
         '</div>' +
         '<span class="frauen-library-area-card__arrow" aria-hidden="true">' + (pending ? "·" : "›") + '</span>' +
       '</article>'
@@ -2602,7 +2599,7 @@
           "",
           group.kicker,
           group.areas.length + " Kapitel",
-          total ? total + " geprüfte Inhalte" : "Quellen werden geprüft"
+          total ? total + " Inhalte" : ""
         ) +
         '<div class="frauen-library-section-head"><div><span>Kapitel</span><h3>Wähle deinen Bereich</h3></div><p>Erst im nächsten Schritt erscheinen die einzelnen Aussagen.</p></div>' +
         '<section class="frauen-library-area-grid" aria-label="' + esc(group.title) + '">' +
@@ -2618,12 +2615,12 @@
     var count = countSichtbare(abschnitt);
     return libraryHero(
       meta.title || bereichKicker(abschnitt),
-      meta.subtitle || "Geprüfte Inhalte mit Quelle und Direktnachweis.",
+      meta.subtitle || "",
       "section " + (owner ? "frauen-library-hero--tone-" + owner.id : "frauen-library-hero--tone-fiqh"),
       owner ? "group/" + owner.id : "",
       owner ? owner.title : "Frauen im Islam",
-      count ? count + (count === 1 ? " geprüfter Inhalt" : " geprüfte Inhalte") : "In Prüfung",
-      "Quelle & Direktnachweis"
+      count ? count + (count === 1 ? " Inhalt" : " Inhalte") : "",
+      ""
     );
   }
 
@@ -3349,7 +3346,7 @@
     return (
       '<div class="topic-collection-page frauen-list-page frauen-library-list">' +
       sectionHero +
-      hint +
+      "" +
       '<div class="frauen-library-list-controls">' + filterBlock(abschnitt, themen, q, thema) + '</div>' +
       (items.length
         ? '<section class="post-grid topic-collection frauen-post-list" aria-label="Aussagen">' +

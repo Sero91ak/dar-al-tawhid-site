@@ -216,7 +216,7 @@ function liveFrauenNativeAddon() {
   return [
     '<link rel="stylesheet" href="/assets/frauen/frauen-fiqh.css?v=frauen-live-v8">',
     '<link rel="stylesheet" href="/assets/frauen/frauen-authority-v1292.css?v=frauen-live-v8">',
-    '<script defer src="/assets/frauen/frauen-fiqh.js?v=frauen-live-v8"><\\/script>',
+    '<script defer src="/test/assets/frauen/frauen-fiqh.js?v=1293-nohint"><\\/script>',
     '<script defer src="/assets/frauen/frauen-live-adapter.js?v=frauen-live-v8"><\\/script>'
   ].join("");
 }
