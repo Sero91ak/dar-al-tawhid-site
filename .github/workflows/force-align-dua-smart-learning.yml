@@ -91,13 +91,13 @@ jobs:
                   code=subprocess.check_output(cmd,text=True).strip()
                   if code=="200":
                       d=json.loads(raw.read_text(encoding="utf-8"))
-                      chars=d.get("characters") or []
-                      joined="".join(str(x.get("text","")) for x in chars)
-                      if d.get("ok") and chars and nfc(joined)==nfc(text):
-                          return {"characters":chars,"words":d.get("words") or [],"loss":d.get("alignmentLoss")}
+                      words=d.get("words") or []
+                      if d.get("ok") and words:
+                          return {"words":words,"loss":d.get("alignmentLoss")}
 
               if not API_KEY:
-                  raise SystemExit("Exact word-level character alignment unavailable")
+                  body=raw.read_text(encoding="utf-8",errors="replace") if raw.exists() else ""
+                  raise SystemExit("Exact word alignment unavailable: "+body[:700])
               cmd=[
                   "curl","-sS","-o",str(raw),"-w","%{http_code}",
                   "-X","POST","https://api.elevenlabs.io/v1/forced-alignment",
@@ -110,19 +110,38 @@ jobs:
                   body=raw.read_text(encoding="utf-8",errors="replace")
                   raise SystemExit(f"Forced alignment HTTP {code}: {body[:500]}")
               d=json.loads(raw.read_text(encoding="utf-8"))
-              chars=d.get("characters") or []
-              if not chars:
-                  raise SystemExit("Forced alignment returned no characters")
-              joined="".join(str(x.get("text","")) for x in chars)
-              if nfc(joined)!=nfc(text):
-                  raise SystemExit("Forced alignment character stream mismatch")
+              if not (d.get("words") or []):
+                  raise SystemExit("Forced alignment returned no words")
               return d
-          def char_span(chars,start,end):
-              timed=[x for x in chars[start:end] if x.get("start") is not None and x.get("end") is not None]
-              if not timed:
-                  raise SystemExit(f"No timestamps in character span {start}:{end}")
-              return float(timed[0]["start"]),float(timed[-1]["end"])
 
+          def aligned_words(aligned):
+              out=[]
+              for row in aligned.get("words") or []:
+                  text=str(row.get("text") or "").strip()
+                  st=row.get("start"); en=row.get("end")
+                  if not text or st is None or en is None:
+                      continue
+                  st=float(st); en=float(en)
+                  if en<=st:
+                      raise SystemExit(f"Invalid word timing: {text} {st} {en}")
+                  out.append({"text":text,"start":st,"end":en})
+              if not out:
+                  raise SystemExit("No valid aligned words")
+              return out
+
+          def match_segments_to_aligned(segments,rows):
+              out=[]; cursor=0
+              for seg in segments:
+                  target=arabic_key(seg["arabic"])
+                  hit=-1
+                  for i in range(cursor,len(rows)):
+                      if arabic_key(rows[i]["text"])==target:
+                          hit=i; break
+                  if hit<0:
+                      raise SystemExit(f"Exact aligned word not found: {seg['arabic']}")
+                  out.append(rows[hit])
+                  cursor=hit+1
+              return out
           def exact_segment_spans(text,segments):
               cursor=0
               rows=[]
@@ -192,13 +211,12 @@ jobs:
                   full=nfc(item.get("arabic") or "")
                   aligned=post_alignment(audio,full)
                   losses.append(aligned.get("loss"))
-                  chars=aligned["characters"]
-                  spans=exact_segment_spans(full,segments)
+                  rows=aligned_words(aligned)
+                  matched=match_segments_to_aligned(segments,rows)
                   tracks=[{"url":str(entry.get("url") or ""),"kind":"sunnah-master"}]
-                  for i,(stc,enc) in enumerate(spans):
-                      st,en=char_span(chars,stc,enc)
+                  for i,row in enumerate(matched):
                       seg_rows.append({
-                          "index":i,"track":0,"start":round(st,3),"end":round(en,3),
+                          "index":i,"track":0,"start":round(row["start"],3),"end":round(row["end"],3),
                           "arabic":segments[i]["arabic"],"transliteration":segments[i]["transliteration"]
                       })
               else:
@@ -213,8 +231,12 @@ jobs:
                       url,audio=download_quran(surah,ayah)
                       aligned=post_alignment(audio,full)
                       losses.append(aligned.get("loss"))
-                      chars=aligned["characters"]
-                      positions=word_positions(full,words)
+                      aligned_rows=aligned_words(aligned)
+                      if len(aligned_rows)!=len(words):
+                          raise SystemExit(f"Quran aligned word count mismatch {surah}:{ayah}: {len(aligned_rows)} != {len(words)}")
+                      for wi,(source_word,row) in enumerate(zip(words,aligned_rows)):
+                          if arabic_key(source_word)!=arabic_key(row["text"]):
+                              raise SystemExit(f"Quran aligned word mismatch {surah}:{ayah} word {wi}: {source_word} != {row['text']}")
                       keys=[arabic_key(w) for w in words]
                       tracks.append({"url":url,"kind":"quran-recitation","surah":surah,"ayah":ayah})
                       search_from=0
@@ -226,10 +248,9 @@ jobs:
                                   hit=wi; break
                           if hit<0:
                               break
-                          stc,enc=positions[hit]
-                          st,en=char_span(chars,stc,enc)
+                          row=aligned_rows[hit]
                           seg_rows.append({
-                              "index":target_i,"track":ref_i,"start":round(st,3),"end":round(en,3),
+                              "index":target_i,"track":ref_i,"start":round(row["start"],3),"end":round(row["end"],3),
                               "arabic":segments[target_i]["arabic"],"transliteration":segments[target_i]["transliteration"]
                           })
                           target_i+=1
