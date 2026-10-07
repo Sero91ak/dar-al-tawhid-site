@@ -350,6 +350,58 @@ function isFrauenLiveRequest(url) {
     );
 }
 
+function isMutableLiveRequest(url) {
+  if (!url || url.origin !== self.location.origin) return false;
+  const path = String(url.pathname || '');
+  if (path.startsWith('/admin') || path.startsWith('/push/onesignal/')) return false;
+  if (/\.(?:json|js|css|html|webmanifest)$/i.test(path)) return true;
+  if (path === '/' || path === '/index.html' || path === '/version.json') return true;
+  return false;
+}
+
+function networkFirstCached(request) {
+  return fetch(request, { cache: 'no-store' })
+    .then((response) => {
+      if (response && response.ok) {
+        const copy = response.clone();
+        caches.open(CACHE_VERSION).then((cache) => cache.put(request, copy)).catch(() => null);
+      }
+      return response;
+    })
+    .catch(() => caches.match(request));
+}
+
+async function refreshLiveCore(reason) {
+  const targets = [
+    '/',
+    '/index.html',
+    '/version.json',
+    '/assets/live-boot.js',
+    '/assets/global-update-banner.js',
+    '/assets/auto-refresh.js',
+    '/data/offline-content-manifest.json'
+  ];
+  const cache = await caches.open(CACHE_VERSION);
+  let refreshed = 0;
+  for (let i = 0; i < targets.length; i += 1) {
+    const raw = targets[i];
+    try {
+      const request = new Request(raw, { cache: 'no-store' });
+      const response = await fetch(request);
+      if (response && response.ok) {
+        await cache.put(raw, response.clone());
+        refreshed += 1;
+      }
+    } catch (e) {}
+  }
+  await postToClients({
+    type: 'LIVE_SYNC_DONE',
+    reason: String(reason || 'resume'),
+    refreshed,
+    at: Date.now()
+  });
+}
+
 function isTadabburDataRequest(url) {
   return url.origin === self.location.origin
     && url.pathname.indexOf('/apple-tv/quran/tadabbur/') === 0
@@ -484,6 +536,10 @@ self.addEventListener('message', (event) => {
         .then(respond)
         .catch(respond)
     );
+    return;
+  }
+  if (data.type === 'LIVE_SYNC') {
+    event.waitUntil(refreshLiveCore(data.reason || 'resume'));
     return;
   }
   if (data.type === 'APP_REPAIR') {
@@ -679,6 +735,17 @@ self.addEventListener('fetch', (event) => {
           return response;
         })
         .catch(() => caches.match(request))
+    );
+    return;
+  }
+
+  // Globale veränderliche App-Dateien: Network-first.
+  // Dadurch werden neue JSON-, JS-, CSS- und HTML-Stände nach App-Start/Resume
+  // sofort aus dem Netz bezogen; der Cache bleibt nur als Offline-Fallback.
+  if (isMutableLiveRequest(url)) {
+    event.respondWith(
+      networkFirstCached(request)
+        .then((response) => response || caches.match(request))
     );
     return;
   }
