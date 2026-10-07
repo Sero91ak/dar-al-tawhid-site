@@ -202,24 +202,18 @@ export async function synthesizeDarVoice(env, text, options = {}) {
               ? {
                   stability: 0.72,
                   similarity_boost: 0.92,
-                  style: 0.04,
-                  speed: 0.90,
                   use_speaker_boost: true
                 }
               : profile === "dua_arabic_slow"
                 ? {
                     stability: 0.76,
                     similarity_boost: 0.92,
-                    style: 0.02,
-                    speed: 0.74,
                     use_speaker_boost: true
                   }
                 : profile === "dua_word"
                   ? {
                       stability: 0.80,
                       similarity_boost: 0.93,
-                      style: 0.01,
-                      speed: 0.80,
                       use_speaker_boost: true
                     }
                   : profile === "dua"
@@ -290,9 +284,14 @@ export async function synthesizeDarVoice(env, text, options = {}) {
     };
   }
   const arabicLearningProfile = ["dua_arabic", "dua_arabic_slow", "dua_word"].includes(profile);
-  const ttsScript = arabicLearningProfile
+  let ttsScript = arabicLearningProfile
     ? String(script || "").normalize("NFC").replace(/[\u06D6-\u06DC]/g, "").replace(/\s+/g, " ").trim()
     : (dictionaryReady || withTimings ? script : prepareDarVoicePronunciation(script));
+  if (profile === "dua_arabic_slow") {
+    ttsScript = "[slowly] " + ttsScript;
+  } else if (profile === "dua_word") {
+    ttsScript = "[slowly] " + ttsScript.replace(/\.+$/g, "") + ".";
+  }
   const body = {
     text: ttsScript,
     model_id: modelId,
