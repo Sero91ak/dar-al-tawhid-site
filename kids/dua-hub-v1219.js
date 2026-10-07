@@ -5,7 +5,7 @@
   "use strict";
 
   const VERSION = 1241;
-  const DATA_URL = "/kids/data/dua-kids.json?v=1235";
+  const DATA_URL = "/kids/data/dua-kids.json?v=1244";
   const PROFILE_KEY = "kids.profiles.v1";
   const ACTIVE_PROFILE_KEY = "kids.activeProfile";
   const LAST_KEY = "kids.duaHub.last.v1";
