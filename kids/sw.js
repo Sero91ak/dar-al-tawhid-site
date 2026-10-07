@@ -207,8 +207,8 @@ const PRECACHE=CORE_PRECACHE.concat([
   "/kids/data/quiz-audio.json",
   "/kids/data/dua-audio.json",
   "/kids/data/owner-voice-audio.json",
-  "/kids/quiz-library.css?v=8",
-  "/kids/quiz-library.js?v=8",
+  "/kids/quiz-library.css?v=9",
+  "/kids/quiz-library.js?v=9",
   "/kids/assets/sahaba-mubashshirun/abu-bakr.jpg",
   "/kids/assets/sahaba-mubashshirun/umar.jpg",
   "/kids/assets/sahaba-mubashshirun/uthman.jpg",
@@ -359,6 +359,11 @@ self.addEventListener("fetch",function(event){
     return;
   }
   if(url.pathname==="/kids/data/quiz-audio.json"||url.pathname==="/kids/data/dua-audio.json"||url.pathname==="/kids/data/dua-arabic-audio.json"||url.pathname==="/kids/data/dua-learning-timings.json"||url.pathname==="/kids/data/owner-voice-audio.json"){
+    event.respondWith(networkFirst(request));
+    return;
+  }
+  /* QUIZ LEARNING CENTER: network-first so 900-question data, dashboard logic and layout never regress to a stale pack. */
+  if(url.pathname==="/kids/data/quiz-kids.json"||url.pathname==="/kids/quiz-library.js"||url.pathname==="/kids/quiz-library.css"){
     event.respondWith(networkFirst(request));
     return;
   }
