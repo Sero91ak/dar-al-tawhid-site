@@ -249,10 +249,26 @@ export async function synthesizeDarVoice(env, text, options = {}) {
     ""
   ).trim();
   const dictionaryReady = Boolean(dictionaryId && dictionaryVersionId);
+  const modelId = String(env.ELEVENLABS_MODEL_ID || "eleven_v4").trim();
+  const requireDictionary = String(env.ELEVENLABS_REQUIRE_PRONUNCIATION_DICTIONARY || "true").trim().toLowerCase() !== "false";
+  if (modelId !== "eleven_v4") {
+    return {
+      ok: false,
+      setupRequired: true,
+      reason: `Produktionsmodell muss eleven_v4 sein, konfiguriert ist: ${modelId || "(leer)"}`
+    };
+  }
+  if (requireDictionary && !dictionaryReady) {
+    return {
+      ok: false,
+      setupRequired: true,
+      reason: "Kanonisches ElevenLabs-Aussprachewörterbuch fehlt. Produktion wird absichtlich gestoppt."
+    };
+  }
   const ttsScript = dictionaryReady || withTimings ? script : prepareDarVoicePronunciation(script);
   const body = {
     text: ttsScript,
-    model_id: String(env.ELEVENLABS_MODEL_ID || "eleven_v4"),
+    model_id: modelId,
     voice_settings: voiceSettings
   };
   if (dictionaryReady) {
@@ -293,6 +309,9 @@ export async function synthesizeDarVoice(env, text, options = {}) {
       normalizedAlignment: payload?.normalized_alignment || null,
       contentType: "audio/mpeg",
       voiceId,
+      modelId,
+      pronunciationDictionaryId: dictionaryId || null,
+      pronunciationDictionaryVersionId: dictionaryVersionId || null,
       chars: script.length,
       timestamps: true,
       estimatedCostEur: Number(((script.length / 1000) * 0.18).toFixed(4))
@@ -305,6 +324,9 @@ export async function synthesizeDarVoice(env, text, options = {}) {
     bytes,
     contentType: "audio/mpeg",
     voiceId,
+    modelId,
+    pronunciationDictionaryId: dictionaryId || null,
+    pronunciationDictionaryVersionId: dictionaryVersionId || null,
     chars: script.length,
     timestamps: false,
     estimatedCostEur: Number(((script.length / 1000) * 0.18).toFixed(4))
