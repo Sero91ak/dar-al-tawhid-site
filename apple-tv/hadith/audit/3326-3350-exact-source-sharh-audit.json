@@ -1,0 +1,194 @@
+{
+  "project": "DĀR AL TAWḤĪD – Exact Source & Early Šarḥ Audit",
+  "range": "HAD-3326-3350",
+  "series": "3251-3350",
+  "status": "completed-exact-source-early-sharh-audit",
+  "ruleVersion": 7,
+  "exactReferenceRule": {
+    "required": [
+      "sourceBook",
+      "sourceVolume",
+      "sourcePage",
+      "sourceChapter",
+      "sourceSection",
+      "sourceHadithNumber",
+      "sourceEdition",
+      "sharhBook",
+      "sharhVolume",
+      "sharhPage",
+      "sharhChapter",
+      "sharhSection",
+      "sharhEdition",
+      "sharhReference"
+    ],
+    "noEstimatedPages": true,
+    "nullPagesForbiddenForNewRecords": true
+  },
+  "sourceEdition": {
+    "book": "Ṣaḥīḥ Muslim",
+    "editor": "Muḥammad Fuʾād ʿAbd al-Bāqī",
+    "publisher": "Dār Iḥyāʾ at-Turāṯ al-ʿArabī",
+    "place": "Bayrūt",
+    "volume": "4",
+    "mapping": {
+      "Muslim 3025": "2319",
+      "Muslim 3029": "2320",
+      "Muslim 3030": "2321",
+      "Muslim 3031": "2322",
+      "Muslim 3032": "2322",
+      "Muslim 3033": "2323"
+    },
+    "chapter": "Kitāb at-Tafsīr"
+  },
+  "sharhEdition": {
+    "scholar": "Qāḍī ʿIyāḍ",
+    "book": "Ikmāl al-Muʿlim bi-Fawāʾid Muslim",
+    "editor": "Yaḥyā Ismāʿīl",
+    "publisher": "Dār al-Wafāʾ",
+    "place": "al-Manṣūrah",
+    "edition": "1. Aufl.",
+    "year": "1419 H/1998",
+    "volume": "8",
+    "mapping": {
+      "Muslim 3025": "587",
+      "Muslim 3029": "590",
+      "Muslim 3030": "591",
+      "Muslim 3031": "592",
+      "Muslim 3032": "593",
+      "Muslim 3033": "594"
+    }
+  },
+  "reason": "HAD-3326–3350 schließt die Serie 3251–3350 mit den noch offenen authentischen Ṣaḥābī-Tafsīr-Kernen aus Muslim 3025 und 3029–3033 ab. Alle 25 Datensätze sind als Āṯār typisiert, weil sie Aussagen bzw. Berichte der Ṣaḥābah innerhalb Ṣaḥīḥ Muslim wiedergeben. Primärseiten und Ikmāl-Druckseiten wurden exakt verifiziert; keine Seite wurde geschätzt. Reine Isnād-Varianten wurden nicht vervielfacht.",
+  "completionRequirement": {
+    "exactPrimaryBook": true,
+    "exactPrimaryVolume": true,
+    "exactPrimaryPage": true,
+    "exactPrimaryChapter": true,
+    "exactPrimarySection": true,
+    "exactPrimaryHadithNumber": true,
+    "exactPrimaryEdition": true,
+    "exactSharhBook": true,
+    "exactSharhVolume": true,
+    "exactSharhPage": true,
+    "exactSharhEdition": true,
+    "noEstimatedPages": true,
+    "noNullSourcePages": true,
+    "noNullSharhPages": true,
+    "duplicateCheckCompleted": true,
+    "semanticDuplicateCheckCompleted": true,
+    "recordTypeAuditCompleted": true,
+    "globalCatalogUpdated": true,
+    "appleTvScreensaverUpdated": true,
+    "webIosAndroidLibraryLoaderUpdated": true,
+    "seriesProgress": "100/100",
+    "seriesCompleted": true,
+    "globalPushCompleted": true,
+    "allRecordsCorrectlyTyped": true
+  },
+  "recordTypeCounts": {
+    "hadith": 0,
+    "athar": 25
+  },
+  "records": [
+    {
+      "id": "HAD-3326",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3327",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3328",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3329",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3330",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3331",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3332",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3333",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3334",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3335",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3336",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3337",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3338",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3339",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3340",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3341",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3342",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3343",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3344",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3345",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3346",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3347",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3348",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3349",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3350",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    }
+  ]
+}
