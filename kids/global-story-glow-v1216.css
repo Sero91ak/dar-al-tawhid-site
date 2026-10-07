@@ -1,4 +1,4 @@
-/* DĀR AL TAWḤĪD Kids · global story capsule touch glow v1216 */
+/* DĀR AL TAWḤĪD Kids · global story capsule touch glow v1217 */
 :root{
   --kids-story-glow-gold:rgba(255,211,105,.72);
   --kids-story-glow-gold-soft:rgba(255,218,135,.28);
@@ -25,8 +25,7 @@
   transition:
     box-shadow .18s ease,
     border-color .18s ease,
-    filter .18s ease,
-    transform .16s cubic-bezier(.2,.85,.2,1)!important;
+    filter .18s ease!important;
 }
 :is(
   #view-stories #psProphetEntry,
@@ -49,7 +48,7 @@
     inset 0 0 28px var(--kids-story-glow-gold-soft),
     0 16px 34px rgba(0,0,0,.24)!important;
   filter:brightness(1.075) saturate(1.055)!important;
-  transform:translateY(-1px) scale(.995)!important;
+  transform:none!important;
   outline:none!important;
 }
 :is([data-ps-mode],[data-ms-mode],[data-sy-mode],[data-dl-mode]):is(:active,.kids-story-touch-glow,:focus-visible){
@@ -60,7 +59,7 @@
     0 0 26px rgba(105,218,204,.22),
     inset 0 0 18px rgba(255,218,135,.14)!important;
   filter:brightness(1.08)!important;
-  transform:scale(.985)!important;
+  transform:none!important;
   outline:none!important;
 }
 @media(hover:hover) and (pointer:fine){
