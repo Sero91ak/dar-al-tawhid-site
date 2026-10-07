@@ -3270,7 +3270,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v115-dua-learning1210";
+const KIDS_BUILD_ID="kids-shell-v116-dua-learning1211";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -4943,7 +4943,7 @@ function duaDailyIndex(list){
   return seed%list.length;
 }
 function fetchKidsDuas(){
-  return fetch("/kids/data/dua-kids.json?v=1210",{cache:"force-cache"})
+  return fetch("/kids/data/dua-kids.json?v=1211",{cache:"force-cache"})
     .then(function(r){if(!r.ok)throw new Error("dua-data");return r.json()})
     .then(function(data){
       kidsDuas=Array.isArray(data.items)?data.items.filter(function(x){return x.verification==="verified"}):[];
@@ -6396,10 +6396,10 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"cc4ac04648774872a036edb959747bd5","r":1,"spa":2}' crossorigin="anonymous"></script>
 <script src="/kids/content-studio-feed.js?v=studio7"></script>
-<script src="/kids/owner-voice.js?v=5"></script>
+<script src="/kids/owner-voice.js?v=6"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v115-dua-learning1210";
+  var KIDS_BUILD_ID="kids-shell-v116-dua-learning1211";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -6415,13 +6415,13 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1210",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1211",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
   }
   window.addEventListener("load",function(){
-    fetch("/kids/version.json?v=1207",{cache:"no-store"})
+    fetch("/kids/version.json?v=1211",{cache:"no-store"})
       .then(function(r){return r.ok?r.json():null})
       .then(function(v){
         var live=String(v&&v.buildId||"");
