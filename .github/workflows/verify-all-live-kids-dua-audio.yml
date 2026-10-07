@@ -60,7 +60,7 @@ jobs:
           expected_revision={
               "arabic":"dua-arabic-native-fusha-v3-20261007",
               "slow":"dua-arabic-native-fusha-slow-v3-20261007",
-              "word":"dua-arabic-native-fusha-word-v3-20261007",
+              "word":"dua-arabic-native-fusha-word-v4-20261007",
           }
           urls=[]
           for label,data in packs.items():
