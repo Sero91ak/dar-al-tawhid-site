@@ -1,0 +1,35 @@
+name: App Lane Guard
+
+# Getrennte App-Wege: Kids, Besucher-Web, Dar Test, Apple TV, Admin.
+# Ein Commit darf nur eine App ändern, damit nicht alle Deploys denselben Weg nutzen.
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dar-al-tawhid-app-lanes
+  cancel-in-progress: true
+
+jobs:
+  lanes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Nur eine App pro Commit
+        env:
+          GITHUB_COMMIT_MESSAGE: ${{ github.event.head_commit.message || github.event.pull_request.title }}
+          INTEGRITY_BASE_REF: ${{ github.event.before || github.event.pull_request.base.sha || '' }}
+        run: node scripts/app-lane-guard.js

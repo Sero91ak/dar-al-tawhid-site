@@ -66,6 +66,9 @@
     "content/admin/edge-to-edge-theme-lock.json",
     "content/admin/app-stability-lock.json",
     "scripts/app-health-check.js",
+    "scripts/app-lane-guard.js",
+    ".github/workflows/app-lane-guard.yml",
+    ".github/workflows/canonical-islamic-content-live.yml",
     "content/admin/quran-tafsir-nav-lock.json",
     "scripts/quran-tafsir-nav-guard.js",
     "content/admin/quran-picker-outside-lock.json",
@@ -151,6 +154,20 @@
     "AGENTS.md"
   ],
   "unlockedScopes": [
+    {
+      "id": "app-lanes-separate-commits-2026-10-07",
+      "approvedBy": "user-explicit-vier-apps-separat-commit-nicht-gleichen-weg",
+      "reason": "Nutzer will bei einer Vorgabe für mehrere Apps getrennte Commits und getrennte Deploy-Wege (Kids, Web, Test, Apple TV), damit ein Push nicht alle Apps hängt oder rot macht.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "scripts/app-lane-guard.js",
+        ".github/workflows/app-lane-guard.yml",
+        ".github/workflows/canonical-islamic-content-live.yml",
+        "wrangler.toml",
+        "AGENTS.md"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
     {
       "id": "visitor-women-share-brand-route-fix-2026-10-07",
       "at": "2026-10-07T17:52:00+02:00",

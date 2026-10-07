@@ -22,6 +22,11 @@ Bei jeder Aufgabe:
 15. **Änderungen an der privaten Admin-App** (`admin/**`, inkl. KI-Video-Studio) werden **direkt gepusht und live für die Admin-App ausgerollt**, sobald sie fertig sind: Commit → Push auf `main` (bzw. Deploy-Workflow `deploy-live-admin-app`) → Admin-UI ist aktuell. Kein separates „push live“ abwarten.
 16. Das betrifft **nicht** die Besucher-App und **nicht** automatische Besucher-Pushs. Feed-/Push-Aktionen aus dem Video-Studio bleiben manuell.
 
+## App-Spuren (Kids, Web, Test, Apple TV – getrennt committen)
+
+17. Eine Vorgabe für mehrere Apps wird **nicht in einem Commit** und **nicht über denselben Deploy-Weg** erledigt. Reihenfolge: eigener Commit Kids → eigener Commit Besucher-Web → eigener Commit Dar Test → eigener Commit Apple TV. Jeder Commit nur die Dateien dieser Spur. CI (`scripts/app-lane-guard.js`) blockiert gemischte App-Commits, außer der Commit enthält ausdrücklich `lanes-multi-freigabe`.
+18. Kids-Inhalte (`kids/**`) rollen über **Deploy Kids App Live**, nicht über den Besucher-Worker-Deploy. Apple-TV-Inhalte (`apple-tv/**`) nicht mit Kids- oder Web-Commits mischen. Gemeinsame Infrastruktur (`cloudflare/site-router.js`, `_headers`) zählt nicht als zweite App, bleibt aber ein eigener, klarer Commit wenn möglich.
+
 ## Quiz-Fragen (Sonderregel – immer live)
 
 12. **Neue geprüfte Quiz-Fragen** werden **ohne Rückfrage direkt live** in die Besucher-App übernommen: Batch erzeugen, in `data/quiz-questions.json` und `data/quiz-questions-test.json` einpflegen, auf `main` mergen und deployen. Keine Freigabe mit „push live“ abwarten.
