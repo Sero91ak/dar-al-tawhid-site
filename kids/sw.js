@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1219-dua-hub";
+const CACHE_NAME="dar-al-tawhid-kids-v1219";
 const KIDS_BUILD_ID="kids-shell-v123-home-wordmark-fix1219";
 const CORE_PRECACHE=[
   "/kids/start",
