@@ -94,28 +94,19 @@
   function lockBackground(on){
     document.documentElement.classList.toggle("dua-smart-open",!!on);
     document.body.classList.toggle("dua-smart-open",!!on);
-    var modal=document.getElementById("duaModal");
-    var shell=document.querySelector(".shell");
-    var nav=document.querySelector(".bottom-nav");
-    if(modal){
-      if(on)modal.setAttribute("inert","");
-      else modal.removeAttribute("inert");
-    }
-    if(on){
-      [shell,nav].forEach(function(el){
+    /* The fixed learning layer already owns pointer input. Do not inert or freeze
+       the app shell/nav: stale iOS modal state must never make the whole app unusable. */
+    if(!on){
+      ["#duaModal",".shell",".bottom-nav"].forEach(function(sel){
+        var el=document.querySelector(sel);
         if(!el)return;
-        el.setAttribute("inert","");
-        el.setAttribute("aria-hidden","true");
+        el.removeAttribute("inert");
+        if(sel!==".duaModal")el.removeAttribute("aria-hidden");
+        el.style.removeProperty("overflow");
+        el.style.removeProperty("touch-action");
       });
-    }else{
-      var underlyingOpen=!!document.querySelector(".modal.open,#duaHubDetail.open");
-      if(!underlyingOpen){
-        [shell,nav].forEach(function(el){
-          if(!el)return;
-          el.removeAttribute("inert");
-          el.removeAttribute("aria-hidden");
-        });
-      }
+      document.body.style.removeProperty("overflow");
+      document.documentElement.style.removeProperty("overflow");
     }
   }
   function ensureRoot(){
@@ -452,7 +443,13 @@
     });
   }
 
-  document.addEventListener("visibilitychange",function(){if(document.hidden)stopAudio()});
+  document.addEventListener("visibilitychange",function(){
+    if(document.hidden)stopAudio();
+    else if(!root||!root.classList.contains("open"))lockBackground(false);
+  });
+  window.addEventListener("pageshow",function(){
+    if(!root||!root.classList.contains("open"))lockBackground(false);
+  });
   window.DARDuaSmartLearn={
     open:open,
     close:close,
