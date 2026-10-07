@@ -289,18 +289,20 @@ export async function synthesizeDarVoice(env, text, options = {}) {
       reason: "Kanonisches ElevenLabs-Aussprachewörterbuch fehlt. Produktion wird absichtlich gestoppt."
     };
   }
-  const ttsScript = dictionaryReady || withTimings ? script : prepareDarVoicePronunciation(script);
+  const arabicLearningProfile = ["dua_arabic", "dua_arabic_slow", "dua_word"].includes(profile);
+  const ttsScript = arabicLearningProfile
+    ? String(script || "").normalize("NFC")
+    : (dictionaryReady || withTimings ? script : prepareDarVoicePronunciation(script));
   const body = {
     text: ttsScript,
     model_id: modelId,
     voice_settings: voiceSettings
   };
-  const arabicLearningProfile = ["dua_arabic", "dua_arabic_slow", "dua_word"].includes(profile);
   if (arabicLearningProfile) {
     body.language_code = "ar";
     body.apply_text_normalization = "off";
   }
-  if (dictionaryReady) {
+  if (dictionaryReady && !arabicLearningProfile) {
     body.pronunciation_dictionary_locators = [{
       pronunciation_dictionary_id: dictionaryId,
       version_id: dictionaryVersionId
@@ -339,8 +341,8 @@ export async function synthesizeDarVoice(env, text, options = {}) {
       contentType: "audio/mpeg",
       voiceId,
       modelId,
-      pronunciationDictionaryId: dictionaryId || null,
-      pronunciationDictionaryVersionId: dictionaryVersionId || null,
+      pronunciationDictionaryId: arabicLearningProfile ? null : (dictionaryId || null),
+      pronunciationDictionaryVersionId: arabicLearningProfile ? null : (dictionaryVersionId || null),
       chars: script.length,
       timestamps: true,
       estimatedCostEur: Number(((script.length / 1000) * 0.18).toFixed(4))
@@ -354,8 +356,8 @@ export async function synthesizeDarVoice(env, text, options = {}) {
     contentType: "audio/mpeg",
     voiceId,
     modelId,
-    pronunciationDictionaryId: dictionaryId || null,
-    pronunciationDictionaryVersionId: dictionaryVersionId || null,
+    pronunciationDictionaryId: arabicLearningProfile ? null : (dictionaryId || null),
+    pronunciationDictionaryVersionId: arabicLearningProfile ? null : (dictionaryVersionId || null),
     chars: script.length,
     timestamps: false,
     estimatedCostEur: Number(((script.length / 1000) * 0.18).toFixed(4))
