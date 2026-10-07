@@ -1,6 +1,6 @@
 {
-  "version": 28,
-  "updatedAt": "2026-10-06T14:10:00Z",
+  "version": 29,
+  "updatedAt": "2026-10-07T08:36:43Z",
   "title": "Ṣaḥābiyyāt",
   "subtitle": "Frauen der ersten Generation – Glaube, Wissen, Standhaftigkeit und Dienst",
   "policy": {
@@ -101,7 +101,106 @@
           "masterAudio": true,
           "masterAgeRange": "4-10",
           "localTarget": "/kids/assets/sahabiyyat-story-audio/khadijah/master.mp3",
-          "age": "4-5"
+          "age": "4-5",
+          "timings": [
+            {
+              "paragraphIndex": 0,
+              "start": 0.08,
+              "end": 3.88
+            },
+            {
+              "paragraphIndex": 1,
+              "start": 3.88,
+              "end": 24.36
+            },
+            {
+              "paragraphIndex": 2,
+              "start": 24.36,
+              "end": 57.68
+            },
+            {
+              "paragraphIndex": 3,
+              "start": 57.68,
+              "end": 86.92
+            },
+            {
+              "paragraphIndex": 4,
+              "start": 86.92,
+              "end": 121.52
+            },
+            {
+              "paragraphIndex": 5,
+              "start": 121.52,
+              "end": 148.26
+            },
+            {
+              "paragraphIndex": 6,
+              "start": 148.26,
+              "end": 171.22
+            },
+            {
+              "paragraphIndex": 7,
+              "start": 171.22,
+              "end": 197.26
+            },
+            {
+              "paragraphIndex": 8,
+              "start": 197.26,
+              "end": 224.6
+            },
+            {
+              "paragraphIndex": 9,
+              "start": 224.6,
+              "end": 249.06
+            },
+            {
+              "paragraphIndex": 10,
+              "start": 249.06,
+              "end": 288.4
+            },
+            {
+              "paragraphIndex": 11,
+              "start": 288.4,
+              "end": 304.04
+            },
+            {
+              "paragraphIndex": 12,
+              "start": 304.04,
+              "end": 329.58
+            },
+            {
+              "paragraphIndex": 13,
+              "start": 329.58,
+              "end": 355.34
+            },
+            {
+              "paragraphIndex": 14,
+              "start": 355.34,
+              "end": 370.58
+            },
+            {
+              "paragraphIndex": 15,
+              "start": 370.58,
+              "end": 372.54
+            },
+            {
+              "paragraphIndex": 16,
+              "start": 372.54,
+              "end": 381.0
+            },
+            {
+              "paragraphIndex": 17,
+              "start": 381.0,
+              "end": 384.02
+            }
+          ],
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5599219394625901,
+          "alignedWords": 1936,
+          "alignedCharacters": 6255,
+          "alignmentGeneratedAt": "2026-10-07T08:36:43Z",
+          "exactAlignment": true,
+          "estimatedTimingsAllowed": false
         },
         "6-8": {
           "status": "ready",
@@ -134,7 +233,106 @@
           "masterAudio": true,
           "masterAgeRange": "4-10",
           "localTarget": "/kids/assets/sahabiyyat-story-audio/khadijah/master.mp3",
-          "age": "6-8"
+          "age": "6-8",
+          "timings": [
+            {
+              "paragraphIndex": 0,
+              "start": 0.08,
+              "end": 3.88
+            },
+            {
+              "paragraphIndex": 1,
+              "start": 3.88,
+              "end": 24.36
+            },
+            {
+              "paragraphIndex": 2,
+              "start": 24.36,
+              "end": 57.68
+            },
+            {
+              "paragraphIndex": 3,
+              "start": 57.68,
+              "end": 86.92
+            },
+            {
+              "paragraphIndex": 4,
+              "start": 86.92,
+              "end": 121.52
+            },
+            {
+              "paragraphIndex": 5,
+              "start": 121.52,
+              "end": 148.26
+            },
+            {
+              "paragraphIndex": 6,
+              "start": 148.26,
+              "end": 171.22
+            },
+            {
+              "paragraphIndex": 7,
+              "start": 171.22,
+              "end": 197.26
+            },
+            {
+              "paragraphIndex": 8,
+              "start": 197.26,
+              "end": 224.6
+            },
+            {
+              "paragraphIndex": 9,
+              "start": 224.6,
+              "end": 249.06
+            },
+            {
+              "paragraphIndex": 10,
+              "start": 249.06,
+              "end": 288.4
+            },
+            {
+              "paragraphIndex": 11,
+              "start": 288.4,
+              "end": 304.04
+            },
+            {
+              "paragraphIndex": 12,
+              "start": 304.04,
+              "end": 329.58
+            },
+            {
+              "paragraphIndex": 13,
+              "start": 329.58,
+              "end": 355.34
+            },
+            {
+              "paragraphIndex": 14,
+              "start": 355.34,
+              "end": 370.58
+            },
+            {
+              "paragraphIndex": 15,
+              "start": 370.58,
+              "end": 372.54
+            },
+            {
+              "paragraphIndex": 16,
+              "start": 372.54,
+              "end": 381.0
+            },
+            {
+              "paragraphIndex": 17,
+              "start": 381.0,
+              "end": 384.02
+            }
+          ],
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5599219394625901,
+          "alignedWords": 1936,
+          "alignedCharacters": 6255,
+          "alignmentGeneratedAt": "2026-10-07T08:36:43Z",
+          "exactAlignment": true,
+          "estimatedTimingsAllowed": false
         },
         "9-10": {
           "status": "ready",
@@ -167,7 +365,106 @@
           "masterAudio": true,
           "masterAgeRange": "4-10",
           "localTarget": "/kids/assets/sahabiyyat-story-audio/khadijah/master.mp3",
-          "age": "9-10"
+          "age": "9-10",
+          "timings": [
+            {
+              "paragraphIndex": 0,
+              "start": 0.08,
+              "end": 3.88
+            },
+            {
+              "paragraphIndex": 1,
+              "start": 3.88,
+              "end": 24.36
+            },
+            {
+              "paragraphIndex": 2,
+              "start": 24.36,
+              "end": 57.68
+            },
+            {
+              "paragraphIndex": 3,
+              "start": 57.68,
+              "end": 86.92
+            },
+            {
+              "paragraphIndex": 4,
+              "start": 86.92,
+              "end": 121.52
+            },
+            {
+              "paragraphIndex": 5,
+              "start": 121.52,
+              "end": 148.26
+            },
+            {
+              "paragraphIndex": 6,
+              "start": 148.26,
+              "end": 171.22
+            },
+            {
+              "paragraphIndex": 7,
+              "start": 171.22,
+              "end": 197.26
+            },
+            {
+              "paragraphIndex": 8,
+              "start": 197.26,
+              "end": 224.6
+            },
+            {
+              "paragraphIndex": 9,
+              "start": 224.6,
+              "end": 249.06
+            },
+            {
+              "paragraphIndex": 10,
+              "start": 249.06,
+              "end": 288.4
+            },
+            {
+              "paragraphIndex": 11,
+              "start": 288.4,
+              "end": 304.04
+            },
+            {
+              "paragraphIndex": 12,
+              "start": 304.04,
+              "end": 329.58
+            },
+            {
+              "paragraphIndex": 13,
+              "start": 329.58,
+              "end": 355.34
+            },
+            {
+              "paragraphIndex": 14,
+              "start": 355.34,
+              "end": 370.58
+            },
+            {
+              "paragraphIndex": 15,
+              "start": 370.58,
+              "end": 372.54
+            },
+            {
+              "paragraphIndex": 16,
+              "start": 372.54,
+              "end": 381.0
+            },
+            {
+              "paragraphIndex": 17,
+              "start": 381.0,
+              "end": 384.02
+            }
+          ],
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5599219394625901,
+          "alignedWords": 1936,
+          "alignedCharacters": 6255,
+          "alignmentGeneratedAt": "2026-10-07T08:36:43Z",
+          "exactAlignment": true,
+          "estimatedTimingsAllowed": false
         }
       },
       "cover": "/kids/assets/sahabiyyat/khadijah-v1124.webp?v=1124",
@@ -275,108 +572,108 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0,
-              "end": 3.963
+              "start": 0.06,
+              "end": 3.98
             },
             {
               "paragraphIndex": 1,
-              "start": 3.963,
-              "end": 28.561
+              "start": 3.98,
+              "end": 29.02
             },
             {
               "paragraphIndex": 2,
-              "start": 28.561,
-              "end": 56.542
+              "start": 29.02,
+              "end": 56.6
             },
             {
               "paragraphIndex": 3,
-              "start": 56.542,
-              "end": 82.406
+              "start": 56.6,
+              "end": 87.24
             },
             {
               "paragraphIndex": 4,
-              "start": 82.406,
-              "end": 103.366
+              "start": 87.24,
+              "end": 108.86
             },
             {
               "paragraphIndex": 5,
-              "start": 103.366,
-              "end": 134.096
+              "start": 108.86,
+              "end": 141.16
             },
             {
               "paragraphIndex": 6,
-              "start": 134.096,
-              "end": 160.567
+              "start": 141.16,
+              "end": 165.58
             },
             {
               "paragraphIndex": 7,
-              "start": 160.567,
-              "end": 183.996
+              "start": 165.58,
+              "end": 190.48
             },
             {
               "paragraphIndex": 8,
-              "start": 183.996,
-              "end": 200.226
+              "start": 190.48,
+              "end": 208.16
             },
             {
               "paragraphIndex": 9,
-              "start": 200.226,
-              "end": 219.693
+              "start": 208.16,
+              "end": 231.34
             },
             {
               "paragraphIndex": 10,
-              "start": 219.693,
-              "end": 246.441
+              "start": 231.34,
+              "end": 250.6
             },
             {
               "paragraphIndex": 11,
-              "start": 246.441,
-              "end": 267.227
+              "start": 250.6,
+              "end": 274.68
             },
             {
               "paragraphIndex": 12,
-              "start": 267.227,
-              "end": 288.583
+              "start": 274.68,
+              "end": 295.16
             },
             {
               "paragraphIndex": 13,
-              "start": 288.583,
-              "end": 316.011
+              "start": 295.16,
+              "end": 320.6
             },
             {
               "paragraphIndex": 14,
-              "start": 316.011,
-              "end": 341.888
+              "start": 320.6,
+              "end": 347.48
             },
             {
               "paragraphIndex": 15,
-              "start": 341.888,
-              "end": 387.457
+              "start": 347.48,
+              "end": 387.48
             },
             {
               "paragraphIndex": 16,
-              "start": 387.457,
-              "end": 417.552
+              "start": 387.48,
+              "end": 417.56
             },
             {
               "paragraphIndex": 17,
-              "start": 417.552,
-              "end": 419.456
+              "start": 417.56,
+              "end": 419.5
             },
             {
               "paragraphIndex": 18,
-              "start": 419.456,
-              "end": 428.215
+              "start": 419.5,
+              "end": 428.22
             },
             {
               "paragraphIndex": 19,
-              "start": 428.215,
-              "end": 431.52
+              "start": 428.22,
+              "end": 431.26
             }
           ],
-          "syncMode": "silence-aware-dynamic-paragraph-v1",
-          "alignmentLoss": null,
-          "alignmentGeneratedAt": "2026-10-05T13:47:01Z",
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5740517285120943,
+          "alignmentGeneratedAt": "2026-10-07T08:36:43Z",
           "allAges": true,
           "codec": "mp3",
           "bitRateKbps": 128,
@@ -385,7 +682,11 @@
           "originalOwnerUpload": true,
           "originalBytesPreserved": true,
           "transcoded": false,
-          "deliveryProfile": "owner-original-byte-identical"
+          "deliveryProfile": "owner-original-byte-identical",
+          "alignedWords": 1974,
+          "alignedCharacters": 6569,
+          "exactAlignment": true,
+          "estimatedTimingsAllowed": false
         },
         "6-8": {
           "status": "ready",
@@ -414,108 +715,108 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0,
-              "end": 3.963
+              "start": 0.06,
+              "end": 3.98
             },
             {
               "paragraphIndex": 1,
-              "start": 3.963,
-              "end": 28.561
+              "start": 3.98,
+              "end": 29.02
             },
             {
               "paragraphIndex": 2,
-              "start": 28.561,
-              "end": 56.542
+              "start": 29.02,
+              "end": 56.6
             },
             {
               "paragraphIndex": 3,
-              "start": 56.542,
-              "end": 82.406
+              "start": 56.6,
+              "end": 87.24
             },
             {
               "paragraphIndex": 4,
-              "start": 82.406,
-              "end": 103.366
+              "start": 87.24,
+              "end": 108.86
             },
             {
               "paragraphIndex": 5,
-              "start": 103.366,
-              "end": 134.096
+              "start": 108.86,
+              "end": 141.16
             },
             {
               "paragraphIndex": 6,
-              "start": 134.096,
-              "end": 160.567
+              "start": 141.16,
+              "end": 165.58
             },
             {
               "paragraphIndex": 7,
-              "start": 160.567,
-              "end": 183.996
+              "start": 165.58,
+              "end": 190.48
             },
             {
               "paragraphIndex": 8,
-              "start": 183.996,
-              "end": 200.226
+              "start": 190.48,
+              "end": 208.16
             },
             {
               "paragraphIndex": 9,
-              "start": 200.226,
-              "end": 219.693
+              "start": 208.16,
+              "end": 231.34
             },
             {
               "paragraphIndex": 10,
-              "start": 219.693,
-              "end": 246.441
+              "start": 231.34,
+              "end": 250.6
             },
             {
               "paragraphIndex": 11,
-              "start": 246.441,
-              "end": 267.227
+              "start": 250.6,
+              "end": 274.68
             },
             {
               "paragraphIndex": 12,
-              "start": 267.227,
-              "end": 288.583
+              "start": 274.68,
+              "end": 295.16
             },
             {
               "paragraphIndex": 13,
-              "start": 288.583,
-              "end": 316.011
+              "start": 295.16,
+              "end": 320.6
             },
             {
               "paragraphIndex": 14,
-              "start": 316.011,
-              "end": 341.888
+              "start": 320.6,
+              "end": 347.48
             },
             {
               "paragraphIndex": 15,
-              "start": 341.888,
-              "end": 387.457
+              "start": 347.48,
+              "end": 387.48
             },
             {
               "paragraphIndex": 16,
-              "start": 387.457,
-              "end": 417.552
+              "start": 387.48,
+              "end": 417.56
             },
             {
               "paragraphIndex": 17,
-              "start": 417.552,
-              "end": 419.456
+              "start": 417.56,
+              "end": 419.5
             },
             {
               "paragraphIndex": 18,
-              "start": 419.456,
-              "end": 428.215
+              "start": 419.5,
+              "end": 428.22
             },
             {
               "paragraphIndex": 19,
-              "start": 428.215,
-              "end": 431.52
+              "start": 428.22,
+              "end": 431.26
             }
           ],
-          "syncMode": "silence-aware-dynamic-paragraph-v1",
-          "alignmentLoss": null,
-          "alignmentGeneratedAt": "2026-10-05T13:47:01Z",
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5740517285120943,
+          "alignmentGeneratedAt": "2026-10-07T08:36:43Z",
           "allAges": true,
           "codec": "mp3",
           "bitRateKbps": 128,
@@ -524,7 +825,11 @@
           "originalOwnerUpload": true,
           "originalBytesPreserved": true,
           "transcoded": false,
-          "deliveryProfile": "owner-original-byte-identical"
+          "deliveryProfile": "owner-original-byte-identical",
+          "alignedWords": 1974,
+          "alignedCharacters": 6569,
+          "exactAlignment": true,
+          "estimatedTimingsAllowed": false
         },
         "9-10": {
           "status": "ready",
@@ -553,108 +858,108 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0,
-              "end": 3.963
+              "start": 0.06,
+              "end": 3.98
             },
             {
               "paragraphIndex": 1,
-              "start": 3.963,
-              "end": 28.561
+              "start": 3.98,
+              "end": 29.02
             },
             {
               "paragraphIndex": 2,
-              "start": 28.561,
-              "end": 56.542
+              "start": 29.02,
+              "end": 56.6
             },
             {
               "paragraphIndex": 3,
-              "start": 56.542,
-              "end": 82.406
+              "start": 56.6,
+              "end": 87.24
             },
             {
               "paragraphIndex": 4,
-              "start": 82.406,
-              "end": 103.366
+              "start": 87.24,
+              "end": 108.86
             },
             {
               "paragraphIndex": 5,
-              "start": 103.366,
-              "end": 134.096
+              "start": 108.86,
+              "end": 141.16
             },
             {
               "paragraphIndex": 6,
-              "start": 134.096,
-              "end": 160.567
+              "start": 141.16,
+              "end": 165.58
             },
             {
               "paragraphIndex": 7,
-              "start": 160.567,
-              "end": 183.996
+              "start": 165.58,
+              "end": 190.48
             },
             {
               "paragraphIndex": 8,
-              "start": 183.996,
-              "end": 200.226
+              "start": 190.48,
+              "end": 208.16
             },
             {
               "paragraphIndex": 9,
-              "start": 200.226,
-              "end": 219.693
+              "start": 208.16,
+              "end": 231.34
             },
             {
               "paragraphIndex": 10,
-              "start": 219.693,
-              "end": 246.441
+              "start": 231.34,
+              "end": 250.6
             },
             {
               "paragraphIndex": 11,
-              "start": 246.441,
-              "end": 267.227
+              "start": 250.6,
+              "end": 274.68
             },
             {
               "paragraphIndex": 12,
-              "start": 267.227,
-              "end": 288.583
+              "start": 274.68,
+              "end": 295.16
             },
             {
               "paragraphIndex": 13,
-              "start": 288.583,
-              "end": 316.011
+              "start": 295.16,
+              "end": 320.6
             },
             {
               "paragraphIndex": 14,
-              "start": 316.011,
-              "end": 341.888
+              "start": 320.6,
+              "end": 347.48
             },
             {
               "paragraphIndex": 15,
-              "start": 341.888,
-              "end": 387.457
+              "start": 347.48,
+              "end": 387.48
             },
             {
               "paragraphIndex": 16,
-              "start": 387.457,
-              "end": 417.552
+              "start": 387.48,
+              "end": 417.56
             },
             {
               "paragraphIndex": 17,
-              "start": 417.552,
-              "end": 419.456
+              "start": 417.56,
+              "end": 419.5
             },
             {
               "paragraphIndex": 18,
-              "start": 419.456,
-              "end": 428.215
+              "start": 419.5,
+              "end": 428.22
             },
             {
               "paragraphIndex": 19,
-              "start": 428.215,
-              "end": 431.52
+              "start": 428.22,
+              "end": 431.26
             }
           ],
-          "syncMode": "silence-aware-dynamic-paragraph-v1",
-          "alignmentLoss": null,
-          "alignmentGeneratedAt": "2026-10-05T13:47:01Z",
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5740517285120943,
+          "alignmentGeneratedAt": "2026-10-07T08:36:43Z",
           "allAges": true,
           "codec": "mp3",
           "bitRateKbps": 128,
@@ -663,7 +968,11 @@
           "originalOwnerUpload": true,
           "originalBytesPreserved": true,
           "transcoded": false,
-          "deliveryProfile": "owner-original-byte-identical"
+          "deliveryProfile": "owner-original-byte-identical",
+          "alignedWords": 1974,
+          "alignedCharacters": 6569,
+          "exactAlignment": true,
+          "estimatedTimingsAllowed": false
         }
       },
       "cover": "/kids/assets/sahabiyyat/aishah-v1124.webp?v=1124",

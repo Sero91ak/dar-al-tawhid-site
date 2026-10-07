@@ -1,6 +1,6 @@
 {
-  "version": 8,
-  "updatedAt": "2026-10-06T13:02:00Z",
+  "version": 9,
+  "updatedAt": "2026-10-07T08:36:43Z",
   "title": "Geschichten der Propheten",
   "policy": {
     "source": "data/prophets/*.json",
@@ -90,123 +90,123 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0,
-              "end": 4.069
+              "start": 0.06,
+              "end": 2.18
             },
             {
               "paragraphIndex": 1,
-              "start": 4.069,
-              "end": 19.737
+              "start": 2.18,
+              "end": 12.74
             },
             {
               "paragraphIndex": 2,
-              "start": 19.737,
-              "end": 34.998
+              "start": 12.74,
+              "end": 35.02
             },
             {
               "paragraphIndex": 3,
-              "start": 34.998,
-              "end": 61.467
+              "start": 35.02,
+              "end": 61.48
             },
             {
               "paragraphIndex": 4,
-              "start": 61.467,
-              "end": 76.754
+              "start": 61.48,
+              "end": 76.92
             },
             {
               "paragraphIndex": 5,
-              "start": 76.754,
-              "end": 90.03
+              "start": 76.92,
+              "end": 94.58
             },
             {
               "paragraphIndex": 6,
-              "start": 90.03,
-              "end": 100.952
+              "start": 94.58,
+              "end": 104.84
             },
             {
               "paragraphIndex": 7,
-              "start": 100.952,
-              "end": 116.958
+              "start": 104.84,
+              "end": 124.72
             },
             {
               "paragraphIndex": 8,
-              "start": 116.958,
-              "end": 147.751
+              "start": 124.72,
+              "end": 147.78
             },
             {
               "paragraphIndex": 9,
-              "start": 147.751,
-              "end": 163.786
+              "start": 147.78,
+              "end": 168.38
             },
             {
               "paragraphIndex": 10,
-              "start": 163.786,
-              "end": 184.246
+              "start": 168.38,
+              "end": 192.42
             },
             {
               "paragraphIndex": 11,
-              "start": 184.246,
-              "end": 199.748
+              "start": 192.42,
+              "end": 209.52
             },
             {
               "paragraphIndex": 12,
-              "start": 199.748,
-              "end": 218.99
+              "start": 209.52,
+              "end": 227.16
             },
             {
               "paragraphIndex": 13,
-              "start": 218.99,
-              "end": 234.067
+              "start": 227.16,
+              "end": 244.84
             },
             {
               "paragraphIndex": 14,
-              "start": 234.067,
-              "end": 244.829
+              "start": 244.84,
+              "end": 258.92
             },
             {
               "paragraphIndex": 15,
-              "start": 244.829,
-              "end": 263.377
+              "start": 258.92,
+              "end": 274.18
             },
             {
               "paragraphIndex": 16,
-              "start": 263.377,
-              "end": 277.893
+              "start": 274.18,
+              "end": 290.68
             },
             {
               "paragraphIndex": 17,
-              "start": 277.893,
-              "end": 302.815
+              "start": 290.68,
+              "end": 315.6
             },
             {
               "paragraphIndex": 18,
-              "start": 302.815,
-              "end": 321.022
+              "start": 315.6,
+              "end": 334.14
             },
             {
               "paragraphIndex": 19,
-              "start": 321.022,
-              "end": 334.137
+              "start": 334.14,
+              "end": 348.66
             },
             {
               "paragraphIndex": 20,
-              "start": 334.137,
-              "end": 337.114
+              "start": 348.66,
+              "end": 348.66
             },
             {
               "paragraphIndex": 21,
-              "start": 337.114,
-              "end": 347.262
+              "start": 348.66,
+              "end": 348.66
             },
             {
               "paragraphIndex": 22,
-              "start": 347.262,
-              "end": 349.675
+              "start": 348.66,
+              "end": 349.48
             }
           ],
-          "syncMode": "silence-aware-dynamic-paragraph-v1",
-          "alignmentLoss": null,
-          "alignmentGeneratedAt": "2026-10-04T01:55:04Z",
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 1.2650409318994646,
+          "alignmentGeneratedAt": "2026-10-07T08:36:43Z",
           "permanentAsset": true,
           "signedPreviewUrlReplaced": true,
           "bytes": 5611321,
@@ -217,7 +217,11 @@
           "originalBytesPreserved": true,
           "transcoded": false,
           "deliveryProfile": "owner-original-byte-identical",
-          "restoredAt": "2026-10-06T13:02:00Z"
+          "restoredAt": "2026-10-06T13:02:00Z",
+          "alignedWords": 1547,
+          "alignedCharacters": 5207,
+          "exactAlignment": true,
+          "estimatedTimingsAllowed": false
         },
         "6-8": {
           "url": "/kids/assets/prophet-story-audio/muhammad/story.mp3?v=8-original",
@@ -234,123 +238,123 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0,
-              "end": 4.069
+              "start": 0.06,
+              "end": 2.18
             },
             {
               "paragraphIndex": 1,
-              "start": 4.069,
-              "end": 19.737
+              "start": 2.18,
+              "end": 12.74
             },
             {
               "paragraphIndex": 2,
-              "start": 19.737,
-              "end": 34.998
+              "start": 12.74,
+              "end": 35.02
             },
             {
               "paragraphIndex": 3,
-              "start": 34.998,
-              "end": 61.467
+              "start": 35.02,
+              "end": 61.48
             },
             {
               "paragraphIndex": 4,
-              "start": 61.467,
-              "end": 76.754
+              "start": 61.48,
+              "end": 76.92
             },
             {
               "paragraphIndex": 5,
-              "start": 76.754,
-              "end": 90.03
+              "start": 76.92,
+              "end": 94.58
             },
             {
               "paragraphIndex": 6,
-              "start": 90.03,
-              "end": 100.952
+              "start": 94.58,
+              "end": 104.84
             },
             {
               "paragraphIndex": 7,
-              "start": 100.952,
-              "end": 116.958
+              "start": 104.84,
+              "end": 124.72
             },
             {
               "paragraphIndex": 8,
-              "start": 116.958,
-              "end": 147.751
+              "start": 124.72,
+              "end": 147.78
             },
             {
               "paragraphIndex": 9,
-              "start": 147.751,
-              "end": 163.786
+              "start": 147.78,
+              "end": 168.38
             },
             {
               "paragraphIndex": 10,
-              "start": 163.786,
-              "end": 184.246
+              "start": 168.38,
+              "end": 192.42
             },
             {
               "paragraphIndex": 11,
-              "start": 184.246,
-              "end": 199.748
+              "start": 192.42,
+              "end": 209.52
             },
             {
               "paragraphIndex": 12,
-              "start": 199.748,
-              "end": 218.99
+              "start": 209.52,
+              "end": 227.16
             },
             {
               "paragraphIndex": 13,
-              "start": 218.99,
-              "end": 234.067
+              "start": 227.16,
+              "end": 244.84
             },
             {
               "paragraphIndex": 14,
-              "start": 234.067,
-              "end": 244.829
+              "start": 244.84,
+              "end": 258.92
             },
             {
               "paragraphIndex": 15,
-              "start": 244.829,
-              "end": 263.377
+              "start": 258.92,
+              "end": 274.18
             },
             {
               "paragraphIndex": 16,
-              "start": 263.377,
-              "end": 277.893
+              "start": 274.18,
+              "end": 290.68
             },
             {
               "paragraphIndex": 17,
-              "start": 277.893,
-              "end": 302.815
+              "start": 290.68,
+              "end": 315.6
             },
             {
               "paragraphIndex": 18,
-              "start": 302.815,
-              "end": 321.022
+              "start": 315.6,
+              "end": 334.14
             },
             {
               "paragraphIndex": 19,
-              "start": 321.022,
-              "end": 334.137
+              "start": 334.14,
+              "end": 348.66
             },
             {
               "paragraphIndex": 20,
-              "start": 334.137,
-              "end": 337.114
+              "start": 348.66,
+              "end": 348.66
             },
             {
               "paragraphIndex": 21,
-              "start": 337.114,
-              "end": 347.262
+              "start": 348.66,
+              "end": 348.66
             },
             {
               "paragraphIndex": 22,
-              "start": 347.262,
-              "end": 349.675
+              "start": 348.66,
+              "end": 349.48
             }
           ],
-          "syncMode": "silence-aware-dynamic-paragraph-v1",
-          "alignmentLoss": null,
-          "alignmentGeneratedAt": "2026-10-04T01:55:04Z",
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 1.2650409318994646,
+          "alignmentGeneratedAt": "2026-10-07T08:36:43Z",
           "permanentAsset": true,
           "signedPreviewUrlReplaced": true,
           "bytes": 5611321,
@@ -361,7 +365,11 @@
           "originalBytesPreserved": true,
           "transcoded": false,
           "deliveryProfile": "owner-original-byte-identical",
-          "restoredAt": "2026-10-06T13:02:00Z"
+          "restoredAt": "2026-10-06T13:02:00Z",
+          "alignedWords": 1547,
+          "alignedCharacters": 5207,
+          "exactAlignment": true,
+          "estimatedTimingsAllowed": false
         },
         "9-10": {
           "url": "/kids/assets/prophet-story-audio/muhammad/story.mp3?v=8-original",
@@ -378,123 +386,123 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0,
-              "end": 4.069
+              "start": 0.06,
+              "end": 2.18
             },
             {
               "paragraphIndex": 1,
-              "start": 4.069,
-              "end": 19.737
+              "start": 2.18,
+              "end": 12.74
             },
             {
               "paragraphIndex": 2,
-              "start": 19.737,
-              "end": 34.998
+              "start": 12.74,
+              "end": 35.02
             },
             {
               "paragraphIndex": 3,
-              "start": 34.998,
-              "end": 61.467
+              "start": 35.02,
+              "end": 61.48
             },
             {
               "paragraphIndex": 4,
-              "start": 61.467,
-              "end": 76.754
+              "start": 61.48,
+              "end": 76.92
             },
             {
               "paragraphIndex": 5,
-              "start": 76.754,
-              "end": 90.03
+              "start": 76.92,
+              "end": 94.58
             },
             {
               "paragraphIndex": 6,
-              "start": 90.03,
-              "end": 100.952
+              "start": 94.58,
+              "end": 104.84
             },
             {
               "paragraphIndex": 7,
-              "start": 100.952,
-              "end": 116.958
+              "start": 104.84,
+              "end": 124.72
             },
             {
               "paragraphIndex": 8,
-              "start": 116.958,
-              "end": 147.751
+              "start": 124.72,
+              "end": 147.78
             },
             {
               "paragraphIndex": 9,
-              "start": 147.751,
-              "end": 163.786
+              "start": 147.78,
+              "end": 168.38
             },
             {
               "paragraphIndex": 10,
-              "start": 163.786,
-              "end": 184.246
+              "start": 168.38,
+              "end": 192.42
             },
             {
               "paragraphIndex": 11,
-              "start": 184.246,
-              "end": 199.748
+              "start": 192.42,
+              "end": 209.52
             },
             {
               "paragraphIndex": 12,
-              "start": 199.748,
-              "end": 218.99
+              "start": 209.52,
+              "end": 227.16
             },
             {
               "paragraphIndex": 13,
-              "start": 218.99,
-              "end": 234.067
+              "start": 227.16,
+              "end": 244.84
             },
             {
               "paragraphIndex": 14,
-              "start": 234.067,
-              "end": 244.829
+              "start": 244.84,
+              "end": 258.92
             },
             {
               "paragraphIndex": 15,
-              "start": 244.829,
-              "end": 263.377
+              "start": 258.92,
+              "end": 274.18
             },
             {
               "paragraphIndex": 16,
-              "start": 263.377,
-              "end": 277.893
+              "start": 274.18,
+              "end": 290.68
             },
             {
               "paragraphIndex": 17,
-              "start": 277.893,
-              "end": 302.815
+              "start": 290.68,
+              "end": 315.6
             },
             {
               "paragraphIndex": 18,
-              "start": 302.815,
-              "end": 321.022
+              "start": 315.6,
+              "end": 334.14
             },
             {
               "paragraphIndex": 19,
-              "start": 321.022,
-              "end": 334.137
+              "start": 334.14,
+              "end": 348.66
             },
             {
               "paragraphIndex": 20,
-              "start": 334.137,
-              "end": 337.114
+              "start": 348.66,
+              "end": 348.66
             },
             {
               "paragraphIndex": 21,
-              "start": 337.114,
-              "end": 347.262
+              "start": 348.66,
+              "end": 348.66
             },
             {
               "paragraphIndex": 22,
-              "start": 347.262,
-              "end": 349.675
+              "start": 348.66,
+              "end": 349.48
             }
           ],
-          "syncMode": "silence-aware-dynamic-paragraph-v1",
-          "alignmentLoss": null,
-          "alignmentGeneratedAt": "2026-10-04T01:55:04Z",
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 1.2650409318994646,
+          "alignmentGeneratedAt": "2026-10-07T08:36:43Z",
           "permanentAsset": true,
           "signedPreviewUrlReplaced": true,
           "bytes": 5611321,
@@ -505,7 +513,11 @@
           "originalBytesPreserved": true,
           "transcoded": false,
           "deliveryProfile": "owner-original-byte-identical",
-          "restoredAt": "2026-10-06T13:02:00Z"
+          "restoredAt": "2026-10-06T13:02:00Z",
+          "alignedWords": 1547,
+          "alignedCharacters": 5207,
+          "exactAlignment": true,
+          "estimatedTimingsAllowed": false
         }
       },
       "referenceMemory": {
@@ -693,83 +705,83 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0,
-              "end": 3.602
+              "start": 0.06,
+              "end": 4.16
             },
             {
               "paragraphIndex": 1,
-              "start": 3.602,
-              "end": 21.197
+              "start": 4.16,
+              "end": 21.36
             },
             {
               "paragraphIndex": 2,
-              "start": 21.197,
-              "end": 41.381
+              "start": 21.36,
+              "end": 41.96
             },
             {
               "paragraphIndex": 3,
-              "start": 41.381,
-              "end": 68.498
+              "start": 41.96,
+              "end": 72.4
             },
             {
               "paragraphIndex": 4,
-              "start": 68.498,
-              "end": 89.702
+              "start": 72.4,
+              "end": 93.08
             },
             {
               "paragraphIndex": 5,
-              "start": 89.702,
-              "end": 110.504
+              "start": 93.08,
+              "end": 111.16
             },
             {
               "paragraphIndex": 6,
-              "start": 110.504,
-              "end": 131.999
+              "start": 111.16,
+              "end": 135.94
             },
             {
               "paragraphIndex": 7,
-              "start": 131.999,
-              "end": 150.493
+              "start": 135.94,
+              "end": 154.38
             },
             {
               "paragraphIndex": 8,
-              "start": 150.493,
-              "end": 173.551
+              "start": 154.38,
+              "end": 173.88
             },
             {
               "paragraphIndex": 9,
-              "start": 173.551,
-              "end": 191.206
+              "start": 173.88,
+              "end": 193.5
             },
             {
               "paragraphIndex": 10,
-              "start": 191.206,
-              "end": 205.06
+              "start": 193.5,
+              "end": 205.4
             },
             {
               "paragraphIndex": 11,
-              "start": 205.06,
-              "end": 215.237
+              "start": 205.4,
+              "end": 215.48
             },
             {
               "paragraphIndex": 12,
-              "start": 215.237,
-              "end": 217.459
+              "start": 215.48,
+              "end": 217.86
             },
             {
               "paragraphIndex": 13,
-              "start": 217.459,
-              "end": 226.376
+              "start": 217.86,
+              "end": 226.64
             },
             {
               "paragraphIndex": 14,
-              "start": 226.376,
-              "end": 229.642
+              "start": 226.64,
+              "end": 229.44
             }
           ],
-          "syncMode": "silence-aware-dynamic-paragraph-v1",
-          "alignmentLoss": null,
-          "alignmentGeneratedAt": "2026-10-04T17:12:00+02:00",
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5420170872992143,
+          "alignmentGeneratedAt": "2026-10-07T08:36:43Z",
           "permanentAsset": true,
           "signedPreviewUrlReplaced": true,
           "bytes": 3691217,
@@ -780,7 +792,11 @@
           "originalBytesPreserved": true,
           "transcoded": false,
           "deliveryProfile": "owner-original-byte-identical",
-          "restoredAt": "2026-10-06T13:02:00Z"
+          "restoredAt": "2026-10-06T13:02:00Z",
+          "alignedWords": 1159,
+          "alignedCharacters": 3622,
+          "exactAlignment": true,
+          "estimatedTimingsAllowed": false
         },
         "6-8": {
           "url": "/kids/assets/prophet-story-audio/adam/story.mp3?v=8-original",
@@ -797,83 +813,83 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0,
-              "end": 3.602
+              "start": 0.06,
+              "end": 4.16
             },
             {
               "paragraphIndex": 1,
-              "start": 3.602,
-              "end": 21.197
+              "start": 4.16,
+              "end": 21.36
             },
             {
               "paragraphIndex": 2,
-              "start": 21.197,
-              "end": 41.381
+              "start": 21.36,
+              "end": 41.96
             },
             {
               "paragraphIndex": 3,
-              "start": 41.381,
-              "end": 68.498
+              "start": 41.96,
+              "end": 72.4
             },
             {
               "paragraphIndex": 4,
-              "start": 68.498,
-              "end": 89.702
+              "start": 72.4,
+              "end": 93.08
             },
             {
               "paragraphIndex": 5,
-              "start": 89.702,
-              "end": 110.504
+              "start": 93.08,
+              "end": 111.16
             },
             {
               "paragraphIndex": 6,
-              "start": 110.504,
-              "end": 131.999
+              "start": 111.16,
+              "end": 135.94
             },
             {
               "paragraphIndex": 7,
-              "start": 131.999,
-              "end": 150.493
+              "start": 135.94,
+              "end": 154.38
             },
             {
               "paragraphIndex": 8,
-              "start": 150.493,
-              "end": 173.551
+              "start": 154.38,
+              "end": 173.88
             },
             {
               "paragraphIndex": 9,
-              "start": 173.551,
-              "end": 191.206
+              "start": 173.88,
+              "end": 193.5
             },
             {
               "paragraphIndex": 10,
-              "start": 191.206,
-              "end": 205.06
+              "start": 193.5,
+              "end": 205.4
             },
             {
               "paragraphIndex": 11,
-              "start": 205.06,
-              "end": 215.237
+              "start": 205.4,
+              "end": 215.48
             },
             {
               "paragraphIndex": 12,
-              "start": 215.237,
-              "end": 217.459
+              "start": 215.48,
+              "end": 217.86
             },
             {
               "paragraphIndex": 13,
-              "start": 217.459,
-              "end": 226.376
+              "start": 217.86,
+              "end": 226.64
             },
             {
               "paragraphIndex": 14,
-              "start": 226.376,
-              "end": 229.642
+              "start": 226.64,
+              "end": 229.44
             }
           ],
-          "syncMode": "silence-aware-dynamic-paragraph-v1",
-          "alignmentLoss": null,
-          "alignmentGeneratedAt": "2026-10-04T17:12:00+02:00",
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5420170872992143,
+          "alignmentGeneratedAt": "2026-10-07T08:36:43Z",
           "permanentAsset": true,
           "signedPreviewUrlReplaced": true,
           "bytes": 3691217,
@@ -884,7 +900,11 @@
           "originalBytesPreserved": true,
           "transcoded": false,
           "deliveryProfile": "owner-original-byte-identical",
-          "restoredAt": "2026-10-06T13:02:00Z"
+          "restoredAt": "2026-10-06T13:02:00Z",
+          "alignedWords": 1159,
+          "alignedCharacters": 3622,
+          "exactAlignment": true,
+          "estimatedTimingsAllowed": false
         },
         "9-10": {
           "url": "/kids/assets/prophet-story-audio/adam/story.mp3?v=8-original",
@@ -901,83 +921,83 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0,
-              "end": 3.602
+              "start": 0.06,
+              "end": 4.16
             },
             {
               "paragraphIndex": 1,
-              "start": 3.602,
-              "end": 21.197
+              "start": 4.16,
+              "end": 21.36
             },
             {
               "paragraphIndex": 2,
-              "start": 21.197,
-              "end": 41.381
+              "start": 21.36,
+              "end": 41.96
             },
             {
               "paragraphIndex": 3,
-              "start": 41.381,
-              "end": 68.498
+              "start": 41.96,
+              "end": 72.4
             },
             {
               "paragraphIndex": 4,
-              "start": 68.498,
-              "end": 89.702
+              "start": 72.4,
+              "end": 93.08
             },
             {
               "paragraphIndex": 5,
-              "start": 89.702,
-              "end": 110.504
+              "start": 93.08,
+              "end": 111.16
             },
             {
               "paragraphIndex": 6,
-              "start": 110.504,
-              "end": 131.999
+              "start": 111.16,
+              "end": 135.94
             },
             {
               "paragraphIndex": 7,
-              "start": 131.999,
-              "end": 150.493
+              "start": 135.94,
+              "end": 154.38
             },
             {
               "paragraphIndex": 8,
-              "start": 150.493,
-              "end": 173.551
+              "start": 154.38,
+              "end": 173.88
             },
             {
               "paragraphIndex": 9,
-              "start": 173.551,
-              "end": 191.206
+              "start": 173.88,
+              "end": 193.5
             },
             {
               "paragraphIndex": 10,
-              "start": 191.206,
-              "end": 205.06
+              "start": 193.5,
+              "end": 205.4
             },
             {
               "paragraphIndex": 11,
-              "start": 205.06,
-              "end": 215.237
+              "start": 205.4,
+              "end": 215.48
             },
             {
               "paragraphIndex": 12,
-              "start": 215.237,
-              "end": 217.459
+              "start": 215.48,
+              "end": 217.86
             },
             {
               "paragraphIndex": 13,
-              "start": 217.459,
-              "end": 226.376
+              "start": 217.86,
+              "end": 226.64
             },
             {
               "paragraphIndex": 14,
-              "start": 226.376,
-              "end": 229.642
+              "start": 226.64,
+              "end": 229.44
             }
           ],
-          "syncMode": "silence-aware-dynamic-paragraph-v1",
-          "alignmentLoss": null,
-          "alignmentGeneratedAt": "2026-10-04T17:12:00+02:00",
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5420170872992143,
+          "alignmentGeneratedAt": "2026-10-07T08:36:43Z",
           "permanentAsset": true,
           "signedPreviewUrlReplaced": true,
           "bytes": 3691217,
@@ -988,7 +1008,11 @@
           "originalBytesPreserved": true,
           "transcoded": false,
           "deliveryProfile": "owner-original-byte-identical",
-          "restoredAt": "2026-10-06T13:02:00Z"
+          "restoredAt": "2026-10-06T13:02:00Z",
+          "alignedWords": 1159,
+          "alignedCharacters": 3622,
+          "exactAlignment": true,
+          "estimatedTimingsAllowed": false
         }
       }
     },
@@ -1161,83 +1185,83 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0,
-              "end": 3.588
+              "start": 0.08,
+              "end": 3.96
             },
             {
               "paragraphIndex": 1,
-              "start": 3.588,
-              "end": 18.991
+              "start": 3.96,
+              "end": 19.46
             },
             {
               "paragraphIndex": 2,
-              "start": 18.991,
-              "end": 40.207
+              "start": 19.46,
+              "end": 40.8
             },
             {
               "paragraphIndex": 3,
-              "start": 40.207,
-              "end": 50.623
+              "start": 40.8,
+              "end": 51.08
             },
             {
               "paragraphIndex": 4,
-              "start": 50.623,
-              "end": 64.785
+              "start": 51.08,
+              "end": 65.319
             },
             {
               "paragraphIndex": 5,
-              "start": 64.785,
-              "end": 84.253
+              "start": 65.319,
+              "end": 84.76
             },
             {
               "paragraphIndex": 6,
-              "start": 84.253,
-              "end": 101.598
+              "start": 84.76,
+              "end": 99.48
             },
             {
               "paragraphIndex": 7,
-              "start": 101.598,
-              "end": 107.196
+              "start": 99.48,
+              "end": 107.8
             },
             {
               "paragraphIndex": 8,
-              "start": 107.196,
-              "end": 125.862
+              "start": 107.8,
+              "end": 126.28
             },
             {
               "paragraphIndex": 9,
-              "start": 125.862,
-              "end": 142.618
+              "start": 126.28,
+              "end": 143.08
             },
             {
               "paragraphIndex": 10,
-              "start": 142.618,
-              "end": 151.972
+              "start": 143.08,
+              "end": 152.1
             },
             {
               "paragraphIndex": 11,
-              "start": 151.972,
-              "end": 160.325
+              "start": 152.1,
+              "end": 160.58
             },
             {
               "paragraphIndex": 12,
-              "start": 160.325,
-              "end": 162.694
+              "start": 160.58,
+              "end": 163.1
             },
             {
               "paragraphIndex": 13,
-              "start": 162.694,
-              "end": 171.646
+              "start": 163.1,
+              "end": 171.82
             },
             {
               "paragraphIndex": 14,
-              "start": 171.646,
-              "end": 175.073
+              "start": 171.82,
+              "end": 174.88
             }
           ],
-          "syncMode": "silence-aware-dynamic-paragraph-v1",
-          "alignmentLoss": null,
-          "alignmentGeneratedAt": "2026-10-04T17:12:00+02:00",
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5502597233008223,
+          "alignmentGeneratedAt": "2026-10-07T08:36:43Z",
           "permanentAsset": true,
           "signedPreviewUrlReplaced": true,
           "bytes": 2818100,
@@ -1248,7 +1272,11 @@
           "originalBytesPreserved": true,
           "transcoded": false,
           "deliveryProfile": "owner-original-byte-identical",
-          "restoredAt": "2026-10-06T13:02:00Z"
+          "restoredAt": "2026-10-06T13:02:00Z",
+          "alignedWords": 855,
+          "alignedCharacters": 2736,
+          "exactAlignment": true,
+          "estimatedTimingsAllowed": false
         },
         "6-8": {
           "url": "/kids/assets/prophet-story-audio/idris/story.mp3?v=8-original",
@@ -1265,83 +1293,83 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0,
-              "end": 3.588
+              "start": 0.08,
+              "end": 3.96
             },
             {
               "paragraphIndex": 1,
-              "start": 3.588,
-              "end": 18.991
+              "start": 3.96,
+              "end": 19.46
             },
             {
               "paragraphIndex": 2,
-              "start": 18.991,
-              "end": 40.207
+              "start": 19.46,
+              "end": 40.8
             },
             {
               "paragraphIndex": 3,
-              "start": 40.207,
-              "end": 50.623
+              "start": 40.8,
+              "end": 51.08
             },
             {
               "paragraphIndex": 4,
-              "start": 50.623,
-              "end": 64.785
+              "start": 51.08,
+              "end": 65.319
             },
             {
               "paragraphIndex": 5,
-              "start": 64.785,
-              "end": 84.253
+              "start": 65.319,
+              "end": 84.76
             },
             {
               "paragraphIndex": 6,
-              "start": 84.253,
-              "end": 101.598
+              "start": 84.76,
+              "end": 99.48
             },
             {
               "paragraphIndex": 7,
-              "start": 101.598,
-              "end": 107.196
+              "start": 99.48,
+              "end": 107.8
             },
             {
               "paragraphIndex": 8,
-              "start": 107.196,
-              "end": 125.862
+              "start": 107.8,
+              "end": 126.28
             },
             {
               "paragraphIndex": 9,
-              "start": 125.862,
-              "end": 142.618
+              "start": 126.28,
+              "end": 143.08
             },
             {
               "paragraphIndex": 10,
-              "start": 142.618,
-              "end": 151.972
+              "start": 143.08,
+              "end": 152.1
             },
             {
               "paragraphIndex": 11,
-              "start": 151.972,
-              "end": 160.325
+              "start": 152.1,
+              "end": 160.58
             },
             {
               "paragraphIndex": 12,
-              "start": 160.325,
-              "end": 162.694
+              "start": 160.58,
+              "end": 163.1
             },
             {
               "paragraphIndex": 13,
-              "start": 162.694,
-              "end": 171.646
+              "start": 163.1,
+              "end": 171.82
             },
             {
               "paragraphIndex": 14,
-              "start": 171.646,
-              "end": 175.073
+              "start": 171.82,
+              "end": 174.88
             }
           ],
-          "syncMode": "silence-aware-dynamic-paragraph-v1",
-          "alignmentLoss": null,
-          "alignmentGeneratedAt": "2026-10-04T17:12:00+02:00",
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5502597233008223,
+          "alignmentGeneratedAt": "2026-10-07T08:36:43Z",
           "permanentAsset": true,
           "signedPreviewUrlReplaced": true,
           "bytes": 2818100,
@@ -1352,7 +1380,11 @@
           "originalBytesPreserved": true,
           "transcoded": false,
           "deliveryProfile": "owner-original-byte-identical",
-          "restoredAt": "2026-10-06T13:02:00Z"
+          "restoredAt": "2026-10-06T13:02:00Z",
+          "alignedWords": 855,
+          "alignedCharacters": 2736,
+          "exactAlignment": true,
+          "estimatedTimingsAllowed": false
         },
         "9-10": {
           "url": "/kids/assets/prophet-story-audio/idris/story.mp3?v=8-original",
@@ -1369,83 +1401,83 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0,
-              "end": 3.588
+              "start": 0.08,
+              "end": 3.96
             },
             {
               "paragraphIndex": 1,
-              "start": 3.588,
-              "end": 18.991
+              "start": 3.96,
+              "end": 19.46
             },
             {
               "paragraphIndex": 2,
-              "start": 18.991,
-              "end": 40.207
+              "start": 19.46,
+              "end": 40.8
             },
             {
               "paragraphIndex": 3,
-              "start": 40.207,
-              "end": 50.623
+              "start": 40.8,
+              "end": 51.08
             },
             {
               "paragraphIndex": 4,
-              "start": 50.623,
-              "end": 64.785
+              "start": 51.08,
+              "end": 65.319
             },
             {
               "paragraphIndex": 5,
-              "start": 64.785,
-              "end": 84.253
+              "start": 65.319,
+              "end": 84.76
             },
             {
               "paragraphIndex": 6,
-              "start": 84.253,
-              "end": 101.598
+              "start": 84.76,
+              "end": 99.48
             },
             {
               "paragraphIndex": 7,
-              "start": 101.598,
-              "end": 107.196
+              "start": 99.48,
+              "end": 107.8
             },
             {
               "paragraphIndex": 8,
-              "start": 107.196,
-              "end": 125.862
+              "start": 107.8,
+              "end": 126.28
             },
             {
               "paragraphIndex": 9,
-              "start": 125.862,
-              "end": 142.618
+              "start": 126.28,
+              "end": 143.08
             },
             {
               "paragraphIndex": 10,
-              "start": 142.618,
-              "end": 151.972
+              "start": 143.08,
+              "end": 152.1
             },
             {
               "paragraphIndex": 11,
-              "start": 151.972,
-              "end": 160.325
+              "start": 152.1,
+              "end": 160.58
             },
             {
               "paragraphIndex": 12,
-              "start": 160.325,
-              "end": 162.694
+              "start": 160.58,
+              "end": 163.1
             },
             {
               "paragraphIndex": 13,
-              "start": 162.694,
-              "end": 171.646
+              "start": 163.1,
+              "end": 171.82
             },
             {
               "paragraphIndex": 14,
-              "start": 171.646,
-              "end": 175.073
+              "start": 171.82,
+              "end": 174.88
             }
           ],
-          "syncMode": "silence-aware-dynamic-paragraph-v1",
-          "alignmentLoss": null,
-          "alignmentGeneratedAt": "2026-10-04T17:12:00+02:00",
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5502597233008223,
+          "alignmentGeneratedAt": "2026-10-07T08:36:43Z",
           "permanentAsset": true,
           "signedPreviewUrlReplaced": true,
           "bytes": 2818100,
@@ -1456,7 +1488,11 @@
           "originalBytesPreserved": true,
           "transcoded": false,
           "deliveryProfile": "owner-original-byte-identical",
-          "restoredAt": "2026-10-06T13:02:00Z"
+          "restoredAt": "2026-10-06T13:02:00Z",
+          "alignedWords": 855,
+          "alignedCharacters": 2736,
+          "exactAlignment": true,
+          "estimatedTimingsAllowed": false
         }
       }
     },
