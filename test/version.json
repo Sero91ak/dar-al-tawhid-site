@@ -1,6 +1,6 @@
 {
-  "buildId": "app-shell-v1327",
-  "appBuildId": "app-shell-v1327",
-  "note": "v1327 · Adaptive Fold/iPad Phase 2 final: Split nach real verfügbarer Readerbreite statt 1400-px-Grenze; stabile Rail+Pane-DOM-Struktur; ca. 480–500 px Mindest-Readerfläche; dynamische Master-Rail 260–340 px; Seiten-Tab-Reserve wird eingerechnet; Reader max. 46rem, PDFs/Medien volle Pane; keine VisualViewport-Scroll-Recalculations; kein horizontales App-Seitendriften; adaptive Grids statt starrer Spalten. Links/Rechts/Unten-Navigation bleibt gespeichert und händigkeitsgerecht. Test-App.",
-  "updatedAt": "2026-10-07T22:25:00+02:00"
+  "buildId": "app-shell-v1328",
+  "appBuildId": "app-shell-v1328",
+  "note": "v1328 · Sichtbarer Adaptive-Navigation-Fix: Der Einstellungen-Bereich rendert die Auswahl Links/Unten/Rechts jetzt direkt aus test/index.html statt nur über eine nachgeladene Runtime-Injektion. adaptive-layout, fold-split und fold-thumb-nav sind statisch mit v1328 eingebunden. Auf schmalem Portrait bleibt die Bottom-Leiste bewusst unverändert; die gespeicherte Seitenposition wird sichtbar und greift bei ausreichender Breite bzw. Landscape/Fold/iPad.",
+  "updatedAt": "2026-10-07T22:43:00+02:00"
 }
