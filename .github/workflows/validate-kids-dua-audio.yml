@@ -54,7 +54,7 @@ jobs:
           grep -F '/kids/owner-voice.js?v=8' kids/index.html
           grep -F '/kids/dua-smart-learn.js?v=1241' kids/index.html
           grep -F '/kids/dua-hub-v1219.js?v=1241' kids/index.html
-          grep -F '/kids/sw.js?v=1241' kids/index.html
+          grep -F '/kids/sw.js?v=1239' kids/index.html
           grep -F 'dar-al-tawhid-kids-v1239' kids/sw.js
           grep -F 'GERMAN_URL="/kids/data/dua-audio.json?v=8"' kids/dua-smart-learn.js
           grep -F 'playGerman:playGerman' kids/dua-smart-learn.js
