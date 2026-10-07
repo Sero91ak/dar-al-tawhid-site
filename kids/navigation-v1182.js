@@ -68,7 +68,7 @@
   function surfaceIds(){
     var out=[];
     var fixed=[
-      "knowledgeModal","duaModal","quizModal","quranModal","fullQuranModal","storyModal",
+      "knowledgeModal","duaModal","duaHubDetail","quizModal","quranModal","fullQuranModal","storyModal",
       "psLibraryPage","psModal","msLibraryPage","msModal","syLibraryPage","syModal",
       "ghWorld","ghPlayer"
     ];
@@ -91,7 +91,7 @@
       "#msLibraryScroll","#msScroll",
       "#syLibraryScroll","#syScroll",
       "#ghWorldScroll","#ghPlayerScroll",
-      "#knowledgeModal .modal-shell","#duaModal .modal-shell","#quizModal .modal-shell",
+      "#knowledgeModal .modal-shell","#duaModal .modal-shell","#duaHubDetailScroll","#quizModal .modal-shell",
       "#quranModal .modal-shell","#fullQuranModal .modal-shell","#storyModal .modal-shell",
       ".kids-follow-reader.open .kfr-read"
     ];
@@ -201,7 +201,7 @@
   function isBackControl(target){
     if(!target||!target.closest)return false;
     return !!target.closest(
-      "[data-close],#psClose,#psLibraryBack,#msClose,#msBack,#syClose,#syBack,#dlClose,#dlBack,"+
+      "[data-close],#duaHubBack,#psClose,#psLibraryBack,#msClose,#msBack,#syClose,#syBack,#dlClose,#dlBack,"+
       "#ghBack,#ghPlayerBack,#ghPlayerMin,.kfr-close"
     );
   }
@@ -324,7 +324,7 @@
       ".kids-follow-reader.open .kfr-close",
       "#psModal.open #psClose","#msModal.open #msClose","#syModal.open #syClose",
       "#ghPlayer.open #ghPlayerBack",
-      ".modal.open [data-close]",
+      ".modal.open [data-close]","#duaHubDetail.open #duaHubBack",
       "#psLibraryPage.open #psLibraryBack","#msLibraryPage.open #msBack","#syLibraryPage.open #syBack",
       "#ghWorld.open #ghBack"
     ];
