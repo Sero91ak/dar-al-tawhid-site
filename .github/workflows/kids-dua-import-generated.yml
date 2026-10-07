@@ -50,9 +50,9 @@ jobs:
 
           mapping=json.loads(MAP.read_text(encoding="utf-8"))
           rows=mapping.get("entries") or []
-          if len(rows)!=29:
-              raise SystemExit(f"Expected 29 generated audio rows, got {len(rows)}")
-          if len({r.get("key") for r in rows})!=29:
+          if len(rows)!=32:
+              raise SystemExit(f"Expected 32 generated audio rows, got {len(rows)}")
+          if len({r.get("key") for r in rows})!=32:
               raise SystemExit("Generated audio map has duplicate keys")
 
           dua=json.loads(DATA.read_text(encoding="utf-8"))
@@ -144,7 +144,7 @@ jobs:
               }
               if lang=="de": de_entries[text]=entry
               else: ar_entries[text]=entry
-              print(f"[{n}/29] {key} · {dur:.2f}s")
+              print(f"[{n}/32] {key} · {dur:.2f}s")
 
           # Reuse existing Eleven v4 Arabic clips only when the exact Arabic text is unchanged.
           for d in items:
