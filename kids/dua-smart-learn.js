@@ -175,7 +175,8 @@
         index:i,
         arabic:word,
         transliteration:norm(row.transliteration||trans[i]||""),
-        audioKey:word
+        audioKey:word,
+        audioUrl:String(row.audioUrl||"")
       };
     });
   }
@@ -281,6 +282,10 @@
   }
   function playWhole(slow){
     if(!currentDua)return false;
+    var direct=slow?currentDua.audioArabicSlowUrl:currentDua.audioArabicUrl;
+    if(direct){
+      return playUrl(direct,slow?"slow":"full",slow?"Langsam und deutlich zuhören …":"Duʿāʾ anhören …");
+    }
     var run=function(p){
       var text=arabicText(currentDua);
       var e=entry(slow?p.slow:p.normal,text);
@@ -300,6 +305,9 @@
     var seg=segs[Number(i)];
     if(!seg)return false;
     selectIndex(i,{scroll:true,play:false});
+    if(seg.audioUrl){
+      return playUrl(seg.audioUrl,"word","Nur dieses Wort: "+(seg.transliteration||seg.arabic));
+    }
     var run=function(p){
       var e=entry(p.word,seg.audioKey||seg.arabic);
       if(!e||!e.url)throw new Error("missing-word");
@@ -318,6 +326,9 @@
   }
   function playGerman(dua){
     if(!dua)return false;
+    if(dua.audioGermanUrl){
+      return playUrl(dua.audioGermanUrl,"german","Erklärung anhören …");
+    }
     var run=function(p){
       var text=germanText(dua);
       var e=entry(p.german,text);
@@ -331,6 +342,14 @@
   }
   function prepare(dua){
     if(!dua)return loadPacks();
+    if(dua.audioArabicUrl)warmUrl(dua.audioArabicUrl);
+    if(dua.audioArabicSlowUrl)warmUrl(dua.audioArabicSlowUrl);
+    if(dua.audioGermanUrl)warmUrl(dua.audioGermanUrl);
+    var directSegs=getSegments(dua);
+    for(var di=0;di<Math.min(3,directSegs.length);di++){
+      if(directSegs[di].audioUrl)warmUrl(directSegs[di].audioUrl);
+    }
+    if(dua.directAudioReady&&directSegs.every(function(s){return !!s.audioUrl}))return Promise.resolve(true);
     return loadPacks().then(function(p){
       var normal=entry(p.normal,arabicText(dua));
       var slow=entry(p.slow,arabicText(dua));
@@ -475,6 +494,8 @@
   function preview(dua,rate){
     var slow=Number(rate||1)<0.9;
     currentDua=dua;
+    var direct=slow?dua&&dua.audioArabicSlowUrl:dua&&dua.audioArabicUrl;
+    if(direct)return playUrl(direct,slow?"slow":"full",slow?"Langsam zuhören …":"Duʿāʾ anhören …");
     var run=function(p){
       var e=entry(slow?p.slow:p.normal,arabicText(dua));
       if(!e||!e.url)throw new Error("missing-preview");
