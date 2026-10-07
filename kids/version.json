@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v140-content-flow1237",
-  "label": "KIDS · V1.08.61",
-  "releasedAt": "2026-10-07T18:25:00+02:00",
-  "note": "V1237 beseitigt globale Leerraum-Tails in DĀR AL TAWḤĪD Kids: jede Hauptansicht folgt ihrer realen Inhaltshöhe, die Shell besitzt allein die Bottom-Dock-Reserve, Duʿāʾ verliert den doppelten 170px/100dvh-Tail und Quiz reserviert Platz nur solange der feste Weiter-Button sichtbar ist.",
+  "buildId": "kids-shell-v141-home-profile1238",
+  "label": "KIDS · V1.08.62",
+  "releasedAt": "2026-10-07T18:35:00+02:00",
+  "note": "V1238 zeigt auf der Kids-Startseite das aktive Kinderprofil mit den neuen 3D-Avataren: Jungenprofil mit weißer Kufi, Mädchenprofil mit rosa Hijab. Das Profil sitzt als fest begrenztes rundes Emblem innerhalb des rechten Safe-Area-Rands, ohne Edge-to-Edge-, Widescreen- oder Oversize-Verhalten. Antippen öffnet direkt den Eltern-/Profilbereich.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -1149,8 +1149,16 @@
     "globalBottomClearance": "single-shell-reserve-v1237",
     "globalMainViewBottomPadding": "zero-own-reserve-v1237",
     "duaDetailTail": "auto-height-no-100dvh-no-double-reserve-v1237",
-    "quizBottomTail": "conditional-next-button-reserve-v1237"
+    "quizBottomTail": "conditional-next-button-reserve-v1237",
+    "homeProfileEmblem": "active-boy-girl-avatar-v1238",
+    "homeProfilePlacement": "hero-right-safe-bounded",
+    "homeProfileSizePhonePx": 50,
+    "homeProfileSizeCompactPx": 48,
+    "homeProfileSizeTabletPx": 54,
+    "homeProfileEdgeToEdge": false,
+    "homeProfileOversize": false,
+    "homeProfileAction": "open-parents-profile"
   },
-  "updatedAt": "2026-10-07T18:25:00+02:00",
-  "deployTrigger": "2026-10-07T18:25:00+02:00"
+  "updatedAt": "2026-10-07T18:35:00+02:00",
+  "deployTrigger": "2026-10-07T18:35:00+02:00"
 }
