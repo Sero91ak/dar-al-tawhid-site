@@ -301,7 +301,10 @@ export async function synthesizeDarVoice(env, text, options = {}) {
     body.language_code = "ar";
     body.apply_text_normalization = "off";
   }
-  if (dictionaryReady) {
+  // Arabic Du'a learning must preserve the fully vocalized Arabic source.
+  // The shared master dictionary contains transliteration aliases that can drop
+  // Arabic consonants/case endings, so it is intentionally excluded here.
+  if (dictionaryReady && !arabicLearningProfile) {
     body.pronunciation_dictionary_locators = [{
       pronunciation_dictionary_id: dictionaryId,
       version_id: dictionaryVersionId
