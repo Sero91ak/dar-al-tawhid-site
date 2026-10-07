@@ -119,6 +119,34 @@ function runKidsDesignGuard() {
       failed += fail(`${f} muss eine echte PNG-Datei sein (kein JPEG mit .png-Endung)`);
     }
   }
+  // Kids Quiz learning center: 900 fixed questions, age comes only from profile/settings.
+  const quizPath = path.join(ROOT, "kids/data/quiz-kids.json");
+  const quizLibraryPath = path.join(ROOT, "kids/quiz-library.js");
+  const quizCssPath = path.join(ROOT, "kids/quiz-library.css");
+  if (!fs.existsSync(quizPath) || !fs.existsSync(quizLibraryPath) || !fs.existsSync(quizCssPath)) {
+    failed += fail("Kids Quiz Lernzentrum: Pflichtdateien fehlen");
+  } else {
+    const quiz = JSON.parse(fs.readFileSync(quizPath, "utf8"));
+    const quizLibrary = fs.readFileSync(quizLibraryPath, "utf8");
+    const quizCss = fs.readFileSync(quizCssPath, "utf8");
+    const quizItems = Array.isArray(quiz.items) ? quiz.items : [];
+    const quizCounts = Object.fromEntries(["4-6","7-8","9-10"].map((band)=>[
+      band, quizItems.filter((q)=>q && q.ageBand===band).length
+    ]));
+    if (quizItems.length !== 900 || quizCounts["4-6"] !== 300 || quizCounts["7-8"] !== 300 || quizCounts["9-10"] !== 300) {
+      failed += fail(`Kids Quiz: erwartet 900 = 300/300/300, gefunden ${quizItems.length} = ${quizCounts["4-6"]}/${quizCounts["7-8"]}/${quizCounts["9-10"]}`);
+    }
+    if (html.includes('id="quizAgePick"') || html.includes('data-quiz-age=')) {
+      failed += fail("Kids Quiz: zweite Altersauswahl im Quiz ist verboten; Alter kommt aus Kids-Einstellungen");
+    }
+    for (const marker of ["openKidsQuizHub","quizReviewMistakes","quizReviewDue","quizResumeRound","data-quiz-topic"]) {
+      if (!quizLibrary.includes(marker)) failed += fail(`Kids Quiz Lernzentrum fehlt: ${marker}`);
+    }
+    for (const marker of ["KIDS_QUIZ_LEARNING_CENTER_V4","KIDS_QUIZ_MOBILE_NEXT_V5"]) {
+      if (!quizCss.includes(marker)) failed += fail(`Kids Quiz Layout-Schutz fehlt: ${marker}`);
+    }
+  }
+
   if (!failed) ok("Kids Design (Edge-to-Edge, V1199-Referenzhero, Adobe-Cinzel-Wortmarke, Glass-Nav, Whole-Card-Tap, keine Pre-Click-Dauer, keine Emojis, PNG-Icons)");
   return failed;
 }
