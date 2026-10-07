@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v133-quiz-learning-center1230",
-  "label": "KIDS · V1.08.54",
-  "releasedAt": "2026-10-07T14:31:00+02:00",
-  "note": "Quiz-Lernzentrum: Altersauswahl im Quiz entfernt; Quiz folgt ausschließlich dem im Kids-Profil gewählten Alter. Neue Lernübersicht mit sicher gelernt, bearbeitet, Fehlern, Direkt-gewusst-Quote, fälligen Wiederholungen, Fehler-Wiederholung, fortsetzbarer letzter Runde, freier Themenwahl und kompletter Fragenbibliothek. Quizrunde kompakter, Edge-to-Edge und mit sichtbar klebendem Weiter-Button.",
+  "buildId": "kids-shell-v134-dua-premium1231",
+  "label": "KIDS · V1.08.55",
+  "releasedAt": "2026-10-07T14:35:00+02:00",
+  "note": "V1231 führt den Duʿāʾ-Bereich vollständig in die dunkle Kids-App-Designsprache zurück, integriert lokal gebündelte generierte Premium-Motive und beseitigt den iOS Scroll-/Touch-Lock der Duʿāʾ-Detailansicht. Quiz V1230 bleibt unverändert erhalten.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1230",
+    "serviceWorkerCache": "v1231-dua-premium",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -1052,7 +1052,7 @@
     "homeBrandDelivery": "same-origin-transparent-png-v1229",
     "homeBrandDataUri": false,
     "homeBrandEscapedNewlineBug": false,
-    "duaHub": "compact-capsule-v1221",
+    "duaHub": "stories-quran-converged-premium-v1231",
     "duaHubManualLibrary": true,
     "duaHubVerifiedEntries": 20,
     "duaHubTarget": "100+ verified entries",
@@ -1064,7 +1064,7 @@
     "duaLibraryLayout": "single-column-capsules",
     "duaHeader": "compact-contained",
     "duaAssets": "local-3d-svg-v1221",
-    "bottomNav": "five-tabs-one-row-original-form",
+    "bottomNav": "five-tabs-one-row-balanced-v1231",
     "homeBrandTransparent": true,
     "globalNavigationControlsExcludedFromCardGeometry": true,
     "deenLessonModes": [
@@ -1102,7 +1102,15 @@
     "kidsQuizMistakeReview": true,
     "kidsQuizDueReview": true,
     "kidsQuizStickyNext": true,
-    "kidsQuizEdgeToEdge": true
+    "kidsQuizEdgeToEdge": true,
+    "duaPalette": "night-teal-navy-antique-gold",
+    "duaHero": "generated-photoreal-local-v1222",
+    "duaCategoryArtwork": "generated-3d-miniature-local-v1222",
+    "duaPrimaryArtwork": "generated-transparent-3d-local-v1222",
+    "duaBottomNavIcon": "generated-transparent-3d-v1222",
+    "duaDetailScroll": "single-shell-scroll-no-inert-lock-v1231",
+    "duaFreezeGuard": "pageshow-visibility-stale-lock-recovery-v1231",
+    "duaAssetsOfflineCached": true
   },
   "updatedAt": "2026-10-07T14:31:00+02:00",
   "deployTrigger": "2026-10-07T14:31:00+02:00"
