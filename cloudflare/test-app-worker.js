@@ -323,6 +323,12 @@ async function finalizeDarTestHomeV1193(asset) {
     else html += hadithFinal;
   }
   // DAR_ADAPTIVE_FOLD_V1326
+  // Force every pre-existing adaptive/fold reference to the same v1326 bytes.
+  // This prevents an older service-worker-cached controller from running first.
+  html = html.replace(/adaptive-layout\.css(?:\?v=[^"']*)?/g, "adaptive-layout.css?v=1326-capacity-fold");
+  html = html.replace(/adaptive-layout\.js(?:\?v=[^"']*)?/g, "adaptive-layout.js?v=1326-capacity-fold");
+  html = html.replace(/fold-split\.css(?:\?v=[^"']*)?/g, "fold-split.css?v=1326-capacity-fold");
+  html = html.replace(/fold-split\.js(?:\?v=[^"']*)?/g, "fold-split.js?v=1326-capacity-fold");
   // Final test authority: real capacity-based Fold/iPad shell. These imports are
   // layout-only and load after legacy route styles so fixed 1400px rules cannot win.
   if (!html.includes('id="darAdaptiveFoldAuthorityV1326"')) {
