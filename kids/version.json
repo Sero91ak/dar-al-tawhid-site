@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v118-global-glow1214",
-  "label": "KIDS · V1.08.39",
-  "releasedAt": "2026-10-07T09:01:00+02:00",
-  "note": "V1214 vereinheitlicht den sichtbaren Capsule-/Card-Touch-Glow appweit. Dīn-Hauptkarte und Dīn-Lektionen haben nun exakt dieselbe Breite und Press-Rückmeldung wie Propheten, Ṣaḥābah und Ṣaḥābiyyāt. Kleine Hören/Lesen/Mitlesen-Capsules bekommen denselben Lichtsaum ohne Layoutänderung. Bestehender Quiz-900-Stand bleibt vollständig erhalten.",
+  "buildId": "kids-shell-v119-home-reference1215",
+  "label": "KIDS · V1.08.40",
+  "releasedAt": "2026-10-07T09:20:00+02:00",
+  "note": "V1215 ersetzt die fehlerhafte Startseiten-Hintergrunddatei durch eine saubere, aus der freigegebenen Referenz rekonstruierte Nacht-Moschee-Platte ohne eingebrannte Karten, Navigation oder Schrift. DĀR AL TAWḤĪD ist jetzt live als runde goldene Kinder-Wortmarke im gleichen Formcharakter wie Kids aufgebaut; der Serif/Cinzel-Look ist endgültig überschrieben. Kids nutzt wieder den deutlich sichtbaren alten 2,6-s-Ballon-Sprung mit zeitversetzten Buchstaben. Die V1214-Capsule-/Card-Glow-Regeln bleiben unverändert erhalten.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1214",
+    "serviceWorkerCache": "v1215",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -997,10 +997,10 @@
     "duaSmartHeroImage": false,
     "duaTransliterationLarge": true,
     "duaWordTapEnabled": true,
-    "homeBrand": "fredoka-single-gold-bubble-v1213",
+    "homeBrand": "rounded-gold-kids-family-v1215",
     "homeBrandWordSpacing": "explicit-three-word-spacing",
-    "homeBrandMotion": "subtle-word-wobble-v1213",
-    "homeKidsBalloon": "classic-2.6s-staggered-v1213",
+    "homeBrandMotion": "subtle-word-float",
+    "homeKidsBalloon": "classic-visible-2.6s-12px-staggered-v1215",
     "homeBackgroundMotion": false,
     "kidsQuizOwnerVoiceGeneration": "manual-after-900-content-freeze",
     "kidsQuizTargetPerAge": 300,
@@ -1009,7 +1009,11 @@
     "globalTouchGlowIOSFallback": true,
     "globalTouchGlowInnerRing": true,
     "globalTouchGlowPressHoldMs": 165,
-    "globalCapsuleStoryHomeParity": "deen=prophets=sahaba=sahabiyyat"
+    "globalCapsuleStoryHomeParity": "deen=prophets=sahaba=sahabiyyat",
+    "homeBackground": "/kids/assets/kids-home-v1215/hero-clean-reference.jpg?v=1215",
+    "homeBackgroundMode": "clean-reference-plate-no-baked-ui",
+    "homeBrandSerif": false,
+    "homeKidsBalloonReducedMotion": "visible-soft-5px"
   },
   "updatedAt": "2026-10-07",
   "deployTrigger": "2026-10-07T09:01:00+02:00"

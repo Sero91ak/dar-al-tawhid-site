@@ -2793,128 +2793,7 @@ html:not([data-view="today"]) .view.active{
 }
 </style>
 
-<style id="kids-home-brand-bubble-v1213">
-/* V1213 — Startseitenmarke wie die freigegebene Kinder-Referenz:
-   DĀR AL TAWḤĪD als einfarbige, freundliche Fredoka-Ballonwortmarke
-   mit echten Wortabständen; Kids bekommt wieder den alten dauerhaften Ballon-Sprung.
-   Hintergrund und übrige Startseite bleiben unverändert. */
 
-#view-today .wm-dar-safe{
-  width:calc(100% - 24px)!important;
-  max-width:620px!important;
-  margin:0 auto -5px!important;
-  padding:2px 2px 8px!important;
-  display:flex!important;
-  justify-content:center!important;
-  align-items:flex-end!important;
-  gap:clamp(10px,2.25vw,16px)!important;
-  white-space:nowrap!important;
-  overflow:visible!important;
-  font-family:"Fredoka","SF Pro Rounded","Arial Rounded MT Bold",system-ui,sans-serif!important;
-  font-size:clamp(36px,9.85vw,50px)!important;
-  line-height:.96!important;
-  font-weight:700!important;
-  letter-spacing:-.025em!important;
-  color:#f6bc45!important;
-  filter:
-    drop-shadow(0 2px 0 rgba(112,61,7,.72))
-    drop-shadow(0 6px 10px rgba(0,0,0,.34))
-    drop-shadow(0 0 9px rgba(255,205,88,.22))!important;
-}
-
-#view-today .wm-dar-safe .wm-word{
-  display:inline-flex!important;
-  flex:0 0 auto!important;
-  align-items:flex-end!important;
-  gap:.005em!important;
-  overflow:visible!important;
-  transform-origin:50% 85%!important;
-  will-change:transform!important;
-}
-
-#view-today .wm-dar-safe .wm-word>span{
-  display:inline-block!important;
-  min-width:0!important;
-  color:#f6bc45!important;
-  background:none!important;
-  -webkit-background-clip:border-box!important;
-  background-clip:border-box!important;
-  -webkit-text-fill-color:#f6bc45!important;
-  -webkit-text-stroke:1.35px rgba(255,239,184,.42)!important;
-  paint-order:stroke fill!important;
-  text-shadow:
-    0 2px 0 #d88c1c,
-    0 5px 0 rgba(99,54,7,.28),
-    0 9px 15px rgba(0,0,0,.28)!important;
-  filter:none!important;
-  animation:none!important;
-  transform-origin:50% 100%!important;
-}
-
-/* Sanfte feste Bogenform wie im Referenzbild, ohne die Wörter zusammenzudrücken. */
-#view-today .wm-word-dar>span:nth-child(1){transform:translateY(5px) rotate(-1deg)!important}
-#view-today .wm-word-dar>span:nth-child(2){transform:translateY(2px) rotate(-.4deg)!important}
-#view-today .wm-word-dar>span:nth-child(3){transform:translateY(0)!important}
-#view-today .wm-word-al>span:nth-child(1){transform:translateY(-1px)!important}
-#view-today .wm-word-al>span:nth-child(2){transform:translateY(-1px)!important}
-#view-today .wm-word-tawhid>span:nth-child(1){transform:translateY(0)!important}
-#view-today .wm-word-tawhid>span:nth-child(2){transform:translateY(0)!important}
-#view-today .wm-word-tawhid>span:nth-child(3){transform:translateY(1px)!important}
-#view-today .wm-word-tawhid>span:nth-child(4){transform:translateY(2px)!important}
-#view-today .wm-word-tawhid>span:nth-child(5){transform:translateY(3px) rotate(.35deg)!important}
-#view-today .wm-word-tawhid>span:nth-child(6){transform:translateY(5px) rotate(1deg)!important}
-
-/* Kein Serif-Unterstrich mehr: die neue Marke wirkt wie Kids, nur einfarbig. */
-#view-today .wm-dar-safe::after{display:none!important;content:none!important}
-
-/* Sehr leichtes „Humpeln“ der drei Wortgruppen. */
-#view-today .wm-word-dar{animation:darKidsWobble1213 4.8s ease-in-out infinite!important}
-#view-today .wm-word-al{animation:darKidsWobble1213 4.8s ease-in-out .16s infinite!important}
-#view-today .wm-word-tawhid{animation:darKidsWobble1213 4.8s ease-in-out .32s infinite!important}
-@keyframes darKidsWobble1213{
-  0%,100%{translate:0 0;rotate:0deg}
-  38%{translate:0 -2px;rotate:-.28deg}
-  72%{translate:0 1px;rotate:.22deg}
-}
-
-/* Exakt wieder der frühere Kids-Ballon-Sprung: dauerhaft, Buchstaben zeitversetzt. */
-#view-today .wm-kids span{
-  display:inline-block!important;
-  transform-origin:50% 88%!important;
-  will-change:transform!important;
-  animation:kidsBalloon1213 2.6s ease-in-out infinite!important;
-}
-#view-today .wm-kids .k{animation-delay:0s!important}
-#view-today .wm-kids .i{animation-delay:.12s!important}
-#view-today .wm-kids .d{animation-delay:.24s!important}
-#view-today .wm-kids .s{animation-delay:.36s!important}
-@keyframes kidsBalloon1213{
-  0%,100%{transform:translateY(0) scale(1)}
-  50%{transform:translateY(-12px) scale(1.08)}
-}
-
-@media(max-width:390px){
-  #view-today .wm-dar-safe{
-    width:calc(100% - 20px)!important;
-    gap:9px!important;
-    font-size:clamp(34px,9.55vw,38px)!important;
-    letter-spacing:-.03em!important;
-  }
-}
-@media(min-width:700px){
-  #view-today .wm-dar-safe{
-    max-width:650px!important;
-    gap:17px!important;
-    font-size:53px!important;
-  }
-}
-@media(prefers-reduced-motion:reduce){
-  #view-today .wm-word-dar,
-  #view-today .wm-word-al,
-  #view-today .wm-word-tawhid,
-  #view-today .wm-kids span{animation:none!important}
-}
-</style>
 
 </head>
 <body>
@@ -3003,7 +2882,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.08.39</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.08.40</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3394,7 +3273,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v118-global-glow1214";
+const KIDS_BUILD_ID="kids-shell-v119-home-reference1215";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6521,7 +6400,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=6"></script>\n<script src="/kids/dua-smart-learn.js?v=2"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v118-global-glow1214";
+  var KIDS_BUILD_ID="kids-shell-v119-home-reference1215";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -6537,13 +6416,13 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1214",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1215",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
   }
   window.addEventListener("load",function(){
-    fetch("/kids/version.json?v=1213",{cache:"no-store"})
+    fetch("/kids/version.json?v=1215",{cache:"no-store"})
       .then(function(r){return r.ok?r.json():null})
       .then(function(v){
         var live=String(v&&v.buildId||"");
@@ -10536,6 +10415,223 @@ html[data-view="stories"] #view-stories > :last-child{
   #view-today .kids-wordmark{
     top:max(78px,calc(env(safe-area-inset-top,0px) + 35px))!important;
   }
+}
+</style>
+
+
+<style id="kids-home-reference-final-v1215">
+#view-today .hero{
+  overflow:hidden!important;
+  background:#061b26!important;
+}
+#view-today .hero::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  background:
+    linear-gradient(180deg,
+      rgba(2,15,23,0) 0%,
+      rgba(2,15,23,0) 55%,
+      rgba(4,22,31,.10) 70%,
+      rgba(5,25,35,.35) 84%,
+      #061b26 100%),
+    url("/kids/assets/kids-home-v1215/hero-clean-reference.jpg?v=1215") center -5px/102% auto no-repeat!important;
+  filter:none!important;
+  transform:none!important;
+  animation:none!important;
+}
+#view-today .hero::after{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:2!important;
+  pointer-events:none!important;
+  background:linear-gradient(180deg,
+    rgba(2,14,22,0) 0%,
+    rgba(2,14,22,0) 60%,
+    rgba(3,19,28,.10) 72%,
+    rgba(5,25,35,.46) 88%,
+    #061b26 100%)!important;
+  transform:none!important;
+  animation:none!important;
+}
+#view-today .hero-sky-video-v1188,
+#view-today .hero-cinema-video,
+#view-today .hero-artifact-shield,
+#view-today .hero .cloud,
+#view-today .shooting-star,
+#view-today .hero .city,
+#view-today .hero .arch,
+#view-today .hero .dune,
+#view-today .hero .lantern{
+  display:none!important;
+  animation:none!important;
+}
+#view-today .kids-wordmark{
+  z-index:20!important;
+  top:max(44px,calc(env(safe-area-inset-top,0px) + 7px))!important;
+  left:0!important;
+  right:0!important;
+  width:100%!important;
+  max-width:none!important;
+  gap:0!important;
+  pointer-events:none!important;
+}
+#view-today .wm-dar-safe{
+  position:relative!important;
+  display:flex!important;
+  justify-content:center!important;
+  align-items:flex-end!important;
+  width:calc(100% - 18px)!important;
+  max-width:620px!important;
+  margin:0 auto -3px!important;
+  padding:2px 2px 7px!important;
+  gap:clamp(7px,1.9vw,12px)!important;
+  overflow:visible!important;
+  white-space:nowrap!important;
+  font-family:"Fredoka","SF Pro Rounded","Arial Rounded MT Bold",system-ui,sans-serif!important;
+  font-size:clamp(37px,10.8vw,48px)!important;
+  line-height:.98!important;
+  font-weight:700!important;
+  letter-spacing:-.025em!important;
+  color:#f4b43b!important;
+  text-rendering:geometricPrecision!important;
+  -webkit-font-smoothing:antialiased!important;
+  filter:drop-shadow(0 8px 11px rgba(0,0,0,.28))!important;
+}
+#view-today .wm-dar-safe .wm-word{
+  display:inline-flex!important;
+  flex:0 0 auto!important;
+  align-items:flex-end!important;
+  gap:0!important;
+  overflow:visible!important;
+  transform-origin:50% 85%!important;
+  will-change:translate,rotate!important;
+}
+#view-today .wm-dar-safe .wm-word>span{
+  display:inline-block!important;
+  min-width:0!important;
+  background:linear-gradient(180deg,#ffda72 0%,#f9c14b 24%,#f2ae31 64%,#e79a22 100%)!important;
+  background-size:100% 100%!important;
+  background-position:50% 50%!important;
+  -webkit-background-clip:text!important;
+  background-clip:text!important;
+  -webkit-text-fill-color:transparent!important;
+  -webkit-text-stroke:1px rgba(255,226,139,.30)!important;
+  paint-order:stroke fill!important;
+  text-shadow:
+    0 1px 0 rgba(255,231,151,.62),
+    0 3px 0 #d88416,
+    0 5px 0 #ab620c,
+    0 7px 10px rgba(0,0,0,.27)!important;
+  filter:none!important;
+  animation:none!important;
+  transform-origin:50% 100%!important;
+}
+#view-today .wm-word-dar>span:nth-child(1){transform:translateY(7px) rotate(-3deg)!important}
+#view-today .wm-word-dar>span:nth-child(2){transform:translateY(3px) rotate(-1deg)!important}
+#view-today .wm-word-dar>span:nth-child(3){transform:translateY(1px) rotate(1.5deg)!important}
+#view-today .wm-word-al>span:nth-child(1){transform:translateY(-2px) rotate(-1deg)!important}
+#view-today .wm-word-al>span:nth-child(2){transform:translateY(-2px) rotate(1.2deg)!important}
+#view-today .wm-word-tawhid>span:nth-child(1){transform:translateY(-1px) rotate(-1.2deg)!important}
+#view-today .wm-word-tawhid>span:nth-child(2){transform:translateY(0) rotate(.6deg)!important}
+#view-today .wm-word-tawhid>span:nth-child(3){transform:translateY(1px) rotate(-.8deg)!important}
+#view-today .wm-word-tawhid>span:nth-child(4){transform:translateY(2px) rotate(.8deg)!important}
+#view-today .wm-word-tawhid>span:nth-child(5){transform:translateY(4px) rotate(-.4deg)!important}
+#view-today .wm-word-tawhid>span:nth-child(6){transform:translateY(7px) rotate(2.5deg)!important}
+#view-today .wm-dar-safe::after{display:none!important;content:none!important}
+#view-today .wm-word-dar{animation:darBubbleFloat1215 5.8s ease-in-out infinite!important}
+#view-today .wm-word-al{animation:darBubbleFloat1215 5.8s ease-in-out .20s infinite!important}
+#view-today .wm-word-tawhid{animation:darBubbleFloat1215 5.8s ease-in-out .40s infinite!important}
+@keyframes darBubbleFloat1215{
+  0%,100%{translate:0 0;rotate:0deg}
+  46%{translate:0 -2px;rotate:-.20deg}
+  72%{translate:0 1px;rotate:.16deg}
+}
+#view-today .wm-kids{
+  display:flex!important;
+  justify-content:center!important;
+  align-items:flex-end!important;
+  gap:.035em!important;
+  position:relative!important;
+  z-index:21!important;
+  margin-top:-4px!important;
+  line-height:.86!important;
+  font-family:"Fredoka","SF Pro Rounded","Arial Rounded MT Bold",system-ui,sans-serif!important;
+  font-weight:700!important;
+  font-size:clamp(72px,20.6vw,92px)!important;
+}
+#view-today .wm-kids span{
+  display:inline-block!important;
+  transform-origin:50% 88%!important;
+  will-change:transform!important;
+  -webkit-text-stroke:3.5px rgba(255,255,255,.54)!important;
+  paint-order:stroke fill!important;
+  text-shadow:
+    0 2px 0 rgba(255,255,255,.58),
+    0 6px 0 rgba(40,22,8,.15),
+    0 12px 18px rgba(8,24,36,.30)!important;
+  animation:kidsBalloonReference1215 2.6s ease-in-out infinite!important;
+}
+#view-today .wm-kids .k{animation-delay:0s!important}
+#view-today .wm-kids .i{animation-delay:.12s!important}
+#view-today .wm-kids .d{animation-delay:.24s!important}
+#view-today .wm-kids .s{animation-delay:.36s!important}
+@keyframes kidsBalloonReference1215{
+  0%,100%{transform:translate3d(0,0,0) scale(1)}
+  50%{transform:translate3d(0,-12px,0) scale(1.08)}
+}
+#view-today .kids-wordmark::before{
+  content:""!important;
+  position:absolute!important;
+  z-index:-1!important;
+  left:50%!important;
+  top:92px!important;
+  width:min(74vw,365px)!important;
+  height:116px!important;
+  border-radius:50%!important;
+  background:radial-gradient(ellipse,rgba(255,211,104,.15) 0%,rgba(101,208,226,.08) 40%,transparent 73%)!important;
+  filter:blur(14px)!important;
+  opacity:.52!important;
+  transform:translateX(-50%)!important;
+  animation:kidsGlowReference1215 5.8s ease-in-out infinite alternate!important;
+}
+#view-today .kids-wordmark::after{display:none!important}
+@keyframes kidsGlowReference1215{
+  from{transform:translateX(calc(-50% - 9px));opacity:.43}
+  to{transform:translateX(calc(-50% + 9px));opacity:.58}
+}
+@media(max-width:390px){
+  #view-today .kids-wordmark{top:max(42px,calc(env(safe-area-inset-top,0px) + 6px))!important}
+  #view-today .wm-dar-safe{
+    width:calc(100% - 14px)!important;
+    gap:6px!important;
+    font-size:clamp(35px,10.15vw,39.5px)!important;
+    letter-spacing:-.03em!important;
+  }
+  #view-today .wm-kids{font-size:clamp(69px,20vw,82px)!important}
+}
+@media(min-width:700px){
+  #view-today .hero::before{background-size:cover!important;background-position:center 22%!important}
+  #view-today .kids-wordmark{top:max(52px,calc(env(safe-area-inset-top,0px) + 12px))!important}
+  #view-today .wm-dar-safe{max-width:650px!important;gap:13px!important;font-size:54px!important}
+  #view-today .wm-kids{font-size:98px!important}
+}
+@keyframes kidsBalloonReduced1215{
+  0%,100%{transform:translate3d(0,0,0) scale(1)}
+  50%{transform:translate3d(0,-5px,0) scale(1.025)}
+}
+@media(prefers-reduced-motion:reduce){
+  #view-today .wm-word-dar,
+  #view-today .wm-word-al,
+  #view-today .wm-word-tawhid,
+  #view-today .kids-wordmark::before{animation:none!important}
+  #view-today .wm-kids span{animation:kidsBalloonReduced1215 3.2s ease-in-out infinite!important}
+  #view-today .wm-kids .k{animation-delay:0s!important}
+  #view-today .wm-kids .i{animation-delay:.16s!important}
+  #view-today .wm-kids .d{animation-delay:.32s!important}
+  #view-today .wm-kids .s{animation-delay:.48s!important}
 }
 </style>
 
