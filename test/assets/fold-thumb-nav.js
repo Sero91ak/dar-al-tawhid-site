@@ -131,20 +131,20 @@
     nav.classList.remove("is-adaptive-centered");
     nav.classList.add("is-adaptive-rail");
     nav.style.setProperty("position", "fixed", "important");
-    nav.style.setProperty("left", side === "left" ? "max(3px, calc(env(safe-area-inset-left, 0px) - 36px))" : "auto", "important");
-    nav.style.setProperty("right", side === "right" ? "max(3px, calc(env(safe-area-inset-right, 0px) - 36px))" : "auto", "important");
+    nav.style.setProperty("left", side === "left" ? "max(2px, calc(env(safe-area-inset-left, 0px) - 38px))" : "auto", "important");
+    nav.style.setProperty("right", side === "right" ? "max(2px, calc(env(safe-area-inset-right, 0px) - 38px))" : "auto", "important");
     nav.style.setProperty("top", "50%", "important");
     nav.style.setProperty("bottom", "auto", "important");
-    nav.style.setProperty("width", "60px", "important");
-    nav.style.setProperty("min-width", "60px", "important");
-    nav.style.setProperty("max-width", "60px", "important");
+    nav.style.setProperty("width", "56px", "important");
+    nav.style.setProperty("min-width", "56px", "important");
+    nav.style.setProperty("max-width", "56px", "important");
     nav.style.setProperty(
       "height",
-      "min(352px, calc(100dvh - max(12px, env(safe-area-inset-top, 0px)) - max(12px, env(safe-area-inset-bottom, 0px))))",
+      "min(340px, calc(100dvh - max(10px, env(safe-area-inset-top, 0px)) - max(10px, env(safe-area-inset-bottom, 0px))))",
       "important"
     );
-    nav.style.setProperty("min-height", "268px", "important");
-    nav.style.setProperty("max-height", "352px", "important");
+    nav.style.setProperty("min-height", "260px", "important");
+    nav.style.setProperty("max-height", "340px", "important");
     nav.style.setProperty("margin", "0", "important");
     nav.style.setProperty("padding", "4px", "important");
     nav.style.setProperty("flex-direction", "column", "important");
