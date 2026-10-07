@@ -171,8 +171,8 @@ jobs:
               except Exception:
                   return {"entries":{}}
 
-          def local_from_entry(entry,asset_dir,expected_model=None,expected_profile=None):
-              if str((entry or {}).get("synthesisRevision") or "")!=SYNTHESIS_REVISION:
+          def local_from_entry(entry,asset_dir,expected_model=None,expected_profile=None,expected_revision=None):
+              if expected_revision and str((entry or {}).get("synthesisRevision") or "")!=str(expected_revision):
                   return None
               if expected_model and str((entry or {}).get("modelId") or "")!=str(expected_model):
                   return None
@@ -406,7 +406,8 @@ jobs:
                       entry,
                       asset_dir,
                       model_id if require_model_match else None,
-                      text_profile
+                      text_profile,
+                      profile_revision(text_profile)
                   )
                   if text_profile in ARABIC_PROFILES:
                       if str(entry.get("arabicSynthesisRevision") or "")!=ARABIC_SYNTHESIS_REVISION:
