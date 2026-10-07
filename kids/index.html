@@ -4981,7 +4981,7 @@ function duaDailyIndex(list){
   return seed%list.length;
 }
 function fetchKidsDuas(){
-  return fetch("/kids/data/dua-kids.json?v=1212",{cache:"force-cache"})
+  return fetch("/kids/data/dua-kids.json?v=1244",{cache:"no-store"})
     .then(function(r){if(!r.ok)throw new Error("dua-data");return r.json()})
     .then(function(data){
       kidsDuas=Array.isArray(data.items)?data.items.filter(function(x){return x.verification==="verified"}):[];
@@ -6516,7 +6516,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"cc4ac04648774872a036edb959747bd5","r":1,"spa":2}' crossorigin="anonymous"></script>
 <script src="/kids/content-studio-feed.js?v=studio7"></script>
-<script src="/kids/owner-voice.js?v=8"></script>\n<script src="/kids/dua-smart-learn.js?v=1243"></script>
+<script src="/kids/owner-voice.js?v=8"></script>\n<script src="/kids/dua-smart-learn.js?v=1244"></script>
 <script>
 (function(){
   var KIDS_BUILD_ID="kids-shell-v142-home-profile-left1239";
@@ -7527,7 +7527,7 @@ html[data-view="stories"] #view-stories > :last-child{
 <script src="/kids/mubashshirun-stories.js?v=31"></script>
 <script src="/kids/sahabiyyat-stories.js?v=23"></script>\n<script src="/kids/deen-lessons.js?v=4"></script>
 <script src="/kids/global-story-glow-v1216.js?v=1239"></script>
-<script src="/kids/dua-hub-v1219.js?v=1241" data-kids-dua-hub="1241"></script>
+<script src="/kids/dua-hub-v1219.js?v=1244" data-kids-dua-hub="1244"></script>
 <script src="/kids/story-hub.js?v=25"></script>
 <script src="/kids/kids-age-typography.js?v=3"></script>
 <script src="/kids/quiz-library.js?v=9"></script>
