@@ -116,7 +116,7 @@
     var out=[];
     var fixed=[
       "knowledgeModal","duaModal","duaHubDetail","quizModal","quranModal","fullQuranModal","storyModal",
-      "psLibraryPage","psModal","msLibraryPage","msModal","syLibraryPage","syModal",
+      "psLibraryPage","psModal","msLibraryPage","msModal","syLibraryPage","syModal","dlLibraryPage","dlModal",
       "ghWorld","ghPlayer"
     ];
     fixed.forEach(function(id){
@@ -136,7 +136,7 @@
       ".shell",
       "#psLibraryScroll","#psScroll",
       "#msLibraryScroll","#msScroll",
-      "#syLibraryScroll","#syScroll",
+      "#syLibraryScroll","#syScroll","#dlLibraryScroll","#dlScroll",
       "#ghWorldScroll","#ghPlayerScroll",
       "#knowledgeModal .modal-shell","#duaModal .modal-shell","#duaHubDetailScroll","#quizModal .modal-shell",
       "#quranModal .modal-shell","#fullQuranModal .modal-shell","#storyModal .modal-shell",
@@ -375,10 +375,10 @@
   function visibleBackButton(){
     var selectors=[
       ".kids-follow-reader.open .kfr-close",
-      "#psModal.open #psClose","#msModal.open #msClose","#syModal.open #syClose",
+      "#psModal.open #psClose","#msModal.open #msClose","#syModal.open #syClose","#dlModal.open #dlClose",
       "#ghPlayer.open #ghPlayerBack",
       ".modal.open [data-close]","#duaHubDetail.open #duaHubBack",
-      "#psLibraryPage.open #psLibraryBack","#msLibraryPage.open #msBack","#syLibraryPage.open #syBack",
+      "#psLibraryPage.open #psLibraryBack","#msLibraryPage.open #msBack","#syLibraryPage.open #syBack","#dlLibraryPage.open #dlBack",
       "#ghWorld.open #ghBack"
     ];
     for(var i=0;i<selectors.length;i++){
@@ -402,45 +402,166 @@
     return false;
   }
 
+  /* KIDS_INTERACTIVE_EDGE_SWIPE_V1246
+     Smooth Kids back navigation:
+     right edge -> swipe left = back
+     left edge -> swipe right = back
+     the active surface follows the finger and springs back on cancel.
+  */
+  function installInteractiveSwipeStyles(){
+    if(document.getElementById("kids-interactive-edge-swipe-v1246"))return;
+    var style=document.createElement("style");
+    style.id="kids-interactive-edge-swipe-v1246";
+    style.textContent=[
+      "html.kids-nav-dragging,html.kids-nav-dragging body{overscroll-behavior-x:none!important;}",
+      "html.kids-nav-dragging body{user-select:none!important;-webkit-user-select:none!important;}",
+      ".kids-nav-swipe-surface{will-change:transform,opacity,box-shadow!important;backface-visibility:hidden!important;-webkit-backface-visibility:hidden!important;}",
+      "@keyframes kidsNavSurfaceInV1246{from{opacity:.74;transform:translate3d(20px,0,0)}to{opacity:1;transform:translate3d(0,0,0)}}",
+      "#psLibraryPage.open,#msLibraryPage.open,#syLibraryPage.open,#dlLibraryPage.open,#ghWorld.open{animation:kidsNavSurfaceInV1246 .34s cubic-bezier(.22,1,.36,1) both;}",
+      "@media(prefers-reduced-motion:reduce){#psLibraryPage.open,#msLibraryPage.open,#syLibraryPage.open,#dlLibraryPage.open,#ghWorld.open{animation:none!important}}"
+    ].join("\n");
+    (document.head||root).appendChild(style);
+  }
+
   function ignoreGestureTarget(target){
     return !!(target&&target.closest&&target.closest(
-      "input,textarea,select,[contenteditable='true'],[role='slider'],.gh-progress,.kfr-progress,.ayah-stage,.quiz-stage"
+      "input,textarea,select,[contenteditable='true'],[role='slider'],.gh-progress,.kfr-progress,.ayah-stage,.quiz-stage,"+
+      "[data-kids-horizontal-scroll],.dua-word-strip,.quran-strip,.alphabet-strip"
     ));
   }
 
+  function currentSwipeSurface(){
+    var selectors=[
+      ".kids-follow-reader.open",
+      "#psModal.open","#msModal.open","#syModal.open","#dlModal.open",
+      "#ghPlayer.open","#duaHubDetail.open",
+      "#knowledgeModal.open","#duaModal.open","#quizModal.open","#quranModal.open","#fullQuranModal.open","#storyModal.open",
+      "#psLibraryPage.open","#msLibraryPage.open","#syLibraryPage.open","#dlLibraryPage.open","#ghWorld.open"
+    ];
+    for(var i=0;i<selectors.length;i++){
+      var el=q(selectors[i]);
+      if(el)return el;
+    }
+    return index>0?q(".view.active"):null;
+  }
+
+  function rememberSwipeInline(el){
+    var state={};
+    ["transform","opacity","transition","will-change","box-shadow"].forEach(function(prop){
+      state[prop]={value:el.style.getPropertyValue(prop),priority:el.style.getPropertyPriority(prop)};
+    });
+    return state;
+  }
+
+  function restoreSwipeInline(el,state){
+    if(!el||!state)return;
+    Object.keys(state).forEach(function(prop){
+      var prev=state[prop];
+      if(prev&&prev.value)el.style.setProperty(prop,prev.value,prev.priority||"");
+      else el.style.removeProperty(prop);
+    });
+    el.classList.remove("kids-nav-swipe-surface");
+  }
+
+  function inwardDistance(g,x){return g.side==="left"?x-g.x:g.x-x}
+
+  function applySwipePosition(g,raw){
+    if(!g||!g.surface)return;
+    var width=Math.max(1,Number(innerWidth)||390);
+    var dist=Math.max(0,Math.min(width*1.04,raw));
+    var sign=g.side==="left"?1:-1;
+    var p=Math.max(0,Math.min(1,dist/width));
+    var moved=dist*(.96-p*.035);
+    g.distance=dist;
+    g.surface.style.setProperty("transition","none","important");
+    g.surface.style.setProperty("will-change","transform,opacity,box-shadow","important");
+    g.surface.style.setProperty("transform","translate3d("+(sign*moved).toFixed(2)+"px,0,0)","important");
+    g.surface.style.setProperty("opacity",String(1-p*.075),"important");
+    g.surface.style.setProperty("box-shadow",(sign>0?"-18px 0 38px":"18px 0 38px")+" rgba(0,0,0,"+(0.10+p*.13).toFixed(3)+")","important");
+  }
+
+  function finishSwipeAnimation(g,commit){
+    if(!g||!g.surface)return;
+    var el=g.surface,reduced=false;
+    try{reduced=matchMedia("(prefers-reduced-motion: reduce)").matches}catch(_){}
+    if(commit){
+      var sign=g.side==="left"?1:-1;
+      var duration=reduced?120:245;
+      el.style.setProperty("transition","transform "+duration+"ms cubic-bezier(.22,1,.36,1), opacity "+Math.max(100,duration-25)+"ms ease, box-shadow "+duration+"ms ease","important");
+      el.style.setProperty("transform","translate3d("+(sign*104)+"vw,0,0)","important");
+      el.style.setProperty("opacity",".91","important");
+      setTimeout(function(){
+        try{back()}finally{
+          requestAnimationFrame(function(){
+            restoreSwipeInline(el,g.inline);
+            root.classList.remove("kids-nav-dragging");
+          });
+        }
+      },Math.max(95,duration-28));
+      return;
+    }
+    var duration=reduced?130:285;
+    el.style.setProperty("transition","transform "+duration+"ms cubic-bezier(.22,1,.36,1), opacity "+Math.max(100,duration-45)+"ms ease, box-shadow "+duration+"ms ease","important");
+    el.style.setProperty("transform",g.inline.transform.value||"translate3d(0,0,0)",g.inline.transform.priority||"important");
+    el.style.setProperty("opacity",g.inline.opacity.value||"1",g.inline.opacity.priority||"important");
+    el.style.setProperty("box-shadow",g.inline["box-shadow"].value||"none",g.inline["box-shadow"].priority||"important");
+    setTimeout(function(){
+      restoreSwipeInline(el,g.inline);
+      root.classList.remove("kids-nav-dragging");
+    },duration+28);
+  }
+
   function pointerDown(e){
-    if(e.isPrimary===false)return;
-    if(e.pointerType==="mouse")return;
-    if(ignoreGestureTarget(e.target))return;
-    var edge=Math.max(26,Math.min(42,innerWidth*.095));
-    var side=e.clientX<=edge?"back":(e.clientX>=innerWidth-edge?"forward":"");
+    if(e.isPrimary===false||e.pointerType==="mouse"||ignoreGestureTarget(e.target))return;
+    if(!visibleBackButton()&&index<=0)return;
+    var width=Math.max(320,Number(innerWidth)||390);
+    var edge=Math.max(36,Math.min(62,width*.12));
+    var side=e.clientX<=edge?"left":(e.clientX>=width-edge?"right":"");
     if(!side)return;
-    gesture={id:e.pointerId,side:side,x:e.clientX,y:e.clientY,t:performance.now(),lastX:e.clientX,lastY:e.clientY};
+    var surface=currentSwipeSurface();
+    if(!surface)return;
+    gesture={id:e.pointerId,side:side,x:e.clientX,y:e.clientY,t:performance.now(),lastX:e.clientX,lastY:e.clientY,claimed:false,surface:surface,inline:rememberSwipeInline(surface),distance:0};
   }
 
   function pointerMove(e){
     if(!gesture||e.pointerId!==gesture.id)return;
-    gesture.lastX=e.clientX;gesture.lastY=e.clientY;
+    var g=gesture,dist=inwardDistance(g,e.clientX),dy=Math.abs(e.clientY-g.y);
+    g.lastX=e.clientX;g.lastY=e.clientY;
+    if(!g.claimed){
+      if(dist>10&&dist>dy*1.18){
+        g.claimed=true;
+        g.surface.classList.add("kids-nav-swipe-surface");
+        root.classList.add("kids-nav-dragging");
+      }else if(dy>13&&dy>Math.max(12,Math.abs(dist))*1.18){
+        gesture=null;
+        return;
+      }else return;
+    }
+    if(e.cancelable)e.preventDefault();
+    if(typeof e.stopImmediatePropagation==="function")e.stopImmediatePropagation();
+    applySwipePosition(g,Math.max(0,dist));
   }
 
   function pointerCancel(e){
-    if(gesture&&(!e||e.pointerId===gesture.id))gesture=null;
+    if(!gesture||(e&&e.pointerId!==gesture.id))return;
+    var g=gesture;gesture=null;
+    if(g.claimed)finishSwipeAnimation(g,false);
   }
 
   function pointerUp(e){
     if(!gesture||e.pointerId!==gesture.id)return;
     var g=gesture;gesture=null;
-    var x=Number(e.clientX);if(!Number.isFinite(x))x=g.lastX;
-    var y=Number(e.clientY);if(!Number.isFinite(y))y=g.lastY;
-    var dx=x-g.x,dy=y-g.y,dt=Math.max(1,performance.now()-g.t);
-    var min=Math.max(68,Math.min(96,innerWidth*.22));
-    var horizontal=Math.abs(dx)>Math.abs(dy)*1.25;
-    var fast=Math.abs(dx)/dt>.16||Math.abs(dx)>125;
-    var valid=g.side==="back"?dx>min:dx<-min;
-    if(!valid||!horizontal||!fast)return;
+    if(!g.claimed)return;
     if(e.cancelable)e.preventDefault();
     if(typeof e.stopImmediatePropagation==="function")e.stopImmediatePropagation();
-    if(g.side==="back")back();else forward();
+    var x=Number(e.clientX);if(!Number.isFinite(x))x=g.lastX;
+    var y=Number(e.clientY);if(!Number.isFinite(y))y=g.lastY;
+    var dist=Math.max(0,inwardDistance(g,x));
+    var dy=Math.abs(y-g.y),dt=Math.max(1,performance.now()-g.t),velocity=dist/dt;
+    var width=Math.max(320,Number(innerWidth)||390);
+    var threshold=Math.max(78,Math.min(126,width*.255));
+    var commit=dist>dy*1.18&&(dist>=threshold||(velocity>.48&&dist>34));
+    finishSwipeAnimation(g,commit);
   }
 
   function lockHomeGeometry(force){
@@ -496,6 +617,7 @@
     /* Capture the approved first-entry geometry BEFORE the late lock is injected. */
     lockHomeGeometry(true);
     installLateLayout();
+    installInteractiveSwipeStyles();
     if(shell){
       try{shell.scrollTo({top:0,left:0,behavior:"auto"})}catch(_){shell.scrollTop=0}
     }
@@ -532,7 +654,8 @@
     forward:forward,
     resetMainTop:resetMainTop,
     captureScrolls:captureScrolls,
-    signature:signature
+    signature:signature,
+    gestureVersion:"interactive-edge-swipe-v1246"
   };
 
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});
