@@ -402,16 +402,18 @@ jobs:
                   text_profile=(profiles_by_text or {}).get(text,profile)
                   prepared=prepare_profile_text(text,text_profile)
                   prepared_hash=hashlib.sha256(prepared.encode("utf-8")).hexdigest()
+                  # Arabic revisions may reuse an older native-Fuṣḥā clip when the
+                  # actual prepared spoken text, model and profile are identical.
+                  # This prevents a metadata-only revision bump from spending credits.
+                  expected_revision=(None if text_profile in ARABIC_PROFILES else profile_revision(text_profile))
                   p=local_from_entry(
                       entry,
                       asset_dir,
                       model_id if require_model_match else None,
                       text_profile,
-                      profile_revision(text_profile)
+                      expected_revision
                   )
                   if text_profile in ARABIC_PROFILES:
-                      if str(entry.get("arabicSynthesisRevision") or "")!=ARABIC_SYNTHESIS_REVISION:
-                          p=None
                       if str(entry.get("preparedTextSha256") or "")!=prepared_hash:
                           p=None
                       if entry.get("pronunciationDictionaryApplied") is not False:
