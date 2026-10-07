@@ -325,45 +325,45 @@ async function finalizeDarTestHomeV1193(asset) {
   // DAR_ADAPTIVE_FOLD_V1326
   // Force every pre-existing adaptive/fold reference to the same v1326 bytes.
   // This prevents an older service-worker-cached controller from running first.
-  html = html.replace(/adaptive-layout\.css(?:\?v=[^"']*)?/g, "adaptive-layout.css?v=1327-capacity-fold");
-  html = html.replace(/adaptive-layout\.js(?:\?v=[^"']*)?/g, "adaptive-layout.js?v=1327-capacity-fold");
-  html = html.replace(/fold-split\.css(?:\?v=[^"']*)?/g, "fold-split.css?v=1327-capacity-fold");
-  html = html.replace(/fold-split\.js(?:\?v=[^"']*)?/g, "fold-split.js?v=1327-capacity-fold");
+  html = html.replace(/adaptive-layout\.css(?:\?v=[^"']*)?/g, "adaptive-layout.css?v=1328-capacity-fold");
+  html = html.replace(/adaptive-layout\.js(?:\?v=[^"']*)?/g, "adaptive-layout.js?v=1328-capacity-fold");
+  html = html.replace(/fold-split\.css(?:\?v=[^"']*)?/g, "fold-split.css?v=1328-capacity-fold");
+  html = html.replace(/fold-split\.js(?:\?v=[^"']*)?/g, "fold-split.js?v=1328-capacity-fold");
   // Final test authority: real capacity-based Fold/iPad shell. These imports are
   // layout-only and load after legacy route styles so fixed 1400px rules cannot win.
   if (!html.includes('id="darAdaptiveFoldAuthorityV1326"')) {
     const adaptiveFoldStyle =
       '<style id="darAdaptiveFoldAuthorityV1326">' +
-      '@import url("/assets/adaptive-layout.css?v=1327-capacity-fold");' +
-      '@import url("/assets/fold-split.css?v=1327-capacity-fold");' +
-      '@import url("/test/assets/fold-thumb-nav.css?v=1327-capacity-fold");' +
+      '@import url("/assets/adaptive-layout.css?v=1328-capacity-fold");' +
+      '@import url("/assets/fold-split.css?v=1328-capacity-fold");' +
+      '@import url("/test/assets/fold-thumb-nav.css?v=1328-capacity-fold");' +
       '</style>';
     if (html.includes("</html>")) html = html.replace("</html>", adaptiveFoldStyle + "</html>");
     else html += adaptiveFoldStyle;
   }
   if (!html.includes('id="darAdaptiveFoldScriptsV1326"')) {
     const adaptiveFoldScripts =
-      '<script id="darAdaptiveFoldScriptsV1326" src="/assets/adaptive-layout.js?v=1327-capacity-fold"><\/script>' +
-      '<script src="/assets/fold-split.js?v=1327-capacity-fold"><\/script>';
+      '<script id="darAdaptiveFoldScriptsV1326" src="/assets/adaptive-layout.js?v=1328-capacity-fold"><\/script>' +
+      '<script src="/assets/fold-split.js?v=1328-capacity-fold"><\/script>';
     if (html.includes("</body>")) html = html.replace("</body>", adaptiveFoldScripts + "</body>");
     else if (html.includes("</html>")) html = html.replace("</html>", adaptiveFoldScripts + "</html>");
     else html += adaptiveFoldScripts;
   }
 
   // DAR_ADAPTIVE_NAV_V1325
-  html = html.replace(/fold-thumb-nav\.css(?:\?v=[^"']*)?/g, "fold-thumb-nav.css?v=1327-capacity-fold");
-  html = html.replace(/fold-thumb-nav\.js(?:\?v=[^"']*)?/g, "fold-thumb-nav.js?v=1327-capacity-fold");
+  html = html.replace(/fold-thumb-nav\.css(?:\?v=[^"']*)?/g, "fold-thumb-nav.css?v=1328-capacity-fold");
+  html = html.replace(/fold-thumb-nav\.js(?:\?v=[^"']*)?/g, "fold-thumb-nav.js?v=1328-capacity-fold");
   // Test-only foundation for user-selectable bottom/left/right navigation.
   // Loaded as a final authority so legacy bottom-nav CSS cannot override side placement.
-  if (!html.includes("fold-thumb-nav.css?v=1327-capacity-fold")) {
+  if (!html.includes("fold-thumb-nav.css?v=1328-capacity-fold")) {
     const adaptiveNavStyle =
-      '<style id="darAdaptiveNavStyleV1325">@import url("/test/assets/fold-thumb-nav.css?v=1327-capacity-fold");</style>';
+      '<style id="darAdaptiveNavStyleV1325">@import url("/test/assets/fold-thumb-nav.css?v=1328-capacity-fold");</style>';
     if (html.includes("</html>")) html = html.replace("</html>", adaptiveNavStyle + "</html>");
     else html += adaptiveNavStyle;
   }
-  if (!html.includes("fold-thumb-nav.js?v=1327-capacity-fold")) {
+  if (!html.includes("fold-thumb-nav.js?v=1328-capacity-fold")) {
     const adaptiveNavScript =
-      '<script id="darAdaptiveNavScriptV1325" src="/test/assets/fold-thumb-nav.js?v=1327-capacity-fold"><\/script>';
+      '<script id="darAdaptiveNavScriptV1325" src="/test/assets/fold-thumb-nav.js?v=1328-capacity-fold"><\/script>';
     if (html.includes("</body>")) html = html.replace("</body>", adaptiveNavScript + "</body>");
     else if (html.includes("</html>")) html = html.replace("</html>", adaptiveNavScript + "</html>");
     else html += adaptiveNavScript;
