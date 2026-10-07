@@ -216,7 +216,7 @@ async function uploadElevenLabsPronunciationMaster(env) {
     throw httpError("Pronunciation-Master ist keine gültige PLS-Lexikondatei.", 500);
   }
   const lexemeCount = (pls.match(/<lexeme\b/g) || []).length;
-  if (lexemeCount !== 10111) {
+  if (lexemeCount !== 10099) {
     throw httpError("Pronunciation-Master hat unerwartete Regelzahl: " + lexemeCount, 500);
   }
 
@@ -229,7 +229,7 @@ async function uploadElevenLabsPronunciationMaster(env) {
   form.append("name", "DAR AL TAWHID Arabic Master 2.9.122");
   form.append(
     "description",
-    "DAR AL TAWHID Arabic-heavy pronunciation master 2.9.122; 10111 unique alias rules; existing curated rules preserved."
+    "DAR AL TAWHID Arabic-heavy pronunciation master 2.9.122; 10099 unique alias rules; existing curated rules preserved."
   );
 
   const res = await fetch("https://api.elevenlabs.io/v1/pronunciation-dictionaries/add-from-file", {
