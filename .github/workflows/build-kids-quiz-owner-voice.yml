@@ -84,6 +84,7 @@ jobs:
           import time
           import urllib.request
           import urllib.error
+          import unicodedata
 
           ROOT=pathlib.Path(".")
           sys.path.insert(0,str(ROOT/"kids/tools"))
@@ -108,6 +109,8 @@ jobs:
           ELEVEN_VOICE=(os.environ.get("ELEVENLABS_VOICE_ID","").strip() or str((PROD_CFG.get("masterVoice") or {}).get("voiceId") or "").strip())
           ELEVEN_MODEL=str(PROD_CFG.get("modelId") or "").strip()
           ELEVEN_DUA_MODEL=ELEVEN_MODEL
+          ARABIC_PROFILES={"dua_arabic","dua_arabic_slow","dua_word"}
+          ARABIC_SYNTHESIS_REVISION="dua-arabic-native-fusha-v2-20261007"
           DICT_CFG=PROD_CFG.get("pronunciationDictionary") or {}
           DICT_ID=str(DICT_CFG.get("id") or "").strip()
           DICT_VERSION=str(DICT_CFG.get("versionId") or "").strip()
@@ -128,6 +131,15 @@ jobs:
 
           def norm(v):
               return " ".join(str(v or "").split()).strip()
+
+          def prepare_profile_text(text,profile):
+              value=norm(text)
+              if profile in ARABIC_PROFILES:
+                  return unicodedata.normalize("NFC",value)
+              return prepare_kids_voice_text(value)
+
+          def profile_revision(profile):
+              return ARABIC_SYNTHESIS_REVISION if profile in ARABIC_PROFILES else SYNTHESIS_REVISION
 
           def quiz_prompt(q):
               question=norm(q.get("question"))
@@ -171,9 +183,11 @@ jobs:
           lock=threading.Lock()
 
           def synth(text,profile,asset_dir,serial,model_id):
-              prepared=norm(text) if profile in ("dua_arabic","dua_arabic_slow","dua_word") else prepare_kids_voice_text(text)
+              prepared=prepare_profile_text(text,profile)
+              revision=profile_revision(profile)
+              dictionary_fingerprint=("native-ar-no-dict" if profile in ARABIC_PROFILES else (DICT_ID+"|"+DICT_VERSION))
               digest=hashlib.sha1(
-                  (SYNTHESIS_REVISION+"|"+str(model_id)+"|"+profile+"|"+DICT_ID+"|"+DICT_VERSION+"|"+text).encode("utf-8")
+                  (revision+"|"+str(model_id)+"|"+profile+"|"+dictionary_fingerprint+"|"+prepared).encode("utf-8")
               ).hexdigest()[:16]
               target=asset_dir/(digest+".m4a")
               last=None
@@ -268,7 +282,7 @@ jobs:
                       }
                       if is_arabic_profile:
                           payload["language_code"]="ar"
-                      if DICT_ID and DICT_VERSION:
+                      if DICT_ID and DICT_VERSION and not is_arabic_profile:
                           payload["pronunciation_dictionary_locators"]=[{
                               "pronunciation_dictionary_id":DICT_ID,
                               "version_id":DICT_VERSION
@@ -381,17 +395,25 @@ jobs:
               for text in unique:
                   entry=old_entries.get(text) or {}
                   text_profile=(profiles_by_text or {}).get(text,profile)
+                  prepared=prepare_profile_text(text,text_profile)
+                  prepared_hash=hashlib.sha256(prepared.encode("utf-8")).hexdigest()
                   p=local_from_entry(
                       entry,
                       asset_dir,
                       model_id if require_model_match else None,
                       text_profile
                   )
+                  if text_profile in ARABIC_PROFILES:
+                      if str(entry.get("arabicSynthesisRevision") or "")!=ARABIC_SYNTHESIS_REVISION:
+                          p=None
+                      if str(entry.get("preparedTextSha256") or "")!=prepared_hash:
+                          p=None
+                      if entry.get("pronunciationDictionaryApplied") is not False:
+                          p=None
                   if p is None:
                       continue
                   results[text]=(p,float(entry.get("durationSeconds") or duration(p)))
-                  prepared=norm(text) if profile in ("dua_arabic","dua_arabic_slow","dua_word") else prepare_kids_voice_text(text)
-                  prepared_hashes[text]=hashlib.sha256(prepared.encode("utf-8")).hexdigest()
+                  prepared_hashes[text]=prepared_hash
 
               missing=[text for text in unique if text not in results]
               print(f"{pack_id}: {len(unique)} Texte · {len(results)} aktuell · {len(missing)} neu")
@@ -421,22 +443,27 @@ jobs:
                   p,d=results[text]
                   referenced.add(p.name)
                   rel="/"+str(p).replace(os.sep,"/")
+                  text_profile=(profiles_by_text or {}).get(text,profile)
+                  is_arabic=text_profile in ARABIC_PROFILES
                   entries[text]={
                       "url":rel+"?v="+build_id,
                       "sha256":hashlib.sha256(p.read_bytes()).hexdigest(),
                       "durationSeconds":round(float(d),3),
                       "preparedTextSha256":prepared_hashes[text],
-                      "synthesisRevision":SYNTHESIS_REVISION,
+                      "synthesisRevision":profile_revision(text_profile),
+                      "arabicSynthesisRevision":(ARABIC_SYNTHESIS_REVISION if is_arabic else None),
+                      "arabicTextNormalization":("NFC" if is_arabic else None),
                       "modelId":model_id,
-                      "speechProfile":(profiles_by_text or {}).get(text,profile),
+                      "speechProfile":text_profile,
                       "voiceProfileId":"serhat-owner-voice-2026",
                       "sourceVoice":"authorized-owner-voice",
                       "sourceType":"owner-voice-generated",
                       "sourceProvider":"DĀR Voice Studio",
                       "sourceSpeaker":"Serhat Abu Malik",
-                      "pronunciationDictionaryId":DICT_ID,
-                      "pronunciationDictionaryVersionId":DICT_VERSION,
-                      "pronunciationDictionaryRuleCount":DICT_RULES,
+                      "pronunciationDictionaryApplied":(not is_arabic),
+                      "pronunciationDictionaryId":(None if is_arabic else DICT_ID),
+                      "pronunciationDictionaryVersionId":(None if is_arabic else DICT_VERSION),
+                      "pronunciationDictionaryRuleCount":(0 if is_arabic else DICT_RULES),
                       "qaBy":"automatic-owner-voice-batch-qa",
                       "qaAt":now
                   }
@@ -445,22 +472,25 @@ jobs:
                   if stale.name not in referenced:
                       stale.unlink(missing_ok=True)
 
+              manifest_is_arabic=profile in ARABIC_PROFILES
               manifest={
                   "schemaVersion":2,
                   "id":pack_id,
                   "buildId":build_id,
                   "updatedAt":now,
-                  "synthesisRevision":SYNTHESIS_REVISION,
+                  "synthesisRevision":(ARABIC_SYNTHESIS_REVISION if manifest_is_arabic else SYNTHESIS_REVISION),
+                  "arabicSynthesisRevision":(ARABIC_SYNTHESIS_REVISION if manifest_is_arabic else None),
                   "voiceProfileId":"serhat-owner-voice-2026",
                   "speaker":"Serhat Abu Malik",
-                  "speechPreparation":"explicit-german-numbers-and-quran-references",
+                  "speechPreparation":("native-vocalized-arabic-nfc-no-dictionary" if manifest_is_arabic else "explicit-german-numbers-and-quran-references"),
                   "manualPerClipApprovalRequired":False,
                   "technicalQaRequired":True,
                   "systemTtsFallbackAllowed":False,
                   "modelId":model_id,
-                  "pronunciationDictionaryId":DICT_ID,
-                  "pronunciationDictionaryVersionId":DICT_VERSION,
-                  "pronunciationDictionaryRuleCount":DICT_RULES,
+                  "pronunciationDictionaryApplied":(not manifest_is_arabic),
+                  "pronunciationDictionaryId":(None if manifest_is_arabic else DICT_ID),
+                  "pronunciationDictionaryVersionId":(None if manifest_is_arabic else DICT_VERSION),
+                  "pronunciationDictionaryRuleCount":(0 if manifest_is_arabic else DICT_RULES),
                   "entries":entries,
                   "counts":{**counts,"uniqueSpokenTexts":len(entries)}
               }
