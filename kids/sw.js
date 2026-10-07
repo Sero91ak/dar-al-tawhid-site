@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1239";
-const KIDS_BUILD_ID="kids-shell-v142-home-profile-left1239";
+const CACHE_NAME="dar-al-tawhid-kids-v1245";
+const KIDS_BUILD_ID="kids-shell-v143-subpage-nav1245";
 const DUA_AUDIO_RUNTIME="1244";
 // QUIZ_HOME_RESTORE_V1225: refresh installed PWAs with the restored Quiz entry.
 const CORE_PRECACHE=[
