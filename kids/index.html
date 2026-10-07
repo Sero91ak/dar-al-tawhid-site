@@ -2714,6 +2714,37 @@ html:not([data-view="today"]) .view.active{
 <link rel="stylesheet" href="/kids/story-hub.css?v=12">
 <link rel="stylesheet" href="/kids/section-heroes-v1095.css?v=1123-dua-quiz-art">
 <link rel="stylesheet" href="/kids/stories-home-v1133.css?v=1152">
+<style id="kids-dua-learning-v1207">
+#duaModal .dua-stage{padding-top:8px!important;padding-bottom:calc(22px + env(safe-area-inset-bottom,0px))!important}
+#duaModal .dua-scene{min-height:178px!important;border-radius:28px!important}
+#duaModal .dua-scene::after{background:linear-gradient(180deg,rgba(4,16,26,.02),rgba(4,16,26,.13) 52%,rgba(4,16,26,.38))!important}
+#duaModal .dua-verified{margin-top:12px!important}
+#duaModal .dua-title{margin-top:12px!important;margin-bottom:4px!important;line-height:1.08!important}
+#duaModal .dua-prompt{max-width:610px!important;margin-bottom:11px!important;font-size:14px!important;line-height:1.48!important}
+#duaModal .dua-ar{margin:2px auto 3px!important;line-height:1.62!important;text-wrap:balance}
+#duaModal .dua-tr{font-size:15px!important;line-height:1.45!important;margin:2px auto 12px!important;color:#f3d893!important}
+#duaModal .dua-meaning{padding:15px 16px!important;border-radius:22px!important;font-size:15px!important;line-height:1.5!important;background:linear-gradient(145deg,rgba(53,128,143,.16),rgba(255,255,255,.04))!important;border-color:rgba(126,210,219,.16)!important}
+#duaModal .dua-learn-kicker{text-align:center;margin:15px 0 8px;color:#f0cf7c;font-size:10px;font-weight:950;letter-spacing:.115em}
+#duaModal .dua-practice-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+#duaModal .dua-practice-actions button{min-height:56px;border-radius:17px;border:1px solid rgba(255,255,255,.10);padding:9px 8px;font-size:12px;font-weight:950;line-height:1.15;cursor:pointer;box-shadow:inset 0 1px rgba(255,255,255,.035)}
+#duaModal .dua-arabic-listen{background:linear-gradient(135deg,#f0c65f,#e0ad43);color:#0e2b3a!important;border-color:rgba(255,223,145,.42)!important}
+#duaModal .dua-arabic-slow{background:rgba(94,195,190,.13);color:#d6fff6!important;border-color:rgba(94,195,190,.24)!important}
+#duaModal .dua-repeat{background:rgba(255,255,255,.065);color:#fff!important}
+#duaModal .dua-actions{grid-template-columns:1fr 1fr!important;gap:8px!important;margin:9px 0 0!important}
+#duaModal .dua-actions button{min-height:54px!important;border-radius:17px!important}
+#duaModal .dua-listen{background:rgba(238,198,101,.13)!important;color:#ffe2a0!important;border:1px solid rgba(238,198,101,.24)!important}
+#duaModal .dua-next-item{background:rgba(255,255,255,.055)!important}
+#duaModal .dua-question{margin-top:16px!important;padding-top:15px!important}
+#duaModal .dua-source{margin-top:14px!important;padding-bottom:4px!important}
+.app[data-age="4–5"] #duaModal .dua-prompt{font-size:16px!important}
+.app[data-age="4–5"] #duaModal .dua-meaning{font-size:17px!important}
+.app[data-age="4–5"] #duaModal .dua-practice-actions button{font-size:13px!important;min-height:60px!important}
+@media(max-width:390px){
+  #duaModal .dua-practice-actions{gap:6px}
+  #duaModal .dua-practice-actions button{font-size:11px;padding:8px 5px}
+  #duaModal .dua-scene{min-height:164px!important}
+}
+</style>
 </head>
 <body>
 <div class="kids-open" id="kidsLaunch" data-kids-launch="v95">
@@ -4865,7 +4896,7 @@ function duaDailyIndex(list){
   return seed%list.length;
 }
 function fetchKidsDuas(){
-  return fetch("/kids/data/dua-kids.json?v=1107",{cache:"force-cache"})
+  return fetch("/kids/data/dua-kids.json?v=1207",{cache:"force-cache"})
     .then(function(r){if(!r.ok)throw new Error("dua-data");return r.json()})
     .then(function(data){
       kidsDuas=Array.isArray(data.items)?data.items.filter(function(x){return x.verification==="verified"}):[];
@@ -4937,9 +4968,9 @@ function recordDuaAttempt(id,firstTry){
 }
 function duaProgressLabel(id){
   var e=duaProgress(id),now=Date.now();
-  if(e.stage==="secure")return Number(e.dueAt||0)<=now?"Wiederholung fällig":"✓ Sicher gelernt";
-  if(e.attempts&&Number(e.dueAt||0)>now)return"✓ Wiederholung später";
-  if(e.attempts)return"Wiederholung fällig";
+  if(e.stage==="secure")return Number(e.dueAt||0)<=now?"Heute noch einmal üben":"✓ Sicher gelernt";
+  if(e.attempts&&Number(e.dueAt||0)>now)return"✓ Später noch einmal üben";
+  if(e.attempts)return"Heute noch einmal üben";
   return"";
 }
 
@@ -4960,31 +4991,56 @@ function stopDuaAudio(){
   duaAudioPlaying=false;
   try{duaAudio.pause()}catch(e){}
   try{duaAudio.removeAttribute("src");duaAudio.load()}catch(e2){}
+  try{if(window.DARKidsOwnerVoice)window.DARKidsOwnerVoice.stop()}catch(e3){}
 }
-function playDuaQuran(refs,pos){
+function playDuaQuran(refs,pos,options){
+  options=options||{};
   refs=Array.isArray(refs)?refs:[];
   pos=Number(pos)||0;
   if(!refs.length||pos>=refs.length){
     duaAudioPlaying=false;
-    var btn=document.getElementById("duaQuranAudio");
-    if(btn)btn.textContent=" Qurʾān hören";
+    if(typeof options.onended==="function")options.onended();
     return;
   }
   var ref=refs[pos];
   duaAudio.src=audioUrl(Number(ref.surah),Number(ref.ayah));
+  var rate=Number(options.rate||1);
+  if(!Number.isFinite(rate))rate=1;
+  duaAudio.playbackRate=Math.max(.72,Math.min(1.08,rate));
   duaAudioPlaying=true;
-  var btn=document.getElementById("duaQuranAudio");
-  if(btn)btn.textContent="■ Stopp";
-  duaAudio.onended=function(){playDuaQuran(refs,pos+1)};
+  duaAudio.onended=function(){playDuaQuran(refs,pos+1,options)};
   duaAudio.onerror=function(){
     duaAudioPlaying=false;
-    if(btn)btn.textContent=" Qurʾān hören";
+    var fb=document.getElementById("duaFeedback");
+    if(fb){fb.className="dua-feedback bad";fb.textContent="Audio konnte nicht geladen werden."}
   };
   kidsNowPlaying("Duʿāʾ","DĀR AL TAWḤĪD Kids");
   duaAudio.play().catch(function(){
     duaAudioPlaying=false;
-    if(btn)btn.textContent=" Qurʾān hören";
+    var fb=document.getElementById("duaFeedback");
+    if(fb){fb.className="dua-feedback bad";fb.textContent="Audio konnte nicht gestartet werden."}
   });
+}
+function playDuaArabic(d,rate,onended){
+  stopDuaAudio();
+  try{if(speech)speech.cancel()}catch(e){}
+  if(d.type==="quran"&&Array.isArray(d.quranRefs)&&d.quranRefs.length){
+    playDuaQuran(d.quranRefs,0,{rate:rate,onended:onended});
+    return true;
+  }
+  var voice=window.DARKidsOwnerVoice;
+  if(voice&&typeof voice.play==="function"){
+    return voice.play(String(d.audioArabicText||d.arabic||""),{
+      source:"kids-dua-arabic",
+      rate:rate||1,
+      onended:onended,
+      onerror:function(){
+        var fb=document.getElementById("duaFeedback");
+        if(fb){fb.className="dua-feedback bad";fb.textContent="Die arabische Audio wird noch vorbereitet."}
+      }
+    });
+  }
+  return false;
 }
 function openDuaAt(index){
   var list=filteredDuas();
@@ -5005,14 +5061,20 @@ function renderDua(){
   var list=filteredDuas();
   var d=list[currentDuaIndex];
   if(!d)return;
+  var germanAudio=String(d.audioGermanText||((d.childPrompt||"")+" "+(d.meaning||""))).replace(/\s+/g," ").trim();
+  var arabicAudio=String(d.audioArabicText||d.arabic||"").replace(/\s+/g," ").trim();
   try{
     var duaVoice=window.DARKidsOwnerVoice;
     if(duaVoice&&typeof duaVoice.preload==="function"){
-      duaVoice.preload((d.childPrompt||"")+" "+(d.meaning||""));
+      duaVoice.preload(germanAudio);
+      if(d.type==="sunnah")duaVoice.preload(arabicAudio);
       duaVoice.preload("Richtig. Sehr gut.");
       duaVoice.preload("Noch nicht. Hör die Erklärung noch einmal.");
       var nextDuaVoice=list[(currentDuaIndex+1)%list.length];
-      if(nextDuaVoice)duaVoice.preload((nextDuaVoice.childPrompt||"")+" "+(nextDuaVoice.meaning||""));
+      if(nextDuaVoice){
+        duaVoice.preload(String(nextDuaVoice.audioGermanText||((nextDuaVoice.childPrompt||"")+" "+(nextDuaVoice.meaning||""))).replace(/\s+/g," ").trim());
+        if(nextDuaVoice.type==="sunnah")duaVoice.preload(String(nextDuaVoice.audioArabicText||nextDuaVoice.arabic||"").replace(/\s+/g," ").trim());
+      }
     }
   }catch(e){}
   var progress=duaProgress(d.id);
@@ -5033,11 +5095,19 @@ function renderDua(){
     '<div class="dua-tr">'+d.transliteration+'</div>'+
     '<div class="dua-meaning">'+d.meaning+'</div>'+
     older+
-    '<div class="dua-actions '+(d.type==="quran"&&Array.isArray(d.quranRefs)&&d.quranRefs.length?"has-quran":"")+'">'+
-      (d.type==="quran"&&Array.isArray(d.quranRefs)&&d.quranRefs.length?'<button id="duaQuranAudio" class="dua-quran-audio"> Qurʾān hören</button>':'')+
-      '<button id="duaListen" class="dua-listen"> Erklärung hören</button><button id="duaNextItem" class="dua-next-item">Nächstes Duʿāʾ ›</button></div>'+
+    '<div class="dua-learn-kicker">HÖREN · NACHSPRECHEN · VERSTEHEN</div>'+
+    '<div class="dua-practice-actions">'+
+      '<button id="duaArabicListen" class="dua-arabic-listen">Arabisch hören</button>'+
+      '<button id="duaArabicSlow" class="dua-arabic-slow">Langsam hören</button>'+
+      '<button id="duaRepeat" class="dua-repeat">Nachsprechen</button>'+
+    '</div>'+
+    '<div class="dua-actions">'+
+      '<button id="duaListen" class="dua-listen">Erklärung hören</button>'+
+      '<button id="duaNextItem" class="dua-next-item">Nächstes Duʿāʾ ›</button>'+
+    '</div>'+
     '<div class="dua-question"><h3>'+d.quiz.question+'</h3><div id="duaAnswers" class="dua-answer-grid"></div><div id="duaFeedback" class="dua-feedback">'+progressText+'</div></div>'+
     '<div class="dua-source">'+d.source+(sourceLink?' · '+sourceLink:'')+'</div>';
+
   var answers=document.getElementById("duaAnswers");
   d.quiz.answers.forEach(function(a){
     var b=document.createElement("button");
@@ -5052,7 +5122,7 @@ function renderDua(){
         fb.className="dua-feedback good";
         var duaResult=recordDuaAttempt(d.id,!duaQuestionHadError);
         if(duaResult.entry&&duaResult.entry.stage==="secure")fb.textContent="✓ Richtig. Sicher gelernt.";
-        else if(!duaQuestionHadError&&!duaResult.counted)fb.textContent="✓ Richtig. Wiederholung später.";
+        else if(!duaQuestionHadError&&!duaResult.counted)fb.textContent="✓ Richtig. Später noch einmal üben.";
         else fb.textContent="✓ Richtig. Sehr gut!";
         markDailyDone("dua");
         updateParentProgress();
@@ -5061,25 +5131,34 @@ function renderDua(){
         duaQuestionHadError=true;
         b.classList.add("wrong");
         fb.className="dua-feedback bad";
-        fb.textContent="Noch nicht. Hör die Erklärung noch einmal.";
+        fb.textContent="Noch nicht. Hör das Duʿāʾ und die Erklärung noch einmal.";
         quizSpeak("Noch nicht. Hör die Erklärung noch einmal.");
         setTimeout(function(){b.classList.remove("wrong")},1100);
       }
     });
     answers.appendChild(b);
   });
-  var quranBtn=document.getElementById("duaQuranAudio");
-  if(quranBtn){
-    quranBtn.addEventListener("click",function(){
-      if(duaAudioPlaying){stopDuaAudio();quranBtn.textContent=" Qurʾān hören";return}
-      try{speech.cancel()}catch(e){}
-      try{if(window.DARKidsOwnerVoice)window.DARKidsOwnerVoice.stop()}catch(e){}
-      playDuaQuran(d.quranRefs,0);
+
+  document.getElementById("duaArabicListen").addEventListener("click",function(){
+    var fb=document.getElementById("duaFeedback");
+    if(fb){fb.className="dua-feedback";fb.textContent="Hör gut zu."}
+    playDuaArabic(d,1,function(){if(fb)fb.textContent=progressText});
+  });
+  document.getElementById("duaArabicSlow").addEventListener("click",function(){
+    var fb=document.getElementById("duaFeedback");
+    if(fb){fb.className="dua-feedback";fb.textContent="Langsam zuhören …"}
+    playDuaArabic(d,.78,function(){if(fb)fb.textContent="Jetzt kannst du es nachsprechen."});
+  });
+  document.getElementById("duaRepeat").addEventListener("click",function(){
+    var fb=document.getElementById("duaFeedback");
+    if(fb){fb.className="dua-feedback";fb.textContent="Erst zuhören …"}
+    playDuaArabic(d,.82,function(){
+      if(fb){fb.className="dua-feedback good";fb.textContent="Jetzt du! Sprich das Duʿāʾ nach."}
     });
-  }
+  });
   document.getElementById("duaListen").addEventListener("click",function(){
     stopDuaAudio();
-    quizSpeak(d.childPrompt+" "+d.meaning);
+    quizSpeak(germanAudio,{source:"kids-dua-german"});
   });
   document.getElementById("duaNextItem").addEventListener("click",function(){
     currentDuaIndex=(currentDuaIndex+1)%list.length;
@@ -5087,7 +5166,6 @@ function renderDua(){
     duaQuestionHadError=false;
     renderDua();
   });
-  if(!progress.attempts||Number(progress.dueAt||0)<=Date.now())setTimeout(function(){quizSpeak(d.childPrompt+" "+d.meaning)},260);
 }
 document.getElementById("openDuaButton").addEventListener("click",function(){
   if(!kidsDuas.length){
@@ -6260,7 +6338,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"cc4ac04648774872a036edb959747bd5","r":1,"spa":2}' crossorigin="anonymous"></script>
 <script src="/kids/content-studio-feed.js?v=studio7"></script>
-<script src="/kids/owner-voice.js?v=4"></script>
+<script src="/kids/owner-voice.js?v=5"></script>
 <script>
 (function(){
   var KIDS_BUILD_ID="kids-shell-v113-deen-photoreal1206";
