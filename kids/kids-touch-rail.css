@@ -1814,3 +1814,120 @@ html body .gh-world-nav > div{border-left-color:rgba(239,208,138,.21)!important}
     transition:none!important;
   }
 }
+
+
+/* =========================================================
+   KIDS_HOME_GLOW_PARITY_V16
+   Canonical glow = calm HOME-card interaction.
+   No neon, no teal double halo, no heavy inset blast.
+   ========================================================= */
+:root{
+  --kids-home-glow-line-hover:rgba(244,211,128,.44);
+  --kids-home-glow-line-press:rgba(250,220,145,.68);
+  --kids-home-glow-hover:
+    0 0 0 1px rgba(244,211,128,.075),
+    0 0 20px rgba(236,196,105,.075),
+    0 15px 36px rgba(0,0,0,.15);
+  --kids-home-glow-press:
+    0 0 0 1px rgba(250,220,145,.14),
+    0 0 27px rgba(240,202,116,.14),
+    0 14px 34px rgba(0,0,0,.16);
+  --kids-home-control-glow-hover:
+    0 0 0 1px rgba(244,211,128,.07),
+    0 0 15px rgba(236,196,105,.07);
+  --kids-home-control-glow-press:
+    0 0 0 1px rgba(250,220,145,.12),
+    0 0 20px rgba(240,202,116,.12);
+}
+
+@media(hover:hover) and (pointer:fine){
+  html body :is(
+    #view-today,#view-stories,#view-quran,#view-dua,#view-quiz,#view-parents,
+    #psLibraryPage,#msLibraryPage,#syLibraryPage,#dlLibraryPage,#ghWorld,
+    .ps-library-page,.ms-library-page,.dl-library-page,.gh-page,.story-hub
+  ) .kids-tap-card:hover{
+    border-color:var(--kids-home-glow-line-hover)!important;
+    box-shadow:var(--kids-home-glow-hover)!important;
+    filter:brightness(1.025)!important;
+    transform:none!important;
+    translate:none!important;
+  }
+}
+
+html body :is(
+  #view-today,#view-stories,#view-quran,#view-dua,#view-quiz,#view-parents,
+  #psLibraryPage,#msLibraryPage,#syLibraryPage,#dlLibraryPage,#ghWorld,
+  .ps-library-page,.ms-library-page,.dl-library-page,.gh-page,.story-hub
+) .kids-tap-card:is(:active,.is-kids-pressed,.kids-story-touch-glow){
+  border-color:var(--kids-home-glow-line-press)!important;
+  box-shadow:var(--kids-home-glow-press)!important;
+  filter:brightness(1.045)!important;
+  transform:none!important;
+  translate:none!important;
+}
+
+html body :is(
+  #view-today,#view-stories,#view-quran,#view-dua,#view-quiz,#view-parents,
+  #psLibraryPage,#msLibraryPage,#syLibraryPage,#dlLibraryPage,#ghWorld,
+  .ps-library-page,.ms-library-page,.dl-library-page,.gh-page,.story-hub
+) .kids-tap-card:focus-visible{
+  outline:0!important;
+  border-color:var(--kids-home-glow-line-press)!important;
+  box-shadow:0 0 0 2px rgba(247,214,132,.10),var(--kids-home-glow-press)!important;
+  filter:brightness(1.04)!important;
+}
+
+html body :is(
+  #view-stories,#psLibraryPage,#msLibraryPage,#syLibraryPage,#dlLibraryPage,#ghWorld,
+  .ps-library-page,.ms-library-page,.dl-library-page
+) :is(.kids-story-touch-glow,[data-ps-mode].kids-story-touch-glow,[data-ms-mode].kids-story-touch-glow,[data-sy-mode].kids-story-touch-glow,[data-dl-mode].kids-story-touch-glow){
+  border-color:var(--kids-home-glow-line-press)!important;
+  box-shadow:var(--kids-home-glow-press)!important;
+  filter:brightness(1.045)!important;
+  transform:none!important;
+}
+
+@media(hover:hover) and (pointer:fine){
+  html body :is(
+    #view-today,#view-stories,#view-quran,#view-dua,#view-quiz,#view-parents,
+    #psLibraryPage,#msLibraryPage,#syLibraryPage,#dlLibraryPage,#ghWorld
+  ) .kids-touch-control:hover{
+    border-color:var(--kids-home-glow-line-hover)!important;
+    box-shadow:var(--kids-home-control-glow-hover)!important;
+    filter:brightness(1.025)!important;
+  }
+}
+html body :is(
+  #view-today,#view-stories,#view-quran,#view-dua,#view-quiz,#view-parents,
+  #psLibraryPage,#msLibraryPage,#syLibraryPage,#dlLibraryPage,#ghWorld
+) .kids-touch-control:is(:active,.is-kids-pressed,[aria-pressed="true"]){
+  border-color:var(--kids-home-glow-line-press)!important;
+  box-shadow:var(--kids-home-control-glow-press)!important;
+  filter:brightness(1.04)!important;
+}
+
+/* Future dynamically-marked Kids cards inherit the same reference glow. */
+@media(hover:hover) and (pointer:fine){
+  html body .kids-tap-card:hover{
+    border-color:var(--kids-home-glow-line-hover)!important;
+    box-shadow:var(--kids-home-glow-hover)!important;
+    filter:brightness(1.025)!important;
+  }
+}
+html body .kids-tap-card:is(:active,.is-kids-pressed){
+  border-color:var(--kids-home-glow-line-press)!important;
+  box-shadow:var(--kids-home-glow-press)!important;
+  filter:brightness(1.045)!important;
+}
+html body .kids-touch-control:is(:active,.is-kids-pressed,[aria-pressed="true"]){
+  border-color:var(--kids-home-glow-line-press)!important;
+  box-shadow:var(--kids-home-control-glow-press)!important;
+  filter:brightness(1.04)!important;
+}
+
+@media(prefers-reduced-motion:reduce){
+  html body .kids-tap-card,
+  html body .kids-touch-control{
+    transition:border-color .1s ease,box-shadow .1s ease!important;
+  }
+}
