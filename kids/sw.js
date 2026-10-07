@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1233";
-const KIDS_BUILD_ID="kids-shell-v136-dua-final1233";
+const CACHE_NAME="dar-al-tawhid-kids-v1234-dua-voice";
+const KIDS_BUILD_ID="kids-shell-v137-dua-voice1234";
 // QUIZ_HOME_RESTORE_V1225: refresh installed PWAs with the restored Quiz entry.
 const CORE_PRECACHE=[
   "/kids/assets/kids-home-v1222/dar-title-reference-clean.svg?v=1229",
@@ -62,8 +62,6 @@ const CORE_PRECACHE=[
   "/kids/assets/deen/adab-akhlaq.jpg?v=1206",
   "/kids/assets/deen/akhirah.jpg?v=1206",
   "/kids/data/dua-kids.json?v=1223",
-  "/kids/data/dua-audio.json",
-  "/kids/data/dua-arabic-audio.json",
   "/kids/assets/kids-owner-voice/996533039c958c21c976.m4a",
   "/kids/assets/kids-owner-voice/cd31c4ca743ad8173e90.m4a",
   "/kids/data/verified-content.json",
@@ -85,7 +83,7 @@ const CORE_PRECACHE=[
   "/kids/global-story-glow-v1216.css?v=1217",
   "/kids/global-story-glow-v1216.js?v=1217",
   "/kids/dua-hub-v1219.css?v=1233",
-  "/kids/dua-hub-v1219.js?v=1233",
+  "/kids/dua-hub-v1219.js?v=1234",
   "/kids/assets/dua-premium/hero-v1222.jpg?v=1233",
   "/kids/assets/dua-premium/nav-dua-v1222.png?v=1233",
   "/kids/assets/dua-premium/action-library-v1222.png?v=1233",
@@ -125,9 +123,9 @@ const CORE_PRECACHE=[
   "/kids/kids-touch-rail.css?v=12",
   "/kids/kids-card-interaction.js?v=5",
   "/kids/kids-age-typography.js?v=3",
-  "/kids/owner-voice.js?v=6",
+  "/kids/owner-voice.js?v=7",
   "/kids/dua-smart-learn.css?v=1233",
-  "/kids/dua-smart-learn.js?v=1233",
+  "/kids/dua-smart-learn.js?v=1234",
   "/kids/content-studio-feed.js?v=studio7",
   "/kids/assets/kids-open-v95.css?v=97",
   "/kids/assets/kids-open-v95.js?v=97",
@@ -326,7 +324,7 @@ self.addEventListener("fetch",function(event){
     event.respondWith(fetch(request));
     return;
   }
-  if(url.pathname==="/kids/data/quiz-audio.json"||url.pathname==="/kids/data/dua-audio.json"||url.pathname==="/kids/data/dua-arabic-audio.json"||url.pathname==="/kids/data/dua-learning-timings.json"||url.pathname==="/kids/data/owner-voice-audio.json"){
+  if(url.pathname==="/kids/data/quiz-audio.json"||url.pathname==="/kids/data/dua-audio.json"||url.pathname==="/kids/data/dua-arabic-audio.json"||url.pathname==="/kids/data/dua-arabic-slow-audio.json"||url.pathname==="/kids/data/dua-word-audio.json"||url.pathname==="/kids/data/dua-kids.json"||url.pathname==="/kids/data/owner-voice-audio.json"){
     event.respondWith(networkFirst(request));
     return;
   }
