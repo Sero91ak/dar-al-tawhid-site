@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1211";
-const KIDS_BUILD_ID="kids-shell-v116-dua-learning1211";
+const CACHE_NAME="dar-al-tawhid-kids-v1212";
+const KIDS_BUILD_ID="kids-shell-v117-dua-smart1212";
 const CORE_PRECACHE=[
   "/kids/start",
   "/kids/start.html",
@@ -114,7 +114,7 @@ const CORE_PRECACHE=[
   "/kids/kids-touch-rail.css?v=9",
   "/kids/kids-card-interaction.js?v=2",
   "/kids/kids-age-typography.js?v=3",
-  "/kids/owner-voice.js?v=6",
+  "/kids/owner-voice.js?v=6",\n  "/kids/dua-smart-learn.css?v=1",\n  "/kids/dua-smart-learn.js?v=1",
   "/kids/content-studio-feed.js?v=studio7",
   "/kids/assets/kids-open-v95.css?v=97",
   "/kids/assets/kids-open-v95.js?v=97",
@@ -313,7 +313,7 @@ self.addEventListener("fetch",function(event){
     event.respondWith(fetch(request));
     return;
   }
-  if(url.pathname==="/kids/data/quiz-audio.json"||url.pathname==="/kids/data/dua-audio.json"||url.pathname==="/kids/data/dua-arabic-audio.json"||url.pathname==="/kids/data/owner-voice-audio.json"){
+  if(url.pathname==="/kids/data/quiz-audio.json"||url.pathname==="/kids/data/dua-audio.json"||url.pathname==="/kids/data/dua-arabic-audio.json"||url.pathname==="/kids/data/dua-learning-timings.json"||url.pathname==="/kids/data/owner-voice-audio.json"){
     event.respondWith(networkFirst(request));
     return;
   }
