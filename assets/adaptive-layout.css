@@ -513,3 +513,48 @@ html[data-fold-capacity="single"]{
     transition:none!important;
   }
 }
+
+
+/* v1329 · SHORT-LANDSCAPE APP SAFETY */
+/* Phone landscape is not a desktop website. Preserve vertical list semantics
+   and use the width for breathing room rather than forcing 3/4 tiny columns. */
+@media (orientation:landscape) and (max-height:559.98px){
+  html[data-layout="medium"] :is(
+    #folderGrid.folder-grid,
+    .folder-grid,
+    #latestGrid.latest-grid,
+    .latest-grid,
+    .dua-theme-grid,
+    .topics-theme-grid,
+    .books-library-list,
+    .lib-grid
+  ){
+    grid-template-columns:1fr!important;
+  }
+
+  html[data-layout="medium"] :is(
+    .qov-page,
+    .quran-topic-page,
+    .books-library-shell,
+    .scholars-index,
+    .more-page,
+    .account-page,
+    .dua-hub,
+    .topics-hub
+  ){
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    margin-inline:0!important;
+  }
+
+  html[data-layout="medium"] #quranSurahGrid,
+  html[data-layout="medium"] #quranSurahGrid.qov-surah-list{
+    display:flex!important;
+    flex-direction:column!important;
+    grid-template-columns:none!important;
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+  }
+}
