@@ -1,5 +1,5 @@
 name: Build Kids Quiz + Dua Owner Voice
-# Dua-only rerun marker: native Fusha pronunciation QA + standalone shadda fix 2026-10-07
+# Dua-only rerun marker: native Fusha pronunciation QA + word-only shadda fix 2026-10-07
 
 on:
   workflow_dispatch:
@@ -132,7 +132,7 @@ jobs:
           ARABIC_SYNTHESIS_REVISIONS={
               "dua_arabic":"dua-arabic-native-fusha-v3-20261007",
               "dua_arabic_slow":"dua-arabic-native-fusha-slow-v3-20261007",
-              "dua_word":"dua-arabic-native-fusha-word-v3-20261007"
+              "dua_word":"dua-arabic-native-fusha-word-v4-20261007"
           }
           DICT_CFG=PROD_CFG.get("pronunciationDictionary") or {}
           DICT_ID=str(DICT_CFG.get("id") or "").strip()
@@ -182,10 +182,10 @@ jobs:
                   # Qurʾānic pause signs are visual recitation annotations, not spoken tokens.
                   value=re.sub(r"[\u06D6-\u06DC]","",value)
                   value=re.sub(r"\s+"," ",value).strip()
-                  # A clip starts without the previous Qurʾānic word, therefore any
-                  # contextual word-initial shadda from connected recitation must go.
-                  value=strip_initial_context_shadda(value)
-                  # Eleven v4 follows delivery tags more reliably than a numeric speed field.
+                  # Only isolated learning words lose a contextual initial shadda.
+                  # Full Duʿāʾ phrases keep every authored diacritic intact.
+                  if profile=="dua_word":
+                      value=strip_initial_context_shadda(value)
                   # Keep the visible/key text untouched; this is hidden synthesis text only.
                   if profile=="dua_arabic_slow":
                       value="[slowly] "+value
