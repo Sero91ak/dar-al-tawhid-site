@@ -198,15 +198,39 @@ export async function synthesizeDarVoice(env, text, options = {}) {
                 speed: 0.95,
                 use_speaker_boost: true
               }
-            : profile === "dua"
+            : profile === "dua_arabic"
               ? {
-                  stability: 0.76,
-                  similarity_boost: 0.90,
-                  style: 0.05,
-                  speed: 0.89,
+                  stability: 0.72,
+                  similarity_boost: 0.92,
+                  style: 0.04,
+                  speed: 0.90,
                   use_speaker_boost: true
                 }
-              : profile === "gentle"
+              : profile === "dua_arabic_slow"
+                ? {
+                    stability: 0.76,
+                    similarity_boost: 0.92,
+                    style: 0.02,
+                    speed: 0.74,
+                    use_speaker_boost: true
+                  }
+                : profile === "dua_word"
+                  ? {
+                      stability: 0.80,
+                      similarity_boost: 0.93,
+                      style: 0.01,
+                      speed: 0.80,
+                      use_speaker_boost: true
+                    }
+                  : profile === "dua"
+                    ? {
+                        stability: 0.76,
+                        similarity_boost: 0.90,
+                        style: 0.05,
+                        speed: 0.89,
+                        use_speaker_boost: true
+                      }
+                    : profile === "gentle"
                 ? {
                     stability: 0.74,
                     similarity_boost: 0.87,
@@ -271,6 +295,11 @@ export async function synthesizeDarVoice(env, text, options = {}) {
     model_id: modelId,
     voice_settings: voiceSettings
   };
+  const arabicLearningProfile = ["dua_arabic", "dua_arabic_slow", "dua_word"].includes(profile);
+  if (arabicLearningProfile) {
+    body.language_code = "ar";
+    body.apply_text_normalization = "off";
+  }
   if (dictionaryReady) {
     body.pronunciation_dictionary_locators = [{
       pronunciation_dictionary_id: dictionaryId,
