@@ -5,7 +5,7 @@
   "formatVersion": "1.3",
   "authenticOnly": true,
   "currentSeries": "3251-3350",
-  "nextId": "HAD-3301",
+  "nextId": "HAD-3326",
   "display": {
     "narratorGap": 14,
     "sourceGap": 14,
@@ -22,7 +22,7 @@
     "showSharh": true,
     "showSharhMode": "compact",
     "requireVerifiedSharh": false,
-    "readyThrough": "HAD-3300"
+    "readyThrough": "HAD-3325"
   },
   "hadithLibrary": {
     "enabledForTestApp": true,
@@ -45,11 +45,11 @@
   "releasePolicy": {
     "onlineBranch": "main",
     "stagingBranch": "apple-tv-hadith-staging",
-    "publishedRange": "HAD-0001-HAD-3300",
+    "publishedRange": "HAD-0001-HAD-3325",
     "excludeStatuses": [
       "missing",
       "needs-review"
     ]
   },
-  "readyThrough": "HAD-3300"
+  "readyThrough": "HAD-3325"
 }
