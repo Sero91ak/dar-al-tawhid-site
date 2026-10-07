@@ -2882,7 +2882,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.08.45</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.08.47</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -2893,7 +2893,7 @@ html:not([data-view="today"]) .view.active{
       <div class="hero" aria-label="DĀR AL TAWḤĪD Kids">
         <div class="hero-artifact-shield" aria-hidden="true"></div>
         <div class="kids-wordmark">
-          <img class="wm-dar-reference-v1219" src="/kids/assets/kids-home-v1219/dar-title-reference.png?v=1220" alt="DĀR AL TAWḤĪD" draggable="false" decoding="async">
+          <img class="wm-dar-reference-v1222" src="/kids/assets/kids-home-v1222/dar-title-reference-clean.svg?v=1222" alt="DĀR AL TAWḤĪD" draggable="false" decoding="async">
           <div class="wm-dar-safe" aria-hidden="true">
             <span class="wm-word wm-word-dar"><span>D</span><span>Ā</span><span>R</span></span>
             <span class="wm-word wm-word-al"><span>A</span><span>L</span></span>
@@ -3273,7 +3273,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v125-dua-compact1221";
+const KIDS_BUILD_ID="kids-shell-v126-home-brand1222";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6400,7 +6400,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=6"></script>\n<script src="/kids/dua-smart-learn.js?v=2"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v125-dua-compact1221";
+  var KIDS_BUILD_ID="kids-shell-v126-home-brand1222";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -6416,13 +6416,13 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1220",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1222",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
   }
   window.addEventListener("load",function(){
-    fetch("/kids/version.json?v=1220",{cache:"no-store"})
+    fetch("/kids/version.json?v=1222",{cache:"no-store"})
       .then(function(r){return r.ok?r.json():null})
       .then(function(v){
         var live=String(v&&v.buildId||"");
@@ -8384,7 +8384,7 @@ html[data-view="stories"] #view-stories > :last-child{
   #view-today .choice::after{animation:none!important}
 }
 </style>
-\n<style id="kids-home-cinema-v1179">
+<style id="kids-home-cinema-v1179">
 /* V1179 — semi-realistische Cinema-Startseite.
    Echte Video-Bewegung, lesbare Kinder-Typografie und nahtloser Übergang in die App. */
 #view-today{
@@ -10659,7 +10659,7 @@ html[data-view="stories"] #view-stories > :last-child{
 #view-today .wm-dar-safe{display:none!important}
 
 /* Exact approved raster wordmark, 2x upscaled by Runway. */
-#view-today .wm-dar-reference-v1219{
+#view-today .wm-dar-reference-v1222{
   display:block!important;
   width:min(82vw,590px)!important;
   max-width:calc(100% - 20px)!important;
@@ -10711,18 +10711,18 @@ html[data-view="stories"] #view-stories > :last-child{
 
 @media(max-width:390px){
   #view-today .kids-wordmark{top:max(41px,calc(env(safe-area-inset-top,0px) + 5px))!important}
-  #view-today .wm-dar-reference-v1219{width:84vw!important;max-width:calc(100% - 16px)!important}
+  #view-today .wm-dar-reference-v1222{width:84vw!important;max-width:calc(100% - 16px)!important}
   #view-today .wm-kids{font-size:clamp(69px,20vw,82px)!important}
 }
 @media(min-width:700px){
   #view-today .kids-wordmark{top:max(52px,calc(env(safe-area-inset-top,0px) + 12px))!important}
-  #view-today .wm-dar-reference-v1219{width:min(76vw,620px)!important}
+  #view-today .wm-dar-reference-v1222{width:min(76vw,620px)!important}
   #view-today .wm-kids{font-size:98px!important}
 }
 
 /* Reduce Motion still shows a small hop so Kids never looks completely static. */
 @media(prefers-reduced-motion:reduce){
-  #view-today .wm-dar-reference-v1219{animation:darApprovedWobbleReduced1218 7s ease-in-out infinite!important}
+  #view-today .wm-dar-reference-v1222{animation:darApprovedWobbleReduced1218 7s ease-in-out infinite!important}
   #view-today .wm-kids span{animation:kidsApprovedBalloonReduced1218 3.2s ease-in-out infinite!important}
   #view-today .wm-kids .k{animation-delay:0s!important}
   #view-today .wm-kids .i{animation-delay:.16s!important}
@@ -10732,5 +10732,66 @@ html[data-view="stories"] #view-stories > :last-child{
 @keyframes darApprovedWobbleReduced1218{0%,100%{transform:translateY(0)}50%{transform:translateY(-1px)}}
 @keyframes kidsApprovedBalloonReduced1218{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-7px) scale(1.025)}}
 </style>
-\n<style id="kids-home-wordmark-asset-fix-v1219">#view-today .wm-dar-reference-v1219{display:block!important;visibility:visible!important;opacity:1!important;width:min(82vw,590px)!important;max-width:calc(100% - 20px)!important;height:auto!important;margin:0 auto 1px!important;object-fit:contain!important;pointer-events:none!important}#view-today .wm-dar-safe{display:none!important}</style>
+<style id="kids-home-wordmark-asset-fix-v1219">#view-today .wm-dar-reference-v1222{display:block!important;visibility:visible!important;opacity:1!important;width:min(82vw,590px)!important;max-width:calc(100% - 20px)!important;height:auto!important;margin:0 auto 1px!important;object-fit:contain!important;pointer-events:none!important}#view-today .wm-dar-safe{display:none!important}</style>
+
+<style id="kids-home-wordmark-final-v1222">
+#view-today .kids-wordmark{
+  position:absolute!important;
+  z-index:24!important;
+  top:max(44px,calc(env(safe-area-inset-top,0px) + 7px))!important;
+  left:0!important;right:0!important;width:100%!important;
+  display:flex!important;flex-direction:column!important;align-items:center!important;
+  gap:0!important;overflow:visible!important;pointer-events:none!important;
+}
+#view-today .wm-dar-safe{display:none!important}
+#view-today .wm-dar-reference-v1222{
+  display:block!important;visibility:visible!important;opacity:1!important;
+  width:min(84vw,610px)!important;max-width:calc(100% - 18px)!important;
+  height:auto!important;margin:0 auto 2px!important;object-fit:contain!important;
+  transform-origin:50% 82%!important;
+  filter:drop-shadow(0 7px 11px rgba(0,0,0,.25))!important;
+  animation:darApprovedWobble1222 5.4s ease-in-out infinite!important;
+}
+@keyframes darApprovedWobble1222{
+  0%,100%{transform:translate3d(0,0,0) rotate(0deg)}
+  38%{transform:translate3d(0,-2px,0) rotate(-.22deg)}
+  70%{transform:translate3d(0,1px,0) rotate(.18deg)}
+}
+#view-today .wm-kids{
+  display:flex!important;margin-top:0!important;
+  font-size:clamp(72px,20.3vw,92px)!important;line-height:.86!important;gap:.035em!important;
+}
+#view-today .wm-kids span{
+  display:inline-block!important;transform-origin:50% 90%!important;will-change:transform!important;
+  animation:kidsBalloon1222 2.18s cubic-bezier(.34,.02,.22,1) infinite!important;
+}
+#view-today .wm-kids .k{animation-delay:0s!important}
+#view-today .wm-kids .i{animation-delay:.13s!important}
+#view-today .wm-kids .d{animation-delay:.26s!important}
+#view-today .wm-kids .s{animation-delay:.39s!important}
+@keyframes kidsBalloon1222{
+  0%,100%{transform:translate3d(0,0,0) rotate(0deg) scale(1,1)}
+  30%{transform:translate3d(0,-15px,0) rotate(-1deg) scale(1.055,.945)}
+  49%{transform:translate3d(0,2px,0) rotate(.35deg) scale(.976,1.034)}
+  66%{transform:translate3d(0,-5px,0) rotate(-.25deg) scale(1.018,.986)}
+  82%{transform:translate3d(0,0,0) rotate(0deg) scale(1,1)}
+}
+@media(max-width:390px){
+  #view-today .kids-wordmark{top:max(41px,calc(env(safe-area-inset-top,0px) + 5px))!important}
+  #view-today .wm-dar-reference-v1222{width:86vw!important;max-width:calc(100% - 14px)!important}
+  #view-today .wm-kids{font-size:clamp(69px,20vw,82px)!important}
+}
+@media(min-width:700px){
+  #view-today .kids-wordmark{top:max(52px,calc(env(safe-area-inset-top,0px) + 12px))!important}
+  #view-today .wm-dar-reference-v1222{width:min(76vw,630px)!important}
+  #view-today .wm-kids{font-size:98px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  #view-today .wm-dar-reference-v1222{animation:darApprovedWobbleReduced1222 7s ease-in-out infinite!important}
+  #view-today .wm-kids span{animation:kidsBalloonReduced1222 3.2s ease-in-out infinite!important}
+}
+@keyframes darApprovedWobbleReduced1222{0%,100%{transform:translateY(0)}50%{transform:translateY(-1px)}}
+@keyframes kidsBalloonReduced1222{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-7px) scale(1.025)}}
+</style>
+
 </html>
