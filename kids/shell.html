@@ -2893,7 +2893,7 @@ html:not([data-view="today"]) .view.active{
       <div class="hero" aria-label="DĀR AL TAWḤĪD Kids">
         <div class="hero-artifact-shield" aria-hidden="true"></div>
         <div class="kids-wordmark">
-          <img class="wm-dar-reference-v1222" src="/kids/assets/kids-home-v1219/dar-title-reference.png?v=1223" alt="DĀR AL TAWḤĪD" draggable="false" decoding="async">
+          <img class="wm-dar-reference-v1222" src="/kids/assets/kids-home-v1219/dar-title-reference.png?v=1226" alt="DĀR AL TAWḤĪD" draggable="false" decoding="async">
           <div class="wm-dar-safe" aria-hidden="true">
             <span class="wm-word wm-word-dar"><span>D</span><span>Ā</span><span>R</span></span>
             <span class="wm-word wm-word-al"><span>A</span><span>L</span></span>
@@ -10792,6 +10792,53 @@ html[data-view="stories"] #view-stories > :last-child{
 }
 @keyframes darApprovedWobbleReduced1222{0%,100%{transform:translateY(0)}50%{transform:translateY(-1px)}}
 @keyframes kidsBalloonReduced1222{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-7px) scale(1.025)}}
+</style>
+
+
+<style id="kids-home-wordmark-visible-v1226">
+/* Hotfix: the old rule "#view-today .kids-wordmark img{display:none!important}"
+   had higher specificity than the later wordmark rules, so iOS hid DĀR AL TAWḤĪD.
+   This selector deliberately outranks it. */
+#view-today .kids-wordmark > img.wm-dar-reference-v1222{
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+  position:relative!important;
+  z-index:26!important;
+  flex:0 0 auto!important;
+  width:min(84vw,610px)!important;
+  max-width:calc(100vw - 18px)!important;
+  height:auto!important;
+  margin:0 auto 2px!important;
+  object-fit:contain!important;
+  transform:none!important;
+  animation:none!important;
+  filter:none!important;
+  pointer-events:none!important;
+}
+#view-today .wm-dar-safe{display:none!important}
+#view-today .kids-wordmark{
+  top:max(44px,calc(env(safe-area-inset-top,0px) + 7px))!important;
+  overflow:visible!important;
+}
+#view-today .wm-kids span{
+  animation:kidsBalloon1222 2.18s cubic-bezier(.34,.02,.22,1) infinite!important;
+}
+#view-today .wm-kids .k{animation-delay:0s!important}
+#view-today .wm-kids .i{animation-delay:.13s!important}
+#view-today .wm-kids .d{animation-delay:.26s!important}
+#view-today .wm-kids .s{animation-delay:.39s!important}
+@media(max-width:390px){
+  #view-today .kids-wordmark > img.wm-dar-reference-v1222{
+    width:86vw!important;
+    max-width:calc(100vw - 14px)!important;
+  }
+}
+@media(min-width:700px){
+  #view-today .kids-wordmark > img.wm-dar-reference-v1222{
+    width:min(76vw,630px)!important;
+  }
+}
 </style>
 
 </html>
