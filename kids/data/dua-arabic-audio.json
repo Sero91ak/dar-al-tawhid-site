@@ -1,11 +1,11 @@
 {
-  "schemaVersion": 1,
-  "id": "KIDS_DUA_ARABIC_OWNER_VOICE_V1",
+  "schemaVersion": 2,
+  "id": "KIDS_DUA_ARABIC_PRO_VOICE_V2",
   "buildId": "kids-dua-v4-20261007-061939",
   "updatedAt": "2026-10-07T06:19:39Z",
   "modelId": "eleven_v4",
-  "voiceProfileId": "serhat-owner-voice-2026",
-  "speaker": "Serhat Abu Malik",
+  "voiceProfileId": "arabic-msa-professional-2026",
+  "speaker": "Karim – Arabic MSA",
   "language": "ar",
   "scope": "sunnah-dua-only",
   "quranArabicSyntheticAllowed": false,
@@ -73,7 +73,7 @@
     "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ": {
       "url": "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-toilet-enter.m4a?v=kids-dua-v4-20261007-061939",
       "sha256": "17de8ca8927c8e4b9ef965520c479c4d8faec535a2e185fe0db30063e37d80be",
-      "durationSeconds": 4.0,
+      "durationSeconds": 4,
       "synthesisRevision": "kids-dua-eleven-v4-20261007",
       "modelId": "eleven_v4",
       "voiceProfileId": "arabic-msa-professional-2026",
@@ -103,7 +103,7 @@
     "بِسْمِ اللَّهِ، تَوَكَّلْتُ عَلَى اللَّهِ، لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ": {
       "url": "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-leave-home.m4a?v=kids-dua-v4-20261007-061939",
       "sha256": "0c289df9b0bea16a61e9bf18694e66ce8a68c5409e06d82f137bf8192e02b207",
-      "durationSeconds": 6.0,
+      "durationSeconds": 6,
       "synthesisRevision": "kids-dua-eleven-v4-20261007",
       "modelId": "eleven_v4",
       "voiceProfileId": "arabic-msa-professional-2026",
@@ -195,5 +195,7 @@
     "sunnahDuaItems": 12,
     "arabicPrompts": 12,
     "uniqueSpokenTexts": 12
-  }
+  },
+  "pronunciationStandard": "Arabic Fuṣḥā / Modern Standard Arabic",
+  "learningReference": true
 }
