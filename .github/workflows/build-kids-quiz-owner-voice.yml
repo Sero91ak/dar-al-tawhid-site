@@ -155,6 +155,26 @@ jobs:
           def norm(v):
               return " ".join(str(v or "").split()).strip()
 
+          def strip_initial_context_shadda(value):
+              """Remove only a shadda attached to the first Arabic base letter of a clip.
+              Qurʾānic connected-script exports can carry idghām/gemination from omitted
+              previous context. That is wrong at the start of a standalone clip/word."""
+              nfd=list(unicodedata.normalize("NFD",str(value or "")))
+              base=None
+              for idx,ch in enumerate(nfd):
+                  if ("\u0621" <= ch <= "\u064A") or ch=="\u0671":
+                      base=idx
+                      break
+              if base is None:
+                  return unicodedata.normalize("NFC","".join(nfd))
+              idx=base+1
+              while idx<len(nfd) and unicodedata.combining(nfd[idx]):
+                  if nfd[idx]=="\u0651":
+                      del nfd[idx]
+                      continue
+                  idx+=1
+              return unicodedata.normalize("NFC","".join(nfd))
+
           def prepare_profile_text(text,profile):
               value=norm(text)
               if profile in ARABIC_PROFILES:
@@ -162,6 +182,9 @@ jobs:
                   # Qurʾānic pause signs are visual recitation annotations, not spoken tokens.
                   value=re.sub(r"[\u06D6-\u06DC]","",value)
                   value=re.sub(r"\s+"," ",value).strip()
+                  # A clip starts without the previous Qurʾānic word, therefore any
+                  # contextual word-initial shadda from connected recitation must go.
+                  value=strip_initial_context_shadda(value)
                   # Eleven v4 follows delivery tags more reliably than a numeric speed field.
                   # Keep the visible/key text untouched; this is hidden synthesis text only.
                   if profile=="dua_arabic_slow":
@@ -480,6 +503,7 @@ jobs:
                       "synthesisRevision":profile_revision(text_profile),
                       "arabicSynthesisRevision":(profile_revision(text_profile) if is_arabic else None),
                       "arabicTextNormalization":("NFC" if is_arabic else None),
+                      "initialContextShaddaStripped":(True if is_arabic else None),
                       "modelId":model_id,
                       "speechProfile":text_profile,
                       "voiceProfileId":"serhat-owner-voice-2026",
@@ -510,7 +534,8 @@ jobs:
                   "arabicSynthesisRevision":(manifest_revision if manifest_is_arabic else None),
                   "voiceProfileId":"serhat-owner-voice-2026",
                   "speaker":"Serhat Abu Malik",
-                  "speechPreparation":("native-vocalized-arabic-nfc-no-dictionary-v4" if manifest_is_arabic else "explicit-german-numbers-and-quran-references"),
+                  "speechPreparation":("native-vocalized-arabic-nfc-no-dictionary-initial-shadda-safe-v5" if manifest_is_arabic else "explicit-german-numbers-and-quran-references"),
+                  "initialContextShaddaStripped":(True if manifest_is_arabic else None),
                   "manualPerClipApprovalRequired":False,
                   "technicalQaRequired":True,
                   "systemTtsFallbackAllowed":False,
