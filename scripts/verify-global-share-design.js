@@ -38,6 +38,18 @@ if (globalShare) {
   forbidToken(globalRel, globalShare, "app-store-badge-de-official.svg", "legacy App Store footer badge");
 }
 
+
+const globalCssRel = "assets/dar-global-share-v1225.css";
+const globalCss = read(globalCssRel);
+for (const token of ["GLOBAL_SOCIAL_BRAND_COLORS_V1269", "#25D366", "#2AABEE", "#833AB4", "#FCAF45"]) {
+  requireToken(globalCssRel, globalCss, token, "global social brand standard " + token);
+}
+const frauenCssRel = "assets/frauen/frauen-fiqh.css";
+const frauenCss = read(frauenCssRel);
+for (const token of ["GLOBAL_SOCIAL_BRAND_COLORS_V1269", "#25D366", "#2AABEE", "#833AB4", "#FCAF45"]) {
+  requireToken(frauenCssRel, frauenCss, token, "Frauen social brand standard " + token);
+}
+
 for (const rel of ["assets/premium-feed-app.js", "test/assets/premium-feed-app.js"]) {
   const src = read(rel);
   requireToken(rel, src, "FEED_HISTORICAL_STATIC", "curated feed image pool");
