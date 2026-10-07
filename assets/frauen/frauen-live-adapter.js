@@ -169,6 +169,16 @@
   },true);
   global.addEventListener("hashchange",function(){hookRender();if(isFrauen())setTimeout(paint,0);else{cleanup();scheduleEntry()}});
   global.addEventListener("pageshow",boot);
+  global.addEventListener("dar:live-sync-done",function(){
+    if(!isFrauen())return;
+    try{
+      if(global.DARFrauenFiqh&&typeof global.DARFrauenFiqh.reload==="function"){
+        global.DARFrauenFiqh.reload().then(function(){paint()}).catch(function(){paint()});
+        return;
+      }
+    }catch(e){}
+    paint();
+  });
   document.addEventListener("dar:render",function(){hookRender();if(isFrauen())paint();else scheduleEntry()});
   if(document.documentElement){
     new MutationObserver(function(){if(isFrauen())return;scheduleEntry()}).observe(document.documentElement,{childList:true,subtree:true});
