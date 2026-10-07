@@ -346,3 +346,23 @@
   .quiz-topic-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
   .quiz-learning-dashboard{padding-left:8px;padding-right:8px}
 }
+
+/* KIDS_QUIZ_MOBILE_NEXT_V5 — next action must never be missed */
+@media(max-width:759px){
+  #quizModal.quiz-round-mode .quiz-next.show{
+    position:fixed!important;
+    left:12px!important;
+    right:12px!important;
+    bottom:calc(10px + env(safe-area-inset-bottom,0px))!important;
+    width:auto!important;
+    max-width:none!important;
+    margin:0!important;
+    z-index:120!important;
+    min-height:56px!important;
+    border-radius:18px!important;
+    box-shadow:0 18px 42px rgba(0,0,0,.52),0 0 0 1px rgba(255,255,255,.08)!important;
+  }
+  #quizModal.quiz-round-mode #quizBody{
+    padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))!important;
+  }
+}
