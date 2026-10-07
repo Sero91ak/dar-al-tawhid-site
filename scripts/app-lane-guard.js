@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /**
  * APP_LANE_GUARD
- * „Global / alle Apps“ = Inhalt in jede App, aber trotzdem getrennte Commits.
+ * „Global / alle Apps / iOS / Web“ = Erwachsenen-Oberflächen, nicht Kids.
+ * Kids nur bei ausdrücklichem Kids-Auftrag. Trotzdem getrennte Commits.
  * Ein Commit darf nur eine App-Spur ändern, damit Kids, Web, Test und Apple TV
  * nicht denselben Push-/Deploy-Weg blockieren oder einen Build verwerfen.
  *

@@ -22,13 +22,13 @@ Bei jeder Aufgabe:
 15. **Änderungen an der privaten Admin-App** (`admin/**`, inkl. KI-Video-Studio) werden **direkt gepusht und live für die Admin-App ausgerollt**, sobald sie fertig sind: Commit → Push auf `main` (bzw. Deploy-Workflow `deploy-live-admin-app`) → Admin-UI ist aktuell. Kein separates „push live“ abwarten.
 16. Das betrifft **nicht** die Besucher-App und **nicht** automatische Besucher-Pushs. Feed-/Push-Aktionen aus dem Video-Studio bleiben manuell.
 
-## App-Spuren (Sprache verstehen – Inhalt überall, Wege getrennt)
+## App-Spuren (Sprache verstehen – Kids eigenständig)
 
-17. **„Global“ / „alle Apps“ / „überall rein“ / „global pushen“** heißt: die **gleiche Aussage/Änderung** in jede genannte Oberfläche bringen (Kids, Besucher-Web/Desktop-Website, Dar Test, Apple TV, iOS-WebView der jeweiligen App). Es heißt **nicht**: alles in **einem** Commit oder **einem** Deploy. Jede App bekommt einen **eigenen Commit**, der **sofort** gepusht wird, bevor die nächste App angefangen wird — damit kein Build abbricht und nichts verloren geht.
-18. **Nur eine App genannt** („in der Test-App“, „Kids“, „Apple TV“, „Besucher-App“, „iOS“) = **nur diese Spur**. Nicht stillschweigend die anderen mitändern.
-19. **Mehrere Apps in einem Satz** („Test und dann Kids und Apple TV und Besucher“) = nacheinander, **getrennte Wege**: 1) Test-Commit + Test-Deploy, 2) Kids-Commit + Kids-Deploy, 3) Apple-TV-Commit + Apple-TV-Weg, 4) Besucher-Commit + Besucher-Deploy. Nie `kids/` + `index.html` + `apple-tv/` + `test/` in einer Dateiänderung. CI (`scripts/app-lane-guard.js`) blockiert Misch-Commits.
-20. Reihenfolge bei „global“: Dar Test zuerst (prüfen), dann Kids, dann Besucher-Web/Desktop, dann Apple TV, dann native iOS-Hülle nur wenn die Swift/Xcode-App betroffen ist. Jeder Schritt Commit → Push auf `main` der **eigenen** Spur, warten bis dieser Weg nicht mehr in derselben Deploy-Schlange wie die nächste Spur hängt.
-21. Kids (`kids/**`) über **Deploy Kids App Live**. Besucher (`index.html`, Website, Desktop) über **Deploy Besucher-App**. Dar Test über den Test-Deploy. Apple TV über den Apple-TV-Weg. Ein hängender oder failed Job einer Spur darf die anderen Commits **nicht** verwerfen; die schon gepushten Spuren bleiben erhalten.
+17. **Kids ist eine eigenständige App.** „Global“, „alle Apps“, „überall“, „iOS“, „Web-App“, „Website“, „Apple TV“ meinen **nicht** die Kids-App. Kids nur ändern, wenn der Nutzer ausdrücklich **Kids** / **Kinder-App** sagt.
+18. **„Global“ bei Ḥadīṯ, Āṯār, Qurʾān, Tadabbur** = derselbe geprüfte Stand in die **Erwachsenen-Oberflächen**, so wie bisher: Website, Besucher-Web-App, iOS-WebApp, native iOS-App, Android-WebApp, Apple TV. Getrennte Commits/Deploys je Spur, nicht ein Misch-Commit.
+19. **„Global“ / „iOS WebApp“ / „iOS App“** = die genannten Erwachsenen-Apps. Apple TV **mit**, wenn der Nutzer Apple TV sagt oder der Inhalt Ḥadīṯ/Āṯār/Qurʾān/Tadabbur ist (wie der bestehende Canonical-Live-Weg). Apple TV **nicht** mit, wenn der Nutzer klar nur Web oder nur iOS meint.
+20. **Nur eine App genannt** = nur diese Spur. **Mehrere Erwachsenen-Apps in einem Satz** = nacheinander eigene Commits: Test → Besucher-Web/Desktop → iOS → Apple TV. Nie `kids/` mit `index.html` / `apple-tv/` / `test/` mischen. CI (`scripts/app-lane-guard.js`) blockiert Misch-Commits.
+21. Kids (`kids/**`) nur über **Deploy Kids App Live**. Besucher über **Deploy Besucher-App**. Dar Test über Test-Deploy. Apple TV über den Apple-TV-Weg. Ein hängender Job einer Spur darf andere schon gepushte Commits nicht verwerfen.
 
 ## Quiz-Fragen (Sonderregel – immer live)
 
