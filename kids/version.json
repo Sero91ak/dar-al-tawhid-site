@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v141-home-profile1238",
-  "label": "KIDS · V1.08.62",
-  "releasedAt": "2026-10-07T18:35:00+02:00",
-  "note": "V1238 zeigt auf der Kids-Startseite das aktive Kinderprofil mit den neuen 3D-Avataren: Jungenprofil mit weißer Kufi, Mädchenprofil mit rosa Hijab. Das Profil sitzt als fest begrenztes rundes Emblem innerhalb des rechten Safe-Area-Rands, ohne Edge-to-Edge-, Widescreen- oder Oversize-Verhalten. Antippen öffnet direkt den Eltern-/Profilbereich.",
+  "buildId": "kids-shell-v142-home-profile-left1239",
+  "label": "KIDS · V1.08.63",
+  "releasedAt": "2026-10-07T18:48:00+02:00",
+  "note": "V1239 setzt das aktive Kinderprofil direkt links neben die Kids-Wortmarke. Jungen- und Mädchenprofil verwenden exakt dieselbe Position; der Avatar ist gegenüber V1238 um wenige Pixel größer. Die Position wird aus der realen Kids-Wortmarke berechnet und bleibt innerhalb fester Safe-Area-Grenzen ohne Edge-to-Edge-, Widescreen- oder Oversize-Verhalten.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1238",
+    "serviceWorkerCache": "v1239",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -1151,14 +1151,16 @@
     "duaDetailTail": "auto-height-no-100dvh-no-double-reserve-v1237",
     "quizBottomTail": "conditional-next-button-reserve-v1237",
     "homeProfileEmblem": "active-boy-girl-avatar-v1238",
-    "homeProfilePlacement": "hero-right-safe-bounded",
-    "homeProfileSizePhonePx": 50,
-    "homeProfileSizeCompactPx": 48,
-    "homeProfileSizeTabletPx": 54,
+    "homeProfilePlacement": "direct-left-of-kids-wordmark-v1239",
+    "homeProfileSizePhonePx": 53,
+    "homeProfileSizeCompactPx": 51,
+    "homeProfileSizeTabletPx": 57,
     "homeProfileEdgeToEdge": false,
     "homeProfileOversize": false,
-    "homeProfileAction": "open-parents-profile"
+    "homeProfileAction": "open-parents-profile",
+    "homeProfileDynamicAnchor": "measured-kids-wordmark-bounds",
+    "homeProfileSamePositionBoyGirl": true
   },
-  "updatedAt": "2026-10-07T18:35:00+02:00",
-  "deployTrigger": "2026-10-07T18:35:00+02:00"
+  "updatedAt": "2026-10-07T18:48:00+02:00",
+  "deployTrigger": "2026-10-07T18:48:00+02:00"
 }
