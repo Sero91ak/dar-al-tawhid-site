@@ -291,7 +291,7 @@ export async function synthesizeDarVoice(env, text, options = {}) {
   }
   const arabicLearningProfile = ["dua_arabic", "dua_arabic_slow", "dua_word"].includes(profile);
   const ttsScript = arabicLearningProfile
-    ? String(script || "").normalize("NFC")
+    ? String(script || "").normalize("NFC").replace(/[\u06D6-\u06DC]/g, "").replace(/\s+/g, " ").trim()
     : (dictionaryReady || withTimings ? script : prepareDarVoicePronunciation(script));
   const body = {
     text: ttsScript,
