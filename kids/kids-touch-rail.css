@@ -932,3 +932,58 @@ html body #dlLibraryPage .dl-story-row{
     margin-right:0!important;
   }
 }
+
+
+/* =========================================================
+   KIDS_GLOBAL_TOUCH_GLOW_V11
+   Specificity lock for the four story worlds and all four
+   story libraries. Local card shadows may not suppress glow.
+   ========================================================= */
+@media(hover:hover) and (pointer:fine){
+  html body #view-stories #deenEntry.kids-tap-card:hover,
+  html body #view-stories #psProphetEntry.kids-tap-card:hover,
+  html body #view-stories #msEntry.kids-tap-card:hover,
+  html body #view-stories #syEntry.kids-tap-card:hover,
+  html body #dlLibraryPage .dl-story-row.kids-tap-card:hover,
+  html body #psLibraryPage .ps-story-row.kids-tap-card:hover,
+  html body #msLibraryPage .ms-story-row.kids-tap-card:hover,
+  html body #syLibraryPage .ms-story-row.kids-tap-card:hover{
+    border-color:rgba(244,211,128,.58)!important;
+    box-shadow:var(--kids-glow-v10-hover)!important;
+    filter:brightness(1.035) saturate(1.015)!important;
+  }
+}
+
+html body #view-stories #deenEntry.kids-tap-card:active,
+html body #view-stories #deenEntry.kids-tap-card.is-kids-pressed,
+html body #view-stories #psProphetEntry.kids-tap-card:active,
+html body #view-stories #psProphetEntry.kids-tap-card.is-kids-pressed,
+html body #view-stories #msEntry.kids-tap-card:active,
+html body #view-stories #msEntry.kids-tap-card.is-kids-pressed,
+html body #view-stories #syEntry.kids-tap-card:active,
+html body #view-stories #syEntry.kids-tap-card.is-kids-pressed,
+html body #dlLibraryPage .dl-story-row.kids-tap-card:active,
+html body #dlLibraryPage .dl-story-row.kids-tap-card.is-kids-pressed,
+html body #psLibraryPage .ps-story-row.kids-tap-card:active,
+html body #psLibraryPage .ps-story-row.kids-tap-card.is-kids-pressed,
+html body #msLibraryPage .ms-story-row.kids-tap-card:active,
+html body #msLibraryPage .ms-story-row.kids-tap-card.is-kids-pressed,
+html body #syLibraryPage .ms-story-row.kids-tap-card:active,
+html body #syLibraryPage .ms-story-row.kids-tap-card.is-kids-pressed{
+  border-color:rgba(250,220,145,.84)!important;
+  box-shadow:var(--kids-glow-v10-press)!important;
+  filter:brightness(1.075) saturate(1.025)!important;
+}
+
+html body #view-stories #deenEntry.kids-tap-card:focus-visible,
+html body #view-stories #psProphetEntry.kids-tap-card:focus-visible,
+html body #view-stories #msEntry.kids-tap-card:focus-visible,
+html body #view-stories #syEntry.kids-tap-card:focus-visible,
+html body #dlLibraryPage .dl-story-row.kids-tap-card:focus-visible,
+html body #psLibraryPage .ps-story-row.kids-tap-card:focus-visible,
+html body #msLibraryPage .ms-story-row.kids-tap-card:focus-visible,
+html body #syLibraryPage .ms-story-row.kids-tap-card:focus-visible{
+  outline:0!important;
+  border-color:rgba(250,220,145,.84)!important;
+  box-shadow:0 0 0 3px rgba(247,214,132,.16),var(--kids-glow-v10-press)!important;
+}
