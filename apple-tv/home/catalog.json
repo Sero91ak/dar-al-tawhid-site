@@ -1,7 +1,22 @@
 {
   "project": "DĀR AL TAWḤĪD – Apple TV Startseite",
-  "schemaVersion": "1.1",
+  "schemaVersion": "1.2",
   "status": "active",
+  "hold": {
+    "unit": "seconds",
+    "forbidMillisecondSkip": true,
+    "neverUseMillisecondsForAdvance": true,
+    "appliesTo": ["quranVerse", "tadabbur"],
+    "note": "Auf der Startseite bei Gebetszeiten: Vers und Tadabbur nicht im Millisekunden-Takt wechseln. Dieselbe Wort-Sekunden-Formel wie der Bildschirmschoner.",
+    "duration": {
+      "unit": "seconds",
+      "baseSeconds": 16,
+      "secondsPerWord": 0.35,
+      "minSeconds": 18,
+      "maxSeconds": 40,
+      "forbidMillisecondTickAdvance": true
+    }
+  },
   "doNotFilterTadabburAsHadithLibrary": true,
   "view": "TVHomeView",
   "liveURL": "https://dar-al-tawhid.de/apple-tv/home/catalog.json",
@@ -23,7 +38,9 @@
       "arabicEdition": "quran-uthmani",
       "germanEdition": "de.bubenheim",
       "fields": ["arabic", "german", "reference"],
-      "note": "Arabisch und Deutsch NUR aus dem Qurʾān-Reader. Niemals tadabbur.text als Vers rendern."
+      "holdUnit": "seconds",
+      "forbidMillisecondSkip": true,
+      "note": "Arabisch und Deutsch NUR aus dem Qurʾān-Reader. Niemals tadabbur.text als Vers rendern. Nicht in Millisekunden weiterschalten."
     },
     "tadabbur": {
       "id": "tadabbur",
@@ -35,6 +52,8 @@
       "lookup": "exact-surah-ayah",
       "referenceFormat": "Sūrah:Āyah",
       "fields": ["text", "narrator", "generation", "source", "grading"],
+      "holdUnit": "seconds",
+      "forbidMillisecondSkip": true,
       "fallback": "Für diesen Vers liegt derzeit keine geprüfte Salaf-Überlieferung vor.",
       "forbiddenSources": [
         "hadith",
