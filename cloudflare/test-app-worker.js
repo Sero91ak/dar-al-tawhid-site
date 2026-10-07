@@ -322,6 +322,23 @@ async function finalizeDarTestHomeV1193(asset) {
     if (html.includes("</html>")) html = html.replace("</html>", hadithFinal + "</html>");
     else html += hadithFinal;
   }
+  // DAR_ADAPTIVE_NAV_V1325
+  // Test-only foundation for user-selectable bottom/left/right navigation.
+  // Loaded as a final authority so legacy bottom-nav CSS cannot override side placement.
+  if (!html.includes('id="darAdaptiveNavStyleV1325"')) {
+    const adaptiveNavStyle =
+      '<style id="darAdaptiveNavStyleV1325">@import url("/test/assets/fold-thumb-nav.css?v=1325-adaptive-nav");</style>';
+    if (html.includes("</html>")) html = html.replace("</html>", adaptiveNavStyle + "</html>");
+    else html += adaptiveNavStyle;
+  }
+  if (!html.includes('id="darAdaptiveNavScriptV1325"')) {
+    const adaptiveNavScript =
+      '<script id="darAdaptiveNavScriptV1325" src="/test/assets/fold-thumb-nav.js?v=1325-adaptive-nav"><\/script>';
+    if (html.includes("</body>")) html = html.replace("</body>", adaptiveNavScript + "</body>");
+    else if (html.includes("</html>")) html = html.replace("</html>", adaptiveNavScript + "</html>");
+    else html += adaptiveNavScript;
+  }
+
   html = html.replace(/window\.__DAR_EXPECTED_BUILD="app-shell-v\d+"/g, 'window.__DAR_EXPECTED_BUILD="app-shell-v1300"');
   html = html.replace(/const APP_BUILD_ID="app-shell-v\d+"/g, 'const APP_BUILD_ID="app-shell-v1300"');
 
