@@ -1,5 +1,7 @@
 name: Upload ElevenLabs Pronunciation Master
 
+# canonical-dictionary-v2: keep one stable dictionary ID; only versions advance.
+
 on:
   workflow_dispatch:
   push:
