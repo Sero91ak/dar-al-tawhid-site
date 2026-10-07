@@ -1876,3 +1876,117 @@ html.duahub-detail-open .shell{
     scroll-padding-bottom:calc(98px + env(safe-area-inset-bottom,0px))!important;
   }
 }
+
+
+/* HOME_PROFILE_EMBLEM_V1238
+   Active Kids profile on Home. Fixed-size, inside the safe right edge:
+   never edge-to-edge, never widescreen, never oversized. */
+#view-today{
+  position:relative!important;
+}
+#view-today > .brand-line{
+  display:block!important;
+  position:absolute!important;
+  z-index:58!important;
+  inset:0!important;
+  width:100%!important;
+  height:0!important;
+  margin:0!important;
+  padding:0!important;
+  pointer-events:none!important;
+  overflow:visible!important;
+}
+#view-today > .brand-line > .profile-dot.profile-dot-avatar{
+  display:grid!important;
+  position:absolute!important;
+  top:calc(var(--kids-home-title-top-fixed,54px) + 156px)!important;
+  right:max(14px,env(safe-area-inset-right,0px))!important;
+  left:auto!important;
+  width:50px!important;
+  height:50px!important;
+  min-width:50px!important;
+  min-height:50px!important;
+  max-width:50px!important;
+  max-height:50px!important;
+  aspect-ratio:1/1!important;
+  margin:0!important;
+  padding:2px!important;
+  border:1.5px solid rgba(240,204,115,.82)!important;
+  border-radius:50%!important;
+  overflow:hidden!important;
+  box-sizing:border-box!important;
+  background:linear-gradient(145deg,rgba(8,39,54,.94),rgba(5,27,40,.96))!important;
+  box-shadow:
+    0 6px 16px rgba(0,0,0,.25),
+    0 0 0 3px rgba(240,204,115,.07)!important;
+  pointer-events:auto!important;
+  cursor:pointer!important;
+  touch-action:manipulation!important;
+  -webkit-tap-highlight-color:transparent!important;
+  transform:none!important;
+  animation:none!important;
+}
+#view-today > .brand-line > .profile-dot.profile-dot-avatar:active{
+  transform:scale(.96)!important;
+}
+#view-today > .brand-line > .profile-dot.profile-dot-avatar .header-profile-avatar{
+  display:grid!important;
+  width:44px!important;
+  height:44px!important;
+  min-width:44px!important;
+  min-height:44px!important;
+  max-width:44px!important;
+  max-height:44px!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+  border-radius:50%!important;
+  transform:none!important;
+}
+#view-today > .brand-line > .profile-dot.profile-dot-avatar .header-profile-avatar > img{
+  display:block!important;
+  width:44px!important;
+  height:44px!important;
+  max-width:44px!important;
+  max-height:44px!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  margin:0!important;
+  transform:none!important;
+}
+.app[data-gender="girl"] #view-today > .brand-line > .profile-dot.profile-dot-avatar{
+  border-color:rgba(242,183,201,.88)!important;
+  box-shadow:
+    0 6px 16px rgba(0,0,0,.25),
+    0 0 0 3px rgba(242,183,201,.08)!important;
+}
+@media(max-width:390px){
+  #view-today > .brand-line > .profile-dot.profile-dot-avatar{
+    top:calc(var(--kids-home-title-top-fixed,52px) + 150px)!important;
+    right:max(12px,env(safe-area-inset-right,0px))!important;
+    width:48px!important;height:48px!important;
+    min-width:48px!important;min-height:48px!important;
+    max-width:48px!important;max-height:48px!important;
+  }
+  #view-today > .brand-line > .profile-dot.profile-dot-avatar .header-profile-avatar,
+  #view-today > .brand-line > .profile-dot.profile-dot-avatar .header-profile-avatar > img{
+    width:42px!important;height:42px!important;
+    min-width:42px!important;min-height:42px!important;
+    max-width:42px!important;max-height:42px!important;
+  }
+}
+@media(min-width:700px){
+  #view-today > .brand-line > .profile-dot.profile-dot-avatar{
+    top:calc(var(--kids-home-title-top-fixed,64px) + 178px)!important;
+    right:max(22px,env(safe-area-inset-right,0px))!important;
+    width:54px!important;height:54px!important;
+    min-width:54px!important;min-height:54px!important;
+    max-width:54px!important;max-height:54px!important;
+  }
+  #view-today > .brand-line > .profile-dot.profile-dot-avatar .header-profile-avatar,
+  #view-today > .brand-line > .profile-dot.profile-dot-avatar .header-profile-avatar > img{
+    width:48px!important;height:48px!important;
+    min-width:48px!important;min-height:48px!important;
+    max-width:48px!important;max-height:48px!important;
+  }
+}
