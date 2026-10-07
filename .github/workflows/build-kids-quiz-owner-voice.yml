@@ -93,19 +93,23 @@ jobs:
           DUA=ROOT/"kids/data/dua-kids.json"
           QUIZ_MANIFEST=ROOT/"kids/data/quiz-audio.json"
           DUA_MANIFEST=ROOT/"kids/data/dua-audio.json"
+          DUA_AR_MANIFEST=ROOT/"kids/data/dua-arabic-audio.json"
           QUIZ_ASSETS=ROOT/"kids/assets/kids-quiz-audio"
           DUA_ASSETS=ROOT/"kids/assets/kids-dua-audio"
+          DUA_AR_ASSETS=ROOT/"kids/assets/kids-dua-arabic-audio"
           API=os.environ["VOICE_API"].rstrip("/")
           SECRET=os.environ.get("ADMIN_PUBLISH_SECRET","").strip()
           ELEVEN_KEY=os.environ.get("ELEVENLABS_API_KEY","").strip()
           ELEVEN_VOICE=(os.environ.get("ELEVENLABS_VOICE_ID","").strip() or "DkU7j9uO4ZEtLD2iRZSH")
           ELEVEN_MODEL="eleven_multilingual_v2"
+          ELEVEN_DUA_MODEL="eleven_v4"
           DICT_ID=os.environ.get("ELEVENLABS_PRONUNCIATION_DICTIONARY_ID","").strip()
           DICT_VERSION=os.environ.get("ELEVENLABS_PRONUNCIATION_DICTIONARY_VERSION_ID","").strip()
           ORIGIN="https://dar-al-tawhid.de"
           REFERER="https://dar-al-tawhid.de/voice-studio/"
           QUIZ_ASSETS.mkdir(parents=True,exist_ok=True)
           DUA_ASSETS.mkdir(parents=True,exist_ok=True)
+          DUA_AR_ASSETS.mkdir(parents=True,exist_ok=True)
 
           def norm(v):
               return " ".join(str(v or "").split()).strip()
@@ -135,8 +139,10 @@ jobs:
               except Exception:
                   return {"entries":{}}
 
-          def local_from_entry(entry,asset_dir):
+          def local_from_entry(entry,asset_dir,expected_model=None):
               if str((entry or {}).get("synthesisRevision") or "")!=SYNTHESIS_REVISION:
+                  return None
+              if expected_model and str((entry or {}).get("modelId") or "")!=str(expected_model):
                   return None
               url=str((entry or {}).get("url") or "").split("?",1)[0]
               expected="/"+str(asset_dir).replace(os.sep,"/")+"/"
@@ -147,10 +153,10 @@ jobs:
 
           lock=threading.Lock()
 
-          def synth(text,profile,asset_dir,serial):
-              prepared=prepare_kids_voice_text(text)
+          def synth(text,profile,asset_dir,serial,model_id):
+              prepared=norm(text) if profile=="dua_arabic" else prepare_kids_voice_text(text)
               digest=hashlib.sha1(
-                  (SYNTHESIS_REVISION+"|"+profile+"|"+text).encode("utf-8")
+                  (SYNTHESIS_REVISION+"|"+str(model_id)+"|"+profile+"|"+text).encode("utf-8")
               ).hexdigest()[:16]
               target=asset_dir/(digest+".m4a")
               last=None
@@ -172,6 +178,14 @@ jobs:
                               "speed":0.91,
                               "use_speaker_boost":True
                           }
+                      elif profile=="dua_arabic":
+                          voice_settings={
+                              "stability":0.68,
+                              "similarity_boost":0.90,
+                              "style":0.06,
+                              "speed":0.91,
+                              "use_speaker_boost":True
+                          }
                       else:
                           voice_settings={
                               "stability":0.68,
@@ -182,7 +196,7 @@ jobs:
                           }
                       payload={
                           "text":prepared,
-                          "model_id":ELEVEN_MODEL,
+                          "model_id":model_id,
                           "voice_settings":voice_settings,
                           "apply_text_normalization":"on"
                       }
@@ -254,7 +268,8 @@ jobs:
                           time.sleep(2*attempt)
               raise RuntimeError(f"Generation failed for {text[:80]!r}: {last}")
 
-          def build_pack(*,texts,manifest_path,asset_dir,profile,pack_id,counts):
+          def build_pack(*,texts,manifest_path,asset_dir,profile,pack_id,counts,model_id=None,require_model_match=False):
+              model_id=model_id or ELEVEN_MODEL
               unique=[]
               seen=set()
               for raw in texts:
@@ -270,18 +285,18 @@ jobs:
 
               for text in unique:
                   entry=old_entries.get(text) or {}
-                  p=local_from_entry(entry,asset_dir)
+                  p=local_from_entry(entry,asset_dir,model_id if require_model_match else None)
                   if p is None:
                       continue
                   results[text]=(p,float(entry.get("durationSeconds") or duration(p)))
-                  prepared=prepare_kids_voice_text(text)
+                  prepared=norm(text) if profile=="dua_arabic" else prepare_kids_voice_text(text)
                   prepared_hashes[text]=hashlib.sha256(prepared.encode("utf-8")).hexdigest()
 
               missing=[text for text in unique if text not in results]
               print(f"{pack_id}: {len(unique)} Texte · {len(results)} aktuell · {len(missing)} neu")
               serial={"done":0,"total":len(missing)}
               with concurrent.futures.ThreadPoolExecutor(max_workers=3) as ex:
-                  futures={ex.submit(synth,text,profile,asset_dir,serial):text for text in missing}
+                  futures={ex.submit(synth,text,profile,asset_dir,serial,model_id):text for text in missing}
                   for fut in concurrent.futures.as_completed(futures):
                       text,p,d,prepared=fut.result()
                       results[text]=(p,d)
@@ -301,6 +316,7 @@ jobs:
                       "durationSeconds":round(float(d),3),
                       "preparedTextSha256":prepared_hashes[text],
                       "synthesisRevision":SYNTHESIS_REVISION,
+                      "modelId":model_id,
                       "voiceProfileId":"serhat-owner-voice-2026",
                       "sourceVoice":"authorized-owner-voice",
                       "sourceType":"owner-voice-generated",
@@ -375,7 +391,7 @@ jobs:
           ]
           if not dua_items:
               raise SystemExit("Keine freigegebenen Kids-Duʿāʾ gefunden.")
-          dua_texts=[norm(str(d.get("childPrompt") or "")+" "+str(d.get("meaning") or "")) for d in dua_items]
+          dua_texts=[norm(d.get("audioGermanText") or (str(d.get("childPrompt") or "")+" "+str(d.get("meaning") or ""))) for d in dua_items]
           dua_texts.extend([
               "Richtig. Sehr gut.",
               "Noch nicht. Hör die Erklärung noch einmal."
@@ -385,14 +401,32 @@ jobs:
               manifest_path=DUA_MANIFEST,
               asset_dir=DUA_ASSETS,
               profile="kids_story",
-              pack_id="KIDS_DUA_OWNER_VOICE_V1",
-              counts={"duaItems":len(dua_items),"explanationPrompts":len(dua_items)}
+              pack_id="KIDS_DUA_OWNER_VOICE_V2",
+              counts={"duaItems":len(dua_items),"explanationPrompts":len(dua_items)},
+              model_id=ELEVEN_DUA_MODEL,
+              require_model_match=True
           )
           if dua_manifest["counts"]["explanationPrompts"]!=len(dua_items):
               raise SystemExit("Duʿāʾ-Voice-Pack unvollständig.")
 
+          dua_arabic_items=[d for d in dua_items if str(d.get("type") or "").lower()=="sunnah"]
+          dua_arabic_texts=[norm(d.get("audioArabicText") or d.get("arabic")) for d in dua_arabic_items]
+          dua_ar_manifest=build_pack(
+              texts=dua_arabic_texts,
+              manifest_path=DUA_AR_MANIFEST,
+              asset_dir=DUA_AR_ASSETS,
+              profile="dua_arabic",
+              pack_id="KIDS_DUA_ARABIC_OWNER_VOICE_V1",
+              counts={"duaItems":len(dua_arabic_items),"arabicPrompts":len(dua_arabic_items)},
+              model_id=ELEVEN_DUA_MODEL,
+              require_model_match=True
+          )
+          if dua_ar_manifest["counts"]["arabicPrompts"]!=len(dua_arabic_items):
+              raise SystemExit("Arabischer Duʿāʾ-Voice-Pack unvollständig.")
+
           print("Quiz voice pack:",quiz_manifest["counts"])
           print("Dua voice pack:",dua_manifest["counts"])
+          print("Dua Arabic voice pack:",dua_ar_manifest["counts"])
           print("Synthesis revision:",SYNTHESIS_REVISION)
           PY
 
@@ -402,7 +436,7 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add             kids/data/quiz-audio.json             kids/data/dua-audio.json             kids/assets/kids-quiz-audio             kids/assets/kids-dua-audio
+          git add             kids/data/quiz-audio.json             kids/data/dua-audio.json             kids/data/dua-arabic-audio.json             kids/assets/kids-quiz-audio             kids/assets/kids-dua-audio             kids/assets/kids-dua-arabic-audio
           if git diff --cached --quiet; then
             echo "Kids owner voice packs already current."
             exit 0
