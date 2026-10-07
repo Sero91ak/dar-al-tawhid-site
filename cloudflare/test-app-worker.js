@@ -176,7 +176,7 @@ async function finalizeDarTestHomeV1193(asset) {
   // v1202: existing Adobe/Runway imagery becomes one continuous Home background.
   // CSS only; no navigation, route or bottom-tab behavior changes.
   if (!html.includes("dar-home-atmosphere-v1202.css")) {
-    const atmosphereLink = '<link rel="stylesheet" id="darHomeAtmosphereV1224" href="/test/assets/dar-home-atmosphere-v1202.css?v=1322-home">\n';
+    const atmosphereLink = '<link rel="stylesheet" id="darHomeAtmosphereV1224" href="/test/assets/dar-home-atmosphere-v1202.css?v=1323-stability">\n';
     if (html.includes("</head>")) html = html.replace("</head>", atmosphereLink + "</head>");
     else html = html.replace("<body", atmosphereLink + "<body");
   }
@@ -192,9 +192,9 @@ async function finalizeDarTestHomeV1193(asset) {
   // The URLs are exactly the same cache keys used by CSS/JS, so no duplicate image transfer occurs.
   if (!html.includes("darHomeHeroMobilePreloadV1239")) {
     const homePreloads =
-      '<link rel="preload" id="darHomeHeroMobilePreloadV1239" as="image" href="/test/assets/home-v1194/hero-mobile-adobe.jpg?v=1322-home" media="(max-width:759px)" fetchpriority="high">\n' +
-      '<link rel="preload" id="darHomeHeroWidePreloadV1239" as="image" href="/test/assets/home-v1194/hero-wide-adobe.jpg?v=1322-home" media="(min-width:760px)" fetchpriority="high">\n' +
-      '<link rel="preload" id="darHomeStudyPreloadV1239" as="image" href="/test/assets/home-v1194/study-runway.jpg?v=1322-home" fetchpriority="high">\n';
+      '<link rel="preload" id="darHomeHeroMobilePreloadV1239" as="image" href="/test/assets/home-v1194/hero-mobile-adobe.jpg?v=1239-home" media="(max-width:759px)" fetchpriority="high">\n' +
+      '<link rel="preload" id="darHomeHeroWidePreloadV1239" as="image" href="/test/assets/home-v1194/hero-wide-adobe.jpg?v=1239-home" media="(min-width:760px)" fetchpriority="high">\n' +
+      '<link rel="preload" id="darHomeStudyPreloadV1239" as="image" href="/test/assets/home-v1194/study-runway.jpg?v=1239-home" fetchpriority="high">\n';
     if (html.includes("</head>")) html = html.replace("</head>", homePreloads + "</head>");
     else html = html.replace("<body", homePreloads + "<body");
   }
@@ -208,8 +208,8 @@ async function finalizeDarTestHomeV1193(asset) {
   }
 
   // Keep only the existing v1194 home authority and refresh its assets.
-  html = html.replace(/dar-home-library-v1194\.css\?v=[^"']+/g, "dar-home-library-v1194.css?v=1322-home");
-  html = html.replace(/dar-home-library-v1194\.js\?v=[^"']+/g, "dar-home-library-v1194.js?v=1322-home");
+  html = html.replace(/dar-home-library-v1194\.css\?v=[^"']+/g, "dar-home-library-v1194.css?v=1323-stability");
+  html = html.replace(/dar-home-library-v1194\.js\?v=[^"']+/g, "dar-home-library-v1194.js?v=1323-stability");
   html = html.replace(/dar-library-redesign-v1168\.css\?v=[^"']+/g, "dar-library-redesign-v1168.css?v=1213-quran-native");
   html = html.replace(/dar-library-redesign-v1168\.js\?v=[^"']+/g, "dar-library-redesign-v1168.js?v=1213-quran-native");
 
