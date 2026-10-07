@@ -323,6 +323,8 @@ async function finalizeDarTestHomeV1193(asset) {
     else html += hadithFinal;
   }
   // DAR_ADAPTIVE_NAV_V1325
+  html = html.replace(/fold-thumb-nav\.css(?:\?v=[^"']*)?/g, "fold-thumb-nav.css?v=1325-adaptive-nav");
+  html = html.replace(/fold-thumb-nav\.js(?:\?v=[^"']*)?/g, "fold-thumb-nav.js?v=1325-adaptive-nav");
   // Test-only foundation for user-selectable bottom/left/right navigation.
   // Loaded as a final authority so legacy bottom-nav CSS cannot override side placement.
   if (!html.includes("fold-thumb-nav.css")) {
