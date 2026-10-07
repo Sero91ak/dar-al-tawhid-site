@@ -448,9 +448,12 @@ jobs:
               return manifest
 
           build_scope=os.environ.get("VOICE_BUILD_SCOPE","full").strip().lower()
-          if build_scope not in ("full","quiz","dua"):
+          if build_scope not in ("full","quiz","dua","pause"):
               raise SystemExit("Ungültiger VOICE_BUILD_SCOPE: "+build_scope)
           print("VOICE_BUILD_SCOPE="+build_scope)
+          if build_scope=="pause":
+              print("VOICE_BUILD_SCOPE=pause · Audioerzeugung absichtlich gestoppt; Runtime bleibt bereit.")
+              raise SystemExit(0)
 
           if build_scope!="dua":
               quiz=json.loads(QUIZ.read_text(encoding="utf-8"))
