@@ -11070,4 +11070,34 @@ html[data-view="stories"] #view-stories > :last-child{
 }
 </style>
 
+<style id="kids-balloon-motion-restore-v1230">
+/* Restore ONLY the Kids balloon movement. */
+#view-today .kids-wordmark > .wm-kids span{
+  display:inline-block!important;
+  transform-origin:50% 90%!important;
+  will-change:transform!important;
+  animation:kidsBalloonRestore1230 2.18s cubic-bezier(.34,.02,.22,1) infinite!important;
+}
+#view-today .kids-wordmark > .wm-kids .k{animation-delay:0s!important}
+#view-today .kids-wordmark > .wm-kids .i{animation-delay:.13s!important}
+#view-today .kids-wordmark > .wm-kids .d{animation-delay:.26s!important}
+#view-today .kids-wordmark > .wm-kids .s{animation-delay:.39s!important}
+@keyframes kidsBalloonRestore1230{
+  0%,100%{transform:translate3d(0,0,0) rotate(0deg) scale(1)}
+  30%{transform:translate3d(0,-14px,0) rotate(-.9deg) scale(1.055,.945)}
+  49%{transform:translate3d(0,2px,0) rotate(.3deg) scale(.976,1.034)}
+  66%{transform:translate3d(0,-5px,0) rotate(-.2deg) scale(1.018,.986)}
+  82%{transform:translate3d(0,0,0) rotate(0deg) scale(1)}
+}
+@media(prefers-reduced-motion:reduce){
+  #view-today .kids-wordmark > .wm-kids span{
+    animation:kidsBalloonRestoreReduced1230 3.2s ease-in-out infinite!important;
+  }
+}
+@keyframes kidsBalloonRestoreReduced1230{
+  0%,100%{transform:translate3d(0,0,0) scale(1)}
+  50%{transform:translate3d(0,-6px,0) scale(1.02)}
+}
+</style>
+
 </html>
