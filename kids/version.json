@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v122-home-reference-lock1218",
-  "label": "KIDS · V1.08.43",
-  "releasedAt": "2026-10-07T10:44:00+02:00",
-  "note": "V1218 sperrt die Startseiten-Wortmarke exakt auf die freigegebene Bild-1-Referenz: DĀR AL TAWḤĪD wird nicht mehr per Font/CSS angenähert, sondern als exakt extrahierte und 2× hochskalierte Referenzgrafik inline geladen. Damit bleiben Rundung, Abstände, Diakritika und gold-orange 3D-Anmutung wie in der Vorlage. Kids behält seine Bild-1-Proportionen und erhält wieder den klar sichtbaren alten Ballon-Sprung mit zeitversetzten Buchstaben. Die globale V1217-Capsule-/Card-Glow-Regel bleibt vollständig erhalten.",
+  "buildId": "kids-shell-v123-home-wordmark-fix1219",
+  "label": "KIDS · V1.08.44",
+  "releasedAt": "2026-10-07T11:02:00+02:00",
+  "note": "V1219 behebt den sichtbaren Startseitenfehler aus V1218. Die exakte DĀR AL TAWḤĪD-Referenzgrafik wird jetzt als echtes same-origin PNG geladen statt als sehr große data:-URL im HTML. Das versehentlich sichtbare literale \\\\n vor Kids wurde vollständig entfernt. Die freigegebene Wortmarke selbst bleibt unverändert; Kids behält den zeitversetzten Ballon-Sprung.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1218",
+    "serviceWorkerCache": "v1219",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -1002,7 +1002,7 @@
     "duaSmartHeroImage": false,
     "duaTransliterationLarge": true,
     "duaWordTapEnabled": true,
-    "homeBrand": "exact-approved-reference-inline-v1218",
+    "homeBrand": "exact-approved-reference-external-png-v1219",
     "homeBrandWordSpacing": "explicit-three-word-spacing",
     "homeBrandMotion": "subtle-whole-wordmark-wobble-v1218",
     "homeKidsBalloon": "strong-staggered-2.18s-v1218",
@@ -1037,7 +1037,11 @@
     "homeBrandSource": "user approved Bild 1",
     "homeBrandRasterUpscale": "Runway 2x",
     "homeBrandCssApproximation": false,
-    "globalCapsuleGlow": "v1217-preserved"
+    "globalCapsuleGlow": "v1217-preserved",
+    "homeBrandAsset": "/kids/assets/kids-home-v1219/dar-title-reference.png?v=1219",
+    "homeBrandDelivery": "same-origin-static-png",
+    "homeBrandDataUri": false,
+    "homeBrandEscapedNewlineBug": false
   },
   "updatedAt": "2026-10-07",
   "deployTrigger": "2026-10-07T10:06:00+02:00"
