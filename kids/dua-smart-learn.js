@@ -95,9 +95,27 @@
     document.documentElement.classList.toggle("dua-smart-open",!!on);
     document.body.classList.toggle("dua-smart-open",!!on);
     var modal=document.getElementById("duaModal");
+    var shell=document.querySelector(".shell");
+    var nav=document.querySelector(".bottom-nav");
     if(modal){
       if(on)modal.setAttribute("inert","");
       else modal.removeAttribute("inert");
+    }
+    if(on){
+      [shell,nav].forEach(function(el){
+        if(!el)return;
+        el.setAttribute("inert","");
+        el.setAttribute("aria-hidden","true");
+      });
+    }else{
+      var underlyingOpen=!!document.querySelector(".modal.open,#duaHubDetail.open");
+      if(!underlyingOpen){
+        [shell,nav].forEach(function(el){
+          if(!el)return;
+          el.removeAttribute("inert");
+          el.removeAttribute("aria-hidden");
+        });
+      }
     }
   }
   function ensureRoot(){
