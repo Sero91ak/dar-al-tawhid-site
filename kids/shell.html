@@ -5343,6 +5343,7 @@ function saveKidsQuizSession(){
       mode:String(kidsQuizRoundMode||"normal"),
       ids:currentQuiz.map(function(q){return String(q&&q.id||"")}).filter(Boolean),
       index:Math.max(0,Math.min(currentQuiz.length-1,Number(currentQuizIndex||0))),
+      correctCount:Math.max(0,Number(quizCorrectCount||0)),
       updatedAt:Date.now()
     }));
   }catch(e){}
@@ -5369,7 +5370,7 @@ window.resumeKidsQuizSession=function(){
     setKidsQuizRoundContext(saved.category,saved.mode);
     currentQuiz=restored;
     currentQuizIndex=Math.max(0,Math.min(restored.length-1,Number(saved.index||0)));
-    quizCorrectCount=0;
+    quizCorrectCount=Math.max(0,Number(saved.correctCount||0));
     quizLocked=false;
     quizQuestionHadError=false;
     renderKidsQuizAgePicker();
@@ -5418,13 +5419,14 @@ function quizAgeRange(){
 }
 var QUIZ_PROGRESS_PREFIX="kids.quiz.progress.v2.";
 function quizProgressDefault(){
-  return {stage:"new",attempts:0,reviewPasses:0,wrong:0,lapses:0,dueAt:0,lastSeenAt:0,lastMistakeAt:0,consecutiveFirstTry:0};
+  return {stage:"new",attempts:0,reviewPasses:0,wrong:0,mistakeTaps:0,lapses:0,dueAt:0,lastSeenAt:0,lastMistakeAt:0,consecutiveFirstTry:0};
 }
 function quizProgress(id){
   var key=QUIZ_PROGRESS_PREFIX+id;
   try{
     var raw=JSON.parse(localStorage.getItem(key)||"null");
     if(raw&&typeof raw==="object"){
+      if(raw.mistakeTaps===undefined)raw.mistakeTaps=Number(raw.wrong||0);
       var base=quizProgressDefault();
       Object.keys(base).forEach(function(k){if(raw[k]===undefined)raw[k]=base[k]});
       return raw;
@@ -5460,6 +5462,16 @@ function quizPriority(id,now){
   if(e.stage==="review")return{bucket:25,due:due,lastSeen:Number(e.lastSeenAt||0),entry:e};
   if(e.stage==="secure")return{bucket:30,due:due,lastSeen:Number(e.lastSeenAt||0),entry:e};
   return{bucket:35,due:due,lastSeen:Number(e.lastSeenAt||0),entry:e};
+}
+function recordQuizMistake(id){
+  var e=quizProgress(id);
+  var now=Date.now();
+  e.mistakeTaps=Number(e.mistakeTaps||0)+1;
+  e.lastMistakeAt=now;
+  e.dueAt=now+5*60*1000;
+  if(e.stage==="new")e.stage="learning";
+  saveQuizProgress(id,e);
+  return e;
 }
 function recordQuizAttempt(id,firstTry){
   var e=quizProgress(id);
@@ -5757,7 +5769,7 @@ function renderQuizQuestion(){
   var help=band==="4-6"?"":(band==="9-10"?"Wähle die beste Antwort.":"Hör zu und tippe auf deine Antwort.");
   var kicker=band==="4-6"?String(q.category||"Quiz"):String(q.category||"Quiz")+" · "+(currentQuizIndex+1)+"/"+currentQuiz.length;
   var listenLabel=band==="4-6"?"Frage hören":"Frage noch einmal hören";
-  var art={url:"https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/cbe2efa5-f245-41e4-9262-be656af8ffc7/c22155b0-3b92-4227-a372-cfdaf600c518/Single_standalone_cinematic_16_9_hero_illustration_for_a_pre.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiZDEzNTA0YmI5ZTBiNjNjMyIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTMzMDM2M30.RWZGx2UrVdXyvfYQRM-noI7t5EVNJPS9cvcn4fawl40",position:"50% 50%",family:"v1124"};
+  var art=quizArtworkForBand(q)||{};
   document.getElementById("quizBody").innerHTML=
     '<div id="quizScene" class="quiz-scene" aria-hidden="true">'+
       '<div class="quiz-scene-top"><span class="quiz-scene-chip">'+quizText(q.category||"Quiz")+'</span><span class="quiz-scene-chip quiz-scene-count">Frage '+(currentQuizIndex+1)+' · '+currentQuiz.length+'</span></div>'+
@@ -5771,7 +5783,7 @@ function renderQuizQuestion(){
     '<div id="quizFeedback" class="quiz-feedback" aria-live="polite"></div>'+
     '<div id="quizExplanation" class="quiz-explanation"></div>'+
     '<div id="quizSource" class="quiz-source"></div>'+
-    '<button id="quizNext" class="quiz-next" type="button">Weiter ›</button>';
+    '<button id="quizNext" class="quiz-next" type="button">'+(currentQuizIndex===currentQuiz.length-1?'Auswertung ansehen':'Weiter')+' ›</button>';
   var scene=document.getElementById("quizScene");
   if(scene&&art.url){
     scene.style.setProperty("--quiz-art",'url("'+art.url.replace(/"/g,"%22")+'")');
@@ -5841,6 +5853,7 @@ function chooseQuizAnswer(index,button){
     quizSpeak(q.success);
   }else{
     quizQuestionHadError=true;
+    recordQuizMistake(q.id);
     button.classList.add("wrong");
     document.getElementById("quizFeedback").className="quiz-feedback bad";
     document.getElementById("quizFeedback").textContent=q.retry;
