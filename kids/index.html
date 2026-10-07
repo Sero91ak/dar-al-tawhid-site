@@ -3183,11 +3183,6 @@ html:not([data-view="today"]) .view.active{
         <div class="top-spacer"></div>
       </div>
       <div id="quizStage" class="quiz-stage">
-        <div id="quizAgePick" class="quiz-age-pick" aria-label="Quiz-Altersstufe">
-          <button type="button" data-quiz-age="4-6">4–6</button>
-          <button type="button" data-quiz-age="7-8">7–8</button>
-          <button type="button" data-quiz-age="9-10">9–10</button>
-        </div>
         <div id="quizProgress" class="quiz-progress"></div>
         <div id="quizBody">
           <div id="quizScene" class="quiz-scene"><div id="quizSceneSymbol" class="quiz-scene-symbol"></div></div>
@@ -5314,44 +5309,21 @@ window.addEventListener("dar-kids-owner-voice-missing",function(event){
     if(missing&&missing===wanted)setQuizListenState("missing");
   }catch(e){}
 });
-var kidsQuizAgeBand="";
 function defaultKidsQuizAgeBand(){
   if(age==="4–5")return"4-6";
   if(age==="9–10")return"9-10";
   return"7-8";
 }
 function currentKidsQuizAgeBand(){
-  if(kidsQuizAgeBand)return kidsQuizAgeBand;
-  var saved="";
-  try{saved=String(localStorage.getItem("kids.quiz.ageBand")||"")}catch(e){}
-  kidsQuizAgeBand=["4-6","7-8","9-10"].indexOf(saved)>=0?saved:defaultKidsQuizAgeBand();
-  return kidsQuizAgeBand;
+  return defaultKidsQuizAgeBand();
 }
 function renderKidsQuizAgePicker(){
+  /* Die Quiz-Altersstufe folgt ausschließlich der Kids-Einstellung.
+     Im Quiz selbst gibt es bewusst keine zweite Altersauswahl. */
   var selected=currentKidsQuizAgeBand();
   var modal=document.getElementById("quizModal");
   if(modal)modal.setAttribute("data-quiz-band",selected);
-  document.querySelectorAll("#quizAgePick [data-quiz-age]").forEach(function(btn){
-    var active=btn.getAttribute("data-quiz-age")===selected;
-    btn.classList.toggle("active",active);
-    btn.setAttribute("aria-pressed",active?"true":"false");
-  });
 }
-function setKidsQuizAgeBand(value,restart){
-  value=String(value||"");
-  if(["4-6","7-8","9-10"].indexOf(value)<0)return;
-  kidsQuizAgeBand=value;
-  try{localStorage.setItem("kids.quiz.ageBand",value)}catch(e){}
-  renderKidsQuizAgePicker();
-  if(restart&&kidsQuizLoaded&&document.getElementById("quizModal").classList.contains("open"))beginQuizSession();
-}
-document.querySelectorAll("#quizAgePick [data-quiz-age]").forEach(function(btn){
-  btn.addEventListener("click",function(){
-    var modal=document.getElementById("quizModal");
-    var libraryMode=!!(modal&&modal.classList.contains("quiz-library-mode"));
-    setKidsQuizAgeBand(btn.getAttribute("data-quiz-age"),!libraryMode);
-  });
-});
 function isYesNoAnswers(answers){
   var labels=(answers||[]).map(function(a){return String(a.label||"").trim().toLowerCase()});
   return labels.length===2&&labels.indexOf("ja")>=0&&labels.indexOf("nein")>=0;
@@ -5566,11 +5538,13 @@ function fetchKidsQuiz(){
           /^kids-quiz-\d{3}$/.test(String(q.id||""));
       });
       kidsQuizPool=baseItems.concat(normalizeStudioQuizItems(studioData));
+      window.kidsQuizPool=kidsQuizPool;
       kidsQuizLoaded=true;
       try{window.dispatchEvent(new CustomEvent("dar-kids-quiz-loaded",{detail:{count:kidsQuizPool.length}}))}catch(e){}
       return kidsQuizPool;
     }).catch(function(){
       kidsQuizPool=[];
+      window.kidsQuizPool=kidsQuizPool;
       kidsQuizLoaded=false;
       return [];
     });
@@ -7451,7 +7425,7 @@ html[data-view="stories"] #view-stories > :last-child{
 <script src="/kids/dua-hub-v1219.js?v=1221" data-kids-dua-hub="1220"></script>
 <script src="/kids/story-hub.js?v=25"></script>
 <script src="/kids/kids-age-typography.js?v=3"></script>
-<script src="/kids/quiz-library.js?v=7"></script>
+<script src="/kids/quiz-library.js?v=8"></script>
 <link rel="stylesheet" href="/kids/section-heroes-v1095.css?v=1123-dua-quiz-art" data-kids-section-heroes-late="1">
 <link rel="stylesheet" href="/kids/stories-home-v1133.css?v=1148" data-kids-stories-home-late="1">
 <link rel="stylesheet" href="/kids/stories-home-v1138.css?v=1152" data-kids-stories-home-polish="1">

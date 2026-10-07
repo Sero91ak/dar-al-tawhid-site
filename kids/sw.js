@@ -182,7 +182,7 @@ const PRECACHE=CORE_PRECACHE.concat([
   "/kids/data/dua-audio.json",
   "/kids/data/owner-voice-audio.json",
   "/kids/quiz-library.css?v=7",
-  "/kids/quiz-library.js?v=7",
+  "/kids/quiz-library.js?v=8",
   "/kids/assets/sahaba-mubashshirun/abu-bakr.jpg",
   "/kids/assets/sahaba-mubashshirun/umar.jpg",
   "/kids/assets/sahaba-mubashshirun/uthman.jpg",

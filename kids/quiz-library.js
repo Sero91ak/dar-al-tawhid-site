@@ -37,8 +37,8 @@
     return"Neu";
   }
   function ensureUi(){
-    var stage=byId("quizStage"),picker=byId("quizAgePick");
-    if(!stage||!picker||byId("quizLibraryToolbar"))return;
+    var stage=byId("quizStage");
+    if(!stage||byId("quizLibraryToolbar"))return;
     var toolbar=document.createElement("div");
     toolbar.id="quizLibraryToolbar";
     toolbar.className="quiz-library-toolbar";
@@ -48,7 +48,9 @@
         '<button id="quizModePlay" class="active" type="button">Quizrunde</button>'+
         '<button id="quizModeLibrary" type="button">Alle Fragen</button>'+
       '</div>';
-    picker.insertAdjacentElement("afterend",toolbar);
+    var progress=byId("quizProgress");
+    if(progress)stage.insertBefore(toolbar,progress);
+    else stage.insertBefore(toolbar,stage.firstChild);
 
     var back=document.createElement("button");
     back.id="quizLibraryBack";
@@ -86,13 +88,6 @@
       renderList();
     });
 
-    document.querySelectorAll("#quizAgePick [data-quiz-age]").forEach(function(btn){
-      btn.addEventListener("click",function(){
-        category="all";query="";visibleLimit=PAGE_SIZE;
-        var s=byId("quizLibrarySearch");if(s)s.value="";
-        setTimeout(function(){refreshSummary();if(mode==="library")renderLibrary()},0);
-      });
-    });
     refreshSummary();
   }
   function updateModeButtons(){
