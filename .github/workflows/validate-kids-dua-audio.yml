@@ -48,6 +48,7 @@ jobs:
             assert len(entries)==expected,(path,len(entries),expected)
             assert data.get("modelId")=="eleven_v4",(path,data.get("modelId"))
             assert data.get("voiceProfileId")=="serhat-owner-voice-2026",(path,data.get("voiceProfileId"))
+            assert "Serhat Abu Malik" in str(data.get("speaker") or ""),(path,data.get("speaker"))
             if path in {
               "kids/data/dua-arabic-audio.json",
               "kids/data/dua-arabic-slow-audio.json",
@@ -69,7 +70,7 @@ jobs:
           expected_revisions={
             "kids/data/dua-arabic-audio.json":"dua-arabic-native-fusha-v3-20261007",
             "kids/data/dua-arabic-slow-audio.json":"dua-arabic-native-fusha-slow-v3-20261007",
-            "kids/data/dua-word-audio.json":"dua-arabic-native-fusha-word-v3-20261007",
+            "kids/data/dua-word-audio.json":"dua-arabic-native-fusha-word-v4-20261007",
           }
           for path,expected_revision in expected_revisions.items():
             data=json.loads((root/path).read_text(encoding="utf-8"))
