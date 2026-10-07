@@ -54,7 +54,16 @@ for (const token of [
   "[data-image-post-open]",
   "[data-image-dua-open]",
   "[data-image-ayah-open]",
-  "[data-image-hadith-open]"
+  "[data-image-hadith-open]",
+  "GLOBAL_SHARE_UI_STANDARD_V1267",
+  "buildShareStandard",
+  "normalizeSharePanel",
+  "dar-share-primary",
+  "dar-share-tools",
+  "data-dar-global-copy-text",
+  "data-dar-global-copy-link",
+  "Wissen weitergeben",
+  "Text, Link oder Bildbeitrag"
 ]) need(globalRel, globalShare, token);
 for (const token of [
   "/api/share-image/background",
@@ -65,8 +74,25 @@ for (const token of [
   "GENERIC_SCENES",
   "share-background-library",
   "Folgt für mehr Wissen aus Qurʾān & Sunnah",
-  "app-store-badge-de-official.svg"
+  "app-store-badge-de-official.svg",
+  'title.textContent="Weitergeben"',
+  'holder.className="share-flat-v410"'
 ]) forbid(globalRel, globalShare, token);
+
+const globalCssRel = "assets/dar-global-share-v1225.css";
+const globalCss = file(globalCssRel);
+for (const token of [
+  "GLOBAL_SHARE_UI_STANDARD_V1267",
+  ".dar-share-card .dar-share-primary",
+  "grid-template-columns:repeat(4,minmax(0,1fr))",
+  ".dar-share-tools",
+  "grid-template-columns:repeat(3,minmax(0,1fr))",
+  ".dar-share-note"
+]) need(globalCssRel, globalCss, token);
+for (const token of [
+  "@media(max-width:370px){\n  .share-panel .share-flat-v410",
+  "grid-template-columns:repeat(3,minmax(0,1fr))!important}.share-panel .share-btn"
+]) forbid(globalCssRel, globalCss, token);
 
 const liveRel = "assets/premium-feed-app.js";
 const testRel = "test/assets/premium-feed-app.js";
