@@ -27552,7 +27552,7 @@ function renderHomePremiumQuickAccess(){
     {nav:"prayer",title:"Gebetszeiten",desc:"Zeiten und Erinnerungen",kind:"prayer"},
     {nav:"quran",title:"Qurʾān",desc:"114 Suren, Arabisch und Lautschrift",kind:"quran"},
     {nav:"quiz",title:"Dīn-Quiz",desc:"Wissen prüfen",kind:"quiz"},
-    {nav:"more",title:"Alle Bereiche",desc:"Der vollständige Mehr-Bereich",kind:"more"}
+    {nav:"more",title:"Weitere Bereiche",desc:"Weitere Funktionen und Einstellungen",kind:"more"}
   ];
   const list=rows.map(c=>`<button type="button" class="home-line-row" data-nav="${esc(c.nav)}" aria-label="${esc(c.title)} öffnen"><span class="home-line-row__ico">${icon(c.kind,c.title)}</span><span class="home-line-row__copy"><b>${esc(c.title)}</b><small>${esc(c.desc)}</small></span></button>`).join("");
   return `<section class="home-line-tawhid" aria-labelledby="homeTawhidTitle"><p class="home-line-kicker">Der Kern</p><h2 class="home-line-title" id="homeTawhidTitle">Tawḥīd</h2><p class="home-line-statement">Allah in Herrschaft, Anbetung und Namen einzig machen. Nur Ihm gebührt die Anbetung.</p><button type="button" class="home-line-open" data-nav="tawhid-guide">Ausführlich mit Belegen</button></section><section class="home-line-list" aria-label="Bereiche">${list}</section>`;
@@ -28078,7 +28078,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v1314";
+const APP_BUILD_ID="app-shell-v1315";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -37038,7 +37038,7 @@ html[data-theme] body.is-home-route #appView .home-line-statement{margin:0 0 8px
 html[data-theme] body.is-home-route #appView .home-line-open{display:inline-flex!important;min-height:36px!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:var(--gold2,#c6a15b)!important;font:800 15px/1 system-ui,sans-serif!important}
 html[data-theme] body.is-home-route #appView .home-line-list{
   display:grid!important;grid-template-columns:1fr 1fr!important;gap:0!important;
-  margin:0 0 88px!important;padding:0!important;background:transparent!important;
+  margin:0 0 18px!important;padding:0!important;background:transparent!important;
 }
 html[data-theme] body.is-home-route #appView .home-line-row{
   display:grid!important;grid-template-columns:40px minmax(0,1fr)!important;gap:8px!important;align-items:center!important;
@@ -37049,7 +37049,7 @@ html[data-theme] body.is-home-route #appView .home-line-row{
   -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
 }
 html[data-theme] body.is-home-route #appView .home-line-list .home-line-row:nth-child(odd){
-  border-right:1px solid color-mix(in srgb,var(--gold2,#c6a15b) 22%,transparent)!important;
+  border-right:0!important;
 }
 html[data-theme] body.is-home-route #appView .home-line-row__ico{width:40px!important;height:40px!important;display:grid!important;place-items:center!important;background:transparent!important;border-radius:0!important}
 html[data-theme] body.is-home-route #appView .home-line-row__ico img.dar3d-icon{width:36px!important;height:36px!important;min-width:0!important;min-height:0!important;object-fit:contain!important}

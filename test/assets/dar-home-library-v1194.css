@@ -1165,3 +1165,106 @@ html.dar-home-v1194[data-theme] body.is-home-route .top-shell .header .brand-kic
   white-space:normal!important;
   text-shadow:none!important;
 }
+
+
+/* v1315 · Start page precision polish · TEST ONLY
+   Keep the existing editorial Hero. Refine the lower Home navigation,
+   Qur'an continue band, typography, and bottom-safe footer. */
+html.dar-home-v1194 body.is-home-route #appView.view{
+  margin-top:-1px!important;
+}
+html.dar-home-v1194 body.is-home-route #appView :is(.home-line-grid,.home-line-list){
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  column-gap:12px!important;
+  row-gap:0!important;
+  margin-bottom:18px!important;
+  border-left:0!important;
+  border-top:0!important;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--dt-page) 10%,transparent),transparent 48%)!important;
+}
+html.dar-home-v1194 body.is-home-route #appView .home-line-row,
+html.dar-home-v1194 body.is-home-route #appView .home-line-list .home-line-row:nth-child(odd){
+  min-height:94px!important;
+  padding:13px 7px!important;
+  border-right:0!important;
+  border-bottom:1px solid color-mix(in srgb,var(--dt-rule) 72%,transparent)!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+html.dar-home-v1194 body.is-home-route #appView .home-line-row__ico{
+  width:38px!important;
+  min-width:38px!important;
+  height:40px!important;
+  margin-right:7px!important;
+}
+html.dar-home-v1194 body.is-home-route #appView .home-line-row__ico img,
+html.dar-home-v1194 body.is-home-route #appView .home-line-row__ico img.dar3d-icon{
+  width:34px!important;
+  height:34px!important;
+  max-width:34px!important;
+  max-height:34px!important;
+  object-fit:contain!important;
+}
+html.dar-home-v1194 body.is-home-route #appView .home-line-row__copy b{
+  font-size:15px!important;
+  line-height:1.12!important;
+  text-decoration:none!important;
+  text-decoration-line:none!important;
+  border-bottom:0!important;
+}
+html.dar-home-v1194 body.is-home-route #appView .home-line-row__copy small{
+  font-size:11px!important;
+  line-height:1.28!important;
+}
+html.dar-home-v1194 body.is-home-route #appView :is(
+  [data-nav="hadith"].home-line-row,[data-dt-nav="hadith"].home-line-row,.dt-hadith-library-entry
+) :is(a,b,strong,span,h2,h3,h4){
+  text-decoration:none!important;
+  text-decoration-line:none!important;
+  border-bottom:0!important;
+  box-shadow:none!important;
+}
+html.dar-home-v1194 body.is-home-route #appView .home-line-tawhid{
+  margin-top:-1px!important;
+  padding:27px 0 22px!important;
+}
+html.dar-home-v1194 body.is-home-route #appView .home-v380-quran-hero.dt-quran-resume-after-core{
+  min-height:84px!important;
+  margin:10px 8px 16px!important;
+  padding:13px 8px!important;
+  border-top:1px solid color-mix(in srgb,var(--dt-rule) 70%,transparent)!important;
+  border-bottom:1px solid color-mix(in srgb,var(--dt-rule) 70%,transparent)!important;
+}
+html.dar-home-v1194 body.is-home-route #appView .home-v380-quran-hero.dt-quran-resume-after-core .home-v380-quran-hero__title{
+  font-size:clamp(20px,5vw,25px)!important;
+  line-height:1.08!important;
+}
+html.dar-home-v1194 body.is-home-route #appView .home-v380-quran-hero.dt-quran-resume-after-core :is(
+  .home-v380-quran-hero__meta,.home-v380-quran-hero__when
+){
+  font-size:10.5px!important;
+  line-height:1.25!important;
+}
+html.dar-home-v1194 body.has-bottom-nav.is-home-route .footer,
+html.dar-home-v1194 body.is-home-route .footer{
+  min-height:0!important;
+  height:auto!important;
+  margin:0!important;
+  padding:18px max(16px,env(safe-area-inset-left,0px)) calc(118px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-right,0px))!important;
+}
+html.dar-home-v1194 body.is-home-route .footer :is(.footer-actions,.footer-socials){
+  margin-top:10px!important;
+  gap:6px!important;
+}
+html.dar-home-v1194 body.is-home-route .footer .signature{
+  margin-top:10px!important;
+  font-size:clamp(22px,6vw,28px)!important;
+  line-height:1.05!important;
+}
+@media(max-width:430px){
+  html.dar-home-v1194 body.is-home-route #appView .home-line-row{
+    min-height:94px!important;
+    padding:13px 7px!important;
+  }
+}
