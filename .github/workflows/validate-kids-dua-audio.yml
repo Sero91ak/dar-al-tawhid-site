@@ -67,7 +67,7 @@ jobs:
           # Arabic packs use exact vocalized Fuṣḥā. Full remains v2; slow/word are
           # dedicated v3 renders with Eleven v4 [slowly] delivery tags.
           expected_revisions={
-            "kids/data/dua-arabic-audio.json":"dua-arabic-native-fusha-v2-20261007",
+            "kids/data/dua-arabic-audio.json":"dua-arabic-native-fusha-v3-20261007",
             "kids/data/dua-arabic-slow-audio.json":"dua-arabic-native-fusha-slow-v3-20261007",
             "kids/data/dua-word-audio.json":"dua-arabic-native-fusha-word-v3-20261007",
           }
