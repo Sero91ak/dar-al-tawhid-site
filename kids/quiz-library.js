@@ -43,11 +43,11 @@
   }
   function statsFor(items){
     var now=Date.now();
-    var total=items.length,seen=0,secure=0,learning=0,due=0,mistakeQuestions=0,wrong=0,attempts=0,directKnown=0;
+    var total=items.length,seen=0,secure=0,learning=0,due=0,mistakeQuestions=0,wrong=0,errors=0,attempts=0,directKnown=0;
     items.forEach(function(q){
       var e=progressFor(q);
-      var a=Number(e.attempts||0),w=Number(e.wrong||0);
-      attempts+=a;wrong+=w;
+      var a=Number(e.attempts||0),w=Number(e.wrong||0),errorTaps=Number(e.mistakeTaps||0);
+      attempts+=a;wrong+=w;errors+=errorTaps;
       if(a>0){
         seen++;
         if(w===0)directKnown++;
@@ -61,7 +61,7 @@
     var learnedPct=total?Math.round((secure/total)*100):0;
     return{
       total:total,seen:seen,secure:secure,learning:learning,due:due,
-      mistakeQuestions:mistakeQuestions,wrong:wrong,attempts:attempts,
+      mistakeQuestions:mistakeQuestions,wrong:wrong,errors:errors,attempts:attempts,
       directKnown:directKnown,firstTry:firstTry,learnedPct:learnedPct
     };
   }
@@ -186,7 +186,12 @@
     ensureUi();
     var box=byId("quizLearningDashboard");if(!box)return;
     var items=bandItems(),stats=statsFor(items),cats=categories(),resume=sessionInfo();
-    var reviewCount=Math.max(stats.due,stats.mistakeQuestions);
+    var now=Date.now();
+    var reviewCount=items.filter(function(q){
+      var e=progressFor(q);
+      return Number(e.wrong||0)>0||Number(e.lapses||0)>0||
+        (Number(e.attempts||0)>0&&Number(e.dueAt||0)>0&&Number(e.dueAt||0)<=now);
+    }).length;
     var recommendation=reviewCount>0
       ? reviewCount+" Frage"+(reviewCount===1?"":"n")+" solltest du wiederholen."
       : stats.seen?"Heute ist keine dringende Wiederholung offen.":"Starte deine erste Quizrunde.";
@@ -195,7 +200,7 @@
       var pct=st.total?Math.round((st.secure/st.total)*100):0;
       return '<button class="quiz-topic-card" type="button" data-quiz-topic="'+escapeHtml(c.name)+'">'+
         '<span class="quiz-topic-name">'+escapeHtml(c.name)+'</span>'+
-        '<span class="quiz-topic-meta">'+st.total+' Fragen · '+st.secure+' sicher</span>'+
+        '<span class="quiz-topic-meta">'+st.total+' Fragen · '+st.secure+' sicher'+(st.errors?' · '+st.errors+' Fehler':'')+'</span>'+
         '<span class="quiz-topic-progress"><i style="width:'+pct+'%"></i></span>'+
       '</button>';
     }).join("");
@@ -217,10 +222,12 @@
       '</section>'+
       '<div class="quiz-dash-bar"><i style="width:'+stats.learnedPct+'%"></i></div>'+
       '<section class="quiz-stat-grid">'+
-        '<div><strong>'+stats.secure+'</strong><span>Sicher gelernt</span></div>'+
+        '<div><strong>'+stats.secure+'</strong><span>Sicher</span></div>'+
         '<div><strong>'+stats.seen+'</strong><span>Bearbeitet</span></div>'+
-        '<div><strong>'+stats.wrong+'</strong><span>Fehler</span></div>'+
-        '<div><strong>'+stats.firstTry+'%</strong><span>Direkt gewusst</span></div>'+
+        '<div><strong>'+stats.learning+'</strong><span>Im Lernen</span></div>'+
+        '<div><strong>'+stats.errors+'</strong><span>Fehler</span></div>'+
+        '<div><strong>'+stats.due+'</strong><span>Jetzt fällig</span></div>'+
+        '<div><strong>'+stats.firstTry+'%</strong><span>Direkt richtig</span></div>'+
       '</section>'+
       resumeHtml+
       '<section class="quiz-review-card '+(reviewCount>0?"needs-review":"is-clear")+'">'+
