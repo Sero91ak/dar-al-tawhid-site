@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v120-global-story-glow1216",
-  "label": "KIDS · V1.08.41",
-  "releasedAt": "2026-10-07T09:44:00+02:00",
-  "note": "V1216 erzwingt den globalen Story-Capsule-Glow auf der Geschichten-Startseite und innerhalb von Propheten, Mubaschschirūn, Ṣaḥābiyyāt und Dīn. Ganze Capsule leuchtet bei Touch/Active/Focus mit Gold-Türkis-Rand, Außen- und Innenglow; ein 560-ms Touch-Hold macht den Effekt auf iPhone/iPad sichtbar. Die Regel liegt nach allen Bereichs-CSS und gilt auch für die Hören/Mitlesen/Lesen-Capsules.",
+  "buildId": "kids-shell-v121-global-glow1217",
+  "label": "KIDS · V1.08.42",
+  "releasedAt": "2026-10-07T10:06:00+02:00",
+  "note": "V1217 setzt den Capsule-/Card-Glow als globale Kids-Regel durch. Ṣaḥābah, Ṣaḥābiyyāt, Propheten, Dīn und neue anklickbare Kids-Capsules erhalten dieselbe sichtbare Touch-/Pressed-Rückmeldung; lokale Karten-Schatten können den Glow nicht mehr verdecken. Die Story-Capsules leuchten ohne Springen, Skalieren oder Breitenänderung. Der sichtbare Dīn-Badge „6 Lern-Erzählungen · Quellen kompakt getrennt“ wurde entfernt; Dīn verwendet konsequent die Bezeichnung Dīn-Lektion. Die V1215-Startseitenreferenz und Kids-Ballonanimation bleiben unverändert.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1216",
+    "serviceWorkerCache": "v1217",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -839,7 +839,7 @@
     "globalCardArrows": false,
     "globalCardRails": false,
     "globalCardWholeHitTarget": true,
-    "globalCardFeedback": "whole-capsule-gold-teal-touch-glow-v1216",
+    "globalCardFeedback": "whole-capsule-gold-teal-touch-glow-v1217",
     "globalCardCoverage": [
       "home choices",
       "resume",
@@ -885,8 +885,8 @@
     "globalCapsulePhoneBleed": "6px each side",
     "globalCapsuleEffectiveOuterMargin": "about 10px with 16px shell inset",
     "globalCapsuleTabletWidth": "100% content column",
-    "globalTouchGlow": "runtime-v3 + css-v10",
-    "globalTouchGlowCoverage": "home + stories home + deen + prophets + sahaba + sahabiyyat + quran + story libraries + compact mode capsules",
+    "globalTouchGlow": "runtime-v4 + css-v11",
+    "globalTouchGlowCoverage": "all clickable Kids capsules/cards + stories home + deen + prophets + sahaba + sahabiyyat + quran + dua + quiz + parents + story libraries + compact mode capsules",
     "globalTouchMotion": "no translate/scale/lift",
     "globalArrowSpaceReclaimed": true,
     "storyLibraryWidth": "near-edge-safe-width",
@@ -1015,7 +1015,7 @@
     "homeBrandSerif": false,
     "homeKidsBalloonReducedMotion": "visible-soft-5px",
     "globalStoryCapsuleGlow": true,
-    "globalStoryCapsuleGlowVersion": 1216,
+    "globalStoryCapsuleGlowVersion": 1217,
     "globalStoryTouchHoldMs": 560,
     "globalStoryGlowTargets": [
       "Propheten-Entry",
@@ -1031,5 +1031,5 @@
     "globalNewStoryAreaGlowInheritance": true
   },
   "updatedAt": "2026-10-07",
-  "deployTrigger": "2026-10-07T09:44:00+02:00"
+  "deployTrigger": "2026-10-07T10:06:00+02:00"
 }
