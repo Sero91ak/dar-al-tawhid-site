@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1216";
-const KIDS_BUILD_ID="kids-shell-v120-global-story-glow1216";
+const CACHE_NAME="dar-al-tawhid-kids-v1217";
+const KIDS_BUILD_ID="kids-shell-v121-global-glow1217";
 const CORE_PRECACHE=[
   "/kids/start",
   "/kids/start.html",
@@ -47,7 +47,7 @@ const CORE_PRECACHE=[
   "/kids/data/story-hub.json?v=7",
   "/kids/deen-learning-v1199.css?v=1199",
   "/kids/deen-lessons.css?v=2",
-  "/kids/deen-lessons.js?v=2",
+  "/kids/deen-lessons.js?v=3",
   "/kids/data/deen-lessons.json?v=3",
   "/kids/assets/deen/deen-entry.jpg?v=1206",
   "/kids/assets/deen/tawhid.jpg?v=1206",
@@ -109,13 +109,13 @@ const CORE_PRECACHE=[
   "/kids/stories-home-v1133.css?v=1152",
   "/kids/stories-home-v1138.css?v=1152",
   "/kids/story-hub.js?v=25",
-  "/kids/global-story-glow-v1216.css?v=1216",
-  "/kids/global-story-glow-v1216.js?v=1216",
+  "/kids/global-story-glow-v1216.css?v=1217",
+  "/kids/global-story-glow-v1216.js?v=1217",
   "/kids/navigation-v1182.js?v=1183",
   "/kids/kids-age-typography.css?v=5",
   "/kids/story-library-cards.css?v=9",
-  "/kids/kids-touch-rail.css?v=10",
-  "/kids/kids-card-interaction.js?v=3",
+  "/kids/kids-touch-rail.css?v=11",
+  "/kids/kids-card-interaction.js?v=4",
   "/kids/kids-age-typography.js?v=3",
   "/kids/owner-voice.js?v=6",\n  "/kids/dua-smart-learn.css?v=2",\n  "/kids/dua-smart-learn.js?v=2",
   "/kids/content-studio-feed.js?v=studio7",
