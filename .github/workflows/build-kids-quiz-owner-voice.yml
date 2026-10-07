@@ -718,30 +718,70 @@ jobs:
           })
           DUA_WORD_MANIFEST.write_text(json.dumps(dua_word_manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
 
+          # Build canonical manifest indexes once. Arabic combining marks can be
+          # canonically equivalent while using a different code-point order, so all
+          # product URL linking uses NFD keys rather than byte-exact JSON keys.
+          def canonical_key(value):
+              return unicodedata.normalize("NFD",norm(value))
+
+          def manifest_index(manifest):
+              return {
+                  canonical_key(key):entry
+                  for key,entry in (manifest.get("entries") or {}).items()
+                  if canonical_key(key)
+              }
+
+          german_index=manifest_index(dua_manifest)
+          arabic_index=manifest_index(dua_ar_manifest)
+          slow_index=manifest_index(dua_ar_slow_manifest)
+          word_index=manifest_index(dua_word_manifest)
+
           # Build learning segments for every Duʿāʾ. Existing hand-reviewed segment
-          # transliterations stay untouched. New items always use exact Arabic token
-          # boundaries; the full transliteration remains visible in the learner.
+          # transliterations stay untouched. Every rebuilt segment is linked directly
+          # to the current isolated-word clip from the just-written V4 manifest.
+          direct_audio_ready=0
+          direct_word_ready=0
           for d in dua_items:
-              words=arabic_tokens(arabic_text(d))
+              full_ar=arabic_text(d)
+              full_de=norm(d.get("audioGermanText") or (str(d.get("childPrompt") or "")+" "+str(d.get("meaning") or "")))
+              ar_entry=arabic_index.get(canonical_key(full_ar)) or {}
+              slow_entry=slow_index.get(canonical_key(full_ar)) or {}
+              de_entry=german_index.get(canonical_key(full_de)) or {}
+              d["audioArabicUrl"]=str(ar_entry.get("url") or "")
+              d["audioArabicSlowUrl"]=str(slow_entry.get("url") or "")
+              d["audioGermanUrl"]=str(de_entry.get("url") or "")
+              if d["audioArabicUrl"] and d["audioArabicSlowUrl"] and d["audioGermanUrl"]:
+                  direct_audio_ready+=1
+
+              words=arabic_tokens(full_ar)
               old_segments=d.get("learningSegments") if isinstance(d.get("learningSegments"),list) else []
               old_by_ar={}
               for seg in old_segments:
                   if isinstance(seg,dict) and norm(seg.get("arabic")):
-                      old_by_ar.setdefault(norm(seg.get("arabic")),[]).append(seg)
+                      old_by_ar.setdefault(canonical_key(seg.get("arabic")),[]).append(seg)
               rebuilt=[]
               used={}
+              all_word_urls=True
               for idx,word in enumerate(words):
-                  choices=old_by_ar.get(word) or []
-                  pos=used.get(word,0)
+                  ckey=canonical_key(word)
+                  choices=old_by_ar.get(ckey) or []
+                  pos=used.get(ckey,0)
                   old_seg=choices[pos] if pos<len(choices) else {}
-                  used[word]=pos+1
+                  used[ckey]=pos+1
+                  word_entry=word_index.get(ckey) or {}
+                  word_url=str(word_entry.get("url") or "")
+                  if not word_url:
+                      all_word_urls=False
                   rebuilt.append({
                       "index":idx,
                       "arabic":word,
                       "transliteration":norm(old_seg.get("transliteration") or ""),
-                      "audioKey":word
+                      "audioKey":word,
+                      "audioUrl":word_url
                   })
               d["learningSegments"]=rebuilt
+              if all_word_urls and len(rebuilt)==len(words):
+                  direct_word_ready+=1
               d["audioStatus"]="ready"
               d["smartLearningReady"]=True
               d["audioModelId"]="eleven_v4"
@@ -752,6 +792,11 @@ jobs:
               d["wordAudioMode"]="isolated-owner-voice-v4"
               d["slowAudioMode"]="dedicated-owner-voice-v4"
               d["timingSlicesDeprecated"]=True
+
+          if direct_audio_ready!=len(dua_items):
+              raise SystemExit(f"Direkte Duʿāʾ-Audio-URLs unvollständig: {direct_audio_ready}/{len(dua_items)}")
+          if direct_word_ready!=len(dua_items):
+              raise SystemExit(f"Direkte Duʿāʾ-Wort-Audio-URLs unvollständig: {direct_word_ready}/{len(dua_items)}")
 
           # Persist the product rule as data, not only as generator behavior.
           # The whole Duʿāʾ area uses the owner's Master voice for Arabic/Fuṣḥā
@@ -774,6 +819,8 @@ jobs:
           counts["ownerVoiceArabicReady"]=len(dua_items)
           counts["ownerVoiceArabicSlowReady"]=len(dua_items)
           counts["isolatedWordLearningReady"]=len(dua_items)
+          counts["directAudioReady"]=direct_audio_ready
+          counts["directWordAudioReady"]=direct_word_ready
 
           dua["audioPolicy"]={
               "voiceProfileId":"serhat-owner-voice-2026",
