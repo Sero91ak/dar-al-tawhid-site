@@ -2893,7 +2893,7 @@ html:not([data-view="today"]) .view.active{
       <div class="hero" aria-label="DĀR AL TAWḤĪD Kids">
         <div class="hero-artifact-shield" aria-hidden="true"></div>
         <div class="kids-wordmark">
-          <img class="wm-dar-reference-v1222" src="/kids/assets/kids-home-v1219/dar-title-reference.png?v=1226" alt="DĀR AL TAWḤĪD" draggable="false" decoding="async">
+          <img class="wm-dar-reference-v1222" src="/kids/assets/kids-home-v1222/dar-title-reference-clean.svg?v=1229" width="1148" height="214" alt="DĀR AL TAWḤĪD" draggable="false" decoding="async" loading="eager" fetchpriority="high">
           <div class="wm-dar-safe" aria-hidden="true">
             <span class="wm-word wm-word-dar"><span>D</span><span>Ā</span><span>R</span></span>
             <span class="wm-word wm-word-al"><span>A</span><span>L</span></span>
@@ -11022,6 +11022,38 @@ html[data-view="stories"] #view-stories > :last-child{
 }
 @keyframes darTitleReduced1228{0%,100%{transform:translateY(0)}50%{transform:translateY(-1px)}}
 @keyframes kidsBalloonReduced1228{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+</style>
+
+<style id="kids-home-wordmark-transparent-asset-v1229">
+#view-today .kids-wordmark{
+  position:absolute!important;z-index:40!important;
+  top:max(44px,calc(env(safe-area-inset-top,0px) + 7px))!important;
+  left:0!important;right:0!important;width:100%!important;max-width:none!important;
+  margin:0!important;padding:0 7px!important;display:flex!important;
+  flex-direction:column!important;align-items:center!important;justify-content:flex-start!important;
+  gap:0!important;overflow:visible!important;pointer-events:none!important;
+}
+#view-today .kids-wordmark > .wm-dar-safe{
+  display:none!important;visibility:hidden!important;opacity:0!important;
+}
+#view-today .kids-wordmark > img.wm-dar-reference-v1222{
+  display:block!important;visibility:visible!important;opacity:1!important;
+  position:relative!important;z-index:43!important;flex:0 0 auto!important;
+  width:min(86vw,620px)!important;max-width:calc(100vw - 14px)!important;
+  height:auto!important;aspect-ratio:1148/214!important;margin:0 auto 1px!important;padding:0!important;
+  object-fit:contain!important;object-position:center!important;image-rendering:auto!important;
+  transform:none!important;animation:none!important;filter:none!important;
+  background:transparent!important;border:0!important;box-shadow:none!important;
+}
+#view-today .kids-wordmark > .wm-kids{margin-top:-1px!important}
+@media(max-width:390px){
+  #view-today .kids-wordmark{top:max(41px,calc(env(safe-area-inset-top,0px) + 5px))!important;padding-inline:5px!important}
+  #view-today .kids-wordmark > img.wm-dar-reference-v1222{width:88vw!important;max-width:calc(100vw - 10px)!important}
+}
+@media(min-width:700px){
+  #view-today .kids-wordmark{top:max(52px,calc(env(safe-area-inset-top,0px) + 12px))!important}
+  #view-today .kids-wordmark > img.wm-dar-reference-v1222{width:min(76vw,630px)!important}
+}
 </style>
 
 </html>
