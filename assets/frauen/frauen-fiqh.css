@@ -4104,3 +4104,55 @@ html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-vis
     max-width:74%!important;
   }
 }
+
+/* GLOBAL_SOCIAL_BRAND_COLORS_V1269
+   Frauen-Share bleibt renderer-eigen, nutzt aber denselben globalen Markenstandard. */
+html[data-theme] body.is-frauen-route .frauen-share-btn.wa{
+  border-color:rgba(37,211,102,.48)!important;
+  background:linear-gradient(145deg,rgba(37,211,102,.18),color-mix(in srgb,var(--card,#fff) 89%,transparent))!important;
+  box-shadow:0 0 18px rgba(37,211,102,.16)!important;
+}
+html[data-theme] body.is-frauen-route .frauen-share-btn.tg{
+  border-color:rgba(42,171,238,.48)!important;
+  background:linear-gradient(145deg,rgba(42,171,238,.17),color-mix(in srgb,var(--card,#fff) 89%,transparent))!important;
+  box-shadow:0 0 18px rgba(42,171,238,.16)!important;
+}
+html[data-theme] body.is-frauen-route .frauen-share-btn.ig{
+  border-color:rgba(225,48,108,.45)!important;
+  background:linear-gradient(145deg,rgba(131,58,180,.15),rgba(225,48,108,.10) 44%,color-mix(in srgb,var(--card,#fff) 90%,transparent) 86%)!important;
+  box-shadow:0 0 18px rgba(225,48,108,.15)!important;
+}
+html[data-theme] body.is-frauen-route .frauen-share-btn.wa .frauen-share-icon{
+  background:#25D366!important;
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  box-shadow:0 7px 20px rgba(37,211,102,.28),inset 0 1px 0 rgba(255,255,255,.22)!important;
+}
+html[data-theme] body.is-frauen-route .frauen-share-btn.tg .frauen-share-icon{
+  background:#2AABEE!important;
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  box-shadow:0 7px 20px rgba(42,171,238,.28),inset 0 1px 0 rgba(255,255,255,.22)!important;
+}
+html[data-theme] body.is-frauen-route .frauen-share-btn.ig .frauen-share-icon{
+  background:linear-gradient(135deg,#833AB4 0%,#C13584 30%,#E1306C 56%,#FD1D1D 76%,#FCAF45 100%)!important;
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  box-shadow:0 7px 20px rgba(225,48,108,.27),inset 0 1px 0 rgba(255,255,255,.22)!important;
+}
+html[data-theme] body.is-frauen-route .frauen-share-btn.wa:is(:hover,:focus-visible){
+  border-color:rgba(37,211,102,.78)!important;
+  box-shadow:0 9px 26px rgba(37,211,102,.24),0 0 0 1px rgba(37,211,102,.12) inset!important;
+}
+html[data-theme] body.is-frauen-route .frauen-share-btn.tg:is(:hover,:focus-visible){
+  border-color:rgba(42,171,238,.78)!important;
+  box-shadow:0 9px 26px rgba(42,171,238,.24),0 0 0 1px rgba(42,171,238,.12) inset!important;
+}
+html[data-theme] body.is-frauen-route .frauen-share-btn.ig:is(:hover,:focus-visible){
+  border-color:rgba(225,48,108,.76)!important;
+  box-shadow:0 9px 26px rgba(225,48,108,.23),0 0 0 1px rgba(252,175,69,.10) inset!important;
+}
+html[data-theme] body.is-frauen-route .frauen-share-btn.wa:focus-visible{outline:2px solid rgba(37,211,102,.72)!important;outline-offset:2px}
+html[data-theme] body.is-frauen-route .frauen-share-btn.tg:focus-visible{outline:2px solid rgba(42,171,238,.72)!important;outline-offset:2px}
+html[data-theme] body.is-frauen-route .frauen-share-btn.ig:focus-visible{outline:2px solid rgba(225,48,108,.70)!important;outline-offset:2px}
+
