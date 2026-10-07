@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1207";
-const KIDS_BUILD_ID="kids-shell-v114-dua-learning1207";
+const CACHE_NAME="dar-al-tawhid-kids-v1210";
+const KIDS_BUILD_ID="kids-shell-v115-dua-learning1210";
 const CORE_PRECACHE=[
   "/kids/start",
   "/kids/start.html",
@@ -58,38 +58,40 @@ const CORE_PRECACHE=[
   "/kids/data/dua-kids.json",
   "/kids/data/dua-audio.json",
   "/kids/data/dua-arabic-audio.json",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-knowledge.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-parents.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-protection.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-sleep.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-wake.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-eating.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-after-eating.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-toilet-enter.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-toilet-exit.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-leave-home.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-mosque-enter.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-mosque-exit.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-afiyah.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-rabbana-atina.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-repentance.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-clear-speech.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-accept-deeds.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-heart-guidance.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-ya-muqallib.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-guidance-taqwa.m4a",
-  "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-sleep.m4a",
-  "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-wake.m4a",
-  "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-eating.m4a",
+  "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-afiyah.m4a",
   "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-after-eating.m4a",
-  "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-toilet-enter.m4a",
-  "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-toilet-exit.m4a",
+  "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-eating.m4a",
+  "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-guidance-taqwa.m4a",
   "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-leave-home.m4a",
   "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-mosque-enter.m4a",
   "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-mosque-exit.m4a",
-  "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-afiyah.m4a",
+  "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-sleep.m4a",
+  "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-toilet-enter.m4a",
+  "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-toilet-exit.m4a",
+  "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-wake.m4a",
   "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-ya-muqallib.m4a",
-  "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-guidance-taqwa.m4a",
+  "/kids/assets/kids-dua-audio/v4-20261007/dua-accept-deeds.m4a",
+  "/kids/assets/kids-dua-audio/v4-20261007/dua-afiyah.m4a",
+  "/kids/assets/kids-dua-audio/v4-20261007/dua-after-eating.m4a",
+  "/kids/assets/kids-dua-audio/v4-20261007/dua-clear-speech.m4a",
+  "/kids/assets/kids-dua-audio/v4-20261007/dua-eating.m4a",
+  "/kids/assets/kids-dua-audio/v4-20261007/dua-guidance-taqwa.m4a",
+  "/kids/assets/kids-dua-audio/v4-20261007/dua-heart-guidance.m4a",
+  "/kids/assets/kids-dua-audio/v4-20261007/dua-knowledge.m4a",
+  "/kids/assets/kids-dua-audio/v4-20261007/dua-leave-home.m4a",
+  "/kids/assets/kids-dua-audio/v4-20261007/dua-mosque-enter.m4a",
+  "/kids/assets/kids-dua-audio/v4-20261007/dua-mosque-exit.m4a",
+  "/kids/assets/kids-dua-audio/v4-20261007/dua-parents.m4a",
+  "/kids/assets/kids-dua-audio/v4-20261007/dua-protection.m4a",
+  "/kids/assets/kids-dua-audio/v4-20261007/dua-rabbana-atina.m4a",
+  "/kids/assets/kids-dua-audio/v4-20261007/dua-repentance.m4a",
+  "/kids/assets/kids-dua-audio/v4-20261007/dua-sleep.m4a",
+  "/kids/assets/kids-dua-audio/v4-20261007/dua-toilet-enter.m4a",
+  "/kids/assets/kids-dua-audio/v4-20261007/dua-toilet-exit.m4a",
+  "/kids/assets/kids-dua-audio/v4-20261007/dua-wake.m4a",
+  "/kids/assets/kids-dua-audio/v4-20261007/dua-ya-muqallib.m4a",
+  "/kids/assets/kids-owner-voice/996533039c958c21c976.m4a",
+  "/kids/assets/kids-owner-voice/cd31c4ca743ad8173e90.m4a",
   "/kids/data/verified-content.json",
   "/kids/prophet-stories.css?v=42",
   "/kids/story-policy.js?v=2",
@@ -112,7 +114,7 @@ const CORE_PRECACHE=[
   "/kids/kids-touch-rail.css?v=9",
   "/kids/kids-card-interaction.js?v=2",
   "/kids/kids-age-typography.js?v=3",
-  "/kids/owner-voice.js?v=4",
+  "/kids/owner-voice.js?v=5",
   "/kids/content-studio-feed.js?v=studio7",
   "/kids/assets/kids-open-v95.css?v=97",
   "/kids/assets/kids-open-v95.js?v=97",
@@ -307,11 +309,11 @@ self.addEventListener("fetch",function(event){
     event.respondWith(fetch(request));
     return;
   }
-  if(url.pathname.indexOf("/kids/assets/prophet-story-audio/")===0||url.pathname.indexOf("/kids/assets/mubashshirun-story-audio/")===0||url.pathname.indexOf("/kids/assets/sahabiyyat-story-audio/")===0||url.pathname.indexOf("/kids/assets/kids-owner-voice/")===0||url.pathname.indexOf("/kids/assets/kids-quiz-audio/")===0||url.pathname.indexOf("/kids/assets/kids-dua-audio/")===0){
+  if(url.pathname.indexOf("/kids/assets/prophet-story-audio/")===0||url.pathname.indexOf("/kids/assets/mubashshirun-story-audio/")===0||url.pathname.indexOf("/kids/assets/sahabiyyat-story-audio/")===0||url.pathname.indexOf("/kids/assets/kids-owner-voice/")===0||url.pathname.indexOf("/kids/assets/kids-quiz-audio/")===0||url.pathname.indexOf("/kids/assets/kids-dua-audio/")===0||url.pathname.indexOf("/kids/assets/kids-dua-arabic-audio/")===0){
     event.respondWith(fetch(request));
     return;
   }
-  if(url.pathname==="/kids/data/quiz-audio.json"||url.pathname==="/kids/data/dua-audio.json"||url.pathname==="/kids/data/owner-voice-audio.json"){
+  if(url.pathname==="/kids/data/quiz-audio.json"||url.pathname==="/kids/data/dua-audio.json"||url.pathname==="/kids/data/dua-arabic-audio.json"||url.pathname==="/kids/data/owner-voice-audio.json"){
     event.respondWith(networkFirst(request));
     return;
   }
