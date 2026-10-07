@@ -127,7 +127,20 @@ jobs:
                   raise RuntimeError("Unknown language: "+lang)
               if not text:
                   raise RuntimeError("Empty spoken text: "+key)
-              dur=fetch(row,target)
+              if row.get("url"):
+                  dur=fetch(row,target)
+              elif lang=="de":
+                  existing=(old.get("entries") or {}).get(text)
+                  if not existing:
+                      raise RuntimeError("Existing German master missing: "+key)
+                  src=ROOT/str(existing.get("url") or "").split("?",1)[0].lstrip("/")
+                  if not src.exists() or src.stat().st_size<1200:
+                      raise RuntimeError("Existing German audio asset missing: "+str(src))
+                  if src.resolve()!=target.resolve():
+                      target.write_bytes(src.read_bytes())
+                  dur=probe(target)
+              else:
+                  raise RuntimeError("Generated audio URL missing: "+key)
               entry={
                   "url":f"/kids/assets/{folder}/{dua_id}.m4a?v={build_id}",
                   "sha256":hashlib.sha256(target.read_bytes()).hexdigest(),
