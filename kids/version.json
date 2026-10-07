@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v115-dua-learning1210",
-  "label": "KIDS · V1.08.35",
-  "releasedAt": "2026-10-07T07:36:00+02:00",
-  "note": "V1210 schließt den Duʿāʾ-Lernbereich vollständig ab: exakt 20 geprüfte Duʿāʾ mit korrigiertem arabischem Wortlaut und Lautschrift, kompakter Zwei-Schritt-Lernansicht, getrenntem Arabisch-Hören, langsamem Üben, Nachsprechen und deutscher Erklärung. Alle 20 deutschen Lern-Audios wurden mit ElevenLabs v4 und der Serhat-Masterstimme neu passend zum aktuellen Text erzeugt. Für alle 12 Sunnah-Duʿāʾ liegen wortgebundene arabische ElevenLabs-v4-Audios vor. Die 8 Qurʾān-Duʿāʾ verwenden ausschließlich echte Qurʾān-Rezitation und niemals synthetische Rezitation. Quellen und Audio-Wortlaut sind an den sichtbaren Eintrag gebunden.",
+  "buildId": "kids-shell-v116-dua-learning1211",
+  "label": "KIDS · V1.08.36",
+  "releasedAt": "2026-10-07T07:44:00+02:00",
+  "note": "V1211 finalisiert den Duʿāʾ-Lernbereich: 20 geprüfte Duʿāʾ, 20 passende deutsche ElevenLabs-v4-Lernaudios, 12 wortgebundene arabische Sunnah-Audios und 8 Qurʾān-Duʿāʾ ausschließlich mit echter Rezitation. Zusätzlich werden arabische Audio-Schlüssel jetzt Unicode-NFC-normalisiert, damit sichtbarer arabischer Wortlaut und Audio auch bei unterschiedlichen Diakritika-Codefolgen zuverlässig exakt zugeordnet werden. Die Lernansicht bleibt kompakt mit Arabisch hören, langsam hören, Nachsprechen, Deutsch hören und Wiederholungsfrage.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1210",
+    "serviceWorkerCache": "v1211",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -957,7 +957,7 @@
     "duaSlowPlayback": true,
     "duaRepeatMode": true,
     "duaAutoGermanPlayback": false,
-    "duaLearning": "compact-two-step-v1210",
+    "duaLearning": "v1211",
     "duaItems": 20,
     "duaSunnahItems": 12,
     "duaQuranItems": 8,
@@ -966,7 +966,13 @@
     "duaQuranArabicVoice": "human-quran-recitation-only",
     "duaSlowPractice": true,
     "duaTransliterationCorrected": true,
-    "duaSourceLocked": true
+    "duaSourceLocked": true,
+    "duaCount": 20,
+    "duaGermanVoiceCount": 20,
+    "duaSunnahArabicVoiceCount": 12,
+    "duaQuranRecitationCount": 8,
+    "duaVoiceModel": "eleven_v4",
+    "duaUnicodeKeyNormalization": "NFC"
   },
   "updatedAt": "2026-10-07",
   "deployTrigger": "2026-10-07T07:22:00+02:00"
