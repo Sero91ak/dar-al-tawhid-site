@@ -503,19 +503,37 @@ jobs:
               raise SystemExit("Duʿāʾ-Voice-Pack unvollständig.")
 
           # Arabic Sunnah Duʿāʾ use the dedicated professional Arabic MSA pack.
-          # This workflow must never overwrite that pack with the German owner voice.
+          # The library may be larger than the already produced Arabic pack. Never
+          # synthesize missing Sunnah Arabic with the German owner voice and never fail
+          # the content build merely because professional Fuṣḥā production is pending.
           dua_arabic_items=[d for d in dua_items if str(d.get("type") or "").lower()=="sunnah"]
           dua_ar_manifest=load_manifest(DUA_AR_MANIFEST)
-          if len(dua_arabic_items)!=12:
-              raise SystemExit(f"Erwartet 12 Sunnah-Duʿāʾ, gefunden: {len(dua_arabic_items)}")
-          if int((dua_ar_manifest.get("counts") or {}).get("arabicPrompts") or 0)!=12:
-              raise SystemExit("Professioneller arabischer Duʿāʾ-Voice-Pack fehlt oder ist unvollständig.")
           if str(dua_ar_manifest.get("modelId") or "")!="eleven_v4":
               raise SystemExit("Arabischer Duʿāʾ-Voice-Pack muss Eleven v4 verwenden.")
+          expected_ar={
+              norm(d.get("audioArabicText") or d.get("arabic") or "")
+              for d in dua_arabic_items
+              if norm(d.get("audioArabicText") or d.get("arabic") or "")
+          }
+          produced_ar=set((dua_ar_manifest.get("entries") or {}).keys())
+          unexpected=sorted(produced_ar-expected_ar)
+          if unexpected:
+              raise SystemExit(
+                  "Arabischer Duʿāʾ-Voice-Pack enthält Texte außerhalb des aktuellen "
+                  f"Sunnah-Bestands: {unexpected[:3]}"
+              )
+          missing_ar=sorted(expected_ar-produced_ar)
+          if missing_ar:
+              print(
+                  "::warning::Professionelle Fuṣḥā-Audios stehen für "
+                  f"{len(produced_ar)}/{len(expected_ar)} Sunnah-Duʿāʾ bereit; "
+                  f"{len(missing_ar)} bleiben bis zur professionellen Produktion text-only."
+              )
 
           print("Quiz voice pack:",quiz_manifest["counts"])
           print("Dua voice pack:",dua_manifest["counts"])
           print("Dua Arabic voice pack:",dua_ar_manifest["counts"])
+          print("Dua Arabic coverage:",{"ready":len(produced_ar),"required":len(expected_ar),"pending":len(missing_ar)})
           print("Synthesis revision:",SYNTHESIS_REVISION)
           PY
 
