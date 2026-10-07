@@ -1,6 +1,6 @@
 const CACHE_NAME="dar-al-tawhid-kids-v1239";
 const KIDS_BUILD_ID="kids-shell-v142-home-profile-left1239";
-const DUA_AUDIO_RUNTIME="1241";
+const DUA_AUDIO_RUNTIME="1242";
 // QUIZ_HOME_RESTORE_V1225: refresh installed PWAs with the restored Quiz entry.
 const CORE_PRECACHE=[
   "/kids/assets/kids-home-v1222/dar-title-reference-clean.svg?v=1229",
@@ -128,7 +128,7 @@ const CORE_PRECACHE=[
   "/kids/kids-age-typography.js?v=3",
   "/kids/owner-voice.js?v=8",
   "/kids/dua-smart-learn.css?v=1233",
-  "/kids/dua-smart-learn.js?v=1241",
+  "/kids/dua-smart-learn.js?v=1242",
   "/kids/content-studio-feed.js?v=studio7",
   "/kids/assets/kids-open-v95.css?v=97",
   "/kids/assets/kids-open-v95.js?v=97",
