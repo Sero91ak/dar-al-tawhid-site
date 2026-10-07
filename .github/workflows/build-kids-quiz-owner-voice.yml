@@ -122,7 +122,7 @@ jobs:
           ELEVEN_MODEL=str(PROD_CFG.get("modelId") or "").strip()
           ELEVEN_DUA_MODEL=ELEVEN_MODEL
           ARABIC_PROFILES={"dua_arabic","dua_arabic_slow","dua_word"}
-          profile_revision(text_profile)S={
+          ARABIC_SYNTHESIS_REVISIONS={
               "dua_arabic":"dua-arabic-native-fusha-v2-20261007",
               "dua_arabic_slow":"dua-arabic-native-fusha-slow-v3-20261007",
               "dua_word":"dua-arabic-native-fusha-word-v3-20261007"
@@ -165,7 +165,7 @@ jobs:
               return prepare_kids_voice_text(value)
 
           def profile_revision(profile):
-              return profile_revision(text_profile)S.get(profile,SYNTHESIS_REVISION)
+              return ARABIC_SYNTHESIS_REVISIONS.get(profile,SYNTHESIS_REVISION)
 
           def quiz_prompt(q):
               question=norm(q.get("question"))
