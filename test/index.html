@@ -10537,11 +10537,11 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/test/assets/dar-setup-hub.js?v=1025" defer></script><!-- DAR_SETUP_HUB_V1 -->
 <script src="/assets/jummah-friday.js?v=1" defer></script><!-- DAR_JUMMAH_FRIDAY_SHARED_V1 -->
 <script src="/assets/app-scroll-manager.js?v=1" defer></script>
-<script src="/assets/adaptive-layout.js?v=16" defer></script>
+<script src="/assets/adaptive-layout.js?v=1328-capacity-fold" defer></script>
 <script src="/assets/qibla-quick-view.js?v=2" defer></script>
 <script src="/assets/global-update-banner.js?v=3"></script>
 <script src="/test/assets/test-update-surface.js?v=3"></script>
-<script src="/assets/fold-split.js?v=4" defer></script>
+<script src="/assets/fold-split.js?v=1328-capacity-fold" defer></script>\n<script src="/test/assets/fold-thumb-nav.js?v=1328-visible" defer></script>
 <script src="/assets/scholars-index.js?v=589" defer></script>
 <script src="/test/assets/prophets/prophets.js?v=36" defer></script>
 <script src="/test/assets/dar-quran-audio-pack.js?v=1063" defer></script>
@@ -12185,7 +12185,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/test/assets/dar-quran-player.css?v=964">
 <link rel="stylesheet" href="/test/assets/ilm-research-chat.css?v=980">
 <link rel="stylesheet" href="/test/assets/frauen/frauen-fiqh.css?v=1292-local">
-<link rel="stylesheet" href="/assets/adaptive-layout.css?v=17">
+<link rel="stylesheet" href="/assets/adaptive-layout.css?v=1328-capacity-fold">
 <link rel="stylesheet" href="/assets/dar-landscape-kids-shell.css?v=5"><!-- DAR_LANDSCAPE_KIDS_SHELL -->
 
 <link rel="stylesheet" href="/assets/qibla-quick-view.css?v=2">
@@ -12202,7 +12202,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/test/assets/dar-top-chrome-fix.css?v=2"><!-- DAR_TOP_CHROME_FIX -->
 <link rel="stylesheet" href="/test/assets/dar-ios-oversize-copy.css?v=7"><!-- DAR_IOS_OVERSIZE_COPY -->
 <link rel="stylesheet" href="/test/assets/full-edge-appearance-polish.css?v=666">
-<link rel="stylesheet" href="/assets/fold-split.css?v=2">
+<link rel="stylesheet" href="/assets/fold-split.css?v=1328-capacity-fold">\n<link rel="stylesheet" href="/test/assets/fold-thumb-nav.css?v=1328-visible">
 <style id="typography-compact-fix-v310">
 /* Finale Typografie-Korrektur — gewinnt gegen Home-Compact-Overrides */
 .section-head h3,
@@ -21223,7 +21223,9 @@ function renderAppIconPanel(){const cur=getDarAppIcon();return `<section class="
 function bindAppIconPicker(){document.querySelectorAll("[data-app-icon-select]").forEach(btn=>{btn.onclick=()=>applyDarAppIcon(btn.getAttribute("data-app-icon-select"))});applyDarAppIcon(getDarAppIcon(),{save:false})}
 function themeButton(key){const cur=getTheme();const info=THEME_META[key]||THEME_META.dark;return `<button type="button" class="theme-switch-btn${cur===key?" is-active":""}" data-theme-select="${key}" aria-pressed="${cur===key?"true":"false"}"><span class="theme-preview"><i class="theme-preview-logo"></i><span class="theme-preview-lines"><i></i><i></i></span></span><span>${esc(info.label)}</span></button>`}
 function renderThemeSwitchPanel(){return `<section class="theme-switch-panel premium-surface"><div class="theme-switch-head"><h3>Erscheinungsbild</h3><p class="theme-switch-note">Die Auswahl wird dauerhaft auf diesem Gerät gespeichert.</p></div><div class="theme-switch-row">${themeButton("light")}${themeButton("eisgold")}${themeButton("salbei")}${themeButton("dark")}${themeButton("soft")}${themeButton("royal")}${themeButton("bordeaux")}${themeButton("dar-al-layl")}</div></section>`}
-function renderAdaptiveNavPanel(){return ""}
+function getAdaptiveNavPositionSetting(){try{const v=localStorage.getItem("darNavPositionV2");return["left","bottom","right"].includes(v)?v:"bottom"}catch(e){return"bottom"}}
+function setAdaptiveNavPositionSetting(value){const next=["left","bottom","right"].includes(value)?value:"bottom";try{localStorage.setItem("darNavPositionV2",next)}catch(e){}try{if(window.DarAdaptiveNavPlacement&&typeof window.DarAdaptiveNavPlacement.setPreference==="function")window.DarAdaptiveNavPlacement.setPreference(next)}catch(e){}document.querySelectorAll("[data-dar-nav-choice]").forEach(btn=>{const on=btn.getAttribute("data-dar-nav-choice")===next;btn.classList.toggle("is-selected",on);btn.setAttribute("aria-pressed",on?"true":"false")});const status=document.getElementById("darNavPositionStatusV1328");if(status)status.textContent=next==="bottom"?"Aktiv: unten · 3D-Icons und Beschriftungen bleiben sichtbar.":"Gespeichert: "+(next==="left"?"links":"rechts")+" · Auf schmalen Displays bleibt die Leiste automatisch unten.";return next}
+function renderAdaptiveNavPanel(){const cur=getAdaptiveNavPositionSetting();const b=(v,label,sub,mark)=>`<button type="button" class="dar-nav-setting-btn${cur===v?" is-selected":""}" data-dar-nav-choice="${v}" aria-pressed="${cur===v?"true":"false"}" onclick="setAdaptiveNavPositionSetting('${v}')"><span class="dar-nav-choice-mark dar-nav-choice-mark--${mark}" aria-hidden="true"></span><strong>${label}</strong><small>${sub}</small></button>`;return `<section class="settings-section dar-nav-position-settings" id="darNavPositionSettingsV1328"><div class="dar-nav-position-kicker">NAVIGATION</div><div class="dar-nav-position-head"><div><h3>Position der Tab-Leiste</h3><p>Unten wie bisher oder seitlich als schmale 3D-Icon-Leiste. Die Auswahl bleibt auf diesem Gerät gespeichert.</p></div></div><div class="dar-nav-position-options" role="group" aria-label="Position der Tab-Leiste">${b("left","Links","Linkshänder","left")}${b("bottom","Unten","Standard","bottom")}${b("right","Rechts","Rechtshänder","right")}</div><p class="dar-nav-position-status" id="darNavPositionStatusV1328">${cur==="bottom"?"Aktiv: unten · 3D-Icons und Beschriftungen bleiben sichtbar.":"Gespeichert: "+(cur==="left"?"links":"rechts")+" · Auf schmalen Displays bleibt die Leiste automatisch unten."}</p></section>`}
 const FONT_SCALE_DEFAULTS={appFontScale:5,quranArabicScale:5,quranTransliterationScale:5,quranGermanScale:5,duaArabicScale:5,duaTransliterationScale:5,duaGermanScale:5,postTextScale:5,postSourceScale:5};
 function clampFontScale(v){v=Number(v);if(!Number.isFinite(v))return 5;v=Math.round(v);if(v<=0)v=1;return Math.max(1,Math.min(10,v))}
 function fontScaleFillPct(v){return (((clampFontScale(v)-1)/9)*100)+"%"}
