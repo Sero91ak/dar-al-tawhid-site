@@ -18,7 +18,9 @@ permissions:
   contents: read
 
 concurrency:
-  group: dar-al-tawhid-kids-live-v1156
+  # Same production lock as the visitor deploy: both publish dar-al-tawhid-site.
+  # This prevents an older run from rolling back newer Kids/Duʿāʾ static assets.
+  group: dar-al-tawhid-production-worker-deploy
   cancel-in-progress: true
 
 jobs:
