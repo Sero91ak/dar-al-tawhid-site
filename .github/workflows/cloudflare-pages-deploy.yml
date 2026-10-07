@@ -47,10 +47,11 @@ permissions:
   contents: read
 
 concurrency:
-  group: dar-al-tawhid-visitor-deploy
-  # Laufenden Live-Deploy nicht bei jedem parallelen Voice/Kids-Push abbrechen.
-  # GitHub hält weiterhin höchstens einen aktuellen Pending-Run; danach gewinnt der neueste Stand.
-  cancel-in-progress: false
+  # Single production lock shared with the Kids live deploy.
+  # Prevents an older visitor run from finishing after a newer Kids/audio deploy
+  # and rolling the same Cloudflare Worker back to stale static assets.
+  group: dar-al-tawhid-production-worker-deploy
+  cancel-in-progress: true
 
 jobs:
   classify:
