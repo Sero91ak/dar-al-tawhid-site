@@ -558,3 +558,101 @@ html.dar-test-side-nav #bottomNav.bottom-nav:hover,
 html.dar-test-side-nav #bottomNav.bottom-nav:focus-within{
   opacity:1!important;
 }
+
+
+/* v1330 · FINAL SIDE-RAIL GEOMETRY + CONTENT RESERVE */
+html.dar-test-side-nav{
+  --dar-side-nav-size:56px!important;
+  --dar-side-nav-reserve:66px!important;
+}
+
+/* Physical-edge placement. */
+html.dar-test-side-nav[data-dar-nav-position="left"] #appChromeDock #bottomNav.bottom-nav,
+html.dar-test-side-nav[data-dar-nav-position="left"] #bottomNav.bottom-nav{
+  left:max(2px,calc(env(safe-area-inset-left,0px) - 38px))!important;
+  right:auto!important;
+}
+html.dar-test-side-nav[data-dar-nav-position="right"] #appChromeDock #bottomNav.bottom-nav,
+html.dar-test-side-nav[data-dar-nav-position="right"] #bottomNav.bottom-nav{
+  left:auto!important;
+  right:max(2px,calc(env(safe-area-inset-right,0px) - 38px))!important;
+}
+
+html.dar-test-side-nav #appChromeDock #bottomNav.bottom-nav,
+html.dar-test-side-nav #bottomNav.bottom-nav{
+  width:56px!important;
+  min-width:56px!important;
+  max-width:56px!important;
+  height:min(340px,calc(100dvh - max(10px,env(safe-area-inset-top,0px)) - max(10px,env(safe-area-inset-bottom,0px))))!important;
+  min-height:260px!important;
+  max-height:340px!important;
+  padding:4px!important;
+  border-radius:20px!important;
+  align-items:center!important;
+  overflow:hidden!important;
+  opacity:.94!important;
+}
+
+html.dar-test-side-nav #bottomNav.bottom-nav .bottom-nav-btn{
+  width:48px!important;
+  min-width:48px!important;
+  max-width:48px!important;
+  min-height:46px!important;
+  max-height:64px!important;
+  display:grid!important;
+  place-items:center!important;
+  padding:0!important;
+  margin:0!important;
+  border-radius:15px!important;
+  overflow:hidden!important;
+}
+
+html.dar-test-side-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon{
+  width:30px!important;
+  height:30px!important;
+  min-width:30px!important;
+  min-height:30px!important;
+  line-height:30px!important;
+  margin:0!important;
+  display:grid!important;
+  place-items:center!important;
+  transform:none!important;
+  -webkit-transform:none!important;
+}
+html.dar-test-side-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon img.dar3d-icon{
+  width:30px!important;
+  height:30px!important;
+  max-width:30px!important;
+  max-height:30px!important;
+  margin:0!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  transform:none!important;
+  -webkit-transform:none!important;
+}
+
+/* Reserve real app width for the rail. Never paint reader/content underneath. */
+html.dar-test-side-nav[data-dar-nav-position="right"] body.has-bottom-nav{
+  padding-right:calc(var(--dar-side-nav-reserve) + max(0px,env(safe-area-inset-right,0px) - 38px))!important;
+}
+html.dar-test-side-nav[data-dar-nav-position="left"] body.has-bottom-nav{
+  padding-left:calc(var(--dar-side-nav-reserve) + max(0px,env(safe-area-inset-left,0px) - 38px))!important;
+}
+html.dar-test-side-nav body.has-bottom-nav > :is(.app,#appRoot,#appShell),
+html.dar-test-side-nav body.has-bottom-nav #appView{
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  box-sizing:border-box!important;
+}
+
+/* Scroll state affects opacity only. */
+html.dar-test-side-nav.dar-nav-scrolling #bottomNav.bottom-nav{
+  opacity:.18!important;
+}
+html.dar-test-side-nav:not(.dar-nav-scrolling) #bottomNav.bottom-nav{
+  opacity:.94!important;
+}
+html.dar-test-side-nav #bottomNav.bottom-nav:is(:hover,:focus-within){
+  opacity:1!important;
+}
