@@ -1624,6 +1624,65 @@
     return loadPromise;
   }
 
+  function resetLiveCaches() {
+    fiqhCache = null;
+    sahabCache = null;
+    tabiiCache = null;
+    muetterCache = null;
+    eheCache = null;
+    hijabCache = null;
+    wissenCache = null;
+    faqCache = null;
+    kurzCache = null;
+    salafCache = null;
+    moscheeCache = null;
+    hajjCache = null;
+    sadaqahCache = null;
+    adabCache = null;
+    kinderCache = null;
+    muslimahCache = null;
+    nifasCache = null;
+    dienstCache = null;
+    iddahCache = null;
+    reinigungCache = null;
+    nikahCache = null;
+    zinahCache = null;
+    umgangCache = null;
+    reiseCache = null;
+    krankheitCache = null;
+    privatCache = null;
+    verwandtCache = null;
+    tawhidCache = null;
+    vermoegenCache = null;
+    gerechtCache = null;
+    dhikrCache = null;
+    geprueftCache = null;
+    todCache = null;
+    arbeitCache = null;
+    medienCache = null;
+    ruqyahCache = null;
+    trauerCache = null;
+    maedchenCache = null;
+    bidahqCache = null;
+    reueCache = null;
+    janaizCache = null;
+    tawbahCache = null;
+    toechterCache = null;
+    janazahCache = null;
+    ramadanCache = null;
+    qiyamCache = null;
+    reueschutzCache = null;
+    muhasabaCache = null;
+    itikafCache = null;
+    dawahCache = null;
+    loadPromise = null;
+  }
+
+  function reloadLiveData() {
+    resetLiveCaches();
+    return load();
+  }
+
   function parseValue(value) {
     var v = String(value || "").replace(/^\/+|\/+$/g, "");
     if (!v) return { page: "hub", abschnitt: "", kennung: "" };
@@ -4598,6 +4657,7 @@
     render: render,
     parseValue: parseValue,
     pageMeta: pageMeta,
-    bind: bind
+    bind: bind,
+    reload: reloadLiveData
   };
 })();
