@@ -131,6 +131,10 @@ jobs:
           SW_EXPECT="$(node -p 'String(require("./kids/version.json").visualSystem.serviceWorkerCache||"").replace(/^v/,"")')"
           HUB_JS_EXPECT="$(node -p 'String(require("./kids/version.json").visualSystem.storyHubJsVersion||"")')"
           SY_JS_EXPECT="$(node -p 'String(require("./kids/version.json").visualSystem.sahabiyyatJsVersion||"")')"
+          DUA_DE_EXPECT="$(node -p 'require("./kids/data/dua-audio.json").buildId')"
+          DUA_AR_EXPECT="$(node -p 'require("./kids/data/dua-arabic-audio.json").buildId')"
+          DUA_SLOW_EXPECT="$(node -p 'require("./kids/data/dua-arabic-slow-audio.json").buildId')"
+          DUA_WORD_EXPECT="$(node -p 'require("./kids/data/dua-word-audio.json").buildId')"
           ok=0
           for attempt in $(seq 1 12); do
             cb="$(date +%s)-$attempt"
@@ -141,6 +145,10 @@ jobs:
             curl -fsS --max-time 25 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/sw.js?cb=$cb" -o /tmp/kids-sw.js || true
             curl -fsS --max-time 25 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/story-hub.js?v=$HUB_JS_EXPECT&cb=$cb" -o /tmp/kids-story-hub.js || true
             curl -fsS --max-time 25 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/sahabiyyat-stories.js?v=$SY_JS_EXPECT&cb=$cb" -o /tmp/kids-sahabiyyat-js.js || true
+            curl -fsS --max-time 25 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/data/dua-audio.json?cb=$cb" -o /tmp/kids-dua-de.json || true
+            curl -fsS --max-time 25 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/data/dua-arabic-audio.json?cb=$cb" -o /tmp/kids-dua-ar.json || true
+            curl -fsS --max-time 25 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/data/dua-arabic-slow-audio.json?cb=$cb" -o /tmp/kids-dua-slow.json || true
+            curl -fsS --max-time 25 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/data/dua-word-audio.json?cb=$cb" -o /tmp/kids-dua-word.json || true
             if grep -F -q "$EXPECT" /tmp/kids-version.json 2>/dev/null &&
                grep -F -q 'id="syEntry"' /tmp/kids-start.html 2>/dev/null &&
                grep -F -q 'class="stories-world-head stories-hero"' /tmp/kids-start.html 2>/dev/null &&
@@ -153,7 +161,25 @@ jobs:
                ! grep -F -q "sy-image-name" /tmp/kids-sahabiyyat-js.js 2>/dev/null &&
                ! grep -F -q "syHeroName" /tmp/kids-sahabiyyat-js.js 2>/dev/null &&
                node -e 'const fs=require("fs");const q=JSON.parse(fs.readFileSync("/tmp/kids-quiz.json","utf8"));if(!Array.isArray(q.items)||q.items.length<650)process.exit(1);' &&
-               node -e 'const fs=require("fs");const s=JSON.parse(fs.readFileSync("/tmp/kids-sahabiyyat.json","utf8"));if(!Array.isArray(s.items)||s.items.length!==14)process.exit(1);'; then
+               node -e 'const fs=require("fs");const s=JSON.parse(fs.readFileSync("/tmp/kids-sahabiyyat.json","utf8"));if(!Array.isArray(s.items)||s.items.length!==14)process.exit(1);' &&
+               DUA_DE_EXPECT="$DUA_DE_EXPECT" DUA_AR_EXPECT="$DUA_AR_EXPECT" DUA_SLOW_EXPECT="$DUA_SLOW_EXPECT" DUA_WORD_EXPECT="$DUA_WORD_EXPECT" node - <<'NODE'
+const fs=require("fs");
+const checks=[
+  ["/tmp/kids-dua-de.json",process.env.DUA_DE_EXPECT,122],
+  ["/tmp/kids-dua-ar.json",process.env.DUA_AR_EXPECT,120],
+  ["/tmp/kids-dua-slow.json",process.env.DUA_SLOW_EXPECT,120],
+  ["/tmp/kids-dua-word.json",process.env.DUA_WORD_EXPECT,696],
+];
+for(const [file,build,count] of checks){
+  const d=JSON.parse(fs.readFileSync(file,"utf8"));
+  if(d.buildId!==build)process.exit(1);
+  if(Object.keys(d.entries||{}).length!==count)process.exit(1);
+  if(d.modelId!=="eleven_v4"||d.voiceProfileId!=="serhat-owner-voice-2026")process.exit(1);
+}
+const word=JSON.parse(fs.readFileSync("/tmp/kids-dua-word.json","utf8"));
+if(word.synthesisRevision!=="dua-arabic-native-fusha-word-v4-20261007")process.exit(1);
+NODE
+            then
               ok=1
               echo "Kids live OK on attempt $attempt · $EXPECT"
               break
