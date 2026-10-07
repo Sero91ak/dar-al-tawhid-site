@@ -2882,7 +2882,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.08.44</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.08.45</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -2893,7 +2893,7 @@ html:not([data-view="today"]) .view.active{
       <div class="hero" aria-label="DĀR AL TAWḤĪD Kids">
         <div class="hero-artifact-shield" aria-hidden="true"></div>
         <div class="kids-wordmark">
-          <img class="wm-dar-reference-v1219" src="/kids/assets/kids-home-v1219/dar-title-reference.png?v=1219" alt="DĀR AL TAWḤĪD" draggable="false" decoding="async">
+          <img class="wm-dar-reference-v1219" src="/kids/assets/kids-home-v1219/dar-title-reference.png?v=1220" alt="DĀR AL TAWḤĪD" draggable="false" decoding="async">
           <div class="wm-dar-safe" aria-hidden="true">
             <span class="wm-word wm-word-dar"><span>D</span><span>Ā</span><span>R</span></span>
             <span class="wm-word wm-word-al"><span>A</span><span>L</span></span>
@@ -6416,13 +6416,13 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1219",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1220",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
   }
   window.addEventListener("load",function(){
-    fetch("/kids/version.json?v=1219",{cache:"no-store"})
+    fetch("/kids/version.json?v=1220",{cache:"no-store"})
       .then(function(r){return r.ok?r.json():null})
       .then(function(v){
         var live=String(v&&v.buildId||"");
