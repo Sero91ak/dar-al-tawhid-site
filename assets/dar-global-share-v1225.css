@@ -1,5 +1,5 @@
 /* DAR_GLOBAL_SHARE_V1225 */
-/* GLOBAL_SHARE_UI_STANDARD_V1267
+/* GLOBAL_SHARE_UI_STANDARD_V1268
    Einziger globaler Teilen-Standard: TEILEN · Wissen weitergeben.
    Frauenbereich behält denselben Aufbau mit eigenem women-historical Renderer. */
 
@@ -33,6 +33,8 @@
 .dar-global-share-toast.is-visible{opacity:1;transform:translate(-50%,0)}
 
 .share-panel.dar-share-card{
+  display:block!important;
+  grid-template-columns:none!important;
   position:relative;
   overflow:hidden;
   margin:18px 0 12px!important;
