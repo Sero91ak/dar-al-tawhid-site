@@ -9,6 +9,12 @@ Das ist kein Fehler und **kein** Grund, sie im Qurʾān-Bereich auszublenden.
 - Das Tadabbur-JSON liefert **nicht** den Vers, sondern die **Erklärung/Aussage** zu `reference` = `Sūrah:Āyah` (z. B. `2:183`).
 - Eine Filterung „kein getrennter Vers im Tadabbur-JSON → Datensatz verstecken“ macht den Bereich leer („Inhalt derzeit nicht verfügbar“). **Diese Filterung rückgängig machen.**
 
+## Haltezeit (Screensaver + Startseite Vers/Tadabbur)
+
+Einheit **Sekunden**, niemals Millisekunden.
+`seconds = 16 + (wörter * 0.35)`, min 18, max 40.
+Kein `Timer` in ms, der Aussagen oder Verse durchrast.
+
 ## Soll (drei getrennte Slots, drei Quellen)
 
 ```

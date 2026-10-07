@@ -11,7 +11,9 @@
     "status": "active",
     "catalogPath": "home/catalog.json",
     "view": "TVHomeView",
-    "rule": "Startseite bei Gebetszeiten: Gebetszeiten + aktueller Qurʾān-Vers + Tadabbur zu genau diesem Vers. Niemals Ḥadīṯ-Bibliothek, Screensaver-Rotation oder Šarḥ in den Tadabbur-Bereich.",
+    "rule": "Startseite bei Gebetszeiten: Gebetszeiten + aktueller Qurʾān-Vers + Tadabbur zu genau diesem Vers. Niemals Ḥadīṯ-Bibliothek, Screensaver-Rotation oder Šarḥ in den Tadabbur-Bereich. Vers und Tadabbur in Sekunden halten, nicht in Millisekunden überspringen.",
+    "holdUnit": "seconds",
+    "forbidMillisecondSkip": true,
     "remoteLoad": true,
     "offlineCache": true
   },
@@ -35,6 +37,8 @@
     "offlineCache": true,
     "fallbackRequired": true,
     "keepExistingCardZones": true,
+    "holdUnit": "seconds",
+    "forbidMillisecondSkip": true,
     "mix": {
       "strategy": "weightedRoundRobin",
       "weights": {
