@@ -4,7 +4,7 @@
   /* BILDBEITRAG_CURATED_POOL_V1250 · AI disabled · curated random pool + women-exclusive ownership */
   if(window.__DAR_GLOBAL_SHARE_V1250)return;
   window.__DAR_GLOBAL_SHARE_V1250=true;
-  /* GLOBAL_SHARE_UI_STANDARD_V1268 · mount API + Legacy-Layout-Cleanup + Desktop-Fallbacks */
+  /* GLOBAL_SHARE_UI_STANDARD_V1268 · mount API + Legacy-Layout-Cleanup + Desktop-Fallbacks + custom image handler */
 
   var SITE="dar-al-tawhid.de";
   var W=1080,H=1350;
@@ -484,6 +484,7 @@
       source:payload&&payload.source||"Quelle siehe Inhalt.",
       url:payload&&payload.url||location.href
     };
+    panel.__darShareImageHandler=payload&&typeof payload.imageHandler==="function"?payload.imageHandler:null;
     container.appendChild(panel);
     return panel;
   }
@@ -551,10 +552,18 @@
     }
     var gi=ev.target&&ev.target.closest?ev.target.closest("[data-dar-global-ig]"):null;
     if(gi){
-      ev.preventDefault();ev.stopPropagation();if(ev.stopImmediatePropagation)ev.stopImmediatePropagation();createAndShare(gi,true);return;
+      ev.preventDefault();ev.stopPropagation();if(ev.stopImmediatePropagation)ev.stopImmediatePropagation();
+      var giPanel=gi.closest(".share-panel");
+      if(giPanel&&typeof giPanel.__darShareImageHandler==="function"){Promise.resolve(giPanel.__darShareImageHandler(true,gi)).catch(function(e){console.error("DAR custom Instagram share",e)});return}
+      createAndShare(gi,true);return;
     }
     var t=ev.target&&ev.target.closest?ev.target.closest("[data-dar-global-image],[data-image-post-open],[data-image-dua-open],[data-image-ayah-open],[data-image-hadith-open],[data-frauen-share=\"image\"]"):null;
-    if(t){ev.preventDefault();ev.stopPropagation();if(ev.stopImmediatePropagation)ev.stopImmediatePropagation();createAndShare(t,false);return}
+    if(t){
+      ev.preventDefault();ev.stopPropagation();if(ev.stopImmediatePropagation)ev.stopImmediatePropagation();
+      var tPanel=t.closest(".share-panel");
+      if(tPanel&&typeof tPanel.__darShareImageHandler==="function"){Promise.resolve(tPanel.__darShareImageHandler(false,t)).catch(function(e){console.error("DAR custom image share",e)});return}
+      createAndShare(t,false);return
+    }
     var ig=ev.target&&ev.target.closest?ev.target.closest("[data-share-instagram],[data-frauen-share=\"ig\"]"):null;
     if(ig){
       var data=ctxFromDom(ig);
