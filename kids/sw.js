@@ -3,8 +3,8 @@ const KIDS_BUILD_ID="kids-shell-v132-home-transparent-brand1229";
 // QUIZ_HOME_RESTORE_V1225: refresh installed PWAs with the restored Quiz entry.
 const CORE_PRECACHE=[
   "/kids/assets/kids-home-v1222/dar-title-reference-clean.svg?v=1229",
-  "/kids/assets/kids-home-v1219/dar-title-reference.png?v=1227",
-  "/kids/assets/kids-home-v1219/dar-title-reference.png?v=1226",
+  "/kids/assets/kids-home-v1219/dar-title-reference.png?v=1229",
+  "/kids/assets/kids-home-v1219/dar-title-reference.png?v=1229",
   "/kids/start",
   "/kids/start.html",
   "/kids/manifest.webmanifest",
@@ -21,7 +21,7 @@ const CORE_PRECACHE=[
   "/kids/assets/kids-home-v1179/hero-poster.png?v=1188",
   "/kids/assets/kids-home-v1191/hero-static-reference.jpg?v=1199",
   "/kids/assets/kids-home-v1215/hero-clean-reference.jpg?v=1215",
-  "/kids/assets/kids-home-v1219/dar-title-reference.png?v=1226",
+  "/kids/assets/kids-home-v1219/dar-title-reference.png?v=1229",
   "/assets/fonts/cinzel-latin-600-normal.woff2",
   "/kids/assets/kids-home-v1176/world-stories.png",
   "/kids/assets/kids-home-v1176/world-quran.png",
