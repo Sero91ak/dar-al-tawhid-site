@@ -1,6 +1,6 @@
 const CACHE_NAME="dar-al-tawhid-kids-v1239";
 const KIDS_BUILD_ID="kids-shell-v142-home-profile-left1239";
-const DUA_AUDIO_RUNTIME="1243";
+const DUA_AUDIO_RUNTIME="1244";
 // QUIZ_HOME_RESTORE_V1225: refresh installed PWAs with the restored Quiz entry.
 const CORE_PRECACHE=[
   "/kids/assets/kids-home-v1222/dar-title-reference-clean.svg?v=1229",
@@ -62,7 +62,7 @@ const CORE_PRECACHE=[
   "/kids/assets/deen/ibadah.jpg?v=1206",
   "/kids/assets/deen/adab-akhlaq.jpg?v=1206",
   "/kids/assets/deen/akhirah.jpg?v=1206",
-  "/kids/data/dua-kids.json?v=1223",
+  "/kids/data/dua-kids.json?v=1244",
   "/kids/assets/kids-owner-voice/996533039c958c21c976.m4a",
   "/kids/assets/kids-owner-voice/cd31c4ca743ad8173e90.m4a",
   "/kids/data/verified-content.json",
@@ -84,7 +84,7 @@ const CORE_PRECACHE=[
   "/kids/global-story-glow-v1216.css?v=1217",
   "/kids/global-story-glow-v1216.js?v=1239",
   "/kids/dua-hub-v1219.css?v=1239",
-  "/kids/dua-hub-v1219.js?v=1241",
+  "/kids/dua-hub-v1219.js?v=1244",
   "/kids/assets/profile-avatars/boy-kufi-v1235.svg",
   "/kids/assets/profile-avatars/girl-hijab-pink-v1235.svg",
   "/kids/assets/dua-premium/hero-v1222.jpg?v=1233",
@@ -128,7 +128,7 @@ const CORE_PRECACHE=[
   "/kids/kids-age-typography.js?v=3",
   "/kids/owner-voice.js?v=8",
   "/kids/dua-smart-learn.css?v=1233",
-  "/kids/dua-smart-learn.js?v=1243",
+  "/kids/dua-smart-learn.js?v=1244",
   "/kids/content-studio-feed.js?v=studio7",
   "/kids/assets/kids-open-v95.css?v=97",
   "/kids/assets/kids-open-v95.js?v=97",
