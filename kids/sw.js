@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1231";
+const CACHE_NAME="dar-al-tawhid-kids-v1232";
 const KIDS_BUILD_ID="kids-shell-v134-dua-premium1231";
 // QUIZ_HOME_RESTORE_V1225: refresh installed PWAs with the restored Quiz entry.
 const CORE_PRECACHE=[
@@ -61,7 +61,7 @@ const CORE_PRECACHE=[
   "/kids/assets/deen/ibadah.jpg?v=1206",
   "/kids/assets/deen/adab-akhlaq.jpg?v=1206",
   "/kids/assets/deen/akhirah.jpg?v=1206",
-  "/kids/data/dua-kids.json",
+  "/kids/data/dua-kids.json?v=1223",
   "/kids/data/dua-audio.json",
   "/kids/data/dua-arabic-audio.json",
   "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-afiyah.m4a",
@@ -117,7 +117,7 @@ const CORE_PRECACHE=[
   "/kids/global-story-glow-v1216.css?v=1217",
   "/kids/global-story-glow-v1216.js?v=1217",
   "/kids/dua-hub-v1219.css?v=1222",
-  "/kids/dua-hub-v1219.js?v=1222",
+  "/kids/dua-hub-v1219.js?v=1223",
   "/kids/assets/dua-premium/hero-v1222.jpg?v=1222",
   "/kids/assets/dua-premium/nav-dua-v1222.png?v=1222",
   "/kids/assets/dua-premium/action-library-v1222.png?v=1222",
