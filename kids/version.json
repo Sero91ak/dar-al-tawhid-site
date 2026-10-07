@@ -1,8 +1,8 @@
 {
   "buildId": "kids-shell-v143-subpage-nav1245",
   "label": "KIDS · V1.08.64",
-  "releasedAt": "2026-10-07T22:22:00+02:00",
-  "note": "KIDS V1.08.64 · Globaler Karten-/Capsule-Glow auf den ruhigen Startseiten-Referenzglow vereinheitlicht (KIDS_HOME_GLOW_PARITY_V16): kein starkes Gold/Türkis-Neon mehr; Qurʾān, Duʿāʾ, Geschichten, Dīn, Propheten, Ṣaḥābah, Ṣaḥābiyyāt, Quiz und Eltern erben dieselbe zurückhaltende Touch-Intensität. Interaktive Swipe-Navigation V1246 bleibt erhalten.",
+  "releasedAt": "2026-10-07T23:18:00+02:00",
+  "note": "KIDS V1.08.64 · Globaler Karten-/Capsule-Glow auf den ruhigen Startseiten-Referenzglow vereinheitlicht (KIDS_HOME_GLOW_PARITY_V16 + Runtime v6): kein starkes Gold/Türkis-Neon mehr; Qurʾān, Duʿāʾ, Geschichten, Dīn, Propheten, Ṣaḥābah, Ṣaḥābiyyāt, Quiz und Eltern erben dieselbe zurückhaltende Touch-Intensität. Interaktive Swipe-Navigation V1246 bleibt erhalten.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -898,7 +898,7 @@
     "globalCapsulePhoneBleed": "6px each side",
     "globalCapsuleEffectiveOuterMargin": "about 10px with 16px shell inset",
     "globalCapsuleTabletWidth": "100% content column",
-    "globalTouchGlow": "runtime-v5 + css-v13",
+    "globalTouchGlow": "home-reference-v16 + runtime-v6",
     "globalTouchGlowCoverage": "all clickable Kids capsules/cards + stories home + deen + prophets + sahaba + sahabiyyat + quran + dua + quiz + parents + story libraries + compact mode capsules",
     "globalTouchMotion": "no translate/scale/lift",
     "globalArrowSpaceReclaimed": true,
@@ -1201,7 +1201,11 @@
     "globalCardGlowRuntime": 6,
     "globalCardGlowCssVersion": 16,
     "globalCardGlowLiveTrigger": "v16-final",
-    "globalCardGlowDeploymentLane": "kids-only"
+    "globalCardGlowDeploymentLane": "kids-only",
+    "globalTouchGlowReference": "home-cards",
+    "globalTouchGlowIntensity": "calm-gold-single-halo",
+    "globalTouchGlowNoTealNeon": true,
+    "globalTouchGlowRuntime": 6
   },
   "updatedAt": "2026-10-07T22:22:00+02:00",
   "deployTrigger": "2026-10-07T22:22:00+02:00-subpage-nav-v13"
