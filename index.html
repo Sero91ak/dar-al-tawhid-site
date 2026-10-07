@@ -18,7 +18,7 @@
 <link rel="preload" as="image" href="/assets/dar-3d-icons/audio.png?v=1093">
 <link rel="preload" as="image" href="/assets/dar-3d-icons/ilm.png?v=1093">
 <link rel="preload" as="image" href="/assets/dar-3d-icons/topics.png?v=1094">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v1267";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v1268";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>/* BOOT_RECOVERY_UNSTICK */(function(){try{var k="dar_repair_loops_v1062";var n=Number(sessionStorage.getItem(k)||0)||0;setTimeout(function(){try{var el=document.getElementById("appView");var t=el?(el.textContent||""):"";if(t.indexOf("App wird repariert")<0){try{sessionStorage.removeItem(k)}catch(e0){}return}if(n>=3)return;sessionStorage.setItem(k,String(n+1));var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(e){}},1800)}catch(e){}})();</script>
 <script id="dar-browser-desktop-router-v833">
 (function(){
@@ -21127,7 +21127,7 @@ function renderQuranAyahArHtml(v){const settings=getQuranViewSettings();const pl
 function renderQuranAyahTr(v){const mode=getQuranTrMode();const pack=v&&v.transliteration||{};const text=quranVerseTr(v,mode);const wrapHidden=quranViewHiddenAttr("showTransliteration");const missing=text?"":" data-tr-missing=\"1\"";const shown=text||"Transliteration nicht verfügbar";if(window.__quranDeferTajweedPaint)return `<div class="quran-ayah-tr-wrap" data-quran-view="showTransliteration"${wrapHidden}><div class="quran-ayah-tr"${missing}>${esc(shown)}</div></div>`;return `<div class="quran-ayah-tr-wrap" data-quran-view="showTransliteration"${wrapHidden}><div class="quran-ayah-tr"${missing} data-tr-readable="${esc(pack.readable||"")}" data-tr-standard="${esc(pack.standard||"")}" data-tr-scientific="${esc(pack.scientific||"")}">${esc(shown)}</div></div>`}
 function applyQuranTransliterationMode(){const mode=getQuranTrMode();document.querySelectorAll(".quran-ayah-tr").forEach(el=>{let text=el.getAttribute("data-tr-"+mode)||"";if(!text){const art=el.closest(".quran-ayah");const aid=Number(String(art&&art.id||"").replace("ayah-",""));const sid=Number(String((currentRoute&&currentRoute.value)||"").split("/")[0]);const verse=(quranSurahCache.get(sid)?.verses||[]).find(function(v){return Number(v.id)===aid});text=quranVerseTr(verse,mode)}if(!text){el.setAttribute("data-tr-missing","1");el.textContent="Transliteration nicht verfügbar"}else{el.removeAttribute("data-tr-missing");el.textContent=text}});document.querySelectorAll(".quran-tr-btn,[data-qov-draft-tr]").forEach(btn=>{const key=btn.getAttribute("data-quran-tr")||btn.getAttribute("data-qov-draft-tr");btn.classList.toggle("active",key===mode)});const note=$("quranTrModeNote");if(note)note.textContent=QURAN_TR_MODES[mode]?.hint||""}
 function applyQuranViewSettingsToDom(){const settings=getQuranViewSettings();document.querySelectorAll("[data-quran-view]").forEach(el=>{const key=el.getAttribute("data-quran-view");el.hidden=!settings[key]});document.querySelectorAll("[data-quran-view-toggle]").forEach(input=>{const key=input.getAttribute("data-quran-view-toggle");input.checked=!!settings[key]})}
-function bindQuranTransliterationPick(){document.querySelectorAll("[data-quran-tr]").forEach(btn=>{btn.onclick=()=>setQuranTrMode(btn.getAttribute("data-quran-tr"))})}let quranWakeLockRef=null;let quranWakeUserOff=false;let posts=[];let currentRoute={view:"home",value:""};var ZAKAT_FOCUS_START="2026-06-18T12:00:00.000Z";var ZAKAT_FOCUS_HOURS=72;var LIBRARY_FOCUS_START="2026-07-24T19:45:00.000Z";var LIBRARY_FOCUS_HOURS=72;var PROPHETS_FOCUS_START="2026-08-08T13:45:00.000Z";var PROPHETS_FOCUS_HOURS=72;function safeHomeTile(fn){try{return typeof fn==="function"? (fn()||"") : ""}catch(e){return ""}}const ROUTE_ALIASES={start:"home",home:"home",feed:"feed",ilm:"ilm",quiz:"quiz","din-quiz":"quiz",beitraege:"topics",topics:"topics",themen:"topics",quran:"quran","quran-player":"quran-player",quranplayer:"quran-player",quran_themen:"quran-topic",themen_quran:"quran-topic","quran-topic":"quran-topic",dua:"duas",duas:"duas",mehr:"more",more:"more",hadith:"hadith",ahadith:"hadith",propheten:"propheten",prophets:"propheten",anbiya:"propheten",gelehrte:"scholars",scholars:"scholars",buecher:"books",bucher:"books",books:"books",quellenbibliothek:"books",quellenbuch:"quellen-book","quellen-book":"quellen-book",quellengelehrter:"quellen-scholar","quellen-scholar":"quellen-scholar",bibliothek:"bibliothek",zakat:"zakat",kalender:"calendar",calendar:"calendar","mein-bereich":"account",account:"account",gebetszeiten:"prayer",prayer:"prayer",jumuah:"jummah",jummah:"jummah",qibla:"qibla",qiblah:"qibla",einstellungen:"settings",settings:"settings",favoriten:"saved",saved:"saved",beitrag:"post",post:"post",news:"news",neu:"news"};let homeSearchPostIds=[];let quranMeta=null;let quranSearchIndex=null;let quranSearchLoading=null;let quranSearchTimer=null;let quranSearchQuery="";let quranTopicsCache=null;let quranTopicsLoading=null;let quranTopicSearch="";let quranExplanationState=null;let postRouteLoadingId="";let postRouteFailedId="";let postRouteError="";const POST_ROUTE_LOAD_TIMEOUT_MS=9000;let appBootHydrated=false;let lastFormPointerAt=0;const quranSurahCache=new Map();const quranTranslitCache=new Map();const quranTranslitLoading=new Map();const tafsirSurahCache=new Map();const quranAtharCache=new Map();let showTafsirBlocks=false;const $=id=>document.getElementById(id);
+function bindQuranTransliterationPick(){document.querySelectorAll("[data-quran-tr]").forEach(btn=>{btn.onclick=()=>setQuranTrMode(btn.getAttribute("data-quran-tr"))})}let quranWakeLockRef=null;let quranWakeUserOff=false;let posts=[];let currentRoute={view:"home",value:""};var ZAKAT_FOCUS_START="2026-06-18T12:00:00.000Z";var ZAKAT_FOCUS_HOURS=72;var LIBRARY_FOCUS_START="2026-07-24T19:45:00.000Z";var LIBRARY_FOCUS_HOURS=72;var PROPHETS_FOCUS_START="2026-08-08T13:45:00.000Z";var PROPHETS_FOCUS_HOURS=72;function safeHomeTile(fn){try{return typeof fn==="function"? (fn()||"") : ""}catch(e){return ""}}const ROUTE_ALIASES={start:"home",home:"home",feed:"feed",ilm:"ilm",quiz:"quiz","din-quiz":"quiz",beitraege:"topics",topics:"topics",themen:"topics",quran:"quran","quran-player":"quran-player",quranplayer:"quran-player",quran_themen:"quran-topic",themen_quran:"quran-topic","quran-topic":"quran-topic",dua:"duas",duas:"duas",mehr:"more",more:"more",hadith:"hadith",ahadith:"hadith",propheten:"propheten",prophets:"propheten",frauen:"frauen","frauen-im-islam":"frauen",anbiya:"propheten",gelehrte:"scholars",scholars:"scholars",buecher:"books",bucher:"books",books:"books",quellenbibliothek:"books",quellenbuch:"quellen-book","quellen-book":"quellen-book",quellengelehrter:"quellen-scholar","quellen-scholar":"quellen-scholar",bibliothek:"bibliothek",zakat:"zakat",kalender:"calendar",calendar:"calendar","mein-bereich":"account",account:"account",gebetszeiten:"prayer",prayer:"prayer",jumuah:"jummah",jummah:"jummah",qibla:"qibla",qiblah:"qibla",einstellungen:"settings",settings:"settings",favoriten:"saved",saved:"saved",beitrag:"post",post:"post",news:"news",neu:"news"};let homeSearchPostIds=[];let quranMeta=null;let quranSearchIndex=null;let quranSearchLoading=null;let quranSearchTimer=null;let quranSearchQuery="";let quranTopicsCache=null;let quranTopicsLoading=null;let quranTopicSearch="";let quranExplanationState=null;let postRouteLoadingId="";let postRouteFailedId="";let postRouteError="";const POST_ROUTE_LOAD_TIMEOUT_MS=9000;let appBootHydrated=false;let lastFormPointerAt=0;const quranSurahCache=new Map();const quranTranslitCache=new Map();const quranTranslitLoading=new Map();const tafsirSurahCache=new Map();const quranAtharCache=new Map();let showTafsirBlocks=false;const $=id=>document.getElementById(id);
 function isEditableTarget(target){if(!target||!target.closest)return false;if(target.closest("[data-nav]"))return false;return!!target.closest("input,textarea,select,button,a,label,[contenteditable='true'],.account-form,.main-search,.search-pro-panel,.prayer-settings-grid,.theme-switch-row,.app-icon-rail,.app-icon-choice")}
 function isFormEditingNow(){
   const active=document.activeElement;
@@ -22539,7 +22539,7 @@ function readRoute(){try{
   return route;
 }catch(eRoute){return {view:"home",value:""}}
 }
-function parentRoute(route){if(route&&route.view==="propheten"&&route.value){const parts=String(route.value||"").split("/").filter(Boolean);if(parts.length>1)return{view:"propheten",value:parts[0]};return{view:"propheten",value:""}}if(route&&route.view==="propheten")return{view:"more",value:""};
+function parentRoute(route){if(route&&route.view==="frauen"){const parts=String(route.value||"").split("/").filter(Boolean);if(parts.length>1)return{view:"frauen",value:parts[0]};if(parts.length===1)return{view:"frauen",value:""};return{view:"more",value:""}}if(route&&route.view==="propheten"&&route.value){const parts=String(route.value||"").split("/").filter(Boolean);if(parts.length>1)return{view:"propheten",value:parts[0]};return{view:"propheten",value:""}}if(route&&route.view==="propheten")return{view:"more",value:""};
   if(route.view==="news-detail")return{view:"news"};
   if(route.view==="news")return{view:"home"};
   if(route.view==="ilm")return{view:"home"};
@@ -22581,7 +22581,7 @@ function parentRoute(route){if(route&&route.view==="propheten"&&route.value){con
   return{view:"home"};
 }
 function bottomNavSecondaryTab(){return isTestAppPath()?"ilm":"quiz"}
-function bottomNavTabForRoute(routeOrView){const route=typeof routeOrView==="string"?{view:routeOrView,value:""}:(routeOrView||{view:"",value:""});const view=route.view||"";if(view==="news-detail")return"home";if(view==="home")return"home";if(isTestAppPath()){if(view==="ilm")return"ilm"}else{if(view==="quiz"||view==="statistik")return"quiz"}if(view==="feed"||view==="topics"||view==="topic"||view==="recent"||view==="series"||view==="post")return"recent";if(["quran","quran-surah","quran-topic","quran-player"].includes(view))return"quran";if(["more","notifications","scholars","scholar","books","book","quellen-book","quellen-scholar","calendar","saved","account","about","hadith","propheten","statistik","prayer","ramadan","zakat","bibliothek","bibliothek-detail","bibliothek-reader","image-editor","image-editor-test","duas","dua-cat","dua","settings","jummah","qibla","news","ilm","quiz"].includes(view))return"more";return""}
+function bottomNavTabForRoute(routeOrView){const route=typeof routeOrView==="string"?{view:routeOrView,value:""}:(routeOrView||{view:"",value:""});const view=route.view||"";if(view==="news-detail")return"home";if(view==="home")return"home";if(isTestAppPath()){if(view==="ilm")return"ilm"}else{if(view==="quiz"||view==="statistik")return"quiz"}if(view==="feed"||view==="topics"||view==="topic"||view==="recent"||view==="series"||view==="post")return"recent";if(["quran","quran-surah","quran-topic","quran-player"].includes(view))return"quran";if(["more","notifications","scholars","scholar","books","book","quellen-book","quellen-scholar","calendar","saved","account","about","hadith","propheten","frauen","statistik","prayer","ramadan","zakat","bibliothek","bibliothek-detail","bibliothek-reader","image-editor","image-editor-test","duas","dua-cat","dua","settings","jummah","qibla","news","ilm","quiz"].includes(view))return"more";return""}
 const BOTTOM_NAV_TABS=["home",bottomNavSecondaryTab(),"recent","quran","more"];
 let bottomNavDrag=null;
 function bottomNavTabIndex(tab){const i=BOTTOM_NAV_TABS.indexOf(tab);return i>=0?i:0}
@@ -27090,7 +27090,8 @@ function featureCatalog(){
   if(typeof seasonalIslamicContext==="function"&&seasonalIslamicContext())items.push({id:"ramadan",title:"Ramaḍān & ʿĪd",icon:"🌙",desc:"Saisonale Beiträge und Zeiten.",button:"Öffnen",nav:"ramadan",group:"Alltag & Gebet",badge:"Saison"});
   {const qIdx=items.findIndex(x=>x.id==="quran");items.splice(qIdx>=0?qIdx+1:3,0,{id:"bibliothek",title:"DĀR AL TAWḤĪD Bibliothek",icon:"📚",desc:"PDFs, Bücher und Themenhefte von DĀR AL TAWḤĪD.",button:"Öffnen",nav:"bibliothek",group:"Lernen & Wissen",badge:"Neu"})}
   items.unshift({id:"propheten",title:"Die Propheten",icon:"",desc:"Qurʾān · Sunnah · authentische Überlieferungen",button:"Entdecken",nav:"propheten",group:"Lernen & Wissen",badge:"Wissen",premium:true});
-  items=items.filter(item=>item.id!=="ilm"&&item.id!=="widgets"&&item.id!=="frauen");
+  {const pIdx=items.findIndex(x=>x.id==="propheten");items.splice(pIdx>=0?pIdx+1:0,0,{id:"frauen",title:"Frauen im Islam",icon:"✦",desc:"Fiqh, Ṣaḥābiyyāt, Tābiʿiyyāt, Ehe, Familie und Wissen.",button:"Öffnen",nav:"frauen",group:"Lernen & Wissen"});}
+  items=items.filter(item=>item.id!=="ilm"&&item.id!=="widgets");
   const seen=new Set();
   return items.filter(item=>{const id=String(item.id||item.nav||"");if(!id||seen.has(id))return false;seen.add(id);return true});
 }
@@ -27528,7 +27529,8 @@ function renderHomeLibrariesSection(){
     {nav:"bibliothek",icon:"📚",title:"DĀR AL TAWḤĪD Bibliothek",desc:"PDFs & Lernmaterialien",aria:"DĀR AL TAWḤĪD Bibliothek öffnen"},
     {nav:"books",icon:"📚",title:"Quellenbibliothek",desc:"Geprüfte Werke & Quellen",aria:"Quellenbibliothek öffnen"},
     {nav:"scholars",icon:"👤",title:"Gelehrte",desc:"Imāme, Ṣaḥābah & Tābiʿīn",aria:"Gelehrten-Bibliothek öffnen"},
-    {nav:"duas",icon:"🤲",title:"Duʿāʾ",desc:"Qurʾān & Sunnah",aria:"Duʿāʾ-Sammlung öffnen"}
+    {nav:"duas",icon:"🤲",title:"Duʿāʾ",desc:"Qurʾān & Sunnah",aria:"Duʿāʾ-Sammlung öffnen"},
+    {nav:"frauen",icon:"🌿",title:"Frauen",desc:"Wissen & Fiqh für Muslimāt",aria:"Frauen-Bereich öffnen"}
   ];
   if(!defs.length)return"";
   const cards=defs.map(c=>`<button type="button" class="home-v380-lib-card home-v380-lib-card--compact home-v380-lib-card--noble" data-nav="${c.nav}" aria-label="${esc(c.aria)}"><span class="home-v380-lib-card__ico" aria-hidden="true">${typeof window.dar3dIconMarkup==="function"?window.dar3dIconMarkup(c.nav,c.title):c.icon}</span><div class="home-v380-lib-card__body"><h3>${esc(c.title)}</h3><p>${esc(c.desc)}</p></div></button>`).join("");
@@ -27863,7 +27865,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v1267";
+const APP_BUILD_ID="app-shell-v1268";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -28208,6 +28210,7 @@ function updateChrome(route){
   const isPost=route.view==="post";
   if(!isIlm)rememberIlmReturnRoute(route,window.scrollY||0);
   document.body.classList.toggle("is-propheten-route",route.view==="propheten");
+  document.body.classList.toggle("is-frauen-route",route.view==="frauen");
   document.body.classList.toggle("is-home-route",isHome);
   document.body.classList.toggle("is-area-route",!isHome);
   document.body.classList.toggle("is-more-route",isMore);
@@ -28234,7 +28237,7 @@ function updateChrome(route){
   document.body.classList.toggle("is-topic-route",route.view==="topic"||route.view==="book"||route.view==="series");
   document.body.classList.toggle("is-scholars-route",route.view==="scholars");
   document.body.classList.toggle("is-scholar-route",route.view==="scholar");
-  document.body.classList.toggle("is-catalog-route",["duas","dua-cat","dua","topics","topic","scholars","scholar","book","series"].includes(route.view));
+  document.body.classList.toggle("is-catalog-route",["duas","dua-cat","dua","topics","topic","scholars","scholar","book","series","frauen"].includes(route.view));
   document.body.classList.toggle("is-library-reader-route",route.view==="bibliothek-reader");
   document.documentElement.classList.toggle("is-library-reader-route",route.view==="bibliothek-reader");
   document.body.classList.toggle("is-post-route",isPost);
@@ -28430,6 +28433,14 @@ function renderScholarsFoldRoute(view,value){
   return DarFold.shell(renderScholars(),renderFiltered("scholar",value),{family:"scholars",compactMode:"pane"});
 }
 
+function renderFrauenRoute(){
+  const api=window.DARFrauenFiqh;
+  const parsed=api&&typeof api.parseValue==="function"?api.parseValue(currentRoute.value):{};
+  const body=api&&typeof api.render==="function"?api.render(currentRoute.value):`<div class="empty">Bereich wird geladen…</div>`;
+  if(parsed.page==="detail")return body;
+  const meta=api&&typeof api.pageMeta==="function"?api.pageMeta(currentRoute.value):{title:"Frauen im Islam",subtitle:"Bereich wird geladen…"};
+  return `${setPageHeader(meta.title,meta.subtitle,"Frauen")}${body}`;
+}
 function render(){
   try{
     const routeBefore=readRoute();
@@ -28490,6 +28501,7 @@ function render(){
     else if(currentRoute.view==="topics")html=renderTopicsFoldRoute("topics");
     else if(currentRoute.view==="scholars")html=renderScholarsFoldRoute("scholars");
     else if(currentRoute.view==="propheten")html=(window.DARProphets&&typeof window.DARProphets.render==="function"?window.DARProphets.render(currentRoute.value):`<div class="empty">Prophetenbibliothek wird geladen…</div>`);
+    else if(currentRoute.view==="frauen")html=renderFrauenRoute();
     else if(currentRoute.view==="books")html=renderQuellenFoldRoute("books");
     else if(currentRoute.view==="quellen-book")html=renderQuellenFoldRoute("quellen-book",currentRoute.value);
     else if(currentRoute.view==="quellen-scholar")html=renderQuellenFoldRoute("quellen-scholar",currentRoute.value);
@@ -28722,6 +28734,7 @@ function bindEvents(){
   const booksSearchInput=$("booksSearchInput");if(booksSearchInput)booksSearchInput.oninput=filterBooksLibrary;
   if(window.DARCanonicalSourceLibrary)DARCanonicalSourceLibrary.bind();
   if(currentRoute.view==="propheten"&&window.DARProphets&&typeof window.DARProphets.bind==="function"){window.DARProphets.bind();}
+  if(currentRoute.view==="frauen"&&window.DARFrauenFiqh&&typeof window.DARFrauenFiqh.bind==="function"){window.DARFrauenFiqh.bind();}
   const advancedFilterBtn=$("advancedFilterBtn");const homeFilterPanel=$("homeFilterPanel");
   if(advancedFilterBtn&&homeFilterPanel){advancedFilterBtn.onclick=()=>{const open=homeFilterPanel.classList.contains("advanced-visible");homeFilterPanel.classList.toggle("advanced-visible",!open);homeFilterPanel.classList.toggle("advanced-hidden",open);advancedFilterBtn.classList.toggle("active",!open);advancedFilterBtn.textContent=open?"Filter anzeigen":"Filter ausblenden"}}
   const homeSearchInput=$("homeSearchInput");
@@ -30016,6 +30029,9 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
 <script src="/assets/library/canonical-source-library.js?v=20"></script>
 <link rel="preload" href="/data/prophets/index.json" as="fetch" crossorigin>
 <script src="/assets/prophets/prophets.js?v=35" defer></script>
+<link rel="stylesheet" href="/test/assets/frauen/frauen-fiqh.css?v=1292-live">
+<link rel="stylesheet" href="/test/assets/frauen/frauen-authority-v1292.css?v=frauen-authority-v1292">
+<script src="/test/assets/frauen/frauen-fiqh.js?v=1292-live" defer></script>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   try {

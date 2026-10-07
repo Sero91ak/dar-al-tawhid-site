@@ -2257,6 +2257,9 @@ button,input,select{font:inherit}
 
 </style>
 <link rel="stylesheet" href="/desktop-preview/desktop-overhaul.css?v=282">
+<link rel="stylesheet" href="/test/assets/frauen/frauen-fiqh.css?v=1292-live">
+<link rel="stylesheet" href="/test/assets/frauen/frauen-authority-v1292.css?v=frauen-authority-v1292">
+<script src="/test/assets/frauen/frauen-fiqh.js?v=1292-live" defer></script>
 </head>
 <body class="desktop-overhaul-v18">
 <header class="site-header">
@@ -3113,9 +3116,27 @@ button,input,select{font:inherit}
   return realIntro("PROPHET",meta?meta.name:"Prophet",meta?((meta.uluAlAzm?"Ulū al-ʿAzm · ":"")+(meta.people||"")):"")+'<section class="section parchment reveal"><div id="prophetDetail"><p>Inhalt wird geladen …</p></div></section>'+footer()
  };
 
+ var desktopFrauenValue="";
+ function paintDesktopFrauen(){
+  var box=document.getElementById("womenApp");
+  var api=window.DARFrauenFiqh;
+  if(!box||!api||typeof api.render!=="function")return;
+  window.readRoute=function(){return {view:currentPage()==="frauen"?"frauen":"desktop",value:desktopFrauenValue}};
+  box.innerHTML=api.render(desktopFrauenValue);
+  if(typeof api.bind==="function")api.bind();
+ }
+ document.addEventListener("click",function(ev){
+  var btn=ev.target&&ev.target.closest?ev.target.closest("#womenApp [data-nav='frauen']"):null;
+  if(!btn)return;
+  ev.preventDefault();
+  ev.stopPropagation();
+  desktopFrauenValue=btn.getAttribute("data-value")||"";
+  paintDesktopFrauen();
+  window.scrollTo({top:0,behavior:"smooth"});
+ },true);
  renders.frauen=function(){
-  return realIntro("FRAUEN","Geprüfte Wissensbereiche","Nur Bereiche mit bereits sichtbaren, geprüften Inhalten werden hier angezeigt.")+
-   '<section class="section reveal"><div class="women-grid">'+realData.womenAreas.map(function(x){return '<a class="women-item desktop-link" data-page="frauenbereich" href="'+pUrl("frauenbereich","id="+encodeURIComponent(x.kennung))+'"><div class="eyebrow">'+Number(x.sichtbareEintraege||0)+' Inhalte</div><h3>'+escBook(x.titel)+'</h3><p>'+escBook(x.untertitel||"")+'</p></a>'}).join("")+'</div></section>'+footer()
+  setTimeout(paintDesktopFrauen,0);
+  return realIntro("FRAUEN","Frauen im Islam","Fiqh, Ṣaḥābiyyāt, Tābiʿiyyāt, Ehe, Familie und Wissen.")+'<section class="section reveal"><div id="womenApp"><div class="loading-line">Bereich wird geladen …</div></div></section>'+footer()
  };
  function womenItemTitle(x){
   return x.titel||x.frage||x.person||x.name||"Geprüfter Inhalt"
