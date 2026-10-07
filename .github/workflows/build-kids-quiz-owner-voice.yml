@@ -409,20 +409,16 @@ jobs:
           if dua_manifest["counts"]["explanationPrompts"]!=len(dua_items):
               raise SystemExit("Duʿāʾ-Voice-Pack unvollständig.")
 
+          # Arabic Sunnah Duʿāʾ use the dedicated professional Arabic MSA pack.
+          # This workflow must never overwrite that pack with the German owner voice.
           dua_arabic_items=[d for d in dua_items if str(d.get("type") or "").lower()=="sunnah"]
-          dua_arabic_texts=[norm(d.get("audioArabicText") or d.get("arabic")) for d in dua_arabic_items]
-          dua_ar_manifest=build_pack(
-              texts=dua_arabic_texts,
-              manifest_path=DUA_AR_MANIFEST,
-              asset_dir=DUA_AR_ASSETS,
-              profile="dua_arabic",
-              pack_id="KIDS_DUA_ARABIC_OWNER_VOICE_V1",
-              counts={"duaItems":len(dua_arabic_items),"arabicPrompts":len(dua_arabic_items)},
-              model_id=ELEVEN_DUA_MODEL,
-              require_model_match=True
-          )
-          if dua_ar_manifest["counts"]["arabicPrompts"]!=len(dua_arabic_items):
-              raise SystemExit("Arabischer Duʿāʾ-Voice-Pack unvollständig.")
+          dua_ar_manifest=load_manifest(DUA_AR_MANIFEST)
+          if len(dua_arabic_items)!=12:
+              raise SystemExit(f"Erwartet 12 Sunnah-Duʿāʾ, gefunden: {len(dua_arabic_items)}")
+          if int((dua_ar_manifest.get("counts") or {}).get("arabicPrompts") or 0)!=12:
+              raise SystemExit("Professioneller arabischer Duʿāʾ-Voice-Pack fehlt oder ist unvollständig.")
+          if str(dua_ar_manifest.get("modelId") or "")!="eleven_v4":
+              raise SystemExit("Arabischer Duʿāʾ-Voice-Pack muss Eleven v4 verwenden.")
 
           print("Quiz voice pack:",quiz_manifest["counts"])
           print("Dua voice pack:",dua_manifest["counts"])
