@@ -123,3 +123,12 @@ Verbindlich für `/kids/` und alle künftigen Kids-Erweiterungen.
 - Eine nicht abgeschlossene Geste federt weich in die Ausgangsposition zurück. Eine abgeschlossene Geste gleitet aus dem Viewport und aktiviert erst danach den vorherigen Zustand.
 - Vertikales Scrollen, Slider sowie Audio-/Qurʾān-Fortschrittsflächen dürfen nicht als Zurück-Geste übernommen werden.
 - Hero-/Bildbühnen werden durch diese Regel nicht optisch verändert.
+
+
+## Globaler Glow wie Startseite — `KIDS_HOME_GLOW_PARITY_V16`
+
+- Referenz für Hover und Touch ist ausschließlich der ruhige Glow der Startseiten-Karten.
+- Global gilt: eine goldene Kontur plus ein weicher, kurzer Gold-Halo. Kein Gold/Türkis-Doppel-Neon und kein starkes inneres Aufleuchten.
+- Dieselbe Intensität gilt in Geschichten, Dīn, Propheten, Ṣaḥābah, Ṣaḥābiyyāt, Duʿāʾ, Qurʾān, Quiz und Eltern sowie für künftige markierte Kids-Karten.
+- Kleine Controls verwenden denselben Charakter mit kleinerem Radius.
+- Kein Scale, kein Lift und kein Springen.
