@@ -506,13 +506,13 @@ function polishHomeStartV1315(){
   var view=document.getElementById("appView");
   if(!view)return;
 
-  /* v1319: the visual authority must live here too because these are inline
+  /* v1320: the visual authority must live here too because these are inline
      !important styles and therefore beat the static Home CSS. */
   view.querySelectorAll(".home-line-grid,.home-line-list").forEach(function(grid){
     grid.style.setProperty("display","grid","important");
     grid.style.setProperty("grid-template-columns","repeat(2,minmax(0,1fr))","important");
-    grid.style.setProperty("column-gap","10px","important");
-    grid.style.setProperty("row-gap","0","important");
+    grid.style.setProperty("column-gap","16px","important");
+    grid.style.setProperty("row-gap","2px","important");
     grid.style.setProperty("margin-bottom","14px","important");
     grid.style.setProperty("border","0","important");
     grid.style.setProperty("background","transparent","important");
@@ -521,7 +521,7 @@ function polishHomeStartV1315(){
   });
 
   view.querySelectorAll(".home-line-row").forEach(function(row){
-    row.style.setProperty("min-height","90px","important");
+    row.style.setProperty("min-height","92px","important");
     row.style.setProperty("padding","12px 5px","important");
     row.style.setProperty("border-left","0","important");
     row.style.setProperty("border-right","0","important");
@@ -604,9 +604,10 @@ function polishHomeStartV1315(){
 
   var core=view.querySelector(".home-line-tawhid");
   if(core){
-    core.style.setProperty("padding","32px 0 22px","important");
+    core.style.setProperty("padding","30px 0 21px","important");
     core.style.setProperty("margin-top","0","important");
     core.style.setProperty("border-top","0","important");
+    core.style.setProperty("position","relative","important");
     core.style.setProperty("background","transparent","important");
   }
 
@@ -619,7 +620,7 @@ function polishHomeStartV1315(){
     footer.style.setProperty("margin","0","important");
     footer.style.setProperty(
       "padding",
-      "18px max(16px,env(safe-area-inset-left,0px)) calc(38px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-right,0px))",
+      "16px max(16px,env(safe-area-inset-left,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-right,0px))",
       "important"
     );
     var actions=footer.querySelector(".footer-actions,.footer-socials");
