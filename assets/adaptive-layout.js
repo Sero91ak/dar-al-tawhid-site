@@ -8,11 +8,20 @@
 (function (global) {
   "use strict";
 
+  if (global.__DAR_ADAPTIVE_LAYOUT_V1326) return;
+  global.__DAR_ADAPTIVE_LAYOUT_V1326 = true;
+
   var COMPACT_MAX = 599;
-  /* Dual nur Desktop: Phone/Tablet-Querformat bleibt Einspalte wie Kids. */
-  var EXPANDED_MIN = 1400;
-  var EXPANDED_PORTRAIT_MIN = 1400;
-  var EXPANDED_MIN_HEIGHT = 700;
+  /* v1326: capacity based — no device-name or fixed desktop-only breakpoint. */
+  var EXPANDED_MIN = 800;
+  var EXPANDED_PORTRAIT_MIN = 800;
+  var EXPANDED_MIN_HEIGHT = 420;
+  var SIDE_NAV_RESERVE = 82;
+  var SIDE_NAV_MIN_WIDTH = 760;
+  var RAIL_MIN = 260;
+  var RAIL_MAX = 340;
+  var MASTER_GAP = 16;
+  var READER_MIN = 480;
   var currentMode = "";
   var rafId = 0;
   var started = false;
@@ -48,31 +57,67 @@
     return { width: w, height: h, offsetTop: offsetTop };
   }
 
+  function navPreference() {
+    try {
+      if (global.DarAdaptiveNavPlacement && typeof global.DarAdaptiveNavPlacement.getPreference === "function") {
+        var live = global.DarAdaptiveNavPlacement.getPreference();
+        if (live === "left" || live === "right" || live === "bottom") return live;
+      }
+    } catch (e) {}
+    try {
+      var stored = String(global.localStorage.getItem("darNavPositionV2") || "bottom");
+      if (stored === "left" || stored === "right") return stored;
+    } catch (e2) {}
+    return "bottom";
+  }
+
+  function sideNavEffective(width, height) {
+    var pref = navPreference();
+    var w = Number(width) || 0;
+    var h = Number(height) || 0;
+    if (pref !== "left" && pref !== "right") return false;
+    if (w < SIDE_NAV_MIN_WIDTH || h < EXPANDED_MIN_HEIGHT) return false;
+    if (document.documentElement && document.documentElement.classList.contains("adaptive-keyboard-open")) return false;
+    return true;
+  }
+
+  function computeLayoutCapacity(width, height) {
+    var w = Math.max(0, Number(width) || 0);
+    var h = Math.max(0, Number(height) || 0);
+    var sideReserve = sideNavEffective(w, h) ? SIDE_NAV_RESERVE : 0;
+    var outer = Math.round(Math.max(24, Math.min(48, w * 0.04)));
+    var usable = Math.max(0, w - sideReserve - outer);
+    var rail = Math.round(Math.min(RAIL_MAX, Math.max(RAIL_MIN, usable * 0.31)));
+    var reader = Math.max(0, usable - rail - MASTER_GAP);
+    var readerMin = w >= 1000 ? 500 : READER_MIN;
+    var dual = w >= EXPANDED_MIN && h >= EXPANDED_MIN_HEIGHT && reader >= readerMin;
+    return {
+      width: w,
+      height: h,
+      sideReserve: sideReserve,
+      outerGutter: outer,
+      usable: usable,
+      rail: rail,
+      gap: MASTER_GAP,
+      reader: reader,
+      readerMin: readerMin,
+      dual: dual
+    };
+  }
+
   /**
-   * Verbindliche Dual-Regel (Breite + Orientierung, kein reiner Gerätetyp):
-   * - Compact/Einspalte: Phone, Fold zu, Tablet Hochformat
-   * - Dual: Tablet Querformat (≥700), Fold offen / große Breite (≥840 Portrait)
+   * v1326 capacity rule:
+   * Dual is enabled only when the real remaining reader pane stays readable
+   * after optional side-tab rail + master rail + spacing.
    */
   function isDualViewport(width, height) {
-    var w = Number(width);
-    var h = Number(height);
-    if (!Number.isFinite(w)) w = 0;
-    if (!Number.isFinite(h)) h = 0;
-    if (w < EXPANDED_MIN) return false;
-    if (h < EXPANDED_MIN_HEIGHT) return false;
-    if (w >= h) return true;
-    if (w >= EXPANDED_PORTRAIT_MIN) return true;
-    return false;
+    return !!computeLayoutCapacity(width, height).dual;
   }
 
   function resolveLayoutMode(width, height) {
     var w = Number(width) || 0;
-    var h = Number(height) || 0;
     if (w < 600) return "compact";
-    if (isDualViewport(w, h) && (h >= EXPANDED_MIN_HEIGHT || w >= h || w >= EXPANDED_PORTRAIT_MIN)) {
-      return "expanded";
-    }
-    return "medium";
+    return isDualViewport(width, height) ? "expanded" : "medium";
   }
 
   function navBottomCompact() {
@@ -100,6 +145,17 @@
     var nav = document.getElementById("bottomNav");
     if (!nav) return;
     if (nav.classList.contains("is-tab-loupe")) return;
+    try {
+      if (global.DarAdaptiveNavPlacement &&
+          typeof global.DarAdaptiveNavPlacement.getEffectivePosition === "function") {
+        var side = global.DarAdaptiveNavPlacement.getEffectivePosition();
+        if (side === "left" || side === "right") return;
+      }
+    } catch (e0) {}
+    try {
+      if (global.DarTestThumbNav && typeof global.DarTestThumbNav.isActive === "function" &&
+          global.DarTestThumbNav.isActive()) return;
+    } catch (e1) {}
     if (document.body && document.body.classList.contains("is-ilm-chat-route")) {
       return;
     }
@@ -186,8 +242,15 @@
     var changed = mode !== currentMode;
     var prevDual = root.getAttribute("data-fold-dual") === "1";
 
+    var capacity = computeLayoutCapacity(metrics.width, metrics.height);
     root.style.setProperty("--layout-vw", metrics.width + "px");
     root.style.setProperty("--layout-vh", metrics.height + "px");
+    root.style.setProperty("--fold-rail-current", capacity.rail + "px");
+    root.style.setProperty("--fold-reader-available", capacity.reader + "px");
+    root.style.setProperty("--fold-side-reserve", capacity.sideReserve + "px");
+    root.style.setProperty("--fold-content-usable", capacity.usable + "px");
+    root.setAttribute("data-fold-capacity", capacity.dual ? "dual" : "single");
+    root.setAttribute("data-fold-reader-px", String(Math.round(capacity.reader)));
     if (changed || force) {
       currentMode = mode;
       root.setAttribute("data-layout", mode);
@@ -238,7 +301,7 @@
 
   function scheduleOrientBurst() {
     clearOrientTimers();
-    [0, 80, 180, 320, 650, 1000].forEach(function (ms) {
+    [0, 160, 420, 850].forEach(function (ms) {
       orientTimers.push(
         setTimeout(function () {
           applyLayout(true);
@@ -248,7 +311,7 @@
     orientTimers.push(
       setTimeout(function () {
         applyNavLayout(currentMode, { forceWidth: true });
-      }, 1100)
+      }, 900)
     );
   }
 
@@ -295,7 +358,6 @@
 
     if (global.visualViewport) {
       global.visualViewport.addEventListener("resize", onResize, { passive: true });
-      global.visualViewport.addEventListener("scroll", onResize, { passive: true });
     }
 
     document.addEventListener("visibilitychange", function () {
@@ -339,6 +401,13 @@
   var api = {
     resolveLayoutMode: resolveLayoutMode,
     isDualViewport: isDualViewport,
+    getLayoutCapacity: function (width, height) {
+      if (arguments.length < 2) {
+        var m = measureViewport();
+        return computeLayoutCapacity(m.width, m.height);
+      }
+      return computeLayoutCapacity(width, height);
+    },
     getPlacement: getPlacement,
     setPlacement: setPlacement,
     getCollapsed: getCollapsed,
@@ -360,6 +429,10 @@
     EXPANDED_MIN: EXPANDED_MIN,
     EXPANDED_PORTRAIT_MIN: EXPANDED_PORTRAIT_MIN,
     EXPANDED_MIN_HEIGHT: EXPANDED_MIN_HEIGHT,
+    SIDE_NAV_RESERVE: SIDE_NAV_RESERVE,
+    RAIL_MIN: RAIL_MIN,
+    RAIL_MAX: RAIL_MAX,
+    READER_MIN: READER_MIN,
   };
 
   global.DarAdaptiveLayout = api;
