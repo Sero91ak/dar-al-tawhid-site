@@ -176,7 +176,7 @@ async function finalizeDarTestHomeV1193(asset) {
   // v1202: existing Adobe/Runway imagery becomes one continuous Home background.
   // CSS only; no navigation, route or bottom-tab behavior changes.
   if (!html.includes("dar-home-atmosphere-v1202.css")) {
-    const atmosphereLink = '<link rel="stylesheet" id="darHomeAtmosphereV1224" href="/test/assets/dar-home-atmosphere-v1202.css?v=1320-home">\n';
+    const atmosphereLink = '<link rel="stylesheet" id="darHomeAtmosphereV1224" href="/test/assets/dar-home-atmosphere-v1202.css?v=1321-home">\n';
     if (html.includes("</head>")) html = html.replace("</head>", atmosphereLink + "</head>");
     else html = html.replace("<body", atmosphereLink + "<body");
   }
@@ -208,8 +208,8 @@ async function finalizeDarTestHomeV1193(asset) {
   }
 
   // Keep only the existing v1194 home authority and refresh its assets.
-  html = html.replace(/dar-home-library-v1194\.css\?v=[^"']+/g, "dar-home-library-v1194.css?v=1320-home");
-  html = html.replace(/dar-home-library-v1194\.js\?v=[^"']+/g, "dar-home-library-v1194.js?v=1320-home");
+  html = html.replace(/dar-home-library-v1194\.css\?v=[^"']+/g, "dar-home-library-v1194.css?v=1321-home");
+  html = html.replace(/dar-home-library-v1194\.js\?v=[^"']+/g, "dar-home-library-v1194.js?v=1321-home");
   html = html.replace(/dar-library-redesign-v1168\.css\?v=[^"']+/g, "dar-library-redesign-v1168.css?v=1213-quran-native");
   html = html.replace(/dar-library-redesign-v1168\.js\?v=[^"']+/g, "dar-library-redesign-v1168.js?v=1213-quran-native");
 
