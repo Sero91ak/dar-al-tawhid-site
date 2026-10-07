@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1220";
-const KIDS_BUILD_ID="kids-shell-v124-dua-hub1220";
+const CACHE_NAME="dar-al-tawhid-kids-v1221-dua-compact";
+const KIDS_BUILD_ID="kids-shell-v125-dua-compact1221";
 const CORE_PRECACHE=[
   "/kids/start",
   "/kids/start.html",
@@ -112,8 +112,15 @@ const CORE_PRECACHE=[
   "/kids/story-hub.js?v=25",
   "/kids/global-story-glow-v1216.css?v=1217",
   "/kids/global-story-glow-v1216.js?v=1217",
-  "/kids/dua-hub-v1219.css?v=1220",
-  "/kids/dua-hub-v1219.js?v=1220",
+  "/kids/dua-hub-v1219.css?v=1221",
+  "/kids/dua-hub-v1219.js?v=1221",
+  "/kids/assets/dua-3d/book.svg?v=1221",
+  "/kids/assets/dua-3d/family.svg?v=1221",
+  "/kids/assets/dua-3d/moon.svg?v=1221",
+  "/kids/assets/dua-3d/food.svg?v=1221",
+  "/kids/assets/dua-3d/home.svg?v=1221",
+  "/kids/assets/dua-3d/mosque.svg?v=1221",
+  "/kids/assets/dua-3d/shield.svg?v=1221",
   "/kids/navigation-v1182.js?v=1183",
   "/kids/kids-age-typography.css?v=5",
   "/kids/story-library-cards.css?v=9",
