@@ -49,7 +49,7 @@
     if(typeof originalQuizSpeak==="function")return originalQuizSpeak(text);
   };
 
-  fetch("/kids/data/quiz-audio.json?v=1",{cache:"force-cache"})
+  fetch("/kids/data/quiz-audio.json?v=4",{cache:"no-store"})
     .then(function(r){return r.ok?r.json():null})
     .then(function(d){
       if(d&&d.entries){
