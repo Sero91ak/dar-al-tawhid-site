@@ -2882,7 +2882,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.08.40</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.08.41</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3273,7 +3273,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v119-home-reference1215";
+const KIDS_BUILD_ID="kids-shell-v120-global-story-glow1216";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6400,7 +6400,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=6"></script>\n<script src="/kids/dua-smart-learn.js?v=2"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v119-home-reference1215";
+  var KIDS_BUILD_ID="kids-shell-v120-global-story-glow1216";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -6416,7 +6416,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1215",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1216",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
@@ -7407,6 +7407,7 @@ html[data-view="stories"] #view-stories > :last-child{
 <script src="/kids/prophet-stories.js?v=42"></script>
 <script src="/kids/mubashshirun-stories.js?v=31"></script>
 <script src="/kids/sahabiyyat-stories.js?v=23"></script>\n<script src="/kids/deen-lessons.js?v=2"></script>
+<script src="/kids/global-story-glow-v1216.js?v=1216"></script>
 <script src="/kids/story-hub.js?v=25"></script>
 <script src="/kids/kids-age-typography.js?v=3"></script>
 <script src="/kids/quiz-library.js?v=7"></script>
@@ -7414,6 +7415,7 @@ html[data-view="stories"] #view-stories > :last-child{
 <link rel="stylesheet" href="/kids/stories-home-v1133.css?v=1148" data-kids-stories-home-late="1">
 <link rel="stylesheet" href="/kids/stories-home-v1138.css?v=1152" data-kids-stories-home-polish="1">
 <link rel="stylesheet" href="/kids/deen-learning-v1199.css?v=1199" data-kids-deen-learning="1">\n<link rel="stylesheet" href="/kids/deen-lessons.css?v=2" data-kids-deen-lessons="1">
+<link rel="stylesheet" href="/kids/global-story-glow-v1216.css?v=1216" data-kids-global-story-glow="1">
 <link rel="stylesheet" href="/kids/story-card-system.css?v=2" data-kids-story-card-system="1">
 <link rel="stylesheet" href="/kids/story-library-cards.css?v=9" data-kids-story-card-repair="1">
 <link rel="stylesheet" href="/kids/kids-touch-rail.css?v=10" data-kids-touch-rail="1">

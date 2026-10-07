@@ -1,0 +1,90 @@
+/* DĀR AL TAWḤĪD Kids · global story capsule touch glow v1216 */
+:root{
+  --kids-story-glow-gold:rgba(255,211,105,.72);
+  --kids-story-glow-gold-soft:rgba(255,218,135,.28);
+  --kids-story-glow-teal:rgba(105,218,204,.30);
+}
+:is(
+  #view-stories #psProphetEntry,
+  #view-stories #msEntry,
+  #view-stories #syEntry,
+  #view-stories #deenEntry,
+  #view-stories .story-row,
+  .ps-library-page [data-ps-id],
+  .ms-library-page [data-ms-id],
+  .ms-library-page [data-sy-id],
+  .dl-library-page [data-dl-id],
+  #ghWorld .gh-category,
+  #ghWorld .gh-story,
+  [data-ps-mode],
+  [data-ms-mode],
+  [data-sy-mode],
+  [data-dl-mode]
+){
+  -webkit-tap-highlight-color:transparent!important;
+  transition:
+    box-shadow .18s ease,
+    border-color .18s ease,
+    filter .18s ease,
+    transform .16s cubic-bezier(.2,.85,.2,1)!important;
+}
+:is(
+  #view-stories #psProphetEntry,
+  #view-stories #msEntry,
+  #view-stories #syEntry,
+  #view-stories #deenEntry,
+  #view-stories .story-row,
+  .ps-library-page [data-ps-id],
+  .ms-library-page [data-ms-id],
+  .ms-library-page [data-sy-id],
+  .dl-library-page [data-dl-id],
+  #ghWorld .gh-category,
+  #ghWorld .gh-story
+):is(:active,.kids-story-touch-glow,:focus-visible){
+  border-color:rgba(255,220,139,.78)!important;
+  box-shadow:
+    0 0 0 1px rgba(255,225,154,.44),
+    0 0 18px var(--kids-story-glow-gold),
+    0 0 38px var(--kids-story-glow-teal),
+    inset 0 0 28px var(--kids-story-glow-gold-soft),
+    0 16px 34px rgba(0,0,0,.24)!important;
+  filter:brightness(1.075) saturate(1.055)!important;
+  transform:translateY(-1px) scale(.995)!important;
+  outline:none!important;
+}
+:is([data-ps-mode],[data-ms-mode],[data-sy-mode],[data-dl-mode]):is(:active,.kids-story-touch-glow,:focus-visible){
+  border-color:rgba(255,220,139,.72)!important;
+  box-shadow:
+    0 0 0 1px rgba(255,225,154,.32),
+    0 0 14px rgba(255,211,105,.58),
+    0 0 26px rgba(105,218,204,.22),
+    inset 0 0 18px rgba(255,218,135,.14)!important;
+  filter:brightness(1.08)!important;
+  transform:scale(.985)!important;
+  outline:none!important;
+}
+@media(hover:hover) and (pointer:fine){
+  :is(
+    #view-stories #psProphetEntry,
+    #view-stories #msEntry,
+    #view-stories #syEntry,
+    #view-stories #deenEntry,
+    .ps-library-page [data-ps-id],
+    .ms-library-page [data-ms-id],
+    .ms-library-page [data-sy-id],
+    .dl-library-page [data-dl-id]
+  ):hover{
+    border-color:rgba(255,220,139,.42)!important;
+    box-shadow:
+      0 0 12px rgba(255,211,105,.22),
+      0 0 24px rgba(105,218,204,.12),
+      inset 0 0 18px rgba(255,218,135,.06)!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  :is(
+    #view-stories #psProphetEntry,#view-stories #msEntry,#view-stories #syEntry,#view-stories #deenEntry,
+    .ps-library-page [data-ps-id],.ms-library-page [data-ms-id],.ms-library-page [data-sy-id],
+    .dl-library-page [data-dl-id],[data-ps-mode],[data-ms-mode],[data-sy-mode],[data-dl-mode]
+  ){transition:none!important}
+}

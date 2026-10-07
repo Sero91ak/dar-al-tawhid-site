@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v119-home-reference1215",
-  "label": "KIDS · V1.08.40",
-  "releasedAt": "2026-10-07T09:20:00+02:00",
-  "note": "V1215 ersetzt die fehlerhafte Startseiten-Hintergrunddatei durch eine saubere, aus der freigegebenen Referenz rekonstruierte Nacht-Moschee-Platte ohne eingebrannte Karten, Navigation oder Schrift. DĀR AL TAWḤĪD ist jetzt live als runde goldene Kinder-Wortmarke im gleichen Formcharakter wie Kids aufgebaut; der Serif/Cinzel-Look ist endgültig überschrieben. Kids nutzt wieder den deutlich sichtbaren alten 2,6-s-Ballon-Sprung mit zeitversetzten Buchstaben. Die V1214-Capsule-/Card-Glow-Regeln bleiben unverändert erhalten.",
+  "buildId": "kids-shell-v120-global-story-glow1216",
+  "label": "KIDS · V1.08.41",
+  "releasedAt": "2026-10-07T09:44:00+02:00",
+  "note": "V1216 erzwingt den globalen Story-Capsule-Glow auf der Geschichten-Startseite und innerhalb von Propheten, Mubaschschirūn, Ṣaḥābiyyāt und Dīn. Ganze Capsule leuchtet bei Touch/Active/Focus mit Gold-Türkis-Rand, Außen- und Innenglow; ein 560-ms Touch-Hold macht den Effekt auf iPhone/iPad sichtbar. Die Regel liegt nach allen Bereichs-CSS und gilt auch für die Hören/Mitlesen/Lesen-Capsules.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1215",
+    "serviceWorkerCache": "v1216",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -839,7 +839,7 @@
     "globalCardArrows": false,
     "globalCardRails": false,
     "globalCardWholeHitTarget": true,
-    "globalCardFeedback": "subtle-border-glow-only",
+    "globalCardFeedback": "whole-capsule-gold-teal-touch-glow-v1216",
     "globalCardCoverage": [
       "home choices",
       "resume",
@@ -865,7 +865,7 @@
     "startPageArrowStyle": "unchanged",
     "globalCardArrowsOutsideStart": false,
     "globalCardWholeHitTargetOutsideStart": true,
-    "globalCardFeedbackOutsideStart": "subtle-border-glow-on-active-hover-focus",
+    "globalCardFeedbackOutsideStart": "story-entry-and-inner-card-touch-glow-v1216",
     "interactionScope": "all navigable child cards outside #view-today",
     "homeHeroBackground": "clean-reference-no-baked-ui-v1215",
     "homeHeroBackgroundAsset": "/kids/assets/kids-home-v1215/hero-clean-reference.jpg?v=1215",
@@ -1013,8 +1013,23 @@
     "homeBackground": "/kids/assets/kids-home-v1215/hero-clean-reference.jpg?v=1215",
     "homeBackgroundMode": "clean-reference-plate-no-baked-ui",
     "homeBrandSerif": false,
-    "homeKidsBalloonReducedMotion": "visible-soft-5px"
+    "homeKidsBalloonReducedMotion": "visible-soft-5px",
+    "globalStoryCapsuleGlow": true,
+    "globalStoryCapsuleGlowVersion": 1216,
+    "globalStoryTouchHoldMs": 560,
+    "globalStoryGlowTargets": [
+      "Propheten-Entry",
+      "Mubaschschirun-Entry",
+      "Sahabiyyat-Entry",
+      "Din-Entry",
+      "Propheten-Stories",
+      "Sahaba-Stories",
+      "Sahabiyyat-Stories",
+      "Din-Lektionen",
+      "Story-Modus-Buttons"
+    ],
+    "globalNewStoryAreaGlowInheritance": true
   },
   "updatedAt": "2026-10-07",
-  "deployTrigger": "2026-10-07T09:20:00+02:00"
+  "deployTrigger": "2026-10-07T09:44:00+02:00"
 }
