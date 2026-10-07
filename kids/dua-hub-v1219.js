@@ -638,20 +638,15 @@
     if (smart && typeof smart.playPreview === "function") {
       Promise.resolve(smart.playPreview(d, 1))
         .catch(() => {
-          if (d.type === "quran" && Array.isArray(d.quranRefs) && d.quranRefs.length) playQuranRefs(d.quranRefs);
-          else if (window.DARKidsOwnerVoice?.play) {
-            window.DARKidsOwnerVoice.play(String(d.audioArabicText || d.arabic || ""), { source: "kids-dua-hub" });
+          if (window.DARKidsOwnerVoice?.play) {
+            window.DARKidsOwnerVoice.play(String(d.audioArabicText || d.arabic || ""), { source: "kids-dua-hub-serhat-fusha" });
           }
         })
         .finally(() => setTimeout(() => button?.classList.remove("is-playing"), 650));
       return;
     }
-    if (d.type === "quran" && Array.isArray(d.quranRefs) && d.quranRefs.length) {
-      playQuranRefs(d.quranRefs);
-      return;
-    }
     if (window.DARKidsOwnerVoice?.play) {
-      window.DARKidsOwnerVoice.play(String(d.audioArabicText || d.arabic || ""), { source: "kids-dua-hub" });
+      window.DARKidsOwnerVoice.play(String(d.audioArabicText || d.arabic || ""), { source: "kids-dua-hub-serhat-fusha" });
     }
   }
 
