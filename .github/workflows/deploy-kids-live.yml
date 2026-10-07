@@ -163,22 +163,22 @@ jobs:
                node -e 'const fs=require("fs");const q=JSON.parse(fs.readFileSync("/tmp/kids-quiz.json","utf8"));if(!Array.isArray(q.items)||q.items.length<650)process.exit(1);' &&
                node -e 'const fs=require("fs");const s=JSON.parse(fs.readFileSync("/tmp/kids-sahabiyyat.json","utf8"));if(!Array.isArray(s.items)||s.items.length!==14)process.exit(1);' &&
                DUA_DE_EXPECT="$DUA_DE_EXPECT" DUA_AR_EXPECT="$DUA_AR_EXPECT" DUA_SLOW_EXPECT="$DUA_SLOW_EXPECT" DUA_WORD_EXPECT="$DUA_WORD_EXPECT" node - <<'NODE'
-const fs=require("fs");
-const checks=[
-  ["/tmp/kids-dua-de.json",process.env.DUA_DE_EXPECT,122],
-  ["/tmp/kids-dua-ar.json",process.env.DUA_AR_EXPECT,120],
-  ["/tmp/kids-dua-slow.json",process.env.DUA_SLOW_EXPECT,120],
-  ["/tmp/kids-dua-word.json",process.env.DUA_WORD_EXPECT,696],
-];
-for(const [file,build,count] of checks){
-  const d=JSON.parse(fs.readFileSync(file,"utf8"));
-  if(d.buildId!==build)process.exit(1);
-  if(Object.keys(d.entries||{}).length!==count)process.exit(1);
-  if(d.modelId!=="eleven_v4"||d.voiceProfileId!=="serhat-owner-voice-2026")process.exit(1);
-}
-const word=JSON.parse(fs.readFileSync("/tmp/kids-dua-word.json","utf8"));
-if(word.synthesisRevision!=="dua-arabic-native-fusha-word-v4-20261007")process.exit(1);
-NODE
+          const fs=require("fs");
+          const checks=[
+            ["/tmp/kids-dua-de.json",process.env.DUA_DE_EXPECT,122],
+            ["/tmp/kids-dua-ar.json",process.env.DUA_AR_EXPECT,120],
+            ["/tmp/kids-dua-slow.json",process.env.DUA_SLOW_EXPECT,120],
+            ["/tmp/kids-dua-word.json",process.env.DUA_WORD_EXPECT,696],
+          ];
+          for(const [file,build,count] of checks){
+            const d=JSON.parse(fs.readFileSync(file,"utf8"));
+            if(d.buildId!==build)process.exit(1);
+            if(Object.keys(d.entries||{}).length!==count)process.exit(1);
+            if(d.modelId!=="eleven_v4"||d.voiceProfileId!=="serhat-owner-voice-2026")process.exit(1);
+          }
+          const word=JSON.parse(fs.readFileSync("/tmp/kids-dua-word.json","utf8"));
+          if(word.synthesisRevision!=="dua-arabic-native-fusha-word-v4-20261007")process.exit(1);
+          NODE
             then
               ok=1
               echo "Kids live OK on attempt $attempt · $EXPECT"
