@@ -9,6 +9,10 @@ on:
       - 'kids/dua-hub-v1219.js'
       - 'kids/index.html'
       - 'kids/sw.js'
+      - 'kids/data/dua-audio.json'
+      - 'kids/data/dua-arabic-audio.json'
+      - 'kids/data/dua-arabic-slow-audio.json'
+      - 'kids/data/dua-word-audio.json'
       - '.github/workflows/validate-kids-dua-audio.yml'
 
 permissions:
@@ -47,6 +51,16 @@ jobs:
               url=str(entry.get("url") or "").split("?",1)[0]
               p=root/url.lstrip("/")
               assert p.exists() and p.stat().st_size>1200,(path,url)
+          # Arabic packs must be the corrected native-Fusha generation.
+          for path in ("kids/data/dua-arabic-audio.json","kids/data/dua-arabic-slow-audio.json","kids/data/dua-word-audio.json"):
+            data=json.loads((root/path).read_text(encoding="utf-8"))
+            assert data.get("arabicSynthesisRevision")=="dua-arabic-native-fusha-v2-20261007",(path,data.get("arabicSynthesisRevision"))
+            assert data.get("pronunciationDictionaryApplied") is False,(path,data.get("pronunciationDictionaryApplied"))
+            assert data.get("pronunciationDictionaryId") is None,(path,data.get("pronunciationDictionaryId"))
+            assert int(data.get("pronunciationDictionaryRuleCount") or 0)==0,(path,data.get("pronunciationDictionaryRuleCount"))
+            for entry in (data.get("entries") or {}).values():
+              assert entry.get("pronunciationDictionaryApplied") is False,(path,entry.get("pronunciationDictionaryApplied"))
+              assert entry.get("arabicSynthesisRevision")=="dua-arabic-native-fusha-v2-20261007",(path,entry.get("arabicSynthesisRevision"))
           print("Du'a manifests and audio assets OK")
           PY
 
@@ -87,7 +101,7 @@ jobs:
       - name: Verify runtime cache-bust wiring
         run: |
           grep -F '/kids/owner-voice.js?v=8' kids/index.html
-          grep -F '/kids/dua-smart-learn.js?v=1241' kids/index.html
+          grep -F '/kids/dua-smart-learn.js?v=1242' kids/index.html
           grep -F '/kids/dua-hub-v1219.js?v=1241' kids/index.html
           grep -F '/kids/sw.js?v=1239' kids/index.html
           grep -F 'dar-al-tawhid-kids-v1239' kids/sw.js
@@ -101,10 +115,10 @@ jobs:
           CB="$(date +%s)"
           curl -fsSL --max-time 30 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/start?cb=$CB" -o /tmp/kids-live.html
           grep -F '/kids/owner-voice.js?v=8' /tmp/kids-live.html
-          grep -F '/kids/dua-smart-learn.js?v=1241' /tmp/kids-live.html
+          grep -F '/kids/dua-smart-learn.js?v=1242' /tmp/kids-live.html
           grep -F '/kids/dua-hub-v1219.js?v=1241' /tmp/kids-live.html
 
-          curl -fsSL --max-time 30 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/dua-smart-learn.js?v=1241&cb=$CB" -o /tmp/dua-smart.js
+          curl -fsSL --max-time 30 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/dua-smart-learn.js?v=1242&cb=$CB" -o /tmp/dua-smart.js
           grep -F 'playGerman:playGerman' /tmp/dua-smart.js
           grep -F 'ensureAudioAttached' /tmp/dua-smart.js
 
