@@ -1,134 +1,407 @@
 /**
- * Test-App only: thumb-reachable navigation for phone landscape / open fold.
- * Tablets and portrait phones keep the regular bottom navigation.
+ * DĀR AL TAWḤĪD · TEST ONLY · Adaptive navigation placement v1325
+ * One #bottomNav, three positions. Side rails use icons only and reserve their
+ * own layout space so reader/content never sits underneath the rail.
  */
-html.dar-test-thumb-nav {
-  --dar-thumb-nav-size: 68px;
-  --dar-thumb-nav-reserve: 78px;
+
+html.dar-test-side-nav{
+  --dar-side-nav-size:70px;
+  --dar-side-nav-reserve:82px;
 }
 
-html.dar-test-thumb-nav #appChromeDock #bottomNav.bottom-nav,
-html.dar-test-thumb-nav #bottomNav.bottom-nav {
-  position: fixed !important;
-  left: auto !important;
-  right: max(8px, env(safe-area-inset-right, 0px)) !important;
-  top: 50% !important;
-  bottom: auto !important;
-  width: var(--dar-thumb-nav-size) !important;
-  min-width: var(--dar-thumb-nav-size) !important;
-  max-width: var(--dar-thumb-nav-size) !important;
-  height: min(390px, calc(100dvh - max(18px, env(safe-area-inset-top, 0px)) - max(18px, env(safe-area-inset-bottom, 0px)))) !important;
-  min-height: 272px !important;
-  max-height: 390px !important;
-  margin: 0 !important;
-  padding: 5px !important;
-  flex-direction: column !important;
-  justify-content: space-between !important;
-  align-items: stretch !important;
-  gap: 2px !important;
-  border-radius: 25px !important;
-  transform: translate3d(0, -50%, 0) !important;
-  -webkit-transform: translate3d(0, -50%, 0) !important;
-  contain: layout paint !important;
-  will-change: auto !important;
-  touch-action: manipulation !important;
-  transition: opacity .16s ease, border-color .16s ease, background-color .16s ease !important;
+/* Side rail geometry. Inline ownership from the controller is repeated here
+   as a final visual authority, but no scrolling/layout calculations happen. */
+html.dar-test-side-nav #appChromeDock #bottomNav.bottom-nav,
+html.dar-test-side-nav #bottomNav.bottom-nav{
+  position:fixed!important;
+  top:50%!important;
+  bottom:auto!important;
+  width:var(--dar-side-nav-size)!important;
+  min-width:var(--dar-side-nav-size)!important;
+  max-width:var(--dar-side-nav-size)!important;
+  height:min(390px,calc(100dvh - max(18px,env(safe-area-inset-top,0px)) - max(18px,env(safe-area-inset-bottom,0px))))!important;
+  min-height:292px!important;
+  max-height:390px!important;
+  margin:0!important;
+  padding:6px!important;
+  flex-direction:column!important;
+  justify-content:space-between!important;
+  align-items:stretch!important;
+  gap:2px!important;
+  border-radius:26px!important;
+  transform:translate3d(0,-50%,0)!important;
+  -webkit-transform:translate3d(0,-50%,0)!important;
+  z-index:80!important;
+  contain:paint!important;
+  touch-action:manipulation!important;
+  will-change:auto!important;
+  transition:
+    opacity .22s cubic-bezier(.22,1,.36,1),
+    background-color .22s ease,
+    border-color .22s ease!important;
 }
 
-html.dar-test-thumb-nav #bottomNav.bottom-nav.post-nav-hidden {
-  opacity: 1 !important;
-  pointer-events: auto !important;
-  transform: translate3d(0, -50%, 0) !important;
-  -webkit-transform: translate3d(0, -50%, 0) !important;
+html.dar-test-side-nav[data-dar-nav-position="left"] #appChromeDock #bottomNav.bottom-nav,
+html.dar-test-side-nav[data-dar-nav-position="left"] #bottomNav.bottom-nav{
+  left:max(8px,env(safe-area-inset-left,0px))!important;
+  right:auto!important;
 }
 
-html.dar-test-thumb-nav #bottomNav .bottom-nav-btn {
-  flex: 1 1 0 !important;
-  width: 100% !important;
-  min-width: 0 !important;
-  max-width: none !important;
-  height: auto !important;
-  min-height: 48px !important;
-  max-height: 72px !important;
-  margin: 0 !important;
-  padding: 4px 2px !important;
-  gap: 2px !important;
-  border: 0 !important;
-  border-radius: 17px !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  transform: none !important;
-  -webkit-transform: none !important;
-  transition: color .14s ease, background-color .14s ease, filter .14s ease !important;
+html.dar-test-side-nav[data-dar-nav-position="right"] #appChromeDock #bottomNav.bottom-nav,
+html.dar-test-side-nav[data-dar-nav-position="right"] #bottomNav.bottom-nav{
+  left:auto!important;
+  right:max(8px,env(safe-area-inset-right,0px))!important;
 }
 
-html.dar-test-thumb-nav #bottomNav .bottom-nav-btn .nav-icon,
-html.dar-test-thumb-nav #bottomNav .bottom-nav-btn.active .nav-icon,
-html.dar-test-thumb-nav #bottomNav .bottom-nav-btn.is-pressed .nav-icon,
-html.dar-test-thumb-nav #bottomNav .bottom-nav-btn:active .nav-icon {
-  width: 22px !important;
-  height: 22px !important;
-  font-size: 18px !important;
-  line-height: 22px !important;
-  transform: none !important;
-  -webkit-transform: none !important;
-  filter: none !important;
+html.dar-test-side-nav #bottomNav.bottom-nav.post-nav-hidden{
+  opacity:1!important;
+  pointer-events:auto!important;
+  transform:translate3d(0,-50%,0)!important;
+  -webkit-transform:translate3d(0,-50%,0)!important;
 }
 
-html.dar-test-thumb-nav #bottomNav .bottom-nav-btn > span:last-child {
-  font-size: 8px !important;
-  line-height: 1 !important;
-  white-space: nowrap !important;
+/* Five equal touch zones. Side placement intentionally removes labels. */
+html.dar-test-side-nav #bottomNav .bottom-nav-btn{
+  flex:1 1 0!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  height:auto!important;
+  min-height:50px!important;
+  max-height:72px!important;
+  margin:0!important;
+  padding:5px 2px!important;
+  gap:0!important;
+  border:0!important;
+  border-radius:17px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  transform:none!important;
+  -webkit-transform:none!important;
+  overflow:visible!important;
+  transition:
+    color .16s ease,
+    background-color .16s ease,
+    filter .16s ease!important;
 }
 
-html.dar-test-thumb-nav #bottomNav .bottom-nav-btn.active {
-  color: var(--gold2, #efd78e) !important;
-  background: color-mix(in srgb, var(--gold2, #efd78e) 10%, transparent) !important;
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--gold2, #efd78e) 17%, transparent) !important;
+html.dar-test-side-nav #bottomNav .bottom-nav-btn > span:last-child{
+  display:none!important;
+  visibility:hidden!important;
+  width:0!important;
+  height:0!important;
+  overflow:hidden!important;
 }
 
-html.dar-test-thumb-nav #bottomNav .bottom-nav-btn:active,
-html.dar-test-thumb-nav #bottomNav .bottom-nav-btn.is-pressed {
-  color: var(--gold2, #efd78e) !important;
-  background: color-mix(in srgb, var(--gold2, #efd78e) 14%, transparent) !important;
-  filter: brightness(1.08) !important;
-  transform: none !important;
-  -webkit-transform: none !important;
+html.dar-test-side-nav #bottomNav .bottom-nav-btn .nav-icon,
+html.dar-test-side-nav #bottomNav .bottom-nav-btn.active .nav-icon,
+html.dar-test-side-nav #bottomNav .bottom-nav-btn.is-pressed .nav-icon,
+html.dar-test-side-nav #bottomNav .bottom-nav-btn:active .nav-icon{
+  width:28px!important;
+  height:28px!important;
+  min-width:28px!important;
+  min-height:28px!important;
+  font-size:22px!important;
+  line-height:28px!important;
+  margin:auto!important;
+  transform:none!important;
+  -webkit-transform:none!important;
 }
 
-html.dar-test-thumb-nav #bottomNav .bottom-nav-pill,
-html.dar-test-thumb-nav #bottomNav::before,
-html.dar-test-thumb-nav #bottomNav::after {
-  display: none !important;
+html.dar-test-side-nav #bottomNav .bottom-nav-btn .nav-icon img.dar3d-icon{
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  display:block!important;
 }
 
-html.dar-test-thumb-nav body.has-bottom-nav {
-  padding-right: calc(var(--dar-thumb-nav-reserve) + env(safe-area-inset-right, 0px)) !important;
-  padding-bottom: max(8px, env(safe-area-inset-bottom, 0px)) !important;
+html.dar-test-side-nav #bottomNav .bottom-nav-btn.active{
+  color:var(--gold2,#efd78e)!important;
+  background:color-mix(in srgb,var(--gold2,#efd78e) 10%,transparent)!important;
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold2,#efd78e) 18%,transparent)!important;
 }
 
-html.dar-test-thumb-nav body.is-feed-fullscreen {
-  padding-right: calc(var(--dar-thumb-nav-reserve) + env(safe-area-inset-right, 0px)) !important;
+html.dar-test-side-nav #bottomNav .bottom-nav-btn:active,
+html.dar-test-side-nav #bottomNav .bottom-nav-btn.is-pressed{
+  color:var(--gold2,#efd78e)!important;
+  background:color-mix(in srgb,var(--gold2,#efd78e) 14%,transparent)!important;
+  filter:brightness(1.06)!important;
 }
 
-html.dar-test-thumb-nav body.has-bottom-nav .float-actions {
-  right: calc(var(--dar-thumb-nav-reserve) + env(safe-area-inset-right, 0px)) !important;
-  bottom: max(10px, env(safe-area-inset-bottom, 0px)) !important;
+html.dar-test-side-nav #bottomNav .bottom-nav-pill,
+html.dar-test-side-nav #bottomNav::before,
+html.dar-test-side-nav #bottomNav::after{
+  display:none!important;
 }
 
-html.dar-test-thumb-nav .qrc-context-bar--dock {
-  right: calc(var(--dar-thumb-nav-reserve) + env(safe-area-inset-right, 0px)) !important;
-  bottom: max(8px, env(safe-area-inset-bottom, 0px)) !important;
+/* The rail owns real space. Full-page backgrounds still paint through body,
+   while all normal flow content stops before the navigation rail. */
+html.dar-test-side-nav body.has-bottom-nav{
+  box-sizing:border-box!important;
+  max-width:100vw!important;
+  padding-bottom:max(8px,env(safe-area-inset-bottom,0px))!important;
 }
 
-html.dar-test-thumb-nav.adaptive-keyboard-open #bottomNav.bottom-nav {
-  opacity: 0 !important;
-  pointer-events: none !important;
+html.dar-test-side-nav[data-dar-nav-position="left"] body.has-bottom-nav{
+  padding-left:calc(var(--dar-side-nav-reserve) + env(safe-area-inset-left,0px))!important;
+  padding-right:0!important;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html.dar-test-thumb-nav #bottomNav.bottom-nav,
-  html.dar-test-thumb-nav #bottomNav .bottom-nav-btn {
-    transition: none !important;
+html.dar-test-side-nav[data-dar-nav-position="right"] body.has-bottom-nav{
+  padding-right:calc(var(--dar-side-nav-reserve) + env(safe-area-inset-right,0px))!important;
+  padding-left:0!important;
+}
+
+html.dar-test-side-nav[data-dar-nav-position="left"] body.is-feed-fullscreen{
+  padding-left:calc(var(--dar-side-nav-reserve) + env(safe-area-inset-left,0px))!important;
+  padding-right:0!important;
+}
+
+html.dar-test-side-nav[data-dar-nav-position="right"] body.is-feed-fullscreen{
+  padding-right:calc(var(--dar-side-nav-reserve) + env(safe-area-inset-right,0px))!important;
+  padding-left:0!important;
+}
+
+html.dar-test-side-nav[data-dar-nav-position="left"] body.has-bottom-nav .float-actions{
+  left:calc(var(--dar-side-nav-reserve) + env(safe-area-inset-left,0px))!important;
+  right:auto!important;
+  bottom:max(10px,env(safe-area-inset-bottom,0px))!important;
+}
+
+html.dar-test-side-nav[data-dar-nav-position="right"] body.has-bottom-nav .float-actions{
+  right:calc(var(--dar-side-nav-reserve) + env(safe-area-inset-right,0px))!important;
+  left:auto!important;
+  bottom:max(10px,env(safe-area-inset-bottom,0px))!important;
+}
+
+html.dar-test-side-nav[data-dar-nav-position="left"] .qrc-context-bar--dock{
+  left:calc(var(--dar-side-nav-reserve) + env(safe-area-inset-left,0px))!important;
+  right:auto!important;
+  bottom:max(8px,env(safe-area-inset-bottom,0px))!important;
+}
+
+html.dar-test-side-nav[data-dar-nav-position="right"] .qrc-context-bar--dock{
+  right:calc(var(--dar-side-nav-reserve) + env(safe-area-inset-right,0px))!important;
+  left:auto!important;
+  bottom:max(8px,env(safe-area-inset-bottom,0px))!important;
+}
+
+/* Handedness rule for existing master/detail layouts:
+   nav right -> selection stays left (default)
+   nav left  -> selection rail moves to the right. */
+html.dar-test-side-nav[data-dar-nav-position="left"] .dar-fold[data-fold-mode="dual"]{
+  grid-template-columns:minmax(0,1fr) clamp(var(--fold-rail-min,320px),var(--fold-rail-pct,34%),var(--fold-rail-max,380px))!important;
+}
+
+html.dar-test-side-nav[data-dar-nav-position="left"] .dar-fold[data-fold-mode="dual"] > .dar-fold__pane{
+  grid-column:1!important;
+  grid-row:1!important;
+  padding-left:0!important;
+  padding-right:18px!important;
+}
+
+html.dar-test-side-nav[data-dar-nav-position="left"] .dar-fold[data-fold-mode="dual"] > .dar-fold__rail{
+  grid-column:2!important;
+  grid-row:1!important;
+  padding-left:14px!important;
+  padding-right:0!important;
+  background:linear-gradient(
+    90deg,
+    var(--fold-divider,color-mix(in srgb,var(--gold2,#efd78e) 28%,transparent)) 0,
+    transparent 1px,
+    transparent 100%
+  )!important;
+}
+
+/* Stable reader measure inside the content pane. Backgrounds may remain
+   full-width; text never stretches into an unreadable desktop line length. */
+html.dar-test-side-nav #appView :is(
+  .article,
+  .post-reader,
+  .post-body,
+  .dua-detail-box,
+  .quran-reader-shell,
+  .quran-ayah-list,
+  .lib-detail,
+  .qsrc-detail
+){
+  max-inline-size:min(100%,46rem)!important;
+  margin-inline:auto!important;
+  box-sizing:border-box!important;
+  min-width:0!important;
+}
+
+/* Quiet reading state: opacity only. Blur and geometry never animate. */
+html.dar-test-side-nav.dar-nav-reader-idle #bottomNav.bottom-nav{
+  opacity:.34!important;
+}
+
+html.dar-test-side-nav.dar-nav-reader-idle #bottomNav.bottom-nav:hover,
+html.dar-test-side-nav.dar-nav-reader-idle #bottomNav.bottom-nav:focus-within{
+  opacity:.96!important;
+}
+
+/* Settings: line-based, compact, theme-aware, no extra card chrome. */
+body.is-settings-route .dar-nav-position-settings{
+  width:100%!important;
+  max-width:none!important;
+  margin:24px 0 8px!important;
+  padding:18px 0 4px!important;
+  border:0!important;
+  border-top:1px solid color-mix(in srgb,var(--gold2,#efd78e) 24%,transparent)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:var(--text,currentColor)!important;
+}
+
+.dar-nav-position-kicker{
+  margin:0 0 7px;
+  color:var(--gold2,#efd78e);
+  font-size:10px;
+  line-height:1.2;
+  font-weight:850;
+  letter-spacing:.14em;
+}
+
+.dar-nav-position-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:16px;
+  min-width:0;
+}
+
+.dar-nav-position-head h3{
+  margin:0;
+  font-size:clamp(16px,2.2vw,20px);
+  line-height:1.2;
+  font-weight:850;
+  text-wrap:balance;
+}
+
+.dar-nav-position-head p{
+  margin:5px 0 0;
+  max-width:58ch;
+  color:var(--muted,currentColor);
+  font-size:12px;
+  line-height:1.45;
+}
+
+.dar-nav-position-options{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:8px;
+  margin-top:15px;
+}
+
+.dar-nav-position-options button{
+  appearance:none;
+  -webkit-appearance:none;
+  min-width:0;
+  min-height:66px;
+  padding:10px 8px 9px;
+  border:1px solid color-mix(in srgb,var(--gold2,#efd78e) 22%,transparent);
+  border-radius:16px;
+  background:color-mix(in srgb,var(--gold2,#efd78e) 3%,transparent);
+  color:var(--text,currentColor);
+  display:grid;
+  grid-template-columns:20px minmax(0,1fr);
+  grid-template-rows:auto auto;
+  column-gap:7px;
+  align-items:center;
+  text-align:left;
+  cursor:pointer;
+  box-shadow:none;
+}
+
+.dar-nav-position-options button strong{
+  min-width:0;
+  font-size:12px;
+  line-height:1.2;
+  font-weight:850;
+}
+
+.dar-nav-position-options button small{
+  grid-column:2;
+  color:var(--muted,currentColor);
+  font-size:9.5px;
+  line-height:1.2;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.dar-nav-position-options button.is-selected{
+  border-color:color-mix(in srgb,var(--gold2,#efd78e) 58%,transparent);
+  background:color-mix(in srgb,var(--gold2,#efd78e) 10%,transparent);
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold2,#efd78e) 12%,transparent);
+}
+
+.dar-nav-choice-mark{
+  grid-row:1 / span 2;
+  width:18px;
+  height:28px;
+  border:1px solid color-mix(in srgb,var(--gold2,#efd78e) 42%,transparent);
+  border-radius:6px;
+  position:relative;
+  opacity:.82;
+}
+
+.dar-nav-choice-mark::after{
+  content:"";
+  position:absolute;
+  background:var(--gold2,#efd78e);
+  border-radius:999px;
+  opacity:.8;
+}
+
+.dar-nav-choice-mark--left::after{
+  left:2px; top:4px; bottom:4px; width:3px;
+}
+
+.dar-nav-choice-mark--right::after{
+  right:2px; top:4px; bottom:4px; width:3px;
+}
+
+.dar-nav-choice-mark--bottom::after{
+  left:3px; right:3px; bottom:2px; height:3px;
+}
+
+.dar-nav-position-status{
+  margin:10px 0 0;
+  color:var(--muted,currentColor);
+  font-size:10.5px;
+  line-height:1.4;
+}
+
+@media(max-width:520px){
+  .dar-nav-position-options{
+    gap:6px;
+  }
+  .dar-nav-position-options button{
+    min-height:62px;
+    padding:9px 6px;
+    grid-template-columns:16px minmax(0,1fr);
+    column-gap:5px;
+    border-radius:14px;
+  }
+  .dar-nav-choice-mark{
+    width:15px;
+    height:25px;
+  }
+  .dar-nav-position-options button strong{font-size:11px}
+  .dar-nav-position-options button small{font-size:8.5px}
+}
+
+html.dar-test-side-nav.adaptive-keyboard-open #bottomNav.bottom-nav{
+  opacity:0!important;
+  pointer-events:none!important;
+}
+
+@media(prefers-reduced-motion:reduce){
+  html.dar-test-side-nav #bottomNav.bottom-nav,
+  html.dar-test-side-nav #bottomNav .bottom-nav-btn{
+    transition:none!important;
   }
 }
