@@ -2,7 +2,7 @@
   "buildId": "kids-shell-v143-subpage-nav1245",
   "label": "KIDS · V1.08.64",
   "releasedAt": "2026-10-07T22:22:00+02:00",
-  "note": "Kanonischer V1245-App-Build: globale, kindgerechte Nicht-Hero-Unterseiten-Navigation für Dīn, Propheten, Ṣaḥābah, Ṣaḥābiyyāt und Hörwelten; Hero-/Bildbühnen bleiben unverändert. Duʿāʾ Audio-Runtime 1244 bleibt erhalten.",
+  "note": "KIDS V1.08.64 mit interaktiver Swipe-Navigation V1246: Rechtskante nach links sowie iOS-typisch Linkskante nach rechts führen weich zurück; die Fläche folgt dem Finger, federt bei Abbruch zurück und gleitet bei Abschluss aus. Sonstige V1245-Inhalte bleiben unverändert.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -768,7 +768,7 @@
     "homeHeroVideoSrc": "direct-video-src-v1180",
     "homeDeployPass": "compact-arched-cinema-v1181-final",
     "navigationScrollPolicy": "main-tab-top-detail-return-position-v1237",
-    "navigationGestureHistory": "edge-swipe-back-forward-v1182",
+    "navigationGestureHistory": "interactive-dual-edge-back-v1246",
     "globalBottomScrollClearance": "single-shell-clearance-v1182",
     "ownerOriginalAudioPolicy": "preserve-uploaded-bytes-no-transcode",
     "abuBakrOwnerAudioBytes": 5722498,
@@ -1078,7 +1078,13 @@
     "homeBrandVisibilityFix": "v1226-specificity",
     "kidsDesignGuardTouchRail": "v13",
     "subpageNavigation": "glass-rail-v13-non-hero-only",
-    "subpageNavigationCoverage": ["Den Dīn lernen", "Propheten", "Ṣaḥābah", "Ṣaḥābiyyāt", "Geschichten des Īmān"],
+    "subpageNavigationCoverage": [
+      "Den Dīn lernen",
+      "Propheten",
+      "Ṣaḥābah",
+      "Ṣaḥābiyyāt",
+      "Geschichten des Īmān"
+    ],
     "subpageNavigationBackControl": "labeled-50px-touch-target",
     "subpageNavigationHeroIsolation": true,
     "homeBrandImagePresent": true,
@@ -1173,7 +1179,11 @@
     "duaAudioIOSDirectPlayback": true,
     "duaAudioDomAttachedPlayer": true,
     "duaAudioManifestNetworkFirst": true,
-    "duaAudioAssetsDirectNetwork": true
+    "duaAudioAssetsDirectNetwork": true,
+    "navigationGesturePhysics": "finger-tracking-spring-glide-v1246",
+    "navigationRightEdgeBack": true,
+    "navigationLeftEdgeBack": true,
+    "navigationSurfaceEntryTransition": "soft-slide-in-v1246"
   },
   "updatedAt": "2026-10-07T22:22:00+02:00",
   "deployTrigger": "2026-10-07T22:22:00+02:00-subpage-nav-v13"
