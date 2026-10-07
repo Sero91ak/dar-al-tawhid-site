@@ -18,6 +18,7 @@
   var queueIndex=0;
   var activeTrack=-1;
   var activeRange=null;
+  var externalPlaying=false;
 
   audio.preload="auto";
   audio.setAttribute("playsinline","");
@@ -73,6 +74,7 @@
   function stopAudio(){
     playToken++;
     playing=false;
+    externalPlaying=false;
     mode="";
     queue=[];
     queueIndex=0;
@@ -84,6 +86,8 @@
     audio.onloadedmetadata=null;
     audio.oncanplay=null;
     audio.onended=null;
+    try{if(typeof window.stopDuaAudio==="function")window.stopDuaAudio()}catch(e2){}
+    try{if(window.DARKidsOwnerVoice&&typeof window.DARKidsOwnerVoice.stop==="function")window.DARKidsOwnerVoice.stop()}catch(e3){}
     paintControls();
   }
   function lockBackground(on){
@@ -294,7 +298,38 @@
   }
   function playWhole(rate,whichMode){
     var ranges=(currentTiming&&currentTiming.ranges)||[];
-    return playQueue(ranges.map(function(r){return {track:r.track,start:r.start,end:r.end,rate:rate};}),whichMode);
+    if(ranges.length){
+      return playQueue(ranges.map(function(r){return {track:r.track,start:r.start,end:r.end,rate:rate};}),whichMode);
+    }
+    // Whole-Duʿāʾ playback must still work even while the exact word map is
+    // unavailable. This uses the same already-working source as the normal
+    // Duʿāʾ page; only word-following remains locked until exact alignment exists.
+    stopAudio();
+    if(currentDua&&typeof window.playDuaArabic==="function"){
+      playing=true;
+      externalPlaying=true;
+      mode=whichMode||"full";
+      paintControls();
+      setStatus(whichMode==="slow"?"Langsam zuhören …":"Duʿāʾ wird abgespielt …","");
+      var ok=window.playDuaArabic(currentDua,rate||1,function(){
+        playing=false;
+        externalPlaying=false;
+        mode="";
+        paintControls();
+        setStatus("Fertig. Wort-für-Wort wird erst mit exakten Zeitmarken freigeschaltet.","good");
+      });
+      if(ok===false){
+        playing=false;
+        externalPlaying=false;
+        mode="";
+        paintControls();
+        setStatus("Audio konnte nicht gestartet werden.","bad");
+        return false;
+      }
+      return true;
+    }
+    setStatus("Audioquelle ist gerade nicht verfügbar.","bad");
+    return false;
   }
   function playSegment(i,rate){
     var row=timingSegments()[Number(i)];
