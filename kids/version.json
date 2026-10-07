@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v136-dua-final1233",
-  "label": "KIDS · V1.08.57",
-  "releasedAt": "2026-10-07T15:57:00+02:00",
-  "note": "V1233 Kids Quiz Lernzentrum finalisiert: 900 Fragen bleiben exakt 300/300/300. Das Quiz übernimmt die Altersstufe ausschließlich aus den Kids-Einstellungen; eine zweite Altersauswahl im Quiz ist entfernt. Die Quiz-Startseite zeigt Lernfortschritt, sicher gelernte und bearbeitete Fragen, Fehler, Direkt-gewusst-Quote, fällige Wiederholungen, Fehlerwiederholung, zuletzt bearbeitete Runde mit Weiterlernen sowie frei wählbare Themen wie Adab und Aḫlāq. Die Rundenansicht ist Edge-to-Edge verdichtet; der Weiter-Button bleibt auf Mobilgeräten nach richtiger Antwort fest sichtbar. Quiz-Katalog, JS und CSS werden network-first ausgeliefert, damit kein alter 650er/Alterswahl-Cache zurückkehrt.",
+  "buildId": "kids-shell-v137-dua-voice1234",
+  "label": "KIDS · V1.08.58",
+  "releasedAt": "2026-10-07T17:18:00+02:00",
+  "note": "V1234 stellt den gesamten Duʿāʾ-Audiopfad auf Serhat Abu Malik – Master mit ElevenLabs V4 um: Fuṣḥā für alle arabischen Duʿāʾ, eigener natürlicher Slow-Render und echte isolierte Wortclips statt Zeitmarken-Slices. Voice-Manifeste und Duʿāʾ-Daten werden network-first geladen.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1233",
+    "serviceWorkerCache": "v1234-dua-voice",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -1128,7 +1128,14 @@
     "duaDetailTypography": "large-age-adaptive-v1233",
     "duaDetailFlow": "hero-title-overlay-actions-text-source-inline",
     "duaBackground": "global-app-background-no-detached-panel",
-    "kidsQuizRuntimeAssets": "v9-network-first"
+    "kidsQuizRuntimeAssets": "v9-network-first",
+    "duaVoice": "serhat-master-eleven-v4-all-arabic-v1234",
+    "duaArabicRegister": "fusha",
+    "duaSlowMode": "dedicated-v4-slow-render",
+    "duaWordMode": "isolated-v4-word-files-no-timing-slices",
+    "duaVoiceCache": "network-first-manifests-direct-audio",
+    "duaKarimFallback": false,
+    "duaQuranLearningVoice": "serhat-master-fusha"
   },
   "updatedAt": "2026-10-07T16:44:00+02:00",
   "deployTrigger": "2026-10-07T16:44:00+02:00"
