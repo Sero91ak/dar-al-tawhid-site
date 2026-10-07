@@ -2,7 +2,7 @@
   "buildId": "kids-shell-v143-subpage-nav1245",
   "label": "KIDS · V1.08.64",
   "releasedAt": "2026-10-07T23:18:00+02:00",
-  "note": "KIDS V1.08.64 · Globaler Karten-/Capsule-Glow auf den ruhigen Startseiten-Referenzglow vereinheitlicht (KIDS_HOME_GLOW_PARITY_V16 + Runtime v6): kein starkes Gold/Türkis-Neon mehr; Qurʾān, Duʿāʾ, Geschichten, Dīn, Propheten, Ṣaḥābah, Ṣaḥābiyyāt, Quiz und Eltern erben dieselbe zurückhaltende Touch-Intensität. Interaktive Swipe-Navigation V1246 bleibt erhalten.",
+  "note": "KIDS V1.08.64 · Globaler Karten-/Capsule-Glow auf den ruhigen Startseiten-Referenzglow vereinheitlicht: eine dezente Goldkontur + weicher kurzer Halo, kein starkes Gold/Türkis-Neon. Geschichten, Dīn, Propheten, Ṣaḥābah, Ṣaḥābiyyāt, Duʿāʾ, Qurʾān, Quiz und Eltern verwenden denselben Glow. Interaktive Swipe-Navigation V1246 bleibt erhalten.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -1205,7 +1205,10 @@
     "globalTouchGlowReference": "home-cards",
     "globalTouchGlowIntensity": "calm-gold-single-halo",
     "globalTouchGlowNoTealNeon": true,
-    "globalTouchGlowRuntime": 6
+    "globalTouchGlowRuntime": 6,
+    "globalGlowReference": "home-card-calm-gold-v16",
+    "globalGlowRuntime": "kids-card-interaction-v6",
+    "globalGlowDeployMarker": "home-glow-parity-live-retry-1"
   },
   "updatedAt": "2026-10-07T22:22:00+02:00",
   "deployTrigger": "2026-10-07T22:22:00+02:00-subpage-nav-v13"
