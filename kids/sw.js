@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1210";
-const KIDS_BUILD_ID="kids-shell-v115-dua-learning1210";
+const CACHE_NAME="dar-al-tawhid-kids-v1211";
+const KIDS_BUILD_ID="kids-shell-v116-dua-learning1211";
 const CORE_PRECACHE=[
   "/kids/start",
   "/kids/start.html",
@@ -114,7 +114,7 @@ const CORE_PRECACHE=[
   "/kids/kids-touch-rail.css?v=9",
   "/kids/kids-card-interaction.js?v=2",
   "/kids/kids-age-typography.js?v=3",
-  "/kids/owner-voice.js?v=5",
+  "/kids/owner-voice.js?v=6",
   "/kids/content-studio-feed.js?v=studio7",
   "/kids/assets/kids-open-v95.css?v=97",
   "/kids/assets/kids-open-v95.js?v=97",
