@@ -35,21 +35,25 @@ document.addEventListener("click",e=>{if(e.detail===0)fromEvent(e)},true);
 window.DARKidsStoryGlow=Object.freeze({version:1217,glow});
 })();
 
-/* DU'A HUB LOADER v1219 — injected through the existing late Kids runtime so all three shells stay identical. */
+/* DU'A HUB LOADER v1238 — use the direct shell includes when present; inject only as a fallback. */
 (() => {
   "use strict";
-  if (!document.querySelector('link[data-kids-dua-hub="1235"]')) {
-    const link=document.createElement("link");
-    link.rel="stylesheet";
-    link.href="/kids/dua-hub-v1219.css?v=1235";
-    link.dataset.kidsDuaHub="1235";
-    document.head.appendChild(link);
+  function ensureDuaHub(){
+    if (!document.querySelector('link[href*="/kids/dua-hub-v1219.css"]')) {
+      const link=document.createElement("link");
+      link.rel="stylesheet";
+      link.href="/kids/dua-hub-v1219.css?v=1238";
+      link.dataset.kidsDuaHub="1238";
+      document.head.appendChild(link);
+    }
+    if (!document.querySelector('script[src*="/kids/dua-hub-v1219.js"]')) {
+      const script=document.createElement("script");
+      script.src="/kids/dua-hub-v1219.js?v=1238";
+      script.dataset.kidsDuaHub="1238";
+      script.defer=true;
+      (document.body||document.documentElement).appendChild(script);
+    }
   }
-  if (!document.querySelector('script[data-kids-dua-hub="1235"]')) {
-    const script=document.createElement("script");
-    script.src="/kids/dua-hub-v1219.js?v=1235";
-    script.dataset.kidsDuaHub="1235";
-    script.defer=true;
-    (document.body||document.documentElement).appendChild(script);
-  }
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",ensureDuaHub,{once:true});
+  else ensureDuaHub();
 })();
