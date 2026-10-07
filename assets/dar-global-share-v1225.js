@@ -4,6 +4,7 @@
   /* BILDBEITRAG_CURATED_POOL_V1250 · AI disabled · curated random pool + women-exclusive ownership */
   if(window.__DAR_GLOBAL_SHARE_V1250)return;
   window.__DAR_GLOBAL_SHARE_V1250=true;
+  /* GLOBAL_SHARE_UI_STANDARD_V1268 · mount API + Legacy-Layout-Cleanup + Desktop-Fallbacks */
 
   var SITE="dar-al-tawhid.de";
   var W=1080,H=1350;
@@ -133,7 +134,19 @@
   }
   function ctxFromDom(trigger){
     if(trigger&&(trigger.hasAttribute("data-image-ayah-open")||trigger.hasAttribute("data-quran-share-ayah")))return ctxFromAyah(trigger);
-    var root=(trigger&&trigger.closest&&trigger.closest(".article,.post-reader,[data-frauen-view],.dua-detail,.quran-ayah,.prophets-detail"))||document.querySelector("#appView .post-reader,#appView .article,#appView .quran-ayah,#appView .prophets-detail")||document.getElementById("appView")||document.body;
+    var ownedPanel=trigger&&trigger.closest?trigger.closest(".share-panel"):null;
+    if(ownedPanel&&ownedPanel.__darSharePayload){
+      var owned=ownedPanel.__darSharePayload;
+      return {
+        kind:String(owned.kind||"content"),
+        category:clean(owned.category||"Wissen"),
+        title:clean(owned.title||"DĀR AL TAWḤĪD"),
+        body:String(owned.body||"").trim(),
+        source:trimSource(owned.source||"Quelle siehe Inhalt."),
+        url:owned.url||location.href
+      };
+    }
+    var root=(trigger&&trigger.closest&&trigger.closest(".article,.post-reader,[data-frauen-view],.dua-detail,.quran-ayah,.prophets-detail,.story-viewer-card,.detail-main"))||document.querySelector("#appView .post-reader,#appView .article,#appView .quran-ayah,#appView .prophets-detail")||document.getElementById("appView")||document.body;
     var route=(window.currentRoute&&window.currentRoute.view)||String(location.hash||"").replace(/^#\/?/,"").split("/")[0];
     var title=text(first(root,".post-reader-title h2,.article-title h2,.prophets-detail__name,.view-head h2,.quran-explain-title strong,h1,h2"));
     var category=text(first(root,".post-reader-title .kicker,.article-title .eyebrow,.post-aussage-kicker,.prophets-tab.is-active,.dua-label,.kicker,.eyebrow"))||"Wissen";
@@ -383,8 +396,7 @@
     if(navigator.share){
       try{await navigator.share({title:p.title,text:p.text,url:p.url});return true}catch(e){if(e&&e.name==="AbortError")return true}
     }
-    try{if(navigator.clipboard&&navigator.clipboard.writeText){await navigator.clipboard.writeText(p.text+"\n\n"+p.url);toast("Text und Link kopiert");return true}}catch(e2){}
-    return false;
+    return copyPlainText(p.text+"\n\n"+p.url);
   }
   function panelHas(panel,kind){
     if(kind==="wa")return !!panel.querySelector('[data-dar-global-wa],a[href*="wa.me"],a[href*="whatsapp"],.share-btn.wa');
@@ -417,7 +429,7 @@
   }
   function buildShareStandard(panel,attrs){
     panel.classList.add("dar-share-card");
-    panel.classList.remove("share-panel-v2","share-panel-v9");
+    panel.classList.remove("share-panel-v2","share-panel-v9","share-row-v2","share-row-v9","share-row-v11","share-flat-v410","post-after-share");
     panel.classList.add("share-panel-v11");
     panel.setAttribute("aria-label","Wissen weitergeben");
     panel.dataset.darShareStandard="v1267";
@@ -456,6 +468,23 @@
     section.className="share-panel share-panel-v11 dar-global-injected-panel";
     return buildShareStandard(section,attrs||{});
   }
+  function mountShare(container,payload){
+    if(!container||!container.appendChild)return null;
+    var previous=container.querySelector&&container.querySelector(":scope > .dar-global-mounted-share");
+    if(previous)previous.remove();
+    var panel=standaloneSharePanel({});
+    panel.classList.add("dar-global-mounted-share");
+    panel.__darSharePayload={
+      kind:payload&&payload.kind||"content",
+      category:payload&&payload.category||"Wissen",
+      title:payload&&payload.title||"DĀR AL TAWḤĪD",
+      body:payload&&payload.body||"",
+      source:payload&&payload.source||"Quelle siehe Inhalt.",
+      url:payload&&payload.url||location.href
+    };
+    container.appendChild(panel);
+    return panel;
+  }
   function injectStandalonePanels(root){
     var scope=root&&root.querySelectorAll?root:document;
     var targets=[];
@@ -471,7 +500,12 @@
     if(!panel||panel.dataset.darShareStandard==="v1267")return;
     /* Frauenbereich ist bereits die Referenz (Bild 1) und behält seinen women-historical Bildrenderer. */
     if(panel.classList.contains("frauen-share-panel")||panel.querySelector("[data-frauen-share]"))return;
-    buildShareStandard(panel,shareContextAttrs(panel));
+    var attrs=shareContextAttrs(panel);
+    var legacyTitle=panel.previousElementSibling;
+    if(legacyTitle&&legacyTitle.matches&&legacyTitle.matches(".post-after-share-title,.share-panel-title,.share-help")){
+      legacyTitle.remove();
+    }
+    buildShareStandard(panel,attrs);
   }
   function enhance(root){
     var scope=root&&root.querySelectorAll?root:document;
@@ -562,5 +596,5 @@
   function boot(){ensureShareCardStyle();enhance(document);try{mo.observe(document.getElementById("appView")||document.body,{childList:true,subtree:true})}catch(e){}}
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
   window.darCopyText=copyPlainText;
-  window.DARGlobalShare={version:"1250",uiVersion:"1267",standard:"wissen-weitergeben",createAndShare:createAndShare,renderFiles:renderFiles,copyText:copyPlainText,site:SITE,imageMode:"curated-pool-only",poolSize:GENERAL_SHARE_IMAGE_POOL.length};
+  window.DARGlobalShare={version:"1250",uiVersion:"1268",standard:"wissen-weitergeben",createAndShare:createAndShare,renderFiles:renderFiles,copyText:copyPlainText,mount:mountShare,sharePayload:sharePayload,site:SITE,imageMode:"curated-pool-only",poolSize:GENERAL_SHARE_IMAGE_POOL.length};
 })();
