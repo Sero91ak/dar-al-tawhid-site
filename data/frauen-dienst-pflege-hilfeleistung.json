@@ -1,6 +1,6 @@
 {
-  "fassung": 1,
-  "aktualisiertAm": "2026-08-29",
+  "fassung": 2,
+  "aktualisiertAm": "2026-10-07",
   "bereich": "dienst-pflege-hilfeleistung",
   "eintraege": [
     {
@@ -92,26 +92,28 @@
     {
       "kennung": "dienst-ibn-abbas-frauen-daienen-nicht-kaempfen-001",
       "person": "Ibn ʿAbbās",
-      "titel": "Frauen dienten und behandelten Verwundete",
-      "bereich": "sahabah-athar",
-      "thema": "hilfeleistung-und-grenze",
-      "kurzvorschau": "Ein Bericht von Ibn ʿAbbās erwähnt, dass Frauen im Rahmen der Feldzüge Verwundete behandelten; Details bleiben in Prüfung.",
-      "vollstaendigeAussage": "Dieser Eintrag bleibt zunächst verborgen. In einem Bericht wird von Ibn ʿAbbās رضي الله عنهما erwähnt, dass Frauen mitgeführt wurden, Verwundete behandelten und eine Gabe erhielten, aber kein voller Anteil wie Kämpfer. Dieser Bericht braucht genaue Prüfung der Fassung, Einstufung und Bedeutung, bevor er sichtbar wird.",
-      "lehre": "Nicht sichtbar.",
-      "quellenart": "in-pruefung",
-      "quellenstatus": "nicht-anzeigen",
-      "quellenanzeige": "In Prüfung.",
+      "titel": "Frauen behandelten Verwundete in den Feldzügen",
+      "bereich": "pflege",
+      "thema": "hilfeleistung-in-feldzuegen",
+      "kurzvorschau": "Ibn ʿAbbās رضي الله عنهما berichtete, dass Frauen den Propheten ﷺ auf Feldzügen begleiteten und Verwundete behandelten.",
+      "vollstaendigeAussage": "Ibn ʿAbbās رضي الله عنهما antwortete auf die Frage, ob der Gesandte Allahs ﷺ mit Frauen auszog: Ja, er zog mit ihnen aus; sie behandelten die Verwundeten und erhielten eine Gabe aus der Beute, jedoch keinen fest zugeteilten Kämpferanteil. Der Bericht belegt ihre praktische Hilfeleistung und Versorgung, ohne daraus pauschal moderne Berufs- oder Einsatzregeln abzuleiten.",
+      "lehre": "Frauen nahmen in authentisch überlieferten Fällen an Versorgung und Behandlung Verwundeter teil.",
+      "quellenart": "sahih",
+      "quellenstatus": "geprueft",
+      "quellenanzeige": "Quelle: Ṣaḥīḥ Muslim, Nr. 1812; al-Bayhaqī, as-Sunan al-Kubrā 9/53; Bericht von Ibn ʿAbbās.",
       "direktnachweisText": "→ Quelle öffnen",
       "direktnachweisUrl": "https://dorar.net/hadith/sharh/63582",
       "direktnachweisArt": "Webseite",
-      "atharPruefung": "Bei der Endprüfung prüfen: Fassung, Einstufung, Zusammenhang, Unterschied zwischen Hilfeleistung und Kampf, und ob der Bericht sichtbar aufgenommen werden darf.",
-      "freigabeDurchSerhat": false,
+      "atharPruefung": "Ṣaḥīḥ-Muslim-Fassung und Bayhaqī-Einstufung geprüft.",
+      "freigabeDurchSerhat": true,
       "schlagwoerter": [
         "Ibn ʿAbbās",
+        "Pflege",
         "Verwundete",
-        "Āthār"
+        "Hilfeleistung",
+        "Feldzüge"
       ],
-      "hinweise": "Nicht sichtbar anzeigen. Erst nach strenger Prüfung, weil hier Fiqh-Abgrenzung nötig ist."
+      "hinweise": "Kein pauschales Urteil zu heutigen gemischten Arbeitsplätzen, Militärdienst oder Berufspflege."
     },
     {
       "kennung": "dienst-pflegeberufe-001",
@@ -853,6 +855,32 @@
       "atharPruefung": "Bei der Endprüfung prüfen.",
       "freigabeDurchSerhat": false,
       "hinweise": "Nicht anzeigen."
+    },
+    {
+      "kennung": "dienst-frau-reinigte-moschee-001",
+      "person": "Eine Frau, die die Moschee reinigte",
+      "titel": "Dienst an der Moschee wurde nicht geringgeschätzt",
+      "bereich": "dienst",
+      "thema": "dienst-an-der-moschee",
+      "kurzvorschau": "Eine Frau reinigte regelmäßig die Moschee. Nach ihrem Tod fragte der Prophet ﷺ nach ihr und betete an ihrem Grab.",
+      "vollstaendigeAussage": "Abū Hurayrah رضي الله عنه berichtete von einer Frau, die die Moschee reinigte. Als sie starb und man den Propheten ﷺ nicht informiert hatte, fragte er nach ihr, ließ sich ihr Grab zeigen und betete für sie. Der Bericht zeigt den Wert eines unscheinbaren, regelmäßigen Dienstes für die Gemeinschaft und dass der Prophet ﷺ diese Frau und ihre Arbeit nicht geringachtete.",
+      "lehre": "Nützlicher Dienst für die Moschee und die Gemeinschaft kann eine große Tat sein, auch wenn er äußerlich unscheinbar wirkt.",
+      "quellenart": "sahih",
+      "quellenstatus": "geprueft",
+      "quellenanzeige": "Quelle: Ṣaḥīḥ al-Bukhārī, Nr. 458/460; Ṣaḥīḥ Muslim, Nr. 956; Bericht von Abū Hurayrah.",
+      "direktnachweisText": "→ Quelle öffnen",
+      "direktnachweisUrl": "https://dorar.net/h/HqW9IdqT?osoul=1",
+      "direktnachweisArt": "Webseite",
+      "schlagwoerter": [
+        "Moschee",
+        "Dienst",
+        "Reinigung",
+        "Gemeinschaft",
+        "gute Taten"
+      ],
+      "hinweise": "Der Bericht wird als Beispiel für freiwilligen Dienst verstanden, nicht als moderne Berufsregel.",
+      "freigabeDurchSerhat": true,
+      "atharPruefung": "Ṣaḥīḥ-al-Bukhārī- und Ṣaḥīḥ-Muslim-Ursprung geprüft."
     }
   ]
 }
