@@ -74,27 +74,35 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          http_code="$(
-            curl -sS -o /tmp/elevenlabs-pronunciation-result.json -w '%{http_code}' \
-              -X POST 'https://api.elevenlabs.io/v1/pronunciation-dictionaries/add-from-file' \
-              -H "xi-api-key: $ELEVENLABS_API_KEY" \
-              -F "file=@$MASTER_FILE;type=application/pls+xml" \
-              -F "name=$DICTIONARY_NAME" \
-              -F "description=DAR AL TAWHID Arabic-heavy pronunciation master 2.9.122; 10099 unique alias rules; existing curated rules preserved."
-          )"
-
-          echo "HTTP $http_code"
-          cat /tmp/elevenlabs-pronunciation-result.json
-
-          if [ "$http_code" -lt 200 ] || [ "$http_code" -ge 300 ]; then
-            exit 1
-          fi
-
           python3 - <<'PY'
           import json
+          import os
           from pathlib import Path
 
-          data = json.loads(Path("/tmp/elevenlabs-pronunciation-result.json").read_text())
+          import requests
+
+          master = Path(os.environ["MASTER_FILE"])
+          api_key = os.environ["ELEVENLABS_API_KEY"]
+          name = os.environ["DICTIONARY_NAME"]
+          description = (
+              "DAR AL TAWHID Arabic-heavy pronunciation master 2.9.122; "
+              "10099 unique alias rules; existing curated rules preserved."
+          )
+
+          with master.open("rb") as fh:
+              response = requests.post(
+                  "https://api.elevenlabs.io/v1/pronunciation-dictionaries/add-from-file",
+                  headers={"xi-api-key": api_key},
+                  data={"name": name, "description": description},
+                  files={"file": (master.name, fh, "application/pls+xml")},
+                  timeout=120,
+              )
+
+          print("HTTP", response.status_code)
+          print(response.text)
+          response.raise_for_status()
+
+          data = response.json()
           clean = {
               "id": data.get("id"),
               "name": data.get("name"),
