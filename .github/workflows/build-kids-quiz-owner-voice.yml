@@ -130,7 +130,7 @@ jobs:
           ELEVEN_DUA_MODEL=ELEVEN_MODEL
           ARABIC_PROFILES={"dua_arabic","dua_arabic_slow","dua_word"}
           ARABIC_SYNTHESIS_REVISIONS={
-              "dua_arabic":"dua-arabic-native-fusha-v2-20261007",
+              "dua_arabic":"dua-arabic-native-fusha-v3-20261007",
               "dua_arabic_slow":"dua-arabic-native-fusha-slow-v3-20261007",
               "dua_word":"dua-arabic-native-fusha-word-v3-20261007"
           }
