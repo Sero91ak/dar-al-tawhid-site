@@ -1,6 +1,6 @@
 {
-  "buildId": "app-shell-v1329",
-  "appBuildId": "app-shell-v1329",
-  "note": "v1329 · Landscape-Korrektur nach iPhone-17-Pro-Max-Test: normales Smartphone quer bleibt Einspalten-App statt Master/Detail. Split benötigt jetzt mindestens 900 px Breite, 560 px nutzbare Höhe und 500 px Readerbreite. Seitliche Tab-Rail ist auf 60 px verschlankt, näher am physischen Rand, 3D-Icons exakt zentriert in 52-px-Touchzonen und der Content reserviert eine eigene freie Rail-Spur. Beim aktiven Scrollen blendet nur die Rail per Opacity ab und kommt nach Scroll-Stopp weich zurück; kein Blur/Resize/Reflow. Vertikale Listen bleiben im kurzen Landscape vertikal. Links/Rechts spiegeln weiterhin die Händigkeit.",
-  "updatedAt": "2026-10-07T22:58:00+02:00"
+  "buildId": "app-shell-v1330",
+  "appBuildId": "app-shell-v1330",
+  "note": "v1330 · Drei klare Oberflächenmodi: Smartphone quer bleibt eine breite Einspalten-App; echtes Fold/iPad nutzt Master/Detail nur mit ausreichend kurzer Kante und Readerbreite; Reader erhalten kontrollierte Textbreiten, während PDF/Medien die volle Content-Pane nutzen. Qurʾān/Duʿāʾ/Bibliothek/Beiträge verwenden eine explizite Master-Detail-Entscheidung, sodass normales iPhone-Landscape nicht mehr in eine schmale linke Spalte gedrückt wird. Seitliche Tab-Rail: 56 px, 30 px 3D-Icons exakt mittig in 48 px Touchzonen, eigener reservierter Content-Streifen, nahe am physischen Rand. Beim aktiven Scrollen wird nur Opacity auf 18 % reduziert und nach Scroll-Stopp wiederhergestellt.",
+  "updatedAt": "2026-10-07T23:27:00+02:00"
 }
