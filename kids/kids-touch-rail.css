@@ -987,3 +987,34 @@ html body #syLibraryPage .ms-story-row.kids-tap-card:focus-visible{
   border-color:rgba(250,220,145,.84)!important;
   box-shadow:0 0 0 3px rgba(247,214,132,.16),var(--kids-glow-v10-press)!important;
 }
+
+
+/* =========================================================
+   KIDS_NAV_CONTROL_GEOMETRY_GUARD_V12
+   Navigation/back controls are controls, never content cards.
+   Protects against stale iOS/PWA runtimes that may still attach
+   .kids-tap-card before the new runtime takes over.
+   ========================================================= */
+html body .ps-library-nav .ps-library-back,
+html body .ps-library-nav .ps-library-back.kids-tap-card{
+  width:42px!important;
+  min-width:42px!important;
+  max-width:42px!important;
+  height:42px!important;
+  flex:0 0 42px!important;
+  margin:0!important;
+}
+html body :is(
+  .ps-library-back,
+  .ms-back,
+  .dl-back,
+  .gh-back,
+  .gh-player-back,
+  .gh-player-min,
+  .duahub-detail-back,
+  .quiz-library-back
+).kids-tap-card{
+  clip-path:initial!important;
+  transform:none!important;
+  translate:none!important;
+}
