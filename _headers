@@ -197,3 +197,10 @@
   Cache-Control: no-cache, must-revalidate, max-age=0
   CDN-Cache-Control: no-cache
   Cloudflare-CDN-Cache-Control: no-cache
+
+# Global mutable app data – online immer revalidieren, offline über Service Worker
+/data/*
+  Cache-Control: no-cache, must-revalidate, max-age=0
+  CDN-Cache-Control: no-cache
+  Cloudflare-CDN-Cache-Control: no-cache
+
