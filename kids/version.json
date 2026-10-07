@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v119-home-reference1215",
-  "label": "KIDS · V1.08.40",
-  "releasedAt": "2026-10-07T09:20:00+02:00",
-  "note": "V1215 ersetzt die fehlerhafte Startseiten-Hintergrunddatei durch eine saubere, aus der freigegebenen Referenz rekonstruierte Nacht-Moschee-Platte ohne eingebrannte Karten, Navigation oder Schrift. DĀR AL TAWḤĪD ist jetzt live als runde goldene Kinder-Wortmarke im gleichen Formcharakter wie Kids aufgebaut; der Serif/Cinzel-Look ist endgültig überschrieben. Kids nutzt wieder den deutlich sichtbaren alten 2,6-s-Ballon-Sprung mit zeitversetzten Buchstaben. Die V1214-Capsule-/Card-Glow-Regeln bleiben unverändert erhalten.",
+  "buildId": "kids-shell-v119-global-glow1216",
+  "label": "KIDS · V1.08.41",
+  "releasedAt": "2026-10-07T09:52:00+02:00",
+  "note": "V1216 macht den Capsule-/Card-Touch-Glow in der Kids-App tatsächlich global: Ṣaḥābah, Ṣaḥābiyyāt, Propheten, Dīn und neue anklickbare Kids-Capsules erhalten dieselbe Touch-/Pressed-Rückmeldung, auch wenn lokale Karten-Schatten gesetzt sind. Der sichtbare Dīn-Badge „6 Lern-Erzählungen · Quellen kompakt getrennt“ ist entfernt; Dīn heißt konsequent Dīn-Lektion. Die freigegebene V1215-Startseitenreferenz und Kids-Ballonanimation bleiben unverändert.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1215",
+    "serviceWorkerCache": "v1216",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
