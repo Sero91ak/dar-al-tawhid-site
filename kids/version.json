@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v142-home-profile-left1239",
-  "label": "KIDS · V1.08.63",
-  "releasedAt": "2026-10-07T19:12:00+02:00",
-  "note": "Kanonischer V1239-App-Build mit Duʿāʾ Audio-Runtime 1242: vollständige native Fuṣḥā-V4-Audios ohne deutsches Aussprachewörterbuch; Unicode-sicheres Matching für alle 120 Duʿāʾ.",
+  "buildId": "kids-shell-v143-subpage-nav1245",
+  "label": "KIDS · V1.08.64",
+  "releasedAt": "2026-10-07T22:22:00+02:00",
+  "note": "Kanonischer V1245-App-Build: globale, kindgerechte Nicht-Hero-Unterseiten-Navigation für Dīn, Propheten, Ṣaḥābah, Ṣaḥābiyyāt und Hörwelten; Hero-/Bildbühnen bleiben unverändert. Duʿāʾ Audio-Runtime 1244 bleibt erhalten.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1239",
+    "serviceWorkerCache": "v1245",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -898,7 +898,7 @@
     "globalCapsulePhoneBleed": "6px each side",
     "globalCapsuleEffectiveOuterMargin": "about 10px with 16px shell inset",
     "globalCapsuleTabletWidth": "100% content column",
-    "globalTouchGlow": "runtime-v5 + css-v12",
+    "globalTouchGlow": "runtime-v5 + css-v13",
     "globalTouchGlowCoverage": "all clickable Kids capsules/cards + stories home + deen + prophets + sahaba + sahabiyyat + quran + dua + quiz + parents + story libraries + compact mode capsules",
     "globalTouchMotion": "no translate/scale/lift",
     "globalArrowSpaceReclaimed": true,
@@ -1076,7 +1076,11 @@
     "kidsQuizHomeEntryVisible": true,
     "kidsQuizHomeEntryRegressionGuard": "v1225",
     "homeBrandVisibilityFix": "v1226-specificity",
-    "kidsDesignGuardTouchRail": "v12",
+    "kidsDesignGuardTouchRail": "v13",
+    "subpageNavigation": "glass-rail-v13-non-hero-only",
+    "subpageNavigationCoverage": ["Den Dīn lernen", "Propheten", "Ṣaḥābah", "Ṣaḥābiyyāt", "Geschichten des Īmān"],
+    "subpageNavigationBackControl": "labeled-50px-touch-target",
+    "subpageNavigationHeroIsolation": true,
     "homeBrandImagePresent": true,
     "homeBrandImageEnabled": true,
     "homeBrandLiveTextFallback": false,
@@ -1171,6 +1175,6 @@
     "duaAudioManifestNetworkFirst": true,
     "duaAudioAssetsDirectNetwork": true
   },
-  "updatedAt": "2026-10-07T19:14:00+02:00",
-  "deployTrigger": "2026-10-07T19:35:00+02:00-dua-native-fusha-runtime1242"
+  "updatedAt": "2026-10-07T22:22:00+02:00",
+  "deployTrigger": "2026-10-07T22:22:00+02:00-subpage-nav-v13"
 }
