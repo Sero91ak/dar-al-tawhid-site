@@ -6,6 +6,16 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/verify-live-kids-dua-audio.yml'
+      - 'kids/data/dua-audio.json'
+      - 'kids/data/dua-arabic-audio.json'
+      - 'kids/data/dua-arabic-slow-audio.json'
+      - 'kids/data/dua-word-audio.json'
+      - 'kids/dua-smart-learn.js'
+      - 'kids/owner-voice.js'
+      - 'kids/assets/kids-dua-audio/**'
+      - 'kids/assets/kids-dua-arabic-audio/**'
+      - 'kids/assets/kids-dua-arabic-slow-audio/**'
+      - 'kids/assets/kids-dua-word-audio/**'
 
 permissions:
   contents: read
