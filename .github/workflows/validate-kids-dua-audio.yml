@@ -144,6 +144,8 @@ jobs:
           grep -F 'playGerman:playGerman' /tmp/dua-smart.js
           grep -F 'ensureAudioAttached' /tmp/dua-smart.js
 
+          curl -fsSL --max-time 30 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/data/dua-kids.json?v=1244&cb=$CB" -o /tmp/dua-kids-live.json
+          curl -fsSL --max-time 30 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/data/dua-audio.json?v=8&cb=$CB" -o /tmp/dua-de.json
           curl -fsSL --max-time 30 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/data/dua-arabic-audio.json?v=8&cb=$CB" -o /tmp/dua-ar.json
           curl -fsSL --max-time 30 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/data/dua-arabic-slow-audio.json?v=3&cb=$CB" -o /tmp/dua-slow.json
           curl -fsSL --max-time 30 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/data/dua-word-audio.json?v=3&cb=$CB" -o /tmp/dua-word.json
@@ -151,6 +153,7 @@ jobs:
           node <<'NODE'
           const fs=require("fs");
           const specs=[
+            ["/tmp/dua-de.json",122],
             ["/tmp/dua-ar.json",120],
             ["/tmp/dua-slow.json",120],
             ["/tmp/dua-word.json",696]
@@ -161,6 +164,18 @@ jobs:
             if(d.voiceProfileId!=="serhat-owner-voice-2026")throw new Error(file+" not Serhat");
             if(Object.keys(d.entries||{}).length!==count)throw new Error(file+" entry count");
           }
+          const live=JSON.parse(fs.readFileSync("/tmp/dua-kids-live.json","utf8"));
+          const items=live.items||[];
+          if(items.length!==120)throw new Error("live dua count "+items.length);
+          const missing=[];
+          for(const d of items){
+            if(!d.audioArabicUrl)missing.push(d.id+":arabic");
+            if(!d.audioArabicSlowUrl)missing.push(d.id+":slow");
+            if(!d.audioGermanUrl)missing.push(d.id+":german");
+            for(const s of d.learningSegments||[]) if(!s.audioUrl) missing.push(d.id+":word");
+          }
+          if(missing.length)throw new Error("live direct audio missing: "+missing.slice(0,50).join(","));
+          console.log("LIVE DIRECT DUA COVERAGE OK · 120/120");
           const ar=JSON.parse(fs.readFileSync("/tmp/dua-ar.json","utf8"));
           const entry=ar.entries["رَبِّ زِدْنِي عِلْمًا"];
           if(!entry||!entry.url)throw new Error("sample Arabic entry missing");
