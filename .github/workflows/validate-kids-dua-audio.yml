@@ -1,0 +1,61 @@
+name: Validate Kids Dua Audio Runtime
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'kids/dua-smart-learn.js'
+      - 'kids/owner-voice.js'
+      - 'kids/dua-hub-v1219.js'
+      - 'kids/index.html'
+      - 'kids/sw.js'
+      - '.github/workflows/validate-kids-dua-audio.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check JavaScript syntax
+        run: |
+          node --check kids/dua-smart-learn.js
+          node --check kids/owner-voice.js
+          node --check kids/dua-hub-v1219.js
+          node --check kids/sw.js
+      - name: Check Du'a manifests and sample assets
+        run: |
+          python3 - <<'PY'
+          import json, pathlib
+          root=pathlib.Path(".")
+          specs=[
+            ("kids/data/dua-audio.json",122),
+            ("kids/data/dua-arabic-audio.json",120),
+            ("kids/data/dua-arabic-slow-audio.json",120),
+            ("kids/data/dua-word-audio.json",696),
+          ]
+          for path, expected in specs:
+            data=json.loads((root/path).read_text(encoding="utf-8"))
+            entries=data.get("entries") or {}
+            assert len(entries)==expected,(path,len(entries),expected)
+            assert data.get("modelId")=="eleven_v4",(path,data.get("modelId"))
+            assert data.get("voiceProfileId")=="serhat-owner-voice-2026",(path,data.get("voiceProfileId"))
+            for entry in entries.values():
+              url=str(entry.get("url") or "").split("?",1)[0]
+              p=root/url.lstrip("/")
+              assert p.exists() and p.stat().st_size>1200,(path,url)
+          print("Du'a manifests and audio assets OK")
+          PY
+      - name: Verify runtime cache-bust wiring
+        run: |
+          grep -F '/kids/owner-voice.js?v=8' kids/index.html
+          grep -F '/kids/dua-smart-learn.js?v=1241' kids/index.html
+          grep -F '/kids/dua-hub-v1219.js?v=1241' kids/index.html
+          grep -F '/kids/sw.js?v=1241' kids/index.html
+          grep -F 'dar-al-tawhid-kids-v1241' kids/sw.js
+          grep -F 'GERMAN_URL="/kids/data/dua-audio.json?v=8"' kids/dua-smart-learn.js
+          grep -F 'playGerman:playGerman' kids/dua-smart-learn.js
+          grep -F 'prepare:prepare' kids/dua-smart-learn.js
