@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1224";
-const KIDS_BUILD_ID="kids-shell-v128-nav-deen-fix1224";
+const CACHE_NAME="dar-al-tawhid-kids-v1225";
+const KIDS_BUILD_ID="kids-shell-v129-quiz-restore1225";
 const CORE_PRECACHE=[
   "/kids/assets/kids-home-v1219/dar-title-reference.png?v=1223",
   "/kids/start",
