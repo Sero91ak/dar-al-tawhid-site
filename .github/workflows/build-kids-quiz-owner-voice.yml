@@ -24,8 +24,6 @@ jobs:
       ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
       ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
       ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
-      ELEVENLABS_PRONUNCIATION_DICTIONARY_ID: ${{ secrets.ELEVENLABS_PRONUNCIATION_DICTIONARY_ID }}
-      ELEVENLABS_PRONUNCIATION_DICTIONARY_VERSION_ID: ${{ secrets.ELEVENLABS_PRONUNCIATION_DICTIONARY_VERSION_ID }}
 
     steps:
       - name: Checkout main
@@ -99,11 +97,20 @@ jobs:
           API=os.environ["VOICE_API"].rstrip("/")
           SECRET=os.environ.get("ADMIN_PUBLISH_SECRET","").strip()
           ELEVEN_KEY=os.environ.get("ELEVENLABS_API_KEY","").strip()
-          ELEVEN_VOICE=(os.environ.get("ELEVENLABS_VOICE_ID","").strip() or "DkU7j9uO4ZEtLD2iRZSH")
-          ELEVEN_MODEL="eleven_v4"
-          ELEVEN_DUA_MODEL="eleven_v4"
-          DICT_ID=os.environ.get("ELEVENLABS_PRONUNCIATION_DICTIONARY_ID","").strip()
-          DICT_VERSION=os.environ.get("ELEVENLABS_PRONUNCIATION_DICTIONARY_VERSION_ID","").strip()
+          PROD_CFG=json.loads((ROOT/"data/pronunciation/elevenlabs-production.json").read_text(encoding="utf-8"))
+          ELEVEN_VOICE=(os.environ.get("ELEVENLABS_VOICE_ID","").strip() or str((PROD_CFG.get("masterVoice") or {}).get("voiceId") or "").strip())
+          ELEVEN_MODEL=str(PROD_CFG.get("modelId") or "").strip()
+          ELEVEN_DUA_MODEL=ELEVEN_MODEL
+          DICT_CFG=PROD_CFG.get("pronunciationDictionary") or {}
+          DICT_ID=str(DICT_CFG.get("id") or "").strip()
+          DICT_VERSION=str(DICT_CFG.get("versionId") or "").strip()
+          DICT_RULES=int(DICT_CFG.get("ruleCount") or 0)
+          if ELEVEN_MODEL!="eleven_v4":
+              raise SystemExit(f"Produktionsmodell muss eleven_v4 sein, gefunden: {ELEVEN_MODEL!r}")
+          if not ELEVEN_VOICE:
+              raise SystemExit("Master Voice-ID fehlt in data/pronunciation/elevenlabs-production.json")
+          if not DICT_ID or not DICT_VERSION or DICT_RULES<1:
+              raise SystemExit("Kanonisches ElevenLabs-Aussprachewörterbuch ist unvollständig konfiguriert.")
           ORIGIN="https://dar-al-tawhid.de"
           REFERER="https://dar-al-tawhid.de/voice-studio/"
           QUIZ_ASSETS.mkdir(parents=True,exist_ok=True)
@@ -155,7 +162,7 @@ jobs:
           def synth(text,profile,asset_dir,serial,model_id):
               prepared=norm(text) if profile=="dua_arabic" else prepare_kids_voice_text(text)
               digest=hashlib.sha1(
-                  (SYNTHESIS_REVISION+"|"+str(model_id)+"|"+profile+"|"+text).encode("utf-8")
+                  (SYNTHESIS_REVISION+"|"+str(model_id)+"|"+profile+"|"+DICT_ID+"|"+DICT_VERSION+"|"+text).encode("utf-8")
               ).hexdigest()[:16]
               target=asset_dir/(digest+".m4a")
               last=None
@@ -321,6 +328,9 @@ jobs:
                       "sourceType":"owner-voice-generated",
                       "sourceProvider":"DĀR Voice Studio",
                       "sourceSpeaker":"Serhat Abu Malik",
+                      "pronunciationDictionaryId":DICT_ID,
+                      "pronunciationDictionaryVersionId":DICT_VERSION,
+                      "pronunciationDictionaryRuleCount":DICT_RULES,
                       "qaBy":"automatic-owner-voice-batch-qa",
                       "qaAt":now
                   }
@@ -341,6 +351,10 @@ jobs:
                   "manualPerClipApprovalRequired":False,
                   "technicalQaRequired":True,
                   "systemTtsFallbackAllowed":False,
+                  "modelId":model_id,
+                  "pronunciationDictionaryId":DICT_ID,
+                  "pronunciationDictionaryVersionId":DICT_VERSION,
+                  "pronunciationDictionaryRuleCount":DICT_RULES,
                   "entries":entries,
                   "counts":{**counts,"uniqueSpokenTexts":len(entries)}
               }
