@@ -2,7 +2,7 @@
   "buildId": "kids-shell-v132-home-transparent-brand1229",
   "label": "KIDS · V1.08.53",
   "releasedAt": "2026-10-07T14:05:00+02:00",
-  "note": "V1229 zeigt auf der Kids-Startseite wieder die freigegebene DĀR AL TAWḤĪD PNG-Bildmarke aus Bild 1 statt der fehlerhaften CSS-Schriftnachbildung. Die transparente Wortmarke liegt direkt über dem unveränderten Hero-Hintergrund; keine zusätzliche Platte und keine Text-Rekonstruktion. Kids-Ballonbewegung bleibt erhalten. Cache, Router, Worker, Manifest, Header und beide Kids-Shells sind synchronisiert.",
+  "note": "Quiz-Lernzentrum: Altersauswahl im Quiz entfernt; Quiz folgt ausschließlich dem im Kids-Profil gewählten Alter. Neue Lernübersicht mit sicher gelernt, bearbeitet, Fehlern, Direkt-gewusst-Quote, fälligen Wiederholungen, Fehler-Wiederholung, fortsetzbarer letzter Runde, freier Themenwahl und kompletter Fragenbibliothek. Quizrunde kompakter, Edge-to-Edge und mit sichtbar klebendem Weiter-Button.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1229",
+    "serviceWorkerCache": "v1230",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -363,7 +363,7 @@
       "fullQuestionCatalogOwnerVoice": true,
       "shortQuizRoundsPreserved": true,
       "noNewQuestionsInThisRelease": false,
-      "catalogAssetVersion": 10,
+      "catalogAssetVersion": 11,
       "latestContentPack": "651-900",
       "questionGenerationPaused": true,
       "questionGenerationCap": 900,
@@ -418,7 +418,17 @@
       "contentAgeAudit": "strict-child-only-v1",
       "advancedTalibTopicsExcluded": true,
       "audioGenerationDeferred": true,
-      "nextAudioModel": "eleven_v4"
+      "nextAudioModel": "eleven_v4",
+      "learningDashboard": "v4",
+      "agePickerInsideQuiz": false,
+      "ageSource": "kids-profile",
+      "statistics": true,
+      "resumeLastRound": true,
+      "topicRounds": true,
+      "mistakeReview": true,
+      "dueReview": true,
+      "edgeToEdge": true,
+      "stickyNext": true
     },
     "kidsQuizContentRevision": "001-900",
     "kidsQuizGenerationPaused": true,
@@ -1075,8 +1085,25 @@
     "homeBrandRender": "transparent-no-box-no-filter",
     "kidsQuizAgeSelection": "settings-only-v1",
     "kidsQuizInlineAgePicker": false,
-    "kidsQuizLibraryCountSync": "v8"
+    "kidsQuizLibraryCountSync": "v8",
+    "kidsQuizAgeSource": "profile-settings-only",
+    "kidsQuizInQuizAgePicker": false,
+    "kidsQuizLearningDashboard": "v4",
+    "kidsQuizStatistics": [
+      "secure",
+      "seen",
+      "wrong",
+      "firstTryRate",
+      "due",
+      "mistakeQuestions"
+    ],
+    "kidsQuizResumeSession": true,
+    "kidsQuizTopicRounds": true,
+    "kidsQuizMistakeReview": true,
+    "kidsQuizDueReview": true,
+    "kidsQuizStickyNext": true,
+    "kidsQuizEdgeToEdge": true
   },
-  "updatedAt": "2026-10-07T14:16:00+02:00",
-  "deployTrigger": "2026-10-07T14:17:30+02:00"
+  "updatedAt": "2026-10-07T14:24:00+02:00",
+  "deployTrigger": "2026-10-07T14:24:00+02:00"
 }
