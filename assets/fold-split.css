@@ -201,11 +201,11 @@ html.is-android .dar-fold__pane {
 /* v1326 · CAPACITY MASTER-DETAIL AUTHORITY */
 :root,
 html[data-theme]{
-  --fold-rail-min:260px;
-  --fold-rail-max:340px;
-  --fold-rail-current:280px;
+  --fold-rail-min:300px;
+  --fold-rail-max:360px;
+  --fold-rail-current:320px;
   --fold-pane-read-max:46rem;
-  --fold-gap:16px;
+  --fold-gap:18px;
 }
 
 /* One stable DOM. Capacity decides whether both panes are visible. */
@@ -372,4 +372,47 @@ html.dar-test-side-nav .dar-fold__pane{
   overflow:visible!important;
   padding-left:0!important;
   padding-right:0!important;
+}
+
+
+/* v1329 · PHONE-LANDSCAPE SAFETY */
+/* A normal phone turned sideways is still one app surface. The same stable
+   rail+pane DOM remains, but the unused side is hidden by compactMode. */
+@media (orientation:landscape) and (max-height:559.98px){
+  html .dar-fold[data-fold-mode="dual"]{
+    display:block!important;
+    grid-template-columns:1fr!important;
+    gap:0!important;
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+  }
+  html .dar-fold[data-fold-mode="dual"][data-fold-single-show="rail"] > .dar-fold__rail{
+    display:block!important;
+  }
+  html .dar-fold[data-fold-mode="dual"][data-fold-single-show="rail"] > .dar-fold__pane{
+    display:none!important;
+  }
+  html .dar-fold[data-fold-mode="dual"][data-fold-single-show="pane"] > .dar-fold__rail{
+    display:none!important;
+  }
+  html .dar-fold[data-fold-mode="dual"][data-fold-single-show="pane"] > .dar-fold__pane{
+    display:block!important;
+  }
+  html .dar-fold[data-fold-mode="dual"] > :is(.dar-fold__rail,.dar-fold__pane){
+    position:static!important;
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    max-height:none!important;
+    overflow:visible!important;
+    padding-left:0!important;
+    padding-right:0!important;
+    background:none!important;
+    grid-column:auto!important;
+    grid-row:auto!important;
+  }
+  html .dar-fold__empty{
+    display:none!important;
+  }
 }
