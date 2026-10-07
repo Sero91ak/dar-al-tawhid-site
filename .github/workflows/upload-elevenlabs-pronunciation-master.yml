@@ -82,8 +82,8 @@ jobs:
           import requests
 
           master = Path(os.environ["MASTER_FILE"])
-          api_key = os.environ["ELEVENLABS_API_KEY"]
-          name = os.environ["DICTIONARY_NAME"]
+          api_key = os.environ["ELEVENLABS_API_KEY"].strip()
+          name = os.environ["DICTIONARY_NAME"].strip()
           description = (
               "DAR AL TAWHID Arabic-heavy pronunciation master 2.9.122; "
               "10099 unique alias rules; existing curated rules preserved."
