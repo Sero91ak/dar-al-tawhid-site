@@ -213,3 +213,46 @@ html body.has-bottom-nav{
     transition:none!important;
   }
 }
+
+/* GLOBAL_COMPACT_CONTENT_FLOW_V1275
+   Appweit: Inhaltsseiten wachsen nur mit ihrem echten Inhalt.
+   Die Bottom-Navigation reserviert ihren Platz bereits am body. */
+:root,
+html[data-theme]{
+  --dar-content-end-gap:clamp(18px,3.6vw,30px);
+}
+html[data-theme] body:not(.is-home-route):not(.is-feed-fullscreen):not(.is-quran-player-route):not(.is-quran-reader-route):not(.is-ilm-chat-route) #appRoot,
+html[data-theme] body:not(.is-home-route):not(.is-feed-fullscreen):not(.is-quran-player-route):not(.is-quran-reader-route):not(.is-ilm-chat-route) #appShell,
+html[data-theme] body:not(.is-home-route):not(.is-feed-fullscreen):not(.is-quran-player-route):not(.is-quran-reader-route):not(.is-ilm-chat-route) .app,
+html[data-theme] body:not(.is-home-route):not(.is-feed-fullscreen):not(.is-quran-player-route):not(.is-quran-reader-route):not(.is-ilm-chat-route) #appView,
+html[data-theme] body:not(.is-home-route):not(.is-feed-fullscreen):not(.is-quran-player-route):not(.is-quran-reader-route):not(.is-ilm-chat-route) #appView.view{
+  min-height:0!important;
+  height:auto!important;
+}
+html[data-theme] body:not(.is-home-route):not(.is-feed-fullscreen):not(.is-quran-player-route):not(.is-quran-reader-route):not(.is-ilm-chat-route) #appView,
+html[data-theme] body:not(.is-home-route):not(.is-feed-fullscreen):not(.is-quran-player-route):not(.is-quran-reader-route):not(.is-ilm-chat-route) #appView.view{
+  flex:0 0 auto!important;
+  padding-bottom:0!important;
+}
+html[data-theme] body:not(.is-home-route):not(.is-feed-fullscreen):not(.is-quran-player-route):not(.is-quran-reader-route):not(.is-ilm-chat-route) :is(
+  .topic-collection-page,
+  .topics-hub,
+  .dua-collection-page,
+  .dua-hub,
+  .quiz-home,
+  .quiz-shell,
+  .more-page,
+  .account-page,
+  .lib-page,
+  .books-library-shell,
+  .article.post-reader
+){
+  min-height:0!important;
+  height:auto!important;
+  margin-bottom:0!important;
+  padding-bottom:var(--dar-content-end-gap)!important;
+}
+html[data-theme] body:not(.is-home-route):not(.is-feed-fullscreen):not(.is-quran-player-route):not(.is-quran-reader-route):not(.is-ilm-chat-route) .footer{
+  margin-top:var(--dar-content-end-gap)!important;
+}
+
