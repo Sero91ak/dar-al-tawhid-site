@@ -1,5 +1,5 @@
 {
-  "fassung": 5,
+  "fassung": 6,
   "aktualisiertAm": "2026-10-07",
   "bereich": "nikah-zustimmung-mahr",
   "eintraege": [
@@ -132,22 +132,28 @@
     },
     {
       "kennung": "nikah-wali-001",
-      "titel": "Walī bei der Ehe",
-      "bereich": "in-pruefung",
-      "thema": "in-pruefung",
-      "kurzvorschau": "Innere Vorbereitung.",
-      "vollstaendigeAussage": "",
-      "lehre": "",
-      "quellenart": "in-pruefung",
-      "quellenstatus": "nicht-anzeigen",
-      "quellenanzeige": "In Prüfung",
-      "direktnachweisText": "→ Quelle öffnen",
-      "direktnachweisUrl": "",
+      "titel": "Walī im Nikāḥ – Beleg und Madhhab-Unterschied",
+      "bereich": "nikah",
+      "thema": "wali-und-nikah",
+      "kurzvorschau": "Die Sunnah überliefert den Grundsatz „Kein Nikāḥ außer mit Walī“. Die juristische Auswertung ist zwischen den Rechtsschulen nicht vollständig einheitlich.",
+      "vollstaendigeAussage": "Von Abū Mūsā al-Ašʿarī رضي الله عنه ist der Ausspruch des Propheten ﷺ überliefert: „Kein Nikāḥ außer mit Walī.“ At-Tirmiḏī und weitere Muḥaddiṯūn führten diesen Beleg im Kapitel über den Walī an. Die Mehrheit der Fuqahāʾ machte den Walī zu einer Voraussetzung des Nikāḥ; Abū Ḥanīfah erlaubte der volljährigen, vernünftigen Frau unter bestimmten Voraussetzungen, ihren Nikāḥ selbst zu schließen. Deshalb wird der authentische Beleg hier klar genannt, während die genaue Rechtswirkung nach Madhhab getrennt behandelt werden muss.",
+      "lehre": "Der Walī ist ein zentraler Bestandteil der klassischen Nikāḥ-Diskussion. Ein Madhhab-Unterschied darf bei der Darstellung nicht verschwiegen werden.",
+      "quellenart": "hasan",
+      "quellenstatus": "geprueft",
+      "quellenanzeige": "Quelle: Sunan Abī Dāwūd, Nr. 2085; Sunan at-Tirmiḏī, Nr. 1101; al-Bayhaqī, as-Sunan al-Kubrā, Bāb lā nikāḥ illā bi-walī. Zum Madhhab-Unterschied: Tuḥfat al-Aḥwaḏī, Bāb mā ǧāʾa lā nikāḥ illā bi-walī.",
+      "direktnachweisText": "→ Quelle und Fiqh-Auswertung öffnen",
+      "direktnachweisUrl": "https://www.islamweb.net/ar/library/content/56/2010/%D8%A8%D8%A7%D8%A8-%D9%85%D8%A7-%D8%AC%D8%A7%D8%A1-%D9%84%D8%A7-%D9%86%D9%83%D8%A7%D8%AD-%D8%A5%D9%84%D8%A7-%D8%A8%D9%88%D9%84%D9%8A",
       "direktnachweisArt": "Webseite",
-      "freigabeDurchSerhat": false,
-      "schlagwoerter": [],
-      "hinweise": "Innere Vorbereitung. Unsichtbar, bis Quelle, Direktnachweis und Prüfung feststehen.",
-      "atharPruefung": "Bei der Endprüfung Ṣaḥābah-, Salaf- und Athar-Aussagen mit Direktnachweis prüfen."
+      "freigabeDurchSerhat": true,
+      "schlagwoerter": [
+        "Walī",
+        "Nikāḥ",
+        "Abū Ḥanīfah",
+        "Mehrheit",
+        "Ehevertrag"
+      ],
+      "hinweise": "Keine Einzelfallentscheidung über die Gültigkeit einer konkreten Ehe. Dafür müssen Madhhab, Vertragsumstände und ggf. richterliche Entscheidung gesondert geprüft werden.",
+      "atharPruefung": "Ḥadīṯbeleg und klassische Darstellung des Madhhab-Unterschieds geprüft."
     },
     {
       "kennung": "nikah-zeugen-001",
@@ -469,6 +475,31 @@
       "hinweise": "Nur zulässige Bedingungen. Welche konkrete Bedingung rechtswirksam ist, kann eine eigene Fiqh-Prüfung erfordern.",
       "freigabeDurchSerhat": true,
       "atharPruefung": "Ṣaḥīḥ al-Bukhārī und Ṣaḥīḥ Muslim geprüft."
+    },
+    {
+      "kennung": "nikah-muslimah-nichtmuslim-001",
+      "titel": "Eine Muslimah ist einem nichtmuslimischen Ehemann nicht erlaubt",
+      "bereich": "nikah",
+      "thema": "muslimah-und-nichtmuslim",
+      "kurzvorschau": "Sūrat al-Mumtaḥanah 60:10 erklärt ausdrücklich, dass gläubige Frauen den ungläubigen Männern nicht erlaubt sind und diese ihnen ebenfalls nicht erlaubt sind.",
+      "vollstaendigeAussage": "Allah sagt über gläubige Frauen, die zu den Muslimen auswanderten: Wenn ihr sie als gläubig erkannt habt, dann gebt sie nicht zu den Ungläubigen zurück; sie sind diesen nicht erlaubt und diese sind ihnen nicht erlaubt. Aṭ-Ṭabarī erklärt ausdrücklich: Gläubige Frauen sind den Ungläubigen nicht erlaubt und Ungläubige den gläubigen Frauen nicht. Der Vers ist eine klare Grundlage dafür, dass eine Muslimah keinen nichtmuslimischen Mann heiratet.",
+      "lehre": "Die religiöse Zugehörigkeit des Ehemanns ist im Nikāḥ einer Muslimah keine Nebensache, sondern eine klare Qurʾānische Grenze.",
+      "quellenart": "quran",
+      "quellenstatus": "geprueft",
+      "quellenanzeige": "Quelle: Qurʾān, Sūrat al-Mumtaḥanah 60:10; Tafsīr aṭ-Ṭabarī.",
+      "direktnachweisText": "→ Quelle öffnen",
+      "direktnachweisUrl": "https://www.islamweb.net/ar/library/content/50/4809/%D8%A7%D9%84%D9%82%D9%88%D9%84-%D9%81%D9%8A-%D8%AA%D8%A3%D9%88%D9%8A%D9%84-%D9%82%D9%88%D9%84%D9%87-%D8%AA%D8%B9%D8%A7%D9%84%D9%89-%D9%8A%D8%A7-%D8%A3%D9%8A%D9%87%D8%A7-%D8%A7%D9%84%D8%B0%D9%8A%D9%86-%D8%A2%D9%85%D9%86%D9%88%D8%A7-%D8%A5%D8%B0%D8%A7-%D8%AC%D8%A7%D8%A1%D9%83%D9%85-%D8%A7%D9%84%D9%85%D8%A4%D9%85%D9%86%D8%A7%D8%AA-%D9%85%D9%87%D8%A7%D8%AC%D8%B1%D8%A7%D8%AA-%D9%81%D8%A7%D9%85%D8%AA%D8%AD%D9%86%D9%88%D9%87%D9%86-",
+      "direktnachweisArt": "Webseite",
+      "schlagwoerter": [
+        "Nikāḥ",
+        "Muslimah",
+        "Nichtmuslim",
+        "al-Mumtaḥanah",
+        "Ehe"
+      ],
+      "hinweise": "Konkrete Fälle von Konversion innerhalb einer bestehenden Ehe, Wartefristen und gerichtliche Fragen benötigen gesonderte Fiqh-Prüfung.",
+      "freigabeDurchSerhat": true,
+      "atharPruefung": "Qurʾān 60:10 und Tafsīr aṭ-Ṭabarī geprüft."
     }
   ]
 }
