@@ -118,7 +118,7 @@ function ensureUi(){
       '<div class="ms-scroll" id="dlScroll">'+
         '<header class="ms-detail-hero dl-detail-hero"><img id="dlHero" class="ms-detail-image" src="" alt="" decoding="async">'+
           '<span class="ms-detail-shade" aria-hidden="true"></span><div class="ms-detail-copy">'+
-            '<div class="ms-detail-kicker">DĪN-LERNERZÄHLUNG</div><h2 id="dlTitle"></h2><p id="dlSummary"></p>'+
+            '<div class="ms-detail-kicker">DĪN-LEKTION</div><h2 id="dlTitle"></h2><p id="dlSummary"></p>'+
             '<div class="ms-meta"><span>Qurʾān &amp; authentische Sunnah</span></div>'+
           '</div></header>'+
         '<div class="ms-body dl-body">'+
@@ -143,7 +143,7 @@ function ensureUi(){
       return{
         key:active?("deen:"+active.id+":"+ageKey()):"deen:lesson",
         title:active?(active.title||active.name):"Den Dīn lernen",
-        subtitle:"Dīn-Lern-Erzählung",
+        subtitle:"Dīn-Lektion",
         album:"DĀR AL TAWḤĪD Kids · Den Dīn lernen",
         text:activeText,
         artwork:active?art(active,"hero"):"",
@@ -224,7 +224,7 @@ async function init(){
     }catch(_){}
     const app=$(".app");if(app&&"MutationObserver" in window)new MutationObserver(()=>{renderCards();if(active)renderActive()}).observe(app,{attributes:true,attributeFilter:["data-age"]});
   }catch(err){
-    console.warn("[DĀR Kids Dīn]",err);const g=$("#dlGrid");if(g)g.innerHTML='<div class="ms-load-error">Die Lern-Erzählungen konnten gerade nicht geladen werden.</div>';
+    console.warn("[DĀR Kids Dīn]",err);const g=$("#dlGrid");if(g)g.innerHTML='<div class="ms-load-error">Die Dīn-Lektionen konnten gerade nicht geladen werden.</div>';
   }
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(init,0),{once:true});else setTimeout(init,0);
