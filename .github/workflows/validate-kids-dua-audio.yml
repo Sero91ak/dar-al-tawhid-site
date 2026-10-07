@@ -59,3 +59,51 @@ jobs:
           grep -F 'GERMAN_URL="/kids/data/dua-audio.json?v=8"' kids/dua-smart-learn.js
           grep -F 'playGerman:playGerman' kids/dua-smart-learn.js
           grep -F 'prepare:prepare' kids/dua-smart-learn.js
+
+      - name: Live delivery smoke test
+        run: |
+          set -euo pipefail
+          CB="$(date +%s)"
+          curl -fsSL --max-time 30 "https://dar-al-tawhid.de/kids/start?cb=$CB" -o /tmp/kids-live.html
+          grep -F '/kids/owner-voice.js?v=8' /tmp/kids-live.html
+          grep -F '/kids/dua-smart-learn.js?v=1241' /tmp/kids-live.html
+          grep -F '/kids/dua-hub-v1219.js?v=1241' /tmp/kids-live.html
+
+          curl -fsSL --max-time 30 "https://dar-al-tawhid.de/kids/dua-smart-learn.js?v=1241&cb=$CB" -o /tmp/dua-smart.js
+          grep -F 'playGerman:playGerman' /tmp/dua-smart.js
+          grep -F 'ensureAudioAttached' /tmp/dua-smart.js
+
+          curl -fsSL --max-time 30 "https://dar-al-tawhid.de/kids/data/dua-arabic-audio.json?v=8&cb=$CB" -o /tmp/dua-ar.json
+          curl -fsSL --max-time 30 "https://dar-al-tawhid.de/kids/data/dua-arabic-slow-audio.json?v=3&cb=$CB" -o /tmp/dua-slow.json
+          curl -fsSL --max-time 30 "https://dar-al-tawhid.de/kids/data/dua-word-audio.json?v=3&cb=$CB" -o /tmp/dua-word.json
+
+          node <<'NODE'
+          const fs=require("fs");
+          const specs=[
+            ["/tmp/dua-ar.json",120],
+            ["/tmp/dua-slow.json",120],
+            ["/tmp/dua-word.json",696]
+          ];
+          for(const [file,count] of specs){
+            const d=JSON.parse(fs.readFileSync(file,"utf8"));
+            if(d.modelId!=="eleven_v4")throw new Error(file+" not V4");
+            if(d.voiceProfileId!=="serhat-owner-voice-2026")throw new Error(file+" not Serhat");
+            if(Object.keys(d.entries||{}).length!==count)throw new Error(file+" entry count");
+          }
+          const ar=JSON.parse(fs.readFileSync("/tmp/dua-ar.json","utf8"));
+          const entry=ar.entries["رَبِّ زِدْنِي عِلْمًا"];
+          if(!entry||!entry.url)throw new Error("sample Arabic entry missing");
+          fs.writeFileSync("/tmp/sample-url.txt",entry.url.split("?")[0]);
+          NODE
+
+          SAMPLE="$(cat /tmp/sample-url.txt)"
+          curl -fsSL --max-time 30 "https://dar-al-tawhid.de$SAMPLE?cb=$CB" -o /tmp/dua-sample.m4a
+          BYTES="$(wc -c < /tmp/dua-sample.m4a)"
+          test "$BYTES" -gt 1200
+          python3 - <<'PY'
+          p="/tmp/dua-sample.m4a"
+          data=open(p,"rb").read(64)
+          if b"ftyp" not in data:
+              raise SystemExit("Live sample is not an MP4/M4A asset")
+          print("LIVE DUA AUDIO OK", len(open(p,"rb").read()))
+          PY
