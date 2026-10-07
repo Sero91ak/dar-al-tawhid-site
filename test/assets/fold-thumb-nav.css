@@ -189,18 +189,19 @@ html.dar-test-side-nav[data-dar-nav-position="right"] .qrc-context-bar--dock{
 /* Handedness rule for existing master/detail layouts:
    nav right -> selection stays left (default)
    nav left  -> selection rail moves to the right. */
-html.dar-test-side-nav[data-dar-nav-position="left"] .dar-fold[data-fold-mode="dual"]{
-  grid-template-columns:minmax(0,1fr) clamp(var(--fold-rail-min,320px),var(--fold-rail-pct,34%),var(--fold-rail-max,380px))!important;
+html.dar-test-side-nav[data-dar-nav-position="left"][data-fold-dual="1"] .dar-fold[data-fold-mode="dual"]{
+  grid-template-columns:minmax(0,1fr) var(--fold-rail-current,280px)!important;
+  gap:var(--fold-gap,16px)!important;
 }
 
-html.dar-test-side-nav[data-dar-nav-position="left"] .dar-fold[data-fold-mode="dual"] > .dar-fold__pane{
+html.dar-test-side-nav[data-dar-nav-position="left"][data-fold-dual="1"] .dar-fold[data-fold-mode="dual"] > .dar-fold__pane{
   grid-column:1!important;
   grid-row:1!important;
   padding-left:0!important;
   padding-right:18px!important;
 }
 
-html.dar-test-side-nav[data-dar-nav-position="left"] .dar-fold[data-fold-mode="dual"] > .dar-fold__rail{
+html.dar-test-side-nav[data-dar-nav-position="left"][data-fold-dual="1"] .dar-fold[data-fold-mode="dual"] > .dar-fold__rail{
   grid-column:2!important;
   grid-row:1!important;
   padding-left:14px!important;
