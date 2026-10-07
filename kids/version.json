@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v118-home-bubble1213",
+  "buildId": "kids-shell-v118-quiz-9001213",
   "label": "KIDS · V1.08.38",
-  "releasedAt": "2026-10-07T08:51:00+02:00",
-  "note": "V1213 gestaltet die Startseitenmarke neu: DĀR AL TAWḤĪD nutzt jetzt denselben kinderfreundlichen Fredoka-/Balloncharakter wie Kids, bleibt aber bewusst einfarbig warm-gold. Die drei Wörter haben klare Abstände, die Buchstaben behalten eine sanfte Bogenform und die Wortgruppen bewegen sich nur sehr leicht. Kids erhält wieder den früheren dauerhaften Ballon-Sprung mit 2,6 Sekunden und zeitversetzten Buchstaben. Hintergrund, Karten, Navigation und übrige Startseite bleiben unverändert.",
+  "releasedAt": "2026-10-07T06:59:42.473Z",
+  "note": "V1213 erweitert das eigenständige Kids-Quiz auf exakt 900 altersgeprüfte Fragen: je 300 für 4–6, 7–8 und 9–10 Jahre. Die 250 neuen Fragen setzen bewusst Schwerpunkte auf Tawḥīd, Īmān, Adab, Aḫlāq, Iḥsān, Ikhlāṣ, Ṣabr, Tawakkul, Wissen und kindliche Alltagssituationen. Fortgeschrittene Ṭālib-al-ʿIlm-Themen bleiben ausgeschlossen. Für den Ausbau wurden ausschließlich Qurʾān-Fundstellen verwendet, die bereits im zuvor freigegebenen 650er-Kidsbestand vorkamen. Audio-Neurendering bleibt bis zum gesonderten V4-Voice-Schritt ausgesetzt.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -251,22 +251,22 @@
     "storyAudioSignedPreviewDependency": false,
     "kidsQuizSystem": "independent-v1",
     "kidsQuizAdultDependency": false,
-    "kidsQuizQuestionCount": 650,
+    "kidsQuizQuestionCount": 900,
     "kidsQuizAgeBands": [
       "4-6",
       "7-8",
       "9-10"
     ],
     "kidsQuizDistribution": {
-      "4-6": 234,
-      "7-8": 208,
-      "9-10": 208
+      "4-6": 300,
+      "7-8": 300,
+      "9-10": 300
     },
     "kidsQuizAudioFirstBand": "4-6",
     "kidsQuizAgeAdaptiveUx": "v1",
     "kidsQuizOwnerVoiceProfile": "serhat-owner-voice-2026",
-    "kidsQuizOwnerVoiceAutoSync": true,
-    "kidsQuizOwnerVoiceImmediateAfterLivePublish": true,
+    "kidsQuizOwnerVoiceAutoSync": false,
+    "kidsQuizOwnerVoiceImmediateAfterLivePublish": false,
     "kidsQuizMissingAudioState": true,
     "kidsQuizManifestNetworkFirst": true,
     "kidsQuizReleaseGuard": true,
@@ -274,7 +274,7 @@
       "version": "age-adaptive-realistic-v19",
       "independentQuizNamespace": true,
       "adultQuizDependency": false,
-      "questionCount": 650,
+      "questionCount": 900,
       "ageBands": [
         "4-6",
         "7-8",
@@ -287,7 +287,7 @@
       "responsiveTablet": true,
       "responsiveDesktop": true,
       "youngAgeAudioFirst": true,
-      "ownerVoiceAutoBatch": true,
+      "ownerVoiceAutoBatch": false,
       "ownerVoiceProfileId": "serhat-owner-voice-2026",
       "systemTtsFallbackAllowed": false,
       "artworkHotlinkDependency": false,
@@ -328,12 +328,17 @@
         "451-500",
         "501-550",
         "551-600",
-        "601-650"
+        "601-650",
+        "651-700",
+        "701-750",
+        "751-800",
+        "801-850",
+        "851-900"
       ],
       "distribution": {
-        "4-6": 234,
-        "7-8": 208,
-        "9-10": 208
+        "4-6": 300,
+        "7-8": 300,
+        "9-10": 300
       },
       "manifestDrivenArtwork": true,
       "sourcePolicy": "Qurʾān + authentische Ṣaḥīḥ-Sunnah; Quellen pro Frage",
@@ -354,11 +359,11 @@
       "fullQuestionCatalogDirectTest": true,
       "fullQuestionCatalogOwnerVoice": true,
       "shortQuizRoundsPreserved": true,
-      "noNewQuestionsInThisRelease": true,
-      "catalogAssetVersion": 9,
-      "latestContentPack": "601-650",
+      "noNewQuestionsInThisRelease": false,
+      "catalogAssetVersion": 10,
+      "latestContentPack": "651-900",
       "questionGenerationPaused": true,
-      "questionGenerationCap": 650,
+      "questionGenerationCap": 900,
       "topicArtworkVersion": "topic-realistic-v4",
       "topicArtworkFamilies": [
         "creation",
@@ -403,11 +408,18 @@
       "catalogVisualTopicCardsLabelPlacement": "bottom-stable",
       "neverEmptyRound": true,
       "installedEntryPointsSynced": true,
-      "legacyCanonicalRuntimeRemoved": true
+      "legacyCanonicalRuntimeRemoved": true,
+      "targetPerAge": 300,
+      "newQuestionsThisRelease": 250,
+      "ikhlasCategoryEnabled": true,
+      "contentAgeAudit": "strict-child-only-v1",
+      "advancedTalibTopicsExcluded": true,
+      "audioGenerationDeferred": true,
+      "nextAudioModel": "eleven_v4"
     },
-    "kidsQuizContentRevision": "001-650",
+    "kidsQuizContentRevision": "001-900",
     "kidsQuizGenerationPaused": true,
-    "kidsQuizGenerationCap": 650,
+    "kidsQuizGenerationCap": 900,
     "kidsQuizNeverEmpty": true,
     "kidsQuizInstalledEntryPointsSynced": true,
     "kidsQuizLegacyCanonicalRuntimeRemoved": true,
@@ -989,8 +1001,12 @@
     "homeBrandWordSpacing": "explicit-three-word-spacing",
     "homeBrandMotion": "subtle-word-wobble-v1213",
     "homeKidsBalloon": "classic-2.6s-staggered-v1213",
-    "homeBackgroundMotion": false
+    "homeBackgroundMotion": false,
+    "kidsQuizOwnerVoiceGeneration": "manual-after-900-content-freeze",
+    "kidsQuizTargetPerAge": 300,
+    "kidsQuizNewQuestionsThisRelease": 250,
+    "kidsQuizNewQuestionSourcePolicy": "only-previously-approved-quran-source-refs"
   },
   "updatedAt": "2026-10-07",
-  "deployTrigger": "2026-10-07T07:22:00+02:00"
+  "deployTrigger": "2026-10-07T06:59:42.478Z"
 }
