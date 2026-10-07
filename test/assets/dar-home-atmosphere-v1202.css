@@ -2609,3 +2609,71 @@ body.is-home-route #appView.view::before{
     width:100vw!important;
   }
 }
+
+
+/* v1324 · SINGLE STATIC MOBILE HOME CANVAS · TEST ONLY */
+@media(max-width:759px){
+  html.dar-home-v1194.dar-home-single-canvas-v1324 body.is-home-route{
+    background-color:var(--dt-page,#f5f1e7)!important;
+    background-image:url("/test/assets/home-v1194/home-mobile-canvas-v1324.svg?v=1324-home")!important;
+    background-repeat:no-repeat!important;
+    background-size:100% auto!important;
+    background-position:center top!important;
+    background-attachment:scroll!important;
+  }
+
+  /* One image owner only. Remove legacy second-scene painters and seam washes. */
+  html.dar-home-v1194.dar-home-single-canvas-v1324 body.is-home-route::before,
+  html.dar-home-v1194.dar-home-single-canvas-v1324 body.is-home-route::after,
+  html.dar-home-v1194.dar-home-single-canvas-v1324 body.is-home-route #appView.view::before,
+  html.dar-home-v1194.dar-home-single-canvas-v1324 body.is-home-route #appView.view::after,
+  html.dar-home-v1194.dar-home-single-canvas-v1324 body.is-home-route .top-shell>.isnad.dt-isnad::after,
+  html.dar-home-v1194.dar-home-single-canvas-v1324 body.is-home-route .home-line-tawhid::before,
+  html.dar-home-v1194.dar-home-single-canvas-v1324 body.is-home-route .home-line-tawhid::after{
+    content:none!important;
+    display:none!important;
+    background:none!important;
+    background-image:none!important;
+    filter:none!important;
+    -webkit-mask-image:none!important;
+    mask-image:none!important;
+  }
+
+  html.dar-home-v1194.dar-home-single-canvas-v1324 body.is-home-route :is(
+    .top-shell,
+    .top-shell.theme-hero-shell,
+    .top-shell .header.theme-hero-surface,
+    #appView,
+    #appView.view,
+    #appView .home-v380-shell,
+    #appView .home-v380-section,
+    #appView .home-line-grid,
+    #appView .home-line-list,
+    #appView .home-line-row,
+    #appView .home-line-row:nth-child(odd),
+    #appView .home-line-row:nth-child(even)
+  ){
+    background:transparent!important;
+    background-color:transparent!important;
+    background-image:none!important;
+    box-shadow:none!important;
+  }
+
+  html.dar-home-v1194.dar-home-single-canvas-v1324 body.is-home-route .top-shell>.isnad.dt-isnad{
+    border-bottom:0!important;
+    background:transparent!important;
+    background-image:none!important;
+  }
+
+  html.dar-home-v1194.dar-home-single-canvas-v1324 body.is-home-route .home-line-tawhid{
+    border-top:0!important;
+    background:transparent!important;
+    background-image:none!important;
+  }
+
+  /* Let the master image fade into the normal parchment footer with no new panel edge. */
+  html.dar-home-v1194.dar-home-single-canvas-v1324 body.is-home-route .footer{
+    background:linear-gradient(180deg,transparent 0%,color-mix(in srgb,var(--dt-page) 90%,#f7f4ed 10%) 42%,var(--dt-page) 100%)!important;
+    background-image:linear-gradient(180deg,transparent 0%,color-mix(in srgb,var(--dt-page) 90%,#f7f4ed 10%) 42%,var(--dt-page) 100%)!important;
+  }
+}
