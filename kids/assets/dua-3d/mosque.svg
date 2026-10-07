@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+<defs>
+  <linearGradient id="navy" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2b6398"/><stop offset=".48" stop-color="#123c6d"/><stop offset="1" stop-color="#061f3e"/></linearGradient>
+  <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff0a9"/><stop offset=".45" stop-color="#e8bd55"/><stop offset="1" stop-color="#986018"/></linearGradient>
+  <linearGradient id="ivory" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff9de"/><stop offset="1" stop-color="#ead39a"/></linearGradient>
+  <radialGradient id="glow"><stop offset="0" stop-color="#f8d46d" stop-opacity=".45"/><stop offset="1" stop-color="#f8d46d" stop-opacity="0"/></radialGradient>
+  <filter id="shadow" x="-40%" y="-40%" width="180%" height="190%"><feDropShadow dx="0" dy="8" stdDeviation="7" flood-color="#061a32" flood-opacity=".30"/></filter>
+  <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="7"/></filter>
+</defs>
+<circle cx="64" cy="64" r="50" fill="url(#glow)"/>
+<g filter="url(#shadow)">
+<path d="M33 61h62v47H33z" fill="url(#navy)" stroke="#d9aa3f" stroke-width="4"/>
+<path d="M42 59c2-18 12-30 22-37 10 7 20 19 22 37H42z" fill="url(#gold)" stroke="#fff0a1" stroke-width="2"/>
+<path d="M53 108V82c0-10 5-17 11-17s11 7 11 17v26H53z" fill="url(#ivory)" stroke="#d6a341" stroke-width="3"/>
+<path d="M23 48h8v60h-8zM97 48h8v60h-8z" fill="url(#gold)"/>
+<circle cx="27" cy="44" r="6" fill="#f3cf6e"/><circle cx="101" cy="44" r="6" fill="#f3cf6e"/>
+</g></svg>
