@@ -132,8 +132,12 @@
 
   function stripArabicPunct(s){
     return norm(s).split(/\s+/).map(function(x){
-      return x.replace(/^[،؛؟,.!…«»"'()\[\]{}]+|[،؛؟,.!…«»"'()\[\]{}]+$/g,"");
-    }).filter(Boolean);
+      return x
+        .replace(/[\u06D6-\u06DC]/g,"")
+        .replace(/^[،؛؟,.!…«»"'()\[\]{}]+|[،؛؟,.!…«»"'()\[\]{}]+$/g,"");
+    }).filter(function(x){
+      return Boolean(x)&&/[\u0621-\u064A\u0671]/.test(x);
+    });
   }
   function latinParts(s){
     return norm(s).replace(/[،,؛;؟?!…]/g," ").split(/\s+/).filter(Boolean);
