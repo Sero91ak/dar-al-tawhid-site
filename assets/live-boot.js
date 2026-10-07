@@ -70,6 +70,9 @@
   var pruneScheduled = false;
   var homeMoreScheduled = false;
   var hadithGateScheduled = false;
+  var LIVE_SYNC_MIN_MS = 15000;
+  var lastLiveSyncAt = 0;
+  var liveSyncBusy = false;
 
   function isFeedRoute() {
     try {
@@ -383,6 +386,46 @@
   }
 
 
+  function requestLiveSync(reason) {
+    if (isTest || liveSyncBusy || !navigator.onLine) return;
+    var now = Date.now();
+    if (now - lastLiveSyncAt < LIVE_SYNC_MIN_MS) return;
+    lastLiveSyncAt = now;
+    liveSyncBusy = true;
+
+    try { runVersionCheck(); } catch (e) {}
+
+    var finish = function () {
+      setTimeout(function () { liveSyncBusy = false; }, 1200);
+    };
+
+    try {
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.getRegistration("/").then(function (reg) {
+          try {
+            if (reg && typeof reg.update === "function") reg.update().catch(function () {});
+          } catch (e) {}
+          try {
+            var worker = navigator.serviceWorker.controller || (reg && reg.active);
+            if (worker && typeof worker.postMessage === "function") {
+              worker.postMessage({ type: "LIVE_SYNC", reason: String(reason || "resume") });
+            }
+          } catch (e) {}
+          finish();
+        }).catch(finish);
+      } else {
+        finish();
+      }
+    } catch (e) {
+      finish();
+    }
+
+    try {
+      fetch("/version.json?live_sync=" + now, { cache: "no-store" }).catch(function () {});
+    } catch (e) {}
+  }
+
+
   function boot() {
     bindFeedHeaderGuard();
     bindChipPruneGuard();
@@ -401,6 +444,22 @@
       });
     }
     setTimeout(runVersionCheck, 2500);
+    setTimeout(function () { requestLiveSync("boot"); }, 800);
+    window.addEventListener("pageshow", function () { requestLiveSync("pageshow"); });
+    window.addEventListener("focus", function () { requestLiveSync("focus"); });
+    window.addEventListener("online", function () { requestLiveSync("online"); });
+    document.addEventListener("visibilitychange", function () {
+      if (!document.hidden) requestLiveSync("visible");
+    });
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.addEventListener("message", function (event) {
+        var data = event && event.data ? event.data : {};
+        if (data.type !== "LIVE_SYNC_DONE") return;
+        try {
+          window.dispatchEvent(new CustomEvent("dar:live-sync-done", { detail: data }));
+        } catch (e) {}
+      });
+    }
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
