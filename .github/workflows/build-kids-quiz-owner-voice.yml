@@ -78,6 +78,7 @@ jobs:
           import json
           import os
           import pathlib
+          import re
           import subprocess
           import sys
           import threading
@@ -110,7 +111,7 @@ jobs:
           ELEVEN_MODEL=str(PROD_CFG.get("modelId") or "").strip()
           ELEVEN_DUA_MODEL=ELEVEN_MODEL
           ARABIC_PROFILES={"dua_arabic","dua_arabic_slow","dua_word"}
-          ARABIC_SYNTHESIS_REVISION="dua-arabic-native-fusha-v2-20261007"
+          ARABIC_SYNTHESIS_REVISION="dua-arabic-native-fusha-v3-20261007"
           DICT_CFG=PROD_CFG.get("pronunciationDictionary") or {}
           DICT_ID=str(DICT_CFG.get("id") or "").strip()
           DICT_VERSION=str(DICT_CFG.get("versionId") or "").strip()
@@ -135,7 +136,11 @@ jobs:
           def prepare_profile_text(text,profile):
               value=norm(text)
               if profile in ARABIC_PROFILES:
-                  return unicodedata.normalize("NFC",value)
+                  value=unicodedata.normalize("NFC",value)
+                  # Qurʾānic pause signs are visual recitation annotations, not spoken tokens.
+                  value=re.sub(r"[\u06D6-\u06DC]","",value)
+                  value=re.sub(r"\s+"," ",value).strip()
+                  return value
               return prepare_kids_voice_text(value)
 
           def profile_revision(profile):
