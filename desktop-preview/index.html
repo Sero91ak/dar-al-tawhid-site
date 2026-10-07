@@ -6,6 +6,8 @@
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://dar-al-tawhid.de/">
 <meta name="theme-color" content="#fbfaf6">
+<link rel="stylesheet" href="/assets/dar-global-share-v1225.css?v=1268">
+<script src="/assets/dar-global-share-v1225.js?v=1268" defer></script>
 <title>DĀR AL TAWḤĪD</title>
 <style>
 :root{
@@ -2708,15 +2710,29 @@ button,input,select{font:inherit}
   var out=document.getElementById("realPosts");if(!out)return;
   loadRealPosts().then(function(rows){out.innerHTML=rows.map(renderPostEntry).join("");var c=document.getElementById("postCountLabel");if(c)c.textContent=rows.length+" ausgewählte Beiträge"}).catch(function(){out.innerHTML='<div class="loading-line">Beiträge konnten gerade nicht geladen werden.</div>'})
  }
+ function mountDesktopShare(host,payload,tries){
+  if(!host)return;
+  tries=Number(tries||0);
+  if(window.DARGlobalShare&&typeof window.DARGlobalShare.mount==="function"){
+   window.DARGlobalShare.mount(host,payload||{});
+   return
+  }
+  if(tries<30)setTimeout(function(){mountDesktopShare(host,payload,tries+1)},60)
+ }
+ function desktopShareUrl(){return location.origin+location.pathname+location.search}
+ function postShareData(row){return{kind:"post",category:row.category||"Wissen",title:row.title||"DĀR AL TAWḤĪD",body:row.statement||row.body||"",source:row.source||row.reference||row.work||"Quelle siehe Beitrag.",url:desktopShareUrl()}}
+ function duaShareData(row){return{kind:"dua",category:"Duʿāʾ",title:row.title||"Duʿāʾ",body:[row.ar||row.arabic||"",row.de||row.german||""].filter(Boolean).join("\n\n"),source:String(row.src||row.source||"").replace(/^📝\s*/,"")||"Quelle siehe Duʿāʾ.",url:desktopShareUrl()}}
+ function publicationShareData(pub){return{kind:"publication",category:pub.category||"Publikation",title:pub.title||"DĀR AL TAWḤĪD Publikation",body:pub.description||pub.subtitle||pub.credit||pub.title||"",source:pub.publisher||"DĀR AL TAWḤĪD",url:desktopShareUrl()}}
  function initPostDetail(){
   var out=document.getElementById("postDetail");if(!out)return;
   var params=new URLSearchParams(location.search),special=params.get("id");
   if(special==="ibn-sirin"){
-   out.innerHTML='<div class="detail-page"><article class="detail-main"><div class="eyebrow">ĀṮĀR · QUELLENMETHODIK</div><h2>Dieses Wissen ist Dīn</h2><div class="speaker">Ibn Sīrīn sagte:</div><div class="statement-block">„Dieses Wissen ist Dīn, so schaut, von wem ihr euren Dīn nehmt.“</div><div class="statement-source"><b>Quelle:</b> Muslim, Ṣaḥīḥ Muslim, Muqaddimah, Bāb: al-Isnād min ad-Dīn. <a target="_blank" rel="noopener" href="'+SOURCE_URL+'">Direktnachweis ↗</a></div></article><aside class="source-index"><div class="eyebrow">NACHWEIS</div><h3>Ṣaḥīḥ Muslim</h3><div class="source-meta"><span>Teil</span><p>Muqaddimah</p></div><div class="source-meta"><span>Sprecher</span><p>Muḥammad ibn Sīrīn</p></div></aside></div>';
+   out.innerHTML='<div class="detail-page"><article class="detail-main"><div class="eyebrow">ĀṮĀR · QUELLENMETHODIK</div><h2>Dieses Wissen ist Dīn</h2><div class="speaker">Ibn Sīrīn sagte:</div><div class="statement-block">„Dieses Wissen ist Dīn, so schaut, von wem ihr euren Dīn nehmt.“</div><div class="statement-source"><b>Quelle:</b> Muslim, Ṣaḥīḥ Muslim, Muqaddimah, Bāb: al-Isnād min ad-Dīn. <a target="_blank" rel="noopener" href="'+SOURCE_URL+'">Direktnachweis ↗</a></div><div id="desktopPostShare" class="desktop-share-host"></div></article><aside class="source-index"><div class="eyebrow">NACHWEIS</div><h3>Ṣaḥīḥ Muslim</h3><div class="source-meta"><span>Teil</span><p>Muqaddimah</p></div><div class="source-meta"><span>Sprecher</span><p>Muḥammad ibn Sīrīn</p></div></aside></div>';
+   mountDesktopShare(document.getElementById("desktopPostShare"),{kind:"post",category:"Āṯār",title:"Dieses Wissen ist Dīn",body:"Dieses Wissen ist Dīn, so schaut, von wem ihr euren Dīn nehmt.",source:"Muslim, Ṣaḥīḥ Muslim, Muqaddimah, Bāb: al-Isnād min ad-Dīn.",url:desktopShareUrl()});
    return
   }
   var file=params.get("file")||REAL_POST_FILES[0];
-  tget("/content/posts/"+file).then(function(t){var r=parsePostMarkdown(t,file);out.innerHTML='<div class="detail-page"><article class="detail-main"><div class="eyebrow">'+escBook(r.category)+'</div><h2>'+escBook(r.title)+'</h2>'+(r.speaker?'<div class="speaker">'+escBook(r.speaker)+'</div>':'')+(r.statement?'<div class="statement-block">„'+escBook(r.statement.replace(/^„|”$/g,""))+'“</div>':'')+'<div class="statement-source"><b>Quelle:</b> '+escBook(r.source||"Quellenangabe im Beitrag")+(r.sourceUrl?' <a target="_blank" rel="noopener" href="'+escBook(r.sourceUrl)+'">Direktnachweis ↗</a>':'')+'</div>'+(r.conclusion?'<p style="margin-top:20px;color:#5f584e;font-size:12px;line-height:1.75">'+escBook(r.conclusion)+'</p>':'')+'</article><aside class="source-index"><div class="eyebrow">ZUORDNUNG</div><h3>'+escBook(r.scholar||r.speaker||"Überlieferung")+'</h3><div class="source-meta"><span>Kategorie</span><p>'+escBook(r.category)+'</p></div><div class="source-meta"><span>Quelle</span><p>'+escBook(r.source||"siehe Beitrag")+'</p></div></aside></div>'}).catch(function(){out.innerHTML='<div class="loading-line">Beitrag konnte gerade nicht geladen werden.</div>'})
+  tget("/content/posts/"+file).then(function(t){var r=parsePostMarkdown(t,file);out.innerHTML='<div class="detail-page"><article class="detail-main"><div class="eyebrow">'+escBook(r.category)+'</div><h2>'+escBook(r.title)+'</h2>'+(r.speaker?'<div class="speaker">'+escBook(r.speaker)+'</div>':'')+(r.statement?'<div class="statement-block">„'+escBook(r.statement.replace(/^„|”$/g,""))+'“</div>':'')+'<div class="statement-source"><b>Quelle:</b> '+escBook(r.source||"Quellenangabe im Beitrag")+(r.sourceUrl?' <a target="_blank" rel="noopener" href="'+escBook(r.sourceUrl)+'">Direktnachweis ↗</a>':'')+'</div>'+(r.conclusion?'<p style="margin-top:20px;color:#5f584e;font-size:12px;line-height:1.75">'+escBook(r.conclusion)+'</p>':'')+'<div id="desktopPostShare" class="desktop-share-host"></div></article><aside class="source-index"><div class="eyebrow">ZUORDNUNG</div><h3>'+escBook(r.scholar||r.speaker||"Überlieferung")+'</h3><div class="source-meta"><span>Kategorie</span><p>'+escBook(r.category)+'</p></div><div class="source-meta"><span>Quelle</span><p>'+escBook(r.source||"siehe Beitrag")+'</p></div></aside></div>';mountDesktopShare(document.getElementById("desktopPostShare"),postShareData(r))}).catch(function(){out.innerHTML='<div class="loading-line">Beitrag konnte gerade nicht geladen werden.</div>'})
  }
  function initRealDuas(){
   var out=document.getElementById("duaReal");if(!out)return;
@@ -2724,7 +2740,7 @@ button,input,select{font:inherit}
    var id=new URLSearchParams(location.search).get("id"),selected=rows.find(function(x){return x.id===id})||rows.find(function(x){return x.id==="dua-065-allahumma-inni-asaluka-al-afwa-wal-afiyah"})||rows[0];
    var cats={};rows.forEach(function(x){cats[x.cat]=(cats[x.cat]||0)+1});
    var list=rows.slice().sort(function(a,b){return (a.order||999)-(b.order||999)}).slice(0,36);
-   out.innerHTML='<aside class="dua-list"><div class="side-title">'+rows.length+' Duʿāʾ</div>'+list.map(function(x){return '<a class="desktop-link'+(x.id===selected.id?' active':'')+'" data-page="dua" href="'+p("dua","id="+encodeURIComponent(x.id))+'">'+escBook(x.title)+'</a>'}).join("")+'</aside><article class="dua-detail"><div class="eyebrow">'+escBook(selected.type)+' · '+escBook(selected.cat)+'</div><h2 style="font:500 30px/1.16 var(--serif);margin:8px 0 14px">'+escBook(selected.title)+'</h2><div class="dua-ar" dir="rtl">'+escBook(selected.ar)+'</div><p class="dua-tr">'+escBook(selected.tr)+'</p><p class="dua-de">'+escBook(selected.de)+'</p><div class="statement-source"><b>Quelle:</b> '+escBook(String(selected.src||"").replace(/^📝\\s*/,""))+'</div><p style="margin-top:13px;color:#80766a;font-size:9px">'+escBook(selected.occasion||"")+'</p></article>'
+   out.innerHTML='<aside class="dua-list"><div class="side-title">'+rows.length+' Duʿāʾ</div>'+list.map(function(x){return '<a class="desktop-link'+(x.id===selected.id?' active':'')+'" data-page="dua" href="'+p("dua","id="+encodeURIComponent(x.id))+'">'+escBook(x.title)+'</a>'}).join("")+'</aside><article class="dua-detail"><div class="eyebrow">'+escBook(selected.type)+' · '+escBook(selected.cat)+'</div><h2 style="font:500 30px/1.16 var(--serif);margin:8px 0 14px">'+escBook(selected.title)+'</h2><div class="dua-ar" dir="rtl">'+escBook(selected.ar)+'</div><p class="dua-tr">'+escBook(selected.tr)+'</p><p class="dua-de">'+escBook(selected.de)+'</p><div class="statement-source"><b>Quelle:</b> '+escBook(String(selected.src||"").replace(/^📝\\s*/,""))+'</div><p style="margin-top:13px;color:#80766a;font-size:9px">'+escBook(selected.occasion||"")+'</p><div id="desktopDuaShare" class="desktop-share-host"></div></article>';mountDesktopShare(document.getElementById("desktopDuaShare"),duaShareData(selected))
   }).catch(function(){out.innerHTML='<div class="loading-line">Duʿāʾ konnten gerade nicht geladen werden.</div>'})
  }
  function initKnowledgeReal(){
@@ -3708,9 +3724,10 @@ button,input,select{font:inherit}
   var pdf=pub.pdfUrl||"";
   return '<section class="section parchment reveal"><div class="pdf-reader-shell">'+
    '<div class="pdf-reader-toolbar"><div class="pdf-reader-toolbar-left"><div class="eyebrow">PDF-LESER</div><h3>'+escBook(pub.title)+'</h3></div>'+
-   '<div class="pdf-reader-actions"><span id="pdfPageStatus" class="pdf-page-status">—</span><button id="pdfShareBtn" class="pdf-action" type="button">Teilen</button><button id="pdfDownloadBtn" class="pdf-action" type="button">Download</button></div></div>'+
+   '<div class="pdf-reader-actions"><span id="pdfPageStatus" class="pdf-page-status">—</span><button id="pdfShareBtn" class="pdf-action" type="button">PDF teilen</button><button id="pdfDownloadBtn" class="pdf-action" type="button">Download</button></div></div>'+
    (pdf?'<div id="pdfScrollReader" class="pdf-scroll-reader"><div id="pdfPages" class="pdf-pages"><div class="pdf-loading">PDF wird für die Leseseite vorbereitet.<span id="pdfLoadProgress" class="pdf-loading-progress">Laden …</span></div></div></div>':'<div class="loading-line">Für dieses Werk ist derzeit keine PDF-Datei hinterlegt.</div>')+
    '<div class="pdf-reader-meta"><span>Version '+escBook(pub.version||"—")+'</span><span>'+escBook(pub.publisher||"DĀR AL TAWḤĪD")+'</span><span>'+escBook(pub.publishedAt||"")+'</span>'+(pub.pageCount?'<span>'+Number(pub.pageCount)+' Seiten</span>':"")+(pub.fileSize?'<span>'+escBook(pub.fileSize)+'</span>':"")+'</div>'+
+   '<div id="desktopPdfShareHost" class="desktop-share-host"></div>'+
    '</div></section>'+footer()
  }
  renders.werk=function(){
@@ -3770,6 +3787,7 @@ button,input,select{font:inherit}
   if(!pub||!pub.pdfUrl)return;
   var share=document.getElementById("pdfShareBtn"),download=document.getElementById("pdfDownloadBtn");
   if(share)share.onclick=function(){sharePdf(pub)};
+  mountDesktopShare(document.getElementById("desktopPdfShareHost"),publicationShareData(pub));
   if(download)download.onclick=function(){downloadPdf(pub)};
   renderPdfPages(pub)
  }
