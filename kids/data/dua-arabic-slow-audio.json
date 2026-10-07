@@ -1,13 +1,14 @@
 {
   "schemaVersion": 1,
   "id": "KIDS_DUA_ARABIC_SLOW_SERHAT_MASTER_V4",
-  "buildId": "kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
-  "updatedAt": "2026-10-07T19:45:09Z",
+  "buildId": "kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
+  "updatedAt": "2026-10-07T20:03:19Z",
   "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
   "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
   "voiceProfileId": "serhat-owner-voice-2026",
   "speaker": "Serhat Abu Malik – Master",
-  "speechPreparation": "native-vocalized-arabic-nfc-no-dictionary-v4",
+  "speechPreparation": "native-vocalized-arabic-nfc-no-dictionary-initial-shadda-safe-v5",
+  "initialContextShaddaStripped": true,
   "manualPerClipApprovalRequired": false,
   "technicalQaRequired": true,
   "systemTtsFallbackAllowed": false,
@@ -18,13 +19,14 @@
   "pronunciationDictionaryRuleCount": 0,
   "entries": {
     "رَبِّ زِدْنِي عِلْمًا": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/e019e67e7d328dc5.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/e019e67e7d328dc5.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "5309cfd1fb227b2f36c941617b8b5ddf43d08d99aa4ba537254ebf4b5222cd75",
       "durationSeconds": 2.72,
       "preparedTextSha256": "e2cd937b0890f78e5b555cfd8d385df775bd8e14a909ebd2439499f7f50aa045",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -37,16 +39,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبَّنَا اغْفِرْ لِي وَلِوَالِدَيَّ وَلِلْمُؤْمِنِينَ يَوْمَ يَقُومُ الْحِسَابُ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/16ead8a7bd289974.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/16ead8a7bd289974.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "5475e18e082a6f128031e8fcd81a59b0dc3842dde67b71f373809bf700513552",
       "durationSeconds": 6.64,
       "preparedTextSha256": "304537b4ca2d350efad785be257f50e6003c59acf93b1855bf36e8059c191b68",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -59,16 +62,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبِّ أَعُوذُ بِكَ مِنْ هَمَزَاتِ الشَّيَاطِينِ وَأَعُوذُ بِكَ رَبِّ أَنْ يَحْضُرُونِ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/28052e8416fe13ff.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/28052e8416fe13ff.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "6739143c9b902a6f8e673d6aecd8ec0e496d88b8a95b6fe3733a1c03f3e61afa",
       "durationSeconds": 7.36,
       "preparedTextSha256": "a5635124a5e45e9b45b34404584df9327a95fe5e478334895c32ec20d034a58e",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -81,16 +85,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "اللَّهُمَّ بِاسْمِكَ أَحْيَا وَأَمُوتُ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/0f4a917d6111c683.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/0f4a917d6111c683.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "6797e78e011d2c98d4ec0e5308a778de5c58065c02e809a0545bc3043ca9c5da",
       "durationSeconds": 3.84,
       "preparedTextSha256": "e1664b9749933117623d955de3463788a418b23b6d47ff395747a9a48f76772e",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -103,16 +108,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/a41c716069c91465.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/a41c716069c91465.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "23ece1dd81bc92bcf19e715fbb69ad2420eb92800fe34fe3038c528fda28ce39",
       "durationSeconds": 6.64,
       "preparedTextSha256": "a7c84e4c604e26b5963263641680744e488d1a4240012638df0b209c4e65ddd6",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -125,16 +131,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "بِسْمِ اللَّهِ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/1fc531e2f4c1402c.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/1fc531e2f4c1402c.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "779382edca62ee8b924bf35493cc14d440429dd231dcaba71e4e81d5fc3614cc",
       "durationSeconds": 1.92,
       "preparedTextSha256": "95690552b67bf63b295eab304a813d81bf190e0e3cd2454686ab56cc4c7effe8",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -147,16 +154,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنِي هَذَا وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلَا قُوَّةٍ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/d5ea66330ac591d1.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/d5ea66330ac591d1.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "e00214e923abf6394f00b163d5fdf62c37c60cf4d190118e9cdd9e6b37902bc2",
       "durationSeconds": 8.0,
       "preparedTextSha256": "4c55576390758baedf16ad0dd4fb5177a9ad7d98f6f5294d85c5e99456ad27c7",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -169,16 +177,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/46f810a5b6c70044.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/46f810a5b6c70044.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "5ced32d26bd13662079db6fffbf0b8e84817edcfd4074e0f2f20438ef50aa6d7",
       "durationSeconds": 4.96,
       "preparedTextSha256": "98f290de4aecaab7d727429d859932c9d3a4da33e063bacd475d09be0b09a5a2",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -191,16 +200,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "غُفْرَانَكَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/8577db986f36efdd.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/8577db986f36efdd.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "50e4daa99be06ac55f5a17a2d329570c94d8cf69460d25d22ac0814f3770c42c",
       "durationSeconds": 1.84,
       "preparedTextSha256": "93f66054369ed45356222a02ec827cb14c645043d87e80e5495105b170d742ae",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -213,16 +223,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "بِسْمِ اللَّهِ، تَوَكَّلْتُ عَلَى اللَّهِ، لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/3cbf444de3795bfe.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/3cbf444de3795bfe.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "0ba7e0af82282f8910afa8ea8b08969829a1f059149fae5a97b838133f46ddc4",
       "durationSeconds": 7.6,
       "preparedTextSha256": "7dd020b67867f1f5ade2dcde8e98c6530c87fdd43c6484ac3fa252e0c22b23cf",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -235,16 +246,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/37753d05043f5111.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/37753d05043f5111.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "45eb431c8019e4ae209e03cc76aa41c91007b19a57214083ec22d947ca3811f8",
       "durationSeconds": 4.0,
       "preparedTextSha256": "bf1cbb29acb1726b69db95e8602f040c0fb1e839ad49c3fe0923257e4717db9a",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -257,16 +269,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/0b4086bd7147955b.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/0b4086bd7147955b.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "29cb5f8f2869aa21d2c1125566970bbef0137e44a408f8833edb140632fc78a2",
       "durationSeconds": 3.84,
       "preparedTextSha256": "dd49b9b179af4a4bb51ebe29a50993406b111e7e5611baf894f9dec52a695017",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -279,16 +292,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/eb64e300d1d7bd14.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/eb64e300d1d7bd14.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "22fb44ffeee2463567a0e13365df8fb3a4d64568ef179865639d57b4dabef1be",
       "durationSeconds": 6.16,
       "preparedTextSha256": "e70bc627056d27a939adb2999d7e69d7911660383df4bb5baaeb136e603bd42e",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -301,16 +315,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/8d113ff1b64ba98b.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/8d113ff1b64ba98b.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "af62ec3ad8325568c0a8eab9513fea167e39706ea4abe2b30e7bc6d9f656f5c1",
       "durationSeconds": 8.56,
       "preparedTextSha256": "8213d7f07ffce71172d63fd019dda785d633a9cb979314e1a0b20bca6cdda694",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -323,16 +338,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبَّنَا ظَلَمْنَا أَنْفُسَنَا وَإِنْ لَمْ تَغْفِرْ لَنَا وَتَرْحَمْنَا لَنَكُونَنَّ مِنَ الْخَاسِرِينَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/6e079d197c46ee44.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/6e079d197c46ee44.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "75b14107f67214f7f2b3dced6b78e9c4f7fdccfd5028314732ad5953eca73043",
       "durationSeconds": 9.6,
       "preparedTextSha256": "f870ad2dc4930dd3f45a17bfecb376f47a3a9895bb50ce38f010891a95fa3a4d",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -345,16 +361,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبِّ اشْرَحْ لِي صَدْرِي وَيَسِّرْ لِي أَمْرِي وَاحْلُلْ عُقْدَةً مِنْ لِسَانِي يَفْقَهُوا قَوْلِي": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/6f429975e905844a.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/6f429975e905844a.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "a025722eda47827cf041d1593e7454b272e5d6d258d4b62acbf28dfbf1079486",
       "durationSeconds": 8.88,
       "preparedTextSha256": "6bb2c4c9970e57899feae5a0230a553fcb454da114ead6206936c4ca46f2907e",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -367,16 +384,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبَّنَا تَقَبَّلْ مِنَّا إِنَّكَ أَنْتَ السَّمِيعُ الْعَلِيمُ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/ffbbbd53c780265f.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/ffbbbd53c780265f.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "c14f49004623c49cecceed6c9a37247f939235c035ce591954274d251c17d560",
       "durationSeconds": 6.0,
       "preparedTextSha256": "70849a95de3cb6dced1e73c68cd7a6353ad55042f0d7aafdb162c0ca87c68f27",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -389,16 +407,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِنْ لَدُنْكَ رَحْمَةً إِنَّكَ أَنْتَ الْوَهَّابُ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/d61f4fbaddae419e.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/d61f4fbaddae419e.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "62cf55fd00e1ed8ebb289fb73b09cf9e238f19b1c87094677da679eb87fcfeb1",
       "durationSeconds": 11.36,
       "preparedTextSha256": "b7e2dc734c606daef1e895407a7f9f100ab44f37a88660933a3d726db2c6d1d7",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -411,16 +430,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "يَا مُقَلِّبَ الْقُلُوبِ ثَبِّتْ قَلْبِي عَلَى دِينِكَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/ef9980e3c44b21db.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/ef9980e3c44b21db.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "ecbe7a0a59db046bd3eb3c66bc28a94677ea5a9a9d0eebfa1086397f7819a583",
       "durationSeconds": 5.2,
       "preparedTextSha256": "0bfabf7a530bd997ccbe1d1fb38adbdc498421d61ea74380355712d717de96bb",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -433,16 +453,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْهُدَى وَالتُّقَى وَالْعَفَافَ وَالْغِنَى": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/4c2581a5d8865df4.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/4c2581a5d8865df4.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "d675ae7d195cb8732979a07c581168863d9131a48a5cd49fb7d80d0ddfc28d9d",
       "durationSeconds": 6.0,
       "preparedTextSha256": "9562a7e97af8d7a9df33ed947326da3998ab412294069b1ae433a7ba5ee9608a",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -455,16 +476,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبَّنَا أَفْرِغْ عَلَيْنَا صَبْرًا وَثَبِّتْ أَقْدَامَنَا وَانصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/63bd92ce3fb555b7.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/63bd92ce3fb555b7.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "cce673361a7addeeee480f7213cbc653b7360dc189166686c9fd2318ecf75df9",
       "durationSeconds": 9.12,
       "preparedTextSha256": "6ea60cc76fa1bee3326434f5dff6d09040d52376ee32ddddd87ee88313cbed06",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -477,16 +499,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبَّنَا لَا تُؤَاخِذْنَا إِن نَّسِينَا أَوْ أَخْطَأْنَا": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/b4263eaf07aacd0d.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/b4263eaf07aacd0d.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "ec8434df974455b5120d5bfd4d47b81b68cb0c7fb01aca7358858b5141353357",
       "durationSeconds": 5.6,
       "preparedTextSha256": "14509a4a7be01e5f035c588dd966f07587745c443a0ded0a83cc88fda583485a",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -499,16 +522,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبَّنَا اغْفِرْ لَنَا ذُنُوبَنَا وَإِسْرَافَنَا فِي أَمْرِنَا وَثَبِّتْ أَقْدَامَنَا": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/cd75bbb23b23281e.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/cd75bbb23b23281e.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "8f2f01edf7e45c74a352078b1f65c4c97a6d022d288b2af6a628c81625d40f4a",
       "durationSeconds": 7.6,
       "preparedTextSha256": "0249b9c1e15269eb0617f96c53a535f542679afbc29f9b9856d68768ddfda648",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -521,16 +545,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبَّنَا آمَنَّا فَاغْفِرْ لَنَا وَارْحَمْنَا وَأَنتَ خَيْرُ الرَّاحِمِينَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/7ac2da5887572e8d.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/7ac2da5887572e8d.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "cfd38b217a64dd46efdc71bd30247b4f7f7d4e7f42801c94fb67f25841640233",
       "durationSeconds": 8.16,
       "preparedTextSha256": "3acc7009d9f7cba95da62d15897df9bac532d12b0f643f8eacd43ce920246a4f",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -543,16 +568,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَّبِّ اغْفِرْ وَارْحَمْ وَأَنتَ خَيْرُ الرَّاحِمِينَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/67e62d4d67e38e47.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/67e62d4d67e38e47.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "d78bf71d22f9b1b7269c4768cbd1342b9d6aac2088f3c204d3a7d0d91bce9d42",
       "durationSeconds": 4.88,
       "preparedTextSha256": "7559cd5a41a22d463c6e66ff337318596d2195ee2566c6c84895e8461bc88b73",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -565,16 +591,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "وَلَا تُخْزِنِي يَوْمَ يُبْعَثُونَ يَوْمَ لَا يَنفَعُ مَالٌ وَلَا بَنُونَ إِلَّا مَنْ أَتَى اللَّهَ بِقَلْبٍ سَلِيمٍ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/838aa5c9eee93091.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/838aa5c9eee93091.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "41c226be7594df126227499aacd96c9e814a0df5635b25f49e459d63f9f70946",
       "durationSeconds": 10.96,
       "preparedTextSha256": "daf51c8dfddb2370890cf49b8685c526b11d78a96435e2bf81ddcd9d8f916682",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -587,16 +614,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبِّ هَبْ لِي حُكْمًا وَأَلْحِقْنِي بِالصَّالِحِينَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/0338adb8b9209e59.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/0338adb8b9209e59.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "b60a039fa1a56b8e0ce827c2f54aab3d19270c021c6eb839d1e490f656db9502",
       "durationSeconds": 4.96,
       "preparedTextSha256": "f9111ef7012b7a54aaf4ca6c0d2d447103b491cd0bff3922a60ed7ceddbe1eef",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -609,16 +637,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "وَاجْعَل لِّي لِسَانَ صِدْقٍ فِي الْآخِرِينَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/33f0e393304b7ac8.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/33f0e393304b7ac8.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "e97a776b3275dd8fea80db8fcd89d478c976c154f9c818d8ba4b38e8354ee5b5",
       "durationSeconds": 4.08,
       "preparedTextSha256": "4c5652912aa76ef0ea01d9a1fba2ba1ffe0d9b5ddfe6fa69368a9321e4ff7e1c",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -631,16 +660,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "وَاجْعَلْنِي مِن وَرَثَةِ جَنَّةِ النَّعِيمِ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/f762ce3ca82b7e26.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/f762ce3ca82b7e26.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "c87fba6c4ca0402925c2c96bad5361eb9a7aad8242ede5236caa2baf3adaee8c",
       "durationSeconds": 4.0,
       "preparedTextSha256": "6cf3b123379e8b9e22a980a64fef7f636df982917ddac4b2f1060ab4ffd52d77",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -653,16 +683,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبِّ نَجِّنِي مِنَ الْقَوْمِ الظَّالِمِينَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/e973be11d030a064.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/e973be11d030a064.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "2e52df6bb98bfa4f62d8dbb5c6eac81fbefb75a69a38e9033cb07fa62aefff59",
       "durationSeconds": 3.92,
       "preparedTextSha256": "e2efec7b20335e4adb305297ed88553f057ba7e7bc14a805254dc0b7c68b96a0",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -675,16 +706,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبِّ أَوْزِعْنِي أَنْ أَشْكُرَ نِعْمَتَكَ الَّتِي أَنْعَمْتَ عَلَيَّ وَعَلَىٰ وَالِدَيَّ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/12369bec33a62933.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/12369bec33a62933.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "88d28b71fb6928c0c6883de0882e2b60c5b7f5488547cbbf7fae1b5f2f08404e",
       "durationSeconds": 7.2,
       "preparedTextSha256": "752dd726abd6c1d18773619083b2606326888932af87c6c9fe3b94f8b25444e0",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -697,16 +729,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "وَأَنْ أَعْمَلَ صَالِحًا تَرْضَاهُ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/e382af3ca30708b7.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/e382af3ca30708b7.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "2df7a79dfe42ac50fe9cec8deb53db190d0f251ae934955f23b719cefc6f5204",
       "durationSeconds": 3.52,
       "preparedTextSha256": "fe915ee8c818a6c87c101648dccd29d8c5e2ec0637336700986e36e802f6cce9",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -719,16 +752,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "وَأَدْخِلْنِي بِرَحْمَتِكَ فِي عِبَادِكَ الصَّالِحِينَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/9ec9cb13b99cfa4c.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/9ec9cb13b99cfa4c.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "71caff651ed71666bab6eeb30ce4363c81b990a25a0c3c05e15c6cbdb35b7306",
       "durationSeconds": 4.56,
       "preparedTextSha256": "ea065660d943c28b93f653b381b95959f33cd4ebe90cefc25fc4d7abad334a04",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -741,16 +775,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبَّنَا افْتَحْ بَيْنَنَا وَبَيْنَ قَوْمِنَا بِالْحَقِّ وَأَنتَ خَيْرُ الْفَاتِحِينَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/9d00f90663786795.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/9d00f90663786795.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "2e40f5af69bf3b1301e515b699eaf741f0d6e863bdd8966166a1cc6bfe8e5bde",
       "durationSeconds": 7.2,
       "preparedTextSha256": "3b571866a0819a9e059b9a0cf311edecaf560dd75988d3ea3c4e47f82dc429f3",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -763,16 +798,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبَّنَا أَفْرِغْ عَلَيْنَا صَبْرًا وَتَوَفَّنَا مُسْلِمِينَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/03a5949dda668c0b.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/03a5949dda668c0b.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "ec9f2fa7c57af7624a1b1c260cdd2f1cd1471f5ec69d47e9ebcf16cefb82806a",
       "durationSeconds": 6.16,
       "preparedTextSha256": "19fc2fd92801f860117ab200d43b9a26202badaa10c45fc311cdec65676af0c7",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -785,16 +821,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبَّنَا وَسِعْتَ كُلَّ شَيْءٍ رَّحْمَةً وَعِلْمًا فَاغْفِرْ لِلَّذِينَ تَابُوا وَاتَّبَعُوا سَبِيلَكَ وَقِهِمْ عَذَابَ الْجَحِيمِ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/6bdebe9d312265fe.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/6bdebe9d312265fe.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "089762ef37925d551859034654467e6c4c8438bb766eb8f5af309da7aa6313e2",
       "durationSeconds": 11.84,
       "preparedTextSha256": "b3fe2f7fd84fb26e30a600ab48bba2f6ad240470daff9589a4847e5f35bde597",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -807,16 +844,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبَّنَا وَأَدْخِلْهُمْ جَنَّاتِ عَدْنٍ الَّتِي وَعَدتَّهُمْ وَمَن صَلَحَ مِنْ آبَائِهِمْ وَأَزْوَاجِهِمْ وَذُرِّيَّاتِهِمْ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/e32efc392c032a0d.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/e32efc392c032a0d.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "acbf8df8aa791a7f729f33405067778326359bcab89ac355d7118594269ee0fb",
       "durationSeconds": 11.44,
       "preparedTextSha256": "d081eb884bfa0b521f2da6b4a44bc1e0602aa7cbb8d45502d8b725c5d21e6be9",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -829,16 +867,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "وَقِهِمُ السَّيِّئَاتِ وَمَن تَقِ السَّيِّئَاتِ يَوْمَئِذٍ فَقَدْ رَحِمْتَهُ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/c0f692512891c0c8.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/c0f692512891c0c8.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "b8380cb7cb3e5e870f81ef7ef8d437212f09ed4b068509cf56e31caae9ba8aa0",
       "durationSeconds": 6.72,
       "preparedTextSha256": "62971fa247462d52a12557223fc420d5e11e32f06518f63acb778f681109e385",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -851,16 +890,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبَّنَا اغْفِرْ لَنَا وَلِإِخْوَانِنَا الَّذِينَ سَبَقُونَا بِالْإِيمَانِ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/14be80d10a91867f.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/14be80d10a91867f.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "bf4d30ca5256a78d7c07ef52ce1a8d5a549ac6695f0333d5c90926252683873c",
       "durationSeconds": 6.16,
       "preparedTextSha256": "2e9abaf628f2227f72b49992fa96d92cba945a3a994d1de113bda6fa756baadb",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -873,16 +913,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "وَلَا تَجْعَلْ فِي قُلُوبِنَا غِلًّا لِّلَّذِينَ آمَنُوا رَبَّنَا إِنَّكَ رَءُوفٌ رَّحِيمٌ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/6887796b99a134b5.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/6887796b99a134b5.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "9f8c77797f5f5a14f94f78fe2bcd08b1095ab2c9594ca0292546a21e6b987a98",
       "durationSeconds": 8.88,
       "preparedTextSha256": "5ba06a290081f11b52718bf0fd1bc24bb735ce010c824d5703a91f8af9a93930",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -895,16 +936,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبَّنَا عَلَيْكَ تَوَكَّلْنَا وَإِلَيْكَ أَنَبْنَا وَإِلَيْكَ الْمَصِيرُ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/692b2d3c21dd44aa.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/692b2d3c21dd44aa.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "9523eb99ccfc04f7f0d33fc67488c04df68db68e741bb99cc8146fecb357859b",
       "durationSeconds": 6.48,
       "preparedTextSha256": "c5361b9614df9c904911003e96595e77e9039834935c89057776696c9c9c01ef",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -917,16 +959,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبَّنَا لَا تَجْعَلْنَا فِتْنَةً لِّلَّذِينَ كَفَرُوا وَاغْفِرْ لَنَا رَبَّنَا": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/69dd90286c9cae5a.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/69dd90286c9cae5a.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "294a88496edbd5a3daad6bddc1e6d4c3f0c9bb9618bb41f45cb265c755ef4106",
       "durationSeconds": 6.72,
       "preparedTextSha256": "3b5dc177d609a8f77ddd8d94081277dc1ff93e5e692d04111a4109276945f254",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -939,16 +982,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبَّنَا أَتْمِمْ لَنَا نُورَنَا وَاغْفِرْ لَنَا إِنَّكَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/c20408cd6da7c207.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/c20408cd6da7c207.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "f5a1f0c251fee29180a76d0fe9eb53fae8e10d76f5f46885accfc21b56a1d9fc",
       "durationSeconds": 8.8,
       "preparedTextSha256": "3f861987b4fb20f52e8fad71c7bc9b52234ed271a9c7b0c302c214b23524ee3d",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -961,16 +1005,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "اللَّهُمَّ اهْدِنِي فِيمَنْ هَدَيْتَ، وَعَافِنِي فِيمَنْ عَافَيْتَ، وَتَوَلَّنِي فِيمَنْ تَوَلَّيْتَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/2e46901b569afffa.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/2e46901b569afffa.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "c71788d74579891907313e90d31dde3760b20973398d37d21efc2d8df211fc6f",
       "durationSeconds": 9.12,
       "preparedTextSha256": "1dcf31f8d75b28c28b6362e77ae734f8be882eb825db43ae2426e944953a8b88",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -983,16 +1028,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ عِلْمٍ لَا يَنْفَعُ، وَمِنْ قَلْبٍ لَا يَخْشَعُ، وَمِنْ نَفْسٍ لَا تَشْبَعُ، وَمِنْ دَعْوَةٍ لَا يُسْتَجَابُ لَهَا": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/7643ef6cb721fa32.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/7643ef6cb721fa32.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "fb37543a887f0630cd559b5f63ecf2f603295594405efb97979f53a698f91a98",
       "durationSeconds": 12.32,
       "preparedTextSha256": "3382bb241fb7f41db467b1abfe27af60785a4de94231c3dec0f65599dbd8896c",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1005,16 +1051,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ زَوَالِ نِعْمَتِكَ، وَتَحَوُّلِ عَافِيَتِكَ، وَفُجَاءَةِ نِقْمَتِكَ، وَجَمِيعِ سَخَطِكَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/41fed1d7f5a05071.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/41fed1d7f5a05071.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "ae7adc35e559b003329185cf99ae8b34e5db4922d1077b332a6b14be1bae0d67",
       "durationSeconds": 10.48,
       "preparedTextSha256": "c67d0d199ae596ea8383dfff383bed22a64585312e8d1f1477cecf04796281cd",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1027,16 +1074,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ جَهْدِ الْبَلَاءِ، وَدَرَكِ الشَّقَاءِ، وَسُوءِ الْقَضَاءِ، وَشَمَاتَةِ الْأَعْدَاءِ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/6cb651f8f4b84c9c.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/6cb651f8f4b84c9c.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "ddc2a8e47ef865a2977f96d009eb82761b7f3ab106e40e3b0fa084a9e4c8c218",
       "durationSeconds": 9.92,
       "preparedTextSha256": "615066dbd817330704dfb3ebd999733f918a6b76be5b348ec898fb542f5f507b",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1049,16 +1097,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبَّنَا وَلَا تَحْمِلْ عَلَيْنَا إِصْرًا كَمَا حَمَلْتَهُ عَلَى الَّذِينَ مِن قَبْلِنَا": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/406aa03ae5cddc55.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/406aa03ae5cddc55.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "5b3160551dbb4eeb8e10ad2f12438da03049e38b19904f5a45f06f6c7545c8aa",
       "durationSeconds": 7.84,
       "preparedTextSha256": "f4e39b3ae9d972af6c07149d868de130f114373635bf0194136c9c2479210d72",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1071,16 +1120,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبَّنَا وَلَا تُحَمِّلْنَا مَا لَا طَاقَةَ لَنَا بِهِ وَاعْفُ عَنَّا وَاغْفِرْ لَنَا وَارْحَمْنَا": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/db263113f149c9cc.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/db263113f149c9cc.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "be7772a646402c1a3279b2c34e2a6d680e94c233c3dccca6c15dd2a92bf11f72",
       "durationSeconds": 9.44,
       "preparedTextSha256": "cfdc99710dd895947dcd99e7fb3764062f59574bcbea2c0a4538a3f801e2c9cf",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1093,16 +1143,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبَّنَا إِنَّنَا آمَنَّا فَاغْفِرْ لَنَا ذُنُوبَنَا وَقِنَا عَذَابَ النَّارِ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/d0806198672e105f.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/d0806198672e105f.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "d98e0572d5cb81bdd48aef1183182fca3237ed538227fba6084f7a2dfed363ac",
       "durationSeconds": 8.32,
       "preparedTextSha256": "851efbb4bd866a87c127cc4ce6981deb435e89bf472713460ee93e035202bd6f",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1115,16 +1166,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبَّنَا آمَنَّا بِمَا أَنزَلْتَ وَاتَّبَعْنَا الرَّسُولَ فَاكْتُبْنَا مَعَ الشَّاهِدِينَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/11ffbdd15a767b80.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/11ffbdd15a767b80.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "8d14258a86b49a17e9d8d414d516b1371c36eb544808c56a36411bb512cd8e6e",
       "durationSeconds": 7.92,
       "preparedTextSha256": "6774f0319d31783dc39d95d0907ebe8b487eaed8705f311192ad2a2401ba953d",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1137,16 +1189,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبَّنَا اغْفِرْ لَنَا ذُنُوبَنَا وَإِسْرَافَنَا فِي أَمْرِنَا وَثَبِّتْ أَقْدَامَنَا وَانصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/2e11cd8d72b586b3.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/2e11cd8d72b586b3.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "b4e77984a533339187823a22a77ce228a7c5fa93554e0a6160559e6f795b6989",
       "durationSeconds": 11.44,
       "preparedTextSha256": "b6fc1e09d1e6e7795bb3c314d04acbdc4910d78a845bfea7a414e5beda357412",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1159,16 +1212,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبَّنَا مَا خَلَقْتَ هَٰذَا بَاطِلًا سُبْحَانَكَ فَقِنَا عَذَابَ النَّارِ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/30c7a3caeeed15e9.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/30c7a3caeeed15e9.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "ac38f6bb854566908b63cdca36ed9f7e177b643ae3136fc309dc89534a9e8cea",
       "durationSeconds": 7.12,
       "preparedTextSha256": "981a47cd8d56dd0265214e0b0065a2202438e3f6eecddbadba694e64523c194d",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1181,16 +1235,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبَّنَا إِنَّكَ مَن تُدْخِلِ النَّارَ فَقَدْ أَخْزَيْتَهُ وَمَا لِلظَّالِمِينَ مِنْ أَنصَارٍ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/25d475dfd1190db0.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/25d475dfd1190db0.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "e5b15afd80fb0e2a467b33b3fd25c8282692cc556dc356e1cc50d681103f969d",
       "durationSeconds": 9.04,
       "preparedTextSha256": "c17a5682015edf4ebd64e0abdcf8c0ca5f2de5a11cff7033163d4889a57ed787",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1203,16 +1258,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبَّنَا وَآتِنَا مَا وَعَدتَّنَا عَلَىٰ رُسُلِكَ وَلَا تُخْزِنَا يَوْمَ الْقِيَامَةِ إِنَّكَ لَا تُخْلِفُ الْمِيعَادَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/3c8f0c0e9458c572.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/3c8f0c0e9458c572.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "10616232a1f0465c14dce9855863e7e56be434260fc724179f9942bc96685eef",
       "durationSeconds": 10.64,
       "preparedTextSha256": "cf67c8af77e3fcfedfeafc4c80e21210f39ce1cc3b2725cb8946308e5a1e2573",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1225,16 +1281,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبَّنَا لَا تَجْعَلْنَا مَعَ الْقَوْمِ الظَّالِمِينَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/788be110c67ac1cb.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/788be110c67ac1cb.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "7f3a47e125baab31aac6e842a9e77813c9b1dc5886771c5dd4a93161d85e71fd",
       "durationSeconds": 4.88,
       "preparedTextSha256": "f2cd6c1a7555b9ec6b4759abd8317f2e389a4826a3cc4c14fc26b2e3dfe8fee8",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1247,16 +1304,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبِّ اجْعَلْنِي مُقِيمَ الصَّلَاةِ وَمِن ذُرِّيَّتِي ۚ رَبَّنَا وَتَقَبَّلْ دُعَاءِ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/83fd7af13469bf20.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/83fd7af13469bf20.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "b6905251fa9766462a0c5b386678d20c5a7653162e2bfcfa1ff8fac713caac09",
       "durationSeconds": 7.2,
       "preparedTextSha256": "9fa6666790dd2c13427548520fc428b8fcb89f9ce9e2d47f91239accb8dd168f",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1269,16 +1327,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "عَلَى اللَّهِ تَوَكَّلْنَا رَبَّنَا لَا تَجْعَلْنَا فِتْنَةً لِّلْقَوْمِ الظَّالِمِينَ وَنَجِّنَا بِرَحْمَتِكَ مِنَ الْقَوْمِ الْكَافِرِينَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/1cbe01dcc7c2dacf.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/1cbe01dcc7c2dacf.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "be639b730c3b890eba5c8420525bacb6096894d6b3698f34d924f23eea301ea8",
       "durationSeconds": 11.44,
       "preparedTextSha256": "9eceef1cb89e14913c27700ca0822b53a69c9d2053c1678d380c8de512a2cdcc",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1291,16 +1350,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبِّ إِنِّي أَعُوذُ بِكَ أَنْ أَسْأَلَكَ مَا لَيْسَ لِي بِهِ عِلْمٌ وَإِلَّا تَغْفِرْ لِي وَتَرْحَمْنِي أَكُن مِّنَ الْخَاسِرِينَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/25ef342ab7b8862d.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/25ef342ab7b8862d.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "04913d75838a915438e81285c2521b9d0c4ee57fb2becb0ec35f5f4e72c36e62",
       "durationSeconds": 11.68,
       "preparedTextSha256": "aa9a85c1f3ca443fd2fee62a08c85965f7629692b829d01e2e223b476c8ec6f4",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1313,16 +1373,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبِّ قَدْ آتَيْتَنِي مِنَ الْمُلْكِ وَعَلَّمْتَنِي مِن تَأْوِيلِ الْأَحَادِيثِ فَاطِرَ السَّمَاوَاتِ وَالْأَرْضِ أَنتَ وَلِيِّي فِي الدُّنْيَا وَالْآخِرَةِ تَوَفَّنِي مُسْلِمًا وَأَلْحِقْنِي بِالصَّالِحِينَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/403f5627362a4cd9.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/403f5627362a4cd9.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "134889c4abf1ebca8345729253938720328a87bc0c210ca757ae1593a1f4d952",
       "durationSeconds": 17.92,
       "preparedTextSha256": "dc895bb5c0750b6b7aecc1945b16dc452cd753f8e040510aa477e5d67e5b69c0",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1335,16 +1396,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَّبِّ أَدْخِلْنِي مُدْخَلَ صِدْقٍ وَأَخْرِجْنِي مُخْرَجَ صِدْقٍ وَاجْعَل لِّي مِن لَّدُنكَ سُلْطَانًا نَّصِيرًا": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/044e1bac1848993f.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/044e1bac1848993f.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "5f70aaeec3317e9db0a645cbd7487e9742887e8fe59bbcb9f9cf94689f8b72fe",
       "durationSeconds": 10.4,
       "preparedTextSha256": "69ba1e3b7cb173aea43343cfd0fd7d814ede54024bb31d426a6a0ce658cd117e",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1357,16 +1419,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبِّ لَا تَذَرْنِي فَرْدًا وَأَنتَ خَيْرُ الْوَارِثِينَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/ffb85951d4cd4104.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/ffb85951d4cd4104.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "73f5e93d96915428942261283a05c1a36a40bd9d1a9d99a6d95c7a30ff16e6f4",
       "durationSeconds": 5.6,
       "preparedTextSha256": "021f1cef59b4ab7a3539919abd3cf60b49e843e6c4edc4ddb65b9f70aa92bc1b",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1379,16 +1442,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "لَّا إِلَٰهَ إِلَّا أَنتَ سُبْحَانَكَ إِنِّي كُنتُ مِنَ الظَّالِمِينَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/8da35c3f445cf8e2.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/8da35c3f445cf8e2.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "d09d0b9e1e3397cb3dc3d82bd3a149f4f1011424d5b85c4685f84db8520f4e67",
       "durationSeconds": 7.04,
       "preparedTextSha256": "d0461b1c553a86cdca6bb04b30b25ab322fa0b5dceec8b80bf0cf5365d63d2d5",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1401,16 +1465,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَّبِّ أَنزِلْنِي مُنزَلًا مُّبَارَكًا وَأَنتَ خَيْرُ الْمُنزِلِينَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/5655e0814594fe04.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/5655e0814594fe04.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "9123314d1b8dbcca48d6c56c6a7700d79c969eff8ef058e396c8ae0bb443526e",
       "durationSeconds": 6.72,
       "preparedTextSha256": "a507e27b074448dc0582e1b60527342d08db9389998e8891b0ae1a4ad06c864d",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1423,16 +1488,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ وَاجْعَلْنَا لِلْمُتَّقِينَ إِمَامًا": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/eb66222d008c5cd1.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/eb66222d008c5cd1.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "78e824a7c378e24dbdaf3066082b22ce7889cb55ae229611b904ff1bac82b941",
       "durationSeconds": 10.0,
       "preparedTextSha256": "0f4ad68a5fb9537ba8438b523956cca71e41ff29dd8202af8052728e85f8b2ff",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1445,16 +1511,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبَّنَا اصْرِفْ عَنَّا عَذَابَ جَهَنَّمَ إِنَّ عَذَابَهَا كَانَ غَرَامًا": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/5e1a42bd4da44039.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/5e1a42bd4da44039.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "db4a5089acb66292e26360363744105986fe06c34de12b7fca537da0f0274e81",
       "durationSeconds": 6.88,
       "preparedTextSha256": "baca59ecc76823cde892c3b7a13c98eb7234d104abf4faca8ad5c760ae722dca",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1467,16 +1534,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبَّنَا آتِنَا مِن لَّدُنكَ رَحْمَةً وَهَيِّئْ لَنَا مِنْ أَمْرِنَا رَشَدًا": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/c9104aa55d48ce88.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/c9104aa55d48ce88.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "842a2bc460059318f6ba9cdda8d3246cb3909cce1e2ac086aea2dd525bc3f262",
       "durationSeconds": 7.84,
       "preparedTextSha256": "b4f0190815185f84c4b367c8f0eb1031226f58f6ad5ba68182f270960c7a509b",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1489,16 +1557,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبِّ أَوْزِعْنِي أَنْ أَشْكُرَ نِعْمَتَكَ الَّتِي أَنْعَمْتَ عَلَيَّ وَعَلَىٰ وَالِدَيَّ وَأَنْ أَعْمَلَ صَالِحًا تَرْضَاهُ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/424e2e14d0f4398a.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/424e2e14d0f4398a.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "d59d2d93f46500110ebe5121cd1485c525a870650314c58309f31caab62899ae",
       "durationSeconds": 10.08,
       "preparedTextSha256": "1705ed644e43af9a5b4d805252de274d73f7b2402d46fbf86ad5e0e3a84a6183",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1511,16 +1580,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبَّنَا آمَنَّا فَاكْتُبْنَا مَعَ الشَّاهِدِينَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/6fcc50897947236b.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/6fcc50897947236b.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "d31c184c6e5f9f8479937557983a9b96b41e2b4c15d17f41af036d1c67b6f2bb",
       "durationSeconds": 4.88,
       "preparedTextSha256": "2dc34a4a57442364897f08718bef10a49bb5fe7b69ab21f9c31db3c29674880a",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1533,16 +1603,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَٰهَ إِلَّا أَنْتَ خَلَقْتَنِي وَأَنَا عَبْدُكَ وَأَنَا عَلَىٰ عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ وَأَبُوءُ بِذَنْبِي فَاغْفِرْ لِي فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/0a9e7fd4490a3852.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/0a9e7fd4490a3852.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "b0ad4439a6d216847434b9681ef1972ea9e0061743de5a33f8fb6e6ccd17170d",
       "durationSeconds": 24.32,
       "preparedTextSha256": "c7d05a1915d5cf896044922552741ba5315c9d2ab1475af433f80b4e056dd40d",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1555,16 +1626,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبِّ أَوْزِعْنِي أَنْ أَشْكُرَ نِعْمَتَكَ الَّتِي أَنْعَمْتَ عَلَيَّ وَعَلَىٰ وَالِدَيَّ وَأَنْ أَعْمَلَ صَالِحًا تَرْضَاهُ وَأَصْلِحْ لِي فِي ذُرِّيَّتِي إِنِّي تُبْتُ إِلَيْكَ وَإِنِّي مِنَ الْمُسْلِمِينَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/abe2c689536db2ca.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/abe2c689536db2ca.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "cdca89bbd55dd6329268b93452c427823d68e9785f676b565a09f35f5c42de7b",
       "durationSeconds": 17.52,
       "preparedTextSha256": "141dc43e73466936f44d7e711fcc0674a63d81352a6b2d71905ee9e2aed70cba",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1577,16 +1649,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "إِنِّي مَسَّنِيَ الضُّرُّ وَأَنتَ أَرْحَمُ الرَّاحِمِينَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/479b367bc69deb12.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/479b367bc69deb12.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "fdf024d963186057db2730ec0e92c19b026a1ae11b4764ced0ef87134fc04659",
       "durationSeconds": 5.04,
       "preparedTextSha256": "11f4f123516f3cf2ca0c7625755a3f9975d8c6ed59c9d719941d7727ddfc56d4",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1599,16 +1672,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبِّ إِنِّي لِمَا أَنزَلْتَ إِلَيَّ مِنْ خَيْرٍ فَقِيرٌ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/7e59edb06b52b12a.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/7e59edb06b52b12a.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "454a3784a220238b2e2eb9629a1ae147020f2b7d2a04eed901f5ad8f63dabf7c",
       "durationSeconds": 5.6,
       "preparedTextSha256": "11985847e55bdd272298e60977fe4b1c92b5aa2a103cbde5b5d9cb9a5e96054d",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1621,16 +1695,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبِّ إِنِّي ظَلَمْتُ نَفْسِي فَاغْفِرْ لِي": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/d5d3696f15fc72a9.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/d5d3696f15fc72a9.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "2227e596663e1da7af6ff246f20468607cfb21d80e88604200d66623a6d6b7d9",
       "durationSeconds": 4.08,
       "preparedTextSha256": "6a4135987579ce3d82e2843e904f43d86b959343539cf5c53c9a08bda541b321",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1643,16 +1718,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبِّ هَبْ لِي مِن لَّدُنكَ ذُرِّيَّةً طَيِّبَةً إِنَّكَ سَمِيعُ الدُّعَاءِ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/54322011f7f96ab6.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/54322011f7f96ab6.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "08ee65a8832edd624dee7b1d3a414eda811c2ae222e70e074d6c9370ad415be8",
       "durationSeconds": 7.44,
       "preparedTextSha256": "2cf8b5a08c2c1e27a825922ea9a30b53ec9c212d1c03ec85007aaa1439381403",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1665,16 +1741,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "اللَّهُمَّ أَصْلِحْ لِي دِينِيَ الَّذِي هُوَ عِصْمَةُ أَمْرِي، وَأَصْلِحْ لِي دُنْيَايَ الَّتِي فِيهَا مَعَاشِي، وَأَصْلِحْ لِي آخِرَتِيَ الَّتِي فِيهَا مَعَادِي": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/487f7e41091399cc.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/487f7e41091399cc.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "0f7b96c4e0d4a2b163d59bf8dda870f794616132e13b241414109cfb6f76966e",
       "durationSeconds": 12.48,
       "preparedTextSha256": "927acd5dc1921c6560c39420f0c46a746dc56f11e9e1fd9e5083ed81e47901b5",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1687,16 +1764,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ، وَالْعَجْزِ وَالْكَسَلِ، وَالْبُخْلِ وَالْجُبْنِ، وَضَلَعِ الدَّيْنِ وَغَلَبَةِ الرِّجَالِ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/462103022115bfac.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/462103022115bfac.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "516fc130760e7e59318dc60d204d523ab0209172f7cdbb9b647889932d7e3d0f",
       "durationSeconds": 11.84,
       "preparedTextSha256": "d49618977f6dbe8070f5f9d8d82b1d004784b7a167e3c27308e70b76338ac5e0",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1709,16 +1787,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/4666b919d784a328.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/4666b919d784a328.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "c7320250d68a98db0c68d487b56bfea7c1b1a4f6818d5bf841774fb62784570a",
       "durationSeconds": 4.96,
       "preparedTextSha256": "10b82f29ee7c2188206f72518ed5a3d70b4a7c892be1cee0820d7eafad6239d8",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1731,16 +1810,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "اللَّهُمَّ رَحْمَتَكَ أَرْجُو، فَلَا تَكِلْنِي إِلَى نَفْسِي طَرْفَةَ عَيْنٍ، وَأَصْلِحْ لِي شَأْنِي كُلَّهُ، لَا إِلَهَ إِلَّا أَنْتَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/673bb1c7eb171abe.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/673bb1c7eb171abe.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "428fa6d0ff31bac072f429d2af868d4116f92262b0a374f5875068755aaf86fb",
       "durationSeconds": 11.2,
       "preparedTextSha256": "877db0b33e00e93e0b148357d4dc2a1831590d7f010f365b6dc6a3133211c864",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1753,16 +1833,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْبَرَصِ وَالْجُنُونِ وَالْجُذَامِ وَمِنْ سَيِّئِ الْأَسْقَامِ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/4b38d8d3003318b5.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/4b38d8d3003318b5.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "b2ac64320d9194ed0e19d265c74501095094389f1a233c34a4aba184126c4d43",
       "durationSeconds": 7.76,
       "preparedTextSha256": "0985e932d113ed4fb99a651c14bab0d4f682a2ca596eeff694b19e85d15bb12f",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1775,16 +1856,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبَّنَا وَاجْعَلْنَا مُسْلِمَيْنِ لَكَ وَمِن ذُرِّيَّتِنَا أُمَّةً مُّسْلِمَةً لَّكَ وَأَرِنَا مَنَاسِكَنَا وَتُبْ عَلَيْنَا إِنَّكَ أَنتَ التَّوَّابُ الرَّحِيمُ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/67c4080adc53ee10.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/67c4080adc53ee10.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "293d6ca3e068161efa317e55aa3815bef97c17dd610af24a92d2673840bd97ec",
       "durationSeconds": 14.8,
       "preparedTextSha256": "77fa84b4736f62276e1e962e65f9331f5e50715a964d3dd30deeb9a27903c453",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1797,16 +1879,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبَّنَا إِنَّكَ جَامِعُ النَّاسِ لِيَوْمٍ لَّا رَيْبَ فِيهِ إِنَّ اللَّهَ لَا يُخْلِفُ الْمِيعَادَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/907cddece2e41c19.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/907cddece2e41c19.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "23e55ece3d8d6b493a95ecae0c881afce891fe426ece859da10311528eac211f",
       "durationSeconds": 9.44,
       "preparedTextSha256": "e94440d8347ef049fba177b1866739359e77a228a1dc9318e6786b9d761c0eaa",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1819,16 +1902,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "اللَّهُمَّ أَعِنِّي عَلَى ذِكْرِكَ وَشُكْرِكَ وَحُسْنِ عِبَادَتِكَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/577ddc5f391ba173.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/577ddc5f391ba173.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "7d33d8d2e3c70889e6abd2335f5255ecad9f6254349a736e1d1cf5b7056f0a15",
       "durationSeconds": 5.92,
       "preparedTextSha256": "2546c5dea971307866e52082b92ec20e05b78b79f1c10904c07e5382662a3e80",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1841,16 +1925,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "اللَّهُمَّ إِنِّي ظَلَمْتُ نَفْسِي ظُلْمًا كَثِيرًا، وَلَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ، فَاغْفِرْ لِي مَغْفِرَةً مِنْ عِنْدِكَ، وَارْحَمْنِي، إِنَّكَ أَنْتَ الْغَفُورُ الرَّحِيمُ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/073c85e75506e56c.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/073c85e75506e56c.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "0c066358362074d03b883fc2145c6ec868492f44af98c7614f4388cf919720f7",
       "durationSeconds": 14.88,
       "preparedTextSha256": "76f84fd2e4bb5d43373f8745a82f1238969cd7a730ee5a2f85b438fc2de8d575",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1863,16 +1948,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "اللَّهُمَّ مُصَرِّفَ الْقُلُوبِ صَرِّفْ قُلُوبَنَا عَلَى طَاعَتِكَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/65bf9bd4f1fba540.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/65bf9bd4f1fba540.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "2bfcf4277b4b7dd5c20a3d31bae0c4cd7efd3e7d25928474567e2ce232b93902",
       "durationSeconds": 5.68,
       "preparedTextSha256": "a682c73191315d906467deb29209ed27b40330fab87f8f7e7653462a78baec2e",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1885,16 +1971,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ شَرِّ مَا عَمِلْتُ، وَمِنْ شَرِّ مَا لَمْ أَعْمَلْ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/20966bbe93afcf59.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/20966bbe93afcf59.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "0c8ab09c303b309dfb02de09998c2584d1232cac11930f3d563b3fe5427a37b9",
       "durationSeconds": 6.72,
       "preparedTextSha256": "14ab32e97f1fa86988b231f5acdfe8e95fdc52e1c366f906eedc5ae45d8a57e3",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1907,16 +1994,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبِّ اغْفِرْ لِي وَتُبْ عَلَيَّ إِنَّكَ أَنْتَ التَّوَّابُ الرَّحِيمُ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/ff2196e707324f81.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/ff2196e707324f81.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "dbea06a7c82a8784cc881aae5dd05972dd42a9c87e2212b141438c124f6ed136",
       "durationSeconds": 6.48,
       "preparedTextSha256": "6586dc593e6e1871f79120b04233d42294b569ec24ebd87fabb736aa89254506",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1929,16 +2017,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "اللَّهُمَّ اهْدِنِي وَسَدِّدْنِي": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/a3e126b614441faf.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/a3e126b614441faf.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "edfd59350cba9afb558033cca3d2be177a061578c8db1d18e391a3a3feb4c6b4",
       "durationSeconds": 3.36,
       "preparedTextSha256": "a575d17d28ff3049923d127ffca6aad7f014878370f797be8b0362eb1ca71e79",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1951,16 +2040,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ لَكَ بِذَنْبِي، فَاغْفِرْ لِي، فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/cf7e573c0e560ddd.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/cf7e573c0e560ddd.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "f6c865da7d93a608038d1d3e222fdc562a67ff4d99bb77c00996d3efe054dbf5",
       "durationSeconds": 23.84,
       "preparedTextSha256": "6e5124cccbce817a9cfe607a27472d134d06218556d665746e0f6ec5a0d7eb34",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1973,16 +2063,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ مُنْكَرَاتِ الْأَخْلَاقِ وَالْأَعْمَالِ وَالْأَهْوَاءِ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/763d6ac051e2bca5.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/763d6ac051e2bca5.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "e24378382518de43a4d931f612c5b57eb58232dd5732044e8b2b9a68ab2c0139",
       "durationSeconds": 6.96,
       "preparedTextSha256": "7120fe5ef525bdf44b4e0d6fe7f867b0bc4b7e0b6522238ebe7917f0402d443b",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -1995,16 +2086,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْكُفْرِ وَالْفَقْرِ وَعَذَابِ الْقَبْرِ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/b66beb1aae02bc7e.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/b66beb1aae02bc7e.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "7290c29364428c578c1a92a2d6142fbdd2a96e039f219b447705e6a9c59617fa",
       "durationSeconds": 6.24,
       "preparedTextSha256": "3d9a69095c6d9ffdb80bd6963b651d8d7c9ead38eab17f4530f9dc0c1f015ff9",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -2017,16 +2109,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "اللَّهُمَّ ارْزُقْنِي شَهَادَةً فِي سَبِيلِكَ، وَاجْعَلْ مَوْتِي فِي بَلَدِ رَسُولِكَ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/88862a89a48c13d6.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/88862a89a48c13d6.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "269b57f138348df863aa11b90f1faeb50bfd94b72f6c928a762aeff0fdaeb73d",
       "durationSeconds": 8.96,
       "preparedTextSha256": "e67c6ecf09822068c306f18af3096e8cee889c9fe7d65a6cd2db4b370af9f246",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -2039,16 +2132,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ عَذَابِ جَهَنَّمَ، وَمِنْ عَذَابِ الْقَبْرِ، وَمِنْ فِتْنَةِ الْمَحْيَا وَالْمَمَاتِ، وَمِنْ شَرِّ فِتْنَةِ الْمَسِيحِ الدَّجَّالِ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/8fffdaa5a9b5eca0.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/8fffdaa5a9b5eca0.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "6ea93800db3f0d66ee120ac58561a41be7319ec52cc63a32f7f83b2a8d9025ea",
       "durationSeconds": 12.64,
       "preparedTextSha256": "9d1166c74199c1ebe4912ce7afecb362c2a6bb0169282010aae6e8cb8bfd048e",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -2061,16 +2155,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "اللَّهُمَّ اغْفِرْ لِي ذَنْبِي كُلَّهُ، دِقَّهُ وَجِلَّهُ، وَأَوَّلَهُ وَآخِرَهُ، وَعَلَانِيَتَهُ وَسِرَّهُ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/1cf42a90a7970df4.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/1cf42a90a7970df4.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "b495495e15a7077f6deabd17ec88cea8ead14e9c0915affd3b1ac9a365fdc1d5",
       "durationSeconds": 10.08,
       "preparedTextSha256": "291099f120564b29efa85fa74f956030e3cac683c23776ca13dbc4163bc55587",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -2083,16 +2178,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "اللَّهُمَّ إِنِّي أَعُوذُ بِرِضَاكَ مِنْ سَخَطِكَ، وَبِمُعَافَاتِكَ مِنْ عُقُوبَتِكَ، وَأَعُوذُ بِكَ مِنْكَ، لَا أُحْصِي ثَنَاءً عَلَيْكَ، أَنْتَ كَمَا أَثْنَيْتَ عَلَى نَفْسِكَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/c4f42c8bbaf70f59.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/c4f42c8bbaf70f59.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "6cd3b93acb9d6e00c3b930ef8b70a05978749a3f52c15f81db41d52af6a59184",
       "durationSeconds": 14.88,
       "preparedTextSha256": "5d2e80ef0ebbf2c9020447ff535062fee3990af5a97300f824e0d003baef6114",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -2105,16 +2201,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "اللَّهُمَّ اغْسِلْ خَطَايَايَ بِمَاءِ الثَّلْجِ وَالْبَرَدِ، وَنَقِّ قَلْبِي مِنَ الْخَطَايَا كَمَا نَقَّيْتَ الثَّوْبَ الْأَبْيَضَ مِنَ الدَّنَسِ، وَبَاعِدْ بَيْنِي وَبَيْنَ خَطَايَايَ كَمَا بَاعَدْتَ بَيْنَ الْمَشْرِقِ وَالْمَغْرِبِ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/51fbb83a9f4af462.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/51fbb83a9f4af462.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "9282cb97e257f24f8db6ac8bec4f425383bae74a737624c38b71fb8e6b71159f",
       "durationSeconds": 16.32,
       "preparedTextSha256": "9192d969dba534c3bf24eafd077e704f049dcfd6646be0b7219adcc1cef36f8f",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -2127,16 +2224,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "اللَّهُمَّ رَبَّ جِبْرِيلَ وَمِيكَائِيلَ وَإِسْرَافِيلَ، فَاطِرَ السَّمَاوَاتِ وَالْأَرْضِ، عَالِمَ الْغَيْبِ وَالشَّهَادَةِ، أَنْتَ تَحْكُمُ بَيْنَ عِبَادِكَ فِيمَا كَانُوا فِيهِ يَخْتَلِفُونَ، اهْدِنِي لِمَا اخْتُلِفَ فِيهِ مِنَ الْحَقِّ بِإِذْنِكَ، إِنَّكَ تَهْدِي مَنْ تَشَاءُ إِلَى صِرَاطٍ مُسْتَقِيمٍ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/ae4512a435cd8be9.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/ae4512a435cd8be9.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "28ee9053629af6f26b805566f6eabb9cf63bd364bfebed2babcaa442ad45ba19",
       "durationSeconds": 24.0,
       "preparedTextSha256": "f084ab408cafefa299a41a7d29c03ef401e40fac8f8d860a16bb324d4c340dff",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -2149,16 +2247,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "اللَّهُمَّ لَكَ أَسْلَمْتُ، وَبِكَ آمَنْتُ، وَعَلَيْكَ تَوَكَّلْتُ، وَإِلَيْكَ أَنَبْتُ، وَبِكَ خَاصَمْتُ، اللَّهُمَّ إِنِّي أَعُوذُ بِعِزَّتِكَ، لَا إِلَهَ إِلَّا أَنْتَ، أَنْ تُضِلَّنِي، أَنْتَ الْحَيُّ الَّذِي لَا يَمُوتُ، وَالْجِنُّ وَالْإِنْسُ يَمُوتُونَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/5209188ff67af929.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/5209188ff67af929.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "ebba7fba74a547275063a77735b5a1c328d3c5f62aedf2ad27757e7fd96e7615",
       "durationSeconds": 21.92,
       "preparedTextSha256": "412a83c66ed03b2d50c7db3df01e3d936652d4739dff46784bbadac5710fe140",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -2171,16 +2270,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "اللَّهُمَّ لَا سَهْلَ إِلَّا مَا جَعَلْتَهُ سَهْلًا، وَأَنْتَ تَجْعَلُ الْحَزْنَ إِذَا شِئْتَ سَهْلًا": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/9de5b4ba7d202ced.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/9de5b4ba7d202ced.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "76011e54b0acc1e8d387ecae171a9b9fdbb833a6e8db38a271c3a288886817c7",
       "durationSeconds": 8.4,
       "preparedTextSha256": "8d6517ad85253ba2db7a627d68ebd48f5c7c66c7af4c467404b4f48fdd0c2285",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -2193,16 +2293,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/1ce312428b4573d1.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/1ce312428b4573d1.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "5d5dd2ea55bd476e2c8b42ebb450209738e1ed7518ba1cbf2c2af8abdd82bc00",
       "durationSeconds": 10.72,
       "preparedTextSha256": "7ba8d9e30f1373eb38e84cd4b91e0d3f2e13ea7901767d05b592a3bc422e61f2",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -2215,16 +2316,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "اللَّهُمَّ صَيِّبًا نَافِعًا": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/b127017cd3f1588d.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/b127017cd3f1588d.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "786100a641998a393030c4a1220c62331059fe527ae013adc5af2f2ea7eda07b",
       "durationSeconds": 3.2,
       "preparedTextSha256": "c5baaebea3ec42f03182c4d2525d24700aa0fe437fa98594c8f81b83f8544e7e",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -2237,16 +2339,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "مُطِرْنَا بِفَضْلِ اللَّهِ وَرَحْمَتِهِ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/2d70b8dfad820e82.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/2d70b8dfad820e82.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "832ee0f01b151f17cd7c2a17a25eed08916fa4b646dd216bff407254265cb441",
       "durationSeconds": 3.68,
       "preparedTextSha256": "d2df061f30e26ed4b4ee6f2b9dd791e42f0692551b02dcc5a4f5b68e5a913f1b",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -2259,16 +2362,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "إِنَّا لِلَّهِ وَإِنَّا إِلَيْهِ رَاجِعُونَ، اللَّهُمَّ أْجُرْنِي فِي مُصِيبَتِي، وَأَخْلِفْ لِي خَيْرًا مِنْهَا": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/81216100257fab83.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/81216100257fab83.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "9c321a66f3ac48f150dc837e4778d9af2602037f4a508af5f9ac616643c78a6d",
       "durationSeconds": 9.6,
       "preparedTextSha256": "50430616e01ed8f89e0755f8da0a656314ee059aa7aec337039440e9a44133f6",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -2281,16 +2385,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "أَذْهِبِ الْبَأْسَ رَبَّ النَّاسِ، اشْفِ أَنْتَ الشَّافِي، لَا شِفَاءَ إِلَّا شِفَاؤُكَ، شِفَاءً لَا يُغَادِرُ سَقَمًا": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/a7eaf6f7aca87f8d.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/a7eaf6f7aca87f8d.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "e89f816266ad5016309093fb43362cf28b07f738bfe5683c9bc1241eb0eecbdc",
       "durationSeconds": 10.48,
       "preparedTextSha256": "4efba6aa1796a8ff3e4eaf1483d427c317c858183072f2f9f797605c77cda1e0",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -2303,16 +2408,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "بِسْمِ اللَّهِ، أَعُوذُ بِعِزَّةِ اللَّهِ وَقُدْرَتِهِ مِنْ شَرِّ مَا أَجِدُ وَأُحَاذِرُ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/efb5c18c64be5b1f.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/efb5c18c64be5b1f.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "636e3f5ea46661521eaada3ecb78ed39ed2834ad574a15fd3af1ae77709ee3a4",
       "durationSeconds": 7.76,
       "preparedTextSha256": "9bcdd87cf2f1762c2fab9c308beac48426b9543015d147d18d53063bcb96d95f",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -2325,16 +2431,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/993d66321597b490.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/993d66321597b490.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "ded5e5278bb9ee59f46423dbf5f1e5ef87fdfcb86cd6473b64e715a56cac0528",
       "durationSeconds": 3.84,
       "preparedTextSha256": "b1b0b2bae2425139707cc4d468121cb3644a872643c48d5e00ff0425c0587f09",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -2347,16 +2454,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "اللَّهُمَّ رَبَّ هَذِهِ الدَّعْوَةِ التَّامَّةِ وَالصَّلَاةِ الْقَائِمَةِ، آتِ مُحَمَّدًا الْوَسِيلَةَ وَالْفَضِيلَةَ، وَابْعَثْهُ مَقَامًا مَحْمُودًا الَّذِي وَعَدْتَهُ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/0c64fc6dc1970b5b.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/0c64fc6dc1970b5b.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "a2290c2fb8c9bb13a157bd15bd5f49ae3e4a41ba3c32704377ed2c240e358196",
       "durationSeconds": 12.8,
       "preparedTextSha256": "5ed12a07d92d77da1fc2efe934fa4c91ad0c5bc76b4273cb7320bdea2ff87876",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -2369,16 +2477,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "أَسْتَغْفِرُ اللَّهَ، اللَّهُمَّ أَنْتَ السَّلَامُ وَمِنْكَ السَّلَامُ، تَبَارَكْتَ ذَا الْجَلَالِ وَالْإِكْرَامِ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/411cd45a962a0c66.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/411cd45a962a0c66.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "3266b9220525d01525a39d1347613574657b1b7650bfce26b29ad811b1123e8a",
       "durationSeconds": 8.48,
       "preparedTextSha256": "c349f6f2fd01852eda02520a128ecee4722e090053f450f3e2e0e73ad0fea3cb",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -2391,16 +2500,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ، أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا أَنْتَ، أَسْتَغْفِرُكَ وَأَتُوبُ إِلَيْكَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/1297042106a3d253.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/1297042106a3d253.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "d19e078edf7a92b8d1ad9389cbc8f4b86d41685a469a658faa121063018deaa9",
       "durationSeconds": 9.6,
       "preparedTextSha256": "ff36e00492cd71dcc119ede0dd21723126863d5299a858fcb854b7ca23b81ae7",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -2413,16 +2523,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "أُعِيذُكُمَا بِكَلِمَاتِ اللَّهِ التَّامَّةِ، مِنْ كُلِّ شَيْطَانٍ وَهَامَّةٍ، وَمِنْ كُلِّ عَيْنٍ لَامَّةٍ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/d983278d1ef46e83.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/d983278d1ef46e83.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "e875d6f916e75536dcea9a4cb6c20a523e78e85bc8bf4a4b852744fcf578ece0",
       "durationSeconds": 10.32,
       "preparedTextSha256": "5552909e90ee092c68c5b0d96b54e3c0e36d862cf080e9b8a7c56c92dd1c5df7",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -2435,16 +2546,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "بِسْمِ اللَّهِ أَرْقِيكَ، مِنْ كُلِّ شَيْءٍ يُؤْذِيكَ، مِنْ شَرِّ كُلِّ نَفْسٍ أَوْ عَيْنِ حَاسِدٍ، اللَّهُ يَشْفِيكَ، بِسْمِ اللَّهِ أَرْقِيكَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/6c92ef4adc864223.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/6c92ef4adc864223.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "539338a4a81bcb91ebf7d800a812d33483150cf578e95b102df52dcac989a500",
       "durationSeconds": 12.96,
       "preparedTextSha256": "dbadd2919890d3197a2c4f39fd67f0d170e0a7e6af8dfd6a0454bea1e1e35bf3",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -2457,16 +2569,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "السَّلَامُ عَلَيْكُمْ أَهْلَ الدِّيَارِ مِنَ الْمُؤْمِنِينَ وَالْمُسْلِمِينَ، وَإِنَّا إِنْ شَاءَ اللَّهُ لَلَاحِقُونَ، أَسْأَلُ اللَّهَ لَنَا وَلَكُمُ الْعَافِيَةَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/e78d1e0ead1f26ae.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/e78d1e0ead1f26ae.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "6a5164e233de76ad05e89d61b81fa1867e4a3ca47d23c1f027cba27e81f9dfc2",
       "durationSeconds": 12.0,
       "preparedTextSha256": "539e5ad6e6eada9f38a7c9197851b0daabe9ba08219fd1abcefabcd5c26c99b3",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -2479,16 +2592,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "اللَّهُمَّ اغْفِرْ لِي، وَارْحَمْنِي، وَاهْدِنِي، وَعَافِنِي، وَارْزُقْنِي": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/46b1420de2bab12b.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/46b1420de2bab12b.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "b24b89656bec317cd27eaab132f37c63b83315fc7b220ee5903bbadee43c21d8",
       "durationSeconds": 7.28,
       "preparedTextSha256": "ab80463f31b37fb5e0e97faebedbfc290da7b6c81874aa429be44c98e279c179",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -2501,16 +2615,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "لَا إِلَهَ إِلَّا اللَّهُ الْعَظِيمُ الْحَلِيمُ، لَا إِلَهَ إِلَّا اللَّهُ رَبُّ الْعَرْشِ الْعَظِيمِ، لَا إِلَهَ إِلَّا اللَّهُ رَبُّ السَّمَاوَاتِ وَرَبُّ الْأَرْضِ وَرَبُّ الْعَرْشِ الْكَرِيمِ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/56e65c2439a47a89.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/56e65c2439a47a89.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "9da253f34d24c429e545d17fa40f9e70c4ac79cb7d87e55993419eb20f66bf93",
       "durationSeconds": 15.6,
       "preparedTextSha256": "9d453ce496cc1da7c5e1d984d347263916ad74bd73123b3989f91d5c8c6bf8ae",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -2523,16 +2638,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/d226fa895adaefdf.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/d226fa895adaefdf.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "e820c5baa127179c8187fdb02e832f2d3fdc2cf7a3df99d6e90cec1c5d95eee4",
       "durationSeconds": 5.92,
       "preparedTextSha256": "e96a5d51c6fee36a2639cdbf328d528157f1b67d9630180cfc168e5f96c75d5a",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -2545,16 +2661,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/88df17fc4a7ce99a.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/88df17fc4a7ce99a.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "3b68940e8e0dce06990f3ee99903ce4dfe7a29f51b1591a4b5e45c1d979eb4a5",
       "durationSeconds": 9.2,
       "preparedTextSha256": "1838258490611816fa0fadd1210894822325dc915ace72986bb52d0d089f4ace",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -2567,16 +2684,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "رَبِّ اغْفِرْ لِي، رَبِّ اغْفِرْ لِي": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/0e8dbf4444409cee.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/0e8dbf4444409cee.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "f91611b7096c80ec211c5091bb1c9c1cec2cbcc86164d82065a3518df63f0cf1",
       "durationSeconds": 4.0,
       "preparedTextSha256": "c81940d12b1eff1df7f7d88f6b92f503e336a07c961ca286f0c0485a16ab46bd",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -2589,16 +2707,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "سُبْحَانَكَ اللَّهُمَّ رَبَّنَا وَبِحَمْدِكَ، اللَّهُمَّ اغْفِرْ لِي": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/05e8a91af7e363b0.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/05e8a91af7e363b0.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "b4e08519c082c90442cd7f27293b4b8d12791fc798216d5a4b27d81a88c25ff6",
       "durationSeconds": 5.92,
       "preparedTextSha256": "a6602ce6f84623532141bc3b5b8a28ecd2b19bc89a916d509da6c686e3341d28",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -2611,16 +2730,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَهَا، وَخَيْرَ مَا فِيهَا، وَخَيْرَ مَا أُرْسِلَتْ بِهِ، وَأَعُوذُ بِكَ مِنْ شَرِّهَا، وَشَرِّ مَا فِيهَا، وَشَرِّ مَا أُرْسِلَتْ بِهِ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/d4544ba9630806d9.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/d4544ba9630806d9.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "ad3ec047a9344d404f824bb962bc70e621620a1b9665f34614d44b62ebcdd0ea",
       "durationSeconds": 14.16,
       "preparedTextSha256": "2be85240afa437d3f670efe81fa7864a65ee1578b4a8e5ec9f055840ee85038f",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -2633,16 +2753,17 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     },
     "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْجَنَّةَ، وَأَعُوذُ بِكَ مِنَ النَّارِ": {
-      "url": "/kids/assets/kids-dua-arabic-slow-audio/7d74c1c1a638d6f6.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-194509",
+      "url": "/kids/assets/kids-dua-arabic-slow-audio/7d74c1c1a638d6f6.m4a?v=kids-dua-arabic-slow-serhat-master-v4-20261007-200319",
       "sha256": "27058f6802bf1153146e65010442776224004b8be8325ce777256df1ae1ab158",
       "durationSeconds": 5.84,
       "preparedTextSha256": "e5831d920aeeee0234e3685a000d1aa95c65dba88a08534feec251081689aa7d",
       "synthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicSynthesisRevision": "dua-arabic-native-fusha-slow-v3-20261007",
       "arabicTextNormalization": "NFC",
+      "initialContextShaddaStripped": true,
       "modelId": "eleven_v4",
       "speechProfile": "dua_arabic_slow",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -2655,7 +2776,7 @@
       "pronunciationDictionaryVersionId": null,
       "pronunciationDictionaryRuleCount": 0,
       "qaBy": "automatic-owner-voice-batch-qa",
-      "qaAt": "2026-10-07T19:45:09Z"
+      "qaAt": "2026-10-07T20:03:19Z"
     }
   },
   "counts": {
