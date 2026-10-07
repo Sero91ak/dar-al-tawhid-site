@@ -1,108 +1,257 @@
 /* DAR_GLOBAL_SHARE_V1225 */
-.dar-global-image-btn{color:var(--gold2,var(--gold,#d8bd75))!important}
-.dar-global-image-btn svg{width:22px;height:22px;display:block}
-.share-btn.is-busy,.dar-global-image-btn.is-busy{opacity:.58!important;pointer-events:none!important}
-.share-panel .dar-global-image-btn{border-color:color-mix(in srgb,var(--gold2,var(--gold,#d8bd75)) 34%,var(--line2,var(--line)) 66%)!important;background:linear-gradient(145deg,color-mix(in srgb,var(--gold2,var(--gold,#d8bd75)) 10%,transparent),color-mix(in srgb,var(--card) 90%,transparent))!important}
-.dar-global-share-toast{position:fixed;z-index:2147483000;left:50%;bottom:calc(104px + env(safe-area-inset-bottom,0px));max-width:min(88vw,460px);padding:10px 14px;border-radius:999px;border:1px solid rgba(238,211,144,.28);background:rgba(6,16,16,.95);color:#fff5df!important;-webkit-text-fill-color:#fff5df!important;box-shadow:0 16px 40px rgba(0,0,0,.28);font-size:11.5px;font-weight:780;opacity:0;transform:translate(-50%,12px);pointer-events:none;transition:opacity .18s ease,transform .18s ease}
-.dar-global-share-toast.is-visible{opacity:1;transform:translate(-50%,0)}
-@media(max-width:520px){.share-flat-v410,.post-after-share{grid-template-columns:repeat(3,minmax(0,1fr))!important}.share-panel .share-btn{min-width:0!important}.share-panel .share-btn span{font-size:10px!important}}
-@media(prefers-reduced-motion:reduce){.dar-global-share-toast{transition:none!important}}
+/* GLOBAL_SHARE_UI_STANDARD_V1267
+   Einziger globaler Teilen-Standard: TEILEN · Wissen weitergeben.
+   Frauenbereich behält denselben Aufbau mit eigenem women-historical Renderer. */
 
-/* GLOBAL_SHARE_ACTIONS_STYLE_V1227 */
-.share-panel .dar-global-share-action,
-.share-panel .dar-global-image-btn{
-  min-height:72px!important;
+.share-btn.is-busy,
+.dar-share-tool.is-busy,
+.dar-global-image-btn.is-busy{
+  opacity:.58!important;
+  pointer-events:none!important;
+}
+
+.dar-global-share-toast{
+  position:fixed;
+  z-index:2147483000;
+  left:50%;
+  bottom:calc(104px + env(safe-area-inset-bottom,0px));
+  max-width:min(88vw,460px);
+  padding:10px 14px;
+  border-radius:999px;
+  border:1px solid rgba(238,211,144,.28);
+  background:rgba(6,16,16,.95);
+  color:#fff5df!important;
+  -webkit-text-fill-color:#fff5df!important;
+  box-shadow:0 16px 40px rgba(0,0,0,.28);
+  font-size:11.5px;
+  font-weight:780;
+  opacity:0;
+  transform:translate(-50%,12px);
+  pointer-events:none;
+  transition:opacity .18s ease,transform .18s ease;
+}
+.dar-global-share-toast.is-visible{opacity:1;transform:translate(-50%,0)}
+
+.share-panel.dar-share-card{
+  position:relative;
+  overflow:hidden;
+  margin:18px 0 12px!important;
+  padding:15px 14px 13px!important;
+  border:1px solid var(--theme-share-btn-border,var(--line,rgba(214,183,106,.34)))!important;
+  border-radius:22px!important;
+  background:var(
+    --theme-share-panel-bg,
+    radial-gradient(circle at 16% 0%,color-mix(in srgb,var(--gold2,#d9bf79) 9%,transparent),transparent 42%),
+    linear-gradient(145deg,color-mix(in srgb,var(--card,#fff) 94%,transparent),color-mix(in srgb,var(--bg,#fff) 93%,transparent))
+  )!important;
+  box-shadow:0 10px 26px rgba(4,14,15,.10),inset 0 1px 0 rgba(255,255,255,.055)!important;
+}
+
+.dar-share-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:14px;
+  margin:0 2px 12px;
+}
+.dar-share-head span{
+  display:block;
+  margin-bottom:3px;
+  color:var(--gold2,var(--gold,#9b7522))!important;
+  -webkit-text-fill-color:var(--gold2,var(--gold,#9b7522))!important;
+  font-size:8.8px;
+  font-weight:900;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+.dar-share-head h3{
+  margin:0!important;
+  color:var(--ink,var(--text,#101b2d))!important;
+  -webkit-text-fill-color:var(--ink,var(--text,#101b2d))!important;
+  font-family:var(--serif,Georgia,serif)!important;
+  font-size:20px!important;
+  line-height:1.12!important;
+  font-weight:650!important;
+}
+.dar-share-head>p{
+  margin:0;
+  color:var(--muted,#667085)!important;
+  -webkit-text-fill-color:var(--muted,#667085)!important;
+  font-size:10.5px;
+  line-height:1.3;
+  text-align:right;
+}
+
+.dar-share-card .dar-share-primary{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:8px!important;
+  align-items:stretch!important;
+}
+.dar-share-card .dar-share-btn{
+  appearance:none;
   display:flex!important;
   flex-direction:column!important;
   align-items:center!important;
   justify-content:center!important;
   gap:6px!important;
-  padding:8px 6px!important;
-  border-radius:15px!important;
-  font-weight:800!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.055)!important;
+  min-width:0!important;
+  min-height:78px!important;
+  padding:9px 5px 8px!important;
+  border:1px solid var(--line,rgba(20,30,45,.12))!important;
+  border-radius:16px!important;
+  background:color-mix(in srgb,var(--card,#fff) 92%,transparent)!important;
+  cursor:pointer;
+  touch-action:manipulation;
+  transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease;
 }
+.dar-share-card .dar-share-btn b{
+  font-size:10.2px!important;
+  line-height:1!important;
+  font-weight:800!important;
+  color:inherit!important;
+  -webkit-text-fill-color:currentColor!important;
+  white-space:nowrap;
+}
+.dar-share-icon,
 .dar-global-share-icon{
-  width:34px;
-  height:34px;
   display:grid;
   place-items:center;
-  border-radius:11px;
+  width:36px;
+  height:36px;
+  border-radius:12px;
   background:color-mix(in srgb,currentColor 8%,transparent);
 }
-.dar-global-share-icon svg{width:21px;height:21px;display:block;fill:currentColor}
-.share-panel .dar-global-share-action>span:last-child,
-.share-panel .dar-global-image-btn>span:last-child{font-size:10px!important;line-height:1!important;white-space:nowrap}
-html[data-theme] .share-panel .dar-global-share-wa{
+.dar-share-icon svg,
+.dar-global-share-icon svg{
+  width:22px;
+  height:22px;
+  display:block;
+  fill:currentColor;
+}
+
+.dar-share-card .dar-global-share-wa{
   color:#18884a!important;
-  border-color:rgba(37,211,102,.28)!important;
-  background:linear-gradient(145deg,rgba(37,211,102,.10),color-mix(in srgb,var(--card) 88%,transparent))!important;
+  -webkit-text-fill-color:#18884a!important;
+  border-color:rgba(37,211,102,.34)!important;
+  background:linear-gradient(145deg,rgba(37,211,102,.10),color-mix(in srgb,var(--card,#fff) 90%,transparent))!important;
+  box-shadow:0 0 16px rgba(37,211,102,.14);
 }
-html[data-theme] .share-panel .dar-global-share-tg{
+.dar-share-card .dar-global-share-tg{
   color:#218ac3!important;
-  border-color:rgba(42,171,238,.28)!important;
-  background:linear-gradient(145deg,rgba(42,171,238,.09),color-mix(in srgb,var(--card) 88%,transparent))!important;
+  -webkit-text-fill-color:#218ac3!important;
+  border-color:rgba(42,171,238,.34)!important;
+  background:linear-gradient(145deg,rgba(42,171,238,.09),color-mix(in srgb,var(--card,#fff) 90%,transparent))!important;
+  box-shadow:0 0 16px rgba(42,171,238,.13);
 }
-html[data-theme] .share-panel .dar-global-share-ig{
+.dar-share-card .dar-global-share-ig{
   color:#b73570!important;
-  border-color:rgba(214,41,118,.24)!important;
-  background:linear-gradient(145deg,rgba(214,41,118,.08),color-mix(in srgb,var(--card) 88%,transparent))!important;
+  -webkit-text-fill-color:#b73570!important;
+  border-color:rgba(214,41,118,.31)!important;
+  background:linear-gradient(145deg,rgba(214,41,118,.08),color-mix(in srgb,var(--card,#fff) 90%,transparent))!important;
+  box-shadow:0 0 16px rgba(214,41,118,.12);
 }
-html[data-theme] .share-panel .dar-global-share-native,
-html[data-theme] .share-panel .dar-global-image-btn{
-  color:var(--gold2,var(--gold,#d7bc78))!important;
-  border-color:color-mix(in srgb,var(--gold2,var(--gold,#d7bc78)) 28%,var(--line) 72%)!important;
+.dar-share-card .dar-global-share-native{
+  color:var(--ink,var(--text,#101b2d))!important;
+  -webkit-text-fill-color:currentColor!important;
+  border-color:color-mix(in srgb,var(--gold2,#d9bf79) 42%,var(--line,transparent))!important;
 }
+
 html:is([data-theme="dark"],[data-theme="royal"],[data-theme="bordeaux"],[data-theme="dar-al-layl"],[data-theme="aurora"])
-.share-panel .dar-global-share-wa{color:#8ee7ad!important}
+.dar-share-card .dar-global-share-wa{color:#8ee7ad!important;-webkit-text-fill-color:#8ee7ad!important}
 html:is([data-theme="dark"],[data-theme="royal"],[data-theme="bordeaux"],[data-theme="dar-al-layl"],[data-theme="aurora"])
-.share-panel .dar-global-share-tg{color:#9fdcff!important}
+.dar-share-card .dar-global-share-tg{color:#9fdcff!important;-webkit-text-fill-color:#9fdcff!important}
 html:is([data-theme="dark"],[data-theme="royal"],[data-theme="bordeaux"],[data-theme="dar-al-layl"],[data-theme="aurora"])
-.share-panel .dar-global-share-ig{color:#ffacd2!important}
-.share-panel .share-flat-v410,
-.share-panel .post-after-share,
-.share-panel .frauen-share-primary{
-  align-items:stretch!important;
+.dar-share-card .dar-global-share-ig{color:#ffacd2!important;-webkit-text-fill-color:#ffacd2!important}
+
+.dar-share-card .dar-share-btn:hover,
+.dar-share-card .dar-share-btn:focus-visible{
+  transform:translateY(-1px);
+  box-shadow:0 7px 22px color-mix(in srgb,currentColor 18%,transparent)!important;
+  outline:none;
 }
+
+.dar-share-tools{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:7px!important;
+  margin-top:8px;
+}
+.dar-share-tool{
+  appearance:none;
+  display:grid!important;
+  grid-template-columns:22px minmax(0,1fr);
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  min-width:0!important;
+  min-height:42px!important;
+  padding:8px 9px!important;
+  border:1px solid var(--line,rgba(20,30,45,.12))!important;
+  border-radius:13px!important;
+  background:color-mix(in srgb,var(--card,#fff) 74%,transparent)!important;
+  color:var(--ink,var(--text,#101b2d))!important;
+  -webkit-text-fill-color:var(--ink,var(--text,#101b2d))!important;
+  cursor:pointer;
+  touch-action:manipulation;
+  transition:transform .16s ease,box-shadow .16s ease;
+}
+.dar-share-tool>span{display:grid;place-items:center}
+.dar-share-tool svg{width:19px;height:19px;fill:currentColor}
+.dar-share-tool b{
+  font-size:10px!important;
+  line-height:1.15!important;
+  font-weight:760!important;
+  color:inherit!important;
+  -webkit-text-fill-color:currentColor!important;
+}
+.dar-share-tool--image{
+  border-color:color-mix(in srgb,var(--gold2,#d9bf79) 40%,transparent)!important;
+}
+.dar-share-tool:hover,
+.dar-share-tool:focus-visible{
+  transform:translateY(-1px);
+  box-shadow:0 7px 20px rgba(10,20,25,.10);
+  outline:none;
+}
+
+.dar-share-note{
+  margin:9px 2px 0!important;
+  color:var(--muted,#667085)!important;
+  -webkit-text-fill-color:var(--muted,#667085)!important;
+  font-size:9.4px!important;
+  line-height:1.4!important;
+}
+
+/* Eingesetzte Share-Karte in Propheten-/Geschichtsdetails folgt exakt demselben Standard. */
+.prophets-detail>.dar-global-injected-panel{margin:24px 0 8px!important}
+
 @media(max-width:520px){
-  .share-panel .share-flat-v410,
-  .share-panel .post-after-share,
-  .share-panel .frauen-share-primary{
+  .share-panel.dar-share-card{padding:13px 12px 12px!important}
+  .dar-share-card .dar-share-primary{
     grid-template-columns:repeat(4,minmax(0,1fr))!important;
     gap:6px!important;
   }
-  .share-panel .dar-global-share-action,
-  .share-panel .dar-global-image-btn{min-height:68px!important;padding:7px 4px!important}
-  .dar-global-share-icon{width:31px;height:31px;border-radius:10px}
-  .dar-global-share-icon svg{width:19px;height:19px}
-  .share-panel .dar-global-share-action>span:last-child,
-  .share-panel .dar-global-image-btn>span:last-child{font-size:9px!important}
+  .dar-share-card .dar-share-btn{min-height:72px!important;padding:8px 3px!important}
+  .dar-share-icon,.dar-global-share-icon{width:33px;height:33px;border-radius:11px}
+  .dar-share-icon svg,.dar-global-share-icon svg{width:20px;height:20px}
+  .dar-share-card .dar-share-btn b{font-size:9.6px!important}
+  .dar-share-tools{gap:6px!important}
+  .dar-share-tool{padding:8px 6px!important;grid-template-columns:19px minmax(0,1fr);gap:5px}
+  .dar-share-tool b{font-size:9.5px!important}
+  .prophets-detail>.dar-global-injected-panel{margin-top:18px!important}
 }
-@media(max-width:370px){
-  .share-panel .share-flat-v410,
-  .share-panel .post-after-share,
-  .share-panel .frauen-share-primary{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+@media(max-width:420px){
+  .dar-share-head>p{display:none}
+  .dar-share-head h3{font-size:18px!important}
+  .dar-share-note{font-size:9px!important}
 }
-
-
-/* GLOBAL_SHARE_INJECTED_PANEL_V1232 */
-.prophets-detail>.dar-global-injected-panel{
-  margin:24px 0 8px!important;
-  padding:14px!important;
-  border-radius:20px!important;
-  border:1px solid color-mix(in srgb,var(--gold2,var(--gold,#d8bd75)) 22%,var(--line,var(--line2)) 78%)!important;
-  background:
-    radial-gradient(circle at 14% 0%,color-mix(in srgb,var(--gold2,var(--gold,#d8bd75)) 7%,transparent),transparent 38%),
-    color-mix(in srgb,var(--card,var(--bg)) 94%,transparent)!important;
-  box-shadow:0 10px 28px rgba(4,15,16,.09),inset 0 1px 0 rgba(255,255,255,.05)!important;
+@media(max-width:350px){
+  .dar-share-card .dar-share-btn b{font-size:8.7px!important}
+  .dar-share-tool b{font-size:8.7px!important}
 }
-.prophets-detail>.dar-global-injected-panel .share-panel-title{
-  margin:0 0 10px!important;
-  font-family:var(--serif)!important;
-  font-size:17px!important;
-  font-weight:650!important;
-  color:var(--ink)!important;
-}
-@media(max-width:520px){
-  .prophets-detail>.dar-global-injected-panel{margin-top:18px!important;padding:11px!important;border-radius:17px!important}
+@media(prefers-reduced-motion:reduce){
+  .dar-global-share-toast,
+  .dar-share-card .dar-share-btn,
+  .dar-share-tool{transition:none!important}
 }
