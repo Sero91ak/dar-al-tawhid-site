@@ -131,7 +131,11 @@ for (const [rel, src] of [[liveRel, liveFeed], [testRel, testFeed]]) {
     "feedSharePoolImage",
     "feedShareRandomIndex",
     "share-pool=v1250",
-    "shareFreshPostFeedItem"
+    "shareFreshPostFeedItem",
+    "openFeedShareStandard",
+    "sfGlobalShareOverlay",
+    "global.DARGlobalShare",
+    "imageHandler"
   ]) need(rel, src, token);
   for (const token of [
     "/api/share-image/background",
@@ -147,6 +151,16 @@ for (const [rel, src] of [[liveRel, liveFeed], [testRel, testFeed]]) {
 if (liveFeed && testFeed && liveFeed !== testFeed) {
   failures.push("Live/Test Premium-Feed-Renderer sind nicht identisch");
 }
+
+const storiesRel = "assets/stories-app.js";
+const stories = file(storiesRel);
+syntax(storiesRel, stories);
+for (const token of [
+  "storyViewerShareHost",
+  "function mountStoryShare",
+  "DARGlobalShare.mount",
+  "mountStoryShare(story)"
+]) need(storiesRel, stories, token);
 
 const frauenRel = "assets/frauen/frauen-fiqh.js";
 const frauen = file(frauenRel);
