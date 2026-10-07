@@ -91,7 +91,7 @@ const DAR_VOICE_BOUNDARY_CLASS = String.raw`\s.,،;؛:!?؟…·()\[\]{}«»"'“
 let _darVoicePronunciationMatchers = null;
 
 function escapeRegExp(value) {
-  return String(value || "").replace(/[\\^$.*+?()[\]{}|]/g, "\\return String(value || "").replace(/[\\^$.*+?()[\]{}|]/g, "\\export async function synthesizeDarVoice(env, text, options = {}) {");");
+  return String(value || "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 function darVoicePronunciationMatchers() {
