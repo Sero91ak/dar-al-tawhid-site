@@ -748,3 +748,612 @@ html[data-kids-age] body .bottom-nav .nav-btn{
   html[data-kids-age] body .bottom-nav .nav-btn .ico{width:29px!important;height:29px!important}
   html[data-kids-age] body .bottom-nav .nav-btn .lab{font-size:10px!important;white-space:nowrap!important}
 }
+
+
+/* DUʿĀʾ PREMIUM CONVERGENCE V1222 */
+/* Ziel: dieselbe dunkle, bildgetragene Premium-Sprache wie Geschichten/Qurʾān.
+   Gleichzeitig kein verschachtelter Scroll-Lock mehr auf iOS. */
+
+html[data-view="dua"] body,
+html[data-view="dua"] .app,
+html[data-view="dua"] .shell{
+  background:#0b2737!important;
+}
+html[data-view="dua"] .shell{
+  padding-top:0!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  overscroll-behavior-y:auto!important;
+  -webkit-overflow-scrolling:touch!important;
+  touch-action:pan-y!important;
+  scroll-padding-bottom:calc(150px + env(safe-area-inset-bottom,0px))!important;
+}
+html.duahub-detail-open .shell{
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  overscroll-behavior-y:auto!important;
+  touch-action:pan-y!important;
+}
+html.duahub-detail-open body,
+html.duahub-detail-open #view-dua,
+html.duahub-detail-open .duahub-detail,
+html.duahub-detail-open .duahub-detail-scroll{
+  touch-action:pan-y!important;
+}
+html.duahub-detail-open .bottom-nav{
+  pointer-events:auto!important;
+}
+
+#view-dua{
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:0 0 calc(190px + env(safe-area-inset-bottom,0px))!important;
+  color:#fff8ea!important;
+  background:
+    radial-gradient(circle at 78% 7%,rgba(109,205,199,.08),transparent 28%),
+    radial-gradient(circle at 16% 18%,rgba(240,199,101,.07),transparent 26%),
+    linear-gradient(180deg,#0b2737 0%,#0a2a3b 46%,#082434 100%)!important;
+}
+.duahub-home{
+  width:min(100%,760px)!important;
+  margin:0 auto!important;
+  padding:0 16px 36px!important;
+  overflow:visible!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.duahub-home[hidden]{display:none!important}
+
+/* ---------- Hero ---------- */
+.duahub-head{
+  width:calc(100% + 32px)!important;
+  min-height:286px!important;
+  margin:0 -16px 20px!important;
+  border:0!important;
+  border-radius:0 0 36px 36px!important;
+  background:
+    linear-gradient(90deg,rgba(2,18,30,.90) 0%,rgba(2,18,30,.64) 42%,rgba(2,18,30,.20) 74%,rgba(2,18,30,.08) 100%),
+    linear-gradient(180deg,rgba(3,19,31,.02) 28%,rgba(3,19,31,.14) 58%,#0b2737 100%),
+    url("/kids/assets/dua-premium/hero-v1222.jpg?v=1222") center 51%/cover no-repeat!important;
+  box-shadow:0 24px 56px rgba(0,0,0,.24)!important;
+}
+.duahub-head::after{
+  background:
+    radial-gradient(circle at 80% 18%,rgba(247,213,133,.14),transparent 24%),
+    linear-gradient(180deg,transparent 42%,rgba(3,21,33,.72) 100%)!important;
+}
+.duahub-brand{
+  top:max(18px,calc(env(safe-area-inset-top,0px) + 8px))!important;
+  left:22px!important;
+  gap:7px!important;
+  color:#fff5d8!important;
+}
+.duahub-brand span{
+  font-family:"Cinzel",Georgia,serif!important;
+  font-size:12px!important;
+  font-weight:700!important;
+  letter-spacing:.10em!important;
+}
+.duahub-brand b{
+  color:#f0cb71!important;
+  font-family:"Fredoka","SF Pro Rounded",system-ui,sans-serif!important;
+  font-size:12px!important;
+  font-weight:700!important;
+}
+.duahub-profile{
+  top:max(13px,calc(env(safe-area-inset-top,0px) + 4px))!important;
+  right:18px!important;
+  padding:3px!important;
+  border:1px solid rgba(240,204,115,.34)!important;
+  border-radius:50%!important;
+  background:rgba(4,27,40,.56)!important;
+  box-shadow:0 7px 18px rgba(0,0,0,.28)!important;
+  backdrop-filter:blur(8px)!important;
+  -webkit-backdrop-filter:blur(8px)!important;
+}
+.duahub-profile-avatar{width:46px!important;height:46px!important}
+.duahub-head-copy{
+  left:22px!important;
+  right:22px!important;
+  bottom:26px!important;
+}
+.duahub-head-copy small{
+  margin:0 0 7px!important;
+  color:#f0cf80!important;
+  font-family:"Cinzel",Georgia,serif!important;
+  font-size:9px!important;
+  font-weight:700!important;
+  letter-spacing:.15em!important;
+}
+.duahub-head-copy h2{
+  color:#fff8e9!important;
+  font-family:"Fredoka","SF Pro Rounded","Arial Rounded MT Bold",system-ui,sans-serif!important;
+  font-size:clamp(46px,12vw,62px)!important;
+  font-weight:680!important;
+  line-height:.94!important;
+  letter-spacing:-.045em!important;
+  text-shadow:0 5px 24px rgba(0,0,0,.38)!important;
+}
+
+/* ---------- Echte generierte 3D-/Miniaturbilder ---------- */
+.duahub-3d{
+  display:block!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  background:none!important;
+  filter:drop-shadow(0 8px 11px rgba(0,0,0,.22))!important;
+}
+.duahub-3d.action-library,
+.duahub-3d.action-learn,
+.duahub-3d.action-random,
+.bottom-nav .duahub-nav-ico img{
+  object-fit:contain!important;
+}
+
+/* ---------- Drei Hauptaktionen ---------- */
+.duahub-actions{
+  gap:10px!important;
+  margin:0 8px 20px!important;
+}
+.duahub-action{
+  min-height:92px!important;
+  padding:8px 12px 8px 10px!important;
+  grid-template-columns:78px minmax(0,1fr) 40px!important;
+  grid-template-rows:1fr 1fr!important;
+  column-gap:12px!important;
+  border:1px solid rgba(233,205,138,.18)!important;
+  border-radius:27px!important;
+  color:#fff8ea!important;
+  background:
+    radial-gradient(circle at 8% 20%,rgba(241,202,108,.10),transparent 31%),
+    linear-gradient(135deg,rgba(18,66,86,.98),rgba(8,41,59,.98))!important;
+  box-shadow:0 16px 34px rgba(0,0,0,.17),inset 0 1px rgba(255,255,255,.045)!important;
+}
+.duahub-action.learn{
+  background:
+    radial-gradient(circle at 10% 18%,rgba(116,211,204,.10),transparent 32%),
+    linear-gradient(135deg,#10465b,#092f43)!important;
+}
+.duahub-action.random{
+  background:
+    radial-gradient(circle at 10% 18%,rgba(240,200,100,.12),transparent 30%),
+    linear-gradient(135deg,#123d55,#082b3f)!important;
+}
+.duahub-action-art{
+  width:74px!important;
+  height:74px!important;
+  margin:0!important;
+  padding:2px!important;
+}
+.duahub-action strong{
+  margin:0 0 2px!important;
+  color:#fff8ea!important;
+  font-family:"Fredoka","SF Pro Rounded",system-ui,sans-serif!important;
+  font-size:17px!important;
+  font-weight:700!important;
+  line-height:1.05!important;
+}
+.duahub-action>span:not(.duahub-3d){
+  color:rgba(255,255,255,.68)!important;
+  font-size:11px!important;
+  font-weight:600!important;
+}
+.duahub-arrow{
+  width:38px!important;
+  height:38px!important;
+  border:1px solid rgba(244,216,150,.22)!important;
+  color:#ffe6a3!important;
+  background:rgba(239,198,98,.11)!important;
+  box-shadow:none!important;
+  font-size:28px!important;
+}
+
+/* ---------- Weiterlernen / Zuletzt gehört ---------- */
+.duahub-resume{
+  gap:12px!important;
+  margin:0 8px 22px!important;
+}
+.duahub-resume-block{gap:7px!important}
+.duahub-resume-head{margin:0 3px!important}
+.duahub-resume-head strong{
+  color:#fff7e6!important;
+  font-family:"Fredoka","SF Pro Rounded",system-ui,sans-serif!important;
+  font-size:17px!important;
+  font-weight:700!important;
+}
+.duahub-resume-head span{color:#f0cc78!important;font-size:9px!important}
+.duahub-resume-card{
+  min-height:86px!important;
+  padding:8px 11px 8px 9px!important;
+  grid-template-columns:72px minmax(0,1fr) 31px!important;
+  gap:11px!important;
+  border:1px solid rgba(238,210,144,.16)!important;
+  border-radius:25px!important;
+  color:#fff8ea!important;
+  background:linear-gradient(135deg,rgba(17,61,81,.96),rgba(8,40,57,.98))!important;
+  box-shadow:0 14px 30px rgba(0,0,0,.14),inset 0 1px rgba(255,255,255,.04)!important;
+}
+.duahub-resume-art{
+  width:70px!important;
+  height:68px!important;
+  border:1px solid rgba(255,255,255,.06)!important;
+  border-radius:19px!important;
+  overflow:hidden!important;
+  background:#0b3247!important;
+}
+.duahub-resume-art .duahub-3d{
+  width:100%!important;
+  height:100%!important;
+  border-radius:18px!important;
+  object-fit:cover!important;
+}
+.duahub-resume-copy strong{color:#fff8ea!important;font-size:15px!important}
+.duahub-resume-copy small{color:rgba(255,255,255,.61)!important;font-size:10px!important}
+.duahub-mini-progress{height:4px!important;background:rgba(255,255,255,.10)!important}
+.duahub-mini-progress i{background:linear-gradient(90deg,#d8a64a,#f0d482)!important}
+.duahub-resume-go{color:#f0cc79!important}
+
+/* ---------- Bibliothek ---------- */
+.duahub-library{
+  margin:0 8px!important;
+  padding:0!important;
+}
+.duahub-section-title{
+  margin:0 2px 12px!important;
+  align-items:end!important;
+}
+.duahub-section-title small{
+  color:#efcc78!important;
+  font-family:"Cinzel",Georgia,serif!important;
+  font-size:9px!important;
+  font-weight:700!important;
+  letter-spacing:.14em!important;
+}
+.duahub-section-title h3{
+  margin:3px 0 0!important;
+  color:#fff8e9!important;
+  font-family:"Fredoka","SF Pro Rounded",system-ui,sans-serif!important;
+  font-size:clamp(31px,8vw,40px)!important;
+  font-weight:680!important;
+  line-height:.97!important;
+  letter-spacing:-.035em!important;
+}
+.duahub-section-title>span{
+  color:#e9c36e!important;
+  font-size:10px!important;
+}
+.duahub-search{
+  height:50px!important;
+  padding:0 16px!important;
+  border:1px solid rgba(235,209,147,.15)!important;
+  border-radius:20px!important;
+  background:rgba(4,32,47,.62)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.035)!important;
+  backdrop-filter:blur(10px)!important;
+  -webkit-backdrop-filter:blur(10px)!important;
+}
+.duahub-search>span{border-color:#e3bb61!important}
+.duahub-search>span::after{background:#e3bb61!important}
+.duahub-search input{
+  color:#fff7e7!important;
+  font-family:"Fredoka","SF Pro Rounded",system-ui,sans-serif!important;
+  font-size:14px!important;
+}
+.duahub-search input::placeholder{color:rgba(255,255,255,.45)!important}
+.duahub-chips{
+  gap:7px!important;
+  padding:9px 0 11px!important;
+}
+.duahub-chips button{
+  min-height:34px!important;
+  padding:0 13px!important;
+  border:1px solid rgba(235,207,140,.13)!important;
+  color:rgba(255,255,255,.64)!important;
+  background:rgba(5,35,50,.58)!important;
+  font-family:"Fredoka","SF Pro Rounded",system-ui,sans-serif!important;
+  font-size:10px!important;
+}
+.duahub-chips button.active{
+  color:#ffe59b!important;
+  border-color:rgba(240,204,113,.30)!important;
+  background:linear-gradient(135deg,rgba(240,199,101,.15),rgba(92,193,190,.07))!important;
+  box-shadow:0 0 18px rgba(240,200,103,.08)!important;
+}
+.duahub-grid{gap:10px!important}
+.duahub-card{
+  min-height:94px!important;
+  padding:9px 10px!important;
+  grid-template-columns:86px minmax(0,1fr) 37px!important;
+  gap:12px!important;
+  border:1px solid rgba(236,207,139,.15)!important;
+  border-radius:26px!important;
+  color:#fff8e9!important;
+  background:linear-gradient(135deg,rgba(16,61,81,.97),rgba(7,39,56,.98))!important;
+  box-shadow:0 14px 30px rgba(0,0,0,.14),inset 0 1px rgba(255,255,255,.035)!important;
+}
+.duahub-card:nth-child(4n+2),
+.duahub-card:nth-child(4n+3){
+  color:#fff8e9!important;
+  border-color:rgba(236,207,139,.15)!important;
+  background:linear-gradient(135deg,rgba(16,61,81,.97),rgba(7,39,56,.98))!important;
+}
+.duahub-card.cat-family{
+  background:linear-gradient(135deg,rgba(63,58,66,.97),rgba(31,39,50,.99))!important;
+}
+.duahub-card.cat-sleep{
+  background:linear-gradient(135deg,rgba(24,55,82,.97),rgba(8,35,58,.99))!important;
+}
+.duahub-card.cat-protection{
+  background:linear-gradient(135deg,rgba(14,59,77,.97),rgba(7,37,55,.99))!important;
+}
+.duahub-card-art{
+  width:86px!important;
+  height:74px!important;
+  min-height:74px!important;
+  border:1px solid rgba(255,255,255,.065)!important;
+  border-radius:20px!important;
+  overflow:hidden!important;
+  background:#0b3247!important;
+  box-shadow:0 8px 18px rgba(0,0,0,.16)!important;
+}
+.duahub-card-art .duahub-3d{
+  width:100%!important;
+  height:100%!important;
+  border-radius:19px!important;
+  object-fit:cover!important;
+  transform:scale(1.03)!important;
+  filter:none!important;
+}
+.duahub-card-copy{gap:3px!important}
+.duahub-card-copy small,
+.duahub-card:nth-child(4n+2) .duahub-card-copy small,
+.duahub-card:nth-child(4n+3) .duahub-card-copy small{
+  color:#efcc78!important;
+  font-family:"Cinzel",Georgia,serif!important;
+  font-size:8px!important;
+  font-weight:700!important;
+  letter-spacing:.10em!important;
+}
+.duahub-card-copy strong{
+  color:#fff8e9!important;
+  font-family:"Fredoka","SF Pro Rounded",system-ui,sans-serif!important;
+  font-size:15.5px!important;
+  font-weight:680!important;
+  line-height:1.08!important;
+  white-space:normal!important;
+  display:-webkit-box!important;
+  -webkit-line-clamp:2!important;
+  -webkit-box-orient:vertical!important;
+}
+.duahub-card-copy em{
+  color:rgba(255,255,255,.56)!important;
+  font-size:9.5px!important;
+  font-weight:600!important;
+}
+.duahub-card-go{
+  width:35px!important;
+  height:35px!important;
+  color:#ffe6a4!important;
+  border:1px solid rgba(243,211,137,.20)!important;
+  background:rgba(238,196,97,.10)!important;
+  font-size:26px!important;
+}
+.duahub-empty,.duahub-loading{
+  color:rgba(255,255,255,.62)!important;
+  border-color:rgba(236,207,139,.16)!important;
+  background:rgba(5,35,50,.48)!important;
+}
+.duahub-empty b{color:#fff8e9!important}
+
+/* ---------- Detailseite: eine Scroll-Ebene, keine App-Sperre ---------- */
+.duahub-detail{
+  position:relative!important;
+  z-index:1!important;
+  top:auto!important;
+  left:auto!important;
+  width:min(100%,760px)!important;
+  min-height:0!important;
+  margin:0 auto!important;
+  transform:none!important;
+  border:0!important;
+  border-radius:0!important;
+  overflow:visible!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.duahub-detail.open{display:block!important}
+.duahub-detail-scroll{
+  height:auto!important;
+  min-height:0!important;
+  padding:12px 16px calc(190px + env(safe-area-inset-bottom,0px))!important;
+  overflow:visible!important;
+  overscroll-behavior:auto!important;
+  -webkit-overflow-scrolling:auto!important;
+}
+.duahub-detail-back{
+  min-height:42px!important;
+  margin:2px 0 12px!important;
+  padding:0 14px!important;
+  border:1px solid rgba(238,209,140,.18)!important;
+  color:#fff3d7!important;
+  background:rgba(5,34,49,.72)!important;
+  box-shadow:0 8px 18px rgba(0,0,0,.12)!important;
+  font-family:"Fredoka","SF Pro Rounded",system-ui,sans-serif!important;
+}
+.duahub-detail-hero{
+  width:calc(100% + 32px)!important;
+  min-height:220px!important;
+  margin:0 -16px 18px!important;
+  border:0!important;
+  border-radius:0 0 34px 34px!important;
+  display:flex!important;
+  align-items:flex-end!important;
+  justify-content:flex-end!important;
+  padding:0 20px 18px!important;
+  background:
+    linear-gradient(90deg,rgba(2,18,30,.82),rgba(2,18,30,.20) 67%,rgba(2,18,30,.05)),
+    linear-gradient(180deg,rgba(3,19,31,.03),rgba(3,19,31,.16) 58%,#0b2737 100%),
+    url("/kids/assets/dua-premium/hero-v1222.jpg?v=1222") center 51%/cover no-repeat!important;
+  box-shadow:0 20px 46px rgba(0,0,0,.20)!important;
+}
+.duahub-detail-art{
+  width:96px!important;
+  height:96px!important;
+  padding:0!important;
+  border:1px solid rgba(248,221,156,.22)!important;
+  border-radius:25px!important;
+  object-fit:cover!important;
+  box-shadow:0 12px 30px rgba(0,0,0,.28)!important;
+}
+.duahub-detail-kicker{
+  margin:0 auto 7px!important;
+  color:#efcc78!important;
+  font-family:"Cinzel",Georgia,serif!important;
+  font-size:9px!important;
+  font-weight:700!important;
+}
+.duahub-detail h2{
+  max-width:670px!important;
+  margin:0 auto!important;
+  color:#fff8e9!important;
+  font-family:"Fredoka","SF Pro Rounded",system-ui,sans-serif!important;
+  font-size:clamp(31px,8.5vw,46px)!important;
+  font-weight:680!important;
+  line-height:.98!important;
+  letter-spacing:-.035em!important;
+}
+.duahub-detail-prompt{
+  max-width:620px!important;
+  margin:8px auto 14px!important;
+  color:rgba(255,255,255,.68)!important;
+  font-family:"Fredoka","SF Pro Rounded",system-ui,sans-serif!important;
+  font-size:13px!important;
+  font-weight:560!important;
+}
+.duahub-detail-actions{
+  max-width:620px!important;
+  gap:9px!important;
+  margin:0 auto 11px!important;
+}
+.duahub-detail-actions button{
+  min-height:50px!important;
+  border-radius:18px!important;
+  font-family:"Fredoka","SF Pro Rounded",system-ui,sans-serif!important;
+}
+.duahub-listen{
+  color:#fff2d0!important;
+  border:1px solid rgba(238,209,140,.18)!important;
+  background:linear-gradient(135deg,#15506a,#0a354d)!important;
+  box-shadow:0 10px 24px rgba(0,0,0,.12)!important;
+}
+.duahub-learn{
+  color:#102f4a!important;
+  border:1px solid rgba(238,209,140,.22)!important;
+  background:linear-gradient(145deg,#f5d37e,#c89436)!important;
+}
+.duahub-textcard{
+  max-width:620px!important;
+  padding:18px 16px!important;
+  border:1px solid rgba(238,209,140,.16)!important;
+  border-radius:27px!important;
+  color:#fff8e9!important;
+  background:
+    radial-gradient(circle at 50% 0,rgba(240,202,108,.07),transparent 27%),
+    linear-gradient(150deg,rgba(17,60,80,.96),rgba(7,37,54,.99))!important;
+  box-shadow:0 18px 38px rgba(0,0,0,.16),inset 0 1px rgba(255,255,255,.035)!important;
+}
+.duahub-arabic{
+  color:#fff8ea!important;
+  font-size:clamp(29px,8.4vw,43px)!important;
+  line-height:1.72!important;
+  text-shadow:0 2px 14px rgba(0,0,0,.16)!important;
+}
+.duahub-translit{
+  color:#efcb76!important;
+  font-size:10.5px!important;
+}
+.duahub-rule{background:linear-gradient(90deg,transparent,#d6a648,transparent)!important}
+.duahub-meaning{
+  color:#f4efe4!important;
+  font-family:"Fredoka","SF Pro Rounded",system-ui,sans-serif!important;
+  font-size:15px!important;
+  font-weight:560!important;
+  line-height:1.5!important;
+}
+.duahub-german-audio{
+  min-height:41px!important;
+  border:1px solid rgba(236,207,139,.15)!important;
+  color:#ffe4a0!important;
+  background:rgba(2,27,42,.46)!important;
+  font-family:"Fredoka","SF Pro Rounded",system-ui,sans-serif!important;
+}
+.duahub-source{
+  max-width:620px!important;
+  margin:10px auto 0!important;
+  padding:11px 13px!important;
+  border:1px solid rgba(236,207,139,.13)!important;
+  color:rgba(255,255,255,.66)!important;
+  background:rgba(5,34,49,.56)!important;
+}
+.duahub-source span{color:#efcb76!important}
+.duahub-source a{color:#9de2df!important}
+
+/* ---------- Bottom-Nav: echtes eigenes Duʿāʾ-3D-Asset ---------- */
+.bottom-nav .duahub-nav-ico::before,
+.bottom-nav .duahub-nav-ico::after,
+.bottom-nav .duahub-nav-ico i{display:none!important}
+.bottom-nav .duahub-nav-ico img{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  filter:drop-shadow(0 4px 7px rgba(0,0,0,.24))!important;
+}
+html[data-kids-age] body .bottom-nav .nav-btn[data-target="stories"] .lab{
+  letter-spacing:-.018em!important;
+}
+@media(max-width:430px){
+  .duahub-home{padding-left:12px!important;padding-right:12px!important}
+  .duahub-head{width:calc(100% + 24px)!important;margin-left:-12px!important;margin-right:-12px!important;min-height:264px!important}
+  .duahub-head-copy{left:18px!important;right:18px!important;bottom:22px!important}
+  .duahub-actions,.duahub-resume,.duahub-library{margin-left:4px!important;margin-right:4px!important}
+  .duahub-action{grid-template-columns:70px minmax(0,1fr) 36px!important;min-height:86px!important}
+  .duahub-action-art{width:67px!important;height:67px!important}
+  .duahub-card{grid-template-columns:78px minmax(0,1fr) 34px!important;min-height:89px!important}
+  .duahub-card-art{width:78px!important;height:70px!important}
+  .duahub-detail-scroll{padding-left:12px!important;padding-right:12px!important}
+  .duahub-detail-hero{width:calc(100% + 24px)!important;margin-left:-12px!important;margin-right:-12px!important}
+  html[data-kids-age] body .bottom-nav .nav-btn[data-target="stories"] .lab{
+    font-size:9.2px!important;
+    letter-spacing:-.035em!important;
+  }
+}
+@media(max-width:365px){
+  .duahub-card-copy strong{font-size:14px!important}
+  .duahub-action strong{font-size:15.5px!important}
+  .duahub-section-title h3{font-size:29px!important}
+  html[data-kids-age] body .bottom-nav .nav-btn .lab{font-size:9.3px!important}
+  html[data-kids-age] body .bottom-nav .nav-btn[data-target="stories"] .lab{font-size:8.7px!important}
+}
+@media(min-width:700px){
+  .duahub-home,.duahub-detail{max-width:840px!important}
+  .duahub-head{min-height:340px!important}
+  .duahub-actions{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  .duahub-action{
+    min-height:150px!important;
+    padding:14px!important;
+    grid-template-columns:1fr 38px!important;
+    grid-template-rows:84px auto auto!important;
+  }
+  .duahub-action-art{grid-column:1/3!important;grid-row:1!important;width:82px!important;height:82px!important}
+  .duahub-action strong{grid-column:1/3!important;grid-row:2!important;align-self:end!important;font-size:18px!important}
+  .duahub-action>span:not(.duahub-3d){grid-column:1!important;grid-row:3!important}
+  .duahub-arrow{grid-column:2!important;grid-row:3!important}
+  .duahub-grid{grid-template-columns:1fr 1fr!important;gap:12px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .duahub-action,.duahub-card,.duahub-resume-card,.duahub-detail-actions button{transition:none!important;animation:none!important}
+}
