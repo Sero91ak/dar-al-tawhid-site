@@ -1,0 +1,230 @@
+name: Force Align Current Prophet + Sahabiyyat Masters
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/force-align-current-prophet-sahabiyyat.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: force-align-current-prophet-sahabiyyat
+  cancel-in-progress: false
+
+jobs:
+  align:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Exact ElevenLabs forced alignment
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from __future__ import annotations
+          import json, os, re, subprocess, tempfile, time, unicodedata
+          from pathlib import Path
+
+          API_KEY="".join(os.environ.get("ELEVENLABS_API_KEY","").split())
+          if not API_KEY.startswith("sk_") or len(API_KEY)!=51:
+              raise SystemExit("ELEVENLABS_API_KEY fehlt oder hat nicht das erwartete Format.")
+
+          TARGETS=[
+              Path("kids/data/prophet-stories.json"),
+              Path("kids/data/sahabiyyat-stories.json"),
+          ]
+          AGES=("4-5","6-8","9-10")
+          MODE="elevenlabs-forced-alignment-v1"
+          stamp=time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime())
+
+          def canon(s:str)->str:
+              return unicodedata.normalize("NFC",str(s or "")).replace("\r\n","\n").replace("\r","\n").strip()
+
+          def story_text(item:dict)->str:
+              scripts=item.get("scripts") or {}
+              return canon(scripts.get("6-8") or scripts.get("9-10") or scripts.get("4-5") or item.get("voiceScript") or "")
+
+          def audio_path(item:dict):
+              audio=item.get("audio") or {}
+              for age in AGES:
+                  row=audio.get(age) or {}
+                  url=str(row.get("url") or "").split("?",1)[0].strip()
+                  if url:
+                      return Path(url.lstrip("/")),url
+              return None,""
+
+          def exact_alignment(audio:Path,text:str)->dict:
+              raw=Path(tempfile.mkstemp(prefix="dar-story-align-",suffix=".json")[1])
+              cmd=[
+                  "curl","-sS","-o",str(raw),"-w","%{http_code}",
+                  "-X","POST","https://api.elevenlabs.io/v1/forced-alignment",
+                  "-H",f"xi-api-key: {API_KEY}",
+                  "-F",f"file=@{audio};type=audio/mpeg",
+                  "--form-string",f"text={text}",
+              ]
+              code=subprocess.check_output(cmd,text=True).strip()
+              body=raw.read_text(encoding="utf-8",errors="replace")
+              if code!="200":
+                  raise SystemExit(f"Forced alignment HTTP {code} for {audio}: {body[:700]}")
+              data=json.loads(body)
+              chars=data.get("characters") or []
+              if not chars:
+                  raise SystemExit(f"Keine Character-Timestamps für {audio}")
+              joined="".join(str(x.get("text","")) for x in chars)
+              if canon(joined)!=canon(text):
+                  raise SystemExit(f"Character stream mismatch for {audio}: {len(canon(joined))} != {len(canon(text))}")
+
+              original=canon(text)
+              paragraphs=[x.strip() for x in re.split(r"\n\s*\n",original) if x.strip()]
+              starts=[]
+              cursor=0
+              for p in paragraphs:
+                  hit=original.find(p,cursor)
+                  if hit<0:
+                      raise SystemExit(f"Absatz nicht im Quelltext gefunden: {audio}")
+                  idx=hit
+                  while idx<len(chars) and chars[idx].get("start") is None:
+                      idx+=1
+                  if idx>=len(chars):
+                      raise SystemExit(f"Kein Start-Timestamp für Absatz: {audio}")
+                  starts.append(float(chars[idx]["start"]))
+                  cursor=hit+len(p)
+
+              last_end=0.0
+              for row in reversed(chars):
+                  if row.get("end") is not None:
+                      last_end=float(row["end"])
+                      break
+              if last_end<=0:
+                  raise SystemExit(f"Kein Audio-Endtimestamp: {audio}")
+
+              timings=[]
+              for i,st in enumerate(starts):
+                  en=starts[i+1] if i+1<len(starts) else last_end
+                  if en<st:
+                      raise SystemExit(f"Nicht-monotone Timestamps: {audio}")
+                  timings.append({
+                      "paragraphIndex":i,
+                      "start":round(st,3),
+                      "end":round(en,3),
+                  })
+              return {
+                  "timings":timings,
+                  "syncMode":MODE,
+                  "alignmentLoss":data.get("loss"),
+                  "alignedWords":len(data.get("words") or []),
+                  "alignedCharacters":len(chars),
+                  "alignmentGeneratedAt":stamp,
+                  "exactAlignment":True,
+                  "estimatedTimingsAllowed":False,
+              }
+
+          changed=[]
+          aligned_total=0
+          for path in TARGETS:
+              data=json.loads(path.read_text(encoding="utf-8"))
+              file_changed=False
+              for item in data.get("items") or []:
+                  audio=item.get("audio") or {}
+                  p,url=audio_path(item)
+                  if p is None:
+                      continue
+                  if not p.exists() or p.stat().st_size<1000:
+                      raise SystemExit(f"Audio-Datei fehlt für {item.get('id')}: {p}")
+                  text=story_text(item)
+                  if not text:
+                      raise SystemExit(f"Story-Text fehlt für {item.get('id')}")
+                  rows=[audio.get(age) or {} for age in AGES if (audio.get(age) or {}).get("url")]
+                  if rows and all(
+                      str(row.get("syncMode") or "")==MODE and
+                      isinstance(row.get("timings"),list) and row.get("timings")
+                      for row in rows
+                  ):
+                      print(f"SKIP exact: {path.name} / {item.get('id')}")
+                      continue
+
+                  print(f"ALIGN: {path.name} / {item.get('id')} / {p}")
+                  result=exact_alignment(p,text)
+                  for age in AGES:
+                      row=audio.get(age)
+                      if not isinstance(row,dict) or not str(row.get("url") or "").strip():
+                          continue
+                      row.update(result)
+                  aligned_total+=1
+                  file_changed=True
+
+              if file_changed:
+                  if isinstance(data.get("version"),int):
+                      data["version"]+=1
+                  data["updatedAt"]=stamp
+                  path.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+                  changed.append(path.as_posix())
+
+          Path("/tmp/aligned-files.txt").write_text("\n".join(changed)+"\n",encoding="utf-8")
+          print(f"Exact aligned masters: {aligned_total}")
+          if not changed:
+              print("Alle vorhandenen Prophet-/Sahabiyyat-Master sind bereits exakt ausgerichtet.")
+          PY
+
+      - name: Validate exact production state
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          MODE="elevenlabs-forced-alignment-v1"
+          AGES=("4-5","6-8","9-10")
+          checked=0
+          for path in (Path("kids/data/prophet-stories.json"),Path("kids/data/sahabiyyat-stories.json")):
+              data=json.loads(path.read_text(encoding="utf-8"))
+              for item in data.get("items") or []:
+                  audio=item.get("audio") or {}
+                  rows=[audio.get(age) or {} for age in AGES if str((audio.get(age) or {}).get("url") or "").strip()]
+                  if not rows:
+                      continue
+                  for row in rows:
+                      if row.get("syncMode")!=MODE:
+                          raise SystemExit(f"{path.name}/{item.get('id')}: nicht exakt ausgerichtet")
+                      timings=row.get("timings") or []
+                      if not timings:
+                          raise SystemExit(f"{path.name}/{item.get('id')}: keine Timings")
+                      last=-1.0
+                      for t in timings:
+                          st=float(t.get("start") or 0)
+                          en=float(t.get("end") or 0)
+                          if st<last or en<st:
+                              raise SystemExit(f"{path.name}/{item.get('id')}: ungültige Timings")
+                          last=en
+                      if row.get("estimatedTimingsAllowed") is not False:
+                          raise SystemExit(f"{path.name}/{item.get('id')}: geschätzte Timings nicht gesperrt")
+                  checked+=1
+          print("VALIDATED exact existing masters:",checked)
+          PY
+
+      - name: Commit exact timing maps
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add kids/data/prophet-stories.json kids/data/sahabiyyat-stories.json
+          if git diff --cached --quiet; then
+            echo "Keine Änderungen."
+            exit 0
+          fi
+          git commit -m "Kids: exact ElevenLabs alignment for current story masters"
+          git pull --rebase origin main
+          git push origin HEAD:main
