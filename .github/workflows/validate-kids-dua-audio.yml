@@ -64,8 +64,8 @@ jobs:
               url=str(entry.get("url") or "").split("?",1)[0]
               p=root/url.lstrip("/")
               assert p.exists() and p.stat().st_size>1200,(path,url)
-          # Arabic packs use exact vocalized Fuṣḥā. Full remains v2; slow/word are
-          # dedicated v3 renders with Eleven v4 [slowly] delivery tags.
+          # Arabic packs use exact vocalized Fuṣḥā. Full, slow and word are
+          # dedicated v3 renders with Eleven v4 and Arabic-native delivery.
           expected_revisions={
             "kids/data/dua-arabic-audio.json":"dua-arabic-native-fusha-v3-20261007",
             "kids/data/dua-arabic-slow-audio.json":"dua-arabic-native-fusha-slow-v3-20261007",
