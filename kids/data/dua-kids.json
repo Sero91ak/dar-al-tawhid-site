@@ -1,12 +1,13 @@
 {
-  "version": 2,
+  "version": 3,
   "policy": {
     "childExplanation": "Die Erklärung darf vereinfacht werden. Arabischer Wortlaut und Quellenangabe werden nicht frei umformuliert.",
     "quranAudio": "Qurʾān-Arabisch wird ausschließlich über die echte Qurʾān-Rezitation abgespielt und niemals synthetisch erzeugt.",
     "sunnahArabicAudio": "Arabische Sunnah-Duʿāʾ werden wortgetreu mit der autorisierten Serhat-Masterstimme erzeugt; der sichtbare Wortlaut bleibt die Referenz.",
     "audioLearning": "Jedes Duʿāʾ hat getrennte Hörwege für Arabisch und Deutsch sowie einen langsamen Übemodus.",
     "maxItems": 20,
-    "status": "verified-only"
+    "status": "verified-only",
+    "sourceVariantLock": "Arabischer Wortlaut, Lautschrift und verlinkte Quelle müssen dieselbe Überlieferungsvariante abbilden."
   },
   "items": [
     {
@@ -131,12 +132,12 @@
       "title": "Vor dem Schlafen",
       "childPrompt": "Dieses Duʿāʾ sagte der Prophet ﷺ, wenn er sich zum Schlafen legte.",
       "arabic": "اللَّهُمَّ بِاسْمِكَ أَحْيَا وَأَمُوتُ",
-      "transliteration": "Allāhumma bismika aḥyā wa amūt.",
+      "transliteration": "Allāhumma bismika aḥyā wa-amūt.",
       "meaning": "O Allah, in Deinem Namen lebe ich und sterbe ich.",
-      "audioGermanText": "Dieses Duʿāʾ sagte der Prophet ﷺ, wenn er sich zum Schlafen legte. Die Bedeutung ist: O Allah, in Deinem Namen lebe ich und sterbe ich.",
+      "audioGermanText": "Dieses Duʿāʾ sagte der Prophet, wenn er sich zum Schlafen legte. Die Bedeutung ist: O Allah, in Deinem Namen lebe ich und sterbe ich.",
       "audioArabicText": "اللَّهُمَّ بِاسْمِكَ أَحْيَا وَأَمُوتُ",
       "source": "Ṣaḥīḥ al-Buḫārī, Nr. 7394",
-      "sourceUrl": "https://dorar.net/h/q5F8hPon",
+      "sourceUrl": "https://dorar.net/hadith/sharh/1656",
       "verification": "verified",
       "grade": "Ṣaḥīḥ",
       "quiz": {
@@ -151,7 +152,8 @@
             "correct": false
           }
         ]
-      }
+      },
+      "verificationNote": "Wortlaut exakt an Ṣaḥīḥ al-Buḫārī 7394 gebunden; nicht mit der Überlieferungsvariante »amūtu wa-aḥyā« vermischen."
     },
     {
       "id": "dua-wake",
@@ -168,7 +170,7 @@
       "audioGermanText": "Nach dem Aufwachen loben wir Allah. Die Bedeutung ist: Alles Lob gehört Allah, Der uns lebendig gemacht hat, nachdem Er uns sterben ließ; und zu Ihm ist die Auferstehung.",
       "audioArabicText": "الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ",
       "source": "Ṣaḥīḥ al-Buḫārī, Nr. 7394",
-      "sourceUrl": "https://dorar.net/h/q5F8hPon",
+      "sourceUrl": "https://dorar.net/hadith/sharh/1656",
       "verification": "verified",
       "grade": "Ṣaḥīḥ",
       "quiz": {
@@ -183,7 +185,8 @@
             "correct": false
           }
         ]
-      }
+      },
+      "verificationNote": "Wortlaut aus Ṣaḥīḥ al-Buḫārī 7394."
     },
     {
       "id": "dua-eating",
@@ -253,7 +256,8 @@
             "correct": false
           }
         ]
-      }
+      },
+      "sourceUrl": "https://dorar.net/h/9x453UuN"
     },
     {
       "id": "dua-toilet-enter",
@@ -284,7 +288,8 @@
             "correct": false
           }
         ]
-      }
+      },
+      "sourceUrl": "https://dorar.net/hadith/sharh/23650"
     },
     {
       "id": "dua-toilet-exit",
@@ -315,7 +320,8 @@
             "correct": false
           }
         ]
-      }
+      },
+      "sourceUrl": "https://dorar.net/h/QR1BIuc2"
     },
     {
       "id": "dua-leave-home",
@@ -346,7 +352,8 @@
             "correct": false
           }
         ]
-      }
+      },
+      "sourceUrl": "https://dorar.net/h/N9oQVlMF"
     },
     {
       "id": "dua-mosque-enter",
@@ -377,7 +384,8 @@
             "correct": false
           }
         ]
-      }
+      },
+      "sourceUrl": "https://dorar.net/h/GKFx5lgu"
     },
     {
       "id": "dua-mosque-exit",
@@ -408,7 +416,8 @@
             "correct": false
           }
         ]
-      }
+      },
+      "sourceUrl": "https://dorar.net/h/GKFx5lgu"
     },
     {
       "id": "dua-afiyah",
@@ -647,7 +656,7 @@
       "arabic": "يَا مُقَلِّبَ الْقُلُوبِ ثَبِّتْ قَلْبِي عَلَى دِينِكَ",
       "transliteration": "Yā Muqalliba l-qulūb, thabbit qalbī ʿalā dīnik.",
       "meaning": "O Wender der Herzen, festige mein Herz auf Deiner Religion.",
-      "audioGermanText": "Der Prophet ﷺ bat Allah oft darum, sein Herz auf dem Dīn fest zu machen. Die Bedeutung ist: O Wender der Herzen, festige mein Herz auf Deiner Religion.",
+      "audioGermanText": "Der Prophet bat Allah oft darum, sein Herz auf dem Dīn fest zu machen. Die Bedeutung ist: O Wender der Herzen, festige mein Herz auf Deiner Religion.",
       "audioArabicText": "يَا مُقَلِّبَ الْقُلُوبِ ثَبِّتْ قَلْبِي عَلَى دِينِكَ",
       "source": "Jāmiʿ at-Tirmiḏī, Nr. 2140",
       "canonicalId": "dua-026-ya-muqallib",
@@ -665,7 +674,8 @@
             "correct": false
           }
         ]
-      }
+      },
+      "sourceUrl": "https://dorar.net/h/bPmrOs5k?osoul=1"
     },
     {
       "id": "dua-guidance-taqwa",
@@ -697,7 +707,8 @@
             "correct": false
           }
         ]
-      }
+      },
+      "sourceUrl": "https://dorar.net/hadith/sharh/66389"
     }
   ]
 }
