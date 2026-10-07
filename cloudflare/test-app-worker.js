@@ -322,20 +322,42 @@ async function finalizeDarTestHomeV1193(asset) {
     if (html.includes("</html>")) html = html.replace("</html>", hadithFinal + "</html>");
     else html += hadithFinal;
   }
+  // DAR_ADAPTIVE_FOLD_V1326
+  // Final test authority: real capacity-based Fold/iPad shell. These imports are
+  // layout-only and load after legacy route styles so fixed 1400px rules cannot win.
+  if (!html.includes('id="darAdaptiveFoldAuthorityV1326"')) {
+    const adaptiveFoldStyle =
+      '<style id="darAdaptiveFoldAuthorityV1326">' +
+      '@import url("/assets/adaptive-layout.css?v=1326-capacity-fold");' +
+      '@import url("/assets/fold-split.css?v=1326-capacity-fold");' +
+      '@import url("/test/assets/fold-thumb-nav.css?v=1326-capacity-fold");' +
+      '</style>';
+    if (html.includes("</html>")) html = html.replace("</html>", adaptiveFoldStyle + "</html>");
+    else html += adaptiveFoldStyle;
+  }
+  if (!html.includes('id="darAdaptiveFoldScriptsV1326"')) {
+    const adaptiveFoldScripts =
+      '<script id="darAdaptiveFoldScriptsV1326" src="/assets/adaptive-layout.js?v=1326-capacity-fold"><\/script>' +
+      '<script src="/assets/fold-split.js?v=1326-capacity-fold"><\/script>';
+    if (html.includes("</body>")) html = html.replace("</body>", adaptiveFoldScripts + "</body>");
+    else if (html.includes("</html>")) html = html.replace("</html>", adaptiveFoldScripts + "</html>");
+    else html += adaptiveFoldScripts;
+  }
+
   // DAR_ADAPTIVE_NAV_V1325
-  html = html.replace(/fold-thumb-nav\.css(?:\?v=[^"']*)?/g, "fold-thumb-nav.css?v=1325-adaptive-nav");
-  html = html.replace(/fold-thumb-nav\.js(?:\?v=[^"']*)?/g, "fold-thumb-nav.js?v=1325-adaptive-nav");
+  html = html.replace(/fold-thumb-nav\.css(?:\?v=[^"']*)?/g, "fold-thumb-nav.css?v=1326-capacity-fold");
+  html = html.replace(/fold-thumb-nav\.js(?:\?v=[^"']*)?/g, "fold-thumb-nav.js?v=1326-capacity-fold");
   // Test-only foundation for user-selectable bottom/left/right navigation.
   // Loaded as a final authority so legacy bottom-nav CSS cannot override side placement.
-  if (!html.includes("fold-thumb-nav.css")) {
+  if (!html.includes("fold-thumb-nav.css?v=1326-capacity-fold")) {
     const adaptiveNavStyle =
-      '<style id="darAdaptiveNavStyleV1325">@import url("/test/assets/fold-thumb-nav.css?v=1325-adaptive-nav");</style>';
+      '<style id="darAdaptiveNavStyleV1325">@import url("/test/assets/fold-thumb-nav.css?v=1326-capacity-fold");</style>';
     if (html.includes("</html>")) html = html.replace("</html>", adaptiveNavStyle + "</html>");
     else html += adaptiveNavStyle;
   }
-  if (!html.includes("fold-thumb-nav.js")) {
+  if (!html.includes("fold-thumb-nav.js?v=1326-capacity-fold")) {
     const adaptiveNavScript =
-      '<script id="darAdaptiveNavScriptV1325" src="/test/assets/fold-thumb-nav.js?v=1325-adaptive-nav"><\/script>';
+      '<script id="darAdaptiveNavScriptV1325" src="/test/assets/fold-thumb-nav.js?v=1326-capacity-fold"><\/script>';
     if (html.includes("</body>")) html = html.replace("</body>", adaptiveNavScript + "</body>");
     else if (html.includes("</html>")) html = html.replace("</html>", adaptiveNavScript + "</html>");
     else html += adaptiveNavScript;
