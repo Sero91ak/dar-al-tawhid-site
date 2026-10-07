@@ -1,0 +1,212 @@
+name: Import generated Kids Dua audio
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/kids-dua-import-generated.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-dua-generated-audio-import
+  cancel-in-progress: false
+
+jobs:
+  import-audio:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Install audio tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg >/dev/null
+
+      - name: Download, encode and build permanent Dua manifests
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from __future__ import annotations
+          import hashlib, json, pathlib, subprocess, time, urllib.request
+
+          ROOT=pathlib.Path(".")
+          MAP=ROOT/".github/dua-audio-import-map.json"
+          DATA=ROOT/"kids/data/dua-kids.json"
+          OLD=ROOT/"kids/data/dua-audio.json"
+          DE_MANIFEST=ROOT/"kids/data/dua-audio.json"
+          AR_MANIFEST=ROOT/"kids/data/dua-arabic-audio.json"
+          DE_DIR=ROOT/"kids/assets/kids-dua-audio/v4-20261007"
+          AR_DIR=ROOT/"kids/assets/kids-dua-arabic-audio/v4-20261007"
+          DE_DIR.mkdir(parents=True,exist_ok=True)
+          AR_DIR.mkdir(parents=True,exist_ok=True)
+
+          mapping=json.loads(MAP.read_text(encoding="utf-8"))
+          rows=mapping.get("entries") or []
+          if len(rows)!=29:
+              raise SystemExit(f"Expected 29 generated audio rows, got {len(rows)}")
+          if len({r.get("key") for r in rows})!=29:
+              raise SystemExit("Generated audio map has duplicate keys")
+
+          dua=json.loads(DATA.read_text(encoding="utf-8"))
+          items=dua.get("items") or []
+          if len(items)!=20:
+              raise SystemExit(f"Expected exactly 20 Kids Duas, got {len(items)}")
+          by_id={d["id"]:d for d in items}
+          if len(by_id)!=20:
+              raise SystemExit("Duplicate Kids Dua ids")
+
+          old={"entries":{}}
+          if OLD.exists():
+              try: old=json.loads(OLD.read_text(encoding="utf-8"))
+              except Exception: pass
+
+          de_entries={}
+          ar_entries={}
+          build_id="kids-dua-v4-20261007-"+time.strftime("%H%M%S",time.gmtime())
+          now=time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime())
+
+          def probe(path:pathlib.Path)->float:
+              out=subprocess.check_output([
+                  "ffprobe","-v","error","-show_entries","format=duration",
+                  "-of","default=nw=1:nk=1",str(path)
+              ],text=True).strip()
+              return float(out)
+
+          def fetch(row, target:pathlib.Path):
+              req=urllib.request.Request(
+                  row["url"],
+                  headers={"User-Agent":"DAR-Kids-Dua-Importer/1"}
+              )
+              tmp=pathlib.Path("/tmp")/(target.stem+".mp3")
+              with urllib.request.urlopen(req,timeout=180) as resp:
+                  body=resp.read()
+              if len(body)<900:
+                  raise RuntimeError(f"Downloaded audio too small for {row['key']}: {len(body)} bytes")
+              tmp.write_bytes(body)
+              subprocess.run([
+                  "ffmpeg","-hide_banner","-loglevel","error","-y",
+                  "-i",str(tmp),"-ac","1","-ar","48000",
+                  "-c:a","aac","-b:a","64k","-movflags","+faststart",str(target)
+              ],check=True)
+              if target.stat().st_size<1200:
+                  raise RuntimeError("Encoded audio too small: "+str(target))
+              return probe(target)
+
+          for n,row in enumerate(rows,1):
+              key=str(row.get("key") or "")
+              if ":" not in key:
+                  raise RuntimeError("Invalid map key: "+key)
+              dua_id,lang=key.rsplit(":",1)
+              d=by_id.get(dua_id)
+              if not d:
+                  raise RuntimeError("Unknown Dua id: "+dua_id)
+              if lang=="de":
+                  text=" ".join(str(d.get("audioGermanText") or "").split()).strip()
+                  target=DE_DIR/(dua_id+".m4a")
+                  folder="kids-dua-audio/v4-20261007"
+              elif lang=="ar":
+                  if str(d.get("type") or "")!="sunnah":
+                      raise RuntimeError("Synthetic Arabic is allowed only for Sunnah Dua: "+dua_id)
+                  text=" ".join(str(d.get("audioArabicText") or d.get("arabic") or "").split()).strip()
+                  target=AR_DIR/(dua_id+".m4a")
+                  folder="kids-dua-arabic-audio/v4-20261007"
+              else:
+                  raise RuntimeError("Unknown language: "+lang)
+              if not text:
+                  raise RuntimeError("Empty spoken text: "+key)
+              dur=fetch(row,target)
+              entry={
+                  "url":f"/kids/assets/{folder}/{dua_id}.m4a?v={build_id}",
+                  "sha256":hashlib.sha256(target.read_bytes()).hexdigest(),
+                  "durationSeconds":round(dur,3),
+                  "synthesisRevision":"kids-dua-eleven-v4-20261007",
+                  "modelId":"eleven_v4",
+                  "voiceProfileId":"serhat-owner-voice-2026",
+                  "sourceVoice":"authorized-owner-voice",
+                  "sourceType":"owner-voice-generated",
+                  "sourceProvider":"ElevenLabs",
+                  "sourceSpeaker":"Serhat Abu Malik",
+                  "generationId":str(row.get("generation_id") or ""),
+                  "qaBy":"source-locked-generated-audio-import",
+                  "qaAt":now
+              }
+              if lang=="de": de_entries[text]=entry
+              else: ar_entries[text]=entry
+              print(f"[{n}/29] {key} · {dur:.2f}s")
+
+          # Keep the two existing feedback clips used by the quiz-style check.
+          for feedback in ("Richtig. Sehr gut.","Noch nicht. Hör die Erklärung noch einmal."):
+              entry=(old.get("entries") or {}).get(feedback)
+              if entry:
+                  local=str(entry.get("url") or "").split("?",1)[0]
+                  p=ROOT/local.lstrip("/")
+                  if p.exists() and p.stat().st_size>1200:
+                      de_entries[feedback]=entry
+
+          expected_de={
+              " ".join(str(d.get("audioGermanText") or "").split()).strip()
+              for d in items
+          }
+          expected_ar={
+              " ".join(str(d.get("audioArabicText") or d.get("arabic") or "").split()).strip()
+              for d in items if str(d.get("type") or "")=="sunnah"
+          }
+          if len(expected_de)!=20 or not expected_de.issubset(de_entries):
+              missing=sorted(expected_de-set(de_entries))
+              raise SystemExit(f"German Dua pack incomplete: {len(de_entries)} entries, missing={missing}")
+          if len(expected_ar)!=9 or set(ar_entries)!=expected_ar:
+              raise SystemExit(f"Arabic Sunnah Dua pack incomplete: {len(ar_entries)} entries")
+
+          de_manifest={
+              "schemaVersion":3,
+              "id":"KIDS_DUA_OWNER_VOICE_V4",
+              "buildId":build_id,
+              "updatedAt":now,
+              "modelId":"eleven_v4",
+              "voiceProfileId":"serhat-owner-voice-2026",
+              "speaker":"Serhat Abu Malik",
+              "manualPerClipApprovalRequired":False,
+              "technicalQaRequired":True,
+              "quranArabicSyntheticAllowed":False,
+              "entries":de_entries,
+              "counts":{"duaItems":20,"germanExplanationPrompts":20,"uniqueSpokenTexts":len(de_entries)}
+          }
+          ar_manifest={
+              "schemaVersion":1,
+              "id":"KIDS_DUA_ARABIC_OWNER_VOICE_V1",
+              "buildId":build_id,
+              "updatedAt":now,
+              "modelId":"eleven_v4",
+              "voiceProfileId":"serhat-owner-voice-2026",
+              "speaker":"Serhat Abu Malik",
+              "language":"ar",
+              "scope":"sunnah-dua-only",
+              "quranArabicSyntheticAllowed":False,
+              "entries":ar_entries,
+              "counts":{"sunnahDuaItems":9,"arabicPrompts":9,"uniqueSpokenTexts":9}
+          }
+          DE_MANIFEST.write_text(json.dumps(de_manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          AR_MANIFEST.write_text(json.dumps(ar_manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          print("Permanent Dua audio packs ready:",de_manifest["counts"],ar_manifest["counts"])
+          PY
+
+      - name: Commit permanent Kids Dua audio
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add kids/data/dua-audio.json kids/data/dua-arabic-audio.json kids/assets/kids-dua-audio/v4-20261007 kids/assets/kids-dua-arabic-audio/v4-20261007
+          if git diff --cached --quiet; then
+            echo "Nothing to import."
+            exit 0
+          fi
+          git commit -m "Kids: import permanent Eleven v4 Dua audio packs"
+          git pull --rebase origin main
+          git push origin HEAD:main
