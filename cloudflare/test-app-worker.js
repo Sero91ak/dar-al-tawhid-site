@@ -325,13 +325,13 @@ async function finalizeDarTestHomeV1193(asset) {
   // DAR_ADAPTIVE_NAV_V1325
   // Test-only foundation for user-selectable bottom/left/right navigation.
   // Loaded as a final authority so legacy bottom-nav CSS cannot override side placement.
-  if (!html.includes('id="darAdaptiveNavStyleV1325"')) {
+  if (!html.includes("fold-thumb-nav.css")) {
     const adaptiveNavStyle =
       '<style id="darAdaptiveNavStyleV1325">@import url("/test/assets/fold-thumb-nav.css?v=1325-adaptive-nav");</style>';
     if (html.includes("</html>")) html = html.replace("</html>", adaptiveNavStyle + "</html>");
     else html += adaptiveNavStyle;
   }
-  if (!html.includes('id="darAdaptiveNavScriptV1325"')) {
+  if (!html.includes("fold-thumb-nav.js")) {
     const adaptiveNavScript =
       '<script id="darAdaptiveNavScriptV1325" src="/test/assets/fold-thumb-nav.js?v=1325-adaptive-nav"><\/script>';
     if (html.includes("</body>")) html = html.replace("</body>", adaptiveNavScript + "</body>");
