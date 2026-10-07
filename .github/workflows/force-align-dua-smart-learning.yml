@@ -75,8 +75,28 @@ jobs:
 
           def post_alignment(audio_path:Path,text:str):
               raw=Path(tempfile.mkstemp(prefix="dua-align-",suffix=".json")[1])
+              if ADMIN_SECRET and VOICE_API:
+                  cmd=[
+                      "curl","-sS","-o",str(raw),"-w","%{http_code}",
+                      "-X","POST",VOICE_API+"/align-story",
+                      "-H","Origin: https://dar-al-tawhid.de",
+                      "-H","Referer: https://dar-al-tawhid.de/voice-studio/",
+                      "-H",f"X-Admin-Secret: {ADMIN_SECRET}",
+                      "-H","Accept: application/json",
+                      "-F",f"file=@{audio_path}",
+                      "--form-string",f"text={text}",
+                      "--form-string","detail=characters"
+                  ]
+                  code=subprocess.check_output(cmd,text=True).strip()
+                  if code=="200":
+                      d=json.loads(raw.read_text(encoding="utf-8"))
+                      chars=d.get("characters") or []
+                      joined="".join(str(x.get("text","")) for x in chars)
+                      if d.get("ok") and chars and nfc(joined)==nfc(text):
+                          return {"characters":chars,"words":d.get("words") or [],"loss":d.get("alignmentLoss")}
+
               if not API_KEY:
-                  raise SystemExit("Direct ElevenLabs key required for exact word-level character timestamps")
+                  raise SystemExit("Exact word-level character alignment unavailable")
               cmd=[
                   "curl","-sS","-o",str(raw),"-w","%{http_code}",
                   "-X","POST","https://api.elevenlabs.io/v1/forced-alignment",
