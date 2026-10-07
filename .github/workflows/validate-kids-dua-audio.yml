@@ -105,20 +105,36 @@ jobs:
           node <<'NODE'
           const fs=require("fs");
           const dua=JSON.parse(fs.readFileSync("kids/data/dua-kids.json","utf8"));
+          const de=JSON.parse(fs.readFileSync("kids/data/dua-audio.json","utf8"));
+          const ar=JSON.parse(fs.readFileSync("kids/data/dua-arabic-audio.json","utf8"));
+          const slow=JSON.parse(fs.readFileSync("kids/data/dua-arabic-slow-audio.json","utf8"));
+          const word=JSON.parse(fs.readFileSync("kids/data/dua-word-audio.json","utf8"));
+          const norm=s=>String(s||"").replace(/\s+/g," ").trim().normalize("NFD");
+          const idx=m=>new Map(Object.entries(m.entries||{}).map(([k,v])=>[norm(k),v]));
+          const deI=idx(de), arI=idx(ar), slowI=idx(slow), wordI=idx(word);
           const failures=[];
           for(const d of dua.items||[]){
+            const a=norm(d.audioArabicText||d.arabic||"");
+            const g=norm(d.audioGermanText||((d.childPrompt||"")+" "+(d.meaning||"")));
+            const arE=arI.get(a), slowE=slowI.get(a), deE=deI.get(g);
             if(!d.audioArabicUrl) failures.push(d.id+": audioArabicUrl");
+            else if(!arE||d.audioArabicUrl!==arE.url) failures.push(d.id+": stale/mismatched audioArabicUrl");
             if(!d.audioArabicSlowUrl) failures.push(d.id+": audioArabicSlowUrl");
+            else if(!slowE||d.audioArabicSlowUrl!==slowE.url) failures.push(d.id+": stale/mismatched audioArabicSlowUrl");
             if(!d.audioGermanUrl) failures.push(d.id+": audioGermanUrl");
+            else if(!deE||d.audioGermanUrl!==deE.url) failures.push(d.id+": stale/mismatched audioGermanUrl");
             for(const seg of d.learningSegments||[]){
+              const key=norm(seg.audioKey||seg.arabic||"");
+              const w=wordI.get(key);
               if(!seg.audioUrl) failures.push(d.id+": word "+(seg.arabic||seg.audioKey||""));
+              else if(!w||seg.audioUrl!==w.url) failures.push(d.id+": stale/mismatched word "+(seg.arabic||seg.audioKey||""));
             }
           }
           if((dua.items||[]).length!==120) failures.push("total != 120");
           if(Number(dua.counts?.directAudioReady)!==120) failures.push("directAudioReady != 120");
           if(Number(dua.counts?.directWordAudioReady)!==120) failures.push("directWordAudioReady != 120");
           if(failures.length) throw new Error(failures.slice(0,100).join("\n"));
-          console.log("DIRECT DUA AUDIO OK · 120/120 Arabic + slow + explanation + all word clips");
+          console.log("DIRECT DUA AUDIO OK · 120/120 URLs exactly match current Serhat V4 manifests");
           NODE
       - name: Verify runtime cache-bust wiring
         run: |
