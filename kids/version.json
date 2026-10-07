@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v139-home-stability1236",
-  "label": "KIDS · V1.08.60",
-  "releasedAt": "2026-10-07T18:20:00+02:00",
-  "note": "V1236 fixiert die Startseiten-Geometrie auf den beim ersten App-Start sichtbaren Hero-Zustand. Beim Wechsel zu Qurʾān, Duʿāʾ oder anderen Tabs und zurück bleibt die Position von DĀR AL TAWḤĪD, Kids, Begrüßung und Weiterhören unverändert. Die Kids-Ballonanimation wird bereits beim ersten Rendern und nach jeder Rückkehr zuverlässig gestartet.",
+  "buildId": "kids-shell-v140-content-flow1237",
+  "label": "KIDS · V1.08.61",
+  "releasedAt": "2026-10-07T18:25:00+02:00",
+  "note": "V1237 beseitigt globale Leerraum-Tails in DĀR AL TAWḤĪD Kids: jede Hauptansicht folgt ihrer realen Inhaltshöhe, die Shell besitzt allein die Bottom-Dock-Reserve, Duʿāʾ verliert den doppelten 170px/100dvh-Tail und Quiz reserviert Platz nur solange der feste Weiter-Button sichtbar ist.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1234",
+    "serviceWorkerCache": "v1237",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -767,7 +767,7 @@
     "homeHeroVisualStyle": "semi-realistic-cinematic-illustration-v1179",
     "homeHeroVideoSrc": "direct-video-src-v1180",
     "homeDeployPass": "compact-arched-cinema-v1181-final",
-    "navigationScrollPolicy": "main-tab-top-detail-return-position-v1182",
+    "navigationScrollPolicy": "main-tab-top-detail-return-position-v1237",
     "navigationGestureHistory": "edge-swipe-back-forward-v1182",
     "globalBottomScrollClearance": "single-shell-clearance-v1182",
     "ownerOriginalAudioPolicy": "preserve-uploaded-bytes-no-transcode",
@@ -1144,8 +1144,13 @@
       "boy": "/kids/assets/profile-avatars/boy-kufi-v1235.svg",
       "girl": "/kids/assets/profile-avatars/girl-hijab-pink-v1235.svg"
     },
-    "homeHeroState": "first-entry-geometry-locked-v1236"
+    "homeHeroState": "first-entry-geometry-locked-v1236",
+    "globalContentFlow": "adaptive-real-content-height-v1237",
+    "globalBottomClearance": "single-shell-reserve-v1237",
+    "globalMainViewBottomPadding": "zero-own-reserve-v1237",
+    "duaDetailTail": "auto-height-no-100dvh-no-double-reserve-v1237",
+    "quizBottomTail": "conditional-next-button-reserve-v1237"
   },
-  "updatedAt": "2026-10-07T18:20:00+02:00",
-  "deployTrigger": "2026-10-07T18:20:00+02:00"
+  "updatedAt": "2026-10-07T18:25:00+02:00",
+  "deployTrigger": "2026-10-07T18:25:00+02:00"
 }
