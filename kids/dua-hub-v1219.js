@@ -4,7 +4,7 @@
 (() => {
   "use strict";
 
-  const VERSION = 1239;
+  const VERSION = 1241;
   const DATA_URL = "/kids/data/dua-kids.json?v=1235";
   const PROFILE_KEY = "kids.profiles.v1";
   const ACTIVE_PROFILE_KEY = "kids.activeProfile";
@@ -519,6 +519,9 @@
 
     const audioReady = hasReadyAudio(d);
     const learnReady = canSmartLearn(d);
+    try {
+      if (window.DARDuaSmartLearn?.prepare) window.DARDuaSmartLearn.prepare(d).catch(() => {});
+    } catch (_) {}
     const listenButton = q("#duaHubListen");
     const learnButton = q("#duaHubLearn");
     const germanButton = q("#duaHubGerman");
@@ -626,13 +629,21 @@
     setLast(d.id);
     const smart = window.DARDuaSmartLearn;
     if (smart && typeof smart.playPreview === "function") {
-      Promise.resolve(smart.playPreview(d, 1))
-        .catch(() => {
-          if (window.DARKidsOwnerVoice?.play) {
-            window.DARKidsOwnerVoice.play(String(d.audioArabicText || d.arabic || ""), { source: "kids-dua-hub-serhat-fusha" });
-          }
-        })
-        .finally(() => setTimeout(() => button?.classList.remove("is-playing"), 650));
+      const fallback = () => {
+        if (window.DARKidsOwnerVoice?.play) {
+          window.DARKidsOwnerVoice.play(String(d.audioArabicText || d.arabic || ""), { source: "kids-dua-hub-serhat-fusha" });
+        }
+      };
+      try {
+        const started = smart.playPreview(d, 1);
+        Promise.resolve(started)
+          .then(ok => { if (ok === false) fallback(); })
+          .catch(fallback)
+          .finally(() => setTimeout(() => button?.classList.remove("is-playing"), 650));
+      } catch (_) {
+        fallback();
+        setTimeout(() => button?.classList.remove("is-playing"), 650);
+      }
       return;
     }
     if (window.DARKidsOwnerVoice?.play) {
@@ -644,7 +655,20 @@
     if (!d || !hasReadyAudio(d)) return;
     stopAudio();
     const text = String(d.audioGermanText || ((d.childPrompt || "") + " " + (d.meaning || ""))).replace(/\s+/g, " ").trim();
-    if (window.DARKidsOwnerVoice?.play) window.DARKidsOwnerVoice.play(text, { source: "kids-dua-hub-german" });
+    const smart = window.DARDuaSmartLearn;
+    const fallback = () => {
+      if (window.DARKidsOwnerVoice?.play) {
+        window.DARKidsOwnerVoice.play(text, { source: "kids-dua-hub-german" });
+      }
+    };
+    if (smart && typeof smart.playGerman === "function") {
+      try {
+        const started = smart.playGerman(d);
+        Promise.resolve(started).then(ok => { if (ok === false) fallback(); }).catch(fallback);
+      } catch (_) { fallback(); }
+      return;
+    }
+    fallback();
   }
 
   function bindView() {
