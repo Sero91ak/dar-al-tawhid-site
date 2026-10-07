@@ -316,6 +316,31 @@
     return match ? parseInt(match[1], 10) : 0;
   }
 
+  function autoApplyRemoteBuild(remoteBuildId) {
+    if (isTest || !navigator.onLine) return false;
+    var id = String(remoteBuildId || "").trim();
+    if (!id) return false;
+    var key = "dar_live_auto_apply_v1";
+    var tries = 0;
+    try {
+      var saved = JSON.parse(sessionStorage.getItem(key) || "{}");
+      tries = String(saved.buildId || "") === id ? Number(saved.tries || 0) : 0;
+      if (tries >= 2) return false;
+      sessionStorage.setItem(key, JSON.stringify({ buildId: id, tries: tries + 1, at: Date.now() }));
+    } catch (e) {}
+    window.__darRemoteBuildId = id;
+    setTimeout(function () {
+      try {
+        if (typeof window.hardRefreshApp === "function") {
+          window.hardRefreshApp();
+          return;
+        }
+      } catch (e) {}
+      try { location.reload(); } catch (e) {}
+    }, 450);
+    return true;
+  }
+
   function runVersionCheck() {
     var local = String(window.__DAR_EXPECTED_BUILD || "").trim();
     if (!local) return;
@@ -327,7 +352,10 @@
       .then(function (remote) {
         if (!remote || !remote.buildId) return;
         var remoteBuildId = String(remote.buildId);
-        if (remoteBuildId === local) return;
+        if (remoteBuildId === local) {
+          try { sessionStorage.removeItem("dar_live_auto_apply_v1"); } catch (e) {}
+          return;
+        }
         var localNum = parseShellBuildNum(local);
         var remoteNum = parseShellBuildNum(remoteBuildId);
         if (localNum > remoteNum) return;
@@ -369,6 +397,7 @@
           if (String(stuck.buildId) === remoteBuildId && (Number(stuck.tries) || 0) >= 3) return;
         } catch (e) {}
         window.__darRemoteBuildId = remoteBuildId;
+        if (!isTest && remoteNum > localNum && autoApplyRemoteBuild(remoteBuildId)) return;
         if (typeof window.DAR_AUTO_REFRESH === "object" && typeof window.DAR_AUTO_REFRESH.check === "function") {
           try { window.dispatchEvent(new CustomEvent("dar:version-mismatch", { detail: { buildId: remoteBuildId, localBuildId: local } })); } catch (e) {}
           return;
