@@ -2,7 +2,7 @@
   "buildId": "kids-shell-v136-dua-final1233",
   "label": "KIDS · V1.08.57",
   "releasedAt": "2026-10-07T15:57:00+02:00",
-  "note": "V1233 finalisiert den Duʿāʾ-Bereich: echter Edge-to-Edge-Hero ohne zusätzliches Branding/Profilbild, volle Widescreen-Kapseln, größere kindgerechte Typografie, 3 Bildvarianten pro Kernkategorie, kompaktere Detailansicht, größerer Arabisch-/Lautschrift-/Deutsch-Lesemodus und Smart-Lernen ohne Shell-/Nav-Lock.",
+  "note": "V1233 Kids Quiz Lernzentrum finalisiert: 900 Fragen bleiben exakt 300/300/300. Das Quiz übernimmt die Altersstufe ausschließlich aus den Kids-Einstellungen; eine zweite Altersauswahl im Quiz ist entfernt. Die Quiz-Startseite zeigt Lernfortschritt, sicher gelernte und bearbeitete Fragen, Fehler, Direkt-gewusst-Quote, fällige Wiederholungen, Fehlerwiederholung, zuletzt bearbeitete Runde mit Weiterlernen sowie frei wählbare Themen wie Adab und Aḫlāq. Die Rundenansicht ist Edge-to-Edge verdichtet; der Weiter-Button bleibt auf Mobilgeräten nach richtiger Antwort fest sichtbar. Quiz-Katalog, JS und CSS werden network-first ausgeliefert, damit kein alter 650er/Alterswahl-Cache zurückkehrt.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -739,7 +739,7 @@
     "alphabetRuntimeRemoved": true,
     "alphabetArchivedAssetsRetained": true,
     "homeHeroBrand": "rounded-gold-kids-family-v1215",
-    "homeQuizVisible": false,
+    "homeQuizVisible": true,
     "homeDailyJourneyVisible": false,
     "homeKnowledgeCardVisible": false,
     "homeHeroArtwork": "/kids/assets/kids-home-v1179/hero-poster.png",
@@ -1083,25 +1083,26 @@
     "homeBrandBackgroundBaked": false,
     "homeBrandIntrinsicSize": "1148x214",
     "homeBrandRender": "transparent-no-box-no-filter",
-    "kidsQuizAgeSelection": "settings-only-v1",
+    "kidsQuizAgeSelection": "settings-only-final",
     "kidsQuizInlineAgePicker": false,
     "kidsQuizLibraryCountSync": "v8",
     "kidsQuizAgeSource": "profile-settings-only",
     "kidsQuizInQuizAgePicker": false,
-    "kidsQuizLearningDashboard": "v4",
+    "kidsQuizLearningDashboard": "v5",
     "kidsQuizStatistics": [
       "secure",
       "seen",
       "wrong",
       "firstTryRate",
       "due",
-      "mistakeQuestions"
+      "mistakeQuestions",
+      "learning"
     ],
     "kidsQuizResumeSession": true,
     "kidsQuizTopicRounds": true,
     "kidsQuizMistakeReview": true,
     "kidsQuizDueReview": true,
-    "kidsQuizStickyNext": true,
+    "kidsQuizStickyNext": "fixed-mobile-v5",
     "kidsQuizEdgeToEdge": true,
     "duaPalette": "night-teal-navy-antique-gold",
     "duaHero": "full-viewport-no-brand-no-profile",
@@ -1126,8 +1127,9 @@
     "duaDetailHero": "full-bleed-21x9-per-dua-scene",
     "duaDetailTypography": "large-age-adaptive-v1233",
     "duaDetailFlow": "hero-title-overlay-actions-text-source-inline",
-    "duaBackground": "global-app-background-no-detached-panel"
+    "duaBackground": "global-app-background-no-detached-panel",
+    "kidsQuizRuntimeAssets": "v9-network-first"
   },
-  "updatedAt": "2026-10-07T15:00:00+02:00",
-  "deployTrigger": "2026-10-07T15:00:00+02:00"
+  "updatedAt": "2026-10-07T16:44:00+02:00",
+  "deployTrigger": "2026-10-07T16:44:00+02:00"
 }
