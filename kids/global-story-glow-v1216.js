@@ -35,7 +35,7 @@ document.addEventListener("click",e=>{if(e.detail===0)fromEvent(e)},true);
 window.DARKidsStoryGlow=Object.freeze({version:1217,glow});
 })();
 
-/* DU'A HUB LOADER v1238 — use the direct shell includes when present; inject only as a fallback. */
+/* DU'A HUB LOADER v1239 — use the direct shell includes when present; inject only as a fallback. */
 (() => {
   "use strict";
   function ensureDuaHub(){
@@ -43,13 +43,13 @@ window.DARKidsStoryGlow=Object.freeze({version:1217,glow});
       const link=document.createElement("link");
       link.rel="stylesheet";
       link.href="/kids/dua-hub-v1219.css?v=1238";
-      link.dataset.kidsDuaHub="1238";
+      link.dataset.kidsDuaHub="1239";
       document.head.appendChild(link);
     }
     if (!document.querySelector('script[src*="/kids/dua-hub-v1219.js"]')) {
       const script=document.createElement("script");
       script.src="/kids/dua-hub-v1219.js?v=1238";
-      script.dataset.kidsDuaHub="1238";
+      script.dataset.kidsDuaHub="1239";
       script.defer=true;
       (document.body||document.documentElement).appendChild(script);
     }
