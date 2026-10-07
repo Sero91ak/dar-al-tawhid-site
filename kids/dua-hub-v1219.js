@@ -4,8 +4,8 @@
 (() => {
   "use strict";
 
-  const VERSION = 1234;
-  const DATA_URL = "/kids/data/dua-kids.json?v=1234";
+  const VERSION = 1235;
+  const DATA_URL = "/kids/data/dua-kids.json?v=1235";
   const PROFILE_KEY = "kids.profiles.v1";
   const ACTIVE_PROFILE_KEY = "kids.activeProfile";
   const LAST_KEY = "kids.duaHub.last.v1";
@@ -195,27 +195,17 @@
     return artAsset(categoryOf(d), d && d.id);
   }
 
+  const PROFILE_AVATAR_ASSETS = Object.freeze({
+    boy: "/kids/assets/profile-avatars/boy-kufi-v1235.svg",
+    girl: "/kids/assets/profile-avatars/girl-hijab-pink-v1235.svg"
+  });
+
   function avatarSvg(gender, className) {
-    const girl = gender === "girl";
-    const uid = "av" + Math.random().toString(36).slice(2, 8);
-    return '<span class="kids-profile-avatar ' + (className || "") + '" data-avatar="' + (girl ? "girl" : "boy") + '" aria-hidden="true">' +
-      '<svg viewBox="0 0 96 96" focusable="false">' +
-      '<defs>' +
-      '<radialGradient id="' + uid + 'skin" cx="44%" cy="30%" r="70%"><stop offset="0" stop-color="#ffe3c7"/><stop offset=".72" stop-color="#dca879"/><stop offset="1" stop-color="#b77b54"/></radialGradient>' +
-      '<linearGradient id="' + uid + 'navy" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#173a66"/><stop offset="1" stop-color="#071d38"/></linearGradient>' +
-      '<linearGradient id="' + uid + 'gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff0b6"/><stop offset=".5" stop-color="#d8a944"/><stop offset="1" stop-color="#8b5b16"/></linearGradient>' +
-      '</defs>' +
-      '<circle cx="48" cy="48" r="45" fill="url(#' + uid + 'navy)" stroke="url(#' + uid + 'gold)" stroke-width="3"/>' +
-      (girl
-        ? '<path d="M22 71c1-25 5-48 26-52 21 4 25 27 26 52-8 10-18 15-26 15S30 81 22 71z" fill="#d9b068"/><path d="M27 68c2-23 7-42 21-45 14 3 19 22 21 45-6 8-13 12-21 12s-15-4-21-12z" fill="#efe0bd"/>'
-        : '<path d="M24 35c3-16 12-24 24-24s21 8 24 24c-8-5-16-7-24-7s-16 2-24 7z" fill="#f7f0dd" stroke="#d7b76f" stroke-width="1.5"/><path d="M28 31c6-5 13-7 20-7 8 0 15 2 21 7" fill="none" stroke="#b99756" stroke-width="1.5"/>') +
-      '<ellipse cx="48" cy="51" rx="22" ry="24" fill="url(#' + uid + 'skin)"/>' +
-      '<ellipse cx="39" cy="49" rx="3.7" ry="5" fill="#1d1a19"/><ellipse cx="57" cy="49" rx="3.7" ry="5" fill="#1d1a19"/>' +
-      '<circle cx="40" cy="47.5" r="1.2" fill="#fff"/><circle cx="58" cy="47.5" r="1.2" fill="#fff"/>' +
-      '<path d="M41 61c4 3 10 3 14 0" fill="none" stroke="#8b4d42" stroke-width="2.2" stroke-linecap="round"/>' +
-      '<circle cx="31" cy="57" r="3" fill="#e59b8b" opacity=".35"/><circle cx="65" cy="57" r="3" fill="#e59b8b" opacity=".35"/>' +
-      '<path d="M29 83c4-11 11-16 19-16 9 0 16 5 20 16" fill="' + (girl ? "#d4ad64" : "#f3ead2") + '"/>' +
-      '</svg></span>';
+    const key = gender === "girl" ? "girl" : "boy";
+    return '<span class="kids-profile-avatar ' + (className || "") + '" data-avatar="' + key + '" aria-hidden="true">' +
+      '<img src="' + PROFILE_AVATAR_ASSETS[key] + '" alt="" decoding="async" loading="eager" ' +
+      'style="display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 5px 7px rgba(17,43,72,.16))">' +
+      '</span>';
   }
 
   function profileDisplayName() {
