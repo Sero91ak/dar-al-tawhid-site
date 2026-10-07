@@ -20,6 +20,7 @@ APP_HOME=Path(os.environ.get("DAR_VOICE_APP_HOME",str(Path.home()/"Applications"
 PRON=APP_HOME/"pronunciation-rules.json"
 PROFILE=APP_HOME/"voice-production-profile.json"
 PLS_MASTER=APP_HOME/"DAR_AL_TAWHID_ElevenLabs_Aussprache_MAX_MASTER.pls"
+EXPANDED_LEXICON=APP_HOME/"islamic-expanded-lexicon.json"
 VOICE_HOME=Path.home()/"SerhatVoice"
 
 def first_existing(paths):
@@ -50,7 +51,7 @@ try:
     PORT=int(os.environ.get("DAR_VOICE_PORT",os.environ.get("PORT","8787")) or 8787)
 except Exception:
     PORT=8787
-ENGINE_VERSION="2.9.120"
+ENGINE_VERSION="2.9.121"
 
 def version_tuple(value):
     parts=[]
@@ -517,6 +518,39 @@ VOICE_PROFILE=json.load(PROFILE.open(encoding="utf-8"))
 _BASE_RULES=list(BASE_LIB.get("rules",[]))
 MAX_MASTER_PLS_RULES=load_max_master_pls(PLS_MASTER)
 
+def build_expanded_lexicon_rules(path:Path):
+    """Großes kuratiertes Islam-/Fuṣḥā-/Qurʾān-Lexikon als MASTER-Regeln laden."""
+    data=load_json_file(path,{"entries":[]})
+    out=[];seen=set()
+    for raw in list((data or {}).get("entries") or []):
+        item=dict(raw or {})
+        canonical=str(item.get("canonical") or "").strip()
+        tts=str(item.get("tts_text") or item.get("arabic") or "").strip()
+        if not canonical or not tts:
+            continue
+        forms=[canonical]+[str(x or "").strip() for x in (item.get("aliases") or []) if str(x or "").strip()]
+        for form in forms:
+            norm=normalize_lookup(form)
+            if not norm or norm in seen:
+                continue
+            seen.add(norm)
+            out.append({
+                "category":str(item.get("category") or "EXPANDED ISLAMIC LEXICON"),
+                "canonical":canonical,
+                "string_to_replace":form,
+                "alias":canonical,
+                "tts_text":tts,
+                "tts_language":"ar" if re.search(r"[\u0600-\u06ff]",tts) else "de",
+                "tts_strategy":"expanded-islamic-lexicon-v1",
+                "voice_lock":"MASTER",
+                "qa_tier":"installed-curated",
+                "source":"islamic-expanded-lexicon.json",
+                "trusted_seed":True,
+                "requires_boundary":True,
+            })
+    print(f"[DĀR Voice] erweitertes Islam-Lexikon geladen: {len(out)} Formen.",flush=True)
+    return out
+
 def build_profile_component_rules(profile):
     """Explizite sichere Teilformen aus bekannten Phrasen als echte Regeln laden.
 
@@ -634,6 +668,7 @@ def derive_max_master_component_rules(rules,blocked_norms=None):
     return out
 
 PROFILE_COMPONENT_RULES=build_profile_component_rules(VOICE_PROFILE)
+EXPANDED_LEXICON_RULES=build_expanded_lexicon_rules(EXPANDED_LEXICON)
 
 _BASE_RULE_NORMS={
     normalize_lookup(str(r.get("string_to_replace","")).strip())
@@ -645,9 +680,14 @@ _PROFILE_COMPONENT_NORMS={
     for r in PROFILE_COMPONENT_RULES
     if str(r.get("string_to_replace","")).strip()
 }
+_EXPANDED_LEXICON_NORMS={
+    normalize_lookup(str(r.get("string_to_replace","")).strip())
+    for r in EXPANDED_LEXICON_RULES
+    if str(r.get("string_to_replace","")).strip()
+}
 MAX_MASTER_COMPONENT_RULES=derive_max_master_component_rules(
     MAX_MASTER_PLS_RULES,
-    _BASE_RULE_NORMS|_PROFILE_COMPONENT_NORMS,
+    _BASE_RULE_NORMS|_PROFILE_COMPONENT_NORMS|_EXPANDED_LEXICON_NORMS,
 )
 _BASE_RULE_EXACT={
     str(r.get("string_to_replace","")).strip()
@@ -658,8 +698,9 @@ MAX_MASTER_PLS_FALLBACK_RULES=[
     r for r in MAX_MASTER_PLS_RULES
     if str(r.get("string_to_replace","")).strip() not in _BASE_RULE_EXACT
     and normalize_lookup(str(r.get("string_to_replace","")).strip()) not in _PROFILE_COMPONENT_NORMS
+    and normalize_lookup(str(r.get("string_to_replace","")).strip()) not in _EXPANDED_LEXICON_NORMS
 ]
-BASE_RULES=_BASE_RULES+PROFILE_COMPONENT_RULES+MAX_MASTER_COMPONENT_RULES+MAX_MASTER_PLS_FALLBACK_RULES
+BASE_RULES=_BASE_RULES+PROFILE_COMPONENT_RULES+EXPANDED_LEXICON_RULES+MAX_MASTER_COMPONENT_RULES+MAX_MASTER_PLS_FALLBACK_RULES
 
 def load_persistent_user_overrides():
     primary=load_json_file(USER_OVERRIDES_FILE,{"schemaVersion":1,"rules":[]})
@@ -921,6 +962,7 @@ def rebuild_runtime_rules():
     counts["maxMasterPlsRules"]=len(MAX_MASTER_PLS_RULES)
     counts["maxMasterPlsFallbackRules"]=len(MAX_MASTER_PLS_FALLBACK_RULES)
     counts["profileComponentRules"]=len(PROFILE_COMPONENT_RULES)
+    counts["expandedLexiconRules"]=len(EXPANDED_LEXICON_RULES)
     counts["maxMasterComponentRules"]=len(MAX_MASTER_COMPONENT_RULES)
     counts["knownRuleAliases"]=len(KNOWN_RULE_ALIAS_INDEX)
     counts["masterEntries"]=len(MASTER_ENTRIES)

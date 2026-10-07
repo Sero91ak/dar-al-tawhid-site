@@ -1,3 +1,5 @@
+import { DAR_ISLAMIC_EXPANDED_LEXICON } from "./pronunciation-lexicon.js";
+
 export function elevenKey(env) {
   let key = String(env.ELEVENLABS_API_KEY || env.ELEVEN_API_KEY || "").trim();
   // Paste-Fehler: Anführungszeichen, Bearer/xi-api-key-Prefix, Whitespace/Zeilenumbrüche
@@ -84,6 +86,56 @@ function decodeBase64Bytes(value) {
   return bytes;
 }
 
+
+const DAR_VOICE_BOUNDARY_CLASS = String.raw`\s.,،;؛:!?؟…·()\[\]{}«»"'“”„‘’—–`;
+let _darVoicePronunciationMatchers = null;
+
+function escapeRegExp(value) {
+  return String(value || "").replace(/[\\^$.*+?()[\]{}|]/g, "\\export async function synthesizeDarVoice(env, text, options = {}) {");
+}
+
+function darVoicePronunciationMatchers() {
+  if (_darVoicePronunciationMatchers) return _darVoicePronunciationMatchers;
+  const rows = [];
+  for (const entry of DAR_ISLAMIC_EXPANDED_LEXICON || []) {
+    const spoken = String(entry?.tts_text || entry?.arabic || "").trim();
+    if (!spoken) continue;
+    const forms = [entry?.canonical, ...(entry?.aliases || [])]
+      .map((x) => String(x || "").trim())
+      .filter(Boolean);
+    for (const form of forms) {
+      if (form.length < 2) continue;
+      rows.push({ form, spoken });
+    }
+  }
+  rows.sort((a, b) => b.form.length - a.form.length);
+  const seen = new Set();
+  _darVoicePronunciationMatchers = rows.filter((row) => {
+    const key = row.form.toLocaleLowerCase("de-DE");
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  }).map((row) => ({
+    ...row,
+    re: new RegExp(
+      "(^|[" + DAR_VOICE_BOUNDARY_CLASS + "])(" + escapeRegExp(row.form) + ")(?=$|[" + DAR_VOICE_BOUNDARY_CLASS + "])",
+      "giu"
+    )
+  }));
+  return _darVoicePronunciationMatchers;
+}
+
+export function prepareDarVoicePronunciation(text) {
+  let value = String(text || "");
+  value = value
+    .replaceAll("ﷺ", "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ")
+    .replaceAll("ﷻ", "سُبْحَانَهُ وَتَعَالَى");
+  for (const row of darVoicePronunciationMatchers()) {
+    value = value.replace(row.re, (_, lead) => String(lead || "") + row.spoken);
+  }
+  return value;
+}
+
 export async function synthesizeDarVoice(env, text, options = {}) {
   const key = elevenKey(env);
   const voiceId = darVoiceId(env);
@@ -140,18 +192,18 @@ export async function synthesizeDarVoice(env, text, options = {}) {
             }
           : profile === "quiz"
             ? {
-                stability: 0.58,
-                similarity_boost: 0.88,
-                style: 0.18,
-                speed: 0.97,
+                stability: 0.64,
+                similarity_boost: 0.89,
+                style: 0.14,
+                speed: 0.95,
                 use_speaker_boost: true
               }
             : profile === "dua"
               ? {
-                  stability: 0.80,
-                  similarity_boost: 0.89,
-                  style: 0.04,
-                  speed: 0.86,
+                  stability: 0.76,
+                  similarity_boost: 0.90,
+                  style: 0.05,
+                  speed: 0.89,
                   use_speaker_boost: true
                 }
               : profile === "gentle"
@@ -196,12 +248,14 @@ export async function synthesizeDarVoice(env, text, options = {}) {
     env.DAR_VOICE_PRONUNCIATION_DICTIONARY_VERSION_ID ||
     ""
   ).trim();
+  const dictionaryReady = Boolean(dictionaryId && dictionaryVersionId);
+  const ttsScript = dictionaryReady || withTimings ? script : prepareDarVoicePronunciation(script);
   const body = {
-    text: script,
+    text: ttsScript,
     model_id: String(env.ELEVENLABS_MODEL_ID || "eleven_multilingual_v2"),
     voice_settings: voiceSettings
   };
-  if (dictionaryId && dictionaryVersionId) {
+  if (dictionaryReady) {
     body.pronunciation_dictionary_locators = [{
       pronunciation_dictionary_id: dictionaryId,
       version_id: dictionaryVersionId

@@ -256,9 +256,9 @@ export async function handleVoiceStudioWebRequest(request, env, cors) {
   if (request.method === "GET" && rest === "/mobile-release") {
     return json({
       ok: true,
-      version: "2.9.120",
-      cache: "dar-voice-studio-v88",
-      installUrl: "https://dar-al-tawhid.de/voice-studio/mobile.html?app=1&cloud=1&v=29119",
+      version: "2.9.121",
+      cache: "dar-voice-studio-v90",
+      installUrl: "https://dar-al-tawhid.de/voice-studio/mobile.html?app=1&cloud=1&v=29121",
       serviceWorker: "/voice-studio/sw-v11.js",
       forceRefresh: true,
       localEngineRequired: false
@@ -275,7 +275,7 @@ export async function handleVoiceStudioWebRequest(request, env, cors) {
       provider: gpu.configured ? "DĀR Voice Remote GPU" : (elevenConfigured ? "ElevenLabs Cloud" : "Cloud Voice nicht konfiguriert"),
       voiceConfigured: configured,
       elevenLabsConfigured: elevenConfigured,
-      mobileCloudRevision: "2.9.120",
+      mobileCloudRevision: "2.9.121",
       remoteGpu: gpu,
       localEngineRequired: false,
       output: gpu.configured ? "engine-native" : "audio/mpeg",

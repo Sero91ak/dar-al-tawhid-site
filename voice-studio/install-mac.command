@@ -262,12 +262,13 @@ download_repo_file "data/pronunciation/story-reference-idris-2026-10-04.json" "$
 download_repo_file "data/pronunciation/DAR_AL_TAWHID_ElevenLabs_Aussprache_MAX_MASTER.pls" "$STAGE/DAR_AL_TAWHID_ElevenLabs_Aussprache_MAX_MASTER.pls"
 download_repo_file "data/pronunciation/voice-production-profile.json" "$STAGE/voice-production-profile.json"
 download_repo_file "data/pronunciation/islamic-master-library.json" "$STAGE/islamic-master-library.json"
+download_repo_file "data/pronunciation/islamic-expanded-lexicon.json" "$STAGE/islamic-expanded-lexicon.json"
 download_repo_file "data/pronunciation/voice-regression-fixtures.json" "$STAGE/voice-regression-fixtures.json"
 download_repo_file "scripts/voice-studio/validate-v2.py" "$STAGE/validate-v2.py"
 download_optional_repo_file "watermark-my-logo-full.png" "$STAGE/watermark-my-logo-full.png"
 download_optional_repo_file "app-icon-512.png" "$STAGE/app-icon-512.png"
 
-for required in local-engine.py speech_flow.py studio.html mobile.html content-studio.js mubashshirun-pack.js alphabet-audio-studio.js alphabet-audio.json quiz-kids.json quiz-audio.json owner-voice-audio.json dua-kids.json stories-authentic.json short-stories-voice.json verified-content.json kids-content-index.json prophet-stories.json mubashshirun-stories.json VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json story-reference-muhammad-2026-10-04.json story-reference-adam-2026-10-04.json story-reference-idris-2026-10-04.json DAR_AL_TAWHID_ElevenLabs_Aussprache_MAX_MASTER.pls voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
+for required in local-engine.py speech_flow.py studio.html mobile.html content-studio.js mubashshirun-pack.js alphabet-audio-studio.js alphabet-audio.json quiz-kids.json quiz-audio.json owner-voice-audio.json dua-kids.json stories-authentic.json short-stories-voice.json verified-content.json kids-content-index.json prophet-stories.json mubashshirun-stories.json VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json story-reference-muhammad-2026-10-04.json story-reference-adam-2026-10-04.json story-reference-idris-2026-10-04.json DAR_AL_TAWHID_ElevenLabs_Aussprache_MAX_MASTER.pls voice-production-profile.json islamic-master-library.json islamic-expanded-lexicon.json voice-regression-fixtures.json validate-v2.py; do
   if [ ! -s "$STAGE/$required" ]; then
     echo "FEHLER: Update-Datei fehlt oder ist leer: $required"
     exit 1
