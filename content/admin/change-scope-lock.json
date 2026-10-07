@@ -7036,6 +7036,18 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-30T23:59:00.000Z"
+    },
+    {
+      "id": "test-primary-area-embedded-geometry-v1313-2026-10-07",
+      "at": "2026-10-07T10:27:00+02:00",
+      "approvedBy": "user-explicit-continue-app-redesign",
+      "reason": "Nutzer beauftragt die nächsten Schritte des Test-App-Umbaus. Nach den Utility-Seiten werden die primären Bereiche Qurʾān, Themen/Wissen, Quiz und Mehr auf dasselbe eingebettete Hero- und Seitenraster umgestellt, damit keine 100vw-/50vw-Verschiebungen oder uneinheitlichen Außenkanten mehr auftreten. Nur Test-App.",
+      "paths": [
+        "test/assets/primary-area-embedded-v1313.css",
+        "cloudflare/test-app-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-30T23:59:00.000Z"
     }
   ],
   "enabled": true
