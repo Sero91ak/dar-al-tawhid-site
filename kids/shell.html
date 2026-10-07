@@ -2698,9 +2698,12 @@ html:not([data-view="today"]) .view.active{
 }
 #duaModal .dua-scene::before{background-image:var(--dua-art)!important;background-size:cover!important;background-position:center 52%!important;filter:saturate(1.03) brightness(.9)!important}
 #quizModal .quiz-scene{
- --quiz-art:url("https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/cbe2efa5-f245-41e4-9262-be656af8ffc7/c22155b0-3b92-4227-a372-cfdaf600c518/Single_standalone_cinematic_16_9_hero_illustration_for_a_pre.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiZDEzNTA0YmI5ZTBiNjNjMyIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTMzMDM2M30.RWZGx2UrVdXyvfYQRM-noI7t5EVNJPS9cvcn4fawl40")!important;
- background-image:linear-gradient(180deg,rgba(4,17,28,.01),rgba(4,17,28,.08) 45%,rgba(4,17,28,.56) 100%),var(--quiz-art)!important;
- background-size:cover!important;background-position:center 50%!important;background-repeat:no-repeat!important;
+ background-image:
+  linear-gradient(180deg,rgba(4,17,28,.01),rgba(4,17,28,.08) 45%,rgba(4,17,28,.56) 100%),
+  var(--quiz-art,var(--quiz-fallback-art,linear-gradient(180deg,#315c78 0%,#5a8f8a 48%,#ba8b5f 100%)))!important;
+ background-size:cover!important;
+ background-position:var(--quiz-art-position,50% 50%)!important;
+ background-repeat:no-repeat!important;
 }
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Fredoka:wght@500;600;700&family=Noto+Naskh+Arabic:wght@500;700&display=swap">
