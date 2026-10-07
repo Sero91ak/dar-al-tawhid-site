@@ -1,6 +1,8 @@
 # smart-dua-rerun-v2
 name: Force Align Dua Smart Learning
 
+# retrigger-v1212-after-owner-worker
+
 on:
   workflow_dispatch:
   push:
