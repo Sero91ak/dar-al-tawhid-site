@@ -40,6 +40,7 @@ jobs:
           MAP=ROOT/".github/dua-audio-import-map.json"
           DATA=ROOT/"kids/data/dua-kids.json"
           OLD=ROOT/"kids/data/dua-audio.json"
+          OLD_AR=ROOT/"kids/data/dua-arabic-audio.json"
           DE_MANIFEST=ROOT/"kids/data/dua-audio.json"
           AR_MANIFEST=ROOT/"kids/data/dua-arabic-audio.json"
           DE_DIR=ROOT/"kids/assets/kids-dua-audio/v4-20261007"
@@ -65,6 +66,10 @@ jobs:
           old={"entries":{}}
           if OLD.exists():
               try: old=json.loads(OLD.read_text(encoding="utf-8"))
+              except Exception: pass
+          old_ar={"entries":{}}
+          if OLD_AR.exists():
+              try: old_ar=json.loads(OLD_AR.read_text(encoding="utf-8"))
               except Exception: pass
 
           de_entries={}
@@ -141,6 +146,21 @@ jobs:
               else: ar_entries[text]=entry
               print(f"[{n}/29] {key} · {dur:.2f}s")
 
+          # Reuse existing Eleven v4 Arabic clips only when the exact Arabic text is unchanged.
+          for d in items:
+              if str(d.get("type") or "")!="sunnah":
+                  continue
+              text=" ".join(str(d.get("audioArabicText") or d.get("arabic") or "").split()).strip()
+              if text in ar_entries:
+                  continue
+              entry=(old_ar.get("entries") or {}).get(text)
+              if not entry or str(entry.get("modelId") or "")!="eleven_v4":
+                  continue
+              local=str(entry.get("url") or "").split("?",1)[0]
+              p=ROOT/local.lstrip("/")
+              if p.exists() and p.stat().st_size>1200:
+                  ar_entries[text]=entry
+
           # Keep the two existing feedback clips used by the quiz-style check.
           for feedback in ("Richtig. Sehr gut.","Noch nicht. Hör die Erklärung noch einmal."):
               entry=(old.get("entries") or {}).get(feedback)
@@ -161,8 +181,9 @@ jobs:
           if len(expected_de)!=20 or not expected_de.issubset(de_entries):
               missing=sorted(expected_de-set(de_entries))
               raise SystemExit(f"German Dua pack incomplete: {len(de_entries)} entries, missing={missing}")
-          if len(expected_ar)!=9 or set(ar_entries)!=expected_ar:
-              raise SystemExit(f"Arabic Sunnah Dua pack incomplete: {len(ar_entries)} entries")
+          if len(expected_ar)!=12 or set(ar_entries)!=expected_ar:
+              missing=sorted(expected_ar-set(ar_entries))
+              raise SystemExit(f"Arabic Sunnah Dua pack incomplete: {len(ar_entries)} entries, missing={missing}")
 
           de_manifest={
               "schemaVersion":3,
@@ -190,7 +211,7 @@ jobs:
               "scope":"sunnah-dua-only",
               "quranArabicSyntheticAllowed":False,
               "entries":ar_entries,
-              "counts":{"sunnahDuaItems":9,"arabicPrompts":9,"uniqueSpokenTexts":9}
+              "counts":{"sunnahDuaItems":12,"arabicPrompts":12,"uniqueSpokenTexts":len(ar_entries)}
           }
           DE_MANIFEST.write_text(json.dumps(de_manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
           AR_MANIFEST.write_text(json.dumps(ar_manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
