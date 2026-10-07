@@ -93,9 +93,13 @@ jobs:
           QUIZ_MANIFEST=ROOT/"kids/data/quiz-audio.json"
           DUA_MANIFEST=ROOT/"kids/data/dua-audio.json"
           DUA_AR_MANIFEST=ROOT/"kids/data/dua-arabic-audio.json"
+          DUA_AR_SLOW_MANIFEST=ROOT/"kids/data/dua-arabic-slow-audio.json"
+          DUA_WORD_MANIFEST=ROOT/"kids/data/dua-word-audio.json"
           QUIZ_ASSETS=ROOT/"kids/assets/kids-quiz-audio"
           DUA_ASSETS=ROOT/"kids/assets/kids-dua-audio"
           DUA_AR_ASSETS=ROOT/"kids/assets/kids-dua-arabic-audio"
+          DUA_AR_SLOW_ASSETS=ROOT/"kids/assets/kids-dua-arabic-slow-audio"
+          DUA_WORD_ASSETS=ROOT/"kids/assets/kids-dua-word-audio"
           API=os.environ["VOICE_API"].rstrip("/")
           SECRET=os.environ.get("ADMIN_PUBLISH_SECRET","").strip()
           ELEVEN_KEY=os.environ.get("ELEVENLABS_API_KEY","").strip()
@@ -118,6 +122,8 @@ jobs:
           QUIZ_ASSETS.mkdir(parents=True,exist_ok=True)
           DUA_ASSETS.mkdir(parents=True,exist_ok=True)
           DUA_AR_ASSETS.mkdir(parents=True,exist_ok=True)
+          DUA_AR_SLOW_ASSETS.mkdir(parents=True,exist_ok=True)
+          DUA_WORD_ASSETS.mkdir(parents=True,exist_ok=True)
 
           def norm(v):
               return " ".join(str(v or "").split()).strip()
@@ -164,7 +170,7 @@ jobs:
           lock=threading.Lock()
 
           def synth(text,profile,asset_dir,serial,model_id):
-              prepared=norm(text) if profile=="dua_arabic" else prepare_kids_voice_text(text)
+              prepared=norm(text) if profile in ("dua_arabic","dua_arabic_slow","dua_word") else prepare_kids_voice_text(text)
               digest=hashlib.sha1(
                   (SYNTHESIS_REVISION+"|"+str(model_id)+"|"+profile+"|"+DICT_ID+"|"+DICT_VERSION+"|"+text).encode("utf-8")
               ).hexdigest()[:16]
@@ -222,10 +228,26 @@ jobs:
                           }
                       elif profile=="dua_arabic":
                           voice_settings={
-                              "stability":0.68,
-                              "similarity_boost":0.90,
-                              "style":0.06,
-                              "speed":0.91,
+                              "stability":0.72,
+                              "similarity_boost":0.92,
+                              "style":0.04,
+                              "speed":0.90,
+                              "use_speaker_boost":True
+                          }
+                      elif profile=="dua_arabic_slow":
+                          voice_settings={
+                              "stability":0.76,
+                              "similarity_boost":0.92,
+                              "style":0.02,
+                              "speed":0.74,
+                              "use_speaker_boost":True
+                          }
+                      elif profile=="dua_word":
+                          voice_settings={
+                              "stability":0.80,
+                              "similarity_boost":0.93,
+                              "style":0.01,
+                              "speed":0.80,
                               "use_speaker_boost":True
                           }
                       else:
@@ -236,12 +258,15 @@ jobs:
                               "speed":0.93,
                               "use_speaker_boost":True
                           }
+                      is_arabic_profile=profile in ("dua_arabic","dua_arabic_slow","dua_word")
                       payload={
                           "text":prepared,
                           "model_id":model_id,
                           "voice_settings":voice_settings,
-                          "apply_text_normalization":"on"
+                          "apply_text_normalization":("off" if is_arabic_profile else "on")
                       }
+                      if is_arabic_profile:
+                          payload["language_code"]="ar"
                       if DICT_ID and DICT_VERSION:
                           payload["pronunciation_dictionary_locators"]=[{
                               "pronunciation_dictionary_id":DICT_ID,
@@ -337,7 +362,7 @@ jobs:
                   if p is None:
                       continue
                   results[text]=(p,float(entry.get("durationSeconds") or duration(p)))
-                  prepared=norm(text) if profile=="dua_arabic" else prepare_kids_voice_text(text)
+                  prepared=norm(text) if profile in ("dua_arabic","dua_arabic_slow","dua_word") else prepare_kids_voice_text(text)
                   prepared_hashes[text]=hashlib.sha256(prepared.encode("utf-8")).hexdigest()
 
               missing=[text for text in unique if text not in results]
@@ -502,38 +527,162 @@ jobs:
           if dua_manifest["counts"]["explanationPrompts"]!=len(dua_items):
               raise SystemExit("Duʿāʾ-Voice-Pack unvollständig.")
 
-          # Arabic Sunnah Duʿāʾ use the dedicated professional Arabic MSA pack.
-          # The library may be larger than the already produced Arabic pack. Never
-          # synthesize missing Sunnah Arabic with the German owner voice and never fail
-          # the content build merely because professional Fuṣḥā production is pending.
-          dua_arabic_items=[d for d in dua_items if str(d.get("type") or "").lower()=="sunnah"]
-          dua_ar_manifest=load_manifest(DUA_AR_MANIFEST)
-          if str(dua_ar_manifest.get("modelId") or "")!="eleven_v4":
-              raise SystemExit("Arabischer Duʿāʾ-Voice-Pack muss Eleven v4 verwenden.")
-          expected_ar={
-              norm(d.get("audioArabicText") or d.get("arabic") or "")
-              for d in dua_arabic_items
-              if norm(d.get("audioArabicText") or d.get("arabic") or "")
+          # Entire Duʿāʾ Arabic layer: Serhat Abu Malik – Master, ElevenLabs V4,
+          # explicit Fuṣḥā language hint. This includes Qurʾānic Duʿāʾ because the
+          # Kids Duʿāʾ learner deliberately teaches the exact displayed wording with
+          # the same owner voice. It is educational speech, not a recitation substitute.
+          def arabic_text(d):
+              return norm(d.get("audioArabicText") or d.get("arabic") or "")
+
+          dua_arabic_items=[d for d in dua_items if arabic_text(d)]
+          if len(dua_arabic_items)!=len(dua_items):
+              raise SystemExit("Mindestens ein freigegebenes Duʿāʾ hat keinen arabischen Mastertext.")
+
+          arabic_phrases=[arabic_text(d) for d in dua_arabic_items]
+          dua_ar_manifest=build_pack(
+              texts=arabic_phrases,
+              manifest_path=DUA_AR_MANIFEST,
+              asset_dir=DUA_AR_ASSETS,
+              profile="dua_arabic",
+              pack_id="KIDS_DUA_ARABIC_SERHAT_MASTER_V4",
+              counts={"duaItems":len(dua_items),"arabicPrompts":len(dua_items)},
+              model_id=ELEVEN_DUA_MODEL,
+              require_model_match=True
+          )
+          dua_ar_manifest.update({
+              "schemaVersion":4,
+              "language":"ar",
+              "arabicRegister":"Fuṣḥā / Classical-Arabic-aware",
+              "scope":"all-verified-dua",
+              "quranArabicSyntheticAllowed":True,
+              "educationMode":"owner-voice-fusha-learning",
+              "speaker":"Serhat Abu Malik – Master"
+          })
+          DUA_AR_MANIFEST.write_text(json.dumps(dua_ar_manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+
+          # Dedicated slow phrase pack. Never slow a normal clip in the browser:
+          # the model renders the phrase slowly and naturally at generation time.
+          dua_ar_slow_manifest=build_pack(
+              texts=arabic_phrases,
+              manifest_path=DUA_AR_SLOW_MANIFEST,
+              asset_dir=DUA_AR_SLOW_ASSETS,
+              profile="dua_arabic_slow",
+              pack_id="KIDS_DUA_ARABIC_SLOW_SERHAT_MASTER_V4",
+              counts={"duaItems":len(dua_items),"slowArabicPrompts":len(dua_items)},
+              model_id=ELEVEN_DUA_MODEL,
+              require_model_match=True
+          )
+          dua_ar_slow_manifest.update({
+              "schemaVersion":1,
+              "language":"ar",
+              "arabicRegister":"Fuṣḥā / Classical-Arabic-aware",
+              "scope":"all-verified-dua",
+              "playbackMode":"dedicated-natural-slow-render",
+              "browserTimeStretchAllowed":False,
+              "speaker":"Serhat Abu Malik – Master"
+          })
+          DUA_AR_SLOW_MANIFEST.write_text(json.dumps(dua_ar_slow_manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+
+          AR_PUNCT="،؛؟,.!…«»\"'()[]{}"
+          def arabic_tokens(text):
+              out=[]
+              for raw in norm(text).split():
+                  token=raw.strip(AR_PUNCT)
+                  if token:
+                      out.append(token)
+              return out
+
+          # Standalone word renders: clicking a word never seeks into a sentence.
+          # Each exact orthographic token is generated as its own Fuṣḥā utterance.
+          word_texts=[]
+          seen_words=set()
+          for d in dua_items:
+              for word in arabic_tokens(arabic_text(d)):
+                  if word not in seen_words:
+                      seen_words.add(word)
+                      word_texts.append(word)
+
+          dua_word_manifest=build_pack(
+              texts=word_texts,
+              manifest_path=DUA_WORD_MANIFEST,
+              asset_dir=DUA_WORD_ASSETS,
+              profile="dua_word",
+              pack_id="KIDS_DUA_WORD_SERHAT_MASTER_V4",
+              counts={
+                  "duaItems":len(dua_items),
+                  "uniqueArabicWords":len(word_texts),
+                  "wordPositions":sum(len(arabic_tokens(arabic_text(d))) for d in dua_items)
+              },
+              model_id=ELEVEN_DUA_MODEL,
+              require_model_match=True
+          )
+          dua_word_manifest.update({
+              "schemaVersion":1,
+              "language":"ar",
+              "arabicRegister":"Fuṣḥā / Classical-Arabic-aware",
+              "scope":"all-verified-dua",
+              "clipMode":"isolated-word",
+              "sourceRule":"exact-displayed-arabic-token",
+              "browserSentenceSlicingAllowed":False,
+              "speaker":"Serhat Abu Malik – Master"
+          })
+          DUA_WORD_MANIFEST.write_text(json.dumps(dua_word_manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+
+          # Build learning segments for every Duʿāʾ. Existing hand-reviewed segment
+          # transliterations stay untouched. New items always use exact Arabic token
+          # boundaries; the full transliteration remains visible in the learner.
+          for d in dua_items:
+              words=arabic_tokens(arabic_text(d))
+              old_segments=d.get("learningSegments") if isinstance(d.get("learningSegments"),list) else []
+              old_by_ar={}
+              for seg in old_segments:
+                  if isinstance(seg,dict) and norm(seg.get("arabic")):
+                      old_by_ar.setdefault(norm(seg.get("arabic")),[]).append(seg)
+              rebuilt=[]
+              used={}
+              for idx,word in enumerate(words):
+                  choices=old_by_ar.get(word) or []
+                  pos=used.get(word,0)
+                  old_seg=choices[pos] if pos<len(choices) else {}
+                  used[word]=pos+1
+                  rebuilt.append({
+                      "index":idx,
+                      "arabic":word,
+                      "transliteration":norm(old_seg.get("transliteration") or ""),
+                      "audioKey":word
+                  })
+              d["learningSegments"]=rebuilt
+              d["audioStatus"]="ready"
+              d["smartLearningReady"]=True
+              d["audioModelId"]="eleven_v4"
+              d["audioVoiceProfileId"]="serhat-owner-voice-2026"
+              d["arabicVoiceProfileId"]="serhat-owner-voice-2026"
+              d["arabicVoiceSpeaker"]="Serhat Abu Malik – Master"
+              d["arabicRegister"]="Fuṣḥā"
+              d["wordAudioMode"]="isolated-owner-voice-v4"
+              d["slowAudioMode"]="dedicated-owner-voice-v4"
+              d["timingSlicesDeprecated"]=True
+
+          dua["audioPolicy"]={
+              "voiceProfileId":"serhat-owner-voice-2026",
+              "speaker":"Serhat Abu Malik – Master",
+              "modelId":"eleven_v4",
+              "arabicRegister":"Fuṣḥā",
+              "germanExplanation":"owner-voice",
+              "arabicFull":"owner-voice",
+              "arabicSlow":"owner-voice-dedicated-slow-render",
+              "arabicWord":"owner-voice-isolated-word-render",
+              "browserTimeStretch":False,
+              "sentenceSliceWordPlayback":False,
+              "quranDuaLearningVoice":"owner-voice-fusha"
           }
-          produced_ar=set((dua_ar_manifest.get("entries") or {}).keys())
-          unexpected=sorted(produced_ar-expected_ar)
-          if unexpected:
-              raise SystemExit(
-                  "Arabischer Duʿāʾ-Voice-Pack enthält Texte außerhalb des aktuellen "
-                  f"Sunnah-Bestands: {unexpected[:3]}"
-              )
-          missing_ar=sorted(expected_ar-produced_ar)
-          if missing_ar:
-              print(
-                  "::warning::Professionelle Fuṣḥā-Audios stehen für "
-                  f"{len(produced_ar)}/{len(expected_ar)} Sunnah-Duʿāʾ bereit; "
-                  f"{len(missing_ar)} bleiben bis zur professionellen Produktion text-only."
-              )
+          DUA.write_text(json.dumps(dua,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
 
           print("Quiz voice pack:",quiz_manifest["counts"])
           print("Dua voice pack:",dua_manifest["counts"])
-          print("Dua Arabic voice pack:",dua_ar_manifest["counts"])
-          print("Dua Arabic coverage:",{"ready":len(produced_ar),"required":len(expected_ar),"pending":len(missing_ar)})
+          print("Dua Arabic owner-voice pack:",dua_ar_manifest["counts"])
+          print("Dua Arabic slow pack:",dua_ar_slow_manifest["counts"])
+          print("Dua isolated word pack:",dua_word_manifest["counts"])
           print("Synthesis revision:",SYNTHESIS_REVISION)
           PY
 
@@ -543,7 +692,7 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add             kids/data/quiz-audio.json             kids/data/dua-audio.json             kids/data/dua-arabic-audio.json             kids/assets/kids-quiz-audio             kids/assets/kids-dua-audio             kids/assets/kids-dua-arabic-audio
+          git add             kids/data/quiz-audio.json             kids/data/dua-audio.json             kids/data/dua-arabic-audio.json             kids/data/dua-arabic-slow-audio.json             kids/data/dua-word-audio.json             kids/data/dua-kids.json             kids/assets/kids-quiz-audio             kids/assets/kids-dua-audio             kids/assets/kids-dua-arabic-audio             kids/assets/kids-dua-arabic-slow-audio             kids/assets/kids-dua-word-audio
           if git diff --cached --quiet; then
             echo "Kids owner voice packs already current."
             exit 0
