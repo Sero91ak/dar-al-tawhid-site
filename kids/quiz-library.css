@@ -366,3 +366,18 @@
     padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))!important;
   }
 }
+
+
+/* KIDS_QUIZ_CONTENT_FLOW_V1237 */
+/* Avoid a permanent empty tail. On phones the extra reserve exists only while
+   the fixed "Weiter" action is visible. */
+@media(max-width:759px){
+  #quizModal.quiz-round-mode #quizBody{
+    padding-bottom:14px!important;
+    scroll-padding-bottom:14px!important;
+  }
+  #quizModal.quiz-round-mode:has(.quiz-next.show) #quizBody{
+    padding-bottom:calc(82px + env(safe-area-inset-bottom,0px))!important;
+    scroll-padding-bottom:calc(94px + env(safe-area-inset-bottom,0px))!important;
+  }
+}
