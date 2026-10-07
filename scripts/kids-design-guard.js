@@ -64,8 +64,8 @@ function runKidsDesignGuard() {
   if (!/KIDS_NO_PRECLICK_DURATION/.test(doc)) {
     failed += fail(`${KIDS_DOC}: Pre-Click-Dauer/Alter-Regel fehlt`);
   }
-  if (!html.includes("/kids/kids-touch-rail.css?v=9")) {
-    failed += fail(`${KIDS_HTML}: globales Karten-Interaktionssystem v9 fehlt`);
+  if (!html.includes("/kids/kids-touch-rail.css?v=10")) {
+    failed += fail(`${KIDS_HTML}: globales Karten-Interaktionssystem v10 fehlt`);
   }
 
   // Approved start hero reference (V1199): keep the exact static scene and
