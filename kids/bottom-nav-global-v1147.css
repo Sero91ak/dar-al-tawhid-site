@@ -10,6 +10,10 @@ html[data-kids-age]:has(#view-stories.active) body .bottom-nav{
   width:min(calc(100% - 28px),740px)!important;
   min-height:68px!important;
   height:auto!important;
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  grid-auto-flow:column!important;
+  grid-auto-columns:minmax(0,1fr)!important;
   gap:5px!important;
   padding:7px!important;
   overflow:visible!important;
@@ -33,6 +37,8 @@ html[data-kids-age] body .bottom-nav .nav-btn,
 html[data-kids-age]:has(#view-stories.active) body .bottom-nav .nav-btn{
   position:static!important;
   z-index:auto!important;
+  min-width:0!important;
+  width:auto!important;
   min-height:var(--kids-control-min,var(--kids-touch,54px))!important;
   max-height:none!important;
   padding:6px 4px!important;
@@ -78,4 +84,27 @@ html[data-kids-age]:has(#view-stories.active) body .bottom-nav .nav-btn.active{
   html[data-kids-age]:has(#view-stories.active) body .bottom-nav{min-height:72px!important}
   html[data-kids-age] body .bottom-nav .nav-btn .ico,
   html[data-kids-age]:has(#view-stories.active) body .bottom-nav .nav-btn .ico{width:34px!important;height:34px!important}
+}
+
+/* Five-tab authority v1221: never wrap after Duʿāʾ is added. */
+html[data-kids-age] body .bottom-nav,
+html[data-kids-age]:has(#view-stories.active) body .bottom-nav{
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  grid-template-rows:1fr!important;
+  grid-auto-flow:column!important;
+}
+html[data-kids-age] body .bottom-nav .nav-btn,
+html[data-kids-age]:has(#view-stories.active) body .bottom-nav .nav-btn{
+  min-width:0!important;
+  width:auto!important;
+  margin:0!important;
+}
+@media(max-width:430px){
+  html[data-kids-age] body .bottom-nav .nav-btn,
+  html[data-kids-age]:has(#view-stories.active) body .bottom-nav .nav-btn{padding:5px 2px!important}
+  html[data-kids-age] body .bottom-nav .nav-btn .ico,
+  html[data-kids-age]:has(#view-stories.active) body .bottom-nav .nav-btn .ico{width:29px!important;height:29px!important}
+  html[data-kids-age] body .bottom-nav .nav-btn .lab,
+  html[data-kids-age]:has(#view-stories.active) body .bottom-nav .nav-btn .lab{font-size:10px!important;white-space:nowrap!important}
 }
