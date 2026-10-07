@@ -1018,3 +1018,286 @@ html body :is(
   transform:none!important;
   translate:none!important;
 }
+
+
+/* =========================================================
+   KIDS_SUBPAGE_NAV_RAIL_V13
+   KIDS_SUBPAGE_NAV_RAIL
+   Non-Hero library/world navigation only.
+   IMPORTANT: Hero stages and their overlay controls are untouched.
+   Future matching pages can opt in with .kids-subpage-nav.
+   ========================================================= */
+:root{
+  --kids-subnav-bg:
+    radial-gradient(circle at 12% 0%,rgba(118,207,197,.08),transparent 36%),
+    linear-gradient(135deg,rgba(9,36,50,.96),rgba(6,27,40,.92));
+  --kids-subnav-line:rgba(151,215,207,.18);
+  --kids-subnav-gold:#f7dda0;
+  --kids-subnav-shadow:
+    0 12px 30px rgba(0,0,0,.18),
+    inset 0 1px 0 rgba(255,255,255,.045);
+}
+
+/* Only the compact title/subtitle rails above library/world content.
+   Do not include *-hero selectors here. */
+html body :is(
+  .kids-subpage-nav,
+  .ms-library-nav,
+  .ps-library-nav,
+  .gh-world-nav
+){
+  box-sizing:border-box!important;
+  flex:none!important;
+  width:auto!important;
+  height:auto!important;
+  min-height:calc(72px + env(safe-area-inset-top,0px))!important;
+  margin:8px max(10px,env(safe-area-inset-right,0px)) 0 max(10px,env(safe-area-inset-left,0px))!important;
+  padding:calc(env(safe-area-inset-top,0px) + 10px) 12px 11px!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:12px!important;
+  border:1px solid var(--kids-subnav-line)!important;
+  border-radius:22px!important;
+  background:var(--kids-subnav-bg)!important;
+  box-shadow:var(--kids-subnav-shadow)!important;
+  backdrop-filter:blur(22px) saturate(1.08)!important;
+  -webkit-backdrop-filter:blur(22px) saturate(1.08)!important;
+  overflow:hidden!important;
+}
+
+/* Title block stays readable and owns the remaining width. */
+html body :is(
+  .kids-subpage-nav,
+  .ms-library-nav,
+  .ps-library-nav,
+  .gh-world-nav
+) > div{
+  min-width:0!important;
+  flex:1 1 auto!important;
+  display:grid!important;
+  align-content:center!important;
+  gap:3px!important;
+  padding:0!important;
+  margin:0!important;
+}
+html body :is(
+  .kids-subpage-nav,
+  .ms-library-nav,
+  .ps-library-nav,
+  .gh-world-nav
+) > div > strong{
+  display:block!important;
+  margin:0!important;
+  font-size:clamp(18px,2.5vw,21px)!important;
+  line-height:1.08!important;
+  font-weight:900!important;
+  letter-spacing:-.012em!important;
+  color:#fff7e9!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+}
+html body :is(
+  .kids-subpage-nav,
+  .ms-library-nav,
+  .ps-library-nav,
+  .gh-world-nav
+) > div > span{
+  display:block!important;
+  margin:0!important;
+  font-size:clamp(11px,1.7vw,13px)!important;
+  line-height:1.3!important;
+  font-weight:700!important;
+  letter-spacing:0!important;
+  color:rgba(255,255,255,.66)!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+}
+
+/* Clear, child-friendly exit control.
+   The text is CSS-generated so current markup and behavior stay unchanged. */
+html body :is(
+  .ms-library-nav .ms-back,
+  .ps-library-nav .ps-library-back,
+  .gh-world-nav .gh-back,
+  .kids-subpage-nav .kids-subpage-back
+),
+html body :is(
+  .ms-library-nav .ms-back,
+  .ps-library-nav .ps-library-back,
+  .gh-world-nav .gh-back,
+  .kids-subpage-nav .kids-subpage-back
+).kids-tap-card{
+  appearance:none!important;
+  -webkit-appearance:none!important;
+  width:88px!important;
+  min-width:88px!important;
+  max-width:88px!important;
+  height:50px!important;
+  min-height:50px!important;
+  max-height:50px!important;
+  flex:0 0 88px!important;
+  margin:0!important;
+  padding:0 11px 1px 9px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:7px!important;
+  border:1px solid rgba(239,207,132,.30)!important;
+  border-radius:16px!important;
+  background:
+    linear-gradient(145deg,rgba(239,207,132,.115),rgba(255,255,255,.045))!important;
+  color:var(--kids-subnav-gold)!important;
+  font-family:var(--kids-reading-font,"Fredoka",-apple-system,BlinkMacSystemFont,"SF Pro Rounded",sans-serif)!important;
+  font-size:27px!important;
+  font-weight:850!important;
+  line-height:1!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.055),
+    0 8px 18px rgba(0,0,0,.12)!important;
+  cursor:pointer!important;
+  -webkit-tap-highlight-color:transparent!important;
+  touch-action:manipulation!important;
+  transform:none!important;
+  translate:none!important;
+  clip-path:none!important;
+  transition:border-color .14s ease,box-shadow .14s ease,filter .14s ease!important;
+}
+html body :is(
+  .ms-library-nav .ms-back,
+  .ps-library-nav .ps-library-back,
+  .gh-world-nav .gh-back,
+  .kids-subpage-nav .kids-subpage-back
+)::after{
+  content:"Zurück";
+  display:block;
+  font-size:11.5px;
+  line-height:1;
+  font-weight:850;
+  letter-spacing:.005em;
+  color:#f9e9bf;
+  white-space:nowrap;
+}
+
+@media(hover:hover) and (pointer:fine){
+  html body :is(
+    .ms-library-nav .ms-back,
+    .ps-library-nav .ps-library-back,
+    .gh-world-nav .gh-back,
+    .kids-subpage-nav .kids-subpage-back
+  ):hover{
+    border-color:rgba(247,218,147,.52)!important;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.07),
+      0 0 22px rgba(236,196,105,.14),
+      0 8px 18px rgba(0,0,0,.12)!important;
+    filter:brightness(1.045)!important;
+  }
+}
+html body :is(
+  .ms-library-nav .ms-back,
+  .ps-library-nav .ps-library-back,
+  .gh-world-nav .gh-back,
+  .kids-subpage-nav .kids-subpage-back
+):is(:active,:focus-visible){
+  outline:0!important;
+  border-color:rgba(250,220,145,.80)!important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,232,164,.20),
+    inset 0 0 15px rgba(240,202,116,.09),
+    0 0 26px rgba(240,202,116,.20),
+    0 8px 18px rgba(0,0,0,.12)!important;
+  filter:brightness(1.065)!important;
+  transform:none!important;
+}
+
+/* Theme accents remain subtle while geometry stays identical everywhere. */
+html body .dl-library-nav{--kids-subnav-line:rgba(124,210,198,.23)}
+html body .sy-library-page .ms-library-nav{--kids-subnav-line:rgba(231,190,145,.22)}
+html body .ps-library-nav{--kids-subnav-line:rgba(96,193,230,.23)}
+html body .gh-world-nav{--kids-subnav-line:rgba(239,208,138,.20)}
+
+@media(max-width:370px){
+  html body :is(.kids-subpage-nav,.ms-library-nav,.ps-library-nav,.gh-world-nav){
+    gap:9px!important;
+    margin-left:8px!important;
+    margin-right:8px!important;
+    padding-left:9px!important;
+    padding-right:9px!important;
+  }
+  html body :is(
+    .ms-library-nav .ms-back,
+    .ps-library-nav .ps-library-back,
+    .gh-world-nav .gh-back,
+    .kids-subpage-nav .kids-subpage-back
+  ),
+  html body :is(
+    .ms-library-nav .ms-back,
+    .ps-library-nav .ps-library-back,
+    .gh-world-nav .gh-back,
+    .kids-subpage-nav .kids-subpage-back
+  ).kids-tap-card{
+    width:78px!important;
+    min-width:78px!important;
+    max-width:78px!important;
+    flex-basis:78px!important;
+    padding-left:7px!important;
+    padding-right:8px!important;
+    gap:5px!important;
+  }
+  html body :is(
+    .ms-library-nav .ms-back,
+    .ps-library-nav .ps-library-back,
+    .gh-world-nav .gh-back,
+    .kids-subpage-nav .kids-subpage-back
+  )::after{font-size:10.5px}
+  html body :is(.kids-subpage-nav,.ms-library-nav,.ps-library-nav,.gh-world-nav)>div>strong{
+    font-size:17px!important;
+  }
+  html body :is(.kids-subpage-nav,.ms-library-nav,.ps-library-nav,.gh-world-nav)>div>span{
+    font-size:10.5px!important;
+  }
+}
+
+@media(min-width:700px){
+  html body :is(.kids-subpage-nav,.ms-library-nav,.ps-library-nav,.gh-world-nav){
+    margin-left:max(14px,env(safe-area-inset-left,0px))!important;
+    margin-right:max(14px,env(safe-area-inset-right,0px))!important;
+    border-radius:24px!important;
+    min-height:calc(78px + env(safe-area-inset-top,0px))!important;
+    padding-left:14px!important;
+    padding-right:16px!important;
+  }
+  html body :is(
+    .ms-library-nav .ms-back,
+    .ps-library-nav .ps-library-back,
+    .gh-world-nav .gh-back,
+    .kids-subpage-nav .kids-subpage-back
+  ),
+  html body :is(
+    .ms-library-nav .ms-back,
+    .ps-library-nav .ps-library-back,
+    .gh-world-nav .gh-back,
+    .kids-subpage-nav .kids-subpage-back
+  ).kids-tap-card{
+    width:96px!important;
+    min-width:96px!important;
+    max-width:96px!important;
+    flex-basis:96px!important;
+    height:52px!important;
+    min-height:52px!important;
+    max-height:52px!important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  html body :is(
+    .ms-library-nav .ms-back,
+    .ps-library-nav .ps-library-back,
+    .gh-world-nav .gh-back,
+    .kids-subpage-nav .kids-subpage-back
+  ){
+    transition:none!important;
+  }
+}

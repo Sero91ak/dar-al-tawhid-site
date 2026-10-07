@@ -84,3 +84,13 @@ Verbindlich für `/kids/` und alle künftigen Kids-Erweiterungen.
 - Die Goldschrift selbst bleibt positionsstabil; nur ein dezenter horizontal wandernder Lichtschein ist erlaubt.
 - **Kids** behält den sanften, zeitversetzten Balloon-Effekt pro Buchstabe sowie den dezenten Unterglow.
 - Keine generierte/eingebrannte Schrift im Hintergrundbild verwenden; die Markenwörter bleiben echte UI-Typografie.
+
+
+## Nicht-Hero-Unterseiten-Navigation — `KIDS_SUBPAGE_NAV_RAIL`
+
+- Diese Regel gilt ausschließlich für kompakte Titel-/Untertitel-Leisten auf Bibliotheks- und Unterseiten, z. B. „Den Dīn lernen“, Propheten, Ṣaḥābah, Ṣaḥābiyyāt und „Geschichten des Īmān“.
+- Solche Leisten werden als eingebettete, ruhige Glasfläche aufgebaut: großzügige Höhe, klare Titelhierarchie und ein eindeutig beschrifteter Zurück-Button mit mindestens 44 px realer Touch-Fläche.
+- Der Zurück-Button darf niemals durch globale Kartenregeln auf volle Breite wachsen. Auch bei alten/stalen iOS-/PWA-Runtimes bleibt seine Geometrie fest.
+- Bestehende **Hero-/Bildbühnen werden nicht verändert**. Das gilt ausdrücklich auch für Zurück-/Minimieren-Controls, die direkt innerhalb eines Hero-Bildes liegen.
+- Nicht unter diese Regel fallen die Startseiten-Hero-Bühne, Geschichten-/Qurʾān-/Eltern-Heroes, Detail-Heroes, Player-Heroes, die Duʿāʾ-Detailbildbühne, Quiz-Kontextbuttons und die untere Haupt-Tab-Leiste.
+- Neue Unterseiten mit dieser Struktur verwenden `.kids-subpage-nav` und `.kids-subpage-back`, damit der globale Standard automatisch greift.
