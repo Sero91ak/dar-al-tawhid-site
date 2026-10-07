@@ -264,6 +264,7 @@
     var effective = effectivePosition(preference, metrics);
     setRootState(preference, effective);
 
+    currentEffective = effective;
     if (effective === "left" || effective === "right") {
       applySidePosition(nav, effective);
     } else {
@@ -271,8 +272,6 @@
       root.classList.remove("dar-nav-reader-idle");
       clearIdleTimer();
     }
-
-    currentEffective = effective;
     updateSettingsControl(preference, effective);
     if (effective === "left" || effective === "right") scheduleIdle();
     return true;
