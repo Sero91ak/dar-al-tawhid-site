@@ -1,4 +1,4 @@
-/* DĀR AL TAWḤĪD KIDS — Global Card Interaction Runtime v4
+/* DĀR AL TAWḤĪD KIDS — Global Card Interaction Runtime v5
    KIDS_GLOBAL_TOUCH_GLOW
    Applies one touch language to all current and future Kids card/capsule surfaces.
 */
@@ -85,7 +85,16 @@
     ".tab-bar button",
     ".ms-back",
     ".ps-back",
+    ".ps-library-back",
+    ".ps-library-nav button",
     ".dl-back",
+    ".ms-library-nav button",
+    ".dl-library-nav button",
+    ".gh-back",
+    ".gh-player-back",
+    ".gh-player-min",
+    ".duahub-detail-back",
+    ".quiz-library-back",
     ".ms-close",
     ".ps-close",
     ".dl-close",
@@ -96,7 +105,10 @@
 
   function markOne(el){
     if(!el || el.nodeType!==1) return;
-    if(el.matches?.(EXCLUDE_SELECTORS)) return;
+    if(el.matches?.(EXCLUDE_SELECTORS)){
+      el.classList.remove("kids-tap-card","kids-touch-control","kids-wide-capsule");
+      return;
+    }
 
     if(el.matches?.(CONTROL_SELECTORS)){
       el.classList.add("kids-touch-control");
@@ -216,7 +228,7 @@
   document.addEventListener("touchcancel",()=>clearPressed(0),{passive:true,capture:true});
 
   window.DARKidsCardInteraction={
-    version:4,
+    version:5,
     mark,
     tapSelector:TAP_SELECTORS
   };
