@@ -257,3 +257,82 @@ html:is([data-theme="dark"],[data-theme="royal"],[data-theme="bordeaux"],[data-t
   .dar-share-card .dar-share-btn,
   .dar-share-tool{transition:none!important}
 }
+
+/* GLOBAL_SOCIAL_BRAND_COLORS_V1269
+   Markenidentität bleibt in jedem Erscheinungsbild sichtbar:
+   WhatsApp = #25D366 · Telegram = #2AABEE · Instagram = Original-Verlauf.
+   Die Panel-/Flächenfarbe bleibt weiterhin vollständig themeabhängig. */
+.dar-share-card .dar-global-share-wa{
+  border-color:rgba(37,211,102,.48)!important;
+  background:linear-gradient(145deg,rgba(37,211,102,.18),color-mix(in srgb,var(--card,#fff) 89%,transparent))!important;
+  box-shadow:0 0 18px rgba(37,211,102,.16)!important;
+}
+.dar-share-card .dar-global-share-tg{
+  border-color:rgba(42,171,238,.48)!important;
+  background:linear-gradient(145deg,rgba(42,171,238,.17),color-mix(in srgb,var(--card,#fff) 89%,transparent))!important;
+  box-shadow:0 0 18px rgba(42,171,238,.16)!important;
+}
+.dar-share-card .dar-global-share-ig{
+  border-color:rgba(225,48,108,.45)!important;
+  background:
+    linear-gradient(145deg,rgba(131,58,180,.15),rgba(225,48,108,.10) 44%,color-mix(in srgb,var(--card,#fff) 90%,transparent) 86%)!important;
+  box-shadow:0 0 18px rgba(225,48,108,.15)!important;
+}
+
+.dar-share-card .dar-global-share-wa :is(.dar-share-icon,.dar-global-share-icon){
+  background:#25D366!important;
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  box-shadow:0 7px 20px rgba(37,211,102,.28),inset 0 1px 0 rgba(255,255,255,.22)!important;
+}
+.dar-share-card .dar-global-share-tg :is(.dar-share-icon,.dar-global-share-icon){
+  background:#2AABEE!important;
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  box-shadow:0 7px 20px rgba(42,171,238,.28),inset 0 1px 0 rgba(255,255,255,.22)!important;
+}
+.dar-share-card .dar-global-share-ig :is(.dar-share-icon,.dar-global-share-icon){
+  background:linear-gradient(135deg,#833AB4 0%,#C13584 30%,#E1306C 56%,#FD1D1D 76%,#FCAF45 100%)!important;
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  box-shadow:0 7px 20px rgba(225,48,108,.27),inset 0 1px 0 rgba(255,255,255,.22)!important;
+}
+
+.dar-share-card .dar-global-share-wa:is(:hover,:focus-visible){
+  border-color:rgba(37,211,102,.78)!important;
+  box-shadow:0 9px 26px rgba(37,211,102,.24),0 0 0 1px rgba(37,211,102,.12) inset!important;
+}
+.dar-share-card .dar-global-share-tg:is(:hover,:focus-visible){
+  border-color:rgba(42,171,238,.78)!important;
+  box-shadow:0 9px 26px rgba(42,171,238,.24),0 0 0 1px rgba(42,171,238,.12) inset!important;
+}
+.dar-share-card .dar-global-share-ig:is(:hover,:focus-visible){
+  border-color:rgba(225,48,108,.76)!important;
+  box-shadow:0 9px 26px rgba(225,48,108,.23),0 0 0 1px rgba(252,175,69,.10) inset!important;
+}
+.dar-share-card .dar-global-share-wa:focus-visible{outline:2px solid rgba(37,211,102,.72)!important;outline-offset:2px}
+.dar-share-card .dar-global-share-tg:focus-visible{outline:2px solid rgba(42,171,238,.72)!important;outline-offset:2px}
+.dar-share-card .dar-global-share-ig:focus-visible{outline:2px solid rgba(225,48,108,.70)!important;outline-offset:2px}
+.dar-share-card :is(.dar-global-share-wa,.dar-global-share-tg,.dar-global-share-ig):active{
+  transform:scale(.98)!important;
+}
+
+html:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"]) .dar-share-card .dar-global-share-wa{
+  color:#11753b!important;-webkit-text-fill-color:#11753b!important;
+}
+html:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"]) .dar-share-card .dar-global-share-tg{
+  color:#176f9f!important;-webkit-text-fill-color:#176f9f!important;
+}
+html:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"]) .dar-share-card .dar-global-share-ig{
+  color:#a72860!important;-webkit-text-fill-color:#a72860!important;
+}
+html:is([data-theme="dark"],[data-theme="royal"],[data-theme="bordeaux"],[data-theme="dar-al-layl"],[data-theme="aurora"]) .dar-share-card .dar-global-share-wa{
+  color:#72e49b!important;-webkit-text-fill-color:#72e49b!important;
+}
+html:is([data-theme="dark"],[data-theme="royal"],[data-theme="bordeaux"],[data-theme="dar-al-layl"],[data-theme="aurora"]) .dar-share-card .dar-global-share-tg{
+  color:#75cdfb!important;-webkit-text-fill-color:#75cdfb!important;
+}
+html:is([data-theme="dark"],[data-theme="royal"],[data-theme="bordeaux"],[data-theme="dar-al-layl"],[data-theme="aurora"]) .dar-share-card .dar-global-share-ig{
+  color:#ff91c2!important;-webkit-text-fill-color:#ff91c2!important;
+}
+
