@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1220-dua-hub";
+const CACHE_NAME="dar-al-tawhid-kids-v1220";
 const KIDS_BUILD_ID="kids-shell-v124-dua-hub1220";
 const CORE_PRECACHE=[
   "/kids/start",
@@ -17,7 +17,7 @@ const CORE_PRECACHE=[
   "/kids/assets/kids-home-v1179/hero-poster.png?v=1188",
   "/kids/assets/kids-home-v1191/hero-static-reference.jpg?v=1199",
   "/kids/assets/kids-home-v1215/hero-clean-reference.jpg?v=1215",
-  "/kids/assets/kids-home-v1219/dar-title-reference.png?v=1219",
+  "/kids/assets/kids-home-v1219/dar-title-reference.png?v=1220",
   "/assets/fonts/cinzel-latin-600-normal.woff2",
   "/kids/assets/kids-home-v1176/world-stories.png",
   "/kids/assets/kids-home-v1176/world-quran.png",
