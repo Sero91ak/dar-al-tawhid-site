@@ -5,11 +5,12 @@ on:
   push:
     branches: [main]
     paths:
-      - 'data/pronunciation/DAR_AL_TAWHID_ElevenLabs_ARABIC_MASTER_29122.pls'
+      - 'data/pronunciation/**.pls'
+      - 'data/pronunciation/elevenlabs-production.json'
       - '.github/workflows/upload-elevenlabs-pronunciation-master.yml'
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: elevenlabs-pronunciation-master-upload
@@ -18,59 +19,106 @@ concurrency:
 jobs:
   upload:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     env:
       ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
-      MASTER_FILE: data/pronunciation/DAR_AL_TAWHID_ElevenLabs_ARABIC_MASTER_29122.pls
-      DICTIONARY_NAME: DAR AL TAWHID Arabic Master 2.9.122
+      PROD_CONFIG: data/pronunciation/elevenlabs-production.json
 
     steps:
       - name: Checkout main
         uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
 
-      - name: Verify ElevenLabs API secret
-        shell: bash
-        run: |
-          set -euo pipefail
-          if [ -z "${ELEVENLABS_API_KEY:-}" ]; then
-            echo "::error::ELEVENLABS_API_KEY ist im Repository nicht konfiguriert."
-            exit 1
-          fi
-          echo "ElevenLabs API secret ist vorhanden."
-
-      - name: Validate PLS master
+      - name: Validate canonical production config and PLS master
         shell: bash
         run: |
           set -euo pipefail
           python3 - <<'PY'
-          from pathlib import Path
+          import json
+          import os
+          import subprocess
           import xml.etree.ElementTree as ET
+          from pathlib import Path
 
-          path = Path("data/pronunciation/DAR_AL_TAWHID_ElevenLabs_ARABIC_MASTER_29122.pls")
-          root = ET.parse(path).getroot()
-          ns = {"p": "http://www.w3.org/2005/01/pronunciation-lexicon"}
-          lexemes = root.findall("p:lexeme", ns)
-          graphemes = []
-          aliases = 0
+          cfg_path=Path(os.environ["PROD_CONFIG"])
+          cfg=json.loads(cfg_path.read_text(encoding="utf-8"))
+          pd=cfg.get("pronunciationDictionary") or {}
+          master=Path(str(pd.get("masterFile") or "").strip())
+          if not master.exists():
+              raise SystemExit(f"Kanonischer PLS-Master fehlt: {master}")
+
+          root=ET.parse(master).getroot()
+          ns={"p":"http://www.w3.org/2005/01/pronunciation-lexicon"}
+          lexemes=root.findall("p:lexeme",ns)
+          rules=[]
+          graphemes=[]
           for lex in lexemes:
-              g = lex.find("p:grapheme", ns)
-              a = lex.find("p:alias", ns)
-              if g is None or not (g.text or "").strip():
-                  raise SystemExit("Lexeme ohne Graphem")
-              graphemes.append((g.text or "").strip())
-              if a is not None and (a.text or "").strip():
-                  aliases += 1
+              g=lex.find("p:grapheme",ns)
+              a=lex.find("p:alias",ns)
+              if g is None or a is None:
+                  raise SystemExit("Produktionsmaster darf nur vollständige Alias-Regeln enthalten.")
+              grapheme=(g.text or "").strip()
+              alias=(a.text or "").strip()
+              if not grapheme or not alias:
+                  raise SystemExit("Leere Graphem-/Alias-Regel im Produktionsmaster.")
+              graphemes.append(grapheme)
+              rules.append({
+                  "type":"alias",
+                  "string_to_replace":grapheme,
+                  "alias":alias
+              })
 
-          if len(lexemes) != 10099:
-              raise SystemExit(f"Erwartet 10099 Lexeme, gefunden {len(lexemes)}")
-          if len(graphemes) != len(set(graphemes)):
+          expected=int(pd.get("ruleCount") or 0)
+          if expected and len(lexemes)!=expected:
+              raise SystemExit(f"Erwartet {expected} Regeln, gefunden {len(lexemes)}")
+          if len(graphemes)!=len(set(graphemes)):
               raise SystemExit("Doppelte Grapheme im PLS-Master")
-          if aliases != len(lexemes):
-              raise SystemExit(f"Nicht alle Regeln sind Alias-Regeln: {aliases}/{len(lexemes)}")
-          print(f"PLS OK: {len(lexemes)} eindeutige Alias-Regeln")
+
+          blob=subprocess.check_output(["git","hash-object",str(master)],text=True).strip()
+          current_blob=str(pd.get("gitBlobSha") or "").strip()
+          dict_id=str(pd.get("id") or "").strip()
+          version_id=str(pd.get("versionId") or "").strip()
+
+          Path("/tmp/elevenlabs-rules.json").write_text(
+              json.dumps({"rules":rules},ensure_ascii=False,separators=(",",":")),
+              encoding="utf-8"
+          )
+
+          same=bool(blob==current_blob and dict_id and version_id and len(rules)==expected)
+          env_path=Path(os.environ["GITHUB_ENV"])
+          with env_path.open("a",encoding="utf-8") as fh:
+              fh.write(f"MASTER_FILE={master.as_posix()}\n")
+              fh.write(f"MASTER_BLOB_SHA={blob}\n")
+              fh.write(f"DICTIONARY_ID={dict_id}\n")
+              fh.write(f"CURRENT_VERSION_ID={version_id}\n")
+              fh.write(f"RULE_COUNT={len(rules)}\n")
+              fh.write(f"REMOTE_UPDATE_REQUIRED={'0' if same else '1'}\n")
+
+          print(f"PLS OK: {len(rules)} eindeutige Alias-Regeln")
+          print(f"Git blob: {blob}")
+          print("Remote update:", "nein – ElevenLabs-Version bereits aktuell" if same else "ja")
           PY
 
-      - name: Upload master directly to ElevenLabs
+      - name: Verify ElevenLabs API secret
+        if: env.REMOTE_UPDATE_REQUIRED == '1'
+        shell: bash
+        run: |
+          set -euo pipefail
+          clean="$(printf '%s' "${ELEVENLABS_API_KEY:-}" | tr -d '[:space:]')"
+          if [ -z "$clean" ]; then
+            echo "::error::ELEVENLABS_API_KEY ist im Repository nicht konfiguriert."
+            exit 1
+          fi
+          if [ "${#clean}" -ne 51 ] || [[ "$clean" != sk_* ]]; then
+            echo "::error::ELEVENLABS_API_KEY hat nicht das erwartete ElevenLabs-Format."
+            exit 1
+          fi
+          echo "ElevenLabs API secret ist formal gültig."
+
+      - name: Update canonical dictionary in ElevenLabs
+        if: env.REMOTE_UPDATE_REQUIRED == '1'
         shell: bash
         run: |
           set -euo pipefail
@@ -81,44 +129,140 @@ jobs:
 
           import requests
 
-          master = Path(os.environ["MASTER_FILE"])
-          api_key = os.environ["ELEVENLABS_API_KEY"].strip()
-          name = os.environ["DICTIONARY_NAME"].strip()
-          description = (
-              "DAR AL TAWHID Arabic-heavy pronunciation master 2.9.122; "
-              "10099 unique alias rules; existing curated rules preserved."
+          api_key="".join(os.environ["ELEVENLABS_API_KEY"].split())
+          cfg=json.loads(Path(os.environ["PROD_CONFIG"]).read_text(encoding="utf-8"))
+          pd=cfg.get("pronunciationDictionary") or {}
+          dict_id=str(pd.get("id") or "").strip()
+          name=str(pd.get("name") or "DAR AL TAWHID Pronunciation Master").strip()
+          master=Path(os.environ["MASTER_FILE"])
+          description=(
+              "DAR AL TAWHID canonical production pronunciation dictionary; "
+              f"{os.environ['RULE_COUNT']} unique alias rules."
           )
 
-          with master.open("rb") as fh:
-              response = requests.post(
-                  "https://api.elevenlabs.io/v1/pronunciation-dictionaries/add-from-file",
-                  headers={"xi-api-key": api_key},
-                  data={"name": name, "description": description},
-                  files={"file": (master.name, fh, "application/pls+xml")},
-                  timeout=120,
+          if dict_id:
+              payload=json.loads(Path("/tmp/elevenlabs-rules.json").read_text(encoding="utf-8"))
+              response=requests.post(
+                  f"https://api.elevenlabs.io/v1/pronunciation-dictionaries/{dict_id}/set-rules",
+                  headers={
+                      "xi-api-key":api_key,
+                      "Content-Type":"application/json"
+                  },
+                  json=payload,
+                  timeout=180,
               )
+          else:
+              with master.open("rb") as fh:
+                  response=requests.post(
+                      "https://api.elevenlabs.io/v1/pronunciation-dictionaries/add-from-file",
+                      headers={"xi-api-key":api_key},
+                      data={"name":name,"description":description},
+                      files={"file":(master.name,fh,"application/pls+xml")},
+                      timeout=180,
+                  )
 
-          print("HTTP", response.status_code)
+          print("HTTP",response.status_code)
           print(response.text)
           response.raise_for_status()
-
-          data = response.json()
-          clean = {
-              "id": data.get("id"),
-              "name": data.get("name"),
-              "version_id": data.get("version_id"),
-              "version_rules_num": data.get("version_rules_num"),
-              "description": data.get("description"),
+          data=response.json()
+          result={
+              "id":str(data.get("id") or dict_id),
+              "name":name,
+              "version_id":str(data.get("version_id") or ""),
+              "version_rules_num":int(data.get("version_rules_num") or 0),
+              "git_blob_sha":os.environ["MASTER_BLOB_SHA"],
+              "master_file":master.as_posix(),
           }
-          if not clean["id"] or not clean["version_id"]:
+          if not result["id"] or not result["version_id"]:
               raise SystemExit("ElevenLabs hat keine Dictionary-/Version-ID zurückgegeben.")
+          if result["version_rules_num"]!=int(os.environ["RULE_COUNT"]):
+              raise SystemExit(
+                  f"ElevenLabs-Regelzahl stimmt nicht: {result['version_rules_num']} != {os.environ['RULE_COUNT']}"
+              )
           Path("elevenlabs-pronunciation-upload-result.json").write_text(
-              json.dumps(clean, ensure_ascii=False, indent=2) + "\n"
+              json.dumps(result,ensure_ascii=False,indent=2)+"\n",
+              encoding="utf-8"
           )
-          print("ELEVENLABS_DICTIONARY_ID=" + str(clean["id"]))
-          print("ELEVENLABS_VERSION_ID=" + str(clean["version_id"]))
-          print("ELEVENLABS_RULES=" + str(clean.get("version_rules_num") or ""))
           PY
+
+      - name: Reuse current dictionary metadata when no remote update is needed
+        if: env.REMOTE_UPDATE_REQUIRED == '0'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          cfg=json.loads(Path(os.environ["PROD_CONFIG"]).read_text(encoding="utf-8"))
+          pd=cfg.get("pronunciationDictionary") or {}
+          result={
+              "id":pd.get("id"),
+              "name":pd.get("name"),
+              "version_id":pd.get("versionId"),
+              "version_rules_num":pd.get("ruleCount"),
+              "git_blob_sha":pd.get("gitBlobSha"),
+              "master_file":pd.get("masterFile"),
+              "skipped":True
+          }
+          Path("elevenlabs-pronunciation-upload-result.json").write_text(
+              json.dumps(result,ensure_ascii=False,indent=2)+"\n",
+              encoding="utf-8"
+          )
+          print("ElevenLabs dictionary already current:", result["id"], result["version_id"])
+          PY
+
+      - name: Synchronize production metadata and Worker vars
+        if: env.REMOTE_UPDATE_REQUIRED == '1'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          import re
+          import time
+          from pathlib import Path
+
+          cfg_path=Path("data/pronunciation/elevenlabs-production.json")
+          wrangler_path=Path("cloudflare/wrangler.toml")
+          result=json.loads(Path("elevenlabs-pronunciation-upload-result.json").read_text(encoding="utf-8"))
+          cfg=json.loads(cfg_path.read_text(encoding="utf-8"))
+          pd=cfg.setdefault("pronunciationDictionary",{})
+          pd["id"]=result["id"]
+          pd["versionId"]=result["version_id"]
+          pd["ruleCount"]=result["version_rules_num"]
+          pd["gitBlobSha"]=result["git_blob_sha"]
+          pd["masterFile"]=result["master_file"]
+          cfg["updatedAt"]=time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime())
+          cfg_path.write_text(json.dumps(cfg,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+
+          w=wrangler_path.read_text(encoding="utf-8")
+          replacements={
+              "ELEVENLABS_MODEL_ID":str(cfg.get("modelId") or "eleven_v4"),
+              "ELEVENLABS_PRONUNCIATION_DICTIONARY_ID":result["id"],
+              "ELEVENLABS_PRONUNCIATION_DICTIONARY_VERSION_ID":result["version_id"],
+              "ELEVENLABS_PRONUNCIATION_RULE_COUNT":str(result["version_rules_num"]),
+          }
+          for key,value in replacements.items():
+              pattern=rf'(?m)^{re.escape(key)}\s*=\s*"[^"]*"\s*$'
+              line=f'{key} = "{value}"'
+              if re.search(pattern,w):
+                  w=re.sub(pattern,line,w)
+              else:
+                  marker='VIDEO_STUDIO_PUBLIC_BASE = "https://dar-admin-publisher.sero91ak.workers.dev"'
+                  w=w.replace(marker,marker+"\n"+line)
+          wrangler_path.write_text(w,encoding="utf-8")
+          PY
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/pronunciation/elevenlabs-production.json cloudflare/wrangler.toml
+          if git diff --cached --quiet; then
+            echo "Produktionsmetadaten bereits aktuell."
+            exit 0
+          fi
+          git commit -m "voice: sync ElevenLabs pronunciation production version"
+          git pull --rebase origin main
+          git push origin HEAD:main
 
       - name: Upload result artifact
         uses: actions/upload-artifact@v4
