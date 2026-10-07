@@ -20,20 +20,20 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     env:
-      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+      ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
       MASTER_FILE: data/pronunciation/DAR_AL_TAWHID_ElevenLabs_ARABIC_MASTER_29122.pls
-      DICTIONARY_NAME: DAR AL TAWHID Arabic Master 2.9.122
+      UPLOAD_ENDPOINT: https://dar-admin-publisher.sero91ak.workers.dev/voice-studio/api/pronunciation-master/upload
 
     steps:
       - name: Checkout main
         uses: actions/checkout@v4
 
-      - name: Verify ElevenLabs secret
+      - name: Verify secure upload bridge secret
         shell: bash
         run: |
           set -euo pipefail
-          if [ -z "${ELEVENLABS_API_KEY:-}" ]; then
-            echo "::error::ELEVENLABS_API_KEY ist im Repository nicht konfiguriert."
+          if [ -z "${ADMIN_PUBLISH_SECRET:-}" ]; then
+            echo "::error::ADMIN_PUBLISH_SECRET ist im Repository nicht konfiguriert."
             exit 1
           fi
 
@@ -50,7 +50,7 @@ jobs:
           ns = {"p": "http://www.w3.org/2005/01/pronunciation-lexicon"}
           lexemes = root.findall("p:lexeme", ns)
           graphemes = []
-          alias_count = 0
+          aliases = 0
           for lex in lexemes:
               g = lex.find("p:grapheme", ns)
               a = lex.find("p:alias", ns)
@@ -58,49 +58,47 @@ jobs:
                   raise SystemExit("Lexeme ohne Graphem")
               graphemes.append((g.text or "").strip())
               if a is not None and (a.text or "").strip():
-                  alias_count += 1
+                  aliases += 1
 
-          if len(graphemes) != len(set(graphemes)):
-              raise SystemExit("Doppelte Grapheme im PLS-Master")
           if len(lexemes) != 10111:
               raise SystemExit(f"Erwartet 10111 Lexeme, gefunden {len(lexemes)}")
-          if alias_count != len(lexemes):
-              raise SystemExit(f"Nicht alle Regeln sind Alias-Regeln: {alias_count}/{len(lexemes)}")
-
+          if len(graphemes) != len(set(graphemes)):
+              raise SystemExit("Doppelte Grapheme im PLS-Master")
+          if aliases != len(lexemes):
+              raise SystemExit(f"Nicht alle Regeln sind Alias-Regeln: {aliases}/{len(lexemes)}")
           print(f"PLS OK: {len(lexemes)} eindeutige Alias-Regeln")
           PY
 
-      - name: Upload master to ElevenLabs
+      - name: Upload through DĀR secure ElevenLabs bridge
         shell: bash
         run: |
           set -euo pipefail
           http_code="$(
             curl -sS -o /tmp/elevenlabs-pronunciation-result.json -w '%{http_code}' \
-              -X POST 'https://api.elevenlabs.io/v1/pronunciation-dictionaries/add-from-file' \
-              -H "xi-api-key: $ELEVENLABS_API_KEY" \
-              -F "file=@$MASTER_FILE;type=application/pls+xml" \
-              -F "name=$DICTIONARY_NAME" \
-              -F "description=DAR AL TAWHID Arabic-heavy pronunciation master 2.9.122; 10111 unique alias rules; existing curated rules preserved."
+              -X POST "$UPLOAD_ENDPOINT" \
+              -H "X-Admin-Secret: $ADMIN_PUBLISH_SECRET" \
+              -H "Accept: application/json"
           )"
-
           echo "HTTP $http_code"
+          cat /tmp/elevenlabs-pronunciation-result.json
+
           if [ "$http_code" -lt 200 ] || [ "$http_code" -ge 300 ]; then
-            cat /tmp/elevenlabs-pronunciation-result.json
             exit 1
           fi
 
           python3 - <<'PY'
           import json
           from pathlib import Path
-
-          src = Path("/tmp/elevenlabs-pronunciation-result.json")
-          data = json.loads(src.read_text())
+          data = json.loads(Path("/tmp/elevenlabs-pronunciation-result.json").read_text())
+          if not data.get("ok"):
+              raise SystemExit(data.get("error") or "Upload nicht bestätigt")
           clean = {
               "id": data.get("id"),
               "name": data.get("name"),
               "version_id": data.get("version_id"),
               "version_rules_num": data.get("version_rules_num"),
               "description": data.get("description"),
+              "sourceLexemes": data.get("sourceLexemes"),
           }
           Path("elevenlabs-pronunciation-upload-result.json").write_text(
               json.dumps(clean, ensure_ascii=False, indent=2) + "\n"
@@ -108,8 +106,6 @@ jobs:
           print("ELEVENLABS_DICTIONARY_ID=" + str(clean.get("id") or ""))
           print("ELEVENLABS_VERSION_ID=" + str(clean.get("version_id") or ""))
           print("ELEVENLABS_RULES=" + str(clean.get("version_rules_num") or ""))
-          with open(Path.home() / "summary.txt", "w") as f:
-              f.write(json.dumps(clean, ensure_ascii=False, indent=2))
           PY
 
       - name: Upload result artifact
