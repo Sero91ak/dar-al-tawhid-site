@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v137-dua-voice1234",
-  "label": "KIDS · V1.08.58",
-  "releasedAt": "2026-10-07T17:18:00+02:00",
-  "note": "V1234 stellt den gesamten Duʿāʾ-Audiopfad auf Serhat Abu Malik – Master mit ElevenLabs V4 um: Fuṣḥā für alle arabischen Duʿāʾ, eigener natürlicher Slow-Render und echte isolierte Wortclips statt Zeitmarken-Slices. Voice-Manifeste und Duʿāʾ-Daten werden network-first geladen.",
+  "buildId": "kids-shell-v138-profile-avatar1235",
+  "label": "KIDS · V1.08.59",
+  "releasedAt": "2026-10-07T17:40:00+02:00",
+  "note": "V1235 ersetzt die bisherigen Profil-SVGs in DĀR AL TAWḤĪD Kids durch die neuen 3D-Profilfiguren: Junge mit weißer Kufi und Mädchen mit rosa Hijab. Die Zuordnung gilt automatisch für Gastprofil, gespeicherte Kinderprofile, Profilauswahl und Header.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -1060,7 +1060,7 @@
     "duaHubRandom": true,
     "duaHubCustom3DIconSystem": true,
     "duaHubDetailBackgroundInert": true,
-    "duaHubProfileAvatars": "boy-kufi-girl-hijab",
+    "duaHubProfileAvatars": "generated-3d-boy-kufi-girl-pink-hijab-v1235",
     "duaLibraryLayout": "single-column-capsules",
     "duaHeader": "compact-contained",
     "duaAssets": "local-3d-svg-v1221",
@@ -1139,8 +1139,12 @@
     "kidsQuizLearningCenter": "v4",
     "kidsQuizStats": "secure-seen-learning-errors-due-first-try",
     "kidsQuizResume": true,
-    "kidsQuizMobileNext": "fixed-visible-v5"
+    "kidsQuizMobileNext": "fixed-visible-v5",
+    "profileAvatarAssets": {
+      "boy": "/kids/assets/profile-avatars/boy-kufi-v1235.svg",
+      "girl": "/kids/assets/profile-avatars/girl-hijab-pink-v1235.svg"
+    }
   },
-  "updatedAt": "2026-10-07T16:45:00+02:00",
-  "deployTrigger": "2026-10-07T16:44:00+02:00"
+  "updatedAt": "2026-10-07T17:40:00+02:00",
+  "deployTrigger": "2026-10-07T17:40:00+02:00"
 }
