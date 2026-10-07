@@ -284,8 +284,31 @@ export async function synthesizeDarVoice(env, text, options = {}) {
     };
   }
   const arabicLearningProfile = ["dua_arabic", "dua_arabic_slow", "dua_word"].includes(profile);
+  const stripInitialArabicContextShadda = (value) => {
+    const chars = Array.from(String(value || "").normalize("NFD"));
+    let base = -1;
+    for (let i = 0; i < chars.length; i += 1) {
+      if (/[\u0621-\u064A\u0671]/u.test(chars[i])) {
+        base = i;
+        break;
+      }
+    }
+    if (base >= 0) {
+      let i = base + 1;
+      while (i < chars.length && /[\u064B-\u065F\u0670]/u.test(chars[i])) {
+        if (chars[i] === "\u0651") {
+          chars.splice(i, 1);
+          continue;
+        }
+        i += 1;
+      }
+    }
+    return chars.join("").normalize("NFC");
+  };
   let ttsScript = arabicLearningProfile
-    ? String(script || "").normalize("NFC").replace(/[\u06D6-\u06DC]/g, "").replace(/\s+/g, " ").trim()
+    ? stripInitialArabicContextShadda(
+        String(script || "").normalize("NFC").replace(/[\u06D6-\u06DC]/g, "").replace(/\s+/g, " ").trim()
+      )
     : (dictionaryReady || withTimings ? script : prepareDarVoicePronunciation(script));
   if (profile === "dua_arabic_slow") {
     ttsScript = "[slowly] " + ttsScript;
