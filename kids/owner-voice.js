@@ -147,8 +147,8 @@
   Promise.allSettled([
     loadManifest("/kids/data/owner-voice-audio.json?v=2",1),
     loadManifest("/kids/data/quiz-audio.json?v=2",2),
-    loadManifest("/kids/data/dua-audio.json?v=6",3),
-    loadManifest("/kids/data/dua-arabic-audio.json?v=6",4)
+    loadManifest("/kids/data/dua-audio.json?v=7",3),
+    loadManifest("/kids/data/dua-arabic-audio.json?v=7",4)
   ]).then(finishLoad).catch(finishLoad);
 
   window.DARKidsOwnerVoice={
