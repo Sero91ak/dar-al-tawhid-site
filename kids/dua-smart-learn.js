@@ -1,9 +1,9 @@
 (function(){
   "use strict";
 
-  var ARABIC_URL="/kids/data/dua-arabic-audio.json?v=6";
-  var SLOW_URL="/kids/data/dua-arabic-slow-audio.json?v=1";
-  var WORD_URL="/kids/data/dua-word-audio.json?v=1";
+  var ARABIC_URL="/kids/data/dua-arabic-audio.json?v=7";
+  var SLOW_URL="/kids/data/dua-arabic-slow-audio.json?v=2";
+  var WORD_URL="/kids/data/dua-word-audio.json?v=2";
   var STORE_KEY="kids.dua.smart.progress.v2";
 
   var packs=null;
