@@ -8,10 +8,15 @@
 (function (global) {
   "use strict";
 
-  var DUAL_MIN = 1400;
-  var DUAL_PORTRAIT_MIN = 1400;
-  var RAIL_MIN = 320;
-  var RAIL_MAX = 380;
+  if (global.__DAR_FOLD_SPLIT_V1326) return;
+  global.__DAR_FOLD_SPLIT_V1326 = true;
+
+  var DUAL_MIN = 800;
+  var DUAL_PORTRAIT_MIN = 800;
+  var RAIL_MIN = 260;
+  var RAIL_MAX = 340;
+  var READER_MIN = 480;
+  var syncRaf = 0;
 
   function measureViewport() {
     if (global.DarAdaptiveLayout && typeof global.DarAdaptiveLayout.measure === "function") {
@@ -49,11 +54,16 @@
     }
     var w = Number(width) || 0;
     var h = Number(height) || 0;
-    if (w < DUAL_MIN) return false;
-    if (h < 700) return false;
-    if (w >= h) return true;
-    if (w >= DUAL_PORTRAIT_MIN) return true;
-    return false;
+    var sideReserve = 0;
+    try {
+      var pref = String(global.localStorage.getItem("darNavPositionV2") || "bottom");
+      if ((pref === "left" || pref === "right") && w >= 760 && h >= 420) sideReserve = 82;
+    } catch (e2) {}
+    var outer = Math.round(Math.max(24, Math.min(48, w * 0.04)));
+    var usable = Math.max(0, w - sideReserve - outer);
+    var rail = Math.round(Math.min(RAIL_MAX, Math.max(RAIL_MIN, usable * 0.31)));
+    var reader = Math.max(0, usable - rail - 16);
+    return w >= DUAL_MIN && h >= 420 && reader >= READER_MIN;
   }
 
   function isDual() {
@@ -85,24 +95,18 @@
    */
   function shell(railHtml, paneHtml, opts) {
     opts = opts || {};
-    var dual = opts.forceDual != null ? !!opts.forceDual : isDual();
     var rail = railHtml == null ? "" : String(railHtml);
     var pane = paneHtml == null ? "" : String(paneHtml);
-
-    if (!dual) {
-      var cm = opts.compactMode || "auto";
-      if (cm === "pane") return pane || rail;
-      if (cm === "rail") return rail || pane;
-      /* auto: prefer pane (open content) when present */
-      return pane || rail;
-    }
-
+    var cm = opts.compactMode || "auto";
+    var singleShow = cm === "rail" ? "rail" : cm === "pane" ? "pane" : (pane ? "pane" : "rail");
     if (!pane) pane = emptyPane(opts.emptyMsg || "Links etwas auswählen");
 
     return (
       '<div class="dar-fold" data-fold-family="' +
       String(opts.family || "") +
-      '" data-fold-mode="dual">' +
+      '" data-fold-mode="dual" data-fold-single-show="' +
+      singleShow +
+      '">' +
       '<aside class="dar-fold__rail" id="' +
       String(opts.railId || "darFoldRail") +
       '">' +
@@ -120,12 +124,31 @@
   function syncRootClass() {
     try {
       var root = document.documentElement;
-      var dual = isDual();
+      var metrics = measureViewport();
+      var dual = isDualViewport(metrics.width, metrics.height);
+      var capacity = null;
+      if (global.DarAdaptiveLayout && typeof global.DarAdaptiveLayout.getLayoutCapacity === "function") {
+        try { capacity = global.DarAdaptiveLayout.getLayoutCapacity(metrics.width, metrics.height); } catch (e0) {}
+      }
+      var rail = capacity && capacity.rail ? capacity.rail : RAIL_MIN;
+      var reader = capacity && capacity.reader ? capacity.reader : Math.max(0, metrics.width - rail - 16);
+
       root.classList.toggle("is-fold-dual", dual);
       root.setAttribute("data-fold-dual", dual ? "1" : "0");
+      root.setAttribute("data-fold-capacity", dual ? "dual" : "single");
       root.style.setProperty("--fold-rail-min", RAIL_MIN + "px");
       root.style.setProperty("--fold-rail-max", RAIL_MAX + "px");
+      root.style.setProperty("--fold-rail-current", Math.round(rail) + "px");
+      root.style.setProperty("--fold-reader-available", Math.round(reader) + "px");
     } catch (e) {}
+  }
+
+  function scheduleSync() {
+    if (syncRaf) return;
+    syncRaf = global.requestAnimationFrame(function () {
+      syncRaf = 0;
+      syncRootClass();
+    });
   }
 
   function start() {
@@ -133,25 +156,22 @@
     global.addEventListener(
       "dar:layoutchange",
       function () {
-        syncRootClass();
+        scheduleSync();
       },
       { passive: true }
     );
-    global.addEventListener(
-      "resize",
-      function () {
-        syncRootClass();
-      },
-      { passive: true }
-    );
+    global.addEventListener("resize", scheduleSync, { passive: true });
     global.addEventListener(
       "orientationchange",
       function () {
-        setTimeout(syncRootClass, 80);
-        setTimeout(syncRootClass, 320);
+        setTimeout(scheduleSync, 160);
+        setTimeout(scheduleSync, 520);
       },
       { passive: true }
     );
+    if (global.visualViewport) {
+      global.visualViewport.addEventListener("resize", scheduleSync, { passive: true });
+    }
   }
 
   var api = {
@@ -159,6 +179,7 @@
     DUAL_PORTRAIT_MIN: DUAL_PORTRAIT_MIN,
     RAIL_MIN: RAIL_MIN,
     RAIL_MAX: RAIL_MAX,
+    READER_MIN: READER_MIN,
     measureWidth: measureWidth,
     measureViewport: measureViewport,
     isDualViewport: isDualViewport,
