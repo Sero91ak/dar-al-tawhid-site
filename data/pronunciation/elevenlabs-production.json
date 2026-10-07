@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-07T08:16:00Z",
+  "updatedAt": "2026-10-07T17:38:00Z",
   "provider": "ElevenLabs",
   "modelId": "eleven_v4",
   "masterVoice": {
@@ -27,8 +27,12 @@
     "policy": "human-quran-recitation-only"
   },
   "sunnahArabicDua": {
-    "policy": "professional-arabic-voice-until-owner-arabic-approved",
-    "currentSpeaker": "Karim – Arabic MSA",
-    "modelId": "eleven_v4"
+    "policy": "owner-master-native-fusha-v4",
+    "currentSpeaker": "Serhat Abu Malik – Master",
+    "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+    "modelId": "eleven_v4",
+    "languageCode": "ar",
+    "pronunciationDictionaryApplied": false,
+    "textNormalization": "NFC-preserve-diacritics-strip-nonspoken-pause-marks"
   }
 }
