@@ -1,329 +1,269 @@
 {
-  "generatedAt": "2026-10-07",
-  "model_id": "eleven_v4",
+  "version": 3,
+  "status": "imported-and-sanitized",
+  "importedBuildId": "kids-dua-v4-20261007-053417",
+  "importedAt": "2026-10-07T05:34:30Z",
+  "purpose": "Audit metadata for the completed DĀR AL TAWḤĪD Kids Duʿāʾ v1210 ElevenLabs v4 import. Temporary signed media URLs were removed after permanent repository import.",
   "voice_id": "DkU7j9uO4ZEtLD2iRZSH",
   "voice_name": "Serhat Abu Malik – Master",
-  "expectedRows": 32,
+  "model_id": "eleven_v4",
+  "expectedRows": 29,
   "entries": [
     {
       "key": "dua-knowledge:de",
       "generation_id": "2pErsakUzTAquCzseVss",
-      "url": "https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/k62PToZaDxL8odIiUBWW/2pErsakUzTAquCzseVss/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261007%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261007T053521Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=59f44ff0c9b4ed2f2c79efefb8bf55794433bf0d7f9ff0a98991f03a65f3d2daa0ea5d14e92d75223b0f155e17d40c3a7d12aa56fe931a6fed257ce94ff7e4d1bf58c1ee50083131e79aae6364e88e206392179419b691742cfeea5371c25bb0296c09d776329f6e6b9e70a2b5560ceec30666be74565f96309a8f97c4978c1e9a27624dada4bb0b33ab598a2c069ac03e66dca25feb7074d25d3591e7cb6a2360208b683d6482d2aeee2dcb9175d075c67bd8932301df475531d6722efe44343eebea7541956f6a56eef6415fc8569c6eea1f01f6ec0297d6f2109cf1ab93d211cc26a8d5d67c6c5a3105fb96c4716fea8e0f8088c97c5cc9b047812fa010a7",
       "duration": 6.64,
       "model_id": "eleven_v4",
       "voice_id": "DkU7j9uO4ZEtLD2iRZSH",
-      "voice_name": "Serhat Abu Malik – Master",
-      "node_id": null
+      "voice_name": "Serhat Abu Malik – Master"
     },
     {
       "key": "dua-parents:de",
       "generation_id": "NlI5b0lv2t3TEzG6mzbU",
-      "url": "https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/3suDyNMBYIMe41MgMArE/NlI5b0lv2t3TEzG6mzbU/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261007%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261007T053525Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=7a323c1d019254a831933fd66d9cdbc4116928c48eaa48db4a006df4ae01d0a4094a4eef96b78307617f6af1cdbda6dfb16f5ed2f43991e5dd26a58632df62c2411c67ef39b5a8584e89a578e36aea7026fb24a31e9443ade76a1261462cd374efa6b018495679df1ed97545d2c9e2d14497bf91b7109b3d6e8bcc7896bd929b5093bdfd7a4cf3b6f6e8f61ea82802c726c95c26eaaa9091f5f17a28f2e49045de022d36fad6ed847b6b7cc91be5a9c8bf032aa9cb453b0173dcead1a73f4aeaadf59719c2f0614a8e19c897d4aa3e0f743448de93a7e92cc7ed1e8bd36cab64bb2cb06083e14d573ba1ffbd58504e5b5034c6fe5b0fec2761e63e027744f7c7",
       "duration": 12.8,
       "model_id": "eleven_v4",
       "voice_id": "DkU7j9uO4ZEtLD2iRZSH",
-      "voice_name": "Serhat Abu Malik – Master",
-      "node_id": null
+      "voice_name": "Serhat Abu Malik – Master"
     },
     {
       "key": "dua-protection:de",
       "generation_id": "TwI1HB5AsPqLR9IjWbNY",
-      "url": "https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/qRPS9cwavgrJlcaQjK25/TwI1HB5AsPqLR9IjWbNY/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261007%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261007T053529Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=ae26816dd06a3e941864fd3bdb90b81a8c929c4664ea9cb0c4bed548567a2432be250553bcd328c1f7e51014dea9b05476809e3b439f4b2c0c067e80e18b54444a0dc5990d4206d246f450074368c9a9da9feabbce49b5e7313ae86a4b182ff5370787eb7c04553a56638d55bed74836f7de9cb7f3f38484c62f80d56c80abae87401529e242489a3980eb25ed694c67680fcd33ff4e840dfa1336bd3c5035660d60a11caced2601c95d4db4ec6775a83f27fcff41c46fb86cea329bf1badef80674b9da0c8e6887c9c4ae72b1bcfc70703218ec650ff2243a89bcae885f09093facd4107a1f1826b9793df4330ce104667430161c88019a910562f08ae61910",
       "duration": 16.08,
       "model_id": "eleven_v4",
       "voice_id": "DkU7j9uO4ZEtLD2iRZSH",
-      "voice_name": "Serhat Abu Malik – Master",
-      "node_id": null
+      "voice_name": "Serhat Abu Malik – Master"
     },
     {
       "key": "dua-sleep:de",
       "generation_id": "PjLlo6f2CJQgBy8GIevv",
-      "url": "https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/oYi6yLwBEL0FxreZSI0f/PjLlo6f2CJQgBy8GIevv/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261007%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261007T053528Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=0ce259a48a1fc5e14ce2b5faa5a59c30094cdcdf9b236b553a7e8291fcdb9876b39e2038ef1a3c1f2fd8e9b1350413b46b135929b867f951055989f078c8bc2b4659a5b4eeceb7b7056a18eb21009ee448f76a4dfb5809ea2e383cfcf672259bb8812fcc33457cf66c271ad14addae7bb227dcbb953da1f41198ddc58e61e1b35d5c831d7be3360d6b46fa7734db20b78a0e522f5ec5c1618906e14c75e1447e86cb5aa2faf2537f3fb1b2e1848b514932bbe16c44fb9777b4e24247f3f62ef865530e6f77b296e415a65c4d2e22064eb6c2473209cc5d52fe25817c432b1765ab8bfcd08bd05e0b1086d95d0f2427e0afb455ade13dd2d8ac4236224d602798",
       "duration": 9.12,
       "model_id": "eleven_v4",
       "voice_id": "DkU7j9uO4ZEtLD2iRZSH",
-      "voice_name": "Serhat Abu Malik – Master",
-      "node_id": null
+      "voice_name": "Serhat Abu Malik – Master"
     },
     {
       "key": "dua-wake:de",
       "generation_id": "le4cfgn7QTc47xPYqzbV",
-      "url": "https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/Z3pTFupnhBPlXHH04Pr1/le4cfgn7QTc47xPYqzbV/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261007%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261007T053530Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=0f68c17dee5ec50e3885bc0565b303e7d8c3faba7d6d7b5d9a89bc0e5608ca0bc186c70177f95b72abf9b0fc0a8fc14202aa2b1123a128fa0fbc48353a9969f9c71134213bdf27fd0cac827dca02957d85f43166e953c2df07d14ff634a878e2ad2d0616f824ec4090d787df7cd6b6e55747ee70ffc9dbd62efabcb2c667344b188099116304aeb267e6d1443684ae0a11294f320450f77ff9b682b91aa0fbf6d51f86f553e0c0906db16b9f5848005d62a4b7674f52faf92c5d1007facc52cb664cc7deff78ce7c4d25cbdfd37fb2072d10b0d1b99740a54570360a82036e867662e3d65433d72d1930492de06bea7bf9da065dd8dd5ccf7806408c2c7e1135",
       "duration": 10.96,
       "model_id": "eleven_v4",
       "voice_id": "DkU7j9uO4ZEtLD2iRZSH",
-      "voice_name": "Serhat Abu Malik – Master",
-      "node_id": null
+      "voice_name": "Serhat Abu Malik – Master"
     },
     {
       "key": "dua-eating:de",
       "generation_id": "Jip7ptqc7XHfclJjXunt",
-      "url": "https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/FNSEoQiMrtjw3JvleUWf/Jip7ptqc7XHfclJjXunt/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261007%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261007T053531Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=7a4feb4549b0e8eddcc4f238a93925dbd82eabf1d2fca6d6dce87500d312b05d3369fcfa3d5d8db26a6d938c9b30698b46473f6686c291b0adb04201107cf760e436867c93391c67b5ae08820c3ef97efcb68438c8744f3f6d4a768e4dfa001fdd702ed0d9a046ecd43a6434c09596c12b7a054d0753e9a9ca985fca26333df5641b46a98057bd9cf2502d74f57686009898520684fd493de7aad23db088e8c1a2ab73c4cb1cf2dfd213b3ff3ecea7c614e681a4f3f4aa41c858b6130250c414ca04355f44c8371980d1f9e3edf1b1073031a7ee0ac0ab341f6f7a997f294eac1128b279142d46f0d3e7186bcdfea8b2ab090292d45731ab96f7496b3ba66d6c",
       "duration": 6.64,
       "model_id": "eleven_v4",
       "voice_id": "DkU7j9uO4ZEtLD2iRZSH",
-      "voice_name": "Serhat Abu Malik – Master",
-      "node_id": null
+      "voice_name": "Serhat Abu Malik – Master"
     },
     {
       "key": "dua-after-eating:de",
       "generation_id": "kTSj57nlF8665qM8mlay",
-      "url": "https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/GaSVUQk5Vwqi9QMKN1Y4/kTSj57nlF8665qM8mlay/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261007%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261007T053534Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=41f130b0b22e070d9c07d3e6fc71be40d3c8af5c7beb475a26be04c7d695cd1c2e7a4faf512bf2b50c56fccdedad7c876939730dbdb2dd9d9cd0e6bb068037c7d649b0a01aaeb107f9595fab240f0e97a29ffc74ea130311e6bf357f9794e458ba654e0033811e5d1097b77ad6cf707c4f0133e2c42c799c40f4dbc97e69a4f0d1a7a7b9af84b2246dd9619452744797e3cabc34418c696aa8604792b297280939abe32e848e64524e2e3dd6564103d5a5b14938fdcd2dd1129ff652974b2241ec02f1bb01ca4f0d03e981f71f1d40c1eca4c950ce3dc71f05eaa42fcf8de1b5f52270190725c3826e97743a8fec779585af9634ee01961e650fe982ccbd1357",
       "duration": 10.8,
       "model_id": "eleven_v4",
       "voice_id": "DkU7j9uO4ZEtLD2iRZSH",
-      "voice_name": "Serhat Abu Malik – Master",
-      "node_id": null
+      "voice_name": "Serhat Abu Malik – Master"
     },
     {
       "key": "dua-toilet-enter:de",
       "generation_id": "Siwjn0p4BfBjpxm64AtP",
-      "url": "https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/An6npAPOW58n5BdadJPR/Siwjn0p4BfBjpxm64AtP/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261007%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261007T053536Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=933033be5c6fb76dfee0e35e03e0da726d2ed8adeea81d470f24244ea3000c910c44abaebd6d6a3af4986d0e0eacce244d6ac96ac881a6ea2f82da31a2d84c0a6df8338ab3c85e09e932b1700469ad0ed6d76f4bc294460529241b957e2213861ff3fb446be0eccffbec6e2d4e39d0626cfbdd545cc13d975daf459cadcbe7e90405ed3e09f9b76135da800017105e84e597c9209e8894f6783f897282574f28c2524863a7e3fde24fab81ae34797fd13ac178bec69df6a95e4f65a040787677bd2d86871adfd2e4a8faf1fb4d794a687d813f01f3b48fd6d2c23d4e702a6494f3fc9c414450076e8c3102f779daef3629dcb120e22af22611d097e554b35257",
       "duration": 10.16,
       "model_id": "eleven_v4",
       "voice_id": "DkU7j9uO4ZEtLD2iRZSH",
-      "voice_name": "Serhat Abu Malik – Master",
-      "node_id": null
+      "voice_name": "Serhat Abu Malik – Master"
     },
     {
       "key": "dua-toilet-exit:de",
       "generation_id": "geUyG1x4ReqE0bBFM56N",
-      "url": "https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/3evti2Qm7eTp3as4VaaZ/geUyG1x4ReqE0bBFM56N/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261007%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261007T053559Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=25b00afc3216a1baafbf8e64824425c4dca6de787393183b0fdffeb722e66726da87f481e6a312a9731993673afc49dd3e31cd9075735917027dee0a868528257959ce3abc1431b5ec26687dc76350d2f58ac786787d86b79150d04259c80c82385391ad9cc22a36aea8d0a594e9e60d0cfb3efd81b25432efd7064d724019ec473672109a13330b2c5a955d7f470b9d21c6cec6ca8569cbd2c8b29726792fe79daa0de880f912cce69304e33d8e551ae531644237451348dd9fdd03520f14f383ea547cfb6863059936c396062265102f716a9229b595ab984916b0f7ffaa34efd895237291cc48d7d408ce17ec4ae90615b4f2a32e5070983cf0c124e494f5",
       "duration": 6.96,
       "model_id": "eleven_v4",
       "voice_id": "DkU7j9uO4ZEtLD2iRZSH",
-      "voice_name": "Serhat Abu Malik – Master",
-      "node_id": null
+      "voice_name": "Serhat Abu Malik – Master"
     },
     {
       "key": "dua-leave-home:de",
       "generation_id": "SuMrNMbbiGg4r5gWStSV",
-      "url": "https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/kVluWUhn9E8QdNDAuLO7/SuMrNMbbiGg4r5gWStSV/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261007%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261007T053603Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=697fad3861c06778da2dab56ed6e66f91c4ccd829d5bb022b7023b491cdcecca396b5cd01108db0b1891335544932bf35c9dfa0b44fd4ba60dc040925c465f30011c431611269b012db0b418385402d847a951fa363509b79d8766fe16e45ddf05f6df5d976b36b30996700d799094263e862aad076f6d1b7dd558c038068119b5c9a42a28a2653a9fc580398692000f9afdd85c5d3f78ed1dd8fa4c6051c55d0283d768a1b15f99ffa2ba50f05bbe08e9a7c2bdb7130c1e6da80ee503746fe5178fd82a4d94014eb503ead530d3c0bd4601417878a6bebe7338b78426e8baaff9d12e613be08cfb83daff2d92e03db324009034cfd4ec6e431806146db6e5e1",
       "duration": 11.04,
       "model_id": "eleven_v4",
       "voice_id": "DkU7j9uO4ZEtLD2iRZSH",
-      "voice_name": "Serhat Abu Malik – Master",
-      "node_id": null
+      "voice_name": "Serhat Abu Malik – Master"
     },
     {
       "key": "dua-mosque-enter:de",
       "generation_id": "6VfXp7hQqePBO4lcoF2A",
-      "url": "https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/nyUCTXzGQX4xyVm5CR1K/6VfXp7hQqePBO4lcoF2A/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261007%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261007T053605Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=6f0c4fbfe51533a0cd86f86a61012996bd42d3d802262406e3a7b1003569797500ee38b1b7b22df397ea15b1e94eb1fc02cb30cc8b1f19b5f1d8853719dbaa241b4986badef52a3ab0b808bf094f0d9a1d56b4f7e1535e2690fff44fb7c61db4dcfb2cabdc8aa8c8bf2be9c493dad3782762ac96e9630803633d523d13009640e05ad7abb692b74a476d98fcf9ddb34573dfc5295635d5f64bfb98402b3849a2bc60b8d27fd736b569c9321e536986fec59a7606cf69b7032d29ae8135b88b6cd977f2086c4dc9d714a9712c5ccccb8b4f8ce2a578d66366b2b8373cd6f102664b98aac249aa948b0b0a0a090b85bc46c0dc41f4c893a4b6c1b8f8cf3afdef65",
       "duration": 9.12,
       "model_id": "eleven_v4",
       "voice_id": "DkU7j9uO4ZEtLD2iRZSH",
-      "voice_name": "Serhat Abu Malik – Master",
-      "node_id": null
+      "voice_name": "Serhat Abu Malik – Master"
     },
     {
       "key": "dua-mosque-exit:de",
       "generation_id": "azDL9Z09QTW2PzxiMRqG",
-      "url": "https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/8KeghbHA2vItDm5RVUUJ/azDL9Z09QTW2PzxiMRqG/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261007%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261007T053609Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=47bcdbec35093e003759dcd8fa37ff81707d72a1c45d1057517b8f41bc9889e5447aa19091af89b97420511557294d90932fec59caac611cbe9a252c64c3d6964b2ca73c27840a32f7e86000592be184db74b74539c34253bad2b799ca397ad6bbc6e24d4c3752dd75c8e2820b38e5c56d4b8cd4f787a6ff590db8e2a241cce83d6813019ea8df67771dee0fc9427a6231983d4d6829641f81a44ad19fb7673bc2b708ec2152a5acb40d90e92e101776907d2449eb7062a54d2d852f6d5bc0a94a442d41c9bc8bd0846917122b57ede4f6890c5b2128adf232f844e4f7cccabe39d92024907eec62ebab31f656f034d6a6538d4b1c7ad67ad58f7fed596f7fa0",
       "duration": 8.16,
       "model_id": "eleven_v4",
       "voice_id": "DkU7j9uO4ZEtLD2iRZSH",
-      "voice_name": "Serhat Abu Malik – Master",
-      "node_id": null
+      "voice_name": "Serhat Abu Malik – Master"
     },
     {
       "key": "dua-afiyah:de",
       "generation_id": "8aI2mSPkzqnB3xRlCVAY",
-      "url": "https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/GdlbE7yASXxAvnyxdy3b/8aI2mSPkzqnB3xRlCVAY/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261007%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261007T053610Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=9705f5843470eba0e6acf8d1a1cb78d596899bddd082ded874699df72e965edbe61de95ecf26872bbbef2f95640b07921c951b886ee3fd1939351922a3378ac3b6985f28f974d0184f7f6836520deb4f37421db930a9f9fa2dfd85cace41293ba055be98fbdb21998b61db514f9331d0ce4ecc2d5a70bf7d6bf469d531fa7e07b05f337e8b1b652ac71b690ae0f287cdf314a6d919ecefa396ce231f64f5df015fe95eb969c705510b80bd3ba0d1d0b0a3d59f9ab7412c3ecbdbe9044e3e6cff5b2b99053b005ce8e1da64b8591a292077925c2e14dd667e19000f25d84db3ae3f388ef551432d21b7e58beb604c455a247e72a76fd4c93e98170b2cfd731d09",
       "duration": 10.24,
       "model_id": "eleven_v4",
       "voice_id": "DkU7j9uO4ZEtLD2iRZSH",
-      "voice_name": "Serhat Abu Malik – Master",
-      "node_id": null
+      "voice_name": "Serhat Abu Malik – Master"
     },
     {
       "key": "dua-rabbana-atina:de",
       "generation_id": "kkc3bjZrGMKdmiM9FifE",
-      "url": "https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/Lp0fNtsKUwgUODyydnVb/kkc3bjZrGMKdmiM9FifE/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261007%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261007T053620Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=89f0860f7b9be043d8ffad0e3c7be7ca94be134e3aa8ff1a8a12e22f7e21db0eca55470674bbf497c39ba389d1cc94a85a5febf8d087369bbfa0cc9164fa98dc7d67d492c2a226381c2238daa9f31aa9cefc08b726daa8953e1d2bf842978a959a26f561448e75943fbb2efd2051d0e9e8078f1ee1f39f16e6b191f25cebbacbbae5984555e0cfebd7f0046dd4a9fc94e3c183e3a4b36a7123afeca820fd9a7610b12cb6f4ee6738eec453910b15666caef1d262abd9d5d7ababc0ee608dfbda34115f8a960ff873eb7f6c4cc22c9680277e186257553e87e52a42b21357128e68ae08d873c00856929eadf753291ceb3103af8482b4d03563b4b1ca1b4bc274",
       "duration": 12.48,
       "model_id": "eleven_v4",
       "voice_id": "DkU7j9uO4ZEtLD2iRZSH",
-      "voice_name": "Serhat Abu Malik – Master",
-      "node_id": null
+      "voice_name": "Serhat Abu Malik – Master"
     },
     {
       "key": "dua-repentance:de",
       "generation_id": "Cxoh0CtRPrnpBxKIjLfm",
-      "url": "https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/Q0rswAx8v10cV2UD79lk/Cxoh0CtRPrnpBxKIjLfm/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261007%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261007T053616Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=7bb58842fd07be1ec07ffd533a1bf3072b62c5d02c0fbc1382e6995c89dfa75fe035f4853d7fd4ce57879a10544029e74cdf97bf998db9172448d90eb882c672b54163869fc586922179bdb53b1572ea69b28eaa8620e6dcb8a6fe30de7bf6347cc09c58d4ee92e57a73f50c628dc109f0317e77b7eec7a97f8319e3677bdc9be67a326f75dff6014cfc502e524099ef0f945c3803c75db6aebabdc8ee4dcd9e3f8d7dcce007b11b1e753b9c7f0986c446e4f0ea154147ca90b3f8908a9075b65410bd6c0764669798e746183b22b7891af3b0f9543e846c95773e04379e98b317bded87225c99bcfb57fdec7f9726058f81c9f6ade118545dbe66e7a7899fb6",
       "duration": 14.88,
       "model_id": "eleven_v4",
       "voice_id": "DkU7j9uO4ZEtLD2iRZSH",
-      "voice_name": "Serhat Abu Malik – Master",
-      "node_id": null
+      "voice_name": "Serhat Abu Malik – Master"
     },
     {
       "key": "dua-clear-speech:de",
       "generation_id": "9s5NTf82awJnrauIXXrL",
-      "url": "https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/RM8yl8iakf6f1KMz4YNB/9s5NTf82awJnrauIXXrL/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261007%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261007T053618Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=2ec3b1a6fdd592b7eb567d55f067b6700b967eee35b0f3ff6746287ef3cd0b0f5e9ec2092432c6dfe6729a40e13bb2357a2839604ac55018f8d5d56127e7fbb910f0bb52126dbbf614a28877513eb9a67ffb6da5a00d9ce8b78eebd894ab0ebfb3efb4568f5c0384b157a9ec039bf4e09c7dc3435f2055c1525eff37c9491a51ee4b58272236d04b689fa60cc6c88f0e4c66183f6e453ba7947d3d56657f5825a11b4aa8ac4b3ac078a562eb0cbffe3ab955a78d61e3ce3cc83a01c12522c87026cdec425b86b642c8aea9d98f4fe8570509e1449567e7a459343ebf1e13bc6ce7cd694de33c061dd60e83dc9fcd6875c042be157cf592e58ab9e03eeeebbc91",
       "duration": 15.36,
       "model_id": "eleven_v4",
       "voice_id": "DkU7j9uO4ZEtLD2iRZSH",
-      "voice_name": "Serhat Abu Malik – Master",
-      "node_id": null
+      "voice_name": "Serhat Abu Malik – Master"
     },
     {
       "key": "dua-accept-deeds:de",
       "generation_id": "VAciKkA6rvVLwDMgYbIN",
-      "url": "https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/lQU45ZEL0BaN3K9elvCr/VAciKkA6rvVLwDMgYbIN/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261007%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261007T053634Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=8f3a1fdaa8bf9d4b74a69ea4c034793c52541418c386cdce4007a25f1cb0e9327f6afccd3d8ed94ad2263af3a4c8822e19aa5b17b93382c9b290bd1f40f5335375e2b8fe253f7d2deced70ade34e60ba757b98b837a8df57c7275c58142b5cad8e61a1e8636e940664831a99555729f8ba474a65086d336893a3108b84780e03696aab906d53bcbba3ca26fa4a6edcdda846c052eb9302b6910ffeca3c1527832e2b82f1b711e0e9c88ba39ca831b2ea4dd7bc8d2251f3fff6cfbbce9e3d11b64184bfd0480b8f92638d66d67370fb19da62ffbbc29972bdd5a15533974f276dd5fad9c84834143b52768c37a3a039e7ea29461076d9d83c7931cfb17dfb9b12",
       "duration": 10.64,
       "model_id": "eleven_v4",
       "voice_id": "DkU7j9uO4ZEtLD2iRZSH",
-      "voice_name": "Serhat Abu Malik – Master",
-      "node_id": null
+      "voice_name": "Serhat Abu Malik – Master"
     },
     {
       "key": "dua-heart-guidance:de",
       "generation_id": "BNSeTaxHqlwOKRzdkYhD",
-      "url": "https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/qRcwqA2ZR4Ag0PiYYwCd/BNSeTaxHqlwOKRzdkYhD/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261007%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261007T053636Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=3fa3575d71303a2ec79fbe94361eb52a415c838bb2527708fa3830cfdd6420cec39b2a2cad020e6ba68b932de6c827997f21eedd36ddd78710b8d626b007e18ed737aee57e1226c3eab9b43b188c2b3f82e68666a3da96d2fb714a09ab7c02bc41efcd37985c7d3511ef87e3697be375a5f6555ddd802bf34627c429e92d8cd2645f503651f32140cfb0b8b27927041a86f09d36e6a9bfc2c07785ec0b6774b8506cc48c50155fac355d59b16d8cb27d9f01e0b2d35d65d81633c881685b4a73a8ce681a26a4894e805939099c31e42dbc17d8d561ec63d600d6ab27006049a69e793d04b25dce8db8e9a3fddaee36de9bafa4e3c0111e132dfd2234e74219e2",
       "duration": 16.64,
       "model_id": "eleven_v4",
       "voice_id": "DkU7j9uO4ZEtLD2iRZSH",
-      "voice_name": "Serhat Abu Malik – Master",
-      "node_id": null
+      "voice_name": "Serhat Abu Malik – Master"
     },
     {
       "key": "dua-ya-muqallib:de",
       "generation_id": "cqFJMl75ETQMnN6RbLEg",
-      "url": "https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/3TJeH58Fgz0K5v7tU3XV/cqFJMl75ETQMnN6RbLEg/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261007%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261007T053638Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=4785c3310f4a444f528c58e73c5e1f1b68fba7c4671a7a506d182ebb38c375b49930d62114511e3952aaa64c69137079688841d9de162bb65505832e399ce47c43a48a12f765e7e077d0dcb64703b1426dd4023dfed690cb6ec016a6a5880d5d7d513f1945e6a46e4e1d7b4af0e77ab3c9c25b92a0988d0cca6ff69bd98b5c6bc34c29bc71cebd7932415a3c4d83e8fe7609311c43bb7e4301698f4d1e25deabcf6395dcce53ea47bbabe487e2d9120b395c896818059892705cec7796b26ed579a729100aaba059ff082d1e614a629b5f59c65912392ca4c0b8141ef8f8ca5a6343a9bfa91c55b9d0dbb9d8c796788b27ea65ca86e020e80e076e54cd7f1b9a",
       "duration": 10.24,
       "model_id": "eleven_v4",
       "voice_id": "DkU7j9uO4ZEtLD2iRZSH",
-      "voice_name": "Serhat Abu Malik – Master",
-      "node_id": null
+      "voice_name": "Serhat Abu Malik – Master"
     },
     {
       "key": "dua-guidance-taqwa:de",
       "generation_id": "T6BfdxiM93BHxJM5uaLD",
-      "url": "https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/jdrjcwpSGQdUUsTO0KcX/T6BfdxiM93BHxJM5uaLD/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261007%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261007T053641Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=37884fe0067772aa2d3c2da6c4137c1c338c6c2570821a12b37aa3f75cd0613e5f12662e84fe54f7a38b04a6bc3a4431dae5b87aae19a29c8dcd9cb5ea389284d4a144868fb0a446a5401ee278d73293ec17e988f1a2a96e1f2c8bd9c7e7a2e18851d31cbec676442b0a41c921fdd232ca840ea7e63446282704208c88f6e8b05c656146d3d963ba274b914ba6158083aa4f90b64b15a93b5f549c7aa3c3fc3f73a97a877366e4d8884a81844031b4b28b8c91b5fe19b96919dcbcb3107c66243b94964ba6108ada0893d77f729aabfbad8809c98180073fe93fc4241214e13282140f933fc72dee3ce1e95e012eb44b0f99b419a09be3ccdb005e37b05136a4",
       "duration": 13.2,
       "model_id": "eleven_v4",
       "voice_id": "DkU7j9uO4ZEtLD2iRZSH",
-      "voice_name": "Serhat Abu Malik – Master",
-      "node_id": null
+      "voice_name": "Serhat Abu Malik – Master"
     },
     {
       "key": "dua-sleep:ar",
       "generation_id": "Jjza3WqnYVS2Fi7yHyXM",
-      "url": "https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/ibpGjilgUjZyBImNtNEk/Jjza3WqnYVS2Fi7yHyXM/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261007%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261007T053642Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=42fe7805f54416761a8fac40e9cb4a6f4e7468efade426b16794cd02e5b554fb5f0ceffea832639b4087109cd1983f25db0c859391b540ad8780d62e22a8eaaa8cf43502ab3bca8844767465e6576093aca8a79c678cefeec538c5eaf3ecfd82463133ae456362670a6f649f92d5d1707fe999b8659c5d8fce0245ea7ef3c6f23cb66b46ec412e47ce96114c09e0f89283bafd415b5320d9f4fce9bc77ba672085d704ef0c827faa89d8e12086f99a28d6abc9af4d9ede53a1893537d114b9c824e879c90f4a0069dd648ebddc93386cb1bf25ba2b735d92f8aa23c5c1f4ce89a4be3b18c45a5e90e3596446948337d60e4b4550341e8f86067eb482b42d5a9e",
       "duration": 3.12,
       "model_id": "eleven_v4",
       "voice_id": "DkU7j9uO4ZEtLD2iRZSH",
-      "voice_name": "Serhat Abu Malik – Master",
-      "node_id": null
+      "voice_name": "Serhat Abu Malik – Master"
     },
     {
       "key": "dua-wake:ar",
       "generation_id": "gQmmVE9gc9pFVHgcbYaX",
-      "url": "https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/5yrNF9rjquN9KbQREeye/gQmmVE9gc9pFVHgcbYaX/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261007%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261007T053643Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=696844cb3b15f189f4ab35092474f58d430b2093b23b9568664724c978043eb0327df3e63476385a9c5dcc5b646735382a256d4be5ec47204cc9ce619f1dfc2a6c9931a38fa303e1beccb32f42e794385430f4e0976c71bb9aaf4ac917e5523bb1d5a0f23dbb0ba0b6c746e74a05e886aa942f6c9e13b2d1a8dcef5f9dc785628c308ddb7bbc6f638c8687afc8d6debaaa28b0802fd8a85b58f957d68066f5d330d5724013a8c637159d42c237a5958810e843e760a3443909d4fbde679c80b9ea4a476051cc1eb167eb4ecbd716ba47ac1142e0707466293bfa9f9c485e6bb797ee8bcec70a8980d9c6207c80ab46c24cfa0ceed453d0df48ba526aa9aa9af7",
       "duration": 5.76,
       "model_id": "eleven_v4",
       "voice_id": "DkU7j9uO4ZEtLD2iRZSH",
-      "voice_name": "Serhat Abu Malik – Master",
-      "node_id": null
+      "voice_name": "Serhat Abu Malik – Master"
     },
     {
       "key": "dua-eating:ar",
       "generation_id": "b3fFfK0bVQUW0458Zy8B",
-      "url": "https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/iVfwXXk6FsspY8x9VVEC/b3fFfK0bVQUW0458Zy8B/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261007%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261007T053644Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=84475c5e3058ccb60eef610006638174b4a4d2930b724ea6ad65bce76c3d06cb40cc6abf2fe0f1e99e2a13d3fc575feb8a98f1f72834a555c7a2e55e77f523bf9b54ea06ad04a60cb003204229afb7d93893f676638ec306fcd4c0ae4a3417b749cb5173364ca9e556ed025a92b96df6dae3e4ec271e4f3b15c924024ec0a9ebe4071e4422ac1c1c3517074121778cf29cda2e541ce516daa0a29f74117d723aa28df0b3c3b006cd161a05cc2e6f4183924e752ab25e2463eb97993e7048a0a0715d47e7b732dd6db1c0390bfc600a3ea910535d1661eba7b3ce26dce30b9e9a26031bc3af24b4e7267a4acaa28c62448cf160fc75dadbee5a895bdac87c06f3",
       "duration": 1.04,
       "model_id": "eleven_v4",
       "voice_id": "DkU7j9uO4ZEtLD2iRZSH",
-      "voice_name": "Serhat Abu Malik – Master",
-      "node_id": null
+      "voice_name": "Serhat Abu Malik – Master"
     },
     {
       "key": "dua-after-eating:ar",
       "generation_id": "lhOogdfxvdrDwB7m2vPM",
-      "url": "https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/zWQdO8MoqNj0DXcAKYI7/lhOogdfxvdrDwB7m2vPM/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261007%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261007T053648Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=994fced3fb8ffc4050b53cace448791431d893afe5ce73133d852d8bdb2e5ec343393e6c983ae13a8b7f712a5e5d73c1a2c2aeb27cf933265e9a71a627865435a7c33d7481dd95873f9246b9601900b1ae40bb28c334a4a432d3be2d971962e685b58259608b7614e333524b02fc58a6fdf7e628190db91c4a3033a3e33cc00ed52c7a03259a20eeae5ca0a16e7d0728c7fad28f2bc1601af0383b76afb4dfc2d77af5017975b3087a17617d45aae7623f4ef760b680dc1e875980c94794380029dc33b3d023ac8628a893c9ee092542620cefabb7c336bd50c5f442666dbf1e2126aac8b47ce53e1b46da6161927043103cf8f53a41915d27d56996f54cdd50",
       "duration": 6.56,
       "model_id": "eleven_v4",
       "voice_id": "DkU7j9uO4ZEtLD2iRZSH",
-      "voice_name": "Serhat Abu Malik – Master",
-      "node_id": null
+      "voice_name": "Serhat Abu Malik – Master"
     },
     {
       "key": "dua-toilet-enter:ar",
       "generation_id": "BhV01vwks1B0wMlyfgmN",
-      "url": "https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/JxOY00fJXeSpSkhN0Lrb/BhV01vwks1B0wMlyfgmN/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261007%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261007T053706Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=5c61f2a3686de9be8d41c61f4ef45b95ae6eac3fa5a084b9e9e74268531dd5e083bb55760c22da497064f16659a35b2cf5b1a4e421c35a76d033415993367a2201f4cf500dfe4fa0c413c71f5e75e292cd6d42a88aacba2151ea3e57fd95b23e614a423e51295f0146daf72099f96752c3cbbf63247696a132eadccaa893d0b9d72521866601e51e20237b189b63b4ec4d9626fb5e8476bc40ca44c1db62b8f700e49c339b7b70bbcd43bf420fbfadec440d4abbbd93cd6f89b47cf4a09f04589b3bb82eaa95b96008137ffbc82c15c730ae435bcdb2e27c7f99df44582d1d24c912fea576a2d863e4b8640d05c49b848e321ab2dbb7c338fc950a458dfd4ebf",
       "duration": 4.32,
       "model_id": "eleven_v4",
       "voice_id": "DkU7j9uO4ZEtLD2iRZSH",
-      "voice_name": "Serhat Abu Malik – Master",
-      "node_id": null
+      "voice_name": "Serhat Abu Malik – Master"
     },
     {
       "key": "dua-toilet-exit:ar",
       "generation_id": "bNZP0dznNniVzylAnVMv",
-      "url": "https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/Dymzo1K3chkgW1mNMwq6/bNZP0dznNniVzylAnVMv/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261007%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261007T053708Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=1a933d0f12f402c78616f1849a9f3100ef3263946c010ca757c9390407009605909fe967d2b4262bb6f5239c96c5e3d4d1b040f7a1fa40ac19e1aaa9a9845d24a950a39e0e46d0df78c2b3fe303983b2018116f111b18526872c1c7abe76e2e684744f36588c913caba607dccc5e48a61539cfbff8300fbb5a5f2dfa92b382a574e858dbd98e2367d5838b183d59c45be56d6903516496319be51e3a721f6620e2af66eefb4ffe4341aafb28365537ed7334d7d3a06044b611b9e7c48c17a7c39db632ac7bbcad16def46ffa57ca75590835bf31607634f618262f33b79f5ae14ac9cd427bc879291b17872a67b78872e4d45e07ebb51ec3f399cdb50ad51a42",
       "duration": 1.36,
       "model_id": "eleven_v4",
       "voice_id": "DkU7j9uO4ZEtLD2iRZSH",
-      "voice_name": "Serhat Abu Malik – Master",
-      "node_id": null
+      "voice_name": "Serhat Abu Malik – Master"
     },
     {
       "key": "dua-leave-home:ar",
       "generation_id": "1qo3s44QH9IuTPBxZOEu",
-      "url": "https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/6hgmvrqJo9auEjDcN74D/1qo3s44QH9IuTPBxZOEu/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261007%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261007T053712Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=9616711d3ca05742b7e3e2e678bcf123adeeb07174a24c03db89f0391b995ffb04a75e3bd7a418f9cbf9542de62a61f77968b431ca70f68a321edfac8c55d64a1dfe76a36343e808f37abd7f93acce3080bf1ba6e0d837ec15a59655d469147535d852d2cd4d4f7ada8f083bfa5a6afe21be79c90db903d998412b0d332deac82f3e186bafdea5608b36006b5dedc713e0d27ccee618946d22f28f7aed9082724263612669401a4bda0b510953c43aa1c3ba967a312107eb80662ccde4e95d734fa7274777df300ab185fb0d5971b5fa8985c4c7b276d39c2fcc477f9e1fe566657904ff38a601b1749dc170b8ff8f4f1d8d4b989318b29a29b163354e0f065d",
       "duration": 6.4,
       "model_id": "eleven_v4",
       "voice_id": "DkU7j9uO4ZEtLD2iRZSH",
-      "voice_name": "Serhat Abu Malik – Master",
-      "node_id": null
+      "voice_name": "Serhat Abu Malik – Master"
     },
     {
       "key": "dua-mosque-enter:ar",
       "generation_id": "KVKhQsjXZgT3PtvMQHhL",
-      "url": "https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/stMcOo53uxhJ9UV23jb3/KVKhQsjXZgT3PtvMQHhL/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261007%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261007T053712Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=1cf0ec192300f682b2bc421e55fb03c4930b0f38016044f0a18fc0205c05a8555fd66b63a1649f194e29bf00bf2c653ffd44d138e8779176fec01abbf72cb1595c09954cf04317eefcd529fcdc149c214f3e119a81d38c264b7a8b4749b519074076fe8f1a18c45a467749166d7fa849d53e2c0c4736f8191b95efecd03bc6a7f6f6bcb1372b2976b6efcb645b08cdfe1a36636d5cb7d091ddae35d45e6ba4ccac6ff0c9db60b96648919815a56cb123387d16cc17888dbcf6950ca492ea8b001cb0e6caaec78f56779b27cba35ee029c9b1c5ab93623f932d41cf845bf49f25429581dccd7bc2c3f85635a367544ca6008386bbdb0018e455494764f24852b3",
       "duration": 3.12,
       "model_id": "eleven_v4",
       "voice_id": "DkU7j9uO4ZEtLD2iRZSH",
-      "voice_name": "Serhat Abu Malik – Master",
-      "node_id": null
+      "voice_name": "Serhat Abu Malik – Master"
     },
     {
       "key": "dua-mosque-exit:ar",
       "generation_id": "FhIOhU71otFhcZYwCUck",
-      "url": "https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/QwUkS6laJ6vQVufpUFa8/FhIOhU71otFhcZYwCUck/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261007%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261007T053714Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=ab95af07ecdd38c667302bcecc8fb8c7166fe9faa327fe6399a32eaf1febae6ce7d1e4d73272335da07bd9acf7256946f1a4087b781e01bbd6c930a7510793d905b5aefa100b77de312d899ed7234ebc3e049e94bdc9a4f4e1fcd961ed34ead50739b65aa920e58724cbb9f9ff2e3f196d08320cec9a19c8b387b8a1fa4adf5a236c2936d28b915bdebf22f945de2d5722c58ca1f3ef41c05f388bcd6ad65428f921c546387438021fd40313da1e2a7a48026f148f7ce9cf4c62e5a7e03c058a017fdb066e0070e78a4ae7f7f402528f17c34b23cc7533597357aead86246fb4a23cb0d415b148011e5856d64ecaf42e9a04bd1c199adfd91acf1859c56ff577",
       "duration": 3.28,
       "model_id": "eleven_v4",
       "voice_id": "DkU7j9uO4ZEtLD2iRZSH",
-      "voice_name": "Serhat Abu Malik – Master",
-      "node_id": null
+      "voice_name": "Serhat Abu Malik – Master"
     },
     {
       "key": "dua-afiyah:ar",
       "generation_id": "NpXBR8yRGNBaYvJVfLXP",
-      "url": "https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/AIRpZrJ46YeXr8Q4M3L3/NpXBR8yRGNBaYvJVfLXP/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261007%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261007T053716Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=6782307855a32501e64cf949009f7c6cee047ca125e8dc8fe89663428788981c2f61aa6e5cf706348a16df10d718d59ceabbebcc33ccc2ffea76549ecf77c3b6bd9c355679385608c1460046527a9dc058da9f23e11824a99fa48dfa35aeba6dd783f63f64b39980993ca3831d24c62e864e7cb97f8bb52e2cda13eab56806cf13d3d20cd79fbb769ae2ebb3e26a67727488d2ac12b41525e02bc3b7fa0df8f982aebae6f1f87fcbac8c55c3ba29cf9b8a67b8253bf05f6b2d38a5d423c7e4666a3db8c187793427ae0e01569e24c2f058a27e2acee62d01ceb5462d0ff9caf03b7d2b7a809406da1248040150d7168c984e42221474d573b9983cf3a9254178",
       "duration": 5.44,
       "model_id": "eleven_v4",
       "voice_id": "DkU7j9uO4ZEtLD2iRZSH",
-      "voice_name": "Serhat Abu Malik – Master",
-      "node_id": null
+      "voice_name": "Serhat Abu Malik – Master"
     },
     {
       "key": "dua-ya-muqallib:ar",
       "generation_id": "khrA8Bw3pfQmaQTAPs6s",
-      "url": "https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/H5hxeD9tcNqA99GLcHk7/khrA8Bw3pfQmaQTAPs6s/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261007%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261007T053719Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=23fdcd201f5cfc26a9057d36761155e12ed378e513958dada06c2e1a062995b128012ebdbf47279790192baae2170189cfd2ddb6b11ee30e03e7d462f22c6947cf2294ec241a01526eb4e035fb5b023f90125b759de508da2bfe56de8a66f06b0a04aefde7d285a2b9434e078fa0a377963454fa437c6f96ed8d7814e458ce03bc76f24c724d7eec1745ca8b9d5fd81126028a8cd10ad966f368d2757c47904b367eaae015b4eaf7af3ff9255d9e1ffa74882291326c86aaccb3de85cae8c26a42caf54a89c83662ab2db9143291c396569f5f40d3e8ef80b8c54ae36e8eb1d06d65253ef5f27a31ff47ec83fc509fb0c5cc36fd1795bd32698eabe42f2ec67b",
       "duration": 4.16,
       "model_id": "eleven_v4",
       "voice_id": "DkU7j9uO4ZEtLD2iRZSH",
-      "voice_name": "Serhat Abu Malik – Master",
-      "node_id": null
+      "voice_name": "Serhat Abu Malik – Master"
     },
     {
       "key": "dua-guidance-taqwa:ar",
       "generation_id": "sQvXTMrq8xLeJAzcfW1T",
-      "url": "https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/I3mWJuyxD1UQ9EZZItSz/sQvXTMrq8xLeJAzcfW1T/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261007%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261007T053722Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=457df7c09c2f6e71b4209e9293ace5f22ca539e671c22d41c37a979e48f9b4f4142ecae73c0fa3b5ab212e86eb583e0f84ea01aa176709a9b9e09053515d65f8f4d7809e45b9da0e08b05ca0118538d098083e367feb5595438238f0e2f46c9ed95e9a16355716768b660dd0cb9b28b690dca7af9b1465d3da0d4c640c322f30264160b608884e025ab445d191c1d3c826ea0cabf8461ce6f1b45a06f9459ab6f2161380ca68c8a02ff71e5122d07631b3771559ba2dc77fb79ed4e5497ba85d5f9d6ed0ea278420f54d7796422e408880c74e4865ccd5c2a66539b4041ae5d41f9b07f48647f28304434acd047fc4c2ce4278f2c7673f7a3bccfce30a1bf49e",
       "duration": 5.28,
       "model_id": "eleven_v4",
       "voice_id": "DkU7j9uO4ZEtLD2iRZSH",
-      "voice_name": "Serhat Abu Malik – Master",
-      "node_id": null
+      "voice_name": "Serhat Abu Malik – Master"
     }
   ]
 }
