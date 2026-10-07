@@ -457,7 +457,9 @@
     tools.appendChild(applyShareContext(toolButton("image","Bildbeitrag","data-dar-global-image"),attrs));
 
     var note=document.createElement("p");note.className="dar-share-note";
-    note.textContent="Instagram öffnet über das System-Menü; dort Instagram auswählen. Bildbeiträge werden lokal in der App erzeugt.";
+    note.textContent=navigator.share
+      ?"Instagram öffnet über das System-Menü; dort Instagram auswählen. Bildbeiträge werden lokal in der App erzeugt."
+      :"Desktop: Instagram/Bildbeitrag wird als PNG vorbereitet und gespeichert; danach in Instagram hochladen. Text und Link lassen sich direkt kopieren.";
 
     panel.appendChild(head);panel.appendChild(primary);panel.appendChild(tools);panel.appendChild(note);
     panel.dataset.darGlobalShareEnhanced="1";
