@@ -1,15 +1,18 @@
 (function(){
   "use strict";
 
-  var ARABIC_URL="/kids/data/dua-arabic-audio.json?v=7";
-  var SLOW_URL="/kids/data/dua-arabic-slow-audio.json?v=2";
-  var WORD_URL="/kids/data/dua-word-audio.json?v=2";
+  var GERMAN_URL="/kids/data/dua-audio.json?v=8";
+  var ARABIC_URL="/kids/data/dua-arabic-audio.json?v=8";
+  var SLOW_URL="/kids/data/dua-arabic-slow-audio.json?v=3";
+  var WORD_URL="/kids/data/dua-word-audio.json?v=3";
   var STORE_KEY="kids.dua.smart.progress.v2";
 
   var packs=null;
   var packPromise=null;
   var root=null;
   var audio=new Audio();
+  var audioAttached=false;
+  var warmers=[];
   var currentDua=null;
   var currentIndex=0;
   var playing=false;
@@ -20,6 +23,40 @@
   audio.setAttribute("playsinline","");
   audio.setAttribute("webkit-playsinline","");
   audio.setAttribute("disableremoteplayback","");
+  audio.volume=1;
+  audio.muted=false;
+
+  function ensureAudioAttached(){
+    if(audioAttached&&audio.isConnected)return;
+    var attach=function(){
+      if(!document.body)return;
+      if(!audio.isConnected){
+        audio.style.display="none";
+        audio.setAttribute("aria-hidden","true");
+        document.body.appendChild(audio);
+      }
+      audioAttached=true;
+    };
+    if(document.body)attach();
+    else document.addEventListener("DOMContentLoaded",attach,{once:true});
+  }
+  function warmUrl(url){
+    if(!url)return;
+    try{
+      var node=new Audio();
+      node.preload="auto";
+      node.setAttribute("playsinline","");
+      node.setAttribute("webkit-playsinline","");
+      node.src=String(url);
+      node.load();
+      warmers.push(node);
+      while(warmers.length>8){
+        var stale=warmers.shift();
+        try{stale.pause();stale.removeAttribute("src");stale.load()}catch(e){}
+      }
+    }catch(e){}
+  }
+  ensureAudioAttached();
 
   function esc(s){
     return String(s==null?"":s).replace(/[&<>"']/g,function(ch){
@@ -37,18 +74,19 @@
   function loadPacks(){
     if(packs)return Promise.resolve(packs);
     if(packPromise)return packPromise;
-    packPromise=Promise.all([fetchJson(ARABIC_URL),fetchJson(SLOW_URL),fetchJson(WORD_URL)])
+    packPromise=Promise.all([fetchJson(GERMAN_URL),fetchJson(ARABIC_URL),fetchJson(SLOW_URL),fetchJson(WORD_URL)])
       .then(function(rows){
-        var normal=rows[0]||{},slow=rows[1]||{},word=rows[2]||{};
-        if(normal.modelId!=="eleven_v4"||slow.modelId!=="eleven_v4"||word.modelId!=="eleven_v4"){
+        var german=rows[0]||{},normal=rows[1]||{},slow=rows[2]||{},word=rows[3]||{};
+        if(german.modelId!=="eleven_v4"||normal.modelId!=="eleven_v4"||slow.modelId!=="eleven_v4"||word.modelId!=="eleven_v4"){
           throw new Error("dua-audio-not-v4");
         }
-        if(normal.voiceProfileId!=="serhat-owner-voice-2026"||
+        if(german.voiceProfileId!=="serhat-owner-voice-2026"||
+           normal.voiceProfileId!=="serhat-owner-voice-2026"||
            slow.voiceProfileId!=="serhat-owner-voice-2026"||
            word.voiceProfileId!=="serhat-owner-voice-2026"){
           throw new Error("dua-audio-not-serhat-master");
         }
-        packs={normal:normal,slow:slow,word:word};
+        packs={german:german,normal:normal,slow:slow,word:word};
         return packs;
       })
       .catch(function(err){packPromise=null;throw err});
@@ -207,12 +245,16 @@
         else{setStatus("Audio konnte nicht gestartet werden.","bad");reject(new Error("audio-playback"))}
       };
       try{
-        audio.src=url;
+        ensureAudioAttached();
+        audio.muted=false;
+        audio.volume=1;
+        audio.src=String(url);
         audio.currentTime=0;
         audio.playbackRate=1;
         audio.preservesPitch=true;
         audio.onended=function(){finish(true)};
         audio.onerror=function(){finish(false)};
+        try{audio.load()}catch(e){}
         var p=audio.play();
         if(p&&p.catch)p.catch(function(){finish(false)});
       }catch(e){finish(false)}
@@ -220,13 +262,17 @@
   }
   function playWhole(slow){
     if(!currentDua)return false;
-    return loadPacks().then(function(p){
+    var run=function(p){
       var text=arabicText(currentDua);
       var e=entry(slow?p.slow:p.normal,text);
       if(!e||!e.url)throw new Error("missing-phrase");
       return playUrl(e.url,slow?"slow":"full",slow?"Langsam und deutlich zuhören …":"Duʿāʾ anhören …");
-    }).catch(function(){
-      setStatus("Diese Aufnahme wird gerade vorbereitet.","bad");
+    };
+    if(packs){
+      try{return run(packs)}catch(e){setStatus("Diese Aufnahme ist nicht verfügbar.","bad");return false}
+    }
+    return loadPacks().then(run).catch(function(){
+      setStatus("Diese Aufnahme konnte nicht geladen werden.","bad");
       return false;
     });
   }
@@ -235,13 +281,50 @@
     var seg=segs[Number(i)];
     if(!seg)return false;
     selectIndex(i,{scroll:true,play:false});
-    return loadPacks().then(function(p){
+    var run=function(p){
       var e=entry(p.word,seg.audioKey||seg.arabic);
       if(!e||!e.url)throw new Error("missing-word");
       return playUrl(e.url,"word","Nur dieses Wort: "+(seg.transliteration||seg.arabic));
-    }).catch(function(){
-      setStatus("Für dieses Wort wird die Einzelaufnahme gerade vorbereitet.","bad");
+    };
+    if(packs){
+      try{return run(packs)}catch(e){setStatus("Die Einzelaufnahme ist nicht verfügbar.","bad");return false}
+    }
+    return loadPacks().then(run).catch(function(){
+      setStatus("Die Einzelaufnahme konnte nicht geladen werden.","bad");
       return false;
+    });
+  }
+  function germanText(d){
+    return norm(d&&(d.audioGermanText||((d.childPrompt||"")+" "+(d.meaning||""))));
+  }
+  function playGerman(dua){
+    if(!dua)return false;
+    var run=function(p){
+      var text=germanText(dua);
+      var e=entry(p.german,text);
+      if(!e||!e.url)throw new Error("missing-german");
+      return playUrl(e.url,"german","Erklärung anhören …");
+    };
+    if(packs){
+      try{return run(packs)}catch(e){return false}
+    }
+    return loadPacks().then(run).catch(function(){return false});
+  }
+  function prepare(dua){
+    if(!dua)return loadPacks();
+    return loadPacks().then(function(p){
+      var normal=entry(p.normal,arabicText(dua));
+      var slow=entry(p.slow,arabicText(dua));
+      var german=entry(p.german,germanText(dua));
+      if(normal&&normal.url)warmUrl(normal.url);
+      if(slow&&slow.url)warmUrl(slow.url);
+      if(german&&german.url)warmUrl(german.url);
+      var segs=getSegments(dua);
+      for(var i=0;i<Math.min(3,segs.length);i++){
+        var w=entry(p.word,segs[i].audioKey||segs[i].arabic);
+        if(w&&w.url)warmUrl(w.url);
+      }
+      return allReady(dua,p);
     });
   }
 
@@ -373,11 +456,13 @@
   function preview(dua,rate){
     var slow=Number(rate||1)<0.9;
     currentDua=dua;
-    return loadPacks().then(function(p){
+    var run=function(p){
       var e=entry(slow?p.slow:p.normal,arabicText(dua));
       if(!e||!e.url)throw new Error("missing-preview");
       return playUrl(e.url,slow?"slow":"full",slow?"Langsam zuhören …":"Duʿāʾ anhören …");
-    });
+    };
+    if(packs)return run(packs);
+    return loadPacks().then(run);
   }
 
   document.addEventListener("visibilitychange",function(){if(document.hidden)stopAudio()});
@@ -392,6 +477,8 @@
     close:close,
     stop:stopAudio,
     playPreview:preview,
+    playGerman:playGerman,
+    prepare:prepare,
     isReady:function(){return !!packs}
   };
   loadPacks().catch(function(){});
