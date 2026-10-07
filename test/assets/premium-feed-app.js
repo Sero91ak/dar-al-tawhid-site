@@ -2776,6 +2776,16 @@
     });
   }
 
+  /* FEED_SHARE_BRANDING_V1275 · Pflichtbranding für den separaten Feed-Canvas. */
+  async function feedSharePaintBrand(ctx,dims){
+    var w=dims.outW,h=dims.outH,scale=w/1080,pad=Math.max(24,Math.round(52*scale)),logoSize=Math.min(Math.round(w*.105),Math.max(70,Math.round(88*scale))),brandLogo=null,appStoreBadge=null;
+    try{brandLogo=await feedShareLoadImg('/watermark-my-logo-full.png?share-brand=v1275')}catch(eLogo){}try{appStoreBadge=await feedShareLoadImg('/assets/app-store-badge-de-official.svg?share-brand=v1275')}catch(eBadge){}
+    if(brandLogo){var lx=w-pad-logoSize,ly=pad;ctx.save();ctx.beginPath();ctx.arc(lx+logoSize/2,ly+logoSize/2,logoSize/2,0,Math.PI*2);ctx.closePath();ctx.clip();ctx.fillStyle='rgba(250,246,235,.97)';ctx.fillRect(lx,ly,logoSize,logoSize);ctx.drawImage(brandLogo,lx,ly,logoSize,logoSize);ctx.restore();ctx.save();ctx.strokeStyle='rgba(239,216,159,.82)';ctx.lineWidth=Math.max(1.5,2*scale);ctx.beginPath();ctx.arc(lx+logoSize/2,ly+logoSize/2,logoSize/2-1,0,Math.PI*2);ctx.stroke();ctx.restore()}
+    var footerH=Math.max(80,Math.round(94*scale)),fade=ctx.createLinearGradient(0,h-footerH*1.55,0,h);fade.addColorStop(0,'rgba(2,10,12,0)');fade.addColorStop(1,'rgba(2,10,12,.74)');ctx.fillStyle=fade;ctx.fillRect(0,h-footerH*1.55,w,footerH*1.55);var lineY=h-footerH;ctx.strokeStyle='rgba(239,216,159,.48)';ctx.lineWidth=Math.max(1,1.2*scale);ctx.beginPath();ctx.moveTo(pad,lineY);ctx.lineTo(w-pad,lineY);ctx.stroke();
+    var gr=Math.max(10,Math.round(13*scale)),gx=pad+gr,gy=h-Math.max(20,Math.round(27*scale));ctx.strokeStyle='#efd89f';ctx.lineWidth=Math.max(1.5,2*scale);ctx.beginPath();ctx.arc(gx,gy,gr,0,Math.PI*2);ctx.stroke();ctx.beginPath();ctx.ellipse(gx,gy,gr*.48,gr,0,0,Math.PI*2);ctx.stroke();ctx.beginPath();ctx.moveTo(gx-gr,gy);ctx.lineTo(gx+gr,gy);ctx.stroke();var fs=Math.max(18,Math.round(24*scale));ctx.fillStyle='#fff8e9';ctx.font='650 '+fs+'px Georgia, serif';ctx.textAlign='left';ctx.shadowColor='rgba(0,0,0,.55)';ctx.shadowBlur=Math.max(3,4*scale);ctx.fillText('dar-al-tawhid.de',pad+gr*2+12*scale,gy+fs*.34);ctx.shadowBlur=0;
+    var bw=Math.min(Math.round(w*.23),Math.max(148,Math.round(168*scale))),bh=Math.round(bw*40/119.66407),bx=w-pad-bw,by=h-bh-Math.max(8,Math.round(10*scale));if(appStoreBadge)ctx.drawImage(appStoreBadge,bx,by,bw,bh);else{ctx.fillStyle='rgba(4,8,10,.9)';ctx.fillRect(bx,by,bw,bh);ctx.fillStyle='#fff';ctx.font='700 '+Math.max(14,Math.round(16*scale))+'px Arial, sans-serif';ctx.textAlign='center';ctx.fillText('Im App Store',bx+bw/2,by+bh*.62);ctx.textAlign='left'}
+  }
+
   function feedShareDrawCover(ctx, img, w, h) {
     var iw = img.naturalWidth || img.width;
     var ih = img.naturalHeight || img.height;
@@ -2967,6 +2977,7 @@
     if (!ctx) throw new Error('Canvas nicht verfügbar');
     await feedSharePaintBg(ctx, scene, dims);
     await feedSharePaintFg(ctx, scene, dims);
+    await feedSharePaintBrand(ctx, dims);
     var blob = await feedShareCanvasBlob(canvas);
     return new File([blob], 'dar-al-tawhid-feed-' + feedItemId + '.png', { type: 'image/png' });
   }

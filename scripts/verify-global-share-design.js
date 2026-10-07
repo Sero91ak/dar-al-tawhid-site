@@ -29,13 +29,15 @@ if (globalShare) {
   requireToken(globalRel, globalShare, "adaptiveBodyLayout", "adaptive body typography");
   requireToken(globalRel, globalShare, 'fillText("AUSSAGE"', "AUSSAGE hierarchy");
   requireToken(globalRel, globalShare, 'fillText("QUELLE"', "QUELLE hierarchy");
+  requireToken(globalRel, globalShare, "GLOBAL_SHARE_BRANDING_V1275", "mandatory share branding");
+  requireToken(globalRel, globalShare, "watermark-my-logo-full.png", "DAR logo in export");
+  requireToken(globalRel, globalShare, "app-store-badge-de-official.svg", "App Store badge in export");
   if (!/__DAR_GLOBAL_SHARE_V1250=true/.test(globalShare)) failures.push(globalRel + ": singleton/version flag mismatch");
   forbidToken(globalRel, globalShare, "/api/share-image/background", "AI share endpoint");
   forbidToken(globalRel, globalShare, "generateFreshBackground", "AI background generator");
   forbidToken(globalRel, globalShare, "GENERIC_SCENES", "legacy app-image scene pool");
   forbidToken(globalRel, globalShare, "share-background-library", "legacy share-image manifest");
   forbidToken(globalRel, globalShare, "Folgt für mehr Wissen aus Qurʾān & Sunnah", "legacy promo footer");
-  forbidToken(globalRel, globalShare, "app-store-badge-de-official.svg", "legacy App Store footer badge");
 }
 
 
@@ -56,6 +58,9 @@ for (const rel of ["assets/premium-feed-app.js", "test/assets/premium-feed-app.j
   requireToken(rel, src, "feedSharePoolImage", "random feed pool loader");
   requireToken(rel, src, "feedShareRandomIndex", "random feed pool selection");
   requireToken(rel, src, "shareFreshPostFeedItem", "post-feed share renderer");
+  requireToken(rel, src, "FEED_SHARE_BRANDING_V1275", "mandatory feed branding");
+  requireToken(rel, src, "watermark-my-logo-full.png", "DAR logo in feed export");
+  requireToken(rel, src, "app-store-badge-de-official.svg", "App Store badge in feed export");
   forbidToken(rel, src, "/api/share-image/background", "AI share endpoint");
   forbidToken(rel, src, "SHARE_IMAGE_API", "AI share API variable");
   forbidToken(rel, src, "feedShareFreshImage", "AI feed generator");
@@ -63,7 +68,6 @@ for (const rel of ["assets/premium-feed-app.js", "test/assets/premium-feed-app.j
   forbidToken(rel, src, "data-original-image", "linked original image passed into share action");
   forbidToken(rel, src, "data-feed-preview-image", "linked preview image passed into share action");
   forbidToken(rel, src, "feedShareBrandFooter", "legacy feed promo footer");
-  forbidToken(rel, src, "app-store-badge-de-official.svg", "legacy App Store footer badge");
 }
 
 const frauenRel = "assets/frauen/frauen-fiqh.js";
@@ -75,12 +79,14 @@ if (frauen) {
   requireToken(frauenRel, frauen, "frauenAdaptiveBodyLayout", "adaptive body typography");
   requireToken(frauenRel, frauen, 'fillText("AUSSAGE"', "AUSSAGE hierarchy");
   requireToken(frauenRel, frauen, 'fillText("QUELLE"', "QUELLE hierarchy");
+  requireToken(frauenRel, frauen, "FRAUEN_SHARE_BRANDING_V1275", "mandatory women branding");
+  requireToken(frauenRel, frauen, "watermark-my-logo-full.png", "DAR logo in women export");
+  requireToken(frauenRel, frauen, "app-store-badge-de-official.svg", "App Store badge in women export");
   forbidToken(frauenRel, frauen, "/api/share-image/background", "AI share endpoint");
   forbidToken(frauenRel, frauen, "FRAUEN_SHARE_IMAGE_API", "AI women share API variable");
   forbidToken(frauenRel, frauen, "frauenFreshShareBackground", "AI women generator");
   forbidToken(frauenRel, frauen, "frauenNextShareScene", "legacy existing-image rotation");
   forbidToken(frauenRel, frauen, 'ctx.fillText("Folgt für mehr Wissen aus Qurʾān & Sunnah"', "legacy promo footer draw");
-  forbidToken(frauenRel, frauen, "app-store-badge-de-official.svg", "legacy App Store footer badge");
 }
 
 if (failures.length) {

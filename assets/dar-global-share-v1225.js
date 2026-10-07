@@ -117,6 +117,14 @@
   function roundRect(ctx,x,y,w,h,r){
     r=Math.min(r,w/2,h/2);ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();
   }
+  /* GLOBAL_SHARE_BRANDING_V1275 · Pflichtbranding wird direkt in jede exportierte PNG gerendert. */
+  function drawShareBranding(ctx,brandLogo,appStoreBadge){
+    var margin=76;
+    if(brandLogo){var size=88,x=W-margin-size,y=18;ctx.save();ctx.beginPath();ctx.arc(x+size/2,y+size/2,size/2,0,Math.PI*2);ctx.closePath();ctx.clip();ctx.fillStyle="rgba(250,246,235,.97)";ctx.fillRect(x,y,size,size);ctx.drawImage(brandLogo,x,y,size,size);ctx.restore();ctx.save();ctx.strokeStyle="rgba(239,216,159,.78)";ctx.lineWidth=2;ctx.beginPath();ctx.arc(x+size/2,y+size/2,size/2-1,0,Math.PI*2);ctx.stroke();ctx.restore()}
+    var footerY=1288;ctx.save();var fade=ctx.createLinearGradient(0,footerY-18,0,H);fade.addColorStop(0,"rgba(3,12,13,0)");fade.addColorStop(1,"rgba(3,12,13,.64)");ctx.fillStyle=fade;ctx.fillRect(0,footerY-18,W,H-footerY+18);ctx.strokeStyle="rgba(239,216,159,.48)";ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(margin,footerY);ctx.lineTo(W-margin,footerY);ctx.stroke();
+    var gx=margin+14,gy=1321,gr=13;ctx.strokeStyle="#efd89f";ctx.lineWidth=2;ctx.beginPath();ctx.arc(gx,gy,gr,0,Math.PI*2);ctx.stroke();ctx.beginPath();ctx.ellipse(gx,gy,gr*.48,gr,0,0,Math.PI*2);ctx.stroke();ctx.beginPath();ctx.moveTo(gx-gr,gy);ctx.lineTo(gx+gr,gy);ctx.stroke();ctx.fillStyle="#fff8e9";ctx.font="650 24px Georgia, 'Times New Roman', serif";ctx.textAlign="left";ctx.shadowColor="rgba(0,0,0,.5)";ctx.shadowBlur=4;ctx.fillText(SITE,margin+39,1330);ctx.shadowBlur=0;
+    var bw=168,bh=Math.round(bw*40/119.66407),bx=W-margin-bw,by=1293;if(appStoreBadge)ctx.drawImage(appStoreBadge,bx,by,bw,bh);else{roundRect(ctx,bx,by,bw,bh,10);ctx.fillStyle="rgba(4,8,10,.88)";ctx.fill();ctx.strokeStyle="rgba(239,216,159,.65)";ctx.stroke();ctx.fillStyle="#fff";ctx.font="700 17px Arial, sans-serif";ctx.textAlign="center";ctx.fillText("Im App Store",bx+bw/2,by+34);ctx.textAlign="left"}ctx.restore();
+  }
   function wrap(ctx,str,maxWidth){
     var lines=[];String(str||"").replace(/\r\n/g,"\n").split("\n").forEach(function(raw){
       var words=raw.trim().split(/\s+/).filter(Boolean);if(!words.length){lines.push("");return}
@@ -199,6 +207,9 @@
     var canvas=document.createElement("canvas");canvas.width=W;canvas.height=H;var ctx=canvas.getContext("2d");if(!ctx)return[];
     try{if(document.fonts&&document.fonts.ready)await document.fonts.ready}catch(e){}
     var bg=await generalPoolBackground();
+    var brandLogo=null,appStoreBadge=null;
+    try{brandLogo=await loadImage("/watermark-my-logo-full.png?share-brand=v1275")}catch(eLogo){}
+    try{appStoreBadge=await loadImage("/assets/app-store-badge-de-official.svg?share-brand=v1275")}catch(eBadge){}
     var margin=76,contentW=W-margin*2;
     data.body=stripUiLabel(data.body||data.title,"body");
     data.source=stripUiLabel(data.source||"Quelle siehe Beitrag in der App.","source");
@@ -288,7 +299,7 @@
         ctx.textAlign="left";
       }
 
-      var sy=1130,sh=160;
+      var sy=1130,sh=148;
       roundRect(ctx,margin,sy,contentW,sh,20);
       ctx.fillStyle="rgba(3,14,15,.76)";
       ctx.fill();
@@ -303,6 +314,7 @@
       var sl=wrap(ctx,trimSource(data.source),contentW-44).slice(0,3),sly=sy+59;
       sl.forEach(function(line){ctx.fillText(line,margin+22,sly);sly+=27});
 
+      drawShareBranding(ctx,brandLogo,appStoreBadge);
       var blob=await new Promise(function(resolve){canvas.toBlob(resolve,"image/png",.97)});
       if(blob)files.push(new File([blob],"dar-al-tawhid-bildbeitrag-"+(p+1)+".png",{type:"image/png"}));
     }

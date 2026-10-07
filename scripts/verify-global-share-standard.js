@@ -69,6 +69,9 @@ for (const token of [
   "ownedPanel.__darSharePayload",
   "legacyTitle.remove()",
   "GLOBAL_SOCIAL_BRAND_COLORS_V1269",
+  "GLOBAL_SHARE_BRANDING_V1275",
+  "watermark-my-logo-full.png",
+  "app-store-badge-de-official.svg",
   "#25D366",
   "#2AABEE",
   "#833AB4"
@@ -82,7 +85,6 @@ for (const token of [
   "GENERIC_SCENES",
   "share-background-library",
   "Folgt für mehr Wissen aus Qurʾān & Sunnah",
-  "app-store-badge-de-official.svg",
   'title.textContent="Weitergeben"',
   'holder.className="share-flat-v410"'
 ]) forbid(globalRel, globalShare, token);
@@ -144,7 +146,10 @@ for (const [rel, src] of [[liveRel, liveFeed], [testRel, testFeed]]) {
     "openFeedShareStandard",
     "sfGlobalShareOverlay",
     "global.DARGlobalShare",
-    "imageHandler"
+    "imageHandler",
+    "FEED_SHARE_BRANDING_V1275",
+    "watermark-my-logo-full.png",
+    "app-store-badge-de-official.svg"
   ]) need(rel, src, token);
   for (const token of [
     "/api/share-image/background",
@@ -182,7 +187,10 @@ for (const token of [
   'data-frauen-share="image"',
   "frauenAdaptiveBodyLayout",
   'fillText("AUSSAGE"',
-  'fillText("QUELLE"'
+  'fillText("QUELLE"',
+  "FRAUEN_SHARE_BRANDING_V1275",
+  "watermark-my-logo-full.png",
+  "app-store-badge-de-official.svg"
 ]) need(frauenRel, frauen, token);
 for (const token of [
   "/api/share-image/background",
@@ -194,7 +202,6 @@ for (const token of [
   "fal-ai/",
   "frauenNextShareScene",
   'ctx.fillText("Folgt für mehr Wissen aus Qurʾān & Sunnah"',
-  "app-store-badge-de-official.svg"
 ]) forbid(frauenRel, frauen, token);
 
 

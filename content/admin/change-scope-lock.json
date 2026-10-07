@@ -152,6 +152,24 @@
   ],
   "unlockedScopes": [
     {
+      "id": "global-share-image-branding-v1275-2026-10-07",
+      "at": "2026-10-07T17:24:00+02:00",
+      "approvedBy": "user-explicit-global-share-logo-website-appstore",
+      "reason": "Nutzer beauftragt ausdrücklich, jeden in Besucher-/iOS-/Web-App erzeugten Bildbeitrag verbindlich mit dem eigenen DĀR AL TAWḤĪD Logo, dar-al-tawhid.de unten links und offizieller Apple-App-Store-Werbung unten rechts zu versehen. Gilt global auch für Qurʾān, Duʿāʾ, Feed, Frauenbereich und sonstige Bild-Share-Renderer.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "assets/dar-global-share-v1225.js",
+        "assets/premium-feed-app.js",
+        "test/assets/premium-feed-app.js",
+        "assets/frauen/frauen-fiqh.js",
+        "scripts/verify-global-share-design.js",
+        "scripts/verify-global-share-standard.js",
+        "service-worker.js",
+        "version.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "kids-offline-instant-open-2026-10-04",
       "approvedBy": "user-explicit-kinder-app-offline-ratzfatz-alles-bereit",
       "reason": "Kids-App muss beim Öffnen sofort stehen: Offline-First, kein Netz-Sturm, Bilder und Startseite aus Cache.",
