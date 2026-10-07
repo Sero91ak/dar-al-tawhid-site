@@ -416,3 +416,67 @@ html.dar-test-side-nav .dar-fold__pane{
     display:none!important;
   }
 }
+
+
+/* v1330 · SURFACE-MODE FOLD AUTHORITY */
+/* Explicit phone-landscape state wins even if stale orientation CSS or an
+   earlier route produced dual markup. */
+html[data-layout-surface="phone-landscape"] .dar-fold[data-fold-mode="dual"]{
+  display:block!important;
+  grid-template-columns:1fr!important;
+  gap:0!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+}
+html[data-layout-surface="phone-landscape"] .dar-fold[data-fold-mode="dual"][data-fold-single-show="rail"] > .dar-fold__rail{
+  display:block!important;
+}
+html[data-layout-surface="phone-landscape"] .dar-fold[data-fold-mode="dual"][data-fold-single-show="rail"] > .dar-fold__pane{
+  display:none!important;
+}
+html[data-layout-surface="phone-landscape"] .dar-fold[data-fold-mode="dual"][data-fold-single-show="pane"] > .dar-fold__rail{
+  display:none!important;
+}
+html[data-layout-surface="phone-landscape"] .dar-fold[data-fold-mode="dual"][data-fold-single-show="pane"] > .dar-fold__pane{
+  display:block!important;
+}
+html[data-layout-surface="phone-landscape"] .dar-fold[data-fold-mode="dual"] > :is(.dar-fold__rail,.dar-fold__pane){
+  position:static!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  max-height:none!important;
+  overflow:visible!important;
+  padding:0!important;
+  background:none!important;
+  grid-column:auto!important;
+  grid-row:auto!important;
+}
+
+/* Real workspace geometry. */
+html[data-layout-surface="workspace"] .dar-fold[data-fold-mode="dual"]{
+  display:grid!important;
+  grid-template-columns:var(--fold-rail-current,320px) minmax(0,1fr)!important;
+  gap:18px!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+}
+html[data-layout-surface="workspace"] .dar-fold[data-fold-mode="dual"] > .dar-fold__rail,
+html[data-layout-surface="workspace"] .dar-fold[data-fold-mode="dual"] > .dar-fold__pane{
+  display:block!important;
+}
+html[data-layout-surface="workspace"] .dar-fold[data-fold-mode="dual"] > .dar-fold__rail{
+  position:sticky!important;
+  top:calc(env(safe-area-inset-top,0px) + 8px)!important;
+  max-height:calc(100dvh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px) - 20px)!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+}
+html[data-layout-surface="workspace"] .dar-fold[data-fold-mode="dual"] > .dar-fold__pane{
+  min-width:0!important;
+  width:100%!important;
+  max-width:100%!important;
+  overflow:visible!important;
+}
