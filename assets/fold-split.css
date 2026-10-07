@@ -196,3 +196,154 @@ html.is-android .dar-fold__pane {
     transition: none !important;
   }
 }
+
+
+/* v1326 · CAPACITY MASTER-DETAIL AUTHORITY */
+:root,
+html[data-theme]{
+  --fold-rail-min:260px;
+  --fold-rail-max:340px;
+  --fold-rail-current:280px;
+  --fold-pane-read-max:46rem;
+  --fold-gap:16px;
+}
+
+/* One stable DOM. Capacity decides whether both panes are visible. */
+html[data-fold-dual="1"] .dar-fold[data-fold-mode="dual"],
+html.is-fold-dual .dar-fold[data-fold-mode="dual"]{
+  display:grid!important;
+  grid-template-columns:var(--fold-rail-current,280px) minmax(0,1fr)!important;
+  gap:var(--fold-gap,16px)!important;
+  align-items:start!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+}
+
+html[data-fold-dual="1"] .dar-fold[data-fold-mode="dual"] > .dar-fold__rail,
+html[data-fold-dual="1"] .dar-fold[data-fold-mode="dual"] > .dar-fold__pane,
+html.is-fold-dual .dar-fold[data-fold-mode="dual"] > .dar-fold__rail,
+html.is-fold-dual .dar-fold[data-fold-mode="dual"] > .dar-fold__pane{
+  display:block!important;
+}
+
+/* Single-pane state preserves the same rail+pane DOM; only visibility changes.
+   This avoids rebuilding readers during Fold open/close and orientation changes. */
+html[data-fold-dual="0"] .dar-fold[data-fold-mode="dual"],
+html[data-fold-capacity="single"] .dar-fold[data-fold-mode="dual"]{
+  display:block!important;
+  width:100%!important;
+  min-width:0!important;
+}
+html[data-fold-dual="0"] .dar-fold[data-fold-mode="dual"][data-fold-single-show="pane"] > .dar-fold__rail,
+html[data-fold-capacity="single"] .dar-fold[data-fold-mode="dual"][data-fold-single-show="pane"] > .dar-fold__rail{
+  display:none!important;
+}
+html[data-fold-dual="0"] .dar-fold[data-fold-mode="dual"][data-fold-single-show="rail"] > .dar-fold__pane,
+html[data-fold-capacity="single"] .dar-fold[data-fold-mode="dual"][data-fold-single-show="rail"] > .dar-fold__pane{
+  display:none!important;
+}
+html[data-fold-dual="0"] .dar-fold[data-fold-mode="dual"] > :is(.dar-fold__rail,.dar-fold__pane),
+html[data-fold-capacity="single"] .dar-fold[data-fold-mode="dual"] > :is(.dar-fold__rail,.dar-fold__pane){
+  position:static!important;
+  max-height:none!important;
+  overflow:visible!important;
+  width:100%!important;
+  max-width:100%!important;
+  padding-left:0!important;
+  padding-right:0!important;
+  background:none!important;
+}
+
+/* Master rail owns its column and scrolls internally only in real dual mode. */
+html[data-fold-dual="1"] .dar-fold[data-fold-mode="dual"] > .dar-fold__rail,
+html.is-fold-dual .dar-fold[data-fold-mode="dual"] > .dar-fold__rail{
+  position:sticky!important;
+  top:calc(env(safe-area-inset-top,0px) + 8px)!important;
+  width:100%!important;
+  max-width:100%!important;
+  max-height:calc(100dvh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px) - 28px)!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  -webkit-overflow-scrolling:touch!important;
+  overscroll-behavior:contain!important;
+  padding:0 14px 24px 0!important;
+  background:linear-gradient(
+    90deg,
+    transparent 0,
+    transparent calc(100% - 1px),
+    var(--fold-divider) calc(100% - 1px),
+    transparent 100%
+  )!important;
+  transform:none!important;
+  will-change:auto!important;
+}
+
+/* Reader pane owns the remaining width; content inside decides text vs media width. */
+html[data-fold-dual="1"] .dar-fold[data-fold-mode="dual"] > .dar-fold__pane,
+html.is-fold-dual .dar-fold[data-fold-mode="dual"] > .dar-fold__pane{
+  min-width:0!important;
+  width:100%!important;
+  max-width:100%!important;
+  padding:0 0 28px 0!important;
+  overflow:visible!important;
+  transform:none!important;
+  will-change:auto!important;
+}
+
+html[data-fold-dual="1"] .dar-fold__pane :is(
+  .article,.post-reader,.post-body,.dua-detail-box,.qrc-shell,
+  .quran-ayah-list,.quran-reader-shell,.lib-detail,.qsrc-detail,.hadith-detail
+),
+html.is-fold-dual .dar-fold__pane :is(
+  .article,.post-reader,.post-body,.dua-detail-box,.qrc-shell,
+  .quran-ayah-list,.quran-reader-shell,.lib-detail,.qsrc-detail,.hadith-detail
+){
+  width:100%!important;
+  max-inline-size:min(100%,var(--fold-pane-read-max,46rem))!important;
+  margin-inline:auto!important;
+  min-width:0!important;
+  box-sizing:border-box!important;
+}
+
+/* PDFs/media center inside the pane and may use its complete width. */
+html[data-fold-dual="1"] .dar-fold__pane :is(
+  .pdf-viewer,.pdf-reader,.pdf-shell,[data-pdf-viewer],
+  iframe[src*=".pdf"],embed[type="application/pdf"],.reader-media,.wide-media
+),
+html.is-fold-dual .dar-fold__pane :is(
+  .pdf-viewer,.pdf-reader,.pdf-shell,[data-pdf-viewer],
+  iframe[src*=".pdf"],embed[type="application/pdf"],.reader-media,.wide-media
+){
+  width:100%!important;
+  max-width:100%!important;
+  max-inline-size:100%!important;
+  margin-inline:auto!important;
+  min-width:0!important;
+}
+
+/* Side global tab rail replaces the bottom clearance in readers. */
+html.dar-test-side-nav .dar-fold__pane{
+  padding-bottom:28px!important;
+}
+
+/* No geometry animation during Fold/rotate; layout changes should settle in one frame. */
+.dar-fold,
+.dar-fold__rail,
+.dar-fold__pane{
+  transition:none!important;
+}
+
+@media(max-width:799.98px){
+  .dar-fold[data-fold-mode="dual"]{
+    grid-template-columns:1fr!important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .dar-fold,
+  .dar-fold__rail,
+  .dar-fold__pane{
+    transition:none!important;
+  }
+}
