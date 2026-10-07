@@ -7048,6 +7048,31 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-30T23:59:00.000Z"
+    },
+    {
+      "id": "global-wissen-weitergeben-share-standard-2026-10-07",
+      "at": "2026-10-07T10:30:00+02:00",
+      "approvedBy": "user-explicit-global-share-standard-bild1",
+      "reason": "Nutzer beauftragt ausdrücklich, den Teilen-Bereich aus Bild 1 global als einzigen Standard in allen DĀR AL TAWḤĪD Apps und auf der Desktop-Website einzusetzen. Alte Beitrag-weitergeben-/3×2-Share-Module vollständig ablösen; WhatsApp, Telegram, Instagram/System-Share, Teilen, Text kopieren, Link kopieren und Bildbeitrag müssen funktionsfähig sein. Erscheinungsbilder bleiben theme-adaptiv.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "assets/dar-global-share-v1225.js",
+        "assets/dar-global-share-v1225.css",
+        "scripts/verify-global-share-design.js",
+        "scripts/verify-global-share-standard.js",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "desktop-preview/index.html",
+        "assets/stories-app.js",
+        "test/assets/stories-app.js",
+        "assets/premium-feed-app.js",
+        "test/assets/premium-feed-app.js"
+      ],
+      "expiresAt": "2026-11-07T23:59:00.000Z"
     }
   ],
   "enabled": true
