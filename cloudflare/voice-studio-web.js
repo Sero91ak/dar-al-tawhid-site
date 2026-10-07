@@ -202,10 +202,80 @@ async function alignStoryAudio(env, file, text) {
   };
 }
 
+
+async function uploadElevenLabsPronunciationMaster(env) {
+  const key = elevenKey(env);
+  if (!key) throw httpError("ElevenLabs API-Key fehlt serverseitig.", 503);
+
+  const sourceUrl = "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/data/pronunciation/DAR_AL_TAWHID_ElevenLabs_ARABIC_MASTER_29122.pls";
+  const source = await fetch(sourceUrl, { cache: "no-store" });
+  if (!source.ok) throw httpError("Pronunciation-Master konnte nicht aus dem Repository geladen werden.", 502);
+
+  const pls = await source.text();
+  if (!pls.includes("<lexicon") || !pls.includes("</lexicon>")) {
+    throw httpError("Pronunciation-Master ist keine gültige PLS-Lexikondatei.", 500);
+  }
+  const lexemeCount = (pls.match(/<lexeme\b/g) || []).length;
+  if (lexemeCount !== 10111) {
+    throw httpError("Pronunciation-Master hat unerwartete Regelzahl: " + lexemeCount, 500);
+  }
+
+  const form = new FormData();
+  form.append(
+    "file",
+    new Blob([pls], { type: "application/pls+xml" }),
+    "DAR_AL_TAWHID_ElevenLabs_ARABIC_MASTER_29122.pls"
+  );
+  form.append("name", "DAR AL TAWHID Arabic Master 2.9.122");
+  form.append(
+    "description",
+    "DAR AL TAWHID Arabic-heavy pronunciation master 2.9.122; 10111 unique alias rules; existing curated rules preserved."
+  );
+
+  const res = await fetch("https://api.elevenlabs.io/v1/pronunciation-dictionaries/add-from-file", {
+    method: "POST",
+    headers: { "xi-api-key": key },
+    body: form
+  });
+  const raw = await res.text();
+  let payload = {};
+  try { payload = JSON.parse(raw); } catch {}
+
+  if (!res.ok) {
+    throw httpError(
+      "ElevenLabs Pronunciation-Upload fehlgeschlagen: " + String(payload?.detail || payload?.message || raw || ("HTTP " + res.status)).slice(0, 500),
+      res.status === 422 ? 422 : 502
+    );
+  }
+
+  return {
+    id: String(payload?.id || ""),
+    version_id: String(payload?.version_id || ""),
+    name: String(payload?.name || "DAR AL TAWHID Arabic Master 2.9.122"),
+    version_rules_num: Number(payload?.version_rules_num || 0),
+    description: String(payload?.description || ""),
+    sourceLexemes: lexemeCount
+  };
+}
+
 export async function handleVoiceStudioWebRequest(request, env, cors) {
   const url = new URL(request.url);
   if (!url.pathname.startsWith("/voice-studio/api")) return null;
   const rest = url.pathname.slice("/voice-studio/api".length) || "/";
+
+
+  if (request.method === "POST" && rest === "/pronunciation-master/upload") {
+    if (!isOwnerAutomationAuthorized(request, env)) {
+      return json({ ok: false, error: "Owner-Freigabe für Pronunciation-Master-Upload fehlt." }, cors, 401);
+    }
+    try {
+      const result = await uploadElevenLabsPronunciationMaster(env);
+      return json({ ok: true, ...result }, cors, 200);
+    } catch (error) {
+      const status = Number(error?.status || 500);
+      return json({ ok: false, error: String(error?.message || error) }, cors, status);
+    }
+  }
 
   if (request.method === "POST" && rest === "/access") {
     assertVoiceStudioOrigin(request, env);
