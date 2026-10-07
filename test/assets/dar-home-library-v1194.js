@@ -506,23 +506,28 @@ function polishHomeStartV1315(){
   var view=document.getElementById("appView");
   if(!view)return;
 
+  /* v1318: keep the two-column editorial index, but remove the table feeling. */
   view.querySelectorAll(".home-line-grid,.home-line-list").forEach(function(grid){
     grid.style.setProperty("display","grid","important");
     grid.style.setProperty("grid-template-columns","repeat(2,minmax(0,1fr))","important");
-    grid.style.setProperty("column-gap","12px","important");
+    grid.style.setProperty("column-gap","14px","important");
     grid.style.setProperty("row-gap","0","important");
-    grid.style.setProperty("margin-bottom","18px","important");
-    grid.style.setProperty("border-left","0","important");
-    grid.style.setProperty("border-top","0","important");
-    grid.style.setProperty("background","linear-gradient(180deg,color-mix(in srgb,var(--dt-page) 10%,transparent),transparent 48%)","important");
+    grid.style.setProperty("margin-bottom","14px","important");
+    grid.style.setProperty("border","0","important");
+    grid.style.setProperty("background","transparent","important");
+    grid.style.setProperty("background-image","none","important");
+    grid.style.setProperty("box-shadow","none","important");
   });
 
   view.querySelectorAll(".home-line-row").forEach(function(row){
-    row.style.setProperty("min-height","94px","important");
+    row.style.setProperty("min-height","92px","important");
     row.style.setProperty("padding","13px 7px","important");
+    row.style.setProperty("border-left","0","important");
     row.style.setProperty("border-right","0","important");
-    row.style.setProperty("border-bottom","1px solid color-mix(in srgb,var(--dt-rule) 72%,transparent)","important");
+    row.style.setProperty("border-top","0","important");
+    row.style.setProperty("border-bottom","1px solid color-mix(in srgb,var(--dt-rule) 52%,transparent)","important");
     row.style.setProperty("background","transparent","important");
+    row.style.setProperty("background-image","none","important");
     row.style.setProperty("box-shadow","none","important");
 
     var ico=row.querySelector(".home-line-row__ico");
@@ -547,6 +552,7 @@ function polishHomeStartV1315(){
       title.style.setProperty("text-decoration","none","important");
       title.style.setProperty("text-decoration-line","none","important");
       title.style.setProperty("border-bottom","0","important");
+      title.style.setProperty("box-shadow","none","important");
     }
     var meta=row.querySelector(".home-line-row__copy small,.home-line-row__meta,.home-line-row__desc,p,small");
     if(meta){
@@ -555,11 +561,18 @@ function polishHomeStartV1315(){
     }
   });
 
+  /* Keep the Hadith entry typographically identical to every other Home entry. */
   view.querySelectorAll('[data-nav="hadith"].home-line-row,[data-dt-nav="hadith"].home-line-row,.dt-hadith-library-entry').forEach(function(row){
+    var title=row.querySelector(".home-line-row__copy b,.home-line-row__title,b,strong,h2,h3,h4,a");
+    var meta=row.querySelector(".home-line-row__copy small,.home-line-row__meta,.home-line-row__desc,small,p");
+    if(title)title.textContent="Ḥadīṯ-Bibliothek";
+    if(meta)meta.textContent="Authentische Überlieferungen";
+    row.setAttribute("aria-label","Ḥadīṯ-Bibliothek öffnen");
     row.querySelectorAll("a,b,strong,span,h2,h3,h4").forEach(function(el){
       el.style.setProperty("text-decoration","none","important");
       el.style.setProperty("text-decoration-line","none","important");
       el.style.setProperty("border-bottom","0","important");
+      el.style.setProperty("box-shadow","none","important");
     });
   });
 
@@ -573,11 +586,11 @@ function polishHomeStartV1315(){
 
   var resume=view.querySelector(".home-v380-quran-hero.dt-quran-resume-after-core,.home-v380-quran-hero");
   if(resume){
-    resume.style.setProperty("min-height","84px","important");
+    resume.style.setProperty("min-height","82px","important");
     resume.style.setProperty("margin","10px 8px 16px","important");
-    resume.style.setProperty("padding","13px 8px","important");
-    resume.style.setProperty("border-top","1px solid color-mix(in srgb,var(--dt-rule) 70%,transparent)","important");
-    resume.style.setProperty("border-bottom","1px solid color-mix(in srgb,var(--dt-rule) 70%,transparent)","important");
+    resume.style.setProperty("padding","12px 8px","important");
+    resume.style.setProperty("border-top","1px solid color-mix(in srgb,var(--dt-rule) 56%,transparent)","important");
+    resume.style.setProperty("border-bottom","1px solid color-mix(in srgb,var(--dt-rule) 56%,transparent)","important");
     var rtitle=resume.querySelector(".home-v380-quran-hero__title");
     if(rtitle){
       rtitle.style.setProperty("font-size","clamp(20px,5vw,25px)","important");
@@ -591,16 +604,24 @@ function polishHomeStartV1315(){
 
   var core=view.querySelector(".home-line-tawhid");
   if(core){
-    core.style.setProperty("padding","27px 0 22px","important");
-    core.style.setProperty("margin-top","-1px","important");
+    core.style.setProperty("padding","34px 0 22px","important");
+    core.style.setProperty("margin-top","0","important");
+    core.style.setProperty("border-top","0","important");
+    core.style.setProperty("background","transparent","important");
   }
 
+  /* Footer is content-sized again. The five-tab navigation is intentionally untouched. */
   var footer=document.querySelector(".footer");
   if(footer){
     footer.style.setProperty("min-height","0","important");
     footer.style.setProperty("height","auto","important");
+    footer.style.setProperty("max-height","none","important");
     footer.style.setProperty("margin","0","important");
-    footer.style.setProperty("padding","18px max(16px,env(safe-area-inset-left,0px)) calc(118px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-right,0px))","important");
+    footer.style.setProperty(
+      "padding",
+      "22px max(16px,env(safe-area-inset-left,0px)) calc(26px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-right,0px))",
+      "important"
+    );
     var actions=footer.querySelector(".footer-actions,.footer-socials");
     if(actions){
       actions.style.setProperty("margin-top","10px","important");
@@ -608,7 +629,9 @@ function polishHomeStartV1315(){
     }
     var signature=footer.querySelector(".signature");
     if(signature){
-      signature.style.setProperty("margin-top","10px","important");
+      signature.style.setProperty("display","block","important");
+      signature.style.setProperty("margin-top","11px","important");
+      signature.style.setProperty("margin-bottom","0","important");
       signature.style.setProperty("font-size","clamp(22px,6vw,28px)","important");
       signature.style.setProperty("line-height","1.05","important");
     }
