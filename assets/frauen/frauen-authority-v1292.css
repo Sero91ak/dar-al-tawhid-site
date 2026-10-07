@@ -574,3 +574,31 @@ html[data-theme] body.is-frauen-route[data-frauen-view="list"] .post-row__meta{
     transition:none!important;
   }
 }
+
+/* FRAUEN_COMPACT_CONTENT_END_V1275
+   Keine doppelte Nav-Reserve: body.has-bottom-nav schützt bereits vor der schwebenden Navigation. */
+html[data-theme] body.is-frauen-route .frauen-library-shell,
+html[data-theme] body.is-frauen-route[data-frauen-view="hub"] .frauen-library-shell,
+html[data-theme] body.is-frauen-route[data-frauen-view="group"] .frauen-library-shell,
+html[data-theme] body.is-frauen-route[data-frauen-view="list"] .frauen-library-shell{
+  min-height:0!important;
+  height:auto!important;
+  padding-bottom:var(--dar-content-end-gap,24px)!important;
+  scroll-padding-bottom:calc(var(--dar-global-nav-h,68px) + env(safe-area-inset-bottom,0px) + 18px)!important;
+}
+html[data-theme] body.is-frauen-route :is(.frauen-hub,.frauen-list-page,.frauen-library-list){
+  min-height:0!important;
+  height:auto!important;
+  padding-bottom:var(--dar-content-end-gap,24px)!important;
+}
+html[data-theme] body.is-frauen-route[data-frauen-view="detail"] .article.post-reader{
+  min-height:0!important;
+  height:auto!important;
+  padding-bottom:var(--dar-content-end-gap,24px)!important;
+}
+html[data-theme] body.is-frauen-route[data-frauen-view="list"] .frauen-post-list,
+html[data-theme] body.is-frauen-route[data-frauen-view="group"] .frauen-library-area-grid,
+html[data-theme] body.is-frauen-route[data-frauen-view="hub"] .frauen-library-grid{
+  margin-bottom:var(--dar-content-end-gap,24px)!important;
+}
+
