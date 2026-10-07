@@ -371,7 +371,7 @@ export default {
         target.pathname = "/kids/start";
       }
       target.searchParams.delete("darsw");
-      target.searchParams.set("kv", "kids-shell-v113-deen-photoreal1206");
+      target.searchParams.set("kv", "kids-shell-v115-dua-learning1210");
       return Response.redirect(target.toString(), 301);
     }
 
