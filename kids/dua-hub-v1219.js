@@ -4,8 +4,8 @@
 (() => {
   "use strict";
 
-  const VERSION = 1223;
-  const DATA_URL = "/kids/data/dua-kids.json?v=1223";
+  const VERSION = 1234;
+  const DATA_URL = "/kids/data/dua-kids.json?v=1234";
   const PROFILE_KEY = "kids.profiles.v1";
   const ACTIVE_PROFILE_KEY = "kids.activeProfile";
   const LAST_KEY = "kids.duaHub.last.v1";
@@ -284,7 +284,7 @@
       btn = document.createElement("button");
       btn.className = "nav-btn duahub-nav";
       btn.dataset.target = "dua";
-      btn.innerHTML = '<span class="ico duahub-nav-ico" aria-hidden="true"><img src="/kids/assets/dua-premium/nav-dua-v1222.png?v=1222" alt="" decoding="async"></span><span class="lab">Duʿāʾ</span>';
+      btn.innerHTML = '<span class="ico duahub-nav-ico" aria-hidden="true"><img src="/kids/assets/dua-premium/nav-dua-v1222.png?v=1234" alt="" decoding="async"></span><span class="lab">Duʿāʾ</span>';
       const stories = q('.nav-btn[data-target="stories"]', nav);
       if (stories?.nextSibling) nav.insertBefore(btn, stories.nextSibling);
       else nav.appendChild(btn);
