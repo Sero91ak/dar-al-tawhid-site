@@ -447,74 +447,66 @@ jobs:
                       raise SystemExit("Audio fehlt: "+str(p))
               return manifest
 
-          scope=os.environ.get("VOICE_BUILD_SCOPE","full").strip().lower()
-          if scope=="dua":
-              quiz_manifest=load_manifest(QUIZ_MANIFEST)
-              print("VOICE_BUILD_SCOPE=dua · Quiz-Pack bleibt unverändert.")
-          else:
-              build_scope=os.environ.get("VOICE_BUILD_SCOPE","full").strip().lower()
+          build_scope=os.environ.get("VOICE_BUILD_SCOPE","full").strip().lower()
           if build_scope not in ("full","quiz","dua"):
               raise SystemExit("Ungültiger VOICE_BUILD_SCOPE: "+build_scope)
           print("VOICE_BUILD_SCOPE="+build_scope)
 
           if build_scope!="dua":
               quiz=json.loads(QUIZ.read_text(encoding="utf-8"))
-                  quiz_items=[
-                      q for q in (quiz.get("items") or [])
-                      if isinstance(q,dict)
-                      and q.get("status")=="published"
-                      and q.get("reviewStatus")=="approved"
-                      and q.get("verification")=="approved"
-                  ]
-                  if len(quiz_items)!=900:
-                      raise SystemExit(f"Erwartet 900 freigegebene Kids-Fragen, gefunden: {len(quiz_items)}")
-                  prompts=[quiz_prompt(q) for q in quiz_items]
-                  if len(set(prompts))!=900:
-                      raise SystemExit("Quiz-Sprachprompts sind nicht eindeutig.")
-                  quiz_texts=[]
-                  quiz_profiles={}
-                  age_profile={
-                      "4-6":"quiz_4_6",
-                      "7-8":"quiz_7_8",
-                      "9-10":"quiz_9_10"
-                  }
-                  for q in quiz_items:
-                      prompt=quiz_prompt(q)
-                      quiz_texts.append(prompt)
-                      quiz_profiles[prompt]=age_profile.get(str(q.get("ageBand") or ""),"quiz_9_10")
-                      for feedback in (norm(q.get("success")),norm(q.get("retry"))):
-                          if feedback:
-                              quiz_texts.append(feedback)
-                              quiz_profiles[feedback]="quiz_feedback"
-                  final_feedback="Sehr gut. Du hast das Quiz geschafft."
-                  quiz_texts.append(final_feedback)
-                  quiz_profiles[final_feedback]="quiz_feedback"
+              quiz_items=[
+                  q for q in (quiz.get("items") or [])
+                  if isinstance(q,dict)
+                  and q.get("status")=="published"
+                  and q.get("reviewStatus")=="approved"
+                  and q.get("verification")=="approved"
+              ]
+              if len(quiz_items)!=900:
+                  raise SystemExit(f"Erwartet 900 freigegebene Kids-Fragen, gefunden: {len(quiz_items)}")
+              prompts=[quiz_prompt(q) for q in quiz_items]
+              if len(set(prompts))!=900:
+                  raise SystemExit("Quiz-Sprachprompts sind nicht eindeutig.")
+              quiz_texts=[]
+              quiz_profiles={}
+              age_profile={
+                  "4-6":"quiz_4_6",
+                  "7-8":"quiz_7_8",
+                  "9-10":"quiz_9_10"
+              }
+              for q in quiz_items:
+                  prompt=quiz_prompt(q)
+                  quiz_texts.append(prompt)
+                  quiz_profiles[prompt]=age_profile.get(str(q.get("ageBand") or ""),"quiz_9_10")
+                  for feedback in (norm(q.get("success")),norm(q.get("retry"))):
+                      if feedback:
+                          quiz_texts.append(feedback)
+                          quiz_profiles[feedback]="quiz_feedback"
+              final_feedback="Sehr gut. Du hast das Quiz geschafft."
+              quiz_texts.append(final_feedback)
+              quiz_profiles[final_feedback]="quiz_feedback"
 
-                  quiz_manifest=build_pack(
-                      texts=quiz_texts,
-                      manifest_path=QUIZ_MANIFEST,
-                      asset_dir=QUIZ_ASSETS,
-                      profile="quiz_feedback",
-                      pack_id="KIDS_QUIZ_OWNER_VOICE_V4",
-                      counts={
-                          "quizQuestions":len(quiz_items),
-                          "questionPrompts":len(set(prompts)),
-                          "age4to6":sum(1 for q in quiz_items if str(q.get("ageBand") or "")=="4-6"),
-                          "age7to8":sum(1 for q in quiz_items if str(q.get("ageBand") or "")=="7-8"),
-                          "age9to10":sum(1 for q in quiz_items if str(q.get("ageBand") or "")=="9-10")
-                      },
-                      model_id=ELEVEN_MODEL,
-                      require_model_match=True,
-                      profiles_by_text=quiz_profiles
-                  )
-                  if quiz_manifest["counts"]["quizQuestions"]!=900 or quiz_manifest["counts"]["questionPrompts"]!=900:
-                      raise SystemExit("900er Quiz-Voice-Pack unvollständig.")
-
-
-
+              quiz_manifest=build_pack(
+                  texts=quiz_texts,
+                  manifest_path=QUIZ_MANIFEST,
+                  asset_dir=QUIZ_ASSETS,
+                  profile="quiz_feedback",
+                  pack_id="KIDS_QUIZ_OWNER_VOICE_V4",
+                  counts={
+                      "quizQuestions":len(quiz_items),
+                      "questionPrompts":len(set(prompts)),
+                      "age4to6":sum(1 for q in quiz_items if str(q.get("ageBand") or "")=="4-6"),
+                      "age7to8":sum(1 for q in quiz_items if str(q.get("ageBand") or "")=="7-8"),
+                      "age9to10":sum(1 for q in quiz_items if str(q.get("ageBand") or "")=="9-10")
+                  },
+                  model_id=ELEVEN_MODEL,
+                  require_model_match=True,
+                  profiles_by_text=quiz_profiles
+              )
+              if quiz_manifest["counts"]["quizQuestions"]!=900 or quiz_manifest["counts"]["questionPrompts"]!=900:
+                  raise SystemExit("900er Quiz-Voice-Pack unvollständig.")
           else:
               quiz_manifest=load_manifest(QUIZ_MANIFEST)
-              print("VOICE_BUILD_SCOPE=dua · 900er Quiz-Audio wird nicht neu erzeugt.")
+              print("VOICE_BUILD_SCOPE=dua · Quiz-Pack bleibt unverändert.")
 
           if build_scope=="quiz":
               print("VOICE_BUILD_SCOPE=quiz · Duʿāʾ-Packs bleiben unverändert.")
