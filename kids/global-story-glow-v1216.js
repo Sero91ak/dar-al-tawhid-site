@@ -32,5 +32,5 @@ function fromEvent(e){
 }
 document.addEventListener("pointerdown",fromEvent,true);
 document.addEventListener("click",e=>{if(e.detail===0)fromEvent(e)},true);
-window.DARKidsStoryGlow=Object.freeze({version:1216,glow});
+window.DARKidsStoryGlow=Object.freeze({version:1217,glow});
 })();
