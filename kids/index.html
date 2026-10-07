@@ -2882,7 +2882,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.08.47</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.08.48</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -2893,7 +2893,7 @@ html:not([data-view="today"]) .view.active{
       <div class="hero" aria-label="DĀR AL TAWḤĪD Kids">
         <div class="hero-artifact-shield" aria-hidden="true"></div>
         <div class="kids-wordmark">
-          <img class="wm-dar-reference-v1222" src="/kids/assets/kids-home-v1222/dar-title-reference-clean.svg?v=1222" alt="DĀR AL TAWḤĪD" draggable="false" decoding="async">
+          <img class="wm-dar-reference-v1222" src="/kids/assets/kids-home-v1219/dar-title-reference.png?v=1223" alt="DĀR AL TAWḤĪD" draggable="false" decoding="async">
           <div class="wm-dar-safe" aria-hidden="true">
             <span class="wm-word wm-word-dar"><span>D</span><span>Ā</span><span>R</span></span>
             <span class="wm-word wm-word-al"><span>A</span><span>L</span></span>
@@ -3273,7 +3273,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v126-home-brand1222";
+const KIDS_BUILD_ID="kids-shell-v127-home-brand1223";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6400,7 +6400,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=6"></script>\n<script src="/kids/dua-smart-learn.js?v=2"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v126-home-brand1222";
+  var KIDS_BUILD_ID="kids-shell-v127-home-brand1223";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -6416,13 +6416,13 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1222",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1223",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
   }
   window.addEventListener("load",function(){
-    fetch("/kids/version.json?v=1222",{cache:"no-store"})
+    fetch("/kids/version.json?v=1223",{cache:"no-store"})
       .then(function(r){return r.ok?r.json():null})
       .then(function(v){
         var live=String(v&&v.buildId||"");
