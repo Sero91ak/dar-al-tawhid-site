@@ -1,0 +1,35 @@
+name: Import Kids Quiz Hero Asset
+
+on:
+  push:
+    branches:
+      - test-kids-quiz-wide-v1230-20261007
+    paths:
+      - .github/workflows/import-kids-hero-assets-v1095.yml
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 1
+      - name: Import generated Quiz hero
+        run: |
+          set -euo pipefail
+          mkdir -p kids/assets/quiz-scenes
+          curl -L --fail --retry 3 "https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:80846495-41cb-443a-bba0-2b83ac67ce36" -o kids/assets/quiz-scenes/quiz-learning-hub-v1230.png
+          test -s kids/assets/quiz-scenes/quiz-learning-hub-v1230.png
+      - name: Commit permanent asset
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add kids/assets/quiz-scenes/quiz-learning-hub-v1230.png
+          git rm .github/workflows/import-kids-hero-assets-v1095.yml
+          git commit -m "Kids Quiz staging: import generated hero asset"
+          git push origin HEAD:${{ github.ref_name }}
