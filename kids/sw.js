@@ -64,38 +64,6 @@ const CORE_PRECACHE=[
   "/kids/data/dua-kids.json?v=1223",
   "/kids/data/dua-audio.json",
   "/kids/data/dua-arabic-audio.json",
-  "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-afiyah.m4a",
-  "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-after-eating.m4a",
-  "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-eating.m4a",
-  "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-guidance-taqwa.m4a",
-  "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-leave-home.m4a",
-  "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-mosque-enter.m4a",
-  "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-mosque-exit.m4a",
-  "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-sleep.m4a",
-  "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-toilet-enter.m4a",
-  "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-toilet-exit.m4a",
-  "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-wake.m4a",
-  "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-ya-muqallib.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-accept-deeds.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-afiyah.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-after-eating.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-clear-speech.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-eating.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-guidance-taqwa.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-heart-guidance.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-knowledge.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-leave-home.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-mosque-enter.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-mosque-exit.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-parents.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-protection.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-rabbana-atina.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-repentance.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-sleep.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-toilet-enter.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-toilet-exit.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-wake.m4a",
-  "/kids/assets/kids-dua-audio/v4-20261007/dua-ya-muqallib.m4a",
   "/kids/assets/kids-owner-voice/996533039c958c21c976.m4a",
   "/kids/assets/kids-owner-voice/cd31c4ca743ad8173e90.m4a",
   "/kids/data/verified-content.json",
@@ -354,7 +322,7 @@ self.addEventListener("fetch",function(event){
     event.respondWith(fetch(request));
     return;
   }
-  if(url.pathname.indexOf("/kids/assets/prophet-story-audio/")===0||url.pathname.indexOf("/kids/assets/mubashshirun-story-audio/")===0||url.pathname.indexOf("/kids/assets/sahabiyyat-story-audio/")===0||url.pathname.indexOf("/kids/assets/kids-owner-voice/")===0||url.pathname.indexOf("/kids/assets/kids-quiz-audio/")===0||url.pathname.indexOf("/kids/assets/kids-dua-audio/")===0||url.pathname.indexOf("/kids/assets/kids-dua-arabic-audio/")===0){
+  if(url.pathname.indexOf("/kids/assets/prophet-story-audio/")===0||url.pathname.indexOf("/kids/assets/mubashshirun-story-audio/")===0||url.pathname.indexOf("/kids/assets/sahabiyyat-story-audio/")===0||url.pathname.indexOf("/kids/assets/kids-owner-voice/")===0||url.pathname.indexOf("/kids/assets/kids-quiz-audio/")===0||url.pathname.indexOf("/kids/assets/kids-dua-audio/")===0||url.pathname.indexOf("/kids/assets/kids-dua-arabic-audio/")===0||url.pathname.indexOf("/kids/assets/kids-dua-arabic-slow-audio/")===0||url.pathname.indexOf("/kids/assets/kids-dua-word-audio/")===0){
     event.respondWith(fetch(request));
     return;
   }
