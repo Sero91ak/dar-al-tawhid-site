@@ -2882,7 +2882,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.08.48</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.08.49</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3273,7 +3273,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v127-home-brand1223";
+const KIDS_BUILD_ID="kids-shell-v128-nav-deen-fix1224";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6400,7 +6400,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=6"></script>\n<script src="/kids/dua-smart-learn.js?v=2"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v127-home-brand1223";
+  var KIDS_BUILD_ID="kids-shell-v128-nav-deen-fix1224";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -6416,13 +6416,13 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1223",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1224",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
   }
   window.addEventListener("load",function(){
-    fetch("/kids/version.json?v=1223",{cache:"no-store"})
+    fetch("/kids/version.json?v=1224",{cache:"no-store"})
       .then(function(r){return r.ok?r.json():null})
       .then(function(v){
         var live=String(v&&v.buildId||"");
@@ -7406,7 +7406,7 @@ html[data-view="stories"] #view-stories > :last-child{
 <script src="/kids/story-policy.js?v=2"></script>
 <script src="/kids/prophet-stories.js?v=42"></script>
 <script src="/kids/mubashshirun-stories.js?v=31"></script>
-<script src="/kids/sahabiyyat-stories.js?v=23"></script>\n<script src="/kids/deen-lessons.js?v=3"></script>
+<script src="/kids/sahabiyyat-stories.js?v=23"></script>\n<script src="/kids/deen-lessons.js?v=4"></script>
 <script src="/kids/global-story-glow-v1216.js?v=1217"></script>
 <script src="/kids/dua-hub-v1219.js?v=1221" data-kids-dua-hub="1220"></script>
 <script src="/kids/story-hub.js?v=25"></script>
@@ -7420,7 +7420,7 @@ html[data-view="stories"] #view-stories > :last-child{
 <link rel="stylesheet" href="/kids/dua-hub-v1219.css?v=1221" data-kids-dua-hub="1220">
 <link rel="stylesheet" href="/kids/story-card-system.css?v=2" data-kids-story-card-system="1">
 <link rel="stylesheet" href="/kids/story-library-cards.css?v=9" data-kids-story-card-repair="1">
-<link rel="stylesheet" href="/kids/kids-touch-rail.css?v=11" data-kids-touch-rail="1">
+<link rel="stylesheet" href="/kids/kids-touch-rail.css?v=12" data-kids-touch-rail="1">
 
 <style id="kids-home-audio-focus-v1169">
 /* Startseite: Audio-first, drei klare Kernwelten, große lesbare Markenbühne. */
@@ -9993,7 +9993,7 @@ html[data-view="stories"] #view-stories > :last-child{
 }
 </style>
 
-  <script src="/kids/kids-card-interaction.js?v=4" defer></script>
+  <script src="/kids/kids-card-interaction.js?v=5" defer></script>
 
 <style id="kids-home-reference-exact-v1199">
 /* V1196 — approved screenshot direction.
