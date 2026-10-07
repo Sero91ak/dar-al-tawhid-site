@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-10-07T08:16:00Z",
+  "provider": "ElevenLabs",
+  "modelId": "eleven_v4",
+  "masterVoice": {
+    "name": "Serhat Abu Malik – Master",
+    "voiceId": "DkU7j9uO4ZEtLD2iRZSH"
+  },
+  "pronunciationDictionary": {
+    "name": "DAR AL TAWHID Arabic Master 2.9.122",
+    "id": "Q8w3SxtoVo8NSjsnlJEd",
+    "versionId": "wSzgkGpAwEDiTak8DApc",
+    "ruleCount": 10099,
+    "masterFile": "data/pronunciation/DAR_AL_TAWHID_ElevenLabs_ARABIC_MASTER_29122.pls",
+    "requiredForProduction": true
+  },
+  "alignment": {
+    "productionMode": "elevenlabs-forced-alignment-v1",
+    "estimatedTimingsAllowed": false,
+    "whisperAllowedAsFinalProduction": false,
+    "silenceAwareAllowedAsFinalProduction": false
+  },
+  "quran": {
+    "syntheticRecitationAllowed": false,
+    "policy": "human-quran-recitation-only"
+  },
+  "sunnahArabicDua": {
+    "policy": "professional-arabic-voice-until-owner-arabic-approved",
+    "currentSpeaker": "Karim – Arabic MSA",
+    "modelId": "eleven_v4"
+  }
+}
