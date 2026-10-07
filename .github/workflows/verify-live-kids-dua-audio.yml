@@ -1,4 +1,5 @@
 name: Verify Live Kids Dua Audio
+# Final Fusha live verify 2026-10-07
 
 on:
   workflow_dispatch:
@@ -31,7 +32,7 @@ jobs:
           set -euo pipefail
           BASE="https://dar-al-tawhid.de"
           CB="$(date +%s)"
-          curl -fsS -A "DarAlTawhidKids-iOS" "$BASE/kids/dua-smart-learn.js?v=1241&cb=$CB" -o /tmp/dua-smart.js
+          curl -fsS -A "DarAlTawhidKids-iOS" "$BASE/kids/dua-smart-learn.js?v=1244&cb=$CB" -o /tmp/dua-smart.js
           grep -F 'GERMAN_URL="/kids/data/dua-audio.json?v=8"' /tmp/dua-smart.js
           grep -F 'playGerman:playGerman' /tmp/dua-smart.js
           grep -F 'prepare:prepare' /tmp/dua-smart.js
@@ -56,6 +57,15 @@ jobs:
             assert len(entries)==expected,(label,len(entries),expected)
             assert data.get("modelId")=="eleven_v4",(label,data.get("modelId"))
             assert data.get("voiceProfileId")=="serhat-owner-voice-2026",(label,data.get("voiceProfileId"))
+            if label=="arabic":
+              assert data.get("synthesisRevision")=="dua-arabic-native-fusha-v3-20261007",data.get("synthesisRevision")
+              assert data.get("pronunciationDictionaryApplied") is False
+            elif label=="slow":
+              assert data.get("synthesisRevision")=="dua-arabic-native-fusha-slow-v3-20261007",data.get("synthesisRevision")
+              assert data.get("pronunciationDictionaryApplied") is False
+            elif label=="word":
+              assert data.get("synthesisRevision")=="dua-arabic-native-fusha-word-v4-20261007",data.get("synthesisRevision")
+              assert data.get("pronunciationDictionaryApplied") is False
             first=next(iter(entries.values()))
             print(label+"\t"+first["url"])
           PY
