@@ -99,6 +99,7 @@
     var pane = paneHtml == null ? "" : String(paneHtml);
     var cm = opts.compactMode || "auto";
     var singleShow = cm === "rail" ? "rail" : cm === "pane" ? "pane" : (pane ? "pane" : "rail");
+    var forceMode = opts.forceDual == null ? "auto" : (opts.forceDual ? "dual" : "single");
     if (!pane) pane = emptyPane(opts.emptyMsg || "Links etwas auswählen");
 
     return (
@@ -106,6 +107,8 @@
       String(opts.family || "") +
       '" data-fold-mode="dual" data-fold-single-show="' +
       singleShow +
+      '" data-fold-force="' +
+      forceMode +
       '">' +
       '<aside class="dar-fold__rail" id="' +
       String(opts.railId || "darFoldRail") +
