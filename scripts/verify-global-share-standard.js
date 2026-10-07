@@ -67,7 +67,11 @@ for (const token of [
   "function mountShare",
   "mount:mountShare",
   "ownedPanel.__darSharePayload",
-  "legacyTitle.remove()"
+  "legacyTitle.remove()",
+  "GLOBAL_SOCIAL_BRAND_COLORS_V1269",
+  "#25D366",
+  "#2AABEE",
+  "#833AB4"
 ]) need(globalRel, globalShare, token);
 for (const token of [
   "/api/share-image/background",
@@ -91,7 +95,12 @@ for (const token of [
   "grid-template-columns:repeat(4,minmax(0,1fr))",
   ".dar-share-tools",
   "grid-template-columns:repeat(3,minmax(0,1fr))",
-  ".dar-share-note"
+  ".dar-share-note",
+  "GLOBAL_SOCIAL_BRAND_COLORS_V1269",
+  "#25D366",
+  "#2AABEE",
+  "#833AB4",
+  "#FCAF45"
 ]) need(globalCssRel, globalCss, token);
 for (const token of [
   "@media(max-width:370px){\n  .share-panel .share-flat-v410",
@@ -187,6 +196,17 @@ for (const token of [
   'ctx.fillText("Folgt für mehr Wissen aus Qurʾān & Sunnah"',
   "app-store-badge-de-official.svg"
 ]) forbid(frauenRel, frauen, token);
+
+
+const frauenCssRel = "assets/frauen/frauen-fiqh.css";
+const frauenCss = file(frauenCssRel);
+for (const token of [
+  "GLOBAL_SOCIAL_BRAND_COLORS_V1269",
+  "#25D366",
+  "#2AABEE",
+  "#833AB4",
+  "#FCAF45"
+]) need(frauenCssRel, frauenCss, token);
 
 const workerRel = "cloudflare/worker.js";
 const worker = file(workerRel);
