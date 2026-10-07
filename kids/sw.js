@@ -114,7 +114,7 @@ const CORE_PRECACHE=[
   "/kids/kids-touch-rail.css?v=9",
   "/kids/kids-card-interaction.js?v=2",
   "/kids/kids-age-typography.js?v=3",
-  "/kids/owner-voice.js?v=6",\n  "/kids/dua-smart-learn.css?v=1",\n  "/kids/dua-smart-learn.js?v=1",
+  "/kids/owner-voice.js?v=6",\n  "/kids/dua-smart-learn.css?v=2",\n  "/kids/dua-smart-learn.js?v=2",
   "/kids/content-studio-feed.js?v=studio7",
   "/kids/assets/kids-open-v95.css?v=97",
   "/kids/assets/kids-open-v95.js?v=97",
