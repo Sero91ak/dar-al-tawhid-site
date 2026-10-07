@@ -111,7 +111,7 @@ jobs:
           ELEVEN_MODEL=str(PROD_CFG.get("modelId") or "").strip()
           ELEVEN_DUA_MODEL=ELEVEN_MODEL
           ARABIC_PROFILES={"dua_arabic","dua_arabic_slow","dua_word"}
-          ARABIC_SYNTHESIS_REVISION="dua-arabic-native-fusha-v3-20261007"
+          ARABIC_SYNTHESIS_REVISION="dua-arabic-native-fusha-v2-20261007"
           DICT_CFG=PROD_CFG.get("pronunciationDictionary") or {}
           DICT_ID=str(DICT_CFG.get("id") or "").strip()
           DICT_VERSION=str(DICT_CFG.get("versionId") or "").strip()
