@@ -64,16 +64,22 @@ jobs:
               url=str(entry.get("url") or "").split("?",1)[0]
               p=root/url.lstrip("/")
               assert p.exists() and p.stat().st_size>1200,(path,url)
-          # Arabic packs must be the corrected native-Fusha generation.
-          for path in ("kids/data/dua-arabic-audio.json","kids/data/dua-arabic-slow-audio.json","kids/data/dua-word-audio.json"):
+          # Arabic packs use exact vocalized Fuṣḥā. Full remains v2; slow/word are
+          # dedicated v3 renders with Eleven v4 [slowly] delivery tags.
+          expected_revisions={
+            "kids/data/dua-arabic-audio.json":"dua-arabic-native-fusha-v2-20261007",
+            "kids/data/dua-arabic-slow-audio.json":"dua-arabic-native-fusha-slow-v3-20261007",
+            "kids/data/dua-word-audio.json":"dua-arabic-native-fusha-word-v3-20261007",
+          }
+          for path,expected_revision in expected_revisions.items():
             data=json.loads((root/path).read_text(encoding="utf-8"))
-            assert data.get("arabicSynthesisRevision")=="dua-arabic-native-fusha-v2-20261007",(path,data.get("arabicSynthesisRevision"))
+            assert data.get("arabicSynthesisRevision")==expected_revision,(path,data.get("arabicSynthesisRevision"),expected_revision)
             assert data.get("pronunciationDictionaryApplied") is False,(path,data.get("pronunciationDictionaryApplied"))
             assert data.get("pronunciationDictionaryId") is None,(path,data.get("pronunciationDictionaryId"))
             assert int(data.get("pronunciationDictionaryRuleCount") or 0)==0,(path,data.get("pronunciationDictionaryRuleCount"))
             for entry in (data.get("entries") or {}).values():
               assert entry.get("pronunciationDictionaryApplied") is False,(path,entry.get("pronunciationDictionaryApplied"))
-              assert entry.get("arabicSynthesisRevision")=="dua-arabic-native-fusha-v2-20261007",(path,entry.get("arabicSynthesisRevision"))
+              assert entry.get("arabicSynthesisRevision")==expected_revision,(path,entry.get("arabicSynthesisRevision"),expected_revision)
           print("Du'a manifests and audio assets OK")
           PY
 
