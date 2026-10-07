@@ -392,3 +392,124 @@ html.is-layout-landscape[data-layout="medium"] .app {
     transition: none !important;
   }
 }
+
+
+/* v1326 · CAPACITY-BASED FOLD/IPAD LAYOUT AUTHORITY */
+:root,
+html[data-theme]{
+  --layout-reader-max:46rem;
+  --layout-media-max:100%;
+  --layout-card-min:260px;
+  --library-card-min:260px;
+}
+
+/* No sideways page drift on Fold/iPad. Horizontal scrolling belongs only to
+   explicit media/table components, never to the app shell. */
+html[data-layout] body,
+html[data-layout][data-orientation="landscape"] body{
+  overflow-x:hidden!important;
+}
+html[data-layout] #appView.view,
+html[data-layout] .view,
+html[data-layout] .app{
+  min-width:0!important;
+  max-width:100%!important;
+  width:100%!important;
+  overflow-x:clip;
+  box-sizing:border-box;
+}
+
+/* Reader text stays readable while the pane/background may use all space. */
+html[data-layout] :is(
+  .article,
+  .post-reader,
+  .post-body,
+  .dua-detail-box,
+  .quran-ayah-list,
+  .quran-surah-head,
+  .quran-reader-shell,
+  .quiz-shell,
+  .hadith-detail,
+  .lib-detail,
+  .qsrc-detail
+){
+  width:100%!important;
+  max-inline-size:min(100%,var(--layout-reader-max,46rem))!important;
+  margin-inline:auto!important;
+  min-width:0!important;
+  box-sizing:border-box!important;
+}
+
+/* Media/PDF deliberately use the complete content pane instead of inheriting
+   the text-column cap. */
+html[data-layout] :is(
+  .pdf-viewer,
+  .pdf-reader,
+  .pdf-shell,
+  [data-pdf-viewer],
+  iframe[src*=".pdf"],
+  embed[type="application/pdf"],
+  .reader-media,
+  .wide-media,
+  .quran-page-canvas
+){
+  width:100%!important;
+  max-width:100%!important;
+  max-inline-size:100%!important;
+  margin-inline:auto!important;
+  min-width:0!important;
+  box-sizing:border-box!important;
+}
+
+/* Content-aware grids: space creates useful columns, never tiny horizontal
+   mini-cards or forced desktop centering. */
+html[data-layout="medium"] :is(.dua-theme-grid,.topics-theme-grid),
+html[data-layout="expanded"] :is(.dua-theme-grid,.topics-theme-grid){
+  display:grid!important;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))!important;
+  gap:clamp(8px,1.3vw,14px)!important;
+}
+html[data-layout="medium"] :is(.lib-grid,.books-library-list,.folder-grid,.latest-grid),
+html[data-layout="expanded"] :is(.lib-grid,.books-library-list,.folder-grid,.latest-grid){
+  display:grid!important;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))!important;
+  gap:clamp(8px,1.2vw,14px)!important;
+}
+
+/* Universal flex/grid safety: long German/Arabic labels cannot force a pane
+   wider than its assigned track. */
+html[data-layout] :is(
+  .view,.article,.post-reader,.post-body,.dua-detail-box,.quran-reader-shell,
+  .quran-ayah-list,.books-library-shell,.library-shell,.hadith-shell-pro,
+  .dar-fold,.dar-fold__rail,.dar-fold__pane
+){
+  min-width:0!important;
+}
+html[data-layout] :is(h1,h2,h3,.view-title,.settings-page-head h2){
+  overflow-wrap:anywhere;
+  text-wrap:balance;
+}
+
+/* Capacity state, written by adaptive-layout.js. */
+html[data-fold-capacity="dual"]{
+  --layout-reader-max:46rem;
+}
+html[data-fold-capacity="single"]{
+  --fold-side-master-gap:0px;
+}
+
+@media(max-width:599.98px){
+  html[data-layout] :is(
+    .article,.post-reader,.post-body,.dua-detail-box,.quran-reader-shell,
+    .quran-ayah-list,.hadith-detail,.lib-detail,.qsrc-detail
+  ){
+    max-inline-size:100%!important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  html[data-layout] .app,
+  html[data-layout] .view{
+    transition:none!important;
+  }
+}
