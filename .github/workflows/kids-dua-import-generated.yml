@@ -46,6 +46,17 @@ jobs:
 
           mapping=json.loads(MAP.read_text(encoding="utf-8"))
           rows=mapping.get("entries") or []
+          canonical_voice="DkU7j9uO4ZEtLD2iRZSH"
+          legacy_ar=[
+              row for row in rows
+              if str(row.get("key") or "").endswith(":ar")
+              and str(row.get("voice_id") or "")!=canonical_voice
+          ]
+          if legacy_ar:
+              raise SystemExit(
+                  "Legacy Arabic Duʿāʾ import blocked: non-Serhat Arabic source rows detected. "
+                  "Use Build Kids Quiz + Dua Owner Voice with [dua-only]."
+              )
           if len(rows)!=32:
               raise SystemExit(f"Expected 32 generated audio rows, got {len(rows)}")
           if len({r.get("key") for r in rows})!=32:
