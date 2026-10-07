@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /**
  * APP_LANE_GUARD
- * Eine Nutzer-Vorgabe für mehrere Apps wird in getrennten Commits gebaut.
+ * „Global / alle Apps“ = Inhalt in jede App, aber trotzdem getrennte Commits.
  * Ein Commit darf nur eine App-Spur ändern, damit Kids, Web, Test und Apple TV
- * nicht denselben Push-/Deploy-Weg blockieren.
+ * nicht denselben Push-/Deploy-Weg blockieren oder einen Build verwerfen.
  *
  * Ausnahme im Commit: lanes-multi-freigabe
  */
