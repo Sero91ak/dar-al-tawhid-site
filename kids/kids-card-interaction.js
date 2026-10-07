@@ -1,4 +1,4 @@
-/* DĀR AL TAWḤĪD KIDS — Global Card Interaction Runtime v5
+/* DĀR AL TAWḤĪD KIDS — Global Card Interaction Runtime v6
    KIDS_GLOBAL_TOUCH_GLOW
    Applies one touch language to all current and future Kids card/capsule surfaces.
 */
@@ -158,15 +158,15 @@
   function applyInlinePress(el){
     rememberInline(el);
     const compact=el.classList.contains("kids-touch-control");
-    el.style.setProperty("border-color","rgba(250,220,145,.82)","important");
+    el.style.setProperty("border-color","rgba(250,220,145,.68)","important");
     el.style.setProperty(
       "box-shadow",
       compact
-        ? "inset 0 0 0 1px rgba(255,232,164,.28), inset 0 0 18px rgba(240,202,116,.12), 0 0 26px rgba(240,202,116,.22)"
-        : "inset 0 0 0 1px rgba(255,232,164,.30), inset 0 0 28px rgba(240,202,116,.15), 0 0 0 1px rgba(250,220,145,.21), 0 0 36px rgba(240,202,116,.25), 0 14px 34px rgba(0,0,0,.18)",
+        ? "0 0 0 1px rgba(250,220,145,.12), 0 0 20px rgba(240,202,116,.12)"
+        : "0 0 0 1px rgba(250,220,145,.14), 0 0 27px rgba(240,202,116,.14), 0 14px 34px rgba(0,0,0,.16)",
       "important"
     );
-    el.style.setProperty("filter",compact?"brightness(1.065)":"brightness(1.075) saturate(1.025)","important");
+    el.style.setProperty("filter",compact?"brightness(1.04)":"brightness(1.045)","important");
   }
 
   function restoreInlinePress(el){
@@ -228,7 +228,7 @@
   document.addEventListener("touchcancel",()=>clearPressed(0),{passive:true,capture:true});
 
   window.DARKidsCardInteraction={
-    version:5,
+    version:6,
     mark,
     tapSelector:TAP_SELECTORS
   };
