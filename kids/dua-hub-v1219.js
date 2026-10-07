@@ -1,11 +1,11 @@
-/* DĀR AL TAWḤĪD Kids · Duʿāʾ Hub v1219
+/* DĀR AL TAWḤĪD Kids · Duʿāʾ Hub v1223
    Premium hybrid library + smart learning entry + profile avatars.
    Keeps the shared bottom navigation system intact and adds Duʿāʾ as a native fifth tab. */
 (() => {
   "use strict";
 
-  const VERSION = 1219;
-  const DATA_URL = "/kids/data/dua-kids.json?v=1219";
+  const VERSION = 1223;
+  const DATA_URL = "/kids/data/dua-kids.json?v=1223";
   const PROFILE_KEY = "kids.profiles.v1";
   const ACTIVE_PROFILE_KEY = "kids.activeProfile";
   const LAST_KEY = "kids.duaHub.last.v1";
@@ -393,8 +393,20 @@
     setTimeout(() => q("#duaHubSearch")?.focus({ preventScroll: true }), 480);
   }
 
+  function canSmartLearn(d) {
+    return !!(d && d.smartLearningReady !== false && Array.isArray(d.learningSegments) && d.learningSegments.length);
+  }
+
+  function hasReadyAudio(d) {
+    return !!(d && d.audioStatus === "ready");
+  }
+
   function smartLearnItem(d) {
     if (!d) return;
+    if (!canSmartLearn(d)) {
+      openDetail(d);
+      return;
+    }
     setContinue(d.id);
     setLast(d.id);
     stopAudio();
@@ -406,7 +418,7 @@
   }
 
   function nextLearnItem() {
-    const list = availableItems();
+    const list = availableItems().filter(canSmartLearn);
     if (!list.length) return null;
     return list.find(d => progress(d.id).stage !== "secure") || list[0];
   }
@@ -460,6 +472,28 @@
     q("#duaHubArabic").textContent = d.arabic || "";
     q("#duaHubTranslit").textContent = d.transliteration || "";
     q("#duaHubMeaning").textContent = d.meaning || "";
+    const audioReady = hasReadyAudio(d);
+    const learnReady = canSmartLearn(d);
+    const listenButton = q("#duaHubListen");
+    const learnButton = q("#duaHubLearn");
+    const germanButton = q("#duaHubGerman");
+    if (listenButton) {
+      listenButton.disabled = !audioReady;
+      const label = q("b", listenButton);
+      if (label) label.textContent = audioReady ? "Anhören" : "Audio folgt";
+      listenButton.setAttribute("aria-disabled", audioReady ? "false" : "true");
+    }
+    if (learnButton) {
+      learnButton.disabled = !learnReady;
+      const label = q("b", learnButton);
+      if (label) label.textContent = learnReady ? "Lernen" : "Lern-Audio folgt";
+      learnButton.setAttribute("aria-disabled", learnReady ? "false" : "true");
+    }
+    if (germanButton) {
+      germanButton.disabled = !audioReady;
+      germanButton.textContent = audioReady ? "Erklärung hören" : "Erklärung lesen";
+      germanButton.setAttribute("aria-disabled", audioReady ? "false" : "true");
+    }
     const source = q("#duaHubSource");
     source.innerHTML = '<span>Quelle</span><b>' + escapeHtml(d.source || "Geprüfter Eintrag") + '</b>' +
       (d.sourceUrl ? '<a href="' + escapeHtml(d.sourceUrl) + '" target="_blank" rel="noopener">Nachweis öffnen</a>' : "");
@@ -537,7 +571,7 @@
   }
 
   function playArabic(d) {
-    if (!d) return;
+    if (!d || !hasReadyAudio(d)) return;
     stopAudio();
     const button = q("#duaHubListen");
     button?.classList.add("is-playing");
@@ -564,7 +598,7 @@
   }
 
   function playGerman(d) {
-    if (!d) return;
+    if (!d || !hasReadyAudio(d)) return;
     stopAudio();
     const text = String(d.audioGermanText || ((d.childPrompt || "") + " " + (d.meaning || ""))).replace(/\s+/g, " ").trim();
     if (window.DARKidsOwnerVoice?.play) window.DARKidsOwnerVoice.play(text, { source: "kids-dua-hub-german" });
