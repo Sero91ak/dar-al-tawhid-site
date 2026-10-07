@@ -99,3 +99,8 @@ html.dua-smart-open,body.dua-smart-open{overflow:hidden!important;overscroll-beh
 @media(prefers-reduced-motion:reduce){
   .dsl-sheet,.dsl-backdrop,.dsl-word,.dsl-progress i{transition:none!important}
 }
+
+
+.dsl button:disabled{opacity:.38!important;cursor:not-allowed!important;filter:saturate(.55)}
+.dsl:not(.exact-ready) .dsl-word{pointer-events:none}
+.dsl:not(.exact-ready) .dsl-focus-hint{color:rgba(255,255,255,.34)}
