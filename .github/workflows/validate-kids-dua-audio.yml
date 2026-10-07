@@ -101,7 +101,7 @@ jobs:
       - name: Verify runtime cache-bust wiring
         run: |
           grep -F '/kids/owner-voice.js?v=8' kids/index.html
-          grep -F '/kids/dua-smart-learn.js?v=1242' kids/index.html
+          grep -F '/kids/dua-smart-learn.js?v=1243' kids/index.html
           grep -F '/kids/dua-hub-v1219.js?v=1241' kids/index.html
           grep -F '/kids/sw.js?v=1239' kids/index.html
           grep -F 'dar-al-tawhid-kids-v1239' kids/sw.js
@@ -115,10 +115,10 @@ jobs:
           CB="$(date +%s)"
           curl -fsSL --max-time 30 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/start?cb=$CB" -o /tmp/kids-live.html
           grep -F '/kids/owner-voice.js?v=8' /tmp/kids-live.html
-          grep -F '/kids/dua-smart-learn.js?v=1242' /tmp/kids-live.html
+          grep -F '/kids/dua-smart-learn.js?v=1243' /tmp/kids-live.html
           grep -F '/kids/dua-hub-v1219.js?v=1241' /tmp/kids-live.html
 
-          curl -fsSL --max-time 30 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/dua-smart-learn.js?v=1242&cb=$CB" -o /tmp/dua-smart.js
+          curl -fsSL --max-time 30 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/dua-smart-learn.js?v=1243&cb=$CB" -o /tmp/dua-smart.js
           grep -F 'playGerman:playGerman' /tmp/dua-smart.js
           grep -F 'ensureAudioAttached' /tmp/dua-smart.js
 
