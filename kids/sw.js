@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1218";
+const CACHE_NAME="dar-al-tawhid-kids-v1219-dua-hub";
 const KIDS_BUILD_ID="kids-shell-v122-home-reference-lock1218";
 const CORE_PRECACHE=[
   "/kids/start",
@@ -111,6 +111,8 @@ const CORE_PRECACHE=[
   "/kids/story-hub.js?v=25",
   "/kids/global-story-glow-v1216.css?v=1217",
   "/kids/global-story-glow-v1216.js?v=1217",
+  "/kids/dua-hub-v1219.css?v=1219",
+  "/kids/dua-hub-v1219.js?v=1219",
   "/kids/navigation-v1182.js?v=1183",
   "/kids/kids-age-typography.css?v=5",
   "/kids/story-library-cards.css?v=9",
