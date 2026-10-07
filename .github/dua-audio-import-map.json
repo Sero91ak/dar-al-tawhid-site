@@ -7,7 +7,7 @@
   "voice_id": "DkU7j9uO4ZEtLD2iRZSH",
   "voice_name": "Serhat Abu Malik – Master",
   "model_id": "eleven_v4",
-  "expectedRows": 29,
+  "expectedRows": 32,
   "entries": [
     {
       "key": "dua-knowledge:de",
@@ -265,5 +265,6 @@
       "voice_id": "DkU7j9uO4ZEtLD2iRZSH",
       "voice_name": "Serhat Abu Malik – Master"
     }
-  ]
+  ],
+  "note": "Final sanitized audit: 20 German ElevenLabs-v4 learning clips + 12 Arabic Sunnah clips. Three unchanged Arabic clips were reused from the prior verified v4 pack; temporary signed URLs were removed after permanent import."
 }
