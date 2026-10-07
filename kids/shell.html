@@ -3270,7 +3270,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v116-dua-learning1211";
+const KIDS_BUILD_ID="kids-shell-v117-dua-smart1212";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -4943,7 +4943,7 @@ function duaDailyIndex(list){
   return seed%list.length;
 }
 function fetchKidsDuas(){
-  return fetch("/kids/data/dua-kids.json?v=1211",{cache:"force-cache"})
+  return fetch("/kids/data/dua-kids.json?v=1212",{cache:"force-cache"})
     .then(function(r){if(!r.ok)throw new Error("dua-data");return r.json()})
     .then(function(data){
       kidsDuas=Array.isArray(data.items)?data.items.filter(function(x){return x.verification==="verified"}):[];
@@ -5105,6 +5105,7 @@ function openDuaAt(index){
 }
 function renderDua(){
   stopDuaAudio();
+  try{if(window.DARDuaSmartLearn)window.DARDuaSmartLearn.stop()}catch(e){}
   var list=filteredDuas();
   var d=list[currentDuaIndex];
   if(!d)return;
@@ -5117,42 +5118,33 @@ function renderDua(){
       if(d.type==="sunnah")duaVoice.preload(arabicAudio);
       duaVoice.preload("Richtig. Sehr gut.");
       duaVoice.preload("Noch nicht. Hör die Erklärung noch einmal.");
-      var nextDuaVoice=list[(currentDuaIndex+1)%list.length];
-      if(nextDuaVoice){
-        duaVoice.preload(String(nextDuaVoice.audioGermanText||((nextDuaVoice.childPrompt||"")+" "+(nextDuaVoice.meaning||""))).replace(/\s+/g," ").trim());
-        if(nextDuaVoice.type==="sunnah")duaVoice.preload(String(nextDuaVoice.audioArabicText||nextDuaVoice.arabic||"").replace(/\s+/g," ").trim());
-      }
     }
   }catch(e){}
-  var progress=duaProgress(d.id);
-  duaQuestionPassed=false;
   var progressText=duaProgressLabel(d.id);
+  duaQuestionPassed=false;
   var older="";
   if(d.olderNote&&age!=="4–5"){
     older='<div class="dua-old-note"><strong>'+d.olderNote.title+'</strong><div class="ar">'+d.olderNote.arabic+'</div><div class="dua-tr">'+d.olderNote.transliteration+'</div></div>';
   }
   var sourceLink=d.sourceUrl?'<a href="'+d.sourceUrl+'" target="_blank" rel="noopener">Quelle öffnen</a>':'';
-  var isQuran=d.type==="quran"&&Array.isArray(d.quranRefs)&&d.quranRefs.length;
-  document.getElementById("duaSubtitle").textContent=(currentDuaIndex+1)+" von "+list.length+" · hören · nachsprechen · verstehen";
+  document.getElementById("duaSubtitle").textContent=(currentDuaIndex+1)+" von "+list.length+" · hören · verstehen · lernen";
   document.getElementById("duaBody").innerHTML=
     '<div class="dua-scene '+String(d.scene||"learn")+'"><div class="dua-scene-symbol">'+kidsIconMarkup(kidsIconName(d.scene||d.symbol,"dua"),"scene-icon")+'</div></div>'+
     '<div class="dua-verified">✓ GEPRÜFT</div>'+
     '<div class="dua-title">'+d.title+'</div>'+
     '<div class="dua-prompt">'+d.childPrompt+'</div>'+
     '<section class="dua-learning-card arabic">'+
-      '<div class="dua-card-kicker">1 · HÖREN & NACHSPRECHEN</div>'+
+      '<div class="dua-card-kicker">1 · DUʿĀʾ HÖREN</div>'+
       '<div class="dua-ar" dir="rtl" lang="ar">'+d.arabic+'</div>'+
       '<div class="dua-tr">'+d.transliteration+'</div>'+
-      '<div class="dua-practice-actions">'+
-        '<button id="duaArabicListen" class="dua-arabic-listen">Arabisch hören</button>'+
-        '<button id="duaArabicSlow" class="dua-arabic-slow">Langsam hören</button>'+
-        '<button id="duaRepeat" class="dua-repeat">Nachsprechen</button>'+
+      '<div class="dua-main-actions">'+
+        '<button id="duaArabicListen" class="dua-main-listen">Arabisch hören</button>'+
+        '<button id="duaLearnOpen" class="dua-main-learn">Lernen</button>'+
       '</div>'+
-      '<div class="dua-step-hint">'+(isQuran?"Echte Qurʾān-Rezitation · keine synthetische Rezitation":"Arabischer Wortlaut exakt wie angezeigt")+'</div>'+
       older+
     '</section>'+
     '<section class="dua-learning-card meaning">'+
-      '<div class="dua-card-kicker">2 · VERSTEHEN</div>'+
+      '<div class="dua-card-kicker">2 · BEDEUTUNG</div>'+
       '<div class="dua-meaning">'+d.meaning+'</div>'+
       '<button id="duaGermanListen" class="dua-audio-de">Deutsch hören</button>'+
     '</section>'+
@@ -5194,31 +5186,37 @@ function renderDua(){
   document.getElementById("duaArabicListen").addEventListener("click",function(){
     var fb=document.getElementById("duaFeedback");
     if(fb){fb.className="dua-feedback";fb.textContent="Hör gut zu."}
-    playDuaArabic(d,1,function(){if(fb)fb.textContent=progressText});
+    if(window.DARDuaSmartLearn&&typeof window.DARDuaSmartLearn.playPreview==="function"){
+      window.DARDuaSmartLearn.playPreview(d,1).then(function(){
+        if(fb)fb.textContent=progressText;
+      }).catch(function(){
+        playDuaArabic(d,1,function(){if(fb)fb.textContent=progressText});
+      });
+    }else{
+      playDuaArabic(d,1,function(){if(fb)fb.textContent=progressText});
+    }
   });
-  document.getElementById("duaArabicSlow").addEventListener("click",function(){
-    var fb=document.getElementById("duaFeedback");
-    if(fb){fb.className="dua-feedback";fb.textContent="Langsam zuhören …"}
-    playDuaArabic(d,.82,function(){if(fb)fb.textContent="Jetzt kannst du es nachsprechen."});
-  });
-  document.getElementById("duaRepeat").addEventListener("click",function(){
-    var fb=document.getElementById("duaFeedback");
-    if(fb){fb.className="dua-feedback";fb.textContent="Erst zuhören …"}
-    playDuaArabic(d,.84,function(){
-      if(fb){fb.className="dua-feedback good";fb.textContent="Jetzt du: Sprich das Duʿāʾ nach."}
-    });
+  document.getElementById("duaLearnOpen").addEventListener("click",function(){
+    stopDuaAudio();
+    try{if(window.DARKidsOwnerVoice)window.DARKidsOwnerVoice.stop()}catch(e){}
+    if(window.DARDuaSmartLearn&&typeof window.DARDuaSmartLearn.open==="function"){
+      window.DARDuaSmartLearn.open(d);
+    }
   });
   document.getElementById("duaGermanListen").addEventListener("click",function(){
     stopDuaAudio();
+    try{if(window.DARDuaSmartLearn)window.DARDuaSmartLearn.stop()}catch(e){}
     quizSpeak(germanAudio,{source:"kids-dua-german"});
   });
   document.getElementById("duaPrevItem").addEventListener("click",function(){
+    try{if(window.DARDuaSmartLearn)window.DARDuaSmartLearn.stop()}catch(e){}
     currentDuaIndex=(currentDuaIndex-1+list.length)%list.length;
     duaQuestionPassed=false;
     duaQuestionHadError=false;
     renderDua();
   });
   document.getElementById("duaNextItem").addEventListener("click",function(){
+    try{if(window.DARDuaSmartLearn)window.DARDuaSmartLearn.stop()}catch(e){}
     currentDuaIndex=(currentDuaIndex+1)%list.length;
     duaQuestionPassed=false;
     duaQuestionHadError=false;
@@ -6396,10 +6394,10 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"cc4ac04648774872a036edb959747bd5","r":1,"spa":2}' crossorigin="anonymous"></script>
 <script src="/kids/content-studio-feed.js?v=studio7"></script>
-<script src="/kids/owner-voice.js?v=6"></script>
+<script src="/kids/owner-voice.js?v=6"></script>\n<script src="/kids/dua-smart-learn.js?v=1"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v116-dua-learning1211";
+  var KIDS_BUILD_ID="kids-shell-v117-dua-smart1212";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -6415,13 +6413,13 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1211",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1212",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
   }
   window.addEventListener("load",function(){
-    fetch("/kids/version.json?v=1211",{cache:"no-store"})
+    fetch("/kids/version.json?v=1212",{cache:"no-store"})
       .then(function(r){return r.ok?r.json():null})
       .then(function(v){
         var live=String(v&&v.buildId||"");
@@ -7398,7 +7396,7 @@ html[data-view="stories"] #view-stories > :last-child{
 }
 
 </style>
-<link rel="stylesheet" href="/kids/quiz-library.css?v=7">
+<link rel="stylesheet" href="/kids/dua-smart-learn.css?v=1" data-kids-dua-smart="1">\n<link rel="stylesheet" href="/kids/quiz-library.css?v=7">
 <link rel="stylesheet" href="/kids/kids-age-typography.css?v=5">
 <script src="/kids/screen-awake.js?v=1"></script>
 <script src="/kids/story-follow-reader.js?v=16"></script>
