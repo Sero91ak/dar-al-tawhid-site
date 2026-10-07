@@ -19,11 +19,20 @@
   },
   "cyclePolicy": {
     "showEveryItemBeforeRepeat": true,
+    "uniquePassRequired": true,
+    "forbidRandomPickFromFullPool": true,
     "shuffleEachCycle": true,
     "crossCycleCooldownCount": 20,
     "preventImmediateRepeat": true,
     "newItemsPolicy": "appendToRemainingAndReshuffle",
-    "removedItemsPolicy": "dropFromState"
+    "removedItemsPolicy": "dropFromState",
+    "echo": {
+      "enabled": true,
+      "maxPerCycle": 1,
+      "neverReplaceUnseen": true,
+      "note": "Pro Durchgang höchstens EINE bereits gesehene Karte als kurze Wiederholung. Sie ersetzt keine noch nicht gezeigte Karte. Erst wenn der Beutel leer ist, komplett neu mischen."
+    },
+    "rule": "Ein shuffleBag: jede gültige Karte genau einmal, bevor der Beutel neu gefüllt wird. Nicht zufällig aus dem Gesamtpool ziehen. persistProgress in Application Support. Neue HAD/Tadabbur-IDs in den RESTbeutel, nicht den Zyklus verwerfen."
   },
   "batchBuildPolicy": {
     "stepSize": 100,

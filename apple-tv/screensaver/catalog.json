@@ -48,6 +48,7 @@
     "checkOnForeground": true,
     "checkOnAppleTVWake": true,
     "minimumRefreshIntervalHours": 6,
+    "includeLatestOnCatalogVersionChange": true,
     "atomicCacheActivation": true,
     "keepLastGoodCacheOnError": true
   },
