@@ -71,7 +71,7 @@ Verbindlich für `/kids/` und alle künftigen Kids-Erweiterungen.
 - `hover` (Desktop), `active`/Pointer-Press (Touch) und `focus-visible` hellen ausschließlich Kontur und Glow leicht auf.
 - Kein Hochspringen, kein `translateY`, kein Scale-/Lift-Effekt.
 - Mobile Touch-Rückmeldung wird zusätzlich durch `kids-card-interaction.js` stabilisiert, damit der Glow auf iPhone/iPad sichtbar bleibt.
-- Neue navigierbare Karten müssen die Klasse `.kids-tap-card` verwenden oder in den zentralen Card-Interaction-Selektor aufgenommen werden.
+- Globale Pflichtregel: **jede anklickbare Capsule/Karte** erhält denselben Glow bei Hover, Touch/Pressed und Focus – auch neu hinzukommende Bereiche. `kids-card-interaction.js` markiert neue Buttons/Karten innerhalb der Kids-Views und Story-Libraries automatisch; `.kids-tap-card` bleibt der explizite Opt-in. Lokale Component-`box-shadow`-Regeln dürfen den Press-Glow nicht überschreiben.
 
 
 ## Startseiten-Hero – verbindliche Referenz (V1199)
