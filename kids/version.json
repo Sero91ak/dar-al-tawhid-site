@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v138-profile-avatar1235",
-  "label": "KIDS · V1.08.59",
-  "releasedAt": "2026-10-07T17:40:00+02:00",
-  "note": "V1235 ersetzt die bisherigen Profil-SVGs in DĀR AL TAWḤĪD Kids durch die neuen 3D-Profilfiguren: Junge mit weißer Kufi und Mädchen mit rosa Hijab. Die Zuordnung gilt automatisch für Gastprofil, gespeicherte Kinderprofile, Profilauswahl und Header.",
+  "buildId": "kids-shell-v139-home-stability1236",
+  "label": "KIDS · V1.08.60",
+  "releasedAt": "2026-10-07T18:20:00+02:00",
+  "note": "V1236 fixiert die Startseiten-Geometrie auf den beim ersten App-Start sichtbaren Hero-Zustand. Beim Wechsel zu Qurʾān, Duʿāʾ oder anderen Tabs und zurück bleibt die Position von DĀR AL TAWḤĪD, Kids, Begrüßung und Weiterhören unverändert. Die Kids-Ballonanimation wird bereits beim ersten Rendern und nach jeder Rückkehr zuverlässig gestartet.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -883,7 +883,7 @@
     "homeHeroBackground": "clean-reference-no-baked-ui-v1215",
     "homeHeroBackgroundAsset": "/kids/assets/kids-home-v1215/hero-clean-reference.jpg?v=1215",
     "homeHeroVideo": "disabled-v1199",
-    "homeKidsMotion": "classic-visible-balloon-stagger-v1215",
+    "homeKidsMotion": "balloon-rearmed-first-load-and-return-v1236",
     "homeKidsUnderGlow": "soft-horizontal-glow-v1199",
     "globalCardInteractionRule": "KIDS_WHOLE_CARD_TAP",
     "preClickDurationRule": "KIDS_NO_PRECLICK_DURATION",
@@ -1143,8 +1143,9 @@
     "profileAvatarAssets": {
       "boy": "/kids/assets/profile-avatars/boy-kufi-v1235.svg",
       "girl": "/kids/assets/profile-avatars/girl-hijab-pink-v1235.svg"
-    }
+    },
+    "homeHeroState": "first-entry-geometry-locked-v1236"
   },
-  "updatedAt": "2026-10-07T17:40:00+02:00",
-  "deployTrigger": "2026-10-07T17:40:00+02:00"
+  "updatedAt": "2026-10-07T18:20:00+02:00",
+  "deployTrigger": "2026-10-07T18:20:00+02:00"
 }
