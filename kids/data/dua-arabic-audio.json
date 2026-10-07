@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "id": "KIDS_DUA_ARABIC_OWNER_VOICE_V1",
-  "buildId": "kids-dua-v4-20261007-053417",
-  "updatedAt": "2026-10-07T05:34:17Z",
+  "buildId": "kids-dua-v4-20261007-054016",
+  "updatedAt": "2026-10-07T05:40:16Z",
   "modelId": "eleven_v4",
   "voiceProfileId": "serhat-owner-voice-2026",
   "speaker": "Serhat Abu Malik",
@@ -10,69 +10,9 @@
   "scope": "sunnah-dua-only",
   "quranArabicSyntheticAllowed": false,
   "entries": {
-    "الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنِي هَذَا وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلَا قُوَّةٍ": {
-      "url": "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-after-eating.m4a?v=kids-dua-v4-20261007-053417",
-      "sha256": "3ad2920ad2bb4d85228ad87357144a4065a6fa88d030207d9336b9518f01db2f",
-      "durationSeconds": 6.72,
-      "synthesisRevision": "kids-dua-eleven-v4-20261007",
-      "modelId": "eleven_v4",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "sourceVoice": "authorized-owner-voice",
-      "sourceType": "owner-voice-generated",
-      "sourceProvider": "ElevenLabs",
-      "sourceSpeaker": "Serhat Abu Malik",
-      "generationId": "m563qPF4AQA33uKIDwpW",
-      "qaBy": "source-locked-generated-audio-import",
-      "qaAt": "2026-10-07T05:34:17Z"
-    },
-    "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ": {
-      "url": "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-toilet-enter.m4a?v=kids-dua-v4-20261007-053417",
-      "sha256": "c0d064fa9acdc212ce256823b71bafc5dce0449dd740e930c66caeb6fa756446",
-      "durationSeconds": 4.4,
-      "synthesisRevision": "kids-dua-eleven-v4-20261007",
-      "modelId": "eleven_v4",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "sourceVoice": "authorized-owner-voice",
-      "sourceType": "owner-voice-generated",
-      "sourceProvider": "ElevenLabs",
-      "sourceSpeaker": "Serhat Abu Malik",
-      "generationId": "j8j8pLWiA4xbRpmAAxTc",
-      "qaBy": "source-locked-generated-audio-import",
-      "qaAt": "2026-10-07T05:34:17Z"
-    },
-    "غُفْرَانَكَ": {
-      "url": "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-toilet-exit.m4a?v=kids-dua-v4-20261007-053417",
-      "sha256": "069712ee6d4239387305e5bd30d64ef77ca5ecaabf6c089d15aafeb7bd3a45db",
-      "durationSeconds": 1.2,
-      "synthesisRevision": "kids-dua-eleven-v4-20261007",
-      "modelId": "eleven_v4",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "sourceVoice": "authorized-owner-voice",
-      "sourceType": "owner-voice-generated",
-      "sourceProvider": "ElevenLabs",
-      "sourceSpeaker": "Serhat Abu Malik",
-      "generationId": "fL0x98kKOJYRYMbfFZKO",
-      "qaBy": "source-locked-generated-audio-import",
-      "qaAt": "2026-10-07T05:34:17Z"
-    },
-    "بِسْمِ اللَّهِ، تَوَكَّلْتُ عَلَى اللَّهِ، لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ": {
-      "url": "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-leave-home.m4a?v=kids-dua-v4-20261007-053417",
-      "sha256": "58a90643ab17c93da8a3c5df7f414d812b48084f2d0d4a30ada70ed11b524f1a",
-      "durationSeconds": 6.16,
-      "synthesisRevision": "kids-dua-eleven-v4-20261007",
-      "modelId": "eleven_v4",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "sourceVoice": "authorized-owner-voice",
-      "sourceType": "owner-voice-generated",
-      "sourceProvider": "ElevenLabs",
-      "sourceSpeaker": "Serhat Abu Malik",
-      "generationId": "V8l7LtmDM9Wifpyx9Ilh",
-      "qaBy": "source-locked-generated-audio-import",
-      "qaAt": "2026-10-07T05:34:17Z"
-    },
-    "اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ": {
-      "url": "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-mosque-enter.m4a?v=kids-dua-v4-20261007-053417",
-      "sha256": "14acb4d18987db586d3cfe5f2aa05522c3e6a378da7ae4c621d2584e3cb4f2f9",
+    "اللَّهُمَّ بِاسْمِكَ أَحْيَا وَأَمُوتُ": {
+      "url": "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-sleep.m4a?v=kids-dua-v4-20261007-054016",
+      "sha256": "4e276ffb62eade89739efe4f6770117706424a156acea53ee8f6ddb264c3856f",
       "durationSeconds": 3.12,
       "synthesisRevision": "kids-dua-eleven-v4-20261007",
       "modelId": "eleven_v4",
@@ -81,14 +21,14 @@
       "sourceType": "owner-voice-generated",
       "sourceProvider": "ElevenLabs",
       "sourceSpeaker": "Serhat Abu Malik",
-      "generationId": "EU7XeUhUqdlzIdyvQvfO",
+      "generationId": "Jjza3WqnYVS2Fi7yHyXM",
       "qaBy": "source-locked-generated-audio-import",
-      "qaAt": "2026-10-07T05:34:17Z"
+      "qaAt": "2026-10-07T05:40:16Z"
     },
-    "اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ": {
-      "url": "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-mosque-exit.m4a?v=kids-dua-v4-20261007-053417",
-      "sha256": "134d1282dfae59ef67cf6173baadce739475555ec674389bd814a7091791d590",
-      "durationSeconds": 3.2,
+    "الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ": {
+      "url": "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-wake.m4a?v=kids-dua-v4-20261007-054016",
+      "sha256": "4c61cc6ddeb4c11dee1601ef3a528efc0dcf4152ef4f9cc53fcd9ad6093329e0",
+      "durationSeconds": 5.76,
       "synthesisRevision": "kids-dua-eleven-v4-20261007",
       "modelId": "eleven_v4",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -96,14 +36,14 @@
       "sourceType": "owner-voice-generated",
       "sourceProvider": "ElevenLabs",
       "sourceSpeaker": "Serhat Abu Malik",
-      "generationId": "ufDKql6bCq7k8HoH5fpa",
+      "generationId": "gQmmVE9gc9pFVHgcbYaX",
       "qaBy": "source-locked-generated-audio-import",
-      "qaAt": "2026-10-07T05:34:17Z"
+      "qaAt": "2026-10-07T05:40:16Z"
     },
-    "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ": {
-      "url": "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-afiyah.m4a?v=kids-dua-v4-20261007-053417",
-      "sha256": "934b8bec61d07b62a8200ea3833553caef2c454d679c257680c074182764c3db",
-      "durationSeconds": 5.44,
+    "بِسْمِ اللَّهِ": {
+      "url": "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-eating.m4a?v=kids-dua-v4-20261007-054016",
+      "sha256": "0cfa2c2d54effb7400c1a9ad8487fbb05d1d23b406f55c44a80a31b99602ef4f",
+      "durationSeconds": 1.04,
       "synthesisRevision": "kids-dua-eleven-v4-20261007",
       "modelId": "eleven_v4",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -111,13 +51,28 @@
       "sourceType": "owner-voice-generated",
       "sourceProvider": "ElevenLabs",
       "sourceSpeaker": "Serhat Abu Malik",
-      "generationId": "QMRib2poUZOZdzw7c1ge",
+      "generationId": "b3fFfK0bVQUW0458Zy8B",
       "qaBy": "source-locked-generated-audio-import",
-      "qaAt": "2026-10-07T05:34:17Z"
+      "qaAt": "2026-10-07T05:40:16Z"
     },
-    "يَا مُقَلِّبَ الْقُلُوبِ ثَبِّتْ قَلْبِي عَلَى دِينِكَ": {
-      "url": "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-ya-muqallib.m4a?v=kids-dua-v4-20261007-053417",
-      "sha256": "6938dcc11f6603952f5be84e432eb6c12bbe40b6ac29c212e48636d123e8dfc6",
+    "الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنِي هَذَا وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلَا قُوَّةٍ": {
+      "url": "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-after-eating.m4a?v=kids-dua-v4-20261007-054016",
+      "sha256": "4f34ba105dbe59e8194a7647912f221186381eabfb54dbcb4e6ae1f6230b5e8d",
+      "durationSeconds": 6.56,
+      "synthesisRevision": "kids-dua-eleven-v4-20261007",
+      "modelId": "eleven_v4",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceType": "owner-voice-generated",
+      "sourceProvider": "ElevenLabs",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "generationId": "lhOogdfxvdrDwB7m2vPM",
+      "qaBy": "source-locked-generated-audio-import",
+      "qaAt": "2026-10-07T05:40:16Z"
+    },
+    "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ": {
+      "url": "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-toilet-enter.m4a?v=kids-dua-v4-20261007-054016",
+      "sha256": "4da30d2d9aeae9d82ea0e4f2c361385c575ffe1bb6f158bc50250f6d26c3c4d7",
       "durationSeconds": 4.32,
       "synthesisRevision": "kids-dua-eleven-v4-20261007",
       "modelId": "eleven_v4",
@@ -126,14 +81,14 @@
       "sourceType": "owner-voice-generated",
       "sourceProvider": "ElevenLabs",
       "sourceSpeaker": "Serhat Abu Malik",
-      "generationId": "yRHoslr73y3Bhj9msoRU",
+      "generationId": "BhV01vwks1B0wMlyfgmN",
       "qaBy": "source-locked-generated-audio-import",
-      "qaAt": "2026-10-07T05:34:17Z"
+      "qaAt": "2026-10-07T05:40:16Z"
     },
-    "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْهُدَى وَالتُّقَى وَالْعَفَافَ وَالْغِنَى": {
-      "url": "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-guidance-taqwa.m4a?v=kids-dua-v4-20261007-053417",
-      "sha256": "6392be611885ebdd4faaf0334732f13839fec6a4c638009039504d8bebafbbea",
-      "durationSeconds": 5.28,
+    "غُفْرَانَكَ": {
+      "url": "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-toilet-exit.m4a?v=kids-dua-v4-20261007-054016",
+      "sha256": "ad42e1fe14597bbfc2369710f6ddca2de5c87a37620247bb360cfa82ba9246e7",
+      "durationSeconds": 1.36,
       "synthesisRevision": "kids-dua-eleven-v4-20261007",
       "modelId": "eleven_v4",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -141,13 +96,28 @@
       "sourceType": "owner-voice-generated",
       "sourceProvider": "ElevenLabs",
       "sourceSpeaker": "Serhat Abu Malik",
-      "generationId": "hexZvzE23fmWbfSkuA5N",
+      "generationId": "bNZP0dznNniVzylAnVMv",
       "qaBy": "source-locked-generated-audio-import",
-      "qaAt": "2026-10-07T05:34:17Z"
+      "qaAt": "2026-10-07T05:40:16Z"
     },
-    "اللَّهُمَّ بِاسْمِكَ أَحْيَا وَأَمُوتُ": {
-      "url": "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-sleep.m4a?v=kids-dua-v4-20261007-052001",
-      "sha256": "c6405cbb88e43f172ae3d82149c49f31085e4ee5effff80a104f50c4296b00a1",
+    "بِسْمِ اللَّهِ، تَوَكَّلْتُ عَلَى اللَّهِ، لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ": {
+      "url": "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-leave-home.m4a?v=kids-dua-v4-20261007-054016",
+      "sha256": "1f195612672d5993eee6d88bdfc7d97e671de8511c10aa1cfc0dc1ce3f60cd8f",
+      "durationSeconds": 6.4,
+      "synthesisRevision": "kids-dua-eleven-v4-20261007",
+      "modelId": "eleven_v4",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceType": "owner-voice-generated",
+      "sourceProvider": "ElevenLabs",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "generationId": "1qo3s44QH9IuTPBxZOEu",
+      "qaBy": "source-locked-generated-audio-import",
+      "qaAt": "2026-10-07T05:40:16Z"
+    },
+    "اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ": {
+      "url": "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-mosque-enter.m4a?v=kids-dua-v4-20261007-054016",
+      "sha256": "8f935315bfa412ec1e37dbf4bd126f9f477b64acad2e51b56c62fd6c5b236f93",
       "durationSeconds": 3.12,
       "synthesisRevision": "kids-dua-eleven-v4-20261007",
       "modelId": "eleven_v4",
@@ -156,14 +126,14 @@
       "sourceType": "owner-voice-generated",
       "sourceProvider": "ElevenLabs",
       "sourceSpeaker": "Serhat Abu Malik",
-      "generationId": "RbevdI2qqktAZILna73h",
+      "generationId": "KVKhQsjXZgT3PtvMQHhL",
       "qaBy": "source-locked-generated-audio-import",
-      "qaAt": "2026-10-07T05:20:01Z"
+      "qaAt": "2026-10-07T05:40:16Z"
     },
-    "الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ": {
-      "url": "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-wake.m4a?v=kids-dua-v4-20261007-052001",
-      "sha256": "0b94cd0568d18e4a8a784716699750c81d2de8308f788388a16b8e814e5a686b",
-      "durationSeconds": 5.6,
+    "اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ": {
+      "url": "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-mosque-exit.m4a?v=kids-dua-v4-20261007-054016",
+      "sha256": "77c8be557262e6d2f96f8561575b68696589688b639a5066c519cd25d87ba291",
+      "durationSeconds": 3.28,
       "synthesisRevision": "kids-dua-eleven-v4-20261007",
       "modelId": "eleven_v4",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -171,14 +141,14 @@
       "sourceType": "owner-voice-generated",
       "sourceProvider": "ElevenLabs",
       "sourceSpeaker": "Serhat Abu Malik",
-      "generationId": "QaaISxHDI2PBAQby9R4M",
+      "generationId": "FhIOhU71otFhcZYwCUck",
       "qaBy": "source-locked-generated-audio-import",
-      "qaAt": "2026-10-07T05:20:01Z"
+      "qaAt": "2026-10-07T05:40:16Z"
     },
-    "بِسْمِ اللَّهِ": {
-      "url": "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-eating.m4a?v=kids-dua-v4-20261007-052001",
-      "sha256": "2ad5467e71d47de89a169073ccabfdf9908d97b57feb6596788829e9ab4091ca",
-      "durationSeconds": 1.2,
+    "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ": {
+      "url": "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-afiyah.m4a?v=kids-dua-v4-20261007-054016",
+      "sha256": "dd24778a13184d5bc2aa3316b94c58465d7de72547bcea3917abaeb782f15d2b",
+      "durationSeconds": 5.44,
       "synthesisRevision": "kids-dua-eleven-v4-20261007",
       "modelId": "eleven_v4",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -186,9 +156,39 @@
       "sourceType": "owner-voice-generated",
       "sourceProvider": "ElevenLabs",
       "sourceSpeaker": "Serhat Abu Malik",
-      "generationId": "68yLKqYGiBy82AjC5m8A",
+      "generationId": "NpXBR8yRGNBaYvJVfLXP",
       "qaBy": "source-locked-generated-audio-import",
-      "qaAt": "2026-10-07T05:20:01Z"
+      "qaAt": "2026-10-07T05:40:16Z"
+    },
+    "يَا مُقَلِّبَ الْقُلُوبِ ثَبِّتْ قَلْبِي عَلَى دِينِكَ": {
+      "url": "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-ya-muqallib.m4a?v=kids-dua-v4-20261007-054016",
+      "sha256": "1e695bb4c4b6b755583d07f1f51a375a142aea2cdad4aa5e8833175b1e271ccd",
+      "durationSeconds": 4.16,
+      "synthesisRevision": "kids-dua-eleven-v4-20261007",
+      "modelId": "eleven_v4",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceType": "owner-voice-generated",
+      "sourceProvider": "ElevenLabs",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "generationId": "khrA8Bw3pfQmaQTAPs6s",
+      "qaBy": "source-locked-generated-audio-import",
+      "qaAt": "2026-10-07T05:40:16Z"
+    },
+    "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْهُدَى وَالتُّقَى وَالْعَفَافَ وَالْغِنَى": {
+      "url": "/kids/assets/kids-dua-arabic-audio/v4-20261007/dua-guidance-taqwa.m4a?v=kids-dua-v4-20261007-054016",
+      "sha256": "e1f92fe7583d3071c5ced1ef6352d79c2692e6929b34da95c07d171f5668e480",
+      "durationSeconds": 5.28,
+      "synthesisRevision": "kids-dua-eleven-v4-20261007",
+      "modelId": "eleven_v4",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceType": "owner-voice-generated",
+      "sourceProvider": "ElevenLabs",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "generationId": "sQvXTMrq8xLeJAzcfW1T",
+      "qaBy": "source-locked-generated-audio-import",
+      "qaAt": "2026-10-07T05:40:16Z"
     }
   },
   "counts": {
