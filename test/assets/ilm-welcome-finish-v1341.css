@@ -260,3 +260,169 @@ html body.is-ilm-chat-route .ilm-answer-text .ilm-science-actions{
     grid-template-columns:minmax(0,1fr)!important;
   }
 }
+
+
+/* MAJLIS FULL-BLEED EDITORIAL V1343
+   Test-App, Majlis route only. Full-width canvas, viewport-safe content.
+   Inherit every appearance token; no fixed new color palette. */
+html body.is-ilm-chat-route .ilm-chat-shell,
+html body.is-ilm-chat-route .ilm-message-list{
+  max-width:none!important;
+  box-sizing:border-box!important;
+}
+html body.is-ilm-chat-route .ilm-welcome--majlis{
+  width:100%!important;
+  max-width:100%!important;
+  margin:0!important;
+  box-sizing:border-box!important;
+  overflow-x:clip!important;
+}
+html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-intro{
+  width:100%!important;
+  max-width:none!important;
+  box-sizing:border-box!important;
+  margin:0!important;
+  padding:clamp(24px,4.4vw,40px) max(14px,env(safe-area-inset-right,0px)) 27px max(14px,env(safe-area-inset-left,0px))!important;
+  border:0!important;
+  border-radius:0!important;
+}
+html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-intro h2{
+  max-width:100%!important;
+  font-size:clamp(2.25rem,8.2vw,4rem)!important;
+  line-height:1.02!important;
+  overflow-wrap:normal!important;
+  text-wrap:balance;
+}
+html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-intro .ilm-welcome-lead{
+  max-width:65ch!important;
+  line-height:1.55!important;
+  text-wrap:pretty;
+}
+html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-prompts,
+html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-paths{
+  width:min(1100px,calc(100% - 28px))!important;
+  max-width:calc(100% - 28px)!important;
+  box-sizing:border-box!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-examples-v1341{
+  width:100%!important;
+  max-width:none!important;
+}
+html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-example-v1341{
+  box-shadow:none!important;
+}
+html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-path-grid{
+  width:100%!important;
+  max-width:none!important;
+  border:0!important;
+  box-sizing:border-box!important;
+}
+html body.is-ilm-chat-route .ilm-message-inner{
+  width:min(980px,calc(100% - 28px))!important;
+  max-width:calc(100% - 28px)!important;
+  margin-inline:auto!important;
+  box-sizing:border-box!important;
+}
+html body.is-ilm-chat-route .ilm-message-inner .ilm-user-row,
+html body.is-ilm-chat-route .ilm-message-inner .ilm-assistant-message{
+  max-width:100%!important;
+  box-sizing:border-box!important;
+}
+html body.is-ilm-chat-route .ilm-message-inner .ilm-assistant-message{
+  width:100%!important;
+}
+html body.is-ilm-chat-route .ilm-answer-text .ilm-science-prose{
+  max-width:72ch!important;
+}
+html body.is-ilm-chat-route .ilm-answer-text .ilm-primary-references{
+  max-width:100%!important;
+}
+html body.is-ilm-chat-route .ilm-discovery{
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin-top:17px!important;
+}
+html body.is-ilm-chat-route .ilm-discovery-results{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  gap:0!important;
+  padding:0!important;
+  min-width:0!important;
+}
+html body.is-ilm-chat-route .ilm-discovery-results > .ilm-discovery-item{
+  display:grid!important;
+  grid-template-columns:28px minmax(0,1fr) 18px!important;
+  gap:10px!important;
+  align-items:center!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  height:auto!important;
+  min-height:58px!important;
+  margin:0!important;
+  padding:12px 2px!important;
+  border:0!important;
+  border-bottom:1px solid color-mix(in srgb,var(--ilm-accent) 20%,transparent)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  text-align:left!important;
+  transform:none!important;
+}
+html body.is-ilm-chat-route .ilm-discovery-results > .ilm-discovery-item .ilm-discovery-copy{
+  display:grid!important;
+  gap:3px!important;
+  min-width:0!important;
+}
+html body.is-ilm-chat-route .ilm-discovery-results > .ilm-discovery-item .ilm-discovery-copy strong{
+  color:var(--ilm-primary-text)!important;
+  font-size:clamp(16px,3.9vw,19px)!important;
+  line-height:1.24!important;
+  overflow-wrap:anywhere!important;
+}
+html body.is-ilm-chat-route .ilm-discovery-results > .ilm-discovery-item .ilm-discovery-summary{
+  color:var(--ilm-secondary-text)!important;
+  font-size:11.5px!important;
+  line-height:1.4!important;
+  -webkit-line-clamp:1!important;
+}
+html body.is-ilm-chat-route .ilm-composer-bar{
+  max-width:100%!important;
+  box-sizing:border-box!important;
+}
+html body.is-ilm-chat-route .ilm-composer-inner{
+  max-width:100%!important;
+  box-sizing:border-box!important;
+}
+@media(max-width:599px){
+  html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-intro{
+    padding-left:max(14px,env(safe-area-inset-left,0px))!important;
+    padding-right:max(14px,env(safe-area-inset-right,0px))!important;
+  }
+  html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-prompts,
+  html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-paths{
+    width:calc(100% - 24px)!important;
+    max-width:calc(100% - 24px)!important;
+  }
+  html body.is-ilm-chat-route .ilm-message-inner{
+    width:calc(100% - 24px)!important;
+    max-width:calc(100% - 24px)!important;
+  }
+  html body.is-ilm-chat-route .ilm-discovery-results > .ilm-discovery-item{
+    grid-template-columns:25px minmax(0,1fr) 16px!important;
+    padding:11px 1px!important;
+    gap:7px!important;
+  }
+  html body.is-ilm-chat-route .ilm-message-list{
+    scroll-padding-bottom:calc(104px + env(safe-area-inset-bottom,0px))!important;
+  }
+}
+@media(min-width:760px){
+  html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-intro{
+    padding-inline:max(28px,calc((100vw - 1100px)/2))!important;
+  }
+}
