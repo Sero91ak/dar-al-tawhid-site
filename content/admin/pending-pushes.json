@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-10-08T13:39:51.778Z",
+  "generated": "2026-10-08T13:40:18.628Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -1075,44 +1075,38 @@
       "createdAt": "2026-10-08T13:30:16.618Z",
       "pushApproved": true,
       "pushApprovedAt": "2026-10-08T13:30:16.618Z",
-      "lastError": "Index auf GitHub ok, aber öffentlicher Index noch ohne Beitrag – Deployment/Cache.",
-      "updatedAt": "2026-10-08T13:39:51.778Z",
-      "lastCheckAt": "2026-10-08T13:39:51.494Z",
+      "lastError": "",
+      "updatedAt": "2026-10-08T13:40:18.628Z",
+      "lastCheckAt": "2026-10-08T13:40:18.405Z",
       "liveCheck": {
-        "ok": false,
+        "ok": true,
         "steps": {
           "githubFileCreated": true,
           "indexUpdatedGithub": true,
           "indexFoundPublic": true,
-          "postInIndex": false,
-          "postFilePublic": false,
+          "postInIndex": true,
+          "postFilePublic": true,
           "visitorUrlOk": true,
-          "cloudflareDeployed": false,
+          "cloudflareDeployed": true,
           "githubIndexHasPost": true,
           "githubPostExists": true
         },
-        "diagnosis": "Index auf GitHub ok, aber öffentlicher Index noch ohne Beitrag – Deployment/Cache.",
-        "indexOk": false,
-        "postOk": false,
+        "diagnosis": "",
+        "indexOk": true,
+        "postOk": true,
         "visitorUrlOk": true,
-        "attempts": 6,
+        "attempts": 1,
         "site": "https://dar-al-tawhid.de",
         "postId": "isa-ibn-maryam-nuzul-frueher-ikhtilaf-slides-468",
-        "indexGenerated": "2026-10-08T11:30:49.828Z",
-        "indexCount": 467,
-        "visitorUrl": "https://dar-al-tawhid.de/?post=isa-ibn-maryam-nuzul-frueher-ikhtilaf-slides-468&v=1791466778987#post/isa-ibn-maryam-nuzul-frueher-ikhtilaf-slides-468",
+        "indexGenerated": "2026-10-08T13:37:22.370Z",
+        "indexCount": 469,
+        "visitorUrl": "https://dar-al-tawhid.de/?post=isa-ibn-maryam-nuzul-frueher-ikhtilaf-slides-468&v=1791466817530#post/isa-ibn-maryam-nuzul-frueher-ikhtilaf-slides-468",
         "githubIndexHasPost": true,
         "githubPostExists": true,
         "needsIndexRepair": false,
-        "needsDeployWait": true,
-        "repair": {
-          "repaired": true,
-          "action": "index-touch",
-          "at": "2026-10-08T13:39:41.463Z",
-          "reason": "Index aktualisiert (Deploy/Cache)"
-        }
+        "needsDeployWait": false
       },
-      "attempts": 6,
+      "attempts": 1,
       "lastRepair": {
         "repaired": true,
         "action": "index-touch",
