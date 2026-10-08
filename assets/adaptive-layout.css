@@ -741,3 +741,92 @@ html[data-layout] :is(
 @media (prefers-reduced-motion: reduce) {
   .post-slides .post-slide-track{transition:none !important;}
 }
+
+/* DAR_POST_SINGLE_COLUMN_PHONE_V1 — Beiträge sind Smartphone-Lesekarten,
+   KEIN aufgeklapptes Buch und keine zwei nebeneinanderliegenden Textseiten.
+   Nur öffentliche Beitragsleser; andere Bibliotheken und Kids unverändert. */
+.post-reader,
+.post-reader .post-reader-main,
+.post-reader .post-slides,
+.post-slides {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+.post-reader {
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+.post-reader .post-slides,
+.post-slides .post-slide-window {
+  overflow-x: hidden;
+}
+.post-slides .post-slide-track {
+  align-items: flex-start !important;
+}
+/* Inhalt steht natürlich direkt unter der Überschrift; niemals auf
+   Bildschirmhöhe strecken oder zwischen den Aussagen verteilen. */
+.post-slides .post-slide {
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 0 0 100% !important;
+  justify-content: flex-start !important;
+  align-items: stretch !important;
+  align-content: flex-start !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  box-sizing: border-box !important;
+  gap: clamp(9px, 2.5vw, 16px) !important;
+}
+.post-slides .post-slide > :is(h2,h3,h4,p,blockquote),
+.post-slides .post-slide-quote,
+.post-slides .post-slide-explanation {
+  margin-block: 0 !important;
+  min-height: 0 !important;
+  max-width: 100% !important;
+}
+.post-slides .post-slide-quote {
+  line-height: 1.52 !important;
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+}
+.post-slides .post-slide-explanation {
+  line-height: 1.52 !important;
+  overflow-wrap: anywhere;
+}
+.post-slides .post-slide-window {
+  min-height: 0 !important;
+}
+@media (max-width: 699.98px) {
+  .post-reader,
+  .post-reader .post-reader-main,
+  .post-reader .post-slides {
+    width: 100% !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  .post-reader .post-reader-main {
+    margin-inline: auto !important;
+  }
+  .post-slides .post-slide {
+    padding-inline: clamp(14px, 3.8vw, 22px);
+  }
+  .post-slides .post-slide :is(h2,h3,h4) {
+    line-height: 1.22 !important;
+    text-wrap: pretty;
+    overflow-wrap: break-word;
+  }
+  .post-reader .post-source {
+    margin-top: clamp(10px, 2.5vw, 16px) !important;
+  }
+}
+/* Auch am iPad und am Desktop bleibt DER BEITRAG ein Lesefluss und
+   kein zweispaltig/aufgeschlagen dargestelltes Buch. */
+@media (min-width: 700px) {
+  .post-reader .post-reader-main {
+    width: min(100%, 46rem) !important;
+    margin-inline: auto !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .post-slides .post-slide-track { transition: none !important; }
+}
