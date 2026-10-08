@@ -39,6 +39,8 @@ jobs:
         run: node download/validate-release.cjs
       - name: Release-JavaScript Syntax prüfen
         run: node --check download/official-release-links.js
+      - name: Neueste Android-Version, Release-Datum und SHA256 testen
+        run: node download/test-release-switchboard.cjs
       - name: Marketing-HTML Inline-JavaScript prüfen
         run: |
           node <<'NODE'
