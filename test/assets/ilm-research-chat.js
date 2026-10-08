@@ -77,12 +77,12 @@
   }
   function toEvidence(item, origin) {
     var url = deepLink(item);
-    var verified = !!(item.reference || item.work) && !!(item.excerpt || item.body || item.statement);
+    var verified = item.verification_status === "verified" && !!(item.reference || item.work) && !!(item.excerpt || item.body || item.statement) && !!url && (hostOk(url) || url.indexOf(location.origin) === 0);
     if (origin === "external") verified = false;
     return {
       speaker: item.speaker || item.author || "",
       speaker_type: item.kind || item.type || "",
-      statement: clip(item.excerpt || item.statement || item.body || "", 280),
+      statement: clip(item.excerpt || item.statement || item.body || "", 2800),
       work: item.work || item.title || "",
       book: item.work || "",
       chapter: item.chapter || "",
@@ -146,13 +146,15 @@
     });
     (reply.sources || []).forEach(function (s) {
       items.push(toEvidence({
-        speaker: s.author || s.speaker || s.label || "",
-        work: s.work || s.host || "",
+        id: s.id, speaker: s.author || s.speaker || s.label || "",
+        work: s.work || s.host || "", reference: s.reference,
+        chapter: s.chapter, page: s.page, volume: s.volume,
+        hadith_number: s.hadith_number, authenticity: s.authenticity,
         excerpt: s.excerpt || s.snippet || "",
         sourceTag: s.note || "",
         url: s.url || s.markedUrl || s.finalUrl || "",
-        markedUrl: s.markedUrl,
-        finalUrl: s.finalUrl
+        markedUrl: s.markedUrl, finalUrl: s.finalUrl,
+        verification_status: s.verification_status
       }, s.origin === "external" ? "external" : "internal"));
     });
     var seen = {};
@@ -165,9 +167,10 @@
     });
     var verified = unique.filter(function (e) { return e.verification_status === "verified"; });
     var rest = unique.filter(function (e) { return e.verification_status !== "verified"; });
-    reply.evidences = verified.concat(rest.slice(0, 2));
+    reply.evidences = verified.concat(rest).slice(0, 8);
+    reply._ilmQuestion = String(question || "");
     reply.follow_up = followUps(question, reply);
-    reply.research_hint = navigator.onLine ? "Online-Recherche aktiv ✦" : "Geprüfte Quellen werden durchsucht …";
+    reply.research_hint = navigator.onLine ? "Fundstellen werden abgeglichen" : "Offline · interne Quellen";
     if (!reply.intro && reply.status === "ok") reply.intro = "Bāraka Allāhu fīk 🌙";
     return reply;
   }
@@ -185,48 +188,85 @@
   }
 
   waitReady(function () {
-    var oldAnswer = window.renderIlmAnswerText;
-    window.renderIlmAnswerText = function (reply, isFirst) {
+    // ʿIlm SCIENCE CHAT · test only.  Show a precise answer first, original proofs on demand.
+    function plain(value) {
+      return String(value || "").replace(/<[^>]*>/g, "").replace(/^[\s„“"'•–-]+|[\s„“"']+$/g, "")
+        .replace(/\*\*|__|#{1,4}\s/g, "").replace(/\s+/g, " ").trim();
+    }
+    function proofIntent(question) {
+      return /(?:exakt|wörtlich|wortlaut|original(?:text|aussage)?|beweis|beleg|quelle|isn[aā]d|nachweis|wort.für.wort|zitiere|überlieferung|hadith.nummer|ḥadīṯ.nummer)/i.test(String(question || ""));
+    }
+    function sourceTitle(ev) {
+      return [ev.speaker, ev.work, ev.chapter, ev.hadith_number && ("Nr. " + ev.hadith_number),
+        ev.volume && ("Bd. " + ev.volume), ev.page && ("S. " + ev.page)].filter(Boolean).join(" · ");
+    }
+    function readableSentence(text, maxLen) {
+      var cleaned = plain(text).replace(/^.{0,70}(?:sagte|sprach):\s*/i, "");
+      var parts = cleaned.split(/(?<=[.!?؛。])\s+/).filter(Boolean);
+      var first = parts.find(function (s) { return s.length >= 35 && s.length <= maxLen; }) || parts[0] || cleaned;
+      if (first.length > maxLen) {
+        first = first.slice(0, maxLen).replace(/\s+\S*$/, "").trim() + "…";
+      }
+      return first;
+    }
+    function shortScientificAnswer(reply) {
+      var ev = (reply.evidences || []).find(function (e) { return e.statement && e.statement.length > 24; });
+      var txt = String(reply.directAnswer || "").trim();
+      if (!ev) {
+        if (reply.status === "unavailable" || reply.status === "insufficient") {
+          return "Für diese Frage liegt mir derzeit kein ausreichend gesicherter Beleg vor. Ich möchte dir keine unbelegte religiöse Aussage geben.";
+        }
+        // Do not present an unrelated canned summary as an Islamic ruling.
+        return txt && !/[„“]/.test(txt) && txt.length <= 480
+          ? txt : "Hierzu finde ich noch keine ausreichend eindeutige Textgrundlage. Bitte formuliere die Frage genauer oder verlange eine konkrete Fundstelle.";
+      }
+      var quote = readableSentence(ev.statement, 280);
+      var reference = sourceTitle(ev) || "hinterlegte Überlieferung";
+      var lead = "Die passende Fundstelle behandelt deine Frage anhand einer überlieferten Aussage.";
+      if (/\b(benehmen|adab|umgang|verhalten|eltern|respekt)\b/i.test(reply._ilmQuestion || "")) {
+        lead = "Beim Benehmen und Umgang ist entscheidend, was die überlieferten Texte tatsächlich belegen.";
+      } else if (/\b(tawḥīd|tauhid|ʿaqīdah|aqidah|īmān|iman)\b/i.test(reply._ilmQuestion || "")) {
+        lead = "Bei Glaubensfragen muss die Antwort an die nachweisbare Aussage aus Qurʾān, Sunnah oder den frühen Quellen gebunden bleiben.";
+      }
+      return lead + "\n\n" + "Aus " + reference + " ergibt sich als zentrale Textstelle: " + quote;
+    }
+    function sourceDisclosure(reply, openProof) {
+      var list = (reply.evidences || []).filter(function (e) { return !!(e.statement || e.deep_link); });
+      if (!list.length) return "";
+      var count = openProof ? Math.min(4, list.length) : Math.min(2, list.length);
+      return '<details class="ilm-science-sources"' + (openProof ? ' open' : '') + '>' +
+        '<summary><span class="ilm-science-source-icon" aria-hidden="true">⌁</span>' +
+        '<span>' + (openProof ? "Originalbelege und Quellen" : "Belege und Fundstellen") +
+        '</span><small>' + count + ' von ' + list.length + '</small><span class="ilm-science-chevron" aria-hidden="true">⌄</span></summary>' +
+        '<div class="ilm-science-source-list">' +
+        list.slice(0, count).map(function (e, i) {
+          var label = e.verification_status === "verified" ? "Direktquelle hinterlegt" :
+            e.verification_status === "partially_verified" ? "Fundstelle noch zu prüfen" : "Angabe nicht unabhängig verifiziert";
+          return '<div class="ilm-science-source-item">' + renderEvidence(e, i) +
+            '<p class="ilm-science-proof-status">' + esc(label) + '</p></div>';
+        }).join("") + '</div></details>';
+    }
+    window.renderIlmAnswerText = function (reply) {
       if (!reply) return "";
       if (reply.status === "conversation" || reply.status === "clarification" || reply.status === "abuse") {
-        var html = '<p class="ilm-intro">' + em(reply.directAnswer || reply.intro || "") + "</p>";
-        (reply.follow_up || reply.followUpQuestions || []).forEach(function (f) {
-          html += '<div class="ilm-follow"><button type="button" data-ilm-follow="' + esc(f) + '">✦ ' + esc(f) + "</button></div>";
-        });
-        return html;
+        var conversational = String(reply.directAnswer || reply.intro || "");
+        return '<div class="ilm-science-prose"><p>' + em(conversational) + "</p></div>";
       }
-      var parts = [];
-      if (reply.research_hint) parts.push('<div class="ilm-status-line">' + esc(reply.research_hint) + "</div>");
-      if (reply.intro) parts.push('<p class="ilm-intro">' + em(reply.intro) + "</p>");
-      if (reply.directAnswer && reply.status !== "unavailable") {
-        String(reply.directAnswer).split(/\n{2,}/).forEach(function (p) {
-          if (p.trim()) parts.push("<p>" + em(p.trim()) + "</p>");
-        });
-      } else if (reply.status === "unavailable") {
-        parts.push("<p>" + em(reply.intro || reply.directAnswer || "Keine ausreichend sichere Fundstelle konnte bestätigt werden.") + "</p>");
-      }
-      (reply.evidences || []).forEach(function (ev, i) {
-        if (ev.verification_status === "unverified" && !ev.statement) return;
-        parts.push(renderEvidence(ev, i));
-      });
-      if (reply.explanation || reply.summary) {
-        parts.push(
-          '<div class="ilm-summary"><b>Kurz zusammengefasst</b><p>' +
-            em(reply.summary || reply.explanation) +
-            "</p><p>Wa-Allāhu aʿlam.</p></div>"
-        );
-      }
-      var follows = reply.follow_up || [];
-      if (follows.length) {
-        parts.push(
-          '<div class="ilm-follow">' +
-            follows.map(function (f) {
-              return '<button type="button" data-ilm-follow="' + esc(f) + '">✦ ' + esc(f) + "</button>";
-            }).join("") +
-          "</div>"
-        );
-      }
-      return parts.join("") || (oldAnswer ? oldAnswer(reply, isFirst) : "");
+      var isProof = proofIntent(reply._ilmQuestion);
+      var answer = isProof
+        ? "Hier sind die nächstliegenden überlieferten Aussagen mit ihren Fundstellen. Bitte beachte den Prüfstatus jeder Quelle."
+        : shortScientificAnswer(reply);
+      var html = '<div class="ilm-science-prose">' + answer.split(/\n{2,}/).filter(Boolean).map(function (p) {
+        return '<p>' + em(p.trim()) + '</p>';
+      }).join("") + '</div>';
+      html += sourceDisclosure(reply, isProof);
+      var follows = isProof
+        ? ["Erkläre mir diese Belege verständlich", "Zeige weitere Belege zu meiner Frage"]
+        : ["Zeige mir den exakten Wortlaut und Beweis", "Erkläre das genauer"];
+      html += '<div class="ilm-science-actions" aria-label="Frage vertiefen">' + follows.map(function (x) {
+        return '<button type="button" data-ilm-follow="' + esc(x) + '">' + esc(x) + '</button>';
+      }).join("") + "</div>";
+      return html;
     };
 
     var oldAssist = window.renderIlmAssistantMessage;
@@ -367,6 +407,50 @@
         return oldClass(text);
       };
     }
+
+
+    // Anchor a newly submitted question in the readable region; never jump to the bottom
+    // just because the answer or references become long.
+    (function installScienceScrollAnchor() {
+      var lastQuestion = "";
+      var pending = false;
+      function adjust() {
+        pending = false;
+        if (!document.body || !document.body.classList.contains("is-ilm-chat-route")) return;
+        var shell = document.querySelector(".ilm-chat-shell");
+        if (!shell) return;
+        var users = shell.querySelectorAll(".ilm-user-row");
+        if (!users.length) { lastQuestion = ""; return; }
+        var last = users[users.length - 1];
+        var content = String(last.textContent || "").trim();
+        if (!content || content === lastQuestion) return;
+        lastQuestion = content;
+        var scroller = last.closest(".ilm-chat-messages, .ilm-messages, .ilm-thread, .ilm-chat-history");
+        if (!scroller) {
+          for (var n = last.parentElement; n && n !== document.body; n = n.parentElement) {
+            if (n.scrollHeight > n.clientHeight + 40 && getComputedStyle(n).overflowY !== "visible") { scroller = n; break; }
+          }
+        }
+        if (scroller) {
+          var top = last.getBoundingClientRect().top - scroller.getBoundingClientRect().top + scroller.scrollTop - 20;
+          scroller.scrollTo({top:Math.max(0,top),behavior:"instant"});
+        } else {
+          var y = window.scrollY + last.getBoundingClientRect().top - 110;
+          if (y > 0) window.scrollTo({top:y,behavior:"instant"});
+        }
+      }
+      var observer = new MutationObserver(function () {
+        if (pending) return;
+        pending = true;
+        requestAnimationFrame(adjust);
+      });
+      function boot() {
+        observer.observe(document.body, {childList:true,subtree:true});
+        adjust();
+      }
+      if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot, {once:true});
+      else boot();
+    })();
 
     document.addEventListener("click", function (ev) {
       var t = ev.target && ev.target.closest ? ev.target.closest("[data-ilm-follow]") : null;
