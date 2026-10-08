@@ -55,7 +55,7 @@ class TvActivity : Activity() {
             )
         }
         shell.addView(label("DĀR AL TAWḤĪD", 32f, gold, true))
-        shell.addView(label("ANDROlD TV · WISSEN AUS QURʾĀN & SUNNAH", 14f, muted, false))
+        shell.addView(label("ANDROID TV · WISSEN AUS QURʾĀN & SUNNAH", 14f, muted, false))
 
         val nav = LinearLayout(this).apply {
             orientation = LinearLayout.HORIZONTAL
