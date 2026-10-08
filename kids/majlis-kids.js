@@ -111,6 +111,13 @@
     var q=String(value||"").trim().slice(0,350);if(!q){status.textContent="Schreib erst eine Frage.";return;}
     stopPlayback();
     var suggestions=chat.querySelector(".km-picks");if(suggestions)suggestions.remove();
+    if(/angst vor|jemand tut mir weh|schlägt mich|will sterben|verletze mich|missbrauch|suizid|selbst verletzen|bin in gefahr/i.test(q)){
+      message("you","[Private Frage – geschützt]");
+      message("guide","Das klingt wichtig. Bitte sprich jetzt mit einem Erwachsenen, dem du vertraust. Wenn du gerade in Gefahr bist, hol sofort Hilfe. Du musst damit nicht allein bleiben.");
+      input.value="";state.audio=null;state.lastAnswer=null;listen.disabled=true;
+      status.textContent="Diese Frage wird geschützt behandelt und nicht an einen KI-Dienst gesendet.";
+      return;
+    }
     if(/adresse|telefonnummer|passwort|mein name ist|ich wohne|schick.*foto|(?:\+?\d[\d\s()-]{8,})/i.test(q)){
       message("you","[Private Angaben geschützt]");
       message("guide","Persönliche Daten gehören nicht in einen Chat. Bitte sprich mit deinen Eltern darüber.");
