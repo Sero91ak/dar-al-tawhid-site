@@ -1,0 +1,121 @@
+name: Check native iOS post push deep links
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'ios/DarAlTawhid/DarAlTawhid/DarAppRouter.swift'
+      - 'ios/DarAlTawhid/DarAlTawhid/WebAppView.swift'
+      - 'ios/DarAlTawhid/DarAlTawhid/DarPushNotifications.swift'
+      - 'ios/DarAlTawhid/DarAlTawhid/DarAlTawhidApp.swift'
+      - 'scripts/ios-post-push-deeplink-guard.cjs'
+      - '.github/workflows/check-ios-post-push-deeplink.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  ios-post-deeplink:
+    name: Swift syntax and route regression
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify native routes without sending any push
+        run: node scripts/ios-post-push-deeplink-guard.cjs
+      - name: Parse native Swift route files
+        shell: bash
+        run: |
+          set -euo pipefail
+          xcrun swiftc -frontend -parse             ios/DarAlTawhid/DarAlTawhid/DarAppRouter.swift             ios/DarAlTawhid/DarAlTawhid/WebAppView.swift             ios/DarAlTawhid/DarAlTawhid/DarPushNotifications.swift             ios/DarAlTawhid/DarAlTawhid/DarAlTawhidApp.swift
+
+      - name: Check local OneSignal XCFramework dependencies
+        id: vendor
+        shell: bash
+        run: |
+          if [ -d ios/DarAlTawhid/Vendor/OneSignal/OneSignalFramework.xcframework ]; then
+            echo "available=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "available=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::Simulator build unavailable in the GitHub checkout: ios/DarAlTawhid/Vendor/OneSignal/*.xcframework are not tracked. Swift parse and deep-link regression tests still run."
+          fi
+      - name: Check original Xcode project resource prerequisites
+        id: project-files
+        shell: bash
+        run: |
+          set -euo pipefail
+          available=true
+          for file in \
+            ios/DarAlTawhid/DarAlTawhid/Widgets/Info.plist \
+            ios/DarAlTawhid/OneSignalNotificationServiceExtension/Info.plist; do
+            if [ ! -f "$file" ]; then
+              available=false
+              echo "::warning::Full app compilation blocked by pre-existing missing project resource: $file"
+            fi
+          done
+          echo "available=$available" >> "$GITHUB_OUTPUT"
+          if [ "$available" = "false" ]; then
+            echo "::notice::Native routing and Swift parsing were checked. The full Simulator build is not certified until the original missing Xcode project resources are restored."
+          fi
+      - name: Fetch official OneSignal 5.5.6 frameworks with pinned SHA-256
+        if: steps.project-files.outputs.available == 'true'
+        timeout-minutes: 8
+        shell: bash
+        run: |
+          set -euo pipefail
+          vendor="ios/DarAlTawhid/Vendor/OneSignal"
+          mkdir -p "$vendor"
+          while IFS=' ' read -r framework checksum; do
+            [ -n "$framework" ] || continue
+            file="${framework}.xcframework.zip"
+            curl --fail --location --silent --show-error --retry 3 \
+              "https://github.com/OneSignal/OneSignal-iOS-SDK/releases/download/5.5.6/$file" \
+              --output "$file"
+            printf '%s  %s\n' "$checksum" "$file" | shasum -a 256 -c -
+            unzip -q "$file" -d "$vendor"
+            test -d "$vendor/${framework}.xcframework"
+            rm -f "$file"
+          done <<'ONE_SIGNAL_XCFRAMEWORKS'
+          OneSignalFramework c4cc2df16b1944935eae476d4d0510497603f3e69d5d0e2439b772989490538e
+          OneSignalUser bb7761d4c56eadb7f93d5aea5f919ce9b3768aefd223e85cd91d8b610fb37582
+          OneSignalNotifications 86e2c1a144318c01d02eef0aa9be577e649780ec6009bdcc68133ff48ea86ace
+          OneSignalLiveActivities a4b63de46ea2878359baa5e388df7307cf10c201d12688ef883b49ce55dd9f3c
+          OneSignalExtension 58288d2cea8de2d9fcf6e17aef99a9f4f2ae482cacb9c471ee04060ef763412e
+          OneSignalOutcomes 52aef6d6abf6cb2bc25bac86a7cc6bc68a5d9d1604e0c981f6b7828b6292946e
+          OneSignalOSCore 096bb5d068c3e36b0aa5386105045af37f02f9e42ed9c66fd2810e8088dbd1f3
+          OneSignalCore 1b7183240403657611f30149e1eecfccf33cfab8a93f8f79316a579e8506d8aa
+          ONE_SIGNAL_XCFRAMEWORKS
+      - name: Provide build-only placeholders for absent privacy manifests
+        if: steps.project-files.outputs.available == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          # CI-only dependency: the original project references privacy
+          # manifests that are not committed. Never publish these temporary
+          # placeholder values; actual App Store privacy manifests require
+          # their own audit and production files.
+          for dir in \
+            ios/DarAlTawhid/DarAlTawhid \
+            ios/DarAlTawhid/DarAlTawhid/Widgets; do
+            file="$dir/PrivacyInfo.xcprivacy"
+            if [ ! -f "$file" ]; then
+              cat > "$file" <<'PRIVACY_CI_ONLY'
+          <?xml version="1.0" encoding="UTF-8"?>
+          <plist version="1.0">
+          <dict>
+          <key>NSPrivacyTracking</key><false/>
+          <key>NSPrivacyTrackingDomains</key><array/>
+          <key>NSPrivacyCollectedDataTypes</key><array/>
+          <key>NSPrivacyAccessedAPITypes</key><array/>
+          </dict>
+          </plist>
+          PRIVACY_CI_ONLY
+              echo "::warning::$file generated only inside this unsigned CI simulator build. Not valid as an audited production privacy declaration."
+            fi
+          done
+      - name: Build native iOS Simulator app (no signing, no deployment)
+        if: steps.project-files.outputs.available == 'true'
+        timeout-minutes: 12
+        shell: bash
+        run: |
+          set -euo pipefail
+          xcodebuild -project ios/DarAlTawhid/DarAlTawhid.xcodeproj -scheme DarAlTawhid -configuration Debug -destination 'generic/platform=iOS Simulator' -derivedDataPath /tmp/dar-ios-post-push-check CODE_SIGNING_ALLOWED=NO -quiet build

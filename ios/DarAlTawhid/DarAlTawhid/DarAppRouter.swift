@@ -31,8 +31,16 @@ final class DarAppRouter: ObservableObject {
     func openPush(type: String, postId: String, url: String) {
         let cleanType = type.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
         let cleanPost = postId.trimmingCharacters(in: .whitespacesAndNewlines)
+        let sourcePostId = URL(string: url)
+            .flatMap { DarAppShell.sourceURL(from: $0) }
+            .map { DarAppShell.postId(from: $0) } ?? ""
+        // A payload labelled "home" may still carry a precise article URL.
+        // In that case its content target must take precedence over the tab.
+        let isHomeWithArticle = cleanType == "home" &&
+            (!cleanPost.isEmpty || !sourcePostId.isEmpty)
         if let exact = DarDeepLink.Destination(rawValue: cleanType),
-           ["prayer", "qibla", "quran", "duas", "more", "search", "jummah", "home"].contains(cleanType) {
+           ["prayer", "qibla", "quran", "duas", "more", "search", "jummah", "home"].contains(cleanType),
+           !isHomeWithArticle {
             apply(exact, webURL: nil)
             return
         }
@@ -50,6 +58,12 @@ final class DarAppRouter: ObservableObject {
         }
         if let parsed = URL(string: url), DarAppShell.isOwnHost(parsed) {
             let target = DarAppShell.inAppURL(from: parsed)
+            // A post link is a content route, not a request to open #home.
+            // Also handle OneSignal notifications with URL but no postId field.
+            if !DarAppShell.postId(from: target).isEmpty {
+                apply(.home, webURL: target)
+                return
+            }
             let dest = hashDestination(target) ?? DarDeepLink.destination(from: parsed)
             apply(dest, webURL: dest == .home || dest == .qibla ? nil : target)
             return
@@ -60,7 +74,14 @@ final class DarAppRouter: ObservableObject {
     private func apply(_ dest: DarDeepLink.Destination, webURL: URL?) {
         self.webURL = webURL
         destination = dest
-        DarQuickActions.set(dest)
+        if webURL == nil {
+            DarQuickActions.set(dest)
+        } else {
+            // Clear stale quick-action routes: they must not overwrite a push
+            // content URL with #home when WKWebView finishes loading.
+            _ = DarQuickActions.consume()
+            _ = DarWidgetStore.consumePendingDestination()
+        }
         openNonce = UUID()
     }
 

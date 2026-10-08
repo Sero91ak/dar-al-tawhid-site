@@ -24,6 +24,24 @@ enum DarPushNotifications {
     private static let jummahPrefix = "dar.jummah."
     private static var didBoot = false
     private static let clickListener = DarOneSignalClickListener()
+    // OneSignal may deliver the click before SwiftUI's onReceive is attached
+    // during a cold launch. Keep only the latest click until the view consumes it.
+    private static let pendingOpenLock = NSLock()
+    private static var pendingOpen: [String: String]?
+
+    static func consumePendingOpen() -> [String: String]? {
+        pendingOpenLock.lock()
+        defer { pendingOpenLock.unlock() }
+        let result = pendingOpen
+        pendingOpen = nil
+        return result
+    }
+
+    private static func peekPendingOpen() -> [String: String]? {
+        pendingOpenLock.lock()
+        defer { pendingOpenLock.unlock() }
+        return pendingOpen
+    }
 
     static func bootstrap(launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
         #if targetEnvironment(macCatalyst)
@@ -176,15 +194,25 @@ enum DarPushNotifications {
         } else {
             mappedURL = chosen
         }
-        NotificationCenter.default.post(
-            name: .darOpenPush,
-            object: nil,
-            userInfo: [
-                "type": val("type"),
-                "postId": val("postId").isEmpty ? val("slug") : val("postId"),
-                "url": mappedURL
-            ]
-        )
+        let payload = [
+            "type": val("type"),
+            "postId": val("postId").isEmpty ? val("slug") : val("postId"),
+            "url": mappedURL
+        ]
+        pendingOpenLock.lock()
+        pendingOpen = payload
+        pendingOpenLock.unlock()
+
+        // If the view is already present this is delivered immediately.
+        // If not, pendingOpen is picked up by .onAppear on cold launch.
+        DispatchQueue.main.async {
+            guard let latest = peekPendingOpen() else { return }
+            NotificationCenter.default.post(
+                name: .darOpenPush,
+                object: nil,
+                userInfo: latest
+            )
+        }
     }
 
     /// Canonical OneSignal external ID — same key as web (`darPushExternalIdV1`), prefix `dar-`.
