@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "DarAlTawhid"
 include(":app")
+include(":kids")
