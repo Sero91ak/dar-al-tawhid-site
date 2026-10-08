@@ -783,8 +783,14 @@
        Read only the most recent user questions of this conversation. */
     function ilmFollowupIntent(value) {
       var q = ilmNormalize(value);
-      return /^(?:(?:und |aber |doch |also |noch )?(?:warum|wieso|weshalb|wer|welcher|welche|welchen|wo|wie|wessen)|(?:gib|zeige|zeig|nenne|finde|such|suche) (?:mir )?(?:noch |weitere |andere |zwei |drei |vier |funf |5 |2 |3 )?(?:beweise|belege|quellen|uberlieferungen|aussagen|meinungen|fundstellen)|(?:wer hat das|wer sagte das|was sagte er|was ist damit|ist das|stimmt das|dazu|mehr dazu|belege dazu|quelle dazu|sag mir mehr))/i.test(q)
-        && !/^(?:warum|wer|welcher|was) (?:ist|bedeutet|war) (?:die |der |das )?(?:tawhid|iman|adab|islam|aqidah|gebet|ehe|zakah|hadith)\b/.test(q);
+      // Follow-up requires a conversational reference or a short evidence request.
+      // A complete new question ("Warum ist X ...?", "Wie funktioniert X?")
+      // must never inherit a previous, unrelated topic.
+      var referenced = /\b(das|dazu|daruber|darauf|diese|dieser|diesen|davon|dort|genannten|vorigen|letzten|er|ihn)\b/.test(q);
+      var evidence = /^(?:(?:und |noch )?(?:gib|zeige|zeig|nenne|finde|suche) (?:mir )?(?:noch |weitere |andere |zwei |drei |vier |funf |5 |2 |3 )?(?:beweise|belege|quellen|uberlieferungen|aussagen|meinungen|fundstellen)(?: dazu)?|(?:quelle|belege|beweise|weitere quellen|mehr quellen|weitere belege) dazu)$/i.test(q);
+      var shortRef = /^(?:(?:und |aber |doch )?(?:wer|welcher|welche|welchen|warum|wieso|weshalb|wo|wie) (?:hat (?:das|er)|sagte (?:das|er)|stehen (?:die|diese)|ist (?:das|dieser)|gibt es (?:daruber|dazu)|war(?:um)? (?:dieser|diese)|(?:sahabi|tabiin|salaf) (?:hat|sagte)))/i.test(q);
+      return evidence || (referenced && (shortRef || q.length <= 75)) ||
+        /^(?:warum (?:ikhtilaf|gibt es ikhtilaf)|welcher (?:sahabi|tabiin|gelehrte) (?:sagte|hat)|noch mehr|weiter|mehr dazu)$/i.test(q);
     }
     function ilmRecentTopic(value, conversation) {
       var current = ilmNormalize(value);
@@ -807,17 +813,20 @@
     function ilmStudyReminder(value, conversation) {
       if (!conversation || !Array.isArray(conversation.messages)) return "";
       var current = ilmNormalize(ilmQueryWithoutGreeting(value));
-      var count = 1, userCount = 0;
-      for (var i = conversation.messages.length - 1; i >= 0 && userCount < 75; i--) {
-        var message = conversation.messages[i];
+      if (!ilmFollowupIntent(current)) return "";
+      var count = 1;
+      var messages = conversation.messages;
+      var skippedCurrent = false;
+      for (var i = messages.length - 1; i >= 0 && count < 76; i--) {
+        var message = messages[i];
         if (!message || message.role !== "user") continue;
-        var text = ilmNormalize(ilmQueryWithoutGreeting(String(message.content || "")));
-        if (!text || text === current) continue;
-        userCount++;
-        if (userCount > 0 && !ilmFollowupIntent(text) && !ilmFollowupIntent(current)) break;
+        var older = ilmNormalize(ilmQueryWithoutGreeting(String(message.content || "")));
+        if (!older) continue;
+        if (!skippedCurrent && older === current) {skippedCurrent=true;continue;}
         count++;
+        // Only count the current connected chain back to its original question.
+        if (!ilmFollowupIntent(older)) break;
       }
-      // A gentle invitation, never a block or a judgement about the visitor.
       if (count < 25 || count % 25 !== 0) return "";
       return "Wir haben dieses Thema schon aus verschiedenen Blickwinkeln betrachtet. Vielleicht hilft es, die bisherigen Belege in Ruhe durchzugehen. Ich kann sie dir kurz zusammenfassen; du kannst selbstverständlich jederzeit weiterfragen.";
     }
