@@ -114,7 +114,28 @@
     }catch(_){status.textContent="Bitte öffne den Qurʾān-Bereich.";}
   }
   function mediaCard(box,media){
-    if(!media||!["dua","quran","quran_results"].includes(media.kind))return;
+    if(!media||!["dua","quran","quran_results","hadith","early","lesson"].includes(media.kind))return;
+    if(["hadith","early","lesson"].includes(media.kind)){
+      var item=el("section","km-media km-sunnah");
+      item.appendChild(el("strong","km-verse-head",String(media.title||"Geprüfter Lerntext")));
+      if(media.person)item.appendChild(el("small","km-source","Überliefert von: "+String(media.person)));
+      if(media.text){
+        item.appendChild(el("small","km-translation-note","Vorhandene deutsche Übertragung · kein arabischer Originaltext"));
+        item.appendChild(el("p","km-meaning",String(media.text)));
+      }else{
+        item.appendChild(el("small","km-translation-note","Kindgerechte Lernzusammenfassung · kein wörtliches Ḥadīṯ-Zitat"));
+      }
+      item.appendChild(el("p","km-media-note",String(media.explanation||"")));
+      if(media.grade)item.appendChild(el("small","km-source","Einstufung der vorhandenen Quelle: "+String(media.grade)));
+      item.appendChild(el("small","km-source","Quelle: "+String(media.source||"")));
+      if(typeof media.sourceUrl==="string"&&/^https:\/\/dorar\.net\//.test(media.sourceUrl)){
+        var link=el("a","km-related","Originalfundstelle ansehen ›");
+        link.href=media.sourceUrl;link.target="_blank";link.rel="noopener noreferrer";
+        item.appendChild(link);
+      }
+      box.appendChild(item);
+      return;
+    }
     if(media.kind==="quran_results"){
       var results=Array.isArray(media.results)?media.results:[];
       results.slice(0,5).forEach(function(verse){
@@ -303,7 +324,27 @@
     return {answer:"Sehr gern, "+familyWord()+"! Diese Duʿāʾ heißt „"+selected.title+"“. Möchtest du sie auf Arabisch hören, auf Deutsch verstehen oder Wort für Wort lernen? Die Bedeutung: "+selected.meaning,
       source:selected.source,media:info};
   }
+  var sunnahDataRequest=null,sunnahCoreRequest=null;
+  function mightBeSunnahQuestion(q){
+    return /\b(hadith|hadis|hadit|sunnah|buchari|bukhari|muslim|wahrheit|wahrhaftigkeit|ehrlich|lugen|nachbar|gast|gutes wort|gute worte|freundliches wort|wohltat|schweigen|ansar|aisha|aishah|scham|tawhid|tauhid|iman|glaubenssaulen|glaubensgrundlagen|ibadah|anbetung|adab|akhlaq|akhirah|auferstehung|rechenschaft|charakter)\b/.test(previewNorm(q))||
+      /allahs namen|allahs eigenschaften|namen und eigenschaften|jungste tag/.test(previewNorm(q));
+  }
+  async function previewSunnah(question){
+    if(!mightBeSunnahQuestion(question))return null;
+    try{
+      if(!sunnahDataRequest)sunnahDataRequest=fetch("/kids/data/majlis-sunnah-v1.json?v=1",{credentials:"same-origin",cache:"force-cache"})
+        .then(function(r){if(!r.ok)throw Error("sunnah-data-unavailable");return r.json();})
+        .catch(function(){return null});
+      if(!sunnahCoreRequest)sunnahCoreRequest=import("/kids/majlis-sunnah-core.js?v=1").catch(function(){return null});
+      var pair=await Promise.all([sunnahDataRequest,sunnahCoreRequest]);
+      var data=pair[0],core=pair[1];
+      var answer=data&&core?.findSunnahFromCorpus?.(question,state.age,activeGender(),data);
+      return answer?{answer:answer.text,source:answer.source,media:answer.media}:null;
+    }catch(_){return null;}
+  }
   async function previewResponse(question){
+    var sunnah=await previewSunnah(question);
+    if(sunnah)return sunnah;
     var data=await previewIndex();
     if(!data)return null;
     return previewVerse(question,data)||previewDua(question,data);
