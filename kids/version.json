@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v169-salah-photoreal1272",
-  "label": "KIDS · V1.08.90",
-  "releasedAt": "2026-10-08T18:18:09.820Z",
-  "note": "KIDS · V1.08.90: Sieben neue lokale fotorealistische Moschee-Szenen für Startseiten-Hero, Gebetszeiten-Hero und alle fünf Gebete. Kompakter verschmolzener Start-Hero ohne große Leerstrecke; größere aktuelle/nächste Gebetszeiten und deutlicher Live-Countdown. Alte illustrierte Videoüberlagerung zugunsten ruhiger CSS-Kamerabewegung deaktiviert, bis fotorealistischer Videorender verfügbar ist. Salāh-Berechnung, Ortseinstellung, Tagesliste und PWA-Offline-Caching erhalten. Hotfix: PWA-SW-Registrierung und Versionsprüfung explizit auf v1273 für Cache-Busting angepasst. GitHub Actions Besucher-App-Deploy per kids/** Commit neu ausgelöst. Cache-Version mit SW-Registrierung v1273 synchronisiert.",
+  "buildId": "kids-shell-v170-salah-native-clean1274",
+  "label": "KIDS · V1.08.91",
+  "releasedAt": "2026-10-08T18:30:40.678Z",
+  "note": "KIDS V1.08.91: Alten gebackenen Wolken-Hero vollständig deaktiviert, neue lokale Moschee-Fotowelt auch direkt in Einstiegsseiten als robustes Fallback verankert. SW 1274 frisch; iOS-Nativprojekt: altes Intro-Video entfernt und stale HTML CachePolicy korrigiert. Achtung: native Swift-Änderung erst mit neu gebauter iOS-App aktiv; Weblayout nach Cloudflare-Deploy.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1273",
+    "serviceWorkerCache": "v1274",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -1239,7 +1239,7 @@
     "duaSmartWholeListening": "v1260-direct-fluent-master",
     "duaSmartSlowListening": "v1260-dedicated-slow-master",
     "duaSmartWordFollow": "v1261-approximate-full-phrase-cues-or-reviewed-timestamps-exact-individual-clip-mode",
-    "salahHomeWorld": "photoreal-unified-hero-v1272",
+    "salahHomeWorld": "photoreal-no-legacy-layers-v1274",
     "salahHeroVideo": "legacy-illustrated-disabled-until-photoreal-new-video",
     "salahHeroMotionFallback": "offline-local-still",
     "salahMotionVisibility": "home-world-observer",
@@ -1247,10 +1247,11 @@
     "salahPrayerPhotos": 7,
     "salahHeroCompact": true,
     "salahDayFiveSceneImages": true,
-    "salahSwRegistration": "v1273"
+    "salahSwRegistration": "v1274",
+    "kidsNativeIntroFix": "native-project-changed-requires-new-iOS-build"
   },
-  "updatedAt": "2026-10-08T18:19:06.541Z",
-  "deployTrigger": "kids-photoreal-v1273-final-production",
+  "updatedAt": "2026-10-08T18:30:40.678Z",
+  "deployTrigger": "kids-native-splash-and-hero-overlap-fix1274",
   "globalDetailDock": {
     "version": "v1253",
     "enabled": true,
