@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "id": "DAR_KIDS_QUIZ_AUDIO_STAGE",
+  "mode": "approved-small-batch",
+  "batchStart": 9,
+  "batchCount": 7,
+  "maxBatchQuestions": 12,
+  "voiceProfileId": "serhat-owner-voice-2026",
+  "voiceName": "Serhat Abu Malik – Master",
+  "modelId": "eleven_v4",
+  "mixedLanguagePolicy": "defer-arabic-script-and-honorific-ligatures-for-Fusha-segment-qa",
+  "germanPolicy": "existing-owner-master-v4-with-reviewed-pronunciation-dictionary",
+  "arabicPolicy": "Fusha V4 dedicated Arabic segments; no German TTS for Arabic phrases",
+  "retentionPolicy": "never-delete-previously-published-quiz-audio-in-staged-rollout",
+  "validation": "question-exact-text, answer-order, correct-feedback-and-explanation, playable-audio-asset"
+}
