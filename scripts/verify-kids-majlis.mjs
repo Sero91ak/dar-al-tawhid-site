@@ -6,13 +6,14 @@ import {webcrypto} from "node:crypto";
 if(!globalThis.crypto)globalThis.crypto=webcrypto;
 const apiSource=readFileSync(new URL("../cloudflare/kids-majlis-api.js",import.meta.url),"utf8");
 const frontSource=readFileSync(new URL("../kids/majlis-kids.js",import.meta.url),"utf8");
+const verifiedContent=JSON.parse(readFileSync(new URL("../kids/data/verified-content.json",import.meta.url),"utf8"));
 const shells=["index","start","shell"].map(name=>readFileSync(new URL("../kids/"+name+".html",import.meta.url),"utf8"));
 const noImports=apiSource.replace(/^import .*?;\s*$/gm,"")
   .replace("export async function handleKidsMajlisApi","async function handleKidsMajlisApi")
   .replace("export const kidsMajlisTesting","const kidsMajlisTesting");
 let calls=0;
 const synth=async (env,text)=>{calls++;return {ok:true,bytes:new Uint8Array([73,68,51]),contentType:"audio/mpeg"}};
-const api=new Function("synthesizeDarVoice","isVoiceConfigured",noImports+"\nreturn {handleKidsMajlisApi,kidsMajlisTesting};")(synth,()=>true);
+const api=new Function("synthesizeDarVoice","isVoiceConfigured","KIDS_VERIFIED_CONTENT",noImports+"\nreturn {handleKidsMajlisApi,kidsMajlisTesting};")(synth,()=>true,verifiedContent);
 new Function(frontSource);
 assert.equal(shells.every(s=>(s.match(/kids\/majlis-kids\.js\?v=1/g)||[]).length===1),true);
 assert.equal(api.kidsMajlisTesting.choose("Wer ist Allah?","6–8").id,"allah");
@@ -21,6 +22,13 @@ assert.equal(api.kidsMajlisTesting.choose("Was ist Takfir?","9–10").id,"restri
 assert.equal(api.kidsMajlisTesting.choose("Mein Passwort ist 123","6–8").id,"privacy");
 assert.equal(api.kidsMajlisTesting.choose("jemand schlägt mich","6–8").id,"help");
 assert.equal(api.kidsMajlisTesting.choose("Wer wohnt im Mond?","6–8").id,"unknown");
+assert.equal(api.kidsMajlisTesting.choose("Rabbi zidni ilma", "6–8").id,"library:dua-032-rabbi-zidni-ilma");
+assert.equal(api.kidsMajlisTesting.choose("Welches Dua schützt vor Einflüsterungen?", "4–5").id,"age_restricted");
+assert.equal(api.kidsMajlisTesting.choose("Welches Dua schützt vor Einflüsterungen?", "9–10").id,"library:dua-079-rabbi-audhu-bika-min-hamazati-sh-shayatin");
+assert.equal(api.kidsMajlisTesting.choose("Schäme mich zu fragen", "9–10").id,"library:aishah-ansar-learning");
+assert.equal(api.kidsMajlisTesting.choose("Schäme mich zu fragen", "6–8").id,"age_restricted");
+assert.equal(api.kidsMajlisTesting.choose("Mein Passwort ist xyz; Rabbi zidni", "9–10").id,"privacy");
+
 const limiter={limit:async()=>({success:true})};
 const parentCode="KIDS-PILOT-PARENT-ACCESS-VERY-STRONG-2026";
 const env={
