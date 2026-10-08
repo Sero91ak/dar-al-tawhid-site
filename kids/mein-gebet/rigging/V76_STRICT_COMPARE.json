@@ -1,0 +1,63 @@
+{
+  "baseline_sha256": "7b4db7e684144ec23c63f8ad63e5a055e66fc871adf2757be62adf2699c41490",
+  "candidate_sha256": "14d803f8c0dfc7a57a566bcd50f12b895ee4bea3008fb660f0d97dc2e62e2e2a",
+  "original_sha256": "062b8555e861c680b1049ab6a3bee0212caa51cda5168a6b33a76be01aa987b9",
+  "views": {
+    "front": {
+      "baseline_body": 0.88236,
+      "candidate_body": 0.88969,
+      "delta_body": 0.00733,
+      "delta_head": 0.0,
+      "no_regression": true,
+      "material_body_gain": true,
+      "calibration": "nominal orientation"
+    },
+    "three_quarter_uncalibrated": {
+      "baseline_body": 0.82962,
+      "candidate_body": 0.82996,
+      "delta_body": 0.00034,
+      "delta_head": 0.0,
+      "no_regression": true,
+      "material_body_gain": false,
+      "calibration": "UNCALIBRATED: diagnostic only"
+    },
+    "right_side": {
+      "baseline_body": 0.87254,
+      "candidate_body": 0.87254,
+      "delta_body": 0.0,
+      "delta_head": 0.0,
+      "no_regression": true,
+      "material_body_gain": false,
+      "calibration": "nominal orientation"
+    },
+    "back": {
+      "baseline_body": 0.87901,
+      "candidate_body": 0.88296,
+      "delta_body": 0.00395,
+      "delta_head": 0.0,
+      "no_regression": true,
+      "material_body_gain": true,
+      "calibration": "nominal orientation"
+    },
+    "left_side": {
+      "baseline_body": 0.86489,
+      "candidate_body": 0.86489,
+      "delta_body": 0.0,
+      "delta_head": 0.0,
+      "no_regression": true,
+      "material_body_gain": false,
+      "calibration": "nominal orientation"
+    }
+  },
+  "regressed_views": [],
+  "materially_improved_views": [
+    "front",
+    "back"
+  ],
+  "geometry_progress_accepted": true,
+  "at_least_90pct_all_views": false,
+  "character_identity_approved": false,
+  "animations_approved": false,
+  "production_approved": false,
+  "reason": "ACCEPT: diagnostic geometric improvement only, not original likeness or deployment"
+}
