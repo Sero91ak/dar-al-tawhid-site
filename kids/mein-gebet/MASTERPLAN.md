@@ -187,3 +187,14 @@ kids/mein-gebet/
 **Nächste Aufgabe: Phase 1 sicher in Staging bereitstellen und auf Geräten testen.** Das Draft-PR enthält den **kleinen Home-Testzugang außerhalb der Hörwelten-Kapseln**, vier anklickbare Vorschau-Lernbereiche und automatische Profilauswahl für die vorhandenen Mini-Profilbilder. **Die vom Nutzer gelieferten Ganzkörperfiguren sind bislang nur Designreferenzen und noch nicht als echte animierbare GLBs eingebunden.** Nach visueller Freigabe vorerst eine Jungenfigur als echten 3D-Rig-Prototypen entwickeln. **Erst nach ausdrücklicher späterer Freigabe** erhält „Mein Gebet“ einen eigenen permanenten Bottom-Tab/eine dauerhafte Seite. Weder sämtliche Gebete noch sämtliche Audios vor Machbarkeitstest produzieren.
 
 **Nicht bereits geliefert:** animierbare GLBs, Gebets-Animationsclips, vollständige Quellenabnahme, Wort-Audios und Live-Deployment.
+
+
+## Technischer Fortschritt – 08.10.2026 (Testbranch, nicht veröffentlicht)
+- Originale Nutzerfiguren als transparente PNG erhalten, ohne das Aussehen zu ändern: `assets/figur-junge-original.png`, `assets/figur-maedchen-original.png`. Keine SVG-Ersatzfiguren im Gebetshub mehr.
+- Zwei unabhängige, textfreie Hero-Hintergrundbilder: `assets/hero-boy.jpg` (Nachtblau/Gold) und `assets/hero-girl.jpg` (Rosé/Nachtblau).
+- `preview-v1.js`: Home-Testlink und Hub-Hero erscheinen automatisch entsprechend `.app[data-gender]`; die Figuren sind unverändert, lediglich der Hintergrund ist profilspezifisch.
+- Navigation der Vorschau ohne Abhängigkeit von `window.showTab` repariert. Vier Lernkarten öffnen Detailansichten; die beiden Zurück-Buttons bleiben innerhalb des Kids-Shell-Flows.
+- Eigenständige klickbare Referenzen: `demo-junge.html` und `demo-maedchen.html`. Kein veröffentlichter App-Tab, keine Veränderung anderer Module.
+- Separat lokal bereitgestellte Offline-HTML-Demos (ursprüngliche PNG-Figuren als Data-URI eingebettet) wurden mit Chromium/Playwright geprüft: Einstiegsbutton, vier Detailkarten, Rücknavigation jeweils erfolgreich und keine JavaScript-Ausnahme.
+- GitHub-Entwurfsbranch ist **kein öffentlicher Preview-Deploy**. GitHub-Dateilinks dürfen nicht als funktionierende Website-URL bezeichnet werden. Browserseitige iOS/WKWebView-Prüfung und produktiver Deploy bleiben offen.
+- **Noch nicht vorhanden:** geriggte GLB-3D-Modelle, geprüfte Gebetsbewegungen, Stimmen/Audios und veröffentlichte Lektionen. Render-PNGs sind keine animierbaren 3D-Dateien.
