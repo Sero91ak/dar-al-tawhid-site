@@ -38,6 +38,33 @@ jobs:
             echo "available=false" >> "$GITHUB_OUTPUT"
             echo "::warning::Simulator build unavailable in the GitHub checkout: ios/DarAlTawhid/Vendor/OneSignal/*.xcframework are not tracked. Swift parse and deep-link regression tests still run."
           fi
+      - name: Fetch official OneSignal 5.5.6 frameworks with pinned SHA-256
+        timeout-minutes: 8
+        shell: bash
+        run: |
+          set -euo pipefail
+          vendor="ios/DarAlTawhid/Vendor/OneSignal"
+          mkdir -p "$vendor"
+          while IFS=' ' read -r framework checksum; do
+            [ -n "$framework" ] || continue
+            file="${framework}.xcframework.zip"
+            curl --fail --location --silent --show-error --retry 3 \
+              "https://github.com/OneSignal/OneSignal-iOS-SDK/releases/download/5.5.6/$file" \
+              --output "$file"
+            printf '%s  %s\n' "$checksum" "$file" | shasum -a 256 -c -
+            unzip -q "$file" -d "$vendor"
+            test -d "$vendor/${framework}.xcframework"
+            rm -f "$file"
+          done <<'ONE_SIGNAL_XCFRAMEWORKS'
+          OneSignalFramework c4cc2df16b1944935eae476d4d0510497603f3e69d5d0e2439b772989490538e
+          OneSignalUser bb7761d4c56eadb7f93d5aea5f919ce9b3768aefd223e85cd91d8b610fb37582
+          OneSignalNotifications 86e2c1a144318c01d02eef0aa9be577e649780ec6009bdcc68133ff48ea86ace
+          OneSignalLiveActivities a4b63de46ea2878359baa5e388df7307cf10c201d12688ef883b49ce55dd9f3c
+          OneSignalExtension 58288d2cea8de2d9fcf6e17aef99a9f4f2ae482cacb9c471ee04060ef763412e
+          OneSignalOutcomes 52aef6d6abf6cb2bc25bac86a7cc6bc68a5d9d1604e0c981f6b7828b6292946e
+          OneSignalOSCore 096bb5d068c3e36b0aa5386105045af37f02f9e42ed9c66fd2810e8088dbd1f3
+          OneSignalCore 1b7183240403657611f30149e1eecfccf33cfab8a93f8f79316a579e8506d8aa
+          ONE_SIGNAL_XCFRAMEWORKS
       - name: Build native iOS Simulator app (no signing, no deployment)
         if: steps.vendor.outputs.available == 'true'
         timeout-minutes: 12
