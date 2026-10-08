@@ -31,8 +31,16 @@ final class DarAppRouter: ObservableObject {
     func openPush(type: String, postId: String, url: String) {
         let cleanType = type.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
         let cleanPost = postId.trimmingCharacters(in: .whitespacesAndNewlines)
+        let sourcePostId = URL(string: url)
+            .flatMap { DarAppShell.sourceURL(from: $0) }
+            .map { DarAppShell.postId(from: $0) } ?? ""
+        // A payload labelled "home" may still carry a precise article URL.
+        // In that case its content target must take precedence over the tab.
+        let isHomeWithArticle = cleanType == "home" &&
+            (!cleanPost.isEmpty || !sourcePostId.isEmpty)
         if let exact = DarDeepLink.Destination(rawValue: cleanType),
-           ["prayer", "qibla", "quran", "duas", "more", "search", "jummah", "home"].contains(cleanType) {
+           ["prayer", "qibla", "quran", "duas", "more", "search", "jummah", "home"].contains(cleanType),
+           !isHomeWithArticle {
             apply(exact, webURL: nil)
             return
         }
