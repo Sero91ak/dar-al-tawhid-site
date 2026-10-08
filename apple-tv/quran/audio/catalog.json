@@ -1,9 +1,10 @@
 {
-  "schemaVersion": "1.3",
+  "schemaVersion": "1.4",
   "status": "active",
   "target": "tvOS-only",
   "playViaWeb": true,
   "autoplay": true,
+  "surahCount": 114,
   "provider": {
     "name": "DĀR AL TAWḤĪD audio pack",
     "editionsURL": "https://dar-al-tawhid.de/data/quran-reciters.json",
@@ -20,7 +21,15 @@
     "advanceTrigger": "audio-item-finished",
     "showArabic": true,
     "showGerman": true,
-    "persistLastPosition": true
+    "persistLastPosition": true,
+    "loop": {
+      "enabled": true,
+      "neverStopAtEnd": true,
+      "whenComplete": "restartFromSurah1Ayah1",
+      "afterLastAyah": "114:6",
+      "next": "1:1",
+      "continueImmediately": true
+    }
   },
   "selection": {
     "includeAllAvailableArabicAudioEditions": false,
@@ -37,7 +46,20 @@
     "waitForFullReciter": false,
     "waitForSeed": false,
     "playViaWeb": true,
-    "playViaProxyUntilCached": true
+    "playViaProxyUntilCached": true,
+    "repeatMushaf": true,
+    "neverStopAtEndOfMushaf": true,
+    "loop": {
+      "enabled": true,
+      "neverStopAtEnd": true,
+      "whenComplete": "restartFromSurah1Ayah1",
+      "afterLastAyah": "114:6",
+      "next": "1:1",
+      "continueImmediately": true,
+      "noPauseAtEnd": true,
+      "noIdleScreenAtEnd": true,
+      "rule": "Wenn Sūrah 114 fertig ist, nicht stoppen. Sofort Sūrah 1 Āyah 1 mit demselben Qāriʾ weiter. QuranTabView und Audio bleiben in derselben Routine."
+    }
   },
   "offline": {
     "cacheLastSuccessfulEditionList": true,
