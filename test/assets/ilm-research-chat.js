@@ -403,6 +403,12 @@
         }).join("") + '</section>';
     }
 
+    function ilmImanScriptureLinks() {
+      return '<section class="ilm-primary-references" aria-label="Qurʾān-Grundlagen für Īmān">' +
+        '<span class="ilm-primary-references-title">Qurʾān-Grundlagen</span>' +
+        '<button type="button" class="ilm-primary-reference" data-ilm-discovery-result="1" data-nav="quran-surah" data-value="2/285"><span>al-Baqarah 2:285<small>Grundlagen des Glaubens</small></span><span aria-hidden="true">↗</span></button>' +
+        '<button type="button" class="ilm-primary-reference" data-ilm-discovery-result="1" data-nav="quran-surah" data-value="4/136"><span>an-Nisāʾ 4:136<small>Aufruf zum Glauben</small></span><span aria-hidden="true">↗</span></button></section>';
+    }
     function shortScientificAnswer(reply) {
       var ev = (reply.evidences || []).find(function (e) { return e.statement && e.statement.length > 24; });
       var txt = String(reply.directAnswer || "").trim();
@@ -487,7 +493,7 @@
       if (!reply) return "";
       if (reply.status === "conversation" || reply.status === "clarification" || reply.status === "abuse") {
         var conversational = String(reply.directAnswer || reply.intro || "");
-        return '<div class="ilm-science-prose"><p>' + em(conversational) + "</p></div>";
+        return (reply._ilmGreetingPrefix ? '<p class="ilm-greeting-inline">' + esc(reply._ilmGreetingPrefix) + "</p>" : "") + '<div class="ilm-science-prose"><p>' + em(conversational) + "</p></div>";
       }
       var isProof = (proofIntent(reply._ilmQuestion) || !!reply._ilmSourceOnly) && !reply._ilmTawhidFollowup;
       var anyProof = (reply.evidences || []).some(function(e){return e && e.statement && e.statement.length >= 18;});
@@ -503,7 +509,7 @@
       if (reply._ilmIsDiscovery) answer = reply._ilmDiscovery.length
         ? "Ich habe dazu passende Inhalte in der App gefunden. Öffne einen Treffer, um den vollständigen Beitrag oder die Qurʾān-Stelle direkt zu lesen."
         : "Ich finde zu dieser Suche momentan keinen direkt öffnungsfähigen Treffer. Versuche einen konkreteren Begriff oder eine andere Schreibweise.";
-      var html = '<div class="ilm-science-prose">' + answer.split(/\n{2,}/).filter(Boolean).map(function (p) {
+      var html = (reply._ilmGreetingPrefix ? '<p class="ilm-greeting-inline">' + esc(reply._ilmGreetingPrefix) + '</p>' : '') + '<div class="ilm-science-prose">' + answer.split(/\n{2,}/).filter(Boolean).map(function (p) {
         var enriched = em(p.trim());
         if (reply._ilmCitationCount) {
           enriched = enriched.replace(/\[([1-3])\]/g,function(match,n){
@@ -515,8 +521,9 @@
         return '<p>' + enriched + '</p>';
       }).join("") + '</div>';
       if (reply._ilmBasicTawhid || reply._ilmTawhidFollowup) html += ilmScriptureLinks(!!reply._ilmTawhidFollowup);
-      if (!reply._ilmBasicTawhid && !reply._ilmTawhidFollowup) html += discoverySection(reply);
-      if (!reply._ilmIsDiscovery && !reply._ilmBasicTawhid && !reply._ilmTawhidFollowup) html += sourceDisclosure(reply, isProof);
+      if (reply._ilmBasicIman) html += ilmImanScriptureLinks();
+      if (!reply._ilmBasicTawhid && !reply._ilmBasicIman && !reply._ilmTawhidFollowup) html += discoverySection(reply);
+      if (!reply._ilmIsDiscovery && !reply._ilmBasicTawhid && !reply._ilmBasicIman && !reply._ilmTawhidFollowup) html += sourceDisclosure(reply, isProof);
       var follows = reply._ilmBasicTawhid
         ? ["Zeige mir weitere Belege für Tawḥīd", "Erkläre Tawḥīd ausführlicher"]
         : reply._ilmIsDiscovery
@@ -698,9 +705,28 @@
       return archive + uniqueCurrentTurn(messages.slice(latestUser)).map(regularMessage).join("");
     };
 
+    /* MAJLIS GREETING QUESTION V1344: parse the complete visitor intent. */
+    function splitIlmGreeting(value) {
+      var full = String(value || "").trim();
+      var salutation = /^(?:as[\s-]*sal[aā]m(?:u)?|assal[aā]m(?:u)?|sal[aā]m(?:un)?|selam(?:un)?|السَّلَامُ|السلام)(?=[\s,.;!؟،]|$)/i.test(full);
+      if (!salutation) return {greeting:false,question:full};
+      var question = /(?:\bwas\s+(?:ist|sind|bedeutet|heißt|hat|sagte|sagt|gilt)\b|\b(?:wie|wo|wann|warum|wieso|wer|wen|welche[rsnm]?|welchen)\b|\b(?:erkl[aä]r|zeige|zeig|gib|finde|suche|kannst\s+du|darf|muss|soll|ich\s+m[oö]chte\s+wissen)\b)/i.exec(full);
+      if (!question || question.index < 8) return {greeting:true,question:""};
+      return {greeting:true,question:full.slice(question.index).replace(/^[\s,.;!؟،:]+/,"").trim()};
+    }
+    function ilmQueryWithoutGreeting(input) {
+      var p = splitIlmGreeting(input);
+      return p.question || String(input || "");
+    }
+    function isBasicImanQuestion(value) {
+      var q = ilmNormalize(value);
+      return /(?:^| )(?:was (?:ist|bedeutet)|was versteht man unter|erklare|definition von) (?:den |die |das )?(?:iman|iiman)(?: |$)/.test(q)
+        && !/(?:beweis|belege|quellen|wo finde|hadith nummer|wortlaut|ausfuhrlich)/.test(q);
+    }
     if (typeof window.searchIlmKnowledge === "function") {
       var oldSearch = window.searchIlmKnowledge;
       window.searchIlmKnowledge = async function (question, conversation, options) {
+        question = ilmQueryWithoutGreeting(question);
         var list = await oldSearch(question, conversation, options);
         // Add a targeted second lexical query for historical/diacritic variants.
         // Never replace the original answer set or flood the chat with parallel searches.
@@ -739,22 +765,32 @@
     if (typeof window.buildIlmAssistantReply === "function") {
       var oldBuild = window.buildIlmAssistantReply;
       window.buildIlmAssistantReply = function (question, matches, mode, external) {
+        var greeting = splitIlmGreeting(question);
+        question = greeting.question || question;
         var reply = oldBuild(question, matches, mode, external);
         var convo = typeof window.getActiveIlmConversation === "function"
           ? window.getActiveIlmConversation(window.getIlmStore && window.getIlmStore())
           : null;
         var improved = decorateReply(question, reply, convo);
         if (improved) {
+          improved._ilmGreetingPrefix = greeting.greeting && greeting.question ? "Wa-ʿalaykum as-salām wa-raḥmatullāhi wa-barakātuh." : "";
           improved._ilmSourceOnly = mode === "sources";
           improved._ilmAnswerMode = mode === "short" ? "short" : "detailed";
           improved._ilmTawhidFollowup = tawhidFollowup(question);
           var rankedMatches = rankKnowledgeSources(question, matches);
           var coreTawhid = isBasicTawhidQuestion(question);
+          var coreIman = isBasicImanQuestion(question);
           improved._ilmDiscovery = discoveryItems(rankedMatches).filter(function(item) {
             return !coreTawhid || !/\b(?:hukm|urteil|gesetzgebung|ṭāghūt)\b/i.test(item.title);
           }).slice(0,coreTawhid ? 2 : 7);
           improved._ilmIsDiscovery = isDiscoveryQuestion(question);
           improved._ilmBasicTawhid = coreTawhid && !improved._ilmIsDiscovery;
+          improved._ilmBasicIman = coreIman && !improved._ilmIsDiscovery;
+          if (improved._ilmBasicIman) {
+            improved._ilmGeneratedText = "Īmān bedeutet Glaube. Der Prophet ﷺ erläuterte im Ḥadīṯ von Jibrīl sechs Glaubensgrundlagen: den Glauben an Allah, Seine Engel, Seine Bücher, Seine Gesandten, den Jüngsten Tag und die Vorherbestimmung (al-Qadar) – das Gute wie das Schlechte.\n\nBeleg: Ṣaḥīḥ Muslim, Ḥadīṯ Nr. 8 (Jibrīl). Im Qurʾān nennt al-Baqarah 2:285 den Glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten.";
+            improved._ilmDiscovery = [];
+            improved.evidences = [];
+          }
           if (improved._ilmBasicTawhid || improved._ilmTawhidFollowup) {
             if (improved._ilmBasicTawhid) improved._ilmGeneratedText = "Tawḥīd bedeutet, Allah als den Einen anzuerkennen und Ihm allein die Anbetung zu widmen.\n\nIm Qurʾān betont Sūrah al-Ikhlāṣ (112:1–4) Allahs Einzigkeit. Sūrah an-Naḥl (16:36) nennt den Aufruf, Allah zu dienen und Ṭāghūt zu meiden.";
             improved.evidences = [];
@@ -763,7 +799,7 @@
           improved._ilmMatches = rankedMatches;
           // Retain the best question-matching entries as the answer's evidence,
           // not the incidental order of cards in the original post index.
-          if (!improved._ilmBasicTawhid && rankedMatches.length) {
+          if (!improved._ilmBasicTawhid && !improved._ilmBasicIman && rankedMatches.length) {
             var picked = rankedMatches.slice(0, 5).map(function(e){return toEvidence(e,"internal")});
             improved.evidences = picked.concat((improved.evidences || []).filter(function(e) {
               return e.source_domain === "external";
@@ -771,7 +807,7 @@
           }
         }
         // Only religious explanation requests go to the bounded source-based composer.
-        if (improved && improved.status === "ok" && !improved._ilmIsDiscovery && !improved._ilmBasicTawhid && !improved._ilmTawhidFollowup && !improved._ilmSourceOnly) requestScienceComposition(improved, question);
+        if (improved && improved.status === "ok" && !improved._ilmIsDiscovery && !improved._ilmBasicTawhid && !improved._ilmBasicIman && !improved._ilmTawhidFollowup && !improved._ilmSourceOnly) requestScienceComposition(improved, question);
         return improved;
       };
     }
@@ -788,9 +824,12 @@
             follow_up: ["Was ist Īmān?", "Zeig mir Beweise aus Qurʾān und Sunnah."]
           };
         }
-        var r = oldConv(text);
-        if (/\b(salam|salā|selam)/i.test(text)) {
-          r.directAnswer = "Wa-ʿalaykum as-salām wa-raḥmatullāhi wa-barakātuh 🌙 Stelle deine Frage zu ʿIlm, ich suche in den geprüften Quellen.";
+        var greeting = splitIlmGreeting(text);
+        var r = oldConv(greeting.question || text);
+        if (greeting.greeting && !greeting.question && r) {
+          r.directAnswer = "Wa-ʿalaykum as-salām wa-raḥmatullāhi wa-barakātuh. Stelle gern deine Frage zu ʿIlm.";
+        } else if (greeting.greeting && greeting.question && r) {
+          r._ilmGreetingPrefix = "Wa-ʿalaykum as-salām wa-raḥmatullāhi wa-barakātuh.";
         }
         return r;
       };
@@ -800,7 +839,7 @@
       var oldClass = window.classifyIlmPrompt;
       window.classifyIlmPrompt = function (text) {
         if (ABUSE.test(String(text || ""))) return { type: "conversation" };
-        return oldClass(text);
+        return oldClass(ilmQueryWithoutGreeting(text));
       };
     }
 
