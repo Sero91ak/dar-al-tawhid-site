@@ -42,7 +42,7 @@ jobs:
           curl --location --silent --show-error --fail --retry 2 --max-time 20             "https://dar-al-tawhid.de/kids/assets/kids-salah-v1272/hero-home.png?v=1274"             -o /tmp/kids-audit/live-art.png || true
           for name in hero-day fajr dhuhr asr maghrib isha; do
             curl --silent --show-error --fail --retry 2 --max-time 20 \
-              "https://dar-al-tawhid.de/kids/assets/kids-salah-v1272/$name.png?v=1274" \
+              "https://dar-al-tawhid.de/kids/assets/kids-salah-v1272/$name.png?v=1275" \
               -o "/tmp/kids-audit/$name.png" || true
           done
           gh api "repos/$REPO/actions/workflows/cloudflare-pages-deploy.yml/runs?per_page=6"             --jq '[.workflow_runs[]|{id,head_sha,status,conclusion,created_at,updated_at,html_url}]'             > /tmp/kids-audit/runs.json || echo '[]' > /tmp/kids-audit/runs.json
@@ -66,9 +66,9 @@ jobs:
              finishedDeployRun=os.getenv('FINISHED_RUN') or None,
              live=dict(buildId=obj.get('buildId'),label=obj.get('label'),
                homeBytes=len(home.encode()),
-               homeBytes=len(home),homeContainsPhotoreal1274='prayer-stage-v1261.css?v=1275' in home,
-               homeContainsNativeClean='kids-shell-v171-salah-reference-viewport1275' in home,
-               cssBytes=len(css),cssContainsPhotoOverride='KIDS_SALAH_OLD_HERO_PURGE_V1274' in css,
+               homeContainsPrayerAssets1275='prayer-stage-v1261.css?v=1275' in home,
+               homeContainsBuild1275='kids-shell-v171-salah-reference-viewport1275' in home,
+               cssBytes=len(css),cssContainsViewportFit='KIDS_SALAH_REFERENCE_FIT_V1275' in css,
                photoBytes=img.stat().st_size if img.exists() else 0,
                prayerArtworkBytes=art,
                allSevenArtworkFilesReachable=(img.exists() and img.stat().st_size>30000 and all(n>30000 for n in art.values())),
