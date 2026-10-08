@@ -6,6 +6,17 @@ import {webcrypto} from "node:crypto";
 if(!globalThis.crypto)globalThis.crypto=webcrypto;
 const apiSource=readFileSync(new URL("../cloudflare/kids-majlis-api.js",import.meta.url),"utf8");
 const frontSource=readFileSync(new URL("../kids/majlis-kids.js",import.meta.url),"utf8");
+const quranSearchSource=readFileSync(new URL("../kids/majlis-quran-search.js",import.meta.url),"utf8");
+const fullQuranData=JSON.parse(readFileSync(new URL("../data/quran-search-index.json",import.meta.url),"utf8"));
+const searchWindow={};
+const quranFetchCalls=[];
+const fullQuranSearch=new Function("window","fetch",quranSearchSource+"\nreturn window.DarKidsQuranSearch;")(
+ searchWindow,async function(url){
+   quranFetchCalls.push(url);
+   assert.equal(url,"/data/quran-search-index.json");
+   return new Response(JSON.stringify(fullQuranData),{status:200,headers:{"Content-Type":"application/json"}});
+ });
+
 const knowledgeSource=readFileSync(new URL("../cloudflare/kids-majlis-knowledge.js",import.meta.url),"utf8");
 const knowledgeIndex=JSON.parse(readFileSync(new URL("../kids/data/majlis-knowledge-v1.json",import.meta.url),"utf8"));
 assert.equal(knowledgeIndex.duas.length,120);
@@ -27,7 +38,39 @@ const api=new Function("synthesizeDarVoice","isVoiceConfigured","KIDS_VERIFIED_C
   noImports+"\nreturn {handleKidsMajlisApi,kidsMajlisTesting};")(synth,()=>true,verifiedContent,
   knowledge.findKnowledge,knowledge.findKnowledgeById,knowledge.mediaForCanonicalId,knowledge.allahAlam,knowledge.profilePrefix);
 new Function(frontSource);
+assert.equal(fullQuranSearch.isQuestion("Wo steht im Qurʾān etwas über Geduld?"),true);
+assert.equal(fullQuranSearch.isQuestion("Wie mache ich Wuḍūʾ?"),false);
+assert.equal(quranFetchCalls.length,0,"Qurʾān should not be downloaded on app boot");
+assert.equal(fullQuranData.length,6236);
+const fullIndex=fullQuranSearch.__test.validate(fullQuranData);
+assert.ok(fullIndex&&fullIndex.byRef.size===6236,"all 6236 unique references must match Quran metadata");
+assert.equal(fullIndex.byRef.get("114:6").globalAyah,6236);
+assert.equal(fullIndex.byRef.get("2:255").globalAyah,262);
+assert.equal(fullQuranSearch.__test.validate(fullQuranData.slice(0,-1)),null,"incomplete index must fail closed");
+assert.equal(fullQuranSearch.__test.validate([fullQuranData[0],...fullQuranData.slice(0,-1)]),null,"duplicate index must fail closed");
+const qr=await fullQuranSearch.search("Qurʾān 2:255");
+assert.equal(qr.status,"found");
+assert.equal(qr.exact,true);
+assert.equal(qr.results[0].reference,"Qurʾān 2:255");
+assert.equal(qr.results[0].recitationUrl,"/quran-audio/ar.alafasy/262.mp3?v=1063");
+assert.ok(qr.results[0].arabic.length>70&&qr.results[0].german.length>80);
+const lastAyah=await fullQuranSearch.search("Sure 114 Vers 6");
+assert.equal(lastAyah.status,"found");assert.equal(lastAyah.results[0].reference,"Qurʾān 114:6");
+const invalidAyah=await fullQuranSearch.search("Qurʾān 2:999");
+assert.equal(invalidAyah.status,"not_found");
+const unknownWord=await fullQuranSearch.search("Quran fiktivwortxyzzzz");
+assert.equal(unknownWord.status,"not_found");
+const german=await fullQuranSearch.search("Wo steht im Qurʾān etwas über Geduld?");
+assert.equal(german.status,"found");assert.ok(german.results.length>0);
+assert.ok(german.results.every(v=>v.reference.startsWith("Qurʾān ")&&v.arabic&&v.german));
+const broad=await fullQuranSearch.search("Quran Allah");
+assert.equal(broad.status,"too_broad");
+assert.equal(quranFetchCalls.length,1,"one lazy Quran corpus fetch reused for every subsequent query");
+
 assert.equal(shells.every(s=>(s.match(/kids\/majlis-kids\.js\?v=1/g)||[]).length===1),true);
+assert.equal(shells.every(s=>(s.match(/kids\/majlis-quran-search\.js\?v=1/g)||[]).length===1),true);
+assert.equal(shells.every(s=>s.indexOf("majlis-quran-search.js")<s.indexOf("majlis-kids.js")),true);
+
 assert.equal(api.kidsMajlisTesting.choose("Wer ist Allah?","6–8").id,"allah");
 assert.equal(api.kidsMajlisTesting.choose("Wer ist Allah?","4–5").text.split(/[.!?]/).length<api.kidsMajlisTesting.choose("Wer ist Allah?","9–10").text.split(/[.!?]/).length,true);
 assert.equal(api.kidsMajlisTesting.choose("Was ist Takfir?","9–10").id,"restricted");
