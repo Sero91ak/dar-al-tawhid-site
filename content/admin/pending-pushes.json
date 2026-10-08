@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-10-08T13:40:28.498Z",
+  "generated": "2026-10-08T13:40:30.919Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -1135,12 +1135,12 @@
       "postTitle": "📖 Miʿrāǧ, Ruʾyah und pauschaler Takfīr – der dokumentierte Ikhtilāf",
       "publishedAt": "2026-10-08T13:31:07.738Z",
       "postPath": "content/posts/2026-10-08-miraj-ruyah-ikhtilaf-kein-pauschaler-takfir-slides.md",
-      "status": "sending",
+      "status": "sent",
       "createdAt": "2026-10-08T13:31:07.738Z",
       "pushApproved": true,
       "pushApprovedAt": "2026-10-08T13:31:07.738Z",
       "lastError": "",
-      "updatedAt": "2026-10-08T13:40:28.498Z",
+      "updatedAt": "2026-10-08T13:40:30.919Z",
       "lastCheckAt": "2026-10-08T13:40:25.145Z",
       "liveCheck": {
         "ok": true,
@@ -1177,7 +1177,21 @@
         "at": "2026-10-08T13:37:23.730Z",
         "reason": "Index aktualisiert (Deploy/Cache)"
       },
-      "sendingAt": "2026-10-08T13:40:28.498Z"
+      "sendingAt": "2026-10-08T13:40:28.498Z",
+      "sentAt": "2026-10-08T13:40:30.688Z",
+      "pushResult": {
+        "target": "segment:DAR_PUSH|all",
+        "targetUrl": "https://dar-al-tawhid.de/?post=miraj-ruyah-ikhtilaf-kein-pauschaler-takfir-slides-469&v=1791466829684#post/miraj-ruyah-ikhtilaf-kein-pauschaler-takfir-slides-469",
+        "channelResults": [
+          {
+            "channel": "all",
+            "sent": true,
+            "target": "segment:DAR_PUSH|all",
+            "recipients": null,
+            "notificationId": "f97b03cd-6359-4230-9378-a8f4b0cb5f4b"
+          }
+        ]
+      }
     }
   }
 }
