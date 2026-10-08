@@ -1135,7 +1135,7 @@ body.kids-salah-day-open{overflow:hidden!important}
   width:100%!important;background:transparent!important;
   border:0!important;border-radius:0!important;
   box-shadow:none!important;overflow:hidden!important;
-  margin-bottom:0!important;
+  margin:0!important;
 }
 #view-today .kids-salah-home-world > .hero::before{
   background:linear-gradient(180deg,rgba(2,19,32,.05) 0%,rgba(2,18,32,.05) 50%,rgba(3,19,34,.13) 72%,rgba(2,19,35,.32) 100%)!important;
@@ -1163,7 +1163,7 @@ body.kids-salah-day-open{overflow:hidden!important}
 }
 #view-today .kids-salah-home-world > .kids-salah-stage::before{
   content:"";display:block!important;position:absolute;
-  top:0;left:5%;right:5%;height:1px;inset:auto 5% auto 5%;
+  top:0;left:5%;right:5%;height:1px;inset:0 5% auto 5%;
   background:linear-gradient(90deg,transparent,rgba(244,214,140,.30),transparent)!important;
   transform:none!important;animation:none!important;z-index:0!important;
 }
