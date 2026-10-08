@@ -227,7 +227,7 @@ async function finalizeDarTestHomeV1193(asset) {
 
 // DAR_ILM_START_PHASE1_CACHE
   html = html.replace(/ilm-research-chat\.css(?:\?v=[^"']*)?/g, "ilm-research-chat.css?v=ilm-dialog-v1342");
-  html = html.replace(/ilm-research-chat\.js(?:\?v=[^"']*)?/g, "ilm-research-chat.js?v=ilm-dialog-v1350");
+  html = html.replace(/ilm-research-chat\.js(?:\?v=[^"']*)?/g, "ilm-research-chat.js?v=ilm-dialog-v1352");
 
     // DAR_ILM_SCHOLARS_V1240
 
