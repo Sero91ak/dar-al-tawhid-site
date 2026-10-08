@@ -55,6 +55,9 @@ async function load(releases) {
   test = await load([release(9), release(10)]);
   assert.ok(test.get("direct-android-apk").href.includes("v1.10"));
   assert.ok(test.get("direct-android-tv-apk").href.includes("dar-al-tawhid-tv.apk"));
+  assert.ok(test.get("dar-public-android-apk").href.includes("v1.10"));
+  assert.ok(test.get("dar-public-tv-apk").href.includes("dar-al-tawhid-tv.apk"));
+  assert.ok(test.get("dar-public-tv-meta").textContent.includes("08.10.2026"));
   assert.ok(test.get("direct-android-meta").textContent.includes("v0.1.10"));
   assert.ok(test.get("direct-android-meta").textContent.includes("08.10.2026"));
   assert.ok(test.get("release-dates-tv").textContent.includes("07.10.2026"));
