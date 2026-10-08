@@ -500,6 +500,19 @@
         return txt && !/[„“]/.test(txt) && txt.length <= 480
           ? txt : "Hierzu finde ich noch keine ausreichend eindeutige Textgrundlage. Bitte formuliere die Frage genauer oder verlange eine konkrete Fundstelle.";
       }
+      // MAJLIS SOURCES-FIRST V1353: when Gemini is unavailable, show an
+      // independently readable synthesis of ALL verified relevant quotations.
+      // This is source exposition, not a newly invented fatwa.
+      var proofs = (reply.evidences||[]).filter(function(e) {
+        return e.verification_status === "verified" && !!e.deep_link && e.statement && e.statement.length >= 24;
+      }).slice(0,3);
+      if (proofs.length >= 2) {
+        return "Die belegten Überlieferungen unterscheiden folgende Sachverhalte: " +
+          proofs.map(function(source,i) {
+            return "["+(i+1)+"] "+clip(source.statement,390) + " (" + sourceTitle(source) + ").";
+          }).join("\n\n") +
+          "\n\nFür eine Beurteilung des persönlichen Einzelfalls müssen der tatsächliche Grund und die Umstände geprüft werden. Wa-Allāhu aʿlam.";
+      }
       // MAJLIS EVIDENCE-FIRST V1351: while an answer is being composed,
       // present the verified source excerpt immediately instead of a bare spinner.
       // Do not invent a ruling or claim that a German paraphrase is original Arabic.
@@ -995,6 +1008,32 @@
         authenticity:"ṣaḥīḥ",
         verification_status:"verified",
         url:"https://islamweb.net/ar/library/content/0/705/%D8%A8%D8%A7%D8%A8-%D8%B1%D9%81%D8%B9-%D8%A7%D9%84%D9%8A%D8%AF%D9%8A%D9%86-%D8%A5%D8%B0%D8%A7-%D9%83%D8%A8%D8%B1-%D9%88%D8%A5%D8%B0%D8%A7-%D8%B1%D9%83%D8%B9-%D9%88%D8%A5%D8%B0%D8%A7-%D8%B1%D9%81%D8%B9#:~:text=%D8%A5%D8%B0%D8%A7%20%D8%B1%D9%81%D8%B9%20%D8%B1%D8%A3%D8%B3%D9%87%20%D9%85%D9%86%20%D8%A7%D9%84%D8%B1%D9%83%D9%88%D8%B9%20%D8%B1%D9%81%D8%B9%20%D9%8A%D8%AF%D9%8A%D9%87"
+      },
+      {
+        id:"bukhari-5273-khul-thabit-wife",
+        kind:"sunnah",
+        title:"Frau fordert Scheidung: Ḫulʿ bei ernsthafter Sorge um Pflichten in der Ehe",
+        speaker:"ʿAbdullāh ibn ʿAbbās",
+        work:"Ṣaḥīḥ al-Buḫārī",
+        reference:"Nr. 5273 · Kitāb aṭ-Ṭalāq · Bāb al-Ḫulʿ",
+        chapter:"Die Trennung durch Ḫulʿ",
+        excerpt:"Die Ehefrau von Ṯābit ibn Qays sagte, sie beanstande weder seine Religion noch seinen Charakter, fürchte aber, ihre ehelichen Pflichten nicht erfüllen zu können. Der Prophet ﷺ fragte nach der Rückgabe seines Gartens; sie stimmte zu, und er wies Ṯābit an, den Garten anzunehmen und die Trennung auszusprechen. Das belegt die Zulässigkeit eines begründeten Ḫulʿ.",
+        authenticity:"ṣaḥīḥ · Ṣaḥīḥ al-Buḫārī",
+        verification_status:"verified",
+        url:"https://dorar.net/h/obOg709f#:~:text="+encodeURIComponent("أتَرُدِّينَ عليه حَديقَتَه")
+      },
+      {
+        id:"tirmidhi-1187-divorce-without-reason",
+        kind:"sunnah",
+        title:"Frau verlangt Scheidung ohne anerkannten Grund: Warnung des Propheten ﷺ",
+        speaker:"Ṯawbān",
+        work:"Sunan at-Tirmiḏī",
+        reference:"Nr. 1187 · auch Sunan Abī Dāwūd Nr. 2226",
+        chapter:"Scheidung ohne anerkannten Grund",
+        excerpt:"Der Prophet ﷺ warnte ausdrücklich vor der Frau, die ohne anerkannten ernsthaften Grund von ihrem Mann die Scheidung fordert. Die Warnung richtet sich nicht pauschal gegen jede Frau, die eine Trennung erbitten muss. At-Tirmiḏī bezeichnete die Überlieferung als ḥasan; die genannte Fassung wird über Ṯawbān berichtet.",
+        authenticity:"ḥasan · Bewertung durch at-Tirmiḏī",
+        verification_status:"verified",
+        url:"https://dorar.net/h/gvODSfk9#:~:text="+encodeURIComponent("أيما امرأةٍ سألت زوجها طلاقًا من غير بأسٍ")
       }
     ];
     if (typeof window.searchIlmKnowledge === "function") {
