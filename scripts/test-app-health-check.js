@@ -293,8 +293,7 @@ try {
 // Independent Majlis tests may evolve without altering the protected push/deploy workflow.
 for (const regression of [
   "ilm-open-research-test.mjs",
-  "ilm-multi-provider-test.mjs",
-  "ilm-compose-fallback-test.mjs"
+  "ilm-gemini-only-test.mjs"
 ]) {
   try {
     const { execFileSync } = require("node:child_process");
