@@ -888,6 +888,37 @@
       return /(?:^| )(?:was (?:ist|bedeutet)|was versteht man unter|erklare|definition von) (?:den |die |das )?(?:iman|iiman)(?: |$)/.test(q)
         && !/(?:beweis|belege|quellen|wo finde|hadith nummer|wortlaut|ausfuhrlich)/.test(q);
     }
+    /* MAJLIS VERIFIED CORE V1350 — small source-checked regression corpus.
+       These are documentary records, not generated fatawa; expandable only after
+       checking a primary work, its exact passage, and its direct source URL. */
+    var ilmVerifiedCoreSources = [
+      {
+        id:"bukhari-703-ibn-umar-ruku-hands",
+        kind:"sunnah",
+        title:"Händeheben im Gebet beim Rukūʿ und beim Aufrichten",
+        speaker:"ʿAbdullāh ibn ʿUmar",
+        work:"Ṣaḥīḥ al-Buḫārī",
+        reference:"Kitāb Ṣifat aṣ-Ṣalāh · Bāb Rafʿ al-Yadayn · Bericht 703 (Islamweb-Zählung)",
+        chapter:"Heben der Hände beim Takbīr, Rukūʿ und Aufrichten",
+        excerpt:"Ich sah den Gesandten Allahs ﷺ beim Stehen zum Gebet seine Hände bis auf Schulterhöhe heben. Er hob die Hände auch beim Takbīr zum Rukūʿ und wenn er seinen Kopf aus dem Rukūʿ erhob. Bei der Niederwerfung tat er das nicht.",
+        authenticity:"ṣaḥīḥ",
+        verification_status:"verified",
+        url:"https://www.islamweb.net/ar/library/content/0/704/%D8%A8%D8%A7%D8%A8-%D8%B1%D9%81%D8%B9-%D8%A7%D9%84%D9%8A%D8%AF%D9%8A%D9%86-%D8%A5%D8%B0%D8%A7-%D9%83%D8%A8%D8%B1-%D9%88%D8%A5%D8%B0%D8%A7-%D8%B1%D9%83%D8%B9-%D9%88%D8%A5%D8%B0%D8%A7-%D8%B1%D9%81%D8%B9#:~:text=%D8%A5%D8%B0%D8%A7%20%D8%B1%D9%81%D8%B9%20%D8%B1%D8%A3%D8%B3%D9%87%20%D9%85%D9%86%20%D8%A7%D9%84%D8%B1%D9%83%D9%88%D8%B9"
+      },
+      {
+        id:"bukhari-704-malik-ruku-hands",
+        kind:"sunnah",
+        title:"Händeheben beim Rukūʿ und nach dem Aufrichten",
+        speaker:"Abū Qilābah über Mālik ibn al-Ḥuwayriṯ",
+        work:"Ṣaḥīḥ al-Buḫārī",
+        reference:"Kitāb Ṣifat aṣ-Ṣalāh · Bāb Rafʿ al-Yadayn · Bericht 704 (Islamweb-Zählung)",
+        chapter:"Heben der Hände beim Takbīr, Rukūʿ und Aufrichten",
+        excerpt:"Mālik ibn al-Ḥuwayriṯ hob beim Gebet die Hände zum Takbīr, vor dem Rukūʿ und nachdem er seinen Kopf aus dem Rukūʿ erhoben hatte. Er berichtete, dass der Gesandte Allahs ﷺ ebenso handelte.",
+        authenticity:"ṣaḥīḥ",
+        verification_status:"verified",
+        url:"https://islamweb.net/ar/library/content/0/705/%D8%A8%D8%A7%D8%A8-%D8%B1%D9%81%D8%B9-%D8%A7%D9%84%D9%8A%D8%AF%D9%8A%D9%86-%D8%A5%D8%B0%D8%A7-%D9%83%D8%A8%D8%B1-%D9%88%D8%A5%D8%B0%D8%A7-%D8%B1%D9%83%D8%B9-%D9%88%D8%A5%D8%B0%D8%A7-%D8%B1%D9%81%D8%B9#:~:text=%D8%A5%D8%B0%D8%A7%20%D8%B1%D9%81%D8%B9%20%D8%B1%D8%A3%D8%B3%D9%87%20%D9%85%D9%86%20%D8%A7%D9%84%D8%B1%D9%83%D9%88%D8%B9%20%D8%B1%D9%81%D8%B9%20%D9%8A%D8%AF%D9%8A%D9%87"
+      }
+    ];
     if (typeof window.searchIlmKnowledge === "function") {
       var oldSearch = window.searchIlmKnowledge;
       window.searchIlmKnowledge = async function (question, conversation, options) {
@@ -912,6 +943,18 @@
                 return true;
               });
           } catch (_e) {}
+        }
+        // Add only records that pass the same subject gate as the main corpus.
+        // Never display a verified hadith just because the user mentioned hands.
+        var verifiedCore = rankKnowledgeSources(question,ilmVerifiedCoreSources);
+        if (verifiedCore.length) {
+          var mergedKeys = Object.create(null);
+          list = (Array.isArray(list) ? list : []).concat(verifiedCore).filter(function(item){
+            var key = String(item.id || item.title || "");
+            if (mergedKeys[key]) return false;
+            mergedKeys[key] = true;
+            return true;
+          });
         }
         var seen = seenIds(conversation);
         var more = /\b(mehr|weitere|noch\s+\d+|fünf|5)\b/i.test(String(question || ""));
