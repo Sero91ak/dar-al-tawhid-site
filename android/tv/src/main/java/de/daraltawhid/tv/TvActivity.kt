@@ -32,6 +32,7 @@ class TvActivity : Activity() {
     private lateinit var body: LinearLayout
     private lateinit var footer: TextView
     private var activeTab = "home"
+    private var renderGeneration = 0
     private var hadithNumber = 1
     private var hadithTotal = 3350
     private var tadabburNumber = 0
@@ -109,6 +110,7 @@ class TvActivity : Activity() {
     }
 
     private fun show(tab: String) {
+        renderGeneration += 1
         activeTab = tab
         getPreferences(MODE_PRIVATE).edit().putString("tab", tab).apply()
         body.removeAllViews()
@@ -120,6 +122,7 @@ class TvActivity : Activity() {
     }
 
     private fun loadHome() {
+        val generation = renderGeneration
         body.addView(label("Gebetszeiten", 29f, gold, true))
         body.addView(label(
             "TV-Geräte haben häufig keinen GPS-Empfänger. Stadt mit OK auswählen – die Wahl bleibt gespeichert.",
@@ -130,12 +133,13 @@ class TvActivity : Activity() {
             getPreferences(MODE_PRIVATE).edit().putInt("city_index", cityIndex).apply()
             // Clear the previous home view before loading new times.
             show("home")
+            body.getChildAt(2)?.requestFocus()
         })
         body.addView(label("Lade aktuelle Gebetszeiten …", 19f, cream, false))
         val city = cities[cityIndex]
         val url = "https://dar-al-tawhid.de/api/prayer/times?lat=${city.second}&lon=${city.third}"
         fetchJson(url) { data ->
-            if (activeTab != "home" || cityIndex >= cities.size || cities[cityIndex] != city) return@fetchJson
+            if (generation != renderGeneration || activeTab != "home" || cities[cityIndex] != city) return@fetchJson
             val root = data?.optJSONObject("times")
                 ?: data?.optJSONObject("prayers")
                 ?: data?.optJSONObject("data")
@@ -177,6 +181,7 @@ class TvActivity : Activity() {
     }
 
     private fun loadHadith() {
+        val generation = renderGeneration
         body.addView(label("Ḥadīṯe & Āṯār", 29f, gold, true))
         val line = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL }
         line.addView(navButton("◀ Vorheriger") {
@@ -190,7 +195,7 @@ class TvActivity : Activity() {
         body.addView(line)
         body.addView(label("Lade Überlieferung HAD-${hadithNumber.toString().padStart(4, '0')} …", 18f, muted, false))
         fetchJson(base + "hadith/catalog.json") { catalog ->
-            if (activeTab != "hadith") return@fetchJson
+            if (generation != renderGeneration || activeTab != "hadith") return@fetchJson
             hadithTotal = catalog?.optInt("publishedCount", 3350) ?: 3350
             val series = catalog?.optJSONArray("series")
             val id = "HAD-${hadithNumber.toString().padStart(4, '0')}"
@@ -209,7 +214,7 @@ class TvActivity : Activity() {
                 return@fetchJson
             }
             fetchJson(base + "hadith/" + dir + id + ".json") { hadith ->
-                if (activeTab != "hadith") return@fetchJson
+                if (generation != renderGeneration || activeTab != "hadith") return@fetchJson
                 if (hadith == null) {
                     body.addView(label("Die Überlieferung ist momentan nicht abrufbar.", 19f, muted, false))
                     return@fetchJson
@@ -228,6 +233,7 @@ class TvActivity : Activity() {
     }
 
     private fun loadTadabbur() {
+        val generation = renderGeneration
         body.addView(label("Qurʾān & Tadabbur", 29f, gold, true))
         body.addView(label(
             "Hier wird Tadabbur zum jeweils angegebenen Vers angezeigt – nicht als Qurʾān-Wortlaut.",
@@ -245,7 +251,7 @@ class TvActivity : Activity() {
         body.addView(controls)
         body.addView(label("Lade geprüfte Tadabbur-Aussage …", 19f, cream, false))
         fetchJson(base + "quran/tadabbur/entries-index.json") { index ->
-            if (activeTab != "tadabbur") return@fetchJson
+            if (generation != renderGeneration || activeTab != "tadabbur") return@fetchJson
             tadabburTotal = index?.optInt("totalVerifiedEntries", 0) ?: 0
             val files = index?.optJSONArray("files")
             var position = tadabburNumber
@@ -268,7 +274,7 @@ class TvActivity : Activity() {
             }
             val entryPosition = position
             fetchJson(base + "quran/tadabbur/" + file) { batch ->
-                if (activeTab != "tadabbur") return@fetchJson
+                if (generation != renderGeneration || activeTab != "tadabbur") return@fetchJson
                 val item = batch?.optJSONArray("entries")?.optJSONObject(entryPosition)
                 if (item == null) {
                     body.addView(label("Dieser Datensatz ist derzeit nicht verfügbar.", 18f, muted, false))
