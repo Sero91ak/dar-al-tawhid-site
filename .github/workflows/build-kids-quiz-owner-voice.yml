@@ -33,6 +33,7 @@ on:
       - 'kids/data/dua-kids.json'
       - 'kids/tools/voice_text.py'
       - 'kids/data/quiz-voice-batch.json'
+      - 'kids/data/quiz-kids.json'
       - '.github/workflows/build-kids-quiz-owner-voice.yml'
 
 permissions:
@@ -69,7 +70,11 @@ jobs:
         run: |
           set -euo pipefail
           mapfile -t changed < <(git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" | sed '/^$/d')
-          if [ "${#changed[@]}" -eq 1 ] && [ "${changed[0]}" = "kids/data/dua-kids.json" ]; then
+          if printf '%s\n' "${changed[@]}" | grep -Fxq 'kids/data/quiz-kids.json'; then
+            echo "VOICE_BUILD_SCOPE=quiz" >> "$GITHUB_ENV"
+            echo "VOICE_AUTO_QUEUE=true" >> "$GITHUB_ENV"
+            echo "Quiz source changed: generate only missing and corrected question audio."
+          elif [ "${#changed[@]}" -eq 1 ] && [ "${changed[0]}" = "kids/data/dua-kids.json" ]; then
             echo "VOICE_BUILD_SCOPE=dua" >> "$GITHUB_ENV"
             echo "Pure kids/data/dua-kids.json push detected -> VOICE_BUILD_SCOPE=dua"
           fi
@@ -132,7 +137,9 @@ jobs:
           "$HOME/.local/bin/ffmpeg" -version 2>/dev/null | sed -n '1p'
 
       - name: Validate Kids speech normalization
-        run: python3 kids/tools/voice_text.py --self-test
+        run: |
+          python3 kids/tools/voice_text.py --self-test
+          python3 kids/tools/quiz_speech_guard.py --self-test
 
       - name: Validate all 900 German Kids quiz sentences before ElevenLabs
         run: python3 kids/tools/quiz_german_qa.py
@@ -257,6 +264,10 @@ jobs:
           def profile_revision(profile):
               return ARABIC_SYNTHESIS_REVISIONS.get(profile,"quiz-fusha-v4-native-20261008" if profile=="quiz_fusha" else SYNTHESIS_REVISION)
 
+          def speech_choice(label):
+              label=norm(label)
+              return label if not label or label.endswith((".", "!", "?", "؟")) else label+"."
+
           def quiz_prompt(q):
               question=norm(q.get("question"))
               labels=[norm((a or {}).get("label")) for a in (q.get("answers") or [])]
@@ -264,7 +275,7 @@ jobs:
               low=[x.casefold() for x in labels]
               if str(q.get("ageBand") or "")=="4-6" and len(low)==2 and "ja" in low and "nein" in low:
                   return norm(question+" Ja oder Nein?")
-              choices=" ".join(f"Antwort {i+1}: {label}." for i,label in enumerate(labels))
+              choices=" ".join(f"Antwort {i+1}: {speech_choice(label)}" for i,label in enumerate(labels))
               return norm(question+" "+choices)
 
           def duration(path):
@@ -1125,6 +1136,10 @@ jobs:
           print("Dua isolated word pack:",dua_word_manifest["counts"])
           print("Synthesis revision:",SYNTHESIS_REVISION)
           PY
+
+      - name: Audit source sentences against generated quiz voice manifest
+        if: env.VOICE_BUILD_SCOPE == 'quiz' && env.DAR_VOICE_PROVIDER_AVAILABLE == '1'
+        run: python3 kids/tools/quiz_speech_guard.py --manifest kids/data/quiz-audio.json
 
       - name: Commit complete Kids owner voice packs
         if: env.DAR_VOICE_PROVIDER_AVAILABLE == '1'
