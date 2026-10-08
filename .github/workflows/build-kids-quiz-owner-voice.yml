@@ -224,7 +224,7 @@ jobs:
                   # Only isolated learning words lose a contextual initial shadda.
                   # Full Duʿāʾ phrases keep every authored diacritic intact.
                   if profile=="quiz_fusha":
-                      value=value.replace("ﷺ","صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ").replace("عليه السلام","عَلَيْهِ السَّلَامُ")
+                      value=value.replace("ﷺ","صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ").replace("عليه السلام","عَلَيْهِ السَّلَامُ").replace("رضي الله عنها","رَضِيَ اللَّهُ عَنْهَا")
                   if profile=="dua_word":
                       value=strip_initial_context_shadda(value)
                   # Keep the visible/key text untouched; this is hidden synthesis text only.
