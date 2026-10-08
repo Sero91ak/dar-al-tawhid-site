@@ -179,3 +179,10 @@ Verbindlich für `/kids/` und alle künftigen Kids-Erweiterungen.
 ## Globale Quellenanzeige für Kinder — V1251
 
 In allen Kinderansichten bleibt der **konkrete Quellenbeleg als reiner, gut lesbarer Text** erhalten. Es werden keine Schaltflächen mit „Nachweis öffnen“, „Quelle öffnen“ oder „Beleg öffnen“ angeboten. Auch ältere Duʿāʾ-Dialoge und dynamisch hinzugefügte Bedienelemente dürfen diese externen Quellenaktionen nicht erneut einblenden. Die Audio-, Lern- und Navigationsfunktionen bleiben unverändert.
+
+## Mädchenfiguren – verbindliche Bedeckungsregel
+
+- Mädchenfiguren **niemals mit sichtbaren Haaren, Haaransatz oder unbedecktem Hals** darstellen.
+- Die Figur trägt einen vollständig bedeckenden Ḥiǧāb/Khimār. Für Gebetsanimationen und Gebetstrainer nur passende, vollständig bedeckende Gebetskleidung verwenden.
+- Dies gilt gleichermaßen für Avatare, Heroes, Illustrationen, Animationen, generierte Medien und Vorschaubilder.
+- Für reine Gebetszeiten-Anzeigen sind **keine Figuren nötig**; die Uhrzeit und gut lesbare animierte Typografie haben Vorrang.
