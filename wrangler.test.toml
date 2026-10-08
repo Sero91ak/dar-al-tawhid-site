@@ -45,6 +45,22 @@ namespace_id = "921302"
 limit = 3
 period = 60
 
+# Independent OpenAI search fallback budget. No API key is committed.
+# Cloudflare secret: OPENAI_API_KEY (configure via wrangler secret put).
+[[ratelimits]]
+name = "ILM_OPENAI_GLOBAL_LIMIT"
+namespace_id = "921303"
+[ratelimits.simple]
+limit = 12
+period = 60
+
+[[ratelimits]]
+name = "ILM_OPENAI_USER_LIMIT"
+namespace_id = "921304"
+[ratelimits.simple]
+limit = 4
+period = 60
+
 [vars]
 PREVIEW_GATE_USER = "Dawud"
 PREVIEW_GATE_PASS = "Malik20"
