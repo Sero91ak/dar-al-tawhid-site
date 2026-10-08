@@ -195,9 +195,12 @@
     var full=root.querySelector('[data-dsl="full"]');
     var slow=root.querySelector('[data-dsl="slow"]');
     var repeat=root.querySelector('[data-dsl="repeat"]');
+    var follow=root.querySelector('[data-dsl="follow"]');
     if(full)full.textContent=playing&&mode==="full"?"Stopp":"Ganz hören";
     if(slow)slow.textContent=playing&&mode==="slow"?"Stopp":"Langsam hören";
     if(repeat)repeat.textContent=playing&&mode==="word"?"Stopp":"Wort wiederholen";
+    if(follow)follow.textContent=playing&&mode==="follow"?"Stopp":"Wort für Wort";
+    root.classList.toggle("phrase-playing",playing&&(mode==="full"||mode==="slow"));
   }
   function paintSelection(){
     if(!root||!currentDua)return;
@@ -219,7 +222,7 @@
     if(!root)return;
     root.classList.toggle("exact-ready",!!on);
     root.querySelectorAll("[data-seg]").forEach(function(n){n.disabled=!on});
-    ["repeat","prev","next","full","slow"].forEach(function(a){
+    ["repeat","follow","prev","next","full","slow"].forEach(function(a){
       var b=root.querySelector('[data-dsl="'+a+'"]');
       if(b)b.disabled=!on;
     });
@@ -310,7 +313,7 @@
     stopAudio();
     var token=playToken;
     playing=true;
-    mode="full";
+    mode="follow";
     paintControls();
     setStatus("Wort für Wort: Die Markierung folgt genau der Aufnahme.","");
     ensureAudioAttached();
@@ -353,12 +356,12 @@
   }
   function playWhole(slow){
     if(!currentDua)return false;
-    // "Ganz hören" in learning mode traverses every recorded word exactly.
-    // The original uninterrupted full voice remains on the Duʿāʾ detail.
-    if(!slow&&playWordSequence())return true;
+    // Full playback uses the uninterrupted native Fuṣḥā master.
+    // Slow playback uses its dedicated slower master.
+    // Only explicit word-follow sequences individual word recordings.
     var direct=slow?currentDua.audioArabicSlowUrl:currentDua.audioArabicUrl;
     if(direct){
-      return playUrl(direct,slow?"slow":"full",slow?"Langsam und deutlich zuhören …":"Duʿāʾ anhören …");
+      return playUrl(direct,slow?"slow":"full",slow?"Langsame Fuṣḥā-Gesamtaufnahme …":"Flüssige Fuṣḥā-Gesamtaufnahme …");
     }
     var run=function(p){
       var text=arabicText(currentDua);
@@ -451,7 +454,7 @@
       '<section class="dsl-sheet" role="dialog" aria-modal="true" aria-labelledby="dslTitle">'+
         '<header class="dsl-head">'+
           '<button class="dsl-close" type="button" data-dsl="close" aria-label="Lernmodus schließen">×</button>'+
-          '<div class="dsl-headcopy"><small>DUʿĀʾ LERNEN</small><strong id="dslTitle">Duʿāʾ lernen</strong><span id="dslSub">Serhat · Fuṣḥā · Wort für Wort</span></div>'+
+          '<div class="dsl-headcopy"><small>DUʿĀʾ LERNEN</small><strong id="dslTitle">Duʿāʾ lernen</strong><span id="dslSub">Fuṣḥā · Wort für Wort</span></div>'+
           '<div class="dsl-count" id="dslCount">1 / 1</div>'+
         '</header>'+
         '<div class="dsl-progress"><i id="dslProgress"></i></div>'+
@@ -470,7 +473,8 @@
           '<div class="dsl-controls">'+
             '<button class="dsl-play primary" type="button" data-dsl="full">Ganz hören</button>'+
             '<button class="dsl-play slow" type="button" data-dsl="slow">Langsam hören</button>'+
-            '<button class="dsl-play repeat" type="button" data-dsl="repeat">Wort wiederholen</button>'+
+            '<button class="dsl-play repeat" type="button" data-dsl="repeat">Wort wiederholen</button>'+ 
+            '<button class="dsl-play follow" type="button" data-dsl="follow">Wort für Wort</button>'+
           '</div>'+
           '<div class="dsl-speednote">Langsam hören ist eine eigene V4-Aufnahme – keine künstliche Zeitdehnung.</div>'+
           '<div class="dsl-stepnav">'+
@@ -564,6 +568,11 @@
     if(a==="repeat"){
       if(playing&&mode==="word"){stopAudio();setStatus("Wiedergabe gestoppt.","")}
       else playWord(currentIndex);
+      return;
+    }
+    if(a==="follow"){
+      if(playing&&mode==="follow"){stopAudio();setStatus("Wiedergabe gestoppt.","")}
+      else if(!playWordSequence())setStatus("Wortaufnahmen noch nicht vollständig verfügbar.","bad");
       return;
     }
     if(a==="prev"){selectIndex(currentIndex-1,{play:true});return}

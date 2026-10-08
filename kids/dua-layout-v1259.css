@@ -136,3 +136,32 @@ html body .dsl .dsl-status{
  html body .dsl .dsl-scroll{justify-content:safe flex-start!important;padding-top:8px!important}
  html body .dsl .dsl-speednote{display:none!important}
 }
+
+/* KIDS_DUA_PLAYBACK_CORRECTION_V1260: native phrase audio + separate focused word mode. */
+html body .dsl .dsl-scroll{
+ justify-content:flex-start!important;
+ padding-top:clamp(20px,5dvh,52px)!important
+}
+html body .dsl .dsl-head{padding-bottom:6px!important}
+html body .dsl .dsl-controls{
+ grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+ gap:8px!important;margin-top:11px!important
+}
+html body .dsl .dsl-controls .dsl-play{
+ min-height:48px!important;font-size:clamp(12px,3.3vw,15px)!important;
+ padding:6px 8px!important;grid-column:auto!important
+}
+html body .dsl .dsl-controls .dsl-play.follow{
+ border-color:rgba(236,201,123,.32)!important;
+ background:linear-gradient(135deg,rgba(172,129,65,.20),rgba(32,73,80,.4))!important;
+ color:#f9dda0!important
+}
+html body .dsl.phrase-playing .dsl-word.active.ar{
+ color:#fff!important;background:transparent!important;box-shadow:none!important
+}
+html body .dsl.phrase-playing .dsl-word.active.tr{
+ color:#f1d99d!important;background:transparent!important;box-shadow:none!important
+}
+@media(max-height:700px){
+ html body .dsl .dsl-scroll{padding-top:12px!important}
+}
