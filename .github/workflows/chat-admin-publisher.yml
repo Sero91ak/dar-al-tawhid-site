@@ -1,0 +1,68 @@
+name: Chat → DAR Admin Publisher
+
+# Published posts still go through the pre-existing DAR Admin Publisher.
+# Adding/changing workflows alone NEVER publishes visitor content.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'content/admin/chat-publish-requests/*.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dar-chat-approved-post-publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Validate and publish expressly approved adult-visitor posts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout published commit
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Select newly added approved requests only
+        shell: bash
+        env:
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          : > chat-publish-requests.txt
+          if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+            echo "::error::Unknown parent commit: refusing to replay previous requests"
+            exit 1
+          fi
+          git diff --diff-filter=A --name-only "$BEFORE" "$AFTER" -- 'content/admin/chat-publish-requests/*.json' > chat-publish-requests.txt
+          while IFS= read -r request; do
+            [ -n "$request" ] || continue
+            node scripts/chat-admin-publish.js --check "$request"
+          done < chat-publish-requests.txt
+
+      - name: Publish through existing DAR Admin service
+        shell: bash
+        env:
+          ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
+        run: |
+          set -euo pipefail
+          if [ ! -s chat-publish-requests.txt ]; then
+            echo "No newly approved requests. Nothing to publish."
+            exit 0
+          fi
+          if [ -z "$ADMIN_PUBLISH_SECRET" ]; then
+            echo "::error::ADMIN_PUBLISH_SECRET is not configured as a GitHub Actions secret"
+            exit 1
+          fi
+          while IFS= read -r request; do
+            [ -n "$request" ] || continue
+            node scripts/chat-admin-publish.js --publish "$request"
+          done < chat-publish-requests.txt
