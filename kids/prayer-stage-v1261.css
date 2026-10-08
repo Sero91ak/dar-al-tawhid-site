@@ -1,0 +1,173 @@
+/* KIDS SALAH STAGE V1 — living typographic prayer clock, no figures or system emoji.
+   The existing home Hero, salam, Qur'an resume and bottom navigation are untouched. */
+#view-today .kids-salah-stage{
+  --salah-gleam:#ffe8ac;--salah-gold:#e8c16e;--salah-cold:#a8ecec;
+  position:relative;isolation:isolate;overflow:hidden;
+  margin:13px -6px 0;padding:20px clamp(14px,4vw,25px) 17px;
+  border-radius:29px;
+  background:radial-gradient(ellipse at 84% 1%,rgba(83,177,196,.22),transparent 52%),
+    radial-gradient(ellipse at 0% 102%,rgba(220,173,87,.12),transparent 58%),
+    linear-gradient(134deg,#0b2537 1%,#123c4c 53%,#092739 100%);
+  box-shadow:0 18px 42px rgba(2,12,27,.23),inset 0 0 0 1px rgba(246,220,158,.20);
+  color:#fff7e9;text-align:center;
+  font-family:"Fredoka","SF Pro Rounded",system-ui,sans-serif;
+}
+#view-today .kids-salah-stage::before{
+  content:"";pointer-events:none;position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(112deg,transparent 18%,rgba(255,248,211,.085) 37%,transparent 57%);
+  transform:translateX(-120%);animation:kidsSalahSkySweep 12s ease-in-out infinite;
+}
+#view-today .kids-salah-stage::after{
+  content:"";pointer-events:none;position:absolute;right:-66px;top:-79px;
+  width:210px;height:210px;border:1px solid rgba(250,212,134,.11);
+  border-radius:50%;box-shadow:0 0 0 22px rgba(227,199,124,.017),0 0 0 52px rgba(223,199,146,.015);
+}
+#view-today .kids-salah-top{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:8px;text-align:left;}
+#view-today .kids-salah-kicker{
+  font:650 clamp(10px,2.8vw,12px)/1.25 "Fredoka",system-ui,sans-serif;
+  letter-spacing:.13em;color:rgba(255,242,212,.84);
+}
+#view-today .kids-salah-location{
+  border:1px solid rgba(230,216,178,.22);border-radius:999px;background:rgba(255,255,255,.065);
+  color:#f9e6b9;min-height:32px;max-width:52%;padding:6px 12px;
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  font:600 11px/1.1 "Fredoka",system-ui,sans-serif;cursor:pointer;
+}
+#view-today .kids-salah-location span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#view-today .kids-salah-location::before{
+  content:"";flex:none;width:7px;height:7px;border-radius:50%;background:#dfc375;
+  box-shadow:0 0 0 3px rgba(251,221,136,.1),0 0 13px rgba(244,216,139,.3);
+}
+#view-today .kids-salah-heading{
+  margin:17px auto 2px;font-size:clamp(27px,7.4vw,45px);line-height:1.09;letter-spacing:-.035em;
+  font-weight:750;text-transform:none;position:relative;z-index:2;color:#fff4de;
+  text-shadow:0 5px 18px rgba(0,0,0,.25);
+}
+#view-today .kids-salah-heading em{
+  display:inline-block;font-style:normal;letter-spacing:.018em;
+  background:linear-gradient(100deg,#ffeaaf,#d9a553 31%,#fff4c9 48%,#d3a25a 67%,#ffebb9);
+  background-size:210% 100%;-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;animation:kidsSalahGold 6.8s ease-in-out infinite;
+}
+#view-today .kids-salah-name{
+  display:block;margin:7px 0 0;color:#b2ece9;font-size:clamp(19px,5.3vw,24px);
+  font-weight:650;letter-spacing:.008em;min-height:25px;
+}
+#view-today .kids-salah-clock{
+  display:block;position:relative;z-index:2;margin:0;
+  font:750 clamp(60px,18vw,93px)/1.17 "Fredoka","SF Pro Rounded",system-ui,sans-serif;
+  font-variant-numeric:tabular-nums;letter-spacing:-.075em;padding-right:.09em;
+  color:#ffe4a4;text-shadow:0 0 28px rgba(247,202,117,.25),0 5px 0 rgba(4,14,25,.15);
+  animation:kidsSalahClockGlow 4.8s ease-in-out infinite;
+}
+#view-today .kids-salah-next{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  min-height:24px;color:rgba(255,248,231,.92);font-size:clamp(12px,3.5vw,15px);font-weight:550;
+}
+#view-today .kids-salah-beat{
+  width:7px;height:7px;border-radius:50%;background:#a8ead7;
+  box-shadow:0 0 0 4px rgba(145,229,207,.11),0 0 12px rgba(139,239,215,.48);
+  animation:kidsSalahBeat 2.5s ease-in-out infinite;
+}
+#view-today .kids-salah-countdown{
+  font-weight:700;color:#f8df9d;font-variant-numeric:tabular-nums;letter-spacing:.025em;
+}
+#view-today .kids-salah-progress{
+  width:100%;height:4px;background:rgba(225,242,235,.13);
+  margin:14px 0 15px;border-radius:100px;overflow:hidden;
+}
+#view-today .kids-salah-progress > span{
+  display:block;height:100%;width:0%;border-radius:inherit;
+  background:linear-gradient(90deg,#68d6d0,#f5d483);box-shadow:0 0 13px rgba(250,214,133,.4);
+  transition:width .7s linear;
+}
+#view-today .kids-salah-five{
+  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));
+  position:relative;z-index:2;gap:0;
+  border-top:1px solid rgba(240,224,188,.14);padding-top:12px;
+}
+#view-today .kids-salah-five button{
+  appearance:none;border:0;background:transparent;min-width:0;
+  padding:2px 0 1px;color:rgba(250,243,226,.76);
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  font-family:inherit;cursor:default;
+}
+#view-today .kids-salah-five button[aria-current="true"]{color:#ffe4a7}
+#view-today .kids-salah-five button .kids-salah-dot{
+  width:5px;height:5px;border-radius:50%;background:rgba(255,249,221,.33);display:block;
+}
+#view-today .kids-salah-five button[aria-current="true"] .kids-salah-dot{
+  width:8px;height:8px;background:#ffdfa0;box-shadow:0 0 13px rgba(255,222,156,.68);
+}
+#view-today .kids-salah-five button .kids-salah-prayer{
+  font-weight:650;font-size:clamp(11px,2.8vw,14px);line-height:1.15;white-space:nowrap;
+}
+#view-today .kids-salah-five button time{
+  font-weight:500;font-size:clamp(11px,3vw,14px);font-variant-numeric:tabular-nums;white-space:nowrap;
+}
+#view-today .kids-salah-status{
+  margin:10px 0 0;color:rgba(255,240,207,.67);font-size:11px;line-height:1.35;
+}
+#view-today .kids-salah-location:focus-visible,
+.kids-salah-overlay button:focus-visible,.kids-salah-overlay input:focus-visible,
+.kids-salah-overlay select:focus-visible{outline:2px solid #f9d580;outline-offset:3px}
+.app[data-gender="girl"] #view-today .kids-salah-stage{
+  --salah-gold:#f4c5d5;
+  background:radial-gradient(ellipse at 82% 0%,rgba(226,141,205,.21),transparent 55%),
+  radial-gradient(ellipse at 10% 100%,rgba(218,157,123,.1),transparent 53%),
+  linear-gradient(137deg,#281934,#3a284a 55%,#211d38 100%);
+  box-shadow:0 18px 42px rgba(10,7,21,.23),inset 0 0 0 1px rgba(248,213,222,.22);
+}
+.app[data-gender="girl"] #view-today .kids-salah-heading em{
+  background-image:linear-gradient(100deg,#ffedf5,#f0b7d2 35%,#ffe7e9 52%,#dba9c9 72%,#fff1e8);
+}
+.app[data-gender="girl"] #view-today .kids-salah-clock{color:#ffe5f0;text-shadow:0 0 24px rgba(238,171,211,.27)}
+.app[data-gender="girl"] #view-today .kids-salah-name{color:#eac5f1}
+.app[data-gender="girl"] #view-today .kids-salah-progress > span{background:linear-gradient(90deg,#bd97df,#f4b9cb)}
+.app[data-gender="girl"] #view-today .kids-salah-five button[aria-current="true"]{color:#ffe0ec}
+@keyframes kidsSalahGold{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes kidsSalahClockGlow{0%,100%{filter:brightness(1)}50%{filter:brightness(1.13)}}
+@keyframes kidsSalahBeat{0%,100%{opacity:.8;transform:scale(.85)}50%{opacity:1;transform:scale(1.23)}}
+@keyframes kidsSalahSkySweep{0%,32%,100%{transform:translateX(-120%)}65%{transform:translateX(120%)}}
+@media(max-width:370px){
+ #view-today .kids-salah-stage{padding-inline:12px}
+ #view-today .kids-salah-heading{font-size:26px}
+ #view-today .kids-salah-clock{font-size:58px}
+ #view-today .kids-salah-five button .kids-salah-prayer{font-size:10.5px}
+ #view-today .kids-salah-five button time{font-size:10.5px}
+}
+@media(min-width:700px){
+ #view-today .kids-salah-stage{padding:25px 28px 23px;margin:18px auto 0;max-width:770px}
+ #view-today .kids-salah-clock{font-size:105px}
+ #view-today .kids-salah-five button .kids-salah-prayer{font-size:16px}
+ #view-today .kids-salah-five button time{font-size:15px}
+}
+@media(prefers-reduced-motion:reduce){
+ #view-today .kids-salah-stage::before,
+ #view-today .kids-salah-heading em,
+ #view-today .kids-salah-clock,
+ #view-today .kids-salah-beat{animation:none!important}
+ #view-today .kids-salah-progress > span{transition:none}
+}
+/* Settings dialog: parent-operable location, not a second home screen */
+.kids-salah-overlay[hidden]{display:none!important}
+.kids-salah-overlay{position:fixed;inset:0;z-index:100200;background:rgba(2,10,20,.78);
+  display:grid;place-items:center;padding:18px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.kids-salah-dialog{width:min(100%,430px);max-height:min(88dvh,700px);overflow:auto;
+  border-radius:28px;border:1px solid rgba(243,217,166,.28);padding:22px 18px;
+  background:linear-gradient(155deg,#173849,#0b2637);color:#fff2d7;
+  box-shadow:0 30px 90px rgba(0,0,0,.42);font-family:"Fredoka",system-ui,sans-serif}
+.kids-salah-dialog h2{margin:0 0 6px;font-size:26px}
+.kids-salah-dialog p{font-size:14px;line-height:1.45;opacity:.86}
+.kids-salah-dialog label{font-weight:600;font-size:14px;display:block;margin:12px 0 6px}
+.kids-salah-dialog input,.kids-salah-dialog select{
+ width:100%;min-height:47px;padding:10px 12px;border-radius:13px;
+ background:#ecf3ee;border:0;color:#13313a;font:550 16px "Fredoka",system-ui,sans-serif}
+.kids-salah-dialog button{min-height:44px;padding:10px 14px;border-radius:14px;font:650 15px "Fredoka",system-ui,sans-serif;cursor:pointer}
+.kids-salah-dialog .kids-salah-primary{border:0;background:#eacb89;color:#172d38;width:100%}
+.kids-salah-dialog .kids-salah-close{float:right;border:1px solid rgba(255,241,211,.22);background:rgba(255,255,255,.06);color:#fff3d7}
+.kids-salah-results{display:grid;gap:5px;margin-top:7px}
+.kids-salah-results button{background:rgba(255,255,255,.09);color:#fff5e8;border:1px solid rgba(255,255,255,.08);text-align:left}
+.kids-salah-dialog details{margin:17px 0 4px;border-top:1px solid rgba(255,255,255,.15);padding-top:10px}
+.kids-salah-dialog summary{cursor:pointer;font-size:14px}
+.kids-salah-dialog .kids-salah-err{min-height:20px;color:#ffdcbf;font-size:12px}
