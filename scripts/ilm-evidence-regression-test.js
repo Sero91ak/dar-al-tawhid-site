@@ -27,7 +27,7 @@ const unrelated = [
   { id: "quran-20-71", kind: "quran", title: "Ṭā-Hā 20:71",
     excerpt: "Ich werde eure Hände und Füße abschneiden." },
   { id: "generic-hands", kind: "quran", title: "Hände oben halten",
-    excerpt: "Eine Hand erhob sich hoch beim Gebet; ohne Bezug auf Rukūʿ." }
+    excerpt: "Eine Hand erhob sich hoch beim Gebet; die konkrete Gebetshaltung wird nicht genannt." }
 ];
 assert.equal(rankKnowledgeSources(question, unrelated).length, 0,
   "Unrelated Qurʾān verses must not be presented as ritual proofs");
