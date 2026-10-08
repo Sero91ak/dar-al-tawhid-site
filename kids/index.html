@@ -2836,7 +2836,7 @@ html:not([data-view="today"]) .view.active{
 </style>
 
 <link rel="stylesheet" href="/kids/profile-stability-v1256.css?v=1258" data-kids-profile-stability="1256">
-<link rel="stylesheet" href="/kids/prayer-stage-v1261.css?v=1272" data-kids-salah-stage="1272">
+<link rel="stylesheet" href="/kids/prayer-stage-v1261.css?v=1274" data-kids-salah-stage="1274">
 </head>
 <body>
 <div class="kids-open" id="kidsLaunch" data-kids-launch="v95">
@@ -2916,7 +2916,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.08.90</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.08.91</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3302,7 +3302,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v169-salah-photoreal1272";
+const KIDS_BUILD_ID="kids-shell-v170-salah-native-clean1274";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6556,7 +6556,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=8"></script>\n<script src="/kids/dua-smart-learn.js?v=1261"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v169-salah-photoreal1272";
+  var KIDS_BUILD_ID="kids-shell-v170-salah-native-clean1274";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -6572,13 +6572,13 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1273",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1274",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
   }
   window.addEventListener("load",function(){
-    fetch("/kids/version.json?v=1273",{cache:"no-store"})
+    fetch("/kids/version.json?v=1274",{cache:"no-store"})
       .then(function(r){return r.ok?r.json():null})
       .then(function(v){
         var live=String(v&&v.buildId||"");
@@ -11249,6 +11249,32 @@ html[data-view="stories"] #view-stories > :last-child{
 
 <link rel="stylesheet" href="/kids/dua-layout-v1259.css?v=1261" data-kids-dua-layout="1259">
 <link rel="stylesheet" href="/kids/dua-learn-cinema-v1261.css?v=1261" data-kids-dua-cinema="1261">
+<style id="kids-salah-native-old-hero-guard-v1274">
+/* KIDS_SALAH_DIRECT_FALLBACK_V1274: valid even if old cached external CSS is served. */
+html.kids-ios-app #kidsLaunch,html.dar-ios-native-app #kidsLaunch{display:none!important}
+#view-today .kids-salah-home-world{
+ background:linear-gradient(180deg,rgba(3,16,32,.10),rgba(4,22,38,.14) 40%,
+ rgba(3,23,39,.52) 68%,#082536 100%),url("/kids/assets/kids-salah-v1272/hero-home.png?v=1274") center 44%/cover no-repeat!important;
+}
+#view-today .kids-salah-home-world::before{content:none!important;display:none!important}
+#view-today .kids-salah-home-world > .hero::before,
+#view-today .kids-salah-home-world > .hero::after{
+ content:none!important;display:none!important;background:none!important;
+}
+#view-today .kids-salah-home-world > .hero{
+ background:none!important;min-height:clamp(388px,103vw,430px)!important;max-height:430px!important
+}
+#view-today .kids-salah-home-world > .kids-salah-stage{
+ background:transparent!important;
+}
+.kids-salah-day::before{
+ background:linear-gradient(180deg,rgba(3,18,33,.14),rgba(3,22,37,.10) 44%,#092a3c 100%),
+ url("/kids/assets/kids-salah-v1272/hero-day.png?v=1274") center 42%/cover no-repeat!important;
+}
+@media(min-width:700px){#view-today .kids-salah-home-world > .hero{
+ min-height:505px!important;max-height:540px!important
+}}
+</style>
 <!-- KIDS_SALAH_STAGE_V1261: placed after hero, before continue-listening -->
-<script defer src="/kids/prayer-stage-v1261.js?v=1272" data-kids-salah-stage="1272"></script>
+<script defer src="/kids/prayer-stage-v1261.js?v=1274" data-kids-salah-stage="1274"></script>
 </html>
