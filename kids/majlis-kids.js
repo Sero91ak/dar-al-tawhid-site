@@ -3,7 +3,7 @@
   "use strict";
   if (window.DarKidsMajlis || !document.querySelector("#view-today .big-choice-grid")) return;
   var state = { open:false, approved:false, busy:false, age:"6–8", turns:0,
-    audio:null, recording:null, microphone:null, recordingTimer:null, audioUrl:null, lastAnswer:null };
+    audio:null, recording:null, microphone:null, recordingTimer:null, audioUrl:null, lastAnswer:null, serverReady:false, serverAuthorized:false };
   try { var savedAge=localStorage.getItem("kids.age"); if(["4–5","6–8","9–10"].includes(savedAge)) state.age=savedAge; } catch (_) {}
   var entries = [
     {rx:/(wer ist allah|wer ist gott|wer ist unser schöpfer|was ist tawhid|was ist tawḥīd|einzigkeit allahs)/i,answer:"Allah ist unser Schöpfer. Er ist Einer und niemand ist so wie Er. Das lernen wir in Sūrah al-Ikhlāṣ. Magst du die kurze Sūrah im Qurʾān-Bereich hören?",source:"Qurʾān 112:1–4"},
@@ -55,6 +55,12 @@
   var checkLabel=el("label"),check=el("input");check.type="checkbox";
   checkLabel.appendChild(check);checkLabel.appendChild(el("span","","Ich bin eine erziehungsberechtigte Person und öffne den Lernbereich für dieses Kind."));
   gate.appendChild(checkLabel);
+  var codeLabel=el("label","km-code-label","Eltern-Zugangscode für die geschützte Sprachfunktion");
+  var codeField=el("input","km-code-input");codeField.type="password";codeField.autocomplete="off";
+  codeField.placeholder="Nur für Erwachsene";codeField.setAttribute("aria-label","Eltern-Zugangscode");
+  codeLabel.appendChild(codeField);gate.appendChild(codeLabel);
+  var gateInfo=el("p","km-gate-info","Vorschau: Hier kannst du feste Lernantworten ausprobieren. Für Spracherkennung und die Masterstimme muss der geschützte Elternzugang eingerichtet sein.");
+  gate.appendChild(gateInfo);
   var approve=el("button","","Lernbereich öffnen");approve.type="button";approve.disabled=true;
   gate.appendChild(approve);guardian.appendChild(gate);
   root.appendChild(top);root.appendChild(notice);root.appendChild(chat);root.appendChild(form);root.appendChild(guardian);
@@ -92,16 +98,35 @@
     }
     return {answer:"Das ist eine interessante Frage! Dafür habe ich hier noch keine ausreichend geprüfte Kinderantwort. Frag bitte deine Eltern. Gemeinsam könnt ihr in den Wissensbereichen unserer App nachschauen.",source:null};
   }
-  function submitQuestion(value) {
+  async function submitQuestion(value) {
     if(!state.approved||state.busy)return;
     var q=String(value||"").trim().slice(0,350);if(!q){status.textContent="Schreib erst eine Frage.";return;}
     var suggestions=chat.querySelector(".km-picks");if(suggestions)suggestions.remove();
     message("you",q);input.value="";state.audio=null;
-    var item=responseFor(q);
+    var item=null;
+    if(state.serverAuthorized){
+      state.busy=true;send.disabled=true;status.textContent="Geprüfte Antwort wird gesucht …";
+      try{
+        var response=await fetch("/kids/api/majlis/answer",{
+          method:"POST",credentials:"same-origin",headers:{"Content-Type":"application/json"},
+          body:JSON.stringify({question:q,age:state.age})
+        });
+        if(!response.ok)throw Error("answer-unavailable");
+        var data=await response.json();
+        if(!data.ok||!data.answer)throw Error("answer-invalid");
+        item={answer:String(data.answer),source:data.source||null,answerId:data.answerId||null};
+      }catch(_){
+        item={answer:"Die Verbindung zum geschützten Lernbereich funktioniert gerade nicht. Bitte versuche es später erneut oder frage deine Eltern.",source:null};
+      }finally{state.busy=false;send.disabled=false}
+    } else {
+      item=responseFor(q);
+    }
+    if(!state.open)return;
     state.lastAnswer=item;
     message("guide",item.answer,item.source);
-    listen.disabled=false;state.turns++;
-    status.textContent=item.source?"Aus einer geprüften Quelle erklärt · zum Anhören tippen.":"Für diese Frage ist die Antwort bewusst begrenzt.";
+    listen.disabled=!(state.serverAuthorized&&item.answerId);
+    state.turns++;
+    status.textContent=state.serverAuthorized?(item.source?"Geprüfte Antwort · mit Masterstimme anhörbar.":"Für diese Frage ist die Antwort bewusst begrenzt."):"Vorschau ohne Sprach-KI · nur feste Lernantworten.";
     if(state.turns%3===0){
       var row=el("div","km-picks"),b=el("button","","✨ Kleine Denkfrage");
       b.type="button";b.addEventListener("click",function(){
@@ -113,12 +138,12 @@
     }
   }
   async function hear() {
-    if(!state.lastAnswer||state.busy)return;
+    if(!state.serverAuthorized||!state.lastAnswer?.answerId||state.busy)return;
     // No browser TTS fallback: the product promises Serhat's actual master voice.
     state.busy=true;listen.disabled=true;status.textContent="Masterstimme wird angefragt …";
     try {
       var res=await fetch("/kids/api/majlis/speak",{method:"POST",credentials:"same-origin",
-        headers:{"Content-Type":"application/json"},body:JSON.stringify({text:state.lastAnswer.answer})});
+        headers:{"Content-Type":"application/json"},body:JSON.stringify({answerId:state.lastAnswer.answerId})});
       if(!res.ok||!(res.headers.get("Content-Type")||"").includes("audio/"))throw Error("voice-unavailable");
       var audioBlob=await res.blob();
       if(state.audioUrl)URL.revokeObjectURL(state.audioUrl);
@@ -131,6 +156,7 @@
   async function startOrStopMic(){
     if(state.recording && state.recording.state==="recording"){state.recording.stop();return;}
     if(!state.approved||state.busy)return;
+    if(!state.serverAuthorized){status.textContent="Sprachaufnahme gibt es erst im geschützten Elternmodus. Die Vorschau funktioniert mit Tippen.";return;}
     if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia||!window.MediaRecorder){
       status.textContent="Auf diesem Gerät ist die Aufnahme hier nicht verfügbar. Du kannst deine Frage schreiben.";return;
     }
@@ -143,7 +169,7 @@
         state.microphone.getTracks().forEach(function(t){t.stop()});
         state.audio=new Blob(parts,{type:state.recording.mimeType||"audio/webm"});
         mic.textContent="🎙";mic.setAttribute("aria-label","Sprachnachricht aufnehmen");
-        status.textContent="Aufnahme bereit. Tippe auf ↑, um sie erkennen zu lassen und abzuschicken.";
+        status.textContent="Aufnahme bereit. Tippe auf ↑, um deine Wörter erkennen zu lassen. Du bestätigst den Text danach.";
       };
       state.recording.start();mic.textContent="■";mic.setAttribute("aria-label","Aufnahme beenden");
       status.textContent="Du sprichst … Tippe auf ■ zum Beenden (maximal 15 Sekunden).";
@@ -160,14 +186,15 @@
       if(!res.ok)throw Error("no-transcription");
       var result=await res.json(),transcript=String(result.text||"").trim();
       if(!transcript)throw Error("empty-transcription");
-      state.busy=false;submitQuestion(transcript);
-    }catch(_){status.textContent="Spracherkennung noch nicht freigeschaltet. Bitte tippe deine Frage ein."}
+      state.busy=false;state.audio=null;input.value=transcript;input.focus();
+      status.textContent="Das habe ich verstanden. Prüfe oder korrigiere die Wörter und tippe dann auf ↑.";
+    }catch(_){status.textContent="Die Spracherkennung klappt gerade nicht. Bitte tippe deine Frage ein."}
     finally{state.busy=false;send.disabled=false;mic.disabled=false}
   }
   function close(){
     if(state.recording&&state.recording.state==="recording")state.recording.stop();
     if(state.audioUrl){URL.revokeObjectURL(state.audioUrl);state.audioUrl=null}
-    state.open=false;state.approved=false;state.audio=null;
+    state.open=false;state.approved=false;state.serverAuthorized=false;state.audio=null;codeField.value="";
     var app=document.querySelector(".app");if(app)app.inert=false;
     root.classList.remove("km-open","km-parent-open");document.body.style.removeProperty("overflow");
     entry.focus({preventScroll:true});
@@ -176,10 +203,27 @@
     if(state.open)return;
     var age=(document.querySelector(".app")||{}).getAttribute?.("data-age");
     if(["4–5","6–8","9–10"].includes(age))state.age=age;
-    state.open=true;state.approved=false;check.checked=false;approve.disabled=true;
+    state.open=true;state.approved=false;state.serverAuthorized=false;state.serverReady=false;check.checked=false;approve.disabled=true;codeField.value="";codeField.style.display="none";codeLabel.style.display="none";
     root.classList.add("km-open","km-parent-open");
     var app=document.querySelector(".app");if(app)app.inert=true;
     welcome();check.focus();
+    fetch("/kids/api/majlis/session",{method:"GET",credentials:"same-origin",cache:"no-store"})
+      .then(function(r){return r.ok?r.json():null})
+      .then(function(data){
+        if(!state.open)return;
+        state.serverReady=!!(data&&data.ok);
+        state.serverAuthorized=!!(data&&data.authorized);
+        if(state.serverReady){
+          gateInfo.textContent=state.serverAuthorized?
+            "Deine geschützte Elternfreigabe ist noch gültig. Du kannst den Bereich öffnen.":
+            "Bitte gib den Eltern-Zugangscode ein. Ohne Code bleibt nur die sichere Vorschau verfügbar.";
+          if(!state.serverAuthorized){codeField.style.display="block";codeLabel.style.display="grid";}
+          approve.textContent="Geschützten Majlis öffnen";
+        }else{
+          gateInfo.textContent="Vorschau ohne Mikrofon oder KI-Stimme. Die geschützten Funktionen sind noch nicht freigeschaltet.";
+          approve.textContent="Lernvorschau öffnen";
+        }
+      }).catch(function(){});
     history.pushState({kidsMajlis:true},"",window.location.href);
   }
   entry.addEventListener("click",open);
@@ -187,11 +231,33 @@
   window.addEventListener("popstate",function(){if(state.open)close()});
   document.addEventListener("keydown",function(ev){if(ev.key==="Escape"&&state.open){ev.preventDefault();back.click()}});
   check.addEventListener("change",function(){approve.disabled=!check.checked});
-  approve.addEventListener("click",function(){if(!check.checked)return;state.approved=true;root.classList.remove("km-parent-open");input.focus()});
+  approve.addEventListener("click",async function(){
+    if(!check.checked||state.busy)return;
+    if(state.serverReady&&!state.serverAuthorized){
+      var code=codeField.value.trim();
+      if(code.length<24){gateInfo.textContent="Der Eltern-Zugangscode fehlt oder ist zu kurz.";return;}
+      state.busy=true;approve.disabled=true;
+      try{
+        var r=await fetch("/kids/api/majlis/session",{
+          method:"POST",credentials:"same-origin",headers:{"Content-Type":"application/json"},
+          body:JSON.stringify({code:code})
+        });
+        codeField.value="";
+        if(!r.ok)throw Error("parent-code");
+        var data=await r.json();
+        if(!data.authorized)throw Error("no-session");
+        state.serverAuthorized=true;
+      }catch(_){gateInfo.textContent="Elternfreigabe fehlgeschlagen. Bitte prüfe deinen Zugangscode.";return;}
+      finally{state.busy=false;approve.disabled=false}
+    }
+    state.approved=true;root.classList.remove("km-parent-open");
+    status.textContent=state.serverAuthorized?"Geschützter Lernchat bereit. Stelle deine Frage!":"Vorschau: Schreibe oder wähle eine Frage.";
+    input.focus();
+  });
   form.addEventListener("submit",function(ev){ev.preventDefault();if(state.audio&&!input.value.trim())sendAudio();else submitQuestion(input.value)});
   input.addEventListener("keydown",function(ev){if(ev.key==="Enter"&&!ev.shiftKey){ev.preventDefault();form.requestSubmit()}});
   mic.addEventListener("click",startOrStopMic);listen.addEventListener("click",hear);
   document.addEventListener("visibilitychange",function(){if(document.hidden&&state.recording&&state.recording.state==="recording")state.recording.stop()});
   reset.addEventListener("click",function(){state.turns=0;state.lastAnswer=null;state.audio=null;listen.disabled=true;welcome()});
-  window.DarKidsMajlis={open:open,close:close,version:"kids-majlis-safe-beta-1"};
+  window.DarKidsMajlis={open:open,close:close,version:"kids-majlis-safe-beta-2"};
 })();
