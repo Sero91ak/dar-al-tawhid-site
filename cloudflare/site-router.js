@@ -247,6 +247,56 @@ function publicWebsiteAddon() {
     <span>Im App Store laden</span>
   </a>
 </section>
+
+<style id="darAndroidDownloadPromoStyle">
+#darAndroidDownloadPromo{width:min(1180px,calc(100% - 28px));margin:17px auto 38px;padding:clamp(17px,3vw,26px);border-radius:25px;border:1px solid rgba(220,186,120,.39);background:linear-gradient(130deg,#11282e,#0c1b23 60%,#21312d);box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 18px 42px #08151a33;color:#fffaf0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+#darAndroidDownloadPromo .dar-android-head{display:flex;justify-content:space-between;gap:12px;align-items:end;flex-wrap:wrap;margin-bottom:17px}
+#darAndroidDownloadPromo .dar-android-kicker{display:block;color:#e8c984;letter-spacing:.19em;font-size:10px;font-weight:850;margin-bottom:8px}
+#darAndroidDownloadPromo .dar-android-head h2{margin:0;font-family:Georgia,"Times New Roman",serif;font-weight:500;font-size:clamp(22px,3vw,29px);letter-spacing:.012em}
+#darAndroidDownloadPromo .dar-android-head p{margin:0;color:#d5d0bf;font-size:12px}
+#darAndroidDownloadPromo .dar-android-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+#darAndroidDownloadPromo .dar-android-card{display:flex;align-items:center;gap:14px;min-width:0;padding:17px 18px;text-decoration:none;border-radius:17px;border:1px solid #dfbd785b;color:#f7f0de;background:linear-gradient(150deg,#1c353d,#101f27 75%);box-shadow:0 6px 24px #0002;transition:transform .22s,border-color .22s,box-shadow .22s}
+#darAndroidDownloadPromo .dar-android-card.tv{background:linear-gradient(135deg,#374048,#17232a 75%)}
+#darAndroidDownloadPromo .dar-android-card:hover,#darAndroidDownloadPromo .dar-android-card:focus-visible{border-color:#f7d992;transform:translateY(-2px);box-shadow:0 8px 29px #0005,0 0 20px #d9ad6630}
+#darAndroidDownloadPromo .dar-android-card:focus-visible{outline:2px solid #ffdf9f;outline-offset:3px}
+#darAndroidDownloadPromo .dar-android-icon{width:70px;height:70px;flex:none;border-radius:16px;object-fit:cover;border:1px solid #dabe829e;background:#172e30}
+#darAndroidDownloadPromo .dar-android-content{min-width:0;flex:1}
+#darAndroidDownloadPromo .dar-android-content small{display:block;font-size:10px;color:#e9cc88;letter-spacing:.15em;font-weight:850}
+#darAndroidDownloadPromo .dar-android-content strong{display:block;margin:6px 0;font:500 clamp(16px,2.6vw,21px)/1.15 Georgia,"Times New Roman",serif}
+#darAndroidDownloadPromo .dar-android-content span{display:block;font-size:12px;color:#d3d6ce;line-height:1.5;font-variant-numeric:tabular-nums}
+#darAndroidDownloadPromo .dar-android-action{align-self:center;flex:none;white-space:nowrap;color:#f5d993;font-size:11px;font-weight:800}
+#darAndroidDownloadPromo .dar-android-help{margin:17px 0 0;color:#d6d0c0;font-size:12px;line-height:1.6}
+#darAndroidDownloadPromo .dar-android-help a{color:#f4d593;text-underline-offset:3px}
+@media(max-width:790px){#darAndroidDownloadPromo .dar-android-card{flex-wrap:wrap}#darAndroidDownloadPromo .dar-android-action{flex:1 0 100%;border-top:1px solid #edc98533;padding-top:10px}}
+@media(max-width:650px){#darAndroidDownloadPromo .dar-android-grid{grid-template-columns:1fr}#darAndroidDownloadPromo .dar-android-card{flex-wrap:nowrap}#darAndroidDownloadPromo .dar-android-action{flex:0 0 auto;border:0;padding:0}#darAndroidDownloadPromo .dar-android-icon{width:56px;height:56px}#darAndroidDownloadPromo .dar-android-head p{font-size:11px}}
+@media(max-width:430px){#darAndroidDownloadPromo .dar-android-card{flex-wrap:wrap}#darAndroidDownloadPromo .dar-android-action{flex:1 0 100%;border-top:1px solid #edc98533;padding-top:8px}}
+</style>
+<section id="darAndroidDownloadPromo" aria-label="Offizielle DAR AL TAWḤĪD Android-Apps herunterladen">
+  <div class="dar-android-head">
+    <div><span class="dar-android-kicker">DIREKT VON DAR AL TAWḤĪD</span><h2>Unsere Apps für Android.</h2></div>
+    <p>Aktuelle, signierte APKs · ohne App-Store-Zwang</p>
+  </div>
+  <div class="dar-android-grid">
+    <a class="dar-android-card" id="dar-public-android-apk" href="/download/" aria-label="Android-Smartphone-App Download und Anleitung">
+      <img class="dar-android-icon" src="/download/icons/android-phone.svg" width="70" height="70" alt="">
+      <span class="dar-android-content">
+        <small>ANDROID · SMARTPHONE &amp; TABLET</small><strong>DAR AL TAWḤĪD</strong>
+        <span id="dar-public-android-meta">Release wird vorbereitet</span>
+      </span>
+      <span class="dar-android-action" id="dar-public-android-action">Info ↗</span>
+    </a>
+    <a class="dar-android-card tv" id="dar-public-tv-apk" href="/download/" aria-label="Android-TV-App Download und Anleitung">
+      <img class="dar-android-icon" src="/download/icons/android-tv-icon.jpg" width="70" height="70" alt="">
+      <span class="dar-android-content">
+        <small>ANDROID TV · GOOGLE TV</small><strong>DAR AL TAWḤĪD</strong>
+        <span id="dar-public-tv-meta">Release wird vorbereitet</span>
+      </span>
+      <span class="dar-android-action" id="dar-public-tv-action">Info ↗</span>
+    </a>
+  </div>
+  <p class="dar-android-help">Version und Veröffentlichungsdatum werden automatisch aktualisiert. Nur offizielle signierte Releases. <a href="/download/#installation">Installation auf Smartphone &amp; TV ↗</a> · <a href="/download/#sicherheit">Sicherheitsinformationen ↗</a></p>
+</section>
+<script src="/download/official-release-links.js" defer><\/script>
 <script id="darPublicWebsiteGuardV1">
 (function(){
   "use strict";
