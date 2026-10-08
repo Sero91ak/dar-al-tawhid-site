@@ -2311,3 +2311,56 @@ html body #view-dua #duaHubDetail.open.duahub-fit-tight .duahub-meaning{
    height:90px!important;min-height:90px!important;
  }
 }
+
+
+/* KIDS_DUA_READER_FINISH_V1253
+   Gold reading dividers and a compact inset audio player; do not alter global controls. */
+html body #view-dua #duaHubDetail.open .duahub-detail-actions{
+  row-gap:6px!important;margin-bottom:3px!important;
+}
+html body #view-dua #duaHubDetail.open .duahub-detail-actions::after{
+  content:""!important;display:block!important;grid-column:1 / -1!important;
+  justify-self:center!important;align-self:center!important;
+  width:min(68%,370px)!important;height:1px!important;margin:5px auto 2px!important;
+  background:linear-gradient(90deg,transparent,rgba(225,191,118,.36) 22%,rgba(247,217,152,.75) 50%,rgba(225,191,118,.36) 78%,transparent)!important;
+  box-shadow:0 1px 6px rgba(239,202,125,.07)!important;pointer-events:none!important;
+}
+html body #view-dua #duaHubDetail.open .duahub-arabic::after{
+  content:""!important;display:block!important;width:86px!important;max-width:45%!important;height:1px!important;
+  margin:8px auto 4px!important;
+  background:linear-gradient(90deg,transparent,rgba(239,207,136,.7),transparent)!important;
+  pointer-events:none!important;
+}
+html body #view-dua #duaHubDetail.open .duahub-translit{margin-top:2px!important}
+html body #view-dua #duaHubDetail.open .duahub-textcard button#duaHubGerman.kids-explain-action{
+  display:grid!important;grid-template-columns:40px minmax(0,1fr) 10px!important;
+  align-items:center!important;column-gap:9px!important;
+  width:min(100%,284px)!important;max-width:calc(100% - 26px)!important;
+  min-height:60px!important;height:auto!important;
+  padding:9px 13px!important;margin:12px auto 1px!important;
+  border:1px solid rgba(232,204,147,.38)!important;border-radius:19px!important;
+  background:linear-gradient(125deg,rgba(18,77,96,.96),rgba(9,48,65,.97))!important;
+  box-shadow:0 4px 12px rgba(0,0,0,.12),inset 0 1px 0 rgba(255,255,255,.07)!important;
+  text-align:left!important;
+}
+html body #view-dua #duaHubDetail.open button#duaHubGerman.kids-explain-action > .kids-explain-icon{
+  width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important;
+  border-radius:12px!important;box-shadow:0 2px 7px rgba(0,0,0,.12)!important;
+}
+html body #view-dua #duaHubDetail.open button#duaHubGerman.kids-explain-action > .kids-explain-copy{gap:2px!important}
+html body #view-dua #duaHubDetail.open button#duaHubGerman.kids-explain-action > .kids-explain-copy > strong{
+  font-size:clamp(15px,3.85vw,17px)!important;font-weight:740!important;line-height:1.12!important;
+}
+html body #view-dua #duaHubDetail.open button#duaHubGerman.kids-explain-action > .kids-explain-copy > small{
+  font-size:clamp(10px,2.65vw,12px)!important;line-height:1.2!important;
+}
+html body #view-dua #duaHubDetail.open button#duaHubGerman.kids-explain-action > .kids-explain-chevron{
+  width:7px!important;height:7px!important;
+}
+html body #view-dua #duaHubDetail.open.duahub-fit-compact .duahub-detail-actions::after{margin:3px auto 0!important}
+html body #view-dua #duaHubDetail.open.duahub-fit-compact .duahub-arabic::after{margin:5px auto 3px!important}
+html body #view-dua #duaHubDetail.open.duahub-fit-tight .duahub-detail-actions::after{margin:2px auto 0!important}
+html body #view-dua #duaHubDetail.open.duahub-fit-tight .duahub-arabic::after{margin:4px auto 2px!important}
+html body #view-dua #duaHubDetail.open.duahub-fit-tight .duahub-textcard button#duaHubGerman.kids-explain-action{
+  min-height:54px!important;margin:8px auto 0!important;padding:6px 12px!important;
+}

@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v149-wide-reader1252",
-  "label": "KIDS · V1.08.70",
-  "releasedAt": "2026-10-08T13:43:00+02:00",
-  "note": "V1.08.70 · Vollbreiter Duʿāʾ-Lesebereich ohne Kartenrahmen, größere Schrift, kompakter Erklärungsbutton, adaptive Höheneinpassung ohne verschachtelten Scrollbereich. Offline V1252.",
+  "buildId": "kids-shell-v150-dua-divider1253",
+  "label": "KIDS · V1.08.71",
+  "releasedAt": "2026-10-08T14:23:00+02:00",
+  "note": "KIDS V1.08.71 · Duʿāʾ-Leser: edle Goldtrennlinien nach Anhören/Lernen und zwischen Arabisch und Lautschrift; kompakter Erklärungsknopf mit deutlich eingerücktem Play-Symbol. Offline-Cache V1253.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1252",
+    "serviceWorkerCache": "v1253",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -1217,15 +1217,15 @@
     "compactBackTouchCssPx": 44,
     "fullBleedDuaDetailHeader": "v1249",
     "globalExplanationAudioActions": "v1249",
-    "duaReaderLayout": "v1252-fullwidth-adaptive",
-    "duaHubCssVersion": "1252",
-    "duaHubJsVersion": "1252",
+    "duaReaderLayout": "v1253-fullwidth-with-gold-divider",
+    "duaHubCssVersion": "1253",
+    "duaHubJsVersion": "1253",
     "globalSourceTextOnly": "v1251"
   },
-  "updatedAt": "2026-10-08T13:43:00+02:00",
-  "deployTrigger": "kids-dua-fullwidth-adaptive-v1252",
+  "updatedAt": "2026-10-08T14:23:00+02:00",
+  "deployTrigger": "kids-dua-divider-polish-v1253",
   "globalDetailDock": {
-    "version": "v1251",
+    "version": "v1253",
     "enabled": true,
     "appliesTo": [
       "deen-detail",
