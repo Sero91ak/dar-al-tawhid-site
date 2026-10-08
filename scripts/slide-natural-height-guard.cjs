@@ -1,0 +1,27 @@
+#!/usr/bin/env node
+"use strict";
+const fs=require("node:fs");
+const assert=require("node:assert/strict");
+const html=fs.readFileSync("index.html","utf8");
+const css=fs.readFileSync("assets/adaptive-layout.css","utf8");
+const js=fs.readFileSync("assets/adaptive-layout.js","utf8");
+assert.match(html,/assets\/adaptive-layout\.css/, "Visitor app must load adaptive CSS");
+assert.match(html,/assets\/adaptive-layout\.js/, "Visitor app must load adaptive JS");
+assert.match(html,/class="post-slide-window"/, "Slide viewport must still exist");
+assert.match(html,/class="post-slide-track"/, "Slide swipe track must still exist");
+assert.match(html,/data-slide-carousel/, "Slide carousel must remain available");
+assert.match(html,/data-slide-prev/, "Previous navigation must remain available");
+assert.match(html,/data-slide-next/, "Next navigation must remain available");
+assert.match(html,/dataset\.active=String\(index\)/,"Navigation must still set active index");
+assert.match(css,/\.post-slides\s+\.post-slide-track\s*\{\s*align-items:flex-start\s*!important/, "Slides must stop cross-axis stretching");
+assert.match(css,/\.post-slides\s+\.post-slide\s*\{[\s\S]*?align-content:start\s*!important/, "Slide grid rows must pack at start");
+assert.match(css,/grid-auto-rows:max-content\s*!important/,"Grid rows must follow content height");
+assert.match(js,/__DAR_SLIDE_CONTENT_HEIGHT_V1/,"Natural-height controller must be registered once");
+assert.match(js,/parseInt\(carousel\.dataset\.active/,"Active slide must drive carousel height");
+assert.match(js,/activeSlide\.scrollHeight, activeSlide\.offsetHeight/,"Viewport must measure active slide only");
+assert.match(js,/attributeFilter:\s*\["data-active"\]/,"Swipe or button navigation must update height");
+assert.match(js,/document\.fonts\.ready\.then\(scan\)/,"Late font loading must trigger re-measure");
+assert.match(js,/ResizeObserver/,"Different slide text lengths must trigger re-measure");
+const post=fs.readFileSync("content/posts/2026-10-08-isa-ibn-maryam-nuzul-frueher-ikhtilaf-slides.md","utf8");
+assert.equal((post.match(/<!-- slide:\s*\d+ -->/g)||[]).length,22,"Q35 content must remain all 22 slides");
+console.log("Slide natural-height regression PASS: compact layout, swipe prev/next, 22 slides and source content intact.");
