@@ -116,7 +116,8 @@ dayPage.hidden=true;
 dayPage.setAttribute("aria-label","Tagesgebetszeiten");
 dayPage.innerHTML=
  '<div class="kids-salah-day-body"><header class="kids-salah-day-header">'+
- '<button class="kids-salah-day-back" id="kidsSalahDayBack" type="button" aria-label="Zurück zur Startseite">‹</button>'+
+ '<button class="kids-salah-day-back" id="kidsSalahDayBack" type="button" aria-label="Zurück zur Startseite">'+
+ '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14.5 5.5 8 12l6.5 6.5"/></svg></button>'+
  '<span class="kids-salah-day-brand">DĀR AL TAWḤĪD KIDS · ṢALĀH</span></header>'+
  '<div class="kids-salah-day-hero" role="group" aria-label="Dein Gebetstag">'+
  '<div class="kids-salah-day-overline"><span class="kids-salah-day-spark" aria-hidden="true">✦</span> DEIN GEBETSTAG <span id="kidsSalahDayDate"></span></div>'+
@@ -170,7 +171,7 @@ function renderDay(){
   const current=previous?.key===key&&previous?.date===date;
   const following=next?.key===key&&next?.date===date;
   return '<div role="listitem" class="kids-salah-day-item'+(current?' is-current':following?' is-next':'')+'" data-prayer="'+key+'">'+
-   '<span class="kids-salah-day-item-orb" aria-hidden="true"></span>'+
+   '<span class="kids-salah-day-item-orb" aria-hidden="true"><img class="kids-salah-day-item-art" src="/kids/assets/kids-salah-v1272/'+key+'.png?v=1277" alt="" loading="eager" decoding="async" width="96" height="96"></span>'+
    '<div class="kids-salah-day-item-name"><strong>'+NAMES[key]+'</strong><small>'+
    (current?'AKTUELLES GEBET':following?'ALS NÄCHSTES':DAY_LABELS[key])+
    '</small></div><time>'+time+'</time></div>';
