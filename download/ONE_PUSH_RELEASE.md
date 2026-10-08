@@ -36,6 +36,8 @@ Android TV (`de.daraltawhid.tv`):
 
 Kids (`de.daraltawhid.kids`): separater Schlüssel, solange **nur intern**; keine Kids-Website-Veröffentlichung.
 
+Für die iOS-Build-Abhängigkeiten gilt zusätzlich **einmalig** die Repository-Variable `DAR_IOS_ONESIGNAL_SDK_VERSION` (genau die bisher genutzte native OneSignal-iOS-SDK-Version). Der bestehende Xcode-Code verweist auf acht nicht im Git gespeicherte Vendor-XCFrameworks. Die CI lädt diese gezielt von OneSignals offiziellen Releases nach und kontrolliert alle acht gegen die offiziellen SHA-256-Prüfsummen. **Keine unbekannte SDK-Version automatisch einsetzen**: Das könnte das geschützte Push-System verändern. Ohne diese exakte Version darf der iOS-Build nicht fälschlich als erfolgreich gelten.
+
 iOS (`de.daraltawhid.app`, mit eigener Widget- und OneSignal-Extension):
 
 - `DAR_IOS_DISTRIBUTION_CERT_BASE64` (Apple Distribution .p12)
