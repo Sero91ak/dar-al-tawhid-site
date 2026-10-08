@@ -5751,6 +5751,7 @@ function renderQuizQuestion(){
       quizVoice.preload(quizPrompt(q));
       quizVoice.preload(q.success||"");
       quizVoice.preload(q.retry||"");
+      quizVoice.preload(q.explanation||"");
       var nextQuizVoice=currentQuiz[currentQuizIndex+1];
       if(nextQuizVoice)quizVoice.preload(quizPrompt(nextQuizVoice));
     }
@@ -5843,7 +5844,22 @@ function chooseQuizAnswer(index,button){
     }else if(!quizQuestionHadError&&!masteryResult.counted){
       document.getElementById("quizFeedback").textContent="✓ "+q.success+" · Wiederholung später";
     }
-    quizSpeak(q.success);
+    // Nach einer richtigen Antwort wird die kindgerechte Erklärung vollständig
+    // in der Serhat-Masterstimme vorgelesen, aber nur mit echtem freigegebenem Clip.
+    // Nicht auf System-TTS ausweichen und keine nächste Quizfrage übertönen.
+    var answeredQuestion=q,answeredIndex=currentQuizIndex;
+    var canExplain=!!(q.explanation&&window.DARKidsOwnerVoice&&
+      typeof window.DARKidsOwnerVoice.has==="function"&&
+      window.DARKidsOwnerVoice.has(q.explanation));
+    quizSpeak(q.success,{
+      source:"kids-quiz-feedback",
+      onended:canExplain?function(){
+        var modal=document.getElementById("quizModal");
+        if(!modal||!modal.classList.contains("open"))return;
+        if(currentQuizIndex!==answeredIndex||currentQuiz[currentQuizIndex]!==answeredQuestion)return;
+        quizSpeak(answeredQuestion.explanation,{source:"kids-quiz-explanation"});
+      }:undefined
+    });
   }else{
     quizQuestionHadError=true;
     recordQuizMistake(q.id);
