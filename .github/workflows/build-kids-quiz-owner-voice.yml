@@ -736,24 +736,29 @@ jobs:
               if not (1<=quiz_start<=900 and 1<=quiz_count<=12):
                   raise SystemExit("Quiz-Batch muss mit 1–900 beginnen und 1–12 Fragen enthalten.")
               end_num=min(900,quiz_start+quiz_count-1)
-              # Arabische Schrift im deutschen Satz wird erst mit Sprachsegmentierung freigegeben.
-              selected_quiz_items=[]
+              auto_queue=os.environ.get("VOICE_AUTO_QUEUE","").strip().lower()=="true"
+              previous_entries=(load_manifest(QUIZ_MANIFEST).get("entries") or {})
+              def missing_any_voice(q):
+                  for speech in quiz_required_texts(q):
+                      entry=previous_entries.get(speech)
+                      if not entry or not local_from_entry(entry,QUIZ_ASSETS):
+                          return True
+                  return False
+              if auto_queue:
+                  selected_quiz_items=[q for q in quiz_items if missing_any_voice(q)][:quiz_count]
+                  if not selected_quiz_items:
+                      print("Alle 900 Fragen mit Frage, Feedback und Erklärung vollständig vertont.",flush=True)
+                      raise SystemExit(0)
+                  quiz_start=min(int(q.get("number") or 0) for q in selected_quiz_items)
+                  end_num=max(int(q.get("number") or 0) for q in selected_quiz_items)
+              else:
+                  selected_quiz_items=[q for q in quiz_items if quiz_start<=int(q.get("number") or 0)<=end_num]
               deferred_arabic=[]
-              for q in quiz_items:
-                  number=int(q.get("number") or 0)
-                  if not quiz_start<=number<=end_num:
-                      continue
-                  samples=[quiz_prompt(q),norm(q.get("explanation"))]
-                  if any(re.search(r"[\u0600-\u06FF\uFB50-\uFDFF\uFE70-\uFEFF]",sample or "") for sample in samples):
-                      deferred_arabic.append(number)
-                      continue
-                  selected_quiz_items.append(q)
-              if not selected_quiz_items:
-                  raise SystemExit("Im Batch liegen nur Fuṣḥā-/Mischsprach-Fragen; separaten Arabisch-Batch verwenden.")
               batch_prompts=[quiz_prompt(q) for q in selected_quiz_items]
               print(f"Kids Quiz Master-Batch: {quiz_start}–{end_num}; freigegeben: {len(selected_quiz_items)}; Arabisch zur QA vorgemerkt: {deferred_arabic}",flush=True)
               quiz_texts=[]
               quiz_profiles={}
+              quiz_models={}
               age_profile={
                   "4-6":"quiz_4_6",
                   "7-8":"quiz_7_8",
@@ -762,18 +767,22 @@ jobs:
               for q in selected_quiz_items:
                   prompt=quiz_prompt(q)
                   quiz_texts.append(prompt)
-                  quiz_profiles[prompt]=age_profile.get(str(q.get("ageBand") or ""),"quiz_9_10")
+                  quiz_models[prompt]=quiz_model_for_text(prompt)
+                  quiz_profiles[prompt]="quiz_fusha" if quiz_models[prompt]==ELEVEN_QUIZ_AR_MODEL else age_profile.get(str(q.get("ageBand") or ""),"quiz_9_10")
                   for feedback in (norm(q.get("success")),norm(q.get("retry"))):
                       if feedback:
                           quiz_texts.append(feedback)
-                          quiz_profiles[feedback]="quiz_feedback"
+                          quiz_models[feedback]=quiz_model_for_text(feedback)
+                          quiz_profiles[feedback]="quiz_fusha" if quiz_models[feedback]==ELEVEN_QUIZ_AR_MODEL else "quiz_feedback"
                   explanation=norm(q.get("explanation"))
                   if explanation:
                       quiz_texts.append(explanation)
-                      quiz_profiles[explanation]="quiz_feedback"
+                      quiz_models[explanation]=quiz_model_for_text(explanation)
+                      quiz_profiles[explanation]="quiz_fusha" if quiz_models[explanation]==ELEVEN_QUIZ_AR_MODEL else "quiz_feedback"
               final_feedback="Sehr gut. Du hast das Quiz geschafft."
               quiz_texts.append(final_feedback)
               quiz_profiles[final_feedback]="quiz_feedback"
+              quiz_models[final_feedback]=ELEVEN_QUIZ_DE_MODEL
 
               quiz_manifest=build_pack(
                   texts=quiz_texts,
@@ -795,6 +804,7 @@ jobs:
                   model_id=ELEVEN_QUIZ_DE_MODEL,
                   require_model_match=True,
                   profiles_by_text=quiz_profiles,
+                  models_by_text=quiz_models,
                   preserve_existing=True
               )
               if any(p not in quiz_manifest["entries"] for p in batch_prompts):
@@ -810,6 +820,18 @@ jobs:
               }
               quiz_manifest["counts"]["readyQuestionPrompts"]=sum(p in quiz_manifest["entries"] for p in prompts)
               quiz_manifest["counts"]["remainingQuestionPrompts"]=900-quiz_manifest["counts"]["readyQuestionPrompts"]
+              quiz_manifest["counts"]["remainingQuestionsWithMissingAudio"]=sum(
+                  1 for q in quiz_items if any(
+                      speech not in quiz_manifest["entries"] for speech in quiz_required_texts(q)
+                  )
+              )
+              quiz_manifest["counts"]["nativeArabicQuestions"]=sum(
+                  1 for q in quiz_items if any(ARABIC_SCRIPT_RE.search(t) for t in quiz_required_texts(q))
+              )
+              quiz_manifest["counts"]["bilingualClips"]=sum(
+                  1 for entry in quiz_manifest["entries"].values()
+                  if entry.get("languageComposition")=="de+ar"
+              )
               QUIZ_MANIFEST.write_text(json.dumps(quiz_manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
               print("Quiz-Fragen mit Master-Audio:",quiz_manifest["counts"]["readyQuestionPrompts"],"/900",flush=True)
           else:
@@ -1086,7 +1108,7 @@ jobs:
             exit 0
           fi
           if [ "${VOICE_BUILD_SCOPE:-}" = "quiz" ]; then
-            git commit -m "Kids: publish staged Serhat V4 quiz owner voice pack"
+            git commit -m "Kids: publish bilingual Serhat German Flash / native Fusha V4 quiz audio"
           else
             git commit -m "Kids: publish Serhat V4 Dua voice packs"
           fi
