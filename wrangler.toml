@@ -34,7 +34,8 @@ watch_paths = [
   "content/updates/daily.json",
   "q/**",
   "quellen/**",
-  "links/**"
+  "links/**",
+  "download/**"
 ]
 
 [vars]
