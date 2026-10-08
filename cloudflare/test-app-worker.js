@@ -1,6 +1,7 @@
 import { ILM_SCIENCE_SYSTEM_INSTRUCTIONS, ILM_SCIENCE_POLICY_VERSION } from "./ilm-science-policy.js";
 import { composeIlmWithGemini } from "./ilm-gemini-bridge.js";
 import { researchIlmWithGemini } from "./ilm-gemini-open-research.js";
+import { composeIlmWithGroqFree } from "./ilm-groq-free-bridge.js";
 import { gateHiddenSurfaces } from "./preview-gate.js";
 const KIDS_VERSION_BODY = JSON.stringify({
   buildId: "kids-shell-v154-profile-persist1257",
@@ -417,7 +418,7 @@ async function ilmOpenResearch(request, env) {
   const question = String(data?.question||"").trim().slice(0,550);
   const mode = data?.mode === "sources" ? "sources" : data?.mode === "short" ? "short" : "detailed";
   if (question.length<7) return send({ok:false,error:"insufficient_question"},422);
-  // GEMINI ONLY: Free-Tier-compatible search via Gemini 2.5 Flash-Lite; no paid fallback.
+  // Free-Tier-compatible Gemini primary-source discovery; Groq never searches unsourced facts.
   const gemini = await researchIlmWithGemini(request,env,question,mode);
   if(gemini.ok)return send(gemini);
   return send({
@@ -489,16 +490,24 @@ async function ilmScienceCompose(request, env) {
   // Cloudflare bindings before contacting Google; a limited request must not
   // silently bypass the cap through a different model.
   const gemini = await composeIlmWithGemini(request, env, question, topicSources, mode);
-  if (gemini.limited) return send({ok:false,error:"gemini_quota_exhausted",provider:"gemini"},429);
   if (gemini.ok) return send({
     ok:true, answer:gemini.answer, usedSourceCount:topicSources.length,
     mode:"source_bound", answerMode:mode, provider:"gemini",
     policyVersion:ILM_SCIENCE_POLICY_VERSION
   });
-  // No Gemini quota => use local checked texts in the UI; never pay another model.
+  // Groq fallback is unlocked only if user independently confirms the
+  // Groq account is Free, the key is stored as a Cloudflare secret, and
+  // rate-limit bindings are installed. No chargeable model is called by default.
+  const groq = await composeIlmWithGroqFree(request, env, question, topicSources, mode);
+  if (groq.ok) return send({
+    ok:true,answer:groq.answer,usedSourceCount:topicSources.length,
+    mode:"source_bound",answerMode:mode,provider:"groq",
+    policyVersion:ILM_SCIENCE_POLICY_VERSION
+  });
   return send({
-    ok:false, error:gemini.limited?"gemini_quota_exhausted":"gemini_compose_unavailable",
-    provider:"gemini", usedSourceCount:topicSources.length, sourceBound:true
+    ok:false,error:gemini.limited?"gemini_quota_exhausted":"evidence_compose_unavailable",
+    provider:"gemini",usedSourceCount:topicSources.length,sourceBound:true,
+    fallback:groq.reason||"not_active"
   },gemini.limited?429:503);
 }
 
