@@ -115,7 +115,9 @@
       ? (ev.speaker + (/prophet|rasul|ﷺ/i.test(ev.speaker) || ev.speaker_type === "sunnah" ? " ﷺ sagte:" : ":"))
       : (idx ? "Ein weiterer Beleg" : "Beleg");
     var open = "";
-    if (ev.verification_status === "verified" && (ev.deep_link || ev.route)) {
+    if (ev.route && discoveryRoute(ev) && ev.route.view) {
+      open = '<button type="button" class="ilm-open-src" data-ilm-discovery-result="1" data-nav="' + esc(ev.route.view) + '" data-value="' + esc(ev.route.value) + '">↗ In der App öffnen</button>';
+    } else if (ev.verification_status === "verified" && ev.deep_link) {
       if (ev.deep_link && /^https?:/i.test(ev.deep_link) && (hostOk(ev.deep_link) || ev.deep_link.indexOf(location.origin + "/") === 0)) {
         open = '<a class="ilm-open-src" href="' + esc(ev.deep_link) + '" target="_blank" rel="noopener noreferrer">↗ Originalstelle öffnen</a>';
       } else if (ev.route && ev.route.view) {
@@ -337,7 +339,7 @@
     function sourceDisclosure(reply, openProof) {
       var list = (reply.evidences || []).filter(function (e) { return !!(e.statement || e.deep_link); });
       if (!list.length) return "";
-      var count = openProof ? Math.min(4, list.length) : Math.min(2, list.length);
+      var count = openProof ? Math.min(4, list.length) : Math.min(Math.max(2,Number(reply._ilmCitationCount)||0),list.length);
       return '<details class="ilm-science-sources"' + (openProof ? ' open' : '') + '>' +
         '<summary><span class="ilm-science-source-icon" aria-hidden="true">⌁</span>' +
         '<span>' + (openProof ? "Originalbelege und Quellen" : "Belege und Fundstellen") +
@@ -380,6 +382,7 @@
           var answer = String(data.answer).replace(/<[^>]*>/g, "").replace(/\r\n/g, "\n").trim().slice(0,1650);
           if (answer.length < 35 || /\[(?:[4-9]|\d{2,})\]/.test(answer)) return;
           reply._ilmGeneratedText = answer;
+          reply._ilmCitationCount = rows.length;
           var node = document.querySelector('[data-ilm-answer-id="' + requestId + '"] .ilm-answer-text');
           if (node && document.body.classList.contains("is-ilm-chat-route")) {
             node.innerHTML = window.renderIlmAnswerText(reply);
@@ -409,7 +412,15 @@
         ? "Ich habe dazu passende Inhalte in der App gefunden. Öffne einen Treffer, um den vollständigen Beitrag oder die Qurʾān-Stelle direkt zu lesen."
         : "Ich finde zu dieser Suche momentan keinen direkt öffnungsfähigen Treffer. Versuche einen konkreteren Begriff oder eine andere Schreibweise.";
       var html = '<div class="ilm-science-prose">' + answer.split(/\n{2,}/).filter(Boolean).map(function (p) {
-        return '<p>' + em(p.trim()) + '</p>';
+        var enriched = em(p.trim());
+        if (reply._ilmCitationCount) {
+          enriched = enriched.replace(/\[([1-3])\]/g,function(match,n){
+            return Number(n) <= reply._ilmCitationCount
+              ? '<button class="ilm-citation-ref" type="button" data-ilm-reveal-proof="' + n + '" aria-label="Beleg ' + n + ' öffnen">[' + n + ']</button>'
+              : match;
+          });
+        }
+        return '<p>' + enriched + '</p>';
       }).join("") + '</div>';
       if (reply._ilmBasicTawhid) html += ilmScriptureLinks();
       if (!reply._ilmBasicTawhid) html += discoverySection(reply);
@@ -570,6 +581,14 @@
             improved._ilmDiscovery = [];
           }
           improved._ilmMatches = rankedMatches;
+          // Retain the best question-matching entries as the answer's evidence,
+          // not the incidental order of cards in the original post index.
+          if (!improved._ilmBasicTawhid && rankedMatches.length) {
+            var picked = rankedMatches.slice(0, 5).map(function(e){return toEvidence(e,"internal")});
+            improved.evidences = picked.concat((improved.evidences || []).filter(function(e) {
+              return e.source_domain === "external";
+            })).slice(0, 8);
+          }
         }
         // Only religious explanation requests go to the bounded source-based composer.
         if (improved && improved.status === "ok" && !improved._ilmIsDiscovery && !improved._ilmBasicTawhid) requestScienceComposition(improved, question);
@@ -879,6 +898,19 @@
         if (ev.key === "Enter" || ev.key === " ") schedule();
       },false);
     })();
+
+    document.addEventListener("click",function(ev) {
+      var btn = ev.target && ev.target.closest && ev.target.closest("[data-ilm-reveal-proof]");
+      if (!btn) return;
+      ev.preventDefault();
+      var msg = btn.closest(".ilm-assistant-message");
+      var panel = msg && msg.querySelector(".ilm-science-sources");
+      if (!panel) return;
+      panel.open = true;
+      var idx = Number(btn.getAttribute("data-ilm-reveal-proof")) - 1;
+      var card = panel.querySelectorAll(".ilm-science-source-item")[idx];
+      if (card && typeof card.scrollIntoView === "function") card.scrollIntoView({block:"nearest",behavior:"smooth"});
+    },false);
 
     document.addEventListener("click", function (ev) {
       var t = ev.target && ev.target.closest ? ev.target.closest("[data-ilm-follow]") : null;
