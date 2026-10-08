@@ -147,6 +147,17 @@
       panel.appendChild(el("span","km-source",String(media.reference||"Qurʾān")));
       panel.appendChild(el("p","km-media-note","Die Rezitation stammt von einem Qāriʾ – nicht von einer KI-Stimme."));
       if(media.recitationUrl)button("▶ Rezitation",function(){playPrepared(media.recitationUrl,"Qurʾān-Rezitation: "+String(media.reference||"")+".");});
+      if(Number.isInteger(Number(media.surah))&&Number.isInteger(Number(media.ayah)))button("Zum Vers im Qurʾān",function(){
+        var surah=Number(media.surah),ayah=Number(media.ayah);
+        if(surah<1||surah>114||ayah<1||ayah>286)return;
+        stopPlayback();close();
+        if(history.state?.kidsMajlis)history.replaceState({kidsMajlis:false},"",window.location.href);
+        try{
+          if(typeof window.openQuranSurah==="function")window.openQuranSurah(surah,ayah,{scrollOffset:0});
+          else if(typeof window.navigate==="function")window.navigate("quran-surah",surah+"/"+ayah);
+          else location.hash="#quran-surah/"+surah+"/"+ayah;
+        }catch(_){status.textContent="Bitte öffne den Qurʾān-Bereich."}
+      });
     }
     panel.appendChild(row);panel.appendChild(details);box.appendChild(panel);
   }
@@ -214,7 +225,7 @@
   }
   function previewDua(q,index){
     var text=previewNorm(q);
-    if(!/(?:\bdua\b|bittgebet|arabisch|اللهم|ربنا|ربي)/i.test(text))return null;
+    if(!/(?:\bdua\b|\bdu a\b|bittgebet|arabisch|اللهم|ربنا|ربي)/i.test(text))return null;
     var selected=null,score=0;
     index.duas.forEach(function(d){
       var title=previewNorm(d.title),trans=previewNorm(d.transliteration),meaning=previewNorm(d.meaning);
