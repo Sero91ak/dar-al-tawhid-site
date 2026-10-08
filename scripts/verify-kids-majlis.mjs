@@ -115,6 +115,20 @@ assert.equal(qiblaRef.results[0].reference,"Qurʾān 2:144");
 const broad=await fullQuranSearch.search("Quran Allah");
 assert.equal(broad.status,"too_broad");
 assert.equal(quranFetchCalls.length,1,"one lazy Quran corpus fetch reused for every subsequent query");
+const offlineWindow={};
+let offlineFetchCalls=0;
+const offlineSearch=new Function("window","fetch","caches",quranSearchSource+"\nreturn window.DarKidsQuranSearch;")(
+ offlineWindow,async()=>{offlineFetchCalls++;throw Error("offline");},{
+  open:async()=>({
+    match:async()=>new Response(JSON.stringify(fullQuranData),{status:200,headers:{"Content-Type":"application/json"}}),
+    put:async()=>{throw Error("offline cache write blocked");}
+  })
+ });
+const offlineResult=await offlineSearch.search("Sure 114 Vers 6");
+assert.equal(offlineResult.status,"found");
+assert.equal(offlineResult.results[0].reference,"Qurʾān 114:6");
+assert.equal(offlineFetchCalls,1);
+
 
 assert.equal(shells.every(s=>(s.match(/kids\/majlis-kids\.js\?v=1/g)||[]).length===1),true);
 assert.equal(shells.every(s=>(s.match(/kids\/majlis-quran-search\.js\?v=1/g)||[]).length===1),true);
