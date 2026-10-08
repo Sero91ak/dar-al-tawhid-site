@@ -186,3 +186,13 @@ In allen Kinderansichten bleibt der **konkrete Quellenbeleg als reiner, gut lesb
 - Die Figur trägt einen vollständig bedeckenden Ḥiǧāb/Khimār. Für Gebetsanimationen und Gebetstrainer nur passende, vollständig bedeckende Gebetskleidung verwenden.
 - Dies gilt gleichermaßen für Avatare, Heroes, Illustrationen, Animationen, generierte Medien und Vorschaubilder.
 - Für reine Gebetszeiten-Anzeigen sind **keine Figuren nötig**; die Uhrzeit und gut lesbare animierte Typografie haben Vorrang.
+
+
+## Gebetszeiten – immersiver Startseiten-Hero (V1270)
+
+- Der bestehende Startseiten-Hero, der Salām, „Hören. Mitlesen. Lernen.“ und der Gebetszeitbereich bilden **eine einzige, visuell durchgehende Bildbühne**. Die Gebetszeitdarstellung erhält ausdrücklich **keine zweite, isolierte Karte/Kapsel** und keinen abrupten Hintergrundausschnitt.
+- Reihenfolge: Markenbild/Avatar → Salām → Hör-/Lern-Einleitung → „Zeit für Ṣalāh“ → aktuelle und nächste Gebetszeit → Live-Countdown → alle fünf Zeiten → Schaltfläche „Alle Gebetszeiten ansehen“ → nächster regulärer Home-Inhalt.
+- Vollbild-Detail „Unsere fünf Gebete“: nächtliches Moschee-/Laternen-Motiv im oberen Hintergrund, gut lesbarer Titel und Untertitel, kompakte Ortsauswahl, fünf groß lesbare Zeilen (Fajr, Dhuhr, ʿAṣr, Maghrib, ʿIshāʾ) mit thematisch abgestuften Tageslichtmotiven. Das aktuelle Gebet ist warm-golden hervorgehoben, das nächste türkis; Mädchenprofil erhält eigenständige Rosé-/Violett-Abstimmung.
+- **Uhrzeiten und Countdown sind niemals Teil eines generierten Bildes/Videos**. Nur standort- und methodenbezogene echte Daten im DOM; bei fehlendem Ort bzw. fehlender API-Antwort sinnvolle Hinweise und `--:--`, keine erfundenen Platzhalter-Zeiten.
+- Adobe/Runway dienen ausschließlich atmosphärischen Hintergrundmedien. Dateien müssen lokal in der App liegen; es werden **keine temporären externen Download-URLs oder Medien-Tokens im ausgelieferten Code** eingebettet. Video ist rein dekorativ, stumm, ohne Schrift/Ziffern und mit offline verfügbarem Standbild; Energiesparmodus und `prefers-reduced-motion` werden respektiert.
+- Über Smartphone-Breiten dürfen weder `HH:MM`-Ziffern noch fünf Zeitspalten abgeschnitten werden. Die unteren Kids-Navigationstabs, der Weiterhören-Bereich sowie die bestehende Home-Profilstruktur bleiben unabhängig und funktionsfähig.
