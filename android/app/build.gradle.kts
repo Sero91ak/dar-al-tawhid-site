@@ -13,12 +13,12 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace = "de.daraltawhid.app"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "de.daraltawhid.app"
         minSdk = 26
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
         resourceConfigurations += listOf("de", "en")
