@@ -6,6 +6,16 @@ import {webcrypto} from "node:crypto";
 if(!globalThis.crypto)globalThis.crypto=webcrypto;
 const apiSource=readFileSync(new URL("../cloudflare/kids-majlis-api.js",import.meta.url),"utf8");
 const frontSource=readFileSync(new URL("../kids/majlis-kids.js",import.meta.url),"utf8");
+const knowledgeSource=readFileSync(new URL("../cloudflare/kids-majlis-knowledge.js",import.meta.url),"utf8");
+const knowledgeIndex=JSON.parse(readFileSync(new URL("../kids/data/majlis-knowledge-v1.json",import.meta.url),"utf8"));
+assert.equal(knowledgeIndex.duas.length,120);
+assert.equal(knowledgeIndex.quiz.length,900);
+assert.equal(knowledgeIndex.quran.ayahCounts.length,114);
+assert.equal(knowledgeIndex.quran.ayahCounts.reduce((x,y)=>x+y,0),6236);
+const knowledgeBody=knowledgeSource.replace(/^import .*?;\s*$/gm,"")
+ .replace(/^export \{[^}]+\};?\s*$/gm,"")
+ .replace("export const majlisKnowledgeTest","const majlisKnowledgeTest");
+const knowledge=new Function("INDEX",knowledgeBody+"\nreturn {findKnowledge,findKnowledgeById,mediaForCanonicalId,quranMedia,allahAlam,profilePrefix,majlisKnowledgeTest};")(knowledgeIndex);
 const verifiedContent=JSON.parse(readFileSync(new URL("../kids/data/verified-content.json",import.meta.url),"utf8"));
 const shells=["index","start","shell"].map(name=>readFileSync(new URL("../kids/"+name+".html",import.meta.url),"utf8"));
 const noImports=apiSource.replace(/^import .*?;\s*$/gm,"")
@@ -13,7 +23,9 @@ const noImports=apiSource.replace(/^import .*?;\s*$/gm,"")
   .replace("export const kidsMajlisTesting","const kidsMajlisTesting");
 let calls=0;
 const synth=async (env,text)=>{calls++;return {ok:true,bytes:new Uint8Array([73,68,51]),contentType:"audio/mpeg"}};
-const api=new Function("synthesizeDarVoice","isVoiceConfigured","KIDS_VERIFIED_CONTENT",noImports+"\nreturn {handleKidsMajlisApi,kidsMajlisTesting};")(synth,()=>true,verifiedContent);
+const api=new Function("synthesizeDarVoice","isVoiceConfigured","KIDS_VERIFIED_CONTENT","findKnowledge","findKnowledgeById","mediaForCanonicalId","allahAlam","profilePrefix",
+  noImports+"\nreturn {handleKidsMajlisApi,kidsMajlisTesting};")(synth,()=>true,verifiedContent,
+  knowledge.findKnowledge,knowledge.findKnowledgeById,knowledge.mediaForCanonicalId,knowledge.allahAlam,knowledge.profilePrefix);
 new Function(frontSource);
 assert.equal(shells.every(s=>(s.match(/kids\/majlis-kids\.js\?v=1/g)||[]).length===1),true);
 assert.equal(api.kidsMajlisTesting.choose("Wer ist Allah?","6–8").id,"allah");
@@ -22,13 +34,30 @@ assert.equal(api.kidsMajlisTesting.choose("Was ist Takfir?","9–10").id,"restri
 assert.equal(api.kidsMajlisTesting.choose("Mein Passwort ist 123","6–8").id,"privacy");
 assert.equal(api.kidsMajlisTesting.choose("jemand schlägt mich","6–8").id,"help");
 assert.equal(api.kidsMajlisTesting.choose("Wer wohnt im Mond?","6–8").id,"unknown");
-assert.equal(api.kidsMajlisTesting.choose("Rabbi zidni ilma", "6–8").id,"library:dua-032-rabbi-zidni-ilma");
+assert.equal(api.kidsMajlisTesting.choose("Rabbi zidni ilma", "6–8").id,"kb:dua:dua-knowledge");
 assert.equal(api.kidsMajlisTesting.choose("Welches Dua schützt vor Einflüsterungen?", "4–5").id,"age_restricted");
 assert.equal(api.kidsMajlisTesting.choose("Welches Dua schützt vor Einflüsterungen?", "9–10").id,"library:dua-079-rabbi-audhu-bika-min-hamazati-sh-shayatin");
 assert.equal(api.kidsMajlisTesting.choose("Schäme mich zu fragen", "9–10").id,"library:aishah-ansar-learning");
 assert.equal(api.kidsMajlisTesting.choose("Schäme mich zu fragen", "6–8").id,"age_restricted");
 assert.equal(api.kidsMajlisTesting.choose("Mein Passwort ist xyz; Rabbi zidni", "9–10").id,"privacy");
 assert.equal(api.kidsMajlisTesting.choose("Ich wohne hier und jemand schlägt mich", "6–8").id,"help");
+assert.ok(knowledgeIndex.duas.every(x=>x.audio.arabic&&x.audio.german&&x.audio.slow));
+const sleeping=knowledge.findKnowledge("Ich möchte ein Dua vor dem Schlafen", "6–8", "girl");
+assert.equal(sleeping.id,"kb:dua:dua-sleep");
+assert.ok(sleeping.text.includes("Schwester"));
+assert.ok(sleeping.media?.audio?.arabic?.includes("/kids-dua-arabic-audio/"));
+assert.ok(sleeping.media.segments.length>0);
+const brother=knowledge.findKnowledgeById(sleeping.id, "6–8", "boy");
+assert.ok(brother.text.includes("Bruder"));
+assert.equal(brother.source,sleeping.source);
+const quran=knowledge.findKnowledge("Kann ich Qurʾān 2:255 hören?", "9–10", "girl");
+assert.equal(quran.id,"verse:2:255");
+assert.ok(quran.media?.recitationUrl?.includes("/262.mp3"));
+assert.equal(knowledge.findKnowledge("Qurʾān 2:999", "9–10", "girl"),null);
+assert.equal(knowledge.findKnowledge("Warum gibt es Sterne auf dem Mars?", "6–8", "boy"),null);
+assert.ok(knowledge.allahAlam("girl").text.includes("Allāhu aʿlam"));
+assert.equal(knowledge.findKnowledge("Wie kann ich dieses Recht beurteilen?", "4–5", "girl"),null);
+
 
 const limiter={limit:async()=>({success:true})};
 const parentCode="KIDS-PILOT-PARENT-ACCESS-VERY-STRONG-2026";
@@ -66,6 +95,16 @@ const reqAuth=(path,method="GET",data=undefined)=>make(path,method,data,{"Cookie
 const answer=await check(reqAuth("answer","POST",{question:"Wer ist Allah?",age:"4–5"}),env,200);
 const payload=await answer.json();
 assert.ok(payload.answerId&&payload.source&&payload.verified);
+assert.match(payload.answer,/Bruder/);
+const duaAnswer=await check(reqAuth("answer","POST",{question:"Ich möchte ein Dua vor dem Schlafen",age:"6–8",gender:"girl"}),env,200);
+const duaPayload=await duaAnswer.json();
+assert.match(duaPayload.answer,/Schwester/);
+assert.equal(duaPayload.media?.kind,"dua");
+assert.ok(duaPayload.media?.audio?.arabic);
+const verseAnswer=await check(reqAuth("answer","POST",{question:"Bitte Qurʾān 2:255 hören",age:"9–10",gender:"boy"}),env,200);
+const versePayload=await verseAnswer.json();
+assert.equal(versePayload.media?.kind,"quran");
+assert.ok(versePayload.media?.recitationUrl?.includes("/262.mp3"));
 const unknown=await check(reqAuth("answer","POST",{question:"Wie groß ist Saturn?",age:"6–8"}),env,200);
 assert.equal((await unknown.json()).verified,false);
 const tooMuch=await check(reqAuth("answer","POST",{question:"A".repeat(351)}),env,400);
