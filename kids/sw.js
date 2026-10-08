@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1251";
-const KIDS_BUILD_ID="kids-shell-v148-sourcetext1251";
+const CACHE_NAME="dar-al-tawhid-kids-v1252";
+const KIDS_BUILD_ID="kids-shell-v149-wide-reader1252";
 const DUA_AUDIO_RUNTIME="1244";
 // QUIZ_HOME_RESTORE_V1225: refresh installed PWAs with the restored Quiz entry.
 const CORE_PRECACHE=[
@@ -85,8 +85,8 @@ const CORE_PRECACHE=[
   "/kids/story-hub.js?v=25",
   "/kids/global-story-glow-v1216.css?v=1217",
   "/kids/global-story-glow-v1216.js?v=1239",
-  "/kids/dua-hub-v1219.css?v=1251",
-  "/kids/dua-hub-v1219.js?v=1251",
+  "/kids/dua-hub-v1219.css?v=1252",
+  "/kids/dua-hub-v1219.js?v=1252",
   "/kids/assets/profile-avatars/boy-kufi-v1235.svg",
   "/kids/assets/profile-avatars/girl-hijab-pink-v1235.svg",
   "/kids/assets/dua-premium/hero-v1222.jpg?v=1233",

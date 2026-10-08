@@ -2922,7 +2922,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.08.69</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.08.70</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -6535,7 +6535,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1251",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1252",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
@@ -7527,7 +7527,7 @@ html[data-view="stories"] #view-stories > :last-child{
 <script src="/kids/mubashshirun-stories.js?v=31"></script>
 <script src="/kids/sahabiyyat-stories.js?v=23"></script>\n<script src="/kids/deen-lessons.js?v=4"></script>
 <script src="/kids/global-story-glow-v1216.js?v=1239"></script>
-<script src="/kids/dua-hub-v1219.js?v=1251" data-kids-dua-hub="1251"></script>
+<script src="/kids/dua-hub-v1219.js?v=1252" data-kids-dua-hub="1252"></script>
 <script src="/kids/story-hub.js?v=25"></script>
 <script src="/kids/kids-age-typography.js?v=3"></script>
 <script src="/kids/quiz-library.js?v=9"></script>
@@ -7536,7 +7536,7 @@ html[data-view="stories"] #view-stories > :last-child{
 <link rel="stylesheet" href="/kids/stories-home-v1138.css?v=1152" data-kids-stories-home-polish="1">
 <link rel="stylesheet" href="/kids/deen-learning-v1199.css?v=1199" data-kids-deen-learning="1">\n<link rel="stylesheet" href="/kids/deen-lessons.css?v=2" data-kids-deen-lessons="1">
 <link rel="stylesheet" href="/kids/global-story-glow-v1216.css?v=1217" data-kids-global-story-glow="1">
-<link rel="stylesheet" href="/kids/dua-hub-v1219.css?v=1251" data-kids-dua-hub="1251">
+<link rel="stylesheet" href="/kids/dua-hub-v1219.css?v=1252" data-kids-dua-hub="1252">
 <link rel="stylesheet" href="/kids/story-card-system.css?v=2" data-kids-story-card-system="1">
 <link rel="stylesheet" href="/kids/story-library-cards.css?v=9" data-kids-story-card-repair="1">
 <link rel="stylesheet" href="/kids/kids-touch-rail.css?v=16" data-kids-touch-rail="1">

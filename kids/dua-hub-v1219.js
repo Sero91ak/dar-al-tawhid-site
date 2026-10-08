@@ -497,6 +497,24 @@
     document.body?.style.removeProperty("overflow");
   }
 
+
+  // KIDS_DUA_READER_FIT_V1252: adapt to rendered height, preserve all source text.
+  function fitDuaReaderViewport() {
+    const detail = q("#duaHubDetail");
+    const reader = q("#duaHubDetailScroll");
+    if (!detail?.classList.contains("open") || !reader) return;
+    detail.classList.remove("duahub-fit-compact", "duahub-fit-tight", "duahub-needs-scroll");
+    const navTop = q(".bottom-nav")?.getBoundingClientRect().top ?? (window.innerHeight - 92);
+    const available = Math.max(200, navTop - reader.getBoundingClientRect().top - 9);
+    if (reader.scrollHeight > available + 2) detail.classList.add("duahub-fit-compact");
+    if (reader.scrollHeight > available + 2) detail.classList.add("duahub-fit-tight");
+    detail.classList.toggle("duahub-needs-scroll", reader.scrollHeight > available + 2);
+  }
+
+  function queueDuaReaderFit() {
+    requestAnimationFrame(() => requestAnimationFrame(fitDuaReaderViewport));
+  }
+
   function openDetail(d) {
     detailItem = d;
     setLast(d.id);
@@ -565,7 +583,9 @@
         try { shell.scrollTo({ top: 0, left: 0, behavior: "auto" }); }
         catch (_) { shell.scrollTop = 0; }
       }
+      queueDuaReaderFit();
     });
+    document.fonts?.ready?.then(queueDuaReaderFit).catch(() => {});
   }
 
   function closeDetail(restore = true) {
@@ -895,6 +915,8 @@
       return;
     }
     buildView();
+    window.addEventListener("resize", queueDuaReaderFit, { passive: true });
+    window.visualViewport?.addEventListener("resize", queueDuaReaderFit, { passive: true });
     installNav();
     installNavCoherence();
     bindView();
