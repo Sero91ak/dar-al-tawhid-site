@@ -56,3 +56,24 @@
 #kidsMajlisRoot .km-msg .km-related{display:inline-flex;align-items:center;justify-content:center;max-width:100%;min-height:39px;margin-top:12px;padding:8px 13px;border:1px solid rgba(236,204,140,.27);border-radius:13px;background:rgba(226,198,130,.10);font:inherit;font-weight:800;font-size:12px;line-height:1.3;color:#f5d9a3;cursor:pointer;text-align:left;transition:background .18s ease,transform .18s ease}
 #kidsMajlisRoot .km-msg .km-related:active{transform:scale(.985)}
 #kidsMajlisRoot .km-msg .km-related:focus-visible{outline:2px solid #f8dc9b;outline-offset:3px}
+
+/* Inline learning cards: the same restrained navy/gold glow as Kids Home. */
+#kidsMajlisRoot .km-media{display:grid;gap:9px;margin-top:12px;padding:13px;border-radius:17px;border:1px solid rgba(239,206,144,.25);background:rgba(11,39,53,.46);min-width:0;max-width:100%}
+#kidsMajlisRoot .km-media-prompt{font-size:13px;font-weight:700;line-height:1.55;margin:0;color:#fff0cd}
+#kidsMajlisRoot .km-media-actions{display:flex;flex-wrap:wrap;gap:7px;max-width:100%}
+#kidsMajlisRoot .km-media-button{min-height:42px;border:1px solid rgba(235,209,153,.25);border-radius:12px;background:rgba(226,198,130,.11);color:#f7e6bd;padding:9px 11px;font:inherit;font-size:12px;font-weight:800;line-height:1.3;cursor:pointer}
+#kidsMajlisRoot .km-media-button:focus-visible,#kidsMajlisRoot .km-word:focus-visible{outline:2px solid #f9dc95;outline-offset:3px}
+#kidsMajlisRoot .km-media-details{display:grid;gap:9px;min-width:0;padding:10px 4px}
+#kidsMajlisRoot .km-media-details[hidden]{display:none}
+#kidsMajlisRoot .km-arabic{font-family:"Noto Naskh Arabic","Amiri","Geeza Pro",serif;font-size:24px!important;line-height:1.95;text-align:center;direction:rtl;unicode-bidi:isolate;color:#fff8e2;margin:0;overflow-wrap:anywhere}
+#kidsMajlisRoot .km-translit{font-size:13px;line-height:1.6;color:#e2dfd6;text-align:center;overflow-wrap:anywhere;margin:0}
+#kidsMajlisRoot .km-meaning{font-size:13px;line-height:1.5;color:#f3e0b3;margin:0}
+#kidsMajlisRoot .km-media-note{font-size:11px;line-height:1.5;color:#d8e6ea;margin:0}
+#kidsMajlisRoot .km-word-panel{border-top:1px solid rgba(242,209,151,.14);padding-top:11px}
+#kidsMajlisRoot .km-word-panel summary{font-size:12px;font-weight:800;color:#f4dca6;cursor:pointer;list-style-position:inside}
+#kidsMajlisRoot .km-words{display:flex;flex-wrap:wrap;gap:9px;margin-top:12px;max-width:100%}
+#kidsMajlisRoot .km-word{min-width:58px;max-width:100%;min-height:65px;padding:9px 11px;border:1px solid rgba(239,210,152,.22);border-radius:12px;color:#f8edce;background:rgba(255,255,255,.055);display:grid;gap:2px;justify-items:center;cursor:pointer}
+#kidsMajlisRoot .km-word strong{font-size:19px;font-family:"Noto Naskh Arabic","Amiri","Geeza Pro",serif;line-height:1.6;direction:rtl;unicode-bidi:isolate}
+#kidsMajlisRoot .km-word small{font-size:10px;color:#dae4e4;line-height:1.2;overflow-wrap:anywhere}
+@media(max-width:380px){#kidsMajlisRoot .km-media{padding:10px}#kidsMajlisRoot .km-media-button{padding:9px 10px;font-size:11px}#kidsMajlisRoot .km-arabic{font-size:21px!important}}
+@media(prefers-reduced-motion:reduce){#kidsMajlisRoot .km-media-button{transition:none!important}}
