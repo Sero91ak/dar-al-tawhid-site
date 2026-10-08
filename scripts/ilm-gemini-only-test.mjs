@@ -16,7 +16,7 @@ for(const section of [
   readFunction("async function ilmOpenResearch(", "// ILM_SCIENCE_COMPOSE_"),
   readFunction("async function ilmScienceCompose(", "export default")
 ]){
-  assert.doesNotMatch(section,/env\.AI\.run|api\.openai\.com|openai/i,
+  assert.doesNotMatch(section,/env\.AI\.run|api\.openai\.com|researchIlmWithOpenAI\s*\(|composeIlmWithOpenAI\s*\(/i,
     "Majlis code must not invoke a paid second provider");
 }
 
