@@ -622,6 +622,8 @@
         }
         reply.evidences = evidence;
         reply._ilmGeneratedText = answer;
+        reply._ilmProvider = data.provider === "openai" ? "OpenAI" : data.provider === "gemini" ? "Gemini" : "";
+        reply._ilmSourceAutoOpen = true;
         reply._ilmCitationCount = evidence.length;
         reply._ilmNoRelevantEvidence = false;
         reply._ilmResearchError = "";
@@ -700,6 +702,8 @@
       var answer = reply._ilmResearching
         ? "Ich suche ergänzende Originalquellen und prüfe ihre Fundstellen, bevor ich eine Antwort gebe."
         : reply._ilmResearchError ? reply._ilmResearchError
+        : isProof && reply._ilmGeneratedText
+        ? reply._ilmGeneratedText
         : isProof
         ? (!anyProof ? "Zu dieser Frage liegen aktuell keine ausreichend belegten Originalstellen vor. Ich möchte keine Beweise erfinden."
           : countAsked > verifiedSources
@@ -730,7 +734,7 @@
       if (reply._ilmBasicTawhid || reply._ilmTawhidFollowup) html += ilmScriptureLinks(!!reply._ilmTawhidFollowup);
       if (reply._ilmBasicIman) html += ilmImanScriptureLinks();
       if (!reply._ilmBasicTawhid && !reply._ilmBasicIman && !reply._ilmTawhidFollowup) html += discoverySection(reply);
-      if (!reply._ilmIsDiscovery && !reply._ilmBasicTawhid && !reply._ilmBasicIman && !reply._ilmTawhidFollowup) html += sourceDisclosure(reply, isProof);
+      if (!reply._ilmIsDiscovery && !reply._ilmBasicTawhid && !reply._ilmBasicIman && !reply._ilmTawhidFollowup) html += sourceDisclosure(reply, isProof || !!reply._ilmSourceAutoOpen);
       if (reply._ilmStudyReminder) html += '<aside class="ilm-study-reminder" aria-label="Hinweis zum Weiterlernen">' +
         '<p>' + esc(reply._ilmStudyReminder) + '</p></aside>';
       var follows = reply._ilmBasicTawhid
