@@ -74,6 +74,9 @@ const truth=sunnah.findSunnahFromCorpus("Erzähle mir den Hadith 6094","6–8","
 assert.equal(truth?.id,"kb:sunnah:had-0020-truth");
 assert.equal(truth.media.grade,"Ṣaḥīḥ");
 assert.equal(truth.media.source,"Ṣaḥīḥ al-Buḫārī · Nr. 6094");
+assert.equal(truth.media.text,sourceHadiths.find(item=>item.id==="had-0020-truth").exactText);
+assert.ok(!truth.text.includes(truth.media.text),"long hadith should appear only once, in the citation card");
+assert.ok(truth.text.includes("Für dich bedeutet"),"children must receive a brief interpretation before the citation card");
 assert.ok(truth.text.includes("Schwester"));
 const checkedDorarLinks={
  "had-0020-truth":"https://dorar.net/hadith/sharh/10209",
