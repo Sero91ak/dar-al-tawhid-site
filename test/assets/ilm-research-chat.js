@@ -778,6 +778,49 @@
       var p = splitIlmGreeting(input);
       return p.question || String(input || "");
     }
+    /* MAJLIS CONVERSATION INTENT V1349
+       General-purpose follow-up context, without a domain-specific answer list.
+       Read only the most recent user questions of this conversation. */
+    function ilmFollowupIntent(value) {
+      var q = ilmNormalize(value);
+      return /^(?:(?:und |aber |doch |also |noch )?(?:warum|wieso|weshalb|wer|welcher|welche|welchen|wo|wie|wessen)|(?:gib|zeige|zeig|nenne|finde|such|suche) (?:mir )?(?:noch |weitere |andere |zwei |drei |vier |funf |5 |2 |3 )?(?:beweise|belege|quellen|uberlieferungen|aussagen|meinungen|fundstellen)|(?:wer hat das|wer sagte das|was sagte er|was ist damit|ist das|stimmt das|dazu|mehr dazu|belege dazu|quelle dazu|sag mir mehr))/i.test(q)
+        && !/^(?:warum|wer|welcher|was) (?:ist|bedeutet|war) (?:die |der |das )?(?:tawhid|iman|adab|islam|aqidah|gebet|ehe|zakah|hadith)\b/.test(q);
+    }
+    function ilmRecentTopic(value, conversation) {
+      var current = ilmNormalize(value);
+      var messages = conversation && Array.isArray(conversation.messages) ? conversation.messages : [];
+      for (var i = messages.length - 1, scanned = 0; i >= 0 && scanned < 70; i--, scanned++) {
+        var m = messages[i];
+        if (!m || m.role !== "user") continue;
+        var candidate = ilmQueryWithoutGreeting(String(m.content || "")).trim();
+        if (!candidate || ilmNormalize(candidate) === current || ilmFollowupIntent(candidate)) continue;
+        if (ilmQuestionTerms(candidate).length && candidate.length >= 8) return candidate.slice(0,250);
+      }
+      return "";
+    }
+    function ilmResolvedQuery(value, conversation) {
+      var current = ilmQueryWithoutGreeting(String(value || "")).trim();
+      if (!ilmFollowupIntent(current)) return current;
+      var subject = ilmRecentTopic(current,conversation);
+      return subject ? "Ausgangsfrage: " + subject + ". Nachfrage dazu: " + current : current;
+    }
+    function ilmStudyReminder(value, conversation) {
+      if (!conversation || !Array.isArray(conversation.messages)) return "";
+      var current = ilmNormalize(ilmQueryWithoutGreeting(value));
+      var count = 1, userCount = 0;
+      for (var i = conversation.messages.length - 1; i >= 0 && userCount < 75; i--) {
+        var message = conversation.messages[i];
+        if (!message || message.role !== "user") continue;
+        var text = ilmNormalize(ilmQueryWithoutGreeting(String(message.content || "")));
+        if (!text || text === current) continue;
+        userCount++;
+        if (userCount > 0 && !ilmFollowupIntent(text) && !ilmFollowupIntent(current)) break;
+        count++;
+      }
+      // A gentle invitation, never a block or a judgement about the visitor.
+      if (count < 25 || count % 25 !== 0) return "";
+      return "Wir haben dieses Thema schon aus verschiedenen Blickwinkeln betrachtet. Vielleicht hilft es, die bisherigen Belege in Ruhe durchzugehen. Ich kann sie dir kurz zusammenfassen; du kannst selbstverständlich jederzeit weiterfragen.";
+    }
     function isBasicImanQuestion(value) {
       var q = ilmNormalize(value);
       return /(?:^| )(?:was (?:ist|bedeutet)|was versteht man unter|erklare|definition von) (?:den |die |das )?(?:iman|iiman)(?: |$)/.test(q)
