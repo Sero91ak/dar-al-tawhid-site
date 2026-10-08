@@ -3,6 +3,43 @@
   "use strict";
   if (!/\/test(\/|$)/.test(String(location.pathname || ""))) return;
 
+  /* MAJLIS ARCHIVE STYLE BOOT V1340: usable even if late HTML imports are ignored. */
+  (function ensureIlmArchiveStyles() {
+    var id = "darIlmHistoryArchiveV1340";
+    var coreId = "darIlmHistoryCoreV1340";
+    function install() {
+      var root = document.head || document.documentElement;
+      if (!root || !document.createElement || !document.getElementById) return;
+      if (!document.getElementById(id)) {
+        var link = document.createElement("link");
+        link.id = id;
+        link.rel = "stylesheet";
+        link.href = "/test/assets/ilm-history-archive-v1338.css?v=1340";
+        root.appendChild(link);
+      }
+      if (!document.getElementById(coreId)) {
+        var style = document.createElement("style");
+        style.id = coreId;
+        style.textContent =
+          'body.is-ilm-chat-route .ilm-history-archive{display:block;max-width:760px;width:100%;margin:4px auto 14px;border:1px solid color-mix(in srgb,var(--ilm-accent) 24%,transparent);border-radius:12px;box-sizing:border-box;overflow:hidden;background:color-mix(in srgb,var(--ilm-header-bg) 36%,transparent)}' +
+          'body.is-ilm-chat-route .ilm-history-archive>summary,body.is-ilm-chat-route .ilm-history-turn>summary{display:flex;align-items:center;gap:10px;list-style:none;cursor:pointer;padding:10px 12px;min-height:42px;font:600 12px/1.4 system-ui,sans-serif;color:var(--ilm-primary-text)}' +
+          'body.is-ilm-chat-route .ilm-history-archive summary::-webkit-details-marker,body.is-ilm-chat-route .ilm-history-turn summary::-webkit-details-marker{display:none}' +
+          'body.is-ilm-chat-route .ilm-history-archive summary::marker,body.is-ilm-chat-route .ilm-history-turn summary::marker{content:""}' +
+          'body.is-ilm-chat-route .ilm-history-archive-label,body.is-ilm-chat-route .ilm-history-turn-question{flex:1;min-width:0}' +
+          'body.is-ilm-chat-route .ilm-history-archive-list{padding:0 10px 7px;border-top:1px solid color-mix(in srgb,var(--ilm-accent) 16%,transparent)}' +
+          'body.is-ilm-chat-route .ilm-history-turn{border-bottom:1px solid color-mix(in srgb,var(--ilm-accent) 12%,transparent)}' +
+          'body.is-ilm-chat-route .ilm-history-turn-question{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}' +
+          'body.is-ilm-chat-route .ilm-history-archive-icon,body.is-ilm-chat-route .ilm-history-archive-chevron,body.is-ilm-chat-route .ilm-history-turn-chevron,body.is-ilm-chat-route .ilm-history-turn-index{color:var(--ilm-accent)}' +
+          'body.is-ilm-chat-route .ilm-history-turn-content{padding:8px 3px}';
+        root.appendChild(style);
+      }
+    }
+    install();
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded",install,{once:true});
+    }
+  })();
+
   var ALLOW = [
     "islamweb.net",
     "shamela.ws",
