@@ -7189,6 +7189,18 @@
         ".github/workflows/check-q35-slides-recovery.yml"
       ],
       "expiresAt": "2026-11-30T23:59:00.000Z"
+    },
+    {
+      "id": "q36-post469-restore-source-slides-2026-10-08",
+      "approvedBy": "user-explicit-q36-rebuild-from-existing-Q36-registered-sources",
+      "reason": "User lost original Q36 draft and requested re-create the slide post from registered Q36 sources; replace only existing post 469, preserve source locations, no OneSignal notifications, Kids, Apple TV or Test edits.",
+      "paths": [
+        "content/posts/2026-10-08-miraj-ruyah-ikhtilaf-kein-pauschaler-takfir-slides.md",
+        "scripts/q36-slides-source-guard.cjs",
+        ".github/workflows/check-q36-slides-source.yml",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-30T23:59:00.000Z"
     }
   ],
   "enabled": true
