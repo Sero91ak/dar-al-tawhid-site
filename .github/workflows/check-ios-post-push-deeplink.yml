@@ -27,3 +27,10 @@ jobs:
         run: |
           set -euo pipefail
           xcrun swiftc -frontend -parse             ios/DarAlTawhid/DarAlTawhid/DarAppRouter.swift             ios/DarAlTawhid/DarAlTawhid/WebAppView.swift             ios/DarAlTawhid/DarAlTawhid/DarPushNotifications.swift             ios/DarAlTawhid/DarAlTawhid/DarAlTawhidApp.swift
+
+      - name: Build native iOS Simulator app (no signing, no deployment)
+        timeout-minutes: 12
+        shell: bash
+        run: |
+          set -euo pipefail
+          xcodebuild -project ios/DarAlTawhid/DarAlTawhid.xcodeproj -scheme DarAlTawhid -configuration Debug -destination 'generic/platform=iOS Simulator' -derivedDataPath /tmp/dar-ios-post-push-check CODE_SIGNING_ALLOWED=NO -quiet build
