@@ -40,8 +40,14 @@ class TvActivity : Activity() {
     private val cities = listOf(
         Triple("Rheinbach", 50.6256, 6.9491),
         Triple("Meckenheim", 50.6235, 7.0294),
+        Triple("Bonn", 50.7374, 7.0982),
         Triple("Köln", 50.9383, 6.9603),
-        Triple("Berlin", 52.5200, 13.4050)
+        Triple("Düsseldorf", 51.2277, 6.7735),
+        Triple("Berlin", 52.5200, 13.4050),
+        Triple("Hamburg", 53.5511, 9.9937),
+        Triple("Frankfurt am Main", 50.1109, 8.6821),
+        Triple("München", 48.1351, 11.5820),
+        Triple("Stuttgart", 48.7758, 9.1829)
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -95,7 +101,9 @@ class TvActivity : Activity() {
         shell.addView(footer)
         setContentView(shell)
 
-        val initial = getPreferences(MODE_PRIVATE).getString("tab", "home") ?: "home"
+        val preferences = getPreferences(MODE_PRIVATE)
+        cityIndex = preferences.getInt("city_index", 0).coerceIn(0, cities.lastIndex)
+        val initial = preferences.getString("tab", "home") ?: "home"
         show(initial)
         nav.getChildAt(0)?.requestFocus()
     }
@@ -113,10 +121,15 @@ class TvActivity : Activity() {
 
     private fun loadHome() {
         body.addView(label("Gebetszeiten", 29f, gold, true))
-        body.addView(label("Standort bitte am Fernseher auswählen. Voreinstellung: Rheinbach.", 16f, muted, false))
-        body.addView(navButton("Standort: ${cities[cityIndex].first}  ·  wechseln") {
+        body.addView(label(
+            "TV-Geräte haben häufig keinen GPS-Empfänger. Stadt mit OK auswählen – die Wahl bleibt gespeichert.",
+            16f, muted, false
+        ))
+        body.addView(navButton("Stadt: ${cities[cityIndex].first}  ·  nächste Stadt") {
             cityIndex = (cityIndex + 1) % cities.size
-            loadHome()
+            getPreferences(MODE_PRIVATE).edit().putInt("city_index", cityIndex).apply()
+            // Clear the previous home view before loading new times.
+            show("home")
         })
         body.addView(label("Lade aktuelle Gebetszeiten …", 19f, cream, false))
         val city = cities[cityIndex]
