@@ -46,6 +46,62 @@ const status=$("#kidsSalahStatus"),progress=$("#kidsSalahProgress");
 const currentName=$("#kidsSalahCurrentName"),currentTime=$("#kidsSalahCurrentTime");
 $("#kidsSalahLocation").addEventListener("click",openSettings);
 
+/* Full-page daily schedule: a new immersive surface, not another nested home card. */
+const dayPage=document.createElement("section");
+dayPage.className="kids-salah-day";
+dayPage.id="kidsSalahDailyPage";
+dayPage.hidden=true;
+dayPage.setAttribute("aria-label","Tagesgebetszeiten");
+dayPage.innerHTML=
+ '<div class="kids-salah-day-body"><header class="kids-salah-day-header">'+
+ '<button class="kids-salah-day-back" id="kidsSalahDayBack" type="button" aria-label="Zurück zur Startseite">‹</button>'+
+ '<span class="kids-salah-day-brand">DĀR AL TAWḤĪD KIDS · ṢALĀH</span></header>'+
+ '<h2>Unsere fünf <em>Gebete</em></h2>'+
+ '<p class="kids-salah-day-subtitle">Hier siehst du alle Gebetszeiten für heute.</p>'+
+ '<div class="kids-salah-day-place"><strong id="kidsSalahDayCity">Dein Gebetsort</strong>'+
+ '<button type="button" id="kidsSalahDayLocation">Ort ändern</button></div>'+
+ '<div class="kids-salah-day-list" id="kidsSalahDayList"></div>'+
+ '<p class="kids-salah-day-notice">Die Gebetszeiten werden für deinen Ort und die ausgewählte Berechnungsmethode ermittelt. Bei abweichenden Angaben frage deine Eltern oder die Moschee vor Ort.</p></div>';
+document.body.appendChild(dayPage);
+const dayList=dayPage.querySelector("#kidsSalahDayList");
+const dayCity=dayPage.querySelector("#kidsSalahDayCity");
+const dayBack=dayPage.querySelector("#kidsSalahDayBack");
+$("#kidsSalahOpenDay").addEventListener("click",()=>{
+ dayPage.hidden=false;document.body.classList.add("kids-salah-day-open");
+ dayPage.dataset.gender=document.querySelector(".app")?.dataset.gender||"boy";
+ renderDay();dayPage.scrollTop=0;dayBack.focus();
+});
+dayBack.addEventListener("click",closeDay);
+dayPage.querySelector("#kidsSalahDayLocation").addEventListener("click",()=>{
+ closeDay();openSettings();
+});
+function closeDay(){
+ dayPage.hidden=true;document.body.classList.remove("kids-salah-day-open");
+ $("#kidsSalahOpenDay").focus();
+}
+document.addEventListener("keydown",e=>{
+ if(e.key==="Escape"&&!dayPage.hidden&&overlay.hidden)closeDay();
+});
+function renderDay(){
+ if(dayPage.hidden)return;
+ dayCity.textContent=place?.name||"Gebetsort einstellen";
+ if(!place){dayList.innerHTML='<p>Bitte wähle zuerst deinen Gebetsort.</p>';return;}
+ let date;try{date=dateInZone(new Date(),place.tz);}catch(_){return;}
+ const today=days[date];
+ const all=[...entries(yesterday(date),days[yesterday(date)]),...entries(date,today),...entries(tomorrow(date),days[tomorrow(date)])];
+ const now=Date.now(),previous=all.filter(i=>i.ts<=now).pop(),next=all.find(i=>i.ts>now);
+ dayList.innerHTML=ORDER.map(key=>{
+  const time=today?.times?.[key]?.time||"--:--";
+  const current=previous?.key===key&&previous?.date===date;
+  const following=next?.key===key&&next?.date===date;
+  return '<div class="kids-salah-day-item'+(current?' is-current':following?' is-next':'')+'">'+
+   '<div class="kids-salah-day-item-name"><strong>'+NAMES[key]+'</strong><small>'+
+   (current?'AKTUELLES GEBET':following?'ALS NÄCHSTES':'TAGESGEBET')+
+   '</small></div><time>'+time+'</time></div>';
+ }).join("");
+}
+
+
 const overlay=document.createElement("div");
 overlay.className="kids-salah-overlay";overlay.hidden=true;
 overlay.innerHTML=
@@ -206,6 +262,7 @@ function draw(){
  const width=Math.max(0,Math.min(100,((now-start)/(next.ts-start))*100));
  progress.style.width=width.toFixed(2)+"%";
  status.textContent="Berechnet für "+(place.name||"deinen Ort")+(navigator.onLine?"":" · Offline-Daten");
+ renderDay();
 }
 async function refresh(){
  if(!place)return;
@@ -230,6 +287,7 @@ async function refresh(){
  if(ticket!==fetchTicket)return;
  if(succeeded){lastFetch=Date.now();try{localStorage.setItem(CACHE,JSON.stringify({placeKey:placeKey(place),days}));}catch(_){}}
  draw();
+ renderDay();
  if(!days[today])status.textContent="Verbindung fehlt. Bitte später erneut versuchen.";
 }
 draw();
