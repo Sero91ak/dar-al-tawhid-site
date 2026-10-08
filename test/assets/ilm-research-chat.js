@@ -528,18 +528,23 @@
       );
     };
 
+    /* MAJLIS CHAT ARCHIVE V1338: archive whole earlier Q/A turns, not separate tall bubbles. */
     var expandedPastAnswers = Object.create(null);
+    var archiveOpen = false;
     document.addEventListener("toggle",function(ev) {
       var elem = ev.target;
-      if (!elem || !elem.matches || !elem.matches("details.ilm-earlier-answer")) return;
-      var id = elem.getAttribute("data-ilm-earlier") || "";
-      if (id) expandedPastAnswers[id] = elem.open;
+      if (!elem || !elem.matches) return;
+      if (elem.matches("details.ilm-history-archive")) {
+        archiveOpen = !!elem.open;
+      } else if (elem.matches("details.ilm-history-turn")) {
+        var id = elem.getAttribute("data-ilm-history-id") || "";
+        if (id) expandedPastAnswers[id] = !!elem.open;
+      }
     },true);
     var oldMsgs = window.renderIlmMessages;
     window.renderIlmMessages = function (conversation) {
       var messages = Array.isArray(conversation && conversation.messages) ? conversation.messages : [];
       if (!messages.length) return window.renderIlmWelcomeState();
-      var assistantSeen = false;
       var latestUser = -1;
       messages.forEach(function(m,i) { if (m.role === "user") latestUser = i; });
       var phaseMap = {
@@ -547,30 +552,56 @@
         external: ["Quellen werden geprüft …", "Frühe Quellen"],
         compose: ["Fundstellen prüfen", "Geprüfte Quellen werden durchsucht …"]
       };
-      return messages.map(function (message, index) {
+      function regularMessage(message) {
         if (message.role === "user") {
           return '<div class="ilm-user-row"><div class="ilm-user-bubble">' + esc(message.content || "") + "</div></div>";
         }
         if (message.role === "loading") {
           var ph = phaseMap[message.phase] || phaseMap.internal;
-          return (
-            '<div class="ilm-loading-row"><span class="ilm-dots"><i></i><i></i><i></i></span>' +
-            "<span>" + esc(ph[0]) + '</span><span class="ilm-loading-sub">' + esc(ph[1]) + "</span></div>"
-          );
+          return '<div class="ilm-loading-row"><span class="ilm-dots"><i></i><i></i><i></i></span>' +
+            "<span>" + esc(ph[0]) + '</span><span class="ilm-loading-sub">' + esc(ph[1]) + "</span></div>";
         }
-        var html = window.renderIlmAssistantMessage(message, !assistantSeen);
-        assistantSeen = true;
-        // Keep every historical answer accessible without forcing a wall of old cards
-        // above the visitor's most recent question.
-        if (index < latestUser) {
-          var id = esc(String(message.id || index));
-          return '<details class="ilm-earlier-answer" data-ilm-earlier="' + id + '"' +
-            (expandedPastAnswers[id] ? ' open' : '') + '><summary><span class="ilm-earlier-answer-icon" aria-hidden="true">↶</span>' +
-            'Vorherige Antwort lesen <span class="ilm-earlier-answer-chevron" aria-hidden="true">⌄</span>' +
-            '</summary><div class="ilm-earlier-answer-content">' + html + '</div></details>';
+        return window.renderIlmAssistantMessage(message,false);
+      }
+      // If no user message exists, keep the original renderer behavior.
+      if (latestUser < 0) return messages.map(regularMessage).join("");
+      var older = messages.slice(0,latestUser);
+      var archive = "";
+      if (older.length) {
+        var turns = [];
+        var current = null;
+        older.forEach(function(m,index) {
+          if (m.role === "user") {
+            if (current) turns.push(current);
+            current = {id:String(m.id || index),question:String(m.content || "Frühere Frage"),answers:[]};
+          } else if (m.role !== "loading") {
+            if (!current) current = {id:"older-" + index,question:"Frühere Antwort",answers:[]};
+            current.answers.push(regularMessage(m));
+          }
+        });
+        if (current) turns.push(current);
+        if (turns.length) {
+          archive = '<details class="ilm-history-archive"' + (archiveOpen ? ' open' : '') +
+            '><summary><span class="ilm-history-archive-icon" aria-hidden="true">↶</span>' +
+            '<span class="ilm-history-archive-label">Frühere Fragen</span>' +
+            '<small>' + turns.length + '</small>' +
+            '<span class="ilm-history-archive-chevron" aria-hidden="true">⌄</span></summary>' +
+            '<div class="ilm-history-archive-list">' +
+            turns.map(function(t,i) {
+              var id = esc(t.id);
+              return '<details class="ilm-history-turn" data-ilm-history-id="' + id + '"' +
+                (expandedPastAnswers[t.id] ? ' open' : '') + '><summary>' +
+                '<span class="ilm-history-turn-index">' + String(i+1).padStart(2,"0") + '</span>' +
+                '<span class="ilm-history-turn-question">' + esc(clip(t.question,125)) + '</span>' +
+                '<span class="ilm-history-turn-chevron" aria-hidden="true">⌄</span></summary>' +
+                '<div class="ilm-history-turn-content">' +
+                (t.answers.join("") || '<p class="ilm-history-no-answer">Für diese Frage liegt noch keine gespeicherte Antwort vor.</p>') +
+                '</div></details>';
+            }).join("") +
+            '</div></details>';
         }
-        return html;
-      }).join("");
+      }
+      return archive + messages.slice(latestUser).map(regularMessage).join("");
     };
 
     if (typeof window.searchIlmKnowledge === "function") {
