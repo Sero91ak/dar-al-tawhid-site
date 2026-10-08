@@ -7256,6 +7256,21 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "android-signed-release-and-existing-ios-marketing-2026-10-08",
+      "at": "2026-10-08T20:21:00+02:00",
+      "approvedBy": "user-requested-immediate-android-apk-signing-website-advertising-and-direct-downloads",
+      "reason": "Unmittelbare offizielle Android/TV-APK-Verteilung vorbereiten, neben dem bestehenden iOS App-Store-Marketing jeweils eigenständige Android- und TV-App-Icons und direkte, nach Freigabe automatisch aktivierte Downloads. Einmalige Mac-Schlüsselsicherung. Nur Entwicklungszweig, keine unsignierten öffentlichen APKs und keine Kids-Freigabe.",
+      "paths": [
+        "download/",
+        "links/index.html",
+        "android/tools/",
+        ".github/workflows/android-website-release.yml",
+        ".github/workflows/verify-android-marketing.yml",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
