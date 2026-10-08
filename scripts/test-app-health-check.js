@@ -275,6 +275,21 @@ if (worker.includes('"/kids/api/recitation/grade"') && worker.includes("@cf/open
   ok("test-app-worker.js: Kids-Rezitationsendpoint vorhanden");
 }
 
+// Majlis source integrity: run the saved topic-and-citation regression suite
+// through the existing Test Health Check (the global deployment workflow is locked).
+try {
+  new Function(read("test/assets/ilm-research-chat.js"));
+  ok("Majlis ʿIlm: Test-Client JavaScript syntax");
+} catch (error) {
+  fail("Majlis ʿIlm: Test-Client JavaScript syntax – " + error.message);
+}
+try {
+  require("./ilm-evidence-regression-test.js");
+  ok("Majlis ʿIlm: geprüfte Quellen, Antwortanzeige und Themenwechsel");
+} catch (error) {
+  fail("Majlis ʿIlm: Quellen-Regression – " + error.message);
+}
+
 if (failed) {
   console.error(`\n${failed} Test-App-Check(s) fehlgeschlagen – Deploy stoppen.`);
   process.exit(1);
