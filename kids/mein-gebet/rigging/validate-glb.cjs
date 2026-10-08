@@ -79,7 +79,7 @@ function validateDocument(g, spec, profile = "boy", metadata = {}) {
     if (!Array.isArray(a.channels) || !a.channels.length) fail("Empty animation clip: " + (a.name || "?"));
     for (const ch of a.channels || []) {
       if (ch.target?.path === "scale") fail("Animated scale changes body/limb proportions: " + a.name);
-      if (!["translation", "rotation", "weights"].includes(ch.target?.path)) fail("Unsupported animation channel: " + String(ch.target?.path));
+      if (!["translation", "rotation"].includes(ch.target?.path)) fail("Unsupported animation channel: " + String(ch.target?.path));
       if (!Number.isInteger(ch.target?.node) || !nodes[ch.target.node]) fail("Animation references invalid joint/node.");
     }
   }
