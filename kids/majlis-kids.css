@@ -46,3 +46,9 @@
 #kidsMajlisRoot .km-parent-panel button:disabled{opacity:.4}
 @media(min-width:700px){#kidsMajlisEntry{max-width:920px;margin-left:auto;margin-right:auto}#kidsMajlisRoot .km-msg{max-width:70%}}
 @media(prefers-reduced-motion:reduce){#kidsMajlisEntry{transition:none!important}}
+
+#kidsMajlisRoot .km-parent-panel .km-code-label{display:grid;gap:8px;margin:13px 0;color:#e7dcc3;font-size:12px;font-weight:800;line-height:1.4}
+#kidsMajlisRoot .km-parent-panel .km-code-input{width:100%;min-width:0;height:49px;border:1px solid rgba(239,214,163,.27);border-radius:15px;padding:11px 13px;color:#fff4d4;font:inherit;font-size:16px;background:rgba(255,255,255,.075);outline-offset:3px}
+#kidsMajlisRoot .km-parent-panel .km-code-input:focus-visible{outline:2px solid #f2d991}
+#kidsMajlisRoot .km-parent-panel .km-gate-info{margin-top:10px;padding:11px 12px;border-radius:13px;background:rgba(220,188,118,.07)}
+@media(max-height:620px){#kidsMajlisRoot .km-parent-panel{max-height:90svh;overflow-y:auto}#kidsMajlisRoot .km-top{padding-top:max(8px,env(safe-area-inset-top))}}
