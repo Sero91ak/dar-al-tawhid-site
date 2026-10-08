@@ -28,7 +28,18 @@ jobs:
           set -euo pipefail
           xcrun swiftc -frontend -parse             ios/DarAlTawhid/DarAlTawhid/DarAppRouter.swift             ios/DarAlTawhid/DarAlTawhid/WebAppView.swift             ios/DarAlTawhid/DarAlTawhid/DarPushNotifications.swift             ios/DarAlTawhid/DarAlTawhid/DarAlTawhidApp.swift
 
+      - name: Check local OneSignal XCFramework dependencies
+        id: vendor
+        shell: bash
+        run: |
+          if [ -d ios/DarAlTawhid/Vendor/OneSignal/OneSignalFramework.xcframework ]; then
+            echo "available=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "available=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::Simulator build unavailable in the GitHub checkout: ios/DarAlTawhid/Vendor/OneSignal/*.xcframework are not tracked. Swift parse and deep-link regression tests still run."
+          fi
       - name: Build native iOS Simulator app (no signing, no deployment)
+        if: steps.vendor.outputs.available == 'true'
         timeout-minutes: 12
         shell: bash
         run: |
