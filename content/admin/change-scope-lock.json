@@ -7243,6 +7243,19 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "native-update-notice-and-tv-install-guide-2026-10-08",
+      "at": "2026-10-08T20:45:00+02:00",
+      "approvedBy": "user-explicit-native-update-notification-and-android-tv-apk-website-distribution",
+      "reason": "GitHub/Cursor verpflichtende Meldung für neue Android-APK/Apple-IPA und konkrete Installationsanleitung für Android TV/Google TV/TV-Box, ohne Live-Deploy. Kids ausschließlich intern, Push unverändert.",
+      "paths": [
+        "AGENTS.md",
+        ".github/workflows/unified-native-build.yml",
+        "download/",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
