@@ -6,6 +6,8 @@ on:
       - feature/android-distribution-2026-10-08
       - feature/android-kids-2026-10-08
       - feature/android-tv-2026-10-08
+      - feature/android-release-automation-2026-10-08
+      - main
     paths:
       - "android/**"
       - ".github/workflows/android-distribution-build.yml"
@@ -68,7 +70,7 @@ jobs:
           ./gradlew --no-daemon :app:assembleDebug
 
       - name: Kids Android Debug APK erstellen
-        if: github.ref_name == 'feature/android-kids-2026-10-08' || github.ref_name == 'feature/android-tv-2026-10-08'
+        if: github.ref_name == 'feature/android-kids-2026-10-08' || github.ref_name == 'feature/android-tv-2026-10-08' || github.ref_name == 'feature/android-release-automation-2026-10-08' || github.ref_name == 'main'
         working-directory: android
         run: ./gradlew --no-daemon :kids:assembleDebug
 
@@ -82,12 +84,12 @@ jobs:
           retention-days: 14
 
       - name: Android TV Debug APK erstellen
-        if: github.ref_name == 'feature/android-tv-2026-10-08'
+        if: github.ref_name == 'feature/android-tv-2026-10-08' || github.ref_name == 'feature/android-release-automation-2026-10-08' || github.ref_name == 'main'
         working-directory: android
         run: ./gradlew --no-daemon :tv:assembleDebug
 
       - name: Android TV APK als internes Test-Artefakt
-        if: github.ref_name == 'feature/android-tv-2026-10-08'
+        if: github.ref_name == 'feature/android-tv-2026-10-08' || github.ref_name == 'feature/android-release-automation-2026-10-08' || github.ref_name == 'main'
         uses: actions/upload-artifact@v4
         with:
           name: dar-al-tawhid-tv-android-debug
@@ -139,6 +141,88 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
+      - name: Kids Release-Signierung nur mit vorhandenen Secrets
+        id: signing_kids
+        shell: bash
+        env:
+          KEYSTORE_BASE64: ${{ secrets.DAR_ANDROID_KIDS_KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.DAR_ANDROID_KIDS_STORE_PASSWORD }}
+          KEYSTORE_ALIAS: ${{ secrets.DAR_ANDROID_KIDS_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.DAR_ANDROID_KIDS_KEY_PASSWORD }}
+        run: |
+          if [[ -n "$KEYSTORE_BASE64" && -n "$KEYSTORE_PASSWORD" && -n "$KEYSTORE_ALIAS" && -n "$KEY_PASSWORD" ]]; then
+            printf '%s' "$KEYSTORE_BASE64" | base64 --decode > android/kids-upload-keystore.jks
+            chmod 600 android/kids-upload-keystore.jks
+            {
+              printf 'storeFile=kids-upload-keystore.jks\n'
+              printf 'storePassword=%s\n' "$KEYSTORE_PASSWORD"
+              printf 'keyAlias=%s\n' "$KEYSTORE_ALIAS"
+              printf 'keyPassword=%s\n' "$KEY_PASSWORD"
+            } > android/kids-keystore.properties
+            chmod 600 android/kids-keystore.properties
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::Kids-Release ausgelassen: Signier-Secrets fehlen."
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Kids AAB + APK signiert erstellen
+        if: steps.signing_kids.outputs.enabled == 'true'
+        working-directory: android
+        run: ./gradlew --no-daemon :kids:bundleRelease :kids:assembleRelease
+
+      - name: Kids signierte Pakete intern bereitstellen
+        if: steps.signing_kids.outputs.enabled == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-al-tawhid-kids-signed-aab-and-apk
+          path: |
+            android/kids/build/outputs/bundle/release/kids-release.aab
+            android/kids/build/outputs/apk/release/kids-release.apk
+          retention-days: 14
+          if-no-files-found: error
+
+      - name: Android TV Release-Signierung nur mit vorhandenen Secrets
+        id: signing_tv
+        shell: bash
+        env:
+          KEYSTORE_BASE64: ${{ secrets.DAR_ANDROID_TV_KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.DAR_ANDROID_TV_STORE_PASSWORD }}
+          KEYSTORE_ALIAS: ${{ secrets.DAR_ANDROID_TV_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.DAR_ANDROID_TV_KEY_PASSWORD }}
+        run: |
+          if [[ -n "$KEYSTORE_BASE64" && -n "$KEYSTORE_PASSWORD" && -n "$KEYSTORE_ALIAS" && -n "$KEY_PASSWORD" ]]; then
+            printf '%s' "$KEYSTORE_BASE64" | base64 --decode > android/tv-upload-keystore.jks
+            chmod 600 android/tv-upload-keystore.jks
+            {
+              printf 'storeFile=tv-upload-keystore.jks\n'
+              printf 'storePassword=%s\n' "$KEYSTORE_PASSWORD"
+              printf 'keyAlias=%s\n' "$KEYSTORE_ALIAS"
+              printf 'keyPassword=%s\n' "$KEY_PASSWORD"
+            } > android/tv-keystore.properties
+            chmod 600 android/tv-keystore.properties
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::TV-Release ausgelassen: Signier-Secrets fehlen."
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Android TV AAB + APK signiert erstellen
+        if: steps.signing_tv.outputs.enabled == 'true'
+        working-directory: android
+        run: ./gradlew --no-daemon :tv:bundleRelease :tv:assembleRelease
+
+      - name: Android TV signierte Pakete intern bereitstellen
+        if: steps.signing_tv.outputs.enabled == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-al-tawhid-tv-signed-aab-and-apk
+          path: |
+            android/tv/build/outputs/bundle/release/tv-release.aab
+            android/tv/build/outputs/apk/release/tv-release.apk
+          retention-days: 14
+          if-no-files-found: error
+
       - name: Temporäre Signierdateien entfernen
         if: always()
-        run: rm -f android/keystore.properties android/upload-keystore.jks
+        run: rm -f android/keystore.properties android/upload-keystore.jks android/kids-keystore.properties android/kids-upload-keystore.jks android/tv-keystore.properties android/tv-upload-keystore.jks
