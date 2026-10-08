@@ -20,7 +20,7 @@ stage.className="kids-salah-stage";
 stage.id="kidsSalahStage";
 stage.setAttribute("aria-label","Gebetszeiten");
 stage.innerHTML=
-  '<div class="kids-salah-top"><span class="kids-salah-kicker">DEIN GEBETSMOMENT</span>'+
+  '<div class="kids-salah-top"><span class="kids-salah-kicker">GEBETSZEITEN</span>'+
   '<button class="kids-salah-location" id="kidsSalahLocation" type="button" aria-label="Gebetsort einstellen"><span id="kidsSalahCity">Ort wählen</span></button></div>'+
   '<h2 class="kids-salah-heading">Zeit für <em>Ṣalāh</em></h2>'+
   '<div class="kids-salah-time-pair">'+
