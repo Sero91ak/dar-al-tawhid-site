@@ -183,7 +183,7 @@ function tahajjudUtc(maghribUtc, fajrUtc, mode) {
   return new Date(maghribUtc.getTime() + ((fajrUtc.getTime() - maghribUtc.getTime()) * 2 / 3));
 }
 
-export function computePublicPrayerTimes({ lat, lon, timeZone, angle, asrFactor } = {}) {
+export function computePublicPrayerTimes({ lat, lon, timeZone, angle, asrFactor, date } = {}) {
   const tz = String(timeZone || "Europe/Berlin");
   const latN = Number(lat);
   const lonN = Number(lon);
@@ -194,7 +194,22 @@ export function computePublicPrayerTimes({ lat, lon, timeZone, angle, asrFactor 
   const asr = Number(asrFactor);
   const method = Number.isFinite(methodAngle) && methodAngle > 0 ? methodAngle : 12;
   const asrN = Number.isFinite(asr) && asr > 0 ? asr : 1;
-  const d = todayLocal(tz);
+  const today = todayLocal(tz);
+  let d = today;
+  if (date != null && date !== "") {
+    const raw = String(date);
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(raw)) return { ok: false, error: "Ungültiges Datum" };
+    const test = new Date(raw + "T12:00:00Z");
+    if (Number.isNaN(test.getTime()) || test.toISOString().slice(0, 10) !== raw) {
+      return { ok: false, error: "Ungültiges Datum" };
+    }
+    const todayUtc = Date.UTC(today.year, today.month - 1, today.day);
+    const wantedUtc = Date.UTC(test.getUTCFullYear(), test.getUTCMonth(), test.getUTCDate());
+    if (Math.abs(wantedUtc - todayUtc) > 3 * 86400000) {
+      return { ok: false, error: "Datum außerhalb des erlaubten Fensters" };
+    }
+    d = { year: test.getUTCFullYear(), month: test.getUTCMonth() + 1, day: test.getUTCDate() };
+  }
   const list = prayerTimes(d, latN, lonN, tz, method, asrN, "off");
   const times = {};
   for (const p of list) {
