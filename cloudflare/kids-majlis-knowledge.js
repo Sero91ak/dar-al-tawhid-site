@@ -51,7 +51,7 @@ function quranMedia(surah,ayah){
 }
 function profilePrefix(gender,style){
  const whom=gender==="girl"?"Schwester":"Bruder";
- return style==="unknown"?"Allāhu aʿlam – Allah weiß es am besten, liebe"+(gender==="girl"?"":"r")+" "+whom+". ":
+ return style==="unknown"?"Wa-Allāhu aʿlam – Allah weiß es am besten, liebe"+(gender==="girl"?"":"r")+" "+whom+". ":
   "Gern, mein"+(gender==="girl"?"e liebe":" lieber")+" "+whom+"! ";
 }
 function personalize(text,gender){
