@@ -45,11 +45,15 @@ const salahWorld=document.createElement("div");
 salahWorld.className="kids-salah-home-world";
 HERO.parentNode.insertBefore(salahWorld,HERO);
 salahWorld.append(HERO,stage);
+if(navigator.connection?.saveData)salahWorld.classList.add("kids-salah-save-data");
 
-
+/* The old illustrated MP4 is deliberately suspended on the new photoreal scene.
+   Keep its loader ready for a future photoreal Runway clip; avoid wasting bandwidth
+   or double-layering mismatched architecture on the new art. */
+const ENABLE_OLD_ILLUSTRATED_VIDEO=false;
 /* Adobe static plate stays local; Runway ambient motion is also local after import.
    Low-power and reduced-motion users see the static high-contrast stage instead. */
-if(!window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches && !navigator.connection?.saveData){
+if(ENABLE_OLD_ILLUSTRATED_VIDEO && !window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches && !navigator.connection?.saveData){
  const motion=document.createElement("video");
  motion.className="kids-salah-motion";motion.muted=true;motion.loop=true;motion.playsInline=true;
  motion.autoplay=true;motion.preload="none";motion.controls=false;
