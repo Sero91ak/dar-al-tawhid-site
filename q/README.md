@@ -55,6 +55,8 @@ Dieser Ordner ist die zentrale Ablage für alle nummerierten Quellenlinks.
 
 | `q/36` | Miʿrāǧ, Ruʾyah und pauschaler Takfīr | `al-Qāḍī ʿIyāḍ; ʿĀʾišah; Ibn ʿAbbās; Ibn Ḥaǧar; Ibn Taymiyyah` | Körperlicher Miʿrāǧ als Mehrheitsposition; echter Ikhtilāf über die Ruʾyah; ʿĀʾišahs Wortlaut enthält keinen ausdrücklichen Takfīr. |
 
+| `q/37` | Niyyah, Ikhlāṣ und Überlieferungsvarianten | `Sufyān aṯ-Ṯawrī` | al-Ḫaṭīb überliefert „meine Absicht“; weitere klassische Fassungen überliefern „mein Selbst“. |
+
 ## Sonderbereiche
 
 - `q/_registry/` ist nur Verwaltung: Nummerierung, Vorlage und Registry.
