@@ -132,3 +132,14 @@ Verbindlich für `/kids/` und alle künftigen Kids-Erweiterungen.
 - Dieselbe Intensität gilt in Geschichten, Dīn, Propheten, Ṣaḥābah, Ṣaḥābiyyāt, Duʿāʾ, Qurʾān, Quiz und Eltern sowie für künftige markierte Kids-Karten.
 - Kleine Controls verwenden denselben Charakter mit kleinerem Radius.
 - Kein Scale, kein Lift und kein Springen.
+
+
+## Globaler Detail-Kopf — `KIDS_GLOBAL_DETAIL_DOCK_V1247`
+
+- Die bisherigen ovalen, frei im Hero liegenden Zurück-Controls auf den **Detail- und Leseseiten** werden ab V1247 durch denselben **eingedockten Top-Header** wie bei „Den Dīn lernen“ ersetzt.
+- Diese neue, ausdrücklich angeforderte Regel **überstimmt für Detailseiten** die älteren V13–V15-Ausnahmen für Hero-Overlay-Zurück-Buttons. Die Hero-Grafiken selbst bleiben unverändert und folgen direkt unter dem Header.
+- Pflichtaufbau: links 46–50 px Zurück-Control mit Chevron, feine vertikale Akzentlinie, rechts dynamischer Seitentitel und ruhiger Untertitel; ganze Breite, untere Rundung, feiner Gold-/Petrol-Glow und iOS-Safe-Area.
+- Der ursprüngliche Button samt seinem Event-Handler wird in die Kopfzeile verschoben, **niemals durch einen funktionslosen Klon ersetzt**. Wisch-Navigation, Fokus, Lesetext, Audio-Player und Scroll-Position bleiben erhalten.
+- Gilt für die Detailansichten von Propheten, Ṣaḥābah, Ṣaḥābiyyāt, Dīn-Lektionen, Geschichten des Īmān, Duʿāʾ sowie die vorhandenen Wissen-, Qurʾān- und Quiz-Dialoge.
+- Für künftige Detailmodule `kids/global-detail-dock-v1247.js` als zentrale Registrierung verwenden statt neue ovale Einzelcontrols zu bauen.
+- **Nicht betroffen:** Startseiten-Hero, normale Bereichs-Header und insbesondere die untere schwebende Haupt-Tab-Leiste.
