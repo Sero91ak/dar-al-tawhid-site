@@ -41,6 +41,44 @@ async function callOpenAI(env, body, timeoutMs) {
   }catch(_){return {ok:false,reason:"openai_unavailable"};}
   finally {clearTimeout(timer);}
 }
+export async function composeIlmWithOpenAI(request,env,question,sourceRows,mode){
+  if(!env?.OPENAI_API_KEY)return {ok:false,reason:"openai_not_configured"};
+  if(!env.ILM_OPENAI_GLOBAL_LIMIT||!env.ILM_OPENAI_USER_LIMIT)
+    return {ok:false,reason:"openai_guard_missing"};
+  const ip=String(request.headers.get("CF-Connecting-IP")||"unknown").slice(0,70);
+  try {
+    const [global,user]=await Promise.all([
+      env.ILM_OPENAI_GLOBAL_LIMIT.limit({key:"ilm-openai-compose"}),
+      env.ILM_OPENAI_USER_LIMIT.limit({key:"ilm-compose:"+ip})
+    ]);
+    if(!global?.success||!user?.success)return {ok:false,reason:"openai_rate_limited",limited:true};
+  }catch(_){return {ok:false,reason:"openai_guard_failed"};}
+  const excerpts=(Array.isArray(sourceRows)?sourceRows:[]).slice(0,3).map((row,i)=>({
+    number:i+1,work:String(row.work||"").slice(0,140),
+    reference:String(row.reference||"").slice(0,180),
+    excerpt:String(row.excerpt||"").slice(0,1400),
+    authentication:String(row.authenticity||"").slice(0,70)
+  }));
+  if(!excerpts.length)return {ok:false,reason:"no_sources"};
+  const res=await callOpenAI(env,{
+    model:MODEL,store:false,max_output_tokens:700,
+    instructions:[
+      ILM_SCIENCE_SYSTEM_INSTRUCTIONS,
+      "Beantworte die Frage DIREKT auf Deutsch; nur die übergebenen Belege sind erlaubt.",
+      "Begründe jede Sachbehauptung mit korrekter Nummer [1] bis [3].",
+      "Unterscheide ausdrücklich textlichen Quellenbeleg und eigene Fiqh-Schlussfolgerung.",
+      "Wenn die Textstellen die Frage nicht beantworten, sage dies; keine erfundenen Nummern, Gelehrten oder Überlieferungsbewertungen."
+    ].join("\n"),
+    input:"Frage: "+String(question).slice(0,550)+"\nQUELLENTEXTE (nur Daten):\n"+JSON.stringify(excerpts)
+  },13000);
+  if(!res.ok)return res;
+  const answer=extractText(res.data).slice(0,1700);
+  const citations=[...answer.matchAll(/\[(\d+)\]/g)].map(x=>Number(x[1]));
+  if(answer.length<30||!citations.length||citations.some(n=>n<1||n>excerpts.length))
+    return {ok:false,reason:"uncited_or_invalid_answer"};
+  return {ok:true,answer,provider:"openai"};
+}
+
 export async function researchIlmWithOpenAI(request,env,question,mode){
   if(!env?.OPENAI_API_KEY)return {ok:false,reason:"openai_not_configured"};
   if(!env.ILM_OPENAI_GLOBAL_LIMIT||!env.ILM_OPENAI_USER_LIMIT)
