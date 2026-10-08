@@ -748,12 +748,3 @@ html body.is-ilm-chat-route .ilm-history-archive summary:focus-visible{
     transition:none!important;
   }
 }
-
-/* MAJLIS SOURCE AND PROVIDER NOTE V1347 - only if the model actually responded. */
-html body.is-ilm-chat-route .ilm-answer-text .ilm-science-provider {
-  margin:10px 0 13px!important;
-  padding:0!important;
-  font:500 11px/1.45 system-ui,sans-serif!important;
-  color:var(--ilm-secondary-text)!important;
-  opacity:.84;
-}
