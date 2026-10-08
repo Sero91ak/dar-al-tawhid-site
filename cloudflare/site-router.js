@@ -75,6 +75,33 @@ async function proxyVoiceApi(request, url) {
   });
 }
 
+async function proxyKidsMajlisApi(request, url) {
+  if (!url.pathname.startsWith("/kids/api/majlis/")) return null;
+  // Never hand this URL to the static asset handler or the public generic voice route.
+  const headers = new Headers(request.headers);
+  headers.delete("host");
+  headers.set("X-DAR-Majlis-Original-Host", url.hostname);
+  const target = "https://dar-admin-publisher.sero91ak.workers.dev" + url.pathname;
+  try {
+    const upstream = await fetch(target,{
+      method: request.method,
+      headers, body: request.method==="GET"||request.method==="HEAD"?undefined:request.body,
+      redirect:"manual"
+    });
+    const out = new Headers(upstream.headers);
+    out.set("Cache-Control","no-store, private");
+    out.set("X-Content-Type-Options","nosniff");
+    out.delete("Content-Length");
+    out.delete("Access-Control-Allow-Origin");
+    out.delete("Access-Control-Allow-Credentials");
+    return new Response(upstream.body,{status:upstream.status,statusText:upstream.statusText,headers:out});
+  } catch (_) {
+    return new Response(JSON.stringify({ok:false,error:"majlis_backend_unavailable"}),{
+      status:503,headers:{"Content-Type":"application/json; charset=utf-8","Cache-Control":"no-store"}
+    });
+  }
+}
+
 async function proxyPrayerApi(request, url) {
   if (!isPrayerApiPath(url.pathname)) return null;
   const dest = `${PRAYER_API_ORIGIN}${url.pathname}${url.search || ""}`;
@@ -677,6 +704,8 @@ export default {
     }
     const prayerApi = await proxyPrayerApi(request, url);
     if (prayerApi) return prayerApi;
+    const majlisApi = await proxyKidsMajlisApi(request, url);
+    if (majlisApi) return majlisApi;
     const voiceApi = await proxyVoiceApi(request, url);
     if (voiceApi) return voiceApi;
     const gated = gateHiddenSurfaces(request, url, env, "live");
