@@ -488,6 +488,8 @@
         '<button type="button" class="ilm-primary-reference" data-ilm-discovery-result="1" data-nav="quran-surah" data-value="4/136"><span>an-Nisāʾ 4:136<small>Aufruf zum Glauben</small></span><span aria-hidden="true">↗</span></button></section>';
     }
     function shortScientificAnswer(reply) {
+      if (reply._ilmResearching) return "Ich recherchiere weitere Originalfundstellen zu deiner Frage und prüfe ihre Herkunft, bevor ich antworte.";
+      if (reply._ilmResearchError) return reply._ilmResearchError;
       var ev = (reply.evidences || []).find(function (e) { return e.verification_status === "verified" && e.statement && e.statement.length > 24; });
       var txt = String(reply.directAnswer || "").trim();
       if (reply._ilmNoRelevantEvidence) return "Dazu liegen mir derzeit keine hinreichend passenden, geprüften Fundstellen vor. Ich verwende keine themenfremden Beiträge als Beweise.";
@@ -527,6 +529,70 @@
           return '<div class="ilm-science-source-item"><p class="ilm-science-index">Beleg ' + (i + 1) + '</p>' + renderEvidence(e, i) +
             '<p class="ilm-science-proof-status">' + esc(label) + '</p></div>';
         }).join("") + '</div></details>';
+    }
+    /* MAJLIS OPEN RESEARCH V1352
+       When the internal catalogue has no verified relevant proof, ask the
+       TEST Worker to search new primary sources. Never answer from unverified
+       Google text or from the model's memory. */
+    var ilmOpenResearchSerial = 0;
+    function requestIlmOpenResearch(reply, question) {
+      if (!reply || !navigator.onLine || !String(question||"").trim()) return;
+      var id = "ilm-research-open-" + (++ilmOpenResearchSerial);
+      reply._ilmAnswerId = id;
+      reply._ilmResearching = true;
+      reply._ilmNoRelevantEvidence = false;
+      var ctrl = typeof AbortController !== "undefined" ? new AbortController() : null;
+      var timer = setTimeout(function(){ if(ctrl) ctrl.abort(); },30000);
+      function repaint() {
+        var node = document.querySelector('[data-ilm-answer-id="' + id + '"] .ilm-answer-text');
+        if(node && document.body.classList.contains("is-ilm-chat-route")) {
+          node.innerHTML = window.renderIlmAnswerText(reply);
+        }
+      }
+      fetch("/test/api/ilm/research", {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({question:String(question).slice(0,550),mode:reply._ilmAnswerMode||"detailed"}),
+        signal:ctrl ? ctrl.signal : undefined
+      }).then(function(response){
+        return response.json().catch(function(){return {ok:false,error:"research_unavailable"};});
+      }).then(function(data){
+        if(!data || !data.ok || !Array.isArray(data.sources) || !data.sources.length ||
+            typeof data.answer !== "string") {
+          reply._ilmResearchError = data && data.error === "rate_limited"
+            ? "Die externe Quellenrecherche ist momentan ausgelastet. Bitte versuche es später erneut; ich werde keine Antwort erfinden."
+            : "Ich konnte zu dieser Frage noch keine ausreichend überprüfbare Originalfundstelle abrufen. Daher gebe ich keine unbelegte Antwort. Wa-Allāhu aʿlam.";
+          return;
+        }
+        var evidence = data.sources.map(function(source){
+          var record = toEvidence(source,"internal");
+          record.source_domain = "extern-quelle-geprüft";
+          return record;
+        }).filter(function(source){
+          return source.verification_status === "verified" && !!source.statement && !!source.deep_link;
+        }).slice(0,3);
+        if(!evidence.length) {
+          reply._ilmResearchError = "Die gefundenen Quellen konnten nicht zuverlässig geöffnet oder überprüft werden. Wa-Allāhu aʿlam.";
+          return;
+        }
+        var answer = String(data.answer).replace(/<[^>]*>/g,"").trim().slice(0,1700);
+        if(answer.length < 25 || /\[(?:[4-9]|\d{2,})\]/.test(answer)) {
+          reply._ilmResearchError = "Die recherchierten Fundstellen sind verfügbar, die Antwort ist aber noch nicht ausreichend sicher. Wa-Allāhu aʿlam.";
+          return;
+        }
+        reply.evidences = evidence;
+        reply._ilmGeneratedText = answer;
+        reply._ilmCitationCount = evidence.length;
+        reply._ilmNoRelevantEvidence = false;
+        reply._ilmResearchError = "";
+      }).catch(function(){
+        reply._ilmResearchError = "Die externe Recherche ist derzeit nicht erreichbar. Ich bleibe bei nachprüfbaren Fundstellen. Wa-Allāhu aʿlam.";
+      }).finally(function(){
+        clearTimeout(timer);
+        reply._ilmResearching = false;
+        reply._ilmNoRelevantEvidence = !(reply.evidences||[]).some(function(e){return e.verification_status === "verified";});
+        repaint();
+      });
     }
     var scienceAnswerSerial = 0;
     function requestScienceComposition(reply, question) {
@@ -1050,6 +1116,15 @@
             }).slice(0,8);
             if (improved.evidences.length) improved._ilmNoRelevantEvidence = false;
           }
+        }
+        // A complete new question may need evidence OUTSIDE our own app.
+        // Do not force visitors into a tiny pre-written answer catalogue.
+        if(improved && !improved._ilmIsDiscovery && !improved._ilmBasicTawhid &&
+            !improved._ilmBasicIman && !improved._ilmCoreAdab &&
+            !improved._ilmTawhidFollowup &&
+            (improved.status === "ok" || improved.status === "insufficient" || improved.status === "unavailable") &&
+            !(improved.evidences||[]).some(function(e){return e.verification_status === "verified" && e.statement})) {
+          requestIlmOpenResearch(improved,scientificQuestion);
         }
         // Only religious explanation requests go to the bounded source-based composer.
         if (improved && improved.status === "ok" && !improved._ilmIsDiscovery && !improved._ilmBasicTawhid && !improved._ilmBasicIman && !improved._ilmTawhidFollowup && !improved._ilmSourceOnly) requestScienceComposition(improved, scientificQuestion);
