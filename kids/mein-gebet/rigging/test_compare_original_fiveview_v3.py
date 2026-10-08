@@ -75,7 +75,7 @@ rejects('report cannot pretend to be production-approved',lambda:compare_reports
 bad=copy.deepcopy(improve);bad['views']['front']['requested_90pct_shape_prefilter_pass']=True
 rejects('forged view 90 percent approval rejected',lambda:compare_reports(old,bad))
 
-source=Path(os.environ.get('KIDS_QA_INPUT_DIR',BASE/'mein_gebet_v75_paket'))
+source=Path(os.environ.get('KIDS_QA_INPUT_DIR',BASE if (BASE/'mein_gebet_junge_v75_geometry_qa_only.glb').is_file() else BASE/'mein_gebet_v75_paket'))
 if all((source/p).is_file() for p in ('mein_gebet_junge_v74_sculpt_internal.glb','mein_gebet_junge_v75_geometry_qa_only.glb','3d_charakterturnaround_eines_jungen_im_thawb.png')):
     actual=compare_actual_files(source/'mein_gebet_junge_v74_sculpt_internal.glb',source/'mein_gebet_junge_v75_geometry_qa_only.glb',source/'3d_charakterturnaround_eines_jungen_im_thawb.png')
     ok('actual GLB binary geometry rejects V7.5 regression',not actual['geometry_progress_accepted'] and 'three_quarter_uncalibrated' in actual['regressed_views'])
