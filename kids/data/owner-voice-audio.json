@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
   "id": "KIDS_OWNER_VOICE_V2",
-  "buildId": "serhat-kids-20261008-094054",
-  "updatedAt": "2026-10-08T10:04:34+0200",
+  "buildId": "serhat-kids-20261008-101054",
+  "updatedAt": "2026-10-08T10:41:39+0200",
   "voiceProfileId": "serhat-owner-voice-2026",
   "speaker": "Serhat Abu Malik",
   "engine": "local-serhat-engine",
@@ -39840,14 +39840,49 @@
         "internal_silence_limit_ms": 720,
         "kids_owner_master_cache": "hit"
       }
+    },
+    "Worum bat Mūsā عليه السلام in diesem Duʿāʾ? Antwort 1: Um Erleichterung und klare Rede. Antwort 2: Um mehr Besitz.": {
+      "url": "/kids/assets/kids-owner-voice/be214a825e6b87d8ec80.m4a?v=serhat-kids-20261008-101054",
+      "sha256": "50fcc78939a9622ffee8d1c29f92988a66c14fd7b98bc285ce75c6f25c5876cf",
+      "durationSeconds": 11.186,
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "speaker": "Serhat Abu Malik",
+      "engine": "local-serhat-engine",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceType": "local-owner-generated",
+      "mode": "question",
+      "scopes": [
+        "dua-quiz"
+      ],
+      "sourceIds": [
+        "dua-clear-speech"
+      ],
+      "qaBy": "local-serhat-engine-auto-qa",
+      "qaMetrics": {
+        "duration_s": 11.186,
+        "rms": 0.155664,
+        "peak": 0.955961,
+        "clipping_ratio": 0.0,
+        "max_internal_silence_ms": 510,
+        "max_sustained_plateau_ms": 80,
+        "speech_rate_wpm": 101.9,
+        "issues": [],
+        "internal_punctuation": true,
+        "inline_arabic_microterm": false,
+        "internal_silence_limit_ms": 560,
+        "owner_voice_composite": true,
+        "owner_voice_parts": 3,
+        "owner_voice_mode": "question",
+        "kids_owner_master_cache": "write"
+      }
     }
   },
   "counts": {
     "requiredTexts": 1127,
-    "generatedThisRun": 0,
-    "failedThisRun": 36,
-    "remainingMissing": 36,
-    "totalEntries": 1180
+    "generatedThisRun": 1,
+    "failedThisRun": 35,
+    "remainingMissing": 35,
+    "totalEntries": 1181
   },
   "pendingFailures": [
     {
@@ -40090,7 +40125,7 @@
       "sourceIds": [
         "quiz"
       ],
-      "error": "Audio-QA fehlgeschlagen (ar/kids_lesson): unexpected_internal_hold · interne Stille 520 ms · Text: يَعْقُوب عَلَيْهِ السَّلَامُ"
+      "error": "Audio-QA fehlgeschlagen (ar/kids_lesson): unexpected_internal_hold · interne Stille 490 ms · Text: يَعْقُوب عَلَيْهِ السَّلَامُ"
     },
     {
       "text": "Rief Ayyūb عليه السلام Allah in seiner Not an? Ja oder Nein?",
@@ -40168,17 +40203,6 @@
         "dua-clear-speech"
       ],
       "error": "Audio-QA fehlgeschlagen (ar/dua): unexpected_internal_hold · interne Stille 590 ms · Text: مُوسَى عَلَيْهِ السَّلَامُ"
-    },
-    {
-      "text": "Worum bat Mūsā عليه السلام in diesem Duʿāʾ? Antwort 1: Um Erleichterung und klare Rede. Antwort 2: Um mehr Besitz.",
-      "mode": "question",
-      "scopes": [
-        "dua-quiz"
-      ],
-      "sourceIds": [
-        "dua-clear-speech"
-      ],
-      "error": "Audio-QA fehlgeschlagen (ar/question): unexpected_internal_hold · interne Stille 590 ms · Text: مُوسَى عَلَيْهِ السَّلَامُ"
     },
     {
       "text": "Wenn jemand krank ist, bittest du Allah um Heilung. Allah allein ist der Heiler. Nimm das Leiden hinweg, Herr der Menschen. Heile, denn Du bist der Heiler. Es g",
