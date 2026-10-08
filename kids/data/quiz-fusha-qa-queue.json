@@ -1,0 +1,806 @@
+{
+  "schemaVersion": 1,
+  "id": "DAR_KIDS_QUIZ_FUSHA_QA_QUEUE",
+  "catalogVersion": 24,
+  "catalogQuestions": 900,
+  "generatedFrom": "kids/data/quiz-kids.json",
+  "voiceProfileId": "serhat-owner-voice-2026",
+  "speaker": "Serhat Abu Malik – Master",
+  "arabicTtsModel": "eleven_v4",
+  "arabicRegister": "Fuṣḥā",
+  "targetLanguage": "ar",
+  "germanVoicePolicy": "existing owner voice master; native Arabic segments never rendered as German",
+  "arabicProductionPolicy": "generate separate verified Fuṣḥā segments and merge into original German quiz flow, verify honorifics and phonetic pronunciation before approval",
+  "noSystemTtsFallback": true,
+  "reviewRequired": true,
+  "counts": {
+    "total": 69,
+    "4-6": 17,
+    "7-8": 16,
+    "9-10": 36
+  },
+  "items": [
+    {
+      "id": "kids-quiz-007",
+      "number": 7,
+      "ageBand": "4-6",
+      "fields": [
+        "answers",
+        "explanation"
+      ],
+      "presentArabicText": "Wie heißt unser Prophet? Muḥammad ﷺ Mūsā عليه السلام Muḥammad ﷺ ist Allahs Gesandter und der letzte Prophet.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-008",
+      "number": 8,
+      "ageBand": "4-6",
+      "fields": [
+        "question",
+        "explanation"
+      ],
+      "presentArabicText": "Sollen wir dem Gesandten ﷺ folgen? Ja Nein Allah befiehlt, dem Gesandten ﷺ zu gehorchen.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-015",
+      "number": 15,
+      "ageBand": "4-6",
+      "fields": [
+        "explanation"
+      ],
+      "presentArabicText": "Sieht Allah, was wir tun? Ja Nein Im Ḥadīṯ über Iḥsān lehrte der Prophet ﷺ, dass Allah uns sieht.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-024",
+      "number": 24,
+      "ageBand": "7-8",
+      "fields": [
+        "answers",
+        "explanation"
+      ],
+      "presentArabicText": "Wem gehorchen wir im Dīn? Allah und Seinem Gesandten ﷺ Nur der eigenen Meinung Jeder Idee im Internet Allah befiehlt den Gehorsam gegenüber Ihm und Seinem Gesandten ﷺ.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-025",
+      "number": 25,
+      "ageBand": "7-8",
+      "fields": [
+        "answers",
+        "explanation"
+      ],
+      "presentArabicText": "Wer ist für Muslime ein schönes Vorbild? Der Gesandte Allahs ﷺ Der reichste Mensch Der lauteste Mensch Allah nennt den Gesandten ﷺ ein schönes Vorbild.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-027",
+      "number": 27,
+      "ageBand": "7-8",
+      "fields": [
+        "question",
+        "explanation"
+      ],
+      "presentArabicText": "Was lehrte der Prophet ﷺ über unsere Worte? Gutes sprechen oder schweigen Alles weitererzählen Andere beleidigen Der Prophet ﷺ verband den Īmān mit gutem Reden oder Schweigen.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-028",
+      "number": 28,
+      "ageBand": "7-8",
+      "fields": [
+        "explanation"
+      ],
+      "presentArabicText": "Wie behandeln wir unseren Nachbarn? Wir schaden ihm nicht Wir ärgern ihn absichtlich Wir ignorieren jedes Recht Der Prophet ﷺ verbot, dem Nachbarn Schaden zuzufügen.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-029",
+      "number": 29,
+      "ageBand": "7-8",
+      "fields": [
+        "explanation"
+      ],
+      "presentArabicText": "Wie behandeln wir einen Gast? Wir ehren ihn Wir verspotten ihn Wir schicken ihn sofort weg Der Prophet ﷺ lehrte, den Gast zu ehren.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-035",
+      "number": 35,
+      "ageBand": "9-10",
+      "fields": [
+        "explanation"
+      ],
+      "presentArabicText": "Welche Antwort beschreibt Iḥsān am besten? Allah so zu dienen, als würdest du Ihn sehen; und wenn nicht, weißt du, dass Er dich sieht Nur freundlich zu wirken Nur viel zu besitzen Der Prophet ﷺ erklärte Iḥsān im Ḥadīṯ Jibrīl.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-036",
+      "number": 36,
+      "ageBand": "9-10",
+      "fields": [
+        "explanation"
+      ],
+      "presentArabicText": "Welche Sache gehört zu den fünf Säulen des Islam? Das Gebet Ein Glücksbringer Die eigene Meinung Der Prophet ﷺ nannte Schahāda, Gebet, Zakāh, Ḥaǧǧ und Fasten im Ramaḍān als Säulen des Islam.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-038",
+      "number": 38,
+      "ageBand": "9-10",
+      "fields": [
+        "explanation"
+      ],
+      "presentArabicText": "Wohin führt Wahrhaftigkeit nach dem Ḥadīṯ? Zum Guten und zur Rechtschaffenheit Zum Hochmut Zum Betrug Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zum Guten und das Gute zum Paradies führt.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-039",
+      "number": 39,
+      "ageBand": "9-10",
+      "fields": [
+        "explanation"
+      ],
+      "presentArabicText": "Was gehört zur Vollkommenheit des Īmān? Für den Bruder lieben, was man für sich selbst liebt Nur an sich selbst denken Andere um Gutes beneiden Der Prophet ﷺ verband vollständigen Īmān mit dieser Liebe für den Bruder.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-040",
+      "number": 40,
+      "ageBand": "9-10",
+      "fields": [
+        "explanation"
+      ],
+      "presentArabicText": "Woran erkennt man gutes muslimisches Verhalten gegenüber anderen Muslimen? Sie sind vor seiner Zunge und Hand sicher Er verletzt sie mit Worten Er schadet ihnen absichtlich Der Prophet ﷺ beschrieb den Muslim als jemanden, vor dessen Zunge und Hand die Muslime sicher sind.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-055",
+      "number": 55,
+      "ageBand": "4-6",
+      "fields": [
+        "question",
+        "explanation"
+      ],
+      "presentArabicText": "Ist Muḥammad ﷺ der letzte Prophet? Ja Nein Allah nennt Muḥammad ﷺ den letzten der Propheten.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-067",
+      "number": 67,
+      "ageBand": "4-6",
+      "fields": [
+        "explanation"
+      ],
+      "presentArabicText": "Mit welcher Hand essen wir? Mit der rechten Mit der linken Der Prophet ﷺ lehrte, Allahs Namen zu nennen und mit der rechten Hand zu essen.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-084",
+      "number": 84,
+      "ageBand": "7-8",
+      "fields": [
+        "question",
+        "explanation"
+      ],
+      "presentArabicText": "Welche Essensregel lehrte der Prophet ﷺ einem Jungen? Allahs Namen nennen und mit rechts essen Mit beiden Händen gleichzeitig essen Nur vom entferntesten Platz essen Der Prophet ﷺ lehrte: Allahs Namen nennen, mit der rechten Hand essen und von dem essen, was vor einem liegt.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-085",
+      "number": 85,
+      "ageBand": "9-10",
+      "fields": [
+        "explanation"
+      ],
+      "presentArabicText": "Welche Grundbotschaft nennt Allah über die Gesandten? Es gibt keinen zu Recht Angebeteten außer Allah, also dient Ihm Jeder Gesandte brachte einen anderen Gott Nur einige Menschen sollen Allah dienen Allah erklärte, dass Er vor Muḥammad ﷺ keinen Gesandten sandte, ohne ihm die Anbetung Allahs allein einzugeben.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-097",
+      "number": 97,
+      "ageBand": "9-10",
+      "fields": [
+        "explanation"
+      ],
+      "presentArabicText": "Wohin richten Muslime sich im Gebet? Zur al-Masǧid al-Ḥarām in Makkah Zu irgendeinem Gebäude Immer nach Norden Allah befahl dem Propheten ﷺ und den Gläubigen, sich im Gebet zur al-Masǧid al-Ḥarām zu wenden.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-098",
+      "number": 98,
+      "ageBand": "9-10",
+      "fields": [
+        "question"
+      ],
+      "presentArabicText": "Wen nannte der Prophet ﷺ wirklich stark? Wer sich beim Zorn beherrscht Wer andere im Streit besiegt Wer am lautesten spricht Wahre Stärke zeigt sich nach dem Ḥadīṯ darin, sich im Zorn zu beherrschen.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-099",
+      "number": 99,
+      "ageBand": "9-10",
+      "fields": [
+        "question",
+        "explanation"
+      ],
+      "presentArabicText": "Was sagte der Prophet ﷺ über Ṣadaqah und Vermögen? Ṣadaqah vermindert Vermögen nicht Ṣadaqah ist immer Verlust Ṣadaqah ist nur für Reiche erlaubt Der Prophet ﷺ lehrte, dass Ṣadaqah Vermögen nicht vermindert; Allah gibt dafür Segen und Lohn.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-101",
+      "number": 101,
+      "ageBand": "4-6",
+      "fields": [
+        "question"
+      ],
+      "presentArabicText": "Baute Nūḥ عليه السلام ein Schiff auf Allahs Befehl? Ja Nein Allah befahl Nūḥ, das Schiff unter Seiner Aufsicht zu bauen.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-102",
+      "number": 102,
+      "ageBand": "4-6",
+      "fields": [
+        "question"
+      ],
+      "presentArabicText": "Machte Allah das Feuer für Ibrāhīm عليه السلام sicher? Ja Nein Allah befahl dem Feuer, kühl und sicher für Ibrāhīm zu sein.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-103",
+      "number": 103,
+      "ageBand": "4-6",
+      "fields": [
+        "question"
+      ],
+      "presentArabicText": "Wer ließ das Meer für Mūsā عليه السلام auseinandergehen? Allah Menschen Allah befahl Mūsā, mit seinem Stab auf das Meer zu schlagen, und das Meer teilte sich.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-104",
+      "number": 104,
+      "ageBand": "4-6",
+      "fields": [
+        "question"
+      ],
+      "presentArabicText": "Sah Yūsuf عليه السلام Sterne, Sonne und Mond in seinem Traum? Ja Nein Yūsuf erzählte seinem Vater von elf Sternen sowie Sonne und Mond in seinem Traum.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-105",
+      "number": 105,
+      "ageBand": "4-6",
+      "fields": [
+        "question"
+      ],
+      "presentArabicText": "Nannte ʿĪsā عليه السلام sich einen Diener Allahs? Ja Nein ʿĪsā sagte: Ich bin Allahs Diener; Allah gab mir die Schrift und machte mich zum Propheten.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-135",
+      "number": 135,
+      "ageBand": "9-10",
+      "fields": [
+        "explanation"
+      ],
+      "presentArabicText": "Wovon hängt der Wert einer Handlung nach dem berühmten Ḥadīṯ ab? Von der Absicht Nur davon, wie andere sie sehen Nur von ihrer Länge Der Prophet ﷺ lehrte, dass Handlungen nach den Absichten bewertet werden und jeder das erhält, was er beabsichtigt.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-136",
+      "number": 136,
+      "ageBand": "9-10",
+      "fields": [
+        "explanation"
+      ],
+      "presentArabicText": "Welche Taten sind Allah besonders lieb? Beständige Taten, auch wenn sie klein sind Nur sehr große Taten einmal im Leben Taten, die nur andere beeindrucken Der Prophet ﷺ lehrte, dass Allah beständige gute Taten liebt, selbst wenn sie gering sind.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-137",
+      "number": 137,
+      "ageBand": "9-10",
+      "fields": [
+        "explanation"
+      ],
+      "presentArabicText": "Worauf schaut Allah nach Ṣaḥīḥ Muslim 2564? Auf Herzen und Taten Nur auf Aussehen und Besitz Nur auf Kleidung Der Prophet ﷺ erklärte, dass Allah nicht auf Aussehen und Vermögen schaut, sondern auf Herzen und Taten.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-138",
+      "number": 138,
+      "ageBand": "9-10",
+      "fields": [
+        "question",
+        "explanation"
+      ],
+      "presentArabicText": "Welche Grundregel lehrt der Prophet ﷺ über den Dīn? Der Dīn ist leicht und soll ohne Übertreibung gelebt werden Man soll sich absichtlich überfordern Nur schwere Handlungen sind wertvoll Der Prophet ﷺ lehrte, dass der Dīn leicht ist und warnte vor Überforderung und Übertreibung.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-196",
+      "number": 196,
+      "ageBand": "9-10",
+      "fields": [
+        "question",
+        "explanation"
+      ],
+      "presentArabicText": "Was lehrte der Prophet ﷺ neben dem Streben nach Nützlichem? Allah um Hilfe zu bitten und nicht aufzugeben Nur auf die eigene Kraft zu vertrauen Nützliche Dinge zu meiden Der Prophet ﷺ lehrte, nach dem Nützlichen zu streben, Allah um Hilfe zu bitten und nicht hilflos aufzugeben.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-197",
+      "number": 197,
+      "ageBand": "9-10",
+      "fields": [
+        "explanation"
+      ],
+      "presentArabicText": "Wann ist Allah dem Diener besonders in Hilfe? Solange der Diener seinem Bruder hilft Nur wenn der Diener niemandem hilft Nur wenn er bekannt ist Der Prophet ﷺ lehrte, dass Allah dem Diener hilft, solange dieser seinem Bruder hilft.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-198",
+      "number": 198,
+      "ageBand": "9-10",
+      "fields": [
+        "question",
+        "explanation"
+      ],
+      "presentArabicText": "Welche Warnung gab der Prophet ﷺ über fehlende Barmherzigkeit? Wer keine Barmherzigkeit zeigt, dem wird keine Barmherzigkeit gezeigt Barmherzigkeit ist nur für kleine Kinder Härte ist immer besser Der Prophet ﷺ verband Barmherzigkeit gegenüber anderen mit dem Empfang von Barmherzigkeit.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-199",
+      "number": 199,
+      "ageBand": "9-10",
+      "fields": [
+        "explanation"
+      ],
+      "presentArabicText": "Wie sollen wir Menschen Dinge des Dīn vermitteln? Erleichtern und nicht unnötig erschweren Absichtlich abschrecken Unverständliche Härte suchen Der Prophet ﷺ befahl, zu erleichtern und nicht zu erschweren sowie frohe Botschaft zu geben und nicht abzuschrecken.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-261",
+      "number": 261,
+      "ageBand": "4-6",
+      "fields": [
+        "question"
+      ],
+      "presentArabicText": "Lehnte Ibrāhīm عليه السلام die Anbetung von Götzen ab? Ja Nein Ibrāhīm erklärte, dass Götzen nicht angebetet werden dürfen.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-313",
+      "number": 313,
+      "ageBand": "4-6",
+      "fields": [
+        "explanation"
+      ],
+      "presentArabicText": "Sollen wir beim Essen Allahs Namen nennen? Ja Nein Der Prophet ﷺ lehrte einem Jungen, Allahs Namen zu nennen und mit rechts zu essen.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-314",
+      "number": 314,
+      "ageBand": "4-6",
+      "fields": [
+        "explanation"
+      ],
+      "presentArabicText": "Essen wir mit der rechten Hand? Ja Nein Der Prophet ﷺ lehrte, mit der rechten Hand zu essen.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-433",
+      "number": 433,
+      "ageBand": "7-8",
+      "fields": [
+        "question",
+        "explanation"
+      ],
+      "presentArabicText": "Wer gehört nach dem Propheten ﷺ zu den Besten? Wer den Qurʾān lernt und ihn lehrt Wer am meisten besitzt Wer am lautesten redet Der Prophet ﷺ lobte das Lernen und Lehren des Qurʾān besonders.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-434",
+      "number": 434,
+      "ageBand": "7-8",
+      "fields": [
+        "question",
+        "explanation"
+      ],
+      "presentArabicText": "Welche kurze Empfehlung wiederholte der Prophet ﷺ einem Mann? Werde nicht zornig Sammle möglichst viel Besitz Rede immer lauter Der Prophet ﷺ wiederholte mehrfach die Empfehlung, sich vor unbeherrschtem Zorn zu schützen.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-446",
+      "number": 446,
+      "ageBand": "9-10",
+      "fields": [
+        "explanation"
+      ],
+      "presentArabicText": "Was lehrt Qurʾān 3:159 über Sanftmut im Umgang mit Menschen? Härte kann Menschen vertreiben, während Sanftmut sie zusammenhält Härte ist immer besser Beratung ist unnötig Allah erinnert daran, dass die Sanftmut des Propheten ﷺ Menschen bei ihm hielt.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-448",
+      "number": 448,
+      "ageBand": "9-10",
+      "fields": [
+        "question",
+        "explanation"
+      ],
+      "presentArabicText": "Wie erklärte der Prophet ﷺ Kibr in Ṣaḥīḥ Muslim 91? Die Wahrheit zurückzuweisen und Menschen zu verachten Saubere Kleidung zu tragen Wissen zu lernen Der Prophet ﷺ erklärte, dass Hochmut nicht schöne Kleidung bedeutet, sondern die Wahrheit abzulehnen und Menschen geringzuschätzen.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-449",
+      "number": 449,
+      "ageBand": "9-10",
+      "fields": [
+        "explanation"
+      ],
+      "presentArabicText": "Wie hilft man nach Ṣaḥīḥ al-Bukhārī 2444 einem Bruder, der Unrecht tut? Indem man ihn vom Unrecht abhält Indem man sein Unrecht unterstützt Indem man schweigt und ihn ermutigt Der Prophet ﷺ erklärte, dass man dem Unrechttuenden hilft, indem man ihn am Ẓulm hindert.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-450",
+      "number": 450,
+      "ageBand": "9-10",
+      "fields": [
+        "explanation"
+      ],
+      "presentArabicText": "Welche Belohnung nennt Ṣaḥīḥ Muslim 2699 für jemanden, der einen Weg geht, um Wissen zu suchen? Allah erleichtert ihm dadurch einen Weg zum Paradies Er braucht danach keine Taten mehr Er wird automatisch reich Der Prophet ﷺ lehrte, dass Allah dem Suchenden nützlichen Wissens einen Weg zum Paradies erleichtert.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-461",
+      "number": 461,
+      "ageBand": "4-6",
+      "fields": [
+        "question",
+        "explanation"
+      ],
+      "presentArabicText": "Gab Allah dem Propheten ﷺ al-Kawthar? Ja Nein Allah sagt zum Propheten ﷺ, dass Er ihm al-Kawthar gegeben hat.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-482",
+      "number": 482,
+      "ageBand": "7-8",
+      "fields": [
+        "question",
+        "explanation"
+      ],
+      "presentArabicText": "Welche Gabe nennt Qurʾān 94:4 für den Propheten ﷺ? Allah erhöhte seine Erwähnung Sein Name sollte vergessen werden Er sollte ohne Botschaft bleiben Allah sagt zum Propheten ﷺ, dass Er seine Erwähnung erhöht hat.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-485",
+      "number": 485,
+      "ageBand": "9-10",
+      "fields": [
+        "explanation"
+      ],
+      "presentArabicText": "Welche Regel lehrt der Ḥadīṯ über Ḥalāl, Ḥarām und zweifelhafte Dinge? Ḥalāl und Ḥarām sind klar; bei Zweifelhaftem ist Vorsicht gut Alles Zweifelhaftes ist automatisch erlaubt Es gibt keinen Unterschied zwischen Ḥalāl und Ḥarām Der Prophet ﷺ erklärte, dass Ḥalāl und Ḥarām klar sind und dazwischen zweifelhafte Dinge liegen; wer sie meidet, schützt Dīn und Ehre.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-486",
+      "number": 486,
+      "ageBand": "9-10",
+      "fields": [
+        "question",
+        "explanation"
+      ],
+      "presentArabicText": "Wie fasste der Prophet ﷺ einen wichtigen Teil des Dīn in Ṣaḥīḥ Muslim 55 zusammen? Der Dīn ist aufrichtige Naṣīḥah Der Dīn ist nur Schweigen Der Dīn ist nur Besitz Der Prophet ﷺ sagte, der Dīn sei Naṣīḥah: gegenüber Allah, Seinem Buch, Seinem Gesandten, den Verantwortlichen und den Muslimen.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-487",
+      "number": 487,
+      "ageBand": "9-10",
+      "fields": [
+        "question",
+        "explanation"
+      ],
+      "presentArabicText": "Mit welchem Bild beschrieb der Prophet ﷺ die Haltung zur Dunyā? Wie ein Fremder oder Reisender Wie jemand, der ewig hier bleibt Wie jemand ohne Ziel Der Prophet ﷺ riet, in der Dunyā wie ein Fremder oder ein Reisender zu sein.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-488",
+      "number": 488,
+      "ageBand": "9-10",
+      "fields": [
+        "explanation"
+      ],
+      "presentArabicText": "Was kann einem Muslim durch Müdigkeit, Krankheit, Sorge oder Schmerz geschehen? Allah tilgt dadurch Sünden Gute Taten werden dadurch wertlos Es hat niemals einen geistlichen Nutzen Der Prophet ﷺ lehrte, dass selbst kleinere Leiden für den Muslim ein Grund für die Tilgung von Sünden sein können.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-533",
+      "number": 533,
+      "ageBand": "7-8",
+      "fields": [
+        "explanation"
+      ],
+      "presentArabicText": "Was ist nach einem Ṣaḥīḥ-Ḥadīṯ ein gutes Wort? Ṣadaqah Zeitverschwendung Etwas Verbotenes Der Prophet ﷺ lehrte, dass ein gutes Wort Ṣadaqah ist.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-534",
+      "number": 534,
+      "ageBand": "7-8",
+      "fields": [
+        "explanation"
+      ],
+      "presentArabicText": "Welche einfache Tat auf dem Weg zählt als Ṣadaqah? Etwas Schädliches vom Weg entfernen Etwas Gefährliches auf den Weg legen Andere am Weg hindern Der Prophet ﷺ nannte das Entfernen von Schaden vom Weg eine Ṣadaqah.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-547",
+      "number": 547,
+      "ageBand": "9-10",
+      "fields": [
+        "explanation"
+      ],
+      "presentArabicText": "Welche praktische Anweisung folgt im Ḥadīṯ über den starken Gläubigen? Strebe nach dem, was dir nützt, bitte Allah um Hilfe und gib nicht auf Verlass dich nur auf deine eigene Kraft Meide jede nützliche Anstrengung Der Prophet ﷺ verbindet Stärke im Īmān mit nützlichem Streben, Hilfe bei Allah und dem Meiden von Hilflosigkeit.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-548",
+      "number": 548,
+      "ageBand": "9-10",
+      "fields": [
+        "explanation"
+      ],
+      "presentArabicText": "Welche Lehre enthält Ṣaḥīḥ Muslim 2626? Keine gute Tat gering achten, selbst freundliches Begegnen nicht Nur große Taten zählen Freundlichkeit hat keinen Wert Der Prophet ﷺ lehrte, keine gute Tat gering zu achten, auch nicht ein freundliches Gesicht beim Treffen.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-549",
+      "number": 549,
+      "ageBand": "9-10",
+      "fields": [
+        "question",
+        "explanation"
+      ],
+      "presentArabicText": "Welche Eigenschaft liebt Allah nach dem Ḥadīṯ von ʿĀʾishah رضي الله عنها? Sanftmut Härte in jeder Situation Grobe Worte Der Prophet ﷺ sagte, dass Allah sanft ist und Sanftmut in allen Angelegenheiten liebt.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-550",
+      "number": 550,
+      "ageBand": "9-10",
+      "fields": [
+        "explanation"
+      ],
+      "presentArabicText": "Was zeigt der Ḥadīṯ über tägliche Ṣadaqah? Viele kleine gute Taten können Ṣadaqah sein Nur Geld kann Ṣadaqah sein Ṣadaqah ist nur einmal im Jahr möglich Der Prophet ﷺ nannte unter anderem gutes Reden, Hilfe, Schritte zum Gebet und das Entfernen von Schaden als Ṣadaqah.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-571",
+      "number": 571,
+      "ageBand": "7-8",
+      "fields": [
+        "question"
+      ],
+      "presentArabicText": "Was antwortete Mūsā عليه السلام über seinen Herrn? Er gab jedem Ding seine Gestalt und leitete es Er erschuf nichts Er kennt nur Menschen Mūsā sagte, ihr Herr sei Derjenige, der jedem Ding seine Schöpfung gab und es dann leitete.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-573",
+      "number": 573,
+      "ageBand": "7-8",
+      "fields": [
+        "explanation"
+      ],
+      "presentArabicText": "Für wen sind Gebet, Opfer, Leben und Tod des Muslims? Für Allah allein Für die Meinung anderer Menschen Für Ruhm Allah befiehlt dem Propheten ﷺ zu sagen, dass Gebet, Opfer, Leben und Tod Allah gehören.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-585",
+      "number": 585,
+      "ageBand": "9-10",
+      "fields": [
+        "explanation"
+      ],
+      "presentArabicText": "Wer hat nach dem Ḥadīṯ besonders viel Recht auf gute Begleitung? Die Mutter, dann die Mutter, dann die Mutter, dann der Vater Nur Freunde Nur Menschen mit viel Besitz Der Prophet ﷺ nannte dreimal die Mutter und danach den Vater als besonders berechtigt auf gute Begleitung.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-586",
+      "number": 586,
+      "ageBand": "9-10",
+      "fields": [
+        "question",
+        "answers",
+        "explanation"
+      ],
+      "presentArabicText": "Welche besondere Belohnung nennt der Prophet ﷺ für die Betreuung eines Waisenkindes? Nähe zum Propheten ﷺ im Paradies Nur weltlichen Ruhm Keine besondere Belohnung Der Prophet ﷺ sagte, dass er und der Betreuer eines Waisenkindes im Paradies eng beieinander sein werden.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-587",
+      "number": 587,
+      "ageBand": "9-10",
+      "fields": [
+        "explanation"
+      ],
+      "presentArabicText": "Welchen Lohn hat jemand, der einen anderen zu einer guten Tat führt? Einen Lohn wie derjenige, der die gute Tat ausführt Überhaupt keinen Lohn Nur dann Lohn, wenn niemand die Tat ausführt Der Prophet ﷺ lehrte, dass derjenige, der auf Gutes hinweist, einen Lohn wie der Ausführende erhält.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-595",
+      "number": 595,
+      "ageBand": "9-10",
+      "fields": [
+        "question",
+        "explanation"
+      ],
+      "presentArabicText": "Was lehrte Yaʿqūb عليه السلام seine Söhne über Allahs Erleichterung? Nicht an Allahs Erleichterung zu verzweifeln Jede Hoffnung aufzugeben Nur auf Menschen zu vertrauen Yaʿqūb عليه السلام befahl seinen Söhnen, zu suchen und nicht an Allahs Erleichterung zu verzweifeln.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-600",
+      "number": 600,
+      "ageBand": "9-10",
+      "fields": [
+        "answers",
+        "explanation"
+      ],
+      "presentArabicText": "Was ist nach Qurʾān 3:31 ein Zeichen wahrer Liebe zu Allah? Dem Propheten ﷺ zu folgen Die Sunnah zu verlassen Nur über Liebe zu sprechen Allah befiehlt dem Propheten ﷺ zu sagen: Wer Allah liebt, soll ihm folgen; dann liebt und vergibt Allah.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-613",
+      "number": 613,
+      "ageBand": "4-6",
+      "fields": [
+        "question"
+      ],
+      "presentArabicText": "Rief Ayyūb عليه السلام Allah in seiner Not an? Ja Nein Ayyūb rief seinen Herrn in seiner Not an, und Allah antwortete ihm.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-614",
+      "number": 614,
+      "ageBand": "4-6",
+      "fields": [
+        "question"
+      ],
+      "presentArabicText": "Bat Mūsā عليه السلام Allah um Gutes? Ja Nein Mūsā bat seinen Herrn um das Gute, das Allah ihm senden würde.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-615",
+      "number": 615,
+      "ageBand": "4-6",
+      "fields": [
+        "question"
+      ],
+      "presentArabicText": "Bat Sulaymān عليه السلام Allah, dankbar zu sein? Ja Nein Sulaymān bat Allah, dankbar für Seine Gaben zu sein und rechtschaffen zu handeln.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-630",
+      "number": 630,
+      "ageBand": "7-8",
+      "fields": [
+        "question"
+      ],
+      "presentArabicText": "Wie reagierte Ayyūb عليه السلام in seiner schweren Prüfung? Er rief Allah an Er gab jede Hoffnung auf Er rief andere an statt Allah Ayyūb wandte sich in seiner Not an Allah, und Allah nahm die Not von ihm.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-631",
+      "number": 631,
+      "ageBand": "7-8",
+      "fields": [
+        "question"
+      ],
+      "presentArabicText": "Was tat Mūsā عليه السلام, nachdem er den Frauen geholfen hatte? Er wandte sich mit Duʿāʾ an Allah Er verlangte sofort Lohn von ihnen Er verspottete sie Nach seiner Hilfe bat Mūsā Allah um das Gute, das er brauchte.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-632",
+      "number": 632,
+      "ageBand": "7-8",
+      "fields": [
+        "question"
+      ],
+      "presentArabicText": "Worum bat Sulaymān عليه السلام in Qurʾān 27:19? Um Dankbarkeit und rechtschaffene Taten Um Hochmut Um Vergessen der Gaben Sulaymān bat um Dank für Allahs Gaben, rechtschaffenes Handeln und Eintritt in Allahs Barmherzigkeit.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-648",
+      "number": 648,
+      "ageBand": "9-10",
+      "fields": [
+        "explanation"
+      ],
+      "presentArabicText": "Welche Regel enthält Ṣaḥīḥ Muslim 2699 über Hilfe? Allah hilft dem Diener, solange der Diener seinem Bruder hilft Hilfe für andere bringt keinen Nutzen Man soll nur sich selbst helfen Der Prophet ﷺ verband Hilfe für andere mit Allahs Hilfe für den Diener.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    },
+    {
+      "id": "kids-quiz-649",
+      "number": 649,
+      "ageBand": "9-10",
+      "fields": [
+        "explanation"
+      ],
+      "presentArabicText": "Welche Verheißung nennt der Ḥadīṯ für jemanden, der einem Muslim eine Not erleichtert? Allah erleichtert ihm eine Not am Tag der Auferstehung Er verliert jede Belohnung Er muss dafür öffentlich gelobt werden Der Prophet ﷺ lehrte, dass Hilfe in der Not eine große Belohnung im Jenseits hat.",
+      "needsNativeFusha": true,
+      "qaStatus": "pending-native-fusha-and-mixed-language-audio"
+    }
+  ]
+}
