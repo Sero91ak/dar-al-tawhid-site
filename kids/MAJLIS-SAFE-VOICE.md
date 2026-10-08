@@ -20,11 +20,11 @@ Status: **isolated prototype** (2026-10-08). The live app on main remains untouc
 6. Do not expose original user voice samples, API secrets, parent credentials or child's private data to the browser.
 7. Cap input length, audio length and answer length; apply server rate limits, abuse detection, prompt injection defenses and maximum voice credits.
 
-## Backend interfaces — **NOT LIVE / NOT IMPLEMENTED**
-- `POST /kids/api/majlis/answer`: parent-authorized session -> sanitized child question (<=350 characters), profile age bucket, only relevant short conversation context -> vetted retrieval + constrained answer, `{id, answer, source_id, confidence, suggested_next}`.
-- `POST /kids/api/majlis/transcribe`: authenticated parent-consented session; short recorded multipart audio. Check MIME + magic bytes/size/duration. STT via ElevenLabs Scribe or Cloudflare Whisper. Reject if server not authorized; no request bodies/transcripts in logs. Show transcription to the child for correction **before sending a question** in production.
-- `POST /kids/api/majlis/speak`: submit signed `answer_id`, not arbitrary text. Backend resolves approved response text, uses ElevenLabs v4/v4 Turbo with server-secret `ELEVENLABS_VOICE_ID`, dictionary ID `Q8w3SxtoVo8NSjsnlJEd`, version `wSzgkGpAwEDiTak8DApc`, then streams audio (German and correctly vocalized Arabic). Do not allow unauthenticated general-purpose TTS.
-- Parent sign-in and explicit revocable server-side authorization must be built using verified backend identity; localStorage/check box is insufficient. No vendor calls before signed authorization is available.
+## Backend interfaces — **IMPLEMENTED IN FEATURE BRANCH; ALL BILLABLE/SENSITIVE OPERATIONS DISABLED BY DEFAULT**
+- `POST /kids/api/majlis/answer`: signed 20-minute parent-code pilot session -> sanitized child question (<=350 characters), age bucket -> twelve fixed, curated answers with conservative safety fallbacks, `{ok, answer, source, answerId, verified, mode:"curated_only"}`. **No generative AI or RAG is deployed yet.**
+- `POST /kids/api/majlis/transcribe`: authenticated session and separately enabled `KIDS_MAJLIS_STT_ENABLED` flag, max 900k multipart audio and file signature checks; Cloudflare Whisper; recognized text is displayed for confirmation before it becomes a question. **Server-side duration validation beyond byte length is still missing**; keep disabled until implemented and tested.
+- `POST /kids/api/majlis/speak`: submit HMAC-signed `answerId` bound to the active parent session, not arbitrary text. Backend resolves a fixed approved response, passes it to existing ElevenLabs `synthesizeDarVoice` using `eleven_v4`, explicitly configured server-side master voice ID and dictionary, then returns MP3. **Disabled until `KIDS_MAJLIS_TTS_ENABLED=true`; spoken Arabic/German quality remains untested.**
+- A server-verified parent-code pilot is implemented using `KIDS_MAJLIS_PARENT_PASSCODE` (random >=24 chars) plus `KIDS_MAJLIS_SIGNING_KEY` (>=32 chars). Cookie is HttpOnly, Secure, SameSite=Strict with max 20-minute TTL. Parent code input is discarded after login. This **does not verify a guardian's legal identity, is not a multi-family auth system and has no per-family revocation**: not suitable as a general release. Full parent-account identity, revocation and consent records remain required.
 - Child data: ephemeral in memory by default, no unnecessary collection, no cross-session audio history, documented retention and EU provider/contract assessment. Provide delete/export if persistent history is introduced.
 - Voice latency: use a single authoritative answer text and speech response; audio must match visible text, not a separate improvising agent.
 - Reuse the established source-aware adult ʿIlm architecture only for retrieval mechanics. Adult answer prompts and browsing freedom cannot be exposed directly to a child.
@@ -38,10 +38,13 @@ Status: **isolated prototype** (2026-10-08). The live app on main remains untouc
 - [x] Small knowledge-game step every third question
 - [x] Mic capture (explicit start/stop, 15 s maximum) with iOS MIME-sensitive upload
 - [x] No local permanent chat history and no browser synthesized voice substitute
-- [ ] Server-authenticated parent session and revocation
+- [x] Short signed parent-code *pilot* session, origin checks, no public credentials
+- [ ] True per-family authenticated guardians, revocable consent
 - [ ] Child-safe retrieval-based response service + Arabic/Fiqh specialist evaluation
-- [ ] Protected speech-to-text and high-fidelity owner-voice TTS backend
-- [ ] Signed/approved answer-id playback
+- [x] Opt-in-only protected STT/TTS routes implemented (both disabled by default)
+- [ ] Verify hard 15-second recording duration on server and German/Arabic STT
+- [ ] Confirm owner-voice identity and mixed-language quality on physical devices
+- [x] Signed answer-id playback tied to active cookie session; arbitrary text cannot be synthesized
 - [ ] Tested word-level German/Arabic vocabulary and source metadata
 - [ ] iOS Safari/PWA and tablet tests, keyboard/screenreader/back-swipe tests
 - [ ] Production security, privacy, QA, rate limits and deploy
@@ -54,4 +57,11 @@ Status: **isolated prototype** (2026-10-08). The live app on main remains untouc
 - No hidden audio capture, zero browser exposure of API keys, no storing child identifiers in analytics/logs.
 - Never ship a silent "fake voice" fallback that purports to be the owner's master voice.
 
-This feature branch is the first safe UI slice, **not a claim of a working live voice assistant**.
+**Status summary:** UI + guarded demo/pilot API + smoke tests in an open draft PR, no merge or production deploy. The production voice assistant is still **not live**.
+
+## Secrets and cost controls
+The Worker `cloudflare/wrangler.toml` now declares `KIDS_MAJLIS_LIMITER` at 10 requests/minute and `KIDS_MAJLIS_VOICE_LIMITER` at 2 syntheses/minute. This Cloudflare Rate Limiting API is eventually consistent, **not** a billing cap. ElevenLabs budget guard and a per-family daily quota are still needed. Set new secrets only after family privacy review and staging tests. Never include secrets in repo or browser.
+
+Feature flags: `KIDS_MAJLIS_PARENT_AUTH_ENABLED`, `KIDS_MAJLIS_STT_ENABLED` and `KIDS_MAJLIS_TTS_ENABLED` all default to off. This intentionally fails closed in production. The stand-alone development branch runs locally as a type-and-quiz preview, with parent checkbox; network transcription or speech never works without configured signed server sessions.
+
+CI file: `.github/workflows/kids-majlis-check.yml` triggers `node scripts/verify-kids-majlis.mjs` and a dry-run Wrangler build on PR updates, with no deployment or paid voice calls.
