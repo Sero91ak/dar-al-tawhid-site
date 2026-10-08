@@ -62,7 +62,17 @@
     }catch(e){return false}
   }
   function entryFor(text){
-    return (manifest.entries||{})[normalize(text)]||null;
+    var key=normalize(text);
+    var entries=manifest.entries||{};
+    // Older Quiz UI versions append a second period to completed answer
+    // sentences ("Antwort 1: ... machen..", "... wissen?."). Prefer the
+    // already-generated, correctly punctuated German Flash clip when it exists.
+    // Never alter original source text or synthesize an audio file on playback.
+    if(key.indexOf("Antwort 1:")!==-1&&/[.!?؟]\./.test(key)){
+      var clean=key.replace(/([.!?؟])\.+(?=\s|$)/g,"$1");
+      if(clean!==key&&entries[clean])return entries[clean];
+    }
+    return entries[key]||null;
   }
   function emitMissing(text,source){
     try{
