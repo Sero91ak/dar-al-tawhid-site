@@ -34,6 +34,34 @@ jobs:
         run: |
           set -euo pipefail
           node --check scripts/chat-admin-publish.js
+          node - <<'NODE'
+          const assert = require('node:assert/strict');
+          const { stripPublicExtras } = require('./scripts/chat-admin-publish.js');
+          const draft = [
+            '---', 'id: "post-123"', 'title: "📖 Titel"', 'category: "Aqidah"',
+            'tags:', '  - "#DarAlTawhid"', '  - "#Niyyah"',
+            'source: "📝 Beleg"', 'links:', '  - label: "Quelle"',
+            '    url: "/q/12"',
+            '---',
+            '🖋️ Sprecher sagte:', '„Die Absicht wird geprüft.“',
+            '#DarAlTawhid #Niyyah',
+            '📝 Quelle: /q/12', '🌙 Fazit: Die Niyyah zählt.',
+            '📥 Telegram: @dar_al_tauhid',
+            '🌐 Website: dar-al-tawhid.de',
+            '📸 Instagram: @dar_at_tawhid'
+          ].join('\n');
+          const cleaned = stripPublicExtras(draft);
+          assert.doesNotMatch(cleaned, /^tags:/m);
+          assert.doesNotMatch(cleaned, /#DarAlTawhid|#Niyyah/);
+          assert.doesNotMatch(cleaned, /📥 Telegram|🌐 Website|📸 Instagram/);
+          assert.match(cleaned, /title: "📖 Titel"/);
+          assert.match(cleaned, /„Die Absicht wird geprüft.“/);
+          assert.match(cleaned, /📝 Quelle: \/q\/12/);
+          assert.match(cleaned, /🌙 Fazit: Die Niyyah zählt/);
+          assert.match(cleaned, /url: "\/q\/12"/);
+          assert.match(stripPublicExtras('---\ntitle: "T"\n---\n# Überschrift\nhttps://www.islamweb.net/#:~:text=foo'), /#:~:text=foo/);
+          console.log('Visitor hashtag filter: passed; quote, source, Fazit preserved.');
+          NODE
           mkdir -p content/admin/chat-publish-requests
           node - <<'NODE'
           const fs = require('node:fs');
