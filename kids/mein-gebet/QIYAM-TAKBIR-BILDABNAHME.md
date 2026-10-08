@@ -45,3 +45,21 @@
 - **Kein Live-Release, keine neuen App-Tabs oder Änderungen an Audio-/Profilmodulen.**
 
 Weitere Nachweise: [Hanbalitische Quellenprüfung](HANBALI-QUELLENPRUEFUNG.md) · [Technisches Storyboard](content/raf-qiyam-storyboard.json).
+
+
+## 5 · Freigabe der überarbeiteten Sieben-Schritte-Grafik (08.10.2026)
+
+Die letzte, nach mehreren Korrekturen entstandene Bildtafel wurde vom Nutzer mit **„Richtig so“** bestätigt. Sie ist daher die aktuelle **visuelle Referenz**:
+
+![Bestätigte Sieben-Schritte-Referenz](assets/gebetspositionen-sieben-schritte-user-approved-review.jpg)
+
+**Verbindliche Prüfvorgaben für die zukünftige 3D-Umsetzung:**
+
+- **Originalproportionen beibehalten.** Keine Verlängerung der Beine, weder in der Seitenansicht des Rukūʿ noch in anderen Positionen. Dieselbe ursprüngliche Jungenfigur, Körper-/Kopfgröße und Kleidung.
+- **Rukūʿ:** Beugung an der Hüfte; Rücken vom Becken bis Schulterbereich **gerade und annähernd waagerecht wie eine Tischplatte**; Hände korrekt an den Knien. Nicht die anatomisch missverständliche Zahl „180°“ als Hüftwinkel verwenden: Der entscheidende Qualitätsmaßstab ist die sichtbare, gerade Rückenlinie.
+- **Suǧūd (erste und zweite Niederwerfung):** Stirn sicher auf der Unterlage, Nase leicht mit Kontakt, **Lippen/Mund/Kinn ohne Bodenkontakt**. Ein Küssen des Bodens durch den Mund ist in dieser Lernvisualisierung ausdrücklich falsch. Gelenkwinkel und Haltung an die Kinderproportionen anpassen.
+- **Takbīrat al-Iḥrām und Rafʿ al-Yadayn:** beide Hände **bis Schulterhöhe**, nicht in Richtung der Ohren überheben.
+- **Qiyām:** bisher gesondert bestätigte Handhaltung auf der Brust bleibt unverändert.
+- **Sujūd-Hadithprüfung:** Die Sieben-Kontaktpunkte-Lehre berücksichtigt **Stirn und Nase** gemeinsam im Kopfbereich (Buḫārī 812); nicht behaupten, ausschließlich die Stirn sei islamrechtlich die einzige relevante Kontaktfläche. Die gestalterische Vorgabe meint ausdrücklich „Stirn und Nase, nicht der Mund“.
+
+**Freigabegrenze:** Nur das vom Nutzer bestätigte **2D-Bild**. Noch kein riggtes 3D-Modell, kein Bewegungsclip, keine Audio-/Fachfreigabe und keine Live-Veröffentlichung. Vor Produktion die Kontaktpunkte, Kinderproportionen und Handbewegungen an einem echten 360°-Rig kontrollieren.
