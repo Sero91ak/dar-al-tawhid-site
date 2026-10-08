@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v167-salah-immersive1270",
-  "label": "KIDS · V1.08.88",
-  "releasedAt": "2026-10-08T16:36:37.615Z",
-  "note": "KIDS · V1.08.88: Der Startseiten-Hero, Salām und die Gebetszeitanzeige bilden nun eine gemeinsame, bildgestützte Bühne ohne separate Salah-Kapsel. Die Detailseite zeigt die fünf Gebete vor einem großflächigen Moschee-Hero mit klaren aktuellen/nächsten Zeiten. Live-Berechnung, Standortwahl, Countdown, Profile und Offline-Cache bleiben erhalten.",
+  "buildId": "kids-shell-v168-salah-runway1271",
+  "label": "KIDS · V1.08.89",
+  "releasedAt": "2026-10-08T17:26:20.096Z",
+  "note": "KIDS · V1.08.89: Alle drei Einstiegsseiten auf derselben Version. Neue Runway-Moschee-Heroanimation wird dauerhaft lokal importiert; Video aktiviert sobald Home-Hero sichtbar ist. Aktualisierte Video-Adresse verhindert alten Browser-Cache. Statisches Offline-Hero, Standort, echte Gebetszeiten und Countdown bleiben erhalten.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1265",
+    "serviceWorkerCache": "v1271",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -1238,10 +1238,14 @@
     "duaSmartLearningLayout": "v1261-fullscreen-three-buttons-stage",
     "duaSmartWholeListening": "v1260-direct-fluent-master",
     "duaSmartSlowListening": "v1260-dedicated-slow-master",
-    "duaSmartWordFollow": "v1261-approximate-full-phrase-cues-or-reviewed-timestamps-exact-individual-clip-mode"
+    "duaSmartWordFollow": "v1261-approximate-full-phrase-cues-or-reviewed-timestamps-exact-individual-clip-mode",
+    "salahHomeWorld": "immersive-one-piece-hero-v1271",
+    "salahHeroVideo": "same-origin-local-mp4-v1271",
+    "salahHeroMotionFallback": "offline-local-still",
+    "salahMotionVisibility": "home-world-observer"
   },
-  "updatedAt": "2026-10-08T13:15:45.228Z",
-  "deployTrigger": "kids-dua-audio-follow-v1261",
+  "updatedAt": "2026-10-08T17:26:20.096Z",
+  "deployTrigger": "kids-salah-runway-v1271",
   "globalDetailDock": {
     "version": "v1253",
     "enabled": true,
