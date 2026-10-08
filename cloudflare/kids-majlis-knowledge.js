@@ -99,7 +99,7 @@ function findDua(raw,age,gender){
  // partial terms such as "Allah" never identify a Duʿāʾ.
  const wantsDua=isDuaIntent(raw);
  const normalized=norm(raw);
- let best=null;
+ let best=null,runnerUp=null;
  for(const row of INDEX.duas){
    const title=norm(row.title),meaning=norm(row.meaning),arabic=norm(row.arabic);
    const canonical=norm(row.transliteration),prompt=norm(row.childPrompt);
@@ -116,9 +116,14 @@ function findDua(raw,age,gender){
      // are unambiguous when the title contains that action.
      if(rank.matched===1&&rank.words<=2&&title.split(" ").some(w=>q.includes(w)))total=4;
    }
-   if(total>=4&&(!best||total>best.total))best={row,total};
+   if(total<4)continue;
+   if(!best||total>best.total){runnerUp=best;best={row,total};}
+   else if(!runnerUp||total>runnerUp.total)runnerUp={row,total};
  }
  if(!best)return null;
+ // Nearly identical candidates are not a safe source match. Never choose arbitrarily.
+ if(runnerUp&&Math.abs(best.total-runnerUp.total)<0.75&&
+    (best.row.source!==runnerUp.row.source||best.row.arabic!==runnerUp.row.arabic))return null;
  const row=best.row;
  if(!available(row,age))return {id:"age_restricted",text:personalize("Dieses Duʿāʾ ist für ältere Kinder freigegeben. Ich zeige dir lieber etwas Passendes für dein Alter. Frag deine Eltern nach dem passenden Lernbereich.",gender),source:null,media:null};
  const media=mediaForDua(row);
