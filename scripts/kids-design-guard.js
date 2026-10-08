@@ -183,7 +183,7 @@ function runKidsDesignGuard() {
     const compact = String(release.visualSystem?.compactGlobalTopDock || "");
     const dockCssRef = "global-detail-dock-v1247.css?v=" + swVersion;
     const dockJsRef = "global-detail-dock-v1247.js?v=1247";
-    if (!/^\\d+$/.test(swVersion)) failed += fail("Kids: Service-Worker-Cacheversion fehlt");
+    if (!/^\d+$/.test(swVersion)) failed += fail("Kids: Service-Worker-Cacheversion fehlt");
     if (compact === "v1248") {
       if (!doc.includes("KIDS_COMPACT_GLOBAL_TOP_DOCK_V1248") || !dockCss.includes("KIDS_COMPACT_GLOBAL_TOP_DOCK_V1248")) {
         failed += fail("Kids: kompakter globaler Top-Kopf V1248 fehlt");
