@@ -392,27 +392,33 @@
       if (/(?:ausfuhrlich|vertief|genauer)/.test(q)) return "depth";
       return "";
     }
-    function rankKnowledgeSources(question, list) {
-      var query = ilmNormalize(question);
-      var words = query.split(" ").filter(function(w) {
-        return w.length >= 4 && !/^(?:welche|einen|einer|einem|über|beweise|zeigen|finde|erklare|dazu|deine|seine|dieser|quelle|lesen|genau|genauer|werden|gibt|wurde)$/.test(w);
+    /* Only search results containing a meaningful query term qualify as evidence. */
+    function ilmQuestionTerms(question) {
+      var stop = /^(?:was|ist|sind|wie|wer|warum|bedeutet|definition|erklare|welche|welcher|welchen|einen|einer|einem|beweise|belege|authentische|authentischen|dazu|deine|quelle|quellen|lesen|genau|werden|gibt|wurde|fur|aus|zum|des|den|die|das|und|oder|im|islam|islamischen|bitte|mehr|mir|mit|nach|eine)$/;
+      return ilmNormalize(question).split(" ").filter(function(word){
+        return word.length >= 4 && !stop.test(word);
       });
+    }
+    function rankKnowledgeSources(question, list) {
+      var terms = ilmQuestionTerms(question);
+      if (!terms.length) return [];
       var seen = Object.create(null);
-      return (Array.isArray(list) ? list : []).map(function (e,index) {
-        var title = ilmNormalize([e.title,e.work,e.reference].join(" "));
-        var body = ilmNormalize([e.excerpt,e.statement,e.body].join(" ").slice(0,1000));
-        var hits = words.reduce(function(sum,w) {
-          return sum + (title.includes(w) ? 5 : body.includes(w) ? 1 : 0);
+      return (Array.isArray(list) ? list : []).map(function(item,index) {
+        var title = " " + ilmNormalize([item.title,item.work,item.reference].join(" ")) + " ";
+        var body = " " + ilmNormalize([item.excerpt,item.statement,item.body].join(" ").slice(0,1600)) + " ";
+        var hits = terms.reduce(function(sum,word) {
+          return sum + (title.includes(" "+word+" ") ? 5 : body.includes(" "+word+" ") ? 2 : 0);
         },0);
-        var quality = e.kind === "quran" ? 1.5 : e.kind === "sunnah" ? 1 : 0;
-        return {item:e,weight:hits+quality,order:index};
-      }).filter(function(o) {
-        var key = String(o.item.id || o.item.title || o.item.reference || o.order);
+        return { item:item, hits:hits, order:index,
+          weight:hits + (item.kind==="quran" ? 1.5 : item.kind==="sunnah" ? 1 : 0) };
+      }).filter(function(row) {
+        if (!row.hits) return false;
+        var key = String(row.item.id || row.item.title || row.item.reference || row.order);
         if (seen[key]) return false;
         seen[key] = true;
         return true;
-      }).sort(function(a,b){return b.weight-a.weight || a.order-b.order})
-        .map(function(o){return o.item});
+      }).sort(function(x,y){return y.weight-x.weight || x.order-y.order})
+        .map(function(row){return row.item});
     }
     function ilmScriptureLinks(extended) {
       var rows = [
