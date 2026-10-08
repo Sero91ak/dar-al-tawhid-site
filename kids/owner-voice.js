@@ -166,6 +166,9 @@
   }
   function finishLoad(){
     loaded=true;
+    try{
+      window.dispatchEvent(new CustomEvent("dar-kids-owner-voice-ready",{detail:{count:Object.keys(manifest.entries||{}).length}}));
+    }catch(e){}
     if(pending){
       var queued=pending;
       pending=null;
@@ -195,7 +198,7 @@
 
   window.quizSpeak=function(text,options){
     options=options||{};
-    play(text,{source:String(options.source||"quiz-or-kids-ui"),onended:options.onended,onerror:options.onerror});
+    return play(text,{source:String(options.source||"quiz-or-kids-ui"),onended:options.onended,onerror:options.onerror});
   };
   window.stopKidsOwnerVoice=stop;
 })();
