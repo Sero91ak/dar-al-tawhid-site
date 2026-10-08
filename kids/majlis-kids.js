@@ -3,7 +3,7 @@
   "use strict";
   if (window.DarKidsMajlis || !document.querySelector("#view-today .big-choice-grid")) return;
   var state = { open:false, approved:false, busy:false, age:"6–8", turns:0,
-    audio:null, recording:null, microphone:null, recordingTimer:null, audioUrl:null, player:null, lastAnswer:null, serverReady:false, serverAuthorized:false };
+    audio:null, recording:null, microphone:null, recordingTimer:null, audioUrl:null, player:null, lastAnswer:null, serverReady:false, serverAuthorized:false, canSpeak:false, canTranscribe:false };
   try { var savedAge=localStorage.getItem("kids.age"); if(["4–5","6–8","9–10"].includes(savedAge)) state.age=savedAge; } catch (_) {}
   var entries = [
     {rx:/(wer ist allah|wer ist gott|wer ist unser schöpfer|was ist tawhid|was ist tawḥīd|einzigkeit allahs)/i,answer:"Allah ist unser Schöpfer. Er ist Einer und niemand ist so wie Er. Das lernen wir in Sūrah al-Ikhlāṣ. Magst du die kurze Sūrah im Qurʾān-Bereich hören?",source:"Qurʾān 112:1–4"},
@@ -125,9 +125,9 @@
     if(!state.open)return;
     state.lastAnswer=item;
     message("guide",item.answer,item.source);
-    listen.disabled=!(state.serverAuthorized&&item.answerId);
+    listen.disabled=!(state.serverAuthorized&&state.canSpeak&&item.answerId);
     state.turns++;
-    status.textContent=state.serverAuthorized?(item.source?"Geprüfte Antwort · mit Masterstimme anhörbar.":"Für diese Frage ist die Antwort bewusst begrenzt."):"Vorschau ohne Sprach-KI · nur feste Lernantworten.";
+    status.textContent=state.serverAuthorized?(item.source?(state.canSpeak?"Geprüfte Antwort · mit Masterstimme anhörbar.":"Geprüfte Antwort · Sprachfunktion noch nicht aktiviert."):"Für diese Frage ist die Antwort bewusst begrenzt."):"Vorschau ohne Sprach-KI · nur feste Lernantworten.";
     if(state.turns%3===0){
       var row=el("div","km-picks"),b=el("button","","✨ Kleine Denkfrage");
       b.type="button";b.addEventListener("click",function(){
@@ -148,7 +148,7 @@
   }
   async function hear() {
     if(state.player&&!state.player.paused){stopPlayback();status.textContent="Wiedergabe beendet.";return;}
-    if(!state.serverAuthorized||!state.lastAnswer?.answerId||state.busy)return;
+    if(!state.serverAuthorized||!state.canSpeak||!state.lastAnswer?.answerId||state.busy)return;
     // No browser TTS fallback: the product promises Serhat's actual master voice.
     state.busy=true;listen.disabled=true;status.textContent="Masterstimme wird angefragt …";
     try {
@@ -166,12 +166,12 @@
       listen.textContent="■ Stoppen";
       status.textContent="Du hörst die Antwort mit der Masterstimme.";
     }catch(_){stopPlayback();status.textContent="Die Serhat-Masterstimme ist aktuell nicht verfügbar. Die Textantwort bleibt erhalten."}
-    finally{state.busy=false;listen.disabled=!(state.open&&state.serverAuthorized&&state.lastAnswer?.answerId)}
+    finally{state.busy=false;listen.disabled=!(state.open&&state.serverAuthorized&&state.canSpeak&&state.lastAnswer?.answerId)}
   }
   async function startOrStopMic(){
     if(state.recording && state.recording.state==="recording"){state.recording.stop();return;}
     if(!state.approved||state.busy)return;
-    if(!state.serverAuthorized){status.textContent="Sprachaufnahme gibt es erst im geschützten Elternmodus. Die Vorschau funktioniert mit Tippen.";return;}
+    if(!state.serverAuthorized||!state.canTranscribe){status.textContent="Die Spracherkennung ist noch nicht freigeschaltet. Du kannst deine Frage schreiben.";return;}
     if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia||!window.MediaRecorder){
       status.textContent="Auf diesem Gerät ist die Aufnahme hier nicht verfügbar. Du kannst deine Frage schreiben.";return;
     }
@@ -209,7 +209,7 @@
   function close(){
     if(state.recording&&state.recording.state==="recording")state.recording.stop();
     stopPlayback();
-    state.open=false;state.approved=false;state.serverAuthorized=false;state.audio=null;codeField.value="";
+    state.open=false;state.approved=false;state.serverAuthorized=false;state.canSpeak=false;state.canTranscribe=false;state.audio=null;codeField.value="";
     var app=document.querySelector(".app");if(app)app.inert=false;
     root.classList.remove("km-open","km-parent-open");document.body.style.removeProperty("overflow");
     entry.focus({preventScroll:true});
@@ -218,7 +218,7 @@
     if(state.open)return;
     var age=(document.querySelector(".app")||{}).getAttribute?.("data-age");
     if(["4–5","6–8","9–10"].includes(age))state.age=age;
-    state.open=true;state.approved=false;state.serverAuthorized=false;state.serverReady=false;check.checked=false;approve.disabled=true;codeField.value="";codeField.style.display="none";codeLabel.style.display="none";
+    state.open=true;state.approved=false;state.serverAuthorized=false;state.serverReady=false;state.canSpeak=false;state.canTranscribe=false;check.checked=false;approve.disabled=true;codeField.value="";codeField.style.display="none";codeLabel.style.display="none";
     root.classList.add("km-open","km-parent-open");
     var app=document.querySelector(".app");if(app)app.inert=true;
     welcome();check.focus();
@@ -228,6 +228,7 @@
         if(!state.open)return;
         state.serverReady=!!(data&&data.ok);
         state.serverAuthorized=!!(data&&data.authorized);
+        state.canSpeak=!!data?.capabilities?.voice;state.canTranscribe=!!data?.capabilities?.transcribe;
         if(state.serverReady){
           gateInfo.textContent=state.serverAuthorized?
             "Deine geschützte Elternfreigabe ist noch gültig. Du kannst den Bereich öffnen.":
@@ -261,12 +262,12 @@
         if(!r.ok)throw Error("parent-code");
         var data=await r.json();
         if(!data.authorized)throw Error("no-session");
-        state.serverAuthorized=true;
+        state.serverAuthorized=true;state.canSpeak=!!data?.capabilities?.voice;state.canTranscribe=!!data?.capabilities?.transcribe;
       }catch(_){gateInfo.textContent="Elternfreigabe fehlgeschlagen. Bitte prüfe deinen Zugangscode.";return;}
       finally{state.busy=false;approve.disabled=false}
     }
     state.approved=true;root.classList.remove("km-parent-open");
-    status.textContent=state.serverAuthorized?"Geschützter Lernchat bereit. Stelle deine Frage!":"Vorschau: Schreibe oder wähle eine Frage.";
+    status.textContent=state.serverAuthorized?(state.canSpeak&&state.canTranscribe?"Geschützter Sprach- und Textchat bereit.":"Geschützter Textchat bereit. Audio noch nicht aktiviert."):"Vorschau: Schreibe oder wähle eine Frage.";
     input.focus();
   });
   form.addEventListener("submit",function(ev){ev.preventDefault();if(state.audio&&!input.value.trim())sendAudio();else submitQuestion(input.value)});
