@@ -1,24 +1,24 @@
 {
-  "timestamp": "2026-10-08T20:35:40Z",
-  "trigger": "push",
-  "finishedDeployConclusion": null,
-  "finishedDeployRun": null,
+  "timestamp": "2026-10-08T20:38:44Z",
+  "trigger": "workflow_run",
+  "finishedDeployConclusion": "failure",
+  "finishedDeployRun": "37840355483",
   "live": {
-    "buildId": "kids-shell-v171-salah-reference-viewport1275",
-    "label": "KIDS · V1.08.92",
-    "homeBytes": 506461,
-    "homeContainsPrayerAssets1275": true,
-    "homeContainsBuild1275": false,
+    "buildId": "kids-shell-v172-salah-reference-gallery1276",
+    "label": "KIDS · V1.08.93",
+    "homeBytes": 506459,
+    "homeContainsPrayerAssets1275": false,
+    "homeContainsBuild1275": true,
     "cssBytes": 90255,
     "cssContainsViewportFit": true,
     "photoBytes": 4919251,
     "prayerArtworkBytes": {
-      "hero-day": 2402180,
-      "fajr": 32866,
-      "dhuhr": 34821,
-      "asr": 36792,
-      "maghrib": 33096,
-      "isha": 31484
+      "hero-day": 2207278,
+      "fajr": 1808212,
+      "dhuhr": 1968042,
+      "asr": 1879100,
+      "maghrib": 1973933,
+      "isha": 2207575
     },
     "allSevenArtworkFilesReachable": true,
     "versionJsonReadable": true
@@ -30,17 +30,17 @@
       "head_sha": "9675bdcb94803cb7df9e0cfe539538d212c7c99d",
       "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37840592263",
       "id": 37840592263,
-      "status": "pending",
-      "updated_at": "2026-10-08T20:35:33Z"
+      "status": "in_progress",
+      "updated_at": "2026-10-08T20:38:37Z"
     },
     {
-      "conclusion": null,
+      "conclusion": "failure",
       "created_at": "2026-10-08T20:33:39Z",
       "head_sha": "cb63ccf9eda4c0e2e53fc6e96c6e9326590a9ea4",
       "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37840355483",
       "id": 37840355483,
-      "status": "in_progress",
-      "updated_at": "2026-10-08T20:34:40Z"
+      "status": "completed",
+      "updated_at": "2026-10-08T20:38:34Z"
     },
     {
       "conclusion": "success",
