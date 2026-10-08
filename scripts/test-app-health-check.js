@@ -290,6 +290,25 @@ try {
   fail("Majlis ʿIlm: Quellen-Regression – " + error.message);
 }
 
+// Independent Majlis tests may evolve without altering the protected push/deploy workflow.
+for (const regression of [
+  "ilm-open-research-test.mjs",
+  "ilm-multi-provider-test.mjs",
+  "ilm-compose-fallback-test.mjs"
+]) {
+  try {
+    const { execFileSync } = require("node:child_process");
+    execFileSync(process.execPath, [require("node:path").join(__dirname, regression)], {
+      cwd: require("node:path").join(__dirname, ".."),
+      stdio: "pipe", timeout: 18000
+    });
+    ok("Majlis ʿIlm: " + regression);
+  } catch (error) {
+    fail("Majlis ʿIlm: " + regression + " – " +
+      (error.stderr ? String(error.stderr).slice(-700) : error.message));
+  }
+}
+
 if (failed) {
   console.error(`\n${failed} Test-App-Check(s) fehlgeschlagen – Deploy stoppen.`);
   process.exit(1);
