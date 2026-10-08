@@ -326,7 +326,7 @@
   }
   var sunnahDataRequest=null,sunnahCoreRequest=null;
   function mightBeSunnahQuestion(q){
-    return /\b(hadith|hadis|hadit|sunnah|buchari|bukhari|muslim|wahrheit|wahrhaftigkeit|ehrlich|lugen|nachbar|gast|gutes wort|gute worte|freundliches wort|wohltat|schweigen|ansar|aisha|aishah|scham|tawhid|tauhid|iman|glaubenssaulen|glaubensgrundlagen|ibadah|anbetung|adab|akhlaq|akhirah|auferstehung|rechenschaft|charakter)\b/.test(previewNorm(q))||
+    return /\b(hadith|hadis|hadit|sunnah|buchari|bukhari|muslim|wahrheit|wahrhaftigkeit|ehrlich|lugen|nachbar|gast|gutes wort|gute worte|freundliches wort|wohltat|schweigen|ansar|aisha|aishah|scham|tawhid|tauhid|iman|glaubenssaulen|glaubensgrundlagen|ibadah|anbetung|adab|akhlaq|akhirah|auferstehung|rechenschaft|charakter|niyyah|niyya|absicht|saulen|hand|zunge|wunschen|glaubenszweige|hindernis|nutzt|nutzlich|leicht|frohe botschaft|bestanding|regelmassig|aussehen|barmherzigkeit|mitgefuhl|sanftmut|zorn|zornig|wut|starke|verdacht|spionieren|reinheit|sauberkeit)\b/.test(previewNorm(q))||
       /allahs namen|allahs eigenschaften|namen und eigenschaften|jungste tag/.test(previewNorm(q));
   }
   async function previewSunnah(question){
