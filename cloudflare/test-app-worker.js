@@ -489,7 +489,7 @@ async function ilmScienceCompose(request, env) {
   // Cloudflare bindings before contacting Google; a limited request must not
   // silently bypass the cap through a different model.
   const gemini = await composeIlmWithGemini(request, env, question, topicSources, mode);
-  if (gemini.limited) return send({ok:false,error:"rate_limited"},429);
+  if (gemini.limited) return send({ok:false,error:"gemini_quota_exhausted",provider:"gemini"},429);
   if (gemini.ok) return send({
     ok:true, answer:gemini.answer, usedSourceCount:topicSources.length,
     mode:"source_bound", answerMode:mode, provider:"gemini",
