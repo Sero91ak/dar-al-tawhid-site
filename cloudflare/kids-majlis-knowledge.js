@@ -87,9 +87,8 @@ function findSemanticVerse(raw,gender){
   if(!row.re.test(q))continue;
   const media=quranMedia(row.surah,row.ayah);
   if(!media)continue;
-  return {id:"verse:"+media.surah+":"+media.ayah,
-   text:personalize("Dazu findest du einen eindeutigen Beleg in "+media.reference+". Du kannst die Rezitation hören. Wenn ein Duʿāʾ-Ausschnitt verfügbar ist, siehst du ihn unten; den vollständigen Vers findest du im Qurʾān-Bereich.",gender),
-   source:media.reference,media};
+  // Canonical sentence is identical for search and signed speech replay.
+  return findExplicitVerse("Qurʾān "+media.surah+":"+media.ayah,gender);
  }
  return null;
 }
