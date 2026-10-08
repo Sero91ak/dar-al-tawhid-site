@@ -2,7 +2,7 @@
   "buildId": "kids-shell-v172-salah-reference-gallery1276",
   "label": "KIDS · V1.08.93",
   "releasedAt": "2026-10-08T20:35:11.755Z",
-  "note": "KIDS V1.08.93: Benutzerfreigegebene sechs hochauflösende, kinderfreundliche Gebetsbilder sind lokal gespeichert: Moschee-Nacht-Hero sowie Fajr, Dhuhr, ʿAṣr, Maghrib und ʿIshāʾ. Gebetsseite ohne Scrollen und ohne unteren Hinweistext; fünf Kapseln passen sich samt sicheren Bildschirmrändern dynamisch an. Offline-Cache 1276 erneuert. Die Gebetszeitenberechnung und Standortwahl bleiben unangetastet.",
+  "note": "KIDS V1.08.93: Benutzerfreigegebene sechs hochauflösende, kinderfreundliche Gebetsbilder sind lokal gespeichert: Moschee-Nacht-Hero sowie Fajr, Dhuhr, ʿAṣr, Maghrib und ʿIshāʾ. Gebetsseite ohne Scrollen und ohne unteren Hinweistext; fünf Kapseln passen sich samt sicheren Bildschirmrändern dynamisch an. Offline-Cache 1276 erneuert. Die Gebetszeitenberechnung und Standortwahl bleiben unangetastet. Produktions-Kontrolllauf nur mit freigegebenen Kids-Dateien; gesperrten Diagnose-Workflow in genehmigten vorherigen Stand zurückgesetzt.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -1254,8 +1254,8 @@
     "salahDayNoticeRemoved": true,
     "salahDeployRecheck": "kids-only-cloudflare-worker-retry-v1276"
   },
-  "updatedAt": "2026-10-08T20:41:27.239Z",
-  "deployTrigger": "kids-salah-reference-gallery-live-confirm-v1276",
+  "updatedAt": "2026-10-08T20:41:38.155Z",
+  "deployTrigger": "kids-v10893-approved-scope-release-final",
   "globalDetailDock": {
     "version": "v1253",
     "enabled": true,
