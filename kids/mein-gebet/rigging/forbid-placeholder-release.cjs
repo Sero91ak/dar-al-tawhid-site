@@ -11,12 +11,12 @@ const path=require("node:path");
 const crypto=require("node:crypto");
 const {parseGLB,validateDocument}=require("./validate-glb.cjs");
 const base=__dirname;
-function validateIdentity(gltf,identity,technical,modelFingerprint={}) {
+function validateIdentity(gltf,identity,technical,modelFingerprint={},expectedSubject="original_boy") {
   const errors=[];
   const forbid=/low.poly|blockout|placeholder|engineering rig|test rig|not.user.approved|not approved|unapproved|draft|prototype|prototyp|experiment/i;
   const name=String(gltf?.asset?.generator||"")+" "+(gltf?.meshes||[]).map(m=>m.name||"").join(" ");
   if(forbid.test(name))errors.push("BLOCKED: diagnostic low-poly/blockout/prototype model markers");
-  if(identity?.subject!=="original_boy")errors.push("BLOCKED: missing required original-boy subject.");
+  if(identity?.subject!==expectedSubject)errors.push("BLOCKED: required approved original child profile subject missing: "+expectedSubject);
   const approv=identity?.accept||{};
   for(const f of ["hasActualOriginalIdentity","artistQualityRenderReviewed","glbMeshAndSkinReviewPassed","rigPoseReviewPassed","signedOffByUserForFinal3D","productionReady"]) {
     if(approv[f]!==true)errors.push("BLOCKED: explicit final-model approval missing: "+f);
@@ -36,6 +36,16 @@ function validateIdentity(gltf,identity,technical,modelFingerprint={}) {
     if(!reviewed.has(angle))errors.push("BLOCKED: missing original-character review view: "+angle);
   if(!String(approved.approvedDate||"").trim())
     errors.push("BLOCKED: no dated original-character visual approval.");
+  // Girl rig cannot inherit the boy's references/cloth pose without a separate review.
+  if(expectedSubject==="original_girl"){
+    if(identity?.referenceStatus?.independentFullTurnaroundApproved!==true)
+      errors.push("BLOCKED: independent full five-view girl turnaround not approved.");
+    if(identity?.religiousPoseReview!=="fully_independently_reviewed")
+      errors.push("BLOCKED: girl prayer postures have not received a separate fiqh review.");
+    const clothing=new Set(approved.reviewedClothingChecks||[]);
+    for(const check of identity?.requiredClothingChecks||[])
+      if(!clothing.has(check))errors.push("BLOCKED: independent girl clothing review missing: "+check);
+  }
   return {readyForProduction:errors.length===0,errors,technicalStructureValid:!!technical?.structureValid};
 }
 function main(argv) {
