@@ -9,6 +9,8 @@ local.properties
 
 # Signing — never commit the upload key
 keystore.properties
+kids-keystore.properties
+tv-keystore.properties
 *.jks
 *.keystore
 *.pepk
