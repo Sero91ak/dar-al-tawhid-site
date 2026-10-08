@@ -134,6 +134,11 @@ const api=new Function("synthesizeDarVoice","isVoiceConfigured","KIDS_VERIFIED_C
   noImports+"\nreturn {handleKidsMajlisApi,kidsMajlisTesting};")(synth,()=>true,verifiedContent,
   knowledge.findKnowledge,knowledge.findKnowledgeById,knowledge.mediaForCanonicalId,knowledge.allahAlam,knowledge.profilePrefix);
 new Function(frontSource);
+assert.match(frontSource,/if\(media\.kind==="lesson"&&Array\.isArray\(media\.sourceRefs\)\)/,
+  "Dīn source references must render Quran navigation in the Majlis");
+assert.match(frontSource,/openQuranVerse\(surah,ayah\)/,
+  "Dīn reference navigation must reach the verified Quran reader");
+
 assert.equal(fullQuranSearch.isQuestion("Wo steht im Qurʾān etwas über Geduld?"),true);
 assert.equal(fullQuranSearch.isQuestion("Wie mache ich Wuḍūʾ?"),false);
 assert.equal(quranFetchCalls.length,0,"Qurʾān should not be downloaded on app boot");
