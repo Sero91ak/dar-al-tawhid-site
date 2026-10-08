@@ -708,3 +708,36 @@ html[data-layout] :is(
 ){
   transition-property:opacity,color,background-color,border-color!important;
 }
+
+
+/* v2026-10-08 · Slide reading cards: natural content height on iPhone/iPad/web.
+   The flex carousel's tallest slide used to stretch every other slide. A
+   grid with auto-sized rows then distributed those empty pixels BETWEEN
+   kicker, heading and quote (hundreds of px on short quotes).
+   Keep the design, typography, slider controls and media intact. */
+.post-slides .post-slide-track{
+  align-items:flex-start !important;
+}
+.post-slides .post-slide{
+  flex:0 0 100% !important;
+  box-sizing:border-box !important;
+  align-self:flex-start !important;
+  align-content:start !important;
+  align-items:start !important;
+  grid-auto-rows:max-content !important;
+  height:max-content !important;
+  min-height:0 !important;
+  gap:clamp(8px,1.8vw,14px);
+}
+.post-slides .post-slide-window{
+  min-height:0 !important;
+}
+/* Keep short text tight without reducing its reading font size. */
+.post-slides .post-slide h3,
+.post-slides .post-slide-quote,
+.post-slides .post-slide-explanation{
+  align-self:start;
+}
+@media (prefers-reduced-motion: reduce) {
+  .post-slides .post-slide-track{transition:none !important;}
+}
