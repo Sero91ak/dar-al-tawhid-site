@@ -38,7 +38,7 @@ const make=(path,method="GET",data=undefined,headers={})=>{
     "Sec-Fetch-Site":"same-origin",...headers
   });
   if(data!==undefined)h.set("Content-Type","application/json");
-  return new Request("https://dar-admin-publisher.example"+endpoint+path,{method,headers,body:data===undefined?undefined:JSON.stringify(data)});
+  return new Request("https://dar-admin-publisher.example"+endpoint+path,{method,headers:h,body:data===undefined?undefined:JSON.stringify(data)});
 };
 let tests=0;
 async function check(req,state,status){
