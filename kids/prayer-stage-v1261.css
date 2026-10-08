@@ -1714,3 +1714,43 @@ body.kids-salah-day-open{overflow:hidden!important}
 #view-today .kids-salah-home-world.kids-salah-save-data::before{
   animation:none!important;transform:none!important;
 }
+
+
+/* KIDS_SALAH_OLD_HERO_PURGE_V1274
+   Final single-image fallback, never expose the earlier storybook hero on iOS.
+   This is resilient when decorative animation is not available. */
+#view-today .kids-salah-home-world{
+  background-color:#071e32!important;
+  background-image:linear-gradient(180deg,rgba(2,17,30,.10) 0%,rgba(4,19,31,.13) 40%,
+     rgba(4,25,40,.50) 65%,rgba(5,26,42,.91) 98%),
+     url("/kids/assets/kids-salah-v1272/hero-home.png?v=1274")!important;
+  background-position:center 0,center 44%!important;
+  background-size:cover!important;
+  background-repeat:no-repeat!important;
+}
+#view-today .kids-salah-home-world::before{
+  content:none!important;display:none!important;animation:none!important;
+}
+#view-today .kids-salah-home-world > .hero::before,
+#view-today .kids-salah-home-world > .hero::after{
+  content:none!important;display:none!important;
+  background-image:none!important;
+}
+#view-today .kids-salah-home-world > .hero{
+  background:none!important;
+  min-height:clamp(388px,103vw,430px)!important;
+  max-height:430px!important;
+}
+#view-today .kids-salah-home-world > .kids-salah-stage{
+  background:transparent!important;
+}
+.kids-salah-day::before{
+  background-image:linear-gradient(180deg,rgba(2,17,32,.14),rgba(3,19,34,.07) 48%,#092a3c 100%),
+    url("/kids/assets/kids-salah-v1272/hero-day.png?v=1274")!important;
+}
+@media(max-width:360px){
+  #view-today .kids-salah-home-world > .hero{min-height:380px!important;max-height:405px!important}
+}
+@media(min-width:700px){
+  #view-today .kids-salah-home-world > .hero{min-height:505px!important;max-height:540px!important}
+}
