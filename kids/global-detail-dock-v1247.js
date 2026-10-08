@@ -44,7 +44,7 @@ function initDetail(c){
  if(btn.parentElement!==bar)bar.insertBefore(btn,bar.firstChild);
  btn.classList.add("kids-detail-dock-back");
  btn.setAttribute("aria-label","Zurück");
- btn.textContent=""; // chevron is drawn with CSS; preserve original click handler
+ if(btn.textContent)btn.textContent=""; // CSS chevron; preserve original click handler
  setText(q(bar,".kids-detail-appbar-title"),configTitle(c,root));
  setText(q(bar,".kids-detail-appbar-subtitle"),c.subtitle);
 }
