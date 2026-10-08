@@ -88,7 +88,7 @@ function quoteAroundText(page, question) {
   return text.slice(offset,offset+3700);
 }
 
-async function verifiedPage(chunk, question) {
+export async function verifiedPage(chunk, question) {
   const url = await directAllowedUrl(chunk?.web?.uri || "");
   if (!url) return null;
   let originalUrl = url, result;
