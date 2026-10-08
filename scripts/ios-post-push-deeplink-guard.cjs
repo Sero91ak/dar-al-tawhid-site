@@ -15,6 +15,7 @@ const push = read("ios/DarAlTawhid/DarAlTawhid/DarPushNotifications.swift");
 const source = read("ios/DarAlTawhid/DarAlTawhid/DarAppShell.swift");
 
 const expect = (where, regex, why) => assert.match(where, regex, why);
+expect(router, /let isHomeWithArticle = cleanType == "home"[\s\S]*?!isHomeWithArticle/, "Article target overrides a generic home push type");
 expect(router, /if !cleanPost\.isEmpty[\s\S]*?apply\(\.home, webURL: target\)/,
        "Payload postId must preserve URL");
 expect(router, /if !DarAppShell\.postId\(from: target\)\.isEmpty\s*\{\s*apply\(\.home, webURL: target\)/,
