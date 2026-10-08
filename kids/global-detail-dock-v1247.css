@@ -147,3 +147,152 @@ html body .modal .modal-top.kids-legacy-appbar .modal-title{min-width:0!importan
 @media(prefers-reduced-motion:reduce){
  html body .kids-detail-appbar .kids-detail-dock-back{transition:none!important}
 }
+
+/* KIDS_COMPACT_GLOBAL_TOP_DOCK_V1248
+ * All Kids library, story and reading headers. Heights are in CSS px.
+ * Respect OS status bars/notches without counting the safe-area twice.
+ * Height grows with a wrapped title rather than cropping text or controls.
+ * No changes to the bottom tab bar or the hero artwork.
+ */
+html body :is(
+  .kids-detail-appbar,
+  .kids-subpage-nav,
+  .ms-library-nav,
+  .ps-library-nav,
+  .gh-world-nav
+){
+  box-sizing:border-box!important;
+  height:auto!important;
+  min-height:calc(60px + env(safe-area-inset-top,0px))!important;
+  max-height:none!important;
+  margin-top:0!important;
+  margin-bottom:8px!important;
+  padding:
+    calc(6px + env(safe-area-inset-top,0px))
+    max(13px,calc(10px + env(safe-area-inset-right,0px)))
+    7px
+    max(13px,calc(10px + env(safe-area-inset-left,0px)))!important;
+  gap:10px!important;
+  align-items:center!important;
+  border-radius:0 0 22px 22px!important;
+}
+html body :is(
+  .kids-detail-appbar,
+  .kids-subpage-nav,
+  .ms-library-nav,
+  .ps-library-nav,
+  .gh-world-nav
+) :is(.kids-detail-appbar-copy, .ps-library-nav-copy, .gh-world-nav-copy),
+html body :is(.ms-library-nav,.ps-library-nav,.gh-world-nav,.kids-subpage-nav) > div{
+  box-sizing:border-box!important;
+  min-width:0!important;
+  max-width:100%!important;
+  padding-left:11px!important;
+  gap:2px!important;
+  overflow:visible!important;
+}
+html body :is(
+  .kids-detail-appbar,.ms-library-nav,.ps-library-nav,.gh-world-nav,.kids-subpage-nav
+) :is(.kids-detail-appbar-title,.ps-library-nav-copy > strong,.gh-world-nav-copy > strong),
+html body :is(.ms-library-nav,.ps-library-nav,.gh-world-nav,.kids-subpage-nav) > div > strong{
+  font-size:clamp(18px,4.65vw,23px)!important;
+  font-weight:800!important;
+  line-height:1.10!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  overflow-wrap:anywhere!important;
+  text-overflow:clip!important;
+}
+html body :is(
+  .kids-detail-appbar,.ms-library-nav,.ps-library-nav,.gh-world-nav,.kids-subpage-nav
+) :is(.kids-detail-appbar-subtitle,.ps-library-nav-copy > span,.gh-world-nav-copy > span),
+html body :is(.ms-library-nav,.ps-library-nav,.gh-world-nav,.kids-subpage-nav) > div > span{
+  font-size:clamp(11px,2.8vw,12.5px)!important;
+  line-height:1.22!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  overflow-wrap:anywhere!important;
+  text-overflow:clip!important;
+}
+html body :is(
+  .kids-detail-appbar .kids-detail-dock-back,
+  .ms-library-nav .ms-back,
+  .ps-library-nav .ps-library-back,
+  .gh-world-nav .gh-back,
+  .kids-subpage-nav .kids-subpage-back
+),
+html body :is(
+  .ms-library-nav .ms-back,
+  .ps-library-nav .ps-library-back,
+  .gh-world-nav .gh-back,
+  .kids-subpage-nav .kids-subpage-back
+).kids-tap-card{
+  box-sizing:border-box!important;
+  position:relative!important;
+  inset:auto!important;
+  flex:0 0 44px!important;
+  width:44px!important;
+  min-width:44px!important;
+  max-width:44px!important;
+  height:44px!important;
+  min-height:44px!important;
+  max-height:44px!important;
+  padding:0!important;
+  margin:0!important;
+  border-radius:15px!important;
+  touch-action:manipulation!important;
+  pointer-events:auto!important;
+  transform:none!important;
+  translate:none!important;
+}
+html body .kids-detail-appbar::after,
+html body :is(.ms-library-nav,.ps-library-nav,.gh-world-nav,.kids-subpage-nav)::after{
+  left:57px!important;
+}
+html body .kids-legacy-appbar .modal-title{
+  padding-left:11px!important;
+}
+html body .modal .modal-top.kids-legacy-appbar{
+  width:calc(100% + 32px)!important;
+  min-height:calc(60px + env(safe-area-inset-top,0px))!important;
+  margin:0 -16px 8px!important;
+  padding:
+    calc(6px + env(safe-area-inset-top,0px))
+    max(13px,calc(10px + env(safe-area-inset-right,0px)))
+    7px
+    max(13px,calc(10px + env(safe-area-inset-left,0px)))!important;
+}
+/* Tablet/iPad: more horizontal breathing room, not taller bars. */
+@media(min-width:700px){
+  html body :is(.kids-detail-appbar,.kids-subpage-nav,.ms-library-nav,.ps-library-nav,.gh-world-nav){
+    min-height:calc(64px + env(safe-area-inset-top,0px))!important;
+    padding:
+      calc(7px + env(safe-area-inset-top,0px))
+      max(20px,calc(12px + env(safe-area-inset-right,0px)))
+      8px
+      max(20px,calc(12px + env(safe-area-inset-left,0px)))!important;
+    gap:13px!important;
+  }
+  html body .modal .modal-top.kids-legacy-appbar{
+    min-height:calc(64px + env(safe-area-inset-top,0px))!important;
+    padding-top:calc(7px + env(safe-area-inset-top,0px))!important;
+    padding-bottom:8px!important;
+  }
+  html body :is(.kids-detail-appbar,.ms-library-nav,.ps-library-nav,.gh-world-nav,.kids-subpage-nav)
+  :is(.kids-detail-appbar-title,.ps-library-nav-copy > strong,.gh-world-nav-copy > strong),
+  html body :is(.ms-library-nav,.ps-library-nav,.gh-world-nav,.kids-subpage-nav) > div > strong{
+    font-size:clamp(20px,2.5vw,24px)!important;
+  }
+}
+/* Narrow phones: never shrink the interactive back target. */
+@media(max-width:359px){
+  html body :is(.kids-detail-appbar,.ms-library-nav,.ps-library-nav,.gh-world-nav,.kids-subpage-nav){
+    gap:8px!important;
+  }
+  html body :is(.kids-detail-appbar,.ms-library-nav,.ps-library-nav,.gh-world-nav,.kids-subpage-nav)
+  :is(.kids-detail-appbar-title,.ps-library-nav-copy > strong,.gh-world-nav-copy > strong),
+  html body :is(.ms-library-nav,.ps-library-nav,.gh-world-nav,.kids-subpage-nav) > div > strong{
+    font-size:18px!important;
+  }
+}
+/* A double-line title can add height; never force max-height or clip it. */
