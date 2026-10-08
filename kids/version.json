@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v155-profile-firstpaint1258",
-  "label": "KIDS · V1.08.76",
-  "releasedAt": "2026-10-08T14:14:12.340Z",
-  "note": "Kids V1.08.76: Profil-CSS wird jetzt vor dem ersten Seitenaufbau geladen. Jungen- und Mädchenfarbwelt, iPhone-Safe-Area und die wetterfreie Registrierung bleiben erhalten.",
+  "buildId": "kids-shell-v156-dua-reader1259",
+  "label": "KIDS · V1.08.77",
+  "releasedAt": "2026-10-08T14:36:51.624Z",
+  "note": "Kids V1.08.77: Duʿāʾ-Detail mit sichtbarem kompaktem Hero, Arabisch unter der Trennlinie und voller Seitenhöhe. Lernmodus mit kompakter Vollbild-Kopfzeile, frei umbrochenem Arabisch und exaktem Wort-Audio-Fokus.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1258",
+    "serviceWorkerCache": "v1259",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -1217,9 +1217,9 @@
     "compactBackTouchCssPx": 44,
     "fullBleedDuaDetailHeader": "v1249",
     "globalExplanationAudioActions": "v1249",
-    "duaReaderLayout": "v1253-fullwidth-with-gold-divider",
-    "duaHubCssVersion": 1258,
-    "duaHubJsVersion": 1258,
+    "duaReaderLayout": "v1259-visible-hero-natural-scroll",
+    "duaHubCssVersion": 1259,
+    "duaHubJsVersion": 1259,
     "globalSourceTextOnly": "v1251",
     "parentsHeroProfileImages": {
       "boy": "/kids/assets/parents-hero/boy-profile-v1254.jpg",
@@ -1234,10 +1234,13 @@
     "profileScrollAndSafeAreaFix": "v1256",
     "profileGenderGuestPersistence": true,
     "iosJoinKeyboardScrollStability": "v1258",
-    "profileStyleLoadedBeforeFirstPaint": true
+    "profileStyleLoadedBeforeFirstPaint": true,
+    "duaSmartLearningLayout": "v1259-fullscreen-wrapped-rtl",
+    "duaSmartWholeListening": "exact-native-word-clip-ended-events",
+    "duaSmartSlowListening": "separate-original-slow-master-no-estimated-timings"
   },
   "updatedAt": "2026-10-08T13:15:45.228Z",
-  "deployTrigger": "kids-profile-firstpaint-v1258",
+  "deployTrigger": "kids-dua-reader-learning-v1259",
   "globalDetailDock": {
     "version": "v1253",
     "enabled": true,

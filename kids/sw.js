@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1258";
-const KIDS_BUILD_ID="kids-shell-v155-profile-firstpaint1258";
+const CACHE_NAME="dar-al-tawhid-kids-v1259";
+const KIDS_BUILD_ID="kids-shell-v156-dua-reader1259";
 const DUA_AUDIO_RUNTIME="1244";
 // QUIZ_HOME_RESTORE_V1225: refresh installed PWAs with the restored Quiz entry.
 const CORE_PRECACHE=[
@@ -88,8 +88,8 @@ const CORE_PRECACHE=[
   "/kids/story-hub.js?v=25",
   "/kids/global-story-glow-v1216.css?v=1217",
   "/kids/global-story-glow-v1216.js?v=1239",
-  "/kids/dua-hub-v1219.css?v=1258",
-  "/kids/dua-hub-v1219.js?v=1258",
+  "/kids/dua-hub-v1219.css?v=1259",
+  "/kids/dua-hub-v1219.js?v=1259",
   "/kids/assets/profile-avatars/boy-kufi-v1235.svg",
   "/kids/assets/profile-avatars/girl-hijab-pink-v1235.svg",
   "/kids/assets/dua-premium/hero-v1222.jpg?v=1233",
@@ -132,8 +132,9 @@ const CORE_PRECACHE=[
   "/kids/kids-card-interaction.js?v=6",
   "/kids/kids-age-typography.js?v=3",
   "/kids/owner-voice.js?v=8",
-  "/kids/dua-smart-learn.css?v=1233",
-  "/kids/dua-smart-learn.js?v=1244",
+  "/kids/dua-smart-learn.css?v=1259",
+  "/kids/dua-layout-v1259.css?v=1259",
+  "/kids/dua-smart-learn.js?v=1259",
   "/kids/content-studio-feed.js?v=studio7",
   "/kids/assets/kids-open-v95.css?v=97",
   "/kids/assets/kids-open-v95.js?v=97",

@@ -224,6 +224,22 @@
       if(b)b.disabled=!on;
     });
   }
+  // v1259: focused Arabic word scrolls within the learning viewport only.
+  // The Arabic and transliteration rows now wrap; no horizontal slider exists.
+  function keepFocusedWordVisible(){
+    if(!root||!root.classList.contains("open"))return;
+    var viewport=root.querySelector(".dsl-scroll");
+    var word=root.querySelector('.dsl-arabic [data-seg="'+currentIndex+'"]');
+    if(!viewport||!word)return;
+    var view=viewport.getBoundingClientRect();
+    var rect=word.getBoundingClientRect();
+    if(rect.top<view.top+16||rect.bottom>view.bottom-16){
+      var desired=viewport.scrollTop+(rect.top-view.top)-(view.height-rect.height)*0.32;
+      try{viewport.scrollTo({top:Math.max(0,desired),behavior:"smooth"})}
+      catch(e){viewport.scrollTop=Math.max(0,desired)}
+    }
+  }
+  function queueFocusedWord(){requestAnimationFrame(keepFocusedWordVisible)}
   function selectIndex(i,opts){
     opts=opts||{};
     var segs=getSegments(currentDua);
@@ -232,10 +248,7 @@
     saveProgress();
     paintSelection();
     if(opts.play)playWord(currentIndex);
-    var node=root&&root.querySelector('[data-seg="'+currentIndex+'"]');
-    if(node&&opts.scroll!==false){
-      try{node.scrollIntoView({block:"nearest",inline:"center",behavior:"smooth"})}catch(e){}
-    }
+    if(opts.scroll!==false)queueFocusedWord();
   }
 
   function stopAudio(){
@@ -282,8 +295,67 @@
       }catch(e){finish(false)}
     });
   }
+  // Each native Serhat Fuṣḥā word clip advances focus on its REAL ended
+  // event. Unlike estimated offsets into the uninterrupted phrase, this
+  // creates exact focus synchronization without invented timestamps.
+  function playWordSequence(){
+    var dua=currentDua;
+    var segs=getSegments(dua);
+    if(!segs.length)return false;
+    var urls=segs.map(function(seg){
+      var row=packs&&entry(packs.word,seg.audioKey||seg.arabic);
+      return seg.audioUrl||(row&&row.url)||"";
+    });
+    if(urls.some(function(url){return !url}))return false;
+    stopAudio();
+    var token=playToken;
+    playing=true;
+    mode="full";
+    paintControls();
+    setStatus("Wort für Wort: Die Markierung folgt genau der Aufnahme.","");
+    ensureAudioAttached();
+    function fail(){
+      if(token!==playToken)return;
+      stopAudio();
+      setStatus("Eine Wortaufnahme konnte nicht abgespielt werden.","bad");
+    }
+    function advance(i){
+      if(token!==playToken||currentDua!==dua)return;
+      if(i>=segs.length){
+        audio.onended=null;
+        playing=false;
+        mode="";
+        paintControls();
+        setStatus("Du hast die ganze Duʿāʾ gehört.","good");
+        return;
+      }
+      currentIndex=i;
+      saveProgress();
+      paintSelection();
+      queueFocusedWord();
+      try{
+        audio.pause();
+        audio.onended=null;
+        audio.onerror=null;
+        audio.src=String(urls[i]);
+        audio.currentTime=0;
+        audio.playbackRate=1;
+        audio.muted=false;
+        audio.volume=1;
+        audio.onended=function(){advance(i+1)};
+        audio.onerror=fail;
+        var p=audio.play();
+        if(p&&p.catch)p.catch(fail);
+      }catch(e){fail()}
+    }
+    advance(0);
+    return true;
+  }
   function playWhole(slow){
     if(!currentDua)return false;
+    // "Ganz hören" in learning mode traverses every recorded word exactly.
+    // The original uninterrupted full voice remains on the Duʿāʾ detail.
+    if(!slow&&playWordSequence())return true;
     var direct=slow?currentDua.audioArabicSlowUrl:currentDua.audioArabicUrl;
     if(direct){
       return playUrl(direct,slow?"slow":"full",slow?"Langsam und deutlich zuhören …":"Duʿāʾ anhören …");
@@ -424,6 +496,7 @@
     }).join(" ");
     paintSelection();
     paintControls();
+    queueFocusedWord();
   }
   function allReady(dua,p){
     var text=arabicText(dua);
@@ -439,6 +512,9 @@
     render();
     root.classList.add("open");
     root.setAttribute("aria-hidden","false");
+    var view=root.querySelector(".dsl-scroll");
+    if(view)view.scrollTop=0;
+    queueFocusedWord();
     document.documentElement.classList.add("dua-smart-open");
     document.body.classList.add("dua-smart-open");
     setReady(false);

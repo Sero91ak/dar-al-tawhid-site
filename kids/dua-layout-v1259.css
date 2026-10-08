@@ -1,0 +1,138 @@
+
+/* KIDS_DUA_GLOBAL_READER_V1259 — all Duʿāʾ details, all profile ages */
+html body #view-dua #duaHubDetail.open .duahub-detail-scroll{
+ display:flex!important;flex-direction:column!important;
+ min-height:calc(100dvh - 174px - env(safe-area-inset-bottom,0px))!important;
+ height:auto!important;max-height:none!important;overflow:visible!important;padding-bottom:0!important
+}
+html body #view-dua #duaHubDetail.open .duahub-detail-hero,
+html body #view-dua #duaHubDetail.open.duahub-fit-compact .duahub-detail-hero,
+html body #view-dua #duaHubDetail.open.duahub-fit-tight .duahub-detail-hero{
+ height:auto!important;min-height:clamp(174px,23dvh,218px)!important;
+ width:100vw!important;max-width:100vw!important;
+ background:linear-gradient(180deg,rgba(2,18,30,.03) 0%,rgba(2,18,30,.06) 47%,rgba(6,29,43,.87) 100%),
+ var(--duahub-detail-image,url("/kids/assets/dua-premium/hero-v1222.jpg?v=1233")) center 37%/cover no-repeat!important
+}
+html body #view-dua #duaHubDetail.open .duahub-detail-hero::after{
+ background:linear-gradient(180deg,transparent 28%,rgba(7,28,42,.03) 52%,rgba(7,31,46,.70) 100%)!important
+}
+html body #view-dua #duaHubDetail.open .duahub-detail-titlewrap{
+ padding:0 max(16px,env(safe-area-inset-right,0px)) 12px max(16px,env(safe-area-inset-left,0px))!important
+}
+html body #view-dua #duaHubDetail.open .duahub-detail-actions{
+ margin-bottom:3px!important;row-gap:2px!important
+}
+html body #view-dua #duaHubDetail.open .duahub-detail-actions::after{
+ width:min(76%,420px)!important;margin:8px auto 3px!important
+}
+html body #view-dua #duaHubDetail.open .duahub-textcard{
+ flex:1 0 auto!important;display:flex!important;flex-direction:column!important;
+ justify-content:space-evenly!important;padding-top:16px!important;padding-bottom:3px!important
+}
+html body #view-dua #duaHubDetail.open .duahub-arabic{
+ padding-top:3px!important;margin-top:0!important
+}
+html body #view-dua #duaHubDetail.open .duahub-translit{margin-top:5px!important}
+html body #view-dua #duaHubDetail.open .duahub-source{
+ margin-top:8px!important;padding-top:7px!important;margin-bottom:0!important
+}
+html body #view-dua #duaHubDetail.open .duahub-textcard button#duaHubGerman.kids-explain-action{
+ margin-top:8px!important;margin-bottom:1px!important
+}
+@media(max-height:720px){
+ html body #view-dua #duaHubDetail.open .duahub-detail-hero{min-height:158px!important}
+}
+@media(min-width:700px){
+ html body #view-dua #duaHubDetail.open .duahub-detail-hero{min-height:clamp(205px,20dvh,260px)!important}
+}
+
+/* KIDS_DUA_LEARNING_V1259 — immersive learning with wrapped RTL words */
+html body .dsl .dsl-sheet{
+ position:absolute!important;top:0!important;bottom:0!important;
+ height:100dvh!important;max-height:100dvh!important;
+ border-radius:0!important;width:min(100%,820px)!important;box-sizing:border-box!important
+}
+html body .dsl .dsl-head{
+ flex:0 0 auto!important;grid-template-columns:38px minmax(0,1fr) 44px!important;
+ gap:7px!important;min-height:0!important;
+ padding:calc(env(safe-area-inset-top,0px) + 7px) 12px 8px!important
+}
+html body .dsl .dsl-close{
+ width:36px!important;height:36px!important;min-height:36px!important;font-size:24px!important
+}
+html body .dsl .dsl-headcopy small{margin:0!important;font-size:8px!important;line-height:1.08!important}
+html body .dsl .dsl-headcopy strong{
+ font-size:clamp(17px,4.8vw,23px)!important;line-height:1.1!important;
+ white-space:normal!important;overflow:visible!important;text-overflow:clip!important;
+ overflow-wrap:break-word!important;margin-top:2px!important
+}
+html body .dsl .dsl-headcopy span{font-size:10px!important;line-height:1.15!important;margin-top:2px!important}
+html body .dsl .dsl-count{font-size:11px!important;white-space:nowrap!important}
+html body .dsl .dsl-progress{flex:0 0 3px!important}
+html body .dsl .dsl-scroll{
+ display:flex!important;flex-direction:column!important;align-items:stretch!important;
+ justify-content:safe center!important;min-height:0!important;flex:1 1 auto!important;
+ overflow-x:hidden!important;overflow-y:auto!important;
+ padding:14px max(12px,env(safe-area-inset-right,0px))
+ calc(20px + env(safe-area-inset-bottom,0px))
+ max(12px,env(safe-area-inset-left,0px))!important;
+ overscroll-behavior:contain!important
+}
+html body .dsl .dsl-arabic,html body .dsl .dsl-translit{
+ display:flex!important;flex-wrap:wrap!important;align-items:center!important;
+ justify-content:center!important;gap:4px 7px!important;
+ width:100%!important;max-width:none!important;
+ overflow:visible!important;scroll-snap-type:none!important;
+ flex:0 0 auto!important;box-sizing:border-box!important
+}
+html body .dsl .dsl-arabic{
+ min-height:0!important;direction:rtl!important;padding:12px 0 8px!important;
+ margin:0 auto!important;border:0!important;border-radius:0!important;
+ background:transparent!important;box-shadow:none!important
+}
+html body .dsl .dsl-translit{
+ margin:5px auto 0!important;padding:5px 0 10px!important;
+ border-bottom:1px solid rgba(228,197,126,.18)!important
+}
+html body .dsl .dsl-word{flex:0 0 auto!important;scroll-snap-align:none!important;max-width:100%!important}
+html body .dsl .dsl-word.ar{
+ font-size:clamp(33px,9.1vw,48px)!important;line-height:1.47!important;
+ padding:0 5px!important;border-radius:11px!important
+}
+html body .dsl .dsl-word.tr{
+ font-size:clamp(16px,4.7vw,23px)!important;line-height:1.35!important;
+ padding:4px 5px!important;border-radius:9px!important
+}
+html body .dsl .dsl-word.active.ar{
+ background:linear-gradient(135deg,#f5da87,#ddb153)!important;
+ color:#102738!important;box-shadow:0 3px 12px rgba(223,175,73,.23)!important
+}
+html body .dsl .dsl-focus{display:none!important}
+html body .dsl .dsl-controls{
+ display:grid!important;grid-template-columns:1.14fr 1fr 1fr!important;
+ gap:7px!important;width:100%!important;margin:10px 0 0!important
+}
+html body .dsl .dsl-play{
+ min-height:51px!important;font-size:clamp(10.5px,2.95vw,13px)!important;
+ line-height:1.12!important;padding:5px!important
+}
+html body .dsl .dsl-play.repeat{grid-column:auto!important}
+html body .dsl .dsl-stepnav{margin:9px 0 0!important;gap:7px!important;width:100%!important}
+html body .dsl .dsl-stepnav button{
+ min-height:47px!important;font-size:clamp(11px,3.1vw,14px)!important
+}
+html body .dsl .dsl-speednote{
+ margin:5px 0 0!important;font-size:10px!important;line-height:1.2!important
+}
+html body .dsl .dsl-status{
+ min-height:20px!important;margin:8px 0 0!important;
+ line-height:1.3!important;font-size:12px!important
+}
+@media(max-width:430px){
+ html body .dsl .dsl-guide{display:none!important}
+ html body .dsl .dsl-word.ar{font-size:clamp(34px,9.2vw,44px)!important}
+}
+@media(max-height:690px){
+ html body .dsl .dsl-scroll{justify-content:safe flex-start!important;padding-top:8px!important}
+ html body .dsl .dsl-speednote{display:none!important}
+}

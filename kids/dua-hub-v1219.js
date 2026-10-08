@@ -506,8 +506,7 @@
     detail.classList.remove("duahub-fit-compact", "duahub-fit-tight", "duahub-needs-scroll");
     const navTop = q(".bottom-nav")?.getBoundingClientRect().top ?? (window.innerHeight - 92);
     const available = Math.max(200, navTop - reader.getBoundingClientRect().top - 9);
-    if (reader.scrollHeight > available + 2) detail.classList.add("duahub-fit-compact");
-    if (reader.scrollHeight > available + 2) detail.classList.add("duahub-fit-tight");
+    // Long Duʿāʾs scroll instead of crushing the artwork or the Arabic text.
     detail.classList.toggle("duahub-needs-scroll", reader.scrollHeight > available + 2);
   }
 
