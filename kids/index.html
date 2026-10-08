@@ -2704,7 +2704,7 @@ html:not([data-view="today"]) .view.active{
 }
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Fredoka:wght@500;600;700&family=Noto+Naskh+Arabic:wght@500;700&display=swap">
-<link rel="stylesheet" href="/kids/assets/kids-open-v95.css?v=97">
+<!-- Launch v174: native/PWA opens directly on the approved mosque background; no obsolete intro overlay or audio. -->
 
 
 <link rel="stylesheet" href="/kids/prophet-stories.css?v=42">
@@ -2839,25 +2839,6 @@ html:not([data-view="today"]) .view.active{
 <link rel="stylesheet" href="/kids/prayer-stage-v1261.css?v=1277" data-kids-salah-stage="1275">
 </head>
 <body>
-<div class="kids-open" id="kidsLaunch" data-kids-launch="v95">
-  <div class="kids-open__sky" aria-hidden="true"></div>
-  <div class="kids-open__stars" aria-hidden="true"></div>
-  <div class="kids-open__stage">
-    <div class="kids-open__halo" aria-hidden="true"></div>
-    <svg class="kids-open__ring" viewBox="0 0 120 120" aria-hidden="true">
-      <circle class="kids-open__ring-bg" cx="60" cy="60" r="54"></circle>
-      <circle class="kids-open__ring-fg" id="kidsLaunchRing" cx="60" cy="60" r="54"></circle>
-    </svg>
-    <div class="kids-open__seal" id="kidsLaunchSeal"><img src="/kids/icons/icon-1024.png?v=logo28" width="320" height="320" alt=""></div>
-  </div>
-  <div class="kids-open__titles">
-    <p class="kids-open__dar">DĀR AL TAWḤĪD</p>
-    <p class="kids-open__kids">Kids</p>
-  </div>
-  <p class="kids-open__pct" id="kidsLaunchPct">0%</p>
-  <div class="kids-open__bloom" aria-hidden="true"></div>
-  <audio id="kidsOwnerGreeting" preload="auto" src="/kids/assets/kids-cinema/intro-voice-serhat-soft.m4a?v=87"></audio>
-</div>
 <div id="kidsUpdateLayer" class="kids-update-layer">
   <div class="kids-update-card" role="dialog" aria-labelledby="kidsUpdateTitle" aria-describedby="kidsUpdateText">
     <div class="kids-update-scene"></div>
@@ -2916,7 +2897,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.08.94</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.08.95</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3302,7 +3283,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v173-salah-native-art1277";
+const KIDS_BUILD_ID="kids-shell-v174-start-stable1278";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6556,38 +6537,27 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=8"></script>\n<script src="/kids/dua-smart-learn.js?v=1261"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v173-salah-native-art1277";
-  var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
-  function freshStart(reason){
-    try{
-      if(sessionStorage.getItem(reloadKey)==="1")return;
-      sessionStorage.setItem(reloadKey,"1");
-    }catch(e){}
-    var u=new URL("/kids/start",location.origin);
-    u.searchParams.set("kv",KIDS_BUILD_ID);
-    u.searchParams.set("refresh",reason||"update");
-    u.searchParams.set("cb",String(Date.now()));
-    location.replace(u.toString());
-  }
+  var KIDS_BUILD_ID="kids-shell-v174-start-stable1278";
+  // Stable start: do not reload a visible app when a service worker takes control.
+  // The next navigation uses network-first and receives the latest release.
   if("serviceWorker" in navigator){
-    navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1277",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1278",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
-    });
+    },{once:true});
   }
   window.addEventListener("load",function(){
-    fetch("/kids/version.json?v=1277",{cache:"no-store"})
+    fetch("/kids/version.json?v=1278",{cache:"no-store"})
       .then(function(r){return r.ok?r.json():null})
       .then(function(v){
         var live=String(v&&v.buildId||"");
-        if(live&&live!==KIDS_BUILD_ID)freshStart("version");
+        if(live&&live!==KIDS_BUILD_ID)window.DARKidsUpdateAvailable=live;
       }).catch(function(){});
-  });
+  },{once:true});
 })();
 </script>
-<script src="/kids/assets/kids-open-v95.js?v=97"></script>
+
 
 
 
@@ -8850,70 +8820,7 @@ html[data-view="stories"] #view-stories > :last-child{
   #view-today .wm-kids span{animation:none!important}
 }
 </style>
-<script id="kids-home-cinema-runtime-v1179">
-(function(){
-  function bootKidsCinema(){
-    var today=document.getElementById("view-today");
-    var hero=today&&today.querySelector(".hero");
-    var video=hero&&hero.querySelector(".hero-cinema-video");
-    if(!today||!hero||!video)return;
-
-    video.muted=true;
-    video.defaultMuted=true;
-    video.loop=true;
-    video.playsInline=true;
-    video.setAttribute("muted","");
-    video.setAttribute("playsinline","");
-    video.setAttribute("webkit-playsinline","");
-
-    function isActive(){
-      return today.classList.contains("active")&&document.visibilityState!=="hidden";
-    }
-    function tryPlay(){
-      if(!isActive())return;
-      var p;
-      try{p=video.play()}catch(e){p=null}
-      if(p&&typeof p.catch==="function")p.catch(function(){
-        hero.classList.remove("cinema-playing");
-      });
-    }
-    function pauseWhenHidden(){
-      if(!isActive()){
-        try{video.pause()}catch(e){}
-      }else{
-        tryPlay();
-      }
-    }
-
-    video.addEventListener("playing",function(){hero.classList.add("cinema-playing")});
-    video.addEventListener("pause",function(){if(!isActive())hero.classList.remove("cinema-playing")});
-    video.addEventListener("canplay",tryPlay);
-    video.addEventListener("loadeddata",tryPlay);
-    video.addEventListener("stalled",function(){hero.classList.remove("cinema-playing")});
-    video.addEventListener("error",function(){hero.classList.remove("cinema-playing")});
-
-    document.addEventListener("visibilitychange",pauseWhenHidden);
-    window.addEventListener("pageshow",tryPlay);
-    window.addEventListener("focus",tryPlay);
-    document.addEventListener("touchstart",tryPlay,{once:true,passive:true});
-    document.addEventListener("pointerdown",tryPlay,{once:true,passive:true});
-
-    try{
-      new MutationObserver(pauseWhenHidden).observe(today,{attributes:true,attributeFilter:["class"]});
-    }catch(e){}
-
-    try{video.load()}catch(e){}
-    setTimeout(tryPlay,60);
-    setTimeout(tryPlay,650);
-    setTimeout(tryPlay,1500);
-  }
-  if(document.readyState==="loading"){
-    document.addEventListener("DOMContentLoaded",bootKidsCinema,{once:true});
-  }else{
-    bootKidsCinema();
-  }
-})();
-</script>
+<!-- kids-home-cinema-runtime-v1179 disabled: preserve stable mosque background; never restart legacy hero video. -->
 <style id="kids-home-cinema-v1180">
 /* V1180 — sichtbarer Cinema-Look auch dann, wenn iOS das Video kurz verzögert. */
 #view-today .hero{
@@ -9412,9 +9319,7 @@ html[data-view="stories"] #view-stories > :last-child{
 @media(min-width:700px){#view-today .hero{min-height:525px!important;max-height:525px!important}#view-today .kids-wordmark{top:max(46px,calc(env(safe-area-inset-top,0px) + 20px))!important;width:min(calc(100vw - 82px),560px)!important;max-width:560px!important}#view-today .wm-dar-arc{width:530px!important}#view-today .wm-dar-arc-text,#view-today .wm-dar-arc-masktext{font-size:54px!important}#view-today .wm-kids{font-size:98px!important}#view-today .hero-copy{bottom:18px!important}#view-today .hero-salam{font-size:19px!important;max-width:470px!important}}
 @media(prefers-reduced-motion:reduce){#view-today .hero-cinema-video{display:none!important}#view-today .wm-dar-shine-bar,#view-today .wm-dar-spark,#view-today .wm-kids span{animation:none!important}#view-today .wm-dar-shine-bar,#view-today .wm-dar-spark{display:none!important}}
 </style>
-<script id="kids-home-cinema-runtime-v1185">
-(function(){function boot1185(){var today=document.getElementById("view-today"),hero=today&&today.querySelector(".hero"),video=hero&&hero.querySelector(".hero-cinema-video");if(!today||!hero||!video)return;var resetting=false;video.muted=true;video.defaultMuted=true;video.loop=false;video.playsInline=true;video.playbackRate=.62;video.setAttribute("muted","");video.setAttribute("playsinline","");video.setAttribute("webkit-playsinline","");function active(){return today.classList.contains("active")&&document.visibilityState!=="hidden"}function play(){if(!active())return;try{video.playbackRate=.62;var p=video.play();if(p&&typeof p.catch==="function")p.catch(function(){hero.classList.remove("cinema-playing")})}catch(e){}}function resetSeam(){if(resetting)return;resetting=true;hero.classList.add("cinema-resetting");setTimeout(function(){try{video.currentTime=.08}catch(e){}setTimeout(function(){hero.classList.remove("cinema-resetting");resetting=false;play()},110)},300)}function guardSeam(){var d=Number(video.duration||0);if(d>0&&video.currentTime>=Math.max(.2,d-.44))resetSeam()}video.addEventListener("playing",function(){hero.classList.add("cinema-playing")});video.addEventListener("timeupdate",guardSeam);video.addEventListener("ended",resetSeam);video.addEventListener("canplay",play);video.addEventListener("loadeddata",play);video.addEventListener("stalled",function(){hero.classList.remove("cinema-playing")});video.addEventListener("error",function(){hero.classList.remove("cinema-playing")});document.addEventListener("visibilitychange",function(){if(active())play();else try{video.pause()}catch(e){}});window.addEventListener("pageshow",play);window.addEventListener("focus",play);document.addEventListener("touchstart",play,{once:true,passive:true});document.addEventListener("pointerdown",play,{once:true,passive:true});try{new MutationObserver(function(){if(active())play();else try{video.pause()}catch(e){}}).observe(today,{attributes:true,attributeFilter:["class"]})}catch(e){}try{video.load()}catch(e){}setTimeout(play,80);setTimeout(play,700)}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot1185,{once:true});else boot1185()})();
-</script>
+<!-- kids-home-cinema-runtime-v1185 disabled: preserve stable mosque background; never restart legacy hero video. -->
 
 
 <style id="kids-home-wordmark-nav-v1186">
@@ -9974,34 +9879,7 @@ html[data-view="stories"] #view-stories > :last-child{
   #view-today .shooting-star{display:none!important}
 }
 </style>
-<script id="kids-home-cinema-runtime-v1188">
-(function(){
-  var hero=document.querySelector("#view-today .hero");
-  var video=hero&&hero.querySelector(".hero-sky-video-v1188");
-  if(!hero||!video)return;
-  video.muted=true;
-  video.defaultMuted=true;
-  video.loop=true;
-  video.playsInline=true;
-  video.playbackRate=1;
-  function ready(){hero.classList.add("cinema1188-ready")}
-  function play(){
-    try{
-      var p=video.play();
-      if(p&&typeof p.catch==="function")p.catch(function(){});
-    }catch(e){}
-  }
-  video.addEventListener("canplay",function(){ready();play()},{passive:true});
-  video.addEventListener("playing",ready,{passive:true});
-  document.addEventListener("visibilitychange",function(){
-    if(document.visibilityState==="visible")play();
-    else try{video.pause()}catch(e){}
-  });
-  document.addEventListener("pointerdown",play,{passive:true,once:true});
-  if(video.readyState>=2)ready();
-  play();
-})();
-</script>
+<!-- kids-home-cinema-runtime-v1188 disabled: preserve stable mosque background; never restart legacy hero video. -->
 
 
 <style id="kids-home-static-reference-v1191">

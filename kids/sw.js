@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1277";
-const KIDS_BUILD_ID="kids-shell-v173-salah-native-art1277";
+const CACHE_NAME="dar-al-tawhid-kids-v1278";
+const KIDS_BUILD_ID="kids-shell-v174-start-stable1278";
 const DUA_AUDIO_RUNTIME="1244";
 // QUIZ_HOME_RESTORE_V1225: refresh installed PWAs with the restored Quiz entry.
 const CORE_PRECACHE=[
@@ -147,8 +147,6 @@ const CORE_PRECACHE=[
   "/kids/dua-learn-cinema-v1261.css?v=1261",
   "/kids/dua-smart-learn.js?v=1261",
   "/kids/content-studio-feed.js?v=studio7",
-  "/kids/assets/kids-open-v95.css?v=97",
-  "/kids/assets/kids-open-v95.js?v=97",
   "/kids/icons/icon-192.png?v=logo28",
   "/kids/icons/icon-512.png?v=logo28",
   "/kids/icons/apple-touch-icon.png?v=logo28",
@@ -237,44 +235,31 @@ function fillCache(urls){
 }
 
 self.addEventListener("install",function(event){
+  var precacheIndex=0;
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(function(cache){
-        return Promise.all(CORE_PRECACHE.map(function(url){return addQuiet(cache,url)}));
+        return Promise.all([0,1,2].map(function(){
+          var next=function(){
+            if(precacheIndex>=CORE_PRECACHE.length)return Promise.resolve();
+            var path=CORE_PRECACHE[precacheIndex++];
+            return addQuiet(cache,path).then(next);
+          };
+          return next();
+        }));
       })
       .then(function(){return self.skipWaiting()})
   );
 });
 
 self.addEventListener("activate",function(event){
+  // Stable startup: claiming control must never navigate/reload an already-open app.
   event.waitUntil(
     caches.keys().then(function(keys){
       return Promise.all(keys.filter(function(key){
         return key.indexOf("dar-al-tawhid-kids-")===0&&key!==CACHE_NAME;
       }).map(function(key){return caches.delete(key)}));
-    }).then(function(){
-      return self.clients.claim();
-    }).then(function(){
-      // Große Bilder und Zusatzmedien nicht mehr automatisch vorladen.
-      // Sie werden erst beim tatsächlichen Öffnen des Bereichs geladen und danach gecacht.
-      return self.clients.matchAll({type:"window",includeUncontrolled:true});
-    }).then(function(clients){
-      return Promise.all(clients.map(function(client){
-        try{
-          var u=new URL(client.url);
-          if(u.origin!==self.location.origin||u.pathname.indexOf("/kids/")!==0)return Promise.resolve();
-          var buildCurrent=u.searchParams.get("kv")===KIDS_BUILD_ID;
-          var duaAudioCurrent=u.searchParams.get("ar")===DUA_AUDIO_RUNTIME;
-          if(buildCurrent&&duaAudioCurrent)return Promise.resolve();
-          u.pathname="/kids/start";
-          u.search="";
-          u.searchParams.set("kv",KIDS_BUILD_ID);
-          u.searchParams.set("ar",DUA_AUDIO_RUNTIME);
-          if(typeof client.navigate==="function")return client.navigate(u.toString()).catch(function(){});
-        }catch(e){}
-        return Promise.resolve();
-      }));
-    })
+    }).then(function(){return self.clients.claim()})
   );
 });
 
