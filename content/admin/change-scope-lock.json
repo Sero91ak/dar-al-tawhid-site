@@ -7123,6 +7123,17 @@
         "test/assets/premium-feed-app.js"
       ],
       "expiresAt": "2026-11-07T23:59:00.000Z"
+    },
+    {
+      "id": "dar-chat-admin-publisher-bridge-2026-10-08",
+      "at": "2026-10-08T12:00:00+02:00",
+      "approvedBy": "user-explicit-direct-chat-to-existing-dar-admin-publisher",
+      "reason": "Nutzer beauftragt ausdrücklich die technische Direktverbindung ChatGPT → bestehender DAR Admin-Publisher. Nur genehmigte Erwachsenen-Besucherbeiträge; keine Kids-, Apple-TV-, Test-, App-Shell-, Push-System- oder Worker-Code-Änderung.",
+      "paths": [
+        "scripts/chat-admin-publish.js",
+        ".github/workflows/chat-admin-publisher.yml",
+        "content/admin/chat-publish-requests/"
+      ]
     }
   ],
   "enabled": true
