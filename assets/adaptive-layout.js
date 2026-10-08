@@ -463,3 +463,100 @@
     start();
   }
 })(typeof window !== "undefined" ? window : this);
+
+
+/* v2026-10-08 · Match the carousel viewport to its ACTIVE slide only.
+ * Each slide may contain a different amount of text. A flex track normally
+ * has the height of its tallest child, leaving giant blank areas on short
+ * cards. This reads the natural height; it never edits text, links or nav.
+ */
+(function (global) {
+  "use strict";
+  if (global.__DAR_SLIDE_CONTENT_HEIGHT_V1) return;
+  global.__DAR_SLIDE_CONTENT_HEIGHT_V1 = true;
+
+  var tracked = new WeakSet();
+  var allSlides = new WeakSet();
+  var pending = new Set();
+  var scheduled = false;
+  var rootObserver = null;
+  var slideObserver = typeof ResizeObserver === "function"
+    ? new ResizeObserver(function (entries) {
+        entries.forEach(function (entry) {
+          var c = entry.target.closest("[data-slide-carousel]");
+          if (c) queue(c);
+        });
+      }) : null;
+
+  function measure(carousel) {
+    if (!carousel.isConnected) return;
+    var windowEl = carousel.querySelector(".post-slide-window");
+    var slides = carousel.querySelectorAll(".post-slide");
+    if (!windowEl || !slides.length) return;
+    var raw = parseInt(carousel.dataset.active || "0", 10);
+    var index = Number.isFinite(raw) ? Math.max(0, Math.min(slides.length - 1, raw)) : 0;
+    var activeSlide = slides[index];
+    var height = Math.ceil(Math.max(activeSlide.scrollHeight, activeSlide.offsetHeight));
+    if (!Number.isFinite(height) || height < 1) return;
+    if (Math.abs(windowEl.getBoundingClientRect().height - height) > 1) {
+      windowEl.style.height = height + "px";
+    }
+  }
+
+  function flush() {
+    scheduled = false;
+    pending.forEach(measure);
+    pending.clear();
+  }
+  function queue(carousel) {
+    if (!carousel || !carousel.isConnected) return;
+    pending.add(carousel);
+    if (!scheduled) {
+      scheduled = true;
+      global.requestAnimationFrame(flush);
+    }
+  }
+
+  function scan() {
+    document.querySelectorAll("[data-slide-carousel]").forEach(function (carousel) {
+      if (!tracked.has(carousel)) {
+        tracked.add(carousel);
+        carousel.querySelectorAll(".post-slide").forEach(function (slide) {
+          if (slideObserver && !allSlides.has(slide)) {
+            allSlides.add(slide);
+            slideObserver.observe(slide);
+          }
+        });
+      }
+      queue(carousel);
+    });
+  }
+  function changed(records) {
+    var hasAdditions = false;
+    records.forEach(function (r) {
+      if (r.type === "attributes" && r.target.matches &&
+          r.target.matches("[data-slide-carousel]")) queue(r.target);
+      else if (r.type === "childList") hasAdditions = true;
+    });
+    if (hasAdditions) scan();
+  }
+
+  function start() {
+    if (!document.body) return;
+    rootObserver = new MutationObserver(changed);
+    rootObserver.observe(document.body, {
+      childList: true, subtree: true, attributes: true,
+      attributeFilter: ["data-active"]
+    });
+    global.addEventListener("resize", scan, { passive: true });
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(scan).catch(function () {});
+    }
+    scan();
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", start, { once: true });
+  } else {
+    start();
+  }
+})(typeof window !== "undefined" ? window : this);
