@@ -1,0 +1,43 @@
+name: Import Kids Salah Cinematic Motion
+on:
+  push:
+    branches: [main]
+    paths: [kids/assets/kids-salah-v1262/.motion-import.json]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: kids-salah-motion-import
+  cancel-in-progress: false
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Kids assets
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 0
+      - name: Import one-time artwork and remove temporary reference
+        shell: bash
+        run: |
+          set -euo pipefail
+          SOURCE="kids/assets/kids-salah-v1262/.motion-import.json"
+          DEST="kids/assets/kids-salah-v1262/cinematic-motion.mp4"
+          if [[ ! -f "$SOURCE" ]]; then
+            echo "No pending import request."
+            exit 0
+          fi
+          URL="$(node -e 'process.stdout.write(JSON.parse(require("fs").readFileSync(process.argv[1],"utf8")).url)' "$SOURCE")"
+          test -n "$URL"
+          mkdir -p "$(dirname "$DEST")"
+          curl -fLSs --retry 3 --connect-timeout 25 --max-time 210 "$URL" -o "$DEST"
+          test "$(wc -c < "$DEST")" -gt 10000
+          [[ "$(dd if="$DEST" bs=1 skip=4 count=4 status=none)" == "ftyp" ]] || { echo "Invalid MP4 signature"; exit 1; }
+          rm "$SOURCE"
+          git config user.name "kids-artifact-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A "$SOURCE" "$DEST"
+          git commit -m "Kids Salah: store Runway cinematic loop locally"
+          git pull --rebase origin main
+          git push origin HEAD:main
