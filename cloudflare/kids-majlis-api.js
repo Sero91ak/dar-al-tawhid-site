@@ -158,8 +158,13 @@ async function handleSpeech(req,env,user){
  const resolvedLibrary=libraryAnswer(libraryItem,reference.age);
  const knowledge=(reference.id.startsWith("kb:")||reference.id.startsWith("verse:"))?
    findKnowledgeById(reference.id,reference.age,gender):null;
- if(!topic&&!resolvedLibrary&&!knowledge)return json({ok:false,error:"unapproved_answer"},403);
- const chosen=knowledge||decorate(resolvedLibrary||{id:topic[0],
+ const fixed=reference.id==="unknown"?allahAlam(gender):
+   ["privacy","help","restricted","age_restricted"].includes(reference.id)?{
+     id:reference.id,text:reference.id==="age_restricted"?
+       "Das erklären wir dir lieber mit deinen Eltern. Allāhu aʿlam – Allah weiß es am besten.":BASIC[reference.id],
+     source:null}:null;
+ if(!topic&&!resolvedLibrary&&!knowledge&&!fixed)return json({ok:false,error:"unapproved_answer"},403);
+ const chosen=fixed||knowledge||decorate(resolvedLibrary||{id:topic[0],
    text:reference.age==="4–5"?topic[2].split(/(?<=[.!?])\s+/u).slice(0,2).join(" "):topic[2],source:topic[3]},gender);
  const text=chosen.text;
  try{
