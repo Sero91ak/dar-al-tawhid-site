@@ -1,3 +1,11 @@
+import java.util.Properties
+
+val uploadPropertiesFile = rootProject.file("tv-keystore.properties")
+val uploadProperties = Properties()
+if (uploadPropertiesFile.exists()) {
+    uploadPropertiesFile.inputStream().use { uploadProperties.load(it) }
+}
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -16,8 +24,24 @@ android {
         resourceConfigurations += listOf("de")
     }
 
+    signingConfigs {
+        if (uploadPropertiesFile.exists()) {
+            create("release") {
+                storeFile = rootProject.file(uploadProperties.getProperty("storeFile"))
+                storePassword = uploadProperties.getProperty("storePassword")
+                keyAlias = uploadProperties.getProperty("keyAlias")
+                keyPassword = uploadProperties.getProperty("keyPassword")
+            }
+        }
+    }
+
     buildTypes {
-        release { isMinifyEnabled = false }
+        release {
+            isMinifyEnabled = false
+            if (uploadPropertiesFile.exists()) {
+                signingConfig = signingConfigs.getByName("release")
+            }
+        }
     }
 
     compileOptions {
