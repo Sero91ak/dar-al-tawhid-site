@@ -1,0 +1,37 @@
+name: Kids Majlis – isolated verification
+on:
+  pull_request:
+    paths:
+      - "kids/majlis-kids.*"
+      - "kids/majlis-quran-search.js"
+      - "kids/data/majlis-knowledge-v1.json"
+      - "data/quran-search-index.json"
+      - "cloudflare/kids-majlis-knowledge.js"
+      - "kids/MAJLIS-SAFE-VOICE.md"
+      - "kids/*html"
+      - "cloudflare/kids-majlis-api.js"
+      - "cloudflare/site-router.js"
+      - "cloudflare/worker.js"
+      - "cloudflare/wrangler.toml"
+      - "scripts/verify-kids-majlis.mjs"
+      - ".github/workflows/kids-majlis-check.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  majlis-safety-and-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Isolated Majlis security tests (no external APIs)
+        run: node scripts/verify-kids-majlis.mjs
+      - name: Install pinned build dependencies
+        run: npm ci --ignore-scripts
+      - name: Worker syntax and binding bundling (no deploy)
+        run: npx wrangler deploy --dry-run --config cloudflare/wrangler.toml --outdir /tmp/kids-majlis-dry-run

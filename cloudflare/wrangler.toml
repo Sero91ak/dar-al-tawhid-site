@@ -65,3 +65,24 @@ crons = ["*/5 * * * *"]
 #   wrangler secret put DAR_VOICE_GPU_ORIGIN     (https://<gpu-host>)
 #   wrangler secret put DAR_VOICE_GPU_TOKEN      (Bearer-Token für den privaten GPU-Host)
 #   wrangler secret put DAR_VOICE_WEB_TOKEN      (separater Zugangscode für die private Voice-PWA)
+
+# Kids Majlis: both limit bindings are mandatory. Feature remains disabled until
+# the strong parent passcode and signing key are configured as Worker secrets.
+[[ratelimits]]
+name = "KIDS_MAJLIS_LIMITER"
+namespace_id = "330081"
+[ratelimits.simple]
+limit = 10
+period = 60
+
+[[ratelimits]]
+name = "KIDS_MAJLIS_VOICE_LIMITER"
+namespace_id = "330082"
+[ratelimits.simple]
+limit = 2
+period = 60
+
+# Secrets: KIDS_MAJLIS_PARENT_PASSCODE (24+ random chars);
+# KIDS_MAJLIS_SIGNING_KEY (32+ random chars)
+# Flags: KIDS_MAJLIS_PARENT_AUTH_ENABLED, KIDS_MAJLIS_STT_ENABLED,
+# KIDS_MAJLIS_TTS_ENABLED; all absent/false by default.
