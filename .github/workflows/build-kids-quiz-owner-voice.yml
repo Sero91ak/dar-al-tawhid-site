@@ -548,7 +548,7 @@ jobs:
                           time.sleep(2*attempt)
               raise RuntimeError(f"Generation failed for {text[:80]!r}: {last}")
 
-          def build_pack(*,texts,manifest_path,asset_dir,profile,pack_id,counts,model_id=None,require_model_match=False,profiles_by_text=None,preserve_existing=False):
+          def build_pack(*,texts,manifest_path,asset_dir,profile,pack_id,counts,model_id=None,require_model_match=False,profiles_by_text=None,models_by_text=None,preserve_existing=False):
               model_id=model_id or ELEVEN_MODEL
               unique=[]
               seen=set()
@@ -566,14 +566,15 @@ jobs:
               for text in unique:
                   entry=old_entries.get(text) or {}
                   text_profile=(profiles_by_text or {}).get(text,profile)
+                  text_model=(models_by_text or {}).get(text,model_id)
                   prepared=prepare_profile_text(text,text_profile)
                   prepared_hash=hashlib.sha256(prepared.encode("utf-8")).hexdigest()
                   expected_revision=profile_revision(text_profile)
-                  expected_cache_model=model_id if require_model_match else None
+                  expected_cache_model=text_model if require_model_match else None
                   # Reuse a verified old V4 German clip if it exactly matches the
                   # current text/profile/preparation. Never burn credits converting
                   # already-finished V4 takes into cheaper-model files.
-                  if preserve_existing and model_id==ELEVEN_QUIZ_DE_MODEL and \
+                  if preserve_existing and text_model==ELEVEN_QUIZ_DE_MODEL and \
                           str(entry.get("modelId") or "")==ELEVEN_QUIZ_AR_MODEL and \
                           str(entry.get("voiceProfileId") or "")=="serhat-owner-voice-2026" and \
                           str(entry.get("preparedTextSha256") or "")==prepared_hash:
@@ -606,7 +607,7 @@ jobs:
                           (profiles_by_text or {}).get(text,profile),
                           asset_dir,
                           serial,
-                          model_id
+                          (models_by_text or {}).get(text,model_id)
                       ):text
                       for text in missing
                   }
@@ -625,11 +626,12 @@ jobs:
                   rel="/"+str(p).replace(os.sep,"/")
                   text_profile=(profiles_by_text or {}).get(text,profile)
                   is_arabic=text_profile in ARABIC_PROFILES
+                  text_model=(models_by_text or {}).get(text,model_id)
                   if preserve_existing and text in old_entries and text not in missing:
                       # Preserve the real original model metadata and exact URL.
                       entries[text]=dict(old_entries[text])
                       continue
-                  uses_dictionary=(not is_arabic and model_id!=ELEVEN_QUIZ_DE_MODEL)
+                  uses_dictionary=(not is_arabic and text_model not in (ELEVEN_QUIZ_DE_MODEL,ELEVEN_QUIZ_HYBRID_MODEL))
                   entries[text]={
                       "url":rel+"?v="+build_id,
                       "sha256":hashlib.sha256(p.read_bytes()).hexdigest(),
@@ -639,8 +641,10 @@ jobs:
                       "arabicSynthesisRevision":(profile_revision(text_profile) if is_arabic else None),
                       "arabicTextNormalization":("NFC" if is_arabic else None),
                       "initialContextShaddaStripped":(True if is_arabic else None),
-                      "modelId":model_id,
+                      "modelId":text_model,
                       "speechProfile":text_profile,
+                      "languageComposition":("de+ar" if text_model==ELEVEN_QUIZ_HYBRID_MODEL else "ar" if text_model==ELEVEN_QUIZ_AR_MODEL else "de"),
+                      "pronunciationQaStatus":("needs-native-fusha-listening-review" if text_model in (ELEVEN_QUIZ_HYBRID_MODEL,ELEVEN_QUIZ_AR_MODEL) else "technical-qa-complete"),
                       "voiceProfileId":"serhat-owner-voice-2026",
                       "sourceVoice":"authorized-owner-voice",
                       "sourceType":"owner-voice-generated",
