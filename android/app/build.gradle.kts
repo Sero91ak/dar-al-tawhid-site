@@ -19,8 +19,8 @@ android {
         applicationId = "de.daraltawhid.app"
         minSdk = 26
         targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = (System.getenv("GITHUB_RUN_NUMBER")?.toIntOrNull() ?: 1)
+        versionName = "1.0.$versionCode"
         resourceConfigurations += listOf("de", "en")
     }
 
