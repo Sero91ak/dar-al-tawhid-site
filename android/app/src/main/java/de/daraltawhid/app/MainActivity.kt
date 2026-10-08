@@ -1,6 +1,9 @@
 package de.daraltawhid.app
 
 import android.annotation.SuppressLint
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.graphics.Bitmap
@@ -24,6 +27,9 @@ import android.widget.LinearLayout
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.webkit.WebViewCompat
+import androidx.webkit.WebViewFeature
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
@@ -34,6 +40,24 @@ class MainActivity : AppCompatActivity() {
     private lateinit var errorOverlay: LinearLayout
     private var filePathCallback: ValueCallback<Array<Uri>>? = null
     private var pendingUrl: String = DarShell.LIVE_URL
+    private var pendingGeolocation: Pair<String, GeolocationPermissions.Callback>? = null
+
+    private val locationPermission = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { results ->
+        val pending = pendingGeolocation
+        pendingGeolocation = null
+        val granted = results[Manifest.permission.ACCESS_FINE_LOCATION] == true ||
+            results[Manifest.permission.ACCESS_COARSE_LOCATION] == true ||
+            hasDeviceLocationPermission()
+        if (pending != null) pending.second.invoke(pending.first, granted, false)
+    }
+
+    private fun hasDeviceLocationPermission(): Boolean =
+        ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
+            PackageManager.PERMISSION_GRANTED ||
+        ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) ==
+            PackageManager.PERMISSION_GRANTED
 
     private val fileChooser = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -83,6 +107,39 @@ class MainActivity : AppCompatActivity() {
             setGeolocationEnabled(true)
         }
         webView.addJavascriptInterface(DarJsBridge(), "DarNative")
+        // Mark the genuine Android shell before any page script runs.
+        // onPageFinished is too late: the site may have already chosen iOS UI.
+        if (WebViewFeature.isFeatureSupported(WebViewFeature.DOCUMENT_START_SCRIPT)) {
+            WebViewCompat.addDocumentStartJavaScript(
+                webView,
+                """
+                (function(){
+                    window.DAR_PLATFORM="android";
+                    window.DAR_NATIVE_PLATFORM="android";
+                    window.DAR_ANDROID_NATIVE_APP=true;
+                    window.DAR_ANDROID_ALTERNATE_ICONS_AVAILABLE=true;
+                    window.DAR_IOS_NATIVE_APP=false;
+                    window.DAR_OFFICIAL_IOS_APP=false;
+                    document.documentElement.classList.add("dar-android-native-app","is-android");
+                    try {
+                      if(!window.webkit) window.webkit={};
+                      if(!window.webkit.messageHandlers) window.webkit.messageHandlers={};
+                      window.webkit.messageHandlers.darAppIcon={
+                        postMessage:function(payload){
+                          var selected=typeof payload==="string"?payload:
+                            payload&&typeof payload==="object"?(payload.name||payload.id||""):"";
+                          DarNative.setAppIcon(String(selected));
+                        }
+                      };
+                      window.DAR_ANDROID_SELECT_APP_ICON=function(name){
+                        DarNative.setAppIcon(String(name||"default"));
+                      };
+                    } catch(e) {}
+                })();
+                """.trimIndent(),
+                setOf("https://dar-al-tawhid.de", "https://www.dar-al-tawhid.de")
+            )
+        }
         webView.webViewClient = DarWebViewClient()
         webView.webChromeClient = DarChromeClient()
 
@@ -122,6 +179,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
+        pendingGeolocation?.let { it.second.invoke(it.first, false, false) }
+        pendingGeolocation = null
         webView.destroy()
         super.onDestroy()
     }
@@ -133,8 +192,11 @@ class MainActivity : AppCompatActivity() {
         val js = """
             (function(){
               try{
+                window.DAR_PLATFORM="android";
+                window.DAR_NATIVE_PLATFORM="android";
                 window.DAR_ANDROID_NATIVE_APP=true;
                 window.DAR_ANDROID_ALTERNATE_ICONS_AVAILABLE=true;
+                window.DAR_OFFICIAL_IOS_APP=false;
                 // Same in-app picker message format as the existing iOS app.
                 // Only route app-icon events; never alter the push bridge.
                 try {
@@ -296,7 +358,22 @@ class MainActivity : AppCompatActivity() {
             origin: String?,
             callback: GeolocationPermissions.Callback?
         ) {
-            callback?.invoke(origin, true, false)
+            if (origin == null || callback == null) return
+            // Only our production origin may request the device's location.
+            if (!DarShell.isOwnHost(Uri.parse(origin)) || !origin.startsWith("https://")) {
+                callback.invoke(origin, false, false)
+                return
+            }
+            if (hasDeviceLocationPermission()) {
+                callback.invoke(origin, true, false)
+                return
+            }
+            // Never lie to the WebView: native runtime permission must be granted.
+            pendingGeolocation?.let { old -> old.second.invoke(old.first, false, false) }
+            pendingGeolocation = origin to callback
+            locationPermission.launch(
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
+            )
         }
 
         override fun onPermissionRequest(request: PermissionRequest?) {
