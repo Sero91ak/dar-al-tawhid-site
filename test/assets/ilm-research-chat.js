@@ -559,9 +559,11 @@
       }).then(function(data){
         if(!data || !data.ok || !Array.isArray(data.sources) || !data.sources.length ||
             typeof data.answer !== "string") {
-          reply._ilmResearchError = data && data.error === "rate_limited"
-            ? "Die externe Quellenrecherche ist momentan ausgelastet. Bitte versuche es später erneut; ich werde keine Antwort erfinden."
-            : "Ich konnte zu dieser Frage noch keine ausreichend überprüfbare Originalfundstelle abrufen. Daher gebe ich keine unbelegte Antwort. Wa-Allāhu aʿlam.";
+          reply._ilmResearchError = data && (data.error === "rate_limited" || data.error === "gemini_quota_exhausted")
+            ? "Die externe Gemini-Recherche ist wegen eines Anbieter- oder Anfragelimits derzeit nicht verfügbar. Das bedeutet nicht, dass keine authentischen Quellen existieren. Ich werde keine unbelegte Antwort erfinden."
+            : data && /(?:research_unavailable|search_provider|gemini_not_configured|guard_failed|guard_not_configured|provider_)/.test(String(data.error || ""))
+              ? "Die externe Quellenrecherche ist technisch momentan nicht verfügbar. Ich kann daher keine zusätzliche Fundstelle bestätigen. Wa-Allāhu aʿlam."
+              : "Ich konnte zu dieser Frage noch keine ausreichend überprüfbare Originalfundstelle abrufen. Daher gebe ich keine unbelegte Antwort. Wa-Allāhu aʿlam.";
           return;
         }
         var evidence = data.sources.map(function(source){
