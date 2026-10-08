@@ -25,6 +25,28 @@ assert.equal(sunnahCorpus.items.filter(x=>x.kind==="hadith").length,4);
 assert.equal(sunnahCorpus.items.filter(x=>x.kind==="early").length,1);
 assert.equal(sunnahCorpus.items.filter(x=>x.kind==="lesson").length,6);
 assert.ok(sunnahCorpus.items.every(x=>sunnah.majlisSunnahTesting.plausible(x)),"Sunnah entries must meet provenance requirements");
+const canonVerified=JSON.parse(readFileSync(new URL("../kids/data/verified-content.json",import.meta.url),"utf8"));
+const canonLessons=JSON.parse(readFileSync(new URL("../kids/data/deen-lessons.json",import.meta.url),"utf8"));
+const sourceHadiths=[...canonVerified.hadithLessons,...canonVerified.earlyLessons];
+const sourceLessons=canonLessons.items;
+assert.equal(sunnahCorpus.items.length,sourceHadiths.length+sourceLessons.length);
+for(const original of sourceHadiths){
+ const row=sunnahCorpus.items.find(x=>x.id===original.id);
+ assert.ok(row,"all canonical Sunnah items must exist");
+ assert.equal(row.source,original.source);
+ assert.equal(row.text,original.exactText);
+ assert.equal(row.explanation,original.childExplanation);
+ assert.deepEqual(row.ages,original.ages);
+ assert.equal(row.canonicalId,original.canonicalId);
+}
+for(const original of sourceLessons){
+ const row=sunnahCorpus.items.find(x=>x.id===original.id);
+ assert.ok(row&&row.kind==="lesson","all six Deen lessons must exist");
+ assert.equal(row.explanation,original.summary);
+ assert.equal(row.title,original.title);
+ assert.deepEqual(row.sourceRefs,original.sourceRefs);
+}
+
 const truth=sunnah.findSunnahFromCorpus("Erzähle mir den Hadith 6094","6–8","girl",sunnahCorpus);
 assert.equal(truth?.id,"kb:sunnah:had-0020-truth");
 assert.equal(truth.media.grade,"Ṣaḥīḥ");
