@@ -2835,6 +2835,7 @@ html:not([data-view="today"]) .view.active{
 }
 </style>
 
+<link rel="stylesheet" href="/kids/profile-stability-v1256.css?v=1258" data-kids-profile-stability="1256">
 </head>
 <body>
 <div class="kids-open" id="kidsLaunch" data-kids-launch="v95">
@@ -2914,7 +2915,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.08.75</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.08.76</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3300,7 +3301,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v154-profile-persist1257";
+const KIDS_BUILD_ID="kids-shell-v155-profile-firstpaint1258";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6525,7 +6526,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=8"></script>\n<script src="/kids/dua-smart-learn.js?v=1244"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v154-profile-persist1257";
+  var KIDS_BUILD_ID="kids-shell-v155-profile-firstpaint1258";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -6541,7 +6542,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1257",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1258",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
@@ -11215,5 +11216,5 @@ html[data-view="stories"] #view-stories > :last-child{
 <!-- KIDS_DUA_FULLBLEED_EXPLANATION_CTA_V1249: shared full-width header and explanation actions, original back controls, no bottom-nav changes -->
 <link rel="stylesheet" href="/kids/global-detail-dock-v1247.css?v=1257" data-kids-global-detail-dock="1257">
 <script src="/kids/global-detail-dock-v1247.js?v=1257" data-kids-global-detail-dock="1257"></script>
-<link rel="stylesheet" href="/kids/profile-stability-v1256.css?v=1257" data-kids-profile-stability="1256">
+
 </html>

@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v154-profile-persist1257",
-  "label": "KIDS · V1.08.75",
-  "releasedAt": "2026-10-08T15:42:00+02:00",
-  "note": "Kids V1.08.75: Mädchenfarbwelt auch bei Gastprofilen gespeichert, iOS-Overlay-Scroll beim Profilwechsel stabil, rosé-violetter Hintergrund. Wetter-/Standortschritt bleibt entfernt.",
+  "buildId": "kids-shell-v155-profile-firstpaint1258",
+  "label": "KIDS · V1.08.76",
+  "releasedAt": "2026-10-08T14:14:12.340Z",
+  "note": "Kids V1.08.76: Profil-CSS wird jetzt vor dem ersten Seitenaufbau geladen. Jungen- und Mädchenfarbwelt, iPhone-Safe-Area und die wetterfreie Registrierung bleiben erhalten.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1257",
+    "serviceWorkerCache": "v1258",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -1233,10 +1233,11 @@
     "weatherOnboardingRemoved": true,
     "profileScrollAndSafeAreaFix": "v1256",
     "profileGenderGuestPersistence": true,
-    "iosJoinKeyboardScrollStability": "v1257"
+    "iosJoinKeyboardScrollStability": "v1258",
+    "profileStyleLoadedBeforeFirstPaint": true
   },
   "updatedAt": "2026-10-08T13:15:45.228Z",
-  "deployTrigger": "kids-profile-guest-persistence-v1257",
+  "deployTrigger": "kids-profile-firstpaint-v1258",
   "globalDetailDock": {
     "version": "v1253",
     "enabled": true,
