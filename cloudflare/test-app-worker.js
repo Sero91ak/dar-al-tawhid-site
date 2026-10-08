@@ -223,8 +223,8 @@ async function finalizeDarTestHomeV1193(asset) {
 // DAR_QURAN_OVERVIEW_V1250
 
 // DAR_ILM_START_PHASE1_CACHE
-  html = html.replace(/ilm-research-chat\.css(?:\?v=[^"']*)?/g, "ilm-research-chat.css?v=ilm-majlis-v1335");
-  html = html.replace(/ilm-research-chat\.js(?:\?v=[^"']*)?/g, "ilm-research-chat.js?v=ilm-majlis-v1335");
+  html = html.replace(/ilm-research-chat\.css(?:\?v=[^"']*)?/g, "ilm-research-chat.css?v=ilm-majlis-v1336");
+  html = html.replace(/ilm-research-chat\.js(?:\?v=[^"']*)?/g, "ilm-research-chat.js?v=ilm-majlis-v1336");
 
     // DAR_ILM_SCHOLARS_V1240
 
@@ -369,8 +369,8 @@ async function finalizeDarTestHomeV1193(asset) {
     else html += adaptiveNavScript;
   }
 
-  html = html.replace(/window\.__DAR_EXPECTED_BUILD="app-shell-v\d+"/g, 'window.__DAR_EXPECTED_BUILD="app-shell-v1335"');
-  html = html.replace(/const APP_BUILD_ID="app-shell-v\d+"/g, 'const APP_BUILD_ID="app-shell-v1335"');
+  html = html.replace(/window\.__DAR_EXPECTED_BUILD="app-shell-v\d+"/g, 'window.__DAR_EXPECTED_BUILD="app-shell-v1336"');
+  html = html.replace(/const APP_BUILD_ID="app-shell-v\d+"/g, 'const APP_BUILD_ID="app-shell-v1336"');
 
   const headers = new Headers(asset.headers);
   headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
