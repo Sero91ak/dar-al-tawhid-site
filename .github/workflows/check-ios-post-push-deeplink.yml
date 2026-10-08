@@ -1,0 +1,29 @@
+name: Check native iOS post push deep links
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'ios/DarAlTawhid/DarAlTawhid/DarAppRouter.swift'
+      - 'ios/DarAlTawhid/DarAlTawhid/WebAppView.swift'
+      - 'ios/DarAlTawhid/DarAlTawhid/DarPushNotifications.swift'
+      - 'ios/DarAlTawhid/DarAlTawhid/DarAlTawhidApp.swift'
+      - 'scripts/ios-post-push-deeplink-guard.cjs'
+      - '.github/workflows/check-ios-post-push-deeplink.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  ios-post-deeplink:
+    name: Swift syntax and route regression
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify native routes without sending any push
+        run: node scripts/ios-post-push-deeplink-guard.cjs
+      - name: Parse native Swift route files
+        shell: bash
+        run: |
+          set -euo pipefail
+          xcrun swiftc -frontend -parse             ios/DarAlTawhid/DarAlTawhid/DarAppRouter.swift             ios/DarAlTawhid/DarAlTawhid/WebAppView.swift             ios/DarAlTawhid/DarAlTawhid/DarPushNotifications.swift             ios/DarAlTawhid/DarAlTawhid/DarAlTawhidApp.swift
