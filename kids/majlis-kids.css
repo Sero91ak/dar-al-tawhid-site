@@ -77,3 +77,12 @@
 #kidsMajlisRoot .km-word small{font-size:10px;color:#dae4e4;line-height:1.2;overflow-wrap:anywhere}
 @media(max-width:380px){#kidsMajlisRoot .km-media{padding:10px}#kidsMajlisRoot .km-media-button{padding:9px 10px;font-size:11px}#kidsMajlisRoot .km-arabic{font-size:21px!important}}
 @media(prefers-reduced-motion:reduce){#kidsMajlisRoot .km-media-button{transition:none!important}}
+
+/* Search hits from all 6,236 Quran verses: source and translation remain attached. */
+#kidsMajlisRoot .km-verse{max-width:100%;min-width:0;display:grid;gap:9px;border:1px solid rgba(223,201,150,.22);border-radius:16px;padding:12px;margin-top:12px;background:rgba(10,36,53,.43);overflow-wrap:anywhere}
+#kidsMajlisRoot .km-verse-head{color:#f3dca6;font-size:13px;line-height:1.45;font-weight:800}
+#kidsMajlisRoot .km-verse .km-arabic{margin:4px 0;font-size:24px!important;text-align:right}
+#kidsMajlisRoot .km-verse .km-meaning{font-size:13px;line-height:1.7;color:#f3e9d8}
+#kidsMajlisRoot .km-translation-note{color:#c3d5d9;font-size:11px;line-height:1.4;opacity:.9}
+#kidsMajlisRoot .km-verse .km-media-actions{margin-top:2px}
+@media(max-width:390px){#kidsMajlisRoot .km-verse{padding:10px}#kidsMajlisRoot .km-verse .km-arabic{font-size:21px!important}}
