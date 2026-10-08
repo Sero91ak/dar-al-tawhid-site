@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v152-parents-profile-hero1255",
-  "label": "KIDS · V1.08.73",
-  "releasedAt": "2026-10-08T13:15:45.228Z",
-  "note": "KIDS V1.08.73 · Eltern-Hero: originale Jungen- und Mädchenfigur in individuellen lokal gespeicherten Motiven, profilabhängiger Bildwechsel; responsive Text-Sicherheitsbreite und auf V1253 stabil gehaltene vorhandene Offline-Audio-Caches; neue Hero-Motive werden gesondert geladen.",
+  "buildId": "kids-shell-v153-profile-stability1256",
+  "label": "KIDS · V1.08.74",
+  "releasedAt": "2026-10-08T15:25:00+02:00",
+  "note": "KIDS V1.08.74 · Profil-Farbwelten Blau/Gold und Rosé/Gold; stabile iOS Profilerstellung ohne Sprung; Wetter-/Standort-Onboarding samt automatisch ausgeführter Standortabfrage entfernt; Profilwechsel kehrt in den bisherigen Tab zurück; Safe-Area- und Offline-Cache-Fix V1256.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1253",
+    "serviceWorkerCache": "v1256",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -1228,7 +1228,10 @@
       "portrait": "head-and-upper-body",
       "textSafe": "responsive-62vw-phone-43vw-tablet",
       "localOfflineAssets": true
-    }
+    },
+    "genderPalette": "boy-blue-gold/girl-rose-gold-v1256",
+    "weatherOnboardingRemoved": true,
+    "profileScrollAndSafeAreaFix": "v1256"
   },
   "updatedAt": "2026-10-08T13:15:45.228Z",
   "deployTrigger": "kids-dua-divider-polish-v1253",

@@ -2898,14 +2898,6 @@ html:not([data-view="today"]) .view.active{
       <button type="button" class="ghost" data-back="who" style="margin-top:8px;width:100%">Zurück</button>
       <button type="button" class="ghost join-skip" style="margin-top:8px;width:100%">Überspringen</button>
     </div>
-    <div class="step" data-step="place">
-      <h2>Wetter am Ort</h2>
-      <p>Wenn du den Ort erlaubst, zeigt die App Sonne oder Mond zur richtigen Zeit und Regen nur, wenn es dort wirklich regnet. Ohne Erlaubnis bleibt es klar und folgt nur der Uhr.</p>
-      <button type="button" id="joinPlace">Ort erlauben</button>
-      <button type="button" class="ghost" id="joinPlaceSkip" style="margin-top:8px;width:100%">Ohne Ort weiter</button>
-      <button type="button" class="ghost" data-back="age" style="margin-top:8px;width:100%">Zurück</button>
-      <button type="button" class="ghost join-skip" style="margin-top:8px;width:100%">Überspringen</button>
-    </div>
     <div class="step" data-step="name">
       <h2>Name merken</h2>
       <p>Nur wenn du ein Konto willst. Sonst einfach überspringen – du kommst direkt in die Kinderwelt.</p>
@@ -2913,7 +2905,7 @@ html:not([data-view="today"]) .view.active{
       <input id="joinPass" type="password" maxlength="40" placeholder="Passwort" autocomplete="new-password">
       <button type="button" id="joinSave">Konto anlegen</button>
       <button type="button" class="ghost join-skip" style="margin-top:8px;width:100%">Ohne Konto weitermachen</button>
-      <button type="button" class="ghost" data-back="place" style="margin-top:8px;width:100%">Zurück</button>
+      <button type="button" class="ghost" data-back="age" style="margin-top:8px;width:100%">Zurück</button>
     </div>
       <button type="button" id="joinCancel" class="ghost" style="display:none;margin-top:10px;width:100%">Abbrechen</button>
   </div>
@@ -2922,7 +2914,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.08.71</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.08.74</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3308,7 +3300,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v152-parents-profile-hero1255";
+const KIDS_BUILD_ID="kids-shell-v153-profile-stability1256";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6167,12 +6159,6 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     if(h<20)return"dusk";
     return"night";
   }
-  function codeToWeather(code){
-    code=Number(code);
-    if(code>=95)return"storm";
-    if((code>=51&&code<=67)||(code>=80&&code<=82))return"rain";
-    return"clear";
-  }
   var liveWeather="clear";
   function paint(){
     var now=new Date();
@@ -6182,22 +6168,6 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     var id=view&&view.id?view.id.replace("view-",""):"today";
     root.setAttribute("data-view",id);
     root.setAttribute("data-calm",document.querySelector(".modal.open")?"1":"0");
-  }
-  function loadWeather(lat,lon){
-    var url="https://api.open-meteo.com/v1/forecast?latitude="+lat+"&longitude="+lon+"&current=weather_code,is_day&timezone=auto";
-    fetch(url).then(function(r){return r.json()}).then(function(data){
-      var cur=data&&data.current;
-      if(!cur)return;
-      liveWeather=codeToWeather(cur.weather_code);
-      if(cur.is_day===0)root.setAttribute("data-sky","night");
-      if(cur.is_day===1&&skyName(new Date().getHours())==="night")root.setAttribute("data-sky","dusk");
-      paint();
-    }).catch(function(){});
-  }
-  if(navigator.geolocation){
-    navigator.geolocation.getCurrentPosition(function(pos){
-      loadWeather(pos.coords.latitude.toFixed(3),pos.coords.longitude.toFixed(3));
-    },function(){liveWeather="clear";paint();},{maximumAge:900000,timeout:8000});
   }
   function fillStars(){
     var box=sky.querySelector(".sky-stars");
@@ -6278,6 +6248,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   var join=document.getElementById("kidsJoin");
   var draft={gender:"boy",age:"6–8"};
   var askId="";
+  var joinScrollY=0;
   function load(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){return []}}
   function save(list){localStorage.setItem(KEY,JSON.stringify(list))}
   function hash(pw){
@@ -6313,6 +6284,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     else if(app)app.setAttribute("data-age",p.age||"6–8");
   }
   function step(name){
+    if(name==="place")name="name";
     join.querySelectorAll(".step").forEach(function(s){s.classList.toggle("on",s.getAttribute("data-step")===name)});
   }
   var GUEST="kids.guest.v1";
@@ -6330,6 +6302,8 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     renderList();
   }
   function openJoin(from){
+    var shellForJoin=document.querySelector(".shell");
+    joinScrollY=shellForJoin?shellForJoin.scrollTop:0;
     join.classList.add("open");
     var cancel=document.getElementById("joinCancel");
     var has=!!localStorage.getItem(ACTIVE);
@@ -6337,7 +6311,11 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     if(cancel)cancel.style.display=has?"block":"none";
     step(from||"hello");
   }
-  function closeJoin(){join.classList.remove("open")}
+  function closeJoin(){
+    join.classList.remove("open");
+    var shellForJoin=document.querySelector(".shell");
+    if(shellForJoin)requestAnimationFrame(function(){shellForJoin.scrollTop=joinScrollY});
+  }
   function currentProfile(){
     var id=localStorage.getItem(ACTIVE);
     return load().find(function(x){return x.id===id})||null;
@@ -6408,6 +6386,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
         }
         localStorage.setItem(ACTIVE,p.id);
         applyProfile(p);
+        try{sessionStorage.setItem("kids.profile.restoreTab",document.querySelector(".view.active")?.id||"view-parents")}catch(e){}
         location.reload();
       });
     });
@@ -6418,13 +6397,8 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     b.addEventListener("click",function(){draft.gender=b.getAttribute("data-gender");step("age")});
   });
   join.querySelectorAll("[data-join-age]").forEach(function(b){
-    b.addEventListener("click",function(){draft.age=b.getAttribute("data-join-age");step("place")});
+    b.addEventListener("click",function(){draft.age=b.getAttribute("data-join-age");step("name")});
   });
-  document.getElementById("joinPlace").addEventListener("click",function(){
-    if(navigator.geolocation)navigator.geolocation.getCurrentPosition(function(){},function(){});
-    step("name");
-  });
-  document.getElementById("joinPlaceSkip").addEventListener("click",function(){step("name")});
   var cancel=document.getElementById("joinCancel");
   if(cancel)cancel.addEventListener("click",function(){if(localStorage.getItem(ACTIVE))closeJoin()});
   document.getElementById("joinSave").addEventListener("click",function(){
@@ -6469,6 +6443,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
         applyBag(p.data);
         localStorage.setItem(ACTIVE,p.id);
         applyProfile(p);
+        try{sessionStorage.setItem("kids.profile.restoreTab",document.querySelector(".view.active")?.id||"view-parents")}catch(e){}
         location.reload();
       });
     });
@@ -6501,8 +6476,17 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   });
   var active=localStorage.getItem(ACTIVE);
   var known=load().find(function(p){return p.id===active});
-  if(known)applyProfile(known);
-  else if(localStorage.getItem(GUEST)==="1"){
+  if(known){
+    applyProfile(known);
+    try{
+      var resumeProfileTab=sessionStorage.getItem("kids.profile.restoreTab")||"";
+      sessionStorage.removeItem("kids.profile.restoreTab");
+      if(/^view-(today|stories|quran|parents)$/.test(resumeProfileTab)){
+        var targetTab=document.querySelector('.nav-btn[data-target="'+resumeProfileTab.slice(5)+'"]');
+        if(targetTab)requestAnimationFrame(function(){targetTab.click()});
+      }
+    }catch(e){}
+  }else if(localStorage.getItem(GUEST)==="1"){
     closeJoin();
   }else openJoin("hello");
   renderList();
@@ -6519,7 +6503,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=8"></script>\n<script src="/kids/dua-smart-learn.js?v=1244"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v152-parents-profile-hero1255";
+  var KIDS_BUILD_ID="kids-shell-v153-profile-stability1256";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -6535,7 +6519,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1255",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1256",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
@@ -11209,4 +11193,5 @@ html[data-view="stories"] #view-stories > :last-child{
 <!-- KIDS_DUA_FULLBLEED_EXPLANATION_CTA_V1249: shared full-width header and explanation actions, original back controls, no bottom-nav changes -->
 <link rel="stylesheet" href="/kids/global-detail-dock-v1247.css?v=1253" data-kids-global-detail-dock="1253">
 <script src="/kids/global-detail-dock-v1247.js?v=1253" data-kids-global-detail-dock="1253"></script>
+<link rel="stylesheet" href="/kids/profile-stability-v1256.css?v=1256" data-kids-profile-stability="1256">
 </html>

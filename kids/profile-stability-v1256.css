@@ -1,0 +1,71 @@
+/* KIDS_PROFILE_STABILITY_V1256 — gentle gender palettes, iOS safe-area and onboarding containment. */
+body .app[data-gender="boy"]{
+  --gold:#e2bd72;--aqua:#73c9c1;
+  background:linear-gradient(175deg,#061a2d 0%,#0c2636 52%,#102c43 100%)!important;
+}
+body .app[data-gender="girl"]{
+  --gold:#f1bfd1;--aqua:#e8b9d2;--cine-line:rgba(241,191,209,.19);
+  background:radial-gradient(circle at 82% 8%,rgba(239,155,194,.15),transparent 33%),linear-gradient(175deg,#101c30 0%,#231d35 51%,#34253f 100%)!important;
+}
+body .app[data-gender="girl"] .shell{
+  background:linear-gradient(180deg,#0c2636 0%,#211c34 44%,#30233d 100%)!important;
+}
+body .app[data-gender="girl"] .bottom-nav{
+  border-color:rgba(243,187,212,.21)!important;
+  box-shadow:0 9px 32px rgba(9,8,25,.33),inset 0 1px rgba(255,226,239,.10)!important;
+}
+body .app[data-gender="girl"] .bottom-nav .nav-btn.active{
+  color:#ffcee2!important;border-color:rgba(255,196,219,.40)!important;
+  background:rgba(236,146,185,.13)!important;
+  box-shadow:inset 0 0 0 1px rgba(255,197,223,.19),0 0 13px rgba(237,151,185,.08)!important;
+}
+body .app[data-gender="girl"] .resume,
+body .app[data-gender="girl"] .daily-journey,
+body .app[data-gender="girl"] .choice,
+body .app[data-gender="girl"] .parent-card{
+  border-color:rgba(241,177,208,.20)!important;
+  box-shadow:inset 0 0 0 1px rgba(243,188,211,.08),0 12px 30px rgba(10,9,25,.20)!important;
+}
+body .app[data-gender="girl"] #view-stories > .page-head::before,
+body .app[data-gender="girl"] #view-quran > .page-head::before{
+  background:linear-gradient(90deg,rgba(42,18,46,.19),transparent 68%),linear-gradient(180deg,transparent 40%,#0c2636 100%)!important;
+}
+/* The logo stays beneath the iOS status bar; hero edge-to-edge geometry unchanged. */
+@media(max-width:699px){
+  html body .app #view-today .kids-wordmark{top:max(84px,calc(env(safe-area-inset-top,0px) + 43px))!important}
+}
+@media(min-width:700px){
+  html body .app #view-today .kids-wordmark{top:max(76px,calc(env(safe-area-inset-top,0px) + 30px))!important}
+}
+/* A self-scrolling wizard never shifts the whole app when a step changes. */
+html body #kidsJoin.kids-join{
+  position:fixed!important;inset:0!important;width:100%!important;
+  height:100dvh!important;min-height:0!important;max-height:100dvh!important;
+  box-sizing:border-box!important;
+  padding:max(12px,env(safe-area-inset-top,0px))
+          max(16px,env(safe-area-inset-right,0px))
+          max(12px,env(safe-area-inset-bottom,0px))
+          max(16px,env(safe-area-inset-left,0px))!important;
+  overflow-x:hidden!important;overflow-y:auto!important;
+  align-items:center!important;justify-items:center!important;
+  overscroll-behavior:contain!important;-webkit-overflow-scrolling:touch;
+  -webkit-text-size-adjust:100%;
+}
+html body #kidsJoin .kids-join-card{
+  width:min(100%,460px)!important;max-width:100%!important;
+  max-height:calc(100dvh - max(12px,env(safe-area-inset-top,0px)) - max(12px,env(safe-area-inset-bottom,0px)) - 8px)!important;
+  min-height:0!important;margin:auto!important;
+  overflow-x:hidden!important;overflow-y:auto!important;
+  overscroll-behavior:contain!important;-webkit-overflow-scrolling:touch;
+  box-sizing:border-box!important;
+}
+html body #kidsJoin .kids-join-card h2{font-size:clamp(25px,6.9vw,30px)!important;line-height:1.13!important}
+html body #kidsJoin .kids-join-card p{
+  font-size:clamp(14px,3.85vw,16px)!important;line-height:1.45!important;
+  overflow-wrap:break-word!important;hyphens:auto;
+}
+html body #kidsJoin .kids-join-card button{font-size:clamp(14px,4vw,17px)!important}
+@media(max-height:690px){
+  html body #kidsJoin .kids-join-card{padding:15px!important}
+  html body #kidsJoin .kids-join-card .ghost{min-height:43px!important}
+}
