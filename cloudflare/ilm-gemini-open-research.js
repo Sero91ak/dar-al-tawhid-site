@@ -91,14 +91,25 @@ function quoteAroundText(page, question) {
 async function verifiedPage(chunk, question) {
   const url = await directAllowedUrl(chunk?.web?.uri || "");
   if (!url) return null;
-  const result = await fetchBounded(url,4800);
-  if (result.status !== 200) return null;
+  let originalUrl = url, result;
+  // Follow only a few redirects BETWEEN approved primary-source hosts.
+  // Never allow redirects to arbitrary infrastructure or private networks.
+  for (let hop=0; hop<3; hop++) {
+    if (!isApprovedIlmSource(originalUrl)) return null;
+    result = await fetchBounded(originalUrl,4200);
+    if (result.status === 200) break;
+    if (![301,302,303,307,308].includes(result.status) || !result.location) return null;
+    const next = new URL(result.location,originalUrl).href;
+    if (!isApprovedIlmSource(next)) return null;
+    originalUrl = next;
+  }
+  if (result?.status !== 200) return null;
   const excerpt = quoteAroundText(result.text,question);
   if (excerpt.length < 250) return null;
   const titleMatch = String(result.text).match(/<title[^>]*>([\s\S]*?)<\/title>/i);
   const title = cleanText(titleMatch?.[1] || chunk?.web?.title || "").slice(0,160);
-  return {id:"research-"+url.slice(0,120),speaker:"",work:title||"Originalquelle",
-    reference:url,statement:excerpt.slice(0,2700),excerpt,source_url:url,
+  return {id:"research-"+originalUrl.slice(0,120),speaker:"",work:title||"Originalquelle",
+    reference:originalUrl,statement:excerpt.slice(0,2700),excerpt,source_url:originalUrl,
     verification_status:"verified",authenticity:"nicht unabhängig eingestuft",
     notes:"Webseitenwortlaut abgerufen; Isnāḍ und Zuschreibung nicht automatisch verifiziert"};
 }
