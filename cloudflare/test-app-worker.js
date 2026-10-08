@@ -1,5 +1,6 @@
 import { ILM_SCIENCE_SYSTEM_INSTRUCTIONS, ILM_SCIENCE_POLICY_VERSION } from "./ilm-science-policy.js";
 import { composeIlmWithGemini } from "./ilm-gemini-bridge.js";
+import { researchIlmWithGemini } from "./ilm-gemini-open-research.js";
 import { gateHiddenSurfaces } from "./preview-gate.js";
 const KIDS_VERSION_BODY = JSON.stringify({
   buildId: "kids-shell-v148-sourcetext1251",
@@ -397,6 +398,33 @@ async function finalizeDarTestHomeV1193(asset) {
 }
 
 
+// MAJLIS OPEN RESEARCH V1352 — Gemini Google Search is a discovery tool;
+// only fetched allowlisted primary texts may reach the final composer.
+async function ilmOpenResearch(request, env) {
+  const headers = {
+    "Content-Type":"application/json; charset=utf-8",
+    "Cache-Control":"no-store, no-cache, max-age=0",
+    "X-Content-Type-Options":"nosniff"
+  };
+  const send = (payload,code=200)=>new Response(JSON.stringify(payload),{status:code,headers});
+  const origin = String(request.headers.get("Origin")||"");
+  if (request.method !== "POST") return send({ok:false,error:"method_not_allowed"},405);
+  if (origin && !["https://dar-al-tawhid.de","https://dar-al-tawhid-test.sero91ak.workers.dev"].includes(origin)) {
+    return send({ok:false,error:"origin_not_allowed"},403);
+  }
+  if (Number(request.headers.get("Content-Length")||0)>5000) return send({ok:false,error:"payload_too_large"},413);
+  const data = await request.json().catch(()=>null);
+  const question = String(data?.question||"").trim().slice(0,550);
+  const mode = data?.mode === "short"?"short":"detailed";
+  if (question.length<7) return send({ok:false,error:"insufficient_question"},422);
+  const result = await researchIlmWithGemini(request,env,question,mode);
+  if (result.limited) return send({ok:false,error:"rate_limited"},429);
+  // Failure is an explicit epistemic limit, never a fallback to the model's
+  // internal memories or to unverified Google Search summaries.
+  if (!result.ok) return send({ok:false,error:result.reason||"research_unavailable"},422);
+  return send(result);
+}
+
 // ILM_SCIENCE_COMPOSE_V1332 — test-only, sources-constrained German answer.
 // Uses the already configured Workers AI binding; no API key in the browser.
 async function ilmScienceCompose(request, env) {
@@ -503,6 +531,7 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     if (url.pathname === "/test/api/ilm/compose") return ilmScienceCompose(request, env);
+    if (url.pathname === "/test/api/ilm/research") return ilmOpenResearch(request, env);
     const gated = gateHiddenSurfaces(request, url, env, "live");
     if (gated) return gated;
 
