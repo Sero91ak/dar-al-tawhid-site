@@ -51,16 +51,32 @@
     const label = byId(prefix + "-label");
     const details = byId(prefix + "-meta");
     const action = byId(prefix + "-action");
-    if (!link) return;
-    link.href = release.href;
-    link.rel = "noopener noreferrer";
-    link.setAttribute("aria-label", (isTv ? "Android-TV-APK" : "Android-APK") +
-      " v" + release.version + " direkt herunterladen");
-    if (label) label.textContent = "DAR AL TAWḤĪD";
-    if (details) details.textContent =
-      "v" + release.version + "  ·  " + release.published;
-    if (action) action.textContent = "APK herunterladen  ↓";
-    link.setAttribute("data-release-ready", "true");
+    if (link) {
+      link.href = release.href;
+      link.rel = "noopener noreferrer";
+      link.setAttribute("aria-label", (isTv ? "Android-TV-APK" : "Android-APK") +
+        " v" + release.version + " direkt herunterladen");
+      if (label) label.textContent = "DAR AL TAWḤĪD";
+      if (details) details.textContent =
+        "v" + release.version + "  ·  " + release.published;
+      if (action) action.textContent = "APK herunterladen  ↓";
+      link.setAttribute("data-release-ready", "true");
+    }
+    // The same release also feeds the main website footer below its iOS promo.
+    const footerId = isTv ? "dar-public-tv" : "dar-public-android";
+    const footerLink = byId(footerId + "-apk");
+    if (footerLink) {
+      footerLink.href = release.href;
+      footerLink.rel = "noopener noreferrer";
+      footerLink.setAttribute("aria-label", (isTv ? "Android TV" : "Android") +
+        " · neueste signierte APK v" + release.version + " herunterladen");
+      footerLink.setAttribute("data-release-ready", "true");
+      const meta = byId(footerId + "-meta");
+      const btn = byId(footerId + "-action");
+      if (meta) meta.textContent =
+        "v" + release.version + "  ·  " + release.published;
+      if (btn) btn.textContent = "APK laden ↓";
+    }
   }
 
   function installDownloadCard(platform, release) {
