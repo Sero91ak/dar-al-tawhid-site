@@ -126,7 +126,7 @@ dayPage.innerHTML=
  '<div class="kids-salah-day-place"><span class="kids-salah-day-place-pin" aria-hidden="true"></span><strong id="kidsSalahDayCity">Dein Gebetsort</strong>'+
  '<button type="button" id="kidsSalahDayLocation">Ort ändern <span aria-hidden="true">›</span></button></div></div>'+
  '<div class="kids-salah-day-list" id="kidsSalahDayList" role="list" aria-label="Fünf Gebete heute"></div>'+
- '<p class="kids-salah-day-notice">Gebetszeiten für deinen Ort und die gewählte Berechnung. Bei Abweichungen frage deine Eltern oder deine Moschee.</p></div>';
+ '</div>';
 document.body.appendChild(dayPage);
 const dayList=dayPage.querySelector("#kidsSalahDayList");
 let lastRenderedDaySignature="";
