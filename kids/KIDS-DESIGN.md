@@ -143,3 +143,13 @@ Verbindlich für `/kids/` und alle künftigen Kids-Erweiterungen.
 - Gilt für die Detailansichten von Propheten, Ṣaḥābah, Ṣaḥābiyyāt, Dīn-Lektionen, Geschichten des Īmān, Duʿāʾ sowie die vorhandenen Wissen-, Qurʾān- und Quiz-Dialoge.
 - Für künftige Detailmodule `kids/global-detail-dock-v1247.js` als zentrale Registrierung verwenden statt neue ovale Einzelcontrols zu bauen.
 - **Nicht betroffen:** Startseiten-Hero, normale Bereichs-Header und insbesondere die untere schwebende Haupt-Tab-Leiste.
+
+
+## Global kompakter Kopf — `KIDS_COMPACT_GLOBAL_TOP_DOCK_V1248`
+
+- Detail- und Bibliotheksköpfe verwenden denselben kompakten eingedockten Aufbau auf Smartphones und iPads (auch im Querformat).
+- Mindesthöhe **60 CSS-px + genau einmal die OS-Safe-Area** auf Smartphones, **64 CSS-px + Safe-Area** auf Tablets; längere Titel dürfen die Höhe automatisch erweitern.
+- Kein Text wird abgeschnitten oder mit Ellipsen verborgen. Die Überschrift bleibt lesbar, der Untertitel bleibt direkt darunter.
+- Jeder Zurück-Button bleibt mindestens **44 × 44 CSS-px** als echte anklickbare Fläche; bestehende Handler, Swipe-Back, Tastaturfokus und Screenreader-Namen bleiben erhalten.
+- Nur vertikale Abstände, Kopfzeilenbreiten, Schriftgröße und Eckradius wurden verringert. Bildbühnen, untere Navigation, Ton, Lesetext, Spielstände und Inhalte ändern sich nicht.
+- Die Regeln werden im letzten Abschnitt von `kids/global-detail-dock-v1247.css` definiert und mit `?v=1248` geladen; keine doppelte Safe-Area-Anrechnung oder iPad-Hochskalierung.

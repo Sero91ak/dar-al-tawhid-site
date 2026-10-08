@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v144-global-detail-dock1247",
-  "label": "KIDS · V1.08.65",
-  "releasedAt": "2026-10-08T09:17:12.356Z",
-  "note": "KIDS V1.08.65 · Einheitlicher eingedockter Top-Kopf mit Zurück, dynamischem Titel und Untertitel auf den Detail-/Leseseiten für Dīn, Propheten, Ṣaḥābah, Ṣaḥābiyyāt, Hörwelten, Duʿāʾ sowie die eingebauten Quiz-, Wissens- und Qurʾān-Dialoge. Die ursprünglichen Zurück-Funktionen und die untere Hauptnavigation bleiben erhalten.",
+  "buildId": "kids-shell-v145-compact-top1248",
+  "label": "KIDS · V1.08.66",
+  "releasedAt": "2026-10-08T10:06:16.279Z",
+  "note": "KIDS V1.08.66 · Kompakte globale Kopfzeilen für alle Detail-/Leseseiten und Bibliotheken auf Smartphones und iPads: 60/64px plus einmal Safe Area, 44px Zurück-Touchziel, vollständige Titel ohne Abschneiden, weniger Leerraum. Navigation, Audio, Hero-Bilder und Inhalte unverändert.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1247",
+    "serviceWorkerCache": "v1248",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -1210,12 +1210,16 @@
     "globalGlowRuntime": "kids-card-interaction-v6",
     "globalGlowDeployMarker": "home-glow-parity-live-retry-2",
     "globalCardGlowProductionRetry": "single-lane-after-queue-fix",
-    "globalCardGlowProductionTarget": "dar-al-tawhid-site/kids"
+    "globalCardGlowProductionTarget": "dar-al-tawhid-site/kids",
+    "compactGlobalTopDock": "v1248",
+    "compactHeaderPhoneCssPx": 60,
+    "compactHeaderTabletCssPx": 64,
+    "compactBackTouchCssPx": 44
   },
-  "updatedAt": "2026-10-08T09:17:12.356Z",
-  "deployTrigger": "global-detail-dock-v1247",
+  "updatedAt": "2026-10-08T10:06:16.279Z",
+  "deployTrigger": "compact-global-top-dock-v1248",
   "globalDetailDock": {
-    "version": "v1247",
+    "version": "v1248",
     "enabled": true,
     "appliesTo": [
       "deen-detail",
@@ -1231,6 +1235,9 @@
     ],
     "preserveBackHandlers": true,
     "preserveBottomNavigation": true,
-    "preserveContentAndAudio": true
+    "preserveContentAndAudio": true,
+    "compactAllLibraries": true,
+    "safeAreaOnce": true,
+    "wrapLongTitles": true
   }
 }
