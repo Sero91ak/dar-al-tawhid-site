@@ -552,7 +552,7 @@
       fetch("/test/api/ilm/research", {
         method:"POST",
         headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({question:String(question).slice(0,550),mode:reply._ilmAnswerMode||"detailed"}),
+        body:JSON.stringify({question:String(question).slice(0,550),mode:(reply._ilmSourceOnly||proofIntent(question))?"sources":(reply._ilmAnswerMode||"detailed")}),
         signal:ctrl ? ctrl.signal : undefined
       }).then(function(response){
         return response.json().catch(function(){return {ok:false,error:"research_unavailable"};});
@@ -655,7 +655,10 @@
       var verifiedSources = (reply.evidences || []).filter(function(e) {
         return e && e.verification_status === "verified" && e.statement && e.statement.length >= 18;
       }).length;
-      var answer = isProof
+      var answer = reply._ilmResearching
+        ? "Ich suche ergänzende Originalquellen und prüfe ihre Fundstellen, bevor ich eine Antwort gebe."
+        : reply._ilmResearchError ? reply._ilmResearchError
+        : isProof
         ? (!anyProof ? "Zu dieser Frage liegen aktuell keine ausreichend belegten Originalstellen vor. Ich möchte keine Beweise erfinden."
           : countAsked > verifiedSources
             ? "Ich kann derzeit " + verifiedSources + " überprüfte " +
