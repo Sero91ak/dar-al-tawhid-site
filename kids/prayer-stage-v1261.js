@@ -10,9 +10,10 @@ const CACHE="darkids_kids_prayer_days_v1";
 const NAMES={fajr:"Fajr",dhuhr:"Dhuhr",asr:"ʿAṣr",maghrib:"Maghrib",isha:"ʿIshāʾ"};
 const ORDER=["fajr","dhuhr","asr","maghrib","isha"];
 const escapeHtml=value=>String(value==null?"":value).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-let place=null,days={},lastDay="",fetchTicket=0,lastFetch=0;
+let place=null,days={},lastDay="",fetchTicket=0,lastFetch=0,lastAttempt=0;
 try{place=JSON.parse(localStorage.getItem(STORE)||"null");}catch(_){}
 if(!place||!Number.isFinite(+place.lat)||!Number.isFinite(+place.lon)||!place.tz)place=null;
+try{if(place)new Intl.DateTimeFormat("en-GB",{timeZone:place.tz});}catch(_){place=null;}
 try{const saved=JSON.parse(localStorage.getItem(CACHE)||"{}");if(saved&&saved.placeKey===placeKey(place)&&saved.days)days=saved.days;}catch(_){}
 const stage=document.createElement("section");
 stage.className="kids-salah-stage";
@@ -120,7 +121,7 @@ function setPlace(p){
  const changed=placeKey(place)!==placeKey(p);
  place=p;
  try{localStorage.setItem(STORE,JSON.stringify(p));}catch(_){}
- if(changed){days={};lastFetch=0;try{localStorage.removeItem(CACHE);}catch(_){}}
+ if(changed){days={};lastFetch=0;lastAttempt=0;try{localStorage.removeItem(CACHE);}catch(_){}}
  draw();refresh();
 }
 function dateInZone(date,tz){
@@ -194,6 +195,7 @@ function draw(){
 }
 async function refresh(){
  if(!place)return;
+ lastAttempt=Date.now();
  const ticket=++fetchTicket,now=new Date(),today=dateInZone(now,place.tz),tom=tomorrow(today);
  const stale=[today,tom].filter(day=>!days[day]||days[day].date!==day||Date.now()-lastFetch>60*60*1000);
  if(!stale.length){draw();return;}
@@ -222,7 +224,7 @@ setInterval(()=>{
  if(!place)return;
  draw();
  const current=dateInZone(new Date(),place.tz);
- if(current!==lastDay||Date.now()-lastFetch>65*60*1000)refresh();
+ if(Date.now()-lastAttempt>60*1000&&(current!==lastDay||!days[current]||Date.now()-lastFetch>65*60*1000))refresh();
 },1000);
 window.addEventListener("online",()=>{if(place)refresh();});
 document.addEventListener("visibilitychange",()=>{if(!document.hidden&&place)refresh();});
