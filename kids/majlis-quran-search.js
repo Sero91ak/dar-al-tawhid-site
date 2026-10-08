@@ -8,7 +8,7 @@
   const MAX_RESULTS=5, MAX_QUERY=350, EXPECTED=6236;
   const NOISE=new Set(("wo wie was warum woher wer in im ist sind es ich du wir kann kannst kommt stehen steht findet finde mir mich " +
     "quran qur an qurʾan koran qurân sura sure surah suren aya ayah ayat vers verse die der das dem den des und oder " +
-    "welcher welche welches eine einer einen eines ein auf von vom zum zur fur für bei uber über über nach dazu " +
+    "welcher welche welches welchem welchems eine einen eines ein auf von vom zum zur fur für bei uber über über nach dazu dass ob wird wurde wurden erwahnt erwähnt " +
     "sagt sagte steht geschrieben möchte moechte wissen zeigen erklaren erklären suche suchst lesen hören " +
     "bitte überstelle stelle bitte gib mir wo gibt es welches sprich").split(/\s+/));
   let pending=null, indexed=null;
@@ -119,6 +119,24 @@
     const items=index.rows.filter(v=>v.surah===matched.surah);
     return {status:"found",exact:false,total:items.length,results:items.slice(0,MAX_RESULTS).map(result)};
   }
+  // These exact topic->verse references are already present in the verified Kids
+  // teaching material. No fuzzy topic tag can invent a Quran reference.
+  const EDITORIAL_VERSES=[
+    {match:/\ballah\b.*\b(einer|einzig|einziger|einzigkeit)\b|\b(einer|einzig|einzigkeit)\b.*\ballah\b/,surah:112,ayah:1},
+    {match:/\b(wudu|gebetswaschung)\b/,surah:5,ayah:6},
+    {match:/\b(qibla|qiblah|gebetsrichtung)\b/,surah:2,ayah:144},
+    {match:/\b(ramadan|ramadhan)\b.*\b(fasten|fastet|fastenpflicht)\b/,surah:2,ayah:183},
+    {match:/\b(rabbi zidni|zidni ilma|mehr wissen)\b/,surah:20,ayah:114}
+  ];
+  function exactEditorialReference(index,query){
+    const q=norm(query);
+    for(const item of EDITORIAL_VERSES){
+      if(!item.match.test(q))continue;
+      const verse=index.byRef.get(item.surah+":"+item.ayah);
+      if(verse)return {status:"found",exact:true,total:1,results:[result(verse)]};
+    }
+    return null;
+  }
   function lookup(index,query){
     const explicit=refFromQuestion(query);
     if(explicit){
@@ -127,6 +145,8 @@
     }
     const named=surahReference(index,query);
     if(named)return named;
+    const editorial=exactEditorialReference(index,query);
+    if(editorial)return editorial;
     const words=terms(query);
     if(!words.length)return {status:"too_broad",exact:false,total:0,results:[]};
     // Require actual Arabic/German/transliteration text. keywordIds and tagText
