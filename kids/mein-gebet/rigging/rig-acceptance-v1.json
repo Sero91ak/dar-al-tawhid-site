@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "project": "DAR AL TAWḤĪD KIDS — Mein Gebet",
+  "status": "draft-only:no-GLB-delivered",
+  "origin": {
+    "approvedImage": "../assets/gebetspositionen-sieben-schritte-user-approved-review.jpg",
+    "qiyamReference": "../assets/qiyam-brusthoehe-user-approved-ref-v1.jpg",
+    "boyCharacter": "../assets/figur-junge-original.png",
+    "girlCharacter": "../assets/figur-maedchen-original.png",
+    "visualApproval": "seven-step 2D pose sheet approved by user 2026-10-08; no inferred 3D approval"
+  },
+  "genderProfiles": {
+    "boy": "original white thobe white/gold kufi",
+    "girl": "original vivid pink hijab and matching vivid pink full dress — different separately verified poses"
+  },
+  "deliverable": {
+    "format": "GLB (binary glTF 2.0)",
+    "scope": "first only boy character",
+    "mustBeTrue3D": true,
+    "requiresSkinning": true,
+    "featureIntegration": "isolated Kids Mein Gebet only",
+    "noAdditionalCreditsWithoutApproval": true,
+    "limitMB": 20
+  },
+  "rig": {
+    "requiredBoneNames": [
+      "Hips",
+      "Spine",
+      "Chest",
+      "Neck",
+      "Head",
+      "UpperArm.L",
+      "LowerArm.L",
+      "Hand.L",
+      "UpperArm.R",
+      "LowerArm.R",
+      "Hand.R",
+      "UpperLeg.L",
+      "LowerLeg.L",
+      "Foot.L",
+      "Toe.L",
+      "UpperLeg.R",
+      "LowerLeg.R",
+      "Foot.R",
+      "Toe.R"
+    ],
+    "rootBone": "Hips",
+    "requiresSkinnedMesh": true,
+    "minimumGeometryVertices": 2000,
+    "requiredClipsForMilestoneOne": [
+      "Qiyam",
+      "Takbir"
+    ],
+    "requiredClipsForExpandedMilestone": [
+      "Ruku",
+      "Sujud",
+      "Jalsah",
+      "SecondSujud",
+      "Tashahhud",
+      "Salam"
+    ],
+    "animationRestrictions": {
+      "forbidAnimatedScale": true,
+      "forbidVideoPlanesAndBillboards": true,
+      "allowReparenting": false,
+      "poseChangesOnlyRotationAndTranslation": true
+    },
+    "quality": {
+      "noLegLengthChangeBetweenPoses": true,
+      "noFaceShapeChange": true,
+      "noLimbStretching": true,
+      "noBodyOrClothingClipping": true,
+      "stableKufiOrnaments": true
+    }
+  },
+  "poses": {
+    "qiyam": {
+      "source": "user-approved",
+      "rightHandOnLeft": true,
+      "hands": "on upper chest near upper garment buttons",
+      "hips": "upright",
+      "eyes": "natural forward/down"
+    },
+    "takbir": {
+      "source": "teaching-selection; needs 3D approval",
+      "raiseHandsTo": "shoulder height, not ear height",
+      "palms": "forward/open",
+      "symmetry": "left/right natural"
+    },
+    "ruku": {
+      "source": "user-approved 2D",
+      "pivot": "hip",
+      "back": "flat-horizontal like a tabletop, no spinal arch",
+      "hands": "on knees",
+      "legs": "original proportions; unchanged bone length",
+      "head": "aligned with spine"
+    },
+    "sujud": {
+      "source": "user-approved 2D",
+      "contact": [
+        "forehead firm",
+        "nose light",
+        "both palms",
+        "both knees",
+        "toes both feet"
+      ],
+      "forbiddenContact": [
+        "lips",
+        "mouth",
+        "chin"
+      ],
+      "pose": "no face kissing ground; no neck compression",
+      "variant": "first and second sujud"
+    },
+    "jalsah": {
+      "source": "user-approved 2D guide; exact fiqh still pending",
+      "hands": "on upper thighs",
+      "position": "sitting between sujud"
+    }
+  },
+  "reviewGates": {
+    "userVisualQiyam": "approved",
+    "userVisualRukuSujud": "approved-2D-only",
+    "userVisualTakbir": "guide-approved-2D-only",
+    "sourceNarrationFiqh": "review-required",
+    "boyRigGLB": "not-delivered",
+    "girlRigGLB": "not-delivered",
+    "threeSixtyDeviceTest": "not-run",
+    "iPhoneOfflineTest": "not-run",
+    "animationPublish": "blocked",
+    "liveMerge": "blocked"
+  },
+  "testLimitations": "Automation can inspect GLB structure, clips, texture and skeleton, but cannot establish actual forehead/nose contact, exact boy identity, 90° back pose or unchanged leg-length visually; real device and human animation review remain mandatory."
+}
