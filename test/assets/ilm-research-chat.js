@@ -804,6 +804,82 @@
       else boot();
     })();
 
+
+    /* MAJLIS MENU V1335: reuse existing working actions, reorganize only visual presentation. */
+    (function installIlmMenuRefinement() {
+      function refineMenu() {
+        if (!document.body || !document.body.classList.contains("is-ilm-chat-route")) return;
+        var menu = document.querySelector(".ilm-menu-popover");
+        if (!menu || menu.dataset.ilmRefined === "1") return;
+        var actions = Array.prototype.slice.call(menu.querySelectorAll("button"));
+        if (actions.length < 6) return;
+        var groups = {conversation:[],mode:[],danger:[],close:[],other:[]};
+        actions.forEach(function(button) {
+          var name = String(button.textContent || "").replace(/\s+/g, " ").trim().toLowerCase();
+          if (name.includes("antwortmodus")) {
+            button.classList.add("ilm-menu-mode-option");
+            button.dataset.ilmMode = /kurz/.test(name) ? "short" : /quellen/.test(name) ? "sources" : "detailed";
+            groups.mode.push(button);
+          } else if (/gespräch löschen|chat löschen/.test(name)) {
+            button.classList.add("ilm-menu-destructive-action");
+            groups.danger.push(button);
+          } else if (/^schließen$/.test(name)) {
+            button.classList.add("ilm-menu-close-button");
+            button.setAttribute("aria-label","Menü schließen");
+            groups.close.push(button);
+          } else if (/chat schließen/.test(name)) {
+            button.classList.add("ilm-menu-exit-action");
+            groups.other.push(button);
+          } else {
+            groups.conversation.push(button);
+          }
+          button.classList.add("ilm-menu-compact-action");
+        });
+        menu.dataset.ilmRefined = "1";
+        menu.classList.add("ilm-menu-refined");
+        // Preserve event delegation: only regroup if these buttons already belong directly to the popover.
+        if (!actions.every(function(button){return button.parentElement === menu})) return;
+        function section(label,klass,buttons) {
+          if (!buttons.length) return null;
+          var el = document.createElement("section");
+          el.className = "ilm-menu-group " + klass;
+          if (label) {
+            var title = document.createElement("p");
+            title.className = "ilm-menu-group-title";
+            title.textContent = label;
+            el.appendChild(title);
+          }
+          buttons.forEach(function(button){el.appendChild(button)});
+          return el;
+        }
+        var titlebar = document.createElement("div");
+        titlebar.className = "ilm-menu-titlebar";
+        var title = document.createElement("span");
+        title.textContent = "Gespräch & Einstellungen";
+        titlebar.appendChild(title);
+        groups.close.forEach(function(btn){titlebar.appendChild(btn)});
+        menu.insertBefore(titlebar,menu.firstChild);
+        [
+          section("Gespräch","ilm-menu-group-chat",groups.conversation),
+          section("Antwortdarstellung","ilm-menu-group-modes",groups.mode),
+          section("Verwaltung","ilm-menu-group-danger",groups.danger.concat(groups.other))
+        ].filter(Boolean).forEach(function(group){menu.appendChild(group)});
+      }
+      function schedule() {
+        // The native app renders the menu after click; do not replace its click handlers.
+        requestAnimationFrame(refineMenu);
+        setTimeout(refineMenu,40);
+      }
+      document.addEventListener("click",function(ev) {
+        var t = ev.target;
+        if (!t || !t.closest) return;
+        if (t.closest(".ilm-chat-header") || t.closest(".ilm-menu-popover")) schedule();
+      },false);
+      document.addEventListener("keydown",function(ev) {
+        if (ev.key === "Enter" || ev.key === " ") schedule();
+      },false);
+    })();
+
     document.addEventListener("click", function (ev) {
       var t = ev.target && ev.target.closest ? ev.target.closest("[data-ilm-follow]") : null;
       if (!t) return;
