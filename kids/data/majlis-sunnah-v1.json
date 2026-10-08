@@ -1,0 +1,285 @@
+{
+  "schemaVersion": 1,
+  "owner": "DĀR AL TAWḤĪD Kids",
+  "generatedFrom": [
+    "kids/data/verified-content.json",
+    "kids/data/deen-lessons.json"
+  ],
+  "policy": "Only source-bearing existing child learning materials, strict title/topic match, quote translations labelled as German text; lesson summaries are not literal hadith; no independent scholarly re-audit claimed.",
+  "items": [
+    {
+      "id": "had-0020-truth",
+      "kind": "hadith",
+      "title": "Sag die Wahrheit",
+      "text": "Haltet euch an die Wahrhaftigkeit, denn die Wahrhaftigkeit führt zur Rechtschaffenheit und die Rechtschaffenheit führt zum Paradies.",
+      "explanation": "Sag die Wahrheit. Wahrhaftigkeit führt zu Gutem.",
+      "source": "Ṣaḥīḥ al-Buḫārī · Nr. 6094",
+      "grade": "Ṣaḥīḥ",
+      "sourceStatus": "verified",
+      "sourceCorpus": "kids/data/verified-content.json",
+      "canonicalId": "HAD-0020",
+      "ages": [
+        "4–5",
+        "6–8",
+        "9–10"
+      ],
+      "triggers": [
+        "wahrheit",
+        "wahrhaftigkeit",
+        "ehrlich sein",
+        "lügen",
+        "6094"
+      ]
+    },
+    {
+      "id": "had-0068-good-word",
+      "kind": "hadith",
+      "title": "Ein gutes Wort",
+      "text": "Ein gutes Wort ist eine Wohltat.",
+      "explanation": "Freundliche und gute Worte gehören zu den guten Taten.",
+      "source": "Ṣaḥīḥ al-Buḫārī · Nr. 2989",
+      "grade": "Ṣaḥīḥ",
+      "sourceStatus": "verified",
+      "sourceCorpus": "kids/data/verified-content.json",
+      "canonicalId": "HAD-0068",
+      "ages": [
+        "4–5",
+        "6–8",
+        "9–10"
+      ],
+      "triggers": [
+        "gutes wort",
+        "gute worte",
+        "freundliches wort",
+        "wohltat",
+        "2989"
+      ]
+    },
+    {
+      "id": "had-0012-speech-neighbor",
+      "kind": "hadith",
+      "title": "Sprich Gutes",
+      "text": "Wer an Allah und den Jüngsten Tag glaubt, soll seinen Nachbarn nicht verletzen; wer an Allah und den Jüngsten Tag glaubt, soll seinen Gast ehren; und wer an Allah und den Jüngsten Tag glaubt, soll Gutes sprechen oder schweigen.",
+      "explanation": "Verletze deinen Nachbarn nicht und wähle gute Worte.",
+      "source": "Ṣaḥīḥ al-Buḫārī · Nr. 6018",
+      "grade": "Ṣaḥīḥ",
+      "sourceStatus": "verified",
+      "sourceCorpus": "kids/data/verified-content.json",
+      "canonicalId": "HAD-0012",
+      "ages": [
+        "6–8",
+        "9–10"
+      ],
+      "triggers": [
+        "gutes sprechen oder schweigen",
+        "sprechen oder schweigen",
+        "gast ehren",
+        "nachbarn nicht verletzen",
+        "6018"
+      ]
+    },
+    {
+      "id": "had-0098-neighbor",
+      "kind": "hadith",
+      "title": "Das Recht des Nachbarn",
+      "text": "Ǧibrīl empfahl mir den Nachbarn immer wieder so eindringlich, dass ich dachte, er würde ihn zu einem Erben machen.",
+      "explanation": "Der Nachbar hat ein großes Recht auf gute Behandlung.",
+      "source": "Ṣaḥīḥ al-Buḫārī · Nr. 6014",
+      "grade": "Ṣaḥīḥ",
+      "sourceStatus": "verified",
+      "sourceCorpus": "kids/data/verified-content.json",
+      "canonicalId": "HAD-0098",
+      "ages": [
+        "9–10"
+      ],
+      "triggers": [
+        "recht des nachbarn",
+        "nachbar recht",
+        "nachbarschaft",
+        "nachbar",
+        "6014"
+      ]
+    },
+    {
+      "id": "aishah-ansar-learning",
+      "kind": "early",
+      "title": "Scham hindert nicht am Lernen",
+      "text": "Wie trefflich sind die Frauen der Anṣār! Die Scham hinderte sie nicht daran, ihre Religion zu lernen.",
+      "explanation": "Wenn du etwas Wichtiges über den Dīn nicht weißt, fragst du mit gutem Adab und lernst es.",
+      "source": "Ṣaḥīḥ Muslim · Nr. 332",
+      "sourceUrl": "https://dorar.net/h/W5IBGzM5?osoul=1",
+      "person": "ʿĀʾišah رضي الله عنها",
+      "generation": "Ṣaḥābiyyah",
+      "sourceStatus": "verified",
+      "sourceCorpus": "kids/data/verified-content.json",
+      "canonicalId": "wissen-frauen-ansar-schamhaftigkeit-001",
+      "ages": [
+        "9–10"
+      ],
+      "triggers": [
+        "ansar frauen",
+        "scham hindert",
+        "aishah ansar",
+        "aisha ansar",
+        "lernen trotz scham",
+        "muslim 332"
+      ]
+    },
+    {
+      "id": "was-ist-tawhid",
+      "kind": "lesson",
+      "title": "Was ist Tawḥīd?",
+      "explanation": "Das wichtigste Fundament: Allah allein ist unser Rabb und nur Er wird angebetet.",
+      "source": "Qurʾān 51:56 · Qurʾān 42:11 · Ṣaḥīḥ al-Buḫārī 2856 · Ṣaḥīḥ Muslim 30",
+      "sourceRefs": [
+        "Qurʾān 51:56",
+        "Qurʾān 42:11",
+        "Ṣaḥīḥ al-Buḫārī 2856",
+        "Ṣaḥīḥ Muslim 30"
+      ],
+      "sourceStatus": "existing_lesson_not_independently_reaudited",
+      "sourceCorpus": "kids/data/deen-lessons.json",
+      "ages": [
+        "4–5",
+        "6–8",
+        "9–10"
+      ],
+      "triggers": [
+        "tawhid",
+        "tauhid",
+        "was ist tawhid",
+        "einzigkeit allahs"
+      ]
+    },
+    {
+      "id": "was-ist-iman",
+      "kind": "lesson",
+      "title": "Was ist Īmān?",
+      "explanation": "Die sechs Säulen des Īmān und was Glaube im Herzen und im Leben bedeutet.",
+      "source": "Qurʾān 8:2 · Qurʾān 48:4 · Ṣaḥīḥ Muslim 8 · Ḥadīṯ Ǧibrīl",
+      "sourceRefs": [
+        "Qurʾān 8:2",
+        "Qurʾān 48:4",
+        "Ṣaḥīḥ Muslim 8 · Ḥadīṯ Ǧibrīl"
+      ],
+      "sourceStatus": "existing_lesson_not_independently_reaudited",
+      "sourceCorpus": "kids/data/deen-lessons.json",
+      "ages": [
+        "4–5",
+        "6–8",
+        "9–10"
+      ],
+      "triggers": [
+        "iman",
+        "glaubenssäulen",
+        "glaubensgrundlagen",
+        "sechs säulen",
+        "was ist iman"
+      ]
+    },
+    {
+      "id": "asma-wa-sifat",
+      "kind": "lesson",
+      "title": "Allahs Namen & Eigenschaften",
+      "explanation": "Wie wir über Allahs Namen und Eigenschaften sprechen – ohne Vergleich und ohne erfundenes Wie.",
+      "source": "Qurʾān 7:180 · Qurʾān 42:11 · Ṣaḥīḥ al-Buḫārī 2736 · Ṣaḥīḥ Muslim 2677",
+      "sourceRefs": [
+        "Qurʾān 7:180",
+        "Qurʾān 42:11",
+        "Ṣaḥīḥ al-Buḫārī 2736",
+        "Ṣaḥīḥ Muslim 2677"
+      ],
+      "sourceStatus": "existing_lesson_not_independently_reaudited",
+      "sourceCorpus": "kids/data/deen-lessons.json",
+      "ages": [
+        "4–5",
+        "6–8",
+        "9–10"
+      ],
+      "triggers": [
+        "allahs namen",
+        "allahs eigenschaften",
+        "asma wa sifat",
+        "namen und eigenschaften"
+      ]
+    },
+    {
+      "id": "was-ist-ibadah",
+      "kind": "lesson",
+      "title": "Was ist ʿIbādah?",
+      "explanation": "Anbetung mit Herz, Worten und Taten – aufrichtig für Allah und gemäß der Sunnah.",
+      "source": "Qurʾān 51:56 · Ṣaḥīḥ al-Buḫārī 8 · Ṣaḥīḥ al-Buḫārī 1 · Ṣaḥīḥ Muslim 16 · Ṣaḥīḥ Muslim 1718",
+      "sourceRefs": [
+        "Qurʾān 51:56",
+        "Ṣaḥīḥ al-Buḫārī 8",
+        "Ṣaḥīḥ al-Buḫārī 1",
+        "Ṣaḥīḥ Muslim 16",
+        "Ṣaḥīḥ Muslim 1718"
+      ],
+      "sourceStatus": "existing_lesson_not_independently_reaudited",
+      "sourceCorpus": "kids/data/deen-lessons.json",
+      "ages": [
+        "4–5",
+        "6–8",
+        "9–10"
+      ],
+      "triggers": [
+        "ibadah",
+        "anbetung",
+        "gottesdienst für allah"
+      ]
+    },
+    {
+      "id": "adab-und-akhlaq",
+      "kind": "lesson",
+      "title": "Adab & Aḫlāq",
+      "explanation": "Wahr sprechen, Eltern gut behandeln, geduldig sein und einen schönen Charakter lernen.",
+      "source": "Qurʾān 17:23–24 · Ṣaḥīḥ al-Buḫārī 6018 · Ṣaḥīḥ Muslim 47 · Ṣaḥīḥ al-Buḫārī 3559",
+      "sourceRefs": [
+        "Qurʾān 17:23–24",
+        "Ṣaḥīḥ al-Buḫārī 6018",
+        "Ṣaḥīḥ Muslim 47",
+        "Ṣaḥīḥ al-Buḫārī 3559"
+      ],
+      "sourceStatus": "existing_lesson_not_independently_reaudited",
+      "sourceCorpus": "kids/data/deen-lessons.json",
+      "ages": [
+        "4–5",
+        "6–8",
+        "9–10"
+      ],
+      "triggers": [
+        "adab",
+        "akhlaq",
+        "guter charakter",
+        "islamische manieren"
+      ]
+    },
+    {
+      "id": "al-akhirah",
+      "kind": "lesson",
+      "title": "Der Jüngste Tag & Āḫirah",
+      "explanation": "Auferstehung, Rechenschaft und Hoffnung – behutsam und nur mit dem, was offenbart wurde.",
+      "source": "Qurʾān 3:185 · Qurʾān 22:7 · Qurʾān 99:7–8 · Ṣaḥīḥ Muslim 8",
+      "sourceRefs": [
+        "Qurʾān 3:185",
+        "Qurʾān 22:7",
+        "Qurʾān 99:7–8",
+        "Ṣaḥīḥ Muslim 8"
+      ],
+      "sourceStatus": "existing_lesson_not_independently_reaudited",
+      "sourceCorpus": "kids/data/deen-lessons.json",
+      "ages": [
+        "4–5",
+        "6–8",
+        "9–10"
+      ],
+      "triggers": [
+        "akhirah",
+        "jüngste tag",
+        "auferstehung",
+        "rechenschaft am jüngsten tag"
+      ]
+    }
+  ]
+}
