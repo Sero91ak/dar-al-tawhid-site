@@ -1,0 +1,51 @@
+name: Import Kids Salah Photoreal Artwork
+on:
+  push:
+    branches: [main]
+    paths: [kids/assets/kids-salah-v1272/.art-import.json]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: kids-salah-art-import
+  cancel-in-progress: false
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Sparse checkout of new Kids prayer artwork
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout: |
+            kids/assets/kids-salah-v1272
+      - name: Save seven photoreal artwork files locally
+        shell: bash
+        run: |
+          set -euo pipefail
+          SOURCE="kids/assets/kids-salah-v1272/.art-import.json"
+          DEST="kids/assets/kids-salah-v1272"
+          if [[ ! -f "$SOURCE" ]]; then echo "No new artwork request"; exit 0; fi
+          node -e 'const r=require("fs").readFileSync(process.argv[1],"utf8"); const j=JSON.parse(r); if(!Array.isArray(j.assets)||j.assets.length!==7)process.exit(1); for(const a of j.assets){if(!/^(hero-home|hero-day|fajr|dhuhr|asr|maghrib|isha)\.png$/.test(a.name)||!/^https:\/\//.test(a.url))process.exit(1); console.log(a.name+" "+a.url);}' "$SOURCE" > /tmp/kids_salah_sources
+          mkdir -p "$DEST"
+          while read -r name url; do
+            curl --fail --location --silent --show-error --retry 3 --connect-timeout 30 --max-time 180 "$url" --output "$DEST/$name"
+            size="$(wc -c < "$DEST/$name")"
+            test "$size" -gt 15000 || { echo "Too small: $name ($size bytes)"; exit 1; }
+            file "$DEST/$name"
+            head -c 4 "$DEST/$name" | od -An -tx1 | tr -d ' \n' | grep -q '^89504e47$' || { echo "Not a PNG: $name"; exit 1; }
+          done < /tmp/kids_salah_sources
+          rm "$SOURCE"
+          git config user.name "kids-artifact-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A "$DEST"
+          git commit -m "Kids Salah: import seven original photoreal prayer artworks"
+          for attempt in 1 2 3 4 5; do
+            git pull --rebase origin main
+            if git push origin HEAD:main; then exit 0; fi
+            sleep 3
+          done
+          exit 1
