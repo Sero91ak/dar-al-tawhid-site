@@ -24,7 +24,7 @@ jobs:
         run: |
           node --check cloudflare/worker.js
           node --check scripts/q35-slides-recovery-guard.cjs
-      - name: Verify 22-slide source structure, parser and publisher
+      - name: Verify 20-slide source structure, parser and publisher
         run: node scripts/q35-slides-recovery-guard.cjs
       - name: Verify YAML with independent real parser (Ruby Psych)
         shell: bash
@@ -35,7 +35,7 @@ jobs:
             abort "No YAML frontmatter" unless frontmatter
             post = YAML.safe_load(frontmatter[1], aliases: false)
             slides = post.fetch("slides")
-            abort "Expected 22 distinct slides, got #{slides.length}" unless slides.length == 22
+            abort "Expected 20 distinct slides, got #{slides.length}" unless slides.length == 20
             slides.each_with_index do |slide, idx|
               abort "Slide #{idx+1} missing title" if slide.fetch("title", "").strip.empty?
               abort "Slide #{idx+1} missing text" if slide.fetch("text", "").strip.empty?

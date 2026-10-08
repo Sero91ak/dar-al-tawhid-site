@@ -61,17 +61,12 @@ slides:
     links:
       - label: "→ Alle Direktnachweise · Q35"
         url: "/q/35/"
-  - title: "Maṭar al-Warrāq zu mutawaffīka"
+  - title: "Maṭar al-Warrāq und al-Ḥasan zu mutawaffīka"
     text: |
       🖋️ Maṭar al-Warrāq رحمه الله
       
       „Ich nehme dich aus dieser Welt; nicht durch die Wegnahme des Todes.“
-    source: "📝 Aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, Tafsīr zu Āl ʿImrān 3:55."
-    links:
-      - label: "→ Alle Direktnachweise · Q35"
-        url: "/q/35/"
-  - title: "Al-Ḥasan al-Baṣrī zu mutawaffīka"
-    text: |
+      
       🖋️ Al-Ḥasan al-Baṣrī رحمه الله
       
       „Ich nehme dich von der Erde.“
@@ -132,17 +127,12 @@ slides:
     links:
       - label: "→ Alle Direktnachweise · Q35"
         url: "/q/35/"
-  - title: "Qatādah über az-Zuḫruf 43:61"
+  - title: "Qatādah und Muǧāhid zu az-Zuḫruf 43:61"
     text: |
       🖋️ Qatādah رحمه الله
       
       „Die Herabkunft von ʿĪsā ibn Maryam ist ein Zeichen für die Stunde.“
-    source: "📝 Aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, Tafsīr zu az-Zuḫruf 43:61."
-    links:
-      - label: "→ Alle Direktnachweise · Q35"
-        url: "/q/35/"
-  - title: "Muǧāhid über az-Zuḫruf 43:61"
-    text: |
+      
       🖋️ Muǧāhid رحمه الله
       
       Er erklärte den Vers mit dem Hervortreten von ʿĪsā ibn Maryam vor dem Tag der Auferstehung.
@@ -367,7 +357,7 @@ slides:
 
 Der Qurʾān verneint ausdrücklich seine Tötung durch seine Gegner und stellt ihr seine Erhebung gegenüber.
 
-📝 Quelle: Qurʾān, an-Nisāʾ 4:157–158.
+📝 Qurʾān, an-Nisāʾ 4:157–158.
 
 [→ Quellen und Direktnachweise · Q35](/q/35/)
 
@@ -386,7 +376,7 @@ Damit ist bereits aus dem Qurʾān klar: Das Verb tawaffā wird nicht ausschlie�
 
 Deshalb ist die Behauptung: „Mutawaffīka in Āl ʿImrān 3:55 kann nur bedeuten, dass ʿĪsā endgültig gestorben ist“ sprachlich nicht zwingend.
 
-📝 Quelle: Qurʾān, az-Zumar 39:42; al-Anʿām 6:60; Āl ʿImrān 3:55.
+📝 Qurʾān, az-Zumar 39:42; al-Anʿām 6:60; Āl ʿImrān 3:55.
 
 [→ Quellen und Direktnachweise · Q35](/q/35/)
 
@@ -407,33 +397,26 @@ Aber sie sagt nicht: „ʿĪsā wird niemals wiederkommen.“
 Sie sagt nicht: „Der Nuzūl ist metaphorisch.“
 Und sie sagt nicht: „Ein später geborener Mann aus der Ummah wird in den Aḥādīṯ als ʿĪsā ibn Maryam bezeichnet.“
 
-📝 Quelle: Aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, Tafsīr zu Āl ʿImrān 3:55.
+📝 Aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, Tafsīr zu Āl ʿImrān 3:55.
 
 [→ Quellen und Direktnachweise · Q35](/q/35/)
 
 <!-- slide: 4 -->
-# Maṭar al-Warrāq zu mutawaffīka
+# Maṭar al-Warrāq und al-Ḥasan zu mutawaffīka
 
 🖋️ Maṭar al-Warrāq رحمه الله
 
 „Ich nehme dich aus dieser Welt; nicht durch die Wegnahme des Todes.“
 
-📝 Quelle: Aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, Tafsīr zu Āl ʿImrān 3:55.
-
-[→ Quellen und Direktnachweise · Q35](/q/35/)
-
-<!-- slide: 5 -->
-# Al-Ḥasan al-Baṣrī zu mutawaffīka
-
 🖋️ Al-Ḥasan al-Baṣrī رحمه الله
 
 „Ich nehme dich von der Erde.“
 
-📝 Quelle: Aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, Tafsīr zu Āl ʿImrān 3:55.
+📝 Aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, Tafsīr zu Āl ʿImrān 3:55.
 
 [→ Quellen und Direktnachweise · Q35](/q/35/)
 
-<!-- slide: 6 -->
+<!-- slide: 5 -->
 # Ibn Zayd: Nuzūl vor dem Tod
 
 🖋️ Ibn Zayd رحمه الله
@@ -448,11 +431,11 @@ Damit lautet die Reihenfolge bei Ibn Zayd:
 
 Er lebt → er steigt herab → er tötet den Daǧǧāl → danach stirbt er.
 
-📝 Quelle: Aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, Tafsīr zu Āl ʿImrān 3:55.
+📝 Aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, Tafsīr zu Āl ʿImrān 3:55.
 
 [→ Quellen und Direktnachweise · Q35](/q/35/)
 
-<!-- slide: 7 -->
+<!-- slide: 6 -->
 # Al-Ḥasan al-Baṣrī: „Er ist jetzt lebendig“
 
 🖋️ Al-Ḥasan al-Baṣrī رحمه الله
@@ -467,11 +450,11 @@ Von ihm wird an derselben Stelle außerdem überliefert:
 
 Das ist keine spätere theologische Konstruktion, sondern die Aussage eines großen Tābiʿī.
 
-📝 Quelle: Aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, Tafsīr zu an-Nisāʾ 4:159.
+📝 Aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, Tafsīr zu an-Nisāʾ 4:159.
 
 [→ Quellen und Direktnachweise · Q35](/q/35/)
 
-<!-- slide: 8 -->
+<!-- slide: 7 -->
 # Ibn ʿAbbās und der Nuzūl
 
 🖋️ ʿAbdullāh ibn ʿAbbās رضي الله عنهما
@@ -488,33 +471,26 @@ Das ist entscheidend: Selbst wenn die Überlieferung von Ibn ʿAbbās „mutawaf
 
 Von ihm wird gerade die Herabkunft von ʿĪsā ibn Maryam überliefert.
 
-📝 Quelle: Aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, Tafsīr zu az-Zuḫruf 43:61.
+📝 Aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, Tafsīr zu az-Zuḫruf 43:61.
 
 [→ Quellen und Direktnachweise · Q35](/q/35/)
 
-<!-- slide: 9 -->
-# Qatādah über az-Zuḫruf 43:61
+<!-- slide: 8 -->
+# Qatādah und Muǧāhid zu az-Zuḫruf 43:61
 
 🖋️ Qatādah رحمه الله
 
 „Die Herabkunft von ʿĪsā ibn Maryam ist ein Zeichen für die Stunde.“
 
-📝 Quelle: Aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, Tafsīr zu az-Zuḫruf 43:61.
-
-[→ Quellen und Direktnachweise · Q35](/q/35/)
-
-<!-- slide: 10 -->
-# Muǧāhid über az-Zuḫruf 43:61
-
 🖋️ Muǧāhid رحمه الله
 
 Er erklärte den Vers mit dem Hervortreten von ʿĪsā ibn Maryam vor dem Tag der Auferstehung.
 
-📝 Quelle: Aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, Tafsīr zu az-Zuḫruf 43:61.
+📝 Aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, Tafsīr zu az-Zuḫruf 43:61.
 
 [→ Quellen und Direktnachweise · Q35](/q/35/)
 
-<!-- slide: 11 -->
+<!-- slide: 9 -->
 # Aḍ-Ḍaḥḥāk über az-Zuḫruf 43:61
 
 🖋️ Aḍ-Ḍaḥḥāk رحمه الله
@@ -523,11 +499,11 @@ Er erklärte ihn mit:
 
 „dem Hervortreten von ʿĪsā ibn Maryam und seiner Herabkunft vom Himmel vor dem Tag der Auferstehung.“
 
-📝 Quelle: Aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, Tafsīr zu az-Zuḫruf 43:61.
+📝 Aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, Tafsīr zu az-Zuḫruf 43:61.
 
 [→ Quellen und Direktnachweise · Q35](/q/35/)
 
-<!-- slide: 12 -->
+<!-- slide: 10 -->
 # Der Prophet ﷺ sagt: „Ibn Maryam“
 
 🖋️ Der Gesandte Allahs ﷺ
@@ -544,11 +520,11 @@ Er sagte:
 
 Ibn Maryam – der Sohn Maryams.
 
-📝 Quelle: Ṣaḥīḥ al-Buḫārī, Nr. 3449; Ṣaḥīḥ Muslim, Nr. 155.
+📝 Ṣaḥīḥ al-Buḫārī, Nr. 3449; Ṣaḥīḥ Muslim, Nr. 155.
 
 [→ Quellen und Direktnachweise · Q35](/q/35/)
 
-<!-- slide: 13 -->
+<!-- slide: 11 -->
 # Die Ummah, ihr Amīr und ʿĪsā ibn Maryam
 
 🖋️ Der Gesandte Allahs ﷺ
@@ -573,11 +549,11 @@ Der Text unterscheidet also zwischen der bereits bestehenden Ummah, ihrem Anfüh
 
 Das widerspricht der Behauptung, der angekündigte ʿĪsā sei lediglich ein später geborener Mann aus derselben Ummah.
 
-📝 Quelle: Ṣaḥīḥ Muslim, Nr. 156, von Ǧābir ibn ʿAbdillāh رضي الله عنه.
+📝 Ṣaḥīḥ Muslim, Nr. 156, von Ǧābir ibn ʿAbdillāh رضي الله عنه.
 
 [→ Quellen und Direktnachweise · Q35](/q/35/)
 
-<!-- slide: 14 -->
+<!-- slide: 12 -->
 # Der gerechte Richter
 
 🖋️ Der Gesandte Allahs ﷺ
@@ -588,11 +564,11 @@ Wieder wird ausdrücklich derselbe genannt:
 
 der Sohn Maryams.
 
-📝 Quelle: Ṣaḥīḥ al-Buḫārī, Nr. 3448; Ṣaḥīḥ Muslim, Nr. 155.
+📝 Ṣaḥīḥ al-Buḫārī, Nr. 3448; Ṣaḥīḥ Muslim, Nr. 155.
 
 [→ Quellen und Direktnachweise · Q35](/q/35/)
 
-<!-- slide: 15 -->
+<!-- slide: 13 -->
 # Al-Masīḥ ibn Maryam – Ort, Engel und Daǧǧāl
 
 🖋️ Der Gesandte Allahs ﷺ
@@ -613,11 +589,11 @@ Der Bericht nennt: al-Masīḥ ibn Maryam, einen konkreten Ort, Engel, seinen Nu
 
 Der Text selbst gibt keinen Hinweis darauf, dass mit „al-Masīḥ ibn Maryam“ eine andere, später geborene Person gemeint sei.
 
-📝 Quelle: Ṣaḥīḥ Muslim, Nr. 2937, von an-Nawwās ibn Samʿān رضي الله عنه.
+📝 Ṣaḥīḥ Muslim, Nr. 2937, von an-Nawwās ibn Samʿān رضي الله عنه.
 
 [→ Quellen und Direktnachweise · Q35](/q/35/)
 
-<!-- slide: 16 -->
+<!-- slide: 14 -->
 # Imām aṭ-Ṭabarī – gest. 310 H.
 
 🖋️ Imām aṭ-Ṭabarī رحمه الله
@@ -634,11 +610,11 @@ und anschließend sterben werde.
 
 Damit steht bereits 310 H. fest: Der Ikhtilāf über tawaffī war aṭ-Ṭabarī bekannt. Trotzdem verstand er die zahlreichen Nuzūl-Berichte als Beweis für den zukünftigen persönlichen Nuzūl von ʿĪsā ibn Maryam.
 
-📝 Quelle: Aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, Tafsīr zu Āl ʿImrān 3:55.
+📝 Aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, Tafsīr zu Āl ʿImrān 3:55.
 
 [→ Quellen und Direktnachweise · Q35](/q/35/)
 
-<!-- slide: 17 -->
+<!-- slide: 15 -->
 # Aṭ-Ṭaḥāwī – gest. 321 H.
 
 🖋️ Abū Ǧaʿfar aṭ-Ṭaḥāwī
@@ -649,11 +625,11 @@ Hier steht ausdrücklich:
 
 ʿĪsā ibn Maryam → vom Himmel.
 
-📝 Quelle: Aṭ-Ṭaḥāwī, al-ʿAqīdah aṭ-Ṭaḥāwiyyah, Abschnitt über die Zeichen der Stunde.
+📝 Aṭ-Ṭaḥāwī, al-ʿAqīdah aṭ-Ṭaḥāwiyyah, Abschnitt über die Zeichen der Stunde.
 
 [→ Quellen und Direktnachweise · Q35](/q/35/)
 
-<!-- slide: 18 -->
+<!-- slide: 16 -->
 # Ibn Baṭṭah – gest. 387 H.
 
 🖋️ Imām Ibn Baṭṭah al-ʿUkbarī رحمه الله
@@ -664,11 +640,11 @@ Ibn Baṭṭah führt in seiner Darstellung der Grundlagen, auf die sich nach se
 
 Das ist ein frühes Konsenszeugnis aus dem 4. Jahrhundert.
 
-📝 Quelle: Ibn Baṭṭah, aš-Šarḥ wa-l-Ibānah / al-Ibānah aṣ-Ṣuġrā, S. 191 und 241 der herangezogenen Ausgabe.
+📝 Ibn Baṭṭah, aš-Šarḥ wa-l-Ibānah / al-Ibānah aṣ-Ṣuġrā, S. 191 und 241 der herangezogenen Ausgabe.
 
 [→ Quellen und Direktnachweise · Q35](/q/35/)
 
-<!-- slide: 19 -->
+<!-- slide: 17 -->
 # Abū ʿAmr ad-Dānī – gest. 444 H.
 
 🖋️ Imām Abū ʿAmr ad-Dānī رحمه الله
@@ -685,11 +661,11 @@ Zu an-Nisāʾ 4:159 erklärt er:
 
 Damit ist dieser Glaubenssatz auch 444 H. ausdrücklich dokumentiert.
 
-📝 Quelle: Abū ʿAmr ad-Dānī, ar-Risālah al-Wāfiyah li-maḏhab Ahl as-Sunnah, Nr. 168–169, S. 243.
+📝 Abū ʿAmr ad-Dānī, ar-Risālah al-Wāfiyah li-maḏhab Ahl as-Sunnah, Nr. 168–169, S. 243.
 
 [→ Quellen und Direktnachweise · Q35](/q/35/)
 
-<!-- slide: 20 -->
+<!-- slide: 18 -->
 # Der entscheidende Unterschied
 
 Es ist sachlich richtig zu sagen:
@@ -702,11 +678,11 @@ Dass es unter den Salaf Ikhtilāf darüber gab, ob die authentischen Nuzūl-Aḥ
 
 Das sind zwei verschiedene Fragen.
 
-📝 Quelle: Zusammenfassung des dokumentierten Tafsīr-Ikhtilāf und der Nuzūl-Aḥādīṯ; Originalnachweise /q/35/.
+📝 Zusammenfassung des dokumentierten Tafsīr-Ikhtilāf und der Nuzūl-Aḥādīṯ; Originalnachweise /q/35/.
 
 [→ Quellen und Direktnachweise · Q35](/q/35/)
 
-<!-- slide: 21 -->
+<!-- slide: 19 -->
 # Wen die frühen Quellen tatsächlich nennen
 
 Die frühen Quellen sprechen von:
@@ -726,11 +702,11 @@ Für die Behauptung:
 
 findet sich in diesen frühen Texten kein entsprechender Beleg von den Ṣaḥābah, Tābiʿīn oder den genannten Imāmen bis zum 5. Jahrhundert.
 
-📝 Quelle: Ṣaḥīḥ al-Buḫārī 3448–3449; Ṣaḥīḥ Muslim 155–156, 2937; aṭ-Ṭabarī zu 3:55 und 43:61; aṭ-Ṭaḥāwī; Ibn Baṭṭah; ad-Dānī.
+📝 Ṣaḥīḥ al-Buḫārī 3448–3449; Ṣaḥīḥ Muslim 155–156, 2937; aṭ-Ṭabarī zu 3:55 und 43:61; aṭ-Ṭaḥāwī; Ibn Baṭṭah; ad-Dānī.
 
 [→ Quellen und Direktnachweise · Q35](/q/35/)
 
-<!-- slide: 22 -->
+<!-- slide: 20 -->
 # Fazit: Der persönliche Nuzūl
 
 Der frühe Ikhtilāf über mutawaffīka ist real und darf nicht verschwiegen werden. Er betrifft jedoch nicht die Identität des in den authentischen Nuzūl-Aḥādīṯ genannten ʿĪsā ibn Maryam.
@@ -741,6 +717,6 @@ Die frühen Tafsīr- und ʿAqīdah-Texte bestätigen denselben persönlichen Nuz
 
 Eine spätere metaphorische Ersatzperson wird in diesen frühen Quellen nicht genannt.
 
-📝 Quelle: Gesamtfazit aus Qurʾān, authentischer Sunnah und den frühen Tafsīr- und ʿAqīdah-Texten; Direktnachweise /q/35/.
+📝 Gesamtfazit aus Qurʾān, authentischer Sunnah und den frühen Tafsīr- und ʿAqīdah-Texten; Direktnachweise /q/35/.
 
 [→ Quellen und Direktnachweise · Q35](/q/35/)
