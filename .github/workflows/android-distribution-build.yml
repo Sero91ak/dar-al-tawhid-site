@@ -10,6 +10,8 @@ on:
       - main
     paths:
       - "android/**"
+      - "download/**"
+      - "links/index.html"
       - ".github/workflows/android-distribution-build.yml"
   workflow_dispatch:
 
