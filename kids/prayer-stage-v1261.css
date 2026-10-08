@@ -825,7 +825,7 @@ body.kids-salah-day-open{overflow:hidden!important}
   background:
    radial-gradient(ellipse at 88% 7%,rgba(245,190,105,.12),transparent 54%),
    linear-gradient(90deg,rgba(5,31,44,.96) 0%,rgba(5,31,44,.84) 56%,rgba(5,31,44,.44) 100%),
-   url("/kids/assets/kids-salah-v1262/cinematic-still.jpg") center 35% /cover no-repeat;
+   url("/kids/assets/kids-salah-v1266/kids-salah-storybook.jpg") center 35% /cover no-repeat;
   box-shadow:0 10px 27px rgba(3,18,31,.24),inset 0 1px 0 rgba(255,245,217,.07);
 }
 .kids-salah-day-hero::before{
@@ -919,7 +919,7 @@ body.kids-salah-day-open{overflow:hidden!important}
 .kids-salah-day[data-gender="girl"] .kids-salah-day-hero{
   background:radial-gradient(ellipse at 83% 0%,rgba(246,181,222,.23),transparent 56%),
    linear-gradient(90deg,rgba(44,24,60,.98),rgba(44,24,60,.79) 53%,rgba(44,24,60,.46)),
-   url("/kids/assets/kids-salah-v1262/cinematic-still.jpg") center 35% /cover no-repeat;
+   url("/kids/assets/kids-salah-v1266/kids-salah-storybook.jpg") center 35% /cover no-repeat;
   border-color:rgba(255,207,234,.28);
 }
 .kids-salah-day[data-gender="girl"] .kids-salah-day-hero h2 em{color:#ffdef0!important}
@@ -1105,3 +1105,12 @@ body.kids-salah-day-open{overflow:hidden!important}
 @media(prefers-reduced-motion:reduce){
  #view-today .kids-salah-beat{animation:none!important}
 }
+
+
+/* KIDS_SALAH_V1268_HERO_ASSET — freshly generated offline hero, reachable controls */
+.kids-salah-day-hero::before{z-index:0!important}
+.kids-salah-day-hero > *{position:relative;z-index:1}
+.kids-salah-day-hero .kids-salah-day-place button{min-height:44px!important}
+.kids-salah-day-back{width:44px!important;height:44px!important}
+#view-today .kids-salah-location{min-height:36px!important}
+#view-today .kids-salah-open-day{min-height:44px!important}
