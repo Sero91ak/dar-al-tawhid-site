@@ -1622,3 +1622,170 @@ body.is-ilm-chat-route .ilm-welcome-intro::before{
   opacity:calc(var(--ilm-history-opacity) * 1.08);
   filter:saturate(.82) contrast(.96) brightness(1.01);
 }
+
+
+/* ILM SCIENCE CHAT V1332 — reserved for /test/ only. */
+body.is-ilm-chat-route .ilm-chat-shell{
+  --ilm-science-rule:color-mix(in srgb,var(--ilm-accent) 19%,transparent);
+  --ilm-science-tint:color-mix(in srgb,var(--ilm-header-bg) 82%,transparent);
+}
+body.is-ilm-chat-route .ilm-assistant-message{
+  width:min(100%,760px)!important;
+  max-width:min(100%,760px)!important;
+  padding:4px 0 24px!important;
+  min-width:0;
+  overflow-wrap:anywhere;
+}
+body.is-ilm-chat-route .ilm-user-row{
+  min-width:0;
+}
+body.is-ilm-chat-route .ilm-user-bubble{
+  max-width:min(85%,560px)!important;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+  font-size:clamp(13.5px,3.4vw,15px)!important;
+  line-height:1.56!important;
+  border:1px solid var(--ilm-science-rule)!important;
+  border-radius:17px 17px 5px 17px!important;
+  padding:11px 15px!important;
+}
+body.is-ilm-chat-route .ilm-answer-text{
+  width:100%;
+  min-width:0;
+  overflow-wrap:anywhere;
+  font-size:clamp(14.5px,3.55vw,16px)!important;
+  line-height:1.75!important;
+}
+body.is-ilm-chat-route .ilm-science-prose{
+  max-width:72ch;
+  color:var(--ilm-primary-text);
+  letter-spacing:.002em;
+  font-weight:450;
+}
+body.is-ilm-chat-route .ilm-science-prose p{
+  margin:0 0 13px!important;
+  line-height:1.76;
+  text-wrap:pretty;
+}
+body.is-ilm-chat-route .ilm-science-sources{
+  margin:18px 0 0;
+  border-top:1px solid var(--ilm-science-rule);
+  border-bottom:1px solid var(--ilm-science-rule);
+  background:transparent;
+  color:var(--ilm-primary-text);
+  min-width:0;
+}
+body.is-ilm-chat-route .ilm-science-sources > summary{
+  list-style:none;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  min-height:51px;
+  gap:10px;
+  padding:10px 1px;
+  color:var(--ilm-primary-text);
+  font-size:13.5px;
+  font-weight:680;
+}
+body.is-ilm-chat-route .ilm-science-sources > summary::-webkit-details-marker{display:none}
+body.is-ilm-chat-route .ilm-science-source-icon{
+  font-family:var(--ilm-serif,Georgia,serif);
+  font-size:26px;
+  color:var(--ilm-accent);
+  font-weight:400;
+}
+body.is-ilm-chat-route .ilm-science-sources > summary small{
+  margin-left:auto;
+  color:var(--ilm-secondary-text);
+  font-size:11px;
+  font-weight:550;
+  white-space:nowrap;
+}
+body.is-ilm-chat-route .ilm-science-chevron{
+  color:var(--ilm-accent);
+  font-size:18px;
+  transition:transform .2s ease;
+}
+body.is-ilm-chat-route .ilm-science-sources[open] .ilm-science-chevron{
+  transform:rotate(180deg);
+}
+body.is-ilm-chat-route .ilm-science-source-list{
+  display:grid;
+  gap:0;
+  padding-bottom:12px;
+}
+body.is-ilm-chat-route .ilm-science-source-item{
+  background:var(--ilm-science-tint);
+  border:1px solid var(--ilm-science-rule);
+  border-radius:13px;
+  margin:0 0 10px;
+  padding:4px 13px 10px;
+}
+body.is-ilm-chat-route .ilm-science-source-item .ilm-evidence{
+  margin:0!important;
+  padding:10px 0 0!important;
+  border-top:0!important;
+}
+body.is-ilm-chat-route .ilm-science-source-item .ilm-quote{
+  font-family:inherit;
+  font-size:clamp(13.5px,3.5vw,15px);
+  font-weight:450;
+  line-height:1.7;
+  font-style:normal;
+  overflow-wrap:anywhere;
+}
+body.is-ilm-chat-route .ilm-science-proof-status{
+  margin:10px 0 0!important;
+  border-top:1px solid var(--ilm-science-rule);
+  padding-top:8px;
+  font-size:11px;
+  line-height:1.5;
+  color:var(--ilm-secondary-text);
+}
+body.is-ilm-chat-route .ilm-science-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin:17px 0 0;
+}
+body.is-ilm-chat-route .ilm-science-actions button{
+  appearance:none;
+  background:color-mix(in srgb,var(--ilm-header-bg) 73%,transparent);
+  color:var(--ilm-primary-text);
+  border:1px solid var(--ilm-science-rule);
+  padding:9px 12px;
+  min-height:38px;
+  border-radius:999px;
+  font-size:12px;
+  line-height:1.4;
+  font-weight:640;
+  cursor:pointer;
+  max-width:100%;
+  white-space:normal;
+  text-align:left;
+}
+body.is-ilm-chat-route .ilm-science-actions button:hover,
+body.is-ilm-chat-route .ilm-science-actions button:focus-visible{
+  border-color:color-mix(in srgb,var(--ilm-accent) 70%,transparent);
+  background:color-mix(in srgb,var(--ilm-accent) 9%,var(--ilm-header-bg));
+  outline-offset:3px;
+}
+body.is-ilm-chat-route .ilm-composer-inner{
+  border:1px solid var(--ilm-science-rule)!important;
+  border-radius:19px!important;
+  background:var(--ilm-composer-bg)!important;
+  padding:4px!important;
+}
+body.is-ilm-chat-route .ilm-loading-row,
+body.is-ilm-chat-route .ilm-status-line{
+  color:var(--ilm-secondary-text)!important;
+}
+@media(max-width:420px){
+  body.is-ilm-chat-route .ilm-science-actions{display:grid;grid-template-columns:1fr}
+  body.is-ilm-chat-route .ilm-science-actions button{width:100%;border-radius:12px}
+  body.is-ilm-chat-route .ilm-science-sources > summary{gap:7px;font-size:12.5px}
+  body.is-ilm-chat-route .ilm-science-source-item{padding:4px 10px 10px}
+}
+@media(prefers-reduced-motion:reduce){
+  body.is-ilm-chat-route .ilm-science-chevron{transition:none}
+}
