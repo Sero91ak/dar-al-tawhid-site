@@ -44,3 +44,18 @@ Alle Werkzeuge arbeiten lokal; keine Netzwerkanfragen, keine neuen Bilder. Die M
 - Die bestätigten hanbalitischen/quellenbezogenen Soll-Regeln bleiben unverändert und gelten auch für spätere Animationen.
 
 V7.6-GLB SHA-256: `14d803f8c0dfc7a57a566bcd50f12b895ee4bea3008fb660f0d97dc2e62e2e2a`.
+## Zusätzliche direkte Gegenprüfung V7.5 → V7.6 (19:21 Uhr)
+
+Die erneute Laufzeitberechnung hat V7.6 nicht nur gegen V7.4, sondern ausdrücklich gegen **V7.5** geprüft (identische Originaldatei, gleiches OpenCV-v3-Verfahren, exakt dieselben fünf GLB-Projektionen). Die GLB-Binärdateien beider Kandidaten wurden tatsächlich eingelesen.
+
+| Blickwinkel | Delta V7.6 gegenüber V7.5 |
+|---|---:|
+| Vorne | +0,00095 |
+| Dreiviertel, unkalibriert | +0,00119 |
+| Rechts | 0,00000 |
+| Hinten | +0,00120 |
+| Links | 0,00000 |
+
+**Keine Kontur- oder Kopfverschlechterung**, aber auch **kein Einzelgewinn ≥0,002**. Darum meldet der strenge `compare_original_fiveview_v3.py` bei genau diesem Paar **`geometry_progress_accepted=false`**, obwohl alle Werte nichtnegativ sind. Die offizielle Qualitätsbeurteilung bleibt: **V7.6 gegenüber V7.4 messbar besser, gegenüber V7.5 kein materieller Einzelgewinn**. Keine einzige Ansicht erfüllt 90 %, und die Dreiviertel-Referenzkamera ist nicht physisch kalibriert. Diese Klarstellung verhindert, dass kleine Verbesserungen als großer Durchbruch ausgegeben werden.
+
+Auch ein einwandfreier GLB-Strukturtest bestätigt nicht die optische Originaltreue oder Korrektheit der Gebetsabläufe. V7.6 ist **nicht** für Produktion, die Kids-App oder die Weitergabe als fertige Originalfigur freigegeben.
