@@ -80,7 +80,7 @@ jobs:
             printf '%s\n' "$CHANGED"
             ANDROID=false
             IOS=false
-            if printf '%s\n' "$CHANGED" | grep -Eq '^(android/|download/|links/index\.html$|\.github/workflows/(android-distribution-build|unified-native-build)\.yml$)'; then
+            if printf '%s\n' "$CHANGED" | grep -Eq '^(android/|\.github/workflows/(android-distribution-build|unified-native-build)\.yml$)'; then
               ANDROID=true
             fi
             if printf '%s\n' "$CHANGED" | grep -Eq '^(ios/DarAlTawhid/|\.github/workflows/(ios-native-build|unified-native-build)\.yml$)'; then
