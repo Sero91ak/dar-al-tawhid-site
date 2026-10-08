@@ -153,3 +153,5 @@ Verbindlich für `/kids/` und alle künftigen Kids-Erweiterungen.
 - Jeder Zurück-Button bleibt mindestens **44 × 44 CSS-px** als echte anklickbare Fläche; bestehende Handler, Swipe-Back, Tastaturfokus und Screenreader-Namen bleiben erhalten.
 - Nur vertikale Abstände, Kopfzeilenbreiten, Schriftgröße und Eckradius wurden verringert. Bildbühnen, untere Navigation, Ton, Lesetext, Spielstände und Inhalte ändern sich nicht.
 - Die Regeln werden im letzten Abschnitt von `kids/global-detail-dock-v1247.css` definiert und mit `?v=1248` geladen; keine doppelte Safe-Area-Anrechnung oder iPad-Hochskalierung.
+
+- Der Release-Guard liest die aktuell freigegebene Service-Worker-Version aus `kids/version.json` und prüft beide Asset-Referenzen dynamisch; eine alte CSS-Versionsnummer darf einen neuen Kids-Live-Deploy nicht blockieren.
