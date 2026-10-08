@@ -155,6 +155,43 @@
       "description": "Überlieferungen und juristische Unterschiede der Reihenfolge Hände/Knie",
       "url": "https://islamweb.net/ar/library/content/89/83/#:~:text=%D9%88%D9%82%D8%AF%20%D8%A7%D8%AE%D8%AA%D9%84%D9%81%20%D8%A3%D9%87%D9%84%20%D8%A7%D9%84%D8%B9%D9%84%D9%85%20%D9%81%D9%8A%20%D9%87%D8%B0%D8%A7%20%D8%A7%D9%84%D8%A8%D8%A7%D8%A8",
       "verifiedLink": true
+    },
+    {
+      "id": "ibn-khuzaymah-wail-chest-479",
+      "category": "primary_hadith_text",
+      "author": "Ibn Ḫuzaymah",
+      "work": "Ṣaḥīḥ Ibn Ḫuzaymah",
+      "hadithNumber": "479",
+      "narrator": "Wāʾil ibn Ḥuǧr",
+      "arabicFragment": "ووضع يده اليمنى على يده اليسرى على صدره",
+      "description": "Expliziter Wortlaut: rechte auf linke Hand auf der Brust; Echtheitsgrad der Zusatzformulierung gesondert umstritten.",
+      "url": "https://www.islamweb.net/ar/library/content/75/479/#:~:text=%D9%88%D9%88%D8%B6%D8%B9%20%D9%8A%D8%AF%D9%87%20%D8%A7%D9%84%D9%8A%D9%85%D9%86%D9%89%20%D8%B9%D9%84%D9%89%20%D9%8A%D8%AF%D9%87%20%D8%A7%D9%84%D9%8A%D8%B3%D8%B1%D9%89%20%D8%B9%D9%84%D9%89%20%D8%B5%D8%AF%D8%B1%D9%87",
+      "verifiedLink": true,
+      "hadithStrength": "chest_phrase_disputed_not_consensus_sahih"
+    },
+    {
+      "id": "dorar-wail-chest-supporting-review",
+      "category": "hadith_grading_record",
+      "work": "Dorar – Hadith-Enzyklopädie",
+      "hadithNumber": "Ibn Ḫuzaymah 479",
+      "narrator": "Wāʾil ibn Ḥuǧr",
+      "description": "Al-Albānī: Isnād schwach, Inhalt über andere Überlieferungswege gestützt; Muslim 401 ohne Zusatz 'auf der Brust'.",
+      "arabicFragment": "إسناده ضعيف لكنه صحيح من طرق أخرى بمعناه",
+      "url": "https://dorar.net/h/tSwzHW4d#:~:text=%D8%A5%D8%B3%D9%86%D8%A7%D8%AF%D9%87%20%D8%B6%D8%B9%D9%8A%D9%81%20%D9%84%D9%83%D9%86%D9%87%20%D8%B5%D8%AD%D9%8A%D8%AD%20%D9%85%D9%86%20%D8%B7%D8%B1%D9%82%20%D8%A3%D8%AE%D8%B1%D9%89%20%D8%A8%D9%85%D8%B9%D9%86%D8%A7%D9%87",
+      "verifiedLink": true,
+      "hadithStrength": "chain_weak_meaning_supported_by_other_routes"
+    },
+    {
+      "id": "dorar-wail-chest-shadh-review",
+      "category": "hadith_grading_record",
+      "work": "Dorar – Hadith-Enzyklopädie",
+      "hadithNumber": "Ibn Ḫuzaymah 479",
+      "narrator": "Wāʾil ibn Ḥuǧr",
+      "description": "Šuʿayb al-Arnāʾūṭ bewertet die Zusätze 'auf der Brust' als šāḏḏ.",
+      "arabicFragment": "زيادة: على صدره شاذة",
+      "url": "https://dorar.net/h/PhDwyW1U#:~:text=%D8%B2%D9%8A%D8%A7%D8%AF%D8%A9%3A%20%D8%B9%D9%84%D9%89%20%D8%B5%D8%AF%D8%B1%D9%87%20%D8%B4%D8%A7%D8%B0%D8%A9",
+      "verifiedLink": true,
+      "hadithStrength": "chest_addition_assessed_shadh"
     }
   ],
   "reviews": [
@@ -195,23 +232,32 @@
       "animationStatus": "locked"
     },
     {
-      "status": "awaiting_joint_review",
+      "status": "user_choice_recorded_awaiting_source_and_pose_review",
       "userApproved": false,
       "scholarReviewed": false,
       "approvedAssetIds": [],
       "id": "qiyam-hands-location",
       "step": "qiyam",
       "title": "Handhöhe im Qiyām",
-      "question": "Unter dem Nabel, über dem Nabel oder auf der Brust? Unterschiedliche Aḥmad-Überlieferungen sachlich prüfen und eine Lehrvariante festlegen.",
+      "question": "Für die Lernfassung ist die Handhaltung auf Brusthöhe gewählt. Exakten Bereich der Brust, Handgelenkkontakt und Hadith-Zusatz 'على صدره' hinsichtlich Überlieferungsqualität noch prüfen; andere Ahmad-Überlieferungen historisch sachlich dokumentieren.",
       "type": "hanbali_variants",
       "sourceIds": [
         "hanbali-hands-location",
-        "hanbali-hands-general"
+        "hanbali-hands-general",
+        "ibn-khuzaymah-wail-chest-479",
+        "dorar-wail-chest-supporting-review",
+        "dorar-wail-chest-shadh-review"
       ],
-      "decision": "offen",
-      "claimLevel": "source_explicit_variants",
+      "decision": "hand_placement_on_chest_selected_for_kids_learning_version",
+      "claimLevel": "direct_chest_text_located_grade_disputed",
       "animationStatus": "locked",
-      "needsJointApproval": true
+      "needsJointApproval": true,
+      "selectedPosition": "hands_folded_on_chest",
+      "selectedBy": "user_in_conversation",
+      "selectedDate": "2026-10-08",
+      "userSelectedTeachingVariant": true,
+      "underlyingHadithChestAdditionStatus": "disputed_grading_explicit_text",
+      "whyLocked": "Gewählte Variante ist keine abgeschlossene Isnad-/fiqhrechtliche Quellenabnahme oder Modell-Pose-Abnahme."
     },
     {
       "status": "awaiting_joint_review",
@@ -376,5 +422,6 @@
       "animationStatus": "locked",
       "needsJointApproval": true
     }
-  ]
+  ],
+  "reviewPolicyUpdate": "Eine durch den Nutzer gewählte Poseoption wird getrennt von wissenschaftlicher Bewertung, Modellabnahme und Kinder-Veröffentlichungsfreigabe gespeichert."
 }
