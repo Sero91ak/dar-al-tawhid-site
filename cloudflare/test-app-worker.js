@@ -2,8 +2,8 @@ import { ILM_SCIENCE_SYSTEM_INSTRUCTIONS, ILM_SCIENCE_POLICY_VERSION } from "./i
 import { composeIlmWithGemini } from "./ilm-gemini-bridge.js";
 import { gateHiddenSurfaces } from "./preview-gate.js";
 const KIDS_VERSION_BODY = JSON.stringify({
-  buildId: "kids-shell-v147-dua-reader1250",
-  label: "KIDS · V1.08.68"
+  buildId: "kids-shell-v148-sourcetext1251",
+  label: "KIDS · V1.08.69"
 });
 
 function kidsVersionResponse() {
@@ -529,7 +529,7 @@ export default {
         target.pathname = "/kids/start";
       }
       target.searchParams.delete("darsw");
-      target.searchParams.set("kv", "kids-shell-v147-dua-reader1250");
+      target.searchParams.set("kv", "kids-shell-v148-sourcetext1251");
       return Response.redirect(target.toString(), 301);
     }
 

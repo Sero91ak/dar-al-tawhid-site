@@ -224,11 +224,24 @@ function runKidsDesignGuard() {
         failed+=fail("Kids Duʿāʾ muss überprüfbare Quellen nur als lesbaren Text zeigen, ohne externen Nachweis-Button");
       }
       const kidsSw = fs.readFileSync(path.join(ROOT,"kids/sw.js"),"utf8");
-      for(const res of ["dua-hub-v1219.css?v=1250","dua-hub-v1219.js?v=1250"]){
+      for(const res of ["dua-hub-v1219.css?v="+swVersion,"dua-hub-v1219.js?v="+swVersion]){
         if(!kidsSw.includes(res))failed+=fail("Kids Duʿāʾ Reader nicht offline-cached: "+res);
       }
       if(!doc.includes("KIDS_DUA_READER_HERO_INTRO_V1250")){
         failed+=fail("Kids Duʿāʾ Lesehierarchie V1250 nicht dokumentiert");
+      }
+    }
+    if(Number(swVersion)>=1251){
+      if(!dockJs.includes("KIDS_NO_EXTERNAL_SOURCE_PROOF_ACTIONS_V1251") ||
+         !dockJs.includes("removeExternalSourceProofActions();")) {
+        failed+=fail("Kids externe Nachweis-/Quelle-Öffnen-Aktionen sind nicht global entfernt");
+      }
+      const pages=["kids/index.html","kids/start.html","kids/shell.html"];
+      for(const file of pages){
+        const content=fs.readFileSync(path.join(ROOT,file),"utf8");
+        if(content.includes(">Quelle öffnen</a>")||content.includes(">Nachweis öffnen</a>")) {
+          failed+=fail(file+": externer Quellennachweis-Link in Kinder-App");
+        }
       }
     }
     for (const file of ["kids/index.html","kids/start.html","kids/shell.html"]) {

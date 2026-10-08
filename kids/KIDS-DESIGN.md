@@ -174,3 +174,8 @@ Verbindlich für `/kids/` und alle künftigen Kids-Erweiterungen.
 - Qurʾān- und Ḥadīṯ-Quellen bleiben als **reiner, lesbarer Text** erhalten. Externe Nachweis-Schaltflächen werden in der Kinder-App **nicht generiert**; `sourceUrl` bleibt intern in den geprüften Datensätzen erhalten, keine externe Navigation.
 - Untere globale Tabs, Screenreader-Bezeichnungen, Lern-/Hör-Audio, bestehende Interaktionen und Bilder bleiben unverändert.
 - CSS/JS für den Duʿāʾ-Hub: `dua-hub-v1219.css?v=1250`, `dua-hub-v1219.js?v=1250`, Offline-Cache `v1250`.
+
+
+## Globale Quellenanzeige für Kinder — V1251
+
+In allen Kinderansichten bleibt der **konkrete Quellenbeleg als reiner, gut lesbarer Text** erhalten. Es werden keine Schaltflächen mit „Nachweis öffnen“, „Quelle öffnen“ oder „Beleg öffnen“ angeboten. Auch ältere Duʿāʾ-Dialoge und dynamisch hinzugefügte Bedienelemente dürfen diese externen Quellenaktionen nicht erneut einblenden. Die Audio-, Lern- und Navigationsfunktionen bleiben unverändert.

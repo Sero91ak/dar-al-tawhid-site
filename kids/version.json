@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v147-dua-reader1250",
-  "label": "KIDS · V1.08.68",
-  "releasedAt": "2026-10-08T12:55:00+02:00",
-  "note": "KIDS V1.08.68 · Duʿāʾ-Leseansicht: Titel auf verkleinertem Hero, Erklärung darunter, leichter Einzel-Lesekasten, gut lesbare Lautschrift/Arabisch/Deutsch, Quellen nur Text ohne Nachweis öffnen. Hör/Lernen/Bottom-Nav unverändert.",
+  "buildId": "kids-shell-v148-sourcetext1251",
+  "label": "KIDS · V1.08.69",
+  "releasedAt": "2026-10-08T13:04:00+02:00",
+  "note": "KIDS V1.08.69 · Duʿāʾ-Lesehierarchie V1250 bleibt erhalten; externe Nachweis-/Quelle-Öffnen-Schaltflächen in allen Kinderansichten entfernt, Quellenangaben bleiben sichtbar. Offline-Build V1251.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1250",
+    "serviceWorkerCache": "v1251",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -1218,13 +1218,14 @@
     "fullBleedDuaDetailHeader": "v1249",
     "globalExplanationAudioActions": "v1249",
     "duaReaderLayout": "v1250",
-    "duaHubCssVersion": "1250",
-    "duaHubJsVersion": "1250"
+    "duaHubCssVersion": "1251",
+    "duaHubJsVersion": "1251",
+    "globalSourceTextOnly": "v1251"
   },
-  "updatedAt": "2026-10-08T12:55:00+02:00",
-  "deployTrigger": "kids-dua-reading-hierarchy-v1250",
+  "updatedAt": "2026-10-08T13:04:00+02:00",
+  "deployTrigger": "kids-global-sourcetext-v1251",
   "globalDetailDock": {
-    "version": "v1250",
+    "version": "v1251",
     "enabled": true,
     "appliesTo": [
       "deen-detail",

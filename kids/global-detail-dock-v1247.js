@@ -72,6 +72,20 @@ function initLegacy(id){
  * The original listeners, disabled state and speech engines are preserved.
  * Future buttons with equivalent German labels adopt the same affordance.
  */
+/* KIDS_NO_EXTERNAL_SOURCE_PROOF_ACTIONS_V1251
+ * No external source-opening controls in the children's UI.
+ * Bibliographical source text remains visible in each learning detail.
+ * Exact action labels only; unrelated educational links remain available.
+ */
+function removeExternalSourceProofActions(){
+  for(const el of document.querySelectorAll("a,button")){
+    const label=String(el.getAttribute("aria-label")||el.textContent||"").replace(/\s+/g," ").trim();
+    if(/^(?:Nachweis öffnen|Quelle öffnen|Beleg öffnen|Originalnachweis öffnen)$/i.test(label)){
+      el.remove();
+    }
+  }
+}
+
 function upgradeExplanationActions(){
   const buttons=document.querySelectorAll("button");
   for(const btn of buttons){
@@ -107,6 +121,7 @@ function sync(){
    for(const c of S)initDetail(c);
    for(const id of LEGACY)initLegacy(id);
    upgradeExplanationActions();
+   removeExternalSourceProofActions();
  }finally{syncing=false;}
 }
 function queue(){
@@ -119,7 +134,7 @@ function start(){
  mo.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:["class","aria-hidden"]});
  document.addEventListener("click",queue,true);
  window.addEventListener("pageshow",queue);
- window.DARKidsDetailDock={ready:true,refresh:sync,version:"1249"};
+ window.DARKidsDetailDock={ready:true,refresh:sync,version:"1251"};
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
 })();
