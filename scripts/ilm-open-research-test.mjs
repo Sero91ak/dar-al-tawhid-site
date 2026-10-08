@@ -68,5 +68,10 @@ try {
  const ungrounded=await researchIlmWithGemini(req,env,"Was sagen die frühen Imāme zur Frage?","short");
  assert.equal(ungrounded.ok,false);
  assert.equal(ungrounded.reason,"ungrounded_search");
- console.log("PASS: Gemini research: approved primary page + citation; spoofed domain rejected; ungrounded refusal");
+ globalThis.fetch=async()=>Response.json({error:{status:"RESOURCE_EXHAUSTED"}},{status:429});
+ const quota=await researchIlmWithGemini(req,env,"Welche authentischen Quellen gibt es?","short");
+ assert.equal(quota.ok,false);
+ assert.equal(quota.limited,true);
+ assert.equal(quota.reason,"gemini_quota_exhausted");
+ console.log("PASS: Gemini research: primary page, guarded citations, domain rejection, and provider-429 abstention");
 } finally { globalThis.fetch=original; }
