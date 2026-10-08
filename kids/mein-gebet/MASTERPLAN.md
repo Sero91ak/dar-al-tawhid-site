@@ -8,6 +8,24 @@
 
 ---
 
+## 0. Hanbalitische Quellen- und Animationsfreigabe (verbindliche Nutzerentscheidung vom 08.10.2026)
+
+Für den gesamten Gebetstrainer ist **hanbalitischer Fiqh** als Lehrrahmen vereinbart. Vorrangige Prüfbasis sind Qurʾān und **authentische Sunnah**, darauf aufbauend Ṣaḥābah, Salaf und frühe hanbalitische Lehrwerke. Die Quellenqualität ist nicht schon deshalb ausreichend, weil eine Ansicht „hanbalitisch“ genannt wird. Bei mehreren Überlieferungen von Imām Aḥmad und unterschiedlichen Hadith-Bewertungen wird dies offen notiert, bevor eine bestimmte visuelle Variante festgelegt wird.
+
+**Pflichtdokumente (isoliert in diesem Feature):**
+- `content/hanbali-review.json`: 12 getrennte Positionen/Lehrentscheidungen, 11 direkte Quellennachweise; alle explizit **nicht freigegeben**.
+- `HANBALI-QUELLENPRUEFUNG.md`: arabische Fundstellen, konkrete Fragen, Prüf-Reihenfolge und Regeln für die gemeinsame Freigabe.
+
+**Keine religiöse Lehr-/Animationsfreigabe aus der bloßen UI-Vorschau ableiten.** `approvedToAnimate=false`, `approvedToRecord=false`, `approvedToTeach=false`; pro Stellung ein eigener Reviewstatus. Die vorhandenen Kinderlektionen sind noch reine Navigations-/Text-Entwürfe.
+
+**Zwei besonders relevante Fragen:** 
+1. Ibn Qudāmah, *al-Muġnī*, Masʾalah 662 beschreibt verschiedene Aḥmad-Überlieferungen zur Handposition im Qiyām (unter/über Nabel). Vor einem festen 3D-Bild vergleichen und gemeinsam entscheiden.
+2. *al-Muġnī*, Masʾalah 783 beschreibt hanbalitisch Frauenhaltungen beim Rukūʿ/Suǧūd/Sitzen. Deshalb muss eine etwaige Differenz für die **Mädchenfigur**, auch unter Berücksichtigung ihres Alters und der stärksten authentischen Belege, eigens geprüft werden. Keine unreflektierte Kopie der Jungenbewegung und keine unbelegte Differenz.
+
+**Erster Freigabeweg:** Qiyām/Handposition → Rukūʿ als Probe-Pose → Suǧūd-Kontaktstellen vs. Absenkreihenfolge → Mädchen-spezifische Fragen → übrige Stationen. Nach jedem Prüfentscheid gesonderte Nutzerfreigabe; keine Sammel-Freigabe. Die Bedienoberfläche bleibt im eigenen Draft-Branch, ohne neue Hauptkapsel oder Tab und ohne Live-Änderungen.
+
+---
+
 ## 1. Gesperrte Figurenvorlagen (visuelle Identität)
 
 Die vom Auftraggeber gelieferten Bilder sind die alleinigen **Designreferenzen**. Sie zeigen unterschiedliche Ansichten, sind aber **keine riggten/animierbaren 3D-Modelle**. Erst ein echtes Mesh mit Skelett, Gelenken und Animationsclips kann im 3D-Gebetstrainer benutzt werden.
