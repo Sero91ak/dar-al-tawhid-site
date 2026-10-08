@@ -91,6 +91,19 @@ for(const [id,url] of Object.entries(checkedDorarLinks)){
  assert.equal(sunnah.findSunnahByIdFromCorpus("kb:sunnah:"+id,"9–10","boy",sunnahCorpus).media.sourceUrl,url);
 }
 assert.equal(sunnahCorpus.items.some(row=>row.sourceUrl&&!/^https:\/\/dorar\.net\//.test(row.sourceUrl)),false,"do not allow unapproved source domains");
+for(const id of Object.keys(checkedDorarLinks)){
+ const row=sunnahCorpus.items.find(item=>item.id===id);
+ assert.ok(/[\u0621-\u064a]/.test(row.arabicExcerpt));
+ assert.ok(row.arabicExcerpt.trim().split(/\s+/).length<=25,"copyright-safe Arabic excerpt limit");
+ assert.equal(row.arabicExcerptVerifiedUrl,row.sourceUrl);
+ const card=sunnah.findSunnahByIdFromCorpus("kb:sunnah:"+id,"9–10","girl",sunnahCorpus);
+ assert.equal(card.media.arabicExcerpt,row.arabicExcerpt);
+ assert.ok(!card.text.includes(row.arabicExcerpt),"Arabic original must be shown only in sources, not repeated");
+}
+const tamperedArabic={...sunnahCorpus,items:sunnahCorpus.items.map(row=>row.id==="had-0020-truth"?{...row,arabicExcerptVerifiedUrl:"https://example.org/fake"}:row)};
+assert.equal(sunnah.findSunnahFromCorpus("Hadith 6094","6–8","boy",tamperedArabic),null,"a forged Arabic citation must fail closed");
+assert.match(frontSource,/Arabischer Originalausschnitt/,"child UI distinguishes excerpt from complete hadith");
+
 
 assert.match(truth.text,/deutsche Übertragung/);
 assert.equal(sunnah.findSunnahByIdFromCorpus(truth.id,"6–8","girl",sunnahCorpus).text,truth.text);
