@@ -30,6 +30,16 @@ Bei jeder Aufgabe:
 20. **Nur eine App genannt** = nur diese Spur. **Mehrere Erwachsenen-Apps in einem Satz** = nacheinander eigene Commits: Test → Besucher-Web/Desktop → iOS → Apple TV. Nie `kids/` mit `index.html` / `apple-tv/` / `test/` mischen. CI (`scripts/app-lane-guard.js`) blockiert Misch-Commits.
 21. Kids (`kids/**`) nur über **Deploy Kids App Live**. Besucher über **Deploy Besucher-App**. Dar Test über Test-Deploy. Apple TV über den Apple-TV-Weg. Ein hängender Job einer Spur darf andere schon gepushte Commits nicht verwerfen.
 
+## Native App-Dateien: Pflichtmeldung an Cursor und ChatGPT (Android / Apple)
+
+- Nach **jeder** Änderung an `android/**` oder `ios/DarAlTawhid/**` ausdrücklich mitteilen: **„Neue native App-Datei erforderlich“**, betroffene Plattform, und zugehörigen GitHub-Actions-Link bzw. Buildstatus. Auch dann melden, wenn die Änderung durch Cursor vorgenommen wurde.
+- `android/app/**` = Erwachsenen-Smartphone-/Tablet-APK; `android/tv/**` = **separate** Android-TV-/Google-TV-APK; `ios/DarAlTawhid/**` = iPhone-/iPad-Build. Änderungen an gemeinsamen nativen `android/`-Dateien können beide Android-Ausgaben betreffen.
+- Bloße `index.html`, `assets/**`, `content/**`, `apple-tv/**`-Katalogänderungen benötigen normalerweise **keine neue APK/IPA**, solange keine native API, Berechtigung, App-Struktur oder TV-Funktion ergänzt wird. Immer ausdrücklich „Web-Update, keine neue App-Installation nötig“ bzw. Ausnahme benennen.
+- Die GitHub-Action `DAR · Ein Push – Apple und Android` prüft betroffene native Plattformen und startet den Build. Die erfolgreiche **Debug-APK ist keine veröffentlichungsfähige Release-APK**. Für öffentliche Website-Distribution ausschließlich verifizierte, dauerhaft signierte Release-APKs verwenden.
+- Website-APK-Links erst nach Prüfung freischalten; Android TV benötigt eine eigene TV-APK. Kids (`android/kids/**`) bleibt **intern im Test**, ist keine öffentliche Erwachsenen-App und erhält niemals einen öffentlichen Kids-Download auf der DAR-Website ohne ausdrückliche Freigabe.
+- Im Abschluss jeder nativen Änderung: geänderte Dateien, „APK/IPA nötig: ja/nein“, aktueller Build-Lauf, signierter Stand und „Website live: ja/nein“ in verständlichem Deutsch nennen. Keine ungeprüfte automatische Veröffentlichung behaupten.
+- Die bestehende **Push-System-Sperre** bleibt auch bei Native-Builds vollständig gültig. Keine SDK-, Berechtigungs- oder OneSignal-Änderung als Nebenarbeit.
+  
 ## Quiz-Fragen (Sonderregel – immer live)
 
 12. **Neue geprüfte Quiz-Fragen** werden **ohne Rückfrage direkt live** in die Besucher-App übernommen: Batch erzeugen, in `data/quiz-questions.json` und `data/quiz-questions-test.json` einpflegen, auf `main` mergen und deployen. Keine Freigabe mit „push live“ abwarten.
