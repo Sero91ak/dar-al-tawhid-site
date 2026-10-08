@@ -791,8 +791,8 @@
       var referenced = /\b(das|dazu|daruber|darauf|diese|dieser|diesen|davon|dort|genannten|vorigen|letzten|er|ihn)\b/.test(q);
       var evidence = /^(?:(?:und |noch )?(?:gib|zeige|zeig|nenne|finde|suche) (?:mir )?(?:noch |weitere |andere |zwei |drei |vier |funf |5 |2 |3 )?(?:beweise|belege|quellen|uberlieferungen|aussagen|meinungen|fundstellen)(?: dazu)?|(?:quelle|belege|beweise|weitere quellen|mehr quellen|weitere belege) dazu)$/i.test(q);
       var shortRef = /^(?:(?:und |aber |doch )?(?:wer|welcher|welche|welchen|warum|wieso|weshalb|wo|wie) (?:hat (?:das|er)|sagte (?:das|er)|stehen (?:die|diese)|ist (?:das|dieser)|gibt es (?:daruber|dazu)|war(?:um)? (?:dieser|diese)|(?:sahabi|tabiin|salaf) (?:hat|sagte)))/i.test(q);
-      return evidence || (referenced && (shortRef ||
-        /^(?:(?:und )?was (?:ist|bedeutet) (?:damit|dazu|das)|(?:warum|wieso) (?:gab es|gibt es) (?:daruber |dazu |diesen |einen )?(?:ikhtilaf|streit|unterschied))/i.test(q))) ||
+      var shortReference = /^(?:(?:und )?was (?:ist|bedeutet) (?:damit|dazu)(?: |$)|(?:und )?was ist das$|(?:warum|wieso) (?:gab es|gibt es) (?:daruber |dazu |diesen |einen )?(?:ikhtilaf|streit|unterschied)|(?:welche|welcher|welchen|wie viele) (?:belege|beweise|quellen|aussagen|uberlieferungen|meinungen|gelehrten|gelehrte) (?:gibt es )?(?:dazu|daruber)(?: [0-9]+)?$)/i.test(q);
+      return evidence || (referenced && (shortRef || shortReference)) ||
         /^(?:warum (?:gab es |gibt es )?(?:diesen |einen )?ikhtilaf|welcher (?:sahabi|tabiin|gelehrte) (?:sagte|hat)|noch mehr|weiter|mehr dazu)$/i.test(q);
     }
     function ilmRecentTopic(value, conversation) {
