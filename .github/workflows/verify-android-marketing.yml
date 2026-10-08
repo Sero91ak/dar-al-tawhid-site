@@ -8,6 +8,7 @@ on:
       - "android/tools/**"
       - "links/index.html"
       - "download/**"
+      - "cloudflare/site-router.js"
       - ".github/workflows/android-website-release.yml"
       - ".github/workflows/verify-android-marketing.yml"
   pull_request:
@@ -15,6 +16,7 @@ on:
       - "android/tools/**"
       - "links/index.html"
       - "download/**"
+      - "cloudflare/site-router.js"
       - ".github/workflows/android-website-release.yml"
       - ".github/workflows/verify-android-marketing.yml"
   workflow_dispatch:
@@ -31,14 +33,17 @@ jobs:
           sparse-checkout: |
             android/tools
             android/tv
+            cloudflare/site-router.js
             links
             download
             .github/workflows/android-website-release.yml
           sparse-checkout-cone-mode: true
       - name: Website-Sicherheitsprüfung
         run: node download/validate-release.cjs
-      - name: Release-JavaScript Syntax prüfen
-        run: node --check download/official-release-links.js
+      - name: Release-JavaScript und Cloudflare-Website-Router Syntax prüfen
+        run: |
+          node --check download/official-release-links.js
+          node --check cloudflare/site-router.js
       - name: Neueste Android-Version, Release-Datum und SHA256 testen
         run: node download/test-release-switchboard.cjs
       - name: Marketing-HTML Inline-JavaScript prüfen
