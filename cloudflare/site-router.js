@@ -4,9 +4,14 @@ function isNativeAppRequest(ua) {
   return /DarAlTawhid-iOS|DarAlTawhidOfficialIOS|DarAlTawhidAndroid/i.test(String(ua || ""));
 }
 
+function isAndroidBrowserRequest(ua) {
+  // Android mobile browsers use the visitor web app; native shells stay separate.
+  return /\bAndroid\b/i.test(String(ua || "")) && !isNativeAppRequest(ua);
+}
+
 function wantsPublicWebsite(request) {
   const ua = String(request.headers.get("User-Agent") || "");
-  return !isNativeAppRequest(ua);
+  return !isNativeAppRequest(ua) && !isAndroidBrowserRequest(ua);
 }
 
 function desktopHeaders(assetResponse) {
@@ -183,7 +188,7 @@ function kidsHeaders(assetResponse) {
   return headers;
 }
 
-function browserManifestResponse(request) {
+function browserManifestResponse(request, androidBrowser = false) {
   const manifest = {
     $schema: "https://json.schemastore.org/web-manifest-combined.json",
     name: "DĀR AL TAWḤĪD Website",
@@ -202,12 +207,21 @@ function browserManifestResponse(request) {
       { src: "/icon-512x512.png", sizes: "512x512", type: "image/png", purpose: "any" }
     ]
   };
+  if (androidBrowser) {
+    manifest.name = "DĀR AL TAWḤĪD";
+    manifest.display = "standalone";
+    manifest.display_override = ["standalone"];
+    manifest.theme_color = "#050706";
+    manifest.background_color = "#050706";
+    manifest.description = "DĀR AL TAWḤĪD – installierbare Android-Web-App mit Qurʾān, Sunnah, Āṯār, Duʿāʾ und Bibliothek.";
+  }
   const headers = new Headers({
+    "Vary": "User-Agent",
     "Content-Type": "application/manifest+json; charset=utf-8",
     "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
     "CDN-Cache-Control": "no-store",
     "Cloudflare-CDN-Cache-Control": "no-store",
-    "X-Dar-Surface": "public-website-manifest"
+    "X-Dar-Surface": androidBrowser ? "android-pwa-manifest" : "public-website-manifest"
   });
   return new Response(request.method === "HEAD" ? null : JSON.stringify(manifest, null, 2), { status: 200, headers });
 }
@@ -688,6 +702,7 @@ export default {
     const isRoot = url.pathname === "/" || url.pathname === "/index.html";
     const ua = String(request.headers.get("User-Agent") || "");
     const nativeApp = isNativeAppRequest(ua);
+    const androidBrowser = isAndroidBrowserRequest(ua);
     const kidsPath = isKidsPath(url.pathname);
     const kidsRecitationGrade =
       url.pathname === "/kids/api/recitation/grade" ||
@@ -697,7 +712,7 @@ export default {
     const legacyVoicePath = url.pathname === "/test/voice-studio" || url.pathname.startsWith("/test/voice-studio/");
 
     if ((request.method === "GET" || request.method === "HEAD") && url.pathname === "/manifest.json" && !nativeApp) {
-      return browserManifestResponse(request);
+      return browserManifestResponse(request, androidBrowser);
     }
 
     if ((request.method === "GET" || request.method === "HEAD") && legacyVoicePath) {
@@ -895,9 +910,10 @@ export default {
       }
     }
 
-    if ((request.method === "GET" || request.method === "HEAD") && isRoot && nativeApp) {
+    if ((request.method === "GET" || request.method === "HEAD") && isRoot && (nativeApp || androidBrowser)) {
       const assetResponse = await env.ASSETS.fetch(request);
       const headers = iosNativeHeaders(assetResponse);
+      if (androidBrowser) headers.set("X-Dar-Surface", "android-pwa");
       if (request.method === "HEAD") {
         return new Response(null, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
       }

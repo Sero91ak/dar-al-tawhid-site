@@ -45,7 +45,7 @@
       window.DAR_ANDROID_NATIVE_APP === true;
     var __darPath = String(location.pathname || "");
     var __darPublicRoot = (__darPath === "/" || __darPath === "/index.html");
-    if (!__darNative && __darPublicRoot) {
+    if (!__darNative && !/\bAndroid\b/i.test(__darUa) && __darPublicRoot) {
       var __darParams = new URLSearchParams(location.search || "");
       ["homescreen","app","mobile","source","darsw"].forEach(function (k) { __darParams.delete(k); });
       if (!__darParams.get("page")) __darParams.set("page", "start");
