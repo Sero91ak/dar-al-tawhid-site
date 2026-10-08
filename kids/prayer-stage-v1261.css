@@ -171,3 +171,164 @@
 .kids-salah-dialog details{margin:17px 0 4px;border-top:1px solid rgba(255,255,255,.15);padding-top:10px}
 .kids-salah-dialog summary{cursor:pointer;font-size:14px}
 .kids-salah-dialog .kids-salah-err{min-height:20px;color:#ffdcbf;font-size:12px}
+
+/* V1262 · Cinematic legible dual-time stage — current prayer and next prayer. */
+#view-today .kids-salah-stage{
+  padding:18px clamp(13px,3.5vw,24px) 14px;
+  background:radial-gradient(ellipse at 12% 8%,rgba(197,162,89,.13),transparent 52%),
+    radial-gradient(ellipse at 91% 94%,rgba(62,155,166,.12),transparent 48%),
+    linear-gradient(142deg,#092535 0%,#123445 48%,#071e30 100%);
+}
+#view-today .kids-salah-heading{margin:10px auto 15px;font-size:clamp(29px,7.6vw,47px);letter-spacing:-.025em}
+#view-today .kids-salah-time-pair{
+ display:grid;grid-template-columns:minmax(0,.82fr) 1px minmax(0,1.18fr);
+ align-items:center;gap:clamp(10px,3.2vw,22px);width:100%;max-width:600px;
+ margin:0 auto;text-align:center;position:relative;z-index:2;
+}
+#view-today .kids-salah-now,#view-today .kids-salah-upcoming{
+ display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-width:0;
+}
+#view-today .kids-salah-time-divider{
+ align-self:stretch;margin:13px 0 6px;min-height:72px;
+ background:linear-gradient(180deg,transparent,rgba(245,222,177,.34) 25%,rgba(245,222,177,.2) 68%,transparent);
+}
+#view-today .kids-salah-pair-label{
+ display:block;font:700 clamp(10px,2.6vw,12px)/1.2 "Fredoka",system-ui,sans-serif;
+ letter-spacing:.12em;color:rgba(253,235,195,.76);white-space:nowrap;
+}
+#view-today .kids-salah-now strong{
+ color:#e8f6f1;font:650 clamp(17px,4.5vw,25px)/1.22 "Fredoka",system-ui,sans-serif;
+ white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;letter-spacing:0;
+}
+#view-today .kids-salah-now time{
+ color:#dcece8;font:650 clamp(31px,9.1vw,54px)/1.22 "Fredoka","SF Pro Rounded",system-ui,sans-serif;
+ font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1;letter-spacing:-.043em;
+ text-shadow:0 0 12px rgba(160,221,216,.14);white-space:nowrap;
+}
+#view-today .kids-salah-name{
+ margin:2px 0 0;min-height:0;color:#abefdc;
+ font-size:clamp(18px,4.9vw,28px);line-height:1.23;white-space:nowrap;
+}
+#view-today .kids-salah-clock{
+ margin:-1px auto 0;font:750 clamp(38px,11.8vw,76px)/1.18 "Fredoka","SF Pro Rounded",system-ui,sans-serif;
+ font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1;letter-spacing:-.053em;
+ color:#ffe7ac;white-space:nowrap;padding-right:0;
+ text-shadow:0 0 26px rgba(255,222,167,.28);
+}
+#view-today .kids-salah-next{
+ margin:12px auto 1px;font-size:clamp(13px,3.45vw,16px);
+ letter-spacing:.015em;gap:8px;
+}
+#view-today .kids-salah-countdown{font-size:clamp(14px,3.8vw,18px);letter-spacing:.04em}
+#view-today .kids-salah-progress{margin:13px 0 14px}
+#view-today .kids-salah-open-day{
+ position:relative;z-index:2;display:flex;align-items:center;justify-content:center;gap:8px;
+ width:100%;min-height:44px;margin:15px auto 0;padding:8px 12px;
+ border:1px solid rgba(247,219,153,.28);border-radius:15px;
+ background:linear-gradient(92deg,rgba(222,177,102,.10),rgba(127,192,189,.07));
+ color:#ffecbb;cursor:pointer;font:650 clamp(13px,3.55vw,15px)/1.2 "Fredoka",system-ui,sans-serif;
+}
+#view-today .kids-salah-open-day span{font-size:21px;line-height:1}
+#view-today .kids-salah-open-day:active{background:rgba(246,220,162,.17)}
+#view-today .kids-salah-status{margin:9px 0 0}
+#view-today .kids-salah-motion{
+ position:absolute;inset:0;width:100%;height:100%;z-index:-1;
+ object-fit:cover;object-position:center;
+ opacity:.32;pointer-events:none;filter:saturate(.75) brightness(.68);
+}
+#view-today .kids-salah-stage:has(.kids-salah-motion)::before{
+ z-index:0;background:linear-gradient(180deg,rgba(3,19,30,.42),rgba(6,22,35,.57)),
+ linear-gradient(112deg,transparent 18%,rgba(255,248,211,.055) 37%,transparent 57%);
+}
+#view-today .kids-salah-stage:has(.kids-salah-motion) > :not(.kids-salah-motion){position:relative;z-index:2}
+.app[data-gender="girl"] #view-today .kids-salah-stage{
+ background:radial-gradient(ellipse at 17% 11%,rgba(239,168,203,.12),transparent 49%),
+ linear-gradient(141deg,#281b35,#342641 51%,#181d30);
+}
+.app[data-gender="girl"] #view-today .kids-salah-now time{color:#eee2f3}
+.app[data-gender="girl"] #view-today .kids-salah-clock{color:#ffe1eb}
+.app[data-gender="girl"] #view-today .kids-salah-open-day{
+ background:linear-gradient(92deg,rgba(247,188,204,.10),rgba(174,137,213,.08));
+ border-color:rgba(253,201,221,.28);color:#ffe1ed;
+}
+@media(max-width:370px){
+ #view-today .kids-salah-time-pair{gap:8px}
+ #view-today .kids-salah-now time{font-size:31px}
+ #view-today .kids-salah-clock{font-size:37px}
+ #view-today .kids-salah-now strong{font-size:16px}
+}
+@media(prefers-reduced-motion:reduce){
+ #view-today .kids-salah-motion{display:none!important}
+}
+
+/* Dedicated daily prayer timetable subpage, opened from home. */
+.kids-salah-day[hidden]{display:none!important}
+.kids-salah-day{
+ position:fixed;inset:0;z-index:100150;
+ overflow:auto;overscroll-behavior:contain;
+ padding:max(19px,env(safe-area-inset-top)) 15px max(110px,env(safe-area-inset-bottom));
+ background:radial-gradient(ellipse at 80% 3%,rgba(85,174,171,.19),transparent 48%),
+ linear-gradient(160deg,#082433,#0a2e42 52%,#071d2f 100%);
+ color:#fff3da;font-family:"Fredoka","SF Pro Rounded",system-ui,sans-serif;
+}
+.kids-salah-day-body{max-width:720px;margin:0 auto}
+.kids-salah-day-header{display:flex;align-items:center;gap:14px;border-bottom:1px solid rgba(234,209,156,.24);
+ padding:7px 0 17px;margin-bottom:18px}
+.kids-salah-day-back{
+ flex:none;display:grid;place-items:center;width:48px;height:48px;border-radius:17px;
+ border:1px solid rgba(251,223,161,.25);background:rgba(255,255,255,.06);
+ color:#ffe4aa;font-size:29px;cursor:pointer;
+}
+.kids-salah-day-brand{font-size:11px;font-weight:650;color:#ebc98f;letter-spacing:.13em}
+.kids-salah-day h2{
+ font-size:clamp(31px,8vw,45px);line-height:1.12;margin:7px 0 9px;color:#ffedc4;
+ letter-spacing:-.025em;
+}
+.kids-salah-day h2 em{font-style:normal;color:#f4d08e}
+.kids-salah-day-subtitle{font-size:clamp(15px,3.7vw,18px);line-height:1.4;color:rgba(251,244,227,.8);margin:0 0 18px}
+.kids-salah-day-place{
+ display:flex;justify-content:space-between;align-items:center;gap:10px;
+ padding:11px 15px;border-radius:16px;background:rgba(255,255,255,.07);
+ border:1px solid rgba(239,214,168,.17);margin:0 0 15px;
+}
+.kids-salah-day-place button{
+ flex:none;min-height:40px;border:1px solid rgba(247,219,154,.32);color:#ffe6b5;
+ border-radius:13px;background:rgba(255,255,255,.04);
+ padding:8px 12px;font:600 13px "Fredoka",system-ui;cursor:pointer;
+}
+.kids-salah-day-list{display:grid;gap:12px;margin:9px 0 20px}
+.kids-salah-day-item{
+ min-height:95px;display:flex;align-items:center;justify-content:space-between;
+ border-radius:22px;padding:16px 20px;gap:14px;
+ background:linear-gradient(110deg,rgba(255,255,255,.078),rgba(255,255,255,.035));
+ border:1px solid rgba(249,220,167,.13);
+}
+.kids-salah-day-item.is-current{
+ background:linear-gradient(100deg,rgba(230,195,119,.21),rgba(118,190,176,.09));
+ border-color:rgba(244,208,127,.42);
+ box-shadow:inset 4px 0 0 #edcb83;
+}
+.kids-salah-day-item.is-next{
+ background:linear-gradient(100deg,rgba(106,197,182,.14),rgba(255,221,135,.1));
+ border-color:rgba(164,217,206,.32);
+}
+.kids-salah-day-item-name{display:flex;flex-direction:column;gap:4px;min-width:0}
+.kids-salah-day-item-name strong{font-size:clamp(23px,5.7vw,31px);line-height:1.1;font-weight:700}
+.kids-salah-day-item-name small{font-size:12px;color:rgba(255,236,202,.7);letter-spacing:.04em}
+.kids-salah-day-item time{
+ font-size:clamp(32px,9vw,48px);font-weight:700;
+ color:#ffe5aa;letter-spacing:-.04em;white-space:nowrap;font-variant-numeric:tabular-nums;
+}
+.kids-salah-day-notice{
+ font-size:13px;line-height:1.5;margin-top:14px;color:rgba(255,240,218,.70);
+}
+body.kids-salah-day-open{overflow:hidden!important}
+.app[data-gender="girl"] ~ .kids-salah-day,.kids-salah-day[data-gender="girl"]{
+ background:radial-gradient(ellipse at 85% 7%,rgba(219,157,202,.17),transparent 48%),
+ linear-gradient(155deg,#261c33,#392744 60%,#201e34);
+}
+.kids-salah-day[data-gender="girl"] .kids-salah-day-item.is-current{
+ background:linear-gradient(100deg,rgba(237,160,205,.20),rgba(207,189,238,.07));
+ border-color:rgba(244,190,215,.42);box-shadow:inset 4px 0 0 #f1bfd5;
+}
+.kids-salah-day[data-gender="girl"] .kids-salah-day-item time{color:#ffe0ed}
