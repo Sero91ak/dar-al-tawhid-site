@@ -951,3 +951,157 @@ body.kids-salah-day-open{overflow:hidden!important}
 @media(prefers-reduced-motion:reduce){
  #view-today .kids-salah-beat,.kids-salah-day-hero::before,.kids-salah-day-spark{animation:none!important}
 }
+
+
+/* KIDS_SALAH_V1267: compact responsive clock typography, no time cards or clipping. */
+#view-today .kids-salah-stage{
+  box-sizing:border-box!important;
+  max-width:100%!important;
+  overflow:hidden;
+  padding:11px clamp(12px,3.4vw,18px) 12px!important;
+}
+#view-today .kids-salah-stage *,
+#view-today .kids-salah-stage *::before,
+#view-today .kids-salah-stage *::after{box-sizing:border-box}
+#view-today .kids-salah-heading{
+  font-size:clamp(24px,6.7vw,36px)!important;
+  margin:5px auto 7px!important;
+}
+#view-today .kids-salah-time-pair{
+  display:grid!important;
+  width:100%!important;
+  max-width:470px!important;
+  grid-template-columns:minmax(0,1fr) 1px minmax(0,1fr)!important;
+  gap:clamp(6px,2.2vw,14px)!important;
+  align-items:center!important;
+}
+#view-today .kids-salah-time-pair > *{min-width:0!important}
+#view-today .kids-salah-now,
+#view-today .kids-salah-upcoming{
+  min-width:0!important;
+  width:100%!important;
+  overflow:visible!important;
+  padding:0!important;
+}
+#view-today .kids-salah-now strong,
+#view-today .kids-salah-name{
+  display:block!important;
+  width:100%!important;
+  font-size:clamp(14px,4.1vw,19px)!important;
+  line-height:1.25!important;
+  margin:2px 0 0!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+#view-today .kids-salah-now time,
+#view-today .kids-salah-clock{
+  box-sizing:border-box!important;
+  display:block!important;
+  min-width:0!important;
+  width:100%!important;
+  padding:1px 0 3px!important;
+  font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif!important;
+  font-size:clamp(25px,7.35vw,42px)!important;
+  font-weight:700!important;
+  line-height:1.26!important;
+  letter-spacing:-.012em!important;
+  font-variant-numeric:tabular-nums!important;
+  font-feature-settings:"tnum" 1!important;
+  color:#fce5b3!important;
+  background:transparent!important;
+  background-image:none!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  filter:none!important;
+  -webkit-filter:none!important;
+  transform:none!important;
+  animation:none!important;
+  white-space:nowrap!important;
+  overflow:visible!important;
+  -webkit-text-fill-color:currentColor!important;
+}
+#view-today .kids-salah-now time{color:#d9f4ec!important}
+#view-today .kids-salah-next{
+  width:max-content!important;
+  max-width:100%!important;
+  min-height:31px!important;
+  margin:6px auto 8px!important;
+  padding:5px 11px!important;
+  gap:6px!important;
+  border-radius:999px!important;
+}
+#view-today .kids-salah-progress{display:none!important}
+#view-today .kids-salah-five{
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  padding-top:7px!important;
+}
+#view-today .kids-salah-slot{
+  min-width:0!important;
+  background:transparent!important;
+  border:none!important;
+  box-shadow:none!important;
+  outline:0!important;
+  transform:none!important;
+  pointer-events:none!important;
+}
+#view-today .kids-salah-slot .kids-salah-prayer,
+#view-today .kids-salah-slot time{
+  font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif!important;
+  font-size:clamp(10px,2.85vw,13px)!important;
+  font-variant-numeric:tabular-nums!important;
+  letter-spacing:-.014em!important;
+  white-space:nowrap!important;
+  overflow:visible!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+#view-today .kids-salah-slot[aria-current="true"] .kids-salah-dot{
+  box-shadow:0 0 10px rgba(245,219,158,.5)!important;
+}
+#view-today .kids-salah-open-day{
+  min-height:41px!important;
+  margin-top:8px!important;
+  padding:7px 11px!important;
+}
+.kids-salah-day-item{
+  box-sizing:border-box!important;
+  width:100%!important;
+  min-width:0!important;
+  overflow:visible!important;
+}
+.kids-salah-day-item-name{min-width:0!important;overflow:hidden!important}
+.kids-salah-day-item-name strong,
+.kids-salah-day-item-name small{
+  display:block!important;overflow:hidden!important;
+  text-overflow:ellipsis!important;white-space:nowrap!important;
+}
+.kids-salah-day-item time{
+  flex:0 0 auto!important;
+  box-sizing:border-box!important;
+  font-size:clamp(21px,6vw,30px)!important;
+  padding:2px 0!important;
+  background:transparent!important;
+  border:0!important;
+  filter:none!important;
+  overflow:visible!important;
+  white-space:nowrap!important;
+}
+@media(max-width:360px){
+ #view-today .kids-salah-stage{padding-inline:10px!important}
+ #view-today .kids-salah-time-pair{gap:5px!important}
+ #view-today .kids-salah-now time,
+ #view-today .kids-salah-clock{font-size:clamp(23px,7.4vw,28px)!important}
+ #view-today .kids-salah-slot .kids-salah-prayer,
+ #view-today .kids-salah-slot time{font-size:clamp(9.5px,2.75vw,10.5px)!important}
+ .kids-salah-day-item{gap:7px!important;padding:10px 9px!important}
+ .kids-salah-day-item time{font-size:clamp(20px,6vw,23px)!important}
+}
+.app[data-gender="girl"] #view-today .kids-salah-now time{color:#f5dff7!important}
+.app[data-gender="girl"] #view-today .kids-salah-clock{color:#ffe0ec!important}
+@media(prefers-reduced-motion:reduce){
+ #view-today .kids-salah-beat{animation:none!important}
+}
