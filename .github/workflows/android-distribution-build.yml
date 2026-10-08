@@ -75,7 +75,7 @@ jobs:
         run: ./gradlew --no-daemon :kids:assembleDebug
 
       - name: Kids APK als internes Test-Artefakt
-        if: github.ref_name == 'feature/android-kids-2026-10-08'
+        if: github.ref_name == 'feature/android-kids-2026-10-08' || github.ref_name == 'feature/android-tv-2026-10-08' || github.ref_name == 'feature/android-release-automation-2026-10-08' || github.ref_name == 'main'
         uses: actions/upload-artifact@v4
         with:
           name: dar-al-tawhid-kids-android-debug
