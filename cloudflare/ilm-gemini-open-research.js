@@ -3,6 +3,7 @@
    become model evidence. Search snippets, AI citations and redirects alone do
    NOT certify an attribution or a hadith grading. */
 import { composeIlmWithGemini } from "./ilm-gemini-bridge.js";
+import { composeIlmWithGroqFree } from "./ilm-groq-free-bridge.js";
 import { ILM_ALLOWED_SOURCE_DOMAINS } from "./ilm-science-policy.js";
 
 const MODEL = "gemini-2.5-flash-lite"; // Google Search grounding has a limited Free Tier
@@ -206,10 +207,20 @@ export async function researchIlmWithGemini(request,env,question,mode) {
     verification_status:"verified",authenticity:"not independently graded",
     excerpt:s.excerpt
   }));
-  const composed = await composeIlmWithGemini(request,env,question,modelSources,mode);
-  if (!composed.ok) return {ok:false,reason:composed.reason||"evidence_compose_unavailable",limited:composed.limited||false};
-  if (/kein(?:en)? ausreichenden? (?:beleg|nachweis)|keine ausreichend|nicht belegbar|nicht beantworten/i.test(composed.answer)) {
+  const gemini = await composeIlmWithGemini(request,env,question,modelSources,mode);
+  // Discovery must come from Google's grounded search and allowlisted source
+  // pages. Groq may ONLY compose from those already-fetched texts, and only
+  // if its strictly opt-in Free Plan gate and rate limits are active.
+  const composed = gemini.ok ? gemini
+    : await composeIlmWithGroqFree(request,env,question,modelSources,mode);
+  if (!composed.ok) return {
+    ok:false,reason:gemini.reason||composed.reason||"evidence_compose_unavailable",
+    limited:!!gemini.limited||!!composed.limited
+  };
+  if (/kein(?:en)? ausreichenden? (?:beleg|nachweis)|keine ausreichend|nicht belegbar|nicht beantworten/i.test(composed.answer))
     return {ok:false,reason:"insufficient_original_evidence"};
-  }
-  return {ok:true,answer:composed.answer,sources:linkedSources,provider:"gemini",researchMode:"verified_primary_pages",searched:true};
+  return {
+    ok:true,answer:composed.answer,sources:linkedSources,
+    provider:composed.provider,researchMode:"verified_primary_pages",searched:true
+  };
 }
