@@ -9,6 +9,7 @@ const STORE="darkids_kids_prayer_place_v1";
 const CACHE="darkids_kids_prayer_days_v1";
 const NAMES={fajr:"Fajr",dhuhr:"Dhuhr",asr:"ʿAṣr",maghrib:"Maghrib",isha:"ʿIshāʾ"};
 const ORDER=["fajr","dhuhr","asr","maghrib","isha"];
+const DAY_LABELS={fajr:"Morgengebet",dhuhr:"Mittagsgebet",asr:"Nachmittagsgebet",maghrib:"Abendgebet",isha:"Nachtgebet"};
 const escapeHtml=value=>String(value==null?"":value).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 let place=null,days={},lastDay="",fetchTicket=0,lastFetch=0,lastAttempt=0;
 try{place=JSON.parse(localStorage.getItem(STORE)||"null");}catch(_){}
@@ -31,8 +32,8 @@ stage.innerHTML=
   '<div class="kids-salah-upcoming"><span class="kids-salah-pair-label">ALS NÄCHSTES</span>'+
   '<span class="kids-salah-name" id="kidsSalahName">Dein nächstes Gebet</span>'+
   '<time class="kids-salah-clock" id="kidsSalahClock">--:--</time></div></div>'+
-  '<div class="kids-salah-next"><i class="kids-salah-beat" aria-hidden="true"></i>'+
-  '<span id="kidsSalahNextText">Standort einstellen</span><strong class="kids-salah-countdown" id="kidsSalahCountdown"></strong></div>'+
+  '<div class="kids-salah-next" aria-label="Nächstes Gebet beginnt in"><i class="kids-salah-beat" aria-hidden="true"></i>'+
+  '<span id="kidsSalahNextText">Standort einstellen</span><strong class="kids-salah-countdown" id="kidsSalahCountdown" role="timer" aria-live="off"></strong></div>'+
   '<div class="kids-salah-progress" aria-hidden="true"><span id="kidsSalahProgress"></span></div>'+
   '<div class="kids-salah-five" id="kidsSalahFive" role="list" aria-label="Fünf tägliche Gebetszeiten">'+
   ORDER.map(key=>'<span class="kids-salah-slot" role="listitem" data-prayer="'+key+'"><span class="kids-salah-dot" aria-hidden="true"></span><span class="kids-salah-prayer">'+NAMES[key]+'</span><time>--:--</time></span>').join("")+
@@ -81,16 +82,22 @@ dayPage.innerHTML=
  '<div class="kids-salah-day-body"><header class="kids-salah-day-header">'+
  '<button class="kids-salah-day-back" id="kidsSalahDayBack" type="button" aria-label="Zurück zur Startseite">‹</button>'+
  '<span class="kids-salah-day-brand">DĀR AL TAWḤĪD KIDS · ṢALĀH</span></header>'+
+ '<div class="kids-salah-day-hero" role="group" aria-label="Dein Gebetstag">'+
+ '<div class="kids-salah-day-overline"><span class="kids-salah-day-spark" aria-hidden="true">✦</span> DEIN GEBETSTAG <span id="kidsSalahDayDate"></span></div>'+
  '<h2>Unsere fünf <em>Gebete</em></h2>'+
- '<p class="kids-salah-day-subtitle">Hier siehst du alle Gebetszeiten für heute.</p>'+
- '<div class="kids-salah-day-place"><strong id="kidsSalahDayCity">Dein Gebetsort</strong>'+
- '<button type="button" id="kidsSalahDayLocation">Ort ändern</button></div>'+
- '<div class="kids-salah-day-list" id="kidsSalahDayList"></div>'+
- '<p class="kids-salah-day-notice">Die Gebetszeiten werden für deinen Ort und die ausgewählte Berechnungsmethode ermittelt. Bei abweichenden Angaben frage deine Eltern oder die Moschee vor Ort.</p></div>';
+ '<p class="kids-salah-day-subtitle">Fünf Gebete begleiten deinen Tag.</p>'+
+ '<div class="kids-salah-day-nextbox"><span>ALS NÄCHSTES</span><strong id="kidsSalahDayUpcomingName">Bitte warten …</strong><time id="kidsSalahDayUpcomingTime">--:--</time></div>'+
+ '<div class="kids-salah-day-place"><span class="kids-salah-day-place-pin" aria-hidden="true"></span><strong id="kidsSalahDayCity">Dein Gebetsort</strong>'+
+ '<button type="button" id="kidsSalahDayLocation">Ort ändern <span aria-hidden="true">›</span></button></div></div>'+
+ '<div class="kids-salah-day-list" id="kidsSalahDayList" role="list" aria-label="Fünf Gebete heute"></div>'+
+ '<p class="kids-salah-day-notice">Gebetszeiten für deinen Ort und die gewählte Berechnung. Bei Abweichungen frage deine Eltern oder deine Moschee.</p></div>';
 document.body.appendChild(dayPage);
 const dayList=dayPage.querySelector("#kidsSalahDayList");
 let lastRenderedDaySignature="";
 const dayCity=dayPage.querySelector("#kidsSalahDayCity");
+const dayDateLabel=dayPage.querySelector("#kidsSalahDayDate");
+const dayUpcomingName=dayPage.querySelector("#kidsSalahDayUpcomingName");
+const dayUpcomingTime=dayPage.querySelector("#kidsSalahDayUpcomingTime");
 const dayBack=dayPage.querySelector("#kidsSalahDayBack");
 $("#kidsSalahOpenDay").addEventListener("click",()=>{
  dayPage.hidden=false;document.body.classList.add("kids-salah-day-open");
@@ -111,11 +118,14 @@ document.addEventListener("keydown",e=>{
 function renderDay(){
  if(dayPage.hidden)return;
  dayCity.textContent=place?.name||"Gebetsort einstellen";
- if(!place){if(lastRenderedDaySignature!=="missing"){dayList.innerHTML='<p>Bitte wähle zuerst deinen Gebetsort.</p>';lastRenderedDaySignature="missing";}return;}
+ if(!place){dayUpcomingName.textContent="Ort wählen";dayUpcomingTime.textContent="--:--";dayDateLabel.textContent="";if(lastRenderedDaySignature!=="missing"){dayList.innerHTML='<p class="kids-salah-day-empty">Bitte wähle zuerst deinen Gebetsort.</p>';lastRenderedDaySignature="missing";}return;}
  let date;try{date=dateInZone(new Date(),place.tz);}catch(_){return;}
  const today=days[date];
+ dayDateLabel.textContent=new Intl.DateTimeFormat("de-DE",{timeZone:place.tz,day:"numeric",month:"long"}).format(new Date());
  const all=[...entries(yesterday(date),days[yesterday(date)]),...entries(date,today),...entries(tomorrow(date),days[tomorrow(date)])];
  const now=Date.now(),previous=all.filter(i=>i.ts<=now).pop(),next=all.find(i=>i.ts>now);
+ dayUpcomingName.textContent=next?(next.date!==date?"Morgen · ":"")+NAMES[next.key]:"Zeiten werden geladen";
+ dayUpcomingTime.textContent=next?.time||"--:--";
  const sig=[date,placeKey(place),ORDER.map(key=>today?.times?.[key]?.time||"--:--").join(","),previous?.key,previous?.date,next?.key,next?.date].join("|");
  if(lastRenderedDaySignature===sig)return;
  lastRenderedDaySignature=sig;
@@ -123,9 +133,10 @@ function renderDay(){
   const time=today?.times?.[key]?.time||"--:--";
   const current=previous?.key===key&&previous?.date===date;
   const following=next?.key===key&&next?.date===date;
-  return '<div class="kids-salah-day-item'+(current?' is-current':following?' is-next':'')+'">'+
+  return '<div role="listitem" class="kids-salah-day-item'+(current?' is-current':following?' is-next':'')+'" data-prayer="'+key+'">'+
+   '<span class="kids-salah-day-item-orb" aria-hidden="true"></span>'+
    '<div class="kids-salah-day-item-name"><strong>'+NAMES[key]+'</strong><small>'+
-   (current?'AKTUELLES GEBET':following?'ALS NÄCHSTES':'TAGESGEBET')+
+   (current?'JETZT · ':following?'BALD · ':'')+DAY_LABELS[key]+
    '</small></div><time>'+time+'</time></div>';
  }).join("");
 }
