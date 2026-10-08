@@ -2632,9 +2632,15 @@ function repairYamlFrontmatter(markdown) {
   const body = match[2] || "";
   const topKey =
     "source|links|logo|layout|slides|intro|introTitle|date|id|title|category|topic|scholar|book|author|tags|type";
+  let insideSlides = false;
   const fixed = match[1]
     .split("\n")
     .map((line) => {
+      // Preserve source:/links: indentation within a slide list.
+      if (/^[A-Za-z0-9_-]+:\s*/.test(line)) {
+        insideSlides = /^slides:\s*$/.test(line);
+      }
+      if (insideSlides) return line;
       if (/^\*\s+/.test(line)) return line.replace(/^\*\s+/, "- ");
       if (/^\*\s*label:/.test(line)) return line.replace(/^\*\s*/, "  - ");
       const nested = line.match(new RegExp(`^(\\s{2,})(${topKey}:\\s*.*)$`));
@@ -2643,7 +2649,6 @@ function repairYamlFrontmatter(markdown) {
     })
     .join("\n")
     .replace(/^\* /gm, "- ")
-    .replace(new RegExp(`^\\s{4}(${topKey}):`, "gm"), "$1:")
     .replace(/^\*\s*label:/gm, "  - label:");
   return `---\n${fixed}\n---\n\n${body.trim()}`.trimEnd() + "\n";
 }
