@@ -157,25 +157,53 @@ jobs:
           NODE
       - name: Verify runtime cache-bust wiring
         run: |
-          grep -F '/kids/owner-voice.js?v=8' kids/index.html
-          grep -F '/kids/dua-smart-learn.js?v=1244' kids/index.html
-          grep -F '/kids/dua-hub-v1219.js?v=1244' kids/index.html
-          grep -F '/kids/sw.js?v=1245' kids/index.html
-          grep -F 'dar-al-tawhid-kids-v1245' kids/sw.js
-          grep -F 'GERMAN_URL="/kids/data/dua-audio.json?v=8"' kids/dua-smart-learn.js
-          grep -F 'playGerman:playGerman' kids/dua-smart-learn.js
-          grep -F 'prepare:prepare' kids/dua-smart-learn.js
+          node <<'NODE'
+          const fs=require("fs");
+          const version=JSON.parse(fs.readFileSync("kids/version.json","utf8"));
+          const html=fs.readFileSync("kids/index.html","utf8");
+          const start=fs.readFileSync("kids/start.html","utf8");
+          const shell=fs.readFileSync("kids/shell.html","utf8");
+          const sw=fs.readFileSync("kids/sw.js","utf8");
+          const smart=fs.readFileSync("kids/dua-smart-learn.js","utf8");
+          const dock=fs.readFileSync("kids/global-detail-dock-v1247.js","utf8");
+          const swVer=String(version.visualSystem.serviceWorkerCache||"").replace(/^v/,"");
+          const hubJsVer=String(version.visualSystem.duaHubJsVersion||"");
+          const hubCssVer=String(version.visualSystem.duaHubCssVersion||"");
+          const must=(ok,label)=>{if(!ok)throw new Error(label);};
+          must(html===start&&html===shell,"Kids HTML entry shells differ");
+          must(version.buildId&&swVer&&hubJsVer&&hubCssVer,"Kids release versions missing");
+          for(const [name,pat] of [["owner voice",/\/kids\/owner-voice\.js\?v=\d+/],["Du'a learning",/\/kids\/dua-smart-learn\.js\?v=\d+/]]){
+            must(pat.test(html),name+" script reference missing");
+          }
+          must(html.includes("/kids/dua-hub-v1219.js?v="+hubJsVer),"Du'a hub JS reference stale");
+          must(html.includes("/kids/dua-hub-v1219.css?v="+hubCssVer),"Du'a hub CSS reference stale");
+          must(html.includes("/kids/sw.js?v="+swVer),"Kids SW registration stale");
+          must(sw.includes("dar-al-tawhid-kids-v"+swVer),"SW cache release mismatch");
+          must(sw.includes("/kids/dua-hub-v1219.js?v="+hubJsVer),"SW Du'a hub JS cache mismatch");
+          must(sw.includes("/kids/dua-hub-v1219.css?v="+hubCssVer),"SW Du'a hub CSS cache mismatch");
+          must(smart.includes('GERMAN_URL="/kids/data/dua-audio.json?v=8"'),"German voice manifest changed");
+          must(smart.includes("playGerman:playGerman")&&smart.includes("prepare:prepare"),"Audio hooks missing");
+          if(Number(swVer)>=1251){
+            must(dock.includes("KIDS_NO_EXTERNAL_SOURCE_PROOF_ACTIONS_V1251"),"Source-only policy missing");
+            must(html.includes("kids/global-detail-dock-v1247.js?v="+swVer),"Global source policy asset stale");
+          }
+          console.log("KIDS DUA CACHE-BUST OK",version.buildId,swVer,hubJsVer,hubCssVer);
+          NODE
 
       - name: Live delivery smoke test
         run: |
           set -euo pipefail
+          EXPECT_BUILD="$(node -p 'require("./kids/version.json").buildId')"
+          EXPECT_HUB_JS="$(node -p 'String(require("./kids/version.json").visualSystem.duaHubJsVersion||"")')"
           CB="$(date +%s)"
+          curl -fsSL --max-time 30 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/version.json?cb=$CB" -o /tmp/kids-version-live.json
+          node -e 'const live=require("/tmp/kids-version-live.json"),local=require("./kids/version.json");if(live.buildId!==local.buildId)throw new Error("Kids live build mismatch: "+live.buildId+" vs "+local.buildId)'
           curl -fsSL --max-time 30 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/start?cb=$CB" -o /tmp/kids-live.html
-          grep -F '/kids/owner-voice.js?v=8' /tmp/kids-live.html
-          grep -F '/kids/dua-smart-learn.js?v=1244' /tmp/kids-live.html
-          grep -F '/kids/dua-hub-v1219.js?v=1244' /tmp/kids-live.html
+          grep -E '/kids/owner-voice.js\?v=[0-9]+' /tmp/kids-live.html
+          grep -E '/kids/dua-smart-learn.js\?v=[0-9]+' /tmp/kids-live.html
+          grep -F "/kids/dua-hub-v1219.js?v=$EXPECT_HUB_JS" /tmp/kids-live.html
 
-          curl -fsSL --max-time 30 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/dua-smart-learn.js?v=1244&cb=$CB" -o /tmp/dua-smart.js
+          curl -fsSL --max-time 30 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/dua-smart-learn.js?cb=$CB" -o /tmp/dua-smart.js
           grep -F 'playGerman:playGerman' /tmp/dua-smart.js
           grep -F 'ensureAudioAttached' /tmp/dua-smart.js
 
