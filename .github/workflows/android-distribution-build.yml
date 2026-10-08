@@ -216,6 +216,35 @@ jobs:
           retention-days: 14
           if-no-files-found: error
 
+      - name: Signierte Release-Dateien und Zertifikate verifizieren
+        if: steps.signing.outputs.enabled == 'true' || steps.signing_tv.outputs.enabled == 'true' || steps.signing_kids.outputs.enabled == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          SDK_ROOT="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}"
+          SIGNER="$SDK_ROOT/build-tools/36.0.0/apksigner"
+          test -x "$SIGNER"
+          echo "### Android Release-Signaturprüfung" >> "$GITHUB_STEP_SUMMARY"
+          for item in app kids tv; do
+            case "$item" in
+              app) enabled="${{ steps.signing.outputs.enabled }}" ;;
+              kids) enabled="${{ steps.signing_kids.outputs.enabled }}" ;;
+              tv) enabled="${{ steps.signing_tv.outputs.enabled }}" ;;
+            esac
+            [[ "$enabled" == true ]] || continue
+            APK="android/$item/build/outputs/apk/release/$item-release.apk"
+            AAB="android/$item/build/outputs/bundle/release/$item-release.aab"
+            test -s "$APK"
+            test -s "$AAB"
+            "$SIGNER" verify --verbose --print-certs "$APK" > "$RUNNER_TEMP/$item-apk-verify.txt"
+            jarsigner -verify "$AAB" > "$RUNNER_TEMP/$item-aab-verify.txt"
+            grep -q '^Verified' "$RUNNER_TEMP/$item-apk-verify.txt"
+            SHA="$(shasum -a 256 "$APK" | cut -d' ' -f1)"
+            CERT="$(grep -m1 'certificate SHA-256 digest:' "$RUNNER_TEMP/$item-apk-verify.txt" | sed 's/^.*digest: //')"
+            test -n "$CERT"
+            echo "- $item: APK/AAB verifiziert; APK SHA256 \`$SHA\`; Zertifikat SHA256 \`$CERT\`" >> "$GITHUB_STEP_SUMMARY"
+          done
+
       - name: Temporäre Signierdateien entfernen
         if: always()
         run: rm -f android/keystore.properties android/upload-keystore.jks android/kids-keystore.properties android/kids-upload-keystore.jks android/tv-keystore.properties android/tv-upload-keystore.jks
