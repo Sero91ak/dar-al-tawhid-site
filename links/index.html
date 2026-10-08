@@ -84,6 +84,7 @@ document.getElementById('copyMain').addEventListener('click',async()=>{try{await
       if(!a||!label||x?.public!==true||x?.status!=='published')continue;
       const part=key==='adult'?'android':'tv';
       if(!new RegExp('^/download/files/dar-al-tawhid-'+part+'-v[0-9][0-9a-z.-]*\\.apk
+<script src="/download/official-release-links.js" defer></script>
 </body>
 </html>).test(x.downloadPath||''))continue;
       if(!/^[a-f0-9]{64}$/i.test(x.sha256||''))continue;
