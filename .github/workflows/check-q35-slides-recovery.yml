@@ -1,0 +1,28 @@
+name: Check Q35 slide text and parser integrity
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'content/posts/2026-10-08-isa-ibn-maryam-nuzul-frueher-ikhtilaf-slides.md'
+      - 'cloudflare/worker.js'
+      - 'scripts/q35-slides-recovery-guard.cjs'
+      - '.github/workflows/check-q35-slides-recovery.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Syntax check publisher and slide guard
+        run: |
+          node --check cloudflare/worker.js
+          node --check scripts/q35-slides-recovery-guard.cjs
+      - name: Verify 22-slide source structure, parser and publisher
+        run: node scripts/q35-slides-recovery-guard.cjs
