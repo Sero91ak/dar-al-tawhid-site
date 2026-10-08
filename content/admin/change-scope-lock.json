@@ -7227,6 +7227,22 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "unified-apple-android-native-build-2026-10-08",
+      "at": "2026-10-08T20:10:00+02:00",
+      "approvedBy": "user-explicit-unified-ios-android-build-and-website-apk-2026-10-08",
+      "reason": "Eigene Android-APK Website-Distribution und automatische native Apple/Android-Artefakte aus einer gemeinsamen Veröffentlichung; Inhalte der Besucher-App, Kids und alle Push-Spuren unverändert. Nur Staging-PR, ohne Live-Merge.",
+      "paths": [
+        ".github/workflows/unified-native-build.yml",
+        ".github/workflows/ios-native-build.yml",
+        ".github/workflows/android-distribution-build.yml",
+        "download/",
+        "ios/DarAlTawhid/",
+        "android/",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
