@@ -1,7 +1,7 @@
 import { ILM_SCIENCE_SYSTEM_INSTRUCTIONS, ILM_SCIENCE_POLICY_VERSION } from "./ilm-science-policy.js";
 import { composeIlmWithGemini } from "./ilm-gemini-bridge.js";
 import { researchIlmWithGemini } from "./ilm-gemini-open-research.js";
-import { researchIlmWithOpenAI } from "./ilm-openai-research.js";
+import { researchIlmWithOpenAI, composeIlmWithOpenAI } from "./ilm-openai-research.js";
 import { gateHiddenSurfaces } from "./preview-gate.js";
 const KIDS_VERSION_BODY = JSON.stringify({
   buildId: "kids-shell-v148-sourcetext1251",
@@ -503,6 +503,14 @@ async function ilmScienceCompose(request, env) {
   if (gemini.ok) return send({
     ok:true, answer:gemini.answer, usedSourceCount:topicSources.length,
     mode:"source_bound", answerMode:mode, provider:"gemini",
+    policyVersion:ILM_SCIENCE_POLICY_VERSION
+  });
+  // A separate paid provider can compose using the SAME checked texts
+  // when Gemini quotas are depleted; never use OpenAI's memory as a proof.
+  const openai = await composeIlmWithOpenAI(request, env, question, topicSources, mode);
+  if(openai.ok) return send({
+    ok:true, answer:openai.answer, usedSourceCount:topicSources.length,
+    mode:"source_bound", answerMode:mode, provider:"openai",
     policyVersion:ILM_SCIENCE_POLICY_VERSION
   });
   if (!env || !env.AI || typeof env.AI.run !== "function") {
