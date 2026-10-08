@@ -194,11 +194,9 @@
     if(!root)return;
     var full=root.querySelector('[data-dsl="full"]');
     var slow=root.querySelector('[data-dsl="slow"]');
-    var repeat=root.querySelector('[data-dsl="repeat"]');
     var follow=root.querySelector('[data-dsl="follow"]');
     if(full)full.textContent=playing&&mode==="full"?"Stopp":"Ganz hören";
     if(slow)slow.textContent=playing&&mode==="slow"?"Stopp":"Langsam hören";
-    if(repeat)repeat.textContent=playing&&mode==="word"?"Stopp":"Wort wiederholen";
     if(follow)follow.textContent=playing&&mode==="follow"?"Stopp":"Wort für Wort";
     root.classList.toggle("phrase-playing",playing&&(mode==="full"||mode==="slow"));
   }
@@ -222,7 +220,7 @@
     if(!root)return;
     root.classList.toggle("exact-ready",!!on);
     root.querySelectorAll("[data-seg]").forEach(function(n){n.disabled=!on});
-    ["repeat","follow","prev","next","full","slow"].forEach(function(a){
+    ["follow","prev","next","full","slow"].forEach(function(a){
       var b=root.querySelector('[data-dsl="'+a+'"]');
       if(b)b.disabled=!on;
     });
@@ -231,7 +229,7 @@
   // The Arabic and transliteration rows now wrap; no horizontal slider exists.
   function keepFocusedWordVisible(){
     if(!root||!root.classList.contains("open"))return;
-    var viewport=root.querySelector(".dsl-scroll");
+    var viewport=root.querySelector(".dsl-reading-stage")||root.querySelector(".dsl-scroll");
     var word=root.querySelector('.dsl-arabic [data-seg="'+currentIndex+'"]');
     if(!viewport||!word)return;
     var view=viewport.getBoundingClientRect();
@@ -254,6 +252,53 @@
     if(opts.scroll!==false)queueFocusedWord();
   }
 
+
+  // Continuous phrase audio: reviewed markers if present, otherwise
+  // approximate word cues derived from actual full-clip and word durations.
+  function phraseWordStarts(d,slow,duration,segs){
+    var approved=d&&d.audioWordTimes&&d.audioWordTimes[slow?"slow":"normal"];
+    if(Array.isArray(approved)&&approved.length===segs.length){
+      var exact=approved.map(function(x){return Number(typeof x==="number"?x:x&&x.startSeconds)});
+      if(exact.every(function(x,i){return Number.isFinite(x)&&x>=0&&x<=duration&&(i===0||x>exact[i-1])}))return exact;
+    }
+    var weights=segs.map(function(seg){
+      var e=packs&&entry(packs.word,seg.audioKey||seg.arabic),v=Number(e&&e.durationSeconds);
+      var letters=(seg.arabic.match(/[\u0621-\u064A\u0671-\u06D3]/g)||[]).length;
+      var t=Math.max(.30,Math.sqrt(Math.max(1,letters))*.42);
+      var w=Number.isFinite(v)&&v>0?Math.max(.32,v-.78):t;
+      return Math.min(2.6,Math.max(.30,w*.65+t*.35));
+    });
+    var total=weights.reduce(function(a,b){return a+b},0)||1;
+    var cursor=Math.min(.16,duration*.025);
+    var usable=Math.max(.01,duration-cursor-Math.min(.10,duration*.02));
+    return weights.map(function(w){var start=cursor;cursor+=w/total*usable;return start});
+  }
+  function attachPhraseFollow(d,slow,token){
+    if(!root||!root.classList.contains("open")||!d)return;
+    var segs=getSegments(d),lastDuration=0,starts=[];
+    if(!segs.length)return;
+    var m=packs&&entry(slow?packs.slow:packs.normal,arabicText(d));
+    var fallback=Number(m&&m.durationSeconds);
+    function update(){
+      if(token!==playToken||currentDua!==d||!root.classList.contains("open"))return;
+      var duration=Number(audio.duration);
+      if(!Number.isFinite(duration)||duration<=0)duration=fallback;
+      if(!Number.isFinite(duration)||duration<=0)return;
+      if(duration!==lastDuration){lastDuration=duration;starts=phraseWordStarts(d,slow,duration,segs)}
+      var seconds=Math.max(0,Number(audio.currentTime)||0),index=0;
+      for(var i=1;i<starts.length;i++){if(seconds>=starts[i])index=i;else break}
+      if(index!==currentIndex){currentIndex=index;paintSelection();queueFocusedWord()}
+    }
+    audio.ontimeupdate=update;audio.onloadedmetadata=update;audio.onseeked=update;
+    currentIndex=0;paintSelection();queueFocusedWord();
+    var tickCount=0;
+    function tick(){
+      if(token!==playToken||!playing||currentDua!==d)return;
+      if((tickCount++%4)===0)update();
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
   function stopAudio(){
     playToken++;
     playing=false;
@@ -263,6 +308,8 @@
     audio.onerror=null;
     audio.oncanplay=null;
     audio.onloadedmetadata=null;
+    audio.ontimeupdate=null;
+    audio.onseeked=null;
     paintControls();
     try{if(window.DARKidsOwnerVoice&&typeof window.DARKidsOwnerVoice.stop==="function")window.DARKidsOwnerVoice.stop()}catch(e){}
   }
@@ -293,6 +340,7 @@
         audio.onended=function(){finish(true)};
         audio.onerror=function(){finish(false)};
         try{audio.load()}catch(e){}
+        if((mode==="full"||mode==="slow")&&root&&root.classList.contains("open")&&currentDua){attachPhraseFollow(currentDua,mode==="slow",token)}
         var p=audio.play();
         if(p&&p.catch)p.catch(function(){finish(false)});
       }catch(e){finish(false)}
@@ -459,29 +507,25 @@
         '</header>'+
         '<div class="dsl-progress"><i id="dslProgress"></i></div>'+
         '<div class="dsl-scroll">'+
-          '<div class="dsl-guide">Tippe ein arabisches Wort oder die Lautschrift an. Du hörst genau dieses Wort als eigene Aufnahme.</div>'+
+          '<div class="dsl-guide">Tippe auf ein Wort und höre es einzeln.</div>'+ 
+          '<div class="dsl-reading-stage">'+
           '<div class="dsl-arabic" id="dslArabic" dir="rtl" lang="ar"></div>'+
           '<div class="dsl-translit" id="dslTranslit"></div>'+
-          '<div class="dsl-focus" id="dslFocus">'+
-            '<small>AKTUELLES WORT</small>'+
-            '<button type="button" class="dsl-focus-word" data-dsl="repeat">'+
-              '<span class="dsl-focus-ar" id="dslFocusAr" dir="rtl" lang="ar"></span>'+
-              '<span class="dsl-focus-tr" id="dslFocusTr"></span>'+
-            '</button>'+
-            '<div class="dsl-focus-hint">Antippen = nur dieses Wort hören</div>'+
-          '</div>'+
+          '</div>'+ 
+          '<div class="dsl-bottom-block">'+
           '<div class="dsl-controls">'+
             '<button class="dsl-play primary" type="button" data-dsl="full">Ganz hören</button>'+
             '<button class="dsl-play slow" type="button" data-dsl="slow">Langsam hören</button>'+
-            '<button class="dsl-play repeat" type="button" data-dsl="repeat">Wort wiederholen</button>'+ 
+ 
             '<button class="dsl-play follow" type="button" data-dsl="follow">Wort für Wort</button>'+
           '</div>'+
-          '<div class="dsl-speednote">Langsam hören ist eine eigene V4-Aufnahme – keine künstliche Zeitdehnung.</div>'+
+          '<div class="dsl-speednote">Flüssig hören · Langsam mitlesen · Wörter einzeln lernen</div>'+
           '<div class="dsl-stepnav">'+
             '<button type="button" data-dsl="prev">‹ Vorheriges Wort</button>'+
             '<button type="button" data-dsl="next">Nächstes Wort ›</button>'+
           '</div>'+
           '<div class="dsl-status" id="dslStatus">Audio wird geprüft …</div>'+
+          '</div>'+
         '</div>'+
       '</section>';
     document.body.appendChild(root);
@@ -516,13 +560,13 @@
     render();
     root.classList.add("open");
     root.setAttribute("aria-hidden","false");
-    var view=root.querySelector(".dsl-scroll");
+    var view=root.querySelector(".dsl-reading-stage")||root.querySelector(".dsl-scroll");
     if(view)view.scrollTop=0;
     queueFocusedWord();
     document.documentElement.classList.add("dua-smart-open");
     document.body.classList.add("dua-smart-open");
     setReady(false);
-    setStatus("Serhat-Master-Audios werden geladen …","");
+    setStatus("Die Fuṣḥā-Aufnahmen werden geladen …","");
     loadPacks().then(function(p){
       if(currentDua!==dua)return;
       var ok=allReady(dua,p);
@@ -563,11 +607,6 @@
     if(a==="slow"){
       if(playing&&mode==="slow"){stopAudio();setStatus("Wiedergabe gestoppt.","")}
       else playWhole(true);
-      return;
-    }
-    if(a==="repeat"){
-      if(playing&&mode==="word"){stopAudio();setStatus("Wiedergabe gestoppt.","")}
-      else playWord(currentIndex);
       return;
     }
     if(a==="follow"){

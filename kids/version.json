@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v157-dua-audio1260",
-  "label": "KIDS · V1.08.78",
-  "releasedAt": "2026-10-08T15:15:00Z",
-  "note": "KIDS V1.08.78: Untertitel ohne Sprechername, Ganz hören nutzt die flüssige native Fuṣḥā-Gesamtaufnahme, Langsam hören nutzt die dedizierte langsame Gesamtaufnahme; Wort für Wort bietet separat exakt synchronisierte originale Einzelaufnahmen. Lerninhalt ohne großen oberen Leerraum.",
+  "buildId": "kids-shell-v158-dua-follow1261",
+  "label": "KIDS · V1.08.79",
+  "releasedAt": "2026-10-08T15:44:05.065Z",
+  "note": "V1.08.79: Animierter gelber Wortfokus auch bei flüssigem und langsamem Fuṣḥā-Gesamtaudio. Ohne geprüfte Wortzeitmarken sind Übergänge angenähert und an die tatsächliche Audiozeit gekoppelt. Wort-für-Wort benutzt Original-Einzelaufnahmen. Lernlayout mit drei kindersicheren Haupttasten und ausgenutzter Bildschirmhöhe.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1260",
+    "serviceWorkerCache": "v1261",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -1218,8 +1218,8 @@
     "fullBleedDuaDetailHeader": "v1249",
     "globalExplanationAudioActions": "v1249",
     "duaReaderLayout": "v1259-visible-hero-natural-scroll",
-    "duaHubCssVersion": 1260,
-    "duaHubJsVersion": 1260,
+    "duaHubCssVersion": 1261,
+    "duaHubJsVersion": 1261,
     "globalSourceTextOnly": "v1251",
     "parentsHeroProfileImages": {
       "boy": "/kids/assets/parents-hero/boy-profile-v1254.jpg",
@@ -1235,13 +1235,13 @@
     "profileGenderGuestPersistence": true,
     "iosJoinKeyboardScrollStability": "v1258",
     "profileStyleLoadedBeforeFirstPaint": true,
-    "duaSmartLearningLayout": "v1260-top-aligned-fullscreen-wrapped-rtl",
+    "duaSmartLearningLayout": "v1261-fullscreen-three-buttons-stage",
     "duaSmartWholeListening": "v1260-direct-fluent-master",
     "duaSmartSlowListening": "v1260-dedicated-slow-master",
-    "duaSmartWordFollow": "v1260-native-word-audio-ended-events"
+    "duaSmartWordFollow": "v1261-approximate-full-phrase-cues-or-reviewed-timestamps-exact-individual-clip-mode"
   },
   "updatedAt": "2026-10-08T13:15:45.228Z",
-  "deployTrigger": "kids-dua-playback-correction-v1260",
+  "deployTrigger": "kids-dua-audio-follow-v1261",
   "globalDetailDock": {
     "version": "v1253",
     "enabled": true,

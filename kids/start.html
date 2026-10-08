@@ -2915,7 +2915,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.08.78</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.08.79</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3301,7 +3301,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v157-dua-audio1260";
+const KIDS_BUILD_ID="kids-shell-v158-dua-follow1261";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -5285,7 +5285,7 @@ function quizSpeak(text,options){
   options=options||{};
   try{if(speech)speech.cancel()}catch(e){}
   if(window.DARKidsOwnerVoice&&typeof window.DARKidsOwnerVoice.play==="function"){
-    var ok=window.DARKidsOwnerVoice.play(String(text||""),{source:options.source||"kids-ui"});
+    var ok=window.DARKidsOwnerVoice.play(String(text||""),{source:options.source||"kids-ui",onended:options.onended,onerror:options.onerror});
     if(options.quizPrompt&&ok===false)setQuizListenState("missing");
     return ok;
   }
@@ -6551,10 +6551,10 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"cc4ac04648774872a036edb959747bd5","r":1,"spa":2}' crossorigin="anonymous"></script>
 <script src="/kids/content-studio-feed.js?v=studio7"></script>
-<script src="/kids/owner-voice.js?v=8"></script>\n<script src="/kids/dua-smart-learn.js?v=1260"></script>
+<script src="/kids/owner-voice.js?v=8"></script>\n<script src="/kids/dua-smart-learn.js?v=1261"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v157-dua-audio1260";
+  var KIDS_BUILD_ID="kids-shell-v158-dua-follow1261";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -6570,7 +6570,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1260",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1261",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
@@ -7553,7 +7553,7 @@ html[data-view="stories"] #view-stories > :last-child{
 }
 
 </style>
-<link rel="stylesheet" href="/kids/dua-smart-learn.css?v=1260" data-kids-dua-smart="1">\n<link rel="stylesheet" href="/kids/quiz-library.css?v=1237">
+<link rel="stylesheet" href="/kids/dua-smart-learn.css?v=1261" data-kids-dua-smart="1">\n<link rel="stylesheet" href="/kids/quiz-library.css?v=1237">
 <link rel="stylesheet" href="/kids/kids-age-typography.css?v=5">
 <script src="/kids/screen-awake.js?v=1"></script>
 <script src="/kids/story-follow-reader.js?v=16"></script>
@@ -7562,7 +7562,7 @@ html[data-view="stories"] #view-stories > :last-child{
 <script src="/kids/mubashshirun-stories.js?v=31"></script>
 <script src="/kids/sahabiyyat-stories.js?v=23"></script>\n<script src="/kids/deen-lessons.js?v=4"></script>
 <script src="/kids/global-story-glow-v1216.js?v=1239"></script>
-<script src="/kids/dua-hub-v1219.js?v=1260" data-kids-dua-hub="1259"></script>
+<script src="/kids/dua-hub-v1219.js?v=1261" data-kids-dua-hub="1259"></script>
 <script src="/kids/story-hub.js?v=25"></script>
 <script src="/kids/kids-age-typography.js?v=3"></script>
 <script src="/kids/quiz-library.js?v=9"></script>
@@ -7571,7 +7571,7 @@ html[data-view="stories"] #view-stories > :last-child{
 <link rel="stylesheet" href="/kids/stories-home-v1138.css?v=1152" data-kids-stories-home-polish="1">
 <link rel="stylesheet" href="/kids/deen-learning-v1199.css?v=1199" data-kids-deen-learning="1">\n<link rel="stylesheet" href="/kids/deen-lessons.css?v=2" data-kids-deen-lessons="1">
 <link rel="stylesheet" href="/kids/global-story-glow-v1216.css?v=1217" data-kids-global-story-glow="1">
-<link rel="stylesheet" href="/kids/dua-hub-v1219.css?v=1260" data-kids-dua-hub="1259">
+<link rel="stylesheet" href="/kids/dua-hub-v1219.css?v=1261" data-kids-dua-hub="1259">
 <link rel="stylesheet" href="/kids/story-card-system.css?v=2" data-kids-story-card-system="1">
 <link rel="stylesheet" href="/kids/story-library-cards.css?v=9" data-kids-story-card-repair="1">
 <link rel="stylesheet" href="/kids/kids-touch-rail.css?v=16" data-kids-touch-rail="1">
@@ -11242,8 +11242,9 @@ html[data-view="stories"] #view-stories > :last-child{
 
 
 <!-- KIDS_DUA_FULLBLEED_EXPLANATION_CTA_V1249: shared full-width header and explanation actions, original back controls, no bottom-nav changes -->
-<link rel="stylesheet" href="/kids/global-detail-dock-v1247.css?v=1260" data-kids-global-detail-dock="1257">
-<script src="/kids/global-detail-dock-v1247.js?v=1260" data-kids-global-detail-dock="1257"></script>
+<link rel="stylesheet" href="/kids/global-detail-dock-v1247.css?v=1261" data-kids-global-detail-dock="1257">
+<script src="/kids/global-detail-dock-v1247.js?v=1261" data-kids-global-detail-dock="1257"></script>
 
-<link rel="stylesheet" href="/kids/dua-layout-v1259.css?v=1260" data-kids-dua-layout="1259">
+<link rel="stylesheet" href="/kids/dua-layout-v1259.css?v=1261" data-kids-dua-layout="1259">
+<link rel="stylesheet" href="/kids/dua-learn-cinema-v1261.css?v=1261" data-kids-dua-cinema="1261">
 </html>
