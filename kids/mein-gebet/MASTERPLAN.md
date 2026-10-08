@@ -4,6 +4,7 @@
 **Gültigkeit:** nur Kids-App (Web, iOS-Kids-WebView und kompatible Kids-Ansichten). Keine Änderung der Erwachsenen-App.  
 **Freigabe:** Nur Staging/Entwurfs-PR. Nicht auf `main` oder live ausrollen, bis ausdrücklich genehmigt.  
 **Grundsatz:** „Mein Gebet zurückstellen“ muss ausschließlich dieses Feature aus der App entfernen. Kein globaler App-Rollback.
+**Nutzerkorrektur vom 08.10.2026:** Kein permanenter Tab und keine neue Hörwelten-Kapsel in der Erprobungsphase. Nur ein kleiner Home-Testzugang innerhalb des bestehenden Home-Tabs. Profilfigur ist immer automatisch und ausschließlich von der aktiven Kinderprofil-Einstellung abhängig; keine zweite Gender-Auswahl im Gebetsbereich.
 
 ---
 
@@ -14,29 +15,31 @@ Die vom Auftraggeber gelieferten Bilder sind die alleinigen **Designreferenzen**
 - **Junge**: gleiches Gesicht, große braune Augen, braune Haare, weiße Kufi mit goldfarbenem Ornamentrand, langes weißes Gewand und passende Schuhe wie in den Originalbildern.
 - **Mädchen**: gleiches Gesicht, große braune Augen, **kräftig rosafarbener** geschlossener Hijab, **passendes rosafarbenes** langes Kleid mit Ärmeln, hellrosa Schuhe wie in den vom Nutzer gelieferten Originalbildern. **Nicht** das abweichende weiße Kleid früherer Probe-Generierungen benutzen.
 - Je Figur ein konsistenter Referenzsatz: frontal, links/rechts drei Viertel, Profil, Rückenansicht, Portrait. Dieselbe Identität in sämtlichen Perspektiven, niemals verschiedene Gesichter oder Kleidung.
-- Das Profil der Kinder-App wird nicht verändert. Falls Profilgeschlecht bekannt, entsprechende Figur im Trainer vorauswählen; manueller Wechsel nur innerhalb „Mein Gebet“ und ohne Änderung des gespeicherten Profils.
+- **Verbindliche automatische Zuordnung:** Aktives Jungenprofil → ausschließlich Jungenfigur; aktives Mädchenprofil → ausschließlich Mädchenfigur. Keine manuelle Figur-Auswahl innerhalb von „Mein Gebet“, weder im Hub noch im 3D-Trainer. Die App liest die vorhandene aktive Profil-Einstellung (`kids.activeProfile`/`kids.profiles.v1` bzw. `.app[data-gender]`). Wechsel des Profils greift beim nächsten Öffnen bzw. nach dem vorhandenen Profilwechsel-Neuladen automatisch. Gastprofile folgen ihrer vorhandenen gewählten Jungen-/Mädchen-Einstellung. Wenn noch keine Wahl existiert, Hinweis zur Profilwahl statt willkürlicher Jungenfigur. Andere Profilfunktionen und Daten niemals verändern.
 - Neutrale Standpose ≠ kanonische Gebetsstellung. Die Hände der Mädchenfigur sind auf den gelieferten Bildern vor dem Körper, aber keine Gebetshaltung darf daraus abgeleitet werden.
 - Für Indoor-Gebetsanimationen gesondert geprüft entscheiden, ob die Figuren barfuß/Socken statt mit den Referenzschuhen auftreten. Referenz-Avatar bleibt unverändert.
 - Kein nicht freigegebenes KI-Bild als finale Lehrdarstellung verwenden.
 
 ## 2. Informationsarchitektur (V1 Endziel)
 
-**Kids Home**: Eine neue **fünfte** Karte `Mein Gebet` in der vorhandenen Kartenliste, nach „Meine Duʿāʾ“ und vor „Quiz spielen“. Gestaltung exakt im bestehenden Kids-Capsule-System mit **weichem Referenz-Glow**, dezentem Goldrand, ruhiger Farbigkeit und denselben Touch-Radien. Keine andere Startseiten-Karte verändern.
+**Phase 1 – Kids Home (bestehender Home-Tab):** Noch **keine neue Hörwelten-Kapsel**, **kein fünfter Haupt-Capsule-Button**, **kein eigener Bottom-Navigations-Tab**. Zunächst nur ein dezenter anklickbarer **Home-Testzugang „Mein Gebet“** unmittelbar **unter** der bestehenden Hörwelten-Kartenliste, ohne sie zu verändern. So lässt sich der neue Bereich ausprobieren, bevor er ein fester Bestandteil der Navigation wird. Der Einstieg zeigt bereits den zum aktiven Profil passenden Jungen- oder Mädchen-Avatar. Gestaltung mit bestehendem **weichem Referenz-Glow** und ohne grellen Halo.
 
-**Mein Gebet (Hub)**: eigene Unterseite mit klarem Kopfbereich, figurengerechter Illustration, kurzem Einführungssatz und **exakt vier großen Kapseln**:
+**Phase 2 – nach ausdrücklicher Designfreigabe:** Den Testzugang in einen separaten, dauerhaften **„Mein Gebet“-Tab** mit eigener vollwertiger Seite überführen. Dies ist ein **späterer eigenständiger Freigabeschritt**; die vorläufige Home-Verknüpfung wird dann ersetzt und nicht als doppelte Navigationsmöglichkeit behalten.
+
+**Mein Gebet (Test-Hub)**: eine nur über den Home-Testzugang erreichbare Vorschauseite mit klarem Kopfbereich, automatisch profilabhängiger Figur, kurzem Einführungssatz und **exakt vier anklickbaren Lernfeldern**:
 
 1. **Was ist das Gebet?** — kurze, altersgerechte Einführung; Ṣalāh als Gottesdienst, die fünf Pflichtgebete, Grundbegriffe.
 2. **Warum beten wir?** — Liebe zu und Erinnerung an Allah, Sinn des Gebets, Umgang mit Ablenkung, aufbauende Motivation statt angstmachender Spielmechanik.
 3. **Wie bete ich?** — Bedingungen vor dem Gebet, Grundstellungen, erster vollständig geprüfter 2-Rakʿah-Ablauf, später alle fünf Gebete.
 4. **Mein 3D-Gebet** — interaktive Jungen-/Mädchenfigur, 360° Betrachtung, schrittweise animierte Bewegungen, Hören/Mitlesen/Lernen.
 
-**Keine weiteren Kapseln auf dieser Startseite**. Wort-für-Wort, langsames Lernen, Wiederholen, Hinweise und Fortschritt sind Funktionen **innerhalb** der Lektionen, nicht eine überfüllte Hub-Navigation.
+**Keine weiteren permanenten Home-Kapseln oder Navigationstabs in Phase 1.** Die vier Lernfelder gehören ausschließlich zur Vorschauseite, nicht zur bestehenden Home-Kartenliste. Wort-für-Wort, langsames Lernen, Wiederholen, Hinweise und Fortschritt sind später Funktionen **innerhalb** der Lektionen.
 
 ### Beispiel-Navigation
 
 `Kids Home → Mein Gebet → Wie bete ich? → 2 Rakʿah lernen → Schritt 3: Qiyām → Audio / 3D-Ansicht`.
 
-Gleichwertiger Zugang zum 3D-Trainer direkt über die vierte Kapsel. Back-Button, iOS-Wisch-zurück und Browser-History müssen denselben Zustand konsistent wiederherstellen, ohne andere Tabs zu beeinflussen.
+Die vierte Lernfläche führt künftig direkt zum 3D-Trainer. In Phase 1 sind die vier Lernfelder nur **anklickbare Gestaltungs-/Navigationsprototypen** ohne echte 3D-/Audio-Funktion. Zurück-Button ist bereits vorhanden; iOS-Wisch-zurück und Browser-History müssen vor einer dauerhaften Navigationserweiterung separat validiert werden, ohne andere Tabs zu beeinflussen.
 
 ## 3. Lerninhalte — genauer redaktioneller Aufbau
 
@@ -149,13 +152,13 @@ kids/mein-gebet/
 
 **Kleine Integrationsstellen**: exakt die benötigten Script-/Style-Verweise in `kids/index.html`, `kids/start.html`, `kids/shell.html`; alle drei Shells müssen identisch bleiben, weil der Kids-Release-Guard dies fordert. Keine Änderung an `index.html` der Erwachsenen-App, `cloudflare/worker.js`, Push, Manifest, vorhandenen Audios/Quiz/Story-Daten oder Service Worker ohne gesonderte Freigabe.
 
-**Feature-Flag**: eigene zentrale, im Produktivmodus standardmäßig **deaktivierte** Konfiguration, die Kapsel, Events, Assets und Hintergrundprozesse gemeinsam schaltet. Bei deaktiviertem Modul darf keinerlei DOM-Karte, Navigationseintrag oder Netzwerkanforderung aus „Mein Gebet“ entstehen. Nur auf ausdrückliche Live-Freigabe aktivieren.
+**Feature-Flag**: Im aktuellen Branch stoppt `window.DAR_KIDS_MEIN_GEBET_ENABLED=false` vor dem Skriptaufruf die gesamte Vorschau-Initialisierung. **Wichtig:** Eine dauerhaft zentral verwaltete Konfiguration mit produktionsseitigem Default OFF und erweiterten Offline/Asset-Regeln ist ein **noch zu implementierendes Release-Gate**. Der Branch ist bislang nicht auf `main` gemergt und nicht live. Bei deaktiviertem Modul darf kein „Mein Gebet“-DOM, neuer Navigationseintrag oder eigener Asset-Download entstehen.
 
 **Offline**: geprüfte Kerntexte, 2D-Fallback, 3D-Modelle und die für das jeweilige Lernpaket benötigten Audioassets offline bereitstellen. Vorhandene Kids-Service-Worker-Strategie nur nach eigener Risikoanalyse und ausdrücklicher Freigabe anfassen. Download-Packs mit sichtbarem Fortschritt erst in späterer Stufe; nicht implizit große Mediendaten herunterladen. Personalisierte Lernstände lokal speichern und beim Rückbau kontrolliert nur diesen Namespace löschen, nicht Profildaten.
 
 ## 8. Abnahmebedingungen und Rückbau
 
-1. Home: bestehende Karten, Markenlogo, Luftigkeit und **weicher globaler Glow** unverändert; fünfte Kapsel vollständig responsive.
+1. Home: bestehende Karten, Markenlogo, Luftigkeit und **weicher globaler Glow** unverändert; der **temporäre schmale Test-Einstieg außerhalb des Kapselrasters** ist vollständig responsive, keine fünfte Hörwelten-Kapsel, kein zusätzlicher Bottom-Tab.
 2. Navigation: Tap, Zurück, Edge-Swipe, Browser-Back in iPhone/iPad/Android/Desktop; keine überdeckte iOS-Statusbar oder Bottom-Navigation, kein Oversize/Edge-to-Edge-Fehler.
 3. Charakter: **Originaldesign** Junge (weiß/gold), Mädchen (kräftig pink) erkennbar; keine Gesichts-/Kleidungswechsel beim Drehen oder zwischen Posen.
 4. Gebetsinhalt: **jede** Pose + Text + Fiqh-Kategorie + Quellen nachweislich fachlich geprüft, bevor die Lektion als fertig gilt. Keine erfundenen Bewertungen/Varianten.
@@ -170,7 +173,7 @@ kids/mein-gebet/
 | Phase | Lieferung | Freigabekriterium | Zusätzliche Generierungskosten |
 |---|---|---|---|
 | **0 (jetzt)** | Informationsarchitektur + technischer Masterplan | Nutzer akzeptiert Struktur | 0 € |
-| **1** | Visuelles, rückbaubares Home/Hub-Prototyp auf Staging | Farben, Karten, Übergänge, Edge-/Touch-Verhalten gefallen | 0 € |
+| **1** | Temporärer Home-Link + profilabhängiger klickbarer Hub auf Staging | Jungenprofil zeigt Jungenfigur, Mädchenprofil zeigt Mädchenfigur; visuelle Struktur gefällt | 0 € |
 | **2** | Eine originalgetreue **Jungenfigur als riggtes GLB** + eine geprüfte Grundpose | 360° und Bewegung real funktionsfähig | nur nach Ausgabenfreigabe |
 | **3** | Kompletter geprüfter 2-Rakʿah-Durchlauf + minimale Audio-Probe | Quellen, Gelenke, Audio und Synchronität abgenommen | nur nach Ausgabenfreigabe |
 | **4** | Gleichwertige Mädchenfigur in **originalem pinkfarbenem Design** | gleiche Qualitätsstandards | nur nach Ausgabenfreigabe |
@@ -181,6 +184,6 @@ kids/mein-gebet/
 
 ## 10. Unmittelbare Entscheidung / nächste Aufgabe
 
-**Nächste Aufgabe: Phase 1 in Staging prüfen.** Das Draft-PR enthält bisher nur eine isolierte Vorschau der Startseiten-Kapsel und der vier Hubbereiche. Nach Genehmigung das bestehende Feature mit einem realen Gerät auf Nutzerprofil und Home testen; danach für **eine** Jungenfigur einen realen 3D-Rig-Prototypen beauftragen/erstellen. Weder sämtliche Gebete noch sämtliche Audios vor diesem Machbarkeitstest produzieren.
+**Nächste Aufgabe: Phase 1 sicher in Staging bereitstellen und auf Geräten testen.** Das Draft-PR enthält den **kleinen Home-Testzugang außerhalb der Hörwelten-Kapseln**, vier anklickbare Vorschau-Lernbereiche und automatische Profilauswahl für die vorhandenen Mini-Profilbilder. **Die vom Nutzer gelieferten Ganzkörperfiguren sind bislang nur Designreferenzen und noch nicht als echte animierbare GLBs eingebunden.** Nach visueller Freigabe vorerst eine Jungenfigur als echten 3D-Rig-Prototypen entwickeln. **Erst nach ausdrücklicher späterer Freigabe** erhält „Mein Gebet“ einen eigenen permanenten Bottom-Tab/eine dauerhafte Seite. Weder sämtliche Gebete noch sämtliche Audios vor Machbarkeitstest produzieren.
 
 **Nicht bereits geliefert:** animierbare GLBs, Gebets-Animationsclips, vollständige Quellenabnahme, Wort-Audios und Live-Deployment.
