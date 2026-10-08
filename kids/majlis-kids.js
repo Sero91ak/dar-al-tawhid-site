@@ -146,6 +146,13 @@
     } else {
       panel.appendChild(el("span","km-source",String(media.reference||"Qurʾān")));
       panel.appendChild(el("p","km-media-note","Die Rezitation stammt von einem Qāriʾ – nicht von einer KI-Stimme."));
+      if(media.excerpt?.arabic){
+        var verseSnippet=el("div","km-quran-excerpt");
+        verseSnippet.appendChild(el("small","","Belegter Duʿāʾ-Ausschnitt · nicht der vollständige Vers"));
+        verseSnippet.appendChild(el("p","km-arabic",media.excerpt.arabic));
+        verseSnippet.appendChild(el("p","km-meaning",media.excerpt.meaning||""));
+        panel.appendChild(verseSnippet);
+      }
       if(media.recitationUrl)button("▶ Rezitation",function(){playPrepared(media.recitationUrl,"Qurʾān-Rezitation: "+String(media.reference||"")+".");});
       if(Number.isInteger(Number(media.surah))&&Number.isInteger(Number(media.ayah)))button("Zum Vers im Qurʾān",function(){
         var surah=Number(media.surah),ayah=Number(media.ayah);
