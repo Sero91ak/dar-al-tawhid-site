@@ -70,6 +70,32 @@ const city=$("#kidsSalahCity"),prayerName=$("#kidsSalahName"),clock=$("#kidsSala
 const nextText=$("#kidsSalahNextText"),countdown=$("#kidsSalahCountdown");
 const status=$("#kidsSalahStatus"),progress=$("#kidsSalahProgress");
 const currentName=$("#kidsSalahCurrentName"),currentTime=$("#kidsSalahCurrentTime");
+
+/* Keep all five time digits visible despite iOS font and viewport differences. */
+let safeFitToken="",safeFitPending=false;
+function safeFitPrayerDigits(force){
+ const signature=[currentTime.textContent,clock.textContent,stage.clientWidth].join("|");
+ if(!force&&safeFitToken===signature)return;
+ safeFitToken=signature;
+ if(safeFitPending)return;
+ safeFitPending=true;
+ requestAnimationFrame(()=>{
+  safeFitPending=false;
+  for(const time of [currentTime,clock]){
+   time.style.removeProperty("font-size");
+   if(!time.isConnected||!time.clientWidth)continue;
+   const range=document.createRange();range.selectNodeContents(time);
+   const available=Math.max(40,time.clientWidth-4);
+   const measured=range.getBoundingClientRect().width;
+   if(measured>available){
+    const current=parseFloat(getComputedStyle(time).fontSize)||30;
+    time.style.setProperty("font-size",Math.max(21,Math.floor(current*available/measured*0.95))+"px","important");
+   }
+  }
+ });
+}
+window.addEventListener("resize",()=>{safeFitToken="";safeFitPrayerDigits(true);},{passive:true});
+
 $("#kidsSalahLocation").addEventListener("click",openSettings);
 
 /* Full-page daily schedule: a new immersive surface, not another nested home card. */
@@ -314,6 +340,7 @@ function draw(){
  progress.style.width=width.toFixed(2)+"%";
  status.textContent="Berechnet für "+(place.name||"deinen Ort")+(navigator.onLine?"":" · Offline-Daten");
  renderDay();
+ safeFitPrayerDigits(false);
 }
 async function refresh(){
  if(!place)return;
