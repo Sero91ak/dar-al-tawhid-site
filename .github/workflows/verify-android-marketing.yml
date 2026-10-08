@@ -53,7 +53,7 @@ jobs:
       - name: Mac-Schlüsselassistent auf Shell-Syntax prüfen
         shell: bash
         run: bash -n android/tools/setup-website-signing.command
-      - name: Nachweis: kein Kids Public APK
+      - name: "Nachweis: kein Kids Public APK"
         run: |
           node <<'NODE'
           const f=require('node:fs');
