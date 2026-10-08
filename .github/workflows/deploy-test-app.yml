@@ -30,6 +30,7 @@ on:
       - scripts/app-stability-repair.js
       - scripts/library-deploy-guard.js
       - scripts/library-deploy-repair.js
+      - scripts/ilm-evidence-regression-test.js
       - scripts/test-app-health-check.js
       - scripts/verify-test-app-deploy.js
       - scripts/purge-cloudflare-cache.js
