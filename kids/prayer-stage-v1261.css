@@ -660,3 +660,48 @@ body.kids-salah-day-open{overflow:hidden!important}
 @media(prefers-reduced-motion:reduce){
  #view-today .kids-salah-clock{animation:none!important}
 }
+
+
+/* V1264a: never squash time digits; crisp iOS rounded clock numerals */
+#view-today .kids-salah-now time,
+#view-today .kids-salah-clock{
+  font-family:"SF Pro Rounded",-apple-system,BlinkMacSystemFont,"Avenir Next",system-ui,sans-serif!important;
+  font-weight:740!important;
+  font-variant-numeric:tabular-nums!important;
+  font-feature-settings:"tnum" 1!important;
+  letter-spacing:-.012em!important;
+  font-kerning:normal!important;
+  white-space:nowrap!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  max-width:100%!important;
+  line-height:1.24!important;
+}
+#view-today .kids-salah-location{
+  max-width:min(28vw,106px)!important;
+}
+#view-today .kids-salah-kicker{
+  font-size:clamp(10px,2.7vw,12px)!important;
+  white-space:nowrap!important;
+  letter-spacing:.12em!important;
+}
+#view-today .kids-salah-five,
+#view-today .kids-salah-five *{
+  -webkit-tap-highlight-color:transparent!important;
+  -webkit-user-select:none!important;
+  user-select:none!important;
+  cursor:default!important;
+}
+#view-today .kids-salah-slot:hover,
+#view-today .kids-salah-slot:active,
+#view-today .kids-salah-slot:focus{
+  background:transparent!important;
+  box-shadow:none!important;
+  outline:0!important;
+  border:0!important;
+  transform:none!important;
+}
+@media(max-width:360px){
+  #view-today .kids-salah-now time{font-size:clamp(26px,7.55vw,31px)!important}
+  #view-today .kids-salah-clock{font-size:clamp(32px,9.05vw,38px)!important}
+}
