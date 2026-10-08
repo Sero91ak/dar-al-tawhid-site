@@ -523,10 +523,8 @@
     var oldWelcome = window.renderIlmWelcomeState;
     window.renderIlmWelcomeState = function () {
       var prompts = [
-        ["Was ist Tawḥīd?", "Grundlage"],
-        ["Was ist Īmān?", "ʿAqīdah"],
-        ["Was sagte der Prophet ﷺ über Īmān?", "Sunnah"],
-        ["Gibt es dazu einen Ijmāʿ?", "Beweise"]
+        ["Was ist Tawḥīd?", "Wissen verstehen"],
+        ["Wo finde ich Belege zur Erhabenheit Allahs?", "In der App suchen"]
       ];
       return (
         '<div class="ilm-welcome ilm-welcome--majlis">' +
@@ -543,11 +541,11 @@
               '<div><h3>Frage stellen</h3><p>Wähle einen Einstieg oder schreibe unten deine eigene Frage.</p></div>' +
               '<span>Geprüfte Quellen</span>' +
             '</div>' +
-            '<div class="ilm-starter-chips">' +
+            '<div class="ilm-welcome-examples-v1341" aria-label="Beispielfragen">' +
               prompts.map(function (item) {
-                return '<button class="ilm-starter-chip" type="button" data-ilm-starter="' + esc(item[0]) + '">' +
-                  '<span class="ilm-starter-copy"><b>' + esc(item[0]) + '</b><small>' + esc(item[1]) + '</small></span>' +
-                  '<span class="ilm-starter-arrow" aria-hidden="true">→</span>' +
+                return '<button class="ilm-welcome-example-v1341" type="button" data-ilm-starter="' + esc(item[0]) + '">' +
+                  '<span class="ilm-welcome-example-text-v1341"><small>' + esc(item[1]) + '</small><b>' + esc(item[0]) + '</b></span>' +
+                  '<span class="ilm-welcome-example-arrow-v1341" aria-hidden="true">↗</span>' +
                 '</button>';
               }).join("") +
             '</div>' +
