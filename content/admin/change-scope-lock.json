@@ -7213,6 +7213,20 @@
         ".github/workflows/android-distribution-build.yml"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "android-downloads-website-2026-10-08",
+      "at": "2026-10-08T19:13:00+02:00",
+      "approvedBy": "user-explicit-website-apk-downloads-adult-and-android-tv-kids-test-only",
+      "reason": "Website darf einen offiziellen Android-Downloadbereich für Erwachsenen-App und Android TV vorbereiten; Kids bleibt private Testphase. Nur signierte und technisch geprüfte APK dürfen als verfügbar markiert werden. Keine Push-Änderungen.",
+      "paths": [
+        "download/",
+        "links/index.html",
+        "wrangler.toml",
+        ".github/workflows/cloudflare-pages-deploy.yml",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
