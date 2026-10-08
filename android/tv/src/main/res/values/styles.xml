@@ -1,0 +1,10 @@
+<resources>
+    <style name="Theme.Tv" parent="android:style/Theme.Material.NoActionBar">
+        <item name="android:fontFamily">sans</item>
+        <item name="android:colorAccent">#D9BD75</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:statusBarColor">#061A21</item>
+        <item name="android:navigationBarColor">#061A21</item>
+    </style>
+</resources>
