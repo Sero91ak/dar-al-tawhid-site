@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-10-08T18:39:35Z",
+  "timestamp": "2026-10-08T18:41:44Z",
   "trigger": "workflow_run",
   "finishedDeployConclusion": "failure",
-  "finishedDeployRun": "37825716209",
+  "finishedDeployRun": "37825740218",
   "live": {
     "buildId": "kids-shell-v167-salah-immersive1270",
     "label": "KIDS · V1.08.88",
@@ -14,13 +14,13 @@
   },
   "lastDeployRuns": [
     {
-      "conclusion": null,
+      "conclusion": "failure",
       "created_at": "2026-10-08T18:37:37Z",
       "head_sha": "1609dda98a2b4bb266f6deb8147f50a8838a46b5",
       "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37825740218",
       "id": 37825740218,
-      "status": "in_progress",
-      "updated_at": "2026-10-08T18:39:30Z"
+      "status": "completed",
+      "updated_at": "2026-10-08T18:41:33Z"
     },
     {
       "conclusion": "cancelled",
