@@ -3,7 +3,7 @@
   "use strict";
   if (window.DarKidsMajlis || !document.querySelector("#view-today .big-choice-grid")) return;
   var state = { open:false, approved:false, busy:false, age:"6–8", turns:0,
-    audio:null, recording:null, microphone:null, recordingTimer:null, audioUrl:null, lastAnswer:null, serverReady:false, serverAuthorized:false };
+    audio:null, recording:null, microphone:null, recordingTimer:null, audioUrl:null, player:null, lastAnswer:null, serverReady:false, serverAuthorized:false };
   try { var savedAge=localStorage.getItem("kids.age"); if(["4–5","6–8","9–10"].includes(savedAge)) state.age=savedAge; } catch (_) {}
   var entries = [
     {rx:/(wer ist allah|wer ist gott|wer ist unser schöpfer|was ist tawhid|was ist tawḥīd|einzigkeit allahs)/i,answer:"Allah ist unser Schöpfer. Er ist Einer und niemand ist so wie Er. Das lernen wir in Sūrah al-Ikhlāṣ. Magst du die kurze Sūrah im Qurʾān-Bereich hören?",source:"Qurʾān 112:1–4"},
@@ -101,6 +101,7 @@
   async function submitQuestion(value) {
     if(!state.approved||state.busy)return;
     var q=String(value||"").trim().slice(0,350);if(!q){status.textContent="Schreib erst eine Frage.";return;}
+    stopPlayback();
     var suggestions=chat.querySelector(".km-picks");if(suggestions)suggestions.remove();
     message("you",q);input.value="";state.audio=null;
     var item=null;
@@ -137,7 +138,16 @@
       });row.appendChild(b);chat.appendChild(row);
     }
   }
+  function stopPlayback(){
+    if(state.player){
+      try{state.player.pause();state.player.removeAttribute("src");state.player.load()}catch(_){}
+      state.player=null;
+    }
+    if(state.audioUrl){URL.revokeObjectURL(state.audioUrl);state.audioUrl=null;}
+    listen.textContent="▶ Antwort anhören";
+  }
   async function hear() {
+    if(state.player&&!state.player.paused){stopPlayback();status.textContent="Wiedergabe beendet.";return;}
     if(!state.serverAuthorized||!state.lastAnswer?.answerId||state.busy)return;
     // No browser TTS fallback: the product promises Serhat's actual master voice.
     state.busy=true;listen.disabled=true;status.textContent="Masterstimme wird angefragt …";
@@ -146,12 +156,17 @@
         headers:{"Content-Type":"application/json"},body:JSON.stringify({answerId:state.lastAnswer.answerId})});
       if(!res.ok||!(res.headers.get("Content-Type")||"").includes("audio/"))throw Error("voice-unavailable");
       var audioBlob=await res.blob();
-      if(state.audioUrl)URL.revokeObjectURL(state.audioUrl);
+      stopPlayback();
+      if(!state.open)return;
       state.audioUrl=URL.createObjectURL(audioBlob);
-      var audio=new Audio(state.audioUrl);audio.preload="auto";await audio.play();
+      var audio=new Audio(state.audioUrl);
+      state.player=audio;audio.preload="auto";
+      audio.onended=function(){if(state.player===audio){stopPlayback();status.textContent="Antwort fertig angehört.";}};
+      await audio.play();
+      listen.textContent="■ Stoppen";
       status.textContent="Du hörst die Antwort mit der Masterstimme.";
-    }catch(_){status.textContent="Die Serhat-Masterstimme ist in dieser Vorschau noch nicht freigeschaltet. Die Textantwort bleibt verfügbar."}
-    finally{state.busy=false;listen.disabled=false}
+    }catch(_){stopPlayback();status.textContent="Die Serhat-Masterstimme ist aktuell nicht verfügbar. Die Textantwort bleibt erhalten."}
+    finally{state.busy=false;listen.disabled=!(state.open&&state.serverAuthorized&&state.lastAnswer?.answerId)}
   }
   async function startOrStopMic(){
     if(state.recording && state.recording.state==="recording"){state.recording.stop();return;}
@@ -167,7 +182,7 @@
       state.recording.onstop=function(){
         clearTimeout(state.recordingTimer);
         state.microphone.getTracks().forEach(function(t){t.stop()});
-        state.audio=new Blob(parts,{type:state.recording.mimeType||"audio/webm"});
+        state.audio=state.open?new Blob(parts,{type:state.recording.mimeType||"audio/webm"}):null;
         mic.textContent="🎙";mic.setAttribute("aria-label","Sprachnachricht aufnehmen");
         status.textContent="Aufnahme bereit. Tippe auf ↑, um deine Wörter erkennen zu lassen. Du bestätigst den Text danach.";
       };
@@ -193,7 +208,7 @@
   }
   function close(){
     if(state.recording&&state.recording.state==="recording")state.recording.stop();
-    if(state.audioUrl){URL.revokeObjectURL(state.audioUrl);state.audioUrl=null}
+    stopPlayback();
     state.open=false;state.approved=false;state.serverAuthorized=false;state.audio=null;codeField.value="";
     var app=document.querySelector(".app");if(app)app.inert=false;
     root.classList.remove("km-open","km-parent-open");document.body.style.removeProperty("overflow");
@@ -258,6 +273,6 @@
   input.addEventListener("keydown",function(ev){if(ev.key==="Enter"&&!ev.shiftKey){ev.preventDefault();form.requestSubmit()}});
   mic.addEventListener("click",startOrStopMic);listen.addEventListener("click",hear);
   document.addEventListener("visibilitychange",function(){if(document.hidden&&state.recording&&state.recording.state==="recording")state.recording.stop()});
-  reset.addEventListener("click",function(){state.turns=0;state.lastAnswer=null;state.audio=null;listen.disabled=true;welcome()});
+  reset.addEventListener("click",function(){stopPlayback();state.turns=0;state.lastAnswer=null;state.audio=null;listen.disabled=true;welcome()});
   window.DarKidsMajlis={open:open,close:close,version:"kids-majlis-safe-beta-2"};
 })();
