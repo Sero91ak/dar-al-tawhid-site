@@ -40,15 +40,16 @@ function choose(q,age){
  for(const row of TOPICS)if(row[1].test(text))return {id:row[0],text:age==="4–5"?row[2].split(/(?<=[.!?])\s+/u).slice(0,2).join(" "):row[2],source:row[3]};
  return {id:"unknown",text:BASIC.unknown,source:null};
 }
+function capabilities(env){return {transcribe:env.KIDS_MAJLIS_STT_ENABLED==="true"&&!!env.AI?.run,voice:env.KIDS_MAJLIS_TTS_ENABLED==="true"&&!!String(env.ELEVENLABS_VOICE_ID||"").trim()&&String(env.ELEVENLABS_MODEL_ID||"")==="eleven_v4"&&!!String(env.ELEVENLABS_PRONUNCIATION_DICTIONARY_ID||"").trim()&&isVoiceConfigured(env)}}
 async function handleSession(req,env){
- if(req.method==="GET"){const s=await session(req,env);return json({ok:true,mode:"parent_code_pilot",authorized:!!s,expiresAt:s?.exp||null})}
+ if(req.method==="GET"){const s=await session(req,env);return json({ok:true,mode:"parent_code_pilot",authorized:!!s,expiresAt:s?.exp||null,capabilities:capabilities(env)})}
  if(req.method==="DELETE")return json({ok:true,authorized:false},200,{"Set-Cookie":cookie("",0)});
  if(req.method!=="POST")return json({ok:false,error:"method_not_allowed"},405);
  const supplied=String((await body(req,256))?.code||"");if(supplied.length<24||supplied.length>256)return json({ok:false,error:"invalid_parent_code"},403);
  const bytes=await Promise.all([crypto.subtle.digest("SHA-256",enc.encode(supplied)),crypto.subtle.digest("SHA-256",enc.encode(env.KIDS_MAJLIS_PARENT_PASSCODE))]);const a=new Uint8Array(bytes[0]),b=new Uint8Array(bytes[1]);let difference=0;for(let i=0;i<a.length;i++)difference|=a[i]^b[i];
  if(difference)return json({ok:false,error:"invalid_parent_code"},403);
  const exp=Date.now()+TTL,token=await sign({kind:"session",nonce:crypto.randomUUID(),exp},env);
- return json({ok:true,authorized:true,expiresAt:exp,mode:"parent_code_pilot"},200,{"Set-Cookie":cookie(token,1200)});
+ return json({ok:true,authorized:true,expiresAt:exp,mode:"parent_code_pilot",capabilities:capabilities(env)},200,{"Set-Cookie":cookie(token,1200)});
 }
 async function handleAnswer(req,env,user){
  if(req.method!=="POST")return json({ok:false,error:"method_not_allowed"},405);
