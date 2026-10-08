@@ -1,0 +1,229 @@
+/* KIDS SALAH STAGE V1 — five real prayer times, no fake/demo clock values.
+   Keeps the established home hero and the listening-resume button intact. */
+(function(){
+"use strict";
+const HOME=document.querySelector("#view-today");
+const HERO=HOME&&HOME.querySelector(".hero");
+if(!HERO||document.getElementById("kidsSalahStage"))return;
+const STORE="darkids_kids_prayer_place_v1";
+const CACHE="darkids_kids_prayer_days_v1";
+const NAMES={fajr:"Fajr",dhuhr:"Dhuhr",asr:"ʿAṣr",maghrib:"Maghrib",isha:"ʿIshāʾ"};
+const ORDER=["fajr","dhuhr","asr","maghrib","isha"];
+const escapeHtml=value=>String(value==null?"":value).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let place=null,days={},lastDay="",fetchTicket=0,lastFetch=0;
+try{place=JSON.parse(localStorage.getItem(STORE)||"null");}catch(_){}
+if(!place||!Number.isFinite(+place.lat)||!Number.isFinite(+place.lon)||!place.tz)place=null;
+try{const saved=JSON.parse(localStorage.getItem(CACHE)||"{}");if(saved&&saved.placeKey===placeKey(place)&&saved.days)days=saved.days;}catch(_){}
+const stage=document.createElement("section");
+stage.className="kids-salah-stage";
+stage.id="kidsSalahStage";
+stage.setAttribute("aria-label","Gebetszeiten");
+stage.innerHTML=
+  '<div class="kids-salah-top"><span class="kids-salah-kicker">DEIN GEBETSMOMENT</span>'+
+  '<button class="kids-salah-location" id="kidsSalahLocation" type="button" aria-label="Gebetsort einstellen"><span id="kidsSalahCity">Ort wählen</span></button></div>'+
+  '<h2 class="kids-salah-heading">Zeit für <em>Ṣalāh</em></h2>'+
+  '<span class="kids-salah-name" id="kidsSalahName">Dein nächstes Gebet</span>'+
+  '<time class="kids-salah-clock" id="kidsSalahClock">--:--</time>'+
+  '<div class="kids-salah-next"><i class="kids-salah-beat" aria-hidden="true"></i>'+
+  '<span id="kidsSalahNextText">Standort einstellen</span><strong class="kids-salah-countdown" id="kidsSalahCountdown"></strong></div>'+
+  '<div class="kids-salah-progress" aria-hidden="true"><span id="kidsSalahProgress"></span></div>'+
+  '<div class="kids-salah-five" id="kidsSalahFive" aria-label="Fünf tägliche Gebetszeiten">'+
+  ORDER.map(key=>'<button type="button" tabindex="-1" data-prayer="'+key+'"><span class="kids-salah-dot" aria-hidden="true"></span><span class="kids-salah-prayer">'+NAMES[key]+'</span><time>--:--</time></button>').join("")+
+  '</div><p class="kids-salah-status" id="kidsSalahStatus">Gebetszeiten passend zu deinem Ort.</p>';
+HERO.insertAdjacentElement("afterend",stage);
+const $=sel=>stage.querySelector(sel);
+const city=$("#kidsSalahCity"),prayerName=$("#kidsSalahName"),clock=$("#kidsSalahClock");
+const nextText=$("#kidsSalahNextText"),countdown=$("#kidsSalahCountdown");
+const status=$("#kidsSalahStatus"),progress=$("#kidsSalahProgress");
+$("#kidsSalahLocation").addEventListener("click",openSettings);
+
+const overlay=document.createElement("div");
+overlay.className="kids-salah-overlay";overlay.hidden=true;
+overlay.innerHTML=
+ '<div class="kids-salah-dialog" role="dialog" aria-modal="true" aria-labelledby="kidsSalahModalTitle">'+
+ '<button type="button" class="kids-salah-close" id="kidsSalahClose" aria-label="Schließen">Schließen</button>'+
+ '<h2 id="kidsSalahModalTitle">Dein Gebetsort</h2>'+
+ '<p>Damit deine Gebetszeiten stimmen, wähle deinen Ort. Bitte deine Eltern um Hilfe.</p>'+
+ '<button type="button" class="kids-salah-primary" id="kidsSalahGps">Meinen Standort verwenden</button>'+
+ '<label for="kidsSalahQuery">Oder Stadt suchen</label>'+
+ '<input id="kidsSalahQuery" type="search" autocomplete="off" placeholder="z. B. Bonn, Berlin, Istanbul">'+
+ '<div class="kids-salah-results" id="kidsSalahResults" aria-live="polite"></div>'+
+ '<details><summary>Berechnung einstellen (für Eltern)</summary>'+
+ '<label for="kidsSalahAngle">Fajr-/ʿIshāʾ-Winkel</label>'+
+ '<select id="kidsSalahAngle"><option value="12">12°</option><option value="15">15°</option><option value="18">18°</option></select>'+
+ '<label for="kidsSalahAsr">ʿAṣr-Berechnung</label>'+
+ '<select id="kidsSalahAsr"><option value="1">Standard (Faktor 1)</option><option value="2">Ḥanafī (Faktor 2)</option></select>'+
+ '<button class="kids-salah-primary" id="kidsSalahSaveMethod" type="button" style="margin-top:12px">Einstellungen speichern</button>'+
+ '</details><p class="kids-salah-err" id="kidsSalahErr" role="status"></p></div>';
+document.body.appendChild(overlay);
+const dialog=overlay.querySelector(".kids-salah-dialog");
+const q=overlay.querySelector("#kidsSalahQuery");
+const results=overlay.querySelector("#kidsSalahResults");
+const err=overlay.querySelector("#kidsSalahErr");
+const angle=overlay.querySelector("#kidsSalahAngle");
+const asr=overlay.querySelector("#kidsSalahAsr");
+let inputTimer=null,searchTicket=0;
+overlay.querySelector("#kidsSalahClose").addEventListener("click",closeSettings);
+overlay.addEventListener("click",e=>{if(e.target===overlay)closeSettings();});
+document.addEventListener("keydown",e=>{if(!overlay.hidden&&e.key==="Escape")closeSettings();});
+overlay.querySelector("#kidsSalahGps").addEventListener("click",()=>{
+ err.textContent="";
+ if(!navigator.geolocation){err.textContent="Standort ist hier nicht verfügbar. Suche bitte deine Stadt.";return;}
+ navigator.geolocation.getCurrentPosition(pos=>{
+  const tz=Intl.DateTimeFormat().resolvedOptions().timeZone||"Europe/Berlin";
+  setPlace({lat:+pos.coords.latitude.toFixed(3),lon:+pos.coords.longitude.toFixed(3),tz,name:"Dein Standort"});
+  closeSettings();
+ },()=>{err.textContent="Standort nicht freigegeben. Suche bitte deine Stadt.";},
+ {enableHighAccuracy:false,timeout:15000,maximumAge:30*60*1000});
+});
+function openSettings(){
+ overlay.hidden=false;err.textContent="";results.innerHTML="";
+ angle.value=String(place?.angle||12);asr.value=String(place?.asr||1);
+ overlay.querySelector("#kidsSalahClose").focus();
+}
+function closeSettings(){overlay.hidden=true;$("#kidsSalahLocation").focus();}
+overlay.querySelector("#kidsSalahSaveMethod").addEventListener("click",()=>{
+ if(!place){err.textContent="Wähle bitte zuerst deinen Gebetsort.";return;}
+ setPlace({...place,angle:Number(angle.value),asr:Number(asr.value)});closeSettings();
+});
+q.addEventListener("input",()=>{
+ clearTimeout(inputTimer);const text=q.value.trim();
+ if(text.length<2){results.innerHTML="";return;}
+ inputTimer=setTimeout(()=>searchCity(text),350);
+});
+async function searchCity(query){
+ const request=++searchTicket;results.textContent="Suche Orte …";
+ try{
+  const url="https://geocoding-api.open-meteo.com/v1/search?name="+encodeURIComponent(query)+"&count=7&language=de&format=json";
+  const response=await fetch(url);
+  if(!response.ok)throw new Error("Search unavailable");
+  const data=await response.json();
+  if(request!==searchTicket)return;
+  const rows=Array.isArray(data.results)?data.results:[];
+  results.innerHTML="";
+  if(!rows.length){results.textContent="Kein Ort gefunden. Bitte anders schreiben.";return;}
+  rows.forEach(item=>{
+   if(!Number.isFinite(+item.latitude)||!Number.isFinite(+item.longitude)||!item.timezone)return;
+   const b=document.createElement("button");b.type="button";
+   b.textContent=[item.name,item.admin1,item.country].filter(Boolean).join(", ");
+   b.addEventListener("click",()=>{
+    setPlace({lat:Number(item.latitude.toFixed(3)),lon:Number(item.longitude.toFixed(3)),tz:item.timezone,
+      name:[item.name,item.country_code].filter(Boolean).join(", ")});
+    closeSettings();
+   });
+   results.appendChild(b);
+  });
+ }catch(_){if(request===searchTicket)results.textContent="Die Ortssuche ist gerade nicht verfügbar. Nutze bitte den Standortknopf.";}
+}
+function placeKey(p){return p?[p.lat,p.lon,p.tz,p.angle||12,p.asr||1].join("|"):"";}
+function setPlace(p){
+ const changed=placeKey(place)!==placeKey(p);
+ place=p;
+ try{localStorage.setItem(STORE,JSON.stringify(p));}catch(_){}
+ if(changed){days={};lastFetch=0;try{localStorage.removeItem(CACHE);}catch(_){}}
+ draw();refresh();
+}
+function dateInZone(date,tz){
+ const parts=new Intl.DateTimeFormat("en-GB",{timeZone:tz,year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(date);
+ const get=t=>parts.find(p=>p.type===t)?.value||"";
+ return get("year")+"-"+get("month")+"-"+get("day");
+}
+function tomorrow(date){
+ const d=new Date(date+"T12:00:00Z");d.setUTCDate(d.getUTCDate()+1);
+ return d.toISOString().slice(0,10);
+}
+function prayerUtc(date,hm,tz){
+ const match=/^(\d{1,2}):(\d{2})$/.exec(String(hm||""));if(!match)return NaN;
+ const [y,m,d]=date.split("-").map(Number);
+ const wanted=Date.UTC(y,m-1,d,+match[1],+match[2]);
+ let actual=wanted;
+ const formatter=new Intl.DateTimeFormat("en-GB",{timeZone:tz,year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hourCycle:"h23"});
+ for(let n=0;n<3;n++){
+  const parts=formatter.formatToParts(new Date(actual));
+  const val=t=>Number(parts.find(p=>p.type===t)?.value||0);
+  const visible=Date.UTC(val("year"),val("month")-1,val("day"),val("hour"),val("minute"));
+  actual+=wanted-visible;
+ }
+ return actual;
+}
+function hhmm(seconds){
+ const h=Math.floor(seconds/3600),m=Math.floor(seconds%3600/60),s=seconds%60;
+ return [h,m,s].map(n=>String(n).padStart(2,"0")).join(":");
+}
+function entries(date,data){
+ if(!data?.times)return[];
+ return ORDER.map(key=>{
+  const v=data.times[key]?.time;return{key,date,time:v,ts:prayerUtc(date,v,place.tz)};
+ }).filter(p=>Number.isFinite(p.ts));
+}
+function draw(){
+ city.textContent=place?.name||"Ort wählen";
+ if(!place){prayerName.textContent="Dein nächstes Gebet";clock.textContent="--:--";nextText.textContent="Standort einstellen";
+  countdown.textContent="";status.textContent="Wähle deinen Ort für zuverlässige Gebetszeiten.";
+  progress.style.width="0%";return;}
+ let today;
+ try{today=dateInZone(new Date(),place.tz);}catch(_){status.textContent="Zeitzone prüfen";return;}
+ if(today!==lastDay){lastDay=today;lastFetch=0;}
+ const now=Date.now(),list=[...entries(today,days[today]),...entries(tomorrow(today),days[tomorrow(today)])].sort((a,b)=>a.ts-b.ts);
+ const todays=days[today];
+ ORDER.forEach(key=>{
+  const b=$("#kidsSalahFive").querySelector('[data-prayer="'+key+'"]');
+  b.querySelector("time").textContent=todays?.times?.[key]?.time||"--:--";
+  b.setAttribute("aria-current","false");
+ });
+ const next=list.find(p=>p.ts>now);
+ if(!next){
+  prayerName.textContent="Gebetszeiten";clock.textContent="--:--";nextText.textContent="Nächstes Gebet wird geladen";
+  countdown.textContent="";progress.style.width="0%";
+  status.textContent=todays?"Die nächste Gebetszeit wird aktualisiert.":"Gebetszeiten werden geladen …";
+  return;
+ }
+ const previous=list.filter(p=>p.ts<=now).pop();
+ const tomorrowPrayer=next.date!==today;
+ prayerName.textContent=(tomorrowPrayer?"Morgen · ":"")+NAMES[next.key];
+ clock.textContent=next.time;
+ const remaining=Math.max(0,Math.ceil((next.ts-now)/1000));
+ nextText.textContent="Beginnt in";
+ countdown.textContent=hhmm(remaining);
+ const b=$("#kidsSalahFive").querySelector('[data-prayer="'+next.key+'"]');
+ if(!tomorrowPrayer&&b)b.setAttribute("aria-current","true");
+ const start=previous?.ts||prayerUtc(today,"00:00",place.tz);
+ const width=Math.max(0,Math.min(100,((now-start)/(next.ts-start))*100));
+ progress.style.width=width.toFixed(2)+"%";
+ status.textContent="Berechnet für "+(place.name||"deinen Ort")+(navigator.onLine?"":" · Offline-Daten");
+}
+async function refresh(){
+ if(!place)return;
+ const ticket=++fetchTicket,now=new Date(),today=dateInZone(now,place.tz),tom=tomorrow(today);
+ const stale=[today,tom].filter(day=>!days[day]||days[day].date!==day||Date.now()-lastFetch>60*60*1000);
+ if(!stale.length){draw();return;}
+ let succeeded=false;
+ await Promise.all(stale.map(async day=>{
+  const params=new URLSearchParams({lat:String(place.lat),lon:String(place.lon),tz:place.tz,
+   angle:String(place.angle||12),asr:String(place.asr||1),date:day});
+  try{
+   const response=await fetch("/api/prayer/times?"+params,{cache:"no-store"});
+   if(!response.ok)throw new Error("prayer API unavailable");
+   const data=await response.json();
+   if(ticket!==fetchTicket)return;
+   if(data.ok&&data.date===day&&data.times&&ORDER.every(k=>data.times[k]?.time)){
+    days[day]=data;succeeded=true;
+   }
+  }catch(_){}
+ }));
+ if(ticket!==fetchTicket)return;
+ if(succeeded){lastFetch=Date.now();try{localStorage.setItem(CACHE,JSON.stringify({placeKey:placeKey(place),days}));}catch(_){}}
+ draw();
+ if(!days[today])status.textContent="Verbindung fehlt. Bitte später erneut versuchen.";
+}
+draw();
+if(place)refresh();
+setInterval(()=>{
+ if(!place)return;
+ draw();
+ const current=dateInZone(new Date(),place.tz);
+ if(current!==lastDay||Date.now()-lastFetch>65*60*1000)refresh();
+},1000);
+window.addEventListener("online",()=>{if(place)refresh();});
+document.addEventListener("visibilitychange",()=>{if(!document.hidden&&place)refresh();});
+})();
