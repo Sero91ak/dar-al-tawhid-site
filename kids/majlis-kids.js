@@ -119,8 +119,12 @@
       var item=el("section","km-media km-sunnah");
       item.appendChild(el("strong","km-verse-head",String(media.title||"Geprüfter Lerntext")));
       if(media.person)item.appendChild(el("small","km-source","Überliefert von: "+String(media.person)));
+      if(media.arabicExcerpt&&typeof media.arabicExcerpt==="string"){
+        item.appendChild(el("small","km-translation-note","Arabischer Originalausschnitt · nicht der vollständige Ḥadīṯ"));
+        item.appendChild(el("p","km-arabic",media.arabicExcerpt));
+      }
       if(media.text){
-        item.appendChild(el("small","km-translation-note","Vorhandene deutsche Übertragung · kein arabischer Originaltext"));
+        item.appendChild(el("small","km-translation-note","Vorhandene deutsche Übertragung"));
         item.appendChild(el("p","km-meaning",String(media.text)));
       }else{
         item.appendChild(el("small","km-translation-note","Kindgerechte Lernzusammenfassung · kein wörtliches Ḥadīṯ-Zitat"));
