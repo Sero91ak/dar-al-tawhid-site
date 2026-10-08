@@ -43,6 +43,13 @@ fi
 echo ""
 echo "Sicherungsordner auf dem Mac: $BASE"
 echo "WICHTIG: Ohne diese Schluessel sind spaetere APK-Updates nicht signierbar."
+echo ""
+read -r -p "Ist de.daraltawhid.app bereits mit einer echten Release-Version bei Google Play erschienen? [ja/NEIN] " PLAY_EXISTING
+if [[ "$PLAY_EXISTING" == "ja" || "$PLAY_EXISTING" == "JA" ]]; then
+  echo "STOPP: Zuerst den vorhandenen Google-Play-App-Signaturschluessel und die bisherige Android-Release-Signatur abgleichen."
+  echo "Ein neu erzeugter Schluessel koennte Updates zwischen Google Play und Website blockieren."
+  exit 4
+fi
 read -r -p "Die Schluessel dort lokal erzeugen und als GitHub Secrets hinterlegen? [ja/NEIN] " CONFIRM
 if [[ "$CONFIRM" != "ja" && "$CONFIRM" != "JA" ]]; then
   echo "Abgebrochen. Es wurde kein Schluessel angelegt."
