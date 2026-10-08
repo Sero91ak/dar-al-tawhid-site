@@ -2281,7 +2281,10 @@ body.is-ilm-chat-route .ilm-citation-ref{
   background:transparent!important;
   box-shadow:none!important;
   color:var(--ilm-accent)!important;
-  font:650 .77em/1 inherit!important;
+  font-family:inherit!important;
+  font-size:.77em!important;
+  font-weight:650!important;
+  line-height:1!important;
   padding:0 2px!important;
   margin:0 1px!important;
   border-radius:3px!important;
@@ -2292,4 +2295,11 @@ body.is-ilm-chat-route .ilm-citation-ref:hover,
 body.is-ilm-chat-route .ilm-citation-ref:focus-visible{
   text-decoration:underline!important;
   outline-offset:2px;
+}
+
+body.is-ilm-chat-route .ilm-menu-popover .ilm-menu-mode-option[aria-pressed="true"],
+body.is-ilm-chat-route .ilm-menu-popover .ilm-menu-mode-option.active,
+body.is-ilm-chat-route .ilm-menu-popover .ilm-menu-mode-option.is-active{
+  border-color:color-mix(in srgb,var(--ilm-accent) 58%,transparent)!important;
+  background:color-mix(in srgb,var(--ilm-accent) 13%,transparent)!important;
 }
