@@ -534,3 +534,44 @@ body .app #view-parents.view > .page-head.page-head{
   background-image:linear-gradient(180deg,rgba(4,17,28,.01),rgba(4,17,28,.08) 45%,rgba(4,17,28,.56) 100%),url("https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/cbe2efa5-f245-41e4-9262-be656af8ffc7/c22155b0-3b92-4227-a372-cfdaf600c518/Single_standalone_cinematic_16_9_hero_illustration_for_a_pre.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiZDEzNTA0YmI5ZTBiNjNjMyIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTMzMDM2M30.RWZGx2UrVdXyvfYQRM-noI7t5EVNJPS9cvcn4fawl40")!important;
   background-size:cover!important;background-position:center 50%!important;background-repeat:no-repeat!important;
 }
+
+/* KIDS_PARENTS_GENDER_HERO_V1254
+   Nur die Eltern-Bildbuehne. Originalgetreue, generierte Jungen-/Maedchenmotive
+   werden anhand des bestehenden Profilmerkmals gewechselt.
+   3 Hintergrundebenen statt hartem Cover-Crop: Kopf und Oberkoerper bleiben sichtbar. */
+html[data-view="parents"] body .app #view-parents.view > .page-head.page-head{
+  background-repeat:no-repeat!important;
+  background-size:100% 100%,100% 100%,auto 100%!important;
+  background-position:center,center,right center!important;
+}
+html[data-view="parents"] body .app:not([data-gender="girl"]) #view-parents.view > .page-head.page-head{
+  background-color:#092942!important;
+  background-image:
+    linear-gradient(90deg,rgba(5,20,36,.96) 0%,rgba(5,20,36,.85) 32%,rgba(5,20,36,.59) 51%,rgba(5,20,36,.10) 78%,transparent 100%),
+    linear-gradient(180deg,rgba(5,22,37,.03) 0%,rgba(5,22,37,.04) 49%,rgba(6,26,41,.36) 74%,#0c2636 100%),
+    url("/kids/assets/kids-art/parents-hero-boy-v1254.jpg")!important;
+}
+html[data-view="parents"] body .app[data-gender="girl"] #view-parents.view > .page-head.page-head{
+  background-color:#21182e!important;
+  background-image:
+    linear-gradient(90deg,rgba(25,17,39,.97) 0%,rgba(25,17,39,.86) 32%,rgba(25,17,39,.57) 51%,rgba(25,17,39,.08) 79%,transparent 100%),
+    linear-gradient(180deg,rgba(12,18,32,.02) 0%,rgba(12,18,32,.05) 50%,rgba(10,27,40,.40) 75%,#0c2636 100%),
+    url("/kids/assets/kids-art/parents-hero-girl-v1254.jpg")!important;
+}
+html[data-view="parents"] body .app #view-parents.view > .page-head.page-head .kicker,
+html[data-view="parents"] body .app #view-parents.view > .page-head.page-head h2,
+html[data-view="parents"] body .app #view-parents.view > .page-head.page-head p{
+  position:relative!important;
+  z-index:2!important;
+}
+html[data-view="parents"] body .app #view-parents.view > .page-head.page-head p{
+  width:min(62vw,390px)!important;
+  max-width:min(62vw,390px)!important;
+  text-wrap:pretty!important;
+}
+@media(min-width:700px){
+  html[data-view="parents"] body .app #view-parents.view > .page-head.page-head p{
+    width:min(43vw,480px)!important;
+    max-width:min(43vw,480px)!important;
+  }
+}
