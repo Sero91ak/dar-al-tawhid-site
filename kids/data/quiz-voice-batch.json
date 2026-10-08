@@ -14,10 +14,11 @@
   "retentionPolicy": "never-delete-previously-published-quiz-audio-in-staged-rollout",
   "validation": "question-exact-text, answer-order, correct-feedback-and-explanation, playable-audio-asset",
   "pilotAgeBand": "all",
-  "batchNotes": "Full 900-question catalog audio fill: only approved quiz text, answer, success/retry and explanation. Scan for missing audio each batch; keep existing V4 takes, cache Flash, verify 69 bilingual questions. Stop only once all 900 are complete.",
+  "batchNotes": "Auto voice queue restart after correcting GitHub runner apt-update timeout; create all 900 Serhat-Master audio sets (German Flash and Arabic Fusha V4), preserve completed recordings.",
   "germanModelId": "eleven_flash_v2_5",
   "arabicModelId": "eleven_v4",
   "costPolicy": "API Flash v2.5 for new German speech; cache/reuse approved recordings; never force rerender when model changes",
   "creditSaver": true,
-  "autoAdvance": true
+  "autoAdvance": true,
+  "autoQueueEnabled": true
 }
