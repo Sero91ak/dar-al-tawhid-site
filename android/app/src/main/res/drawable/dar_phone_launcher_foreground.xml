@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Keep the full Arabic and German DAR AL TAWḤĪD lettering inside Android
-     launcher masks. The complete source artwork is not cropped. -->
+     launcher masks. Keep a 26dp safe margin for Arabic and bottom lettering. -->
 <inset xmlns:android="http://schemas.android.com/apk/res/android"
     android:drawable="@drawable/dar_phone_default"
-    android:inset="18dp" />
+    android:inset="26dp" />
