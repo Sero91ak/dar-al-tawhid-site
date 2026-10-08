@@ -176,15 +176,37 @@ function runKidsDesignGuard() {
     for (const marker of ["kids-detail-appbar","kids-detail-dock-back","safe-area-inset-top"]) {
       if (!dockCss.includes(marker)) failed += fail("Kids-Detail-Dock CSS: "+marker+" fehlt");
     }
+    // Read the approved release's cache version, not a frozen v1247 value.
+    // Otherwise every legitimate update is blocked and never reaches devices.
+    const release = JSON.parse(fs.readFileSync(path.join(ROOT, "kids/version.json"), "utf8"));
+    const swVersion = String(release.visualSystem?.serviceWorkerCache || "").replace(/^v/, "");
+    const compact = String(release.visualSystem?.compactGlobalTopDock || "");
+    const dockCssRef = "global-detail-dock-v1247.css?v=" + swVersion;
+    const dockJsRef = "global-detail-dock-v1247.js?v=1247";
+    if (!/^\\d+$/.test(swVersion)) failed += fail("Kids: Service-Worker-Cacheversion fehlt");
+    if (compact === "v1248") {
+      if (!doc.includes("KIDS_COMPACT_GLOBAL_TOP_DOCK_V1248") || !dockCss.includes("KIDS_COMPACT_GLOBAL_TOP_DOCK_V1248")) {
+        failed += fail("Kids: kompakter globaler Top-Kopf V1248 fehlt");
+      }
+      for (const needle of [
+        "min-height:calc(60px + env(safe-area-inset-top,0px))",
+        "min-height:calc(64px + env(safe-area-inset-top,0px))",
+        "min-width:44px!important",
+        "white-space:normal!important",
+        "max-height:none!important"
+      ]) {
+        if (!dockCss.includes(needle)) failed += fail("Kids-Detail-Dock kompakte Sicherheitsregel fehlt: "+needle);
+      }
+    }
     for (const file of ["kids/index.html","kids/start.html","kids/shell.html"]) {
       const page = fs.readFileSync(path.join(ROOT, file), "utf8");
-      for (const asset of ["global-detail-dock-v1247.css?v=1247","global-detail-dock-v1247.js?v=1247"]) {
+      for (const asset of [dockCssRef,dockJsRef]) {
         if (!page.includes(asset)) failed += fail(file+": globaler Detail-Kopf fehlt: "+asset);
       }
     }
     const sw = fs.readFileSync(path.join(ROOT, "kids/sw.js"), "utf8");
-    if (!sw.includes("dar-al-tawhid-kids-v1247") || !sw.includes("global-detail-dock-v1247.css?v=1247") || !sw.includes("global-detail-dock-v1247.js?v=1247")) {
-      failed += fail("Kids: SW muss V1247 und CSS/JS für Offline-Nutzung vorhalten");
+    if (!sw.includes("dar-al-tawhid-kids-v"+swVersion) || !sw.includes(dockCssRef) || !sw.includes(dockJsRef)) {
+      failed += fail("Kids: Service Worker enthält nicht die aktuelle CSS/JS-Offlineversion "+swVersion);
     }
   }
 
