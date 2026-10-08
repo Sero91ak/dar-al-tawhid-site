@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.provider.Settings
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
@@ -22,6 +23,7 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.Toast
 import android.widget.Button
 import android.widget.LinearLayout
 import androidx.activity.OnBackPressedCallback
@@ -140,6 +142,13 @@ class MainActivity : AppCompatActivity() {
                       window.DAR_ANDROID_SELECT_APP_ICON=function(name){
                         DarNative.setAppIcon(String(name||"default"));
                       };
+                      window.webkit.messageHandlers.darOpenSystemSettings={
+                        postMessage:function(data){
+                          DarNative.openSystemSettings(
+                            String(data&&data.kind?data.kind:"app")
+                          );
+                        }
+                      };
                     } catch(e) {}
                 })();
                 """.trimIndent(),
@@ -220,6 +229,11 @@ class MainActivity : AppCompatActivity() {
                   window.DAR_ANDROID_SELECT_APP_ICON=function(name){
                     try{DarNative.setAppIcon(String(name||"default"))}catch(e){}
                   };
+                  window.webkit.messageHandlers.darOpenSystemSettings={
+                    postMessage:function(data){
+                      try{DarNative.openSystemSettings(String(data&&data.kind?data.kind:"app"))}catch(e){}
+                    }
+                  };
                 }catch(e){}
 
                 window.DAR_ANDROID_NATIVE_PUSH=true;
@@ -272,6 +286,35 @@ class MainActivity : AppCompatActivity() {
 
         @JavascriptInterface
         fun getAppIcon(): String = DarAppIcons.current(this@MainActivity)
+
+        @JavascriptInterface
+        fun openSystemSettings(kind: String) {
+            runOnUiThread {
+                val which = kind.trim().lowercase()
+                // Android settings UIs differ by vendor. App details always works
+                // and links directly to location and notification permissions.
+                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                    data = Uri.parse("package:$packageName")
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                }
+                try {
+                    startActivity(intent)
+                    if (which == "location") {
+                        Toast.makeText(this@MainActivity,
+                            "Unter Berechtigungen → Standort den Zugriff erlauben.",
+                            Toast.LENGTH_LONG).show()
+                    } else if (which == "notifications") {
+                        Toast.makeText(this@MainActivity,
+                            "Unter Benachrichtigungen die gewünschten Hinweise erlauben.",
+                            Toast.LENGTH_LONG).show()
+                    }
+                } catch (_: ActivityNotFoundException) {
+                    Toast.makeText(this@MainActivity,
+                        "Bitte die App-Berechtigungen in den Android-Einstellungen öffnen.",
+                        Toast.LENGTH_LONG).show()
+                }
+            }
+        }
 
         @JavascriptInterface
         fun pushSettings(json: String) {
@@ -383,7 +426,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun onPermissionRequest(request: PermissionRequest?) {
-            request?.grant(request.resources)
+            // Geolocation is handled by its own runtime-permission callback.
+            // Never blindly grant camera/microphone/protected-media permissions
+            // merely because a web page requested them.
+            request?.deny()
         }
     }
 
