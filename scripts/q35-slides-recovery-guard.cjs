@@ -23,7 +23,7 @@ assert.doesNotMatch(yaml,/^(?:scholar|author):/m,"Do not attribute mixed Quran/h
 assert.doesNotMatch(post,/#DarAlTawhid|📥 Telegram|🌐 Website|📸 Instagram/,"No social extras in visitor post");
 const numbers=[...body.matchAll(/<!-- slide: (\d+) -->/g)].map(m=>Number(m[1]));
 assert.deepEqual(numbers,Array.from({length:22},(_,i)=>i+1),"Slide body numbers must be sequential");
-for(const term of ["4:157–158","39:42","6:60","ʿAlī ibn Abī Ṭalḥah","Maṭar al-Warrāq","Ibn Zayd","al-Ḥasan al-Baṣrī","Ṣaḥīḥ Muslim, Nr. 156","Ṣaḥīḥ Muslim, Nr. 2937","Ibn Baṭṭah","Abū ʿAmr ad-Dānī","Fazit"]){
+for(const term of ["4:157–158","39:42","6:60","ʿAlī ibn Abī Ṭalḥah","Maṭar al-Warrāq","Ibn Zayd","Al-Ḥasan al-Baṣrī","Ṣaḥīḥ Muslim, Nr. 156","Ṣaḥīḥ Muslim, Nr. 2937","Ibn Baṭṭah","Abū ʿAmr ad-Dānī","Fazit"]){
   assert.ok(post.includes(term),"User-supplied section missing: "+term);
 }
 const sandbox={window:{},global:{}};
