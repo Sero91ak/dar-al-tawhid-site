@@ -7149,6 +7149,19 @@
         ".github/workflows/check-quellen-library.yml"
       ],
       "expiresAt": "2026-11-30T23:59:00.000Z"
+    },
+    {
+      "id": "q35-post468-full-user-text-slide-repair-2026-10-08",
+      "approvedBy": "user-q35-exact-original-text-for-existing-slide-post-468-and-fix-slide-1-of-1",
+      "reason": "User submitted the complete original Q35 text to restore existing 468 as correctly functioning multi-slide article, keeping Q36 untouched and no new push.",
+      "paths": [
+        "content/posts/2026-10-08-isa-ibn-maryam-nuzul-frueher-ikhtilaf-slides.md",
+        "cloudflare/worker.js",
+        "scripts/q35-slides-recovery-guard.cjs",
+        ".github/workflows/check-q35-slides-recovery.yml",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-30T23:59:00.000Z"
     }
   ],
   "enabled": true
