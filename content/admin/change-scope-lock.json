@@ -7201,6 +7201,17 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-30T23:59:00.000Z"
+    },
+    {
+      "id": "post-reader-smartphone-single-column-2026-10-08",
+      "approvedBy": "user-requested-single-page-smartphone-readable-post-layout-no-book",
+      "reason": "User explicitly rejects opened-book/two-page reader layout. Scope limited to responsive post CSS and dynamic slide-height regression count; no article text, sources, push, Kids, test app or Apple TV changes.",
+      "paths": [
+        "assets/adaptive-layout.css",
+        "scripts/slide-natural-height-guard.cjs",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-30T23:59:00.000Z"
     }
   ],
   "enabled": true
