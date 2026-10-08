@@ -573,10 +573,15 @@
         older.forEach(function(m,index) {
           if (m.role === "user") {
             if (current) turns.push(current);
-            current = {id:String(m.id || index),question:String(m.content || "Frühere Frage"),answers:[]};
+            current = {id:String(m.id || index),question:String(m.content || "Frühere Frage"),answers:[],answerKeys:Object.create(null)};
           } else if (m.role !== "loading") {
-            if (!current) current = {id:"older-" + index,question:"Frühere Antwort",answers:[]};
-            current.answers.push(regularMessage(m));
+            if (!current) current = {id:"older-" + index,question:"Frühere Antwort",answers:[],answerKeys:Object.create(null)};
+            var archivedSignature = m.role === "assistant"
+              ? String(window.renderIlmAnswerText(m.reply || {})).replace(/\s+/g," ").trim() : "";
+            if (!archivedSignature || !current.answerKeys[archivedSignature]) {
+              current.answers.push(regularMessage(m));
+              if (archivedSignature) current.answerKeys[archivedSignature] = true;
+            }
           }
         });
         if (current) turns.push(current);
