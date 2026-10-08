@@ -40,6 +40,38 @@
     }
   })();
 
+  /* MAJLIS SPACING BOOT V1342: critical layout after legacy styles, test route only. */
+  (function ensureMajlisSpacing() {
+    var key = "darIlmSpacingCoreV1342";
+    function install() {
+      var root = document.head || document.documentElement;
+      if (!root || !document.createElement || !document.getElementById || document.getElementById(key)) return;
+      var style = document.createElement("style");
+      style.id = key;
+      style.textContent = [
+        'html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-examples-v1341{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:12px!important;margin:17px 0 0!important;width:100%!important;padding:0!important}',
+        'html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-example-v1341{display:flex!important;flex-direction:row!important;align-items:center!important;min-height:75px!important;width:100%!important;min-width:0!important;max-width:100%!important;padding:13px 15px!important;margin:0!important;gap:12px!important;border-radius:14px!important;white-space:normal!important;box-sizing:border-box!important}',
+        'html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-example-text-v1341{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:7px!important;flex:1 1 auto!important;min-width:0!important;text-align:left!important}',
+        'html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-example-text-v1341>small,html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-example-text-v1341>b{display:block!important;position:static!important;float:none!important;white-space:normal!important;margin:0!important;max-width:100%!important}',
+        'html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-example-text-v1341>small{font:700 10px/1.3 system-ui,sans-serif!important;color:var(--ilm-accent)!important;text-transform:uppercase!important}',
+        'html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-example-text-v1341>b{font:630 14px/1.4 system-ui,sans-serif!important;color:var(--ilm-primary-text)!important;overflow-wrap:anywhere!important}',
+        'html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-paths{margin-top:31px!important;padding-bottom:18px!important}',
+        'html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-path-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;border:0!important;margin-top:16px!important}',
+        'html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-path-grid>button.ilm-welcome-path{margin:0!important;min-width:0!important;min-height:91px!important;border:1px solid color-mix(in srgb,var(--ilm-accent) 21%,transparent)!important;border-radius:14px!important;padding:13px 12px!important}',
+        'html body.is-ilm-chat-route .ilm-message-inner{padding-top:19px!important}',
+        'html body.is-ilm-chat-route .ilm-message-inner .ilm-user-row{margin:12px 0 18px!important}',
+        'html body.is-ilm-chat-route .ilm-message-inner .ilm-assistant-message{margin:7px 0 23px!important}',
+        'html body.is-ilm-chat-route .ilm-answer-text .ilm-primary-references{margin-top:18px!important;padding-top:15px!important}',
+        'html body.is-ilm-chat-route .ilm-answer-text .ilm-science-actions{margin:16px 0 11px!important;gap:9px!important}',
+        '@media(min-width:760px){html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-examples-v1341{grid-template-columns:repeat(2,minmax(0,1fr))!important}}',
+        '@media(max-width:355px){html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-path-grid{grid-template-columns:minmax(0,1fr)!important}}'
+      ].join("\n");
+      root.appendChild(style);
+    }
+    install();
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded",install,{once:true});
+  })();
+
   var ALLOW = [
     "islamweb.net",
     "shamela.ws",
