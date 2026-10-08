@@ -81,8 +81,8 @@ async function throttle(req,env,voice=false){const ip=req.headers.get("CF-Connec
 function clean(s){const t=String(s||"").normalize("NFKC").replace(/[\u0000-\u001f\u007f]/g," ").trim();return t.length<=350?t:""}
 function choose(q,age){
  const text=clean(q);
+ if(/angst vor|tut mir weh|schlägt mich|will sterben|verletze mich|missbrauch|suizid|selbst verletzen|habe angst|bin in gefahr/i.test(text))return {id:"help",text:BASIC.help,source:null};
  if(/adresse|telefonnummer|passwort|mein name ist|ich wohne|schick.*foto|(?:\+?\d[\d\s()-]{8,})/i.test(text))return {id:"privacy",text:BASIC.privacy,source:null};
- if(/angst vor|tut mir weh|schlägt mich|will sterben|verletze mich|missbrauch|suizid/i.test(text))return {id:"help",text:BASIC.help,source:null};
  if(/takf[iī]r|k[aā]fir|ungläubig|jihad|dschihad|gewalt|anschlag|bombe|waffe|fatw[aā]|scheidung|sex/i.test(text))return {id:"restricted",text:BASIC.restricted,source:null};
  const library=matchedLibrary(text,age);if(library)return library;
  for(const row of TOPICS)if(row[1].test(text))return {id:row[0],text:age==="4–5"?row[2].split(/(?<=[.!?])\s+/u).slice(0,2).join(" "):row[2],source:row[3]};
