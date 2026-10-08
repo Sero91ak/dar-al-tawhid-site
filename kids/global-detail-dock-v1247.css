@@ -99,7 +99,7 @@ html body .kids-detail-appbar .kids-detail-dock-back:active{
  box-shadow:0 0 0 2px rgba(241,210,146,.1)!important;
 }
 /* Entirely replace the old oval overlay. Do not remove image or copy. */
-html body #psModal .ps-top{display:none!important}
+html body #psModal .ps-sheet:has(> .kids-detail-appbar) > .ps-top{display:none!important}
 html body #psModal .ps-sheet,
 html body :is(#msModal,#syModal,#dlModal) .ms-sheet{
  display:flex!important;flex-direction:column!important;min-height:0!important
@@ -121,10 +121,10 @@ html body #duaHubDetail > .kids-detail-appbar{
  position:relative!important;margin:0 0 10px!important;
  border-radius:0 0 24px 24px!important
 }
-html body #duaHubDetail .duahub-detail-scroll{padding-top:0!important}
+html body #duaHubDetail:has(> .kids-detail-appbar) .duahub-detail-scroll{padding-top:0!important}
 /* Legacy knowledge, Quiz, Qurʾān and story details use their original
    .modal-top, ensuring their close listeners and all player wiring stay put. */
-html body .modal.open .modal-shell{padding-top:0!important}
+html body .modal.open .modal-shell:has(> .kids-legacy-appbar){padding-top:0!important}
 html body .modal .modal-top.kids-legacy-appbar{
  width:calc(100% + 32px)!important;
  margin:0 -16px 12px!important;
