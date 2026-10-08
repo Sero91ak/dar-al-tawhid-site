@@ -748,3 +748,22 @@ html body.is-ilm-chat-route .ilm-history-archive summary:focus-visible{
     transition:none!important;
   }
 }
+
+/* MAJLIS REFLECTIVE STUDY NOTE V1349 — optional, never blocks questions. */
+html body.is-ilm-chat-route .ilm-answer-text .ilm-study-reminder{
+  width:100%;
+  max-width:100%;
+  margin:16px 0 4px;
+  padding:12px 14px;
+  box-sizing:border-box;
+  background:color-mix(in srgb,var(--ilm-header-bg) 32%,transparent);
+  border-left:2px solid color-mix(in srgb,var(--ilm-accent) 68%,transparent);
+  border-radius:4px 11px 11px 4px;
+  box-shadow:none;
+}
+html body.is-ilm-chat-route .ilm-answer-text .ilm-study-reminder p{
+  margin:0;
+  font:500 clamp(13px,1.02rem,16px)/1.65 system-ui,sans-serif;
+  color:var(--ilm-secondary-text);
+  overflow-wrap:anywhere;
+}
