@@ -100,8 +100,43 @@
       status.textContent=label||"Aufnahme wird abgespielt.";
     }catch(_){stopPlayback();status.textContent="Die Aufnahme ist momentan nicht erreichbar. Bitte versuche es später erneut.";}
   }
+  function openQuranVerse(surah,ayah){
+    var s=Number(surah),a=Number(ayah);
+    if(!Number.isInteger(s)||s<1||s>114||!Number.isInteger(a)||a<1||a>286)return;
+    stopPlayback();
+    var wasMajlis=!!history.state?.kidsMajlis;
+    close();
+    if(wasMajlis)history.replaceState({kidsMajlis:false},"",window.location.href);
+    try{
+      if(typeof window.openQuranSurah==="function")window.openQuranSurah(s,a,{scrollOffset:0});
+      else if(typeof window.navigate==="function")window.navigate("quran-surah",s+"/"+a);
+      else location.hash="#quran-surah/"+s+"/"+a;
+    }catch(_){status.textContent="Bitte öffne den Qurʾān-Bereich.";}
+  }
   function mediaCard(box,media){
-    if(!media||!["dua","quran"].includes(media.kind))return;
+    if(!media||!["dua","quran","quran_results"].includes(media.kind))return;
+    if(media.kind==="quran_results"){
+      var results=Array.isArray(media.results)?media.results:[];
+      results.slice(0,5).forEach(function(verse){
+        if(!verse||!Number.isInteger(verse.surah)||!Number.isInteger(verse.ayah)||
+          typeof verse.arabic!=="string"||typeof verse.german!=="string"||
+          !protectedAudioUrl(verse.recitationUrl))return;
+        var card=el("section","km-verse");
+        card.appendChild(el("strong","km-verse-head",verse.reference+" · "+(verse.surahName||"Qurʾān")));
+        card.appendChild(el("p","km-arabic",verse.arabic));
+        card.appendChild(el("p","km-meaning",verse.german));
+        card.appendChild(el("small","km-translation-note","Deutsche Übersetzung aus dem vorhandenen Qurʾān-Korpus"));
+        var actions=el("div","km-media-actions");
+        var play=el("button","km-media-button","▶ Rezitation");play.type="button";
+        play.addEventListener("click",function(){
+          playPrepared(verse.recitationUrl,"Rezitation durch "+(verse.reciter||"den Qāriʾ")+" · "+verse.reference);
+        });
+        var open=el("button","km-media-button","Zum Vers");open.type="button";
+        open.addEventListener("click",function(){openQuranVerse(verse.surah,verse.ayah);});
+        actions.appendChild(play);actions.appendChild(open);card.appendChild(actions);box.appendChild(card);
+      });
+      return;
+    }
     var panel=el("section","km-media");
     var prompt=el("p","km-media-prompt",media.kind==="dua"?
       "Möchtest du diese Duʿāʾ direkt hier lesen, anhören oder Wort für Wort lernen?":
@@ -154,17 +189,7 @@
         panel.appendChild(verseSnippet);
       }
       if(media.recitationUrl)button("▶ Rezitation",function(){playPrepared(media.recitationUrl,"Qurʾān-Rezitation: "+String(media.reference||"")+".");});
-      if(Number.isInteger(Number(media.surah))&&Number.isInteger(Number(media.ayah)))button("Zum Vers im Qurʾān",function(){
-        var surah=Number(media.surah),ayah=Number(media.ayah);
-        if(surah<1||surah>114||ayah<1||ayah>286)return;
-        stopPlayback();close();
-        if(history.state?.kidsMajlis)history.replaceState({kidsMajlis:false},"",window.location.href);
-        try{
-          if(typeof window.openQuranSurah==="function")window.openQuranSurah(surah,ayah,{scrollOffset:0});
-          else if(typeof window.navigate==="function")window.navigate("quran-surah",surah+"/"+ayah);
-          else location.hash="#quran-surah/"+surah+"/"+ayah;
-        }catch(_){status.textContent="Bitte öffne den Qurʾān-Bereich."}
-      });
+      if(Number.isInteger(Number(media.surah))&&Number.isInteger(Number(media.ayah)))button("Zum Vers im Qurʾān",function(){openQuranVerse(media.surah,media.ayah)});
     }
     panel.appendChild(row);panel.appendChild(details);box.appendChild(panel);
   }
@@ -195,7 +220,7 @@
   }
   function picks() {
     var row=el("div","km-picks");
-    ["Wer ist Allah?","Warum beten wir?","Was ist Īmān?","Duʿāʾ vor dem Schlafen","Qurʾān 2:255","Was ist Wuḍūʾ?"].forEach(function(q){
+    ["Wer ist Allah?","Wo steht im Qurʾān etwas über Geduld?","Qurʾān 2:255","Duʿāʾ vor dem Schlafen","Was ist Īmān?","Was ist Wuḍūʾ?"].forEach(function(q){
       var b=el("button","",q);b.type="button";b.addEventListener("click",function(){submitQuestion(q)});
       row.appendChild(b);
     });chat.appendChild(row);
@@ -294,7 +319,29 @@
     }
     message("you",q);input.value="";state.audio=null;
     var item=null;
-    if(state.serverAuthorized){
+    var quranSearch=window.DarKidsQuranSearch;
+    if(quranSearch?.isQuestion?.(q)){
+      state.busy=true;send.disabled=true;
+      status.textContent="Ich suche in allen 6.236 Qurʾān-Versen nach passenden Stellen …";
+      try{
+        var result=await quranSearch.search(q);
+        if(result.status==="found"){
+          var amount=result.results.length;
+          var msg=result.exact?"Ich habe den gewünschten Qurʾān-Vers gefunden.":
+            "Ich habe "+amount+" passende Qurʾān-Stelle"+(amount===1?"":"n")+" gefunden"+(result.total>amount?" (von "+result.total+" Worttreffern)":"")+".";
+          item={answer:"Al-ḥamdu lillāh, mein"+(activeGender()==="girl"?"e liebe":" lieber")+" "+familyWord()+"! "+msg+" Du kannst den originalen arabischen Vers, die vorhandene deutsche Übersetzung und die Rezitation direkt unten öffnen. Ich füge keine eigene Tafsīr-Auslegung hinzu.",
+            source:null,media:{kind:"quran_results",results:result.results},answerId:null};
+        }else if(result.status==="too_broad"){
+          item={answer:"Diese Suche ist sehr allgemein. Nenne bitte ein genaueres Wort, eine Sūrah oder eine Versnummer. Dann finden wir die passende Stelle. Wa-Allāhu aʿlam.",source:null};
+        }else if(result.status==="not_found"){
+          item={answer:"Wa-Allāhu aʿlam – Allah weiß es am besten. Ich habe in der vorhandenen Qurʾān-Übersetzung keine eindeutige Stelle zu diesen Wörtern gefunden. Versuch eine andere Formulierung oder frage deine Eltern.",source:null};
+        }else{
+          item={answer:"Der vollständige Qurʾān-Suchindex ist gerade nicht verfügbar. Ich möchte dir keine Verse aus dem Gedächtnis zuordnen. Bitte öffne den Qurʾān-Bereich oder versuche es erneut.",source:null};
+        }
+      }catch(_){
+        item={answer:"Die Qurʾān-Suche ist derzeit nicht verfügbar. Versuche es später erneut oder öffne den Qurʾān-Bereich.",source:null};
+      }finally{state.busy=false;send.disabled=false}
+    }else if(state.serverAuthorized){
       state.busy=true;send.disabled=true;status.textContent="Geprüfte Antwort wird gesucht …";
       try{
         var response=await fetch("/kids/api/majlis/answer",{
