@@ -2914,7 +2914,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.08.74</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.08.75</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3300,7 +3300,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v153-profile-stability1256";
+const KIDS_BUILD_ID="kids-shell-v154-profile-persist1257";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6249,6 +6249,8 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   var draft={gender:"boy",age:"6–8"};
   var askId="";
   var joinScrollY=0;
+  var GUEST_GENDER="kids.guest.gender.v1";
+  try{if("scrollRestoration" in history)history.scrollRestoration="manual"}catch(e){}
   function load(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){return []}}
   function save(list){localStorage.setItem(KEY,JSON.stringify(list))}
   function hash(pw){
@@ -6286,10 +6288,14 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   function step(name){
     if(name==="place")name="name";
     join.querySelectorAll(".step").forEach(function(s){s.classList.toggle("on",s.getAttribute("data-step")===name)});
+    var card=join.querySelector(".kids-join-card");
+    if(card)card.scrollTop=0;
+    join.scrollTop=0;
   }
   var GUEST="kids.guest.v1";
   function skipJoin(){
     localStorage.setItem(GUEST,"1");
+    localStorage.setItem(GUEST_GENDER,draft.gender||"boy");
     var app=document.querySelector(".app");
     if(app){
       app.setAttribute("data-gender",draft.gender||"boy");
@@ -6312,9 +6318,19 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     step(from||"hello");
   }
   function closeJoin(){
+    try{
+      if(document.activeElement&&/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName))document.activeElement.blur();
+    }catch(e){}
     join.classList.remove("open");
     var shellForJoin=document.querySelector(".shell");
-    if(shellForJoin)requestAnimationFrame(function(){shellForJoin.scrollTop=joinScrollY});
+    var savedScroll=joinScrollY;
+    var restore=function(){
+      if(shellForJoin)shellForJoin.scrollTop=savedScroll;
+      try{document.documentElement.scrollTop=0;document.body.scrollTop=0;window.scrollTo(0,0)}catch(e){}
+    };
+    requestAnimationFrame(restore);
+    setTimeout(restore,150);
+    setTimeout(restore,380);
   }
   function currentProfile(){
     var id=localStorage.getItem(ACTIVE);
@@ -6394,7 +6410,11 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   document.getElementById("joinNextHello").addEventListener("click",function(){step("who")});
   join.querySelectorAll("[data-back]").forEach(function(b){b.addEventListener("click",function(){step(b.getAttribute("data-back"))})});
   join.querySelectorAll("[data-gender]").forEach(function(b){
-    b.addEventListener("click",function(){draft.gender=b.getAttribute("data-gender");step("age")});
+    b.addEventListener("click",function(){
+      draft.gender=b.getAttribute("data-gender");
+      try{localStorage.setItem(GUEST_GENDER,draft.gender)}catch(e){}
+      step("age");
+    });
   });
   join.querySelectorAll("[data-join-age]").forEach(function(b){
     b.addEventListener("click",function(){draft.age=b.getAttribute("data-join-age");step("name")});
@@ -6487,6 +6507,8 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
       }
     }catch(e){}
   }else if(localStorage.getItem(GUEST)==="1"){
+    var guestApp=document.querySelector(".app");
+    if(guestApp)guestApp.setAttribute("data-gender",localStorage.getItem(GUEST_GENDER)||"boy");
     closeJoin();
   }else openJoin("hello");
   renderList();
@@ -6503,7 +6525,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=8"></script>\n<script src="/kids/dua-smart-learn.js?v=1244"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v153-profile-stability1256";
+  var KIDS_BUILD_ID="kids-shell-v154-profile-persist1257";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -6519,7 +6541,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1256",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1257",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
@@ -11193,5 +11215,5 @@ html[data-view="stories"] #view-stories > :last-child{
 <!-- KIDS_DUA_FULLBLEED_EXPLANATION_CTA_V1249: shared full-width header and explanation actions, original back controls, no bottom-nav changes -->
 <link rel="stylesheet" href="/kids/global-detail-dock-v1247.css?v=1253" data-kids-global-detail-dock="1253">
 <script src="/kids/global-detail-dock-v1247.js?v=1253" data-kids-global-detail-dock="1253"></script>
-<link rel="stylesheet" href="/kids/profile-stability-v1256.css?v=1256" data-kids-profile-stability="1256">
+<link rel="stylesheet" href="/kids/profile-stability-v1256.css?v=1257" data-kids-profile-stability="1256">
 </html>

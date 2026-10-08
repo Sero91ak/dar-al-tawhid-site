@@ -69,3 +69,15 @@ html body #kidsJoin .kids-join-card button{font-size:clamp(14px,4vw,17px)!import
   html body #kidsJoin .kids-join-card{padding:15px!important}
   html body #kidsJoin .kids-join-card .ghost{min-height:43px!important}
 }
+
+/* KIDS_GUEST_GENDER_PERSISTENCE_V1257: gentle rose-violet continuity beneath the hero. */
+html body .app[data-gender="girl"] .shell{
+  background:linear-gradient(180deg,#211b33 0%,#2d213c 49%,#382746 100%)!important;
+}
+html body .app[data-gender="girl"] #view-today .hero::after{
+  background:linear-gradient(180deg,transparent 52%,rgba(26,19,42,.15) 74%,#211b33 100%)!important;
+}
+html body .app[data-gender="girl"] #view-today .resume,
+html body .app[data-gender="girl"] #view-today .daily-journey{
+  background:rgba(39,25,53,.94)!important;
+}
