@@ -44,9 +44,13 @@ jobs:
       - name: Android SDK / API 36 installieren
         shell: bash
         run: |
-          SDK_MANAGER="$(command -v sdkmanager || true)"
+          SDK_ROOT="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}"
+          SDK_MANAGER="$(find "$SDK_ROOT/cmdline-tools" -type f -name sdkmanager 2>/dev/null | sort -V | tail -n 1)"
           if [[ -z "$SDK_MANAGER" ]]; then
-            echo "::error::Android sdkmanager fehlt auf dem GitHub-Runner."
+            SDK_MANAGER="$(find "$SDK_ROOT/tools" -type f -name sdkmanager 2>/dev/null | head -n 1)"
+          fi
+          if [[ -z "$SDK_MANAGER" ]]; then
+            echo "::error::Kein Android sdkmanager im installierten SDK gefunden."
             exit 1
           fi
           yes | "$SDK_MANAGER" --licenses >/dev/null || true
