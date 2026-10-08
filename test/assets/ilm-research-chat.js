@@ -116,7 +116,7 @@
       : (idx ? "Ein weiterer Beleg" : "Beleg");
     var open = "";
     if (ev.verification_status === "verified" && (ev.deep_link || ev.route)) {
-      if (ev.deep_link && /^https?:/i.test(ev.deep_link) && (hostOk(ev.deep_link) || ev.source_domain === "dar-al-tawhid" || ev.deep_link.indexOf(location.origin) === 0)) {
+      if (ev.deep_link && /^https?:/i.test(ev.deep_link) && (hostOk(ev.deep_link) || ev.deep_link.indexOf(location.origin + "/") === 0)) {
         open = '<a class="ilm-open-src" href="' + esc(ev.deep_link) + '" target="_blank" rel="noopener noreferrer">↗ Originalstelle öffnen</a>';
       } else if (ev.route && ev.route.view) {
         open = '<button type="button" class="ilm-open-src" data-ilm-open-route="' + esc(JSON.stringify(ev.route)) + '">↗ Originalstelle öffnen</button>';
@@ -242,7 +242,7 @@
         list.slice(0, count).map(function (e, i) {
           var label = e.verification_status === "verified" ? "Direktquelle hinterlegt" :
             e.verification_status === "partially_verified" ? "Fundstelle noch zu prüfen" : "Angabe nicht unabhängig verifiziert";
-          return '<div class="ilm-science-source-item">' + renderEvidence(e, i) +
+          return '<div class="ilm-science-source-item"><p class="ilm-science-index">Beleg ' + (i + 1) + '</p>' + renderEvidence(e, i) +
             '<p class="ilm-science-proof-status">' + esc(label) + '</p></div>';
         }).join("") + '</div></details>';
     }
@@ -312,7 +312,7 @@
     window.renderIlmAssistantMessage = function (message, isFirst) {
       var reply = message.reply || {};
       return (
-        '<article class="ilm-assistant-message" data-ilm-assistant="' + esc(message.id) + '"' + (reply._ilmAnswerId ? ' data-ilm-answer-id="' + esc(reply._ilmAnswerId) + '"' : "") + '>' +
+        '<article class="ilm-assistant-message" data-ilm-assistant="' + esc(message.id) + '"' + (reply._ilmAnswerId ? ' data-ilm-answer-id="' + esc(reply._ilmAnswerId) + '"' : "") + (reply._ilmQuestion ? ' data-ilm-parent-question="' + esc(reply._ilmQuestion.slice(0,480)) + '"' : "") + '>' +
           '<p class="ilm-science-assistant-label">ʿILM <span>·</span> DĀR AL TAWḤĪD</p>' +
           '<div class="ilm-answer-text">' + window.renderIlmAnswerText(reply, isFirst) + "</div>" +
         "</article>"
@@ -500,6 +500,9 @@
       if (!t) return;
       ev.preventDefault();
       var q = t.getAttribute("data-ilm-follow") || "";
+      var message = t.closest(".ilm-assistant-message");
+      var original = message ? message.getAttribute("data-ilm-parent-question") || "" : "";
+      if (original && /(?:exakt|beweis|beleg|erkläre|weitere|genauer)/i.test(q)) q = original + " — " + q;
       if (q && typeof window.submitIlmQuestion === "function") window.submitIlmQuestion(q);
     }, true);
   });
