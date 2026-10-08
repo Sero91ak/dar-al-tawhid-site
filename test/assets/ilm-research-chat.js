@@ -587,6 +587,141 @@
       else boot();
     })();
 
+    /* ILM DISCOVERY RETURN V1333: do not replace the site's navigation/history stack. */
+    (function installIlmDiscoveryReturn() {
+      var KEY = "darIlmDiscoveryReturnV1333";
+      var MAX_AGE = 45 * 60 * 1000;
+      var scrollSelectors = ".ilm-chat-messages, .ilm-messages, .ilm-thread, .ilm-chat-history";
+      var pending = false;
+      var restoring = false;
+      function read() {
+        try {
+          var saved = JSON.parse(sessionStorage.getItem(KEY) || "null");
+          if (!saved || !saved.target || Date.now() - Number(saved.at || 0) > MAX_AGE) {
+            sessionStorage.removeItem(KEY);
+            return null;
+          }
+          return saved;
+        } catch (_e) { return null; }
+      }
+      function save(el) {
+        if (!document.body || !document.body.classList.contains("is-ilm-chat-route")) return;
+        var view = el.getAttribute("data-nav") || "";
+        var value = el.getAttribute("data-value") || "";
+        if (!discoveryRoute({route:{view:view,value:value}})) return;
+        var scroller = document.querySelector(scrollSelectors);
+        var state = {
+          target:{view:view,value:value},
+          scrollY:window.scrollY || 0,
+          innerScroll:scroller ? Number(scroller.scrollTop || 0) : null,
+          fromHash:String(location.hash || "#ilm"),
+          at:Date.now()
+        };
+        try { sessionStorage.setItem(KEY, JSON.stringify(state)); } catch (_e) {}
+      }
+      function isTargetRoute(state) {
+        if (!state || !document.body || document.body.classList.contains("is-ilm-chat-route")) return false;
+        var currentHash = String(location.hash || "").toLowerCase();
+        var expectedView = state.target.view;
+        var matchHash = currentHash.includes(expectedView);
+        var classes = {
+          "post":"is-post-route",
+          "dua":"is-dua-route",
+          "quran-surah":"is-quran-reader-route"
+        };
+        return matchHash || document.body.classList.contains(classes[expectedView] || "ilm-unknown");
+      }
+      function restoreChatScroll(state) {
+        if (restoring) return;
+        restoring = true;
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            var scroller = document.querySelector(scrollSelectors);
+            if (scroller && state.innerScroll != null) {
+              scroller.scrollTop = Math.max(0, Number(state.innerScroll) || 0);
+            } else if (state.scrollY > 0) {
+              window.scrollTo({top:Number(state.scrollY) || 0,behavior:"instant"});
+            }
+            restoring = false;
+          });
+        });
+      }
+      function sync() {
+        pending = false;
+        var saved = read();
+        var root = document.getElementById("appView");
+        if (!root) return;
+        var existing = root.querySelector("[data-ilm-discovery-return]");
+        if (!saved) { if (existing) existing.remove(); return; }
+        if (document.body.classList.contains("is-ilm-chat-route")) {
+          if (existing) existing.remove();
+          try { sessionStorage.removeItem(KEY); } catch (_e) {}
+          restoreChatScroll(saved);
+          return;
+        }
+        if (!isTargetRoute(saved)) {
+          if (existing) existing.remove();
+          return;
+        }
+        if (existing) return;
+        var bar = document.createElement("div");
+        bar.className = "ilm-discovery-return";
+        bar.setAttribute("data-ilm-discovery-return","1");
+        bar.innerHTML = '<button type="button" data-ilm-discovery-back="1" aria-label="Zurück zur ʿIlm-Unterhaltung">' +
+          '<span aria-hidden="true">‹</span><span>Zurück zum ʿIlm-Chat</span></button>' +
+          '<span class="ilm-discovery-return-note">Deine Unterhaltung bleibt erhalten</span>';
+        root.insertBefore(bar,root.firstChild);
+      }
+      function schedule() {
+        if (pending) return;
+        pending = true;
+        requestAnimationFrame(sync);
+      }
+      function goBack() {
+        var saved = read();
+        var navTab = document.querySelector('[data-bottom-nav="ilm"]');
+        if (navTab && typeof navTab.click === "function") {
+          navTab.click();
+        } else if (typeof window.navigate === "function") {
+          window.navigate("ilm","");
+        } else {
+          location.hash = "#ilm";
+        }
+        if (saved) {
+          // The view is rendered by the original router, never by a duplicate reader.
+          setTimeout(function () {
+            if (document.body.classList.contains("is-ilm-chat-route")) {
+              restoreChatScroll(saved);
+              try { sessionStorage.removeItem(KEY); } catch (_e) {}
+            }
+          },60);
+        }
+      }
+      document.addEventListener("click",function (ev) {
+        var link = ev.target && ev.target.closest && ev.target.closest('[data-ilm-discovery-result="1"]');
+        if (link) { save(link); return; }
+        var back = ev.target && ev.target.closest && ev.target.closest('[data-ilm-discovery-back="1"]');
+        if (!back) return;
+        ev.preventDefault();
+        ev.stopPropagation();
+        goBack();
+      },true);
+      document.addEventListener("pointerdown",function (ev) {
+        var link = ev.target && ev.target.closest && ev.target.closest('[data-ilm-discovery-result="1"]');
+        if (link) save(link);
+      },true);
+      window.addEventListener("popstate",schedule);
+      window.addEventListener("hashchange",schedule);
+      var observer = new MutationObserver(schedule);
+      function boot() {
+        if (!document.body) return;
+        observer.observe(document.body,{childList:true,subtree:true});
+        schedule();
+      }
+      if (document.readyState === "loading") document.addEventListener("DOMContentLoaded",boot,{once:true});
+      else boot();
+    })();
+
     document.addEventListener("click", function (ev) {
       var t = ev.target && ev.target.closest ? ev.target.closest("[data-ilm-follow]") : null;
       if (!t) return;
