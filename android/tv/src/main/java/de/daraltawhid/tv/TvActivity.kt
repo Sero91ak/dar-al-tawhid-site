@@ -1,0 +1,354 @@
+package de.daraltawhid.tv
+
+import android.app.Activity
+import android.graphics.Color
+import android.graphics.Typeface
+import android.graphics.drawable.GradientDrawable
+import android.os.Bundle
+import android.view.Gravity
+import android.view.View
+import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.ScrollView
+import android.widget.TextView
+import org.json.JSONArray
+import org.json.JSONObject
+import java.net.HttpURLConnection
+import java.net.URL
+import kotlin.concurrent.thread
+
+/**
+ * Native Android TV starting point, separate from phone WebView.
+ * D-pad navigable 10-foot UI, verified shared content feeds, HTTPS/cache fallback.
+ * The TV app must not confuse a Hadith/library statement with the home Tadabbur slot.
+ */
+class TvActivity : Activity() {
+    private val dark = Color.rgb(6, 26, 33)
+    private val panel = Color.rgb(16, 43, 51)
+    private val gold = Color.rgb(217, 189, 117)
+    private val cream = Color.rgb(244, 239, 219)
+    private val muted = Color.rgb(183, 195, 189)
+    private val base = "https://dar-al-tawhid.de/apple-tv/"
+    private lateinit var body: LinearLayout
+    private lateinit var footer: TextView
+    private var activeTab = "home"
+    private var hadithNumber = 1
+    private var hadithTotal = 3350
+    private var tadabburNumber = 0
+    private var tadabburTotal = 0
+    private var cityIndex = 0
+    private val cities = listOf(
+        Triple("Rheinbach", 50.6256, 6.9491),
+        Triple("Meckenheim", 50.6235, 7.0294),
+        Triple("Köln", 50.9383, 6.9603),
+        Triple("Berlin", 52.5200, 13.4050)
+    )
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val shell = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(dp(46), dp(28), dp(46), dp(24))
+            background = GradientDrawable(
+                GradientDrawable.Orientation.TL_BR,
+                intArrayOf(dark, Color.rgb(10, 51, 57), dark)
+            )
+        }
+        shell.addView(label("DĀR AL TAWḤĪD", 32f, gold, true))
+        shell.addView(label("ANDROlD TV · WISSEN AUS QURʾĀN & SUNNAH", 14f, muted, false))
+
+        val nav = LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL
+            setPadding(0, dp(16), 0, dp(24))
+        }
+        listOf(
+            "home" to "Startseite",
+            "hadith" to "Ḥadīṯe & Āṯār",
+            "tadabbur" to "Qurʾān & Tadabbur"
+        ).forEach { (id, title) ->
+            nav.addView(navButton(title) { show(id) },
+                LinearLayout.LayoutParams(0, dp(64), 1f).apply {
+                    marginEnd = dp(14)
+                })
+        }
+        shell.addView(nav)
+
+        val scroll = ScrollView(this).apply {
+            isFillViewport = true
+            isFocusable = false
+            clipToPadding = false
+        }
+        body = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(dp(26), dp(22), dp(26), dp(22))
+            background = panelBackground()
+        }
+        scroll.addView(body)
+        shell.addView(scroll, LinearLayout.LayoutParams(-1, 0, 1f))
+        footer = label(
+            "Inhalte: gemeinsamer DĀR-AL-TAWḤĪD-Katalog · Fernbedienung: ◀ ▶ ▲ ▼ und OK",
+            13f,
+            muted,
+            false
+        )
+        footer.setPadding(0, dp(15), 0, 0)
+        shell.addView(footer)
+        setContentView(shell)
+
+        val initial = getPreferences(MODE_PRIVATE).getString("tab", "home") ?: "home"
+        show(initial)
+        nav.getChildAt(0)?.requestFocus()
+    }
+
+    private fun show(tab: String) {
+        activeTab = tab
+        getPreferences(MODE_PRIVATE).edit().putString("tab", tab).apply()
+        body.removeAllViews()
+        when (tab) {
+            "hadith" -> loadHadith()
+            "tadabbur" -> loadTadabbur()
+            else -> loadHome()
+        }
+    }
+
+    private fun loadHome() {
+        body.addView(label("Gebetszeiten", 29f, gold, true))
+        body.addView(label("Standort bitte am Fernseher auswählen. Voreinstellung: Rheinbach.", 16f, muted, false))
+        body.addView(navButton("Standort: ${cities[cityIndex].first}  ·  wechseln") {
+            cityIndex = (cityIndex + 1) % cities.size
+            loadHome()
+        })
+        body.addView(label("Lade aktuelle Gebetszeiten …", 19f, cream, false))
+        val city = cities[cityIndex]
+        val url = "https://dar-al-tawhid.de/api/prayer/times?lat=${city.second}&lon=${city.third}"
+        fetchJson(url) { data ->
+            if (activeTab != "home" || cityIndex >= cities.size || cities[cityIndex] != city) return@fetchJson
+            val root = data?.optJSONObject("times")
+                ?: data?.optJSONObject("prayers")
+                ?: data?.optJSONObject("data")
+                ?: data
+            if (root == null) {
+                body.addView(label("Gebetszeiten momentan nicht erreichbar. Gespeicherte Inhalte bleiben verfügbar.", 17f, muted, false))
+                return@fetchJson
+            }
+            val lines = mutableListOf<String>()
+            val names = listOf(
+                "fajr" to "Faǧr",
+                "dhuhr" to "Ẓuhr",
+                "asr" to "ʿAṣr",
+                "maghrib" to "Maġrib",
+                "isha" to "ʿIšāʾ"
+            )
+            for ((key, display) in names) {
+                var value = root.optString(key).ifBlank { root.optString(key.replaceFirstChar { it.uppercase() }) }
+                if (value.isBlank()) {
+                    val times = root.optJSONObject("times")
+                    value = times?.optString(key).orEmpty()
+                }
+                if (value.isNotBlank()) lines.add("$display   ·   $value")
+            }
+            body.addView(label(
+                if (lines.isEmpty()) "Zeitformat der Quelle muss noch angepasst werden." else lines.joinToString("     "),
+                24f, cream, true
+            ))
+        }
+        body.addView(label("Qurʾān und Tadabbur", 29f, gold, true))
+        body.addView(label(
+            "Im eigenen Tab findest du belegte Aussagen, die einer konkreten Āyah zugeordnet sind. " +
+                "Der Qurʾān-Vers wird nicht durch den Tadabbur-Text ersetzt.",
+            19f, cream, false
+        ))
+        body.addView(navButton("Qurʾān & Tadabbur öffnen") { show("tadabbur") })
+        body.addView(label("Ḥadīṯ-Sammlung", 29f, gold, true))
+        body.addView(navButton("Überlieferungen lesen") { show("hadith") })
+    }
+
+    private fun loadHadith() {
+        body.addView(label("Ḥadīṯe & Āṯār", 29f, gold, true))
+        val line = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL }
+        line.addView(navButton("◀ Vorheriger") {
+            hadithNumber = (hadithNumber - 1).coerceAtLeast(1)
+            show("hadith")
+        }, LinearLayout.LayoutParams(0, dp(62), 1f))
+        line.addView(navButton("Nächster ▶") {
+            hadithNumber = (hadithNumber + 1).coerceAtMost(hadithTotal)
+            show("hadith")
+        }, LinearLayout.LayoutParams(0, dp(62), 1f))
+        body.addView(line)
+        body.addView(label("Lade Überlieferung HAD-${hadithNumber.toString().padStart(4, '0')} …", 18f, muted, false))
+        fetchJson(base + "hadith/catalog.json") { catalog ->
+            if (activeTab != "hadith") return@fetchJson
+            hadithTotal = catalog?.optInt("publishedCount", 3350) ?: 3350
+            val series = catalog?.optJSONArray("series")
+            val id = "HAD-${hadithNumber.toString().padStart(4, '0')}"
+            var dir: String? = null
+            if (series != null) {
+                for (i in 0 until series.length()) {
+                    val row = series.optJSONObject(i) ?: continue
+                    if (id >= row.optString("firstId") && id <= row.optString("lastId")) {
+                        dir = row.optString("indexPath").removeSuffix("index.json")
+                        break
+                    }
+                }
+            }
+            if (dir == null) {
+                body.addView(label("Zu dieser Nummer wurde kein freigegebener Datensatz gefunden.", 18f, muted, false))
+                return@fetchJson
+            }
+            fetchJson(base + "hadith/" + dir + id + ".json") { hadith ->
+                if (activeTab != "hadith") return@fetchJson
+                if (hadith == null) {
+                    body.addView(label("Die Überlieferung ist momentan nicht abrufbar.", 19f, muted, false))
+                    return@fetchJson
+                }
+                body.addView(label(hadith.optString("narratorLine"), 18f, muted, false))
+                body.addView(label(hadith.optString("speakerLabel"), 20f, gold, true))
+                body.addView(label(cleanMarkdown(hadith.optString("textMarkdown")), 26f, cream, false))
+                body.addView(label(hadith.optString("source") + " · " + hadith.optString("grade"), 17f, gold, false))
+                if (hadith.optString("sharhText").isNotBlank()) {
+                    body.addView(label("Erläuterung", 21f, gold, true))
+                    body.addView(label(hadith.optString("sharhText"), 19f, cream, false))
+                    body.addView(label(hadith.optString("sharhReference"), 14f, muted, false))
+                }
+            }
+        }
+    }
+
+    private fun loadTadabbur() {
+        body.addView(label("Qurʾān & Tadabbur", 29f, gold, true))
+        body.addView(label(
+            "Hier wird Tadabbur zum jeweils angegebenen Vers angezeigt – nicht als Qurʾān-Wortlaut.",
+            16f, muted, false
+        ))
+        val controls = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL }
+        controls.addView(navButton("◀ Vorheriger") {
+            tadabburNumber = (tadabburNumber - 1).coerceAtLeast(0)
+            show("tadabbur")
+        }, LinearLayout.LayoutParams(0, dp(62), 1f))
+        controls.addView(navButton("Nächster ▶") {
+            tadabburNumber = (tadabburNumber + 1).coerceAtMost((tadabburTotal - 1).coerceAtLeast(0))
+            show("tadabbur")
+        }, LinearLayout.LayoutParams(0, dp(62), 1f))
+        body.addView(controls)
+        body.addView(label("Lade geprüfte Tadabbur-Aussage …", 19f, cream, false))
+        fetchJson(base + "quran/tadabbur/entries-index.json") { index ->
+            if (activeTab != "tadabbur") return@fetchJson
+            tadabburTotal = index?.optInt("totalVerifiedEntries", 0) ?: 0
+            val files = index?.optJSONArray("files")
+            var position = tadabburNumber
+            var chosenFile: String? = null
+            if (files != null) {
+                for (i in 0 until files.length()) {
+                    val row = files.optJSONObject(i) ?: continue
+                    val count = row.optInt("count", 0)
+                    if (count <= 0) continue
+                    if (position < count) {
+                        chosenFile = row.optString("path")
+                        break
+                    }
+                    position -= count
+                }
+            }
+            val file = chosenFile ?: run {
+                body.addView(label("Noch keine passende Aussage gefunden.", 18f, muted, false))
+                return@fetchJson
+            }
+            val entryPosition = position
+            fetchJson(base + "quran/tadabbur/" + file) { batch ->
+                if (activeTab != "tadabbur") return@fetchJson
+                val item = batch?.optJSONArray("entries")?.optJSONObject(entryPosition)
+                if (item == null) {
+                    body.addView(label("Dieser Datensatz ist derzeit nicht verfügbar.", 18f, muted, false))
+                    return@fetchJson
+                }
+                body.addView(label("Zu Qurʾān " + item.optString("reference"), 23f, gold, true))
+                body.addView(label(item.optString("text"), 27f, cream, false))
+                body.addView(label(item.optString("narrator") + " · " + item.optString("generation"), 18f, muted, false))
+                body.addView(label(item.optString("source") + " · " + item.optString("grading"), 16f, gold, false))
+            }
+        }
+    }
+
+    private fun fetchJson(url: String, done: (JSONObject?) -> Unit) {
+        val prefs = getPreferences(MODE_PRIVATE)
+        thread(name = "dar-tv-json-fetch") {
+            var value: JSONObject? = null
+            try {
+                val conn = URL(url).openConnection() as HttpURLConnection
+                conn.connectTimeout = 10000
+                conn.readTimeout = 10000
+                conn.setRequestProperty("Accept", "application/json")
+                try {
+                    if (conn.responseCode in 200..299) {
+                        val raw = conn.inputStream.bufferedReader(Charsets.UTF_8).use { it.readText() }
+                        value = JSONObject(raw)
+                        if (raw.length < 800000) prefs.edit().putString("cache:$url", raw).apply()
+                    }
+                } finally {
+                    conn.disconnect()
+                }
+            } catch (_: Exception) {
+                // Fall back to the last successfully fetched JSON (per URL).
+            }
+            if (value == null) {
+                value = runCatching { JSONObject(prefs.getString("cache:$url", "{}") ?: "{}") }.getOrNull()
+                if (value?.length() == 0) value = null
+            }
+            val result = value
+            runOnUiThread { if (!isFinishing && !isDestroyed) done(result) }
+        }
+    }
+
+    private fun cleanMarkdown(raw: String): String =
+        raw.replace("**", "").replace("__", "").replace("`", "")
+
+    private fun navButton(title: String, action: () -> Unit): Button =
+        Button(this).apply {
+            text = title
+            textSize = 17f
+            isAllCaps = false
+            isFocusable = true
+            setTextColor(cream)
+            background = buttonBackground(false)
+            setPadding(dp(14), 0, dp(14), 0)
+            setOnClickListener { action() }
+            onFocusChangeListener = View.OnFocusChangeListener { view, hasFocus ->
+                (view as Button).background = buttonBackground(hasFocus)
+                view.setTextColor(if (hasFocus) dark else cream)
+                view.animate().scaleX(if (hasFocus) 1.04f else 1f)
+                    .scaleY(if (hasFocus) 1.04f else 1f).setDuration(150).start()
+            }
+        }
+
+    private fun label(text: String, size: Float, color: Int, bold: Boolean): TextView =
+        TextView(this).apply {
+            this.text = text
+            textSize = size
+            setTextColor(color)
+            if (bold) typeface = Typeface.create("sans-serif", Typeface.BOLD)
+            setLineSpacing(dp(4).toFloat(), 1.04f)
+            setPadding(0, dp(9), 0, dp(9))
+            gravity = Gravity.START
+        }
+
+    private fun panelBackground(): GradientDrawable =
+        GradientDrawable().apply {
+            setColor(panel)
+            cornerRadius = dp(24).toFloat()
+            setStroke(dp(1), Color.rgb(76, 91, 76))
+        }
+
+    private fun buttonBackground(focused: Boolean): GradientDrawable =
+        GradientDrawable().apply {
+            setColor(if (focused) gold else Color.rgb(25, 58, 64))
+            cornerRadius = dp(16).toFloat()
+            setStroke(dp(1), if (focused) cream else Color.rgb(91, 105, 96))
+        }
+
+    private fun dp(value: Int): Int = (value * resources.displayMetrics.density).toInt()
+
+    @Suppress("DEPRECATION")
+    override fun onBackPressed() {
+        if (activeTab != "home") show("home") else super.onBackPressed()
+    }
+}
