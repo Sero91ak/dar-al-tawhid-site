@@ -1,0 +1,155 @@
+{
+  "schemaVersion": 1,
+  "feature": "mein-gebet",
+  "name": "Hanbali pose storyboard for child profile rigs",
+  "status": "draft_pose_storyboard_not_religiously_final",
+  "audience": "internal_editorial_only",
+  "approvedForProduction": false,
+  "userSelected20261008": true,
+  "genderMode": "derive_existing_kids_profile_no_manual_switch",
+  "selectedTeachingVariant": {
+    "qiyam": {
+      "posture": "upright",
+      "rightOnLeft": true,
+      "handsLocation": "on_chest",
+      "exactContactAndHeight": "user_visual_approved_between_upper_thobe_buttons; precise rig_joint_targets_pending",
+      "evidenceIds": [
+        "bukhari-740-qabd",
+        "abu-dawud-759-tawus-mursal",
+        "ibn-khuzaymah-wail-chest-479"
+      ],
+      "textStrength": {
+        "qabd": "sahih_Bukhari_740",
+        "chest": "explicit_mursal_Tawus_and_disputed_Ibn_Khuzaymah_extension"
+      },
+      "visualReference": {
+        "path": "/kids/mein-gebet/assets/qiyam-brusthoehe-user-approved-ref-v1.jpg",
+        "status": "approved_by_user_for_visible_hand_position_only",
+        "approvedOn": "2026-10-08",
+        "reviewNote": "User explicitly confirmed chest-high Qabd in the provided four-view sheet, not mesh/rig, cloth physics, religious narration, or animation quality.",
+        "riggingReady": false
+      }
+    },
+    "rafAlYadayn": {
+      "handHeight": "approximately_to_shoulders_as_primary_demo",
+      "referenceVariant": "ibn_umar_bukhari_736",
+      "note": "Another well-attested description mentions ears; do not claim alternative invalid.",
+      "occurrences": [
+        {
+          "id": "raf_opening",
+          "trigger": "prayer_start_with_takbir",
+          "requiredRakats": "all",
+          "evidence": [
+            "bukhari-736-raf-yadayn",
+            "muslim-390-raf-yadayn"
+          ]
+        },
+        {
+          "id": "raf_before_ruku",
+          "trigger": "before_each_ruku",
+          "requiredRakats": "all",
+          "evidence": [
+            "bukhari-736-raf-yadayn",
+            "muslim-390-raf-yadayn"
+          ]
+        },
+        {
+          "id": "raf_after_ruku",
+          "trigger": "rising_from_each_ruku",
+          "requiredRakats": "all",
+          "evidence": [
+            "bukhari-736-raf-yadayn",
+            "muslim-390-raf-yadayn"
+          ]
+        },
+        {
+          "id": "raf_after_two",
+          "trigger": "rising_after_first_tashahhud_to_third_rakah",
+          "requiredRakats": [
+            3,
+            4
+          ],
+          "evidence": [
+            "bukhari-739-raise-after-two",
+            "abd-razzaq-2519-raf"
+          ]
+        }
+      ],
+      "noRafOnSujud": true,
+      "visualReference": {
+        "path": "/kids/mein-gebet/assets/takbir-raf-yadayn-candidate-v1.jpg",
+        "status": "awaiting_user_visual_and_rigging_review",
+        "approvedOn": null,
+        "reviewIssues": [
+          "Profile view is not a clean true 90-degree side angle",
+          "Ensure wrist/palm height correctly aligns with selected shoulder-level variant",
+          "Hands open, symmetrical, palms facing forward; check from 360-degree views"
+        ],
+        "riggingReady": false
+      },
+      "compositeVisualStatus": "latest_seven_step_reference_user_approved; older_candidate_not_approved"
+    }
+  },
+  "variantsByProfile": {
+    "boy": {
+      "character": "figur-junge-original.png",
+      "rigStatus": "not_present",
+      "modelPoseAssets": []
+    },
+    "girl": {
+      "character": "figur-maedchen-original.png",
+      "rigStatus": "not_present",
+      "modelPoseAssets": [],
+      "genderSpecificPostureReview": "required_before_any_rigged_animation"
+    }
+  },
+  "validationRules": [
+    "two_rakah_prayer_must_never_add_raf_after_two_rakah",
+    "raf_after_two_only_when_third_rakah_follows",
+    "all_pose_timing_requires_joint_review_before_release",
+    "no_child_ui_auto_load_of_unapproved_storyboard",
+    "no_publication_or_audio_generation_without_explicit_approval",
+    "both_characters_derive_from_existing_profile_setting"
+  ],
+  "simulationExamples": [
+    {
+      "prayer": "fajr_fard",
+      "rakats": 2,
+      "rafAfterSecondRakah": false
+    },
+    {
+      "prayer": "maghrib_fard",
+      "rakats": 3,
+      "rafAfterSecondRakah": true
+    },
+    {
+      "prayer": "dhuhr_fard",
+      "rakats": 4,
+      "rafAfterSecondRakah": true
+    }
+  ],
+  "productionNote": "User-approved latest seven-step 2D visual reference is NOT an actual GLB, nor a published or fully religiously verified prayer lesson.",
+  "userApprovedCompositeReference": {
+    "path": "/kids/mein-gebet/assets/gebetspositionen-sieben-schritte-user-approved-review.jpg",
+    "originalAsset": "gebetsanleitung_in_sieben_schritten.png",
+    "userVisualApprovedOn": "2026-10-08",
+    "status": "approved_as_2d_visual_reference_only",
+    "stepsShown": [
+      "qiyam_chest_qabd",
+      "takbir_shoulder_level",
+      "ruku_flat_spine",
+      "rise_raf_shoulder_level",
+      "sujud_forehead_and_light_nose",
+      "sitting_between_sujud",
+      "second_sujud"
+    ],
+    "designConstraints": {
+      "sameKidIdentityAndScale": true,
+      "noLegLengthChange": true,
+      "rukuBack": "flat_horizontally_straight_at_hip_bend",
+      "sujudContact": "forehead_firmly_floor_nose_lightly_floor_lips_clear_floor",
+      "takbir": "hands_at_shoulder_height_not_ears"
+    },
+    "scope": "visual_only_not_hadith_or_scholarly_or_3d_approval"
+  }
+}
