@@ -914,6 +914,19 @@ struct WebAppView: UIViewRepresentable {
                     }
                 }
             }
+            // For a notification opened from any existing tab, put Home
+            // immediately before the article in browser history. One Back
+            // gesture then returns to the regular home screen.
+            if isPostRoute,
+               let current = webView?.url,
+               DarAppShell.isOwnHost(current),
+               current.fragment != "home" {
+                webView?.evaluateJavaScript("window.location.hash = '#home'") { [weak self] _, _ in
+                    self?.lastLoadedPushURL = target
+                    self?.webView?.load(URLRequest(url: target, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 60))
+                }
+                return
+            }
             if !isPostRoute && lastLoadedPushURL == target { return }
             lastLoadedPushURL = target
             webView?.load(URLRequest(url: target, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 60))
