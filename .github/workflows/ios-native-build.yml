@@ -29,56 +29,13 @@ jobs:
           xcodebuild -version
           xcodebuild -list -project "$IOS_PROJECT"
 
-      - name: Native OneSignal-Bibliotheken in exakt freigegebener Version laden
+      - name: OneSignal-Vendor in freigegebener SDK-Version wiederherstellen
         shell: bash
         env:
           SDK_VERSION: ${{ vars.DAR_IOS_ONESIGNAL_SDK_VERSION }}
-        run: |
-          set -euo pipefail
-          VENDOR="ios/DarAlTawhid/Vendor/OneSignal"
-          mkdir -p "$VENDOR"
-          FRAMEWORKS=(
-            OneSignalFramework OneSignalUser OneSignalNotifications
-            OneSignalLiveActivities OneSignalExtension OneSignalOutcomes
-            OneSignalOSCore OneSignalCore
-          )
-          COMPLETE=true
-          for name in "${FRAMEWORKS[@]}"; do
-            [[ -f "$VENDOR/$name.xcframework/Info.plist" ]] || COMPLETE=false
-          done
-          if [[ "$COMPLETE" == true ]]; then
-            echo "OneSignal-Vendor-Bibliotheken liegen vollständig vor. Keine Version geändert."
-            exit 0
-          fi
-          if [[ ! "$SDK_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            echo "::error::Das iOS-Projekt benötigt acht OneSignal-XCFrameworks, die nicht im Repository liegen. Bitte die GENAU bisher eingesetzte native OneSignal-iOS-SDK-Version als Repository Variable DAR_IOS_ONESIGNAL_SDK_VERSION setzen. Keine automatische unbekannte SDK-/Push-Migration."
-            exit 1
-          fi
-          PACKAGE="$RUNNER_TEMP/OneSignal-Package.swift"
-          curl -fLsS --retry 3 --connect-timeout 20 --max-time 90 \
-            "https://raw.githubusercontent.com/OneSignal/OneSignal-XCFramework/$SDK_VERSION/Package.swift" -o "$PACKAGE"
-          python3 - "$PACKAGE" "$SDK_VERSION" > "$RUNNER_TEMP/dar-onesignal-checksums.tsv" <<'PY'
-          import re, sys
-          content = open(sys.argv[1], encoding="utf-8").read()
-          version = sys.argv[2]
-          required = [
-            "OneSignalFramework", "OneSignalUser", "OneSignalNotifications",
-            "OneSignalLiveActivities", "OneSignalExtension", "OneSignalOutcomes",
-            "OneSignalOSCore", "OneSignalCore"
-          ]
-          matches = dict(
-            (name, (url, checksum)) for name, url, checksum in
-            re.findall(r'\.binaryTarget\(\s*name:\s*"([^"]+)",\s*url:\s*"([^"]+)",\s*checksum:\s*"([A-Fa-f0-9]{64})"', content, re.S)
-          )
-          for name in required:
-              if name not in matches:
-                  raise SystemExit(f"Missing signed upstream binaryTarget checksum: {name}")
-              url, checksum = matches[name]
-              if url != f"https://github.com/OneSignal/OneSignal-iOS-SDK/releases/download/{version}/{name}.xcframework.zip":
-                  raise SystemExit(f"Unexpected SDK release URL: {name}")
-              print(f"{name}\t{url}\t{checksum.lower()}")
-          PY
-          while IFS=
+        run: bash ios/DarAlTawhid/scripts/restore-onesignal-vendor.sh
+
+      - name: iPhone und iPad kompilieren (ohne Signatur)
         shell: bash
         run: |
           set -euo pipefail
