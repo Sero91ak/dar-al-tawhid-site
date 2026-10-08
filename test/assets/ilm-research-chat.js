@@ -488,7 +488,7 @@
         '<button type="button" class="ilm-primary-reference" data-ilm-discovery-result="1" data-nav="quran-surah" data-value="4/136"><span>an-Nisāʾ 4:136<small>Aufruf zum Glauben</small></span><span aria-hidden="true">↗</span></button></section>';
     }
     function shortScientificAnswer(reply) {
-      var ev = (reply.evidences || []).find(function (e) { return e.statement && e.statement.length > 24; });
+      var ev = (reply.evidences || []).find(function (e) { return e.verification_status === "verified" && e.statement && e.statement.length > 24; });
       var txt = String(reply.directAnswer || "").trim();
       if (reply._ilmNoRelevantEvidence) return "Dazu liegen mir derzeit keine hinreichend passenden, geprüften Fundstellen vor. Ich verwende keine themenfremden Beiträge als Beweise.";
       if (!ev) {
@@ -503,10 +503,10 @@
       if (reply._ilmComposing) {
         return "Ich ordne die gefundenen Aussagen und formuliere eine kurze Antwort anhand der vorhandenen Quellen.";
       }
-      return "Passende Fundstellen sind vorhanden, aber ich kann gerade keine ausreichend sichere zusammenhängende Antwort erstellen. Öffne „Belege und Fundstellen“, um die Originalauszüge nachzuprüfen.";
+      return "Die vorhandenen Auszüge erlauben derzeit keine ausreichend gesicherte Antwort. Ich werde keine religiöse Aussage aus ungeprüften Fundstellen ableiten. Wa-Allāhu aʿlam.";
     }
     function sourceDisclosure(reply, openProof) {
-      var list = (reply.evidences || []).filter(function (e) { return !!(e.statement || e.deep_link); });
+      var list = (reply.evidences || []).filter(function (e) { return e.verification_status === "verified" && !!e.statement && !!e.deep_link; });
       if (!list.length) return "";
       var count = openProof ? Math.min(5, list.length) : Math.min(Math.max(2,Number(reply._ilmCitationCount)||0,Number(reply._ilmRequestedEvidenceCount)||0),list.length);
       return '<details class="ilm-science-sources"' + (openProof ? ' open' : '') + '>' +
@@ -524,7 +524,7 @@
     var scienceAnswerSerial = 0;
     function requestScienceComposition(reply, question) {
       if (!reply || proofIntent(question) || reply._ilmSourceOnly || !navigator.onLine) return;
-      var rows = (reply.evidences || []).filter(function (e) { return e.statement && e.statement.length >= 18; }).slice(0,3);
+      var rows = (reply.evidences || []).filter(function (e) { return e.verification_status === "verified" && !!e.deep_link && e.statement && e.statement.length >= 18; }).slice(0,3);
       if (!rows.length) return;
       var requestId = "ilm-science-" + (++scienceAnswerSerial);
       reply._ilmAnswerId = requestId;
@@ -978,12 +978,12 @@
           // Retain the best question-matching entries as the answer's evidence,
           // not the incidental order of cards in the original post index.
           if (!improved._ilmBasicTawhid && !improved._ilmBasicIman && !improved._ilmCoreAdab) {
-            var picked = rankedMatches.slice(0, 5).map(function(e){return toEvidence(e,"internal")});
+            var picked = rankedMatches.slice(0, 5).map(function(e){return toEvidence(e,"internal")}).filter(function(e){return e.verification_status === "verified"});
             var terms = ilmQuestionTerms(scientificQuestion);
             var relevantExternal = (improved.evidences || []).filter(function(e) {
               var contents = " " + ilmNormalize([e.work,e.reference,e.statement].join(" ")) + " ";
               return e.source_domain === "external" &&
-                terms.some(function(w){return contents.includes(" " + w + " ")});
+                terms.filter(function(w){return contents.includes(" " + w + " ")}).length >= Math.min(2,terms.length) && ilmSubjectGate(scientificQuestion,contents) && e.verification_status === "verified";
             });
             improved.evidences = picked.concat(relevantExternal).slice(0,8);
             improved._ilmNoRelevantEvidence = !improved.evidences.length;
