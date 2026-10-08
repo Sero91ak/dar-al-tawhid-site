@@ -568,3 +568,23 @@ html body .app[data-gender="girl"] #view-parents.view > .page-head.page-head{
   }
 }
 /* KIDS_PARENTS_PROFILE_HERO_V1254_END */
+
+/* KIDS_PARENTS_HERO_TEXT_SAFE_V1255 — all copy stays left of the character. */
+html[data-view="parents"] body .app #view-parents.view > .page-head.page-head .kicker,
+html[data-view="parents"] body .app #view-parents.view > .page-head.page-head h2,
+html[data-view="parents"] body .app #view-parents.view > .page-head.page-head p{
+  position:relative!important;
+  z-index:2!important;
+}
+html[data-view="parents"] body .app #view-parents.view > .page-head.page-head p{
+  width:min(62vw,385px)!important;
+  max-width:min(62vw,385px)!important;
+  text-wrap:pretty!important;
+}
+@media(min-width:700px){
+  html[data-view="parents"] body .app #view-parents.view > .page-head.page-head p{
+    width:min(43vw,480px)!important;
+    max-width:min(43vw,480px)!important;
+  }
+}
+/* KIDS_PARENTS_HERO_TEXT_SAFE_V1255_END */
