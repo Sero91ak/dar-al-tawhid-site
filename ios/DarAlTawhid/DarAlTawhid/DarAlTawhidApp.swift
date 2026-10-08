@@ -95,7 +95,17 @@ struct DarAlTawhidApp: App {
                     router.open(url)
                 }
                 .onAppear {
-                    router.openPendingQuickAction()
+                    // On a cold OneSignal launch the click may precede onReceive.
+                    // Article deep links take precedence over stale quick actions.
+                    if let pending = DarPushNotifications.consumePendingOpen() {
+                        router.openPush(
+                            type: pending["type"] ?? "",
+                            postId: pending["postId"] ?? "",
+                            url: pending["url"] ?? ""
+                        )
+                    } else {
+                        router.openPendingQuickAction()
+                    }
                 }
                 .onReceive(NotificationCenter.default.publisher(for: .darOpenShortcut)) { note in
                     guard let raw = note.userInfo?["destination"] as? String,
@@ -103,6 +113,9 @@ struct DarAlTawhidApp: App {
                     router.openShortcut(destination)
                 }
                 .onReceive(NotificationCenter.default.publisher(for: .darOpenPush)) { note in
+                    // Consume the buffered copy; it must not replay on later
+                    // foreground events after the user returns to Home.
+                    _ = DarPushNotifications.consumePendingOpen()
                     let info = note.userInfo ?? [:]
                     router.openPush(
                         type: String(describing: info["type"] ?? ""),
