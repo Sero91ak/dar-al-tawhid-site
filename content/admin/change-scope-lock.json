@@ -7201,6 +7201,18 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-30T23:59:00.000Z"
+    },
+    {
+      "id": "android-distribution-build-staging-2026-10-08",
+      "at": "2026-10-08T19:13:00+02:00",
+      "approvedBy": "user-explicit-android-play-and-website-all-three",
+      "reason": "Android-Paketierung und technischer Test auf eigenem Feature-Branch, ohne Produktions-Deploy oder Eingriff in geschützte Push-Systeme.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "android/",
+        ".github/workflows/android-distribution-build.yml"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
