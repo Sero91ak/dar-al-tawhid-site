@@ -35,8 +35,8 @@ assert.equal(api.kidsMajlisTesting.choose("Mein Passwort ist 123","6–8").id,"p
 assert.equal(api.kidsMajlisTesting.choose("jemand schlägt mich","6–8").id,"help");
 assert.equal(api.kidsMajlisTesting.choose("Wer wohnt im Mond?","6–8").id,"unknown");
 assert.equal(api.kidsMajlisTesting.choose("Rabbi zidni ilma", "6–8").id,"kb:dua:dua-knowledge");
-assert.equal(api.kidsMajlisTesting.choose("Welches Dua schützt vor Einflüsterungen?", "4–5").id,"age_restricted");
-assert.equal(api.kidsMajlisTesting.choose("Welches Dua schützt vor Einflüsterungen?", "9–10").id,"library:dua-079-rabbi-audhu-bika-min-hamazati-sh-shayatin");
+assert.equal(api.kidsMajlisTesting.choose("Welches Dua schützt vor Einflüsterungen?", "4–5").id,"kb:dua:dua-protection");
+assert.equal(api.kidsMajlisTesting.choose("Welches Dua schützt vor Einflüsterungen?", "9–10").id,"kb:dua:dua-protection");
 assert.equal(api.kidsMajlisTesting.choose("Schäme mich zu fragen", "9–10").id,"library:aishah-ansar-learning");
 assert.equal(api.kidsMajlisTesting.choose("Schäme mich zu fragen", "6–8").id,"age_restricted");
 assert.equal(api.kidsMajlisTesting.choose("Mein Passwort ist xyz; Rabbi zidni", "9–10").id,"privacy");
