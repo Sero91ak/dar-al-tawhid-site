@@ -1,0 +1,26 @@
+name: Check Q36 source slides
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'content/posts/2026-10-08-miraj-ruyah-ikhtilaf-kein-pauschaler-takfir-slides.md'
+      - 'scripts/q36-slides-source-guard.cjs'
+      - '.github/workflows/check-q36-slides-source.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check existing Q36 citations, slide layout and source YAML
+        run: |
+          set -euo pipefail
+          node --check scripts/q36-slides-source-guard.cjs
+          node scripts/q36-slides-source-guard.cjs
