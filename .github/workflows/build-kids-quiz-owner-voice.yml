@@ -1139,8 +1139,21 @@ jobs:
           else
             git commit -m "Kids: publish Serhat V4 Dua voice packs"
           fi
-          git pull --rebase origin main
-          git push origin HEAD:main
+          # Other app releases frequently update main during audio generation.
+          # Retry non-fast-forward / ref-lock races without re-synthesizing clips.
+          for attempt in $(seq 1 10); do
+            git pull --rebase origin main
+            if git push origin HEAD:main; then
+              echo "Kids voice pack committed successfully (attempt ${attempt})."
+              break
+            fi
+            if [ "${attempt}" -eq 10 ]; then
+              echo "::error::GitHub main changed during all 10 voice pack push attempts."
+              exit 1
+            fi
+            echo "::warning::Concurrent main update; retrying voice pack push ${attempt}/10."
+            sleep $((attempt * 2))
+          done
 
       - name: Publish released Quiz voice audio to the live Cloudflare site
         if: env.VOICE_BUILD_SCOPE == 'quiz' && env.DAR_VOICE_PROVIDER_AVAILABLE == '1'
