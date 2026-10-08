@@ -40,6 +40,11 @@ jobs:
           curl --location --silent --show-error --fail --retry 2 --max-time 20 -A "DarAlTawhidKids-iOS" --location --max-redirs 4             -H "Cache-Control: no-cache"             "https://dar-al-tawhid.de/kids/start?audit=$(date +%s)"             -o /tmp/kids-audit/live-home.html || true
           curl --location --silent --show-error --fail --retry 2 --max-time 20 -A "DarAlTawhidKids-iOS"             "https://dar-al-tawhid.de/kids/prayer-stage-v1261.css?v=1274&audit=$(date +%s)"             -o /tmp/kids-audit/live-salah.css || true
           curl --location --silent --show-error --fail --retry 2 --max-time 20             "https://dar-al-tawhid.de/kids/assets/kids-salah-v1272/hero-home.png?v=1274"             -o /tmp/kids-audit/live-art.png || true
+          for name in hero-day fajr dhuhr asr maghrib isha; do
+            curl --silent --show-error --fail --retry 2 --max-time 20 \
+              "https://dar-al-tawhid.de/kids/assets/kids-salah-v1272/$name.png?v=1274" \
+              -o "/tmp/kids-audit/$name.png" || true
+          done
           gh api "repos/$REPO/actions/workflows/cloudflare-pages-deploy.yml/runs?per_page=6"             --jq '[.workflow_runs[]|{id,head_sha,status,conclusion,created_at,updated_at,html_url}]'             > /tmp/kids-audit/runs.json || echo '[]' > /tmp/kids-audit/runs.json
           export AUDIT_TIME="$(date -u +%FT%TZ)"
           python3 - <<'PY'
@@ -55,6 +60,7 @@ jobs:
           css=read('live-salah.css')
           img=(p/'live-art.png')
           runs=json.loads(read('runs.json') or '[]')
+          art={name:((p/(name+'.png')).stat().st_size if (p/(name+'.png')).exists() else 0) for name in ['hero-day','fajr','dhuhr','asr','maghrib','isha']}
           doc=dict(timestamp=os.getenv('AUDIT_TIME'),trigger=os.getenv('TRIGGER'),
              finishedDeployConclusion=os.getenv('FINISHED_CONCLUSION') or None,
              finishedDeployRun=os.getenv('FINISHED_RUN') or None,
@@ -64,6 +70,8 @@ jobs:
                homeContainsNativeClean='kids-shell-v170-salah-native-clean1274' in home,
                cssBytes=len(css),cssContainsPhotoOverride='KIDS_SALAH_OLD_HERO_PURGE_V1274' in css,
                photoBytes=img.stat().st_size if img.exists() else 0,
+               prayerArtworkBytes=art,
+               allSevenArtworkFilesReachable=(img.exists() and img.stat().st_size>30000 and all(n>30000 for n in art.values())),
                versionJsonReadable=bool(obj)),
              lastDeployRuns=runs)
           (p/'report.json').write_text(json.dumps(doc,indent=2,ensure_ascii=False)+'\n')
