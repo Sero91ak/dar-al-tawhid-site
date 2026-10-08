@@ -601,7 +601,29 @@
             '</div></details>';
         }
       }
-      return archive + messages.slice(latestUser).map(regularMessage).join("");
+      // Only display one instance of an identical assistant answer within ONE
+      // user turn. Different questions remain separate, even if asked repeatedly.
+      // Some legacy flows append the same reply twice while completing research.
+      function replySignature(message) {
+        if (!message || message.role !== "assistant") return "";
+        var rendered = window.renderIlmAnswerText(message.reply || {});
+        return String(rendered || "").replace(/<[^>]*>/g," ").replace(/&nbsp;|&#160;/g," ")
+          .replace(/\s+/g," ").trim();
+      }
+      function uniqueCurrentTurn(items) {
+        var seen = Object.create(null);
+        return items.filter(function(message) {
+          if (!message || message.role === "user") { seen = Object.create(null); return true; }
+          if (message.role === "loading") return true;
+          if (message.role !== "assistant") return true;
+          var signature = replySignature(message);
+          if (!signature) return true;
+          if (seen[signature]) return false;
+          seen[signature] = true;
+          return true;
+        });
+      }
+      return archive + uniqueCurrentTurn(messages.slice(latestUser)).map(regularMessage).join("");
     };
 
     if (typeof window.searchIlmKnowledge === "function") {
