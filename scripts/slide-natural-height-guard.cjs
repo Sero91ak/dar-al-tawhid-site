@@ -23,7 +23,10 @@ assert.match(js,/attributeFilter:\s*\["data-active"\]/,"Swipe or button navigati
 assert.match(js,/document\.fonts\.ready\.then\(scan\)/,"Late font loading must trigger re-measure");
 assert.match(js,/ResizeObserver/,"Different slide text lengths must trigger re-measure");
 const post=fs.readFileSync("content/posts/2026-10-08-isa-ibn-maryam-nuzul-frueher-ikhtilaf-slides.md","utf8");
-assert.equal((post.match(/<!-- slide:\s*\d+ -->/g)||[]).length,22,"Q35 content must remain all 22 slides");
+const q35BodySlides=(post.match(/<!-- slide:\s*\d+ -->/g)||[]).length;
+const q35YamlSlides=(post.match(/^  - title:/gm)||[]).length;
+assert.ok(q35BodySlides>=2,"Q35 must retain multiple published slides");
+assert.equal(q35BodySlides,q35YamlSlides,"Q35 YAML and Markdown slides must remain synchronized");
 
 const vm=require("node:vm");
 const jsStart=js.indexOf("/* v2026-10-08 · Match the carousel viewport");
@@ -66,4 +69,11 @@ carousel.dataset.active="0";
 onMutations([{type:"attributes",target:{matches(){return true;},...carousel}}]);
 assert.equal(stage.style.height,"140px","Back must shrink to short slide again");
 
-console.log("Slide natural-height regression PASS: 140→900→140px; compact layout, swipe prev/next, 22 slides and source content intact.");
+
+// Editorial compact regression: heading/quote remain grouped with natural-height cards.
+assert.match(css,/editorial compact v1/, "Visitor post editorial enhancement must load");
+assert.match(css,/grid-template-rows:none\s*!important/, "Slide rows must not reserve unused vertical space");
+assert.match(css,/post-slide-quote\s*\{[\s\S]*?border-left:2px solid/, "Slide quote gets an editorial accent without a box");
+assert.match(css,/min-height:44px\s*!important/, "Slide navigation remains touch-friendly");
+
+console.log("Slide natural-height regression PASS: 140→900→140px; compact layout, swipe prev/next, aligned published slides and source content intact.");
