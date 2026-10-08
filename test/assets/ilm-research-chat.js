@@ -177,6 +177,15 @@
   function toEvidence(item, origin) {
     var url = deepLink(item);
     var verified = item.verification_status === "verified" && !!(item.reference || item.work) && !!(item.excerpt || item.body || item.statement) && !!url && (hostOk(url) || url.indexOf(location.origin) === 0);
+    // A canonical Arabic verse with a matching numeric in-app route is
+    // locally inspectable even when no external PDF or web link exists.
+    var ayaRoute = item.route && item.route.view === "quran-surah" ? String(item.route.value || "") : "";
+    var localAyah = origin !== "external" && item.kind === "quran" &&
+      /^(?:[1-9]|[1-9]\d|1[01]\d|11[0-4])\/(?:[1-9]\d{0,2})$/.test(ayaRoute) &&
+      item.id === "quran-" + ayaRoute.replace("/", "-") &&
+      /[\u0600-\u06ff]{5,}/.test(String(item.body || "")) &&
+      String(item.excerpt || "").length >= 25 && !!item.reference;
+    if (localAyah) verified = true;
     if (origin === "external") verified = false;
     return {
       speaker: item.speaker || item.author || "",
@@ -194,7 +203,7 @@
       deep_link: url,
       verification_status: verified ? "verified" : (url ? "partially_verified" : "unverified"),
       authenticity: item.authenticity || "",
-      notes: item.sourceTag || item.note || "",
+      notes: localAyah ? "Interner Qurʾān-Reader · Versnummer direkt prüfbar; keine eigenständige Rechtsauslegung" : (item.sourceTag || item.note || ""),
       id: item.id || "",
       route: item.route || null,
       groupLabel: item.groupLabel || ""
@@ -217,7 +226,7 @@
     var open = "";
     if (ev.route && ["post","dua","quran-surah"].includes(String(ev.route.view || "")) && String(ev.route.value || "") && !/[<>"\u0000-\u001f]/.test(String(ev.route.value))) {
       open = '<button type="button" class="ilm-open-src" data-ilm-discovery-result="1" data-nav="' + esc(ev.route.view) + '" data-value="' + esc(ev.route.value) + '">↗ In der App öffnen</button>';
-    } else if (ev.verification_status === "verified" && ev.deep_link) {
+    } else if (ev.verification_status === "verified" && (ev.deep_link || (ev.route && ev.route.view === "quran-surah"))) {
       if (ev.deep_link && /^https?:/i.test(ev.deep_link) && (hostOk(ev.deep_link) || ev.deep_link.indexOf(location.origin + "/") === 0)) {
         open = '<a class="ilm-open-src" href="' + esc(ev.deep_link) + '" target="_blank" rel="noopener noreferrer">↗ Originalstelle öffnen</a>';
       } else if (ev.route && ev.route.view) {
@@ -504,7 +513,7 @@
       // independently readable synthesis of ALL verified relevant quotations.
       // This is source exposition, not a newly invented fatwa.
       var proofs = (reply.evidences||[]).filter(function(e) {
-        return e.verification_status === "verified" && !!e.deep_link && e.statement && e.statement.length >= 24;
+        return e.verification_status === "verified" && (e.deep_link || (e.route && e.route.view === "quran-surah")) && e.statement && e.statement.length >= 24;
       }).slice(0,3);
       if (proofs.length >= 2) {
         return "Die belegten Überlieferungen unterscheiden folgende Sachverhalte: " +
@@ -528,7 +537,7 @@
       return "Die gefundenen Auszüge sind noch nicht ausreichend überprüft. Ich gebe sie nicht als gesicherte religiöse Beweise aus. Wa-Allāhu aʿlam.";
     }
     function sourceDisclosure(reply, openProof) {
-      var list = (reply.evidences || []).filter(function (e) { return e.verification_status === "verified" && !!e.statement && !!e.deep_link; });
+      var list = (reply.evidences || []).filter(function (e) { return e.verification_status === "verified" && !!e.statement && (e.deep_link || (e.route && e.route.view === "quran-surah")); });
       if (!list.length) return "";
       var count = openProof ? Math.min(5, list.length) : Math.min(Math.max(2,Number(reply._ilmCitationCount)||0,Number(reply._ilmRequestedEvidenceCount)||0),list.length);
       return '<details class="ilm-science-sources"' + (openProof ? ' open' : '') + '>' +
@@ -612,7 +621,7 @@
     var scienceAnswerSerial = 0;
     function requestScienceComposition(reply, question) {
       if (!reply || proofIntent(question) || reply._ilmSourceOnly || !navigator.onLine) return;
-      var rows = (reply.evidences || []).filter(function (e) { return e.verification_status === "verified" && !!e.deep_link && e.statement && e.statement.length >= 18; }).slice(0,3);
+      var rows = (reply.evidences || []).filter(function (e) { return e.verification_status === "verified" && (e.deep_link || (e.route && e.route.view === "quran-surah")) && e.statement && e.statement.length >= 18; }).slice(0,3);
       if (!rows.length) return;
       var requestId = "ilm-science-" + (++scienceAnswerSerial);
       reply._ilmAnswerId = requestId;
