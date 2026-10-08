@@ -122,6 +122,7 @@ import {
 } from "./library-push-admin.js";
 import { sendNewPostPush } from "./post-push-admin.js";
 import { handleIlmResearch } from "./ilm-research.js";
+import { handleKidsMajlisApi } from "./kids-majlis-api.js";
 
 const DEFAULT_OWNER = "Sero91ak";
 const DEFAULT_REPO = "dar-al-tawhid-site";
@@ -148,6 +149,8 @@ const LIVE_CHECK_SCHEDULE_CRON_MS = [0, 5000, 15000, 30000, 60000, 120000];
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+
+    if (url.pathname.startsWith("/kids/api/majlis/")) return handleKidsMajlisApi(request, env);
 
     if (url.pathname === "/api/ilm/research") {
       return handleIlmResearch(request);
