@@ -1,0 +1,83 @@
+{
+  "measurement_method_id": "fiveview-cropped-grabcut-seeded-v3-20261008",
+  "opencv_version": "4.13.0",
+  "model": "mein_gebet_junge_v74_sculpt_internal.glb",
+  "model_sha256": "7b4db7e684144ec23c63f8ad63e5a055e66fc871adf2757be62adf2699c41490",
+  "original_sha256": "062b8555e861c680b1049ab6a3bee0212caa51cda5168a6b33a76be01aa987b9",
+  "source_crop_boundaries_px": [
+    0,
+    318,
+    611,
+    874,
+    1173,
+    1448
+  ],
+  "source_segmentation_seed_thresholds": [
+    10,
+    12,
+    15
+  ],
+  "views": {
+    "front": {
+      "camera_azimuth_used": 0,
+      "reference_camera_physically_calibrated": false,
+      "reference_angle_label": "0 degree nominal cardinal view",
+      "reference_segmentation_agreement": 0.98759,
+      "reference_masks_stable": true,
+      "whole_body_shape_iou_worst": 0.88236,
+      "head_region_iou_worst": 0.89482,
+      "requested_90pct_shape_prefilter_pass": false
+    },
+    "three_quarter_uncalibrated": {
+      "camera_azimuth_used": 45,
+      "reference_camera_physically_calibrated": false,
+      "reference_angle_label": "3/4 unknown angle",
+      "reference_segmentation_agreement": 0.98173,
+      "reference_masks_stable": true,
+      "whole_body_shape_iou_worst": 0.82962,
+      "head_region_iou_worst": 0.90118,
+      "requested_90pct_shape_prefilter_pass": false
+    },
+    "right_side": {
+      "camera_azimuth_used": 90,
+      "reference_camera_physically_calibrated": false,
+      "reference_angle_label": "90 degree nominal cardinal view",
+      "reference_segmentation_agreement": 0.97259,
+      "reference_masks_stable": true,
+      "whole_body_shape_iou_worst": 0.87254,
+      "head_region_iou_worst": 0.88159,
+      "requested_90pct_shape_prefilter_pass": false
+    },
+    "back": {
+      "camera_azimuth_used": 180,
+      "reference_camera_physically_calibrated": false,
+      "reference_angle_label": "180 degree nominal cardinal view",
+      "reference_segmentation_agreement": 0.9704,
+      "reference_masks_stable": true,
+      "whole_body_shape_iou_worst": 0.87901,
+      "head_region_iou_worst": 0.8532,
+      "requested_90pct_shape_prefilter_pass": false
+    },
+    "left_side": {
+      "camera_azimuth_used": 270,
+      "reference_camera_physically_calibrated": false,
+      "reference_angle_label": "270 degree nominal cardinal view",
+      "reference_segmentation_agreement": 0.98883,
+      "reference_masks_stable": true,
+      "whole_body_shape_iou_worst": 0.86489,
+      "head_region_iou_worst": 0.88333,
+      "requested_90pct_shape_prefilter_pass": false
+    }
+  },
+  "all_five_90pct_pass": false,
+  "original_character_likeness_approved": false,
+  "prayer_poses_approved": false,
+  "real_ipad_test_done": false,
+  "production_approved": false,
+  "warnings": [
+    "An uncalibrated 3/4 camera cannot grant a 90% geometry pass even when a pixel score exceeds 90.",
+    "IoU is a SILHOUETTE overlap metric, not facial identity or religious correctness.",
+    "The reference shows neutral resting arms; GLB evaluated in bind/static mesh geometry.",
+    "No new images are generated or written by this program."
+  ]
+}
