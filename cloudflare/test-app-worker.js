@@ -438,16 +438,27 @@ async function ilmScienceCompose(request, env) {
     authenticity:String(e && e.authenticity || "").slice(0,70),
     verification_status:String(e && e.verification_status || "unverified").slice(0,30),
     excerpt:String(e && e.statement || "").replace(/<[^>]*>/g," ").trim().slice(0,900)
-  })).filter(e => e.excerpt.length >= 18);
-  if (!sources.length) return send({ok:false,error:"no_source_text"},422);
+  })).filter(e => e.excerpt.length >= 18 && e.verification_status === "verified");
+  if (!sources.length) return send({ok:false,error:"no_verified_source_text"},422);
+  const sourceNormalize = value => String(value || "").toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9 ]/g," ").replace(/\s+/g," ");
+  const questionNorm = sourceNormalize(question);
+  const requireRuku = /\b(?:ruku|rukuh|verbeugung)\b/.test(questionNorm);
+  const requireHands = requireRuku && /\b(?:hand|hande|handen|heben|hoch|unten|senken)\b/.test(questionNorm);
+  const sourceSupportsRuku = source => {
+    const text = sourceNormalize([source.work,source.reference,source.excerpt].join(" "));
+    return (!requireRuku || /\b(?:ruku|rukuh|verbeugung)\b/.test(text)) &&
+      (!requireHands || /\b(?:hand|hande|handen|heben|hebt|hob|hoben|gehoben|erhob|erhoben|erhebt|senkte|senken)\b/.test(text));
+  };
+  const topicSources = sources.filter(sourceSupportsRuku);
+  if (!topicSources.length) return send({ok:false,error:"no_topic_relevant_verified_source"},422);
   // Gemini is the preferred evidence-bound model when a server-side key exists.
   // No personal Gemini/ChatGPT account is involved. Rate limit is enforced by
   // Cloudflare bindings before contacting Google; a limited request must not
   // silently bypass the cap through a different model.
-  const gemini = await composeIlmWithGemini(request, env, question, sources, mode);
+  const gemini = await composeIlmWithGemini(request, env, question, topicSources, mode);
   if (gemini.limited) return send({ok:false,error:"rate_limited"},429);
   if (gemini.ok) return send({
-    ok:true, answer:gemini.answer, usedSourceCount:sources.length,
+    ok:true, answer:gemini.answer, usedSourceCount:topicSources.length,
     mode:"source_bound", answerMode:mode, provider:"gemini",
     policyVersion:ILM_SCIENCE_POLICY_VERSION
   });
@@ -473,7 +484,7 @@ async function ilmScienceCompose(request, env) {
     const result = await env.AI.run("@cf/meta/llama-3.1-8b-instruct-fp8", {
       messages:[
         {role:"system",content:system},
-        {role:"user",content:"FRAGE:\n"+question+"\n\nQUELLEN-AUSZÜGE:\n"+JSON.stringify(sources)}
+        {role:"user",content:"FRAGE:\n"+question+"\n\nQUELLEN-AUSZÜGE:\n"+JSON.stringify(topicSources)}
       ],
       max_tokens:mode === "short" ? 210 : 390,
       temperature:0.15,
@@ -482,7 +493,7 @@ async function ilmScienceCompose(request, env) {
     });
     const answer = String(result && result.response || "").trim().slice(0,1700);
     if (!answer || answer.length < 35) return send({ok:false,error:"empty_ai_answer"},502);
-    return send({ok:true,answer,usedSourceCount:sources.length,mode:"source_bound",answerMode:mode,provider:"workers_ai",policyVersion:ILM_SCIENCE_POLICY_VERSION});
+    return send({ok:true,answer,usedSourceCount:topicSources.length,mode:"source_bound",answerMode:mode,provider:"workers_ai",policyVersion:ILM_SCIENCE_POLICY_VERSION});
   } catch (_) {
     return send({ok:false,error:"ai_compose_failed"},502);
   }
