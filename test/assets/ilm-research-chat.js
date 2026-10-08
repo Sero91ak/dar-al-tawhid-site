@@ -296,7 +296,13 @@
         .replace(/\*\*|__|#{1,4}\s/g, "").replace(/\s+/g, " ").trim();
     }
     function proofIntent(question) {
-      return /(?:exakt|wörtlich|wortlaut|original(?:text|aussage)?|beweis|beleg|quelle|isn[aā]d|nachweis|wort.für.wort|zitiere|überlieferung|hadith.nummer|ḥadīṯ.nummer)/i.test(String(question || ""));
+      var q = String(question || "");
+      // A definition requested WITH evidence is still a question, not a request
+      // to suppress explanation and display only raw proof excerpts.
+      var definition = /(?:was\s+(?:ist|bedeutet)|erkl[aä]r|was\s+versteht\s+man\s+unter)/i.test(q);
+      var exactQuote = /(?:exakt|wörtlich|wortlaut|original(?:text|aussage)?|wort.für.wort|zitiere|isn[aā]d)/i.test(q);
+      if (definition && !exactQuote) return false;
+      return /(?:exakt|wörtlich|wortlaut|original(?:text|aussage)?|beweis|beleg|quelle|isn[aā]d|nachweis|wort.für.wort|zitiere|überlieferung|hadith.nummer|ḥadīṯ.nummer)/i.test(q);
     }
     function sourceTitle(ev) {
       return [ev.speaker, ev.work, ev.reference !== ev.work ? ev.reference : "", ev.chapter, ev.hadith_number && ("Nr. " + ev.hadith_number),
@@ -525,6 +531,7 @@
           var answer = String(data.answer).replace(/<[^>]*>/g, "").replace(/\r\n/g, "\n").trim().slice(0,1650);
           if (answer.length < 35 || /\[(?:[4-9]|\d{2,})\]/.test(answer)) return;
           reply._ilmGeneratedText = answer;
+          reply._ilmProvider = data.provider === "gemini" ? "Gemini" : data.provider === "workers_ai" ? "Cloudflare Workers AI" : "";
           reply._ilmCitationCount = rows.length;
           var node = document.querySelector('[data-ilm-answer-id="' + requestId + '"] .ilm-answer-text');
           if (node && document.body.classList.contains("is-ilm-chat-route")) {
@@ -572,6 +579,9 @@
         }
         return '<p>' + enriched + '</p>';
       }).join("") + '</div>';
+      if (reply._ilmProvider && reply._ilmGeneratedText) {
+        html += '<p class="ilm-science-provider">Mit ' + esc(reply._ilmProvider) + ' formuliert · nach Quellenprüfung</p>';
+      }
       if (reply._ilmBasicTawhid || reply._ilmTawhidFollowup) html += ilmScriptureLinks(!!reply._ilmTawhidFollowup);
       if (reply._ilmBasicIman) html += ilmImanScriptureLinks();
       if (!reply._ilmBasicTawhid && !reply._ilmBasicIman && !reply._ilmTawhidFollowup) html += discoverySection(reply);
