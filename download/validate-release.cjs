@@ -36,6 +36,7 @@ if (fs.existsSync(publicRouterPath)) {
     assert.ok(router.includes('id="' + id + '"'), "Main website Android promotion missing: " + id);
   }
   assert.ok(router.includes('/download/official-release-links.js'), "Main website must use shared official release switchboard");
+  assert.ok(router.includes('/download/icons/android-phone-default.jpg'), 'Main website must use supplied phone icon');
 }
 
 assert.ok(links.includes('href="/download/"'), "Website links page must offer official Android downloads");
@@ -43,8 +44,10 @@ assert.ok(!html.includes("apk-kids"), "Kids must not have a public download butt
 assert.ok(!html.includes("de.daraltawhid.kids"), "Kids app must not be advertised publicly here");
 assert.equal(manifest.apps.kids.public, false, "Kids is private-testing only");
 assert.ok(links.includes('src="/download/icons/android-tv-icon.jpg"'), "Website must show official TV icon");
+assert.ok(links.includes('src="/download/icons/android-phone-default.jpg"'), "Website must use provided Android phone icon");
+assert.ok(html.includes('src="/download/icons/android-phone-default.jpg"'), "Download page must use provided Android phone icon");
 assert.ok(html.includes('src="/download/icons/android-tv-official.jpg"'), "TV download card must show supplied official banner");
-for (const art of ["download/icons/android-tv-official.jpg", "download/icons/android-tv-icon.jpg"]) {
+for (const art of ["download/icons/android-phone-default.jpg", "download/icons/android-tv-official.jpg", "download/icons/android-tv-icon.jpg"]) {
   const data = fs.readFileSync(path.join(root, art));
   assert.ok(data.length > 10_000 && data[0] === 0xff && data[1] === 0xd8, "Official TV artwork missing: " + art);
 }

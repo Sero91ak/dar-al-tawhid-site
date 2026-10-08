@@ -277,7 +277,7 @@ function publicWebsiteAddon() {
   </div>
   <div class="dar-android-grid">
     <a class="dar-android-card" id="dar-public-android-apk" href="/download/" aria-label="Android-Smartphone-App Download und Anleitung">
-      <img class="dar-android-icon" src="/download/icons/android-phone.svg" width="70" height="70" alt="">
+      <img class="dar-android-icon" src="/download/icons/android-phone-default.jpg" width="70" height="70" alt="">
       <span class="dar-android-content">
         <small>ANDROID · SMARTPHONE &amp; TABLET</small><strong>DAR AL TAWḤĪD</strong>
         <span id="dar-public-android-meta">Release wird vorbereitet</span>
