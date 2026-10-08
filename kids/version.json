@@ -1,8 +1,8 @@
 {
   "buildId": "kids-shell-v169-salah-photoreal1272",
   "label": "KIDS · V1.08.90",
-  "releasedAt": "2026-10-08T17:40:30.774Z",
-  "note": "KIDS · V1.08.90: Sieben neue lokale fotorealistische Moschee-Szenen für Startseiten-Hero, Gebetszeiten-Hero und alle fünf Gebete. Kompakter verschmolzener Start-Hero ohne große Leerstrecke; größere aktuelle/nächste Gebetszeiten und deutlicher Live-Countdown. Alte illustrierte Videoüberlagerung zugunsten ruhiger CSS-Kamerabewegung deaktiviert, bis fotorealistischer Videorender verfügbar ist. Salāh-Berechnung, Ortseinstellung, Tagesliste und PWA-Offline-Caching erhalten.",
+  "releasedAt": "2026-10-08T18:18:09.820Z",
+  "note": "KIDS · V1.08.90: Sieben neue lokale fotorealistische Moschee-Szenen für Startseiten-Hero, Gebetszeiten-Hero und alle fünf Gebete. Kompakter verschmolzener Start-Hero ohne große Leerstrecke; größere aktuelle/nächste Gebetszeiten und deutlicher Live-Countdown. Alte illustrierte Videoüberlagerung zugunsten ruhiger CSS-Kamerabewegung deaktiviert, bis fotorealistischer Videorender verfügbar ist. Salāh-Berechnung, Ortseinstellung, Tagesliste und PWA-Offline-Caching erhalten. Hotfix: PWA-SW-Registrierung und Versionsprüfung explizit auf v1273 für Cache-Busting angepasst. GitHub Actions Besucher-App-Deploy per kids/** Commit neu ausgelöst.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -1246,10 +1246,11 @@
     "salahMotion": "photoreal-slow-css-pan-reduced-motion-safe",
     "salahPrayerPhotos": 7,
     "salahHeroCompact": true,
-    "salahDayFiveSceneImages": true
+    "salahDayFiveSceneImages": true,
+    "salahSwRegistration": "v1273"
   },
-  "updatedAt": "2026-10-08T17:40:30.774Z",
-  "deployTrigger": "kids-salah-photoreal-v1272",
+  "updatedAt": "2026-10-08T18:18:09.820Z",
+  "deployTrigger": "kids-v10890-refresh-registration-1273",
   "globalDetailDock": {
     "version": "v1253",
     "enabled": true,
