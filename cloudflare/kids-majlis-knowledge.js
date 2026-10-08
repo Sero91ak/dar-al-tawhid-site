@@ -42,8 +42,12 @@ function quranMedia(surah,ayah){
  const s=Number(surah),a=Number(ayah),counts=INDEX.quran?.ayahCounts||[];
  if(!Number.isInteger(s)||!Number.isInteger(a)||s<1||s>114||a<1||a>Number(counts[s-1]))return null;
  const global=counts.slice(0,s-1).reduce((x,y)=>x+y,0)+a;
+ const verseRelated=INDEX.duas.find(row=>row.sourceType==="quran"&&
+   Array.isArray(row.quranRefs)&&row.quranRefs.some(ref=>Number(ref.surah)===s&&Number(ref.ayah)===a));
+ const excerpt=verseRelated?{kind:"dua_excerpt",title:verseRelated.title,arabic:verseRelated.arabic,
+   meaning:verseRelated.meaning,source:verseRelated.source}:null;
  return {kind:"quran",surah:s,ayah:a,reference:"Qurʾān "+s+":"+a,
-  reciter:"Mišārī Rāšid al-ʿAfāsī",recitationUrl:"/quran-audio/ar.alafasy/"+global+".mp3?v=1063"};
+  reciter:"Mišārī Rāšid al-ʿAfāsī",recitationUrl:"/quran-audio/ar.alafasy/"+global+".mp3?v=1063",excerpt};
 }
 function profilePrefix(gender,style){
  const whom=gender==="girl"?"Schwester":"Bruder";
@@ -68,6 +72,26 @@ function findExplicitVerse(raw,gender){
  return {id:"verse:"+media.surah+":"+media.ayah,
   text:personalize("Du meinst "+media.reference+". Du kannst die Rezitation unten direkt anhören. Den genauen arabischen Wortlaut und die Übersetzung kannst du auch im Qurʾān-Bereich öffnen. Ich dichte keinen Versinhalt dazu.",gender),
   source:media.reference,media};
+}
+const VERIFIED_VERSE_TERMS=[
+ {re:/\b(allah.*ein(?:er|zig)|einzigkeit allahs|sura[t h]*al.?ikhl[aā]s|al.?ikhl[aā]s)\b/i, surah:112,ayah:1},
+ {re:/\b(gebetswaschung|wu[ḍd]u|wudu)\b/i,surah:5,ayah:6},
+ {re:/\b(qibla|qiblah|kaaba|kaʿba)\b/i,surah:2,ayah:144},
+ {re:/\b(rabbi zidni|mehr wissen|wissen vermehren)\b/i,surah:20,ayah:114},
+ {re:/\b(eltern gut behandeln|eltern ehren|guter umgang mit eltern)\b/i,surah:17,ayah:23}
+];
+function findSemanticVerse(raw,gender){
+ const q=String(raw||"");
+ if(!/(?:qur|koran|sura|sure|vers|āyah|ayah|wo.*steht|wo.*kommt.*vor)/i.test(q))return null;
+ for(const row of VERIFIED_VERSE_TERMS){
+  if(!row.re.test(q))continue;
+  const media=quranMedia(row.surah,row.ayah);
+  if(!media)continue;
+  return {id:"verse:"+media.surah+":"+media.ayah,
+   text:personalize("Dazu findest du einen eindeutigen Beleg in "+media.reference+". Du kannst die Rezitation hören. Wenn ein Duʿāʾ-Ausschnitt verfügbar ist, siehst du ihn unten; den vollständigen Vers findest du im Qurʾān-Bereich.",gender),
+   source:media.reference,media};
+ }
+ return null;
 }
 function findDua(raw,age,gender){
  const q=keywords(raw);
@@ -129,7 +153,7 @@ function findKnowledge(question,age,gender){
  const q=String(question||"").trim();
  if(!q||q.length>350)return null;
  const g=gender==="girl"?"girl":"boy";
- return findExplicitVerse(q,g)||findDua(q,age,g)||findQuiz(q,age,g)||null;
+ return findExplicitVerse(q,g)||findSemanticVerse(q,g)||findDua(q,age,g)||findQuiz(q,age,g)||null;
 }
 function findKnowledgeById(id,age,gender){
  const s=String(id||"");
