@@ -73,6 +73,83 @@
   gate.appendChild(approve);guardian.appendChild(gate);
   root.appendChild(top);root.appendChild(notice);root.appendChild(chat);root.appendChild(form);root.appendChild(guardian);
   document.body.appendChild(root);
+  function activeGender(){
+    var gender=(document.querySelector(".app")||{}).getAttribute?.("data-gender")||"";
+    try{
+      var active=localStorage.getItem("kids.activeProfile"),profiles=JSON.parse(localStorage.getItem("kids.profiles.v1")||"[]");
+      var profile=Array.isArray(profiles)?profiles.find(function(p){return String(p.id)===String(active)}):null;
+      if(profile?.gender)gender=profile.gender;
+    }catch(_){}
+    return gender==="girl"?"girl":"boy";
+  }
+  function familyWord(){return activeGender()==="girl"?"Schwester":"Bruder";}
+  function protectedAudioUrl(url){
+    var s=String(url||"");
+    if(/^\/kids\/assets\/kids-dua-(?:arabic-|arabic-slow-|word-)?audio\/[a-zA-Z0-9._-]+\.m4a\?v=[a-zA-Z0-9._-]+$/.test(s))return s;
+    if(/^\/quran-audio\/ar\.alafasy\/[1-9]\d{0,3}\.mp3\?v=1063$/.test(s))return s;
+    return null;
+  }
+  async function playPrepared(url,label){
+    var safe=protectedAudioUrl(url);
+    if(!safe){status.textContent="Diese Audiodatei ist nicht freigegeben.";return;}
+    stopPlayback();
+    try{
+      var sound=new Audio(safe);state.player=sound;sound.preload="none";
+      sound.onended=function(){if(state.player===sound){stopPlayback();status.textContent="Aufnahme fertig angehört."}};
+      await sound.play();
+      status.textContent=label||"Aufnahme wird abgespielt.";
+    }catch(_){stopPlayback();status.textContent="Die Aufnahme ist momentan nicht erreichbar. Bitte versuche es später erneut.";}
+  }
+  function mediaCard(box,media){
+    if(!media||!["dua","quran"].includes(media.kind))return;
+    var panel=el("section","km-media");
+    var prompt=el("p","km-media-prompt",media.kind==="dua"?
+      "Möchtest du diese Duʿāʾ direkt hier lesen, anhören oder Wort für Wort lernen?":
+      "Möchtest du diesen Qurʾān-Vers im Chat anhören?");
+    panel.appendChild(prompt);
+    var row=el("div","km-media-actions");
+    function button(label,run){
+      var btn=el("button","km-media-button",label);btn.type="button";
+      btn.addEventListener("click",run);row.appendChild(btn);return btn;
+    }
+    var details=el("div","km-media-details");details.hidden=true;
+    if(media.kind==="dua"){
+      button("Ja, lesen",function(){
+        details.hidden=!details.hidden;
+        if(!details.hasChildNodes()){
+          details.appendChild(el("p","km-arabic",media.arabic||""));
+          details.appendChild(el("p","km-translit",media.transliteration||""));
+          details.appendChild(el("p","km-meaning",media.meaning||""));
+          details.appendChild(el("span","km-source","Quelle: "+String(media.source||"")));
+        }
+        status.textContent=details.hidden?"Lesekarte geschlossen.":"Arabischer Text und Bedeutung eingeblendet.";
+      });
+      if(media.audio?.arabic)button("▶ Arabisch",function(){playPrepared(media.audio.arabic,"Du hörst die vorhandene Fuṣḥā-Masteraufnahme.");});
+      if(media.audio?.german)button("▶ Deutsch",function(){playPrepared(media.audio.german,"Du hörst die deutsche Masteraufnahme.");});
+      if(media.audio?.arabicSlow)button("▶ Langsam",function(){playPrepared(media.audio.arabicSlow,"Langsames arabisches Vorlesen.");});
+      if(Array.isArray(media.segments)&&media.segments.length){
+        var chunks=el("details","km-word-panel"),summary=el("summary","","Wort für Wort üben");
+        chunks.appendChild(summary);var words=el("div","km-words");
+        media.segments.slice(0,30).forEach(function(part){
+          if(!protectedAudioUrl(part.audioUrl))return;
+          var b=el("button","km-word","");
+          b.type="button";b.appendChild(el("strong","",part.arabic||""));
+          b.appendChild(el("small","",part.transliteration||""));
+          b.addEventListener("click",function(){playPrepared(part.audioUrl,"Ein arabisches Wort aus deiner Duʿāʾ.");});
+          words.appendChild(b);
+        });
+        chunks.appendChild(words);panel.appendChild(chunks);
+      }
+      if(media.quran?.recitationUrl)button("▶ Qurʾān-Rezitation",function(){
+        playPrepared(media.quran.recitationUrl,"Originalrezitation von "+(media.quran.reciter||"dem Qāriʾ")+".");
+      });
+    } else {
+      panel.appendChild(el("span","km-source",String(media.reference||"Qurʾān")));
+      panel.appendChild(el("p","km-media-note","Die Rezitation stammt von einem Qāriʾ – nicht von einer KI-Stimme."));
+      if(media.recitationUrl)button("▶ Rezitation",function(){playPrepared(media.recitationUrl,"Qurʾān-Rezitation: "+String(media.reference||"")+".");});
+    }
+    panel.appendChild(row);panel.appendChild(details);box.appendChild(panel);
+  }
   function message(who,text,source) {
     var box=el("article","km-msg"+(who==="you"?" km-you":""));
     box.appendChild(el("small","",who==="you"?"DEINE FRAGE":"DEIN LERNBEGLEITER"));
@@ -107,7 +184,7 @@
   }
   function welcome() {
     chat.replaceChildren();
-    message("guide","As-salāmu ʿalaykum! 🌟 Hier darfst du fragen und entdecken. Ich antworte kurz und mit einer geprüften Quelle. Was möchtest du heute lernen?");
+    message("guide","As-salāmu ʿalaykum, liebe"+(activeGender()==="girl"?"":"r")+" "+familyWord()+"! 🌟 Schön, dass du da bist. Frag mich alles über den Dīn. Wir lernen liebevoll und mit echten Quellen. Wenn ich etwas nicht sicher weiß, sage ich: Allāhu aʿlam – Allah weiß es am besten. Was möchtest du entdecken?");
     picks();status.textContent="Wähle eine Frage oder schreibe selbst.";
   }
   function responseFor(question) {
@@ -121,7 +198,7 @@
       var answer=state.age==="4–5" ? item.answer.split(/(?<=[.!?])\s+/).slice(0,2).join(" ") : item.answer;
       return {answer:answer,source:item.source};
     }
-    return {answer:"Das ist eine interessante Frage! Dafür habe ich hier noch keine ausreichend geprüfte Kinderantwort. Frag bitte deine Eltern. Gemeinsam könnt ihr in den Wissensbereichen unserer App nachschauen.",source:null};
+    return {answer:"Allāhu aʿlam – Allah weiß es am besten, meine liebe"+(activeGender()==="girl"?"":"r")+" "+familyWord()+". Dazu habe ich keine eindeutig geprüfte Antwort. Ich möchte nichts erfinden. Frag bitte deine Eltern, damit ihr gemeinsam nach einem Beleg suchen könnt.",source:null};
   }
   async function submitQuestion(value) {
     if(!state.approved||state.busy)return;
@@ -149,12 +226,12 @@
       try{
         var response=await fetch("/kids/api/majlis/answer",{
           method:"POST",credentials:"same-origin",headers:{"Content-Type":"application/json"},
-          body:JSON.stringify({question:q,age:state.age})
+          body:JSON.stringify({question:q,age:state.age,gender:activeGender()})
         });
         if(!response.ok)throw Error("answer-unavailable");
         var data=await response.json();
         if(!data.ok||!data.answer)throw Error("answer-invalid");
-        item={answer:String(data.answer),source:data.source||null,answerId:data.answerId||null};
+        item={answer:String(data.answer),source:data.source||null,answerId:data.answerId||null,media:data.media||null};
       }catch(_){
         item={answer:"Die Verbindung zum geschützten Lernbereich funktioniert gerade nicht. Bitte versuche es später erneut oder frage deine Eltern.",source:null};
       }finally{state.busy=false;send.disabled=false}
@@ -163,7 +240,8 @@
     }
     if(!state.open)return;
     state.lastAnswer=item;
-    message("guide",item.answer,item.source);
+    var lastBox=message("guide",item.answer,item.source);
+    if(item.media)mediaCard(lastBox,item.media);
     listen.disabled=!(state.serverAuthorized&&state.canSpeak&&item.answerId);
     state.turns++;
     status.textContent=state.serverAuthorized?(item.source?(state.canSpeak?"Geprüfte Antwort · mit Masterstimme anhörbar.":"Geprüfte Antwort · Sprachfunktion noch nicht aktiviert."):"Für diese Frage ist die Antwort bewusst begrenzt."):"Vorschau ohne Sprach-KI · nur feste Lernantworten.";
