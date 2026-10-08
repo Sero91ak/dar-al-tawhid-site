@@ -1,3 +1,5 @@
+> **KORRIGENDUM (08.10.2026): Dieser ältere V7.5-Bericht enthält eine inzwischen widerlegte Aussage zur Nicht-Regression.** Die ursprünglichen gleich breiten Referenzausschnitte haben insbesondere den Dreiviertel-Umriss abgeschnitten. Der korrigierte, unabhängig stabilisierte QA-v2-Test ergibt **V7.4 = 0,82724** und **V7.5 = 0,82635** für 3/4; V7.5 verschlechtert diese Perspektive also leicht (**−0,00089**). Die übrigen korrigierten Werte und der neue fail-closed Test stehen in [V7-5-QA-V2-KORRIGIERTER-REFERENZVERGLEICH.md](V7-5-QA-V2-KORRIGIERTER-REFERENZVERGLEICH.md). **Dieser ältere Bericht darf nicht als 5/5- oder No-Regression-Freigabenachweis verwendet werden.**
+
 # Modell V7.5 – echte Schulter-/Ärmel-Geometriekorrektur und Fünf-Blickwinkel-Regression (08.10.2026)
 
 **Entscheidung:** V7.5 ist ein **technischer, ungeprüfter Charakter-Kandidat**; **keine App-Freigabe**. Diese Fassung wurde aus dem tatsächlichen V7.4-GLB als 3D-Vertex-Korrektur abgeleitet, **nicht** aus neuer KI-Bildgenerierung oder visueller Projektion. Die unveränderten, vom Nutzer bestätigten Originalansichten sind der Prüfmaßstab.
