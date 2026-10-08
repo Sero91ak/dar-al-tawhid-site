@@ -1,0 +1,69 @@
+/* Majlis al-Ilm Test-only welcome finishing layer v1341.
+   Global appearance variables remain the sole color authority. */
+html[data-theme] body.is-ilm-chat-route .ilm-welcome-examples-v1341,
+body.is-ilm-chat-route .ilm-welcome-examples-v1341{
+ display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:9px!important;width:100%!important;min-height:0!important;
+ margin:11px 0 0!important;padding:0!important;
+ visibility:visible!important;opacity:1!important;
+}
+html[data-theme] body.is-ilm-chat-route .ilm-welcome-example-v1341,
+body.is-ilm-chat-route .ilm-welcome-example-v1341{
+ display:flex!important;align-items:center!important;justify-content:space-between!important;
+ gap:7px!important;min-width:0!important;width:100%!important;min-height:63px!important;
+ padding:10px 11px!important;margin:0!important;
+ background:color-mix(in srgb,var(--ilm-header-bg) 68%,transparent)!important;
+ color:var(--ilm-primary-text)!important;
+ border:1px solid color-mix(in srgb,var(--ilm-accent) 23%,transparent)!important;
+ border-radius:13px!important;box-shadow:none!important;
+ text-align:left!important;cursor:pointer!important;
+ visibility:visible!important;opacity:1!important;transform:none!important;
+ -webkit-tap-highlight-color:transparent;
+}
+body.is-ilm-chat-route .ilm-welcome-example-text-v1341{display:grid;gap:4px;min-width:0;flex:1}
+body.is-ilm-chat-route .ilm-welcome-example-text-v1341 small{
+ color:var(--ilm-accent);font:680 9px/1.25 system-ui,sans-serif;
+ letter-spacing:.06em;text-transform:uppercase;
+}
+body.is-ilm-chat-route .ilm-welcome-example-text-v1341 b{
+ color:var(--ilm-primary-text);font:625 12px/1.35 system-ui,sans-serif;
+ overflow-wrap:break-word;
+}
+body.is-ilm-chat-route .ilm-welcome-example-arrow-v1341{
+ flex:0 0 auto;color:var(--ilm-accent);font:400 17px/1 system-ui,sans-serif;
+}
+body.is-ilm-chat-route .ilm-welcome-example-v1341:hover,
+body.is-ilm-chat-route .ilm-welcome-example-v1341:focus-visible{
+ border-color:color-mix(in srgb,var(--ilm-accent) 62%,transparent)!important;
+ outline-offset:2px;
+}
+html[data-theme] body.is-ilm-chat-route .ilm-welcome-paths{
+ margin-top:21px!important;padding-bottom:6px!important;
+}
+html[data-theme] body.is-ilm-chat-route .ilm-welcome-path-grid{
+ display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:9px!important;border:0!important;
+}
+html[data-theme] body.is-ilm-chat-route .ilm-welcome-path-grid .ilm-welcome-path{
+ min-width:0!important;min-height:76px!important;
+ padding:12px!important;margin:0!important;
+ border:1px solid color-mix(in srgb,var(--ilm-accent) 21%,transparent)!important;
+ border-radius:14px!important;
+ background:color-mix(in srgb,var(--ilm-header-bg) 58%,transparent)!important;
+ box-shadow:none!important;
+}
+html[data-theme] body.is-ilm-chat-route .ilm-welcome-path-grid .ilm-welcome-path:hover,
+html[data-theme] body.is-ilm-chat-route .ilm-welcome-path-grid .ilm-welcome-path:focus-visible{
+ border-color:color-mix(in srgb,var(--ilm-accent) 52%,transparent)!important;
+}
+@media(max-width:345px){
+ html[data-theme] body.is-ilm-chat-route .ilm-welcome-examples-v1341{
+  grid-template-columns:minmax(0,1fr)!important;
+ }
+ html[data-theme] body.is-ilm-chat-route .ilm-welcome-path-grid{
+  grid-template-columns:minmax(0,1fr)!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ body.is-ilm-chat-route .ilm-welcome-example-v1341{transition:none!important}
+}
