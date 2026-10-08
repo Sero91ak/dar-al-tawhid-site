@@ -39,7 +39,13 @@ stage.innerHTML=
   ORDER.map(key=>'<span class="kids-salah-slot" role="listitem" data-prayer="'+key+'"><span class="kids-salah-dot" aria-hidden="true"></span><span class="kids-salah-prayer">'+NAMES[key]+'</span><time>--:--</time></span>').join("")+
   '</div><button class="kids-salah-open-day" id="kidsSalahOpenDay" type="button">Alle Gebetszeiten ansehen <span aria-hidden="true">›</span></button>'+
   '<p class="kids-salah-status" id="kidsSalahStatus">Gebetszeiten passend zu deinem Ort.</p>';
-HERO.insertAdjacentElement("afterend",stage);
+/* A single illustrated home world: the salām + learning intro + prayer clock share
+   one background, without a second isolated capsule. */
+const salahWorld=document.createElement("div");
+salahWorld.className="kids-salah-home-world";
+HERO.parentNode.insertBefore(salahWorld,HERO);
+salahWorld.append(HERO,stage);
+
 
 /* Adobe static plate stays local; Runway ambient motion is also local after import.
    Low-power and reduced-motion users see the static high-contrast stage instead. */
@@ -50,7 +56,7 @@ if(!window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches && !navigat
  motion.setAttribute("playsinline","");motion.setAttribute("muted","");motion.setAttribute("aria-hidden","true");
  motion.poster="/kids/assets/kids-salah-v1262/cinematic-still.jpg";
  motion.onerror=()=>{motion.remove();};
- stage.insertBefore(motion,stage.firstChild);
+ salahWorld.insertBefore(motion,HERO);
  const startMotion=()=>{
   if(!motion.isConnected||document.hidden)return;
   if(!motion.src)motion.src="/kids/assets/kids-salah-v1262/cinematic-motion.mp4";
@@ -111,7 +117,7 @@ dayPage.innerHTML=
  '<div class="kids-salah-day-hero" role="group" aria-label="Dein Gebetstag">'+
  '<div class="kids-salah-day-overline"><span class="kids-salah-day-spark" aria-hidden="true">✦</span> DEIN GEBETSTAG <span id="kidsSalahDayDate"></span></div>'+
  '<h2>Unsere fünf <em>Gebete</em></h2>'+
- '<p class="kids-salah-day-subtitle">Fünf Gebete begleiten deinen Tag.</p>'+
+ '<p class="kids-salah-day-subtitle">Hier siehst du alle Gebetszeiten für heute.</p>'+
  '<div class="kids-salah-day-nextbox"><span>ALS NÄCHSTES</span><strong id="kidsSalahDayUpcomingName">Bitte warten …</strong><time id="kidsSalahDayUpcomingTime">--:--</time></div>'+
  '<div class="kids-salah-day-place"><span class="kids-salah-day-place-pin" aria-hidden="true"></span><strong id="kidsSalahDayCity">Dein Gebetsort</strong>'+
  '<button type="button" id="kidsSalahDayLocation">Ort ändern <span aria-hidden="true">›</span></button></div></div>'+
@@ -162,7 +168,7 @@ function renderDay(){
   return '<div role="listitem" class="kids-salah-day-item'+(current?' is-current':following?' is-next':'')+'" data-prayer="'+key+'">'+
    '<span class="kids-salah-day-item-orb" aria-hidden="true"></span>'+
    '<div class="kids-salah-day-item-name"><strong>'+NAMES[key]+'</strong><small>'+
-   (current?'JETZT · ':following?'BALD · ':'')+DAY_LABELS[key]+
+   (current?'AKTUELLES GEBET':following?'ALS NÄCHSTES':DAY_LABELS[key])+
    '</small></div><time>'+time+'</time></div>';
  }).join("");
 }
