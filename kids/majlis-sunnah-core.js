@@ -53,8 +53,8 @@ function expose(row,age,gender){
   source:null,media:null};
  const source=String(row.source);
  let body="";
- if(row.kind==="hadith")body="In unserer Ḥadīṯ-Bibliothek findest du „"+row.title+"“. "+(row.translationLabel?.startsWith("Auszug")?"Der belegte Auszug aus der vorhandenen deutschen Übertragung lautet: ":"Die vorhandene deutsche Übertragung lautet: ")+"„"+row.text+"“ Für dich bedeutet das: "+row.explanation;
- else if(row.kind==="early")body="Von "+row.person+" ist in unserer Quellenbibliothek diese Aussage überliefert: „"+row.text+"“ Was du daraus lernen kannst: "+row.explanation;
+ if(row.kind==="hadith")body="Ich habe den belegten Ḥadīṯ „"+row.title+"“ gefunden. Für dich bedeutet er: "+row.explanation+" "+(row.translationLabel?.startsWith("Auszug")?"Den Auszug aus der vorhandenen deutschen Übertragung":"Die vorhandene deutsche Übertragung")+" findest du direkt in der Quellenkarte darunter.";
+ else if(row.kind==="early")body="Von "+row.person+" ist eine passende Aussage überliefert. Daraus kannst du lernen: "+row.explanation+" Die vorhandene deutsche Wiedergabe und die Quelle findest du direkt darunter.";
  else body="In unserem Lernkapitel „"+row.title+"“ erklären wir: "+row.explanation+" Diese Zusammenfassung ist kein wörtliches Ḥadīṯ-Zitat. Lies die angegebenen Qurʾān- und Sunnah-Belege dazu.";
  const media={kind:row.kind,title:row.title,text:row.kind==="lesson"?null:row.text,
    explanation:row.explanation,source,sourceRefs:row.kind==="lesson"?row.sourceRefs:[],
