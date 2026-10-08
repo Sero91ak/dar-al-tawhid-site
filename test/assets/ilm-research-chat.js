@@ -209,6 +209,66 @@
       }
       return first;
     }
+    /* ILM APP DISCOVERY V1333: one search index, concise answer, native in-app routes. */
+    function isDiscoveryQuestion(text) {
+      return /(?:\bwo\s+(?:finde|steht|gibt|lese)\b|\b(?:finde|suche|such|öffne|oeffne)\b|\b(?:in der app|auf der seite|welcher beitrag|welche beiträge|welche sura|welche sure|welcher vers|welcher ḥadīṯ|welcher hadith)\b|\bzeig(?:e)?\s+mir\s+(?:den|die|einen|das)\s+(?:beitrag|quelle|thema|stelle|vers))/i.test(String(text || ""));
+    }
+    function discoveryRoute(item) {
+      var route = item && item.route;
+      if (!route || !["post","dua","quran-surah"].includes(String(route.view || ""))) return null;
+      var value = String(route.value == null ? "" : route.value).trim();
+      if (!value || value.length > 170 || /[<>"'\x00-\x1f]/.test(value)) return null;
+      return {view:route.view,value:value};
+    }
+    function discoveryItems(matches) {
+      var used = Object.create(null);
+      var found = [];
+      (Array.isArray(matches) ? matches : []).forEach(function (it) {
+        var route = discoveryRoute(it);
+        if (!route) return;
+        var key = route.view + ":" + route.value;
+        if (used[key]) return;
+        used[key] = true;
+        found.push({
+          title:String(it.title || it.work || "Inhalt öffnen"),
+          kind:String(it.kind || "posts"),
+          route:route,
+          summary:clip(it.excerpt || it.body || it.reference || "", 125),
+          source:clip(it.reference || it.work || "", 92),
+          id:String(it.id || ""),
+          score:Number(it.score || 0)
+        });
+      });
+      return found.slice(0, 7);
+    }
+    function discoveryKindLabel(item) {
+      if (item.route.view === "quran-surah") return "Qurʾān · Āyah";
+      if (item.route.view === "dua") return "Duʿāʾ";
+      return "Beitrag · " + (item.kind === "sunnah" ? "Ḥadīṯ" : item.kind === "athar" ? "Athar" : "Wissen");
+    }
+    function discoveryItemHtml(item, index) {
+      return '<button type="button" class="ilm-discovery-item" data-ilm-discovery-result="1" data-nav="' +
+        esc(item.route.view) + '" data-value="' + esc(item.route.value) +
+        '" aria-label="' + esc(item.title + " in der App öffnen") + '">' +
+        '<span class="ilm-discovery-number" aria-hidden="true">' + String(index + 1).padStart(2, "0") + '</span>' +
+        '<span class="ilm-discovery-copy"><span class="ilm-discovery-kind">' + esc(discoveryKindLabel(item)) +
+        '</span><strong>' + esc(clip(item.title, 105)) + '</strong>' +
+        (item.summary ? '<span class="ilm-discovery-summary">' + esc(item.summary) + '</span>' : '') +
+        '</span><span class="ilm-discovery-arrow" aria-hidden="true">↗</span></button>';
+    }
+    function discoverySection(reply) {
+      var items = Array.isArray(reply._ilmDiscovery) ? reply._ilmDiscovery : [];
+      if (!items.length) return "";
+      var first = items.slice(0, 3).map(discoveryItemHtml).join("");
+      var more = items.slice(3);
+      return '<section class="ilm-discovery" aria-label="Passende Inhalte der App">' +
+        '<div class="ilm-discovery-head"><h3>In der App gefunden</h3><span>Direkt öffnen</span></div>' +
+        '<div class="ilm-discovery-results">' + first + '</div>' +
+        (more.length ? '<details class="ilm-discovery-more"><summary>Weitere ' + more.length +
+          ' Treffer anzeigen <span aria-hidden="true">⌄</span></summary><div class="ilm-discovery-results">' +
+          more.map(function (it, i) { return discoveryItemHtml(it, i + 3); }).join("") + '</div></details>' : '') +
+        '</section>';
+    }
     function shortScientificAnswer(reply) {
       var ev = (reply.evidences || []).find(function (e) { return e.statement && e.statement.length > 24; });
       var txt = String(reply.directAnswer || "").trim();
@@ -297,11 +357,17 @@
       var answer = isProof
         ? "Hier sind die nächstliegenden überlieferten Aussagen mit ihren Fundstellen. Bitte beachte den Prüfstatus jeder Quelle."
         : (reply._ilmGeneratedText || shortScientificAnswer(reply));
+      if (reply._ilmIsDiscovery) answer = reply._ilmDiscovery.length
+        ? "Ich habe dazu passende Inhalte in der App gefunden. Öffne einen Treffer, um den vollständigen Beitrag oder die Qurʾān-Stelle direkt zu lesen."
+        : "Ich finde zu dieser Suche momentan keinen direkt öffnungsfähigen Treffer. Versuche einen konkreteren Begriff oder eine andere Schreibweise.";
       var html = '<div class="ilm-science-prose">' + answer.split(/\n{2,}/).filter(Boolean).map(function (p) {
         return '<p>' + em(p.trim()) + '</p>';
       }).join("") + '</div>';
-      html += sourceDisclosure(reply, isProof);
-      var follows = isProof
+      html += discoverySection(reply);
+      if (!reply._ilmIsDiscovery) html += sourceDisclosure(reply, isProof);
+      var follows = reply._ilmIsDiscovery
+        ? ["Erkläre mir das Thema", "Zeige mir den exakten Beweis"]
+        : isProof
         ? ["Erkläre mir diese Belege verständlich", "Zeige weitere Belege zu meiner Frage"]
         : ["Zeige mir den exakten Wortlaut und Beweis", "Erkläre das genauer"];
       html += '<div class="ilm-science-actions" aria-label="Frage vertiefen">' + follows.map(function (x) {
@@ -397,6 +463,26 @@
       var oldSearch = window.searchIlmKnowledge;
       window.searchIlmKnowledge = async function (question, conversation, options) {
         var list = await oldSearch(question, conversation, options);
+        // Add a targeted second lexical query for historical/diacritic variants.
+        // Never replace the original answer set or flood the chat with parallel searches.
+        var extra = "";
+        if (/(?:hoheit|erhaben|über\s+(?:dem|den)\s+thron|über\s+seinen\s+geschöpfen|ʿulūw|uluw)/i.test(question))
+          extra = "ʿUlūw Istiwāʾ Allah Thron";
+        else if (/(?:istiw[aāʾ]|istawa)/i.test(question))
+          extra = "Allah über dem Thron";
+        if (extra && (!Array.isArray(list) || list.length < 6)) {
+          try {
+            var alt = await oldSearch(extra, conversation, options);
+            var ids = Object.create(null);
+            list = (Array.isArray(list) ? list : []).concat(Array.isArray(alt) ? alt : [])
+              .filter(function (item) {
+                var key = String(item.id || JSON.stringify(item.route || {}) + item.title);
+                if (ids[key]) return false;
+                ids[key] = true;
+                return true;
+              });
+          } catch (_e) {}
+        }
         var seen = seenIds(conversation);
         var more = /\b(mehr|weitere|noch\s+\d+|fünf|5)\b/i.test(String(question || ""));
         if (!more) return list;
@@ -419,8 +505,12 @@
           ? window.getActiveIlmConversation(window.getIlmStore && window.getIlmStore())
           : null;
         var improved = decorateReply(question, reply, convo);
-        // Asynchronous composition never blocks the existing local answer or its sources.
-        if (improved && improved.status === "ok") requestScienceComposition(improved, question);
+        if (improved) {
+          improved._ilmDiscovery = discoveryItems(matches);
+          improved._ilmIsDiscovery = isDiscoveryQuestion(question);
+        }
+        // Discovery answers are navigational, not religious verdicts; no model call needed.
+        if (improved && improved.status === "ok" && !improved._ilmIsDiscovery) requestScienceComposition(improved, question);
         return improved;
       };
     }
