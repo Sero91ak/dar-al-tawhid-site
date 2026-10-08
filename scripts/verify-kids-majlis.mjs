@@ -43,7 +43,7 @@ const make=(path,method="GET",data=undefined,headers={})=>{
 let tests=0;
 async function check(req,state,status){
   const res=await api.handleKidsMajlisApi(req,state);
-  assert.equal(res.status,status,"status "+new URL(req.url).pathname);
+  assert.equal(res.status,status,"status "+new URL(req.url).pathname+" body="+await res.clone().text()+" origin="+req.headers.get("origin")+" host="+req.headers.get("x-dar-majlis-original-host")+" fetchSite="+req.headers.get("sec-fetch-site"));
   tests++;return res;
 }
 await check(make("session"),{},503); // nothing opens without secrets and rate limits
