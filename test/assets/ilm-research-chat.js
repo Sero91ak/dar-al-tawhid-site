@@ -269,6 +269,54 @@
           more.map(function (it, i) { return discoveryItemHtml(it, i + 3); }).join("") + '</div></details>' : '') +
         '</section>';
     }
+
+    /* MAJLIS QUALITY V1335 · test-only answer intent and bounded references */
+    function ilmNormalize(text) {
+      return String(text || "").toLowerCase()
+        .replace(/[ḥḫḏṭṣḍẓʿʾ]/g,function(c){return ({"ḥ":"h","ḫ":"kh","ḏ":"dh","ṭ":"t","ṣ":"s","ḍ":"d","ẓ":"z","ʿ":"","ʾ":""})[c] || c;})
+        .normalize("NFKD").replace(/[\u0300-\u036f]/g,"")
+        .replace(/[^a-z0-9äöüß ]/g," ").replace(/\s+/g," ").trim();
+    }
+    function isBasicTawhidQuestion(question) {
+      var q = ilmNormalize(question);
+      return /(?:^| )(?:was (?:ist|bedeutet)|was versteht man unter|erklare|definition von) (?:den |die |das )?(?:tawhid|tauhid)(?: |$)/.test(q)
+        && !/(?:hukm|urteil|takfir|gesetz|ibadah und|welcher vers)/.test(q);
+    }
+    function rankKnowledgeSources(question, list) {
+      var query = ilmNormalize(question);
+      var words = query.split(" ").filter(function(w) {
+        return w.length >= 4 && !/^(?:welche|einen|einer|einem|über|beweise|zeigen|finde|erklare|dazu|deine|seine|dieser|quelle|lesen|genau|genauer|werden|gibt|wurde)$/.test(w);
+      });
+      var seen = Object.create(null);
+      return (Array.isArray(list) ? list : []).map(function (e,index) {
+        var title = ilmNormalize([e.title,e.work,e.reference].join(" "));
+        var body = ilmNormalize([e.excerpt,e.statement,e.body].join(" ").slice(0,1000));
+        var hits = words.reduce(function(sum,w) {
+          return sum + (title.includes(w) ? 5 : body.includes(w) ? 1 : 0);
+        },0);
+        var quality = e.kind === "quran" ? 1.5 : e.kind === "sunnah" ? 1 : 0;
+        return {item:e,weight:hits+quality,order:index};
+      }).filter(function(o) {
+        var key = String(o.item.id || o.item.title || o.item.reference || o.order);
+        if (seen[key]) return false;
+        seen[key] = true;
+        return true;
+      }).sort(function(a,b){return b.weight-a.weight || a.order-b.order})
+        .map(function(o){return o.item});
+    }
+    function ilmScriptureLinks() {
+      var rows = [
+        {view:"quran-surah",value:"112/1",title:"al-Ikhlāṣ 112:1–4",caption:"Allahs Einzigkeit"},
+        {view:"quran-surah",value:"16/36",title:"an-Naḥl 16:36",caption:"Allah allein dienen"}
+      ];
+      return '<section class="ilm-primary-references" aria-label="Qurʾān-Grundlagen"><span class="ilm-primary-references-title">Qurʾān-Grundlagen</span>' +
+        rows.map(function(r){
+          return '<button type="button" class="ilm-primary-reference" data-ilm-discovery-result="1" data-nav="' +
+            esc(r.view) + '" data-value="' + esc(r.value) + '"><span>' + esc(r.title) +
+            '<small>' + esc(r.caption) + '</small></span><span aria-hidden="true">↗</span></button>';
+        }).join("") + '</section>';
+    }
+
     function shortScientificAnswer(reply) {
       var ev = (reply.evidences || []).find(function (e) { return e.statement && e.statement.length > 24; });
       var txt = String(reply.directAnswer || "").trim();
@@ -363,9 +411,12 @@
       var html = '<div class="ilm-science-prose">' + answer.split(/\n{2,}/).filter(Boolean).map(function (p) {
         return '<p>' + em(p.trim()) + '</p>';
       }).join("") + '</div>';
-      html += discoverySection(reply);
-      if (!reply._ilmIsDiscovery) html += sourceDisclosure(reply, isProof);
-      var follows = reply._ilmIsDiscovery
+      if (reply._ilmBasicTawhid) html += ilmScriptureLinks();
+      if (!reply._ilmBasicTawhid) html += discoverySection(reply);
+      if (!reply._ilmIsDiscovery && !reply._ilmBasicTawhid) html += sourceDisclosure(reply, isProof);
+      var follows = reply._ilmBasicTawhid
+        ? ["Zeige mir weitere Belege für Tawḥīd", "Erkläre Tawḥīd ausführlicher"]
+        : reply._ilmIsDiscovery
         ? ["Erkläre mir das Thema", "Zeige mir den exakten Beweis"]
         : isProof
         ? ["Erkläre mir diese Belege verständlich", "Zeige weitere Belege zu meiner Frage"]
@@ -506,11 +557,22 @@
           : null;
         var improved = decorateReply(question, reply, convo);
         if (improved) {
-          improved._ilmDiscovery = discoveryItems(matches);
+          var rankedMatches = rankKnowledgeSources(question, matches);
+          var coreTawhid = isBasicTawhidQuestion(question);
+          improved._ilmDiscovery = discoveryItems(rankedMatches).filter(function(item) {
+            return !coreTawhid || !/\b(?:hukm|urteil|gesetzgebung|ṭāghūt)\b/i.test(item.title);
+          }).slice(0,coreTawhid ? 2 : 7);
           improved._ilmIsDiscovery = isDiscoveryQuestion(question);
+          improved._ilmBasicTawhid = coreTawhid && !improved._ilmIsDiscovery;
+          if (improved._ilmBasicTawhid) {
+            improved._ilmGeneratedText = "Tawḥīd bedeutet, Allah als den Einen anzuerkennen und Ihm allein die Anbetung zu widmen.\n\nIm Qurʾān betont Sūrah al-Ikhlāṣ (112:1–4) Allahs Einzigkeit. Sūrah an-Naḥl (16:36) nennt den Aufruf, Allah zu dienen und Ṭāghūt zu meiden.";
+            improved.evidences = [];
+            improved._ilmDiscovery = [];
+          }
+          improved._ilmMatches = rankedMatches;
         }
-        // Discovery answers are navigational, not religious verdicts; no model call needed.
-        if (improved && improved.status === "ok" && !improved._ilmIsDiscovery) requestScienceComposition(improved, question);
+        // Only religious explanation requests go to the bounded source-based composer.
+        if (improved && improved.status === "ok" && !improved._ilmIsDiscovery && !improved._ilmBasicTawhid) requestScienceComposition(improved, question);
         return improved;
       };
     }
