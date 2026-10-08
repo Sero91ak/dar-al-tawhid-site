@@ -3,6 +3,11 @@ name: Chat → DAR Admin Publisher
 # Published posts still go through the pre-existing DAR Admin Publisher.
 # Adding/changing workflows alone NEVER publishes visitor content.
 on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/chat-admin-publish.js'
+      - '.github/workflows/chat-admin-publisher.yml'
   push:
     branches: [main]
     paths:
@@ -16,7 +21,51 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  validate:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Offline validation (no publishing and no credentials)
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check scripts/chat-admin-publish.js
+          mkdir -p content/admin/chat-publish-requests
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const reg = JSON.parse(fs.readFileSync('q/_registry/shortlinks.json', 'utf8'));
+          const active = reg.links.find(x => x.status === 'active' && fs.existsSync('q/' + x.number + '/index.html'));
+          if (!active) throw Error('No active source in registry');
+          const base = (mode) => [
+            '---', 'id: "chat-smoke-test-post"', 'title: "Smoke Test"',
+            'category: "Test"', 'source: "Verified Source"',
+            'links:', '  - label: "Quelle"', '    url: "/q/' + active.number + '"',
+            ...(mode === 'slide' ? ['layout: "slides"', 'slides:', '  - title: "Teil A"', '    text: "Aussage A"', '  - title: "Teil B"', '    text: "Aussage B"'] : []),
+            '---', 'This is an offline validator-only test. No visitors receive it.'
+          ].join('\n');
+          const make = (mode, approved) => ({
+            version: 1, audience: 'adult-visitors', approved,
+            command: 'global live pushen', mode, push: false, markdown: base(mode)
+          });
+          const folder = 'content/admin/chat-publish-requests/';
+          fs.writeFileSync(folder + 'smoke-single-01.json', JSON.stringify(make('single', true)));
+          fs.writeFileSync(folder + 'smoke-slides-01.json', JSON.stringify(make('slide', true)));
+          fs.writeFileSync(folder + 'smoke-denied-01.json', JSON.stringify(make('single', false)));
+          NODE
+          node scripts/chat-admin-publish.js --check content/admin/chat-publish-requests/smoke-single-01.json
+          node scripts/chat-admin-publish.js --check content/admin/chat-publish-requests/smoke-slides-01.json
+          if node scripts/chat-admin-publish.js --check content/admin/chat-publish-requests/smoke-denied-01.json; then
+            echo "::error::Unapproved request was accepted"
+            exit 1
+          fi
+          echo "Safe offline checks succeeded."
+
   publish:
+    if: github.event_name == 'push'
     name: Validate and publish expressly approved adult-visitor posts
     runs-on: ubuntu-latest
     steps:
