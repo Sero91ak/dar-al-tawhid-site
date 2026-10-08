@@ -398,12 +398,30 @@
       if (/(?:ausfuhrlich|vertief|genauer)/.test(q)) return "depth";
       return "";
     }
-    /* Only search results containing a meaningful query term qualify as evidence. */
+    /* MAJLIS RELEVANCE V1350: no keyword-only pseudo-proofs.
+       The current QUESTION governs every displayed and composed source. */
     function ilmQuestionTerms(question) {
-      var stop = /^(?:was|ist|sind|wie|wer|warum|bedeutet|definition|erklare|welche|welcher|welchen|einen|einer|einem|beweise|belege|authentische|authentischen|dazu|deine|quelle|quellen|lesen|genau|werden|gibt|wurde|fur|aus|zum|des|den|die|das|und|oder|im|islam|islamischen|bitte|mehr|mir|mit|nach|eine)$/;
-      return ilmNormalize(question).split(" ").filter(function(word){
+      var stop = /^(?:was|ist|sind|wie|wer|warum|bedeutet|definition|erklare|welche|welcher|welchen|einen|einer|einem|beweise|belege|authentische|authentischen|dazu|deine|quelle|quellen|lesen|genau|werden|gibt|wurde|fur|aus|zum|des|den|die|das|und|oder|im|islam|islamischen|bitte|mehr|mir|mit|nach|eine|ausgangsfrage|nachfrage|zeigen|zeige|genannten|vorigen)$/;
+      return Array.from(new Set(ilmNormalize(question).split(" ").filter(function(word){
         return word.length >= 4 && !stop.test(word);
-      });
+      })));
+    }
+    function ilmSubjectGate(question, source) {
+      var q = " " + ilmNormalize(question) + " ";
+      var s = " " + ilmNormalize(source) + " ";
+      // A verse about a person's hands is not a proof on raising hands in salāh.
+      // Require the ritual AND the requested action in the actual source text.
+      var ruku = /\b(?:ruku|rukuh|verbeugung)\b/.test(q);
+      var sujud = /\b(?:sujud|sudschud|niederwerfung)\b/.test(q);
+      var prayer = /\b(?:gebet|beten|salah|salat|ruku|rukuh|verbeugung|sujud|niederwerfung)\b/.test(q);
+      var hands = /\b(?:hand|hande|handen|heben|hochheben|hochw|hoch|gehoben|senken|unten)\b/.test(q);
+      if (ruku && !/\b(?:ruku|rukuh|verbeugung|verbeugte|verbeugten)\b/.test(s)) return false;
+      if (sujud && !/\b(?:sujud|sudschud|niederwerfung)\b/.test(s)) return false;
+      if (prayer && hands) {
+        if (!/\b(?:hand|hande|handen|hands|hochheben|heben|hebt|hob|hoben|gehoben|erhob|erhoben|erhebt|senkte|senken)\b/.test(s)) return false;
+        if (!ruku && !sujud && !/\b(?:gebet|gebetes|gebets|beten|salah|salat|namaz|ruku|rukuh|verbeugung|sujud|niederwerfung)\b/.test(s)) return false;
+      }
+      return true;
     }
     function rankKnowledgeSources(question, list) {
       var terms = ilmQuestionTerms(question);
@@ -411,20 +429,23 @@
       var seen = Object.create(null);
       return (Array.isArray(list) ? list : []).map(function(item,index) {
         var title = " " + ilmNormalize([item.title,item.work,item.reference].join(" ")) + " ";
-        var body = " " + ilmNormalize([item.excerpt,item.statement,item.body].join(" ").slice(0,1600)) + " ";
-        var hits = terms.reduce(function(sum,word) {
-          return sum + (title.includes(" "+word+" ") ? 5 : body.includes(" "+word+" ") ? 2 : 0);
-        },0);
-        return { item:item, hits:hits, order:index,
-          weight:hits + (item.kind==="quran" ? 1.5 : item.kind==="sunnah" ? 1 : 0) };
+        var body = " " + ilmNormalize([item.excerpt,item.statement,item.body].join(" ").slice(0,3000)) + " ";
+        var source = title + body;
+        var matched = terms.filter(function(word) {
+          return title.includes(" " + word + " ") || body.includes(" " + word + " ");
+        });
+        var titleHits = matched.filter(function(word){return title.includes(" " + word + " ");}).length;
+        return {item:item,order:index,hits:matched.length,titleHits:titleHits,
+          relevant:ilmSubjectGate(question,source),
+          weight:matched.length*3 + titleHits*3 + (item.kind==="sunnah" ? 1 : 0)};
       }).filter(function(row) {
-        if (!row.hits) return false;
+        if (!row.relevant || row.hits < Math.min(2,terms.length)) return false;
         var key = String(row.item.id || row.item.title || row.item.reference || row.order);
         if (seen[key]) return false;
         seen[key] = true;
         return true;
-      }).sort(function(x,y){return y.weight-x.weight || x.order-y.order})
-        .map(function(row){return row.item});
+      }).sort(function(a,b){return b.weight-a.weight || a.order-b.order;})
+        .map(function(row){return row.item;});
     }
     function ilmScriptureLinks(extended) {
       var rows = [
