@@ -565,8 +565,8 @@
       reply._ilmResearchProgress = "Ich suche nach Quellen in der App und in externen Originalwerken …";
       reply._ilmNoRelevantEvidence = false;
       var ctrl = typeof AbortController !== "undefined" ? new AbortController() : null;
-      // Only the configured Gemini provider is permitted for Majlis research.
-      var timer = setTimeout(function(){ if(ctrl) ctrl.abort(); },35000);
+      // Gemini discovers cited sources; Groq may compose ONLY after Free-plan authorization.
+      var timer = setTimeout(function(){ if(ctrl) ctrl.abort(); },55000);
       var started = Date.now();
       var progress = setInterval(function(){
         if(!reply._ilmResearching){clearInterval(progress);return;}
@@ -574,7 +574,7 @@
         reply._ilmResearchProgress = elapsed < 14000
           ? "Ich gleiche die Frage mit Quellen und Originaltexten ab …"
           : elapsed < 30000
-            ? "Die Prüfung dauert etwas länger. Gemini gleicht weitere Fundstellen ab …"
+            ? "Die Prüfung dauert etwas länger. Ich gleiche weitere Fundstellen ab …"
             : elapsed < 48000
               ? "Vertiefte Recherche: weitere Quellen und Nachweise werden geprüft …"
               : "Die Recherche läuft weiter. Ich überprüfe, was sich tatsächlich belegen lässt …";
@@ -619,7 +619,7 @@
         }
         reply.evidences = evidence;
         reply._ilmGeneratedText = answer;
-        reply._ilmProvider = data.provider === "gemini" ? "Gemini" : "";
+        reply._ilmProvider = data.provider === "gemini" ? "Gemini" : data.provider === "groq" ? "Groq" : "";
         reply._ilmSourceAutoOpen = true;
         reply._ilmCitationCount = evidence.length;
         reply._ilmNoRelevantEvidence = false;
@@ -644,7 +644,7 @@
       reply._ilmAnswerId = requestId;
       reply._ilmComposing = true;
       var ctrl = typeof AbortController !== "undefined" ? new AbortController() : null;
-      var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 13000);
+      var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 26000);
       fetch("/test/api/ilm/compose", {
         method:"POST",
         headers:{"Content-Type":"application/json"},
@@ -667,7 +667,7 @@
           if (answer.length < 35 || /\[(?:[4-9]|\d{2,})\]/.test(answer)) return;
           if (reply._ilmCoreAdab && !/(?:adab|anstand|benehmen|charakter|verhalten|umgang|akhl[aā]q)/i.test(answer)) return;
           reply._ilmGeneratedText = answer;
-          reply._ilmProvider = data.provider === "gemini" ? "Gemini" : "";
+          reply._ilmProvider = data.provider === "gemini" ? "Gemini" : data.provider === "groq" ? "Groq" : "";
           reply._ilmCitationCount = rows.length;
           var node = document.querySelector('[data-ilm-answer-id="' + requestId + '"] .ilm-answer-text');
           if (node && document.body.classList.contains("is-ilm-chat-route")) {
@@ -697,7 +697,7 @@
         return e && e.verification_status === "verified" && e.statement && e.statement.length >= 18;
       }).length;
       var answer = reply._ilmResearching
-        ? "Ich suche ergänzende Originalquellen und prüfe ihre Fundstellen, bevor ich eine Antwort gebe."
+        ? (reply._ilmResearchProgress || "Ich suche ergänzende Originalquellen und prüfe ihre Fundstellen …")
         : reply._ilmResearchError ? reply._ilmResearchError
         : isProof && reply._ilmGeneratedText
         ? reply._ilmGeneratedText
