@@ -223,8 +223,8 @@ async function finalizeDarTestHomeV1193(asset) {
 // DAR_QURAN_OVERVIEW_V1250
 
 // DAR_ILM_START_PHASE1_CACHE
-  html = html.replace(/ilm-research-chat\.css(?:\?v=[^"']*)?/g, "ilm-research-chat.css?v=ilm-dialog-v1337");
-  html = html.replace(/ilm-research-chat\.js(?:\?v=[^"']*)?/g, "ilm-research-chat.js?v=ilm-dialog-v1337");
+  html = html.replace(/ilm-research-chat\.css(?:\?v=[^"']*)?/g, "ilm-research-chat.css?v=ilm-dialog-v1338");
+  html = html.replace(/ilm-research-chat\.js(?:\?v=[^"']*)?/g, "ilm-research-chat.js?v=ilm-dialog-v1338");
 
     // DAR_ILM_SCHOLARS_V1240
 
@@ -372,6 +372,11 @@ async function finalizeDarTestHomeV1193(asset) {
   html = html.replace(/window\.__DAR_EXPECTED_BUILD="app-shell-v\d+"/g, 'window.__DAR_EXPECTED_BUILD="app-shell-v1337"');
   html = html.replace(/const APP_BUILD_ID="app-shell-v\d+"/g, 'const APP_BUILD_ID="app-shell-v1337"');
 
+  // Single compact Majlis archive is a test-only final visual layer.
+  if (!html.includes('id="darIlmHistoryArchiveV1338"')) {
+    const archiveStyle = '<style id="darIlmHistoryArchiveV1338">@import url("/test/assets/ilm-history-archive-v1338.css?v=1338");</style>';
+    html = html.includes("</html>") ? html.replace("</html>", archiveStyle + "</html>") : html + archiveStyle;
+  }
   const headers = new Headers(asset.headers);
   headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
   headers.set("Pragma", "no-cache");
