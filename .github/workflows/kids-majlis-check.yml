@@ -3,6 +3,11 @@ on:
   pull_request:
     paths:
       - "kids/majlis-kids.*"
+      - "kids/majlis-quran-search.js"
+      - "kids/data/majlis-knowledge-v1.json"
+      - "data/quran-search-index.json"
+      - "cloudflare/kids-majlis-knowledge.js"
+      - "kids/MAJLIS-SAFE-VOICE.md"
       - "kids/*html"
       - "cloudflare/kids-majlis-api.js"
       - "cloudflare/site-router.js"
