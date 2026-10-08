@@ -1809,3 +1809,12 @@ body.is-ilm-chat-route .ilm-science-assistant-label span{
 body.is-ilm-chat-route .ilm-science-prose p:first-child{margin-top:0!important}
 body.is-ilm-chat-route .ilm-science-source-item .ilm-cite,
 body.is-ilm-chat-route .ilm-science-source-item .ilm-cite-meta{overflow-wrap:anywhere}
+
+body.is-ilm-chat-route .ilm-science-index{
+  margin:6px 0 0!important;
+  font-size:10.5px;
+  font-weight:750;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+  color:var(--ilm-accent);
+}
