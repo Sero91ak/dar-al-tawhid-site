@@ -42,7 +42,7 @@ function initDetail(c){
    if(anchor)host.insertBefore(bar,anchor);else host.prepend(bar);
  }
  if(btn.parentElement!==bar)bar.insertBefore(btn,bar.firstChild);
- btn.classList.add("kids-detail-dock-back");
+ if(!btn.classList.contains("kids-detail-dock-back"))btn.classList.add("kids-detail-dock-back");
  btn.setAttribute("aria-label","Zurück");
  if(btn.textContent)btn.textContent=""; // CSS chevron; preserve original click handler
  setText(q(bar,".kids-detail-appbar-title"),configTitle(c,root));
@@ -52,7 +52,7 @@ function initLegacy(id){
  const modal=document.getElementById(id);
  const bar=q(modal,":scope > .modal-shell > .modal-top");
  if(!bar)return;
- bar.classList.add("kids-detail-appbar","kids-legacy-appbar");
+ if(!bar.classList.contains("kids-detail-appbar"))bar.classList.add("kids-detail-appbar","kids-legacy-appbar");
  bar.setAttribute("data-kids-detail-dock","v1247");
  const btn=q(bar,".close-btn");
  if(btn){
