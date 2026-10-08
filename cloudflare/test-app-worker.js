@@ -223,8 +223,8 @@ async function finalizeDarTestHomeV1193(asset) {
 // DAR_QURAN_OVERVIEW_V1250
 
 // DAR_ILM_START_PHASE1_CACHE
-  html = html.replace(/ilm-research-chat\.css(?:\?v=[^"']*)?/g, "ilm-research-chat.css?v=ilm-science-v1332");
-  html = html.replace(/ilm-research-chat\.js(?:\?v=[^"']*)?/g, "ilm-research-chat.js?v=ilm-science-v1332");
+  html = html.replace(/ilm-research-chat\.css(?:\?v=[^"']*)?/g, "ilm-research-chat.css?v=ilm-science-v1332-final");
+  html = html.replace(/ilm-research-chat\.js(?:\?v=[^"']*)?/g, "ilm-research-chat.js?v=ilm-science-v1332-final");
 
     // DAR_ILM_SCHOLARS_V1240
 
@@ -401,7 +401,7 @@ async function ilmScienceCompose(request, env) {
   try {
     const ip = String(request.headers.get("CF-Connecting-IP") || "unknown").slice(0,70);
     const cache = caches.default;
-    const key = new Request("https://ilm-test-rate.invalid/compose/" + encodeURIComponent(ip));
+    const key = new Request(new URL("/__ilm_test_rate/" + encodeURIComponent(ip), request.url).toString());
     const old = await cache.match(key);
     const hits = Number(old && await old.text() || 0) || 0;
     if (hits >= 12) return send({ok:false,error:"rate_limited"},429);
