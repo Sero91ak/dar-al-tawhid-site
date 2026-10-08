@@ -155,3 +155,12 @@ Verbindlich für `/kids/` und alle künftigen Kids-Erweiterungen.
 - Die Regeln werden im letzten Abschnitt von `kids/global-detail-dock-v1247.css` definiert und mit `?v=1248` geladen; keine doppelte Safe-Area-Anrechnung oder iPad-Hochskalierung.
 
 - Der Release-Guard liest die aktuell freigegebene Service-Worker-Version aus `kids/version.json` und prüft beide Asset-Referenzen dynamisch; eine alte CSS-Versionsnummer darf einen neuen Kids-Live-Deploy nicht blockieren.
+
+
+## Duʿāʾ-Header + Erklärungsaktionen — `KIDS_DUA_FULLBLEED_EXPLANATION_CTA_V1249`
+
+- Im Duʿāʾ-Detail reicht der feste obere Detail-Kopf von der linken bis zur rechten **Viewportkante**, unabhängig von der begrenzten Breite des Lesecontainers; die Bildbühne und die globale untere Tab-Leiste bleiben unverändert.
+- Safe-Area-Inset gilt weiterhin nur einmal. Pfeiltaste/Zurück-Button bleiben mit 44 × 44 CSS-px Touchfläche vollständig bedienbar.
+- Alle **echten Erklärungs-Audiobuttons** mit passenden deutschen Labels erhalten global einen sichtbaren goldenen CSS-Play-Pfeil, eine lesbare Schaltflächenbeschriftung, einen Hinweis 'Tippe hier und hör zu', sowie ruhigen Glow und deutlichen Tastaturfokus.
+- Die ursprünglichen Buttons werden **nicht geklont**: Audiosignal, Klick-Handler, deaktiviert-Zustand und Accessibility bleiben erhalten. Statische Erklärungstexte bekommen eine lesbare Typografie, aber keinen falschen Play-Button.
+- Gültige Release-Dateien: `kids/global-detail-dock-v1247.css?v=1249` und `kids/global-detail-dock-v1247.js?v=1249` über den v1249-Service-Worker-Cache.

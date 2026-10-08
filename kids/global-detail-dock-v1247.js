@@ -66,6 +66,39 @@ function initLegacy(id){
  const copy=q(bar,".modal-title");
  if(copy&&!copy.classList.contains("kids-detail-appbar-copy"))copy.classList.add("kids-detail-appbar-copy");
 }
+
+/* KIDS_EXPLANATION_ACTIONS_V1249
+ * Upgrade native explanation/audio buttons without cloning them.
+ * The original listeners, disabled state and speech engines are preserved.
+ * Future buttons with equivalent German labels adopt the same affordance.
+ */
+function upgradeExplanationActions(){
+  const buttons=document.querySelectorAll("button");
+  for(const btn of buttons){
+    const present=btn.querySelector(":scope > .kids-explain-copy > strong");
+    const label=(present?present.textContent:btn.textContent||"").replace(/\s+/g," ").trim();
+    if(!/erklärung/i.test(label)||!/(?:hören|anhören|abspielen)/i.test(label)||label.length>80)continue;
+    if(!present){
+      const icon=document.createElement("span");icon.className="kids-explain-icon";icon.setAttribute("aria-hidden","true");
+      const copy=document.createElement("span");copy.className="kids-explain-copy";
+      const name=document.createElement("strong");name.textContent=label;
+      const hint=document.createElement("small");
+      hint.textContent=btn.disabled?"Audio wird vorbereitet":"Tippe hier und hör zu";
+      const arrow=document.createElement("span");arrow.className="kids-explain-chevron";arrow.setAttribute("aria-hidden","true");
+      copy.append(name,hint);
+      btn.replaceChildren(icon,copy,arrow);
+      btn.classList.add("kids-explain-action");
+    }else{
+      const hint=btn.querySelector(".kids-explain-copy small");
+      const updated=btn.disabled?"Audio wird vorbereitet":"Tippe hier und hör zu";
+      if(hint&&hint.textContent!==updated)hint.textContent=updated;
+    }
+    if(!btn.dataset.kidsExplainOriginalLabel)btn.dataset.kidsExplainOriginalLabel=label;
+    const spokenLabel=label+(btn.disabled?", Audio wird vorbereitet":", Tippe hier und hör zu");
+    if(btn.getAttribute("aria-label")!==spokenLabel)btn.setAttribute("aria-label",spokenLabel);
+  }
+}
+
 let syncing=false,queued=false;
 function sync(){
  if(syncing)return;
@@ -73,6 +106,7 @@ function sync(){
  try{
    for(const c of S)initDetail(c);
    for(const id of LEGACY)initLegacy(id);
+   upgradeExplanationActions();
  }finally{syncing=false;}
 }
 function queue(){
@@ -85,7 +119,7 @@ function start(){
  mo.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:["class","aria-hidden"]});
  document.addEventListener("click",queue,true);
  window.addEventListener("pageshow",queue);
- window.DARKidsDetailDock={ready:true,refresh:sync,version:"1247"};
+ window.DARKidsDetailDock={ready:true,refresh:sync,version:"1249"};
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
 })();

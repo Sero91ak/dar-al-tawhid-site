@@ -2,8 +2,8 @@ import { ILM_SCIENCE_SYSTEM_INSTRUCTIONS, ILM_SCIENCE_POLICY_VERSION } from "./i
 import { composeIlmWithGemini } from "./ilm-gemini-bridge.js";
 import { gateHiddenSurfaces } from "./preview-gate.js";
 const KIDS_VERSION_BODY = JSON.stringify({
-  buildId: "kids-shell-v145-compact-top1248",
-  label: "KIDS · V1.08.66"
+  buildId: "kids-shell-v146-dua-fullbleed-explain1249",
+  label: "KIDS · V1.08.67"
 });
 
 function kidsVersionResponse() {
@@ -529,7 +529,7 @@ export default {
         target.pathname = "/kids/start";
       }
       target.searchParams.delete("darsw");
-      target.searchParams.set("kv", "kids-shell-v145-compact-top1248");
+      target.searchParams.set("kv", "kids-shell-v146-dua-fullbleed-explain1249");
       return Response.redirect(target.toString(), 301);
     }
 

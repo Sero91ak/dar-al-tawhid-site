@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v145-compact-top1248",
-  "label": "KIDS · V1.08.66",
-  "releasedAt": "2026-10-08T10:06:16.279Z",
-  "note": "KIDS V1.08.66 · Kompakte globale Kopfzeilen für alle Detail-/Leseseiten und Bibliotheken auf Smartphones und iPads: 60/64px plus einmal Safe Area, 44px Zurück-Touchziel, vollständige Titel ohne Abschneiden, weniger Leerraum. Navigation, Audio, Hero-Bilder und Inhalte unverändert.",
+  "buildId": "kids-shell-v146-dua-fullbleed-explain1249",
+  "label": "KIDS · V1.08.67",
+  "releasedAt": "2026-10-08T12:30:00+02:00",
+  "note": "KIDS V1.08.67 · Duʿāʾ-Kopfzeile randlos über volle Bildschirmbreite; globale kindgerechte Erklärung-hören-Buttons mit Play-Symbol, Hilfetext, Touch-Ziel und Fokus. Audio, Lesetexte, Navigation unverändert.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1248",
+    "serviceWorkerCache": "v1249",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -1214,12 +1214,14 @@
     "compactGlobalTopDock": "v1248",
     "compactHeaderPhoneCssPx": 60,
     "compactHeaderTabletCssPx": 64,
-    "compactBackTouchCssPx": 44
+    "compactBackTouchCssPx": 44,
+    "fullBleedDuaDetailHeader": "v1249",
+    "globalExplanationAudioActions": "v1249"
   },
-  "updatedAt": "2026-10-08T10:06:16.279Z",
-  "deployTrigger": "compact-global-top-dock-v1248",
+  "updatedAt": "2026-10-08T12:30:00+02:00",
+  "deployTrigger": "kids-dua-fullbleed-explanation-cta-v1249",
   "globalDetailDock": {
-    "version": "v1248",
+    "version": "v1249",
     "enabled": true,
     "appliesTo": [
       "deen-detail",
@@ -1238,6 +1240,8 @@
     "preserveContentAndAudio": true,
     "compactAllLibraries": true,
     "safeAreaOnce": true,
-    "wrapLongTitles": true
+    "wrapLongTitles": true,
+    "fullBleedDua": true,
+    "childFriendlyExplanationButtons": true
   }
 }

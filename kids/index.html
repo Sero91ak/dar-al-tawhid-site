@@ -2922,7 +2922,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.08.66</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.08.67</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3308,7 +3308,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v145-compact-top1248";
+const KIDS_BUILD_ID="kids-shell-v146-dua-fullbleed-explain1249";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6519,7 +6519,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=8"></script>\n<script src="/kids/dua-smart-learn.js?v=1244"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v145-compact-top1248";
+  var KIDS_BUILD_ID="kids-shell-v146-dua-fullbleed-explain1249";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -6535,7 +6535,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1248",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1249",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
@@ -11206,7 +11206,7 @@ html[data-view="stories"] #view-stories > :last-child{
 </style>
 
 
-<!-- KIDS_COMPACT_GLOBAL_TOP_DOCK_V1248: compact shared top dock, original back controls, no bottom-nav changes -->
-<link rel="stylesheet" href="/kids/global-detail-dock-v1247.css?v=1248" data-kids-global-detail-dock="1248">
-<script src="/kids/global-detail-dock-v1247.js?v=1247" data-kids-global-detail-dock="1248"></script>
+<!-- KIDS_DUA_FULLBLEED_EXPLANATION_CTA_V1249: shared full-width header and explanation actions, original back controls, no bottom-nav changes -->
+<link rel="stylesheet" href="/kids/global-detail-dock-v1247.css?v=1249" data-kids-global-detail-dock="1249">
+<script src="/kids/global-detail-dock-v1247.js?v=1249" data-kids-global-detail-dock="1249"></script>
 </html>

@@ -296,3 +296,173 @@ html body .modal .modal-top.kids-legacy-appbar{
   }
 }
 /* A double-line title can add height; never force max-height or clip it. */
+
+
+/* KIDS_DUA_FULLBLEED_EXPLANATION_CTA_V1249
+   Du'a details remain ordinary scroll pages; only their header breaks out
+   of the centered reading column, using the same geometry as the hero image.
+   In all explanation-audio actions the icon, subtitle and button itself form
+   one accessible hit target. No changes to the fixed bottom tab bar. */
+html body #view-dua #duaHubDetail.open > .kids-detail-appbar{
+  position:relative!important;
+  box-sizing:border-box!important;
+  width:100vw!important;
+  max-width:none!important;
+  min-width:100vw!important;
+  margin:0 0 0 calc(50% - 50vw)!important;
+  left:auto!important;
+  right:auto!important;
+  transform:none!important;
+  border-left:0!important;
+  border-right:0!important;
+  border-radius:0 0 22px 22px!important;
+  overflow:visible!important;
+}
+/* Keep the hero and header in the same edge-to-edge coordinate system. */
+html body #view-dua #duaHubDetail.open #duaHubDetailHero{
+  max-width:none!important;
+}
+html body button.kids-explain-action{
+  position:relative!important;
+  box-sizing:border-box!important;
+  display:grid!important;
+  grid-template-columns:46px minmax(0,1fr) 15px!important;
+  align-items:center!important;
+  gap:12px!important;
+  width:min(100%,620px)!important;
+  max-width:100%!important;
+  min-height:72px!important;
+  height:auto!important;
+  margin:14px auto 0!important;
+  padding:11px 16px!important;
+  border:1px solid rgba(231,203,138,.34)!important;
+  border-radius:22px!important;
+  background:linear-gradient(122deg,rgba(23,81,101,.98),rgba(7,43,59,.98))!important;
+  box-shadow:0 7px 19px rgba(0,0,0,.15),inset 0 1px 0 rgba(255,255,255,.055)!important;
+  color:#fff7df!important;
+  font-family:"Fredoka","SF Pro Rounded",system-ui,sans-serif!important;
+  cursor:pointer!important;
+  text-align:left!important;
+  text-decoration:none!important;
+  -webkit-tap-highlight-color:transparent!important;
+  touch-action:manipulation!important;
+  transition:border-color .16s ease,box-shadow .16s ease,background .16s ease!important;
+}
+html body button.kids-explain-action .kids-explain-icon{
+  grid-column:1!important;
+  display:grid!important;
+  place-items:center!important;
+  box-sizing:border-box!important;
+  width:46px!important;
+  height:46px!important;
+  min-width:46px!important;
+  flex:none!important;
+  border-radius:16px!important;
+  background:linear-gradient(145deg,#f9de98,#e5b966)!important;
+  box-shadow:0 2px 9px rgba(0,0,0,.12)!important;
+  color:#103344!important;
+}
+html body button.kids-explain-action .kids-explain-icon::before{
+  content:""!important;
+  display:block!important;
+  width:0!important;height:0!important;
+  border-top:8px solid transparent!important;
+  border-bottom:8px solid transparent!important;
+  border-left:12px solid currentColor!important;
+  margin-left:4px!important;
+}
+html body button.kids-explain-action .kids-explain-copy{
+  grid-column:2!important;
+  display:flex!important;
+  min-width:0!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  gap:3px!important;
+  white-space:normal!important;
+}
+html body button.kids-explain-action .kids-explain-copy strong{
+  display:block!important;
+  color:#fff6dc!important;
+  font-size:clamp(16px,3.9vw,19px)!important;
+  line-height:1.14!important;
+  font-weight:800!important;
+  white-space:normal!important;
+  overflow-wrap:anywhere!important;
+}
+html body button.kids-explain-action .kids-explain-copy small{
+  display:block!important;
+  color:rgba(232,243,239,.78)!important;
+  font-size:clamp(11px,2.8vw,13px)!important;
+  font-weight:550!important;
+  line-height:1.25!important;
+  white-space:normal!important;
+  overflow-wrap:anywhere!important;
+}
+html body button.kids-explain-action .kids-explain-chevron{
+  grid-column:3!important;
+  display:block!important;
+  width:9px!important;height:9px!important;
+  border-right:2px solid rgba(250,222,160,.8)!important;
+  border-top:2px solid rgba(250,222,160,.8)!important;
+  transform:rotate(45deg)!important;
+  pointer-events:none!important;
+}
+@media(hover:hover) and (pointer:fine){
+  html body button.kids-explain-action:not(:disabled):hover{
+    border-color:rgba(244,213,144,.54)!important;
+    box-shadow:0 0 0 2px rgba(247,214,132,.09),0 8px 19px rgba(0,0,0,.15)!important;
+  }
+}
+html body button.kids-explain-action:not(:disabled):active{
+  border-color:rgba(248,218,154,.6)!important;
+  background:linear-gradient(122deg,rgba(32,96,110,.98),rgba(10,52,68,.98))!important;
+}
+html body button.kids-explain-action:focus-visible{
+  outline:3px solid #f7d98f!important;
+  outline-offset:3px!important;
+}
+html body button.kids-explain-action:disabled{
+  opacity:.62!important;
+  cursor:default!important;
+}
+html body button.kids-explain-action:disabled .kids-explain-icon{
+  background:rgba(235,216,173,.25)!important;
+  color:#f8e1aa!important;
+}
+html body button.kids-explain-action:disabled .kids-explain-icon::before{
+  border-left-color:currentColor!important;
+}
+html body .app[data-age="4–5"] button.kids-explain-action .kids-explain-copy strong{
+  font-size:19px!important;
+}
+html body .app[data-age="4–5"] button.kids-explain-action .kids-explain-copy small{
+  font-size:13px!important;
+}
+@media(min-width:700px){
+ html body button.kids-explain-action{
+  min-height:75px!important;
+  padding:12px 18px!important;
+ }
+}
+@media(max-width:359px){
+ html body button.kids-explain-action{
+  grid-template-columns:44px minmax(0,1fr) 11px!important;
+  gap:9px!important;
+  padding:10px 12px!important;
+ }
+ html body button.kids-explain-action .kids-explain-icon{
+  width:44px!important;height:44px!important;min-width:44px!important;
+ }
+}
+/* Static quiz explanations are readable text, not fake audio buttons. */
+html body .quiz-explanation.show{
+  font-family:"Fredoka","SF Pro Rounded",system-ui,sans-serif!important;
+  font-size:clamp(15px,3.7vw,17px)!important;
+  line-height:1.55!important;
+  padding:15px 17px!important;
+  text-align:left!important;
+  color:#f5f6ed!important;
+}
+@media(prefers-reduced-motion:reduce){
+ html body button.kids-explain-action{transition:none!important}
+}

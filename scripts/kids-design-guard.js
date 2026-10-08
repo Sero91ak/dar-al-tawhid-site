@@ -182,7 +182,7 @@ function runKidsDesignGuard() {
     const swVersion = String(release.visualSystem?.serviceWorkerCache || "").replace(/^v/, "");
     const compact = String(release.visualSystem?.compactGlobalTopDock || "");
     const dockCssRef = "global-detail-dock-v1247.css?v=" + swVersion;
-    const dockJsRef = "global-detail-dock-v1247.js?v=1247";
+    const dockJsRef = "global-detail-dock-v1247.js?v=" + (Number(swVersion)>=1249 ? swVersion : "1247");
     if (!/^\d+$/.test(swVersion)) failed += fail("Kids: Service-Worker-Cacheversion fehlt");
     if (compact === "v1248") {
       if (!doc.includes("KIDS_COMPACT_GLOBAL_TOP_DOCK_V1248") || !dockCss.includes("KIDS_COMPACT_GLOBAL_TOP_DOCK_V1248")) {
@@ -196,6 +196,18 @@ function runKidsDesignGuard() {
         "max-height:none!important"
       ]) {
         if (!dockCss.includes(needle)) failed += fail("Kids-Detail-Dock kompakte Sicherheitsregel fehlt: "+needle);
+      }
+    }
+    if (Number(swVersion)>=1249) {
+      for (const needle of [
+        "KIDS_DUA_FULLBLEED_EXPLANATION_CTA_V1249",
+        "width:100vw!important",
+        "margin:0 0 0 calc(50% - 50vw)!important",
+        "grid-template-columns:46px minmax(0,1fr) 15px",
+        "focus-visible"
+      ]) if(!dockCss.includes(needle))failed+=fail("Kids Duʿāʾ edge/header or explain control missing: "+needle);
+      if(!dockJs.includes("upgradeExplanationActions")||!dockJs.includes("btn.replaceChildren(icon,copy,arrow)")) {
+        failed+=fail("Kids explanation button event-preserving decorator missing");
       }
     }
     for (const file of ["kids/index.html","kids/start.html","kids/shell.html"]) {
