@@ -487,7 +487,7 @@
     function sourceDisclosure(reply, openProof) {
       var list = (reply.evidences || []).filter(function (e) { return !!(e.statement || e.deep_link); });
       if (!list.length) return "";
-      var count = openProof ? Math.min(4, list.length) : Math.min(Math.max(2,Number(reply._ilmCitationCount)||0),list.length);
+      var count = openProof ? Math.min(5, list.length) : Math.min(Math.max(2,Number(reply._ilmCitationCount)||0,Number(reply._ilmRequestedEvidenceCount)||0),list.length);
       return '<details class="ilm-science-sources"' + (openProof ? ' open' : '') + '>' +
         '<summary><span class="ilm-science-source-icon" aria-hidden="true">⌁</span>' +
         '<span>' + (openProof ? "Originalbelege und Quellen" : "Belege und Fundstellen") +
@@ -557,9 +557,17 @@
       }
       var isProof = (proofIntent(reply._ilmQuestion) || !!reply._ilmSourceOnly) && !reply._ilmTawhidFollowup;
       var anyProof = (reply.evidences || []).some(function(e){return e && e.statement && e.statement.length >= 18;});
+      var countAsked = Number(reply._ilmRequestedEvidenceCount || 0);
+      var verifiedSources = (reply.evidences || []).filter(function(e) {
+        return e && e.verification_status === "verified" && e.statement && e.statement.length >= 18;
+      }).length;
       var answer = isProof
-        ? (anyProof ? "Hier sind die nächstliegenden überlieferten Aussagen mit ihren Fundstellen. Bitte beachte den Prüfstatus jeder Quelle."
-          : "Zu dieser Frage liegen aktuell keine ausreichend belegten Originalstellen vor. Ich möchte keine Beweise erfinden.")
+        ? (!anyProof ? "Zu dieser Frage liegen aktuell keine ausreichend belegten Originalstellen vor. Ich möchte keine Beweise erfinden."
+          : countAsked > verifiedSources
+            ? "Ich kann derzeit " + verifiedSources + " überprüfte " +
+              (verifiedSources === 1 ? "Fundstelle" : "Fundstellen") +
+              " zeigen. Weitere verlangte Belege sind bislang nicht ausreichend überprüft. Unten findest du die vorhandenen Fundstellen mit ihrem Prüfstatus."
+            : "Hier sind die gefundenen Aussagen und ihre Fundstellen. Beachte den Prüfstatus jeder Quelle.")
         : (reply._ilmGeneratedText || shortScientificAnswer(reply));
       if (reply._ilmTawhidFollowup === "depth") {
         answer = "Tawḥīd ist das Bekenntnis zur Einzigkeit Allahs. Dazu gehört, dass Allah allein der Herr und Schöpfer ist, dass Ihm allein die Anbetung zusteht und dass Seine Namen und Eigenschaften gemäß Qurʾān und authentischer Sunnah bejaht werden.\n\nDie genannten Qurʾān-Stellen bilden hierfür grundlegende Belege. Die vollständigen Verse kannst du direkt in der App öffnen.";
@@ -813,6 +821,27 @@
       var subject = ilmRecentTopic(current,conversation);
       return subject ? "Ausgangsfrage: " + subject.replace(/[.!?]+$/,"") + ". Nachfrage dazu: " + current : current;
     }
+    function ilmPriorTurnEvidence(conversation) {
+      var messages = conversation && Array.isArray(conversation.messages) ? conversation.messages : [];
+      for (var i = messages.length-1, n=0; i>=0 && n<16; i--,n++) {
+        var m = messages[i];
+        if (!m || m.role !== "assistant" || !m.reply) continue;
+        var evidence = Array.isArray(m.reply.evidences) ? m.reply.evidences : [];
+        // Carry over only items that still include an actual excerpt and reference.
+        var items = evidence.filter(function(e) {
+          return e && e.statement && e.statement.length >= 18
+            && (e.reference || e.work) && e.verification_status === "verified";
+        }).slice(0,4);
+        if (items.length) return items;
+      }
+      return [];
+    }
+    function ilmRequestedEvidenceCount(question) {
+      var q = ilmNormalize(question);
+      if (!/(?:beweis|beleg|quelle|uberlieferung|aussage|fundstelle)/.test(q)) return 0;
+      var m = /(?:^| )(ein|eine|einen|zwei|drei|vier|funf|1|2|3|4|5)(?: |$)/.exec(q);
+      return m ? ({ein:1,eine:1,einen:1,zwei:2,drei:3,vier:4,funf:5}[m[1]] || Number(m[1]) || 0) : 0;
+    }
     function ilmStudyReminder(value, conversation) {
       if (!conversation || !Array.isArray(conversation.messages)) return "";
       var current = ilmNormalize(ilmQueryWithoutGreeting(value));
@@ -890,6 +919,7 @@
         var improved = decorateReply(scientificQuestion, reply, convo);
         if (improved) {
           improved._ilmStudyReminder = ilmStudyReminder(question,convo);
+          improved._ilmRequestedEvidenceCount = ilmRequestedEvidenceCount(question);
           improved._ilmGreetingPrefix = greeting.greeting && greeting.question ? "Wa-ʿalaykum as-salām wa-raḥmatullāhi wa-barakātuh." : "";
           improved._ilmSourceOnly = mode === "sources";
           improved._ilmAnswerMode = mode === "short" ? "short" : "detailed";
@@ -935,6 +965,18 @@
             });
             improved.evidences = picked.concat(relevantExternal).slice(0,8);
             improved._ilmNoRelevantEvidence = !improved.evidences.length;
+          }
+          if (ilmFollowupIntent(question) && !improved._ilmIsDiscovery) {
+            var oldSources = ilmPriorTurnEvidence(convo);
+            var keys = Object.create(null);
+            var allSources = (improved.evidences || []).concat(oldSources);
+            improved.evidences = allSources.filter(function(ev) {
+              var key = String(ev.id || ilmNormalize(ev.statement).slice(0,110));
+              if (keys[key]) return false;
+              keys[key] = true;
+              return true;
+            }).slice(0,8);
+            if (improved.evidences.length) improved._ilmNoRelevantEvidence = false;
           }
         }
         // Only religious explanation requests go to the bounded source-based composer.
