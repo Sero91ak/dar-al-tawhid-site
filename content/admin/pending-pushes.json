@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-10-08T11:33:06.458Z",
+  "generated": "2026-10-08T11:33:08.463Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -1007,12 +1007,12 @@
       "postTitle": "📖 Der schwerste Kampf ist die eigene Absicht",
       "publishedAt": "2026-10-08T11:30:39.559Z",
       "postPath": "content/posts/2026-10-08-sufyan-ath-thawri-kampf-um-niyyah.md",
-      "status": "sending",
+      "status": "sent",
       "createdAt": "2026-10-08T11:30:39.559Z",
       "pushApproved": true,
       "pushApprovedAt": "2026-10-08T11:30:39.559Z",
       "lastError": "",
-      "updatedAt": "2026-10-08T11:33:06.458Z",
+      "updatedAt": "2026-10-08T11:33:08.463Z",
       "lastCheckAt": "2026-10-08T11:33:05.222Z",
       "liveCheck": {
         "ok": true,
@@ -1049,7 +1049,21 @@
         "at": "2026-10-08T11:30:50.629Z",
         "reason": "Index aktualisiert (Deploy/Cache)"
       },
-      "sendingAt": "2026-10-08T11:33:06.458Z"
+      "sendingAt": "2026-10-08T11:33:06.458Z",
+      "sentAt": "2026-10-08T11:33:08.304Z",
+      "pushResult": {
+        "target": "segment:DAR_PUSH|all",
+        "targetUrl": "https://dar-al-tawhid.de/?post=sufyan-thawri-niyyah-struggle-20261008-467&v=1791459187485#post/sufyan-thawri-niyyah-struggle-20261008-467",
+        "channelResults": [
+          {
+            "channel": "all",
+            "sent": true,
+            "target": "segment:DAR_PUSH|all",
+            "recipients": null,
+            "notificationId": "e9abe827-c72c-42dc-8123-c4db785309b1"
+          }
+        ]
+      }
     }
   }
 }
