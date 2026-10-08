@@ -45,6 +45,24 @@ namespace_id = "921302"
 limit = 3
 period = 60
 
+# Groq Free-Tier source-only composition. The API key and Free-Plan
+# confirmation MUST be stored as Cloudflare secrets. Both guards fail closed.
+# Neither a secret alone nor these minute limits can guarantee an account
+# remains free if it is later manually upgraded to a paid subscription.
+[[ratelimits]]
+name = "ILM_GROQ_GLOBAL_LIMIT"
+namespace_id = "921305"
+[ratelimits.simple]
+limit = 6
+period = 60
+
+[[ratelimits]]
+name = "ILM_GROQ_USER_LIMIT"
+namespace_id = "921306"
+[ratelimits.simple]
+limit = 2
+period = 60
+
 [vars]
 PREVIEW_GATE_USER = "Dawud"
 PREVIEW_GATE_PASS = "Malik20"
