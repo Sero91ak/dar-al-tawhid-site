@@ -391,7 +391,7 @@
       "selectedLiftHeight": "shoulder_level_as_illustrated_in_bukhari_736"
     },
     {
-      "status": "awaiting_joint_review",
+      "status": "visual_reference_confirmed_source_and_3d_review_pending",
       "userApproved": false,
       "scholarReviewed": false,
       "approvedAssetIds": [],
@@ -407,10 +407,29 @@
       "decision": "offen",
       "claimLevel": "sources_collected",
       "animationStatus": "locked",
-      "needsJointApproval": true
+      "needsJointApproval": true,
+      "visualReference": {
+        "path": "/kids/mein-gebet/assets/gebetspositionen-sieben-schritte-user-approved-review.jpg",
+        "status": "user_approved_visual_reference",
+        "approvalDate": "2026-10-08",
+        "approvalScope": "2d_visual_pose_only_not_fiqh_or_rig_approval",
+        "rigStatus": "not_present",
+        "finalAnimationApproved": false
+      },
+      "visualApprovedByUser": true,
+      "visualConstraints": {
+        "unchangedChildLegLength": true,
+        "originalBodyProportions": true,
+        "pelvisFold": "bent_at_hips",
+        "spine": "straight_and_approximately_horizontal_like_a_table",
+        "knees": "naturally extended_not_hyperextended",
+        "hands": "rest_on_knees_without_anatomical_distortion",
+        "headNeck": "aligned_with_straight_back",
+        "avoid": "elongated_legs_round_back_or_arbitrary_angle_label"
+      }
     },
     {
-      "status": "awaiting_joint_review",
+      "status": "visual_reference_confirmed_source_and_3d_review_pending",
       "userApproved": false,
       "scholarReviewed": false,
       "approvedAssetIds": [],
@@ -425,7 +444,27 @@
       "decision": "offen",
       "claimLevel": "sahih_anchor",
       "animationStatus": "locked",
-      "needsJointApproval": true
+      "needsJointApproval": true,
+      "visualReference": {
+        "path": "/kids/mein-gebet/assets/gebetspositionen-sieben-schritte-user-approved-review.jpg",
+        "status": "user_approved_visual_reference",
+        "approvalDate": "2026-10-08",
+        "approvalScope": "2d_visual_pose_only_not_fiqh_or_rig_approval",
+        "rigStatus": "not_present",
+        "finalAnimationApproved": false
+      },
+      "visualApprovedByUser": true,
+      "visualConstraints": {
+        "forehead": "firm_contact_with_floor",
+        "nose": "light_contact_with_floor",
+        "lips": "no_contact_with_floor",
+        "chin": "no_contact_with_floor",
+        "noFaceKissingGround": true,
+        "otherSevenContactPoints": "two_hands_two_knees_both_feet_toes_to_be_verified_in_actual_3d",
+        "headAngle": "tilt_from_neck_so_forehead_reaches_ground_without_pushing_mouth_down",
+        "feetAndClothing": "verify pose and contact under garments rather than inferring from 2D",
+        "childBodyProportions": "unchanged"
+      }
     },
     {
       "status": "awaiting_joint_review",
@@ -537,5 +576,7 @@
     }
   ],
   "reviewPolicyUpdate": "Eine durch den Nutzer gewählte Poseoption wird getrennt von wissenschaftlicher Bewertung, Modellabnahme und Kinder-Veröffentlichungsfreigabe gespeichert.",
-  "sourceCountLabel": "21 collected; individual authentication/review stages differ"
+  "sourceCountLabel": "21 collected; individual authentication/review stages differ",
+  "visualReferenceUpdateDate": "2026-10-08",
+  "visualApprovalBoundary": "Latest seven-step user-approved infographic is a 2D visual reference; no formal religious or technical GLB/audio/publishing approval."
 }
