@@ -30,6 +30,7 @@ jobs:
         with:
           sparse-checkout: |
             android/tools
+            android/tv
             links
             download
             .github/workflows/android-website-release.yml
