@@ -93,7 +93,7 @@
       surahName:row.surahName,arabic:row.arabic,german:row.german,
       reciter:"Mišārī Rāšid al-ʿAfāsī",recitationUrl:recitationUrl(row.globalAyah)};
   }
-  function surahReference(index,query){
+  function surahReference(index,query,offset=0){
     const q=norm(query);
     if(!/(?:sura|surah|sure|سوره)/.test(q))return null;
     const chapters=index.rows.filter(v=>v.ayah===1);
@@ -117,7 +117,7 @@
         {status:"not_found",exact:true,total:0,results:[]};
     }
     const items=index.rows.filter(v=>v.surah===matched.surah);
-    return {status:"found",exact:false,total:items.length,results:items.slice(0,MAX_RESULTS).map(result)};
+    return {status:"found",exact:false,total:items.length,offset,nextOffset:Math.min(items.length,offset+MAX_RESULTS),results:items.slice(offset,offset+MAX_RESULTS).map(result)};
   }
   // These exact topic->verse references are already present in the verified Kids
   // teaching material. No fuzzy topic tag can invent a Quran reference.
@@ -137,13 +137,13 @@
     }
     return null;
   }
-  function lookup(index,query){
+  function lookup(index,query,offset=0){
     const explicit=refFromQuestion(query);
     if(explicit){
       const row=index.byRef.get(explicit.surah+":"+explicit.ayah);
       return row?{status:"found",exact:true,total:1,results:[result(row)]}:{status:"not_found",exact:true,total:0,results:[]};
     }
-    const named=surahReference(index,query);
+    const named=surahReference(index,query,offset);
     if(named)return named;
     const editorial=exactEditorialReference(index,query);
     if(editorial)return editorial;
@@ -167,14 +167,15 @@
     if(!candidates.length)return {status:"not_found",exact:false,total:0,results:[]};
     if(words.length===1&&candidates.length>120)return {status:"too_broad",exact:false,total:candidates.length,results:[]};
     candidates.sort((a,b)=>b.points-a.points||a.row.globalAyah-b.row.globalAyah);
-    return {status:"found",exact:false,total:candidates.length,results:candidates.slice(0,MAX_RESULTS).map(x=>result(x.row))};
+    return {status:"found",exact:false,total:candidates.length,offset,nextOffset:Math.min(candidates.length,offset+MAX_RESULTS),results:candidates.slice(offset,offset+MAX_RESULTS).map(x=>result(x.row))};
   }
-  async function search(question){
+  async function search(question,options={}){
     if(typeof question!=="string"||!question.trim()||question.length>MAX_QUERY)
       return {status:"invalid",results:[],total:0};
     const index=await load();
     if(!index)return {status:"unavailable",results:[],total:0};
-    return lookup(index,question);
+    const offset=Math.min(EXPECTED,Math.max(0,Math.floor(Number(options?.offset)||0)));
+    return lookup(index,question,offset);
   }
   root.DarKidsQuranSearch=Object.freeze({version:1,indexPath:INDEX,isQuestion,search,
     __test:Object.freeze({norm,terms,refFromQuestion,validate,lookup})});
