@@ -66,4 +66,11 @@ carousel.dataset.active="0";
 onMutations([{type:"attributes",target:{matches(){return true;},...carousel}}]);
 assert.equal(stage.style.height,"140px","Back must shrink to short slide again");
 
+
+// Editorial compact regression: heading/quote remain grouped with natural-height cards.
+assert.match(css,/editorial compact v1/, "Visitor post editorial enhancement must load");
+assert.match(css,/grid-template-rows:none\\s*!important/, "Slide rows must not reserve unused vertical space");
+assert.match(css,/post-slide-quote\\s*\\{[\\s\\S]*?border-left:2px solid/, "Slide quote gets an editorial accent without a box");
+assert.match(css,/min-height:44px\\s*!important/, "Slide navigation remains touch-friendly");
+
 console.log("Slide natural-height regression PASS: 140→900→140px; compact layout, swipe prev/next, 22 slides and source content intact.");
