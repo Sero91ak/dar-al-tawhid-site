@@ -1,18 +1,18 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1275";
-const KIDS_BUILD_ID="kids-shell-v171-salah-reference-viewport1275";
+const CACHE_NAME="dar-al-tawhid-kids-v1276";
+const KIDS_BUILD_ID="kids-shell-v172-salah-reference-gallery1276";
 const DUA_AUDIO_RUNTIME="1244";
 // QUIZ_HOME_RESTORE_V1225: refresh installed PWAs with the restored Quiz entry.
 const CORE_PRECACHE=[
   "/kids/assets/kids-salah-v1272/hero-home.png?v=1272",
-  "/kids/assets/kids-salah-v1272/hero-day.png?v=1275",
-  "/kids/assets/kids-salah-v1272/fajr.png?v=1275",
-  "/kids/assets/kids-salah-v1272/dhuhr.png?v=1275",
-  "/kids/assets/kids-salah-v1272/asr.png?v=1275",
-  "/kids/assets/kids-salah-v1272/maghrib.png?v=1275",
-  "/kids/assets/kids-salah-v1272/isha.png?v=1275",
+  "/kids/assets/kids-salah-v1272/hero-day.png?v=1276",
+  "/kids/assets/kids-salah-v1272/fajr.png?v=1276",
+  "/kids/assets/kids-salah-v1272/dhuhr.png?v=1276",
+  "/kids/assets/kids-salah-v1272/asr.png?v=1276",
+  "/kids/assets/kids-salah-v1272/maghrib.png?v=1276",
+  "/kids/assets/kids-salah-v1272/isha.png?v=1276",
   "/kids/assets/kids-salah-v1262/cinematic-still.jpg",
-  "/kids/prayer-stage-v1261.css?v=1275",
-  "/kids/prayer-stage-v1261.js?v=1275",
+  "/kids/prayer-stage-v1261.css?v=1276",
+  "/kids/prayer-stage-v1261.js?v=1276",
   "/kids/assets/kids-home-v1222/dar-title-reference-clean.svg?v=1229",
   "/kids/assets/kids-home-v1219/dar-title-reference.png?v=1229",
   "/kids/assets/kids-home-v1219/dar-title-reference.png?v=1229",
@@ -67,8 +67,8 @@ const CORE_PRECACHE=[
   "/kids/deen-learning-v1199.css?v=1199",
   "/kids/deen-lessons.css?v=2",
   "/kids/deen-lessons.js?v=4",
-  "/kids/global-detail-dock-v1247.css?v=1275",
-  "/kids/global-detail-dock-v1247.js?v=1275",
+  "/kids/global-detail-dock-v1247.css?v=1276",
+  "/kids/global-detail-dock-v1247.js?v=1276",
   "/kids/data/deen-lessons.json?v=3",
   "/kids/assets/deen/deen-entry.jpg?v=1206",
   "/kids/assets/deen/tawhid.jpg?v=1206",
@@ -98,8 +98,8 @@ const CORE_PRECACHE=[
   "/kids/story-hub.js?v=25",
   "/kids/global-story-glow-v1216.css?v=1217",
   "/kids/global-story-glow-v1216.js?v=1239",
-  "/kids/dua-hub-v1219.css?v=1275",
-  "/kids/dua-hub-v1219.js?v=1275",
+  "/kids/dua-hub-v1219.css?v=1276",
+  "/kids/dua-hub-v1219.js?v=1276",
   "/kids/assets/profile-avatars/boy-kufi-v1235.svg",
   "/kids/assets/profile-avatars/girl-hijab-pink-v1235.svg",
   "/kids/assets/dua-premium/hero-v1222.jpg?v=1233",

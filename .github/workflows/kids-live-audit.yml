@@ -39,7 +39,7 @@ jobs:
           curl --location --silent --show-error --fail --retry 2 --max-time 20 -A "DarAlTawhidKids-iOS"             -H "Cache-Control: no-cache"             "https://dar-al-tawhid.de/kids/version.json?audit=$(date +%s)"             -o /tmp/kids-audit/live-version.json || true
           curl --location --silent --show-error --fail --retry 2 --max-time 20 -A "DarAlTawhidKids-iOS" --location --max-redirs 4             -H "Cache-Control: no-cache"             "https://dar-al-tawhid.de/kids/start?audit=$(date +%s)"             -o /tmp/kids-audit/live-home.html || true
           curl --location --silent --show-error --fail --retry 2 --max-time 20 -A "DarAlTawhidKids-iOS"             "https://dar-al-tawhid.de/kids/prayer-stage-v1261.css?v=1275&audit=$(date +%s)"             -o /tmp/kids-audit/live-salah.css || true
-          curl --location --silent --show-error --fail --retry 2 --max-time 20             "https://dar-al-tawhid.de/kids/assets/kids-salah-v1272/hero-home.png?v=1274"             -o /tmp/kids-audit/live-art.png || true
+          curl --location --silent --show-error --fail --retry 2 --max-time 20             "https://dar-al-tawhid.de/kids/assets/kids-salah-v1272/hero-home.png?v=1276"             -o /tmp/kids-audit/live-art.png || true
           for name in hero-day fajr dhuhr asr maghrib isha; do
             curl --silent --show-error --fail --retry 2 --max-time 20 \
               "https://dar-al-tawhid.de/kids/assets/kids-salah-v1272/$name.png?v=1275" \
@@ -67,7 +67,7 @@ jobs:
              live=dict(buildId=obj.get('buildId'),label=obj.get('label'),
                homeBytes=len(home.encode()),
                homeContainsPrayerAssets1275='prayer-stage-v1261.css?v=1275' in home,
-               homeContainsBuild1275='kids-shell-v171-salah-reference-viewport1275' in home,
+               homeContainsBuild1275='kids-shell-v172-salah-reference-gallery1276' in home,
                cssBytes=len(css),cssContainsViewportFit='KIDS_SALAH_REFERENCE_FIT_V1275' in css,
                photoBytes=img.stat().st_size if img.exists() else 0,
                prayerArtworkBytes=art,

@@ -1774,7 +1774,7 @@ body.kids-salah-day-open{overflow:hidden!important}
   height:clamp(265px,49dvh,440px)!important;z-index:0!important;
   background-image:linear-gradient(180deg,rgba(3,18,30,.09) 0%,
     rgba(3,17,31,.02) 37%,rgba(3,24,39,.49) 75%,#071f32 99%),
-    url("/kids/assets/kids-salah-v1272/hero-day.png?v=1275")!important;
+    url("/kids/assets/kids-salah-v1272/hero-day.png?v=1276")!important;
   background-size:100% 100%,cover!important;
   background-position:center,center 43%!important;
   background-repeat:no-repeat!important;
@@ -1895,19 +1895,19 @@ body.kids-salah-day-open{overflow:hidden!important}
   background:linear-gradient(110deg,rgba(22,83,92,.88),rgba(10,52,78,.86))!important;
 }
 .kids-salah-day-item[data-prayer="fajr"] .kids-salah-day-item-orb{
-  background-image:url("/kids/assets/kids-salah-v1272/fajr.png?v=1275")!important;
+  background-image:url("/kids/assets/kids-salah-v1272/fajr.png?v=1276")!important;
 }
 .kids-salah-day-item[data-prayer="dhuhr"] .kids-salah-day-item-orb{
-  background-image:url("/kids/assets/kids-salah-v1272/dhuhr.png?v=1275")!important;
+  background-image:url("/kids/assets/kids-salah-v1272/dhuhr.png?v=1276")!important;
 }
 .kids-salah-day-item[data-prayer="asr"] .kids-salah-day-item-orb{
-  background-image:url("/kids/assets/kids-salah-v1272/asr.png?v=1275")!important;
+  background-image:url("/kids/assets/kids-salah-v1272/asr.png?v=1276")!important;
 }
 .kids-salah-day-item[data-prayer="maghrib"] .kids-salah-day-item-orb{
-  background-image:url("/kids/assets/kids-salah-v1272/maghrib.png?v=1275")!important;
+  background-image:url("/kids/assets/kids-salah-v1272/maghrib.png?v=1276")!important;
 }
 .kids-salah-day-item[data-prayer="isha"] .kids-salah-day-item-orb{
-  background-image:url("/kids/assets/kids-salah-v1272/isha.png?v=1275")!important;
+  background-image:url("/kids/assets/kids-salah-v1272/isha.png?v=1276")!important;
 }
 .kids-salah-day[data-gender="girl"] .kids-salah-day-item.is-current{
   border-color:#ffe2b5!important;
