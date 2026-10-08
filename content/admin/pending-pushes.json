@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-10-08T13:31:07.881Z",
+  "generated": "2026-10-08T13:31:30.073Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -1130,8 +1130,50 @@
       "createdAt": "2026-10-08T13:31:07.738Z",
       "pushApproved": true,
       "pushApprovedAt": "2026-10-08T13:31:07.738Z",
-      "lastError": "Push wartet auf Live-Verfügbarkeit",
-      "updatedAt": "2026-10-08T13:31:07.881Z"
+      "lastError": "Index auf GitHub ok, aber öffentlicher Index noch ohne Beitrag – Deployment/Cache.",
+      "updatedAt": "2026-10-08T13:31:30.073Z",
+      "lastCheckAt": "2026-10-08T13:31:29.934Z",
+      "liveCheck": {
+        "ok": false,
+        "steps": {
+          "githubFileCreated": true,
+          "indexUpdatedGithub": true,
+          "indexFoundPublic": true,
+          "postInIndex": false,
+          "postFilePublic": false,
+          "visitorUrlOk": true,
+          "cloudflareDeployed": false,
+          "githubIndexHasPost": true,
+          "githubPostExists": true
+        },
+        "diagnosis": "Index auf GitHub ok, aber öffentlicher Index noch ohne Beitrag – Deployment/Cache.",
+        "indexOk": false,
+        "postOk": false,
+        "visitorUrlOk": true,
+        "attempts": 3,
+        "site": "https://dar-al-tawhid.de",
+        "postId": "miraj-ruyah-ikhtilaf-kein-pauschaler-takfir-slides-469",
+        "indexGenerated": "2026-10-08T11:30:49.828Z",
+        "indexCount": 467,
+        "visitorUrl": "https://dar-al-tawhid.de/?post=miraj-ruyah-ikhtilaf-kein-pauschaler-takfir-slides-469&v=1791466277897#post/miraj-ruyah-ikhtilaf-kein-pauschaler-takfir-slides-469",
+        "githubIndexHasPost": true,
+        "githubPostExists": true,
+        "needsIndexRepair": false,
+        "needsDeployWait": true,
+        "repair": {
+          "repaired": true,
+          "action": "index-touch",
+          "at": "2026-10-08T13:31:20.778Z",
+          "reason": "Index aktualisiert (Deploy/Cache)"
+        }
+      },
+      "attempts": 3,
+      "lastRepair": {
+        "repaired": true,
+        "action": "index-touch",
+        "at": "2026-10-08T13:31:20.778Z",
+        "reason": "Index aktualisiert (Deploy/Cache)"
+      }
     }
   }
 }
