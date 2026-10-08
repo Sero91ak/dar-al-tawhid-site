@@ -1,0 +1,380 @@
+{
+  "schemaVersion": 1,
+  "feature": "mein-gebet",
+  "primarySchool": "hanbali",
+  "textualAuthorityOrder": [
+    "quran",
+    "authentic_sunnah",
+    "sahabah",
+    "salaf_early_imams",
+    "classical_hanbali_fiqh"
+  ],
+  "methodology": "Hanbalitischer Lehrpfad; bei echten Text-/Überlieferungsunterschieden Varianten nachvollziehbar dokumentieren, Beweisstärke unabhängig prüfen, erst dann gemeinsame Freigabe.",
+  "approvedToAnimate": false,
+  "approvedToRecord": false,
+  "approvedToTeach": false,
+  "appliesToProfiles": [
+    "boy",
+    "girl"
+  ],
+  "ageSpecificMatters": "Keinen Rechtssatz zu erwachsenen Frauen ohne Prüfung auf das Mädchenprofil übertragen.",
+  "statusKey": "awaiting_joint_source_and_pose_review",
+  "buildMode": "preview_only_not_published",
+  "evidenceDisclaimer": "Direktnachweise gefunden; keine umfassende Isnad-, Fiqh-, Multimedia- oder Nutzerabnahme. verifiedLink bedeutet Linkinhalt gefunden, NICHT religiös abschließend geprüft.",
+  "animationsPolicy": {
+    "defaultStatus": "locked",
+    "unlockOnlyWhen": [
+      "source_arabic_exact_verified",
+      "narration_strength_reviewed",
+      "hanbali_position_reviewed",
+      "gender_relevance_reviewed",
+      "user_explicit_approval",
+      "pose_reference_reviewed"
+    ],
+    "neverInferGenderPoseFromAvatar": true,
+    "noAnimatedPlaceholderAsInstruction": true
+  },
+  "sources": [
+    {
+      "id": "hadith-pray-as-seen",
+      "category": "sahih_hadith",
+      "work": "Ṣaḥīḥ al-Buḫārī",
+      "hadithNumber": "6008",
+      "narrator": "Mālik ibn al-Ḥuwayriṯ",
+      "description": "Ṣallū kamā raʾaytumūnī uṣallī – Betet, wie ihr mich beten gesehen habt",
+      "url": "https://dorar.net/hadith/sharh/147145#:~:text=%D9%88%D8%B5%D9%84%D9%88%D8%A7%20%D9%83%D9%85%D8%A7%20%D8%B1%D8%A3%D9%8A%D8%AA%D9%85%D9%88%D9%86%D9%8A%20%D8%A3%D8%B5%D9%84%D9%8A",
+      "verifiedLink": true
+    },
+    {
+      "id": "hadith-seven-points",
+      "category": "sahih_hadith",
+      "work": "Ṣaḥīḥ al-Buḫārī",
+      "hadithNumber": "812",
+      "narrator": "ʿAbdullāh ibn ʿAbbās",
+      "description": "Sieben Kontaktstellen bei Suǧūd",
+      "url": "https://dorar.net/hadith/sharh/72023#:~:text=%D8%B9%D9%84%D9%89%20%D8%A7%D9%84%D8%AC%D8%A8%D9%87%D8%A9",
+      "verifiedLink": true
+    },
+    {
+      "id": "hanbali-hands-general",
+      "category": "classical_hanbali_fiqh",
+      "author": "Ibn Qudāmah",
+      "work": "al-Muġnī",
+      "chapter": "Bāb Ṣifat aṣ-Ṣalāh",
+      "section": "Masʾalah 661",
+      "description": "Rechte Hand auf die linke; Art des Greifens",
+      "url": "https://www.islamweb.net/ar/library/content/15/549/#:~:text=%D8%AB%D9%85%20%D9%8A%D8%B6%D8%B9%20%D9%8A%D8%AF%D9%87%20%D8%A7%D9%84%D9%8A%D9%85%D9%86%D9%89%20%D8%B9%D9%84%D9%89%20%D9%83%D9%88%D8%B9%D9%87%20%D8%A7%D9%84%D9%8A%D8%B3%D8%B1%D9%89",
+      "verifiedLink": true
+    },
+    {
+      "id": "hanbali-hands-location",
+      "category": "classical_hanbali_fiqh",
+      "author": "Ibn Qudāmah",
+      "work": "al-Muġnī",
+      "chapter": "Bāb Ṣifat aṣ-Ṣalāh",
+      "section": "Masʾalah 662",
+      "description": "Unterschiedliche Überlieferungen Imām Aḥmads zum Ort der Handhaltung",
+      "url": "https://islamweb.net/ar/library/content/15/550/#:~:text=%D8%A7%D8%AE%D8%AA%D9%84%D9%81%D8%AA%20%D8%A7%D9%84%D8%B1%D9%88%D8%A7%D9%8A%D8%A9%20%D9%81%D9%8A%20%D9%85%D9%88%D8%B6%D8%B9%20%D9%88%D8%B6%D8%B9%D9%87%D9%85%D8%A7",
+      "verifiedLink": true
+    },
+    {
+      "id": "hanbali-ruku",
+      "category": "classical_hanbali_fiqh",
+      "author": "Ibn Qudāmah",
+      "work": "al-Muġnī",
+      "chapter": "Bāb Ṣifat aṣ-Ṣalāh",
+      "section": "Masʾalah 691",
+      "description": "Hände auf Knien, Finger spreizen, Rücken strecken, Kopf neutral",
+      "url": "https://islamweb.net/ar/library/content/15/570/#:~:text=%D9%88%D9%8A%D9%85%D8%AF%20%D8%B8%D9%87%D8%B1%D9%87%20%D8%8C%20%D9%88%D9%84%D8%A7%20%D9%8A%D8%B1%D9%81%D8%B9%20%D8%B1%D8%A3%D8%B3%D9%87",
+      "verifiedLink": true
+    },
+    {
+      "id": "hanbali-sitting-between-sujud",
+      "category": "classical_hanbali_fiqh",
+      "author": "Ibn Qudāmah",
+      "work": "al-Muġnī",
+      "volume": "1",
+      "page": "308 (Webausgabe)",
+      "section": "Masʾalah 730",
+      "description": "Iftirāš zwischen den beiden Niederwerfungen",
+      "url": "https://www.islamweb.net/ar/library/content/15/599/#:~:text=%D9%8A%D8%AC%D9%84%D8%B3%20%D8%A8%D9%8A%D9%86%20%D8%A7%D9%84%D8%B3%D8%AC%D8%AF%D8%AA%D9%8A%D9%86%20%D9%85%D9%81%D8%AA%D8%B1%D8%B4%D8%A7",
+      "verifiedLink": true
+    },
+    {
+      "id": "hanbali-between-sujud-dhikr",
+      "category": "classical_hanbali_fiqh",
+      "author": "Ibn Qudāmah",
+      "work": "al-Muġnī",
+      "volume": "1",
+      "page": "309 (Webausgabe)",
+      "description": "Rabb-iġfir lī zwischen den zwei Suǧūd",
+      "url": "https://islamweb.net/ar/library/content/15/601/#:~:text=%D8%B1%D8%A8%20%D8%A7%D8%BA%D9%81%D8%B1%20%D9%84%D9%8A%20%D8%B1%D8%A8%20%D8%A7%D8%BA%D9%81%D8%B1%20%D9%84%D9%8A",
+      "verifiedLink": true
+    },
+    {
+      "id": "hanbali-tashahhud",
+      "category": "classical_hanbali_fiqh",
+      "author": "Ibn Qudāmah",
+      "work": "al-Muġnī",
+      "volume": "1",
+      "page": "314 (Webausgabe)",
+      "section": "Masʾalah 744",
+      "description": "Handflächen/Finger im Tašahhud",
+      "url": "https://islamweb.net/ar/library/content/15/612/#:~:text=%D8%AB%D9%85%20%D9%8A%D8%A8%D8%B3%D8%B7%20%D9%83%D9%81%D9%87%20%D8%A7%D9%84%D9%8A%D8%B3%D8%B1%D9%89%20%D8%B9%D9%84%D9%89%20%D9%81%D8%AE%D8%B0%D9%87%20%D8%A7%D9%84%D9%8A%D8%B3%D8%B1%D9%89",
+      "verifiedLink": true
+    },
+    {
+      "id": "hanbali-gender",
+      "category": "classical_hanbali_fiqh",
+      "author": "Ibn Qudāmah",
+      "work": "al-Muġnī",
+      "volume": "1",
+      "page": "329 (Webausgabe)",
+      "section": "Masʾalah 783",
+      "description": "Männer/Frauen: Gemeinsamkeiten und beschriebene Unterschiede in Rukūʿ/Suǧūd/Sitzen",
+      "url": "https://www.islamweb.net/ar/library/content/15/635/#:~:text=%D8%A7%D9%84%D9%85%D8%B1%D8%A3%D8%A9%20%D8%AA%D8%AC%D9%85%D8%B9%20%D9%86%D9%81%D8%B3%D9%87%D8%A7%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%B1%D9%83%D9%88%D8%B9%20%D9%88%D8%A7%D9%84%D8%B3%D8%AC%D9%88%D8%AF",
+      "verifiedLink": true
+    },
+    {
+      "id": "ibn-hibban-wail-pose",
+      "category": "hadith_primary",
+      "author": "Ibn Ḥibbān",
+      "work": "Ṣaḥīḥ Ibn Ḥibbān",
+      "volume": "5",
+      "page": "170 (Webausgabe)",
+      "hadithNumber": "1860 (Webausgabe)",
+      "description": "Waʾil ibn Ḥuǧr beschreibt Gebetsstellungen",
+      "url": "https://islamweb.net/ar/library/content/314/1864/#:~:text=%D8%AB%D9%85%20%D8%B1%D9%83%D8%B9%20%D8%8C%20%D9%81%D9%88%D8%B6%D8%B9%20%D9%8A%D8%AF%D9%8A%D9%87%20%D8%B9%D9%84%D9%89%20%D8%B1%D9%83%D8%A8%D8%AA%D9%8A%D9%87",
+      "verifiedLink": true
+    },
+    {
+      "id": "sujud-order-debate",
+      "category": "classical_evidence_discussion",
+      "work": "al-Iʿtibār fī n-nāsiḫ wa-l-mansūḫ min al-āṯār",
+      "chapter": "Wadʿ al-yadayn qabl ar-rukbatayn fī s-suǧūd",
+      "description": "Überlieferungen und juristische Unterschiede der Reihenfolge Hände/Knie",
+      "url": "https://islamweb.net/ar/library/content/89/83/#:~:text=%D9%88%D9%82%D8%AF%20%D8%A7%D8%AE%D8%AA%D9%84%D9%81%20%D8%A3%D9%87%D9%84%20%D8%A7%D9%84%D8%B9%D9%84%D9%85%20%D9%81%D9%8A%20%D9%87%D8%B0%D8%A7%20%D8%A7%D9%84%D8%A8%D8%A7%D8%A8",
+      "verifiedLink": true
+    }
+  ],
+  "reviews": [
+    {
+      "status": "awaiting_joint_review",
+      "userApproved": false,
+      "scholarReviewed": false,
+      "approvedAssetIds": [],
+      "id": "opening-takbir",
+      "step": "takbir",
+      "title": "Eröffnungstakbīr",
+      "question": "Armhöhe, Handflächenrichtung und zeitliche Abfolge beim Takbīr?",
+      "type": "pose_and_recitation",
+      "sourceIds": [
+        "hadith-pray-as-seen",
+        "ibn-hibban-wail-pose"
+      ],
+      "decision": "offen",
+      "claimLevel": "sources_collected",
+      "animationStatus": "locked"
+    },
+    {
+      "status": "awaiting_joint_review",
+      "userApproved": false,
+      "scholarReviewed": false,
+      "approvedAssetIds": [],
+      "id": "qiyam-right-over-left",
+      "step": "qiyam",
+      "title": "Rechte auf linke Hand",
+      "question": "Rechte Hand über linker Hand am Handgelenk/Unterarm; genaue Handgelenkform?",
+      "type": "pose",
+      "sourceIds": [
+        "hanbali-hands-general",
+        "ibn-hibban-wail-pose"
+      ],
+      "decision": "offen",
+      "claimLevel": "sources_collected",
+      "animationStatus": "locked"
+    },
+    {
+      "status": "awaiting_joint_review",
+      "userApproved": false,
+      "scholarReviewed": false,
+      "approvedAssetIds": [],
+      "id": "qiyam-hands-location",
+      "step": "qiyam",
+      "title": "Handhöhe im Qiyām",
+      "question": "Unter dem Nabel, über dem Nabel oder auf der Brust? Unterschiedliche Aḥmad-Überlieferungen sachlich prüfen und eine Lehrvariante festlegen.",
+      "type": "hanbali_variants",
+      "sourceIds": [
+        "hanbali-hands-location",
+        "hanbali-hands-general"
+      ],
+      "decision": "offen",
+      "claimLevel": "source_explicit_variants",
+      "animationStatus": "locked",
+      "needsJointApproval": true
+    },
+    {
+      "status": "awaiting_joint_review",
+      "userApproved": false,
+      "scholarReviewed": false,
+      "approvedAssetIds": [],
+      "id": "raf-al-yadayn",
+      "step": "takbir_ruku_raising",
+      "title": "Rafʿ al-yadayn",
+      "question": "An welchen Bewegungsstellen werden beide Hände angehoben, wie hoch und wann?",
+      "type": "pose_and_timing",
+      "sourceIds": [
+        "ibn-hibban-wail-pose"
+      ],
+      "decision": "offen",
+      "claimLevel": "sources_collected",
+      "animationStatus": "locked",
+      "needsJointApproval": true
+    },
+    {
+      "status": "awaiting_joint_review",
+      "userApproved": false,
+      "scholarReviewed": false,
+      "approvedAssetIds": [],
+      "id": "ruku-knees-spine",
+      "step": "ruku",
+      "title": "Rukūʿ: Knie, Rücken und Kopf",
+      "question": "Handflächen an die Knie; Rücken strecken, Kopf nicht zu hoch/tief. Exakte Figurstellung und Beugungswinkel abnehmen.",
+      "type": "pose",
+      "sourceIds": [
+        "hanbali-ruku",
+        "ibn-hibban-wail-pose"
+      ],
+      "decision": "offen",
+      "claimLevel": "sources_collected",
+      "animationStatus": "locked",
+      "needsJointApproval": true
+    },
+    {
+      "status": "awaiting_joint_review",
+      "userApproved": false,
+      "scholarReviewed": false,
+      "approvedAssetIds": [],
+      "id": "sujud-seven-contact",
+      "step": "sujud",
+      "title": "Suǧūd: sieben Kontaktstellen",
+      "question": "Stirn/Nase, zwei Hände, zwei Knie, Zehen beider Füße. Prüfen, ob Kleidung diese Stellen optisch verdeckt.",
+      "type": "pose",
+      "sourceIds": [
+        "hadith-seven-points"
+      ],
+      "decision": "offen",
+      "claimLevel": "sahih_anchor",
+      "animationStatus": "locked",
+      "needsJointApproval": true
+    },
+    {
+      "status": "awaiting_joint_review",
+      "userApproved": false,
+      "scholarReviewed": false,
+      "approvedAssetIds": [],
+      "id": "sujud-descent-order",
+      "step": "sujud_transition",
+      "title": "Absenken zum Suǧūd",
+      "question": "Knie oder Hände zuerst? Differenzen der Überlieferungen und konkreten hanbalitischen Lehrfassung gemeinsam prüfen.",
+      "type": "disputed_transition",
+      "sourceIds": [
+        "sujud-order-debate"
+      ],
+      "decision": "offen",
+      "claimLevel": "source_explicit_variants",
+      "animationStatus": "locked",
+      "needsJointApproval": true
+    },
+    {
+      "status": "awaiting_joint_review",
+      "userApproved": false,
+      "scholarReviewed": false,
+      "approvedAssetIds": [],
+      "id": "between-sujud-iftirash",
+      "step": "jalsah",
+      "title": "Ǧalsah: Sitzhaltung",
+      "question": "Iftirāš der linken und Aufstellen der rechten Fußstellung sowie korrekte Hände überprüfen.",
+      "type": "pose",
+      "sourceIds": [
+        "hanbali-sitting-between-sujud"
+      ],
+      "decision": "offen",
+      "claimLevel": "sources_collected",
+      "animationStatus": "locked"
+    },
+    {
+      "status": "awaiting_joint_review",
+      "userApproved": false,
+      "scholarReviewed": false,
+      "approvedAssetIds": [],
+      "id": "between-sujud-dua",
+      "step": "jalsah",
+      "title": "Dhikr zwischen Niederwerfungen",
+      "question": "Arabischer Wortlaut (Rabb-iġfir lī), Wiederholungsanzahl und Audio-Timing fachlich freigeben.",
+      "type": "recitation",
+      "sourceIds": [
+        "hanbali-between-sujud-dhikr"
+      ],
+      "decision": "offen",
+      "claimLevel": "sources_collected",
+      "animationStatus": "locked"
+    },
+    {
+      "status": "awaiting_joint_review",
+      "userApproved": false,
+      "scholarReviewed": false,
+      "approvedAssetIds": [],
+      "id": "tashahhud-finger",
+      "step": "tashahhud",
+      "title": "Tašahhud: Hände und Zeigefinger",
+      "question": "Hände auf Oberschenkeln; Zeigefingerform, Zeitpunkt und Bewegung nur mit belastbaren Belegen animieren.",
+      "type": "pose_and_timing",
+      "sourceIds": [
+        "hanbali-tashahhud"
+      ],
+      "decision": "offen",
+      "claimLevel": "sources_collected",
+      "animationStatus": "locked",
+      "needsJointApproval": true
+    },
+    {
+      "status": "awaiting_joint_review",
+      "userApproved": false,
+      "scholarReviewed": false,
+      "approvedAssetIds": [],
+      "id": "sitting-last-tashahhud",
+      "step": "tashahhud",
+      "title": "Abschließendes Sitzen",
+      "question": "Unterschied zwischen erster und letzter Sitzhaltung, speziell 2-Rakʿah vs. 3-/4-Rakʿah-Gebet, separat prüfen.",
+      "type": "hanbali_variants",
+      "sourceIds": [
+        "hanbali-tashahhud",
+        "hanbali-sitting-between-sujud"
+      ],
+      "decision": "offen",
+      "claimLevel": "research_incomplete",
+      "animationStatus": "locked",
+      "needsJointApproval": true
+    },
+    {
+      "status": "awaiting_joint_review",
+      "userApproved": false,
+      "scholarReviewed": false,
+      "approvedAssetIds": [],
+      "id": "gender-posture",
+      "step": "all_poses",
+      "title": "Mädchenfigur: Gebetsstellungen",
+      "question": "Ibn Qudāmah erwähnt engeres Zusammennehmen beim Rukūʿ/Suǧūd und andere Sitzarten. Prüfen: normative Einordnung, Beweislage und altersgerechte Anwendung auf ein Mädchen. Keine automatische Kopie der Jungenposen.",
+      "type": "hanbali_gender_difference",
+      "sourceIds": [
+        "hanbali-gender",
+        "hadith-pray-as-seen"
+      ],
+      "decision": "offen",
+      "claimLevel": "source_explicit_variants",
+      "animationStatus": "locked",
+      "needsJointApproval": true
+    }
+  ]
+}
