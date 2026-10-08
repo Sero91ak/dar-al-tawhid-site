@@ -13,7 +13,7 @@
       window.DAR_IOS_NATIVE_APP === true ||
       window.DAR_ANDROID_NATIVE_APP === true;
     var __darPublicRoot = (__darBootPath === "/" || __darBootPath === "/index.html");
-    if (!__darBootNative && !/\bAndroid\b/i.test(__darUa) && __darPublicRoot) {
+    if (!__darBootNative && !/\bAndroid\b/i.test(__darBootUa) && __darPublicRoot) {
       try {
         if (document.documentElement) {
           document.documentElement.classList.remove("dar-soft-booting");
