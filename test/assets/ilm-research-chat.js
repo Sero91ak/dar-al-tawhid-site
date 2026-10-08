@@ -594,6 +594,18 @@
       var scrollSelectors = ".ilm-chat-messages, .ilm-messages, .ilm-thread, .ilm-chat-history";
       var pending = false;
       var restoring = false;
+      var observing = false;
+      var observer;
+      function stopObserve() {
+        if (observing && observer) observer.disconnect();
+        observing = false;
+      }
+      function startObserve() {
+        if (!observing && observer && document.body) {
+          observer.observe(document.body,{childList:true,subtree:true});
+          observing = true;
+        }
+      }
       function read() {
         try {
           var saved = JSON.parse(sessionStorage.getItem(KEY) || "null");
@@ -615,9 +627,11 @@
           scrollY:window.scrollY || 0,
           innerScroll:scroller ? Number(scroller.scrollTop || 0) : null,
           fromHash:String(location.hash || "#ilm"),
+          visited:false,
           at:Date.now()
         };
         try { sessionStorage.setItem(KEY, JSON.stringify(state)); } catch (_e) {}
+        startObserve();
       }
       function isTargetRoute(state) {
         if (!state || !document.body || document.body.classList.contains("is-ilm-chat-route")) return false;
@@ -652,16 +666,23 @@
         var root = document.getElementById("appView");
         if (!root) return;
         var existing = root.querySelector("[data-ilm-discovery-return]");
-        if (!saved) { if (existing) existing.remove(); return; }
+        if (!saved) { if (existing) existing.remove(); stopObserve(); return; }
         if (document.body.classList.contains("is-ilm-chat-route")) {
           if (existing) existing.remove();
+          // A pointerdown can mutate the DOM before navigation; do not discard the return trip yet.
+          if (!saved.visited) return;
           try { sessionStorage.removeItem(KEY); } catch (_e) {}
+          stopObserve();
           restoreChatScroll(saved);
           return;
         }
         if (!isTargetRoute(saved)) {
           if (existing) existing.remove();
           return;
+        }
+        if (!saved.visited) {
+          saved.visited = true;
+          try { sessionStorage.setItem(KEY, JSON.stringify(saved)); } catch (_e) {}
         }
         if (existing) return;
         var bar = document.createElement("div");
@@ -712,11 +733,10 @@
       },true);
       window.addEventListener("popstate",schedule);
       window.addEventListener("hashchange",schedule);
-      var observer = new MutationObserver(schedule);
+      observer = new MutationObserver(schedule);
       function boot() {
         if (!document.body) return;
-        observer.observe(document.body,{childList:true,subtree:true});
-        schedule();
+        if (read()) { startObserve(); schedule(); }
       }
       if (document.readyState === "loading") document.addEventListener("DOMContentLoaded",boot,{once:true});
       else boot();
