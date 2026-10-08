@@ -7145,7 +7145,9 @@
         "ios/DarAlTawhid/DarAlTawhid/WebAppView.swift",
         "content/admin/change-scope-lock.json",
         "ios/DarAlTawhid/DarAlTawhid/DarPushNotifications.swift",
-        "ios/DarAlTawhid/DarAlTawhid/DarAlTawhidApp.swift"
+        "ios/DarAlTawhid/DarAlTawhid/DarAlTawhidApp.swift",
+        "scripts/ios-post-push-deeplink-guard.cjs",
+        ".github/workflows/check-ios-post-push-deeplink.yml"
       ],
       "expiresAt": "2026-11-30T23:59:00.000Z"
     }
