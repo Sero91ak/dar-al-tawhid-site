@@ -1,0 +1,16 @@
+/* Majlis al-Ilm — test-only compact question archive */
+body.is-ilm-chat-route .ilm-history-archive{width:min(100%,760px);margin:4px auto 14px;border:1px solid color-mix(in srgb,var(--ilm-accent) 18%,transparent);border-radius:12px;background:color-mix(in srgb,var(--ilm-header-bg) 38%,transparent);color:var(--ilm-primary-text)}
+body.is-ilm-chat-route .ilm-history-archive>summary{display:flex;align-items:center;gap:10px;min-height:43px;padding:9px 12px;list-style:none;cursor:pointer;color:var(--ilm-secondary-text);font:620 12px/1.4 system-ui,sans-serif}
+body.is-ilm-chat-route .ilm-history-archive>summary::-webkit-details-marker,body.is-ilm-chat-route .ilm-history-turn>summary::-webkit-details-marker{display:none}
+body.is-ilm-chat-route .ilm-history-archive-label,body.is-ilm-chat-route .ilm-history-turn-question{flex:1;min-width:0}
+body.is-ilm-chat-route .ilm-history-archive-icon,body.is-ilm-chat-route .ilm-history-archive-chevron,body.is-ilm-chat-route .ilm-history-turn-chevron{color:var(--ilm-accent)}
+body.is-ilm-chat-route .ilm-history-archive>summary small{color:var(--ilm-accent);font-size:11px}
+body.is-ilm-chat-route .ilm-history-archive-list{border-top:1px solid var(--ilm-line);padding:0 11px 6px}
+body.is-ilm-chat-route .ilm-history-turn{border-bottom:1px solid color-mix(in srgb,var(--ilm-accent) 13%,transparent)}
+body.is-ilm-chat-route .ilm-history-turn:last-child{border-bottom:0}
+body.is-ilm-chat-route .ilm-history-turn>summary{display:flex;align-items:center;gap:10px;min-height:40px;padding:8px 0;list-style:none;cursor:pointer;color:var(--ilm-primary-text);font:560 12px/1.4 system-ui,sans-serif}
+body.is-ilm-chat-route .ilm-history-turn-index{font-size:10px;color:var(--ilm-accent)}
+body.is-ilm-chat-route .ilm-history-turn-question{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+body.is-ilm-chat-route .ilm-history-turn-content{padding:8px 3px}
+body.is-ilm-chat-route .ilm-history-turn-content .ilm-assistant-message{width:100%!important;margin:0!important}
+body.is-ilm-chat-route .ilm-history-no-answer{font:400 12px/1.5 system-ui,sans-serif;color:var(--ilm-secondary-text)}
