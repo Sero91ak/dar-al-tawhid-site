@@ -99,21 +99,37 @@ jobs:
           echo "DAR_VOICE_PROVIDER=unavailable" >> "$GITHUB_ENV"
           echo "::warning::Kein CI-Voice-Provider konfiguriert. Sprach-Normalisierung wird geprüft; Audio-Neurendering wird übersprungen."
 
-      - name: Install audio tools
+      - name: Install audio tools (resilient; no apt-update network block)
         if: env.DAR_VOICE_PROVIDER_AVAILABLE == '1'
-        timeout-minutes: 3
+        timeout-minutes: 7
         run: |
           set -euo pipefail
-          if command -v ffmpeg >/dev/null 2>&1 && command -v ffprobe >/dev/null 2>&1; then
-            echo "ffmpeg/ffprobe already available; skipping apt."
+          if command -v ffmpeg >/dev/null 2>&1; then
+            echo "ffmpeg already available."
             ffmpeg -version 2>/dev/null | sed -n '1p'
             exit 0
           fi
+          # Ubuntu package indexes may be cached. Do NOT make a stalled
+          # apt-get update a blocker for the 900-question voice queue.
           export DEBIAN_FRONTEND=noninteractive
-          timeout 90s sudo apt-get             -o Acquire::Retries=2             -o Acquire::http::Timeout=20             -o Acquire::https::Timeout=20             -o DPkg::Lock::Timeout=30             update -qq
-          timeout 90s sudo apt-get             -o Acquire::Retries=2             -o Acquire::http::Timeout=20             -o Acquire::https::Timeout=20             -o DPkg::Lock::Timeout=30             install -y ffmpeg >/dev/null
-          ffmpeg -version 2>/dev/null | sed -n '1p'
-          ffprobe -version 2>/dev/null | sed -n '1p'
+          if timeout 45s sudo apt-get -o Acquire::Retries=1 -o DPkg::Lock::Timeout=15 install -y ffmpeg >/dev/null 2>&1; then
+            ffmpeg -version 2>/dev/null | sed -n '1p'
+            exit 0
+          fi
+          echo "::warning::apt unavailable; using pinned prebuilt FFmpeg via Python wheel."
+          python3 -m pip install -q --disable-pip-version-check --target "$RUNNER_TEMP/dar-audio-python" imageio-ffmpeg==0.6.0
+          mkdir -p "$HOME/.local/bin"
+          PYTHONPATH="$RUNNER_TEMP/dar-audio-python" python3 - <<'PY'
+          import imageio_ffmpeg, pathlib, os
+          target=pathlib.Path.home()/".local/bin/ffmpeg"
+          if target.exists() or target.is_symlink():
+              target.unlink()
+          target.symlink_to(imageio_ffmpeg.get_ffmpeg_exe())
+          os.chmod(imageio_ffmpeg.get_ffmpeg_exe(),0o755)
+          print("Pinned FFmpeg:",target.resolve())
+          PY
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          "$HOME/.local/bin/ffmpeg" -version 2>/dev/null | sed -n '1p'
 
       - name: Validate Kids speech normalization
         run: python3 kids/tools/voice_text.py --self-test
@@ -249,11 +265,22 @@ jobs:
               return norm(question+" "+choices)
 
           def duration(path):
-              out=subprocess.check_output([
-                  "ffprobe","-v","error","-show_entries","format=duration",
-                  "-of","default=nw=1:nk=1",str(path)
-              ],text=True).strip()
-              return float(out)
+              import shutil
+              if shutil.which("ffprobe"):
+                  out=subprocess.check_output([
+                      "ffprobe","-v","error","-show_entries","format=duration",
+                      "-of","default=nw=1:nk=1",str(path)
+                  ],text=True).strip()
+                  return float(out)
+              # Static FFmpeg wheels do not bundle ffprobe. Its duration
+              # metadata is available in the ffmpeg input header.
+              probe=subprocess.run(["ffmpeg","-hide_banner","-i",str(path)],
+                                  stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
+              match=re.search(r"Duration:\s*(\d+):(\d+):(\d+(?:\.\d+)?)",probe.stderr)
+              if not match:
+                  raise RuntimeError("Cannot read real media duration: "+str(path))
+              hours,minutes,seconds=match.groups()
+              return int(hours)*3600+int(minutes)*60+float(seconds)
 
           def load_manifest(path):
               if not path.exists():
