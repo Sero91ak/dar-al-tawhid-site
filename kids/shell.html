@@ -5402,7 +5402,8 @@ function isYesNoAnswers(answers){
 }
 function spokenChoices(q){
   return (q.answers||[]).map(function(a,i){
-    return "Antwort "+(i+1)+": "+a.label+".";
+    var label=String((a||{}).label||"").replace(/\s+/g," ").trim();
+    return "Antwort "+(i+1)+": "+label+(/[.!?؟]$/.test(label)?"":".");
   }).join(" ");
 }
 function quizPrompt(q){
