@@ -39,6 +39,31 @@ stage.innerHTML=
   '</div><button class="kids-salah-open-day" id="kidsSalahOpenDay" type="button">Alle Gebetszeiten ansehen <span aria-hidden="true">›</span></button>'+
   '<p class="kids-salah-status" id="kidsSalahStatus">Gebetszeiten passend zu deinem Ort.</p>';
 HERO.insertAdjacentElement("afterend",stage);
+
+/* Adobe static plate stays local; Runway ambient motion is also local after import.
+   Low-power and reduced-motion users see the static high-contrast stage instead. */
+if(!window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches && !navigator.connection?.saveData){
+ const motion=document.createElement("video");
+ motion.className="kids-salah-motion";motion.muted=true;motion.loop=true;motion.playsInline=true;
+ motion.autoplay=true;motion.preload="none";motion.controls=false;
+ motion.setAttribute("playsinline","");motion.setAttribute("muted","");motion.setAttribute("aria-hidden","true");
+ motion.poster="/kids/assets/kids-salah-v1262/cinematic-still.jpg";
+ motion.onerror=()=>{motion.remove();};
+ stage.insertBefore(motion,stage.firstChild);
+ const startMotion=()=>{
+  if(!motion.isConnected||document.hidden)return;
+  if(!motion.src)motion.src="/kids/assets/kids-salah-v1262/cinematic-motion.mp4";
+  const p=motion.play();if(p&&typeof p.catch==="function")p.catch(()=>{});
+ };
+ const stopMotion=()=>{try{motion.pause();}catch(_){}};
+ if("IntersectionObserver" in window){
+  const observer=new IntersectionObserver(rows=>{
+   if(rows[0]?.isIntersecting)startMotion();else stopMotion();
+  },{threshold:.05});observer.observe(stage);
+ }else{startMotion();}
+ document.addEventListener("visibilitychange",()=>{if(document.hidden)stopMotion();else if(stage.getBoundingClientRect().bottom>0)startMotion();});
+}
+
 const $=sel=>stage.querySelector(sel);
 const city=$("#kidsSalahCity"),prayerName=$("#kidsSalahName"),clock=$("#kidsSalahClock");
 const nextText=$("#kidsSalahNextText"),countdown=$("#kidsSalahCountdown");
