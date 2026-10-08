@@ -35,16 +35,20 @@ Status: **isolated prototype** (2026-10-08). The live app on main remains untouc
 - [x] Responsive dedicated Majlis dialogue, dark blue/gold restrained glow
 - [x] Text question send + 12 fixed, sourced topic patterns and honest out-of-scope fallback
 - [x] Profile age bucket read; short-form variant for ages 4–5
+- [x] Boy/girl local profile drives affectionate Bruder/Schwester welcome and signed gender-specific answer text
 - [x] Small knowledge-game step every third question
 - [x] Mic capture (explicit start/stop, 15 s maximum) with iOS MIME-sensitive upload
 - [x] No local permanent chat history and no browser synthesized voice substitute
 - [x] Short signed parent-code *pilot* session, origin checks, no public credentials
 - [ ] True per-family authenticated guardians, revocable consent
-- [ ] Child-safe retrieval-based response service + Arabic/Fiqh specialist evaluation
+- [x] Deterministic, age-gated retrieval over 120 app-approved Duʿāʾ, 900 approved quiz explanations, 20 manually sourced topics and Quran reference indexes; no free-form religious generation
+- [ ] Independent scholarly review of the 900 quiz items, multi-school Fiqh questions and Arabic pronunication before broad child-facing rollout
 - [x] Opt-in-only protected STT/TTS routes implemented (both disabled by default)
 - [ ] Verify hard 15-second recording duration on server and German/Arabic STT
 - [ ] Confirm owner-voice identity and mixed-language quality on physical devices
 - [x] Signed answer-id playback tied to active cookie session; arbitrary text cannot be synthesized
+- [x] Direct Duʿāʾ reading, canonical German and Arabic V4 assets, slow clips and word-by-word audio with no new synthesis
+- [x] Qāriʾ recitation of validated numeric Qurʾān references, selected sourced concepts, and clearly labelled Qurʾān-Duʿāʾ excerpts
 - [ ] Tested word-level German/Arabic vocabulary and source metadata
 - [ ] iOS Safari/PWA and tablet tests, keyboard/screenreader/back-swipe tests
 - [ ] Production security, privacy, QA, rate limits and deploy
@@ -68,3 +72,14 @@ CI file: `.github/workflows/kids-majlis-check.yml` triggers `node scripts/verify
 
 ## Kids approved topics extension
 Eight additional short source-linked explanations have been aligned to the six existing `kids/data/deen-lessons.json` headings and verified Kids hadith examples: Īmān, Allah's Names, ʿIbādah, Adab, Āḫirah, neighbor rights, Qiblah, and Niyyah. This is still a small *editorial answer bank*, not an AI that can safely answer all open-ended Fiqh questions. All references require final source-by-source review before public launch.
+
+## Source hierarchy, epistemic restraint and user experience (October 2026)
+- Sources can include Qurʾān (direct verse reference), reliably graded Sunnah, Ṣaḥābah and Tābiʿīn reports, Salaf, and later qualified scholarly works. **Do not** treat a later commentary as Qurʾānic text or attribute a statement to an early authority without a precise verified reference; disagreements must be labelled rather than concealed. The current corpus consists of the reviewed Kids data; it **does not** yet represent a scholarly verified survey of the later schools or every salafī narration.
+- The retrieval engine is strictly extractive: source-bearing, approved child-oriented answer snippets only. High-confidence matches produce a short explanation and original source; unsupported / disputed questions produce **„Allāhu aʿlam – Allah weiß es am besten“** and an adult handoff. In particular, the service does **not** pretend to know that Qurʾān and all prior scholars are silent on a question: it only says the **available verified Kids corpus** has no decisive source.
+- The public proof-of-concept is capable of safe client-side (no question upload) selection of precise 120 Duʿāʾ metadata and numbered Qurʾān verses. Other 900 quiz explanations require the parent-authenticated server search. The public proof-of-concept does **not** synthesize arbitrary spoken child answers or transmit recorded children's speech.
+- The new index `kids/data/majlis-knowledge-v1.json` is derived from `kids/data/dua-kids.json`, `kids/data/quiz-kids.json` and the existing `assets/dar-quran-audio-pack.js` recitation offsets: 120 verified Dua records, 900 published and app-approved quiz records and 114 Sūrah āyah counts. It references only existing same-origin Master Fuṣḥā/German/slow/word audio paths. **The 900 approval markers are inherited project statuses, not a claim of fresh independent scholarly audit.**
+- A read/hear/slow/word-by-word choice is attached to the selected Duʿāʾ in the chat. Quran recitation uses the existing `ar.alafasy` qāriʾ pack, never a TTS reading falsely passed off as a Qurʾān recitation. For verses sourced only as a Duʿāʾ phrase, display that phrase labelled *excerpt*, not a fabricated full verse.
+- The audio-generating API does not speak data sent by the client; it resolves a short-lived signed answer reference to its canonical approved text. The selected boy/girl gender is included only for correct phrasing and signed along with the answer reference, not used to grant authorization.
+- For Qurʾān full-text search outside curated excerpts, add a carefully verified full Arabic/German verse corpus with ayah IDs and recitation alignment **before** representing the search as complete. For nuanced early/late scholar opinions and contested Fiqh, require source granularity (author, Arabic quotation, book, volume/page, grade and provenance), human audit and clear limits before considering model-generated conversational rewrites.
+- Age buckets prevent direct answers from material not approved for that entire bucket; individual registered child ages require a separately verified parent account. Personal data and child distress are screened out locally, with a same-process trusted adult handoff.
+- No claim of fully conversational real-time AI, final Fuṣḥā quality, deploy completion or all-child-data compliance is authorized by this experimental branch.
