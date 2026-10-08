@@ -1,0 +1,48 @@
+{
+  "baseline_model": "mein_gebet_junge_v74_sculpt_internal.glb",
+  "candidate_model": "mein_gebet_junge_v75_geometry_qa_only.glb",
+  "views": {
+    "front": {
+      "baseline": 0.8813,
+      "candidate": 0.88704,
+      "delta": 0.00574,
+      "head_delta": 0.0,
+      "not_worse": true
+    },
+    "three_quarter_uncalibrated": {
+      "baseline": 0.82724,
+      "candidate": 0.82635,
+      "delta": -0.00089,
+      "head_delta": 0.0,
+      "not_worse": false
+    },
+    "right_side": {
+      "baseline": 0.87148,
+      "candidate": 0.87148,
+      "delta": 0.0,
+      "head_delta": 0.0,
+      "not_worse": true
+    },
+    "back": {
+      "baseline": 0.87897,
+      "candidate": 0.88171,
+      "delta": 0.00274,
+      "head_delta": 0.0,
+      "not_worse": true
+    },
+    "left_side": {
+      "baseline": 0.86462,
+      "candidate": 0.86462,
+      "delta": 0.0,
+      "head_delta": 0.0,
+      "not_worse": true
+    }
+  },
+  "regressions": [
+    "three_quarter_uncalibrated"
+  ],
+  "strict_five_view_no_regression": false,
+  "all_five_90pct_shape_gate": false,
+  "production_approved": false,
+  "note": "No-regression is necessary but never sufficient for original-character/pose/iPad approval."
+}
