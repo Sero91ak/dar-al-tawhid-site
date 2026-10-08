@@ -89,6 +89,7 @@ dayPage.innerHTML=
  '<p class="kids-salah-day-notice">Die Gebetszeiten werden für deinen Ort und die ausgewählte Berechnungsmethode ermittelt. Bei abweichenden Angaben frage deine Eltern oder die Moschee vor Ort.</p></div>';
 document.body.appendChild(dayPage);
 const dayList=dayPage.querySelector("#kidsSalahDayList");
+let lastRenderedDaySignature="";
 const dayCity=dayPage.querySelector("#kidsSalahDayCity");
 const dayBack=dayPage.querySelector("#kidsSalahDayBack");
 $("#kidsSalahOpenDay").addEventListener("click",()=>{
@@ -110,11 +111,14 @@ document.addEventListener("keydown",e=>{
 function renderDay(){
  if(dayPage.hidden)return;
  dayCity.textContent=place?.name||"Gebetsort einstellen";
- if(!place){dayList.innerHTML='<p>Bitte wähle zuerst deinen Gebetsort.</p>';return;}
+ if(!place){if(lastRenderedDaySignature!=="missing"){dayList.innerHTML='<p>Bitte wähle zuerst deinen Gebetsort.</p>';lastRenderedDaySignature="missing";}return;}
  let date;try{date=dateInZone(new Date(),place.tz);}catch(_){return;}
  const today=days[date];
  const all=[...entries(yesterday(date),days[yesterday(date)]),...entries(date,today),...entries(tomorrow(date),days[tomorrow(date)])];
  const now=Date.now(),previous=all.filter(i=>i.ts<=now).pop(),next=all.find(i=>i.ts>now);
+ const sig=[date,placeKey(place),ORDER.map(key=>today?.times?.[key]?.time||"--:--").join(","),previous?.key,previous?.date,next?.key,next?.date].join("|");
+ if(lastRenderedDaySignature===sig)return;
+ lastRenderedDaySignature=sig;
  dayList.innerHTML=ORDER.map(key=>{
   const time=today?.times?.[key]?.time||"--:--";
   const current=previous?.key===key&&previous?.date===date;
