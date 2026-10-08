@@ -65,6 +65,33 @@ jobs:
           OneSignalOSCore 096bb5d068c3e36b0aa5386105045af37f02f9e42ed9c66fd2810e8088dbd1f3
           OneSignalCore 1b7183240403657611f30149e1eecfccf33cfab8a93f8f79316a579e8506d8aa
           ONE_SIGNAL_XCFRAMEWORKS
+      - name: Provide build-only placeholders for absent privacy manifests
+        shell: bash
+        run: |
+          set -euo pipefail
+          # CI-only dependency: the original project references privacy
+          # manifests that are not committed. Never publish these temporary
+          # placeholder values; actual App Store privacy manifests require
+          # their own audit and production files.
+          for dir in \
+            ios/DarAlTawhid/DarAlTawhid \
+            ios/DarAlTawhid/DarAlTawhid/Widgets; do
+            file="$dir/PrivacyInfo.xcprivacy"
+            if [ ! -f "$file" ]; then
+              cat > "$file" <<'PRIVACY_CI_ONLY'
+          <?xml version="1.0" encoding="UTF-8"?>
+          <plist version="1.0">
+          <dict>
+          <key>NSPrivacyTracking</key><false/>
+          <key>NSPrivacyTrackingDomains</key><array/>
+          <key>NSPrivacyCollectedDataTypes</key><array/>
+          <key>NSPrivacyAccessedAPITypes</key><array/>
+          </dict>
+          </plist>
+          PRIVACY_CI_ONLY
+              echo "::warning::$file generated only inside this unsigned CI simulator build. Not valid as an audited production privacy declaration."
+            fi
+          done
       - name: Build native iOS Simulator app (no signing, no deployment)
         timeout-minutes: 12
         shell: bash
