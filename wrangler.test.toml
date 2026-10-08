@@ -29,6 +29,22 @@ binding = "ASSETS"
 [ai]
 binding = "AI"
 
+# Majlis al-ʿIlm Gemini test pilot. Edge-local limit, not a global spending cap.
+# The Gemini bridge fails closed if either binding is missing.
+[[ratelimits]]
+name = "ILM_GEMINI_GLOBAL_LIMIT"
+namespace_id = "921301"
+[ratelimits.simple]
+limit = 10
+period = 60
+
+[[ratelimits]]
+name = "ILM_GEMINI_USER_LIMIT"
+namespace_id = "921302"
+[ratelimits.simple]
+limit = 3
+period = 60
+
 [vars]
 PREVIEW_GATE_USER = "Dawud"
 PREVIEW_GATE_PASS = "Malik20"
