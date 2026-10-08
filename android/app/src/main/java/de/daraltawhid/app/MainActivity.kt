@@ -120,7 +120,13 @@ class MainActivity : AppCompatActivity() {
                     window.DAR_ANDROID_ALTERNATE_ICONS_AVAILABLE=true;
                     window.DAR_IOS_NATIVE_APP=false;
                     window.DAR_OFFICIAL_IOS_APP=false;
-                    document.documentElement.classList.add("dar-android-native-app","is-android");
+                    if(document.documentElement){
+                      document.documentElement.classList.add("dar-android-native-app","is-android");
+                    }else{
+                      document.addEventListener("DOMContentLoaded",function(){
+                        if(document.documentElement)document.documentElement.classList.add("dar-android-native-app","is-android");
+                      },{once:true});
+                    }
                     try {
                       if(!window.webkit) window.webkit={};
                       if(!window.webkit.messageHandlers) window.webkit.messageHandlers={};
