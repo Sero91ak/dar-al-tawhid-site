@@ -58,6 +58,35 @@
     .foot span{display:block;font:12px Inter,Arial,sans-serif;color:var(--mute);margin-top:8px;letter-spacing:0}
     @media(max-width:700px){.cards{grid-template-columns:1fr}.card{min-height:0}.top{margin-bottom:28px}.lede{margin-bottom:26px}.card .grow{min-height:6px}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+    .release-info{margin:12px 0 4px;padding:14px 15px;border-radius:13px;background:rgba(228,196,120,.075);border:1px solid rgba(226,196,126,.3)}
+    .release-info[hidden]{display:none}
+    .release-version{margin:0 0 6px;color:var(--gold);font-weight:750;font-size:15px;letter-spacing:.02em}
+    .release-dates,.release-meta{margin:5px 0;color:var(--mute);font-size:12px;line-height:1.5;font-variant-numeric:tabular-nums}
+    .release-sha-details{margin-top:11px;color:var(--mute);font-size:12px}
+    .release-sha-details summary{cursor:pointer;color:#f3dca5}
+    .release-sha-details code{display:block;margin-top:9px;color:#e8dbc6;font-size:11px;overflow-wrap:anywhere;user-select:all}
+    .release-source{display:inline-block;margin-top:11px;font-size:12px;color:var(--gold);text-underline-offset:3px}
+    .install-section{margin:40px 0 0;padding-top:26px;border-top:1px solid var(--line)}
+    .install-section h2{margin:0 0 16px;font-size:clamp(26px,4vw,35px);font-weight:500}
+    .install-sub{margin:0 0 20px;color:var(--mute);font-size:14px;line-height:1.7}
+    .install-panels{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .install-panel{border-radius:20px;border:1px solid var(--line);background:linear-gradient(155deg,#142f32e6,#08181fd9);padding:19px}
+    .install-panel h3{font-family:Georgia,"Times New Roman",serif;font-size:22px;font-weight:500;margin:0 0 13px}
+    .install-panel ol{padding-left:23px;margin:0;display:grid;gap:10px;color:#e0e3d9;font-size:13px;line-height:1.65}
+    .install-panel li::marker{color:var(--gold);font-weight:700}
+    .install-panel .subnote{margin:16px 0 0;padding:12px 13px;background:#f7d58b0d;border-left:2px solid #dec17e;color:var(--mute);font-size:12px;line-height:1.7}
+    .install-panel a,.security-intro a{color:#f0d18e;text-underline-offset:3px}
+    .help-toggle{display:block;padding:13px 15px;margin:20px 0 0;border-radius:15px;border:1px solid var(--line);background:#061b20d9;color:var(--mute)}
+    .help-toggle summary{font-size:14px;color:#f6dfab;font-weight:700;cursor:pointer}
+    .help-toggle p{line-height:1.7;font-size:13px}
+    .security-intro{max-width:800px;font-size:13px;line-height:1.85;color:var(--mute)}
+    .security-intro strong{color:#f6e4bd}
+    .security-bits{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin-top:18px}
+    .security-bit{border:1px solid var(--line);background:rgba(12,35,42,.7);border-radius:14px;padding:15px}
+    .security-bit strong{display:block;margin-bottom:6px;font-size:13px;color:var(--gold)}
+    .security-bit p{margin:0;font-size:12px;line-height:1.6;color:var(--mute)}
+    @media(max-width:700px){.install-panels{grid-template-columns:1fr}.security-bits{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -85,6 +114,13 @@
           <div class="state" id="status-adult" role="status"><span class="dot" aria-hidden="true"></span><span>Veröffentlichung in Vorbereitung</span></div>
           <a class="btn" id="apk-adult" hidden rel="noopener" href="#"><span>APK herunterladen</span><span aria-hidden="true">↓</span></a>
           <div class="placeholder" id="pending-adult">Download folgt nach Signatur- und Gerätetest</div>
+          <div class="release-info" id="release-info-adult" hidden aria-live="polite">
+            <p class="release-version" id="release-version-adult">Version wird ermittelt</p>
+            <p class="release-dates" id="release-dates-adult"></p>
+            <p class="release-meta" id="release-meta-adult"></p>
+            <details class="release-sha-details"><summary>SHA-256-Prüfsumme der APK anzeigen</summary><code id="release-sha-adult"></code></details>
+            <a class="release-source" id="release-source-adult" href="#" target="_blank" rel="noopener noreferrer" hidden>Offiziellen GitHub-Release ansehen ↗</a>
+          </div>
         </article>
 
         <article class="card" id="tv-card">
@@ -99,107 +135,69 @@
           <div class="state" id="status-tv" role="status"><span class="dot" aria-hidden="true"></span><span>TV-Version in Vorbereitung</span></div>
           <a class="btn" id="apk-tv" hidden rel="noopener" href="#"><span>TV-APK herunterladen</span><span aria-hidden="true">↓</span></a>
           <div class="placeholder" id="pending-tv">Download folgt nach Signatur- und TV-Test</div>
+          <div class="release-info" id="release-info-tv" hidden aria-live="polite">
+            <p class="release-version" id="release-version-tv">Version wird ermittelt</p>
+            <p class="release-dates" id="release-dates-tv"></p>
+            <p class="release-meta" id="release-meta-tv"></p>
+            <details class="release-sha-details"><summary>SHA-256-Prüfsumme der APK anzeigen</summary><code id="release-sha-tv"></code></details>
+            <a class="release-source" id="release-source-tv" href="#" target="_blank" rel="noopener noreferrer" hidden>Offiziellen GitHub-Release ansehen ↗</a>
+          </div>
         </article>
       </section>
 
-      <section class="guide" id="tv-installation" aria-labelledby="tv-setup-title">
-        <p class="eyebrow">AUF DEM FERNSEHER INSTALLIEREN</p>
-        <h2 id="tv-setup-title">So kommt DAR AL TAWḤĪD auf deinen TV.</h2>
-        <p class="guide-intro">Du benötigst einen Fernseher mit Android TV oder Google TV beziehungsweise eine passende Android-TV-Box. Verwende dafür ausschließlich die <strong>TV-APK</strong>, nicht die Smartphone-Version. Die Download-Schaltfläche wird erst nach unserer Release-Prüfung freigeschaltet.</p>
-        <div class="guide-grid">
-          <div class="guide-step">
-            <span class="number">WEG 01 · DIREKT AM TV</span>
-            <h3>TV-Browser</h3>
-            <p>Öffne im Fernseher einen Browser und rufe <code>dar-al-tawhid.de/download/</code> auf. Wähle den TV-Download. Öffne die APK über Downloads oder einen Dateimanager und bestätige die Installation. Falls erforderlich, erlaube diesem Browser oder Dateimanager „Unbekannte Apps installieren“.</p>
-          </div>
-          <div class="guide-step">
-            <span class="number">WEG 02 · ÜBER DAS HANDY</span>
-            <h3>Per WLAN übertragen</h3>
-            <p>Lade die TV-APK auf dein Android-Smartphone. Installiere eine geeignete Dateiübertragungs-App auf Handy und Android TV, verbinde beide mit demselben WLAN, sende die Datei und öffne sie auf dem Fernseher. Erlaube die Installation nur der verwendeten, vertrauenswürdigen Quelle.</p>
-          </div>
-          <div class="guide-step">
-            <span class="number">WEG 03 · MIT TV-BOX</span>
-            <h3>Per USB-Stick</h3>
-            <p>Lade die TV-APK am Computer herunter und kopiere sie auf einen USB-Stick. Stecke ihn an einen unterstützten Android-Fernseher oder eine Android-TV-Box. Öffne die APK im Dateimanager und bestätige die Installation. Ohne USB-Anschluss nutze stattdessen den WLAN-Weg.</p>
-          </div>
+      <section class="install-section" id="installation" aria-labelledby="installation-heading">
+        <p class="eyebrow">SCHRITT FÜR SCHRITT</p>
+        <h2 id="installation-heading">Einfach und bewusst installieren.</h2>
+        <p class="install-sub">Du benötigst normalerweise <strong>keinen Entwicklermodus</strong>. Android fragt beim Installieren einer APK außerhalb des Play Stores nach einer einmaligen Berechtigung für den verwendeten Browser oder Dateimanager. Je nach Gerät können die Menüs anders heißen.</p>
+        <div class="install-panels">
+          <section class="install-panel" aria-labelledby="phone-install">
+            <h3 id="phone-install">Android-Smartphone</h3>
+            <ol>
+              <li>Öffne <strong>dar-al-tawhid.de/download/</strong> in Chrome oder deinem Browser und tippe bei <strong>Android · Smartphone</strong> auf „APK herunterladen“.</li>
+              <li>Öffne die heruntergeladene Datei. Falls Android blockiert: Tippe auf „Einstellungen“ und erlaube <strong>nur diesem Browser oder Dateimanager</strong> die Installation. Alternativer Menüweg: <strong>Einstellungen → Apps → Spezieller App-Zugriff → Unbekannte Apps installieren</strong>.</li>
+              <li>Bestätige die Installation, öffne DAR AL TAWḤĪD und prüfe die Funktionen. Anschließend kannst du die einmalige Installationsberechtigung wieder ausschalten.</li>
+            </ol>
+            <p class="subnote">Für künftige native Updates dieselbe offizielle APK erneut herunterladen und die Installation bestätigen. Die App muss dafür nicht entfernt werden, solange Paketname und Signatur übereinstimmen.</p>
+          </section>
+          <section class="install-panel" id="tv-installation" aria-labelledby="tv-install">
+            <h3 id="tv-install">Android TV · Google TV</h3>
+            <ol>
+              <li>Lade ausdrücklich die <strong>Android-TV-APK</strong> herunter: direkt über einen unterstützten TV-Browser oder am Smartphone/Computer.</li>
+              <li>Übertrage die TV-APK bei Bedarf per <strong>USB-Stick</strong> oder mit einer vertrauenswürdigen Dateiübertragungs-App im selben WLAN auf den Fernseher bzw. die Android-TV-Box.</li>
+              <li>Öffne die Datei über den TV-Dateimanager. Wenn erforderlich: <strong>Einstellungen → Apps → Sicherheit &amp; Einschränkungen → Unbekannte Apps installieren</strong> (Hersteller und Version können abweichen). Erlaube nur dem verwendeten Dateimanager die Installation.</li>
+              <li>„Installieren“ bestätigen, anschließend den Zugriff auf unbekannte App-Installationen wieder deaktivieren. Das DAR-AL-TAWḤĪD-Symbol erscheint im TV-App-Menü.</li>
+            </ol>
+            <p class="subnote">Auf manchen TV-Systemen ist die Option zunächst verborgen. Dafür kann optional der Entwicklermodus nötig sein; siehe Hilfe darunter. Auf Geräten mit Tizen, webOS oder Apple tvOS funktionieren Android-APKs nicht.</p>
+          </section>
         </div>
-        <p class="tiny-note">Hinweis: Menünamen und Installationsrechte unterscheiden sich je nach Hersteller und Android-Version. Manche Geräte besitzen keinen Browser oder blockieren externe APKs. Samsung Tizen, LG webOS und Apple TV können Android-APKs nicht direkt installieren. Google Play Protect sollte aktiviert bleiben. Aktualisierungen per Website-APK benötigen in der Regel erneut eine Bestätigung am Gerät.</p>
+        <details class="help-toggle">
+          <summary>Google TV: „Unbekannte Apps installieren“ fehlt? So findest du die Option.</summary>
+          <p>Prüfe zuerst unter <strong>Einstellungen → Apps → Sicherheit &amp; Einschränkungen</strong> oder in der Suchfunktion der Einstellungen. Nur wenn die Option auf deinem Modell verborgen ist, kann <strong>Einstellungen → System → Info → Android TV OS-Build</strong> und siebenmaliges Bestätigen mit OK die Entwickleroptionen sichtbar machen. Kehre danach zu den App-Installationsrechten zurück. Das ist geräteabhängig und erlaubt nicht auf jedem Fernseher externe APKs.</p>
+          <p>Wenn Android ausdrücklich eine zusätzliche Entwicklerverifizierung, eine Sicherheitswartezeit oder eine Sicherheitswarnung verlangt, befolge die offiziellen Hinweise des Geräts. <strong>Deaktiviere Google Play Protect nicht</strong> und umgehe keine Warnung über eine möglicherweise schädliche Datei.</p>
+        </details>
+      </section>
+
+      <section class="install-section" id="sicherheit" aria-labelledby="security-heading">
+        <p class="eyebrow">TRANSPARENZ &amp; VERTRAUEN</p>
+        <h2 id="security-heading">Woran du die offizielle APK erkennst.</h2>
+        <p class="security-intro">Wir stellen die installierbaren Dateien über <strong>offizielle, digital signierte GitHub-Releases</strong> von DAR AL TAWḤĪD bereit. Die Buttons werden nur bei einem freigegebenen Release aktiv. Jede Version zeigt die <strong>Versionsnummer</strong>, das <strong>Erstellungs-/Veröffentlichungsdatum</strong> und die <strong>SHA-256-Prüfsumme</strong>. Eine Signatur und Prüfsumme belegen Herkunft beziehungsweise Unverändertheit – sie sind <strong>keine Garantie für Virenfreiheit</strong> und ersetzen keine Geräteschutzprüfung. Lade die Datei nie von fremden Weiterleitungsseiten herunter.</p>
+        <div class="security-bits">
+          <div class="security-bit"><strong>Originalquelle</strong><p>dar-al-tawhid.de führt ausschließlich zu überprüften APK-Dateien aus dem offiziellen GitHub-Projekt.</p></div>
+          <div class="security-bit"><strong>Digitale Signatur</strong><p>Die Release-APKs wurden im Build signiert. Android kontrolliert bei späteren Updates die Zertifikatsübereinstimmung.</p></div>
+          <div class="security-bit"><strong>Play Protect</strong><p>Google Play Protect sollte eingeschaltet bleiben. Stoppe die Installation, wenn dein Gerät eine konkrete Schadsoftware-Warnung meldet.</p></div>
+        </div>
+        <p class="security-intro">Mehr Informationen: <a href="https://developer.android.com/distribute/marketing-tools/alternative-distribution?hl=de" target="_blank" rel="noopener noreferrer">Android-Dokumentation zum Installieren außerhalb des Play Stores ↗</a> und <a href="https://support.google.com/android/answer/2812853?hl=de" target="_blank" rel="noopener noreferrer">Google Play Protect ↗</a>.</p>
       </section>
 
       <div class="note">
-        <p><strong>Installation:</strong> Lade die APK auf deinem kompatiblen Android-Gerät herunter und erlaube die Installation dieser Datei aus der verwendeten App bzw. dem Dateimanager. Bei Fernsehern wird möglicherweise ein USB-Stick oder ein Übertragungsprogramm benötigt. Android TV und Handy-Android verwenden unterschiedliche App-Versionen.</p>
-        <p><strong>Updates:</strong> Änderungen an den geladenen Website-Inhalten erscheinen direkt in der App. Neue native Funktionen erfordern gegebenenfalls eine neue APK. Die Signatur wird bei jeder Veröffentlichung geprüft. Heruntergeladene APKs dürfen nur aus unserer offiziellen Domain bezogen werden.</p>
+        <p><strong>Update-Hinweis:</strong> Web-Inhalte erscheinen nach der jeweiligen Veröffentlichung automatisch. Eine neue native Funktion erfordert eine neu signierte APK, die hier mit ihrer aktuellen Versionsnummer und ihrem Datum angeboten wird.</p>
+        <p><strong>Verfügbarkeit:</strong> Noch nicht freigegebene Testdateien oder interne Kids-Builds werden auf dieser öffentlichen Seite nicht angeboten.</p>
       </div>
     </main>
 
     <footer class="foot">DAR AL TAWḤĪD<span>dar-al-tawhid.de · by Serhat Abu Malik</span></footer>
   </div>
 
-  <script>
-    (() => {
-      "use strict";
-      const supported = new Set(["adult", "tv"]);
-      const sha = /^[a-f0-9]{64}$/i;
-      const filePattern = /^\/download\/files\/dar-al-tawhid-(android|tv)-v[0-9][0-9a-z.-]*\.apk$/;
-      const statusLabel = { adult: "Offizielle Android-APK verfügbar", tv: "Offizielle Android-TV-APK verfügbar" };
-      const statuses = { adult: "Veröffentlichung in Vorbereitung", tv: "TV-Version in Vorbereitung" };
-
-      function setAvailability(name, item, verified) {
-        const button = document.getElementById("apk-" + name);
-        const pending = document.getElementById("pending-" + name);
-        const state = document.getElementById("status-" + name);
-        if (!button || !state || !pending) return;
-        const span = state.querySelector("span:last-child");
-        if (!verified) {
-          button.hidden = true;
-          button.removeAttribute("href");
-          pending.hidden = false;
-          state.classList.remove("ready");
-          if (span) span.textContent = statuses[name];
-          return;
-        }
-        button.href = item.downloadPath;
-        button.download = item.downloadPath.split("/").pop();
-        button.hidden = false;
-        pending.hidden = true;
-        state.classList.add("ready");
-        if (span) span.textContent = statusLabel[name] + " · " + item.versionName;
-      }
-
-      async function refresh() {
-        try {
-          const response = await fetch("/download/releases.json", { cache: "no-store", credentials: "omit" });
-          if (!response.ok) return;
-          const doc = await response.json();
-          if (!doc || doc.schemaVersion !== 1 || !doc.apps) return;
-          for (const name of supported) {
-            const item = doc.apps[name];
-            let verified = Boolean(item &&
-              item.public === true && item.status === "published" &&
-              Number.isInteger(item.versionCode) && item.versionCode > 0 &&
-              typeof item.versionName === "string" && item.versionName.length > 0 &&
-              typeof item.downloadPath === "string" &&
-              filePattern.test(item.downloadPath) &&
-              (name === "adult" ? item.downloadPath.includes("-android-") : item.downloadPath.includes("-tv-")) &&
-              typeof item.sha256 === "string" && sha.test(item.sha256) &&
-              typeof item.signingCertificateSha256 === "string" &&
-              /^[A-Fa-f0-9:]{64,95}$/.test(item.signingCertificateSha256)
-            );
-            if (verified) {
-              try {
-                const head = await fetch(item.downloadPath, { method: "HEAD", cache: "no-store", credentials: "omit" });
-                verified = head.ok && Number(head.headers.get("content-length") || "0") > 0;
-              } catch (_) { verified = false; }
-            }
-            setAvailability(name, item, verified);
-          }
-        } catch (_) {
-          // Keep the download button hidden if the release registry is unavailable.
-        }
-      }
-      refresh();
-    })();
-  </script>
 <script src="/download/official-release-links.js" defer></script>
 </body>
 </html>
