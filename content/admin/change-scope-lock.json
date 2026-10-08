@@ -7134,6 +7134,20 @@
         ".github/workflows/chat-admin-publisher.yml",
         "content/admin/chat-publish-requests/"
       ]
+    },
+    {
+      "id": "quellen-library-link-recovery-2026-10-08",
+      "approvedBy": "user-explicit-quellenbibliothek-links-broken-report",
+      "reason": "Source library /quellen Q links cannot be accessed; repair only the public registry fallback, source-library page, and narrow source-only deploy pathway without changing article content, Kids, Test, Apple TV or any OneSignal/push code.",
+      "paths": [
+        "quellen/",
+        "scripts/sync-quellen-registry.cjs",
+        "scripts/cf-pages-build.js",
+        "wrangler.toml",
+        ".github/workflows/cloudflare-pages-deploy.yml",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-30T23:59:00.000Z"
     }
   ],
   "enabled": true
