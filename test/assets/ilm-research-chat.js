@@ -530,6 +530,7 @@
           if (!data || !data.ok || typeof data.answer !== "string") return;
           var answer = String(data.answer).replace(/<[^>]*>/g, "").replace(/\r\n/g, "\n").trim().slice(0,1650);
           if (answer.length < 35 || /\[(?:[4-9]|\d{2,})\]/.test(answer)) return;
+          if (reply._ilmCoreAdab && !/(?:adab|anstand|benehmen|charakter|verhalten|umgang|akhl[aā]q)/i.test(answer)) return;
           reply._ilmGeneratedText = answer;
           reply._ilmProvider = data.provider === "gemini" ? "Gemini" : data.provider === "workers_ai" ? "Cloudflare Workers AI" : "";
           reply._ilmCitationCount = rows.length;
@@ -580,7 +581,7 @@
         return '<p>' + enriched + '</p>';
       }).join("") + '</div>';
       if (reply._ilmProvider && reply._ilmGeneratedText) {
-        html += '<p class="ilm-science-provider">Mit ' + esc(reply._ilmProvider) + ' formuliert · nach Quellenprüfung</p>';
+        html += '<p class="ilm-science-provider">Mit ' + esc(reply._ilmProvider) + ' formuliert · anhand bereitgestellter Fundstellen</p>';
       }
       if (reply._ilmBasicTawhid || reply._ilmTawhidFollowup) html += ilmScriptureLinks(!!reply._ilmTawhidFollowup);
       if (reply._ilmBasicIman) html += ilmImanScriptureLinks();
