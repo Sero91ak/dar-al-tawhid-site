@@ -7271,6 +7271,23 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "android-tv-user-supplied-official-art-2026-10-08",
+      "at": "2026-10-08T21:10:00+02:00",
+      "approvedBy": "user-explicit-tv-icon-and-banner-from-upload-2026-10-08",
+      "reason": "Offizielles vom Nutzer hochgeladenes Android-TV-Installationslogo vollständig im TV-APK-Manifest, als Launcher-Banner und Icon, sowie Download-Werbung einbinden. Nur TV und Marketing-Staging; Smartphone-App, Kids und Push bleiben unangetastet.",
+      "paths": [
+        "android/tv/src/main/AndroidManifest.xml",
+        "android/tv/src/main/res/drawable-nodpi/",
+        "android/tv/branding/",
+        "download/icons/",
+        "download/index.html",
+        "download/validate-release.cjs",
+        "links/index.html",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true

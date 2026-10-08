@@ -27,6 +27,12 @@ assert.ok(links.includes('href="/download/"'), "Website links page must offer of
 assert.ok(!html.includes("apk-kids"), "Kids must not have a public download button");
 assert.ok(!html.includes("de.daraltawhid.kids"), "Kids app must not be advertised publicly here");
 assert.equal(manifest.apps.kids.public, false, "Kids is private-testing only");
+assert.ok(links.includes('src="/download/icons/android-tv-icon.jpg"'), "Website must show official TV icon");
+assert.ok(html.includes('src="/download/icons/android-tv-official.jpg"'), "TV download card must show supplied official banner");
+for (const art of ["download/icons/android-tv-official.jpg", "download/icons/android-tv-icon.jpg", "android/tv/src/main/res/drawable-nodpi/dar_tv_banner.jpg", "android/tv/src/main/res/drawable-nodpi/dar_tv_icon.jpg"]) {
+  const data = fs.readFileSync(path.join(root, art));
+  assert.ok(data.length > 10_000 && data[0] === 0xff && data[1] === 0xd8, "Official artwork missing or not JPEG: " + art);
+}
 assert.equal(manifest.apps.kids.status, "private-testing");
 
 let published = 0;
