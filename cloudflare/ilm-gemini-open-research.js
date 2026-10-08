@@ -153,6 +153,17 @@ export async function researchIlmWithGemini(request,env,question,mode) {
   for(const page of pages) if(!seen.has(page.reference)) {seen.add(page.reference);unique.push(page);}
   const sources = unique.slice(0,3);
   if (!sources.length) return {ok:false,reason:"no_approved_source_text"};
+  const linkedSources = sources.map(s=>({
+    id:s.id,work:s.work,reference:s.reference,url:s.reference,
+    excerpt:s.statement,verification_status:"verified",authenticity:s.authenticity,
+    note:s.notes
+  }));
+  // For an explicit proof/source request, deliver the original pages directly.
+  // Do not spend a second Gemini completion on paraphrasing sources the user asked to inspect.
+  if (mode === "sources") return {
+    ok:true,answer:"Hier sind abgerufene Originalquellen mit ihrem Fundstellenstatus. Die Echtheit einzelner Überlieferungswege muss gesondert geprüft werden. [1]",
+    sources:linkedSources,provider:"gemini",researchMode:"verified_primary_pages",searched:true
+  };
 
   // Second Gemini call is strictly bounded to pages actually read on approved
   // domains. A grounded search summary is NOT used as the final answer.
@@ -166,9 +177,5 @@ export async function researchIlmWithGemini(request,env,question,mode) {
   if (/kein(?:en)? ausreichenden? (?:beleg|nachweis)|keine ausreichend|nicht belegbar|nicht beantworten/i.test(composed.answer)) {
     return {ok:false,reason:"insufficient_original_evidence"};
   }
-  return {ok:true,answer:composed.answer,sources:sources.map(s=>({
-    id:s.id,work:s.work,reference:s.reference,url:s.reference,
-    excerpt:s.statement,verification_status:"verified",authenticity:s.authenticity,
-    note:s.notes
-  })),provider:"gemini",researchMode:"verified_primary_pages",searched:true};
+  return {ok:true,answer:composed.answer,sources:linkedSources,provider:"gemini",researchMode:"verified_primary_pages",searched:true};
 }
