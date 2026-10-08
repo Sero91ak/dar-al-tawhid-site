@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="13dp"
+    android:orientation="vertical"
+    android:background="@drawable/widget_prayer_bg">
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="DAR AL TAWḤĪD · GEBETSZEITEN" android:textSize="12sp"
+        android:textColor="#EAD091" android:textStyle="bold" />
+    <TextView android:id="@+id/widget_location"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="Standort in der App freigeben" android:textSize="11sp"
+        android:textColor="#D9D7C8" android:layout_marginBottom="8dp"
+        android:singleLine="true" android:ellipsize="end" />
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="horizontal" android:gravity="center_vertical">
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+            android:text="FAǦR" android:textSize="10sp" android:textColor="#C4D2CB" />
+        <TextView android:id="@+id/widget_fajr" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:text="—" android:textSize="12sp"
+            android:textStyle="bold" android:textColor="#FFFFFF" />
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="horizontal" android:gravity="center_vertical">
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+            android:text="ẒUHR" android:textSize="10sp" android:textColor="#C4D2CB" />
+        <TextView android:id="@+id/widget_dhuhr" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:text="—" android:textSize="12sp"
+            android:textStyle="bold" android:textColor="#FFFFFF" />
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="horizontal" android:gravity="center_vertical">
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+            android:text="ʿAṢR" android:textSize="10sp" android:textColor="#C4D2CB" />
+        <TextView android:id="@+id/widget_asr" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:text="—" android:textSize="12sp"
+            android:textStyle="bold" android:textColor="#FFFFFF" />
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="horizontal" android:gravity="center_vertical">
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+            android:text="MAĠRIB" android:textSize="10sp" android:textColor="#C4D2CB" />
+        <TextView android:id="@+id/widget_maghrib" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:text="—" android:textSize="12sp"
+            android:textStyle="bold" android:textColor="#FFFFFF" />
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="horizontal" android:gravity="center_vertical">
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+            android:text="ʿIŠĀʾ" android:textSize="10sp" android:textColor="#C4D2CB" />
+        <TextView android:id="@+id/widget_isha" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:text="—" android:textSize="12sp"
+            android:textStyle="bold" android:textColor="#FFFFFF" />
+    </LinearLayout>
+</LinearLayout>

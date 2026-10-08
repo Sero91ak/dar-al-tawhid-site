@@ -288,6 +288,13 @@ class MainActivity : AppCompatActivity() {
         fun getAppIcon(): String = DarAppIcons.current(this@MainActivity)
 
         @JavascriptInterface
+        fun saveWidgetLocation(latitude: Double, longitude: Double, city: String) {
+            DarPrayerWidgetProvider.saveLocation(
+                this@MainActivity.applicationContext, latitude, longitude, city
+            )
+        }
+
+        @JavascriptInterface
         fun openSystemSettings(kind: String) {
             runOnUiThread {
                 val which = kind.trim().lowercase()
