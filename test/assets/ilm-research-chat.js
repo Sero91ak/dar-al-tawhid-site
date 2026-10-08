@@ -273,8 +273,8 @@
       }).then(function (r) { return r.ok ? r.json() : null; })
         .then(function (data) {
           if (!data || !data.ok || typeof data.answer !== "string") return;
-          var answer = plain(data.answer).slice(0,1650);
-          if (answer.length < 35) return;
+          var answer = String(data.answer).replace(/<[^>]*>/g, "").replace(/\r\n/g, "\n").trim().slice(0,1650);
+          if (answer.length < 35 || /\[(?:[4-9]|\d{2,})\]/.test(answer)) return;
           reply._ilmGeneratedText = answer;
           var node = document.querySelector('[data-ilm-answer-id="' + requestId + '"] .ilm-answer-text');
           if (node && document.body.classList.contains("is-ilm-chat-route")) {
