@@ -73,4 +73,44 @@ const noProof = shortScientificAnswer({
 assert.match(noProof, /keine hinreichend passenden/);
 assert.doesNotMatch(noProof, /Die geprüfte Fundstelle berichtet/);
 
+
+/* Regression: doctrinal answer must remain available when Gemini is exhausted. */
+const originalSynthesis = Function(
+  section("function ilmNormalize(text) {", "function ilmScriptureLinks(extended)") +
+  section("/* MAJLIS VERIFIED CORE V1350", "if (typeof window.searchIlmKnowledge") +
+  ";return {rankKnowledgeSources, ilmVerifiedCoreSources};"
+)();
+const divorceQuestion="Was ist Urteil über eine Frau die Scheidung fordert";
+const divorceSources = originalSynthesis.rankKnowledgeSources(divorceQuestion,originalSynthesis.ilmVerifiedCoreSources);
+assert.equal(divorceSources.length,2,"Both sides of the divorce and Ḫulʿ ruling must be documented");
+assert.ok(divorceSources.some(s=>/5273/.test(s.reference)),"Missing Buḫārī 5273");
+assert.ok(divorceSources.some(s=>/1187/.test(s.reference)),"Missing at-Tirmiḏī 1187");
+const documented=divorceSources.map(s=>({
+  verification_status:"verified",deep_link:s.url,
+  statement:s.excerpt,work:s.work,reference:s.reference
+}));
+const offlineReply=shortScientificAnswer({_ilmComposing:true,evidences:documented});
+assert.match(offlineReply,/Ḫulʿ/);
+assert.match(offlineReply,/ohne anerkannten/);
+assert.match(offlineReply,/5273/);
+assert.match(offlineReply,/1187/);
+assert.doesNotMatch(offlineReply,/keine ausreichend/);
+
+/* Regression: canonical Arabic Qur'an reader reference, never unsourced Ḥadīṯ. */
+const toEvidence = Function("deepLink","hostOk","location","clip",
+  section("function toEvidence(item, origin) {","function followUps(question, reply)")+
+  ";return toEvidence;"
+)(item => item.url || "", () => true, {origin:"https://dar-al-tawhid.de"},
+  (value,max)=>String(value||"").slice(0,max));
+const aya={
+  id:"quran-2-229",kind:"quran",
+  reference:"al-Baqarah 2:229",work:"al-Baqarah",
+  excerpt:"Wenn beide befürchten, die Grenzen Allahs nicht einzuhalten.",
+  body:"فَلَا جُنَاحَ عَلَيْهِمَا فِيمَا افْتَدَتْ بِهِ",
+  route:{view:"quran-surah",value:"2/229"}
+};
+assert.equal(toEvidence(aya,"internal").verification_status,"verified");
+assert.equal(toEvidence({...aya,id:"quran-2-999"},"internal").verification_status,"unverified");
+assert.equal(toEvidence({...aya,kind:"sunnah"},"internal").verification_status,"unverified");
+
 console.log("PASS: Majlis topic gate, off-topic exclusion, valid proof, topic switch and immediate verified-evidence answer");
