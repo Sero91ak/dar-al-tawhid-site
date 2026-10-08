@@ -7,12 +7,16 @@
   "maxBatchQuestions": 12,
   "voiceProfileId": "serhat-owner-voice-2026",
   "voiceName": "Serhat Abu Malik – Master",
-  "modelId": "eleven_v4",
+  "modelId": "eleven_flash_v2_5",
   "mixedLanguagePolicy": "defer-arabic-script-and-honorific-ligatures-for-Fusha-segment-qa",
-  "germanPolicy": "existing-owner-master-v4-with-reviewed-pronunciation-dictionary",
-  "arabicPolicy": "Fusha V4 dedicated Arabic segments; no German TTS for Arabic phrases",
+  "germanPolicy": "Serhat Master + ElevenLabs Flash v2.5 for NEW German quiz texts; previous approved V4 takes remain untouched; local verified master-pronunciation preprocessor; pronunciation QA before bulk production",
+  "arabicPolicy": "Serhat Master + ElevenLabs V4 only for native Arabic/Fuṣḥā passages; mixed-language scripts and honorifics need separate QA",
   "retentionPolicy": "never-delete-previously-published-quiz-audio-in-staged-rollout",
   "validation": "question-exact-text, answer-order, correct-feedback-and-explanation, playable-audio-asset",
   "pilotAgeBand": "9-10",
-  "batchNotes": "Altersgruppe 9–10 Jahre; Fragen 41–47 mit längeren Antwortmöglichkeiten als abschließender Pilot der drei Sprechprofile."
+  "batchNotes": "Altersgruppe 9–10 Jahre; Fragen 41–47 mit längeren Antwortmöglichkeiten als abschließender Pilot der drei Sprechprofile.",
+  "germanModelId": "eleven_flash_v2_5",
+  "arabicModelId": "eleven_v4",
+  "costPolicy": "API Flash v2.5 for new German speech; cache/reuse approved recordings; never force rerender when model changes",
+  "creditSaver": true
 }
