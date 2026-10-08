@@ -54,6 +54,16 @@ const quran=knowledge.findKnowledge("Kann ich Qurʾān 2:255 hören?", "9–10",
 assert.equal(quran.id,"verse:2:255");
 assert.ok(quran.media?.recitationUrl?.includes("/262.mp3"));
 assert.equal(knowledge.findKnowledge("Qurʾān 2:999", "9–10", "girl"),null);
+const tawhidAyah=knowledge.findKnowledge("Wo steht im Qurʾān, dass Allah einer ist?", "6–8", "boy");
+assert.equal(tawhidAyah?.id,"verse:112:1");
+const researchAyah=knowledge.findKnowledge("In welcher Sure steht Rabbi zidni?", "6–8", "girl");
+assert.equal(researchAyah?.id,"verse:20:114");
+assert.ok(researchAyah?.media?.excerpt?.arabic);
+assert.ok(researchAyah?.media?.excerpt?.meaning);
+assert.match(researchAyah.media.recitationUrl,/^\/quran-audio\/ar\.alafasy\//);
+assert.equal(knowledge.findKnowledgeById(tawhidAyah.id,"6–8","boy").text,tawhidAyah.text);
+assert.ok(knowledge.majlisKnowledgeTest.findQuiz("Ein anderes unbekanntes Thema", "6–8", "boy")===null);
+
 assert.equal(knowledge.findKnowledge("Warum gibt es Sterne auf dem Mars?", "6–8", "boy"),null);
 assert.ok(knowledge.allahAlam("girl").text.includes("Allāhu aʿlam"));
 assert.equal(knowledge.findKnowledge("Wie kann ich dieses Recht beurteilen?", "4–5", "girl"),null);
