@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "feature": "dar-al-tawhid-kids-mein-gebet",
+  "subject": "original_boy",
+  "status": "original-character-identity-not-yet-transferred-to-3d",
+  "originalAsset": "../assets/figur-junge-original.png",
+  "qiyamPoseReference": "../assets/qiyam-brusthoehe-user-approved-ref-v1.jpg",
+  "acceptedSevenPosture2D": "../assets/gebetspositionen-sieben-schritte-user-approved-review.jpg",
+  "masterTurnaround": "Provided in original user references: front / 3-quarter / strict side / back; keep actual user supplied images for sculpt model.",
+  "traits": {
+    "face": "soft round child face; original eye/brow/nose/lips layout, expressive large natural brown eyes; not pink flat cheeks or huge protruding cylinders",
+    "hair": "wavy layered deep brown hair, fine locks around cap, keep original hairline",
+    "kufi": "WHITE perforated dome with distinctive ORANGE/GOLD geometric embroidered band; actual fine repeating arches; no polygon blobs on cap",
+    "thobe": "warm white ankle-length thobe, stand-up collar, narrow short button placket, smooth drape with natural cloth folds",
+    "shoes": "original small white shoes, smooth non-angular soles",
+    "body": "child proportions, same absolute bone lengths throughout every pose, no stretched legs, feet size unchanged",
+    "handPose": "right hand folded atop left on upper chest between garment first two top buttons",
+    "takbir": "open palms lifted shoulder-high, not to ears",
+    "ruku": "bent at hips with straight horizontal table-like back, hands on knees",
+    "sujud": "forehead touches floor firmly, nose lightly; lips mouth chin all CLEAR of floor"
+  },
+  "forbid": [
+    "previous low-poly engineering blockout as production character",
+    "new unapproved replacement face",
+    "different kufi/cap pattern",
+    "elongated legs or scaling transforms",
+    "mouth touching floor in either Sujud",
+    "copying adult male specific pose to girl unreviewed"
+  ],
+  "accept": {
+    "hasActualOriginalIdentity": false,
+    "artistQualityRenderReviewed": false,
+    "glbMeshAndSkinReviewPassed": false,
+    "rigPoseReviewPassed": false,
+    "signedOffByUserForFinal3D": false,
+    "productionReady": false
+  },
+  "requiredReviewAngles": [
+    "front",
+    "left_90_side",
+    "right_90_side",
+    "three_quarter_45",
+    "back"
+  ],
+  "comments": "All signoffs must be separately recorded based on actual rendered GLB. The user-approved 2D originals do not approve the preliminary low-poly GLB."
+}
