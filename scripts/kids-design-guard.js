@@ -159,6 +159,35 @@ function runKidsDesignGuard() {
     }
   }
 
+  // KIDS_GLOBAL_DETAIL_DOCK_V1247: one shared dock for detail and reading views.
+  if (!doc.includes("KIDS_GLOBAL_DETAIL_DOCK_V1247")) {
+    failed += fail("Kids: globaler Detail-Kopf muss dokumentiert bleiben");
+  }
+  const detailDockCss = path.join(ROOT, "kids/global-detail-dock-v1247.css");
+  const detailDockJs = path.join(ROOT, "kids/global-detail-dock-v1247.js");
+  if (!fs.existsSync(detailDockCss) || !fs.existsSync(detailDockJs)) {
+    failed += fail("Kids: CSS/JS der globalen Detail-Navigation fehlen");
+  } else {
+    const dockJs = fs.readFileSync(detailDockJs, "utf8");
+    const dockCss = fs.readFileSync(detailDockCss, "utf8");
+    for (const id of ["psModal","msModal","syModal","dlModal","ghPlayer","duaHubDetail"]) {
+      if (!dockJs.includes('id:"'+id+'"')) failed += fail("Kids-Detail-Dock: Seite fehlt: "+id);
+    }
+    for (const marker of ["kids-detail-appbar","kids-detail-dock-back","safe-area-inset-top"]) {
+      if (!dockCss.includes(marker)) failed += fail("Kids-Detail-Dock CSS: "+marker+" fehlt");
+    }
+    for (const file of ["kids/index.html","kids/start.html","kids/shell.html"]) {
+      const page = fs.readFileSync(path.join(ROOT, file), "utf8");
+      for (const asset of ["global-detail-dock-v1247.css?v=1247","global-detail-dock-v1247.js?v=1247"]) {
+        if (!page.includes(asset)) failed += fail(file+": globaler Detail-Kopf fehlt: "+asset);
+      }
+    }
+    const sw = fs.readFileSync(path.join(ROOT, "kids/sw.js"), "utf8");
+    if (!sw.includes("dar-al-tawhid-kids-v1247") || !sw.includes("global-detail-dock-v1247.css?v=1247") || !sw.includes("global-detail-dock-v1247.js?v=1247")) {
+      failed += fail("Kids: SW muss V1247 und CSS/JS für Offline-Nutzung vorhalten");
+    }
+  }
+
   if (!failed) ok("Kids Design (Edge-to-Edge, V1199-Referenzhero, Adobe-Cinzel-Wortmarke, Glass-Nav, Whole-Card-Tap, keine Pre-Click-Dauer, keine Emojis, PNG-Icons)");
   return failed;
 }
