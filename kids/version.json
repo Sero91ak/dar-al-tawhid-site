@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v151-parents-gender-hero1254",
+  "buildId": "kids-shell-v151-parents-profile-hero1254",
   "label": "KIDS · V1.08.72",
-  "releasedAt": "2026-10-08T15:00:00+02:00",
-  "note": "KIDS V1.08.72 · Eltern-Hero: Originalfiguren des Jungen- und Mädchenprofils, jeweils eigenständiges dauerhaftes Hero-Motiv mit ruhigem Lesebereich; responsive Kopf-/Oberkörper-Fokussierung. Service-Worker-Cache V1254.",
+  "releasedAt": "2026-10-08T13:12:17.068Z",
+  "note": "KIDS V1.08.72 · Eltern-Hero: zwei dauerhaft lokal gespeicherte hochwertige 3D-Figurenbilder; Jungenprofil Nachtblau/Gold, Mädchenprofil Rosé/Nachtblau; Wechsel automatisch über bestehende Profilwahl; Kopf und Oberkörper sichtbar, Beine nicht nötig; Offline-Cache V1254.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -1220,9 +1220,17 @@
     "duaReaderLayout": "v1253-fullwidth-with-gold-divider",
     "duaHubCssVersion": "1253",
     "duaHubJsVersion": "1253",
-    "globalSourceTextOnly": "v1251"
+    "globalSourceTextOnly": "v1251",
+    "parentsHeroProfileImages": {
+      "boy": "/kids/assets/parents-hero/boy-profile-v1254.jpg",
+      "girl": "/kids/assets/parents-hero/girl-profile-v1254.jpg",
+      "mode": "existing-app-data-gender",
+      "portrait": "head-and-upper-body",
+      "textSafe": true,
+      "localOfflineAssets": true
+    }
   },
-  "updatedAt": "2026-10-08T14:23:00+02:00",
+  "updatedAt": "2026-10-08T13:12:17.068Z",
   "deployTrigger": "kids-dua-divider-polish-v1253",
   "globalDetailDock": {
     "version": "v1253",

@@ -1,5 +1,5 @@
 const CACHE_NAME="dar-al-tawhid-kids-v1254";
-const KIDS_BUILD_ID="kids-shell-v151-parents-gender-hero1254";
+const KIDS_BUILD_ID="kids-shell-v151-parents-profile-hero1254";
 const DUA_AUDIO_RUNTIME="1244";
 // QUIZ_HOME_RESTORE_V1225: refresh installed PWAs with the restored Quiz entry.
 const CORE_PRECACHE=[
@@ -14,8 +14,8 @@ const CORE_PRECACHE=[
   "/kids/assets/kids-art/section-stories-v1097.png?v=1097-real3",
   "/kids/assets/kids-art/section-quran-v1090.jpg?v=1090",
   "/kids/assets/kids-art/section-parents-v1097.png?v=1097-real3",
-  "/kids/assets/kids-art/parents-hero-boy-v1254.jpg",
-  "/kids/assets/kids-art/parents-hero-girl-v1254.jpg",
+  "/kids/assets/parents-hero/boy-profile-v1254.jpg",
+  "/kids/assets/parents-hero/girl-profile-v1254.jpg",
   "/kids/assets/kids-art/home-journey-v11-clean2.jpg",
   "/kids/assets/kids-art/knowledge-courtyard-v11.jpg",
   "/kids/assets/kids-art/dua-home-v11.jpg",

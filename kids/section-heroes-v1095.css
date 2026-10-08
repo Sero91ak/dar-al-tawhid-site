@@ -535,43 +535,36 @@ body .app #view-parents.view > .page-head.page-head{
   background-size:cover!important;background-position:center 50%!important;background-repeat:no-repeat!important;
 }
 
-/* KIDS_PARENTS_GENDER_HERO_V1254
-   Nur die Eltern-Bildbuehne. Originalgetreue, generierte Jungen-/Maedchenmotive
-   werden anhand des bestehenden Profilmerkmals gewechselt.
-   3 Hintergrundebenen statt hartem Cover-Crop: Kopf und Oberkoerper bleiben sichtbar. */
-html[data-view="parents"] body .app #view-parents.view > .page-head.page-head{
+
+/* KIDS_PARENTS_PROFILE_HERO_V1254 — targeted only at the parents header.
+   Exact character images baked into local JPEGs; dynamic avatar/profile switch
+   reuses the existing .app[data-gender] state without any new listeners. */
+html body .app:not([data-gender="girl"]) #view-parents.view > .page-head.page-head{
+  background-color:#092339!important;
+  background-image:
+    linear-gradient(90deg,rgba(3,17,31,.76) 0%,rgba(3,17,31,.46) 43%,rgba(3,17,31,.06) 76%),
+    linear-gradient(180deg,rgba(3,18,29,.02) 0%,rgba(3,18,29,.05) 43%,rgba(4,24,38,.20) 66%,#0c2636 100%),
+    url("/kids/assets/parents-hero/boy-profile-v1254.jpg")!important;
+  background-size:cover,cover,cover!important;
+  background-position:center,center,63% 14%!important;
   background-repeat:no-repeat!important;
-  background-size:100% 100%,100% 100%,auto 100%!important;
-  background-position:center,center,right center!important;
 }
-html[data-view="parents"] body .app:not([data-gender="girl"]) #view-parents.view > .page-head.page-head{
-  background-color:#092942!important;
+html body .app[data-gender="girl"] #view-parents.view > .page-head.page-head{
+  background-color:#20182e!important;
   background-image:
-    linear-gradient(90deg,rgba(5,20,36,.96) 0%,rgba(5,20,36,.85) 32%,rgba(5,20,36,.59) 51%,rgba(5,20,36,.10) 78%,transparent 100%),
-    linear-gradient(180deg,rgba(5,22,37,.03) 0%,rgba(5,22,37,.04) 49%,rgba(6,26,41,.36) 74%,#0c2636 100%),
-    url("/kids/assets/kids-art/parents-hero-boy-v1254.jpg")!important;
-}
-html[data-view="parents"] body .app[data-gender="girl"] #view-parents.view > .page-head.page-head{
-  background-color:#21182e!important;
-  background-image:
-    linear-gradient(90deg,rgba(25,17,39,.97) 0%,rgba(25,17,39,.86) 32%,rgba(25,17,39,.57) 51%,rgba(25,17,39,.08) 79%,transparent 100%),
-    linear-gradient(180deg,rgba(12,18,32,.02) 0%,rgba(12,18,32,.05) 50%,rgba(10,27,40,.40) 75%,#0c2636 100%),
-    url("/kids/assets/kids-art/parents-hero-girl-v1254.jpg")!important;
-}
-html[data-view="parents"] body .app #view-parents.view > .page-head.page-head .kicker,
-html[data-view="parents"] body .app #view-parents.view > .page-head.page-head h2,
-html[data-view="parents"] body .app #view-parents.view > .page-head.page-head p{
-  position:relative!important;
-  z-index:2!important;
-}
-html[data-view="parents"] body .app #view-parents.view > .page-head.page-head p{
-  width:min(62vw,390px)!important;
-  max-width:min(62vw,390px)!important;
-  text-wrap:pretty!important;
+    linear-gradient(90deg,rgba(19,17,38,.81) 0%,rgba(19,17,38,.45) 44%,rgba(19,17,38,.03) 77%),
+    linear-gradient(180deg,rgba(8,15,30,.01) 0%,rgba(8,15,30,.04) 43%,rgba(7,22,35,.24) 66%,#0c2636 100%),
+    url("/kids/assets/parents-hero/girl-profile-v1254.jpg")!important;
+  background-size:cover,cover,cover!important;
+  background-position:center,center,64% 12%!important;
+  background-repeat:no-repeat!important;
 }
 @media(min-width:700px){
-  html[data-view="parents"] body .app #view-parents.view > .page-head.page-head p{
-    width:min(43vw,480px)!important;
-    max-width:min(43vw,480px)!important;
+  html body .app:not([data-gender="girl"]) #view-parents.view > .page-head.page-head{
+    background-position:center,center,65% 7%!important;
+  }
+  html body .app[data-gender="girl"] #view-parents.view > .page-head.page-head{
+    background-position:center,center,66% 6%!important;
   }
 }
+/* KIDS_PARENTS_PROFILE_HERO_V1254_END */
