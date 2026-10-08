@@ -21,7 +21,7 @@ help:"Das klingt wichtig. Bitte sprich jetzt mit einem Erwachsenen, dem du vertr
 restricted:"Das ist eine schwierige Frage. Für eine sichere Antwort sprich bitte mit deinen Eltern oder einer vertrauenswürdigen erwachsenen Fachperson."};
 const json=(x,status=200,headers={})=>new Response(JSON.stringify(x),{status,headers:{"Content-Type":"application/json; charset=utf-8","Cache-Control":"no-store","X-Content-Type-Options":"nosniff","Referrer-Policy":"no-referrer",...headers}});
 function configured(env){return env.KIDS_MAJLIS_PARENT_AUTH_ENABLED==="true"&&String(env.KIDS_MAJLIS_PARENT_PASSCODE||"").length>=24&&String(env.KIDS_MAJLIS_SIGNING_KEY||"").length>=32&&!!env.KIDS_MAJLIS_LIMITER?.limit&&!!env.KIDS_MAJLIS_VOICE_LIMITER?.limit}
-function validOrigin(req){return req.headers.get("Origin")==="https://dar-al-tawhid.de"&&req.headers.get("X-DAR-Majlis-Original-Host")==="dar-al-tawhid.de"&&req.headers.get("Sec-Fetch-Site")!=="cross-site"}
+function validOrigin(req){const origin=req.headers.get("Origin")||"";const sameSite=req.headers.get("Sec-Fetch-Site")||"";return req.headers.get("X-DAR-Majlis-Original-Host")==="dar-al-tawhid.de"&&sameSite!=="cross-site"&&(origin==="https://dar-al-tawhid.de"||(req.method==="GET"&&!origin&&sameSite==="same-origin"))}
 const b64=s=>{let out="";for(const v of enc.encode(s))out+=String.fromCharCode(v);return btoa(out).replace(/=/g,"").replace(/\+/g,"-").replace(/\//g,"_")};
 const un64=s=>{s=s.replace(/-/g,"+").replace(/_/g,"/");const raw=atob(s.padEnd(Math.ceil(s.length/4)*4,"="));return new TextDecoder().decode(Uint8Array.from(raw,c=>c.charCodeAt(0)))};
 async function key(env){return crypto.subtle.importKey("raw",enc.encode(env.KIDS_MAJLIS_SIGNING_KEY),{name:"HMAC",hash:"SHA-256"},false,["sign","verify"])}
@@ -77,7 +77,7 @@ async function handleSTT(req,env){
 }
 async function handleSpeech(req,env,user){
  if(req.method!=="POST")return json({ok:false,error:"method_not_allowed"},405);
- if(env.KIDS_MAJLIS_TTS_ENABLED!=="true"||!isVoiceConfigured(env))return json({ok:false,error:"owner_voice_not_enabled"},503);
+ if(env.KIDS_MAJLIS_TTS_ENABLED!=="true"||!String(env.ELEVENLABS_VOICE_ID||"").trim()||String(env.ELEVENLABS_MODEL_ID||"")!=="eleven_v4"||!String(env.ELEVENLABS_PRONUNCIATION_DICTIONARY_ID||"").trim()||!isVoiceConfigured(env))return json({ok:false,error:"owner_voice_not_enabled"},503);
  if(!(await throttle(req,env,true)))return json({ok:false,error:"voice_rate_limited"},429);
  const payload=await body(req,3000),reference=await verify(payload?.answerId,env,"answer");
  if(!reference||reference.nonce!==user.nonce||!["4–5","6–8","9–10"].includes(reference.age))return json({ok:false,error:"invalid_answer_reference"},403);
