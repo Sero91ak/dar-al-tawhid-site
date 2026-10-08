@@ -497,7 +497,7 @@
         '<button type="button" class="ilm-primary-reference" data-ilm-discovery-result="1" data-nav="quran-surah" data-value="4/136"><span>an-Nisāʾ 4:136<small>Aufruf zum Glauben</small></span><span aria-hidden="true">↗</span></button></section>';
     }
     function shortScientificAnswer(reply) {
-      if (reply._ilmResearching) return "Ich recherchiere weitere Originalfundstellen zu deiner Frage und prüfe ihre Herkunft, bevor ich antworte.";
+      if (reply._ilmResearching) return reply._ilmResearchProgress || "Ich suche in Qurʾān, Sunnah und zugelassenen Originalquellen nach einer belegten Antwort …";
       if (reply._ilmResearchError) return reply._ilmResearchError;
       var ev = (reply.evidences || []).find(function (e) { return e.verification_status === "verified" && e.statement && e.statement.length > 24; });
       var txt = String(reply.directAnswer || "").trim();
@@ -562,9 +562,25 @@
       var id = "ilm-research-open-" + (++ilmOpenResearchSerial);
       reply._ilmAnswerId = id;
       reply._ilmResearching = true;
+      reply._ilmResearchProgress = "Ich suche nach Quellen in der App und in externen Originalwerken …";
       reply._ilmNoRelevantEvidence = false;
       var ctrl = typeof AbortController !== "undefined" ? new AbortController() : null;
-      var timer = setTimeout(function(){ if(ctrl) ctrl.abort(); },30000);
+      // Server can try Gemini and then OpenAI with independent web search.
+      // Do not abort at 30s while the second provider is still researching.
+      var timer = setTimeout(function(){ if(ctrl) ctrl.abort(); },65000);
+      var started = Date.now();
+      var progress = setInterval(function(){
+        if(!reply._ilmResearching){clearInterval(progress);return;}
+        var elapsed = Date.now()-started;
+        reply._ilmResearchProgress = elapsed < 14000
+          ? "Ich gleiche die Frage mit Quellen und Originaltexten ab …"
+          : elapsed < 30000
+            ? "Die Prüfung dauert etwas länger. Ich suche weiter und vergleiche die Fundstellen …"
+            : elapsed < 48000
+              ? "Vertiefte Recherche: weitere Quellen und Nachweise werden geprüft …"
+              : "Die Recherche läuft weiter. Ich überprüfe, was sich tatsächlich belegen lässt …";
+        repaint();
+      },6000);
       function repaint() {
         var node = document.querySelector('[data-ilm-answer-id="' + id + '"] .ilm-answer-text');
         if(node && document.body.classList.contains("is-ilm-chat-route")) {
@@ -581,11 +597,11 @@
       }).then(function(data){
         if(!data || !data.ok || !Array.isArray(data.sources) || !data.sources.length ||
             typeof data.answer !== "string") {
-          reply._ilmResearchError = data && (data.error === "rate_limited" || data.error === "gemini_quota_exhausted")
-            ? "Die externe Gemini-Recherche ist wegen eines Anbieter- oder Anfragelimits derzeit nicht verfügbar. Das bedeutet nicht, dass keine authentischen Quellen existieren. Ich werde keine unbelegte Antwort erfinden."
-            : data && /(?:research_unavailable|search_provider|gemini_not_configured|guard_failed|guard_not_configured|provider_)/.test(String(data.error || ""))
-              ? "Die externe Quellenrecherche ist technisch momentan nicht verfügbar. Ich kann daher keine zusätzliche Fundstelle bestätigen. Wa-Allāhu aʿlam."
-              : "Ich konnte zu dieser Frage noch keine ausreichend überprüfbare Originalfundstelle abrufen. Daher gebe ich keine unbelegte Antwort. Wa-Allāhu aʿlam.";
+          reply._ilmResearchError = data && (data.error === "research_capacity_limited" || data.error === "rate_limited" || data.error === "gemini_quota_exhausted")
+            ? "Die beiden Recherchewege sind momentan durch ein Kontingent- oder Anfragelimit eingeschränkt. Das ist eine technische Grenze, keine Aussage darüber, ob islamische Beweise vorhanden sind. Unsere geprüften internen Quellen bleiben verfügbar."
+            : data && (data.error === "research_providers_unavailable" || /(?:research_unavailable|search_provider|gemini_not_configured|provider_)/.test(String(data.error || "")))
+              ? "Die externe Quellenrecherche konnte technisch nicht abgeschlossen werden. Das bedeutet nicht, dass zu diesem Thema keine Belege existieren. Interne Quellen werden weiterhin verwendet."
+              : "Nach vertiefter Recherche konnte ich noch keine ausreichend überprüfbare Originalfundstelle für diese konkrete Aussage sichern. Ich gebe deshalb keine ungesicherte Zuschreibung aus. Wa-Allāhu aʿlam.";
           return;
         }
         var evidence = data.sources.map(function(source){
@@ -613,6 +629,8 @@
         reply._ilmResearchError = "Die externe Recherche ist derzeit nicht erreichbar. Ich bleibe bei nachprüfbaren Fundstellen. Wa-Allāhu aʿlam.";
       }).finally(function(){
         clearTimeout(timer);
+        clearInterval(progress);
+        reply._ilmResearchProgress = "";
         reply._ilmResearching = false;
         reply._ilmNoRelevantEvidence = !(reply.evidences||[]).some(function(e){return e.verification_status === "verified";});
         repaint();
