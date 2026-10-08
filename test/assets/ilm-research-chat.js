@@ -408,8 +408,10 @@
         return '<div class="ilm-science-prose"><p>' + em(conversational) + "</p></div>";
       }
       var isProof = proofIntent(reply._ilmQuestion) || !!reply._ilmSourceOnly;
+      var anyProof = (reply.evidences || []).some(function(e){return e && e.statement && e.statement.length >= 18;});
       var answer = isProof
-        ? "Hier sind die nächstliegenden überlieferten Aussagen mit ihren Fundstellen. Bitte beachte den Prüfstatus jeder Quelle."
+        ? (anyProof ? "Hier sind die nächstliegenden überlieferten Aussagen mit ihren Fundstellen. Bitte beachte den Prüfstatus jeder Quelle."
+          : "Zu dieser Frage liegen aktuell keine ausreichend belegten Originalstellen vor. Ich möchte keine Beweise erfinden.")
         : (reply._ilmGeneratedText || shortScientificAnswer(reply));
       if (reply._ilmIsDiscovery) answer = reply._ilmDiscovery.length
         ? "Ich habe dazu passende Inhalte in der App gefunden. Öffne einen Treffer, um den vollständigen Beitrag oder die Qurʾān-Stelle direkt zu lesen."
