@@ -2271,3 +2271,25 @@ body.is-ilm-chat-route .ilm-menu-close-button::after{content:"×";font-size:22px
 @media(prefers-reduced-motion:reduce){
   body.is-ilm-chat-route .ilm-menu-popover .ilm-menu-compact-action{transition:none!important}
 }
+
+/* Inline citations remain small, keyboard accessible and open exact source cards. */
+body.is-ilm-chat-route .ilm-citation-ref{
+  appearance:none;
+  display:inline;
+  min-width:0;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:var(--ilm-accent)!important;
+  font:650 .77em/1 inherit!important;
+  padding:0 2px!important;
+  margin:0 1px!important;
+  border-radius:3px!important;
+  vertical-align:baseline;
+  cursor:pointer;
+}
+body.is-ilm-chat-route .ilm-citation-ref:hover,
+body.is-ilm-chat-route .ilm-citation-ref:focus-visible{
+  text-decoration:underline!important;
+  outline-offset:2px;
+}
