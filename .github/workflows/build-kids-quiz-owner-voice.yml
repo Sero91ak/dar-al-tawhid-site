@@ -223,6 +223,8 @@ jobs:
                   value=re.sub(r"\s+"," ",value).strip()
                   # Only isolated learning words lose a contextual initial shadda.
                   # Full Duʿāʾ phrases keep every authored diacritic intact.
+                  if profile=="quiz_fusha":
+                      value=value.replace("ﷺ","صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ").replace("عليه السلام","عَلَيْهِ السَّلَامُ")
                   if profile=="dua_word":
                       value=strip_initial_context_shadda(value)
                   # Keep the visible/key text untouched; this is hidden synthesis text only.
@@ -276,6 +278,7 @@ jobs:
               return p if p.exists() and p.stat().st_size>1200 else None
 
           lock=threading.Lock()
+          speech_synth_lock=threading.RLock()
 
           def speech_parts(value):
               parts=[]
@@ -305,6 +308,35 @@ jobs:
 
           def synth(text,profile,asset_dir,serial,model_id):
               prepared=prepare_profile_text(text,profile)
+              if model_id==ELEVEN_QUIZ_HYBRID_MODEL:
+                  segments=speech_parts(text)
+                  if len(segments)<2 or not any(lang=="ar" for lang,_ in segments):
+                      raise RuntimeError("Bilingual clip needs German/Arabic fragments")
+                  digest=hashlib.sha1(("hybrid-v1|"+ELEVEN_VOICE+"|"+str(profile)+"|"+prepared).encode("utf-8")).hexdigest()[:16]
+                  target=asset_dir/(digest+".m4a")
+                  if target.exists() and target.stat().st_size>1200:
+                      return text,target,duration(target),prepared
+                  fragments=[]
+                  for lang,segment in segments:
+                      native=(lang=="ar")
+                      segment_profile="quiz_fusha" if native else profile
+                      segment_model=ELEVEN_QUIZ_AR_MODEL if native else ELEVEN_QUIZ_DE_MODEL
+                      segment_progress={"done":0,"total":1}
+                      with speech_synth_lock:
+                          _,fragment,_,_=synth(segment,segment_profile,asset_dir,segment_progress,segment_model)
+                      fragments.append(fragment)
+                  concat_list=pathlib.Path("/tmp")/(digest+"-concat.txt")
+                  concat_list.write_text("".join("file '"+str(p.resolve())+"'\n" for p in fragments),encoding="utf-8")
+                  subprocess.run(["ffmpeg","-hide_banner","-loglevel","error","-y",
+                      "-f","concat","-safe","0","-i",str(concat_list),
+                      "-ac","1","-ar","48000","-c:a","aac","-b:a","48k",
+                      "-movflags","+faststart",str(target)],check=True)
+                  if target.stat().st_size<1200:
+                      raise RuntimeError("Bilingual audio incomplete")
+                  d=duration(target)
+                  if not 0.25<=d<=180:
+                      raise RuntimeError("Bilingual duration implausible")
+                  return text,target,d,prepared
               revision=profile_revision(profile)
               dictionary_fingerprint=(
                   "native-ar-no-dict" if profile in ARABIC_PROFILES else
@@ -315,11 +347,13 @@ jobs:
                   (revision+"|"+str(model_id)+"|"+profile+"|"+dictionary_fingerprint+"|"+prepared).encode("utf-8")
               ).hexdigest()[:16]
               target=asset_dir/(digest+".m4a")
+              if target.exists() and target.stat().st_size>1200:
+                  return text,target,duration(target),prepared
               last=None
               # DĀR Worker currently has a V4 default. Never pretend its output
               # was cost-saving Flash if the direct ElevenLabs API is unavailable.
-              if model_id==ELEVEN_QUIZ_DE_MODEL and not ELEVEN_KEY:
-                  raise RuntimeError("German Flash requires direct ElevenLabs API credentials; refusing unverified V4 Worker fallback")
+              if (model_id==ELEVEN_QUIZ_DE_MODEL or profile=="quiz_fusha") and not ELEVEN_KEY:
+                  raise RuntimeError("Exact Flash/Fusha model requires direct ElevenLabs credentials; refuse unknown Worker model")
               for attempt in range(1,4):
                   if ELEVEN_KEY:
                       if profile=="quiz_4_6":
@@ -370,6 +404,12 @@ jobs:
                               "speed":0.91,
                               "use_speaker_boost":True
                           }
+                      elif profile=="quiz_fusha":
+                          voice_settings={
+                              "stability":0.74,
+                              "similarity_boost":0.92,
+                              "use_speaker_boost":True
+                          }
                       elif profile=="dua_arabic":
                           voice_settings={
                               "stability":0.72,
@@ -396,7 +436,7 @@ jobs:
                               "speed":0.93,
                               "use_speaker_boost":True
                           }
-                      is_arabic_profile=profile in ("dua_arabic","dua_arabic_slow","dua_word")
+                      is_arabic_profile=profile in ARABIC_PROFILES
                       is_flash=model_id==ELEVEN_QUIZ_DE_MODEL
                       if is_flash:
                           voice_settings.pop("style",None)
@@ -453,8 +493,8 @@ jobs:
                           with urllib.request.urlopen(req,timeout=180) as response:
                               data=response.read()
                       except urllib.error.HTTPError as direct_error:
-                          if model_id==ELEVEN_QUIZ_DE_MODEL:
-                              raise RuntimeError("Flash API request failed; refuse fallback to V4 Worker") from direct_error
+                          if model_id==ELEVEN_QUIZ_DE_MODEL or profile=="quiz_fusha":
+                              raise RuntimeError("Language-specific API failed; refuse unknown Worker fallback") from direct_error
                           if ELEVEN_KEY and SECRET and int(getattr(direct_error,"code",0) or 0) in (401,403):
                               print(f"Direct ElevenLabs auth rejected ({direct_error.code}); falling back to DĀR Voice Worker.",flush=True)
                               fallback_body=json.dumps({
