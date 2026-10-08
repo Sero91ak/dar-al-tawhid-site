@@ -1,0 +1,44 @@
+name: Check Q source library
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'quellen/**'
+      - 'q/_registry/shortlinks.json'
+      - 'scripts/sync-quellen-registry.cjs'
+      - '.github/workflows/check-quellen-library.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate Q source-library synchronization and all source pages
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check scripts/sync-quellen-registry.cjs
+          node scripts/sync-quellen-registry.cjs --check
+          node - <<'NODE'
+          const fs=require('fs'),assert=require('node:assert/strict');
+          const html=fs.readFileSync('quellen/index.html','utf8');
+          const publicData=JSON.parse(fs.readFileSync('quellen/shortlinks.json','utf8'));
+          const embedded=html.match(/<script id="qlSourceSnapshot" type="application\/json">([\s\S]*?)<\/script>/);
+          assert.ok(embedded,'Embedded Q fallback missing');
+          const snapshot=JSON.parse(embedded[1]);
+          assert.deepEqual(snapshot.links,publicData.links,'Embedded source list must match public JSON');
+          assert.ok(snapshot.links.length>=37,'Source list unexpectedly incomplete');
+          for(const item of snapshot.links){
+            assert.ok(fs.existsSync('q/'+item.number+'/index.html'),'Missing Q source '+item.number);
+          }
+          assert.match(html,/fetchSourceRegistry\('\/quellen\/shortlinks.json'\)/);
+          assert.match(html,/href="\/q\/\$\{s.q\}\//);
+          console.log('Quellenbibliothek: '+snapshot.links.length+' numbered links, public+embedded copy OK');
+          NODE
