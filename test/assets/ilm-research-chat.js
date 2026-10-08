@@ -216,19 +216,15 @@
         if (reply.status === "unavailable" || reply.status === "insufficient") {
           return "Für diese Frage liegt mir derzeit kein ausreichend gesicherter Beleg vor. Ich möchte dir keine unbelegte religiöse Aussage geben.";
         }
-        // Do not present an unrelated canned summary as an Islamic ruling.
         return txt && !/[„“]/.test(txt) && txt.length <= 480
           ? txt : "Hierzu finde ich noch keine ausreichend eindeutige Textgrundlage. Bitte formuliere die Frage genauer oder verlange eine konkrete Fundstelle.";
       }
-      var quote = readableSentence(ev.statement, 280);
-      var reference = sourceTitle(ev) || "hinterlegte Überlieferung";
-      var lead = "Die passende Fundstelle behandelt deine Frage anhand einer überlieferten Aussage.";
-      if (/\b(benehmen|adab|umgang|verhalten|eltern|respekt)\b/i.test(reply._ilmQuestion || "")) {
-        lead = "Beim Benehmen und Umgang ist entscheidend, was die überlieferten Texte tatsächlich belegen.";
-      } else if (/\b(tawḥīd|tauhid|ʿaqīdah|aqidah|īmān|iman)\b/i.test(reply._ilmQuestion || "")) {
-        lead = "Bei Glaubensfragen muss die Antwort an die nachweisbare Aussage aus Qurʾān, Sunnah oder den frühen Quellen gebunden bleiben.";
+      // A source list is not itself a prose answer. Never duplicate raw post text
+      // merely to make the fallback look complete.
+      if (reply._ilmComposing) {
+        return "Ich ordne die gefundenen Aussagen und formuliere eine kurze Antwort anhand der vorhandenen Quellen.";
       }
-      return lead + "\n\n" + "Aus " + reference + " ergibt sich als zentrale Textstelle: " + quote;
+      return "Passende Fundstellen sind vorhanden, aber ich kann gerade keine ausreichend sichere zusammenhängende Antwort erstellen. Öffne „Belege und Fundstellen“, um die Originalauszüge nachzuprüfen.";
     }
     function sourceDisclosure(reply, openProof) {
       var list = (reply.evidences || []).filter(function (e) { return !!(e.statement || e.deep_link); });
@@ -283,6 +279,12 @@
         }).catch(function () {}).finally(function () {
           clearTimeout(timer);
           reply._ilmComposing = false;
+          if (!reply._ilmGeneratedText) {
+            var node = document.querySelector('[data-ilm-answer-id="' + requestId + '"] .ilm-answer-text');
+            if (node && document.body.classList.contains("is-ilm-chat-route")) {
+              node.innerHTML = window.renderIlmAnswerText(reply);
+            }
+          }
         });
     }
     window.renderIlmAnswerText = function (reply) {
