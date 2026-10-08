@@ -3,6 +3,23 @@ name: Build Kids Quiz + Dua Owner Voice
 
 on:
   workflow_dispatch:
+    inputs:
+      scope:
+        description: "Audioumfang: quiz / dua / full / pause"
+        required: true
+        type: choice
+        options: [quiz, dua, full, pause]
+        default: quiz
+      quiz_start:
+        description: "Erste Quiznummer (1–900, nur fuer Quiz)"
+        required: true
+        type: number
+        default: 1
+      quiz_count:
+        description: "Quizfragen je Durchlauf (maximal 12)"
+        required: true
+        type: number
+        default: 7
   push:
     branches: [main]
     paths:
@@ -26,7 +43,9 @@ jobs:
       ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
       ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
       ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
-      VOICE_BUILD_SCOPE: ${{ contains(github.event.head_commit.message, '[dua-only]') && 'dua' || contains(github.event.head_commit.message, '[quiz-only]') && 'quiz' || 'full' }}
+      VOICE_BUILD_SCOPE: ${{ github.event_name == 'workflow_dispatch' && inputs.scope || contains(github.event.head_commit.message, '[quiz-batch]') && 'quiz' || contains(github.event.head_commit.message, '[voice-pause]') && 'pause' || contains(github.event.head_commit.message, '[dua-only]') && 'dua' || contains(github.event.head_commit.message, '[quiz-only]') && 'quiz' || 'full' }}
+      QUIZ_BATCH_START: ${{ inputs.quiz_start || '1' }}
+      QUIZ_BATCH_COUNT: ${{ inputs.quiz_count || '7' }}
 
     steps:
       - name: Checkout main
@@ -431,7 +450,7 @@ jobs:
                           time.sleep(2*attempt)
               raise RuntimeError(f"Generation failed for {text[:80]!r}: {last}")
 
-          def build_pack(*,texts,manifest_path,asset_dir,profile,pack_id,counts,model_id=None,require_model_match=False,profiles_by_text=None):
+          def build_pack(*,texts,manifest_path,asset_dir,profile,pack_id,counts,model_id=None,require_model_match=False,profiles_by_text=None,preserve_existing=False):
               model_id=model_id or ELEVEN_MODEL
               unique=[]
               seen=set()
@@ -523,9 +542,15 @@ jobs:
                       "qaAt":now
                   }
 
-              for stale in asset_dir.glob("*.m4a"):
-                  if stale.name not in referenced:
-                      stale.unlink(missing_ok=True)
+              if preserve_existing:
+                  # Stufenweise Quiz-Audios duerfen vorhandene Altaufnahmen niemals loeschen.
+                  for old_text,old_entry in old_entries.items():
+                      if old_text not in entries and local_from_entry(old_entry,asset_dir):
+                          entries[old_text]=old_entry
+              else:
+                  for stale in asset_dir.glob("*.m4a"):
+                      if stale.name not in referenced:
+                          stale.unlink(missing_ok=True)
 
               manifest_is_arabic=profile in ARABIC_PROFILES
               manifest_revision=profile_revision(profile)
@@ -583,6 +608,27 @@ jobs:
               prompts=[quiz_prompt(q) for q in quiz_items]
               if len(set(prompts))!=900:
                   raise SystemExit("Quiz-Sprachprompts sind nicht eindeutig.")
+              quiz_start=int(os.environ.get("QUIZ_BATCH_START") or "1")
+              quiz_count=int(os.environ.get("QUIZ_BATCH_COUNT") or "7")
+              if not (1<=quiz_start<=900 and 1<=quiz_count<=12):
+                  raise SystemExit("Quiz-Batch muss mit 1–900 beginnen und 1–12 Fragen enthalten.")
+              end_num=min(900,quiz_start+quiz_count-1)
+              # Arabische Schrift im deutschen Satz wird erst mit Sprachsegmentierung freigegeben.
+              selected_quiz_items=[]
+              deferred_arabic=[]
+              for q in quiz_items:
+                  number=int(q.get("number") or 0)
+                  if not quiz_start<=number<=end_num:
+                      continue
+                  samples=[quiz_prompt(q),norm(q.get("explanation"))]
+                  if any(re.search(r"[\u0600-\u06FF]",sample or "") for sample in samples):
+                      deferred_arabic.append(number)
+                      continue
+                  selected_quiz_items.append(q)
+              if not selected_quiz_items:
+                  raise SystemExit("Im Batch liegen nur Fuṣḥā-/Mischsprach-Fragen; separaten Arabisch-Batch verwenden.")
+              batch_prompts=[quiz_prompt(q) for q in selected_quiz_items]
+              print(f"Kids Quiz Master-Batch: {quiz_start}–{end_num}; freigegeben: {len(selected_quiz_items)}; Arabisch zur QA vorgemerkt: {deferred_arabic}",flush=True)
               quiz_texts=[]
               quiz_profiles={}
               age_profile={
@@ -590,7 +636,7 @@ jobs:
                   "7-8":"quiz_7_8",
                   "9-10":"quiz_9_10"
               }
-              for q in quiz_items:
+              for q in selected_quiz_items:
                   prompt=quiz_prompt(q)
                   quiz_texts.append(prompt)
                   quiz_profiles[prompt]=age_profile.get(str(q.get("ageBand") or ""),"quiz_9_10")
@@ -598,6 +644,10 @@ jobs:
                       if feedback:
                           quiz_texts.append(feedback)
                           quiz_profiles[feedback]="quiz_feedback"
+                  explanation=norm(q.get("explanation"))
+                  if explanation:
+                      quiz_texts.append(explanation)
+                      quiz_profiles[explanation]="quiz_feedback"
               final_feedback="Sehr gut. Du hast das Quiz geschafft."
               quiz_texts.append(final_feedback)
               quiz_profiles[final_feedback]="quiz_feedback"
@@ -611,16 +661,25 @@ jobs:
                   counts={
                       "quizQuestions":len(quiz_items),
                       "questionPrompts":len(set(prompts)),
+                      "batchQuestions":len(selected_quiz_items),
+                      "batchStart":quiz_start,
+                      "batchEnd":end_num,
+                      "batchDeferredArabic":deferred_arabic,
                       "age4to6":sum(1 for q in quiz_items if str(q.get("ageBand") or "")=="4-6"),
                       "age7to8":sum(1 for q in quiz_items if str(q.get("ageBand") or "")=="7-8"),
                       "age9to10":sum(1 for q in quiz_items if str(q.get("ageBand") or "")=="9-10")
                   },
                   model_id=ELEVEN_MODEL,
                   require_model_match=True,
-                  profiles_by_text=quiz_profiles
+                  profiles_by_text=quiz_profiles,
+                  preserve_existing=True
               )
-              if quiz_manifest["counts"]["quizQuestions"]!=900 or quiz_manifest["counts"]["questionPrompts"]!=900:
-                  raise SystemExit("900er Quiz-Voice-Pack unvollständig.")
+              if any(p not in quiz_manifest["entries"] for p in batch_prompts):
+                  raise SystemExit("Quiz-Batch unvollständig: mindestens ein freigegebener Frageclip fehlt.")
+              quiz_manifest["counts"]["readyQuestionPrompts"]=sum(p in quiz_manifest["entries"] for p in prompts)
+              quiz_manifest["counts"]["remainingQuestionPrompts"]=900-quiz_manifest["counts"]["readyQuestionPrompts"]
+              QUIZ_MANIFEST.write_text(json.dumps(quiz_manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+              print("Quiz-Fragen mit Master-Audio:",quiz_manifest["counts"]["readyQuestionPrompts"],"/900",flush=True)
           else:
               quiz_manifest=load_manifest(QUIZ_MANIFEST)
               print("VOICE_BUILD_SCOPE=dua · Quiz-Pack bleibt unverändert.")
