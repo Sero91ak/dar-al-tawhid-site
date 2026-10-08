@@ -418,7 +418,7 @@ async function ilmOpenResearch(request, env) {
   const mode = data?.mode === "short"?"short":"detailed";
   if (question.length<7) return send({ok:false,error:"insufficient_question"},422);
   const result = await researchIlmWithGemini(request,env,question,mode);
-  if (result.limited) return send({ok:false,error:"rate_limited"},429);
+  if (result.limited) return send({ok:false,error:result.reason === "gemini_quota_exhausted" ? "gemini_quota_exhausted" : "rate_limited"},429);
   // Failure is an explicit epistemic limit, never a fallback to the model's
   // internal memories or to unverified Google Search summaries.
   if (!result.ok) return send({ok:false,error:result.reason||"research_unavailable"},422);
