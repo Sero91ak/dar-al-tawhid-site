@@ -35,3 +35,14 @@ Hinweis: Der QA-Checker gibt bewusst Exitcode 1, wenn die 90-%-Hürde nicht best
 * Prozentwerte betreffen nur **Silhouettenüberlappung**, nicht Charakterähnlichkeit, die Augen, den Bart (keiner), Haarstruktur, 3D-Animation, religiöse Belege oder iPad-Viewer.
 * Es ist kein Modell mit 90 % bestätigt und keine fertige originale 3D-Figur erstellt.
 * Die Bildvorlagen sind KI-illustriert und nicht zwingend physisch konsistente Aufnahmen eines echten einzigen 3D-Modells.
+## GitHub-Checkout / reproduzierbarer Offline-Test
+
+Die **GLB-Binärdateien und die ursprüngliche Original-Referenztafel sind absichtlich keine Live-Assets des GitHub-Entwurfs**. Die Dateien liegen bereits im Chat-Paket `Mein_Gebet_Junge_V75_GLBRig_StrengGeprueft_NICHT_FREIGEGEBEN.zip`; dort den Ordner `mein_gebet_v75_paket` entpacken. Für die Repo-Version im Ordner `kids/mein-gebet/rigging` den vollständigen Pfad zu diesem Ordner übergeben:
+
+```bash
+KIDS_QA_INPUT_DIR=/absoluter/pfad/mein_gebet_v75_paket python kids/mein-gebet/rigging/test_original_fiveview_v2.py
+python kids/mein-gebet/rigging/qa_original_fiveview_v2.py /absoluter/pfad/mein_gebet_v75_paket/mein_gebet_junge_v75_geometry_qa_only.glb /absoluter/pfad/mein_gebet_v75_paket/3d_charakterturnaround_eines_jungen_im_thawb.png --json /tmp/qa-v75.json
+python kids/mein-gebet/rigging/compare_original_fiveview_v2.py /tmp/qa-v74.json /tmp/qa-v75.json
+```
+
+Die erste Zeile soll **23 PASS** melden. Die zweite und dritte Zeile sollen bei V7.5 **Exitcode 1** liefern, weil die Modellqualität die 90%-Schwelle noch nicht erreicht und die Dreiviertelkontur gegenüber V7.4 geringfügig schlechter ist. Nicht mit den beiden fehlgeschlagenen *Modellabnahmen* einen Defekt des QA-Testsystems verwechseln. Vor dem dritten Befehl auch den V7.4-Bericht mit derselben unveränderten Quelle generieren. Für die 3/4-Ansicht ist die Originalkamera noch unkalibriert und daher keine finale 90%-Abnahme möglich.
