@@ -7145,7 +7145,8 @@
         "scripts/cf-pages-build.js",
         "wrangler.toml",
         ".github/workflows/cloudflare-pages-deploy.yml",
-        "content/admin/change-scope-lock.json"
+        "content/admin/change-scope-lock.json",
+        ".github/workflows/check-quellen-library.yml"
       ],
       "expiresAt": "2026-11-30T23:59:00.000Z"
     }
