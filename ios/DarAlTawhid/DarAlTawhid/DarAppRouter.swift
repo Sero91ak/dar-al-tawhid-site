@@ -50,6 +50,12 @@ final class DarAppRouter: ObservableObject {
         }
         if let parsed = URL(string: url), DarAppShell.isOwnHost(parsed) {
             let target = DarAppShell.inAppURL(from: parsed)
+            // A post link is a content route, not a request to open #home.
+            // Also handle OneSignal notifications with URL but no postId field.
+            if !DarAppShell.postId(from: target).isEmpty {
+                apply(.home, webURL: target)
+                return
+            }
             let dest = hashDestination(target) ?? DarDeepLink.destination(from: parsed)
             apply(dest, webURL: dest == .home || dest == .qibla ? nil : target)
             return
@@ -60,7 +66,14 @@ final class DarAppRouter: ObservableObject {
     private func apply(_ dest: DarDeepLink.Destination, webURL: URL?) {
         self.webURL = webURL
         destination = dest
-        DarQuickActions.set(dest)
+        if webURL == nil {
+            DarQuickActions.set(dest)
+        } else {
+            // Clear stale quick-action routes: they must not overwrite a push
+            // content URL with #home when WKWebView finishes loading.
+            _ = DarQuickActions.consume()
+            _ = DarWidgetStore.consumePendingDestination()
+        }
         openNonce = UUID()
     }
 
