@@ -60,7 +60,7 @@ try {
   ]);
 
   // Unverified or fabricated citation indices must never reach the visitor.
-  globalThis.fetch=async ()=>Response.json({choices:[{message:{content:"Eine unbelegte Aussage. [4]"}}]});
+  globalThis.fetch=async ()=>Response.json({choices:[{message:{content:"Diese unbelegte Aussage darf trotz ausreichender Länge nicht als Quellenbeleg erscheinen. [4]"}}]});
   const invalid=await composeIlmWithGroqFree(request,env,question,sources,"short");
   assert.equal(invalid.ok,false);
   assert.equal(invalid.reason,"groq_invalid_citations");
