@@ -40,3 +40,16 @@ Stand: 08.10.2026 · GitHub-Entwurf #825 · **kein Live-Release**
 Feature-Flag `window.DAR_KIDS_MEIN_GEBET_ENABLED=false` **vor** dem Ladevorgang gesetzt → keine Registrierung des Moduls. Vollständiger Rückbau durch Löschen von `kids/mein-gebet/` und **ausschließlich** der drei identischen `preview-v1.js`-Skriptreferenzen in `kids/index.html`, `kids/start.html`, `kids/shell.html`. Andere Kids-/Besucher-/Admin-Dateien dürfen nicht revertiert oder angepasst werden.
 
 **Freigabestatus:** `DRAFT`; **nicht mergen, nicht live deployen** ohne Nutzerabnahme. Keine neuen ElevenLabs-/Runway-Credits in diesem Update.
+
+## Quellen-Nachtrag: Qabd und Rafʿ al-Yadayn (08.10.2026)
+
+**Nutzer hat für die Lernfassung festgelegt:** Qabd mit rechter auf linker Hand/Unterarm **auf Brusthöhe** und Rafʿ al-Yadayn an den vier belegten Stellen.
+
+- Ṣaḥīḥ al-Buḫārī 736 / Muslim 390a–b: Eröffnung, vor Rukūʿ, nach Rukūʿ.
+- Ṣaḥīḥ al-Buḫārī 739 / al-Muṣannaf von ʿAbd ar-Razzāq 2519 (2/68): zusätzlich beim Aufstehen zur dritten Rakʿah.
+- Ṣaḥīḥ al-Buḫārī 740: Qabd rechts auf links, *ohne* explizite Handhöhe.
+- Ṭāwūs: *Sunan Abī Dāwūd* 759; in *al-Marāsīl* 33: **mursal** mit explizitem Brustbezug.
+- Ibn Ḫuzaymah 479: explizite Brustformulierung, deren Zusatzechtheit unterschiedlich bewertet wird.
+- Daten unter `content/hanbali-review.json` (jetzt **21 Quellen-/Bewertungsverweise**, **12 Prüfpositionen**) und `content/raf-qiyam-storyboard.json` (vier Raf-Anlässe, keine vierte Gelegenheit im Zweirakʿah-Gebet). Dokumentation unter `HANBALI-QUELLENPRUEFUNG.md`.
+
+**14/14 statische Integritäts- und Review-Sperrprüfungen bestanden:** alle Reviewverweise aufgelöst; alle Posen gesperrt; Kinder-/Audiofreigabe weiterhin `false`; kein neuer Skriptverweis auf `main`, Draft-PR weiterhin unmerged. Diese Prüfung ist **keine** finale isnād-/fiqhrechtliche Abnahme und **kein** gerätebasierter 3D-Test. 
