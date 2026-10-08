@@ -128,6 +128,20 @@
       item.appendChild(el("p","km-media-note",String(media.explanation||"")));
       if(media.grade)item.appendChild(el("small","km-source","Einstufung der vorhandenen Quelle: "+String(media.grade)));
       item.appendChild(el("small","km-source","Quelle: "+String(media.source||"")));
+      if(media.kind==="lesson"&&Array.isArray(media.sourceRefs)){
+        var evidence=el("div","km-media-actions");
+        media.sourceRefs.slice(0,8).forEach(function(ref){
+          var m=String(ref||"").match(/^Qurʾān\s+(\d{1,3}):(\d{1,3})(?:[–-]\d{1,3})?$/);
+          if(!m)return;
+          var surah=Number(m[1]),ayah=Number(m[2]);
+          if(surah<1||surah>114||ayah<1||ayah>286)return;
+          var evidenceButton=el("button","km-media-button","Qurʾān "+surah+":"+ayah+" öffnen");
+          evidenceButton.type="button";
+          evidenceButton.addEventListener("click",function(){openQuranVerse(surah,ayah)});
+          evidence.appendChild(evidenceButton);
+        });
+        if(evidence.childNodes.length)item.appendChild(evidence);
+      }
       if(typeof media.sourceUrl==="string"&&/^https:\/\/dorar\.net\//.test(media.sourceUrl)){
         var link=el("a","km-related","Originalfundstelle ansehen ›");
         link.href=media.sourceUrl;link.target="_blank";link.rel="noopener noreferrer";
