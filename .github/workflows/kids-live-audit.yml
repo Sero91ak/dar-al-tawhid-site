@@ -4,6 +4,11 @@ on:
     branches: [main]
     paths:
       - .github/workflows/kids-live-audit.yml
+      - kids/manifest.webmanifest
+      - kids/version.json
+      - cloudflare/site-router.js
+      - cloudflare/test-app-worker.js
+      - _headers
   workflow_run:
     workflows:
       - Deploy Besucher-App (Cloudflare Workers)
