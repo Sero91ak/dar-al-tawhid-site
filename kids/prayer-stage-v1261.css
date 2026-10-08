@@ -1937,3 +1937,73 @@ body.kids-salah-day-open{overflow:hidden!important}
 @media(prefers-reduced-motion:reduce){
  .kids-salah-day-item,.kids-salah-day-item time{animation:none!important;transition:none!important}
 }
+
+
+/* KIDS_SALAH_REFERENCE_ICON_REPAIR_V1277: actual illustrated assets and aligned navigation. */
+.kids-salah-day .kids-salah-day-back{
+  display:grid!important;
+  place-items:center!important;
+  flex:0 0 auto!important;
+  padding:0!important;
+  line-height:1!important;
+  font-size:0!important;
+  text-align:center!important;
+  vertical-align:middle!important;
+  -webkit-appearance:none!important;
+  appearance:none!important;
+  touch-action:manipulation;
+}
+.kids-salah-day .kids-salah-day-back svg{
+  display:block!important;
+  width:clamp(23px,3.1dvh,27px)!important;
+  height:clamp(23px,3.1dvh,27px)!important;
+  stroke:#ffe6ac!important;
+  stroke-width:3.2!important;
+  fill:none!important;
+  stroke-linecap:round!important;
+  stroke-linejoin:round!important;
+  margin:0!important;padding:0!important;
+  transform:none!important;
+  overflow:visible!important;
+  flex:none!important;
+}
+.kids-salah-day .kids-salah-day-item-orb{
+  position:relative!important;
+  display:block!important;
+  overflow:hidden!important;
+  background:#113a54!important;
+  background-image:none!important;
+  isolation:isolate!important;
+}
+.kids-salah-day .kids-salah-day-item[data-prayer] .kids-salah-day-item-orb{
+  background-image:none!important;
+}
+.kids-salah-day .kids-salah-day-item-orb::before,
+.kids-salah-day .kids-salah-day-item-orb::after{
+  display:none!important;
+  content:none!important;
+}
+.kids-salah-day .kids-salah-day-item-art{
+  position:absolute!important;
+  inset:0!important;
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:none!important;
+  max-height:none!important;
+  border:0!important;
+  border-radius:inherit!important;
+  padding:0!important;
+  margin:0!important;
+  object-fit:cover!important;
+  object-position:center center!important;
+  opacity:1!important;
+  filter:none!important;
+  mix-blend-mode:normal!important;
+  transform:none!important;
+  z-index:2!important;
+  pointer-events:none!important;
+}
+.kids-salah-day .kids-salah-day-header{
+  align-items:center!important;
+}
