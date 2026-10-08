@@ -17,7 +17,10 @@ jobs:
         uses: actions/checkout@v4
         with:
           persist-credentials: true
-          fetch-depth: 0
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout: |
+            kids/assets/kids-salah-v1262
       - name: Import one-time artwork and remove temporary reference
         shell: bash
         run: |
@@ -39,5 +42,13 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A "$SOURCE" "$DEST"
           git commit -m "Kids Salah: store Runway cinematic loop locally"
-          git pull --rebase origin main
-          git push origin HEAD:main
+          for attempt in 1 2 3 4 5; do
+            git pull --rebase origin main
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "Concurrent main update; retrying import push ${attempt}/5"
+            sleep 3
+          done
+          echo "Could not publish video after five attempts" >&2
+          exit 1
