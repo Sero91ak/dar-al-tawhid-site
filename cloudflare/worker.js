@@ -246,7 +246,8 @@ export default {
           lon: url.searchParams.get("lon"),
           timeZone: url.searchParams.get("tz") || url.searchParams.get("timeZone"),
           angle: url.searchParams.get("angle"),
-          asrFactor: url.searchParams.get("asr") || url.searchParams.get("asrFactor")
+          asrFactor: url.searchParams.get("asr") || url.searchParams.get("asrFactor"),
+          date: url.searchParams.get("date")
         });
         return json(result, cors, result.ok ? 200 : 400);
       }
