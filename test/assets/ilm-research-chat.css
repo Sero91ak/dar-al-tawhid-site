@@ -1818,3 +1818,197 @@ body.is-ilm-chat-route .ilm-science-index{
   text-transform:uppercase;
   color:var(--ilm-accent);
 }
+
+
+/* ILM INTELLIGENT DISCOVERY V1333 · Test-App only · compact scholarly search */
+body.is-ilm-chat-route .ilm-discovery{
+  --ilm-discovery-stroke:color-mix(in srgb,var(--ilm-accent) 22%,transparent);
+  --ilm-discovery-surface:color-mix(in srgb,var(--ilm-header-bg) 75%,var(--ilm-page-bg));
+  margin:20px 0 6px;
+  width:100%;
+  max-width:760px;
+  min-width:0;
+  overflow-wrap:anywhere;
+}
+body.is-ilm-chat-route .ilm-discovery-head{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:8px;
+  padding:0 0 11px;
+  border-bottom:1px solid var(--ilm-discovery-stroke);
+}
+body.is-ilm-chat-route .ilm-discovery-head h3{
+  font:650 clamp(18px,4.7vw,23px)/1.1 var(--ilm-serif,Georgia,serif);
+  letter-spacing:.004em;
+  color:var(--ilm-primary-text);
+  margin:0;
+}
+body.is-ilm-chat-route .ilm-discovery-head > span{
+  color:var(--ilm-secondary-text);
+  font-size:11px;
+  font-weight:670;
+  letter-spacing:.035em;
+}
+body.is-ilm-chat-route .ilm-discovery-results{
+  display:grid;
+  width:100%;
+  grid-template-columns:minmax(0,1fr);
+  gap:0;
+}
+body.is-ilm-chat-route .ilm-discovery-item{
+  width:100%;
+  max-width:100%;
+  min-width:0;
+  display:grid;
+  grid-template-columns:35px minmax(0,1fr) 24px;
+  align-items:center;
+  gap:11px;
+  padding:15px 3px;
+  margin:0;
+  background:transparent;
+  box-shadow:none;
+  border:0;
+  border-bottom:1px solid var(--ilm-discovery-stroke);
+  border-radius:0;
+  color:var(--ilm-primary-text);
+  text-align:left;
+  font-family:inherit;
+  cursor:pointer;
+  appearance:none;
+  -webkit-tap-highlight-color:transparent;
+}
+body.is-ilm-chat-route .ilm-discovery-number{
+  align-self:start;
+  padding-top:3px;
+  font-size:11px;
+  font-weight:720;
+  font-variant-numeric:tabular-nums;
+  letter-spacing:.05em;
+  color:var(--ilm-accent);
+}
+body.is-ilm-chat-route .ilm-discovery-copy{
+  min-width:0;
+  display:grid;
+  gap:4px;
+}
+body.is-ilm-chat-route .ilm-discovery-kind{
+  font-size:10.5px;
+  line-height:1.35;
+  letter-spacing:.075em;
+  text-transform:uppercase;
+  font-weight:730;
+  color:var(--ilm-accent);
+}
+body.is-ilm-chat-route .ilm-discovery-copy strong{
+  display:block;
+  color:var(--ilm-primary-text);
+  font-family:var(--ilm-serif,Georgia,serif);
+  font-size:clamp(17px,4vw,21px);
+  font-weight:650;
+  line-height:1.24;
+  text-wrap:pretty;
+  overflow-wrap:anywhere;
+}
+body.is-ilm-chat-route .ilm-discovery-summary{
+  font-size:12.5px;
+  line-height:1.5;
+  color:var(--ilm-secondary-text);
+  overflow:hidden;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  max-width:62ch;
+}
+body.is-ilm-chat-route .ilm-discovery-arrow{
+  color:var(--ilm-accent);
+  font-size:20px;
+  line-height:1;
+  justify-self:end;
+  opacity:.85;
+}
+body.is-ilm-chat-route .ilm-discovery-item:hover,
+body.is-ilm-chat-route .ilm-discovery-item:focus-visible{
+  outline-offset:2px;
+  background:color-mix(in srgb,var(--ilm-accent) 5%,transparent);
+}
+body.is-ilm-chat-route .ilm-discovery-item:active{
+  background:color-mix(in srgb,var(--ilm-accent) 8%,transparent);
+}
+body.is-ilm-chat-route .ilm-discovery-more{
+  margin:0;
+  border:0;
+}
+body.is-ilm-chat-route .ilm-discovery-more > summary{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 3px;
+  font-size:12.5px;
+  line-height:1.4;
+  font-weight:700;
+  color:var(--ilm-accent);
+  cursor:pointer;
+  list-style:none;
+}
+body.is-ilm-chat-route .ilm-discovery-more > summary::-webkit-details-marker{display:none}
+body.is-ilm-chat-route .ilm-discovery-more > summary span{
+  display:inline-block;
+  transition:transform .22s ease;
+}
+body.is-ilm-chat-route .ilm-discovery-more[open] > summary span{
+  transform:rotate(180deg);
+}
+#appView > .ilm-discovery-return,
+body .ilm-discovery-return[data-ilm-discovery-return]{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:8px;
+  width:100%;
+  max-width:min(100%,1180px);
+  box-sizing:border-box;
+  margin:0 auto 14px;
+  padding:10px clamp(12px,3vw,18px);
+  border:1px solid color-mix(in srgb,var(--gold2,#c9aa71) 22%,transparent);
+  border-radius:12px;
+  background:color-mix(in srgb,var(--card,var(--bg,#0b1514)) 91%,transparent);
+  color:var(--text,#f1ead8);
+}
+.ilm-discovery-return [data-ilm-discovery-back]{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  max-width:100%;
+  min-height:36px;
+  padding:4px;
+  border:0;
+  background:none;
+  color:var(--gold2,#c9aa71);
+  font:750 13px/1.3 system-ui,sans-serif;
+  cursor:pointer;
+}
+.ilm-discovery-return [data-ilm-discovery-back] > span:first-child{
+  font-size:25px;
+  font-weight:400;
+  line-height:1;
+}
+.ilm-discovery-return-note{
+  font:550 11px/1.4 system-ui,sans-serif;
+  color:var(--muted,#a9a296);
+  letter-spacing:.01em;
+}
+@media(max-width:420px){
+  body.is-ilm-chat-route .ilm-discovery-item{
+    grid-template-columns:25px minmax(0,1fr) 17px;
+    gap:7px;
+    padding:14px 1px;
+  }
+  body.is-ilm-chat-route .ilm-discovery-summary{font-size:12px}
+  .ilm-discovery-return-note{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  body.is-ilm-chat-route .ilm-discovery-more > summary span{transition:none}
+}
