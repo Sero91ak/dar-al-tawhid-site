@@ -115,7 +115,7 @@
       ? (ev.speaker + (/prophet|rasul|ﷺ/i.test(ev.speaker) || ev.speaker_type === "sunnah" ? " ﷺ sagte:" : ":"))
       : (idx ? "Ein weiterer Beleg" : "Beleg");
     var open = "";
-    if (ev.route && discoveryRoute(ev) && ev.route.view) {
+    if (ev.route && ["post","dua","quran-surah"].includes(String(ev.route.view || "")) && String(ev.route.value || "") && !/[<>"\u0000-\u001f]/.test(String(ev.route.value))) {
       open = '<button type="button" class="ilm-open-src" data-ilm-discovery-result="1" data-nav="' + esc(ev.route.view) + '" data-value="' + esc(ev.route.value) + '">↗ In der App öffnen</button>';
     } else if (ev.verification_status === "verified" && ev.deep_link) {
       if (ev.deep_link && /^https?:/i.test(ev.deep_link) && (hostOk(ev.deep_link) || ev.deep_link.indexOf(location.origin + "/") === 0)) {
