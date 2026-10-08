@@ -56,6 +56,15 @@ assert.equal(qr.results[0].recitationUrl,"/quran-audio/ar.alafasy/262.mp3?v=1063
 assert.ok(qr.results[0].arabic.length>70&&qr.results[0].german.length>80);
 const lastAyah=await fullQuranSearch.search("Sure 114 Vers 6");
 assert.equal(lastAyah.status,"found");assert.equal(lastAyah.results[0].reference,"Qurʾān 114:6");
+const arabicText=await fullQuranSearch.search("Quran قُلْ هُوَ ٱللَّهُ أَحَدٌ");
+assert.equal(arabicText.status,"found");
+assert.equal(arabicText.results[0].reference,"Qurʾān 112:1","Arabic exact phrase should identify Sūrah al-Ikhlāṣ");
+const translitText=await fullQuranSearch.search("Quran Qul huwal laahu ahad");
+assert.equal(translitText.status,"found");
+assert.equal(translitText.results[0].reference,"Qurʾān 112:1","existing Latin transcription should resolve to identical ayah");
+const germanText=await fullQuranSearch.search("Quran Sag: Er ist Allah, ein Einer");
+assert.equal(germanText.status,"found");
+assert.equal(germanText.results[0].reference,"Qurʾān 112:1","German original translation phrase should identify same ayah");
 const invalidAyah=await fullQuranSearch.search("Qurʾān 2:999");
 assert.equal(invalidAyah.status,"not_found");
 const unknownWord=await fullQuranSearch.search("Quran fiktivwortxyzzzz");
