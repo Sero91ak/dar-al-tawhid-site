@@ -86,7 +86,8 @@
           "Hands open, symmetrical, palms facing forward; check from 360-degree views"
         ],
         "riggingReady": false
-      }
+      },
+      "compositeVisualStatus": "latest_seven_step_reference_user_approved; older_candidate_not_approved"
     }
   },
   "variantsByProfile": {
@@ -127,5 +128,28 @@
       "rafAfterSecondRakah": true
     }
   ],
-  "productionNote": "Qiyam image is an approved 2D pose reference only; no true 3D mesh (.glb), animation or authoritative prayer teaching is included."
+  "productionNote": "User-approved latest seven-step 2D visual reference is NOT an actual GLB, nor a published or fully religiously verified prayer lesson.",
+  "userApprovedCompositeReference": {
+    "path": "/kids/mein-gebet/assets/gebetspositionen-sieben-schritte-user-approved-review.jpg",
+    "originalAsset": "gebetsanleitung_in_sieben_schritten.png",
+    "userVisualApprovedOn": "2026-10-08",
+    "status": "approved_as_2d_visual_reference_only",
+    "stepsShown": [
+      "qiyam_chest_qabd",
+      "takbir_shoulder_level",
+      "ruku_flat_spine",
+      "rise_raf_shoulder_level",
+      "sujud_forehead_and_light_nose",
+      "sitting_between_sujud",
+      "second_sujud"
+    ],
+    "designConstraints": {
+      "sameKidIdentityAndScale": true,
+      "noLegLengthChange": true,
+      "rukuBack": "flat_horizontally_straight_at_hip_bend",
+      "sujudContact": "forehead_firmly_floor_nose_lightly_floor_lips_clear_floor",
+      "takbir": "hands_at_shoulder_height_not_ears"
+    },
+    "scope": "visual_only_not_hadith_or_scholarly_or_3d_approval"
+  }
 }
