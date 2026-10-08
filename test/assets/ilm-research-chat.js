@@ -580,9 +580,6 @@
         }
         return '<p>' + enriched + '</p>';
       }).join("") + '</div>';
-      if (reply._ilmProvider && reply._ilmGeneratedText) {
-        html += '<p class="ilm-science-provider">Mit ' + esc(reply._ilmProvider) + ' formuliert · anhand bereitgestellter Fundstellen</p>';
-      }
       if (reply._ilmBasicTawhid || reply._ilmTawhidFollowup) html += ilmScriptureLinks(!!reply._ilmTawhidFollowup);
       if (reply._ilmBasicIman) html += ilmImanScriptureLinks();
       if (!reply._ilmBasicTawhid && !reply._ilmBasicIman && !reply._ilmTawhidFollowup) html += discoverySection(reply);
