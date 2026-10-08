@@ -126,6 +126,17 @@ export async function researchIlmWithGemini(request,env,question,mode) {
     if (!global?.success || !user?.success) return {ok:false,limited:true,reason:"rate_limited"};
   } catch (_) { return {ok:false,reason:"guard_failed"}; }
 
+  // On a provider quota error, use a short shared circuit breaker to avoid
+  // flooding Google with requests that cannot succeed. No user data is cached.
+  let quotaCache=null, quotaKey=null;
+  try {
+    if(typeof caches !== "undefined" && caches.default) {
+      quotaCache=caches.default;
+      quotaKey=new Request(new URL("/__ilm_search_provider_429",request.url).href);
+      if(await quotaCache.match(quotaKey)) return {ok:false,limited:true,reason:"gemini_quota_exhausted"};
+    }
+  } catch(_) { quotaCache=null; quotaKey=null; }
+
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(),13000);
   let grounded;
@@ -146,6 +157,14 @@ export async function researchIlmWithGemini(request,env,question,mode) {
       })
     });
     if (!response.ok) {
+      if(response.status === 429) {
+        try {
+          if(quotaCache && quotaKey) await quotaCache.put(quotaKey,new Response("quota",{
+            headers:{"Cache-Control":"public,max-age=300"}
+          }));
+        } catch(_) {}
+        return {ok:false,limited:true,reason:"gemini_quota_exhausted"};
+      }
       const providerError = await response.json().catch(()=>null);
       const providerCode = String(providerError?.error?.status||"").replace(/[^A-Z_]/g,"").slice(0,32);
       return {ok:false,reason:"search_provider_http_"+response.status+(providerCode?"_"+providerCode:"")};
