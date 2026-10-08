@@ -832,6 +832,7 @@
           var rankedMatches = rankKnowledgeSources(question, matches);
           var coreTawhid = isBasicTawhidQuestion(question);
           var coreIman = isBasicImanQuestion(question);
+          var coreAdab = isBasicAdabQuestion(question) && !isDiscoveryQuestion(question);
           improved._ilmDiscovery = discoveryItems(rankedMatches).filter(function(item) {
             return !coreTawhid || !/\b(?:hukm|urteil|gesetzgebung|ṭāghūt)\b/i.test(item.title);
           }).slice(0,coreTawhid ? 2 : 7);
@@ -848,10 +849,18 @@
             improved.evidences = [];
             improved._ilmDiscovery = [];
           }
+          if (coreAdab) {
+            improved.status = "ok";
+            improved._ilmCoreAdab = true;
+            improved._ilmGeneratedText = "Adab (أدب) bedeutet Anstand, gutes Benehmen und einen respektvollen Umgang. Dazu gehören gute Worte, Rücksichtnahme und ein aufrichtiger Charakter.\n\nDer Prophet ﷺ erklärte sinngemäß, dass die Besten unter den Menschen diejenigen mit dem besten Charakter sind. [1] Beleg: Ṣaḥīḥ al-Buḫārī Nr. 3559, Ṣaḥīḥ Muslim Nr. 2321.";
+            improved.evidences = [ilmAdabVerifiedSource()];
+            improved._ilmDiscovery = [];
+            improved._ilmCitationCount = 1;
+          }
           improved._ilmMatches = rankedMatches;
           // Retain the best question-matching entries as the answer's evidence,
           // not the incidental order of cards in the original post index.
-          if (!improved._ilmBasicTawhid && !improved._ilmBasicIman) {
+          if (!improved._ilmBasicTawhid && !improved._ilmBasicIman && !improved._ilmCoreAdab) {
             var picked = rankedMatches.slice(0, 5).map(function(e){return toEvidence(e,"internal")});
             var terms = ilmQuestionTerms(question);
             var relevantExternal = (improved.evidences || []).filter(function(e) {
