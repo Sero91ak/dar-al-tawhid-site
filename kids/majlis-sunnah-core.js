@@ -17,6 +17,11 @@ function plausible(row){
     !row.title||!row.explanation||!row.source||
     !Array.isArray(row.ages)||!row.ages.length||
     !row.ages.every(x=>AGES.has(x))||!Array.isArray(row.triggers)||!row.triggers.length)return false;
+ if(row.arabicExcerpt&&!(row.kind==="hadith"&&row.grade==="Ṣaḥīḥ"&&
+   typeof row.arabicExcerpt==="string"&&row.arabicExcerpt.length<300&&
+   /[\u0621-\u064a]/.test(row.arabicExcerpt)&&row.arabicExcerpt.trim().split(/\s+/).length<=25&&
+   /^https:\/\/dorar\.net\/hadith\/sharh\/\d+$/.test(row.sourceUrl||"")&&
+   row.sourceUrl===row.arabicExcerptVerifiedUrl))return false;
  if(row.kind==="hadith")return row.sourceStatus==="verified"&&row.grade==="Ṣaḥīḥ"&&
    !!row.text&&/^Ṣaḥīḥ (?:al-Buḫārī|Muslim) · Nr\. \d+$/.test(row.source)&&
    (!row.id.startsWith("catalog-")||(
@@ -59,6 +64,7 @@ function expose(row,age,gender){
  const media={kind:row.kind,title:row.title,text:row.kind==="lesson"?null:row.text,
    explanation:row.explanation,source,sourceRefs:row.kind==="lesson"?row.sourceRefs:[],
    sourceUrl:row.sourceUrl||null,grade:row.grade||null,person:row.person||null,
+   arabicExcerpt:row.arabicExcerpt||null,
    translationLabel:row.translationLabel||(row.kind==="hadith"||row.kind==="early"?"Vorhandene deutsche Übertragung":"Lernzusammenfassung")};
  return {id:"kb:sunnah:"+row.id,text:address(safeGender)+body,source,media};
 }
