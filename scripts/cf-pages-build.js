@@ -36,6 +36,11 @@ execFileSync(process.execPath, [coverGenerator], {
   stdio: 'inherit'
 });
 
+execFileSync(process.execPath, [path.join(__dirname, "sync-quellen-registry.cjs")], {
+  cwd: root,
+  stdio: "inherit"
+});
+
 execFileSync(process.execPath, [visitorLibraryPublisher], {
   cwd: root,
   stdio: 'inherit'
