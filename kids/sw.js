@@ -347,6 +347,13 @@ self.addEventListener("fetch",function(event){
     event.respondWith(fetch(request));
     return;
   }
+  // The quiz owner-voice router must update immediately after German speech fixes.
+  // Network-first prevents an installed Kids PWA from retaining an obsolete
+  // audio lookup even while its 900-question catalogue and manifest are fresh.
+  if(url.pathname==="/kids/owner-voice.js"){
+    event.respondWith(networkFirst(request));
+    return;
+  }
   if(url.pathname==="/kids/data/quiz-audio.json"||url.pathname==="/kids/data/dua-audio.json"||url.pathname==="/kids/data/dua-arabic-audio.json"||url.pathname==="/kids/data/dua-arabic-slow-audio.json"||url.pathname==="/kids/data/dua-word-audio.json"||url.pathname==="/kids/data/dua-kids.json"||url.pathname==="/kids/data/owner-voice-audio.json"){
     event.respondWith(networkFirst(request));
     return;
