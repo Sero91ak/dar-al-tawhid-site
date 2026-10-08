@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v143-subpage-nav1245",
-  "label": "KIDS · V1.08.64",
-  "releasedAt": "2026-10-07T23:18:00+02:00",
-  "note": "KIDS V1.08.64 · Globaler Karten-/Capsule-Glow auf den ruhigen Startseiten-Referenzglow vereinheitlicht: eine dezente Goldkontur + weicher kurzer Halo, kein starkes Gold/Türkis-Neon. Geschichten, Dīn, Propheten, Ṣaḥābah, Ṣaḥābiyyāt, Duʿāʾ, Qurʾān, Quiz und Eltern verwenden denselben Glow. Interaktive Swipe-Navigation V1246 bleibt erhalten.",
+  "buildId": "kids-shell-v144-global-detail-dock1247",
+  "label": "KIDS · V1.08.65",
+  "releasedAt": "2026-10-08T09:17:12.356Z",
+  "note": "KIDS V1.08.65 · Einheitlicher eingedockter Top-Kopf mit Zurück, dynamischem Titel und Untertitel auf den Detail-/Leseseiten für Dīn, Propheten, Ṣaḥābah, Ṣaḥābiyyāt, Hörwelten, Duʿāʾ sowie die eingebauten Quiz-, Wissens- und Qurʾān-Dialoge. Die ursprünglichen Zurück-Funktionen und die untere Hauptnavigation bleiben erhalten.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -1212,6 +1212,25 @@
     "globalCardGlowProductionRetry": "single-lane-after-queue-fix",
     "globalCardGlowProductionTarget": "dar-al-tawhid-site/kids"
   },
-  "updatedAt": "2026-10-07T22:22:00+02:00",
-  "deployTrigger": "2026-10-07T22:22:00+02:00-subpage-nav-v13"
+  "updatedAt": "2026-10-08T09:17:12.356Z",
+  "deployTrigger": "global-detail-dock-v1247",
+  "globalDetailDock": {
+    "version": "v1247",
+    "enabled": true,
+    "appliesTo": [
+      "deen-detail",
+      "prophet-detail",
+      "sahabi-detail",
+      "sahabiyyah-detail",
+      "story-player",
+      "dua-detail",
+      "knowledge",
+      "quiz",
+      "quran",
+      "legacy-dua"
+    ],
+    "preserveBackHandlers": true,
+    "preserveBottomNavigation": true,
+    "preserveContentAndAudio": true
+  }
 }
