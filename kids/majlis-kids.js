@@ -135,6 +135,29 @@
         open.addEventListener("click",function(){openQuranVerse(verse.surah,verse.ayah);});
         actions.appendChild(play);actions.appendChild(open);card.appendChild(actions);box.appendChild(card);
       });
+      var next=Number(media.nextOffset)||0,total=Number(media.total)||0;
+      if(typeof media.query==="string"&&next>0&&next<total&&next<=6236){
+        var more=el("button","km-related","Weitere 5 Fundstellen anzeigen ("+next+" von "+total+")  ›");
+        more.type="button";
+        more.addEventListener("click",async function(){
+          if(!state.open||more.disabled)return;
+          more.disabled=true;more.textContent="Weitere Qurʾān-Verse werden gesucht …";
+          try{
+            var found=await window.DarKidsQuranSearch.search(media.query,{offset:next});
+            if(!state.open||!box.isConnected)return;
+            if(found.status!=="found"||!found.results?.length||Number(found.offset)!==next||Number(found.nextOffset)<=next)
+              throw Error("no-safe-results");
+            more.remove();
+            mediaCard(box,{kind:"quran_results",results:found.results,query:media.query,
+              nextOffset:found.nextOffset,total:found.total});
+            chat.scrollTop=chat.scrollHeight;
+            status.textContent="Weitere geprüfte Qurʾān-Fundstellen angezeigt.";
+          }catch(_){
+            if(box.isConnected){more.disabled=false;more.textContent="Erneut versuchen · weitere Fundstellen";status.textContent="Weitere Treffer sind gerade nicht verfügbar.";}
+          }
+        });
+        box.appendChild(more);
+      }
       return;
     }
     var panel=el("section","km-media");
@@ -330,7 +353,8 @@
           var msg=result.exact?"Ich habe den gewünschten Qurʾān-Vers gefunden.":
             "Ich habe "+amount+" passende Qurʾān-Stelle"+(amount===1?"":"n")+" gefunden"+(result.total>amount?" (von "+result.total+" Worttreffern)":"")+".";
           item={answer:"Al-ḥamdu lillāh, mein"+(activeGender()==="girl"?"e liebe":" lieber")+" "+familyWord()+"! "+msg+" Du kannst den originalen arabischen Vers, die vorhandene deutsche Übersetzung und die Rezitation direkt unten öffnen. Ich füge keine eigene Tafsīr-Auslegung hinzu.",
-            source:null,media:{kind:"quran_results",results:result.results},answerId:null};
+            source:null,media:{kind:"quran_results",results:result.results,query:q,total:result.total,
+               nextOffset:result.nextOffset||0},answerId:null};
         }else if(result.status==="too_broad"){
           item={answer:"Diese Suche ist sehr allgemein. Nenne bitte ein genaueres Wort, eine Sūrah oder eine Versnummer. Dann finden wir die passende Stelle. Wa-Allāhu aʿlam.",source:null};
         }else if(result.status==="not_found"){
