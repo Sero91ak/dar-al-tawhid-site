@@ -62,7 +62,7 @@ export async function composeIlmWithGemini(request, env, question, sources, mode
       }),
       signal: controller.signal
     });
-    if (!response.ok) return { ok: false, reason: "provider_http_error", status: response.status };
+    if (!response.ok) return { ok: false, reason: response.status === 429 ? "gemini_quota_exhausted" : "provider_http_error", status: response.status, limited: response.status === 429 };
     const body = await response.json().catch(() => null);
     const answer = (body?.candidates?.[0]?.content?.parts || [])
       .map(p => String(p?.text || "")).join("").trim().slice(0,1700);
