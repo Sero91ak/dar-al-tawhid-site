@@ -134,6 +134,9 @@ jobs:
       - name: Validate Kids speech normalization
         run: python3 kids/tools/voice_text.py --self-test
 
+      - name: Validate all 900 German Kids quiz sentences before ElevenLabs
+        run: python3 kids/tools/quiz_german_qa.py
+
       - name: Generate complete Quiz + Dua Serhat voice packs
         if: env.DAR_VOICE_PROVIDER_AVAILABLE == '1'
         run: |
