@@ -332,3 +332,26 @@ body.kids-salah-day-open{overflow:hidden!important}
  border-color:rgba(244,190,215,.42);box-shadow:inset 4px 0 0 #f1bfd5;
 }
 .kids-salah-day[data-gender="girl"] .kids-salah-day-item time{color:#ffe0ed}
+
+/* Adobe Firefly art plate under native typographic UI, always available offline. */
+#view-today .kids-salah-stage{
+ background-image:
+  linear-gradient(180deg,rgba(4,23,38,.79),rgba(3,21,36,.70)),
+  url("/kids/assets/kids-salah-v1262/cinematic-still.jpg");
+ background-size:cover,cover;
+ background-position:center,center;
+}
+.app[data-gender="girl"] #view-today .kids-salah-stage{
+ background-image:
+  linear-gradient(180deg,rgba(43,25,57,.81),rgba(23,22,44,.81)),
+  url("/kids/assets/kids-salah-v1262/cinematic-still.jpg");
+}
+#view-today .kids-salah-motion{z-index:0;opacity:.30;mix-blend-mode:screen}
+#view-today .kids-salah-stage > :not(.kids-salah-motion){position:relative;z-index:2}
+#view-today .kids-salah-stage:has(.kids-salah-motion)::before{
+ z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(6,21,31,.30),rgba(6,22,35,.52));
+ animation:none;
+}
+@media(prefers-reduced-motion:reduce){
+ #view-today .kids-salah-motion{display:none!important}
+}
