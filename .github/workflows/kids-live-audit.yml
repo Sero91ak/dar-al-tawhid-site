@@ -38,7 +38,7 @@ jobs:
           mkdir -p /tmp/kids-audit
           curl --location --silent --show-error --fail --retry 2 --max-time 20 -A "DarAlTawhidKids-iOS"             -H "Cache-Control: no-cache"             "https://dar-al-tawhid.de/kids/version.json?audit=$(date +%s)"             -o /tmp/kids-audit/live-version.json || true
           curl --location --silent --show-error --fail --retry 2 --max-time 20 -A "DarAlTawhidKids-iOS" --location --max-redirs 4             -H "Cache-Control: no-cache"             "https://dar-al-tawhid.de/kids/start?audit=$(date +%s)"             -o /tmp/kids-audit/live-home.html || true
-          curl --location --silent --show-error --fail --retry 2 --max-time 20 -A "DarAlTawhidKids-iOS"             "https://dar-al-tawhid.de/kids/prayer-stage-v1261.css?v=1274&audit=$(date +%s)"             -o /tmp/kids-audit/live-salah.css || true
+          curl --location --silent --show-error --fail --retry 2 --max-time 20 -A "DarAlTawhidKids-iOS"             "https://dar-al-tawhid.de/kids/prayer-stage-v1261.css?v=1275&audit=$(date +%s)"             -o /tmp/kids-audit/live-salah.css || true
           curl --location --silent --show-error --fail --retry 2 --max-time 20             "https://dar-al-tawhid.de/kids/assets/kids-salah-v1272/hero-home.png?v=1274"             -o /tmp/kids-audit/live-art.png || true
           for name in hero-day fajr dhuhr asr maghrib isha; do
             curl --silent --show-error --fail --retry 2 --max-time 20 \
@@ -66,8 +66,8 @@ jobs:
              finishedDeployRun=os.getenv('FINISHED_RUN') or None,
              live=dict(buildId=obj.get('buildId'),label=obj.get('label'),
                homeBytes=len(home.encode()),
-               homeBytes=len(home),homeContainsPhotoreal1274='prayer-stage-v1261.css?v=1274' in home,
-               homeContainsNativeClean='kids-shell-v170-salah-native-clean1274' in home,
+               homeBytes=len(home),homeContainsPhotoreal1274='prayer-stage-v1261.css?v=1275' in home,
+               homeContainsNativeClean='kids-shell-v171-salah-reference-viewport1275' in home,
                cssBytes=len(css),cssContainsPhotoOverride='KIDS_SALAH_OLD_HERO_PURGE_V1274' in css,
                photoBytes=img.stat().st_size if img.exists() else 0,
                prayerArtworkBytes=art,

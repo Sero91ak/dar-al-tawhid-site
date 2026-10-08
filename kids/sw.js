@@ -1,18 +1,18 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1274";
-const KIDS_BUILD_ID="kids-shell-v170-salah-native-clean1274";
+const CACHE_NAME="dar-al-tawhid-kids-v1275";
+const KIDS_BUILD_ID="kids-shell-v171-salah-reference-viewport1275";
 const DUA_AUDIO_RUNTIME="1244";
 // QUIZ_HOME_RESTORE_V1225: refresh installed PWAs with the restored Quiz entry.
 const CORE_PRECACHE=[
   "/kids/assets/kids-salah-v1272/hero-home.png?v=1272",
-  "/kids/assets/kids-salah-v1272/hero-day.png?v=1272",
-  "/kids/assets/kids-salah-v1272/fajr.png?v=1272",
-  "/kids/assets/kids-salah-v1272/dhuhr.png?v=1272",
-  "/kids/assets/kids-salah-v1272/asr.png?v=1272",
-  "/kids/assets/kids-salah-v1272/maghrib.png?v=1272",
-  "/kids/assets/kids-salah-v1272/isha.png?v=1272",
+  "/kids/assets/kids-salah-v1272/hero-day.png?v=1275",
+  "/kids/assets/kids-salah-v1272/fajr.png?v=1275",
+  "/kids/assets/kids-salah-v1272/dhuhr.png?v=1275",
+  "/kids/assets/kids-salah-v1272/asr.png?v=1275",
+  "/kids/assets/kids-salah-v1272/maghrib.png?v=1275",
+  "/kids/assets/kids-salah-v1272/isha.png?v=1275",
   "/kids/assets/kids-salah-v1262/cinematic-still.jpg",
-  "/kids/prayer-stage-v1261.css?v=1274",
-  "/kids/prayer-stage-v1261.js?v=1274",
+  "/kids/prayer-stage-v1261.css?v=1275",
+  "/kids/prayer-stage-v1261.js?v=1275",
   "/kids/assets/kids-home-v1222/dar-title-reference-clean.svg?v=1229",
   "/kids/assets/kids-home-v1219/dar-title-reference.png?v=1229",
   "/kids/assets/kids-home-v1219/dar-title-reference.png?v=1229",

@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v170-salah-native-clean1274",
-  "label": "KIDS · V1.08.91",
-  "releasedAt": "2026-10-08T18:30:40.678Z",
-  "note": "KIDS V1.08.91: Alten gebackenen Wolken-Hero vollständig deaktiviert, neue lokale Moschee-Fotowelt auch direkt in Einstiegsseiten als robustes Fallback verankert. SW 1274 frisch; iOS-Nativprojekt: altes Intro-Video entfernt und stale HTML CachePolicy korrigiert. Achtung: native Swift-Änderung erst mit neu gebauter iOS-App aktiv; Weblayout nach Cloudflare-Deploy.",
+  "buildId": "kids-shell-v171-salah-reference-viewport1275",
+  "label": "KIDS · V1.08.92",
+  "releasedAt": "2026-10-08T21:34:00+02:00",
+  "note": "KIDS V1.08.92: Gebetszeiten-Tagesansicht ohne Scrollen auf eine Bildschirmhöhe angepasst; untere Hinweiskarte entfernt; fünf Gebetsmotive direkt aus der Nutzer-Vorlage übernommen und Hero als Kinder-Nachtmoschee angeglichen. Mobile Safe Areas, große Ziffern und zurückliegende Standorteinstellungen erhalten. Native iOS-App benötigt für Swift-Änderungen weiterhin neuen Build.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1274",
+    "serviceWorkerCache": "v1275",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -1247,8 +1247,11 @@
     "salahPrayerPhotos": 7,
     "salahHeroCompact": true,
     "salahDayFiveSceneImages": true,
-    "salahSwRegistration": "v1274",
-    "kidsNativeIntroFix": "native-project-changed-requires-new-iOS-build"
+    "salahSwRegistration": "v1275",
+    "kidsNativeIntroFix": "native-project-changed-requires-new-iOS-build",
+    "salahDayViewportFit": "no-scroll-5-cards-safe-areas-v1275",
+    "salahDayArtwork": "reference-exact-five-thumbnails-adobe-hero-v1275",
+    "salahDayNoticeRemoved": true
   },
   "updatedAt": "2026-10-08T18:30:40.678Z",
   "deployTrigger": "kids-native-splash-and-hero-overlap-fix1274",
