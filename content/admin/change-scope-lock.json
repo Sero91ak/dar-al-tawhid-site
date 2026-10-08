@@ -7201,6 +7201,23 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-30T23:59:00.000Z"
+    },
+    {
+      "id": "android-public-web-download-cards-2026-10-08",
+      "at": "2026-10-08T21:21:00+02:00",
+      "approvedBy": "user-explicit-android-and-tv-website-download-buttons-with-version-date-and-install-safety",
+      "reason": "Website Android/TV APK promo alongside the existing Apple store banner; version, date, integrity and safe installation. Only release-staging PR; no live downloads without public signed GitHub release. No changes to Kids, native iOS or push.",
+      "paths": [
+        "links/index.html",
+        "cloudflare/site-router.js",
+        "download/",
+        "wrangler.toml",
+        ".assetsignore",
+        ".github/workflows/cloudflare-pages-deploy.yml",
+        ".github/workflows/verify-android-marketing.yml",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true

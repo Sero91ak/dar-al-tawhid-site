@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "brand": "DAR AL TAWḤĪD",
+  "deployment": "production",
+  "publishedAt": null,
+  "apps": {
+    "adult": {
+      "name": "DAR AL TAWḤĪD",
+      "packageName": "de.daraltawhid.app",
+      "platform": "android-phone-tablet",
+      "public": false,
+      "status": "preparing",
+      "versionName": null,
+      "versionCode": null,
+      "downloadPath": null,
+      "sha256": null,
+      "signingCertificateSha256": null
+    },
+    "tv": {
+      "name": "DAR AL TAWḤĪD",
+      "packageName": "de.daraltawhid.tv",
+      "platform": "android-tv-google-tv",
+      "public": false,
+      "status": "preparing",
+      "versionName": null,
+      "versionCode": null,
+      "downloadPath": null,
+      "sha256": null,
+      "signingCertificateSha256": null
+    },
+    "kids": {
+      "name": "TAWḤĪD KIDS",
+      "packageName": "de.daraltawhid.kids",
+      "platform": "android-phone-tablet",
+      "public": false,
+      "status": "private-testing",
+      "versionName": null,
+      "versionCode": null,
+      "downloadPath": null,
+      "sha256": null,
+      "signingCertificateSha256": null
+    }
+  }
+}
