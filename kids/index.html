@@ -5285,7 +5285,7 @@ function quizSpeak(text,options){
   options=options||{};
   try{if(speech)speech.cancel()}catch(e){}
   if(window.DARKidsOwnerVoice&&typeof window.DARKidsOwnerVoice.play==="function"){
-    var ok=window.DARKidsOwnerVoice.play(String(text||""),{source:options.source||"kids-ui"});
+    var ok=window.DARKidsOwnerVoice.play(String(text||""),{source:options.source||"kids-ui",onended:options.onended,onerror:options.onerror});
     if(options.quizPrompt&&ok===false)setQuizListenState("missing");
     return ok;
   }
