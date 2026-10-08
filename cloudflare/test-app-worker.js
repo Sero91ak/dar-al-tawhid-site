@@ -223,8 +223,8 @@ async function finalizeDarTestHomeV1193(asset) {
 // DAR_QURAN_OVERVIEW_V1250
 
 // DAR_ILM_START_PHASE1_CACHE
-  html = html.replace(/ilm-research-chat\.css(?:\?v=[^"']*)?/g, "ilm-research-chat.css?v=ilm-dialog-v1338");
-  html = html.replace(/ilm-research-chat\.js(?:\?v=[^"']*)?/g, "ilm-research-chat.js?v=ilm-dialog-v1341");
+  html = html.replace(/ilm-research-chat\.css(?:\?v=[^"']*)?/g, "ilm-research-chat.css?v=ilm-dialog-v1342");
+  html = html.replace(/ilm-research-chat\.js(?:\?v=[^"']*)?/g, "ilm-research-chat.js?v=ilm-dialog-v1342");
 
     // DAR_ILM_SCHOLARS_V1240
 
@@ -382,7 +382,7 @@ async function finalizeDarTestHomeV1193(asset) {
   }
   // Test-only welcome quick starts and four separate Wissenswege; keep global themes.
   if (!html.includes('id="darIlmWelcomeFinishV1341"')) {
-    const welcomeLink = '<link rel="stylesheet" id="darIlmWelcomeFinishV1341" href="/test/assets/ilm-welcome-finish-v1341.css?v=1341">\n';
+    const welcomeLink = '<link rel="stylesheet" id="darIlmWelcomeFinishV1341" href="/test/assets/ilm-welcome-finish-v1341.css?v=1342">\n';
     if (html.includes("</head>")) html = html.replace("</head>", welcomeLink + "</head>");
     else if (html.includes("<body")) html = html.replace("<body", welcomeLink + "<body");
     else html = welcomeLink + html;
