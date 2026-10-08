@@ -75,6 +75,20 @@ assert.equal(truth?.id,"kb:sunnah:had-0020-truth");
 assert.equal(truth.media.grade,"Ṣaḥīḥ");
 assert.equal(truth.media.source,"Ṣaḥīḥ al-Buḫārī · Nr. 6094");
 assert.ok(truth.text.includes("Schwester"));
+const checkedDorarLinks={
+ "had-0020-truth":"https://dorar.net/hadith/sharh/10209",
+ "had-0068-good-word":"https://dorar.net/hadith/sharh/133103",
+ "had-0012-speech-neighbor":"https://dorar.net/hadith/sharh/72415",
+ "had-0098-neighbor":"https://dorar.net/hadith/sharh/13224"
+};
+for(const [id,url] of Object.entries(checkedDorarLinks)){
+ const record=sunnahCorpus.items.find(row=>row.id===id);
+ assert.ok(record,"checked Ṣaḥīḥ source must be present: "+id);
+ assert.equal(record.sourceUrl,url,"source must point to its exact checked Dorar evidence");
+ assert.equal(sunnah.findSunnahByIdFromCorpus("kb:sunnah:"+id,"9–10","boy",sunnahCorpus).media.sourceUrl,url);
+}
+assert.equal(sunnahCorpus.items.some(row=>row.sourceUrl&&!/^https:\/\/dorar\.net\//.test(row.sourceUrl)),false,"do not allow unapproved source domains");
+
 assert.match(truth.text,/deutsche Übertragung/);
 assert.equal(sunnah.findSunnahByIdFromCorpus(truth.id,"6–8","girl",sunnahCorpus).text,truth.text);
 assert.equal(sunnah.findSunnahFromCorpus("Was ist Īmān?","6–8","boy",sunnahCorpus)?.id,"kb:sunnah:was-ist-iman");
