@@ -72,6 +72,36 @@
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded",install,{once:true});
   })();
 
+  /* MAJLIS HEADER LATE SAFETY V1345
+     Retain a tiny critical style layer after old test headers on iOS Safari. */
+  (function ensureMajlisNativeHeader() {
+    var id = "darIlmNativeHeaderV1345";
+    function install() {
+      var root = document.head || document.documentElement;
+      if (!root || !document.createElement || !document.getElementById || document.getElementById(id)) return;
+      var style = document.createElement("style");
+      style.id = id;
+      style.textContent = [
+        'html body.is-ilm-chat-route .ilm-chat-header{position:sticky!important;top:0!important;z-index:48!important;display:grid!important;grid-template-columns:88px minmax(0,1fr) 88px!important;align-items:center!important;gap:3px!important;width:100%!important;max-width:100%!important;min-height:70px!important;height:auto!important;margin:0!important;padding:10px max(12px,env(safe-area-inset-right,0px)) 10px max(12px,env(safe-area-inset-left,0px))!important;border:0!important;border-radius:0!important;box-shadow:none!important;background:linear-gradient(180deg,color-mix(in srgb,var(--ilm-header-bg) 64%,var(--ilm-page-bg)),var(--ilm-page-bg))!important;overflow:visible!important}',
+        'html body.is-ilm-chat-route .ilm-chat-header::before,html body.is-ilm-chat-route .ilm-chat-header::after{display:none!important;content:none!important}',
+        'html body.is-ilm-chat-route .ilm-chat-header .ilm-header-title{justify-self:center!important;min-width:0!important;display:flex!important;flex-direction:column!important;align-items:center!important;gap:2px!important}',
+        'html body.is-ilm-chat-route .ilm-chat-header .ilm-header-title b{font-size:clamp(1.24rem,4.7vw,1.55rem)!important;line-height:1.08!important;font-weight:620!important;white-space:nowrap!important;text-shadow:none!important}',
+        'html body.is-ilm-chat-route .ilm-chat-header .ilm-header-title::after{display:none!important;content:none!important}',
+        'html body.is-ilm-chat-route .ilm-chat-header .ilm-header-actions{justify-self:end!important;display:flex!important;flex-wrap:nowrap!important;gap:0!important;min-width:88px!important}',
+        'html body.is-ilm-chat-route .ilm-chat-header .ilm-icon-btn,html body.is-ilm-chat-route .ilm-chat-header>button,html body.is-ilm-chat-route .ilm-chat-header .ilm-header-actions>button{width:44px!important;min-width:44px!important;max-width:44px!important;height:44px!important;min-height:44px!important;max-height:44px!important;border:0!important;border-radius:50%!important;background:transparent!important;background-image:none!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;color:var(--ilm-primary-text)!important;transform:none!important}',
+        'html body.is-ilm-chat-route .ilm-chat-header .ilm-icon-btn:focus-visible,html body.is-ilm-chat-route .ilm-chat-header>button:focus-visible,html body.is-ilm-chat-route .ilm-chat-header .ilm-header-actions>button:focus-visible{outline:2px solid var(--ilm-accent)!important;outline-offset:-2px!important}',
+        'html body.is-ilm-chat-route .ilm-history-archive:not([open]){width:max-content!important;max-width:100%!important;min-height:0!important;margin:4px 0 14px!important;border:0!important;background:transparent!important;box-shadow:none!important}',
+        'html body.is-ilm-chat-route .ilm-history-archive:not([open])>summary{min-height:34px!important;padding:4px 8px!important;font-size:11px!important}',
+        '@media(max-width:360px){html body.is-ilm-chat-route .ilm-chat-header{grid-template-columns:80px minmax(0,1fr) 80px!important;gap:2px!important;padding-left:5px!important;padding-right:5px!important}html body.is-ilm-chat-route .ilm-chat-header .ilm-header-actions{min-width:80px!important}html body.is-ilm-chat-route .ilm-chat-header .ilm-header-title b{font-size:clamp(1.08rem,4.8vw,1.24rem)!important}}'
+      ].join("\n");
+      root.appendChild(style);
+    }
+    install();
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded",install,{once:true});
+    }
+  })();
+
   var ALLOW = [
     "islamweb.net",
     "shamela.ws",
