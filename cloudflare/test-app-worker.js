@@ -1,6 +1,7 @@
 import { ILM_SCIENCE_SYSTEM_INSTRUCTIONS, ILM_SCIENCE_POLICY_VERSION } from "./ilm-science-policy.js";
 import { composeIlmWithGemini } from "./ilm-gemini-bridge.js";
 import { researchIlmWithGemini } from "./ilm-gemini-open-research.js";
+import { researchIlmWithOpenAI } from "./ilm-openai-research.js";
 import { gateHiddenSurfaces } from "./preview-gate.js";
 const KIDS_VERSION_BODY = JSON.stringify({
   buildId: "kids-shell-v148-sourcetext1251",
@@ -415,14 +416,28 @@ async function ilmOpenResearch(request, env) {
   if (Number(request.headers.get("Content-Length")||0)>5000) return send({ok:false,error:"payload_too_large"},413);
   const data = await request.json().catch(()=>null);
   const question = String(data?.question||"").trim().slice(0,550);
-  const mode = data?.mode === "short"?"short":"detailed";
+  const mode = data?.mode === "sources" ? "sources" : data?.mode === "short" ? "short" : "detailed";
   if (question.length<7) return send({ok:false,error:"insufficient_question"},422);
-  const result = await researchIlmWithGemini(request,env,question,mode);
-  if (result.limited) return send({ok:false,error:result.reason === "gemini_quota_exhausted" ? "gemini_quota_exhausted" : "rate_limited"},429);
-  // Failure is an explicit epistemic limit, never a fallback to the model's
-  // internal memories or to unverified Google Search summaries.
-  if (!result.ok) return send({ok:false,error:result.reason||"research_unavailable"},422);
-  return send(result);
+  // Automatic failover: a Gemini quota/tool/source outage must never masquerade
+  // as an absence of Islamic evidence. The OpenAI search uses a different key,
+  // an independent quota and the same primary-source URL allowlist.
+  const gemini = await researchIlmWithGemini(request,env,question,mode);
+  if (gemini.ok) return send(gemini);
+  const openai = await researchIlmWithOpenAI(request,env,question,mode);
+  if (openai.ok) return send(openai);
+  const configured = !!env?.OPENAI_API_KEY;
+  // Return a technical-state reason; never pretend an unsearched topic is unanswerable.
+  const exhausted = !!gemini.limited || !!openai.limited;
+  return send({
+    ok:false,
+    error:exhausted ? "research_capacity_limited" : "research_providers_unavailable",
+    providers:{
+      gemini:String(gemini.reason||"unavailable").slice(0,65),
+      openai:String(openai.reason||"unavailable").slice(0,65)
+    },
+    openaiConfigured:configured,
+    epistemicStatus:"not_searched_successfully"
+  },exhausted?503:422);
 }
 
 // ILM_SCIENCE_COMPOSE_V1332 — test-only, sources-constrained German answer.
