@@ -54,3 +54,16 @@ Eine **grüne technische Strukturprüfung** ist **keine** veröffentlichbare rel
 Eine **originalgetreue, skinnte GLB-Jungenfigur** muss mit einem geeigneten echten 3D-Modellierer (z. B. Blender mit Originaldesign-Referenzen) erstellt und anschließend durch den Validator geprüft werden. Adobe/Runway-Bild- und Videogenerierung ersetzt **kein** skinnbares GLB. Zusätzliche externe Kosten oder Generierungscredits benötigen vorherige ausdrückliche Freigabe.
 
 **Keine Veränderung an Live, anderen App-Bereichen, Service Worker oder Gebets-Audios.**
+
+
+## Sichtprüfung der Originalidentität: neue harte Sperre (08.10.2026)
+
+Die vorangegangene technisch gültige Low-Poly-Drehprobe war **optisch kein akzeptables Modell des Originaljungen**. Darum darf sie nicht mehr als Kinder-Modell vorgeschlagen oder eingebunden werden. Statt einer weiteren Ersatzfigur wurde ein **separates Vier-Perspektiven-Referenzpaket** aus den ORIGINALEN Nutzerbildern aufbereitet (Front, 45°, Seitenansicht, Rückansicht). Die Quelldateien wurden **nicht geometrisch gestreckt oder durch KI verändert**; der Bildwechsel ist **kein echtes 3D-GLB**. Das vollständige Bild-/GIF-/Quellpaket liegt als Gesprächs-Anhang vor, **nicht** automatisch im Repository.
+
+- `original-boy-identity-lock-v1.json`: vollständig beschriebenes Gesicht, Augen, Haare, Kufi-Goldmuster, echter Thawb und verbotene Abweichungen; alle finalen Freigabefelder stehen absichtlich auf `false`.
+- `forbid-placeholder-release.cjs`: separates Veröffentlichungs-Gate für einen **tatsächlich vorliegenden** GLB-Kandidaten. Es lehnt den alten Low-Poly-Generator mit `engineering rig blockout`, `prototype` usw. ausdrücklich ab und verlangt **sowohl** Strukturprüfungen als auch dokumentierte individuelle visuelle Freigaben.
+- Aufrufen: `node kids/mein-gebet/rigging/forbid-placeholder-release.cjs /path/to/original-boy.glb`.
+- 6 unabhängige Prüfungen dieser Freigabelogik bestanden, einschließlich einer Sperre für den alten Low-Poly-Prototyp selbst bei irrtümlich gesetzten Freigabefeldern.
+- **Hinweis:** Die Sichtprüfung durch den Nutzer bleibt unbedingt erforderlich. Ein Modell mit falschem Gesicht wird nicht durch einen erfolgreichen GLB-Strukturtest legitimiert; umgekehrt ist das bloße Setzen von JSON-Freigabe-Flags kein gesicherter Beweis für visuelle Identität.
+
+**Nächster technischer Produktionsschritt:** das tatsächliche originalgetreue Boy-Mesh nach den Original-Perspektiven sculpten, mit dem bereits geprüften Skelett riggen und dann Qiyām/Takbīr in einer echten, gerenderten 360°-Ansicht abnehmen. Mit Adobe/Runway-Bildern ist dieser Schritt nicht bereits erledigt. Keine Credits oder Veröffentlichung ohne Nutzerfreigabe.
