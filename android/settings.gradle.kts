@@ -17,3 +17,4 @@ dependencyResolutionManagement {
 rootProject.name = "DarAlTawhid"
 include(":app")
 include(":kids")
+include(":tv")
