@@ -127,7 +127,7 @@ async function handleAnswer(req,env,user){
  const age=["4–5","6–8","9–10"].includes(input?.age)?input.age:"6–8";
  const gender=input?.gender==="girl"?"girl":"boy";
  const answer=choose(q,age,gender);
- const answerId=await sign({kind:"answer",id:answer.id,age,gender,nonce:user.nonce,exp:Math.min(Date.now()+480000,user.exp)},env);
+ const answerId=(answer.source||answer.id==="unknown")?await sign({kind:"answer",id:answer.id,age,gender,nonce:user.nonce,exp:Math.min(Date.now()+480000,user.exp)},env):null;
  return json({ok:true,answer:answer.text,source:answer.source,answerId,media:answer.media||null,verified:!!answer.source,mode:"verified_corpus_v1"});
 }
 function validAudio(bytes,mime){return (mime.includes("webm")&&bytes[0]===0x1a&&bytes[1]===0x45&&bytes[2]===0xdf&&bytes[3]===0xa3)||(mime.includes("mp4")&&bytes[4]===0x66&&bytes[5]===0x74&&bytes[6]===0x79&&bytes[7]===0x70)||(mime.includes("ogg")&&bytes[0]===79&&bytes[1]===103&&bytes[2]===103&&bytes[3]===83)}
