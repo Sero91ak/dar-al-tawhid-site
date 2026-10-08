@@ -151,6 +151,10 @@ jobs:
           PROD_CFG=json.loads((ROOT/"data/pronunciation/elevenlabs-production.json").read_text(encoding="utf-8"))
           ELEVEN_VOICE=(os.environ.get("ELEVENLABS_VOICE_ID","").strip() or str((PROD_CFG.get("masterVoice") or {}).get("voiceId") or "").strip())
           ELEVEN_MODEL=str(PROD_CFG.get("modelId") or "").strip()
+          # Speech models are selected by LANGUAGE, not by the reusable master voice.
+          # Keep V4 for genuine Arabic/Fusha; Flash for NEW German quiz renders.
+          ELEVEN_QUIZ_DE_MODEL="eleven_flash_v2_5"
+          ELEVEN_QUIZ_AR_MODEL=ELEVEN_MODEL
           ELEVEN_DUA_MODEL=ELEVEN_MODEL
           ARABIC_PROFILES={"dua_arabic","dua_arabic_slow","dua_word"}
           ARABIC_SYNTHESIS_REVISIONS={
@@ -265,12 +269,20 @@ jobs:
           def synth(text,profile,asset_dir,serial,model_id):
               prepared=prepare_profile_text(text,profile)
               revision=profile_revision(profile)
-              dictionary_fingerprint=("native-ar-no-dict" if profile in ARABIC_PROFILES else (DICT_ID+"|"+DICT_VERSION))
+              dictionary_fingerprint=(
+                  "native-ar-no-dict" if profile in ARABIC_PROFILES else
+                  "flash-inline-master-rules-kids-v1" if model_id==ELEVEN_QUIZ_DE_MODEL else
+                  (DICT_ID+"|"+DICT_VERSION)
+              )
               digest=hashlib.sha1(
                   (revision+"|"+str(model_id)+"|"+profile+"|"+dictionary_fingerprint+"|"+prepared).encode("utf-8")
               ).hexdigest()[:16]
               target=asset_dir/(digest+".m4a")
               last=None
+              # DĀR Worker currently has a V4 default. Never pretend its output
+              # was cost-saving Flash if the direct ElevenLabs API is unavailable.
+              if model_id==ELEVEN_QUIZ_DE_MODEL and not ELEVEN_KEY:
+                  raise RuntimeError("German Flash requires direct ElevenLabs API credentials; refusing unverified V4 Worker fallback")
               for attempt in range(1,4):
                   if ELEVEN_KEY:
                       if profile=="quiz_4_6":
@@ -348,15 +360,21 @@ jobs:
                               "use_speaker_boost":True
                           }
                       is_arabic_profile=profile in ("dua_arabic","dua_arabic_slow","dua_word")
+                      is_flash=model_id==ELEVEN_QUIZ_DE_MODEL
+                      if is_flash:
+                          voice_settings.pop("style",None)
                       payload={
                           "text":prepared,
                           "model_id":model_id,
                           "voice_settings":voice_settings,
-                          "apply_text_normalization":("off" if is_arabic_profile else "on")
+                          "apply_text_normalization":("off" if is_arabic_profile or is_flash else "on")
                       }
                       if is_arabic_profile:
                           payload["language_code"]="ar"
-                      if DICT_ID and DICT_VERSION and not is_arabic_profile:
+                      # Flash v2.5 does not honour phoneme dictionary tags.
+                      # For German Flash the curated inline master substitutions
+                      # from prepare_kids_voice_text are used instead.
+                      if DICT_ID and DICT_VERSION and not is_arabic_profile and not is_flash:
                           payload["pronunciation_dictionary_locators"]=[{
                               "pronunciation_dictionary_id":DICT_ID,
                               "version_id":DICT_VERSION
@@ -398,6 +416,8 @@ jobs:
                           with urllib.request.urlopen(req,timeout=180) as response:
                               data=response.read()
                       except urllib.error.HTTPError as direct_error:
+                          if model_id==ELEVEN_QUIZ_DE_MODEL:
+                              raise RuntimeError("Flash API request failed; refuse fallback to V4 Worker") from direct_error
                           if ELEVEN_KEY and SECRET and int(getattr(direct_error,"code",0) or 0) in (401,403):
                               print(f"Direct ElevenLabs auth rejected ({direct_error.code}); falling back to DĀR Voice Worker.",flush=True)
                               fallback_body=json.dumps({
@@ -472,10 +492,19 @@ jobs:
                   prepared=prepare_profile_text(text,text_profile)
                   prepared_hash=hashlib.sha256(prepared.encode("utf-8")).hexdigest()
                   expected_revision=profile_revision(text_profile)
+                  expected_cache_model=model_id if require_model_match else None
+                  # Reuse a verified old V4 German clip if it exactly matches the
+                  # current text/profile/preparation. Never burn credits converting
+                  # already-finished V4 takes into cheaper-model files.
+                  if preserve_existing and model_id==ELEVEN_QUIZ_DE_MODEL and \
+                          str(entry.get("modelId") or "")==ELEVEN_QUIZ_AR_MODEL and \
+                          str(entry.get("voiceProfileId") or "")=="serhat-owner-voice-2026" and \
+                          str(entry.get("preparedTextSha256") or "")==prepared_hash:
+                      expected_cache_model=None
                   p=local_from_entry(
                       entry,
                       asset_dir,
-                      model_id if require_model_match else None,
+                      expected_cache_model,
                       text_profile,
                       expected_revision
                   )
@@ -519,6 +548,11 @@ jobs:
                   rel="/"+str(p).replace(os.sep,"/")
                   text_profile=(profiles_by_text or {}).get(text,profile)
                   is_arabic=text_profile in ARABIC_PROFILES
+                  if preserve_existing and text in old_entries and text not in missing:
+                      # Preserve the real original model metadata and exact URL.
+                      entries[text]=dict(old_entries[text])
+                      continue
+                  uses_dictionary=(not is_arabic and model_id!=ELEVEN_QUIZ_DE_MODEL)
                   entries[text]={
                       "url":rel+"?v="+build_id,
                       "sha256":hashlib.sha256(p.read_bytes()).hexdigest(),
@@ -535,10 +569,10 @@ jobs:
                       "sourceType":"owner-voice-generated",
                       "sourceProvider":"DĀR Voice Studio",
                       "sourceSpeaker":"Serhat Abu Malik",
-                      "pronunciationDictionaryApplied":(not is_arabic),
-                      "pronunciationDictionaryId":(None if is_arabic else DICT_ID),
-                      "pronunciationDictionaryVersionId":(None if is_arabic else DICT_VERSION),
-                      "pronunciationDictionaryRuleCount":(0 if is_arabic else DICT_RULES),
+                      "pronunciationDictionaryApplied":uses_dictionary,
+                      "pronunciationDictionaryId":(DICT_ID if uses_dictionary else None),
+                      "pronunciationDictionaryVersionId":(DICT_VERSION if uses_dictionary else None),
+                      "pronunciationDictionaryRuleCount":(DICT_RULES if uses_dictionary else 0),
                       "qaBy":"automatic-owner-voice-batch-qa",
                       "qaAt":now
                   }
@@ -612,8 +646,10 @@ jobs:
               batch_config=load_manifest(ROOT/"kids/data/quiz-voice-batch.json")
               if str(batch_config.get("voiceProfileId") or "")!="serhat-owner-voice-2026":
                   raise SystemExit("Die Quiz-Batch-Datei hat keine autorisierte Serhat-Masterstimme.")
-              if str(batch_config.get("modelId") or "")!="eleven_v4":
-                  raise SystemExit("Die Quiz-Batch-Datei muss auf ElevenLabs V4 festgelegt sein.")
+              if str(batch_config.get("germanModelId") or "")!=ELEVEN_QUIZ_DE_MODEL:
+                  raise SystemExit("Quiz: German voice policy must use cost-saving Flash v2.5.")
+              if str(batch_config.get("arabicModelId") or "")!=ELEVEN_QUIZ_AR_MODEL:
+                  raise SystemExit("Quiz: native Arabic/Fuṣḥā must use ElevenLabs V4.")
               quiz_start=int(os.environ.get("QUIZ_BATCH_START") or batch_config.get("batchStart") or 1)
               quiz_count=int(os.environ.get("QUIZ_BATCH_COUNT") or batch_config.get("batchCount") or 7)
               if not (1<=quiz_start<=900 and 1<=quiz_count<=12):
@@ -663,7 +699,7 @@ jobs:
                   manifest_path=QUIZ_MANIFEST,
                   asset_dir=QUIZ_ASSETS,
                   profile="quiz_feedback",
-                  pack_id="KIDS_QUIZ_OWNER_VOICE_V4",
+                  pack_id="KIDS_QUIZ_OWNER_VOICE_HYBRID_V1",
                   counts={
                       "quizQuestions":len(quiz_items),
                       "questionPrompts":len(set(prompts)),
@@ -675,13 +711,22 @@ jobs:
                       "age7to8":sum(1 for q in quiz_items if str(q.get("ageBand") or "")=="7-8"),
                       "age9to10":sum(1 for q in quiz_items if str(q.get("ageBand") or "")=="9-10")
                   },
-                  model_id=ELEVEN_MODEL,
+                  model_id=ELEVEN_QUIZ_DE_MODEL,
                   require_model_match=True,
                   profiles_by_text=quiz_profiles,
                   preserve_existing=True
               )
               if any(p not in quiz_manifest["entries"] for p in batch_prompts):
                   raise SystemExit("Quiz-Batch unvollständig: mindestens ein freigegebener Frageclip fehlt.")
+              quiz_manifest["languageModelPolicy"]={
+                  "de":"eleven_flash_v2_5",
+                  "ar":"eleven_v4",
+                  "voiceProfileId":"serhat-owner-voice-2026",
+                  "preserveExistingV4":True,
+                  "germanPhonemeDictionaryCompatible":False,
+                  "germanInlinePronunciationMaster":True,
+                  "arabicSegmentQaRequired":True
+              }
               quiz_manifest["counts"]["readyQuestionPrompts"]=sum(p in quiz_manifest["entries"] for p in prompts)
               quiz_manifest["counts"]["remainingQuestionPrompts"]=900-quiz_manifest["counts"]["readyQuestionPrompts"]
               QUIZ_MANIFEST.write_text(json.dumps(quiz_manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
