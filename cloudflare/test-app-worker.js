@@ -3,8 +3,8 @@ import { composeIlmWithGemini } from "./ilm-gemini-bridge.js";
 import { researchIlmWithGemini } from "./ilm-gemini-open-research.js";
 import { gateHiddenSurfaces } from "./preview-gate.js";
 const KIDS_VERSION_BODY = JSON.stringify({
-  buildId: "kids-shell-v152-parents-profile-hero1255",
-  label: "KIDS · V1.08.73"
+  buildId: "kids-shell-v154-profile-persist1257",
+  label: "KIDS · V1.08.75"
 });
 
 function kidsVersionResponse() {
@@ -544,7 +544,7 @@ export default {
         target.pathname = "/kids/start";
       }
       target.searchParams.delete("darsw");
-      target.searchParams.set("kv", "kids-shell-v152-parents-profile-hero1255");
+      target.searchParams.set("kv", "kids-shell-v154-profile-persist1257");
       return Response.redirect(target.toString(), 301);
     }
 
