@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "feature": "dar-al-tawhid-kids-mein-gebet",
+  "subject": "original_girl",
+  "status": "original-girl-2d-reference-only-no-3d-mesh-or-rig",
+  "originalAsset": "../assets/figur-maedchen-original.png",
+  "referenceStatus": {
+    "originalFrontAvailable": true,
+    "independentFullTurnaroundApproved": false,
+    "mandatoryViews": [
+      "front",
+      "left_90_side",
+      "right_90_side",
+      "three_quarter_45",
+      "back"
+    ],
+    "approvedUnalteredViews": [
+      "front"
+    ],
+    "comment": "The original full-body girl PNG exists in GitHub. The five-angle boy pose sheet is NOT a source or approval for the girl. Independently reviewed girl views still required."
+  },
+  "traits": {
+    "face": "Same original girl's face and child proportions; not a transformed boy model or generic replacement",
+    "hair": "entirely concealed at ALL views, including back and both sides; no visible hair locks or forehead hair",
+    "neck": "fully covered in all poses; never reveal throat, neckline skin or back of neck",
+    "hijab": "original vivid warm rose-pink full-coverage Khimar/Hijab; securely covering head, hair, ears as per original, and neck/chest, with anatomically natural layers",
+    "dress": "full length loose prayer clothing in SAME vivid pink color family as hijab, NEVER white; modest drape, no material clipping",
+    "hands": "hands and wrists naturally posed in accordance with teaching pose review; no anatomy distortion or exposed hair",
+    "feet": "matching original pink slippers or original agreed footwear; keep leg length and child body scale invariant",
+    "animation": "all cloth/collar/hijab coverage preserved at raised hands, Ruku, Sujud, Jalsah and transitions; separate gender-specific pose/factual review not auto copied from boy"
+  },
+  "forbid": [
+    "copying boy original GLB or recoloring boy's white thobe to pink without matching original girl",
+    "white dress under pink hijab",
+    "visible hair or uncovered neck in ANY animation frame",
+    "shortened hem or clothing piercing skin at Ruku or Sujud",
+    "changing head-to-body ratio or extending limbs",
+    "declaring any unreviewed prayer pose as final or religiously authentic",
+    "missing independent 5-angle girl reference confirmation"
+  ],
+  "requiredReviewAngles": [
+    "front",
+    "left_90_side",
+    "right_90_side",
+    "three_quarter_45",
+    "back"
+  ],
+  "requiredClothingChecks": [
+    "hair_covered",
+    "neck_covered",
+    "khimar_front_chest_covered",
+    "khimar_back_covered",
+    "loose_pink_full_dress",
+    "no_clipping_all_prayer_poses"
+  ],
+  "religiousPoseReview": "pending_individual_fiqh_verification_no_unfounded_gender_differences",
+  "accept": {
+    "hasActualOriginalIdentity": false,
+    "artistQualityRenderReviewed": false,
+    "glbMeshAndSkinReviewPassed": false,
+    "rigPoseReviewPassed": false,
+    "signedOffByUserForFinal3D": false,
+    "productionReady": false
+  },
+  "approvedModelChecksum": {
+    "sha256": null,
+    "bytes": null,
+    "reviewRecordId": null,
+    "reviewedAngles": [],
+    "approvedDate": null
+  },
+  "productionGate": "No girl model was created/approved by the presence of this manifest. Only accept a real inspected GLB and independent girl reference approvals."
+}
