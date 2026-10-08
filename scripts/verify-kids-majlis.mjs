@@ -21,7 +21,7 @@ const sunnahCorpus=JSON.parse(readFileSync(new URL("../kids/data/majlis-sunnah-v
 const sunnahCoreSource=readFileSync(new URL("../kids/majlis-sunnah-core.js",import.meta.url),"utf8");
 const sunnah=new Function(sunnahCoreSource.replace(/\bexport /g,"")+
  "\nreturn {findSunnahFromCorpus,findSunnahByIdFromCorpus,majlisSunnahTesting};")();
-assert.equal(sunnahCorpus.items.filter(x=>x.kind==="hadith").length,4);
+assert.equal(sunnahCorpus.items.filter(x=>x.kind==="hadith").length,19);
 assert.equal(sunnahCorpus.items.filter(x=>x.kind==="early").length,1);
 assert.equal(sunnahCorpus.items.filter(x=>x.kind==="lesson").length,6);
 assert.ok(sunnahCorpus.items.every(x=>sunnah.majlisSunnahTesting.plausible(x)),"Sunnah entries must meet provenance requirements");
@@ -29,7 +29,30 @@ const canonVerified=JSON.parse(readFileSync(new URL("../kids/data/verified-conte
 const canonLessons=JSON.parse(readFileSync(new URL("../kids/data/deen-lessons.json",import.meta.url),"utf8"));
 const sourceHadiths=[...canonVerified.hadithLessons,...canonVerified.earlyLessons];
 const sourceLessons=canonLessons.items;
-assert.equal(sunnahCorpus.items.length,sourceHadiths.length+sourceLessons.length);
+assert.equal(sunnahCorpus.items.length,sourceHadiths.length+sourceLessons.length+15);
+const catalogEntries=sunnahCorpus.items.filter(x=>x.id.startsWith("catalog-"));
+assert.equal(catalogEntries.length,15);
+assert.equal(new Set(sunnahCorpus.items.map(x=>x.id)).size,sunnahCorpus.items.length,"no repeated knowledge ids");
+for(const row of catalogEntries){
+ assert.equal(row.kind,"hadith");
+ assert.equal(row.grade,"Ṣaḥīḥ");
+ assert.equal(row.independentScholarlyAudit,false,"project catalog verification is not a new external scholarly audit");
+ assert.deepEqual(row.ages.includes("4–5"),false,"new unreviewed child-age cases must not be shown to youngest");
+ assert.match(row.source,/^Ṣaḥīḥ (?:al-Buḫārī|Muslim) · Nr\. \d+$/);
+ const origin=JSON.parse(readFileSync(new URL("../"+row.sourceCorpus,import.meta.url),"utf8"));
+ assert.equal(origin.id,row.canonicalId);
+ assert.equal(origin.grade,row.grade);
+ assert.equal(origin.sharhStatus,"verified");
+ assert.equal(origin.recordType,"hadith");
+ assert.equal(origin.source.replace(", Nr."," · Nr."),row.source);
+ const originalGerman=origin.textMarkdown.replace(/\*\*/g,"").replace(/\*/g,"");
+ assert.ok(originalGerman.includes(row.text),"candidate translations must be exact existing prose or a labelled exact excerpt");
+ if(row.text!==originalGerman)assert.match(row.translationLabel,/^Auszug/);
+ assert.equal(row.arabicText,undefined,"never invent Arabic quotations");
+ const matchNum=row.source.match(/Nr\. (\d+)$/)?.[1];
+ assert.ok(row.triggers.includes(matchNum),"exact catalog hadith number must be searchable");
+}
+
 for(const original of sourceHadiths){
  const row=sunnahCorpus.items.find(x=>x.id===original.id);
  assert.ok(row,"all canonical Sunnah items must exist");
@@ -57,6 +80,21 @@ assert.equal(sunnah.findSunnahByIdFromCorpus(truth.id,"6–8","girl",sunnahCorpu
 assert.equal(sunnah.findSunnahFromCorpus("Was ist Īmān?","6–8","boy",sunnahCorpus)?.id,"kb:sunnah:was-ist-iman");
 assert.equal(sunnah.findSunnahFromCorpus("Sag mir etwas über das Recht des Nachbarn","4–5","boy",sunnahCorpus)?.id,"age_restricted");
 assert.equal(sunnah.findSunnahFromCorpus("Ein Hadith","6–8","boy",sunnahCorpus),null,"generic hadith requests must not pick arbitrarily");
+const intention=sunnah.findSunnahFromCorpus("Was bedeutet Niyyah?","6–8","girl",sunnahCorpus);
+assert.equal(intention?.id,"kb:sunnah:catalog-had-0001");
+assert.match(intention.text,/Auszug aus der vorhandenen deutschen Übertragung/);
+assert.match(intention.source,/Ṣaḥīḥ al-Buḫārī · Nr\. 1/);
+const pillars=sunnah.findSunnahFromCorpus("Was sind die fünf Säulen?","9–10","boy",sunnahCorpus);
+assert.equal(pillars?.id,"kb:sunnah:catalog-had-0002");
+assert.ok(pillars.text.includes("Bruder"));
+assert.equal(sunnah.findSunnahByIdFromCorpus(pillars.id,"9–10","boy",sunnahCorpus).text,pillars.text);
+assert.equal(sunnah.findSunnahFromCorpus("Ḥadīṯ 6013","9–10","girl",sunnahCorpus)?.id,"kb:sunnah:catalog-had-0016");
+assert.equal(sunnah.findSunnahFromCorpus("Hadith 6013","4–5","boy",sunnahCorpus)?.id,"age_restricted");
+const originalNumber=sunnah.findSunnahFromCorpus("Hadith 6013","9–10","girl",sunnahCorpus);
+assert.equal(originalNumber?.source,"Ṣaḥīḥ al-Buḫārī · Nr. 6013");
+const forgedCatalog={...sunnahCorpus,items:sunnahCorpus.items.map(x=>x.id==="catalog-had-0016"?{...x,grade:"Ḍaʿīf"}:x)};
+assert.equal(sunnah.findSunnahFromCorpus("Hadith 6013","9–10","girl",forgedCatalog),null);
+
 assert.equal(sunnah.findSunnahFromCorpus("Qurʾān 2:255","9–10","boy",sunnahCorpus),null,"Sunnah finder cannot hijack Quran references");
 const forgedCorpus={...sunnahCorpus,items:sunnahCorpus.items.map(x=>x.id==="had-0020-truth"?{...x,grade:"Ḍaʿīf"}:x)};
 assert.equal(sunnah.findSunnahFromCorpus("Hadith 6094","6–8","boy",forgedCorpus),null,"non-sahih row must fail closed");
