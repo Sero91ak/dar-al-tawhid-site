@@ -12,7 +12,7 @@
       "posture": "upright",
       "rightOnLeft": true,
       "handsLocation": "on_chest",
-      "exactContactAndHeight": "needs pose reference approval",
+      "exactContactAndHeight": "user_visual_approved_between_upper_thobe_buttons; precise rig_joint_targets_pending",
       "evidenceIds": [
         "bukhari-740-qabd",
         "abu-dawud-759-tawus-mursal",
@@ -21,6 +21,13 @@
       "textStrength": {
         "qabd": "sahih_Bukhari_740",
         "chest": "explicit_mursal_Tawus_and_disputed_Ibn_Khuzaymah_extension"
+      },
+      "visualReference": {
+        "path": "/kids/mein-gebet/assets/qiyam-brusthoehe-user-approved-ref-v1.jpg",
+        "status": "approved_by_user_for_visible_hand_position_only",
+        "approvedOn": "2026-10-08",
+        "reviewNote": "User explicitly confirmed chest-high Qabd in the provided four-view sheet, not mesh/rig, cloth physics, religious narration, or animation quality.",
+        "riggingReady": false
       }
     },
     "rafAlYadayn": {
@@ -68,7 +75,18 @@
           ]
         }
       ],
-      "noRafOnSujud": true
+      "noRafOnSujud": true,
+      "visualReference": {
+        "path": "/kids/mein-gebet/assets/takbir-raf-yadayn-candidate-v1.jpg",
+        "status": "awaiting_user_visual_and_rigging_review",
+        "approvedOn": null,
+        "reviewIssues": [
+          "Profile view is not a clean true 90-degree side angle",
+          "Ensure wrist/palm height correctly aligns with selected shoulder-level variant",
+          "Hands open, symmetrical, palms facing forward; check from 360-degree views"
+        ],
+        "riggingReady": false
+      }
     }
   },
   "variantsByProfile": {
@@ -108,5 +126,6 @@
       "rakats": 4,
       "rafAfterSecondRakah": true
     }
-  ]
+  ],
+  "productionNote": "Qiyam image is an approved 2D pose reference only; no true 3D mesh (.glb), animation or authoritative prayer teaching is included."
 }
