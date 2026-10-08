@@ -30,12 +30,18 @@
         file.size < 10000 || !DIGEST.test(file.digest || "")) return null;
     const href = DOWNLOAD + release.tag_name + "/" + name;
     if (file.browser_download_url !== href) return null;
-    const built = fmtDate(file.created_at);
+    // Version and original build timestamp come from the native signed build,
+    // NOT the GitHub release tag or later upload date.
+    const fields = typeof release.body === "string" ? release.body : "";
+    const versionField = name === NAMES.tv ? "TV_VERSION" : "ANDROID_VERSION";
+    const match = new RegExp("^" + versionField + "=([0-9]+\\.[0-9]+\\.[0-9]+)$", "m").exec(fields);
+    const builtAt = /^BUILD_CREATED_AT=(\\d{4}-\\d{2}-\\d{2}T[^\\n]+Z)$/m.exec(fields);
+    const built = builtAt ? fmtDate(builtAt[1]) : "";
     const published = fmtDate(release.published_at);
-    if (!built || !published) return null;
+    if (!built || !published || !match) return null;
     return {
       href, sha256: file.digest.slice(7).toLowerCase(),
-      version: "0.1." + buildNumber, built, published,
+      version: match[1], built, published,
       size: (file.size / 1024 / 1024).toLocaleString("de-DE", {
         maximumFractionDigits: 1
       }) + " MB",
