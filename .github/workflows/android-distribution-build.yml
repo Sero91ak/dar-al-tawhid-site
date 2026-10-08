@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - feature/android-distribution-2026-10-08
+      - feature/android-kids-2026-10-08
     paths:
       - "android/**"
       - ".github/workflows/android-distribution-build.yml"
@@ -64,6 +65,20 @@ jobs:
         run: |
           chmod +x gradlew
           ./gradlew --no-daemon :app:assembleDebug
+
+      - name: Kids Android Debug APK erstellen
+        if: github.ref_name == 'feature/android-kids-2026-10-08'
+        working-directory: android
+        run: ./gradlew --no-daemon :kids:assembleDebug
+
+      - name: Kids APK als internes Test-Artefakt
+        if: github.ref_name == 'feature/android-kids-2026-10-08'
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-al-tawhid-kids-android-debug
+          path: android/kids/build/outputs/apk/debug/kids-debug.apk
+          if-no-files-found: error
+          retention-days: 14
 
       - name: Debug APK als internes Test-Artefakt
         uses: actions/upload-artifact@v4
