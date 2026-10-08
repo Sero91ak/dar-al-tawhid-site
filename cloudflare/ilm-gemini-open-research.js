@@ -134,7 +134,11 @@ export async function researchIlmWithGemini(request,env,question,mode) {
         generationConfig:{maxOutputTokens:800,temperature:0.05,topP:0.8}
       })
     });
-    if (!response.ok) return {ok:false,reason:"search_provider_error"};
+    if (!response.ok) {
+      const providerError = await response.json().catch(()=>null);
+      const providerCode = String(providerError?.error?.status||"").replace(/[^A-Z_]/g,"").slice(0,32);
+      return {ok:false,reason:"search_provider_http_"+response.status+(providerCode?"_"+providerCode:"")};
+    }
     grounded = await response.json();
   } catch (_) {return {ok:false,reason:"search_provider_unavailable"};}
   finally {clearTimeout(timer);}
