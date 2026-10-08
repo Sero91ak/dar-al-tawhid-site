@@ -565,9 +565,8 @@
       reply._ilmResearchProgress = "Ich suche nach Quellen in der App und in externen Originalwerken …";
       reply._ilmNoRelevantEvidence = false;
       var ctrl = typeof AbortController !== "undefined" ? new AbortController() : null;
-      // Server can try Gemini and then OpenAI with independent web search.
-      // Do not abort at 30s while the second provider is still researching.
-      var timer = setTimeout(function(){ if(ctrl) ctrl.abort(); },65000);
+      // Only the configured Gemini provider is permitted for Majlis research.
+      var timer = setTimeout(function(){ if(ctrl) ctrl.abort(); },35000);
       var started = Date.now();
       var progress = setInterval(function(){
         if(!reply._ilmResearching){clearInterval(progress);return;}
@@ -575,7 +574,7 @@
         reply._ilmResearchProgress = elapsed < 14000
           ? "Ich gleiche die Frage mit Quellen und Originaltexten ab …"
           : elapsed < 30000
-            ? "Die Prüfung dauert etwas länger. Ich suche weiter und vergleiche die Fundstellen …"
+            ? "Die Prüfung dauert etwas länger. Gemini gleicht weitere Fundstellen ab …"
             : elapsed < 48000
               ? "Vertiefte Recherche: weitere Quellen und Nachweise werden geprüft …"
               : "Die Recherche läuft weiter. Ich überprüfe, was sich tatsächlich belegen lässt …";
@@ -597,11 +596,9 @@
       }).then(function(data){
         if(!data || !data.ok || !Array.isArray(data.sources) || !data.sources.length ||
             typeof data.answer !== "string") {
-          reply._ilmResearchError = data && (data.error === "research_capacity_limited" || data.error === "rate_limited" || data.error === "gemini_quota_exhausted")
-            ? "Die beiden Recherchewege sind momentan durch ein Kontingent- oder Anfragelimit eingeschränkt. Das ist eine technische Grenze, keine Aussage darüber, ob islamische Beweise vorhanden sind. Unsere geprüften internen Quellen bleiben verfügbar."
-            : data && (data.error === "research_providers_unavailable" || /(?:research_unavailable|search_provider|gemini_not_configured|provider_)/.test(String(data.error || "")))
-              ? "Die externe Quellenrecherche konnte technisch nicht abgeschlossen werden. Das bedeutet nicht, dass zu diesem Thema keine Belege existieren. Interne Quellen werden weiterhin verwendet."
-              : "Nach vertiefter Recherche konnte ich noch keine ausreichend überprüfbare Originalfundstelle für diese konkrete Aussage sichern. Ich gebe deshalb keine ungesicherte Zuschreibung aus. Wa-Allāhu aʿlam.";
+          reply._ilmResearchError = data && (data.error === "rate_limited" || data.error === "gemini_quota_exhausted")
+            ? "Das verfügbare Gemini-Kontingent ist derzeit ausgeschöpft. Ich verwende weiterhin unsere geprüften internen Quellen. Es wird kein kostenpflichtiger Ersatzdienst gestartet."
+            : "Die Gemini-Recherche konnte diese Frage momentan nicht mit neuen Originalfundstellen beantworten. Unsere vorhandenen Quellen bleiben verfügbar; ich erfinde keine Nachweise.";
           return;
         }
         var evidence = data.sources.map(function(source){
@@ -622,7 +619,7 @@
         }
         reply.evidences = evidence;
         reply._ilmGeneratedText = answer;
-        reply._ilmProvider = data.provider === "openai" ? "OpenAI" : data.provider === "gemini" ? "Gemini" : "";
+        reply._ilmProvider = data.provider === "gemini" ? "Gemini" : "";
         reply._ilmSourceAutoOpen = true;
         reply._ilmCitationCount = evidence.length;
         reply._ilmNoRelevantEvidence = false;
@@ -670,7 +667,7 @@
           if (answer.length < 35 || /\[(?:[4-9]|\d{2,})\]/.test(answer)) return;
           if (reply._ilmCoreAdab && !/(?:adab|anstand|benehmen|charakter|verhalten|umgang|akhl[aā]q)/i.test(answer)) return;
           reply._ilmGeneratedText = answer;
-          reply._ilmProvider = data.provider === "gemini" ? "Gemini" : data.provider === "workers_ai" ? "Cloudflare Workers AI" : "";
+          reply._ilmProvider = data.provider === "gemini" ? "Gemini" : "";
           reply._ilmCitationCount = rows.length;
           var node = document.querySelector('[data-ilm-answer-id="' + requestId + '"] .ilm-answer-text');
           if (node && document.body.classList.contains("is-ilm-chat-route")) {
