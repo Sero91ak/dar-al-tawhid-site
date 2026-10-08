@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-10-08",
+  "project": "DAR AL TAWḤĪD KIDS Mein Gebet",
+  "source": "GitHub draft #825 and source files inspected",
+  "state": "draft_not_complete",
+  "baseline": "feature/kids-mein-gebet-preview-20261008",
+  "boy": {
+    "source2D": "assets/figur-junge-original.png",
+    "status": "internal V7.7 geometric candidate, NOT visually approved",
+    "glbAvailableInRepository": false,
+    "structuralRigValidatedOnOfflineCandidate": true,
+    "requiredFiveViewOriginalityApproved": false,
+    "fiveViewSilhouetteAbove90Percent": false,
+    "lastKnownSilhouetteIoU": {
+      "front": 0.89663,
+      "threeQuarterNominalUncalibrated": 0.83245,
+      "right": 0.87264,
+      "back": 0.88963,
+      "left": 0.86511
+    },
+    "manualFaceKufiHairClothApproval": false,
+    "productionRigApproved": false
+  },
+  "girl": {
+    "source2D": "assets/figur-maedchen-original.png",
+    "status": "original 2D single graphic present, no certified original rig or 5-angle pack",
+    "fiveIndependentViewsApproved": false,
+    "actualRigGLBDelivered": false,
+    "fullHairAndNeckCoverage3DApproved": false,
+    "matchingPinkHijabAndDress3DApproved": false,
+    "separateFiqhPoseReviewApproved": false,
+    "productionRigApproved": false
+  },
+  "prayer": {
+    "theologicalSourcesFinalReviewed": false,
+    "approvedTeachingAnimations": [],
+    "provisionalRigClipNames": [
+      "Qiyam",
+      "Takbir"
+    ],
+    "pendingTeachingClips": [
+      "Ruku",
+      "RiseFromRuku",
+      "Sujud",
+      "Jalsah",
+      "SecondSujud",
+      "Tashahhud",
+      "Salam"
+    ],
+    "correctForBothProfilesApproved": false
+  },
+  "app": {
+    "profileBased2DPreviewInDraft": true,
+    "independentWorkingHttpsStaging": false,
+    "realIPadTouchSafariTestPassed": false,
+    "realIPhoneWebViewTestPassed": false,
+    "offlineTestPassed": false,
+    "approvedForHomeRelease": false,
+    "bottomTabAllowed": false
+  },
+  "permissions": {
+    "newImageGeneration": false,
+    "newPaidCreditSpend": false,
+    "mergeMain": false,
+    "liveDeploy": false
+  },
+  "reviewGates": {
+    "originalHumanApproval": false,
+    "hanbaliSourceReview": false,
+    "productionUserApproval": false
+  },
+  "productionReady": false,
+  "nextBlockingActions": [
+    "Original boy 3D face/hair/kufi topology and independent 360 degree visual approval",
+    "Independent original girl five-view rig with complete neck/hair coverage and original pink dress",
+    "Rig and validate full mandatory prayer animation sequences and independent religious review",
+    "Run real device HTTPS staging test and user approval",
+    "Do not publish until all above succeed"
+  ],
+  "truthRule": "If a check has no verified evidence it MUST remain false. Structural tests on prototype or 2D image are not a 100% completion."
+}
