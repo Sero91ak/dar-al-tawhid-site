@@ -448,6 +448,7 @@
     function shortScientificAnswer(reply) {
       var ev = (reply.evidences || []).find(function (e) { return e.statement && e.statement.length > 24; });
       var txt = String(reply.directAnswer || "").trim();
+      if (reply._ilmNoRelevantEvidence) return "Dazu liegen mir derzeit keine hinreichend passenden, geprüften Fundstellen vor. Ich verwende keine themenfremden Beiträge als Beweise.";
       if (!ev) {
         if (reply.status === "unavailable" || reply.status === "insufficient") {
           return "Für diese Frage liegt mir derzeit kein ausreichend gesicherter Beleg vor. Ich möchte dir keine unbelegte religiöse Aussage geben.";
@@ -835,11 +836,16 @@
           improved._ilmMatches = rankedMatches;
           // Retain the best question-matching entries as the answer's evidence,
           // not the incidental order of cards in the original post index.
-          if (!improved._ilmBasicTawhid && !improved._ilmBasicIman && rankedMatches.length) {
+          if (!improved._ilmBasicTawhid && !improved._ilmBasicIman) {
             var picked = rankedMatches.slice(0, 5).map(function(e){return toEvidence(e,"internal")});
-            improved.evidences = picked.concat((improved.evidences || []).filter(function(e) {
-              return e.source_domain === "external";
-            })).slice(0, 8);
+            var terms = ilmQuestionTerms(question);
+            var relevantExternal = (improved.evidences || []).filter(function(e) {
+              var contents = " " + ilmNormalize([e.work,e.reference,e.statement].join(" ")) + " ";
+              return e.source_domain === "external" &&
+                terms.some(function(w){return contents.includes(" " + w + " ")});
+            });
+            improved.evidences = picked.concat(relevantExternal).slice(0,8);
+            improved._ilmNoRelevantEvidence = !improved.evidences.length;
           }
         }
         // Only religious explanation requests go to the bounded source-based composer.
