@@ -27,6 +27,17 @@ assert.ok(html.includes('id="release-sha-adult"') && html.includes('id="release-
 assert.ok(html.includes('id="installation"') && html.includes('id="sicherheit"'), "Safe install and security help missing");
 assert.ok(html.includes('/download/official-release-links.js'), "Official release switchboard missing");
 assert.ok(links.includes('id="native-downloads-title"') && links.includes('id="direct-android-meta"') && links.includes('id="direct-android-tv-meta"'), "Apple-adjacent Android version and release date cards missing");
+
+const publicRouterPath = path.join(root, "cloudflare/site-router.js");
+if (fs.existsSync(publicRouterPath)) {
+  const router = fs.readFileSync(publicRouterPath, "utf8");
+  assert.ok(router.includes('id="darIosAppStorePromo"'), "Existing iOS promotion must remain");
+  for (const id of ["darAndroidDownloadPromo", "dar-public-android-apk", "dar-public-tv-apk", "dar-public-android-meta", "dar-public-tv-meta"]) {
+    assert.ok(router.includes('id="' + id + '"'), "Main website Android promotion missing: " + id);
+  }
+  assert.ok(router.includes('/download/official-release-links.js'), "Main website must use shared official release switchboard");
+}
+
 assert.ok(links.includes('href="/download/"'), "Website links page must offer official Android downloads");
 assert.ok(!html.includes("apk-kids"), "Kids must not have a public download button");
 assert.ok(!html.includes("de.daraltawhid.kids"), "Kids app must not be advertised publicly here");
