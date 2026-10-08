@@ -15,6 +15,7 @@ function release(n, { draft = false, invalidTv = false, published = "2026-10-08T
   const url = "https://github.com/" + repo + "/releases/download/" + tag + "/";
   return {
     tag_name: tag, draft, prerelease: false, published_at: published,
+    body: "ANDROID_VERSION=1.0." + n + "\\nTV_VERSION=0.1." + n + "\\nBUILD_CREATED_AT=2026-10-07T19:00:00Z",
     assets: ["dar-al-tawhid-android.apk", "dar-al-tawhid-tv.apk"].map((name) => ({
       name, state: "uploaded", size: 20480,
       digest: invalidTv && name.includes("-tv") ? null : "sha256:" + "a".repeat(64),
@@ -58,7 +59,9 @@ async function load(releases) {
   assert.ok(test.get("dar-public-android-apk").href.includes("v1.10"));
   assert.ok(test.get("dar-public-tv-apk").href.includes("dar-al-tawhid-tv.apk"));
   assert.ok(test.get("dar-public-tv-meta").textContent.includes("08.10.2026"));
-  assert.ok(test.get("direct-android-meta").textContent.includes("v0.1.10"));
+  assert.ok(test.get("dar-public-tv-meta").textContent.includes("v0.1.10"));
+  assert.ok(test.get("release-version-adult").textContent.includes("1.0.10"));
+  assert.ok(test.get("direct-android-meta").textContent.includes("v1.0.10"));
   assert.ok(test.get("direct-android-meta").textContent.includes("08.10.2026"));
   assert.ok(test.get("release-dates-tv").textContent.includes("07.10.2026"));
   assert.equal(test.get("release-sha-adult").textContent, "a".repeat(64));
