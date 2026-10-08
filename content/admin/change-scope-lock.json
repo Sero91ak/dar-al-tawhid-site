@@ -7162,6 +7162,19 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-30T23:59:00.000Z"
+    },
+    {
+      "id": "visitor-slide-compact-height-2026-10-08",
+      "approvedBy": "user-explicit-slide-excessive-blank-space-with-screenshots",
+      "reason": "User requests restoring manual-style compact text flow on adult visitor post slides: short slides must not inherit tallest sibling height, navigation stays close to content. No contents/IDs/Push/Kids/Apple TV changes.",
+      "paths": [
+        "assets/adaptive-layout.css",
+        "assets/adaptive-layout.js",
+        "scripts/slide-natural-height-guard.cjs",
+        ".github/workflows/check-slide-natural-height.yml",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-30T23:59:00.000Z"
     }
   ],
   "enabled": true
