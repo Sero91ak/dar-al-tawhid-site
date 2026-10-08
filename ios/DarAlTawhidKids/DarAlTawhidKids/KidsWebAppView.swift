@@ -75,25 +75,10 @@ struct KidsWebAppView: UIViewRepresentable {
             )
             NotificationCenter.default.addObserver(
                 self,
-                selector: #selector(introDidFinish),
-                name: .kidsIntroDidFinish,
-                object: nil
-            )
-            NotificationCenter.default.addObserver(
-                self,
                 selector: #selector(appDidEnterBackground),
                 name: UIApplication.didEnterBackgroundNotification,
                 object: nil
             )
-        }
-
-        @objc private func introDidFinish() {
-            guard let webView else { return }
-            webView.alpha = 1
-            let path = webView.url?.path.lowercased() ?? ""
-            if path.isEmpty || webView.url?.scheme == "about" {
-                loadKidsHome(in: webView)
-            }
         }
 
         deinit {
@@ -111,7 +96,7 @@ struct KidsWebAppView: UIViewRepresentable {
             webView.load(
                 URLRequest(
                     url: KidsAppShell.launchURL,
-                    cachePolicy: .returnCacheDataElseLoad,
+                    cachePolicy: .reloadIgnoringLocalCacheData,
                     timeoutInterval: 30
                 )
             )
@@ -323,7 +308,7 @@ struct KidsWebAppView: UIViewRepresentable {
                 webView.load(
                     URLRequest(
                         url: KidsAppShell.inAppURL(from: url),
-                        cachePolicy: .returnCacheDataElseLoad,
+                        cachePolicy: .reloadIgnoringLocalCacheData,
                         timeoutInterval: 30
                     )
                 )
@@ -362,7 +347,7 @@ struct KidsWebAppView: UIViewRepresentable {
                 webView.load(
                     URLRequest(
                         url: KidsAppShell.inAppURL(from: url),
-                        cachePolicy: .returnCacheDataElseLoad,
+                        cachePolicy: .reloadIgnoringLocalCacheData,
                         timeoutInterval: 30
                     )
                 )
