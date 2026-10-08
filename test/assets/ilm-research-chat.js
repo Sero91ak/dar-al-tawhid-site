@@ -498,12 +498,19 @@
         return txt && !/[„“]/.test(txt) && txt.length <= 480
           ? txt : "Hierzu finde ich noch keine ausreichend eindeutige Textgrundlage. Bitte formuliere die Frage genauer oder verlange eine konkrete Fundstelle.";
       }
-      // A source list is not itself a prose answer. Never duplicate raw post text
-      // merely to make the fallback look complete.
-      if (reply._ilmComposing) {
-        return "Ich ordne die gefundenen Aussagen und formuliere eine kurze Antwort anhand der vorhandenen Quellen.";
+      // MAJLIS EVIDENCE-FIRST V1351: while an answer is being composed,
+      // present the verified source excerpt immediately instead of a bare spinner.
+      // Do not invent a ruling or claim that a German paraphrase is original Arabic.
+      if (ev.verification_status === "verified" && ev.deep_link) {
+        var excerpt = clip(ev.statement, 470);
+        var reference = sourceTitle(ev);
+        return "Die geprüfte Fundstelle berichtet: „" + excerpt + "“" +
+          (reference ? " (" + reference + ")." : ".") +
+          (reply._ilmComposing
+            ? " Ich gleiche die genaue Fragestellung noch mit den Belegen ab."
+            : " Eine weitergehende rechtliche Einordnung benötigt zusätzliche einschlägige Belege. Wa-Allāhu aʿlam.");
       }
-      return "Die vorhandenen Auszüge erlauben derzeit keine ausreichend gesicherte Antwort. Ich werde keine religiöse Aussage aus ungeprüften Fundstellen ableiten. Wa-Allāhu aʿlam.";
+      return "Die gefundenen Auszüge sind noch nicht ausreichend überprüft. Ich gebe sie nicht als gesicherte religiöse Beweise aus. Wa-Allāhu aʿlam.";
     }
     function sourceDisclosure(reply, openProof) {
       var list = (reply.evidences || []).filter(function (e) { return e.verification_status === "verified" && !!e.statement && !!e.deep_link; });
