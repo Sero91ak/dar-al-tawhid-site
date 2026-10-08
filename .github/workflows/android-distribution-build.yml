@@ -238,6 +238,7 @@ jobs:
             test -s "$AAB"
             "$SIGNER" verify --verbose --print-certs "$APK" > "$RUNNER_TEMP/$item-apk-verify.txt"
             jarsigner -verify "$AAB" > "$RUNNER_TEMP/$item-aab-verify.txt"
+            grep -qi 'jar verified' "$RUNNER_TEMP/$item-aab-verify.txt"
             grep -q '^Verified' "$RUNNER_TEMP/$item-apk-verify.txt"
             SHA="$(shasum -a 256 "$APK" | cut -d' ' -f1)"
             CERT="$(grep -m1 'certificate SHA-256 digest:' "$RUNNER_TEMP/$item-apk-verify.txt" | sed 's/^.*digest: //')"
