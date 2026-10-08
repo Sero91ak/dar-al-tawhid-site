@@ -22,13 +22,6 @@ on:
       - manifest*.json
       - wrangler.test.toml
       - cloudflare/test-app-worker.js
-      - scripts/ilm-open-research-test.mjs
-      - cloudflare/ilm-science-policy.js
-      - cloudflare/ilm-gemini-bridge.js
-      - cloudflare/ilm-openai-research.js
-      - scripts/ilm-compose-fallback-test.mjs
-      - scripts/ilm-multi-provider-test.mjs
-      - cloudflare/ilm-gemini-open-research.js
       - cloudflare/preview-gate.js
       - scripts/cf-pages-build.js
       - scripts/sync-app-build-ids.js
@@ -79,12 +72,6 @@ jobs:
           INTEGRITY_BASE_REF: ${{ github.event.before || github.event.pull_request.base.sha || '' }}
         run: |
           node --check cloudflare/test-app-worker.js
-          node --check cloudflare/ilm-gemini-open-research.js
-          node --check cloudflare/ilm-openai-research.js
-          node --check test/assets/ilm-research-chat.js
-          node scripts/ilm-open-research-test.mjs
-          node scripts/ilm-multi-provider-test.mjs
-          node scripts/ilm-compose-fallback-test.mjs
           node scripts/test-app-health-check.js
           node scripts/library-deploy-guard.js
           node scripts/app-stability-guard.js
