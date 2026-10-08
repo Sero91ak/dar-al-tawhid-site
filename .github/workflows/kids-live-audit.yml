@@ -1,0 +1,80 @@
+name: Diagnose Kids Live-Deploy
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/kids-live-audit.yml
+  workflow_run:
+    workflows:
+      - Deploy Besucher-App (Cloudflare Workers)
+    types: [completed]
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: write
+concurrency:
+  group: dar-kids-live-audit
+  cancel-in-progress: true
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Measure production and latest Cloudflare deploy outcome
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          TRIGGER: ${{ github.event_name }}
+          FINISHED_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+          FINISHED_RUN: ${{ github.event.workflow_run.id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/kids-audit
+          curl --silent --show-error --fail --retry 2 --max-time 20 -A "DarAlTawhidKids-iOS"             -H "Cache-Control: no-cache"             "https://dar-al-tawhid.de/kids/version.json?audit=$(date +%s)"             -o /tmp/kids-audit/live-version.json || true
+          curl --silent --show-error --fail --retry 2 --max-time 20 -A "DarAlTawhidKids-iOS"             -H "Cache-Control: no-cache"             "https://dar-al-tawhid.de/kids/start?audit=$(date +%s)"             -o /tmp/kids-audit/live-home.html || true
+          curl --silent --show-error --fail --retry 2 --max-time 20 -A "DarAlTawhidKids-iOS"             "https://dar-al-tawhid.de/kids/prayer-stage-v1261.css?v=1274&audit=$(date +%s)"             -o /tmp/kids-audit/live-salah.css || true
+          curl --silent --show-error --fail --retry 2 --max-time 20             "https://dar-al-tawhid.de/kids/assets/kids-salah-v1272/hero-home.png?v=1274"             -o /tmp/kids-audit/live-art.png || true
+          gh api "repos/$REPO/actions/workflows/cloudflare-pages-deploy.yml/runs?per_page=6"             --jq '[.workflow_runs[]|{id,head_sha,status,conclusion,created_at,updated_at,html_url}]'             > /tmp/kids-audit/runs.json || echo '[]' > /tmp/kids-audit/runs.json
+          export AUDIT_TIME="$(date -u +%FT%TZ)"
+          python3 - <<'PY'
+          import json,os,pathlib
+          p=pathlib.Path('/tmp/kids-audit')
+          def read(name):
+            f=p/name
+            return f.read_text(errors='replace') if f.exists() else ''
+          version=read('live-version.json')
+          try: obj=json.loads(version)
+          except Exception: obj={}
+          home=read('live-home.html')
+          css=read('live-salah.css')
+          img=(p/'live-art.png')
+          runs=json.loads(read('runs.json') or '[]')
+          doc=dict(timestamp=os.getenv('AUDIT_TIME'),trigger=os.getenv('TRIGGER'),
+             finishedDeployConclusion=os.getenv('FINISHED_CONCLUSION') or None,
+             finishedDeployRun=os.getenv('FINISHED_RUN') or None,
+             live=dict(buildId=obj.get('buildId'),label=obj.get('label'),
+               homeContainsPhotoreal1274='prayer-stage-v1261.css?v=1274' in home,
+               homeContainsNativeClean='kids-shell-v170-salah-native-clean1274' in home,
+               cssContainsPhotoOverride='KIDS_SALAH_OLD_HERO_PURGE_V1274' in css,
+               photoBytes=img.stat().st_size if img.exists() else 0,
+               versionJsonReadable=bool(obj)),
+             lastDeployRuns=runs)
+          (p/'report.json').write_text(json.dumps(doc,indent=2,ensure_ascii=False)+'\n')
+          print(json.dumps(doc,indent=2,ensure_ascii=False))
+          PY
+      - name: Save diagnostic report outside production-deploy paths
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          FILE="ci-status/kids-live-audit.json"
+          CONTENT="$(base64 -w0 /tmp/kids-audit/report.json)"
+          SHA="$(gh api "repos/$REPO/contents/$FILE" --jq .sha 2>/dev/null || true)"
+          if [ -n "$SHA" ]; then
+            gh api --method PUT "repos/$REPO/contents/$FILE" -f message="ci(kids): record independent live/deploy audit" -f content="$CONTENT" -f sha="$SHA" >/dev/null
+          else
+            gh api --method PUT "repos/$REPO/contents/$FILE" -f message="ci(kids): record independent live/deploy audit" -f content="$CONTENT" >/dev/null
+          fi
