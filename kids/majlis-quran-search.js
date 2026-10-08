@@ -56,7 +56,7 @@
     const indexedRows=records.map(x=>{
       const key=x.surahId+":"+x.ayah;
       const line={surah:x.surahId,ayah:x.ayah,reference:"Qurʾān "+key,
-        surahName:x.surahName||"",arabic:x.ar,german:x.de,transliteration:x.tr||"",
+        surahName:x.surahName||"",surahArabic:x.surahArabic||"",arabic:x.ar,german:x.de,transliteration:x.tr||"",
         globalAyah:prefix[x.surahId-1]+x.ayah,
         deNorm:norm(x.de),arNorm:norm(x.ar),trNorm:norm(x.tr||"")};
       byRef.set(key,line);return line;
@@ -93,12 +93,40 @@
       surahName:row.surahName,arabic:row.arabic,german:row.german,
       reciter:"Mišārī Rāšid al-ʿAfāsī",recitationUrl:recitationUrl(row.globalAyah)};
   }
+  function surahReference(index,query){
+    const q=norm(query);
+    if(!/(?:sura|surah|sure|سوره)/.test(q))return null;
+    const chapters=index.rows.filter(v=>v.ayah===1);
+    let matched=null;
+    const numeric=String(query).match(/(?:sura|surah|sure|sūrah)\s*(\d{1,3})(?!\d)/i);
+    if(numeric){
+      const n=Number(numeric[1]);
+      matched=chapters.find(v=>v.surah===n)||null;
+    }else{
+      const hits=chapters.filter(ch=>{
+        const name=norm(ch.surahName),ar=norm(ch.surahArabic||"");
+        return (name.length>=5&&q.includes(name))||(ar.length>=4&&q.includes(ar));
+      }).sort((a,b)=>b.surahName.length-a.surahName.length);
+      if(hits.length===1)matched=hits[0];
+    }
+    if(!matched)return null;
+    const verse=String(query).match(/(?:vers(?:e)?|ayah|āyah|aya|ayat)\s*(\d{1,3})(?!\d)/i);
+    if(verse){
+      const row=index.byRef.get(matched.surah+":"+Number(verse[1]));
+      return row?{status:"found",exact:true,total:1,results:[result(row)]}:
+        {status:"not_found",exact:true,total:0,results:[]};
+    }
+    const items=index.rows.filter(v=>v.surah===matched.surah);
+    return {status:"found",exact:false,total:items.length,results:items.slice(0,MAX_RESULTS).map(result)};
+  }
   function lookup(index,query){
     const explicit=refFromQuestion(query);
     if(explicit){
       const row=index.byRef.get(explicit.surah+":"+explicit.ayah);
       return row?{status:"found",exact:true,total:1,results:[result(row)]}:{status:"not_found",exact:true,total:0,results:[]};
     }
+    const named=surahReference(index,query);
+    if(named)return named;
     const words=terms(query);
     if(!words.length)return {status:"too_broad",exact:false,total:0,results:[]};
     // Require actual Arabic/German/transliteration text. keywordIds and tagText
