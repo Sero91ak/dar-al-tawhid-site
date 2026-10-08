@@ -11,7 +11,6 @@
 		A10000000000000000000002 /* KidsWebAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000012 /* KidsWebAppView.swift */; };
 		A10000000000000000000003 /* KidsAppShell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000013 /* KidsAppShell.swift */; };
 		A10000000000000000000007 /* KidsNativeIntro.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000019 /* KidsNativeIntro.swift */; };
-		A10000000000000000000008 /* intro-ios.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000001A /* intro-ios.mp4 */; };
 		A10000000000000000000004 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000014 /* Assets.xcassets */; };
 		A10000000000000000000005 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000015 /* PrivacyInfo.xcprivacy */; };
 		A10000000000000000000006 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A10000000000000000000016 /* WebKit.framework */; };
@@ -23,7 +22,6 @@
 		A10000000000000000000012 /* KidsWebAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KidsWebAppView.swift; sourceTree = "<group>"; };
 		A10000000000000000000013 /* KidsAppShell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KidsAppShell.swift; sourceTree = "<group>"; };
 		A10000000000000000000019 /* KidsNativeIntro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KidsNativeIntro.swift; sourceTree = "<group>"; };
-		A1000000000000000000001A /* intro-ios.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "intro-ios.mp4"; sourceTree = "<group>"; };
 		A10000000000000000000014 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A10000000000000000000015 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		A10000000000000000000016 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -59,7 +57,6 @@
 				A10000000000000000000012 /* KidsWebAppView.swift */,
 				A10000000000000000000013 /* KidsAppShell.swift */,
 				A10000000000000000000019 /* KidsNativeIntro.swift */,
-				A1000000000000000000001A /* intro-ios.mp4 */,
 				A10000000000000000000014 /* Assets.xcassets */,
 				A10000000000000000000015 /* PrivacyInfo.xcprivacy */,
 				A10000000000000000000017 /* Info.plist */,
@@ -144,7 +141,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A10000000000000000000004 /* Assets.xcassets in Resources */,
-				A10000000000000000000008 /* intro-ios.mp4 in Resources */,
 				A10000000000000000000005 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
