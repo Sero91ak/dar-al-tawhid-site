@@ -246,6 +246,45 @@
             '<p class="ilm-science-proof-status">' + esc(label) + '</p></div>';
         }).join("") + '</div></details>';
     }
+    var scienceAnswerSerial = 0;
+    function requestScienceComposition(reply, question) {
+      if (!reply || proofIntent(question) || !navigator.onLine) return;
+      var rows = (reply.evidences || []).filter(function (e) { return e.statement && e.statement.length >= 18; }).slice(0,3);
+      if (!rows.length) return;
+      var requestId = "ilm-science-" + (++scienceAnswerSerial);
+      reply._ilmAnswerId = requestId;
+      reply._ilmComposing = true;
+      var ctrl = typeof AbortController !== "undefined" ? new AbortController() : null;
+      var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 13000);
+      fetch("/test/api/ilm/compose", {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+          question:String(question || "").slice(0,550),
+          evidence:rows.map(function (e) {
+            return {
+              speaker:e.speaker, work:e.work, reference:e.work,
+              authenticity:e.authenticity, verification_status:e.verification_status,
+              statement:e.statement.slice(0,900)
+            };
+          })
+        }),
+        signal:ctrl ? ctrl.signal : undefined
+      }).then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (data) {
+          if (!data || !data.ok || typeof data.answer !== "string") return;
+          var answer = plain(data.answer).slice(0,1650);
+          if (answer.length < 35) return;
+          reply._ilmGeneratedText = answer;
+          var node = document.querySelector('[data-ilm-answer-id="' + requestId + '"] .ilm-answer-text');
+          if (node && document.body.classList.contains("is-ilm-chat-route")) {
+            node.innerHTML = window.renderIlmAnswerText(reply);
+          }
+        }).catch(function () {}).finally(function () {
+          clearTimeout(timer);
+          reply._ilmComposing = false;
+        });
+    }
     window.renderIlmAnswerText = function (reply) {
       if (!reply) return "";
       if (reply.status === "conversation" || reply.status === "clarification" || reply.status === "abuse") {
@@ -255,7 +294,7 @@
       var isProof = proofIntent(reply._ilmQuestion);
       var answer = isProof
         ? "Hier sind die nächstliegenden überlieferten Aussagen mit ihren Fundstellen. Bitte beachte den Prüfstatus jeder Quelle."
-        : shortScientificAnswer(reply);
+        : (reply._ilmGeneratedText || shortScientificAnswer(reply));
       var html = '<div class="ilm-science-prose">' + answer.split(/\n{2,}/).filter(Boolean).map(function (p) {
         return '<p>' + em(p.trim()) + '</p>';
       }).join("") + '</div>';
@@ -273,7 +312,8 @@
     window.renderIlmAssistantMessage = function (message, isFirst) {
       var reply = message.reply || {};
       return (
-        '<article class="ilm-assistant-message" data-ilm-assistant="' + esc(message.id) + '">' +
+        '<article class="ilm-assistant-message" data-ilm-assistant="' + esc(message.id) + '"' + (reply._ilmAnswerId ? ' data-ilm-answer-id="' + esc(reply._ilmAnswerId) + '"' : "") + '>' +
+          '<p class="ilm-science-assistant-label">ʿILM <span>·</span> DĀR AL TAWḤĪD</p>' +
           '<div class="ilm-answer-text">' + window.renderIlmAnswerText(reply, isFirst) + "</div>" +
         "</article>"
       );
@@ -376,7 +416,10 @@
         var convo = typeof window.getActiveIlmConversation === "function"
           ? window.getActiveIlmConversation(window.getIlmStore && window.getIlmStore())
           : null;
-        return decorateReply(question, reply, convo);
+        var improved = decorateReply(question, reply, convo);
+        // Asynchronous composition never blocks the existing local answer or its sources.
+        if (improved && improved.status === "ok") requestScienceComposition(improved, question);
+        return improved;
       };
     }
 
