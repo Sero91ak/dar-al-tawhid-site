@@ -84,6 +84,7 @@
       speaker_type: item.kind || item.type || "",
       statement: clip(item.excerpt || item.statement || item.body || "", 2800),
       work: item.work || item.title || "",
+      reference: item.reference || "",
       book: item.work || "",
       chapter: item.chapter || "",
       volume: item.volume || "",
@@ -126,7 +127,7 @@
     } else if (ev.verification_status === "partially_verified" && ev.deep_link && hostOk(ev.deep_link)) {
       open = '<a class="ilm-open-src" href="' + esc(ev.deep_link) + '" target="_blank" rel="noopener noreferrer">↗ Fundstelle zur Prüfung öffnen</a>';
     }
-    var meta = [ev.chapter, ev.hadith_number ? "Nr. " + ev.hadith_number : "", ev.volume ? "Band " + ev.volume : "", ev.page ? "Seite " + ev.page : "", ev.notes].filter(Boolean).join(" · ");
+    var meta = [ev.reference && ev.reference !== ev.work ? ev.reference : "", ev.chapter, ev.hadith_number ? "Nr. " + ev.hadith_number : "", ev.volume ? "Band " + ev.volume : "", ev.page ? "Seite " + ev.page : "", ev.notes].filter(Boolean).join(" · ");
     return (
       '<section class="ilm-evidence">' +
         '<p class="ilm-evidence-kicker">' + esc(kicker) + "</p>" +
@@ -199,7 +200,7 @@
       return /(?:exakt|wörtlich|wortlaut|original(?:text|aussage)?|beweis|beleg|quelle|isn[aā]d|nachweis|wort.für.wort|zitiere|überlieferung|hadith.nummer|ḥadīṯ.nummer)/i.test(String(question || ""));
     }
     function sourceTitle(ev) {
-      return [ev.speaker, ev.work, ev.chapter, ev.hadith_number && ("Nr. " + ev.hadith_number),
+      return [ev.speaker, ev.work, ev.reference !== ev.work ? ev.reference : "", ev.chapter, ev.hadith_number && ("Nr. " + ev.hadith_number),
         ev.volume && ("Bd. " + ev.volume), ev.page && ("S. " + ev.page)].filter(Boolean).join(" · ");
     }
     function readableSentence(text, maxLen) {
@@ -232,10 +233,10 @@
         if (used[key]) return;
         used[key] = true;
         found.push({
-          title:String(it.title || it.work || "Inhalt öffnen"),
+          title:String(it.title || it.work || "Inhalt öffnen").replace(/^[\s📖📚🖋✒️📜]+/gu,"").trim(),
           kind:String(it.kind || "posts"),
           route:route,
-          summary:clip(it.excerpt || it.body || it.reference || "", 125),
+          summary:clip(String(it.excerpt || it.body || it.reference || "").replace(/^[\s📖📚🖋✒️📜]+/gu,"").trim(), 93),
           source:clip(it.reference || it.work || "", 92),
           id:String(it.id || ""),
           score:Number(it.score || 0)
@@ -368,9 +369,10 @@
         headers:{"Content-Type":"application/json"},
         body:JSON.stringify({
           question:String(question || "").slice(0,550),
+          mode:reply._ilmAnswerMode || "detailed",
           evidence:rows.map(function (e) {
             return {
-              speaker:e.speaker, work:e.work, reference:e.work,
+              speaker:e.speaker, work:e.work, reference:e.reference || e.work,
               authenticity:e.authenticity, verification_status:e.verification_status,
               statement:e.statement.slice(0,900)
             };
@@ -570,6 +572,7 @@
         var improved = decorateReply(question, reply, convo);
         if (improved) {
           improved._ilmSourceOnly = mode === "sources";
+          improved._ilmAnswerMode = mode === "short" ? "short" : "detailed";
           var rankedMatches = rankKnowledgeSources(question, matches);
           var coreTawhid = isBasicTawhidQuestion(question);
           improved._ilmDiscovery = discoveryItems(rankedMatches).filter(function(item) {
