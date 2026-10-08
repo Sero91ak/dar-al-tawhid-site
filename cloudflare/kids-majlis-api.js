@@ -1,5 +1,6 @@
 /* DĀR KIDS MAJLIS: protected parent-code pilot API, disabled until secret config. */
 import { synthesizeDarVoice, isVoiceConfigured } from "./video-studio/voice.js";
+import KIDS_VERIFIED_CONTENT from "../kids/data/verified-content.json";
 const P="/kids/api/majlis/", C="dar_kids_majlis_pilot", TTL=1200000, enc=new TextEncoder();
 const TOPICS=[
  ["allah",/wer ist allah|wer ist gott|schöpfer|tawh[iī]d|einzigkeit allahs/i,"Allah ist unser Schöpfer. Er ist Einer und niemand ist so wie Er. Das lernen wir in Sūrah al-Ikhlāṣ. Magst du die kurze Sūrah im Qurʾān-Bereich hören?","Qurʾān 112:1–4"],
@@ -24,6 +25,43 @@ const TOPICS=[
  ["niyyah",/niyyah|niyya|gute absicht|warum ist absicht wichtig/i,"Niyyah bedeutet Absicht. Allah weiß, was wir im Herzen vorhaben. Darum ist es schön, eine gute Tat aufrichtig für Allah zu tun.","Ṣaḥīḥ al-Buḫārī, Nr. 1"]
 
 ];
+// This content is shared with the Kids app and explicitly labelled "verified" by its editors.
+// Specific matcher wins over generic words like Duʿāʾ; an age-disallowed match falls back safely.
+const VERIFIED_MATCHERS=[
+ ["dua-032-rabbi-zidni-ilma",/rabbi zidni|zidn[iī]|du[aʿā]+.*wissen|wissen.*du[aʿā]+|bittgebet.*wissen|mehr wissen/i],
+ ["dua-044-rabbana-ghfir-li-wa-li-walidayya",/du[aʿā]+.*eltern|bittgebet.*eltern|du[aʿā]+.*mama|du[aʿā]+.*papa|für meine eltern beten/i],
+ ["dua-052-rabbi-anzilni-munzalan-mubarakan",/gesegnet ankommen|du[aʿā]+.*ankomm|bittgebet.*ankomm|du[aʿā]+.*reise/i],
+ ["dua-079-rabbi-audhu-bika-min-hamazati-sh-shayatin",/du[aʿā]+.*schutz|bittgebet.*schutz|schutz.*bittgebet|einflüsterungen/i],
+ ["dua-059-sayyid-al-istighfar",/sayyid.al.istighfar|großes.*vergebung.*du[aʿā]+|du[aʿā]+.*vergebung/i],
+ ["had-0020-truth",/warum.*wahrheit|warum.*nicht lügen|wahrheit sagen|sag die wahrheit/i],
+ ["had-0068-good-word",/gutes wort|freundliche worte|freundlich sprechen/i],
+ ["had-0012-speech-neighbor",/nachbar.*gut.*sprechen|gutes.*nachbar.*sagen/i],
+ ["had-0098-neighbor",/recht.*nachbar|gut.*nachbar|nachbarn helfen|nachbarn nett/i],
+ ["aishah-ansar-learning",/sch[aä]m.*fragen|scham.*lernen|traue mich nicht.*fragen/i]
+];
+const ALL_VERIFIED=[
+ ...(KIDS_VERIFIED_CONTENT?.duas||[]),
+ ...(KIDS_VERIFIED_CONTENT?.hadithLessons||[]),
+ ...(KIDS_VERIFIED_CONTENT?.earlyLessons||[])
+].filter(item=>item?.verificationStatus==="verified"&&item.source&&item.id);
+const VERIFIED_BY_ID=new Map(ALL_VERIFIED.map(x=>[String(x.id),x]));
+function libraryAnswer(item,age){
+ if(!item||item.verificationStatus!=="verified"||!item.ages?.includes(age))return null;
+ const explanation=String(item.childExplanation||"").trim(),title=String(item.title||"").trim();
+ if(!title||!explanation||!item.source)return null;
+ const hasArabic=typeof item.arabic==="string"&&item.arabic.length>0&&item.arabic.length<115;
+ const intro=hasArabic?
+   ("In „Meine Duʿāʾ“ kannst du „"+title+"“ lernen. "+explanation+" Das arabische Duʿāʾ lautet: "+item.arabic):
+   ("Unsere geprüfte Lektion „"+title+"“ erklärt es so: "+explanation+" Du findest sie auch in der Kinder-App.");
+ return {id:"library:"+item.id,text:intro,source:String(item.source)};
+}
+function matchedLibrary(text,age){
+ for(const [id,re] of VERIFIED_MATCHERS)if(re.test(text)){
+   const item=VERIFIED_BY_ID.get(id);
+   return libraryAnswer(item,age)||{id:"age_restricted",text:"Dieses Thema erklären wir für deine Altersstufe lieber gemeinsam mit deinen Eltern. Du kannst sie bitten, den passenden Lernbereich zu öffnen.",source:null};
+ }
+ return null;
+}
 const BASIC={unknown:"Das ist eine interessante Frage! Dafür habe ich hier noch keine ausreichend geprüfte Kinderantwort. Frag bitte deine Eltern. Gemeinsam könnt ihr in den Wissensbereichen unserer App nachschauen.",
 privacy:"Persönliche Daten gehören nicht in einen Chat. Sprich darüber mit deinen Eltern, ja?",
 help:"Das klingt wichtig. Bitte sprich jetzt mit einem Erwachsenen, dem du vertraust. Wenn du gerade in Gefahr bist, hol sofort Hilfe. Du musst damit nicht allein bleiben.",
@@ -46,6 +84,7 @@ function choose(q,age){
  if(/adresse|telefonnummer|passwort|mein name ist|ich wohne|schick.*foto/i.test(text))return {id:"privacy",text:BASIC.privacy,source:null};
  if(/angst vor|tut mir weh|schlägt mich|will sterben|verletze mich|missbrauch|suizid/i.test(text))return {id:"help",text:BASIC.help,source:null};
  if(/takf[iī]r|k[aā]fir|ungläubig|jihad|dschihad|gewalt|anschlag|bombe|waffe|fatw[aā]|scheidung|sex/i.test(text))return {id:"restricted",text:BASIC.restricted,source:null};
+ const library=matchedLibrary(text,age);if(library)return library;
  for(const row of TOPICS)if(row[1].test(text))return {id:row[0],text:age==="4–5"?row[2].split(/(?<=[.!?])\s+/u).slice(0,2).join(" "):row[2],source:row[3]};
  return {id:"unknown",text:BASIC.unknown,source:null};
 }
@@ -92,8 +131,10 @@ async function handleSpeech(req,env,user){
  const payload=await body(req,3000),reference=await verify(payload?.answerId,env,"answer");
  if(!reference||reference.nonce!==user.nonce||!["4–5","6–8","9–10"].includes(reference.age))return json({ok:false,error:"invalid_answer_reference"},403);
  const topic=TOPICS.find(x=>x[0]===reference.id);
- if(!topic)return json({ok:false,error:"unapproved_answer"},403);
- const text=reference.age==="4–5"?topic[2].split(/(?<=[.!?])\s+/u).slice(0,2).join(" "):topic[2];
+ const libraryItem=reference.id.startsWith("library:")?VERIFIED_BY_ID.get(reference.id.slice(8)):null;
+ const resolvedLibrary=libraryAnswer(libraryItem,reference.age);
+ if(!topic&&!resolvedLibrary)return json({ok:false,error:"unapproved_answer"},403);
+ const text=resolvedLibrary?.text||(reference.age==="4–5"?topic[2].split(/(?<=[.!?])\s+/u).slice(0,2).join(" "):topic[2]);
  try{
    const response=await synthesizeDarVoice(env,text,{profile:"kids_lesson",timestamps:false});
    if(!response.ok||!response.bytes)return json({ok:false,error:"voice_generation_failed"},502);
