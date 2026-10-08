@@ -17,6 +17,28 @@ const fullQuranSearch=new Function("window","fetch",quranSearchSource+"\nreturn 
    return new Response(JSON.stringify(fullQuranData),{status:200,headers:{"Content-Type":"application/json"}});
  });
 
+const sunnahCorpus=JSON.parse(readFileSync(new URL("../kids/data/majlis-sunnah-v1.json",import.meta.url),"utf8"));
+const sunnahCoreSource=readFileSync(new URL("../kids/majlis-sunnah-core.js",import.meta.url),"utf8");
+const sunnah=new Function(sunnahCoreSource.replace(/\bexport /g,"")+
+ "\nreturn {findSunnahFromCorpus,findSunnahByIdFromCorpus,majlisSunnahTesting};")();
+assert.equal(sunnahCorpus.items.filter(x=>x.kind==="hadith").length,4);
+assert.equal(sunnahCorpus.items.filter(x=>x.kind==="early").length,1);
+assert.equal(sunnahCorpus.items.filter(x=>x.kind==="lesson").length,6);
+assert.ok(sunnahCorpus.items.every(x=>sunnah.majlisSunnahTesting.plausible(x)),"Sunnah entries must meet provenance requirements");
+const truth=sunnah.findSunnahFromCorpus("Erzähle mir den Hadith 6094","6–8","girl",sunnahCorpus);
+assert.equal(truth?.id,"kb:sunnah:had-0020-truth");
+assert.equal(truth.media.grade,"Ṣaḥīḥ");
+assert.equal(truth.media.source,"Ṣaḥīḥ al-Buḫārī · Nr. 6094");
+assert.ok(truth.text.includes("Schwester"));
+assert.match(truth.text,/deutsche Übertragung/);
+assert.equal(sunnah.findSunnahByIdFromCorpus(truth.id,"6–8","girl",sunnahCorpus).text,truth.text);
+assert.equal(sunnah.findSunnahFromCorpus("Was ist Īmān?","6–8","boy",sunnahCorpus)?.id,"kb:sunnah:was-ist-iman");
+assert.equal(sunnah.findSunnahFromCorpus("Sag mir etwas über das Recht des Nachbarn","4–5","boy",sunnahCorpus)?.id,"age_restricted");
+assert.equal(sunnah.findSunnahFromCorpus("Ein Hadith","6–8","boy",sunnahCorpus),null,"generic hadith requests must not pick arbitrarily");
+assert.equal(sunnah.findSunnahFromCorpus("Qurʾān 2:255","9–10","boy",sunnahCorpus),null,"Sunnah finder cannot hijack Quran references");
+const forgedCorpus={...sunnahCorpus,items:sunnahCorpus.items.map(x=>x.id==="had-0020-truth"?{...x,grade:"Ḍaʿīf"}:x)};
+assert.equal(sunnah.findSunnahFromCorpus("Hadith 6094","6–8","boy",forgedCorpus),null,"non-sahih row must fail closed");
+
 const knowledgeSource=readFileSync(new URL("../cloudflare/kids-majlis-knowledge.js",import.meta.url),"utf8");
 const knowledgeIndex=JSON.parse(readFileSync(new URL("../kids/data/majlis-knowledge-v1.json",import.meta.url),"utf8"));
 assert.equal(knowledgeIndex.duas.length,120);
@@ -26,7 +48,7 @@ assert.equal(knowledgeIndex.quran.ayahCounts.reduce((x,y)=>x+y,0),6236);
 const knowledgeBody=knowledgeSource.replace(/^import .*?;\s*$/gm,"")
  .replace(/^export \{[^}]+\};?\s*$/gm,"")
  .replace("export const majlisKnowledgeTest","const majlisKnowledgeTest");
-const knowledge=new Function("INDEX",knowledgeBody+"\nreturn {findKnowledge,findKnowledgeById,mediaForCanonicalId,quranMedia,allahAlam,profilePrefix,majlisKnowledgeTest};")(knowledgeIndex);
+const knowledge=new Function("INDEX","SUNNAH","findSunnahFromCorpus","findSunnahByIdFromCorpus",knowledgeBody+"\nreturn {findKnowledge,findKnowledgeById,mediaForCanonicalId,quranMedia,allahAlam,profilePrefix,majlisKnowledgeTest};")(knowledgeIndex,sunnahCorpus,sunnah.findSunnahFromCorpus,sunnah.findSunnahByIdFromCorpus);
 const verifiedContent=JSON.parse(readFileSync(new URL("../kids/data/verified-content.json",import.meta.url),"utf8"));
 const shells=["index","start","shell"].map(name=>readFileSync(new URL("../kids/"+name+".html",import.meta.url),"utf8"));
 const noImports=apiSource.replace(/^import .*?;\s*$/gm,"")
@@ -141,6 +163,12 @@ assert.equal(api.kidsMajlisTesting.choose("Mein Passwort ist 123","6–8").id,"p
 assert.equal(api.kidsMajlisTesting.choose("jemand schlägt mich","6–8").id,"help");
 assert.equal(api.kidsMajlisTesting.choose("Wer wohnt im Mond?","6–8").id,"unknown");
 assert.equal(api.kidsMajlisTesting.choose("Rabbi zidni ilma", "6–8").id,"kb:dua:dua-knowledge");
+assert.equal(api.kidsMajlisTesting.choose("Hadith 6094","6–8","girl").id,"kb:sunnah:had-0020-truth");
+assert.equal(api.kidsMajlisTesting.choose("Was ist Īmān?","6–8","boy").id,"kb:sunnah:was-ist-iman");
+assert.equal(api.kidsMajlisTesting.choose("Hadith 6014","4–5","girl").id,"age_restricted");
+assert.ok(knowledge.findKnowledgeById("kb:sunnah:had-0020-truth","6–8","girl").media.text.includes("Wahrhaftigkeit"));
+assert.equal(knowledge.findKnowledgeById("kb:sunnah:had-0098-neighbor","4–5","girl").source,null);
+
 assert.equal(api.kidsMajlisTesting.choose("Welches Dua schützt vor Einflüsterungen?", "4–5").id,"kb:dua:dua-protection");
 assert.equal(api.kidsMajlisTesting.choose("Welches Dua schützt vor Einflüsterungen?", "9–10").id,"kb:dua:dua-protection");
 assert.equal(api.kidsMajlisTesting.choose("Schäme mich zu fragen", "9–10").id,"library:aishah-ansar-learning");
