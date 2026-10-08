@@ -1,0 +1,41 @@
+name: Majlis Gemini Open Research Smoke
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/ilm-open-research-smoke.yml
+
+permissions:
+  contents: read
+
+jobs:
+  research-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Run one bounded question against the public Test endpoint
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "One Gemini question only. This action is not triggered by ordinary app updates."
+          code="$(curl -sS --max-time 65 \
+            -X POST 'https://dar-al-tawhid.de/test/api/ilm/research' \
+            -H 'Origin: https://dar-al-tawhid.de' \
+            -H 'Content-Type: application/json' \
+            -d '{"question":"Welche Überlieferung beschreibt das Heben der Hände beim Rukūʿ im Gebet?","mode":"short"}' \
+            -o "$RUNNER_TEMP/ilm-research-smoke.json" -w '%{http_code}')"
+          export RESEARCH_HTTP_STATUS="$code"
+          node - <<'NODE'
+          const fs=require("fs");
+          const data=JSON.parse(fs.readFileSync(process.env.RUNNER_TEMP+"/ilm-research-smoke.json","utf8"));
+          const sources=Array.isArray(data.sources)?data.sources:[];
+          console.log(JSON.stringify({status:process.env.RESEARCH_HTTP_STATUS,
+            ok:!!data.ok,reason:data.error||null,sourceCount:sources.length,
+            model:data.provider||null,mode:data.researchMode||null,
+            sources:sources.map(s=>({host:(()=>{
+              try{return new URL(s.url).hostname;}catch(_){return "";}
+            })(),status:s.verification_status}))}));
+          if (process.env.RESEARCH_HTTP_STATUS!=="200"||data.ok!==true||
+              sources.length<1||typeof data.answer!=="string"||!data.answer.includes("[1]")) process.exit(1);
+          NODE
