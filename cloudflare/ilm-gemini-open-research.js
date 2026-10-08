@@ -5,7 +5,7 @@
 import { composeIlmWithGemini } from "./ilm-gemini-bridge.js";
 import { ILM_ALLOWED_SOURCE_DOMAINS } from "./ilm-science-policy.js";
 
-const MODEL = "gemini-3.5-flash-lite";
+const MODEL = "gemini-2.5-flash-lite"; // Google Search grounding has a limited Free Tier
 const ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/" + MODEL + ":generateContent";
 const APPROVED = ILM_ALLOWED_SOURCE_DOMAINS;
 const GOOGLE_REDIRECT = "vertexaisearch.cloud.google.com";
