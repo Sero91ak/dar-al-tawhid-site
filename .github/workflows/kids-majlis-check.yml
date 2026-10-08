@@ -1,9 +1,25 @@
 name: Kids Majlis – isolated verification
 on:
+  push:
+    branches:
+      - "feature/kids-majlis-*"
+    paths:
+      - "kids/majlis-kids.*"
+      - "kids/majlis-quran-search.js"
+      - "kids/majlis-sunnah-core.js"
+      - "kids/data/majlis-sunnah-v1.json"
+      - "kids/data/majlis-knowledge-v1.json"
+      - "cloudflare/kids-majlis-knowledge.js"
+      - "cloudflare/kids-majlis-api.js"
+      - "scripts/verify-kids-majlis.mjs"
+      - "kids/MAJLIS-SAFE-VOICE.md"
+      - ".github/workflows/kids-majlis-check.yml"
   pull_request:
     paths:
       - "kids/majlis-kids.*"
       - "kids/majlis-quran-search.js"
+      - "kids/majlis-sunnah-core.js"
+      - "kids/data/majlis-sunnah-v1.json"
       - "kids/data/majlis-knowledge-v1.json"
       - "data/quran-search-index.json"
       - "cloudflare/kids-majlis-knowledge.js"
