@@ -1,0 +1,28 @@
+name: Check compact slide height
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'assets/adaptive-layout.css'
+      - 'assets/adaptive-layout.js'
+      - 'scripts/slide-natural-height-guard.cjs'
+      - '.github/workflows/check-slide-natural-height.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check slide layout script
+        run: |
+          node --check assets/adaptive-layout.js
+          node --check scripts/slide-natural-height-guard.cjs
+      - name: Verify compact slide viewport uses active card height
+        run: node scripts/slide-natural-height-guard.cjs
