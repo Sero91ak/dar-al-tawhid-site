@@ -28,6 +28,7 @@ assert.equal(api.kidsMajlisTesting.choose("Welches Dua schützt vor Einflüsteru
 assert.equal(api.kidsMajlisTesting.choose("Schäme mich zu fragen", "9–10").id,"library:aishah-ansar-learning");
 assert.equal(api.kidsMajlisTesting.choose("Schäme mich zu fragen", "6–8").id,"age_restricted");
 assert.equal(api.kidsMajlisTesting.choose("Mein Passwort ist xyz; Rabbi zidni", "9–10").id,"privacy");
+assert.equal(api.kidsMajlisTesting.choose("Ich wohne hier und jemand schlägt mich", "6–8").id,"help");
 
 const limiter={limit:async()=>({success:true})};
 const parentCode="KIDS-PILOT-PARENT-ACCESS-VERY-STRONG-2026";
