@@ -259,12 +259,13 @@
         '</span><span class="ilm-discovery-arrow" aria-hidden="true">↗</span></button>';
     }
     function discoverySection(reply) {
-      var items = Array.isArray(reply._ilmDiscovery) ? reply._ilmDiscovery : [];
+      var navigational = !!reply._ilmIsDiscovery;
+      var items = Array.isArray(reply._ilmDiscovery) ? reply._ilmDiscovery.slice(0,navigational ? 7 : 2) : [];
       if (!items.length) return "";
-      var first = items.slice(0, 3).map(discoveryItemHtml).join("");
-      var more = items.slice(3);
+      var first = items.slice(0,navigational ? 3 : 2).map(discoveryItemHtml).join("");
+      var more = navigational ? items.slice(3) : [];
       return '<section class="ilm-discovery" aria-label="Passende Inhalte der App">' +
-        '<div class="ilm-discovery-head"><h3>In der App gefunden</h3><span>Direkt öffnen</span></div>' +
+        '<div class="ilm-discovery-head"><h3>' + (navigational ? 'In der App gefunden' : 'Passend zum Thema') + '</h3><span>Direkt öffnen</span></div>' +
         '<div class="ilm-discovery-results">' + first + '</div>' +
         (more.length ? '<details class="ilm-discovery-more"><summary>Weitere ' + more.length +
           ' Treffer anzeigen <span aria-hidden="true">⌄</span></summary><div class="ilm-discovery-results">' +
@@ -354,7 +355,7 @@
     }
     var scienceAnswerSerial = 0;
     function requestScienceComposition(reply, question) {
-      if (!reply || proofIntent(question) || !navigator.onLine) return;
+      if (!reply || proofIntent(question) || reply._ilmSourceOnly || !navigator.onLine) return;
       var rows = (reply.evidences || []).filter(function (e) { return e.statement && e.statement.length >= 18; }).slice(0,3);
       if (!rows.length) return;
       var requestId = "ilm-science-" + (++scienceAnswerSerial);
@@ -404,7 +405,7 @@
         var conversational = String(reply.directAnswer || reply.intro || "");
         return '<div class="ilm-science-prose"><p>' + em(conversational) + "</p></div>";
       }
-      var isProof = proofIntent(reply._ilmQuestion);
+      var isProof = proofIntent(reply._ilmQuestion) || !!reply._ilmSourceOnly;
       var answer = isProof
         ? "Hier sind die nächstliegenden überlieferten Aussagen mit ihren Fundstellen. Bitte beachte den Prüfstatus jeder Quelle."
         : (reply._ilmGeneratedText || shortScientificAnswer(reply));
@@ -568,6 +569,7 @@
           : null;
         var improved = decorateReply(question, reply, convo);
         if (improved) {
+          improved._ilmSourceOnly = mode === "sources";
           var rankedMatches = rankKnowledgeSources(question, matches);
           var coreTawhid = isBasicTawhidQuestion(question);
           improved._ilmDiscovery = discoveryItems(rankedMatches).filter(function(item) {
@@ -591,7 +593,7 @@
           }
         }
         // Only religious explanation requests go to the bounded source-based composer.
-        if (improved && improved.status === "ok" && !improved._ilmIsDiscovery && !improved._ilmBasicTawhid) requestScienceComposition(improved, question);
+        if (improved && improved.status === "ok" && !improved._ilmIsDiscovery && !improved._ilmBasicTawhid && !improved._ilmSourceOnly) requestScienceComposition(improved, question);
         return improved;
       };
     }
