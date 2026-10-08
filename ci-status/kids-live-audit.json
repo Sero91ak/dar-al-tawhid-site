@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-10-08T20:47:02Z",
+  "timestamp": "2026-10-08T20:51:49Z",
   "trigger": "workflow_run",
   "finishedDeployConclusion": "success",
-  "finishedDeployRun": "37841335547",
+  "finishedDeployRun": "37841357807",
   "live": {
     "buildId": "kids-shell-v172-salah-reference-gallery1276",
     "label": "KIDS · V1.08.93",
@@ -25,13 +25,13 @@
   },
   "lastDeployRuns": [
     {
-      "conclusion": null,
+      "conclusion": "success",
       "created_at": "2026-10-08T20:41:43Z",
       "head_sha": "3f484ab5bc5d15e27bda7ec626c57b2b7530c188",
       "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37841357807",
       "id": 37841357807,
-      "status": "in_progress",
-      "updated_at": "2026-10-08T20:46:53Z"
+      "status": "completed",
+      "updated_at": "2026-10-08T20:51:38Z"
     },
     {
       "conclusion": "success",
