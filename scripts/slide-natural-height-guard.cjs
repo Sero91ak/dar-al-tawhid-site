@@ -24,4 +24,46 @@ assert.match(js,/document\.fonts\.ready\.then\(scan\)/,"Late font loading must t
 assert.match(js,/ResizeObserver/,"Different slide text lengths must trigger re-measure");
 const post=fs.readFileSync("content/posts/2026-10-08-isa-ibn-maryam-nuzul-frueher-ikhtilaf-slides.md","utf8");
 assert.equal((post.match(/<!-- slide:\s*\d+ -->/g)||[]).length,22,"Q35 content must remain all 22 slides");
-console.log("Slide natural-height regression PASS: compact layout, swipe prev/next, 22 slides and source content intact.");
+
+const vm=require("node:vm");
+const jsStart=js.indexOf("/* v2026-10-08 · Match the carousel viewport");
+assert.ok(jsStart>0,"Natural-height controller source must be available");
+let onMutations;
+const stage={
+  style:{height:""},
+  getBoundingClientRect(){return{height:parseFloat(this.style.height)||1000};}
+};
+const carousel={
+  isConnected:true, dataset:{active:"0"},
+  querySelector(sel){return sel===".post-slide-window"?stage:null;},
+  querySelectorAll(sel){return sel===".post-slide"?slides:[];}
+};
+const slides=[140,900].map(height=>({
+  scrollHeight:height,offsetHeight:height,
+  closest(){return carousel;}
+}));
+const documentMock={
+  body:{},readyState:"complete",
+  querySelectorAll(sel){return sel==="[data-slide-carousel]"?[carousel]:[];}
+};
+const windowMock={
+  requestAnimationFrame(fn){fn();},
+  addEventListener(){}
+};
+class RO{observe(){}}
+class MO{
+  constructor(callback){onMutations=callback;}
+  observe(){}
+}
+vm.runInNewContext(js.slice(jsStart),{
+  window:windowMock, document:documentMock,ResizeObserver:RO,MutationObserver:MO
+},{timeout:2000});
+assert.equal(stage.style.height,"140px","Short active slide must not use tallest sibling height");
+carousel.dataset.active="1";
+onMutations([{type:"attributes",target:{matches(){return true;},...carousel}}]);
+assert.equal(stage.style.height,"900px","Long slide must grow naturally without clipping");
+carousel.dataset.active="0";
+onMutations([{type:"attributes",target:{matches(){return true;},...carousel}}]);
+assert.equal(stage.style.height,"140px","Back must shrink to short slide again");
+
+console.log("Slide natural-height regression PASS: 140→900→140px; compact layout, swipe prev/next, 22 slides and source content intact.");
