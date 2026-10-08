@@ -63,18 +63,44 @@
     });
     return {rows:indexedRows,byRef};
   }
+  async function localCache(){
+    try {
+      if(typeof caches==="undefined"||!caches||typeof caches.open!=="function")return null;
+      return await caches.open("dar-kids-majlis-quran-full-v1");
+    }catch(_){return null;}
+  }
+  async function verifiedIndexFromResponse(response){
+    if(!response||!response.ok)return null;
+    const data=await response.json();
+    return validate(data);
+  }
   async function load(){
     if(indexed)return indexed;
     if(!pending){
-      pending=fetch(INDEX,{cache:"force-cache",credentials:"same-origin"})
-        .then(r=>{if(!r.ok)throw Error("quran-index-unavailable");return r.json()})
-        .then(data=>{
-          const index=validate(data);
-          if(!index)throw Error("quran-index-incomplete");
-          indexed=index;return indexed;
-        });
+      pending=(async function(){
+        // Only after the first child-initiated Qurʾān question. Never prefetch on boot.
+        const cache=await localCache();
+        try{
+          const response=await fetch(INDEX,{cache:"force-cache",credentials:"same-origin"});
+          const copy=response?.ok?response.clone():null;
+          const verified=await verifiedIndexFromResponse(response);
+          if(!verified)throw Error("quran-index-incomplete");
+          indexed=verified;
+          // Preserve a previously validated corpus for the next offline session.
+          if(cache&&copy){try{await cache.put(INDEX,copy)}catch(_){}}
+          return indexed;
+        }catch(_){
+          // Never display an incomplete or modified saved corpus: recheck all 6,236 keys.
+          try{
+            const saved=cache?await cache.match(INDEX):null;
+            const verified=await verifiedIndexFromResponse(saved);
+            if(verified){indexed=verified;return indexed;}
+          }catch(_saved){}
+          return null;
+        }
+      })();
     }
-    try{return await pending}catch(_){pending=null;return null}
+    try{return await pending}finally{if(!indexed)pending=null}
   }
   function tokensMatched(tokens,haystack){
     let hits=0;
