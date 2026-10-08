@@ -168,6 +168,7 @@
     if(state.recording&&state.recording.state==="recording")state.recording.stop();
     if(state.audioUrl){URL.revokeObjectURL(state.audioUrl);state.audioUrl=null}
     state.open=false;state.approved=false;state.audio=null;
+    var app=document.querySelector(".app");if(app)app.inert=false;
     root.classList.remove("km-open","km-parent-open");document.body.style.removeProperty("overflow");
     entry.focus({preventScroll:true});
   }
@@ -177,6 +178,7 @@
     if(["4–5","6–8","9–10"].includes(age))state.age=age;
     state.open=true;state.approved=false;check.checked=false;approve.disabled=true;
     root.classList.add("km-open","km-parent-open");
+    var app=document.querySelector(".app");if(app)app.inert=true;
     welcome();check.focus();
     history.pushState({kidsMajlis:true},"",window.location.href);
   }
@@ -189,6 +191,7 @@
   form.addEventListener("submit",function(ev){ev.preventDefault();if(state.audio&&!input.value.trim())sendAudio();else submitQuestion(input.value)});
   input.addEventListener("keydown",function(ev){if(ev.key==="Enter"&&!ev.shiftKey){ev.preventDefault();form.requestSubmit()}});
   mic.addEventListener("click",startOrStopMic);listen.addEventListener("click",hear);
-  reset.addEventListener("click",function(){state.turns=0;state.lastAnswer=null;listen.disabled=true;welcome()});
+  document.addEventListener("visibilitychange",function(){if(document.hidden&&state.recording&&state.recording.state==="recording")state.recording.stop()});
+  reset.addEventListener("click",function(){state.turns=0;state.lastAnswer=null;state.audio=null;listen.disabled=true;welcome()});
   window.DarKidsMajlis={open:open,close:close,version:"kids-majlis-safe-beta-1"};
 })();
