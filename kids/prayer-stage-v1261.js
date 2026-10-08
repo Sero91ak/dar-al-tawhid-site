@@ -59,14 +59,14 @@ if(!window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches && !navigat
  salahWorld.insertBefore(motion,HERO);
  const startMotion=()=>{
   if(!motion.isConnected||document.hidden)return;
-  if(!motion.src)motion.src="/kids/assets/kids-salah-v1262/cinematic-motion.mp4";
+  if(!motion.src)motion.src="/kids/assets/kids-salah-v1262/cinematic-motion.mp4?v=1271";
   const p=motion.play();if(p&&typeof p.catch==="function")p.catch(()=>{});
  };
  const stopMotion=()=>{try{motion.pause();}catch(_){}};
  if("IntersectionObserver" in window){
   const observer=new IntersectionObserver(rows=>{
    if(rows[0]?.isIntersecting)startMotion();else stopMotion();
-  },{threshold:.05});observer.observe(stage);
+  },{threshold:.05});observer.observe(salahWorld);
  }else{startMotion();}
  document.addEventListener("visibilitychange",()=>{if(document.hidden)stopMotion();else if(stage.getBoundingClientRect().bottom>0)startMotion();});
 }
