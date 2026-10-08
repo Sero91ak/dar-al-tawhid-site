@@ -43,10 +43,6 @@
             android:configChanges="orientation|screenSize|keyboardHidden|screenLayout|smallestScreenSize|uiMode"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustResize">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -61,5 +57,253 @@
                 <data android:scheme="daraltawhid" />
             </intent-filter>
         </activity>
+
+        <activity-alias
+            android:name=".LauncherDefault"
+            android:enabled="true"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher"
+            android:roundIcon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".LauncherEmblemCremePetrol"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/dar_alt_emblem_creme_petrol"
+            android:roundIcon="@drawable/dar_alt_emblem_creme_petrol"
+            android:label="@string/app_name"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".LauncherEmblemNachtblau"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/dar_alt_emblem_nachtblau"
+            android:roundIcon="@drawable/dar_alt_emblem_nachtblau"
+            android:label="@string/app_name"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".LauncherEmblemSchwarzgold"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/dar_alt_emblem_schwarzgold"
+            android:roundIcon="@drawable/dar_alt_emblem_schwarzgold"
+            android:label="@string/app_name"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".LauncherTypeAnthrazitAr"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/dar_alt_type_anthrazit_ar"
+            android:roundIcon="@drawable/dar_alt_type_anthrazit_ar"
+            android:label="@string/app_name"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".LauncherTypeAnthrazitFein"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/dar_alt_type_anthrazit_fein"
+            android:roundIcon="@drawable/dar_alt_type_anthrazit_fein"
+            android:label="@string/app_name"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".LauncherTypeBordeauxAr"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/dar_alt_type_bordeaux_ar"
+            android:roundIcon="@drawable/dar_alt_type_bordeaux_ar"
+            android:label="@string/app_name"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".LauncherTypeBordeaux"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/dar_alt_type_bordeaux"
+            android:roundIcon="@drawable/dar_alt_type_bordeaux"
+            android:label="@string/app_name"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".LauncherTypeCremeAr"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/dar_alt_type_creme_ar"
+            android:roundIcon="@drawable/dar_alt_type_creme_ar"
+            android:label="@string/app_name"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".LauncherTypeCreme"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/dar_alt_type_creme"
+            android:roundIcon="@drawable/dar_alt_type_creme"
+            android:label="@string/app_name"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".LauncherTypeGruenAr"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/dar_alt_type_gruen_ar"
+            android:roundIcon="@drawable/dar_alt_type_gruen_ar"
+            android:label="@string/app_name"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".LauncherTypeGruen"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/dar_alt_type_gruen"
+            android:roundIcon="@drawable/dar_alt_type_gruen"
+            android:label="@string/app_name"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".LauncherTypeNavyAr"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/dar_alt_type_navy_ar"
+            android:roundIcon="@drawable/dar_alt_type_navy_ar"
+            android:label="@string/app_name"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".LauncherTypeNavy"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/dar_alt_type_navy"
+            android:roundIcon="@drawable/dar_alt_type_navy"
+            android:label="@string/app_name"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".LauncherTypeSchwarzAr"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/dar_alt_type_schwarz_ar"
+            android:roundIcon="@drawable/dar_alt_type_schwarz_ar"
+            android:label="@string/app_name"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".LauncherTypeSchwarzAr2"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/dar_alt_type_schwarz_ar2"
+            android:roundIcon="@drawable/dar_alt_type_schwarz_ar2"
+            android:label="@string/app_name"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".LauncherTypeSchwarzRund"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/dar_alt_type_schwarz_rund"
+            android:roundIcon="@drawable/dar_alt_type_schwarz_rund"
+            android:label="@string/app_name"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".LauncherTypeSchwarz"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/dar_alt_type_schwarz"
+            android:roundIcon="@drawable/dar_alt_type_schwarz"
+            android:label="@string/app_name"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias
+            android:name=".LauncherTypeWeissAr"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/dar_alt_type_weiss_ar"
+            android:roundIcon="@drawable/dar_alt_type_weiss_ar"
+            android:label="@string/app_name"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
     </application>
 </manifest>

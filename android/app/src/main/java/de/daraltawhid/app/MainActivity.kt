@@ -134,6 +134,26 @@ class MainActivity : AppCompatActivity() {
             (function(){
               try{
                 window.DAR_ANDROID_NATIVE_APP=true;
+                window.DAR_ANDROID_ALTERNATE_ICONS_AVAILABLE=true;
+                // Same in-app picker message format as the existing iOS app.
+                // Only route app-icon events; never alter the push bridge.
+                try {
+                  if(!window.webkit) window.webkit={};
+                  if(!window.webkit.messageHandlers) window.webkit.messageHandlers={};
+                  window.webkit.messageHandlers.darAppIcon={
+                    postMessage:function(payload){
+                      try {
+                        var chosen=typeof payload==="string"?payload:
+                          payload&&typeof payload==="object"?(payload.name||payload.id||""):"";
+                        DarNative.setAppIcon(String(chosen));
+                      }catch(iconError){}
+                    }
+                  };
+                  window.DAR_ANDROID_SELECT_APP_ICON=function(name){
+                    try{DarNative.setAppIcon(String(name||"default"))}catch(e){}
+                  };
+                }catch(e){}
+
                 window.DAR_ANDROID_NATIVE_PUSH=true;
                 window.DAR_IOS_NATIVE_APP=false;
                 window.DAR_ANDROID_DEVICE_ID=${jsString(device)};
@@ -177,6 +197,14 @@ class MainActivity : AppCompatActivity() {
         JSONObject.quote(value)
 
     private inner class DarJsBridge {
+        @JavascriptInterface
+        fun setAppIcon(name: String) {
+            DarAppIcons.set(this@MainActivity, name)
+        }
+
+        @JavascriptInterface
+        fun getAppIcon(): String = DarAppIcons.current(this@MainActivity)
+
         @JavascriptInterface
         fun pushSettings(json: String) {
             DarPush.applyWebSettings(json)
