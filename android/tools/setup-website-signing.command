@@ -15,15 +15,21 @@ echo "Erstellt 2 getrennte, dauerhaft verwendete Schluessel: Besucher-App und An
 echo "Die Schluessel werden NICHT ins GitHub-Repository geladen."
 echo ""
 
-if ! command -v keytool >/dev/null 2>&1; then
-  if [[ -x /usr/libexec/java_home ]]; then
-    export JAVA_HOME="$(/usr/libexec/java_home -v 17 2>/dev/null || true)"
-    if [[ -n "$JAVA_HOME" ]]; then export PATH="$JAVA_HOME/bin:$PATH"; fi
+# macOS provides /usr/bin/keytool and /usr/bin/java stubs even without any JDK.
+# Checking command -v is therefore insufficient: test that Java actually runs.
+if [[ -x /usr/libexec/java_home ]]; then
+  INSTALLED_JDK17="$(/usr/libexec/java_home -v 17 2>/dev/null || true)"
+  if [[ -n "$INSTALLED_JDK17" ]]; then
+    export JAVA_HOME="$INSTALLED_JDK17"
+    export PATH="$JAVA_HOME/bin:$PATH"
   fi
 fi
-if ! command -v keytool >/dev/null 2>&1; then
-  echo "FEHLT: Java keytool. Auf dem Mac einmal JDK 17 installieren."
-  echo "Beispiel mit Homebrew: brew install --cask temurin@17"
+if ! command -v java >/dev/null 2>&1 || ! java -version >/dev/null 2>&1 \
+   || ! command -v keytool >/dev/null 2>&1 || ! keytool -help >/dev/null 2>&1; then
+  echo "FEHLT: Eine funktionsfähige Java-Laufzeit (JDK 17)."
+  echo "Homebrew: brew install --cask temurin@17"
+  echo "Danach die aktualisierte setup-website-signing.command neu herunterladen und starten."
+  echo "Bis dahin wurden keine neuen Schlüssel angelegt oder GitHub-Secrets verändert."
   exit 2
 fi
 if ! command -v gh >/dev/null 2>&1; then
@@ -61,6 +67,12 @@ generate_and_store() {
   local keyfile="$BASE/$tag-signing.p12"
   local passfile="$BASE/$tag-signing-password.txt"
   local password
+  # First attempt may have written a password before Java failed.
+  # It is safe to regenerate only if no keystore exists at all.
+  if [[ -f "$passfile" && ! -e "$keyfile" ]]; then
+    echo "$tag: Verwaiste Passwortdatei aus abgebrochenem Start erkannt (kein Keystore)."
+    rm -f -- "$passfile"
+  fi
   if [[ -f "$keyfile" || -f "$passfile" ]]; then
     if [[ ! -s "$keyfile" || ! -s "$passfile" ]]; then
       echo "FEHLER: Unvollstaendiger vorhandener Schluessel. Bestehende Dateien werden NICHT ueberschrieben: $tag"
