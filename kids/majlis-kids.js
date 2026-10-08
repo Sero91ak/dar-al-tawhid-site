@@ -4,6 +4,7 @@
   if (window.DarKidsMajlis || !document.querySelector("#view-today .big-choice-grid")) return;
   var state = { open:false, approved:false, busy:false, age:"6–8", turns:0,
     audio:null, recording:null, microphone:null, recordingTimer:null, audioUrl:null, lastAnswer:null };
+  try { var savedAge=localStorage.getItem("kids.age"); if(["4–5","6–8","9–10"].includes(savedAge)) state.age=savedAge; } catch (_) {}
   var entries = [
     {rx:/(wer ist allah|wer ist gott|wer ist unser schöpfer|was ist tawhid|was ist tawḥīd|einzigkeit allahs)/i,answer:"Allah ist unser Schöpfer. Er ist Einer und niemand ist so wie Er. Das lernen wir in Sūrah al-Ikhlāṣ. Magst du die kurze Sūrah im Qurʾān-Bereich hören?",source:"Qurʾān 112:1–4"},
     {rx:/(was ist islam|was bedeutet islam)/i,answer:"Islam bedeutet, dass wir Allah allein anbeten und auf Ihn hören. Dazu gehören zum Beispiel das Gebet, die Zakāh und das Fasten im Ramaḍān. Wir lernen das Schritt für Schritt.",source:"Ṣaḥīḥ Muslim, Ḥadīṯ von Ǧibrīl (Nr. 8)"},
@@ -39,7 +40,7 @@
   title.appendChild(el("strong","","Majlis al-ʿIlm"));top.appendChild(back);top.appendChild(title);
   var notice=el("p","km-guardian","Dein digitaler Lernbegleiter. Keine echte Person im Chat. Schwierige Fragen kannst du mit deinen Eltern besprechen.");
   var chat=el("div","km-chat");chat.setAttribute("role","log");chat.setAttribute("aria-live","polite");
-  var form=el("form","km-form"),status=el("p","km-status","Schreibe deine Frage oder halte das Mikrofon kurz gedrückt.");
+  var form=el("form","km-form"),status=el("p","km-status","Schreibe deine Frage oder tippe auf das Mikrofon.");
   var controls=el("div","km-controls"),input=el("textarea");input.rows=1;input.maxLength=350;
   input.placeholder="Was möchtest du über den Islam wissen?";input.setAttribute("aria-label","Deine Frage");
   var mic=el("button","","🎙");mic.type="button";mic.setAttribute("aria-label","Sprachnachricht aufnehmen");
@@ -84,7 +85,11 @@
       return {answer:"Persönliche Daten gehören nicht in einen Chat. Sprich darüber mit deinen Eltern, ja?",source:null};
     if (/(angst vor|jemand tut mir weh|schlägt mich|will sterben|verletze mich|missbrauch)/i.test(q))
       return {answer:"Das klingt wichtig. Bitte sprich jetzt mit einem Erwachsenen, dem du vertraust. Wenn du gerade in Gefahr bist, hol sofort Hilfe. Du musst damit nicht allein bleiben.",source:null};
-    for(var i=0;i<entries.length;i++)if(entries[i].rx.test(q))return entries[i];
+    for(var i=0;i<entries.length;i++)if(entries[i].rx.test(q)) {
+      var item=entries[i];
+      var answer=state.age==="4–5" ? item.answer.split(/(?<=[.!?])\s+/).slice(0,2).join(" ") : item.answer;
+      return {answer:answer,source:item.source};
+    }
     return {answer:"Das ist eine interessante Frage! Dafür habe ich hier noch keine ausreichend geprüfte Kinderantwort. Frag bitte deine Eltern. Gemeinsam könnt ihr in den Wissensbereichen unserer App nachschauen.",source:null};
   }
   function submitQuestion(value) {
@@ -150,7 +155,7 @@
     var audio=state.audio;state.audio=null;state.busy=true;send.disabled=true;mic.disabled=true;
     status.textContent="Sprachnachricht wird sicher verarbeitet …";
     try{
-      var fd=new FormData();fd.append("audio",audio,"question.webm");
+      var fd=new FormData();fd.append("audio",audio,(audio.type||"").includes("mp4")?"question.m4a":"question.webm");
       var res=await fetch("/kids/api/majlis/transcribe",{method:"POST",credentials:"same-origin",body:fd});
       if(!res.ok)throw Error("no-transcription");
       var result=await res.json(),transcript=String(result.text||"").trim();
@@ -168,6 +173,8 @@
   }
   function open(){
     if(state.open)return;
+    var age=(document.querySelector(".app")||{}).getAttribute?.("data-age");
+    if(["4–5","6–8","9–10"].includes(age))state.age=age;
     state.open=true;state.approved=false;check.checked=false;approve.disabled=true;
     root.classList.add("km-open","km-parent-open");
     welcome();check.focus();
