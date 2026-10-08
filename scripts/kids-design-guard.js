@@ -251,7 +251,15 @@ function runKidsDesignGuard() {
       }
     }
     const sw = fs.readFileSync(path.join(ROOT, "kids/sw.js"), "utf8");
-    if (!sw.includes("dar-al-tawhid-kids-v"+swVersion) || !sw.includes(dockCssRef) || !sw.includes(dockJsRef)) {
+    // swVersion is the PINNED detail-dock/dua asset query version.
+    // The global service worker cache advances independently for Salah and other Kids features.
+    const liveCacheMatch = sw.match(/const CACHE_NAME=["']dar-al-tawhid-kids-v(\d+)["']/);
+    const liveCacheVersion = liveCacheMatch ? Number(liveCacheMatch[1]) : 0;
+    const buildCacheMatch = String(release.buildId || "").match(/(\d+)$/);
+    const buildCacheVersion = buildCacheMatch ? Number(buildCacheMatch[1]) : 0;
+    if (!liveCacheMatch || liveCacheVersion < Number(swVersion) ||
+        liveCacheVersion !== buildCacheVersion ||
+        !sw.includes(dockCssRef) || !sw.includes(dockJsRef)) {
       failed += fail("Kids: Service Worker enthält nicht die aktuelle CSS/JS-Offlineversion "+swVersion);
     }
   }
