@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#081a22">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Offizielle Android-Downloads von DAR AL TAWḤĪD für Smartphones, Tablets und Android TV.">
+  <meta property="og:title" content="DAR AL TAWḤĪD | Offizielle Android-Downloads">
+  <meta property="og:description" content="Sicher geprüfte APK-Dateien direkt über die offizielle DAR AL TAWḤĪD Website installieren.">
+  <meta property="og:image" content="https://dar-al-tawhid.de/app-icon-512.png">
+  <meta property="og:url" content="https://dar-al-tawhid.de/download/">
+  <title>DAR AL TAWḤĪD · Android-Downloads</title>
+  <style>
+    :root{color-scheme:dark;--bg:#07171f;--bg2:#0b2229;--gold:#e2c47e;--cream:#f4eddc;--mute:#b8c5c3;--line:rgba(226,196,126,.29)}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;min-height:100svh;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:var(--cream);background:radial-gradient(65vw 46vw at 95% -10%,#21443e66,transparent 75%),radial-gradient(54vw 53vw at -15% 66%,#193d4966,transparent 76%),linear-gradient(140deg,#061116,#0b2528 60%,#07151c)}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(90deg,transparent 0,transparent 67px,rgba(226,196,126,.018) 68px)}
+    a{color:inherit}
+    .wrap{position:relative;width:min(100%,1000px);margin:auto;padding:clamp(20px,5vw,56px) clamp(18px,4vw,38px) 55px}
+    .top{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:clamp(30px,6vw,54px)}
+    .topbrand{font-family:Georgia,"Times New Roman",serif;color:var(--gold);letter-spacing:.07em;font-size:clamp(17px,3vw,23px)}
+    .back{font-size:13px;text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:6px;color:var(--mute)}
+    .eyebrow{font-size:11px;letter-spacing:.24em;font-weight:700;color:var(--gold);margin:0 0 14px}
+    h1,h2{font-family:Georgia,"Times New Roman",serif}
+    h1{font-size:clamp(38px,6vw,66px);font-weight:500;letter-spacing:-.02em;line-height:1.04;margin:0 0 19px}
+    .lede{color:var(--mute);font-size:clamp(15px,2.2vw,19px);line-height:1.65;max-width:700px;margin:0 0 36px}
+    .rule{height:1px;background:linear-gradient(90deg,var(--line),transparent);margin-bottom:34px}
+    .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+    .card{position:relative;isolation:isolate;padding:clamp(21px,3.5vw,32px);border:1px solid var(--line);border-radius:24px;background:linear-gradient(144deg,rgba(28,65,67,.65),rgba(7,25,32,.88) 67%);box-shadow:0 12px 50px #0002;display:flex;flex-direction:column;min-height:445px;overflow:hidden}
+    .card:before{content:"";position:absolute;z-index:-1;width:240px;height:240px;border-radius:50%;top:-145px;right:-110px;background:#e2c47e1a;filter:blur(28px)}
+    .heading{display:flex;gap:19px;align-items:center}
+    .heading img{width:76px;height:76px;border-radius:18px;object-fit:cover;border:1px solid #f9dd9770;box-shadow:0 10px 28px #0005}
+    .tv-symbol{height:76px;width:110px;display:grid;place-items:center;border:2px solid var(--gold);border-radius:13px;background:linear-gradient(160deg,#12292f,#050e13);box-shadow:0 0 0 5px #e2c47e10}
+    .tv-symbol img{width:43px;height:43px;border-radius:50%;object-fit:cover}
+    .tv-symbol:after{content:"TV";position:absolute;margin-top:63px;font-weight:900;font-size:10px;color:var(--gold);letter-spacing:.22em}
+    .type{font-size:11px;font-weight:750;letter-spacing:.21em;color:var(--gold);margin:0 0 8px}
+    h2{font-size:clamp(23px,3vw,31px);line-height:1.12;margin:0;font-weight:500}
+    .desc{font-size:15px;line-height:1.68;color:var(--mute);margin:22px 0 17px}
+    .features{margin:0 0 23px;padding:0;list-style:none;display:grid;gap:9px;font-size:13px;color:#d7ded5}
+    .features li:before{content:"—";color:var(--gold);margin-right:9px}
+    .grow{flex:1}
+    .state{padding:14px 0 12px;border-top:1px solid var(--line);font-size:13px;color:var(--mute);display:flex;align-items:center;gap:9px}
+    .dot{width:7px;height:7px;flex:0 0 7px;border-radius:50%;background:#c69b58;box-shadow:0 0 9px #d0a55a55}
+    .ready .dot{background:#68cda6;box-shadow:0 0 10px #68cda688}
+    .btn{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:54px;margin-top:9px;padding:13px 18px;text-decoration:none;font-weight:750;font-size:14px;border-radius:13px;color:#082025;background:linear-gradient(120deg,#edcf8e,#d0a75c);box-shadow:0 8px 25px #0003}
+    .btn:focus-visible,.back:focus-visible{outline:3px solid #ffeab6;outline-offset:4px}
+    .btn[hidden]{display:none}
+    .placeholder{border:1px solid var(--line);border-radius:13px;padding:17px;margin-top:9px;color:var(--mute);font-size:13px;text-align:center;letter-spacing:.03em;background:#101e23}
+    .placeholder[hidden]{display:none}
+    .note{margin-top:32px;padding-top:20px;border-top:1px solid var(--line);color:var(--mute);font-size:13px;line-height:1.72}
+    .note strong{color:var(--cream)}
+    .foot{margin-top:43px;color:var(--gold);font-family:Georgia,"Times New Roman",serif;font-size:16px;text-align:center;letter-spacing:.04em}
+    .foot span{display:block;font:12px Inter,Arial,sans-serif;color:var(--mute);margin-top:8px;letter-spacing:0}
+    @media(max-width:700px){.cards{grid-template-columns:1fr}.card{min-height:0}.top{margin-bottom:28px}.lede{margin-bottom:26px}.card .grow{min-height:6px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="top" aria-label="Hauptnavigation">
+      <a class="topbrand" href="/">DAR AL TAWḤĪD</a>
+      <a class="back" href="/">Zur Website ↗</a>
+    </nav>
+
+    <main>
+      <p class="eyebrow">OFFIZIELLE APP-DOWNLOADS</p>
+      <h1>DAR AL TAWḤĪD<br>für Android.</h1>
+      <p class="lede">Die offiziellen Apps direkt über unsere Website. Einmal installieren, danach neue Beiträge und Web-Inhalte direkt in der App erleben.</p>
+      <div class="rule" aria-hidden="true"></div>
+
+      <section class="cards" aria-label="Android-App-Auswahl">
+        <article class="card" id="adult-card">
+          <div class="heading">
+            <img src="/app-icon-512.png" alt="DAR AL TAWḤĪD App-Icon" width="76" height="76" loading="eager">
+            <div><p class="type">ANDROID · SMARTPHONE & TABLET</p><h2>DAR AL TAWḤĪD</h2></div>
+          </div>
+          <p class="desc">Wissen, Qurʾān, geprüfte Quellen, Gebetszeiten und Bibliothek in einer eigenen App auf Android-Geräten.</p>
+          <ul class="features"><li>Android-Smartphones und Tablets</li><li>Aktuelle Inhalte über die Website</li><li>Offiziell signierte APK bei Veröffentlichung</li></ul>
+          <div class="grow"></div>
+          <div class="state" id="status-adult" role="status"><span class="dot" aria-hidden="true"></span><span>Veröffentlichung in Vorbereitung</span></div>
+          <a class="btn" id="apk-adult" hidden rel="noopener" href="#"><span>APK herunterladen</span><span aria-hidden="true">↓</span></a>
+          <div class="placeholder" id="pending-adult">Download folgt nach Signatur- und Gerätetest</div>
+        </article>
+
+        <article class="card" id="tv-card">
+          <div class="heading">
+            <div class="tv-symbol" aria-hidden="true"><img src="/app-icon-512.png" alt="" width="43" height="43"></div>
+            <div><p class="type">ANDROID TV · GOOGLE TV</p><h2>DAR AL TAWḤĪD</h2></div>
+          </div>
+          <p class="desc">Eigene Fernseh-App für große Bildschirme mit Fernbedienungssteuerung und aufbereiteter Qurʾān- und Wissensdarstellung.</p>
+          <ul class="features"><li>Android TV, Google TV und kompatible TV-Boxen</li><li>TV-Oberfläche statt gestreckter Handy-App</li><li>Eigenes TV-Icon und TV-Startbild</li></ul>
+          <div class="grow"></div>
+          <div class="state" id="status-tv" role="status"><span class="dot" aria-hidden="true"></span><span>TV-Version in Vorbereitung</span></div>
+          <a class="btn" id="apk-tv" hidden rel="noopener" href="#"><span>TV-APK herunterladen</span><span aria-hidden="true">↓</span></a>
+          <div class="placeholder" id="pending-tv">Download folgt nach Signatur- und TV-Test</div>
+        </article>
+      </section>
+
+      <div class="note">
+        <p><strong>Installation:</strong> Lade die APK auf deinem kompatiblen Android-Gerät herunter und erlaube die Installation dieser Datei aus der verwendeten App bzw. dem Dateimanager. Bei Fernsehern wird möglicherweise ein USB-Stick oder ein Übertragungsprogramm benötigt. Android TV und Handy-Android verwenden unterschiedliche App-Versionen.</p>
+        <p><strong>Updates:</strong> Änderungen an den geladenen Website-Inhalten erscheinen direkt in der App. Neue native Funktionen erfordern gegebenenfalls eine neue APK. Die Signatur wird bei jeder Veröffentlichung geprüft. Heruntergeladene APKs dürfen nur aus unserer offiziellen Domain bezogen werden.</p>
+      </div>
+    </main>
+
+    <footer class="foot">DAR AL TAWḤĪD<span>dar-al-tawhid.de · by Serhat Abu Malik</span></footer>
+  </div>
+
+  <script>
+    (() => {
+      "use strict";
+      const supported = new Set(["adult", "tv"]);
+      const sha = /^[a-f0-9]{64}$/i;
+      const filePattern = /^\/download\/files\/dar-al-tawhid-(android|tv)-v[0-9][0-9a-z.-]*\.apk$/;
+      const statusLabel = { adult: "Offizielle Android-APK verfügbar", tv: "Offizielle Android-TV-APK verfügbar" };
+      const statuses = { adult: "Veröffentlichung in Vorbereitung", tv: "TV-Version in Vorbereitung" };
+
+      function setAvailability(name, item, verified) {
+        const button = document.getElementById("apk-" + name);
+        const pending = document.getElementById("pending-" + name);
+        const state = document.getElementById("status-" + name);
+        if (!button || !state || !pending) return;
+        const span = state.querySelector("span:last-child");
+        if (!verified) {
+          button.hidden = true;
+          button.removeAttribute("href");
+          pending.hidden = false;
+          state.classList.remove("ready");
+          if (span) span.textContent = statuses[name];
+          return;
+        }
+        button.href = item.downloadPath;
+        button.download = item.downloadPath.split("/").pop();
+        button.hidden = false;
+        pending.hidden = true;
+        state.classList.add("ready");
+        if (span) span.textContent = statusLabel[name] + " · " + item.versionName;
+      }
+
+      async function refresh() {
+        try {
+          const response = await fetch("/download/releases.json", { cache: "no-store", credentials: "omit" });
+          if (!response.ok) return;
+          const doc = await response.json();
+          if (!doc || doc.schemaVersion !== 1 || !doc.apps) return;
+          for (const name of supported) {
+            const item = doc.apps[name];
+            let verified = Boolean(item &&
+              item.public === true && item.status === "published" &&
+              Number.isInteger(item.versionCode) && item.versionCode > 0 &&
+              typeof item.versionName === "string" && item.versionName.length > 0 &&
+              typeof item.downloadPath === "string" &&
+              filePattern.test(item.downloadPath) &&
+              (name === "adult" ? item.downloadPath.includes("-android-") : item.downloadPath.includes("-tv-")) &&
+              typeof item.sha256 === "string" && sha.test(item.sha256) &&
+              typeof item.signingCertificateSha256 === "string" &&
+              /^[A-Fa-f0-9:]{64,95}$/.test(item.signingCertificateSha256)
+            );
+            if (verified) {
+              try {
+                const head = await fetch(item.downloadPath, { method: "HEAD", cache: "no-store", credentials: "omit" });
+                verified = head.ok && Number(head.headers.get("content-length") || "0") > 0;
+              } catch (_) { verified = false; }
+            }
+            setAvailability(name, item, verified);
+          }
+        } catch (_) {
+          // Keep the download button hidden if the release registry is unavailable.
+        }
+      }
+      refresh();
+    })();
+  </script>
+</body>
+</html>
