@@ -5,7 +5,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const ROOT = path.resolve(__dirname, "..");
 const PREFIX = "content/admin/chat-publish-requests/";
-const COMMANDS = new Set(["global live pushen", "push is live", "push live", "global live veröffentlichen", "global live veroeffentlichen"]);
+const COMMANDS = new Set(["global live pushen", "push is live", "push live", "global live veröffentlichen", "global live veroeffentlichen", "global live veröffentlichen mit push", "global live veroeffentlichen mit push"]);
 function requireValid(ok, reason) { if (!ok) throw Error("Chat Publish: " + reason); }
 function field(yaml, key) {
   const m = yaml.match(new RegExp("^" + key + ":\\s*(.*)$", "m"));
@@ -27,7 +27,11 @@ function inspect(request) {
   requireValid(field(fm[1], "title") && field(fm[1], "category") && field(fm[1], "source"), "required metadata");
   const slide = /^(?:type:\s*["']?slides?|layout:\s*["']?slides?)["']?\s*$/m.test(fm[1]);
   requireValid((request.mode === "slide") === slide, "mode mismatch");
-  if (slide) requireValid(/^(slides:\s*$)/m.test(fm[1]) || /<!--\s*slide:\s*\d+\s*-->/.test(markdown), "slide content missing");
+  if (slide) {
+    const yamlSlides = (fm[1].match(/^  - (?:title|text):/gm) || []).length;
+    const bodySlides = (markdown.match(/<!--\\s*slide:\\s*\\d+\\s*-->/g) || []).length;
+    requireValid(Math.max(yamlSlides, bodySlides) >= 2, "slide mode needs at least two statements");
+  }
   const sourceRefs = [...new Set([...markdown.matchAll(/\/q\/([1-9]\d*)/g)].map(m => Number(m[1])))];
   requireValid(sourceRefs.length > 0, "shortlink missing");
   const registry = JSON.parse(fs.readFileSync(path.join(ROOT, "q/_registry/shortlinks.json"), "utf8"));
@@ -49,6 +53,13 @@ async function run() {
   const post = inspect(request);
   console.log("Chat Publish validated", post.id, request.mode, post.sourceRefs.length, "source(s)");
   if (mode === "--check") return;
+  const stored = JSON.parse(fs.readFileSync(path.join(ROOT, "content/posts/posts-index.json"), "utf8")).files || [];
+  for (const entry of stored) {
+    const existing = path.join(ROOT, "content/posts", entry.name);
+    if (!fs.existsSync(existing)) continue;
+    const current = fs.readFileSync(existing, "utf8").match(/^---\\s*\\n([\\s\\S]*?)\\n---/);
+    requireValid(!current || field(current[1], "id") !== post.id, "post id already exists");
+  }
   requireValid(process.env.GITHUB_ACTIONS === "true" && process.env.GITHUB_REF === "refs/heads/main", "Actions main only");
   const secret = String(process.env.ADMIN_PUBLISH_SECRET || "");
   requireValid(Boolean(secret), "Admin Publisher connection missing");
