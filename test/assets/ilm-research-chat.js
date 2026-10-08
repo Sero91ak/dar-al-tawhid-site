@@ -555,7 +555,7 @@
         var conversational = String(reply.directAnswer || reply.intro || "");
         return (reply._ilmGreetingPrefix ? '<p class="ilm-greeting-inline">' + esc(reply._ilmGreetingPrefix) + "</p>" : "") + '<div class="ilm-science-prose"><p>' + em(conversational) + "</p></div>";
       }
-      var isProof = (proofIntent(reply._ilmQuestion) || !!reply._ilmSourceOnly) && !reply._ilmTawhidFollowup;
+      var isProof = (proofIntent(reply._ilmOriginalQuestion || reply._ilmQuestion) || !!reply._ilmSourceOnly) && !reply._ilmTawhidFollowup;
       var anyProof = (reply.evidences || []).some(function(e){return e && e.statement && e.statement.length >= 18;});
       var countAsked = Number(reply._ilmRequestedEvidenceCount || 0);
       var verifiedSources = (reply.evidences || []).filter(function(e) {
@@ -918,6 +918,7 @@
         var reply = oldBuild(scientificQuestion, matches, mode, external);
         var improved = decorateReply(scientificQuestion, reply, convo);
         if (improved) {
+          improved._ilmOriginalQuestion = question;
           improved._ilmStudyReminder = ilmStudyReminder(question,convo);
           improved._ilmRequestedEvidenceCount = ilmRequestedEvidenceCount(question);
           improved._ilmGreetingPrefix = greeting.greeting && greeting.question ? "Wa-ʿalaykum as-salām wa-raḥmatullāhi wa-barakātuh." : "";
