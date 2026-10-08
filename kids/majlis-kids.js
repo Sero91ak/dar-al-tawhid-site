@@ -77,7 +77,24 @@
     var box=el("article","km-msg"+(who==="you"?" km-you":""));
     box.appendChild(el("small","",who==="you"?"DEINE FRAGE":"DEIN LERNBEGLEITER"));
     box.appendChild(el("div","",text));
-    if(source) box.appendChild(el("span","km-source","Quelle: "+source));
+    if(source){
+      box.appendChild(el("span","km-source","Quelle: "+source));
+      var isDua=/Meine Duʿāʾ|arabische[sr]? Duʿāʾ|Bittgebet|Duʿāʾ kannst/i.test(String(text));
+      var related=isDua?"dua":/Qurʾān/i.test(String(source))?"quran":/Ṣaḥīḥ|Muslim|Buḫārī/i.test(String(source))?"quiz":null;
+      var dest=related==="dua"?"openDuaButton":related==="quiz"?"openQuizButton":null;
+      var label=related==="dua"?"Meine Duʿāʾ öffnen":related==="quran"?"Im Qurʾān weiterlernen":"Wissen im Quiz üben";
+      if(related){
+        var next=el("button","km-related",label+"  ›");next.type="button";
+        next.addEventListener("click",function(){
+          var previous=!!(history.state&&history.state.kidsMajlis);
+          close();
+          if(previous)history.back();
+          var target=dest?document.getElementById(dest):document.querySelector('.choice.quran[data-go="quran"]');
+          if(target)target.click();
+        });
+        box.appendChild(next);
+      }
+    }
     chat.appendChild(box);chat.scrollTop=chat.scrollHeight;
     return box;
   }
