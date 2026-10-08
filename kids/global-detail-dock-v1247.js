@@ -43,7 +43,7 @@ function initDetail(c){
  }
  if(btn.parentElement!==bar)bar.insertBefore(btn,bar.firstChild);
  if(!btn.classList.contains("kids-detail-dock-back"))btn.classList.add("kids-detail-dock-back");
- btn.setAttribute("aria-label","Zurück");
+ if(btn.getAttribute("aria-label")!=="Zurück")btn.setAttribute("aria-label","Zurück");
  if(btn.textContent)btn.textContent=""; // CSS chevron; preserve original click handler
  setText(q(bar,".kids-detail-appbar-title"),configTitle(c,root));
  setText(q(bar,".kids-detail-appbar-subtitle"),c.subtitle);
@@ -53,18 +53,18 @@ function initLegacy(id){
  const bar=q(modal,":scope > .modal-shell > .modal-top");
  if(!bar)return;
  if(!bar.classList.contains("kids-detail-appbar"))bar.classList.add("kids-detail-appbar","kids-legacy-appbar");
- bar.setAttribute("data-kids-detail-dock","v1247");
+ if(bar.getAttribute("data-kids-detail-dock")!=="v1247")bar.setAttribute("data-kids-detail-dock","v1247");
  const btn=q(bar,".close-btn");
  if(btn){
-   btn.classList.add("kids-detail-dock-back");
-   btn.setAttribute("aria-label","Zurück");
+   if(!btn.classList.contains("kids-detail-dock-back"))btn.classList.add("kids-detail-dock-back");
+   if(btn.getAttribute("aria-label")!=="Zurück")btn.setAttribute("aria-label","Zurück");
    if(btn.dataset.kidsDetailChevron!=="1"){
      btn.textContent="";
      btn.dataset.kidsDetailChevron="1";
    }
  }
  const copy=q(bar,".modal-title");
- if(copy)copy.classList.add("kids-detail-appbar-copy");
+ if(copy&&!copy.classList.contains("kids-detail-appbar-copy"))copy.classList.add("kids-detail-appbar-copy");
 }
 let syncing=false,queued=false;
 function sync(){
