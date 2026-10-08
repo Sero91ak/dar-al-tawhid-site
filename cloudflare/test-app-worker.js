@@ -417,7 +417,7 @@ async function ilmOpenResearch(request, env) {
   const question = String(data?.question||"").trim().slice(0,550);
   const mode = data?.mode === "sources" ? "sources" : data?.mode === "short" ? "short" : "detailed";
   if (question.length<7) return send({ok:false,error:"insufficient_question"},422);
-  // GEMINI ONLY: never call OpenAI or another paid provider.
+  // GEMINI ONLY: Free-Tier-compatible search via Gemini 2.5 Flash-Lite; no paid fallback.
   const gemini = await researchIlmWithGemini(request,env,question,mode);
   if(gemini.ok)return send(gemini);
   return send({
