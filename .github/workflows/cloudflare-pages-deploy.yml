@@ -25,6 +25,7 @@ on:
       - data/pronunciation/**
       - data/frauen-*.json
       - q/**
+      - quellen/**
       - links/**
       - data/scholar-index-meta.json
       - data/scholar-history-curated.json
@@ -40,6 +41,7 @@ on:
       - .assetsignore
       - package.json
       - scripts/cf-pages-build.js
+      - scripts/sync-quellen-registry.cjs
       - scripts/sync-app-build-ids.js
       - scripts/verify-live-deploy.js
       - scripts/purge-cloudflare-cache.js
@@ -98,7 +100,7 @@ jobs:
           else
             echo "shortlinks_only=false" >> "$GITHUB_OUTPUT"
           fi
-          if [ -n "$CHANGED" ] && [ -z "$(printf '%s\n' "$CHANGED" | grep -Ev '^(q/|assets/q-source-dar-al-layl\.css$)' || true)" ]; then
+          if [ -n "$CHANGED" ] && printf '%s\n' "$CHANGED" | grep -Eq '^(q/|quellen/)' && [ -z "$(printf '%s\n' "$CHANGED" | grep -Ev '^(q/|quellen/|assets/q-source-dar-al-layl\.css$|scripts/sync-quellen-registry\.cjs$|scripts/cf-pages-build\.js$|\.github/workflows/cloudflare-pages-deploy\.yml$|content/admin/change-scope-lock\.json$|wrangler\.toml$)' || true)" ]; then
             echo "qsource_only=true" >> "$GITHUB_OUTPUT"
           else
             echo "qsource_only=false" >> "$GITHUB_OUTPUT"
@@ -190,6 +192,11 @@ jobs:
       - name: Desktop-Beitragsindex für Quellenlink-Deploy erzeugen
         run: node scripts/build-desktop-posts-index.js
 
+      - name: Öffentliche Quellenbibliothek aus Q-Register aktualisieren
+        run: |
+          node scripts/sync-quellen-registry.cjs
+          node scripts/sync-quellen-registry.cjs --check
+
       - name: Quellenlink-Seiten prüfen
         shell: bash
         run: |
@@ -224,6 +231,26 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: deploy
+
+      - name: Quellenbibliothek live und vollständig prüfen
+        shell: bash
+        run: |
+          set -euo pipefail
+          domain="https://dar-al-tawhid.de"
+          cache="${GITHUB_SHA}"
+          for route in /quellen/ /quellen/shortlinks.json /q/1/ /q/37/; do
+            path="$(mktemp)"
+            code="$(curl -L --retry 4 --retry-delay 3 --max-time 25 -sS -o "$path" -w '%{http_code}' "$domain$route?cb=$cache")"
+            echo "GET $route → HTTP $code"
+            test "$code" = "200" || { echo "::error::$route nicht erreichbar"; exit 1; }
+            case "$route" in
+              /quellen/) grep -q 'qlSourceSnapshot' "$path" || exit 1 ;;
+              /quellen/shortlinks.json)
+                node -e 'const fs=require("fs");const x=JSON.parse(fs.readFileSync(process.argv[1]));if(!Array.isArray(x.links)||x.links.length<37||!x.links.some(q=>q.number===37))process.exit(1)' "$path" ;;
+              /q/*) grep -q 'DAR AL TAWḤĪD' "$path" || exit 1 ;;
+            esac
+            rm "$path"
+          done
 
       - name: Quellenlink-Live-Smoke-Test
         shell: bash
