@@ -528,7 +528,7 @@
       if (ev.verification_status === "verified" && ev.deep_link) {
         var excerpt = clip(ev.statement, 470);
         var reference = sourceTitle(ev);
-        return "Die geprüfte Fundstelle berichtet: „" + excerpt + "“" +
+        return "Der überprüfbar referenzierte Quellenauszug lautet sinngemäß: „" + excerpt + "“" +
           (reference ? " (" + reference + ")." : ".") +
           (reply._ilmComposing
             ? " Ich gleiche die genaue Fragestellung noch mit den Belegen ab."
