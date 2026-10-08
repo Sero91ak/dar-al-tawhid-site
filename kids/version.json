@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v146-dua-fullbleed-explain1249",
-  "label": "KIDS · V1.08.67",
-  "releasedAt": "2026-10-08T12:30:00+02:00",
-  "note": "KIDS V1.08.67 · Duʿāʾ-Kopfzeile randlos über volle Bildschirmbreite; globale kindgerechte Erklärung-hören-Buttons mit Play-Symbol, Hilfetext, Touch-Ziel und Fokus. Audio, Lesetexte, Navigation unverändert.",
+  "buildId": "kids-shell-v147-dua-reader1250",
+  "label": "KIDS · V1.08.68",
+  "releasedAt": "2026-10-08T12:55:00+02:00",
+  "note": "KIDS V1.08.68 · Duʿāʾ-Leseansicht: Titel auf verkleinertem Hero, Erklärung darunter, leichter Einzel-Lesekasten, gut lesbare Lautschrift/Arabisch/Deutsch, Quellen nur Text ohne Nachweis öffnen. Hör/Lernen/Bottom-Nav unverändert.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1249",
+    "serviceWorkerCache": "v1250",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -1216,12 +1216,15 @@
     "compactHeaderTabletCssPx": 64,
     "compactBackTouchCssPx": 44,
     "fullBleedDuaDetailHeader": "v1249",
-    "globalExplanationAudioActions": "v1249"
+    "globalExplanationAudioActions": "v1249",
+    "duaReaderLayout": "v1250",
+    "duaHubCssVersion": "1250",
+    "duaHubJsVersion": "1250"
   },
-  "updatedAt": "2026-10-08T12:30:00+02:00",
-  "deployTrigger": "kids-dua-fullbleed-explanation-cta-v1249",
+  "updatedAt": "2026-10-08T12:55:00+02:00",
+  "deployTrigger": "kids-dua-reading-hierarchy-v1250",
   "globalDetailDock": {
-    "version": "v1249",
+    "version": "v1250",
     "enabled": true,
     "appliesTo": [
       "deen-detail",
@@ -1242,6 +1245,7 @@
     "safeAreaOnce": true,
     "wrapLongTitles": true,
     "fullBleedDua": true,
-    "childFriendlyExplanationButtons": true
+    "childFriendlyExplanationButtons": true,
+    "sourceTextOnly": true
   }
 }

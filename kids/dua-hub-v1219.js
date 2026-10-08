@@ -245,9 +245,9 @@
             '<div class="duahub-detail-titlewrap">' +
               '<div class="duahub-detail-kicker" id="duaHubDetailKicker">GEPRÜFT</div>' +
               '<h2 id="duaHubDetailTitle">Duʿāʾ</h2>' +
-              '<p id="duaHubDetailPrompt" class="duahub-detail-prompt"></p>' +
             '</div>' +
           '</div>' +
+          '<div class="duahub-detail-intro" role="note"><p id="duaHubDetailPrompt" class="duahub-detail-prompt"></p></div>' +
           '<div class="duahub-detail-actions">' +
             '<button type="button" id="duaHubListen" class="duahub-listen"><span class="duahub-play">▶</span><b>Anhören</b></button>' +
             '<button type="button" id="duaHubLearn" class="duahub-learn"><span class="duahub-bookmark">◆</span><b>Lernen</b></button>' +
@@ -544,8 +544,14 @@
     }
 
     const source = q("#duaHubSource");
-    source.innerHTML = '<span>Quelle</span><b>' + escapeHtml(d.source || "Geprüfter Eintrag") + '</b>' +
-      (d.sourceUrl ? '<a href="' + escapeHtml(d.sourceUrl) + '" target="_blank" rel="noopener">Nachweis öffnen</a>' : "");
+    // KIDS_SOURCE_TEXT_ONLY_V1250: the verified source citation remains visible,
+    // but children are never sent to an external verification page.
+    source.replaceChildren();
+    const sourceLabel = document.createElement("span");
+    sourceLabel.textContent = "QUELLE";
+    const sourceText = document.createElement("b");
+    sourceText.textContent = String(d.source || "Geprüfter Eintrag");
+    source.append(sourceLabel,sourceText);
 
     const shell = q(".shell");
     lastShellScroll = shell ? (Number(shell.scrollTop) || 0) : 0;

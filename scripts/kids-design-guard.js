@@ -210,6 +210,27 @@ function runKidsDesignGuard() {
         failed+=fail("Kids explanation button event-preserving decorator missing");
       }
     }
+    if (Number(swVersion)>=1250) {
+      const duaCss = fs.readFileSync(path.join(ROOT,"kids/dua-hub-v1219.css"),"utf8");
+      const duaJs = fs.readFileSync(path.join(ROOT,"kids/dua-hub-v1219.js"),"utf8");
+      for (const marker of [
+        "KIDS_DUA_READER_HERO_INTRO_V1250",
+        ".duahub-detail-intro",
+        "font-size:clamp(18px,4.2vw,21px)",
+        ".duahub-source a"
+      ]) if(!duaCss.includes(marker))failed+=fail("Kids Duʿāʾ lesbare Lesehierarchie fehlt: "+marker);
+      if(!duaJs.includes("KIDS_SOURCE_TEXT_ONLY_V1250") || duaJs.includes("Nachweis öffnen") ||
+         !duaJs.includes("source.append(sourceLabel,sourceText)")) {
+        failed+=fail("Kids Duʿāʾ muss überprüfbare Quellen nur als lesbaren Text zeigen, ohne externen Nachweis-Button");
+      }
+      const kidsSw = fs.readFileSync(path.join(ROOT,"kids/sw.js"),"utf8");
+      for(const res of ["dua-hub-v1219.css?v=1250","dua-hub-v1219.js?v=1250"]){
+        if(!kidsSw.includes(res))failed+=fail("Kids Duʿāʾ Reader nicht offline-cached: "+res);
+      }
+      if(!doc.includes("KIDS_DUA_READER_HERO_INTRO_V1250")){
+        failed+=fail("Kids Duʿāʾ Lesehierarchie V1250 nicht dokumentiert");
+      }
+    }
     for (const file of ["kids/index.html","kids/start.html","kids/shell.html"]) {
       const page = fs.readFileSync(path.join(ROOT, file), "utf8");
       for (const asset of [dockCssRef,dockJsRef]) {

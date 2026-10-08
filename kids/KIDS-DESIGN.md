@@ -164,3 +164,13 @@ Verbindlich für `/kids/` und alle künftigen Kids-Erweiterungen.
 - Alle **echten Erklärungs-Audiobuttons** mit passenden deutschen Labels erhalten global einen sichtbaren goldenen CSS-Play-Pfeil, eine lesbare Schaltflächenbeschriftung, einen Hinweis 'Tippe hier und hör zu', sowie ruhigen Glow und deutlichen Tastaturfokus.
 - Die ursprünglichen Buttons werden **nicht geklont**: Audiosignal, Klick-Handler, deaktiviert-Zustand und Accessibility bleiben erhalten. Statische Erklärungstexte bekommen eine lesbare Typografie, aber keinen falschen Play-Button.
 - Gültige Release-Dateien: `kids/global-detail-dock-v1247.css?v=1249` und `kids/global-detail-dock-v1247.js?v=1249` über den v1249-Service-Worker-Cache.
+
+
+## Duʿāʾ-Lesehierarchie — `KIDS_DUA_READER_HERO_INTRO_V1250`
+
+- Hero: visuelles Motiv + kompaktes Kicker-Siegel + Duʿāʾ-Titel; die Erklärung/Einleitung erscheint **unter** dem Motiv ohne zusätzlichen Kasten, nur mit dezenter Goldlinie.
+- Genau **eine leichte Lesefläche** für Arabisch, Lautschrift, deutsche Bedeutung, Erklärungs-Audiobutton und Quellennennung. Die Fläche hat weniger Innenabstand und geringere Rahmen-/Schattenstärke.
+- Smartphone: Arabisch 35–49 CSS-px, Lautschrift 18–21 CSS-px, Deutsch 18–21 CSS-px; Tablet: gleiche Lesbarkeit, nur angemessene breite. Lange arabische Verse, lange Titel und Lautschrift umbrechen ohne Abschneiden.
+- Qurʾān- und Ḥadīṯ-Quellen bleiben als **reiner, lesbarer Text** erhalten. Externe Nachweis-Schaltflächen werden in der Kinder-App **nicht generiert**; `sourceUrl` bleibt intern in den geprüften Datensätzen erhalten, keine externe Navigation.
+- Untere globale Tabs, Screenreader-Bezeichnungen, Lern-/Hör-Audio, bestehende Interaktionen und Bilder bleiben unverändert.
+- CSS/JS für den Duʿāʾ-Hub: `dua-hub-v1219.css?v=1250`, `dua-hub-v1219.js?v=1250`, Offline-Cache `v1250`.
