@@ -49,6 +49,8 @@
     .btn[hidden]{display:none}
     .placeholder{border:1px solid var(--line);border-radius:13px;padding:17px;margin-top:9px;color:var(--mute);font-size:13px;text-align:center;letter-spacing:.03em;background:#101e23}
     .placeholder[hidden]{display:none}
+    .guide{margin-top:42px}.guide h2{font-size:clamp(27px,4vw,36px);font-weight:500;margin:0 0 11px}.guide-intro{font-size:14px;color:var(--mute);line-height:1.68;margin:0 0 21px;max-width:700px}.guide-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.guide-step{padding:19px 16px 17px;border:1px solid var(--line);border-radius:17px;background:rgba(9,27,33,.76)}.guide-step .number{display:block;font-size:11px;letter-spacing:.19em;font-weight:850;color:var(--gold);margin-bottom:10px}.guide-step h3{font-family:Georgia,"Times New Roman",serif;font-weight:500;font-size:20px;line-height:1.23;margin:0 0 9px}.guide-step p{margin:0;color:var(--mute);font-size:13px;line-height:1.68}.guide-step code{color:#f3dab0;overflow-wrap:anywhere}.tiny-note{color:var(--mute);font-size:12px;line-height:1.7;margin:19px 0 0}
+    @media(max-width:700px){.guide-grid{grid-template-columns:1fr}}
     .note{margin-top:32px;padding-top:20px;border-top:1px solid var(--line);color:var(--mute);font-size:13px;line-height:1.72}
     .note strong{color:var(--cream)}
     .foot{margin-top:43px;color:var(--gold);font-family:Georgia,"Times New Roman",serif;font-size:16px;text-align:center;letter-spacing:.04em}
@@ -96,6 +98,30 @@
           <a class="btn" id="apk-tv" hidden rel="noopener" href="#"><span>TV-APK herunterladen</span><span aria-hidden="true">↓</span></a>
           <div class="placeholder" id="pending-tv">Download folgt nach Signatur- und TV-Test</div>
         </article>
+      </section>
+
+      <section class="guide" id="tv-installation" aria-labelledby="tv-setup-title">
+        <p class="eyebrow">AUF DEM FERNSEHER INSTALLIEREN</p>
+        <h2 id="tv-setup-title">So kommt DAR AL TAWḤĪD auf deinen TV.</h2>
+        <p class="guide-intro">Du benötigst einen Fernseher mit Android TV oder Google TV beziehungsweise eine passende Android-TV-Box. Verwende dafür ausschließlich die <strong>TV-APK</strong>, nicht die Smartphone-Version. Die Download-Schaltfläche wird erst nach unserer Release-Prüfung freigeschaltet.</p>
+        <div class="guide-grid">
+          <div class="guide-step">
+            <span class="number">WEG 01 · DIREKT AM TV</span>
+            <h3>TV-Browser</h3>
+            <p>Öffne im Fernseher einen Browser und rufe <code>dar-al-tawhid.de/download/</code> auf. Wähle den TV-Download. Öffne die APK über Downloads oder einen Dateimanager und bestätige die Installation. Falls erforderlich, erlaube diesem Browser oder Dateimanager „Unbekannte Apps installieren“.</p>
+          </div>
+          <div class="guide-step">
+            <span class="number">WEG 02 · ÜBER DAS HANDY</span>
+            <h3>Per WLAN übertragen</h3>
+            <p>Lade die TV-APK auf dein Android-Smartphone. Installiere eine geeignete Dateiübertragungs-App auf Handy und Android TV, verbinde beide mit demselben WLAN, sende die Datei und öffne sie auf dem Fernseher. Erlaube die Installation nur der verwendeten, vertrauenswürdigen Quelle.</p>
+          </div>
+          <div class="guide-step">
+            <span class="number">WEG 03 · MIT TV-BOX</span>
+            <h3>Per USB-Stick</h3>
+            <p>Lade die TV-APK am Computer herunter und kopiere sie auf einen USB-Stick. Stecke ihn an einen unterstützten Android-Fernseher oder eine Android-TV-Box. Öffne die APK im Dateimanager und bestätige die Installation. Ohne USB-Anschluss nutze stattdessen den WLAN-Weg.</p>
+          </div>
+        </div>
+        <p class="tiny-note">Hinweis: Menünamen und Installationsrechte unterscheiden sich je nach Hersteller und Android-Version. Manche Geräte besitzen keinen Browser oder blockieren externe APKs. Samsung Tizen, LG webOS und Apple TV können Android-APKs nicht direkt installieren. Google Play Protect sollte aktiviert bleiben. Aktualisierungen per Website-APK benötigen in der Regel erneut eine Bestätigung am Gerät.</p>
       </section>
 
       <div class="note">
