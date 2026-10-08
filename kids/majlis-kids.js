@@ -83,7 +83,7 @@
   }
   function picks() {
     var row=el("div","km-picks");
-    ["Wer ist Allah?","Warum beten wir?","Was ist Duʿāʾ?","Was ist Wuḍūʾ?"].forEach(function(q){
+    ["Wer ist Allah?","Warum beten wir?","Was ist Īmān?","Was ist Wuḍūʾ?","Was ist Qiblah?","Was ist gutes Benehmen?"].forEach(function(q){
       var b=el("button","",q);b.type="button";b.addEventListener("click",function(){submitQuestion(q)});
       row.appendChild(b);
     });chat.appendChild(row);
@@ -111,6 +111,13 @@
     var q=String(value||"").trim().slice(0,350);if(!q){status.textContent="Schreib erst eine Frage.";return;}
     stopPlayback();
     var suggestions=chat.querySelector(".km-picks");if(suggestions)suggestions.remove();
+    if(/adresse|telefonnummer|passwort|mein name ist|ich wohne|schick.*foto|(?:\+?\d[\d\s()-]{8,})/i.test(q)){
+      message("you","[Private Angaben geschützt]");
+      message("guide","Persönliche Daten gehören nicht in einen Chat. Bitte sprich mit deinen Eltern darüber.");
+      input.value="";state.audio=null;state.lastAnswer=null;listen.disabled=true;
+      status.textContent="Private Angaben wurden weder als Frage abgeschickt noch gespeichert.";
+      return;
+    }
     message("you",q);input.value="";state.audio=null;
     var item=null;
     if(state.serverAuthorized){
