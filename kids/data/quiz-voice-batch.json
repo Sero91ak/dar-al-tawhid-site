@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "DAR_KIDS_QUIZ_AUDIO_STAGE",
   "mode": "approved-small-batch",
-  "batchStart": 9,
+  "batchStart": 19,
   "batchCount": 7,
   "maxBatchQuestions": 12,
   "voiceProfileId": "serhat-owner-voice-2026",
@@ -12,5 +12,7 @@
   "germanPolicy": "existing-owner-master-v4-with-reviewed-pronunciation-dictionary",
   "arabicPolicy": "Fusha V4 dedicated Arabic segments; no German TTS for Arabic phrases",
   "retentionPolicy": "never-delete-previously-published-quiz-audio-in-staged-rollout",
-  "validation": "question-exact-text, answer-order, correct-feedback-and-explanation, playable-audio-asset"
+  "validation": "question-exact-text, answer-order, correct-feedback-and-explanation, playable-audio-asset",
+  "pilotAgeBand": "7-8",
+  "batchNotes": "Altersgruppe 7–8 Jahre; arabische Ligaturen und gemischte Schrift für separate Fuṣḥā-QA zurückstellen."
 }
