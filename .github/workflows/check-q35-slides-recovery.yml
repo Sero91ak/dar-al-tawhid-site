@@ -26,3 +26,22 @@ jobs:
           node --check scripts/q35-slides-recovery-guard.cjs
       - name: Verify 22-slide source structure, parser and publisher
         run: node scripts/q35-slides-recovery-guard.cjs
+      - name: Verify YAML with independent real parser (Ruby Psych)
+        shell: bash
+        run: |
+          ruby -ryaml -e '
+            raw = File.read(ARGV.fetch(0))
+            frontmatter = raw.match(/\A---\s*\n(.*?)\n---\s*\n/m)
+            abort "No YAML frontmatter" unless frontmatter
+            post = YAML.safe_load(frontmatter[1], aliases: false)
+            slides = post.fetch("slides")
+            abort "Expected 22 distinct slides, got #{slides.length}" unless slides.length == 22
+            slides.each_with_index do |slide, idx|
+              abort "Slide #{idx+1} missing title" if slide.fetch("title", "").strip.empty?
+              abort "Slide #{idx+1} missing text" if slide.fetch("text", "").strip.empty?
+              abort "Slide #{idx+1} missing source" if slide.fetch("source", "").strip.empty?
+              urls = slide.fetch("links", []).map { |link| link["url"] }
+              abort "Slide #{idx+1} missing Q35 source" unless urls.include?("/q/35/")
+            end
+            puts "Independent YAML parser confirms #{slides.length} fully sourced slides"
+          ' content/posts/2026-10-08-isa-ibn-maryam-nuzul-frueher-ikhtilaf-slides.md
