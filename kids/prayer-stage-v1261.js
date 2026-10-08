@@ -23,19 +23,27 @@ stage.innerHTML=
   '<div class="kids-salah-top"><span class="kids-salah-kicker">DEIN GEBETSMOMENT</span>'+
   '<button class="kids-salah-location" id="kidsSalahLocation" type="button" aria-label="Gebetsort einstellen"><span id="kidsSalahCity">Ort wählen</span></button></div>'+
   '<h2 class="kids-salah-heading">Zeit für <em>Ṣalāh</em></h2>'+
+  '<div class="kids-salah-time-pair">'+
+  '<div class="kids-salah-now"><span class="kids-salah-pair-label">AKTUELL</span>'+
+  '<strong id="kidsSalahCurrentName">Noch kein Gebet</strong>'+
+  '<time id="kidsSalahCurrentTime">--:--</time></div>'+
+  '<span class="kids-salah-time-divider" aria-hidden="true"></span>'+
+  '<div class="kids-salah-upcoming"><span class="kids-salah-pair-label">ALS NÄCHSTES</span>'+
   '<span class="kids-salah-name" id="kidsSalahName">Dein nächstes Gebet</span>'+
-  '<time class="kids-salah-clock" id="kidsSalahClock">--:--</time>'+
+  '<time class="kids-salah-clock" id="kidsSalahClock">--:--</time></div></div>'+
   '<div class="kids-salah-next"><i class="kids-salah-beat" aria-hidden="true"></i>'+
   '<span id="kidsSalahNextText">Standort einstellen</span><strong class="kids-salah-countdown" id="kidsSalahCountdown"></strong></div>'+
   '<div class="kids-salah-progress" aria-hidden="true"><span id="kidsSalahProgress"></span></div>'+
   '<div class="kids-salah-five" id="kidsSalahFive" aria-label="Fünf tägliche Gebetszeiten">'+
   ORDER.map(key=>'<button type="button" tabindex="-1" data-prayer="'+key+'"><span class="kids-salah-dot" aria-hidden="true"></span><span class="kids-salah-prayer">'+NAMES[key]+'</span><time>--:--</time></button>').join("")+
-  '</div><p class="kids-salah-status" id="kidsSalahStatus">Gebetszeiten passend zu deinem Ort.</p>';
+  '</div><button class="kids-salah-open-day" id="kidsSalahOpenDay" type="button">Alle Gebetszeiten ansehen <span aria-hidden="true">›</span></button>'+
+  '<p class="kids-salah-status" id="kidsSalahStatus">Gebetszeiten passend zu deinem Ort.</p>';
 HERO.insertAdjacentElement("afterend",stage);
 const $=sel=>stage.querySelector(sel);
 const city=$("#kidsSalahCity"),prayerName=$("#kidsSalahName"),clock=$("#kidsSalahClock");
 const nextText=$("#kidsSalahNextText"),countdown=$("#kidsSalahCountdown");
 const status=$("#kidsSalahStatus"),progress=$("#kidsSalahProgress");
+const currentName=$("#kidsSalahCurrentName"),currentTime=$("#kidsSalahCurrentTime");
 $("#kidsSalahLocation").addEventListener("click",openSettings);
 
 const overlay=document.createElement("div");
@@ -133,6 +141,10 @@ function tomorrow(date){
  const d=new Date(date+"T12:00:00Z");d.setUTCDate(d.getUTCDate()+1);
  return d.toISOString().slice(0,10);
 }
+function yesterday(date){
+ const d=new Date(date+"T12:00:00Z");d.setUTCDate(d.getUTCDate()-1);
+ return d.toISOString().slice(0,10);
+}
 function prayerUtc(date,hm,tz){
  const match=/^(\d{1,2}):(\d{2})$/.exec(String(hm||""));if(!match)return NaN;
  const [y,m,d]=date.split("-").map(Number);
@@ -159,19 +171,22 @@ function entries(date,data){
 }
 function draw(){
  city.textContent=place?.name||"Ort wählen";
- if(!place){prayerName.textContent="Dein nächstes Gebet";clock.textContent="--:--";nextText.textContent="Standort einstellen";
+ if(!place){currentName.textContent="Gebetsort wählen";currentTime.textContent="--:--";prayerName.textContent="Nächstes Gebet";clock.textContent="--:--";nextText.textContent="Standort einstellen";
   countdown.textContent="";status.textContent="Wähle deinen Ort für zuverlässige Gebetszeiten.";
   progress.style.width="0%";return;}
  let today;
  try{today=dateInZone(new Date(),place.tz);}catch(_){status.textContent="Zeitzone prüfen";return;}
  if(today!==lastDay){lastDay=today;lastFetch=0;}
- const now=Date.now(),list=[...entries(today,days[today]),...entries(tomorrow(today),days[tomorrow(today)])].sort((a,b)=>a.ts-b.ts);
+ const now=Date.now(),list=[...entries(yesterday(today),days[yesterday(today)]),...entries(today,days[today]),...entries(tomorrow(today),days[tomorrow(today)])].sort((a,b)=>a.ts-b.ts);
  const todays=days[today];
  ORDER.forEach(key=>{
   const b=$("#kidsSalahFive").querySelector('[data-prayer="'+key+'"]');
   b.querySelector("time").textContent=todays?.times?.[key]?.time||"--:--";
   b.setAttribute("aria-current","false");
  });
+ const previous=list.filter(p=>p.ts<=now).pop();
+ currentName.textContent=previous?NAMES[previous.key]:"Wird geladen";
+ currentTime.textContent=previous?.time||"--:--";
  const next=list.find(p=>p.ts>now);
  if(!next){
   prayerName.textContent="Gebetszeiten";clock.textContent="--:--";nextText.textContent="Nächstes Gebet wird geladen";
@@ -179,7 +194,6 @@ function draw(){
   status.textContent=todays?"Die nächste Gebetszeit wird aktualisiert.":"Gebetszeiten werden geladen …";
   return;
  }
- const previous=list.filter(p=>p.ts<=now).pop();
  const tomorrowPrayer=next.date!==today;
  prayerName.textContent=(tomorrowPrayer?"Morgen · ":"")+NAMES[next.key];
  clock.textContent=next.time;
@@ -196,8 +210,8 @@ function draw(){
 async function refresh(){
  if(!place)return;
  lastAttempt=Date.now();
- const ticket=++fetchTicket,now=new Date(),today=dateInZone(now,place.tz),tom=tomorrow(today);
- const stale=[today,tom].filter(day=>!days[day]||days[day].date!==day||Date.now()-lastFetch>60*60*1000);
+ const ticket=++fetchTicket,now=new Date(),today=dateInZone(now,place.tz),tom=tomorrow(today),prev=yesterday(today);
+ const stale=[prev,today,tom].filter(day=>!days[day]||days[day].date!==day||Date.now()-lastFetch>60*60*1000);
  if(!stale.length){draw();return;}
  let succeeded=false;
  await Promise.all(stale.map(async day=>{
