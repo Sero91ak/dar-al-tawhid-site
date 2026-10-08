@@ -177,7 +177,7 @@
   }
   function picks() {
     var row=el("div","km-picks");
-    ["Wer ist Allah?","Warum beten wir?","Was ist Īmān?","Was ist Wuḍūʾ?","Was ist Qiblah?","Was ist gutes Benehmen?"].forEach(function(q){
+    ["Wer ist Allah?","Warum beten wir?","Was ist Īmān?","Duʿāʾ vor dem Schlafen","Qurʾān 2:255","Was ist Wuḍūʾ?"].forEach(function(q){
       var b=el("button","",q);b.type="button";b.addEventListener("click",function(){submitQuestion(q)});
       row.appendChild(b);
     });chat.appendChild(row);
@@ -186,6 +186,61 @@
     chat.replaceChildren();
     message("guide","As-salāmu ʿalaykum, liebe"+(activeGender()==="girl"?"":"r")+" "+familyWord()+"! 🌟 Schön, dass du da bist. Frag mich alles über den Dīn. Wir lernen liebevoll und mit echten Quellen. Wenn ich etwas nicht sicher weiß, sage ich: Allāhu aʿlam – Allah weiß es am besten. Was möchtest du entdecken?");
     picks();status.textContent="Wähle eine Frage oder schreibe selbst.";
+  }
+  var indexRequest=null;
+  function previewNorm(s){
+    return String(s||"").normalize("NFKD").toLowerCase()
+      .replace(/[\u0300-\u036f\u064b-\u065f]/g,"").replace(/[^a-z0-9\u0621-\u064a]+/g," ")
+      .replace(/\s+/g," ").trim();
+  }
+  async function previewIndex(){
+    if(indexRequest)return indexRequest;
+    indexRequest=fetch("/kids/data/majlis-knowledge-v1.json?v=1",{cache:"force-cache"})
+      .then(function(r){if(!r.ok)throw Error("knowledge-unavailable");return r.json()})
+      .then(function(data){return data?.schemaVersion===1&&Array.isArray(data.duas)&&Array.isArray(data.quran?.ayahCounts)?data:null})
+      .catch(function(){return null});
+    return indexRequest;
+  }
+  function previewVerse(q,index){
+    var m=String(q).match(/(\d{1,3})\s*[:/]\s*(\d{1,3})\b/);
+    if(!m||!/qur|koran|sura|sure|vers|ayah|ayat/i.test(q))return null;
+    var s=Number(m[1]),a=Number(m[2]),list=index.quran.ayahCounts;
+    if(s<1||s>114||a<1||a>list[s-1])return null;
+    var global=list.slice(0,s-1).reduce(function(x,y){return x+y},0)+a;
+    var label="Qurʾān "+s+":"+a;
+    return {answer:"Gern, "+familyWord()+"! "+label+" kannst du direkt anhören. Beim Qurʾān bleibt die Rezitation bei einem richtigen Qāriʾ. Für eine genaue Erklärung kannst du den Qurʾān-Bereich öffnen.",
+      source:label,media:{kind:"quran",surah:s,ayah:a,reference:label,reciter:"Mišārī Rāšid al-ʿAfāsī",
+        recitationUrl:"/quran-audio/ar.alafasy/"+global+".mp3?v=1063"}};
+  }
+  function previewDua(q,index){
+    var text=previewNorm(q);
+    if(!/(?:\bdua\b|bittgebet|arabisch|اللهم|ربنا|ربي)/i.test(text))return null;
+    var selected=null,score=0;
+    index.duas.forEach(function(d){
+      var title=previewNorm(d.title),trans=previewNorm(d.transliteration),meaning=previewNorm(d.meaning);
+      var value=0;
+      if(title.length>=7&&text.includes(title))value=10;
+      if(trans.length>=9&&text.includes(trans))value=11;
+      if(meaning.length>=12&&text.includes(meaning))value=11;
+      if(value>score){selected=d;score=value;}
+    });
+    if(!selected||score<10)return null;
+    var allowed=state.age==="4–5"?selected.ageMin<=4&&selected.ageMax>=5:
+      state.age==="9–10"?selected.ageMin<=9&&selected.ageMax>=10:
+      selected.ageMin<=6&&selected.ageMax>=8;
+    if(!allowed)return {answer:"Diese Duʿāʾ lernst du lieber mit deinen Eltern, wenn du dafür alt genug bist. Allāhu aʿlam.",source:null};
+    var a=selected.audio||{};
+    if(!protectedAudioUrl(a.arabic)||!protectedAudioUrl(a.german)||!protectedAudioUrl(a.slow))return null;
+    var info={kind:"dua",id:selected.id,title:selected.title,arabic:selected.arabic,transliteration:selected.transliteration,
+      meaning:selected.meaning,source:selected.source,audio:{arabic:a.arabic,german:a.german,arabicSlow:a.slow},
+      segments:(selected.segments||[]).slice(0,30)};
+    return {answer:"Sehr gern, "+familyWord()+"! Diese Duʿāʾ heißt „"+selected.title+"“. Möchtest du sie auf Arabisch hören, auf Deutsch verstehen oder Wort für Wort lernen? Die Bedeutung: "+selected.meaning,
+      source:selected.source,media:info};
+  }
+  async function previewResponse(question){
+    var data=await previewIndex();
+    if(!data)return null;
+    return previewVerse(question,data)||previewDua(question,data);
   }
   function responseFor(question) {
     var q=String(question||"").normalize("NFKC").trim();
@@ -236,7 +291,7 @@
         item={answer:"Die Verbindung zum geschützten Lernbereich funktioniert gerade nicht. Bitte versuche es später erneut oder frage deine Eltern.",source:null};
       }finally{state.busy=false;send.disabled=false}
     } else {
-      item=responseFor(q);
+      item=await previewResponse(q)||responseFor(q);
     }
     if(!state.open)return;
     state.lastAnswer=item;
