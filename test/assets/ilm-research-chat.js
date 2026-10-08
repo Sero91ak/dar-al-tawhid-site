@@ -584,6 +584,8 @@
       if (reply._ilmBasicIman) html += ilmImanScriptureLinks();
       if (!reply._ilmBasicTawhid && !reply._ilmBasicIman && !reply._ilmTawhidFollowup) html += discoverySection(reply);
       if (!reply._ilmIsDiscovery && !reply._ilmBasicTawhid && !reply._ilmBasicIman && !reply._ilmTawhidFollowup) html += sourceDisclosure(reply, isProof);
+      if (reply._ilmStudyReminder) html += '<aside class="ilm-study-reminder" aria-label="Hinweis zum Weiterlernen">' +
+        '<p>' + esc(reply._ilmStudyReminder) + '</p></aside>';
       var follows = reply._ilmBasicTawhid
         ? ["Zeige mir weitere Belege für Tawḥīd", "Erkläre Tawḥīd ausführlicher"]
         : reply._ilmIsDiscovery
@@ -838,7 +840,7 @@
     if (typeof window.searchIlmKnowledge === "function") {
       var oldSearch = window.searchIlmKnowledge;
       window.searchIlmKnowledge = async function (question, conversation, options) {
-        question = ilmQueryWithoutGreeting(question);
+        question = ilmResolvedQuery(question, conversation);
         var list = await oldSearch(question, conversation, options);
         // Add a targeted second lexical query for historical/diacritic variants.
         // Never replace the original answer set or flood the chat with parallel searches.
@@ -879,17 +881,19 @@
       window.buildIlmAssistantReply = function (question, matches, mode, external) {
         var greeting = splitIlmGreeting(question);
         question = greeting.question || question;
-        var reply = oldBuild(question, matches, mode, external);
         var convo = typeof window.getActiveIlmConversation === "function"
           ? window.getActiveIlmConversation(window.getIlmStore && window.getIlmStore())
           : null;
-        var improved = decorateReply(question, reply, convo);
+        var scientificQuestion = ilmResolvedQuery(question, convo);
+        var reply = oldBuild(scientificQuestion, matches, mode, external);
+        var improved = decorateReply(scientificQuestion, reply, convo);
         if (improved) {
+          improved._ilmStudyReminder = ilmStudyReminder(question,convo);
           improved._ilmGreetingPrefix = greeting.greeting && greeting.question ? "Wa-ʿalaykum as-salām wa-raḥmatullāhi wa-barakātuh." : "";
           improved._ilmSourceOnly = mode === "sources";
           improved._ilmAnswerMode = mode === "short" ? "short" : "detailed";
           improved._ilmTawhidFollowup = tawhidFollowup(question);
-          var rankedMatches = rankKnowledgeSources(question, matches);
+          var rankedMatches = rankKnowledgeSources(scientificQuestion, matches);
           var coreTawhid = isBasicTawhidQuestion(question);
           var coreIman = isBasicImanQuestion(question);
           var coreAdab = isBasicAdabQuestion(question) && !isDiscoveryQuestion(question);
@@ -922,7 +926,7 @@
           // not the incidental order of cards in the original post index.
           if (!improved._ilmBasicTawhid && !improved._ilmBasicIman && !improved._ilmCoreAdab) {
             var picked = rankedMatches.slice(0, 5).map(function(e){return toEvidence(e,"internal")});
-            var terms = ilmQuestionTerms(question);
+            var terms = ilmQuestionTerms(scientificQuestion);
             var relevantExternal = (improved.evidences || []).filter(function(e) {
               var contents = " " + ilmNormalize([e.work,e.reference,e.statement].join(" ")) + " ";
               return e.source_domain === "external" &&
@@ -933,7 +937,7 @@
           }
         }
         // Only religious explanation requests go to the bounded source-based composer.
-        if (improved && improved.status === "ok" && !improved._ilmIsDiscovery && !improved._ilmBasicTawhid && !improved._ilmBasicIman && !improved._ilmTawhidFollowup && !improved._ilmSourceOnly) requestScienceComposition(improved, question);
+        if (improved && improved.status === "ok" && !improved._ilmIsDiscovery && !improved._ilmBasicTawhid && !improved._ilmBasicIman && !improved._ilmTawhidFollowup && !improved._ilmSourceOnly) requestScienceComposition(improved, scientificQuestion);
         return improved;
       };
     }
@@ -965,7 +969,10 @@
       var oldClass = window.classifyIlmPrompt;
       window.classifyIlmPrompt = function (text) {
         if (ABUSE.test(String(text || ""))) return { type: "conversation" };
-        return oldClass(ilmQueryWithoutGreeting(text));
+        var convo = typeof window.getActiveIlmConversation === "function"
+          ? window.getActiveIlmConversation(window.getIlmStore && window.getIlmStore())
+          : null;
+        return oldClass(ilmResolvedQuery(text,convo));
       };
     }
 
