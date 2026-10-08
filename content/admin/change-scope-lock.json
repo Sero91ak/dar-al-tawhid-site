@@ -7134,6 +7134,18 @@
         ".github/workflows/chat-admin-publisher.yml",
         "content/admin/chat-publish-requests/"
       ]
+    },
+    {
+      "id": "ios-post-notification-content-deeplink-2026-10-08",
+      "at": "2026-10-08T14:00:00+02:00",
+      "approvedBy": "user-explicit-post-notification-opens-exact-article-and-back-home",
+      "reason": "User reports visitor post notification opens home rather than article. Scope only native iOS content route mapping and WKWebView navigation; no OneSignal payload, secret, provider, scheduler, registration, Kids, Apple TV, Test changes.",
+      "paths": [
+        "ios/DarAlTawhid/DarAlTawhid/DarAppRouter.swift",
+        "ios/DarAlTawhid/DarAlTawhid/WebAppView.swift",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-30T23:59:00.000Z"
     }
   ],
   "enabled": true
