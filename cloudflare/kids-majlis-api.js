@@ -1,6 +1,7 @@
 /* DĀR KIDS MAJLIS: protected parent-code pilot API, disabled until secret config. */
 import { synthesizeDarVoice, isVoiceConfigured } from "./video-studio/voice.js";
 import KIDS_VERIFIED_CONTENT from "../kids/data/verified-content.json";
+import {findKnowledge,findKnowledgeById,mediaForCanonicalId,allahAlam,profilePrefix} from "./kids-majlis-knowledge.js";
 const P="/kids/api/majlis/", C="dar_kids_majlis_pilot", TTL=1200000, enc=new TextEncoder();
 const TOPICS=[
  ["allah",/wer ist allah|wer ist gott|schöpfer|tawh[iī]d|einzigkeit allahs/i,"Allah ist unser Schöpfer. Er ist Einer und niemand ist so wie Er. Das lernen wir in Sūrah al-Ikhlāṣ. Magst du die kurze Sūrah im Qurʾān-Bereich hören?","Qurʾān 112:1–4"],
@@ -79,14 +80,34 @@ async function session(req,env){const raw=req.headers.get("Cookie")||"";const pa
 async function body(req,max=1600){if(!(req.headers.get("Content-Type")||"").startsWith("application/json"))return null;const txt=await req.text();if(txt.length>max)return null;try{return JSON.parse(txt)}catch(_){return null}}
 async function throttle(req,env,voice=false){const ip=req.headers.get("CF-Connecting-IP")||"unknown",limiter=voice?env.KIDS_MAJLIS_VOICE_LIMITER:env.KIDS_MAJLIS_LIMITER;const result=await limiter.limit({key:(voice?"voice-":"core-")+ip.slice(0,64)});return result?.success===true}
 function clean(s){const t=String(s||"").normalize("NFKC").replace(/[\u0000-\u001f\u007f]/g," ").trim();return t.length<=350?t:""}
-function choose(q,age){
+function decorate(item,gender){
+ if(!item)return allahAlam(gender);
+ if(item.id==="unknown")return allahAlam(gender);
+ if(["privacy","help","restricted","age_restricted"].includes(item.id))return item;
+ if(item.id.startsWith("kb:")||item.id.startsWith("verse:"))return item;
+ const media=item.id.startsWith("library:")?
+   mediaForCanonicalId(VERIFIED_BY_ID.get(item.id.slice(8))?.canonicalId,"6–8"):null;
+ return {...item,text:profilePrefix(gender)+item.text,media:media||item.media||null};
+}
+function choose(q,age,gender="boy"){
  const text=clean(q);
  if(/angst vor|tut mir weh|schlägt mich|will sterben|verletze mich|missbrauch|suizid|selbst verletzen|habe angst|bin in gefahr/i.test(text))return {id:"help",text:BASIC.help,source:null};
  if(/adresse|telefonnummer|passwort|mein name ist|ich wohne|schick.*foto|(?:\+?\d[\d\s()-]{8,})/i.test(text))return {id:"privacy",text:BASIC.privacy,source:null};
  if(/takf[iī]r|k[aā]fir|ungläubig|jihad|dschihad|gewalt|anschlag|bombe|waffe|fatw[aā]|scheidung|sex/i.test(text))return {id:"restricted",text:BASIC.restricted,source:null};
- const library=matchedLibrary(text,age);if(library)return library;
- for(const row of TOPICS)if(row[1].test(text))return {id:row[0],text:age==="4–5"?row[2].split(/(?<=[.!?])\s+/u).slice(0,2).join(" "):row[2],source:row[3]};
- return {id:"unknown",text:BASIC.unknown,source:null};
+ const knowledge=findKnowledge(text,age,gender);
+ if(knowledge)return knowledge;
+ const library=matchedLibrary(text,age);
+ if(library){
+   const result=decorate(library,gender);
+   if(library.id.startsWith("library:")){
+     const canonical=VERIFIED_BY_ID.get(library.id.slice(8))?.canonicalId;
+     result.media=mediaForCanonicalId(canonical,age)||null;
+   }
+   return result;
+ }
+ for(const row of TOPICS)if(row[1].test(text))return decorate({id:row[0],
+   text:age==="4–5"?row[2].split(/(?<=[.!?])\s+/u).slice(0,2).join(" "):row[2],source:row[3]},gender);
+ return allahAlam(gender);
 }
 function capabilities(env){return {transcribe:env.KIDS_MAJLIS_STT_ENABLED==="true"&&!!env.AI?.run,voice:env.KIDS_MAJLIS_TTS_ENABLED==="true"&&!!String(env.ELEVENLABS_VOICE_ID||"").trim()&&String(env.ELEVENLABS_MODEL_ID||"")==="eleven_v4"&&!!String(env.ELEVENLABS_PRONUNCIATION_DICTIONARY_ID||"").trim()&&isVoiceConfigured(env)}}
 async function handleSession(req,env){
@@ -104,9 +125,10 @@ async function handleAnswer(req,env,user){
  const input=await body(req),q=clean(input?.question);
  if(!q)return json({ok:false,error:"invalid_question"},400);
  const age=["4–5","6–8","9–10"].includes(input?.age)?input.age:"6–8";
- const answer=choose(q,age);
- const answerId=await sign({kind:"answer",id:answer.id,age,nonce:user.nonce,exp:Math.min(Date.now()+480000,user.exp)},env);
- return json({ok:true,answer:answer.text,source:answer.source,answerId,verified:!!answer.source,mode:"curated_only"});
+ const gender=input?.gender==="girl"?"girl":"boy";
+ const answer=choose(q,age,gender);
+ const answerId=await sign({kind:"answer",id:answer.id,age,gender,nonce:user.nonce,exp:Math.min(Date.now()+480000,user.exp)},env);
+ return json({ok:true,answer:answer.text,source:answer.source,answerId,media:answer.media||null,verified:!!answer.source,mode:"verified_corpus_v1"});
 }
 function validAudio(bytes,mime){return (mime.includes("webm")&&bytes[0]===0x1a&&bytes[1]===0x45&&bytes[2]===0xdf&&bytes[3]===0xa3)||(mime.includes("mp4")&&bytes[4]===0x66&&bytes[5]===0x74&&bytes[6]===0x79&&bytes[7]===0x70)||(mime.includes("ogg")&&bytes[0]===79&&bytes[1]===103&&bytes[2]===103&&bytes[3]===83)}
 function encodeAudio(bytes){let s="";for(let i=0;i<bytes.length;i+=8192)s+=String.fromCharCode(...bytes.slice(i,i+8192));return btoa(s)}
@@ -130,11 +152,16 @@ async function handleSpeech(req,env,user){
  if(!(await throttle(req,env,true)))return json({ok:false,error:"voice_rate_limited"},429);
  const payload=await body(req,3000),reference=await verify(payload?.answerId,env,"answer");
  if(!reference||reference.nonce!==user.nonce||!["4–5","6–8","9–10"].includes(reference.age))return json({ok:false,error:"invalid_answer_reference"},403);
+ const gender=reference.gender==="girl"?"girl":"boy";
  const topic=TOPICS.find(x=>x[0]===reference.id);
  const libraryItem=reference.id.startsWith("library:")?VERIFIED_BY_ID.get(reference.id.slice(8)):null;
  const resolvedLibrary=libraryAnswer(libraryItem,reference.age);
- if(!topic&&!resolvedLibrary)return json({ok:false,error:"unapproved_answer"},403);
- const text=resolvedLibrary?.text||(reference.age==="4–5"?topic[2].split(/(?<=[.!?])\s+/u).slice(0,2).join(" "):topic[2]);
+ const knowledge=(reference.id.startsWith("kb:")||reference.id.startsWith("verse:"))?
+   findKnowledgeById(reference.id,reference.age,gender):null;
+ if(!topic&&!resolvedLibrary&&!knowledge)return json({ok:false,error:"unapproved_answer"},403);
+ const chosen=knowledge||decorate(resolvedLibrary||{id:topic[0],
+   text:reference.age==="4–5"?topic[2].split(/(?<=[.!?])\s+/u).slice(0,2).join(" "):topic[2],source:topic[3]},gender);
+ const text=chosen.text;
  try{
    const response=await synthesizeDarVoice(env,text,{profile:"kids_lesson",timestamps:false});
    if(!response.ok||!response.bytes)return json({ok:false,error:"voice_generation_failed"},502);
