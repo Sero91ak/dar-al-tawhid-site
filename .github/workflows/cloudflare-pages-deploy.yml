@@ -100,7 +100,7 @@ jobs:
           else
             echo "shortlinks_only=false" >> "$GITHUB_OUTPUT"
           fi
-          if [ -n "$CHANGED" ] && printf '%s\n' "$CHANGED" | grep -Eq '^(q/|quellen/)' && [ -z "$(printf '%s\n' "$CHANGED" | grep -Ev '^(q/|quellen/|assets/q-source-dar-al-layl\.css$|scripts/sync-quellen-registry\.cjs$|scripts/cf-pages-build\.js$|\.github/workflows/cloudflare-pages-deploy\.yml$|content/admin/change-scope-lock\.json$|wrangler\.toml$)' || true)" ]; then
+          if [ -n "$CHANGED" ] && printf '%s\n' "$CHANGED" | grep -Eq '^(q/|quellen/)' && [ -z "$(printf '%s\n' "$CHANGED" | grep -Ev '^(q/|quellen/|assets/q-source-dar-al-layl\.css$|scripts/sync-quellen-registry\.cjs$|scripts/cf-pages-build\.js$|\.github/workflows/cloudflare-pages-deploy\.yml$|\.github/workflows/check-quellen-library\.yml$|content/admin/change-scope-lock\.json$|wrangler\.toml$)' || true)" ]; then
             echo "qsource_only=true" >> "$GITHUB_OUTPUT"
           else
             echo "qsource_only=false" >> "$GITHUB_OUTPUT"
