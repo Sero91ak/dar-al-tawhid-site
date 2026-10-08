@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-10-08T13:40:22.980Z",
+  "generated": "2026-10-08T13:40:26.372Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -1139,44 +1139,38 @@
       "createdAt": "2026-10-08T13:31:07.738Z",
       "pushApproved": true,
       "pushApprovedAt": "2026-10-08T13:31:07.738Z",
-      "lastError": "Index auf GitHub ok, aber öffentlicher Index noch ohne Beitrag – Deployment/Cache.",
-      "updatedAt": "2026-10-08T13:37:34.334Z",
-      "lastCheckAt": "2026-10-08T13:37:34.049Z",
+      "lastError": "",
+      "updatedAt": "2026-10-08T13:40:26.372Z",
+      "lastCheckAt": "2026-10-08T13:40:25.145Z",
       "liveCheck": {
-        "ok": false,
+        "ok": true,
         "steps": {
           "githubFileCreated": true,
           "indexUpdatedGithub": true,
           "indexFoundPublic": true,
-          "postInIndex": false,
-          "postFilePublic": false,
+          "postInIndex": true,
+          "postFilePublic": true,
           "visitorUrlOk": true,
-          "cloudflareDeployed": false,
+          "cloudflareDeployed": true,
           "githubIndexHasPost": true,
           "githubPostExists": true
         },
-        "diagnosis": "Index auf GitHub ok, aber öffentlicher Index noch ohne Beitrag – Deployment/Cache.",
-        "indexOk": false,
-        "postOk": false,
+        "diagnosis": "",
+        "indexOk": true,
+        "postOk": true,
         "visitorUrlOk": true,
-        "attempts": 6,
+        "attempts": 1,
         "site": "https://dar-al-tawhid.de",
         "postId": "miraj-ruyah-ikhtilaf-kein-pauschaler-takfir-slides-469",
-        "indexGenerated": "2026-10-08T11:30:49.828Z",
-        "indexCount": 467,
-        "visitorUrl": "https://dar-al-tawhid.de/?post=miraj-ruyah-ikhtilaf-kein-pauschaler-takfir-slides-469&v=1791466641254#post/miraj-ruyah-ikhtilaf-kein-pauschaler-takfir-slides-469",
+        "indexGenerated": "2026-10-08T13:37:22.370Z",
+        "indexCount": 469,
+        "visitorUrl": "https://dar-al-tawhid.de/?post=miraj-ruyah-ikhtilaf-kein-pauschaler-takfir-slides-469&v=1791466824416#post/miraj-ruyah-ikhtilaf-kein-pauschaler-takfir-slides-469",
         "githubIndexHasPost": true,
         "githubPostExists": true,
         "needsIndexRepair": false,
-        "needsDeployWait": true,
-        "repair": {
-          "repaired": true,
-          "action": "index-touch",
-          "at": "2026-10-08T13:37:23.730Z",
-          "reason": "Index aktualisiert (Deploy/Cache)"
-        }
+        "needsDeployWait": false
       },
-      "attempts": 6,
+      "attempts": 1,
       "lastRepair": {
         "repaired": true,
         "action": "index-touch",
