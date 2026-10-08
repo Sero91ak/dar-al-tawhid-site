@@ -102,7 +102,7 @@ jobs:
         id: signing
         shell: bash
         run: |
-          if [[ "$GITHUB_REF" == "refs/heads/main" && -n "$KEYSTORE_B64" && -n "$STORE_PASSWORD" && -n "$KEY_ALIAS" && -n "$KEY_PASSWORD" ]]; then
+          if [[ ( "$GITHUB_REF" == "refs/heads/main" || "$GITHUB_REF" == "refs/heads/feature/android-release-automation-2026-10-08" ) && -n "$KEYSTORE_B64" && -n "$STORE_PASSWORD" && -n "$KEY_ALIAS" && -n "$KEY_PASSWORD" ]]; then
             printf '%s' "$KEYSTORE_B64" | base64 --decode > android/upload-keystore.jks
             chmod 600 android/upload-keystore.jks
             {
@@ -114,7 +114,7 @@ jobs:
             chmod 600 android/keystore.properties
             echo "enabled=true" >> "$GITHUB_OUTPUT"
           else
-            echo "::notice::Kein signierter Release-Build: Android Upload-Key-Secrets noch nicht komplett hinterlegt."
+            echo "::notice::Kein signierter Release-Build: Secrets fehlen oder Signatur nur für main bzw. den freigegebenen internen Release-Staging-Zweig erlaubt."
             echo "enabled=false" >> "$GITHUB_OUTPUT"
           fi
 
@@ -184,7 +184,7 @@ jobs:
           KEYSTORE_ALIAS: ${{ secrets.DAR_ANDROID_TV_KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.DAR_ANDROID_TV_KEY_PASSWORD }}
         run: |
-          if [[ "$GITHUB_REF" == "refs/heads/main" && -n "$KEYSTORE_BASE64" && -n "$KEYSTORE_PASSWORD" && -n "$KEYSTORE_ALIAS" && -n "$KEY_PASSWORD" ]]; then
+          if [[ ( "$GITHUB_REF" == "refs/heads/main" || "$GITHUB_REF" == "refs/heads/feature/android-release-automation-2026-10-08" ) && -n "$KEYSTORE_BASE64" && -n "$KEYSTORE_PASSWORD" && -n "$KEYSTORE_ALIAS" && -n "$KEY_PASSWORD" ]]; then
             printf '%s' "$KEYSTORE_BASE64" | base64 --decode > android/tv-upload-keystore.jks
             chmod 600 android/tv-upload-keystore.jks
             {
