@@ -59,6 +59,17 @@
       "syncMode": "ayah-by-ayah",
       "autoAdvance": true,
       "persistLastPosition": true,
+      "surahCount": 114,
+      "loop": {
+        "enabled": true,
+        "neverStopAtEnd": true,
+        "whenComplete": "restartFromSurah1Ayah1",
+        "afterLastAyah": "114:6",
+        "next": "1:1",
+        "continueImmediately": true,
+        "noPauseAtEnd": true,
+        "rule": "Nach der letzten Āyah von Sūrah 114 sofort wieder bei 1:1 weiterlesen und weiterhören. Nicht anhalten."
+      },
       "remoteLoad": true,
       "offlineCache": true
     },
@@ -66,6 +77,7 @@
       "status": "active",
       "target": "tvOS-only",
       "catalogPath": "quran/audio/catalog.json",
+      "loopWhenMushafComplete": true,
       "remoteLoad": true,
       "offlineCache": true,
       "playViaWeb": true,
