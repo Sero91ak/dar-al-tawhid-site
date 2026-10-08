@@ -25,6 +25,7 @@ on:
     paths:
       - 'kids/data/dua-kids.json'
       - 'kids/tools/voice_text.py'
+      - 'kids/data/quiz-voice-batch.json'
       - '.github/workflows/build-kids-quiz-owner-voice.yml'
 
 permissions:
@@ -44,8 +45,8 @@ jobs:
       ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
       ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
       VOICE_BUILD_SCOPE: ${{ github.event_name == 'workflow_dispatch' && inputs.scope || contains(github.event.head_commit.message, '[quiz-batch]') && 'quiz' || contains(github.event.head_commit.message, '[voice-pause]') && 'pause' || contains(github.event.head_commit.message, '[dua-only]') && 'dua' || contains(github.event.head_commit.message, '[quiz-only]') && 'quiz' || 'full' }}
-      QUIZ_BATCH_START: ${{ inputs.quiz_start || '1' }}
-      QUIZ_BATCH_COUNT: ${{ inputs.quiz_count || '7' }}
+      QUIZ_BATCH_START: ${{ github.event_name == 'workflow_dispatch' && inputs.quiz_start || '' }}
+      QUIZ_BATCH_COUNT: ${{ github.event_name == 'workflow_dispatch' && inputs.quiz_count || '' }}
 
     steps:
       - name: Checkout main
@@ -608,8 +609,13 @@ jobs:
               prompts=[quiz_prompt(q) for q in quiz_items]
               if len(set(prompts))!=900:
                   raise SystemExit("Quiz-Sprachprompts sind nicht eindeutig.")
-              quiz_start=int(os.environ.get("QUIZ_BATCH_START") or "1")
-              quiz_count=int(os.environ.get("QUIZ_BATCH_COUNT") or "7")
+              batch_config=load_manifest(ROOT/"kids/data/quiz-voice-batch.json")
+              if str(batch_config.get("voiceProfileId") or "")!="serhat-owner-voice-2026":
+                  raise SystemExit("Die Quiz-Batch-Datei hat keine autorisierte Serhat-Masterstimme.")
+              if str(batch_config.get("modelId") or "")!="eleven_v4":
+                  raise SystemExit("Die Quiz-Batch-Datei muss auf ElevenLabs V4 festgelegt sein.")
+              quiz_start=int(os.environ.get("QUIZ_BATCH_START") or batch_config.get("batchStart") or 1)
+              quiz_count=int(os.environ.get("QUIZ_BATCH_COUNT") or batch_config.get("batchCount") or 7)
               if not (1<=quiz_start<=900 and 1<=quiz_count<=12):
                   raise SystemExit("Quiz-Batch muss mit 1–900 beginnen und 1–12 Fragen enthalten.")
               end_num=min(900,quiz_start+quiz_count-1)
@@ -621,7 +627,7 @@ jobs:
                   if not quiz_start<=number<=end_num:
                       continue
                   samples=[quiz_prompt(q),norm(q.get("explanation"))]
-                  if any(re.search(r"[\u0600-\u06FF]",sample or "") for sample in samples):
+                  if any(re.search(r"[\u0600-\u06FF\uFB50-\uFDFF\uFE70-\uFEFF]",sample or "") for sample in samples):
                       deferred_arabic.append(number)
                       continue
                   selected_quiz_items.append(q)
@@ -953,6 +959,10 @@ jobs:
             echo "Kids owner voice packs already current."
             exit 0
           fi
-          git commit -m "Kids: publish complete Serhat V4 Dua voice packs"
+          if [ "${VOICE_BUILD_SCOPE:-}" = "quiz" ]; then
+            git commit -m "Kids: publish staged Serhat V4 quiz owner voice pack"
+          else
+            git commit -m "Kids: publish Serhat V4 Dua voice packs"
+          fi
           git pull --rebase origin main
           git push origin HEAD:main
