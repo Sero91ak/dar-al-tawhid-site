@@ -3,6 +3,8 @@ const KIDS_BUILD_ID="kids-shell-v158-dua-follow1261";
 const DUA_AUDIO_RUNTIME="1244";
 // QUIZ_HOME_RESTORE_V1225: refresh installed PWAs with the restored Quiz entry.
 const CORE_PRECACHE=[
+  "/kids/prayer-stage-v1261.css?v=1261",
+  "/kids/prayer-stage-v1261.js?v=1261",
   "/kids/assets/kids-home-v1222/dar-title-reference-clean.svg?v=1229",
   "/kids/assets/kids-home-v1219/dar-title-reference.png?v=1229",
   "/kids/assets/kids-home-v1219/dar-title-reference.png?v=1229",
