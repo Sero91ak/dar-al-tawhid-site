@@ -41,11 +41,16 @@ jobs:
           distribution: temurin
           java-version: "17"
 
-      - name: Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Android API 36 installieren
-        run: sdkmanager --install "platforms;android-36" "build-tools;36.0.0"
+      - name: Android SDK / API 36 installieren
+        shell: bash
+        run: |
+          SDK_MANAGER="$(command -v sdkmanager || true)"
+          if [[ -z "$SDK_MANAGER" ]]; then
+            echo "::error::Android sdkmanager fehlt auf dem GitHub-Runner."
+            exit 1
+          fi
+          yes | "$SDK_MANAGER" --licenses >/dev/null || true
+          "$SDK_MANAGER" --install "platforms;android-36" "build-tools;36.0.0"
 
       - name: Gradle einrichten
         uses: gradle/actions/setup-gradle@v4
