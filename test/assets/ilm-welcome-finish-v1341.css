@@ -67,3 +67,196 @@ html[data-theme] body.is-ilm-chat-route .ilm-welcome-path-grid .ilm-welcome-path
 @media(prefers-reduced-motion:reduce){
  body.is-ilm-chat-route .ilm-welcome-example-v1341{transition:none!important}
 }
+
+/* MAJLIS LAYOUT AUTHORITY V1342 */
+/* Only the Test ʿIlm route. Actual colors remain inherited from active theme. */
+html body.is-ilm-chat-route .ilm-welcome--majlis{
+  display:block!important;
+  width:100%!important;
+  min-width:0!important;
+  padding-bottom:clamp(30px,7vw,56px)!important;
+}
+html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-prompts{
+  margin-top:clamp(25px,5vw,32px)!important;
+}
+html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-prompts-head{
+  padding-bottom:14px!important;
+}
+html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-examples-v1341{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  align-items:stretch!important;
+  gap:12px!important;
+  width:100%!important;
+  max-width:100%!important;
+  margin:17px 0 0!important;
+  padding:0!important;
+  height:auto!important;
+}
+html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-examples-v1341 > button.ilm-welcome-example-v1341{
+  display:flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:12px!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  height:auto!important;
+  min-height:75px!important;
+  margin:0!important;
+  padding:13px 15px!important;
+  border:1px solid color-mix(in srgb,var(--ilm-accent) 24%,transparent)!important;
+  border-radius:14px!important;
+  box-sizing:border-box!important;
+  background:color-mix(in srgb,var(--ilm-header-bg) 66%,transparent)!important;
+  color:var(--ilm-primary-text)!important;
+  box-shadow:none!important;
+  text-align:left!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  transform:none!important;
+}
+html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-example-text-v1341{
+  display:flex!important;
+  flex:1 1 auto!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  gap:7px!important;
+  min-width:0!important;
+  max-width:100%!important;
+  margin:0!important;
+  padding:0!important;
+  white-space:normal!important;
+  text-align:left!important;
+}
+html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-example-text-v1341 > small{
+  display:block!important;
+  flex:0 0 auto!important;
+  position:static!important;
+  float:none!important;
+  width:auto!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+  font:700 10px/1.2 system-ui,sans-serif!important;
+  color:var(--ilm-accent)!important;
+  letter-spacing:.045em!important;
+  text-transform:uppercase!important;
+  white-space:normal!important;
+}
+html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-example-text-v1341 > b{
+  display:block!important;
+  position:static!important;
+  float:none!important;
+  width:auto!important;
+  margin:0!important;
+  padding:0!important;
+  color:var(--ilm-primary-text)!important;
+  font:630 clamp(13px,3.35vw,15px)/1.4 system-ui,sans-serif!important;
+  letter-spacing:0!important;
+  white-space:normal!important;
+  overflow-wrap:anywhere!important;
+}
+html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-example-arrow-v1341{
+  display:block!important;
+  position:static!important;
+  flex:0 0 20px!important;
+  width:20px!important;
+  text-align:right!important;
+  margin-left:auto!important;
+  font:500 18px/1 system-ui,sans-serif!important;
+  color:var(--ilm-accent)!important;
+}
+html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-paths{
+  width:min(780px,calc(100% - 28px))!important;
+  margin:clamp(27px,6vw,38px) auto 0!important;
+  padding:0 0 18px!important;
+}
+html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-paths-head{
+  padding-bottom:15px!important;
+}
+html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-path-grid{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  column-gap:12px!important;
+  row-gap:12px!important;
+  width:100%!important;
+  min-width:0!important;
+  margin:16px 0 0!important;
+  padding:0!important;
+  border:0!important;
+}
+html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-path-grid > button.ilm-welcome-path,
+html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-path-grid > button.ilm-welcome-path:nth-child(odd),
+html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-path-grid > button.ilm-welcome-path:nth-child(even){
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) 18px!important;
+  align-items:center!important;
+  gap:7px!important;
+  width:100%!important;
+  min-width:0!important;
+  min-height:91px!important;
+  margin:0!important;
+  padding:13px 12px!important;
+  border:1px solid color-mix(in srgb,var(--ilm-accent) 21%,transparent)!important;
+  border-radius:14px!important;
+  box-sizing:border-box!important;
+  box-shadow:none!important;
+  background:color-mix(in srgb,var(--ilm-header-bg) 61%,transparent)!important;
+  text-align:left!important;
+}
+html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-path-grid > .ilm-welcome-path span{
+  display:flex!important;
+  flex-direction:column!important;
+  gap:6px!important;
+  min-width:0!important;
+  align-items:flex-start!important;
+}
+html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-path-grid > .ilm-welcome-path b{
+  font-size:clamp(16px,4vw,20px)!important;
+  line-height:1.1!important;
+}
+html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-path-grid > .ilm-welcome-path small{
+  font-size:11px!important;
+  line-height:1.38!important;
+  overflow-wrap:anywhere!important;
+}
+html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-path-grid > .ilm-welcome-path i{
+  justify-self:end!important;
+  font-size:18px!important;
+}
+/* Moderate breathing room in the current answer without a forced full-height card. */
+html body.is-ilm-chat-route .ilm-message-inner{
+  padding-top:clamp(17px,3vw,24px)!important;
+}
+html body.is-ilm-chat-route .ilm-message-inner .ilm-user-row{
+  margin:12px 0 18px!important;
+}
+html body.is-ilm-chat-route .ilm-message-inner .ilm-assistant-message{
+  margin:7px 0 23px!important;
+}
+html body.is-ilm-chat-route .ilm-assistant-message .ilm-science-prose p{
+  margin:0 0 15px!important;
+  line-height:1.65!important;
+}
+html body.is-ilm-chat-route .ilm-answer-text .ilm-primary-references{
+  margin:18px 0 0!important;
+  padding-top:15px!important;
+  gap:10px!important;
+}
+html body.is-ilm-chat-route .ilm-answer-text .ilm-science-actions{
+  margin:16px 0 11px!important;
+  gap:9px!important;
+}
+@media(min-width:760px){
+  html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-examples-v1341{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+}
+@media(max-width:355px){
+  html body.is-ilm-chat-route .ilm-welcome--majlis .ilm-welcome-path-grid{
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+}
