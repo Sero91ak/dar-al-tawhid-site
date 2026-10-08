@@ -34,8 +34,8 @@ stage.innerHTML=
   '<div class="kids-salah-next"><i class="kids-salah-beat" aria-hidden="true"></i>'+
   '<span id="kidsSalahNextText">Standort einstellen</span><strong class="kids-salah-countdown" id="kidsSalahCountdown"></strong></div>'+
   '<div class="kids-salah-progress" aria-hidden="true"><span id="kidsSalahProgress"></span></div>'+
-  '<div class="kids-salah-five" id="kidsSalahFive" aria-label="Fünf tägliche Gebetszeiten">'+
-  ORDER.map(key=>'<button type="button" tabindex="-1" data-prayer="'+key+'"><span class="kids-salah-dot" aria-hidden="true"></span><span class="kids-salah-prayer">'+NAMES[key]+'</span><time>--:--</time></button>').join("")+
+  '<div class="kids-salah-five" id="kidsSalahFive" role="list" aria-label="Fünf tägliche Gebetszeiten">'+
+  ORDER.map(key=>'<span class="kids-salah-slot" role="listitem" data-prayer="'+key+'"><span class="kids-salah-dot" aria-hidden="true"></span><span class="kids-salah-prayer">'+NAMES[key]+'</span><time>--:--</time></span>').join("")+
   '</div><button class="kids-salah-open-day" id="kidsSalahOpenDay" type="button">Alle Gebetszeiten ansehen <span aria-hidden="true">›</span></button>'+
   '<p class="kids-salah-status" id="kidsSalahStatus">Gebetszeiten passend zu deinem Ort.</p>';
 HERO.insertAdjacentElement("afterend",stage);
@@ -156,6 +156,14 @@ const results=overlay.querySelector("#kidsSalahResults");
 const err=overlay.querySelector("#kidsSalahErr");
 const angle=overlay.querySelector("#kidsSalahAngle");
 const asr=overlay.querySelector("#kidsSalahAsr");
+const appThemeRoot=document.querySelector(".app");
+if(appThemeRoot && typeof MutationObserver!=="undefined"){
+ new MutationObserver(()=>{
+  const gender=appThemeRoot.dataset.gender||"boy";
+  dayPage.dataset.gender=gender;overlay.dataset.gender=gender;
+ }).observe(appThemeRoot,{attributes:true,attributeFilter:["data-gender"]});
+}
+
 let inputTimer=null,searchTicket=0;
 overlay.querySelector("#kidsSalahClose").addEventListener("click",closeSettings);
 overlay.addEventListener("click",e=>{if(e.target===overlay)closeSettings();});
@@ -171,6 +179,7 @@ overlay.querySelector("#kidsSalahGps").addEventListener("click",()=>{
  {enableHighAccuracy:false,timeout:15000,maximumAge:30*60*1000});
 });
 function openSettings(){
+ overlay.dataset.gender=document.querySelector(".app")?.dataset.gender||"boy";
  overlay.hidden=false;err.textContent="";results.innerHTML="";
  angle.value=String(place?.angle||12);asr.value=String(place?.asr||1);
  overlay.querySelector("#kidsSalahClose").focus();
@@ -255,7 +264,9 @@ function entries(date,data){
  }).filter(p=>Number.isFinite(p.ts));
 }
 function draw(){
- city.textContent=place?.name||"Ort wählen";
+ city.textContent=place?.name?String(place.name).split(",")[0].trim():"Ort wählen";
+ $("#kidsSalahLocation").title=place?.name||"Gebetsort auswählen";
+ $("#kidsSalahLocation").setAttribute("aria-label",place?.name?"Gebetsort ändern: "+place.name:"Gebetsort auswählen");
  if(!place){currentName.textContent="Gebetsort wählen";currentTime.textContent="--:--";prayerName.textContent="Nächstes Gebet";clock.textContent="--:--";nextText.textContent="Standort einstellen";
   countdown.textContent="";status.textContent="Wähle deinen Ort für zuverlässige Gebetszeiten.";
   progress.style.width="0%";return;}
