@@ -1475,3 +1475,242 @@ body.kids-salah-day-open{overflow:hidden!important}
 @media(prefers-reduced-motion:reduce){
  #view-today .kids-salah-home-world > .kids-salah-motion{display:none!important}
 }
+
+
+/* KIDS_SALAH_PHOTOREAL_V1272 — compact contiguous home experience; seven local original artworks.
+   Dark gradients are for text contrast only, never opaque masks over the architecture. */
+#view-today .kids-salah-home-world{
+  background:#092535!important;
+  margin-inline:-16px!important;
+  padding:0 16px 14px!important;
+  isolation:isolate!important;
+}
+#view-today .kids-salah-home-world::before{
+  content:"";display:block;position:absolute;inset:-3%;z-index:0;pointer-events:none;
+  background:url("/kids/assets/kids-salah-v1272/hero-home.png?v=1272") center 42%/cover no-repeat;
+  transform:scale(1.035);
+  animation:kidsSalahPhotorealDrift1272 19s ease-in-out infinite alternate;
+  will-change:transform;
+}
+@keyframes kidsSalahPhotorealDrift1272{
+  from{transform:scale(1.035) translate3d(-.4%,.45%,0)}
+  to{transform:scale(1.09) translate3d(.45%,-.45%,0)}
+}
+#view-today .kids-salah-home-world::after{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  height:auto!important;
+  background:linear-gradient(180deg,
+     rgba(3,18,32,.17) 0%,rgba(3,19,34,.17) 22%,
+     rgba(3,18,35,.12) 45%,rgba(3,22,36,.40) 59%,
+     rgba(4,26,42,.60) 75%,rgba(5,30,46,.87) 95%,#082536 100%)!important;
+}
+#view-today .kids-salah-home-world > .hero{
+  position:relative!important;z-index:2!important;
+  min-height:clamp(415px,108vw,455px)!important;
+  max-height:455px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+#view-today .kids-salah-home-world > .hero::before,
+#view-today .kids-salah-home-world > .hero::after{
+  background:none!important;background-image:none!important;
+  opacity:0!important;animation:none!important;
+}
+#view-today .kids-salah-home-world .hero-copy{
+  bottom:10px!important;padding-bottom:3px!important;
+}
+#view-today .kids-salah-home-world .hero-salam{
+  margin-bottom:7px!important;
+  text-shadow:0 2px 12px #061725,0 1px 3px #03101d!important;
+}
+#view-today .kids-salah-home-world .hero-kicker{margin-bottom:6px!important}
+#view-today .kids-salah-home-world > .kids-salah-stage{
+  padding:8px clamp(12px,4.1vw,22px) 12px!important;
+  background:transparent!important;
+  background-image:none!important;
+  isolation:auto!important;
+}
+#view-today .kids-salah-home-world > .kids-salah-stage::before{
+  background:linear-gradient(90deg,transparent,rgba(250,228,179,.22),transparent)!important;
+}
+#view-today .kids-salah-home-world > .kids-salah-motion{display:none!important}
+#view-today .kids-salah-home-world .kids-salah-top{
+  margin-bottom:2px!important;
+}
+#view-today .kids-salah-home-world .kids-salah-heading{
+  margin:4px auto 7px!important;
+  font-size:clamp(30px,8.1vw,44px)!important;
+}
+#view-today .kids-salah-home-world .kids-salah-time-pair{
+  max-width:510px!important;
+  grid-template-columns:minmax(0,1fr) 1px minmax(0,1fr)!important;
+  gap:clamp(6px,2.6vw,16px)!important;
+}
+#view-today .kids-salah-home-world .kids-salah-pair-label{
+  font-size:clamp(11px,2.8vw,13px)!important;letter-spacing:.09em!important;
+}
+#view-today .kids-salah-home-world .kids-salah-now strong,
+#view-today .kids-salah-home-world .kids-salah-name{
+  font-size:clamp(18px,4.85vw,25px)!important;
+  margin:2px 0!important;
+}
+#view-today .kids-salah-home-world .kids-salah-now time,
+#view-today .kids-salah-home-world .kids-salah-clock{
+  font-size:clamp(37px,10.7vw,55px)!important;
+  font-weight:800!important;
+  line-height:1.16!important;
+  text-shadow:0 3px 10px rgba(0,0,0,.55),0 0 14px rgba(255,219,154,.11)!important;
+}
+#view-today .kids-salah-home-world .kids-salah-now time{color:#d5fff4!important}
+#view-today .kids-salah-home-world .kids-salah-clock{color:#ffe2a2!important}
+#view-today .kids-salah-home-world .kids-salah-next{
+  margin:9px auto 9px!important;
+  padding:9px 14px!important;
+  min-height:43px!important;
+  border:1px solid rgba(255,222,157,.58)!important;
+  background:rgba(4,29,45,.71)!important;
+  border-radius:999px!important;
+  font-size:clamp(14px,3.7vw,17px)!important;
+  box-shadow:0 0 18px rgba(252,212,125,.12),inset 0 1px 0 rgba(255,255,255,.08)!important;
+}
+#view-today .kids-salah-home-world .kids-salah-countdown{
+  font-size:clamp(17px,4.4vw,21px)!important;
+  font-weight:800!important;
+  font-variant-numeric:tabular-nums!important;
+  letter-spacing:.035em!important;
+}
+#view-today .kids-salah-home-world .kids-salah-progress{margin:8px auto 10px!important}
+#view-today .kids-salah-home-world .kids-salah-five{
+  padding-top:10px!important;
+}
+#view-today .kids-salah-home-world .kids-salah-slot time{
+  font-size:clamp(13px,3.6vw,16px)!important;
+  font-variant-numeric:tabular-nums!important;
+}
+#view-today .kids-salah-home-world .kids-salah-open-day{
+  min-height:52px!important;margin-top:12px!important;
+  font-size:clamp(15px,4vw,18px)!important;
+  background:linear-gradient(90deg,rgba(9,39,57,.89),rgba(20,54,65,.75))!important;
+}
+#view-today .kids-salah-home-world + .resume{margin-top:11px!important}
+.app[data-gender="girl"] #view-today .kids-salah-home-world{
+  background:#221f3b!important;
+}
+.app[data-gender="girl"] #view-today .kids-salah-home-world::after{
+  background:linear-gradient(180deg,rgba(34,20,52,.17),rgba(37,24,56,.20) 40%,rgba(35,25,59,.49) 72%,#251f40 100%)!important;
+}
+.app[data-gender="girl"] #view-today .kids-salah-home-world .kids-salah-now time{color:#f6dafa!important}
+.app[data-gender="girl"] #view-today .kids-salah-home-world .kids-salah-clock{color:#ffe2f1!important}
+/* Full-page prayer schedule: real cinematic photographic hero with reduced wasted sky. */
+.kids-salah-day{
+  background:linear-gradient(180deg,#061b2b 0%,#092a3e 55%,#081f31 100%)!important;
+}
+.kids-salah-day::before{
+  height:clamp(365px,55dvh,490px)!important;
+  background:
+    linear-gradient(180deg,rgba(3,18,31,.17) 0%,rgba(3,23,38,.08) 40%,
+          rgba(7,28,43,.27) 67%,#092a3c 100%),
+    url("/kids/assets/kids-salah-v1272/hero-day.png?v=1272") center 42% /cover no-repeat!important;
+}
+.kids-salah-day-hero{
+  padding-top:clamp(115px,17dvh,190px)!important;
+}
+.kids-salah-day-hero h2{
+  font-size:clamp(32px,8.7vw,49px)!important;
+  line-height:1.10!important;
+}
+.kids-salah-day-subtitle{margin-bottom:12px!important}
+.kids-salah-day-place{
+  border:1px solid rgba(243,218,161,.38)!important;
+  background:linear-gradient(120deg,rgba(8,42,61,.88),rgba(10,40,56,.76))!important;
+}
+.kids-salah-day-list{gap:10px!important}
+.kids-salah-day-item{
+  min-height:100px!important;
+  grid-template-columns:clamp(65px,19vw,89px) minmax(0,1fr) auto!important;
+  gap:clamp(9px,2.7vw,17px)!important;
+  padding:8px clamp(9px,2.7vw,14px)!important;
+  border:1px solid rgba(186,226,234,.31)!important;
+  background:linear-gradient(118deg,rgba(20,66,87,.91),rgba(10,48,68,.88))!important;
+}
+.kids-salah-day-item-orb{
+  width:clamp(65px,19vw,89px)!important;height:clamp(65px,19vw,89px)!important;
+  max-width:89px!important;max-height:89px!important;
+  border-radius:17px!important;
+  background-color:#15445b!important;background-position:center!important;
+  background-size:cover!important;background-repeat:no-repeat!important;
+  box-shadow:0 2px 15px rgba(0,0,0,.27),inset 0 0 0 1px rgba(255,244,215,.26)!important;
+}
+.kids-salah-day-item-orb::before,.kids-salah-day-item-orb::after{
+  content:none!important;display:none!important;
+}
+.kids-salah-day-item[data-prayer="fajr"] .kids-salah-day-item-orb{
+  background-image:url("/kids/assets/kids-salah-v1272/fajr.png?v=1272")!important;
+}
+.kids-salah-day-item[data-prayer="dhuhr"] .kids-salah-day-item-orb{
+  background-image:url("/kids/assets/kids-salah-v1272/dhuhr.png?v=1272")!important;
+}
+.kids-salah-day-item[data-prayer="asr"] .kids-salah-day-item-orb{
+  background-image:url("/kids/assets/kids-salah-v1272/asr.png?v=1272")!important;
+}
+.kids-salah-day-item[data-prayer="maghrib"] .kids-salah-day-item-orb{
+  background-image:url("/kids/assets/kids-salah-v1272/maghrib.png?v=1272")!important;
+}
+.kids-salah-day-item[data-prayer="isha"] .kids-salah-day-item-orb{
+  background-image:url("/kids/assets/kids-salah-v1272/isha.png?v=1272")!important;
+}
+.kids-salah-day-item-name strong{
+  font-size:clamp(23px,6.35vw,33px)!important;
+}
+.kids-salah-day-item time{
+  font-size:clamp(29px,7.8vw,43px)!important;
+  font-variant-numeric:tabular-nums!important;
+}
+.kids-salah-day-item.is-current{
+  border:2px solid #f5ce78!important;
+  box-shadow:0 0 20px rgba(248,205,113,.22),inset 0 0 15px rgba(247,211,143,.05)!important;
+}
+.kids-salah-day[data-gender="girl"]::before{
+  background:
+    linear-gradient(180deg,rgba(36,21,50,.19) 0%,rgba(36,21,50,.15) 45%,
+       rgba(35,25,56,.43) 76%,#332541 100%),
+    url("/kids/assets/kids-salah-v1272/hero-day.png?v=1272") center 42%/cover no-repeat!important;
+}
+@media(max-width:370px){
+  #view-today .kids-salah-home-world > .hero{
+    min-height:400px!important;max-height:420px!important;
+  }
+  #view-today .kids-salah-home-world .kids-salah-now time,
+  #view-today .kids-salah-home-world .kids-salah-clock{
+    font-size:clamp(31px,9.9vw,38px)!important;
+  }
+  #view-today .kids-salah-home-world .kids-salah-time-pair{gap:6px!important}
+  #view-today .kids-salah-home-world .kids-salah-heading{font-size:29px!important}
+  .kids-salah-day-hero{padding-top:clamp(104px,16dvh,148px)!important}
+  .kids-salah-day-item{
+    grid-template-columns:61px minmax(0,1fr) auto!important;
+    gap:7px!important;min-height:82px!important;
+  }
+  .kids-salah-day-item-orb{
+    width:61px!important;height:61px!important;max-width:61px!important;max-height:61px!important;
+  }
+  .kids-salah-day-item time{font-size:clamp(23px,7.1vw,29px)!important}
+}
+@media(min-width:700px){
+  #view-today .kids-salah-home-world > .hero{
+    min-height:505px!important;max-height:540px!important;
+  }
+  #view-today .kids-salah-home-world{padding-inline:clamp(20px,5vw,46px)!important}
+  #view-today .kids-salah-home-world .kids-salah-now time,
+  #view-today .kids-salah-home-world .kids-salah-clock{
+    font-size:clamp(45px,6vw,62px)!important;
+  }
+  .kids-salah-day-hero{padding-top:clamp(185px,24dvh,248px)!important}
+  .kids-salah-day-item{min-height:112px!important}
+}
+@media(prefers-reduced-motion:reduce),(prefers-reduced-data:reduce){
+  #view-today .kids-salah-home-world::before{animation:none!important;transform:none!important}
+}
+#view-today .kids-salah-home-world.kids-salah-save-data::before{
+  animation:none!important;transform:none!important;
+}
