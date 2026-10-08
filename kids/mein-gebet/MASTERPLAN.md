@@ -13,16 +13,18 @@
 Für den gesamten Gebetstrainer ist **hanbalitischer Fiqh** als Lehrrahmen vereinbart. Vorrangige Prüfbasis sind Qurʾān und **authentische Sunnah**, darauf aufbauend Ṣaḥābah, Salaf und frühe hanbalitische Lehrwerke. Die Quellenqualität ist nicht schon deshalb ausreichend, weil eine Ansicht „hanbalitisch“ genannt wird. Bei mehreren Überlieferungen von Imām Aḥmad und unterschiedlichen Hadith-Bewertungen wird dies offen notiert, bevor eine bestimmte visuelle Variante festgelegt wird.
 
 **Pflichtdokumente (isoliert in diesem Feature):**
-- `content/hanbali-review.json`: 12 getrennte Positionen/Lehrentscheidungen, 11 direkte Quellennachweise; alle explizit **nicht freigegeben**.
+- `content/hanbali-review.json`: 12 getrennte Positionen/Lehrentscheidungen und inzwischen 21 gesammelte Quellen-/Bewertungsverweise. Qabd auf Brusthöhe sowie vier Rafʿ-al-Yadayn-Anlässe sind als **vom Nutzer gewählte Lehrvarianten** notiert; keine einzige Animation oder öffentliche Kinderlektion ist damit automatisch freigegeben.
 - `HANBALI-QUELLENPRUEFUNG.md`: arabische Fundstellen, konkrete Fragen, Prüf-Reihenfolge und Regeln für die gemeinsame Freigabe.
 
 **Keine religiöse Lehr-/Animationsfreigabe aus der bloßen UI-Vorschau ableiten.** `approvedToAnimate=false`, `approvedToRecord=false`, `approvedToTeach=false`; pro Stellung ein eigener Reviewstatus. Die vorhandenen Kinderlektionen sind noch reine Navigations-/Text-Entwürfe.
 
 **Zwei besonders relevante Fragen:** 
-1. Ibn Qudāmah, *al-Muġnī*, Masʾalah 662 beschreibt verschiedene Aḥmad-Überlieferungen zur Handposition im Qiyām (unter/über Nabel). Vor einem festen 3D-Bild vergleichen und gemeinsam entscheiden.
+1. **Qiyām-Handhaltung ist entschieden:** Rechte auf linke Hand/Unterarm, beide auf Brusthöhe. Als Belege dienen Ṣaḥīḥ al-Buḫārī 740 (Qabd ohne Höhenangabe), der explizite *mursal*-Bericht des Ṭāwūs (Sunan Abī Dāwūd 759 / al-Marāsīl 33) und Ibn Ḫuzaymah 479 mit unterschiedlich bewerteter Zusatzeinschaltung. Ibn Qudāmah, *al-Muġnī* Masʾalah 662 beschreibt andere klassische Aḥmad-Überlieferungen. Diese Unterschiede bleiben transparent, die Modell-Pose benötigt dennoch gesonderte Freigabe.
 2. *al-Muġnī*, Masʾalah 783 beschreibt hanbalitisch Frauenhaltungen beim Rukūʿ/Suǧūd/Sitzen. Deshalb muss eine etwaige Differenz für die **Mädchenfigur**, auch unter Berücksichtigung ihres Alters und der stärksten authentischen Belege, eigens geprüft werden. Keine unreflektierte Kopie der Jungenbewegung und keine unbelegte Differenz.
 
-**Erster Freigabeweg:** Qiyām/Handposition → Rukūʿ als Probe-Pose → Suǧūd-Kontaktstellen vs. Absenkreihenfolge → Mädchen-spezifische Fragen → übrige Stationen. Nach jedem Prüfentscheid gesonderte Nutzerfreigabe; keine Sammel-Freigabe. Die Bedienoberfläche bleibt im eigenen Draft-Branch, ohne neue Hauptkapsel oder Tab und ohne Live-Änderungen.
+**Rafʿ al-Yadayn ausgewählt:** Hände auf Schulterhöhe (Buḫārī 736): bei Gebetseröffnung, vor Rukūʿ und nach Rukūʿ; zusätzlich **beim Aufstehen zur dritten Rakʿah**, wenn vorhanden (Buḫārī 739, Muṣannaf ʿAbd ar-Razzāq 2519, Bd. 2, S. 68). Kein Heben beim Suǧūd auf Grundlage dieser Texte. Schultern sind gewähltes visuelles Referenzmaß; weitere überlieferte Höhen bleiben im internen Prüfregister. Die vierte Stelle wird **niemals künstlich in ein 2-Rakʿah-Gebet eingebaut**.
+
+**Erster Freigabeweg:** Gewählte Qiyām-/Rafʿ-Varianten als Pose-Referenzen überprüfen → Rukūʿ als Probe-Pose → Suǧūd-Kontaktstellen vs. Absenkreihenfolge → Mädchen-spezifische Fragen → übrige Stationen. Nach jedem konkreten Modell-/Fachentscheid gesonderte Nutzerfreigabe; keine Sammel-Freigabe. Die Bedienoberfläche bleibt im eigenen Draft-Branch, ohne neue Hauptkapsel oder Tab und ohne Live-Änderungen.
 
 ---
 
