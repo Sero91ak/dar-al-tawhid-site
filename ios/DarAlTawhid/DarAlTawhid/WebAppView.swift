@@ -691,9 +691,10 @@ struct WebAppView: UIViewRepresentable {
         if context.coordinator.lastOpenNonce != openNonce {
             context.coordinator.lastOpenNonce = openNonce
             if let openURL {
+                // An exact content deep link must win over the generic home tab.
+                // Otherwise opening a post notification immediately returns to #home.
                 context.coordinator.loadPushURL(openURL)
-            }
-            if let route = destination {
+            } else if let route = destination {
                 context.coordinator.navigate(to: route, force: true)
             }
         }
@@ -890,12 +891,20 @@ struct WebAppView: UIViewRepresentable {
         func loadPushURL(_ url: URL) {
             let target = DarAppShell.inAppURL(from: url)
             guard DarAppShell.isOwnHost(target) else { return }
+
+            // A post notification is an exact content route. Never treat its
+            // #post/<id> fragment as a tab destination (#home).
+            // WKWebView loads the full URL, retaining normal back navigation
+            // to the preceding app page / home rather than discarding the post.
+            let isPostRoute = !DarAppShell.postId(from: target).isEmpty
             let dest = DarDeepLink.destination(from: target)
-            if dest == .qibla || dest == .prayer || dest == .quran || dest == .duas || dest == .jummah {
+            if !isPostRoute &&
+                (dest == .qibla || dest == .prayer || dest == .quran ||
+                 dest == .duas || dest == .jummah) {
                 navigate(to: dest, force: true)
                 return
             }
-            if let current = webView?.url, DarAppShell.isOwnHost(current) {
+            if !isPostRoute, let current = webView?.url, DarAppShell.isOwnHost(current) {
                 let currentPath = current.path.isEmpty ? "/" : current.path
                 let targetPath = target.path.isEmpty ? "/" : target.path
                 if currentPath == targetPath || (currentPath == "/" && targetPath.hasPrefix("/")) {
@@ -905,7 +914,7 @@ struct WebAppView: UIViewRepresentable {
                     }
                 }
             }
-            if lastLoadedPushURL == target { return }
+            if !isPostRoute && lastLoadedPushURL == target { return }
             lastLoadedPushURL = target
             webView?.load(URLRequest(url: target, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 60))
         }
