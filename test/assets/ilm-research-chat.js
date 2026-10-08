@@ -439,6 +439,21 @@
         }).join("") + '</section>';
     }
 
+    /* Verified core topic for the test question: Adab / good character. */
+    function isBasicAdabQuestion(question) {
+      var q = ilmNormalize(question);
+      return /(?:^| )(?:was ist|was bedeutet|erklare|definition von|was versteht man unter) (?:der |die |das )?adab(?: |$)/.test(q);
+    }
+    function ilmAdabVerifiedSource() {
+      return {
+        id:"core-adab-bukhari-3559", speaker:"ʿAbdullāh ibn ʿAmr",
+        statement:"Der Prophet ﷺ vermied anstößige Rede und erklärte sinngemäß, dass die Besten unter den Menschen diejenigen mit dem besten Charakter sind.",
+        work:"Ṣaḥīḥ al-Buḫārī", reference:"Nr. 3559 · Ṣaḥīḥ Muslim Nr. 2321",
+        verification_status:"verified", authenticity:"ṣaḥīḥ",
+        source_domain:"dorar.net", source_url:"https://dorar.net/h/ToIF2N8R",
+        deep_link:"https://dorar.net/h/ToIF2N8R"
+      };
+    }
     function ilmImanScriptureLinks() {
       return '<section class="ilm-primary-references" aria-label="Qurʾān-Grundlagen für Īmān">' +
         '<span class="ilm-primary-references-title">Qurʾān-Grundlagen</span>' +
