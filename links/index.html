@@ -34,6 +34,30 @@
 .whatsapp .emblem .emblem-img{width:78%;height:78%}
 .library .emblem .emblem-img{width:82%;height:82%}
 .app .emblem .emblem-img{width:72%;height:72%}
+
+/* Offizieller Android-App-Bereich, direkt unter dem bestehenden iOS-App-Store-Link */
+.native-downloads{margin:15px 0 7px;display:grid;gap:12px;width:100%;min-width:0;padding:17px 0 2px;border-top:1px solid rgba(216,178,96,.38)}
+.native-intro{display:flex;justify-content:space-between;gap:8px 16px;align-items:center;flex-wrap:wrap;padding:0 3px}
+.native-overline{font-size:10px;letter-spacing:.19em;font-weight:800;color:#f1d58c}
+.native-caption{font-size:10px;color:#d1c8b8;letter-spacing:.025em}
+.native-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;min-width:0}
+.native-card{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:7px;min-width:0;min-height:187px;padding:14px 15px 13px;isolation:isolate;overflow:hidden;text-decoration:none;color:#f8efdd;border:1px solid rgba(216,178,96,.4);border-radius:19px;background:linear-gradient(140deg,rgba(24,53,61,.95),rgba(4,14,20,.94) 78%);box-shadow:inset 0 1px 0 rgba(255,255,255,.11),0 12px 32px #0005;transition:border-color .25s,transform .25s,box-shadow .25s}
+.native-card::before{content:"";position:absolute;inset:-70px -70px auto auto;width:170px;height:170px;border-radius:50%;background:radial-gradient(circle,rgba(214,183,109,.19),transparent 70%);pointer-events:none;z-index:-1}
+.native-tv{background:linear-gradient(135deg,rgba(51,61,67,.97),rgba(14,23,32,.95) 75%)}
+.native-card:hover,.native-card:focus-visible{border-color:#f0d48a;transform:translateY(-2px);box-shadow:inset 0 1px 0 #ffffff18,0 0 24px rgba(216,178,96,.16),0 14px 33px #0006}
+.native-card:focus-visible{outline:2px solid #ffe4a1;outline-offset:3px}
+.native-card-top{display:flex;align-items:center;gap:12px;min-width:0;width:100%}
+.native-card-top img{display:block;flex:0 0 55px;width:55px;height:55px;border-radius:14px;object-fit:cover;border:1px solid #e2be7d74;background:#162c2e}
+.native-device{display:block;min-width:0;color:#edca83;font-weight:800;font-size:10px;letter-spacing:.15em}
+.native-device small{display:block;margin-top:6px;color:#dfd7c9;font-size:10px;font-weight:500;letter-spacing:0}
+.native-card-title{display:block;font-family:Georgia,"Times New Roman",serif;font-size:clamp(17px,3.5vw,21px);line-height:1.15;letter-spacing:.02em}
+.native-card-meta{display:block;color:#e3ccb0;font-size:11px;letter-spacing:.02em;line-height:1.3;font-variant-numeric:tabular-nums;min-height:14px}
+.native-card-action{display:block;align-self:stretch;margin-top:auto;border-top:1px solid rgba(216,178,96,.24);padding-top:10px;color:#f6d893;font-size:11px;font-weight:750;letter-spacing:.055em}
+.native-card[data-release-ready="true"] .native-card-action{color:#f4e4ad}
+.native-security{padding:0 3px;margin:0;color:#c7bcaa;font-size:10px;line-height:1.5}
+.native-security a{color:#f4d88f;text-decoration:underline;text-decoration-color:#d6b5695c;text-underline-offset:3px}
+@media(max-width:550px){.native-grid{grid-template-columns:1fr}.native-card{min-height:139px}.native-card-top img{width:49px;height:49px;flex-basis:49px}.native-card-title{font-size:20px}}
+
 </style>
 </head>
 <body>
@@ -53,8 +77,33 @@
       <button class="row app" id="openApp" type="button"><span class="emblem" aria-hidden="true"><img class="emblem-img" src="data:image/png;base64,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" alt="" /></span><span class="text"><span class="label">App</span><span class="value">Dar al Tawḥīd App</span></span><span class="go">›</span></button>
       <a class="row" style="--accent:#2497e8" href="https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753" target="_blank" rel="noopener noreferrer" aria-label="DĀR AL TAWḤĪD im Apple App Store öffnen"><span class="emblem" aria-hidden="true"><img class="emblem-img" src="/assets/app-store-icon-fixed.svg?v=appstore-round-20260913-1820" alt="" style="width:100%;height:100%;border-radius:50%;object-fit:contain;background:#fff;padding:0;display:block" /></span><span class="text"><span class="label">App Store</span><span class="value">DĀR AL TAWḤĪD App</span></span><span class="go">›</span></a>
 
-      <a class="row" id="direct-android-apk" style="--accent:#73af83" href="/download/" aria-label="DAR AL TAWḤĪD Android herunterladen"><span class="emblem" aria-hidden="true" style="background:transparent;overflow:hidden"><img class="emblem-img" src="/download/icons/android-phone.svg" alt="" style="width:100%;height:100%;border-radius:50%;object-fit:contain" /></span><span class="text"><span class="label">Android · APK</span><span class="value" id="direct-android-label">DAR AL TAWḤĪD · bald</span></span><span class="go">›</span></a>
-      <a class="row" id="direct-android-tv-apk" style="--accent:#78b3b8" href="/download/" aria-label="DAR AL TAWḤĪD Android TV herunterladen"><span class="emblem" aria-hidden="true" style="background:transparent;overflow:hidden"><img class="emblem-img" src="/download/icons/android-tv-icon.jpg" alt="" style="width:100%;height:100%;border-radius:50%;object-fit:contain" /></span><span class="text"><span class="label">Android TV · APK</span><span class="value" id="direct-android-tv-label">DAR AL TAWḤĪD TV · bald</span></span><span class="go">›</span></a>
+      <section class="native-downloads" aria-labelledby="native-downloads-title">
+        <div class="native-intro">
+          <span class="native-overline" id="native-downloads-title">FÜR ANDROID · OFFIZIELLE APPS</span>
+          <span class="native-caption">Zwei eigenständige Installationsdateien</span>
+        </div>
+        <div class="native-grid">
+          <a class="native-card native-phone" id="direct-android-apk" href="/download/" aria-label="DAR AL TAWḤĪD Android-APK: Download und Installationsanleitung">
+            <span class="native-card-top">
+              <img src="/download/icons/android-phone.svg" alt="" width="56" height="56" loading="lazy">
+              <span class="native-device">ANDROID <small>Smartphone &amp; Tablet</small></span>
+            </span>
+            <span class="native-card-title" id="direct-android-label">DAR AL TAWḤĪD</span>
+            <span class="native-card-meta" id="direct-android-meta">Release wird vorbereitet</span>
+            <span class="native-card-action" id="direct-android-action">Download-Informationen ↗</span>
+          </a>
+          <a class="native-card native-tv" id="direct-android-tv-apk" href="/download/" aria-label="DAR AL TAWḤĪD TV-APK: Download und Installationsanleitung">
+            <span class="native-card-top">
+              <img src="/download/icons/android-tv-icon.jpg" alt="" width="56" height="56" loading="lazy">
+              <span class="native-device">ANDROID TV <small>Google TV &amp; TV-Box</small></span>
+            </span>
+            <span class="native-card-title" id="direct-android-tv-label">DAR AL TAWḤĪD</span>
+            <span class="native-card-meta" id="direct-android-tv-meta">Release wird vorbereitet</span>
+            <span class="native-card-action" id="direct-android-tv-action">Download-Informationen ↗</span>
+          </a>
+        </div>
+        <p class="native-security">Signierte APKs · Version und Datum automatisch aktuell · <a href="/download/#installation">Installationshilfe &amp; Sicherheit ↗</a></p>
+      </section>
     </nav>
     <footer class="footer"><p class="tags">QURʾĀN · SUNNAH · SALAF · ʿILM · MANHAJ</p><a class="domain" href="https://dar-al-tawhid.de/links">dar-al-tawhid.de/links</a></footer>
   </section>
