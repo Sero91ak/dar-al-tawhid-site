@@ -42,5 +42,13 @@
     "three_quarter_45",
     "back"
   ],
-  "comments": "All signoffs must be separately recorded based on actual rendered GLB. The user-approved 2D originals do not approve the preliminary low-poly GLB."
+  "comments": "All signoffs must be separately recorded based on actual rendered GLB. The user-approved 2D originals do not approve the preliminary low-poly GLB.",
+  "approvedModelChecksum": {
+    "sha256": null,
+    "bytes": null,
+    "reviewRecordId": null,
+    "reviewedAngles": [],
+    "approvedDate": null
+  },
+  "identityReleasePolicy": "A true GLB rig test is necessary but insufficient. Production requires exact SHA-256 for the already rendered, human-approved model plus documented 5-angle visual approval and explicit user signoff. Never set these automatically."
 }
