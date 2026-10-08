@@ -32,7 +32,7 @@ function candidateScore(question,row){
   const t=normalizeWords(term);
   if(!t)continue;
   if(/^\d{1,6}$/.test(t)){
-   if(/\b(hadith|hadis|buchari|bukhari|muslim|nr|nummer)\b/.test(q)&&phraseIn(q,t))
+   if(/\b(hadith|hadit|hadis|buchari|bukhari|muslim|nr|nummer)\b/.test(q)&&phraseIn(q,t))
     points=Math.max(points,110);
    continue;
   }
