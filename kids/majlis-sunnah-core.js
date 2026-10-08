@@ -18,7 +18,10 @@ function plausible(row){
     !Array.isArray(row.ages)||!row.ages.length||
     !row.ages.every(x=>AGES.has(x))||!Array.isArray(row.triggers)||!row.triggers.length)return false;
  if(row.kind==="hadith")return row.sourceStatus==="verified"&&row.grade==="Ṣaḥīḥ"&&
-   !!row.text&&/^Ṣaḥīḥ al-(Buḫārī|Muslim) · Nr\. \d+$/.test(row.source);
+   !!row.text&&/^Ṣaḥīḥ (?:al-Buḫārī|Muslim) · Nr\. \d+$/.test(row.source)&&
+   (!row.id.startsWith("catalog-")||(
+     /^apple-tv\/hadith\/series\/001-050\/HAD-\d{4}\.json$/.test(row.sourceCorpus||"")&&
+     row.independentScholarlyAudit===false&&/^HAD-\d{4}$/.test(row.canonicalId||"")));
  if(row.kind==="early")return row.sourceStatus==="verified"&&!!row.person&&!!row.text&&
    /^Ṣaḥīḥ (?:Muslim|al-Buḫārī) · Nr\. \d+$/.test(row.source);
  return row.sourceStatus==="existing_lesson_not_independently_reaudited"&&
@@ -50,13 +53,13 @@ function expose(row,age,gender){
   source:null,media:null};
  const source=String(row.source);
  let body="";
- if(row.kind==="hadith")body="In unserer Ḥadīṯ-Bibliothek findest du „"+row.title+"“. Die vorhandene deutsche Übertragung lautet: „"+row.text+"“ Für dich bedeutet das: "+row.explanation;
+ if(row.kind==="hadith")body="In unserer Ḥadīṯ-Bibliothek findest du „"+row.title+"“. "+(row.translationLabel?.startsWith("Auszug")?"Der belegte Auszug aus der vorhandenen deutschen Übertragung lautet: ":"Die vorhandene deutsche Übertragung lautet: ")+"„"+row.text+"“ Für dich bedeutet das: "+row.explanation;
  else if(row.kind==="early")body="Von "+row.person+" ist in unserer Quellenbibliothek diese Aussage überliefert: „"+row.text+"“ Was du daraus lernen kannst: "+row.explanation;
  else body="In unserem Lernkapitel „"+row.title+"“ erklären wir: "+row.explanation+" Diese Zusammenfassung ist kein wörtliches Ḥadīṯ-Zitat. Lies die angegebenen Qurʾān- und Sunnah-Belege dazu.";
  const media={kind:row.kind,title:row.title,text:row.kind==="lesson"?null:row.text,
    explanation:row.explanation,source,sourceRefs:row.kind==="lesson"?row.sourceRefs:[],
    sourceUrl:row.sourceUrl||null,grade:row.grade||null,person:row.person||null,
-   translationLabel:row.kind==="hadith"||row.kind==="early"?"Vorhandene deutsche Übertragung":"Lernzusammenfassung"};
+   translationLabel:row.translationLabel||(row.kind==="hadith"||row.kind==="early"?"Vorhandene deutsche Übertragung":"Lernzusammenfassung")};
  return {id:"kb:sunnah:"+row.id,text:address(safeGender)+body,source,media};
 }
 export function findSunnahFromCorpus(question,age,gender,data){
