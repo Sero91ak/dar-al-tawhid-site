@@ -77,6 +77,18 @@ const byNumber=await fullQuranSearch.search("Surah 2");
 assert.equal(byNumber.status,"found");
 assert.equal(byNumber.total,286);
 assert.equal(byNumber.results.length,5);
+assert.equal(byNumber.offset,0);
+assert.equal(byNumber.nextOffset,5);
+const surahPage2=await fullQuranSearch.search("Surah 2",{offset:5});
+assert.equal(surahPage2.status,"found");
+assert.equal(surahPage2.total,286);
+assert.equal(surahPage2.offset,5);
+assert.deepEqual(surahPage2.results.map(v=>v.ayah),[6,7,8,9,10]);
+assert.equal(surahPage2.nextOffset,10);
+const surahFinal=await fullQuranSearch.search("Surah 2",{offset:285});
+assert.deepEqual(surahFinal.results.map(v=>v.ayah),[286]);
+assert.equal(surahFinal.nextOffset,286);
+
 assert.equal((await fullQuranSearch.search("Surah 2 Vers 999")).status,"not_found");
 const invalidAyah=await fullQuranSearch.search("Qurʾān 2:999");
 assert.equal(invalidAyah.status,"not_found");
@@ -84,6 +96,14 @@ const unknownWord=await fullQuranSearch.search("Quran fiktivwortxyzzzz");
 assert.equal(unknownWord.status,"not_found");
 const german=await fullQuranSearch.search("Wo steht im Qurʾān etwas über Geduld?");
 assert.equal(german.status,"found");assert.ok(german.results.length>0);
+assert.ok(german.total>=german.results.length);
+if(german.total>5){
+ const moreGerman=await fullQuranSearch.search("Wo steht im Qurʾān etwas über Geduld?",{offset:5});
+ assert.equal(moreGerman.status,"found");
+ assert.equal(moreGerman.offset,5);
+ assert.ok(moreGerman.results.every(v=>!german.results.some(first=>first.reference===v.reference)));
+}
+
 assert.ok(german.results.every(v=>v.reference.startsWith("Qurʾān ")&&v.arabic&&v.german));
 const imanRef=await fullQuranSearch.search("Wo steht im Qurʾān, dass Allah Einer ist?");
 assert.equal(imanRef.status,"found");
