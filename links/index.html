@@ -66,37 +66,8 @@ function openModal(){modal.classList.add('open');modal.setAttribute('aria-hidden
 document.querySelectorAll('.row').forEach(row=>{row.addEventListener('pointerdown',()=>row.classList.add('is-lit'));['pointerup','pointercancel','pointerleave'].forEach(ev=>row.addEventListener(ev,()=>setTimeout(()=>row.classList.remove('is-lit'),420)))});
 document.getElementById('copyMain').addEventListener('click',async()=>{try{await navigator.clipboard.writeText('https://dar-al-tawhid.de/links')}catch(e){}});
 
-// Statische Werbeeinträge ohne tote APK-Links: nur nach geprüfter Veröffentlichung direkt zur APK.
-(async function darReleaseLinks(){
-  try{
-    const r=await fetch('/download/releases.json',{cache:'no-store',credentials:'omit'});
-    if(!r.ok)return;
-    const m=await r.json();
-    if(m?.schemaVersion!==1)return;
-    const entries=[
-      ['adult','direct-android-apk','direct-android-label','DAR AL TAWḤĪD · APK'],
-      ['tv','direct-android-tv-apk','direct-android-tv-label','DAR AL TAWḤĪD TV · APK']
-    ];
-    for(const [key,linkId,labelId,caption] of entries){
-      const a=document.getElementById(linkId);
-      const label=document.getElementById(labelId);
-      const x=m.apps?.[key];
-      if(!a||!label||x?.public!==true||x?.status!=='published')continue;
-      const part=key==='adult'?'android':'tv';
-      if(!new RegExp('^/download/files/dar-al-tawhid-'+part+'-v[0-9][0-9a-z.-]*\\.apk
-<script src="/download/official-release-links.js" defer></script>
-</body>
-</html>).test(x.downloadPath||''))continue;
-      if(!/^[a-f0-9]{64}$/i.test(x.sha256||''))continue;
-      if(!/^[a-f0-9:]{64,95}$/i.test(x.signingCertificateSha256||''))continue;
-      const head=await fetch(x.downloadPath,{method:'HEAD',cache:'no-store',credentials:'omit'});
-      if(!head.ok||Number(head.headers.get('content-length')||0)<10000)continue;
-      a.href=x.downloadPath;
-      a.setAttribute('download',x.downloadPath.split('/').pop());
-      label.textContent=caption;
-    }
-  }catch(_){}
-})();
+
 </script>
+<script src="/download/official-release-links.js" defer></script>
 </body>
 </html>
