@@ -37,7 +37,7 @@ jobs:
           set -euo pipefail
           mkdir -p /tmp/kids-audit
           curl --silent --show-error --fail --retry 2 --max-time 20 -A "DarAlTawhidKids-iOS"             -H "Cache-Control: no-cache"             "https://dar-al-tawhid.de/kids/version.json?audit=$(date +%s)"             -o /tmp/kids-audit/live-version.json || true
-          curl --silent --show-error --fail --retry 2 --max-time 20 -A "DarAlTawhidKids-iOS"             -H "Cache-Control: no-cache"             "https://dar-al-tawhid.de/kids/start?audit=$(date +%s)"             -o /tmp/kids-audit/live-home.html || true
+          curl --silent --show-error --fail --retry 2 --max-time 20 -A "DarAlTawhidKids-iOS" --location --max-redirs 4             -H "Cache-Control: no-cache"             "https://dar-al-tawhid.de/kids/start?audit=$(date +%s)"             -o /tmp/kids-audit/live-home.html || true
           curl --silent --show-error --fail --retry 2 --max-time 20 -A "DarAlTawhidKids-iOS"             "https://dar-al-tawhid.de/kids/prayer-stage-v1261.css?v=1274&audit=$(date +%s)"             -o /tmp/kids-audit/live-salah.css || true
           curl --silent --show-error --fail --retry 2 --max-time 20             "https://dar-al-tawhid.de/kids/assets/kids-salah-v1272/hero-home.png?v=1274"             -o /tmp/kids-audit/live-art.png || true
           gh api "repos/$REPO/actions/workflows/cloudflare-pages-deploy.yml/runs?per_page=6"             --jq '[.workflow_runs[]|{id,head_sha,status,conclusion,created_at,updated_at,html_url}]'             > /tmp/kids-audit/runs.json || echo '[]' > /tmp/kids-audit/runs.json
@@ -59,6 +59,7 @@ jobs:
              finishedDeployConclusion=os.getenv('FINISHED_CONCLUSION') or None,
              finishedDeployRun=os.getenv('FINISHED_RUN') or None,
              live=dict(buildId=obj.get('buildId'),label=obj.get('label'),
+               homeBytes=len(home.encode()),
                homeContainsPhotoreal1274='prayer-stage-v1261.css?v=1274' in home,
                homeContainsNativeClean='kids-shell-v170-salah-native-clean1274' in home,
                cssContainsPhotoOverride='KIDS_SALAH_OLD_HERO_PURGE_V1274' in css,
