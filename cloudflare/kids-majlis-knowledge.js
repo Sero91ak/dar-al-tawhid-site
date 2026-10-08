@@ -1,6 +1,8 @@
 /* MAJLIS al-ʿILM: deterministic retrieval from approved Kids material.
    No generative claims, no invented verses, no unrestricted fatwa engine. */
 import INDEX from "../kids/data/majlis-knowledge-v1.json";
+import SUNNAH from "../kids/data/majlis-sunnah-v1.json";
+import {findSunnahFromCorpus,findSunnahByIdFromCorpus} from "../kids/majlis-sunnah-core.js";
 
 const STOP=new Set(["ich","du","er","sie","wir","ihr","es","mein","meine","dein","deine","das","dies","diese","dieses","ist","sind","war","wird","wurde","und","oder","was","wer","wie","wann","wo","welche","welcher","welches","gibt","gibt es","hat","haben","dem","den","der","des","die","ein","eine","einen","einem","fur","für","an","am","im","in","mit","zur","zum","von","vom","auf","uber","über","bei","mich","mir","bitte","etwas","mochte","möchte","wissen","finden","lerne","lernen","erklart","erklärt","bedeutet","frage","fragen","mir","mehr","jetzt","denn","kommt","steht","aus","quran","koran","qurʾan","qurān","dua","duʿa","duʿā","bittgebet","vers","surah","sure","sura","sūrah","allah","allāh","erzahle","erzählen"]);
 function norm(value){
@@ -157,10 +159,11 @@ function findKnowledge(question,age,gender){
  const q=String(question||"").trim();
  if(!q||q.length>350)return null;
  const g=gender==="girl"?"girl":"boy";
- return findExplicitVerse(q,g)||findSemanticVerse(q,g)||findDua(q,age,g)||findQuiz(q,age,g)||null;
+ return findExplicitVerse(q,g)||findSemanticVerse(q,g)||findDua(q,age,g)||findSunnahFromCorpus(q,age,g,SUNNAH)||findQuiz(q,age,g)||null;
 }
 function findKnowledgeById(id,age,gender){
  const s=String(id||"");
+ if(s.startsWith("kb:sunnah:"))return findSunnahByIdFromCorpus(s,age,gender,SUNNAH);
  if(s.startsWith("kb:dua:")){
   const row=INDEX.duas.find(x=>x.id===s.slice(7));
   if(!row||!available(row,age))return null;
