@@ -19,7 +19,14 @@ on:
         description: "Quizfragen je Durchlauf (maximal 12)"
         required: true
         type: number
-        default: 7
+        default: 12
+      auto_queue:
+        description: "Fehlende Quiz-Audios automatisch fortlaufend in Paketen erzeugen"
+        type: boolean
+        required: false
+        default: false
+  schedule:
+    - cron: '17 * * * *'
   push:
     branches: [main]
     paths:
@@ -30,10 +37,11 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: kids-quiz-dua-owner-voice
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -44,9 +52,10 @@ jobs:
       ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
       ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
       ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
-      VOICE_BUILD_SCOPE: ${{ github.event_name == 'workflow_dispatch' && inputs.scope || contains(github.event.head_commit.message, '[quiz-batch]') && 'quiz' || contains(github.event.head_commit.message, '[voice-pause]') && 'pause' || contains(github.event.head_commit.message, '[dua-only]') && 'dua' || contains(github.event.head_commit.message, '[quiz-only]') && 'quiz' || 'full' }}
+      VOICE_BUILD_SCOPE: ${{ github.event_name == 'workflow_dispatch' && inputs.scope || (github.event_name == 'schedule' || contains(github.event.head_commit.message, '[quiz-auto]') || contains(github.event.head_commit.message, '[quiz-batch]')) && 'quiz' || contains(github.event.head_commit.message, '[voice-pause]') && 'pause' || contains(github.event.head_commit.message, '[dua-only]') && 'dua' || contains(github.event.head_commit.message, '[quiz-only]') && 'quiz' || 'full' }}
       QUIZ_BATCH_START: ${{ github.event_name == 'workflow_dispatch' && inputs.quiz_start || '' }}
       QUIZ_BATCH_COUNT: ${{ github.event_name == 'workflow_dispatch' && inputs.quiz_count || '' }}
+      VOICE_AUTO_QUEUE: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.auto_queue) || (github.event_name == 'push' && contains(github.event.head_commit.message, '[quiz-auto]')) }}
 
     steps:
       - name: Checkout main
@@ -155,8 +164,10 @@ jobs:
           # Keep V4 for genuine Arabic/Fusha; Flash for NEW German quiz renders.
           ELEVEN_QUIZ_DE_MODEL="eleven_flash_v2_5"
           ELEVEN_QUIZ_AR_MODEL=ELEVEN_MODEL
+          ELEVEN_QUIZ_HYBRID_MODEL=ELEVEN_QUIZ_DE_MODEL+"+"+ELEVEN_QUIZ_AR_MODEL
+          ARABIC_SCRIPT_RE=re.compile(r"[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]+(?:\s+[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]+)*")
           ELEVEN_DUA_MODEL=ELEVEN_MODEL
-          ARABIC_PROFILES={"dua_arabic","dua_arabic_slow","dua_word"}
+          ARABIC_PROFILES={"dua_arabic","dua_arabic_slow","dua_word","quiz_fusha"}
           ARABIC_SYNTHESIS_REVISIONS={
               "dua_arabic":"dua-arabic-native-fusha-v3-20261007",
               "dua_arabic_slow":"dua-arabic-native-fusha-slow-v3-20261007",
@@ -220,10 +231,10 @@ jobs:
                   elif profile=="dua_word":
                       value="[slowly] "+value.rstrip(".")+"."
                   return value
-              return prepare_kids_voice_text(value)
+              return prepare_kids_voice_text(value,apply_pronunciation=not bool(ARABIC_SCRIPT_RE.search(value)))
 
           def profile_revision(profile):
-              return ARABIC_SYNTHESIS_REVISIONS.get(profile,SYNTHESIS_REVISION)
+              return ARABIC_SYNTHESIS_REVISIONS.get(profile,"quiz-fusha-v4-native-20261008" if profile=="quiz_fusha" else SYNTHESIS_REVISION)
 
           def quiz_prompt(q):
               question=norm(q.get("question"))
@@ -265,6 +276,32 @@ jobs:
               return p if p.exists() and p.stat().st_size>1200 else None
 
           lock=threading.Lock()
+
+          def speech_parts(value):
+              parts=[]
+              pos=0
+              for match in ARABIC_SCRIPT_RE.finditer(value):
+                  before=value[pos:match.start()].strip()
+                  if before:
+                      parts.append(("de",before))
+                  native=match.group().strip()
+                  if native:
+                      parts.append(("ar",native))
+                  pos=match.end()
+              trailing=value[pos:].strip()
+              if trailing:
+                  parts.append(("de",trailing))
+              return parts
+
+          def quiz_model_for_text(value):
+              if not ARABIC_SCRIPT_RE.search(value):
+                  return ELEVEN_QUIZ_DE_MODEL
+              segments=speech_parts(value)
+              return ELEVEN_QUIZ_HYBRID_MODEL if len(segments)>1 else ELEVEN_QUIZ_AR_MODEL
+
+          def quiz_required_texts(q):
+              parts=[quiz_prompt(q),norm(q.get("success")),norm(q.get("retry")),norm(q.get("explanation"))]
+              return [p for p in parts if p]
 
           def synth(text,profile,asset_dir,serial,model_id):
               prepared=prepare_profile_text(text,profile)
