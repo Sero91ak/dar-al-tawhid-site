@@ -1,13 +1,14 @@
 {
-  "timestamp": "2026-10-08T18:48:33Z",
-  "trigger": "workflow_run",
-  "finishedDeployConclusion": "success",
-  "finishedDeployRun": "37826416517",
+  "timestamp": "2026-10-08T18:49:34Z",
+  "trigger": "push",
+  "finishedDeployConclusion": null,
+  "finishedDeployRun": null,
   "live": {
     "buildId": "kids-shell-v170-salah-native-clean1274",
     "label": "KIDS · V1.08.91",
-    "homeContainsPhotoreal1274": false,
-    "homeContainsNativeClean": false,
+    "homeBytes": 506449,
+    "homeContainsPhotoreal1274": true,
+    "homeContainsNativeClean": true,
     "cssContainsPhotoOverride": true,
     "photoBytes": 4919251,
     "versionJsonReadable": true
