@@ -46,7 +46,7 @@ async function load(releases) {
     setTimeout, clearTimeout, console
   }, { timeout: 1500 });
   await new Promise((resolve) => setTimeout(resolve, 15));
-  return { get: (id) => nodes.get(id) };
+  return { get: (id) => document.getElementById(id) };
 }
 (async () => {
   let test = await load([release(2, { draft: true })]);
