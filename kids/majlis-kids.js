@@ -202,7 +202,7 @@
   }
   function welcome() {
     chat.replaceChildren();
-    message("guide","As-salāmu ʿalaykum, liebe"+(activeGender()==="girl"?"":"r")+" "+familyWord()+"! 🌟 Schön, dass du da bist. Frag mich alles über den Dīn. Wir lernen liebevoll und mit echten Quellen. Wenn ich etwas nicht sicher weiß, sage ich: Allāhu aʿlam – Allah weiß es am besten. Was möchtest du entdecken?");
+    message("guide","As-salāmu ʿalaykum, liebe"+(activeGender()==="girl"?"":"r")+" "+familyWord()+"! 🌟 Schön, dass du da bist. Frag mich alles über den Dīn. Wir lernen liebevoll und mit echten Quellen. Wenn ich etwas nicht sicher weiß, sage ich: Wa-Allāhu aʿlam – Allah weiß es am besten. Was möchtest du entdecken?");
     picks();status.textContent="Wähle eine Frage oder schreibe selbst.";
   }
   var indexRequest=null;
@@ -271,7 +271,7 @@
       var answer=state.age==="4–5" ? item.answer.split(/(?<=[.!?])\s+/).slice(0,2).join(" ") : item.answer;
       return {answer:answer,source:item.source};
     }
-    return {answer:"Allāhu aʿlam – Allah weiß es am besten, meine liebe"+(activeGender()==="girl"?"":"r")+" "+familyWord()+". Dazu habe ich keine eindeutig geprüfte Antwort. Ich möchte nichts erfinden. Frag bitte deine Eltern, damit ihr gemeinsam nach einem Beleg suchen könnt.",source:null};
+    return {answer:"Wa-Allāhu aʿlam – Allah weiß es am besten, meine liebe"+(activeGender()==="girl"?"":"r")+" "+familyWord()+". Dazu habe ich keine eindeutig geprüfte Antwort. Ich möchte nichts erfinden. Frag bitte deine Eltern, damit ihr gemeinsam nach einem Beleg suchen könnt.",source:null};
   }
   async function submitQuestion(value) {
     if(!state.approved||state.busy)return;
