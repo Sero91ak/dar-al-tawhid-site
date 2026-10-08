@@ -427,7 +427,7 @@
           : "Zu dieser Frage liegen aktuell keine ausreichend belegten Originalstellen vor. Ich möchte keine Beweise erfinden.")
         : (reply._ilmGeneratedText || shortScientificAnswer(reply));
       if (reply._ilmTawhidFollowup === "depth") {
-        answer = "Tawḥīd ist das Bekenntnis zur Einzigkeit Allahs. Dazu gehört, dass Allah allein der Herr und Schöpfer ist, dass Ihm allein die Anbetung zusteht und dass Seine Namen und Eigenschaften gemäß Qurʾān und authentischer Sunnah bejaht werden.\\n\\nDie genannten Qurʾān-Stellen bilden hierfür grundlegende Belege. Die vollständigen Verse kannst du direkt in der App öffnen.";
+        answer = "Tawḥīd ist das Bekenntnis zur Einzigkeit Allahs. Dazu gehört, dass Allah allein der Herr und Schöpfer ist, dass Ihm allein die Anbetung zusteht und dass Seine Namen und Eigenschaften gemäß Qurʾān und authentischer Sunnah bejaht werden.\n\nDie genannten Qurʾān-Stellen bilden hierfür grundlegende Belege. Die vollständigen Verse kannst du direkt in der App öffnen.";
       } else if (reply._ilmTawhidFollowup === "proof") {
         answer = "Hier findest du zusätzliche Qurʾān-Stellen zur Einzigkeit Allahs und dazu, dass Ihm allein die Anbetung zusteht. Öffne die Verse, um den vollständigen Wortlaut nachzulesen.";
       }
@@ -528,6 +528,13 @@
       );
     };
 
+    var expandedPastAnswers = Object.create(null);
+    document.addEventListener("toggle",function(ev) {
+      var elem = ev.target;
+      if (!elem || !elem.matches || !elem.matches("details.ilm-earlier-answer")) return;
+      var id = elem.getAttribute("data-ilm-earlier") || "";
+      if (id) expandedPastAnswers[id] = elem.open;
+    },true);
     var oldMsgs = window.renderIlmMessages;
     window.renderIlmMessages = function (conversation) {
       var messages = Array.isArray(conversation && conversation.messages) ? conversation.messages : [];
@@ -557,8 +564,8 @@
         // above the visitor's most recent question.
         if (index < latestUser) {
           var id = esc(String(message.id || index));
-          return '<details class="ilm-earlier-answer" data-ilm-earlier="' + id +
-            '"><summary><span class="ilm-earlier-answer-icon" aria-hidden="true">↶</span>' +
+          return '<details class="ilm-earlier-answer" data-ilm-earlier="' + id + '"' +
+            (expandedPastAnswers[id] ? ' open' : '') + '><summary><span class="ilm-earlier-answer-icon" aria-hidden="true">↶</span>' +
             'Vorherige Antwort lesen <span class="ilm-earlier-answer-chevron" aria-hidden="true">⌄</span>' +
             '</summary><div class="ilm-earlier-answer-content">' + html + '</div></details>';
         }
