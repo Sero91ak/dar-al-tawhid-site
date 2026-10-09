@@ -4,7 +4,7 @@
 const COMPONENTS={5121:{bytes:1,read:(b,o)=>b.readUInt8(o)},5123:{bytes:2,read:(b,o)=>b.readUInt16LE(o)},5125:{bytes:4,read:(b,o)=>b.readUInt32LE(o)},5126:{bytes:4,read:(b,o)=>b.readFloatLE(o)}};
 const TYPE_SIZE={SCALAR:1,VEC2:2,VEC3:3,VEC4:4,MAT4:16};
 const MAX_VERTICES=400000;
-function validateGeometryBytes(g,bin){
+function validateGeometryBytes(g,bin,{minimumReferencedVertices=2000}={}){
  const errors=[],fail=x=>errors.push(x);
  if(!Buffer.isBuffer(bin)||bin.length<4)
    return {valid:false,errors:["Missing GLB BIN vertex data."],productionApproved:false};
@@ -13,7 +13,10 @@ function validateGeometryBytes(g,bin){
  const meshes=Array.isArray(g?.meshes)?g.meshes:[];
  const skins=Array.isArray(g?.skins)?g.skins:[];
  const nodes=Array.isArray(g?.nodes)?g.nodes:[];
- let totalVertices=0,totalTriangles=0,skinnedPrimitives=0;
+ let totalVertices=0,totalTriangles=0,skinnedPrimitives=0,totalReferencedVertices=0;
+ const boundingMin=[Infinity,Infinity,Infinity],boundingMax=[-Infinity,-Infinity,-Infinity];
+ if(!Number.isInteger(minimumReferencedVertices)||minimumReferencedVertices<3)
+   fail("Invalid minimum reference vertex criterion.");
  function readAccessor(index,type,types,label){
    const a=accessors[index],size=TYPE_SIZE[type],component=COMPONENTS[a?.componentType];
    if(!Number.isInteger(index)||!a||a.type!==type||!size||
@@ -106,6 +109,13 @@ function validateGeometryBytes(g,bin){
      for(let i=0;i<pos.count;i++){
        let normalSquared=0;
        for(let j=0;j<3;j++){
+         const coordinate=pos.read(i,j);
+         if(Number.isFinite(coordinate)){
+           boundingMin[j]=Math.min(boundingMin[j],coordinate);
+           boundingMax[j]=Math.max(boundingMax[j],coordinate);
+         }
+       }
+       for(let j=0;j<3;j++){
          if(!Number.isFinite(pos.read(i,j))||!Number.isFinite(normal.read(i,j))){
            fail("Nonfinite vertex position or normal "+label);break;
          }
@@ -134,9 +144,13 @@ function validateGeometryBytes(g,bin){
      const idx=readAccessor(p?.indices,"SCALAR",[5121,5123,5125],label+" indices");
      if(idx){
        if(idx.count%3!==0)fail("Triangle indices not divisible by 3 "+label);
+       const used=new Set();
        for(let k=0;k<idx.count;k++){
-         if(idx.read(k,0)>=pos.count){fail("Triangle index outside POSITION "+label);break;}
+         const value=idx.read(k,0);
+         if(value>=pos.count){fail("Triangle index outside POSITION "+label);break;}
+         used.add(value);
        }
+       totalReferencedVertices+=used.size;
        totalTriangles+=Math.floor(idx.count/3);
      }
      totalVertices+=pos.count;
@@ -144,7 +158,12 @@ function validateGeometryBytes(g,bin){
    }
  }
  if(!skinnedPrimitives)fail("No actual skinned triangle primitive.");
+ if(totalReferencedVertices<minimumReferencedVertices)
+   fail("Too few actually referenced mesh vertices: "+totalReferencedVertices);
+ if(boundingMin.some((x,i)=>!Number.isFinite(x)||!Number.isFinite(boundingMax[i])||boundingMax[i]-x<0.02))
+   fail("Degenerate/flat geometry bounds; not a validated full 3D character.");
  return {valid:errors.length===0,errors,productionApproved:false,
-   vertices:totalVertices,triangles:totalTriangles,skinnedPrimitives};
+   vertices:totalVertices,referencedVertices:totalReferencedVertices,
+   triangles:totalTriangles,skinnedPrimitives};
 }
 module.exports={validateGeometryBytes};
