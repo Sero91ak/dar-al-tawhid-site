@@ -498,21 +498,21 @@
   function readInputFromDom() {
     zakatInput = {
       ...zakatInput,
-      cash: $("zakatCash")?.value ?? "",
-      bank: $("zakatBank")?.value ?? "",
-      digital: $("zakatDigital")?.value ?? "",
-      otherLiquid: $("zakatOtherLiquid")?.value ?? "",
-      goldGrams: $("zakatGoldGrams")?.value ?? "",
-      goldValueManual: $("zakatGoldManual")?.value ?? "",
-      goldType: $("zakatGoldType")?.value || "investment",
-      silverGrams: $("zakatSilverGrams")?.value ?? "",
-      silverValueManual: $("zakatSilverManual")?.value ?? "",
-      debtsDue: $("zakatDebts")?.value ?? "",
-      nisabSinceDate: $("zakatNisabSince")?.value ?? "",
-      todayDate: $("zakatToday")?.value ?? new Date().toISOString().slice(0, 10),
+      cash: $("zakatCash")?.value ?? zakatInput.cash,
+      bank: $("zakatBank")?.value ?? zakatInput.bank,
+      digital: $("zakatDigital")?.value ?? zakatInput.digital,
+      otherLiquid: $("zakatOtherLiquid")?.value ?? zakatInput.otherLiquid,
+      goldGrams: $("zakatGoldGrams")?.value ?? zakatInput.goldGrams,
+      goldValueManual: $("zakatGoldManual")?.value ?? zakatInput.goldValueManual,
+      goldType: $("zakatGoldType")?.value || zakatInput.goldType || "investment",
+      silverGrams: $("zakatSilverGrams")?.value ?? zakatInput.silverGrams,
+      silverValueManual: $("zakatSilverManual")?.value ?? zakatInput.silverValueManual,
+      debtsDue: $("zakatDebts")?.value ?? zakatInput.debtsDue,
+      nisabSinceDate: $("zakatNisabSince")?.value ?? zakatInput.nisabSinceDate,
+      todayDate: $("zakatToday")?.value ?? zakatInput.todayDate,
       manualPrices: {
-        goldPerGramEur: $("zakatManualGoldPrice")?.value ?? "",
-        silverPerGramEur: $("zakatManualSilverPrice")?.value ?? ""
+        goldPerGramEur: $("zakatManualGoldPrice")?.value ?? zakatInput.manualPrices.goldPerGramEur,
+        silverPerGramEur: $("zakatManualSilverPrice")?.value ?? zakatInput.manualPrices.silverPerGramEur
       }
     };
     const details = document.querySelector(".zakat-manual-prices");
