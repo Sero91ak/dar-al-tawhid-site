@@ -103,7 +103,7 @@
       "description": "Einige Autorenwerke und Kapitel sind direkt nachgewiesen, die genaue Druckedition und Einzelseite nicht für alle rekonstruiert. Kein Printseiten-Nachweis behaupten."
     }
   ],
-  "nextAction": "28 von 28 Hadith mit klassischem Šarḥ. 5 von 22 Āṯār mit abschließend geprüfter Zuschreibung, 17 noch offen. HAD-0399 Schülerwortlaut von ar-Rabīʿ statt ungesicherter Kurzform; HAD-0401 Autorenwerk direkt belegt, Edition ausstehend.",
+  "nextAction": "Alle 28 Ḥadīṯe dieses Blocks besitzen klassische Šarḥ-Erklärungen. 5/22 Āṯār mit verifizierter Attribution, 17 offen; zusätzliche Originalbelege: HAD-0396 (al-Qāḍī ʿIyāḍ), HAD-0405 (Abū Dāwūd 4612), HAD-0404 (Mālik- und Muǧāhid-Zuschreibung strikt getrennt). Primärstelle und endgültige Kettenbewertung dürfen nicht zusammenfallen.",
   "entries": [
     {
       "id": "HAD-0393",
@@ -133,8 +133,9 @@
       "id": "HAD-0396",
       "recordType": "athar",
       "sharh": "not-required",
-      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis.",
-      "attribution": "needs-review"
+      "statusNote": "Al-Qāḍī ʿIyāḍ, aš-Šifāʾ 2/444, zitiert in konkretem Gespräch über den Grab-Besuch aus al-Mabsūṭ. Arabischer Text und Kontext geprüft, direkte Überlieferungskette Māliks noch nicht.",
+      "attribution": "classical-quotation-located-original-chain-pending",
+      "primarySourceVerified": true
     },
     {
       "id": "HAD-0397",
@@ -195,15 +196,17 @@
       "id": "HAD-0404",
       "recordType": "athar",
       "sharh": "not-required",
-      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis.",
-      "attribution": "needs-review"
+      "statusNote": "Bei Ibn ʿAbd al-Barr, Ǧāmiʿ Bayān al-ʿIlm 2/925–926 Nr.1762, gilt der direkte Kettennachweis Muǧāhid, nicht Mālik. Māliks Variante mit Hinweis auf Grab aus späteren Zitaten bekannt, direkte Kette noch unbewiesen.",
+      "attribution": "attribution-to-malik-unverified-mujahid-parallel-located",
+      "primarySourceVerified": true
     },
     {
       "id": "HAD-0405",
       "recordType": "athar",
       "sharh": "not-required",
-      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis.",
-      "attribution": "needs-review"
+      "statusNote": "ʿUmar ibn ʿAbd al-ʿAzīz' Brief über Qadar und Festhalten an der Sunnah bei Abū Dāwūd Nr. 4612 und al-Bayhaqī, al-Qaḍāʾ wa-l-Qadar Nr. 539 mit Varianten; Kettenkritik offen.",
+      "attribution": "multiple-routes-located-chain-grading-pending",
+      "primarySourceVerified": true
     },
     {
       "id": "HAD-0406",
@@ -478,5 +481,5 @@
   "openTotal": 20,
   "reviewPolicyUpdate": "Projektregel AGENTS.md 2026-10-09: Hadith erfordert verifizierten Šarḥ; Athar kein Šarḥ nötig, aber Authentizitäts-/Isnādprüfung zwingend.",
   "atharAttributionPending": 17,
-  "atharIsnadLocatedPendingGrading": 4
+  "atharIsnadLocatedPendingGrading": 5
 }
