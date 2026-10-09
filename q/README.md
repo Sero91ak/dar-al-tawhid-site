@@ -57,6 +57,8 @@ Dieser Ordner ist die zentrale Ablage für alle nummerierten Quellenlinks.
 
 | `q/37` | Niyyah, Ikhlāṣ und Überlieferungsvarianten | `Sufyān aṯ-Ṯawrī` | al-Ḫaṭīb überliefert „meine Absicht“; weitere klassische Fassungen überliefern „mein Selbst“. |
 
+| `q/38` | Taqwā, Pflichten und freiwillige Gottesdienste | `ʿUmar ibn ʿAbd al-ʿAzīz` | Taqwā besteht im Meiden der Verbote und Erfüllen der Pflichten; freiwillige Taten sind eine Ergänzung. |
+
 ## Sonderbereiche
 
 - `q/_registry/` ist nur Verwaltung: Nummerierung, Vorlage und Registry.
