@@ -10,6 +10,7 @@ const path=require("node:path");
 const crypto=require("node:crypto");
 const {parseGLB,validateDocument}=require("./validate-glb.cjs");
 const {validateAnimationBytes}=require("./validate-glb-binary.cjs");
+const {validateGeometryBytes}=require("./validate-glb-geometry-binary.cjs");
 const root=__dirname;
 const read=p=>JSON.parse(fs.readFileSync(path.join(root,p),"utf8"));
 function audit(status,boy,girl,story,hanbali){
@@ -92,9 +93,10 @@ function verifyLocalBinary(file,identity,profile,acceptance){
    const parsed=parseGLB(bytes);
    const result=validateDocument(parsed.gltf,acceptance,profile,{fileBytes:bytes.length,hasBin:parsed.hasBin});
    const samplerAudit=validateAnimationBytes(parsed.gltf,parsed.bin);
-   if(!result.structureValid||!samplerAudit.valid)
-     return {pass:false,reason:"GLB structure or keyframe bytes rejected "+profile,errors:[...result.errors,...samplerAudit.errors]};
-   return {pass:true,sha256:digest,bytes:bytes.length,animationSamplerBytesVerified:true};
+   const geometryAudit=validateGeometryBytes(parsed.gltf,parsed.bin);
+   if(!result.structureValid||!samplerAudit.valid||!geometryAudit.valid)
+     return {pass:false,reason:"GLB structure, keyframe or geometry bytes rejected "+profile,errors:[...result.errors,...samplerAudit.errors,...geometryAudit.errors]};
+   return {pass:true,sha256:digest,bytes:bytes.length,animationSamplerBytesVerified:true,geometryVertexBytesVerified:true};
  }catch(e){return {pass:false,reason:"Cannot verify real "+profile+" GLB: "+e.message};}
 }
 function checkActualBinaryArguments(args,boy,girl,acceptance){
