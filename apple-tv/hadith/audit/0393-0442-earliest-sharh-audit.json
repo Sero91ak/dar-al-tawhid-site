@@ -6,8 +6,8 @@
   "hadithCount": 30,
   "atharCount": 20,
   "verifiedSharh": 3,
-  "openSharh": 47,
-  "status": "in-progress",
+  "openSharh": 27,
+  "status": "hadith-and-athar-review-separated",
   "policy": {
     "authenticPrimaryTextRequired": true,
     "independentAtharIsnadVerificationRequired": true,
@@ -44,115 +44,133 @@
       "description": "Zwei weitere Āṯār zunächst mit genauem arabischem Isnādnachweis prüfen."
     }
   ],
-  "nextAction": "47 noch offene Einzelpositionen quellenkritisch prüfen; HAD-0411–0412 und 0415–0440 zuerst anhand Ṣaḥīḥ al-Buḫārī direkt kommentieren, während Āṯār ohne eindeutige Quellen und Isnād offen bleiben. Anschließend HAD-0443–0492.",
+  "nextAction": "27 Hadith benötigen direkten klassischen Šarḥ und 20 Athar benötigen genauen Isnād-/Originaltextnachweis; Athar sind KEINE 20 Šarḥ-Lücken.",
   "entries": [
     {
       "id": "HAD-0393",
       "recordType": "athar",
-      "sharh": "open-source-review",
-      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+      "sharh": "not-required",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis.",
+      "attribution": "needs-review"
     },
     {
       "id": "HAD-0394",
       "recordType": "athar",
-      "sharh": "open-source-review",
-      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+      "sharh": "not-required",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis.",
+      "attribution": "needs-review"
     },
     {
       "id": "HAD-0395",
       "recordType": "athar",
-      "sharh": "open-source-review",
-      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+      "sharh": "not-required",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis.",
+      "attribution": "needs-review"
     },
     {
       "id": "HAD-0396",
       "recordType": "athar",
-      "sharh": "open-source-review",
-      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+      "sharh": "not-required",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis.",
+      "attribution": "needs-review"
     },
     {
       "id": "HAD-0397",
       "recordType": "athar",
-      "sharh": "open-source-review",
-      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+      "sharh": "not-required",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis.",
+      "attribution": "needs-review"
     },
     {
       "id": "HAD-0398",
       "recordType": "athar",
-      "sharh": "open-source-review",
-      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+      "sharh": "not-required",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis.",
+      "attribution": "needs-review"
     },
     {
       "id": "HAD-0399",
       "recordType": "athar",
-      "sharh": "open-source-review",
-      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+      "sharh": "not-required",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis.",
+      "attribution": "needs-review"
     },
     {
       "id": "HAD-0400",
       "recordType": "athar",
-      "sharh": "open-source-review",
-      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+      "sharh": "not-required",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis.",
+      "attribution": "needs-review"
     },
     {
       "id": "HAD-0401",
       "recordType": "athar",
-      "sharh": "open-source-review",
-      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+      "sharh": "not-required",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis.",
+      "attribution": "needs-review"
     },
     {
       "id": "HAD-0402",
       "recordType": "athar",
-      "sharh": "open-source-review",
-      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+      "sharh": "not-required",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis.",
+      "attribution": "needs-review"
     },
     {
       "id": "HAD-0403",
       "recordType": "athar",
-      "sharh": "open-source-review",
-      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+      "sharh": "not-required",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis.",
+      "attribution": "needs-review"
     },
     {
       "id": "HAD-0404",
       "recordType": "athar",
-      "sharh": "open-source-review",
-      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+      "sharh": "not-required",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis.",
+      "attribution": "needs-review"
     },
     {
       "id": "HAD-0405",
       "recordType": "athar",
-      "sharh": "open-source-review",
-      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+      "sharh": "not-required",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis.",
+      "attribution": "needs-review"
     },
     {
       "id": "HAD-0406",
       "recordType": "athar",
-      "sharh": "open-source-review",
-      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+      "sharh": "not-required",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis.",
+      "attribution": "needs-review"
     },
     {
       "id": "HAD-0407",
       "recordType": "athar",
-      "sharh": "open-source-review",
-      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+      "sharh": "not-required",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis.",
+      "attribution": "needs-review"
     },
     {
       "id": "HAD-0408",
       "recordType": "athar",
-      "sharh": "open-source-review",
-      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+      "sharh": "not-required",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis.",
+      "attribution": "needs-review"
     },
     {
       "id": "HAD-0409",
       "recordType": "athar",
-      "sharh": "open-source-review",
-      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+      "sharh": "not-required",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis.",
+      "attribution": "needs-review"
     },
     {
       "id": "HAD-0410",
       "recordType": "athar",
-      "sharh": "open-source-review",
-      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+      "sharh": "not-required",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis.",
+      "attribution": "needs-review"
     },
     {
       "id": "HAD-0411",
@@ -340,14 +358,22 @@
     {
       "id": "HAD-0441",
       "recordType": "athar",
-      "sharh": "open-source-review",
-      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+      "sharh": "not-required",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis.",
+      "attribution": "needs-review"
     },
     {
       "id": "HAD-0442",
       "recordType": "athar",
-      "sharh": "open-source-review",
-      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+      "sharh": "not-required",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis.",
+      "attribution": "needs-review"
     }
-  ]
+  ],
+  "hadithSharhVerified": 3,
+  "hadithSharhOpen": 27,
+  "atharAttributionVerified": 0,
+  "atharAttributionOpen": 20,
+  "openTotal": 47,
+  "reviewPolicyUpdate": "Projektregel AGENTS.md 2026-10-09: Hadith erfordert verifizierten Šarḥ; Athar kein Šarḥ nötig, aber Authentizitäts-/Isnādprüfung zwingend."
 }
