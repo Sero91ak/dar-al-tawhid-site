@@ -61,6 +61,27 @@ class ProjectionPreflightTests(unittest.TestCase):
         g["nodes"][1].update(translation=[0, 0, 0], rotation=[0, 0, 0, 1], scale=[1, 1, 1])
         self.assertTrue(assert_projection_safe(g))
 
+    def test_active_scene_only_with_reachable_character_passes(self):
+        g = fixture()
+        g["scenes"] = [{"nodes": [0]}, {"nodes": []}]
+        g["scene"] = 0
+        self.assertTrue(assert_projection_safe(g))
+
+    def test_mesh_in_inactive_scene_is_not_mixed_into_iou(self):
+        def broken(g):
+            g["scenes"] = [{"nodes": [0]}, {"nodes": [1]}]
+            g["scene"] = 1
+        self.fails(broken)
+
+    def test_scene_with_no_visible_roots_rejected(self):
+        self.fails(lambda g: g.update(scenes=[{"nodes": []}], scene=0))
+
+    def test_invalid_active_scene_index_rejected(self):
+        self.fails(lambda g: g.update(scenes=[{"nodes": [0]}], scene=9))
+
+    def test_scene_node_reference_out_of_range_rejected(self):
+        self.fails(lambda g: g.update(scenes=[{"nodes": [99]}], scene=0))
+
     def test_nan_scale_rejected(self):
         self.fails(lambda g: g["nodes"][0].update(scale=[1, float("nan"), 1]))
 
