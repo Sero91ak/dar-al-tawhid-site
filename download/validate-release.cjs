@@ -34,6 +34,8 @@ if (fs.existsSync(publicRouterPath)) {
   const router = fs.readFileSync(publicRouterPath, "utf8");
   assert.ok(router.includes('id="darIosAppStorePromo"'), "Existing iOS promotion must remain");
   assert.ok(router.includes("window.darInstallAndroidPwa=async function"), "Main website Android PWA installer missing");
+  assert.ok(router.includes("__darEarlyInstallPrompt"), "Early Android beforeinstallprompt capture missing");
+  assert.ok(router.includes("var installEvent=deferredInstall;"), "Android install prompt must be consumed directly inside the user gesture");
   assert.ok(router.includes('navigator.serviceWorker.register("/service-worker.js",{scope:"/"})'), "Android PWA service worker registration missing");
   assert.ok(router.includes("return !isNativeAppRequest(ua);"), "Android browsers must receive the public website");
   assert.ok(!router.includes('id="darAndroidDownloadPromo"'), "Obsolete APK promo must not cover the public website");
