@@ -1,0 +1,166 @@
+/* KIDS_DUA_TRILINGUAL_LEARNING_V1282
+   Keep the existing full-page learner, voice and controls. Only compress reading
+   whitespace and add semantically aligned German below Arabic/transliteration. */
+html body .dsl .dsl-scroll{
+  padding-top:0!important;
+  justify-content:flex-start!important;
+  overflow:hidden!important;
+}
+html body .dsl .dsl-guide{
+  display:block!important;
+  margin:3px auto 1px!important;
+  padding:0!important;
+  line-height:1.2!important;
+  color:rgba(243,242,231,.72)!important;
+  font-size:clamp(11.5px,2.9vw,14px)!important;
+  flex:0 0 auto!important;
+}
+html body .dsl .dsl-reading-stage{
+  flex:1 1 auto!important;
+  justify-content:flex-start!important;
+  min-height:0!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  padding:0 0 3px!important;
+  margin:0!important;
+  scrollbar-width:none!important;
+  overscroll-behavior:contain!important;
+}
+html body .dsl .dsl-reading-stage .dsl-arabic{
+  flex:0 0 auto!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-height:0!important;
+  padding:1px 0 6px!important;
+  margin:0!important;
+  direction:rtl!important;
+  display:flex!important;
+  flex-wrap:wrap!important;
+  justify-content:center!important;
+  gap:0 3px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  overflow:visible!important;
+}
+html body .dsl .dsl-reading-stage .dsl-translit{
+  flex:0 0 auto!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-height:0!important;
+  display:flex!important;
+  flex-wrap:wrap!important;
+  justify-content:center!important;
+  gap:3px 4px!important;
+  margin:0!important;
+  padding:5px 0 6px!important;
+  border-top:1px solid rgba(223,188,119,.28)!important;
+  border-bottom:0!important;
+  overflow:visible!important;
+}
+html body .dsl .dsl-reading-stage .dsl-german{
+  flex:0 0 auto!important;
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-height:0!important;
+  display:flex!important;
+  flex-wrap:wrap!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:3px 4px!important;
+  padding:7px 0 4px!important;
+  margin:0!important;
+  border-top:1px solid rgba(223,188,119,.28)!important;
+  border-bottom:0!important;
+  text-align:center!important;
+}
+html body .dsl .dsl-word.ar{
+  flex:0 0 auto!important;
+  font-size:var(--dsl-ar-size,40px)!important;
+  line-height:1.38!important;
+  padding:0 3px!important;
+  margin:0!important;
+  border-radius:10px!important;
+  max-width:100%!important;
+}
+html body .dsl .dsl-word.tr{
+  flex:0 0 auto!important;
+  font-size:var(--dsl-tr-size,19px)!important;
+  line-height:1.28!important;
+  padding:3px 4px!important;
+  margin:0!important;
+  border-radius:9px!important;
+  max-width:100%!important;
+}
+html body .dsl .dsl-word.de{
+  flex:0 0 auto!important;
+  max-width:100%!important;
+  border:1px solid transparent!important;
+  background:rgba(255,255,255,.035)!important;
+  color:#e9f2ed!important;
+  font-size:var(--dsl-de-size,16px)!important;
+  font-weight:800!important;
+  line-height:1.25!important;
+  padding:4px 6px!important;
+  border-radius:9px!important;
+  white-space:normal!important;
+  text-align:center!important;
+  overflow-wrap:break-word!important;
+}
+html body .dsl .dsl-word.active.de,
+html body .dsl.phrase-playing .dsl-word.active.de{
+  background:rgba(228,177,78,.20)!important;
+  color:#ffeba8!important;
+  border-color:rgba(246,207,119,.45)!important;
+  box-shadow:0 0 11px rgba(227,179,72,.14)!important;
+}
+html body .dsl .dsl-german-phrase{
+  margin:0!important;
+  max-width:100%!important;
+  text-align:center!important;
+  color:#e9f2ed!important;
+  font-weight:700!important;
+  font-size:var(--dsl-de-size,16px)!important;
+  line-height:1.45!important;
+  overflow-wrap:anywhere!important;
+}
+html body .dsl .dsl-german-current{
+  flex:0 0 auto!important;
+  width:100%!important;
+  min-height:0!important;
+  text-align:center!important;
+  color:rgba(242,222,168,.77)!important;
+  font-size:clamp(11px,2.6vw,12.5px)!important;
+  font-weight:700!important;
+  line-height:1.2!important;
+  margin:2px 0 1px!important;
+  padding:0!important;
+}
+html body .dsl.dsl-reviewed-words .dsl-german-current{display:none!important}
+html body .dsl .dsl-bottom-block{
+  border-top:0!important;
+  padding-top:5px!important;
+}
+html body .dsl .dsl-controls{
+  margin-top:0!important;
+}
+html body .dsl .dsl-speednote{margin-top:5px!important}
+html body .dsl .dsl-status{margin-top:5px!important}
+@media(max-width:430px){
+  html body .dsl .dsl-scroll{
+    padding-left:max(7px,env(safe-area-inset-left,0px))!important;
+    padding-right:max(7px,env(safe-area-inset-right,0px))!important;
+  }
+  html body .dsl .dsl-guide{margin-top:2px!important}
+  html body .dsl .dsl-reading-stage .dsl-arabic{gap:0 2px!important}
+  html body .dsl .dsl-reading-stage .dsl-translit{gap:2px 3px!important}
+}
+@media(max-height:700px){
+  html body .dsl .dsl-guide{font-size:11px!important}
+  html body .dsl .dsl-reading-stage{padding-bottom:1px!important}
+  html body .dsl .dsl-german-current{font-size:11px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  html body .dsl .dsl-word.de{transition:none!important}
+}
