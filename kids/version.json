@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v191-home-safe1296",
-  "label": "KIDS · V1.09.12",
+  "buildId": "kids-shell-v192-sticky-header1297",
+  "label": "KIDS · V1.09.13",
   "releasedAt": "2026-10-09T18:46:00Z",
-  "note": "KIDS V1.09.12: Erstöffnungs-Höhe bleibt am tatsächlichen sichtbaren Viewport und der fixen unteren Tab-Leiste gemessen (V1295); jetzt läuft das freigegebene Moscheebild auch auf iPads/Tablets unter die iOS-Statusleiste, ohne Logo oder Gebetszeiten nach unten zu verschieben. Smartphones, Tablets, Hoch-/Querformat: kein automatisches Scrollen, Bild unverzerrt, die fünf Gebetszeiten und der Gebetszeiten-Button bleiben prioritär. Auf unzureichend hohen Bildschirmen bleibt reguläres Scrollen möglich, um Überlappung und unleserliche Verkleinerung zu vermeiden.",
+  "note": "KIDS V1.09.13: Einheitliche Kopfzeile bleibt beim vertikalen Scrollen der Duʿāʾ-Detailseite (z.B. Für meine Eltern) sichtbar. Der Bild-/Textinhalt scrollt weich unter die deckende Kopfzeile, ohne deren vertikales Springen beim iOS-Rubberband. Native Sticky-Position statt JavaScript-Scroll-Animation; nur eine Scrollfläche, Momentum bleibt. Gemeinsame Scroll-Header-Regel für weitere aktive Kids-Unterseiten. Hör- und Lernfunktionen, Startbild und Bottom-Navigation unverändert. Geräte-QA erforderlich.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1296",
+    "serviceWorkerCache": "v1297",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
