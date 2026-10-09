@@ -1,0 +1,38 @@
+name: Qurʾān-Tadabbur — strenger Katalog-Audit
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - apple-tv/quran/tadabbur/**
+      - .github/workflows/verify-quran-tadabbur.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verify-quran-tadabbur-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  verify-tadabbur:
+    name: Prüfe Verse, Index und Lückenbericht
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository laden
+        uses: actions/checkout@v4
+      - name: Node.js einrichten
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Vollständiger Katalog-Audit
+        run: python3 apple-tv/quran/tadabbur/tools/verify_tadabbur_catalog.py
+      - name: Echte Lücken aus allen registrierten Einträgen berechnen
+        run: node apple-tv/quran/tadabbur/tools/find-missing-references.mjs
+      - name: Gespeicherten Lückenreport auf Aktualität prüfen
+        shell: bash
+        run: |
+          git diff --exit-code -- apple-tv/quran/tadabbur/missing-references.report.json
+          echo 'Tadabbur: kompletter Audit und Lückenbericht konsistent.'
