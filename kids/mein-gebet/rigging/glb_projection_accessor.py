@@ -76,6 +76,13 @@ def decode_triangle_primitive(g, blob, primitive):
     indices = [x[0] for x in faces]
     if any(i >= len(verts) for i in indices):
         raise ValueError("Projected GLB triangle index outside POSITION vertices")
+    # Discard unused vertices before scaling a silhouette. Outlier POSITION
+    # values that are not referenced by any triangle cannot legitimately
+    # change camera framing or IoU scores.
+    used = sorted(set(indices))
+    lookup = {old: new for new, old in enumerate(used)}
+    verts = [verts[i] for i in used]
+    indices = [lookup[i] for i in indices]
     if not any(max(v[axis] for v in verts) - min(v[axis] for v in verts) > 0.01
                for axis in (0, 1, 2)):
         raise ValueError("Projected mesh has no meaningful geometric extent")
