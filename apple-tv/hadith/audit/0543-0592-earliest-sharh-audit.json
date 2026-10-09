@@ -5,11 +5,11 @@
   "totalInspected": 50,
   "hadithCount": 20,
   "atharCount": 30,
-  "hadithSharhVerified": 13,
-  "hadithSharhOpen": 7,
-  "atharAttributionVerified": 0,
-  "atharAttributionOpen": 30,
-  "openTotal": 37,
+  "hadithSharhVerified": 14,
+  "hadithSharhOpen": 6,
+  "atharAttributionVerified": 2,
+  "atharAttributionOpen": 28,
+  "openTotal": 34,
   "sourceOfTruth": "apple-tv/hadith/series/",
   "policy": {
     "hadith": "Nur authentischer Primärbericht mit direkt klassisch-arabischem Šarḥ",
@@ -32,7 +32,7 @@
       "note": "30 Āṯār mit häufig allgemeinen Quellennennungen; keine blinde Echtheitsannahme."
     }
   ],
-  "nextAction": "7 verbleibende Ḥadīṯe mit direktem Šarḥ nachweisen (einschließlich strittigem Isnād 0554); 30 Āṯār auf originale Zuschreibung prüfen; dann nächster Block HAD-0593–0642.",
+  "nextAction": "Noch 6 Ḥadīṯ-Kommentare und 28 Āṯār-Zuschreibungen im Block HAD-0543–0592 offen. Danach HAD-0593–0642 fortsetzen; keine ungesicherten Isnād automatisch verifizieren.",
   "entries": [
     {
       "id": "HAD-0543",
@@ -189,8 +189,8 @@
     {
       "id": "HAD-0567",
       "recordType": "hadith",
-      "sharh": "open-source-review",
-      "statusNote": "Arabischen Originaltext, Primärnummer, Isnāde und direkt einschlägigen klassischen Šarḥ noch punktgenau prüfen."
+      "sharh": "verified",
+      "statusNote": "Originalwortlaut Buḫārī und direkter Ibn-Ḥaǧar-Kommentar Bd. 8 digitale S. 694 samt Hörer-Kettenkritik dokumentiert; Druckedition offen."
     },
     {
       "id": "HAD-0568",
@@ -291,8 +291,8 @@
       "id": "HAD-0582",
       "recordType": "athar",
       "sharh": "not-required",
-      "attribution": "needs-review",
-      "sourceAudit": "Arabische Primärquelle, Sprecher und Isnād bislang nicht einzeln nachgewiesen. Auch bei mutmaßlichen Parallelen nicht automatisch als authentisch zählen."
+      "attribution": "verified",
+      "sourceAudit": "ʿAlī: Buḫārī Kitāb al-ʿIlm, ʿUbaydullāh ibn Mūsā → Maʿrūf → Abū aṭ-Ṭufayl → ʿAlī; Parallele HAD-0488"
     },
     {
       "id": "HAD-0583",
@@ -354,8 +354,8 @@
       "id": "HAD-0591",
       "recordType": "athar",
       "sharh": "not-required",
-      "attribution": "needs-review",
-      "sourceAudit": "Arabische Primärquelle, Sprecher und Isnād bislang nicht einzeln nachgewiesen. Auch bei mutmaßlichen Parallelen nicht automatisch als authentisch zählen."
+      "attribution": "verified",
+      "sourceAudit": "Muḥammad ibn Sīrīn: Muslim Muqaddimah + Siyar 4/611, Ḥammād ibn Zayd → Ayyūb → Ibn Sīrīn; Parallele HAD-0491"
     },
     {
       "id": "HAD-0592",
