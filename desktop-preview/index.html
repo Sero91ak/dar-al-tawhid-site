@@ -2551,6 +2551,7 @@ html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
   if(key==="quran")initBook();
   if(document.getElementById("prayerRiver"))initPrayerTicker();
   if(key==="zakat")initZakat();
+  if(key==="quiz")initQuiz();
   if(key==="einstellungen")initSettings();
   initRealPage(key);
   initSmartBrowse(key);
@@ -3275,7 +3276,7 @@ html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
   var box=document.getElementById("womenApp");
   var api=window.DARFrauenFiqh;
   if(!box||!api||typeof api.render!=="function")return;
-  window.readRoute=function(){return {view:currentPage()==="frauen"?"frauen":"desktop",value:desktopFrauenValue}};
+  window.readRoute=function(){var page=currentPage();return {view:page==="frauen"?"frauen":page==="zakat"?"zakat":"desktop",value:desktopFrauenValue}};
   box.innerHTML=api.render(desktopFrauenValue);
   if(typeof api.bind==="function")api.bind();
  }
@@ -3607,7 +3608,7 @@ html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
  renders.bibliothek=function(){
   return realIntro("BIBLIOTHEK","Publikationen und klassische Quellenwerke.","Suche nach Titel, Autor, Kategorie oder Thema.")+
    '<section class="section reveal">'+smartSearchHtml("librarySmartSearch","Titel, Autor oder Thema suchen …","librarySmartStatus")+
-   '<div id="libraryDefault"><section class="parchment" style="padding:20px 0;background:transparent"><div class="section-head"><h2>DĀR AL TAWḤĪD Publikationen</h2><p>'+realData.publications.length+' Werke</p></div><div class="real-cover-grid">'+realData.publications.slice(0,12).map(function(b){return '<a class="real-cover desktop-link" data-page="werk" href="'+pUrl("werk","type=pub&id="+encodeURIComponent(b.id))+'"><div class="real-cover-visual">'+(b.coverUrl?'<img src="'+escBook(b.coverUrl)+'" alt="">':"")+'</div><h3>'+escBook(b.title)+'</h3><small>'+escBook(b.category||"")+(b.fileSize?' · '+escBook(b.fileSize):"")+'</small></a>'}).join("")+'</div></section><section class="section"><div class="section-head"><h2>Quellenwerke</h2><p>Verifizierter Bibliotheksindex</p></div><div class="list-lines">'+realData.books.slice(0,16).map(function(b){return '<a class="list-row desktop-link" data-page="werk" href="'+pUrl("werk","type=book&id="+encodeURIComponent(b.id))+'"><span class="meta">'+escBook(b.category||"Werk")+'</span><strong>'+escBook(b.title)+'</strong><small>'+escBook(b.author||"")+'</small></a>'}).join("")+'</div></section></div><div id="librarySearchResults" class="library-search-results"></div></section>'+footer()
+   '<div id="libraryDefault"><section class="parchment" style="padding:20px 0;background:transparent"><div class="section-head"><h2>DĀR AL TAWḤĪD Publikationen</h2><p>'+realData.publications.length+' Werke</p></div><div class="real-cover-grid">'+realData.publications.map(function(b){return '<a class="real-cover desktop-link" data-page="werk" href="'+pUrl("werk","type=pub&id="+encodeURIComponent(b.id))+'"><div class="real-cover-visual">'+(b.coverUrl?'<img src="'+escBook(b.coverUrl)+'" alt="">':"")+'</div><h3>'+escBook(b.title)+'</h3><small>'+escBook(b.category||"")+(b.fileSize?' · '+escBook(b.fileSize):"")+'</small></a>'}).join("")+'</div></section><section class="section"><div class="section-head"><h2>Quellenwerke</h2><p>Verifizierter Bibliotheksindex</p></div><div class="list-lines">'+realData.books.map(function(b){return '<a class="list-row desktop-link" data-page="werk" href="'+pUrl("werk","type=book&id="+encodeURIComponent(b.id))+'"><span class="meta">'+escBook(b.category||"Werk")+'</span><strong>'+escBook(b.title)+'</strong><small>'+escBook(b.author||"")+'</small></a>'}).join("")+'</div></section></div><div id="librarySearchResults" class="library-search-results"></div></section>'+footer()
  };
  function initLibraryBrowser(){
   var input=document.getElementById("librarySmartSearch"),out=document.getElementById("librarySearchResults"),def=document.getElementById("libraryDefault"),status=document.getElementById("librarySmartStatus");if(!input||!out)return;
