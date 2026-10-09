@@ -1,13 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/widget_faith_root"
+    android:id="@+id/widget_daily_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/widget_dar_background"
+    android:background="@drawable/widget_background"
     android:orientation="vertical"
-    android:padding="14dp">
-    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="DĀR AL TAWḤĪD · DUʿĀʾ DES TAGES" android:textColor="@color/dar_gold" android:textSize="10sp" android:textStyle="bold" />
-    <TextView android:id="@+id/widget_faith_arabic" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:gravity="center_vertical|end" android:textColor="@color/dar_text" android:textDirection="rtl" android:textSize="20sp" android:textStyle="bold" />
-    <TextView android:id="@+id/widget_faith_ref" android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="end" android:textColor="@color/dar_gold" android:textSize="9sp" android:textStyle="bold" />
-    <TextView android:id="@+id/widget_faith_german" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:maxLines="3" android:textColor="#D4D1C7" android:textSize="11sp" />
+    android:gravity="center_vertical">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/widget_brand"
+        android:textColor="#E6CE91"
+        android:textSize="11sp"
+        android:textStyle="bold"
+        android:letterSpacing="0.08" />
+    <TextView
+        android:id="@+id/widget_daily_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Dhikr"
+        android:textColor="#FFF8E8"
+        android:textSize="21sp"
+        android:textStyle="bold"
+        android:maxLines="1" />
+    <TextView
+        android:id="@+id/widget_daily_body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="SubḥānAllāh · al-ḥamdu lillāh · Allāhu akbar."
+        android:textColor="#D7D7CE"
+        android:textSize="12sp"
+        android:maxLines="3" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/widget_open_app"
+        android:textColor="#E6CE91"
+        android:textSize="10sp"
+        android:textStyle="bold" />
 </LinearLayout>

@@ -7,194 +7,141 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.view.View
 import android.widget.RemoteViews
 import org.json.JSONObject
 import java.net.HttpURLConnection
 import java.net.URL
 import java.net.URLEncoder
-import java.nio.charset.StandardCharsets
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 import java.util.TimeZone
-import java.util.concurrent.Executors
 
 class PrayerTimesWidgetProvider : AppWidgetProvider() {
-    override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
-        val pending = goAsync()
-        EXECUTOR.execute {
-            try {
-                refresh(context, appWidgetManager, appWidgetIds)
-            } finally {
-                pending.finish()
-            }
+    override fun onUpdate(context: Context, manager: AppWidgetManager, appWidgetIds: IntArray) {
+        appWidgetIds.forEach { id ->
+            render(context, manager, id, DarWidgetStore.prayerDay(context))
+            refreshAsync(context.applicationContext, id)
         }
     }
 
-    override fun onAppWidgetOptionsChanged(
-        context: Context,
-        appWidgetManager: AppWidgetManager,
-        appWidgetId: Int,
-        newOptions: android.os.Bundle
-    ) {
-        super.onAppWidgetOptionsChanged(context, appWidgetManager, appWidgetId, newOptions)
-        EXECUTOR.execute { refresh(context, appWidgetManager, intArrayOf(appWidgetId)) }
+    private fun refreshAsync(context: Context, appWidgetId: Int) {
+        val settings = DarWidgetStore.prayerSettings(context)
+        if (settings == null) {
+            render(context, AppWidgetManager.getInstance(context), appWidgetId, null)
+            return
+        }
+        Thread {
+            val fresh = fetchDay(settings)
+            if (fresh != null) DarWidgetStore.savePrayerDay(context, fresh)
+            render(context, AppWidgetManager.getInstance(context), appWidgetId, fresh ?: DarWidgetStore.prayerDay(context))
+        }.start()
+    }
+
+    private fun fetchDay(settings: DarPrayerSettings): DarPrayerDay? {
+        return try {
+            val tz = TimeZone.getTimeZone(settings.timeZone)
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US).apply { timeZone = tz }
+            val date = dateFormat.format(Date())
+            fun enc(value: String) = URLEncoder.encode(value, "UTF-8")
+            val url = URL(
+                "https://dar-al-tawhid.de/api/prayer/times" +
+                    "?lat=${enc(settings.lat.toString())}" +
+                    "&lon=${enc(settings.lon.toString())}" +
+                    "&tz=${enc(settings.timeZone)}" +
+                    "&angle=${enc(settings.angle.toString())}" +
+                    "&asr=${enc(settings.asrFactor.toString())}" +
+                    "&date=${enc(date)}"
+            )
+            val connection = (url.openConnection() as HttpURLConnection).apply {
+                requestMethod = "GET"
+                connectTimeout = 7000
+                readTimeout = 7000
+                setRequestProperty("Accept", "application/json")
+                setRequestProperty("User-Agent", "DarAlTawhidAndroidWidget/1.0")
+            }
+            try {
+                if (connection.responseCode !in 200..299) return null
+                val body = connection.inputStream.bufferedReader().use { it.readText() }
+                val root = JSONObject(body)
+                if (!root.optBoolean("ok", false)) return null
+                val times = root.getJSONObject("times")
+                fun time(key: String) = times.optJSONObject(key)?.optString("time", "--:--") ?: "--:--"
+                DarPrayerDay(
+                    date = root.optString("date", date),
+                    fajr = time("fajr"),
+                    dhuhr = time("dhuhr"),
+                    asr = time("asr"),
+                    maghrib = time("maghrib"),
+                    isha = time("isha")
+                )
+            } finally {
+                connection.disconnect()
+            }
+        } catch (_: Exception) {
+            null
+        }
+    }
+
+    private fun render(context: Context, manager: AppWidgetManager, appWidgetId: Int, day: DarPrayerDay?) {
+        val views = RemoteViews(context.packageName, R.layout.widget_prayer_times)
+        val settings = DarWidgetStore.prayerSettings(context)
+        val next = if (day != null) resolveNext(day, settings?.timeZone) else null
+        views.setTextViewText(R.id.widget_city, settings?.city ?: "Standort in der App setzen")
+        views.setTextViewText(R.id.widget_prayer_name, next?.first ?: "Gebetszeiten")
+        views.setTextViewText(R.id.widget_prayer_time, next?.second ?: "--:--")
+        views.setTextViewText(
+            R.id.widget_all_times,
+            if (day == null) {
+                "Öffne die App und synchronisiere deinen Standort."
+            } else {
+                "Fajr ${day.fajr} · Ẓuhr ${day.dhuhr} · ʿAṣr ${day.asr} · Maghrib ${day.maghrib} · ʿIshāʾ ${day.isha}"
+            }
+        )
+
+        val open = Intent(Intent.ACTION_VIEW, Uri.parse("daraltawhid://prayer"), context, MainActivity::class.java)
+        val pending = PendingIntent.getActivity(
+            context,
+            appWidgetId,
+            open,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+        views.setOnClickPendingIntent(R.id.widget_root, pending)
+        manager.updateAppWidget(appWidgetId, views)
+    }
+
+    private fun resolveNext(day: DarPrayerDay, timeZone: String?): Pair<String, String> {
+        val order = listOf(
+            "Fajr" to day.fajr,
+            "Ẓuhr" to day.dhuhr,
+            "ʿAṣr" to day.asr,
+            "Maghrib" to day.maghrib,
+            "ʿIshāʾ" to day.isha
+        )
+        val cal = Calendar.getInstance(TimeZone.getTimeZone(timeZone ?: TimeZone.getDefault().id))
+        val nowMinutes = cal.get(Calendar.HOUR_OF_DAY) * 60 + cal.get(Calendar.MINUTE)
+        for ((name, value) in order) {
+            val minute = parseMinutes(value)
+            if (minute != null && minute > nowMinutes) return name to value
+        }
+        return "Fajr · morgen" to day.fajr
+    }
+
+    private fun parseMinutes(value: String): Int? {
+        val parts = value.split(":")
+        if (parts.size != 2) return null
+        val h = parts[0].toIntOrNull() ?: return null
+        val m = parts[1].toIntOrNull() ?: return null
+        return h * 60 + m
     }
 
     companion object {
-        private val EXECUTOR = Executors.newSingleThreadExecutor()
-        private val ORDER = listOf("fajr", "dhuhr", "asr", "maghrib", "isha")
-        private val LABELS = mapOf(
-            "fajr" to "Fajr",
-            "dhuhr" to "Ẓuhr",
-            "asr" to "ʿAṣr",
-            "maghrib" to "Maghrib",
-            "isha" to "ʿIshāʾ"
-        )
-
-        fun refreshAll(context: Context) {
+        fun updateAll(context: Context) {
             val manager = AppWidgetManager.getInstance(context)
-            val ids = manager.getAppWidgetIds(ComponentName(context, PrayerTimesWidgetProvider::class.java))
-            if (ids.isNotEmpty()) EXECUTOR.execute { refresh(context, manager, ids) }
-        }
-
-        private fun refresh(context: Context, manager: AppWidgetManager, ids: IntArray) {
-            val settings = DarWidgetStore.loadPrayerSettings(context)
-            val payload = if (settings != null) {
-                fetchPayload(settings)?.also { DarWidgetStore.savePrayerPayload(context, it) }
-                    ?: DarWidgetStore.loadPrayerPayload(context).takeIf { it.isNotBlank() }
-            } else null
-            ids.forEach { id ->
-                manager.updateAppWidget(id, buildViews(context, manager, id, settings, payload))
-            }
-        }
-
-        private fun fetchPayload(settings: DarWidgetStore.PrayerSettings): String? {
-            var connection: HttpURLConnection? = null
-            return try {
-                fun enc(value: Any): String =
-                    URLEncoder.encode(value.toString(), StandardCharsets.UTF_8.name())
-                val urlText = "https://dar-al-tawhid.de/api/prayer/times" +
-                    "?lat=" + enc(settings.lat) +
-                    "&lon=" + enc(settings.lon) +
-                    "&tz=" + enc(settings.timeZone) +
-                    "&angle=" + enc(settings.angle) +
-                    "&asr=" + enc(settings.asrFactor)
-                connection = (URL(urlText).openConnection() as HttpURLConnection).apply {
-                    requestMethod = "GET"
-                    connectTimeout = 5500
-                    readTimeout = 5500
-                    setRequestProperty("Accept", "application/json")
-                    setRequestProperty("User-Agent", "DarAlTawhidAndroidWidget/1.0")
-                }
-                if (connection.responseCode !in 200..299) return null
-                val text = connection.inputStream.bufferedReader(Charsets.UTF_8).use { it.readText() }
-                val root = JSONObject(text)
-                if (!root.optBoolean("ok", false)) null else text
-            } catch (_: Throwable) {
-                null
-            } finally {
-                connection?.disconnect()
-            }
-        }
-
-        private fun buildViews(
-            context: Context,
-            manager: AppWidgetManager,
-            widgetId: Int,
-            settings: DarWidgetStore.PrayerSettings?,
-            payload: String?
-        ): RemoteViews {
-            val views = RemoteViews(context.packageName, R.layout.widget_prayer_times)
-            views.setOnClickPendingIntent(
-                R.id.widget_prayer_root,
-                openIntent(context, "daraltawhid://prayer", widgetId)
-            )
-
-            if (settings == null) {
-                views.setTextViewText(R.id.widget_prayer_name, "Gebetszeiten")
-                views.setTextViewText(R.id.widget_prayer_time, "--:--")
-                views.setTextViewText(R.id.widget_prayer_city, "Standort zuerst in der App wählen")
-                views.setViewVisibility(R.id.widget_prayer_list, View.GONE)
-                return views
-            }
-
-            val parsed = try { payload?.let(::JSONObject) } catch (_: Throwable) { null }
-            val times = parsed?.optJSONObject("times")
-            if (times == null) {
-                views.setTextViewText(R.id.widget_prayer_name, "Gebetszeiten")
-                views.setTextViewText(R.id.widget_prayer_time, "offline")
-                views.setTextViewText(R.id.widget_prayer_city, settings.city)
-                views.setViewVisibility(R.id.widget_prayer_list, View.GONE)
-                return views
-            }
-
-            val current = currentMinutes(settings.timeZone)
-            var nextKey = ORDER.firstOrNull {
-                val minutes = parseMinutes(times.optJSONObject(it)?.optString("time"))
-                minutes >= 0 && minutes > current
-            }
-            var tomorrow = false
-            if (nextKey == null) {
-                nextKey = "fajr"
-                tomorrow = true
-            }
-            val nextTime = times.optJSONObject(nextKey)?.optString("time").orEmpty().ifBlank { "--:--" }
-            views.setTextViewText(
-                R.id.widget_prayer_name,
-                (LABELS[nextKey] ?: "Gebet") + if (tomorrow) " · morgen" else ""
-            )
-            views.setTextViewText(R.id.widget_prayer_time, nextTime)
-            views.setTextViewText(R.id.widget_prayer_city, settings.city)
-
-            val rows = listOf(
-                Triple(R.id.widget_row_fajr_name, R.id.widget_row_fajr_time, "fajr"),
-                Triple(R.id.widget_row_dhuhr_name, R.id.widget_row_dhuhr_time, "dhuhr"),
-                Triple(R.id.widget_row_asr_name, R.id.widget_row_asr_time, "asr"),
-                Triple(R.id.widget_row_maghrib_name, R.id.widget_row_maghrib_time, "maghrib"),
-                Triple(R.id.widget_row_isha_name, R.id.widget_row_isha_time, "isha")
-            )
-            rows.forEach { (nameId, timeId, key) ->
-                views.setTextViewText(nameId, LABELS[key] ?: key)
-                views.setTextViewText(
-                    timeId,
-                    times.optJSONObject(key)?.optString("time").orEmpty().ifBlank { "--:--" }
-                )
-            }
-
-            val minHeight = manager.getAppWidgetOptions(widgetId)
-                .getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, 110)
-            views.setViewVisibility(
-                R.id.widget_prayer_list,
-                if (minHeight >= 150) View.VISIBLE else View.GONE
-            )
-            return views
-        }
-
-        private fun parseMinutes(value: String?): Int {
-            val parts = value.orEmpty().split(":")
-            if (parts.size != 2) return -1
-            val h = parts[0].toIntOrNull() ?: return -1
-            val m = parts[1].toIntOrNull() ?: return -1
-            return h * 60 + m
-        }
-
-        private fun currentMinutes(timeZone: String): Int {
-            val cal = Calendar.getInstance(TimeZone.getTimeZone(timeZone))
-            return cal.get(Calendar.HOUR_OF_DAY) * 60 + cal.get(Calendar.MINUTE)
-        }
-
-        private fun openIntent(context: Context, uri: String, requestCode: Int): PendingIntent {
-            val intent = Intent(context, MainActivity::class.java).apply {
-                action = Intent.ACTION_VIEW
-                data = Uri.parse(uri)
-                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
-            }
-            return PendingIntent.getActivity(
-                context,
-                requestCode,
-                intent,
-                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-            )
+            val component = ComponentName(context, PrayerTimesWidgetProvider::class.java)
+            val ids = manager.getAppWidgetIds(component)
+            if (ids.isNotEmpty()) PrayerTimesWidgetProvider().onUpdate(context, manager, ids)
         }
     }
 }

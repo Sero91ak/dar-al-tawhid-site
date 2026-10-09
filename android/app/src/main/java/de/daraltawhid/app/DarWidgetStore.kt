@@ -1,93 +1,112 @@
 package de.daraltawhid.app
 
-import android.appwidget.AppWidgetManager
-import android.content.ComponentName
 import android.content.Context
-import android.os.Bundle
 import org.json.JSONObject
 import java.util.TimeZone
 
+data class DarPrayerSettings(
+    val city: String,
+    val lat: Double,
+    val lon: Double,
+    val angle: Double,
+    val asrFactor: Double,
+    val timeZone: String
+)
+
+data class DarPrayerDay(
+    val date: String,
+    val fajr: String,
+    val dhuhr: String,
+    val asr: String,
+    val maghrib: String,
+    val isha: String
+)
+
 object DarWidgetStore {
-    private const val PREFS = "dar_native_widgets"
-    private const val KEY_PRAYER_PAYLOAD = "prayer_payload"
+    private const val PREFS = "dar_native_widgets_v1"
+    private const val KEY_PRAYER_SETTINGS = "prayer_settings"
+    private const val KEY_PRAYER_DAY = "prayer_day"
 
-    data class PrayerSettings(
-        val city: String,
-        val lat: Double,
-        val lon: Double,
-        val angle: Double,
-        val asrFactor: Double,
-        val timeZone: String
-    )
+    fun savePrayerSettings(context: Context, json: String): Boolean {
+        return try {
+            val input = JSONObject(json)
+            val lat = input.optDouble("lat", Double.NaN)
+            val lon = input.optDouble("lon", Double.NaN)
+            if (!lat.isFinite() || !lon.isFinite()) return false
+            val city = input.optString("city", "").trim().ifBlank { "Standort" }
+            val angle = input.optDouble("angle", 12.0).takeIf { it.isFinite() && it > 0 } ?: 12.0
+            val rawAsr = when {
+                input.has("asrFactor") -> input.optDouble("asrFactor", 1.0)
+                input.has("asr") -> input.optDouble("asr", 1.0)
+                else -> 1.0
+            }
+            val asr = rawAsr.takeIf { it.isFinite() && it > 0 } ?: 1.0
+            val tz = input.optString("timezone", input.optString("timeZone", TimeZone.getDefault().id))
+                .trim()
+                .ifBlank { TimeZone.getDefault().id }
 
-    fun savePrayerSettings(context: Context, json: String) {
-        try {
-            val obj = JSONObject(json)
-            val lat = obj.optDouble("lat", Double.NaN)
-            val lon = obj.optDouble("lon", Double.NaN)
-            if (!lat.isFinite() || !lon.isFinite()) return
-            val tz = obj.optString(
-                "timeZone",
-                obj.optString("timezone", obj.optString("tz", TimeZone.getDefault().id))
-            ).ifBlank { TimeZone.getDefault().id }
-            context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit()
-                .putString("city", obj.optString("city", "Dein Standort"))
-                .putLong("lat_bits", java.lang.Double.doubleToRawLongBits(lat))
-                .putLong("lon_bits", java.lang.Double.doubleToRawLongBits(lon))
-                .putLong("angle_bits", java.lang.Double.doubleToRawLongBits(obj.optDouble("angle", 12.0)))
-                .putLong("asr_bits", java.lang.Double.doubleToRawLongBits(obj.optDouble("asrFactor", 1.0)))
-                .putString("timezone", tz)
-                .apply()
-            PrayerTimesWidgetProvider.refreshAll(context)
-        } catch (_: Throwable) {
+            val normalized = JSONObject()
+                .put("city", city)
+                .put("lat", lat)
+                .put("lon", lon)
+                .put("angle", angle)
+                .put("asrFactor", asr)
+                .put("timeZone", tz)
+            prefs(context).edit().putString(KEY_PRAYER_SETTINGS, normalized.toString()).apply()
+            true
+        } catch (_: Exception) {
+            false
         }
     }
 
-    fun loadPrayerSettings(context: Context): PrayerSettings? {
-        val prefs = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
-        if (!prefs.contains("lat_bits") || !prefs.contains("lon_bits")) return null
-        val lat = java.lang.Double.longBitsToDouble(prefs.getLong("lat_bits", 0L))
-        val lon = java.lang.Double.longBitsToDouble(prefs.getLong("lon_bits", 0L))
-        if (!lat.isFinite() || !lon.isFinite()) return null
-        return PrayerSettings(
-            city = prefs.getString("city", "Dein Standort").orEmpty().ifBlank { "Dein Standort" },
-            lat = lat,
-            lon = lon,
-            angle = java.lang.Double.longBitsToDouble(
-                prefs.getLong("angle_bits", java.lang.Double.doubleToRawLongBits(12.0))
-            ),
-            asrFactor = java.lang.Double.longBitsToDouble(
-                prefs.getLong("asr_bits", java.lang.Double.doubleToRawLongBits(1.0))
-            ),
-            timeZone = prefs.getString("timezone", TimeZone.getDefault().id)
-                .orEmpty().ifBlank { TimeZone.getDefault().id }
-        )
+    fun prayerSettings(context: Context): DarPrayerSettings? {
+        val raw = prefs(context).getString(KEY_PRAYER_SETTINGS, null) ?: return null
+        return try {
+            val input = JSONObject(raw)
+            val lat = input.optDouble("lat", Double.NaN)
+            val lon = input.optDouble("lon", Double.NaN)
+            if (!lat.isFinite() || !lon.isFinite()) return null
+            DarPrayerSettings(
+                city = input.optString("city", "Standort"),
+                lat = lat,
+                lon = lon,
+                angle = input.optDouble("angle", 12.0),
+                asrFactor = input.optDouble("asrFactor", 1.0),
+                timeZone = input.optString("timeZone", TimeZone.getDefault().id)
+            )
+        } catch (_: Exception) {
+            null
+        }
     }
 
-    fun savePrayerPayload(context: Context, json: String) {
+    fun savePrayerDay(context: Context, day: DarPrayerDay) {
+        val data = JSONObject()
+            .put("date", day.date)
+            .put("fajr", day.fajr)
+            .put("dhuhr", day.dhuhr)
+            .put("asr", day.asr)
+            .put("maghrib", day.maghrib)
+            .put("isha", day.isha)
+        prefs(context).edit().putString(KEY_PRAYER_DAY, data.toString()).apply()
+    }
+
+    fun prayerDay(context: Context): DarPrayerDay? {
+        val raw = prefs(context).getString(KEY_PRAYER_DAY, null) ?: return null
+        return try {
+            val data = JSONObject(raw)
+            DarPrayerDay(
+                date = data.optString("date", ""),
+                fajr = data.optString("fajr", "--:--"),
+                dhuhr = data.optString("dhuhr", "--:--"),
+                asr = data.optString("asr", "--:--"),
+                maghrib = data.optString("maghrib", "--:--"),
+                isha = data.optString("isha", "--:--")
+            )
+        } catch (_: Exception) {
+            null
+        }
+    }
+
+    private fun prefs(context: Context) =
         context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
-            .edit().putString(KEY_PRAYER_PAYLOAD, json).apply()
-    }
-
-    fun loadPrayerPayload(context: Context): String =
-        context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
-            .getString(KEY_PRAYER_PAYLOAD, "").orEmpty()
-
-    fun canPinWidget(context: Context, kind: String): Boolean {
-        val manager = AppWidgetManager.getInstance(context)
-        return manager.isRequestPinAppWidgetSupported && widgetProviderClass(kind) != null
-    }
-
-    fun requestPinWidget(context: Context, kind: String): Boolean {
-        val provider = widgetProviderClass(kind) ?: return false
-        val manager = AppWidgetManager.getInstance(context)
-        if (!manager.isRequestPinAppWidgetSupported) return false
-        return manager.requestPinAppWidget(ComponentName(context, provider), Bundle(), null)
-    }
-
-    private fun widgetProviderClass(kind: String): Class<*>? = when (kind.trim().lowercase()) {
-        "prayer", "prayer-times", "gebetszeiten" -> PrayerTimesWidgetProvider::class.java
-        "faith", "ayah-dua", "dua", "daily" -> DailyFaithWidgetProvider::class.java
-        else -> null
-    }
 }

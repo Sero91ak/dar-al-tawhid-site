@@ -3,6 +3,10 @@ package de.daraltawhid.app
 import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.app.PendingIntent
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
+import android.os.Build
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
@@ -135,6 +139,8 @@ class MainActivity : AppCompatActivity() {
               try{
                 window.DAR_ANDROID_NATIVE_APP=true;
                 window.DAR_ANDROID_NATIVE_PUSH=true;
+                window.DAR_ANDROID_NATIVE_WIDGETS=true;
+                window.DAR_ANDROID_NATIVE_ICONS=true;
                 window.DAR_IOS_NATIVE_APP=false;
                 window.DAR_ANDROID_DEVICE_ID=${jsString(device)};
                 window.DAR_ANDROID_ONESIGNAL_ID=${jsString(sub)};
@@ -148,6 +154,21 @@ class MainActivity : AppCompatActivity() {
                   if(rawPrayerSettings)DarNative.syncPrayerSettings(rawPrayerSettings);
                 }catch(e){}
                 try{localStorage.setItem("darPushExternalIdV1", window.DAR_ANDROID_DEVICE_ID)}catch(e){}
+                try{
+                  var prayerRaw=localStorage.getItem("darPrayerSettingsV1");
+                  if(prayerRaw&&window.DarNative&&typeof window.DarNative.prayerSettings==="function"){
+                    window.DarNative.prayerSettings(prayerRaw);
+                  }
+                }catch(ePrayer){}
+                window.darNativeSetAppIcon=function(id){
+                  try{return !!(window.DarNative&&window.DarNative.setAppIcon&&window.DarNative.setAppIcon(String(id||"")))}catch(e){return false}
+                };
+                window.darNativeCurrentAppIcon=function(){
+                  try{return String(window.DarNative&&window.DarNative.currentAppIcon?window.DarNative.currentAppIcon():"")}catch(e){return ""}
+                };
+                window.darNativeRequestWidget=function(kind){
+                  try{return !!(window.DarNative&&window.DarNative.requestWidget&&window.DarNative.requestWidget(String(kind||"prayer")))}catch(e){return false}
+                };
                 var root=document.documentElement;
                 if(root){
                   root.classList.add("dar-android-native-app");
@@ -188,6 +209,65 @@ class MainActivity : AppCompatActivity() {
         @JavascriptInterface
         fun pushSettings(json: String) {
             DarPush.applyWebSettings(json)
+        }
+
+        @JavascriptInterface
+        fun prayerSettings(json: String): Boolean {
+            val saved = DarWidgetStore.savePrayerSettings(this@MainActivity, json)
+            if (saved) PrayerTimesWidgetProvider.updateAll(this@MainActivity)
+            return saved
+        }
+
+        @JavascriptInterface
+        fun setAppIcon(name: String): Boolean {
+            val normalized = DarLauncherIcons.normalize(name) ?: return false
+            runOnUiThread {
+                DarLauncherIcons.set(this@MainActivity, normalized)
+                val detail = JSONObject.quote(normalized)
+                webView.evaluateJavascript(
+                    "window.dispatchEvent(new CustomEvent('dar-native-icon-changed',{detail:" + detail + "}));",
+                    null
+                )
+            }
+            return true
+        }
+
+        @JavascriptInterface
+        fun currentAppIcon(): String =
+            DarLauncherIcons.current(this@MainActivity)
+
+        @JavascriptInterface
+        fun requestWidget(kind: String): Boolean {
+            val widgetKind = kind.trim().lowercase()
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return false
+            val manager = AppWidgetManager.getInstance(this@MainActivity)
+            if (!manager.isRequestPinAppWidgetSupported) return false
+            val provider = when (widgetKind) {
+                "daily", "today", "faith" -> ComponentName(this@MainActivity, DailyFaithWidgetProvider::class.java)
+                else -> ComponentName(this@MainActivity, PrayerTimesWidgetProvider::class.java)
+            }
+            runOnUiThread {
+                val callbackIntent = Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse(if (widgetKind == "daily" || widgetKind == "today" || widgetKind == "faith") "daraltawhid://home" else "daraltawhid://prayer"),
+                    this@MainActivity,
+                    MainActivity::class.java
+                )
+                val success = PendingIntent.getActivity(
+                    this@MainActivity,
+                    if (widgetKind == "daily" || widgetKind == "today" || widgetKind == "faith") 2202 else 2201,
+                    callbackIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                )
+                val requested = manager.requestPinAppWidget(provider, null, success)
+                val kindJson = JSONObject.quote(widgetKind)
+                val requestedJson = if (requested) "true" else "false"
+                webView.evaluateJavascript(
+                    "window.dispatchEvent(new CustomEvent('dar-native-widget-result',{detail:{kind:" + kindJson + ",requested:" + requestedJson + "}}));",
+                    null
+                )
+            }
+            return true
         }
 
         @JavascriptInterface
