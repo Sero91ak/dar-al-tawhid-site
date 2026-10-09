@@ -612,19 +612,19 @@ body[data-profile="girl"] .overview-copy .kicker{color:#f8c7da;text-shadow:none}
 }
 
 </style></head>
-<body data-profile="boy" data-preview-release="V5.7-20261009" data-preview-deploy="v5.7-retry-only"><main class="wrap">
+<body data-profile="boy" data-preview-release="V6.0-20261009" data-preview-deploy="v6.0-age-profile-preview"><main class="wrap">
 
 <header class="academy-header">
- <div class="academy-brand"><div class="brand">DĀR AL TAWḤĪD · KIDS</div><div class="stage">Meine Lernakademie · Vorschau V5.7 <span class="preview-release-stamp">Persönlich &amp; klar</span></div></div>
- <div class="academy-header-actions"><button type="button" class="preview-refresh" id="previewRefresh" aria-label="HTML-Vorschau neu laden">↻ <span>Aktualisieren</span></button><div class="academy-profile" id="academyProfile"><img id="academyAvatar" alt="" src="/kids/assets/profile-avatars/boy-kufi-v1235.svg" width="42" height="42"><span class="academy-profile-names"><strong id="profileLabel">Kinderprofil wird geladen</strong><small id="profileRole">Unterricht</small></span></div></div>
-</header>
+ <div class="academy-brand"><div class="brand">DĀR AL TAWḤĪD · KIDS</div><div class="stage">Meine Lernakademie · Vorschau V6.0 <span class="preview-release-stamp">Altersgerecht lernen</span></div></div>
+ <div class="academy-header-actions"><button type="button" class="preview-refresh" id="previewRefresh" aria-label="HTML-Vorschau neu laden">↻ <span>Aktualisieren</span></button><div class="academy-profile" id="academyProfile"><img id="academyAvatar" alt="" src="/kids/assets/profile-avatars/boy-kufi-v1235.svg" width="42" height="42"><span class="academy-profile-names"><strong id="profileLabel">Kinderprofil wird geladen</strong><small id="profileRole">Unterricht</small><small id="academyAgeLabel" class="academy-age-label" aria-live="polite">Altersstufe</small></span></div></div>
+</header><p id="academyAgeWarning" class="academy-age-warning" role="alert" hidden>Bitte wähle im Kinderprofil eine passende Altersstufe aus.</p>
 <section class="academy-home" id="academyHome">
  <section class="overview-hero" aria-label="Deine islamische Lernakademie">
   <img id="academyHeroImage" src="/desktop-preview/assets/kids-academy-hero-boys-v1.jpg" alt="" decoding="async" fetchpriority="high" onerror="this.onerror=null;this.classList.add('is-ready');this.src='/desktop-preview/assets/kids-academy-hero-v1.jpg'">
-  <div class="overview-copy"><div class="kicker">Deine islamische Lernakademie</div><h1><span class="hero-title-line">Wissen</span> <span class="hero-title-line">entdecken</span></h1><p id="overviewGreeting" class="overview-greeting"><span id="overviewSalam" class="greeting-salam">As-salāmu ʿalaykum, lieber Bruder.</span><span id="overviewFollowup" class="greeting-followup">Heute lernen wir etwas Neues!</span></p></div>
+  <div class="overview-copy"><div class="kicker" id="overviewKicker">Deine islamische Lernakademie</div><h1><span class="hero-title-line">Wissen</span> <span class="hero-title-line">entdecken</span></h1><p id="overviewGreeting" class="overview-greeting"><span id="overviewSalam" class="greeting-salam">As-salāmu ʿalaykum, lieber Bruder.</span><span id="overviewFollowup" class="greeting-followup">Heute lernen wir etwas Neues!</span></p></div>
  </section>
  <section class="today-class" aria-labelledby="todayTitle">
-  <div class="today-text"><span class="kicker">Für dich vorbereitet</span><h2 id="todayTitle">Dein Unterricht heute</h2><p><strong>Ṣidq – Wahrhaftigkeit</strong><br>Warum ist es gut, die Wahrheit zu sagen?</p><div class="today-summary" id="todaySummary">Deine erste Lektion wartet auf dich.</div></div>
+  <div class="today-text"><span class="kicker" id="todayKicker">Für dich vorbereitet</span><h2 id="todayTitle">Dein Unterricht heute</h2><p><strong>Ṣidq – Wahrhaftigkeit</strong><br><span id="todayTopicIntro">Warum ist es gut, die Wahrheit zu sagen?</span></p><div class="today-summary" id="todaySummary">Deine erste Lektion wartet auf dich.</div><div class="academy-time" id="academyTime">Lernzeit: 8–12 Minuten · Pausen jederzeit</div></div>
   <button type="button" class="pill primary today-button" data-open-lesson="sidq">Unterricht beginnen <span aria-hidden="true">→</span></button>
  </section>
  <section class="journey" aria-labelledby="journeyTitle">
@@ -632,9 +632,9 @@ body[data-profile="girl"] .overview-copy .kicker{color:#f8c7da;text-shadow:none}
   <div class="journey-status"><span id="courseStatus">Bereit</span><div class="journey-bar"><span id="journeyBar"></span></div><small id="journeyDetail">Dein Wissen wächst Schritt für Schritt.</small></div>
  </section>
  <section class="subjects" aria-labelledby="subjectsTitle">
-  <div class="subjects-title"><div><span class="kicker">Wissen aus Qurʾān & Sunnah</span><h2 id="subjectsTitle">Wähle dein Unterrichtsfach</h2><p>Jedes Fach begleitet dich auf deiner Lernreise.</p></div></div>
+  <div class="subjects-title"><div><span class="kicker">Wissen aus Qurʾān & Sunnah</span><h2 id="subjectsTitle">Wähle dein Unterrichtsfach</h2><p id="subjectsIntro">Jedes Fach begleitet dich auf deiner Lernreise.</p></div></div>
   <div class="category-grid" aria-label="Unterrichtskategorien">
-   <button type="button" class="category-card" data-open-lesson="sidq"><img src="/desktop-preview/assets/kids-academy-akhlaq-v1.jpg" alt="" loading="lazy" decoding="async"><span class="category-card-copy"><span class="category-state">Jetzt lernen</span><strong class="category-name">Akhlāq</strong><span class="category-detail">Wahrhaftigkeit · Guter Charakter</span></span></button>
+   <button type="button" class="category-card" data-open-lesson="sidq"><img src="/desktop-preview/assets/kids-academy-akhlaq-v1.jpg" alt="" loading="lazy" decoding="async"><span class="category-card-copy"><span class="category-state" id="akhlaqCardStatus">Jetzt lernen</span><strong class="category-name">Akhlāq</strong><span class="category-detail">Wahrhaftigkeit · Guter Charakter</span></span></button>
    <button type="button" class="category-card" disabled aria-label="Adab, in Vorbereitung"><img src="/desktop-preview/assets/kids-academy-adab-v1.jpg" alt="" loading="lazy" decoding="async"><span class="category-card-copy"><span class="category-state">Bald verfügbar</span><strong class="category-name">Adab</strong><span class="category-detail">Gutes Benehmen · Respekt</span></span></button>
    <button type="button" class="category-card" disabled aria-label="Fiqh, in Vorbereitung"><img src="/kids/assets/deen/ibadah.jpg?v=1205" alt="" loading="lazy" decoding="async"><span class="category-card-copy"><span class="category-state">Bald verfügbar</span><strong class="category-name">Fiqh</strong><span class="category-detail">Gebet · Reinheit · Praxis</span></span></button>
    <button type="button" class="category-card" disabled aria-label="ʿAqīdah, in Vorbereitung"><img src="/kids/assets/deen/tawhid.jpg?v=1205" alt="" loading="lazy" decoding="async"><span class="category-card-copy"><span class="category-state">Bald verfügbar</span><strong class="category-name">ʿAqīdah</strong><span class="category-detail">Tawḥīd · Ikhlāṣ · Īmān</span></span></button>
@@ -643,12 +643,12 @@ body[data-profile="girl"] .overview-copy .kicker{color:#f8c7da;text-shadow:none}
 </section>
 <section class="lesson-main" id="lessonMain" hidden>
  <div class="lesson-topline"><button type="button" class="pill back-pill" id="backToAcademy"><span aria-hidden="true">←</span> Zur Lernakademie</button><span class="lesson-label">Akhlāq · Einheit 01</span></div>
- <div class="lesson-heading" role="group" aria-label="Akhlāq-Unterricht Ṣidq – Wahrhaftigkeit"><span class="lesson-theme-tag">Akhlāq · Guter Charakter</span><h1>Ṣidq <span>· Wahrhaftigkeit</span></h1><p>Gemeinsam verstehen, nachdenken und üben.</p></div>
+ <div class="lesson-heading" role="group" aria-label="Akhlāq-Unterricht Ṣidq – Wahrhaftigkeit"><span class="lesson-theme-tag">Akhlāq · Guter Charakter</span><h1>Ṣidq <span>· Wahrhaftigkeit</span></h1><p id="lessonIntroduction">Gemeinsam verstehen, nachdenken und üben.</p></div>
  <div class="stage-tracker" role="group" aria-label="Unterrichtsschritte"><button class="tracker-item is-current" data-jump-step="0"><b>1</b><span>Willkommen</span></button><button class="tracker-item" data-jump-step="1"><b>2</b><span>Verstehen</span></button><button class="tracker-item" data-jump-step="2"><b>3</b><span>Belege</span></button><button class="tracker-item" data-jump-step="3"><b>4</b><span>Mitdenken</span></button><button class="tracker-item" data-jump-step="4"><b>5</b><span>Merken</span></button></div>
  <div class="stage-surface" id="stageSurface">
-  <section class="lesson-stage" data-lesson-step="0" aria-labelledby="welcomeTitle"><span class="kicker">Schritt 1 · Willkommen</span><h2 id="welcomeTitle">Schön, dass du da bist!</h2><p class="stage-lead welcome-greeting" id="welcomeGreeting"><span id="welcomeSalam" class="stage-greeting-salam">As-salāmu ʿalaykum, lieber Bruder.</span><span id="welcomeFollowup" class="stage-greeting-followup">Schön, dass du heute mitlernst!</span></p><p class="stage-body">Heute sprechen wir darüber, weshalb <strong>Wahrhaftigkeit</strong> wichtig ist. Du kannst jederzeit anhalten, noch einmal zuhören oder etwas in deinem eigenen Tempo lesen.</p><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="0">Begrüßung anhören</button><span class="voice-note">Zum Anhören · Teststimme</span></div></section>
+  <section class="lesson-stage" data-lesson-step="0" aria-labelledby="welcomeTitle"><span class="kicker">Schritt 1 · Willkommen</span><h2 id="welcomeTitle">Schön, dass du da bist!</h2><p class="stage-lead welcome-greeting" id="welcomeGreeting"><span id="welcomeSalam" class="stage-greeting-salam">As-salāmu ʿalaykum, lieber Bruder.</span><span id="welcomeFollowup" class="stage-greeting-followup">Schön, dass du heute mitlernst!</span></p><p class="stage-body" id="lessonWelcomeBody">Heute sprechen wir darüber, weshalb <strong>Wahrhaftigkeit</strong> wichtig ist. Du kannst jederzeit anhalten, noch einmal zuhören oder etwas in deinem eigenen Tempo lesen.</p><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="0">Begrüßung anhören</button><span class="voice-note">Zum Anhören · Teststimme</span></div></section>
   <section class="lesson-stage" data-lesson-step="1" aria-labelledby="explainTitle" hidden><span class="kicker">Schritt 2 · Heute lernen wir</span><h2 id="explainTitle">Was bedeutet Wahrhaftigkeit?</h2><p class="stage-lead">Die <strong>Wahrheit sagen</strong> – auch wenn es manchmal Mut kostet.</p><div class="spoken-paragraph" id="explainWords"><p data-spoken>Manchmal passiert uns aus Versehen ein Fehler.</p><p data-spoken>Wenn wir ehrlich sagen, was passiert ist, können wir Verantwortung übernehmen und etwas wiedergutmachen.</p><p data-spoken>Wenn wir stattdessen lügen, kann das Vertrauen anderer Menschen leiden.</p><p data-spoken>Wahrhaftigkeit ist deshalb ein wichtiger Teil unseres guten Charakters.</p></div><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="1">Erklärung anhören</button><span class="voice-note">Beim Hören wird der aktuelle Satz sanft hervorgehoben.</span></div></section>
-  <section class="lesson-stage" data-lesson-step="2" aria-labelledby="evidenceTitle" hidden><span class="kicker">Schritt 3 · Qurʾān und Sunnah</span><h2 id="evidenceTitle">Was lernen wir aus den Quellen?</h2><p class="stage-lead">Wir hören zuerst einen Vers aus dem Qurʾān und betrachten danach eine authentische Überlieferung.</p><div class="evidence-region"><section class="lesson-source-block">
+  <section class="lesson-stage" data-lesson-step="2" aria-labelledby="evidenceTitle" hidden><span class="kicker">Schritt 3 · Qurʾān und Sunnah</span><h2 id="evidenceTitle">Was lernen wir aus den Quellen?</h2><p class="stage-lead" id="evidenceLead">Wir hören zuerst einen Vers aus dem Qurʾān und betrachten danach eine authentische Überlieferung.</p><div class="evidence-region"><section class="lesson-source-block">
   <div class="eyebrow">Qurʾān · Sūrat at-Tawbah · Vers 119</div>
   <div class="arabic-listen-row">
     <button type="button" class="arabic-play-button" data-arabic-audio="quran:9:119" aria-label="Sūrat at-Tawbah, Vers 119 auf Arabisch anhören" aria-pressed="false">
@@ -689,7 +689,8 @@ body[data-profile="girl"] .overview-copy .kicker{color:#f8c7da;text-shadow:none}
 (()=>{
 "use strict";
 const $=s=>document.querySelector(s),all=s=>[...document.querySelectorAll(s)];
-const VERSION="academy-v4",INTERVALS=[1,3,7,14,30,60,90];
+const VERSION="academy-v4"; /* Bestehende Lernstände bleiben erhalten */
+const INTERVALS_BY_AGE={"4-5":[1,3,7,14,30],"6-8":[1,3,7,14,30,60],"9-10":[1,3,7,14,30,60,90]};
 const exercises={
   "4-5":[
     {type:"choice",prompt:"Du hast etwas kaputt gemacht. Was sagst du?",options:["Ich sage ehrlich: Ich war das.","Ich sage: Jemand anders war es."],correct:0,hint:"Überlege: Was bedeutet ehrlich sein?",explain:"Wahrhaftigkeit bedeutet: Ich sage, was wirklich passiert ist."},
@@ -709,6 +710,55 @@ const exercises={
 let id="unassigned",gender="neutral",age="6-8",profileName="",step=0,unlocked=0,qIndex=0,choice=null,answerMode="choices",answered=false,finished=false;
 let score={done:0,correct:0,choices:0},recognition=null,voice=null,audio=null,audioKey="",fallbackTried=false,voiceToken=0;
 let recorder=null,micStream=null,micClock=null,micSince=0,micRequest=0,voiceObjectUrl=null,voiceReady=false;
+
+const AGE_UI=Object.freeze({
+ "4-5":{
+  heroKicker:"Meine islamische Lernschule",heroFollowup:"Heute lernen wir zusammen!",
+  todayTitle:"Wir lernen heute!",todayKicker:"Komm, wir lernen!",topicIntro:"Warum sagen wir die Wahrheit?",
+  duration:"5–8 Minuten",start:"Jetzt mitlernen",repeat:"Noch einmal üben",
+  journeyTitle:"Mein Lernweg",journeyNew:"Heute wartet etwas Neues auf dich.",journeyDue:"Zeit zum Wiederholen!",journeyDone:"Du kannst jederzeit noch einmal zuhören.",
+  subjectsTitle:"Was möchtest du lernen?",subjectsIntro:"Tippe auf ein Fach. Wir lernen zusammen.",
+  welcomeNext:"Schön, dass du da bist!",
+  welcomeBody:"Heute geht es darum, die Wahrheit zu sagen. Wir hören zu und überlegen zusammen. Du darfst eine Pause machen.",
+  lessonIntro:"Zuhören, nachdenken und zusammen üben.",
+  evidenceLead:"Hör dir einen Vers aus dem Qurʾān an. Danach lernen wir, was der Prophet ﷺ über die Wahrheit gesagt hat.",
+  steps:["Hallo!","Zuhören","Qurʾān","Antworten","Merken"],
+  questionTitle:"Was sagst du?",hint:"Ein kleiner Tipp",feedbackWait:"Hör in Ruhe zu. Du kannst tippen oder sprechen.",
+  recapTitle:"Das merke ich mir",recapText:"Du hast mitgemacht. Hör es dir später gerne noch einmal an.",
+  availableStatus:"Zusammen lernen"
+ },
+ "6-8":{
+  heroKicker:"Deine islamische Lernakademie",heroFollowup:"Heute lernen wir etwas Neues!",
+  todayTitle:"Dein Unterricht heute",todayKicker:"Für dich vorbereitet",topicIntro:"Warum ist es gut, die Wahrheit zu sagen?",
+  duration:"8–12 Minuten",start:"Unterricht beginnen",repeat:"Lektion wiederholen",
+  journeyTitle:"Meine Lernreise",journeyNew:"Eine neue Lektion wartet auf dich.",journeyDue:"Heute ist eine kurze Wiederholung dran.",journeyDone:"Du hast Ṣidq schon geübt!",
+  subjectsTitle:"Wähle dein Unterrichtsfach",subjectsIntro:"Entdecke ein Thema – Schritt für Schritt.",
+  welcomeNext:"Schön, dass du heute mitlernst!",
+  welcomeBody:"Heute sprechen wir darüber, warum Wahrhaftigkeit wichtig ist. Wir hören zu, lesen mit und denken nach. Du darfst jederzeit eine Pause machen.",
+  lessonIntro:"Gemeinsam verstehen, nachdenken und üben.",
+  evidenceLead:"Wir hören zuerst einen Vers aus dem Qurʾān und betrachten danach eine authentische Überlieferung.",
+  steps:["Willkommen","Verstehen","Belege","Mitdenken","Merken"],
+  questionTitle:"Was würdest du tun?",hint:"Kleiner Hinweis",feedbackWait:"Nimm dir Zeit. Du kannst auswählen, schreiben oder sprechen.",
+  recapTitle:"Das habe ich gelernt",recapText:"Du hast mitgedacht. Wiederhole die Aussagen in ein paar Tagen.",
+  availableStatus:"Jetzt lernen"
+ },
+ "9-10":{
+  heroKicker:"Deine islamische Wissensakademie",heroFollowup:"Heute entdecken wir neue Zusammenhänge.",
+  todayTitle:"Deine Wissensstunde",todayKicker:"Heute auf deinem Lernweg",topicIntro:"Wie zeigt sich Wahrhaftigkeit im Alltag?",
+  duration:"12–18 Minuten",start:"Wissen vertiefen",repeat:"Wissen wiederholen",
+  journeyTitle:"Mein Wissensweg",journeyNew:"Heute lernst du einen neuen Beleg kennen.",journeyDue:"Prüfe, was du noch in Erinnerung hast.",journeyDone:"Du kannst den Unterricht erneut vertiefen.",
+  subjectsTitle:"Wähle dein Wissensgebiet",subjectsIntro:"Vertiefe dein Wissen aus Qurʾān und Sunnah.",
+  welcomeNext:"Schön, dass du dein Wissen heute erweiterst!",
+  welcomeBody:"Heute beschäftigen wir uns mit Ṣidq: Warum ist die Wahrheit wichtig, und wie handeln wir nach einem Fehler? Wir lernen anhand von Qurʾān und Sunnah und erklären das Thema mit eigenen Worten.",
+  lessonIntro:"Belege verstehen, Zusammenhänge erkennen, anwenden.",
+  evidenceLead:"Lies Qurʾān 9:119 und den Ḥadīṯ in Ṣaḥīḥ Muslim 2607a. Welcher Gedanke verbindet beide Aussagen?",
+  steps:["Start","Verstehen","Quellen","Nachdenken","Festigen"],
+  questionTitle:"Wie erklärst du das?",hint:"Denkanstoß",feedbackWait:"Erkläre deine Überlegung. Du kannst schreiben oder sprechen.",
+  recapTitle:"Das nehme ich mit",recapText:"Du hast die Belege betrachtet. Wiederhole sie später mit eigenen Worten.",
+  availableStatus:"Wissen vertiefen"
+ }
+});
+const humanAge=x=>String(x||"").replace(/-/g,"–");
 const TRACKS={"quran:9:119":{src:"/quran-audio/ar.alafasy/1354.mp3",fallback:"https://everyayah.com/data/Alafasy_128kbps/009119.mp3"}};
 const stages=all('.lesson-stage[data-lesson-step]');
 const questions=()=>exercises[age]||exercises["6-8"];
@@ -973,7 +1023,7 @@ function persist(level){
  try{localStorage.setItem(storageKey(),JSON.stringify(item));$("#nextDue").textContent="Nächste Erinnerung: "+due.toLocaleDateString("de-DE")+". Du kannst jederzeit vorher üben."}catch(_){$("#nextDue").textContent="Lokal speichern ist nicht verfügbar. Du kannst trotzdem wiederholen."}
  all("[data-reflect]").forEach(b=>{b.classList.toggle("active",b.dataset.reflect===level);b.setAttribute("aria-pressed",String(b.dataset.reflect===level))});renderHome();
 }
-$("#previewRefresh").onclick=()=>{const url=new URL(location.href);url.searchParams.set("cb","v5.7-"+Date.now());location.replace(url.toString())};
+$("#previewRefresh").onclick=()=>{const url=new URL(location.href);url.searchParams.set("cb","v6.0-"+Date.now());location.replace(url.toString())};
 all("[data-open-lesson]").forEach(b=>b.onclick=begin);
 $("#backToAcademy").onclick=home;$("#backAfterLesson").onclick=home;
 $("#previousStep").onclick=()=>showStep(step-1);$("#forwardStep").onclick=nextStep;
