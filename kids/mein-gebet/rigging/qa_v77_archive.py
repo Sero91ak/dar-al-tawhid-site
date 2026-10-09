@@ -40,7 +40,7 @@ def pinned_members(archive, model_digest=V77_SHA, reference_digest=REFERENCE_SHA
             if (pure.is_absolute() or ".." in pure.parts or
                 any(part in ("", ".") for part in pure.parts) or
                 "\x00" in name or name.startswith("/") or
-                (m.external_attr >> 16) & stat.S_IFMT(0o170000) == stat.S_IFLNK):
+                stat.S_IFMT(m.external_attr >> 16) == stat.S_IFLNK):
                 raise ValueError("Unsafe ZIP entry name or symlink")
             if m.is_dir():
                 continue
@@ -139,8 +139,9 @@ def main():
         pathlib.Path(args.json).write_text(output, encoding="utf-8")
     print(output, end="")
     return 0 if (result.get("modelBytesVerified") and result.get("referenceBytesVerified")
-                 and all(result.get(k, {}).get("completed") for k in
-                         ("binaryRig", "fixedFiveViews", "angleDiagnostic"))) else 1
+                 and result.get("binaryRig", {}).get("passed")
+                 and result.get("fixedFiveViews", {}).get("passed")
+                 and result.get("angleDiagnostic", {}).get("completed")) else 1
 
 
 if __name__ == "__main__":
