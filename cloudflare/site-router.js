@@ -204,7 +204,13 @@ function pwaIconPath(id, size) {
 
 function browserManifestResponse(request, androidBrowser = false) {
   const url = new URL(request.url);
-  const iconId = normalizePwaIconId(url.searchParams.get("icon"));
+  const cookieHeader = String(request.headers.get("Cookie") || "");
+  const cookieMatch = cookieHeader.match(/(?:^|;\s*)dar_pwa_icon=([^;]+)/);
+  let cookieIcon = "";
+  if (cookieMatch) {
+    try { cookieIcon = decodeURIComponent(cookieMatch[1] || ""); } catch (e) { cookieIcon = cookieMatch[1] || ""; }
+  }
+  const iconId = normalizePwaIconId(cookieIcon || url.searchParams.get("icon"));
   const icon = DAR_PWA_ICON_MAP[iconId] || DAR_PWA_ICON_MAP["type-creme-ar"];
   const icon192 = pwaIconPath(iconId, 192);
   const icon512 = icon.high ? pwaIconPath(iconId, 512) : pwaIconPath("type-creme-ar", 512);
@@ -328,12 +334,12 @@ function publicWebsiteAddon() {
   function refreshManifestForIcon(id){
     id=pwaIconMap[id]?id:"type-creme-ar";
     try{
-      var link=document.querySelector('link[rel="manifest"]');
-      if(link)link.setAttribute("href","/manifest.json?icon="+encodeURIComponent(id)+"&v=pwa-picker-v2-20261009");
+      document.cookie="dar_pwa_icon="+encodeURIComponent(id)+"; Max-Age=31536000; Path=/; SameSite=Lax";
       var row=pwaIconMap[id];
       var meta=document.querySelector('meta[name="theme-color"]');
       if(meta&&row)meta.setAttribute("content",row.theme);
       document.documentElement.setAttribute("data-dar-pwa-icon",id);
+      fetch("/manifest.json",{cache:"no-store",credentials:"same-origin"}).catch(function(){});
     }catch(e){}
   }
   function applyPwaIcon(id,persist){
@@ -420,9 +426,8 @@ function publicWebsiteAddon() {
         return true;
       }
     }catch(e){}
-    setPwaHint("Installation wird vorbereitet …");
-    await ensureAndroidServiceWorkerReady();
-    var installEvent=deferredInstall||await waitForInstallPrompt(2200);
+    // Keep the native prompt inside the original user gesture.
+    var installEvent=deferredInstall;
     if(installEvent){
       try{
         installEvent.prompt();
@@ -436,7 +441,13 @@ function publicWebsiteAddon() {
         return false;
       }catch(e){}
     }
-    setPwaHint("Chrome bietet den Installationsdialog noch nicht an. Seite neu laden und erneut auf „Web-App installieren“ tippen.");
+    setPwaHint("Installation wird vorbereitet …");
+    await ensureAndroidServiceWorkerReady();
+    if(deferredInstall){
+      setPwaHint("Installation ist bereit. Bitte jetzt noch einmal auf „Web-App installieren“ tippen.");
+      return false;
+    }
+    setPwaHint("Chrome hat den Installationsdialog noch nicht freigegeben. Seite einmal neu laden und dann direkt auf „Web-App installieren“ tippen.");
     return false;
   };
   document.addEventListener("click",function(event){

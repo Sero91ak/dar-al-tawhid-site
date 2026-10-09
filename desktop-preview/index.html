@@ -2273,7 +2273,18 @@ button,input,select{font:inherit}
 <link rel="stylesheet" href="/test/assets/frauen/frauen-authority-v1292.css?v=frauen-authority-v1292">
 <script src="/test/assets/frauen/frauen-fiqh.js?v=1294-share-brand" defer></script>
 
-<link rel="manifest" href="/manifest.json?icon=type-creme-ar&v=pwa-picker-v2-20261009">
+<script id="darPwaIconCookieBoot">
+(function(){
+ try{
+  var allowed={"type-creme-ar":1,"emblem-creme-petrol":1,"emblem-nachtblau":1,"emblem-schwarzgold":1,"type-anthrazit-ar":1,"type-anthrazit-fein":1,"type-creme":1,"type-weiss-ar":1,"type-schwarz-rund":1,"type-schwarz-ar":1,"type-schwarz":1,"type-navy-ar":1,"type-navy":1,"type-bordeaux-ar":1,"type-bordeaux":1,"type-gruen-ar":1,"type-gruen":1,"type-schwarz-ar2":1};
+  var id=localStorage.getItem("dar_pwa_icon_v2")||"type-creme-ar";
+  if(!allowed[id])id="type-creme-ar";
+  document.cookie="dar_pwa_icon="+encodeURIComponent(id)+"; Max-Age=31536000; Path=/; SameSite=Lax";
+ }catch(e){}
+ try{if("serviceWorker" in navigator)navigator.serviceWorker.register("/service-worker.js",{scope:"/"}).catch(function(){})}catch(e){}
+})();
+</script>
+<link rel="manifest" href="/manifest.json">
 <style id="darAndroidPwaWebsiteV1">
 #darAndroidPwaHome{display:none}
 html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
@@ -2607,12 +2618,12 @@ html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
  function darRefreshPwaManifest(id){
   id=DAR_PWA_ICON_MAP[id]?id:"type-creme-ar";
   try{
-   var link=document.querySelector('link[rel="manifest"]');
-   if(link)link.setAttribute("href","/manifest.json?icon="+encodeURIComponent(id)+"&v=pwa-picker-v2-20261009");
+   document.cookie="dar_pwa_icon="+encodeURIComponent(id)+"; Max-Age=31536000; Path=/; SameSite=Lax";
    var row=DAR_PWA_ICON_MAP[id];
    var meta=document.querySelector('meta[name="theme-color"]');
    if(meta&&row)meta.setAttribute("content",row.theme);
-   document.documentElement.setAttribute("data-dar-pwa-icon",id)
+   document.documentElement.setAttribute("data-dar-pwa-icon",id);
+   fetch("/manifest.json",{cache:"no-store",credentials:"same-origin"}).catch(function(){})
   }catch(e){}
  }
  function darApplyPwaIcon(id,persist){
@@ -2705,9 +2716,8 @@ html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
    darPwaHint(msgNonAndroid);darPwaToast(msgNonAndroid);
    return false
   }
-  darPwaHint("Installation wird vorbereitet …");
-  await darEnsurePwaServiceWorker();
-  var installEvent=darDeferredPwaPrompt||await darWaitForInstallPrompt(2200);
+  // Important: prompt() must run from this user gesture. Do not await before it.
+  var installEvent=darDeferredPwaPrompt;
   if(installEvent){
    try{
     installEvent.prompt();
@@ -2723,7 +2733,14 @@ html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
     return false
    }catch(e){}
   }
-  var msg="Chrome bietet den Installationsdialog noch nicht an. Seite neu laden und erneut auf „Web-App installieren“ tippen.";
+  darPwaHint("Installation wird vorbereitet …");
+  await darEnsurePwaServiceWorker();
+  if(darDeferredPwaPrompt){
+   var ready="Installation ist bereit. Bitte jetzt noch einmal auf „Web-App installieren“ tippen.";
+   darPwaHint(ready);darPwaToast(ready);
+   return false
+  }
+  var msg="Chrome hat den Installationsdialog noch nicht freigegeben. Seite einmal neu laden und dann direkt auf „Web-App installieren“ tippen.";
   darPwaHint(msg);darPwaToast(msg);
   return false
  }
