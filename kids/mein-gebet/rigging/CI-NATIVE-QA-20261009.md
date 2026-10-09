@@ -120,3 +120,19 @@ Im bisherigen Projektions-Vergleich wurden rohe Vertexlisten zusammengestellt, o
 Die genaue V7.7-Archivdatei wurde in GitHub-Releases/Actions-Artefakten und unter ihren spezifischen Namen im angebundenen Google Drive **nicht gefunden**; die Library-ZIP ist sichtbar, aber die Plattform gibt weiterhin keinen autorisierten Raw-Byte-Pfad aus. Folglich gab es hier keine neue reale IoU-Messung, kein Sculpt und keine Bildgeneration.
 
 **Freigabe weiter gesperrt, GitHub PR #825 weiterhin Draft ohne Merge/Deploy.**
+
+## 09.10.2026 – Gegenprobe: inverse Bind-Matrizen müssen zur tatsächlichen Ruhepose passen
+
+**Abgeschlossene native GitHub Actions:** https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37951935341, Commit `191957b2f75e4a691aaf3ceea9e75ae2f1d8a071` – alle Schritte erfolgreich.
+
+**231 automatisch bestandene Checks:** 39 glTF-Rigstruktur + 20 Animations-BIN + 27 Geometrie-/Skin-BIN + **14 echte synthetische GLB-End-to-End-Dateitests** + 20 numerische Animations-Knochenlängen + **19 neu hinzugekommene inverse-Bind-/Ruhepose-Tests** + 18 Freigabe-Audit + 12 Rig-Freeze + 7 Kamera-Unit-Tests + 19 aktive Szenen-/Projektions-Unit-Tests + 21 ByteStride-/Geometriezugriff-Tests + 15 V7.7-ZIP-Sicherheitstests.
+
+### Gefundene echte Prüflücke
+
+Die bisherige `validate-glb-geometry-binary.cjs` konnte zwar erkennen, ob eine inverse Bind-Matrix endliche, annähernd orthonormale und affine Werte enthält. Das bewies **nicht**, dass die konkrete inverse Bind-Matrix die **tatsächliche globale Restposition und Restrotation ihres GLB-Joints** rückgängig macht. Beispielsweise hätte ein korrekt orthonormales, aber um 30 Zentimeter verschobenes `inverseBindMatrices` trotz anatomisch falscher Haut-/Mesh-Verschiebung formal bestanden.
+
+`validate-inverse-bind-pose.cjs` berechnet jetzt pro Bone und pro Skin die globalen Resttransformationen einschließlich der Vorfahrenkette, erstellt daraus die mathematisch korrekte inverse Starrkörpermatrix und vergleicht **alle 16 Float32-Komponenten** des tatsächlichen Matrix-Accessors mit strikter Toleranz. Dieser unabhängige Test wird im normalen `validate-glb.cjs`, im originalitätssperrenden `forbid-placeholder-release.cjs` und im vollständigen `audit-project-completion.cjs --require-ready` verlangt.
+
+Die GitHub-Tests wurden nicht nur abstrakt gerechnet: `test-glb-end-to-end.cjs` schreibt echte **synthetische** GLB-Dateien, verändert darin eine ansonsten plausible Bind-Matrix sowie einen Knochen-Restoffset und bestätigt, dass der finale Validator in beiden Fällen fehlschlägt. Ein Fehler der Testdaten-Erzeugung (Zusammenführen des BIN-Chunks vor dem Abschließen der Bind-Matrizen) wurde anhand der realen roten CI-Läufe identifiziert und behoben. **Der aktuelle grüne Commit ersetzt frühere rote Zwischenstände.**
+
+**Keine Verwechslung mit V7.7:** Die originale GLB-Datei und ihre referenzierte Turnaround-PNG sind hier weiterhin nicht als überprüfbare Bytes verfügbar. Deshalb weder neue originalgetreue Modellform noch 5-Ansichten-v4-IoU; die historischen v3-Werte bleiben gekennzeichnet. Echte menschliche Prüfung von Gesicht/Kufi/Kleidung/Rukūʿ/Suǧūd und iPhone/iPad bleibt offen. Keine Veröffentlichung, keine kostenpflichtige Generierung.
