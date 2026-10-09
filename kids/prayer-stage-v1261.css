@@ -2217,3 +2217,41 @@ html body #view-today .kids-salah-open-day{
     background-repeat:no-repeat!important;
   }
 }
+
+/* KIDS_HOME_IPAD_FULLBLEED_SAFE_V1296
+   Tablet versions use the same continuous night-mosque canvas behind the
+   iPad status bar as phone versions. The visual content retains its vertical
+   reference placement; only the image canvas extends into the safe area. */
+@media (min-width:700px){
+  html.kids-ios-app body #view-today.view .kids-salah-home-world,
+  html.dar-ios-native-app body #view-today.view .kids-salah-home-world{
+    --kids-start-lift:env(safe-area-inset-top,0px);
+    --kids-start-compensation:var(--kids-start-lift);
+    margin-top:calc(-1 * var(--kids-start-lift))!important;
+  }
+  html.kids-ios-app body #view-today.view .kids-salah-home-world > .hero,
+  html.dar-ios-native-app body #view-today.view .kids-salah-home-world > .hero{
+    min-height:calc(var(--kids-home-visible-hero) + var(--kids-start-compensation))!important;
+    height:calc(var(--kids-home-visible-hero) + var(--kids-start-compensation))!important;
+    max-height:calc(var(--kids-home-visible-hero) + var(--kids-start-compensation))!important;
+  }
+  html.kids-ios-app body #view-today.view .kids-salah-home-world .kids-wordmark,
+  html.dar-ios-native-app body #view-today.view .kids-salah-home-world .kids-wordmark{
+    top:calc(clamp(54px,7dvh,94px) + var(--kids-start-compensation))!important;
+  }
+}
+@media (min-width:700px) and (display-mode:standalone){
+  html:not(.kids-ios-app):not(.dar-ios-native-app) body #view-today.view .kids-salah-home-world{
+    --kids-start-lift:env(safe-area-inset-top,0px);
+    --kids-start-compensation:var(--kids-start-lift);
+    margin-top:calc(-1 * var(--kids-start-lift))!important;
+  }
+  html:not(.kids-ios-app):not(.dar-ios-native-app) body #view-today.view .kids-salah-home-world > .hero{
+    min-height:calc(var(--kids-home-visible-hero) + var(--kids-start-compensation))!important;
+    height:calc(var(--kids-home-visible-hero) + var(--kids-start-compensation))!important;
+    max-height:calc(var(--kids-home-visible-hero) + var(--kids-start-compensation))!important;
+  }
+  html:not(.kids-ios-app):not(.dar-ios-native-app) body #view-today.view .kids-salah-home-world .kids-wordmark{
+    top:calc(clamp(54px,7dvh,94px) + var(--kids-start-compensation))!important;
+  }
+}
