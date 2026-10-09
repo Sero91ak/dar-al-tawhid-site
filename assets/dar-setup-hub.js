@@ -247,6 +247,35 @@
     document.head.appendChild(link);
   }
 
+  function patchNativePrayerSettingsSync() {
+    try {
+      if (window.__darAndroidWidgetPrayerPatched) return true;
+      if (typeof window.setPrayerSettings !== "function") return false;
+      var original = window.setPrayerSettings;
+      window.setPrayerSettings = function () {
+        var result = original.apply(this, arguments);
+        try {
+          if (window.DarNative && typeof window.DarNative.prayerSettings === "function") {
+            var latest = typeof window.getPrayerSettings === "function"
+              ? window.getPrayerSettings()
+              : readSettings();
+            window.DarNative.prayerSettings(JSON.stringify(latest || {}));
+          }
+        } catch (e) {}
+        return result;
+      };
+      window.__darAndroidWidgetPrayerPatched = true;
+      try {
+        if (window.DarNative && typeof window.DarNative.prayerSettings === "function") {
+          window.DarNative.prayerSettings(JSON.stringify(readSettings() || {}));
+        }
+      } catch (e2) {}
+      return true;
+    } catch (e3) {
+      return false;
+    }
+  }
+
   function mountIntoSettings() {
     ensureCss();
     var page = document.querySelector(".settings-one-page");
@@ -281,11 +310,17 @@
     render: renderHtml,
     bind: bind,
     mount: mountIntoSettings,
-    refresh: onSettingsRoute
+    refresh: onSettingsRoute,
+    syncNativePrayerSettings: patchNativePrayerSettingsSync
   };
 
   function boot() {
+    patchNativePrayerSettingsSync();
     onSettingsRoute();
+    if (!window.__darAndroidWidgetPrayerPatched) {
+      setTimeout(patchNativePrayerSettingsSync, 250);
+      setTimeout(patchNativePrayerSettingsSync, 900);
+    }
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
