@@ -7,9 +7,9 @@
   "atharCount": 30,
   "hadithSharhVerified": 19,
   "hadithSharhOpen": 1,
-  "atharAttributionVerified": 1,
-  "atharAttributionOpen": 29,
-  "openTotal": 30,
+  "atharAttributionVerified": 2,
+  "atharAttributionOpen": 28,
+  "openTotal": 29,
   "policy": {
     "sourceOfTruth": "apple-tv/hadith/series/",
     "atharSharhNotRequired": true,
@@ -39,7 +39,7 @@
       "description": "Ausspruch von Muḥammad ibn Sīrīn als maqtūʿ mit direktem Muslim-Muqaddimah-Isnād, nicht als prophetischer Ḥadīṯ; Überschneidung HAD-0491."
     }
   ],
-  "nextAction": "1 Ḥadīṯ-Fall HAD-0554 mit unterbrochener marfūʿ-Überlieferung und 29 offene Āṯār-Attributionen prüfen; danach HAD-0593–0642 nächster 50er-Block. Druckeditionen nur bei unabhängiger Bestätigung eintragen.",
+  "nextAction": "1 Ḥadīṯ und 28 Āṯār offen. Ältere verifizierte Āṯār HAD-0582/0591 beim Audit-Merge erhalten.",
   "entries": [
     {
       "id": "HAD-0543",
@@ -318,8 +318,10 @@
       "id": "HAD-0582",
       "recordType": "athar",
       "sharh": "not-required",
-      "attribution": "needs-review",
-      "sourceAudit": "Genaue arabische Primärstelle, Sprecher, vollständigen Isnād und individuellen Überlieferungsstatus zunächst nachweisen"
+      "attribution": "verified",
+      "sourceAudit": "ʿAlī: Buḫārī Kitāb al-ʿIlm, ʿUbaydullāh ibn Mūsā → Maʿrūf → Abū aṭ-Ṭufayl → ʿAlī; Parallele HAD-0488",
+      "isnadStatus": "source-verified in previous audit",
+      "verificationNote": "Previously verified in prior audit; preserve status after concurrent audit merge."
     },
     {
       "id": "HAD-0583",
