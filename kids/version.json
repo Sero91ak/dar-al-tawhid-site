@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v178-trilingual1282",
-  "label": "KIDS · V1.08.99",
-  "releasedAt": "2026-10-09T07:55:33.139Z",
-  "note": "KIDS V1.08.99: Duʿāʾ-Wortlernmodus mit Arabisch, Lautschrift und deutscher Wortbedeutung in drei kompakten, getrennten Ebenen; responsive Zeilenanpassung ohne unlesbar kleine Schrift oder Änderung der App-Seite; zwei statt doppelter Trennlinien, synchroner Wortfokus. Bei noch nicht redaktionell zugeordneten Worten bleibt die geprüfte deutsche Gesamtbedeutung sichtbar. Fuṣḥā-Audio und Steuerung unverändert.",
+  "buildId": "kids-shell-v179-trilingual1283",
+  "label": "KIDS · V1.09.00",
+  "releasedAt": "2026-10-09T08:10:21.228Z",
+  "note": "KIDS V1.09.00: Trilingualer Duʿāʾ-Lernmodus mit 120 vollständig zugeordneten arabisch/deutschsprachigen Wortbedeutungsreihen (1.366 Positionen), synchroner Auswahl über Arabisch/Lautschrift/Deutsch, zwei edlen Trennlinien und responsiver Schrift-/Zeilenanpassung. Der gemessene Lesebereich scrollt bei langen Duʿāʾs innerhalb der unveränderten Bildschirmseite. V1283 erzwingt saubere Aktualisierung der vollständigen Bedeutungsdatei im iOS/Android Offline-Cache.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1282",
+    "serviceWorkerCache": "v1283",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -1258,8 +1258,8 @@
     "nativeIntroStatus": "fixed-in-ios-source-requires-new-native-distribution",
     "kidsStartupMovieBootstraps": 0,
     "homeMosqueBackground": "existing-approved-preserved",
-    "duaTrilingualLearning": "v1282",
-    "duaWordMeaningReviewCount": 20
+    "duaTrilingualLearning": "v1283",
+    "duaWordMeaningReviewCount": 120
   },
   "updatedAt": "2026-10-08T21:07:54.808Z",
   "deployTrigger": "kids-startup-stability-v1278",
