@@ -60,6 +60,37 @@ function checkJson(label, file) {
   }
 }
 
+// Qurʾān-Player runtime regression guard. No layout/CSS changes.
+const quranRuntimePaths = [
+  "assets/dar-quran-player.js",
+  "assets/dar-quran-audio-pack.js",
+  "test/assets/dar-quran-player.js",
+  "test/assets/dar-quran-audio-pack.js"
+];
+for (const file of quranRuntimePaths) checkJsSyntax(file, read(file));
+const quranPlayerProd = read(quranRuntimePaths[0]);
+const quranPackProd = read(quranRuntimePaths[1]);
+if (quranPlayerProd !== read(quranRuntimePaths[2])) fail("Qurʾān-Player: Test-/Besucher-Runtime unterschiedlich");
+else ok("Qurʾān-Player: Test-/Besucher-Runtime synchron");
+if (quranPackProd !== read(quranRuntimePaths[3])) fail("Qurʾān-Audio-Pack: Test-/Besucher-Runtime unterschiedlich");
+else ok("Qurʾān-Audio-Pack: Test-/Besucher-Runtime synchron");
+for (const [marker, label] of [
+  ["fallbackReciterTried", "begrenzter Rezitator-Fallback"],
+  ["recoverPlayback(", "Wiedergabe-Stall-Recovery"],
+  ["dataLoadSerial", "asynchroner Vers-Ladeschutz"],
+  ["activeDataRequest", "deduplizierte Sūrah-Ladevorgänge"],
+  ["returnQuranRoute", "Rücknavigation"],
+  ["next: function () { return nextAyah(false); }", "native iOS Nächster Titel"],
+  ["prev: function () { return prevAyah(); }", "native iOS Voriger Titel"]
+]) {
+  if (!quranPlayerProd.includes(marker)) fail("Qurʾān-Player: " + label + " fehlt");
+}
+if (!quranPackProd.includes("retryCounts") || !quranPackProd.includes("have === AYAH_TOTAL")) {
+  fail("Qurʾān-Audio-Pack: Download-Begrenzung oder vollständiger Abschluss fehlt");
+} else {
+  ok("Qurʾān-Audio-Pack: Retry-/Vollständigkeitsregel vorhanden");
+}
+
 // Visitor app
 const indexHtml = read("index.html");
 if (!indexHtml.includes("function render(")) fail("index.html: render() fehlt");
