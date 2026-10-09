@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v175-fullbleed1279",
-  "label": "KIDS · V1.08.96",
+  "buildId": "kids-shell-v176-global-swipe1280",
+  "label": "KIDS · V1.08.97",
   "releasedAt": "2026-10-08T21:07:54.808Z",
-  "note": "KIDS V1.08.96: Startbild des freigegebenen Moscheemotivs unter iOS bis an die Statusleiste geführt, Startinhalt in der Höhe des freigegebenen zweiten Referenzbilds ohne automatischen Scroll-Sprung, überflüssige Standort-Berechnungszeile unter den Gebetszeiten entfernt. Standortwahl, Gebetszeiten, Countdown und übrige Inhalte bleiben erhalten.",
+  "note": "KIDS V1.08.97: Globale gestengesteuerte Zurück-Navigation per iOS TouchEvents-Fallback und PointerEvents auf iPhone/iPad; animiertes Ziehen ab linkem Rand und sanfte Rückfederung bei Abbruch. Auch Gebetszeiten-Vollansicht, Duʿāʾ-Lernmodus und Content-Detail unterstützt. Vertikales Scrollen und horizontale Lernstreifen geschützt. Freigegebenes Moscheemotiv und Gebetszeiten unverändert.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
