@@ -7259,7 +7259,7 @@
       "id": "android-native-launcher-icons-widgets-2026-10-09",
       "at": "2026-10-09T17:00:00+02:00",
       "approvedBy": "user-explicit-installed-app-icon-switch-and-android-homescreen-widgets",
-      "reason": "Nutzer beauftragt ausdrücklich: in der installierten Android-App App-Icons direkt wechseln und auf dem Homescreen aktualisieren; echte Android-Homescreen-Widgets für Gebetszeiten und religiöse Inhalte bereitstellen sowie eine systemeigene Widget-Auswahl aus der App ermöglichen. Keine Kids-, Push- oder Apple-TV-Änderung. Ergänzung 2026-10-09: den bereits vorhandenen App-Icon-Wähler in den echten App-Einstellungen mit DarNative.setAppIcon/currentAppIcon verbinden und parallel die PWA/WebAPK-Iconpräferenz spiegeln. Ergänzung 2026-10-09: alle 18 nativen Android-Launcher-Aliases als Adaptive Icons ausliefern, damit Android keine zusätzliche graue/helle Außenfläche um das quadratische Logo legt und die vorhandene DĀR-Grafik die Launcher-Maske korrekt ausfüllt. Ergänzung 2026-10-09: native Android-Einstellungsoberfläche per Worker-Injektion absichern, damit Widgets & Launcher-Icon unabhängig vom ausgelieferten Web-Shell-Stand erreichbar bleiben.",
+      "reason": "Nutzer beauftragt ausdrücklich: in der installierten Android-App App-Icons direkt wechseln und auf dem Homescreen aktualisieren; echte Android-Homescreen-Widgets für Gebetszeiten und religiöse Inhalte bereitstellen sowie eine systemeigene Widget-Auswahl aus der App ermöglichen. Keine Kids-, Push- oder Apple-TV-Änderung. Ergänzung 2026-10-09: den bereits vorhandenen App-Icon-Wähler in den echten App-Einstellungen mit DarNative.setAppIcon/currentAppIcon verbinden und parallel die PWA/WebAPK-Iconpräferenz spiegeln. Ergänzung 2026-10-09: alle 18 nativen Android-Launcher-Aliases als Adaptive Icons ausliefern, damit Android keine zusätzliche graue/helle Außenfläche um das quadratische Logo legt und die vorhandene DĀR-Grafik die Launcher-Maske korrekt ausfüllt. Ergänzung 2026-10-09: native Android-Einstellungsoberfläche per Worker-Injektion absichern, damit Widgets & Launcher-Icon unabhängig vom ausgelieferten Web-Shell-Stand erreichbar bleiben. Ergänzung 2026-10-09: Erwachsenen-Android-only Build/Signierung wiederherstellen, ohne Kids/TV/iOS; CI-VersionCode wieder monoton über den GitHub-Run erhöhen, damit neue signierte APKs installierte ältere Versionen aktualisieren können.",
       "paths": [
         "content/admin/change-scope-lock.json",
         "android/",
@@ -7267,7 +7267,9 @@
         "assets/dar-setup-hub.js",
         ".github/workflows/android-native-widgets-check.yml",
         "index.html",
-        "cloudflare/site-router.js"
+        "cloudflare/site-router.js",
+        ".github/workflows/android-adult-native-build.yml",
+        "android/app/build.gradle.kts"
       ],
       "expiresAt": "2026-11-30T23:59:00.000Z"
     }
