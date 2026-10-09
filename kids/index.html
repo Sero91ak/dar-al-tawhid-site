@@ -5795,7 +5795,7 @@ function renderQuizQuestion(){
     if(this.disabled)return;
     quizSpeak(quizPrompt(q),{quizPrompt:true,source:"kids-quiz-question"});
   });
-  document.getElementById("quizNext").addEventListener("click",function(){currentQuizIndex++;renderQuizQuestion()});
+  document.getElementById("quizNext").addEventListener("click",function(){window.DARKidsTermLearning?.stop?.();currentQuizIndex++;renderQuizQuestion()});
   setTimeout(function(){
     if(currentQuiz[currentQuizIndex]!==q)return;
     refreshQuizListenState();
@@ -5855,14 +5855,30 @@ function chooseQuizAnswer(index,button){
     var canExplain=!!(q.explanation&&window.DARKidsOwnerVoice&&
       typeof window.DARKidsOwnerVoice.has==="function"&&
       window.DARKidsOwnerVoice.has(q.explanation));
+    function questionStillOpen(){
+      var modal=document.getElementById("quizModal");
+      return !!(modal&&modal.classList.contains("open")&&
+        currentQuizIndex===answeredIndex&&currentQuiz[currentQuizIndex]===answeredQuestion);
+    }
+    function playQuizTermExplanation(){
+      if(!questionStillOpen()||!window.DARKidsTermLearning?.playFor)return;
+      var correctWords=(answeredQuestion.answers||[]).filter(function(x){return x.correct}).map(function(x){return x.label||""});
+      window.DARKidsTermLearning.playFor(
+        [answeredQuestion.question,answeredQuestion.explanation,answeredQuestion.topic,answeredQuestion.category].concat(correctWords).join(" "),
+        {age:currentKidsQuizAgeBand(),max:2,stillValid:questionStillOpen}
+      ).catch(function(){});
+    }
     quizSpeak(q.success,{
       source:"kids-quiz-feedback",
-      onended:canExplain?function(){
-        var modal=document.getElementById("quizModal");
-        if(!modal||!modal.classList.contains("open"))return;
-        if(currentQuizIndex!==answeredIndex||currentQuiz[currentQuizIndex]!==answeredQuestion)return;
-        quizSpeak(answeredQuestion.explanation,{source:"kids-quiz-explanation"});
-      }:undefined
+      onended:function(){
+        if(!questionStillOpen())return;
+        if(canExplain){
+          quizSpeak(answeredQuestion.explanation,{
+            source:"kids-quiz-explanation",
+            onended:playQuizTermExplanation
+          });
+        }else{playQuizTermExplanation()}
+      }
     });
   }else{
     quizQuestionHadError=true;
