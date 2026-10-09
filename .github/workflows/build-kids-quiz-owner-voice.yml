@@ -53,7 +53,7 @@ jobs:
       ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
       ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
       ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
-      VOICE_BUILD_SCOPE: ${{ github.event_name == 'workflow_dispatch' && inputs.scope || (github.event_name == 'schedule' || contains(github.event.head_commit.message, '[quiz-auto]') || contains(github.event.head_commit.message, '[quiz-batch]')) && 'quiz' || contains(github.event.head_commit.message, '[voice-pause]') && 'pause' || contains(github.event.head_commit.message, '[dua-only]') && 'dua' || contains(github.event.head_commit.message, '[quiz-only]') && 'quiz' || 'full' }}
+      VOICE_BUILD_SCOPE: ${{ github.event_name == 'workflow_dispatch' && inputs.scope || (github.event_name == 'schedule' || contains(github.event.head_commit.message, '[quiz-auto]') || contains(github.event.head_commit.message, '[quiz-batch]')) && 'quiz' || contains(github.event.head_commit.message, '[voice-pause]') && 'pause' || contains(github.event.head_commit.message, '[dua-only]') && 'dua' || contains(github.event.head_commit.message, '[quiz-only]') && 'quiz' || 'pause' }}
       QUIZ_BATCH_START: ${{ github.event_name == 'workflow_dispatch' && inputs.quiz_start || '' }}
       QUIZ_BATCH_COUNT: ${{ github.event_name == 'workflow_dispatch' && inputs.quiz_count || '' }}
       VOICE_AUTO_QUEUE: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.auto_queue) || (github.event_name == 'push' && contains(github.event.head_commit.message, '[quiz-auto]')) }}
@@ -64,19 +64,25 @@ jobs:
         with:
           ref: main
 
-      - name: Auto-scope pure Dua data pushes
-        if: github.event_name == 'push' && env.VOICE_BUILD_SCOPE == 'full'
+      # Safe default: code/CI changes MUST NOT trigger a costly full quiz/Duʿāʾ render.
+      # Only explicitly selected workflow_dispatch and scoped source changes may render.
+      - name: Auto-scope actual voice source changes
+        if: github.event_name == 'push' && env.VOICE_BUILD_SCOPE == 'pause' && !contains(github.event.head_commit.message, '[voice-pause]')
         shell: bash
         run: |
           set -euo pipefail
-          mapfile -t changed < <(git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" | sed '/^$/d')
+          # First parent works for both normal pushes and GitHub merge commits.
+          mapfile -t changed < <(git diff --name-only "$GITHUB_SHA^1" "$GITHUB_SHA" | sed '/^$/d')
           if printf '%s\n' "${changed[@]}" | grep -Fxq 'kids/data/quiz-kids.json'; then
             echo "VOICE_BUILD_SCOPE=quiz" >> "$GITHUB_ENV"
             echo "VOICE_AUTO_QUEUE=true" >> "$GITHUB_ENV"
-            echo "Quiz source changed: generate only missing and corrected question audio."
+            echo "Quiz content changed: generate only missing/updated approved question audio."
           elif [ "${#changed[@]}" -eq 1 ] && [ "${changed[0]}" = "kids/data/dua-kids.json" ]; then
             echo "VOICE_BUILD_SCOPE=dua" >> "$GITHUB_ENV"
-            echo "Pure kids/data/dua-kids.json push detected -> VOICE_BUILD_SCOPE=dua"
+            echo "Exclusive Duʿāʾ source update: rendering its approved changes."
+          else
+            echo "VOICE_BUILD_SCOPE=pause" >> "$GITHUB_ENV"
+            echo "Non-voice code update: no paid synthesis is authorized."
           fi
 
       - name: Resolve available DĀR owner voice path
