@@ -1,12 +1,12 @@
 {
-  "timestamp": "2026-10-09T15:33:38Z",
+  "timestamp": "2026-10-09T15:34:12Z",
   "trigger": "workflow_run",
-  "finishedDeployConclusion": "cancelled",
-  "finishedDeployRun": "37952550586",
+  "finishedDeployConclusion": "success",
+  "finishedDeployRun": "37951965657",
   "live": {
-    "buildId": "kids-shell-v181-elastic1286",
-    "label": "KIDS · V1.09.02",
-    "homeBytes": 501741,
+    "buildId": "kids-shell-v182-unified-header1287",
+    "label": "KIDS · V1.09.03",
+    "homeBytes": 501755,
     "homeContainsPrayerAssets1275": false,
     "homeContainsBuild1275": false,
     "cssBytes": 94130,
@@ -25,8 +25,8 @@
     "trilingualWordLearningReady": true,
     "trilingualAssets": {
       "learning": {
-        "ref": "/kids/dua-smart-learn.js?v=1286",
-        "bytes": 31237
+        "ref": "/kids/dua-smart-learn.js?v=1287",
+        "bytes": 31396
       },
       "trilingualCss": {
         "ref": "/kids/dua-learn-trilingual-v1282.css?v=1285",
@@ -49,8 +49,8 @@
       "head_sha": "f82ffd3125927a08064399b19029dcca5d02ce65",
       "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37952567341",
       "id": 37952567341,
-      "status": "pending",
-      "updated_at": "2026-10-09T15:33:02Z"
+      "status": "in_progress",
+      "updated_at": "2026-10-09T15:34:07Z"
     },
     {
       "conclusion": "cancelled",
