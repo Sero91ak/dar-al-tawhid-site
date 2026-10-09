@@ -73,6 +73,7 @@ class MainActivity : AppCompatActivity() {
         ActivityResultContracts.RequestPermission()
     ) { granted ->
         if (granted) DarPush.bootstrap(application)
+        if (::webView.isInitialized) injectBridge()
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -215,6 +216,10 @@ class MainActivity : AppCompatActivity() {
         val device = DarPush.deviceId(this)
         val sub = DarPush.subscriptionId()
         val token = DarPush.pushToken()
+        val notificationsAllowed = Build.VERSION.SDK_INT < 33 ||
+            ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) ==
+                PackageManager.PERMISSION_GRANTED
+        val notificationState = jsString(if (notificationsAllowed) "granted" else "denied")
         val js = """
             (function(){
               try{
@@ -290,12 +295,15 @@ class MainActivity : AppCompatActivity() {
                   root.classList.add("dar-android-native-app");
                   root.classList.add("is-android");
                 }
+                // Reflect the actual Android OS permission. Do not claim
+                // granted simply because the native WebView is running.
+                var nativeNotificationState=${notificationState};
                 window.Notification=window.Notification||function(){};
-                try{Object.defineProperty(window.Notification,"permission",{configurable:true,get:function(){return "granted"}})}catch(e){}
-                window.Notification.requestPermission=function(){return Promise.resolve("granted")};
+                try{Object.defineProperty(window.Notification,"permission",{configurable:true,get:function(){return nativeNotificationState}})}catch(e){}
+                window.Notification.requestPermission=function(){return Promise.resolve(nativeNotificationState)};
                 window.hasNotificationApi=function(){return true};
-                window.getNotificationPermission=function(){return "granted"};
-                window.requestNotificationPermission=function(){return Promise.resolve("granted")};
+                window.getNotificationPermission=function(){return nativeNotificationState};
+                window.requestNotificationPermission=function(){return Promise.resolve(nativeNotificationState)};
                 function nativeReady(){
                   return {ready:true,optedIn:true,subscriptionId:window.DAR_ANDROID_ONESIGNAL_ID||"",token:window.DAR_ANDROID_PUSH_TOKEN||"",os:window.OneSignal||{}};
                 }
