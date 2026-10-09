@@ -648,7 +648,7 @@
       if ((Number(live.currentTime) || 0) > at + 0.2 || live.readyState >= 3) return;
       state.current = at;
       state.resumeAt = at;
-      recoverPlayback(kind);
+      if (engine.wantPlay) tryFallback();
     }, 8000);
   }
   function onAudioSignal(ev) {
@@ -760,10 +760,12 @@
       if (path.indexOf("http") === 0) return path;
       return origin + path;
     }
-    if (pack && typeof pack.url === "function") list.push(absProxy(pack.url(rec.edition, g)));
-    list.push(absProxy("/quran-audio/" + rec.edition + "/" + g + ".mp3"));
+    // Use progressive audio hosts first: the app proxy buffers an entire MP3 before returning it.
+    // Keep the same proxy as a fallback, never remove an existing audio provider.
     list.push("https://everyayah.com/data/" + rec.folder + "/" + s + a + ".mp3");
     list.push("https://cdn.islamic.network/quran/audio/128/" + rec.edition + "/" + g + ".mp3");
+    if (pack && typeof pack.url === "function") list.push(absProxy(pack.url(rec.edition, g)));
+    list.push(absProxy("/quran-audio/" + rec.edition + "/" + g + ".mp3"));
     return list.filter(function (u, i, arr) { return u && arr.indexOf(u) === i; });
   }
   function missingAudioHalt(qari, surah, ayah, url) {
@@ -867,7 +869,7 @@
     var wantQari = state.reciter;
     var surah = state.surah;
     var ayah = state.ayah;
-    resolveSource(wantQari, surah, ayah).then(function (hit) {
+    function applySource(hit) {
       if (gen !== playGen) {
         if (hit && hit.saved) { try { URL.revokeObjectURL(hit.url); } catch (eStale) {} }
         return;
@@ -934,7 +936,17 @@
       paintChrome();
       paintMini();
       followPlayingAyah(false);
-    });
+    }
+    // iOS Safari requires the first audio.play() to occur in the direct tap gesture.
+    // Resolve the deterministic streaming URL synchronously on online sessions.
+    if (!isOffline()) {
+      var directUrls = urlsForWithRec(reciterById(wantQari), surah, ayah);
+      applySource(directUrls.length ? { qari: wantQari, url: directUrls[0] } : null);
+    } else {
+      resolveSource(wantQari, surah, ayah).then(applySource, function () {
+        if (gen === playGen) missingAudioHalt(wantQari, surah, ayah, "");
+      });
+    }
   }
   function preloadNext() {}
   function setFallbackSourceAtPosition(a, url) {
@@ -4391,8 +4403,8 @@
     if (!a.paused && now - (engine.lastProgressAt || 0) > 20000 && now - (engine.watchReloadAt || 0) > 20000) {
       engine.watchReloadAt = now;
       state.resumeAt = Number(a.currentTime) || 0;
-      logAudio("watchdog reload after no progress", snapAudio(a));
-      recoverPlayback("watchdog");
+      logAudio("watchdog try next audio source after no progress", snapAudio(a));
+      tryFallback();
     }
   }, 4000);
   window.addEventListener("online", function () {
