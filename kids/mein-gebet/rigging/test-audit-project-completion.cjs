@@ -101,4 +101,48 @@ check("full strict CLI audit returns nonzero with missing GLBs",()=>{
  assert.equal(result.ready,false);
  assert.equal(result.localBinaryEvidence.pass,false);
 });
+check("even an entirely fabricated green metadata record cannot authorize production",()=>{
+ const s=clone(status),b=clone(boy),g=clone(girl),h=clone(sources),storyboard=clone(story);
+ for(const [id,m] of [["boy",b],["girl",g]]){
+   for(const key of Object.keys(m.accept))m.accept[key]=true;
+   m.approvedModelChecksum.sha256=(id==="boy"?"a":"b").repeat(64);
+   m.approvedModelChecksum.bytes=1800;
+   m.approvedModelChecksum.approvedDate="2026-10-09";
+   m.approvedModelChecksum.reviewRecordId="synthetic-only-not-a-real-review";
+   m.approvedModelChecksum.reviewedAngles=m.requiredReviewAngles.slice();
+   const v=s.technicalQA.modelVerification[id];
+   v.glbSha256=m.approvedModelChecksum.sha256;
+   v.structureValid=true;
+   v.bindPoseAndBoneLengthsVerified=true;
+   v.animationSamplerPayloadVerified=true;
+ }
+ g.referenceStatus.independentFullTurnaroundApproved=true;
+ g.religiousPoseReview="fully_independently_reviewed";
+ g.approvedModelChecksum.reviewedClothingChecks=g.requiredClothingChecks.slice();
+ const views={front:.94,threeQuarter:.94,right:.94,back:.94,left:.94};
+ s.boy.independentFiveViewSilhouetteIoU=views;
+ s.boy.threeQuarterCameraPhysicallyCalibrated=true;
+ s.boy.fiveViewSilhouetteAbove90Percent=true;
+ s.boy.requiredFiveViewOriginalityApproved=true;
+ s.boy.manualFaceKufiHairClothApproval=true;
+ s.girl.independentFiveViewSilhouetteIoU=views;
+ s.girl.threeQuarterCameraPhysicallyCalibrated=true;
+ s.girl.fiveIndependentViewsApproved=true;
+ s.girl.fullHairAndNeckCoverage3DApproved=true;
+ s.girl.matchingPinkHijabAndDress3DApproved=true;
+ s.technicalQA.translationGuardVerifiedAgainstApprovedGLB=true;
+ s.prayer.correctForBothProfilesApproved=true;
+ s.prayer.approvedTeachingAnimations=["Qiyam","Takbir","Ruku","RiseFromRuku","Sujud","Jalsah","SecondSujud","Tashahhud","Salam"];
+ s.prayer.pendingTeachingClips=[];
+ s.prayer.poseContactFrameReviewApproved=true;
+ s.prayer.theologicalSourcesFinalReviewed=true;
+ h.approvedToTeach=true;storyboard.approvedForProduction=true;
+ s.app.realIPadTouchSafariTestPassed=true;s.app.realIPhoneWebViewTestPassed=true;
+ s.app.offlineTestPassed=true;s.app.independentWorkingHttpsStaging=true;
+ s.reviewGates.originalHumanApproval=true;s.reviewGates.productionUserApproval=true;
+ const r=audit(s,b,g,storyboard,h);
+ assert.equal(r.metadataReady,true);
+ assert.equal(r.ready,false);
+ assert.equal(r.physicalGLBVerificationRequired,true);
+});
 console.log(passed+" audit-blocker regression tests PASS. No real GLB validated, no release.");
