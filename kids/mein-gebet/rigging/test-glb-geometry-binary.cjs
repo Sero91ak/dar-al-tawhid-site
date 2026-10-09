@@ -2,7 +2,7 @@
 "use strict";
 /* Synthetic *real Buffer* geometry QA, no original model or pose approval. */
 const assert=require("node:assert/strict");
-const {validateGeometryBytes}=require("./validate-glb-geometry-binary.cjs");
+const {validateGeometryBytes,spatialThicknessRatio}=require("./validate-glb-geometry-binary.cjs");
 function fixture(){
  const chunks=[],bufferViews=[],accessors=[];
  function add(data,type,componentType,count){
@@ -91,6 +91,17 @@ bad("reject zero-area triangle with unique but overlapping positions",(_,bin,off
 bad("reject duplicate index triangle at the area gate",(_,bin,offsets)=>{
   bin.writeUInt16LE(1,offsets[5]+4);
 },"Excessive zero-area");
+test("oblique billboard looks extended in XYZ but has zero real thickness",()=>{
+ const pts=[[0,0,0],[1,0,-1],[0,1,-1],[1,1,-2],[.5,.25,-.75]];
+ assert.equal(spatialThicknessRatio(pts)<1e-8,true);
+});
+test("real tetrahedron has nonzero spatial thickness even if rotated",()=>{
+ const pts=[[0,0,0],[1,0,0],[0,1,0],[.15,.15,.7],[.3,.4,.2]];
+ assert.ok(spatialThicknessRatio(pts)>.05);
+});
+test("collinear vertices cannot fake spatial thickness",()=>{
+ assert.equal(spatialThicknessRatio([[0,0,0],[1,1,1],[2,2,2],[3,3,3]]),0);
+});
 test("default production minimum rejects tiny synthetic mesh",()=>{
  const {g,bin}=fixture();const r=validateGeometryBytes(g,bin);
  assert.equal(r.valid,false);assert.ok(r.errors.some(x=>x.includes("Too few actually referenced")));
