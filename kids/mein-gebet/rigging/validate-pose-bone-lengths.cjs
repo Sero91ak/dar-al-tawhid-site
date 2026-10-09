@@ -196,7 +196,7 @@ function validatePoseBoneLengths(g,bin,{tolerance=EPSILON_METRES}={}){
        for(const c of animationChannels){
          const times=c.time;
          let k=0;
-         while(k+1<times.length&&times[k+1]<t)k++;
+         while(k+1<times.length&&times[k+1]<=t)k++;
          let value=c.values[k];
          if(t<=times[0])value=c.values[0];
          else if(t>=times[times.length-1])value=c.values.at(-1);
