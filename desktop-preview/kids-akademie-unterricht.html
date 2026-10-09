@@ -774,10 +774,10 @@ body[data-kids-age="9-10"] .lesson-stage .recap-lesson p{
   .lesson-stage button,.journey-bar span{transition:none!important;animation:none!important}
 }
 </style></head>
-<body data-profile="boy" data-preview-release="V6.4-20261009" data-preview-deploy="v6.4-guided-answer-preview"><main class="wrap">
+<body data-profile="boy" data-preview-release="V6.5-20261009" data-preview-deploy="v6.5-resume-preview-only"><main class="wrap">
 
 <header class="academy-header">
- <div class="academy-brand"><div class="brand">DĀR AL TAWḤĪD · KIDS</div><div class="stage">Meine Lernakademie · Vorschau V6.4 <span class="preview-release-stamp">Ehrliche Antworten</span></div></div>
+ <div class="academy-brand"><div class="brand">DĀR AL TAWḤĪD · KIDS</div><div class="stage">Meine Lernakademie · Vorschau V6.5 <span class="preview-release-stamp">Ehrliche Antworten</span></div></div>
  <div class="academy-header-actions"><button type="button" class="preview-refresh" id="previewRefresh" aria-label="HTML-Vorschau neu laden">↻ <span>Aktualisieren</span></button><div class="academy-profile" id="academyProfile"><img id="academyAvatar" alt="" src="/kids/assets/profile-avatars/boy-kufi-v1235.svg" width="42" height="42"><span class="academy-profile-names"><strong id="profileLabel">Kinderprofil wird geladen</strong><small id="profileRole">Unterricht</small><small id="academyAgeLabel" class="academy-age-label" aria-live="polite">Altersstufe</small></span></div></div>
 </header><p id="academyAgeWarning" class="academy-age-warning" role="alert" hidden>Bitte wähle im Kinderprofil eine passende Altersstufe aus.</p>
 <section class="academy-home" id="academyHome">
@@ -927,6 +927,31 @@ const questions=()=>exercises[age]||[];
 const address=()=>{const role=gender==="girl"?"liebe Schwester":"lieber Bruder";const first=profileName.split(/\s+/)[0];return first?role+" "+first:role;};
 const storageKey=()=>["kids",VERSION,id,age,"sidq"].join(".");
 const oldRecord=()=>{try{return JSON.parse(localStorage.getItem(storageKey())||"null")}catch(_){return null}};
+const draftKey=()=>["kids",VERSION,id,age,"sidq","draft-v1"].join(".");
+function readDraft(){
+ try{
+  const d=JSON.parse(localStorage.getItem(draftKey())||"null");
+  if(!d||d.lessonId!=="sidq"||d.id!==id||d.age!==age)return null;
+  const elapsed=Date.now()-Number(d.savedAt);
+  if(!Number.isFinite(elapsed)||elapsed<0||elapsed>7*86400000)return null;
+  if(!Number.isInteger(d.step)||d.step<0||d.step>4)return null;
+  if(!Number.isInteger(d.qIndex)||d.qIndex<0||d.qIndex>=questions().length)return null;
+  if(!d.score||!Number.isInteger(d.score.done)||d.score.done<0||d.score.done>questions().length)return null;
+  const val=v=>Number.isInteger(v)&&v>=0?Math.min(v,questions().length):0;
+  return {step:d.step,unlocked:Math.min(4,Math.max(d.step,val(d.unlocked))),qIndex:d.qIndex,
+   score:{done:val(d.score.done),correct:val(d.score.correct),choices:val(d.score.choices),neededHelp:val(d.score.neededHelp)}};
+ }catch(_){return null}
+}
+function saveDraft(nextStep=step,nextIndex=qIndex){
+ if(!AGE_UI[age])return;
+ try{
+  const record={lessonId:"sidq",id,age,savedAt:Date.now(),step:nextStep,unlocked:Math.max(unlocked,nextStep),
+   qIndex:nextIndex,score:{done:score.done,correct:score.correct,choices:score.choices,neededHelp:score.neededHelp}};
+  localStorage.setItem(draftKey(),JSON.stringify(record));
+ }catch(_){}
+}
+function clearDraft(){try{localStorage.removeItem(draftKey())}catch(_){}}
+
 function ageKey(x){
  const t=String(x??"").trim().replace(/[–—−]/g,"-").replace(/\s+/g,"");
  return Object.hasOwn(exercises,t)?t:null;
@@ -1106,13 +1131,13 @@ function renderHome(){
    $("#journeyBar").style.width="0%";
    return;
  }
- const rec=oldRecord(),due=Number(rec?.nextDue||0),pending=rec&&due<=Date.now();
+ const rec=oldRecord(),draft=readDraft(),canContinue=!!draft&&(draft.step>0||draft.qIndex>0),due=Number(rec?.nextDue||0),pending=rec&&due<=Date.now();
  $("#courseStatus").textContent=!rec?"Bereit":pending?"Wiederholen":"Schon geübt";
  $("#reviewNotice").textContent=!rec?ui.journeyNew:pending?ui.journeyDue:ui.journeyDone;
- $("#todaySummary").textContent=!rec?"Dein nächster Schritt ist bereit.":pending?"Heute kannst du dich erinnern.":"Du darfst den Unterricht jederzeit wiederholen.";
+ $("#todaySummary").textContent=canContinue?"Du kannst deine Unterrichtsstunde dort fortsetzen, wo du pausiert hast.":!rec?"Dein nächster Schritt ist bereit.":pending?"Heute kannst du dich erinnern.":"Du darfst den Unterricht jederzeit wiederholen.";
  $("#journeyBar").style.width=rec?"100%":"12%";
  $("#journeyDetail").textContent=!rec?"Schritt für Schritt, in deinem Tempo.":pending?"Deine Wiederholung ist bereit.":"Nächste Erinnerung: "+new Date(due).toLocaleDateString("de-DE");
- $(".today-button").firstChild.textContent=rec?ui.repeat+" ":ui.start+" ";
+ $(".today-button").firstChild.textContent=canContinue?"Unterricht fortsetzen ":rec?ui.repeat+" ":ui.start+" ";
 }
 
 function syncProfile(force=false){
@@ -1151,8 +1176,13 @@ function prepareOwnerVoice(){
 function home(){stopAll();hideLesson();renderHome();window.scrollTo(0,0)}
 function begin(){
  syncProfile();if(!AGE_UI[age]){renderHome();return}prepareOwnerVoice();$("#academyHome").hidden=true;$("#lessonMain").hidden=false;
- step=0;unlocked=0;qIndex=0;finished=false;score={done:0,correct:0,choices:0,neededHelp:0};
- showStep(0,false);window.scrollTo(0,0);
+ const draft=readDraft();
+ if(draft){
+  step=draft.step;unlocked=draft.unlocked;qIndex=draft.qIndex;finished=step===4;score=draft.score;
+ }else{
+  step=0;unlocked=0;qIndex=0;finished=false;score={done:0,correct:0,choices:0,neededHelp:0};
+ }
+ showStep(step,false);window.scrollTo(0,0);
 }
 function showStep(n,scroll=true){
  if(n<0||n>unlocked||n>=5)return;
@@ -1161,6 +1191,7 @@ function showStep(n,scroll=true){
  $("#previousStep").hidden=n===0;$("#forwardStep").hidden=n>=3;$("#lessonNavigation").hidden=n>=3;
  if(n<3)$("#forwardStep").firstChild.textContent=["Zur Erklärung ","Zu Qurʾān und Sunnah ","Jetzt mitdenken "][n];
  if(n===3&&!finished)showQuestion();if(n===4)showRecap();
+ saveDraft();
  if(scroll)$("#stageSurface").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});
 }
 function nextStep(){if(step<3){unlocked=Math.max(unlocked,step+1);showStep(step+1)}}
@@ -1266,6 +1297,9 @@ function check(){
  all(".choice-button").forEach(b=>b.disabled=true);
  $("#nextQuestion").hidden=qIndex===questions().length-1;$("#finishLesson").hidden=qIndex!==questions().length-1;
  $("#voiceRetake").hidden=true;stopMic(answerMode==="voice"&&voiceReady);
+ // Only progress numbers are saved; never voice recordings or children's answer text.
+ saveDraft(qIndex===questions().length-1?4:3,
+   qIndex===questions().length-1?qIndex:qIndex+1);
 }
 function finish(){finished=true;unlocked=4;showStep(4)}
 function showRecap(){
@@ -1280,10 +1314,10 @@ function persist(level){
  const n=(level==="help"||wrongChoices)?0:Math.min(Math.max(-1,formerIndex)+1,intervals.length-1);
  const due=new Date();due.setHours(12,0,0,0);due.setDate(due.getDate()+intervals[n]);
  const item={id,age,lessonId:"sidq",completedAt:Date.now(),nextDue:due.getTime(),intervalIndex:n,reviewCount:(Number(prev?.reviewCount)||0)+1,answerCount:score.done,choiceCorrect:score.correct,choiceAnswered:score.choices,neededHelp:score.neededHelp,selfReport:level};
- try{localStorage.setItem(storageKey(),JSON.stringify(item));$("#nextDue").textContent="Nächste Erinnerung: "+due.toLocaleDateString("de-DE")+". Du kannst jederzeit vorher üben."}catch(_){$("#nextDue").textContent="Lokal speichern ist nicht verfügbar. Du kannst trotzdem wiederholen."}
+ try{localStorage.setItem(storageKey(),JSON.stringify(item));clearDraft();$("#nextDue").textContent="Nächste Erinnerung: "+due.toLocaleDateString("de-DE")+". Du kannst jederzeit vorher üben."}catch(_){$("#nextDue").textContent="Lokal speichern ist nicht verfügbar. Du kannst trotzdem wiederholen."}
  all("[data-reflect]").forEach(b=>{b.classList.toggle("active",b.dataset.reflect===level);b.setAttribute("aria-pressed",String(b.dataset.reflect===level))});renderHome();
 }
-$("#previewRefresh").onclick=()=>{const url=new URL(location.href);url.searchParams.set("cb","v6.4-"+Date.now());location.replace(url.toString())};
+$("#previewRefresh").onclick=()=>{const url=new URL(location.href);url.searchParams.set("cb","v6.5-"+Date.now());location.replace(url.toString())};
 all("[data-open-lesson]").forEach(b=>b.onclick=begin);
 $("#backToAcademy").onclick=home;$("#backAfterLesson").onclick=home;
 $("#previousStep").onclick=()=>showStep(step-1);$("#forwardStep").onclick=nextStep;
@@ -1300,7 +1334,7 @@ $("#check").onclick=check;
  };
  $("#hint").onclick=()=>{$("#feedback").textContent=questions()[qIndex].hint};
 $("#repeat").onclick=()=>speak(3,[questions()[qIndex].prompt]);
-$("#nextQuestion").onclick=()=>{qIndex++;showQuestion()};$("#finishLesson").onclick=finish;
+$("#nextQuestion").onclick=()=>{qIndex++;showQuestion();saveDraft()};$("#finishLesson").onclick=finish;
 $("#mic").onclick=beginVoiceRecording;$("#cancelMic").onclick=finishRecording;$("#voiceRetake").onclick=beginVoiceRecording;
 $("#answer").oninput=()=>{if($("#answer").value.trim())choice=null};
 all("[data-reflect]").forEach(b=>b.onclick=()=>persist(b.dataset.reflect));
