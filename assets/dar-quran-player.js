@@ -2256,6 +2256,14 @@
   function dismissFullPlayer() {
     fullUiWanted = false;
     dismissUntil = Date.now() + 8000;
+    sheetEpoch += 1; // Invalidate any pending asynchronous menu redraw.
+    var root = playerRoot();
+    var openSheet = root && root.querySelector("[data-dqp-sheet]");
+    if (openSheet) {
+      openSheet.classList.remove("is-open");
+      openSheet.hidden = true;
+      openSheet.innerHTML = "";
+    }
     hideFullPlayerUi();
   }
   function wantFullPlayer() {
