@@ -1,0 +1,389 @@
+{
+  "project": "DAR AL TAWḤĪD · Quellenkritische Šarḥ-/Āṯār-Prüfung",
+  "range": "HAD-0493–HAD-0542",
+  "auditedDate": "2026-10-09",
+  "totalInspected": 50,
+  "hadithCount": 30,
+  "atharCount": 20,
+  "hadithSharhVerified": 7,
+  "hadithSharhOpen": 23,
+  "atharAttributionVerified": 0,
+  "atharAttributionOpen": 20,
+  "openTotal": 43,
+  "policy": {
+    "hadith": "Authentischer Primärbericht + direkt belegbarer früher arabischer Kommentar",
+    "athar": "Kein Šarḥ erforderlich; originaler Isnād/Attribution einzeln verifizieren",
+    "printEdition": "Nicht ohne externen Editionsnachweis behaupten",
+    "sourceOfTruth": "apple-tv/hadith/series/",
+    "blobs": "Nur mit aktuellem Datei-SHA verändern",
+    "publishing": "Technischen Worker-Deploy und HTTP-Endpunkt separat prüfen"
+  },
+  "qualityCorrections": [
+    {
+      "id": "HAD-0499",
+      "type": "wrong-speaker-corrected",
+      "source": "Sunan ad-Dārimī, al-Muqaddimah, Nr.204",
+      "correctSpeaker": "ʿAbdullāh ibn Masʿūd",
+      "commit": "04cf9f4b42b366a2139520ed7af087fe1bb62740"
+    },
+    {
+      "id": "HAD-0498",
+      "type": "primary-chain-added",
+      "source": "Ṣaḥīḥ Muslim, al-Muqaddimah, Bd.1 S.16 digital",
+      "commit": "cb9ad6a05ee8c5d2724942909056423cb60e7f33"
+    }
+  ],
+  "nextAction": "23 Hadith-Kommentare und 20 Athar-Attributionen einzeln prüfen, anschließend 0543–0592. Verifizierten digitalen Band/Seitenbezug und Druckedition getrennt behandeln.",
+  "entries": [
+    {
+      "id": "HAD-0493",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Authentischen originalen Āṯar-Wortlaut, Sprecher und Isnād einzeln nachweisen"
+    },
+    {
+      "id": "HAD-0494",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Authentischen originalen Āṯar-Wortlaut, Sprecher und Isnād einzeln nachweisen"
+    },
+    {
+      "id": "HAD-0495",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Authentischen originalen Āṯar-Wortlaut, Sprecher und Isnād einzeln nachweisen"
+    },
+    {
+      "id": "HAD-0496",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Authentischen originalen Āṯar-Wortlaut, Sprecher und Isnād einzeln nachweisen"
+    },
+    {
+      "id": "HAD-0497",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Authentischen originalen Āṯar-Wortlaut, Sprecher und Isnād einzeln nachweisen"
+    },
+    {
+      "id": "HAD-0498",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Originalisnād in Muqaddimah Ṣaḥīḥ Muslim direkt dokumentiert; unabhängige Kettenprüfung noch offen."
+    },
+    {
+      "id": "HAD-0499",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Falsche Zuschreibung zu Ibn al-Mubārak berichtigt: Sprecher Ibn Masʿūd laut Sunan ad-Dārimī Nr.204; Kettenkritik offen."
+    },
+    {
+      "id": "HAD-0500",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Authentischen originalen Āṯar-Wortlaut, Sprecher und Isnād einzeln nachweisen"
+    },
+    {
+      "id": "HAD-0501",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Authentischen originalen Āṯar-Wortlaut, Sprecher und Isnād einzeln nachweisen"
+    },
+    {
+      "id": "HAD-0502",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Authentischen originalen Āṯar-Wortlaut, Sprecher und Isnād einzeln nachweisen"
+    },
+    {
+      "id": "HAD-0503",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Authentischen originalen Āṯar-Wortlaut, Sprecher und Isnād einzeln nachweisen"
+    },
+    {
+      "id": "HAD-0504",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Authentischen originalen Āṯar-Wortlaut, Sprecher und Isnād einzeln nachweisen"
+    },
+    {
+      "id": "HAD-0505",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Authentischen originalen Āṯar-Wortlaut, Sprecher und Isnād einzeln nachweisen"
+    },
+    {
+      "id": "HAD-0506",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Authentischen originalen Āṯar-Wortlaut, Sprecher und Isnād einzeln nachweisen"
+    },
+    {
+      "id": "HAD-0507",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Authentischen originalen Āṯar-Wortlaut, Sprecher und Isnād einzeln nachweisen"
+    },
+    {
+      "id": "HAD-0508",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Authentischen originalen Āṯar-Wortlaut, Sprecher und Isnād einzeln nachweisen"
+    },
+    {
+      "id": "HAD-0509",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Authentischen originalen Āṯar-Wortlaut, Sprecher und Isnād einzeln nachweisen"
+    },
+    {
+      "id": "HAD-0510",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Authentischen originalen Āṯar-Wortlaut, Sprecher und Isnād einzeln nachweisen"
+    },
+    {
+      "id": "HAD-0511",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Genaue Originalquelle und klassischen arabischen Direkt-Šarḥ einschließlich Ausgabe nachprüfen"
+    },
+    {
+      "id": "HAD-0512",
+      "recordType": "hadith",
+      "sharh": "verified",
+      "attribution": null,
+      "sourceAudit": "Original-Muslim-Bericht und Ibn-Raǧab-Šarḥ dokumentiert; digitale Werkpagination"
+    },
+    {
+      "id": "HAD-0513",
+      "recordType": "hadith",
+      "sharh": "verified",
+      "attribution": null,
+      "sourceAudit": "Original-Muslim-Bericht und Ibn-Raǧab-Šarḥ dokumentiert; digitale Werkpagination"
+    },
+    {
+      "id": "HAD-0514",
+      "recordType": "hadith",
+      "sharh": "verified",
+      "attribution": null,
+      "sourceAudit": "Original-Muslim-Bericht und Ibn-Raǧab-Šarḥ dokumentiert; digitale Werkpagination"
+    },
+    {
+      "id": "HAD-0515",
+      "recordType": "hadith",
+      "sharh": "verified",
+      "attribution": null,
+      "sourceAudit": "Original-Muslim-Bericht und Ibn-Raǧab-Šarḥ dokumentiert; digitale Werkpagination"
+    },
+    {
+      "id": "HAD-0516",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Genaue Originalquelle und klassischen arabischen Direkt-Šarḥ einschließlich Ausgabe nachprüfen"
+    },
+    {
+      "id": "HAD-0517",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Genaue Originalquelle und klassischen arabischen Direkt-Šarḥ einschließlich Ausgabe nachprüfen"
+    },
+    {
+      "id": "HAD-0518",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Genaue Originalquelle und klassischen arabischen Direkt-Šarḥ einschließlich Ausgabe nachprüfen"
+    },
+    {
+      "id": "HAD-0519",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Genaue Originalquelle und klassischen arabischen Direkt-Šarḥ einschließlich Ausgabe nachprüfen"
+    },
+    {
+      "id": "HAD-0520",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Genaue Originalquelle und klassischen arabischen Direkt-Šarḥ einschließlich Ausgabe nachprüfen"
+    },
+    {
+      "id": "HAD-0521",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Genaue Originalquelle und klassischen arabischen Direkt-Šarḥ einschließlich Ausgabe nachprüfen"
+    },
+    {
+      "id": "HAD-0522",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Genaue Originalquelle und klassischen arabischen Direkt-Šarḥ einschließlich Ausgabe nachprüfen"
+    },
+    {
+      "id": "HAD-0523",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Genaue Originalquelle und klassischen arabischen Direkt-Šarḥ einschließlich Ausgabe nachprüfen"
+    },
+    {
+      "id": "HAD-0524",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Genaue Originalquelle und klassischen arabischen Direkt-Šarḥ einschließlich Ausgabe nachprüfen"
+    },
+    {
+      "id": "HAD-0525",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Genaue Originalquelle und klassischen arabischen Direkt-Šarḥ einschließlich Ausgabe nachprüfen"
+    },
+    {
+      "id": "HAD-0526",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Genaue Originalquelle und klassischen arabischen Direkt-Šarḥ einschließlich Ausgabe nachprüfen"
+    },
+    {
+      "id": "HAD-0527",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Genaue Originalquelle und klassischen arabischen Direkt-Šarḥ einschließlich Ausgabe nachprüfen"
+    },
+    {
+      "id": "HAD-0528",
+      "recordType": "hadith",
+      "sharh": "verified",
+      "attribution": null,
+      "sourceAudit": "Original-Muslim-Bericht und Ibn-Raǧab-Šarḥ dokumentiert; digitale Werkpagination"
+    },
+    {
+      "id": "HAD-0529",
+      "recordType": "hadith",
+      "sharh": "verified",
+      "attribution": null,
+      "sourceAudit": "Original-Muslim-Bericht und Ibn-Raǧab-Šarḥ dokumentiert; digitale Werkpagination"
+    },
+    {
+      "id": "HAD-0530",
+      "recordType": "hadith",
+      "sharh": "verified",
+      "attribution": null,
+      "sourceAudit": "Original-Muslim-Bericht und Ibn-Raǧab-Šarḥ dokumentiert; digitale Werkpagination"
+    },
+    {
+      "id": "HAD-0531",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Genaue Originalquelle und klassischen arabischen Direkt-Šarḥ einschließlich Ausgabe nachprüfen"
+    },
+    {
+      "id": "HAD-0532",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Genaue Originalquelle und klassischen arabischen Direkt-Šarḥ einschließlich Ausgabe nachprüfen"
+    },
+    {
+      "id": "HAD-0533",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Genaue Originalquelle und klassischen arabischen Direkt-Šarḥ einschließlich Ausgabe nachprüfen"
+    },
+    {
+      "id": "HAD-0534",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Genaue Originalquelle und klassischen arabischen Direkt-Šarḥ einschließlich Ausgabe nachprüfen"
+    },
+    {
+      "id": "HAD-0535",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Genaue Originalquelle und klassischen arabischen Direkt-Šarḥ einschließlich Ausgabe nachprüfen"
+    },
+    {
+      "id": "HAD-0536",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Genaue Originalquelle und klassischen arabischen Direkt-Šarḥ einschließlich Ausgabe nachprüfen"
+    },
+    {
+      "id": "HAD-0537",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Genaue Originalquelle und klassischen arabischen Direkt-Šarḥ einschließlich Ausgabe nachprüfen"
+    },
+    {
+      "id": "HAD-0538",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Genaue Originalquelle und klassischen arabischen Direkt-Šarḥ einschließlich Ausgabe nachprüfen"
+    },
+    {
+      "id": "HAD-0539",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Genaue Originalquelle und klassischen arabischen Direkt-Šarḥ einschließlich Ausgabe nachprüfen"
+    },
+    {
+      "id": "HAD-0540",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Genaue Originalquelle und klassischen arabischen Direkt-Šarḥ einschließlich Ausgabe nachprüfen"
+    },
+    {
+      "id": "HAD-0541",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Authentischen originalen Āṯar-Wortlaut, Sprecher und Isnād einzeln nachweisen"
+    },
+    {
+      "id": "HAD-0542",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Authentischen originalen Āṯar-Wortlaut, Sprecher und Isnād einzeln nachweisen"
+    }
+  ]
+}
