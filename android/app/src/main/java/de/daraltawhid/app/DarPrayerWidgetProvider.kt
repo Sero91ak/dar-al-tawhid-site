@@ -11,6 +11,7 @@ import android.widget.RemoteViews
 import org.json.JSONObject
 import java.net.HttpURLConnection
 import java.net.URL
+import java.time.LocalDate
 import java.util.Locale
 import kotlin.concurrent.thread
 
@@ -57,12 +58,20 @@ class DarPrayerWidgetProvider : AppWidgetProvider() {
                 } finally {
                     response?.disconnect()
                 }
-                val settings = root ?: runCatching {
+                // Prayer times depend on the day. A cached response from
+                // yesterday can be dangerously misleading even if labelled
+                // "saved". Only allow an offline cache from the same day.
+                val currentDay = LocalDate.now().toString()
+                val sameDayCache = prefs.getString("cached_local_date", null) == currentDay
+                val settings = root ?: if (sameDayCache) runCatching {
                     JSONObject(prefs.getString("cached_response", "") ?: "")
-                }.getOrNull()
+                }.getOrNull() else null
                 val saved = root == null
                 if (root != null) {
-                    prefs.edit().putString("cached_response", root.toString()).apply()
+                    prefs.edit()
+                        .putString("cached_response", root.toString())
+                        .putString("cached_local_date", currentDay)
+                        .apply()
                 }
                 val source = settings?.optJSONObject("times")
                     ?: settings?.optJSONObject("prayers")
@@ -132,7 +141,7 @@ class DarPrayerWidgetProvider : AppWidgetProvider() {
             prefs.edit().putString("lat", lat.toString()).putString("lon", lon.toString())
                 .putString("city", city.take(60)).apply()
             if (previous.first != lat.toString() || previous.second != lon.toString()) {
-                prefs.edit().remove("cached_response").apply()
+                prefs.edit().remove("cached_response").remove("cached_local_date").apply()
             }
             val manager = AppWidgetManager.getInstance(context)
             val ids = manager.getAppWidgetIds(ComponentName(context, DarPrayerWidgetProvider::class.java))
