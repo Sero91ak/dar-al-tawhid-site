@@ -268,8 +268,9 @@
     }
   }
   function queueFocusedWord(){requestAnimationFrame(keepFocusedWordVisible)}
-  // Responsive fitting measures actual wrapped rows rather than estimating widths.
-  // Minimum sizes preserve reading comfort; long duʿāʾs scroll inside the stage.
+  // KIDS_DUA_ELASTIC_CENTER_V1286
+  // Short duas stay optically centered. Medium-length duas grow outwards from
+  // the center. Long text stays readable in three independently tracked lanes.
   function measureLines(selector){
     if(!root)return 0;
     var rows=Object.create(null);
@@ -281,29 +282,55 @@
   function fitReadingStage(){
     if(!root||!root.classList.contains("open")||!currentDua)return;
     var stage=root.querySelector(".dsl-reading-stage");
-    if(!stage)return;
+    if(!stage||!stage.clientHeight)return;
     var count=getSegments(currentDua).length;
-    // Measure the natural content, not already capped scroll lanes.
-    root.classList.remove("dsl-long-content");
-    var short=count<=5,medium=count<=13,long=count<=22;
-    var ar=short?44:(medium?40:(long?36:33));
-    var tr=short?20:(medium?19:(long?18:17));
-    var de=short?16.5:(medium?16:(long?15:14.5));
-    var targetAr=count<=17?3:Math.max(3,Math.ceil(count/5.5));
-    var targetTr=count<=17?2:Math.max(2,Math.ceil(count/8));
-    for(var i=0;i<10;i++){
-      root.style.setProperty("--dsl-ar-size",ar+"px");
-      root.style.setProperty("--dsl-tr-size",tr+"px");
-      root.style.setProperty("--dsl-de-size",de+"px");
-      var arLines=measureLines(".dsl-arabic .dsl-word");
-      var trLines=measureLines(".dsl-translit .dsl-word");
-      var tooTall=stage.scrollHeight>stage.clientHeight+3;
-      if((arLines<=targetAr&&trLines<=targetTr&&!tooTall)||(ar<=31&&tr<=16.5))break;
-      if(ar>31)ar=Math.max(31,ar-1.5);
-      if(tr>16.5)tr=Math.max(16.5,tr-.4);
-      if(de>14)de=Math.max(14,de-.25);
+    var short=count<=5;
+    var medium=count<=14;
+    var extensive=count>22;
+    root.classList.remove("dsl-long-content","dsl-reader-short","dsl-reader-medium","dsl-reader-long");
+    root.classList.add(short?"dsl-reader-short":(medium?"dsl-reader-medium":"dsl-reader-long"));
+    // Keep the active accessibility highlight on all three languages;
+    // never reduce type to tiny unreadable text just to eliminate scrolling.
+    var floor=short?[46,21,18]:medium?[40,19.5,17]:extensive?[38,18.5,16.5]:[37,18.5,16.5];
+    var ceiling=short?[60,27,22]:medium?[53,25,21]:extensive?[45,22,19]:[50,23.5,20];
+    var allowedArabic=short?3:(medium?4:7);
+    var allowedLatin=short?3:(medium?3:5);
+    var available=stage.clientHeight;
+    var chosen=null;
+    function apply(values){
+      root.style.setProperty("--dsl-ar-size",values[0].toFixed(2)+"px");
+      root.style.setProperty("--dsl-tr-size",values[1].toFixed(2)+"px");
+      root.style.setProperty("--dsl-de-size",values[2].toFixed(2)+"px");
     }
-    root.classList.toggle("dsl-long-content",count>18||stage.scrollHeight>stage.clientHeight+2);
+    function fits(){
+      var arabic=stage.querySelector(".dsl-arabic");
+      var latin=stage.querySelector(".dsl-translit");
+      var german=stage.querySelector(".dsl-german");
+      var current=stage.querySelector(".dsl-german-current");
+      var natural=(arabic?arabic.scrollHeight:0)+(latin?latin.scrollHeight:0)+
+        (german?german.scrollHeight:0)+(current&&getComputedStyle(current).display!=="none"?current.scrollHeight:0);
+      return natural<=available-9&&stage.scrollHeight<=available+2&&
+        measureLines(".dsl-arabic .dsl-word")<=allowedArabic&&
+        measureLines(".dsl-translit .dsl-word")<=allowedLatin;
+    }
+    // Two passes through a bounded 3D type scale; the final fit is measured
+    // using the actual on-screen font and width, not the item count alone.
+    for(var i=0;i<=18;i++){
+      var fraction=i/18;
+      var trial=floor.map(function(min,j){return min+(ceiling[j]-min)*fraction});
+      apply(trial);
+      if(!fits())break;
+      chosen=trial;
+    }
+    if(chosen){
+      apply(chosen);
+    }else{
+      // No safe text fit: give each language its own bounded scroll lane.
+      // The focused Arabic, Latin, German tokens stay jointly visible.
+      apply(floor);
+      root.classList.add("dsl-long-content");
+    }
+    if(extensive)root.classList.add("dsl-long-content");
     queueFocusedWord();
   }
   function queueReaderFit(){
