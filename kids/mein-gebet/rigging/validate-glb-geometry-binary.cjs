@@ -52,6 +52,16 @@ function validateGeometryBytes(g,bin){
      let finite=true;
      for(let j=0;j<16;j++)if(!Number.isFinite(matrices.read(i,j)))finite=false;
      if(!finite){fail("Nonfinite inverse bind matrix in skin "+si);break;}
+     // Inverse bind matrices must preserve lengths; unreviewed shear/scale
+     // would invalidate the prayer-figure proportion guarantee.
+     const axes=[[0,1,2],[4,5,6],[8,9,10]].map(ids=>ids.map(j=>matrices.read(i,j)));
+     const dot=(u,v)=>u.reduce((sum,value,j)=>sum+value*v[j],0);
+     if(axes.some(u=>Math.abs(dot(u,u)-1)>0.005)||
+       Math.abs(dot(axes[0],axes[1]))>0.005||
+       Math.abs(dot(axes[0],axes[2]))>0.005||
+       Math.abs(dot(axes[1],axes[2]))>0.005){
+       fail("Scaled/sheared inverse bind matrix in skin "+si);break;
+     }
      if(Math.abs(matrices.read(i,3))>1e-3||Math.abs(matrices.read(i,7))>1e-3||
         Math.abs(matrices.read(i,11))>1e-3||Math.abs(matrices.read(i,15)-1)>1e-3){
        fail("Nonaffine inverse bind matrix in skin "+si);break;
@@ -78,6 +88,10 @@ function validateGeometryBytes(g,bin){
    for(const [pi,p] of mesh.primitives.entries()){
      const label="mesh "+mi+" primitive "+pi,attributes=p?.attributes||{};
      if(p?.mode!==undefined&&p.mode!==4){fail("Unsupported non-triangle primitive "+label);continue;}
+     if(p?.targets?.length || (mesh.weights && mesh.weights.length))
+       fail("Unreviewed mesh morph displacements "+label);
+     if(["JOINTS_1","WEIGHTS_1","JOINTS_2","WEIGHTS_2"].some(k=>attributes[k]!==undefined))
+       fail("Unsupported additional skin influence sets "+label);
      const pos=readAccessor(attributes.POSITION,"VEC3",[5126],label+" POSITION");
      const normal=readAccessor(attributes.NORMAL,"VEC3",[5126],label+" NORMAL");
      const joints=readAccessor(attributes.JOINTS_0,"VEC4",[5121,5123],label+" JOINTS_0");
@@ -90,11 +104,14 @@ function validateGeometryBytes(g,bin){
         accessors[attributes.WEIGHTS_0].componentType!==5126)
        fail("Unsigned skin weights must be normalized "+label);
      for(let i=0;i<pos.count;i++){
+       let normalSquared=0;
        for(let j=0;j<3;j++){
          if(!Number.isFinite(pos.read(i,j))||!Number.isFinite(normal.read(i,j))){
            fail("Nonfinite vertex position or normal "+label);break;
          }
+         normalSquared+=normal.read(i,j)**2;
        }
+       if(Math.abs(normalSquared-1)>0.12)fail("Nonunit mesh normal "+label+" vertex "+i);
        let weightSum=0;
        for(let j=0;j<4;j++){
          const joint=joints.read(i,j);
@@ -109,7 +126,7 @@ function validateGeometryBytes(g,bin){
          }
          weightSum+=w;
        }
-       if(Math.abs(weightSum-1)>0.015){
+       if(Math.abs(weightSum-1)>0.008){
          fail("Skin weights not normalized "+label+" vertex "+i);break;
        }
        if(errors.length>150)return {valid:false,errors:["Too many geometry errors; first error: "+errors[0]],productionApproved:false};
