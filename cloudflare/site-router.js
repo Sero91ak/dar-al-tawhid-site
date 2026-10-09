@@ -1182,7 +1182,10 @@ export default {
     if (prayerApi) return prayerApi;
     const voiceApi = await proxyVoiceApi(request, url);
     if (voiceApi) return voiceApi;
-    const gated = gateHiddenSurfaces(request, url, env, "live");
+    // Die öffentliche KIDS-Web-App und Lernakademie benötigen kein HTTP-Basic-Login.
+    // Nur /kids (einschließlich CSS, JSON, Audio und Unterricht) freigeben;
+    // /test/kids und andere interne Routen bleiben hinter der bisherigen Sperre.
+    const gated = isLiveKidsPath(url.pathname) ? null : gateHiddenSurfaces(request, url, env, "live");
     if (gated) return gated;
     if (request.method === "GET" || request.method === "HEAD") {
       const intro = await serveKidsIntroVideo(request, url, env);
