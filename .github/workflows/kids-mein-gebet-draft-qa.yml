@@ -46,6 +46,7 @@ jobs:
           node kids/mein-gebet/rigging/validate-glb.test.cjs
           node kids/mein-gebet/rigging/test-glb-binary.cjs
           node kids/mein-gebet/rigging/test-glb-geometry-binary.cjs
+          node kids/mein-gebet/rigging/test-glb-end-to-end.cjs
           node kids/mein-gebet/rigging/test-audit-project-completion.cjs
           node kids/mein-gebet/rigging/test-animation-rig-freeze.cjs
       - name: Exercise deterministic camera diagnostic tests
