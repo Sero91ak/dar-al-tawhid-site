@@ -103,7 +103,7 @@
       "description": "Einige Autorenwerke und Kapitel sind direkt nachgewiesen, die genaue Druckedition und Einzelseite nicht für alle rekonstruiert. Kein Printseiten-Nachweis behaupten."
     }
   ],
-  "nextAction": "Hadith 28/28 Šarḥ verifiziert, 5/22 Āṯār in der Zuschreibung verifiziert; 17 Zuschreibungen noch offen, davon 4 mit lokalisierter, nicht abschließend bewerteter Kette. HAD-0395 nicht über die widersprüchlichen Isnād-Urteile hinaus als ṣaḥīḥ ausgeben.",
+  "nextAction": "28 von 28 Hadith mit klassischem Šarḥ. 5 von 22 Āṯār mit abschließend geprüfter Zuschreibung, 17 noch offen. HAD-0399 Schülerwortlaut von ar-Rabīʿ statt ungesicherter Kurzform; HAD-0401 Autorenwerk direkt belegt, Edition ausstehend.",
   "entries": [
     {
       "id": "HAD-0393",
@@ -155,8 +155,9 @@
       "id": "HAD-0399",
       "recordType": "athar",
       "sharh": "not-required",
-      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis.",
-      "attribution": "needs-review"
+      "statusNote": "Der unmittelbare Wortlaut von ar-Rabīʿ in Siyar dokumentiert, während die verbreitete Kurzform nur mit 'ويروى' erscheint; vollständige Isnādkette bis ar-Rabīʿ offen.",
+      "attribution": "direct-disciple-wording-located-chain-pending",
+      "primarySourceVerified": true
     },
     {
       "id": "HAD-0400",
@@ -170,8 +171,9 @@
       "id": "HAD-0401",
       "recordType": "athar",
       "sharh": "not-required",
-      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis.",
-      "attribution": "needs-review"
+      "statusNote": "Erster Satz aus al-Barbahārīs eigenem Werk Šarḥ as-Sunnah direkt nachgewiesen; Handschrift- und Druckedition ungeprüft.",
+      "attribution": "author-text-located-edition-pending",
+      "primarySourceVerified": true
     },
     {
       "id": "HAD-0402",
