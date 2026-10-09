@@ -103,7 +103,7 @@
       "description": "Einige Autorenwerke und Kapitel sind direkt nachgewiesen, die genaue Druckedition und Einzelseite nicht für alle rekonstruiert. Kein Printseiten-Nachweis behaupten."
     }
   ],
-  "nextAction": "28/28 Ḥadīṯe mit verifiziertem Šarḥ; 5/22 Āṯār mit verifizierter Zuschreibung, 17 offen. HAD-0408/0409 enthalten jetzt direkte arabisch belegte Einzeltexte statt Mischparaphrasen. Nächste Einzelprüfung HAD-0406/0407/0410 und HAD-0441/0442; keine Scheinauthentifizierung.",
+  "nextAction": "28/28 Ḥadīṯ-Šarḥe verifiziert. 5/22 Āṯār final verifiziert, 17 noch offen. HAD-0408, HAD-0409 und HAD-0442 mit genauem klassischem arabischem Wortlaut statt Mischparaphrasen; Kettenprüfung separat weiterführen.",
   "entries": [
     {
       "id": "HAD-0393",
@@ -473,8 +473,9 @@
       "id": "HAD-0442",
       "recordType": "athar",
       "sharh": "not-required",
-      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis.",
-      "attribution": "needs-review"
+      "statusNote": "Exakter Bukhārī-Kapiteltext zur Niederwerfung auf Turban/Kopfbedeckung und mit Händen in Ärmeln nach Ibn Raǧab 2/264 dokumentiert; Muṣannaf-Weg Ibn Abī Šaybah ← Abū Usāmah ← Hišām ← al-Ḥasan lokalisiert. Vollständige Beurteilung offen.",
+      "attribution": "bukhari-taliq-and-musannaf-isnad-located-pending-grading",
+      "primarySourceVerified": true
     }
   ],
   "hadithSharhVerified": 28,
