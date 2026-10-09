@@ -486,7 +486,7 @@
   }
 
 
-  // Continuous phrase audio: reviewed markers if present, otherwise
+  // Continuous phrase audio: exact reviewed markers for the audio SOURCE, otherwise
   // approximate word cues derived from actual full-clip and word durations.
   function phraseWordStarts(d,slow,duration,segs){
     var approved=d&&d.audioWordTimes&&d.audioWordTimes[slow?"slow":"normal"];
@@ -575,7 +575,14 @@
         audio.onended=function(){finish(true)};
         audio.onerror=function(){finish(false)};
         try{audio.load()}catch(e){}
-        if((mode==="full"||mode==="slow")&&root&&root.classList.contains("open")&&currentDua){attachPhraseFollow(currentDua,mode==="slow",token)}
+        if((mode==="full"||mode==="slow")&&root&&root.classList.contains("open")&&currentDua){
+          // HTMLAudio.currentTime is the SOURCE clock even when playbackRate
+          // is 0.86. Use NORMAL word markers for slowed normal recordings.
+          // Use SLOW markers only for a distinct approved native slow clip.
+          var approvedSlow=mode==="slow"?approvedNativeSlowUrl(currentDua):"";
+          var nativeSlow=!!approvedSlow&&String(url)===approvedSlow;
+          attachPhraseFollow(currentDua,nativeSlow,token);
+        }
         var p=audio.play();
         if(p&&p.catch)p.catch(function(){finish(false)});
       }catch(e){finish(false)}
