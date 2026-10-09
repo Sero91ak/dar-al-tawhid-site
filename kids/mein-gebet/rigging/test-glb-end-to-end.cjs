@@ -40,7 +40,7 @@ function glbFixture(){
   for(let i=0;i<N;i++){
     xyz.writeFloatLE((i%40)/40-.5,i*12);
     xyz.writeFloatLE(Math.floor(i/40)/40,i*12+4);
-    xyz.writeFloatLE((i%17)/30-.25,i*12+8);
+    xyz.writeFloatLE(((i*i)%17)/30-.25,i*12+8); // curved cross-section; no phantom zero-area triangles
     normals.writeFloatLE(1,i*12+8);
     weights.writeFloatLE(1,i*16);
     indices.writeUInt16LE(i,i*2);
