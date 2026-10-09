@@ -50,6 +50,7 @@ if (fs.existsSync(publicRouterPath)) {
   assert.ok(router.includes('purpose: "maskable"'), "Android launcher must receive maskable artwork");
   assert.ok(router.includes('display: "standalone"'), "Android PWA manifest must be standalone");
   assert.ok(router.includes('id: "/pwa/"'), "Android PWA manifest must have the dedicated stable app id /pwa/");
+  assert.ok(router.includes("btn.disabled=installed||preparing"), "Install button must stay disabled until beforeinstallprompt");
   assert.ok(router.includes('start_url: "/pwa/?pwa=1"'), "Dynamic Android PWA manifest must launch the dedicated visitor app shell");
 }
 assert.equal(pwaManifest.display, "standalone", "Public manifest must be installable as standalone PWA");

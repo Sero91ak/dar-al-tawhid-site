@@ -2325,10 +2325,10 @@ button,input,select{font:inherit}
     document.querySelectorAll("[data-dar-pwa-install]").forEach(function(btn){
      if(!btn.dataset.darInstallLabel)btn.dataset.darInstallLabel=btn.textContent||"Web-App installieren";
      var preparing=android&&!installed&&!ready;
-     btn.disabled=installed;
-     btn.setAttribute("aria-disabled",installed?"true":"false");
+     btn.disabled=installed||preparing;
+     btn.setAttribute("aria-disabled",(installed||preparing)?"true":"false");
      btn.setAttribute("data-dar-pwa-install-state",installed?"installed":(ready?"ready":"preparing"));
-     var nextLabel=installed?"Bereits installiert":btn.dataset.darInstallLabel;
+     var nextLabel=installed?"Bereits installiert":(preparing?"Installation wird vorbereitet …":btn.dataset.darInstallLabel);
      if(btn.textContent!==nextLabel)btn.textContent=nextLabel;
     });
    }catch(e){}
@@ -4561,6 +4561,58 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
  summary:focus,summary:focus-visible,[tabindex]:focus,[tabindex]:focus-visible,.desktop-link:focus,.desktop-link:focus-visible,
  .more-row:focus,.more-row:focus-visible,.category-card:focus,.category-card:focus-visible,.feature-card:focus,.feature-card:focus-visible,
  .header-action:focus,.header-action:focus-visible,.main-nav a:focus,.main-nav a:focus-visible{outline:0!important;outline-offset:0!important}
+}
+</style>
+
+<style id="darMobileTapVisualHardStopV9">
+@media (hover:none) and (pointer:coarse){
+  html,body,body *{
+    -webkit-tap-highlight-color:transparent!important;
+  }
+  html body a,
+  html body button,
+  html body [role="button"],
+  html body summary,
+  html body [tabindex],
+  html body .desktop-link,
+  html body .more-row,
+  html body .category-card,
+  html body .feature-card,
+  html body .header-action,
+  html body .main-nav a{
+    -webkit-tap-highlight-color:transparent!important;
+    -webkit-touch-callout:none!important;
+  }
+  html body a:focus,
+  html body a:focus-visible,
+  html body button:focus,
+  html body button:focus-visible,
+  html body [role="button"]:focus,
+  html body [role="button"]:focus-visible,
+  html body summary:focus,
+  html body summary:focus-visible,
+  html body [tabindex]:focus,
+  html body [tabindex]:focus-visible{
+    outline:0!important;
+    outline-offset:0!important;
+    box-shadow:none!important;
+  }
+  html body a:active,
+  html body button:active,
+  html body [role="button"]:active,
+  html body summary:active,
+  html body [tabindex]:active,
+  html body .desktop-link:active,
+  html body .more-row:active,
+  html body .category-card:active,
+  html body .feature-card:active,
+  html body .header-action:active,
+  html body .main-nav a:active{
+    outline:0!important;
+    box-shadow:none!important;
+    filter:none!important;
+    opacity:1!important;
+  }
 }
 </style>
 </body>

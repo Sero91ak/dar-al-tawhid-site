@@ -215,7 +215,7 @@ function browserManifestResponse(request, androidBrowser = false) {
   if (cookieMatch) {
     try { cookieIcon = decodeURIComponent(cookieMatch[1] || ""); } catch (e) { cookieIcon = cookieMatch[1] || ""; }
   }
-  const iconId = "type-creme-ar";
+  const iconId = normalizePwaIconId(cookieIcon || url.searchParams.get("icon"));
   const icon = DAR_PWA_ICON_MAP[iconId] || DAR_PWA_ICON_MAP["type-creme-ar"];
   const icon192 = pwaIconPath(iconId, 192);
   const icon512 = icon.high ? pwaIconPath(iconId, 512) : pwaIconPath("type-creme-ar", 512);
@@ -580,10 +580,10 @@ a,button,[role="button"],summary,[tabindex],label{-webkit-tap-highlight-color:tr
       document.querySelectorAll("[data-dar-pwa-install]").forEach(function(btn){
         if(!btn.dataset.darInstallLabel)btn.dataset.darInstallLabel=btn.textContent||"Web-App installieren";
         var preparing=android&&!installed&&!ready;
-        btn.disabled=installed;
-        btn.setAttribute("aria-disabled",installed?"true":"false");
+        btn.disabled=installed||preparing;
+        btn.setAttribute("aria-disabled",(installed||preparing)?"true":"false");
         btn.setAttribute("data-dar-pwa-install-state",installed?"installed":(ready?"ready":"preparing"));
-        var nextLabel=installed?"Bereits installiert":btn.dataset.darInstallLabel;
+        var nextLabel=installed?"Bereits installiert":(preparing?"Installation wird vorbereitet …":btn.dataset.darInstallLabel);
         if(btn.textContent!==nextLabel)btn.textContent=nextLabel;
       });
     }catch(e){}
