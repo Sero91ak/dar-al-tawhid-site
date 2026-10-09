@@ -3629,11 +3629,22 @@
       wantFullPlayer();
       var host = playerRoot();
       if (!host) { paintMini(); return; }
-      if (host.dataset.ready === "1") { bind(false); paintMini(); return; }
+      if (host.dataset.ready === "1") {
+        bind(false);
+        if (dataSurahLoaded !== Number(state.surah)) {
+          ensureData().then(function (ok) {
+            if (!ok || !fullUiWanted || !isFullPlayerRoute()) return;
+            paintInfo();
+            paintAyah(false);
+          });
+        }
+        paintMini();
+        return;
+      }
       bind(false);
-      ensureData().then(function () {
+      ensureData().then(function (ok) {
         var node = playerRoot();
-        if (!node || !fullUiWanted) return;
+        if (!ok || !node || !fullUiWanted || !isFullPlayerRoute()) return;
         node.dataset.ready = "1";
         paintInfo();
         paintAyah(false);
