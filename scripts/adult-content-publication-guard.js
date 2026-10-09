@@ -30,7 +30,7 @@ function readPost(text,file){
  let type=fm.recordType||fm.appleTvType||"";
  if(!type&&/Prophet|Gesandte|Muḥammad|Muhammad/i.test(fm.scholar||""))type="hadith";
  if(!type&&/Hadith|Ḥadīṯ/i.test(fm.category||""))type="hadith";
- if(!type&&fm.scholar)type="athar";
+ if(!type&&fm.scholar&&fm.type==="single"&&/🖋️/u.test(m[2])&&/„[^“]+“/u.test(m[2])&&!/^(?:allah|qur.an)$/i.test(norm(fm.scholar)))type="athar";
  if(type!=="hadith"&&type!=="athar")return {skip:true,file};
  let body=m[2],piece=body.split(/\n\s*(?:📝|🌙|\*\*Überlieferungsstatus|\*\*Quelle:)/u)[0];
  const first=piece.indexOf("„"),last=piece.lastIndexOf("“");
@@ -78,12 +78,16 @@ function selected(){
 function validate(p,otherPosts,existingTv){
  if(p.skip)return "skip";
  if(!p.fm.scholar||!p.fm.source||p.text.length<36||p.text.length>20000)block("missing speaker, source or statement",{post:p.file});
+ if(/^\s*#[\p{L}\p{N}_-]+\s*$/gmu.test(p.body)||/(?:^|\n)\s*(?:📥\s*Telegram|🌐\s*Website|📸\s*Instagram)\s*:/u.test(p.body))block("visible hashtags or outdated social footer",{post:p.file});
  const q=short(p.body);
  if(!q||!fs.existsSync(root+"/q/"+q+"/index.html"))block("own source page /q/ missing",{post:p.file});
  const a={id:p.id,speaker:p.fm.scholar,text:p.text,q,number:p.fm.sourceHadithNumber};
  for(const e of otherPosts){const reason=duplicate(a,e);if(reason)block("existing adult post: "+reason,{post:p.file,existing:e.ref});}
  for(const e of existingTv){
-  if(e.origin===p.id)return "already-synced";
+  if(e.origin===p.id){
+   if(norm(e.text)===norm(p.text))return "already-synced";
+   block("already published Apple TV record differs; explicit update review required",{post:p.file,existing:e.ref});
+  }
   const reason=duplicate(a,e);if(reason)block("existing Apple TV statement: "+reason,{post:p.file,existing:e.ref});
  }
  if(p.type==="hadith"){
@@ -97,8 +101,8 @@ function validate(p,otherPosts,existingTv){
 function makeRecord(p,q,n){
  const f=p.fm,h=p.type==="hadith";
  const r={id:"HAD-"+String(n).padStart(4,"0"),recordType:p.type,categoryLabel:h?"ḤADĪṮ":"ĀṮAR",language:"de",
-  narratorLine:h?(f.narratorLine||f.scholar+" berichtete:"):f.scholar+" رحمه الله:",
-  speakerLabel:h?(f.speakerLabel||"Der Prophet ﷺ sagte:"):"Überlieferte Aussage:",
+  narratorLine:h?(f.narratorLine||f.scholar+" berichtete:"):"Über "+f.scholar+" wird überliefert:",
+  speakerLabel:h?(f.speakerLabel||"Der Prophet ﷺ sagte:"):"Überlieferter Ausspruch:",
   textMarkdown:p.text,source:f.book||f.source,sourceBook:f.book||f.source,
   sourceVolume:f.sourceVolume||null,sourcePage:f.sourcePage||null,sourceSection:"DAR AL TAWḤĪD /q/"+q+"/",
   sourceHadithNumber:h?(f.sourceHadithNumber||null):null,
