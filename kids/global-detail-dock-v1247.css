@@ -879,3 +879,72 @@ html body #quranModal.modal.open .modal-top.kids-legacy-appbar .modal-title smal
     padding-bottom:8px!important;
   }
 }
+
+
+/* KIDS_GLOBAL_STICKY_READER_HEADERS_V1297
+   The title/back bar MUST stay anchored while detail content scrolls BELOW it.
+   Proven regression: Duʿāʾ "Für meine Eltern" scroll moved the header itself.
+   One scrolling owner (.shell), NOT a second nested reading scroller.
+   Sticky is compositor-driven (no scroll handlers or transform animations).
+   Header remains in layout, so there is NO padding-jump during open/close.
+   Use the same rule for phone and tablet; in-app overlays keep their own
+   original scroll areas and header layout. */
+html body .shell #view-dua.view.active #duaHubDetail.open > .kids-detail-appbar,
+html body .shell > .view.active > .kids-detail-appbar,
+html body .shell > .view.active > :is(.kids-subpage-nav,.ms-library-nav,.ps-library-nav,.gh-world-nav){
+  position:-webkit-sticky!important;
+  position:sticky!important;
+  top:0!important;
+  inset-block-start:0!important;
+  z-index:600!important;
+  transform:none!important;
+  translate:none!important;
+  animation:none!important;
+  will-change:auto!important;
+  isolation:isolate!important;
+  backface-visibility:hidden!important;
+  -webkit-backface-visibility:hidden!important;
+  contain:none!important;
+  background-color:#062936!important;
+  background-image:radial-gradient(circle at 8% 0%,rgba(110,207,197,.08),transparent 35%),
+    linear-gradient(180deg,#05232e 0%,#062936 100%)!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+html body .shell #view-dua.view.active #duaHubDetail.open > .kids-detail-appbar{
+  margin-top:0!important;
+  margin-bottom:0!important;
+  overscroll-behavior:contain!important;
+}
+/* iOS rubber-band and scroll anchoring previously caused the top bar to
+   move together with the hero, then jump back. Block chain/bounce on the
+   SINGLE scrolling shell, retaining momentum and native vertical panning. */
+html.duahub-detail-open body .shell,
+html[data-view="dua"].duahub-detail-open body .shell{
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  overscroll-behavior-y:none!important;
+  -webkit-overflow-scrolling:touch!important;
+  overflow-anchor:none!important;
+  touch-action:pan-y!important;
+  scroll-padding-top:0!important;
+}
+html.duahub-detail-open #view-dua.view.active,
+html.duahub-detail-open #view-dua .duahub-detail.open{
+  overflow:visible!important;
+  transform:none!important;
+}
+html.duahub-detail-open #view-dua .duahub-detail.open > .duahub-detail-scroll{
+  overflow:visible!important;
+  overscroll-behavior-y:auto!important;
+}
+/* Use an opaque top surface, never translucent artwork behind the status
+   text when content has moved under the header. */
+html body .shell #view-dua.view.active #duaHubDetail.open > .kids-detail-appbar::before{
+  content:none!important;
+}
+@media (prefers-reduced-motion:reduce){
+ html body .shell #view-dua.view.active #duaHubDetail.open > .kids-detail-appbar{
+   transition:none!important;
+ }
+}
