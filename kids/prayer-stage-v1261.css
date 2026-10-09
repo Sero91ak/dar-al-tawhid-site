@@ -2060,7 +2060,7 @@ body.kids-salah-day-open{overflow:hidden!important}
     /* Before JS measures the actual dock and CTA, reserve approximate space
        for their full height. Prevent first-paint 40px downward jump on short
        phones, then let the existing precise DOM-based measurement take over. */
-    --kids-home-visible-hero:max(min(clamp(292px,min(50dvh,calc(100dvh - 420px)),430px),var(--kids-home-measured-target,9999px)),var(--kids-home-measured-min,292px));
+    --kids-home-visible-hero:max(min(clamp(292px,min(50dvh,var(--kids-home-preflight-cap,calc(100dvh - 420px))),430px),var(--kids-home-measured-target,9999px)),var(--kids-home-measured-min,292px));
     box-sizing:border-box!important;
     min-height:calc(var(--kids-home-visible-hero) + var(--kids-start-compensation,0px))!important;
     height:calc(var(--kids-home-visible-hero) + var(--kids-start-compensation,0px))!important;
