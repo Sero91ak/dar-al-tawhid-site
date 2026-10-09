@@ -32,7 +32,27 @@ function stripPublicExtras(markdown) {
     return line.replace(/(^|[ \t])#[\p{L}\p{N}_-]+(?=[ \t,.;:!?'"})\]]|$)/gu, "$1").replace(/[ \t]+$/g, "");
   }
   const cleanedFm = frontmatter.split("\n").map(cleanLine).join("\n");
-  const cleanedBody = parts[4].split("\n").map(cleanLine).join("\n");
+  const bodyLines = parts[4].split("\n").map(cleanLine);
+  // Single posts only: source card and /q/ contain source, links and isnad.
+  // Do not touch slides because each slide can have its own exact source.
+  const isSlide = /^(?:type|layout):\s*["']?slides?["']?\s*$/m.test(cleanedFm);
+  let inStatusNote = false;
+  const statementLines = bodyLines.filter(line => {
+    if (isSlide) return true;
+    if (/^\s*(?:📝\s*(?:(?:\*\*)?Quelle(?:\*\*)?:?|𝐐𝐮𝐞𝐥𝐥𝐞:)|(?:\*\*)?Quelle(?:\*\*)?\s*:)/u.test(line)) return false;
+    if (/^\s*🔗\s*(?:https?:\/\/)?(?:www\.)?dar-al-tawhid\.de\/q\/\d+\b/u.test(line)) return false;
+    if (/^\s*(?:\*\*)?Überlieferungsstatus(?:\*\*)?\s*:/u.test(line)) {
+      inStatusNote = true;
+      return false;
+    }
+    if (inStatusNote) {
+      if (!line.trim()) { inStatusNote = false; return false; }
+      if (/^\s*(?:🌙|🖋️|#{1,6}\s|\*\*Fazit)/u.test(line)) inStatusNote = false;
+      else return false;
+    }
+    return true;
+  });
+  const cleanedBody = statementLines.join("\n").replace(/\n{3,}/g, "\n\n");
   return parts[1] + cleanedFm + parts[3] + cleanedBody;
 }
 
