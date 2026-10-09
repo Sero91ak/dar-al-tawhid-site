@@ -7,7 +7,7 @@
   "atharCount": 22,
   "verifiedSharh": 28,
   "openSharh": 0,
-  "status": "hadith-sharh-complete-athar-attribution-pending",
+  "status": "hadith-sharh-complete-athar-attribution-in-progress",
   "policy": {
     "authenticPrimaryTextRequired": true,
     "independentAtharIsnadVerificationRequired": true,
@@ -60,7 +60,7 @@
       "range": "HAD-0393–HAD-0410",
       "kind": "poor-attribution",
       "status": "open",
-      "description": "18 Āṯār häufig mit unspezifischen Quellen ohne Einzelnachweis."
+      "description": "Von 18 frühen Āṯār jetzt 2 Zuschreibungen überprüft, bei 2 weiteren Primärtexte und Ketten ermittelt; weitere 14 bislang nicht abschließend bearbeitet."
     },
     {
       "range": "HAD-0441–HAD-0442",
@@ -103,7 +103,7 @@
       "description": "Einige Autorenwerke und Kapitel sind direkt nachgewiesen, die genaue Druckedition und Einzelseite nicht für alle rekonstruiert. Kein Printseiten-Nachweis behaupten."
     }
   ],
-  "nextAction": "Alle 28 Hadith dieses Blocks haben klassische Šarḥ-Einträge, jedoch mehrere digitale statt bestätigter Druckseiten. 20 separate Āṯār müssen erst einzeln auf authentische Attribution geprüft werden. Danach nächste 50er-Blöcke HAD-0443 ff.",
+  "nextAction": "Alle 28 Ḥadīṯe mit Šarḥ belegt. 4 von 22 Āṯār mit geprüfter Zuschreibung; 18 noch offen (darunter 2 mit lokalisierter, noch nicht vollständig bewerteter Kette). HAD-0393 ff. einzeln nachweisen, danach HAD-0443 ff.",
   "entries": [
     {
       "id": "HAD-0393",
@@ -116,8 +116,9 @@
       "id": "HAD-0394",
       "recordType": "athar",
       "sharh": "not-required",
-      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis.",
-      "attribution": "needs-review"
+      "statusNote": "Arabischer Originalwortlaut, durchgehende Hörkette und klassische Rijāl-Angaben geprüft (al-Āǧurrī Nr. 127).",
+      "attribution": "verified",
+      "primarySourceVerified": true
     },
     {
       "id": "HAD-0395",
@@ -137,8 +138,9 @@
       "id": "HAD-0397",
       "recordType": "athar",
       "sharh": "not-required",
-      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis.",
-      "attribution": "needs-review"
+      "statusNote": "Originalstelle und Überlieferungskette lokalisiert; vollständige Prüfung aller Überlieferer noch offen.",
+      "attribution": "isnad-located-pending-grading",
+      "primarySourceVerified": false
     },
     {
       "id": "HAD-0398",
@@ -158,8 +160,9 @@
       "id": "HAD-0400",
       "recordType": "athar",
       "sharh": "not-required",
-      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis.",
-      "attribution": "needs-review"
+      "statusNote": "Originalstelle und Überlieferungskette lokalisiert; vollständige Prüfung aller Überlieferer noch offen.",
+      "attribution": "isnad-located-pending-grading",
+      "primarySourceVerified": false
     },
     {
       "id": "HAD-0401",
@@ -172,8 +175,9 @@
       "id": "HAD-0402",
       "recordType": "athar",
       "sharh": "not-required",
-      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis.",
-      "attribution": "needs-review"
+      "statusNote": "Primärbeleg mit direkter Hörkette in Ṣaḥīḥ Muslim, Muqaddimah, und unabhängiger Parallelbeleg bei al-Ḥākim.",
+      "attribution": "verified",
+      "primarySourceVerified": true
     },
     {
       "id": "HAD-0403",
@@ -464,8 +468,10 @@
   ],
   "hadithSharhVerified": 28,
   "hadithSharhOpen": 0,
-  "atharAttributionVerified": 2,
+  "atharAttributionVerified": 4,
   "atharAttributionOpen": 20,
   "openTotal": 20,
-  "reviewPolicyUpdate": "Projektregel AGENTS.md 2026-10-09: Hadith erfordert verifizierten Šarḥ; Athar kein Šarḥ nötig, aber Authentizitäts-/Isnādprüfung zwingend."
+  "reviewPolicyUpdate": "Projektregel AGENTS.md 2026-10-09: Hadith erfordert verifizierten Šarḥ; Athar kein Šarḥ nötig, aber Authentizitäts-/Isnādprüfung zwingend.",
+  "atharAttributionPending": 18,
+  "atharIsnadLocatedPendingGrading": 2
 }
