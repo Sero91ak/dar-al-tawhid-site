@@ -340,7 +340,7 @@ function androidNativeToolsAddon() {
 }
 
 // DAR_ANDROID_PWA_INSTALL_RUNTIME_V3_20261009
-// DAR_ANDROID_PWA_DIRECT_INSTALL_TAP_CLEAN_LIVE_V3_20261009
+// DAR_ANDROID_PWA_DIRECT_INSTALL_TAP_CLEAN_LIVE_V4_20261009
 function publicWebsiteAddon() {
   return `
 <style id="darPublicTapCleanV4">
