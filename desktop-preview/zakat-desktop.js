@@ -89,7 +89,9 @@
         var config = global.DARZakatApp.getConfig();
         var input = inputSnapshot();
         var result = config ? global.DARZakat.computeZakat(input, config) : null;
-        if (!result || !Object.values(input).some(function (x) { return typeof x === "string" && /[1-9]/.test(x); })) {
+        var populated = ["cash","bank","digital","otherLiquid","goldGrams","goldValueManual","silverGrams","silverValueManual","debtsDue"]
+          .some(function (key) { return global.DARZakat.parseAmount(input[key]) > 0; });
+        if (!result || !populated) {
           global.alert("Bitte zuerst Vermögenswerte eingeben.");
           return;
         }
