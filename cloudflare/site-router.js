@@ -351,9 +351,12 @@ function publicWebsiteAddon() {
       document.querySelectorAll("[data-dar-pwa-logo]").forEach(function(img){img.setAttribute("src",pwaIconSrc(id))});
       document.querySelectorAll("[data-dar-pwa-icon]").forEach(function(btn){btn.classList.toggle("is-active",btn.getAttribute("data-dar-pwa-icon")===id)});
       document.querySelectorAll("[data-dar-pwa-icon-status]").forEach(function(el){
-        el.textContent=standalone
-          ?"Icon gespeichert. Android/Chrome übernimmt ein bereits installiertes Launcher-Icon beim Web-App-Metadatenupdate; für einen sofortigen Wechsel ist eine Neuinstallation nötig."
-          :"Dieses Icon wird für die nächste Android-Web-App-Installation verwendet.";
+        var nativeAndroid=!!(window.DarNative&&typeof window.DarNative.setAppIcon==="function");
+        el.textContent=nativeAndroid
+          ?"Launcher-Icon wird direkt in der Android-App geändert."
+          :standalone
+            ?"Icon gespeichert. Android/Chrome übernimmt die Änderung beim WebAPK-Metadatenupdate; für einen sofortigen Wechsel ist eine Neuinstallation nötig."
+            :"Dieses Icon wird für die nächste Android-Web-App-Installation verwendet.";
       });
       try{
         if(window.DarNative&&typeof window.DarNative.setAppIcon==="function"){

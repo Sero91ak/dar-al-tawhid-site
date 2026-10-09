@@ -2644,9 +2644,12 @@ html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
    document.querySelectorAll("[data-dar-pwa-logo]").forEach(function(img){img.src=darPwaIconSrc(id)});
    document.querySelectorAll("[data-dar-pwa-icon]").forEach(function(btn){btn.classList.toggle("is-active",btn.getAttribute("data-dar-pwa-icon")===id)});
    document.querySelectorAll("[data-dar-pwa-icon-status]").forEach(function(el){
-    el.textContent=darPwaStandalone()
-     ?"Icon gespeichert. Android/Chrome aktualisiert ein bereits installiertes Launcher-Icon nicht sofort; für den sofortigen Wechsel die Web-App neu installieren."
-     :"Dieses Icon wird für die nächste Android-Web-App-Installation verwendet."
+    var nativeAndroid=!!(window.DarNative&&typeof window.DarNative.setAppIcon==="function");
+    el.textContent=nativeAndroid
+     ?"Launcher-Icon wird direkt in der Android-App geändert."
+     :darPwaStandalone()
+      ?"Icon gespeichert. Android/Chrome übernimmt die Änderung beim WebAPK-Metadatenupdate; für einen sofortigen Wechsel die Web-App neu installieren."
+      :"Dieses Icon wird für die nächste Android-Web-App-Installation verwendet."
    });
    try{
     if(window.DarNative&&typeof window.DarNative.setAppIcon==="function"){
