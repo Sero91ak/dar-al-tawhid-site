@@ -5,11 +5,11 @@
   "totalInspected": 50,
   "hadithCount": 30,
   "atharCount": 20,
-  "hadithSharhVerified": 24,
-  "hadithSharhOpen": 6,
+  "hadithSharhVerified": 30,
+  "hadithSharhOpen": 0,
   "atharAttributionVerified": 1,
   "atharAttributionOpen": 19,
-  "openTotal": 25,
+  "openTotal": 19,
   "policy": {
     "hadith": "Authentischer Primärbericht + direkt belegbarer früher arabischer Kommentar",
     "athar": "Kein Šarḥ erforderlich; originaler Isnād/Attribution einzeln verifizieren",
@@ -31,9 +31,21 @@
       "type": "primary-chain-added",
       "source": "Ṣaḥīḥ Muslim, al-Muqaddimah, Bd.1 S.16 digital",
       "commit": "cb9ad6a05ee8c5d2724942909056423cb60e7f33"
+    },
+    {
+      "id": "HAD-0525",
+      "issue": "Previous German statement reversed meaning of khayr as-sadaqah ʿan ẓahr ġinā",
+      "resolution": "Correct German primary text anchored to Bukhari 1426; al-Bayhaqi vol.4 p.181",
+      "commit": "47acdbd4bdc70525359635926bf44d7d941fe7d6"
+    },
+    {
+      "id": "HAD-0520",
+      "issue": "Incorrect narrator Abū Hurayrah",
+      "resolution": "Corrected to ʿAbdullāh ibn ʿAmr with Abū Qābūs isnad",
+      "commit": "f0e88b99e128f37871f7617de2f7789931b32475"
     }
   ],
-  "nextAction": "Noch 6 Ḥadīṯ-Šarḥ-Prüfungen und 19 Āṯār-Attributionen offen. Keine fachliche Freigabe ohne belegte arabische Originalstellen und echte Quellenprüfung.",
+  "nextAction": "Ḥadīṯ-Kommentare 30/30 digital belegt. 19 Āṯār benötigen weiterhin individuell nachgewiesene arabische Originalzitate und sichere Zuschreibung; anschließend 0543–0592 als nächsten 50er-Block untersuchen. Einzelne Druckeditionen später exakt nachtragen.",
   "entries": [
     {
       "id": "HAD-0493",
@@ -220,16 +232,16 @@
     {
       "id": "HAD-0519",
       "recordType": "hadith",
-      "sharh": "open-source-review",
+      "sharh": "verified",
       "attribution": null,
-      "sourceAudit": "Genaue Originalquelle und klassischen arabischen Direkt-Šarḥ einschließlich Ausgabe nachprüfen"
+      "sourceAudit": "Klassischer arabischer Direktkommentar und authentifizierte Primärnummer im HAD-Datensatz dokumentiert; konkrete Druckedition nicht identifiziert."
     },
     {
       "id": "HAD-0520",
       "recordType": "hadith",
-      "sharh": "open-source-review",
+      "sharh": "verified",
       "attribution": null,
-      "sourceAudit": "Genaue Originalquelle und klassischen arabischen Direkt-Šarḥ einschließlich Ausgabe nachprüfen"
+      "sourceAudit": "Falschen Erzähler zu ʿAbdullāh ibn ʿAmr berichtigt; direkte klassische Arabischerklärung und frühe Isnādbelege dokumentiert."
     },
     {
       "id": "HAD-0521",
@@ -255,16 +267,17 @@
     {
       "id": "HAD-0524",
       "recordType": "hadith",
-      "sharh": "open-source-review",
+      "sharh": "verified",
       "attribution": null,
-      "sourceAudit": "Genaue Originalquelle und klassischen arabischen Direkt-Šarḥ einschließlich Ausgabe nachprüfen"
+      "sourceAudit": "Klassischer arabischer Direktkommentar und authentifizierte Primärnummer im HAD-Datensatz dokumentiert; konkrete Druckedition nicht identifiziert.",
+      "semanticDuplicateOf": "HAD-0520"
     },
     {
       "id": "HAD-0525",
       "recordType": "hadith",
-      "sharh": "open-source-review",
+      "sharh": "verified",
       "attribution": null,
-      "sourceAudit": "Genaue Originalquelle und klassischen arabischen Direkt-Šarḥ einschließlich Ausgabe nachprüfen"
+      "sourceAudit": "Primärtextfehler 'bei Bedürftigkeit' zu 'nach eigenem erforderlichen Auskommen' korrigiert; frühklassische al-Bayhaqī-Erklärung digital belegt."
     },
     {
       "id": "HAD-0526",
@@ -361,16 +374,16 @@
     {
       "id": "HAD-0539",
       "recordType": "hadith",
-      "sharh": "open-source-review",
+      "sharh": "verified",
       "attribution": null,
-      "sourceAudit": "Genaue Originalquelle und klassischen arabischen Direkt-Šarḥ einschließlich Ausgabe nachprüfen"
+      "sourceAudit": "Klassischer arabischer Direktkommentar und authentifizierte Primärnummer im HAD-Datensatz dokumentiert; konkrete Druckedition nicht identifiziert."
     },
     {
       "id": "HAD-0540",
       "recordType": "hadith",
-      "sharh": "open-source-review",
+      "sharh": "verified",
       "attribution": null,
-      "sourceAudit": "Genaue Originalquelle und klassischen arabischen Direkt-Šarḥ einschließlich Ausgabe nachprüfen"
+      "sourceAudit": "Klassischer arabischer Direktkommentar und authentifizierte Primärnummer im HAD-Datensatz dokumentiert; konkrete Druckedition nicht identifiziert."
     },
     {
       "id": "HAD-0541",
