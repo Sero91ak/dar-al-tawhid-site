@@ -2600,7 +2600,7 @@ html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
   darPwaHint("Web-App ist installiert.");
   darPwaToast("DĀR AL TAWḤĪD wurde als Web-App installiert.")
  });
- window.darInstallAndroidPwa=async function(){
+ async function darInstallDesktopPwa(){
   if(darPwaStandalone()){
    darPwaHint("Web-App ist bereits installiert.");
    darPwaToast("Die DĀR AL TAWḤĪD Web-App ist bereits installiert.");
@@ -2613,6 +2613,7 @@ html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
     if(choice&&choice.outcome==="accepted"){
      darDeferredPwaPrompt=null;
      darPwaHint("Installation bestätigt.");
+     darPwaToast("Installation bestätigt. Die Web-App wird deinem Gerät hinzugefügt.");
      return true
     }
     darPwaHint("Installation wurde nicht bestätigt.");
@@ -2629,13 +2630,14 @@ html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
    darPwaHint(msg2);darPwaToast(msg2)
   }
   return false
- };
+ }
+ window.darInstallAndroidPwa=darInstallDesktopPwa;
  document.addEventListener("click",function(e){
   var btn=e.target&&e.target.closest?e.target.closest("[data-dar-pwa-install]"):null;
   if(!btn)return;
   e.preventDefault();
   e.stopImmediatePropagation();
-  window.darInstallAndroidPwa()
+  darInstallDesktopPwa()
  },true);
  try{
   var darAndroid=/\bAndroid\b/i.test(String(navigator.userAgent||""));
