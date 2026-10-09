@@ -214,6 +214,25 @@ try{
     assert.equal(r.exit,1,r.message);
     assert.ok(JSON.parse(r.message).errors.some(e=>e.includes("Static skeletal scaling")));
   });
+  check("collapsing a real child bone is rejected by numeric pose preflight",()=>{
+    const fake=JSON.parse(JSON.stringify(g));
+    fake.nodes[2].translation=[0,0,0]; // Chest rest segment vanishes
+    const file=path.join(tmp,"collapsed-chest-bone.glb");
+    fs.writeFileSync(file,encodeGLB(fake,bin));
+    const r=quietMain(validateMain,[file,"boy"]);
+    assert.equal(r.exit,1,r.message);
+    const report=JSON.parse(r.message);
+    assert.equal(report.boneLengthInvariantVerified,false);
+    assert.ok(report.errors.some(e=>e.includes("Zero-length/degenerate")),r.message);
+  });
+  check("structurally valid GLB exposes numeric segment evidence",()=>{
+    const r=quietMain(validateMain,[candidate,"boy"]);
+    const report=JSON.parse(r.message);
+    assert.equal(r.exit,0,r.message);
+    assert.equal(report.boneLengthInvariantVerified,true);
+    assert.equal(report.numericBoneEvidence.segments,18);
+    assert.ok(report.numericBoneEvidence.sampledFrames>=6);
+  });
   check("intact vertices and animation bytes cannot rescue a disconnected skeleton",()=>{
     const fake=JSON.parse(JSON.stringify(g));
     fake.nodes[3].children=[];
