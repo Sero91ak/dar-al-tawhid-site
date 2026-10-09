@@ -203,7 +203,6 @@ struct DarAlTawhidWidgets: WidgetBundle {
         TodayWidget()
         AyahWidget()
         DuaWidget()
-        DarPrayerLiveActivityWidget()
         if #available(iOSApplicationExtension 18.0, *) {
             DarPrayerControlWidget()
             DarQiblaControlWidget()
