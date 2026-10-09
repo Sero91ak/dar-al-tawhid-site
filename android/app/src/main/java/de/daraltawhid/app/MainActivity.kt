@@ -220,6 +220,7 @@ class MainActivity : AppCompatActivity() {
             ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) ==
                 PackageManager.PERMISSION_GRANTED
         val notificationState = jsString(if (notificationsAllowed) "granted" else "denied")
+        val selectedLauncherIcon = jsString(DarAppIcons.current(this))
         val js = """
             (function(){
               try{
@@ -227,6 +228,17 @@ class MainActivity : AppCompatActivity() {
                 window.DAR_NATIVE_PLATFORM="android";
                 window.DAR_ANDROID_NATIVE_APP=true;
                 window.DAR_ANDROID_ALTERNATE_ICONS_AVAILABLE=true;
+                window.DAR_ANDROID_CURRENT_APP_ICON=${selectedLauncherIcon};
+                // Sync the in-app choice to the actual native launcher state.
+                // A cached old iOS theme choice must not overwrite the Android icon.
+                try{
+                  localStorage.setItem("darAppIconV1",window.DAR_ANDROID_CURRENT_APP_ICON);
+                  document.querySelectorAll("[data-app-icon-select]").forEach(function(button){
+                    var active=button.getAttribute("data-app-icon-select")===window.DAR_ANDROID_CURRENT_APP_ICON;
+                    button.classList.toggle("is-active",active);
+                    button.setAttribute("aria-pressed",active?"true":"false");
+                  });
+                }catch(e){}
                 window.DAR_OFFICIAL_IOS_APP=false;
                 window.DAR_IOS_NATIVE_APP=false;
                 // Same in-app picker message format as the existing iOS app.
@@ -331,8 +343,16 @@ class MainActivity : AppCompatActivity() {
 
     private inner class DarJsBridge {
         @JavascriptInterface
-        fun setAppIcon(name: String) {
-            DarAppIcons.set(this@MainActivity, name)
+        fun setAppIcon(name: String): Boolean {
+            val changed = DarAppIcons.set(this@MainActivity, name)
+            if (!changed) {
+                runOnUiThread {
+                    Toast.makeText(this@MainActivity,
+                        "Dieses App-Symbol ist auf deinem Gerät nicht verfügbar.",
+                        Toast.LENGTH_SHORT).show()
+                }
+            }
+            return changed
         }
 
         @JavascriptInterface
