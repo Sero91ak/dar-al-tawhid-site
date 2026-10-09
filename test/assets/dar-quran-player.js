@@ -3314,15 +3314,17 @@
         if (on && on.scrollIntoView) on.scrollIntoView({ block: "center" });
       });
     }
+    // The picker must work even without a network connection or text API.
+    // Render every Āyah number immediately; enrich the Arabic/German text later.
+    draw();
     if (dataSurahLoaded !== Number(state.surah) || !verses.length) {
-      openSheet("Āyah auswählen", "<p class=\"dqp-sheet-wait\">Āyāt werden geladen …</p>");
       var requestEpoch = sheetEpoch;
       var requestedSurah = Number(state.surah);
       ensureData().then(function (ok) {
         var sh = activeSheetEl();
-        if (requestEpoch === sheetEpoch && requestedSurah === Number(state.surah) && sh && !sh.hidden) draw();
+        if (ok && requestEpoch === sheetEpoch && requestedSurah === Number(state.surah) && sh && !sh.hidden) draw();
       });
-    } else draw();
+    }
   }
   // Canonical 114-Sūrah index, validated against content/quran/surahs.json (6236 Āyāt).
   // This is a local fallback for the picker, independent of global page-load timing.
