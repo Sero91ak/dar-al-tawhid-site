@@ -32,11 +32,10 @@ const publicRouterPath = path.join(root, "cloudflare/site-router.js");
 if (fs.existsSync(publicRouterPath)) {
   const router = fs.readFileSync(publicRouterPath, "utf8");
   assert.ok(router.includes('id="darIosAppStorePromo"'), "Existing iOS promotion must remain");
-  for (const id of ["darAndroidDownloadPromo", "dar-public-android-apk", "dar-public-tv-apk", "dar-public-android-meta", "dar-public-tv-meta"]) {
-    assert.ok(router.includes('id="' + id + '"'), "Main website Android promotion missing: " + id);
-  }
-  assert.ok(router.includes('/download/official-release-links.js'), "Main website must use shared official release switchboard");
-  assert.ok(router.includes('/download/icons/android-phone-default.jpg'), 'Main website must use supplied phone icon');
+  assert.ok(router.includes("window.darInstallAndroidPwa=async function"), "Main website Android PWA installer missing");
+  assert.ok(router.includes('navigator.serviceWorker.register("/service-worker.js",{scope:"/"})'), "Android PWA service worker registration missing");
+  assert.ok(router.includes("return !isNativeAppRequest(ua);"), "Android browsers must receive the public website");
+  assert.ok(!router.includes('id="darAndroidDownloadPromo"'), "Obsolete APK promo must not cover the public website");
 }
 
 assert.ok(links.includes('href="/download/"'), "Website links page must offer official Android downloads");
