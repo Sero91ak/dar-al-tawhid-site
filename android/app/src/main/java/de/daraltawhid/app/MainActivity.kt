@@ -1,6 +1,8 @@
 package de.daraltawhid.app
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.content.pm.PackageManager
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.graphics.Bitmap
@@ -24,6 +26,7 @@ import android.widget.LinearLayout
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
@@ -34,6 +37,33 @@ class MainActivity : AppCompatActivity() {
     private lateinit var errorOverlay: LinearLayout
     private var filePathCallback: ValueCallback<Array<Uri>>? = null
     private var pendingUrl: String = DarShell.LIVE_URL
+    private var pendingGeoOrigin: String? = null
+    private var pendingGeoCallback: GeolocationPermissions.Callback? = null
+    private var pendingMicrophoneRequest: PermissionRequest? = null
+
+    private val locationPermission = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { results ->
+        val origin = pendingGeoOrigin
+        val callback = pendingGeoCallback
+        pendingGeoOrigin = null
+        pendingGeoCallback = null
+        if (origin != null && callback != null) {
+            callback.invoke(origin, results.values.any { it }, false)
+        }
+    }
+
+    private val microphonePermission = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { granted ->
+        val request = pendingMicrophoneRequest
+        pendingMicrophoneRequest = null
+        if (granted) {
+            request?.grant(arrayOf(PermissionRequest.RESOURCE_AUDIO_CAPTURE))
+        } else {
+            request?.deny()
+        }
+    }
 
     private val fileChooser = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -122,6 +152,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
+        pendingGeoOrigin?.let { origin -> pendingGeoCallback?.invoke(origin, false, false) }
+        pendingGeoOrigin = null
+        pendingGeoCallback = null
+        pendingMicrophoneRequest?.deny()
+        pendingMicrophoneRequest = null
         webView.destroy()
         super.onDestroy()
     }
@@ -268,11 +303,52 @@ class MainActivity : AppCompatActivity() {
             origin: String?,
             callback: GeolocationPermissions.Callback?
         ) {
-            callback?.invoke(origin, true, false)
+            if (origin == null || callback == null) return
+            // WebView permission is NOT an Android runtime location permission.
+            // Only our app origin may request it; ask the user when required.
+            if (!DarShell.isOwnHost(Uri.parse(origin))) {
+                callback.invoke(origin, false, false)
+                return
+            }
+            val allowed = listOf(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ).any { ContextCompat.checkSelfPermission(this@MainActivity, it) == PackageManager.PERMISSION_GRANTED }
+            if (allowed) {
+                callback.invoke(origin, true, false)
+                return
+            }
+            pendingGeoOrigin?.let { oldOrigin ->
+                pendingGeoCallback?.invoke(oldOrigin, false, false)
+            }
+            pendingGeoOrigin = origin
+            pendingGeoCallback = callback
+            locationPermission.launch(
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
+            )
         }
 
         override fun onPermissionRequest(request: PermissionRequest?) {
-            request?.grant(request.resources)
+            if (request == null) return
+            runOnUiThread {
+                // Never grant all website-requested WebView resources implicitly.
+                if (!DarShell.isOwnHost(request.origin) ||
+                    request.resources.any { it != PermissionRequest.RESOURCE_AUDIO_CAPTURE }
+                ) {
+                    request.deny()
+                    return@runOnUiThread
+                }
+                if (ContextCompat.checkSelfPermission(
+                        this@MainActivity, Manifest.permission.RECORD_AUDIO
+                    ) == PackageManager.PERMISSION_GRANTED
+                ) {
+                    request.grant(arrayOf(PermissionRequest.RESOURCE_AUDIO_CAPTURE))
+                } else {
+                    pendingMicrophoneRequest?.deny()
+                    pendingMicrophoneRequest = request
+                    microphonePermission.launch(Manifest.permission.RECORD_AUDIO)
+                }
+            }
         }
     }
 
