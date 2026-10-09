@@ -53,6 +53,7 @@ if (fs.existsSync(publicRouterPath)) {
   assert.ok(router.includes("btn.disabled=installed"), "Install button must remain clickable while Chrome prepares beforeinstallprompt and only disable after installation");
   assert.ok(!router.includes("btn.disabled=installed||preparing"), "Install button must not be disabled merely while Chrome prepares beforeinstallprompt");
   assert.ok(router.includes('start_url: "/pwa/?pwa=1"'), "Dynamic Android PWA manifest must launch the dedicated visitor app shell");
+  assert.ok(router.includes('const legacyPwaLaunch = url.searchParams.get("homescreen") === "1"'), "Legacy Android home-screen launches must migrate into /pwa/");
   assert.ok(router.includes('dataset.appPath="android-pwa"'), "Dedicated Android PWA must mark its app path before first paint");
   assert.ok(router.includes('"is-standalone-pwa","is-android"'), "Dedicated Android PWA must activate standalone/mobile styling before first paint");
 }
