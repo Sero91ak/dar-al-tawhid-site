@@ -1411,13 +1411,24 @@
     paintStatus();
     var promise = (async function () {
       try {
-        if (typeof window.loadQuranIndex === "function") await window.loadQuranIndex();
+        if (typeof window.loadQuranIndex === "function") {
+          try { await window.loadQuranIndex(); } catch (eIndex) {}
+        }
         if (requestId !== dataLoadSerial || Number(state.surah) !== requestedSurah) return false;
-        var doc = typeof window.loadQuranSurah === "function"
-          ? await window.loadQuranSurah(requestedSurah) : null;
+        var doc = null;
+        if (typeof window.loadQuranSurah === "function") {
+          try { doc = await window.loadQuranSurah(requestedSurah); } catch (eSurah) {}
+        }
+        // Canonical text files exist independently of the global reader loader.
+        if (!doc || !Array.isArray(doc.verses) || !doc.verses.length) {
+          var path = "/content/quran/" + String(requestedSurah).padStart(3, "0") + ".json";
+          var res = await fetch(path, { cache: "force-cache", credentials: "same-origin" });
+          if (!res.ok) throw new Error("surah " + requestedSurah + ": HTTP " + res.status);
+          doc = await res.json();
+        }
         if (requestId !== dataLoadSerial || Number(state.surah) !== requestedSurah) return false;
-        verses = (doc && doc.verses) || [];
-        meta = surahMeta(requestedSurah);
+        verses = Array.isArray(doc.verses) ? doc.verses : [];
+        meta = surahMeta(requestedSurah) || QURAN_PLAYER_SURAHS[requestedSurah - 1] || null;
         dataSurahLoaded = requestedSurah;
         if (state.ayah > totalAyat()) state.ayah = totalAyat();
         if (state.ayah < 1) state.ayah = 1;
