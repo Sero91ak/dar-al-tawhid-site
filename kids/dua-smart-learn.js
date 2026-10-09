@@ -20,6 +20,8 @@
   var playing=false;
   var mode="";
   var playToken=0;
+  var layoutFrame=0;
+  var fitObserver=null;
 
   audio.preload="auto";
   audio.setAttribute("playsinline","");
@@ -171,12 +173,15 @@
     var words=stripArabicPunct(dua.audioArabicText||dua.arabic||"");
     var old=Array.isArray(dua.learningSegments)?dua.learningSegments:[];
     var trans=alignTranslit(dua.transliteration||"",words.length);
+    var reviewed=(window.DARKidsDuaWordMeanings&&window.DARKidsDuaWordMeanings.get)?
+      window.DARKidsDuaWordMeanings.get(dua,words):null;
     return words.map(function(word,i){
       var row=old[i]||{};
       return {
         index:i,
         arabic:word,
         transliteration:norm(row.transliteration||trans[i]||""),
+        german:String(row.german||row.meaning||(reviewed&&reviewed[i])||"").trim(),
         audioKey:word,
         audioUrl:String(row.audioUrl||"")
       };
@@ -213,6 +218,8 @@
     var prog=document.getElementById("dslProgress");
     if(ar)ar.textContent=seg.arabic||"";
     if(tr)tr.textContent=seg.transliteration||"";
+    var de=document.getElementById("dslGermanCurrent");
+    if(de)de.textContent=seg.german?("Bedeutung: "+seg.german):"Gesamtbedeutung des Duʿāʾs";
     if(count)count.textContent=(currentIndex+1)+" / "+Math.max(1,segs.length);
     if(prog)prog.style.width=(((currentIndex+1)/Math.max(1,segs.length))*100).toFixed(1)+"%";
   }
@@ -241,6 +248,48 @@
     }
   }
   function queueFocusedWord(){requestAnimationFrame(keepFocusedWordVisible)}
+  // Responsive fitting measures actual wrapped rows rather than estimating widths.
+  // Minimum sizes preserve reading comfort; long duʿāʾs scroll inside the stage.
+  function measureLines(selector){
+    if(!root)return 0;
+    var rows=Object.create(null);
+    root.querySelectorAll(selector).forEach(function(el){
+      rows[Math.round(el.offsetTop/3)*3]=true;
+    });
+    return Object.keys(rows).length;
+  }
+  function fitReadingStage(){
+    if(!root||!root.classList.contains("open")||!currentDua)return;
+    var stage=root.querySelector(".dsl-reading-stage");
+    if(!stage)return;
+    var count=getSegments(currentDua).length;
+    var short=count<=5,medium=count<=13,long=count<=22;
+    var ar=short?44:(medium?40:(long?36:33));
+    var tr=short?20:(medium?19:(long?18:17));
+    var de=short?16.5:(medium?16:(long?15:14.5));
+    var targetAr=count<=17?3:Math.max(3,Math.ceil(count/5.5));
+    var targetTr=count<=17?2:Math.max(2,Math.ceil(count/8));
+    for(var i=0;i<10;i++){
+      root.style.setProperty("--dsl-ar-size",ar+"px");
+      root.style.setProperty("--dsl-tr-size",tr+"px");
+      root.style.setProperty("--dsl-de-size",de+"px");
+      var arLines=measureLines(".dsl-arabic .dsl-word");
+      var trLines=measureLines(".dsl-translit .dsl-word");
+      var tooTall=stage.scrollHeight>stage.clientHeight+3;
+      if((arLines<=targetAr&&trLines<=targetTr&&!tooTall)||(ar<=31&&tr<=16.5))break;
+      if(ar>31)ar=Math.max(31,ar-1.5);
+      if(tr>16.5)tr=Math.max(16.5,tr-.4);
+      if(de>14)de=Math.max(14,de-.25);
+    }
+    root.classList.toggle("dsl-long-content",stage.scrollHeight>stage.clientHeight+2);
+  }
+  function queueReaderFit(){
+    if(layoutFrame)cancelAnimationFrame(layoutFrame);
+    layoutFrame=requestAnimationFrame(function(){
+      layoutFrame=0;
+      fitReadingStage();
+    });
+  }
   function selectIndex(i,opts){
     opts=opts||{};
     var segs=getSegments(currentDua);
@@ -511,6 +560,8 @@
           '<div class="dsl-reading-stage">'+
           '<div class="dsl-arabic" id="dslArabic" dir="rtl" lang="ar"></div>'+
           '<div class="dsl-translit" id="dslTranslit"></div>'+
+          '<div class="dsl-german" id="dslGerman" lang="de"></div>'+
+          '<div class="dsl-german-current" id="dslGermanCurrent" aria-live="off"></div>'+
           '</div>'+ 
           '<div class="dsl-bottom-block">'+
           '<div class="dsl-controls">'+
@@ -542,6 +593,12 @@
     document.getElementById("dslTranslit").innerHTML=segs.map(function(s,i){
       return '<button type="button" class="dsl-word tr" data-seg="'+i+'">'+esc(s.transliteration||"•")+'</button>';
     }).join(" ");
+    var german=document.getElementById("dslGerman");
+    var complete=segs.length>0&&segs.every(function(s){return Boolean(s.german)});
+    root.classList.toggle("dsl-reviewed-words",complete);
+    german.innerHTML=complete?segs.map(function(s,i){
+      return '<button type="button" class="dsl-word de" data-seg="'+i+'">'+esc(s.german)+'</button>';
+    }).join(" "):'<p class="dsl-german-phrase">'+esc(currentDua&&currentDua.meaning||"")+'</p>';
     paintSelection();
     paintControls();
     queueFocusedWord();
@@ -560,6 +617,12 @@
     render();
     root.classList.add("open");
     root.setAttribute("aria-hidden","false");
+    queueReaderFit();
+    if(document.fonts&&document.fonts.ready)document.fonts.ready.then(queueReaderFit).catch(function(){});
+    if(!fitObserver&&window.ResizeObserver){
+      fitObserver=new ResizeObserver(function(){queueReaderFit()});
+      fitObserver.observe(root.querySelector(".dsl-sheet"));
+    }
     var view=root.querySelector(".dsl-reading-stage")||root.querySelector(".dsl-scroll");
     if(view)view.scrollTop=0;
     queueFocusedWord();
@@ -586,6 +649,7 @@
     }
     document.documentElement.classList.remove("dua-smart-open");
     document.body.classList.remove("dua-smart-open");
+    if(layoutFrame){cancelAnimationFrame(layoutFrame);layoutFrame=0}
     currentDua=null;
   }
   function onClick(ev){
@@ -632,6 +696,8 @@
   }
 
   document.addEventListener("visibilitychange",function(){if(document.hidden)stopAudio()});
+  window.addEventListener("resize",queueReaderFit,{passive:true});
+  window.addEventListener("orientationchange",queueReaderFit,{passive:true});
   window.addEventListener("pageshow",function(){
     if(!root||!root.classList.contains("open")){
       document.documentElement.classList.remove("dua-smart-open");
