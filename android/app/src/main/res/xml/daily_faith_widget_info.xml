@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="140dp"
+    android:minHeight="110dp"
+    android:targetCellWidth="2"
+    android:targetCellHeight="2"
+    android:maxResizeWidth="420dp"
+    android:maxResizeHeight="300dp"
+    android:updatePeriodMillis="86400000"
+    android:initialLayout="@layout/widget_daily_faith"
+    android:previewLayout="@layout/widget_daily_faith"
+    android:description="@string/widget_faith_description"
+    android:resizeMode="horizontal|vertical"
+    android:widgetCategory="home_screen" />

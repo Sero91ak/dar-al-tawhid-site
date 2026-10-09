@@ -33,6 +33,16 @@
       <p class="pw-status" id="pwStatus" role="status"></p>
     </section>
 
+    <section class="pw-card" id="pwNativeAndroidCard">
+      <h2>Android · Startbildschirm</h2>
+      <p class="pw-lead" id="pwNativeAndroidLead">Echte Android-Widgets werden von der nativen Android-App bereitgestellt. Eine installierte PWA kann selbst keinen Android AppWidgetProvider registrieren.</p>
+      <div class="pw-actions" id="pwNativeAndroidActions" hidden>
+        <button type="button" class="primary" id="pwPinPrayerWidget">Gebetszeiten-Widget hinzufügen</button>
+        <button type="button" id="pwPinFaithWidget">Duʿāʾ-des-Tages hinzufügen</button>
+      </div>
+      <p class="pw-status" id="pwNativeAndroidStatus" role="status"></p>
+    </section>
+
     <section class="pw-card">
       <h2>Plattform-Vorschau</h2>
       <div class="pw-tabs" role="tablist">
@@ -100,8 +110,9 @@
         <h3 style="margin:14px 0 8px;font-size:14px">Android</h3>
         <ol>
           <li>Standort in der App setzen, Widget aktivieren und synchronisieren.</li>
-          <li>Auf dem Homescreen sind Android-Widgets typischerweise <b>frei ziehbar</b> – die Vorschau oben simuliert das mit Resize.</li>
-          <li>Presets: 2×2 (nur nächstes Gebet), 4×2 (kompakt), 4×4 (Tagesliste).</li>
+          <li>In der nativen Android-App oben <b>Gebetszeiten-Widget hinzufügen</b> oder <b>Duʿāʾ-des-Tages hinzufügen</b> wählen.</li>
+          <li>Android zeigt die Systembestätigung zum Anheften. Das Gebetszeiten-Widget ist danach frei in der Größe anpassbar.</li>
+          <li>Die PWA/Web-App kann keinen nativen Android AppWidgetProvider registrieren.</li>
           <li>Deep Link: <code>/widgets/?platform=android</code></li>
         </ol>
         <h3 style="margin:14px 0 8px;font-size:14px">PWA / Web</h3>
@@ -199,7 +210,35 @@
       } catch (e) {}
     }
 
+    function bindNativeAndroidWidgets() {
+      var actions = document.getElementById("pwNativeAndroidActions");
+      var lead = document.getElementById("pwNativeAndroidLead");
+      var status = document.getElementById("pwNativeAndroidStatus");
+      var nativeReady = !!(window.DarNative && typeof window.DarNative.requestWidget === "function");
+      if (!nativeReady) {
+        if (lead) lead.textContent = "Die Web-App/PWA kann keine nativen Android-Homescreen-Widgets registrieren. Diese Widgets stehen in der nativen DĀR-Android-App zur Verfügung.";
+        return;
+      }
+      if (actions) actions.hidden = false;
+      if (lead) lead.textContent = "Wähle ein Widget. Android öffnet danach die Systemabfrage zum Anheften auf dem Startbildschirm.";
+      function request(kind, label) {
+        try {
+          var ok = !!window.DarNative.requestWidget(kind);
+          if (status) status.textContent = ok
+            ? "Android-Systemabfrage für „" + label + "“ wurde geöffnet."
+            : "Der aktuelle Launcher unterstützt das direkte Anheften nicht. Öffne die Widget-Auswahl des Startbildschirms.";
+        } catch (e) {
+          if (status) status.textContent = "Widget konnte nicht angefordert werden.";
+        }
+      }
+      var prayer = document.getElementById("pwPinPrayerWidget");
+      var faith = document.getElementById("pwPinFaithWidget");
+      if (prayer) prayer.onclick = function () { request("prayer", "Gebetszeiten"); };
+      if (faith) faith.onclick = function () { request("faith", "Duʿāʾ des Tages"); };
+    }
+
     function bind() {
+      bindNativeAndroidWidgets();
       var themeSel = document.getElementById("pwThemeMode");
       var cfg = DarWidgetStorage.getConfig();
       themeSel.value = cfg.themeMode || "auto";

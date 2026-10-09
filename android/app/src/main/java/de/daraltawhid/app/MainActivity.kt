@@ -139,6 +139,14 @@ class MainActivity : AppCompatActivity() {
                 window.DAR_ANDROID_DEVICE_ID=${jsString(device)};
                 window.DAR_ANDROID_ONESIGNAL_ID=${jsString(sub)};
                 window.DAR_ANDROID_PUSH_TOKEN=${jsString(token)};
+                window.DAR_ANDROID_NATIVE_WIDGETS=true;
+                window.darRequestAndroidWidget=function(kind){
+                  try{return !!DarNative.requestWidget(String(kind||"prayer"))}catch(e){return false}
+                };
+                try{
+                  var rawPrayerSettings=localStorage.getItem("darPrayerSettingsV1");
+                  if(rawPrayerSettings)DarNative.syncPrayerSettings(rawPrayerSettings);
+                }catch(e){}
                 try{localStorage.setItem("darPushExternalIdV1", window.DAR_ANDROID_DEVICE_ID)}catch(e){}
                 var root=document.documentElement;
                 if(root){
@@ -185,6 +193,22 @@ class MainActivity : AppCompatActivity() {
         @JavascriptInterface
         fun haptic() {
             webView.performHapticFeedback(android.view.HapticFeedbackConstants.KEYBOARD_TAP)
+        }
+
+        @JavascriptInterface
+        fun syncPrayerSettings(json: String) {
+            DarWidgetStore.savePrayerSettings(applicationContext, json)
+        }
+
+        @JavascriptInterface
+        fun requestWidget(kind: String): Boolean {
+            val supported = DarWidgetStore.canPinWidget(applicationContext, kind)
+            if (supported) {
+                runOnUiThread {
+                    DarWidgetStore.requestPinWidget(this@MainActivity, kind)
+                }
+            }
+            return supported
         }
     }
 

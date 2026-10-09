@@ -1,28 +1,28 @@
-# Native homescreen notes (Phase 3+)
+# Native homescreen widgets
 
-This folder documents how the web widget maps to native shells later.
-The live product today is the **PWA/web preview** under `/widgets/`.
+The shared preview remains under `/widgets/`. Native Android support is connected to the adult Android shell.
 
-## Apple WidgetKit (Small)
+## Android
 
-| Item | Value |
-|------|--------|
-| Preview size | 158×158 CSS px |
-| Content | Next prayer · time · countdown |
-| Deep link | `/widgets/?platform=apple&size=apple-small` |
+Implemented providers:
 
-Native implementation later: WidgetKit timeline provider reading the same offline day packets (`darWidgetPrayerCacheV1` / App Group shared store).
+- `PrayerTimesWidgetProvider`
+  - resizable home-screen widget
+  - reads the same location/method settings exported from `darPrayerSettingsV1`
+  - refreshes from the existing public `/api/prayer/times` endpoint
+  - keeps the last successful payload as an offline fallback
+  - tap opens `daraltawhid://prayer`
+- `DailyFaithWidgetProvider`
+  - Qurʾānic duʿāʾ rotation
+  - local/offline content
+  - tap opens `daraltawhid://dua`
 
-## Android App Widget (resizable)
+The in-app widget page uses Android 8+ `requestPinAppWidget()`; the Android launcher still shows its normal system confirmation before placement.
 
-| Item | Value |
-|------|--------|
-| Behavior | User-resizable (2×2 → 4×4) |
-| Preview | Drag corner on `/widgets/?platform=android` |
-| Density | `xs` / `sm` / `md` / `lg` via `DarWidgetSizes.densityFromBox` |
+## PWA limitation
 
-Native later: `AppWidgetProvider` + `resizeMode="horizontal|vertical"`; on size change map dp cells to the same density bands and reuse layout rules from `layoutForDensity`.
+An installed PWA cannot register an Android `AppWidgetProvider`. Real launcher widgets therefore require the native Android package. The web/PWA widget page remains a preview/configuration surface.
 
-## Rule
+## Apple
 
-Do **not** recalculate prayer times differently in native code. Reuse or port `widgets/shared/prayer-math.js` and the validated day packets only.
+WidgetKit remains the native iOS implementation. Keep prayer-time calculation/source parity across both native platforms.

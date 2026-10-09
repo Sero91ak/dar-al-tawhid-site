@@ -37,6 +37,26 @@
         android:usesCleartextTraffic="false"
         android:networkSecurityConfig="@xml/network_security_config">
 
+        <receiver
+            android:name=".PrayerTimesWidgetProvider"
+            android:exported="true"
+            android:label="@string/widget_prayer_name">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/prayer_times_widget_info" />
+        </receiver>
+
+        <receiver
+            android:name=".DailyFaithWidgetProvider"
+            android:exported="true"
+            android:label="@string/widget_faith_name">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/daily_faith_widget_info" />
+        </receiver>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

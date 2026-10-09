@@ -7236,6 +7236,24 @@
         "service-worker.js"
       ],
       "expiresAt": "2026-11-30T23:59:00.000Z"
+    },
+    {
+      "id": "android-native-home-widgets-2026-10-09",
+      "at": "2026-10-09T17:30:00+02:00",
+      "approvedBy": "user-explicit-android-home-widgets-and-widget-selection",
+      "reason": "Nutzer beauftragt echte Android-Homescreen-Widgets für Gebetszeiten und religiöse Inhalte sowie eine In-App-Auswahl, mit der Android die Systemabfrage zum Anheften öffnet. PWA bleibt getrennt; Kids, Push und Apple TV unverändert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "android/app/src/main/AndroidManifest.xml",
+        "android/app/src/main/java/de/daraltawhid/app/",
+        "android/app/src/main/res/layout/",
+        "android/app/src/main/res/drawable/",
+        "android/app/src/main/res/xml/",
+        "android/app/src/main/res/values/strings.xml",
+        "widgets/index.html",
+        "widgets/native/README.md"
+      ],
+      "expiresAt": "2026-11-30T23:59:00.000Z"
     }
   ],
   "enabled": true
