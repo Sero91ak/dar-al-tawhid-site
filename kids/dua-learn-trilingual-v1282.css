@@ -231,3 +231,58 @@ html body .dsl .dsl-word:focus-visible{
   outline:2px solid #f4d687!important;
   outline-offset:2px!important;
 }
+
+
+/* KIDS_DUA_CENTERED_RESPONSIVE_READING_V1291
+   The reader uses its existing flexible viewport: short duas stay centered;
+   medium duas grow above/below the visual center as measured type increases.
+   Very long duas keep all three individually scrollable focus-follow lanes.
+   The footer/audio actions never move, the page itself never grows. */
+html body .dsl:not(.dsl-long-content) .dsl-reading-stage{
+  justify-content:safe center!important;
+  padding:8px 0 6px!important;
+}
+html body .dsl.dsl-reader-short:not(.dsl-long-content) .dsl-reading-stage{
+  justify-content:safe center!important;
+  padding:12px 0 8px!important;
+}
+html body .dsl.dsl-reader-medium:not(.dsl-long-content) .dsl-reading-stage{
+  justify-content:safe center!important;
+  padding:9px 0 7px!important;
+}
+html body .dsl.dsl-reader-long:not(.dsl-long-content) .dsl-reading-stage{
+  justify-content:safe center!important;
+  padding:6px 0 4px!important;
+}
+html body .dsl.dsl-long-content .dsl-reading-stage{
+  justify-content:flex-start!important;
+  padding:3px 0 2px!important;
+}
+html body .dsl .dsl-reading-stage .dsl-arabic{
+  line-height:1.38!important;
+}
+html body .dsl .dsl-reading-stage .dsl-translit,
+html body .dsl .dsl-reading-stage .dsl-german{
+  align-content:center!important;
+}
+html body .dsl.dsl-long-content .dsl-reading-stage .dsl-arabic,
+html body .dsl.dsl-long-content .dsl-reading-stage .dsl-translit,
+html body .dsl.dsl-long-content .dsl-reading-stage .dsl-german{
+  align-content:flex-start!important;
+}
+html body .dsl .dsl-word.de{
+  color:#f7f7f1!important;
+  background:rgba(231,238,238,.065)!important;
+}
+html body .dsl .dsl-word.tr{color:#fce4a3!important}
+html body .dsl .dsl-guide{
+  margin-top:5px!important;
+  margin-bottom:3px!important;
+}
+@media (max-height:700px){
+  html body .dsl.dsl-reader-short:not(.dsl-long-content) .dsl-reading-stage,
+  html body .dsl.dsl-reader-medium:not(.dsl-long-content) .dsl-reading-stage{
+    padding:5px 0 3px!important;
+  }
+  html body .dsl .dsl-guide{margin-top:2px!important}
+}
