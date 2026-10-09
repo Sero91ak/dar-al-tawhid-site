@@ -251,7 +251,7 @@ function browserManifestResponse(request, androidBrowser = false) {
     "Cloudflare-CDN-Cache-Control": "no-store",
     "X-Dar-Surface": androidBrowser ? "android-pwa-manifest" : "public-website-manifest",
     "X-Dar-PWA-Icon": iconId,
-    "X-Dar-PWA-Install-Build": "dedicated-app-id-v5-loader-20261009"
+    "X-Dar-PWA-Install-Build": "dedicated-app-id-v7-loader-clickable-20261009"
   });
   return new Response(request.method === "HEAD" ? null : JSON.stringify(manifest, null, 2), { status: 200, headers });
 }
