@@ -1528,7 +1528,10 @@ export default {
     }
 
     if ((request.method === "GET" || request.method === "HEAD") && isRoot && wantsPublicWebsite(request)) {
-      const target = new URL("/desktop-preview/index.html", url.origin);
+      // Workers Static Assets canonicalizes */index.html to the directory URL.
+      // Fetch the canonical directory asset internally so the public root never
+      // leaks a 30x redirect to /desktop-preview/ and still receives our injected guards.
+      const target = new URL("/desktop-preview/", url.origin);
       const assetRequest = new Request(target.toString(), request);
       const assetResponse = await env.ASSETS.fetch(assetRequest);
       const headers = desktopHeaders(assetResponse);
