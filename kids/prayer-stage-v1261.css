@@ -2009,19 +2009,32 @@ body.kids-salah-day-open{overflow:hidden!important}
 }
 
 /* KIDS_HOME_FULLBLEED_STATUS_V1279
-   iPhone reference 2: the same approved mosque photograph flows behind the
-   system status icons. Lift the entire illustrated home world by the original
-   safe-top reservation, rather than auto-scrolling the page on launch.
-   No extra artwork or colored status-bar strip is introduced. */
+   The approved photograph reaches the physical top edge beneath the white
+   iOS status icons. Compensation maintains reference 2's logo / prayer
+   geometry even when the safe-area inset differs by device. No auto-scroll. */
 @media(max-width:699px){
   html.kids-ios-app #view-today .kids-salah-home-world,
   html.dar-ios-native-app #view-today .kids-salah-home-world{
-    margin-top:-46px!important;
+    --kids-start-lift:max(46px, env(safe-area-inset-top, 0px));
+    --kids-start-compensation:calc(var(--kids-start-lift) - 46px);
+    margin-top:calc(-1 * var(--kids-start-lift))!important;
+  }
+  html.kids-ios-app #view-today .kids-salah-home-world > .hero,
+  html.dar-ios-native-app #view-today .kids-salah-home-world > .hero{
+    min-height:calc(clamp(388px,103vw,430px) + var(--kids-start-compensation))!important;
+    height:calc(clamp(388px,103vw,430px) + var(--kids-start-compensation))!important;
+    max-height:calc(430px + var(--kids-start-compensation))!important;
+  }
+  html.kids-ios-app #view-today .kids-salah-home-world .kids-wordmark,
+  html.dar-ios-native-app #view-today .kids-salah-home-world .kids-wordmark{
+    top:calc(max(84px, env(safe-area-inset-top, 0px) + 43px) + var(--kids-start-compensation))!important;
   }
 }
 @media (display-mode:standalone) and (max-width:699px){
   html:not(.kids-ios-app) #view-today .kids-salah-home-world{
-    margin-top:calc(-1 * max(0px, min(46px, env(safe-area-inset-top, 0px))))!important;
+    --kids-start-lift:env(safe-area-inset-top, 0px);
+    --kids-start-compensation:0px;
+    margin-top:calc(-1 * var(--kids-start-lift))!important;
   }
 }
 /* The selected city is already legible in the prayer header. Keep non-routine
