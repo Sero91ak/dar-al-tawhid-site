@@ -124,6 +124,10 @@ if(navigator.connection?.saveData)salahWorld.classList.add("kids-salah-save-data
      HERO.style.setProperty("--kids-home-measured-target",wanted+"px");
      HERO.style.setProperty("--kids-home-preflight-cap","9999px");
      lastHeight=wanted;lastWidth=w;
+     // The browser applies the CSS custom properties on the next frame.
+     // Check the *painted* CTA/dock clearance again before declaring the
+     // opening geometry stable, rather than trusting the pre-layout rect.
+     schedule();
    }
  }
  function schedule(){
@@ -132,6 +136,14 @@ if(navigator.connection?.saveData)salahWorld.classList.add("kids-salah-save-data
  }
  const ro=typeof ResizeObserver==="function"?new ResizeObserver(schedule):null;
  ro?.observe(stage);ro?.observe(dock);
+ // Fonts, profile artwork and the CTA can change height after the first
+ // frame without changing the stage/dock dimensions. Cover those too.
+ ro?.observe(cta);
+ const wordmark=HERO.querySelector(".kids-wordmark");
+ const introduction=HERO.querySelector(".hero-copy");
+ if(wordmark)ro?.observe(wordmark);
+ if(introduction)ro?.observe(introduction);
+ window.addEventListener("load",schedule,{once:true});
  window.addEventListener("resize",schedule,{passive:true});
  window.addEventListener("orientationchange",schedule,{passive:true});
  window.addEventListener("pageshow",schedule,{passive:true});
