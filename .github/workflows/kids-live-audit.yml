@@ -58,6 +58,31 @@ jobs:
           except Exception: obj={}
           home=read('live-home.html')
           css=read('live-salah.css')
+          # Read the exact JS/CSS mappings referenced by the live Kids HTML.
+          import re, urllib.request
+          def live_asset(filename):
+            match=re.search(r'/kids/'+re.escape(filename)+r'\?v=[a-zA-Z0-9_-]+',home)
+            if not match:return {'ref':None,'text':'','bytes':0}
+            ref=match.group(0)
+            req=urllib.request.Request('https://dar-al-tawhid.de'+ref,
+              headers={'User-Agent':'DarAlTawhidKids-iOS/LiveAudit','Cache-Control':'no-cache'})
+            try:
+              with urllib.request.urlopen(req,timeout=25) as response: raw=response.read()
+              return {'ref':ref,'text':raw.decode('utf-8','replace'),'bytes':len(raw)}
+            except Exception as error:
+              print('Kids live asset fetch failed:',ref,type(error).__name__,str(error)[:160])
+              return {'ref':ref,'text':'','bytes':0}
+          learning=live_asset('dua-smart-learn.js')
+          trilingual=live_asset('dua-learn-trilingual-v1282.css')
+          german=live_asset('dua-word-meanings-v1.js')
+          phonetic=live_asset('dua-phonetic-alignment-v1.js')
+          wordLearningReady=bool(obj.get('buildId') and obj['buildId'] in home)
+          wordLearningReady=wordLearningReady and all(x['bytes']>1000 for x in [learning,trilingual,german,phonetic])
+          wordLearningReady=wordLearningReady and (
+            'KIDS_DUA_TRILINGUAL_FOCUS_LANES_V1284' in trilingual['text']
+            and 'dsl-long-content' in learning['text']
+            and 'DARKidsDuaWordMeanings' in german['text']
+            and 'DARKidsDuaPhoneticAlignment' in phonetic['text'])
           img=(p/'live-art.png')
           runs=json.loads(read('runs.json') or '[]')
           art={name:((p/(name+'.png')).stat().st_size if (p/(name+'.png')).exists() else 0) for name in ['hero-day','fajr','dhuhr','asr','maghrib','isha']}
@@ -72,7 +97,9 @@ jobs:
                photoBytes=img.stat().st_size if img.exists() else 0,
                prayerArtworkBytes=art,
                allSevenArtworkFilesReachable=(img.exists() and img.stat().st_size>30000 and all(n>30000 for n in art.values())),
-               versionJsonReadable=bool(obj)),
+               versionJsonReadable=bool(obj),
+               trilingualWordLearningReady=wordLearningReady,
+               trilingualAssets={name:{'ref':value['ref'],'bytes':value['bytes']} for name,value in [('learning',learning),('trilingualCss',trilingual),('germanMeanings',german),('phonetic',phonetic)]}),
              lastDeployRuns=runs)
           (p/'report.json').write_text(json.dumps(doc,indent=2,ensure_ascii=False)+'\n')
           print(json.dumps(doc,indent=2,ensure_ascii=False))
