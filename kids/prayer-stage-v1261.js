@@ -115,10 +115,10 @@ dayPage.id="kidsSalahDailyPage";
 dayPage.hidden=true;
 dayPage.setAttribute("aria-label","Tagesgebetszeiten");
 dayPage.innerHTML=
- '<div class="kids-salah-day-body"><header class="kids-salah-day-header">'+
- '<button class="kids-salah-day-back" id="kidsSalahDayBack" type="button" aria-label="Zurück zur Startseite">'+
+ '<div class="kids-salah-day-body"><header class="kids-salah-day-header kids-detail-appbar" data-kids-unified-header="v1287">'+
+ '<button class="kids-salah-day-back kids-detail-dock-back" id="kidsSalahDayBack" type="button" aria-label="Zurück zur Startseite">'+
  '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14.5 5.5 8 12l6.5 6.5"/></svg></button>'+
- '<span class="kids-salah-day-brand">DĀR AL TAWḤĪD KIDS · ṢALĀH</span></header>'+
+ '<div class="kids-detail-appbar-copy kids-salah-day-brand"><strong class="kids-detail-appbar-title">Gebetszeiten</strong><span class="kids-detail-appbar-subtitle">Unsere fünf Gebete · Heute</span></div></header>'+
  '<div class="kids-salah-day-hero" role="group" aria-label="Dein Gebetstag">'+
  '<div class="kids-salah-day-overline"><span class="kids-salah-day-spark" aria-hidden="true">✦</span> DEIN GEBETSTAG <span id="kidsSalahDayDate"></span></div>'+
  '<h2>Unsere fünf <em>Gebete</em></h2>'+
