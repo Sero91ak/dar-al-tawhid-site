@@ -5,19 +5,19 @@
   "schemaVersion": "1.3",
   "sourceOfTruth": "/apple-tv/hadith/",
   "liveURL": "https://dar-al-tawhid.de/apple-tv/hadith/catalog.json",
-  "authenticOnly": true,
+  "authenticOnly": false,
   "supportedRecordTypes": [
     "hadith",
     "athar"
   ],
-  "totalCount": 3350,
-  "publishedCount": 3350,
+  "totalCount": 3351,
+  "publishedCount": 3351,
   "hadithCount": 2407,
-  "atharCount": 943,
-  "currentSeries": "3251-3350",
-  "latestId": "HAD-3350",
-  "latestPublishedId": "HAD-3350",
-  "nextId": "HAD-3351",
+  "atharCount": 944,
+  "currentSeries": "3351-3450",
+  "latestId": "HAD-3351",
+  "latestPublishedId": "HAD-3351",
+  "nextId": "HAD-3352",
   "screensaver": {
     "enabled": true,
     "provider": "HadithScreensaverProvider",
@@ -34,7 +34,7 @@
     "activation": "per-record-immediate"
   },
   "policy": {
-    "authenticOnly": true,
+    "authenticOnly": false,
     "requireVerifiedSharh": false,
     "screensaverShowsSharh": true,
     "screensaverSharhMode": "compact",
@@ -44,7 +44,11 @@
       "needs-review"
     ],
     "hadithLibraryIncludesOpenSharh": true,
-    "singleSourceForWebIosAndroidAppleTv": true
+    "singleSourceForWebIosAndroidAppleTv": true,
+    "hadithRequireAuthenticity": true,
+    "newHadithMustHaveVerifiedSharh": true,
+    "atharRequireAccurateIsnadStatus": true,
+    "atharDoNotRequireSharh": true
   },
   "series": [
     {
@@ -489,6 +493,18 @@
       "publishedFrom": "HAD-3251",
       "publishedTo": "HAD-3350",
       "publishedCount": 100,
+      "skipped": []
+    },
+    {
+      "id": "3351-3450",
+      "count": 1,
+      "firstId": "HAD-3351",
+      "lastId": "HAD-3351",
+      "indexPath": "series/3351-3450/index.json",
+      "label": "HAD-3351 bis HAD-3351",
+      "publishedFrom": "HAD-3351",
+      "publishedTo": "HAD-3351",
+      "publishedCount": 1,
       "skipped": []
     }
   ]
