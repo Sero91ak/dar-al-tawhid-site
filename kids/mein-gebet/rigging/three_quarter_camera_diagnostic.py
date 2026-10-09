@@ -59,7 +59,7 @@ def sweep(model_path, reference_path):
     body = best_fit_diagnostic(rows, 'whole_body_iou_worst')
     head = best_fit_diagnostic(rows, 'head_region_iou_worst')
     return {
-        'method': 'v77-locked-angle-sweep-diagnostic-v1',
+        'method': 'v77-locked-angle-sweep-diagnostic-v2-stride-scene-safe',
         'source_glb_sha256': PINNED_V77_SHA256,
         'source_reference_sha256': PINNED_REFERENCE_SHA256,
         'reference_segmentation_stability': round(reference_stability, 5),
