@@ -341,8 +341,20 @@ function androidNativeToolsAddon() {
 
 // DAR_ANDROID_PWA_INSTALL_RUNTIME_V3_20261009
 // DAR_ANDROID_PWA_DIRECT_INSTALL_TAP_CLEAN_LIVE_V4_20261009
+// DAR_ANDROID_PWA_INSTALL_READY_GATE_V6_20261009
 function publicWebsiteAddon() {
   return `
+<style id="darPublicTouchRectangleHardStopV6">
+@media (hover:none) and (pointer:coarse){
+ html,body,body *{-webkit-tap-highlight-color:rgba(0,0,0,0)!important}
+ a,button,[role="button"],summary,[tabindex],label,.desktop-link,.more-row,.category-card,.feature-card,.header-action,.main-nav a,
+ a *,button *,[role="button"] *,summary *,.desktop-link *,.more-row *,.category-card *,.feature-card *,.header-action *,.main-nav a *{-webkit-tap-highlight-color:rgba(0,0,0,0)!important}
+ a:focus,a:focus-visible,button:focus,button:focus-visible,[role="button"]:focus,[role="button"]:focus-visible,
+ summary:focus,summary:focus-visible,[tabindex]:focus,[tabindex]:focus-visible,.desktop-link:focus,.desktop-link:focus-visible,
+ .more-row:focus,.more-row:focus-visible,.category-card:focus,.category-card:focus-visible,.feature-card:focus,.feature-card:focus-visible,
+ .header-action:focus,.header-action:focus-visible,.main-nav a:focus,.main-nav a:focus-visible{outline:0!important;outline-offset:0!important}
+}
+</style>
 <style id="darPublicTapCleanV4">
 *{-webkit-tap-highlight-color:transparent!important}
 @media(hover:none) and (pointer:coarse){
@@ -568,10 +580,10 @@ a,button,[role="button"],summary,[tabindex],label{-webkit-tap-highlight-color:tr
       document.querySelectorAll("[data-dar-pwa-install]").forEach(function(btn){
         if(!btn.dataset.darInstallLabel)btn.dataset.darInstallLabel=btn.textContent||"Web-App installieren";
         var preparing=android&&!installed&&!ready;
-        btn.disabled=installed;
-        btn.setAttribute("aria-disabled",installed?"true":"false");
+        btn.disabled=installed||preparing;
+        btn.setAttribute("aria-disabled",(installed||preparing)?"true":"false");
         btn.setAttribute("data-dar-pwa-install-state",installed?"installed":(ready?"ready":"preparing"));
-        var nextLabel=installed?"Bereits installiert":btn.dataset.darInstallLabel;
+        var nextLabel=installed?"Bereits installiert":(preparing?"Installation wird vorbereitet …":btn.dataset.darInstallLabel);
         if(btn.textContent!==nextLabel)btn.textContent=nextLabel;
       });
     }catch(e){}

@@ -114,3 +114,7 @@ console.log("ANDROID_SITE_RELEASE_GUARD OK | public=" + published + " | Kids=pri
 // Direct install UI contract
 assert.ok(router.includes("syncRouterInstallButtons"), "Direct Android PWA install readiness gate missing");
 assert.ok(router.includes("beforeinstallprompt"), "beforeinstallprompt capture missing");
+assert.ok(router.includes("btn.disabled=installed||preparing;"), "Android install button must remain disabled until the native Chromium install prompt is ready");
+assert.ok(router.includes('preparing?"Installation wird vorbereitet …"'), "Android install button must show preparing state before the native prompt exists");
+assert.ok(router.includes("DAR_ANDROID_PWA_INSTALL_READY_GATE_V6_20261009"), "Android install readiness gate marker missing");
+assert.ok(router.includes("darPublicTouchRectangleHardStopV6"), "Mobile tap rectangle hard-stop missing");
