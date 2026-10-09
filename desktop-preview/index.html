@@ -2648,6 +2648,11 @@ html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
      ?"Icon gespeichert. Android/Chrome aktualisiert ein bereits installiertes Launcher-Icon nicht sofort; für den sofortigen Wechsel die Web-App neu installieren."
      :"Dieses Icon wird für die nächste Android-Web-App-Installation verwendet."
    });
+   try{
+    if(window.DarNative&&typeof window.DarNative.setAppIcon==="function"){
+     window.DarNative.setAppIcon(id);
+    }
+   }catch(eAndroidIcon){}
    var nativeHandler=window.webkit&&window.webkit.messageHandlers&&window.webkit.messageHandlers.darAppIcon;
    if(nativeHandler&&nativeHandler.postMessage)nativeHandler.postMessage({name:id,id:id})
   }catch(e){}
@@ -3498,7 +3503,7 @@ html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
 
  renders.mehr=function(){
   return realIntro("MEHR","Weitere Bereiche entdecken.","Wissenssammlungen, Apps und Werkzeuge der Seite.")+
-   '<section class="section reveal"><div class="more-grid"><a class="more-row desktop-link" href="'+pUrl("downloads")+'" data-page="downloads"><div><h3>Downloads</h3><p>Android-Web-App installieren oder die offizielle iPhone-/iPad-App öffnen.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+pUrl("propheten")+'" data-page="propheten"><div><h3>Propheten</h3><p>25 geprüfte Profile aus Qurʾān, Sunnah und frühen Quellen.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+pUrl("frauen")+'" data-page="frauen"><div><h3>Frauen</h3><p>Geprüfte Bereiche zu Fiqh, Familie, Wissen und Adab.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+pUrl("quiz")+'" data-page="quiz"><div><h3>Quiz</h3><p>Geprüfte Fragen mit Erklärung und Quelle.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+pUrl("zakat")+'" data-page="zakat"><div><h3>Zakāt-Rechner</h3><p>Vermögen und fällige Schulden eingeben.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+pUrl("quellen")+'" data-page="quellen"><div><h3>Quellen</h3><p>Direktnachweise und verwendete Werke.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+pUrl("einstellungen")+'" data-page="einstellungen"><div><h3>Darstellung</h3><p>Lesemodus und Schriftgröße.</p></div><b>→</b></a></div></section>'+footer()
+   '<section class="section reveal"><div class="more-grid"><a class="more-row desktop-link" href="'+pUrl("downloads")+'" data-page="downloads"><div><h3>Downloads</h3><p>Android-Web-App installieren oder die offizielle iPhone-/iPad-App öffnen.</p></div><b>→</b></a><a class="more-row" href="/widgets/?platform=android"><div><h3>Widgets & App-Icon</h3><p>Gebetszeiten, Heute & Dhikr sowie App-Icon verwalten.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+pUrl("propheten")+'" data-page="propheten"><div><h3>Propheten</h3><p>25 geprüfte Profile aus Qurʾān, Sunnah und frühen Quellen.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+pUrl("frauen")+'" data-page="frauen"><div><h3>Frauen</h3><p>Geprüfte Bereiche zu Fiqh, Familie, Wissen und Adab.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+pUrl("quiz")+'" data-page="quiz"><div><h3>Quiz</h3><p>Geprüfte Fragen mit Erklärung und Quelle.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+pUrl("zakat")+'" data-page="zakat"><div><h3>Zakāt-Rechner</h3><p>Vermögen und fällige Schulden eingeben.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+pUrl("quellen")+'" data-page="quellen"><div><h3>Quellen</h3><p>Direktnachweise und verwendete Werke.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+pUrl("einstellungen")+'" data-page="einstellungen"><div><h3>Darstellung</h3><p>Lesemodus und Schriftgröße.</p></div><b>→</b></a></div></section>'+footer()
  };
 
  // --- Smart browse v9 ---
