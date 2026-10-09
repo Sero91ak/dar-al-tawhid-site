@@ -94,7 +94,7 @@
     var out = Object.assign({}, record);
     out.recordType = out.recordType || "hadith";
     out.hasVerifiedSharh = hasVerifiedSharh(record);
-    out.libraryStatus = out.hasVerifiedSharh ? "complete" : "open-sharh";
+    out.libraryStatus = out.recordType === "athar" ? "athar-no-sharh-required" : (out.hasVerifiedSharh ? "complete" : "open-sharh");
     out.bookCategory = out.bookCategory || out.categoryLabel || (out.recordType === "athar" ? "Āṯār" : "Ḥadīṯ");
     return out;
   }
