@@ -341,6 +341,16 @@ function androidNativeToolsAddon() {
 // DAR_ANDROID_PWA_INSTALL_RUNTIME_V3_20261009
 function publicWebsiteAddon() {
   return `
+<style id="darPublicTapCleanV1">
+html,body,a,button,input,select,textarea,summary,label,[role="button"],[tabindex]{
+ -webkit-tap-highlight-color:rgba(0,0,0,0)!important;
+}
+a:focus:not(:focus-visible),button:focus:not(:focus-visible),input:focus:not(:focus-visible),
+select:focus:not(:focus-visible),textarea:focus:not(:focus-visible),summary:focus:not(:focus-visible),
+[role="button"]:focus:not(:focus-visible),[tabindex]:focus:not(:focus-visible){
+ outline:none!important;
+}
+</style>
 <style id="darPublicWebsiteOnlyV1">
 #darIosAppStorePromo{display:none;width:min(1180px,calc(100% - 28px));margin:26px auto 38px;padding:17px 18px;border:1px solid rgba(152,116,57,.22);border-radius:24px;background:linear-gradient(105deg,#121d25,#1b2d34 52%,#213a32);box-shadow:0 14px 34px rgba(14,25,28,.13);color:#fffaf0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
 #darIosAppStorePromo.is-visible{display:grid;grid-template-columns:44px minmax(0,1fr) auto;align-items:center;gap:14px}
@@ -522,15 +532,14 @@ function publicWebsiteAddon() {
     if(installEvent){
       try{
         installEvent.prompt();
-        // A beforeinstallprompt event may only be used once.
-        deferredInstall=null;
-        window.__darEarlyInstallPrompt=null;
         var choice=await installEvent.userChoice;
         if(choice&&choice.outcome==="accepted"){
+          deferredInstall=null;
+          window.__darEarlyInstallPrompt=null;
           setPwaHint("Installation bestätigt.");
           return true;
         }
-        setPwaHint("Installation abgebrochen. Für einen neuen Versuch die Seite einmal neu laden.");
+        setPwaHint("Installation wurde nicht bestätigt.");
         return false;
       }catch(e){}
     }

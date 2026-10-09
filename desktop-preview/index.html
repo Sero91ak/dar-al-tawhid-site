@@ -2317,7 +2317,17 @@ button,input,select{font:inherit}
  try{if("serviceWorker" in navigator)navigator.serviceWorker.register("/service-worker.js",{scope:"/"}).catch(function(){})}catch(e){}
 })();
 </script>
-<link rel="manifest" href="/manifest.json" crossorigin="use-credentials">
+<link rel="manifest" href="/manifest.json">
+<style id="darMobileTapCleanV1">
+html,body,a,button,input,select,textarea,summary,label,[role="button"],[tabindex]{
+ -webkit-tap-highlight-color:rgba(0,0,0,0)!important;
+}
+a:focus:not(:focus-visible),button:focus:not(:focus-visible),input:focus:not(:focus-visible),
+select:focus:not(:focus-visible),textarea:focus:not(:focus-visible),summary:focus:not(:focus-visible),
+[role="button"]:focus:not(:focus-visible),[tabindex]:focus:not(:focus-visible){
+ outline:none!important;
+}
+</style>
 <style id="darAndroidPwaWebsiteV1">
 #darAndroidPwaHome{display:none}
 html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
@@ -2798,17 +2808,16 @@ html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
   if(installEvent){
    try{
     installEvent.prompt();
-    // A beforeinstallprompt event may only be used once.
-    darDeferredPwaPrompt=null;
-    window.__darEarlyInstallPrompt=null;
     var choice=await installEvent.userChoice;
     if(choice&&choice.outcome==="accepted"){
+     darDeferredPwaPrompt=null;
+     window.__darEarlyInstallPrompt=null;
      darPwaHint("Installation bestätigt.");
      darPwaToast("Installation bestätigt. Android fügt die Web-App jetzt hinzu.");
      return true
     }
-    darPwaHint("Installation abgebrochen. Für einen neuen Versuch die Seite einmal neu laden.");
-    darPwaToast("Installation abgebrochen. Für einen neuen Versuch die Seite einmal neu laden.");
+    darPwaHint("Installation wurde nicht bestätigt.");
+    darPwaToast("Installation wurde nicht bestätigt.");
     return false
    }catch(e){}
   }
