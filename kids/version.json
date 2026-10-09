@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v196-launch-measure1301",
-  "label": "KIDS · V1.09.17",
+  "buildId": "kids-shell-v197-home-dock-fit1302",
+  "label": "KIDS · V1.09.18",
   "releasedAt": "2026-10-09T18:46:00Z",
-  "note": "KIDS V1.09.17: Erste Startseitenmessung nimmt die tatsächlich gerenderte Hero-Höhe als Basis und rechnet die zusätzliche Safe-Area-Bildüberdeckung korrekt heraus. Die responsive Gebetszeiten-CTA wird damit ohne künstlichen Höhenzuwachs beim ersten Öffnen gegen die reale Tab-Leistenposition angepasst. Besonders auf kürzeren iPhones, Android-Smartphones und iPads in Querformat soll der sichtbare Nachsprung reduziert werden. Originalbild, Zeiten, Audio, Wischsteuerung und Navigation unverändert. Auf sehr kleinen Displays bleibt Scrollen möglich.",
+  "note": "KIDS V1.09.18: Erste Startseitenhöhe wird anhand realer Bildschirmhöhe, Position der unteren Tab-Leiste und Position der Schaltfläche ‚Alle Gebetszeiten ansehen‘ ermittelt. Falls Logo und Begrüßung den CTA unter die Tabs drängen würden, aktiviert der Bildschirm eine kompakte, weiterhin vollständig lesbare Geometrie und misst erneut. Keine künstliche Scrollposition, kein Motivwechsel, keine ausgeblendeten Gebetszeiten. Kleine Displays bleiben bei physikalisch zu geringer Höhe scrollbar. CSS, JS, alle drei App-Einstiege und Offline-Cache sind versioniert.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1301",
+    "serviceWorkerCache": "v1302",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
