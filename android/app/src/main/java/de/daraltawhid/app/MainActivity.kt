@@ -254,6 +254,36 @@ class MainActivity : AppCompatActivity() {
                 window.DAR_ANDROID_ONESIGNAL_ID=${jsString(sub)};
                 window.DAR_ANDROID_PUSH_TOKEN=${jsString(token)};
                 try{localStorage.setItem("darPushExternalIdV1", window.DAR_ANDROID_DEVICE_ID)}catch(e){}
+                // Native home-screen widget location bridge. The website may
+                // change the selected city without a full page reload.
+                // Sync the saved coordinates only when changed, no extra GPS
+                // requests and no OneSignal/push registration side effects.
+                try{
+                  if(!window.__DAR_ANDROID_WIDGET_SYNC_V2){
+                    window.__DAR_ANDROID_WIDGET_SYNC_V2=true;
+                    window.__darWidgetLastLocation=null;
+                    window.__darAndroidSyncWidgetLocation=function(){
+                      try{
+                        var value=typeof getPrayerSettings==="function"?
+                          getPrayerSettings():JSON.parse(localStorage.getItem("darPrayerSettingsV1")||"{}");
+                        var lat=Number(value.lat!=null?value.lat:value.latitude);
+                        var lon=Number(value.lon!=null?value.lon:value.lng!=null?value.lng:value.longitude);
+                        if(!Number.isFinite(lat)||!Number.isFinite(lon)||
+                           lat< -90||lat>90||lon< -180||lon>180||
+                           !(value.locationGranted===true||value.city||value.locationName))return;
+                        var name=String(value.city||value.locationName||"Mein Standort").slice(0,60);
+                        var signature=lat.toFixed(5)+"|"+lon.toFixed(5)+"|"+name;
+                        if(signature===window.__darWidgetLastLocation)return;
+                        DarNative.saveWidgetLocation(lat,lon,name);
+                        window.__darWidgetLastLocation=signature;
+                      }catch(e){}
+                    };
+                    window.__darAndroidSyncWidgetLocation();
+                    window.setInterval(window.__darAndroidSyncWidgetLocation,60000);
+                  }else if(window.__darAndroidSyncWidgetLocation){
+                    window.__darAndroidSyncWidgetLocation();
+                  }
+                }catch(e){}
                 var root=document.documentElement;
                 if(root){
                   root.classList.remove("dar-ios-native-app","dar-ios-native-tabs");
