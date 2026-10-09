@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-10-09T15:00:54Z",
+  "timestamp": "2026-10-09T15:02:22Z",
   "trigger": "workflow_run",
   "finishedDeployConclusion": "cancelled",
-  "finishedDeployRun": "37948409545",
+  "finishedDeployRun": "37948587259",
   "live": {
     "buildId": "kids-shell-v181-elastic1286",
     "label": "KIDS · V1.09.02",
@@ -44,6 +44,24 @@
   },
   "lastDeployRuns": [
     {
+      "conclusion": null,
+      "created_at": "2026-10-09T15:02:14Z",
+      "head_sha": "0972102dbe4174ac66df443f698dd4c1cdb45995",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37948679082",
+      "id": 37948679082,
+      "status": "pending",
+      "updated_at": "2026-10-09T15:02:15Z"
+    },
+    {
+      "conclusion": "cancelled",
+      "created_at": "2026-10-09T15:01:30Z",
+      "head_sha": "872a59f727d589ed43b61e58f6d9bc4c332e0b0c",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37948587259",
+      "id": 37948587259,
+      "status": "completed",
+      "updated_at": "2026-10-09T15:02:15Z"
+    },
+    {
       "conclusion": "cancelled",
       "created_at": "2026-10-09T15:00:10Z",
       "head_sha": "ad4322a5e5db37c53cd825d6c8d354c20733e9ec",
@@ -78,24 +96,6 @@
       "id": 37947795840,
       "status": "completed",
       "updated_at": "2026-10-09T14:55:46Z"
-    },
-    {
-      "conclusion": null,
-      "created_at": "2026-10-09T14:54:29Z",
-      "head_sha": "963d312b430304c5e1dd03c8eb948e5f5fb1b5d9",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37947688725",
-      "id": 37947688725,
-      "status": "in_progress",
-      "updated_at": "2026-10-09T14:59:14Z"
-    },
-    {
-      "conclusion": "cancelled",
-      "created_at": "2026-10-09T14:52:46Z",
-      "head_sha": "0e653db47965b8f1b7a5fd9b0f5af5c18583c1b7",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37947477321",
-      "id": 37947477321,
-      "status": "completed",
-      "updated_at": "2026-10-09T14:53:29Z"
     }
   ]
 }
