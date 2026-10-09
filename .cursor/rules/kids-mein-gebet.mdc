@@ -1,0 +1,8 @@
+---
+description: DĀR AL TAWḤĪD KIDS Mein Gebet isolated draft engineering rules
+globs:
+  - "kids/mein-gebet/**"
+  - ".github/workflows/kids-mein-gebet-draft-qa.yml"
+alwaysApply: false
+---
+For every task touching Mein Gebet, follow `kids/mein-gebet/AGENTS.md` and `kids/mein-gebet/AUTONOMOUS-AGENT-HANDOFF.md`; also obey repository-root `AGENTS.md`. Work on the draft feature branch `feature/kids-mein-gebet-preview-20261008` / Draft PR #825 or a safe child branch targeting that feature branch. Never push/merge main or deploy live without fresh express user authorization. Keep actual V7.7 original art SHA gates and religious/visual/device approvals honest. Prefer real preview/app fixes, reproduce and test every correction, document progress on the draft.
