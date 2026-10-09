@@ -5,8 +5,8 @@
   "totalInspected": 50,
   "hadithCount": 30,
   "atharCount": 20,
-  "verifiedSharh": 3,
-  "openSharh": 27,
+  "verifiedSharh": 18,
+  "openSharh": 12,
   "status": "hadith-and-athar-review-separated",
   "policy": {
     "authenticPrimaryTextRequired": true,
@@ -19,9 +19,24 @@
     "sourceOfTruth": "apple-tv/hadith/series/"
   },
   "verifiedIds": [
+    "HAD-0411",
+    "HAD-0412",
     "HAD-0413",
     "HAD-0414",
-    "HAD-0420"
+    "HAD-0415",
+    "HAD-0416",
+    "HAD-0417",
+    "HAD-0418",
+    "HAD-0419",
+    "HAD-0420",
+    "HAD-0421",
+    "HAD-0422",
+    "HAD-0423",
+    "HAD-0424",
+    "HAD-0425",
+    "HAD-0426",
+    "HAD-0427",
+    "HAD-0428"
   ],
   "issues": [
     {
@@ -42,9 +57,20 @@
       "kind": "athar-attribution",
       "status": "open",
       "description": "Zwei weitere Āṯār zunächst mit genauem arabischem Isnādnachweis prüfen."
+    },
+    {
+      "ids": [
+        "HAD-0411",
+        "HAD-0412",
+        "HAD-0418",
+        "HAD-0419"
+      ],
+      "kind": "wrong-hadith-number",
+      "status": "resolved",
+      "description": "Vier irreführende deutsche Zusammenfassungen passten nicht zum numerischen Buḫārī-Original. Quellentreue Ersatztexte wurden einzeln per SHA gesichert."
     }
   ],
-  "nextAction": "27 Hadith benötigen direkten klassischen Šarḥ und 20 Athar benötigen genauen Isnād-/Originaltextnachweis; Athar sind KEINE 20 Šarḥ-Lücken.",
+  "nextAction": "12 authentische Buḫārī-Einträge mit offenem Šarḥ sowie 20 Āṯār mit ungeprüfter Originalzuschreibung; Ḥadīṯe und Āṯār strikt getrennt führen.",
   "entries": [
     {
       "id": "HAD-0393",
@@ -175,14 +201,18 @@
     {
       "id": "HAD-0411",
       "recordType": "hadith",
-      "sharh": "open-source-review",
-      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+      "sharh": "verified",
+      "statusNote": "Buḫārī-Primärtext und direkter Ibn-Raǧab-Kommentar mit digitaler Werkpagination im zugehörigen HAD-Datensatz; keine bestätigte Druckedition. Vorheriger deutscher Primärtext widersprach der Buḫārī-Nummer; gegen das arabische Original korrigiert.",
+      "primarySourceNumber": "371",
+      "primarySourceCorrected": true
     },
     {
       "id": "HAD-0412",
       "recordType": "hadith",
-      "sharh": "open-source-review",
-      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+      "sharh": "verified",
+      "statusNote": "Buḫārī-Primärtext und direkter Ibn-Raǧab-Kommentar mit digitaler Werkpagination im zugehörigen HAD-Datensatz; keine bestätigte Druckedition. Vorheriger deutscher Primärtext widersprach der Buḫārī-Nummer; gegen das arabische Original korrigiert.",
+      "primarySourceNumber": "372",
+      "primarySourceCorrected": true
     },
     {
       "id": "HAD-0413",
@@ -201,32 +231,39 @@
     {
       "id": "HAD-0415",
       "recordType": "hadith",
-      "sharh": "open-source-review",
-      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+      "sharh": "verified",
+      "statusNote": "Buḫārī-Primärtext und direkter Ibn-Raǧab-Kommentar mit digitaler Werkpagination im zugehörigen HAD-Datensatz; keine bestätigte Druckedition.",
+      "primarySourceNumber": "375"
     },
     {
       "id": "HAD-0416",
       "recordType": "hadith",
-      "sharh": "open-source-review",
-      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+      "sharh": "verified",
+      "statusNote": "Buḫārī-Primärtext und direkter Ibn-Raǧab-Kommentar mit digitaler Werkpagination im zugehörigen HAD-Datensatz; keine bestätigte Druckedition.",
+      "primarySourceNumber": "376"
     },
     {
       "id": "HAD-0417",
       "recordType": "hadith",
-      "sharh": "open-source-review",
-      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+      "sharh": "verified",
+      "statusNote": "Buḫārī-Primärtext und direkter Ibn-Raǧab-Kommentar mit digitaler Werkpagination im zugehörigen HAD-Datensatz; keine bestätigte Druckedition.",
+      "primarySourceNumber": "377"
     },
     {
       "id": "HAD-0418",
       "recordType": "hadith",
-      "sharh": "open-source-review",
-      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+      "sharh": "verified",
+      "statusNote": "Buḫārī-Primärtext und direkter Ibn-Raǧab-Kommentar mit digitaler Werkpagination im zugehörigen HAD-Datensatz; keine bestätigte Druckedition. Vorheriger deutscher Primärtext widersprach der Buḫārī-Nummer; gegen das arabische Original korrigiert.",
+      "primarySourceNumber": "378",
+      "primarySourceCorrected": true
     },
     {
       "id": "HAD-0419",
       "recordType": "hadith",
-      "sharh": "open-source-review",
-      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+      "sharh": "verified",
+      "statusNote": "Buḫārī-Primärtext und direkter Ibn-Raǧab-Kommentar mit digitaler Werkpagination im zugehörigen HAD-Datensatz; keine bestätigte Druckedition. Vorheriger deutscher Primärtext widersprach der Buḫārī-Nummer; gegen das arabische Original korrigiert.",
+      "primarySourceNumber": "379",
+      "primarySourceCorrected": true
     },
     {
       "id": "HAD-0420",
@@ -238,50 +275,58 @@
     {
       "id": "HAD-0421",
       "recordType": "hadith",
-      "sharh": "open-source-review",
-      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+      "sharh": "verified",
+      "statusNote": "Buḫārī-Primärtext und direkter Ibn-Raǧab-Kommentar mit digitaler Werkpagination im zugehörigen HAD-Datensatz; keine bestätigte Druckedition.",
+      "primarySourceNumber": "381"
     },
     {
       "id": "HAD-0422",
       "recordType": "hadith",
-      "sharh": "open-source-review",
-      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+      "sharh": "verified",
+      "statusNote": "Buḫārī-Primärtext und direkter Ibn-Raǧab-Kommentar mit digitaler Werkpagination im zugehörigen HAD-Datensatz; keine bestätigte Druckedition.",
+      "primarySourceNumber": "382"
     },
     {
       "id": "HAD-0423",
       "recordType": "hadith",
-      "sharh": "open-source-review",
-      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+      "sharh": "verified",
+      "statusNote": "Buḫārī-Primärtext und direkter Ibn-Raǧab-Kommentar mit digitaler Werkpagination im zugehörigen HAD-Datensatz; keine bestätigte Druckedition.",
+      "primarySourceNumber": "383"
     },
     {
       "id": "HAD-0424",
       "recordType": "hadith",
-      "sharh": "open-source-review",
-      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+      "sharh": "verified",
+      "statusNote": "Buḫārī-Primärtext und direkter Ibn-Raǧab-Kommentar mit digitaler Werkpagination im zugehörigen HAD-Datensatz; keine bestätigte Druckedition.",
+      "primarySourceNumber": "384"
     },
     {
       "id": "HAD-0425",
       "recordType": "hadith",
-      "sharh": "open-source-review",
-      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+      "sharh": "verified",
+      "statusNote": "Buḫārī-Primärtext und direkter Ibn-Raǧab-Kommentar mit digitaler Werkpagination im zugehörigen HAD-Datensatz; keine bestätigte Druckedition.",
+      "primarySourceNumber": "385"
     },
     {
       "id": "HAD-0426",
       "recordType": "hadith",
-      "sharh": "open-source-review",
-      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+      "sharh": "verified",
+      "statusNote": "Buḫārī-Primärtext und direkter Ibn-Raǧab-Kommentar mit digitaler Werkpagination im zugehörigen HAD-Datensatz; keine bestätigte Druckedition.",
+      "primarySourceNumber": "386"
     },
     {
       "id": "HAD-0427",
       "recordType": "hadith",
-      "sharh": "open-source-review",
-      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+      "sharh": "verified",
+      "statusNote": "Buḫārī-Primärtext und direkter Ibn-Raǧab-Kommentar mit digitaler Werkpagination im zugehörigen HAD-Datensatz; keine bestätigte Druckedition.",
+      "primarySourceNumber": "387"
     },
     {
       "id": "HAD-0428",
       "recordType": "hadith",
-      "sharh": "open-source-review",
-      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+      "sharh": "verified",
+      "statusNote": "Buḫārī-Primärtext und direkter Ibn-Raǧab-Kommentar mit digitaler Werkpagination im zugehörigen HAD-Datensatz; keine bestätigte Druckedition.",
+      "primarySourceNumber": "388"
     },
     {
       "id": "HAD-0429",
