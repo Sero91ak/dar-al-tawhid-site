@@ -11,7 +11,7 @@ topic: "Taqwā, Pflichten und freiwillige Gottesdienste"
 scholar: "ʿUmar ibn ʿAbd al-ʿAzīz"
 book: "al-Mizzī, Tahḏīb al-Kamāl fī Asmāʾ ar-Riǧāl"
 tags: []
-source: "📝 al-Mizzī, Tahḏīb al-Kamāl fī Asmāʾ ar-Riǧāl, Bd. 21, S. 445, Biographie Nr. 4277. Athar eines Tābiʿī, kein prophetischer Ḥadīṯ; die angeführte Überlieferungskette ist unterbrochen."
+source: "📝 al-Mizzī, Tahḏīb al-Kamāl fī Asmāʾ ar-Riǧāl, Bd. 21, S. 445, Biographie Nr. 4277."
 links:
   - label: "🔗 dar-al-tawhid.de/q/38"
     url: "/q/38/"
@@ -27,9 +27,5 @@ Vielmehr besteht Taqwā gegenüber Allah darin, **das zu unterlassen, was Allah 
 
 Wem darüber hinaus weiteres Gutes gewährt wird, für den ist es Gutes, das zu weiterem Guten hinzukommt.“
 
-📝 **Quelle:** al-Mizzī, *Tahḏīb al-Kamāl fī Asmāʾ ar-Riǧāl*, Bd. 21, S. 445, Biographie Nr. 4277.
-🔗 dar-al-tawhid.de/q/38
-
-**Überlieferungsstatus:** Der Wortlaut ist bei al-Mizzī überliefert. Der genannte Zwischenüberlieferer ʿAbd ar-Raḥmān ibn Maysarah wurde laut seiner Biographie erst 118 n. H. geboren, ʿUmar ibn ʿAbd al-ʿAzīz starb 101 n. H.; die direkte Verbindung ist daher nicht gegeben.
 
 🌙 **Fazit:** **Wahre Taqwā** zeigt sich nicht allein in vielen freiwilligen Gottesdiensten, sondern vor allem darin, **Allahs Verbote zu meiden und Seine Pflichten zu erfüllen**. Freiwillige Taten sind eine wertvolle Ergänzung – kein Ersatz für Gehorsam.
