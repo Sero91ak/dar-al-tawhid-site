@@ -127,10 +127,11 @@
     "animationFreezeV77ProtocolCommitted": true,
     "animationFreezeSyntheticTestsPassed": 12,
     "animationFreezeRealV77CandidateTestPassed": false,
-    "adversarialAuditSyntheticTestsPassed": 17,
+    "adversarialAuditSyntheticTestsPassed": 18,
     "metadataOnlyCanApproveProduction": false,
     "strictBinaryReleaseCLI": "node kids/mein-gebet/rigging/audit-project-completion.cjs --require-ready --boy-glb=/absolute/path/boy.glb --girl-glb=/absolute/path/girl.glb",
     "releaseAuditShaNote": "Code SHA varies by future commits. Strict release requires actual GLB paths and exact approved manifest SHA-256 + size.",
-    "nextExactAssetNeed": "Provide exact V7.7 GLB sha 353b028862f91922d6288cf6ede09d5c8150815657c66c9c116b7775311c07fa and original turnaround PNG sha 062b8555e861c680b1049ab6a3bee0212caa51cda5168a6b33a76be01aa987b9 to a readable local work directory; do not use substituted models or screenshots."
+    "nextExactAssetNeed": "Provide exact V7.7 GLB sha 353b028862f91922d6288cf6ede09d5c8150815657c66c9c116b7775311c07fa and original turnaround PNG sha 062b8555e861c680b1049ab6a3bee0212caa51cda5168a6b33a76be01aa987b9 to a readable local work directory; do not use substituted models or screenshots.",
+    "allGreenMetadataWithoutGLBStillReleaseBlocked": true
   }
 }
