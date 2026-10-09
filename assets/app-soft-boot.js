@@ -1,6 +1,6 @@
 /**
  * Soft boot overlay for visitor + test web apps (iOS parity).
- * v674 · Android-PWA: Standard-Logo + 0–100%-Loader mit robustem PWA-Startmarker.
+ * v675 · Android-PWA: Standard-Logo + 0–100%-Loader mit robustem PWA-Startmarker.
  * Launcher-/Installations-Icon bleibt strikt getrennt vom Boot-Logo.
  */
 (function () {
@@ -307,9 +307,17 @@
         window.DAR_OFFICIAL_IOS_APP === true || window.DAR_IOS_NATIVE_APP === true || window.DAR_ANDROID_NATIVE_APP === true;
       var standaloneReq = false;
       try {
+        var installParams = new URLSearchParams(location.search || "");
+        var installLaunchMarker = installParams.get("pwa") === "1";
         standaloneReq =
-          !!(window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) ||
-          window.navigator.standalone === true;
+          !!(window.matchMedia && (
+            window.matchMedia("(display-mode: standalone)").matches ||
+            window.matchMedia("(display-mode: fullscreen)").matches ||
+            window.matchMedia("(display-mode: minimal-ui)").matches
+          )) ||
+          window.navigator.standalone === true ||
+          installLaunchMarker ||
+          window.__DAR_PWA_STANDARD_BOOT === true;
       } catch (eStandalone) {}
       var desktopPublic = !!document.querySelector('link[href*="/desktop-preview/desktop-overhaul.css"]');
       if (!nativeReq && !standaloneReq && ((pth === "/" || pth === "/index.html") || desktopPublic)) {

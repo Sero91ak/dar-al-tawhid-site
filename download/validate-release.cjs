@@ -52,6 +52,9 @@ if (fs.existsSync(publicRouterPath)) {
 assert.equal(pwaManifest.display, "standalone", "Public manifest must be installable as standalone PWA");
 assert.equal(pwaManifest.start_url, "/?page=start&pwa=1", "Installed Android PWA must launch with the loader marker");
 assert.equal(pwaManifest.background_color, "#050706", "PWA system splash background must match the standard boot surface");
+const softBoot = fs.readFileSync(path.join(root, "assets/app-soft-boot.js"), "utf8");
+assert.ok(softBoot.includes('installParams.get("pwa") === "1"'), "Soft boot runtime must preserve the PWA launch marker in its second standalone guard");
+assert.ok(softBoot.includes('window.__DAR_PWA_STANDARD_BOOT === true'), "Soft boot runtime must honor the early PWA boot decision");
 assert.equal(pwaManifest.scope, "/", "PWA scope must cover the public website");
 assert.equal(pwaManifest.id, "/", "PWA id must be stable and query-free");
 assert.ok(pwaManifest.icons.some((icon) => icon.sizes === "192x192" && /assets\/app-icons\/type-creme-ar\/icon-192\.png/.test(icon.src)), "Native iOS-equivalent 192px PWA icon missing");
