@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v188-home-fit1293",
-  "label": "KIDS · V1.09.09",
+  "buildId": "kids-shell-v189-home-tablet1294",
+  "label": "KIDS · V1.09.10",
   "releasedAt": "2026-10-09T18:46:00Z",
-  "note": "KIDS V1.09.09: Smartphone- und Tablet-Startbildschirm an den genehmigten Gebetszeiten-Screenshot proportional angepasst. Die sichtbare Viewporthöhe steuert das Hero-Bild; auf kurzen Smartphones und iPads im Querformat verkürzen sich Abstände und Schrift nur moderat. Die responsive Regel ist auch gegenüber alten nativen iOS-CSS-Overrides abgesichert. Freigegebenes Moscheemotiv bleibt unverändert, Gebetszeiten-Button bleibt zugänglich, keine erzwungene Start-Scrollbewegung. Extreme Kleinbildschirme bleiben scrollbar.",
+  "note": "KIDS V1.09.10: freigegebene Startansicht im richtigen Seitenverhältnis auf Smartphones und Tablets. Für Tablet-Ansichten wurde die durchgehende Moscheebildfläche bis an beide Bildschirmränder geführt; responsive Hero-Höhe, Salām, fünf Gebetszeiten, Gebetszeiten-Button und feste Tab-Leiste bleiben erhalten. Kein Start-Autoscroll und keine Bildverzerrung. Prüfung auf realem iPhone/iPad weiterhin ausstehend.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1293",
+    "serviceWorkerCache": "v1294",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
