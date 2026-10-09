@@ -415,7 +415,7 @@ function mode(m){
  $("#choices").hidden=m!=="choices"||q.type!=="choice";
  $("#answerExtra").hidden=m==="choices";$("#mic").hidden=m!=="voice";
  $("#openWrite").setAttribute("aria-pressed",String(m==="text"));$("#openVoice").setAttribute("aria-pressed",String(m==="voice"));
- if(m==="text")$("#answer").focus({preventScroll:true});
+ /* iOS: Keyboard nur auf expliziten Textfeld-Tap. */
  if(m==="voice")$("#micInfo").textContent="Tippe auf Aufnahme starten. Prüfe danach den erkannten Text.";
 }
 function showQuestion(){
