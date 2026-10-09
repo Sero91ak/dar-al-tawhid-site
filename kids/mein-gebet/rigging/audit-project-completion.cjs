@@ -11,6 +11,7 @@ const crypto=require("node:crypto");
 const {parseGLB,validateDocument}=require("./validate-glb.cjs");
 const {validateAnimationBytes}=require("./validate-glb-binary.cjs");
 const {validateGeometryBytes}=require("./validate-glb-geometry-binary.cjs");
+const {validatePoseBoneLengths}=require("./validate-pose-bone-lengths.cjs");
 const root=__dirname;
 const read=p=>JSON.parse(fs.readFileSync(path.join(root,p),"utf8"));
 function audit(status,boy,girl,story,hanbali){
@@ -94,9 +95,10 @@ function verifyLocalBinary(file,identity,profile,acceptance){
    const result=validateDocument(parsed.gltf,acceptance,profile,{fileBytes:bytes.length,hasBin:parsed.hasBin});
    const samplerAudit=validateAnimationBytes(parsed.gltf,parsed.bin);
    const geometryAudit=validateGeometryBytes(parsed.gltf,parsed.bin);
-   if(!result.structureValid||!samplerAudit.valid||!geometryAudit.valid)
-     return {pass:false,reason:"GLB structure, keyframe or geometry bytes rejected "+profile,errors:[...result.errors,...samplerAudit.errors,...geometryAudit.errors]};
-   return {pass:true,sha256:digest,bytes:bytes.length,animationSamplerBytesVerified:true,geometryVertexBytesVerified:true};
+   const poseAudit=validatePoseBoneLengths(parsed.gltf,parsed.bin);
+   if(!result.structureValid||!samplerAudit.valid||!geometryAudit.valid||!poseAudit.valid)
+     return {pass:false,reason:"GLB structure, keyframe or geometry bytes rejected "+profile,errors:[...result.errors,...samplerAudit.errors,...geometryAudit.errors,...poseAudit.errors]};
+   return {pass:true,sha256:digest,bytes:bytes.length,animationSamplerBytesVerified:true,geometryVertexBytesVerified:true,boneLengthInvariantVerified:true,poseSamples:poseAudit.sampledFrames};
  }catch(e){return {pass:false,reason:"Cannot verify real "+profile+" GLB: "+e.message};}
 }
 function checkActualBinaryArguments(args,boy,girl,acceptance){
@@ -106,7 +108,8 @@ function checkActualBinaryArguments(args,boy,girl,acceptance){
  };
  const boyResult=verifyLocalBinary(option("--boy-glb="),boy,"boy",acceptance);
  const girlResult=verifyLocalBinary(option("--girl-glb="),girl,"girl",acceptance);
- const independent=boyResult.pass&&girlResult.pass&&boyResult.sha256!==girlResult.sha256;
+ const independent=boyResult.pass&&girlResult.pass&&boyResult.boneLengthInvariantVerified===true&&
+   girlResult.boneLengthInvariantVerified===true&&boyResult.sha256!==girlResult.sha256;
  return {pass:independent,boy:boyResult,girl:girlResult,
    note:"Matching exact GLB bytes and structure is necessary but cannot certify rendered visual identity or religious correctness."};
 }
