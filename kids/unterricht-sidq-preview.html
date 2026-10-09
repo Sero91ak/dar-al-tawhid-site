@@ -66,6 +66,34 @@ textarea{width:100%;min-height:86px;border-radius:15px;background:rgba(255,255,2
 .lesson-main .panel button:active{box-shadow:0 0 12px rgba(231,194,129,.15)}
 @media(min-width:850px){.category-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.category-card{min-height:265px}}
 @media(max-width:390px){.category-card{min-height:182px}.category-card-copy{padding:15px 12px}.category-name{font-size:21px}}
+
+/* KIDS ACADEMY V3 – source-first practice; imagery restricted to overview and category cards */
+.course-guide{padding:19px 2px 12px;border-bottom:1px solid var(--border);margin-bottom:20px}
+.guide-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.guide-heading h2{font-size:clamp(20px,3.6vw,29px);font-family:Georgia,serif;margin:5px 0}
+.guide-state{color:var(--gold);font-size:12px;border:1px solid var(--border);border-radius:99px;padding:7px 10px;background:rgba(218,194,140,.04)}
+.guide-timeline{display:flex;align-items:center;gap:0;max-width:500px;padding:16px 8px 6px}
+.timeline-dot{width:15px;height:15px;border:2px solid rgba(240,217,169,.6);border-radius:100%;background:#092536}
+.timeline-dot.active{background:var(--gold);box-shadow:0 0 0 5px rgba(223,190,128,.08)}
+.timeline-rail{height:1px;flex:1;background:rgba(240,217,169,.32)}
+.guide-sub,.guide-foot,.guide-privacy{font-size:13px;line-height:1.5;color:var(--muted)}
+.guide-foot{display:flex;gap:15px;align-items:center;flex-wrap:wrap}.guide-privacy{font-size:11px;opacity:.83;margin-bottom:0}
+.age-demo{display:flex;flex-wrap:wrap;align-items:center;gap:8px 11px;margin:7px 0 23px;padding:12px 0;border-bottom:1px solid var(--border)}
+.age-demo label{font-size:13px;color:var(--gold);font-weight:800}.age-demo select{color:var(--text);background:#163a4f;border:1px solid var(--border);border-radius:10px;padding:10px;min-height:44px;font-size:15px}
+.age-demo span{font-size:11px;color:var(--muted)}
+.question-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}.question-index{font-size:12px;color:var(--muted)}
+.panel h2{font-family:Georgia,serif;font-size:clamp(21px,3vw,28px)}
+.panel #question{font-size:clamp(18px,2.6vw,23px);font-weight:720;margin:15px 0}
+.choices{display:grid;gap:9px;margin:13px 0 18px}
+.choice-button{min-height:52px;padding:12px 15px;text-align:left;border:1px solid rgba(236,206,152,.24);border-radius:15px;background:rgba(255,255,255,.035);font-size:16px;line-height:1.4}
+.choice-button[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 12px rgba(120,190,190,.13);background:rgba(128,191,191,.12)}
+.mic-actions{display:flex;gap:7px;flex-wrap:wrap;margin:16px 0 6px}
+.next-row{display:flex;gap:10px;margin-top:12px}
+.summary-tile{border-top:1px solid var(--border);padding-top:13px}
+.summary-tile>span{font-weight:780}
+.policy-note{border-top:1px solid var(--border);padding-top:15px}
+.lesson-main .grid{grid-template-columns:1fr}
+@media(min-width:850px){.lesson-main .grid{grid-template-columns:minmax(0,1.24fr) minmax(310px,.85fr)}}
 </style></head>
 <body data-profile="boy"><main class="wrap">
 <header><div><div class="brand">DĀR AL TAWḤĪD · KIDS</div><div class="stage">Interaktiver Unterricht · HTML-Vorschau · nicht veröffentlicht</div></div>
@@ -73,15 +101,24 @@ textarea{width:100%;min-height:86px;border-radius:15px;background:rgba(255,255,2
 
 <section class="academy-home" id="academyHome">
   <section class="overview-hero" aria-label="Unterrichtsakademie">
-    <img src="https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3-pro-image/images/0103d2be-6a8b-40ee-b64d-6e3243b3b05b/bb6a8f67-950b-4235-be46-ebbd1b5a807e/Create_ONE_cinematic_high_end_3D_animated_feature_background.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiYjA4MTc3ZTBmZmFlNjRiZSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTY3ODA0OH0.bQc0VAugmoW7giDD7DbpETo2w41q-4f0MgmwN9xEoAQ" onerror="this.onerror=null;this.src='/kids/assets/deen/deen-entry.jpg?v=1205'" alt="" decoding="async" fetchpriority="high">
+    <img src="https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3-pro-image/images/0103d2be-6a8b-40ee-b64d-6e3243b3b05b/bb6a8f67-950b-4235-be46-ebbd1b5a807e/Create_ONE_cinematic_high_end_3D_animated_feature_background.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiYjA4MTc3ZTBmZmFlNjRiZSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTY3ODA0OH0.bQc0VAugmoW7giDD7DbpETo2w41q-4f0MgmwN9xEoAQ" onerror="this.onerror=null;this.src='https://dar-al-tawhid.de/kids/assets/kids-art/knowledge-courtyard-v11.jpg'" alt="" decoding="async" fetchpriority="high">
     <div class="overview-copy"><div class="kicker">Deine islamische Lernakademie</div><h1>Den Dīn lernen</h1><p id="overviewGreeting">As-salāmu ʿalaykum, mein lieber Bruder. Gemeinsam lernen wir Wissen aus Qurʾān und Sunnah.</p></div>
   </section>
   <section class="overview-head"><div><h2>Wähle dein Unterrichtsfach</h2><p>Entdecke ein Thema – Schritt für Schritt, in deinem Tempo.</p></div><span class="stage">Unterrichts-Vorschau</span></section>
-  <div class="category-grid" aria-label="Unterrichtskategorien">
-    <button type="button" class="category-card" data-open-lesson="sidq"><img src="https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3-pro-image/images/8829f3d0-92d4-4e9b-a143-27bd56723e24/29ad152e-f266-42e4-934c-a1de4a822846/One_single_3D_animated_feature_film_quality__semi_realistic_.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNzkyMmViMWNmOTEzMWI3YSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTYyMTE0OH0.YJxnz2HR0o8ViTrh6HgiJ5X6yKmTGTCQAnfBvURgpM4" onerror="this.onerror=null;this.src='/kids/assets/deen/adab-akhlaq.jpg?v=1205'" alt="" loading="lazy" decoding="async"><span class="category-card-copy"><span class="category-state">1 Musterlektion verfügbar</span><strong class="category-name">Akhlāq</strong><span class="category-detail">Wahrhaftigkeit · Guter Charakter</span></span></button>
-    <button type="button" class="category-card" disabled aria-label="Adab, Unterricht noch in Vorbereitung"><img src="https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3-pro-image/images/5d0bcff1-15a7-4b68-ad57-04e9f84ff026/9bf1fd46-9658-46a9-86da-34144b2f4751/One_single_polished_mature_3D_animated_film_still_for_an_Isl.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNTM5NWYzNWI0NmZiYzdmNiIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTY1NDQ5MX0.8fwpQCGlXnQaQNSz010FODaR7taCVCES8U5RAp7-184" onerror="this.onerror=null;this.src='/kids/assets/deen/adab-akhlaq.jpg?v=1205'" alt="" loading="lazy" decoding="async"><span class="category-card-copy"><span class="category-state">In Vorbereitung</span><strong class="category-name">Adab</strong><span class="category-detail">Benehmen · Guter Umgang</span></span></button>
-    <button type="button" class="category-card" disabled aria-label="Fiqh, Unterricht noch in Vorbereitung"><img src="/kids/assets/deen/ibadah.jpg?v=1205" alt="" loading="lazy" decoding="async"><span class="category-card-copy"><span class="category-state">In Vorbereitung</span><strong class="category-name">Fiqh</strong><span class="category-detail">Gebet · Reinheit · Praxis</span></span></button>
-    <button type="button" class="category-card" disabled aria-label="Aqida, Unterricht noch in Vorbereitung"><img src="/kids/assets/deen/tawhid.jpg?v=1205" alt="" loading="lazy" decoding="async"><span class="category-card-copy"><span class="category-state">In Vorbereitung</span><strong class="category-name">ʿAqīdah</strong><span class="category-detail">Tawḥīd · Ikhlāṣ · Īmān</span></span></button>
+  
+<section class="course-guide" aria-label="Dein Lernplan">
+  <div class="guide-heading"><div><span class="kicker">Dein Lernweg</span><h2>Heute lernen · später wiederholen</h2></div><span class="guide-state" id="courseStatus">Noch nicht begonnen</span></div>
+  <div class="guide-timeline" aria-hidden="true"><span class="timeline-dot active"></span><span class="timeline-rail"></span><span class="timeline-dot"></span><span class="timeline-rail"></span><span class="timeline-dot"></span><span class="timeline-rail"></span><span class="timeline-dot"></span></div>
+  <p class="guide-sub">Verstehen → mitdenken → mit eigenen Worten erklären → nach einigen Tagen erinnern.</p>
+  <div class="guide-foot"><p id="reviewNotice">Deine erste Unterrichtsstunde ist bereit.</p><button class="pill" id="repeatReview" type="button" hidden>Jetzt wiederholen</button></div>
+  <p class="guide-privacy">Demonstration: Lernstände werden nur lokal in diesem Browser gespeichert. Keine Bewertung des Īmān.</p>
+</section>
+<div class="age-demo"><label for="ageGroup">Altersstufe für diese Vorschau</label><select id="ageGroup"><option value="4-5">4–5 Jahre</option><option value="6-8" selected>6–8 Jahre</option><option value="9-10">9–10 Jahre</option></select><span>Im späteren App-Bereich übernimmt das vorhandene Kinderprofil diese Einstellung automatisch.</span></div>
+<div class="category-grid" aria-label="Unterrichtskategorien">
+    <button type="button" class="category-card" data-open-lesson="sidq"><img src="https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3-pro-image/images/8829f3d0-92d4-4e9b-a143-27bd56723e24/29ad152e-f266-42e4-934c-a1de4a822846/One_single_3D_animated_feature_film_quality__semi_realistic_.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNzkyMmViMWNmOTEzMWI3YSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTYyMTE0OH0.YJxnz2HR0o8ViTrh6HgiJ5X6yKmTGTCQAnfBvURgpM4" onerror="this.onerror=null;this.src='https://dar-al-tawhid.de/kids/assets/deen/adab-akhlaq.jpg?v=1205'" alt="" loading="lazy" decoding="async"><span class="category-card-copy"><span class="category-state">1 Musterlektion verfügbar</span><strong class="category-name">Akhlāq</strong><span class="category-detail">Wahrhaftigkeit · Guter Charakter</span></span></button>
+    <button type="button" class="category-card" disabled aria-label="Adab, Unterricht noch in Vorbereitung"><img src="https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3-pro-image/images/5d0bcff1-15a7-4b68-ad57-04e9f84ff026/9bf1fd46-9658-46a9-86da-34144b2f4751/One_single_polished_mature_3D_animated_film_still_for_an_Isl.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNTM5NWYzNWI0NmZiYzdmNiIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTY1NDQ5MX0.8fwpQCGlXnQaQNSz010FODaR7taCVCES8U5RAp7-184" onerror="this.onerror=null;this.src='https://dar-al-tawhid.de/kids/assets/deen/adab-akhlaq.jpg?v=1205'" alt="" loading="lazy" decoding="async"><span class="category-card-copy"><span class="category-state">In Vorbereitung</span><strong class="category-name">Adab</strong><span class="category-detail">Benehmen · Guter Umgang</span></span></button>
+    <button type="button" class="category-card" disabled aria-label="Fiqh, Unterricht noch in Vorbereitung"><img src="https://dar-al-tawhid.de/kids/assets/deen/ibadah.jpg?v=1205" alt="" loading="lazy" decoding="async"><span class="category-card-copy"><span class="category-state">In Vorbereitung</span><strong class="category-name">Fiqh</strong><span class="category-detail">Gebet · Reinheit · Praxis</span></span></button>
+    <button type="button" class="category-card" disabled aria-label="Aqida, Unterricht noch in Vorbereitung"><img src="https://dar-al-tawhid.de/kids/assets/deen/tawhid.jpg?v=1205" alt="" loading="lazy" decoding="async"><span class="category-card-copy"><span class="category-state">In Vorbereitung</span><strong class="category-name">ʿAqīdah</strong><span class="category-detail">Tawḥīd · Ikhlāṣ · Īmān</span></span></button>
   </div>
   <p class="overview-note">In dieser Vorschau gibt es eine vollständige Musterlektion zu Akhlāq. Weitere Fachlektionen werden ausschließlich mit geprüften Quellen ergänzt. Die eigentlichen Unterrichts- und Frageseiten bleiben vollständig bildfrei.</p>
 </section>
@@ -96,7 +133,7 @@ textarea{width:100%;min-height:86px;border-radius:15px;background:rgba(255,255,2
 <div class="source">Quelle: Qurʾān 9:119 · Deutsch sinngemäß · https://quran.com/9/119</div>
 <div class="eyebrow">Sunnah · Ṣaḥīḥ Muslim 2607</div>
 <p class="quote">Wahrhaftigkeit führt zur Rechtschaffenheit, und Rechtschaffenheit führt zum Paradies.</p>
-<div class="source">Quelle: Ṣaḥīḥ Muslim, Nr. 2607 · sinngemäßer Auszug aus der Überlieferung von ʿAbdullāh ibn Masʿūd · https://sunnah.com/muslim:2607</div>
+<div class="source">Quelle: Ṣaḥīḥ Muslim, Nr. 2607a · sinngemäßer Auszug aus der Überlieferung von ʿAbdullāh ibn Masʿūd · https://sunnah.com/muslim:2607a</div>
 <div class="eyebrow">Erklärung</div>
 <p id="explanation" class="explain">Wer einen Fehler macht und die Wahrheit sagt, kann Verantwortung übernehmen und den Fehler wiedergutmachen. Eine Lüge kann andere verletzen und Vertrauen zerstören. Deshalb sagen wir die Wahrheit, auch wenn es uns schwerfällt.</p>
 <div class="eyebrow">Alltagsbeispiel</div><p class="explain">Du hast versehentlich ein Glas zerbrochen. Du darfst sagen: „Ich war das. Es tut mir leid. Ich helfe beim Aufräumen.“</p>
@@ -104,14 +141,26 @@ textarea{width:100%;min-height:86px;border-radius:15px;background:rgba(255,255,2
 <div class="controls"><button class="pill primary" id="play">Unterricht anhören</button><button class="pill" id="stop">Stopp</button></div>
 <p class="small" id="audioInfo">Vorschau: lokale iOS-Systemstimme zum Testen. Die Masterstimme ist noch nicht angeschlossen.</p>
 </article>
-<aside class="panel"><div class="kicker">Mitdenken</div><h2>Deine Unterrichtsfrage</h2>
-<p id="question">Was solltest du sagen, wenn du aus Versehen etwas kaputt gemacht hast?</p><div class="progress" aria-label="Fortschritt"><span id="bar"></span></div>
-<div class="controls"><button class="pill accent" id="mic">Mikrofon starten</button><button class="pill" id="cancelMic" hidden>Aufnahme beenden</button></div>
-<p class="small" id="micInfo">Das Mikrofon startet erst nach deinem Antippen. Die Vorschau speichert keine Sprachaufnahmen.</p>
-<label for="answer" class="small">Antwort schreiben oder korrigieren</label><textarea id="answer" placeholder="Ich würde …"></textarea>
-<div class="answers"><button id="check" class="pill primary">Antwort prüfen</button><button id="hint" class="pill">Hinweis</button><button id="repeat" class="pill">Frage wiederholen</button></div>
-<div class="response" aria-live="polite" id="feedback">Denke erst nach. Du kannst sprechen oder schreiben.</div>
-<p class="small">Eine automatische Bewertung kann irren. Dies ist ein regelbasierter Demonstrator, kein freigegebener KI-Lehrer.</p>
+
+<aside class="panel" id="learningPanel">
+<div class="question-top"><span class="kicker" id="questionStage">Unterricht · Mitdenken</span><span class="question-index" id="questionIndex">Frage 1 von 3</span></div>
+<h2 id="questionTitle">Was hast du verstanden?</h2>
+<div class="progress" aria-label="Lernfortschritt"><span id="bar"></span></div>
+<p id="question">Was solltest du sagen, wenn du aus Versehen etwas kaputt gemacht hast?</p>
+<div class="choices" id="choices" role="group" aria-label="Antwortmöglichkeiten"></div>
+<div class="mic-actions"><button class="pill accent" id="mic" type="button">Antwort sprechen</button><button class="pill" id="cancelMic" type="button" hidden>Aufnahme beenden</button></div>
+<p class="small" id="micInfo">Das Mikrofon wird erst nach dem Antippen eingeschaltet. Die Vorschau speichert keine Sprachdatei.</p>
+<label for="answer" class="small">Oder antworte mit eigenen Worten</label><textarea id="answer" spellcheck="true" placeholder="Ich würde …" maxlength="550"></textarea>
+<div class="answers"><button id="check" class="pill primary" type="button">Antwort prüfen</button><button id="hint" class="pill" type="button">Kleiner Hinweis</button><button id="repeat" class="pill" type="button">Frage anhören</button></div>
+<div class="response" aria-live="polite" id="feedback">Du kannst in Ruhe nachdenken. Eine kurze Antwort reicht.</div>
+<div class="next-row"><button class="pill primary" type="button" id="nextQuestion" hidden>Nächste Frage</button><button class="pill" type="button" id="finishLesson" hidden>Unterricht abschließen</button></div>
+<div id="summaryPanel" hidden>
+  <h2>Gut mitgedacht!</h2><p id="summaryText">Du hast dich mit dem Thema beschäftigt. Du kannst später noch einmal üben.</p>
+  <div class="summary-tile"><span>Was hilft dir jetzt?</span><div class="answers"><button class="pill" type="button" data-reflect="ready">Ich habe es verstanden</button><button class="pill" type="button" data-reflect="help">Ich möchte mehr üben</button></div></div>
+  <p class="small" id="nextDue">Nächste Erinnerung wird nach deinem Lernstand vorgeschlagen.</p>
+  <button class="pill primary" type="button" id="backAfterLesson">Zur Unterrichtsübersicht</button>
+</div>
+<p class="small policy-note">Die Auswertung ist eine unverbindliche Lernhilfe, keine religiöse Bewertung. Unsichere oder ungewöhnliche Antworten prüft später ein Erwachsener.</p>
 </aside></div></div></main>
 <script>
 (()=>{
