@@ -2245,6 +2245,10 @@
     return neu;
   }
   function navigateApp(view, value) {
+    if (value && typeof window.navigate === "function") {
+      window.navigate(view, value, { noAnim: true, skipPush: true });
+      return;
+    }
     if (typeof window.navigateToTabRootReplace === "function") {
       window.navigateToTabRootReplace(view, value || "");
       return;
@@ -2256,10 +2260,23 @@
       try { window.dispatchEvent(new HashChangeEvent("hashchange")); } catch (e2) {}
     }
   }
+  var returnQuranRoute = null;
+  function capturePlayerEntryRoute() {
+    var parts = String(location.hash || "").replace(/^#\/?/, "").split("/");
+    var view = parts.shift() || "";
+    if (view === "quran" || view === "quran-surah") {
+      returnQuranRoute = { view: view, value: parts.join("/") };
+    } else if (view !== "quran-player") {
+      returnQuranRoute = null;
+    }
+  }
   function leavePlayerRoute(kind) {
     persistCurrent("leave-full");
     writeMode("global-quran");
     dismissFullPlayer();
+    var target = kind === "read"
+      ? { view: "quran-surah", value: String(state.surah) + "/" + state.ayah }
+      : (returnQuranRoute || { view: "home", value: "" });
     function go() {
       document.documentElement.classList.remove("is-quran-player-route");
       if (document.body) {
@@ -2271,27 +2288,21 @@
         root.style.display = "none";
         try { root.setAttribute("inert", ""); } catch (e0) {}
       }
-      if (kind === "read") navigateApp("quran-surah", String(state.surah) + "/" + state.ayah);
-      else navigateApp("home");
-      try {
-        if (kind !== "read") {
-          history.replaceState(null, "", location.pathname + (location.search || "") + "#home");
-        }
-      } catch (e1) {}
+      navigateApp(target.view, target.value);
       paintMini();
       setTimeout(function () {
         dismissFullPlayer();
         hideFullPlayerUi();
         if (kind !== "read") {
           var hash = String(location.hash || "").replace(/^#\/?/, "");
-          if (hash.split("/")[0] === "quran-player") navigateApp("home");
+          if (hash.split("/")[0] === "quran-player") navigateApp(target.view, target.value);
         }
         paintMini();
       }, 40);
       setTimeout(function () {
         if (Date.now() < dismissUntil) {
           var hash2 = String(location.hash || "").replace(/^#\/?/, "");
-          if (hash2.split("/")[0] === "quran-player") navigateApp(kind === "read" ? "quran-surah" : "home", kind === "read" ? String(state.surah) + "/" + state.ayah : "");
+          if (hash2.split("/")[0] === "quran-player") navigateApp(target.view, target.value);
           hideFullPlayerUi();
           paintMini();
         }
@@ -2624,6 +2635,7 @@
       return;
     }
     qlog("[QURAN_STATE] restore global player state", opts);
+    capturePlayerEntryRoute();
     var snap = readGlobal();
     applyGlobalBlob(snap);
     state.learnMode = false;
@@ -3065,7 +3077,10 @@
     if (sh.id === "dqpLearnSheet") bindLearnSheet(sh);
     sh.hidden = false;
     sh.innerHTML = '<div class="dqp-sheet-card"><div class="dqp-sheet-head"><span>' + esc(title) + '</span><button type="button" class="dqp-hit" data-dqp="sheet-close">Fertig</button></div>' + html + "</div>";
-    requestAnimationFrame(function () { sh.classList.add("is-open"); });
+    var thisSheetEpoch = sheetEpoch;
+    requestAnimationFrame(function () {
+      if (thisSheetEpoch === sheetEpoch && !sh.hidden) sh.classList.add("is-open");
+    });
   }
   function cycle(list, cur) { return list[(list.indexOf(cur) + 1) % list.length]; }
   function pickRandomSurah() {
