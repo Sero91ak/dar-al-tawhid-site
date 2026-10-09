@@ -1,0 +1,375 @@
+{
+  "project": "DAR AL TAWḤĪD · Ḥadīṯ & Šarḥ",
+  "range": "HAD-0343–HAD-0392",
+  "date": "2026-10-09",
+  "totalInspected": 50,
+  "newlyVerified": 6,
+  "remainingOpen": 44,
+  "hadithRecords": 28,
+  "atharRecords": 22,
+  "scope": "Primärbestände vollständig gesichtet; bei sechs Ḥadīṯ-Einträgen direkte klassische arabische Kommentare nachgetragen; die übrigen ausdrücklich nicht als Šarḥ-verifiziert gezählt",
+  "policy": {
+    "sourceOfTruth": "apple-tv/hadith/series/",
+    "sourceValidation": "Wortlaut, Isnāde, Quellenband/Seite, Onlinepagination und nachweisbare Edition separat prüfen",
+    "earliestDirectArabicCommentPreferred": true,
+    "noEstimatedPages": true,
+    "verifiedRequiresDirectSharh": true,
+    "printEditionOfVerifiedItems": "unresolved",
+    "semanticOverlapNotSameIsnad": true,
+    "avoidParallelOverwrites": true
+  },
+  "risk": "Ab HAD-0371 22 als athar kategorisierte Datensätze. Einige Quellenangaben sind zu allgemein; das bestehende grade-Label authentisch/athar ist ohne gesonderte Einzel-Isnādprüfung kein Nachweis für authentische Attribution.",
+  "nextAction": "44 offene Datensätze auf Genauigkeit und direkten Kommentar prüfen; insbesondere 22 Āṯār einzeln aus Originalquelle verifizieren und nicht fälschlich auf verified setzen.",
+  "entries": [
+    {
+      "id": "HAD-0343",
+      "recordType": "hadith",
+      "sharh": "verified",
+      "sourceAudit": "Arabische Primärüberlieferung, frühester direkter Šarḥ, genaue Edition und Seitenangaben einzeln prüfen",
+      "note": "ʿAmmār-Tayammum: paralleler Bericht zu HAD-0342"
+    },
+    {
+      "id": "HAD-0344",
+      "recordType": "hadith",
+      "sharh": "verified",
+      "sourceAudit": "Arabische Primärüberlieferung, frühester direkter Šarḥ, genaue Edition und Seitenangaben einzeln prüfen",
+      "note": "Tayammum bei fehlendem Wasser für ǧunub"
+    },
+    {
+      "id": "HAD-0345",
+      "recordType": "hadith",
+      "sharh": "verified",
+      "sourceAudit": "Arabische Primärüberlieferung, frühester direkter Šarḥ, genaue Edition und Seitenangaben einzeln prüfen",
+      "note": "Abū Mūsā/Ibn Masʿūd: Überlieferung und Fiqh-Sorge"
+    },
+    {
+      "id": "HAD-0346",
+      "recordType": "hadith",
+      "sharh": "verified",
+      "sourceAudit": "Arabische Primärüberlieferung, frühester direkter Šarḥ, genaue Edition und Seitenangaben einzeln prüfen",
+      "note": "Zweiter Weg über den Dialog Abū Mūsā/Ibn Masʿūd"
+    },
+    {
+      "id": "HAD-0347",
+      "recordType": "hadith",
+      "sharh": "verified",
+      "sourceAudit": "Arabische Primärüberlieferung, frühester direkter Šarḥ, genaue Edition und Seitenangaben einzeln prüfen",
+      "note": "Tayammum mit einem Erdschlag"
+    },
+    {
+      "id": "HAD-0348",
+      "recordType": "hadith",
+      "sharh": "verified",
+      "sourceAudit": "Arabische Primärüberlieferung, frühester direkter Šarḥ, genaue Edition und Seitenangaben einzeln prüfen",
+      "note": "Kürzung des längeren Imrān-Berichts HAD-0344"
+    },
+    {
+      "id": "HAD-0349",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Arabische Primärüberlieferung, frühester direkter Šarḥ, genaue Edition und Seitenangaben einzeln prüfen",
+      "note": "Isrāʾ-Gebot fünf Gebete; Ibn Raǧab Originalstelle bekannt, genaue Kommentar-Abgrenzung noch prüfen"
+    },
+    {
+      "id": "HAD-0350",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Arabische Primärüberlieferung, frühester direkter Šarḥ, genaue Edition und Seitenangaben einzeln prüfen",
+      "note": "Zwei Rakʿah, Reise/Haḏar; frühesten präzisen Kommentar suchen"
+    },
+    {
+      "id": "HAD-0351",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Arabische Primärüberlieferung, frühester direkter Šarḥ, genaue Edition und Seitenangaben einzeln prüfen",
+      "note": "ʿĪd-Versammlungen, Parallelen HAD-0324"
+    },
+    {
+      "id": "HAD-0352",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Arabische Primärüberlieferung, frühester direkter Šarḥ, genaue Edition und Seitenangaben einzeln prüfen",
+      "note": null
+    },
+    {
+      "id": "HAD-0353",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Arabische Primärüberlieferung, frühester direkter Šarḥ, genaue Edition und Seitenangaben einzeln prüfen",
+      "note": null
+    },
+    {
+      "id": "HAD-0354",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Arabische Primärüberlieferung, frühester direkter Šarḥ, genaue Edition und Seitenangaben einzeln prüfen",
+      "note": null
+    },
+    {
+      "id": "HAD-0355",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Arabische Primärüberlieferung, frühester direkter Šarḥ, genaue Edition und Seitenangaben einzeln prüfen",
+      "note": null
+    },
+    {
+      "id": "HAD-0356",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Arabische Primärüberlieferung, frühester direkter Šarḥ, genaue Edition und Seitenangaben einzeln prüfen",
+      "note": null
+    },
+    {
+      "id": "HAD-0357",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Arabische Primärüberlieferung, frühester direkter Šarḥ, genaue Edition und Seitenangaben einzeln prüfen",
+      "note": null
+    },
+    {
+      "id": "HAD-0358",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Arabische Primärüberlieferung, frühester direkter Šarḥ, genaue Edition und Seitenangaben einzeln prüfen",
+      "note": null
+    },
+    {
+      "id": "HAD-0359",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Arabische Primärüberlieferung, frühester direkter Šarḥ, genaue Edition und Seitenangaben einzeln prüfen",
+      "note": null
+    },
+    {
+      "id": "HAD-0360",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Arabische Primärüberlieferung, frühester direkter Šarḥ, genaue Edition und Seitenangaben einzeln prüfen",
+      "note": null
+    },
+    {
+      "id": "HAD-0361",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Arabische Primärüberlieferung, frühester direkter Šarḥ, genaue Edition und Seitenangaben einzeln prüfen",
+      "note": null
+    },
+    {
+      "id": "HAD-0362",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Arabische Primärüberlieferung, frühester direkter Šarḥ, genaue Edition und Seitenangaben einzeln prüfen",
+      "note": null
+    },
+    {
+      "id": "HAD-0363",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Arabische Primärüberlieferung, frühester direkter Šarḥ, genaue Edition und Seitenangaben einzeln prüfen",
+      "note": "Stark verkürzte Paraphrase, Ḥadīṯ-Originalwortlaut/Nummer prüfen"
+    },
+    {
+      "id": "HAD-0364",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Arabische Primärüberlieferung, frühester direkter Šarḥ, genaue Edition und Seitenangaben einzeln prüfen",
+      "note": null
+    },
+    {
+      "id": "HAD-0365",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Arabische Primärüberlieferung, frühester direkter Šarḥ, genaue Edition und Seitenangaben einzeln prüfen",
+      "note": "Freie Paraphrase, exakte Primärüberlieferung/Nummer prüfen"
+    },
+    {
+      "id": "HAD-0366",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Arabische Primärüberlieferung, frühester direkter Šarḥ, genaue Edition und Seitenangaben einzeln prüfen",
+      "note": null
+    },
+    {
+      "id": "HAD-0367",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Arabische Primärüberlieferung, frühester direkter Šarḥ, genaue Edition und Seitenangaben einzeln prüfen",
+      "note": null
+    },
+    {
+      "id": "HAD-0368",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Arabische Primärüberlieferung, frühester direkter Šarḥ, genaue Edition und Seitenangaben einzeln prüfen",
+      "note": null
+    },
+    {
+      "id": "HAD-0369",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Arabische Primärüberlieferung, frühester direkter Šarḥ, genaue Edition und Seitenangaben einzeln prüfen",
+      "note": null
+    },
+    {
+      "id": "HAD-0370",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Arabische Primärüberlieferung, frühester direkter Šarḥ, genaue Edition und Seitenangaben einzeln prüfen",
+      "note": null
+    },
+    {
+      "id": "HAD-0371",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "sourceAudit": "Hadith-/Athar-Authentizitäts- und Isnādnachweis vor Kommentar nochmals verifizieren",
+      "note": "Āṯār-Bereich: künftig vor Šarḥ insbesondere Isnāde und exakte Primärstellen kontrollieren"
+    },
+    {
+      "id": "HAD-0372",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "sourceAudit": "Hadith-/Athar-Authentizitäts- und Isnādnachweis vor Kommentar nochmals verifizieren",
+      "note": null
+    },
+    {
+      "id": "HAD-0373",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "sourceAudit": "Hadith-/Athar-Authentizitäts- und Isnādnachweis vor Kommentar nochmals verifizieren",
+      "note": null
+    },
+    {
+      "id": "HAD-0374",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "sourceAudit": "Hadith-/Athar-Authentizitäts- und Isnādnachweis vor Kommentar nochmals verifizieren",
+      "note": null
+    },
+    {
+      "id": "HAD-0375",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "sourceAudit": "Hadith-/Athar-Authentizitäts- und Isnādnachweis vor Kommentar nochmals verifizieren",
+      "note": null
+    },
+    {
+      "id": "HAD-0376",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "sourceAudit": "Hadith-/Athar-Authentizitäts- und Isnādnachweis vor Kommentar nochmals verifizieren",
+      "note": null
+    },
+    {
+      "id": "HAD-0377",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "sourceAudit": "Hadith-/Athar-Authentizitäts- und Isnādnachweis vor Kommentar nochmals verifizieren",
+      "note": null
+    },
+    {
+      "id": "HAD-0378",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "sourceAudit": "Hadith-/Athar-Authentizitäts- und Isnādnachweis vor Kommentar nochmals verifizieren",
+      "note": null
+    },
+    {
+      "id": "HAD-0379",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "sourceAudit": "Hadith-/Athar-Authentizitäts- und Isnādnachweis vor Kommentar nochmals verifizieren",
+      "note": null
+    },
+    {
+      "id": "HAD-0380",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "sourceAudit": "Hadith-/Athar-Authentizitäts- und Isnādnachweis vor Kommentar nochmals verifizieren",
+      "note": null
+    },
+    {
+      "id": "HAD-0381",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "sourceAudit": "Hadith-/Athar-Authentizitäts- und Isnādnachweis vor Kommentar nochmals verifizieren",
+      "note": null
+    },
+    {
+      "id": "HAD-0382",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "sourceAudit": "Hadith-/Athar-Authentizitäts- und Isnādnachweis vor Kommentar nochmals verifizieren",
+      "note": null
+    },
+    {
+      "id": "HAD-0383",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "sourceAudit": "Hadith-/Athar-Authentizitäts- und Isnādnachweis vor Kommentar nochmals verifizieren",
+      "note": null
+    },
+    {
+      "id": "HAD-0384",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "sourceAudit": "Hadith-/Athar-Authentizitäts- und Isnādnachweis vor Kommentar nochmals verifizieren",
+      "note": null
+    },
+    {
+      "id": "HAD-0385",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "sourceAudit": "Hadith-/Athar-Authentizitäts- und Isnādnachweis vor Kommentar nochmals verifizieren",
+      "note": null
+    },
+    {
+      "id": "HAD-0386",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "sourceAudit": "Hadith-/Athar-Authentizitäts- und Isnādnachweis vor Kommentar nochmals verifizieren",
+      "note": null
+    },
+    {
+      "id": "HAD-0387",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "sourceAudit": "Hadith-/Athar-Authentizitäts- und Isnādnachweis vor Kommentar nochmals verifizieren",
+      "note": null
+    },
+    {
+      "id": "HAD-0388",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "sourceAudit": "Hadith-/Athar-Authentizitäts- und Isnādnachweis vor Kommentar nochmals verifizieren",
+      "note": "Vage Quellenangabe, exakte Primärstelle fehlt"
+    },
+    {
+      "id": "HAD-0389",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "sourceAudit": "Hadith-/Athar-Authentizitäts- und Isnādnachweis vor Kommentar nochmals verifizieren",
+      "note": "Vage Quellenangabe und ggf. paraphrasierte Aussage, vor Übernahme verifizieren"
+    },
+    {
+      "id": "HAD-0390",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "sourceAudit": "Hadith-/Athar-Authentizitäts- und Isnādnachweis vor Kommentar nochmals verifizieren",
+      "note": "Vage Sammelquelle Ṣaḥīḥ al-Buḫārī/Muslim, exakte Primärstelle fehlt"
+    },
+    {
+      "id": "HAD-0391",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "sourceAudit": "Hadith-/Athar-Authentizitäts- und Isnādnachweis vor Kommentar nochmals verifizieren",
+      "note": null
+    },
+    {
+      "id": "HAD-0392",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "sourceAudit": "Hadith-/Athar-Authentizitäts- und Isnādnachweis vor Kommentar nochmals verifizieren",
+      "note": null
+    }
+  ]
+}
