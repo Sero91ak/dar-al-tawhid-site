@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v197-home-dock-fit1302",
-  "label": "KIDS · V1.09.18",
+  "buildId": "kids-shell-v198-home-paint1303",
+  "label": "KIDS · V1.09.19",
   "releasedAt": "2026-10-09T18:46:00Z",
-  "note": "KIDS V1.09.18: Erste Startseitenhöhe wird anhand realer Bildschirmhöhe, Position der unteren Tab-Leiste und Position der Schaltfläche ‚Alle Gebetszeiten ansehen‘ ermittelt. Falls Logo und Begrüßung den CTA unter die Tabs drängen würden, aktiviert der Bildschirm eine kompakte, weiterhin vollständig lesbare Geometrie und misst erneut. Keine künstliche Scrollposition, kein Motivwechsel, keine ausgeblendeten Gebetszeiten. Kleine Displays bleiben bei physikalisch zu geringer Höhe scrollbar. CSS, JS, alle drei App-Einstiege und Offline-Cache sind versioniert.",
+  "note": "KIDS V1.09.19: Die genehmigte Startbild-Höhe wird nach der ersten realen Darstellung erneut geprüft, damit der Gebetszeiten-Button auf iPhone, Android und Tablet nicht nach unten unter die feste Tab-Leiste rutscht. ResizeObserver beobachtet zusätzlich CTA, Wortmarke und Begrüßung; nach Schriften-/Bild-Ladevorgang wird die tatsächliche CTA/Dock-Kollision erneut berechnet. Bisheriges Moscheemotiv, Gebetszeiten, Reihenfolge und Scrollfähigkeit für physisch sehr kleine Displays bleiben unverändert.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1302",
+    "serviceWorkerCache": "v1303",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
