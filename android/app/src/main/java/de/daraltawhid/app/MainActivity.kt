@@ -1,8 +1,12 @@
 package de.daraltawhid.app
 
 import android.annotation.SuppressLint
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.provider.Settings
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
@@ -19,11 +23,15 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.Toast
 import android.widget.Button
 import android.widget.LinearLayout
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.webkit.WebViewCompat
+import androidx.webkit.WebViewFeature
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
@@ -34,6 +42,24 @@ class MainActivity : AppCompatActivity() {
     private lateinit var errorOverlay: LinearLayout
     private var filePathCallback: ValueCallback<Array<Uri>>? = null
     private var pendingUrl: String = DarShell.LIVE_URL
+    private var pendingGeolocation: Pair<String, GeolocationPermissions.Callback>? = null
+
+    private val locationPermission = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { results ->
+        val pending = pendingGeolocation
+        pendingGeolocation = null
+        val granted = results[Manifest.permission.ACCESS_FINE_LOCATION] == true ||
+            results[Manifest.permission.ACCESS_COARSE_LOCATION] == true ||
+            hasDeviceLocationPermission()
+        if (pending != null) pending.second.invoke(pending.first, granted, false)
+    }
+
+    private fun hasDeviceLocationPermission(): Boolean =
+        ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
+            PackageManager.PERMISSION_GRANTED ||
+        ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) ==
+            PackageManager.PERMISSION_GRANTED
 
     private val fileChooser = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -47,6 +73,7 @@ class MainActivity : AppCompatActivity() {
         ActivityResultContracts.RequestPermission()
     ) { granted ->
         if (granted) DarPush.bootstrap(application)
+        if (::webView.isInitialized) injectBridge()
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -83,6 +110,63 @@ class MainActivity : AppCompatActivity() {
             setGeolocationEnabled(true)
         }
         webView.addJavascriptInterface(DarJsBridge(), "DarNative")
+        // Mark the genuine Android shell before any page script runs.
+        // onPageFinished is too late: the site may have already chosen iOS UI.
+        if (WebViewFeature.isFeatureSupported(WebViewFeature.DOCUMENT_START_SCRIPT)) {
+            WebViewCompat.addDocumentStartJavaScript(
+                webView,
+                """
+                (function(){
+                    window.DAR_PLATFORM="android";
+                    window.DAR_NATIVE_PLATFORM="android";
+                    window.DAR_ANDROID_NATIVE_APP=true;
+                    window.DAR_ANDROID_ALTERNATE_ICONS_AVAILABLE=true;
+                    // The shared site's OneSignal initialization historically
+                    // sets DAR_IOS_NATIVE_APP=true for *both* native platforms.
+                    // Pin this Android-only property before that script runs.
+                    Object.defineProperty(window,"DAR_IOS_NATIVE_APP",{
+                      configurable:false, enumerable:true,
+                      get:function(){return false;},
+                      set:function(){}
+                    });
+                    Object.defineProperty(window,"DAR_OFFICIAL_IOS_APP",{
+                      configurable:false, enumerable:true,
+                      get:function(){return false;},
+                      set:function(){}
+                    });
+                    if(document.documentElement){
+                      document.documentElement.classList.add("dar-android-native-app","is-android");
+                    }else{
+                      document.addEventListener("DOMContentLoaded",function(){
+                        if(document.documentElement)document.documentElement.classList.add("dar-android-native-app","is-android");
+                      },{once:true});
+                    }
+                    try {
+                      if(!window.webkit) window.webkit={};
+                      if(!window.webkit.messageHandlers) window.webkit.messageHandlers={};
+                      window.webkit.messageHandlers.darAppIcon={
+                        postMessage:function(payload){
+                          var selected=typeof payload==="string"?payload:
+                            payload&&typeof payload==="object"?(payload.name||payload.id||""):"";
+                          DarNative.setAppIcon(String(selected));
+                        }
+                      };
+                      window.DAR_ANDROID_SELECT_APP_ICON=function(name){
+                        DarNative.setAppIcon(String(name||"default"));
+                      };
+                      window.webkit.messageHandlers.darOpenSystemSettings={
+                        postMessage:function(data){
+                          DarNative.openSystemSettings(
+                            String(data&&data.kind?data.kind:"app")
+                          );
+                        }
+                      };
+                    } catch(e) {}
+                })();
+                """.trimIndent(),
+                setOf("https://dar-al-tawhid.de", "https://www.dar-al-tawhid.de")
+            )
+        }
         webView.webViewClient = DarWebViewClient()
         webView.webChromeClient = DarChromeClient()
 
@@ -122,6 +206,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
+        pendingGeolocation?.let { it.second.invoke(it.first, false, false) }
+        pendingGeolocation = null
         webView.destroy()
         super.onDestroy()
     }
@@ -130,27 +216,111 @@ class MainActivity : AppCompatActivity() {
         val device = DarPush.deviceId(this)
         val sub = DarPush.subscriptionId()
         val token = DarPush.pushToken()
+        val notificationsAllowed = Build.VERSION.SDK_INT < 33 ||
+            ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) ==
+                PackageManager.PERMISSION_GRANTED
+        val notificationState = jsString(if (notificationsAllowed) "granted" else "denied")
+        val selectedLauncherIcon = jsString(DarAppIcons.current(this))
         val js = """
             (function(){
               try{
+                window.DAR_PLATFORM="android";
+                window.DAR_NATIVE_PLATFORM="android";
                 window.DAR_ANDROID_NATIVE_APP=true;
+                window.DAR_ANDROID_ALTERNATE_ICONS_AVAILABLE=true;
+                window.DAR_ANDROID_CURRENT_APP_ICON=${selectedLauncherIcon};
+                // Sync the in-app choice to the actual native launcher state.
+                // A cached old iOS theme choice must not overwrite the Android icon.
+                try{
+                  localStorage.setItem("darAppIconV1",window.DAR_ANDROID_CURRENT_APP_ICON);
+                  document.querySelectorAll("[data-app-icon-select]").forEach(function(button){
+                    var active=button.getAttribute("data-app-icon-select")===window.DAR_ANDROID_CURRENT_APP_ICON;
+                    button.classList.toggle("is-active",active);
+                    button.setAttribute("aria-pressed",active?"true":"false");
+                  });
+                }catch(e){}
+                window.DAR_OFFICIAL_IOS_APP=false;
+                window.DAR_IOS_NATIVE_APP=false;
+                // Same in-app picker message format as the existing iOS app.
+                // Only route app-icon events; never alter the push bridge.
+                try {
+                  if(!window.webkit) window.webkit={};
+                  if(!window.webkit.messageHandlers) window.webkit.messageHandlers={};
+                  window.webkit.messageHandlers.darAppIcon={
+                    postMessage:function(payload){
+                      try {
+                        var chosen=typeof payload==="string"?payload:
+                          payload&&typeof payload==="object"?(payload.name||payload.id||""):"";
+                        DarNative.setAppIcon(String(chosen));
+                      }catch(iconError){}
+                    }
+                  };
+                  window.DAR_ANDROID_SELECT_APP_ICON=function(name){
+                    try{DarNative.setAppIcon(String(name||"default"))}catch(e){}
+                  };
+                  window.webkit.messageHandlers.darOpenSystemSettings={
+                    postMessage:function(data){
+                      try{DarNative.openSystemSettings(String(data&&data.kind?data.kind:"app"))}catch(e){}
+                    }
+                  };
+                }catch(e){}
+
                 window.DAR_ANDROID_NATIVE_PUSH=true;
                 window.DAR_IOS_NATIVE_APP=false;
                 window.DAR_ANDROID_DEVICE_ID=${jsString(device)};
                 window.DAR_ANDROID_ONESIGNAL_ID=${jsString(sub)};
                 window.DAR_ANDROID_PUSH_TOKEN=${jsString(token)};
                 try{localStorage.setItem("darPushExternalIdV1", window.DAR_ANDROID_DEVICE_ID)}catch(e){}
+                // Native home-screen widget location bridge. The website may
+                // change the selected city without a full page reload.
+                // Sync the saved coordinates only when changed, no extra GPS
+                // requests and no OneSignal/push registration side effects.
+                try{
+                  if(!window.__DAR_ANDROID_WIDGET_SYNC_V2){
+                    window.__DAR_ANDROID_WIDGET_SYNC_V2=true;
+                    window.__darWidgetLastLocation=null;
+                    window.__darAndroidSyncWidgetLocation=function(){
+                      try{
+                        var value=typeof getPrayerSettings==="function"?
+                          getPrayerSettings():JSON.parse(localStorage.getItem("darPrayerSettingsV1")||"{}");
+                        var rawLat=value.lat!=null?value.lat:value.latitude;
+                        var rawLon=value.lon!=null?value.lon:value.lng!=null?value.lng:value.longitude;
+                        // Number(null) === 0; absent location must never
+                        // silently turn into coordinates 0,0 in the widget.
+                        if(rawLat==null||rawLon==null||rawLat===""||rawLon==="")return;
+                        var lat=Number(rawLat);
+                        var lon=Number(rawLon);
+                        if(!Number.isFinite(lat)||!Number.isFinite(lon)||
+                           lat< -90||lat>90||lon< -180||lon>180||
+                           !(value.locationGranted===true||value.city||value.locationName))return;
+                        var name=String(value.city||value.locationName||"Mein Standort").slice(0,60);
+                        var signature=lat.toFixed(5)+"|"+lon.toFixed(5)+"|"+name;
+                        if(signature===window.__darWidgetLastLocation)return;
+                        DarNative.saveWidgetLocation(lat,lon,name);
+                        window.__darWidgetLastLocation=signature;
+                      }catch(e){}
+                    };
+                    window.__darAndroidSyncWidgetLocation();
+                    window.setInterval(window.__darAndroidSyncWidgetLocation,60000);
+                  }else if(window.__darAndroidSyncWidgetLocation){
+                    window.__darAndroidSyncWidgetLocation();
+                  }
+                }catch(e){}
                 var root=document.documentElement;
                 if(root){
+                  root.classList.remove("dar-ios-native-app","dar-ios-native-tabs");
                   root.classList.add("dar-android-native-app");
                   root.classList.add("is-android");
                 }
+                // Reflect the actual Android OS permission. Do not claim
+                // granted simply because the native WebView is running.
+                var nativeNotificationState=${notificationState};
                 window.Notification=window.Notification||function(){};
-                try{Object.defineProperty(window.Notification,"permission",{configurable:true,get:function(){return "granted"}})}catch(e){}
-                window.Notification.requestPermission=function(){return Promise.resolve("granted")};
+                try{Object.defineProperty(window.Notification,"permission",{configurable:true,get:function(){return nativeNotificationState}})}catch(e){}
+                window.Notification.requestPermission=function(){return Promise.resolve(nativeNotificationState)};
                 window.hasNotificationApi=function(){return true};
-                window.getNotificationPermission=function(){return "granted"};
-                window.requestNotificationPermission=function(){return Promise.resolve("granted")};
+                window.getNotificationPermission=function(){return nativeNotificationState};
+                window.requestNotificationPermission=function(){return Promise.resolve(nativeNotificationState)};
                 function nativeReady(){
                   return {ready:true,optedIn:true,subscriptionId:window.DAR_ANDROID_ONESIGNAL_ID||"",token:window.DAR_ANDROID_PUSH_TOKEN||"",os:window.OneSignal||{}};
                 }
@@ -177,6 +347,58 @@ class MainActivity : AppCompatActivity() {
         JSONObject.quote(value)
 
     private inner class DarJsBridge {
+        @JavascriptInterface
+        fun setAppIcon(name: String): Boolean {
+            val changed = DarAppIcons.set(this@MainActivity, name)
+            if (!changed) {
+                runOnUiThread {
+                    Toast.makeText(this@MainActivity,
+                        "Dieses App-Symbol ist auf deinem Gerät nicht verfügbar.",
+                        Toast.LENGTH_SHORT).show()
+                }
+            }
+            return changed
+        }
+
+        @JavascriptInterface
+        fun getAppIcon(): String = DarAppIcons.current(this@MainActivity)
+
+        @JavascriptInterface
+        fun saveWidgetLocation(latitude: Double, longitude: Double, city: String) {
+            DarPrayerWidgetProvider.saveLocation(
+                this@MainActivity.applicationContext, latitude, longitude, city
+            )
+        }
+
+        @JavascriptInterface
+        fun openSystemSettings(kind: String) {
+            runOnUiThread {
+                val which = kind.trim().lowercase()
+                // Android settings UIs differ by vendor. App details always works
+                // and links directly to location and notification permissions.
+                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                    data = Uri.parse("package:$packageName")
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                }
+                try {
+                    startActivity(intent)
+                    if (which == "location") {
+                        Toast.makeText(this@MainActivity,
+                            "Unter Berechtigungen → Standort den Zugriff erlauben.",
+                            Toast.LENGTH_LONG).show()
+                    } else if (which == "notifications") {
+                        Toast.makeText(this@MainActivity,
+                            "Unter Benachrichtigungen die gewünschten Hinweise erlauben.",
+                            Toast.LENGTH_LONG).show()
+                    }
+                } catch (_: ActivityNotFoundException) {
+                    Toast.makeText(this@MainActivity,
+                        "Bitte die App-Berechtigungen in den Android-Einstellungen öffnen.",
+                        Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+
         @JavascriptInterface
         fun pushSettings(json: String) {
             DarPush.applyWebSettings(json)
@@ -268,11 +490,29 @@ class MainActivity : AppCompatActivity() {
             origin: String?,
             callback: GeolocationPermissions.Callback?
         ) {
-            callback?.invoke(origin, true, false)
+            if (origin == null || callback == null) return
+            // Only our production origin may request the device's location.
+            if (!DarShell.isOwnHost(Uri.parse(origin)) || !origin.startsWith("https://")) {
+                callback.invoke(origin, false, false)
+                return
+            }
+            if (hasDeviceLocationPermission()) {
+                callback.invoke(origin, true, false)
+                return
+            }
+            // Never lie to the WebView: native runtime permission must be granted.
+            pendingGeolocation?.let { old -> old.second.invoke(old.first, false, false) }
+            pendingGeolocation = origin to callback
+            locationPermission.launch(
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
+            )
         }
 
         override fun onPermissionRequest(request: PermissionRequest?) {
-            request?.grant(request.resources)
+            // Geolocation is handled by its own runtime-permission callback.
+            // Never blindly grant camera/microphone/protected-media permissions
+            // merely because a web page requested them.
+            request?.deny()
         }
     }
 

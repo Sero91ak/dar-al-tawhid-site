@@ -1,0 +1,147 @@
+name: DAR iOS · Native Build
+# Called by the one-push app coordinator. Never publishes to the App Store itself.
+on:
+  workflow_call:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ios-adult:
+    name: iOS · Build und ggf. signierte IPA
+    runs-on: macos-26
+    timeout-minutes: 55
+    env:
+      IOS_PROJECT: ios/DarAlTawhid/DarAlTawhid.xcodeproj
+      IOS_SCHEME: DarAlTawhid
+    steps:
+      - name: iOS-Projekt auschecken
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            ios/DarAlTawhid
+          sparse-checkout-cone-mode: true
+          persist-credentials: false
+
+      - name: Xcode-Version dokumentieren
+        run: |
+          xcodebuild -version
+          xcodebuild -list -project "$IOS_PROJECT"
+
+      - name: OneSignal-Vendor in freigegebener SDK-Version wiederherstellen
+        shell: bash
+        env:
+          SDK_VERSION: ${{ vars.DAR_IOS_ONESIGNAL_SDK_VERSION }}
+        run: bash ios/DarAlTawhid/scripts/restore-onesignal-vendor.sh
+
+      - name: iPhone und iPad kompilieren (ohne Signatur)
+        shell: bash
+        run: |
+          set -euo pipefail
+          xcodebuild build \
+            -project "$IOS_PROJECT" \
+            -scheme "$IOS_SCHEME" \
+            -configuration Release \
+            -sdk iphonesimulator \
+            -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath "$RUNNER_TEMP/dar-ios-build" \
+            CODE_SIGNING_ALLOWED=NO \
+            CURRENT_PROJECT_VERSION="$((100000 + GITHUB_RUN_NUMBER))" \
+            -quiet
+
+      - name: Signierungszugang nur auf main prüfen
+        id: signing
+        shell: bash
+        env:
+          CERTIFICATE: ${{ secrets.DAR_IOS_DISTRIBUTION_CERT_BASE64 }}
+          CERT_PASSWORD: ${{ secrets.DAR_IOS_DISTRIBUTION_CERT_PASSWORD }}
+          ASC_KEY: ${{ secrets.DAR_ASC_API_PRIVATE_KEY }}
+          ASC_ID: ${{ secrets.DAR_ASC_API_KEY_ID }}
+          ASC_ISSUER: ${{ secrets.DAR_ASC_ISSUER_ID }}
+        run: |
+          if [[ "${GITHUB_REF}" == "refs/heads/main" && -n "$CERTIFICATE" && -n "$CERT_PASSWORD" && -n "$ASC_KEY" && -n "$ASC_ID" && -n "$ASC_ISSUER" ]]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+            echo "::notice::iOS Release-Signierung ist freigeschaltet. IPA nur intern, kein App-Store-Upload."
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::iOS Simulator-Build geprüft; signierte IPA benötigt Zertifikat und App-Store-Connect-API-Zugang auf main."
+          fi
+
+      - name: Temporäre Schlüssel und Apple-ID installieren
+        if: steps.signing.outputs.enabled == 'true'
+        shell: bash
+        env:
+          CERTIFICATE: ${{ secrets.DAR_IOS_DISTRIBUTION_CERT_BASE64 }}
+          CERT_PASSWORD: ${{ secrets.DAR_IOS_DISTRIBUTION_CERT_PASSWORD }}
+          ASC_KEY: ${{ secrets.DAR_ASC_API_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          printf '%s' "$CERTIFICATE" | base64 --decode > "$RUNNER_TEMP/dar-distribution.p12"
+          chmod 600 "$RUNNER_TEMP/dar-distribution.p12"
+          printf '%s' "$ASC_KEY" > "$RUNNER_TEMP/DarAppStoreConnectAuthKey.p8"
+          chmod 600 "$RUNNER_TEMP/DarAppStoreConnectAuthKey.p8"
+          security create-keychain -p "${RUNNER_TEMP}" "$RUNNER_TEMP/dar-signing.keychain-db"
+          security unlock-keychain -p "${RUNNER_TEMP}" "$RUNNER_TEMP/dar-signing.keychain-db"
+          security set-keychain-settings -lut 21600 "$RUNNER_TEMP/dar-signing.keychain-db"
+          security import "$RUNNER_TEMP/dar-distribution.p12" -P "$CERT_PASSWORD" -A -t cert -f pkcs12 -k "$RUNNER_TEMP/dar-signing.keychain-db"
+          security set-key-partition-list -S apple-tool:,apple: -k "${RUNNER_TEMP}" "$RUNNER_TEMP/dar-signing.keychain-db"
+          security list-keychain -d user -s "$RUNNER_TEMP/dar-signing.keychain-db"
+
+      - name: Signiertes iOS-Archiv erzeugen
+        if: steps.signing.outputs.enabled == 'true'
+        shell: bash
+        env:
+          ASC_ID: ${{ secrets.DAR_ASC_API_KEY_ID }}
+          ASC_ISSUER: ${{ secrets.DAR_ASC_ISSUER_ID }}
+        run: |
+          set -euo pipefail
+          xcodebuild archive \
+            -project "$IOS_PROJECT" \
+            -scheme "$IOS_SCHEME" \
+            -configuration Release \
+            -destination 'generic/platform=iOS' \
+            -archivePath "$RUNNER_TEMP/DarAlTawhid.xcarchive" \
+            CURRENT_PROJECT_VERSION="$((100000 + GITHUB_RUN_NUMBER))" \
+            -allowProvisioningUpdates \
+            -authenticationKeyPath "$RUNNER_TEMP/DarAppStoreConnectAuthKey.p8" \
+            -authenticationKeyID "$ASC_ID" \
+            -authenticationKeyIssuerID "$ASC_ISSUER" \
+            -quiet
+
+      - name: Signierte IPA nur als interne Datei exportieren
+        if: steps.signing.outputs.enabled == 'true'
+        shell: bash
+        env:
+          ASC_ID: ${{ secrets.DAR_ASC_API_KEY_ID }}
+          ASC_ISSUER: ${{ secrets.DAR_ASC_ISSUER_ID }}
+        run: |
+          set -euo pipefail
+          cp ios/DarAlTawhid/ExportOptions.plist "$RUNNER_TEMP/DarExportOptions.plist"
+          /usr/libexec/PlistBuddy -c 'Set :destination export' "$RUNNER_TEMP/DarExportOptions.plist"
+          xcodebuild -exportArchive \
+            -archivePath "$RUNNER_TEMP/DarAlTawhid.xcarchive" \
+            -exportPath "$RUNNER_TEMP/ios-export" \
+            -exportOptionsPlist "$RUNNER_TEMP/DarExportOptions.plist" \
+            -allowProvisioningUpdates \
+            -authenticationKeyPath "$RUNNER_TEMP/DarAppStoreConnectAuthKey.p8" \
+            -authenticationKeyID "$ASC_ID" \
+            -authenticationKeyIssuerID "$ASC_ISSUER" \
+            -quiet
+          test -s "$RUNNER_TEMP/ios-export/DarAlTawhid.ipa" || test -n "$(find "$RUNNER_TEMP/ios-export" -maxdepth 1 -name '*.ipa' -size +0c -print -quit)"
+
+      - name: Signierte iPhone- und iPad-Datei intern speichern
+        if: steps.signing.outputs.enabled == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-al-tawhid-ios-signed-ipa
+          path: ${{ runner.temp }}/ios-export/*.ipa
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Temporäre Apple-Geheimnisse löschen
+        if: always()
+        shell: bash
+        run: |
+          rm -f "$RUNNER_TEMP/dar-distribution.p12" "$RUNNER_TEMP/DarAppStoreConnectAuthKey.p8" "$RUNNER_TEMP/DarExportOptions.plist"
+          security delete-keychain "$RUNNER_TEMP/dar-signing.keychain-db" 2>/dev/null || true

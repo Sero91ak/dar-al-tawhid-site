@@ -1,0 +1,176 @@
+name: DAR · Ein Push – Apple und Android
+# Website content is already published by the existing Cloudflare lane.
+# Native packages are rebuilt only when a native shell or release config changes.
+on:
+  push:
+    branches:
+      - main
+      - feature/android-release-automation-2026-10-08
+    paths:
+      - "android/**"
+      - "ios/DarAlTawhid/**"
+      - "download/**"
+      - "links/index.html"
+      - ".github/workflows/unified-native-build.yml"
+      - ".github/workflows/ios-native-build.yml"
+      - ".github/workflows/android-distribution-build.yml"
+  workflow_dispatch:
+    inputs:
+      platform:
+        type: choice
+        description: "Native App-Pakete bei Bedarf neu erstellen"
+        options:
+          - all
+          - android
+          - ios
+        default: all
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: dar-native-build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  detect:
+    name: Welche Plattform braucht ein neues Paket?
+    runs-on: ubuntu-latest
+    outputs:
+      android: ${{ steps.detect.outputs.android }}
+      ios: ${{ steps.detect.outputs.ios }}
+    steps:
+      - name: Geringer Checkout nur für Änderungsvergleich
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+          sparse-checkout: |
+            .github/workflows
+            android
+            download
+            ios/DarAlTawhid
+            links
+          sparse-checkout-cone-mode: true
+      - name: Plattform-Abhängigkeiten bestimmen
+        id: detect
+        shell: bash
+        env:
+          ACTION_EVENT: ${{ github.event_name }}
+          CHOSEN_PLATFORM: ${{ inputs.platform }}
+          BEFORE_SHA: ${{ github.event.before }}
+        run: |
+          set -euo pipefail
+          if [[ "$ACTION_EVENT" == "workflow_dispatch" ]]; then
+            case "${CHOSEN_PLATFORM:-all}" in
+              all) ANDROID=true; IOS=true ;;
+              android) ANDROID=true; IOS=false ;;
+              ios) ANDROID=false; IOS=true ;;
+              *) echo "::error::Unbekannte App-Plattform"; exit 1 ;;
+            esac
+          else
+            if [[ -n "$BEFORE_SHA" && "$BEFORE_SHA" != "0000000000000000000000000000000000000000" ]]; then
+              if ! git cat-file -e "$BEFORE_SHA^{commit}" 2>/dev/null; then
+                git fetch --no-tags --depth=1 origin "$BEFORE_SHA"
+              fi
+              CHANGED="$(git diff --name-only "$BEFORE_SHA" "$GITHUB_SHA")"
+            else
+              CHANGED="$(git diff --name-only HEAD^ HEAD)"
+            fi
+            printf '%s\n' "$CHANGED"
+            ANDROID=false
+            IOS=false
+            if printf '%s\n' "$CHANGED" | grep -Eq '^(android/|\.github/workflows/(android-distribution-build|unified-native-build)\.yml$)'; then
+              ANDROID=true
+            fi
+            if printf '%s\n' "$CHANGED" | grep -Eq '^(ios/DarAlTawhid/|\.github/workflows/(ios-native-build|unified-native-build)\.yml$)'; then
+              IOS=true
+            fi
+          fi
+          echo "android=$ANDROID" >> "$GITHUB_OUTPUT"
+          echo "ios=$IOS" >> "$GITHUB_OUTPUT"
+          # User/Cursor release notice: mandatory for native changes.
+          if [[ "$ANDROID" == true ]]; then
+            echo "::warning title=Neue Android-App-Datei erforderlich::Der native Android-Code wurde geändert. Neue signierte APK und Play-AAB erst nach erfolgreich abgeschlossenem Build und Freigabe verteilen."
+            echo "native_notice_android=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "native_notice_android=false" >> "$GITHUB_OUTPUT"
+          fi
+          if [[ "$IOS" == true ]]; then
+            echo "::warning title=Neue iOS-App-Version erforderlich::Die native Apple-App wurde geändert. Ein neues signiertes iOS-Archiv ist erforderlich; ein Web-Deploy allein reicht nicht."
+            echo "native_notice_ios=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "native_notice_ios=false" >> "$GITHUB_OUTPUT"
+          fi
+
+          {
+            echo "## DAR AL TAWḤĪD · Ein Push für alle Apps"
+            echo ""
+            echo "| Bereich | Native Datei erforderlich? |"
+            echo "|---|---|"
+            echo "| Android Smartphone & TV | $ANDROID |"
+            if [[ "$ANDROID" == true ]]; then echo "**NEUE ANDROID-APK ERFORDERLICH** · vor Veröffentlichung Release-Signatur und Gerätetest kontrollieren."; fi
+            if [[ "$IOS" == true ]]; then echo "**NEUE iOS-VERSION ERFORDERLICH** · signiertes Archiv und App Store Connect überprüfen."; fi
+            if [[ "$ANDROID" != true && "$IOS" != true ]]; then echo "**KEIN NATIVES UPDATE NÖTIG** · gewöhnliche Web-Änderungen werden separat auf die installierten App-Oberflächen übertragen."; fi
+            echo "| iPhone / iPad | $IOS |"
+            echo ""
+            echo "Web-Inhalte werden unabhängig durch den bestehenden Cloudflare-Workflow bereitgestellt."
+            echo "Kids bleibt ein internes Testpaket. Keine automatischen App-Store-Uploads."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Natives Update auf dem GitHub Pull Request ankündigen
+        if: github.event_name == 'push' && (steps.detect.outputs.native_notice_android == 'true' || steps.detect.outputs.native_notice_ios == 'true')
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NATIVE_ANDROID: ${{ steps.detect.outputs.native_notice_android }}
+          NATIVE_IOS: ${{ steps.detect.outputs.native_notice_ios }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          PR="$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$GITHUB_REF_NAME" --state open --json number --jq '.[0].number // empty')"
+          if [[ -z "$PR" ]]; then
+            echo "Kein offener PR auf dem Branch – Hinweis bleibt in GitHub-Actions-Logs und Summary."
+            exit 0
+          fi
+          NOTICE="$RUNNER_TEMP/dar-native-update-notice.md"
+          {
+            echo "### ⚠️ Native App-Datei aktualisieren"
+            echo ""
+            echo "Änderung: \`$GITHUB_SHA\`"
+            echo ""
+            if [[ "$NATIVE_ANDROID" == true ]]; then
+              echo "- **Android:** Neue **signierte APK** (Website) und ggf. **AAB** (Play Console) erforderlich. Android-Smartphone und Android TV haben **getrennte APKs**."
+            else
+              echo "- **Android:** Keine neue APK für diese Änderung."
+            fi
+            if [[ "$NATIVE_IOS" == true ]]; then
+              echo "- **iOS:** Neues signiertes iPhone-/iPad-Archiv erforderlich."
+            else
+              echo "- **iOS:** Keine neue IPA für diese Änderung."
+            fi
+            echo ""
+            echo "Kids bleibt interne Testphase; das CI-Ergebnis ist **keine** Veröffentlichungsfreigabe. Offizielle Downloads erst nach erfolgreicher Release-Signierung, echten Gerätetests und ausdrücklicher Live-Freigabe einschalten."
+            echo ""
+            echo "Build: https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          } > "$NOTICE"
+          gh pr comment "$PR" --repo "$GITHUB_REPOSITORY" --body-file "$NOTICE"
+          echo "Native Update-Pflicht auf PR #$PR vermerkt."
+
+      - name: Website-Signaturen und Kids-Sperre prüfen
+        run: node download/validate-release.cjs
+
+  android:
+    name: Android · APK und AAB
+    needs: detect
+    if: needs.detect.outputs.android == 'true'
+    uses: ./.github/workflows/android-distribution-build.yml
+    secrets: inherit
+
+  ios:
+    name: Apple · iPhone und iPad
+    needs: detect
+    if: needs.detect.outputs.ios == 'true'
+    uses: ./.github/workflows/ios-native-build.yml
+    secrets: inherit

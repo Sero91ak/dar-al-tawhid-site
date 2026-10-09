@@ -1,0 +1,115 @@
+name: DAR Android · Signierte Website-APK freigabefertig
+# Manual approved release creation, NOT auto-published, NOT Kids.
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: "Tippe APK-VORBEREITEN. Release bleibt als Entwurf unveroeffentlicht."
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dar-android-website-release
+  cancel-in-progress: false
+
+jobs:
+  authorize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Freigabe nur vom stabilen Hauptzweig vorbereiten
+        shell: bash
+        env:
+          USER_CONFIRM: ${{ inputs.confirm }}
+        run: |
+          set -euo pipefail
+          [[ "$GITHUB_REF" == "refs/heads/main" ]] || { echo "::error::Release nur auf main"; exit 1; }
+          [[ "$USER_CONFIRM" == "APK-VORBEREITEN" ]] || { echo "::error::Bestätigung APK-VORBEREITEN fehlt."; exit 1; }
+          echo "Kein öffentlicher Release: Die beiden signierten APKs werden zunächst nur als GitHub Release-ENTWURF erstellt."
+
+  build:
+    needs: authorize
+    uses: ./.github/workflows/android-distribution-build.yml
+    secrets: inherit
+
+  draft-release:
+    name: Zwei signierte Dateien als privaten Release-Entwurf vorbereiten
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Erwachsenen-Release-APK herunterladen
+        uses: actions/download-artifact@v4
+        with:
+          name: dar-al-tawhid-adult-signed-aab-and-apk
+          path: ${{ runner.temp }}/signed/adult
+      - name: TV-Release-APK herunterladen
+        uses: actions/download-artifact@v4
+        with:
+          name: dar-al-tawhid-tv-signed-aab-and-apk
+          path: ${{ runner.temp }}/signed/tv
+
+      - name: Signierte Dateien im öffentlichen APK-Dateinamen bereitstellen
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/release"
+          adult="$(find "$RUNNER_TEMP/signed/adult" -type f -name 'app-release.apk' -size +10000c -print -quit)"
+          tv="$(find "$RUNNER_TEMP/signed/tv" -type f -name 'tv-release.apk' -size +10000c -print -quit)"
+          [[ -n "$adult" && -n "$tv" ]] || {
+            echo "::error::Signierte Android-/TV-Release-Datei fehlt. Originalschlüssel und GitHub Secrets zuerst einrichten."
+            exit 1
+          }
+          cp "$adult" "$RUNNER_TEMP/release/dar-al-tawhid-android.apk"
+          cp "$tv" "$RUNNER_TEMP/release/dar-al-tawhid-tv.apk"
+          cd "$RUNNER_TEMP/release"
+          shasum -a 256 dar-al-tawhid-android.apk dar-al-tawhid-tv.apk > SHA256SUMS.txt
+          test -s SHA256SUMS.txt
+
+      - name: Beide APK-Signaturen nochmals prüfen
+        shell: bash
+        run: |
+          set -euo pipefail
+          SDK_ROOT="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}"
+          VERIFY="$(find "$SDK_ROOT/build-tools" -type f -name apksigner 2>/dev/null | sort -V | tail -n 1)"
+          test -x "$VERIFY" || { echo "::error::apksigner fehlt"; exit 1; }
+          for apk in "$RUNNER_TEMP/release/"*.apk; do
+            "$VERIFY" verify --verbose --print-certs "$apk" > "$apk.verify.txt"
+            grep -q '^Verified' "$apk.verify.txt"
+          done
+          echo "Beide APK-Dateien haben signierte, verifizierte Android-Release-Signaturen."
+
+      - name: GitHub Release als ENTWURF speichern
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          TAG="android-website-v1.${GITHUB_RUN_NUMBER}"
+          RELEASE_DIR="$RUNNER_TEMP/release"
+          {
+            echo "DAR AL TAWḤĪD — offizielle Android-Release-Dateien."
+            echo ""
+            echo "**ACHTUNG: Entwurf. NICHT VERÖFFENTLICHEN, bevor beide APKs auf Android-Smartphone und Android/Google TV installiert und getestet wurden.**"
+            echo ""
+            echo "- dar-al-tawhid-android.apk — Besucher-App für Android-Smartphone/Tablet"
+            echo "- dar-al-tawhid-tv.apk — Android TV / Google TV / unterstützte Android-TV-Box"
+            echo "- SHA256SUMS.txt — Prüfsummen"
+            echo ""
+            echo "TAWḤĪD KIDS ist ausdrücklich NICHT enthalten."
+            echo "Für spätere Updates müssen die ursprünglichen GitHub-Signing-Secrets/Keystores erhalten bleiben."
+            echo "Commit: $GITHUB_SHA"
+          } > "$RUNNER_TEMP/release-notes.md"
+          gh release create "$TAG" \
+            "$RELEASE_DIR/dar-al-tawhid-android.apk" \
+            "$RELEASE_DIR/dar-al-tawhid-tv.apk" \
+            "$RELEASE_DIR/SHA256SUMS.txt" \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$GITHUB_SHA" \
+            --title "DAR AL TAWḤĪD · Android & Android TV · v1.${GITHUB_RUN_NUMBER}" \
+            --notes-file "$RUNNER_TEMP/release-notes.md" \
+            --draft
+          echo "## Geschützter Android-Release-Entwurf" >> "$GITHUB_STEP_SUMMARY"
+          echo "Beide signierten APKs liegen als ENTWURF vor, Kids ist ausgeschlossen." >> "$GITHUB_STEP_SUMMARY"
+          echo "Nach echten Gerätetests den Entwurf manuell veröffentlichen. Erst dann wird der Website-Direktdownload aktiv." >> "$GITHUB_STEP_SUMMARY"

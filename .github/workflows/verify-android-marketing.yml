@@ -1,0 +1,76 @@
+name: DAR Android · Website und Signierungscheck
+on:
+  push:
+    branches:
+      - feature/android-release-automation-2026-10-08
+      - main
+    paths:
+      - "android/tools/**"
+      - "links/index.html"
+      - "download/**"
+      - "cloudflare/site-router.js"
+      - ".github/workflows/android-website-release.yml"
+      - ".github/workflows/verify-android-marketing.yml"
+  pull_request:
+    paths:
+      - "android/tools/**"
+      - "links/index.html"
+      - "download/**"
+      - "cloudflare/site-router.js"
+      - ".github/workflows/android-website-release.yml"
+      - ".github/workflows/verify-android-marketing.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            android/tools
+            android/tv
+            cloudflare/site-router.js
+            links
+            download
+            .github/workflows/android-website-release.yml
+          sparse-checkout-cone-mode: true
+      - name: Website-Sicherheitsprüfung
+        run: node download/validate-release.cjs
+      - name: Release-JavaScript und Cloudflare-Website-Router Syntax prüfen
+        run: |
+          node --check download/official-release-links.js
+          node --check cloudflare/site-router.js
+      - name: Neueste Android-Version, Release-Datum und SHA256 testen
+        run: node download/test-release-switchboard.cjs
+      - name: Marketing-HTML Inline-JavaScript prüfen
+        run: |
+          node <<'NODE'
+          const fs=require('node:fs'),vm=require('node:vm');
+          for (const name of ['links/index.html','download/index.html']) {
+            const html=fs.readFileSync(name,'utf8');
+            const tags=[...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)];
+            for (let i=0;i<tags.length;i++) if(tags[i][1].trim()) new vm.Script(tags[i][1],{filename:name+'#script-'+i});
+            if(!html.includes('/download/official-release-links.js'))throw Error(name+': Release JS fehlt');
+          }
+          console.log('Marketing JavaScript syntaktisch OK');
+          NODE
+      - name: Mac-Schlüsselassistent auf Shell-Syntax prüfen
+        shell: bash
+        run: bash -n android/tools/setup-website-signing.command
+      - name: "Nachweis: kein Kids Public APK"
+        run: |
+          node <<'NODE'
+          const f=require('node:fs');
+          const manifest=JSON.parse(f.readFileSync('download/releases.json'));
+          if (manifest.apps.kids.public!==false || manifest.apps.kids.status!=='private-testing')
+            process.exit(1);
+          const c=f.readFileSync('links/index.html','utf8');
+          for(const id of ['direct-android-apk','direct-android-tv-apk'])
+            if(!c.includes('id="'+id+'"'))throw Error(id+' fehlt');
+          if(!c.includes('apps.apple.com/de/app/'))throw Error('Bestehender Apple App Store Link fehlt');
+          console.log('Apple-Werbung erhalten, Android + TV separat, Kids privat');
+          NODE

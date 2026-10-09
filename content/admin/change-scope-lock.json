@@ -7201,6 +7201,93 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-30T23:59:00.000Z"
+    },
+    {
+      "id": "android-distribution-build-staging-2026-10-08",
+      "at": "2026-10-08T19:13:00+02:00",
+      "approvedBy": "user-explicit-android-play-and-website-all-three",
+      "reason": "Android-Paketierung und technischer Test auf eigenem Feature-Branch, ohne Produktions-Deploy oder Eingriff in geschützte Push-Systeme.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "android/",
+        ".github/workflows/android-distribution-build.yml"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "android-downloads-website-2026-10-08",
+      "at": "2026-10-08T19:13:00+02:00",
+      "approvedBy": "user-explicit-website-apk-downloads-adult-and-android-tv-kids-test-only",
+      "reason": "Website darf einen offiziellen Android-Downloadbereich für Erwachsenen-App und Android TV vorbereiten; Kids bleibt private Testphase. Nur signierte und technisch geprüfte APK dürfen als verfügbar markiert werden. Keine Push-Änderungen.",
+      "paths": [
+        "download/",
+        "links/index.html",
+        "wrangler.toml",
+        ".github/workflows/cloudflare-pages-deploy.yml",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "unified-apple-android-native-build-2026-10-08",
+      "at": "2026-10-08T20:10:00+02:00",
+      "approvedBy": "user-explicit-unified-ios-android-build-and-website-apk-2026-10-08",
+      "reason": "Eigene Android-APK Website-Distribution und automatische native Apple/Android-Artefakte aus einer gemeinsamen Veröffentlichung; Inhalte der Besucher-App, Kids und alle Push-Spuren unverändert. Nur Staging-PR, ohne Live-Merge.",
+      "paths": [
+        ".github/workflows/unified-native-build.yml",
+        ".github/workflows/ios-native-build.yml",
+        ".github/workflows/android-distribution-build.yml",
+        "download/",
+        "ios/DarAlTawhid/",
+        "android/",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "native-update-notice-and-tv-install-guide-2026-10-08",
+      "at": "2026-10-08T20:45:00+02:00",
+      "approvedBy": "user-explicit-native-update-notification-and-android-tv-apk-website-distribution",
+      "reason": "GitHub/Cursor verpflichtende Meldung für neue Android-APK/Apple-IPA und konkrete Installationsanleitung für Android TV/Google TV/TV-Box, ohne Live-Deploy. Kids ausschließlich intern, Push unverändert.",
+      "paths": [
+        "AGENTS.md",
+        ".github/workflows/unified-native-build.yml",
+        "download/",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "android-signed-release-and-existing-ios-marketing-2026-10-08",
+      "at": "2026-10-08T20:21:00+02:00",
+      "approvedBy": "user-requested-immediate-android-apk-signing-website-advertising-and-direct-downloads",
+      "reason": "Unmittelbare offizielle Android/TV-APK-Verteilung vorbereiten, neben dem bestehenden iOS App-Store-Marketing jeweils eigenständige Android- und TV-App-Icons und direkte, nach Freigabe automatisch aktivierte Downloads. Einmalige Mac-Schlüsselsicherung. Nur Entwicklungszweig, keine unsignierten öffentlichen APKs und keine Kids-Freigabe.",
+      "paths": [
+        "download/",
+        "links/index.html",
+        "android/tools/",
+        ".github/workflows/android-website-release.yml",
+        ".github/workflows/verify-android-marketing.yml",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "android-tv-user-supplied-official-art-2026-10-08",
+      "at": "2026-10-08T21:10:00+02:00",
+      "approvedBy": "user-explicit-tv-icon-and-banner-from-upload-2026-10-08",
+      "reason": "Offizielles vom Nutzer hochgeladenes Android-TV-Installationslogo vollständig im TV-APK-Manifest, als Launcher-Banner und Icon, sowie Download-Werbung einbinden. Nur TV und Marketing-Staging; Smartphone-App, Kids und Push bleiben unangetastet.",
+      "paths": [
+        "android/tv/src/main/AndroidManifest.xml",
+        "android/tv/src/main/res/drawable-nodpi/",
+        "android/tv/branding/",
+        "download/icons/",
+        "download/index.html",
+        "download/validate-release.cjs",
+        "links/index.html",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
