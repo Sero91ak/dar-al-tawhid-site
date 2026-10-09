@@ -1187,6 +1187,22 @@ export default {
     // /test/kids und andere interne Routen bleiben hinter der bisherigen Sperre.
     const gated = isLiveKidsPath(url.pathname) ? null : gateHiddenSurfaces(request, url, env, "live");
     if (gated) return gated;
+    // TV-only stable short URL, pinned to a verified signed public GitHub release.
+    // Update the pinned version only after the next TV-APK signature/release audit.
+    if ((request.method === "GET" || request.method === "HEAD") && url.pathname === "/tv.apk") {
+      const tvReleaseUrl = "https://github.com/Sero91ak/dar-al-tawhid-site/releases/download/android-website-v1.54/dar-al-tawhid-tv.apk";
+      return new Response(null, {
+        status: 302,
+        headers: {
+          "Location": tvReleaseUrl,
+          "Cache-Control": "no-store, max-age=0",
+          "CDN-Cache-Control": "no-store",
+          "Content-Security-Policy": "default-src 'none'",
+          "Referrer-Policy": "no-referrer",
+          "X-Dar-Surface": "official-android-tv-apk"
+        }
+      });
+    }
     if (request.method === "GET" || request.method === "HEAD") {
       const intro = await serveKidsIntroVideo(request, url, env);
       if (intro) return intro;

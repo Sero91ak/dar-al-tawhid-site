@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#071923">
+<meta name="color-scheme" content="dark">
+<meta name="description" content="DĀR AL TAWḤĪD TV – offizielle signierte Android-TV-APK herunterladen und auf Android TV, Google TV oder Fire TV installieren.">
+<meta property="og:title" content="DĀR AL TAWḤĪD TV · Offizieller Download">
+<meta property="og:image" content="https://dar-al-tawhid.de/download/icons/android-tv-official.jpg">
+<meta property="og:url" content="https://dar-al-tawhid.de/tv/">
+<title>DĀR AL TAWḤĪD TV · APK herunterladen</title>
+<style>
+:root{color-scheme:dark;--gold:#e6c781;--cream:#f7efe0;--muted:#bed0d1;--edge:rgba(230,199,129,.32)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;color:var(--cream);font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;background:radial-gradient(ellipse at 75% -25%,#31515c88,transparent 63%),linear-gradient(155deg,#07141c,#102b32 60%,#071923)}
+a{color:inherit}
+main{width:min(100% - 44px,1060px);margin:auto;padding:25px 0 65px}
+nav{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:23px}
+nav a{text-decoration:none}
+nav .brand{font:500 clamp(17px,2.2vw,25px) Georgia,serif;color:var(--gold);letter-spacing:.07em}
+nav .back{color:var(--muted);font-size:14px;text-decoration:underline;text-underline-offset:5px}
+.hero{display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:30px;padding:clamp(22px,4vw,43px);border:1px solid var(--edge);border-radius:26px;background:linear-gradient(145deg,#16373bbd,#081d26dc);box-shadow:0 24px 55px #0004}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.2em;color:var(--gold);text-transform:uppercase}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:500}
+h1{font-size:clamp(42px,6vw,74px);line-height:1.05;margin:11px 0 16px;letter-spacing:-.025em}
+h1 span{color:var(--gold)}
+.lead{font-size:clamp(16px,1.6vw,19px);line-height:1.66;color:#dae3df;max-width:630px}
+.tv-art{width:100%;max-width:420px;height:auto;aspect-ratio:16/9;object-fit:cover;border:1px solid var(--edge);border-radius:17px;box-shadow:0 12px 30px #0005}
+.short{display:inline-flex;align-items:center;flex-wrap:wrap;gap:11px;padding:11px 15px;border:1px solid var(--edge);border-radius:12px;color:var(--gold);font-size:clamp(17px,2vw,23px);font-weight:800;margin:10px 0 3px;background:#050e15a8;overflow-wrap:anywhere}
+.download{margin:24px 0 7px;border:1px solid var(--edge);padding:clamp(20px,3vw,30px);border-radius:22px;background:#071c25e8}
+.release-state{font-size:14px;color:var(--muted);line-height:1.6;margin:0 0 15px}
+.release-state.ready{color:#9fdcc4}
+.btn{display:flex;align-items:center;justify-content:space-between;gap:15px;width:100%;min-height:80px;padding:21px 28px;border-radius:15px;text-decoration:none;background:linear-gradient(125deg,#ffe5a6,#d3ad64);color:#09232a;font-size:clamp(20px,2.8vw,29px);font-weight:850}
+.btn[hidden],.pending[hidden],.release-info[hidden],.release-source[hidden]{display:none!important}
+.btn:focus-visible,nav a:focus-visible,details summary:focus-visible,.quick-link:focus-visible,.fallback:focus-visible{outline:4px solid #fff0bf;outline-offset:5px}
+.btn:hover,.btn:focus-visible{background:linear-gradient(125deg,#ffedca,#e5ba73)}
+.pending{padding:18px;border:1px solid var(--edge);border-radius:13px;color:var(--muted);line-height:1.6}
+.release-info{font-size:13px;color:var(--muted);margin:14px 0 4px;line-height:1.65}
+.release-version{color:var(--gold);font-weight:800;font-size:17px;margin:0 0 4px}
+.release-dates,.release-meta{margin:4px 0}
+.release-sha-details{margin:10px 0}
+.release-sha-details summary{cursor:pointer;color:#f0d79c}
+.release-sha-details code{display:block;overflow-wrap:anywhere;color:#dde9e4;padding:9px 0}
+.release-source{color:#f1d698;text-underline-offset:5px}
+.fallback{display:inline-block;color:#f4d794;text-underline-offset:5px;font-weight:700;margin-top:14px}
+.micro{color:var(--muted);font-size:13px;line-height:1.7;margin:15px 0 0}
+h2{font-size:clamp(26px,3.4vw,40px);margin:0 0 13px}
+.guide{margin-top:45px}
+.guide-intro{font-size:15px;color:var(--muted);line-height:1.7;max-width:850px}
+.steps{display:grid;grid-template-columns:1fr 1fr;gap:17px;margin-top:17px}
+.step{border:1px solid var(--edge);border-radius:18px;background:#0e252ac7;padding:22px}
+.step h3{font-size:24px;margin:0 0 13px}
+.step ol{margin:0;padding-left:23px;color:#e0e8e5;font-size:15px;line-height:1.75}
+.step li{margin-bottom:10px}
+.step li::marker{color:var(--gold);font-weight:800}
+.help{margin-top:21px;border:1px solid var(--edge);border-radius:15px;padding:17px;color:var(--muted);line-height:1.7}
+.help summary{color:var(--gold);font-weight:700;cursor:pointer}
+.help p{margin-bottom:0}
+.quick-link{color:var(--gold);font-weight:800;text-underline-offset:5px;overflow-wrap:anywhere}
+.footer{margin-top:35px;padding-top:24px;border-top:1px solid var(--edge);font-size:13px;color:var(--muted);line-height:1.8}
+.footer a{color:var(--gold)}
+@media(max-width:780px){.hero{grid-template-columns:1fr;gap:15px}.steps{grid-template-columns:1fr}.tv-art{max-width:100%}main{width:min(100% - 28px,1060px)}.btn{min-height:66px;padding:17px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<main>
+<nav aria-label="Navigation"><a class="brand" href="/download/">DĀR AL TAWḤĪD</a><a class="back" href="/download/">← Alle Downloads</a></nav>
+<section class="hero" aria-labelledby="title">
+<div>
+<p class="eyebrow">Offizielle TV-App · Android TV · Google TV · Fire TV</p>
+<h1 id="title">DĀR AL<br>TAWḤĪD <span>TV</span></h1>
+<p class="lead">Unsere eigene Fernseher-App: Qurʾān, islamisches Wissen und TV-Oberfläche mit Fernbedienung. Lade die TV-APK herunter und bestätige die Installation auf deinem Fernseher.</p>
+<p class="eyebrow">Diese Adresse am Fernseher eingeben</p>
+<p class="short" aria-label="dar-al-tawhid.de Schrägstrich tv">dar-al-tawhid.de/tv</p>
+</div>
+<img class="tv-art" src="/download/icons/android-tv-official.jpg" alt="Offizielles DĀR AL TAWḤĪD TV-Motiv" width="800" height="450">
+</section>
+<section class="download" aria-labelledby="download-heading">
+<h2 id="download-heading">DĀR AL TAWḤĪD TV downloaden</h2>
+<div class="release-state" id="status-tv" role="status" aria-live="polite"><span>Offiziellen signierten TV-Release prüfen …</span></div>
+<a class="btn" id="apk-tv" href="#" hidden rel="noopener noreferrer"><span>TV-App herunterladen (.apk)</span><span aria-hidden="true">↓</span></a>
+<div class="pending" id="pending-tv">Wenn dein TV-Browser die automatische Release-Prüfung nicht unterstützt, benutze den direkten APK-Kurzlink unterhalb.</div>
+<div class="release-info" id="release-info-tv" hidden aria-live="polite">
+<p class="release-version" id="release-version-tv"></p>
+<p class="release-dates" id="release-dates-tv"></p>
+<p class="release-meta" id="release-meta-tv"></p>
+<details class="release-sha-details"><summary>SHA-256-Prüfsumme anzeigen</summary><code id="release-sha-tv"></code></details>
+<a class="release-source" id="release-source-tv" hidden href="#" rel="noopener noreferrer" target="_blank">Offiziellen GitHub-Release ansehen ↗</a>
+</div>
+<a class="fallback" href="/tv.apk" rel="noopener noreferrer">Direkter TV-APK-Download: dar-al-tawhid.de/tv.apk ↓</a>
+<p class="micro">Der Kurzlink führt zur derzeit verifizierten, signierten TV-APK (v0.1.54). Der Versions-Button oben wird über die offiziellen Release-Metadaten aktualisiert. Nur für Android TV / Google TV und kompatible Fire-TV-Geräte; keine Smartphone-APK.</p>
+</section>
+<section class="guide" aria-labelledby="install-guide">
+<h2 id="install-guide">In wenigen Schritten auf den Fernseher</h2>
+<p class="guide-intro">Die APK-Datei wird heruntergeladen; danach öffnet das Gerät den Android-Paketinstaller. Eine Website kann den Sicherheitsdialog nicht automatisch bestätigen.</p>
+<div class="steps">
+<article class="step">
+<h3>Android TV / Google TV</h3>
+<ol>
+<li>Öffne einen TV-Browser oder einen vertrauenswürdigen Download-Manager.</li>
+<li>Tippe mit der Fernbedienung <strong>dar-al-tawhid.de/tv</strong> ein, oder in einer Downloader-App direkt <strong>dar-al-tawhid.de/tv.apk</strong>.</li>
+<li>Lade die TV-APK herunter. Öffne sie anschließend unter <strong>Downloads</strong> bzw. im Dateimanager.</li>
+<li>Wenn nötig, erlaube dem benutzten Browser/Dateimanager unter <strong>Apps → Spezieller App-Zugriff → Unbekannte Apps installieren</strong> die Installation.</li>
+<li>Bestätige <strong>Installieren</strong> und öffne <strong>DĀR AL TAWḤĪD TV</strong> im App-Menü.</li>
+</ol>
+</article>
+<article class="step">
+<h3>Amazon Fire TV (mit Alexa)</h3>
+<ol>
+<li>Öffne auf deinem <strong>Fire TV Stick / Fire TV</strong> eine Downloader-App, die APK-Dateien herunterladen kann.</li>
+<li>Gib <strong>dar-al-tawhid.de/tv.apk</strong> ein und starte den Download.</li>
+<li>Erlaube – falls angefragt – ausschließlich dieser Downloader-App das <strong>Installieren unbekannter Apps</strong> in den Fire-TV-Einstellungen.</li>
+<li>Öffne die heruntergeladene APK, bestätige <strong>Installieren</strong> und starte die TV-App unter <strong>Deine Apps</strong>.</li>
+<li>Falls Fire TV den Installationsdialog grundsätzlich nicht anbietet, ist dein Gerät bzw. Fire-OS-Stand möglicherweise nicht mit diesem Installationsweg kompatibel.</li>
+</ol>
+</article>
+</div>
+<details class="help"><summary>TV-Browser hat keinen Download oder Installation ist blockiert?</summary>
+<p>Lade die TV-APK auf einem Computer oder Smartphone über <a class="quick-link" href="/tv.apk">dar-al-tawhid.de/tv.apk</a> herunter und übertrage sie per USB-Stick oder über eine vertrauenswürdige lokale Übertragungs-App. Prüfe vor der Installation die Paketberechtigungen. Deaktiviere Play Protect nicht und umgehe keine konkrete Schadsoftware-Warnung. Samsung Tizen, LG webOS, Apple TV und reine Echo-/Alexa-Lautsprecher können Android-APKs nicht installieren. Auf manchen neueren Fire-TV-Modellen mit Vega OS sind Android-APKs ebenfalls nicht nutzbar.</p>
+</details>
+</section>
+<p class="footer">DĀR AL TAWḤĪD TV · Offizieller APK-Download aus dem <a href="https://github.com/Sero91ak/dar-al-tawhid-site/releases">DĀR-AL-TAWḤĪD-GitHub-Repository</a>. Die Veröffentlichung einer signierten APK belegt nicht die vollständige Funktionsgleichheit mit Apple TV; tatsächliche Fernbedienungs-, Audio- und Gerätetests bleiben erforderlich.</p>
+</main>
+<script src="/download/official-release-links.js" defer></script>
+</body>
+</html>

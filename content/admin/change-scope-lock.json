@@ -7275,6 +7275,17 @@
         "android/app/build.gradle.kts"
       ],
       "expiresAt": "2026-11-30T23:59:00.000Z"
+    },
+    {
+      "id": "android-tv-download-page-only-2026-10-09",
+      "approvedBy": "user-request-android-tv-direct-tv-apk-download",
+      "reason": "Nutzerauftrag 09.10.2026: eigene DĀR AL TAWḤĪD TV-Downloadseite mit kurzer /tv/-Adresse, mit offizieller signierter TV-APK und einem direkten TV-APK-Kurzlink; sichtbarer Einstieg im bestehenden /download/-Bereich. Ausschließlich diese drei Dateien, keine anderen Apps, keine Push-Änderung und kein Live-Deploy ohne Freigabe.",
+      "paths": [
+        "tv/index.html",
+        "download/index.html",
+        "cloudflare/site-router.js"
+      ],
+      "expiresAt": "2026-11-30T23:59:00.000Z"
     }
   ],
   "enabled": true
