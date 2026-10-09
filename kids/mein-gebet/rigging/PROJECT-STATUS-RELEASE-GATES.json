@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "asOf": "2026-10-08",
+  "asOf": "2026-10-09",
   "project": "DAR AL TAWḤĪD KIDS Mein Gebet",
   "source": "GitHub draft #825 and source files inspected",
   "state": "draft_not_complete",
@@ -78,5 +78,17 @@
     "Run real device HTTPS staging test and user approval",
     "Do not publish until all above succeed"
   ],
-  "truthRule": "If a check has no verified evidence it MUST remain false. Structural tests on prototype or 2D image are not a 100% completion."
+  "truthRule": "If a check has no verified evidence it MUST remain false. Structural tests on prototype or 2D image are not a 100% completion.",
+  "technicalQA": {
+    "verifiedAt": "2026-10-09",
+    "validatorFile": "rigging/validate-glb.cjs",
+    "validatorBlobSha": "c29319ba5004f71eeece6914ecb2c00e871ef001",
+    "syntheticUpperArmTranslationAccepted": true,
+    "syntheticLowerLegTranslationAccepted": true,
+    "syntheticScaleAnimationRejected": true,
+    "realGLBCheckedInThisRun": false,
+    "boneLengthInvariantVerified": false,
+    "requiresAdditionalNoLimbTranslationGuard": true,
+    "note": "Existing structural validator permits non-root translation channels that may stretch limbs without scale keys. Reproduced with two isolated glTF fixtures. Do not claim pose or release approval. No production model bytes were available in the repository."
+  }
 }
