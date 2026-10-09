@@ -7286,6 +7286,20 @@
         "cloudflare/site-router.js"
       ],
       "expiresAt": "2026-11-30T23:59:00.000Z"
+    },
+    {
+      "id": "public-pwa-install-tap-clean-2026-10-09",
+      "at": "2026-10-09T21:50:00+02:00",
+      "approvedBy": "user-explicit-android-install-and-remove-tap-rectangle-everywhere",
+      "reason": "Nutzer beauftragt ausdrücklich: störenden hellen Rechteck-/Tap-Effekt auf Website, iOS und Android entfernen; Android-Web-App-Installationsbutton wieder direkt bedienbar machen. 100%-Bootscreen und Standard-DĀR-Logo bleiben unverändert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "desktop-preview/index.html",
+        "cloudflare/site-router.js",
+        "ios/DarAlTawhid/DarAlTawhid/WebAppView.swift",
+        "android/app/src/main/java/de/daraltawhid/app/MainActivity.kt"
+      ],
+      "expiresAt": "2026-11-30T23:59:00.000Z"
     }
   ],
   "enabled": true
