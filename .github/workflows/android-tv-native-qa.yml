@@ -58,7 +58,7 @@ jobs:
           "$sdk/apksigner" verify --verbose "$apk"
           "$sdk/aapt" dump badging "$apk" > "$RUNNER_TEMP/tv-badging.txt"
           grep -q "name='de.daraltawhid.tv.debug'" "$RUNNER_TEMP/tv-badging.txt"
-          grep -q 'leanback-launcher' "$RUNNER_TEMP/tv-badging.txt"
+          grep -Eq 'leanback-launchable-activity|android.software.leanback' "$RUNNER_TEMP/tv-badging.txt"
           grep -q "versionCode='155'" "$RUNNER_TEMP/tv-badging.txt"
           sha256sum "$apk"
       - name: Publish internal TV test APK
@@ -102,7 +102,7 @@ jobs:
           "$sdk/apksigner" verify --print-certs --verbose "$apk"
           "$sdk/aapt" dump badging "$apk" > "$RUNNER_TEMP/tv-release-badging.txt"
           grep -q "name='de.daraltawhid.tv'" "$RUNNER_TEMP/tv-release-badging.txt"
-          grep -q 'leanback-launcher' "$RUNNER_TEMP/tv-release-badging.txt"
+          grep -Eq 'leanback-launchable-activity|android.software.leanback' "$RUNNER_TEMP/tv-release-badging.txt"
           sha256sum "$apk"
       - name: Publish signed TV candidate internally (no public release)
         if: steps.signature.outputs.available == 'true'
