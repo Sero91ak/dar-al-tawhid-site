@@ -412,8 +412,8 @@
     root.classList.add(short?"dsl-reader-short":(medium?"dsl-reader-medium":"dsl-reader-long"));
     // Keep the active accessibility highlight on all three languages;
     // never reduce type to tiny unreadable text just to eliminate scrolling.
-    var floor=short?[46,21,18]:medium?[40,19.5,17]:extensive?[38,18.5,16.5]:[37,18.5,16.5];
-    var ceiling=short?[60,27,22]:medium?[53,25,21]:extensive?[45,22,19]:[50,23.5,20];
+    var floor=short?[46,21,18]:medium?[42,20.5,18]:extensive?[38,18.5,16.5]:[38,19,17];
+    var ceiling=short?[62,28,23]:medium?[58,27,23]:extensive?[47,23,19.5]:[52,25,21];
     var allowedArabic=short?3:(medium?4:7);
     var allowedLatin=short?3:(medium?3:5);
     var available=stage.clientHeight;
