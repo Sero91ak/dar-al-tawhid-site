@@ -1274,7 +1274,10 @@ export default {
 
     if ((request.method === "GET" || request.method === "HEAD") &&
         (url.pathname === "/pwa" || url.pathname === "/pwa/" || url.pathname === "/pwa/index.html")) {
-      const target = new URL("/index.html", url.origin);
+      // Workers Static Assets canonicalizes /index.html to /. Fetch the
+      // canonical root asset through the binding so /pwa/ receives HTML, not
+      // a redirect that escapes into the public desktop website.
+      const target = new URL("/", url.origin);
       const assetRequest = new Request(target.toString(), request);
       const assetResponse = await env.ASSETS.fetch(assetRequest);
       const headers = new Headers(assetResponse.headers);
