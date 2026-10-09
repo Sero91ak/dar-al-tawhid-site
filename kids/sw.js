@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1287";
-const KIDS_BUILD_ID="kids-shell-v182-unified-header1287";
+const CACHE_NAME="dar-al-tawhid-kids-v1288";
+const KIDS_BUILD_ID="kids-shell-v183-header-lock1288";
 const DUA_AUDIO_RUNTIME="1244";
 // QUIZ_HOME_RESTORE_V1225: refresh installed PWAs with the restored Quiz entry.
 const CORE_PRECACHE=[
@@ -67,7 +67,7 @@ const CORE_PRECACHE=[
   "/kids/deen-learning-v1199.css?v=1199",
   "/kids/deen-lessons.css?v=2",
   "/kids/deen-lessons.js?v=4",
-  "/kids/global-detail-dock-v1247.css?v=1287",
+  "/kids/global-detail-dock-v1247.css?v=1288",
   "/kids/global-detail-dock-v1247.js?v=1278",
   "/kids/data/deen-lessons.json?v=3",
   "/kids/assets/deen/deen-entry.jpg?v=1206",
@@ -187,7 +187,7 @@ const CORE_PRECACHE=[
   "/kids/dua-learn-cinema-v1261.css?v=1261",
   "/kids/dua-word-meanings-v1.js?v=2",
   "/kids/dua-phonetic-alignment-v1.js?v=1",
-  "/kids/dua-smart-learn.js?v=1287",
+  "/kids/dua-smart-learn.js?v=1288",
   "/kids/dua-learn-trilingual-v1282.css?v=1285",
   "/kids/dua-learn-elastic-v1286.css?v=1286",
   "/kids/content-studio-feed.js?v=studio8",
