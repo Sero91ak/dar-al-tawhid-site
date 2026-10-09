@@ -1,0 +1,353 @@
+{
+  "project": "DAR AL TAWḤĪD – Ḥadīṯ/Āṯār und klassischer Šarḥ",
+  "range": "HAD-0393–HAD-0442",
+  "auditedDate": "2026-10-09",
+  "totalInspected": 50,
+  "hadithCount": 30,
+  "atharCount": 20,
+  "verifiedSharh": 3,
+  "openSharh": 47,
+  "status": "in-progress",
+  "policy": {
+    "authenticPrimaryTextRequired": true,
+    "independentAtharIsnadVerificationRequired": true,
+    "directArabicClassicalSharhRequired": true,
+    "onlyVerifiedDigitalPagination": true,
+    "noPrintEditionClaimsWithoutEvidence": true,
+    "noInventedStatements": true,
+    "semanticParallelsCheckedIndividually": true,
+    "sourceOfTruth": "apple-tv/hadith/series/"
+  },
+  "verifiedIds": [
+    "HAD-0413",
+    "HAD-0414",
+    "HAD-0420"
+  ],
+  "issues": [
+    {
+      "id": "HAD-0420",
+      "kind": "primary-german-text-incomplete",
+      "resolved": true,
+      "description": "Primärtext enthielt vorher keine alte Matte und fehlende Reihenstellung; vollständige Fassung anhand Buḫārī Nr.380 eingebaut.",
+      "commit": "b422bc916ad04c5d44aa35d52a7a15193c69fb2f"
+    },
+    {
+      "range": "HAD-0393–HAD-0410",
+      "kind": "poor-attribution",
+      "status": "open",
+      "description": "18 Āṯār häufig mit unspezifischen Quellen ohne Einzelnachweis."
+    },
+    {
+      "range": "HAD-0441–HAD-0442",
+      "kind": "athar-attribution",
+      "status": "open",
+      "description": "Zwei weitere Āṯār zunächst mit genauem arabischem Isnādnachweis prüfen."
+    }
+  ],
+  "nextAction": "47 noch offene Einzelpositionen quellenkritisch prüfen; HAD-0411–0412 und 0415–0440 zuerst anhand Ṣaḥīḥ al-Buḫārī direkt kommentieren, während Āṯār ohne eindeutige Quellen und Isnād offen bleiben. Anschließend HAD-0443–0492.",
+  "entries": [
+    {
+      "id": "HAD-0393",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+    },
+    {
+      "id": "HAD-0394",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+    },
+    {
+      "id": "HAD-0395",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+    },
+    {
+      "id": "HAD-0396",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+    },
+    {
+      "id": "HAD-0397",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+    },
+    {
+      "id": "HAD-0398",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+    },
+    {
+      "id": "HAD-0399",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+    },
+    {
+      "id": "HAD-0400",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+    },
+    {
+      "id": "HAD-0401",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+    },
+    {
+      "id": "HAD-0402",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+    },
+    {
+      "id": "HAD-0403",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+    },
+    {
+      "id": "HAD-0404",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+    },
+    {
+      "id": "HAD-0405",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+    },
+    {
+      "id": "HAD-0406",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+    },
+    {
+      "id": "HAD-0407",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+    },
+    {
+      "id": "HAD-0408",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+    },
+    {
+      "id": "HAD-0409",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+    },
+    {
+      "id": "HAD-0410",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+    },
+    {
+      "id": "HAD-0411",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+    },
+    {
+      "id": "HAD-0412",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+    },
+    {
+      "id": "HAD-0413",
+      "recordType": "hadith",
+      "sharh": "verified",
+      "statusNote": "Bukhārī-Primärtext und arabischer Direktkommentar Ibn Raǧab samt digitaler Werkpagination im jeweiligen HAD-Datensatz; keine bestätigte Druckedition.",
+      "primarySourceNumber": "373"
+    },
+    {
+      "id": "HAD-0414",
+      "recordType": "hadith",
+      "sharh": "verified",
+      "statusNote": "Bukhārī-Primärtext und arabischer Direktkommentar Ibn Raǧab samt digitaler Werkpagination im jeweiligen HAD-Datensatz; keine bestätigte Druckedition.",
+      "primarySourceNumber": "374"
+    },
+    {
+      "id": "HAD-0415",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+    },
+    {
+      "id": "HAD-0416",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+    },
+    {
+      "id": "HAD-0417",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+    },
+    {
+      "id": "HAD-0418",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+    },
+    {
+      "id": "HAD-0419",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+    },
+    {
+      "id": "HAD-0420",
+      "recordType": "hadith",
+      "sharh": "verified",
+      "statusNote": "Bukhārī-Primärtext und arabischer Direktkommentar Ibn Raǧab samt digitaler Werkpagination im jeweiligen HAD-Datensatz; keine bestätigte Druckedition.",
+      "primarySourceNumber": "380"
+    },
+    {
+      "id": "HAD-0421",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+    },
+    {
+      "id": "HAD-0422",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+    },
+    {
+      "id": "HAD-0423",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+    },
+    {
+      "id": "HAD-0424",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+    },
+    {
+      "id": "HAD-0425",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+    },
+    {
+      "id": "HAD-0426",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+    },
+    {
+      "id": "HAD-0427",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+    },
+    {
+      "id": "HAD-0428",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+    },
+    {
+      "id": "HAD-0429",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+    },
+    {
+      "id": "HAD-0430",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+    },
+    {
+      "id": "HAD-0431",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+    },
+    {
+      "id": "HAD-0432",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+    },
+    {
+      "id": "HAD-0433",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+    },
+    {
+      "id": "HAD-0434",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+    },
+    {
+      "id": "HAD-0435",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+    },
+    {
+      "id": "HAD-0436",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+    },
+    {
+      "id": "HAD-0437",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+    },
+    {
+      "id": "HAD-0438",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+    },
+    {
+      "id": "HAD-0439",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+    },
+    {
+      "id": "HAD-0440",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "statusNote": "Deutsche Primärfassung gegen arabischen Ṣaḥīḥ-al-Buḫārī-Text prüfen, frühesten direkten arabischen Šarḥ und Edition/Seitenangaben einzeln nachweisen."
+    },
+    {
+      "id": "HAD-0441",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+    },
+    {
+      "id": "HAD-0442",
+      "recordType": "athar",
+      "sharh": "open-source-review",
+      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis."
+    }
+  ]
+}
