@@ -71,10 +71,13 @@ class DarPrayerWidgetProvider : AppWidgetProvider() {
                 val data = source?.optJSONObject("times") ?: source
                 val labels = listOf("fajr", "dhuhr", "asr", "maghrib", "isha")
                 val times = labels.map { key ->
-                    val raw = data?.optString(key).orEmpty().ifBlank {
-                        data?.optString(key.replaceFirstChar { it.uppercase() }).orEmpty()
+                    val record = data?.opt(key) ?: data?.opt(key.replaceFirstChar { it.uppercase() })
+                    val raw = when (record) {
+                        is JSONObject -> record.optString("time")
+                        is String -> record
+                        else -> ""
                     }
-                    Regex("""\b\d{1,2}:\d{2}\b""").find(raw)?.value ?: "—"
+                    Regex("""\b(?:[01]?\d|2[0-3]):[0-5]\d\b""").find(raw)?.value ?: "—"
                 }
                 if (times.all { it == "—" }) {
                     display(app, manager, appWidgetIds,
