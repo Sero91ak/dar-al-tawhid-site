@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v193-home-first-frame1298",
-  "label": "KIDS · V1.09.14",
+  "buildId": "kids-shell-v194-launch-top1299",
+  "label": "KIDS · V1.09.15",
   "releasedAt": "2026-10-09T18:46:00Z",
-  "note": "KIDS V1.09.14: Startposition am freigegebenen Screenshot ausgerichtet; Gebetszeiten-Button wird bereits vor dem ersten Bildschirmaufbau mit der tatsächlich verfügbaren Viewport- und Dockhöhe abgeglichen. Die Berechnung verwendet die Grundhöhe statt die von iOS-Safe-Area-Bildfläche erweiterte Höhe und verhindert dadurch wandernde Startpositionen. Smartphones und Tablets bleiben proportional, sehr kleine Displays dürfen normal scrollen. Moscheebild, fünf Gebetszeiten und untere Tab-Leiste bleiben erhalten.",
+  "note": "KIDS V1.09.15: Die beim ersten Öffnen freigegebene Home-Startposition wird sowohl für den internen Scrollcontainer als auch für das äußere iOS-/Tablet-Dokument auf Position 0 gehalten. Schon vorhandene viewportabhängige Hero-Höhen und die tatsächlich vermessene Position des Gebetszeiten-Buttons gegenüber der festen Tab-Leiste bleiben aktiv. Keine künstliche Start-Scrollverschiebung, keine Änderung des Moscheemotivs, keine geänderten Gebetszeiten. Kleine Geräte bleiben für weitere Inhalte scrollbar.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1298",
+    "serviceWorkerCache": "v1299",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
