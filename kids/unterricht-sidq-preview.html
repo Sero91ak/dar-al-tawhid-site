@@ -255,7 +255,7 @@ function resetQuestions(){
   questionIndex=0;renderQuestion();
 }
 function renderQuestion(){
-  stopSpeech();stopRecognition();
+  restoreControls();stopSpeech();stopRecognition();
   const ex=currentQuestions()[questionIndex];
   if(!ex){showSummary();return}
   choice=null;recognized=null;answered=false;
