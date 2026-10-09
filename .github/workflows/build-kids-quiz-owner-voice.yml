@@ -211,7 +211,7 @@ jobs:
           for approval in model_policy.get("approvedV3Words") or []:
               if not isinstance(approval,dict) or approval.get("model")!="eleven_v3" or approval.get("status")!="human-audio-approved" or not approval.get("approvedBy"):
                   raise SystemExit("V3 word approval needs an explicit Arabic-audio human review.")
-              text_key=unicodedata.normalize("NFC",norm(approval.get("arabic")))
+              text_key=unicodedata.normalize("NFC"," ".join(str(approval.get("arabic") or "").split()).strip())
               if not text_key or text_key in approved_v3:
                   raise SystemExit("Invalid or duplicate V3 word approval.")
               approved_v3.add(text_key)
