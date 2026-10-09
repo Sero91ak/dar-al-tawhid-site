@@ -1406,8 +1406,9 @@ async function beginVoiceRecording(){
 }
 function setAudioFeedback(message){
  const detail=$("#audioDiagnostics");if(detail)detail.textContent=message;
+ const failed=/nicht verfügbar|konnte nicht|nicht gestartet|nicht abgespielt/i.test(message);
  const technical=/Gerätestimme|Masteraufnahme|Serhat-Masteraufnahme|Masterstimme|Für diesen Satz/i.test(message);
- const friendly=technical?"Die Erklärung wird vorgelesen. Du kannst in deinem Tempo zuhören.":message;
+ const friendly=failed?"Das Vorlesen klappt gerade nicht. Bitte versuche es erneut.":technical?"Die Erklärung wird vorgelesen. Du kannst in deinem Tempo zuhören.":message;
  const el=$("#audioFeedback");if(el)el.textContent=friendly;
  const welcome=$("#voiceStatus");if(welcome)welcome.textContent=friendly;
 }
@@ -1548,7 +1549,7 @@ function prepareOwnerVoice(){
  window.__academyOwnerVoiceRequested=true;
  const src=document.createElement("script");src.src="/kids/owner-voice.js?v=8";src.async=true;
  src.onerror=()=>{window.__academyOwnerVoiceRequested=false;
-  $("#voiceStatus").textContent="Masteraudio gerade nicht verfügbar · Gerätestimme weiterhin möglich."};
+  $("#voiceStatus").textContent="Du kannst weiterhin auf „Anhören“ tippen."};
  document.head.appendChild(src);
 }
 
@@ -1762,7 +1763,7 @@ $("#previousStep").onclick=()=>showStep(step-1);$("#forwardStep").onclick=nextSt
 all("[data-jump-step]").forEach(b=>b.onclick=()=>showStep(Number(b.dataset.jumpStep)));
 all("[data-speak-stage]").forEach(b=>b.onclick=()=>speak(Number(b.dataset.speakStage)));
 all("[data-arabic-audio]").forEach(b=>b.onclick=()=>playRecitation(b.dataset.arabicAudio));
-$("#openWrite").onclick=()=>mode("text");$("#openVoice").onclick=()=>beginVoiceRecording();
+$("#openWrite").onclick=()=>mode("text");$("#openVoice").onclick=()=>mode("voice");
 $("#check").onclick=check;
  $("#retryChoice").onclick=()=>{
    if(answered||step!==3)return;
