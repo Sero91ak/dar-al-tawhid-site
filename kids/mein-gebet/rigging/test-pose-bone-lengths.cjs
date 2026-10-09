@@ -50,8 +50,10 @@ check("real-buffer forward-kinematic segment distances remain constant under 90-
  assert.equal(r.productionApproved,false);
 });
 check("external world motion of Hips does not change bone lengths",()=>{
- const r=result(g=>g.animations[0].channels.push({sampler:1,target:{node:0,path:"translation"}})||
-   g.animations[0].samplers.push({input:0,output:2}));
+ const r=result(g=>{
+   g.animations[0].channels.push({sampler:1,target:{node:0,path:"translation"}});
+   g.animations[0].samplers.push({input:0,output:2});
+ });
  assert.equal(r.valid,true,JSON.stringify(r.errors));
 });
 check("STEP interpolation also preserves rigid parent limb lengths",()=>{
@@ -66,7 +68,7 @@ blocked("reject non-unit quaternion from corrupted frame",(_,b)=>b.writeFloatLE(
 blocked("reject animated scale path",g=>g.animations[0].channels[0].target.path="scale","Unsupported animation target");
 blocked("reject static skeletal scale",g=>g.nodes[1].scale=[1.2,1,1],"Static scale");
 blocked("reject disconnected hand hierarchy",g=>g.nodes[1].children=[],"disconnected");
-blocked("reject missing skin skeleton",g=>g.skins=[],"No measurable bone segments");
+blocked("reject missing skin skeleton",g=>g.skins=[],"Missing unique Hips");
 blocked("reject duplicate pose channels",g=>g.animations[0].channels.push({...g.animations[0].channels[0]}),"Duplicate animation targets");
 blocked("reject out-of-BIN bufferView",g=>g.bufferViews[1].byteOffset=10000,"outside GLB BIN");
 blocked("reject NaN animation data",(_,b)=>b.writeFloatLE(NaN,8+12),"Nonfinite");
