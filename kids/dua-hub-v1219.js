@@ -533,6 +533,21 @@
     q("#duaHubArabic").textContent = d.arabic || "";
     q("#duaHubTranslit").textContent = d.transliteration || "";
     q("#duaHubMeaning").textContent = d.meaning || "";
+    // Gemeinsames Wortwissen direkt unter der deutschen Bedeutung – ohne neue Karte.
+    const meaningNode = q("#duaHubMeaning");
+    let termNode = q("#duaHubTermLearning");
+    if (!termNode && meaningNode) {
+      termNode = document.createElement("div");
+      termNode.id = "duaHubTermLearning";
+      meaningNode.insertAdjacentElement("afterend", termNode);
+    }
+    if (termNode && window.DARKidsTermLearning?.render) {
+      window.DARKidsTermLearning.render(
+        termNode,
+        [d.title, d.childPrompt, d.audioGermanText, d.meaning].filter(Boolean).join(" "),
+        { forceDua: true, age: activeAge(), max: 2 }
+      );
+    }
 
     const audioReady = hasReadyAudio(d);
     const learnReady = canSmartLearn(d);
