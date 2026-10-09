@@ -93,7 +93,7 @@ function glbFixture(){
   // Write matching glTF inverse bind translations (column-major).
   for(const [name,i] of lookup)
     for(let axis=0;axis<3;axis++)
-      ibm.writeFloatLE(-restPosition(name)[axis],i*64+(12+axis)*4);
+      parts[0].writeFloatLE(-restPosition(name)[axis],i*64+(12+axis)*4);
   nodes.push({name:"Synthetic skinned test body; not original",mesh:0,skin:0});
   const animations=["Qiyam","Takbir"].map(name=>({name,
     channels:[{sampler:0,target:{node:0,path:"rotation"}}],
