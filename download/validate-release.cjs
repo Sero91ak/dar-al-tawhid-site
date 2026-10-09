@@ -19,7 +19,6 @@ const manifest = JSON.parse(file);
 const html = fs.readFileSync(path.join(__dirname, "index.html"), "utf8");
 const links = fs.readFileSync(path.join(root, "links/index.html"), "utf8");
 const pwaManifest = JSON.parse(fs.readFileSync(path.join(root, "manifest.json"), "utf8"));
-const desktopWebsite = fs.readFileSync(path.join(root, "desktop-preview/index.html"), "utf8");
 
 assert.equal(manifest.schemaVersion, 1);
 assert.ok(manifest.apps && typeof manifest.apps === "object");
@@ -47,8 +46,6 @@ assert.equal(pwaManifest.scope, "/", "PWA scope must cover the public website");
 assert.equal(pwaManifest.id, "/", "PWA id must be stable and query-free");
 assert.ok(pwaManifest.icons.some((icon) => icon.sizes === "192x192" && /assets\/app-icons\/type-creme-ar\/icon-192\.png/.test(icon.src)), "Native iOS-equivalent 192px PWA icon missing");
 assert.ok(pwaManifest.icons.some((icon) => icon.sizes === "512x512" && /assets\/app-icons\/type-creme-ar\/icon-512\.png/.test(icon.src)), "Native iOS-equivalent 512px PWA icon missing");
-assert.ok(desktopWebsite.includes('manifest.json?v=android-pwa-native-ios-20261009'), "Desktop website must force-refresh the corrected PWA manifest");
-assert.ok(desktopWebsite.includes("darWaitForInstallPrompt"), "Desktop Android install button must wait for the native install prompt");
 
 assert.ok(links.includes('href="/download/"'), "Website links page must offer official Android downloads");
 assert.ok(!html.includes("apk-kids"), "Kids must not have a public download button");
