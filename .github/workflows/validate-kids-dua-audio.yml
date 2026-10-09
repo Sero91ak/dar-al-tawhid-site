@@ -2,6 +2,19 @@ name: Validate Kids Dua Audio Runtime
 
 on:
   workflow_dispatch:
+  pull_request:
+    paths:
+      - 'kids/dua-smart-learn.js'
+      - 'kids/data/dua-arabic-audio.json'
+      - 'kids/data/dua-arabic-slow-audio.json'
+      - 'kids/data/dua-word-audio.json'
+      - 'kids/index.html'
+      - 'kids/start.html'
+      - 'kids/shell.html'
+      - 'kids/sw.js'
+      - 'scripts/kids-dua-audio-playback-guard.js'
+      - '.github/workflows/build-kids-quiz-owner-voice.yml'
+      - '.github/workflows/validate-kids-dua-audio.yml'
   push:
     branches: [main]
     paths:
@@ -31,6 +44,8 @@ jobs:
           node --check kids/owner-voice.js
           node --check kids/dua-hub-v1219.js
           node --check kids/sw.js
+      - name: Check targeted Du'a Fuṣḥā player regression
+        run: node scripts/kids-dua-audio-playback-guard.js
       - name: Check Du'a manifests and sample assets
         run: |
           python3 - <<'PY'
