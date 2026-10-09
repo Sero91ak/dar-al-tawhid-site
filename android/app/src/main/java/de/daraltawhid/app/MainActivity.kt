@@ -154,11 +154,16 @@ class MainActivity : AppCompatActivity() {
                       }
                       window.webkit.messageHandlers.darAppIcon={
                         postMessage:function(payload){
-                          var id=payload&&typeof payload==="object"?String(payload.id||""):"";
+                          var requested=payload&&typeof payload==="object"?
+                            String(payload.id||payload.name||""):String(payload||"");
                           var click=window.__darAndroidIconClick;
-                          if(!id||!click||id!==click.id||Date.now()-click.time>2500)return;
+                          if(!click||!click.id||Date.now()-click.time>2500)return;
+                          var normalized=requested.toLowerCase().replace(/[^a-z0-9]/g,"");
+                          var clicked=String(click.id).toLowerCase().replace(/[^a-z0-9]/g,"");
+                          // iOS uses AppIconTypeCreme while the HTML uses type-creme.
+                          if(normalized!==clicked&&normalized!=="appicon"+clicked)return;
                           window.__darAndroidIconClick=null;
-                          DarNative.setAppIcon(id);
+                          DarNative.setAppIcon(click.id);
                         }
                       };
                       window.DAR_ANDROID_SELECT_APP_ICON=function(name){
@@ -266,11 +271,15 @@ class MainActivity : AppCompatActivity() {
                   window.webkit.messageHandlers.darAppIcon={
                     postMessage:function(payload){
                       try {
-                        var id=payload&&typeof payload==="object"?String(payload.id||""):"";
+                        var requested=payload&&typeof payload==="object"?
+                          String(payload.id||payload.name||""):String(payload||"");
                         var click=window.__darAndroidIconClick;
-                        if(!id||!click||id!==click.id||Date.now()-click.time>2500)return;
+                        if(!click||!click.id||Date.now()-click.time>2500)return;
+                        var normalized=requested.toLowerCase().replace(/[^a-z0-9]/g,"");
+                        var clicked=String(click.id).toLowerCase().replace(/[^a-z0-9]/g,"");
+                        if(normalized!==clicked&&normalized!=="appicon"+clicked)return;
                         window.__darAndroidIconClick=null;
-                        DarNative.setAppIcon(id);
+                        DarNative.setAppIcon(click.id);
                         if(window.__darAndroidRefreshUi)window.__darAndroidRefreshUi();
                       }catch(iconError){}
                     }
