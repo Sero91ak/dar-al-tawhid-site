@@ -466,3 +466,180 @@ html body .quiz-explanation.show{
 @media(prefers-reduced-motion:reduce){
  html body button.kids-explain-action{transition:none!important}
 }
+
+/* KIDS_UNIFIED_ALL_DETAIL_HEADERS_V1287
+   Reference: Duʿāʾ detail back/heading bar, with one design contract for
+   modal learning, read-along, daily prayer and content-studio details.
+   Original button nodes/listeners, reading panes, audio and bottom tabs are intact. */
+html body :is(
+  .kids-detail-appbar,
+  .ms-library-nav,.ps-library-nav,.gh-world-nav,.kids-subpage-nav
+){
+  background:radial-gradient(circle at 8% 0%,rgba(103,186,179,.07),transparent 39%),
+    linear-gradient(180deg,#082c38 0%,#062632 100%)!important;
+  border-top:0!important;
+  border-bottom:1px solid rgba(211,190,139,.19)!important;
+  border-radius:0 0 24px 24px!important;
+  box-shadow:0 10px 22px rgba(0,0,0,.14),inset 0 -1px rgba(163,214,202,.045)!important;
+  -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+}
+html body :is(.ms-library-nav,.ps-library-nav,.gh-world-nav,.kids-subpage-nav) :is(
+  .ms-back,.ps-library-back,.gh-back,.kids-subpage-back
+){
+  display:grid!important;place-items:center!important;flex:0 0 44px!important;
+  width:44px!important;height:44px!important;min-width:44px!important;
+  min-height:44px!important;border-radius:15px!important;
+  border:1px solid rgba(241,207,135,.24)!important;
+  background:linear-gradient(150deg,rgba(238,210,149,.11),rgba(9,48,59,.55))!important;
+  color:transparent!important;font-size:0!important;line-height:0!important;
+  box-shadow:0 4px 11px rgba(0,0,0,.10)!important;
+}
+html body :is(.ms-library-nav,.ps-library-nav,.gh-world-nav,.kids-subpage-nav) :is(
+  .ms-back,.ps-library-back,.gh-back,.kids-subpage-back
+)::before{
+  content:""!important;display:block!important;width:11px!important;height:11px!important;
+  border-left:3px solid #f5d68f!important;border-bottom:3px solid #f5d68f!important;
+  transform:translateX(2px) rotate(45deg)!important;border-radius:1px!important;
+}
+html body :is(.ms-library-nav,.ps-library-nav,.gh-world-nav,.kids-subpage-nav) :is(
+  .ms-back,.ps-library-back,.gh-back,.kids-subpage-back
+) > svg{display:none!important}
+
+/* The word-learning view uses the same actual header; no separate X or
+   centered text header. Keep 7/7 visible as a quiet metadata chip. */
+html body #duaSmartLearn .dsl-head.kids-detail-appbar{
+  flex:0 0 auto!important;display:flex!important;
+  grid-template-columns:none!important;
+  justify-content:flex-start!important;
+  text-align:left!important;
+  margin:0!important;width:100%!important;
+  border-radius:0 0 24px 24px!important;
+  padding:calc(9px + env(safe-area-inset-top,0px))
+     max(13px,env(safe-area-inset-right,0px))
+     10px max(13px,env(safe-area-inset-left,0px))!important;
+}
+html body #duaSmartLearn .dsl-headcopy.kids-detail-appbar-copy{
+  min-width:0!important;text-align:left!important;
+  display:flex!important;flex-direction:column!important;
+  border-left:1px solid rgba(239,211,145,.19)!important;
+  padding-left:11px!important;
+}
+html body #duaSmartLearn .dsl-headcopy #dslTitle{
+  margin:0!important;
+  font-size:clamp(18px,4.65vw,24px)!important;
+  line-height:1.12!important;
+  white-space:normal!important;overflow:visible!important;
+  overflow-wrap:anywhere!important;
+  text-overflow:clip!important;
+}
+html body #duaSmartLearn #dslSub{
+  margin:0!important;font-size:clamp(11px,2.8vw,13px)!important;
+  color:rgba(226,237,238,.70)!important;line-height:1.2!important
+}
+html body #duaSmartLearn .dsl-count{
+  flex:0 0 auto!important;
+  padding:5px 7px!important;
+  margin-left:auto!important;
+  text-align:right!important;
+  font-size:clamp(10px,2.75vw,12px)!important;
+  color:#f5d68f!important;white-space:nowrap!important;
+  border-radius:9px!important;
+  background:rgba(231,197,119,.055)!important;
+}
+html body #duaSmartLearn .dsl-progress{
+  height:2px!important;
+  flex:0 0 2px!important;
+  background:rgba(220,200,154,.12)!important;
+  border:0!important;
+}
+html body #duaSmartLearn .dsl-progress i{
+  background:linear-gradient(90deg,rgba(207,171,96,.48),rgba(244,207,127,.82))!important;
+  transition:width .22s ease!important;
+}
+
+/* Audiobook reader: reuse the same left back control and headline, but avoid
+   adding the device safe-top again inside a floating sheet. */
+html body .kids-follow-reader .kfr-head.kids-detail-appbar{
+  display:flex!important;grid-template-columns:none!important;
+  width:100%!important;min-height:70px!important;
+  margin:0!important;padding:10px 14px!important;
+  gap:10px!important;text-align:left!important;
+}
+html body .kids-follow-reader .kfr-head-copy.kids-detail-appbar-copy{
+  min-width:0!important;display:flex!important;
+  flex-direction:column!important;gap:3px!important;
+  padding-left:11px!important;text-align:left!important;
+}
+html body .kids-follow-reader .kfr-head .kfr-title{
+  white-space:normal!important;overflow:visible!important;
+  font-size:clamp(18px,4.7vw,24px)!important;
+}
+html body .kids-follow-reader .kfr-head .kfr-subtitle{
+  display:block!important;
+  white-space:normal!important;overflow-wrap:anywhere!important;
+  font-size:clamp(11px,2.8vw,13px)!important;
+}
+html body .kids-follow-reader .kfr-head .kfr-close.kids-detail-dock-back{
+  width:46px!important;height:46px!important;min-width:46px!important;
+  max-width:46px!important;min-height:46px!important;max-height:46px!important;
+  flex:0 0 46px!important;
+}
+
+/* Daily prayer timetable deliberately remains compact: all five cards must
+   still fit on small phones. Same colors, corner geometry and back chevron. */
+html body #kidsSalahDailyPage .kids-salah-day-header.kids-detail-appbar{
+  position:relative!important;
+  flex:0 0 auto!important;display:flex!important;
+  width:100%!important;
+  min-height:clamp(40px,5.4dvh,50px)!important;
+  height:clamp(40px,5.4dvh,50px)!important;
+  max-height:clamp(40px,5.4dvh,50px)!important;
+  padding:0 5px!important;
+  margin:0!important;gap:10px!important;
+  overflow:hidden!important;
+  border-radius:0 0 16px 16px!important;
+}
+html body #kidsSalahDailyPage .kids-salah-day-header .kids-detail-appbar-copy{
+  gap:0!important;padding-left:10px!important;text-align:left!important;
+  display:flex!important;flex-direction:column!important;
+}
+html body #kidsSalahDailyPage .kids-salah-day-header .kids-detail-appbar-title{
+  font-size:clamp(15px,4.1vw,19px)!important;
+  line-height:1.1!important;letter-spacing:0!important;
+}
+html body #kidsSalahDailyPage .kids-salah-day-header .kids-detail-appbar-subtitle{
+  font-size:10px!important;letter-spacing:0!important;line-height:1.1!important;
+}
+html body #kidsSalahDailyPage .kids-salah-day-header .kids-detail-dock-back{
+  width:clamp(36px,5dvh,44px)!important;min-width:clamp(36px,5dvh,44px)!important;
+  max-width:clamp(36px,5dvh,44px)!important;
+  height:clamp(36px,5dvh,44px)!important;
+  min-height:clamp(36px,5dvh,44px)!important;
+  max-height:clamp(36px,5dvh,44px)!important;flex:0 0 auto!important;
+}
+html body #kidsSalahDailyPage .kids-salah-day-header .kids-detail-dock-back svg{display:none!important}
+
+/* Studio article reader: right-close legacy is replaced by the original
+   button in the standard left-back position. The reader remains scrollable. */
+html body #studioContentModal .studio-content-top.kids-detail-appbar{
+  display:flex!important;
+  justify-content:flex-start!important;
+  gap:10px!important;width:100%!important;
+  padding:12px 14px!important;
+  min-height:70px!important;
+  border-radius:0 0 22px 22px!important;
+}
+html body #studioContentModal .studio-content-top .kids-detail-appbar-copy{
+  gap:3px!important;padding-left:11px!important;
+}
+
+/* A single press target, consistent throughout the app. */
+html body .kids-detail-appbar .kids-detail-dock-back{
+  -webkit-tap-highlight-color:transparent!important;
+  touch-action:manipulation!important;
+}
+@media(max-width:370px){
+  html body #duaSmartLearn .dsl-head.kids-detail-appbar{gap:8px!important}
+  html body #duaSmartLearn .dsl-headcopy #dslTitle{font-size:18px!important}
+  html body #duaSmartLearn .dsl-count{font-size:10px!important;padding:4px!important}
+}
