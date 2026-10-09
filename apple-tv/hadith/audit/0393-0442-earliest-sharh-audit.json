@@ -103,7 +103,7 @@
       "description": "Einige Autorenwerke und Kapitel sind direkt nachgewiesen, die genaue Druckedition und Einzelseite nicht für alle rekonstruiert. Kein Printseiten-Nachweis behaupten."
     }
   ],
-  "nextAction": "Alle 28 Ḥadīṯe dieses Blocks besitzen klassische Šarḥ-Erklärungen. 5/22 Āṯār mit verifizierter Attribution, 17 offen; zusätzliche Originalbelege: HAD-0396 (al-Qāḍī ʿIyāḍ), HAD-0405 (Abū Dāwūd 4612), HAD-0404 (Mālik- und Muǧāhid-Zuschreibung strikt getrennt). Primärstelle und endgültige Kettenbewertung dürfen nicht zusammenfallen.",
+  "nextAction": "28/28 Ḥadīṯ-Šarḥ verifiziert; 5/22 Āṯār mit verifizierter Zuschreibung, 17 noch offen. Quellenfehler HAD-0398: al-Ḫaṭīb al-Ǧāmiʿ Nr. 8 (statt al-Faqīh), narratorische Unsicherheit notiert. HAD-0408: deutsche Mischparaphrase aus direktem Original neu bearbeiten, bis dahin nicht als 'verified' markieren. Bei HAD-0404/0405 direkte Kettenbewertung weiterhin ausstehend.",
   "entries": [
     {
       "id": "HAD-0393",
@@ -149,8 +149,9 @@
       "id": "HAD-0398",
       "recordType": "athar",
       "sharh": "not-required",
-      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis.",
-      "attribution": "needs-review"
+      "statusNote": "Exakter arabischer Quellenbeleg al-Ḫaṭīb, al-Ǧāmiʿ li-Aḫlāq ar-Rāwī, Muqaddimah Nr. 8, digitale 1/79. Zweifelstelle beim Sprecher der direkten Verbindung zu Sufyān ('mein Vater oder Ibn Misʿar') ausdrücklich notiert; Kettenbewertung offen.",
+      "attribution": "isnad-located-with-uncertain-narrator-pending-grading",
+      "primarySourceVerified": true
     },
     {
       "id": "HAD-0399",
@@ -226,7 +227,7 @@
       "id": "HAD-0408",
       "recordType": "athar",
       "sharh": "not-required",
-      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis.",
+      "statusNote": "Qualitätswarnung: Vorhandene deutsche Zusammenfassung verbindet nicht belegte Elemente zu einer einheitlichen Fuḍayl-Aussage. Direkt überlieferte Fassung findet sich bei Abū Nuʿaym, Ḥilyat al-Awliyāʾ 8/103, über ʿAbd aṣ-Ṣamad ibn Yazīd. Vor einer Freigabe Text und Isnāde einzeln korrigieren.",
       "attribution": "needs-review"
     },
     {
