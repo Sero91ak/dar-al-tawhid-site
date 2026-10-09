@@ -2836,7 +2836,7 @@ html:not([data-view="today"]) .view.active{
 </style>
 
 <link rel="stylesheet" href="/kids/profile-stability-v1256.css?v=1258" data-kids-profile-stability="1256">
-<link rel="stylesheet" href="/kids/prayer-stage-v1261.css?v=1278" data-kids-salah-stage="1275">
+<link rel="stylesheet" href="/kids/prayer-stage-v1261.css?v=1279" data-kids-salah-stage="1275">
 </head>
 <body>
 <div id="kidsUpdateLayer" class="kids-update-layer">
@@ -2897,7 +2897,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.08.95</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.08.97</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -5768,7 +5768,8 @@ function renderQuizQuestion(){
     '<div id="quizHelp" class="quiz-help">'+help+'</div>'+
     '<div id="quizAnswers" class="quiz-answers" role="group" aria-label="Antworten"></div>'+
     '<div id="quizFeedback" class="quiz-feedback" aria-live="polite"></div>'+
-    '<div id="quizExplanation" class="quiz-explanation"></div>'+
+    '<div id="quizExplanation" class="quiz-explanation"></div>'+ 
+    '<div id="quizTermLearning" hidden></div>'+ 
     '<div id="quizSource" class="quiz-source"></div>'+
     '<button id="quizNext" class="quiz-next" type="button">'+(currentQuizIndex===currentQuiz.length-1?'Auswertung ansehen':'Weiter')+' ›</button>';
   var scene=document.getElementById("quizScene");
@@ -5794,7 +5795,7 @@ function renderQuizQuestion(){
     if(this.disabled)return;
     quizSpeak(quizPrompt(q),{quizPrompt:true,source:"kids-quiz-question"});
   });
-  document.getElementById("quizNext").addEventListener("click",function(){currentQuizIndex++;renderQuizQuestion()});
+  document.getElementById("quizNext").addEventListener("click",function(){window.DARKidsTermLearning?.stop?.();currentQuizIndex++;renderQuizQuestion()});
   setTimeout(function(){
     if(currentQuiz[currentQuizIndex]!==q)return;
     refreshQuizListenState();
@@ -5830,6 +5831,14 @@ function chooseQuizAnswer(index,button){
       explanation.textContent=String(q.explanation);
       explanation.classList.add("show");
     }
+    // Erklärt Fachbegriffe beidseitig, ohne die freigegebenen Quiz-/Audio-Texte zu verändern.
+    var termSlot=document.getElementById("quizTermLearning");
+    if(termSlot&&window.DARKidsTermLearning&&typeof window.DARKidsTermLearning.render==="function"){
+      var correctTerms=(Array.isArray(q.answers)?q.answers:[]).filter(function(a){return a.correct}).map(function(a){return a.label||""});
+      window.DARKidsTermLearning.render(termSlot,
+        [q.question,q.explanation,q.topic,q.category].concat(correctTerms).join(" "),
+        {age:currentKidsQuizAgeBand(),max:2});
+    }
     var src=document.getElementById("quizSource");
     if(src)src.innerHTML='<strong>Quelle:</strong> '+String(q.source||"");
     document.getElementById("quizNext").classList.add("show");
@@ -5846,14 +5855,30 @@ function chooseQuizAnswer(index,button){
     var canExplain=!!(q.explanation&&window.DARKidsOwnerVoice&&
       typeof window.DARKidsOwnerVoice.has==="function"&&
       window.DARKidsOwnerVoice.has(q.explanation));
+    function questionStillOpen(){
+      var modal=document.getElementById("quizModal");
+      return !!(modal&&modal.classList.contains("open")&&
+        currentQuizIndex===answeredIndex&&currentQuiz[currentQuizIndex]===answeredQuestion);
+    }
+    function playQuizTermExplanation(){
+      if(!questionStillOpen()||!window.DARKidsTermLearning?.playFor)return;
+      var correctWords=(answeredQuestion.answers||[]).filter(function(x){return x.correct}).map(function(x){return x.label||""});
+      window.DARKidsTermLearning.playFor(
+        [answeredQuestion.question,answeredQuestion.explanation,answeredQuestion.topic,answeredQuestion.category].concat(correctWords).join(" "),
+        {age:currentKidsQuizAgeBand(),max:2,stillValid:questionStillOpen}
+      ).catch(function(){});
+    }
     quizSpeak(q.success,{
       source:"kids-quiz-feedback",
-      onended:canExplain?function(){
-        var modal=document.getElementById("quizModal");
-        if(!modal||!modal.classList.contains("open"))return;
-        if(currentQuizIndex!==answeredIndex||currentQuiz[currentQuizIndex]!==answeredQuestion)return;
-        quizSpeak(answeredQuestion.explanation,{source:"kids-quiz-explanation"});
-      }:undefined
+      onended:function(){
+        if(!questionStillOpen())return;
+        if(canExplain){
+          quizSpeak(answeredQuestion.explanation,{
+            source:"kids-quiz-explanation",
+            onended:playQuizTermExplanation
+          });
+        }else{playQuizTermExplanation()}
+      }
     });
   }else{
     quizQuestionHadError=true;
@@ -6542,7 +6567,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   // The next navigation uses network-first and receives the latest release.
   if("serviceWorker" in navigator){
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1278",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1280",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     },{once:true});
@@ -7534,7 +7559,8 @@ html[data-view="stories"] #view-stories > :last-child{
 <script src="/kids/mubashshirun-stories.js?v=31"></script>
 <script src="/kids/sahabiyyat-stories.js?v=23"></script>\n<script src="/kids/deen-lessons.js?v=4"></script>
 <script src="/kids/global-story-glow-v1216.js?v=1239"></script>
-<script src="/kids/dua-hub-v1219.js?v=1278" data-kids-dua-hub="1259"></script>
+<script src="/kids/term-learning.js?v=1"></script>
+<script src="/kids/dua-hub-v1219.js?v=1279" data-kids-dua-hub="1259"></script>
 <script src="/kids/story-hub.js?v=25"></script>
 <script src="/kids/kids-age-typography.js?v=3"></script>
 <script src="/kids/quiz-library.js?v=9"></script>
@@ -9279,7 +9305,7 @@ html[data-view="stories"] #view-stories > :last-child{
 }
 </style>
 
-<script src="/kids/navigation-v1182.js?v=1246"></script>
+<script src="/kids/navigation-v1182.js?v=1280"></script>
 
 <style id="kids-home-cinema-v1185">
 #view-today{--home-v1185-deep:#061b26;--home-v1185-petrol:#082b37}
@@ -11154,5 +11180,5 @@ html.kids-ios-app #kidsLaunch,html.dar-ios-native-app #kidsLaunch{display:none!i
 }}
 </style>
 <!-- KIDS_SALAH_STAGE_V1261: placed after hero, before continue-listening -->
-<script defer src="/kids/prayer-stage-v1261.js?v=1278" data-kids-salah-stage="1275"></script>
+<script defer src="/kids/prayer-stage-v1261.js?v=1279" data-kids-salah-stage="1275"></script>
 </html>
