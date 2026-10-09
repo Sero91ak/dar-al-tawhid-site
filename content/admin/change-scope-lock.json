@@ -155,6 +155,18 @@
   ],
   "unlockedScopes": [
     {
+      "id": "kids-mein-gebet-autonomous-preview-2026-10-09",
+      "at": "2026-10-09T17:10:00.000Z",
+      "approvedBy": "user-explicit-autonomous-kids-mein-gebet-draft-only",
+      "reason": "Ausdrücklicher Nutzerauftrag: autonom am Entwurf DĀR AL TAWḤĪD KIDS – Mein Gebet auf Feature-Branch/PR #825 arbeiten. Kein Merge nach main, keine Live-Veröffentlichung.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "kids/mein-gebet/",
+        ".github/workflows/kids-mein-gebet-draft-qa.yml"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "app-lanes-separate-commits-2026-10-07",
       "approvedBy": "user-explicit-vier-apps-separat-commit-nicht-gleichen-weg",
       "reason": "Nutzer will bei einer Vorgabe für mehrere Apps getrennte Commits und getrennte Deploy-Wege (Kids, Web, Test, Apple TV), damit ein Push nicht alle Apps hängt oder rot macht.",

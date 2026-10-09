@@ -5,7 +5,25 @@
 (function(){
 "use strict";
 if(window.DAR_KIDS_MEIN_GEBET_ENABLED===false)return;
-var assets={boy:"/kids/mein-gebet/assets/figur-junge-original.png",girl:"/kids/mein-gebet/assets/figur-maedchen-original.png"};
+function assetDir(){
+  var src="";
+  try{if(document.currentScript&&document.currentScript.src)src=document.currentScript.src}catch(_){}
+  if(!src){
+    var list=document.getElementsByTagName("script");
+    for(var i=list.length-1;i>=0;i--){
+      var s=list[i].src||"";
+      if(/preview-v1\.js(?:\?|$)/.test(s)){src=s;break}
+    }
+  }
+  if(src){
+    var cut=src.split("?")[0];
+    return cut.slice(0,cut.lastIndexOf("/")+1)+"assets/";
+  }
+  return "/kids/mein-gebet/assets/";
+}
+var ASSET_DIR=assetDir();
+var assets={boy:ASSET_DIR+"figur-junge-original.png",girl:ASSET_DIR+"figur-maedchen-original.png"};
+var heroBoy=ASSET_DIR+"hero-boy.jpg",heroGirl=ASSET_DIR+"hero-girl.jpg";
 var lessons=[
 {id:"what",n:"01",title:"Was ist das Gebet?",desc:"Ṣalāh und die fünf täglichen Gebete kennenlernen.",parts:["Was bedeutet Ṣalāh?","Die fünf Pflichtgebete","Was ist eine Rakʿah?"]},
 {id:"why",n:"02",title:"Warum beten wir?",desc:"Die Bedeutung des Gebets kindgerecht entdecken.",parts:["Anbetung Allahs","Dankbarkeit und Gedenken","Mit Freude lernen"]},
@@ -26,7 +44,7 @@ function getGender(){
 function init(){
   var home=document.getElementById("view-today"),grid=home&&home.querySelector(".big-choice-grid"),shell=document.querySelector("main.shell");
   if(!home||!grid||!shell||document.getElementById("kidsMeinGebetEntry"))return;
-  var style=make("style");style.id="kids-mein-gebet-preview-style";style.textContent="\n#view-today #kidsMeinGebetEntry.kmg-home-link{display:flex!important;align-items:center!important;gap:12px!important;width:100%!important;min-height:78px!important;margin:14px 0 0!important;padding:12px 16px!important;border-radius:22px!important;border:1px solid rgba(227,197,129,.23)!important;background:linear-gradient(115deg,rgba(20,69,68,.76),rgba(18,47,63,.80))!important;box-shadow:0 9px 25px rgba(0,0,0,.11),0 0 14px rgba(226,189,114,.06)!important;color:#fff8eb!important;text-align:left!important;cursor:pointer!important}\n#kidsMeinGebetEntry:active{transform:scale(.992)}\n#kidsMeinGebetEntry:focus-visible,#view-mein-gebet button:focus-visible{outline:2px solid #ffdc94;outline-offset:3px}\n#kidsMeinGebetEntry .kmg-mini{height:55px;width:55px;flex:0 0 55px;object-fit:contain;background:rgba(255,255,255,.065);border-radius:16px;padding:2px}\n#kidsMeinGebetEntry .kmg-copy{display:flex;flex:1;min-width:0;flex-direction:column;gap:3px}\n#kidsMeinGebetEntry .kmg-copy small{font-size:11px;color:rgba(255,255,255,.70);line-height:1.3}\n#kidsMeinGebetEntry .kmg-copy strong{font:750 20px/1.1 \"Fredoka\",system-ui,sans-serif}\n#kidsMeinGebetEntry .kmg-arrow{font-size:25px;color:#f5d8a6}\n#view-mein-gebet{padding:4px 0 calc(160px + env(safe-area-inset-bottom,0px));color:#fff8eb}\n#view-mein-gebet [hidden]{display:none!important}\n#view-mein-gebet .kmg-back{display:inline-flex;align-items:center;min-height:44px;padding:11px 16px;margin:0 0 16px;border:1px solid rgba(238,214,165,.25);border-radius:999px;background:rgba(255,255,255,.07);color:#ffe6b6;cursor:pointer;font-weight:750}\n#view-mein-gebet .kmg-hero{display:flex;align-items:center;gap:16px;padding:25px 20px;border:1px solid rgba(226,189,114,.20);border-radius:28px;background:radial-gradient(circle at 90% 8%,rgba(213,183,124,.14),transparent 45%),linear-gradient(145deg,#103b44,#102838 72%);overflow:hidden}\n#view-mein-gebet .kmg-hero-copy{flex:1;min-width:0}\n#view-mein-gebet .kmg-kicker{color:#f0d09c;font-size:10px;font-weight:850;letter-spacing:.1em;margin:0 0 10px}\n#view-mein-gebet h2{font:750 clamp(29px,7.7vw,44px)/1.07 \"Fredoka\",system-ui,sans-serif;letter-spacing:-.02em;margin:0 0 10px}\n#view-mein-gebet p{line-height:1.5}\n#view-mein-gebet .kmg-hero p:last-child{margin:0;color:rgba(255,255,255,.76);font-size:13px}\n#view-mein-gebet .kmg-figure{width:96px;height:149px;max-width:29%;flex:0 0 auto;object-fit:contain}\n#view-mein-gebet .kmg-caption{margin:12px 2px 17px;color:rgba(255,255,255,.67);font-size:12px}\n#view-mein-gebet .kmg-list{display:grid;grid-template-columns:1fr;gap:12px}\n#view-mein-gebet .kmg-lesson{display:grid;grid-template-columns:40px minmax(0,1fr) 16px;align-items:center;gap:13px;padding:18px 15px;min-height:90px;border:1px solid rgba(226,189,114,.17);border-radius:23px;background:rgba(255,255,255,.065);text-align:left;color:#fff8eb;cursor:pointer}\n#view-mein-gebet .kmg-num{display:grid;place-items:center;width:40px;height:40px;border-radius:13px;background:rgba(226,189,114,.12);color:#ffe3a2;font-size:12px;font-weight:900}\n#view-mein-gebet .kmg-lesson strong{display:block;font:740 clamp(18px,4.7vw,22px)/1.15 \"Fredoka\",system-ui,sans-serif;margin-bottom:5px}\n#view-mein-gebet .kmg-lesson small{font-size:12px;line-height:1.4;color:rgba(255,255,255,.68)}\n#view-mein-gebet .kmg-chevron{font-size:25px;color:#f5d596}\n#view-mein-gebet .kmg-detail-stage{display:flex;align-items:center;gap:18px;padding:20px;border:1px solid rgba(226,189,114,.18);background:rgba(255,255,255,.055);border-radius:23px;margin:20px 0}\n#view-mein-gebet .kmg-detail-stage img{width:84px;height:125px;object-fit:contain}\n#view-mein-gebet .kmg-detail-stage span{flex:1;font-size:13px;line-height:1.5;color:rgba(255,255,255,.8)}\n#view-mein-gebet .kmg-topic{display:flex;gap:13px;align-items:center;min-height:56px;padding:12px 14px;border:1px solid rgba(255,255,255,.1);border-radius:15px;background:rgba(255,255,255,.045);margin-bottom:9px;font-size:14px}\n#view-mein-gebet .kmg-topic b{color:#f3d5a2}\n#view-mein-gebet .kmg-note{margin:17px 2px;font-size:12px;color:rgba(255,255,255,.64)}\n@media(min-width:700px){#view-mein-gebet .kmg-list{grid-template-columns:repeat(2,minmax(0,1fr))}#view-mein-gebet .kmg-figure{height:190px;width:125px}}\n@media(max-width:360px){#view-mein-gebet .kmg-hero{gap:10px;padding:20px 15px}#view-mein-gebet .kmg-figure{max-width:24%}#view-today #kidsMeinGebetEntry.kmg-home-link{padding:10px 12px!important}}\n@media(prefers-reduced-motion:reduce){#kidsMeinGebetEntry{transition:none!important}}\n/* Adapt only this isolated module to existing Kids gender palette, without touching app globals. */\n#view-today #kidsMeinGebetEntry.kmg-home-link,\n#view-mein-gebet{\n  --kmg-theme-accent:var(--gold,#e2bd72);\n  --kmg-theme-border:rgba(226,189,114,.22);\n  --kmg-theme-focus:rgba(226,189,114,.18);\n  --kmg-theme-haze:rgba(114,174,193,.075);\n}\n.app[data-gender=\"boy\"] #view-today #kidsMeinGebetEntry.kmg-home-link,\n.app[data-gender=\"boy\"] #view-mein-gebet{\n  --kmg-theme-accent:#e2bd72;\n  --kmg-theme-border:rgba(226,189,114,.27);\n  --kmg-theme-focus:rgba(226,189,114,.19);\n  --kmg-theme-haze:rgba(90,166,186,.09);\n}\n.app[data-gender=\"girl\"] #view-today #kidsMeinGebetEntry.kmg-home-link,\n.app[data-gender=\"girl\"] #view-mein-gebet{\n  --kmg-theme-accent:#f2b7c9;\n  --kmg-theme-border:rgba(242,183,201,.30);\n  --kmg-theme-focus:rgba(242,183,201,.20);\n  --kmg-theme-haze:rgba(200,107,157,.10);\n}\n#view-today #kidsMeinGebetEntry.kmg-home-link{\n  border-color:var(--kmg-theme-border)!important;\n  box-shadow:0 9px 25px rgba(0,0,0,.12),0 0 10px var(--kmg-theme-focus)!important;\n  background:linear-gradient(112deg,rgba(11,39,56,.95),rgba(20,57,66,.83))!important;\n  border-radius:26px!important;\n  -webkit-tap-highlight-color:transparent!important;\n}\n.app[data-gender=\"girl\"] #view-today #kidsMeinGebetEntry.kmg-home-link{\n  background:linear-gradient(112deg,rgba(29,30,55,.96),rgba(80,48,82,.68))!important;\n}\n#view-today #kidsMeinGebetEntry .kmg-mini{border:1px solid var(--kmg-theme-border)!important}\n#view-today #kidsMeinGebetEntry .kmg-arrow,\n#view-mein-gebet .kmg-kicker,\n#view-mein-gebet .kmg-chevron,\n#view-mein-gebet .kmg-topic b,\n#view-mein-gebet .kmg-num{color:var(--kmg-theme-accent)!important}\n#view-mein-gebet .kmg-back,\n#view-mein-gebet .kmg-hero,\n#view-mein-gebet .kmg-lesson,\n#view-mein-gebet .kmg-detail-stage{\n  border-color:var(--kmg-theme-border)!important;\n}\n#view-mein-gebet .kmg-hero{\n  background:radial-gradient(circle at 90% 12%,var(--kmg-theme-haze),transparent 46%),\n             linear-gradient(155deg,rgba(16,55,67,.97),rgba(12,35,54,.98))!important;\n  border-radius:30px!important;\n}\n.app[data-gender=\"girl\"] #view-mein-gebet .kmg-hero{\n  background:radial-gradient(circle at 90% 12%,var(--kmg-theme-haze),transparent 46%),\n             linear-gradient(155deg,rgba(39,39,65,.98),rgba(22,36,57,.98))!important;\n}\n#view-mein-gebet .kmg-num{background:var(--kmg-theme-focus)!important}\n#view-mein-gebet .kmg-lesson{\n  border-radius:27px!important;\n  box-shadow:0 11px 25px rgba(0,0,0,.11),0 0 11px var(--kmg-theme-haze)!important;\n  -webkit-tap-highlight-color:transparent!important;\n}\n#view-today #kidsMeinGebetEntry.kmg-home-link:active,\n#view-today #kidsMeinGebetEntry.kmg-home-link:focus-visible,\n#view-mein-gebet .kmg-lesson:active,\n#view-mein-gebet .kmg-lesson:focus-visible{\n  border-color:var(--kmg-theme-accent)!important;\n  box-shadow:0 0 0 1px var(--kmg-theme-focus),0 0 15px var(--kmg-theme-focus),\n             0 12px 25px rgba(0,0,0,.12)!important;\n  outline:none!important;\n}\n#view-mein-gebet .kmg-back:focus-visible{outline:2px solid var(--kmg-theme-accent)!important;outline-offset:3px}\n#view-mein-gebet .kmg-note,#view-mein-gebet .kmg-caption{letter-spacing:.002em}\n@media(prefers-reduced-motion:reduce){\n  #view-today #kidsMeinGebetEntry.kmg-home-link,\n  #view-mein-gebet .kmg-lesson{transition:none!important}\n}";style.textContent+="\n/* 08.10.2026 — locally versioned hero image assets. Live character remains bound to active Kids profile. */\n#view-mein-gebet .kmg-hero{position:relative!important;isolation:isolate;min-height:220px}\n#view-mein-gebet .kmg-hero::before{content:\"\";position:absolute;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(90deg,rgba(8,28,43,.88) 0%,rgba(9,29,45,.69) 53%,rgba(9,29,45,.14) 100%),url(\"/kids/mein-gebet/assets/hero-boy.jpg\");background-position:center;background-size:cover;background-repeat:no-repeat}\n.app[data-gender=\"girl\"] #view-mein-gebet .kmg-hero::before{background-image:linear-gradient(90deg,rgba(20,23,47,.88) 0%,rgba(39,29,55,.63) 53%,rgba(39,29,55,.07) 100%),url(\"/kids/mein-gebet/assets/hero-girl.jpg\")}\n#view-mein-gebet .kmg-hero-copy,#view-mein-gebet .kmg-figure{position:relative;z-index:1}\n#view-mein-gebet .kmg-figure{width:116px;height:164px;max-width:31%;filter:drop-shadow(0 6px 14px rgba(0,0,0,.23))}\n#view-today #kidsMeinGebetEntry.kmg-home-link{position:relative;overflow:hidden;isolation:isolate;min-height:91px!important;background-image:linear-gradient(90deg,rgba(8,28,43,.92),rgba(8,28,43,.51) 56%,rgba(8,28,43,.26)),url(\"/kids/mein-gebet/assets/hero-boy.jpg\")!important;background-size:cover!important;background-position:center 52%!important}\n.app[data-gender=\"girl\"] #view-today #kidsMeinGebetEntry.kmg-home-link{background-image:linear-gradient(90deg,rgba(28,25,50,.89),rgba(30,25,52,.56) 56%,rgba(28,25,50,.16)),url(\"/kids/mein-gebet/assets/hero-girl.jpg\")!important}\n#view-today #kidsMeinGebetEntry > *{position:relative;z-index:1}\n#view-mein-gebet .kmg-lesson{touch-action:manipulation;transition:background-color .18s ease,box-shadow .18s ease,transform .18s ease}\n#view-mein-gebet .kmg-lesson:active{transform:scale(.992)}\n#view-mein-gebet .kmg-back{touch-action:manipulation}\n@media(max-width:375px){#view-mein-gebet .kmg-figure{width:83px;height:140px;max-width:29%}#view-mein-gebet .kmg-hero{min-height:205px}}\n";style.textContent+="\n#view-mein-gebet .kmg-list-heading{font-size:15px;font-weight:800;letter-spacing:.01em;color:var(--kmg-theme-accent);margin:22px 3px 13px}\n#view-mein-gebet .kmg-topics{display:grid;gap:10px}\n#view-mein-gebet button.kmg-topic{width:100%;text-align:left;color:#f7f0e6;cursor:pointer;min-height:64px}\n#view-mein-gebet button.kmg-topic:active{transform:scale(.993)}\n#view-mein-gebet button.kmg-topic:focus-visible{outline:2px solid var(--kmg-theme-accent);outline-offset:3px}\n#view-mein-gebet .kmg-topic span:nth-child(2){flex:1}\n#view-mein-gebet .kmg-topic-arrow{color:var(--kmg-theme-accent);font-size:24px}\n#view-mein-gebet .kmg-station-box{display:flex;align-items:center;gap:17px;padding:24px 20px;border-radius:26px;border:1px solid var(--kmg-theme-border);background:radial-gradient(circle at 100% 0,var(--kmg-theme-haze),transparent 60%),rgba(255,255,255,.06);min-height:220px}\n#view-mein-gebet .kmg-station-figure{flex:0 0 35%;width:35%;max-width:160px;max-height:235px;object-fit:contain;filter:drop-shadow(0 9px 14px rgba(0,0,0,.14))}\n#view-mein-gebet .kmg-station-text{margin:0;line-height:1.64;font-size:14px;color:#fff7e7;flex:1;min-width:0}\n#view-mein-gebet .kmg-station-actions{display:flex;gap:10px;margin-top:20px}\n#view-mein-gebet .kmg-step-btn{min-height:48px;flex:1;cursor:pointer;border-radius:17px;font:750 14px/1.25 \"Fredoka\",system-ui,sans-serif;padding:12px}\n#view-mein-gebet .kmg-primary{background:var(--kmg-theme-accent);border:1px solid var(--kmg-theme-accent);color:#0c2336}\n#view-mein-gebet .kmg-secondary{border:1px solid var(--kmg-theme-border);background:rgba(255,255,255,.045);color:#f9edd6}\n#view-mein-gebet .kmg-step-btn:disabled{opacity:.36;cursor:default}\n#view-mein-gebet .kmg-step-btn:focus-visible{outline:2px solid var(--kmg-theme-accent);outline-offset:3px}\n@media(max-width:390px){#view-mein-gebet .kmg-station-box{flex-direction:column;align-items:center;text-align:center;padding:16px}#view-mein-gebet .kmg-station-figure{height:160px;max-height:160px;width:auto;max-width:55%;flex:none}#view-mein-gebet .kmg-step-btn{font-size:13px}}\n";style.textContent+="\n#view-mein-gebet .kmg-source-status{font-size:11px;line-height:1.5;margin:0 3px 17px;border:1px solid var(--kmg-theme-border);border-radius:12px;padding:9px 12px;background:rgba(255,255,255,.035);color:var(--kmg-theme-accent)}\n#view-mein-gebet .kmg-source-status::before{content:\"◈ \";opacity:.9}\n";document.head.appendChild(style);
+  var style=make("style");style.id="kids-mein-gebet-preview-style";style.textContent="\n#view-today #kidsMeinGebetEntry.kmg-home-link{display:flex!important;align-items:center!important;gap:12px!important;width:100%!important;min-height:78px!important;margin:14px 0 0!important;padding:12px 16px!important;border-radius:22px!important;border:1px solid rgba(227,197,129,.23)!important;background:linear-gradient(115deg,rgba(20,69,68,.76),rgba(18,47,63,.80))!important;box-shadow:0 9px 25px rgba(0,0,0,.11),0 0 14px rgba(226,189,114,.06)!important;color:#fff8eb!important;text-align:left!important;cursor:pointer!important}\n#kidsMeinGebetEntry:active{transform:scale(.992)}\n#kidsMeinGebetEntry:focus-visible,#view-mein-gebet button:focus-visible{outline:2px solid #ffdc94;outline-offset:3px}\n#kidsMeinGebetEntry .kmg-mini{height:55px;width:55px;flex:0 0 55px;object-fit:contain;background:rgba(255,255,255,.065);border-radius:16px;padding:2px}\n#kidsMeinGebetEntry .kmg-copy{display:flex;flex:1;min-width:0;flex-direction:column;gap:3px}\n#kidsMeinGebetEntry .kmg-copy small{font-size:11px;color:rgba(255,255,255,.70);line-height:1.3}\n#kidsMeinGebetEntry .kmg-copy strong{font:750 20px/1.1 \"Fredoka\",system-ui,sans-serif}\n#kidsMeinGebetEntry .kmg-arrow{font-size:25px;color:#f5d8a6}\n#view-mein-gebet{padding:4px 0 calc(160px + env(safe-area-inset-bottom,0px));color:#fff8eb}\n#view-mein-gebet [hidden]{display:none!important}\n#view-mein-gebet .kmg-back{display:inline-flex;align-items:center;min-height:44px;padding:11px 16px;margin:0 0 16px;border:1px solid rgba(238,214,165,.25);border-radius:999px;background:rgba(255,255,255,.07);color:#ffe6b6;cursor:pointer;font-weight:750}\n#view-mein-gebet .kmg-hero{display:flex;align-items:center;gap:16px;padding:25px 20px;border:1px solid rgba(226,189,114,.20);border-radius:28px;background:radial-gradient(circle at 90% 8%,rgba(213,183,124,.14),transparent 45%),linear-gradient(145deg,#103b44,#102838 72%);overflow:hidden}\n#view-mein-gebet .kmg-hero-copy{flex:1;min-width:0}\n#view-mein-gebet .kmg-kicker{color:#f0d09c;font-size:10px;font-weight:850;letter-spacing:.1em;margin:0 0 10px}\n#view-mein-gebet h2{font:750 clamp(29px,7.7vw,44px)/1.07 \"Fredoka\",system-ui,sans-serif;letter-spacing:-.02em;margin:0 0 10px}\n#view-mein-gebet p{line-height:1.5}\n#view-mein-gebet .kmg-hero p:last-child{margin:0;color:rgba(255,255,255,.76);font-size:13px}\n#view-mein-gebet .kmg-figure{width:96px;height:149px;max-width:29%;flex:0 0 auto;object-fit:contain}\n#view-mein-gebet .kmg-caption{margin:12px 2px 17px;color:rgba(255,255,255,.67);font-size:12px}\n#view-mein-gebet .kmg-list{display:grid;grid-template-columns:1fr;gap:12px}\n#view-mein-gebet .kmg-lesson{display:grid;grid-template-columns:40px minmax(0,1fr) 16px;align-items:center;gap:13px;padding:18px 15px;min-height:90px;border:1px solid rgba(226,189,114,.17);border-radius:23px;background:rgba(255,255,255,.065);text-align:left;color:#fff8eb;cursor:pointer}\n#view-mein-gebet .kmg-num{display:grid;place-items:center;width:40px;height:40px;border-radius:13px;background:rgba(226,189,114,.12);color:#ffe3a2;font-size:12px;font-weight:900}\n#view-mein-gebet .kmg-lesson strong{display:block;font:740 clamp(18px,4.7vw,22px)/1.15 \"Fredoka\",system-ui,sans-serif;margin-bottom:5px}\n#view-mein-gebet .kmg-lesson small{font-size:12px;line-height:1.4;color:rgba(255,255,255,.68)}\n#view-mein-gebet .kmg-chevron{font-size:25px;color:#f5d596}\n#view-mein-gebet .kmg-detail-stage{display:flex;align-items:center;gap:18px;padding:20px;border:1px solid rgba(226,189,114,.18);background:rgba(255,255,255,.055);border-radius:23px;margin:20px 0}\n#view-mein-gebet .kmg-detail-stage img{width:84px;height:125px;object-fit:contain}\n#view-mein-gebet .kmg-detail-stage span{flex:1;font-size:13px;line-height:1.5;color:rgba(255,255,255,.8)}\n#view-mein-gebet .kmg-topic{display:flex;gap:13px;align-items:center;min-height:56px;padding:12px 14px;border:1px solid rgba(255,255,255,.1);border-radius:15px;background:rgba(255,255,255,.045);margin-bottom:9px;font-size:14px}\n#view-mein-gebet .kmg-topic b{color:#f3d5a2}\n#view-mein-gebet .kmg-note{margin:17px 2px;font-size:12px;color:rgba(255,255,255,.64)}\n@media(min-width:700px){#view-mein-gebet .kmg-list{grid-template-columns:repeat(2,minmax(0,1fr))}#view-mein-gebet .kmg-figure{height:190px;width:125px}}\n@media(max-width:360px){#view-mein-gebet .kmg-hero{gap:10px;padding:20px 15px}#view-mein-gebet .kmg-figure{max-width:24%}#view-today #kidsMeinGebetEntry.kmg-home-link{padding:10px 12px!important}}\n@media(prefers-reduced-motion:reduce){#kidsMeinGebetEntry{transition:none!important}}\n/* Adapt only this isolated module to existing Kids gender palette, without touching app globals. */\n#view-today #kidsMeinGebetEntry.kmg-home-link,\n#view-mein-gebet{\n  --kmg-theme-accent:var(--gold,#e2bd72);\n  --kmg-theme-border:rgba(226,189,114,.22);\n  --kmg-theme-focus:rgba(226,189,114,.18);\n  --kmg-theme-haze:rgba(114,174,193,.075);\n}\n.app[data-gender=\"boy\"] #view-today #kidsMeinGebetEntry.kmg-home-link,\n.app[data-gender=\"boy\"] #view-mein-gebet{\n  --kmg-theme-accent:#e2bd72;\n  --kmg-theme-border:rgba(226,189,114,.27);\n  --kmg-theme-focus:rgba(226,189,114,.19);\n  --kmg-theme-haze:rgba(90,166,186,.09);\n}\n.app[data-gender=\"girl\"] #view-today #kidsMeinGebetEntry.kmg-home-link,\n.app[data-gender=\"girl\"] #view-mein-gebet{\n  --kmg-theme-accent:#f2b7c9;\n  --kmg-theme-border:rgba(242,183,201,.30);\n  --kmg-theme-focus:rgba(242,183,201,.20);\n  --kmg-theme-haze:rgba(200,107,157,.10);\n}\n#view-today #kidsMeinGebetEntry.kmg-home-link{\n  border-color:var(--kmg-theme-border)!important;\n  box-shadow:0 9px 25px rgba(0,0,0,.12),0 0 10px var(--kmg-theme-focus)!important;\n  background:linear-gradient(112deg,rgba(11,39,56,.95),rgba(20,57,66,.83))!important;\n  border-radius:26px!important;\n  -webkit-tap-highlight-color:transparent!important;\n}\n.app[data-gender=\"girl\"] #view-today #kidsMeinGebetEntry.kmg-home-link{\n  background:linear-gradient(112deg,rgba(29,30,55,.96),rgba(80,48,82,.68))!important;\n}\n#view-today #kidsMeinGebetEntry .kmg-mini{border:1px solid var(--kmg-theme-border)!important}\n#view-today #kidsMeinGebetEntry .kmg-arrow,\n#view-mein-gebet .kmg-kicker,\n#view-mein-gebet .kmg-chevron,\n#view-mein-gebet .kmg-topic b,\n#view-mein-gebet .kmg-num{color:var(--kmg-theme-accent)!important}\n#view-mein-gebet .kmg-back,\n#view-mein-gebet .kmg-hero,\n#view-mein-gebet .kmg-lesson,\n#view-mein-gebet .kmg-detail-stage{\n  border-color:var(--kmg-theme-border)!important;\n}\n#view-mein-gebet .kmg-hero{\n  background:radial-gradient(circle at 90% 12%,var(--kmg-theme-haze),transparent 46%),\n             linear-gradient(155deg,rgba(16,55,67,.97),rgba(12,35,54,.98))!important;\n  border-radius:30px!important;\n}\n.app[data-gender=\"girl\"] #view-mein-gebet .kmg-hero{\n  background:radial-gradient(circle at 90% 12%,var(--kmg-theme-haze),transparent 46%),\n             linear-gradient(155deg,rgba(39,39,65,.98),rgba(22,36,57,.98))!important;\n}\n#view-mein-gebet .kmg-num{background:var(--kmg-theme-focus)!important}\n#view-mein-gebet .kmg-lesson{\n  border-radius:27px!important;\n  box-shadow:0 11px 25px rgba(0,0,0,.11),0 0 11px var(--kmg-theme-haze)!important;\n  -webkit-tap-highlight-color:transparent!important;\n}\n#view-today #kidsMeinGebetEntry.kmg-home-link:active,\n#view-today #kidsMeinGebetEntry.kmg-home-link:focus-visible,\n#view-mein-gebet .kmg-lesson:active,\n#view-mein-gebet .kmg-lesson:focus-visible{\n  border-color:var(--kmg-theme-accent)!important;\n  box-shadow:0 0 0 1px var(--kmg-theme-focus),0 0 15px var(--kmg-theme-focus),\n             0 12px 25px rgba(0,0,0,.12)!important;\n  outline:none!important;\n}\n#view-mein-gebet .kmg-back:focus-visible{outline:2px solid var(--kmg-theme-accent)!important;outline-offset:3px}\n#view-mein-gebet .kmg-note,#view-mein-gebet .kmg-caption{letter-spacing:.002em}\n@media(prefers-reduced-motion:reduce){\n  #view-today #kidsMeinGebetEntry.kmg-home-link,\n  #view-mein-gebet .kmg-lesson{transition:none!important}\n}";style.textContent+="\n/* 08.10.2026 — locally versioned hero image assets. Live character remains bound to active Kids profile. */\n#view-mein-gebet .kmg-hero{position:relative!important;isolation:isolate;min-height:220px}\n#view-mein-gebet .kmg-hero::before{content:\"\";position:absolute;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(90deg,rgba(8,28,43,.88) 0%,rgba(9,29,45,.69) 53%,rgba(9,29,45,.14) 100%),url(\""+heroBoy+"\");background-position:center;background-size:cover;background-repeat:no-repeat}\n.app[data-gender=\"girl\"] #view-mein-gebet .kmg-hero::before{background-image:linear-gradient(90deg,rgba(20,23,47,.88) 0%,rgba(39,29,55,.63) 53%,rgba(39,29,55,.07) 100%),url(\""+heroGirl+"\")}\n#view-mein-gebet .kmg-hero-copy,#view-mein-gebet .kmg-figure{position:relative;z-index:1}\n#view-mein-gebet .kmg-figure{width:116px;height:164px;max-width:31%;filter:drop-shadow(0 6px 14px rgba(0,0,0,.23))}\n#view-today #kidsMeinGebetEntry.kmg-home-link{position:relative;overflow:hidden;isolation:isolate;min-height:91px!important;background-image:linear-gradient(90deg,rgba(8,28,43,.92),rgba(8,28,43,.51) 56%,rgba(8,28,43,.26)),url(\""+heroBoy+"\")!important;background-size:cover!important;background-position:center 52%!important}\n.app[data-gender=\"girl\"] #view-today #kidsMeinGebetEntry.kmg-home-link{background-image:linear-gradient(90deg,rgba(28,25,50,.89),rgba(30,25,52,.56) 56%,rgba(28,25,50,.16)),url(\""+heroGirl+"\")!important}\n#view-today #kidsMeinGebetEntry > *{position:relative;z-index:1}\n#view-mein-gebet .kmg-lesson{touch-action:manipulation;transition:background-color .18s ease,box-shadow .18s ease,transform .18s ease}\n#view-mein-gebet .kmg-lesson:active{transform:scale(.992)}\n#view-mein-gebet .kmg-back{touch-action:manipulation}\n@media(max-width:375px){#view-mein-gebet .kmg-figure{width:83px;height:140px;max-width:29%}#view-mein-gebet .kmg-hero{min-height:205px}}\n";style.textContent+="\n#view-mein-gebet .kmg-list-heading{font-size:15px;font-weight:800;letter-spacing:.01em;color:var(--kmg-theme-accent);margin:22px 3px 13px}\n#view-mein-gebet .kmg-topics{display:grid;gap:10px}\n#view-mein-gebet button.kmg-topic{width:100%;text-align:left;color:#f7f0e6;cursor:pointer;min-height:64px}\n#view-mein-gebet button.kmg-topic:active{transform:scale(.993)}\n#view-mein-gebet button.kmg-topic:focus-visible{outline:2px solid var(--kmg-theme-accent);outline-offset:3px}\n#view-mein-gebet .kmg-topic span:nth-child(2){flex:1}\n#view-mein-gebet .kmg-topic-arrow{color:var(--kmg-theme-accent);font-size:24px}\n#view-mein-gebet .kmg-station-box{display:flex;align-items:center;gap:17px;padding:24px 20px;border-radius:26px;border:1px solid var(--kmg-theme-border);background:radial-gradient(circle at 100% 0,var(--kmg-theme-haze),transparent 60%),rgba(255,255,255,.06);min-height:220px}\n#view-mein-gebet .kmg-station-figure{flex:0 0 35%;width:35%;max-width:160px;max-height:235px;object-fit:contain;filter:drop-shadow(0 9px 14px rgba(0,0,0,.14))}\n#view-mein-gebet .kmg-station-text{margin:0;line-height:1.64;font-size:14px;color:#fff7e7;flex:1;min-width:0}\n#view-mein-gebet .kmg-station-actions{display:flex;gap:10px;margin-top:20px}\n#view-mein-gebet .kmg-step-btn{min-height:48px;flex:1;cursor:pointer;border-radius:17px;font:750 14px/1.25 \"Fredoka\",system-ui,sans-serif;padding:12px}\n#view-mein-gebet .kmg-primary{background:var(--kmg-theme-accent);border:1px solid var(--kmg-theme-accent);color:#0c2336}\n#view-mein-gebet .kmg-secondary{border:1px solid var(--kmg-theme-border);background:rgba(255,255,255,.045);color:#f9edd6}\n#view-mein-gebet .kmg-step-btn:disabled{opacity:.36;cursor:default}\n#view-mein-gebet .kmg-step-btn:focus-visible{outline:2px solid var(--kmg-theme-accent);outline-offset:3px}\n@media(max-width:390px){#view-mein-gebet .kmg-station-box{flex-direction:column;align-items:center;text-align:center;padding:16px}#view-mein-gebet .kmg-station-figure{height:160px;max-height:160px;width:auto;max-width:55%;flex:none}#view-mein-gebet .kmg-step-btn{font-size:13px}}\n";style.textContent+="\n#view-mein-gebet .kmg-source-status{font-size:11px;line-height:1.5;margin:0 3px 17px;border:1px solid var(--kmg-theme-border);border-radius:12px;padding:9px 12px;background:rgba(255,255,255,.035);color:var(--kmg-theme-accent)}\n#view-mein-gebet .kmg-source-status::before{content:\"◈ \";opacity:.9}\n";document.head.appendChild(style);
 
   /* A single compact Home link, placed OUTSIDE the original capsule grid. */
   var entry=make("button","kmg-home-link");entry.id="kidsMeinGebetEntry";entry.type="button";entry.setAttribute("aria-label","Mein Gebet – Testansicht öffnen");
@@ -40,7 +58,7 @@ function init(){
 
   var view=make("section","view");view.id="view-mein-gebet";view.setAttribute("aria-label","Mein Gebet – Vorschau");
   var overview=make("div");overview.id="kmgOverview";
-  var backHome=make("button","kmg-back","← Zur Startseite");backHome.type="button";overview.appendChild(backHome);
+  var backHome=make("button","kmg-back","← Zur Startseite");backHome.type="button";backHome.setAttribute("aria-label","Zurück zur Startseite");overview.appendChild(backHome);
   var hero=make("header","kmg-hero"),heroCopy=make("div","kmg-hero-copy");
   heroCopy.appendChild(make("p","kmg-kicker","DĀR AL TAWḤĪD KIDS · VORSCHAU"));
   heroCopy.appendChild(make("h2",null,"Mein Gebet"));
@@ -64,7 +82,7 @@ function init(){
   view.appendChild(overview);
 
   var detail=make("div");detail.id="kmgDetail";detail.hidden=true;
-  var backOverview=make("button","kmg-back","← Zu Mein Gebet");backOverview.type="button";detail.appendChild(backOverview);
+  var backOverview=make("button","kmg-back","← Zu Mein Gebet");backOverview.type="button";backOverview.setAttribute("aria-label","Zurück zu Mein Gebet");detail.appendChild(backOverview);
   detail.appendChild(make("p","kmg-kicker","LERNBEREICH · DESIGNVORSCHAU"));
   var title=make("h2"),desc=make("p");detail.appendChild(title);detail.appendChild(desc);
   var status=make("p","kmg-source-status","Geplante hanbalitische Lektion · Fachprüfung noch ausstehend");
@@ -79,7 +97,7 @@ function init(){
   view.appendChild(detail);
   // A third navigation level so every visible learning station really opens.
   var station=make("div","kmg-station");station.id="kmgStation";station.hidden=true;
-  var backToLesson=make("button","kmg-back","← Zu den Lernstationen");backToLesson.type="button";
+  var backToLesson=make("button","kmg-back","← Zu den Lernstationen");backToLesson.type="button";backToLesson.setAttribute("aria-label","Zurück zu den Lernstationen");
   station.appendChild(backToLesson);
   station.appendChild(make("p","kmg-kicker","MEIN GEBET · LERNSTATION"));
   var stationTitle=make("h2");stationTitle.id="kmgStationTitle";stationTitle.setAttribute("aria-live","polite");
@@ -87,7 +105,7 @@ function init(){
   var stationBox=make("div","kmg-station-box");
   var stationArt=make("img","kmg-station-figure");stationArt.alt="Aktive Kinderfigur";stationArt.loading="lazy";
   stationBox.appendChild(stationArt);
-  var stationBody=make("p","kmg-station-text");stationBox.appendChild(stationBody);
+  var stationBody=make("p","kmg-station-text");stationBody.setAttribute("dir","auto");stationBox.appendChild(stationBody);
   station.appendChild(stationBox);
   station.appendChild(make("p","kmg-note","Redaktioneller Arbeitsentwurf · hanbalitische Quellenprüfung ausstehend. Keine Gebetsstellung, kein Audio und kein Quellenurteil wurde für Kinder freigegeben."));
   var stationActions=make("div","kmg-station-actions");
@@ -101,16 +119,54 @@ function init(){
     var s=document.querySelector("main.shell");
     if(s){try{s.scrollTo({top:0,left:0,behavior:"auto"})}catch(_){s.scrollTop=0}}
   }
-  function showStation(index){
+  var historyBusy=false;
+  function snapshot(){
+    var layer="home";
+    if(view.classList.contains("active")){
+      if(!station.hidden)layer="station";
+      else if(!detail.hidden)layer="lesson";
+      else layer="overview";
+    }
+    return {layer:layer,lesson:currentLesson&&currentLesson.id,index:currentStationIndex};
+  }
+  function pushSnap(){
+    if(historyBusy)return;
+    try{history.pushState({kmg:true,snap:snapshot()},"")}catch(_){}
+  }
+  function fillLesson(id){
+    var l=lessons.find(function(x){return x.id===id});if(!l)return false;
+    currentLesson=l;title.textContent=l.title;desc.textContent=l.desc;topics.replaceChildren();
+    l.parts.forEach(function(part,i){
+      var el=make("button","kmg-topic");el.type="button";el.dataset.kmgTopic=String(i);
+      el.appendChild(make("b",null,String(i+1).padStart(2,"0")));
+      el.appendChild(make("span",null,part));
+      el.appendChild(make("span","kmg-topic-arrow","›"));topics.appendChild(el);
+    });
+    return true;
+  }
+  function showStation(index,opts){
     if(!currentLesson)return;
     currentStationIndex=Math.min(Math.max(0,index),currentLesson.parts.length-1);
     var part=currentLesson.parts[currentStationIndex];
     stationTitle.textContent=part;stationBody.textContent=stationText[currentLesson.id][currentStationIndex];
     previous.disabled=currentStationIndex===0;following.disabled=currentStationIndex===currentLesson.parts.length-1;
     overview.hidden=true;detail.hidden=true;station.hidden=false;refreshProfile();scrollStart();
+    if(!(opts&&opts.silent))pushSnap();
   }
-  function showLesson(){overview.hidden=true;detail.hidden=false;station.hidden=true;scrollStart()}
-  backToLesson.addEventListener("click",showLesson);
+  function showLesson(opts){overview.hidden=true;detail.hidden=false;station.hidden=true;scrollStart();if(!(opts&&opts.silent))pushSnap()}
+  function showOverview(opts){detail.hidden=true;station.hidden=true;overview.hidden=false;scrollStart();if(!(opts&&opts.silent))pushSnap()}
+  function restore(st){
+    historyBusy=true;
+    try{
+      if(!st||st.layer==="home"){navigate("today");return}
+      navigate("mein-gebet");
+      if(st.lesson)fillLesson(st.lesson);
+      if(st.layer==="station")showStation(st.index||0,{silent:true});
+      else if(st.layer==="lesson")showLesson({silent:true});
+      else showOverview({silent:true});
+    }finally{historyBusy=false}
+  }
+  backToLesson.addEventListener("click",function(){showLesson()});
   previous.addEventListener("click",function(){showStation(currentStationIndex-1)});
   following.addEventListener("click",function(){showStation(currentStationIndex+1)});
   topics.addEventListener("click",function(e){
@@ -119,7 +175,9 @@ function init(){
   });
 
   function refreshProfile(){
-    var g=getGender();[entryPic,pic,detailPic,stationArt].forEach(function(img){img.hidden=!g;if(g)img.src=assets[g]});
+    var g=getGender();
+    var alt=g==="girl"?"Mädchenfigur des aktiven Profils":g==="boy"?"Jungenfigur des aktiven Profils":"";
+    [entryPic,pic,detailPic,stationArt].forEach(function(img){img.hidden=!g;if(g){img.src=assets[g];img.alt=alt}});
     caption.textContent=g==="girl"?"Mädchenprofil aktiv: automatisch Mädchenfigur.":
       g==="boy"?"Jungenprofil aktiv: automatisch Jungenfigur.":
       "Bitte zuerst in der Kids-App ein Jungen- oder Mädchenprofil auswählen.";
@@ -141,24 +199,26 @@ function init(){
     else window.scrollTo(0,0);
     return true;
   }
-  function showOverview(){detail.hidden=true;station.hidden=true;overview.hidden=false;scrollStart()}
-  entry.addEventListener("click",function(){showOverview();refreshProfile();navigate("mein-gebet")});
-  backHome.addEventListener("click",function(){navigate("today")});
-  backOverview.addEventListener("click",showOverview);
+  entry.addEventListener("click",function(){showOverview({silent:true});refreshProfile();navigate("mein-gebet");pushSnap()});
+  backHome.addEventListener("click",function(){navigate("today");pushSnap()});
+  backOverview.addEventListener("click",function(){showOverview()});
   list.addEventListener("click",function(e){
     var btn=e.target.closest&&e.target.closest("[data-kmg-lesson]");
     if(!btn)return;
-    var l=lessons.find(function(x){return x.id===btn.dataset.kmgLesson});if(!l)return;
-    currentLesson=l;title.textContent=l.title;desc.textContent=l.desc;topics.replaceChildren();
-    l.parts.forEach(function(part,i){
-      var el=make("button","kmg-topic");el.type="button";el.dataset.kmgTopic=String(i);
-      el.appendChild(make("b",null,String(i+1).padStart(2,"0")));
-      el.appendChild(make("span",null,part));
-      el.appendChild(make("span","kmg-topic-arrow","›"));topics.appendChild(el);
-    });
+    if(!fillLesson(btn.dataset.kmgLesson))return;
     showLesson();refreshProfile();
   });
-  document.addEventListener("keydown",function(e){if(e.key==="Escape"&&view.classList.contains("active")){if(!station.hidden)showLesson();else if(!detail.hidden)showOverview();else navigate("today")}});
+  document.addEventListener("keydown",function(e){
+    if(e.key==="Escape"&&view.classList.contains("active")){
+      if(!station.hidden)showLesson();
+      else if(!detail.hidden)showOverview();
+      else {navigate("today");pushSnap()}
+    }
+  });
+  window.addEventListener("popstate",function(e){
+    if(e.state&&e.state.kmg)restore(e.state.snap);
+    else if(view.classList.contains("active"))restore({layer:"home"});
+  });
   var app=document.querySelector(".app");
   if(app&&window.MutationObserver){new MutationObserver(function(entries){if(entries.some(function(x){return x.attributeName==="data-gender"}))refreshProfile()}).observe(app,{attributes:true,attributeFilter:["data-gender"]})}
   refreshProfile();

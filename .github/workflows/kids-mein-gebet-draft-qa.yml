@@ -3,14 +3,18 @@ on:
   push:
     branches:
       - "feature/kids-mein-gebet-preview-20261008"
+      - "cursor/kids-mein-gebet-*"
+      - "agent/kids-mein-gebet-*"
     paths:
       - ".github/workflows/kids-mein-gebet-draft-qa.yml"
-      - "kids/mein-gebet/rigging/**"
+      - "kids/mein-gebet/**"
   pull_request:
-    branches: [main]
+    branches:
+      - "feature/kids-mein-gebet-preview-20261008"
+      - main
     paths:
       - ".github/workflows/kids-mein-gebet-draft-qa.yml"
-      - "kids/mein-gebet/rigging/**"
+      - "kids/mein-gebet/**"
 
 # Isolated safety checks for the draft PR. No deploy, build, secrets or write token.
 permissions:
@@ -18,7 +22,7 @@ permissions:
 
 jobs:
   structural-tests:
-    if: ${{ github.ref_name == 'feature/kids-mein-gebet-preview-20261008' || github.event.pull_request.number == 825 }}
+    if: ${{ github.event_name == 'push' || github.base_ref == 'feature/kids-mein-gebet-preview-20261008' || github.event.pull_request.number == 825 }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -43,6 +47,8 @@ jobs:
           node --check kids/mein-gebet/rigging/validate-inverse-bind-pose.cjs
           node --check kids/mein-gebet/rigging/audit-project-completion.cjs
           node --check kids/mein-gebet/rigging/verify-animation-rig-freeze.cjs
+          node --check kids/mein-gebet/preview-v1.js
+          node --check kids/mein-gebet/rigging/test-preview-v1.cjs
       - name: Validate all synthetic structure and release gates
         run: |
           node kids/mein-gebet/rigging/validate-glb.test.cjs
@@ -53,6 +59,7 @@ jobs:
           node kids/mein-gebet/rigging/test-inverse-bind-pose.cjs
           node kids/mein-gebet/rigging/test-audit-project-completion.cjs
           node kids/mein-gebet/rigging/test-animation-rig-freeze.cjs
+          node kids/mein-gebet/rigging/test-preview-v1.cjs
       - name: Exercise deterministic camera diagnostic tests
         run: |
           python kids/mein-gebet/rigging/test_three_quarter_camera_diagnostic.py
