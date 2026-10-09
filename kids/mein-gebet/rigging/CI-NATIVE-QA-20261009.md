@@ -90,3 +90,19 @@ Der Validator überprüft jetzt zusätzlich, dass **alle** 19 benannten primäre
 - Ohne diese wirklich zugängliche ZIP bleibt das Ergebnis **BLOCKED**, nicht behauptete 90 %, keine Freigabe für 3D-Gesicht/Hijab/Kufi und kein neues V7.8.
 
 **Produktionsstatus: bewusst gesperrt. Draft-PR #825 bleibt offen; keine Änderung an main oder der Live-Kinder-App.**
+
+## 09.10.2026 – Fünf-Ansichten-Messintegrität: verschachtelte Vertexdaten
+
+**GitHub-Actions-Lauf:** https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37947486073, geprüfter Commit `1a0ae6e7ed09988ee9bc77860221701a5890b1ce` – vollständig **erfolgreich**.
+
+**205 native Softwareprüfungen:** Vorherige 184 plus 21 neue, rein datenorientierte Python-Tests.
+
+Der originale Fünf-Ansichten-Messcode `qa_original_fiveview_v3.py` verwendete bisher einen direkten `numpy.frombuffer(..., count=3*N)`-Zugriff, der **glTF-BufferView.byteStride** ignorierte. Bei einer GLB-Datei mit verschachtelten Vertexattributen konnte er gültige Bufferdaten fälschlich als Positionen interpretieren, wodurch die gerenderte Silhouette und damit der IoU-Wert nicht belastbar gewesen wären.
+
+`glb_projection_accessor.py` behebt das durch sichere Auswertung von `bufferView.byteOffset`, `accessor.byteOffset`, `byteStride`, `count`, Komponententypen, Endlichkeit und Speichergrenzen. Es werden nur gültige, indizierte Dreiecke verarbeitet. Nicht referenzierte Vertices – insbesondere weit entfernte Dummy-Outlier – werden vor der Kamera-/Silhouetten-Skalierung aus der gerenderten Geometrie entfernt.
+
+`test_glb_projection_accessor.py`: **21/21** echte Python-Unit-Tests bestanden, darunter verschachtelte Positionen bei 20- und 24-Byte-Strides, UInt16-/UInt32-Indizes, Out-of-bounds, NaN/Infinity, falscher Typ, verwaiste Fernvertices sowie nichtdreieckige Geometrie.
+
+Ein zusätzlicher Blick auf GitHub-Releases und frühere CI-Artefakte ergab **kein authentisches V7.7-GLB**. Auch die gezielte Suche nach den exakten V7.7-Dateinamen im verbundenen Google Drive brachte keinen Treffer. Die in der Library vorhandene ZIP ließ sich unverändert nicht als Rohbytes materialisieren. **Deshalb wurden keine echten fünf IoU-Messwerte neu berechnet und keine Modellkonturen geändert.**
+
+**Freigabe weiterhin NEIN:** Die bisherige nominal unkalibrierte 3/4-Messung 83,245 % bleibt ein historischer V7.7-Baselinewert, nicht eine neue Messung mit dem korrigierten Decoder. Sobald die echten, unveränderten GLB-/PNG-Bytes verfügbar werden, müssen alle fünf Blickwinkel mit der korrigierten Ausleselogik erneut ermittelt werden; menschliche Originaltreue- und Gebetspositionsabnahme sind unabhängig davon erforderlich.
