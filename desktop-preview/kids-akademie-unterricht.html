@@ -216,6 +216,51 @@ body[data-profile="girl"] .overview-hero:after{background:linear-gradient(90deg,
 }
 @media(prefers-reduced-motion:reduce){.journey-bar span{transition:none}}
 
+
+/* Kids Academy V4.1 — kindgerechte Eingabe & sichere lokale Sprachaufnahme */
+.lesson-stage .answer-extra textarea{
+  font-family:ui-rounded,"Avenir Next Rounded","Avenir Next",-apple-system,BlinkMacSystemFont,sans-serif;
+  font-size:clamp(18px,2.3vw,21px);
+  font-weight:600;line-height:1.7;letter-spacing:.005em;
+  min-height:136px;padding:18px 20px;
+  border-radius:20px;
+  border:1px solid rgba(237,210,161,.36);
+  background:linear-gradient(145deg,rgba(240,220,171,.095),rgba(122,191,199,.035));
+  color:var(--text);
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.1);
+  caret-color:var(--gold);
+  resize:vertical;
+}
+.lesson-stage .answer-extra textarea::placeholder{font-weight:500;color:var(--muted);opacity:.8}
+.lesson-stage .answer-extra textarea:focus{
+  outline:2px solid var(--accent);outline-offset:2px;
+  border-color:var(--accent);background:rgba(255,255,255,.065)
+}
+.lesson-stage .answer-extra label{
+  color:var(--gold);font-weight:750;font-size:15px;letter-spacing:.02em;margin:6px 0 9px;
+}
+.lesson-stage .answer-options .pill[aria-pressed="true"]{
+  border-color:var(--accent);box-shadow:0 0 13px rgba(130,193,204,.17);
+  background:rgba(118,186,192,.12);
+}
+.recording-indicator{
+  display:inline-flex;align-items:center;gap:8px;min-height:44px;
+  font:750 14px ui-rounded,"Avenir Next Rounded",-apple-system,sans-serif;color:var(--gold);
+}
+.recording-indicator[hidden],.voice-preview[hidden]{display:none!important}
+.recording-dot{
+  display:inline-block;width:11px;height:11px;border-radius:50%;
+  background:#de7f83;box-shadow:0 0 0 4px rgba(222,127,131,.12);
+  animation:kids-record-pulse 1.35s ease-in-out infinite;
+}
+@keyframes kids-record-pulse{50%{box-shadow:0 0 0 9px rgba(222,127,131,.02)}}
+.voice-preview{border-top:1px solid var(--border);margin:15px 0;padding:15px 0;display:grid;gap:10px}
+.voice-preview label{margin:0!important}
+.voice-preview audio{width:100%;max-width:440px;accent-color:var(--gold)}
+.voice-preview .voice-retake{justify-self:start;font-size:13px}
+.answer-extra .small{font-size:12px;line-height:1.55}
+@media(prefers-reduced-motion:reduce){.recording-dot{animation:none}}
+
 </style></head>
 <body data-profile="neutral"><main class="wrap">
 
@@ -251,8 +296,8 @@ body[data-profile="girl"] .overview-hero:after{background:linear-gradient(90deg,
  <div class="lesson-heading"><h1>Ṣidq <span>· Wahrhaftigkeit</span></h1><p>Gemeinsam verstehen, nachdenken und üben.</p></div>
  <div class="stage-tracker" role="group" aria-label="Unterrichtsschritte"><button class="tracker-item is-current" data-jump-step="0"><b>1</b><span>Willkommen</span></button><button class="tracker-item" data-jump-step="1"><b>2</b><span>Verstehen</span></button><button class="tracker-item" data-jump-step="2"><b>3</b><span>Belege</span></button><button class="tracker-item" data-jump-step="3"><b>4</b><span>Mitdenken</span></button><button class="tracker-item" data-jump-step="4"><b>5</b><span>Merken</span></button></div>
  <div class="stage-surface" id="stageSurface">
-  <section class="lesson-stage" data-lesson-step="0" aria-labelledby="welcomeTitle"><span class="kicker">Schritt 1 · Willkommen</span><h2 id="welcomeTitle">Schön, dass du da bist!</h2><p class="stage-lead" id="welcomeGreeting"></p><p class="stage-body">Heute sprechen wir darüber, weshalb <strong>Wahrhaftigkeit</strong> wichtig ist. Du kannst jederzeit anhalten, noch einmal zuhören oder etwas in deinem eigenen Tempo lesen.</p><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="0">Begrüßung anhören</button><span class="voice-note">Deutsche Demo-Stimme · Masterstimme folgt</span></div></section>
-  <section class="lesson-stage" data-lesson-step="1" aria-labelledby="explainTitle" hidden><span class="kicker">Schritt 2 · Heute lernen wir</span><h2 id="explainTitle">Was bedeutet Wahrhaftigkeit?</h2><p class="stage-lead">Die <strong>Wahrheit sagen</strong> – auch wenn es manchmal Mut kostet.</p><div class="spoken-paragraph" id="explainWords"><p data-spoken>Manchmal passiert uns aus Versehen ein Fehler.</p><p data-spoken>Wenn wir ehrlich sagen, was passiert ist, können wir Verantwortung übernehmen und etwas wiedergutmachen.</p><p data-spoken>Wenn wir stattdessen lügen, kann das Vertrauen anderer Menschen leiden.</p><p data-spoken>Wahrhaftigkeit ist deshalb ein wichtiger Teil unseres guten Charakters.</p></div><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="1">Erklärung anhören</button><span class="voice-note">Beim Hören wird der gerade gesprochene Satz markiert.</span></div></section>
+  <section class="lesson-stage" data-lesson-step="0" aria-labelledby="welcomeTitle"><span class="kicker">Schritt 1 · Willkommen</span><h2 id="welcomeTitle">Schön, dass du da bist!</h2><p class="stage-lead" id="welcomeGreeting"></p><p class="stage-body">Heute sprechen wir darüber, weshalb <strong>Wahrhaftigkeit</strong> wichtig ist. Du kannst jederzeit anhalten, noch einmal zuhören oder etwas in deinem eigenen Tempo lesen.</p><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="0">Begrüßung anhören</button><span class="voice-note">Zum Anhören · Teststimme</span></div></section>
+  <section class="lesson-stage" data-lesson-step="1" aria-labelledby="explainTitle" hidden><span class="kicker">Schritt 2 · Heute lernen wir</span><h2 id="explainTitle">Was bedeutet Wahrhaftigkeit?</h2><p class="stage-lead">Die <strong>Wahrheit sagen</strong> – auch wenn es manchmal Mut kostet.</p><div class="spoken-paragraph" id="explainWords"><p data-spoken>Manchmal passiert uns aus Versehen ein Fehler.</p><p data-spoken>Wenn wir ehrlich sagen, was passiert ist, können wir Verantwortung übernehmen und etwas wiedergutmachen.</p><p data-spoken>Wenn wir stattdessen lügen, kann das Vertrauen anderer Menschen leiden.</p><p data-spoken>Wahrhaftigkeit ist deshalb ein wichtiger Teil unseres guten Charakters.</p></div><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="1">Erklärung anhören</button><span class="voice-note">Beim Hören wird der aktuelle Satz sanft hervorgehoben.</span></div></section>
   <section class="lesson-stage" data-lesson-step="2" aria-labelledby="evidenceTitle" hidden><span class="kicker">Schritt 3 · Qurʾān und Sunnah</span><h2 id="evidenceTitle">Was lernen wir aus den Quellen?</h2><p class="stage-lead">Wir hören zuerst einen Vers aus dem Qurʾān und betrachten danach eine authentische Überlieferung.</p><div class="evidence-region"><section class="lesson-source-block">
   <div class="eyebrow">Qurʾān · Sūrat at-Tawbah · Vers 119</div>
   <div class="arabic-listen-row">
@@ -275,7 +320,7 @@ body[data-profile="girl"] .overview-hero:after{background:linear-gradient(90deg,
   <section class="lesson-stage" data-lesson-step="3" aria-labelledby="practiceTitle" hidden><div class="question-top"><span class="kicker">Schritt 4 · Jetzt bist du dran</span><span class="question-index" id="questionIndex">Frage 1 von 3</span></div><h2 id="practiceTitle">Was würdest du tun?</h2><div class="progress"><span id="bar"></span></div>
    <div class="question-panel"><p id="question" class="question-prompt"></p><div class="choices" id="choices" role="group" aria-label="Antwortmöglichkeiten"></div>
     <div class="answer-options" id="answerOptions"><button type="button" class="pill answer-open" id="openWrite">Mit eigenen Worten antworten</button><button type="button" class="pill answer-open" id="openVoice">Antwort sprechen</button></div>
-    <div class="answer-extra" id="answerExtra" hidden><label for="answer" id="answerLabel">Deine Antwort</label><textarea id="answer" spellcheck="true" maxlength="550" placeholder="Ich würde ..."></textarea><div class="voice-actions"><button type="button" class="pill accent" id="mic" hidden>Aufnahme starten</button><button type="button" class="pill" id="cancelMic" hidden>Aufnahme beenden</button></div><p class="small" id="micInfo">Das Mikrofon wird erst aktiviert, wenn du es antippst.</p></div>
+    <div class="answer-extra" id="answerExtra" hidden><label for="answer" id="answerLabel">Deine Antwort</label><textarea id="answer" spellcheck="true" maxlength="550" placeholder="Ich würde ..."></textarea><div class="voice-actions"><button type="button" class="pill accent" id="mic" hidden>Aufnahme starten</button><button type="button" class="pill" id="cancelMic" hidden>Aufnahme beenden</button><span id="recordingIndicator" class="recording-indicator" hidden aria-live="polite"><span class="recording-dot" aria-hidden="true"></span><span id="recordingTime">00:00</span></span></div><p class="small" id="micInfo" aria-live="polite">Tippe auf „Antwort sprechen“. Erst dann wird das Mikrofon angefragt.</p><div class="voice-preview" id="voicePreview" hidden><label for="voicePlayback">Deine gesprochene Antwort</label><audio id="voicePlayback" controls preload="metadata" playsinline></audio><button type="button" class="pill voice-retake" id="voiceRetake">Noch einmal sprechen</button><p class="small">Nur zum Anhören und Nachdenken. Die Vorschau wertet die Aufnahme noch nicht automatisch aus.</p></div></div>
     <div class="answer-bottom"><button id="check" class="pill primary" type="button">Antwort prüfen</button><button id="hint" class="pill" type="button">Kleiner Hinweis</button><button id="repeat" class="pill" type="button">Frage anhören</button></div><div class="response" aria-live="polite" id="feedback">Du darfst in Ruhe nachdenken.</div>
     <button type="button" class="pill primary next-question" id="nextQuestion" hidden>Zur nächsten Frage <span aria-hidden="true">→</span></button><button type="button" class="pill primary next-question" id="finishLesson" hidden>Zum Merksatz <span aria-hidden="true">→</span></button>
    </div>
@@ -287,7 +332,7 @@ body[data-profile="girl"] .overview-hero:after{background:linear-gradient(90deg,
   </section>
  </div>
  <div class="lesson-navigation" id="lessonNavigation"><button type="button" class="pill" id="previousStep" hidden>← Zurück</button><button type="button" class="pill primary" id="forwardStep">Weiter zum Unterricht <span aria-hidden="true">→</span></button></div>
- <div class="lesson-meta">Du lernst in deinem Tempo. Fragen kannst du per Auswahl, Sprache oder Text beantworten. Es gibt keine Bewertung deines Īmān.</div>
+ <div class="lesson-meta">Du lernst in deinem Tempo. Fragen kannst du per Auswahl, Sprache oder Text beantworten. Du kannst jederzeit eine Pause machen.</div>
 </section>
 </main>
 <script>
@@ -313,6 +358,7 @@ const exercises={
 };
 let id="unassigned",gender="neutral",age="6-8",step=0,unlocked=0,qIndex=0,choice=null,answerMode="choices",answered=false,finished=false;
 let score={done:0,correct:0,choices:0},recognition=null,voice=null,audio=null,audioKey="",fallbackTried=false,voiceToken=0;
+let recorder=null,micStream=null,micClock=null,micSince=0,micRequest=0,voiceObjectUrl=null,voiceReady=false;
 const TRACKS={"quran:9:119":{src:"/quran-audio/ar.alafasy/1354.mp3",fallback:"https://everyayah.com/data/Alafasy_128kbps/009119.mp3"}};
 const stages=all('.lesson-stage[data-lesson-step]');
 const questions=()=>exercises[age]||exercises["6-8"];
@@ -329,7 +375,82 @@ function getProfile(){
  const g=child?.gender==="girl"?"girl":child?.gender==="boy"?"boy":guest==="girl"?"girl":guest==="boy"?"boy":"neutral";
  return {child,g,age:ageKey(child?.age||a),id:child?.id?String(child.id):guest?"guest-"+g:"preview"};
 }
-function stopMic(){if(recognition){try{recognition.abort()}catch(_){}recognition=null}$("#mic").disabled=false;$("#cancelMic").hidden=true}
+function stopMicTracks(){
+ if(micStream){micStream.getTracks().forEach(t=>{try{t.stop()}catch(_){}});micStream=null}
+}
+function stopMicTimer(){if(micClock){clearInterval(micClock);micClock=null}}
+function resetVoiceClip(){
+ voiceReady=false;
+ if(voiceObjectUrl){URL.revokeObjectURL(voiceObjectUrl);voiceObjectUrl=null}
+ const el=$("#voicePlayback");if(el){el.pause();el.removeAttribute("src");el.load()}
+ $("#voicePreview").hidden=true;
+}
+function stopMic(){
+ micRequest++;
+ if(recognition){try{recognition.abort()}catch(_){}recognition=null}
+ const previous=recorder;recorder=null;
+ if(previous&&previous.state!=="inactive"){
+   previous.onstop=null;previous.ondataavailable=null;
+   try{previous.stop()}catch(_){}
+ }
+ stopMicTracks();stopMicTimer();
+ $("#mic").disabled=false;$("#cancelMic").hidden=true;$("#recordingIndicator").hidden=true;
+ resetVoiceClip();
+}
+function finishRecording(){
+ const current=recorder;
+ if(!current||current.state!=="recording")return;
+ $("#cancelMic").disabled=true;
+ try{current.stop()}catch(_){stopMic();$("#micInfo").textContent="Aufnahme konnte nicht beendet werden. Bitte tippe deine Antwort."}
+}
+async function beginVoiceRecording(){
+ const canRecord=!!(navigator.mediaDevices?.getUserMedia&&window.MediaRecorder);
+ if(!canRecord){
+   mode("text");
+   $("#micInfo").textContent="Diese Browseransicht kann kein Audio aufnehmen. Öffne die Seite in Safari oder schreibe deine Antwort.";
+   return;
+ }
+ stopSpeech();stopAudio();stopMic();
+ mode("voice");
+ const request=++micRequest;$("#mic").disabled=true;
+ $("#micInfo").textContent="Mikrofonfreigabe wird angefragt …";
+ let stream;
+ try{stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true},video:false})}
+ catch(e){
+   if(request!==micRequest)return;
+   $("#mic").disabled=false;
+   $("#micInfo").textContent=e?.name==="NotAllowedError"?"Das Mikrofon wurde nicht freigegeben. Prüfe die Berechtigung oder tippe deine Antwort.":"Aufnahme in dieser Browseransicht nicht möglich. Du kannst deine Antwort schreiben.";
+   return;
+ }
+ if(request!==micRequest||step!==3||answerMode!=="voice"){stream.getTracks().forEach(t=>t.stop());return}
+ micStream=stream;const chunks=[];let localRecorder;
+ try{
+  const mp4=MediaRecorder.isTypeSupported?.("audio/mp4");
+  const webm=MediaRecorder.isTypeSupported?.("audio/webm;codecs=opus");
+  localRecorder=mp4?new MediaRecorder(stream,{mimeType:"audio/mp4"}):webm?new MediaRecorder(stream,{mimeType:"audio/webm;codecs=opus"}):new MediaRecorder(stream);
+ }catch(e){stopMicTracks();$("#mic").disabled=false;$("#micInfo").textContent="Aufnahme konnte nicht gestartet werden. Du kannst stattdessen schreiben.";return}
+ recorder=localRecorder;
+ localRecorder.ondataavailable=e=>{if(e.data?.size>0)chunks.push(e.data)};
+ localRecorder.onerror=()=>{if(recorder===localRecorder){stopMic();$("#micInfo").textContent="Bei der Aufnahme ist ein Fehler aufgetreten. Bitte versuche es erneut oder schreibe."}};
+ localRecorder.onstop=()=>{
+   if(recorder!==localRecorder)return;
+   stopMicTracks();stopMicTimer();$("#recordingIndicator").hidden=true;$("#cancelMic").hidden=true;$("#cancelMic").disabled=false;$("#mic").disabled=false;recorder=null;
+   const blob=new Blob(chunks,{type:localRecorder.mimeType||chunks[0]?.type||"audio/mp4"});
+   if(blob.size<350){$("#micInfo").textContent="Es wurde keine hörbare Antwort aufgenommen. Versuche es noch einmal.";return}
+   resetVoiceClip();voiceObjectUrl=URL.createObjectURL(blob);voiceReady=true;
+   const play=$("#voicePlayback");play.src=voiceObjectUrl;$("#voicePreview").hidden=false;
+   $("#micInfo").textContent="Deine Antwort wurde aufgenommen. Du kannst sie jetzt anhören und anschließend bestätigen.";
+ };
+ try{localRecorder.start()}catch(e){recorder=null;stopMicTracks();$("#mic").disabled=false;$("#micInfo").textContent="Mikrofonstart fehlgeschlagen. Nutze die Texteingabe.";return}
+ micSince=Date.now();$("#mic").disabled=true;$("#cancelMic").hidden=false;$("#cancelMic").disabled=false;$("#recordingIndicator").hidden=false;
+ const refresh=()=>{
+   const sec=Math.floor((Date.now()-micSince)/1000);
+   $("#recordingTime").textContent=String(Math.floor(sec/60)).padStart(2,"0")+":"+String(sec%60).padStart(2,"0");
+   if(sec>=45)finishRecording();
+ };
+ refresh();micClock=setInterval(refresh,500);
+ $("#micInfo").textContent="Jetzt kannst du sprechen. Tippe danach auf „Aufnahme beenden“.";
+}
 function stopSpeech(){
  voiceToken++;try{speechSynthesis.cancel()}catch(_){}voice=null;
  all(".is-reading").forEach(x=>x.classList.remove("is-reading"));
@@ -416,7 +537,7 @@ function mode(m){
  $("#answerExtra").hidden=m==="choices";$("#mic").hidden=m!=="voice";
  $("#openWrite").setAttribute("aria-pressed",String(m==="text"));$("#openVoice").setAttribute("aria-pressed",String(m==="voice"));
  /* iOS: Keyboard nur auf expliziten Textfeld-Tap. */
- if(m==="voice")$("#micInfo").textContent="Tippe auf Aufnahme starten. Prüfe danach den erkannten Text.";
+ if(m==="voice")$("#micInfo").textContent="Tippe auf „Aufnahme starten“ und sprich. Deine Aufnahme bleibt nur auf diesem Gerät.";
 }
 function showQuestion(){
  const q=questions()[qIndex];if(!q){finish();return}
@@ -435,13 +556,13 @@ function check(){
  if(answered)return;
  const q=questions()[qIndex],typed=$("#answer").value.trim();
  if(answerMode==="choices"&&choice===null){$("#feedback").textContent="Wähle bitte eine Antwort – oder nutze Sprechen oder Schreiben.";return}
- if(answerMode!=="choices"&&!typed){$("#feedback").textContent="Bitte antworte erst mit eigenen Worten.";return}
+ if(answerMode!=="choices"&&!typed&&!(answerMode==="voice"&&voiceReady)){$("#feedback").textContent="Bitte sprich oder schreibe zuerst deine Antwort.";return}
  answered=true;score.done++;let text;
  if(answerMode==="choices"&&choice!==null){
   score.choices++;
   if(choice===q.correct){score.correct++;text="Sehr schön, "+address()+"! "+q.explain}
   else text="Lass es uns noch einmal erklären: "+q.explain;
- }else text="Danke fürs Mitdenken, "+address()+". Eine mögliche Erklärung lautet: "+(q.sample||q.explain)+" Vergleiche diese Erklärung mit deiner Antwort. Eine automatische Freitextbewertung findet noch nicht statt.";
+ }else text=(answerMode==="voice"&&voiceReady&&!typed?"Deine gesprochene Antwort ist angekommen. Du kannst sie anhören. Die Vorschau versteht den gesprochenen Inhalt noch nicht automatisch. ":"Danke fürs Mitdenken, "+address()+". ")+"Eine mögliche Erklärung lautet: "+(q.sample||q.explain)+" Vergleiche sie mit deiner Antwort. Es gibt hier noch keine automatische Bewertung freier Antworten.";
  $("#feedback").textContent=text;$("#bar").style.width=((qIndex+1)/questions().length*100)+"%";
  $("#check").hidden=true;$("#hint").hidden=true;$("#repeat").hidden=true;$("#openWrite").hidden=true;$("#openVoice").hidden=true;
  all(".choice-button").forEach(b=>b.disabled=true);
@@ -459,30 +580,17 @@ function persist(level){
  try{localStorage.setItem(storageKey(),JSON.stringify(item));$("#nextDue").textContent="Nächste Erinnerung: "+due.toLocaleDateString("de-DE")+". Du kannst jederzeit vorher üben."}catch(_){$("#nextDue").textContent="Lokal speichern ist nicht verfügbar. Du kannst trotzdem wiederholen."}
  all("[data-reflect]").forEach(b=>{b.classList.toggle("active",b.dataset.reflect===level);b.setAttribute("aria-pressed",String(b.dataset.reflect===level))});renderHome();
 }
-function mic(){
- const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
- if(!SR){$("#micInfo").textContent="Spracherkennung ist hier nicht verfügbar. Bitte schreibe deine Antwort.";mode("text");return}
- stopAll();mode("voice");
- try{
-  recognition=new SR();recognition.lang="de-DE";recognition.interimResults=false;recognition.continuous=false;
-  recognition.onresult=e=>{$("#answer").value=e.results?.[0]?.[0]?.transcript||"";$("#micInfo").textContent="Lies den erkannten Text und korrigiere ihn bei Bedarf."};
-  recognition.onerror=()=>$("#micInfo").textContent="Spracherkennung konnte nicht abgeschlossen werden. Bitte schreibe deine Antwort.";
-  recognition.onend=()=>{$("#mic").disabled=false;$("#cancelMic").hidden=true;recognition=null};
-  $("#mic").disabled=true;$("#cancelMic").hidden=false;$("#micInfo").textContent="Du kannst jetzt sprechen. Die Spracherkennung benötigt möglicherweise Internet.";
-  recognition.start();
- }catch(_){stopMic();$("#micInfo").textContent="Mikrofon nicht verfügbar. Bitte schreibe deine Antwort."}
-}
 all("[data-open-lesson]").forEach(b=>b.onclick=begin);
 $("#backToAcademy").onclick=home;$("#backAfterLesson").onclick=home;
 $("#previousStep").onclick=()=>showStep(step-1);$("#forwardStep").onclick=nextStep;
 all("[data-jump-step]").forEach(b=>b.onclick=()=>showStep(Number(b.dataset.jumpStep)));
 all("[data-speak-stage]").forEach(b=>b.onclick=()=>speak(Number(b.dataset.speakStage)));
 all("[data-arabic-audio]").forEach(b=>b.onclick=()=>playRecitation(b.dataset.arabicAudio));
-$("#openWrite").onclick=()=>mode("text");$("#openVoice").onclick=()=>mode("voice");
+$("#openWrite").onclick=()=>mode("text");$("#openVoice").onclick=()=>beginVoiceRecording();
 $("#check").onclick=check;$("#hint").onclick=()=>{$("#feedback").textContent=questions()[qIndex].hint};
 $("#repeat").onclick=()=>speak(3,[questions()[qIndex].prompt]);
 $("#nextQuestion").onclick=()=>{qIndex++;showQuestion()};$("#finishLesson").onclick=finish;
-$("#mic").onclick=mic;$("#cancelMic").onclick=()=>{try{recognition?.stop()}catch(_){}};
+$("#mic").onclick=beginVoiceRecording;$("#cancelMic").onclick=finishRecording;$("#voiceRetake").onclick=beginVoiceRecording;
 $("#answer").oninput=()=>{if($("#answer").value.trim())choice=null};
 all("[data-reflect]").forEach(b=>b.onclick=()=>persist(b.dataset.reflect));
 window.addEventListener("storage",e=>{if(["kids.activeProfile","kids.profiles.v1","kids.guest.gender.v1","kids.age"].includes(e.key))syncProfile(true)});
