@@ -333,9 +333,35 @@ function isAudioRequest(request, url) {
     || /^\/(?:apple-tv\/)?adhan\//i.test(url.pathname);
 }
 
+function isDedicatedPwaUrl(url) {
+  if (!url || url.origin !== self.location.origin) return false;
+  return url.pathname === '/pwa' || url.pathname === '/pwa/' || url.pathname === '/pwa/index.html'
+    || (url.searchParams && url.searchParams.get('pwa') === '1');
+}
+
+async function requestComesFromDedicatedPwa(event) {
+  try {
+    const id = event && (event.clientId || event.resultingClientId);
+    if (!id) return false;
+    const client = await self.clients.get(id);
+    if (!client || !client.url) return false;
+    return isDedicatedPwaUrl(new URL(client.url));
+  } catch (e) {
+    return false;
+  }
+}
+
+function dedicatedPwaNavigationRequest(request, url) {
+  const target = new URL('/pwa/', self.location.origin);
+  for (const [key, value] of url.searchParams.entries()) target.searchParams.append(key, value);
+  target.searchParams.set('pwa', '1');
+  target.hash = url.hash || '';
+  return new Request(target.toString(), request);
+}
+
 function isAppShellRequest(url) {
   if (url.origin !== self.location.origin) return false;
-  if (url.pathname === '/pwa' || url.pathname === '/pwa/' || url.pathname === '/pwa/index.html') return true;
+  if (isDedicatedPwaUrl(url)) return true;
   if (url.pathname === '/' || url.pathname === '/index.html') return true;
   if (url.pathname === '/test/' || url.pathname === '/test/index.html') return true;
   if (url.pathname === '/version.json' || url.pathname === '/test/version.json') return true;
@@ -658,26 +684,36 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  // Navigation zuerst behandeln. Wenn eine bereits installierte PWA intern auf /
+  // oder /index.html springt (z. B. Push/Deep-Link/Reload), bleibt sie zwingend
+  // auf der dedizierten /pwa/-Shell und kann nicht in die öffentliche Website kippen.
+  if (request.mode === 'navigate') {
+    event.respondWith((async () => {
+      let effectiveRequest = request;
+      let effectiveUrl = url;
+      const fromPwa = await requestComesFromDedicatedPwa(event);
+      if (fromPwa && url.origin === self.location.origin && (url.pathname === '/' || url.pathname === '/index.html')) {
+        effectiveRequest = dedicatedPwaNavigationRequest(request, url);
+        effectiveUrl = new URL(effectiveRequest.url);
+      }
+      const shellKey = navigationShellKey(effectiveUrl);
+      const fallbackKey = shellKey === '/pwa/?pwa=1' ? shellKey : '/index.html';
+      return fetchNavigationShell(effectiveRequest, shellKey)
+        .catch(() => caches.match(shellKey))
+        .then((response) => response || caches.match(fallbackKey));
+    })());
+    return;
+  }
+
   // App-Hülle und Version: immer zuerst vom Netz (kein veralteter Quiz-Tab/Fokus).
   if (isAppShellRequest(url)) {
     const shellKey = navigationShellKey(url);
+    const fallbackKey = shellKey === '/pwa/?pwa=1' ? shellKey : '/index.html';
     event.respondWith(
       fetch(request, { cache: 'no-store' })
         .then((response) => storeShellResponse(shellKey, response))
         .catch(() => caches.match(shellKey))
-        .then((response) => response || caches.match('/index.html'))
-    );
-    return;
-  }
-
-  // Navigation: network-first, damit beim erneuten Oeffnen der App
-  // nicht zuerst eine veraltete App-Huelle angezeigt wird.
-  if (request.mode === 'navigate') {
-    const shellKey = navigationShellKey(url);
-    event.respondWith(
-      fetchNavigationShell(request, shellKey)
-        .catch(() => caches.match(shellKey))
-        .then((response) => response || caches.match('/index.html'))
+        .then((response) => response || caches.match(fallbackKey))
     );
     return;
   }
