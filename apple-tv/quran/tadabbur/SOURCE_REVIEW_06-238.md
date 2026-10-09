@@ -1,0 +1,22 @@
+# Strenge Tafsīr-Quellenprüfung · Batch 06-238
+
+Datum: 2026-10-09. Acht neue Referenzen aus Sūrah al-Aʿrāf anhand der direkt nachlesbaren frühen Berichte in aṭ-Ṭabarī.
+
+- **7:2**, Muǧāhid ibn Ǧabr; Tafsīr aṭ-Ṭabarī zu Qurʾān 7:2, Bericht 14317; Direktnachweis https://www.islamweb.net/ar/library/content/50/1954/; Überlieferung: Muḥammad ibn ʿAmr → Abū ʿĀṣim → ʿĪsā ibn Maymūn → Ibn Abī Naǧīḥ → Muǧāhid. Arabisches Originalfragment: «فلا يكن في صدرك حرج منه، قال: شك». Keine Behauptung, der Prophet ﷺ habe tatsächlich an der Offenbarung gezweifelt; es geht um die Deutung einer Aufforderung.
+- **7:8**, Muǧāhid ibn Ǧabr; Tafsīr aṭ-Ṭabarī zu Qurʾān 7:8, Bericht 14328; Direktnachweis https://www.islamweb.net/ar/library/content/50/1961/; Überlieferung: al-Muṯannā → Abū Ḥuḏayfah Mūsā ibn Masʿūd → Šibl ibn ʿAbbād → Ibn Abī Naǧīḥ → Muǧāhid. Arabisches Originalfragment: «والوزن يومئذ، القضاء». Der spätere Kommentar aṭ-Ṭabarīs erläutert ausdrücklich die wirkliche Waage; keine Entgegensetzung konstruieren.
+- **7:11**, Qatādah ibn Diʿāmah; Tafsīr aṭ-Ṭabarī zu Qurʾān 7:11, Bericht 14343; Direktnachweis https://www.islamweb.net/ar/library/content/50/1964/; Überlieferung: Bišr ibn Muʿāḏ → Yazīd ibn Zurayʿ → Saʿīd ibn Abī ʿArūbah → Qatādah. Arabisches Originalfragment: «خلق الله آدم من طين، ثم صورناكم في بطون أمهاتكم خلقا من بعد خلق». Frühe Deutung dieses Verses, nicht ein selbständiges naturwissenschaftliches Untersuchungsprotokoll.
+- **7:16**, Muǧāhid ibn Ǧabr; Tafsīr aṭ-Ṭabarī zu Qurʾān 7:16, Bericht 14366; Direktnachweis https://www.islamweb.net/ar/library/content/50/1968/; Überlieferung: Muḥammad ibn ʿAmr → Abū ʿĀṣim → ʿĪsā ibn Maymūn → Ibn Abī Naǧīḥ → Muǧāhid. Arabisches Originalfragment: «صراطك المستقيم، قال: الحق». Der Āṯar enthält ausschließlich diese kurze Erklärung; weitere Aussagen über die Wege des Satans sind nicht Teil dieses Zitats.
+- **7:17**, Qatādah ibn Diʿāmah; Tafsīr aṭ-Ṭabarī zu Qurʾān 7:17, Bericht 14372; Direktnachweis https://www.islamweb.net/ar/library/content/50/1969/; Überlieferung: Bišr ibn Muʿāḏ → Yazīd ibn Zurayʿ → Saʿīd ibn Abī ʿArūbah → Qatādah. Arabisches Originalfragment: «زيّن لهم السيئات والمعاصي ودعاهم إليها». Aṭ-Ṭabarī überliefert auch andere Deutungen der Richtungen, insbesondere von Ibrāhīm an-Naḫaʿī; keine Einigkeit behaupten.
+- **7:22**, Muǧāhid ibn Ǧabr; Tafsīr aṭ-Ṭabarī zu Qurʾān 7:22, Bericht 14400; Direktnachweis https://www.islamweb.net/ar/library/content/50/1976/; Überlieferung: Muḥammad ibn ʿAmr → Abū ʿĀṣim → ʿĪsā ibn Maymūn → Ibn Abī Naǧīḥ → Muǧāhid. Arabisches Originalfragment: «يخصفان، قال: يرقعان، كهيئة الثوب». Nicht die anderen in diesem Kapitel enthaltenen ungesicherten Einzelheiten über Art der Frucht oder die Schlange übernehmen.
+- **7:26**, Qatādah ibn Diʿāmah; Tafsīr aṭ-Ṭabarī zu Qurʾān 7:26, Bericht 14438; Direktnachweis https://www.islamweb.net/ar/library/content/50/1983/; Überlieferung: Bišr ibn Muʿāḏ → Yazīd ibn Zurayʿ → Saʿīd ibn Abī ʿArūbah → Qatādah. Arabisches Originalfragment: «ولباس التقوى، هو الإيمان». Andere frühe Tafsīr-Deutungen als Ikhtilāf respektieren; nicht als Iǧmāʿ deklarieren.
+- **7:32**, Qatādah ibn Diʿāmah; Tafsīr aṭ-Ṭabarī zu Qurʾān 7:32, Bericht 14545; Direktnachweis https://www.islamweb.net/ar/library/content/50/1993/; Überlieferung: Bišr ibn Muʿāḏ → Yazīd ibn Zurayʿ → Saʿīd ibn Abī ʿArūbah → Qatādah. Arabisches Originalfragment: «من عمل بالإيمان في الدنيا خلصت له كرامة الله يوم القيامة». Aussage bezieht sich auf die verheißene Ehrung im Jenseits; nicht als weltliches Besitzverbot für Andersgläubige verstehen.
+
+## Fachliche Grenzen
+
+- Bei **7:8** erläutert Muǧāhid den Ausdruck «الوزن» als «القضاء». Der Āṯar darf nicht als Widerlegung der sonst begründeten realen Waage dargestellt werden. Aṭ-Ṭabarī bejaht die wirkliche Waage im anschließenden Tafsīr-Abschnitt.
+- Bei **7:17** stehen unterschiedliche frühe Deutungen der vier Richtungen. Zitiert wird ausschließlich Qatādahs erkennbare Deutung.
+- Bei **7:22** werden von anderen Überlieferern zusätzliche Erzählungsdetails berichtet. Keine davon wird mit Muǧāhids einfacher Worterklärung vermischt.
+- Bei **7:26** erklären verschiedene frühe Stimmen „Kleidung der Gottesfurcht“ als Īmān, Ḥayāʾ und rechtschaffenes Handeln. Kein behaupteter Iǧmāʿ.
+- **7:31** ist bereits im Katalog; bewusst nicht doppelt registriert.
+
+Überlieferungswege werden offengelegt, nicht selbständig mit ṣaḥīḥ/ḥasan bewertet. Jede Aussage bleibt dem richtigen frühen Erzähler zugeordnet; die technischen GitHub-Audits sind keine vollständige historische Rijāl-Kritik.
