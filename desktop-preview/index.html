@@ -2579,7 +2579,21 @@ html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
   return intro("quellen")+'<section class="section parchment reveal"><div class="section-head"><h2>Quellenwerke</h2><p>Verifizierte Werke und ihre Verwendung</p></div><div id="sourcesReal" class="source-work-list"><div class="loading-line">Quellen werden geladen …</div></div></section>'+footer()
  }
  function einstellungen(){
-  return intro("einstellungen")+'<section class="section reveal"><div style="max-width:760px"><div class="form-line"><label>Schriftgröße</label><input id="fontSizeRange" type="range" min="90" max="118" value="100"></div><div class="form-line"><label>Lesemodus</label><select id="readingMode"><option value="normal">Weiß · leicht cremig</option><option value="warm">Wärmeres Pergament</option></select></div></div></section>'+footer()
+  return intro("einstellungen")+
+   '<section class="section reveal"><div style="max-width:760px">'+
+    '<div class="form-line"><label>Schriftgröße</label><input id="fontSizeRange" type="range" min="90" max="118" value="100"></div>'+
+    '<div class="form-line"><label>Lesemodus</label><select id="readingMode"><option value="normal">Weiß · leicht cremig</option><option value="warm">Wärmeres Pergament</option></select></div>'+
+    '<div class="download-app-card" style="margin-top:22px">'+
+      '<div class="download-app-card__head"><span class="download-app-card__icon">'+androidPwaLogo()+'</span><div><div class="kicker">APP · STARTBILDSCHIRM</div><h2>App-Icon</h2></div></div>'+
+      '<p>Wähle das DĀR-Icon für Android. In der nativen Android-App wird das Launcher-Symbol direkt gewechselt; bei der Web-App wird die Auswahl für Chrome/WebAPK gespeichert.</p>'+
+      androidPwaIconPicker()+
+    '</div>'+
+    '<div class="download-app-card" style="margin-top:16px">'+
+      '<div class="kicker">ANDROID · WIDGETS</div><h2 style="margin-top:4px">Startbildschirm-Widgets</h2>'+
+      '<p>Gebetszeiten sowie „Heute & Dhikr“ verwalten und in der nativen Android-App direkt über die Android-Systemabfrage hinzufügen.</p>'+
+      '<a class="download-app-btn" href="/widgets/?platform=android">Widgets & App-Icon öffnen</a>'+
+    '</div>'+
+   '</div></section>'+footer()
  }
  var renders={start:start,quran:quran,beitraege:beitraege,beitrag:beitrag,quelle:quelle,dua:dua,wissen:wissen,bibliothek:bibliothek,gebetszeiten:gebetszeiten,mehr:mehr,downloads:downloads,suche:suche,thema:thema,werk:werk,zakat:zakat,quiz:quiz,propheten:propheten,frauen:frauen,quellen:quellen,einstellungen:einstellungen};
 
