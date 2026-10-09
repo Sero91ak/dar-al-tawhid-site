@@ -545,6 +545,26 @@
     zakatManualOpen = false;
   }
 
+  // Desktop reuse: restore a user-selected local calculation without losing
+  // values from sections that were collapsed and therefore not in the DOM.
+  function restoreZakatInput(saved) {
+    const base = defaultInput();
+    const values = saved && typeof saved === "object" ? saved : {};
+    zakatInput = {
+      ...base,
+      ...values,
+      manualPrices: { ...base.manualPrices, ...(values.manualPrices || {}) }
+    };
+    zakatSections = {
+      ...defaultSections(),
+      liquids: true,
+      metals: true,
+      hawl: Boolean(zakatInput.nisabSinceDate),
+      details: true
+    };
+    zakatRenderPreserve();
+  }
+
   function installZakatDelegation() {
     if (installZakatDelegation.done) return;
     installZakatDelegation.done = true;
@@ -725,6 +745,7 @@
     loadZakatConfig,
     loadZakatPrices,
     getConfig: () => effectiveConfig(),
-    resetInput: resetZakatInput
+    resetInput: resetZakatInput,
+    restoreInput: restoreZakatInput
   };
 })(typeof window !== "undefined" ? window : global);
