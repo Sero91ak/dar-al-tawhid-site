@@ -1,0 +1,396 @@
+{
+  "project": "DAR AL TAWḤĪD · Ḥadīṯ-/Āṯār-Quellenprüfung",
+  "range": "HAD-0443–HAD-0492",
+  "auditedDate": "2026-10-09",
+  "totalInspected": 50,
+  "hadithCount": 20,
+  "atharCount": 30,
+  "hadithSharhVerified": 5,
+  "hadithSharhOpen": 15,
+  "atharAttributionVerified": 0,
+  "atharAttributionOpen": 30,
+  "openTotal": 45,
+  "sourceOfTruth": "apple-tv/hadith/series/",
+  "policy": {
+    "hadith": "Authentische Primärquelle + direkt nachweisbarer klassischer Šarḥ",
+    "athar": "Kein Šarḥ erforderlich, aber individuelle Primärquelle und Isnād-/Zuschreibungsprüfung",
+    "estimatedPrintPagination": "verboten",
+    "concurrentEdits": "Nur nach aktuell verifiziertem Blob-SHA committen",
+    "live": "Nur erfolgreich abgeschlossener Cloudflare-Deploy und überprüfter HTTP-Abruf bestätigen Veröffentlichung"
+  },
+  "riskNotes": [
+    {
+      "id": "HAD-0445",
+      "type": "record-type-review",
+      "note": "Erste-Person-Text 'wir beteten mit dem Propheten' mit Bukhari 385 (HAD-0425) doppelt; eventuell irrtümlich als Āṯar statt Ḥadīṯ klassifiziert. Nicht als unabhängig authentifiziert zählen."
+    },
+    {
+      "id": "HAD-0447",
+      "type": "legal-inference-not-athar",
+      "note": "Eingetragene Fiqhfolgerung darf nicht ohne genaue Fundstelle als Ausspruch Imām Aḥmads gelten."
+    },
+    {
+      "id": "HAD-0484",
+      "type": "record-type-review",
+      "note": "Der Text ist als prophetischer Ḥadīṯ über Neuerungen geläufig, obwohl recordType athar heißt. Wortlaut und Isnāde zuordnen, bevor Status geändert wird."
+    },
+    {
+      "range": "HAD-0471–0492",
+      "type": "attribution-review",
+      "note": "Viele vorhandene Werknachweise sind unspezifisch. Ohne Original-Überlieferer, Isnād und Band-/Seite kein verifizierter Zuschreibungsstatus."
+    }
+  ],
+  "nextAction": "15 offen kommentierte Ḥadīṯe 0454–0469 bearbeiten; 30 Āṯār erst originalkritisch prüfen. Danach weitere 50er-Blöcke bis zum tatsächlichen aktuellen Katalogende.",
+  "entries": [
+    {
+      "id": "HAD-0443",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Wortlaut, Sprecher, Isnādkette und gesonderten Authentizitätsstatus erst nachweisen"
+    },
+    {
+      "id": "HAD-0444",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Wortlaut, Sprecher, Isnādkette und gesonderten Authentizitätsstatus erst nachweisen"
+    },
+    {
+      "id": "HAD-0445",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Wortlaut, Sprecher, Isnādkette und gesonderten Authentizitätsstatus erst nachweisen"
+    },
+    {
+      "id": "HAD-0446",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Wortlaut, Sprecher, Isnādkette und gesonderten Authentizitätsstatus erst nachweisen"
+    },
+    {
+      "id": "HAD-0447",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Wortlaut, Sprecher, Isnādkette und gesonderten Authentizitätsstatus erst nachweisen"
+    },
+    {
+      "id": "HAD-0448",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Wortlaut, Sprecher, Isnādkette und gesonderten Authentizitätsstatus erst nachweisen"
+    },
+    {
+      "id": "HAD-0449",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Wortlaut, Sprecher, Isnādkette und gesonderten Authentizitätsstatus erst nachweisen"
+    },
+    {
+      "id": "HAD-0450",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Wortlaut, Sprecher, Isnādkette und gesonderten Authentizitätsstatus erst nachweisen"
+    },
+    {
+      "id": "HAD-0451",
+      "recordType": "hadith",
+      "sharh": "verified",
+      "attribution": null,
+      "sourceAudit": "Originalquelle und klassisch-arabischer Kommentar dokumentiert; Druckedition noch unbestimmt"
+    },
+    {
+      "id": "HAD-0452",
+      "recordType": "hadith",
+      "sharh": "verified",
+      "attribution": null,
+      "sourceAudit": "Originalquelle und klassisch-arabischer Kommentar dokumentiert; Druckedition noch unbestimmt"
+    },
+    {
+      "id": "HAD-0453",
+      "recordType": "hadith",
+      "sharh": "verified",
+      "attribution": null,
+      "sourceAudit": "Originalquelle und klassisch-arabischer Kommentar dokumentiert; Druckedition noch unbestimmt"
+    },
+    {
+      "id": "HAD-0454",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Konkrete Primärnummer, klassisch-arabischen Direktkommentar und Editionsangabe nachprüfen"
+    },
+    {
+      "id": "HAD-0455",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Konkrete Primärnummer, klassisch-arabischen Direktkommentar und Editionsangabe nachprüfen"
+    },
+    {
+      "id": "HAD-0456",
+      "recordType": "hadith",
+      "sharh": "verified",
+      "attribution": null,
+      "sourceAudit": "Originalquelle und klassisch-arabischer Kommentar dokumentiert; Druckedition noch unbestimmt"
+    },
+    {
+      "id": "HAD-0457",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Konkrete Primärnummer, klassisch-arabischen Direktkommentar und Editionsangabe nachprüfen"
+    },
+    {
+      "id": "HAD-0458",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Konkrete Primärnummer, klassisch-arabischen Direktkommentar und Editionsangabe nachprüfen"
+    },
+    {
+      "id": "HAD-0459",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Konkrete Primärnummer, klassisch-arabischen Direktkommentar und Editionsangabe nachprüfen"
+    },
+    {
+      "id": "HAD-0460",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Konkrete Primärnummer, klassisch-arabischen Direktkommentar und Editionsangabe nachprüfen"
+    },
+    {
+      "id": "HAD-0461",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Konkrete Primärnummer, klassisch-arabischen Direktkommentar und Editionsangabe nachprüfen"
+    },
+    {
+      "id": "HAD-0462",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Konkrete Primärnummer, klassisch-arabischen Direktkommentar und Editionsangabe nachprüfen"
+    },
+    {
+      "id": "HAD-0463",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Konkrete Primärnummer, klassisch-arabischen Direktkommentar und Editionsangabe nachprüfen"
+    },
+    {
+      "id": "HAD-0464",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Konkrete Primärnummer, klassisch-arabischen Direktkommentar und Editionsangabe nachprüfen"
+    },
+    {
+      "id": "HAD-0465",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Konkrete Primärnummer, klassisch-arabischen Direktkommentar und Editionsangabe nachprüfen"
+    },
+    {
+      "id": "HAD-0466",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Konkrete Primärnummer, klassisch-arabischen Direktkommentar und Editionsangabe nachprüfen"
+    },
+    {
+      "id": "HAD-0467",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Konkrete Primärnummer, klassisch-arabischen Direktkommentar und Editionsangabe nachprüfen"
+    },
+    {
+      "id": "HAD-0468",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Konkrete Primärnummer, klassisch-arabischen Direktkommentar und Editionsangabe nachprüfen"
+    },
+    {
+      "id": "HAD-0469",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "attribution": null,
+      "sourceAudit": "Konkrete Primärnummer, klassisch-arabischen Direktkommentar und Editionsangabe nachprüfen"
+    },
+    {
+      "id": "HAD-0470",
+      "recordType": "hadith",
+      "sharh": "verified",
+      "attribution": null,
+      "sourceAudit": "Originalquelle und klassisch-arabischer Kommentar dokumentiert; Druckedition noch unbestimmt"
+    },
+    {
+      "id": "HAD-0471",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Wortlaut, Sprecher, Isnādkette und gesonderten Authentizitätsstatus erst nachweisen"
+    },
+    {
+      "id": "HAD-0472",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Wortlaut, Sprecher, Isnādkette und gesonderten Authentizitätsstatus erst nachweisen"
+    },
+    {
+      "id": "HAD-0473",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Wortlaut, Sprecher, Isnādkette und gesonderten Authentizitätsstatus erst nachweisen"
+    },
+    {
+      "id": "HAD-0474",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Wortlaut, Sprecher, Isnādkette und gesonderten Authentizitätsstatus erst nachweisen"
+    },
+    {
+      "id": "HAD-0475",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Wortlaut, Sprecher, Isnādkette und gesonderten Authentizitätsstatus erst nachweisen"
+    },
+    {
+      "id": "HAD-0476",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Wortlaut, Sprecher, Isnādkette und gesonderten Authentizitätsstatus erst nachweisen"
+    },
+    {
+      "id": "HAD-0477",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Wortlaut, Sprecher, Isnādkette und gesonderten Authentizitätsstatus erst nachweisen"
+    },
+    {
+      "id": "HAD-0478",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Wortlaut, Sprecher, Isnādkette und gesonderten Authentizitätsstatus erst nachweisen"
+    },
+    {
+      "id": "HAD-0479",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Wortlaut, Sprecher, Isnādkette und gesonderten Authentizitätsstatus erst nachweisen"
+    },
+    {
+      "id": "HAD-0480",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Wortlaut, Sprecher, Isnādkette und gesonderten Authentizitätsstatus erst nachweisen"
+    },
+    {
+      "id": "HAD-0481",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Wortlaut, Sprecher, Isnādkette und gesonderten Authentizitätsstatus erst nachweisen"
+    },
+    {
+      "id": "HAD-0482",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Wortlaut, Sprecher, Isnādkette und gesonderten Authentizitätsstatus erst nachweisen"
+    },
+    {
+      "id": "HAD-0483",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Wortlaut, Sprecher, Isnādkette und gesonderten Authentizitätsstatus erst nachweisen"
+    },
+    {
+      "id": "HAD-0484",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Wortlaut, Sprecher, Isnādkette und gesonderten Authentizitätsstatus erst nachweisen"
+    },
+    {
+      "id": "HAD-0485",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Wortlaut, Sprecher, Isnādkette und gesonderten Authentizitätsstatus erst nachweisen"
+    },
+    {
+      "id": "HAD-0486",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Wortlaut, Sprecher, Isnādkette und gesonderten Authentizitätsstatus erst nachweisen"
+    },
+    {
+      "id": "HAD-0487",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Wortlaut, Sprecher, Isnādkette und gesonderten Authentizitätsstatus erst nachweisen"
+    },
+    {
+      "id": "HAD-0488",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Wortlaut, Sprecher, Isnādkette und gesonderten Authentizitätsstatus erst nachweisen"
+    },
+    {
+      "id": "HAD-0489",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Wortlaut, Sprecher, Isnādkette und gesonderten Authentizitätsstatus erst nachweisen"
+    },
+    {
+      "id": "HAD-0490",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Wortlaut, Sprecher, Isnādkette und gesonderten Authentizitätsstatus erst nachweisen"
+    },
+    {
+      "id": "HAD-0491",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Wortlaut, Sprecher, Isnādkette und gesonderten Authentizitätsstatus erst nachweisen"
+    },
+    {
+      "id": "HAD-0492",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Wortlaut, Sprecher, Isnādkette und gesonderten Authentizitätsstatus erst nachweisen"
+    }
+  ]
+}
