@@ -24870,11 +24870,11 @@ function getPushConnectionStatus(){
   const pwa=isStandalonePwa();
   const ios=isIOSDevice();
   const native=isDarNativeApp();
-  if(native){const android=isDarNativeAndroidApp();const nativeId=android?String(window.DAR_ANDROID_ONESIGNAL_ID||"").trim():"native-app";const registered=!!nativeId;return {permission,optedIn:registered,subId:nativeId,pwa:true,ios:!android,android,native:true,serverOk:registered,ready:registered};}
+  if(native){const android=isDarNativeAndroidApp();const nativeId=android?String(window.DAR_ANDROID_ONESIGNAL_ID||"").trim():"native-app";const registered=!!nativeId;const allowed=!android||permission==="granted";const ready=registered&&allowed;return {permission,optedIn:ready,subId:nativeId,pwa:true,ios:!android,android,native:true,serverOk:ready,ready};}
   return {permission,optedIn,subId,pwa,ios,native:false,serverOk:optedIn&&!!subId,ready:permission==="granted"&&optedIn&&!!subId&&(!ios||pwa)};
 }
 function pushConnectionStatusRows(s,serverMissingLabel){
-  if(s.native)return [["App",true,s.android?"Android-App":"iOS-App"],["Push",s.serverOk,s.serverOk?"über die App":"Registrierung ausstehend"],["Web-Push",true,"nicht nötig"]];
+  if(s.native)return [["App",true,s.android?"Android-App":"iOS-App"],["Push",s.serverOk,s.serverOk?"über die App":(s.android&&s.permission!=="granted"?"Android-Benachrichtigung erlauben":"Registrierung ausstehend")],["Web-Push",true,"nicht nötig"]];
   return [
     ["App gespeichert",s.pwa||!s.ios,s.pwa?"Home-Bildschirm":(s.ios?"Safari-Tab – bitte speichern":"Browser")],
     ["Erlaubnis",s.permission==="granted",s.permission==="granted"?"erlaubt":s.permission],
