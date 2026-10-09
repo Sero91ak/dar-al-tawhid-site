@@ -3110,15 +3110,22 @@ html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
  }
  function loadDesktopContent(){
   return Promise.all([
-   fetchJsonSafe("/desktop-preview/posts.json").then(function(rows){return{posts:Array.isArray(rows)?rows:[]}}).catch(function(){
-     return fetchJsonSafe("/content/posts/posts-index.json").then(function(idx){
-      return{posts:(idx.files||[]).slice().reverse().map(function(x){
-       var id=String(x.name||"").replace(/\.md$/,""),slug=id.replace(/^\d{4}-\d{2}-\d{2}-/,"");
-       return{id:id,file:x.name,title:slug.replace(/-/g," "),category:(slug.split("-")[0]||"Beitrag"),topic:"",speaker:"",work:"",reference:"",body:"",links:[]}
-      })}
+   fetchJsonSafe("/data/desktop-posts-index.json").then(function(feed){
+     if(!Array.isArray(feed.posts)||!feed.posts.length)throw new Error("Desktop Beitragsindex leer");
+     return{posts:feed.posts}
+   }).catch(function(){
+     return fetchJsonSafe("/desktop-preview/posts.json").then(function(rows){
+       return{posts:Array.isArray(rows)?rows:[]}
+     }).catch(function(){
+       return fetchJsonSafe("/content/posts/posts-index.json").then(function(idx){
+         return{posts:(idx.files||[]).slice().reverse().map(function(x){
+           var id=String(x.name||"").replace(/\.md$/,""),slug=id.replace(/^\d{4}-\d{2}-\d{2}-/,"");
+           return{id:id,file:x.name,title:slug.replace(/-/g," "),category:(slug.split("-")[0]||"Beitrag"),topic:"",speaker:"",work:"",reference:"",body:"",links:[]}
+         })}
+       })
      })
    }),
-   fetchJsonSafe("/data/books-library.json").catch(function(){return{books:[]}}),
+      fetchJsonSafe("/data/books-library.json").catch(function(){return{books:[]}}),
    fetchJsonSafe("/data/library-publications.json").catch(function(){return{publications:[]}}),
    fetchJsonSafe("/data/prophets/index.json").catch(function(){return{prophets:[]}}),
    fetchJsonSafe("/data/quiz-questions.json").catch(function(){return[]}),
