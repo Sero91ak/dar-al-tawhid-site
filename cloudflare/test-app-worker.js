@@ -4,8 +4,8 @@ import { researchIlmWithGemini } from "./ilm-gemini-open-research.js";
 import { composeIlmWithGroqFree } from "./ilm-groq-free-bridge.js";
 import { gateHiddenSurfaces } from "./preview-gate.js";
 const KIDS_VERSION_BODY = JSON.stringify({
-  buildId: "kids-shell-v189-home-tablet1294",
-  label: "KIDS · V1.09.10"
+  buildId: "kids-shell-v190-home-measured1295",
+  label: "KIDS · V1.09.11"
 });
 
 function kidsVersionResponse() {
@@ -553,7 +553,7 @@ export default {
         target.pathname = "/kids/start";
       }
       target.searchParams.delete("darsw");
-      target.searchParams.set("kv", "kids-shell-v189-home-tablet1294");
+      target.searchParams.set("kv", "kids-shell-v190-home-measured1295");
       return Response.redirect(target.toString(), 301);
     }
 
