@@ -568,10 +568,10 @@ a,button,[role="button"],summary,[tabindex],label{-webkit-tap-highlight-color:tr
       document.querySelectorAll("[data-dar-pwa-install]").forEach(function(btn){
         if(!btn.dataset.darInstallLabel)btn.dataset.darInstallLabel=btn.textContent||"Web-App installieren";
         var preparing=android&&!installed&&!ready;
-        btn.disabled=installed||preparing;
-        btn.setAttribute("aria-disabled",(installed||preparing)?"true":"false");
+        btn.disabled=installed;
+        btn.setAttribute("aria-disabled",installed?"true":"false");
         btn.setAttribute("data-dar-pwa-install-state",installed?"installed":(ready?"ready":"preparing"));
-        var nextLabel=installed?"Bereits installiert":(preparing?"Installation wird vorbereitet …":btn.dataset.darInstallLabel);
+        var nextLabel=installed?"Bereits installiert":btn.dataset.darInstallLabel;
         if(btn.textContent!==nextLabel)btn.textContent=nextLabel;
       });
     }catch(e){}
