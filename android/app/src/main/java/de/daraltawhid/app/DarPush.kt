@@ -43,6 +43,12 @@ object DarPush {
         OneSignal.User.pushSubscription.optIn()
     }
 
+    fun enableAfterPermission() {
+        // SDK initialization belongs to Application.onCreate. Do not reinitialize
+        // it when POST_NOTIFICATIONS returns from the system permission dialog.
+        OneSignal.User.pushSubscription.optIn()
+    }
+
     fun subscriptionId(): String = OneSignal.User.pushSubscription.id.orEmpty()
 
     fun pushToken(): String = OneSignal.User.pushSubscription.token.orEmpty()
