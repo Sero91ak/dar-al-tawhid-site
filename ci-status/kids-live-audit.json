@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-10-09T16:10:38Z",
+  "timestamp": "2026-10-09T16:11:48Z",
   "trigger": "workflow_run",
-  "finishedDeployConclusion": "cancelled",
-  "finishedDeployRun": "37957103151",
+  "finishedDeployConclusion": "success",
+  "finishedDeployRun": "37956631564",
   "live": {
     "buildId": "kids-shell-v182-unified-header1287",
     "label": "KIDS · V1.09.03",
@@ -45,12 +45,21 @@
   "lastDeployRuns": [
     {
       "conclusion": null,
+      "created_at": "2026-10-09T16:11:48Z",
+      "head_sha": "2d5894afe2cd32d65a1fd8e7db9f38ebf0034051",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37957339912",
+      "id": 37957339912,
+      "status": "queued",
+      "updated_at": "2026-10-09T16:11:48Z"
+    },
+    {
+      "conclusion": null,
       "created_at": "2026-10-09T16:10:26Z",
       "head_sha": "92473ab10c2fd6d9b38d7b1fc77a0017b7a19d22",
       "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37957168454",
       "id": 37957168454,
-      "status": "pending",
-      "updated_at": "2026-10-09T16:10:27Z"
+      "status": "in_progress",
+      "updated_at": "2026-10-09T16:11:40Z"
     },
     {
       "conclusion": "cancelled",
@@ -80,22 +89,13 @@
       "updated_at": "2026-10-09T16:07:27Z"
     },
     {
-      "conclusion": null,
+      "conclusion": "success",
       "created_at": "2026-10-09T16:06:04Z",
       "head_sha": "73feda030ec317465d1521651ecccc82e14e2e5a",
       "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37956631564",
       "id": 37956631564,
-      "status": "in_progress",
-      "updated_at": "2026-10-09T16:07:41Z"
-    },
-    {
-      "conclusion": "failure",
-      "created_at": "2026-10-09T16:04:51Z",
-      "head_sha": "39e5c764133bbf2ad3932adaf6264bd0e57abcdd",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37956478852",
-      "id": 37956478852,
       "status": "completed",
-      "updated_at": "2026-10-09T16:06:55Z"
+      "updated_at": "2026-10-09T16:11:37Z"
     }
   ]
 }
