@@ -54,7 +54,7 @@ function audit(status,boy,girl,story,hanbali){
    status.girl?.fullHairAndNeckCoverage3DApproved===true&&status.girl?.matchingPinkHijabAndDress3DApproved===true);
  need("girls independent five-view clothing and pose review absent",girl.referenceStatus?.independentFullTurnaroundApproved===true&&
    girl.religiousPoseReview==="fully_independently_reviewed"&&
-   Array.isArray(girl.requiredClothingChecks)&&
+   Array.isArray(girl.requiredClothingChecks)&&Array.isArray(girl.approvedModelChecksum?.reviewedClothingChecks)&&
    girl.requiredClothingChecks.every(x=>(girl.approvedModelChecksum?.reviewedClothingChecks||[]).includes(x)));
  need("boys and girls have not both received separate pose approval",status.prayer?.correctForBothProfilesApproved===true);
  const requiredPrayerClips=["Qiyam","Takbir","Ruku","RiseFromRuku","Sujud","Jalsah","SecondSujud","Tashahhud","Salam"];
@@ -74,8 +74,9 @@ function audit(status,boy,girl,story,hanbali){
  forbidden("status claims ready despite incomplete gates",status.productionReady===true&&!allPassed);
  forbidden("boy model claims approved in status without digest",status.boy?.productionRigApproved===true&&(!boy.accept?.productionReady||!boy.approvedModelChecksum?.sha256));
  forbidden("girl model claims approved in status without digest",status.girl?.productionRigApproved===true&&(!girl.accept?.productionReady||!girl.approvedModelChecksum?.sha256));
- const ready=allPassed&&inconsistent.length===0;
- return {ready,blockingChecks:problems,inconsistent,passedChecks:checkCount-problems.length,totalChecks:checkCount};
+ const metadataReady=allPassed&&inconsistent.length===0;
+ // Pure metadata can NEVER authorize a release: file checks run in main(--require-ready).
+ return {ready:false,metadataReady,physicalGLBVerificationRequired:true,blockingChecks:problems,inconsistent,passedChecks:checkCount-problems.length,totalChecks:checkCount};
 }
 // Manifest flags alone never prove an actual inspected GLB is present.
 function verifyLocalBinary(file,identity,profile,acceptance){
@@ -114,7 +115,7 @@ function main(args){
  if(args.includes("--require-ready")){
    const acceptance=read("rig-acceptance-v1.json");
    result.localBinaryEvidence=checkActualBinaryArguments(args,boy,girl,acceptance);
-   result.ready=result.ready&&result.localBinaryEvidence.pass;
+   result.ready=result.metadataReady&&result.localBinaryEvidence.pass;
  }
  process.stdout.write(JSON.stringify(result,null,2)+"\n");
  if(result.inconsistent.length)return 2;
