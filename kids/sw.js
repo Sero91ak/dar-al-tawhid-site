@@ -417,6 +417,13 @@ self.addEventListener("fetch",function(event){
     event.respondWith(networkFirst(request));
     return;
   }
+  /* HOME VIEWPORT FIT: load current sizing CSS and measurement JS first.
+     On an offline first-open, networkFirst transparently returns the cached
+     matching release; avoid one-launch stale hero geometry from SWR. */
+  if(url.pathname==="/kids/prayer-stage-v1261.css"||url.pathname==="/kids/prayer-stage-v1261.js"){
+    event.respondWith(networkFirst(request));
+    return;
+  }
   /* GLOBAL TOUCH RAIL: always network-first so interaction styling updates immediately. */
   if(url.pathname==="/kids/kids-touch-rail.css"){
     event.respondWith(networkFirst(request));
