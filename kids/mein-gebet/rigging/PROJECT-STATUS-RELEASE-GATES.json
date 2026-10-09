@@ -96,7 +96,7 @@
     "realGLBCheckedInThisRun": false,
     "boneLengthInvariantVerified": false,
     "requiresAdditionalNoLimbTranslationGuard": false,
-    "note": "Committed validator and all 29 committed JavaScript offline assertions passed in isolated V8 harness (mocked Node primitives); 7 Python camera diagnostic tests passed locally. No real GLB bytes materialized. Real binary rig test, physical angle calibration, five-view progress and visual identity approval remain blocked.",
+    "note": "Released model version-independent translation guard is committed and 29/29 rig structure synthetic checks passed. Both GLB sources still inaccessible and independent physical model testing incomplete. strict --require-ready requires real SHA-matching boy and girl GLBs.",
     "translationGuardCommitted": true,
     "translationGuardVerifiedAgainstActualV77GLB": false,
     "javascriptRepositoryTestSuiteRunAfterGuard": true,
@@ -122,6 +122,7 @@
       }
     },
     "releaseAuditRequiresExactBoyAndGirlGLB": true,
-    "noModelReleasedBeforePhysicalReview": true
+    "noModelReleasedBeforePhysicalReview": true,
+    "translationGuardVerifiedAgainstApprovedGLB": false
   }
 }
