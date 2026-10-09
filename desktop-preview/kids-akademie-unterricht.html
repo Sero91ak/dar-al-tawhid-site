@@ -268,7 +268,7 @@ body[data-kids-age="4-5"] .lesson-stage .recap-lesson p{font-size:clamp(18px,2.7
 body[data-kids-age="4-5"] .lesson-stage .question-prompt{font-size:clamp(19px,3.1vw,24px)}
 body[data-kids-age="4-5"] .choice-button{font-size:clamp(17px,2.7vw,20px);min-height:61px}
 </style></head>
-<body data-profile="neutral"><main class="wrap">
+<body data-profile="boy"><main class="wrap">
 
 <header class="academy-header">
  <div class="academy-brand"><div class="brand">DĀR AL TAWḤĪD · KIDS</div><div class="stage">Meine Lernakademie · Unterrichtsvorschau</div></div>
@@ -368,7 +368,7 @@ let recorder=null,micStream=null,micClock=null,micSince=0,micRequest=0,voiceObje
 const TRACKS={"quran:9:119":{src:"/quran-audio/ar.alafasy/1354.mp3",fallback:"https://everyayah.com/data/Alafasy_128kbps/009119.mp3"}};
 const stages=all('.lesson-stage[data-lesson-step]');
 const questions=()=>exercises[age]||exercises["6-8"];
-const address=()=>gender==="boy"?"mein lieber Bruder":gender==="girl"?"meine liebe Schwester":"liebes Kind";
+const address=()=>gender==="girl"?"liebe Schwester":"lieber Bruder";
 const storageKey=()=>["kids",VERSION,id,age,"sidq"].join(".");
 const oldRecord=()=>{try{return JSON.parse(localStorage.getItem(storageKey())||"null")}catch(_){return null}};
 function ageKey(x){const t=String(x||"").replace(/[–—]/g,"-");return exercises[t]?t:"6-8"}
@@ -378,8 +378,13 @@ function getProfile(){
   if(Array.isArray(data))child=data.find(p=>active&&String(p?.id)===String(active))||null;
   guest=localStorage.getItem("kids.guest.gender.v1")||"";a=localStorage.getItem("kids.age")||"";
  }catch(_){}
- const g=child?.gender==="girl"?"girl":child?.gender==="boy"?"boy":guest==="girl"?"girl":guest==="boy"?"boy":"neutral";
- return {child,g,age:ageKey(child?.age||a),id:child?.id?String(child.id):guest?"guest-"+g:"preview"};
+ /* Profil zuerst. Die reine HTML-Vorschau kennt ohne Browser-Speicher kein Konto;
+    deshalb darf ausschließlich hier ein expliziter Demo-Link die Ansicht bestimmen. */
+ const previewParam=new URLSearchParams(window.location.search).get("previewProfil");
+ const demoGender=previewParam==="maedchen"?"girl":previewParam==="junge"?"boy":null;
+ const g=child?.gender==="girl"?"girl":child?.gender==="boy"?"boy":demoGender||(guest==="girl"?"girl":"boy");
+ const previewId=demoGender?"demo-"+demoGender:guest?"guest-"+g:"demo-boy";
+ return {child,g,age:ageKey(child?.age||a),id:child?.id?String(child.id):previewId};
 }
 function stopMicTracks(){
  if(micStream){micStream.getTracks().forEach(t=>{try{t.stop()}catch(_){}});micStream=null}
@@ -514,9 +519,9 @@ function syncProfile(force=false){
  const p=getProfile();if(!force&&p.id===id&&p.g===gender&&p.age===age)return;
  if(p.id!==id||p.g!==gender||p.age!==age){stopAll();hideLesson()}
  id=p.id;gender=p.g;age=p.age;document.body.dataset.profile=gender;
- $("#profileLabel").textContent=p.child?.name|| (gender==="neutral"?"Lernvorschau":"Mein Profil");
- $("#academyProfile").classList.toggle("has-profile",gender!=="neutral");
- if(gender!=="neutral")$("#academyAvatar").src=gender==="girl"?"/kids/assets/profile-avatars/girl-hijab-pink-v1235.svg":"/kids/assets/profile-avatars/boy-kufi-v1235.svg";
+ $("#profileLabel").textContent=p.child?.name||(gender==="girl"?"Mädchenprofil · Vorschau":"Jungenprofil · Vorschau");
+ $("#academyProfile").classList.add("has-profile");
+ $("#academyAvatar").src=gender==="girl"?"/kids/assets/profile-avatars/girl-hijab-pink-v1235.svg":"/kids/assets/profile-avatars/boy-kufi-v1235.svg";
  $("#overviewGreeting").textContent="As-salāmu ʿalaykum, "+address()+". Heute entdecken wir gemeinsam neues Wissen.";
  $("#welcomeGreeting").textContent="As-salāmu ʿalaykum, "+address()+". Schön, dass du heute mitlernst!";
  applyAgeTeaching();renderHome();
