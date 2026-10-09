@@ -173,9 +173,15 @@
     }
 
     function syncIfPossible() {
-      if (DarWidgetStorage.hasLocation(DarWidgetStorage.readAppPrayerSettings())) {
+      var settings = DarWidgetStorage.readAppPrayerSettings();
+      if (DarWidgetStorage.hasLocation(settings)) {
         DarWidgetStorage.syncCache(DarPrayerMath);
         if (window.DarWidgetBridge) DarWidgetBridge.publish("sync");
+        try {
+          if (window.DarNative && typeof window.DarNative.prayerSettings === "function") {
+            window.DarNative.prayerSettings(JSON.stringify(settings));
+          }
+        } catch (e) {}
       }
     }
 
