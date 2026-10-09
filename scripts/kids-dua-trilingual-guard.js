@@ -12,21 +12,28 @@ const data=JSON.parse(read("kids/data/dua-kids.json"));
 const context={window:{}};
 vm.runInNewContext(read("kids/dua-word-meanings-v1.js"),context,{filename:"dua-word-meanings-v1.js",timeout:1500});
 const glossary=context.window.DARKidsDuaWordMeanings;
+vm.runInNewContext(read("kids/dua-phonetic-alignment-v1.js"),context,{filename:"dua-phonetic-alignment-v1.js",timeout:1500});
+const phonetic=context.window.DARKidsDuaPhoneticAlignment;
 const items=data.items||[],bad=[];
 const fail=x=>{bad.push(x);console.error("KIDS_DUA_TRILINGUAL_GUARD FAIL:",x)};
 if(items.length<120)fail("Dua count regressed below 120");
 if(glossary.coverage()!==items.length)fail("Bilingual meaning coverage differs from total Duʿāʾ count");
-let aligned=0;
+let aligned=0, romanAligned=0;
+if(phonetic.coverage()!==100)fail("Phonetic alignment must cover 100 unpaired Duʿāʾs");
 for(const d of items){
  const rows=d.learningSegments||[];
  const meanings=glossary.get(d,rows);
  if(!rows.length||!meanings||meanings.length!==rows.length||meanings.some(x=>!String(x).trim()))fail("Missing/empty German segments: "+d.id);
  else aligned+=meanings.length;
+ const roman=rows.every(x=>!!x.transliteration)?rows.map(x=>x.transliteration):phonetic.get(d,rows);
+ if(!roman||roman.length!==rows.length||roman.some(x=>!String(x).trim()))fail("Arabic/Latin phonetic alignment missing: "+d.id);
+ else romanAligned+=roman.length;
  if(rows.some((s,i)=>s.index!==i))fail("Arabic word indexes changed: "+d.id);
 }
 if(aligned<1366)fail("Word alignment count dropped below 1366: "+aligned);
+if(romanAligned!==aligned)fail("Arabic/Roman index pairing mismatch: "+romanAligned+"/"+aligned);
 const js=read("kids/dua-smart-learn.js");
-for(const token of ["id=\"dslGerman\"","class=\"dsl-word de\"","getSegments(currentDua)","german:String(","root.querySelectorAll(\"[data-seg]\")","attachPhraseFollow(","playWordSequence()","var reviewed=","fitReadingStage()","queueReaderFit()"]){
+for(const token of ["id=\"dslGerman\"","class=\"dsl-word de\"","getSegments(currentDua)","german:String(","root.querySelectorAll(\"[data-seg]\")","attachPhraseFollow(","playWordSequence()","var reviewed=","var phonetic=","fitReadingStage()","queueReaderFit()"]){
  if(!js.includes(token))fail("Runtime feature missing "+token);
 }
 new vm.Script(js,{filename:"dua-smart-learn.js"});
@@ -39,17 +46,17 @@ const cacheVersion=Number(String(v.visualSystem?.serviceWorkerCache||"").replace
 if(cacheVersion<1282||!String(v.buildId||"").endsWith(String(cacheVersion)))fail("Kids release cache/build version mismatch");
 for(const page of ["kids/index.html","kids/start.html","kids/shell.html"]){
  const html=read(page);
- for(const token of [v.buildId,"/kids/sw.js?v="+cacheVersion,"/kids/dua-word-meanings-v1.js?v=2","/kids/dua-smart-learn.js?v=1282","/kids/dua-learn-trilingual-v1282.css?v=1283"]){
+ for(const token of [v.buildId,"/kids/sw.js?v="+cacheVersion,"/kids/dua-word-meanings-v1.js?v=2","/kids/dua-phonetic-alignment-v1.js?v=1","/kids/dua-smart-learn.js?v=1284","/kids/dua-learn-trilingual-v1282.css?v=1283"]){
   if(!html.includes(token))fail(page+" missing "+token);
  }
 }
 const sw=read("kids/sw.js");
-for(const token of ['dar-al-tawhid-kids-v'+cacheVersion,v.buildId,"/kids/dua-word-meanings-v1.js?v=2","/kids/dua-smart-learn.js?v=1282","/kids/dua-learn-trilingual-v1282.css?v=1283"]){
+for(const token of ['dar-al-tawhid-kids-v'+cacheVersion,v.buildId,"/kids/dua-word-meanings-v1.js?v=2","/kids/dua-phonetic-alignment-v1.js?v=1","/kids/dua-smart-learn.js?v=1284","/kids/dua-learn-trilingual-v1282.css?v=1283"]){
  if(!sw.includes(token))fail("Offline precache missing "+token);
 }
 function runKidsDuaTrilingualGuard(){
   if(bad.length){console.error(bad.length+" trilingual QA failures");return bad.length}
-  console.log("KIDS_DUA_TRILINGUAL_GUARD OK · "+items.length+" Duʿāʾs · "+aligned+" contextual German word meanings · 3-layer focus · 3 pages · offline V1282+ · syntax passed");
+  console.log("KIDS_DUA_TRILINGUAL_GUARD OK · "+items.length+" Duʿāʾs · "+aligned+" Arabic/Roman/German aligned word positions · 3-layer focus · 3 pages · offline V1282+ · syntax passed");
   return 0;
 }
 if(require.main===module)process.exit(runKidsDuaTrilingualGuard()?1:0);
