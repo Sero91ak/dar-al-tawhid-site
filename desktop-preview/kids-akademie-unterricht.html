@@ -281,6 +281,11 @@ body[data-kids-age="4-5"] .choice-button{font-size:clamp(17px,2.7vw,20px);min-he
 .overview-hero:after{background:linear-gradient(90deg,rgba(4,24,36,.33),rgba(4,24,36,0) 70%),linear-gradient(0deg,rgba(4,24,36,.31),transparent 65%)}
 body[data-profile="girl"] .overview-hero:after{background:linear-gradient(90deg,rgba(38,20,51,.27),rgba(38,20,51,0) 70%),linear-gradient(0deg,rgba(38,20,51,.23),transparent 65%)}
 @media(max-width:600px){.overview-hero img{object-position:59% center}.overview-copy h1{font-size:clamp(32px,7.4vw,45px)}}
+
+/* Kein falsches Jungen-Hero beim Wechsel zum Mädchenprofil anzeigen. */
+.overview-hero img{opacity:0;transition:opacity .22s ease}
+.overview-hero img.is-ready{opacity:1}
+@media(prefers-reduced-motion:reduce){.overview-hero img{transition:none}}
 </style></head>
 <body data-profile="boy"><main class="wrap">
 
@@ -290,7 +295,7 @@ body[data-profile="girl"] .overview-hero:after{background:linear-gradient(90deg,
 </header>
 <section class="academy-home" id="academyHome">
  <section class="overview-hero" aria-label="Deine islamische Lernakademie">
-  <img id="academyHeroImage" src="/desktop-preview/assets/kids-academy-hero-boys-v1.jpg" alt="" decoding="async" fetchpriority="high" onerror="this.onerror=null;this.src='/desktop-preview/assets/kids-academy-hero-v1.jpg'">
+  <img id="academyHeroImage" src="/desktop-preview/assets/kids-academy-hero-boys-v1.jpg" alt="" decoding="async" fetchpriority="high" onerror="this.onerror=null;this.classList.add('is-ready');this.src='/desktop-preview/assets/kids-academy-hero-v1.jpg'">
   <div class="overview-copy"><div class="kicker">Deine islamische Lernakademie</div><h1>Wissen entdecken</h1><p id="overviewGreeting">As-salāmu ʿalaykum. Schön, dass du heute wieder etwas lernen möchtest.</p></div>
  </section>
  <section class="today-class" aria-labelledby="todayTitle">
@@ -537,7 +542,11 @@ function syncProfile(force=false){
  $("#profileRole").textContent=gender==="girl"?"Schwester"+(profileName?"":" · Vorschau"):"Bruder"+(profileName?"":" · Vorschau");
  $("#academyProfile").classList.add("has-profile");
  $("#academyAvatar").src=gender==="girl"?"/kids/assets/profile-avatars/girl-hijab-pink-v1235.svg":"/kids/assets/profile-avatars/boy-kufi-v1235.svg";
- $("#academyHeroImage").src=gender==="girl"?"/desktop-preview/assets/kids-academy-hero-girls-v1.jpg":"/desktop-preview/assets/kids-academy-hero-boys-v1.jpg";
+ const hero=$("#academyHeroImage");
+ hero.classList.remove("is-ready");
+ hero.onload=()=>hero.classList.add("is-ready");
+ hero.src=gender==="girl"?"/desktop-preview/assets/kids-academy-hero-girls-v1.jpg":"/desktop-preview/assets/kids-academy-hero-boys-v1.jpg";
+ if(hero.complete&&hero.naturalWidth)hero.classList.add("is-ready");
  $("#overviewGreeting").textContent="As-salāmu ʿalaykum, "+address()+". Heute entdecken wir gemeinsam neues Wissen.";
  $("#welcomeGreeting").textContent="As-salāmu ʿalaykum, "+address()+". Schön, dass du heute mitlernst!";
  applyAgeTeaching();renderHome();
