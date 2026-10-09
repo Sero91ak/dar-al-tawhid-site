@@ -7,6 +7,8 @@
  */
 const fs=require("node:fs");
 const path=require("node:path");
+const crypto=require("node:crypto");
+const {parseGLB,validateDocument}=require("./validate-glb.cjs");
 const root=__dirname;
 const read=p=>JSON.parse(fs.readFileSync(path.join(root,p),"utf8"));
 function audit(status,boy,girl,story,hanbali){
@@ -75,16 +77,49 @@ function audit(status,boy,girl,story,hanbali){
  const ready=allPassed&&inconsistent.length===0;
  return {ready,blockingChecks:problems,inconsistent,passedChecks:checkCount-problems.length,totalChecks:checkCount};
 }
+// Manifest flags alone never prove an actual inspected GLB is present.
+function verifyLocalBinary(file,identity,profile,acceptance){
+ if(!file||typeof file!=="string"||path.extname(file).toLowerCase()!==".glb")
+   return {pass:false,reason:"Missing real "+profile+" .glb path"};
+ try{
+   const bytes=fs.readFileSync(file);
+   const checksum=identity?.approvedModelChecksum||{};
+   const digest=crypto.createHash("sha256").update(bytes).digest("hex");
+   if(checksum.sha256!==digest || checksum.bytes!==bytes.length)
+     return {pass:false,reason:"File bytes do not match reviewed "+profile+" SHA-256 and size"};
+   const parsed=parseGLB(bytes);
+   const result=validateDocument(parsed.gltf,acceptance,profile,{fileBytes:bytes.length,hasBin:parsed.hasBin});
+   if(!result.structureValid)
+     return {pass:false,reason:"Structural GLB validation rejected "+profile,errors:result.errors};
+   return {pass:true,sha256:digest,bytes:bytes.length};
+ }catch(e){return {pass:false,reason:"Cannot verify real "+profile+" GLB: "+e.message};}
+}
+function checkActualBinaryArguments(args,boy,girl,acceptance){
+ const option=(prefix)=>{
+   const matches=args.filter(x=>typeof x==="string"&&x.startsWith(prefix));
+   return matches.length===1?matches[0].slice(prefix.length):null;
+ };
+ const boyResult=verifyLocalBinary(option("--boy-glb="),boy,"boy",acceptance);
+ const girlResult=verifyLocalBinary(option("--girl-glb="),girl,"girl",acceptance);
+ const independent=boyResult.pass&&girlResult.pass&&boyResult.sha256!==girlResult.sha256;
+ return {pass:independent,boy:boyResult,girl:girlResult,
+   note:"Matching exact GLB bytes and structure is necessary but cannot certify rendered visual identity or religious correctness."};
+}
 function main(args){
  const boy=read("original-boy-identity-lock-v1.json"),girl=read("original-girl-identity-lock-v1.json");
  const status=read("PROJECT-STATUS-RELEASE-GATES.json");
  const story=JSON.parse(fs.readFileSync(path.join(root,"../content/raf-qiyam-storyboard.json"),"utf8"));
  const hanbali=JSON.parse(fs.readFileSync(path.join(root,"../content/hanbali-review.json"),"utf8"));
  const result=audit(status,boy,girl,story,hanbali);
- process.stdout.write(JSON.stringify(result,null,2)+"\n");
+ if(args.includes("--require-ready")){
+   const acceptance=read("rig-acceptance-v1.json");
+   result.localBinaryEvidence=checkActualBinaryArguments(args,boy,girl,acceptance);
+   result.ready=result.ready&&result.localBinaryEvidence.pass;
+ }
+ process.stdout.write(JSON.stringify(result,null,2)+"\\n");
  if(result.inconsistent.length)return 2;
  if(args.includes("--require-ready")&&!result.ready)return 1;
  return 0;
 }
-module.exports={audit,main};
+module.exports={audit,verifyLocalBinary,checkActualBinaryArguments,main};
 if(require.main===module)process.exitCode=main(process.argv.slice(2));
