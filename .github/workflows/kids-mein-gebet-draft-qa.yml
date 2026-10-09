@@ -1,0 +1,61 @@
+name: Kids Mein Gebet - isolated draft QA
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/kids-mein-gebet-draft-qa.yml"
+      - "kids/mein-gebet/rigging/**"
+
+# Isolated safety checks for the draft PR. No deploy, build, secrets or write token.
+permissions:
+  contents: read
+
+jobs:
+  structural-tests:
+    if: ${{ github.event.pull_request.number == 825 }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout the draft commit
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Verify JS syntax
+        run: |
+          node --check kids/mein-gebet/rigging/validate-glb.cjs
+          node --check kids/mein-gebet/rigging/audit-project-completion.cjs
+          node --check kids/mein-gebet/rigging/verify-animation-rig-freeze.cjs
+      - name: Validate all synthetic structure and release gates
+        run: |
+          node kids/mein-gebet/rigging/validate-glb.test.cjs
+          node kids/mein-gebet/rigging/test-audit-project-completion.cjs
+          node kids/mein-gebet/rigging/test-animation-rig-freeze.cjs
+      - name: Exercise deterministic camera diagnostic tests
+        run: |
+          python kids/mein-gebet/rigging/test_three_quarter_camera_diagnostic.py
+      - name: Ensure production release is blocked without real reviewed GLBs
+        shell: bash
+        run: |
+          set +e
+          node kids/mein-gebet/rigging/audit-project-completion.cjs --require-ready > "$RUNNER_TEMP/kids-audit.json"
+          actual=$?
+          set -e
+          test "$actual" -eq 1
+          python - "$RUNNER_TEMP/kids-audit.json" <<'PY'
+          import json
+          import sys
+          with open(sys.argv[1], encoding='utf-8') as f:
+              report = json.load(f)
+          assert report['ready'] is False, 'Unexpected release-ready result'
+          assert report['localBinaryEvidence']['pass'] is False, 'Actual GLBs incorrectly verified'
+          assert report['physicalGLBVerificationRequired'] is True, 'Missing physical release guard'
+          print('PASS: real model bytes absent -> production release remains blocked')
+          PY
