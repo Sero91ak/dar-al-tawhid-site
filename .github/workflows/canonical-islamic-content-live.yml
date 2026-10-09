@@ -10,6 +10,8 @@ on:
     branches:
       - main
     paths:
+      - content/posts/**
+      - scripts/adult-content-publication-guard.js
       - apple-tv/hadith/**
       - apple-tv/quran/tadabbur/**
       - apple-tv/catalog.json
@@ -22,10 +24,11 @@ on:
       - .github/workflows/canonical-islamic-content-live.yml
 
 permissions:
-  contents: read
+  contents: write
+  issues: write
 
 concurrency:
-  group: dar-al-tawhid-apple-tv-canonical
+  group: dar-al-tawhid-production-worker-deploy
   cancel-in-progress: false
 
 jobs:
@@ -50,10 +53,72 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Autonome Beiträge bestimmen
+        if: github.event_name == 'push'
+        shell: bash
+        run: |
+          BASE="${{ github.event.before }}"
+          {
+            echo "CHANGED_POST_FILES<<ADULT_POSTS_EOF"
+            if [ -n "$BASE" ] && git cat-file -e "$BASE^{commit}" 2>/dev/null; then
+              git diff --diff-filter=A --name-only "$BASE" "${{ github.sha }}" -- 'content/posts/*.md'
+            fi
+            echo "ADULT_POSTS_EOF"
+          } >> "$GITHUB_ENV"
+
+      - name: Auto-Publisher und Dublettenprüfung testen
+        run: node scripts/adult-content-publication-guard.js --self-test
+
+      - name: Neue Ḥadīṯe und Āṯār prüfen und synchronisieren
+        id: adult_sync
+        continue-on-error: true
+        env:
+          AUTOPUBLISH_REPORT_PATH: ${{ runner.temp }}/adult-publication.json
+        run: node scripts/adult-content-publication-guard.js --sync
+
+      - name: Bei Dubletten oder fehlendem Šarḥ Nutzer informieren
+        if: steps.adult_sync.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPORT: ${{ runner.temp }}/adult-publication.json
+        shell: bash
+        run: |
+          title="Beitrag blockiert: Apple TV / globaler Dubletten- und Quellencheck"
+          if [ -s "$REPORT" ]; then
+            content="$(cat "$REPORT")"
+          else
+            content="Auto-Veröffentlichung schlug vor der Berichtserstellung fehl. Bitte den Workflow prüfen."
+          fi
+          printf '## Automatische Veröffentlichungsprüfung\n\n%s\n\nRun: %s/%s/actions/runs/%s\n' "$content" "$GITHUB_SERVER_URL" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID" > /tmp/adult-publish-issue.md
+          gh issue create --title "$title" --body-file /tmp/adult-publish-issue.md || true
+          echo "::error::Neuer Beitrag abgelehnt: Duplikat, Quellenmangel oder fehlender Šarḥ. GitHub-Issue wurde angefordert."
+          exit 1
+
       - name: Kataloge aus Dateien neu aufbauen
         run: |
           node scripts/rebuild-canonical-islamic-content.js
           node scripts/validate-canonical-content.js
+
+      - name: Apple-TV-Inhalte als eigene Spur auf main festschreiben
+        if: github.event_name == 'push'
+        shell: bash
+        env:
+          AUTOPUBLISH_REPORT_PATH: ${{ runner.temp }}/adult-publication.json
+        run: |
+          created="$(node -e "const f=require('fs');const p=process.env.AUTOPUBLISH_REPORT_PATH;console.log(f.existsSync(p)?(JSON.parse(f.readFileSync(p)).created||[]).length:0)")"
+          if [ "$created" -eq 0 ]; then
+            echo "Kein neuer Apple-TV-Datensatz – kein zusätzlicher Commit."
+            exit 0
+          fi
+          git config user.name "dar-al-tawhid-content-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apple-tv/hadith/series apple-tv/hadith/catalog.json apple-tv/hadith/manifest.json apple-tv/hadith/sync-status.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Apple TV: neue geprüfte Erwachsenen-Aussagen automatisch synchronisiert"
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
+          echo "Apple-TV-Spur im Repository veröffentlicht; ohne Besucher-Push."
 
       - name: Test-App Staging aus test-library-canonical übernehmen
         run: |
