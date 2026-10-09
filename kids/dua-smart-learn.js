@@ -173,6 +173,8 @@
     var words=stripArabicPunct(dua.audioArabicText||dua.arabic||"");
     var old=Array.isArray(dua.learningSegments)?dua.learningSegments:[];
     var trans=alignTranslit(dua.transliteration||"",words.length);
+    var phonetic=(window.DARKidsDuaPhoneticAlignment&&window.DARKidsDuaPhoneticAlignment.get)?
+      window.DARKidsDuaPhoneticAlignment.get(dua,words):null;
     var reviewed=(window.DARKidsDuaWordMeanings&&window.DARKidsDuaWordMeanings.get)?
       window.DARKidsDuaWordMeanings.get(dua,words):null;
     return words.map(function(word,i){
@@ -180,7 +182,7 @@
       return {
         index:i,
         arabic:word,
-        transliteration:norm(row.transliteration||trans[i]||""),
+        transliteration:norm(row.transliteration||(phonetic&&phonetic[i])||trans[i]||""),
         german:String(row.german||row.meaning||(reviewed&&reviewed[i])||"").trim(),
         audioKey:word,
         audioUrl:String(row.audioUrl||"")
