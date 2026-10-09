@@ -138,6 +138,20 @@ html body .dsl .dsl-german-current{
   padding:0!important;
 }
 html body .dsl.dsl-reviewed-words .dsl-german-current{display:none!important}
+html body .dsl.dsl-reviewed-words.dsl-long-content .dsl-german-current{
+  display:block!important;
+  flex:0 0 auto!important;
+  margin:1px 0 0!important;
+  padding:3px 4px!important;
+  min-height:18px!important;
+  border-radius:9px!important;
+  color:#ffe7a2!important;
+  background:rgba(207,159,69,.07)!important;
+  white-space:normal!important;
+  overflow-wrap:break-word!important;
+  font-size:clamp(11px,2.6vw,12.5px)!important;
+  line-height:1.24!important
+}
 html body .dsl .dsl-bottom-block{
   border-top:0!important;
   padding-top:5px!important;
