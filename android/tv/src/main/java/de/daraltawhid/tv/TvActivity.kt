@@ -135,8 +135,44 @@ class TvActivity : Activity() {
             show("home")
             body.getChildAt(2)?.requestFocus()
         })
-        val prayerTimesLabel = label("Lade aktuelle Gebetszeiten …", 19f, cream, false)
-        body.addView(prayerTimesLabel)
+        // 16:9 / 10-foot TV: each prayer has its own equal-width card.
+        // A single joined TextView wrapped ʿIšāʾ into a second line on actual TVs.
+        val prayerRow = LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL
+            setPadding(0, dp(12), 0, dp(13))
+        }
+        val names = listOf(
+            "fajr" to "Faǧr",
+            "dhuhr" to "Ẓuhr",
+            "asr" to "ʿAṣr",
+            "maghrib" to "Maġrib",
+            "isha" to "ʿIšāʾ"
+        )
+        val prayerValues = mutableMapOf<String, TextView>()
+        names.forEach { (key, display) ->
+            val tile = LinearLayout(this).apply {
+                orientation = LinearLayout.VERTICAL
+                gravity = Gravity.CENTER
+                setPadding(dp(6), dp(8), dp(6), dp(8))
+                background = panelBackground()
+            }
+            tile.addView(label(display, 17f, gold, true).apply {
+                gravity = Gravity.CENTER
+                setSingleLine(true)
+            })
+            val time = label("--:--", 25f, cream, true).apply {
+                gravity = Gravity.CENTER
+                setSingleLine(true)
+                includeFontPadding = false
+            }
+            prayerValues[key] = time
+            tile.addView(time)
+            prayerRow.addView(tile, LinearLayout.LayoutParams(0, dp(105), 1f).apply {
+                marginStart = dp(4)
+                marginEnd = dp(4)
+            })
+        }
+        body.addView(prayerRow)
         val city = cities[cityIndex]
         val url = "https://dar-al-tawhid.de/api/prayer/times?lat=${city.second}&lon=${city.third}"
         fetchJson(url) { data ->
@@ -146,19 +182,11 @@ class TvActivity : Activity() {
                 ?: data?.optJSONObject("data")
                 ?: data
             if (root == null) {
-                prayerTimesLabel.text = "Gebetszeiten momentan nicht erreichbar. Gespeicherte Inhalte bleiben verfügbar."
-                prayerTimesLabel.setTextColor(muted)
+                prayerValues.values.forEach { it.text = "--:--" }
+                body.addView(label("Gebetszeiten momentan nicht erreichbar – die letzte Stadt bleibt gespeichert.", 15f, muted, false))
                 return@fetchJson
             }
-            val lines = mutableListOf<String>()
-            val names = listOf(
-                "fajr" to "Faǧr",
-                "dhuhr" to "Ẓuhr",
-                "asr" to "ʿAṣr",
-                "maghrib" to "Maġrib",
-                "isha" to "ʿIšāʾ"
-            )
-            for ((key, display) in names) {
+            for ((key, _) in names) {
                 // The public /api/prayer/times endpoint returns
                 // {"fajr":{"name":"Fajr","time":"05:32"}}, not plain strings.
                 val record = root.opt(key) ?: root.opt(key.replaceFirstChar { it.uppercase() })
@@ -168,14 +196,8 @@ class TvActivity : Activity() {
                     else -> ""
                 }
                 val value = Regex("""\b(?:[01]?\d|2[0-3]):[0-5]\d\b""").find(raw)?.value
-                if (value != null) lines.add("$display   ·   $value")
+                prayerValues[key]?.text = value ?: "--:--"
             }
-            prayerTimesLabel.text =
-                if (lines.isEmpty()) "Zeitformat der Quelle muss noch angepasst werden."
-                else lines.joinToString("     ")
-            prayerTimesLabel.textSize = 24f
-            prayerTimesLabel.setTextColor(cream)
-            prayerTimesLabel.typeface = Typeface.create("sans-serif", Typeface.BOLD)
         }
         body.addView(label("Qurʾān und Tadabbur", 29f, gold, true))
         body.addView(label(
