@@ -224,7 +224,13 @@ function runKidsDesignGuard() {
         failed+=fail("Kids Duʿāʾ muss überprüfbare Quellen nur als lesbaren Text zeigen, ohne externen Nachweis-Button");
       }
       const kidsSw = fs.readFileSync(path.join(ROOT,"kids/sw.js"),"utf8");
-      for(const res of ["dua-hub-v1219.css?v="+swVersion,"dua-hub-v1219.js?v="+swVersion]){
+      // Die CSS-Datei folgt der Service-Worker-Version; der JS-Reader darf separat aktualisiert werden.
+      const kidsHome = fs.readFileSync(path.join(ROOT,"kids/index.html"),"utf8");
+      const readerScript = (kidsHome.match(/\/kids\/dua-hub-v1219\.js\?v=\d+/)||[])[0];
+      const offlineFiles = ["dua-hub-v1219.css?v="+swVersion];
+      if(readerScript)offlineFiles.push(readerScript.slice("/kids/".length));
+      else failed+=fail("Kids Duʿāʾ Reader Script-Verweis fehlt in kids/index.html");
+      for(const res of offlineFiles){
         if(!kidsSw.includes(res))failed+=fail("Kids Duʿāʾ Reader nicht offline-cached: "+res);
       }
       if(!doc.includes("KIDS_DUA_READER_HERO_INTRO_V1250")){
