@@ -110,7 +110,7 @@ function rebuildHadith() {
     schemaVersion: "1.3",
     sourceOfTruth: "/apple-tv/hadith/",
     liveURL: "https://dar-al-tawhid.de/apple-tv/hadith/catalog.json",
-    authenticOnly: true,
+    authenticOnly: false,
     supportedRecordTypes: ["hadith", "athar"],
     totalCount: allRecords.length,
     publishedCount: allRecords.length,
@@ -133,8 +133,12 @@ function rebuildHadith() {
       activation: "per-record-immediate"
     },
     policy: {
-      authenticOnly: true,
+      authenticOnly: false,
       requireVerifiedSharh: false,
+      newHadithMustHaveVerifiedSharh: true,
+      hadithRequireAuthenticity: true,
+      atharRequireAccurateIsnadStatus: true,
+      atharDoNotRequireSharh: true,
       screensaverShowsSharh: true,
       screensaverSharhMode: "compact",
       hadithLibraryShowsSharh: true,
@@ -152,6 +156,8 @@ function rebuildHadith() {
     manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
   }
   manifest.currentSeries = currentSeries;
+  manifest.authenticOnly = false;
+  manifest.contentPolicy = { hadithRequiresAuthenticatedSource: true, hadithRequiresVerifiedSharh: true, atharWithoutSharh: true, atharIsnadStatusDisclosure: true };
   manifest.nextId = catalog.nextId;
   manifest.readyThrough = latest;
   manifest.releasePolicy = manifest.releasePolicy || {};
