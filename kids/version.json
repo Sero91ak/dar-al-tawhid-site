@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v199-home-fresh1304",
-  "label": "KIDS · V1.09.20",
+  "buildId": "kids-shell-v200-home-stable1305",
+  "label": "KIDS · V1.09.21",
   "releasedAt": "2026-10-09T18:46:00Z",
-  "note": "KIDS V1.09.20: Startseiten-Höhe erhält immer die aktuelle, am realen Bildschirm und an der Tab-Leiste gemessene CSS/JS-Fassung, statt beim ersten Öffnen eine veraltete PWA-Kopie zu zeigen. CSS und JS des Gebetszeiten-/Startbildschirms werden network-first ausgeliefert, mit Offline-Cache als Rückfall. Proportionale Hero-Höhe, unverändertes Moscheebild, Startposition oben und bei physisch zu kleinen Displays zulässiges Scrollen bleiben erhalten.",
+  "note": "KIDS V1.09.21: Startbildschirm wird beim Öffnen anhand der realen Bildschirmhöhe und der festen unteren Tabnavigation ausgerichtet. Während manuellen Scrollens bleibt die berechnete Hero- und Gebetszeiten-Geometrie stabil; kein störendes Nachwachsen des Bildes. Auf iPhone, Android und iPad bleibt die bestehende flexible 1304-Geometrie, das freigegebene Moscheemotiv und alle fünf Gebetszeiten erhalten. Sehr kleine Geräte bleiben scrollbar.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1304",
+    "serviceWorkerCache": "v1305",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
