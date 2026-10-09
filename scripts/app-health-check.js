@@ -99,6 +99,67 @@ if (!quranPackProd.includes("retryCounts") || !quranPackProd.includes("have === 
   ok("Qurʾān-Audio-Pack: Retry-/Vollständigkeitsregel vorhanden");
 }
 
+// Execute representative functions from the actual runtime against isolated fakes.
+// These checks do not open or modify any player DOM or native preferences.
+function quranIsolate(name, names, mocks) {
+  const tag = "function " + name + "(";
+  const pos = quranPlayerProd.indexOf(tag);
+  if (pos < 0) throw new Error("Qurʾān-Player Funktion fehlt: " + name);
+  const start = quranPlayerProd.slice(pos - 6, pos) === "async " ? pos - 6 : pos;
+  const end = quranPlayerProd.indexOf("\n  }", pos);
+  if (end < 0) throw new Error("Qurʾān-Player Funktionsende fehlt: " + name);
+  return new Function(...names, "return (" + quranPlayerProd.slice(start, end + 4) + ");")(...mocks);
+}
+function quranRuntimeAssert(good, description) {
+  if (!good) fail("Qurʾān-Player Runtime-Test: " + description);
+  else ok("Qurʾān-Player Runtime-Test: " + description);
+}
+try {
+  const state = { surah: 36, ayah: 1, playing: false };
+  let calls = [];
+  const prev = quranIsolate("prevAyah",
+    ["state", "gotoAyah", "gotoSurah", "ayahCountHard", "logAudio"],
+    [state, (ayah) => calls.push(["ayah", ayah]),
+      (surah, ayah) => calls.push(["surah", surah, ayah]),
+      (surah) => surah === 35 ? 45 : 83, () => {}]);
+  prev();
+  quranRuntimeAssert(calls.length === 1 && calls[0][0] === "surah"
+    && calls[0][1] === 35 && calls[0][2] === 45,
+    "Vorherige Sūrah beginnt bei der letzten Āyah");
+  calls = [];
+  state.ayah = 3;
+  prev();
+  quranRuntimeAssert(calls.length === 1 && calls[0][0] === "ayah" && calls[0][1] === 2,
+    "Voriger Vers innerhalb der Sūrah");
+
+  const media = { ended: true, currentSrc: "/quran-audio/ar.alafasy/3706.mp3", getAttribute: () => "" };
+  const engine = { started: true, loadedSurah: 36, loadedAyah: 6 };
+  const verse = { surah: 36, ayah: 6 };
+  const actuallyEnded = quranIsolate("trackReallyFinished",
+    ["audioEl", "engine", "state", "ignoreEndedUntil", "logAudio", "snapAudio"],
+    [() => media, engine, verse, Date.now() + 5000, () => {}, () => ({})]);
+  quranRuntimeAssert(actuallyEnded(), "kurze Āyah wird trotz Schutzfenster beendet");
+  engine.loadedAyah = 5;
+  quranRuntimeAssert(!actuallyEnded(), "veraltetes Endsignal wird ignoriert");
+
+  const recoveryEngine = { wantPlay: true, recoveryCount: 0 };
+  const recoveryState = { playing: true, current: 3 };
+  let retries = 0, pauses = 0, errorPaints = 0;
+  const recover = quranIsolate("recoverPlayback",
+    ["engine", "state", "window", "clearStallRetry", "audioEl", "loadAudio",
+     "paintError", "paintChrome", "paintMini", "syncPublicAudioState", "logAudio", "snapAudio"],
+    [recoveryEngine, recoveryState, {}, () => {},
+     () => ({ currentTime: 3, pause: () => { pauses++; } }),
+     (play, keep, recovery) => { if (play && keep && recovery) retries++; },
+     () => { errorPaints++; }, () => {}, () => {}, () => {}, () => {}, () => ({})]);
+  for (let i = 0; i < 5; i++) recover("waiting");
+  quranRuntimeAssert(retries === 3 && pauses === 1 && errorPaints === 1
+    && recoveryEngine.wantPlay === false && recoveryState.playing === false,
+    "Wiedergabeversuche enden kontrolliert statt in Schleife");
+} catch (error) {
+  fail("Qurʾān-Player Runtime-Tests konnten nicht ausgeführt werden: " + error.message);
+}
+
 // Visitor app
 const indexHtml = read("index.html");
 if (!indexHtml.includes("function render(")) fail("index.html: render() fehlt");
