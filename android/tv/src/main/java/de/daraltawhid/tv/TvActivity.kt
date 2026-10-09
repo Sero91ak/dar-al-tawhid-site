@@ -117,6 +117,7 @@ class TvActivity : Activity() {
         when (tab) {
             "hadith" -> loadHadith()
             "tadabbur" -> loadTadabbur()
+            "locations" -> loadCities()
             else -> loadHome()
         }
     }
@@ -128,11 +129,9 @@ class TvActivity : Activity() {
             "TV-Geräte haben häufig keinen GPS-Empfänger. Stadt mit OK auswählen – die Wahl bleibt gespeichert.",
             16f, muted, false
         ))
-        body.addView(navButton("Stadt: ${cities[cityIndex].first}  ·  nächste Stadt") {
-            cityIndex = (cityIndex + 1) % cities.size
-            getPreferences(MODE_PRIVATE).edit().putInt("city_index", cityIndex).apply()
-            // Clear the previous home view before loading new times.
-            show("home")
+        body.addView(navButton("Stadt: ${cities[cityIndex].first}  ·  auswählen") {
+            show("locations")
+            // Move focus into the real city picker for D-pad and OK.
             body.getChildAt(2)?.requestFocus()
         })
         val prayerTimesLabel = label("Lade aktuelle Gebetszeiten …", 19f, cream, false)
@@ -186,6 +185,33 @@ class TvActivity : Activity() {
         body.addView(navButton("Qurʾān & Tadabbur öffnen") { show("tadabbur") })
         body.addView(label("Ḥadīṯ-Sammlung", 29f, gold, true))
         body.addView(navButton("Überlieferungen lesen") { show("hadith") })
+    }
+
+    private fun loadCities() {
+        body.addView(label("Stadt auswählen", 29f, gold, true))
+        body.addView(label(
+            "Mit ▲ und ▼ eine Stadt auswählen und mit OK bestätigen. " +
+                "Die Gebetszeiten werden danach nur für die ausgewählte Stadt neu geladen.",
+            17f, muted, false
+        ))
+        cities.forEachIndexed { index, city ->
+            val selected = index == cityIndex
+            body.addView(navButton(
+                (if (selected) "✓  " else "") + city.first +
+                    if (selected) "   ·   ausgewählt" else ""
+            ) {
+                cityIndex = index
+                getPreferences(MODE_PRIVATE).edit()
+                    .putInt("city_index", index)
+                    .apply()
+                show("home")
+                body.getChildAt(2)?.requestFocus()
+            })
+        }
+        body.addView(navButton("◀ Zurück zu Gebetszeiten") {
+            show("home")
+            body.getChildAt(2)?.requestFocus()
+        })
     }
 
     private fun loadHadith() {
