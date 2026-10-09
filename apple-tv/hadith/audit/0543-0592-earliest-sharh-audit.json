@@ -1,368 +1,395 @@
 {
-  "project": "DAR AL TAWḤĪD · Ḥadīṯ und Āṯār",
+  "project": "DAR AL TAWḤĪD – Ḥadīṯ/Āṯār Quellenprüfung",
   "range": "HAD-0543–HAD-0592",
   "auditedDate": "2026-10-09",
   "totalInspected": 50,
   "hadithCount": 20,
   "atharCount": 30,
-  "hadithSharhVerified": 14,
-  "hadithSharhOpen": 6,
-  "atharAttributionVerified": 2,
-  "atharAttributionOpen": 28,
-  "openTotal": 34,
-  "sourceOfTruth": "apple-tv/hadith/series/",
+  "hadithSharhVerified": 19,
+  "hadithSharhOpen": 1,
+  "atharAttributionVerified": 1,
+  "atharAttributionOpen": 29,
+  "openTotal": 30,
   "policy": {
-    "hadith": "Nur authentischer Primärbericht mit direkt klassisch-arabischem Šarḥ",
-    "athar": "Kein Šarḥ nötig; genaue Originalaussage und glaubhaft belegter Isnād/Zuschreibung erforderlich",
-    "noGuessedEdition": true,
-    "printEditionIfUnidentified": null,
-    "noCycleInSemanticDuplicateOf": true,
-    "concurrentCommitSafety": "Vor jedem Schreibschritt aktuellen Blob-SHA lesen",
-    "globalLiveProof": "GitHub Actions Erfolg + echter HTTP-Abruf für jeweilige Erwachsenen-Oberfläche"
+    "sourceOfTruth": "apple-tv/hadith/series/",
+    "atharSharhNotRequired": true,
+    "individualAtharAttributionAndIsnadRequired": true,
+    "verifiedHadithMustHaveDirectClassicalArabicSharh": true,
+    "noInventedPagesOrPrintEditions": true,
+    "duplicateChainsNotIdentical": true,
+    "requiresPrimaryTextComparison": true
   },
-  "risks": [
+  "riskNotes": [
     {
       "id": "HAD-0554",
-      "kind": "chain-review",
-      "note": "Gleicher Ausspruch wie HAD-0463; bei frühen Ḥadīṯkritikern mursal-Fassung stärker; nicht als verified deklarieren."
+      "kind": "mursal-versus-marfu",
+      "status": "needs-review",
+      "description": "Von Abū Hurayrah überlieferter Satz 'min ḥusn islām al-marʾ tarkuhu mā lā yaʿnīh' bei at-Tirmiḏī; Ibn Raǧab bevorzugt frühen mursal-Weg, nicht als zweifelsfrei marfūʿ abschließen."
     },
     {
-      "range": "HAD-0543–0550; HAD-0571–0592",
-      "kind": "athar-attribution-review",
-      "note": "30 Āṯār mit häufig allgemeinen Quellennennungen; keine blinde Echtheitsannahme."
+      "id": "HAD-0584",
+      "kind": "possible-record-type-issue",
+      "status": "needs-review",
+      "description": "Datensatz als athar geführt, beschreibt aber den authentischen Ḥuḏayfah-Bericht von Buḫārī/Muslim; genaues Rubrizierungsprinzip und Quellentext vor Änderung prüfen."
+    },
+    {
+      "id": "HAD-0591",
+      "kind": "verified-athar",
+      "status": "verified",
+      "description": "Ausspruch von Muḥammad ibn Sīrīn als maqtūʿ mit direktem Muslim-Muqaddimah-Isnād, nicht als prophetischer Ḥadīṯ; Überschneidung HAD-0491."
     }
   ],
-  "nextAction": "Noch 6 Ḥadīṯ-Kommentare und 28 Āṯār-Zuschreibungen im Block HAD-0543–0592 offen. Danach HAD-0593–0642 fortsetzen; keine ungesicherten Isnād automatisch verifizieren.",
+  "nextAction": "1 Ḥadīṯ-Fall HAD-0554 mit unterbrochener marfūʿ-Überlieferung und 29 offene Āṯār-Attributionen prüfen; danach HAD-0593–0642 nächster 50er-Block. Druckeditionen nur bei unabhängiger Bestätigung eintragen.",
   "entries": [
     {
       "id": "HAD-0543",
       "recordType": "athar",
       "sharh": "not-required",
       "attribution": "needs-review",
-      "sourceAudit": "Arabische Primärquelle, Sprecher und Isnād bislang nicht einzeln nachgewiesen. Auch bei mutmaßlichen Parallelen nicht automatisch als authentisch zählen."
+      "sourceAudit": "Genaue arabische Primärstelle, Sprecher, vollständigen Isnād und individuellen Überlieferungsstatus zunächst nachweisen"
     },
     {
       "id": "HAD-0544",
       "recordType": "athar",
       "sharh": "not-required",
       "attribution": "needs-review",
-      "sourceAudit": "Arabische Primärquelle, Sprecher und Isnād bislang nicht einzeln nachgewiesen. Auch bei mutmaßlichen Parallelen nicht automatisch als authentisch zählen."
+      "sourceAudit": "Genaue arabische Primärstelle, Sprecher, vollständigen Isnād und individuellen Überlieferungsstatus zunächst nachweisen"
     },
     {
       "id": "HAD-0545",
       "recordType": "athar",
       "sharh": "not-required",
       "attribution": "needs-review",
-      "sourceAudit": "Arabische Primärquelle, Sprecher und Isnād bislang nicht einzeln nachgewiesen. Auch bei mutmaßlichen Parallelen nicht automatisch als authentisch zählen."
+      "sourceAudit": "Genaue arabische Primärstelle, Sprecher, vollständigen Isnād und individuellen Überlieferungsstatus zunächst nachweisen"
     },
     {
       "id": "HAD-0546",
       "recordType": "athar",
       "sharh": "not-required",
       "attribution": "needs-review",
-      "sourceAudit": "Arabische Primärquelle, Sprecher und Isnād bislang nicht einzeln nachgewiesen. Auch bei mutmaßlichen Parallelen nicht automatisch als authentisch zählen."
+      "sourceAudit": "Genaue arabische Primärstelle, Sprecher, vollständigen Isnād und individuellen Überlieferungsstatus zunächst nachweisen"
     },
     {
       "id": "HAD-0547",
       "recordType": "athar",
       "sharh": "not-required",
       "attribution": "needs-review",
-      "sourceAudit": "Arabische Primärquelle, Sprecher und Isnād bislang nicht einzeln nachgewiesen. Auch bei mutmaßlichen Parallelen nicht automatisch als authentisch zählen."
+      "sourceAudit": "Genaue arabische Primärstelle, Sprecher, vollständigen Isnād und individuellen Überlieferungsstatus zunächst nachweisen"
     },
     {
       "id": "HAD-0548",
       "recordType": "athar",
       "sharh": "not-required",
       "attribution": "needs-review",
-      "sourceAudit": "Arabische Primärquelle, Sprecher und Isnād bislang nicht einzeln nachgewiesen. Auch bei mutmaßlichen Parallelen nicht automatisch als authentisch zählen."
+      "sourceAudit": "Genaue arabische Primärstelle, Sprecher, vollständigen Isnād und individuellen Überlieferungsstatus zunächst nachweisen"
     },
     {
       "id": "HAD-0549",
       "recordType": "athar",
       "sharh": "not-required",
       "attribution": "needs-review",
-      "sourceAudit": "Arabische Primärquelle, Sprecher und Isnād bislang nicht einzeln nachgewiesen. Auch bei mutmaßlichen Parallelen nicht automatisch als authentisch zählen."
+      "sourceAudit": "Genaue arabische Primärstelle, Sprecher, vollständigen Isnād und individuellen Überlieferungsstatus zunächst nachweisen"
     },
     {
       "id": "HAD-0550",
       "recordType": "athar",
       "sharh": "not-required",
       "attribution": "needs-review",
-      "sourceAudit": "Arabische Primärquelle, Sprecher und Isnād bislang nicht einzeln nachgewiesen. Auch bei mutmaßlichen Parallelen nicht automatisch als authentisch zählen."
+      "sourceAudit": "Genaue arabische Primärstelle, Sprecher, vollständigen Isnād und individuellen Überlieferungsstatus zunächst nachweisen"
     },
     {
       "id": "HAD-0551",
       "recordType": "hadith",
       "sharh": "verified",
-      "statusNote": "Authentischer Primärtext und direkt einschlägiger klassischer arabischer Kommentar mit digitaler Werkpagination im HAD-Datensatz; konkreter Druckeditionsnachweis weiterhin offen."
+      "attribution": null,
+      "sourceAudit": "Klassischer arabischer Direktkommentar im HAD-Datensatz dokumentiert; konkrete Druckedition teilweise offen"
     },
     {
       "id": "HAD-0552",
       "recordType": "hadith",
       "sharh": "verified",
-      "statusNote": "Authentischer Primärtext und direkt einschlägiger klassischer arabischer Kommentar mit digitaler Werkpagination im HAD-Datensatz; konkreter Druckeditionsnachweis weiterhin offen."
+      "attribution": null,
+      "sourceAudit": "Klassischer arabischer Direktkommentar im HAD-Datensatz dokumentiert; konkrete Druckedition teilweise offen"
     },
     {
       "id": "HAD-0553",
       "recordType": "hadith",
       "sharh": "verified",
-      "statusNote": "Authentischer Primärtext und direkt einschlägiger klassischer arabischer Kommentar mit digitaler Werkpagination im HAD-Datensatz; konkreter Druckeditionsnachweis weiterhin offen."
+      "attribution": null,
+      "sourceAudit": "Klassischer arabischer Direktkommentar im HAD-Datensatz dokumentiert; konkrete Druckedition teilweise offen"
     },
     {
       "id": "HAD-0554",
       "recordType": "hadith",
-      "sharh": "open-source-review",
-      "statusNote": "Arabischen Originaltext, Primärnummer, Isnāde und direkt einschlägigen klassischen Šarḥ noch punktgenau prüfen."
+      "sharh": "needs-review",
+      "attribution": null,
+      "sourceAudit": "Ṯirmiḏī/Ibn-Māǧah-Überlieferungswege und bevorzugte mursal-Fassung quellenkritisch untersuchen; ohne nachgewiesen sicheren marfūʿ-Isnād nicht als verified ausgeben."
     },
     {
       "id": "HAD-0555",
       "recordType": "hadith",
       "sharh": "verified",
-      "statusNote": "Authentischer Primärtext und direkt einschlägiger klassischer arabischer Kommentar mit digitaler Werkpagination im HAD-Datensatz; konkreter Druckeditionsnachweis weiterhin offen."
+      "attribution": null,
+      "sourceAudit": "Klassischer arabischer Direktkommentar im HAD-Datensatz dokumentiert; konkrete Druckedition teilweise offen"
     },
     {
       "id": "HAD-0556",
       "recordType": "hadith",
-      "sharh": "open-source-review",
-      "statusNote": "Arabischen Originaltext, Primärnummer, Isnāde und direkt einschlägigen klassischen Šarḥ noch punktgenau prüfen."
+      "sharh": "verified",
+      "attribution": null,
+      "sourceAudit": "Klassischer arabischer Direktkommentar im HAD-Datensatz dokumentiert; konkrete Druckedition teilweise offen"
     },
     {
       "id": "HAD-0557",
       "recordType": "hadith",
       "sharh": "verified",
-      "statusNote": "Authentischer Primärtext und direkt einschlägiger klassischer arabischer Kommentar mit digitaler Werkpagination im HAD-Datensatz; konkreter Druckeditionsnachweis weiterhin offen."
+      "attribution": null,
+      "sourceAudit": "Klassischer arabischer Direktkommentar im HAD-Datensatz dokumentiert; konkrete Druckedition teilweise offen"
     },
     {
       "id": "HAD-0558",
       "recordType": "hadith",
       "sharh": "verified",
-      "statusNote": "Authentischer Primärtext und direkt einschlägiger klassischer arabischer Kommentar mit digitaler Werkpagination im HAD-Datensatz; konkreter Druckeditionsnachweis weiterhin offen."
+      "attribution": null,
+      "sourceAudit": "Klassischer arabischer Direktkommentar im HAD-Datensatz dokumentiert; konkrete Druckedition teilweise offen"
     },
     {
       "id": "HAD-0559",
       "recordType": "hadith",
       "sharh": "verified",
-      "statusNote": "Authentischer Primärtext und direkt einschlägiger klassischer arabischer Kommentar mit digitaler Werkpagination im HAD-Datensatz; konkreter Druckeditionsnachweis weiterhin offen."
+      "attribution": null,
+      "sourceAudit": "Klassischer arabischer Direktkommentar im HAD-Datensatz dokumentiert; konkrete Druckedition teilweise offen"
     },
     {
       "id": "HAD-0560",
       "recordType": "hadith",
       "sharh": "verified",
-      "statusNote": "Authentischer Primärtext und direkt einschlägiger klassischer arabischer Kommentar mit digitaler Werkpagination im HAD-Datensatz; konkreter Druckeditionsnachweis weiterhin offen."
+      "attribution": null,
+      "sourceAudit": "Klassischer arabischer Direktkommentar im HAD-Datensatz dokumentiert; konkrete Druckedition teilweise offen"
     },
     {
       "id": "HAD-0561",
       "recordType": "hadith",
-      "sharh": "open-source-review",
-      "statusNote": "Arabischen Originaltext, Primärnummer, Isnāde und direkt einschlägigen klassischen Šarḥ noch punktgenau prüfen."
+      "sharh": "verified",
+      "attribution": null,
+      "sourceAudit": "Klassischer arabischer Direktkommentar im HAD-Datensatz dokumentiert; konkrete Druckedition teilweise offen"
     },
     {
       "id": "HAD-0562",
       "recordType": "hadith",
       "sharh": "verified",
-      "statusNote": "Authentischer Primärtext und direkt einschlägiger klassischer arabischer Kommentar mit digitaler Werkpagination im HAD-Datensatz; konkreter Druckeditionsnachweis weiterhin offen."
+      "attribution": null,
+      "sourceAudit": "Klassischer arabischer Direktkommentar im HAD-Datensatz dokumentiert; konkrete Druckedition teilweise offen"
     },
     {
       "id": "HAD-0563",
       "recordType": "hadith",
       "sharh": "verified",
-      "statusNote": "Authentischer Primärtext und direkt einschlägiger klassischer arabischer Kommentar mit digitaler Werkpagination im HAD-Datensatz; konkreter Druckeditionsnachweis weiterhin offen."
+      "attribution": null,
+      "sourceAudit": "Klassischer arabischer Direktkommentar im HAD-Datensatz dokumentiert; konkrete Druckedition teilweise offen"
     },
     {
       "id": "HAD-0564",
       "recordType": "hadith",
       "sharh": "verified",
-      "statusNote": "Authentischer Primärtext und direkt einschlägiger klassischer arabischer Kommentar mit digitaler Werkpagination im HAD-Datensatz; konkreter Druckeditionsnachweis weiterhin offen."
+      "attribution": null,
+      "sourceAudit": "Klassischer arabischer Direktkommentar im HAD-Datensatz dokumentiert; konkrete Druckedition teilweise offen"
     },
     {
       "id": "HAD-0565",
       "recordType": "hadith",
       "sharh": "verified",
-      "statusNote": "Authentischer Primärtext und direkt einschlägiger klassischer arabischer Kommentar mit digitaler Werkpagination im HAD-Datensatz; konkreter Druckeditionsnachweis weiterhin offen."
+      "attribution": null,
+      "sourceAudit": "Klassischer arabischer Direktkommentar im HAD-Datensatz dokumentiert; konkrete Druckedition teilweise offen"
     },
     {
       "id": "HAD-0566",
       "recordType": "hadith",
       "sharh": "verified",
-      "statusNote": "Authentischer Primärtext und direkt einschlägiger klassischer arabischer Kommentar mit digitaler Werkpagination im HAD-Datensatz; konkreter Druckeditionsnachweis weiterhin offen."
+      "attribution": null,
+      "sourceAudit": "Klassischer arabischer Direktkommentar im HAD-Datensatz dokumentiert; konkrete Druckedition teilweise offen"
     },
     {
       "id": "HAD-0567",
       "recordType": "hadith",
       "sharh": "verified",
-      "statusNote": "Originalwortlaut Buḫārī und direkter Ibn-Ḥaǧar-Kommentar Bd. 8 digitale S. 694 samt Hörer-Kettenkritik dokumentiert; Druckedition offen."
+      "attribution": null,
+      "sourceAudit": "Klassischer arabischer Direktkommentar im HAD-Datensatz dokumentiert; konkrete Druckedition teilweise offen"
     },
     {
       "id": "HAD-0568",
       "recordType": "hadith",
-      "sharh": "open-source-review",
-      "statusNote": "Arabischen Originaltext, Primärnummer, Isnāde und direkt einschlägigen klassischen Šarḥ noch punktgenau prüfen."
+      "sharh": "verified",
+      "attribution": null,
+      "sourceAudit": "Klassischer arabischer Direktkommentar im HAD-Datensatz dokumentiert; konkrete Druckedition teilweise offen"
     },
     {
       "id": "HAD-0569",
       "recordType": "hadith",
-      "sharh": "open-source-review",
-      "statusNote": "Arabischen Originaltext, Primärnummer, Isnāde und direkt einschlägigen klassischen Šarḥ noch punktgenau prüfen."
+      "sharh": "verified",
+      "attribution": null,
+      "sourceAudit": "Klassischer arabischer Direktkommentar im HAD-Datensatz dokumentiert; konkrete Druckedition teilweise offen"
     },
     {
       "id": "HAD-0570",
       "recordType": "hadith",
-      "sharh": "open-source-review",
-      "statusNote": "Arabischen Originaltext, Primärnummer, Isnāde und direkt einschlägigen klassischen Šarḥ noch punktgenau prüfen."
+      "sharh": "verified",
+      "attribution": null,
+      "sourceAudit": "Klassischer arabischer Direktkommentar im HAD-Datensatz dokumentiert; konkrete Druckedition teilweise offen"
     },
     {
       "id": "HAD-0571",
       "recordType": "athar",
       "sharh": "not-required",
       "attribution": "needs-review",
-      "sourceAudit": "Arabische Primärquelle, Sprecher und Isnād bislang nicht einzeln nachgewiesen. Auch bei mutmaßlichen Parallelen nicht automatisch als authentisch zählen."
+      "sourceAudit": "Genaue arabische Primärstelle, Sprecher, vollständigen Isnād und individuellen Überlieferungsstatus zunächst nachweisen"
     },
     {
       "id": "HAD-0572",
       "recordType": "athar",
       "sharh": "not-required",
       "attribution": "needs-review",
-      "sourceAudit": "Arabische Primärquelle, Sprecher und Isnād bislang nicht einzeln nachgewiesen. Auch bei mutmaßlichen Parallelen nicht automatisch als authentisch zählen."
+      "sourceAudit": "Genaue arabische Primärstelle, Sprecher, vollständigen Isnād und individuellen Überlieferungsstatus zunächst nachweisen"
     },
     {
       "id": "HAD-0573",
       "recordType": "athar",
       "sharh": "not-required",
       "attribution": "needs-review",
-      "sourceAudit": "Arabische Primärquelle, Sprecher und Isnād bislang nicht einzeln nachgewiesen. Auch bei mutmaßlichen Parallelen nicht automatisch als authentisch zählen."
+      "sourceAudit": "Genaue arabische Primärstelle, Sprecher, vollständigen Isnād und individuellen Überlieferungsstatus zunächst nachweisen"
     },
     {
       "id": "HAD-0574",
       "recordType": "athar",
       "sharh": "not-required",
       "attribution": "needs-review",
-      "sourceAudit": "Arabische Primärquelle, Sprecher und Isnād bislang nicht einzeln nachgewiesen. Auch bei mutmaßlichen Parallelen nicht automatisch als authentisch zählen."
+      "sourceAudit": "Genaue arabische Primärstelle, Sprecher, vollständigen Isnād und individuellen Überlieferungsstatus zunächst nachweisen"
     },
     {
       "id": "HAD-0575",
       "recordType": "athar",
       "sharh": "not-required",
       "attribution": "needs-review",
-      "sourceAudit": "Arabische Primärquelle, Sprecher und Isnād bislang nicht einzeln nachgewiesen. Auch bei mutmaßlichen Parallelen nicht automatisch als authentisch zählen."
+      "sourceAudit": "Genaue arabische Primärstelle, Sprecher, vollständigen Isnād und individuellen Überlieferungsstatus zunächst nachweisen"
     },
     {
       "id": "HAD-0576",
       "recordType": "athar",
       "sharh": "not-required",
       "attribution": "needs-review",
-      "sourceAudit": "Arabische Primärquelle, Sprecher und Isnād bislang nicht einzeln nachgewiesen. Auch bei mutmaßlichen Parallelen nicht automatisch als authentisch zählen."
+      "sourceAudit": "Genaue arabische Primärstelle, Sprecher, vollständigen Isnād und individuellen Überlieferungsstatus zunächst nachweisen"
     },
     {
       "id": "HAD-0577",
       "recordType": "athar",
       "sharh": "not-required",
       "attribution": "needs-review",
-      "sourceAudit": "Arabische Primärquelle, Sprecher und Isnād bislang nicht einzeln nachgewiesen. Auch bei mutmaßlichen Parallelen nicht automatisch als authentisch zählen."
+      "sourceAudit": "Genaue arabische Primärstelle, Sprecher, vollständigen Isnād und individuellen Überlieferungsstatus zunächst nachweisen"
     },
     {
       "id": "HAD-0578",
       "recordType": "athar",
       "sharh": "not-required",
       "attribution": "needs-review",
-      "sourceAudit": "Arabische Primärquelle, Sprecher und Isnād bislang nicht einzeln nachgewiesen. Auch bei mutmaßlichen Parallelen nicht automatisch als authentisch zählen."
+      "sourceAudit": "Genaue arabische Primärstelle, Sprecher, vollständigen Isnād und individuellen Überlieferungsstatus zunächst nachweisen"
     },
     {
       "id": "HAD-0579",
       "recordType": "athar",
       "sharh": "not-required",
       "attribution": "needs-review",
-      "sourceAudit": "Arabische Primärquelle, Sprecher und Isnād bislang nicht einzeln nachgewiesen. Auch bei mutmaßlichen Parallelen nicht automatisch als authentisch zählen."
+      "sourceAudit": "Genaue arabische Primärstelle, Sprecher, vollständigen Isnād und individuellen Überlieferungsstatus zunächst nachweisen"
     },
     {
       "id": "HAD-0580",
       "recordType": "athar",
       "sharh": "not-required",
       "attribution": "needs-review",
-      "sourceAudit": "Arabische Primärquelle, Sprecher und Isnād bislang nicht einzeln nachgewiesen. Auch bei mutmaßlichen Parallelen nicht automatisch als authentisch zählen."
+      "sourceAudit": "Genaue arabische Primärstelle, Sprecher, vollständigen Isnād und individuellen Überlieferungsstatus zunächst nachweisen"
     },
     {
       "id": "HAD-0581",
       "recordType": "athar",
       "sharh": "not-required",
       "attribution": "needs-review",
-      "sourceAudit": "Arabische Primärquelle, Sprecher und Isnād bislang nicht einzeln nachgewiesen. Auch bei mutmaßlichen Parallelen nicht automatisch als authentisch zählen."
+      "sourceAudit": "Genaue arabische Primärstelle, Sprecher, vollständigen Isnād und individuellen Überlieferungsstatus zunächst nachweisen"
     },
     {
       "id": "HAD-0582",
       "recordType": "athar",
       "sharh": "not-required",
-      "attribution": "verified",
-      "sourceAudit": "ʿAlī: Buḫārī Kitāb al-ʿIlm, ʿUbaydullāh ibn Mūsā → Maʿrūf → Abū aṭ-Ṭufayl → ʿAlī; Parallele HAD-0488"
+      "attribution": "needs-review",
+      "sourceAudit": "Genaue arabische Primärstelle, Sprecher, vollständigen Isnād und individuellen Überlieferungsstatus zunächst nachweisen"
     },
     {
       "id": "HAD-0583",
       "recordType": "athar",
       "sharh": "not-required",
       "attribution": "needs-review",
-      "sourceAudit": "Arabische Primärquelle, Sprecher und Isnād bislang nicht einzeln nachgewiesen. Auch bei mutmaßlichen Parallelen nicht automatisch als authentisch zählen."
+      "sourceAudit": "Genaue arabische Primärstelle, Sprecher, vollständigen Isnād und individuellen Überlieferungsstatus zunächst nachweisen"
     },
     {
       "id": "HAD-0584",
       "recordType": "athar",
       "sharh": "not-required",
       "attribution": "needs-review",
-      "sourceAudit": "Arabische Primärquelle, Sprecher und Isnād bislang nicht einzeln nachgewiesen. Auch bei mutmaßlichen Parallelen nicht automatisch als authentisch zählen."
+      "sourceAudit": "Genaue arabische Primärstelle, Sprecher, vollständigen Isnād und individuellen Überlieferungsstatus zunächst nachweisen"
     },
     {
       "id": "HAD-0585",
       "recordType": "athar",
       "sharh": "not-required",
       "attribution": "needs-review",
-      "sourceAudit": "Arabische Primärquelle, Sprecher und Isnād bislang nicht einzeln nachgewiesen. Auch bei mutmaßlichen Parallelen nicht automatisch als authentisch zählen."
+      "sourceAudit": "Genaue arabische Primärstelle, Sprecher, vollständigen Isnād und individuellen Überlieferungsstatus zunächst nachweisen"
     },
     {
       "id": "HAD-0586",
       "recordType": "athar",
       "sharh": "not-required",
       "attribution": "needs-review",
-      "sourceAudit": "Arabische Primärquelle, Sprecher und Isnād bislang nicht einzeln nachgewiesen. Auch bei mutmaßlichen Parallelen nicht automatisch als authentisch zählen."
+      "sourceAudit": "Genaue arabische Primärstelle, Sprecher, vollständigen Isnād und individuellen Überlieferungsstatus zunächst nachweisen"
     },
     {
       "id": "HAD-0587",
       "recordType": "athar",
       "sharh": "not-required",
       "attribution": "needs-review",
-      "sourceAudit": "Arabische Primärquelle, Sprecher und Isnād bislang nicht einzeln nachgewiesen. Auch bei mutmaßlichen Parallelen nicht automatisch als authentisch zählen."
+      "sourceAudit": "Genaue arabische Primärstelle, Sprecher, vollständigen Isnād und individuellen Überlieferungsstatus zunächst nachweisen"
     },
     {
       "id": "HAD-0588",
       "recordType": "athar",
       "sharh": "not-required",
       "attribution": "needs-review",
-      "sourceAudit": "Arabische Primärquelle, Sprecher und Isnād bislang nicht einzeln nachgewiesen. Auch bei mutmaßlichen Parallelen nicht automatisch als authentisch zählen."
+      "sourceAudit": "Genaue arabische Primärstelle, Sprecher, vollständigen Isnād und individuellen Überlieferungsstatus zunächst nachweisen"
     },
     {
       "id": "HAD-0589",
       "recordType": "athar",
       "sharh": "not-required",
       "attribution": "needs-review",
-      "sourceAudit": "Arabische Primärquelle, Sprecher und Isnād bislang nicht einzeln nachgewiesen. Auch bei mutmaßlichen Parallelen nicht automatisch als authentisch zählen."
+      "sourceAudit": "Genaue arabische Primärstelle, Sprecher, vollständigen Isnād und individuellen Überlieferungsstatus zunächst nachweisen"
     },
     {
       "id": "HAD-0590",
       "recordType": "athar",
       "sharh": "not-required",
       "attribution": "needs-review",
-      "sourceAudit": "Arabische Primärquelle, Sprecher und Isnād bislang nicht einzeln nachgewiesen. Auch bei mutmaßlichen Parallelen nicht automatisch als authentisch zählen."
+      "sourceAudit": "Genaue arabische Primärstelle, Sprecher, vollständigen Isnād und individuellen Überlieferungsstatus zunächst nachweisen"
     },
     {
       "id": "HAD-0591",
       "recordType": "athar",
       "sharh": "not-required",
       "attribution": "verified",
-      "sourceAudit": "Muḥammad ibn Sīrīn: Muslim Muqaddimah + Siyar 4/611, Ḥammād ibn Zayd → Ayyūb → Ibn Sīrīn; Parallele HAD-0491"
+      "sourceAudit": "Ibn Sīrīn, genaue Muslim-Muqaddimah-Überlieferung mit Kette Ḥasan ibn ar-Rabīʿ → Ḥammād ibn Zayd → Ayyūb/Hišām → Muḥammad ibn Sīrīn; ferner parallel Muḫlad ibn Ḥusayn → Hišām → Ibn Sīrīn; kein marfūʿ-Ḥadīṯ"
     },
     {
       "id": "HAD-0592",
       "recordType": "athar",
       "sharh": "not-required",
       "attribution": "needs-review",
-      "sourceAudit": "Arabische Primärquelle, Sprecher und Isnād bislang nicht einzeln nachgewiesen. Auch bei mutmaßlichen Parallelen nicht automatisch als authentisch zählen."
+      "sourceAudit": "Genaue arabische Primärstelle, Sprecher, vollständigen Isnād und individuellen Überlieferungsstatus zunächst nachweisen"
     }
   ]
 }
