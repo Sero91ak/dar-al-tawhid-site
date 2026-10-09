@@ -399,6 +399,12 @@ function publicWebsiteAddon() {
 #darIosAppStorePromo .dar-store-link{display:flex;align-items:center;gap:9px;min-height:46px;padding:0 15px;border:1px solid rgba(234,211,154,.26);border-radius:15px;background:#fffaf0;color:#15231f;text-decoration:none;font-size:10px;font-weight:850;letter-spacing:.02em;white-space:nowrap}
 #darIosAppStorePromo .dar-store-link svg{width:22px;height:22px;flex:0 0 auto}
 @media(max-width:680px){#darIosAppStorePromo.is-visible{grid-template-columns:40px minmax(0,1fr);gap:12px;padding:15px;border-radius:20px}#darIosAppStorePromo .dar-store-link{grid-column:1/3;justify-content:center;width:100%}}
+/* dar-public-tap-clean-v1 */
+html{-webkit-tap-highlight-color:transparent}
+a,button,[role="button"],summary,[tabindex],label{-webkit-tap-highlight-color:transparent}
+@media(hover:none) and (pointer:coarse){
+ a:focus,button:focus,[role="button"]:focus,summary:focus,[tabindex]:focus{outline:none}
+}
 .dar-download-fallback{padding:18px 0 34px}
 .dar-download-fallback__intro{padding:18px 0 20px;border-bottom:1px solid rgba(132,111,72,.18)}
 .dar-download-fallback__intro small{display:block;color:#8c6a2d;font-size:9px;font-weight:850;letter-spacing:.14em}
@@ -546,12 +552,14 @@ function publicWebsiteAddon() {
   function syncRouterInstallButtons(){
     try{
       var ready=!!(window.__darEarlyInstallPrompt||deferredInstall);
+      var installed=false;
+      try{installed=window.matchMedia("(display-mode: standalone)").matches}catch(e){}
       document.querySelectorAll("[data-dar-pwa-install]").forEach(function(btn){
         if(!btn.dataset.darInstallLabel)btn.dataset.darInstallLabel=btn.textContent||"Web-App installieren";
-        btn.disabled=!ready;
-        btn.setAttribute("aria-disabled",ready?"false":"true");
-        btn.setAttribute("data-dar-pwa-install-state",ready?"ready":"preparing");
-        var nextLabel=ready?btn.dataset.darInstallLabel:"Installation wird vorbereitet …";
+        btn.disabled=installed;
+        btn.setAttribute("aria-disabled",installed?"true":"false");
+        btn.setAttribute("data-dar-pwa-install-state",installed?"installed":(ready?"ready":"preparing"));
+        var nextLabel=installed?"Bereits installiert":btn.dataset.darInstallLabel;
         if(btn.textContent!==nextLabel)btn.textContent=nextLabel;
       });
     }catch(e){}
@@ -734,7 +742,7 @@ function publicWebsiteAddon() {
       var root=document.getElementById("pageRoot");
       if(!root)return;
       root.innerHTML='<section class="dar-download-fallback"><div class="dar-download-fallback__intro"><small>DOWNLOADS</small><h1>DĀR AL TAWḤĪD als App nutzen.</h1><p>Android als Web-App installieren oder die offizielle iOS-App im Apple App Store öffnen.</p></div><div class="dar-download-fallback__grid">'+
-        '<article class="dar-download-fallback__card"><div class="dar-download-fallback__head"><span class="dar-download-fallback__icon">'+androidLogoMarkup()+'</span><div><small>ANDROID · SMARTPHONE & TABLET</small><h2>Web-App installieren</h2></div></div><p>Die öffentliche DĀR AL TAWḤĪD Website lässt sich auf Android direkt wie eine App installieren. Keine APK nötig.</p><ol><li>In Chrome, Edge oder Samsung Internet öffnen.</li><li>Auf Web-App installieren tippen.</li><li>Der Installationsbutton wird aktiv, sobald Chrome den nativen Installationsdialog freigegeben hat.</li></ol><button class="dar-download-fallback__btn" type="button" data-dar-pwa-install>Web-App installieren</button>'+pwaIconPickerMarkup()+'</article>'+
+        '<article class="dar-download-fallback__card"><div class="dar-download-fallback__head"><span class="dar-download-fallback__icon">'+androidLogoMarkup()+'</span><div><small>ANDROID · SMARTPHONE & TABLET</small><h2>Web-App installieren</h2></div></div><p>Die öffentliche DĀR AL TAWḤĪD Website lässt sich auf Android direkt wie eine App installieren. Keine APK nötig.</p><ol><li>In Chrome, Edge oder Samsung Internet öffnen.</li><li>Auf Web-App installieren tippen.</li><li>Auf „Web-App installieren“ tippen – der native Android-Installationsdialog öffnet sich direkt, sobald Chrome die Web-App freigegeben hat.</li></ol><button class="dar-download-fallback__btn" type="button" data-dar-pwa-install>Web-App installieren</button>'+pwaIconPickerMarkup()+'</article>'+
         '<article class="dar-download-fallback__card"><div class="dar-download-fallback__head"><span class="dar-download-fallback__icon apple">'+appleLogoMarkup()+'</span><div><small>APPLE · IPHONE & IPAD</small><h2>iOS-App</h2></div></div><p>Für iPhone und iPad steht die native DĀR AL TAWḤĪD App im Apple App Store bereit.</p><a class="dar-download-fallback__btn apple" href="https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753" rel="noopener noreferrer">'+appleLogoMarkup()+'<span>Im App Store laden</span></a></article>'+
         '</div></section>';
       applyPwaIcon(getPwaIconId(),false);

@@ -2305,14 +2305,14 @@ button,input,select{font:inherit}
   window.__darPwaInstallState=window.__darEarlyInstallPrompt?"ready":"preparing";
   window.__darSyncInstallButtons=function(){
    try{
-    var ready=window.__darPwaInstallState==="ready"&&!!window.__darEarlyInstallPrompt;
-    var installed=window.matchMedia&&window.matchMedia("(display-mode: standalone)").matches;
+    var ready=!!window.__darEarlyInstallPrompt;
+    var installed=!!(window.matchMedia&&window.matchMedia("(display-mode: standalone)").matches);
     document.querySelectorAll("[data-dar-pwa-install]").forEach(function(btn){
-     btn.disabled=installed||!ready;
-     btn.setAttribute("aria-disabled",(installed||!ready)?"true":"false");
+     btn.disabled=installed;
+     btn.setAttribute("aria-disabled",installed?"true":"false");
      btn.setAttribute("data-dar-pwa-install-state",installed?"installed":(ready?"ready":"preparing"));
      if(!btn.dataset.darInstallLabel)btn.dataset.darInstallLabel=btn.textContent||"Web-App installieren";
-     var nextLabel=installed?"Bereits installiert":(ready?btn.dataset.darInstallLabel:"Installation wird vorbereitet …");
+     var nextLabel=installed?"Bereits installiert":btn.dataset.darInstallLabel;
      if(btn.textContent!==nextLabel)btn.textContent=nextLabel;
     });
    }catch(e){}
@@ -2346,14 +2346,12 @@ button,input,select{font:inherit}
     var target=event.target&&event.target.closest?event.target.closest("[data-dar-pwa-install]"):null;
     if(!target)return;
     var promptEvent=window.__darEarlyInstallPrompt;
-    event.preventDefault();
-    event.stopImmediatePropagation();
     if(!promptEvent){
-      window.__darPwaInstallState="preparing";
-      window.__darSyncInstallButtons();
-      window.dispatchEvent(new CustomEvent("dar:pwa-install-missing"));
+      // Keep the button clickable. Let the normal installer handle preparation/fallback.
       return;
     }
+    event.preventDefault();
+    event.stopImmediatePropagation();
     if(window.__darInstallPromptBusy)return;
     window.__darInstallPromptBusy=true;
     promptEvent.prompt();
@@ -2382,18 +2380,7 @@ button,input,select{font:inherit}
  }catch(e){}
  try{
   if("serviceWorker" in navigator){
-   navigator.serviceWorker.register("/service-worker.js",{scope:"/"}).then(function(){
-    return navigator.serviceWorker.ready;
-   }).then(function(){
-    var android=/\bAndroid\b/i.test(String(navigator.userAgent||""));
-    if(!android||navigator.serviceWorker.controller)return;
-    var key="dar_pwa_sw_control_reload_v2";
-    try{
-     if(sessionStorage.getItem(key)==="1")return;
-     sessionStorage.setItem(key,"1");
-    }catch(eStore){return}
-    location.reload();
-   }).catch(function(){});
+   navigator.serviceWorker.register("/service-worker.js",{scope:"/"}).catch(function(){});
   }
  }catch(e){}
 })();
