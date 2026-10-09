@@ -442,13 +442,15 @@ function publicWebsiteAddon() {
     if(installEvent){
       try{
         installEvent.prompt();
+        // A beforeinstallprompt event may only be used once.
+        deferredInstall=null;
+        window.__darEarlyInstallPrompt=null;
         var choice=await installEvent.userChoice;
         if(choice&&choice.outcome==="accepted"){
-          deferredInstall=null;
           setPwaHint("Installation bestätigt.");
           return true;
         }
-        setPwaHint("Installation wurde nicht bestätigt.");
+        setPwaHint("Installation abgebrochen. Für einen neuen Versuch die Seite einmal neu laden.");
         return false;
       }catch(e){}
     }

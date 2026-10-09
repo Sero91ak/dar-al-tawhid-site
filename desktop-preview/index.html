@@ -2754,15 +2754,17 @@ html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
   if(installEvent){
    try{
     installEvent.prompt();
+    // A beforeinstallprompt event may only be used once.
+    darDeferredPwaPrompt=null;
+    window.__darEarlyInstallPrompt=null;
     var choice=await installEvent.userChoice;
     if(choice&&choice.outcome==="accepted"){
-     darDeferredPwaPrompt=null;
      darPwaHint("Installation bestätigt.");
      darPwaToast("Installation bestätigt. Android fügt die Web-App jetzt hinzu.");
      return true
     }
-    darPwaHint("Installation wurde nicht bestätigt.");
-    darPwaToast("Installation wurde nicht bestätigt.");
+    darPwaHint("Installation abgebrochen. Für einen neuen Versuch die Seite einmal neu laden.");
+    darPwaToast("Installation abgebrochen. Für einen neuen Versuch die Seite einmal neu laden.");
     return false
    }catch(e){}
   }
