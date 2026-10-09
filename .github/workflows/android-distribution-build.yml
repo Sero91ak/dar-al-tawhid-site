@@ -36,7 +36,7 @@ jobs:
       - name: Website release registry and Kids privacy guard
         run: node download/validate-release.cjs
 
-      - name: Java 17
+      - name: Native Android-Bridge & Icon-Auswahl Regression\n        run: node android/tools/test-android-native-bridges.cjs\n      - name: Java 17
         uses: actions/setup-java@v4
         with:
           distribution: temurin
