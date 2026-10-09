@@ -259,6 +259,76 @@ function liveFrauenNativeAddon() {
   ].join("");
 }
 
+function androidNativeToolsAddon() {
+  return `
+<style id="darAndroidNativeToolsV1">
+#darAndroidNativeTools{margin:18px 0 0;padding:18px 0 2px;border-top:1px solid color-mix(in srgb,var(--gold2,#e8c96a) 26%,rgba(255,255,255,.10) 74%);font-family:inherit}
+#darAndroidNativeTools .dar-ant-kicker{margin:0 0 5px;color:var(--gold2,#d9ba69);font-size:9px;font-weight:850;letter-spacing:.13em;text-transform:uppercase}
+#darAndroidNativeTools h3{margin:0 0 5px;font:600 19px/1.2 Georgia,"Times New Roman",serif;color:var(--text,#f6f1e5)}
+#darAndroidNativeTools p{margin:0 0 13px;color:var(--muted,#a9aaa5);font-size:11px;line-height:1.55}
+#darAndroidNativeTools .dar-ant-actions{display:flex;flex-wrap:wrap;gap:9px}
+#darAndroidNativeTools button,#darAndroidNativeTools a{min-height:42px;padding:0 13px;border:1px solid color-mix(in srgb,var(--gold2,#e8c96a) 42%,transparent);border-radius:12px;background:transparent;color:var(--gold2,#e8c96a);font:750 10px/1 system-ui,-apple-system,sans-serif;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+#darAndroidNativeTools button.dar-ant-primary{background:color-mix(in srgb,var(--gold2,#e8c96a) 16%,transparent)}
+#darAndroidNativeToolsStatus{display:block;min-height:16px;margin-top:8px;color:var(--muted,#a9aaa5);font-size:9px;line-height:1.45}
+</style>
+<script id="darAndroidNativeToolsScriptV1">
+(function(){
+  "use strict";
+  if(!/DarAlTawhidAndroid/i.test(String(navigator.userAgent||"")))return;
+  function onSettingsRoute(){
+    var hash=String(location.hash||"").toLowerCase();
+    return /(^|[#/])settings(?:$|[/?&])/.test(hash)||document.body.classList.contains("is-settings-route")||!!document.querySelector(".settings-one-page");
+  }
+  function requestWidget(kind,label){
+    var status=document.getElementById("darAndroidNativeToolsStatus");
+    try{
+      var api=window.DarNative;
+      var ok=!!(api&&typeof api.requestWidget==="function"&&api.requestWidget(kind));
+      if(status)status.textContent=ok
+        ?"Android öffnet jetzt die Systemabfrage für „"+label+"“."
+        :"Der Launcher unterstützt das direkte Anheften hier nicht. Öffne die Android-Widget-Auswahl auf dem Startbildschirm.";
+    }catch(e){
+      if(status)status.textContent="Widget konnte nicht angefordert werden.";
+    }
+  }
+  function ensure(){
+    if(!onSettingsRoute())return;
+    var page=document.querySelector(".settings-one-page")||document.querySelector(".settings-page")||document.getElementById("appView");
+    if(!page||document.getElementById("darAndroidNativeTools"))return;
+    var section=document.createElement("section");
+    section.id="darAndroidNativeTools";
+    section.setAttribute("aria-label","Android Widgets und App-Icon");
+    section.innerHTML=
+      '<div class="dar-ant-kicker">ANDROID · STARTBILDSCHIRM</div>'+
+      '<h3>Widgets & App-Icon</h3>'+
+      '<p>Launcher-Icon wechseln oder echte Android-Widgets direkt auf den Startbildschirm setzen.</p>'+
+      '<div class="dar-ant-actions">'+
+        '<a class="dar-ant-primary" href="/widgets/?platform=android&native=1">App-Icon & Widgets öffnen</a>'+
+        '<button type="button" data-dar-native-widget="prayer">Gebetszeiten hinzufügen</button>'+
+        '<button type="button" data-dar-native-widget="faith">Heute & Dhikr hinzufügen</button>'+
+      '</div>'+
+      '<span id="darAndroidNativeToolsStatus" role="status"></span>';
+    page.appendChild(section);
+    section.addEventListener("click",function(ev){
+      var btn=ev.target&&ev.target.closest?ev.target.closest("[data-dar-native-widget]"):null;
+      if(!btn)return;
+      ev.preventDefault();
+      var kind=btn.getAttribute("data-dar-native-widget")||"prayer";
+      requestWidget(kind,kind==="faith"?"Heute & Dhikr":"Gebetszeiten");
+    });
+  }
+  function schedule(){setTimeout(ensure,0);setTimeout(ensure,120);setTimeout(ensure,420)}
+  schedule();
+  window.addEventListener("hashchange",schedule);
+  window.addEventListener("pageshow",schedule);
+  document.addEventListener("dar:render",schedule);
+  try{
+    new MutationObserver(function(){if(onSettingsRoute())schedule()}).observe(document.documentElement,{childList:true,subtree:true});
+  }catch(e){}
+})();
+<\\/script>`;
+}
+
 function publicWebsiteAddon() {
   return `
 <style id="darPublicWebsiteOnlyV1">
@@ -988,6 +1058,7 @@ export default {
     const isRoot = url.pathname === "/" || url.pathname === "/index.html";
     const ua = String(request.headers.get("User-Agent") || "");
     const nativeApp = isNativeAppRequest(ua);
+    const androidNativeApp = /DarAlTawhidAndroid/i.test(ua);
     const androidBrowser = isAndroidBrowserRequest(ua);
     const kidsPath = isKidsPath(url.pathname);
     const kidsRecitationGrade =
@@ -1206,6 +1277,10 @@ export default {
       if (assetResponse.ok && !html.includes("frauen-live-adapter.js")) {
         const frauenAddon = liveFrauenNativeAddon();
         html = html.includes("</body>") ? html.replace("</body>", frauenAddon + "</body>") : html + frauenAddon;
+      }
+      if (assetResponse.ok && androidNativeApp && !html.includes("darAndroidNativeToolsScriptV1")) {
+        const androidAddon = androidNativeToolsAddon();
+        html = html.includes("</body>") ? html.replace("</body>", androidAddon + "</body>") : html + androidAddon;
       }
       headers.set("Content-Type", "text/html; charset=utf-8");
       return new Response(html, {
