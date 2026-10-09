@@ -35,6 +35,7 @@
   var surahs = [];
   var cachedKeys = Object.create(null);
   var pending = Object.create(null);
+  var retryCounts = Object.create(null);
   var inflight = 0;
   var MAX_INFLIGHT = 1;
   var queue = [];
@@ -261,11 +262,13 @@
         throw new Error("store");
       }
       markHave(edition, ayah);
+      delete retryCounts[k];
       failStreak = 0;
     } catch (e) {
       pending[k] = false;
       failStreak += 1;
-      if (!cancelled[edition] && e && e.message !== "store") {
+      retryCounts[k] = (retryCounts[k] || 0) + 1;
+      if (!cancelled[edition] && e && e.message !== "store" && retryCounts[k] < 3) {
         pending[k] = true;
         queue.push({ edition: edition, ayah: ayah });
       }
@@ -308,7 +311,7 @@
     if (!edition) return;
     if (isTvPlayback()) return;
     var g = globalAyah(surah, ayah);
-    if (g < AYAH_TOTAL) enqueue(edition, g + 1, false);
+    if (g < AYAH_TOTAL) enqueue(edition, g + 1, true);
   }
   function prefetchSurah() {}
   function startSeed() {
@@ -337,13 +340,14 @@
       total: AYAH_TOTAL,
       queued: queuedFor,
       downloading: downloading,
-      complete: have >= AYAH_TOTAL - 5
+      complete: have === AYAH_TOTAL
     };
   }
   function downloadLabel(edition) {
     var p = reciterProgress(edition);
     if (p.complete) return "Gespeichert";
-    if (p.downloading || p.have > 0) return "Lädt " + p.have + "/" + p.total;
+    if (p.downloading) return "Lädt " + p.have + "/" + p.total;
+    if (p.have > 0) return "Fortsetzen " + p.have + "/" + p.total;
     return "Download";
   }
   function downloadReciter(edition) {
@@ -371,6 +375,9 @@
     queue = queue.filter(function (job) { return job.edition !== ed; });
     Object.keys(pending).forEach(function (k) {
       if (k.indexOf(ed + ":") === 0) delete pending[k];
+    });
+    Object.keys(retryCounts).forEach(function (k) {
+      if (k.indexOf(ed + ":") === 0) delete retryCounts[k];
     });
     if (status.reciter === ed) status.reciter = "";
     status.queued = queue.length;
