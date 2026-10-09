@@ -14,6 +14,7 @@ const {parseGLB,validateDocument,main:validateMain}=require("./validate-glb.cjs"
 const {validateAnimationBytes}=require("./validate-glb-binary.cjs");
 const {validateGeometryBytes}=require("./validate-glb-geometry-binary.cjs");
 const {main:releaseMain}=require("./audit-project-completion.cjs");
+const {main:forbidBoyMain}=require("./forbid-placeholder-release.cjs");
 const N=2400;
 function glbFixture(){
   const views=[],accessors=[],parts=[];let offset=0;
@@ -138,6 +139,13 @@ try{
     const status=JSON.parse(r.message);
     assert.equal(status.ready,false);
     assert.equal(status.localBinaryEvidence.pass,false);
+  });
+  check("boy-model identity lock rejects an otherwise structurally valid artificial GLB",()=>{
+    const r=quietMain(forbidBoyMain,[candidate]);
+    assert.equal(r.exit,1,r.message);
+    const identity=JSON.parse(r.message);
+    assert.equal(identity.readyForProduction,false);
+    assert.ok(identity.errors.some(e=>e.includes("BLOCKED")));
   });
   check("one corrupted mesh normal is blocked by real GLB CLI",()=>{
     const copy=Buffer.from(bin);
