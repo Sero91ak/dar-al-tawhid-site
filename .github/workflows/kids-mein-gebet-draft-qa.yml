@@ -1,5 +1,11 @@
 name: Kids Mein Gebet - isolated draft QA
 on:
+  push:
+    branches:
+      - "feature/kids-mein-gebet-preview-20261008"
+    paths:
+      - ".github/workflows/kids-mein-gebet-draft-qa.yml"
+      - "kids/mein-gebet/rigging/**"
   pull_request:
     branches: [main]
     paths:
@@ -12,7 +18,7 @@ permissions:
 
 jobs:
   structural-tests:
-    if: ${{ github.event.pull_request.number == 825 }}
+    if: ${{ github.ref_name == 'feature/kids-mein-gebet-preview-20261008' || github.event.pull_request.number == 825 }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
