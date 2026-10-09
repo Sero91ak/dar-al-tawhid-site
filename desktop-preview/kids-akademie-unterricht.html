@@ -774,7 +774,7 @@ body[data-kids-age="9-10"] .lesson-stage .recap-lesson p{
   .lesson-stage button,.journey-bar span{transition:none!important;animation:none!important}
 }
 
-/* V6.6: Altersgerecht vorlesen, ohne versehentlich eine Antwort auszuwählen */
+/* V6.7: Altersgerecht vorlesen, ohne versehentlich eine Antwort auszuwählen */
 .choice-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:9px;align-items:stretch;min-width:0}
 .choice-row .choice-button{min-width:0;text-align:left;overflow-wrap:anywhere}
 .choice-listen{min-width:77px;min-height:56px;border:1px solid var(--border);background:rgba(241,216,167,.08);border-radius:16px;color:var(--gold);font-size:14px;font-weight:800;padding:9px 10px}
@@ -783,11 +783,15 @@ body[data-kids-age="9-10"] .lesson-stage .recap-lesson p{
 body[data-kids-age="4-5"] .choice-listen{min-width:89px;min-height:68px;font-size:17px}
 body[data-kids-age="4-5"] .choice-audio-help{font-size:16px}
 @media(max-width:380px){.choice-row{gap:7px}.choice-listen{min-width:66px;padding:9px 7px}.choice-row .choice-button{padding:13px 12px}}
+.academy-audio-feedback{margin:10px 0 14px;padding:10px 13px;border:1px solid var(--border);background:rgba(236,205,144,.055);border-radius:13px;font-size:13px;line-height:1.45;color:#efdbaf}
+.master-voice-test{min-height:46px;font-size:14px}.master-voice-sample-note{margin:7px 0 0;color:var(--muted);font-size:12px}
+body[data-embedded="true"] .academy-header{display:none}
+body[data-embedded="true"] .wrap{padding-top:12px}
 </style></head>
-<body data-profile="boy" data-preview-release="V6.6-20261009" data-preview-deploy="v6.6-audio-answers-only"><main class="wrap">
+<body data-profile="boy" data-preview-release="V6.7-20261009" data-preview-deploy="v6.7-audio-answers-only"><main class="wrap">
 
 <header class="academy-header">
- <div class="academy-brand"><div class="brand">DĀR AL TAWḤĪD · KIDS</div><div class="stage">Meine Lernakademie · Vorschau V6.6 <span class="preview-release-stamp">Ehrliche Antworten</span></div></div>
+ <div class="academy-brand"><div class="brand">DĀR AL TAWḤĪD · KIDS</div><div class="stage">Meine Lernakademie · Vorschau V6.7 <span class="preview-release-stamp">Ehrliche Antworten</span></div></div>
  <div class="academy-header-actions"><button type="button" class="preview-refresh" id="previewRefresh" aria-label="HTML-Vorschau neu laden">↻ <span>Aktualisieren</span></button><div class="academy-profile" id="academyProfile"><img id="academyAvatar" alt="" src="/kids/assets/profile-avatars/boy-kufi-v1235.svg" width="42" height="42"><span class="academy-profile-names"><strong id="profileLabel">Kinderprofil wird geladen</strong><small id="profileRole">Unterricht</small><small id="academyAgeLabel" class="academy-age-label" aria-live="polite">Altersstufe</small></span></div></div>
 </header><p id="academyAgeWarning" class="academy-age-warning" role="alert" hidden>Bitte wähle im Kinderprofil eine passende Altersstufe aus.</p>
 <section class="academy-home" id="academyHome">
@@ -817,8 +821,8 @@ body[data-kids-age="4-5"] .choice-audio-help{font-size:16px}
  <div class="lesson-topline"><button type="button" class="pill back-pill" id="backToAcademy"><span aria-hidden="true">←</span> Zur Lernakademie</button><span class="lesson-label">Akhlāq · Einheit 01</span></div>
  <div class="lesson-heading" role="group" aria-label="Akhlāq-Unterricht Ṣidq – Wahrhaftigkeit"><span class="lesson-theme-tag">Akhlāq · Guter Charakter</span><h1>Ṣidq <span>· Wahrhaftigkeit</span></h1><p id="lessonIntroduction">Gemeinsam verstehen, nachdenken und üben.</p></div>
  <div class="stage-tracker" role="group" aria-label="Unterrichtsschritte"><button class="tracker-item is-current" data-jump-step="0"><b>1</b><span>Willkommen</span></button><button class="tracker-item" data-jump-step="1"><b>2</b><span>Verstehen</span></button><button class="tracker-item" data-jump-step="2"><b>3</b><span>Belege</span></button><button class="tracker-item" data-jump-step="3"><b>4</b><span>Mitdenken</span></button><button class="tracker-item" data-jump-step="4"><b>5</b><span>Merken</span></button></div>
- <div class="stage-surface" id="stageSurface">
-  <section class="lesson-stage" data-lesson-step="0" aria-labelledby="welcomeTitle"><span class="kicker">Schritt 1 · Willkommen</span><h2 id="welcomeTitle">Schön, dass du da bist!</h2><p class="stage-lead welcome-greeting" id="welcomeGreeting"><span id="welcomeSalam" class="stage-greeting-salam">As-salāmu ʿalaykum, lieber Bruder.</span><span id="welcomeFollowup" class="stage-greeting-followup">Schön, dass du heute mitlernst!</span></p><p class="stage-body" id="lessonWelcomeBody">Heute sprechen wir darüber, weshalb <strong>Wahrhaftigkeit</strong> wichtig ist. Du kannst jederzeit anhalten, noch einmal zuhören oder etwas in deinem eigenen Tempo lesen.</p><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="0">Begrüßung anhören</button><span class="voice-note" id="voiceStatus" aria-live="polite">Masteraufnahme, falls vorhanden · sonst Gerätestimme</span></div></section>
+ <p class="academy-audio-feedback" id="audioFeedback" role="status" aria-live="polite">Audio beginnt erst nach deinem Tippen. Für noch fehlende Masteraufnahmen wird eine Gerätestimme verwendet.</p><div class="stage-surface" id="stageSurface">
+  <section class="lesson-stage" data-lesson-step="0" aria-labelledby="welcomeTitle"><span class="kicker">Schritt 1 · Willkommen</span><h2 id="welcomeTitle">Schön, dass du da bist!</h2><p class="stage-lead welcome-greeting" id="welcomeGreeting"><span id="welcomeSalam" class="stage-greeting-salam">As-salāmu ʿalaykum, lieber Bruder.</span><span id="welcomeFollowup" class="stage-greeting-followup">Schön, dass du heute mitlernst!</span></p><p class="stage-body" id="lessonWelcomeBody">Heute sprechen wir darüber, weshalb <strong>Wahrhaftigkeit</strong> wichtig ist. Du kannst jederzeit anhalten, noch einmal zuhören oder etwas in deinem eigenen Tempo lesen.</p><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="0">Begrüßung anhören</button><span class="voice-note" id="voiceStatus" aria-live="polite">Deine Stimme bei vorhandener Masteraufnahme · sonst Gerätestimme</span><button type="button" class="pill soft-gold master-voice-test" id="masterVoiceTest">▶ Meine Stimme testen</button><p class="master-voice-sample-note" id="masterVoiceTestStatus" aria-live="polite">Echte Serhat-Masterprobe aus dem Duʿāʾ-Bereich – kein Unterrichtssatz.</p></div></section>
   <section class="lesson-stage" data-lesson-step="1" aria-labelledby="explainTitle" hidden><span class="kicker">Schritt 2 · Heute lernen wir</span><h2 id="explainTitle">Was bedeutet Wahrhaftigkeit?</h2><p class="stage-lead">Die <strong>Wahrheit sagen</strong> – auch wenn es manchmal Mut kostet.</p><div class="spoken-paragraph" id="explainWords"><p data-spoken>Manchmal passiert uns aus Versehen ein Fehler.</p><p data-spoken>Wenn wir ehrlich sagen, was passiert ist, können wir Verantwortung übernehmen und etwas wiedergutmachen.</p><p data-spoken>Wenn wir stattdessen lügen, kann das Vertrauen anderer Menschen leiden.</p><p data-spoken>Wahrhaftigkeit ist deshalb ein wichtiger Teil unseres guten Charakters.</p></div><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="1">Erklärung anhören</button><span class="voice-note">Beim Hören wird der aktuelle Satz sanft hervorgehoben.</span></div></section>
   <section class="lesson-stage" data-lesson-step="2" aria-labelledby="evidenceTitle" hidden><span class="kicker">Schritt 3 · Qurʾān und Sunnah</span><h2 id="evidenceTitle">Was lernen wir aus den Quellen?</h2><p class="stage-lead" id="evidenceLead">Wir hören zuerst einen Vers aus dem Qurʾān und betrachten danach eine authentische Überlieferung.</p><div class="evidence-region"><section class="lesson-source-block">
   <div class="eyebrow">Qurʾān · Sūrat at-Tawbah · Vers 119</div>
@@ -861,6 +865,7 @@ body[data-kids-age="4-5"] .choice-audio-help{font-size:16px}
 (()=>{
 "use strict";
 const $=s=>document.querySelector(s),all=s=>[...document.querySelectorAll(s)];
+if(new URLSearchParams(location.search).get("embedded")==="1")document.body.dataset.embedded="true";
 const VERSION="academy-v4"; /* Bestehende Lernstände bleiben erhalten */
 const INTERVALS_BY_AGE={"4-5":[1,3,7,14,30],"6-8":[1,3,7,14,30,60],"9-10":[1,3,7,14,30,60,90]};
 const exercises={
@@ -882,6 +887,7 @@ const exercises={
 let id="unassigned",gender="neutral",age="6-8",profileName="",step=0,unlocked=0,qIndex=0,choice=null,answerMode="choices",answered=false,finished=false;
 let score={done:0,correct:0,choices:0,neededHelp:0},attempts=0,recognition=null,voice=null,audio=null,audioKey="",fallbackTried=false,voiceToken=0;
 let recorder=null,micStream=null,micClock=null,micSince=0,micRequest=0,voiceObjectUrl=null,voiceReady=false;
+let masterProbeAudio=null;
 
 const AGE_UI=Object.freeze({
  "4-5":{
@@ -1062,12 +1068,32 @@ async function beginVoiceRecording(){
  refresh();micClock=setInterval(refresh,500);
  $("#micInfo").textContent="Jetzt kannst du sprechen. Tippe danach auf „Aufnahme beenden“.";
 }
+function setAudioFeedback(message){const el=$("#audioFeedback");if(el)el.textContent=message;const welcome=$("#voiceStatus");if(welcome)welcome.textContent=message}
+function stopMasterProbe(){
+ const p=masterProbeAudio;masterProbeAudio=null;
+ if(p){p.onended=p.onerror=p.onplaying=null;try{p.pause();p.removeAttribute("src");p.load()}catch(_){}}
+}
+function playMasterProbe(){
+ stopSpeech();stopAudio();
+ const info=$("#masterVoiceTestStatus");
+ // Existing Serhat Duʿāʾ master clip, not a lesson recording.
+ const clip=new Audio("/kids/assets/kids-dua-audio/e8bacbf8baf198b5.m4a?v=kids-dua-owner-voice-v2-20261007-200319");
+ masterProbeAudio=clip;clip.playsInline=true;clip.volume=1;clip.muted=false;
+ info.textContent="Deine Masterstimme wird geladen …";
+ clip.onplaying=()=>{if(masterProbeAudio===clip)info.textContent="Serhat-Masterprobe wird abgespielt. Hörst du nichts, prüfe die Medienlautstärke."};
+ clip.onended=()=>{if(masterProbeAudio===clip){masterProbeAudio=null;info.textContent="Masterprobe beendet. Unterrichtsaufnahmen werden einzeln zugeordnet."}};
+ const fail=()=>{if(masterProbeAudio===clip){stopMasterProbe();info.textContent="Masterprobe nicht abspielbar. Prüfe Verbindung und Medienlautstärke."}};
+ clip.onerror=fail;
+ try{const p=clip.play();if(p?.catch)p.catch(fail)}catch(_){fail()}
+}
 function stopSpeech(){
+ stopMasterProbe();
  voiceToken++;
  try{window.DARKidsOwnerVoice?.stop()}catch(_){}
  try{speechSynthesis.cancel()}catch(_){}voice=null;
  all(".is-reading").forEach(x=>x.classList.remove("is-reading"));
  all("[data-speak-stage]").forEach(x=>{x.disabled=false;x.setAttribute("aria-pressed","false")});
+ all(".choice-listen").forEach(x=>x.setAttribute("aria-pressed","false"));
 }
 function stopAudio(note){
  if(audio){audio.onerror=null;audio.onended=null;try{audio.pause();audio.removeAttribute("src");audio.load()}catch(_){}}
@@ -1234,12 +1260,12 @@ function speak(index,custom){
  function deviceRead(t){
   if(!live())return;
   if(!("speechSynthesis" in window)||typeof SpeechSynthesisUtterance==="undefined"){$("#voiceStatus").textContent="Vorlesen auf diesem Gerät nicht verfügbar.";return}
-  $("#voiceStatus").textContent="Gerätestimme · Masteraufnahme für diesen Satz noch nicht vorhanden.";
+  setAudioFeedback("Gerätestimme · Für diesen Satz fehlt noch deine Masteraufnahme.");
   const u=new SpeechSynthesisUtterance(t);u.lang="de-DE";u.rate=age==="4-5"?.79:age==="9-10"?.93:.86;
   u.onend=()=>{if(live()){k++;next()}};
-  u.onerror=()=>{if(live())stopSpeech()};
+  u.onerror=()=>{if(live()){stopSpeech();setAudioFeedback("Gerätestimme konnte nicht abgespielt werden. Teste die Masterstimme.")}};
   voice=u;
-  try{speechSynthesis.speak(u)}catch(_){stopSpeech()}
+  try{speechSynthesis.resume();speechSynthesis.speak(u)}catch(_){stopSpeech();setAudioFeedback("Gerätestimme konnte nicht gestartet werden. Teste die Masterstimme.")}
  }
  function next(){
   if(!live())return;
@@ -1248,7 +1274,7 @@ function speak(index,custom){
   const t=String(lines[k]||"").trim();if(!t){k++;next();return}
   const owner=window.DARKidsOwnerVoice;
   if(owner&&typeof owner.has==="function"&&owner.has(t)){
-   $("#voiceStatus").textContent="Vorhandene Serhat-Masteraufnahme.";
+   setAudioFeedback("Serhat-Masteraufnahme für diesen Satz startet.");
    let failed=false;
    const fallback=()=>{if(failed||!live())return;failed=true;deviceRead(t)};
    try{
@@ -1355,7 +1381,8 @@ function persist(level){
  try{localStorage.setItem(storageKey(),JSON.stringify(item));clearDraft();$("#nextDue").textContent="Nächste Erinnerung: "+due.toLocaleDateString("de-DE")+". Du kannst jederzeit vorher üben."}catch(_){$("#nextDue").textContent="Lokal speichern ist nicht verfügbar. Du kannst trotzdem wiederholen."}
  all("[data-reflect]").forEach(b=>{b.classList.toggle("active",b.dataset.reflect===level);b.setAttribute("aria-pressed",String(b.dataset.reflect===level))});renderHome();
 }
-$("#previewRefresh").onclick=()=>{const url=new URL(location.href);url.searchParams.set("cb","v6.6-"+Date.now());location.replace(url.toString())};
+$("#masterVoiceTest").onclick=playMasterProbe;
+$("#previewRefresh").onclick=()=>{const url=new URL(location.href);url.searchParams.set("cb","v6.7-"+Date.now());location.replace(url.toString())};
 all("[data-open-lesson]").forEach(b=>b.onclick=begin);
 $("#backToAcademy").onclick=home;$("#backAfterLesson").onclick=home;
 $("#previousStep").onclick=()=>showStep(step-1);$("#forwardStep").onclick=nextStep;
