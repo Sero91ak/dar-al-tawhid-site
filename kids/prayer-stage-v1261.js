@@ -89,6 +89,7 @@ if(navigator.connection?.saveData)salahWorld.classList.add("kids-salah-save-data
    if(Math.abs(lastHeight-wanted)>2||Math.abs(lastWidth-w)>1){
      HERO.style.setProperty("--kids-home-measured-min",safeMinimum+"px");
      HERO.style.setProperty("--kids-home-measured-target",wanted+"px");
+     HERO.style.setProperty("--kids-home-preflight-cap","9999px");
      lastHeight=wanted;lastWidth=w;lastViewportHeight=h;
    }
  }
