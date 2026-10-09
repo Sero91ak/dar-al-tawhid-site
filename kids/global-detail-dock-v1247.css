@@ -759,3 +759,123 @@ html body #duaSmartLearn .dsl-head.kids-detail-appbar > .dsl-progress > i{
     font-size:18px!important;
   }
 }
+
+/* KIDS_LEGACY_SAFE_AREA_SINGLE_OWNER_V1289
+   Qurʾān teaching screenshot: the legacy #quranModal .modal-shell sets a
+   padding-top of safe-top+20px (important), while the shared modal appbar
+   already includes the device safe-top. Since ID specificity beats the
+   generic shared rule, a black/dark-blue strip is left above the appbar.
+   The full-screen shell owns NO top inset; ONLY the shared header does.
+   Scope to legacy full-screen modals with the real shared dock installed.
+   Do not change Quran content, recitation buttons, player, touch or bottom nav. */
+html body :is(
+  #knowledgeModal,#duaModal,#quizModal,#storyModal,#quranModal,#fullQuranModal
+).modal.open > .modal-shell:has(> .modal-top.kids-legacy-appbar){
+  padding-top:0!important;
+  margin-top:0!important;
+}
+/* Qurʾān previously retained an ID-specific legacy header height,
+   50px rounded button and extra top gap. Lock it to the exact Duʿāʾ
+   detail geometry, avoiding the ID rules still embedded in index.html. */
+html body #quranModal.modal.open > .modal-shell > .modal-top.kids-legacy-appbar.kids-detail-appbar{
+  box-sizing:border-box!important;
+  position:relative!important;
+  display:flex!important;
+  flex:0 0 auto!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  min-height:calc(60px + env(safe-area-inset-top,0px))!important;
+  height:auto!important;
+  max-height:none!important;
+  max-width:none!important;
+  padding:
+    calc(6px + env(safe-area-inset-top,0px))
+    max(13px,calc(10px + env(safe-area-inset-right,0px)))
+    7px
+    max(13px,calc(10px + env(safe-area-inset-left,0px)))!important;
+  margin-top:0!important;
+  margin-bottom:8px!important;
+  gap:10px!important;
+  width:calc(100% + max(18px,env(safe-area-inset-left,0px)) + max(18px,env(safe-area-inset-right,0px)))!important;
+  margin-left:calc(-1 * max(18px,env(safe-area-inset-left,0px)))!important;
+  margin-right:calc(-1 * max(18px,env(safe-area-inset-right,0px)))!important;
+  border:0!important;
+  border-bottom:1px solid rgba(211,190,139,.19)!important;
+  border-radius:0 0 24px 24px!important;
+  background:radial-gradient(circle at 8% 0%,rgba(103,186,179,.07),transparent 39%),
+    linear-gradient(180deg,#082c38 0%,#062632 100%)!important;
+  box-shadow:0 10px 22px rgba(0,0,0,.14),inset 0 -1px rgba(163,214,202,.045)!important;
+}
+/* Do not let the previous 50px / cyan-outlined Quran-only button win. */
+html body #quranModal.modal.open .modal-top.kids-legacy-appbar .close-btn.kids-detail-dock-back{
+  box-sizing:border-box!important;
+  display:grid!important;
+  place-items:center!important;
+  position:relative!important;
+  inset:auto!important;
+  flex:0 0 44px!important;
+  width:44px!important;
+  height:44px!important;
+  min-width:44px!important;
+  min-height:44px!important;
+  max-width:44px!important;
+  max-height:44px!important;
+  padding:0!important;
+  margin:0!important;
+  border-radius:15px!important;
+  border:1px solid rgba(241,207,135,.24)!important;
+  background:linear-gradient(150deg,rgba(238,210,149,.11),rgba(9,48,59,.55))!important;
+  color:#f5d68f!important;
+  box-shadow:0 4px 11px rgba(0,0,0,.10)!important;
+  font-size:0!important;
+  transform:none!important;
+}
+html body #quranModal.modal.open .modal-top.kids-legacy-appbar .close-btn.kids-detail-dock-back::before{
+  content:""!important;
+  display:block!important;
+  width:11px!important;height:11px!important;
+  border-left:3px solid currentColor!important;
+  border-bottom:3px solid currentColor!important;
+  transform:translateX(2px) rotate(45deg)!important;
+  border-radius:1px!important;
+}
+html body #quranModal.modal.open .modal-top.kids-legacy-appbar .close-btn.kids-detail-dock-back::after{
+  content:none!important;
+}
+html body #quranModal.modal.open .modal-top.kids-legacy-appbar .modal-title.kids-detail-appbar-copy{
+  display:flex!important;
+  flex:1 1 auto!important;
+  flex-direction:column!important;
+  min-width:0!important;
+  padding-left:11px!important;
+  border-left:1px solid rgba(239,211,145,.19)!important;
+  text-align:left!important;
+  justify-content:center!important;
+  gap:2px!important;
+}
+html body #quranModal.modal.open .modal-top.kids-legacy-appbar .modal-title strong{
+  margin:0!important;
+  font-family:"Fredoka",system-ui,sans-serif!important;
+  font-size:clamp(18px,4.65vw,23px)!important;
+  line-height:1.1!important;
+  font-weight:800!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  overflow-wrap:anywhere!important;
+}
+html body #quranModal.modal.open .modal-top.kids-legacy-appbar .modal-title small{
+  display:block!important;
+  margin:0!important;
+  font-family:"Fredoka",system-ui,sans-serif!important;
+  font-size:clamp(11px,2.8vw,12.5px)!important;
+  line-height:1.22!important;
+  color:rgba(226,237,238,.68)!important;
+}
+/* iPad uses the same component and only wider horizontal padding. */
+@media(min-width:700px){
+  html body #quranModal.modal.open > .modal-shell > .modal-top.kids-legacy-appbar.kids-detail-appbar{
+    min-height:calc(64px + env(safe-area-inset-top,0px))!important;
+    padding-top:calc(7px + env(safe-area-inset-top,0px))!important;
+    padding-bottom:8px!important;
+  }
+}
