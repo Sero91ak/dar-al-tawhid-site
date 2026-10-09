@@ -20,6 +20,127 @@
   var playing=false;
   var mode="";
   var playToken=0;
+  // Seamless Fuṣḥā player: decode words once, schedule with an accurate audio clock.
+  // Conservative silence cropping removes synthetic padding, not Arabic phonemes.
+  var cleanContext=null, cleanPlayback=null;
+  var cleanWordCache=new Map();
+  var cleanCacheMax=55;
+  var CLEAN_GAP=0.065;
+  var CLEAN_SLOW_RATE=0.83;
+  function cleanContextReady(){
+    try{
+      var Ctor=window.AudioContext||window.webkitAudioContext;
+      if(!Ctor||!window.fetch)return null;
+      if(!cleanContext)cleanContext=new Ctor();
+      return cleanContext;
+    }catch(_){return null}
+  }
+  function cleanWordWindow(buffer){
+    var sampleRate=buffer.sampleRate;
+    var data=buffer.getChannelData(0);
+    var step=Math.max(128,Math.round(sampleRate*.012));
+    var frameRms=[],peak=0;
+    for(var pos=0;pos<data.length;pos+=step){
+      var total=0,len=Math.min(step,data.length-pos);
+      for(var j=0;j<len;j++){var s=data[pos+j];total+=s*s}
+      var rms=Math.sqrt(total/Math.max(len,1));
+      frameRms.push(rms);if(rms>peak)peak=rms;
+    }
+    var duration=buffer.duration;
+    if(!peak||duration<.20)return{buffer:buffer,start:0,end:duration};
+    // Detect only clear quiet padding; cap removed time to preserve soft letters.
+    var threshold=Math.max(.0011,peak*.044),first=0,last=frameRms.length-1;
+    while(first<last&&frameRms[first]<threshold)first++;
+    while(last>first&&frameRms[last]<threshold)last--;
+    var start=Math.min(.34,Math.max(0,first*step/sampleRate-.055));
+    var end=Math.max(duration-.42,Math.min(duration,(last+1)*step/sampleRate+.075));
+    if(end-start<Math.min(.22,duration*.43))return{buffer:buffer,start:0,end:duration};
+    return{buffer:buffer,start:start,end:end};
+  }
+  function cleanDecode(url){
+    if(cleanWordCache.has(url))return cleanWordCache.get(url);
+    var ctx=cleanContextReady();
+    if(!ctx)return Promise.reject(new Error("web-audio-unavailable"));
+    var promise=fetch(url,{cache:"force-cache"}).then(function(res){
+      if(!res.ok)throw new Error("word-audio-"+res.status);
+      return res.arrayBuffer();
+    }).then(function(bytes){
+      return ctx.decodeAudioData(bytes.slice(0));
+    }).then(function(buffer){return cleanWordWindow(buffer)}).catch(function(err){
+      cleanWordCache.delete(url);throw err;
+    });
+    cleanWordCache.set(url,promise);
+    if(cleanWordCache.size>cleanCacheMax){
+      var oldest=cleanWordCache.keys().next().value;
+      if(oldest!==url)cleanWordCache.delete(oldest);
+    }
+    return promise;
+  }
+  function cleanStop(){
+    if(!cleanPlayback)return;
+    var previous=cleanPlayback;
+    cleanPlayback=null;
+    if(previous.raf)cancelAnimationFrame(previous.raf);
+    (previous.sources||[]).forEach(function(s){try{s.onended=null;s.stop(0)}catch(_){}});
+  }
+  function playCleanSequence(urls,segs,whichMode,label,onFailure){
+    var ctx=cleanContextReady();
+    if(!ctx||!Array.isArray(urls)||!urls.length)return false;
+    // Set state synchronously within the user's tap gesture.
+    stopAudio();
+    var token=playToken,dua=currentDua;
+    playing=true;mode=whichMode;
+    paintControls();setStatus(label,"");
+    var audioGate={sources:[],raf:0};
+    cleanPlayback=audioGate;
+    Promise.resolve(ctx.resume()).then(function(){
+      return Promise.all(urls.map(cleanDecode));
+    }).then(function(rows){
+      if(token!==playToken||cleanPlayback!==audioGate||currentDua!==dua)return;
+      var starts=[],elapsed=0,first=ctx.currentTime+.065;
+      rows.forEach(function(item,index){
+        var duration=Math.max(.06,item.end-item.start),when=first+elapsed;
+        starts.push(when);
+        var source=ctx.createBufferSource();
+        source.buffer=item.buffer;
+        var gain=ctx.createGain();
+        source.connect(gain);gain.connect(ctx.destination);
+        var fade=Math.min(.018,duration*.14);
+        gain.gain.setValueAtTime(.008,when);
+        gain.gain.linearRampToValueAtTime(1,when+fade);
+        gain.gain.setValueAtTime(1,when+duration-fade);
+        gain.gain.linearRampToValueAtTime(.008,when+duration);
+        source.start(when,item.start,duration);
+        source.stop(when+duration+.001);
+        audioGate.sources.push(source);
+        elapsed+=duration+(index===rows.length-1?0:CLEAN_GAP);
+      });
+      function updateFocus(){
+        if(token!==playToken||cleanPlayback!==audioGate)return;
+        var now=ctx.currentTime,at=0;
+        for(var i=1;i<starts.length;i++){if(now>=starts[i])at=i;else break}
+        if(now>=starts[0]&&segs[at]&&currentIndex!==segs[at].index){
+          currentIndex=segs[at].index;
+          paintSelection();saveProgress();queueFocusedWord();
+        }
+        if(now>=first+elapsed+.08){
+          cleanPlayback=null;playing=false;mode="";paintControls();
+          setStatus(whichMode==="follow"?"Du hast die ganze Duʿāʾ gehört.":"Fertig.","good");
+          return;
+        }
+        audioGate.raf=requestAnimationFrame(updateFocus);
+      }
+      audioGate.raf=requestAnimationFrame(updateFocus);
+    }).catch(function(){
+      if(token!==playToken||cleanPlayback!==audioGate)return;
+      cleanStop();
+      // If decoding is unsupported for a particular iPhone, keep approved HTMLAudio fallback.
+      playing=false;mode="";paintControls();
+      if(typeof onFailure==="function")onFailure();
+      else setStatus("Diese Aufnahme ist derzeit nicht verfügbar.","bad");
+    });
+    return true;
+  }
   var layoutFrame=0;
   var fitObserver=null;
 
@@ -400,6 +521,7 @@
   }
   function stopAudio(){
     playToken++;
+    cleanStop();
     playing=false;
     mode="";
     try{audio.pause()}catch(e){}
@@ -412,7 +534,7 @@
     paintControls();
     try{if(window.DARKidsOwnerVoice&&typeof window.DARKidsOwnerVoice.stop==="function")window.DARKidsOwnerVoice.stop()}catch(e){}
   }
-  function playUrl(url,whichMode,label){
+  function playUrl(url,whichMode,label,playRate){
     stopAudio();
     if(!url){setStatus("Audio ist noch nicht verfügbar.","bad");return Promise.reject(new Error("missing-audio"))}
     playToken++;
@@ -434,12 +556,13 @@
         audio.volume=1;
         audio.src=String(url);
         audio.currentTime=0;
-        audio.playbackRate=1;
+        audio.playbackRate=Number(playRate)||1;
         audio.preservesPitch=true;
+        if('webkitPreservesPitch' in audio)audio.webkitPreservesPitch=true;
         audio.onended=function(){finish(true)};
         audio.onerror=function(){finish(false)};
         try{audio.load()}catch(e){}
-        if((mode==="full"||mode==="slow")&&root&&root.classList.contains("open")&&currentDua){attachPhraseFollow(currentDua,mode==="slow",token)}
+        if((mode==="full"||mode==="slow")&&root&&root.classList.contains("open")&&currentDua){attachPhraseFollow(currentDua,false,token)}
         var p=audio.play();
         if(p&&p.catch)p.catch(function(){finish(false)});
       }catch(e){finish(false)}
@@ -448,7 +571,7 @@
   // Each native Serhat Fuṣḥā word clip advances focus on its REAL ended
   // event. Unlike estimated offsets into the uninterrupted phrase, this
   // creates exact focus synchronization without invented timestamps.
-  function playWordSequence(){
+  function playWordSequenceLegacy(){
     var dua=currentDua;
     var segs=getSegments(dua);
     if(!segs.length)return false;
@@ -501,20 +624,33 @@
     advance(0);
     return true;
   }
+  function playWordSequence(){
+    var dua=currentDua,segs=getSegments(dua);
+    if(!segs.length)return false;
+    var urls=segs.map(function(seg){
+      var row=packs&&entry(packs.word,seg.audioKey||seg.arabic);
+      return seg.audioUrl||(row&&row.url)||"";
+    });
+    if(urls.some(function(url){return !url}))return playWordSequenceLegacy();
+    if(playCleanSequence(urls,segs,"follow","Wort für Wort: Die Markierung folgt direkt der Fuṣḥā-Aufnahme.",playWordSequenceLegacy))return true;
+    return playWordSequenceLegacy();
+  }
   function playWhole(slow){
     if(!currentDua)return false;
-    // Full playback uses the uninterrupted native Fuṣḥā master.
-    // Slow playback uses its dedicated slower master.
-    // Only explicit word-follow sequences individual word recordings.
-    var direct=slow?currentDua.audioArabicSlowUrl:currentDua.audioArabicUrl;
+    // Reuse the same uninterrupted Fuṣḥā master. The prior separately
+    // synthesized 'slow' take carried audible pacing/breath artefacts.
+    // Native pitch-preserving 0.83x playback slows evenly without new exhales.
+    var rate=slow?CLEAN_SLOW_RATE:1;
+    var direct=currentDua.audioArabicUrl;
     if(direct){
-      return playUrl(direct,slow?"slow":"full",slow?"Langsame Fuṣḥā-Gesamtaufnahme …":"Flüssige Fuṣḥā-Gesamtaufnahme …");
+      return playUrl(direct,slow?"slow":"full",
+        slow?"Gleichmäßig langsame Fuṣḥā-Aufnahme …":"Flüssige Fuṣḥā-Gesamtaufnahme …",rate);
     }
     var run=function(p){
-      var text=arabicText(currentDua);
-      var e=entry(slow?p.slow:p.normal,text);
+      var e=entry(p.normal,arabicText(currentDua));
       if(!e||!e.url)throw new Error("missing-phrase");
-      return playUrl(e.url,slow?"slow":"full",slow?"Langsam und deutlich zuhören …":"Duʿāʾ anhören …");
+      return playUrl(e.url,slow?"slow":"full",
+        slow?"Langsam und gleichmäßig zuhören …":"Duʿāʾ anhören …",rate);
     };
     if(packs){
       try{return run(packs)}catch(e){setStatus("Diese Aufnahme ist nicht verfügbar.","bad");return false}
@@ -529,6 +665,9 @@
     var seg=segs[Number(i)];
     if(!seg)return false;
     selectIndex(i,{scroll:true,play:false});
+    if(seg.audioUrl&&playCleanSequence([seg.audioUrl],[seg],"word","Nur dieses Wort: "+(seg.transliteration||seg.arabic),function(){
+      playUrl(seg.audioUrl,"word","Nur dieses Wort: "+(seg.transliteration||seg.arabic));
+    }))return true;
     if(seg.audioUrl){
       return playUrl(seg.audioUrl,"word","Nur dieses Wort: "+(seg.transliteration||seg.arabic));
     }
