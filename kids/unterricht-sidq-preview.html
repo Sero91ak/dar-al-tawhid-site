@@ -165,34 +165,202 @@ textarea{width:100%;min-height:86px;border-radius:15px;background:rgba(255,255,2
 <script>
 (()=>{
 "use strict";
-const q=s=>document.querySelector(s),all=s=>Array.from(document.querySelectorAll(s));
-let profile="boy",mode="both",recognition=null,speaking=false;
-const name=()=>profile==="boy"?"mein lieber Bruder":"meine liebe Schwester";
-const greet=()=>`As-salāmu ʿalaykum, ${name()}. Heute lernen wir, weshalb Wahrheit so wichtig ist.`;
-function speechText(){return greet()+" Allah sagt: Und seid mit den Wahrhaftigen. Der Prophet, Allahs Segen und Frieden auf ihm, erklärte, dass Wahrhaftigkeit zur Rechtschaffenheit führt und Rechtschaffenheit zum Paradies. "+q("#explanation").textContent+" Was solltest du sagen, wenn du etwas kaputt gemacht hast?";}
-function stopSpeech(){if("speechSynthesis"in window){speechSynthesis.cancel();speaking=false;q("#play").textContent="Unterricht anhören";}}
-function speak(t){if(mode==="read"||!("speechSynthesis"in window)){q("#audioInfo").textContent="Audio in diesem Modus nicht verfügbar.";return}stopSpeech();const u=new SpeechSynthesisUtterance(t);u.lang="de-DE";u.rate=.87;u.onend=()=>{speaking=false;q("#play").textContent="Unterricht anhören"};speechSynthesis.speak(u);speaking=true;q("#play").textContent="Erneut anhören";}
-all("[data-profile]").forEach(b=>b.addEventListener("click",()=>{profile=b.dataset.profile;document.body.dataset.profile=profile;all("[data-profile]").forEach(x=>x.classList.toggle("active",x===b));q("#greeting").textContent=greet();q("#overviewGreeting").textContent=greet().replace("Heute lernen wir, weshalb Wahrheit so wichtig ist.","Gemeinsam lernen wir Wissen aus Qurʾān und Sunnah.");stopSpeech()}));
-all("[data-mode]").forEach(b=>b.addEventListener("click",()=>{mode=b.dataset.mode;all("[data-mode]").forEach(x=>x.classList.toggle("active",x===b));if(mode==="read")stopSpeech()}));
-q("#play").onclick=()=>speak(speechText());q("#stop").onclick=stopSpeech;
-q("#hint").onclick=()=>{q("#feedback").textContent="Denke an diese drei Schritte: Wahrheit sagen, sich entschuldigen und den Fehler wiedergutmachen."};
-q("#repeat").onclick=()=>speak(q("#question").textContent);
-function check(){const v=q("#answer").value.toLocaleLowerCase("de-DE").trim();if(!v){q("#feedback").textContent="Versuche es mit eigenen Worten. Eine kurze Antwort reicht.";return}const truth=/(ich war|ich habe|wahrheit|ehrlich|zugeben|gestehen|sagen)/.test(v);const repair=/(entschuld|leid|aufräum|helfen|wieder gut|ersetzen|repar)/.test(v);q("#bar").style.width=truth&&repair?"100%":truth||repair?"55%":"25%";q("#feedback").textContent=truth&&repair?"Gut erklärt: Du sagst die Wahrheit und übernimmst Verantwortung.":truth?"Du hast erkannt, dass Ehrlichkeit wichtig ist. Was könntest du danach zur Wiedergutmachung tun?":repair?"Wiedergutmachung ist gut. Wie sagst du vorher ehrlich, dass du es warst?":"Das üben wir gemeinsam: Sage die Wahrheit und hilf anschließend, den Fehler wiedergutzumachen."; }
-q("#check").onclick=check;
-const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-q("#mic").onclick=()=>{if(!SR){q("#micInfo").textContent="Spracherkennung ist auf diesem Gerät beziehungsweise in diesem Browser nicht verfügbar. Bitte tippe deine Antwort.";return}
-try{recognition=new SR();recognition.lang="de-DE";recognition.interimResults=false;recognition.maxAlternatives=1;recognition.onresult=e=>{q("#answer").value=e.results[0][0].transcript;q("#micInfo").textContent="Erkannte Antwort: Bitte prüfen oder korrigieren.";check()};recognition.onerror=()=>q("#micInfo").textContent="Die Erkennung konnte nicht abgeschlossen werden. Bitte antworte per Text.";recognition.onend=()=>{q("#mic").disabled=false;q("#cancelMic").hidden=true};q("#mic").disabled=true;q("#cancelMic").hidden=false;recognition.start();q("#micInfo").textContent="Du kannst jetzt sprechen."}catch(e){q("#mic").disabled=false;q("#micInfo").textContent="Mikrofon derzeit nicht verfügbar."}};
-q("#cancelMic").onclick=()=>{try{recognition?.stop()}catch(e){}};
-
-function setAcademyVisible(isHome){
-  q("#academyHome").hidden=!isHome;
-  q("#lessonMain").hidden=isHome;
-  if(isHome){stopSpeech();try{recognition?.stop()}catch(e){}}
-  window.scrollTo({top:0,behavior:"auto"});
+const $=s=>document.querySelector(s);
+const $=s=>Array.from(document.querySelectorAll(s));
+const DATA_VERSION="2026-10-09";
+const intervals=[1,3,7,14,30,60,90];
+const exercises={
+  "4-5":[
+    {type:"choice",prompt:"Du hast etwas kaputt gemacht. Was sagst du?",options:["Ich sage ehrlich: Ich war das.","Ich sage: Jemand anders war es."],correct:0,hint:"Überlege: Was bedeutet ehrlich sein?",explain:"Wahrhaftigkeit bedeutet: Ich sage, was wirklich passiert ist."},
+    {type:"choice",prompt:"Was kannst du danach Gutes tun?",options:["Ich entschuldige mich und helfe.","Ich verstecke den Fehler."],correct:0,hint:"Wenn jemand Hilfe braucht, kannst du mithelfen.",explain:"Nach einem Fehler können wir um Entschuldigung bitten und ihn wiedergutmachen."}
+  ],
+  "6-8":[
+    {type:"choice",prompt:"Du hast versehentlich ein Glas zerbrochen. Was ist eine ehrliche Antwort?",options:["Ich war das. Es tut mir leid.","Das war bestimmt jemand anders.","Ich tue so, als hätte ich nichts gesehen."],correct:0,hint:"Was ist wirklich passiert? Sprich es freundlich aus.",explain:"Die Wahrheit zu sagen ist besser, als jemand anderem die Schuld zuzuschieben."},
+    {type:"text",prompt:"Was kannst du tun, nachdem du einen Fehler ehrlich zugegeben hast?",sample:"Ich kann mich entschuldigen und helfen, den Fehler wiedergutzumachen.",hint:"Denke an Entschuldigung und Hilfe."},
+    {type:"choice",prompt:"Was lehrt uns der Vers aus Sūrat at-Tawbah 9:119?",options:["Wir sollen mit den Wahrhaftigen sein.","Wir dürfen lügen, wenn wir Angst haben.","Man soll eigene Fehler immer verstecken."],correct:0,hint:"Lies dir die kurze deutsche Bedeutung des Qurʾān-Verses noch einmal durch.",explain:"Allah befiehlt den Gläubigen, mit den Wahrhaftigen zu sein."}
+  ],
+  "9-10":[
+    {type:"choice",prompt:"Welche Aussage entspricht dem Ḥadīṯ über Wahrhaftigkeit?",options:["Wahrhaftigkeit führt zur Rechtschaffenheit.","Wahrheit spielt beim guten Charakter keine Rolle.","Eine Lüge ist immer die leichtere und richtige Lösung."],correct:0,hint:"Was führt laut der authentischen Sunnah zur Rechtschaffenheit?",explain:"Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt und diese zum Paradies."},
+    {type:"text",prompt:"Erkläre in eigenen Worten: Warum gehört Wahrhaftigkeit zu einem guten Charakter?",sample:"Wahrhaftigkeit führt zu rechtschaffenem Verhalten. Sie bewahrt das Vertrauen und hilft uns, Verantwortung zu übernehmen.",hint:"Denke an Vertrauen und das Wort des Propheten ﷺ."},
+    {type:"text",prompt:"Worin liegt der Unterschied zwischen einem versehentlichen Fehler und einer bewussten Lüge?",sample:"Einen Fehler kann man unbeabsichtigt machen. Eine bewusste Lüge bedeutet, absichtlich etwas Unwahres zu sagen. Nach einem Fehler sollte man ehrlich bleiben und ihn wiedergutmachen.",hint:"Denk an den Unterschied zwischen Versehen und absichtlicher Unwahrheit."}
+  ]
+};
+let profile="boy",age="6-8",mode="both",questionIndex=0,choice=null,recognized=null,answered=false;
+let session={checked:0,answeredChoices:0,correctChoices:0,usedHelp:false};
+const greeting=()=>profile==="boy"?"mein lieber Bruder":"meine liebe Schwester";
+const currentQuestions=()=>exercises[age];
+const storageKey=()=>["kids","unterricht","preview",DATA_VERSION,"sidq",profile,age].join(".");
+const withDate=(days)=>{
+  const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()+days);
+  return d.toLocaleDateString("de-DE",{day:"2-digit",month:"long",year:"numeric"});
+};
+const safeRead=()=>{try{return JSON.parse(localStorage.getItem(storageKey())||"null")}catch(_){return null}};
+function applyProfile(){
+  document.body.dataset.profile=profile;
+  $("#academyHome [data-open-lesson]").forEach(b=>b.setAttribute("aria-label",b.getAttribute("aria-label")||"Unterricht öffnen"));
+  $("[data-profile]").forEach(b=>{const a=b.dataset.profile===profile;b.classList.toggle("active",a);b.setAttribute("aria-pressed",String(a))});
+  const intro="As-salāmu ʿalaykum, "+greeting()+". ";
+  $("#overviewGreeting").textContent=intro+"Gemeinsam lernen wir Wissen aus Qurʾān und Sunnah.";
+  $("#greeting").textContent=intro+"Heute lernen wir, weshalb Wahrheit so wichtig ist.";
+  renderStatus();
 }
-all("[data-open-lesson]").forEach(b=>b.addEventListener("click",()=>setAcademyVisible(false)));
-q("#backToAcademy").addEventListener("click",()=>setAcademyVisible(true));
-
-document.addEventListener("visibilitychange",()=>{if(document.hidden){stopSpeech();try{recognition?.stop()}catch(e){}}});
+function renderStatus(){
+  const record=safeRead(),status=$("#courseStatus"),note=$("#reviewNotice"),b=$("#repeatReview");
+  if(!record){status.textContent="Noch nicht begonnen";note.textContent="Deine erste Unterrichtsstunde ist bereit.";b.hidden=true;return}
+  const due=Number(record.nextDue||0),ready=due<=Date.now();
+  status.textContent=ready?"Wiederholung bereit":"Bereits gelernt";
+  note.textContent=ready?"Eine kurze Erinnerung hilft, das Gelernte zu behalten.":"Nächste empfohlene Erinnerung: "+new Date(due).toLocaleDateString("de-DE")+".";
+  b.hidden=false;b.textContent=ready?"Jetzt wiederholen":"Freiwillig wiederholen";
+}
+const showLesson=()=>{
+  $("#academyHome").hidden=true;$("#lessonMain").hidden=false;
+  stopSpeech();resetQuestions();
+  window.scrollTo(0,0);
+};
+const showHome=()=>{
+  $("#academyHome").hidden=false;$("#lessonMain").hidden=true;
+  stopSpeech();stopRecognition();renderStatus();
+  window.scrollTo(0,0);
+};
+let utterance=null;
+function stopSpeech(){
+  try{window.speechSynthesis?.cancel()}catch(_){}
+  utterance=null;$("#play").textContent="Unterricht anhören";
+}
+function germanLessonText(){
+  return "As-salāmu ʿalaykum, "+greeting()+". "+
+  "Heute lernen wir die Wahrhaftigkeit. Im Qurʾān, Sūrat at-Tawbah, Vers 119, steht sinngemäß: Und seid mit den Wahrhaftigen. "+
+  "Von ʿAbdullāh ibn Masʿūd ist in Ṣaḥīḥ Muslim 2607 a überliefert, dass der Prophet, Allahs Segen und Frieden auf ihm, lehrte: Wahrhaftigkeit führt zur Rechtschaffenheit und Rechtschaffenheit führt zum Paradies. "+
+  $("#explanation").textContent+" "+
+  "Wir üben jetzt gemeinsam. Du kannst sprechen, schreiben oder eine Antwort auswählen.";
+}
+function speak(t){
+  if(mode==="read"){ $("#audioInfo").textContent="Du befindest dich im Lesemodus. Wechsel zu Hören & Lesen, um die deutsche Demo-Stimme zu testen.";return }
+  if(!("speechSynthesis" in window)){$("#audioInfo").textContent="Die Sprachwiedergabe ist in diesem Browser nicht verfügbar.";return}
+  stopSpeech();
+  utterance=new SpeechSynthesisUtterance(t);utterance.lang="de-DE";utterance.rate=.88;utterance.pitch=1;
+  utterance.onend=()=>$("#play").textContent="Unterricht anhören";
+  utterance.onerror=()=>$("#audioInfo").textContent="Audio ist momentan nicht verfügbar. Der Lesemodus bleibt verwendbar.";
+  window.speechSynthesis.speak(utterance);
+  $("#play").textContent="Erneut anhören";
+  $("#audioInfo").textContent="Dies ist nur eine deutsche Systemstimmen-Demo. Die geprüfte Serhat-Masterstimme und Qurʾān-Rezitation werden separat angeschlossen.";
+}
+let recognition=null;
+function stopRecognition(){
+  try{recognition?.abort()}catch(_){}
+  recognition=null;$("#mic").disabled=false;$("#cancelMic").hidden=true;
+}
+function resetQuestions(){
+  session={checked:0,answeredChoices:0,correctChoices:0,usedHelp:false};
+  questionIndex=0;renderQuestion();
+}
+function renderQuestion(){
+  stopSpeech();stopRecognition();
+  const ex=currentQuestions()[questionIndex];
+  if(!ex){showSummary();return}
+  choice=null;recognized=null;answered=false;
+  $("#summaryPanel").hidden=true;$("#questionStage").textContent="Mitdenken · Ṣidq";
+  $("#questionIndex").textContent="Frage "+(questionIndex+1)+" von "+currentQuestions().length;
+  $("#questionTitle").textContent="Denke selbst nach";
+  $("#question").textContent=ex.prompt;
+  $("#choices").innerHTML="";
+  if(ex.type==="choice"){
+    ex.options.forEach((label,index)=>{
+      const b=document.createElement("button");b.type="button";b.className="choice-button";b.textContent=label;b.setAttribute("aria-pressed","false");
+      b.addEventListener("click",()=>{choice=index;$(".choice-button").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));$("#answer").value="";});
+      $("#choices").appendChild(b);
+    });
+  }
+  $("#choices").hidden=ex.type!=="choice";
+  $("#answer").value="";
+  $("#answer").placeholder=ex.type==="choice"?"Alternativ mit eigenen Worten antworten …":"Deine Erklärung in eigenen Worten …";
+  $("#check").disabled=false;$("#check").hidden=false;
+  $("#hint").hidden=false;$("#repeat").hidden=false;
+  $("#nextQuestion").hidden=true;$("#finishLesson").hidden=true;
+  $("#feedback").textContent=age==="4-5"?"Nimm dir Zeit. Du kannst eine Antwort auswählen.":"Erkläre es in deinem Tempo. Du darfst sprechen oder schreiben.";
+  $("#micInfo").textContent="Erst antippen, dann sprechen. Eine Erkennung kann Fehler enthalten; prüfe ihren Text.";
+  $("#bar").style.width=(questionIndex/currentQuestions().length*100)+"%";
+}
+function check(){
+  if(answered)return;
+  const ex=currentQuestions()[questionIndex],written=$("#answer").value.trim();
+  if(choice===null && !written){$("#feedback").textContent="Wähle eine Antwort oder sage/schreibe deine eigenen Worte.";return}
+  answered=true;session.checked++;
+  let feedback="";
+  if(choice!==null && !written && ex.type==="choice"){
+    session.answeredChoices++;
+    if(choice===ex.correct){session.correctChoices++;feedback="Das passt zu unserem Beleg. "+ex.explain}
+    else{session.usedHelp=true;feedback="Wir wiederholen es gemeinsam: "+ex.explain+" Es ist in Ordnung, noch einmal nachzudenken."}
+  }else{
+    feedback="Danke, dass du dir Gedanken gemacht hast. Eine mögliche Erklärung ist: "+(ex.sample||ex.explain)+
+      " Vergleiche diese Erklärung mit deinen eigenen Worten. Ein Computer kann offene Antworten hier noch nicht zuverlässig als richtig oder falsch bewerten.";
+  }
+  $("#feedback").textContent=feedback;
+  $("#nextQuestion").hidden=questionIndex===currentQuestions().length-1;
+  $("#finishLesson").hidden=questionIndex!==currentQuestions().length-1;
+  $("#check").hidden=true;
+  $("#bar").style.width=((questionIndex+1)/currentQuestions().length*100)+"%";
+}
+function showSummary(){
+  $("#questionStage").textContent="Unterricht abgeschlossen";
+  $("#questionIndex").textContent="Wiederholen ist erlaubt";
+  $("#questionTitle").textContent="Das hast du geübt";
+  $("#question").textContent="Wahrhaftigkeit bedeutet, die Wahrheit zu sagen und für Fehler Verantwortung zu übernehmen.";
+  $("#choices").hidden=true;$("#mic").hidden=true;$("#cancelMic").hidden=true;$("#micInfo").hidden=true;
+  $("#answer").hidden=true;document.querySelector('label[for="answer"]').hidden=true;
+  $("#check").hidden=true;$("#hint").hidden=true;$("#repeat").hidden=true;$("#nextQuestion").hidden=true;$("#finishLesson").hidden=true;
+  $("#summaryPanel").hidden=false;
+  $("#feedback").textContent="Du hast die Fragen bearbeitet. Entscheide selbst, ob du bald noch einmal üben möchtest.";
+  $("#summaryText").textContent="Du hast "+session.checked+" von "+currentQuestions().length+" Aufgaben bearbeitet. Bei offenen Antworten zählt deine eigene Erklärung und das gemeinsame Nachdenken – nicht eine automatische Schulnote.";
+  $("#bar").style.width="100%";
+}
+function restoreControls(){
+  $("#mic").hidden=false;$("#micInfo").hidden=false;$("#answer").hidden=false;document.querySelector('label[for="answer"]').hidden=false;
+}
+function reflect(level){
+  const previous=safeRead(),prior=Number(previous?.intervalIndex??-1);
+  const nextIndex=level==="help"?0:Math.min(prior+1,intervals.length-1);
+  const days=intervals[nextIndex],d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()+days);
+  const record={version:DATA_VERSION,lessonId:"sidq",profile,age,completedAt:Date.now(),reviewCount:(Number(previous?.reviewCount)||0)+1,intervalIndex:nextIndex,nextDue:d.getTime(),selfReport:level,choiceExercises:session.answeredChoices,choiceCorrect:session.correctChoices};
+  try{localStorage.setItem(storageKey(),JSON.stringify(record));$("#nextDue").textContent=level==="help"?
+    "Gut, dass du weiter üben möchtest. Kurze Wiederholung empfohlen: "+withDate(days)+".":
+    "Nächste kurze Erinnerung vorgeschlagen: "+withDate(days)+"."}
+  catch(_){$("#nextDue").textContent="Lokal speichern ist in diesem Browser blockiert. Du kannst den Unterricht trotzdem bearbeiten."}
+  $("[data-reflect]").forEach(b=>{b.classList.toggle("active",b.dataset.reflect===level);b.setAttribute("aria-pressed",String(b.dataset.reflect===level))});
+  renderStatus();
+}
+$("[data-profile]").forEach(b=>b.addEventListener("click",()=>{profile=b.dataset.profile;applyProfile();showHome()}));
+$("#ageGroup").addEventListener("change",e=>{age=e.target.value;applyProfile();showHome()});
+$("[data-mode]").forEach(b=>b.addEventListener("click",()=>{mode=b.dataset.mode;$("[data-mode]").forEach(x=>{x.classList.toggle("active",x===b);x.setAttribute("aria-pressed",String(x===b))});if(mode==="read")stopSpeech()}));
+$("[data-open-lesson]").forEach(b=>b.addEventListener("click",showLesson));
+$("#backToAcademy").addEventListener("click",showHome);
+$("#backAfterLesson").addEventListener("click",showHome);
+$("#repeatReview").addEventListener("click",showLesson);
+$("#play").addEventListener("click",()=>speak(germanLessonText()));
+$("#stop").addEventListener("click",stopSpeech);
+$("#hint").addEventListener("click",()=>{session.usedHelp=true;$("#feedback").textContent=currentQuestions()[questionIndex]?.hint||"Lies den Beleg noch einmal."});
+$("#repeat").addEventListener("click",()=>speak(currentQuestions()[questionIndex]?.prompt||""));
+$("#check").addEventListener("click",check);
+$("#nextQuestion").addEventListener("click",()=>{questionIndex++;renderQuestion()});
+$("#finishLesson").addEventListener("click",showSummary);
+$("[data-reflect]").forEach(b=>b.addEventListener("click",()=>reflect(b.dataset.reflect)));
+$("#answer").addEventListener("input",()=>{if($("#answer").value.trim()){choice=null;$(".choice-button").forEach(x=>x.setAttribute("aria-pressed","false"))}});
+$("#mic").addEventListener("click",()=>{
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){$("#micInfo").textContent="Spracherkennung ist hier nicht verfügbar. Du kannst per Tastatur oder Auswahl antworten.";return}
+  stopSpeech();stopRecognition();
+  try{
+    recognition=new SR();recognition.lang="de-DE";recognition.interimResults=false;recognition.continuous=false;recognition.maxAlternatives=1;
+    recognition.onresult=e=>{const value=e.results?.[0]?.[0]?.transcript||"";$("#answer").value=value;choice=null;$(".choice-button").forEach(x=>x.setAttribute("aria-pressed","false"));$("#micInfo").textContent="Bitte prüfe den erkannten Text und tippe anschließend auf „Antwort prüfen“.";};
+    recognition.onerror=e=>{$("#micInfo").textContent="Die Spracherkennung konnte nicht abgeschlossen werden ("+(e.error||"unbekannt")+"). Bitte schreibe oder wähle eine Antwort.";};
+    recognition.onend=()=>{$("#mic").disabled=false;$("#cancelMic").hidden=true;recognition=null};
+    $("#mic").disabled=true;$("#cancelMic").hidden=false;$("#micInfo").textContent="Du kannst jetzt sprechen. Hinweis: Je nach Browser kann die Spracherkennung online erfolgen.";
+    recognition.start();
+  }catch(e){stopRecognition();$("#micInfo").textContent="Mikrofon derzeit nicht verfügbar. Bitte schreibe oder wähle eine Antwort."}
+});
+$("#cancelMic").addEventListener("click",()=>{try{recognition?.stop()}catch(_){}});
+document.addEventListener("visibilitychange",()=>{if(document.hidden){stopSpeech();stopRecognition()}});
+window.addEventListener("pagehide",()=>{stopSpeech();stopRecognition()});
+restoreControls();applyProfile();renderStatus();
 })();
 </script></body></html>
