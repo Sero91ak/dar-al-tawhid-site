@@ -30,7 +30,7 @@ function readPost(text,file){
  let type=fm.recordType||fm.appleTvType||"";
  if(!type&&/Prophet|Gesandte|Muḥammad|Muhammad/i.test(fm.scholar||""))type="hadith";
  if(!type&&/Hadith|Ḥadīṯ/i.test(fm.category||""))type="hadith";
- if(!type&&fm.scholar&&fm.type==="single"&&/🖋️/u.test(m[2])&&/„[^“]+“/u.test(m[2])&&!/^(?:allah|qur.an)$/i.test(norm(fm.scholar)))type="athar";
+ if(!type&&fm.scholar&&(!fm.type||fm.type==="single")&&/🖋️/u.test(m[2])&&/„[^“]+“/u.test(m[2])&&!/^(?:allah|qur.an)$/i.test(norm(fm.scholar)))type="athar";
  if(type!=="hadith"&&type!=="athar")return {skip:true,file};
  let body=m[2],piece=body.split(/\n\s*(?:📝|🌙|\*\*Überlieferungsstatus|\*\*Quelle:)/u)[0];
  const first=piece.indexOf("„"),last=piece.lastIndexOf("“");
@@ -81,6 +81,9 @@ function validate(p,otherPosts,existingTv){
  if(/^\s*#[\p{L}\p{N}_-]+\s*$/gmu.test(p.body)||/(?:^|\n)\s*(?:📥\s*Telegram|🌐\s*Website|📸\s*Instagram)\s*:/u.test(p.body))block("visible hashtags or outdated social footer",{post:p.file});
  const q=short(p.body);
  if(!q||!fs.existsSync(root+"/q/"+q+"/index.html"))block("own source page /q/ missing",{post:p.file});
+ const sourceHtml=fs.readFileSync(root+"/q/"+q+"/index.html","utf8");
+ if(!sourceHtml.includes("qsource-links")||!sourceHtml.includes("#:~:text="))block("source page lacks verified direct text evidence",{post:p.file,q});
+ if(/https?:\/\//i.test(p.body)&&!/https?:\/\/dar-al-tawhid\.de\/q\//i.test(p.body))block("external link in reader text",{post:p.file});
  const a={id:p.id,speaker:p.fm.scholar,text:p.text,q,number:p.fm.sourceHadithNumber};
  for(const e of otherPosts){const reason=duplicate(a,e);if(reason)block("existing adult post: "+reason,{post:p.file,existing:e.ref});}
  for(const e of existingTv){
