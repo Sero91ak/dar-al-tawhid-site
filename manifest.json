@@ -7,11 +7,11 @@
     "standalone",
     "minimal-ui"
   ],
-  "start_url": "/?page=start",
+  "start_url": "/?page=start&pwa=1",
   "scope": "/",
   "id": "/",
   "theme_color": "#10282a",
-  "background_color": "#f6f0e4",
+  "background_color": "#050706",
   "description": "DĀR AL TAWḤĪD – installierbare Web-App mit Qurʾān, Sunnah, Āṯār, Beiträgen, Duʿāʾ und Bibliothek.",
   "orientation": "any",
   "prefer_related_applications": false,

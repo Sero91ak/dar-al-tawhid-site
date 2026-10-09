@@ -47,8 +47,11 @@ if (fs.existsSync(publicRouterPath)) {
   assert.ok(router.includes('purpose: "maskable"'), "Android launcher must receive maskable artwork");
   assert.ok(router.includes('display: "standalone"'), "Android PWA manifest must be standalone");
   assert.ok(router.includes('id: "/"'), "Android PWA manifest must have a stable app id");
+  assert.ok(router.includes('start_url: "/?page=start&pwa=1"'), "Dynamic Android PWA manifest must preserve the loader launch marker");
 }
 assert.equal(pwaManifest.display, "standalone", "Public manifest must be installable as standalone PWA");
+assert.equal(pwaManifest.start_url, "/?page=start&pwa=1", "Installed Android PWA must launch with the loader marker");
+assert.equal(pwaManifest.background_color, "#050706", "PWA system splash background must match the standard boot surface");
 assert.equal(pwaManifest.scope, "/", "PWA scope must cover the public website");
 assert.equal(pwaManifest.id, "/", "PWA id must be stable and query-free");
 assert.ok(pwaManifest.icons.some((icon) => icon.sizes === "192x192" && /assets\/app-icons\/type-creme-ar\/icon-192\.png/.test(icon.src)), "Native iOS-equivalent 192px PWA icon missing");

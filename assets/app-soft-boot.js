@@ -1,6 +1,6 @@
 /**
  * Soft boot overlay for visitor + test web apps (iOS parity).
- * v673 · Android-PWA: Standard-Logo + 0–100%-Loader im Standalone-Modus wiederhergestellt.
+ * v674 · Android-PWA: Standard-Logo + 0–100%-Loader mit robustem PWA-Startmarker.
  * Launcher-/Installations-Icon bleibt strikt getrennt vom Boot-Logo.
  */
 (function () {
@@ -15,9 +15,16 @@
       window.DAR_ANDROID_NATIVE_APP === true;
     var __darBootStandalone = false;
     try {
+      var __darBootParamsEarly = new URLSearchParams(location.search || "");
+      var __darBootLaunchMarker = __darBootParamsEarly.get("pwa") === "1";
       __darBootStandalone =
-        !!(window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) ||
-        window.navigator.standalone === true;
+        !!(window.matchMedia && (
+          window.matchMedia("(display-mode: standalone)").matches ||
+          window.matchMedia("(display-mode: fullscreen)").matches ||
+          window.matchMedia("(display-mode: minimal-ui)").matches
+        )) ||
+        window.navigator.standalone === true ||
+        __darBootLaunchMarker;
     } catch (__darStandaloneErr) {}
     var __darDesktopPublic = !!document.querySelector('link[href*="/desktop-preview/desktop-overhaul.css"]');
     var __darPublicRoot = (__darBootPath === "/" || __darBootPath === "/index.html");
@@ -52,7 +59,7 @@
   var MAX_FAKE = 0.94;
   var FADE_HOLD_MS = 280;
   var HUNDRED_HOLD_MS = 380;
-  var MIN_SHOW_MS = 900;
+  var MIN_SHOW_MS = 1250;
   var HARD_TIMEOUT_MS = 6500;
   var THEME_FILLS = {
     dark: "#050706",
