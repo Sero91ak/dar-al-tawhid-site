@@ -60,6 +60,8 @@ assert(generator.includes("model_id==\"eleven_v4\""),"Expected V4-only voice set
 assert(generator.includes("models_by_text=word_models"),"Approved per-word V3 model routing missing");
 assert(generator.includes("allow_reviewed_legacy=True"),"Existing word audio must be preserved");
 assert(generator.includes("if len(missing)>limit:"),"Small batch spending cap missing");
+assert(generator.includes("final word recording not human-audio-approved"),"Unreviewed V3 output could be published");
+assert(generator.includes("real_hash!=str(a.get(\"sha256\") or \"\")"),"Approved V3 asset lacks SHA-256 match");
 const modelPolicy=JSON.parse(read("kids/data/dua-audio-model-policy.json"));
 assert.equal(modelPolicy.voiceProfileId,"serhat-owner-voice-2026");
 assert.equal(modelPolicy.defaultWordModel,"eleven_v4");
@@ -72,6 +74,7 @@ for(const item of modelPolicy.approvedV3Words){
   assert.equal(item.status,"human-audio-approved");
   assert(typeof item.arabic==="string"&&item.arabic.trim(),"V3 approval lacks Arabic text");
   assert(typeof item.approvedBy==="string"&&item.approvedBy.trim(),"V3 approval lacks responsible reviewer");
+  assert(/^[0-9a-f]{64}$/.test(item.sha256||""),"V3 approval requires SHA-256 of final clip");
 }
 assert(generator.includes("dua-arabic-native-fusha-word-v5-natural-20261009"),"Word render revision missing");
 assert(generator.includes("dua-arabic-native-fusha-slow-v4-natural-20261009"),"Slow render revision missing");
