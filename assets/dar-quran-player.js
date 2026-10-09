@@ -936,7 +936,7 @@
     }
     var urls = urlsFor(state.surah, state.ayah);
     urlIndex += 1;
-    if (urlIndex >= urls.length && isOffline()) {
+    if (isOffline()) {
       missingAudioHalt(state.reciter, state.surah, state.ayah, engine.lastUrl);
       return;
     }
@@ -1080,8 +1080,12 @@
       logAudio("ended ignored: empty src");
       return false;
     }
-    if (Date.now() < ignoreEndedUntil) {
+    if (Date.now() < ignoreEndedUntil && !a.ended) {
       logAudio("ended ignored: src-change window");
+      return false;
+    }
+    if (engine.loadedSurah !== state.surah || engine.loadedAyah !== state.ayah) {
+      logAudio("ended ignored: obsolete verse", snapAudio(a));
       return false;
     }
     if (!engine.started) {
@@ -1337,39 +1341,50 @@
   }
   var dataLoadSerial = 0;
   var dataSurahLoaded = 0;
-  async function ensureData() {
+  var activeDataRequest = null;
+  function ensureData() {
     var requestedSurah = Number(state.surah);
-    if (dataSurahLoaded === requestedSurah && verses.length && meta && !state.loading) return true;
+    if (dataSurahLoaded === requestedSurah && verses.length && meta && !state.loading) return Promise.resolve(true);
+    if (activeDataRequest && activeDataRequest.surah === requestedSurah) return activeDataRequest.promise;
     var requestId = ++dataLoadSerial;
     state.loading = true;
     paintStatus();
-    try {
-      if (typeof window.loadQuranIndex === "function") await window.loadQuranIndex();
-      if (requestId !== dataLoadSerial || Number(state.surah) !== requestedSurah) return false;
-      var doc = typeof window.loadQuranSurah === "function"
-        ? await window.loadQuranSurah(requestedSurah) : null;
-      if (requestId !== dataLoadSerial || Number(state.surah) !== requestedSurah) return false;
-      verses = (doc && doc.verses) || [];
-      meta = surahMeta(requestedSurah);
-      dataSurahLoaded = requestedSurah;
-      if (state.ayah > totalAyat()) state.ayah = totalAyat();
-      if (state.ayah < 1) state.ayah = 1;
-      saveState();
-      ensureTadCatalog();
-      loadTranslit(requestedSurah);
-      loadTafsir(requestedSurah);
-      return true;
-    } catch (err) {
-      if (requestId !== dataLoadSerial || Number(state.surah) !== requestedSurah) return false;
-      state.error = "Die Qurʾān-Texte konnten nicht geladen werden. Bitte erneut versuchen.";
-      paintError();
-      return false;
-    } finally {
-      if (requestId === dataLoadSerial) {
-        state.loading = false;
-        paintStatus();
+    var promise = (async function () {
+      try {
+        if (typeof window.loadQuranIndex === "function") await window.loadQuranIndex();
+        if (requestId !== dataLoadSerial || Number(state.surah) !== requestedSurah) return false;
+        var doc = typeof window.loadQuranSurah === "function"
+          ? await window.loadQuranSurah(requestedSurah) : null;
+        if (requestId !== dataLoadSerial || Number(state.surah) !== requestedSurah) return false;
+        verses = (doc && doc.verses) || [];
+        meta = surahMeta(requestedSurah);
+        dataSurahLoaded = requestedSurah;
+        if (state.ayah > totalAyat()) state.ayah = totalAyat();
+        if (state.ayah < 1) state.ayah = 1;
+        saveState();
+        ensureTadCatalog();
+        loadTranslit(requestedSurah);
+        loadTafsir(requestedSurah);
+        return true;
+      } catch (err) {
+        if (requestId !== dataLoadSerial || Number(state.surah) !== requestedSurah) return false;
+        state.error = "Die Qurʾān-Texte konnten nicht geladen werden. Bitte erneut versuchen.";
+        paintError();
+        return false;
+      } finally {
+        if (requestId === dataLoadSerial) {
+          state.loading = false;
+          paintStatus();
+        }
       }
-    }
+    })();
+    activeDataRequest = { surah: requestedSurah, promise: promise };
+    promise.then(function () {
+      if (activeDataRequest && activeDataRequest.promise === promise) activeDataRequest = null;
+    }, function () {
+      if (activeDataRequest && activeDataRequest.promise === promise) activeDataRequest = null;
+    });
+    return promise;
   }
   function parseRoute(value) {
     var parts = String(value || "").split("/").filter(Boolean);
@@ -1504,7 +1519,7 @@
     if (!root) return;
     var el = root.querySelector("[data-dqp-ayah]");
     if (!el) return;
-    var v = verseAt(state.ayah);
+    var v = dataSurahLoaded === Number(state.surah) ? verseAt(state.ayah) : null;
     var apply = function () {
       var st = el.querySelector(".dqp-status");
       if (st) st.remove();
