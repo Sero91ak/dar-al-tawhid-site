@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-10-09T13:56:48Z",
+  "timestamp": "2026-10-09T14:05:44Z",
   "trigger": "workflow_run",
   "finishedDeployConclusion": "success",
-  "finishedDeployRun": "37939329803",
+  "finishedDeployRun": "37940981535",
   "live": {
     "buildId": "kids-shell-v181-elastic1286",
     "label": "KIDS · V1.09.02",
@@ -45,6 +45,24 @@
   "lastDeployRuns": [
     {
       "conclusion": "success",
+      "created_at": "2026-10-09T14:00:33Z",
+      "head_sha": "c488382d1a5abea3057c8fe71955074a2a3d727f",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37940981535",
+      "id": 37940981535,
+      "status": "completed",
+      "updated_at": "2026-10-09T14:05:20Z"
+    },
+    {
+      "conclusion": "success",
+      "created_at": "2026-10-09T13:58:33Z",
+      "head_sha": "6e0dadfe411116a9f46b94085dfe63b0334d49fb",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37940730816",
+      "id": 37940730816,
+      "status": "completed",
+      "updated_at": "2026-10-09T14:00:32Z"
+    },
+    {
+      "conclusion": "success",
       "created_at": "2026-10-09T13:47:06Z",
       "head_sha": "23825f3de418210ba7042694cbf474ab5739a5f1",
       "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37939329803",
@@ -78,24 +96,6 @@
       "id": 37932729537,
       "status": "completed",
       "updated_at": "2026-10-09T12:51:10Z"
-    },
-    {
-      "conclusion": "success",
-      "created_at": "2026-10-09T12:50:42Z",
-      "head_sha": "9ae65ddf15ce9db83f8b0a9f25ab127b8c4420da",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37932718355",
-      "id": 37932718355,
-      "status": "completed",
-      "updated_at": "2026-10-09T12:55:46Z"
-    },
-    {
-      "conclusion": "cancelled",
-      "created_at": "2026-10-09T12:50:30Z",
-      "head_sha": "a2b47edd7f33f43d2ed136b41469c95230cb4ae0",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37932696858",
-      "id": 37932696858,
-      "status": "completed",
-      "updated_at": "2026-10-09T12:50:33Z"
     }
   ]
 }
