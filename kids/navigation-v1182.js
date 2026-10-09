@@ -14,6 +14,8 @@
   var replaying=false;
   var clickToken=0;
   var gesture=null;
+  var touchPathEnabled=false;
+  var swipeAnimating=false;
 
   function q(s,r){return (r||document).querySelector(s)}
   function qa(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
@@ -124,6 +126,10 @@
       if(el&&el.classList.contains("open"))out.push(id);
     });
     qa(".kids-follow-reader.open[id]").forEach(function(el){out.push(el.id)});
+    if(q("#kidsSalahDailyPage:not([hidden])"))out.push("kidsSalahDailyPage");
+    if(q(".kids-salah-overlay:not([hidden])"))out.push("kidsSalahLocationOverlay");
+    if(q("#duaSmartLearn.open"))out.push("duaSmartLearn");
+    if(q("#studioContentModal.open"))out.push("studioContentModal");
     return out;
   }
 
@@ -249,7 +255,8 @@
     if(!target||!target.closest)return false;
     return !!target.closest(
       "[data-close],#duaHubBack,#psClose,#psLibraryBack,#msClose,#msBack,#syClose,#syBack,#dlClose,#dlBack,"+
-      "#ghBack,#ghPlayerBack,#ghPlayerMin,.kfr-close"
+      "#ghBack,#ghPlayerBack,#ghPlayerMin,.kfr-close,"+
+      "#kidsSalahDayBack,#kidsSalahClose,#studioContentClose,#duaSmartLearn [data-dsl='close']"
     );
   }
 
@@ -374,6 +381,10 @@
 
   function visibleBackButton(){
     var selectors=[
+      ".kids-salah-overlay:not([hidden]) #kidsSalahClose",
+      "#duaSmartLearn.open .dsl-close",
+      "#studioContentModal.open #studioContentClose",
+      "#kidsSalahDailyPage:not([hidden]) #kidsSalahDayBack",
       ".kids-follow-reader.open .kfr-close",
       "#psModal.open #psClose","#msModal.open #msClose","#syModal.open #syClose","#dlModal.open #dlClose",
       "#ghPlayer.open #ghPlayerBack",
@@ -383,7 +394,8 @@
     ];
     for(var i=0;i<selectors.length;i++){
       var el=q(selectors[i]);
-      if(el)return el;
+      if(el&&el.isConnected&&el.getClientRects().length&&
+         getComputedStyle(el).visibility!=="hidden"&&getComputedStyle(el).display!=="none")return el;
     }
     return null;
   }
@@ -425,13 +437,16 @@
 
   function ignoreGestureTarget(target){
     return !!(target&&target.closest&&target.closest(
-      "input,textarea,select,[contenteditable='true'],[role='slider'],.gh-progress,.kfr-progress,.ayah-stage,.quiz-stage,"+
-      "[data-kids-horizontal-scroll],.dua-word-strip,.quran-strip,.alphabet-strip"
+      "input,textarea,select,[contenteditable='true'],[role='slider'],.gh-progress,.kfr-progress,"+
+      "[data-kids-horizontal-scroll],.dua-word-strip,.quran-strip,.alphabet-strip,"+
+      ".story-strip-scroller,.surah-strip,.kids-carousel,[data-swipe-lock]"
     ));
   }
 
   function currentSwipeSurface(){
     var selectors=[
+      ".kids-salah-overlay:not([hidden])","#duaSmartLearn.open","#studioContentModal.open",
+      "#kidsSalahDailyPage:not([hidden])",
       ".kids-follow-reader.open",
       "#psModal.open","#msModal.open","#syModal.open","#dlModal.open",
       "#ghPlayer.open","#duaHubDetail.open",
@@ -483,6 +498,7 @@
   function finishSwipeAnimation(g,commit){
     if(!g||!g.surface)return;
     var el=g.surface,reduced=false;
+    swipeAnimating=true;
     try{reduced=matchMedia("(prefers-reduced-motion: reduce)").matches}catch(_){}
     if(commit){
       var sign=g.side==="left"?1:-1;
@@ -491,10 +507,16 @@
       el.style.setProperty("transform","translate3d("+(sign*104)+"vw,0,0)","important");
       el.style.setProperty("opacity",".91","important");
       setTimeout(function(){
-        try{back()}finally{
+        var didBack=false;
+        try{didBack=back()}finally{
           requestAnimationFrame(function(){
             restoreSwipeInline(el,g.inline);
             root.classList.remove("kids-nav-dragging");
+            swipeAnimating=false;
+            if(didBack){
+              root.classList.add("kids-nav-just-returned");
+              setTimeout(function(){root.classList.remove("kids-nav-just-returned")},330);
+            }
           });
         }
       },Math.max(95,duration-28));
@@ -508,15 +530,17 @@
     setTimeout(function(){
       restoreSwipeInline(el,g.inline);
       root.classList.remove("kids-nav-dragging");
+      swipeAnimating=false;
     },duration+28);
   }
 
   function pointerDown(e){
-    if(e.isPrimary===false||e.pointerType==="mouse"||ignoreGestureTarget(e.target))return;
+    if(swipeAnimating||gesture||e.isPrimary===false||e.pointerType==="mouse"||
+       (touchPathEnabled&&e.pointerType==="touch")||ignoreGestureTarget(e.target))return;
     if(!visibleBackButton()&&index<=0)return;
     var width=Math.max(320,Number(innerWidth)||390);
-    var edge=Math.max(36,Math.min(62,width*.12));
-    var side=e.clientX<=edge?"left":(e.clientX>=width-edge?"right":"");
+    var edge=Math.max(72,Math.min(128,width*.15));
+    var side=e.clientX<=edge?"left":"";
     if(!side)return;
     var surface=currentSwipeSurface();
     if(!surface)return;
@@ -562,6 +586,43 @@
     var threshold=Math.max(78,Math.min(126,width*.255));
     var commit=dist>dy*1.18&&(dist>=threshold||(velocity>.48&&dist>34));
     finishSwipeAnimation(g,commit);
+  }
+
+  /* iOS WKWebView: touch events remain reliable when system edge gestures
+     cancel PointerEvents. Handle exactly one finger; never steal vertical
+     scrolling or a known horizontal carousel. All listeners are non-passive
+     only where preventDefault is required after a horizontal claim. */
+  function touchStart(e){
+    if(swipeAnimating||gesture||!e.touches||e.touches.length!==1)return;
+    var t=e.touches[0];
+    pointerDown({pointerId:t.identifier+10000,pointerType:"touch-fallback",
+      isPrimary:true,target:e.target,clientX:t.clientX,clientY:t.clientY});
+  }
+  function touchMove(e){
+    if(!gesture||!e.touches||e.touches.length!==1)return;
+    var t=e.touches[0];
+    pointerMove({pointerId:t.identifier+10000,clientX:t.clientX,clientY:t.clientY,
+      cancelable:e.cancelable,preventDefault:function(){e.preventDefault()},
+      stopImmediatePropagation:function(){e.stopImmediatePropagation()}});
+  }
+  function touchEnd(e){
+    if(!gesture||!e.changedTouches)return;
+    for(var i=0;i<e.changedTouches.length;i++){
+      var t=e.changedTouches[i];
+      if(t.identifier+10000!==gesture.id)continue;
+      pointerUp({pointerId:gesture.id,clientX:t.clientX,clientY:t.clientY,
+        cancelable:e.cancelable,preventDefault:function(){e.preventDefault()},
+        stopImmediatePropagation:function(){e.stopImmediatePropagation()}});
+      break;
+    }
+  }
+  function touchCancel(e){
+    if(!gesture||!e.changedTouches)return;
+    for(var i=0;i<e.changedTouches.length;i++){
+      if(e.changedTouches[i].identifier+10000===gesture.id){
+        pointerCancel({pointerId:gesture.id});break;
+      }
+    }
   }
 
   function lockHomeGeometry(force){
@@ -628,6 +689,13 @@
     document.addEventListener("pointermove",pointerMove,true);
     document.addEventListener("pointerup",pointerUp,true);
     document.addEventListener("pointercancel",pointerCancel,true);
+    touchPathEnabled=("ontouchstart" in window)||(navigator.maxTouchPoints>0);
+    if(touchPathEnabled){
+      document.addEventListener("touchstart",touchStart,{capture:true,passive:true});
+      document.addEventListener("touchmove",touchMove,{capture:true,passive:false});
+      document.addEventListener("touchend",touchEnd,{capture:true,passive:false});
+      document.addEventListener("touchcancel",touchCancel,{capture:true,passive:true});
+    }
 
     window.addEventListener("pageshow",function(){
       installLateLayout();
@@ -655,7 +723,7 @@
     resetMainTop:resetMainTop,
     captureScrolls:captureScrolls,
     signature:signature,
-    gestureVersion:"interactive-edge-swipe-v1246"
+    gestureVersion:"interactive-touch-edge-swipe-v1280"
   };
 
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});
