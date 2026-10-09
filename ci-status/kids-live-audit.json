@@ -1,15 +1,15 @@
 {
-  "timestamp": "2026-10-09T20:12:47Z",
+  "timestamp": "2026-10-09T20:14:06Z",
   "trigger": "workflow_run",
-  "finishedDeployConclusion": "cancelled",
-  "finishedDeployRun": "37985341238",
+  "finishedDeployConclusion": "success",
+  "finishedDeployRun": "37985075119",
   "live": {
     "buildId": "kids-shell-v191-home-safe1296",
     "label": "KIDS · V1.09.12",
     "homeBytes": 503168,
     "homeContainsPrayerAssets1275": false,
     "homeContainsBuild1275": false,
-    "cssBytes": 103816,
+    "cssBytes": 104415,
     "cssContainsViewportFit": true,
     "photoBytes": 4919251,
     "prayerArtworkBytes": {
@@ -49,8 +49,8 @@
       "head_sha": "f47450e25d5567c690cddb8e27f277cbb4bb3272",
       "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37985436408",
       "id": 37985436408,
-      "status": "pending",
-      "updated_at": "2026-10-09T20:12:39Z"
+      "status": "in_progress",
+      "updated_at": "2026-10-09T20:14:00Z"
     },
     {
       "conclusion": "cancelled",
@@ -71,13 +71,13 @@
       "updated_at": "2026-10-09T20:11:50Z"
     },
     {
-      "conclusion": null,
+      "conclusion": "success",
       "created_at": "2026-10-09T20:09:29Z",
       "head_sha": "f7059755833d0a34124e4c65a98749268954a8b2",
       "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37985075119",
       "id": 37985075119,
-      "status": "in_progress",
-      "updated_at": "2026-10-09T20:11:25Z"
+      "status": "completed",
+      "updated_at": "2026-10-09T20:13:57Z"
     },
     {
       "conclusion": "cancelled",
