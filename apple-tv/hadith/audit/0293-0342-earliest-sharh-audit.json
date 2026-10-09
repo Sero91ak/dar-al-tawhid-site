@@ -4,8 +4,8 @@
   "auditedDate": "2026-10-09",
   "inspectionKind": "Eintrags-/Überlieferungstext gesichtet; klassische Direktnachweise nur bei verified vollständig eingetragen",
   "totalInspected": 50,
-  "newlyVerified": 38,
-  "remainingOpen": 12,
+  "newlyVerified": 41,
+  "remainingOpen": 9,
   "status": "partial-source-verification",
   "policy": {
     "sourceOfTruth": "apple-tv/hadith/series/",
@@ -18,7 +18,7 @@
     "compareBlobSHAOnMutation": true
   },
   "caution": "Verified bedeutet: arabischer Kommentar, Werk, Bd. und digitale Werkpagination eingetragen; die konkrete Druckausgabe ist nicht nachgewiesen (sharhEdition: null). Strenge Druckeditions-Nachprüfung bleibt ein separater Qualitätsauftrag.",
-  "nextAction": "12 verbleibende offene Kommentare mit überprüfbarem frühem Direkttext ergänzen; dann HAD-0343–0392. Keine Schätzung oder pauschale Dubletten-Übernahme.",
+  "nextAction": "Die neun verbliebenen Einträge nach konkreten arabischen Kommentaren sowie Isnāden prüfen, keine Schätzungen oder automatischen Dubletten-Transfers. Nächster 50er-Audit HAD-0343–0392 separat.",
   "entries": [
     {
       "id": "HAD-0293",
@@ -65,9 +65,8 @@
     },
     {
       "id": "HAD-0301",
-      "sharh": "open-source-review",
-      "note": "Iʿtikāf und Haarpflege, möglicherweise Variante HAD-0296.",
-      "possibleSemanticParallel": "HAD-0296"
+      "sharh": "verified",
+      "commentary": "Direkter arabischer Ibn-Raǧab-Kommentar im HAD-Datensatz mit digitaler Werkpagination; gedruckte Edition nicht identifiziert."
     },
     {
       "id": "HAD-0302",
@@ -167,9 +166,8 @@
     },
     {
       "id": "HAD-0320",
-      "sharh": "open-source-review",
-      "note": "Istiḥāḍah-Überlieferung, Variantenabgleich mit HAD-0306 offen.",
-      "possibleSemanticParallel": "HAD-0306"
+      "sharh": "verified",
+      "commentary": "Direkter arabischer Ibn-Raǧab-Kommentar im HAD-Datensatz mit digitaler Werkpagination; gedruckte Edition nicht identifiziert."
     },
     {
       "id": "HAD-0321",
@@ -258,9 +256,8 @@
     },
     {
       "id": "HAD-0337",
-      "sharh": "open-source-review",
-      "note": "Tayammum vor Grußerwiderung, direkter Kommentar fehlt.",
-      "possibleSemanticParallel": null
+      "sharh": "verified",
+      "commentary": "Direkter arabischer Ibn-Raǧab-Kommentar im HAD-Datensatz mit digitaler Werkpagination; gedruckte Edition nicht identifiziert."
     },
     {
       "id": "HAD-0338",
