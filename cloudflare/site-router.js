@@ -11,7 +11,10 @@ function isAndroidBrowserRequest(ua) {
 
 function wantsPublicWebsite(request) {
   const ua = String(request.headers.get("User-Agent") || "");
-  // Every real browser, including Android, receives the public website.
+  const url = new URL(request.url);
+  // Installed PWA launches must receive the visitor app shell, not the public desktop website.
+  if (url.searchParams.get("pwa") === "1") return false;
+  // Every normal browser, including Android, receives the public website.
   // Native iOS/Android shells stay on their own app route.
   return !isNativeAppRequest(ua);
 }
