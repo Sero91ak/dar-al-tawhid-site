@@ -611,6 +611,168 @@ body[data-profile="girl"] .overview-copy .kicker{color:#f8c7da;text-shadow:none}
  }
 }
 
+
+/* V6.0 — altersgerechte Lernoberfläche, ohne zusätzliche Hero-Bilder */
+.academy-age-label{
+  color:var(--gold)!important;
+  font-size:11px!important;
+  font-weight:770;
+  line-height:1.36!important;
+  margin-top:2px;
+}
+.academy-age-warning{
+  margin:14px 0!important;
+  padding:12px 15px;
+  border:1px solid var(--gold);
+  border-radius:16px;
+  background:rgba(244,211,143,.09);
+  color:var(--text);
+  font-size:clamp(14px,1.75vw,16px);
+  font-weight:650;
+}
+.academy-age-warning[hidden]{display:none!important}
+.academy-time{
+  margin-top:9px;
+  color:var(--muted);
+  font-size:clamp(12px,1.5vw,14px);
+  font-weight:680;
+}
+body[data-kids-age="4-5"]{
+  font-family:ui-rounded,"Avenir Next Rounded","Avenir Next",-apple-system,BlinkMacSystemFont,sans-serif;
+}
+body[data-kids-age="4-5"] .overview-copy h1{
+  font-size:clamp(50px,5.9vw,70px);
+  letter-spacing:-.03em;
+}
+body[data-kids-age="4-5"] .overview-copy .greeting-salam,
+body[data-kids-age="4-5"] .overview-copy .greeting-followup{
+  font-size:clamp(17px,2.05vw,21px);
+  line-height:1.55;
+}
+body[data-kids-age="4-5"] .today-class h2,
+body[data-kids-age="4-5"] .subjects-title h2,
+body[data-kids-age="4-5"] .journey h2{
+  font-size:clamp(25px,3.5vw,33px);
+  line-height:1.25;
+  letter-spacing:-.02em;
+}
+body[data-kids-age="4-5"] .today-text p{
+  font-size:clamp(17px,2.15vw,20px);
+  line-height:1.58;
+}
+body[data-kids-age="4-5"] .today-button{
+  min-height:62px;
+  padding:14px 21px;
+  font-size:clamp(18px,2.1vw,21px);
+  font-weight:860;
+}
+body[data-kids-age="4-5"] .category-card{
+  min-height:185px;
+}
+body[data-kids-age="4-5"] .category-card-copy strong{
+  font-size:clamp(25px,3.1vw,34px);
+}
+body[data-kids-age="4-5"] .lesson-heading h1{
+  font-size:clamp(34px,5vw,52px);
+}
+body[data-kids-age="4-5"] .lesson-stage h2{
+  font-size:clamp(27px,4.4vw,36px);
+  line-height:1.25;
+}
+body[data-kids-age="4-5"] .lesson-stage .stage-body,
+body[data-kids-age="4-5"] .lesson-stage .stage-lead,
+body[data-kids-age="4-5"] .lesson-stage .teacher-explainer{
+  font-size:clamp(18px,2.6vw,22px);
+  line-height:1.75;
+}
+body[data-kids-age="4-5"] .tracker-item span{
+  font-size:clamp(11px,1.55vw,14px);
+  font-weight:800;
+}
+body[data-kids-age="4-5"] .pill,
+body[data-kids-age="4-5"] .lesson-stage button,
+body[data-kids-age="4-5"] .tracker-item{
+  min-height:54px;
+}
+body[data-kids-age="4-5"] .choice-button{
+  font-size:clamp(18px,2.6vw,21px);
+  line-height:1.5;
+  min-height:68px;
+  padding:16px 18px;
+}
+body[data-kids-age="4-5"] .lesson-stage .arabic-verse{
+  font-size:clamp(34px,5.9vw,50px);
+  line-height:1.9;
+}
+body[data-kids-age="4-5"] .arabic-play-button{
+  min-width:84px;min-height:77px;
+}
+body[data-kids-age="4-5"] .answer-open{
+  font-size:clamp(16px,2.3vw,19px);
+}
+body[data-kids-age="4-5"] .recap-lesson p{
+  font-size:clamp(18px,2.7vw,21px);
+  line-height:1.72;
+}
+body[data-kids-age="6-8"] .today-button{
+  min-height:52px;
+}
+body[data-kids-age="6-8"] .choice-button{
+  min-height:59px;
+}
+body[data-kids-age="9-10"] .lesson-heading h1{
+  font-size:clamp(33px,4.5vw,50px);
+}
+body[data-kids-age="9-10"] .lesson-stage .stage-body,
+body[data-kids-age="9-10"] .lesson-stage .stage-lead{
+  line-height:1.58;
+}
+body[data-kids-age="9-10"] .lesson-stage .spoken-paragraph p{
+  margin:10px 0;
+  line-height:1.65;
+}
+body[data-kids-age="9-10"] .lesson-stage .recap-lesson p{
+  line-height:1.66;
+}
+/* Profil: Name, Anrede und Altersstufe müssen vollständig lesbar bleiben. */
+.academy-profile-names #profileLabel{
+  overflow-wrap:anywhere;
+  white-space:normal;
+  overflow:visible;
+  text-overflow:clip;
+}
+.academy-profile-names #profileRole,
+.academy-profile-names #academyAgeLabel{
+  white-space:normal;overflow-wrap:anywhere;
+  max-width:100%;
+}
+/* Fokusführung und große Tap-Ziele auf iPhone/iPad */
+.lesson-stage .choice-button:focus-visible,
+.lesson-stage .pill:focus-visible,
+.tracker-item:focus-visible{
+  outline:3px solid var(--gold);
+  outline-offset:3px;
+}
+@media(max-width:640px){
+  .academy-header-actions{gap:8px}
+  .academy-profile{max-width:min(79vw,390px)}
+  body[data-kids-age="4-5"] .overview-copy h1,
+  body[data-kids-age="6-8"] .overview-copy h1,
+  body[data-kids-age="9-10"] .overview-copy h1{
+    font-size:clamp(36px,9.05vw,45px);
+  }
+  .overview-copy .hero-title-line{display:block}
+  body[data-kids-age="4-5"] .overview-copy .greeting-salam,
+  body[data-kids-age="4-5"] .overview-copy .greeting-followup{
+    font-size:clamp(16px,4.1vw,19px);
+  }
+  body[data-kids-age="4-5"] .today-button{width:100%;justify-content:center}
+  body[data-kids-age="4-5"] .lesson-stage{padding-inline:clamp(14px,4vw,22px)}
+  .lesson-stage .arabic-listen-row{min-width:0}
+}
+@media(prefers-reduced-motion:reduce){
+  .lesson-stage button,.journey-bar span{transition:none!important;animation:none!important}
+}
 </style></head>
 <body data-profile="boy" data-preview-release="V6.0-20261009" data-preview-deploy="v6.0-age-profile-preview"><main class="wrap">
 
