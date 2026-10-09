@@ -68,6 +68,7 @@ jobs:
       shortlinks_only: ${{ steps.scope.outputs.shortlinks_only }}
       qsource_only: ${{ steps.scope.outputs.qsource_only }}
       preview_only: ${{ steps.scope.outputs.preview_only }}
+      adult_posts_touched: ${{ steps.scope.outputs.adult_posts_touched }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -81,6 +82,7 @@ jobs:
             echo "shortlinks_only=false" >> "$GITHUB_OUTPUT"
             echo "qsource_only=false" >> "$GITHUB_OUTPUT"
             echo "preview_only=false" >> "$GITHUB_OUTPUT"
+            echo "adult_posts_touched=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           BASE="${{ github.event.before }}"
@@ -88,10 +90,18 @@ jobs:
             echo "shortlinks_only=false" >> "$GITHUB_OUTPUT"
             echo "qsource_only=false" >> "$GITHUB_OUTPUT"
             echo "preview_only=false" >> "$GITHUB_OUTPUT"
+            echo "adult_posts_touched=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           CHANGED="$(git diff --name-only "$BASE" "$GITHUB_SHA")"
           echo "$CHANGED"
+          # Adult content is deployed by the canonical Ḥadīṯ/Āṯār lane. Never let
+          # the older visitor checkout overwrite a newer Apple TV + app bundle.
+          if printf '%s\n' "$CHANGED" | grep -q '^content/posts/'; then
+            echo "adult_posts_touched=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "adult_posts_touched=false" >> "$GITHUB_OUTPUT"
+          fi
           if [ -n "$CHANGED" ] && [ -z "$(printf '%s\n' "$CHANGED" | grep -v '^_redirects$' || true)" ]; then
             if awk 'NF && $1 !~ /^#/ && $1 !~ /^\/quelle\// { bad=1 } END { exit bad }' _redirects; then
               echo "shortlinks_only=true" >> "$GITHUB_OUTPUT"
@@ -321,7 +331,7 @@ jobs:
 
   deploy:
     needs: classify
-    if: github.event_name != 'schedule' && needs.classify.outputs.shortlinks_only != 'true' && needs.classify.outputs.qsource_only != 'true' && needs.classify.outputs.preview_only != 'true'
+    if: github.event_name != 'schedule' && needs.classify.outputs.shortlinks_only != 'true' && needs.classify.outputs.qsource_only != 'true' && needs.classify.outputs.preview_only != 'true' && needs.classify.outputs.adult_posts_touched != 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
