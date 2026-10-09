@@ -22,7 +22,27 @@
   }
 
   function parseAmount(value) {
-    const n = parseFloat(String(value ?? "").replace(/\s/g, "").replace(",", "."));
+    // Accept German and international grouping while keeping precise cents and grams.
+    // German: 1.234,50 / 1.234 / 12,5; international: 1,234.50 / 12.5.
+    let str = String(value ?? "").trim().replace(/[\s\u00a0\u202f€]/g, "");
+    if (!str || !/^[\d.,]+$/.test(str)) return 0;
+    const comma = str.lastIndexOf(",");
+    const dot = str.lastIndexOf(".");
+    if (comma >= 0 && dot >= 0) {
+      const decimal = comma > dot ? "," : ".";
+      const grouping = decimal === "," ? "." : ",";
+      str = str.split(grouping).join("").replace(decimal, ".");
+    } else if (comma >= 0) {
+      if (str.split(",").length > 2 && /^\d{1,3}(?:,\d{3})+$/.test(str)) {
+        str = str.replace(/,/g, "");
+      } else {
+        str = str.replace(",", ".");
+      }
+    } else if (dot >= 0 && /^\d{1,3}(?:\.\d{3})+$/.test(str)) {
+      str = str.replace(/\./g, "");
+    }
+    if (!/^\d+(?:\.\d+)?$/.test(str)) return 0;
+    const n = Number(str);
     return Number.isFinite(n) && n > 0 ? n : 0;
   }
 
