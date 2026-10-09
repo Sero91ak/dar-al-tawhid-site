@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow"><link rel="manifest" href="/kids/manifest.webmanifest"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="theme-color" content="#071d30">
-<title>Kids-Lernakademie · Smartphone-Pilot · DĀR AL TAWḤĪD</title>
+<title>Meine Lernakademie · DĀR AL TAWḤĪD KIDS</title>
 <style>
 :root{color-scheme:dark;--gold:#e6c886;--base:#071d30;--text:#fff4dd;--muted:#c5d7d7;--border:rgba(229,203,149,.26);--accent:#75b7c1}
 *{box-sizing:border-box}html{min-height:100%;background:var(--base)}body{margin:0;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Avenir Next",sans-serif;background:radial-gradient(circle at 50% -12%,#16445c,transparent 57%),#071d30;line-height:1.55}
@@ -792,11 +792,189 @@ body[data-embedded="true"] .academy-header{display:none}
 body[data-embedded="true"] .wrap{padding-top:12px}
 .academy-back-app{display:inline-flex;align-items:center;white-space:nowrap;text-decoration:none;font-size:13px;padding:10px 12px;color:#fff1ca}
 @media(max-width:420px){.academy-header-actions{flex-wrap:wrap;justify-content:flex-end}.academy-back-app{font-size:12px;padding:8px}}
+
+/* V6.8: authoritative smartphone/tablet CSS. Older prototype rules above do
+   not define mobile geometry any more. Photo and copy have distinct zones. */
+html,body{max-width:100%;overflow-x:clip}
+.wrap,.academy-header,.academy-home,.lesson-main,.lesson-stage,.today-class,
+.category-grid,.journey,.stage-surface,.academy-brand,.academy-profile-names{min-width:0}
+.preview-refresh{display:none}
+.pill,.choice-listen,.choice-button,.category-card{touch-action:manipulation}
+@media(max-width:700px){
+ .wrap{width:100%;max-width:100%;margin:0 auto;padding:
+   calc(env(safe-area-inset-top) + 8px)
+   max(14px,env(safe-area-inset-right))
+   calc(env(safe-area-inset-bottom) + 24px)
+   max(14px,env(safe-area-inset-left))}
+ /* Header: brand and exit above one untruncated child-profile row. */
+ .academy-header{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 8px;align-items:center;padding:4px 1px 12px}
+ .academy-brand{grid-column:1;grid-row:1;min-width:0}
+ .academy-brand .brand{font:800 clamp(14px,4vw,18px)/1.3 Georgia,serif;letter-spacing:.04em}
+ .academy-brand .stage{font-size:11px;line-height:1.3;margin-top:3px}
+ .academy-header-actions{display:contents}
+ .academy-back-app{grid-column:2;grid-row:1;justify-self:end;min-height:43px;padding:10px 12px;font-size:12px}
+ .academy-profile{grid-column:1/-1;grid-row:2;justify-self:stretch;display:flex;
+   width:100%;max-width:none;min-width:0;min-height:59px;flex:none;
+   align-items:center;gap:10px;padding:7px 12px 7px 8px;border-radius:16px}
+ .academy-profile img{width:43px;height:43px;flex:0 0 43px}
+ .academy-profile .academy-profile-names{flex:1;min-width:0;max-width:100%}
+ .academy-profile-names #profileLabel{font-size:15px;line-height:1.28;white-space:normal;overflow-wrap:anywhere}
+ .academy-profile-names #profileRole,.academy-profile-names #academyAgeLabel{font-size:11px;line-height:1.3;white-space:normal}
+ /* Hero: the illustration always stays unobstructed in the photo row. */
+ .overview-hero{--photo:clamp(205px,59vw,270px);display:grid;grid-template-rows:var(--photo) auto;
+   align-items:stretch;min-height:0;height:auto;width:100%;margin:12px 0 13px;
+   padding:0!important;border-radius:22px;overflow:hidden;background:var(--surface)}
+ .overview-hero img{position:absolute;inset:0 0 auto;width:100%;height:var(--photo);
+   object-fit:cover;object-position:62% center;z-index:0}
+ .overview-hero:after{position:absolute;inset:0 0 auto;height:var(--photo);
+   background:linear-gradient(0deg,rgba(8,31,45,.45),transparent 48%);
+   z-index:1;pointer-events:none}
+ body[data-profile="girl"] .overview-hero:after{background:linear-gradient(0deg,rgba(44,27,56,.48),transparent 50%)}
+ .overview-copy,body[data-profile="boy"] .overview-copy,body[data-profile="girl"] .overview-copy{
+   grid-row:2;position:relative;isolation:isolate;display:block;box-sizing:border-box;
+   align-self:stretch;width:100%;max-width:100%;min-width:0;flex:none;margin:0;
+   padding:17px 19px 20px;background:linear-gradient(170deg,#10364b,#0c2a40);
+   border:0;border-radius:0;box-shadow:none}
+ body[data-profile="girl"] .overview-copy{background:linear-gradient(170deg,#422d54,#302341)}
+ .overview-copy::before,body[data-profile="girl"] .overview-copy::before{display:none}
+ .overview-copy .kicker{display:block;font-size:10px;line-height:1.5;letter-spacing:.1em}
+ .overview-copy h1,body[data-profile="girl"] .overview-copy h1,
+ body[data-kids-age="4-5"] .overview-copy h1,body[data-kids-age="6-8"] .overview-copy h1,
+ body[data-kids-age="9-10"] .overview-copy h1{
+   font-size:clamp(29px,7.7vw,37px);line-height:1.11;letter-spacing:-.02em;
+   margin:5px 0 0;max-width:100%;overflow-wrap:break-word}
+ .overview-copy .hero-title-line{display:inline;white-space:normal}
+ .overview-copy .hero-title-line+.hero-title-line::before{content:" "}
+ .overview-copy .overview-greeting{margin:10px 0 0;max-width:100%}
+ .overview-copy .greeting-salam,body[data-profile="girl"] .overview-copy .greeting-salam,
+ body[data-kids-age="4-5"] .overview-copy .greeting-salam{font-size:clamp(16px,4.25vw,19px);line-height:1.42;font-weight:750}
+ .overview-copy .greeting-followup,body[data-profile="girl"] .overview-copy .greeting-followup,
+ body[data-kids-age="4-5"] .overview-copy .greeting-followup{font-size:clamp(14px,3.65vw,16px);line-height:1.44;margin-top:3px}
+ /* Main actions: easy to find; secondary material follows instead of competing. */
+ .today-class{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;
+   padding:17px;border-radius:20px;margin:0}
+ .today-text{min-width:0}
+ .today-class h2,body[data-kids-age="4-5"] .today-class h2{
+   font-size:clamp(23px,6.1vw,27px);margin:4px 0 6px;line-height:1.22}
+ .today-class p,body[data-kids-age="4-5"] .today-text p{font-size:clamp(15px,4vw,18px);line-height:1.5}
+ .today-summary,.academy-time{font-size:12px;line-height:1.42}
+ .today-button,body[data-kids-age="4-5"] .today-button{
+   display:flex;align-items:center;justify-content:center;gap:9px;width:100%;max-width:none;
+   min-height:56px;padding:12px 16px;font-size:17px;border-radius:15px}
+ .journey{display:grid;grid-template-columns:minmax(0,1fr);gap:9px;
+   margin:20px 0 23px;padding:0 2px;align-items:start}
+ .journey h2,body[data-kids-age="4-5"] .journey h2{font-size:clamp(22px,6vw,27px);line-height:1.25}
+ .journey p{font-size:13px;line-height:1.5;margin:3px 0}
+ .journey-status{width:100%;flex:none;text-align:left}
+ .journey-bar{height:9px;margin:7px 0 5px}
+ .subjects-title h2,body[data-kids-age="4-5"] .subjects-title h2{font-size:clamp(23px,6.2vw,29px);line-height:1.23}
+ .subjects-title p{font-size:13px;line-height:1.45}
+ .category-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:13px 0 0}
+ .category-card,body[data-kids-age="4-5"] .category-card{
+   min-width:0;min-height:0;aspect-ratio:1/1.05;border-radius:18px}
+ .category-card-copy{min-width:0;padding:12px 10px;gap:3px}
+ .category-state{font-size:10px;letter-spacing:0}
+ .category-name,body[data-kids-age="4-5"] .category-card-copy strong{font-size:clamp(20px,5.65vw,26px);line-height:1.14}
+ .category-detail{font-size:11px;line-height:1.4;overflow-wrap:break-word}
+ /* Five lesson stages must never force horizontal scrolling. */
+ .lesson-topline{padding:12px 0 9px}
+ .lesson-topline .pill{min-height:44px;padding:9px 13px;font-size:13px}
+ .lesson-label{display:none}
+ .lesson-heading{min-height:146px;padding:18px 17px;margin:0 0 6px;border-radius:19px}
+ .lesson-theme-tag{font-size:10px;margin-bottom:6px}
+ .lesson-heading h1,body[data-kids-age="4-5"] .lesson-heading h1{
+   font-size:clamp(28px,7.4vw,36px);line-height:1.15}
+ .lesson-heading p{font-size:13px;line-height:1.45}
+ .stage-tracker{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));
+   gap:2px;overflow:visible;padding:11px 0 5px}
+ .stage-tracker button,body[data-kids-age="4-5"] .tracker-item{
+   display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+   box-sizing:border-box;width:100%;min-width:0;min-height:67px;padding:3px 1px;gap:5px}
+ .stage-tracker button b{flex:none;display:grid;place-items:center;width:32px;height:32px;font-size:13px}
+ .stage-tracker button span,body[data-kids-age="4-5"] .tracker-item span{
+   display:block;max-width:100%;font-size:clamp(9px,2.45vw,11px);
+   line-height:1.25;text-align:center;overflow-wrap:break-word}
+ .stage-surface{min-height:0}
+ .academy-audio-feedback{padding:9px 11px;margin:5px 0 11px;font-size:12px;line-height:1.45;border-radius:12px}
+ .lesson-stage,body[data-kids-age="4-5"] .lesson-stage{
+   box-sizing:border-box;min-width:0;padding:18px 16px;margin:0;border-radius:19px}
+ .lesson-stage h2,body[data-kids-age="4-5"] .lesson-stage h2{
+   font-size:clamp(23px,6.1vw,29px);line-height:1.24;margin:6px 0 11px}
+ .lesson-stage .stage-body,.lesson-stage .stage-lead,
+ body[data-kids-age="4-5"] .lesson-stage .stage-body,
+ body[data-kids-age="4-5"] .lesson-stage .stage-lead,
+ body[data-kids-age="4-5"] .lesson-stage .teacher-explainer{
+   font-size:clamp(16px,4.2vw,19px);line-height:1.65;overflow-wrap:break-word}
+ .stage-audio{display:grid;grid-template-columns:minmax(0,1fr);gap:9px;margin:14px 0 4px}
+ .stage-audio .pill{display:flex;align-items:center;justify-content:center;
+   width:100%;min-height:53px;padding:11px 13px;font-size:15px;border-radius:14px}
+ .stage-audio .voice-note,.stage-audio .master-voice-sample-note{
+   display:block;margin:0;font-size:12px;line-height:1.46}
+ /* Large Arabic type and separate listen control, no 84px min-width collision. */
+ .lesson-stage .arabic-listen-row{display:grid;grid-template-columns:minmax(0,1fr);row-gap:8px;min-width:0;padding:12px 0}
+ .lesson-stage .arabic-play-button,body[data-kids-age="4-5"] .arabic-play-button{
+   width:max-content;min-width:0;min-height:49px;flex-direction:row;
+   gap:7px;padding:8px 15px;font-size:12px;border-radius:12px}
+ .lesson-stage .arabic-verse,body[data-kids-age="4-5"] .lesson-stage .arabic-verse{
+   box-sizing:border-box;min-width:0;width:100%;
+   font-size:clamp(27px,7.1vw,35px);line-height:1.95;overflow-wrap:anywhere}
+ .lesson-stage .lesson-source-block .quote{font-size:clamp(17px,4.5vw,20px)}
+ .lesson-stage .lesson-source-block .source{font-size:12px;overflow-wrap:anywhere}
+ .question-index{flex:none;text-align:right;font-size:11px;line-height:1.4}
+ .question-prompt,body[data-kids-age="4-5"] .lesson-stage .question-prompt{
+   font-size:clamp(18px,4.9vw,22px);line-height:1.46}
+ .choices{gap:11px}
+ .choice-row{display:grid;grid-template-columns:minmax(0,1fr) 75px;gap:8px}
+ .choice-row .choice-button,body[data-kids-age="4-5"] .choice-button{
+   min-width:0;min-height:62px;padding:12px 13px;
+   font-size:clamp(16px,4.1vw,19px);line-height:1.45;border-radius:14px}
+ .choice-listen,body[data-kids-age="4-5"] .choice-listen{
+   width:75px;min-width:0;min-height:62px;padding:8px 4px;border-radius:14px;font-size:13px}
+ .answer-options{display:grid;grid-template-columns:1fr;gap:9px}
+ .answer-options .pill{width:100%;min-height:50px;font-size:14px}
+ .lesson-stage .answer-extra textarea{min-height:128px;padding:14px;font-size:17px}
+ .answer-bottom{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .answer-bottom .pill{min-width:0;min-height:50px;padding:10px;font-size:13px}
+ .answer-bottom #check{grid-column:1/-1;font-size:16px;min-height:55px}
+ .next-question{width:100%;min-height:54px}
+ .lesson-navigation{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:10px;margin:13px 0}
+ .lesson-navigation .pill{min-width:0;min-height:53px;padding:11px 12px;font-size:14px}
+ .lesson-navigation #forwardStep{grid-column:2;justify-self:stretch;margin-left:0}
+ .lesson-navigation #previousStep[hidden]+#forwardStep{grid-column:1/-1}
+ .recap-reflection .answers{display:grid;grid-template-columns:1fr;gap:9px}
+ .recap-reflection .answers .pill{min-height:50px}
+ .voice-preview audio{max-width:100%}
+}
+@media(max-width:360px){
+ .wrap{padding-right:max(11px,env(safe-area-inset-right));padding-left:max(11px,env(safe-area-inset-left))}
+ .academy-brand .brand{font-size:13px;letter-spacing:.02em}
+ .academy-brand .stage{font-size:10px}
+ .academy-back-app{font-size:11px;padding:9px 10px}
+ .overview-hero{--photo:200px}
+ .overview-copy,body[data-profile="boy"] .overview-copy,body[data-profile="girl"] .overview-copy{padding:14px 15px 17px}
+ .category-card-copy{padding:11px 9px}
+ .category-name,body[data-kids-age="4-5"] .category-card-copy strong{font-size:19px}
+ .category-detail{font-size:10px}
+ .lesson-stage,body[data-kids-age="4-5"] .lesson-stage{padding:16px 12px}
+ .choice-row{grid-template-columns:minmax(0,1fr) 66px;gap:6px}
+ .choice-listen,body[data-kids-age="4-5"] .choice-listen{width:66px;font-size:12px}
+ .stage-tracker button span{font-size:9px}
+}
+@media(min-width:701px) and (max-width:1050px){
+ .wrap{max-width:940px;padding-inline:clamp(20px,3vw,34px)}
+ .academy-profile{min-width:0;max-width:260px}
+ .overview-copy,body[data-profile="boy"] .overview-copy,body[data-profile="girl"] .overview-copy{
+   width:48%;max-width:48%}
+ .overview-copy h1,body[data-profile="girl"] .overview-copy h1{font-size:clamp(40px,5.3vw,57px)}
+ .category-card{min-width:0}
+}
+@media(hover:none){.pill:active,.choice-button:active,.choice-listen:active{filter:brightness(1.1)}}
+
 </style></head>
-<body data-profile="boy" data-preview-release="V6.7.1-20261009" data-preview-deploy="v6.7.1-own-voice-playback"><main class="wrap">
+<body data-profile="boy" data-preview-release="V6.8-20261009" data-preview-deploy="v6.7.1-own-voice-playback"><main class="wrap">
 
 <header class="academy-header">
- <div class="academy-brand"><div class="brand">DĀR AL TAWḤĪD · KIDS</div><div class="stage">Meine Lernakademie · Smartphone-Pilot V6.7.1 <span class="preview-release-stamp">Ehrliche Antworten</span></div></div>
+ <div class="academy-brand"><div class="brand">DĀR AL TAWḤĪD · KIDS</div><div class="stage">Dein Unterricht · Qurʾān & Sunnah</div></div>
  <div class="academy-header-actions"><a href="/kids/start" class="pill academy-back-app" aria-label="Zur KIDS-App zurück">← Kids-App</a><button type="button" class="preview-refresh" id="previewRefresh" aria-label="HTML-Vorschau neu laden">↻ <span>Aktualisieren</span></button><div class="academy-profile" id="academyProfile"><img id="academyAvatar" alt="" src="/kids/assets/profile-avatars/boy-kufi-v1235.svg" width="42" height="42"><span class="academy-profile-names"><strong id="profileLabel">Kinderprofil wird geladen</strong><small id="profileRole">Unterricht</small><small id="academyAgeLabel" class="academy-age-label" aria-live="polite">Altersstufe</small></span></div></div>
 </header><p id="academyAgeWarning" class="academy-age-warning" role="alert" hidden>Bitte wähle im Kinderprofil eine passende Altersstufe aus.</p>
 <section class="academy-home" id="academyHome">
