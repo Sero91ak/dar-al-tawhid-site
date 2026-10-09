@@ -1,0 +1,137 @@
+name: DAR Android · Offizielle signierte APK Downloads
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/android-public-apk-release.yml"
+  workflow_dispatch:
+    inputs:
+      source_run_id:
+        description: "Successful signed Android/TV workflow run ID"
+        required: true
+        type: string
+      expected_commit:
+        description: "40 character SHA of the Android native source build"
+        required: true
+        type: string
+      confirmation:
+        description: "Type ANDROID-VEROEFFENTLICHEN"
+        required: true
+        type: string
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: dar-android-public-releases
+  cancel-in-progress: false
+jobs:
+  public-apk-release:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Exact signed source, approval and build provenance
+        shell: bash
+        run: |
+          set -euo pipefail
+          run="37893625158"
+          sha="2ab22fc52ee203f07d2ed29913288df864bc89ef"
+          if [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" ]]; then
+            [[ "$(jq -r '.inputs.confirmation' "$GITHUB_EVENT_PATH")" == "ANDROID-VEROEFFENTLICHEN" ]] || { echo "::error::Approval missing"; exit 1; }
+            run="$(jq -r '.inputs.source_run_id' "$GITHUB_EVENT_PATH")"
+            sha="$(jq -r '.inputs.expected_commit' "$GITHUB_EVENT_PATH")"
+          fi
+          [[ "$run" =~ ^[0-9]{6,14}$ && "$sha" =~ ^[0-9a-f]{40}$ ]] || { echo "::error::Invalid source pin"; exit 1; }
+          info="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$run")"
+          [[ "$(jq -r '.conclusion' <<< "$info")" == "success" ]] || { echo "::error::Native build failed"; exit 1; }
+          [[ "$(jq -r '.head_sha' <<< "$info")" == "$sha" ]] || { echo "::error::Build SHA mismatch"; exit 1; }
+          number="$(jq -r '.run_number' <<< "$info")"
+          created="$(jq -r '.run_started_at' <<< "$info")"
+          [[ "$number" =~ ^[1-9][0-9]*$ && "$created" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}T.*Z$ ]] || exit 1
+          echo "NATIVE_RUN=$run" >> "$GITHUB_ENV"
+          echo "NATIVE_SHA=$sha" >> "$GITHUB_ENV"
+          echo "NATIVE_VERSION_CODE=$number" >> "$GITHUB_ENV"
+          echo "NATIVE_BUILD_TIME=$created" >> "$GITHUB_ENV"
+          echo "Original Android signed build: $run | commit $sha"
+
+      - name: Retrieve adult and TV signed APK artifacts only
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/phone" "$RUNNER_TEMP/tv" "$RUNNER_TEMP/publish"
+          gh run download "$NATIVE_RUN" --repo "$GITHUB_REPOSITORY" --name dar-al-tawhid-adult-signed-aab-and-apk --dir "$RUNNER_TEMP/phone"
+          gh run download "$NATIVE_RUN" --repo "$GITHUB_REPOSITORY" --name dar-al-tawhid-tv-signed-aab-and-apk --dir "$RUNNER_TEMP/tv"
+          phone="$(find "$RUNNER_TEMP/phone" -type f -name app-release.apk -size +100000c -print -quit)"
+          tv="$(find "$RUNNER_TEMP/tv" -type f -name tv-release.apk -size +100000c -print -quit)"
+          [[ -n "$phone" && -n "$tv" ]] || { echo "::error::Signed APK files unavailable"; exit 1; }
+          cp "$phone" "$RUNNER_TEMP/publish/dar-al-tawhid-android.apk"
+          cp "$tv" "$RUNNER_TEMP/publish/dar-al-tawhid-tv.apk"
+          (cd "$RUNNER_TEMP/publish" && sha256sum *.apk > SHA256SUMS.txt)
+
+      - name: Android SDK verification tools
+        uses: android-actions/setup-android@v3
+      - name: Verify APK signatures, package IDs and actual version names
+        shell: bash
+        run: |
+          set -euo pipefail
+          sdkmanager --install "build-tools;36.0.0" >/dev/null
+          sdk="$ANDROID_HOME/build-tools/36.0.0"
+          for platform in android tv; do
+            apk="$RUNNER_TEMP/publish/dar-al-tawhid-$platform.apk"
+            "$sdk/apksigner" verify --verbose "$apk" > "$RUNNER_TEMP/apksigner-$platform.txt"
+            grep -q '^Verified' "$RUNNER_TEMP/apksigner-$platform.txt" || exit 1
+            "$sdk/aapt" dump badging "$apk" > "$RUNNER_TEMP/aapt-$platform.txt"
+            read -r pkg code ver < <(python3 - "$RUNNER_TEMP/aapt-$platform.txt" <<'PY'
+          import re,sys
+          row=open(sys.argv[1],encoding="utf-8").readline()
+          def val(key):
+              match=re.search(r"\b"+key+r"='([^']+)'",row)
+              if match is None: raise SystemExit("Missing APK manifest field "+key)
+              return match.group(1)
+          print(val("name"),val("versionCode"),val("versionName"))
+          PY
+            )
+            if [[ "$platform" == "android" ]]; then
+              [[ "$pkg" == "de.daraltawhid.app" && "$ver" == "1.0.$NATIVE_VERSION_CODE" ]] || exit 1
+              echo "ANDROID_VERSION=$ver" >> "$GITHUB_ENV"
+            else
+              [[ "$pkg" == "de.daraltawhid.tv" && "$ver" == "0.1.$NATIVE_VERSION_CODE" ]] || exit 1
+              echo "TV_VERSION=$ver" >> "$GITHUB_ENV"
+            fi
+            [[ "$code" == "$NATIVE_VERSION_CODE" ]] || exit 1
+            echo "Verified signed $platform APK: $pkg $ver"
+          done
+
+      - name: Publish official Android phone and TV APK downloads
+        shell: bash
+        run: |
+          set -euo pipefail
+          tag="android-website-v1.$NATIVE_VERSION_CODE"
+          if gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "::error::Official tag already used: $tag"
+            exit 1
+          fi
+          {
+            printf 'DAR AL TAWḤĪD – signierte Android-App-Downloads\n\n'
+            printf 'ANDROID_VERSION=%s\n' "$ANDROID_VERSION"
+            printf 'TV_VERSION=%s\n' "$TV_VERSION"
+            printf 'BUILD_CREATED_AT=%s\n\n' "$NATIVE_BUILD_TIME"
+            printf '%s\n' 'Android-Smartphone: dar-al-tawhid-android.apk'
+            printf '%s\n' 'Android TV / Google TV: dar-al-tawhid-tv.apk'
+            printf '%s\n' 'Prüfsummen: SHA256SUMS.txt'
+            printf '\nOriginal Android Build: %s\n' "$NATIVE_RUN"
+            printf 'Original Native Commit: %s\n\n' "$NATIVE_SHA"
+            printf '%s\n' 'Dies ist die erste öffentliche APK-Bereitstellung. Weitere Gerätetests werden empfohlen.'
+            printf '%s\n' 'Play Protect aktiviert lassen; die digitale Signatur ist keine absolute Virenfrei-Garantie.'
+            printf '%s\n' 'Kids-Apps sind ausdrücklich NICHT enthalten.'
+          } > "$RUNNER_TEMP/release-notes.md"
+          gh release create "$tag" \
+            "$RUNNER_TEMP/publish/dar-al-tawhid-android.apk" \
+            "$RUNNER_TEMP/publish/dar-al-tawhid-tv.apk" \
+            "$RUNNER_TEMP/publish/SHA256SUMS.txt" \
+            --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
+            --title "DAR AL TAWḤĪD Android $ANDROID_VERSION · TV $TV_VERSION" \
+            --notes-file "$RUNNER_TEMP/release-notes.md" --latest
+          echo "Official downloads: https://github.com/$GITHUB_REPOSITORY/releases/tag/$tag" >> "$GITHUB_STEP_SUMMARY"
