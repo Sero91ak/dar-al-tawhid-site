@@ -239,7 +239,7 @@ function browserManifestResponse(request, androidBrowser = false) {
     ]
   };
   const headers = new Headers({
-    "Vary": "User-Agent",
+    "Vary": "User-Agent, Cookie",
     "Content-Type": "application/manifest+json; charset=utf-8",
     "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
     "CDN-Cache-Control": "no-store",
