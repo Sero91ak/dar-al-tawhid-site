@@ -17,7 +17,7 @@ function fixture(){
  for(const j of [0,5,10,15])ibm.writeFloatLE(1,j*4);
  const ibmIndex=add(ibm,"MAT4",5126,1);
  const position=Buffer.alloc(36);
- position.writeFloatLE(1,12);position.writeFloatLE(1,28);
+ position.writeFloatLE(1,12);position.writeFloatLE(1,28);position.writeFloatLE(.2,32);
  const positionIndex=add(position,"VEC3",5126,3);
  const normal=Buffer.alloc(36);
  for(const j of [8,20,32])normal.writeFloatLE(1,j);
@@ -44,7 +44,7 @@ let count=0;
 function test(name,fn){fn();count++;console.log("PASS "+name);}
 function bad(name,edit,expected){
  test(name,()=>{const {g,bin,offsets}=fixture();edit(g,bin,offsets);
-   const result=validateGeometryBytes(g,bin);assert.equal(result.valid,false);
+   const result=validateGeometryBytes(g,bin,{minimumReferencedVertices:3});assert.equal(result.valid,false);
    assert.ok(result.errors.some(x=>x.includes(expected)),JSON.stringify(result.errors));});
 }
 test("positive actual-buffer mesh with 1 bind matrix and 1 triangle",()=>{
@@ -53,7 +53,7 @@ test("positive actual-buffer mesh with 1 bind matrix and 1 triangle",()=>{
  assert.equal(r.triangles,1);assert.equal(r.productionApproved,false);
 });
 test("reject missing BIN buffer",()=>{
- const {g}=fixture();assert.equal(validateGeometryBytes(g,null).valid,false);
+ const {g}=fixture();assert.equal(validateGeometryBytes(g,null,{minimumReferencedVertices:3}).valid,false);
 });
 bad("reject invalid joint index",(_,bin,offsets)=>bin.writeUInt8(3,offsets[3]),"Out-of-range");
 bad("reject NaN position",(_,bin,offsets)=>bin.writeFloatLE(NaN,offsets[1]),"Nonfinite");
@@ -77,4 +77,10 @@ bad("reject triangle strip primitive",g=>g.meshes[0].primitives[0].mode=5,"non-t
 bad("reject missing indexed triangle mesh",g=>delete g.meshes[0].primitives[0].indices,"Invalid accessor");
 bad("reject misaligned vertex data",g=>g.accessors[1].byteOffset=2,"outside BIN");
 bad("reject invalid matrix bottom row",(_,bin,offsets)=>bin.writeFloatLE(1,offsets[0]+12),"Nonaffine");
+bad("reject repeated-index fake geometry",(_,bin,offsets)=>{for(let i=0;i<3;i++)bin.writeUInt16LE(0,offsets[5]+2*i)},"Too few actually referenced");
+bad("reject flat billboard mesh",(_,bin,offsets)=>bin.writeFloatLE(0,offsets[1]+32),"Degenerate/flat");
+test("default production minimum rejects tiny synthetic mesh",()=>{
+ const {g,bin}=fixture();const r=validateGeometryBytes(g,bin);
+ assert.equal(r.valid,false);assert.ok(r.errors.some(x=>x.includes("Too few actually referenced")));
+});
 console.log(count+" real-Buffer geometry preflight tests passed. NO 3D identity or fiqh release.");
