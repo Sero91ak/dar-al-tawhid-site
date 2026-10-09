@@ -341,14 +341,15 @@ function androidNativeToolsAddon() {
 // DAR_ANDROID_PWA_INSTALL_RUNTIME_V3_20261009
 function publicWebsiteAddon() {
   return `
-<style id="darPublicTapCleanV1">
-html,body,a,button,input,select,textarea,summary,label,[role="button"],[tabindex]{
- -webkit-tap-highlight-color:rgba(0,0,0,0)!important;
-}
-a:focus:not(:focus-visible),button:focus:not(:focus-visible),input:focus:not(:focus-visible),
-select:focus:not(:focus-visible),textarea:focus:not(:focus-visible),summary:focus:not(:focus-visible),
-[role="button"]:focus:not(:focus-visible),[tabindex]:focus:not(:focus-visible){
- outline:none!important;
+<style id="darPublicTapCleanV2">
+*{-webkit-tap-highlight-color:transparent!important}
+@media(hover:none) and (pointer:coarse){
+ a,button,[role="button"],summary,[tabindex],label,input,select,textarea{
+  -webkit-tap-highlight-color:transparent!important;
+ }
+ a:focus,button:focus,[role="button"]:focus,summary:focus,[tabindex]:focus{
+  outline:none!important;
+ }
 }
 </style>
 <style id="darPublicWebsiteOnlyV1">
