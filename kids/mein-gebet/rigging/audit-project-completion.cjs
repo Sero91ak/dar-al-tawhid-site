@@ -48,7 +48,7 @@ function audit(status,boy,girl,story,hanbali){
  need("girl independent five-view silhouette and calibrated 3/4 evidence missing",status.girl?.fiveIndependentViewsApproved===true&&passesViewEvidence(status.girl));
  need("boy exact GLB payload and invariant bone lengths unverified",checksAgainstExactBinary("boy",boy));
  need("girl exact GLB payload and invariant bone lengths unverified",checksAgainstExactBinary("girl",girl));
- need("non-root translation prevention not validated on real candidate",status.technicalQA?.translationGuardVerifiedAgainstActualV77GLB===true);
+ need("non-root translation prevention not validated on real candidate",status.technicalQA?.translationGuardVerifiedAgainstApprovedGLB===true);
  need("boy facial/hair/kufi/cloth signoff missing",status.boy?.manualFaceKufiHairClothApproval===true);
  need("girl covered hair/neck and original pink clothing not approved",
    status.girl?.fullHairAndNeckCoverage3DApproved===true&&status.girl?.matchingPinkHijabAndDress3DApproved===true);
