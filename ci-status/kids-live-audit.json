@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-10-09T18:40:16Z",
-  "trigger": "push",
-  "finishedDeployConclusion": null,
-  "finishedDeployRun": null,
+  "timestamp": "2026-10-09T18:41:13Z",
+  "trigger": "workflow_run",
+  "finishedDeployConclusion": "cancelled",
+  "finishedDeployRun": "37974955434",
   "live": {
     "buildId": "kids-shell-v185-dua-audio1290",
     "label": "KIDS · V1.09.06",
@@ -45,6 +45,24 @@
   "lastDeployRuns": [
     {
       "conclusion": null,
+      "created_at": "2026-10-09T18:41:02Z",
+      "head_sha": "33da3f2a5e92b5820f85556eb8c33cb7efe68c61",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37974980200",
+      "id": 37974980200,
+      "status": "pending",
+      "updated_at": "2026-10-09T18:41:03Z"
+    },
+    {
+      "conclusion": "cancelled",
+      "created_at": "2026-10-09T18:40:49Z",
+      "head_sha": "60e25ff836d5463e5f13170dabb969e666b9ea5d",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37974955434",
+      "id": 37974955434,
+      "status": "completed",
+      "updated_at": "2026-10-09T18:41:04Z"
+    },
+    {
+      "conclusion": null,
       "created_at": "2026-10-09T18:40:09Z",
       "head_sha": "082ae9b05808359f3497546838129558df1988d4",
       "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37974875843",
@@ -78,24 +96,6 @@
       "id": 37973457711,
       "status": "completed",
       "updated_at": "2026-10-09T18:28:00Z"
-    },
-    {
-      "conclusion": "cancelled",
-      "created_at": "2026-10-09T18:27:48Z",
-      "head_sha": "aa020a4520e273a097b70eb1b510d2513b26eeeb",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37973442726",
-      "id": 37973442726,
-      "status": "completed",
-      "updated_at": "2026-10-09T18:27:57Z"
-    },
-    {
-      "conclusion": "cancelled",
-      "created_at": "2026-10-09T18:27:41Z",
-      "head_sha": "729dc26e9a8a2ea67d11f9c0d770ae295d24ffcd",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37973428710",
-      "id": 37973428710,
-      "status": "completed",
-      "updated_at": "2026-10-09T18:27:50Z"
     }
   ]
 }
