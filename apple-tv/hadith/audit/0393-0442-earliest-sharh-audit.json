@@ -110,7 +110,7 @@
       "description": "Mawqūf/Āṯar-Fehlklassifikation korrigiert: ṣaḥīḥ marfūʿ Buḫārī Nr.828 und klassischer Ibn-Raǧab-Šarḥ 2/281."
     }
   ],
-  "nextAction": "HAD-0441 als marfūʿ-Buḫārī Nr.828 statt irreführendem 'athar' berichtigt; direkter Šarḥ Ibn Raǧab 2/281 ergänzt. Insgesamt 29/29 Ḥadīṯe mit Šarḥ. 5/21 Āṯār-Zuschreibungen verifiziert und 16 offen. Noch ausstehende Quellen nach arabischen Primärtexten und Isnāden einzeln prüfen; keine Editionsbehauptungen.",
+  "nextAction": "Alle 29/29 Ḥadīṯ-Šarḥe mit klassischem Kommentar vorhanden. 5/21 Āṯār vollständig zugeschrieben, 16 offen. HAD-0407 nach aṭ-Ṭabarī Q17:36 mit zwei Wegen und HAD-0410 nach Ibn aṣ-Ṣalāḥ Typ 61 auf direkte Texte korrigiert; die Endbewertung der Isnād-Ketten bleibt ausstehend. Nächste offene Nummern HAD-0406 und darüber hinaus.",
   "entries": [
     {
       "id": "HAD-0393",
@@ -227,8 +227,9 @@
       "id": "HAD-0407",
       "recordType": "athar",
       "sharh": "not-required",
-      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis.",
-      "attribution": "needs-review"
+      "statusNote": "aṭ-Ṭabarī Tafsīr Q17:36, Bd.17 digitale S.447, zwei arabische Wege zu Qatādah: via Saʿīd und via Maʿmar. Wortlaut über Sehen, Hören und Wissen exakt wiederhergestellt. Endgültige Kettenkritik offen.",
+      "attribution": "two-isnads-located-pending-grading",
+      "primarySourceVerified": true
     },
     {
       "id": "HAD-0408",
@@ -250,8 +251,9 @@
       "id": "HAD-0410",
       "recordType": "athar",
       "sharh": "not-required",
-      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis.",
-      "attribution": "needs-review"
+      "statusNote": "Yaḥyā al-Qaṭṭāns tatsächliche Antwort in Ibn aṣ-Ṣalāḥ, Muqaddimah, Typ 61, digitale S.389, über Abū Bakr b. Ḫallād dokumentiert. Frühere Mischparaphrase ersetzt. Vollständige Isnādkette bis Verfasser ausstehend.",
+      "attribution": "classical-report-located-chain-to-author-pending",
+      "primarySourceVerified": true
     },
     {
       "id": "HAD-0411",
