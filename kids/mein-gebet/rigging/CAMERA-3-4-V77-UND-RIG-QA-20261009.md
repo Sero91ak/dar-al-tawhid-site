@@ -32,7 +32,7 @@ Die zwei SHA-256-Werte werden vor der Bildmessung erzwungen; kein Vergleich mit 
 
 `validate-glb.cjs` blockiert jetzt Translationen aller Nicht-Wurzel-Skin-Joints (über sämtliche Skins) sowie Animationen innerer Nicht-Joint-Zwischenknoten, wenn sie zwischen zwei Skin-Joints liegen. Nur die echte eindeutige `Hips`-Wurzel darf als Skin-Joint übersetzt werden; gewöhnliche, nicht zum Skin gehörige Objekte sowie ein äußerer Elternknoten des vollständigen Rigs dürfen sich verschieben. Skalierung bleibt verboten.
 
-`validate-glb.test.cjs` enthält zusätzliche synthetische Negativ-/Positivtests. Die separat isolierte Nachbildung dieser Schutzlogik wurde lokal mit 13/13 Fällen geprüft; **eine erneute Ausführung der vollständigen, auf GitHub aktualisierten JavaScript-Suite sowie ein Validatorlauf am echten V7.7-GLB wurden noch nicht bestätigt**. Es wurde kein Animationclip verändert. Die Sperre ist vorsorglich aktiv, nicht eine Freigabe für Gebetsanimationen.
+`validate-glb.test.cjs` enthält zusätzliche synthetische Negativ-/Positivtests. Zusätzlich zur isoliert geprüften 13/13-Schutzlogik wurde nun **die tatsächliche aktualisierte GitHub-JavaScript-Datei** zusammen mit der zugehörigen Testsuite in einer abgeschotteten V8-Testumgebung mit nachgebildeten Node-Basisfunktionen ausgeführt: **29/29 PASS**. Das ersetzt weder eine GitHub-Actions-/Node-Dateisystemprüfung noch einen Validatorlauf mit dem echten V7.7-GLB; beide bleiben offen. Es wurde kein Animationclip verändert. Die Sperre ist vorsorglich aktiv, nicht eine Freigabe für Gebetsanimationen.
 
 ## 4. Nächste Modellierung nach Ermittlung der Winkel-Sensitivität
 
