@@ -18,6 +18,7 @@ from pathlib import Path
 import cv2
 import numpy as np
 from geometry_projection_preflight import assert_projection_safe
+from glb_projection_accessor import decode_triangle_primitive
 
 ORIGINAL_SHA='062b8555e861c680b1049ab6a3bee0212caa51cda5168a6b33a76be01aa987b9'
 # Five characters are NOT equal-width. Gaps sampled from original y=140..880:
@@ -43,19 +44,20 @@ def glb_mesh(path):
     vertices=[]; faces=[]; offset=0
     for mesh in gltf.get('meshes',[]):
         for prim in mesh.get('primitives',[]):
-            pa=gltf['accessors'][prim['attributes']['POSITION']]
-            pv=gltf['bufferViews'][pa['bufferView']]
-            if pa['componentType']!=5126 or pa['type']!='VEC3':raise ValueError('float32 VEC3 required')
-            po=pv.get('byteOffset',0)+pa.get('byteOffset',0)
-            xyz=np.frombuffer(blob,dtype='<f4',count=pa['count']*3,offset=po).reshape(-1,3)
-            if 'indices' not in prim:raise ValueError('triangles must be indexed')
-            ia=gltf['accessors'][prim['indices']];iv=gltf['bufferViews'][ia['bufferView']]
-            if ia['componentType'] not in (5123,5125):raise ValueError('only uint16/uint32 indices')
-            io=iv.get('byteOffset',0)+ia.get('byteOffset',0)
-            idx=np.frombuffer(blob,dtype={5123:'<u2',5125:'<u4'}[ia['componentType']],count=ia['count'],offset=io).reshape(-1,3)
-            vertices.append(xyz);faces.append(idx+offset);offset+=len(xyz)
+            # BufferView.byteStride, accessor byteOffset and element bounds
+            # must be respected. Raw frombuffer() produced fake silhouettes
+            # for GLBs using interleaved POSITION/index attributes.
+            xyz,local_faces=decode_triangle_primitive(gltf,blob,prim)
+            xyz=np.asarray(xyz,dtype=np.float64)
+            idx=np.asarray(local_faces,dtype=np.int64)
+            vertices.append(xyz)
+            faces.append(idx+offset)
+            offset+=len(xyz)
     if not vertices:raise ValueError('missing 3D triangle meshes')
-    return np.concatenate(vertices),np.concatenate(faces)
+    combined=np.concatenate(vertices)
+    if not np.isfinite(combined).all() or np.ptp(combined[:,1])<0.02:
+        raise ValueError('Nonfinite/flat model geometry invalidates original silhouette comparison')
+    return combined,np.concatenate(faces)
 
 def only_largest(mask):
     n,labels,stats,_=cv2.connectedComponentsWithStats(np.uint8(mask>0),8)
