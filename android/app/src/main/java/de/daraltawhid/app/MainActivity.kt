@@ -283,8 +283,13 @@ class MainActivity : AppCompatActivity() {
                       try{
                         var value=typeof getPrayerSettings==="function"?
                           getPrayerSettings():JSON.parse(localStorage.getItem("darPrayerSettingsV1")||"{}");
-                        var lat=Number(value.lat!=null?value.lat:value.latitude);
-                        var lon=Number(value.lon!=null?value.lon:value.lng!=null?value.lng:value.longitude);
+                        var rawLat=value.lat!=null?value.lat:value.latitude;
+                        var rawLon=value.lon!=null?value.lon:value.lng!=null?value.lng:value.longitude;
+                        // Number(null) === 0; absent location must never
+                        // silently turn into coordinates 0,0 in the widget.
+                        if(rawLat==null||rawLon==null||rawLat===""||rawLon==="")return;
+                        var lat=Number(rawLat);
+                        var lon=Number(rawLon);
                         if(!Number.isFinite(lat)||!Number.isFinite(lon)||
                            lat< -90||lat>90||lon< -180||lon>180||
                            !(value.locationGranted===true||value.city||value.locationName))return;
