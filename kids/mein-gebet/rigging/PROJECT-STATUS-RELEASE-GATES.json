@@ -107,7 +107,7 @@
     "realOriginalImageAvailableToThisRun": false,
     "physicalThreeQuarterCameraCalibrated": false,
     "javascriptRepositoryTestChecksPassed": 39,
-    "javascriptTestEnvironment": "GitHub Actions native Node.js 22 and Python 3.11; 184/184 synthetic tests on latest verified draft run",
+    "javascriptTestEnvironment": "GitHub Actions native Node.js 22/Python 3.11; current green checks verified from the latest run",
     "modelVerification": {
       "boy": {
         "glbSha256": null,
@@ -138,12 +138,12 @@
     "allGreenMetadataWithoutGLBStillReleaseBlocked": true,
     "binarySamplerTestsPassed": 20,
     "geometryProjectionPreflightUnitTestsPassed": 14,
-    "nativeRunnerTotalChecksPassed": 184,
+    "nativeRunnerTotalChecksPassed": 205,
     "nativeRunnerCompletedSuccessfully": true,
     "nativeRunner": "GitHub Actions ubuntu-latest; Node.js 22; Python 3.11",
-    "nativeRunnerHeadSha": "6bf3f7e489b8bde9a0593b4135e9409c1edfda5d",
-    "nativeRunnerRunUrl": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37937012907",
-    "nativeRunnerScope": "184 native CI unit/integration/security checks, all with synthetic fixture bytes; SHA-pinned original V7.7 GLB and reference still unavailable, no model visual/fiqh approval.",
+    "nativeRunnerHeadSha": "1a0ae6e7ed09988ee9bc77860221701a5890b1ce",
+    "nativeRunnerRunUrl": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37947486073",
+    "nativeRunnerScope": "205 actual GitHub Actions Node.js 22/Python 3.11 checks with synthetic buffers/files. No original V7.7 GLB or original illustration bytes obtained; no visual/fiqh/device signoff.",
     "binarySampleProofOnActualGLB": false,
     "realFiveViewRecomputedAfterV77": false,
     "staticRigTransformGuardCommitted": true,
@@ -161,6 +161,11 @@
     "boneLengthNumericTestsPassed": 20,
     "v77ArchiveIntakeCommitted": true,
     "v77ArchiveSecurityTestsPassed": 15,
-    "v77ArchiveActualModelBytesValidated": false
+    "v77ArchiveActualModelBytesValidated": false,
+    "originalViewAccessorDecoderCommitted": true,
+    "originalViewAccessorDecoderTestsPassed": 21,
+    "originalViewInterleavedByteStrideHandled": true,
+    "originalViewUnreferencedOutliersIgnored": true,
+    "originalViewActualV77Remeasured": false
   }
 }
