@@ -2257,6 +2257,8 @@ button,input,select{font:inherit}
 
 </style>
 <link rel="stylesheet" href="/desktop-preview/desktop-overhaul.css?v=282">
+<link rel="stylesheet" href="/assets/app-card-layout.css?v=1297">
+<link rel="stylesheet" href="/desktop-preview/zakat-desktop.css?v=1">
 <link rel="stylesheet" href="/test/assets/frauen/frauen-fiqh.css?v=1292-live">
 <link rel="stylesheet" href="/test/assets/frauen/frauen-authority-v1292.css?v=frauen-authority-v1292">
 <script src="/test/assets/frauen/frauen-fiqh.js?v=1294-share-brand" defer></script>
@@ -2371,6 +2373,10 @@ html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
 <main class="page" id="pageRoot"></main>
 
 <script src="/widgets/shared/prayer-math.js"></script>
+<script src="/assets/zakat-engine.js?v=1"></script>
+<script src="/assets/zakat-pdf.js?v=1"></script>
+<script src="/assets/zakat-app.js?v=1"></script>
+<script src="/desktop-preview/zakat-desktop.js?v=1"></script>
 <script>
 (function(){
  "use strict";
@@ -2393,7 +2399,7 @@ html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
   suche:["SUCHE","In allen Bereichen suchen.","Durchsuche Qurʾān, Beiträge, Duʿāʾ, Wissen, Bibliothek und Quellen von einem Ort aus."],
   thema:["THEMA","Wissen nach Themen.","Öffne verwandte Beiträge, Aussagen und Quellen innerhalb eines Themenbereichs."],
   werk:["WERK","Werk und Inhaltsübersicht.","Informationen zum Werk, Autor und verfügbare Kapitel."],
-  zakat:["ZAKĀT","Zakāt berechnen.","Ein einfacher Rechner mit klarer Eingabe und Ergebnis."],
+  zakat:["ZAKĀT","Zakāt vollständig berechnen.","Niṣāb, Ḥawl, Gold und Silber, liquide Mittel und fällige Schulden – mit Live-Preisen, Quellen und transparentem Rechenweg."],
   quiz:["QUIZ","Wissen prüfen.","Beantworte Fragen und erhalte direkt eine Rückmeldung."],
   propheten:["PROPHETEN","Biografien und Lehren.","Kapitelweise Übersicht zu den Propheten mit Quellenbezug."],
   frauen:["FRAUEN","Wissen und Überlieferungen.","Thematische Inhalte über Frauen in Qurʾān, Sunnah und den frühen Generationen."],
@@ -2510,9 +2516,11 @@ html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
   return intro("werk")+'<section class="section parchment reveal"><div id="workReal"><div class="loading-line">Werk wird geladen …</div></div></section>'+footer()
  }
  function zakat(){
-  return intro("zakat")+'<section class="section parchment reveal"><div style="max-width:760px"><div class="form-line"><label for="zCash">Geldvermögen</label><input id="zCash" inputmode="decimal" placeholder="0,00 €"></div><div class="form-line"><label for="zGold">Gold / Silber</label><input id="zGold" inputmode="decimal" placeholder="0,00 €"></div><div class="form-line"><label for="zDebt">Fällige Schulden</label><input id="zDebt" inputmode="decimal" placeholder="0,00 €"></div><div id="zResult" class="calc-result">Zakāt: 0,00 €</div><p style="color:#766e62;font-size:10.5px;line-height:1.6">Die endgültige Berechnung hängt unter anderem vom Nisāb und der persönlichen Situation ab.</p></div></section>'+footer()
- }
- function quiz(){
+  return intro("zakat")+
+   '<section class="section parchment reveal"><div id="desktopZakatMount" aria-live="polite"><div class="loading-line">Zakāt-Rechner mit Niṣāb, Ḥawl und aktuellen Preisen wird geladen …</div></div></section>'+
+   footer()
+  }
+  function quiz(){
   return intro("quiz")+'<section class="section reveal"><div id="quizReal" class="quiz-shell"><div class="loading-line">Fragen werden geladen …</div></div></section>'+footer()
  }
  function propheten(){
@@ -3000,12 +3008,13 @@ html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
   input.oninput=paint;paint()
  }
  function initZakat(){
-  var els=["zCash","zGold","zDebt"].map(function(id){return document.getElementById(id)}),out=document.getElementById("zResult");
-  function num(v){return Number(String(v||"").replace(/\./g,"").replace(",","."))||0}
-  function calc(){var net=Math.max(0,num(els[0].value)+num(els[1].value)-num(els[2].value));out.textContent="Zakāt: "+(net*.025).toLocaleString("de-DE",{minimumFractionDigits:2,maximumFractionDigits:2})+" €"}
-  els.forEach(function(el){el.oninput=calc})
+  if(window.DARDesktopZakat)window.DARDesktopZakat.ready();
+  else{
+   var el=document.getElementById("desktopZakatMount");
+   if(el)el.textContent="Der vollständige Zakāt-Rechner konnte nicht gestartet werden. Bitte lade die Seite erneut.";
+  }
  }
- function initQuiz(){
+  function initQuiz(){
   var out=document.getElementById("quizFeedback");document.querySelectorAll(".quiz-option").forEach(function(b){b.onclick=function(){out.textContent=b.getAttribute("data-correct")==="1"?"Richtig · Ibn Sīrīn.":"Nicht richtig. Die Aussage wird von Ibn Sīrīn überliefert."}})
  }
  function initSettings(){
