@@ -2325,10 +2325,10 @@ button,input,select{font:inherit}
     document.querySelectorAll("[data-dar-pwa-install]").forEach(function(btn){
      if(!btn.dataset.darInstallLabel)btn.dataset.darInstallLabel=btn.textContent||"Web-App installieren";
      var preparing=android&&!installed&&!ready;
-     btn.disabled=installed||preparing;
-     btn.setAttribute("aria-disabled",(installed||preparing)?"true":"false");
+     btn.disabled=installed;
+     btn.setAttribute("aria-disabled",installed?"true":"false");
      btn.setAttribute("data-dar-pwa-install-state",installed?"installed":(ready?"ready":"preparing"));
-     var nextLabel=installed?"Bereits installiert":(preparing?"Installation wird vorbereitet …":btn.dataset.darInstallLabel);
+     var nextLabel=installed?"Bereits installiert":btn.dataset.darInstallLabel;
      if(btn.textContent!==nextLabel)btn.textContent=nextLabel;
     });
    }catch(e){}
@@ -2373,8 +2373,20 @@ button,input,select{font:inherit}
     if(!target)return;
     var promptEvent=window.__darEarlyInstallPrompt;
     if(!promptEvent){
-      // The button is disabled while Chrome is still preparing the native prompt.
       event.preventDefault();
+      try{
+        if("serviceWorker" in navigator){
+          navigator.serviceWorker.register("/service-worker.js",{scope:"/"}).then(function(){
+            return navigator.serviceWorker.ready;
+          }).catch(function(){});
+        }
+      }catch(ePrime){}
+      window.__darPwaInstallState="preparing";
+      window.__darSyncInstallButtons();
+      try{
+        var hint=document.querySelector("[data-dar-pwa-hint]");
+        if(hint)hint.textContent="Installation wird vorbereitet. Sobald Android bereit ist, erneut auf „Web-App installieren“ tippen.";
+      }catch(eHint){}
       return;
     }
     event.preventDefault();
@@ -2564,6 +2576,29 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
 }
 </style>
 <!-- android-pwa-direct-install-live-v4-touch-clean -->
+<style id="darTapFlashKillV9">
+@media (hover:none),(pointer:coarse){
+  html,body,body *{-webkit-tap-highlight-color:transparent!important}
+  a,button,[role="button"],summary,[tabindex],label,input,select,textarea,
+  .desktop-link,.more-row,.category-card,.feature-card,.header-action,.main-nav a{
+    -webkit-tap-highlight-color:transparent!important;
+    -webkit-touch-callout:none!important;
+  }
+  a:active,button:active,[role="button"]:active,summary:active,[tabindex]:active,
+  .desktop-link:active,.more-row:active,.category-card:active,.feature-card:active,.header-action:active,.main-nav a:active{
+    background-image:none!important;
+    filter:none!important;
+    opacity:1!important;
+    outline:none!important;
+    box-shadow:none!important;
+  }
+  a:focus,button:focus,[role="button"]:focus,summary:focus,[tabindex]:focus,
+  a:focus-visible,button:focus-visible,[role="button"]:focus-visible,summary:focus-visible,[tabindex]:focus-visible{
+    outline:none!important;
+    box-shadow:none!important;
+  }
+}
+</style>
 </head>
 <style id="dar-touch-active-fix">
 @media (hover:none) and (pointer:coarse){
