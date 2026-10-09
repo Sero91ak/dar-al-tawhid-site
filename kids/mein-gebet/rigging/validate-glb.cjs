@@ -10,6 +10,7 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const {validateAnimationBytes} = require("./validate-glb-binary.cjs");
+const {validateGeometryBytes} = require("./validate-glb-geometry-binary.cjs");
 const GLB_MAGIC = 0x46546c67;
 const GLB_JSON = 0x4e4f534a;
 
@@ -203,6 +204,13 @@ function main(args) {
       result.structureValid = false;
     }
     result.animationSamplerBytesVerified = binary.valid;
+    const geometry = validateGeometryBytes(gltf, bin);
+    if (!geometry.valid) {
+      result.errors.push(...geometry.errors);
+      result.structureValid = false;
+    }
+    result.geometryVertexBytesVerified = geometry.valid;
+    result.binaryGeometry = {vertices:geometry.vertices || 0,triangles:geometry.triangles || 0};
     result.productionApproved = false;
     process.stdout.write(JSON.stringify(result,null,2)+"\n");
     return result.structureValid ? 0 : 1;
