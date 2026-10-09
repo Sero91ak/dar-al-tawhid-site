@@ -194,7 +194,7 @@
           })).then(function (chunks) {
             var records = sortRecords([].concat.apply([], chunks));
             var complete = records.filter(hasVerifiedSharh);
-            var open = records.filter(function (record) { return !hasVerifiedSharh(record); });
+            var open = records.filter(function (record) { return (record.recordType || "hadith") !== "athar" && !hasVerifiedSharh(record); });
 
             return {
               libraryCatalog: libraryCatalog,
