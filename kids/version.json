@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v183-header-lock1288",
-  "label": "KIDS · V1.09.04",
+  "buildId": "kids-shell-v184-quran-top1289",
+  "label": "KIDS · V1.09.05",
   "releasedAt": "2026-10-09T12:48:30Z",
-  "note": "KIDS V1.09.04: Kopfzeile des Duʿāʾ-Lernmodus geometrisch an das freigegebene Bild der Duʿāʾ-Detailseite angeglichen. Abweichende Safe-Area-/Innenabstands-Regeln überschrieben, gleicher Button (44px, Pfeil, 15px Rundung), gleiche Titel-/Untertitel-Ausrichtung, Linien, Farben und Rundungen. Der Lernfortschritt 2/2 bzw. 7/7 wird als dezente dünne Linie innerhalb der Kopfzeile dargestellt, nicht als separater Abschlussstreifen. Lesen und Hörfunktionen bleiben unverändert.",
+  "note": "KIDS V1.09.05: Der Qurʾān-Lernbildschirm (z.B. An-Nās) besitzt keine separate dunkelblaue Safe-Area-Leerfläche mehr oberhalb der Kopfzeile. Doppelte Safe-Area-Reservierung im alten Qurʾān-Modal beseitigt: nur die globale Kopfzeile verwaltet den Abstand zur iOS-Statusanzeige. Header reicht durchgehend bis an den oberen Bildschirmrand; Button, Abstände, Titel, Untertitel, Rundung und Hintergrund wie beim freigegebenen Duʿāʾ-Detail. Touch, Hör-/Sprechfunktionen, Wortmarkierung und gesamte Lernlogik unverändert.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1288",
+    "serviceWorkerCache": "v1289",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
