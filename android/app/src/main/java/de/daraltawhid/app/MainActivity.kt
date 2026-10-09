@@ -24,6 +24,7 @@ import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Toast
+import android.util.Base64
 import android.widget.Button
 import android.widget.LinearLayout
 import androidx.activity.OnBackPressedCallback
@@ -144,11 +145,20 @@ class MainActivity : AppCompatActivity() {
                     try {
                       if(!window.webkit) window.webkit={};
                       if(!window.webkit.messageHandlers) window.webkit.messageHandlers={};
+                      if(!window.__darAndroidIconUserClickBound){
+                        window.__darAndroidIconUserClickBound=true;
+                        document.addEventListener("click",function(ev){
+                          var btn=ev.target&&ev.target.closest&&ev.target.closest("[data-app-icon-select]");
+                          if(btn)window.__darAndroidIconClick={id:btn.getAttribute("data-app-icon-select"),time:Date.now()};
+                        },true);
+                      }
                       window.webkit.messageHandlers.darAppIcon={
                         postMessage:function(payload){
-                          var selected=typeof payload==="string"?payload:
-                            payload&&typeof payload==="object"?(payload.name||payload.id||""):"";
-                          DarNative.setAppIcon(String(selected));
+                          var id=payload&&typeof payload==="object"?String(payload.id||""):"";
+                          var click=window.__darAndroidIconClick;
+                          if(!id||!click||id!==click.id||Date.now()-click.time>2500)return;
+                          window.__darAndroidIconClick=null;
+                          DarNative.setAppIcon(id);
                         }
                       };
                       window.DAR_ANDROID_SELECT_APP_ICON=function(name){
@@ -246,12 +256,22 @@ class MainActivity : AppCompatActivity() {
                 try {
                   if(!window.webkit) window.webkit={};
                   if(!window.webkit.messageHandlers) window.webkit.messageHandlers={};
+                  if(!window.__darAndroidIconUserClickBound){
+                    window.__darAndroidIconUserClickBound=true;
+                    document.addEventListener("click",function(ev){
+                      var btn=ev.target&&ev.target.closest&&ev.target.closest("[data-app-icon-select]");
+                      if(btn)window.__darAndroidIconClick={id:btn.getAttribute("data-app-icon-select"),time:Date.now()};
+                    },true);
+                  }
                   window.webkit.messageHandlers.darAppIcon={
                     postMessage:function(payload){
                       try {
-                        var chosen=typeof payload==="string"?payload:
-                          payload&&typeof payload==="object"?(payload.name||payload.id||""):"";
-                        DarNative.setAppIcon(String(chosen));
+                        var id=payload&&typeof payload==="object"?String(payload.id||""):"";
+                        var click=window.__darAndroidIconClick;
+                        if(!id||!click||id!==click.id||Date.now()-click.time>2500)return;
+                        window.__darAndroidIconClick=null;
+                        DarNative.setAppIcon(id);
+                        if(window.__darAndroidRefreshUi)window.__darAndroidRefreshUi();
                       }catch(iconError){}
                     }
                   };
@@ -352,6 +372,7 @@ class MainActivity : AppCompatActivity() {
             })();
         """.trimIndent()
         webView.evaluateJavascript(js, null)
+        webView.evaluateJavascript(DarAndroidUi.SCRIPT, null)
     }
 
     private fun jsString(value: String): String =
@@ -373,6 +394,12 @@ class MainActivity : AppCompatActivity() {
 
         @JavascriptInterface
         fun getAppIcon(): String = DarAppIcons.current(this@MainActivity)
+
+        @JavascriptInterface
+        fun getDefaultIconDataUri(): String = runCatching {
+            val bytes = resources.openRawResource(R.drawable.dar_phone_default).use { it.readBytes() }
+            "data:image/jpeg;base64," + Base64.encodeToString(bytes, Base64.NO_WRAP)
+        }.getOrDefault("")
 
         @JavascriptInterface
         fun saveWidgetLocation(latitude: Double, longitude: Double, city: String) {
