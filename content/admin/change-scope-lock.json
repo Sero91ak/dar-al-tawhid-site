@@ -155,6 +155,26 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-athar-hadith-auto-global-20261009",
+      "at": "2026-10-09T11:57:00+02:00",
+      "approvedBy": "user-explicit-global-live-adult-ios-android-desktop-apple-tv-with-duplicate-block",
+      "reason": "New canonical auto-publishing flow. Hadith only with verified Sharh; Athar without Sharh; duplicate rejection with user-visible GitHub issue; live adult surfaces including Apple TV; Kids and notification pushes protected.",
+      "paths": [
+        "scripts/adult-content-publication-guard.js",
+        "scripts/rebuild-canonical-islamic-content.js",
+        "scripts/validate-canonical-content.js",
+        ".github/workflows/canonical-islamic-content-live.yml",
+        ".github/workflows/cloudflare-pages-deploy.yml",
+        "apple-tv/hadith/",
+        "assets/hadith-library-data.js",
+        "test/assets/hadith-library-data.js",
+        "content/posts/",
+        "content/admin/change-scope-lock.json",
+        "AGENTS.md"
+      ],
+      "expiresAt": "2027-01-31T23:59:00.000Z"
+    },
+    {
       "id": "app-lanes-separate-commits-2026-10-07",
       "approvedBy": "user-explicit-vier-apps-separat-commit-nicht-gleichen-weg",
       "reason": "Nutzer will bei einer Vorgabe für mehrere Apps getrennte Commits und getrennte Deploy-Wege (Kids, Web, Test, Apple TV), damit ein Push nicht alle Apps hängt oder rot macht.",
