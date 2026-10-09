@@ -1335,22 +1335,41 @@
       ? window.quranSurahMeta(id)
       : ((window.quranMeta && window.quranMeta.surahs) || []).find(function (s) { return Number(s.id) === Number(id); });
   }
+  var dataLoadSerial = 0;
+  var dataSurahLoaded = 0;
   async function ensureData() {
+    var requestedSurah = Number(state.surah);
+    if (dataSurahLoaded === requestedSurah && verses.length && meta && !state.loading) return true;
+    var requestId = ++dataLoadSerial;
     state.loading = true;
     paintStatus();
-    if (typeof window.loadQuranIndex === "function") await window.loadQuranIndex();
-    if (typeof window.loadQuranSurah === "function") {
-      var doc = await window.loadQuranSurah(state.surah);
+    try {
+      if (typeof window.loadQuranIndex === "function") await window.loadQuranIndex();
+      if (requestId !== dataLoadSerial || Number(state.surah) !== requestedSurah) return false;
+      var doc = typeof window.loadQuranSurah === "function"
+        ? await window.loadQuranSurah(requestedSurah) : null;
+      if (requestId !== dataLoadSerial || Number(state.surah) !== requestedSurah) return false;
       verses = (doc && doc.verses) || [];
-    } else verses = [];
-    meta = surahMeta(state.surah);
-    if (state.ayah > totalAyat()) state.ayah = totalAyat();
-    if (state.ayah < 1) state.ayah = 1;
-    state.loading = false;
-    saveState();
-    ensureTadCatalog();
-    loadTranslit(state.surah);
-    loadTafsir(state.surah);
+      meta = surahMeta(requestedSurah);
+      dataSurahLoaded = requestedSurah;
+      if (state.ayah > totalAyat()) state.ayah = totalAyat();
+      if (state.ayah < 1) state.ayah = 1;
+      saveState();
+      ensureTadCatalog();
+      loadTranslit(requestedSurah);
+      loadTafsir(requestedSurah);
+      return true;
+    } catch (err) {
+      if (requestId !== dataLoadSerial || Number(state.surah) !== requestedSurah) return false;
+      state.error = "Die Qurʾān-Texte konnten nicht geladen werden. Bitte erneut versuchen.";
+      paintError();
+      return false;
+    } finally {
+      if (requestId === dataLoadSerial) {
+        state.loading = false;
+        paintStatus();
+      }
+    }
   }
   function parseRoute(value) {
     var parts = String(value || "").split("/").filter(Boolean);
@@ -1834,7 +1853,7 @@
   var progCache = null;
   var lastProgPct = -1;
   var lastProgPaintAt = 0;
-  var PROG_HZ = 120;
+  var PROG_HZ = 30;
   var PROG_FRAME_MS = 1000 / PROG_HZ;
   function invalidateProgressCache() { progCache = null; lastProgPct = -1; }
   var lastSeekUiAt = 0;
@@ -1953,7 +1972,7 @@
     if (!progressTimer) {
       progressTimer = setInterval(function () {
         progressClockTick();
-      }, 8);
+      }, 250);
     }
   }
   function stopProgressClock() {
@@ -2987,9 +3006,7 @@
       if (opt) onOpt(opt);
     }
     sh.addEventListener("click", handle, true);
-    sh.addEventListener("pointerup", function (ev) {
-      if (ev.pointerType === "touch") handle(ev);
-    }, true);
+    // Native click already follows touch; do not handle both pointerup and click.
   }
   function learnSheet() {
     var sh = document.getElementById("dqpLearnSheet");
@@ -3070,8 +3087,14 @@
   async function gotoSurah(id, ayah, autoplay, keepReciter) {
     var next = Math.max(1, Math.min(114, Number(id) || 1));
     rememberSurah(next);
+    if (next !== state.surah) {
+      dataLoadSerial += 1;
+      dataSurahLoaded = 0;
+      verses = [];
+      meta = surahMeta(next) || null;
+    }
     state.surah = next;
-    state.ayah = Number(ayah) || 1;
+    state.ayah = Math.max(1, Math.min(ayahCountHard(next), Number(ayah) || 1));
     state.resumeAt = 0;
     if (!keepReciter && (state.shuffle === "reciter" || state.shuffle === "both")) state.reciter = pickRandomReciter();
     writeHash();
@@ -3120,8 +3143,8 @@
     logAudio("previous clicked", { surah: state.surah, ayah: state.ayah, qari: state.reciter });
     if (state.ayah > 1) return gotoAyah(state.ayah - 1, state.playing);
     if (state.surah > 1) {
-      await gotoSurah(state.surah - 1, 1, state.playing, true);
-      return gotoAyah(totalAyat(), state.playing);
+      var previousSurah = state.surah - 1;
+      return gotoSurah(previousSurah, ayahCountHard(previousSurah), state.playing, true);
     }
   }
   function skip(d) {
@@ -3275,11 +3298,12 @@
     }
     if (id.indexOf("r-") === 0) {
       closeSheet();
+      var wasPlaying = !!state.playing && !audioEl().paused;
       state.reciter = id.slice(2);
       state.resumeAt = audioEl().currentTime || 0;
       saveState();
       paintInfo();
-      loadAudio(true, true);
+      loadAudio(wasPlaying, true);
       return;
     }
     if (id === "m-shuffle") {
@@ -3432,10 +3456,7 @@
       if (opt) onOpt(opt);
     }
     root.addEventListener("click", onPlayerAction);
-    root.addEventListener("keydown", function (ev) {
-      if (ev.key !== "Enter" && ev.key !== " " && ev.key !== "Spacebar") return;
-      onPlayerAction(ev);
-    });
+    // Native buttons dispatch click for Enter/Space; no duplicate keydown action.
     root.addEventListener("input", function (ev) {
       if (ev.target && ev.target.getAttribute("data-dqp") === "text-scale") {
         setTextScale(ev.target.value, true);
@@ -3616,6 +3637,8 @@
     },
     stop: stopSession,
     open: launchPlayback,
+    next: function () { return nextAyah(false); },
+    prev: function () { return prevAyah(); },
     playFromReader: playFromReader,
     revealPlayingAyah: revealPlayingAyah,
     store: function () {
