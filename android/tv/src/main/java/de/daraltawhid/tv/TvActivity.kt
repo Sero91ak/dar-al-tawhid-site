@@ -167,7 +167,7 @@ class TvActivity : Activity() {
                     is String -> record
                     else -> ""
                 }
-                val value = Regex("""\\b(?:[01]?\\d|2[0-3]):[0-5]\\d\\b""").find(raw)?.value
+                val value = Regex("""\b(?:[01]?\d|2[0-3]):[0-5]\d\b""").find(raw)?.value
                 if (value != null) lines.add("$display   ·   $value")
             }
             prayerTimesLabel.text =
