@@ -63,6 +63,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: main
+          fetch-depth: 2 # needed to diff first parent after merge; avoid unauthorised full batch
 
       # Safe default: code/CI changes MUST NOT trigger a costly full quiz/Duʿāʾ render.
       # Only explicitly selected workflow_dispatch and scoped source changes may render.
