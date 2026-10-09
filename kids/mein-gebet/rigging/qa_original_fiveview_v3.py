@@ -17,6 +17,7 @@ import struct
 from pathlib import Path
 import cv2
 import numpy as np
+from geometry_projection_preflight import assert_projection_safe
 
 ORIGINAL_SHA='062b8555e861c680b1049ab6a3bee0212caa51cda5168a6b33a76be01aa987b9'
 # Five characters are NOT equal-width. Gaps sampled from original y=140..880:
@@ -35,6 +36,7 @@ def glb_mesh(path):
     jsize,jtype=struct.unpack_from('<II',raw,12)
     if jtype!=0x4e4f534a:raise ValueError('GLB JSON chunk not first')
     gltf=json.loads(raw[20:20+jsize]);bo=20+jsize
+    assert_projection_safe(gltf)  # Never score unprojected transforms/morphs as genuine silhouettes.
     bsize,btype=struct.unpack_from('<II',raw,bo)
     if btype!=0x004e4942 or bo+8+bsize>len(raw):raise ValueError('GLB binary data missing')
     blob=raw[bo+8:bo+8+bsize]
