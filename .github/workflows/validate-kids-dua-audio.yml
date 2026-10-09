@@ -51,7 +51,7 @@ jobs:
           python3 - <<'PY'
           import pathlib, re, textwrap
           text=pathlib.Path(".github/workflows/build-kids-quiz-owner-voice.yml").read_text(encoding="utf-8")
-          blocks=re.findall(r"(?ms)^          python3 - <<'PY'\\n(.*?)^          PY\\s*$",text)
+          blocks=re.findall(r"(?ms)^          python3 - <<'PY'\n(.*?)^          PY\s*$",text)
           candidates=[textwrap.dedent(part) for part in blocks if "def build_pack" in part]
           assert len(candidates)==1,"Cannot uniquely extract Kids voice generator for static QA"
           compile(candidates[0],"<Kids owner-voice generator>","exec")
