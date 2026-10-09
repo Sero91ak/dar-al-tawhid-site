@@ -40,6 +40,7 @@ jobs:
           node --check kids/mein-gebet/rigging/validate-glb-binary.cjs
           node --check kids/mein-gebet/rigging/validate-glb-geometry-binary.cjs
           node --check kids/mein-gebet/rigging/validate-pose-bone-lengths.cjs
+          node --check kids/mein-gebet/rigging/validate-inverse-bind-pose.cjs
           node --check kids/mein-gebet/rigging/audit-project-completion.cjs
           node --check kids/mein-gebet/rigging/verify-animation-rig-freeze.cjs
       - name: Validate all synthetic structure and release gates
@@ -49,6 +50,7 @@ jobs:
           node kids/mein-gebet/rigging/test-glb-geometry-binary.cjs
           node kids/mein-gebet/rigging/test-glb-end-to-end.cjs
           node kids/mein-gebet/rigging/test-pose-bone-lengths.cjs
+          node kids/mein-gebet/rigging/test-inverse-bind-pose.cjs
           node kids/mein-gebet/rigging/test-audit-project-completion.cjs
           node kids/mein-gebet/rigging/test-animation-rig-freeze.cjs
       - name: Exercise deterministic camera diagnostic tests
