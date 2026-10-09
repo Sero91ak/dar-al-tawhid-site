@@ -559,6 +559,7 @@
       ...defaultSections(),
       liquids: true,
       metals: true,
+      prices: Boolean(zakatInput.manualPrices.goldPerGramEur || zakatInput.manualPrices.silverPerGramEur),
       hawl: Boolean(zakatInput.nisabSinceDate),
       details: true
     };
