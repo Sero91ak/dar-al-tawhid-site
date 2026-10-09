@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="de"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Mein Gebet · Kids-Home-Vertrag</title>
+<style>
+html,body{margin:0;background:#071927;color:#fff8ed;font-family:system-ui,sans-serif}
+.app{min-height:100svh;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px)}
+.shell{flex:1;overflow:auto;padding:16px}
+.view{display:none}.view.active{display:block}
+.big-choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.choice,.knowledge-card{padding:16px;border-radius:16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)}
+.bottom-nav{display:flex;gap:8px;padding:8px 8px calc(8px + env(safe-area-inset-bottom,0px));border-top:1px solid rgba(255,255,255,.1)}
+.nav-btn{flex:1;min-height:48px;background:transparent;color:#fff8ed;border:0}
+.nav-btn.active{color:#e2bd72}
+</style>
+</head>
+<body>
+<div class="app" data-gender="boy">
+<main class="shell">
+<section class="view active" id="view-today">
+  <div class="section-title">Deine Hörwelten</div>
+  <div class="big-choice-grid">
+    <button class="choice" type="button">Hörbücher</button>
+    <button class="choice" type="button">Qurʾān</button>
+    <button class="choice" type="button">Meine Duʿāʾ</button>
+    <button class="choice" type="button">Quiz</button>
+  </div>
+  <button class="knowledge-card" type="button">Heute Wissen</button>
+</section>
+<section class="view" id="view-stories"></section>
+<section class="view" id="view-quran"></section>
+<section class="view" id="view-parents"></section>
+</main>
+<nav class="bottom-nav" aria-label="Hauptnavigation">
+  <button class="nav-btn active" data-target="today" type="button">Heute</button>
+  <button class="nav-btn" data-target="stories" type="button">Geschichten</button>
+  <button class="nav-btn" data-target="quran" type="button">Qurʾān</button>
+  <button class="nav-btn" data-target="parents" type="button">Eltern</button>
+</nav>
+</div>
+<script src="../preview-v1.js"></script>
+</body></html>
