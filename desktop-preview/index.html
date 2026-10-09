@@ -2276,6 +2276,15 @@ button,input,select{font:inherit}
 <script id="darPwaIconCookieBoot">
 (function(){
  try{
+  window.__darEarlyInstallPrompt=window.__darEarlyInstallPrompt||null;
+  window.addEventListener("beforeinstallprompt",function(event){
+   try{
+    event.preventDefault();
+    window.__darEarlyInstallPrompt=event;
+   }catch(e){}
+  },{capture:true});
+ }catch(eEarly){}
+ try{
   var allowed={"type-creme-ar":1,"emblem-creme-petrol":1,"emblem-nachtblau":1,"emblem-schwarzgold":1,"type-anthrazit-ar":1,"type-anthrazit-fein":1,"type-creme":1,"type-weiss-ar":1,"type-schwarz-rund":1,"type-schwarz-ar":1,"type-schwarz":1,"type-navy-ar":1,"type-navy":1,"type-bordeaux-ar":1,"type-bordeaux":1,"type-gruen-ar":1,"type-gruen":1,"type-schwarz-ar2":1};
   var id=localStorage.getItem("dar_pwa_icon_v2")||"type-creme-ar";
   if(!allowed[id])id="type-creme-ar";
@@ -2610,7 +2619,7 @@ html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
  window.addEventListener("popstate",function(){navigate(location.pathname+location.search,false)});
 
  // Public website PWA installer must work even when /desktop-preview/ was loaded directly.
- var darDeferredPwaPrompt=null;
+ var darDeferredPwaPrompt=window.__darEarlyInstallPrompt||null;
  var darInstallPromptWaiters=[];
  var darInstallToastTimer=0;
  function darPwaStandalone(){
@@ -2669,6 +2678,7 @@ html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
   darInstallToastTimer=setTimeout(function(){if(toast)toast.style.display="none"},6500)
  }
  function darPublishInstallPrompt(ev){
+  window.__darEarlyInstallPrompt=ev;
   darDeferredPwaPrompt=ev;
   var waiters=darInstallPromptWaiters.splice(0);
   waiters.forEach(function(resolve){try{resolve(ev)}catch(e){}})
