@@ -11,13 +11,56 @@ const root=__dirname;
 const read=p=>JSON.parse(fs.readFileSync(path.join(root,p),"utf8"));
 function audit(status,boy,girl,story,hanbali){
  const problems=[], inconsistent=[];
- const need=(label,ok)=>{if(!ok)problems.push(label);};
+ let checkCount=0;
+ const need=(label,ok)=>{checkCount++;if(!ok)problems.push(label);};
  const forbidden=(label,val)=>{if(val)inconsistent.push(label);};
- need("boys production original 3D not approved",boy.accept?.productionReady===true&&boy.approvedModelChecksum?.sha256?.length===64);
- need("girls production original 3D not approved",girl.accept?.productionReady===true&&girl.approvedModelChecksum?.sha256?.length===64);
- need("girls independent five views and clothing are not signed off",girl.referenceStatus?.independentFullTurnaroundApproved===true&&girl.religiousPoseReview==="fully_independently_reviewed"&&(girl.approvedModelChecksum?.reviewedClothingChecks||[]).length===(girl.requiredClothingChecks||[]).length);
+ const hex=s=>typeof s==="string"&&/^[a-f0-9]{64}$/.test(s);
+ const approvedIdentity=(manifest,subject)=>{
+   if(manifest?.subject!==subject)return false;
+   const a=manifest.accept||{}, checksum=manifest.approvedModelChecksum||{};
+   const flags=["hasActualOriginalIdentity","artistQualityRenderReviewed","glbMeshAndSkinReviewPassed",
+     "rigPoseReviewPassed","signedOffByUserForFinal3D","productionReady"];
+   const angles=new Set(checksum.reviewedAngles||[]);
+   return flags.every(f=>a[f]===true)&&hex(checksum.sha256)&&
+     Number.isSafeInteger(checksum.bytes)&&checksum.bytes>0&&
+     typeof checksum.reviewRecordId==="string"&&checksum.reviewRecordId.trim().length>0&&
+     typeof checksum.approvedDate==="string"&&/^\\d{4}-\\d{2}-\\d{2}$/.test(checksum.approvedDate)&&
+     Array.isArray(manifest.requiredReviewAngles)&&manifest.requiredReviewAngles.length>=5&&
+     manifest.requiredReviewAngles.every(view=>angles.has(view));
+ };
+ const passesViewEvidence=profile=>{
+   const data=profile?.independentFiveViewSilhouetteIoU;
+   return profile?.threeQuarterCameraPhysicallyCalibrated===true &&
+     data && ["front","threeQuarter","right","back","left"].every(view=>
+       typeof data[view]==="number"&&Number.isFinite(data[view])&&data[view]>=.90&&data[view]<=1);
+ };
+ const checksAgainstExactBinary=(profile,manifest)=>{
+   const verification=status.technicalQA?.modelVerification?.[profile];
+   return verification?.structureValid===true && verification?.bindPoseAndBoneLengthsVerified===true &&
+     verification?.animationSamplerPayloadVerified===true &&
+     hex(verification?.glbSha256)&&verification.glbSha256===manifest?.approvedModelChecksum?.sha256;
+ };
+ need("boys final original identity and five rendered review angles missing",approvedIdentity(boy,"original_boy"));
+ need("girls final original identity and five rendered review angles missing",approvedIdentity(girl,"original_girl"));
+ need("boy silhouette five-view >=90% with calibrated 3/4 view missing",status.boy?.fiveViewSilhouetteAbove90Percent===true&&status.boy?.requiredFiveViewOriginalityApproved===true&&passesViewEvidence(status.boy));
+ need("girl independent five-view silhouette and calibrated 3/4 evidence missing",status.girl?.fiveIndependentViewsApproved===true&&passesViewEvidence(status.girl));
+ need("boy exact GLB payload and invariant bone lengths unverified",checksAgainstExactBinary("boy",boy));
+ need("girl exact GLB payload and invariant bone lengths unverified",checksAgainstExactBinary("girl",girl));
+ need("non-root translation prevention not validated on real candidate",status.technicalQA?.translationGuardVerifiedAgainstActualV77GLB===true);
+ need("boy facial/hair/kufi/cloth signoff missing",status.boy?.manualFaceKufiHairClothApproval===true);
+ need("girl covered hair/neck and original pink clothing not approved",
+   status.girl?.fullHairAndNeckCoverage3DApproved===true&&status.girl?.matchingPinkHijabAndDress3DApproved===true);
+ need("girls independent five-view clothing and pose review absent",girl.referenceStatus?.independentFullTurnaroundApproved===true&&
+   girl.religiousPoseReview==="fully_independently_reviewed"&&
+   Array.isArray(girl.requiredClothingChecks)&&
+   girl.requiredClothingChecks.every(x=>(girl.approvedModelChecksum?.reviewedClothingChecks||[]).includes(x)));
  need("boys and girls have not both received separate pose approval",status.prayer?.correctForBothProfilesApproved===true);
- need("all required actual animation clips not verified",status.prayer?.pendingTeachingClips?.length===0);
+ const requiredPrayerClips=["Qiyam","Takbir","Ruku","RiseFromRuku","Sujud","Jalsah","SecondSujud","Tashahhud","Salam"];
+ const verifiedClips=status.prayer?.approvedTeachingAnimations;
+ need("complete teaching clip list unverified",Array.isArray(verifiedClips)&&
+   requiredPrayerClips.every(clip=>verifiedClips.includes(clip))&&
+   status.prayer?.pendingTeachingClips?.length===0);
+ need("real frame-by-frame Sujud and Ruku ground/contact review missing",status.prayer?.poseContactFrameReviewApproved===true);
  need("source review incomplete",hanbali.approvedToTeach===true&&status.prayer.theologicalSourcesFinalReviewed===true);
  need("storyboard not final",story.approvedForProduction===true);
  need("real iPad test not complete",status.app?.realIPadTouchSafariTestPassed===true);
@@ -29,7 +72,7 @@ function audit(status,boy,girl,story,hanbali){
  forbidden("status claims ready despite incomplete gates",status.productionReady===true&&!ready);
  forbidden("boy model claims approved in status without digest",status.boy?.productionRigApproved===true&&(!boy.accept?.productionReady||!boy.approvedModelChecksum?.sha256));
  forbidden("girl model claims approved in status without digest",status.girl?.productionRigApproved===true&&(!girl.accept?.productionReady||!girl.approvedModelChecksum?.sha256));
- return {ready,blockingChecks:problems,inconsistent,passedChecks:12-problems.length};
+ return {ready,blockingChecks:problems,inconsistent,passedChecks:checkCount-problems.length,totalChecks:checkCount};
 }
 function main(args){
  const boy=read("original-boy-identity-lock-v1.json"),girl=read("original-girl-identity-lock-v1.json");
