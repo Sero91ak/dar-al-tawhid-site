@@ -495,6 +495,257 @@
     "dem Feuer"
   ]
 });
+  Object.assign(byId,{
+  "kids-dua-002-sabr-thabbit": [
+    "Unser Herr",
+    "gieße aus",
+    "über uns",
+    "Geduld",
+    "und festige",
+    "unsere Schritte",
+    "und hilf uns",
+    "gegen",
+    "das Volk",
+    "das ungläubige"
+  ],
+  "kids-dua-003-la-tuakhidhna": [
+    "Unser Herr",
+    "nicht",
+    "nimm uns zur Rechenschaft",
+    "wenn",
+    "wir vergessen",
+    "oder",
+    "Fehler machen"
+  ],
+  "kids-dua-004-ighfir-dhunubana": [
+    "Unser Herr",
+    "vergib",
+    "uns",
+    "unsere Sünden",
+    "und unser Übermaß",
+    "in",
+    "unserer Angelegenheit",
+    "und festige",
+    "unsere Schritte"
+  ],
+  "kids-dua-005-faghfir-lana": [
+    "Unser Herr",
+    "wir glauben",
+    "so vergib",
+    "uns",
+    "und erbarme Dich unser",
+    "und Du bist",
+    "der Beste",
+    "der Barmherzigen"
+  ],
+  "kids-dua-006-rabbi-ighfir-warham": [
+    "Mein Herr",
+    "vergib",
+    "und erbarme Dich",
+    "und Du bist",
+    "der Beste",
+    "der Barmherzigen"
+  ],
+  "kids-dua-007-qalb-salim": [
+    "und nicht",
+    "beschäme mich",
+    "am Tag",
+    "an dem sie auferweckt werden",
+    "am Tag",
+    "nicht",
+    "nützt",
+    "Besitz",
+    "und auch nicht",
+    "Kinder",
+    "außer",
+    "wer",
+    "kommt",
+    "zu Allah",
+    "mit einem Herzen",
+    "einem gesunden"
+  ],
+  "kids-dua-008-hukman-walhiqni": [
+    "Mein Herr",
+    "schenke",
+    "mir",
+    "Urteilskraft",
+    "und füge mich hinzu",
+    "den Rechtschaffenen"
+  ],
+  "kids-dua-009-lisan-sidq": [
+    "und mache",
+    "mir",
+    "einen Ruf",
+    "einen wahrhaftigen",
+    "unter",
+    "den Späteren"
+  ],
+  "kids-dua-010-jannah-naim": [
+    "und mache mich",
+    "zu",
+    "den Erben",
+    "des Gartens",
+    "der Wonne"
+  ],
+  "kids-dua-011-najji-mina-zalimin": [
+    "Mein Herr",
+    "rette mich",
+    "vor",
+    "dem Volk",
+    "dem ungerechten"
+  ],
+  "kids-dua-012-awzini-shukr": [
+    "Mein Herr",
+    "leite mich an",
+    "dass",
+    "ich dankbar bin",
+    "für Deine Gunst",
+    "die",
+    "Du erwiesen hast",
+    "mir",
+    "und",
+    "meinen Eltern"
+  ],
+  "kids-dua-013-amal-salih": [
+    "und dass",
+    "ich handle",
+    "rechtschaffen",
+    "womit Du zufrieden bist"
+  ],
+  "kids-dua-014-adkhilni-rahmatik": [
+    "und lass mich eintreten",
+    "durch Deine Barmherzigkeit",
+    "unter",
+    "Deine Diener",
+    "die Rechtschaffenen"
+  ],
+  "kids-dua-015-fattah": [
+    "Unser Herr",
+    "entscheide",
+    "zwischen uns",
+    "und zwischen",
+    "unserem Volk",
+    "in Wahrheit",
+    "und Du bist",
+    "der Beste",
+    "der Entscheidenden"
+  ],
+  "kids-dua-016-afrigh-sabra-tawaffana": [
+    "Unser Herr",
+    "gieße aus",
+    "über uns",
+    "Geduld",
+    "und lass uns sterben",
+    "als Muslime"
+  ],
+  "kids-dua-017-rahma-ilm": [
+    "Unser Herr",
+    "Du umfasst",
+    "alles",
+    "Dinge",
+    "mit Barmherzigkeit",
+    "und Wissen",
+    "so vergib",
+    "denjenigen",
+    "die bereuen",
+    "und folgen",
+    "Deinem Weg",
+    "und bewahre sie",
+    "vor der Strafe",
+    "des Höllenfeuers"
+  ],
+  "kids-dua-018-adkhilhum-jannat-adn": [
+    "Unser Herr",
+    "und lass sie eintreten",
+    "in die Gärten",
+    "von ʿAdn",
+    "die",
+    "Du ihnen versprachst",
+    "und diejenigen",
+    "die rechtschaffen waren",
+    "unter",
+    "ihren Vätern",
+    "und ihren Ehepartnern",
+    "und ihren Nachkommen"
+  ],
+  "kids-dua-019-qihim-sayyiat": [
+    "und bewahre sie",
+    "vor schlechten Taten",
+    "und wen",
+    "Du bewahrst",
+    "vor schlechten Taten",
+    "an jenem Tag",
+    "so hast Du gewiss",
+    "Dich seiner erbarmt"
+  ],
+  "kids-dua-020-rabbana-ghfir-lana-ikhwan": [
+    "Unser Herr",
+    "vergib",
+    "uns",
+    "und unseren Brüdern",
+    "die",
+    "uns vorausgingen",
+    "im Glauben"
+  ],
+  "kids-dua-021-la-ghill": [
+    "und nicht",
+    "lasse entstehen",
+    "in",
+    "unseren Herzen",
+    "Groll",
+    "gegen diejenigen",
+    "die glauben",
+    "unser Herr",
+    "gewiss Du bist",
+    "gütig",
+    "barmherzig"
+  ],
+  "kids-dua-022-tawakkalna-anabna": [
+    "Unser Herr",
+    "auf Dich",
+    "vertrauen wir",
+    "und zu Dir",
+    "kehren wir um",
+    "und zu Dir",
+    "ist die Rückkehr"
+  ],
+  "kids-dua-023-la-tajalna-fitna": [
+    "Unser Herr",
+    "nicht",
+    "mache uns",
+    "zur Versuchung",
+    "für diejenigen",
+    "die ungläubig sind",
+    "und vergib",
+    "uns",
+    "unser Herr"
+  ],
+  "kids-dua-024-atmim-nurana": [
+    "Unser Herr",
+    "vollende",
+    "für uns",
+    "unser Licht",
+    "und vergib",
+    "uns",
+    "gewiss Du",
+    "über",
+    "alle",
+    "Dinge",
+    "hast Macht"
+  ],
+  "kids-dua-025-qunut-witr": [
+    "O Allah",
+    "leite mich recht",
+    "unter denen",
+    "die Du geleitet hast",
+    "und schenke mir Wohlergehen",
+    "unter denen",
+    "denen Du Wohlergehen gabst",
+    "und nimm Dich meiner an",
+    "unter denen",
+    "deren Du Dich angenommen hast"
+  ]
+});
   window.DARKidsDuaWordMeanings={
     get:function(dua,words){
       var rows=dua&&byId[String(dua.id||"")];
