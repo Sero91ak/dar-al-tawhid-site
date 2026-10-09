@@ -1,3 +1,4 @@
+/* public-pwa-emergency-repair-live-20261009-1824 */
 import { gateHiddenSurfaces } from "./preview-gate.js";
 /* Dar Test (/test) ohne Browser-Anmeldefenster. Kids bleibt geschützt. v1096 */
 function isNativeAppRequest(ua) {
