@@ -30,8 +30,9 @@ assert.ok(html.includes('/download/official-release-links.js'), "Official releas
 assert.ok(links.includes('id="native-downloads-title"') && links.includes('id="direct-android-meta"') && links.includes('id="direct-android-tv-meta"'), "Apple-adjacent Android version and release date cards missing");
 
 const publicRouterPath = path.join(root, "cloudflare/site-router.js");
+let router = "";
 if (fs.existsSync(publicRouterPath)) {
-  const router = fs.readFileSync(publicRouterPath, "utf8");
+  router = fs.readFileSync(publicRouterPath, "utf8");
   assert.ok(router.includes('id="darIosAppStorePromo"'), "Existing iOS promotion must remain");
   assert.ok(router.includes("window.darInstallAndroidPwa=async function"), "Main website Android PWA installer missing");
   assert.ok(router.includes("__darEarlyInstallPrompt"), "Early Android beforeinstallprompt capture missing");
