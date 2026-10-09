@@ -636,7 +636,8 @@
     loadAudio(true, true, true);
   }
   function scheduleStallRetry(kind) {
-    clearStallRetry();
+    // Repeated waiting events must not postpone the same recovery indefinitely.
+    if (engine.stallTimer) return;
     var gen = playGen;
     var a = audioEl();
     var at = Number(a.currentTime) || 0;
@@ -2136,7 +2137,7 @@
     mediaHandlersBound = true;
     try {
       navigator.mediaSession.setActionHandler("play", function () { togglePlay(true); });
-      navigator.mediaSession.setActionHandler("pause", function () { audioEl().pause(); });
+      navigator.mediaSession.setActionHandler("pause", function () { engine.wantPlay = false; audioEl().pause(); });
       navigator.mediaSession.setActionHandler("previoustrack", function () { prevAyah(); });
       navigator.mediaSession.setActionHandler("nexttrack", function () { nextAyah(false); });
       navigator.mediaSession.setActionHandler("seekbackward", function () { skip(-10); });
@@ -2755,6 +2756,7 @@
       runPlay(a, playGen);
     } else {
       logAudio("pause clicked", snapAudio(a));
+      engine.wantPlay = false;
       a.pause();
     }
   }
@@ -2808,7 +2810,7 @@
       var t = e.target.closest("[data-dqp-mini]");
       var act = t ? t.getAttribute("data-dqp-mini") : "";
       if (act === "play") { e.preventDefault(); togglePlay(true); return; }
-      if (act === "pause") { e.preventDefault(); audioEl().pause(); return; }
+      if (act === "pause") { e.preventDefault(); engine.wantPlay = false; audioEl().pause(); return; }
       if (act === "stop") { e.preventDefault(); stopSession(); return; }
       if (act === "learn-loop") {
         e.preventDefault();
@@ -2858,6 +2860,7 @@
       pauseBtn.addEventListener("click", function (e) {
         e.preventDefault();
         e.stopPropagation();
+        engine.wantPlay = false;
         audioEl().pause();
       });
     }
@@ -3799,7 +3802,7 @@
       saveState();
       loadAudio(true, false);
     },
-    pause: function () { audioEl().pause(); },
+    pause: function () { engine.wantPlay = false; audioEl().pause(); },
     resume: function () { togglePlay(true); },
     stop: stopSession,
     nextAyah: function () { return nextAyah(false); },
