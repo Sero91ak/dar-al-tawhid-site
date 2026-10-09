@@ -261,6 +261,12 @@ body[data-profile="girl"] .overview-hero:after{background:linear-gradient(90deg,
 .answer-extra .small{font-size:12px;line-height:1.55}
 @media(prefers-reduced-motion:reduce){.recording-dot{animation:none}}
 
+
+/* Kinder lesen je nach gespeichertem App-Alter in abgestufter Lesetypografie. */
+body[data-kids-age="4-5"] .lesson-stage .spoken-paragraph p,
+body[data-kids-age="4-5"] .lesson-stage .recap-lesson p{font-size:clamp(18px,2.7vw,21px);line-height:1.8}
+body[data-kids-age="4-5"] .lesson-stage .question-prompt{font-size:clamp(19px,3.1vw,24px)}
+body[data-kids-age="4-5"] .choice-button{font-size:clamp(17px,2.7vw,20px);min-height:61px}
 </style></head>
 <body data-profile="neutral"><main class="wrap">
 
@@ -465,6 +471,36 @@ function stopAudio(note){
 }
 function stopAll(){stopSpeech();stopAudio();stopMic()}
 function hideLesson(){$("#academyHome").hidden=false;$("#lessonMain").hidden=true}
+
+/* Derselbe geprüfte Beleg, unterschiedlich erklärte Lernschritte pro Altersstufe. */
+const AGE_EXPLANATIONS=Object.freeze({
+ "4-5":{
+  lead:"Die Wahrheit sagen – das ist ehrlich.",
+  lines:["Manchmal geht etwas aus Versehen kaputt.","Du darfst ehrlich sagen: Das war ich.","Danach kannst du um Entschuldigung bitten und beim Aufräumen helfen.","Ehrlich sein ist gut. Das üben wir gemeinsam."],
+  evidence:"Allah sagt uns im Qurʾān, dass wir mit den Wahrhaftigen sein sollen. Der Prophet ﷺ erklärte, wie gut Wahrhaftigkeit ist. Deshalb sagen wir die Wahrheit, auch wenn wir einen Fehler machen.",
+  recap:["Wahrhaftigkeit bedeutet: Ich sage die Wahrheit.","Allah lehrt uns, mit den Wahrhaftigen zu sein.","Wenn mir ein Fehler passiert, sage ich ehrlich, was geschehen ist."]
+ },
+ "6-8":{
+  lead:"Die Wahrheit sagen – auch wenn es manchmal Mut kostet.",
+  lines:["Manchmal passiert uns aus Versehen ein Fehler.","Wenn wir ehrlich sagen, was passiert ist, können wir Verantwortung übernehmen und etwas wiedergutmachen.","Wenn wir stattdessen lügen, kann das Vertrauen anderer Menschen leiden.","Wahrhaftigkeit ist deshalb ein wichtiger Teil unseres guten Charakters."],
+  evidence:"Allah befiehlt uns, mit den Wahrhaftigen zu sein. Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt. Deshalb sollen wir ehrlich sprechen und uns um gutes Verhalten bemühen.",
+  recap:["Wahrhaftigkeit bedeutet, ehrlich zu sprechen.","Allah ruft uns dazu auf, mit den Wahrhaftigen zu sein. Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt.","Wenn mir ein Fehler passiert, sage ich die Wahrheit und versuche, ihn wiedergutzumachen."]
+ },
+ "9-10":{
+  lead:"Wahrhaftigkeit heißt, bewusst bei der Wahrheit zu bleiben – selbst wenn das schwierig ist.",
+  lines:["Jeder Mensch kann aus Versehen einen Fehler machen. Entscheidend ist, wie wir danach handeln.","Wer die Wahrheit sagt, übernimmt Verantwortung und schafft die Grundlage, den Fehler wiedergutzumachen.","Eine bewusste Lüge kann das Vertrauen anderer Menschen beschädigen und weitere falsche Aussagen nach sich ziehen.","Wahrhaftigkeit ist mehr als ein einzelnes richtiges Wort: Sie ist eine Haltung, die wir im Alltag immer wieder üben."],
+  evidence:"Allah fordert die Gläubigen in Sūrat at-Tawbah 9:119 auf, mit den Wahrhaftigen zu sein. In Ṣaḥīḥ Muslim 2607a beschreibt der Prophet ﷺ Wahrhaftigkeit als einen Weg zur Rechtschaffenheit. Daraus lernen wir, beim Sprechen und Handeln aufrichtig zu bleiben.",
+  recap:["Ṣidq bedeutet Wahrhaftigkeit. Sie zeigt sich auch dann, wenn Ehrlichkeit Mut kostet.","Qurʾān 9:119 und der Ḥadīṯ in Ṣaḥīḥ Muslim 2607a verdeutlichen die Bedeutung der Wahrhaftigkeit.","Ich möchte ehrlich bleiben, Verantwortung übernehmen und einen Fehler nach Möglichkeit wiedergutmachen."]
+ }
+});
+function applyAgeTeaching(){
+ const content=AGE_EXPLANATIONS[age]||AGE_EXPLANATIONS["6-8"];
+ document.body.dataset.kidsAge=age;
+ const lead=$('[data-lesson-step="1"] .stage-lead');if(lead)lead.textContent=content.lead;
+ all("#explainWords [data-spoken]").forEach((el,i)=>{if(content.lines[i])el.textContent=content.lines[i]});
+ const e=$(".teacher-explainer");if(e)e.textContent=content.evidence;
+ all(".recap-lesson p").forEach((el,i)=>{if(content.recap[i])el.textContent=content.recap[i]});
+}
 function renderHome(){
  const rec=oldRecord(),due=Number(rec?.nextDue||0),pending=rec&&due<=Date.now();
  $("#courseStatus").textContent=!rec?"Bereit":pending?"Wiederholen":"Bereits gelernt";
@@ -483,7 +519,7 @@ function syncProfile(force=false){
  if(gender!=="neutral")$("#academyAvatar").src=gender==="girl"?"/kids/assets/profile-avatars/girl-hijab-pink-v1235.svg":"/kids/assets/profile-avatars/boy-kufi-v1235.svg";
  $("#overviewGreeting").textContent="As-salāmu ʿalaykum, "+address()+". Heute entdecken wir gemeinsam neues Wissen.";
  $("#welcomeGreeting").textContent="As-salāmu ʿalaykum, "+address()+". Schön, dass du heute mitlernst!";
- renderHome();
+ applyAgeTeaching();renderHome();
 }
 function home(){stopAll();hideLesson();renderHome();window.scrollTo(0,0)}
 function begin(){
