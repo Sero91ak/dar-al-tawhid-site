@@ -51,4 +51,11 @@ test("allow parent-of-whole-rig translation",()=> {const x=fixture();x.nodes.pus
 test("reject duplicate root naming",()=> {const x=fixture();x.nodes.push({name:"Hips"});x.skins[0].joints.push(20);x.accessors[0].count=20;assert.ok(status(x).errors.some(s=>s.includes("ambiguous skeleton root")))});
 test("reject cyclic skeletal hierarchy",()=> {const x=fixture();x.nodes[0].children=[1];x.nodes[1].children=[0];x.animations[0].channels[0].target={node:0,path:"translation"};assert.equal(status(x).structureValid,false)});
 test("reject invalid child references",()=> {const x=fixture();x.nodes[0].children=[9999];assert.equal(status(x).structureValid,false)});
+test("static identity scale on Hips allowed",()=> {const x=fixture();x.nodes[0].scale=[1,1,1];assert.equal(status(x).structureValid,true)});
+test("static UpperArm stretching rejected",()=> {const x=fixture();x.nodes[5].scale=[1,1.5,1];assert.ok(status(x).errors.some(s=>s.includes("Static skeletal scaling")))});
+test("static spine matrix bypass rejected",()=> {const x=fixture();x.nodes[1].matrix=[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1];assert.equal(status(x).structureValid,false)});
+test("static intermediary helper scaling rejected",()=> {const x=fixture();x.nodes.push({name:"Helper",scale:[1,1.2,1],children:[5]});x.nodes[0].children=[20];assert.equal(status(x).structureValid,false)});
+test("nonfinite bind rotation rejected",()=> {const x=fixture();x.nodes[4].rotation=[0,0,0,NaN];assert.equal(status(x).structureValid,false)});
+test("duplicate skin indices rejected",()=> {const x=fixture();x.skins[0].joints[1]=0;assert.equal(status(x).structureValid,false)});
+test("invalid second-skin bind accessor rejected",()=> {const x=fixture();x.skins.push({joints:[5,6],inverseBindMatrices:3});assert.equal(status(x).structureValid,false)});
 process.stdout.write("\n"+count+" offline test checks passed. No 3D model generated or approved.\n");
