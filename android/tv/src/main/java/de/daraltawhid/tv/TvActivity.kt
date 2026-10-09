@@ -225,10 +225,12 @@ class TvActivity : Activity() {
         line.addView(navButton("◀ Vorheriger") {
             hadithNumber = (hadithNumber - 1).coerceAtLeast(1)
             show("hadith")
+            focusPagerButton(0)
         }, LinearLayout.LayoutParams(0, dp(62), 1f))
         line.addView(navButton("Nächster ▶") {
             hadithNumber = (hadithNumber + 1).coerceAtMost(hadithTotal)
             show("hadith")
+            focusPagerButton(1)
         }, LinearLayout.LayoutParams(0, dp(62), 1f))
         body.addView(line)
         body.addView(label("Lade Überlieferung HAD-${hadithNumber.toString().padStart(4, '0')} …", 18f, muted, false))
@@ -281,10 +283,12 @@ class TvActivity : Activity() {
         controls.addView(navButton("◀ Vorheriger") {
             tadabburNumber = (tadabburNumber - 1).coerceAtLeast(0)
             show("tadabbur")
+            focusPagerButton(0)
         }, LinearLayout.LayoutParams(0, dp(62), 1f))
         controls.addView(navButton("Nächster ▶") {
             tadabburNumber = (tadabburNumber + 1).coerceAtMost((tadabburTotal - 1).coerceAtLeast(0))
             show("tadabbur")
+            focusPagerButton(1)
         }, LinearLayout.LayoutParams(0, dp(62), 1f))
         body.addView(controls)
         body.addView(label("Lade geprüfte Tadabbur-Aussage …", 19f, cream, false))
@@ -377,6 +381,13 @@ class TvActivity : Activity() {
     private fun cleanMarkdown(raw: String): String =
         raw.replace("**", "").replace("__", "").replace("`", "")
 
+    /** Preserve D-pad focus across the view recreation required by a page change. */
+    private fun focusPagerButton(position: Int) {
+        val pager = body.getChildAt(1) as? LinearLayout ?: return
+        val button = pager.getChildAt(position) ?: return
+        button.post { if (!isFinishing && !isDestroyed) button.requestFocus() }
+    }
+
     private fun navButton(title: String, action: () -> Unit): Button =
         Button(this).apply {
             text = title
@@ -424,6 +435,13 @@ class TvActivity : Activity() {
 
     @Suppress("DEPRECATION")
     override fun onBackPressed() {
-        if (activeTab != "home") show("home") else super.onBackPressed()
+        when (activeTab) {
+            "locations" -> {
+                show("home")
+                body.getChildAt(2)?.requestFocus()
+            }
+            "home" -> super.onBackPressed()
+            else -> show("home")
+        }
     }
 }
