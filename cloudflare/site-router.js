@@ -342,19 +342,38 @@ function androidNativeToolsAddon() {
 // DAR_ANDROID_PWA_DIRECT_INSTALL_TAP_CLEAN_LIVE_V3_20261009
 function publicWebsiteAddon() {
   return `
-<style id="darPublicTapCleanV3">
+<style id="darPublicTapCleanV4">
 *{-webkit-tap-highlight-color:transparent!important}
 @media(hover:none) and (pointer:coarse){
  a,button,[role="button"],summary,[tabindex],label,input,select,textarea{
-  -webkit-tap-highlight-color:rgba(0,0,0,0)!important;
+  -webkit-tap-highlight-color:transparent!important;
  }
- a:focus,button:focus,[role="button"]:focus,summary:focus,[tabindex]:focus{
-  outline:none!important;
+ html body.desktop-overhaul-v18 a:focus,
+ html body.desktop-overhaul-v18 a:focus-visible,
+ html body.desktop-overhaul-v18 button:focus,
+ html body.desktop-overhaul-v18 button:focus-visible,
+ html body.desktop-overhaul-v18 [role="button"]:focus,
+ html body.desktop-overhaul-v18 [role="button"]:focus-visible,
+ html body.desktop-overhaul-v18 summary:focus,
+ html body.desktop-overhaul-v18 [tabindex]:focus,
+ html body.desktop-overhaul-v18 .desktop-link:focus,
+ html body.desktop-overhaul-v18 .desktop-link:focus-visible,
+ html body.desktop-overhaul-v18 .more-row:focus,
+ html body.desktop-overhaul-v18 .more-row:focus-visible,
+ html body.desktop-overhaul-v18 .category-card:focus,
+ html body.desktop-overhaul-v18 .category-card:focus-visible,
+ html body.desktop-overhaul-v18 .feature-card:focus,
+ html body.desktop-overhaul-v18 .feature-card:focus-visible,
+ html body.desktop-overhaul-v18 .header-action:focus,
+ html body.desktop-overhaul-v18 .header-action:focus-visible,
+ html body.desktop-overhaul-v18 .main-nav a:focus,
+ html body.desktop-overhaul-v18 .main-nav a:focus-visible{
+  outline:0!important;
+  outline-offset:0!important;
  }
  a:active,button:active,[role="button"]:active,.desktop-link:active,.more-row:active,.category-card:active,.feature-card:active,.header-action:active,.main-nav a:active{
   filter:none!important;
   opacity:1!important;
-  box-shadow:none!important;
   transform:none!important;
  }
  a:active::before,a:active::after,
@@ -365,7 +384,6 @@ function publicWebsiteAddon() {
  .category-card:active::before,.category-card:active::after,
  .feature-card:active::before,.feature-card:active::after{
   opacity:0!important;
-  box-shadow:none!important;
   filter:none!important;
   background:transparent!important;
  }
