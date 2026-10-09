@@ -487,7 +487,15 @@ jobs:
                           }
                       is_arabic_profile=profile in ARABIC_PROFILES
                       is_flash=model_id==ELEVEN_QUIZ_DE_MODEL
-                      if is_flash:
+                      # Eleven v4 documents only Stability + Similarity sliders.
+                      # Never send a speculative Speed/Style/Speaker-boost setting
+                      # and never label an unsupported slider as "native slow".
+                      if model_id=="eleven_v4":
+                          voice_settings={
+                              "stability":voice_settings.get("stability",0.72),
+                              "similarity_boost":voice_settings.get("similarity_boost",0.92)
+                          }
+                      elif is_flash:
                           voice_settings.pop("style",None)
                       payload={
                           "text":prepared,
@@ -495,8 +503,10 @@ jobs:
                           "voice_settings":voice_settings,
                           "apply_text_normalization":("off" if is_arabic_profile or is_flash else "on")
                       }
-                      if is_arabic_profile:
+                      if is_arabic_profile and model_id=="eleven_v4":
                           payload["language_code"]="ar"
+                      # On V3, prefer genuine Arabic-script autodetection over
+                      # an unverified language_code override.
                       # Flash v2.5 does not honour phoneme dictionary tags.
                       # For German Flash the curated inline master substitutions
                       # from prepare_kids_voice_text are used instead.
