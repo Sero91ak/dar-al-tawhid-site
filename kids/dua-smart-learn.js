@@ -648,8 +648,19 @@
     if(playCleanSequence(urls,segs,"follow","Wort für Wort: Die Markierung folgt direkt der Fuṣḥā-Aufnahme.",playWordSequenceLegacy))return true;
     return playWordSequenceLegacy();
   }
+  // Newly rendered dedicated slow takes are used only after explicit
+  // pronunciation + breath/listening QA. Old automatic batches are not approved.
+  function approvedNativeSlowUrl(dua){
+    var row=packs&&entry(packs.slow,arabicText(dua));
+    return row&&row.audioListeningApproved===true&&
+      row.qaApproval==="human-reviewed-natural-fusha"&&row.url?String(row.url):"";
+  }
   function playWhole(slow){
     if(!currentDua)return false;
+    var nativeSlow=slow?approvedNativeSlowUrl(currentDua):"";
+    if(nativeSlow){
+      return playUrl(nativeSlow,"slow","Natürlich langsame, freigegebene Fuṣḥā-Aufnahme …",1);
+    }
     // Reuse the same uninterrupted Fuṣḥā master. The prior separately
     // synthesized 'slow' take carried audible pacing/breath artefacts.
     // Moderate native pitch-preserving playback slows evenly; no separately generated breath cues.
@@ -884,14 +895,21 @@
     if(a==="next"){selectIndex(currentIndex+1,{play:true});return}
   }
   function preview(dua,rate){
-    var slow=Number(rate||1)<0.9;
+    if(!dua)return false;
+    var slow=Number(rate||1)<.9;
     currentDua=dua;
-    var direct=slow?dua&&dua.audioArabicSlowUrl:dua&&dua.audioArabicUrl;
-    if(direct)return playUrl(direct,slow?"slow":"full",slow?"Langsam zuhören …":"Duʿāʾ anhören …");
+    var approved=slow?approvedNativeSlowUrl(dua):"";
+    if(approved)return playUrl(approved,"slow","Freigegebene langsame Fuṣḥā-Aufnahme …",1);
+    // Keep preview and full-screen lesson on the SAME verified phrase source.
+    // Do not route preview through the old [slowly] master with breath artefacts.
+    var direct=dua.audioArabicUrl,playRate=slow?CLEAN_SLOW_RATE:1;
+    if(direct)return playUrl(direct,slow?"slow":"full",slow?"Ruhig und natürlich zuhören …":"Duʿāʾ anhören …",playRate);
     var run=function(p){
-      var e=entry(slow?p.slow:p.normal,arabicText(dua));
-      if(!e||!e.url)throw new Error("missing-preview");
-      return playUrl(e.url,slow?"slow":"full",slow?"Langsam zuhören …":"Duʿāʾ anhören …");
+      var native=slow?approvedNativeSlowUrl(dua):"";
+      var e=entry(p.normal,arabicText(dua));
+      if(!native&&(!e||!e.url))throw new Error("missing-preview");
+      return playUrl(native||(e&&e.url),slow?"slow":"full",
+        slow?"Ruhig und natürlich zuhören …":"Duʿāʾ anhören …",native?1:playRate);
     };
     if(packs)return run(packs);
     return loadPacks().then(run);
