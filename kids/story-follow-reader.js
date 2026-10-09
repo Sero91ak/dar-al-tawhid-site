@@ -61,9 +61,9 @@ function create(options){
   root.setAttribute("aria-hidden","true");
   root.innerHTML=
     '<section class="kfr-sheet" role="dialog" aria-modal="true" aria-label="Geschichte mitlesen">'+
-      '<header class="kfr-head">'+
-        '<div class="kfr-head-copy"><span class="kfr-kicker">HÖRBUCH · MITLESEN</span><strong class="kfr-title"></strong><span class="kfr-subtitle"></span></div>'+
-        '<button class="kfr-close" type="button" aria-label="Mitlesen schließen"><span>Zur Geschichte</span><b aria-hidden="true">×</b></button>'+
+      '<header class="kfr-head kids-detail-appbar" data-kids-unified-header="v1287">'+
+        '<button class="kfr-close kids-detail-dock-back" type="button" aria-label="Zurück zur Geschichte"></button><div class="kfr-head-copy kids-detail-appbar-copy"><strong class="kfr-title kids-detail-appbar-title"></strong><span class="kfr-subtitle kids-detail-appbar-subtitle"></span></div>'+
+        ''+
       '</header>'+
       '<div class="kfr-controls">'+
         '<button class="kfr-skip kfr-skip-back" type="button" data-kfr-seek="-15" aria-label="15 Sekunden zurück">−15 s</button>'+
