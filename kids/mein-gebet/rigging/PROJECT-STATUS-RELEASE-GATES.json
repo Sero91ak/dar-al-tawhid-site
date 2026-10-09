@@ -116,14 +116,16 @@
         "structureValid": false,
         "bindPoseAndBoneLengthsVerified": false,
         "animationSamplerPayloadVerified": false,
-        "boneLengthNumericVerified": false
+        "boneLengthNumericVerified": false,
+        "inverseBindMatchesRestPoseVerified": false
       },
       "girl": {
         "glbSha256": null,
         "structureValid": false,
         "bindPoseAndBoneLengthsVerified": false,
         "animationSamplerPayloadVerified": false,
-        "boneLengthNumericVerified": false
+        "boneLengthNumericVerified": false,
+        "inverseBindMatchesRestPoseVerified": false
       }
     },
     "releaseAuditRequiresExactBoyAndGirlGLB": true,
@@ -140,12 +142,12 @@
     "allGreenMetadataWithoutGLBStillReleaseBlocked": true,
     "binarySamplerTestsPassed": 20,
     "geometryProjectionPreflightUnitTestsPassed": 14,
-    "nativeRunnerTotalChecksPassed": 210,
+    "nativeRunnerTotalChecksPassed": 231,
     "nativeRunnerCompletedSuccessfully": true,
     "nativeRunner": "GitHub Actions ubuntu-latest; Node.js 22; Python 3.11",
-    "nativeRunnerHeadSha": "bdf4656db028b4def2d26017ccd19aa2dfad844c",
-    "nativeRunnerRunUrl": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37948050710",
-    "nativeRunnerScope": "210 native CI tests on synthetic original-view geometry, camera, zip, mesh, rig and release guards. Real V7.7 GLB + original PNG not available for measurement, visual approval or production.",
+    "nativeRunnerHeadSha": "191957b2f75e4a691aaf3ceea9e75ae2f1d8a071",
+    "nativeRunnerRunUrl": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37951935341",
+    "nativeRunnerScope": "231 native Node.js/Python tests on synthetic fixture data and GLB files. New real math verifies inverseBind equals global unanimated joint rest transform. No original V7.7 GLB/reference measured; no 3D identity, prayer pose, girl costume, device or production approval.",
     "binarySampleProofOnActualGLB": false,
     "realFiveViewRecomputedAfterV77": false,
     "staticRigTransformGuardCommitted": true,
@@ -154,7 +156,7 @@
     "geometryBinaryGateCommitted": true,
     "geometryBinaryActualOriginalGLBVerified": false,
     "geometryBinarySyntheticNativeTestsPassed": 27,
-    "syntheticNativeGLBEndToEndFileTestsPassed": 12,
+    "syntheticNativeGLBEndToEndFileTestsPassed": 14,
     "antiFakeVertexCountGateCommitted": true,
     "threeDimensionalExtentPrefilterCommitted": true,
     "connectedRigTopologyGuardCommitted": true,
@@ -172,6 +174,11 @@
     "originalViewActiveSceneTestsPassed": 5,
     "originalViewMethodId": "fiveview-cropped-grabcut-seeded-v4-stride-scene-safe-20261009",
     "originalViewHistoricalV3MustBeRecomputed": true,
-    "originalViewInactiveScenesRejected": true
+    "originalViewInactiveScenesRejected": true,
+    "bindRestPoseMatrixEqualityGuardCommitted": true,
+    "bindRestPoseMatrixEqualityUnitTestsPassed": 19,
+    "bindRestPoseMatrixEqualityEndToEndTestsPassed": 2,
+    "bindRestPoseRealOriginalV77Verified": false,
+    "inverseBindAgainstActualApprovedModel": false
   }
 }
