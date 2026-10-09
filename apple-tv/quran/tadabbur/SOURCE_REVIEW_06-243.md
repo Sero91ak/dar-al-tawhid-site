@@ -1,0 +1,16 @@
+# Quellenprüfung Batch 06-243
+
+Datum: 09.10.2026. Vier neue Verse aus Sūrah 7 mit Primärtext und benanntem isnād:
+
+- 7:48, Abū Miǧlaz Lāḥiq ibn Ḥumayd, Tafsīr aṭ-Ṭabarī zu Qurʾān 7:48, Bericht 14741, https://www.islamweb.net/ar/library/content/50/2018/. Kette: Yaʿqūb ibn Ibrāhīm ad-Dawraqī → Ismāʿīl ibn ʿUlayyah → Sulaymān at-Taymī → Abū Miǧlaz Lāḥiq ibn Ḥumayd. Wortlaut: «نادت الملائكة رجالا في النار يعرفونهم بسيماهم». Diese Deutung unterscheidet sich von anderen Berichten zu den Aṣḥāb al-Aʿrāf. Nicht als Konsens behandeln.
+- 7:49, Abū Miǧlaz Lāḥiq ibn Ḥumayd, Tafsīr aṭ-Ṭabarī zu Qurʾān 7:49, Bericht 14748, https://www.islamweb.net/ar/library/content/50/2019/. Kette: Yaʿqūb ibn Ibrāhīm ad-Dawraqī → Ismāʿīl ibn ʿUlayyah → Sulaymān at-Taymī → Abū Miǧlaz Lāḥiq ibn Ḥumayd. Wortlaut: «نادت الملائكة رجالا في النار ... فهذا حين يدخل أهل الجنة الجنة». Aṭ-Ṭabarī nennt daneben die abweichende Erklärung der Aṣḥāb al-Aʿrāf als Empfänger der Barmherzigkeit. Berichte 14741/14748 stammen nicht von zwei voneinander unabhängigen unteren Ketten.
+- 7:53, Qatādah ibn Diʿāmah, Tafsīr aṭ-Ṭabarī zu Qurʾān 7:53, Bericht 14761, https://www.islamweb.net/ar/library/content/50/2023/. Kette: Bišr ibn Muʿāḏ → Yazīd ibn Zurayʿ → Saʿīd ibn Abī ʿArūbah → Qatādah. Original: «هل ينظرون إلا تأويله أي ثوابه، يوم يأتي تأويله أي ثوابه». Ein benachbarter Qatādah-Weg über Maʿmar sagt «عاقبته» (Folge/Ergebnis). Das deutsche „Vergeltung“ paraphrasiert diese Bedeutungsbreite, nicht ein ungenanntes Prophetenwort.
+- 7:55, Abū Mūsā al-Ašʿarī, Tafsīr aṭ-Ṭabarī zu Qurʾān 7:55, Bericht 14778; Ṣaḥīḥ al-Buḫārī 2992; Ṣaḥīḥ Muslim 2704, https://www.islamweb.net/ar/library/content/50/2027/. Aṭ-Ṭabarī: Muḥammad ibn Ḥumayd → Ǧarīr ibn ʿAbd al-Ḥamīd → ʿĀṣim al-Aḥwal → Abū ʿUṯmān an-Nahdī → Abū Mūsā → Prophet ﷺ. Unabhängiger Ṣaḥīḥ-al-Buḫārī-Weg 2992: Muḥammad ibn Yūsuf → Sufyān → ʿĀṣim → Abū ʿUṯmān → Abū Mūsā → Prophet ﷺ; siehe https://dorar.net/h/Zz4wH55U?osoul=1 . Original: «اربعوا على أنفسكم فإنكم لا تدعون أصم ولا غائبا». Historischer Anlass war lautes Takbīr/Ḏikr; keine Aussage, dass jede Form hörbaren Bittgebets untersagt sei.
+
+## Wichtige wissenschaftliche Grenzen
+1. 7:48 und 7:49: Abū Miǧlaz vertritt die Deutung, dass die Anrufenden Engel sind. Aṭ-Ṭabarī nennt andere Auffassungen über die Aṣḥāb al-Aʿrāf; der eine erhaltene gemeinsame untere Isnād ist kein zweifacher unabhängiger Beweis. Keine Behauptung von Iǧmāʿ.
+2. 7:53: Qatādah erläutert „taʾwīl“ als „ṯawāb“ (Vergeltung); der andere überlieferte Weg nennt die Folge („ʿāqibah“). Die Aussage als Tābiʿī-Tafsīr und nicht als Ḥadīṯ qudsī darstellen.
+3. 7:55: Der authentische marfūʿ-Text über das Mäßigen der Stimme ist unabhängig in **Ṣaḥīḥ al-Buḫārī 2992 / Ṣaḥīḥ Muslim 2704** nachgewiesen. Die Authentizität wird nicht aus der isolierten aṭ-Ṭabarī-Kette über Ibn Ḥumayd erschlossen. Originalüberlieferung und Varianten: https://dorar.net/h/Zz4wH55U?osoul=1 .
+4. Verse 7:47, 7:50 und 7:52 wurden nicht aus aṭ-Ṭabarīs eigenem Kommentar in angebliche frühe maqtūʿ-Zitate umgedeutet. Die stark ausführliche Überlieferung zur Fürsprache in 7:49 wurde ebenfalls nicht aus einem ungeprüften Bericht als Prophetensunnah übernommen.
+
+Der technische Audit gilt für **Datei- und Referenzkonsistenz**; er beweist nicht die vollständige historische Rijāl-Kritik aller früheren Katalogeinträge.
