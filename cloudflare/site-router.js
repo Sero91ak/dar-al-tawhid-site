@@ -1294,7 +1294,9 @@ export default {
           '<script id="darDedicatedPwaBootV2">' +
           'window.__DAR_PWA_STANDARD_BOOT=true;' +
           'window.__DAR_PWA_DEDICATED_APP=true;' +
-          'try{document.documentElement.classList.add("dar-pwa-standalone-boot","dar-soft-booting","dar-dedicated-pwa-app")}catch(e){}' +
+          'window.__DAR_PWA_LAUNCH_MARKER=true;' +
+          'try{sessionStorage.setItem("dar_pwa_launch_session_v1","1")}catch(e){}' +
+          'try{var r=document.documentElement;r.classList.add("dar-pwa-standalone-boot","dar-soft-booting","dar-dedicated-pwa-app","is-standalone-pwa","is-android");r.dataset.appPath="android-pwa"}catch(e){}' +
           '<\/script>';
         if (!html.includes('id="darDedicatedPwaBootV2"')) {
           html = html.includes("<head>") ? html.replace("<head>", "<head>" + pwaHead) : pwaHead + html;
