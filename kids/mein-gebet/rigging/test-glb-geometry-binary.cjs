@@ -79,6 +79,18 @@ bad("reject misaligned vertex data",g=>g.accessors[1].byteOffset=2,"outside BIN"
 bad("reject invalid matrix bottom row",(_,bin,offsets)=>bin.writeFloatLE(1,offsets[0]+12),"Nonaffine");
 bad("reject repeated-index fake geometry",(_,bin,offsets)=>{for(let i=0;i<3;i++)bin.writeUInt16LE(0,offsets[5]+2*i)},"Too few actually referenced");
 bad("reject flat billboard mesh",(_,bin,offsets)=>bin.writeFloatLE(0,offsets[1]+32),"Degenerate/flat");
+bad("reject collinear triangles despite XYZ extents",(_,bin,offsets)=>{
+  // All three points lie on [0,0,0] -> [1,1,1] -> [2,2,2].
+  for(let p=0;p<3;p++)for(let k=0;k<3;k++)
+    bin.writeFloatLE(p,offsets[1]+p*12+k*4);
+},"Excessive zero-area");
+bad("reject zero-area triangle with unique but overlapping positions",(_,bin,offsets)=>{
+  // Different indices but identical first two vertex positions.
+  for(let k=0;k<3;k++)bin.writeFloatLE(0,offsets[1]+12+k*4);
+},"Excessive zero-area");
+bad("reject duplicate index triangle at the area gate",(_,bin,offsets)=>{
+  bin.writeUInt16LE(1,offsets[5]+4);
+},"Excessive zero-area");
 test("default production minimum rejects tiny synthetic mesh",()=>{
  const {g,bin}=fixture();const r=validateGeometryBytes(g,bin);
  assert.equal(r.valid,false);assert.ok(r.errors.some(x=>x.includes("Too few actually referenced")));
