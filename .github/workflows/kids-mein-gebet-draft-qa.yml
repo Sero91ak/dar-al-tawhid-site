@@ -55,6 +55,7 @@ jobs:
         run: |
           python kids/mein-gebet/rigging/test_three_quarter_camera_diagnostic.py
           python kids/mein-gebet/rigging/test_geometry_projection_preflight.py
+          python kids/mein-gebet/rigging/test_qa_v77_archive.py
       - name: Ensure production release is blocked without real reviewed GLBs
         shell: bash
         run: |
