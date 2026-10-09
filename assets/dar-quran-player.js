@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 982;
+    var PLAYER_BUILD = 983;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App, iOS-App und Apple TV: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -125,7 +125,7 @@
   var trackHeard = false;
   var playGen = 0;
   var allowAdvance = false;
-  var engine = { started: false, lastUrl: "", loadedSurah: 0, loadedAyah: 0, stallTimer: 0, lastProgressAt: 0, wantPlay: false, objectUrl: "", blobTried: false, haltedOffline: false, watchReloadAt: 0, endedAt: 0 };
+  var engine = { started: false, lastUrl: "", loadedSurah: 0, loadedAyah: 0, stallTimer: 0, lastProgressAt: 0, wantPlay: false, objectUrl: "", blobTried: false, fallbackReciterTried: false, haltedOffline: false, watchReloadAt: 0, endedAt: 0 };
 
   var lastSysVolAt = 0;
   function usesSystemVolume() {
@@ -137,7 +137,6 @@
     try { a.defaultMuted = false; } catch (e0) {}
     try { a.muted = false; } catch (e1) {}
     try { a.volume = 1; } catch (e2) {}
-    if (!(Number(state.volume) > 0)) state.volume = 1;
   }
   function armTvSpeakerUnlock() {
     if (!isAppleTvApp() || window.__DAR_TV_SPEAKER_UNLOCK) return;
@@ -515,7 +514,7 @@
     if (raw.textScaleFit === 1 && Number(raw.textScale) >= 1 && Number(raw.textScale) <= 10) {
       state.textScale = Math.round(Number(raw.textScale));
     }
-    if (Number(raw.volume) > 0 && Number(raw.volume) <= 1) state.volume = Number(raw.volume);
+    if (Number(raw.volume) >= 0 && Number(raw.volume) <= 1) state.volume = Number(raw.volume);
     var t = Number(raw.currentTime != null ? raw.currentTime : raw.resumeAt) || 0;
     if (t > 0) { state.resumeAt = t; state.current = t; }
     if (!LEARN_PLAYER_ONLY && raw.sessionActive === true) state.sessionActive = true;
@@ -715,7 +714,7 @@
     if (!isOffline()) return resolvePlayable(qari, surah, ayah);
     return savedAyahUrl(qari, surah, ayah).then(function (saved) {
       if (saved) return { qari: qari, url: saved, saved: true };
-      return resolvePlayable(qari, surah, ayah);
+      return null; // Offline playback requires a previously saved file.
     });
   }
   function setAudioSrc(a, url) {
@@ -801,9 +800,16 @@
         engine.abortRetries = (engine.abortRetries || 0) + 1;
         if (engine.abortRetries <= 2) {
           setTimeout(function () {
-            if (gen !== playGen) return;
+            if (gen !== playGen || !engine.wantPlay) return;
             runPlay(a, gen);
           }, 180);
+        } else {
+          engine.wantPlay = false;
+          state.playing = false;
+          state.error = "Wiedergabe unterbrochen. Tippe erneut auf Wiedergabe.";
+          paintError();
+          paintChrome();
+          syncPublicAudioState(a);
         }
         return;
       }
@@ -827,6 +833,8 @@
     engine.started = false;
     engine.wantPlay = !!autoplay;
     engine.haltedOffline = false;
+    engine.fallbackReciterTried = false;
+    if (engine.fallbackTimer) { clearTimeout(engine.fallbackTimer); engine.fallbackTimer = 0; }
     clearStallRetry();
     ignoreEndedUntil = Date.now() + 1200;
     engine.abortRetries = 0;
@@ -933,22 +941,28 @@
       return;
     }
     if (urlIndex >= urls.length) {
+      if (engine.fallbackReciterTried || state.reciter === FALLBACK_QARI || isOffline()) {
+        missingAudioHalt(state.reciter, state.surah, state.ayah, engine.lastUrl);
+        return;
+      }
+      engine.fallbackReciterTried = true;
+      var fallbackGeneration = playGen;
       resolvePlayable(FALLBACK_QARI, state.surah, state.ayah).then(function (hit) {
+        if (fallbackGeneration !== playGen) return;
         if (!hit || hit.url === engine.lastUrl) {
           missingAudioHalt(state.reciter, state.surah, state.ayah, engine.lastUrl);
           return;
         }
-        if (hit.qari !== state.reciter) {
-          state.reciter = hit.qari;
-          state.error = "Diese Āyah ist bei diesem Qāriʾ nicht verfügbar. Es wird vorübergehend " + reciterById(hit.qari).name + " abgespielt.";
-        }
+        state.reciter = hit.qari;
+        state.error = "Diese Āyah ist bei diesem Qāriʾ nicht verfügbar. Es wird vorübergehend " + reciterById(hit.qari).name + " abgespielt.";
+        urlIndex = 0;
         ignoreEndedUntil = Date.now() + 1200;
         engine.started = false;
         allowAdvance = false;
         engine.lastUrl = hit.url;
         setAudioSrc(audioEl(), hit.url);
-        logAudio("src changed", snapAudio(audioEl()));
-        if (state.playing || state.sessionActive) runPlay(audioEl(), playGen);
+        logAudio("fallback reciter", snapAudio(audioEl()));
+        if (engine.wantPlay || state.playing) runPlay(audioEl(), playGen);
         paintChrome();
       });
       return;
@@ -1048,8 +1062,11 @@
     syncPublicAudioState(a);
     if (code === 1) return;
     if (engine.fallbackTimer) clearTimeout(engine.fallbackTimer);
+    var failedGeneration = playGen;
+    var failedUrl = engine.lastUrl;
     engine.fallbackTimer = setTimeout(function () {
       engine.fallbackTimer = 0;
+      if (failedGeneration !== playGen || failedUrl !== engine.lastUrl) return;
       var el = audioEl();
       if (engine.started && !el.paused && el.readyState >= 2) return;
       if (el.readyState >= 3) return;
