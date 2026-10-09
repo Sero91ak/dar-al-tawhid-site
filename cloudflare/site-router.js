@@ -214,7 +214,7 @@ function browserManifestResponse(request, androidBrowser = false) {
   if (cookieMatch) {
     try { cookieIcon = decodeURIComponent(cookieMatch[1] || ""); } catch (e) { cookieIcon = cookieMatch[1] || ""; }
   }
-  const iconId = normalizePwaIconId(cookieIcon || url.searchParams.get("icon"));
+  const iconId = "type-creme-ar";
   const icon = DAR_PWA_ICON_MAP[iconId] || DAR_PWA_ICON_MAP["type-creme-ar"];
   const icon192 = pwaIconPath(iconId, 192);
   const icon512 = icon.high ? pwaIconPath(iconId, 512) : pwaIconPath("type-creme-ar", 512);
@@ -226,7 +226,7 @@ function browserManifestResponse(request, androidBrowser = false) {
     short_name: "DĀR AL TAWḤĪD",
     display: "standalone",
     display_override: ["standalone", "minimal-ui"],
-    start_url: "/?page=start&pwa=1",
+    start_url: "/pwa/?pwa=1",
     scope: "/",
     id: "/",
     theme_color: icon.theme,
@@ -721,7 +721,7 @@ a,button,[role="button"],summary,[tabindex],label{-webkit-tap-highlight-color:tr
     return '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.37 12.64c-.03-2.16 1.76-3.2 1.84-3.25-1-1.47-2.57-1.67-3.12-1.69-1.32-.14-2.59.78-3.26.78s-1.7-.76-2.81-.74c-1.44.02-2.78.84-3.52 2.14-1.51 2.62-.39 6.5 1.08 8.63.72 1.04 1.58 2.21 2.71 2.17 1.09-.05 1.5-.7 2.81-.7s1.68.7 2.82.68c1.17-.02 1.91-1.06 2.62-2.11.83-1.2 1.17-2.37 1.19-2.43-.03-.01-2.27-.87-2.3-3.48zM14.5 6.9c.6-.73 1-1.74.89-2.75-.86.03-1.9.57-2.52 1.3-.55.64-1.04 1.67-.91 2.65.96.07 1.95-.49 2.54-1.2z"/></svg>';
   }
   function androidLogoMarkup(){
-    return '<img data-dar-pwa-logo src="'+pwaIconSrc(getPwaIconId())+'" alt="" width="58" height="58" decoding="async">';
+    return '<img src="/assets/app-icons/type-creme-ar/icon-512.png?v=pwa-standard-v1-20261009" alt="" width="58" height="58" decoding="async">';
   }
   function pwaIconPickerMarkup(){
     return '<div class="dar-pwa-icon-picker"><div class="dar-pwa-icon-picker__title">App-Icon wählen</div><div class="dar-pwa-icon-picker__strip">'+pwaIcons.map(function(row){return '<button type="button" data-dar-pwa-icon="'+row.id+'" title="'+row.label+'"><img src="/assets/app-icons/'+row.id+'/icon-192.png?v=pwa-picker-v2-20261009" alt="'+row.label+'" loading="lazy"></button>'}).join('')+'</div><div class="dar-pwa-icon-picker__status" data-dar-pwa-icon-status></div></div>';
@@ -1202,6 +1202,56 @@ export default {
 
     if ((request.method === "GET" || request.method === "HEAD") && url.pathname === "/manifest.json" && !nativeApp) {
       return browserManifestResponse(request, androidBrowser);
+    }
+
+    if ((request.method === "GET" || request.method === "HEAD") && isRoot && url.searchParams.get("pwa") === "1" && !nativeApp) {
+      const target = new URL(request.url);
+      target.pathname = "/pwa/";
+      target.search = "?pwa=1";
+      return new Response(null, {
+        status: 307,
+        headers: {
+          "Location": target.pathname + target.search,
+          "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
+          "CDN-Cache-Control": "no-store",
+          "Cloudflare-CDN-Cache-Control": "no-store",
+          "X-Dar-Surface": "android-pwa-redirect"
+        }
+      });
+    }
+
+    if ((request.method === "GET" || request.method === "HEAD") &&
+        (url.pathname === "/pwa" || url.pathname === "/pwa/" || url.pathname === "/pwa/index.html")) {
+      const target = new URL("/index.html", url.origin);
+      const assetRequest = new Request(target.toString(), request);
+      const assetResponse = await env.ASSETS.fetch(assetRequest);
+      const headers = new Headers(assetResponse.headers);
+      headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+      headers.set("CDN-Cache-Control", "no-store");
+      headers.set("Cloudflare-CDN-Cache-Control", "no-store");
+      headers.set("Pragma", "no-cache");
+      headers.set("X-Dar-Surface", "android-pwa-app");
+      headers.delete("ETag");
+      headers.delete("Content-Length");
+      headers.delete("Content-Encoding");
+      if (request.method === "HEAD") {
+        headers.set("Content-Type", "text/html; charset=utf-8");
+        return new Response(null, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
+      }
+      let html = await assetResponse.text();
+      if (assetResponse.ok) {
+        const pwaHead =
+          '<base href="/">' +
+          '<script id="darDedicatedPwaBootV1">' +
+          'window.__DAR_PWA_STANDARD_BOOT=true;' +
+          'try{document.documentElement.classList.add("dar-pwa-standalone-boot","dar-soft-booting")}catch(e){}' +
+          '<\/script>';
+        if (!html.includes('id="darDedicatedPwaBootV1"')) {
+          html = html.includes("<head>") ? html.replace("<head>", "<head>" + pwaHead) : pwaHead + html;
+        }
+      }
+      headers.set("Content-Type", "text/html; charset=utf-8");
+      return new Response(html, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
     }
 
     if ((request.method === "GET" || request.method === "HEAD") && legacyVoicePath) {
