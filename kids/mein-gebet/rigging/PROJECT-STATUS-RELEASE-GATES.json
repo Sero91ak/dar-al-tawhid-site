@@ -22,7 +22,9 @@
     "manualFaceKufiHairClothApproval": false,
     "productionRigApproved": false,
     "threeQuarterCameraPhysicallyCalibrated": false,
-    "independentFiveViewSilhouetteIoU": null
+    "independentFiveViewSilhouetteIoU": null,
+    "lastKnownSilhouetteMethod": "historical cropped-grabcut seeded v3 (2026-10-08), not yet recalculated by stride-/scene-safe v4",
+    "newMethodCurrentFiveViewIoU": null
   },
   "girl": {
     "source2D": "assets/figur-maedchen-original.png",
@@ -138,12 +140,12 @@
     "allGreenMetadataWithoutGLBStillReleaseBlocked": true,
     "binarySamplerTestsPassed": 20,
     "geometryProjectionPreflightUnitTestsPassed": 14,
-    "nativeRunnerTotalChecksPassed": 205,
+    "nativeRunnerTotalChecksPassed": 210,
     "nativeRunnerCompletedSuccessfully": true,
     "nativeRunner": "GitHub Actions ubuntu-latest; Node.js 22; Python 3.11",
-    "nativeRunnerHeadSha": "1a0ae6e7ed09988ee9bc77860221701a5890b1ce",
-    "nativeRunnerRunUrl": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37947486073",
-    "nativeRunnerScope": "205 actual GitHub Actions Node.js 22/Python 3.11 checks with synthetic buffers/files. No original V7.7 GLB or original illustration bytes obtained; no visual/fiqh/device signoff.",
+    "nativeRunnerHeadSha": "bdf4656db028b4def2d26017ccd19aa2dfad844c",
+    "nativeRunnerRunUrl": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37948050710",
+    "nativeRunnerScope": "210 native CI tests on synthetic original-view geometry, camera, zip, mesh, rig and release guards. Real V7.7 GLB + original PNG not available for measurement, visual approval or production.",
     "binarySampleProofOnActualGLB": false,
     "realFiveViewRecomputedAfterV77": false,
     "staticRigTransformGuardCommitted": true,
@@ -166,6 +168,10 @@
     "originalViewAccessorDecoderTestsPassed": 21,
     "originalViewInterleavedByteStrideHandled": true,
     "originalViewUnreferencedOutliersIgnored": true,
-    "originalViewActualV77Remeasured": false
+    "originalViewActualV77Remeasured": false,
+    "originalViewActiveSceneTestsPassed": 5,
+    "originalViewMethodId": "fiveview-cropped-grabcut-seeded-v4-stride-scene-safe-20261009",
+    "originalViewHistoricalV3MustBeRecomputed": true,
+    "originalViewInactiveScenesRejected": true
   }
 }
