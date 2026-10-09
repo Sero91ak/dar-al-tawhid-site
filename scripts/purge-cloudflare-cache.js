@@ -85,6 +85,37 @@ async function resolveZoneId(hostname) {
   return zone.id;
 }
 
+async function diagnoseWorkerBindings(zoneId, hostname) {
+  let accountId = "";
+  try {
+    const zone = await cfApi(`/zones/${zoneId}`);
+    accountId = String(zone?.result?.account?.id || "");
+  } catch (err) {
+    console.warn("Cloudflare Zone-Diagnose nicht möglich:", err.message || err);
+  }
+  try {
+    const routes = await cfApi(`/zones/${zoneId}/workers/routes`);
+    const compact = (routes.result || []).map((r) => ({
+      id: r.id || "", pattern: r.pattern || "", script: r.script || "", environment: r.environment || ""
+    }));
+    console.log("Cloudflare Worker-Routen:", JSON.stringify(compact));
+  } catch (err) {
+    console.warn("Cloudflare Worker-Routen nicht lesbar:", err.message || err);
+  }
+  if (accountId) {
+    try {
+      const domains = await cfApi(`/accounts/${accountId}/workers/domains`);
+      const compact = (domains.result || []).map((d) => ({
+        id: d.id || "", hostname: d.hostname || "", service: d.service || "", environment: d.environment || "", zone_id: d.zone_id || ""
+      }));
+      console.log("Cloudflare Worker-Custom-Domains:", JSON.stringify(compact));
+    } catch (err) {
+      console.warn("Cloudflare Worker-Custom-Domains nicht lesbar:", err.message || err);
+    }
+  }
+  console.log("Cloudflare Ziel-Domain:", hostname, "erwarteter Worker=dar-al-tawhid-site");
+}
+
 async function purgeEverything(zoneId) {
   const result = await cfApi(`/zones/${zoneId}/purge_cache`, {
     method: "POST",
@@ -195,6 +226,7 @@ function testPurgeFiles() {
   const hostname = new URL(SITE_URL).hostname;
   const zoneId = await resolveZoneId(hostname);
   console.log("Zone:", zoneId, "für", hostname, "scope=", PURGE_SCOPE);
+  await diagnoseWorkerBindings(zoneId, hostname);
 
   // Nur /test/*: kein Zone-weites purge_everything (Besucher-App unberührt lassen).
   if (PURGE_SCOPE === "test") {
