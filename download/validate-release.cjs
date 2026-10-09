@@ -45,16 +45,15 @@ if (fs.existsSync(publicRouterPath)) {
   assert.ok(router.includes("DAR_PWA_ICON_CATALOG"), "Android PWA icon catalog missing");
   assert.ok(router.includes("normalizePwaIconId"), "Android PWA selected-icon manifest support missing");
   assert.ok(router.includes("No async work may happen before prompt()"), "Android install prompt must stay inside the original tap");
-  assert.ok(router.includes("dar_pwa_icon"), "Android PWA selected icon must use a stable manifest URL with a cookie-backed preference");
-  assert.ok(router.includes("data-dar-pwa-icon-current"), "Current PWA icon state must not reuse the clickable icon selector attribute");
-  assert.ok(router.includes('button[data-dar-pwa-icon]'), "PWA icon click handler must be scoped to actual buttons");
+  assert.ok(router.includes('X-Dar-Surface", "android-pwa-app"'), "Installed Android PWA must have a dedicated app-shell surface");
+  assert.ok(router.includes('target.pathname = "/pwa/"'), "Legacy PWA start must redirect into the dedicated /pwa/ shell");
   assert.ok(router.includes('purpose: "maskable"'), "Android launcher must receive maskable artwork");
   assert.ok(router.includes('display: "standalone"'), "Android PWA manifest must be standalone");
   assert.ok(router.includes('id: "/"'), "Android PWA manifest must have a stable app id");
-  assert.ok(router.includes('start_url: "/?page=start&pwa=1"'), "Dynamic Android PWA manifest must preserve the loader launch marker");
+  assert.ok(router.includes('start_url: "/pwa/?pwa=1"'), "Dynamic Android PWA manifest must launch the dedicated visitor app shell");
 }
 assert.equal(pwaManifest.display, "standalone", "Public manifest must be installable as standalone PWA");
-assert.equal(pwaManifest.start_url, "/?page=start&pwa=1", "Installed Android PWA must launch with the loader marker");
+assert.equal(pwaManifest.start_url, "/pwa/?pwa=1", "Installed Android PWA must launch the dedicated visitor app shell");
 assert.equal(pwaManifest.background_color, "#050706", "PWA system splash background must match the standard boot surface");
 assert.equal(pwaManifest.scope, "/", "PWA scope must cover the public website");
 assert.equal(pwaManifest.id, "/", "PWA id must be stable and query-free");
