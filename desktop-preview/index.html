@@ -2664,15 +2664,17 @@ html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
   root.classList.add("is-leaving");
   setTimeout(function(){render();root.classList.remove("is-leaving");window.scrollTo({top:0,behavior:"smooth"})},150)
  }
+ // Reliability guard: public website navigation uses normal browser loads.
+ // This keeps every link functional even if a page-specific SPA initializer fails.
  document.addEventListener("click",function(e){
   var t=e.target&&e.target.closest?e.target:null;
   var a=t?t.closest("a.desktop-link"):null;
   if(!a)return;
   var u=new URL(a.href,location.href);
   if(u.origin!==location.origin||(u.pathname!=="/"&&u.pathname!=="/desktop-preview/"))return;
-  e.preventDefault();navigate(u.pathname+u.search,true)
+  // Intentionally do not preventDefault: use the anchor href as a full navigation.
  });
- window.addEventListener("popstate",function(){navigate(location.pathname+location.search,false)});
+ window.addEventListener("popstate",function(){location.reload()});
 
  // Public website PWA installer must work even when /desktop-preview/ was loaded directly.
  var darDeferredPwaPrompt=window.__darEarlyInstallPrompt||null;
