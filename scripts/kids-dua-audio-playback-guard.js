@@ -17,6 +17,10 @@ for(const key of [
   'attachPhraseFollow(currentDua,mode==="slow",token)',
   'function playCleanSequence',
   'function playWordSequence',
+  'function approvedNativeSlowUrl',
+  'row.audioListeningApproved===true',
+  'row.qaApproval==="human-reviewed-natural-fusha"',
+  'var direct=dua.audioArabicUrl,playRate=slow?CLEAN_SLOW_RATE:1;',
   'function cleanWordWindow',
   'function keepFocusedWordVisible',
   'data-dsl="full"',
@@ -50,6 +54,8 @@ const generator=read(".github/workflows/build-kids-quiz-owner-voice.yml");
 assert(!generator.includes('value="[slowly] "+value'),"Slow spoken directive is still in generator");
 assert(!generator.includes('value="[slowly] "+value.rstrip(".")+"."'),"Synthetic word-ending breath cue remains");
 assert(generator.includes('"speed":0.88')&&generator.includes('"speed":0.92'),"Arabic native speed profiles missing");
+assert(generator.includes("|| 'pause' }}"),"Non-voice code push can accidentally synthesize whole libraries");
+assert(generator.includes("fetch-depth: 2"),"Voice scope change detection cannot resolve merge parent");
 assert(generator.includes("dua-arabic-native-fusha-word-v5-natural-20261009"),"Word render revision missing");
 assert(generator.includes("dua-arabic-native-fusha-slow-v4-natural-20261009"),"Slow render revision missing");
 
