@@ -96,9 +96,29 @@ if(navigator.connection?.saveData)salahWorld.classList.add("kids-salah-save-data
    // 'reference' as the initial base caused the prayer CTA to drop down
    // again after the first layout pass.
    const actualBase=Math.max(0,heroRect.height-bleedCompensation);
-   const wanted=Math.max(safeMinimum,Math.min(reference,Math.round(actualBase+free)));
-   // Always measure against live dock; on very small screens keep scroll
-   // instead of shrinking/overlapping words or obstructing touch controls.
+   const availableBase=Math.round(actualBase+free);
+   // A tall logo plus salām may demand more height than is available above
+   // the physical navigation. Switch to the smaller *real* text geometry
+   // before computing its safe minimum; never push the prayer CTA beneath
+   // the bottom tabs merely to preserve generous heading whitespace.
+   const tight=salahWorld.classList.contains("kids-home-fit-tight");
+   if(!tight&&free< -4&&availableBase<safeMinimum-4){
+     salahWorld.classList.add("kids-home-fit-tight");
+     lastHeight=0;
+     schedule();
+     return;
+   }
+   // Keep the condensed state stable during scroll/address-bar movement.
+   // Only release on a substantially taller viewport (e.g. rotation).
+   if(tight&&h>900&&availableBase>safeMinimum+90){
+     salahWorld.classList.remove("kids-home-fit-tight");
+     lastHeight=0;
+     schedule();
+     return;
+   }
+   const wanted=Math.max(safeMinimum,Math.min(reference,availableBase));
+   // Very short devices remain vertically scrollable when even condensed
+   // text and 44px touch targets cannot physically fit above the dock.
    if(Math.abs(lastHeight-wanted)>2||Math.abs(lastWidth-w)>1){
      HERO.style.setProperty("--kids-home-measured-min",safeMinimum+"px");
      HERO.style.setProperty("--kids-home-measured-target",wanted+"px");
