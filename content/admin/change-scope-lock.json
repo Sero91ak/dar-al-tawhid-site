@@ -7259,13 +7259,14 @@
       "id": "android-native-launcher-icons-widgets-2026-10-09",
       "at": "2026-10-09T17:00:00+02:00",
       "approvedBy": "user-explicit-installed-app-icon-switch-and-android-homescreen-widgets",
-      "reason": "Nutzer beauftragt ausdrücklich: in der installierten Android-App App-Icons direkt wechseln und auf dem Homescreen aktualisieren; echte Android-Homescreen-Widgets für Gebetszeiten und religiöse Inhalte bereitstellen sowie eine systemeigene Widget-Auswahl aus der App ermöglichen. Keine Kids-, Push- oder Apple-TV-Änderung.",
+      "reason": "Nutzer beauftragt ausdrücklich: in der installierten Android-App App-Icons direkt wechseln und auf dem Homescreen aktualisieren; echte Android-Homescreen-Widgets für Gebetszeiten und religiöse Inhalte bereitstellen sowie eine systemeigene Widget-Auswahl aus der App ermöglichen. Keine Kids-, Push- oder Apple-TV-Änderung. Ergänzung 2026-10-09: den bereits vorhandenen App-Icon-Wähler in den echten App-Einstellungen mit DarNative.setAppIcon/currentAppIcon verbinden und parallel die PWA/WebAPK-Iconpräferenz spiegeln.",
       "paths": [
         "content/admin/change-scope-lock.json",
         "android/",
         "widgets/index.html",
         "assets/dar-setup-hub.js",
-        ".github/workflows/android-native-widgets-check.yml"
+        ".github/workflows/android-native-widgets-check.yml",
+        "index.html"
       ],
       "expiresAt": "2026-11-30T23:59:00.000Z"
     }
