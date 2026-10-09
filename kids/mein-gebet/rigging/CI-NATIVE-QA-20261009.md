@@ -69,3 +69,24 @@ Logbelegte Testverteilung:
 Der Validator überprüft jetzt zusätzlich, dass **alle** 19 benannten primären Skin-Joints echte Nachkommen derselben Hips-Skelettwurzel sind. Richtig benannte, aber getrennte/frei schwebende Knochen oder eine losgelöste Kopf-/Bein-Hierarchie sind ungültig. Der End-to-End-Test schreibt ein nicht-originales Test-GLB, prüft funktionierende Import-/Struktur-/Animations-/Mesh-Bytepfade und beweist, dass der Jungen-Identitätsschutz (`forbid-placeholder-release.cjs`) **auch bei gültiger synthetischer GLB-Struktur keine Produktionsfreigabe** erteilt.
 
 **Unveränderte Sperre:** V7.7-Originaldatei und die exakte Original-Turnaround-PNG konnten weiterhin nicht materialisiert werden; deshalb keine neue fünfseitige echte IoU-Messung, kein realer Clip-Freeze-Beweis, keine originalgetreue V7.8-Figur. Das Projekt bleibt bewusst Draft, unveröffentlicht, ohne Freigabe von Gebetsposen oder beiden Profilen.
+
+## 09.10.2026 – Numerische Posen, validiertes Archiv und Native-CI
+
+**Neuer nachweislich erfolgreicher GitHub-Lauf:** https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37937012907 für `6bf3f7e489b8bde9a0593b4135e9409c1edfda5d`.
+
+**184 native automatische Prüfungen bestanden**, davon 39 GLB-/Rigstruktur, 20 Animations-BIN, 27 Mesh-/Skin-BIN, 12 echte synthetische GLB-Datenträger-End-to-End-Tests, **20 neue numerische Knochenlängenprüfungen**, 18 Release-Sperren, 12 Rig-Freeze, 7 Winkel-Unit-Tests, 14 Projektions-Unit-Tests sowie **15 neue ZIP-Sicherheitsprüfungen**.
+
+### Numerische Keyframe-/Zwischenbildkontrolle
+
+- `validate-pose-bone-lengths.cjs` liest die Animationen aus dem wirklichen GLB-BIN, bildet durch Quaternionen und translatierte Restknochen die globalen Gelenkpositionen und prüft alle Skin-Bonelängen an den vorhandenen Keyframes sowie dazwischen. Qiyām und Takbīr bleiben unverändert.
+- Der Prüfer verbietet degenerierte Knochen, Translationen eines Nicht-Wurzeljoints und gestreckte Zwischenhelfer, Matrix-/Scale-Manipulationen, defekte Zeitwerte und falsche Quaternionen. `validate-glb.cjs`, `forbid-placeholder-release.cjs` und `audit-project-completion.cjs` verlangen diese zusätzliche unabhängige Prüfung.
+- **Grenze:** Die mathematische Invarianz von Joint-Zentren ist keine Garantie für gewichtsbedingtes Skinning-Stretching/Clipping, Stoff oder islamrechtlich korrekte Rukūʿ-/Suǧūd-Kontakte. Für reale Modelle bleibt `boneLengthInvariantVerified=false`.
+
+### Vorbereitung auf ORIGINALEN V7.7-Archivzugriff
+
+- `qa_v77_archive.py` sucht in der unveränderten V7.7-ZIP ausschließlich die zwei unverwechselbaren Originaldateien anhand der **exakten SHA-256-Digests** `353b028862f91922d6288cf6ede09d5c8150815657c66c9c116b7775311c07fa` (GLB) und `062b8555e861c680b1049ab6a3bee0212caa51cda5168a6b33a76be01aa987b9` (PNG).
+- ZIP-Slip/Symlink/Kompressionsbomben/verdächtige Abmessungen blockieren die Ausführung. Nach erfolgreicher Dateiverifikation extrahiert das Programm **nur diese beiden exakten Dateien temporär**, startet den nativen GLB-Validator und anschließend die feste Fünf-Ansichten-Messung sowie den unkalibrierten Kamera-Sensitivitätstest. Keine unfreigegebenen Dateien, keine Ersatzreferenz, kein Deploy.
+- Aufruf mit den **echten ZIP-Bytes**: `python kids/mein-gebet/rigging/qa_v77_archive.py "/PFAD/Mein_Gebet_V77_STRICT_NICHT_FREIGEGEBEN.zip" --json "/PFAD/V77-QA-Bericht.json"`.
+- Ohne diese wirklich zugängliche ZIP bleibt das Ergebnis **BLOCKED**, nicht behauptete 90 %, keine Freigabe für 3D-Gesicht/Hijab/Kufi und kein neues V7.8.
+
+**Produktionsstatus: bewusst gesperrt. Draft-PR #825 bleibt offen; keine Änderung an main oder der Live-Kinder-App.**
