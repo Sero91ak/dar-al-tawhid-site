@@ -193,30 +193,24 @@ function kidsHeaders(assetResponse) {
 function browserManifestResponse(request, androidBrowser = false) {
   const manifest = {
     $schema: "https://json.schemastore.org/web-manifest-combined.json",
-    name: "DĀR AL TAWḤĪD Website",
+    name: "DĀR AL TAWḤĪD",
     short_name: "DĀR AL TAWḤĪD",
-    display: "browser",
-    display_override: ["browser"],
+    display: "standalone",
+    display_override: ["standalone", "minimal-ui"],
     start_url: "/?page=start",
     scope: "/",
-    id: "/?page=start",
-    theme_color: "#fbfaf6",
-    background_color: "#fbfaf6",
-    description: "DĀR AL TAWḤĪD – Webseite mit Qurʾān, Sunnah, Āṯār, Beiträgen, Duʿāʾ und Bibliothek.",
+    id: "/",
+    theme_color: "#10282a",
+    background_color: "#f6f0e4",
+    description: "DĀR AL TAWḤĪD – installierbare Web-App mit Qurʾān, Sunnah, Āṯār, Beiträgen, Duʿāʾ und Bibliothek.",
     orientation: "any",
+    prefer_related_applications: false,
     icons: [
-      { src: "/icon-192x192.png", sizes: "192x192", type: "image/png", purpose: "any" },
-      { src: "/icon-512x512.png", sizes: "512x512", type: "image/png", purpose: "any" }
+      { src: "/assets/app-icons/type-creme-ar/icon-192.png?v=pwa-native-ios-20261009", sizes: "192x192", type: "image/png", purpose: "any" },
+      { src: "/assets/app-icons/type-creme-ar/icon-512.png?v=pwa-native-ios-20261009", sizes: "512x512", type: "image/png", purpose: "any" },
+      { src: "/assets/app-icons/type-creme-ar/icon-1024.png?v=pwa-native-ios-20261009", sizes: "1024x1024", type: "image/png", purpose: "any" }
     ]
   };
-  if (androidBrowser) {
-    manifest.name = "DĀR AL TAWḤĪD";
-    manifest.display = "standalone";
-    manifest.display_override = ["standalone"];
-    manifest.theme_color = "#050706";
-    manifest.background_color = "#050706";
-    manifest.description = "DĀR AL TAWḤĪD – installierbare Android-Web-App mit Qurʾān, Sunnah, Āṯār, Duʿāʾ und Bibliothek.";
-  }
   const headers = new Headers({
     "Vary": "User-Agent",
     "Content-Type": "application/manifest+json; charset=utf-8",
@@ -227,7 +221,6 @@ function browserManifestResponse(request, androidBrowser = false) {
   });
   return new Response(request.method === "HEAD" ? null : JSON.stringify(manifest, null, 2), { status: 200, headers });
 }
-
 function liveFrauenNativeAddon() {
   return [
     '<link rel="stylesheet" href="/assets/frauen/frauen-fiqh.css?v=frauen-live-v8">',
@@ -259,7 +252,7 @@ function publicWebsiteAddon() {
 .dar-download-fallback__head{display:flex;align-items:center;gap:14px}
 .dar-download-fallback__icon{width:58px;height:58px;flex:0 0 58px;display:grid;place-items:center;border-radius:17px;background:#102b2b;color:#a4c639}
 .dar-download-fallback__icon.apple{background:#fff;color:#111}
-.dar-download-fallback__icon svg{width:36px;height:36px;display:block}
+.dar-download-fallback__icon svg,.dar-download-fallback__icon img{width:36px;height:36px;display:block;object-fit:contain;border-radius:10px}
 .dar-download-fallback__card small{display:block;color:#8a6b2d;font-size:8px;font-weight:850;letter-spacing:.13em}
 .dar-download-fallback__card h2{margin:4px 0 0;font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;font-size:22px;font-weight:600;color:#2a2924}
 .dar-download-fallback__card p,.dar-download-fallback__card ol{color:#625c53;font-size:11px;line-height:1.7}
@@ -300,6 +293,7 @@ function publicWebsiteAddon() {
   if(apple&&promo)promo.classList.add("is-visible");
 
   var deferredInstall=null;
+  var installPromptWaiters=[];
   function setPwaHint(text){
     try{
       var home=document.getElementById("darPwaHomeHint");
@@ -311,11 +305,40 @@ function publicWebsiteAddon() {
     try{document.documentElement.classList.add("dar-pwa-standalone")}catch(e){}
     setPwaHint("Bereits als App installiert.");
   }
+  function publishInstallPrompt(event){
+    deferredInstall=event;
+    var waiters=installPromptWaiters.splice(0);
+    waiters.forEach(function(resolve){try{resolve(event)}catch(e){}});
+  }
+  function waitForInstallPrompt(ms){
+    if(deferredInstall)return Promise.resolve(deferredInstall);
+    return new Promise(function(resolve){
+      var done=false;
+      function finish(value){if(done)return;done=true;resolve(value||null)}
+      installPromptWaiters.push(finish);
+      setTimeout(function(){
+        var idx=installPromptWaiters.indexOf(finish);
+        if(idx>=0)installPromptWaiters.splice(idx,1);
+        finish(null);
+      },Math.max(250,Number(ms)||1800));
+    });
+  }
+  async function ensureAndroidServiceWorkerReady(){
+    if(!("serviceWorker" in navigator))return false;
+    try{
+      await navigator.serviceWorker.register("/service-worker.js",{scope:"/"});
+      await Promise.race([
+        navigator.serviceWorker.ready,
+        new Promise(function(resolve){setTimeout(resolve,1800)})
+      ]);
+      return true;
+    }catch(e){return false}
+  }
   window.addEventListener("beforeinstallprompt",function(event){
     if(!android||standalone)return;
     event.preventDefault();
-    deferredInstall=event;
-    setPwaHint("Bereit zur Installation auf deinem Startbildschirm.");
+    publishInstallPrompt(event);
+    setPwaHint("Bereit zur direkten Installation.");
   });
   window.addEventListener("appinstalled",function(){
     deferredInstall=null;
@@ -332,10 +355,13 @@ function publicWebsiteAddon() {
         return true;
       }
     }catch(e){}
-    if(deferredInstall){
+    setPwaHint("Installation wird vorbereitet …");
+    await ensureAndroidServiceWorkerReady();
+    var installEvent=deferredInstall||await waitForInstallPrompt(2200);
+    if(installEvent){
       try{
-        deferredInstall.prompt();
-        var choice=await deferredInstall.userChoice;
+        installEvent.prompt();
+        var choice=await installEvent.userChoice;
         if(choice&&choice.outcome==="accepted"){
           deferredInstall=null;
           setPwaHint("Installation bestätigt.");
@@ -345,7 +371,7 @@ function publicWebsiteAddon() {
         return false;
       }catch(e){}
     }
-    setPwaHint("Browser-Menü öffnen → „App installieren“ oder „Zum Startbildschirm hinzufügen“.");
+    setPwaHint("Chrome bietet den Installationsdialog noch nicht an. Seite neu laden und erneut auf „Web-App installieren“ tippen.");
     return false;
   };
   document.addEventListener("click",function(event){
@@ -398,7 +424,7 @@ function publicWebsiteAddon() {
     return '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.37 12.64c-.03-2.16 1.76-3.2 1.84-3.25-1-1.47-2.57-1.67-3.12-1.69-1.32-.14-2.59.78-3.26.78s-1.7-.76-2.81-.74c-1.44.02-2.78.84-3.52 2.14-1.51 2.62-.39 6.5 1.08 8.63.72 1.04 1.58 2.21 2.71 2.17 1.09-.05 1.5-.7 2.81-.7s1.68.7 2.82.68c1.17-.02 1.91-1.06 2.62-2.11.83-1.2 1.17-2.37 1.19-2.43-.03-.01-2.27-.87-2.3-3.48zM14.5 6.9c.6-.73 1-1.74.89-2.75-.86.03-1.9.57-2.52 1.3-.55.64-1.04 1.67-.91 2.65.96.07 1.95-.49 2.54-1.2z"/></svg>';
   }
   function androidLogoMarkup(){
-    return '<svg viewBox="0 0 64 64" aria-hidden="true"><g fill="currentColor"><path d="M20.2 17.7 16.5 11.3a1.5 1.5 0 0 1 2.6-1.5l3.8 6.5A24.2 24.2 0 0 1 32 14.5c3.3 0 6.4.7 9.1 1.9l3.8-6.5a1.5 1.5 0 1 1 2.6 1.5l-3.7 6.4A16.5 16.5 0 0 1 49 29H15a16.5 16.5 0 0 1 5.2-11.3Z"/><rect x="15" y="31" width="34" height="22" rx="3"/><rect x="9" y="31" width="4" height="19" rx="2"/><rect x="51" y="31" width="4" height="19" rx="2"/><rect x="21" y="51" width="5" height="10" rx="2.5"/><rect x="38" y="51" width="5" height="10" rx="2.5"/></g><circle cx="24" cy="23" r="1.8" fill="#10252a"/><circle cx="40" cy="23" r="1.8" fill="#10252a"/></svg>';
+    return '<img src="/assets/app-icons/type-creme-ar/icon-512.png?v=pwa-native-ios-20261009" alt="" width="36" height="36" decoding="async">';
   }
   function ensurePublicDownloads(){
     var page="start";

@@ -2263,7 +2263,7 @@ button,input,select{font:inherit}
 <link rel="stylesheet" href="/test/assets/frauen/frauen-authority-v1292.css?v=frauen-authority-v1292">
 <script src="/test/assets/frauen/frauen-fiqh.js?v=1294-share-brand" defer></script>
 
-<link rel="manifest" href="/manifest.json">
+<link rel="manifest" href="/manifest.json?v=android-pwa-native-ios-20261009">
 <style id="darAndroidPwaWebsiteV1">
 #darAndroidPwaHome{display:none}
 html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
@@ -2412,7 +2412,7 @@ html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
  function footer(){return '<footer class="site-footer reveal"><span>DĀR AL TAWḤĪD</span><span>Qurʾān · Sunnah · Āṯār</span></footer>'}
  function sourceLine(label,url){return '<div class="statement-source"><b>Quelle:</b> '+label+' <a target="_blank" rel="noopener" href="'+url+'">Direktnachweis ↗</a></div>'}
 
- function androidPwaLogo(){return '<svg viewBox="0 0 64 64" aria-hidden="true"><g fill="currentColor"><path d="M20.2 17.7 16.5 11.3a1.5 1.5 0 0 1 2.6-1.5l3.8 6.5A24.2 24.2 0 0 1 32 14.5c3.3 0 6.4.7 9.1 1.9l3.8-6.5a1.5 1.5 0 1 1 2.6 1.5l-3.7 6.4A16.5 16.5 0 0 1 49 29H15a16.5 16.5 0 0 1 5.2-11.3Z"/><rect x="15" y="31" width="34" height="22" rx="3"/><rect x="9" y="31" width="4" height="19" rx="2"/><rect x="51" y="31" width="4" height="19" rx="2"/><rect x="21" y="51" width="5" height="10" rx="2.5"/><rect x="38" y="51" width="5" height="10" rx="2.5"/></g><circle cx="24" cy="23" r="1.8" fill="#10252a"/><circle cx="40" cy="23" r="1.8" fill="#10252a"/></svg>'}
+ function androidPwaLogo(){return '<img src="/assets/app-icons/type-creme-ar/icon-512.png?v=pwa-native-ios-20261009" alt="" width="40" height="40" decoding="async">'}
  function appleLogo(){return '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.37 12.64c-.03-2.16 1.76-3.2 1.84-3.25-1-1.47-2.57-1.67-3.12-1.69-1.32-.14-2.59.78-3.26.78s-1.7-.76-2.81-.74c-1.44.02-2.78.84-3.52 2.14-1.51 2.62-.39 6.5 1.08 8.63.72 1.04 1.58 2.21 2.71 2.17 1.09-.05 1.5-.7 2.81-.7s1.68.7 2.82.68c1.17-.02 1.91-1.06 2.62-2.11.83-1.2 1.17-2.37 1.19-2.43-.03-.01-2.27-.87-2.3-3.48zM14.5 6.9c.6-.73 1-1.74.89-2.75-.86.03-1.9.57-2.52 1.3-.55.64-1.04 1.67-.91 2.65.96.07 1.95-.49 2.54-1.2z"/></svg>'}
  function androidPwaStartPromo(){return '<aside id="darAndroidPwaHome" aria-label="Android Web-App installieren"><a class="dar-pwa-home-help desktop-link" href="'+p("downloads")+'" data-page="downloads">Installationshilfe</a><span class="dar-pwa-android-mark">'+androidPwaLogo()+'</span><span class="dar-pwa-home-copy"><small>ANDROID · WEB-APP</small><strong>DĀR AL TAWḤĪD installieren</strong><span id="darPwaHomeHint">Wie eine App auf dem Startbildschirm · ohne APK.</span></span><button class="dar-pwa-home-action" type="button" data-dar-pwa-install>Installieren</button></aside>'}
 
@@ -2573,6 +2573,7 @@ html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
 
  // Public website PWA installer must work even when /desktop-preview/ was loaded directly.
  var darDeferredPwaPrompt=null;
+ var darInstallPromptWaiters=[];
  var darInstallToastTimer=0;
  function darPwaStandalone(){
   try{return window.matchMedia("(display-mode: standalone)").matches||window.navigator.standalone===true}catch(e){return false}
@@ -2598,10 +2599,36 @@ html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
   clearTimeout(darInstallToastTimer);
   darInstallToastTimer=setTimeout(function(){if(toast)toast.style.display="none"},6500)
  }
+ function darPublishInstallPrompt(ev){
+  darDeferredPwaPrompt=ev;
+  var waiters=darInstallPromptWaiters.splice(0);
+  waiters.forEach(function(resolve){try{resolve(ev)}catch(e){}})
+ }
+ function darWaitForInstallPrompt(ms){
+  if(darDeferredPwaPrompt)return Promise.resolve(darDeferredPwaPrompt);
+  return new Promise(function(resolve){
+   var done=false;
+   function finish(value){if(done)return;done=true;resolve(value||null)}
+   darInstallPromptWaiters.push(finish);
+   setTimeout(function(){
+    var idx=darInstallPromptWaiters.indexOf(finish);
+    if(idx>=0)darInstallPromptWaiters.splice(idx,1);
+    finish(null)
+   },Math.max(250,Number(ms)||1800))
+  })
+ }
+ async function darEnsurePwaServiceWorker(){
+  if(!("serviceWorker" in navigator))return false;
+  try{
+   await navigator.serviceWorker.register("/service-worker.js",{scope:"/"});
+   await Promise.race([navigator.serviceWorker.ready,new Promise(function(resolve){setTimeout(resolve,1800)})]);
+   return true
+  }catch(e){return false}
+ }
  window.addEventListener("beforeinstallprompt",function(ev){
   ev.preventDefault();
-  darDeferredPwaPrompt=ev;
-  darPwaHint("Bereit zur Installation.")
+  darPublishInstallPrompt(ev);
+  darPwaHint("Bereit zur direkten Installation.")
  });
  window.addEventListener("appinstalled",function(){
   darDeferredPwaPrompt=null;
@@ -2615,14 +2642,23 @@ html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
    darPwaToast("Die DĀR AL TAWḤĪD Web-App ist bereits installiert.");
    return true
   }
-  if(darDeferredPwaPrompt){
+  var android=/\bAndroid\b/i.test(String(navigator.userAgent||""));
+  if(!android){
+   var msgNonAndroid="Die Android-Web-App bitte auf einem Android-Gerät in Chrome, Edge oder Samsung Internet öffnen.";
+   darPwaHint(msgNonAndroid);darPwaToast(msgNonAndroid);
+   return false
+  }
+  darPwaHint("Installation wird vorbereitet …");
+  await darEnsurePwaServiceWorker();
+  var installEvent=darDeferredPwaPrompt||await darWaitForInstallPrompt(2200);
+  if(installEvent){
    try{
-    darDeferredPwaPrompt.prompt();
-    var choice=await darDeferredPwaPrompt.userChoice;
+    installEvent.prompt();
+    var choice=await installEvent.userChoice;
     if(choice&&choice.outcome==="accepted"){
      darDeferredPwaPrompt=null;
      darPwaHint("Installation bestätigt.");
-     darPwaToast("Installation bestätigt. Die Web-App wird deinem Gerät hinzugefügt.");
+     darPwaToast("Installation bestätigt. Android fügt die Web-App jetzt hinzu.");
      return true
     }
     darPwaHint("Installation wurde nicht bestätigt.");
@@ -2630,14 +2666,8 @@ html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
     return false
    }catch(e){}
   }
-  var android=/\bAndroid\b/i.test(String(navigator.userAgent||""));
-  if(android){
-   var msg="Chrome-Menü ⋮ öffnen und „App installieren“ oder „Zum Startbildschirm hinzufügen“ wählen.";
-   darPwaHint(msg);darPwaToast(msg)
-  }else{
-   var msg2="Die Android-Web-App bitte auf einem Android-Gerät in Chrome, Edge oder Samsung Internet öffnen.";
-   darPwaHint(msg2);darPwaToast(msg2)
-  }
+  var msg="Chrome bietet den Installationsdialog noch nicht an. Seite neu laden und erneut auf „Web-App installieren“ tippen.";
+  darPwaHint(msg);darPwaToast(msg);
   return false
  }
  window.darInstallAndroidPwa=darInstallDesktopPwa;
