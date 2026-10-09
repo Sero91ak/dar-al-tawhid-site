@@ -694,6 +694,9 @@ jobs:
                       "speechProfile":text_profile,
                       "languageComposition":("de+ar" if text_model==ELEVEN_QUIZ_HYBRID_MODEL else "ar" if text_model==ELEVEN_QUIZ_AR_MODEL else "de"),
                       "pronunciationQaStatus":("needs-native-fusha-listening-review" if text_model in (ELEVEN_QUIZ_HYBRID_MODEL,ELEVEN_QUIZ_AR_MODEL) else "technical-qa-complete"),
+                      # No automatically generated Arabic track may assert a completed hearing review.
+                      "audioListeningApproved":(False if is_arabic else None),
+                      "qaApproval":("pending-native-listening" if is_arabic else "technical-qa-complete"),
                       "voiceProfileId":"serhat-owner-voice-2026",
                       "sourceVoice":"authorized-owner-voice",
                       "sourceType":"owner-voice-generated",
@@ -730,7 +733,7 @@ jobs:
                   "speaker":"Serhat Abu Malik",
                   "speechPreparation":("native-vocalized-arabic-nfc-no-dictionary-initial-shadda-safe-v5" if manifest_is_arabic else "explicit-german-numbers-and-quran-references"),
                   "initialContextShaddaStripped":(True if manifest_is_arabic else None),
-                  "manualPerClipApprovalRequired":False,
+                  "manualPerClipApprovalRequired":(manifest_is_arabic and profile in ("dua_arabic_slow","dua_word")),
                   "technicalQaRequired":True,
                   "systemTtsFallbackAllowed":False,
                   "modelId":model_id,
