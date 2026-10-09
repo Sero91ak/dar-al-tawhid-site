@@ -2325,10 +2325,10 @@ button,input,select{font:inherit}
     document.querySelectorAll("[data-dar-pwa-install]").forEach(function(btn){
      if(!btn.dataset.darInstallLabel)btn.dataset.darInstallLabel=btn.textContent||"Web-App installieren";
      var preparing=android&&!installed&&!ready;
-     btn.disabled=installed||preparing;
-     btn.setAttribute("aria-disabled",(installed||preparing)?"true":"false");
+     btn.disabled=installed;
+     btn.setAttribute("aria-disabled",installed?"true":"false");
      btn.setAttribute("data-dar-pwa-install-state",installed?"installed":(ready?"ready":"preparing"));
-     var nextLabel=installed?"Bereits installiert":(preparing?"Installation wird vorbereitet …":btn.dataset.darInstallLabel);
+     var nextLabel=installed?"Bereits installiert":btn.dataset.darInstallLabel;
      if(btn.textContent!==nextLabel)btn.textContent=nextLabel;
     });
    }catch(e){}
@@ -2420,6 +2420,28 @@ button,input,select{font:inherit}
  }
  a:focus,button:focus,[role="button"]:focus,summary:focus,[tabindex]:focus{
   outline:none!important;
+ }
+}
+</style>
+<style id="darTapPressCleanFinalV1">
+*{-webkit-tap-highlight-color:transparent!important}
+@media(hover:none) and (pointer:coarse){
+ a,button,[role="button"],summary,[tabindex],.desktop-link,.more-row,.category-card,.feature-card,.header-action,.main-nav a{
+  -webkit-tap-highlight-color:transparent!important;
+ }
+ a:focus,a:focus-visible,button:focus,button:focus-visible,[role="button"]:focus,[role="button"]:focus-visible,
+ summary:focus,[tabindex]:focus,.desktop-link:focus,.more-row:focus,.category-card:focus,.feature-card:focus,.header-action:focus,.main-nav a:focus{
+  outline:0!important;outline-offset:0!important;
+ }
+ a:active,button:active,[role="button"]:active,summary:active,[tabindex]:active,
+ .desktop-link:active,.more-row:active,.category-card:active,.feature-card:active,.header-action:active,.main-nav a:active{
+  filter:none!important;opacity:1!important;transform:none!important;box-shadow:none!important;
+ }
+ a:active::before,a:active::after,button:active::before,button:active::after,
+ [role="button"]:active::before,[role="button"]:active::after,
+ .desktop-link:active::before,.desktop-link:active::after,.more-row:active::before,.more-row:active::after,
+ .category-card:active::before,.category-card:active::after,.feature-card:active::before,.feature-card:active::after{
+  opacity:0!important;filter:none!important;background:transparent!important;box-shadow:none!important;
  }
 }
 </style>
