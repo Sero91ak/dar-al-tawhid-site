@@ -38,6 +38,8 @@ if (fs.existsSync(publicRouterPath)) {
   assert.ok(router.includes("var installEvent=deferredInstall;"), "Android install prompt must be consumed directly inside the user gesture");
   assert.ok(router.includes('navigator.serviceWorker.register("/service-worker.js",{scope:"/"})'), "Android PWA service worker registration missing");
   assert.ok(router.includes("return !isNativeAppRequest(ua);"), "Android browsers must receive the public website");
+  assert.ok(!router.includes("isRoot && (nativeApp || androidBrowser)"), "Android browsers must not be intercepted by the native root shell");
+  assert.ok(router.includes("isRoot && nativeApp"), "Only native app user agents may receive the native root shell");
   assert.ok(!router.includes('id="darAndroidDownloadPromo"'), "Obsolete APK promo must not cover the public website");
   assert.ok(router.includes("DAR_PWA_ICON_CATALOG"), "Android PWA icon catalog missing");
   assert.ok(router.includes("normalizePwaIconId"), "Android PWA selected-icon manifest support missing");

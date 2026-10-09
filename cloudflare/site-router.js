@@ -1194,10 +1194,9 @@ export default {
       }
     }
 
-    if ((request.method === "GET" || request.method === "HEAD") && isRoot && (nativeApp || androidBrowser)) {
+    if ((request.method === "GET" || request.method === "HEAD") && isRoot && nativeApp) {
       const assetResponse = await env.ASSETS.fetch(request);
       const headers = iosNativeHeaders(assetResponse);
-      if (androidBrowser) headers.set("X-Dar-Surface", "android-pwa");
       if (request.method === "HEAD") {
         return new Response(null, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
       }
