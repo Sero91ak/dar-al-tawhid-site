@@ -39,8 +39,19 @@ def prompt(question: dict) -> str:
     low = [x.casefold() for x in labels]
     if question.get("ageBand") == "4-6" and len(low) == 2 and "ja" in low and "nein" in low:
         return norm(q + " Ja oder Nein?")
-    choices = " ".join(f"Antwort {idx}: {label}." for idx, label in enumerate(labels, 1))
+    choices = " ".join(f"Antwort {idx}: {label if label.endswith(('.', '!', '?', '؟')) else label + '.'}" for idx, label in enumerate(labels, 1))
     return norm(q + " " + choices)
+
+
+def test_spoken_punctuation() -> None:
+    """Regression: mirror production quiz_prompt without duplicate punctuation."""
+    q = {"ageBand": "7-8", "question": "Was stimmt?", "answers": [
+        {"label": "Ein ganzer Satz."}, {"label": "Eine Frage?"}, {"label": "Ein Wort"}
+    ]}
+    expected = "Was stimmt? Antwort 1: Ein ganzer Satz. Antwort 2: Eine Frage? Antwort 3: Ein Wort."
+    actual = prompt(q)
+    if actual != expected:
+        raise SystemExit(f"KIDS GERMAN QA: speech punctuation drift: {actual!r}")
 
 
 def audit() -> list[str]:
@@ -111,6 +122,7 @@ def audit() -> list[str]:
 
 
 if __name__ == "__main__":
+    test_spoken_punctuation()
     findings = audit()
     for finding in findings[:80]:
         print("KIDS GERMAN QA FAIL:", finding)
