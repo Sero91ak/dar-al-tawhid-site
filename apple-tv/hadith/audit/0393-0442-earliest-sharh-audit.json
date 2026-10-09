@@ -103,14 +103,15 @@
       "description": "Einige Autorenwerke und Kapitel sind direkt nachgewiesen, die genaue Druckedition und Einzelseite nicht für alle rekonstruiert. Kein Printseiten-Nachweis behaupten."
     }
   ],
-  "nextAction": "Alle 28 Ḥadīṯe mit Šarḥ belegt. 4 von 22 Āṯār mit geprüfter Zuschreibung; 18 noch offen (darunter 2 mit lokalisierter, noch nicht vollständig bewerteter Kette). HAD-0393 ff. einzeln nachweisen, danach HAD-0443 ff.",
+  "nextAction": "28/28 Šarḥ geprüft. 4/22 Āṯār final verifiziert; 18 weiter offen, davon 3 mit dokumentierter Kette. Bei HAD-0393 Varianten Ayyūb/Abū Qilābah sorgfältig auseinanderhalten.",
   "entries": [
     {
       "id": "HAD-0393",
       "recordType": "athar",
       "sharh": "not-required",
-      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis.",
-      "attribution": "needs-review"
+      "statusNote": "Al-Ḥākims arabischer Wortlaut mit Qurʾān-Abgrenzung und Kette lokalisiert; ähnlicher Bericht über Abū Qilābah getrennt ausgewiesen. Muḥammad b. Muṣʿab und übrige Glieder noch nicht abschließend bewertet.",
+      "attribution": "isnad-located-pending-grading",
+      "primarySourceVerified": false
     },
     {
       "id": "HAD-0394",
@@ -473,5 +474,5 @@
   "openTotal": 20,
   "reviewPolicyUpdate": "Projektregel AGENTS.md 2026-10-09: Hadith erfordert verifizierten Šarḥ; Athar kein Šarḥ nötig, aber Authentizitäts-/Isnādprüfung zwingend.",
   "atharAttributionPending": 18,
-  "atharIsnadLocatedPendingGrading": 2
+  "atharIsnadLocatedPendingGrading": 3
 }
