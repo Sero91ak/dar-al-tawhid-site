@@ -125,7 +125,7 @@
   var trackHeard = false;
   var playGen = 0;
   var allowAdvance = false;
-  var engine = { started: false, lastUrl: "", loadedSurah: 0, loadedAyah: 0, stallTimer: 0, lastProgressAt: 0, wantPlay: false, objectUrl: "", blobTried: false, fallbackReciterTried: false, haltedOffline: false, watchReloadAt: 0, endedAt: 0 };
+  var engine = { started: false, lastUrl: "", loadedSurah: 0, loadedAyah: 0, stallTimer: 0, lastProgressAt: 0, wantPlay: false, objectUrl: "", blobTried: false, fallbackReciterTried: false, haltedOffline: false, watchReloadAt: 0, endedAt: 0, recoveryCount: 0, lastObservedTime: 0 };
 
   var lastSysVolAt = 0;
   function usesSystemVolume() {
@@ -614,6 +614,27 @@
     clearTimeout(engine.stallTimer);
     engine.stallTimer = 0;
   }
+  function recoverPlayback(kind) {
+    if (!engine.wantPlay || window.__DAR_ADHAN_ACTIVE === true) return;
+    engine.recoveryCount = (engine.recoveryCount || 0) + 1;
+    if (engine.recoveryCount > 3) {
+      clearStallRetry();
+      engine.wantPlay = false;
+      state.playing = false;
+      state.error = "Die Rezitation wurde wiederholt unterbrochen. Tippe auf Erneut versuchen.";
+      try { audioEl().pause(); } catch (ePauseRecovery) {}
+      paintError();
+      paintChrome();
+      paintMini();
+      syncPublicAudioState(audioEl());
+      return;
+    }
+    var a = audioEl();
+    state.resumeAt = Number(a.currentTime) || state.current || 0;
+    engine.watchReloadAt = Date.now();
+    logAudio("recovery " + engine.recoveryCount + " after " + kind, snapAudio(a));
+    loadAudio(true, true, true);
+  }
   function scheduleStallRetry(kind) {
     clearStallRetry();
     var gen = playGen;
@@ -627,8 +648,7 @@
       if ((Number(live.currentTime) || 0) > at + 0.2 || live.readyState >= 3) return;
       state.current = at;
       state.resumeAt = at;
-      logAudio("retry after " + kind, snapAudio(live));
-      loadAudio(true, true);
+      recoverPlayback(kind);
     }, 8000);
   }
   function onAudioSignal(ev) {
@@ -824,8 +844,10 @@
       tryFallback();
     });
   }
-  function loadAudio(autoplay, keepTime) {
+  function loadAudio(autoplay, keepTime, recovery) {
     var gen = ++playGen;
+    if (!recovery) engine.recoveryCount = 0;
+    engine.lastObservedTime = Number(state.resumeAt || state.current) || 0;
     urlIndex = 0;
     state.error = "";
     trackHeard = false;
@@ -982,8 +1004,13 @@
     var a = audioEl();
     state.duration = audioDuration(a);
     syncProgressSample(false);
-    engine.lastProgressAt = Date.now();
-    clearStallRetry();
+    var observedTime = Number(a.currentTime) || 0;
+    if (Math.abs(observedTime - (Number(engine.lastObservedTime) || 0)) > 0.09) {
+      engine.lastProgressAt = Date.now();
+      engine.lastObservedTime = observedTime;
+      engine.recoveryCount = 0;
+      clearStallRetry();
+    }
     syncPublicAudioState(a);
     if (engine.started && (Number(state.current) || 0) > 0.25 && isFinite(state.duration) && state.duration > 1) {
       trackHeard = true;
@@ -2733,6 +2760,8 @@
     trackHeard = false;
     allowAdvance = false;
     engine.started = false;
+    engine.recoveryCount = 0;
+    clearStallRetry();
     stopProgressClock();
     if (engine.fallbackTimer) { clearTimeout(engine.fallbackTimer); engine.fallbackTimer = 0; }
     persistCurrent("stop");
@@ -4328,7 +4357,7 @@
       engine.watchReloadAt = now;
       state.resumeAt = Number(a.currentTime) || 0;
       logAudio("watchdog reload after no progress", snapAudio(a));
-      loadAudio(true, true);
+      recoverPlayback("watchdog");
     }
   }, 4000);
   window.addEventListener("online", function () {
