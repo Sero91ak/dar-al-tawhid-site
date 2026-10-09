@@ -67,7 +67,7 @@ jobs:
             '📝 **Quelle:** al-Mizzī 21/445', '🔗 dar-al-tawhid.de/q/38',
             '**Überlieferungsstatus:** Die Kette ist unterbrochen.',
             '🌙 **Fazit:** Kurzes Fazit bleibt stehen.'
-          ].join('\\n'));
+          ].join('\n'));
           assert.doesNotMatch(tagged.split('---').slice(2).join('---'), /📝 \*\*Quelle|🔗 dar-al-tawhid|Überlieferungsstatus/u);
           assert.match(tagged, /„Die eigentliche Aussage bleibt stehen.“/);
           assert.match(tagged, /🌙 \*\*Fazit:\*\* Kurzes Fazit bleibt stehen/);
