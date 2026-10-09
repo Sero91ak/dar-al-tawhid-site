@@ -36,6 +36,9 @@
       return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char];
     });
   }
+  // Keep escaped visitor content safe when the mobile app helper is absent.
+  if (typeof global.esc !== "function") global.esc = esc;
+
   function inputSnapshot() {
     var names = {
       cash:"zakatCash", bank:"zakatBank", digital:"zakatDigital",
@@ -166,6 +169,10 @@
         if (!global.confirm("Gespeicherte Berechnung wirklich löschen?")) return;
         safeWriteHistory(rows.filter(function (row) { return row.id !== id; }));
         mount();
+        return;
+      }
+      if (global.DARZakatApp?.restoreInput) {
+        global.DARZakatApp.restoreInput(entry.input);
         return;
       }
       var inputs = {
