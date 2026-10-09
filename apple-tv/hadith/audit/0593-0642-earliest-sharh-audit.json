@@ -1,0 +1,366 @@
+{
+  "project": "DAR AL TAWḤĪD Ḥadīṯ-/Āṯār-Quellenprüfung",
+  "range": "HAD-0593–HAD-0642",
+  "auditedDate": "2026-10-09",
+  "totalInspected": 50,
+  "hadithCount": 30,
+  "atharCount": 20,
+  "hadithSharhVerified": 3,
+  "hadithSharhOpen": 27,
+  "atharAttributionVerified": 1,
+  "atharAttributionOpen": 19,
+  "openTotal": 46,
+  "sourceOfTruth": "apple-tv/hadith/series/",
+  "policy": {
+    "hadith": "Authentischer Primärtext und unmittelbar nachweisbarer früher arabischer Šarḥ",
+    "athar": "Kein Šarḥ nötig, doch zuverlässiger individueller Quellen- und Isnādbeleg",
+    "sourcePages": "Nur direkt verifizierte digitale Werkpagination, keine geratenen Druckseiten",
+    "noFakeGrade": true,
+    "avoidDuplicateCycles": true,
+    "commitSafety": "Frischen Blob-SHA verwenden, parallele Änderungen nicht überschreiben",
+    "cloudflare": "Keinen globalen Live-Status ohne bestandene Actions- und HTTP-Prüfung bestätigen"
+  },
+  "issues": [
+    {
+      "id": "HAD-0629",
+      "type": "chain-criticism",
+      "status": "open",
+      "note": "Ausspruch über Freundesreligion auch HAD-0460, vor ḥasan-/ṣaḥīḥ-Freigabe strittige Überlieferungswege prüfen."
+    },
+    {
+      "id": "HAD-0636",
+      "type": "chain-criticism",
+      "status": "open",
+      "note": "'Gläubiger Spiegel des Gläubigen' auch HAD-0468, isnād nicht pauschal als zweifelsfrei authentisch zählen."
+    },
+    {
+      "range": "HAD-0593–0610; HAD-0642",
+      "type": "athar-primary-attribution",
+      "status": "open",
+      "note": "19 weitere Āṯār häufig nur mit Werksnamen, kein genügender Originalisnād."
+    }
+  ],
+  "nextAction": "27 Ḥadīṯe und 19 Āṯār noch offen; weitere 50er-Serie HAD-0643–0692 prüfen; Kettenkritik und Doppelfassungen berücksichtigen.",
+  "entries": [
+    {
+      "id": "HAD-0593",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Ungeprüft: arabischen Wortlaut, Originalsprecher und genaue Isnādkette/Primärstelle einzeln nachweisen"
+    },
+    {
+      "id": "HAD-0594",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Ungeprüft: arabischen Wortlaut, Originalsprecher und genaue Isnādkette/Primärstelle einzeln nachweisen"
+    },
+    {
+      "id": "HAD-0595",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Ungeprüft: arabischen Wortlaut, Originalsprecher und genaue Isnādkette/Primärstelle einzeln nachweisen"
+    },
+    {
+      "id": "HAD-0596",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Ungeprüft: arabischen Wortlaut, Originalsprecher und genaue Isnādkette/Primärstelle einzeln nachweisen"
+    },
+    {
+      "id": "HAD-0597",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Ungeprüft: arabischen Wortlaut, Originalsprecher und genaue Isnādkette/Primärstelle einzeln nachweisen"
+    },
+    {
+      "id": "HAD-0598",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Ungeprüft: arabischen Wortlaut, Originalsprecher und genaue Isnādkette/Primärstelle einzeln nachweisen"
+    },
+    {
+      "id": "HAD-0599",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Ungeprüft: arabischen Wortlaut, Originalsprecher und genaue Isnādkette/Primärstelle einzeln nachweisen"
+    },
+    {
+      "id": "HAD-0600",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Ungeprüft: arabischen Wortlaut, Originalsprecher und genaue Isnādkette/Primärstelle einzeln nachweisen"
+    },
+    {
+      "id": "HAD-0601",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Ungeprüft: arabischen Wortlaut, Originalsprecher und genaue Isnādkette/Primärstelle einzeln nachweisen"
+    },
+    {
+      "id": "HAD-0602",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Ungeprüft: arabischen Wortlaut, Originalsprecher und genaue Isnādkette/Primärstelle einzeln nachweisen"
+    },
+    {
+      "id": "HAD-0603",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Ungeprüft: arabischen Wortlaut, Originalsprecher und genaue Isnādkette/Primärstelle einzeln nachweisen"
+    },
+    {
+      "id": "HAD-0604",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Ungeprüft: arabischen Wortlaut, Originalsprecher und genaue Isnādkette/Primärstelle einzeln nachweisen"
+    },
+    {
+      "id": "HAD-0605",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Ungeprüft: arabischen Wortlaut, Originalsprecher und genaue Isnādkette/Primärstelle einzeln nachweisen"
+    },
+    {
+      "id": "HAD-0606",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Ungeprüft: arabischen Wortlaut, Originalsprecher und genaue Isnādkette/Primärstelle einzeln nachweisen"
+    },
+    {
+      "id": "HAD-0607",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Ungeprüft: arabischen Wortlaut, Originalsprecher und genaue Isnādkette/Primärstelle einzeln nachweisen"
+    },
+    {
+      "id": "HAD-0608",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Ungeprüft: arabischen Wortlaut, Originalsprecher und genaue Isnādkette/Primärstelle einzeln nachweisen"
+    },
+    {
+      "id": "HAD-0609",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Ungeprüft: arabischen Wortlaut, Originalsprecher und genaue Isnādkette/Primärstelle einzeln nachweisen"
+    },
+    {
+      "id": "HAD-0610",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Ungeprüft: arabischen Wortlaut, Originalsprecher und genaue Isnādkette/Primärstelle einzeln nachweisen"
+    },
+    {
+      "id": "HAD-0611",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Direkten frühen arabischen Kommentar, exakten Prophetenwortlaut und genaue Primärnummer vor Statusfreigabe prüfen"
+    },
+    {
+      "id": "HAD-0612",
+      "recordType": "hadith",
+      "sharh": "verified",
+      "sourceAudit": "Muslim Primärnummer und direkter klassischer Kommentar mit digitaler Werkpagination in HAD-Datei; als semantische Parallele eines älteren Eintrags ausgewiesen"
+    },
+    {
+      "id": "HAD-0613",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Direkten frühen arabischen Kommentar, exakten Prophetenwortlaut und genaue Primärnummer vor Statusfreigabe prüfen"
+    },
+    {
+      "id": "HAD-0614",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Direkten frühen arabischen Kommentar, exakten Prophetenwortlaut und genaue Primärnummer vor Statusfreigabe prüfen"
+    },
+    {
+      "id": "HAD-0615",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Direkten frühen arabischen Kommentar, exakten Prophetenwortlaut und genaue Primärnummer vor Statusfreigabe prüfen"
+    },
+    {
+      "id": "HAD-0616",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Direkten frühen arabischen Kommentar, exakten Prophetenwortlaut und genaue Primärnummer vor Statusfreigabe prüfen"
+    },
+    {
+      "id": "HAD-0617",
+      "recordType": "hadith",
+      "sharh": "verified",
+      "sourceAudit": "Muslim Primärnummer und direkter klassischer Kommentar mit digitaler Werkpagination in HAD-Datei; als semantische Parallele eines älteren Eintrags ausgewiesen"
+    },
+    {
+      "id": "HAD-0618",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Direkten frühen arabischen Kommentar, exakten Prophetenwortlaut und genaue Primärnummer vor Statusfreigabe prüfen"
+    },
+    {
+      "id": "HAD-0619",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Direkten frühen arabischen Kommentar, exakten Prophetenwortlaut und genaue Primärnummer vor Statusfreigabe prüfen"
+    },
+    {
+      "id": "HAD-0620",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Direkten frühen arabischen Kommentar, exakten Prophetenwortlaut und genaue Primärnummer vor Statusfreigabe prüfen"
+    },
+    {
+      "id": "HAD-0621",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Direkten frühen arabischen Kommentar, exakten Prophetenwortlaut und genaue Primärnummer vor Statusfreigabe prüfen"
+    },
+    {
+      "id": "HAD-0622",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Direkten frühen arabischen Kommentar, exakten Prophetenwortlaut und genaue Primärnummer vor Statusfreigabe prüfen"
+    },
+    {
+      "id": "HAD-0623",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Direkten frühen arabischen Kommentar, exakten Prophetenwortlaut und genaue Primärnummer vor Statusfreigabe prüfen"
+    },
+    {
+      "id": "HAD-0624",
+      "recordType": "hadith",
+      "sharh": "verified",
+      "sourceAudit": "Muslim Primärnummer und direkter klassischer Kommentar mit digitaler Werkpagination in HAD-Datei; als semantische Parallele eines älteren Eintrags ausgewiesen"
+    },
+    {
+      "id": "HAD-0625",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Direkten frühen arabischen Kommentar, exakten Prophetenwortlaut und genaue Primärnummer vor Statusfreigabe prüfen"
+    },
+    {
+      "id": "HAD-0626",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Direkten frühen arabischen Kommentar, exakten Prophetenwortlaut und genaue Primärnummer vor Statusfreigabe prüfen"
+    },
+    {
+      "id": "HAD-0627",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Direkten frühen arabischen Kommentar, exakten Prophetenwortlaut und genaue Primärnummer vor Statusfreigabe prüfen"
+    },
+    {
+      "id": "HAD-0628",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Direkten frühen arabischen Kommentar, exakten Prophetenwortlaut und genaue Primärnummer vor Statusfreigabe prüfen"
+    },
+    {
+      "id": "HAD-0629",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Direkten frühen arabischen Kommentar, exakten Prophetenwortlaut und genaue Primärnummer vor Statusfreigabe prüfen"
+    },
+    {
+      "id": "HAD-0630",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Direkten frühen arabischen Kommentar, exakten Prophetenwortlaut und genaue Primärnummer vor Statusfreigabe prüfen"
+    },
+    {
+      "id": "HAD-0631",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Direkten frühen arabischen Kommentar, exakten Prophetenwortlaut und genaue Primärnummer vor Statusfreigabe prüfen"
+    },
+    {
+      "id": "HAD-0632",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Direkten frühen arabischen Kommentar, exakten Prophetenwortlaut und genaue Primärnummer vor Statusfreigabe prüfen"
+    },
+    {
+      "id": "HAD-0633",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Direkten frühen arabischen Kommentar, exakten Prophetenwortlaut und genaue Primärnummer vor Statusfreigabe prüfen"
+    },
+    {
+      "id": "HAD-0634",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Direkten frühen arabischen Kommentar, exakten Prophetenwortlaut und genaue Primärnummer vor Statusfreigabe prüfen"
+    },
+    {
+      "id": "HAD-0635",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Direkten frühen arabischen Kommentar, exakten Prophetenwortlaut und genaue Primärnummer vor Statusfreigabe prüfen"
+    },
+    {
+      "id": "HAD-0636",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Direkten frühen arabischen Kommentar, exakten Prophetenwortlaut und genaue Primärnummer vor Statusfreigabe prüfen"
+    },
+    {
+      "id": "HAD-0637",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Direkten frühen arabischen Kommentar, exakten Prophetenwortlaut und genaue Primärnummer vor Statusfreigabe prüfen"
+    },
+    {
+      "id": "HAD-0638",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Direkten frühen arabischen Kommentar, exakten Prophetenwortlaut und genaue Primärnummer vor Statusfreigabe prüfen"
+    },
+    {
+      "id": "HAD-0639",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Direkten frühen arabischen Kommentar, exakten Prophetenwortlaut und genaue Primärnummer vor Statusfreigabe prüfen"
+    },
+    {
+      "id": "HAD-0640",
+      "recordType": "hadith",
+      "sharh": "open-source-review",
+      "sourceAudit": "Direkten frühen arabischen Kommentar, exakten Prophetenwortlaut und genaue Primärnummer vor Statusfreigabe prüfen"
+    },
+    {
+      "id": "HAD-0641",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "verified",
+      "sourceAudit": "Muḥammad ibn Sīrīn, Muslim Muqaddimah digitale S.15, Muḥammad ibn aṣ-Ṣabbāḥ → Ismāʿīl ibn Zakariyyāʾ → ʿĀṣim al-Aḥwal → Ibn Sīrīn; Original arabisch in HAD-Datei"
+    },
+    {
+      "id": "HAD-0642",
+      "recordType": "athar",
+      "sharh": "not-required",
+      "attribution": "needs-review",
+      "sourceAudit": "Ungeprüft: arabischen Wortlaut, Originalsprecher und genaue Isnādkette/Primärstelle einzeln nachweisen"
+    }
+  ]
+}
