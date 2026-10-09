@@ -66,11 +66,18 @@ function validateHadith() {
     if (!index) continue;
     const listed = Array.isArray(index.files) ? index.files : [];
     seriesSum += listed.length;
+    const bounds = String(series.id || "").match(/^(\d+)-(\d+)$/);
     for (const name of listed) {
+      const n = Number((name.match(/^HAD-(\d+)\.json$/i) || [])[1]);
+      if (!bounds || !n || n < Number(bounds[1]) || n > Number(bounds[2])) {
+        fail("HAD record in wrong series: " + series.id + "/" + name);
+      }
       const recPath = path.join(ROOT, path.dirname(indexRel), name);
       if (!fs.existsSync(recPath)) fail("missing record " + path.dirname(indexRel) + "/" + name);
     }
   }
+  const ranges = (catalog.series || []).map(s => (String(s.id || "").match(/^(\d+)-(\d+)$/) || []).slice(1).map(Number)).filter(p => p.length === 2).sort((a,b) => a[0]-b[0]);
+  for (let i=1; i<ranges.length; i++) if (ranges[i][0] <= ranges[i-1][1]) fail("Overlapping HAD series ranges: " + ranges[i-1].join("-") + " and " + ranges[i].join("-"));
   if (seriesSum !== count) fail("series index files " + seriesSum + " !== disk " + count);
   ok("hadith files=" + count + " latest=" + latest);
 }
