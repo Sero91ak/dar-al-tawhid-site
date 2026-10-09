@@ -196,8 +196,8 @@ jobs:
           ARABIC_PROFILES={"dua_arabic","dua_arabic_slow","dua_word","quiz_fusha"}
           ARABIC_SYNTHESIS_REVISIONS={
               "dua_arabic":"dua-arabic-native-fusha-v3-20261007",
-              "dua_arabic_slow":"dua-arabic-native-fusha-slow-v3-20261007",
-              "dua_word":"dua-arabic-native-fusha-word-v4-20261007"
+              "dua_arabic_slow":"dua-arabic-native-fusha-slow-v4-natural-20261009",
+              "dua_word":"dua-arabic-native-fusha-word-v5-natural-20261009"
           }
           DICT_CFG=PROD_CFG.get("pronunciationDictionary") or {}
           DICT_ID=str(DICT_CFG.get("id") or "").strip()
@@ -254,10 +254,9 @@ jobs:
                   if profile=="dua_word":
                       value=strip_initial_context_shadda(value)
                   # Keep the visible/key text untouched; this is hidden synthesis text only.
-                  if profile=="dua_arabic_slow":
-                      value="[slowly] "+value
-                  elif profile=="dua_word":
-                      value="[slowly] "+value.rstrip(".")+"."
+                  # Eleven v4 can voice stage directions and sentence-final
+                  # breaths. Pace with synthesis speed, not [slowly] / appended ".".
+                  # Keep the exact standalone Arabic word, preserving its phonemes.
                   return value
               return prepare_kids_voice_text(value,apply_pronunciation=not bool(ARABIC_SCRIPT_RE.search(value)))
 
@@ -461,12 +460,14 @@ jobs:
                           voice_settings={
                               "stability":0.76,
                               "similarity_boost":0.92,
+                              "speed":0.88,
                               "use_speaker_boost":True
                           }
                       elif profile=="dua_word":
                           voice_settings={
                               "stability":0.80,
                               "similarity_boost":0.93,
+                              "speed":0.92,
                               "use_speaker_boost":True
                           }
                       else:
