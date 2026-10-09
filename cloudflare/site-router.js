@@ -422,9 +422,34 @@ function publicWebsiteAddon() {
         '</div></section>';
     }
   }
+  function schedulePublicDownloads(){
+    setTimeout(ensurePublicDownloads,0);
+    setTimeout(ensurePublicDownloads,120);
+    setTimeout(ensurePublicDownloads,420);
+  }
   ensurePublicDownloads();
-  window.addEventListener("pageshow",ensurePublicDownloads);
-  window.addEventListener("popstate",function(){setTimeout(ensurePublicDownloads,0)});
+  window.addEventListener("pageshow",schedulePublicDownloads);
+  window.addEventListener("popstate",schedulePublicDownloads);
+  try{
+    ["pushState","replaceState"].forEach(function(method){
+      var original=history[method];
+      if(typeof original!=="function"||original.__darDownloadsWrapped)return;
+      var wrapped=function(){
+        var result=original.apply(history,arguments);
+        schedulePublicDownloads();
+        return result;
+      };
+      wrapped.__darDownloadsWrapped=true;
+      history[method]=wrapped;
+    });
+  }catch(eHistory){}
+  try{
+    var publicRoot=document.getElementById("pageRoot");
+    if(publicRoot&&window.MutationObserver){
+      var downloadsObserver=new MutationObserver(function(){schedulePublicDownloads()});
+      downloadsObserver.observe(publicRoot,{childList:true,subtree:true});
+    }
+  }catch(eObserver){}
 })();
 </script>`;
 }
