@@ -1,0 +1,7 @@
+# Quellenprüfung 06-232 (9. Oktober 2026)
+
+- **6:115** — Qatādah ibn Diʿāmah; Tafsīr aṭ-Ṭabarī zu Qurʾān 6:115, Bericht 13789; https://www.islamweb.net/ar/library/content/50/1867/. Isnād: Bišr ibn Muʿāḏ → Yazīd ibn Zurayʿ → Saʿīd ibn Abī ʿArūbah → Qatādah. Wortlaut: «صدقًا وعدلًا فيما حكم». Aṭ-Ṭabarīs übrige Erklärung des Verses nicht als Qatādahs Aussage kennzeichnen.
+- **6:119** — Qatādah ibn Diʿāmah; Tafsīr aṭ-Ṭabarī zu Qurʾān 6:119, Bericht 13793; https://www.islamweb.net/ar/library/content/50/1871/. Isnād: Bišr ibn Muʿāḏ → Yazīd ibn Zurayʿ → Saʿīd ibn Abī ʿArūbah → Qatādah. Original: «إلا ما اضطررتم إليه، من الميتة». Kein Freibrief ohne tatsächlich vorliegende Notlage und keine Gesamtdarstellung aller fiqhrechtlichen Ausnahmebedingungen.
+- **6:121** — Muǧāhid ibn Ǧabr; Tafsīr aṭ-Ṭabarī zu Qurʾān 6:121, Bericht 13817; https://www.islamweb.net/ar/library/content/50/1875/. Isnād: Muḥammad ibn ʿAmr → Abū ʿĀṣim → ʿĪsā ibn Maymūn → ʿAbdullāh ibn Abī Naǧīḥ → Muǧāhid. Originalfragment: «أما ما ذبح الله للميتة فلا تأكلون منه وأما ما ذبحتم بأيديكم فهو حلال». Bericht 13818 ebenfalls von Muǧāhid. Die Auslegung betrifft die spezifische Auseinandersetzung um das Ḥalāl-Erklären von Maytah, keinen pauschalen Takfīr einzelner Muslime.
+
+**Hinweis:** 6:121 betrifft den dokumentierten Streit über Maytah und ist kein pauschales Urteil zu beliebigen Einzelfällen. Keine dieser Aussagen wird zu einem marfūʿ-Ḥadīṯ umgedeutet. Einstufungen wiederkehrender Isnād-Wege aus dem bisherigen Katalog dürfen einen unabhängigen Rijāl-Audit nicht ersetzen.
