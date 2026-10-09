@@ -3,13 +3,13 @@
   "range": "HAD-0443–HAD-0492",
   "auditedDate": "2026-10-09",
   "totalInspected": 50,
-  "hadithCount": 20,
-  "atharCount": 30,
-  "hadithSharhVerified": 5,
-  "hadithSharhOpen": 15,
+  "hadithCount": 21,
+  "atharCount": 29,
+  "hadithSharhVerified": 18,
+  "hadithSharhOpen": 3,
   "atharAttributionVerified": 0,
-  "atharAttributionOpen": 30,
-  "openTotal": 45,
+  "atharAttributionOpen": 29,
+  "openTotal": 32,
   "sourceOfTruth": "apple-tv/hadith/series/",
   "policy": {
     "hadith": "Authentische Primärquelle + direkt nachweisbarer klassischer Šarḥ",
@@ -40,7 +40,7 @@
       "note": "Viele vorhandene Werknachweise sind unspezifisch. Ohne Original-Überlieferer, Isnād und Band-/Seite kein verifizierter Zuschreibungsstatus."
     }
   ],
-  "nextAction": "15 offen kommentierte Ḥadīṯe 0454–0469 bearbeiten; 30 Āṯār erst originalkritisch prüfen. Danach weitere 50er-Blöcke bis zum tatsächlichen aktuellen Katalogende.",
+  "nextAction": "Drei offene Ḥadīṯ-Kommentare 0460/0463/0468 und 29 Āṯār-Zuschreibungen bearbeiten; danach HAD-0493 bis HAD-0542.",
   "entries": [
     {
       "id": "HAD-0443",
@@ -58,10 +58,11 @@
     },
     {
       "id": "HAD-0445",
-      "recordType": "athar",
-      "sharh": "not-required",
-      "attribution": "needs-review",
-      "sourceAudit": "Wortlaut, Sprecher, Isnādkette und gesonderten Authentizitätsstatus erst nachweisen"
+      "recordType": "hadith",
+      "sharh": "verified",
+      "attribution": null,
+      "sourceAudit": "Wortlaut, Sprecher, Isnādkette und gesonderten Authentizitätsstatus erst nachweisen",
+      "semanticDuplicateOf": "HAD-0425"
     },
     {
       "id": "HAD-0446",
@@ -122,14 +123,14 @@
     {
       "id": "HAD-0454",
       "recordType": "hadith",
-      "sharh": "open-source-review",
+      "sharh": "verified",
       "attribution": null,
       "sourceAudit": "Konkrete Primärnummer, klassisch-arabischen Direktkommentar und Editionsangabe nachprüfen"
     },
     {
       "id": "HAD-0455",
       "recordType": "hadith",
-      "sharh": "open-source-review",
+      "sharh": "verified",
       "attribution": null,
       "sourceAudit": "Konkrete Primärnummer, klassisch-arabischen Direktkommentar und Editionsangabe nachprüfen"
     },
@@ -143,91 +144,91 @@
     {
       "id": "HAD-0457",
       "recordType": "hadith",
-      "sharh": "open-source-review",
+      "sharh": "verified",
       "attribution": null,
       "sourceAudit": "Konkrete Primärnummer, klassisch-arabischen Direktkommentar und Editionsangabe nachprüfen"
     },
     {
       "id": "HAD-0458",
       "recordType": "hadith",
-      "sharh": "open-source-review",
+      "sharh": "verified",
       "attribution": null,
       "sourceAudit": "Konkrete Primärnummer, klassisch-arabischen Direktkommentar und Editionsangabe nachprüfen"
     },
     {
       "id": "HAD-0459",
       "recordType": "hadith",
-      "sharh": "open-source-review",
+      "sharh": "verified",
       "attribution": null,
       "sourceAudit": "Konkrete Primärnummer, klassisch-arabischen Direktkommentar und Editionsangabe nachprüfen"
     },
     {
       "id": "HAD-0460",
       "recordType": "hadith",
-      "sharh": "open-source-review",
+      "sharh": "needs-review",
       "attribution": null,
       "sourceAudit": "Konkrete Primärnummer, klassisch-arabischen Direktkommentar und Editionsangabe nachprüfen"
     },
     {
       "id": "HAD-0461",
       "recordType": "hadith",
-      "sharh": "open-source-review",
+      "sharh": "verified",
       "attribution": null,
       "sourceAudit": "Konkrete Primärnummer, klassisch-arabischen Direktkommentar und Editionsangabe nachprüfen"
     },
     {
       "id": "HAD-0462",
       "recordType": "hadith",
-      "sharh": "open-source-review",
+      "sharh": "verified",
       "attribution": null,
       "sourceAudit": "Konkrete Primärnummer, klassisch-arabischen Direktkommentar und Editionsangabe nachprüfen"
     },
     {
       "id": "HAD-0463",
       "recordType": "hadith",
-      "sharh": "open-source-review",
+      "sharh": "needs-review",
       "attribution": null,
       "sourceAudit": "Konkrete Primärnummer, klassisch-arabischen Direktkommentar und Editionsangabe nachprüfen"
     },
     {
       "id": "HAD-0464",
       "recordType": "hadith",
-      "sharh": "open-source-review",
+      "sharh": "verified",
       "attribution": null,
       "sourceAudit": "Konkrete Primärnummer, klassisch-arabischen Direktkommentar und Editionsangabe nachprüfen"
     },
     {
       "id": "HAD-0465",
       "recordType": "hadith",
-      "sharh": "open-source-review",
+      "sharh": "verified",
       "attribution": null,
       "sourceAudit": "Konkrete Primärnummer, klassisch-arabischen Direktkommentar und Editionsangabe nachprüfen"
     },
     {
       "id": "HAD-0466",
       "recordType": "hadith",
-      "sharh": "open-source-review",
+      "sharh": "verified",
       "attribution": null,
       "sourceAudit": "Konkrete Primärnummer, klassisch-arabischen Direktkommentar und Editionsangabe nachprüfen"
     },
     {
       "id": "HAD-0467",
       "recordType": "hadith",
-      "sharh": "open-source-review",
+      "sharh": "verified",
       "attribution": null,
       "sourceAudit": "Konkrete Primärnummer, klassisch-arabischen Direktkommentar und Editionsangabe nachprüfen"
     },
     {
       "id": "HAD-0468",
       "recordType": "hadith",
-      "sharh": "open-source-review",
+      "sharh": "needs-review",
       "attribution": null,
       "sourceAudit": "Konkrete Primärnummer, klassisch-arabischen Direktkommentar und Editionsangabe nachprüfen"
     },
     {
       "id": "HAD-0469",
       "recordType": "hadith",
-      "sharh": "open-source-review",
+      "sharh": "verified",
       "attribution": null,
       "sourceAudit": "Konkrete Primärnummer, klassisch-arabischen Direktkommentar und Editionsangabe nachprüfen"
     },
