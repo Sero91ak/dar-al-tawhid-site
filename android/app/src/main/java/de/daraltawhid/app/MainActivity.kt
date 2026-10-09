@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity() {
     private var filePathCallback: ValueCallback<Array<Uri>>? = null
     private var pendingUrl: String = DarShell.LIVE_URL
     private var pendingGeolocation: Pair<String, GeolocationPermissions.Callback>? = null
+    private var pendingSetupLocation = false
 
     private val locationPermission = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
@@ -54,6 +55,16 @@ class MainActivity : AppCompatActivity() {
             results[Manifest.permission.ACCESS_COARSE_LOCATION] == true ||
             hasDeviceLocationPermission()
         if (pending != null) pending.second.invoke(pending.first, granted, false)
+        if (pendingSetupLocation) {
+            pendingSetupLocation = false
+            if (granted) {
+                continueLocationSetup()
+            } else if (::webView.isInitialized) {
+                Toast.makeText(this,
+                    "Standort ist noch nicht erlaubt. Unter App-Info → Berechtigungen kannst du ihn freigeben.",
+                    Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
     private fun hasDeviceLocationPermission(): Boolean =
@@ -387,6 +398,26 @@ class MainActivity : AppCompatActivity() {
     private fun jsString(value: String): String =
         JSONObject.quote(value)
 
+    /** Continue the user's explicit location action after Android permission. */
+    private fun continueLocationSetup() {
+        if (!::webView.isInitialized) return
+        webView.evaluateJavascript(
+            """
+            (function(){
+              try {
+                if (typeof navigate === "function") navigate("prayer");
+                else if (location.hash.indexOf("prayer") === -1) location.hash = "#prayer";
+                setTimeout(function(){
+                  var trigger=document.getElementById("useLocationBtn");
+                  if(trigger)trigger.click();
+                },350);
+              } catch(e) {}
+            })();
+            """.trimIndent(),
+            null
+        )
+    }
+
     private inner class DarJsBridge {
         @JavascriptInterface
         fun setAppIcon(name: String): Boolean {
@@ -421,8 +452,25 @@ class MainActivity : AppCompatActivity() {
         fun openSystemSettings(kind: String) {
             runOnUiThread {
                 val which = kind.trim().lowercase()
-                // Android settings UIs differ by vendor. App details always works
-                // and links directly to location and notification permissions.
+                // A user choosing Standort needs a real permission prompt,
+                // followed by the site's actual prayer-location action.
+                if (which == "location") {
+                    if (hasDeviceLocationPermission()) {
+                        continueLocationSetup()
+                    } else if (pendingGeolocation == null) {
+                        pendingSetupLocation = true
+                        locationPermission.launch(arrayOf(
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION
+                        ))
+                    } else {
+                        Toast.makeText(this@MainActivity,
+                            "Eine Standortfreigabe läuft bereits.",
+                            Toast.LENGTH_SHORT).show()
+                    }
+                    return@runOnUiThread
+                }
+                // Notification and other app settings are vendor-dependent.
                 val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
                     data = Uri.parse("package:$packageName")
                     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
