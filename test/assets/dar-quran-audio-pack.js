@@ -219,8 +219,8 @@
     if (cancelled[edition]) return;
     if (cachedKeys[k] || pending[k]) return;
     pending[k] = true;
-    if (urgent) queue.unshift({ edition: edition, ayah: ayah });
-    else queue.push({ edition: edition, ayah: ayah });
+    if (urgent) queue.unshift({ edition: edition, ayah: ayah, urgent: true });
+    else queue.push({ edition: edition, ayah: ayah, urgent: false });
     status.queued = queue.length;
     pump();
   }
@@ -292,6 +292,9 @@
     }
     var st = window.quranAudioState || {};
     if (window.__DAR_ADHAN_ACTIVE === true || st.isLoading) return waitPump(1500);
+    // Keep full-reciter downloads from competing with the active audio stream.
+    // Only the upcoming Āyah may be prefetched while playback is active.
+    if (st.isPlaying && !(queue[0] && queue[0].urgent)) return waitPump(3000);
     if (navigator.onLine === false) return waitPump(15000);
     if (failStreak >= 3) {
       failStreak = 0;
