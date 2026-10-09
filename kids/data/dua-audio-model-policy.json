@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "id": "KIDS_DUA_ARABIC_MODEL_ROUTING_V1",
+  "voiceProfileId": "serhat-owner-voice-2026",
+  "speaker": "Serhat Abu Malik – Master",
+  "language": "ar",
+  "phraseModel": "eleven_v4",
+  "slowPhraseModel": "eleven_v4",
+  "defaultWordModel": "eleven_v4",
+  "comparisonWordModel": "eleven_v3",
+  "allowAutomaticV3Promotion": false,
+  "approvedV3Words": [],
+  "reviewRequirements": [
+    "identical vocalized Arabic",
+    "original approved Serhat owner voice",
+    "no synthetic stage directions",
+    "Arabic phonetic review (harakat, madd, shaddah, ayn, hamza, ha, ha emphatic)",
+    "A/B compare against V4",
+    "no audible gasp, exhale or breath tail",
+    "human signoff before publishing"
+  ],
+  "comparison": {
+    "text": "رَبِّ زِدْنِي عِلْمًا",
+    "modelIds": [
+      "eleven_v3",
+      "eleven_v4"
+    ],
+    "status": "generated-awaiting-human-listening-review",
+    "flowId": "U5BK7MLRAC0OaI3PgskC",
+    "durationsSeconds": {
+      "eleven_v3": 1.6,
+      "eleven_v4": 1.76
+    }
+  },
+  "guardrails": {
+    "maxNewArabicWordClipsPerRun": 8,
+    "maxNewSlowPhrasesPerRun": 3,
+    "explicitBatchOnly": true,
+    "untestedModelMustNotAutoReplaceOldFile": true,
+    "keepLiveUnchanged": true
+  },
+  "note": "V3 is not automatically better or cheaper for short words. A word can use V3 only after a quality-reviewed approvedV3Words entry; otherwise remain V4. No generation is started by this policy file."
+}
