@@ -6,6 +6,18 @@ const spec = require("./rig-acceptance-v1.json");
 const { validateDocument,parseGLB } = require("./validate-glb.cjs");
 function fixture(){
   const nodes=spec.rig.requiredBoneNames.map(name=>({name}));
+  const index=new Map(nodes.map((node,i)=>[node.name,i]));
+  const hierarchy={
+    Hips:["Spine","UpperLeg.L","UpperLeg.R"],
+    Spine:["Chest"],Chest:["Neck","UpperArm.L","UpperArm.R"],
+    Neck:["Head"],
+    "UpperArm.L":["LowerArm.L"],"LowerArm.L":["Hand.L"],
+    "UpperArm.R":["LowerArm.R"],"LowerArm.R":["Hand.R"],
+    "UpperLeg.L":["LowerLeg.L"],"LowerLeg.L":["Foot.L"],"Foot.L":["Toe.L"],
+    "UpperLeg.R":["LowerLeg.R"],"LowerLeg.R":["Foot.R"],"Foot.R":["Toe.R"]
+  };
+  for(const [parent,children] of Object.entries(hierarchy))
+    nodes[index.get(parent)].children=children.map(x=>index.get(x));
   nodes.push({name:"Body",mesh:0,skin:0});
   return {
     asset:{version:"2.0"},nodes,
@@ -58,4 +70,16 @@ test("static intermediary helper scaling rejected",()=> {const x=fixture();x.nod
 test("nonfinite bind rotation rejected",()=> {const x=fixture();x.nodes[4].rotation=[0,0,0,NaN];assert.equal(status(x).structureValid,false)});
 test("duplicate skin indices rejected",()=> {const x=fixture();x.skins[0].joints[1]=0;assert.equal(status(x).structureValid,false)});
 test("invalid second-skin bind accessor rejected",()=> {const x=fixture();x.skins.push({joints:[5,6],inverseBindMatrices:3});assert.equal(status(x).structureValid,false)});
+test("reject disconnected child bones despite correct names",()=>{
+ const x=fixture();delete x.nodes[15].children; // disconnected LowerLeg.R subtree
+ assert.ok(status(x).errors.some(s=>s.includes("Disconnected skin bone")));
+});
+test("reject detached Head from torso hierarchy",()=>{
+ const x=fixture();x.nodes[3].children=[]; // Neck without Head
+ assert.ok(status(x).errors.some(s=>s.includes("Disconnected skin bone")));
+});
+test("reject duplicate bone names on distinct joint IDs",()=>{
+ const x=fixture();x.nodes[18].name="Toe.L";
+ assert.ok(status(x).errors.some(s=>s.includes("duplicate joint names")));
+});
 process.stdout.write("\n"+count+" offline test checks passed. No 3D model generated or approved.\n");
