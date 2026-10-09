@@ -39,7 +39,8 @@
     "sharhChapter": { "type": ["string", "null"] },
     "sharhSection": { "type": ["string", "null"] },
     "sharhEdition": { "type": ["string", "null"] },
-    "sharhReference": { "type": ["string", "null"] }
+    "sharhReference": { "type": ["string", "null"] },
+    "semanticDuplicateOf": { "type": ["string", "null"], "pattern": "^HAD-[0-9]{4}$", "description": "Optional reference to a semantically overlapping HAD record; does not imply a weak or invalid chain." }
   },
   "additionalProperties": false
 }
