@@ -20,8 +20,25 @@ jobs:
         with:
           distribution: temurin
           java-version: "17"
+      - name: Verify native icon and widget declarations
+        shell: bash
+        run: |
+          set -euo pipefail
+          alias_count="$(grep -c '<activity-alias' android/app/src/main/AndroidManifest.xml)"
+          widget_count="$(grep -c 'WidgetProvider' android/app/src/main/AndroidManifest.xml)"
+          test "$alias_count" -eq 18
+          test "$widget_count" -eq 2
+
       - name: Build Android debug APK
         working-directory: android
         run: |
           chmod +x ./gradlew
           ./gradlew :app:assembleDebug --stacktrace
+
+      - name: Upload Android widget/icon test APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-android-native-widgets-debug
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+          retention-days: 7
