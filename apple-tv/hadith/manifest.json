@@ -3,9 +3,9 @@
   "language": "de",
   "encoding": "UTF-8",
   "formatVersion": "1.3",
-  "authenticOnly": true,
-  "currentSeries": "3251-3350",
-  "nextId": "HAD-3351",
+  "authenticOnly": false,
+  "currentSeries": "3351-3450",
+  "nextId": "HAD-3352",
   "display": {
     "narratorGap": 14,
     "sourceGap": 14,
@@ -22,7 +22,7 @@
     "showSharh": true,
     "showSharhMode": "compact",
     "requireVerifiedSharh": false,
-    "readyThrough": "HAD-3350"
+    "readyThrough": "HAD-3351"
   },
   "hadithLibrary": {
     "enabledForTestApp": true,
@@ -45,11 +45,17 @@
   "releasePolicy": {
     "onlineBranch": "main",
     "stagingBranch": "apple-tv-hadith-staging",
-    "publishedRange": "HAD-0001-HAD-3350",
+    "publishedRange": "HAD-0001-HAD-3351",
     "excludeStatuses": [
       "missing",
       "needs-review"
     ]
   },
-  "readyThrough": "HAD-3350"
+  "readyThrough": "HAD-3351",
+  "contentPolicy": {
+    "hadithRequiresAuthenticatedSource": true,
+    "hadithRequiresVerifiedSharh": true,
+    "atharWithoutSharh": true,
+    "atharIsnadStatusDisclosure": true
+  }
 }
