@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v174-start-stable1278",
-  "label": "KIDS · V1.08.95",
+  "buildId": "kids-shell-v175-fullbleed1279",
+  "label": "KIDS · V1.08.96",
   "releasedAt": "2026-10-08T21:07:54.808Z",
-  "note": "KIDS V1.08.95: Kinder-App startet direkt auf dem vorhandenen freigegebenen Moscheebild. Veralteten Web-Splash inklusive Startaudio entfernt; drei konkurrierende Home-Cinema-Bootstraps deaktiviert; Service-Worker-Aktivierung darf offene Seiten nicht mehr navigieren, controllerchange/version-check kein automatisches Reload; SW-Bildvorladung auf maximal drei parallele Requests begrenzt. Die Moschee-Bilddateien, der Gebetstimer und die Gebetsansicht bleiben unverändert. Ältere iOS-Nativ-Binaries benötigen einen neuen App-Build, damit ihr eingebautes Intro entfällt.",
+  "note": "KIDS V1.08.96: Startbild des freigegebenen Moscheemotivs unter iOS bis an die Statusleiste geführt, Startinhalt in der Höhe des freigegebenen zweiten Referenzbilds ohne automatischen Scroll-Sprung, überflüssige Standort-Berechnungszeile unter den Gebetszeiten entfernt. Standortwahl, Gebetszeiten, Countdown und übrige Inhalte bleiben erhalten.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
