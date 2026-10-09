@@ -1,0 +1,11 @@
+# Tadabbur 06-253 – Quellen-/Isnād-Dokumentation (09.10.2026)
+
+- **7:200** Qatādah ibn Diʿāmah; Tafsīr aṭ-Ṭabarī zu Qurʾān 7:200, Bericht 15554; https://www.islamweb.net/ar/library/content/50/2181/. Kette: Bišr ibn Muʿāḏ → Yazīd ibn Zurayʿ → Saʿīd ibn Abī ʿArūbah → Qatādah. Wortlaut: «علم الله أن هذا العدو منيع ومريد». Der unmittelbar vorhergehende Bericht 15553 von Ibn Zayd wird nicht als authentischer marfūʿ-Ḥadīṯ übernommen.
+- **7:201** Muǧāhid ibn Ǧabr; Tafsīr aṭ-Ṭabarī zu Qurʾān 7:201, Bericht 15558; https://www.islamweb.net/ar/library/content/50/2182/. Kette: Muḥammad ibn ʿAmr → Abū ʿĀṣim → ʿĪsā ibn Maymūn → Ibn Abī Naǧīḥ → Muǧāhid. Original «إذا مسهم طيف من الشيطان تذكروا قال هو الغضب». Parallel: Bericht 15559. Aṭ-Ṭabarī bevorzugt die allgemeinere Lesart aller Ursachen der Versuchung und bestreitet die Begrenzung auf nur Zorn.
+- **7:204** Muǧāhid ibn Ǧabr; Tafsīr aṭ-Ṭabarī zu Qurʾān 7:204, Bericht 15590; https://www.islamweb.net/ar/library/content/50/2186/. Kette: Muḥammad ibn al-Muṯannā → Muḥammad ibn Ǧaʿfar (Ġundar) → Šuʿbah ibn al-Ḥaǧǧāǧ → Ḥumayd al-Aʿraǧ → Muǧāhid. Explizit: «سمعت حميدا الأعرج قال سمعت مجاهدا ... قال في الصلاة». Auch weitere Berichte nennen Gebet und Freitagspredigt; nicht als ausschließliche, für alle Rechtsschulen verbindliche Anwendung darstellen.
+
+**Unterschiede und bewusst offen gelassene Stellen:** 7:200 enthält Qatādahs frühen Kommentar; der mit „قال رسول الله“ berichtete Nachbartext 15553 über Ibn Zayd besitzt keine vollständige marfūʿ-Kette. 7:201 deutet Muǧāhid „Ṭayf“ hier als Zorn; aṭ-Ṭabarī erläutert ausführlich, dass auch andere Antriebe und Versuchungen unter den Vers fallen. 7:204 liegt ein besonders ausdrücklich verbundener Weg von Šuʿbah über Ḥumayd al-Aʿraǧ (jeweils mit „samiʿtu“) zu Muǧāhid vor. Die Anwendung auf Gebet und Freitagspredigt ist in der frühen Auslegung umstritten. **Kein Iǧmāʿ behaupten.**
+
+7:189–190 werden wegen umstrittener Traditionsketten über die angebliche Benennung eines Kindes Ādams und Ḥawwāʾs nicht auf dieser Grundlage registriert. 7:182–183 und 7:185–186 bestehen in den geprüften aṭ-Ṭabarī-Stellen aus eigenem Kommentar ohne zusätzliche isolierbare frühe Überlieferung.
+
+Die automatische Bestandsprüfung kontrolliert Quellenfelder/Verszahlen/Dubletten, jedoch keine abschließende historische ʿIlal-/Rijāl-Kritik aller Einträge.
