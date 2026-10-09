@@ -26,6 +26,9 @@ import android.widget.LinearLayout
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationManagerCompat
+import androidx.webkit.WebViewCompat
+import androidx.webkit.WebViewFeature
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
@@ -112,6 +115,15 @@ class MainActivity : AppCompatActivity() {
             javaScriptCanOpenWindowsAutomatically = true
             setGeolocationEnabled(true)
         }
+        // Platform-specific Android bridge. Do not let the shared iOS web shell
+        // overwrite the Android identity before its own scripts initialize.
+        if (WebViewFeature.isFeatureSupported(WebViewFeature.DOCUMENT_START_SCRIPT)) {
+            WebViewCompat.addDocumentStartJavaScript(
+                webView,
+                androidPlatformIdentityScript(),
+                setOf("https://dar-al-tawhid.de", "https://www.dar-al-tawhid.de")
+            )
+        }
         webView.addJavascriptInterface(DarJsBridge(), "DarNative")
         webView.webViewClient = DarWebViewClient()
         webView.webChromeClient = DarChromeClient()
@@ -161,7 +173,68 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
     }
 
+    private fun androidPlatformIdentityScript(): String = """
+        (function () {
+          if (!/DarAlTawhidAndroid/i.test(String(navigator.userAgent || ""))) return;
+          window.DAR_ANDROID_NATIVE_APP = true;
+          try {
+            Object.defineProperty(window, "DAR_IOS_NATIVE_APP", {
+              configurable: false, enumerable: true,
+              get: function () { return false; },
+              set: function () {}
+            });
+            Object.defineProperty(window, "DAR_OFFICIAL_IOS_APP", {
+              configurable: false, enumerable: true,
+              get: function () { return false; },
+              set: function () {}
+            });
+          } catch (e) {
+            window.DAR_IOS_NATIVE_APP = false;
+            window.DAR_OFFICIAL_IOS_APP = false;
+          }
+          function repairAndroidStatus() {
+            var box = document.getElementById("notificationHealthBox");
+            if (!box) return;
+            var chips = document.querySelectorAll(".notification-status-chip");
+            for (var i = 0; i < chips.length; i++) {
+              var chip = chips[i];
+              if (chip.textContent.trim() === "iOS-App") chip.textContent = "Android-App";
+            }
+            var kind = box.querySelector(".notification-health__kind");
+            if (kind && kind.textContent !== "Android Native") kind.textContent = "Android Native";
+            var line = box.querySelector(".notification-health__line");
+            if (!line) return;
+            var granted = window.DAR_ANDROID_POST_NOTIFICATIONS_GRANTED === true;
+            var sub = String(window.DAR_ANDROID_ONESIGNAL_ID || "").trim();
+            var token = String(window.DAR_ANDROID_PUSH_TOKEN || "").trim();
+            var status = !granted ? "Android-Benachrichtigungen nicht freigegeben" :
+                !sub ? "Android-OneSignal-Registrierung fehlt" :
+                !token ? "Android-FCM-Token fehlt" :
+                "Android registriert · Server-Zustellung noch nicht bestätigt";
+            if (line.textContent !== status) line.textContent = status;
+            var warning = !granted || !sub || !token;
+            if (line.classList.contains("notification-health__line--warn") !== warning) {
+              line.classList.toggle("notification-health__line--warn", warning);
+            }
+          }
+          var queued = false;
+          function scheduleRepair() {
+            if (queued) return;
+            queued = true;
+            setTimeout(function () { queued = false; repairAndroidStatus(); }, 120);
+          }
+          new MutationObserver(scheduleRepair).observe(document, {
+            childList: true, subtree: true
+          });
+          document.addEventListener("DOMContentLoaded", scheduleRepair);
+          window.addEventListener("darAndroidBridgeUpdated", scheduleRepair);
+        })();
+    """.trimIndent()
+
     private fun injectBridge() {
+        val notificationsGranted = NotificationManagerCompat.from(this).areNotificationsEnabled() &&
+            (android.os.Build.VERSION.SDK_INT < 33 ||
+                ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED)
         val device = DarPush.deviceId(this)
         val sub = DarPush.subscriptionId()
         val token = DarPush.pushToken()
@@ -171,6 +244,7 @@ class MainActivity : AppCompatActivity() {
                 window.DAR_ANDROID_NATIVE_APP=true;
                 window.DAR_ANDROID_NATIVE_PUSH=true;
                 window.DAR_IOS_NATIVE_APP=false;
+                window.DAR_ANDROID_POST_NOTIFICATIONS_GRANTED=${notificationsGranted};
                 window.DAR_ANDROID_DEVICE_ID=${jsString(device)};
                 window.DAR_ANDROID_ONESIGNAL_ID=${jsString(sub)};
                 window.DAR_ANDROID_PUSH_TOKEN=${jsString(token)};
@@ -202,6 +276,7 @@ class MainActivity : AppCompatActivity() {
                 var hideSave=document.createElement("style");
                 hideSave.textContent="html.dar-android-native-app #footerAppSave,html.dar-android-native-app .footer-app-save,html.dar-android-native-app .footer-action-save{display:none!important}html.dar-android-native-app .top-shell,html.dar-android-native-app .header,html.dar-android-native-app .header.theme-hero-surface,html.dar-android-native-app .sf-top,html.dar-android-native-app .qov-header,html.dar-android-native-app .app-bar,html.dar-android-native-app .view-head,html.dar-android-native-app .settings-page-head{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;filter:none!important;background:var(--quran-page-bg,var(--theme-feed-bg,var(--dar-edge-fill,var(--page-cover,var(--outer-bg-flat,var(--bg,#050706))))))!important;background-image:none!important}html.dar-android-native-app .top-edge-fade,html.dar-android-native-app #topEdgeFade,html.dar-android-native-app .top-swim-aura,html.dar-android-native-app #topSwimAura{display:none!important;visibility:hidden!important;opacity:0!important;height:0!important;background:none!important;filter:none!important;pointer-events:none!important}html.dar-android-native-app .top-shell:before,html.dar-android-native-app .top-shell:after,html.dar-android-native-app .header:before,html.dar-android-native-app .header:after,html.dar-android-native-app .qov-header:before,html.dar-android-native-app .qov-header:after,html.dar-android-native-app .app-bar:before,html.dar-android-native-app .app-bar:after{content:none!important;display:none!important;opacity:0!important;background:none!important;filter:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}";
                 document.documentElement.appendChild(hideSave);
+                window.dispatchEvent(new Event("darAndroidBridgeUpdated"));
               }catch(e){}
             })();
         """.trimIndent()
