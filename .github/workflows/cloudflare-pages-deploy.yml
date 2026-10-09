@@ -69,6 +69,7 @@ jobs:
       qsource_only: ${{ steps.scope.outputs.qsource_only }}
       preview_only: ${{ steps.scope.outputs.preview_only }}
       adult_posts_touched: ${{ steps.scope.outputs.adult_posts_touched }}
+      kids_touched: ${{ steps.scope.outputs.kids_touched }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -83,6 +84,7 @@ jobs:
             echo "qsource_only=false" >> "$GITHUB_OUTPUT"
             echo "preview_only=false" >> "$GITHUB_OUTPUT"
             echo "adult_posts_touched=false" >> "$GITHUB_OUTPUT"
+            echo "kids_touched=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           BASE="${{ github.event.before }}"
@@ -91,6 +93,7 @@ jobs:
             echo "qsource_only=false" >> "$GITHUB_OUTPUT"
             echo "preview_only=false" >> "$GITHUB_OUTPUT"
             echo "adult_posts_touched=false" >> "$GITHUB_OUTPUT"
+            echo "kids_touched=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           CHANGED="$(git diff --name-only "$BASE" "$GITHUB_SHA")"
@@ -101,6 +104,13 @@ jobs:
             echo "adult_posts_touched=true" >> "$GITHUB_OUTPUT"
           else
             echo "adult_posts_touched=false" >> "$GITHUB_OUTPUT"
+          fi
+          # Cross-lane guard: Kids release checks may only block a deployment
+          # when this trigger actually changes the Kids lane or its guards.
+          if printf '%s\n' "$CHANGED" | grep -Eq '^(kids/|scripts/kids-prophet-release-guard\.js$|scripts/kids-dua-trilingual-guard\.js$)'; then
+            echo "kids_touched=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "kids_touched=false" >> "$GITHUB_OUTPUT"
           fi
           if [ -n "$CHANGED" ] && [ -z "$(printf '%s\n' "$CHANGED" | grep -v '^_redirects$' || true)" ]; then
             if awk 'NF && $1 !~ /^#/ && $1 !~ /^\/quelle\// { bad=1 } END { exit bad }' _redirects; then
@@ -405,8 +415,13 @@ jobs:
           GITHUB_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
         run: |
           node scripts/app-health-check.js
-          node scripts/kids-prophet-release-guard.js
-          node scripts/kids-dua-trilingual-guard.js
+          if [ "${{ needs.classify.outputs.kids_touched }}" = "true" ]; then
+            echo "Kids-Spur geändert – Kids Release Guards ausführen."
+            node scripts/kids-prophet-release-guard.js
+            node scripts/kids-dua-trilingual-guard.js
+          else
+            echo "Kids-Spur unverändert – Kids Release Guards blockieren diesen Visitor/Web-Deploy nicht."
+          fi
           node scripts/change-scope-lock-guard.js
           node scripts/push-system-guard.js
           node scripts/push-lanes-guard.js
