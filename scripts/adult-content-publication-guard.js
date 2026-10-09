@@ -46,7 +46,7 @@ function readPost(text,file){
  const first=piece.indexOf("„"),last=piece.lastIndexOf("“");
  if(first>=0&&last>first)piece=piece.slice(first+1,last);
  else piece=piece.replace(/^🖋️[^\n]*\n/u,"");
- return {file,id:fm.id||path.basename(file,".md"),fm,type,body,text:piece.replace(/\*\*/g,"").trim()};
+ return {file,id:fm.id||path.basename(file,".md"),fm,type,body,sourceLink:short(m[1])||short(body),text:piece.replace(/\*\*/g,"").trim()};
 }
 function duplicate(a,b){
  if(a.id&&b.id&&a.id===b.id)return "same post identifier";
@@ -65,7 +65,7 @@ function allPosts(excluded){
   if(x.name===excluded||!x.name.endsWith(".md"))continue;
   const name=posts+"/"+x.name;if(!fs.existsSync(name))continue;
   const p=readPost(fs.readFileSync(name,"utf8"),x.name);
-  if(!p.skip)out.push({ref:"content/posts/"+x.name,id:p.id,text:p.text,speaker:p.fm.scholar,q:short(p.body),number:p.fm.sourceHadithNumber});
+  if(!p.skip)out.push({ref:"content/posts/"+x.name,id:p.id,text:p.text,speaker:p.fm.scholar,q:p.sourceLink,number:p.fm.sourceHadithNumber});
  }
  return out;
 }
@@ -100,7 +100,9 @@ function validate(p,otherPosts,existingTv){
  if(p.skip)return "skip";
  if(!p.fm.scholar||!p.fm.source||p.text.length<36||p.text.length>20000)block("missing speaker, source or statement",{post:p.file});
  if(/^\s*#[\p{L}\p{N}_-]+\s*$/gmu.test(p.body)||/(?:^|\n)\s*(?:📥\s*Telegram|🌐\s*Website|📸\s*Instagram)\s*:/u.test(p.body))block("visible hashtags or outdated social footer",{post:p.file});
- const q=short(p.body);
+ const q=p.sourceLink;
+ if(/^\s*(?:📝\s*(?:\*\*)?Quelle|🔗\s*(?:https?:\/\/)?(?:www\.)?dar-al-tawhid\.de\/q\/|(?:\*\*)?Überlieferungsstatus(?:\*\*)?\s*:)/mu.test(p.body))
+  block("source, q link or isnad explanation duplicated in app statement; move to source card /q/",{post:p.file});
  if(!q||!fs.existsSync(root+"/q/"+q+"/index.html"))block("own source page /q/ missing",{post:p.file});
  const sourceHtml=fs.readFileSync(root+"/q/"+q+"/index.html","utf8");
  if(!sourceHtml.includes("qsource-links")||!sourceHtml.includes("#:~:text="))block("source page lacks verified direct text evidence",{post:p.file,q});
@@ -158,8 +160,8 @@ function main(){
   const p=readPost(fs.readFileSync(root+"/"+file,"utf8"),file);
   if(p.skip){console.log("SKIP: slide or non-hadith/athar",file);continue}
   for(const e of batch){
-   const reason=duplicate({id:p.id,speaker:p.fm.scholar,text:p.text,q:short(p.body)},
-      {id:e.id,speaker:e.fm.scholar,text:e.text,q:short(e.body)});
+   const reason=duplicate({id:p.id,speaker:p.fm.scholar,text:p.text,q:p.sourceLink},
+      {id:e.id,speaker:e.fm.scholar,text:e.text,q:e.sourceLink});
    if(reason)block("duplicate in new content batch: "+reason,{post:p.file,existing:e.file});
   }
   const q=validate(p,allPosts(path.basename(file)),[...previous,...made.map(x=>({id:x.id,ref:x.id,text:x.textMarkdown,speaker:x.narratorLine,q:short(x.sourceSection)}))]);
