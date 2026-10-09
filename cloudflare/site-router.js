@@ -329,6 +329,7 @@ function androidNativeToolsAddon() {
 <\\/script>`;
 }
 
+// DAR_ANDROID_PWA_INSTALL_RUNTIME_V3_20261009
 function publicWebsiteAddon() {
   return `
 <style id="darPublicWebsiteOnlyV1">
