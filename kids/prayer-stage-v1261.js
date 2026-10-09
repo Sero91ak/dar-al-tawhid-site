@@ -349,7 +349,7 @@ function draw(){
  const start=previous?.ts||prayerUtc(today,"00:00",place.tz);
  const width=Math.max(0,Math.min(100,((now-start)/(next.ts-start))*100));
  progress.style.width=width.toFixed(2)+"%";
- status.textContent="Berechnet für "+(place.name||"deinen Ort")+(navigator.onLine?"":" · Offline-Daten");
+ status.textContent=""; // City remains visible in the prayer header; alerts remain visible.
  renderDay();
  safeFitPrayerDigits(false);
 }
