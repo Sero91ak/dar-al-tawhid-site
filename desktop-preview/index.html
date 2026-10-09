@@ -2260,6 +2260,46 @@ button,input,select{font:inherit}
 <link rel="stylesheet" href="/test/assets/frauen/frauen-fiqh.css?v=1292-live">
 <link rel="stylesheet" href="/test/assets/frauen/frauen-authority-v1292.css?v=frauen-authority-v1292">
 <script src="/test/assets/frauen/frauen-fiqh.js?v=1294-share-brand" defer></script>
+
+<link rel="manifest" href="/manifest.json">
+<style id="darAndroidPwaWebsiteV1">
+#darAndroidPwaHome{display:none}
+html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
+ display:flex;position:fixed;z-index:265;right:clamp(10px,2.2vw,24px);
+ bottom:calc(12px + env(safe-area-inset-bottom,0px));width:min(355px,calc(100vw - 20px));
+ align-items:center;gap:12px;padding:12px 13px;border:1px solid rgba(221,187,117,.48);
+ border-radius:20px;background:linear-gradient(145deg,rgba(10,28,32,.96),rgba(8,20,27,.97));
+ box-shadow:0 18px 48px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.08);
+ color:#fff8e8;-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)
+}
+.dar-pwa-android-mark{width:52px;height:52px;flex:0 0 52px;display:grid;place-items:center;border-radius:16px;background:rgba(164,198,57,.12);color:#a4c639;border:1px solid rgba(164,198,57,.28)}
+.dar-pwa-android-mark svg{width:34px;height:34px;display:block}
+.dar-pwa-home-copy{min-width:0;flex:1}
+.dar-pwa-home-copy small{display:block;color:#e8c984;font-size:8px;font-weight:850;letter-spacing:.13em}
+.dar-pwa-home-copy strong{display:block;margin:3px 0 2px;font:600 15px/1.2 Georgia,"Times New Roman",serif}
+.dar-pwa-home-copy span{display:block;color:rgba(255,248,232,.72);font-size:9.5px;line-height:1.35}
+.dar-pwa-home-action{flex:0 0 auto;min-height:38px;padding:0 11px;border:1px solid rgba(238,207,141,.34);border-radius:12px;background:#fff8e8;color:#142721;font-size:9px;font-weight:850;cursor:pointer}
+.dar-pwa-home-help{position:absolute;right:10px;top:-22px;color:#f0d89a;font-size:8px;text-decoration:none}
+.download-hub-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.download-app-card{min-width:0;padding:22px;border:1px solid rgba(124,97,45,.2);border-radius:22px;background:linear-gradient(145deg,#fffdf8,#f5f0e6);box-shadow:0 10px 30px rgba(65,48,24,.07)}
+.download-app-card__head{display:flex;gap:14px;align-items:center}
+.download-app-card__icon{width:62px;height:62px;flex:0 0 62px;display:grid;place-items:center;border-radius:18px;background:#0f282a;color:#a4c639}
+.download-app-card__icon.ios{background:#fff}
+.download-app-card__icon svg,.download-app-card__icon img{width:40px;height:40px;display:block;object-fit:contain}
+.download-app-card h2{margin:0;font:600 21px/1.15 Georgia,"Times New Roman",serif;color:#2a2924}
+.download-app-card .kicker{margin-bottom:5px;color:#8a6b2d;font-size:8px;font-weight:850;letter-spacing:.13em}
+.download-app-card p{margin:14px 0;color:#6d665c;font-size:12px;line-height:1.65}
+.download-app-steps{margin:14px 0 18px;padding-left:18px;color:#514b43;font-size:11px;line-height:1.7}
+.download-app-btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 15px;border:1px solid #9a7738;border-radius:13px;background:#17342f;color:#fff9e9;text-decoration:none;font-size:10px;font-weight:850;cursor:pointer}
+.download-app-btn.ios{background:#121820;border-color:#121820}
+.download-app-note{display:block;margin-top:10px;color:#81776b;font-size:9px;line-height:1.45}
+@media(max-width:760px){
+ html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{right:9px;bottom:calc(10px + env(safe-area-inset-bottom,0px));width:min(310px,calc(100vw - 18px));padding:10px;border-radius:17px}
+ .dar-pwa-android-mark{width:45px;height:45px;flex-basis:45px;border-radius:14px}.dar-pwa-android-mark svg{width:29px;height:29px}
+ .dar-pwa-home-copy strong{font-size:13px}.dar-pwa-home-copy span{font-size:8.5px}.dar-pwa-home-action{min-height:34px;padding:0 9px}
+ .download-hub-grid{grid-template-columns:1fr}.download-app-card{padding:18px}
+}
+</style>
 </head>
 <body class="desktop-overhaul-v18">
 <header class="site-header">
@@ -2357,12 +2397,16 @@ button,input,select{font:inherit}
   propheten:["PROPHETEN","Biografien und Lehren.","Kapitelweise Übersicht zu den Propheten mit Quellenbezug."],
   frauen:["FRAUEN","Wissen und Überlieferungen.","Thematische Inhalte über Frauen in Qurʾān, Sunnah und den frühen Generationen."],
   quellen:["QUELLEN","Werke und Direktnachweise.","Quellen nach Werk, Gelehrtem und Thema geordnet."],
-  einstellungen:["DARSTELLUNG","Lesen nach deinen Vorlieben.","Passe Schriftgröße und Lesedarstellung an."]
+  einstellungen:["DARSTELLUNG","Lesen nach deinen Vorlieben.","Passe Schriftgröße und Lesedarstellung an."],
+  downloads:["DOWNLOADS","DĀR AL TAWḤĪD als App nutzen.","Android-Web-App installieren oder die offizielle iOS-App im App Store öffnen."]
  };
  function p(name,extra){return "/?page="+encodeURIComponent(name)+(extra?"&"+extra:"")}
  function intro(k){var d=intros[k]||intros.thema;return '<section class="page-intro reveal"><div><div class="eyebrow">'+d[0]+'</div><h1>'+d[1]+'</h1><p>'+d[2]+'</p></div><div class="intro-aside">Qurʾān · Sunnah · Āṯār<br>DĀR AL TAWḤĪD</div></section><div class="ornament-line reveal"></div>'}
  function footer(){return '<footer class="site-footer reveal"><span>DĀR AL TAWḤĪD</span><span>Qurʾān · Sunnah · Āṯār</span></footer>'}
  function sourceLine(label,url){return '<div class="statement-source"><b>Quelle:</b> '+label+' <a target="_blank" rel="noopener" href="'+url+'">Direktnachweis ↗</a></div>'}
+
+ function androidPwaLogo(){return '<svg viewBox="0 0 64 64" aria-hidden="true"><g fill="currentColor"><path d="M20.2 17.7 16.5 11.3a1.5 1.5 0 0 1 2.6-1.5l3.8 6.5A24.2 24.2 0 0 1 32 14.5c3.3 0 6.4.7 9.1 1.9l3.8-6.5a1.5 1.5 0 1 1 2.6 1.5l-3.7 6.4A16.5 16.5 0 0 1 49 29H15a16.5 16.5 0 0 1 5.2-11.3Z"/><rect x="15" y="31" width="34" height="22" rx="3"/><rect x="9" y="31" width="4" height="19" rx="2"/><rect x="51" y="31" width="4" height="19" rx="2"/><rect x="21" y="51" width="5" height="10" rx="2.5"/><rect x="38" y="51" width="5" height="10" rx="2.5"/></g><circle cx="24" cy="23" r="1.8" fill="#10252a"/><circle cx="40" cy="23" r="1.8" fill="#10252a"/></svg>'}
+ function androidPwaStartPromo(){return '<aside id="darAndroidPwaHome" aria-label="Android Web-App installieren"><a class="dar-pwa-home-help desktop-link" href="'+p("downloads")+'" data-page="downloads">Installationshilfe</a><span class="dar-pwa-android-mark">'+androidPwaLogo()+'</span><span class="dar-pwa-home-copy"><small>ANDROID · WEB-APP</small><strong>DĀR AL TAWḤĪD installieren</strong><span id="darPwaHomeHint">Wie eine App auf dem Startbildschirm · ohne APK.</span></span><button class="dar-pwa-home-action" type="button" data-dar-pwa-install>Installieren</button></aside>'}
 
  function start(){
   return intro("start")+
@@ -2376,7 +2420,7 @@ button,input,select{font:inherit}
   '<section class="section reveal"><div class="section-head"><h2>Direkt öffnen</h2><p>Ausgewählte Bereiche</p></div><div class="list-lines">'+
   '<a class="list-row desktop-link" href="'+p("beitrag","id=ibn-sirin")+'" data-page="beitrag"><span class="meta">Beitrag</span><strong>Dieses Wissen ist Dīn</strong><small>Lesen</small></a>'+
   '<a class="list-row desktop-link" href="'+p("quran")+'" data-page="quran"><span class="meta">Qurʾān</span><strong>al-Fātiḥah in der Buchansicht</strong><small>Öffnen</small></a>'+
-  '<a class="list-row desktop-link" href="'+p("quellen")+'" data-page="quellen"><span class="meta">Quellen</span><strong>Werke und Direktnachweise</strong><small>Nachschlagen</small></a></div></section>'+footer()
+  '<a class="list-row desktop-link" href="'+p("quellen")+'" data-page="quellen"><span class="meta">Quellen</span><strong>Werke und Direktnachweise</strong><small>Nachschlagen</small></a></div></section>'+androidPwaStartPromo()+footer()
  }
  var quranBookState={surah:1,spread:0,pages:[],meta:null,busy:false};
  function escBook(v){return String(v==null?"":v).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
@@ -2441,8 +2485,16 @@ button,input,select{font:inherit}
  }
  function mehr(){
   return intro("mehr")+
-  '<section class="section reveal"><div class="more-grid"><a class="more-row desktop-link" href="'+p("zakat")+'" data-page="zakat"><div><h3>Zakāt-Rechner</h3><p>Berechnung mit einfacher Eingabe.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+p("quiz")+'" data-page="quiz"><div><h3>Quiz</h3><p>Wissensfragen nach Kategorien.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+p("propheten")+'" data-page="propheten"><div><h3>Propheten</h3><p>Biografien und Lehren nach Kapiteln.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+p("frauen")+'" data-page="frauen"><div><h3>Frauen</h3><p>Wissen und Überlieferungen thematisch geordnet.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+p("quellen")+'" data-page="quellen"><div><h3>Quellen</h3><p>Werke und Direktnachweise.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+p("einstellungen")+'" data-page="einstellungen"><div><h3>Darstellung</h3><p>Schrift und Lesekomfort.</p></div><b>→</b></a></div></section>'+footer()
+  '<section class="section reveal"><div class="more-grid"><a class="more-row desktop-link" href="'+p("zakat")+'" data-page="zakat"><div><h3>Zakāt-Rechner</h3><p>Berechnung mit einfacher Eingabe.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+p("quiz")+'" data-page="quiz"><div><h3>Quiz</h3><p>Wissensfragen nach Kategorien.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+p("propheten")+'" data-page="propheten"><div><h3>Propheten</h3><p>Biografien und Lehren nach Kapiteln.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+p("frauen")+'" data-page="frauen"><div><h3>Frauen</h3><p>Wissen und Überlieferungen thematisch geordnet.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+p("quellen")+'" data-page="quellen"><div><h3>Quellen</h3><p>Werke und Direktnachweise.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+p("downloads")+'" data-page="downloads"><div><h3>Downloads</h3><p>Android-Web-App installieren oder iOS-App laden.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+p("einstellungen")+'" data-page="einstellungen"><div><h3>Darstellung</h3><p>Schrift und Lesekomfort.</p></div><b>→</b></a></div></section>'+footer()
  }
+ function downloads(){
+  return intro("downloads")+
+  '<section class="section reveal"><div class="section-head"><h2>Apps & Installation</h2><p>Android als Web-App · iPhone & iPad über den App Store</p></div><div class="download-hub-grid">'+
+  '<article class="download-app-card"><div class="download-app-card__head"><span class="download-app-card__icon">'+androidPwaLogo()+'</span><div><div class="kicker">ANDROID · SMARTPHONE & TABLET</div><h2>Web-App installieren</h2></div></div><p>Die DĀR AL TAWḤĪD Website wird direkt als eigenständige App auf deinem Android-Startbildschirm installiert. Keine APK nötig.</p><ol class="download-app-steps"><li>Diese Seite in Chrome, Edge oder Samsung Internet öffnen.</li><li>Auf <b>Web-App installieren</b> tippen.</li><li>Falls kein Dialog erscheint: Browser-Menü öffnen und <b>App installieren</b> oder <b>Zum Startbildschirm hinzufügen</b> wählen.</li></ol><button class="download-app-btn" type="button" data-dar-pwa-install>Web-App installieren</button><span class="download-app-note" data-dar-pwa-hint>Installiert mit DĀR-Icon und eigenem App-Fenster.</span></article>'+
+  '<article class="download-app-card"><div class="download-app-card__head"><span class="download-app-card__icon ios"><img src="/assets/app-store-icon-fixed.svg?v=appstore-round-20260913-1820" alt=""></span><div><div class="kicker">APPLE · IPHONE & IPAD</div><h2>iOS-App</h2></div></div><p>Für iPhone und iPad bleibt die native DĀR AL TAWḤĪD App im Apple App Store verfügbar. Der bestehende App-Store-Bereich auf der Startseite bleibt unverändert.</p><a class="download-app-btn ios" href="https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753" target="_blank" rel="noopener noreferrer">Im App Store laden</a><span class="download-app-note">Offizielle native iOS-Version.</span></article>'+
+  '</div></section>'+footer()
+ }
+
  function suche(){
   return intro("suche")+'<section class="section parchment reveal"><input id="siteSearch" class="search-input" type="search" placeholder="Qurʾān, Beitrag, Duʿāʾ, Werk, Prophet oder Thema suchen …" autocomplete="off"><div id="searchResults" class="list-lines" style="margin-top:20px"><div class="loading-line">Suchindex wird geladen …</div></div></section>'+footer()
  }
@@ -2473,7 +2525,7 @@ button,input,select{font:inherit}
  function einstellungen(){
   return intro("einstellungen")+'<section class="section reveal"><div style="max-width:760px"><div class="form-line"><label>Schriftgröße</label><input id="fontSizeRange" type="range" min="90" max="118" value="100"></div><div class="form-line"><label>Lesemodus</label><select id="readingMode"><option value="normal">Weiß · leicht cremig</option><option value="warm">Wärmeres Pergament</option></select></div></div></section>'+footer()
  }
- var renders={start:start,quran:quran,beitraege:beitraege,beitrag:beitrag,quelle:quelle,dua:dua,wissen:wissen,bibliothek:bibliothek,gebetszeiten:gebetszeiten,mehr:mehr,suche:suche,thema:thema,werk:werk,zakat:zakat,quiz:quiz,propheten:propheten,frauen:frauen,quellen:quellen,einstellungen:einstellungen};
+ var renders={start:start,quran:quran,beitraege:beitraege,beitrag:beitrag,quelle:quelle,dua:dua,wissen:wissen,bibliothek:bibliothek,gebetszeiten:gebetszeiten,mehr:mehr,downloads:downloads,suche:suche,thema:thema,werk:werk,zakat:zakat,quiz:quiz,propheten:propheten,frauen:frauen,quellen:quellen,einstellungen:einstellungen};
 
  function currentPage(){return (new URLSearchParams(location.search).get("page")||"start").toLowerCase()}
  function render(){
