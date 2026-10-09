@@ -70,14 +70,24 @@ jobs:
           cp "$tv" "$RUNNER_TEMP/publish/dar-al-tawhid-tv.apk"
           (cd "$RUNNER_TEMP/publish" && sha256sum *.apk > SHA256SUMS.txt)
 
-      - name: Android SDK verification tools
-        uses: android-actions/setup-android@v3
+      - name: Use Android SDK installed on GitHub hosted runner
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -d "$ANDROID_HOME/build-tools" || { echo "::error::Android SDK build-tools not found"; exit 1; }
+          echo "Installed Android build-tools:"
+          ls -1 "$ANDROID_HOME/build-tools"
       - name: Verify APK signatures, package IDs and actual version names
         shell: bash
         run: |
           set -euo pipefail
-          sdkmanager --install "build-tools;36.0.0" >/dev/null
-          sdk="$ANDROID_HOME/build-tools/36.0.0"
+          # Use an already installed SDK. GitHub's Android SDK action can fail
+          # because legacy SDK package "tools" no longer exists.
+          sdk="$(find "$ANDROID_HOME/build-tools" -mindepth 1 -maxdepth 1 -type d | sort -V | tail -n 1)"
+          test -x "$sdk/apksigner" && test -x "$sdk/aapt" || {
+            echo "::error::Android apksigner/aapt unavailable in $sdk"
+            exit 1
+          }
           for platform in android tv; do
             apk="$RUNNER_TEMP/publish/dar-al-tawhid-$platform.apk"
             "$sdk/apksigner" verify --verbose "$apk" > "$RUNNER_TEMP/apksigner-$platform.txt"
