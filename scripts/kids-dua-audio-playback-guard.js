@@ -14,7 +14,9 @@ for(const key of [
   'var CLEAN_SLOW_RATE=0.86;',
   'var rate=slow?CLEAN_SLOW_RATE:1;',
   'var direct=currentDua.audioArabicUrl;',
-  'attachPhraseFollow(currentDua,mode==="slow",token)',
+  'var approvedSlow=mode==="slow"?approvedNativeSlowUrl(currentDua):"";',
+  'var nativeSlow=!!approvedSlow&&String(url)===approvedSlow;',
+  'attachPhraseFollow(currentDua,nativeSlow,token)',
   'function playCleanSequence',
   'function playWordSequence',
   'function approvedNativeSlowUrl',
@@ -28,6 +30,7 @@ for(const key of [
   'data-dsl="follow"'
 ])assert(js.includes(key),"Missing playback invariant: "+key);
 assert(!js.includes("speechSynthesis"),"Unexpected system TTS in Duʿāʾ player");
+assert(!js.includes('attachPhraseFollow(currentDua,mode==="slow",token)'),"Wrong timestamps: slowed normal master is not a distinct native slow source");
 const m=js.match(/function cleanWordWindow\(buffer\)\{([\s\S]*?)\n  \}\n  function cleanDecode/);
 assert(m,"Cannot isolate real word-boundary trimmer");
 const trim=vm.runInNewContext("(function cleanWordWindow(buffer){"+m[1]+"\n})",{},{timeout:4000});
