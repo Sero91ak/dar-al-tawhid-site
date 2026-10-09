@@ -13,7 +13,7 @@ function validateGeometryBytes(g,bin,{minimumReferencedVertices=2000}={}){
  const meshes=Array.isArray(g?.meshes)?g.meshes:[];
  const skins=Array.isArray(g?.skins)?g.skins:[];
  const nodes=Array.isArray(g?.nodes)?g.nodes:[];
- let totalVertices=0,totalTriangles=0,skinnedPrimitives=0,totalReferencedVertices=0;
+ let totalVertices=0,totalTriangles=0,skinnedPrimitives=0,totalReferencedVertices=0,degenerateTriangles=0;
  const boundingMin=[Infinity,Infinity,Infinity],boundingMax=[-Infinity,-Infinity,-Infinity];
  if(!Number.isInteger(minimumReferencedVertices)||minimumReferencedVertices<3)
    fail("Invalid minimum reference vertex criterion.");
@@ -109,13 +109,6 @@ function validateGeometryBytes(g,bin,{minimumReferencedVertices=2000}={}){
      for(let i=0;i<pos.count;i++){
        let normalSquared=0;
        for(let j=0;j<3;j++){
-         const coordinate=pos.read(i,j);
-         if(Number.isFinite(coordinate)){
-           boundingMin[j]=Math.min(boundingMin[j],coordinate);
-           boundingMax[j]=Math.max(boundingMax[j],coordinate);
-         }
-       }
-       for(let j=0;j<3;j++){
          if(!Number.isFinite(pos.read(i,j))||!Number.isFinite(normal.read(i,j))){
            fail("Nonfinite vertex position or normal "+label);break;
          }
@@ -145,13 +138,38 @@ function validateGeometryBytes(g,bin,{minimumReferencedVertices=2000}={}){
      if(idx){
        if(idx.count%3!==0)fail("Triangle indices not divisible by 3 "+label);
        const used=new Set();
-       for(let k=0;k<idx.count;k++){
-         const value=idx.read(k,0);
-         if(value>=pos.count){fail("Triangle index outside POSITION "+label);break;}
-         used.add(value);
+       const triangles=Math.floor(idx.count/3);
+       let degenerate=0;
+       for(let k=0;k<triangles;k++){
+         const a=idx.read(k*3,0),b=idx.read(k*3+1,0),c=idx.read(k*3+2,0);
+         if(a>=pos.count||b>=pos.count||c>=pos.count){
+           fail("Triangle index outside POSITION "+label);break;
+         }
+         if(a===b||a===c||b===c){degenerate++;continue;}
+         const p=[a,b,c].map(i=>[pos.read(i,0),pos.read(i,1),pos.read(i,2)]);
+         if(p.some(row=>row.some(v=>!Number.isFinite(v)))){
+           fail("Nonfinite indexed triangle geometry "+label);break;
+         }
+         const u=p[1].map((v,j)=>v-p[0][j]),v=p[2].map((n,j)=>n-p[0][j]);
+         const cross=[u[1]*v[2]-u[2]*v[1],u[2]*v[0]-u[0]*v[2],u[0]*v[1]-u[1]*v[0]];
+         const areaSquared=cross.reduce((s,x)=>s+x*x,0);
+         if(!Number.isFinite(areaSquared)||areaSquared<=1e-20){degenerate++;continue;}
+         for(const index of [a,b,c])used.add(index);
+       }
+       // Count only vertices belonging to real triangles, not dummy points
+       // or degenerate faces created to inflate the character's apparent size.
+       for(const index of used){
+         for(let axis=0;axis<3;axis++){
+           const x=pos.read(index,axis);
+           boundingMin[axis]=Math.min(boundingMin[axis],x);
+           boundingMax[axis]=Math.max(boundingMax[axis],x);
+         }
        }
        totalReferencedVertices+=used.size;
-       totalTriangles+=Math.floor(idx.count/3);
+       totalTriangles+=triangles;
+       degenerateTriangles+=degenerate;
+       if(triangles>0&&degenerate/triangles>0.05)
+         fail("Excessive zero-area or repeated-index triangles "+label);
      }
      totalVertices+=pos.count;
      skinnedPrimitives++;
@@ -164,6 +182,6 @@ function validateGeometryBytes(g,bin,{minimumReferencedVertices=2000}={}){
    fail("Degenerate/flat geometry bounds; not a validated full 3D character.");
  return {valid:errors.length===0,errors,productionApproved:false,
    vertices:totalVertices,referencedVertices:totalReferencedVertices,
-   triangles:totalTriangles,skinnedPrimitives};
+   triangles:totalTriangles,degenerateTriangles,skinnedPrimitives};
 }
 module.exports={validateGeometryBytes};
