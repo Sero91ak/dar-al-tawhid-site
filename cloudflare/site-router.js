@@ -369,7 +369,7 @@ function publicWebsiteAddon() {
   window.darGetPwaIcon=getPwaIconId;
   applyPwaIcon(getPwaIconId(),false);
 
-  var deferredInstall=null;
+  var deferredInstall=window.__darEarlyInstallPrompt||null;
   var installPromptWaiters=[];
   function setPwaHint(text){
     try{
@@ -383,6 +383,7 @@ function publicWebsiteAddon() {
     setPwaHint("Bereits als App installiert.");
   }
   function publishInstallPrompt(event){
+    window.__darEarlyInstallPrompt=event;
     deferredInstall=event;
     var waiters=installPromptWaiters.splice(0);
     waiters.forEach(function(resolve){try{resolve(event)}catch(e){}});
@@ -419,6 +420,7 @@ function publicWebsiteAddon() {
   });
   window.addEventListener("appinstalled",function(){
     deferredInstall=null;
+    window.__darEarlyInstallPrompt=null;
     setInstalledState();
   });
   window.darInstallAndroidPwa=async function(){
