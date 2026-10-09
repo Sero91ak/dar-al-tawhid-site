@@ -70,5 +70,77 @@
     });
     return hits;
   }
-  window.DARKidsTermLearning={find:find,render:render,terms:TERMS};
+  // Reusable approved Serhat-Master clips; never synthesize speech in the browser.
+  var AUDIO_MANIFEST="/kids/data/term-learning-audio.json?v=1";
+  var audioManifest=null;
+  var manifestPending=null;
+  var termPlayer=new Audio();
+  var playbackToken=0;
+  termPlayer.preload="auto";
+  termPlayer.setAttribute("playsinline","");
+  termPlayer.setAttribute("webkit-playsinline","");
+  function loadAudioManifest(){
+    if(audioManifest)return Promise.resolve(audioManifest);
+    if(manifestPending)return manifestPending;
+    manifestPending=fetch(AUDIO_MANIFEST,{cache:"no-store"}).then(function(r){
+      if(!r.ok)throw new Error("term-audio-"+r.status);
+      return r.json();
+    }).then(function(data){
+      if(!data||data.voiceProfileId!=="serhat-owner-voice-2026"||!data.entries)throw new Error("unapproved-term-audio");
+      audioManifest=data;
+      return data;
+    }).catch(function(){
+      manifestPending=null;
+      return null;
+    });
+    return manifestPending;
+  }
+  function stop(){
+    playbackToken++;
+    try{termPlayer.pause();termPlayer.removeAttribute("src");termPlayer.load()}catch(_){}
+    termPlayer.onended=null;termPlayer.onerror=null;
+  }
+  function playFor(input,opts){
+    opts=opts||{};
+    var hits=find(input,opts);
+    var token=++playbackToken;
+    function complete(ok){
+      if(playbackToken===token&&typeof opts.onended==="function")opts.onended();
+      return ok;
+    }
+    if(!hits.length)return Promise.resolve(complete(false));
+    return loadAudioManifest().then(function(manifest){
+      if(playbackToken!==token)return false;
+      if(!manifest)return complete(false);
+      var young=/^(4|4-6|4–5)/.test(String(opts.age||""));
+      var suffix=young?"basic":"deep";
+      var clips=hits.map(function(t){
+        var entry=manifest.entries[t.id+"-"+suffix];
+        return entry&&entry.url&&entry.qaStatus==="passed"?String(entry.url):"";
+      }).filter(Boolean);
+      if(!clips.length)return complete(false);
+      return new Promise(function(resolve){
+        var index=0,played=false;
+        function advance(){
+          if(playbackToken!==token){resolve(false);return}
+          if(typeof opts.stillValid==="function"&&!opts.stillValid()){stop();resolve(false);return}
+          if(index>=clips.length){resolve(complete(played));return}
+          var url=clips[index++];
+          termPlayer.onended=advance;
+          termPlayer.onerror=advance;
+          termPlayer.src=url;
+          try{termPlayer.load()}catch(_){}
+          try{
+            var result=termPlayer.play();
+            played=true;
+            if(result&&result.catch)result.catch(advance);
+          }catch(_){advance()}
+        }
+        advance();
+      });
+    }).catch(function(){return complete(false)});
+  }
+  window.addEventListener("pagehide",stop);
+  document.addEventListener("visibilitychange",function(){if(document.hidden)stop()});
+  window.DARKidsTermLearning={find:find,render:render,terms:TERMS,playFor:playFor,stop:stop,loadAudioManifest:loadAudioManifest};
 })();
