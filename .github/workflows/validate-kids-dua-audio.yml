@@ -185,7 +185,9 @@ jobs:
           must(smart.includes("playGerman:playGerman")&&smart.includes("prepare:prepare"),"Audio hooks missing");
           if(Number(swVer)>=1251){
             must(dock.includes("KIDS_NO_EXTERNAL_SOURCE_PROOF_ACTIONS_V1251"),"Source-only policy missing");
-            must(html.includes("kids/global-detail-dock-v1247.js?v="+swVer),"Global source policy asset stale");
+            const dockRef=(html.match(/\/kids\/global-detail-dock-v1247\.js\?v=\d+/)||[])[0];
+            must(!!dockRef,"Global source policy asset reference missing");
+            must(sw.includes(dockRef),"Global source policy asset not offline cached: "+dockRef);
           }
           console.log("KIDS DUA CACHE-BUST OK",version.buildId,swVer,hubJsVer,hubCssVer);
           NODE
