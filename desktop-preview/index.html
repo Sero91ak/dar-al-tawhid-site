@@ -2301,12 +2301,40 @@ button,input,select{font:inherit}
 (function(){
  try{
   window.__darEarlyInstallPrompt=window.__darEarlyInstallPrompt||null;
+  window.__darInstallPromptBusy=false;
   window.addEventListener("beforeinstallprompt",function(event){
    try{
     event.preventDefault();
     window.__darEarlyInstallPrompt=event;
+    window.dispatchEvent(new CustomEvent("dar:pwa-install-ready"));
    }catch(e){}
   },{capture:true});
+
+  // Direct one-tap installer: runs before the SPA/router handlers so Chrome keeps
+  // the original user activation for beforeinstallprompt.prompt().
+  document.addEventListener("click",function(event){
+   try{
+    var target=event.target&&event.target.closest?event.target.closest("[data-dar-pwa-install]"):null;
+    if(!target||window.__darInstallPromptBusy)return;
+    var promptEvent=window.__darEarlyInstallPrompt;
+    if(!promptEvent)return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    window.__darInstallPromptBusy=true;
+    promptEvent.prompt();
+    Promise.resolve(promptEvent.userChoice).then(function(choice){
+     window.__darEarlyInstallPrompt=null;
+     window.__darInstallPromptBusy=false;
+     var outcome=choice&&choice.outcome?choice.outcome:"dismissed";
+     window.dispatchEvent(new CustomEvent("dar:pwa-install-choice",{detail:{outcome:outcome}}));
+    }).catch(function(){
+     window.__darEarlyInstallPrompt=null;
+     window.__darInstallPromptBusy=false;
+    });
+   }catch(eClick){
+    window.__darInstallPromptBusy=false;
+   }
+  },true);
  }catch(eEarly){}
  try{
   var allowed={"type-creme-ar":1,"emblem-creme-petrol":1,"emblem-nachtblau":1,"emblem-schwarzgold":1,"type-anthrazit-ar":1,"type-anthrazit-fein":1,"type-creme":1,"type-weiss-ar":1,"type-schwarz-rund":1,"type-schwarz-ar":1,"type-schwarz":1,"type-navy-ar":1,"type-navy":1,"type-bordeaux-ar":1,"type-bordeaux":1,"type-gruen-ar":1,"type-gruen":1,"type-schwarz-ar2":1};
@@ -2321,7 +2349,7 @@ button,input,select{font:inherit}
    }).then(function(){
     var android=/\bAndroid\b/i.test(String(navigator.userAgent||""));
     if(!android||navigator.serviceWorker.controller)return;
-    var key="dar_pwa_sw_control_reload_v1";
+    var key="dar_pwa_sw_control_reload_v2";
     try{
      if(sessionStorage.getItem(key)==="1")return;
      sessionStorage.setItem(key,"1");
@@ -2395,10 +2423,29 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
 </head>
 <style id="dar-touch-active-fix">
 @media (hover:none) and (pointer:coarse){
-  a:active,button:active,[role="button"]:active,.desktop-link:active,.more-row:active,.category-card:active,.feature-card:active{
+  html,body,a,button,[role="button"],summary,[tabindex],label{
+    -webkit-tap-highlight-color:rgba(0,0,0,0)!important;
+  }
+  a:focus,button:focus,[role="button"]:focus,summary:focus,[tabindex]:focus{
+    outline:none!important;
+  }
+  a:active,button:active,[role="button"]:active,.desktop-link:active,.more-row:active,.category-card:active,.feature-card:active,.header-action:active,.main-nav a:active{
     filter:none!important;
+    opacity:1!important;
     box-shadow:none!important;
-    background-image:none!important;
+    transform:none!important;
+  }
+  a:active::before,a:active::after,
+  button:active::before,button:active::after,
+  [role="button"]:active::before,[role="button"]:active::after,
+  .desktop-link:active::before,.desktop-link:active::after,
+  .more-row:active::before,.more-row:active::after,
+  .category-card:active::before,.category-card:active::after,
+  .feature-card:active::before,.feature-card:active::after{
+    opacity:0!important;
+    box-shadow:none!important;
+    filter:none!important;
+    background:transparent!important;
   }
 }
 </style>
@@ -2827,6 +2874,16 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
   document.documentElement.classList.add("dar-pwa-standalone");
   darPwaHint("Web-App ist installiert.");
   darPwaToast("DĀR AL TAWḤĪD wurde als Web-App installiert.")
+ });
+ window.addEventListener("dar:pwa-install-choice",function(ev){
+  var outcome=ev&&ev.detail&&ev.detail.outcome;
+  darDeferredPwaPrompt=null;
+  if(outcome==="accepted"){
+   darPwaHint("Installation bestätigt.");
+   darPwaToast("Installation bestätigt. Android fügt die Web-App jetzt hinzu.");
+  }else{
+   darPwaHint("Installation wurde nicht bestätigt.");
+  }
  });
  async function darInstallDesktopPwa(){
   if(darPwaStandalone()){
