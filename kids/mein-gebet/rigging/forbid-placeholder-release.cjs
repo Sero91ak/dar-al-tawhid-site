@@ -10,6 +10,7 @@ const fs=require("node:fs");
 const path=require("node:path");
 const crypto=require("node:crypto");
 const {parseGLB,validateDocument}=require("./validate-glb.cjs");
+const {validateAnimationBytes}=require("./validate-glb-binary.cjs");
 const base=__dirname;
 function validateIdentity(gltf,identity,technical,modelFingerprint={},expectedSubject="original_boy") {
   const errors=[];
@@ -57,6 +58,9 @@ function main(argv) {
     const identity=JSON.parse(fs.readFileSync(path.join(base,"original-boy-identity-lock-v1.json"),"utf8"));
     const acceptance=JSON.parse(fs.readFileSync(path.join(base,"rig-acceptance-v1.json"),"utf8"));
     const technical=validateDocument(parsed.gltf,acceptance,"boy",{fileBytes:data.length,hasBin:parsed.hasBin});
+    const samplerAudit=validateAnimationBytes(parsed.gltf,parsed.bin);
+    if(!samplerAudit.valid){technical.errors.push(...samplerAudit.errors);technical.structureValid=false;}
+    technical.animationSamplerBytesVerified=samplerAudit.valid;
     const result=validateIdentity(parsed.gltf,identity,technical,{sha256:crypto.createHash("sha256").update(data).digest("hex"),bytes:data.length});
     process.stdout.write(JSON.stringify(result,null,2)+"\n");
     return result.readyForProduction ? 0 : 1;
