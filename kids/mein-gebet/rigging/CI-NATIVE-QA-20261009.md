@@ -106,3 +106,17 @@ Der originale Fünf-Ansichten-Messcode `qa_original_fiveview_v3.py` verwendete b
 Ein zusätzlicher Blick auf GitHub-Releases und frühere CI-Artefakte ergab **kein authentisches V7.7-GLB**. Auch die gezielte Suche nach den exakten V7.7-Dateinamen im verbundenen Google Drive brachte keinen Treffer. Die in der Library vorhandene ZIP ließ sich unverändert nicht als Rohbytes materialisieren. **Deshalb wurden keine echten fünf IoU-Messwerte neu berechnet und keine Modellkonturen geändert.**
 
 **Freigabe weiterhin NEIN:** Die bisherige nominal unkalibrierte 3/4-Messung 83,245 % bleibt ein historischer V7.7-Baselinewert, nicht eine neue Messung mit dem korrigierten Decoder. Sobald die echten, unveränderten GLB-/PNG-Bytes verfügbar werden, müssen alle fünf Blickwinkel mit der korrigierten Ausleselogik erneut ermittelt werden; menschliche Originaltreue- und Gebetspositionsabnahme sind unabhängig davon erforderlich.
+
+## 09.10.2026 – Korrekte aktive glTF-Szene und Messmethoden-Versionierung
+
+**Aktueller CI-Lauf:** https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37948050710 – geprüft auf `bdf4656db028b4def2d26017ccd19aa2dfad844c`, erfolgreich.
+
+**210/210 native automatische Tests:** 39 Rigstruktur + 20 Animations-BIN + 27 Geometrie-BIN + 12 End-to-End-GLBs + 20 numerische Gelenklängen + 18 Release-Audits + 12 Rig-Freeze + 7 Kamera-Unit-Tests + **19 aktive Szene-/Morph-/Projektions-Tests** + **21 GLB-Zugriff-/Stride-Tests** + 15 sichere V7.7-Archive-Tests.
+
+Im bisherigen Projektions-Vergleich wurden rohe Vertexlisten zusammengestellt, ohne zu prüfen, ob Meshknoten zur **aktiven glTF-Szene** gehören. `geometry_projection_preflight.py` weist daher jetzt eine GLB-Datei zurück, wenn Meshknoten durch die aktive `scene` und deren Rootknoten nicht erreichbar sind. Das vermeidet falsche Konturen durch Geometrie in anderen Szenen; fünf weitere Tests belegen korrekte und manipulierte Szenezuordnungen.
+
+**Wichtig für die historische Vergleichbarkeit:** Die Messmethoden-ID ist jetzt ausdrücklich `fiveview-cropped-grabcut-seeded-v4-stride-scene-safe-20261009`; der Winkeltest nutzt `v77-locked-angle-sweep-diagnostic-v2-stride-scene-safe`. Die fünf historischen V7.7-Werte aus der alten v3-Methode sind **nicht** stillschweigend zu Resultaten von v4 umdeklariert worden. Bis zur erneuten tatsächlichen Berechnung auf dem exakten GLB plus Original-PNG bleibt die neue v4-Ergebnisreihe **nicht verfügbar** (null).
+
+Die genaue V7.7-Archivdatei wurde in GitHub-Releases/Actions-Artefakten und unter ihren spezifischen Namen im angebundenen Google Drive **nicht gefunden**; die Library-ZIP ist sichtbar, aber die Plattform gibt weiterhin keinen autorisierten Raw-Byte-Pfad aus. Folglich gab es hier keine neue reale IoU-Messung, kein Sculpt und keine Bildgeneration.
+
+**Freigabe weiter gesperrt, GitHub PR #825 weiterhin Draft ohne Merge/Deploy.**
