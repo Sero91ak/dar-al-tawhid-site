@@ -56,6 +56,23 @@ assert(!generator.includes('value="[slowly] "+value.rstrip(".")+"."'),"Synthetic
 assert(generator.includes('"speed":0.88')&&generator.includes('"speed":0.92'),"Arabic native speed profiles missing");
 assert(generator.includes("|| 'pause' }}"),"Non-voice code push can accidentally synthesize whole libraries");
 assert(generator.includes("fetch-depth: 2"),"Voice scope change detection cannot resolve merge parent");
+assert(generator.includes("model_id==\"eleven_v4\""),"Expected V4-only voice setting filter");
+assert(generator.includes("models_by_text=word_models"),"Approved per-word V3 model routing missing");
+assert(generator.includes("allow_reviewed_legacy=True"),"Existing word audio must be preserved");
+assert(generator.includes("if len(missing)>limit:"),"Small batch spending cap missing");
+const modelPolicy=JSON.parse(read("kids/data/dua-audio-model-policy.json"));
+assert.equal(modelPolicy.voiceProfileId,"serhat-owner-voice-2026");
+assert.equal(modelPolicy.defaultWordModel,"eleven_v4");
+assert.equal(modelPolicy.comparisonWordModel,"eleven_v3");
+assert.equal(modelPolicy.allowAutomaticV3Promotion,false);
+assert(Array.isArray(modelPolicy.approvedV3Words),"V3 approval list malformed");
+assert(modelPolicy.approvedV3Words.length<=8,"Too many V3 approvals per batch");
+for(const item of modelPolicy.approvedV3Words){
+  assert.equal(item.model,"eleven_v3");
+  assert.equal(item.status,"human-audio-approved");
+  assert(typeof item.arabic==="string"&&item.arabic.trim(),"V3 approval lacks Arabic text");
+  assert(typeof item.approvedBy==="string"&&item.approvedBy.trim(),"V3 approval lacks responsible reviewer");
+}
 assert(generator.includes("dua-arabic-native-fusha-word-v5-natural-20261009"),"Word render revision missing");
 assert(generator.includes("dua-arabic-native-fusha-slow-v4-natural-20261009"),"Slow render revision missing");
 
