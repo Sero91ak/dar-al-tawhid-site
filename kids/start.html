@@ -2905,7 +2905,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.09.06</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.09.07</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3295,7 +3295,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v185-dua-audio1290";
+const KIDS_BUILD_ID="kids-shell-v186-dua-center1291";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6573,15 +6573,15 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/content-studio-feed.js?v=studio8"></script>
 <script src="/kids/owner-voice.js?v=8"></script>\n<script src="/kids/dua-word-meanings-v1.js?v=2"></script>
 <script src="/kids/dua-phonetic-alignment-v1.js?v=1"></script>
-<script src="/kids/dua-smart-learn.js?v=1290"></script>
+<script src="/kids/dua-smart-learn.js?v=1291"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v185-dua-audio1290";
+  var KIDS_BUILD_ID="kids-shell-v186-dua-center1291";
   // Stable start: do not reload a visible app when a service worker takes control.
   // The next navigation uses network-first and receives the latest release.
   if("serviceWorker" in navigator){
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1290",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1291",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     },{once:true});
@@ -11167,7 +11167,7 @@ html[data-view="stories"] #view-stories > :last-child{
 
 <link rel="stylesheet" href="/kids/dua-layout-v1259.css?v=1261" data-kids-dua-layout="1259">
 <link rel="stylesheet" href="/kids/dua-learn-cinema-v1261.css?v=1261" data-kids-dua-cinema="1261">
-<link rel="stylesheet" href="/kids/dua-learn-trilingual-v1282.css?v=1285" data-kids-dua-trilingual="1282">
+<link rel="stylesheet" href="/kids/dua-learn-trilingual-v1282.css?v=1291" data-kids-dua-trilingual="1282">
 <link rel="stylesheet" href="/kids/dua-learn-elastic-v1286.css?v=1286" data-kids-dua-elastic="1286">
 <style id="kids-salah-native-old-hero-guard-v1274">
 /* KIDS_SALAH_DIRECT_FALLBACK_V1274: valid even if old cached external CSS is served. */

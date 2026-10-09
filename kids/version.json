@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v185-dua-audio1290",
-  "label": "KIDS · V1.09.06",
-  "releasedAt": "2026-10-09T18:27:57.893Z",
-  "note": "V1.09.06: Audio-Qualitätskorrektur für Duʿāʾ-Lernmodus. Für langsam hören wird die flüssige Fuṣḥā-Masteraufnahme gleichmäßig mit 0,83-facher Geschwindigkeit und Tonhöhenkorrektur verwendet; Wort-für-Wort-Wiedergabe nutzt vorbereitete Audiopuffer, konservativen Stilleschnitt und feste 65-ms-Wortübergänge. Wortfokus synchron, iOS-Fallback erhalten. Die Original-Audiodateien und arabischen Texte bleiben unverändert.",
+  "buildId": "kids-shell-v186-dua-center1291",
+  "label": "KIDS · V1.09.07",
+  "releasedAt": "2026-10-09T18:46:00Z",
+  "note": "KIDS V1.09.07: Duʿāʾ Lernmodus zentriert kurze Duʿāʾs, lässt mittlere aus der Mitte nach oben und unten wachsen und nutzt bei langen Duʿāʾs den ganzen Leseraum. Größere dynamisch gemessene arabische, lateinische und deutsche Schrift bei unveränderten Audio-Bedientasten.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1290",
+    "serviceWorkerCache": "v1291",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -1261,7 +1261,8 @@
     "duaTrilingualLearning": "v1285",
     "duaWordMeaningReviewCount": 120,
     "duaElasticCenter": "v1286",
-    "duaSeamlessAudio": "v1290"
+    "duaSeamlessAudio": "v1290",
+    "duaAdaptiveCenter": "v1291"
   },
   "updatedAt": "2026-10-08T21:07:54.808Z",
   "deployTrigger": "kids-startup-stability-v1278",
