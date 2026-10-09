@@ -214,6 +214,20 @@
     try{shell.scrollTo({top:0,left:0,behavior:"auto"})}catch(_){shell.scrollTop=0}
   }
 
+  /* On a genuine first open, WKWebView/Safari may restore the document
+     viewport even though the app's internal .shell is already at top=0.
+     Clear the document offset only while the Today screen is unobstructed.
+     No synthetic scrolled-to-section entry and no animated jump. */
+  function resetLaunchViewport(){
+    var today=q("#view-today");
+    if(!today||!today.classList.contains("active")||surfaceIds().length)return;
+    var scrolling=document.scrollingElement;
+    var y=Math.max(0,Number(window.scrollY)||0,Number(scrolling&&scrolling.scrollTop)||0);
+    if(y<=1)return;
+    try{window.scrollTo(0,0)}catch(_){}
+    if(scrolling)scrolling.scrollTop=0;
+  }
+
   function descriptorFor(target){
     if(!target||!target.closest)return null;
     var el=target.closest("button,a,[role='button'],[data-go],[data-story],[data-ps-id],[data-ms-id],[data-sy-id],[data-dl-id],[data-gh-id],[data-surah],[data-quran-ref]");
@@ -737,6 +751,7 @@
     if(shell){
       try{shell.scrollTo({top:0,left:0,behavior:"auto"})}catch(_){shell.scrollTop=0}
     }
+    resetLaunchViewport();
     stack=[{desc:{type:"tab",target:activeTab()},signature:signature(),scrolls:captureScrolls()}];
     index=0;
     document.addEventListener("click",onClickCapture,true);
@@ -757,7 +772,7 @@
       lockHomeGeometry(false);
       var active=activeTab();
       if(!surfaceIds().length&&active)resetMainTop();
-      if(active==="today")armHome();
+      if(active==="today"){resetLaunchViewport();armHome();}
     });
     window.addEventListener("orientationchange",function(){
       root.style.removeProperty("--kids-home-hero-height-fixed");
