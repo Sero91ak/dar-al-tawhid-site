@@ -630,6 +630,7 @@
   }
 
   function stopAudio() {
+    try { window.DARKidsTermLearning?.stop?.(); } catch (_) {}
     try {
       if (window.DARDuaSmartLearn?.stop) window.DARDuaSmartLearn.stop();
     } catch (_) {}
@@ -702,27 +703,28 @@
     if (!d || !hasReadyAudio(d)) return;
     stopAudio();
     const text = String(d.audioGermanText || ((d.childPrompt || "") + " " + (d.meaning || ""))).replace(/\s+/g, " ").trim();
-    const smart = window.DARDuaSmartLearn;
-    const fallback = () => {
-      if (d.audioGermanUrl) {
-        fallbackAudio = new Audio(String(d.audioGermanUrl));
-        fallbackAudio.playsInline = true;
-        fallbackAudio.preload = "auto";
-        fallbackAudio.play().catch(() => {});
-        return;
-      }
-      if (window.DARKidsOwnerVoice?.play) {
-        window.DARKidsOwnerVoice.play(text, { source: "kids-dua-hub-german" });
-      }
+    const glossary = window.DARKidsTermLearning;
+    const isCurrent = () => detailItem === d && !!q("#duaHubDetail")?.classList.contains("open");
+    const explainTerms = () => {
+      if (!isCurrent() || !glossary?.playFor) return;
+      glossary.playFor(
+        [d.title, d.childPrompt, text, d.meaning].filter(Boolean).join(" "),
+        { forceDua: true, age: activeAge(), max: 2, stillValid: isCurrent }
+      ).catch(() => {});
     };
-    if (smart && typeof smart.playGerman === "function") {
-      try {
-        const started = smart.playGerman(d);
-        Promise.resolve(started).then(ok => { if (ok === false) fallback(); }).catch(fallback);
-      } catch (_) { fallback(); }
+    // Die geprüfte vorhandene Erklärung beginnt unmittelbar beim Tippen.
+    // Danach folgt die separat vertonte arabisch-deutsche Worterklärung.
+    if (d.audioGermanUrl) {
+      fallbackAudio = new Audio(String(d.audioGermanUrl));
+      fallbackAudio.playsInline = true;
+      fallbackAudio.preload = "auto";
+      fallbackAudio.onended = explainTerms;
+      fallbackAudio.play().catch(() => {});
       return;
     }
-    fallback();
+    if (window.DARKidsOwnerVoice?.play) {
+      window.DARKidsOwnerVoice.play(text, { source: "kids-dua-hub-german", onended: explainTerms });
+    }
   }
 
   function bindView() {
