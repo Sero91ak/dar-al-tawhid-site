@@ -5,11 +5,11 @@
   "totalInspected": 50,
   "hadithCount": 30,
   "atharCount": 20,
-  "hadithSharhVerified": 7,
-  "hadithSharhOpen": 23,
-  "atharAttributionVerified": 0,
-  "atharAttributionOpen": 20,
-  "openTotal": 43,
+  "hadithSharhVerified": 12,
+  "hadithSharhOpen": 18,
+  "atharAttributionVerified": 1,
+  "atharAttributionOpen": 19,
+  "openTotal": 37,
   "policy": {
     "hadith": "Authentischer Primärbericht + direkt belegbarer früher arabischer Kommentar",
     "athar": "Kein Šarḥ erforderlich; originaler Isnād/Attribution einzeln verifizieren",
@@ -33,7 +33,7 @@
       "commit": "cb9ad6a05ee8c5d2724942909056423cb60e7f33"
     }
   ],
-  "nextAction": "23 Hadith-Kommentare und 20 Athar-Attributionen einzeln prüfen, anschließend 0543–0592. Verifizierten digitalen Band/Seitenbezug und Druckedition getrennt behandeln.",
+  "nextAction": "Offen 18 Ḥadīṯ-Kommentare sowie 19 Āṯār-Zuschreibungen. Vor neuer Freigabe Quellen, Isnād, mögliche Überliefererverwechslungen und Druckedition prüfen; danach HAD-0543–0592.",
   "entries": [
     {
       "id": "HAD-0493",
@@ -74,8 +74,8 @@
       "id": "HAD-0498",
       "recordType": "athar",
       "sharh": "not-required",
-      "attribution": "needs-review",
-      "sourceAudit": "Originalisnād in Muqaddimah Ṣaḥīḥ Muslim direkt dokumentiert; unabhängige Kettenprüfung noch offen."
+      "attribution": "verified",
+      "sourceAudit": "Sahih Muslim Muqaddimah, digital Bd.1 S.16: Muḥammad ibn ʿAbdullāh ibn Qahzāḏ → ʿAbdān ibn ʿUṯmān → ʿAbdullāh ibn al-Mubārak; vollständiger Wortlaut in HAD."
     },
     {
       "id": "HAD-0499",
@@ -164,9 +164,9 @@
     {
       "id": "HAD-0511",
       "recordType": "hadith",
-      "sharh": "open-source-review",
+      "sharh": "verified",
       "attribution": null,
-      "sourceAudit": "Genaue Originalquelle und klassischen arabischen Direkt-Šarḥ einschließlich Ausgabe nachprüfen"
+      "sourceAudit": "Falsche Überliefererzeile anhand arabischer Primärquelle korrigiert; Primärnummer und direkter klassischer Kommentar mit Online-Werkpagination im HAD-Datensatz; Druckedition offen."
     },
     {
       "id": "HAD-0512",
@@ -199,16 +199,16 @@
     {
       "id": "HAD-0516",
       "recordType": "hadith",
-      "sharh": "open-source-review",
+      "sharh": "verified",
       "attribution": null,
-      "sourceAudit": "Genaue Originalquelle und klassischen arabischen Direkt-Šarḥ einschließlich Ausgabe nachprüfen"
+      "sourceAudit": "Primärnummer und direkter klassischer Kommentar mit Online-Werkpagination im HAD-Datensatz; Druckedition offen."
     },
     {
       "id": "HAD-0517",
       "recordType": "hadith",
-      "sharh": "open-source-review",
+      "sharh": "verified",
       "attribution": null,
-      "sourceAudit": "Genaue Originalquelle und klassischen arabischen Direkt-Šarḥ einschließlich Ausgabe nachprüfen"
+      "sourceAudit": "Primärnummer und direkter klassischer Kommentar mit Online-Werkpagination im HAD-Datensatz; Druckedition offen."
     },
     {
       "id": "HAD-0518",
@@ -234,16 +234,16 @@
     {
       "id": "HAD-0521",
       "recordType": "hadith",
-      "sharh": "open-source-review",
+      "sharh": "verified",
       "attribution": null,
-      "sourceAudit": "Genaue Originalquelle und klassischen arabischen Direkt-Šarḥ einschließlich Ausgabe nachprüfen"
+      "sourceAudit": "Primärnummer und direkter klassischer Kommentar mit Online-Werkpagination im HAD-Datensatz; Druckedition offen."
     },
     {
       "id": "HAD-0522",
       "recordType": "hadith",
-      "sharh": "open-source-review",
+      "sharh": "verified",
       "attribution": null,
-      "sourceAudit": "Genaue Originalquelle und klassischen arabischen Direkt-Šarḥ einschließlich Ausgabe nachprüfen"
+      "sourceAudit": "Falsche Überliefererzeile anhand arabischer Primärquelle korrigiert; Primärnummer und direkter klassischer Kommentar mit Online-Werkpagination im HAD-Datensatz; Druckedition offen."
     },
     {
       "id": "HAD-0523",
