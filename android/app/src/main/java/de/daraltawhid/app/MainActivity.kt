@@ -51,6 +51,9 @@ class MainActivity : AppCompatActivity() {
         override fun run() {
             if (isFinishing || isDestroyed || !::webView.isInitialized) return
             injectBridge()
+            if (DarPush.subscriptionId().isNotBlank() && DarPush.pushToken().isNotBlank()) {
+                pushRefreshRemaining = 0
+            }
             if (pushRefreshRemaining > 0) {
                 pushRefreshRemaining--
                 pushRefreshHandler.postDelayed(this, 2_000L)
@@ -286,7 +289,9 @@ class MainActivity : AppCompatActivity() {
                   root.classList.add("dar-android-native-app");
                   root.classList.add("is-android");
                 }
-                window.Notification=window.Notification||function(){};
+                window.Notification=window.Notification||function(){
+                  throw new Error("Native Android notification must be delivered by Android/OneSignal");
+                };
                 function androidPermission(){return window.DAR_ANDROID_POST_NOTIFICATIONS_GRANTED === true ? "granted" : "denied"}
                 try{Object.defineProperty(window.Notification,"permission",{configurable:true,get:androidPermission})}catch(e){}
                 window.Notification.requestPermission=function(){return window.requestNotificationPermission()};
@@ -321,9 +326,13 @@ class MainActivity : AppCompatActivity() {
                     return {subscriptionId:state.subscriptionId,token:state.token,optedIn:state.optedIn,ready:state.ready};
                   };
                 }
-                var hideSave=document.createElement("style");
-                hideSave.textContent="html.dar-android-native-app #footerAppSave,html.dar-android-native-app .footer-app-save,html.dar-android-native-app .footer-action-save{display:none!important}html.dar-android-native-app .top-shell,html.dar-android-native-app .header,html.dar-android-native-app .header.theme-hero-surface,html.dar-android-native-app .sf-top,html.dar-android-native-app .qov-header,html.dar-android-native-app .app-bar,html.dar-android-native-app .view-head,html.dar-android-native-app .settings-page-head{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;filter:none!important;background:var(--quran-page-bg,var(--theme-feed-bg,var(--dar-edge-fill,var(--page-cover,var(--outer-bg-flat,var(--bg,#050706))))))!important;background-image:none!important}html.dar-android-native-app .top-edge-fade,html.dar-android-native-app #topEdgeFade,html.dar-android-native-app .top-swim-aura,html.dar-android-native-app #topSwimAura{display:none!important;visibility:hidden!important;opacity:0!important;height:0!important;background:none!important;filter:none!important;pointer-events:none!important}html.dar-android-native-app .top-shell:before,html.dar-android-native-app .top-shell:after,html.dar-android-native-app .header:before,html.dar-android-native-app .header:after,html.dar-android-native-app .qov-header:before,html.dar-android-native-app .qov-header:after,html.dar-android-native-app .app-bar:before,html.dar-android-native-app .app-bar:after{content:none!important;display:none!important;opacity:0!important;background:none!important;filter:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}";
-                document.documentElement.appendChild(hideSave);
+                var hideSave=document.getElementById("dar-android-native-chrome-patch");
+                if(!hideSave){
+                  hideSave=document.createElement("style");
+                  hideSave.id="dar-android-native-chrome-patch";
+                  hideSave.textContent="html.dar-android-native-app #footerAppSave,html.dar-android-native-app .footer-app-save,html.dar-android-native-app .footer-action-save{display:none!important}html.dar-android-native-app .top-shell,html.dar-android-native-app .header,html.dar-android-native-app .header.theme-hero-surface,html.dar-android-native-app .sf-top,html.dar-android-native-app .qov-header,html.dar-android-native-app .app-bar,html.dar-android-native-app .view-head,html.dar-android-native-app .settings-page-head{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;filter:none!important;background:var(--quran-page-bg,var(--theme-feed-bg,var(--dar-edge-fill,var(--page-cover,var(--outer-bg-flat,var(--bg,#050706))))))!important;background-image:none!important}html.dar-android-native-app .top-edge-fade,html.dar-android-native-app #topEdgeFade,html.dar-android-native-app .top-swim-aura,html.dar-android-native-app #topSwimAura{display:none!important;visibility:hidden!important;opacity:0!important;height:0!important;background:none!important;filter:none!important;pointer-events:none!important}html.dar-android-native-app .top-shell:before,html.dar-android-native-app .top-shell:after,html.dar-android-native-app .header:before,html.dar-android-native-app .header:after,html.dar-android-native-app .qov-header:before,html.dar-android-native-app .qov-header:after,html.dar-android-native-app .app-bar:before,html.dar-android-native-app .app-bar:after{content:none!important;display:none!important;opacity:0!important;background:none!important;filter:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}";
+                  document.documentElement.appendChild(hideSave);
+                }
                 window.dispatchEvent(new Event("darAndroidBridgeUpdated"));
               }catch(e){}
             })();
