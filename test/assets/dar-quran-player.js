@@ -1079,6 +1079,8 @@
     var pausedEl = document.getElementById("darQuranPlayerAudio");
     var internalPause = !!engine.internalPausePending;
     engine.internalPausePending = false;
+    // A delayed internal pause event must not turn a newly playing track into a fake paused state.
+    if (internalPause && pausedEl && !pausedEl.paused) return;
     if (!internalPause && !(pausedEl && pausedEl.ended) && window.__DAR_ADHAN_ACTIVE !== true) {
       engine.wantPlay = false;
     }
