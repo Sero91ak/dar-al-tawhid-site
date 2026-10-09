@@ -321,17 +321,29 @@ class MainActivity : AppCompatActivity() {
                 window.hasNotificationApi=function(){return true};
                 window.getNotificationPermission=function(){return nativeNotificationState};
                 window.requestNotificationPermission=function(){return Promise.resolve(nativeNotificationState)};
+                // Web Push service workers are not used in this native WebView.
+                // Never report push enabled unless Android OS permission AND
+                // a genuine OneSignal subscription ID are both present.
                 function nativeReady(){
-                  return {ready:true,optedIn:true,subscriptionId:window.DAR_ANDROID_ONESIGNAL_ID||"",token:window.DAR_ANDROID_PUSH_TOKEN||"",os:window.OneSignal||{}};
+                  var permission=(nativeNotificationState==="granted");
+                  var id=String(window.DAR_ANDROID_ONESIGNAL_ID||"");
+                  var pushToken=String(window.DAR_ANDROID_PUSH_TOKEN||"");
+                  var registered=!!id;
+                  return {ready:permission&&registered,optedIn:permission&&registered,
+                    permission:permission?"granted":"denied",subscriptionId:id,
+                    token:pushToken,os:window.OneSignal||{},platform:"android"};
                 }
                 window.waitForPushSubscriptionReady=function(){return Promise.resolve(nativeReady())};
-                window.waitForPushOptIn=function(){return Promise.resolve(true)};
-                window.ensureOneSignalPushSubscription=function(){return Promise.resolve(true)};
+                window.waitForPushOptIn=function(){return Promise.resolve(nativeReady().optedIn)};
+                window.ensureOneSignalPushSubscription=function(){return Promise.resolve(nativeReady().ready)};
                 window.ensureOneSignalServiceWorkerReady=function(){return Promise.resolve(null)};
                 window.getOneSignalServiceWorkerRegistration=function(){return Promise.resolve(null)};
                 if(typeof readOneSignalPushSubscriptionState==="function"){
                   readOneSignalPushSubscriptionState=function(){
-                    return {subscriptionId:window.DAR_ANDROID_ONESIGNAL_ID||"",token:window.DAR_ANDROID_PUSH_TOKEN||"",optedIn:true,ready:!!window.DAR_ANDROID_ONESIGNAL_ID};
+                    var status=nativeReady();
+                    return {subscriptionId:status.subscriptionId,token:status.token,
+                      optedIn:status.optedIn,ready:status.ready,
+                      permission:status.permission,platform:"android"};
                   };
                 }
                 var hideSave=document.createElement("style");
