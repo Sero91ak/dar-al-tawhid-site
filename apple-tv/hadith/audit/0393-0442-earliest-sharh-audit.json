@@ -3,9 +3,9 @@
   "range": "HAD-0393–HAD-0442",
   "auditedDate": "2026-10-09",
   "totalInspected": 50,
-  "hadithCount": 28,
-  "atharCount": 22,
-  "verifiedSharh": 28,
+  "hadithCount": 29,
+  "atharCount": 21,
+  "verifiedSharh": 29,
   "openSharh": 0,
   "status": "hadith-sharh-complete-athar-attribution-in-progress",
   "policy": {
@@ -46,7 +46,8 @@
     "HAD-0437",
     "HAD-0438",
     "HAD-0439",
-    "HAD-0440"
+    "HAD-0440",
+    "HAD-0441"
   ],
   "issues": [
     {
@@ -101,9 +102,15 @@
       "kind": "edition-backfill",
       "status": "open",
       "description": "Einige Autorenwerke und Kapitel sind direkt nachgewiesen, die genaue Druckedition und Einzelseite nicht für alle rekonstruiert. Kein Printseiten-Nachweis behaupten."
+    },
+    {
+      "id": "HAD-0441",
+      "kind": "record-type-correction",
+      "status": "resolved",
+      "description": "Mawqūf/Āṯar-Fehlklassifikation korrigiert: ṣaḥīḥ marfūʿ Buḫārī Nr.828 und klassischer Ibn-Raǧab-Šarḥ 2/281."
     }
   ],
-  "nextAction": "28/28 Ḥadīṯ-Šarḥe verifiziert. 5/22 Āṯār final verifiziert, 17 noch offen. HAD-0408, HAD-0409 und HAD-0442 mit genauem klassischem arabischem Wortlaut statt Mischparaphrasen; Kettenprüfung separat weiterführen.",
+  "nextAction": "HAD-0441 als marfūʿ-Buḫārī Nr.828 statt irreführendem 'athar' berichtigt; direkter Šarḥ Ibn Raǧab 2/281 ergänzt. Insgesamt 29/29 Ḥadīṯe mit Šarḥ. 5/21 Āṯār-Zuschreibungen verifiziert und 16 offen. Noch ausstehende Quellen nach arabischen Primärtexten und Isnāden einzeln prüfen; keine Editionsbehauptungen.",
   "entries": [
     {
       "id": "HAD-0393",
@@ -464,10 +471,12 @@
     },
     {
       "id": "HAD-0441",
-      "recordType": "athar",
-      "sharh": "not-required",
-      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis.",
-      "attribution": "needs-review"
+      "recordType": "hadith",
+      "sharh": "verified",
+      "statusNote": "Ehemals als Āṯar fehlklassifiziert: Ḥadīṯ des Abū Ḥumayd als marfūʿ in Ṣaḥīḥ al-Buḫārī Nr. 828 mit voller Kette, bereits vor Nr. 391 als Kapitelhinweis. Direkter klassischer Šarḥ Ibn Raǧab Fatḥ al-Bārī 2/281 im HAD-Datensatz.",
+      "primarySourceNumber": "828",
+      "primarySourceVerified": true,
+      "primarySourceCorrected": true
     },
     {
       "id": "HAD-0442",
@@ -484,6 +493,6 @@
   "atharAttributionOpen": 20,
   "openTotal": 20,
   "reviewPolicyUpdate": "Projektregel AGENTS.md 2026-10-09: Hadith erfordert verifizierten Šarḥ; Athar kein Šarḥ nötig, aber Authentizitäts-/Isnādprüfung zwingend.",
-  "atharAttributionPending": 17,
+  "atharAttributionPending": 16,
   "atharIsnadLocatedPendingGrading": 6
 }
