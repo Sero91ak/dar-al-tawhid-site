@@ -110,3 +110,7 @@ for (const [id, name, pkg, suffix] of [
 }
 if (published > 0) assert.ok(typeof manifest.publishedAt === "string" && !Number.isNaN(Date.parse(manifest.publishedAt)));
 console.log("ANDROID_SITE_RELEASE_GUARD OK | public=" + published + " | Kids=private-testing");
+
+// Direct install UI contract
+assert.ok(router.includes("syncRouterInstallButtons"), "Direct Android PWA install readiness gate missing");
+assert.ok(router.includes("beforeinstallprompt"), "beforeinstallprompt capture missing");

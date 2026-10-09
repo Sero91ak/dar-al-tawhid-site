@@ -2302,13 +2302,41 @@ button,input,select{font:inherit}
  try{
   window.__darEarlyInstallPrompt=window.__darEarlyInstallPrompt||null;
   window.__darInstallPromptBusy=false;
+  window.__darPwaInstallState=window.__darEarlyInstallPrompt?"ready":"preparing";
+  window.__darSyncInstallButtons=function(){
+   try{
+    var ready=window.__darPwaInstallState==="ready"&&!!window.__darEarlyInstallPrompt;
+    var installed=window.matchMedia&&window.matchMedia("(display-mode: standalone)").matches;
+    document.querySelectorAll("[data-dar-pwa-install]").forEach(function(btn){
+     btn.disabled=installed||!ready;
+     btn.setAttribute("aria-disabled",(installed||!ready)?"true":"false");
+     btn.setAttribute("data-dar-pwa-install-state",installed?"installed":(ready?"ready":"preparing"));
+     if(!btn.dataset.darInstallLabel)btn.dataset.darInstallLabel=btn.textContent||"Web-App installieren";
+     btn.textContent=installed?"Bereits installiert":(ready?btn.dataset.darInstallLabel:"Installation wird vorbereitet …");
+    });
+   }catch(e){}
+  };
   window.addEventListener("beforeinstallprompt",function(event){
    try{
     event.preventDefault();
     window.__darEarlyInstallPrompt=event;
+    window.__darPwaInstallState="ready";
+    window.__darSyncInstallButtons();
     window.dispatchEvent(new CustomEvent("dar:pwa-install-ready"));
    }catch(e){}
   },{capture:true});
+  window.addEventListener("appinstalled",function(){
+   window.__darEarlyInstallPrompt=null;
+   window.__darPwaInstallState="installed";
+   window.__darSyncInstallButtons();
+  });
+  document.addEventListener("DOMContentLoaded",function(){
+   window.__darSyncInstallButtons();
+   try{
+    var mo=new MutationObserver(function(){window.__darSyncInstallButtons()});
+    mo.observe(document.documentElement,{childList:true,subtree:true});
+   }catch(e){}
+  });
 
   // Direct one-tap installer. The native prompt must be invoked synchronously from
   // the original tap; do not await service-worker readiness before prompt().
@@ -2317,18 +2345,22 @@ button,input,select{font:inherit}
     var target=event.target&&event.target.closest?event.target.closest("[data-dar-pwa-install]"):null;
     if(!target)return;
     var promptEvent=window.__darEarlyInstallPrompt;
+    event.preventDefault();
+    event.stopImmediatePropagation();
     if(!promptEvent){
+      window.__darPwaInstallState="preparing";
+      window.__darSyncInstallButtons();
       window.dispatchEvent(new CustomEvent("dar:pwa-install-missing"));
       return;
     }
     if(window.__darInstallPromptBusy)return;
-    event.preventDefault();
-    event.stopImmediatePropagation();
     window.__darInstallPromptBusy=true;
     promptEvent.prompt();
     Promise.resolve(promptEvent.userChoice).then(function(choice){
      window.__darEarlyInstallPrompt=null;
      window.__darInstallPromptBusy=false;
+     window.__darPwaInstallState=choice&&choice.outcome==="accepted"?"installed":"preparing";
+     window.__darSyncInstallButtons();
      var outcome=choice&&choice.outcome?choice.outcome:"dismissed";
      window.dispatchEvent(new CustomEvent("dar:pwa-install-choice",{detail:{outcome:outcome}}));
     }).catch(function(){
@@ -2393,7 +2425,7 @@ html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
 .dar-pwa-home-copy small{display:block;color:#e8c984;font-size:8px;font-weight:850;letter-spacing:.13em}
 .dar-pwa-home-copy strong{display:block;margin:3px 0 2px;font:600 15px/1.2 Georgia,"Times New Roman",serif}
 .dar-pwa-home-copy span{display:block;color:rgba(255,248,232,.72);font-size:9.5px;line-height:1.35}
-.dar-pwa-home-action{flex:0 0 auto;min-height:38px;padding:0 11px;border:1px solid rgba(238,207,141,.34);border-radius:12px;background:#fff8e8;color:#142721;font-size:9px;font-weight:850;cursor:pointer}
+.dar-pwa-home-action{flex:0 0 auto;min-height:38px;padding:0 11px;border:1px solid rgba(238,207,141,.34);border-radius:12px;background:#fff8e8;color:#142721;font-size:9px;font-weight:850;cursor:pointer}.dar-pwa-home-action:disabled,.download-app-btn:disabled{cursor:default;opacity:.62;filter:saturate(.65);pointer-events:none}
 .dar-pwa-home-help{position:absolute;right:10px;top:-22px;color:#f0d89a;font-size:8px;text-decoration:none}
 .download-hub-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .download-app-card{min-width:0;padding:22px;border:1px solid rgba(124,97,45,.2);border-radius:22px;background:linear-gradient(145deg,#fffdf8,#f5f0e6);box-shadow:0 10px 30px rgba(65,48,24,.07)}
@@ -2743,7 +2775,7 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
  function downloads(){
   return intro("downloads")+
   '<section class="section reveal"><div class="section-head"><h2>Apps & Installation</h2><p>Android als Web-App · iPhone & iPad über den App Store</p></div><div class="download-hub-grid">'+
-  '<article class="download-app-card"><div class="download-app-card__head"><span class="download-app-card__icon">'+androidPwaLogo()+'</span><div><div class="kicker">ANDROID · SMARTPHONE & TABLET</div><h2>Web-App installieren</h2></div></div><p>Die DĀR AL TAWḤĪD Website wird direkt als eigenständige App auf deinem Android-Startbildschirm installiert. Keine APK nötig.</p><ol class="download-app-steps"><li>Diese Seite in Chrome, Edge oder Samsung Internet öffnen.</li><li>Auf <b>Web-App installieren</b> tippen.</li><li>Falls kein Dialog erscheint: Browser-Menü öffnen und <b>App installieren</b> oder <b>Zum Startbildschirm hinzufügen</b> wählen.</li></ol><button class="download-app-btn" type="button" data-dar-pwa-install>Web-App installieren</button>'+androidPwaIconPicker()+'<span class="download-app-note" data-dar-pwa-hint>Installiert mit DĀR-Icon und eigenem App-Fenster.</span></article>'+
+  '<article class="download-app-card"><div class="download-app-card__head"><span class="download-app-card__icon">'+androidPwaLogo()+'</span><div><div class="kicker">ANDROID · SMARTPHONE & TABLET</div><h2>Web-App installieren</h2></div></div><p>Die DĀR AL TAWḤĪD Website wird direkt als eigenständige App auf deinem Android-Startbildschirm installiert. Keine APK nötig.</p><ol class="download-app-steps"><li>Diese Seite in Chrome, Edge oder Samsung Internet öffnen.</li><li>Auf <b>Web-App installieren</b> tippen.</li><li>Der Button wird aktiv, sobald Chrome den nativen Installationsdialog freigegeben hat.</li></ol><button class="download-app-btn" type="button" data-dar-pwa-install>Web-App installieren</button>'+androidPwaIconPicker()+'<span class="download-app-note" data-dar-pwa-hint>Installiert mit DĀR-Icon und eigenem App-Fenster.</span></article>'+
   '<article class="download-app-card"><div class="download-app-card__head"><span class="download-app-card__icon ios">'+appleLogo()+'</span><div><div class="kicker">APPLE · IPHONE & IPAD</div><h2>iOS-App</h2></div></div><p>Für iPhone und iPad bleibt die native DĀR AL TAWḤĪD App im Apple App Store verfügbar. Der bestehende App-Store-Bereich auf der Startseite bleibt unverändert.</p><a class="download-app-btn ios" href="https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753" target="_blank" rel="noopener noreferrer">'+appleLogo()+'<span>Im App Store laden</span></a><span class="download-app-note">Offizielle native iOS-Version.</span></article>'+
   '</div></section>'+footer()
  }
@@ -2816,6 +2848,7 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
   initSmartBrowse(key);
   if(key==="werk")initPdfReaderPage();
   if(window.darSetPwaIcon)window.darSetPwaIcon(darPwaIconId(),false);
+  if(window.__darSyncInstallButtons)window.__darSyncInstallButtons();
  }
  function navigate(url,push){
   if(push!==false)history.pushState({desktop:true},"",url);
@@ -2960,7 +2993,7 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
     darPwaHint("Installation ist bereit. Jetzt erneut auf „Web-App installieren“ tippen.");
     darPwaToast("Installation ist bereit. Bitte erneut auf „Web-App installieren“ tippen.");
    }else{
-    var msg="Chrome bietet den nativen Installationsdialog auf diesem Gerät noch nicht an. Öffne das Chrome-Menü ⋮ und wähle „App installieren“.";
+    var msg="Die direkte Installation wird noch vorbereitet. Der Installationsbutton wird automatisch aktiv, sobald Chrome den nativen Dialog freigibt.";
     darPwaHint(msg);darPwaToast(msg);
    }
   }).catch(function(){});
@@ -3005,7 +3038,7 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
    darPwaHint(ready);darPwaToast(ready);
    return false
   }
-  var msg="Chrome hat den Installationsdialog noch nicht freigegeben. Seite einmal neu laden und dann direkt auf „Web-App installieren“ tippen.";
+  var msg="Die direkte Installation ist noch nicht freigegeben. Der Button wird automatisch aktiv, sobald Chrome den nativen Installationsdialog bereitstellt.";
   darPwaHint(msg);darPwaToast(msg);
   return false
  }
