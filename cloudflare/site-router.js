@@ -229,7 +229,7 @@ function browserManifestResponse(request, androidBrowser = false) {
     display_override: ["standalone", "minimal-ui"],
     start_url: "/pwa/?pwa=1",
     scope: "/",
-    id: "/",
+    id: "/pwa/",
     theme_color: icon.theme,
     background_color: "#050706",
     description: "DĀR AL TAWḤĪD – installierbare Web-App mit Qurʾān, Sunnah, Āṯār, Beiträgen, Duʿāʾ und Bibliothek.",
@@ -251,7 +251,7 @@ function browserManifestResponse(request, androidBrowser = false) {
     "Cloudflare-CDN-Cache-Control": "no-store",
     "X-Dar-Surface": androidBrowser ? "android-pwa-manifest" : "public-website-manifest",
     "X-Dar-PWA-Icon": iconId,
-    "X-Dar-PWA-Install-Build": "direct-prompt-v4-loader-20261009"
+    "X-Dar-PWA-Install-Build": "dedicated-app-id-v5-loader-20261009"
   });
   return new Response(request.method === "HEAD" ? null : JSON.stringify(manifest, null, 2), { status: 200, headers });
 }
@@ -1246,11 +1246,12 @@ export default {
       if (assetResponse.ok) {
         const pwaHead =
           '<base href="/">' +
-          '<script id="darDedicatedPwaBootV1">' +
+          '<script id="darDedicatedPwaBootV2">' +
           'window.__DAR_PWA_STANDARD_BOOT=true;' +
-          'try{document.documentElement.classList.add("dar-pwa-standalone-boot","dar-soft-booting")}catch(e){}' +
+          'window.__DAR_PWA_DEDICATED_APP=true;' +
+          'try{document.documentElement.classList.add("dar-pwa-standalone-boot","dar-soft-booting","dar-dedicated-pwa-app")}catch(e){}' +
           '<\/script>';
-        if (!html.includes('id="darDedicatedPwaBootV1"')) {
+        if (!html.includes('id="darDedicatedPwaBootV2"')) {
           html = html.includes("<head>") ? html.replace("<head>", "<head>" + pwaHead) : pwaHead + html;
         }
       }
