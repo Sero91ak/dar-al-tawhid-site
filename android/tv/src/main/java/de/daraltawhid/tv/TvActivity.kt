@@ -23,11 +23,11 @@ import kotlin.concurrent.thread
  * The TV app must not confuse a Hadith/library statement with the home Tadabbur slot.
  */
 class TvActivity : Activity() {
-    private val dark = Color.rgb(6, 26, 33)
-    private val panel = Color.rgb(16, 43, 51)
-    private val gold = Color.rgb(217, 189, 117)
-    private val cream = Color.rgb(244, 239, 219)
-    private val muted = Color.rgb(183, 195, 189)
+    private val dark = Color.rgb(5, 7, 17)
+    private val panel = Color.rgb(13, 19, 34)
+    private val gold = Color.rgb(199, 160, 89)
+    private val cream = Color.rgb(239, 226, 197)
+    private val muted = Color.rgb(185, 171, 150)
     private val base = "https://dar-al-tawhid.de/apple-tv/"
     private lateinit var body: LinearLayout
     private lateinit var footer: TextView
@@ -55,18 +55,18 @@ class TvActivity : Activity() {
         super.onCreate(savedInstanceState)
         val shell = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            setPadding(dp(46), dp(28), dp(46), dp(24))
+            setPadding(dp(48), dp(25), dp(48), dp(22))
             background = GradientDrawable(
                 GradientDrawable.Orientation.TL_BR,
-                intArrayOf(dark, Color.rgb(10, 51, 57), dark)
+                intArrayOf(dark, Color.rgb(11, 13, 26), Color.rgb(2, 5, 12))
             )
         }
-        shell.addView(label("DĀR AL TAWḤĪD", 32f, gold, true))
-        shell.addView(label("ANDROID TV · WISSEN AUS QURʾĀN & SUNNAH", 14f, muted, false))
+        shell.addView(label("DĀR AL TAWḤĪD", 32f, cream, true))
+        shell.addView(label("WISSEN AUS QURʾĀN & SUNNAH  ·  TV", 13f, gold, false))
 
         val nav = LinearLayout(this).apply {
             orientation = LinearLayout.HORIZONTAL
-            setPadding(0, dp(16), 0, dp(24))
+            setPadding(0, dp(10), 0, dp(13))
         }
         listOf(
             "home" to "Startseite",
@@ -74,8 +74,8 @@ class TvActivity : Activity() {
             "tadabbur" to "Qurʾān & Tadabbur"
         ).forEach { (id, title) ->
             nav.addView(navButton(title) { show(id) },
-                LinearLayout.LayoutParams(0, dp(64), 1f).apply {
-                    marginEnd = dp(14)
+                LinearLayout.LayoutParams(0, dp(50), 1f).apply {
+                    marginEnd = dp(13)
                 })
         }
         shell.addView(nav)
@@ -87,7 +87,7 @@ class TvActivity : Activity() {
         }
         body = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            setPadding(dp(26), dp(22), dp(26), dp(22))
+            setPadding(dp(29), dp(19), dp(29), dp(24))
             background = panelBackground()
         }
         scroll.addView(body)
@@ -135,8 +135,47 @@ class TvActivity : Activity() {
             show("home")
             body.getChildAt(2)?.requestFocus()
         })
-        val prayerTimesLabel = label("Lade aktuelle Gebetszeiten …", 19f, cream, false)
-        body.addView(prayerTimesLabel)
+        // Five independent prayer tiles: never concatenate names/times into one
+        // wrapping TextView (the bug shown in the owner's TV screenshot).
+        val prayerRow = LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL
+            weightSum = 5f
+            setPadding(0, dp(11), 0, dp(9))
+        }
+        val prayerNames = listOf(
+            "fajr" to "Faǧr",
+            "dhuhr" to "Ẓuhr",
+            "asr" to "ʿAṣr",
+            "maghrib" to "Maġrib",
+            "isha" to "ʿIšāʾ"
+        )
+        val prayerValues = mutableListOf<TextView>()
+        prayerNames.forEach { (_, title) ->
+            val prayerCell = LinearLayout(this).apply {
+                orientation = LinearLayout.VERTICAL
+                gravity = Gravity.CENTER
+                setPadding(dp(7), dp(13), dp(7), dp(13))
+                background = prayerCardBackground()
+            }
+            prayerCell.addView(label(title, 16f, gold, true).apply {
+                gravity = Gravity.CENTER
+                maxLines = 1
+                setPadding(0, 0, 0, dp(5))
+            })
+            val value = label("--:--", 22f, cream, true).apply {
+                gravity = Gravity.CENTER
+                maxLines = 1
+                setPadding(0, 0, 0, 0)
+            }
+            prayerCell.addView(value)
+            prayerValues.add(value)
+            prayerRow.addView(prayerCell, LinearLayout.LayoutParams(0, dp(93), 1f).apply {
+                marginEnd = dp(7)
+            })
+        }
+        body.addView(prayerRow)
+        val prayerStatus = label("", 13f, muted, false)
+        body.addView(prayerStatus)
         val city = cities[cityIndex]
         val url = "https://dar-al-tawhid.de/api/prayer/times?lat=${city.second}&lon=${city.third}"
         fetchJson(url) { data ->
@@ -146,21 +185,10 @@ class TvActivity : Activity() {
                 ?: data?.optJSONObject("data")
                 ?: data
             if (root == null) {
-                prayerTimesLabel.text = "Gebetszeiten momentan nicht erreichbar. Gespeicherte Inhalte bleiben verfügbar."
-                prayerTimesLabel.setTextColor(muted)
+                prayerStatus.text = "Zeiten vorübergehend nicht abrufbar. Bitte Internetverbindung prüfen."
                 return@fetchJson
             }
-            val lines = mutableListOf<String>()
-            val names = listOf(
-                "fajr" to "Faǧr",
-                "dhuhr" to "Ẓuhr",
-                "asr" to "ʿAṣr",
-                "maghrib" to "Maġrib",
-                "isha" to "ʿIšāʾ"
-            )
-            for ((key, display) in names) {
-                // The public /api/prayer/times endpoint returns
-                // {"fajr":{"name":"Fajr","time":"05:32"}}, not plain strings.
+            prayerNames.forEachIndexed { index, (key, _) ->
                 val record = root.opt(key) ?: root.opt(key.replaceFirstChar { it.uppercase() })
                 val raw = when (record) {
                     is JSONObject -> record.optString("time")
@@ -168,21 +196,47 @@ class TvActivity : Activity() {
                     else -> ""
                 }
                 val value = Regex("""\b(?:[01]?\d|2[0-3]):[0-5]\d\b""").find(raw)?.value
-                if (value != null) lines.add("$display   ·   $value")
+                prayerValues[index].text = value ?: "--:--"
             }
-            prayerTimesLabel.text =
-                if (lines.isEmpty()) "Zeitformat der Quelle muss noch angepasst werden."
-                else lines.joinToString("     ")
-            prayerTimesLabel.textSize = 24f
-            prayerTimesLabel.setTextColor(cream)
-            prayerTimesLabel.typeface = Typeface.create("sans-serif", Typeface.BOLD)
+            prayerStatus.text = "Ort: ${city.first}  ·  Zeiten aus der DĀR-Gebetszeitenquelle"
         }
-        body.addView(label("Qurʾān und Tadabbur", 29f, gold, true))
-        body.addView(label(
-            "Im eigenen Tab findest du belegte Aussagen, die einer konkreten Āyah zugeordnet sind. " +
-                "Der Qurʾān-Vers wird nicht durch den Tadabbur-Text ersetzt.",
-            19f, cream, false
-        ))
+        // Apple TV home contract: prayer times -> matching Quran verse -> Tadabbur.
+        // Qur'an wording must come from the Quran reader, never from a Tadabbur record.
+        body.addView(label("Qurʾān-Vers", 25f, gold, true))
+        val arabicVerse = label("Qurʾān 2:183  ·  Arabischer Vers wird geladen …", 19f, cream, false).apply {
+            gravity = Gravity.CENTER
+            textDirection = View.TEXT_DIRECTION_RTL
+            textAlignment = View.TEXT_ALIGNMENT_CENTER
+        }
+        val germanVerse = label("Deutsche Übersetzung wird geladen …", 17f, cream, false)
+        body.addView(arabicVerse)
+        body.addView(germanVerse)
+        fetchJson("https://api.alquran.cloud/v1/ayah/2:183/quran-uthmani") { verse ->
+            if (generation == renderGeneration && activeTab == "home") {
+                arabicVerse.text = verse?.optJSONObject("data")?.optString("text")?.takeIf { it.isNotBlank() }
+                    ?: "Arabischer Qurʾān-Vers momentan nicht erreichbar"
+            }
+        }
+        fetchJson("https://api.alquran.cloud/v1/ayah/2:183/de.bubenheim") { verse ->
+            if (generation == renderGeneration && activeTab == "home") {
+                germanVerse.text = verse?.optJSONObject("data")?.optString("text")?.takeIf { it.isNotBlank() }
+                    ?: "Deutsche Qurʾān-Übersetzung momentan nicht erreichbar"
+            }
+        }
+        body.addView(label("Tadabbur zu 2:183", 23f, gold, true))
+        val tadabburHome = label("Geprüfte Aussage wird geladen …", 17f, cream, false)
+        body.addView(tadabburHome)
+        fetchJson(base + "quran/tadabbur/entries.json") { batch ->
+            if (generation != renderGeneration || activeTab != "home") return@fetchJson
+            val entries = batch?.optJSONArray("entries")
+            val match = (0 until (entries?.length() ?: 0))
+                .mapNotNull { entries?.optJSONObject(it) }
+                .firstOrNull { it.optString("reference") == "2:183" }
+            tadabburHome.text = match?.let {
+                it.optString("text") + "\n" + it.optString("narrator") + " · " + it.optString("source")
+            } ?: "Für diesen Vers liegt derzeit keine geprüfte Salaf-Überlieferung vor."
+        }
+        body.addView(label("Mehr entdecken", 22f, gold, true))
         body.addView(navButton("Qurʾān & Tadabbur öffnen") { show("tadabbur") })
         body.addView(label("Ḥadīṯ-Sammlung", 29f, gold, true))
         body.addView(navButton("Überlieferungen lesen") { show("hadith") })
@@ -332,12 +386,13 @@ class TvActivity : Activity() {
     private fun navButton(title: String, action: () -> Unit): Button =
         Button(this).apply {
             text = title
-            textSize = 17f
+            textSize = 16f
+            typeface = Typeface.create("serif", Typeface.NORMAL)
             isAllCaps = false
             isFocusable = true
             setTextColor(cream)
             background = buttonBackground(false)
-            setPadding(dp(14), 0, dp(14), 0)
+            setPadding(dp(12), 0, dp(12), 0)
             setOnClickListener { action() }
             onFocusChangeListener = View.OnFocusChangeListener { view, hasFocus ->
                 (view as Button).background = buttonBackground(hasFocus)
@@ -352,8 +407,8 @@ class TvActivity : Activity() {
             this.text = text
             textSize = size
             setTextColor(color)
-            if (bold) typeface = Typeface.create("sans-serif", Typeface.BOLD)
-            setLineSpacing(dp(4).toFloat(), 1.04f)
+            typeface = Typeface.create("serif", if (bold) Typeface.BOLD else Typeface.NORMAL)
+            setLineSpacing(dp(2).toFloat(), 1.04f)
             setPadding(0, dp(9), 0, dp(9))
             gravity = Gravity.START
         }
@@ -361,15 +416,22 @@ class TvActivity : Activity() {
     private fun panelBackground(): GradientDrawable =
         GradientDrawable().apply {
             setColor(panel)
-            cornerRadius = dp(24).toFloat()
-            setStroke(dp(1), Color.rgb(76, 91, 76))
+            cornerRadius = dp(26).toFloat()
+            setStroke(dp(1), Color.rgb(86, 70, 43))
         }
 
     private fun buttonBackground(focused: Boolean): GradientDrawable =
         GradientDrawable().apply {
-            setColor(if (focused) gold else Color.rgb(25, 58, 64))
-            cornerRadius = dp(16).toFloat()
-            setStroke(dp(1), if (focused) cream else Color.rgb(91, 105, 96))
+            setColor(if (focused) gold else Color.rgb(25, 26, 42))
+            cornerRadius = dp(18).toFloat()
+            setStroke(dp(1), if (focused) cream else Color.rgb(107, 85, 49))
+        }
+
+    private fun prayerCardBackground(): GradientDrawable =
+        GradientDrawable().apply {
+            setColor(Color.rgb(10, 14, 29))
+            cornerRadius = dp(15).toFloat()
+            setStroke(dp(1), Color.rgb(95, 75, 44))
         }
 
     private fun dp(value: Int): Int = (value * resources.displayMetrics.density).toInt()
