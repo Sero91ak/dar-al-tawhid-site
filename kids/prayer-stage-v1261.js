@@ -62,7 +62,17 @@ if(navigator.connection?.saveData)salahWorld.classList.add("kids-salah-save-data
  }
  function fit(){
    queued=false;
+   /* KIDS_HOME_SCROLL_FREEZE_V1305 */
    if(!HERO.isConnected||!HOME.classList.contains("active")||document.hidden)return;
+   // The approved initial arrangement is fitted only at the top. Scrolling
+   // moves the CTA relative to the fixed dock; using that moved rectangle as
+   // an available-space signal would expand the hero while the user scrolls.
+   // Layout is recalculated when the user returns to the top or the screen
+   // dimensions change; no scrolling is triggered by this fitter.
+   const mainShell=document.querySelector(".shell");
+   const mainY=Math.max(0,Number(mainShell?.scrollTop)||0,
+     Number(document.scrollingElement?.scrollTop)||0,Number(window.scrollY)||0);
+   if(mainY>2)return;
    const w=window.innerWidth||document.documentElement.clientWidth;
    const h=window.visualViewport?.height||window.innerHeight||document.documentElement.clientHeight;
    const heroRect=HERO.getBoundingClientRect(),ctaRect=cta.getBoundingClientRect();
