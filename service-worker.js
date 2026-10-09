@@ -107,6 +107,8 @@ const APP_SHELL = [
   '/assets/app-icons/type-creme-ar/icon-512.png',
   '/assets/app-icons/type-creme-ar/icon-1024.png',
   '/watermark-my-logo-full.png',
+  '/assets/app-soft-boot.css',
+  '/assets/app-soft-boot.js',
   '/watermark-circle-soft.png',
   '/content/duas/duas.json',
   '/content/quran/surahs.json',

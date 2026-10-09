@@ -7226,14 +7226,16 @@
       "id": "android-pwa-public-website-restore-2026-10-09",
       "at": "2026-10-09T15:36:00+02:00",
       "approvedBy": "user-explicit-restore-android-web-app-on-website-home-and-more-downloads",
-      "reason": "Nutzer beauftragt ausdrücklich die frühere Android-Web-App/PWA wiederherzustellen: Android-Browser sollen die öffentliche Website erhalten; Startseite unten rechts erhält PWA-Installation; Mehr bekommt einen eigenen Downloads-Bereich mit Android-Web-App und zusätzlichem iOS-App-Store-Eintrag. Bestehender iOS-Download auf der Startseite bleibt bestehen. Keine Kids-, Push- oder Apple-TV-Änderung. Ergänzung 2026-10-09: Installierbarkeit des Android-PWA-Manifests reparieren, den direkten nativen Browser-Installationsdialog anbinden und für Android exakt dieselbe primäre Icon-Grafik wie die native iOS-App verwenden. Ergänzung 2026-10-09: Launcher-Icon als Android-maskable Vollflächen-Icon ausliefern, Download-Kachel stärker füllen und die vorhandenen App-Icon-Varianten für Android-PWA-Auswahl/Manifest synchronisieren; bereits installierte PWA-Launcher-Icons unterliegen weiterhin dem Android/Chrome-Metadatenupdate. Ergänzung 2026-10-09: direkten Installationsdialog wiederherstellen, indem beforeinstallprompt.prompt() innerhalb des ursprünglichen Nutzer-Taps ausgeführt wird; Manifest-URL stabil halten und Icon-Wahl per Cookie an dieselbe Manifest-URL binden, damit Chrome/WebAPK bestehende Installationen aktualisieren kann.",
+      "reason": "Nutzer beauftragt ausdrücklich die frühere Android-Web-App/PWA wiederherzustellen: Android-Browser sollen die öffentliche Website erhalten; Startseite unten rechts erhält PWA-Installation; Mehr bekommt einen eigenen Downloads-Bereich mit Android-Web-App und zusätzlichem iOS-App-Store-Eintrag. Bestehender iOS-Download auf der Startseite bleibt bestehen. Keine Kids-, Push- oder Apple-TV-Änderung. Ergänzung 2026-10-09: Installierbarkeit des Android-PWA-Manifests reparieren, den direkten nativen Browser-Installationsdialog anbinden und für Android exakt dieselbe primäre Icon-Grafik wie die native iOS-App verwenden. Ergänzung 2026-10-09: Launcher-Icon als Android-maskable Vollflächen-Icon ausliefern, Download-Kachel stärker füllen und die vorhandenen App-Icon-Varianten für Android-PWA-Auswahl/Manifest synchronisieren; bereits installierte PWA-Launcher-Icons unterliegen weiterhin dem Android/Chrome-Metadatenupdate. Ergänzung 2026-10-09: direkten Installationsdialog wiederherstellen, indem beforeinstallprompt.prompt() innerhalb des ursprünglichen Nutzer-Taps ausgeführt wird; Manifest-URL stabil halten und Icon-Wahl per Cookie an dieselbe Manifest-URL binden, damit Chrome/WebAPK bestehende Installationen aktualisieren kann. Ergänzung 2026-10-09: den bisherigen 0–100-%-Start-Ladebereich der installierten Android-Web-App mit festem Standard-DĀR-Logo wiederherstellen. Wechselbare Launcher-/Installations-Icons dürfen den Boot-/Loading-Screen nicht verändern; normale Browser-Website bleibt ohne App-Loader.",
       "paths": [
         "content/admin/change-scope-lock.json",
         "cloudflare/site-router.js",
         "desktop-preview/index.html",
         "download/validate-release.cjs",
         "manifest.json",
-        "service-worker.js"
+        "service-worker.js",
+        "assets/app-soft-boot.js",
+        "assets/app-soft-boot.css"
       ],
       "expiresAt": "2026-11-30T23:59:00.000Z"
     },

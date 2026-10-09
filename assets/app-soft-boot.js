@@ -1,6 +1,7 @@
 /**
  * Soft boot overlay for visitor + test web apps (iOS parity).
- * v672 · Android-Native: Soft-Boot überspringen (kein Logo-Hang). v670 · Titel DĀR AL TAWḤĪD; Leiste rund (CSS in index). Overlay nie auf <html>.
+ * v673 · Android-PWA: Standard-Logo + 0–100%-Loader im Standalone-Modus wiederhergestellt.
+ * Launcher-/Installations-Icon bleibt strikt getrennt vom Boot-Logo.
  */
 (function () {
   /* PUBLIC WEBSITE: NEVER SHOW APP SOFT BOOT */
@@ -12,7 +13,20 @@
       window.DAR_OFFICIAL_IOS_APP === true ||
       window.DAR_IOS_NATIVE_APP === true ||
       window.DAR_ANDROID_NATIVE_APP === true;
+    var __darBootStandalone = false;
+    try {
+      __darBootStandalone =
+        !!(window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) ||
+        window.navigator.standalone === true;
+    } catch (__darStandaloneErr) {}
+    var __darDesktopPublic = !!document.querySelector('link[href*="/desktop-preview/desktop-overhaul.css"]');
     var __darPublicRoot = (__darBootPath === "/" || __darBootPath === "/index.html");
+
+    // Normal website browsing never receives the app loader. Installed PWA standalone does.
+    if (!__darBootNative && !__darBootStandalone && __darDesktopPublic) {
+      window.__darSoftBootPublicSkip = true;
+      return;
+    }
     if (!__darBootNative && !/\bAndroid\b/i.test(__darBootUa) && __darPublicRoot) {
       try {
         if (document.documentElement) {
@@ -217,7 +231,7 @@
   function viewLooksReady() {
     try {
       if (window.__darAppBootOk) return true;
-      var view = document.getElementById("appView");
+      var view = document.getElementById("appView") || document.getElementById("pageRoot");
       if (!view) return false;
       var text = (view.textContent || "").replace(/\s+/g, " ").trim();
       if (!text || text === "App wird geladen…") return false;
@@ -227,8 +241,11 @@
   }
   function maybeFinish() {
     if (finished || window.__darSoftBootLocked) return;
-    if (!window.__darAppBootOk && !viewLooksReady()) return;
-    if (!window.__darAppBootOk) return;
+    var ready = viewLooksReady();
+    if (!window.__darAppBootOk && !ready) return;
+    // Legacy visitor/test app still uses the explicit boot-ready signal.
+    // Desktop/PWA uses #pageRoot and may finish as soon as its real content is painted.
+    if (!window.__darAppBootOk && !document.getElementById("pageRoot")) return;
     finish();
   }
   function releaseChrome() {
@@ -252,10 +269,23 @@
       var pth = String(location.pathname || "");
       var nativeReq = /DarAlTawhid-iOS|DarAlTawhidOfficialIOS|DarAlTawhidAndroid/i.test(ua) ||
         window.DAR_OFFICIAL_IOS_APP === true || window.DAR_IOS_NATIVE_APP === true || window.DAR_ANDROID_NATIVE_APP === true;
-      if (!nativeReq && (pth === "/" || pth === "/index.html")) {
+      var standaloneReq = false;
+      try {
+        standaloneReq =
+          !!(window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) ||
+          window.navigator.standalone === true;
+      } catch (eStandalone) {}
+      var desktopPublic = !!document.querySelector('link[href*="/desktop-preview/desktop-overhaul.css"]');
+      if (!nativeReq && !standaloneReq && ((pth === "/" || pth === "/index.html") || desktopPublic)) {
         finished = true;
         releaseChrome();
         return;
+      }
+      if (standaloneReq) {
+        try {
+          window.__DAR_PWA_STANDARD_BOOT = true;
+          document.documentElement.classList.add("dar-pwa-standalone-boot");
+        } catch (ePwaClass) {}
       }
 
       var root = document.documentElement;
@@ -307,7 +337,7 @@
         maybeFinish();
       });
       var startObserve = function () {
-        var view = document.getElementById("appView");
+        var view = document.getElementById("appView") || document.getElementById("pageRoot");
         if (view) mo.observe(view, { childList: true, subtree: true, characterData: true });
         if (document.body) mo.observe(document.body, { attributes: true, attributeFilter: ["class"] });
         mo.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme", "class"] });
