@@ -765,20 +765,29 @@ const questions=()=>exercises[age]||exercises["6-8"];
 const address=()=>{const role=gender==="girl"?"liebe Schwester":"lieber Bruder";const first=profileName.split(/\s+/)[0];return first?role+" "+first:role;};
 const storageKey=()=>["kids",VERSION,id,age,"sidq"].join(".");
 const oldRecord=()=>{try{return JSON.parse(localStorage.getItem(storageKey())||"null")}catch(_){return null}};
-function ageKey(x){const t=String(x||"").replace(/[–—]/g,"-");return exercises[t]?t:"6-8"}
+function ageKey(x){
+ const t=String(x??"").trim().replace(/[–—−]/g,"-").replace(/\s+/g,"");
+ return Object.hasOwn(exercises,t)?t:null;
+}
 function getProfile(){
- let child=null,guest="",a="";try{
-  const data=JSON.parse(localStorage.getItem("kids.profiles.v1")||"[]"),active=localStorage.getItem("kids.activeProfile");
+ let child=null,guest="",storedAge="";
+ try{
+  const data=JSON.parse(localStorage.getItem("kids.profiles.v1")||"[]");
+  const active=localStorage.getItem("kids.activeProfile");
   if(Array.isArray(data))child=data.find(p=>active&&String(p?.id)===String(active))||null;
-  guest=localStorage.getItem("kids.guest.gender.v1")||"";a=localStorage.getItem("kids.age")||"";
+  guest=localStorage.getItem("kids.guest.gender.v1")||"";
+  storedAge=localStorage.getItem("kids.age")||"";
  }catch(_){}
- /* Profil zuerst. Die reine HTML-Vorschau kennt ohne Browser-Speicher kein Konto;
-    deshalb darf ausschließlich hier ein expliziter Demo-Link die Ansicht bestimmen. */
- const previewParam=new URLSearchParams(window.location.search).get("previewProfil");
+ const params=new URLSearchParams(window.location.search);
+ const previewParam=params.get("previewProfil");
  const demoGender=previewParam==="maedchen"?"girl":previewParam==="junge"?"boy":null;
+ const previewAge=ageKey(params.get("previewAlter"));
+ const profileAge=child?ageKey(child.age):null;
+ // Echte Profile werden niemals nach den Demo-Parametern eingeordnet.
+ const selectedAge=child?profileAge:(previewAge||ageKey(storedAge)||"6-8");
  const g=child?.gender==="girl"?"girl":child?.gender==="boy"?"boy":demoGender||(guest==="girl"?"girl":"boy");
  const previewId=demoGender?"demo-"+demoGender:guest?"guest-"+g:"demo-boy";
- return {child,g,age:ageKey(child?.age||a),id:child?.id?String(child.id):previewId};
+ return {child,g,age:selectedAge,id:child?.id?String(child.id):previewId,demo:!child,ageMissing:!!child&&!profileAge};
 }
 function stopMicTracks(){
  if(micStream){micStream.getTracks().forEach(t=>{try{t.stop()}catch(_){}});micStream=null}
@@ -893,28 +902,65 @@ const AGE_EXPLANATIONS=Object.freeze({
  }
 });
 function applyAgeTeaching(){
- const content=AGE_EXPLANATIONS[age]||AGE_EXPLANATIONS["6-8"];
- document.body.dataset.kidsAge=age;
+ document.body.dataset.kidsAge=age||"unassigned";
+ const ui=AGE_UI[age],content=AGE_EXPLANATIONS[age];
+ if(!ui||!content)return;
+ $("#overviewKicker").textContent=ui.heroKicker;
+ $("#overviewFollowup").textContent=ui.heroFollowup;
+ $("#todayKicker").textContent=ui.todayKicker;
+ $("#todayTitle").textContent=ui.todayTitle;
+ $("#todayTopicIntro").textContent=ui.topicIntro;
+ $("#academyTime").textContent="Lernzeit: etwa "+ui.duration+" · Du darfst jederzeit pausieren";
+ $("#journeyTitle").textContent=ui.journeyTitle;
+ $("#subjectsTitle").textContent=ui.subjectsTitle;
+ $("#subjectsIntro").textContent=ui.subjectsIntro;
+ $("#welcomeFollowup").textContent=ui.welcomeNext;
+ $("#lessonWelcomeBody").textContent=ui.welcomeBody;
+ $("#lessonIntroduction").textContent=ui.lessonIntro;
+ $("#evidenceLead").textContent=ui.evidenceLead;
+ $("#practiceTitle").textContent=ui.questionTitle;
+ $("#recapTitle").textContent=ui.recapTitle;
+ $("#hint").textContent=ui.hint;
+ $("#akhlaqCardStatus").textContent=ui.availableStatus;
+ all("[data-jump-step]").forEach((b,i)=>{const label=b.querySelector("span");if(label)label.textContent=ui.steps[i]});
  const lead=$('[data-lesson-step="1"] .stage-lead');if(lead)lead.textContent=content.lead;
  all("#explainWords [data-spoken]").forEach((el,i)=>{if(content.lines[i])el.textContent=content.lines[i]});
  const e=$(".teacher-explainer");if(e)e.textContent=content.evidence;
  all(".recap-lesson p").forEach((el,i)=>{if(content.recap[i])el.textContent=content.recap[i]});
 }
+
 function renderHome(){
+ const ui=AGE_UI[age];
+ const allowed=!!ui;
+ all("[data-open-lesson]").forEach(b=>b.disabled=!allowed);
+ $("#academyAgeWarning").hidden=allowed;
+ if(!allowed){
+   $("#courseStatus").textContent="Alter fehlt";
+   $("#reviewNotice").textContent="Bitte zuerst die Altersstufe im Profil festlegen.";
+   $("#todaySummary").textContent="Die Unterrichtsstufe konnte nicht erkannt werden.";
+   $("#journeyDetail").textContent="Kein Unterricht startet mit einer falschen Altersstufe.";
+   $("#journeyBar").style.width="0%";
+   return;
+ }
  const rec=oldRecord(),due=Number(rec?.nextDue||0),pending=rec&&due<=Date.now();
- $("#courseStatus").textContent=!rec?"Bereit":pending?"Wiederholen":"Bereits gelernt";
- $("#reviewNotice").textContent=!rec?"Eine neue Lektion wartet auf dich.":pending?"Heute ist eine kurze Wiederholung dran.":"Du hast Ṣidq schon geübt!";
- $("#todaySummary").textContent=!rec?"Eine neue Unterrichtsstunde ist bereit.":pending?"Erinnere dich an das Gelernte.":"Diese Lektion kannst du jederzeit erneut anhören.";
+ $("#courseStatus").textContent=!rec?"Bereit":pending?"Wiederholen":"Schon geübt";
+ $("#reviewNotice").textContent=!rec?ui.journeyNew:pending?ui.journeyDue:ui.journeyDone;
+ $("#todaySummary").textContent=!rec?"Dein nächster Schritt ist bereit.":pending?"Heute kannst du dich erinnern.":"Du darfst den Unterricht jederzeit wiederholen.";
  $("#journeyBar").style.width=rec?"100%":"12%";
- $("#journeyDetail").textContent=!rec?"Schritt für Schritt lernen.":pending?"Wiederholung ist bereit.":"Nächste Erinnerung: "+new Date(due).toLocaleDateString("de-DE");
- $(".today-button").firstChild.textContent=rec?"Lektion wiederholen ":"Unterricht beginnen ";
+ $("#journeyDetail").textContent=!rec?"Schritt für Schritt, in deinem Tempo.":pending?"Deine Wiederholung ist bereit.":"Nächste Erinnerung: "+new Date(due).toLocaleDateString("de-DE");
+ $(".today-button").firstChild.textContent=rec?ui.repeat+" ":ui.start+" ";
 }
+
 function syncProfile(force=false){
- const p=getProfile();const newName=typeof p.child?.name==="string"?p.child.name.trim().replace(/\s+/g," ").slice(0,72):"";if(!force&&p.id===id&&p.g===gender&&p.age===age&&newName===profileName)return;
+ const p=getProfile();
+ const newName=typeof p.child?.name==="string"?p.child.name.trim().replace(/\s+/g," ").slice(0,72):"";
+ if(!force&&p.id===id&&p.g===gender&&p.age===age&&newName===profileName)return;
  if(p.id!==id||p.g!==gender||p.age!==age){stopAll();hideLesson()}
- id=p.id;gender=p.g;age=p.age;profileName=newName;document.body.dataset.profile=gender;
+ id=p.id;gender=p.g;age=p.age;profileName=newName;
+ document.body.dataset.profile=gender;
  $("#profileLabel").textContent=profileName||(gender==="girl"?"Mädchenprofil":"Jungenprofil");
  $("#profileRole").textContent=gender==="girl"?"Schwester"+(profileName?"":" · Vorschau"):"Bruder"+(profileName?"":" · Vorschau");
+ $("#academyAgeLabel").textContent=p.ageMissing?"Altersstufe fehlt":(p.demo?"Demo · ":"")+humanAge(age)+" Jahre";
  $("#academyProfile").classList.add("has-profile");
  $("#academyAvatar").src=gender==="girl"?"/kids/assets/profile-avatars/girl-hijab-pink-v1235.svg":"/kids/assets/profile-avatars/boy-kufi-v1235.svg";
  const hero=$("#academyHeroImage");
@@ -923,14 +969,14 @@ function syncProfile(force=false){
  hero.src=gender==="girl"?"/desktop-preview/assets/kids-academy-hero-girls-v1.jpg":"/desktop-preview/assets/kids-academy-hero-boys-v1.jpg";
  if(hero.complete&&hero.naturalWidth)hero.classList.add("is-ready");
  $("#overviewSalam").textContent="As-salāmu ʿalaykum, "+address()+".";
- $("#overviewFollowup").textContent="Heute lernen wir etwas Neues!";
  $("#welcomeSalam").textContent="As-salāmu ʿalaykum, "+address()+".";
- $("#welcomeFollowup").textContent="Schön, dass du heute mitlernst!";
- applyAgeTeaching();renderHome();
+ applyAgeTeaching();
+ renderHome();
 }
+
 function home(){stopAll();hideLesson();renderHome();window.scrollTo(0,0)}
 function begin(){
- syncProfile();$("#academyHome").hidden=true;$("#lessonMain").hidden=false;
+ syncProfile();if(!AGE_UI[age]){renderHome();return}$("#academyHome").hidden=true;$("#lessonMain").hidden=false;
  step=0;unlocked=0;qIndex=0;finished=false;score={done:0,correct:0,choices:0};
  showStep(0,false);window.scrollTo(0,0);
 }
@@ -990,9 +1036,9 @@ function showQuestion(){
  $("#choices").replaceChildren();
  if(q.type==="choice")q.options.forEach((t,i)=>{const b=document.createElement("button");b.type="button";b.className="choice-button";b.textContent=t;b.setAttribute("aria-pressed","false");b.onclick=()=>{choice=i;all(".choice-button").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));$("#answer").value=""};$("#choices").appendChild(b)});
  $("#answer").value="";$("#answer").placeholder=q.type==="text"?"Erkläre es mit eigenen Worten …":"Ich würde …";
- $("#feedback").textContent="Nimm dir Zeit. Du kannst auswählen, schreiben oder sprechen.";
+ $("#feedback").textContent=AGE_UI[age]?.feedbackWait||"Nimm dir Zeit.";
  $("#check").hidden=false;$("#hint").hidden=false;$("#repeat").hidden=false;
- $("#nextQuestion").hidden=true;$("#finishLesson").hidden=true;$("#openWrite").hidden=false;$("#openVoice").hidden=false;
+ $("#nextQuestion").hidden=true;$("#finishLesson").hidden=true;$("#openWrite").hidden=age==="4-5";$("#openVoice").hidden=false;
  mode(q.type==="text"?"text":"choices");
 }
 function check(){
@@ -1013,12 +1059,12 @@ function check(){
 }
 function finish(){finished=true;unlocked=4;showStep(4)}
 function showRecap(){
- $("#summaryText").textContent="Du hast "+score.done+" von "+questions().length+" Fragen bearbeitet. Die wichtigsten Aussagen darfst du später noch einmal üben.";
+ $("#summaryText").textContent=(AGE_UI[age]?.recapText||"Gut mitgemacht!")+" ("+score.done+" von "+questions().length+" Fragen bearbeitet.)";
  all("[data-reflect]").forEach(b=>{b.classList.remove("active");b.setAttribute("aria-pressed","false")});
 }
 function persist(level){
- const prev=oldRecord(),n=level==="help"?0:Math.min(Number(prev?.intervalIndex??-1)+1,INTERVALS.length-1);
- const due=new Date();due.setHours(12,0,0,0);due.setDate(due.getDate()+INTERVALS[n]);
+ const prev=oldRecord(),intervals=INTERVALS_BY_AGE[age]||INTERVALS_BY_AGE["6-8"],n=level==="help"?0:Math.min(Number(prev?.intervalIndex??-1)+1,intervals.length-1);
+ const due=new Date();due.setHours(12,0,0,0);due.setDate(due.getDate()+intervals[n]);
  const item={id,age,lessonId:"sidq",completedAt:Date.now(),nextDue:due.getTime(),intervalIndex:n,reviewCount:(Number(prev?.reviewCount)||0)+1,answerCount:score.done,choiceCorrect:score.correct,choiceAnswered:score.choices,selfReport:level};
  try{localStorage.setItem(storageKey(),JSON.stringify(item));$("#nextDue").textContent="Nächste Erinnerung: "+due.toLocaleDateString("de-DE")+". Du kannst jederzeit vorher üben."}catch(_){$("#nextDue").textContent="Lokal speichern ist nicht verfügbar. Du kannst trotzdem wiederholen."}
  all("[data-reflect]").forEach(b=>{b.classList.toggle("active",b.dataset.reflect===level);b.setAttribute("aria-pressed",String(b.dataset.reflect===level))});renderHome();
