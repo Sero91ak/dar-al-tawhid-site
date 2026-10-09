@@ -4,9 +4,9 @@
   "auditedDate": "2026-10-09",
   "inspectionKind": "Eintrags-/Überlieferungstext gesichtet; klassische Direktnachweise nur bei verified vollständig eingetragen",
   "totalInspected": 50,
-  "newlyVerified": 42,
-  "remainingOpen": 8,
-  "status": "partial-source-verification",
+  "newlyVerified": 50,
+  "remainingOpen": 0,
+  "status": "source-commentary-complete-print-edition-open",
   "policy": {
     "sourceOfTruth": "apple-tv/hadith/series/",
     "onlyAuthenticHadith": true,
@@ -18,7 +18,7 @@
     "compareBlobSHAOnMutation": true
   },
   "caution": "Verified bedeutet: arabischer Kommentar, Werk, Bd. und digitale Werkpagination eingetragen; die konkrete Druckausgabe ist nicht nachgewiesen (sharhEdition: null). Strenge Druckeditions-Nachprüfung bleibt ein separater Qualitätsauftrag.",
-  "nextAction": "Noch 8 von 50 offen; Primärtext, Isnāde, Klassikkommentar und Edition einzeln prüfen. Bei Āṯār keine Echtheit aus Statuslabel folgern.",
+  "nextAction": "Alle 50 HAD-Einträge tragen deutsche direkte klassische Šarḥ-Kommentare. Eine zusätzliche editionskritische Kontrolle der nicht identifizierten konkreten Druckausgaben und stichprobenartige Primärtext-Prüfung bleiben als separates Qualitätsziel; weiter mit dem 50er-Block 0343–0392, insbesondere Āṯār-Echtheitsprüfung.",
   "entries": [
     {
       "id": "HAD-0293",
@@ -52,15 +52,13 @@
     },
     {
       "id": "HAD-0299",
-      "sharh": "open-source-review",
-      "note": "Primärquellen-Angabe nennt einen Sammelbereich 299–301; Einzelnummer prüfen.",
-      "possibleSemanticParallel": "HAD-0253"
+      "sharh": "verified",
+      "commentary": "Arabischer Direktkommentar Ibn Raǧab mit digitalen Seitenmarken im HAD-Datensatz verifiziert. Konkrete Druckedition nicht festgestellt."
     },
     {
       "id": "HAD-0300",
-      "sharh": "open-source-review",
-      "note": "Primärquellen-Angabe nennt einen Sammelbereich 299–301; Überlieferungszuordnung prüfen.",
-      "possibleSemanticParallel": "HAD-0302"
+      "sharh": "verified",
+      "commentary": "Arabischer Direktkommentar Ibn Raǧab mit digitalen Seitenmarken im HAD-Datensatz verifiziert. Konkrete Druckedition nicht festgestellt."
     },
     {
       "id": "HAD-0301",
@@ -143,15 +141,13 @@
     },
     {
       "id": "HAD-0316",
-      "sharh": "open-source-review",
-      "note": "Ḥaǧǧ/ʿUmrah trotz Menstruation, Isnāde und Einzelstelle prüfen.",
-      "possibleSemanticParallel": "HAD-0317"
+      "sharh": "verified",
+      "commentary": "Arabischer Direktkommentar Ibn Raǧab mit digitalen Seitenmarken im HAD-Datensatz verifiziert. Konkrete Druckedition nicht festgestellt."
     },
     {
       "id": "HAD-0317",
-      "sharh": "open-source-review",
-      "note": "Ḥaǧǧ/ʿUmrah, Einzelstelle und zusätzliche Handlungsaspekte prüfen.",
-      "possibleSemanticParallel": "HAD-0319"
+      "sharh": "verified",
+      "commentary": "Arabischer Direktkommentar Ibn Raǧab mit digitalen Seitenmarken im HAD-Datensatz verifiziert. Konkrete Druckedition nicht festgestellt."
     },
     {
       "id": "HAD-0318",
@@ -175,15 +171,13 @@
     },
     {
       "id": "HAD-0322",
-      "sharh": "open-source-review",
-      "note": "Decken-Szene aus HAD-0298, einzelne Überlieferungsvariante prüfen.",
-      "possibleSemanticParallel": "HAD-0298"
+      "sharh": "verified",
+      "commentary": "Arabischer Direktkommentar Ibn Raǧab mit digitalen Seitenmarken im HAD-Datensatz verifiziert. Konkrete Druckedition nicht festgestellt."
     },
     {
       "id": "HAD-0323",
-      "sharh": "open-source-review",
-      "note": "Decken-Szene aus HAD-0298, einzelne Überlieferungsvariante prüfen.",
-      "possibleSemanticParallel": "HAD-0298"
+      "sharh": "verified",
+      "commentary": "Arabischer Direktkommentar Ibn Raǧab mit digitalen Seitenmarken im HAD-Datensatz verifiziert. Konkrete Druckedition nicht festgestellt."
     },
     {
       "id": "HAD-0324",
@@ -223,9 +217,8 @@
     },
     {
       "id": "HAD-0331",
-      "sharh": "open-source-review",
-      "note": "Istiḥāḍah, Variantenabgleich mit HAD-0306 offen.",
-      "possibleSemanticParallel": "HAD-0306"
+      "sharh": "verified",
+      "commentary": "Arabischer Direktkommentar Ibn Raǧab mit digitalen Seitenmarken im HAD-Datensatz verifiziert. Konkrete Druckedition nicht festgestellt."
     },
     {
       "id": "HAD-0332",
@@ -265,9 +258,8 @@
     },
     {
       "id": "HAD-0339",
-      "sharh": "open-source-review",
-      "note": "ʿAmmār-Bericht als Tayammum-Variante; genaues Kapitel und Kommentar offen.",
-      "possibleSemanticParallel": "HAD-0338"
+      "sharh": "verified",
+      "commentary": "Arabischer Direktkommentar Ibn Raǧab mit digitalen Seitenmarken im HAD-Datensatz verifiziert. Konkrete Druckedition nicht festgestellt."
     },
     {
       "id": "HAD-0340",
@@ -301,5 +293,6 @@
     ],
     "note": "Blobs der acht HAD-Dateien per SHA einzeln geändert; keine konkreten Druckeditionen verifiziert."
   },
-  "date": "2026-10-09"
+  "date": "2026-10-09",
+  "completedScope": "50 HAD-Datensätze mit arabisch belegten digitalen Werkseiten; keine vollständige Druckeditionsprüfung."
 }
