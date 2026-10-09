@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Keep the full Arabic title, DAR letters and AL TAWḤĪD inside Android's
+     108dp adaptive-icon safe zone; do not enlarge this bitmap to fill the mask. -->
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@mipmap/ic_launcher_foreground"
+    android:inset="18dp" />
