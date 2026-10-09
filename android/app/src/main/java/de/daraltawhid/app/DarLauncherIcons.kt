@@ -47,18 +47,31 @@ object DarLauncherIcons {
     fun set(context: Context, requested: String): String {
         val selected = normalize(requested) ?: "type-creme-ar"
         val pm = context.packageManager
-        aliases.forEach { (id, alias) ->
-            val component = ComponentName(context.packageName, "${context.packageName}.$alias")
-            val state = if (id == selected) {
-                PackageManager.COMPONENT_ENABLED_STATE_ENABLED
-            } else {
-                PackageManager.COMPONENT_ENABLED_STATE_DISABLED
-            }
+
+        // Enable the new alias first so there is never a moment with no launcher entry.
+        aliases[selected]?.let { alias ->
             try {
-                pm.setComponentEnabledSetting(component, state, PackageManager.DONT_KILL_APP)
+                pm.setComponentEnabledSetting(
+                    ComponentName(context.packageName, "${context.packageName}.$alias"),
+                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                    PackageManager.DONT_KILL_APP
+                )
             } catch (_: Exception) {
             }
         }
+
+        aliases.forEach { (id, alias) ->
+            if (id == selected) return@forEach
+            try {
+                pm.setComponentEnabledSetting(
+                    ComponentName(context.packageName, "${context.packageName}.$alias"),
+                    PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                    PackageManager.DONT_KILL_APP
+                )
+            } catch (_: Exception) {
+            }
+        }
+
         context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
             .edit()
             .putString(KEY, selected)
