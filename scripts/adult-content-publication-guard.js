@@ -21,9 +21,19 @@ function short(s){const m=String(s||"").match(/(?:\/q\/|dar-al-tawhid\.de\/q\/)(
 function readPost(text,file){
  const m=text.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);
  if(!m)throw Error(file+": YAML frontmatter missing");
- const fm={};for(const line of m[1].split(/\r?\n/)){
-  const kv=line.match(/^([a-zA-Z][\w-]*):\s*(.*)$/);if(!kv)continue;
-  let v=kv[2].trim();if(v[0]==='"'){try{v=JSON.parse(v)}catch{}}else if(v[0]==="'"&&v.endsWith("'"))v=v.slice(1,-1);
+ const fm={},lines=m[1].split(/\r?\n/);
+ for(let i=0;i<lines.length;i++){
+  const kv=lines[i].match(/^([a-zA-Z][\w-]*):\s*(.*)$/);if(!kv)continue;
+  let v=kv[2].trim();
+  if(v==="|"||v==="|-"||v===">"||v===">-"){
+   const block=[];while(i+1<lines.length&&(/^\s+/.test(lines[i+1])||!lines[i+1].trim())){
+    block.push(lines[++i]);
+   }
+   const indents=block.filter(x=>x.trim()).map(x=>x.match(/^\s*/)[0].length);
+   const min=indents.length?Math.min(...indents):0;
+   v=block.map(x=>x.slice(Math.min(x.length,min))).join(v[0]===">"?" ":"\n").trim();
+  }else if(v[0]==='"'){try{v=JSON.parse(v)}catch{}}
+  else if(v[0]==="'"&&v.endsWith("'"))v=v.slice(1,-1);
   fm[kv[1]]=v;
  }
  if(/^(?:slide|slides|skip)$/i.test(fm.type||fm.layout||fm.recordType||""))return {skip:true,file};
@@ -106,7 +116,7 @@ function validate(p,otherPosts,existingTv){
  }
  if(p.type==="hadith"){
   const required=["sharhText","sharhScholar","sharhBook","sharhReference","grade"];
-  if(p.fm.sharhStatus!=="verified"||required.some(k=>!p.fm[k]))
+  if(p.fm.sharhStatus!=="verified"||required.some(k=>!p.fm[k])||p.fm.sharhText.trim().length<30||p.fm.sharhReference.trim().length<15)
    block("Hadith missing verified Sharh and bibliographic reference",{post:p.file,missing:required.filter(k=>!p.fm[k])});
   if(/schwach|ungepruft|unterbrochen|da.if/i.test(norm(p.fm.grade)))block("Hadith grading requires manual verification",{post:p.file});
  }
