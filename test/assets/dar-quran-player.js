@@ -2302,6 +2302,7 @@
     }
   }
   function leavePlayerRoute(kind) {
+    dismissAllPlayerSheets();
     persistCurrent("leave-full");
     writeMode("global-quran");
     dismissFullPlayer();
@@ -3097,6 +3098,18 @@
     return learnSheet();
   }
   var sheetEpoch = 0;
+  function dismissAllPlayerSheets() {
+    sheetEpoch += 1;
+    document.querySelectorAll("#darQuranPlayer [data-dqp-sheet], #dqpLearnSheet").forEach(function (sh) {
+      sh.classList.remove("is-open");
+      sh.hidden = true;
+      sh.innerHTML = "";
+    });
+    if (dlLabelTimer) {
+      clearInterval(dlLabelTimer);
+      dlLabelTimer = 0;
+    }
+  }
   function closeSheet() {
     sheetEpoch += 1;
     var sh = activeSheetEl();
@@ -4381,6 +4394,7 @@
     routePaintT = setTimeout(function () {
       routePaintT = 0;
       persistCurrent("route");
+      if (!isFullPlayerRoute() && !isReaderRoute()) dismissAllPlayerSheets();
       ensureReaderLearnPlayer();
       cleanupLearningPlayerOnRouteLeave();
       paintMini();
