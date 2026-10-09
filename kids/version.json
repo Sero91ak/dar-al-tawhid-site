@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v176-global-swipe1280",
-  "label": "KIDS · V1.08.97",
+  "buildId": "kids-shell-v177-swiperender1281",
+  "label": "KIDS · V1.08.98",
   "releasedAt": "2026-10-08T21:07:54.808Z",
-  "note": "KIDS V1.08.97: Globale gestengesteuerte Zurück-Navigation per iOS TouchEvents-Fallback und PointerEvents auf iPhone/iPad; animiertes Ziehen ab linkem Rand und sanfte Rückfederung bei Abbruch. Auch Gebetszeiten-Vollansicht, Duʿāʾ-Lernmodus und Content-Detail unterstützt. Vertikales Scrollen und horizontale Lernstreifen geschützt. Freigegebenes Moscheemotiv und Gebetszeiten unverändert.",
+  "note": "KIDS V1.08.98: Videoanalyse 09:16. Bei Swipe-Back wird die vorige Tab-Ansicht unter dem aktuellen Screen sichtbar gehalten, statt einen leeren blauen Bereich zu zeigen. Beide Randrichtungen auf iOS/iPad unterstützt, vorherige Einblendanimation nach Back unterdrückt, Tabwechsel schneller und ohne dunkles Zwischenbild. Vertikale Gesten und kurze abgebrochene Gesten bleiben geschützt.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1280",
+    "serviceWorkerCache": "v1281",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
