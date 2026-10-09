@@ -4,7 +4,7 @@
 const assert=require("node:assert/strict");
 const fs=require("node:fs");
 const path=require("node:path");
-const {audit,checkActualBinaryArguments,verifyLocalBinary}=require("./audit-project-completion.cjs");
+const {audit,checkActualBinaryArguments,verifyLocalBinary,main}=require("./audit-project-completion.cjs");
 const dir=__dirname;
 const load=p=>JSON.parse(fs.readFileSync(path.join(dir,p),"utf8"));
 const boy=load("original-boy-identity-lock-v1.json");
@@ -89,5 +89,16 @@ check("duplicate release model arguments are rejected",()=>{
 check("even present unsupported GLB paths cannot fake a reviewed checksum",()=>{
  const r=checkActualBinaryArguments(["--boy-glb=/not-found/boy.glb","--girl-glb=/not-found/girl.glb"],boy,girl,acceptance);
  assert.equal(r.pass,false);
+});
+check("full strict CLI audit returns nonzero with missing GLBs",()=>{
+ const original=process.stdout.write;
+ let captured="";
+ try{
+   process.stdout.write=x=>{captured+=x;return true;};
+   assert.equal(main(["--require-ready"]),1);
+ }finally{process.stdout.write=original;}
+ const result=JSON.parse(captured);
+ assert.equal(result.ready,false);
+ assert.equal(result.localBinaryEvidence.pass,false);
 });
 console.log(passed+" audit-blocker regression tests PASS. No real GLB validated, no release.");
