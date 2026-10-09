@@ -321,6 +321,10 @@
     var back=isBackControl(e.target);
     var desc=back?null:descriptorFor(e.target);
     if(!back&&!desc)return;
+    if(desc&&desc.type==="tab"&&desc.target!==activeTab()){
+      root.classList.add("kids-nav-tab-switching");
+      setTimeout(function(){root.classList.remove("kids-nav-tab-switching")},290);
+    }
     saveCurrent();
     var before=signature();
     var token=++clickToken;
@@ -430,6 +434,8 @@
       "html.kids-nav-just-returned .view.active{animation:none!important;opacity:1!important;}",
       "html.kids-nav-transitioning .view.active{animation:none!important;opacity:1!important;}",
       ".kids-nav-swipe-underlay{animation:none!important;pointer-events:none!important;contain:layout!important;}",
+      "@keyframes kidsNavTabRevealV1281{from{opacity:.94;transform:translate3d(12px,0,0)}to{opacity:1;transform:none}}",
+      "html.kids-nav-tab-switching .shell > .view.active{animation:kidsNavTabRevealV1281 .24s cubic-bezier(.22,1,.36,1) both!important;}",
       ".kids-nav-swipe-surface{will-change:transform,opacity,box-shadow!important;backface-visibility:hidden!important;-webkit-backface-visibility:hidden!important;}",
       "@keyframes kidsNavSurfaceInV1246{from{opacity:.74;transform:translate3d(20px,0,0)}to{opacity:1;transform:translate3d(0,0,0)}}",
       "#psLibraryPage.open,#msLibraryPage.open,#syLibraryPage.open,#dlLibraryPage.open,#ghWorld.open{animation:kidsNavSurfaceInV1246 .34s cubic-bezier(.22,1,.36,1) both;}",
