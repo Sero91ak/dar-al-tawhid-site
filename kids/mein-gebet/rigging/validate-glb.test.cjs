@@ -37,4 +37,18 @@ test("reject glb length mismatch",()=> {let b=Buffer.alloc(24);b.writeUInt32LE(0
 const j=JSON.stringify({asset:{version:"2.0"},nodes:[]}),pad=(4-j.length%4)%4,chunk=Buffer.from(j+" ".repeat(pad),"utf8"),buffer=Buffer.alloc(20+chunk.length);
 buffer.writeUInt32LE(0x46546c67,0);buffer.writeUInt32LE(2,4);buffer.writeUInt32LE(buffer.length,8);buffer.writeUInt32LE(chunk.length,12);buffer.writeUInt32LE(0x4e4f534a,16);chunk.copy(buffer,20);
 test("parse valid minimal GLB header/json",()=> assert.equal(parseGLB(buffer).gltf.asset.version,"2.0"));
+// Limb-stretch regression: the first real release gate must fail closed.
+test("allow Hips root translation",()=> {const x=fixture();x.animations[0].channels[0].target.path="translation";assert.equal(status(x).structureValid,true)});
+test("reject Spine joint translation",()=> {const x=fixture();x.animations[0].channels[0].target={node:1,path:"translation"};assert.ok(status(x).errors.some(s=>s.includes("non-root skinned joint translation")))});
+test("reject UpperArm.L joint translation",()=> {const x=fixture();x.animations[0].channels[0].target={node:5,path:"translation"};assert.equal(status(x).structureValid,false)});
+test("reject LowerLeg.R joint translation",()=> {const x=fixture();x.animations[0].channels[0].target={node:16,path:"translation"};assert.equal(status(x).structureValid,false)});
+test("allow nonjoint object translation",()=> {const x=fixture();x.animations[0].channels[0].target={node:19,path:"translation"};assert.equal(status(x).structureValid,true)});
+test("allow limb joint rotation",()=> {const x=fixture();x.animations[0].channels[0].target={node:5,path:"rotation"};assert.equal(status(x).structureValid,true)});
+test("reject translation on a second skin's joint",()=> {const x=fixture();x.nodes.push({name:"ExtraJoint"});x.skins.push({joints:[20],inverseBindMatrices:0});x.animations[0].channels[0].target={node:20,path:"translation"};assert.equal(status(x).structureValid,false)});
+test("reject falsely named nested Hips",()=> {const x=fixture();x.nodes[1].children=[0];x.animations[0].channels[0].target={node:0,path:"translation"};assert.equal(status(x).structureValid,false)});
+test("reject intermediary skeletal helper translation",()=> {const x=fixture();x.nodes.push({name:"ArmHelper",children:[5]});x.nodes[0].children=[20];x.animations[0].channels[0].target={node:20,path:"translation"};assert.equal(status(x).structureValid,false)});
+test("allow parent-of-whole-rig translation",()=> {const x=fixture();x.nodes.push({name:"World",children:[0]});x.animations[0].channels[0].target={node:20,path:"translation"};assert.equal(status(x).structureValid,true)});
+test("reject duplicate root naming",()=> {const x=fixture();x.nodes[16].name="Hips";assert.equal(status(x).structureValid,false)});
+test("reject cyclic skeletal hierarchy",()=> {const x=fixture();x.nodes[0].children=[1];x.nodes[1].children=[0];x.animations[0].channels[0].target={node:0,path:"translation"};assert.equal(status(x).structureValid,false)});
+test("reject invalid child references",()=> {const x=fixture();x.nodes[0].children=[9999];assert.equal(status(x).structureValid,false)});
 process.stdout.write("\n"+count+" offline test checks passed. No 3D model generated or approved.\n");
