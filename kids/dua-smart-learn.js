@@ -239,15 +239,32 @@
   // The Arabic and transliteration rows now wrap; no horizontal slider exists.
   function keepFocusedWordVisible(){
     if(!root||!root.classList.contains("open"))return;
-    var viewport=root.querySelector(".dsl-reading-stage")||root.querySelector(".dsl-scroll");
-    var word=root.querySelector('.dsl-arabic [data-seg="'+currentIndex+'"]');
-    if(!viewport||!word)return;
-    var view=viewport.getBoundingClientRect();
-    var rect=word.getBoundingClientRect();
-    if(rect.top<view.top+16||rect.bottom>view.bottom-16){
-      var desired=viewport.scrollTop+(rect.top-view.top)-(view.height-rect.height)*0.32;
-      try{viewport.scrollTo({top:Math.max(0,desired),behavior:"smooth"})}
-      catch(e){viewport.scrollTop=Math.max(0,desired)}
+    function follow(container,word,inset){
+      if(!container||!word)return;
+      var view=container.getBoundingClientRect();
+      var rect=word.getBoundingClientRect();
+      if(rect.top<view.top+inset||rect.bottom>view.bottom-inset){
+        var desired=container.scrollTop+(rect.top-view.top)-(view.height-rect.height)*.35;
+        try{container.scrollTo({top:Math.max(0,desired),behavior:"smooth"})}
+        catch(e){container.scrollTop=Math.max(0,desired)}
+      }
+    }
+    if(root.classList.contains("dsl-long-content")){
+      // Long Duʿāʾs use three vertically bounded reading lanes.
+      // The ACTIVE Arabic, Latin and German words must all remain visible.
+      [".dsl-arabic",".dsl-translit",".dsl-german"].forEach(function(selector){
+        var layer=root.querySelector(selector);
+        if(!layer)return;
+        var word=layer.querySelector('[data-seg="'+currentIndex+'"]');
+        follow(layer,word,8);
+      });
+      return;
+    }
+    var stage=root.querySelector(".dsl-reading-stage")||root.querySelector(".dsl-scroll");
+    follow(stage,root.querySelector('.dsl-arabic [data-seg="'+currentIndex+'"]'),10);
+    // On a tiny screen make the German counterpart visible as well.
+    if(stage&&stage.scrollHeight>stage.clientHeight){
+      follow(stage,root.querySelector('.dsl-german [data-seg="'+currentIndex+'"]'),8);
     }
   }
   function queueFocusedWord(){requestAnimationFrame(keepFocusedWordVisible)}
@@ -266,6 +283,8 @@
     var stage=root.querySelector(".dsl-reading-stage");
     if(!stage)return;
     var count=getSegments(currentDua).length;
+    // Measure the natural content, not already capped scroll lanes.
+    root.classList.remove("dsl-long-content");
     var short=count<=5,medium=count<=13,long=count<=22;
     var ar=short?44:(medium?40:(long?36:33));
     var tr=short?20:(medium?19:(long?18:17));
@@ -284,7 +303,8 @@
       if(tr>16.5)tr=Math.max(16.5,tr-.4);
       if(de>14)de=Math.max(14,de-.25);
     }
-    root.classList.toggle("dsl-long-content",stage.scrollHeight>stage.clientHeight+2);
+    root.classList.toggle("dsl-long-content",count>18||stage.scrollHeight>stage.clientHeight+2);
+    queueFocusedWord();
   }
   function queueReaderFit(){
     if(layoutFrame)cancelAnimationFrame(layoutFrame);
