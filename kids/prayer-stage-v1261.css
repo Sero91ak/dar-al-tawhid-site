@@ -2007,3 +2007,30 @@ body.kids-salah-day-open{overflow:hidden!important}
 .kids-salah-day .kids-salah-day-header{
   align-items:center!important;
 }
+
+/* KIDS_HOME_FULLBLEED_STATUS_V1279
+   iPhone reference 2: the same approved mosque photograph flows behind the
+   system status icons. Lift the entire illustrated home world by the original
+   safe-top reservation, rather than auto-scrolling the page on launch.
+   No extra artwork or colored status-bar strip is introduced. */
+@media(max-width:699px){
+  html.kids-ios-app #view-today .kids-salah-home-world,
+  html.dar-ios-native-app #view-today .kids-salah-home-world{
+    margin-top:-46px!important;
+  }
+}
+@media (display-mode:standalone) and (max-width:699px){
+  html:not(.kids-ios-app) #view-today .kids-salah-home-world{
+    margin-top:calc(-1 * max(0px, min(46px, env(safe-area-inset-top, 0px))))!important;
+  }
+}
+/* The selected city is already legible in the prayer header. Keep non-routine
+   warnings and location prompts available in the status node. */
+#view-today .kids-salah-status:empty{
+  display:none!important;
+  margin:0!important;
+  padding:0!important;
+}
+#view-today .kids-salah-home-world{
+  padding-bottom:3px!important;
+}
