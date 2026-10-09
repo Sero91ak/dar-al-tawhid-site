@@ -84,20 +84,22 @@
     "verifiedAt": "2026-10-09",
     "validatorFile": "rigging/validate-glb.cjs",
     "validatorBlobSha": "e643a9a33bd86984f9c1cc5d0e2f6d3e391c3d71",
-    "syntheticUpperArmTranslationAccepted": null,
-    "syntheticLowerLegTranslationAccepted": null,
+    "syntheticUpperArmTranslationAccepted": false,
+    "syntheticLowerLegTranslationAccepted": false,
     "syntheticScaleAnimationRejected": true,
     "realGLBCheckedInThisRun": false,
     "boneLengthInvariantVerified": false,
     "requiresAdditionalNoLimbTranslationGuard": false,
-    "note": "Fail-closed no-non-root-translation guard committed; 13 isolated synthetic checks of guard logic and 7 Python diagnostic unit tests passed locally. No real GLB bytes materialized; actual V7.7 validator run, real camera sweep and original-likeness review remain blocked. Existing five-view values are retained.",
+    "note": "Committed validator and all 29 committed JavaScript offline assertions passed in isolated V8 harness (mocked Node primitives); 7 Python camera diagnostic tests passed locally. No real GLB bytes materialized. Real binary rig test, physical angle calibration, five-view progress and visual identity approval remain blocked.",
     "translationGuardCommitted": true,
     "translationGuardVerifiedAgainstActualV77GLB": false,
-    "javascriptRepositoryTestSuiteRunAfterGuard": false,
+    "javascriptRepositoryTestSuiteRunAfterGuard": true,
     "angleDiagnosticFile": "rigging/three_quarter_camera_diagnostic.py",
     "angleDiagnosticUnitTestsPass": 7,
     "angleSweepAgainstActualV77GLB": false,
     "realOriginalImageAvailableToThisRun": false,
-    "physicalThreeQuarterCameraCalibrated": false
+    "physicalThreeQuarterCameraCalibrated": false,
+    "javascriptRepositoryTestChecksPassed": 29,
+    "javascriptTestEnvironment": "Connector-fetched exact JS run in isolated V8 with mocked node:assert, Buffer and fs/path; not GitHub Actions or real Node filesystem"
   }
 }
