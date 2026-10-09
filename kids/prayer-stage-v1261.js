@@ -55,7 +55,7 @@ if(navigator.connection?.saveData)salahWorld.classList.add("kids-salah-save-data
  const dock=document.querySelector(".bottom-nav");
  const cta=stage.querySelector("#kidsSalahOpenDay");
  if(!dock||!cta)return;
- let queued=false,lastHeight=0,lastWidth=0,lastViewportHeight=0;
+ let queued=false,lastHeight=0,lastWidth=0;
  function desiredHeroMax(w,h){
    if(w>=700)return h<=840?Math.min(390,Math.max(306,.43*h)):Math.min(525,Math.max(350,.50*h));
    return Math.min(430,Math.max(292,.50*h));
@@ -81,16 +81,29 @@ if(navigator.connection?.saveData)salahWorld.classList.add("kids-salah-save-data
    // The actual hero height also includes the native safe-area image bleed.
    // Calculate the target from the previously applied BASE height, not from
    // the inflated visible rectangle, to prevent cumulative startup drift.
-   const base=(lastWidth===w&&Math.abs(lastViewportHeight-h)<1&&lastHeight>0)
-     ?lastHeight:reference;
-   const wanted=Math.max(safeMinimum,Math.min(reference,Math.round(base+free)));
+   const nativeIos=document.documentElement.classList.contains("kids-ios-app")||
+     document.documentElement.classList.contains("dar-ios-native-app");
+   const bleedMargin=parseFloat(getComputedStyle(salahWorld).marginTop)||0;
+   // The visible hero rectangle includes extra photo behind the device's
+   // status bar. CSS adds that bleed back *after* the base target. Exclude
+   // it when measuring, otherwise the initial fit grows or jumps on short
+   // phones and landscape tablets.
+   const bleedCompensation=w>=700
+     ?Math.max(0,-bleedMargin)
+     :(nativeIos?Math.max(0,-bleedMargin-46):0);
+   // Always start from the height ACTUALLY painted now. In short viewports
+   // the CSS preflight cap can be smaller than desiredHeroMax(), so using
+   // 'reference' as the initial base caused the prayer CTA to drop down
+   // again after the first layout pass.
+   const actualBase=Math.max(0,heroRect.height-bleedCompensation);
+   const wanted=Math.max(safeMinimum,Math.min(reference,Math.round(actualBase+free)));
    // Always measure against live dock; on very small screens keep scroll
    // instead of shrinking/overlapping words or obstructing touch controls.
    if(Math.abs(lastHeight-wanted)>2||Math.abs(lastWidth-w)>1){
      HERO.style.setProperty("--kids-home-measured-min",safeMinimum+"px");
      HERO.style.setProperty("--kids-home-measured-target",wanted+"px");
      HERO.style.setProperty("--kids-home-preflight-cap","9999px");
-     lastHeight=wanted;lastWidth=w;lastViewportHeight=h;
+     lastHeight=wanted;lastWidth=w;
    }
  }
  function schedule(){
