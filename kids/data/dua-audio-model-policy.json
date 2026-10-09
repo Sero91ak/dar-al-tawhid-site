@@ -20,17 +20,35 @@
     "human signoff before publishing"
   ],
   "comparison": {
-    "text": "رَبِّ زِدْنِي عِلْمًا",
-    "modelIds": [
-      "eleven_v3",
-      "eleven_v4"
-    ],
     "status": "generated-awaiting-human-listening-review",
     "flowId": "U5BK7MLRAC0OaI3PgskC",
-    "durationsSeconds": {
-      "eleven_v3": 1.6,
-      "eleven_v4": 1.76
-    }
+    "tests": [
+      {
+        "text": "رَبِّ زِدْنِي عِلْمًا",
+        "models": {
+          "eleven_v3": {
+            "durationSeconds": 1.6
+          },
+          "eleven_v4": {
+            "durationSeconds": 1.76
+          }
+        },
+        "purpose": "continuous phrase: diction and natural pace"
+      },
+      {
+        "text": "لَا",
+        "models": {
+          "eleven_v3": {
+            "durationSeconds": 0.4
+          },
+          "eleven_v4": {
+            "durationSeconds": 0.8
+          }
+        },
+        "purpose": "isolated madd vowel and breath/tail, no automatic approval"
+      }
+    ],
+    "durationReviewNote": "Duration alone does not establish correctness. Assess vowel length and breath artifacts by listening to both recordings."
   },
   "guardrails": {
     "maxNewArabicWordClipsPerRun": 8,
