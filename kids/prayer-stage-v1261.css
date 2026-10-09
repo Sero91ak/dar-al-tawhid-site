@@ -2255,3 +2255,13 @@ html body #view-today .kids-salah-open-day{
     top:calc(clamp(54px,7dvh,94px) + var(--kids-start-compensation))!important;
   }
 }
+
+/* KIDS_HOME_IPAD_LANDSCAPE_TOP_V1296 — retain the compact tablet-landscape logo height after adding
+   status-bar bleed; portrait sizing must not be forced into a short iPad. */
+@media (min-width:700px) and (max-height:840px){
+  html.kids-ios-app body #view-today.view .kids-salah-home-world .kids-wordmark,
+  html.dar-ios-native-app body #view-today.view .kids-salah-home-world .kids-wordmark,
+  html:not(.kids-ios-app):not(.dar-ios-native-app) body #view-today.view .kids-salah-home-world .kids-wordmark{
+    top:calc(clamp(40px,6dvh,65px) + var(--kids-start-compensation,0px))!important;
+  }
+}
