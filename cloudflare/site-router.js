@@ -249,6 +249,24 @@ function publicWebsiteAddon() {
 #darIosAppStorePromo .dar-store-link{display:flex;align-items:center;gap:9px;min-height:46px;padding:0 15px;border:1px solid rgba(234,211,154,.26);border-radius:15px;background:#fffaf0;color:#15231f;text-decoration:none;font-size:10px;font-weight:850;letter-spacing:.02em;white-space:nowrap}
 #darIosAppStorePromo .dar-store-link svg{width:22px;height:22px;flex:0 0 auto}
 @media(max-width:680px){#darIosAppStorePromo.is-visible{grid-template-columns:40px minmax(0,1fr);gap:12px;padding:15px;border-radius:20px}#darIosAppStorePromo .dar-store-link{grid-column:1/3;justify-content:center;width:100%}}
+.dar-download-fallback{padding:18px 0 34px}
+.dar-download-fallback__intro{padding:18px 0 20px;border-bottom:1px solid rgba(132,111,72,.18)}
+.dar-download-fallback__intro small{display:block;color:#8c6a2d;font-size:9px;font-weight:850;letter-spacing:.14em}
+.dar-download-fallback__intro h1{margin:7px 0 5px;font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;font-size:clamp(34px,5vw,58px);font-weight:500;color:#2b2923}
+.dar-download-fallback__intro p{margin:0;color:#70685c;font-size:13px;line-height:1.6}
+.dar-download-fallback__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:22px}
+.dar-download-fallback__card{padding:22px;border:1px solid rgba(124,97,45,.2);border-radius:22px;background:linear-gradient(145deg,#fffdf8,#f5f0e6);box-shadow:0 10px 30px rgba(65,48,24,.07)}
+.dar-download-fallback__head{display:flex;align-items:center;gap:14px}
+.dar-download-fallback__icon{width:58px;height:58px;flex:0 0 58px;display:grid;place-items:center;border-radius:17px;background:#102b2b;color:#a4c639}
+.dar-download-fallback__icon.apple{background:#fff;color:#111}
+.dar-download-fallback__icon svg{width:36px;height:36px;display:block}
+.dar-download-fallback__card small{display:block;color:#8a6b2d;font-size:8px;font-weight:850;letter-spacing:.13em}
+.dar-download-fallback__card h2{margin:4px 0 0;font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;font-size:22px;font-weight:600;color:#2a2924}
+.dar-download-fallback__card p,.dar-download-fallback__card ol{color:#625c53;font-size:11px;line-height:1.7}
+.dar-download-fallback__btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 15px;border:1px solid #9a7738;border-radius:13px;background:#17342f;color:#fff9e9;text-decoration:none;font-size:10px;font-weight:850;cursor:pointer}
+.dar-download-fallback__btn.apple{background:#111820;border-color:#111820}
+.dar-download-fallback__btn svg{width:18px;height:18px}
+@media(max-width:760px){.dar-download-fallback__grid{grid-template-columns:1fr}.dar-download-fallback__card{padding:18px}}
 </style>
 <section id="darIosAppStorePromo" aria-label="DĀR AL TAWḤĪD im App Store">
   <div class="dar-store-apple" aria-hidden="true">
@@ -375,6 +393,38 @@ function publicWebsiteAddon() {
       }
     }catch(eCache){}
   }
+
+  function appleLogoMarkup(){
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.37 12.64c-.03-2.16 1.76-3.2 1.84-3.25-1-1.47-2.57-1.67-3.12-1.69-1.32-.14-2.59.78-3.26.78s-1.7-.76-2.81-.74c-1.44.02-2.78.84-3.52 2.14-1.51 2.62-.39 6.5 1.08 8.63.72 1.04 1.58 2.21 2.71 2.17 1.09-.05 1.5-.7 2.81-.7s1.68.7 2.82.68c1.17-.02 1.91-1.06 2.62-2.11.83-1.2 1.17-2.37 1.19-2.43-.03-.01-2.27-.87-2.3-3.48zM14.5 6.9c.6-.73 1-1.74.89-2.75-.86.03-1.9.57-2.52 1.3-.55.64-1.04 1.67-.91 2.65.96.07 1.95-.49 2.54-1.2z"/></svg>';
+  }
+  function androidLogoMarkup(){
+    return '<svg viewBox="0 0 64 64" aria-hidden="true"><g fill="currentColor"><path d="M20.2 17.7 16.5 11.3a1.5 1.5 0 0 1 2.6-1.5l3.8 6.5A24.2 24.2 0 0 1 32 14.5c3.3 0 6.4.7 9.1 1.9l3.8-6.5a1.5 1.5 0 1 1 2.6 1.5l-3.7 6.4A16.5 16.5 0 0 1 49 29H15a16.5 16.5 0 0 1 5.2-11.3Z"/><rect x="15" y="31" width="34" height="22" rx="3"/><rect x="9" y="31" width="4" height="19" rx="2"/><rect x="51" y="31" width="4" height="19" rx="2"/><rect x="21" y="51" width="5" height="10" rx="2.5"/><rect x="38" y="51" width="5" height="10" rx="2.5"/></g><circle cx="24" cy="23" r="1.8" fill="#10252a"/><circle cx="40" cy="23" r="1.8" fill="#10252a"/></svg>';
+  }
+  function ensurePublicDownloads(){
+    var page="start";
+    try{page=(new URLSearchParams(location.search).get("page")||"start").toLowerCase()}catch(e){}
+    if(page==="mehr"){
+      var grid=document.querySelector(".more-grid");
+      if(grid&&!grid.querySelector('[data-page="downloads"],.dar-download-route')){
+        var link=document.createElement("a");
+        link.className="more-row dar-download-route";
+        link.href="/?page=downloads";
+        link.innerHTML='<div><h3>Downloads</h3><p>Android-Web-App installieren · iPhone & iPad im Apple App Store.</p></div><b>→</b>';
+        grid.insertBefore(link,grid.firstChild);
+      }
+    }
+    if(page==="downloads"&&!document.querySelector(".download-hub-grid,.dar-download-fallback")){
+      var root=document.getElementById("pageRoot");
+      if(!root)return;
+      root.innerHTML='<section class="dar-download-fallback"><div class="dar-download-fallback__intro"><small>DOWNLOADS</small><h1>DĀR AL TAWḤĪD als App nutzen.</h1><p>Android als Web-App installieren oder die offizielle iOS-App im Apple App Store öffnen.</p></div><div class="dar-download-fallback__grid">'+
+        '<article class="dar-download-fallback__card"><div class="dar-download-fallback__head"><span class="dar-download-fallback__icon">'+androidLogoMarkup()+'</span><div><small>ANDROID · SMARTPHONE & TABLET</small><h2>Web-App installieren</h2></div></div><p>Die öffentliche DĀR AL TAWḤĪD Website lässt sich auf Android direkt wie eine App installieren. Keine APK nötig.</p><ol><li>In Chrome, Edge oder Samsung Internet öffnen.</li><li>Auf Web-App installieren tippen.</li><li>Falls kein Dialog erscheint: Browser-Menü → App installieren bzw. Zum Startbildschirm hinzufügen.</li></ol><button class="dar-download-fallback__btn" type="button" data-dar-pwa-install>Web-App installieren</button></article>'+
+        '<article class="dar-download-fallback__card"><div class="dar-download-fallback__head"><span class="dar-download-fallback__icon apple">'+appleLogoMarkup()+'</span><div><small>APPLE · IPHONE & IPAD</small><h2>iOS-App</h2></div></div><p>Für iPhone und iPad steht die native DĀR AL TAWḤĪD App im Apple App Store bereit.</p><a class="dar-download-fallback__btn apple" href="https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753" rel="noopener noreferrer">'+appleLogoMarkup()+'<span>Im App Store laden</span></a></article>'+
+        '</div></section>';
+    }
+  }
+  ensurePublicDownloads();
+  window.addEventListener("pageshow",ensurePublicDownloads);
+  window.addEventListener("popstate",function(){setTimeout(ensurePublicDownloads,0)});
 })();
 </script>`;
 }
