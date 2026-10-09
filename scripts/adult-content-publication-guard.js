@@ -71,6 +71,17 @@ function allTv(){
  }
  return out;
 }
+function seriesDirFor(n){
+ const ranges=fs.readdirSync(series).filter(s=>/^\d+-\d+$/.test(s)).map(s=>{
+  const p=s.split("-").map(Number);return {start:p[0],end:p[1],name:s};
+ }).filter(r=>r.end>=r.start).sort((a,b)=>a.start-b.start);
+ const hit=ranges.find(r=>n>=r.start&&n<=r.end);
+ if(hit)return series+"/"+hit.name;
+ const last=ranges[ranges.length-1];
+ if(last&&n!==last.end+1)throw Error("Unsafe series gap before "+n);
+ const start=last?last.end+1:1;
+ return series+"/"+String(start).padStart(3,"0")+"-"+String(start+99);
+}
 function selected(){
  const at=process.argv.indexOf("--post"),all=at>=0?[process.argv[at+1]]:String(process.env.CHANGED_POST_FILES||"").split(/\r?\n/);
  return [...new Set(all.map(x=>String(x||"").trim()).filter(x=>/^content\/posts\/[a-z0-9][\w-]*\.md$/.test(x)))];
@@ -145,8 +156,8 @@ function main(){
   if(q==="already-synced"){console.log("Already synced",p.id);continue}
   batch.push(p);
   if(write){
-   const r=makeRecord(p,q,++next),start=Math.floor((next-1)/100)*100+1;
-   const dir=series+"/"+String(start).padStart(3,"0")+"-"+String(start+99);
+   const r=makeRecord(p,q,++next);
+   const dir=seriesDirFor(next);
    fs.mkdirSync(dir,{recursive:true});
    const dest=dir+"/"+r.id+".json";
    if(fs.existsSync(dest))block("HAD number already allocated",{number:r.id});
