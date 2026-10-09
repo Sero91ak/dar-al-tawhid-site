@@ -53,7 +53,13 @@ if (fs.existsSync(publicRouterPath)) {
   assert.ok(router.includes("btn.disabled=installed"), "Install button must remain clickable while Chrome prepares beforeinstallprompt and only disable after installation");
   assert.ok(!router.includes("btn.disabled=installed||preparing"), "Install button must not be disabled merely while Chrome prepares beforeinstallprompt");
   assert.ok(router.includes('start_url: "/pwa/?pwa=1"'), "Dynamic Android PWA manifest must launch the dedicated visitor app shell");
+  assert.ok(router.includes('dataset.appPath="android-pwa"'), "Dedicated Android PWA must mark its app path before first paint");
+  assert.ok(router.includes('"is-standalone-pwa","is-android"'), "Dedicated Android PWA must activate standalone/mobile styling before first paint");
 }
+const pwaServiceWorker = fs.readFileSync(path.join(root, "service-worker.js"), "utf8");
+assert.ok(pwaServiceWorker.includes("requestComesFromDedicatedPwa"), "Installed PWA client isolation is missing");
+assert.ok(pwaServiceWorker.includes("dedicatedPwaNavigationRequest"), "Installed PWA root-navigation rewrite is missing");
+assert.ok(pwaServiceWorker.includes("const fallbackKey = shellKey === '/pwa/?pwa=1' ? shellKey : '/index.html'"), "Installed PWA must never fall back to the public website shell");
 assert.equal(pwaManifest.display, "standalone", "Public manifest must be installable as standalone PWA");
 assert.equal(pwaManifest.start_url, "/pwa/?pwa=1", "Installed Android PWA must launch the dedicated visitor app shell");
 assert.equal(pwaManifest.background_color, "#050706", "PWA system splash background must match the standard boot surface");
