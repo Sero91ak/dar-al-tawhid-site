@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "totalVerifiedEntries": 4605,
+  "totalVerifiedEntries": 4609,
   "files": [
     {
       "path": "entries.json",
@@ -1901,6 +1901,10 @@
     {
       "path": "entries-gap-06-230.json",
       "count": 6
+    },
+    {
+      "path": "entries-gap-06-231.json",
+      "count": 4
     }
   ],
   "mergeRule": "Index all entries by exact reference Sūrah:Āyah. Duplicate references are invalid unless a future schema explicitly supports multiple reviewed entries per verse.",
