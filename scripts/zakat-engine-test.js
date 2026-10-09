@@ -84,6 +84,29 @@ assert(belowNisab.resultCase === "A", "below nisab case A");
 assert(belowNisab.zakatDue === 0, "zero zakat below nisab");
 assert(belowNisab.nisab.reached === false, "nisab not reached");
 
+// Regression: German prices, debt and metal values must retain thousands and cents.
+const amountCases = [
+  ["1.234,50", 1234.50],
+  ["1234,50", 1234.50],
+  ["1.234", 1234],
+  ["1,234.50", 1234.50],
+  ["10 200,95", 10200.95],
+  ["1.000.000,05", 1000000.05],
+  ["12.5", 12.5],
+  ["2..000", 0],
+  ["", 0],
+  ["-10", 0]
+];
+for (const [raw, expected] of amountCases) {
+  assert(Math.abs(Z.parseAmount(raw) - expected) < 0.001, "parseAmount " + JSON.stringify(raw) + " -> " + expected);
+}
+const deFormatted = Z.computeZakat({
+  cash: "5.000,00", bank: "5.000,00", goldGrams: "10",
+  debtsDue: "2.000,00", nisabSinceDate: "2024-01-01", todayDate: "2026-06-18"
+}, config);
+assert(Math.abs(deFormatted.zakatableWealth - 8750) < 0.01, "German input matches exact Zakāt base");
+assert(Math.abs(deFormatted.zakatDue - result.zakatDue) < 0.01, "German input matches exact Zakāt due");
+
 assert(Z.roundMoney(218.749) === 218.75, "roundMoney half up");
 
 const fresh = Z.priceFreshnessFromAge(now);
