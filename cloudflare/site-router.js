@@ -1253,7 +1253,10 @@ export default {
       return browserManifestResponse(request, androidBrowser);
     }
 
-    if ((request.method === "GET" || request.method === "HEAD") && isRoot && url.searchParams.get("pwa") === "1" && !nativeApp) {
+    const legacyPwaLaunch = url.searchParams.get("homescreen") === "1"
+      || url.searchParams.get("app") === "1"
+      || url.searchParams.get("mobile") === "1";
+    if ((request.method === "GET" || request.method === "HEAD") && isRoot && (url.searchParams.get("pwa") === "1" || legacyPwaLaunch) && !nativeApp) {
       const target = new URL(request.url);
       target.pathname = "/pwa/";
       target.search = "?pwa=1";
