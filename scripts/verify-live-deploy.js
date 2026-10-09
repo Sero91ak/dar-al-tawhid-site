@@ -94,6 +94,12 @@ async function main() {
     if (!visitorOk) {
       visitorOk = await waitForHtmlIncludes(`${SITE_URL}/index.html`, [visitorBuild], nativeHeaders);
     }
+    const pwaOk = await waitForHtmlIncludes(`${SITE_URL}/pwa/?pwa=1`, [
+      visitorBuild,
+      "darDedicatedPwaBootV2",
+      "__DAR_PWA_DEDICATED_APP=true",
+      'dataset.appPath="android-pwa"'
+    ]);
 
     const { text } = await fetchStatus(`${SITE_URL}/`, nativeHeaders);
     const zakatMatch = text.match(/zakat-app\.js\?v=(\d+)/);
@@ -111,14 +117,14 @@ async function main() {
       200
     );
 
-    if (!publicWebsiteOk || !visitorOk || zakatVer < expectZakat || !voiceStudioOk || !voiceVersionOk || !pronunciationOk) {
+    if (!publicWebsiteOk || !visitorOk || !pwaOk || zakatVer < expectZakat || !voiceStudioOk || !voiceVersionOk || !pronunciationOk) {
       console.error(
-        `verify: Besucher-App fehlgeschlagen (public=${publicWebsiteOk ? "ok" : "fail"}, native-build=${visitorOk ? visitorBuild : "fail"}, zakat=v${zakatVer || "?"}, voice=${voiceStudioOk ? "ok" : "fail"}, voice-version=${voiceVersionOk ? "ok" : "fail"}, pronunciation=${pronunciationOk ? "ok" : "fail"})`
+        `verify: Besucher-App fehlgeschlagen (public=${publicWebsiteOk ? "ok" : "fail"}, native-build=${visitorOk ? visitorBuild : "fail"}, android-pwa=${pwaOk ? "ok" : "fail"}, zakat=v${zakatVer || "?"}, voice=${voiceStudioOk ? "ok" : "fail"}, voice-version=${voiceVersionOk ? "ok" : "fail"}, pronunciation=${pronunciationOk ? "ok" : "fail"})`
       );
       failed += 1;
     } else {
       console.log(
-        `verify: Besucher-App live OK (public website + native ${visitorBuild}, zakat>=v${expectZakat}, Voice Studio + Aussprachebibliothek OK)`
+        `verify: Besucher-App live OK (public website + native ${visitorBuild} + Android PWA /pwa/, zakat>=v${expectZakat}, Voice Studio + Aussprachebibliothek OK)`
       );
     }
   }
