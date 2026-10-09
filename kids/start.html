@@ -2702,6 +2702,14 @@ html:not([data-view="today"]) .view.active{
  background-image:linear-gradient(180deg,rgba(4,17,28,.01),rgba(4,17,28,.08) 45%,rgba(4,17,28,.56) 100%),var(--quiz-art)!important;
  background-size:cover!important;background-position:center 50%!important;background-repeat:no-repeat!important;
 }
+/* Isolated KIDS Academy pilot entry: no change to the existing four home choices. */
+.academy-pilot-entry{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:16px 0 5px;padding:16px 18px;min-height:92px;border-radius:22px;border:1px solid rgba(226,189,114,.28);background:linear-gradient(110deg,rgba(16,56,73,.94),rgba(32,52,74,.86));color:#fff4dd;text-decoration:none;box-shadow:0 12px 28px rgba(0,0,0,.12)}
+.academy-pilot-entry:focus-visible{outline:3px solid #e2bd72;outline-offset:3px}
+.academy-pilot-text{display:flex;flex-direction:column;gap:3px;min-width:0}
+.academy-pilot-text small{font-size:10px;letter-spacing:.11em;color:#edd092;font-weight:850}
+.academy-pilot-text strong{font-size:20px;line-height:1.18}
+.academy-pilot-text>span{font-size:12px;color:rgba(255,255,255,.78)}
+.academy-pilot-arrow{flex:none;display:grid;place-items:center;border:1px solid rgba(226,189,114,.4);background:rgba(226,189,114,.1);color:#f1d28c;border-radius:50%;height:42px;width:42px;font-size:24px}
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Fredoka:wght@500;600;700&family=Noto+Naskh+Arabic:wght@500;700&display=swap">
 <!-- Launch v174: native/PWA opens directly on the approved mosque background; no obsolete intro overlay or audio. -->
@@ -2981,6 +2989,10 @@ html:not([data-view="today"]) .view.active{
           
         </button>
       </div>
+      <a href="/kids/akademie/" class="academy-pilot-entry" aria-label="Neue Lernakademie auf dem Smartphone testen">
+        <span class="academy-pilot-text"><small>LERNEN · SMARTPHONE-PILOT V6.7</small><strong>Meine Lernakademie</strong><span>Ṣidq · Wahrhaftigkeit · 5 Unterrichtsschritte</span></span>
+        <span class="academy-pilot-arrow" aria-hidden="true">→</span>
+      </a>
 
       <button id="knowledgeCard" class="knowledge-card" type="button">
         <span class="kicon" aria-hidden="true"></span>
