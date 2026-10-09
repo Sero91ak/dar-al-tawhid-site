@@ -90,7 +90,7 @@
       login.addEventListener("click", function () {
         if (!global.DARZakat || !global.DARZakatApp) return;
         var config = global.DARZakatApp.getConfig();
-        var input = inputSnapshot();
+        var input = global.DARZakatApp.getInput ? global.DARZakatApp.getInput() : inputSnapshot();
         var result = config ? global.DARZakat.computeZakat(input, config) : null;
         var populated = ["cash","bank","digital","otherLiquid","goldGrams","goldValueManual","silverGrams","silverValueManual","debtsDue"]
           .some(function (key) { return global.DARZakat.parseAmount(input[key]) > 0; });
