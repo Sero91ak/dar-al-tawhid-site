@@ -11,6 +11,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const {validateAnimationBytes} = require("./validate-glb-binary.cjs");
 const {validateGeometryBytes} = require("./validate-glb-geometry-binary.cjs");
+const {validatePoseBoneLengths}=require("./validate-pose-bone-lengths.cjs");
 const GLB_MAGIC = 0x46546c67;
 const GLB_JSON = 0x4e4f534a;
 
@@ -229,6 +230,15 @@ function main(args) {
       result.structureValid = false;
     }
     result.geometryVertexBytesVerified = geometry.valid;
+    const bonePose = validatePoseBoneLengths(gltf, bin);
+    if (!bonePose.valid) {
+      result.errors.push(...bonePose.errors);
+      result.structureValid = false;
+    }
+    result.boneLengthInvariantVerified = bonePose.valid;
+    result.numericBoneEvidence = {segments:bonePose.measuredSegments||0,
+      sampledFrames:bonePose.sampledFrames||0,
+      maxLengthDeltaMetres:bonePose.maxLengthDeltaMetres??null};
     result.binaryGeometry = {vertices:geometry.vertices || 0,triangles:geometry.triangles || 0};
     result.productionApproved = false;
     process.stdout.write(JSON.stringify(result,null,2)+"\n");
