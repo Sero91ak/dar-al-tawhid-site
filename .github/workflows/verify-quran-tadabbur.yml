@@ -31,6 +31,8 @@ jobs:
         run: python3 apple-tv/quran/tadabbur/tools/verify_tadabbur_catalog.py
       - name: Echte Lücken aus allen registrierten Einträgen berechnen
         run: node apple-tv/quran/tadabbur/tools/find-missing-references.mjs
+      - name: Zehn-Prozent-Etappen und Batchlimits prüfen
+        run: node apple-tv/quran/tadabbur/tools/check-milestones.mjs
       - name: Gespeicherten Lückenreport auf Aktualität prüfen
         shell: bash
         run: |
