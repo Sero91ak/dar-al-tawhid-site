@@ -5,11 +5,11 @@
   "totalInspected": 50,
   "hadithCount": 30,
   "atharCount": 20,
-  "hadithSharhVerified": 19,
-  "hadithSharhOpen": 11,
+  "hadithSharhVerified": 21,
+  "hadithSharhOpen": 9,
   "atharAttributionVerified": 1,
   "atharAttributionOpen": 19,
-  "openTotal": 30,
+  "openTotal": 28,
   "policy": {
     "hadith": "Authentischer Primärbericht + direkt belegbarer früher arabischer Kommentar",
     "athar": "Kein Šarḥ erforderlich; originaler Isnād/Attribution einzeln verifizieren",
@@ -33,7 +33,7 @@
       "commit": "cb9ad6a05ee8c5d2724942909056423cb60e7f33"
     }
   ],
-  "nextAction": "11 Ḥadīṯ-Kommentare und 19 Āṯār-Attributionen noch offen; pro Datensatz Primärtext und frühestmöglichen direkten arabischen Kommentar belegen. Konkrete Druckedition noch editionskritisch nacharbeiten.",
+  "nextAction": "Verbleiben 9 Ḥadīṯe mit offener Šarḥ-Prüfung und 19 Āṯār-Attributionen. Früheste Originalquellen und Isnādprüfung fortsetzen.",
   "entries": [
     {
       "id": "HAD-0493",
@@ -304,9 +304,9 @@
     {
       "id": "HAD-0531",
       "recordType": "hadith",
-      "sharh": "open-source-review",
+      "sharh": "verified",
       "attribution": null,
-      "sourceAudit": "Genaue Originalquelle und klassischen arabischen Direkt-Šarḥ einschließlich Ausgabe nachprüfen"
+      "sourceAudit": "Direkter arabischer klassischer Originalkommentar mit Quellenangabe und digitaler Werkpagination im HAD-Datensatz; Printedition nicht nachgewiesen."
     },
     {
       "id": "HAD-0532",
@@ -332,9 +332,9 @@
     {
       "id": "HAD-0535",
       "recordType": "hadith",
-      "sharh": "open-source-review",
+      "sharh": "verified",
       "attribution": null,
-      "sourceAudit": "Genaue Originalquelle und klassischen arabischen Direkt-Šarḥ einschließlich Ausgabe nachprüfen"
+      "sourceAudit": "Direkter arabischer klassischer Originalkommentar mit Quellenangabe und digitaler Werkpagination im HAD-Datensatz; Printedition nicht nachgewiesen."
     },
     {
       "id": "HAD-0536",
