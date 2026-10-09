@@ -551,7 +551,8 @@ function publicWebsiteAddon() {
         btn.disabled=!ready;
         btn.setAttribute("aria-disabled",ready?"false":"true");
         btn.setAttribute("data-dar-pwa-install-state",ready?"ready":"preparing");
-        btn.textContent=ready?btn.dataset.darInstallLabel:"Installation wird vorbereitet …";
+        var nextLabel=ready?btn.dataset.darInstallLabel:"Installation wird vorbereitet …";
+        if(btn.textContent!==nextLabel)btn.textContent=nextLabel;
       });
     }catch(e){}
   }

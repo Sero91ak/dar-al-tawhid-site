@@ -2312,7 +2312,8 @@ button,input,select{font:inherit}
      btn.setAttribute("aria-disabled",(installed||!ready)?"true":"false");
      btn.setAttribute("data-dar-pwa-install-state",installed?"installed":(ready?"ready":"preparing"));
      if(!btn.dataset.darInstallLabel)btn.dataset.darInstallLabel=btn.textContent||"Web-App installieren";
-     btn.textContent=installed?"Bereits installiert":(ready?btn.dataset.darInstallLabel:"Installation wird vorbereitet …");
+     var nextLabel=installed?"Bereits installiert":(ready?btn.dataset.darInstallLabel:"Installation wird vorbereitet …");
+     if(btn.textContent!==nextLabel)btn.textContent=nextLabel;
     });
    }catch(e){}
   };
