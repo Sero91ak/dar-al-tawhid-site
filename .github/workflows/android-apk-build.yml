@@ -57,6 +57,25 @@ jobs:
           sha256sum android/app/build/outputs/apk/debug/app-debug.apk
           ls -lh android/app/build/outputs/apk/debug/app-debug.apk
 
+      - name: Audit OneSignal worker status (read only)
+        if: always()
+        run: |
+          HEALTH_JSON="$(curl -fsS --max-time 20 'https://dar-admin-publisher.sero91ak.workers.dev/health' 2>/dev/null || echo '{}')"
+          export HEALTH_JSON
+          node - <<'NODE'
+          try {
+            const health = JSON.parse(process.env.HEALTH_JSON || '{}');
+            const reachable = health.service === 'dar-admin-publisher';
+            const hasOneSignalKey = health.hasOneSignalKey === true;
+            console.log('Push worker health: reachable=' + reachable + ', hasOneSignalKey=' + hasOneSignalKey);
+            if (!reachable || !hasOneSignalKey) {
+              console.log('::warning::Android push blocked: worker unreachable or missing OneSignal key. No secrets were changed.');
+            }
+          } catch (_) {
+            console.log('::warning::Worker health response unavailable or invalid; no secrets were changed.');
+          }
+          NODE
+
       - name: Publish installable DEBUG APK for device testing
         uses: actions/upload-artifact@v4
         with:
