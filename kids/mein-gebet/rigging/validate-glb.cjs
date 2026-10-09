@@ -12,6 +12,7 @@ const path = require("node:path");
 const {validateAnimationBytes} = require("./validate-glb-binary.cjs");
 const {validateGeometryBytes} = require("./validate-glb-geometry-binary.cjs");
 const {validatePoseBoneLengths}=require("./validate-pose-bone-lengths.cjs");
+const {validateInverseBindPose}=require("./validate-inverse-bind-pose.cjs");
 const GLB_MAGIC = 0x46546c67;
 const GLB_JSON = 0x4e4f534a;
 
@@ -236,6 +237,10 @@ function main(args) {
       result.structureValid = false;
     }
     result.boneLengthInvariantVerified = bonePose.valid;
+    const bindRest=validateInverseBindPose(gltf,bin);
+    if(!bindRest.valid){result.errors.push(...bindRest.errors);result.structureValid=false;}
+    result.inverseBindMatchesRestPose=bindRest.valid;
+    result.inverseBindMatricesVerified=bindRest.matricesVerified||0;
     result.numericBoneEvidence = {segments:bonePose.measuredSegments||0,
       sampledFrames:bonePose.sampledFrames||0,
       maxLengthDeltaMetres:bonePose.maxLengthDeltaMetres??null};
