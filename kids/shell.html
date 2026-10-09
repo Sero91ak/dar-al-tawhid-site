@@ -2906,7 +2906,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.09.12</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.09.13</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3296,7 +3296,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v191-home-safe1296";
+const KIDS_BUILD_ID="kids-shell-v192-sticky-header1297";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6577,12 +6577,12 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/dua-smart-learn.js?v=1291"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v191-home-safe1296";
+  var KIDS_BUILD_ID="kids-shell-v192-sticky-header1297";
   // Stable start: do not reload a visible app when a service worker takes control.
   // The next navigation uses network-first and receives the latest release.
   if("serviceWorker" in navigator){
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1296",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1297",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     },{once:true});
@@ -11163,7 +11163,7 @@ html[data-view="stories"] #view-stories > :last-child{
 
 
 <!-- KIDS_DUA_FULLBLEED_EXPLANATION_CTA_V1249: shared full-width header and explanation actions, original back controls, no bottom-nav changes -->
-<link rel="stylesheet" href="/kids/global-detail-dock-v1247.css?v=1289" data-kids-global-detail-dock="1257">
+<link rel="stylesheet" href="/kids/global-detail-dock-v1247.css?v=1297" data-kids-global-detail-dock="1257">
 <script src="/kids/global-detail-dock-v1247.js?v=1278" data-kids-global-detail-dock="1257"></script>
 
 <link rel="stylesheet" href="/kids/dua-layout-v1259.css?v=1261" data-kids-dua-layout="1259">
