@@ -14,6 +14,7 @@ const {parseGLB,validateDocument,main:validateMain}=require("./validate-glb.cjs"
 const {validateAnimationBytes}=require("./validate-glb-binary.cjs");
 const {validateGeometryBytes}=require("./validate-glb-geometry-binary.cjs");
 const {validatePoseBoneLengths}=require("./validate-pose-bone-lengths.cjs");
+const {validateInverseBindPose}=require("./validate-inverse-bind-pose.cjs");
 const {main:releaseMain}=require("./audit-project-completion.cjs");
 const {main:forbidBoyMain}=require("./forbid-placeholder-release.cjs");
 const N=2400;
@@ -158,6 +159,9 @@ try{
     const pose=validatePoseBoneLengths(parsed.gltf,parsed.bin);
     assert.equal(pose.valid,true,JSON.stringify(pose.errors));
     assert.equal(pose.measuredSegments,18);
+    const bind=validateInverseBindPose(parsed.gltf,parsed.bin);
+    assert.equal(bind.valid,true,JSON.stringify(bind.errors));
+    assert.equal(bind.matricesVerified,19);
   });
   check("full CLI structural preflight accepts test fixture but does not approve original likeness",()=>{
     const r=quietMain(validateMain,[candidate,"boy"]);
@@ -214,6 +218,27 @@ try{
     assert.equal(r.exit,1,r.message);
     assert.ok(JSON.parse(r.message).errors.some(e=>e.includes("Static skeletal scaling")));
   });
+  check("valid matrix shape but stale global inverse bind is rejected in real CLI",()=>{
+    const wrong=Buffer.from(bin);
+    const old=wrong.readFloatLE(12*4);
+    wrong.writeFloatLE(old+0.3,12*4); // still rigid, but wrong root global bind translation.
+    const file=path.join(tmp,"stale-inverse-bind.glb");
+    fs.writeFileSync(file,encodeGLB(g,wrong));
+    const r=quietMain(validateMain,[file,"boy"]);
+    assert.equal(r.exit,1,r.message);
+    const report=JSON.parse(r.message);
+    assert.equal(report.inverseBindMatchesRestPose,false);
+    assert.ok(report.errors.some(e=>e.includes("Inverse bind differs")),r.message);
+  });
+  check("changed rest-pose offset while leaving inverse binds unchanged is rejected",()=>{
+    const fake=JSON.parse(JSON.stringify(g));
+    fake.nodes[6].translation=[-.39,-.12,0];
+    const file=path.join(tmp,"unmatched-rest-offset.glb");
+    fs.writeFileSync(file,encodeGLB(fake,bin));
+    const r=quietMain(validateMain,[file,"boy"]);
+    assert.equal(r.exit,1,r.message);
+    assert.ok(JSON.parse(r.message).errors.some(e=>e.includes("Inverse bind differs")),r.message);
+  });
   check("collapsing a real child bone is rejected by numeric pose preflight",()=>{
     const fake=JSON.parse(JSON.stringify(g));
     fake.nodes[2].translation=[0,0,0]; // Chest rest segment vanishes
@@ -230,6 +255,8 @@ try{
     const report=JSON.parse(r.message);
     assert.equal(r.exit,0,r.message);
     assert.equal(report.boneLengthInvariantVerified,true);
+    assert.equal(report.inverseBindMatchesRestPose,true);
+    assert.equal(report.inverseBindMatricesVerified,19);
     assert.equal(report.numericBoneEvidence.segments,18);
     assert.ok(report.numericBoneEvidence.sampledFrames>=6);
   });
