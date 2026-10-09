@@ -178,3 +178,56 @@ html body .dsl .dsl-status{margin-top:5px!important}
 @media(prefers-reduced-motion:reduce){
   html body .dsl .dsl-word.de{transition:none!important}
 }
+
+
+/* KIDS_DUA_TRILINGUAL_FOCUS_LANES_V1284
+   For long duas, retain all three languages simultaneously on the SAME page.
+   Each reading lane scrolls only inside itself, following the active index. */
+html body .dsl.dsl-long-content .dsl-reading-stage{
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:flex-start!important;
+  overflow:hidden!important;
+  min-height:0!important;
+}
+html body .dsl.dsl-long-content .dsl-reading-stage .dsl-arabic,
+html body .dsl.dsl-long-content .dsl-reading-stage .dsl-translit,
+html body .dsl.dsl-long-content .dsl-reading-stage .dsl-german{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  flex-grow:1!important;
+  flex-shrink:1!important;
+  min-height:0!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  overscroll-behavior:contain!important;
+  -webkit-overflow-scrolling:touch!important;
+  scrollbar-width:none!important;
+  align-content:flex-start!important;
+  align-items:flex-start!important;
+  touch-action:pan-y!important;
+}
+html body .dsl.dsl-long-content .dsl-reading-stage .dsl-arabic{
+  flex-basis:47%!important;
+  margin:0!important;
+  padding:3px 0 5px!important;
+}
+html body .dsl.dsl-long-content .dsl-reading-stage .dsl-translit{
+  flex-basis:24%!important;
+  margin:0!important;
+  padding:5px 0!important;
+}
+html body .dsl.dsl-long-content .dsl-reading-stage .dsl-german{
+  flex-basis:29%!important;
+  margin:0!important;
+  padding:5px 0!important;
+}
+html body .dsl.dsl-long-content .dsl-reading-stage .dsl-arabic::-webkit-scrollbar,
+html body .dsl.dsl-long-content .dsl-reading-stage .dsl-translit::-webkit-scrollbar,
+html body .dsl.dsl-long-content .dsl-reading-stage .dsl-german::-webkit-scrollbar{
+  display:none!important;
+}
+html body .dsl .dsl-word:focus-visible{
+  outline:2px solid #f4d687!important;
+  outline-offset:2px!important;
+}
