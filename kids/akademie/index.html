@@ -1115,8 +1115,178 @@ body[data-academy-step="1"] .lesson-heading,body[data-academy-step="2"] .lesson-
 }
 @media(prefers-reduced-motion:reduce){.academy-hero-character,.tracker-item{transition:none!important;animation:none!important}}
 
+
+/* V6.9 KIDS – friendly, accessible lesson design; isolated academy */
+body{--kids-cream:#fff9ee;--kids-ink:#173747;--kids-soft:#f2f8f8;--kids-border:#d7e5e4;--kids-bright:#64c7c1;--kids-sun:#f1bf62}
+body[data-profile="girl"]{--kids-soft:#fff1f7;--kids-border:#ead8e9;--kids-bright:#b99ae2;--kids-sun:#f5bd9b}
+.lesson-main{max-width:1100px;margin:0 auto}
+.lesson-stage{
+ --text:var(--kids-ink);--muted:#526b76;--gold:#94651b;--border:var(--kids-border);--accent:#298f91;
+ background:var(--kids-cream)!important;color:var(--kids-ink)!important;
+ border:1px solid #f7e6c8!important;border-radius:26px!important;
+ box-shadow:0 19px 46px rgba(0,0,0,.13)!important
+}
+body[data-profile="girl"] .lesson-stage{
+ --accent:#9066c9;--gold:#985e6e;
+ background:#fff8fc!important;border-color:#f6deec!important
+}
+.lesson-stage .kicker,.lesson-stage .recap-label{color:var(--gold)!important}
+.lesson-stage h2,.lesson-stage h3,.lesson-stage .stage-lead,
+.lesson-stage .stage-lead strong,.lesson-stage .stage-body,.lesson-stage .teacher-explainer,
+.lesson-stage .spoken-paragraph p,.lesson-stage .recap-lesson p,
+.lesson-stage .response,.lesson-stage .question-prompt,
+.lesson-stage .quote,.lesson-stage .source,.lesson-stage .voice-note,
+.lesson-stage .answer-extra label,.lesson-stage .audio-caption{color:var(--kids-ink)!important}
+.lesson-stage .stage-lead,.lesson-stage .stage-body,.lesson-stage .spoken-paragraph p,
+.lesson-stage .teacher-explainer{line-height:1.55!important}
+.lesson-stage .pill:not(.primary),.lesson-stage .choice-listen,
+.lesson-stage .choice-button{background:#fff!important;color:var(--kids-ink)!important;border:1.5px solid var(--kids-border)!important}
+.lesson-stage .pill:not(.primary):active,.lesson-stage .choice-button:active{transform:scale(.985)}
+.lesson-stage .pill.soft-gold,.lesson-stage .arabic-play-button{
+ background:#eaf7f6!important;color:#145965!important;border-color:#9dcfca!important
+}
+body[data-profile="girl"] .lesson-stage .pill.soft-gold,body[data-profile="girl"] .lesson-stage .arabic-play-button{
+ background:#f4eafd!important;color:#5c3e89!important;border-color:#d7bdef!important
+}
+.lesson-stage .pill.primary{
+ border:0!important;background:linear-gradient(135deg,#f6cf7e,#e9b657)!important;
+ color:#273944!important;box-shadow:0 6px 16px rgba(146,91,18,.13)
+}
+body[data-profile="girl"] .lesson-stage .pill.primary{background:linear-gradient(135deg,#f8c9b2,#e9a1b6)!important;color:#422940!important}
+.lesson-stage .question-prompt-card{
+ background:linear-gradient(155deg,#e9f7f4,#f7fbf4)!important;
+ border:1px solid #c6e6de!important;border-radius:22px;
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.78)
+}
+body[data-profile="girl"] .lesson-stage .question-prompt-card{
+ background:linear-gradient(155deg,#f8e8fb,#fff2eb)!important;border-color:#ebcde8!important
+}
+.lesson-stage .question-prompt-card .question-kicker{color:#36797c!important}
+body[data-profile="girl"] .lesson-stage .question-prompt-card .question-kicker{color:#9360a9!important}
+.lesson-stage #repeat{font-weight:850!important;border-radius:15px!important}
+.lesson-stage .question-prompt-card .question-prompt{font-weight:820!important;letter-spacing:-.025em}
+.lesson-stage .progress{background:#dbe7e7}
+.lesson-stage .progress span{background:linear-gradient(90deg,#69bebe,#7fd3a2)}
+body[data-profile="girl"] .lesson-stage .progress span{background:linear-gradient(90deg,#bba5e7,#e5a3c3)}
+.lesson-stage .choice-row{align-items:stretch}
+.lesson-stage .choice-button{text-align:left;border-radius:18px!important;font-weight:720!important;position:relative;padding-left:18px!important}
+.lesson-stage .choice-button[aria-pressed="true"]{
+ background:#dff5e6!important;border-color:#48b48e!important;
+ box-shadow:0 0 0 2px rgba(76,177,135,.11)!important;padding-right:42px!important
+}
+.lesson-stage .choice-button[aria-pressed="true"]::after{
+ content:"✓";position:absolute;right:11px;top:50%;transform:translateY(-50%);
+ width:25px;height:25px;display:grid;place-items:center;color:#fff;background:#268f74;border-radius:50%;font-weight:900
+}
+body[data-profile="girl"] .lesson-stage .choice-button[aria-pressed="true"]{
+ background:#f5e8fc!important;border-color:#b588d6!important
+}
+body[data-profile="girl"] .lesson-stage .choice-button[aria-pressed="true"]::after{background:#9265ba}
+.lesson-stage .choice-listen{background:#eef9fa!important;color:#236978!important;font-weight:850!important}
+.lesson-stage .choice-listen[aria-pressed="true"]{background:#ccefea!important;border-color:#63b5ad!important}
+.lesson-stage .choice-audio-help,.lesson-stage .answer-mode-caption,
+.lesson-stage .feedback-final,.lesson-stage #micInfo,.lesson-stage .small,
+.lesson-stage #voicePlayState,.lesson-stage .recap-reflection p{color:#54717b!important}
+.lesson-stage .answer-options .pill{border-radius:17px!important;font-weight:850!important;letter-spacing:0}
+.lesson-stage .answer-options .pill[aria-pressed="true"]{
+ border:2px solid #64b7b8!important;background:#ddf5f2!important;color:#185561!important
+}
+body[data-profile="girl"] .lesson-stage .answer-options .pill[aria-pressed="true"]{
+ border-color:#b994d2!important;background:#f3e6fb!important;color:#734e99!important
+}
+.lesson-stage .answer-extra{
+ padding:14px;background:#f6f9f8;border-radius:18px;border:1px solid #d7e6e4
+}
+body[data-profile="girl"] .lesson-stage .answer-extra{background:#fff2f9;border-color:#ebd7e6}
+.lesson-stage .answer-extra textarea{
+ background:#fff!important;color:var(--kids-ink)!important;border:1.5px solid var(--kids-border)!important;
+ border-radius:14px!important;font-size:17px!important;min-height:106px!important;box-shadow:none!important
+}
+.lesson-stage .answer-extra textarea::placeholder{color:#788e95!important}
+.lesson-stage .voice-actions #mic{background:#dff5f1!important;border:2px solid #78beb2!important;color:#164c58!important}
+.lesson-stage .voice-actions #cancelMic{border:2px solid #dfaca0!important}
+.lesson-stage .response{
+ background:#e8f4f2!important;border-left:4px solid #61ada6!important;
+ color:#234754!important;border-radius:14px!important;min-height:0;padding:13px 15px!important
+}
+body[data-profile="girl"] .lesson-stage .response{
+ background:#f6eafa!important;border-color:#c89ed4!important
+}
+.lesson-stage .recap-item{background:#fff!important;border:1.5px solid var(--kids-border)!important;
+ border-radius:21px!important;box-shadow:0 4px 13px rgba(22,67,71,.04)}
+.lesson-stage .recap-item:nth-child(1){border-top:5px solid #6ac4a4!important}
+.lesson-stage .recap-item:nth-child(2){border-top:5px solid #e9bd71!important}
+.lesson-stage .recap-item:nth-child(3){border-top:5px solid #8daed9!important}
+body[data-profile="girl"] .lesson-stage .recap-item:nth-child(1){border-top-color:#c7a1e2!important}
+body[data-profile="girl"] .lesson-stage .recap-item:nth-child(3){border-top-color:#f1a4bb!important}
+.lesson-stage .recap-reflection{background:#f5f9f9!important;border-color:var(--kids-border)!important}
+.lesson-stage .recap-reflection .answers .pill.active{background:#dcf2eb!important;border-color:#4da48f!important}
+.lesson-stage .voice-preview{background:#fff!important;border-color:var(--kids-border)!important}
+.lesson-stage .academy-tech-details summary{color:#647982!important}
+.lesson-stage .lesson-source-block{padding:14px 16px;background:#fff;border:1px solid var(--kids-border);border-radius:18px}
+.lesson-stage .arabic-verse{color:#214551!important}
+.lesson-stage .lesson-source-block .quote{color:#183643!important}
+.lesson-stage .lesson-source-block .source{color:#5a6c70!important}
+.lesson-stage .teacher-explainer{border-radius:15px;background:#edf7f4;padding:13px 15px}
+body[data-profile="girl"] .lesson-stage .teacher-explainer{background:#f7eafb}
+.lesson-stage .spoken-paragraph [data-spoken]{
+ background:#fff!important;color:#234451!important;border:1px solid #dae7e3!important
+}
+.lesson-stage .spoken-paragraph [data-spoken]::before{background:#dcf4e9!important;color:#317c77!important}
+.lesson-stage .spoken-paragraph [data-spoken].is-reading{
+ background:#dff4ed!important;border-color:#6eb9a1!important;box-shadow:0 4px 12px rgba(62,160,126,.07)
+}
+body[data-profile="girl"] .lesson-stage .spoken-paragraph [data-spoken].is-reading{
+ background:#f6e3fb!important;border-color:#bb8fd8!important
+}
+.lesson-stage .stage-audio .pill{display:inline-flex;align-items:center;justify-content:center}
+.lesson-stage #backAfterLesson{width:100%;min-height:58px;border-radius:16px}
+.lesson-stage .recap-reflection .answers .pill{border-radius:16px!important}
+.lesson-stage .feedback-final{background:#f3f6f5;border-radius:13px;padding:10px 13px}
+body[data-academy-step] .academy-audio-feedback{position:absolute!important;width:1px;height:1px;padding:0!important;margin:0!important;overflow:hidden!important;clip-path:inset(50%)!important;white-space:nowrap}
+.stage-tracker .tracker-item.is-current b{background:#f0ca79!important;color:#203a42!important;border-color:#f0ca79!important;box-shadow:0 0 0 5px rgba(240,202,121,.16)!important}
+body[data-profile="girl"] .stage-tracker .tracker-item.is-current b{background:#f4b8cf!important;border-color:#f4b8cf!important}
+.stage-tracker .tracker-item.is-done b{color:#c9f1e4!important;border-color:#6ebbb3!important;background:rgba(65,164,148,.17)}
+.stage-tracker .tracker-item[aria-current="step"] span{color:#fff1cc;font-weight:850}
+.today-class{background:linear-gradient(150deg,#eaf9f6,#fff5de)!important;
+ border-color:#cde4df!important;color:#173947;box-shadow:0 12px 33px rgba(0,0,0,.1)!important}
+body[data-profile="girl"] .today-class{background:linear-gradient(155deg,#faedf8,#fff5e9)!important;border-color:#e5c9e0!important}
+.today-class .today-text h2,.today-class .today-text p,.today-class .today-text p strong,
+.today-class #todaySummary,.today-class #academyTime{color:#1a4250!important}
+.today-class .kicker{color:#8c6527!important}
+.today-class .today-button{border:0!important;border-radius:16px!important;
+ background:linear-gradient(135deg,#f3c974,#e7b45c)!important;color:#193742!important;
+ box-shadow:0 7px 17px rgba(149,106,37,.13)}
+body[data-profile="girl"] .today-class .today-button{background:linear-gradient(135deg,#f6bfaf,#e5a2c2)!important}
+.overview-hero{box-shadow:0 12px 28px rgba(0,0,0,.13)}
+.academy-hero-character{border-radius:28px}
+.category-card{border-radius:22px!important}
+.category-card:not(:disabled){border-color:#eac884!important}
+@media(max-width:700px){
+ .lesson-main{padding-bottom:calc(env(safe-area-inset-bottom) + 16px)}
+ .lesson-stage{border-radius:23px!important;padding:clamp(15px,4vw,19px)!important}
+ .lesson-stage h2,body[data-kids-age="4-5"] .lesson-stage h2{font-size:clamp(24px,6.5vw,30px)!important;line-height:1.18!important}
+ .question-prompt-card .question-prompt{font-size:clamp(19px,5.2vw,23px)!important}
+ .lesson-stage .answer-bottom{margin-top:9px;gap:9px}
+ .lesson-stage .answer-bottom #check{border-radius:15px!important;min-height:57px}
+ .lesson-stage .answer-bottom #hint{border-radius:14px!important}
+ .lesson-stage .stage-lead,.lesson-stage .stage-body{font-size:clamp(16px,4.15vw,19px)!important}
+ .lesson-stage .recap-item{padding:15px}
+ .lesson-stage .recap-item p{font-size:clamp(16px,4.2vw,18px)!important}
+ .lesson-stage .answer-options .pill{min-height:63px;font-size:clamp(14px,3.9vw,17px)!important}
+ .lesson-stage .choice-button{min-height:65px!important}
+ .lesson-stage .choice-listen{min-height:65px!important}
+}
+@media(min-width:701px){
+ .lesson-stage{padding:clamp(23px,3vw,34px)!important}
+ .lesson-stage[data-lesson-step="3"] .question-panel{gap:24px}
+ .lesson-stage .question-prompt-card{padding:clamp(22px,3vw,34px)}
+ .lesson-stage .recap-reflection .answers{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(prefers-reduced-motion:reduce){.lesson-stage .pill,.lesson-stage .choice-button{transform:none!important;transition:none!important}}
+
 </style></head>
-<body data-profile="boy" data-preview-release="V6.8-20261010" data-preview-deploy="v6.8-teaching-experience"><main class="wrap">
+<body data-profile="boy" data-preview-release="V6.9-20261010" data-preview-deploy="v6.9-fun-and-simple"><main class="wrap">
 
 <header class="academy-header">
  <div class="academy-brand"><div class="brand">DĀR AL TAWḤĪD · KIDS</div><div class="stage">Dein Unterricht · Qurʾān & Sunnah</div></div>
