@@ -115,6 +115,14 @@ Geschützt durch `content/admin/change-scope-lock.json` und `scripts/change-scop
 
 **Vor jedem Merge:** `node scripts/change-scope-lock-guard.js` muss grün sein.
 
+## Neue Beitragsregel vom 09.10.2026 (Erwachsenen-Apps / Textbeiträge)
+
+- Bei **neu veröffentlichten** normalen Textbeiträgen und App-Beiträgen **keine sichtbaren Hashtagzeilen** und **keine Social-Media-Fußzeilen** wie Telegram, Website und Instagram ausgeben. In neuen `content/posts/*.md` stets `tags: []` verwenden; Altbeiträge nicht pauschal überschreiben.
+- Wird ausdrücklich ein **Quellenlink / Quellencode** angefordert, die nächste tatsächlich freie Nummer unter `q/<nummer>/` vergeben, eine **eigene gebündelte Quellenkarte** mit überprüfbaren arabischen Originalwortlauten, einzeln passenden Direktlinks, Textfragment-Markierungen und – falls verfügbar – PDF/Scan erstellen. Im normalen Beitrag steht direkt nach der Quellenzeile **nur** `🔗 dar-al-tawhid.de/q/<nummer>` als sichtbarer Link; keine externen URLs und keine zweite Quellenlink-Seite für denselben Beitrag.
+- Bei App-Veröffentlichung den Beitrag **ohne Hashtags** in die gemeinsame Erwachsenen-Beitragsquelle und deren Index aufnehmen, die bestehenden getrennten App-Deploy-Wege beachten. **Keine Besucher-Push-Benachrichtigung ohne gesonderte Freigabe.** Kids-App nicht ohne ausdrückliche Nennung ändern.
+- Die **bestehende Social-Icon-Leiste auf /q/-Quellenkarten** ist eine eigenständige Designvorgabe und von der Abschaffung der **Textbeitrags-Fußzeilen** nicht automatisch betroffen.
+- Eine Fundstelle ist **kein Beweis für einen ununterbrochenen Isnād**; authentische Zuschreibung und Überlieferungsstatus sachgerecht unterscheiden, insbesondere bei Athār.
+
 ## Quellenprüfung & DAR-AL-TAWḤĪD-Kurzlinks (streng – global und ohne Ausnahmen)
 
 Diese Regel ersetzt alle früheren Regeln zu sichtbaren Quellenlinks in veröffentlichten DAR-AL-TAWḤĪD-Inhalten.
