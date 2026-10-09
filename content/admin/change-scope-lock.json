@@ -7201,6 +7201,14 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-30T23:59:00.000Z"
+    },
+    {
+      "approvedBy": "user-explicit-native-android-apk-replaces-pwa",
+      "reason": "Nutzerauftrag vom 09.10.2026: Android-PWA durch eigenständig installierbare APK ersetzen; eigenen APK-Compile- und Artefakt-Workflow für den Android-Native-Entwicklungsbranch ergänzen, ohne Besucher-/Push-/iOS-Lanes zu ändern.",
+      "expiresAt": "2026-11-30T23:59:00.000Z",
+      "paths": [
+        ".github/workflows/android-apk-build.yml"
+      ]
     }
   ],
   "enabled": true
