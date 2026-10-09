@@ -77,6 +77,7 @@
   },
   "productionReady": false,
   "nextBlockingActions": [
+    "Use qa_v77_archive.py on the exact user's V7.7 ZIP once its raw bytes are authorized and available; SHA-256-pinned GLB plus reference must match before actual five-view IoU and FK QA.",
     "Before release provide both exact visually approved boy/girl GLBs, verify SHA-256 size, sampler bytes, bind pose and unchanged bone lengths; --require-ready rejects missing GLB paths.",
     "Run new camera sensitivity sweep on exact original V7.7 GLB + exact original image, then independently establish real view/camera orientation before sculpting.",
     "Original boy 3D face/hair/kufi topology and independent 360 degree visual approval",
@@ -89,7 +90,7 @@
   "technicalQA": {
     "verifiedAt": "2026-10-09",
     "validatorFile": "rigging/validate-glb.cjs",
-    "validatorBlobSha": "e643a9a33bd86984f9c1cc5d0e2f6d3e391c3d71",
+    "validatorBlobSha": "dfc73ef4b9ba7e32be2091accb0c3dc50dc695cc",
     "syntheticUpperArmTranslationAccepted": false,
     "syntheticLowerLegTranslationAccepted": false,
     "syntheticScaleAnimationRejected": true,
@@ -106,19 +107,21 @@
     "realOriginalImageAvailableToThisRun": false,
     "physicalThreeQuarterCameraCalibrated": false,
     "javascriptRepositoryTestChecksPassed": 39,
-    "javascriptTestEnvironment": "Connector-fetched exact JS run in isolated V8 with mocked node:assert, Buffer and fs/path; not GitHub Actions or real Node filesystem",
+    "javascriptTestEnvironment": "GitHub Actions native Node.js 22 and Python 3.11; 184/184 synthetic tests on latest verified draft run",
     "modelVerification": {
       "boy": {
         "glbSha256": null,
         "structureValid": false,
         "bindPoseAndBoneLengthsVerified": false,
-        "animationSamplerPayloadVerified": false
+        "animationSamplerPayloadVerified": false,
+        "boneLengthNumericVerified": false
       },
       "girl": {
         "glbSha256": null,
         "structureValid": false,
         "bindPoseAndBoneLengthsVerified": false,
-        "animationSamplerPayloadVerified": false
+        "animationSamplerPayloadVerified": false,
+        "boneLengthNumericVerified": false
       }
     },
     "releaseAuditRequiresExactBoyAndGirlGLB": true,
@@ -135,12 +138,12 @@
     "allGreenMetadataWithoutGLBStillReleaseBlocked": true,
     "binarySamplerTestsPassed": 20,
     "geometryProjectionPreflightUnitTestsPassed": 14,
-    "nativeRunnerTotalChecksPassed": 147,
+    "nativeRunnerTotalChecksPassed": 184,
     "nativeRunnerCompletedSuccessfully": true,
     "nativeRunner": "GitHub Actions ubuntu-latest; Node.js 22; Python 3.11",
-    "nativeRunnerHeadSha": "64f67351d9461a1ad4a9825e6135fd0624db89dd",
-    "nativeRunnerRunUrl": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37933121032",
-    "nativeRunnerScope": "147 actual native GitHub Actions Node/Python checks with synthetic data and generated temporary GLB, including negative boy identity gate; NOT actual V7.7/turnaround, physical camera calibration or manual art/fiqh signoff.",
+    "nativeRunnerHeadSha": "6bf3f7e489b8bde9a0593b4135e9409c1edfda5d",
+    "nativeRunnerRunUrl": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37937012907",
+    "nativeRunnerScope": "184 native CI unit/integration/security checks, all with synthetic fixture bytes; SHA-pinned original V7.7 GLB and reference still unavailable, no model visual/fiqh approval.",
     "binarySampleProofOnActualGLB": false,
     "realFiveViewRecomputedAfterV77": false,
     "staticRigTransformGuardCommitted": true,
@@ -149,10 +152,15 @@
     "geometryBinaryGateCommitted": true,
     "geometryBinaryActualOriginalGLBVerified": false,
     "geometryBinarySyntheticNativeTestsPassed": 27,
-    "syntheticNativeGLBEndToEndFileTestsPassed": 10,
+    "syntheticNativeGLBEndToEndFileTestsPassed": 12,
     "antiFakeVertexCountGateCommitted": true,
     "threeDimensionalExtentPrefilterCommitted": true,
     "connectedRigTopologyGuardCommitted": true,
-    "connectedRigTopologyNativeTestsPassed": true
+    "connectedRigTopologyNativeTestsPassed": true,
+    "boneLengthNumericVerifierCommitted": true,
+    "boneLengthNumericTestsPassed": 20,
+    "v77ArchiveIntakeCommitted": true,
+    "v77ArchiveSecurityTestsPassed": 15,
+    "v77ArchiveActualModelBytesValidated": false
   }
 }
