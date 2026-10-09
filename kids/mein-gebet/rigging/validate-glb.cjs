@@ -9,6 +9,7 @@
  */
 const fs = require("node:fs");
 const path = require("node:path");
+const {validateAnimationBytes} = require("./validate-glb-binary.cjs");
 const GLB_MAGIC = 0x46546c67;
 const GLB_JSON = 0x4e4f534a;
 
@@ -20,6 +21,7 @@ function parseGLB(buffer) {
   let offset = 12;
   let json = null;
   let hasBin = false;
+  let bin = null;
   while (offset + 8 <= buffer.length) {
     const size = buffer.readUInt32LE(offset);
     const type = buffer.readUInt32LE(offset + 4);
@@ -29,12 +31,14 @@ function parseGLB(buffer) {
       if (json !== null) throw Error("Multiple JSON chunks.");
       json = JSON.parse(buffer.subarray(offset, offset + size).toString("utf8").trim());
     } else if (type === 0x004e4942) {
+      if (hasBin) throw Error("Multiple GLB BIN chunks.");
       hasBin = true;
+      bin = buffer.subarray(offset, offset + size);
     }
     offset += size;
   }
   if (offset !== buffer.length || !json) throw Error("GLB missing or malformed JSON chunk.");
-  return { gltf: json, hasBin };
+  return { gltf: json, hasBin, bin };
 }
 
 function validateDocument(g, spec, profile = "boy", metadata = {}) {
@@ -155,9 +159,16 @@ function main(args) {
   }
   try {
     const blob = fs.readFileSync(file);
-    const {gltf, hasBin} = parseGLB(blob);
+    const {gltf, hasBin, bin} = parseGLB(blob);
     const spec = JSON.parse(fs.readFileSync(path.join(__dirname,"rig-acceptance-v1.json"),"utf8"));
     const result = validateDocument(gltf, spec, profile, {fileBytes:blob.length,hasBin});
+    const binary = validateAnimationBytes(gltf, bin);
+    if (!binary.valid) {
+      result.errors.push(...binary.errors);
+      result.structureValid = false;
+    }
+    result.animationSamplerBytesVerified = binary.valid;
+    result.productionApproved = false;
     process.stdout.write(JSON.stringify(result,null,2)+"\n");
     return result.structureValid ? 0 : 1;
   } catch (err) {
