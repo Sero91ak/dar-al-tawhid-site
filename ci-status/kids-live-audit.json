@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-10-09T18:13:17Z",
+  "timestamp": "2026-10-09T18:18:14Z",
   "trigger": "workflow_run",
   "finishedDeployConclusion": "success",
-  "finishedDeployRun": "37971191544",
+  "finishedDeployRun": "37971703487",
   "live": {
     "buildId": "kids-shell-v184-quran-top1289",
     "label": "KIDS · V1.09.05",
@@ -44,13 +44,13 @@
   },
   "lastDeployRuns": [
     {
-      "conclusion": null,
+      "conclusion": "success",
       "created_at": "2026-10-09T18:12:50Z",
       "head_sha": "e68babe1929c920572507eb4b812bb14ed4ed7db",
       "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37971703487",
       "id": 37971703487,
-      "status": "in_progress",
-      "updated_at": "2026-10-09T18:13:08Z"
+      "status": "completed",
+      "updated_at": "2026-10-09T18:18:03Z"
     },
     {
       "conclusion": "success",
