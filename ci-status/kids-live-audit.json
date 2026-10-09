@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-10-09T18:42:28Z",
+  "timestamp": "2026-10-09T18:42:53Z",
   "trigger": "workflow_run",
   "finishedDeployConclusion": "cancelled",
-  "finishedDeployRun": "37974980200",
+  "finishedDeployRun": "37975112613",
   "live": {
     "buildId": "kids-shell-v185-dua-audio1290",
     "label": "KIDS · V1.09.06",
@@ -45,12 +45,21 @@
   "lastDeployRuns": [
     {
       "conclusion": null,
+      "created_at": "2026-10-09T18:42:45Z",
+      "head_sha": "f6e32e443de71e67125f3accc3c204151f824d7e",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37975176054",
+      "id": 37975176054,
+      "status": "pending",
+      "updated_at": "2026-10-09T18:42:46Z"
+    },
+    {
+      "conclusion": "cancelled",
       "created_at": "2026-10-09T18:42:11Z",
       "head_sha": "02587421394aa87c0998fc78cd99e88bf9607840",
       "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37975112613",
       "id": 37975112613,
-      "status": "pending",
-      "updated_at": "2026-10-09T18:42:13Z"
+      "status": "completed",
+      "updated_at": "2026-10-09T18:42:46Z"
     },
     {
       "conclusion": "cancelled",
@@ -87,15 +96,6 @@
       "id": 37973473486,
       "status": "completed",
       "updated_at": "2026-10-09T18:33:23Z"
-    },
-    {
-      "conclusion": "cancelled",
-      "created_at": "2026-10-09T18:27:59Z",
-      "head_sha": "6d532d526f5e00cb2a4133f796c777e5a54bd584",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37973463320",
-      "id": 37973463320,
-      "status": "completed",
-      "updated_at": "2026-10-09T18:28:06Z"
     }
   ]
 }
