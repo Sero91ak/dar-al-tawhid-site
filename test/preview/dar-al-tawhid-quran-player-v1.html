@@ -8,8 +8,122 @@ body.kids{color-scheme:dark;--bg:#081928;--bg2:#142e41;--pane:rgba(17,40,55,.91)
 @media(max-width:800px){.desktop{display:block}.sidebar{display:none}.workspace{padding:calc(15px + env(safe-area-inset-top,0px)) 15px 145px}.content-grid{grid-template-columns:1fr}.heading{margin-bottom:16px}.heading h1{font-size:clamp(31px,8vw,48px)}.heading .sub{font-size:12px;margin-top:9px}.topline{margin-bottom:21px}.miniplay{left:10px;right:10px;bottom:max(9px,env(safe-area-inset-bottom,0px));padding:12px 13px;display:grid;grid-template-columns:1fr;gap:8px;border-radius:17px}.now-playing{display:flex;align-items:center;gap:9px;justify-content:space-between}.now-playing span{margin:0}.controlbox{gap:7px}.play{width:47px;height:47px}.skip{height:35px;width:35px}.seek-wrap{gap:5px}.statgrid{margin-top:13px}}
 @media(max-width:420px){.workspace{padding-left:10px;padding-right:10px}.scene{padding:20px;min-height:175px}.kids .scene{min-height:195px}.scene .arabic-name{font-size:26px}.scene h2{font-size:29px}.verse{padding:19px 17px 9px}.quran-text{font-size:36px;line-height:1.95}.kids .quran-text{font-size:38px}.reader-tools{padding:11px 12px 0;gap:6px}.tab{font-size:10px;padding:9px 10px}.navrow{padding:12px}.kid-actions{padding:9px 12px 15px}.kid-btn{font-size:13px;min-height:54px}.stat{padding:10px 5px}.stat b{font-size:19px}.miniplay{padding:11px 10px}.controlbox{gap:4px}.seek-wrap span{font-size:9px;min-width:29px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
-</style></head><body class="adult"><div class="app"><div class="desktop"><nav class="sidebar"><div class="brand"><span class="brand-mark">۞</span><span>DĀR AL TAWḤĪD<br><span style="font-size:10px;color:var(--gold);letter-spacing:.18em">QURʾĀN STUDIO</span></span></div><div class="navtitle">ENTDECKEN</div><button class="navitem active" data-scroll="stage">◉ &nbsp; Jetzt hören</button><button class="navitem" data-scroll="surahs">▤ &nbsp; Sūren entdecken</button><button class="navitem" data-scroll="settings">⚙ &nbsp; Einstellungen</button><button class="navitem" data-scroll="progress">◷ &nbsp; Fortschritt</button><div class="sidefoot">VORSCHAU · V1<br>Isolierter HTML-Prototyp<br>Kein Eingriff in die Live-App</div></nav><div class="workspace"><div class="topline"><span class="breadcrumbs">DĀR AL TAWḤĪD / QURʾĀN / PLAYER</span><span class="chip"><i class="live-dot"></i> HTML-VORSCHAU V1</span></div>
+/* MOBILE_V2_STYLES_BEGIN */
+
+/* DUAL_QURAN_PLAYER_MOBILE_V2 · mobile-first studio shell, iPhone/Android/iPad */
+.mobile-sections{display:none}
+html{scroll-padding-top:90px}
+#stage,#surahs,#settings,#progress{scroll-margin-top:92px}
+@media(min-width:801px) and (max-width:1150px){
+.desktop{display:block;max-width:980px}.sidebar{display:none}
+.workspace{padding:28px clamp(26px,5vw,52px) 155px}
+.content-grid{grid-template-columns:minmax(0,1fr);gap:18px}
+.sidecol{grid-template-columns:repeat(2,minmax(0,1fr))}
+.sidecol .card:last-child:nth-child(odd){grid-column:1/-1}
+.miniplay{left:max(22px,calc((100vw - 980px)/2 + 30px));right:max(22px,calc((100vw - 980px)/2 + 30px));grid-template-columns:minmax(115px,1fr) minmax(330px,2fr)}
+.mobile-sections{display:flex;margin:0 0 18px;padding:5px;gap:5px;border:1px solid var(--stroke);border-radius:18px;background:rgba(4,19,22,.76)}
+.mobile-sections button{flex:1;min-height:44px;border-radius:13px;color:var(--muted);background:transparent;font-size:12px;font-weight:680}
+.mobile-sections button:first-child{color:var(--goldhi);background:rgba(225,186,116,.13)}
+}
+@media(max-width:800px){
+:root{--radius:26px}
+html{scroll-padding-top:calc(82px + env(safe-area-inset-top,0px))}
+body{overscroll-behavior-y:contain}
+.app,.desktop{min-height:100dvh}
+.app:before{height:380px;opacity:.20}
+.workspace{padding:calc(13px + env(safe-area-inset-top,0px)) max(14px,env(safe-area-inset-left,0px)) calc(142px + env(safe-area-inset-bottom,0px)) max(14px,env(safe-area-inset-right,0px))}
+.topline{position:relative;margin:0 0 13px;min-height:48px;padding:0 1px 0 53px;display:flex;align-items:center}
+.topline:before{content:"۞";position:absolute;left:0;top:0;width:44px;height:44px;display:grid;place-items:center;border:1px solid rgba(220,188,127,.45);background:linear-gradient(160deg,rgba(227,190,122,.13),rgba(22,48,44,.85));color:var(--goldhi);border-radius:16px;font:24px/1 var(--arab)}
+.topline .breadcrumbs{font-weight:770;color:var(--ink);font-size:clamp(11px,3.1vw,14px);letter-spacing:.02em;line-height:1.4}
+.topline .chip{display:none}
+.heading{display:none}
+.mobile-sections{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;margin:0 0 15px;padding:5px;border-radius:17px;background:rgba(2,16,21,.72);border:1px solid rgba(232,199,142,.14);box-shadow:0 12px 24px rgba(0,0,0,.1);position:sticky;top:calc(env(safe-area-inset-top,0px) + 4px);z-index:12;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.mobile-sections button{min-height:44px;min-width:0;border-radius:12px;background:transparent;color:#bbc9be;display:flex;align-items:center;justify-content:center;gap:5px;flex-direction:column;font-size:10px;font-weight:730;letter-spacing:.01em;padding:5px 2px}
+.mobile-sections button span{font-size:16px;line-height:1}
+.mobile-sections button.active{background:linear-gradient(135deg,rgba(209,177,112,.21),rgba(209,177,112,.10));color:var(--goldhi);box-shadow:inset 0 0 0 1px rgba(228,199,140,.18)}
+.content-grid{display:flex;flex-direction:column;gap:16px}
+.content-grid>*{width:100%;min-width:0}
+.glass{border-radius:24px;border-color:rgba(225,198,142,.20);box-shadow:0 16px 40px rgba(0,0,0,.13),inset 0 1px rgba(255,255,255,.045)}
+.main-panel{border-radius:25px}
+.scene{min-height:138px;padding:20px 20px 15px;background-position:center,center,center,center;background-size:cover}
+.scene:before{font-size:230px;top:-60px}
+.scene h2{font-size:clamp(25px,7vw,33px);margin:6px 0 3px;line-height:1.15}
+.scene small{font-size:11px}
+.scene-num{font-size:9px;letter-spacing:.14em}
+.scene .arabic-name{font-size:clamp(22px,6vw,29px);line-height:1.5;white-space:normal;text-align:right;max-width:46%}
+.reader-tools{padding:13px 13px 3px;display:flex;gap:6px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.reader-tools::-webkit-scrollbar{display:none}
+.tab{min-height:44px;min-width:max-content;padding:9px 12px;border-radius:13px;font-size:11px;white-space:nowrap;flex:none}
+.verse{min-height:0;padding:19px 19px 10px}
+.versehead{font-size:10px;letter-spacing:.13em}
+.iconbtn{height:43px;width:43px}
+.quran-text{font-size:clamp(33px,8.7vw,44px);line-height:1.96;margin:17px auto 12px;overflow-wrap:normal;word-break:normal;white-space:normal;padding:5px 1px;color:#fff8eb}
+.translation{font-size:clamp(16px,4.3vw,19px);line-height:1.65;margin:9px auto;max-width:520px}
+.latin{font-size:14px;line-height:1.6;margin:13px auto}
+.tip{margin-top:13px;padding:11px 12px}
+.versefade{margin:12px 0 0;font-size:10px}
+.navrow{padding:10px 12px 16px;gap:9px}
+.navrow .secondary{min-height:47px;padding:9px 12px;flex:1;max-width:190px;font-size:12px}
+.navrow .number{white-space:nowrap;font-size:10px}
+.sidecol{display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
+.card{padding:19px}
+.card h3{font-size:16px}
+.sura-button{min-height:64px;border-radius:17px;padding:12px 14px}
+.sura-button b{font-size:13px}
+.sura-button .ar{font-size:23px}
+.inputrow{margin:13px 0;align-items:flex-start;flex-direction:column;gap:7px}
+.inputrow label{font-size:12px}
+.inputrow select{min-height:46px;padding:11px;font-size:13px}
+.miniplay{position:fixed;z-index:30;left:max(8px,env(safe-area-inset-left,0px));right:max(8px,env(safe-area-inset-right,0px));bottom:calc(8px + env(safe-area-inset-bottom,0px));width:auto;padding:9px 13px 11px;border-radius:23px;border:1px solid rgba(233,202,142,.39);background:rgba(6,24,25,.96);box-shadow:0 12px 48px rgba(0,0,0,.42),inset 0 1px rgba(255,255,255,.07);display:flex;flex-direction:column;gap:8px;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}
+.now-playing{width:100%;min-height:17px;display:flex;justify-content:space-between;align-items:center;gap:9px;padding:0 2px}
+.now-playing b{font-size:12px;font-weight:750}
+.now-playing span{font-size:10px;white-space:nowrap;max-width:43%;text-overflow:ellipsis;overflow:hidden;margin:0}
+.controlbox{display:flex;align-items:center;width:100%;gap:9px;min-width:0}
+.play{height:51px;width:51px;font-size:22px;box-shadow:0 4px 17px rgba(207,169,102,.25)}
+.skip{width:40px;height:43px;border-radius:13px;font-size:20px}
+.seek-wrap{display:grid;grid-template-columns:29px minmax(0,1fr) 29px;gap:5px;align-items:center;min-width:0;flex:1}
+.seek-wrap span{min-width:0;font-size:10px;color:#bec8c1;text-align:center}
+#seek{min-width:20px;height:27px;margin:0;touch-action:pan-y}
+#stage,#surahs,#settings,#progress{scroll-margin-top:calc(85px + env(safe-area-inset-top,0px))}
+}
+@media(max-width:360px){
+.workspace{padding-left:9px;padding-right:9px}
+.mobile-sections button{font-size:9px}
+.scene{padding-left:14px;padding-right:14px}
+.verse{padding-left:12px;padding-right:12px}
+.navrow .secondary{font-size:10px;padding:8px}
+.miniplay{padding-left:8px;padding-right:8px}
+.controlbox{gap:4px}.skip{width:34px}.play{width:46px;height:46px}
+.seek-wrap{grid-template-columns:26px minmax(0,1fr) 26px;gap:2px}
+}
+@media(min-width:801px){.mobile-sections button.active{background:rgba(218,186,128,.15);color:var(--goldhi)}}
+
+/* DĀR AL TAWḤĪD Quran Player · serene editorial audio console */
+.adult .scene{background-image:linear-gradient(100deg,rgba(7,27,27,.95) 0%,rgba(7,27,27,.79) 48%,rgba(9,30,28,.28) 100%),url("/test/assets/area-heroes-v1290/quran-player.webp");background-repeat:no-repeat;background-size:cover;background-position:center,center 43%}
+.adult .scene:before{opacity:.28;color:rgba(240,206,144,.13);right:7%}
+.adult .scene:after{background:linear-gradient(180deg,transparent,rgba(5,22,22,.2));border-bottom:1px solid rgba(234,204,140,.17)}
+.adult .scene-num{color:#eccb90}
+.adult .scene h2{color:#fff2d8;text-shadow:0 3px 18px rgba(0,0,0,.42)}
+.adult .quran-text{font-feature-settings:"kern" 1;font-variant-ligatures:normal}
+.adult .tab.active{background:rgba(237,204,145,.18);border-color:rgba(237,204,145,.45);box-shadow:inset 0 1px rgba(255,245,216,.07)}
+.adult .translation{color:#eae8df}
+.adult .secondary{font-weight:680}
+.adult .miniplay{background:linear-gradient(115deg,rgba(9,30,31,.97),rgba(9,27,30,.97))}
+@media(max-width:800px){
+.adult .scene{min-height:147px;background-position:center,62% center}
+.adult .scene:before{opacity:.20}
+.adult .reader-tools{background:linear-gradient(180deg,rgba(230,199,141,.045),transparent)}
+.adult .quran-text{font-size:clamp(34px,8.9vw,45px)}
+.adult .verse{background:linear-gradient(180deg,rgba(7,26,25,.18),transparent)}
+.adult .navrow{border-top:1px solid rgba(234,201,140,.1)}
+.adult .mobile-sections{background:rgba(6,26,26,.93)}
+.adult .mobile-sections button.active{background:rgba(220,186,120,.19)}
+}
+
+/* MOBILE_V2_STYLES_END */
+</style></head><body class="adult"><div class="app"><div class="desktop"><nav class="sidebar"><div class="brand"><span class="brand-mark">۞</span><span>DĀR AL TAWḤĪD<br><span style="font-size:10px;color:var(--gold);letter-spacing:.18em">QURʾĀN STUDIO</span></span></div><div class="navtitle">ENTDECKEN</div><button class="navitem active" data-scroll="stage">◉ &nbsp; Jetzt hören</button><button class="navitem" data-scroll="surahs">▤ &nbsp; Sūren entdecken</button><button class="navitem" data-scroll="settings">⚙ &nbsp; Einstellungen</button><button class="navitem" data-scroll="progress">◷ &nbsp; Fortschritt</button><div class="sidefoot">VORSCHAU · V1<br>Isolierter HTML-Prototyp<br>Kein Eingriff in die Live-App</div></nav><div class="workspace"><div class="topline"><span class="breadcrumbs">DĀR AL TAWḤĪD Quran Player</span><span class="chip"><i class="live-dot"></i> HTML-VORSCHAU V1</span></div>
 <header class="heading"><div><span class="eyebrow">PREMIUM RECITATION EXPERIENCE</span><h1>Der Qurʾān.<br><em>Ein besonderer Moment.</em></h1><p class="sub">Hören, lesen, verstehen und lernen. Alles an einem Ort – ohne den Qurʾān-Text zu verändern.</p></div></header>
+<nav class="mobile-sections" aria-label="DĀR AL TAWḤĪD Quran Player · Bereiche"><button type="button" data-scroll="stage" class="active" aria-label="Player öffnen"><span aria-hidden="true">◉</span>Player</button><button type="button" data-scroll="surahs" class="" aria-label="Sūren öffnen"><span aria-hidden="true">▤</span>Sūren</button><button type="button" data-scroll="settings" class="" aria-label="Studio öffnen"><span aria-hidden="true">⚙</span>Studio</button><button type="button" data-scroll="progress" class="" aria-label="Merkliste öffnen"><span aria-hidden="true">☆</span>Merkliste</button></nav>
 <div class="content-grid"><main class="glass main-panel" id="stage"><section class="scene"><div><div class="scene-num">SŪRAH <span id="surahIndex">001</span> · QURʾĀN</div><h2 id="surahName">Al-Fātiḥah</h2><small id="suraCount">7 Āyāt · Zuhören & Tadabbur</small></div><div class="arabic-name" id="suraArabic" lang="ar" dir="rtl">الفاتحة</div></section>
 <div class="reader-tools"><button class="tab active" data-layer="ar">Arabisch</button><button class="tab active" data-layer="de">Deutsch</button><button class="tab" data-layer="lat">Lautschrift</button><button class="tab" data-layer="tad">Tadabbur</button><button class="tab" data-layer="taf">Tafsīr</button></div>
 <section class="verse"><div class="versehead"><span id="verseReference">ĀYAH 01 / 07</span><div style="display:flex;gap:7px"><button class="iconbtn" id="bookmark" aria-label="Āyah merken" title="Āyah merken">☆</button><button class="iconbtn" id="copy" aria-label="Vers kopieren" title="Vers kopieren">⧉</button></div></div><div id="quranText" class="quran-text" lang="ar" dir="rtl"></div><div class="translation" id="translation"></div><div class="latin" id="latin" hidden></div><div class="tip" id="commentBox" hidden></div><p class="versefade" id="verseFooter">Qurʾān · geprüfte Originaldaten</p></section><div class="navrow"><button class="secondary" id="prev">← Vorige Āyah</button><span class="number" id="counter">1 von 7</span><button class="secondary" id="next">Nächste Āyah →</button></div></main>
@@ -68,4 +182,7 @@ if(KIDS){$('kidHear').addEventListener('click',()=>{if(playing){stop();status('P
 // Opening external HTML as a local file has no same-origin data service; embedded fallback is used.
 const query=new URLSearchParams(location.search);const s=Number(query.get('surah')||state.surah);if(LIST.some(x=>x.id===s)&&!dataCache[s]){chooseSurah(s)}else{doc=dataCache[s]||doc;state.surah=doc.id;paint();status('Bereit zum Hören');}
 })();
+
+/* MOBILE_V2_SECTION_NAV */
+document.querySelectorAll('.mobile-sections button[data-scroll]').forEach(function(btn){btn.addEventListener('click',function(){document.querySelectorAll('.mobile-sections button').forEach(x=>x.classList.remove('active'));btn.classList.add('active')})});
 </script></body></html>
