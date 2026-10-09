@@ -49,6 +49,43 @@ function validateDocument(g, spec, profile = "boy", metadata = {}) {
   const meshes = Array.isArray(g?.meshes) ? g.meshes : [];
   const accessors = Array.isArray(g?.accessors) ? g.accessors : [];
   const animations = Array.isArray(g?.animations) ? g.animations : [];
+  // A translation on a child joint changes its effective bone length without
+  // any scale channel. Collect joints across ALL skins, not only skins[0].
+  const skinnedJointNodes = new Set(skins.flatMap(s => Array.isArray(s.joints) ? s.joints : []));
+  const parentByNode = new Map();
+  for (const [parent, node] of nodes.entries()) {
+    for (const child of node?.children || []) {
+      if (!Number.isInteger(child) || !nodes[child]) { fail("Invalid scene-node child reference."); continue; }
+      if (parentByNode.has(child)) { fail("Scene node has multiple parents."); continue; }
+      parentByNode.set(child, parent);
+    }
+  }
+  const hasSkinnedAncestor = index => {
+    const visited = new Set([index]);
+    let ancestor = parentByNode.get(index);
+    while (ancestor !== undefined) {
+      if (visited.has(ancestor)) { fail("Cyclic skeletal node hierarchy."); return true; }
+      if (skinnedJointNodes.has(ancestor)) return true;
+      visited.add(ancestor);
+      ancestor = parentByNode.get(ancestor);
+    }
+    return false;
+  };
+  // Non-joint helper nodes BETWEEN joints can also stretch an arm/leg.
+  const skeletalAncestors = new Set();
+  for (const joint of skinnedJointNodes) {
+    const visited = new Set([joint]);
+    let ancestor = parentByNode.get(joint);
+    while (ancestor !== undefined) {
+      if (visited.has(ancestor)) { fail("Cyclic skeletal node hierarchy."); break; }
+      skeletalAncestors.add(ancestor);
+      visited.add(ancestor);
+      ancestor = parentByNode.get(ancestor);
+    }
+  }
+  const rootName = spec?.rig?.rootBone;
+  const rootJointIndices = [...skinnedJointNodes].filter(i => nodes[i]?.name === rootName);
+  if (!rootName || rootJointIndices.length !== 1) fail("Missing or ambiguous skeleton root joint.");
   if (!skins.length) fail("No skin. A 2D billboard / unrigged model cannot be used as an animated prayer character.");
   if (!meshes.length) fail("No real mesh geometry.");
   if (!nodes.length) fail("No GLB scene nodes.");
@@ -81,6 +118,16 @@ function validateDocument(g, spec, profile = "boy", metadata = {}) {
       if (ch.target?.path === "scale") fail("Animated scale changes body/limb proportions: " + a.name);
       if (!["translation", "rotation"].includes(ch.target?.path)) fail("Unsupported animation channel: " + String(ch.target?.path));
       if (!Number.isInteger(ch.target?.node) || !nodes[ch.target.node]) fail("Animation references invalid joint/node.");
+      if (ch.target?.path === "translation" && Number.isInteger(ch.target?.node) && nodes[ch.target.node]) {
+        const target = ch.target.node;
+        if (skinnedJointNodes.has(target) &&
+            (target !== rootJointIndices[0] || hasSkinnedAncestor(target))) {
+          fail("Forbidden non-root skinned joint translation (limb stretch risk): " + a.name + " / " + (nodes[target].name || target));
+        }
+        if (!skinnedJointNodes.has(target) && skeletalAncestors.has(target) && hasSkinnedAncestor(target)) {
+          fail("Forbidden translation of intermediary skeletal helper node: " + a.name);
+        }
+      }
     }
   }
   for (const clip of spec?.rig?.requiredClipsForMilestoneOne || []) {
