@@ -35,3 +35,18 @@ Never mark production ready or amend failed tests into success without evidence.
 5. Screenshots/video: **absent** (no GUI browser on this agent). Real iPhone/iPad: **absent**. Religious approval: **absent**. Original V7.7 GLB: **not in repository** (search found no `.glb`).
 6. Remaining blockers: authentic boy GLB SHA `353b0288…`; five-view PNG SHA `062b8555…` not re-measured with v4; girl 3D; Hanbali `approvedToAnimate/Record/Teach` still false; no HTTPS staging / device QA; `productionReady` remains false.
 7. Status: **IMPLEMENTED** (2D demo/history/assets). **AUTOMATED TESTED** (preview + existing synthetic rigging). **VISUALLY VERIFIED**: no. **HUMAN APPROVED**: no. **BLOCKED**: original 3D, v4 IoU, fiqh, device, live.
+
+## 2026-10-09 — Cursor Cloud, Phase 1 UI + unabhängige Phase-2-Verträge (PR #894 Fortsetzung)
+
+1. Agent: Cursor Cloud. Branch `cursor/kids-mein-gebet-dev-fa8f`, Draft-PR https://github.com/Sero91ak/dar-al-tawhid-site/pull/894 gegen `feature/kids-mein-gebet-preview-20261008`.
+2. Auftrag aus Review #894: echte Browser-/History-Prüfung, Kids-Home-Anbindung ohne fünften Tab, kein Voice-Studio-Fix, keine GLB-Erfindung.
+3. Umsetzung:
+   - `preview-v1.js`: UI-Zurück nutzt `history.back()` wenn ein Mein-Gebet-State liegt; linker Rand-Swipe; Safe-Area oben; `overscroll-behavior:contain`. Cache-Pin `preview-v1.js?v=2` in den drei identischen Kids-Shells.
+   - `config.json`: Phase 1, `permanentBottomTab=false`, keine Live-/Merge-Freigabe.
+   - `qa/home-fixture.html` bildet den Kids-Home-Vertrag (4 Tabs, Grid, Testzugang).
+   - `rigging/test-kids-shell-contract.cjs` (11 Checks) und `rigging/test-preview-playwright.cjs` (Chromium: iPhone-Boy, iPad-Girl, Fixture, `goBack`).
+   - Screenshots unter `qa/screenshots/` (Chromium-Emulation, kein physisches iPhone).
+4. Tests vor Push: `test-preview-v1.cjs` 10 PASS inkl. History-Back; Shell-Vertrag 11 PASS; Playwright 3 PASS (`NODE_PATH=/tmp/pw/node_modules`). Synthetische Rigging-Suite unverändert nicht als 3D-Freigabe gewertet. CI-URL am **finalen** SHA nach dem Push nachtragen.
+5. Browser: Chromium 390×844 / 768×1024 / Fixture; 0 Konsolenfehler. Junge weiß/gold, Mädchen pinkes Hijab, 4 Tabs Heute/Geschichten/Qurʾān/Eltern. **Echtes iPhone/iPad/WKWebView: absent.** Religiöse Freigabe: absent.
+6. Phase 2 dauerhafter Tab, Original-GLB, Audio, Fiqh-Animation: **BLOCKED** (Freigabe bzw. fehlende Bytes). Voice-Studio-Validate-Rot: fremde Spur, nicht angefasst.
+7. Status: **IMPLEMENTED** (History-Back, Swipe, Home-Vertrag). **AUTOMATED TESTED** (VM + Chromium). **VISUALLY VERIFIED**: Chromium-Emulation ja, reales Gerät nein. **HUMAN APPROVED**: nein.

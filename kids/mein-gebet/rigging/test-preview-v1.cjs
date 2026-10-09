@@ -246,8 +246,20 @@ function boot(gender) {
       (winListeners[type] || (winListeners[type] = [])).push(fn);
     },
     history: {
+      _stack: [{ state: null }],
+      get state() {
+        return this._stack[this._stack.length - 1].state;
+      },
       pushState(state) {
-        historyStack.push(JSON.parse(JSON.stringify(state)));
+        const copy = JSON.parse(JSON.stringify(state));
+        this._stack.push({ state: copy });
+        historyStack.push(copy);
+      },
+      back() {
+        if (this._stack.length < 2) return;
+        this._stack.pop();
+        const st = this._stack[this._stack.length - 1].state;
+        (winListeners.popstate || []).forEach((fn) => fn({ state: st }));
       }
     },
     scrollTo() {},
@@ -261,7 +273,7 @@ function boot(gender) {
     MutationObserver: windowObj.MutationObserver,
     localStorage: windowObj.localStorage
   });
-  return { document, historyStack, winListeners, html };
+  return { document, historyStack, winListeners, html, history: windowObj.history };
 }
 
 check("preview mounts Home entry, four lessons, and the boy original figure", () => {
@@ -299,6 +311,22 @@ check("entry, lesson and station clicks drive history and girl original art", ()
   assert.ok(girlArt >= 1);
   assert.ok(historyStack.length >= 2);
   assert.equal(historyStack[historyStack.length - 1].kmg, true);
+});
+
+check("browser back restores lesson, overview, then home", () => {
+  const ctx = boot("boy");
+  ctx.document.getElementById("kidsMeinGebetEntry").click();
+  ctx.document.querySelectorAll("[data-kmg-lesson]")[0].click();
+  ctx.document.querySelectorAll("[data-kmg-topic]")[0].click();
+  assert.equal(ctx.document.getElementById("kmgStation").hidden, false);
+  ctx.history.back();
+  assert.equal(ctx.document.getElementById("kmgStation").hidden, true);
+  assert.equal(ctx.document.getElementById("kmgDetail").hidden, false);
+  ctx.history.back();
+  assert.equal(ctx.document.getElementById("kmgOverview").hidden, false);
+  ctx.history.back();
+  assert.equal(ctx.document.getElementById("view-today").classList.contains("active"), true);
+  assert.equal(ctx.document.getElementById("view-mein-gebet").classList.contains("active"), false);
 });
 
 console.log("OK preview-v1 isolated checks: " + passed);

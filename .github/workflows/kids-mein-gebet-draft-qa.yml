@@ -49,6 +49,8 @@ jobs:
           node --check kids/mein-gebet/rigging/verify-animation-rig-freeze.cjs
           node --check kids/mein-gebet/preview-v1.js
           node --check kids/mein-gebet/rigging/test-preview-v1.cjs
+          node --check kids/mein-gebet/rigging/test-kids-shell-contract.cjs
+          node --check kids/mein-gebet/rigging/test-preview-playwright.cjs
       - name: Validate all synthetic structure and release gates
         run: |
           node kids/mein-gebet/rigging/validate-glb.test.cjs
@@ -60,6 +62,7 @@ jobs:
           node kids/mein-gebet/rigging/test-audit-project-completion.cjs
           node kids/mein-gebet/rigging/test-animation-rig-freeze.cjs
           node kids/mein-gebet/rigging/test-preview-v1.cjs
+          node kids/mein-gebet/rigging/test-kids-shell-contract.cjs
       - name: Exercise deterministic camera diagnostic tests
         run: |
           python kids/mein-gebet/rigging/test_three_quarter_camera_diagnostic.py
@@ -84,3 +87,11 @@ jobs:
           assert report['physicalGLBVerificationRequired'] is True, 'Missing physical release guard'
           print('PASS: real model bytes absent -> production release remains blocked')
           PY
+      - name: Install Chromium for isolated preview navigation
+        run: |
+          npm install --prefix "$RUNNER_TEMP/pw" playwright@1.55.0
+          npx --prefix "$RUNNER_TEMP/pw" playwright install chromium
+      - name: Real Chromium history and profile navigation
+        env:
+          NODE_PATH: ${{ runner.temp }}/pw/node_modules
+        run: node kids/mein-gebet/rigging/test-preview-playwright.cjs
