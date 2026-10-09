@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-10-08T13:40:30.919Z",
+  "generated": "2026-10-09T14:16:51.000Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -1189,6 +1189,48 @@
             "target": "segment:DAR_PUSH|all",
             "recipients": null,
             "notificationId": "f97b03cd-6359-4230-9378-a8f4b0cb5f4b"
+          }
+        ]
+      }
+    },
+    "umar-ibn-abd-al-aziz-wahre-taqwa-20261009": {
+      "postId": "umar-ibn-abd-al-aziz-wahre-taqwa-20261009",
+      "filename": "tazkiyah-umar-ibn-abd-al-aziz-wahre-taqwa-20261009.md",
+      "postTitle": "📖 Wahre Taqwā – mehr als Fasten und Nachtgebet",
+      "postPath": "content/posts/tazkiyah-umar-ibn-abd-al-aziz-wahre-taqwa-20261009.md",
+      "publishedAt": "2026-10-09T08:41:00.000Z",
+      "status": "sent",
+      "pushApproved": true,
+      "pushApprovedAt": "2026-10-09T14:16:49.000Z",
+      "approvalOrigin": "Nutzerbestätigung: Push live bei Beiträgen bedeutet OneSignal-Gerätebenachrichtigung, 2026-10-09",
+      "sentAt": "2026-10-09T14:16:51.000Z",
+      "updatedAt": "2026-10-09T14:16:51.000Z",
+      "lastError": "",
+      "pushResult": {
+        "target": "segment:DAR_PUSH|all",
+        "targetUrl": "https://dar-al-tawhid.de/?post=umar-ibn-abd-al-aziz-wahre-taqwa-20261009#post/umar-ibn-abd-al-aziz-wahre-taqwa-20261009",
+        "notificationId": "59463399-8fb3-4fb4-85a3-3b391cc4dfd3",
+        "idempotencyKey": "6e4f384d-71d5-4c3a-a88e-291dd4b5c6f0",
+        "provider": "OneSignal",
+        "successful": 88,
+        "failed": 3,
+        "errored": 0,
+        "confirmedReceived": 0,
+        "channelResults": [
+          {
+            "channel": "ios",
+            "successful": 74,
+            "failed": 3
+          },
+          {
+            "channel": "safari_web_push",
+            "successful": 10,
+            "failed": 0
+          },
+          {
+            "channel": "chrome_web_push",
+            "successful": 4,
+            "failed": 0
           }
         ]
       }
