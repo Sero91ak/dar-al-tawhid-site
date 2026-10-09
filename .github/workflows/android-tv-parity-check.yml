@@ -1,0 +1,71 @@
+name: Android TV · Apple-TV Parity Staging
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "android/tv/**"
+      - "android/settings.gradle.kts"
+      - ".github/workflows/android-tv-parity-check.yml"
+  push:
+    branches:
+      - feat/android-tv-apple-parity-phase1-20261009
+    paths:
+      - "android/tv/**"
+      - "android/settings.gradle.kts"
+      - ".github/workflows/android-tv-parity-check.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  tv-parity-build:
+    name: Android TV debug APK and layout source audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout TV and Gradle source
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            android
+          sparse-checkout-cone-mode: true
+
+      - name: Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Gradle environment
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Restore and check original TV package
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -Fq 'include(":tv")' android/settings.gradle.kts
+          grep -q 'de.daraltawhid.tv' android/tv/build.gradle.kts
+          grep -q 'LEANBACK_LAUNCHER' android/tv/src/main/AndroidManifest.xml
+          grep -q 'setSingleLine(true)' android/tv/src/main/java/de/daraltawhid/tv/TvActivity.kt
+          grep -q 'prayerValues' android/tv/src/main/java/de/daraltawhid/tv/TvActivity.kt
+          test -s android/tv/src/main/res/drawable-nodpi/dar_tv_banner.jpg
+
+      - name: Compile real Android TV APK
+        working-directory: android
+        run: bash ./gradlew --no-daemon --stacktrace :tv:assembleDebug
+
+      - name: Verify TV debug output
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s android/tv/build/outputs/apk/debug/tv-debug.apk
+          sha256sum android/tv/build/outputs/apk/debug/tv-debug.apk
+          ls -lh android/tv/build/outputs/apk/debug/tv-debug.apk
+
+      - name: Publish TV debug APK for internal validation
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-al-tawhid-tv-parity-phase1-debug
+          path: android/tv/build/outputs/apk/debug/tv-debug.apk
+          if-no-files-found: error
+          retention-days: 14
