@@ -1,5 +1,5 @@
 {
-  "fassung": 3,
+  "fassung": 4,
   "aktualisiertAm": "2026-10-09",
   "bereich": "dienst-pflege-hilfeleistung",
   "eintraege": [
@@ -730,23 +730,30 @@
       "hinweise": "Nicht anzeigen."
     },
     {
-      "kennung": "dienst-beduerftige-detail-001",
-      "person": "",
-      "titel": "Umgang mit Bedürftigen im Detail",
-      "bereich": "versorgung",
-      "thema": "in-pruefung",
-      "kurzvorschau": "In Prüfung.",
-      "vollstaendigeAussage": "",
-      "lehre": "",
-      "quellenart": "in-pruefung",
-      "quellenstatus": "nicht-anzeigen",
-      "quellenanzeige": "In Prüfung.",
-      "direktnachweisText": "",
-      "direktnachweisUrl": "",
-      "direktnachweisArt": "",
-      "atharPruefung": "Bei der Endprüfung prüfen.",
-      "freigabeDurchSerhat": false,
-      "hinweise": "Nicht anzeigen."
+      "kennung": "dienst-witwen-beduerftige-bukhari-5353-001",
+      "person": "Abū Hurayrah",
+      "titel": "Hilfe für Witwen und Bedürftige",
+      "bereich": "hilfe-witwen-arme",
+      "thema": "hilfe-witwen-arme",
+      "kurzvorschau": "Ṣaḥīḥ al-Bukhārī vergleicht den Einsatz für Witwen und Bedürftige mit besonders verdienstvollen Gottesdiensten.",
+      "vollstaendigeAussage": "Abū Hurayrah رضي الله عنه überlieferte, dass der Prophet ﷺ sagte: Wer sich um die Belange einer Witwe und eines Bedürftigen bemüht, ist hinsichtlich seines Lohnes wie jemand, der sich auf Allahs Weg einsetzt, oder wie jemand, der nachts betet und tagsüber fastet. Es geht um tätige Versorgung und Unterstützung der Hilfsbedürftigen, nicht um den Aufruf zu Kampfhandlungen.",
+      "lehre": "Die Unterstützung von Witwen und Bedürftigen gehört zu den besonders verdienstvollen guten Taten.",
+      "quellenart": "sahih",
+      "quellenstatus": "geprueft",
+      "quellenanzeige": "Quelle: Ṣaḥīḥ al-Bukhārī, Nr. 5353; Ṣaḥīḥ Muslim, Nr. 2982; Bericht von Abū Hurayrah.",
+      "direktnachweisText": "→ Quelle öffnen",
+      "direktnachweisUrl": "https://dorar.net/hadith/sharh/15140",
+      "direktnachweisArt": "Webseite",
+      "atharPruefung": "Originalwortlaut, Überlieferer, Fundstelle und direkter Quellennachweis überprüft.",
+      "freigabeDurchSerhat": true,
+      "hinweise": "Die Aussage ist quellengebunden. Keine modernen Rechts- oder Gesundheitsentscheidungen daraus ableiten.",
+      "schlagwoerter": [
+        "Witwen",
+        "Armut",
+        "Hilfe",
+        "Fürsorge",
+        "Bukhārī"
+      ]
     },
     {
       "kennung": "dienst-waisen-detail-001",
@@ -887,6 +894,31 @@
       "hinweise": "Der Bericht wird als Beispiel für freiwilligen Dienst verstanden, nicht als moderne Berufsregel.",
       "freigabeDurchSerhat": true,
       "atharPruefung": "Ṣaḥīḥ-al-Bukhārī- und Ṣaḥīḥ-Muslim-Ursprung geprüft."
+    },
+    {
+      "kennung": "dienst-tiere-wasser-bukhari-2363-001",
+      "person": "Abū Hurayrah",
+      "titel": "Wasser für ein durstiges Tier",
+      "bereich": "tierfuersorge-wasser",
+      "thema": "tierfuersorge-wasser",
+      "kurzvorschau": "Ein Mann gab einem vor Durst leidenden Hund Wasser; Allah vergab ihm dafür.",
+      "vollstaendigeAussage": "Abū Hurayrah رضي الله عنه berichtete, dass der Prophet ﷺ von einem Mann erzählte, der nach eigenem großen Durst einem Hund begegnete, der durstig die Erde leckte. Er holte Wasser aus einem Brunnen und tränkte das Tier. Allah würdigte seine Tat und vergab ihm. Auf die Frage, ob es auch für Tiere Lohn gebe, erklärte der Prophet ﷺ: In jeder lebendigen Kreatur liegt die Möglichkeit eines Lohnes für Wohltätigkeit.",
+      "lehre": "Barmherzigkeit und Versorgung erstrecken sich auch auf hilfsbedürftige Tiere. Der Bericht begründet weder eine neue Tierhaltungsregel noch eine spezielle medizinische Aussage.",
+      "quellenart": "sahih",
+      "quellenstatus": "geprueft",
+      "quellenanzeige": "Quelle: Ṣaḥīḥ al-Bukhārī, Nr. 2363; Ṣaḥīḥ Muslim, Nr. 2244; Bericht von Abū Hurayrah.",
+      "direktnachweisText": "→ Quelle öffnen",
+      "direktnachweisUrl": "https://dorar.net/hadith/sharh/6625",
+      "direktnachweisArt": "Webseite",
+      "atharPruefung": "Originalwortlaut, Überlieferer, Fundstelle und direkter Quellennachweis überprüft.",
+      "freigabeDurchSerhat": true,
+      "hinweise": "Die Aussage ist quellengebunden. Keine modernen Rechts- oder Gesundheitsentscheidungen daraus ableiten.",
+      "schlagwoerter": [
+        "Tiere",
+        "Wasser",
+        "Barmherzigkeit",
+        "Bukhārī"
+      ]
     }
   ]
 }
