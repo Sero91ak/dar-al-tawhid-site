@@ -1,0 +1,91 @@
+name: Kids Serhat Bilingual Term Audio
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'kids/term-learning.js'
+      - 'kids/tools/build-term-audio.py'
+      - '.github/workflows/build-kids-term-audio.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-term-owner-voice-audio
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+    steps:
+      - name: Checkout current main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Verify authorized ElevenLabs synthesis
+        run: |
+          set -euo pipefail
+          if [ -z "$ELEVENLABS_API_KEY" ]; then
+            echo "::error::ELEVENLABS_API_KEY missing. No audio will be incorrectly marked complete."
+            exit 1
+          fi
+
+      - name: Install or locate FFmpeg
+        run: |
+          set -euo pipefail
+          if command -v ffmpeg && command -v ffprobe; then
+            ffmpeg -version | head -n 1
+            exit 0
+          fi
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg
+
+      - name: Generate thirty-six reusable German Serhat term explanations
+        run: |
+          set -euo pipefail
+          python3 kids/tools/voice_text.py --self-test
+          python3 kids/tools/build-term-audio.py
+          python3 - <<'PY'
+          import json, pathlib, subprocess
+          data=json.loads(pathlib.Path("kids/data/term-learning-audio.json").read_text(encoding="utf-8"))
+          entries=data["entries"]
+          assert data["voiceProfileId"]=="serhat-owner-voice-2026"
+          assert data["modelId"]=="eleven_flash_v2_5"
+          assert len(entries)==36
+          for key,entry in entries.items():
+              assert entry["qaStatus"]=="passed" and entry["durationSeconds"]>=1.5, key
+              assert pathlib.Path(entry["url"].lstrip("/")).is_file(), key
+          subprocess.run(["node","--check","kids/term-learning.js"],check=True)
+          subprocess.run(["node","scripts/kids-design-guard.js"],check=True)
+          print("Kids bilingual Serhat term voice pack: 36/36 validated")
+          PY
+
+      - name: Commit QA-approved term clips and offline manifest
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add kids/data/term-learning-audio.json kids/assets/kids-term-audio kids/sw.js
+          if git diff --cached --quiet; then
+            echo "All audio assets already current."
+            exit 0
+          fi
+          git commit -m "Kids: publish Serhat bilingual glossary voice and offline clips [voice-pause]"
+          for attempt in $(seq 1 8); do
+            git pull --rebase origin main
+            if git push origin HEAD:main; then
+              echo "Kids bilingual Serhat term audio committed and ready for Cloudflare release."
+              exit 0
+            fi
+            if [ "$attempt" -ge 8 ]; then
+              echo "::error::Concurrent main push conflict; audio commit not released."
+              exit 1
+            fi
+            sleep $((attempt * 2))
+          done
