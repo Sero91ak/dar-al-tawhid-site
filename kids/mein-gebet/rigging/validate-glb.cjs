@@ -87,6 +87,41 @@ function validateDocument(g, spec, profile = "boy", metadata = {}) {
       ancestor = parentByNode.get(ancestor);
     }
   }
+  // Bind pose must not contain hidden local limb-stretch or matrix/shear.
+  // This is a structural prefilter; actual skinned bone lengths still need
+  // numeric frame-by-frame verification and human review.
+  for (const [skinIndex, member] of skins.entries()) {
+    const bones = member?.joints;
+    if (!Array.isArray(bones) || !bones.length || new Set(bones).size !== bones.length)
+      fail("Skin has empty or duplicated joint indices: " + skinIndex);
+    for (const index of bones || [])
+      if (!Number.isInteger(index) || index < 0 || !nodes[index])
+        fail("Skin references nonexistent joint: " + skinIndex + "/" + index);
+    const bindIndex = member?.inverseBindMatrices;
+    const bindAcc = accessors[bindIndex];
+    if (!Number.isInteger(bindIndex) || !bindAcc || bindAcc.type !== "MAT4" ||
+        bindAcc.componentType !== 5126 || bindAcc.count !== bones?.length)
+      fail("Invalid inverseBindMatrices for skin: " + skinIndex);
+  }
+  for (const index of new Set([...skinnedJointNodes, ...skeletalAncestors])) {
+    const n = nodes[index];
+    if (!n) continue;
+    if (n.matrix !== undefined)
+      fail("Matrix-based skeletal transform cannot be proven stretch-free: " + (n.name || index));
+    if (n.scale !== undefined &&
+        (!Array.isArray(n.scale) || n.scale.length !== 3 ||
+         n.scale.some(c => typeof c !== "number" || !Number.isFinite(c) || Math.abs(c - 1) > 1e-6)))
+      fail("Static skeletal scaling changes bone proportions: " + (n.name || index));
+    if (n.translation !== undefined &&
+        (!Array.isArray(n.translation) || n.translation.length !== 3 ||
+         n.translation.some(c => typeof c !== "number" || !Number.isFinite(c))))
+      fail("Nonfinite skeletal translation: " + (n.name || index));
+    if (n.rotation !== undefined &&
+        (!Array.isArray(n.rotation) || n.rotation.length !== 4 ||
+         n.rotation.some(c => typeof c !== "number" || !Number.isFinite(c)) ||
+         Math.abs(Math.hypot(...n.rotation) - 1) > 0.001))
+      fail("Invalid static skeletal quaternion: " + (n.name || index));
+  }
   const rootName = spec?.rig?.rootBone;
   const rootJointIndices = [...skinnedJointNodes].filter(i => nodes[i]?.name === rootName);
   if (!rootName || rootJointIndices.length !== 1) fail("Missing or ambiguous skeleton root joint.");
