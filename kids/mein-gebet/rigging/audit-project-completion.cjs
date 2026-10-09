@@ -9,6 +9,7 @@ const fs=require("node:fs");
 const path=require("node:path");
 const crypto=require("node:crypto");
 const {parseGLB,validateDocument}=require("./validate-glb.cjs");
+const {validateAnimationBytes}=require("./validate-glb-binary.cjs");
 const root=__dirname;
 const read=p=>JSON.parse(fs.readFileSync(path.join(root,p),"utf8"));
 function audit(status,boy,girl,story,hanbali){
@@ -90,9 +91,10 @@ function verifyLocalBinary(file,identity,profile,acceptance){
      return {pass:false,reason:"File bytes do not match reviewed "+profile+" SHA-256 and size"};
    const parsed=parseGLB(bytes);
    const result=validateDocument(parsed.gltf,acceptance,profile,{fileBytes:bytes.length,hasBin:parsed.hasBin});
-   if(!result.structureValid)
-     return {pass:false,reason:"Structural GLB validation rejected "+profile,errors:result.errors};
-   return {pass:true,sha256:digest,bytes:bytes.length};
+   const samplerAudit=validateAnimationBytes(parsed.gltf,parsed.bin);
+   if(!result.structureValid||!samplerAudit.valid)
+     return {pass:false,reason:"GLB structure or keyframe bytes rejected "+profile,errors:[...result.errors,...samplerAudit.errors]};
+   return {pass:true,sha256:digest,bytes:bytes.length,animationSamplerBytesVerified:true};
  }catch(e){return {pass:false,reason:"Cannot verify real "+profile+" GLB: "+e.message};}
 }
 function checkActualBinaryArguments(args,boy,girl,acceptance){
