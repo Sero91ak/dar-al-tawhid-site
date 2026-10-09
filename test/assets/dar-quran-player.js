@@ -937,6 +937,23 @@
     });
   }
   function preloadNext() {}
+  function setFallbackSourceAtPosition(a, url) {
+    // An alternate URL of the SAME reciter should continue the current Āyah.
+    var at = Number(a.currentTime) || Number(state.resumeAt) || Number(state.current) || 0;
+    var generation = playGen;
+    setAudioSrc(a, url);
+    if (at <= 0.2) return;
+    state.resumeAt = at;
+    function resumeFallback() {
+      a.removeEventListener("loadedmetadata", resumeFallback);
+      if (generation !== playGen || String(a.getAttribute("src") || "") !== url) return;
+      var d = Number(a.duration);
+      var target = isFinite(d) && d > 0 ? Math.min(at, Math.max(0, d - 0.15)) : at;
+      try { a.currentTime = target; } catch (eFallbackSeek) {}
+    }
+    a.addEventListener("loadedmetadata", resumeFallback);
+    if (a.readyState >= 1) resumeFallback();
+  }
   function tryFallback() {
     if (!engine.blobTried) {
       engine.blobTried = true;
@@ -955,7 +972,7 @@
         engine.lastUrl = saved;
         var el = audioEl();
         logAudio("fallback saved offline copy", { surah: sSaved, ayah: aSaved });
-        setAudioSrc(el, saved);
+        setFallbackSourceAtPosition(el, saved);
         if (engine.wantPlay) runPlay(el, playGen);
       });
       return;
@@ -999,7 +1016,7 @@
     var a = audioEl();
     engine.lastUrl = urls[urlIndex];
     logAudio("fallback url", { url: engine.lastUrl, index: urlIndex });
-    setAudioSrc(a, engine.lastUrl);
+    setFallbackSourceAtPosition(a, engine.lastUrl);
     logAudio("src changed", snapAudio(a));
     if (engine.wantPlay) runPlay(a, playGen);
   }
