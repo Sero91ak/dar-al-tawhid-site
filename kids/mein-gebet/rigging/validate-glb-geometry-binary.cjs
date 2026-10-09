@@ -4,6 +4,40 @@
 const COMPONENTS={5121:{bytes:1,read:(b,o)=>b.readUInt8(o)},5123:{bytes:2,read:(b,o)=>b.readUInt16LE(o)},5125:{bytes:4,read:(b,o)=>b.readUInt32LE(o)},5126:{bytes:4,read:(b,o)=>b.readFloatLE(o)}};
 const TYPE_SIZE={SCALAR:1,VEC2:2,VEC3:3,VEC4:4,MAT4:16};
 const MAX_VERTICES=400000;
+/** Largest out-of-plane vertex distance relative to geometry diagonal.
+ * A rotated flat polygon has an XYZ axis-aligned bounding box but no volume.
+ * This is a prefilter only, not a proof of watertight manifold geometry. */
+function spatialThicknessRatio(points) {
+ if(!Array.isArray(points)||points.length<4)return 0;
+ const origin=points[0];
+ const dist2=(a,b)=>a.reduce((acc,v,j)=>acc+(v-b[j])**2,0);
+ let farthest=origin,d2max=0;
+ for(const p of points){const d=dist2(p,origin);if(d>d2max){farthest=p;d2max=d;}}
+ if(!Number.isFinite(d2max)||d2max<=1e-20)return 0;
+ const edge=farthest.map((v,j)=>v-origin[j]);
+ let normal=null,area2max=0;
+ for(const p of points){
+   const v=p.map((x,j)=>x-origin[j]);
+   const cross=[
+     edge[1]*v[2]-edge[2]*v[1],
+     edge[2]*v[0]-edge[0]*v[2],
+     edge[0]*v[1]-edge[1]*v[0]
+   ];
+   const area2=cross.reduce((sum,x)=>sum+x*x,0);
+   if(area2>area2max){area2max=area2;normal=cross;}
+ }
+ if(!Number.isFinite(area2max)||area2max<=1e-20)return 0;
+ const norm=Math.sqrt(area2max);
+ let maxOutOfPlane=0,maxExtent2=d2max;
+ for(const p of points){
+   const v=p.map((x,j)=>x-origin[j]);
+   const d=Math.abs(normal.reduce((sum,x,j)=>sum+x*v[j],0))/norm;
+   maxOutOfPlane=Math.max(maxOutOfPlane,d);
+   maxExtent2=Math.max(maxExtent2,dist2(p,origin));
+ }
+ return maxOutOfPlane/Math.sqrt(maxExtent2);
+}
+
 function validateGeometryBytes(g,bin,{minimumReferencedVertices=2000}={}){
  const errors=[],fail=x=>errors.push(x);
  if(!Buffer.isBuffer(bin)||bin.length<4)
@@ -15,6 +49,7 @@ function validateGeometryBytes(g,bin,{minimumReferencedVertices=2000}={}){
  const nodes=Array.isArray(g?.nodes)?g.nodes:[];
  let totalVertices=0,totalTriangles=0,skinnedPrimitives=0,totalReferencedVertices=0,degenerateTriangles=0;
  const boundingMin=[Infinity,Infinity,Infinity],boundingMax=[-Infinity,-Infinity,-Infinity];
+ const referencedPositions=[];
  if(!Number.isInteger(minimumReferencedVertices)||minimumReferencedVertices<3)
    fail("Invalid minimum reference vertex criterion.");
  function readAccessor(index,type,types,label){
@@ -159,10 +194,11 @@ function validateGeometryBytes(g,bin,{minimumReferencedVertices=2000}={}){
        // Count only vertices belonging to real triangles, not dummy points
        // or degenerate faces created to inflate the character's apparent size.
        for(const index of used){
+         const p=[pos.read(index,0),pos.read(index,1),pos.read(index,2)];
+         referencedPositions.push(p);
          for(let axis=0;axis<3;axis++){
-           const x=pos.read(index,axis);
-           boundingMin[axis]=Math.min(boundingMin[axis],x);
-           boundingMax[axis]=Math.max(boundingMax[axis],x);
+           boundingMin[axis]=Math.min(boundingMin[axis],p[axis]);
+           boundingMax[axis]=Math.max(boundingMax[axis],p[axis]);
          }
        }
        totalReferencedVertices+=used.size;
@@ -180,8 +216,16 @@ function validateGeometryBytes(g,bin,{minimumReferencedVertices=2000}={}){
    fail("Too few actually referenced mesh vertices: "+totalReferencedVertices);
  if(boundingMin.some((x,i)=>!Number.isFinite(x)||!Number.isFinite(boundingMax[i])||boundingMax[i]-x<0.02))
    fail("Degenerate/flat geometry bounds; not a validated full 3D character.");
+ // A tilted billboard can span X, Y and Z while remaining exactly coplanar.
+ // Only enforce this production-grade volume prefilter on full-size models;
+ // three-vertex unit fixtures exercise accessor validation separately.
+ const thicknessRatio=minimumReferencedVertices>=2000?
+   spatialThicknessRatio(referencedPositions):null;
+ if(thicknessRatio!==null&&(!Number.isFinite(thicknessRatio)||thicknessRatio<0.012))
+   fail("Coplanar/zero-thickness geometry is not a real 3D character.");
  return {valid:errors.length===0,errors,productionApproved:false,
    vertices:totalVertices,referencedVertices:totalReferencedVertices,
-   triangles:totalTriangles,degenerateTriangles,skinnedPrimitives};
+   triangles:totalTriangles,degenerateTriangles,spatialThicknessRatio:thicknessRatio,
+   referencedBounds:{min:boundingMin,max:boundingMax},skinnedPrimitives};
 }
-module.exports={validateGeometryBytes};
+module.exports={validateGeometryBytes,spatialThicknessRatio};
