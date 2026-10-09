@@ -159,12 +159,16 @@ class TvActivity : Activity() {
                 "isha" to "ʿIšāʾ"
             )
             for ((key, display) in names) {
-                var value = root.optString(key).ifBlank { root.optString(key.replaceFirstChar { it.uppercase() }) }
-                if (value.isBlank()) {
-                    val times = root.optJSONObject("times")
-                    value = times?.optString(key).orEmpty()
+                // The public /api/prayer/times endpoint returns
+                // {"fajr":{"name":"Fajr","time":"05:32"}}, not plain strings.
+                val record = root.opt(key) ?: root.opt(key.replaceFirstChar { it.uppercase() })
+                val raw = when (record) {
+                    is JSONObject -> record.optString("time")
+                    is String -> record
+                    else -> ""
                 }
-                if (value.isNotBlank()) lines.add("$display   ·   $value")
+                val value = Regex("""\\b(?:[01]?\\d|2[0-3]):[0-5]\\d\\b""").find(raw)?.value
+                if (value != null) lines.add("$display   ·   $value")
             }
             prayerTimesLabel.text =
                 if (lines.isEmpty()) "Zeitformat der Quelle muss noch angepasst werden."
