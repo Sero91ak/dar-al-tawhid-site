@@ -137,7 +137,7 @@ def check(model,source):
             'head_region_iou_worst':round(min(head),5),
             'requested_90pct_shape_prefilter_pass':min(vals)>=.90 and min(head)>=.85 and min_consistency>=.96 and index!=1
         }
-    return {'measurement_method_id':'fiveview-cropped-grabcut-seeded-v3-20261008',
+    return {'measurement_method_id':'fiveview-cropped-grabcut-seeded-v4-stride-scene-safe-20261009',
             'opencv_version':cv2.__version__,
             'model':Path(model).name,'model_sha256':hashlib.sha256(Path(model).read_bytes()).hexdigest(),
             'original_sha256':ORIGINAL_SHA,'source_crop_boundaries_px':list(CUTS),'source_segmentation_seed_thresholds':list(SEEDS),
