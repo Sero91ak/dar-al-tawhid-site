@@ -60,6 +60,28 @@ function checkJson(label, file) {
   }
 }
 
+// Qurʾān-Player: guard visitor runtime only (Dar Test uses its own lane).
+for (const file of ["assets/dar-quran-player.js", "assets/dar-quran-audio-pack.js"]) {
+  checkJsSyntax(file, read(file));
+}
+const quranPlayerRuntime = read("assets/dar-quran-player.js");
+const quranAudioRuntime = read("assets/dar-quran-audio-pack.js");
+for (const marker of [
+  "fallbackReciterTried",
+  "recoverPlayback(",
+  "activeDataRequest",
+  "returnQuranRoute",
+  "dismissAllPlayerSheets",
+  "next: function () { return nextAyah(false); }",
+  "prev: function () { return prevAyah(); }"
+]) {
+  if (!quranPlayerRuntime.includes(marker)) fail("Qurʾān-Player Runtime-Marker fehlt: " + marker);
+}
+if (!quranAudioRuntime.includes("retryCounts") ||
+    !quranAudioRuntime.includes("have === AYAH_TOTAL")) {
+  fail("Qurʾān-Audio-Downloads: Retry- oder Abschlussregel fehlt");
+}
+
 // Visitor app
 const indexHtml = read("index.html");
 if (!indexHtml.includes("function render(")) fail("index.html: render() fehlt");
