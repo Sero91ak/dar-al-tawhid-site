@@ -12,6 +12,7 @@ const crypto=require("node:crypto");
 const {parseGLB,validateDocument}=require("./validate-glb.cjs");
 const {validateAnimationBytes}=require("./validate-glb-binary.cjs");
 const {validateGeometryBytes}=require("./validate-glb-geometry-binary.cjs");
+const {validatePoseBoneLengths}=require("./validate-pose-bone-lengths.cjs");
 const base=__dirname;
 function validateIdentity(gltf,identity,technical,modelFingerprint={},expectedSubject="original_boy") {
   const errors=[];
@@ -65,6 +66,9 @@ function main(argv) {
     const geometryAudit=validateGeometryBytes(parsed.gltf,parsed.bin);
     if(!geometryAudit.valid){technical.errors.push(...geometryAudit.errors);technical.structureValid=false;}
     technical.geometryVertexBytesVerified=geometryAudit.valid;
+    const pose=validatePoseBoneLengths(parsed.gltf,parsed.bin);
+    if(!pose.valid){technical.errors.push(...pose.errors);technical.structureValid=false;}
+    technical.boneLengthInvariantVerified=pose.valid;
     const result=validateIdentity(parsed.gltf,identity,technical,{sha256:crypto.createHash("sha256").update(data).digest("hex"),bytes:data.length});
     process.stdout.write(JSON.stringify(result,null,2)+"\n");
     return result.readyForProduction ? 0 : 1;
