@@ -1,5 +1,5 @@
 (function(){
-  /* DUA_AUDIO_RELEASE_1244_FINAL_SYNCED */
+  /* DUA_AUDIO_NATURAL_WORD_EDGES_20261009 */
   "use strict";
 
   // FUSHA_AUDIO_RELEASE_20261007_V3 · full v2 · slow/word v3 · exact vocalized Arabic
@@ -25,8 +25,8 @@
   var cleanContext=null, cleanPlayback=null;
   var cleanWordCache=new Map();
   var cleanCacheMax=55;
-  var CLEAN_GAP=0.065;
-  var CLEAN_SLOW_RATE=0.83;
+  var CLEAN_GAP=0.19;
+  var CLEAN_SLOW_RATE=0.86;
   function cleanContextReady(){
     try{
       var Ctor=window.AudioContext||window.webkitAudioContext;
@@ -36,25 +36,38 @@
     }catch(_){return null}
   }
   function cleanWordWindow(buffer){
-    var sampleRate=buffer.sampleRate;
-    var data=buffer.getChannelData(0);
-    var step=Math.max(128,Math.round(sampleRate*.012));
-    var frameRms=[],peak=0;
+    // Only trim padding at the beginning/end of isolated words.
+    // Never gate inside Arabic speech: weak ه / ح and final vowels must survive.
+    var rate=buffer.sampleRate,data=buffer.getChannelData(0);
+    var step=Math.max(128,Math.round(rate*.012)),rms=[],peak=0;
     for(var pos=0;pos<data.length;pos+=step){
-      var total=0,len=Math.min(step,data.length-pos);
-      for(var j=0;j<len;j++){var s=data[pos+j];total+=s*s}
-      var rms=Math.sqrt(total/Math.max(len,1));
-      frameRms.push(rms);if(rms>peak)peak=rms;
+      var sum=0,len=Math.min(step,data.length-pos);
+      for(var j=0;j<len;j++){var sample=data[pos+j];sum+=sample*sample}
+      var level=Math.sqrt(sum/Math.max(1,len));
+      rms.push(level);if(level>peak)peak=level;
     }
-    var duration=buffer.duration;
-    if(!peak||duration<.20)return{buffer:buffer,start:0,end:duration};
-    // Detect only clear quiet padding; cap removed time to preserve soft letters.
-    var threshold=Math.max(.0011,peak*.044),first=0,last=frameRms.length-1;
-    while(first<last&&frameRms[first]<threshold)first++;
-    while(last>first&&frameRms[last]<threshold)last--;
-    var start=Math.min(.34,Math.max(0,first*step/sampleRate-.055));
-    var end=Math.max(duration-.42,Math.min(duration,(last+1)*step/sampleRate+.075));
-    if(end-start<Math.min(.22,duration*.43))return{buffer:buffer,start:0,end:duration};
+    var duration=buffer.duration,whole={buffer:buffer,start:0,end:duration};
+    if(!peak||duration<.22||rms.length<6)return whole;
+    // The voice peak, rather than a single click, defines the speech floor.
+    var sorted=rms.slice().sort(function(a,b){return a-b});
+    var reference=Math.max(sorted[Math.floor(sorted.length*.96)]||0,peak*.5);
+    var voiceGate=Math.max(.0023,reference*.16);
+    var quietGate=Math.max(.0010,reference*.052);
+    var first=-1,last=-1;
+    for(var i=0;i<rms.length-1;i++){
+      if(rms[i]>=voiceGate&&rms[i+1]>=voiceGate){first=i;break}
+    }
+    for(var k=rms.length-1;k>0;k--){
+      if(rms[k]>=voiceGate&&rms[k-1]>=voiceGate){last=k;break}
+    }
+    if(first<0||last<=first)return whole;
+    // Keep quiet neighbouring consonants before/after the voiced nucleus.
+    var leadSteps=0,tailSteps=0;
+    while(first>0&&leadSteps<8&&rms[first-1]>=quietGate){first--;leadSteps++}
+    while(last<rms.length-1&&tailSteps<10&&rms[last+1]>=quietGate){last++;tailSteps++}
+    var start=Math.max(0,first*step/rate-.090);
+    var end=Math.min(duration,(last+1)*step/rate+.120);
+    if(end-start<Math.min(.22,duration*.28))return whole;
     return{buffer:buffer,start:start,end:end};
   }
   function cleanDecode(url){
@@ -105,11 +118,11 @@
         source.buffer=item.buffer;
         var gain=ctx.createGain();
         source.connect(gain);gain.connect(ctx.destination);
-        var fade=Math.min(.018,duration*.14);
-        gain.gain.setValueAtTime(.008,when);
+        var fade=Math.min(.032,duration*.16);
+        gain.gain.setValueAtTime(0,when);
         gain.gain.linearRampToValueAtTime(1,when+fade);
         gain.gain.setValueAtTime(1,when+duration-fade);
-        gain.gain.linearRampToValueAtTime(.008,when+duration);
+        gain.gain.linearRampToValueAtTime(0,when+duration);
         source.start(when,item.start,duration);
         source.stop(when+duration+.001);
         audioGate.sources.push(source);
@@ -639,7 +652,7 @@
     if(!currentDua)return false;
     // Reuse the same uninterrupted Fuṣḥā master. The prior separately
     // synthesized 'slow' take carried audible pacing/breath artefacts.
-    // Native pitch-preserving 0.83x playback slows evenly without new exhales.
+    // Moderate native pitch-preserving playback slows evenly; no separately generated breath cues.
     var rate=slow?CLEAN_SLOW_RATE:1;
     var direct=currentDua.audioArabicUrl;
     if(direct){
