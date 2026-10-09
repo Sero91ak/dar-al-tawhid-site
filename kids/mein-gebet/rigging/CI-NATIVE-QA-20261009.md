@@ -59,3 +59,13 @@ Logbelegte Testverteilung:
 **Konkret:** `validate-glb-geometry-binary.cjs` prüft im echten BIN-Chunk sämtliche referenzierten Positionen/Normalen, Gewichtsnormierung, Skin-Joint-Indizes, Dreiecksindices, bind-pose Matrixwerte und globalen räumlichen XYZ-Umfang. Ein GLB mit 2.400 angeblichen Vertices, aber nur drei benutzten Indices, wird abgelehnt. Ausführungswege: normaler `validate-glb.cjs`, `forbid-placeholder-release.cjs`, `audit-project-completion.cjs --require-ready`. Die End-to-End-Tests generieren kurzzeitig ein **synthetisches** GLB in einem temporären Verzeichnis, prüfen erfolgreiche strukturelle Verarbeitung, manipulieren anschließend unterschiedliche echte Binärbytes und stellen deren Ablehnung fest. Alle Testdateien werden danach gelöscht.
 
 **Trennung bleibt essenziell:** Die 142 Prüfungen sind Softwaretests, **keine** gemessene V7.7-Silhouette, keine rekonstruierte Originalfigur, keine echte GLB-Binärabnahme. V7.7 hat weiterhin 0 von 5 Silhouettenansichten über 90 %, 3/4 weiterhin 83,25 % unkalibriert. Ein neuer Sculpt wäre ohne exakt geprüfte Originalbytes eine unbelegte Veränderung. Keine Produktionsfreigabe/kein Merge/kein Deploy.
+
+## Aktualisierung · Strenge Knochen-Hierarchie und originale Figuren-Freigabesperre
+
+**GitHub-Actions-Lauf:** https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37933121032 · `64f67351d9461a1ad4a9825e6135fd0624db89dd` · erfolgreich.
+
+**147 automatisch bestandene Checks:** 39 GLB-/Rigstruktur, 20 Keyframe-BIN, 27 Geometry/Topology/Skin-BIN, 10 echte synthetische GLB-Disk-Dateitests, 18 Release-Audit, 12 Rig-Freeze, 7 Kameradiagnostik-Unit-Tests, 14 Projektions-Unit-Tests.
+
+Der Validator überprüft jetzt zusätzlich, dass **alle** 19 benannten primären Skin-Joints echte Nachkommen derselben Hips-Skelettwurzel sind. Richtig benannte, aber getrennte/frei schwebende Knochen oder eine losgelöste Kopf-/Bein-Hierarchie sind ungültig. Der End-to-End-Test schreibt ein nicht-originales Test-GLB, prüft funktionierende Import-/Struktur-/Animations-/Mesh-Bytepfade und beweist, dass der Jungen-Identitätsschutz (`forbid-placeholder-release.cjs`) **auch bei gültiger synthetischer GLB-Struktur keine Produktionsfreigabe** erteilt.
+
+**Unveränderte Sperre:** V7.7-Originaldatei und die exakte Original-Turnaround-PNG konnten weiterhin nicht materialisiert werden; deshalb keine neue fünfseitige echte IoU-Messung, kein realer Clip-Freeze-Beweis, keine originalgetreue V7.8-Figur. Das Projekt bleibt bewusst Draft, unveröffentlicht, ohne Freigabe von Gebetsposen oder beiden Profilen.
