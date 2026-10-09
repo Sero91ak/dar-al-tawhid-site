@@ -3,8 +3,8 @@
   "range": "HAD-0343–HAD-0392",
   "date": "2026-10-09",
   "totalInspected": 50,
-  "newlyVerified": 22,
-  "remainingOpen": 28,
+  "newlyVerified": 28,
+  "remainingOpen": 22,
   "hadithRecords": 28,
   "atharRecords": 22,
   "scope": "Primärbestände vollständig gesichtet; bei sechs Ḥadīṯ-Einträgen direkte klassische arabische Kommentare nachgetragen; die übrigen ausdrücklich nicht als Šarḥ-verifiziert gezählt",
@@ -19,7 +19,7 @@
     "avoidParallelOverwrites": true
   },
   "risk": "Ab HAD-0371 22 als athar kategorisierte Datensätze. Einige Quellenangaben sind zu allgemein; das bestehende grade-Label authentisch/athar ist ohne gesonderte Einzel-Isnādprüfung kein Nachweis für authentische Attribution.",
-  "nextAction": "Noch 28 von 50 offen; Primärtext, Isnāde, Klassikkommentar und Edition einzeln prüfen. Bei Āṯār keine Echtheit aus Statuslabel folgern.",
+  "nextAction": "22 HAD-Einträge weiterhin offen; davon 22 Āṯār mit häufig ungenauen Quellenangaben. Primärtext und isnād vor klassischem Kommentar separat prüfen. Danach nächste 50er-Serie.",
   "entries": [
     {
       "id": "HAD-0343",
@@ -80,9 +80,8 @@
     {
       "id": "HAD-0351",
       "recordType": "hadith",
-      "sharh": "open-source-review",
-      "sourceAudit": "Arabische Primärüberlieferung, frühester direkter Šarḥ, genaue Edition und Seitenangaben einzeln prüfen",
-      "note": "ʿĪd-Versammlungen, Parallelen HAD-0324"
+      "sharh": "verified",
+      "sourceAudit": "Arabischer Buḫārī-Primärbericht samt Direktkommentar Ibn Raǧab dokumentiert; Digitalpagination im HAD-Datensatz, Druckedition unbestimmt."
     },
     {
       "id": "HAD-0352",
@@ -164,9 +163,8 @@
     {
       "id": "HAD-0363",
       "recordType": "hadith",
-      "sharh": "open-source-review",
-      "sourceAudit": "Arabische Primärüberlieferung, frühester direkter Šarḥ, genaue Edition und Seitenangaben einzeln prüfen",
-      "note": "Stark verkürzte Paraphrase, Ḥadīṯ-Originalwortlaut/Nummer prüfen"
+      "sharh": "verified",
+      "sourceAudit": "Arabischer Buḫārī-Primärbericht samt Direktkommentar Ibn Raǧab dokumentiert; Digitalpagination im HAD-Datensatz, Druckedition unbestimmt."
     },
     {
       "id": "HAD-0364",
@@ -185,30 +183,26 @@
     {
       "id": "HAD-0366",
       "recordType": "hadith",
-      "sharh": "open-source-review",
-      "sourceAudit": "Arabische Primärüberlieferung, frühester direkter Šarḥ, genaue Edition und Seitenangaben einzeln prüfen",
-      "note": null
+      "sharh": "verified",
+      "sourceAudit": "Arabischer Buḫārī-Primärbericht samt Direktkommentar Ibn Raǧab dokumentiert; Digitalpagination im HAD-Datensatz, Druckedition unbestimmt."
     },
     {
       "id": "HAD-0367",
       "recordType": "hadith",
-      "sharh": "open-source-review",
-      "sourceAudit": "Arabische Primärüberlieferung, frühester direkter Šarḥ, genaue Edition und Seitenangaben einzeln prüfen",
-      "note": null
+      "sharh": "verified",
+      "sourceAudit": "Arabischer Buḫārī-Primärbericht samt Direktkommentar Ibn Raǧab dokumentiert; Digitalpagination im HAD-Datensatz, Druckedition unbestimmt."
     },
     {
       "id": "HAD-0368",
       "recordType": "hadith",
-      "sharh": "open-source-review",
-      "sourceAudit": "Arabische Primärüberlieferung, frühester direkter Šarḥ, genaue Edition und Seitenangaben einzeln prüfen",
-      "note": null
+      "sharh": "verified",
+      "sourceAudit": "Arabischer Buḫārī-Primärbericht samt Direktkommentar Ibn Raǧab dokumentiert; Digitalpagination im HAD-Datensatz, Druckedition unbestimmt."
     },
     {
       "id": "HAD-0369",
       "recordType": "hadith",
-      "sharh": "open-source-review",
-      "sourceAudit": "Arabische Primärüberlieferung, frühester direkter Šarḥ, genaue Edition und Seitenangaben einzeln prüfen",
-      "note": null
+      "sharh": "verified",
+      "sourceAudit": "Arabischer Buḫārī-Primärbericht samt Direktkommentar Ibn Raǧab dokumentiert; Digitalpagination im HAD-Datensatz, Druckedition unbestimmt."
     },
     {
       "id": "HAD-0370",
@@ -372,5 +366,11 @@
       "note": null
     }
   ],
-  "lastReviewedAt": "2026-10-09"
+  "lastReviewedAt": "2026-10-09",
+  "qualityIssue": {
+    "id": "HAD-0363",
+    "resolved": true,
+    "description": "Zu allgemeiner deutscher Primärtext wurde auf den originalen Buḫārī-Bericht über die syrische Ǧubbah und den Wuḍūʾ zurückgeführt.",
+    "commit": "40d283469a5ce36f67576a319110688d823ac998"
+  }
 }
