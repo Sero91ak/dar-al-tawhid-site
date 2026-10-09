@@ -48,7 +48,7 @@ test("reject translation on a second skin's joint",()=> {const x=fixture();x.nod
 test("reject falsely named nested Hips",()=> {const x=fixture();x.nodes[1].children=[0];x.animations[0].channels[0].target={node:0,path:"translation"};assert.equal(status(x).structureValid,false)});
 test("reject intermediary skeletal helper translation",()=> {const x=fixture();x.nodes.push({name:"ArmHelper",children:[5]});x.nodes[0].children=[20];x.animations[0].channels[0].target={node:20,path:"translation"};assert.equal(status(x).structureValid,false)});
 test("allow parent-of-whole-rig translation",()=> {const x=fixture();x.nodes.push({name:"World",children:[0]});x.animations[0].channels[0].target={node:20,path:"translation"};assert.equal(status(x).structureValid,true)});
-test("reject duplicate root naming",()=> {const x=fixture();x.nodes[16].name="Hips";assert.equal(status(x).structureValid,false)});
+test("reject duplicate root naming",()=> {const x=fixture();x.nodes.push({name:"Hips"});x.skins[0].joints.push(20);x.accessors[0].count=20;assert.ok(status(x).errors.some(s=>s.includes("ambiguous skeleton root")))});
 test("reject cyclic skeletal hierarchy",()=> {const x=fixture();x.nodes[0].children=[1];x.nodes[1].children=[0];x.animations[0].channels[0].target={node:0,path:"translation"};assert.equal(status(x).structureValid,false)});
 test("reject invalid child references",()=> {const x=fixture();x.nodes[0].children=[9999];assert.equal(status(x).structureValid,false)});
 process.stdout.write("\n"+count+" offline test checks passed. No 3D model generated or approved.\n");
