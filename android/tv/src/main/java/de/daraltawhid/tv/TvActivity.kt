@@ -135,7 +135,8 @@ class TvActivity : Activity() {
             show("home")
             body.getChildAt(2)?.requestFocus()
         })
-        body.addView(label("Lade aktuelle Gebetszeiten …", 19f, cream, false))
+        val prayerTimesLabel = label("Lade aktuelle Gebetszeiten …", 19f, cream, false)
+        body.addView(prayerTimesLabel)
         val city = cities[cityIndex]
         val url = "https://dar-al-tawhid.de/api/prayer/times?lat=${city.second}&lon=${city.third}"
         fetchJson(url) { data ->
@@ -145,7 +146,8 @@ class TvActivity : Activity() {
                 ?: data?.optJSONObject("data")
                 ?: data
             if (root == null) {
-                body.addView(label("Gebetszeiten momentan nicht erreichbar. Gespeicherte Inhalte bleiben verfügbar.", 17f, muted, false))
+                prayerTimesLabel.text = "Gebetszeiten momentan nicht erreichbar. Gespeicherte Inhalte bleiben verfügbar."
+                prayerTimesLabel.setTextColor(muted)
                 return@fetchJson
             }
             val lines = mutableListOf<String>()
@@ -164,10 +166,12 @@ class TvActivity : Activity() {
                 }
                 if (value.isNotBlank()) lines.add("$display   ·   $value")
             }
-            body.addView(label(
-                if (lines.isEmpty()) "Zeitformat der Quelle muss noch angepasst werden." else lines.joinToString("     "),
-                24f, cream, true
-            ))
+            prayerTimesLabel.text =
+                if (lines.isEmpty()) "Zeitformat der Quelle muss noch angepasst werden."
+                else lines.joinToString("     ")
+            prayerTimesLabel.textSize = 24f
+            prayerTimesLabel.setTextColor(cream)
+            prayerTimesLabel.typeface = Typeface.create("sans-serif", Typeface.BOLD)
         }
         body.addView(label("Qurʾān und Tadabbur", 29f, gold, true))
         body.addView(label(
