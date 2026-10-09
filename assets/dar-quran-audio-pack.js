@@ -285,7 +285,11 @@
     }, ms);
   }
   function pump() {
-    if (!queue.length) return;
+    if (!queue.length) {
+      status.queued = 0;
+      if (!inflight) status.reciter = "";
+      return;
+    }
     var st = window.quranAudioState || {};
     if (window.__DAR_ADHAN_ACTIVE === true || st.isLoading) return waitPump(1500);
     if (navigator.onLine === false) return waitPump(15000);
