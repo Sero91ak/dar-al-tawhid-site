@@ -1,0 +1,40 @@
+name: Verify Quran Player V3 Preview URLs
+on:
+  push:
+    branches:
+      - preview/quran-player-browser-links-20261010
+    paths:
+      - .github/workflows/verify-quran-player-v3-previews.yml
+permissions:
+  contents: read
+jobs:
+  check-public-quran-previews:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify both exact public test player URLs and expected version markers
+        shell: bash
+        run: |
+          set -euo pipefail
+          urls=(
+            "https://dar-al-tawhid.de/test/preview/dar-al-tawhid-quran-player-v3.html"
+            "https://dar-al-tawhid.de/test/preview/tawhid-kids-quran-player-v3.html"
+          )
+          for idx in "${!urls[@]}"; do
+            url="${urls[$idx]}"
+            body="/tmp/dar-quran-player-v3-${idx}.html"
+            ok=0
+            for attempt in $(seq 1 12); do
+              code=$(curl --connect-timeout 10 --max-time 30 -L -sS -o "$body" -w '%{http_code}' "$url?previewtest=20261010-v3-$attempt" || true)
+              if [ "$code" = "200" ] && grep -Fq 'QURAN_PLAYER_V3_FOCUS_SHELL' "$body" && grep -Fq 'QURAN_PLAYER_V3_VIEWPORT_LOCK' "$body" && grep -Fq '<audio id="audio"' "$body"; then
+                echo "PASS: exact URL HTTP 200 and V3 markers present: $url"
+                ok=1
+                break
+              fi
+              echo "Retry $attempt: HTTP $code / markers missing: $url"
+              sleep 5
+            done
+            if [ "$ok" != "1" ]; then
+              echo "::error::Exact V3 preview URL did not serve expected HTML: $url"
+              exit 1
+            fi
+          done
