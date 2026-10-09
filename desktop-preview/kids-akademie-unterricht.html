@@ -788,7 +788,7 @@ function persist(level){
  try{localStorage.setItem(storageKey(),JSON.stringify(item));$("#nextDue").textContent="Nächste Erinnerung: "+due.toLocaleDateString("de-DE")+". Du kannst jederzeit vorher üben."}catch(_){$("#nextDue").textContent="Lokal speichern ist nicht verfügbar. Du kannst trotzdem wiederholen."}
  all("[data-reflect]").forEach(b=>{b.classList.toggle("active",b.dataset.reflect===level);b.setAttribute("aria-pressed",String(b.dataset.reflect===level))});renderHome();
 }
-$("#previewRefresh").onclick=()=>{const url=new URL(location.href);url.searchParams.set("cb","v5.1-"+Date.now());location.replace(url.toString())};
+$("#previewRefresh").onclick=()=>{const url=new URL(location.href);url.searchParams.set("cb","v5.2-"+Date.now());location.replace(url.toString())};
 all("[data-open-lesson]").forEach(b=>b.onclick=begin);
 $("#backToAcademy").onclick=home;$("#backAfterLesson").onclick=home;
 $("#previousStep").onclick=()=>showStep(step-1);$("#forwardStep").onclick=nextStep;
