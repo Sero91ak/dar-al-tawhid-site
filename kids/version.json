@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v180-trilingual1285",
-  "label": "KIDS · V1.09.01",
-  "releasedAt": "2026-10-09T09:45:31.152Z",
-  "note": "KIDS V1.09.01: Drei synchron markierte Lernebenen für alle 120 Duʿāʾs. Bei langen Gebeten bleibt zusätzlich Arabisch · Lautschrift · Deutsch als kompakter Fokusstreifen sichtbar. 1.366 bedeutungsorientierte Wortgruppen und ein automatischer Vollständigkeits-Guard; Originalrezitation und Quellen unverändert. Die Gesamtaufnahme benutzt weiterhin approximative Zeitmarken, Wortfolge verwendet echte Clip-Ende-Ereignisse.",
+  "buildId": "kids-shell-v181-elastic1286",
+  "label": "KIDS · V1.09.02",
+  "releasedAt": "2026-10-09T12:48:30Z",
+  "note": "KIDS V1.09.02: Der Duʿāʾ-Lernmodus richtet kurze Texte vertikal mittig aus; mittlere wachsen um die Mitte und lange nutzen drei mitlaufende Lesespuren. Arabisch, Lautschrift und Deutsch werden abhängig vom echten freien Leseraum möglichst groß dargestellt. Lange Texte behalten eine gut lesbare Schrift und scrollen nur innerhalb ihrer Lesespuren. Keine Änderungen an Originalgebet, Fuṣḥā-Aufnahmen, Bedienfeld oder Screenhöhe.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1285",
+    "serviceWorkerCache": "v1286",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -1259,7 +1259,8 @@
     "kidsStartupMovieBootstraps": 0,
     "homeMosqueBackground": "existing-approved-preserved",
     "duaTrilingualLearning": "v1285",
-    "duaWordMeaningReviewCount": 120
+    "duaWordMeaningReviewCount": 120,
+    "duaElasticCenter": "v1286"
   },
   "updatedAt": "2026-10-08T21:07:54.808Z",
   "deployTrigger": "kids-startup-stability-v1278",
