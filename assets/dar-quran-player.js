@@ -767,6 +767,9 @@
     return list.filter(function (u, i, arr) { return u && arr.indexOf(u) === i; });
   }
   function missingAudioHalt(qari, surah, ayah, url) {
+    clearStallRetry();
+    try { audioEl().pause(); } catch (eNoAudio) {}
+    stopProgressClock();
     state.playing = false;
     allowAdvance = false;
     engine.started = false;
@@ -834,6 +837,7 @@
         return;
       }
       if (name === "NotAllowedError") {
+        engine.wantPlay = false;
         state.playing = false;
         state.error = "Tippe erneut auf Wiedergabe, um den Ton zu starten.";
         paintError();
@@ -1005,7 +1009,7 @@
     state.duration = audioDuration(a);
     syncProgressSample(false);
     var observedTime = Number(a.currentTime) || 0;
-    if (Math.abs(observedTime - (Number(engine.lastObservedTime) || 0)) > 0.09) {
+    if (observedTime > (Number(engine.lastObservedTime) || 0) + 0.09) {
       engine.lastProgressAt = Date.now();
       engine.lastObservedTime = observedTime;
       engine.recoveryCount = 0;
@@ -2872,6 +2876,8 @@
         var a = audioEl();
         var d = Number(a.duration) || Number(state.duration) || 0;
         if (d) a.currentTime = (Number(range.value) / 1000) * d;
+        engine.lastObservedTime = Number(a.currentTime) || 0;
+        engine.lastProgressAt = Date.now();
         state.current = a.currentTime || 0;
         syncProgressSample(true);
         lastProgPct = -1;
@@ -3218,6 +3224,8 @@
   function skip(d) {
     var a = audioEl();
     a.currentTime = Math.max(0, (a.currentTime || 0) + d);
+    engine.lastObservedTime = Number(a.currentTime) || 0;
+    engine.lastProgressAt = Date.now();
   }
   function clipTxt(s, n) {
     s = String(s || "").replace(/\s+/g, " ").trim();
@@ -3565,6 +3573,8 @@
         seekLock = true;
         var a = audioEl();
         if (a.duration) a.currentTime = (Number(sl.value) / 1000) * a.duration;
+        engine.lastObservedTime = Number(a.currentTime) || 0;
+        engine.lastProgressAt = Date.now();
         state.current = a.currentTime || 0;
         paintProgress();
       });
