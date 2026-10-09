@@ -888,7 +888,10 @@
       a.defaultMuted = false;
       a.volume = 1;
       unlockSpeaker(a);
-      try { a.pause(); } catch (ePauseSrc) {}
+      try {
+        if (!a.paused) engine.internalPausePending = true;
+        a.pause();
+      } catch (ePauseSrc) { engine.internalPausePending = false; }
       var prev = String(a.getAttribute("src") || a.currentSrc || "");
       if (prev && (prev === hit.url || prev.split("?")[0] === String(hit.url).split("?")[0])) {
         try { a.removeAttribute("src"); a.load(); } catch (eBlank) {}
@@ -1048,6 +1051,7 @@
   }
   function onPlayEv() {
     if (!isAppleTvApp() && !isQuranArea()) {
+      engine.wantPlay = false;
       try { audioEl().pause(); } catch (ePlayLeave) {}
       persistCurrent("blocked-play-off-quran");
       state.playing = false;
@@ -1056,6 +1060,7 @@
       return;
     }
     engine.started = true;
+    engine.wantPlay = true;
     engine.lastProgressAt = Date.now();
     state.playing = true;
     state.sessionActive = true;
@@ -1072,7 +1077,11 @@
   }
   function onPauseEv() {
     var pausedEl = document.getElementById("darQuranPlayerAudio");
-    if (!(pausedEl && pausedEl.ended) && Date.now() >= ignoreEndedUntil && window.__DAR_ADHAN_ACTIVE !== true) engine.wantPlay = false;
+    var internalPause = !!engine.internalPausePending;
+    engine.internalPausePending = false;
+    if (!internalPause && !(pausedEl && pausedEl.ended) && window.__DAR_ADHAN_ACTIVE !== true) {
+      engine.wantPlay = false;
+    }
     state.playing = false;
     saveState();
     paintChrome();
