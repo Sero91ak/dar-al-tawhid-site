@@ -69,7 +69,8 @@ class ProjectionPreflightTests(unittest.TestCase):
 
     def test_mesh_in_inactive_scene_is_not_mixed_into_iou(self):
         def broken(g):
-            g["scenes"] = [{"nodes": [0]}, {"nodes": [1]}]
+            g["nodes"].append({"name": "Empty active scene root"})
+            g["scenes"] = [{"nodes": [0]}, {"nodes": [2]}]
             g["scene"] = 1
         self.fails(broken)
 
