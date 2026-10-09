@@ -200,6 +200,23 @@ jobs:
           ELEVEN_QUIZ_HYBRID_MODEL=ELEVEN_QUIZ_DE_MODEL+"+"+ELEVEN_QUIZ_AR_MODEL
           ARABIC_SCRIPT_RE=re.compile(r"[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]+(?:\s+[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]+)*")
           ELEVEN_DUA_MODEL=ELEVEN_MODEL
+          ELEVEN_DUA_WORD_V3_MODEL="eleven_v3"
+          DUA_WORD_POLICY=ROOT/"kids/data/dua-audio-model-policy.json"
+          model_policy=json.loads(DUA_WORD_POLICY.read_text(encoding="utf-8"))
+          approved_v3=set()
+          if model_policy.get("voiceProfileId")!="serhat-owner-voice-2026" or model_policy.get("defaultWordModel")!="eleven_v4":
+              raise SystemExit("Duʿāʾ audio routing policy has an unsupported speaker or default model.")
+          if model_policy.get("allowAutomaticV3Promotion") is not False:
+              raise SystemExit("Duʿāʾ V3 must never be enabled automatically by simple word length.")
+          for approval in model_policy.get("approvedV3Words") or []:
+              if not isinstance(approval,dict) or approval.get("model")!="eleven_v3" or approval.get("status")!="human-audio-approved" or not approval.get("approvedBy"):
+                  raise SystemExit("V3 word approval needs an explicit Arabic-audio human review.")
+              text_key=unicodedata.normalize("NFC",norm(approval.get("arabic")))
+              if not text_key or text_key in approved_v3:
+                  raise SystemExit("Invalid or duplicate V3 word approval.")
+              approved_v3.add(text_key)
+          if len(approved_v3)>8:
+              raise SystemExit("V3 approvals must roll out in batches of at most eight words.")
           ARABIC_PROFILES={"dua_arabic","dua_arabic_slow","dua_word","quiz_fusha"}
           ARABIC_SYNTHESIS_REVISIONS={
               "dua_arabic":"dua-arabic-native-fusha-v3-20261007",
@@ -607,7 +624,7 @@ jobs:
                           time.sleep(2*attempt)
               raise RuntimeError(f"Generation failed for {text[:80]!r}: {last}")
 
-          def build_pack(*,texts,manifest_path,asset_dir,profile,pack_id,counts,model_id=None,require_model_match=False,profiles_by_text=None,models_by_text=None,preserve_existing=False):
+          def build_pack(*,texts,manifest_path,asset_dir,profile,pack_id,counts,model_id=None,require_model_match=False,profiles_by_text=None,models_by_text=None,preserve_existing=False,allow_reviewed_legacy=False):
               model_id=model_id or ELEVEN_MODEL
               unique=[]
               seen=set()
@@ -645,6 +662,17 @@ jobs:
                       text_profile,
                       expected_revision
                   )
+                  # Legacy published Arabic files must not be re-rendered merely
+                  # because the synthesis recipe changed. Only individually
+                  # approved model switches or genuinely missing clips may run.
+                  if p is None and allow_reviewed_legacy and text_profile in ("dua_word","dua_arabic_slow"):
+                      old_model=str(entry.get("modelId") or "")
+                      if old_model==str(text_model)=="eleven_v4" and entry.get("voiceProfileId")=="serhat-owner-voice-2026":
+                          p=local_from_entry(entry,asset_dir,old_model,text_profile)
+                          if p is not None:
+                              results[text]=(p,float(entry.get("durationSeconds") or duration(p)))
+                              prepared_hashes[text]=str(entry.get("preparedTextSha256") or "")
+                              continue
                   if text_profile in ARABIC_PROFILES:
                       if str(entry.get("preparedTextSha256") or "")!=prepared_hash:
                           p=None
@@ -656,6 +684,10 @@ jobs:
                   prepared_hashes[text]=prepared_hash
 
               missing=[text for text in unique if text not in results]
+              if profile in ("dua_word","dua_arabic_slow"):
+                  limit=8 if profile=="dua_word" else 3
+                  if len(missing)>limit:
+                      raise SystemExit(f"Zu viele kostenträchtige {profile}-Neurenderings ({len(missing)} > {limit}); kleinere geprüfte Pakete benutzen.")
               print(f"{pack_id}: {len(unique)} Texte · {len(results)} aktuell · {len(missing)} neu")
               serial={"done":0,"total":len(missing)}
               with concurrent.futures.ThreadPoolExecutor(max_workers=3) as ex:
@@ -972,7 +1004,9 @@ jobs:
               pack_id="KIDS_DUA_ARABIC_SLOW_SERHAT_MASTER_V4",
               counts={"duaItems":len(dua_items),"slowArabicPrompts":len(dua_items)},
               model_id=ELEVEN_DUA_MODEL,
-              require_model_match=True
+              require_model_match=True,
+              preserve_existing=True,
+              allow_reviewed_legacy=True
           )
           dua_ar_slow_manifest.update({
               "schemaVersion":1,
@@ -1005,6 +1039,7 @@ jobs:
                       seen_words.add(word)
                       word_texts.append(word)
 
+          word_models={word:(ELEVEN_DUA_WORD_V3_MODEL if unicodedata.normalize("NFC",word) in approved_v3 else ELEVEN_DUA_MODEL) for word in word_texts}
           dua_word_manifest=build_pack(
               texts=word_texts,
               manifest_path=DUA_WORD_MANIFEST,
@@ -1017,7 +1052,10 @@ jobs:
                   "wordPositions":sum(len(arabic_tokens(arabic_text(d))) for d in dua_items)
               },
               model_id=ELEVEN_DUA_MODEL,
-              require_model_match=True
+              require_model_match=True,
+              models_by_text=word_models,
+              preserve_existing=True,
+              allow_reviewed_legacy=True
           )
           dua_word_manifest.update({
               "schemaVersion":1,
@@ -1027,7 +1065,10 @@ jobs:
               "clipMode":"isolated-word",
               "sourceRule":"exact-displayed-arabic-token",
               "browserSentenceSlicingAllowed":False,
-              "speaker":"Serhat Abu Malik – Master"
+              "speaker":"Serhat Abu Malik – Master",
+              "entryModelPolicy":"human-reviewed word-level eleven_v3 exceptions, otherwise eleven_v4",
+              "modelsUsed":sorted(set(str(v.get("modelId") or "eleven_v4") for v in dua_word_manifest["entries"].values())),
+              "approvedV3Words":sorted(approved_v3)
           })
           DUA_WORD_MANIFEST.write_text(json.dumps(dua_word_manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
 
