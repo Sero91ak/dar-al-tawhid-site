@@ -135,16 +135,22 @@
     "allGreenMetadataWithoutGLBStillReleaseBlocked": true,
     "binarySamplerTestsPassed": 20,
     "geometryProjectionPreflightUnitTestsPassed": 14,
-    "nativeRunnerTotalChecksPassed": 107,
+    "nativeRunnerTotalChecksPassed": 142,
     "nativeRunnerCompletedSuccessfully": true,
     "nativeRunner": "GitHub Actions ubuntu-latest; Node.js 22; Python 3.11",
-    "nativeRunnerHeadSha": "a40fc8749ef2e2d361c09b13a80bc1d80d8456bb",
-    "nativeRunnerRunUrl": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37916376903",
-    "nativeRunnerScope": "107 structural/synthetic tests only; NO actual V7.7 GLB, original reference image, face likeness, device or animation poses verified.",
+    "nativeRunnerHeadSha": "b5a99c5c9cd07a50a14684e90f7eb7dff942cef7",
+    "nativeRunnerRunUrl": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37932645756",
+    "nativeRunnerScope": "142 CI structural/synthetic checks, including a real on-disk synthetic GLB file. No original V7.7 model or human visual/fiqh test performed.",
     "binarySampleProofOnActualGLB": false,
     "realFiveViewRecomputedAfterV77": false,
     "staticRigTransformGuardCommitted": true,
     "geometryProjectionTransformGuardCommitted": true,
-    "binarySamplerGuardCommitted": true
+    "binarySamplerGuardCommitted": true,
+    "geometryBinaryGateCommitted": true,
+    "geometryBinaryActualOriginalGLBVerified": false,
+    "geometryBinarySyntheticNativeTestsPassed": 27,
+    "syntheticNativeGLBEndToEndFileTestsPassed": 8,
+    "antiFakeVertexCountGateCommitted": true,
+    "threeDimensionalExtentPrefilterCommitted": true
   }
 }
