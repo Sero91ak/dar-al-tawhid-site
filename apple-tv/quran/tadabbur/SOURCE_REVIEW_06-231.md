@@ -1,0 +1,10 @@
+# 06-231 — Quellenprüfung (2026-10-09)
+
+Neu registriert: 6:108, 6:109, 6:111, 6:112.
+
+- **6:108** Qatādah ibn Diʿāmah — Tafsīr aṭ-Ṭabarī zu Qurʾān 6:108, Bericht 13739, https://www.islamweb.net/ar/library/content/50/1854/. Kette: Bišr ibn Muʿāḏ → Yazīd ibn Zurayʿ → Saʿīd ibn Abī ʿArūbah → Qatādah. Arabisch: «كان المسلمون يسبون أوثان الكفار فيردون ذلك عليهم فنهاهم الله أن يستسبوا لربهم». Bericht über frühe Erklärung; kein unabhängig gesicherter Einzel-Offenbarungsanlass.
+- **6:109** Muǧāhid ibn Ǧabr — Tafsīr aṭ-Ṭabarī zu Qurʾān 6:109, Bericht 13744, https://www.islamweb.net/ar/library/content/50/1856/. Kette: Muḥammad ibn ʿAmr → Abū ʿĀṣim → ʿĪsā ibn Maymūn → ʿAbdullāh ibn Abī Naǧīḥ → Muǧāhid. Arabisch: «سألت قريش محمدا أن يأتيهم بآية واستحلفهم ليؤمنن بها». Keine prophetische marfūʿ-Zuschreibung, sondern Mujāhids direkte Tafsīr-Aussage.
+- **6:111** Qatādah ibn Diʿāmah — Tafsīr aṭ-Ṭabarī zu Qurʾān 6:111, Bericht 13758, https://www.islamweb.net/ar/library/content/50/1860/. Kette: Bišr ibn Muʿāḏ → Yazīd ibn Zurayʿ → Saʿīd ibn Abī ʿArūbah → Qatādah. Arabisch: «حتى يعاينوا ذلك معاينة ما كانوا ليؤمنوا إلا أن يشاء الله». Aṭ-Ṭabarī dokumentiert zu „qubulan“ auch die frühe Erklärung „in Gruppen“; Lesartendifferenz nicht zu behauptetem Iǧmāʿ machen.
+- **6:112** Muǧāhid ibn Ǧabr — Tafsīr aṭ-Ṭabarī zu Qurʾān 6:112, Bericht 13776, https://www.islamweb.net/ar/library/content/50/1861/. Kette: Muḥammad ibn ʿAmr → Abū ʿĀṣim → ʿĪsā ibn Maymūn → ʿAbdullāh ibn Abī Naǧīḥ → Muǧāhid. Arabisch: «تزيين الباطل بالألسنة». Die Tafsīr-Aussage ist auf den zitierten Ausdruck begrenzt; der übrige Vers wird nicht frei ergänzt.
+
+Die als `isnād ḥasan` erfassten wiederkehrenden Ketten entsprechen dem bisher verwendeten Katalogstandard. Die Aussagen werden ausschließlich als maqtūʿ-Tafsīr der Tābiʿīn dokumentiert, nicht als Aḥādīṯ des Propheten ﷺ. Die spätere inhaltliche Isnād-/Rijāl-Komplettprüfung bleibt gesondert erforderlich. Zu 6:111 bestehen unterschiedliche Deutungen von `qubulan` in der Überlieferung, die ausdrücklich im Datensatz vermerkt sind.
