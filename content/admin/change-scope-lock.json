@@ -7300,6 +7300,17 @@
         "android/app/src/main/java/de/daraltawhid/app/MainActivity.kt"
       ],
       "expiresAt": "2026-11-30T23:59:00.000Z"
+    },
+    {
+      "id": "android-tv-parity-build-2026-10-09",
+      "approvedBy": "user-asked-stepwise-android-tv-apple-tv-parity-repair",
+      "reason": "Schrittweise, isolierte Android-TV-Paritätsarbeit: separater TV-Quellbaum aus ursprünglichem signiertem Release wiederherstellen, 16:9-Gebetszeiten reparieren, TV-Modul eigenständig testen. Keine iOS-/Kids-/Push-Änderung und keine öffentliche TV-APK-Freigabe bis nach Gerätetest.",
+      "paths": [
+        "android/tv/",
+        "android/settings.gradle.kts",
+        ".github/workflows/android-tv-parity-check.yml"
+      ],
+      "expiresAt": "2026-11-30T23:59:00.000Z"
     }
   ],
   "enabled": true
