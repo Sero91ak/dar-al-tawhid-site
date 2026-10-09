@@ -105,7 +105,7 @@
     "angleSweepAgainstActualV77GLB": false,
     "realOriginalImageAvailableToThisRun": false,
     "physicalThreeQuarterCameraCalibrated": false,
-    "javascriptRepositoryTestChecksPassed": 36,
+    "javascriptRepositoryTestChecksPassed": 39,
     "javascriptTestEnvironment": "Connector-fetched exact JS run in isolated V8 with mocked node:assert, Buffer and fs/path; not GitHub Actions or real Node filesystem",
     "modelVerification": {
       "boy": {
@@ -135,12 +135,12 @@
     "allGreenMetadataWithoutGLBStillReleaseBlocked": true,
     "binarySamplerTestsPassed": 20,
     "geometryProjectionPreflightUnitTestsPassed": 14,
-    "nativeRunnerTotalChecksPassed": 142,
+    "nativeRunnerTotalChecksPassed": 147,
     "nativeRunnerCompletedSuccessfully": true,
     "nativeRunner": "GitHub Actions ubuntu-latest; Node.js 22; Python 3.11",
-    "nativeRunnerHeadSha": "b5a99c5c9cd07a50a14684e90f7eb7dff942cef7",
-    "nativeRunnerRunUrl": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37932645756",
-    "nativeRunnerScope": "142 CI structural/synthetic checks, including a real on-disk synthetic GLB file. No original V7.7 model or human visual/fiqh test performed.",
+    "nativeRunnerHeadSha": "64f67351d9461a1ad4a9825e6135fd0624db89dd",
+    "nativeRunnerRunUrl": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37933121032",
+    "nativeRunnerScope": "147 actual native GitHub Actions Node/Python checks with synthetic data and generated temporary GLB, including negative boy identity gate; NOT actual V7.7/turnaround, physical camera calibration or manual art/fiqh signoff.",
     "binarySampleProofOnActualGLB": false,
     "realFiveViewRecomputedAfterV77": false,
     "staticRigTransformGuardCommitted": true,
@@ -149,8 +149,10 @@
     "geometryBinaryGateCommitted": true,
     "geometryBinaryActualOriginalGLBVerified": false,
     "geometryBinarySyntheticNativeTestsPassed": 27,
-    "syntheticNativeGLBEndToEndFileTestsPassed": 8,
+    "syntheticNativeGLBEndToEndFileTestsPassed": 10,
     "antiFakeVertexCountGateCommitted": true,
-    "threeDimensionalExtentPrefilterCommitted": true
+    "threeDimensionalExtentPrefilterCommitted": true,
+    "connectedRigTopologyGuardCommitted": true,
+    "connectedRigTopologyNativeTestsPassed": true
   }
 }
