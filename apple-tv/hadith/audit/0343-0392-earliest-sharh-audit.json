@@ -3,8 +3,8 @@
   "range": "HAD-0343–HAD-0392",
   "date": "2026-10-09",
   "totalInspected": 50,
-  "newlyVerified": 6,
-  "remainingOpen": 44,
+  "newlyVerified": 7,
+  "remainingOpen": 43,
   "hadithRecords": 28,
   "atharRecords": 22,
   "scope": "Primärbestände vollständig gesichtet; bei sechs Ḥadīṯ-Einträgen direkte klassische arabische Kommentare nachgetragen; die übrigen ausdrücklich nicht als Šarḥ-verifiziert gezählt",
@@ -19,7 +19,7 @@
     "avoidParallelOverwrites": true
   },
   "risk": "Ab HAD-0371 22 als athar kategorisierte Datensätze. Einige Quellenangaben sind zu allgemein; das bestehende grade-Label authentisch/athar ist ohne gesonderte Einzel-Isnādprüfung kein Nachweis für authentische Attribution.",
-  "nextAction": "44 offene Datensätze auf Genauigkeit und direkten Kommentar prüfen; insbesondere 22 Āṯār einzeln aus Originalquelle verifizieren und nicht fälschlich auf verified setzen.",
+  "nextAction": "43 offen im HAD-0343–0392-Block; Isnāde und arabische Primärstellen vor jeder weiteren Šarḥ-Veröffentlichung einzeln überprüfen. Kein Druckeditionsnachweis fingieren.",
   "entries": [
     {
       "id": "HAD-0343",
@@ -66,9 +66,9 @@
     {
       "id": "HAD-0349",
       "recordType": "hadith",
-      "sharh": "open-source-review",
+      "sharh": "verified",
       "sourceAudit": "Arabische Primärüberlieferung, frühester direkter Šarḥ, genaue Edition und Seitenangaben einzeln prüfen",
-      "note": "Isrāʾ-Gebot fünf Gebete; Ibn Raǧab Originalstelle bekannt, genaue Kommentar-Abgrenzung noch prüfen"
+      "note": "Ibn Raǧab, Fatḥ al-Bārī, Bd. 2, S. 107–118; arabische Originalquelle https://islamweb.net/ar/library/content/302/297; konkrete Druckedition weiterhin offen."
     },
     {
       "id": "HAD-0350",
