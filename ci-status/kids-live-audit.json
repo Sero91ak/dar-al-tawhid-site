@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-10-09T18:58:16Z",
+  "timestamp": "2026-10-09T18:59:25Z",
   "trigger": "workflow_run",
   "finishedDeployConclusion": "cancelled",
-  "finishedDeployRun": "37976882046",
+  "finishedDeployRun": "37977058054",
   "live": {
     "buildId": "kids-shell-v186-dua-center1291",
     "label": "KIDS · V1.09.07",
@@ -44,6 +44,33 @@
   },
   "lastDeployRuns": [
     {
+      "conclusion": null,
+      "created_at": "2026-10-09T18:59:09Z",
+      "head_sha": "2141fb5cc3298eee1141c7237d0d8bd7db67bb33",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37977076750",
+      "id": 37977076750,
+      "status": "pending",
+      "updated_at": "2026-10-09T18:59:10Z"
+    },
+    {
+      "conclusion": "cancelled",
+      "created_at": "2026-10-09T18:58:59Z",
+      "head_sha": "977585f1568739147b99b6b60742d7664b5e2a21",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37977058054",
+      "id": 37977058054,
+      "status": "completed",
+      "updated_at": "2026-10-09T18:59:10Z"
+    },
+    {
+      "conclusion": "cancelled",
+      "created_at": "2026-10-09T18:58:50Z",
+      "head_sha": "163dfad939bf41bb17b8040de2f0c6b8eda6146c",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37977041928",
+      "id": 37977041928,
+      "status": "completed",
+      "updated_at": "2026-10-09T18:59:00Z"
+    },
+    {
       "conclusion": "cancelled",
       "created_at": "2026-10-09T18:57:27Z",
       "head_sha": "706b2202e662d6db4581bd2c47cdaff901ad8be4",
@@ -69,33 +96,6 @@
       "id": 37976862164,
       "status": "completed",
       "updated_at": "2026-10-09T18:57:22Z"
-    },
-    {
-      "conclusion": "cancelled",
-      "created_at": "2026-10-09T18:57:16Z",
-      "head_sha": "f11572d21a50c6fda84dd81c216d9473f968c898",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37976860513",
-      "id": 37976860513,
-      "status": "completed",
-      "updated_at": "2026-10-09T18:57:19Z"
-    },
-    {
-      "conclusion": "cancelled",
-      "created_at": "2026-10-09T18:57:12Z",
-      "head_sha": "183cbb2f0cad0b924db26ed267569307cd7e2a56",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37976851779",
-      "id": 37976851779,
-      "status": "completed",
-      "updated_at": "2026-10-09T18:57:18Z"
-    },
-    {
-      "conclusion": "cancelled",
-      "created_at": "2026-10-09T18:57:07Z",
-      "head_sha": "8ff565f221ce94e27bd8f49a07c98321f1fa6c4e",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37976841332",
-      "id": 37976841332,
-      "status": "completed",
-      "updated_at": "2026-10-09T18:57:13Z"
     }
   ]
 }
