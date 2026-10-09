@@ -528,7 +528,7 @@ select:focus:not(:focus-visible),textarea:focus:not(:focus-visible),summary:focu
       }
     }catch(e){}
     // Keep the native prompt inside the original user gesture.
-    var installEvent=deferredInstall;
+    var installEvent=window.__darEarlyInstallPrompt||deferredInstall;
     if(installEvent){
       try{
         installEvent.prompt();
@@ -541,7 +541,10 @@ select:focus:not(:focus-visible),textarea:focus:not(:focus-visible),summary:focu
         }
         setPwaHint("Installation wurde nicht bestätigt.");
         return false;
-      }catch(e){}
+      }catch(e){
+        deferredInstall=null;
+        window.__darEarlyInstallPrompt=null;
+      }
     }
     setPwaHint("Installation wird vorbereitet …");
     await ensureAndroidServiceWorkerReady();
