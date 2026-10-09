@@ -597,8 +597,8 @@ function publicWebsiteAddon() {
     var btn=event.target&&event.target.closest?event.target.closest("[data-dar-pwa-install]"):null;
     if(!btn)return;
 
-    // Prefer the stored install event immediately inside this tap.
-    // This keeps Chrome's transient user activation intact.
+    // Use the stored install event immediately inside this tap.
+    // No async work may happen before prompt(), otherwise Chrome can drop user activation.
     var directEvent=window.__darEarlyInstallPrompt||deferredInstall;
     if(directEvent&&!window.__darInstallPromptBusy){
       event.preventDefault();
@@ -619,10 +619,11 @@ function publicWebsiteAddon() {
         });
         return;
       }catch(eDirect){
+        deferredInstall=null;
+        window.__darEarlyInstallPrompt=null;
         window.__darInstallPromptBusy=false;
       }
     }
-
     event.preventDefault();
     window.darInstallAndroidPwa();
   },true);

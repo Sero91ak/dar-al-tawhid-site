@@ -2310,14 +2310,18 @@ button,input,select{font:inherit}
    }catch(e){}
   },{capture:true});
 
-  // Direct one-tap installer: runs before the SPA/router handlers so Chrome keeps
-  // the original user activation for beforeinstallprompt.prompt().
+  // Direct one-tap installer. The native prompt must be invoked synchronously from
+  // the original tap; do not await service-worker readiness before prompt().
   document.addEventListener("click",function(event){
    try{
     var target=event.target&&event.target.closest?event.target.closest("[data-dar-pwa-install]"):null;
-    if(!target||window.__darInstallPromptBusy)return;
+    if(!target)return;
     var promptEvent=window.__darEarlyInstallPrompt;
-    if(!promptEvent)return;
+    if(!promptEvent){
+      window.dispatchEvent(new CustomEvent("dar:pwa-install-missing"));
+      return;
+    }
+    if(window.__darInstallPromptBusy)return;
     event.preventDefault();
     event.stopImmediatePropagation();
     window.__darInstallPromptBusy=true;
@@ -2330,6 +2334,7 @@ button,input,select{font:inherit}
     }).catch(function(){
      window.__darEarlyInstallPrompt=null;
      window.__darInstallPromptBusy=false;
+     window.dispatchEvent(new CustomEvent("dar:pwa-install-error"));
     });
    }catch(eClick){
     window.__darInstallPromptBusy=false;
@@ -2417,6 +2422,48 @@ html,body,a,button,[role="button"],.desktop-link,.more-row,.category-card,.featu
 a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:focus:not(:focus-visible){
   outline:none!important;
   box-shadow:none;
+}
+/* darTouchHighlightFixV3 */
+@media (hover:none) and (pointer:coarse){
+  html,body,a,button,[role="button"],summary,[tabindex],label,input,select,textarea,
+  .desktop-link,.more-row,.category-card,.feature-card,.header-action,.main-nav a,
+  .download-app-btn,.dar-pwa-home-action,.dar-pwa-icon-choice{
+    -webkit-tap-highlight-color:transparent!important;
+    outline:0!important;
+    outline-offset:0!important;
+    box-shadow:none!important;
+  }
+  a:focus,a:focus-visible,a:active,
+  button:focus,button:focus-visible,button:active,
+  [role="button"]:focus,[role="button"]:focus-visible,[role="button"]:active,
+  .desktop-link:focus,.desktop-link:focus-visible,.desktop-link:active,
+  .more-row:focus,.more-row:focus-visible,.more-row:active,
+  .category-card:focus,.category-card:focus-visible,.category-card:active,
+  .feature-card:focus,.feature-card:focus-visible,.feature-card:active,
+  .header-action:focus,.header-action:focus-visible,.header-action:active,
+  .main-nav a:focus,.main-nav a:focus-visible,.main-nav a:active,
+  .download-app-btn:focus,.download-app-btn:focus-visible,.download-app-btn:active,
+  .dar-pwa-home-action:focus,.dar-pwa-home-action:focus-visible,.dar-pwa-home-action:active,
+  .dar-pwa-icon-choice:focus,.dar-pwa-icon-choice:focus-visible,.dar-pwa-icon-choice:active{
+    -webkit-tap-highlight-color:transparent!important;
+    outline:0!important;
+    outline-offset:0!important;
+    filter:none!important;
+    opacity:1!important;
+  }
+  a:focus::before,a:focus::after,a:active::before,a:active::after,
+  button:focus::before,button:focus::after,button:active::before,button:active::after,
+  [role="button"]:focus::before,[role="button"]:focus::after,[role="button"]:active::before,[role="button"]:active::after,
+  .desktop-link:focus::before,.desktop-link:focus::after,.desktop-link:active::before,.desktop-link:active::after,
+  .more-row:focus::before,.more-row:focus::after,.more-row:active::before,.more-row:active::after,
+  .category-card:focus::before,.category-card:focus::after,.category-card:active::before,.category-card:active::after,
+  .feature-card:focus::before,.feature-card:focus::after,.feature-card:active::before,.feature-card:active::after{
+    opacity:0!important;
+    background:transparent!important;
+    background-image:none!important;
+    box-shadow:none!important;
+    filter:none!important;
+  }
 }
 </style>
 <!-- android-pwa-direct-install-live-v4-touch-clean -->
@@ -2906,6 +2953,18 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
    darPwaHint("Installation wurde nicht bestätigt.");
   }
  });
+ window.addEventListener("dar:pwa-install-missing",function(){
+  darPwaHint("Chrome bereitet die Installation vor …");
+  darEnsurePwaServiceWorker().then(function(){
+   if(window.__darEarlyInstallPrompt){
+    darPwaHint("Installation ist bereit. Jetzt erneut auf „Web-App installieren“ tippen.");
+    darPwaToast("Installation ist bereit. Bitte erneut auf „Web-App installieren“ tippen.");
+   }else{
+    var msg="Chrome bietet den nativen Installationsdialog auf diesem Gerät noch nicht an. Öffne das Chrome-Menü ⋮ und wähle „App installieren“.";
+    darPwaHint(msg);darPwaToast(msg);
+   }
+  }).catch(function(){});
+ });
  async function darInstallDesktopPwa(){
   if(darPwaStandalone()){
    darPwaHint("Web-App ist bereits installiert.");
@@ -2961,10 +3020,11 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
   }
   var btn=e.target&&e.target.closest?e.target.closest("[data-dar-pwa-install]"):null;
   if(!btn)return;
+  // The early capture listener owns direct prompt() when available.
+  if(window.__darEarlyInstallPrompt||window.__darInstallPromptBusy)return;
   e.preventDefault();
-  e.stopImmediatePropagation();
   darInstallDesktopPwa()
- },true);
+ },false);
  try{
   var darAndroid=/\bAndroid\b/i.test(String(navigator.userAgent||""));
   if(darAndroid)document.documentElement.classList.add("dar-android-browser");
