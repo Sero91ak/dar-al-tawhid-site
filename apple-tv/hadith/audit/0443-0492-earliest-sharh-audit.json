@@ -7,9 +7,9 @@
   "atharCount": 29,
   "hadithSharhVerified": 20,
   "hadithSharhOpen": 1,
-  "atharAttributionVerified": 4,
-  "atharAttributionOpen": 25,
-  "openTotal": 26,
+  "atharAttributionVerified": 6,
+  "atharAttributionOpen": 23,
+  "openTotal": 24,
   "sourceOfTruth": "apple-tv/hadith/series/",
   "policy": {
     "hadith": "Authentische Primärquelle + direkt nachweisbarer klassischer Šarḥ",
@@ -40,7 +40,7 @@
       "note": "Viele vorhandene Werknachweise sind unspezifisch. Ohne Original-Überlieferer, Isnād und Band-/Seite kein verifizierter Zuschreibungsstatus."
     }
   ],
-  "nextAction": "HAD-0460 und HAD-0468 mit klassischen arabischen Direktkommentaren vervollständigt. HAD-0463 bleibt aufgrund stark umstrittener marfūʿ-/mursal-Kette needs-review trotz vorhandenem Ibn-Raǧab-Šarḥ. Daneben 25 Āṯār mit offener Zuschreibungsprüfung.",
+  "nextAction": "Aktueller Stand: 20/21 Hadith mit Šarḥ; 6/29 Āṯār mit verifizierter Zuschreibung. HAD-0471 im arabischen Primärtext und in zwei Ketten lokalisiert, finaler Isnād-Ḥukm offen. HAD-0463 bleibt hadithŠarḥ=needs-review. Weitere offene Āṯār und isnād-kritische Einträge einzeln prüfen.",
   "entries": [
     {
       "id": "HAD-0443",
@@ -68,8 +68,9 @@
       "id": "HAD-0446",
       "recordType": "athar",
       "sharh": "not-required",
-      "attribution": "needs-review",
-      "sourceAudit": "Wortlaut, Sprecher, Isnādkette und gesonderten Authentizitätsstatus erst nachweisen"
+      "attribution": "verified",
+      "sourceAudit": "2026-10-09: Arabischer Buḫārī-Bericht Nr. 387 direkt abgeglichen: آدم ← شعبة ← الأعمش (قال سمعت إبراهيم يحدث) ← إبراهيم النخعي ← همام بن الحارث ← جرير بن عبد الله. Ibrāhīms Schluss 'فكان يعجبهم لأن جريرا كان من آخر من أسلم' gehört zum authentischen Bericht. Der frühere isolierte deutsche Text erläuterte nicht, dass es um masḥ ʿalā al-ḫuffayn nach dem späten Islam Ǧarīrs geht. Ibn Ḥaǧar erläutert dies in Fatḥ al-Bārī zur ṣalāh fī al-ḫifāf. Für den Eintrag wird nur der nachweisbare Ausspruch Ibrāhīms als Āṯar gewertet; die zugrunde liegende Prophetenüberlieferung wird nicht erneut als separater Ḥadīṯ gezählt. Eine bestimmte Druckedition der Kommentarstelle nicht verifiziert.",
+      "primarySourceVerified": true
     },
     {
       "id": "HAD-0447",
@@ -82,8 +83,9 @@
       "id": "HAD-0448",
       "recordType": "athar",
       "sharh": "not-required",
-      "attribution": "needs-review",
-      "sourceAudit": "Wortlaut, Sprecher, Isnādkette und gesonderten Authentizitätsstatus erst nachweisen"
+      "attribution": "verified",
+      "sourceAudit": "2026-10-09: Buḫārī Nr. 377 arabisch mit al-Ḥāfiẓ Ibn Raǧab, Fatḥ al-Bārī zur selben Überlieferung abgeglichen: علي بن عبد الله ← سفيان بن عيينة ← أبو حازم ← سهل بن سعد. Wortlaut 'ما بقي بالناس أعلم مني هو من أثل الغابة' belegt. Keine separate nur als mawqūf verbreitete unabhängige Kette behaupten: der Ausspruch steht innerhalb des überlieferten Ḥadīṯs von Sahl. Thematische Doppelung zur Beschreibung des Minbars bei HAD-0417; der Eintrag zählt nicht als eigenständiger zweiter prophetischer Ḥadīṯ. Kein Druckedition-Nachweis.",
+      "primarySourceVerified": true
     },
     {
       "id": "HAD-0449",
@@ -243,8 +245,9 @@
       "id": "HAD-0471",
       "recordType": "athar",
       "sharh": "not-required",
-      "attribution": "needs-review",
-      "sourceAudit": "Wortlaut, Sprecher, Isnādkette und gesonderten Authentizitätsstatus erst nachweisen"
+      "attribution": "isnad-located-pending-grading",
+      "sourceAudit": "2026-10-09: Arabischer Originaltext 'اتبعوا ولا تبتدعوا فقد كفيتم' bei ad-Dārimī Nr.205 direkt gefunden mit يعلى بن عبيد ← الأعمش ← حبيب بن أبي ثابت ← أبو عبد الرحمن السلمي ← عبد الله بن مسعود. Al-Lālakāʾī Nr.104 bewahrt denselben Hauptweg über Yaʿlā b. ʿUbayd und einen zweiten über Muḥāḍir b. al-Muwarraʿ; der Zusatz 'كل بدعة ضلالة' stammt nach seinem Wortlaut nur von Muḥāḍir und wurde hier nicht unkritisch ergänzt. Überprüfung möglicher ʿanʿanah und aller Rijāl-Details steht aus. Seite 80 bzw. 96 sind digitale Werkpagination, nicht beanspruchte Printausgaben.",
+      "primarySourceVerified": true
     },
     {
       "id": "HAD-0472",
