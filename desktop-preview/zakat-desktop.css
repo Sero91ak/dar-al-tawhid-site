@@ -1,0 +1,69 @@
+/* Desktop presentation adapter for the production Zakāt application.
+   All calculations, field definitions and sources remain in assets/zakat-*.js. */
+#desktopZakatMount{max-width:1110px;margin:0 auto;min-height:390px}
+#desktopZakatMount .zakat-shell{display:grid;gap:13px;max-width:100%}
+#desktopZakatMount .zakat-result-strip{padding:25px 30px!important;border:1px solid rgba(90,70,40,.22)!important;border-radius:12px!important;background:linear-gradient(115deg,#eae0cc,#f8f2e8 75%);box-shadow:0 10px 34px rgba(87,65,26,.07);color:#29261f}
+#desktopZakatMount .zakat-strip-head{display:flex;flex-wrap:wrap;gap:10px;align-items:baseline;justify-content:space-between;border-bottom:1px solid rgba(90,70,40,.15);padding-bottom:13px}
+#desktopZakatMount .zakat-strip-kicker,#desktopZakatMount .zakat-strip-sub,#desktopZakatMount .zakat-result-label{font-size:10px;font-weight:750;color:#75694e;letter-spacing:.07em}
+#desktopZakatMount .zakat-strip-title{font:500 clamp(23px,3vw,32px)/1.2 Georgia,serif;margin:0;flex:1}
+#desktopZakatMount .zakat-result-label{display:block;margin-top:18px;text-transform:uppercase}
+#desktopZakatMount .zakat-result-amount{font:500 clamp(36px,5vw,58px)/1.2 Georgia,serif;color:#30483a;margin:2px 0 6px}
+#desktopZakatMount .zakat-result-strip-meta,#desktopZakatMount .zakat-head-badges{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+#desktopZakatMount .zakat-result-sub{font-size:12px;color:#675e51}
+#desktopZakatMount .zakat-acc{border-radius:10px!important;border:1px solid rgba(88,66,34,.20)!important;overflow:hidden;background:#fffdf8!important;box-shadow:none!important}
+#desktopZakatMount .zakat-acc-head{display:flex;align-items:center;gap:14px;cursor:pointer;min-height:63px;padding:13px 20px!important;border:0;background:#fffdf8!important;color:#302b22;text-align:left}
+#desktopZakatMount .zakat-acc-head:hover{background:#f8f2e7!important}
+#desktopZakatMount .zakat-acc-copy{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}
+#desktopZakatMount .zakat-acc-kicker{color:#987439;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.12em}
+#desktopZakatMount .zakat-acc-head h3{margin:0;font:500 21px/1.2 Georgia,serif}
+#desktopZakatMount .zakat-acc-preview-line{font-size:11px;color:#726c61;max-width:50%}
+#desktopZakatMount .zakat-acc-chevron{height:9px;width:9px;flex:none;border-right:1.5px solid #987439;border-bottom:1.5px solid #987439;transform:rotate(45deg);transition:transform .2s}
+#desktopZakatMount .zakat-acc.is-open .zakat-acc-chevron{transform:rotate(225deg)}
+#desktopZakatMount .zakat-acc.is-closed .zakat-acc-body,#desktopZakatMount .zakat-acc.is-open .zakat-acc-preview{display:none!important}
+#desktopZakatMount .zakat-acc.is-open .zakat-acc-body{display:block!important;border-top:1px solid rgba(88,66,34,.11)}
+#desktopZakatMount .zakat-acc-body{padding:18px 20px 20px!important}
+#desktopZakatMount .zakat-acc-preview{padding:0 20px 11px}
+#desktopZakatMount .zakat-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+#desktopZakatMount .zakat-form-grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+#desktopZakatMount .zakat-form-grid label,#desktopZakatMount .zakat-acc-body label{display:grid;gap:6px;font-size:11px;font-weight:700;color:#645845;margin-bottom:12px}
+#desktopZakatMount .zakat-form-grid label{margin-bottom:0}
+#desktopZakatMount .zakat-field{display:block;width:100%;min-height:42px;padding:10px 12px;color:#2c2924;background:#fff;border:1px solid rgba(88,66,34,.25);border-radius:6px;outline-offset:2px;outline-color:#987439}
+#desktopZakatMount .zakat-field:focus-visible{border-color:#987439;box-shadow:0 0 0 3px rgba(152,116,57,.11)}
+#desktopZakatMount .zakat-price-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:8px 0}
+#desktopZakatMount .zakat-price-grid>*{min-width:0;padding:12px;border:1px solid rgba(88,66,34,.13);border-radius:6px}
+#desktopZakatMount .zakat-source-tabs,#desktopZakatMount .zakat-source-nav{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}
+#desktopZakatMount button{cursor:pointer}
+#desktopZakatMount .zakat-source-tabs button,#desktopZakatMount .zakat-source-nav button,#desktopZakatMount .zakat-mini-btn{border:1px solid rgba(88,66,34,.22);border-radius:7px;background:#f8f2e7;color:#5f4928;padding:8px 11px}
+#desktopZakatMount .zakat-source-tabs button.active,#desktopZakatMount .zakat-source-nav button.active{background:#305043;color:#fff}
+#desktopZakatMount .zakat-pill{display:inline-flex;align-items:center;border-radius:999px;padding:4px 9px;font-size:10px;color:#5f573e;background:#eee8d8;border:1px solid rgba(88,66,34,.10)}
+#desktopZakatMount .zakat-pill.ok{color:#1f5941;background:#e3eee5}
+#desktopZakatMount .zakat-pill.warn,#desktopZakatMount .zakat-warn{color:#845a16;background:#fbf1d9}
+#desktopZakatMount .zakat-pill.preview{background:#ece9e3}
+#desktopZakatMount .zakat-warn,#desktopZakatMount .desktop-zakat-error{padding:11px 14px;margin:10px 0;border:1px solid rgba(158,109,40,.28);border-radius:7px;font-size:12px;line-height:1.6}
+#desktopZakatMount .zakat-muted,#desktopZakatMount .zakat-footer{font-size:11px;color:#776e61;line-height:1.6}
+#desktopZakatMount .zakat-subsection-label{font-size:13px;font-weight:700;margin:17px 0 10px}
+#desktopZakatMount .zakat-nisab-compare,#desktopZakatMount .zakat-kpi-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:10px 0}
+#desktopZakatMount .zakat-nisab-compare>div,#desktopZakatMount .zakat-kpi{padding:13px;background:#f7f1e5;border-radius:7px;display:grid;gap:7px}
+#desktopZakatMount .zakat-nisab-compare span,#desktopZakatMount .zakat-kpi span{font-size:11px;color:#776e61}
+#desktopZakatMount .zakat-nisab-compare b,#desktopZakatMount .zakat-kpi b{font-size:16px;font-weight:700;color:#2d4d3d}
+#desktopZakatMount .zakat-status-row{display:flex;gap:8px;flex-wrap:wrap;margin:11px 0}
+#desktopZakatMount .zakat-steps{display:grid;gap:10px}
+#desktopZakatMount .zakat-step{display:grid;grid-template-columns:24px 1fr auto;gap:9px;align-items:center;padding:11px 0;border-bottom:1px solid rgba(90,70,40,.13);font-size:12px}
+#desktopZakatMount .zakat-step-num{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#eee6d6;color:#765b2a}
+#desktopZakatMount .zakat-step small{grid-column:2/-1;font-size:11px;color:#776e61}
+#desktopZakatMount .zakat-actions{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:10px;margin-top:14px}
+#desktopZakatMount .zakat-btn{min-height:40px;padding:9px 18px!important;border:1px solid #9b8154!important;border-radius:6px!important;background:#f6edda!important;color:#543e20!important;font-size:12px;font-weight:750}
+#desktopZakatMount .zakat-btn.primary,#desktopZakatMount .zakat-btn:hover{background:#304c3e!important;color:#fff!important}
+#desktopZakatMount .zakat-source-card,#desktopZakatMount .zakat-source-item{border-bottom:1px solid rgba(90,70,40,.12);padding:10px 0;line-height:1.6}
+#desktopZakatMount .zakat-source-card a,#desktopZakatMount .zakat-source-item a{color:#755724;text-decoration:underline}
+#desktopZakatMount .desktop-zakat-history{padding:20px;border:1px solid rgba(90,70,40,.22);border-radius:9px;background:#fffdf8}
+#desktopZakatMount .desktop-zakat-history-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+#desktopZakatMount .desktop-zakat-history h3{margin:0;font:500 19px/1.3 Georgia,serif}
+#desktopZakatMount .desktop-zakat-history p{color:#776e61;font-size:11px;line-height:1.5}
+#desktopZakatMount .desktop-zakat-history-list{display:grid}
+#desktopZakatMount .desktop-zakat-history-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 0;border-top:1px solid rgba(88,66,34,.10);font-size:12px}
+#desktopZakatMount .desktop-zakat-history-row b{margin-right:auto}
+#desktopZakatMount .desktop-zakat-history-row button{border:1px solid rgba(88,66,34,.22);background:transparent;color:#6c572e;border-radius:5px;padding:7px 10px}
+#desktopZakatMount .zakat-manual-prices{margin-top:12px;font-size:12px}
+#desktopZakatMount .zakat-manual-prices summary{cursor:pointer;color:#705323;font-weight:700}
+@media(max-width:700px){#desktopZakatMount .zakat-form-grid,#desktopZakatMount .zakat-form-grid-3,#desktopZakatMount .zakat-price-grid{grid-template-columns:1fr}#desktopZakatMount .zakat-kpi-grid,#desktopZakatMount .zakat-nisab-compare{grid-template-columns:1fr}#desktopZakatMount .zakat-acc-preview-line{max-width:none}#desktopZakatMount .zakat-result-strip{padding:20px!important}}
