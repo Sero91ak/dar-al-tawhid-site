@@ -47,6 +47,65 @@ HERO.parentNode.insertBefore(salahWorld,HERO);
 salahWorld.append(HERO,stage);
 if(navigator.connection?.saveData)salahWorld.classList.add("kids-salah-save-data");
 
+/* KIDS_HOME_MEASURED_FIT_V1295
+   The prayer CTA is fitted against the ACTUAL dock top, not a screenshot
+   coordinate or an assumed device size. No scroll manipulation. Logo, salām,
+   mosque picture, prayer controls and their DOM order remain unchanged. */
+(function(){
+ const dock=document.querySelector(".bottom-nav");
+ const cta=stage.querySelector("#kidsSalahOpenDay");
+ if(!dock||!cta)return;
+ let queued=false,lastHeight=0,lastWidth=0;
+ function desiredHeroMax(w,h){
+   if(w>=700)return h<=840?Math.min(390,Math.max(306,.43*h)):Math.min(525,Math.max(350,.50*h));
+   return Math.min(430,Math.max(292,.50*h));
+ }
+ function fit(){
+   queued=false;
+   if(!HERO.isConnected||!HOME.classList.contains("active")||document.hidden)return;
+   const w=window.innerWidth||document.documentElement.clientWidth;
+   const h=window.visualViewport?.height||window.innerHeight||document.documentElement.clientHeight;
+   const heroRect=HERO.getBoundingClientRect(),ctaRect=cta.getBoundingClientRect();
+   const navRect=dock.getBoundingClientRect();
+   if(!heroRect.height||!ctaRect.height||!navRect.height)return;
+   const reference=desiredHeroMax(w,h);
+   const mark=HERO.querySelector(".kids-wordmark");
+   const copy=HERO.querySelector(".hero-copy");
+   // Absolute logo and intro may not overlap even on the shortest display.
+   const markBottom=mark?.getBoundingClientRect().bottom||heroRect.top;
+   const introHeight=copy?.getBoundingClientRect().height||125;
+   const contentMinimum=Math.ceil(Math.max(w>=700?306:292,markBottom-heroRect.top+introHeight+12));
+   const safeMinimum=Math.min(560,contentMinimum);
+   const gap=12;
+   const free=navRect.top-gap-ctaRect.bottom;
+   const wanted=Math.max(safeMinimum,Math.min(reference,Math.round(heroRect.height+free)));
+   // Always measure against live dock; on very small screens keep scroll
+   // instead of shrinking/overlapping words or obstructing touch controls.
+   if(Math.abs(lastHeight-wanted)>2||Math.abs(lastWidth-w)>1){
+     HERO.style.setProperty("--kids-home-measured-min",safeMinimum+"px");
+     HERO.style.setProperty("--kids-home-measured-target",wanted+"px");
+     lastHeight=wanted;lastWidth=w;
+   }
+ }
+ function schedule(){
+   if(queued)return;queued=true;
+   requestAnimationFrame(()=>requestAnimationFrame(fit));
+ }
+ const ro=typeof ResizeObserver==="function"?new ResizeObserver(schedule):null;
+ ro?.observe(stage);ro?.observe(dock);
+ window.addEventListener("resize",schedule,{passive:true});
+ window.addEventListener("orientationchange",schedule,{passive:true});
+ window.addEventListener("pageshow",schedule,{passive:true});
+ window.visualViewport?.addEventListener("resize",schedule,{passive:true});
+ document.addEventListener("visibilitychange",()=>{if(!document.hidden)schedule()});
+ document.addEventListener("click",e=>{
+   if(e.target?.closest?.('.nav-btn[data-target="today"]'))setTimeout(schedule,80);
+ },true);
+ if(document.fonts?.ready)document.fonts.ready.then(schedule).catch(()=>{});
+ schedule();
+ setTimeout(schedule,450);
+})();
+
 /* The old illustrated MP4 is deliberately suspended on the new photoreal scene.
    Keep its loader ready for a future photoreal Runway clip; avoid wasting bandwidth
    or double-layering mismatched architecture on the new art. */
