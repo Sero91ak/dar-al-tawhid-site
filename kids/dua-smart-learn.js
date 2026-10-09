@@ -603,8 +603,8 @@
           '<button class="dsl-close kids-detail-dock-back" type="button" data-dsl="close" aria-label="Zurück zu Mein Duʿāʾ"></button>'+
           '<div class="dsl-headcopy kids-detail-appbar-copy"><strong class="kids-detail-appbar-title" id="dslTitle">Duʿāʾ lernen</strong><span class="kids-detail-appbar-subtitle" id="dslSub">Mein Duʿāʾ · Fuṣḥā &amp; Wort für Wort</span></div>'+
           '<div class="dsl-count" id="dslCount">1 / 1</div>'+
+          '<div class="dsl-progress" role="progressbar" aria-label="Lernfortschritt"><i id="dslProgress"></i></div>'+
         '</header>'+
-        '<div class="dsl-progress"><i id="dslProgress"></i></div>'+
         '<div class="dsl-scroll">'+
           '<div class="dsl-guide">Tippe auf ein Wort und höre es einzeln.</div>'+ 
           '<div class="dsl-reading-stage">'+
