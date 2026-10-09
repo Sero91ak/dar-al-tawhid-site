@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v187-home-fit1292",
-  "label": "KIDS · V1.09.08",
+  "buildId": "kids-shell-v188-home-fit1293",
+  "label": "KIDS · V1.09.09",
   "releasedAt": "2026-10-09T18:46:00Z",
-  "note": "KIDS V1.09.08: Die genehmigte erste Startansicht mit dem unveränderten Moscheemotiv, der Begrüßung, allen fünf Gebetszeiten und der Schaltfläche ‚Alle Gebetszeiten ansehen‘ wird auf iPhone, Android-Smartphone und iPads/Tablets viewport-abhängig skaliert. Smartphone-Hero reagiert auf 50dvh, Tablet-Hero auf 50dvh (Querformat 43dvh). Auf kürzeren Viewports werden Logo, Schrift und Gebetsbereich moderat verdichtet; feste Bottom-Navigation bleibt erhalten, bei zu wenig Bildschirmhöhe darf die Seite scrollbar bleiben. Keine künstliche Start-Scrollbewegung, kein Abschneiden von Inhalten und kein Stretching des freigegebenen Motivs. Alter V1.09.07-Stand bleibt erhalten.",
+  "note": "KIDS V1.09.09: Smartphone- und Tablet-Startbildschirm an den genehmigten Gebetszeiten-Screenshot proportional angepasst. Die sichtbare Viewporthöhe steuert das Hero-Bild; auf kurzen Smartphones und iPads im Querformat verkürzen sich Abstände und Schrift nur moderat. Die responsive Regel ist auch gegenüber alten nativen iOS-CSS-Overrides abgesichert. Freigegebenes Moscheemotiv bleibt unverändert, Gebetszeiten-Button bleibt zugänglich, keine erzwungene Start-Scrollbewegung. Extreme Kleinbildschirme bleiben scrollbar.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1292",
+    "serviceWorkerCache": "v1293",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
