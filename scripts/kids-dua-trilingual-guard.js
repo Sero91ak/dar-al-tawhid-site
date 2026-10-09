@@ -1,63 +1,67 @@
 #!/usr/bin/env node
-/* KIDS_DUA_TRILINGUAL_GUARD_V1282
- * Ensures German meanings are complete for 120 Duʿāʾs and the three learning
- * layers stay synchronised, legible, cached, and identical on all entry pages.
- * Semantic correctness still requires scholarly/language editorial review.
- */
 "use strict";
-const fs=require("node:fs"), path=require("node:path"), vm=require("node:vm");
-const ROOT=path.join(__dirname,"..");
+/* KIDS_DUA_TRILINGUAL_INTEGRITY_V1
+   Ensures all approved Du'a words have three exact-index display segments.
+   This is a structural QA test, NOT a linguistic review or audio-forced alignment. */
+const fs=require("node:fs"),path=require("node:path"),vm=require("node:vm");
+const ROOT=path.resolve(__dirname,".."),errors=[];
 const read=p=>fs.readFileSync(path.join(ROOT,p),"utf8");
+const check=(ok,message)=>{if(!ok)errors.push(message)};
+function loadWindow(p){
+  const context={window:{}};
+  vm.runInNewContext(read(p),context,{filename:p,timeout:5000});
+  return context.window;
+}
+function arabicWords(dua){
+  return String(dua.audioArabicText||dua.arabic||"").normalize("NFD").replace(/\s+/g," ").trim().split(/\s+/)
+  .map(x=>x.replace(/[\u06D6-\u06DC]/g,"").replace(/^[،؛؟,.!…«»"'()\[\]{}]+|[،؛؟,.!…«»"'()\[\]{}]+$/g,""))
+  .filter(x=>Boolean(x)&&/[\u0621-\u064A\u0671]/.test(x));
+}
 const data=JSON.parse(read("kids/data/dua-kids.json"));
-const context={window:{}};
-vm.runInNewContext(read("kids/dua-word-meanings-v1.js"),context,{filename:"dua-word-meanings-v1.js",timeout:1500});
-const glossary=context.window.DARKidsDuaWordMeanings;
-vm.runInNewContext(read("kids/dua-phonetic-alignment-v1.js"),context,{filename:"dua-phonetic-alignment-v1.js",timeout:1500});
-const phonetic=context.window.DARKidsDuaPhoneticAlignment;
-const items=data.items||[],bad=[];
-const fail=x=>{bad.push(x);console.error("KIDS_DUA_TRILINGUAL_GUARD FAIL:",x)};
-if(items.length<120)fail("Dua count regressed below 120");
-if(glossary.coverage()!==items.length)fail("Bilingual meaning coverage differs from total Duʿāʾ count");
-let aligned=0, romanAligned=0;
-if(phonetic.coverage()!==100)fail("Phonetic alignment must cover 100 unpaired Duʿāʾs");
+const items=data.items||[];
+check(items.length>=120,"mindestens 120 Duʿāʾs erforderlich, vorhanden: "+items.length);
+const words=loadWindow("kids/dua-word-meanings-v1.js").DARKidsDuaWordMeanings;
+const phonetic=loadWindow("kids/dua-phonetic-alignment-v1.js").DARKidsDuaPhoneticAlignment;
+check(words&&typeof words.get==="function","German mapping API fehlt");
+check(phonetic&&typeof phonetic.get==="function","phonetic mapping API fehlt");
+let arabicCount=0,meaningCount=0,translitCount=0;
+const ids=new Set();
 for(const d of items){
- const rows=d.learningSegments||[];
- const meanings=glossary.get(d,rows);
- if(!rows.length||!meanings||meanings.length!==rows.length||meanings.some(x=>!String(x).trim()))fail("Missing/empty German segments: "+d.id);
- else aligned+=meanings.length;
- const roman=rows.every(x=>!!x.transliteration)?rows.map(x=>x.transliteration):phonetic.get(d,rows);
- if(!roman||roman.length!==rows.length||roman.some(x=>!String(x).trim()))fail("Arabic/Latin phonetic alignment missing: "+d.id);
- else romanAligned+=roman.length;
- if(rows.some((s,i)=>s.index!==i))fail("Arabic word indexes changed: "+d.id);
+  const id=String(d.id||"");
+  check(id&&!ids.has(id),"Duʿāʾ-ID fehlt/dupliziert: "+id);
+  ids.add(id);
+  const ar=arabicWords(d),seg=Array.isArray(d.learningSegments)?d.learningSegments:[];
+  arabicCount+=ar.length;
+  check(ar.length===seg.length,id+": word/audio row count "+ar.length+"/"+seg.length);
+  const de=words&&words.get(d,ar);
+  check(Array.isArray(de)&&de.length===ar.length,id+": German indices misaligned");
+  const phon=phonetic&&phonetic.get(d,ar);
+  for(let i=0;i<ar.length;i++){
+    const row=seg[i]||{};
+    check(String(row.arabic||"").normalize("NFD")===ar[i],id+": Arabic index "+i+" differs");
+    const german=String(row.german||row.meaning||(de&&de[i])||"").trim();
+    const latin=String(row.transliteration||(phon&&phon[i])||"").trim();
+    if(!german||/^[•—–\s]+$/.test(german))errors.push(id+": German meaning missing at "+i);else meaningCount++;
+    if(!latin||/^[•—–\s]+$/.test(latin))errors.push(id+": Latin pronunciation missing at "+i);else translitCount++;
+    check(Boolean(row.audioUrl),id+": native Fuṣḥā word clip missing at "+i);
+  }
 }
-if(aligned<1366)fail("Word alignment count dropped below 1366: "+aligned);
-if(romanAligned!==aligned)fail("Arabic/Roman index pairing mismatch: "+romanAligned+"/"+aligned);
-const js=read("kids/dua-smart-learn.js");
-for(const token of ["id=\"dslGerman\"","class=\"dsl-word de\"","getSegments(currentDua)","german:String(","root.querySelectorAll(\"[data-seg]\")","attachPhraseFollow(","playWordSequence()","var reviewed=","var phonetic=","fitReadingStage()","queueReaderFit()"]){
- if(!js.includes(token))fail("Runtime feature missing "+token);
+const js=read("kids/dua-smart-learn.js"),css=read("kids/dua-learn-trilingual-v1282.css");
+for(const needle of ['class="dsl-german"','class="dsl-word de"','[data-seg]','function attachPhraseFollow','function playWordSequence','function fitReadingStage','seg.arabic,seg.transliteration,seg.german']){
+ check(js.includes(needle),"Duʿāʾ runtime marker missing: "+needle);
 }
-new vm.Script(js,{filename:"dua-smart-learn.js"});
-const css=read("kids/dua-learn-trilingual-v1282.css");
-for(const token of ["KIDS_DUA_TRILINGUAL_LEARNING_V1282",".dsl-german",".dsl-word.active.de","font-size:var(--dsl-ar-size,40px)","font-size:var(--dsl-tr-size,19px)","font-size:var(--dsl-de-size,16px)","overflow-y:auto!important","border-bottom:0!important"]){
- if(!css.includes(token))fail("Trilingual styling missing "+token);
+for(const needle of [".dsl-german{",".dsl-reading-stage .dsl-translit{",".dsl-reading-stage .dsl-arabic{",".dsl-word.active.de","border-top:1px solid","border-bottom:0!important"]){
+ check(css.includes(needle),"German/Arabic layout guard missing: "+needle);
 }
-const v=JSON.parse(read("kids/version.json"));
-const cacheVersion=Number(String(v.visualSystem?.serviceWorkerCache||"").replace(/^v/,""));
-if(cacheVersion<1282||!String(v.buildId||"").endsWith(String(cacheVersion)))fail("Kids release cache/build version mismatch");
-for(const page of ["kids/index.html","kids/start.html","kids/shell.html"]){
- const html=read(page);
- for(const token of [v.buildId,"/kids/sw.js?v="+cacheVersion,"/kids/dua-word-meanings-v1.js?v=2","/kids/dua-phonetic-alignment-v1.js?v=1","/kids/dua-smart-learn.js?v=1284","/kids/dua-learn-trilingual-v1282.css?v=1283"]){
-  if(!html.includes(token))fail(page+" missing "+token);
+const ver=JSON.parse(read("kids/version.json")),sw=read("kids/sw.js");
+check(sw.includes('const KIDS_BUILD_ID="'+ver.buildId+'"'),"SW/build-ID mismatch");
+for(const entry of ["/kids/dua-smart-learn.js?v=1285","/kids/dua-word-meanings-v1.js?v=2","/kids/dua-phonetic-alignment-v1.js?v=1","/kids/dua-learn-trilingual-v1282.css?v=1283"]){
+ check(sw.includes(entry),"SW precache missing "+entry);
+ for(const page of ["kids/index.html","kids/start.html","kids/shell.html"]){
+  const body=read(page);check(body.includes(entry),page+" resource missing "+entry);
  }
 }
-const sw=read("kids/sw.js");
-for(const token of ['dar-al-tawhid-kids-v'+cacheVersion,v.buildId,"/kids/dua-word-meanings-v1.js?v=2","/kids/dua-phonetic-alignment-v1.js?v=1","/kids/dua-smart-learn.js?v=1284","/kids/dua-learn-trilingual-v1282.css?v=1283"]){
- if(!sw.includes(token))fail("Offline precache missing "+token);
-}
-function runKidsDuaTrilingualGuard(){
-  if(bad.length){console.error(bad.length+" trilingual QA failures");return bad.length}
-  console.log("KIDS_DUA_TRILINGUAL_GUARD OK · "+items.length+" Duʿāʾs · "+aligned+" Arabic/Roman/German aligned word positions · 3-layer focus · 3 pages · offline V1282+ · syntax passed");
-  return 0;
-}
-if(require.main===module)process.exit(runKidsDuaTrilingualGuard()?1:0);
-module.exports={runKidsDuaTrilingualGuard};
+check(sw.includes('dar-al-tawhid-kids-v1285'),"SW cache must advance after runtime update");
+check(arabicCount===meaningCount&&arabicCount===translitCount,"3-language word counts differ");
+if(errors.length){errors.forEach(e=>console.error("KIDS TRILINGUAL FAIL:",e));process.exit(1)}
+console.log("KIDS TRILINGUAL PASS: "+items.length+" Duʿāʾs, "+arabicCount+" matching Arabic/Latin/German words, audio index and offline precache");

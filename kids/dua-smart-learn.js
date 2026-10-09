@@ -221,7 +221,8 @@
     if(ar)ar.textContent=seg.arabic||"";
     if(tr)tr.textContent=seg.transliteration||"";
     var de=document.getElementById("dslGermanCurrent");
-    if(de)de.textContent=seg.german?("Bedeutung: "+seg.german):"Gesamtbedeutung des Duʿāʾs";
+    // Even in an internally scrollable long Duʿāʾ all three active levels stay visible.
+    if(de)de.textContent=seg.german?[seg.arabic,seg.transliteration,seg.german].filter(Boolean).join(" · "):"Gesamtbedeutung des Duʿāʾs";
     if(count)count.textContent=(currentIndex+1)+" / "+Math.max(1,segs.length);
     if(prog)prog.style.width=(((currentIndex+1)/Math.max(1,segs.length))*100).toFixed(1)+"%";
   }

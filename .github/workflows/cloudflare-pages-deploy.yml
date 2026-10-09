@@ -389,6 +389,7 @@ jobs:
         run: |
           node scripts/app-health-check.js
           node scripts/kids-prophet-release-guard.js
+          node scripts/kids-dua-trilingual-guard.js
           node scripts/change-scope-lock-guard.js
           node scripts/push-system-guard.js
           node scripts/push-lanes-guard.js

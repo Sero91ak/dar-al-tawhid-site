@@ -22,6 +22,9 @@ jobs:
       - name: Run app health check
         run: node scripts/app-health-check.js
 
+      - name: Kids Duʿāʾ Arabic / Latin / German integrity
+        run: node scripts/kids-dua-trilingual-guard.js
+
       - name: Header prayer display guard (Maghrib/Zeit im Header)
         run: node scripts/header-prayer-display-guard.js
 
