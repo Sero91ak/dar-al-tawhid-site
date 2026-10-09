@@ -217,6 +217,27 @@ jobs:
               approved_v3.add(text_key)
           if len(approved_v3)>8:
               raise SystemExit("V3 approvals must roll out in batches of at most eight words.")
+          if approved_v3:
+              # A model preview is not approval of the final published sound.
+              # V3 must refer to an existing, actually reviewed asset with
+              # verified SHA-256; never synthesize-and-publish a fresh take.
+              approved_items={unicodedata.normalize("NFC"," ".join(str(a["arabic"]).split()).strip()):a for a in model_policy["approvedV3Words"]}
+              existing=json.loads(DUA_WORD_MANIFEST.read_text(encoding="utf-8")).get("entries") or {}
+              canonical_existing={unicodedata.normalize("NFD",k):v for k,v in existing.items()}
+              for word in approved_v3:
+                  a=approved_items[word]
+                  row=canonical_existing.get(unicodedata.normalize("NFD",word)) or {}
+                  url=str(row.get("url") or "").split("?",1)[0]
+                  if row.get("modelId")!="eleven_v3" or row.get("audioListeningApproved") is not True or row.get("qaApproval")!="human-reviewed-natural-fusha":
+                      raise SystemExit("V3 blocked: final word recording not human-audio-approved: "+word)
+                  if not url.startswith("/kids/assets/kids-dua-word-audio/"):
+                      raise SystemExit("V3 blocked: imported audio outside approved word assets: "+word)
+                  actual_path=ROOT/url.lstrip("/")
+                  if not actual_path.is_file():
+                      raise SystemExit("V3 blocked: final reviewed audio file missing: "+word)
+                  real_hash=hashlib.sha256(actual_path.read_bytes()).hexdigest()
+                  if real_hash!=str(a.get("sha256") or "") or real_hash!=str(row.get("sha256") or ""):
+                      raise SystemExit("V3 blocked: reviewed asset checksum mismatch: "+word)
           ARABIC_PROFILES={"dua_arabic","dua_arabic_slow","dua_word","quiz_fusha"}
           ARABIC_SYNTHESIS_REVISIONS={
               "dua_arabic":"dua-arabic-native-fusha-v3-20261007",
