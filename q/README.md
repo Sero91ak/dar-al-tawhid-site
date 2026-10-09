@@ -58,6 +58,7 @@ Dieser Ordner ist die zentrale Ablage für alle nummerierten Quellenlinks.
 | `q/37` | Niyyah, Ikhlāṣ und Überlieferungsvarianten | `Sufyān aṯ-Ṯawrī` | al-Ḫaṭīb überliefert „meine Absicht“; weitere klassische Fassungen überliefern „mein Selbst“. |
 
 | `q/38` | Taqwā, Pflichten und freiwillige Gottesdienste | `ʿUmar ibn ʿAbd al-ʿAzīz` | Taqwā besteht im Meiden der Verbote und Erfüllen der Pflichten; freiwillige Taten sind eine Ergänzung. |
+| `q/40` | Tawḥīd, Ikhlāṣ und ʿIbādah (al-Kahf 18:28) | `Abū Isḥāq az-Zaǧǧāǧ` | Sie rufen Allah mit Tawḥīd und Aufrichtigkeit an und dienen Ihm. |
 
 ## Sonderbereiche
 
