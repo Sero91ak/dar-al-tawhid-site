@@ -79,6 +79,7 @@
 
   function isNative() {
     try {
+      if (window.DAR_ANDROID_NATIVE_APP || window.DarNative) return true;
       if (typeof isDarNativeApp === "function") return !!isDarNativeApp();
     } catch (e) {}
     return !!(window.webkit && window.webkit.messageHandlers);
@@ -104,7 +105,7 @@
         notifBtnClass +
         '" data-dar-setup-action="notifications">Öffnen</button></div>',
       '    <div class="dar-setup-hub__row"><div class="dar-setup-hub__copy"><strong>Gebetszeiten</strong><span>Daten für Widgets und Watch aktualisieren</span></div><button type="button" class="dar-setup-hub__btn is-active" data-dar-setup-action="sync">Sync</button></div>',
-      '    <div class="dar-setup-hub__row"><div class="dar-setup-hub__copy"><strong>Widget-Ziele</strong><span>Öffnet direkt Gebetszeiten, Kalender, Qurʾān oder Duʿāʾ</span></div><button type="button" class="dar-setup-hub__btn is-active" data-dar-setup-action="widgets">Prüfen</button></div>',
+      '    <div class="dar-setup-hub__row"><div class="dar-setup-hub__copy"><strong>Widgets & App-Icon</strong><span>Gebetszeiten, Heute & Dhikr sowie Launcher-Icon verwalten</span></div><button type="button" class="dar-setup-hub__btn is-active" data-dar-setup-action="widgets">Öffnen</button></div>',
       "  </div>",
       "</section>"
     ].join("");
@@ -124,6 +125,11 @@
         window.webkit.messageHandlers.darPushSettings.postMessage(s);
       }
     } catch (e2) {}
+    try {
+      if (window.DarNative && typeof window.DarNative.prayerSettings === "function") {
+        window.DarNative.prayerSettings(JSON.stringify(s));
+      }
+    } catch (eAndroidWidget) {}
     try {
       if (window.__darWidgetPublish) window.__darWidgetPublish();
     } catch (e3) {}
@@ -175,7 +181,19 @@
   }
 
   function openWidgets() {
-    go("prayer");
+    try {
+      if (window.DAR_ANDROID_NATIVE_APP || window.DarNative) {
+        location.href = "/widgets/?platform=android&native=1";
+        return;
+      }
+      if (window.webkit && window.webkit.messageHandlers) {
+        location.href = "/widgets/?platform=apple";
+        return;
+      }
+      location.href = "/widgets/?platform=android";
+    } catch (e) {
+      go("prayer");
+    }
   }
 
   function bind(root) {

@@ -6,6 +6,16 @@
   <meta name="theme-color" content="#0a0a0a">
   <title>Widgets · DAR AL TAWḤĪD</title>
   <link rel="stylesheet" href="/widgets/prayer-times/prayer-widget.css">
+  <style id="dar-native-android-tools-v1">
+    .pw-native-icon-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-top:18px}
+    .pw-native-icon-head h3{margin:0;font-size:14px}
+    .pw-native-icon-head span{font-size:11px;opacity:.68}
+    .pw-native-icon-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(62px,1fr));gap:10px;margin-top:10px}
+    .pw-native-icon-btn{appearance:none;border:2px solid transparent;border-radius:16px;padding:4px;background:rgba(255,255,255,.05);cursor:pointer}
+    .pw-native-icon-btn.is-active{border-color:#c7a86a;box-shadow:0 0 0 2px rgba(199,168,106,.14)}
+    .pw-native-icon-btn img{display:block;width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px}
+    .pw-native-icon-label{display:block;margin-top:4px;font-size:9px;line-height:1.2;text-align:center;opacity:.76}
+  </style>
 </head>
 <body>
   <main class="pw-page" id="pwPage">
@@ -38,7 +48,14 @@
       <p class="pw-lead" id="pwNativeAndroidLead">Echte Android-Widgets werden von der nativen Android-App bereitgestellt. Eine installierte PWA kann selbst keinen Android AppWidgetProvider registrieren.</p>
       <div class="pw-actions" id="pwNativeAndroidActions" hidden>
         <button type="button" class="primary" id="pwPinPrayerWidget">Gebetszeiten-Widget hinzufügen</button>
-        <button type="button" id="pwPinFaithWidget">Duʿāʾ-des-Tages hinzufügen</button>
+        <button type="button" id="pwPinFaithWidget">Heute & Dhikr hinzufügen</button>
+      </div>
+      <div id="pwNativeIconTools" hidden>
+        <div class="pw-native-icon-head">
+          <h3>App-Icon</h3>
+          <span>ändert das Launcher-Symbol</span>
+        </div>
+        <div class="pw-native-icon-grid" id="pwNativeIconGrid" aria-label="Android App-Icon wählen"></div>
       </div>
       <p class="pw-status" id="pwNativeAndroidStatus" role="status"></p>
     </section>
@@ -112,7 +129,7 @@
           <li>Standort in der App setzen, Widget aktivieren und synchronisieren.</li>
           <li>In der nativen Android-App oben <b>Gebetszeiten-Widget hinzufügen</b> oder <b>Duʿāʾ-des-Tages hinzufügen</b> wählen.</li>
           <li>Android zeigt die Systembestätigung zum Anheften. Das Gebetszeiten-Widget ist danach frei in der Größe anpassbar.</li>
-          <li>Die PWA/Web-App kann keinen nativen Android AppWidgetProvider registrieren.</li>
+          <li>Die PWA/Web-App kann keinen nativen Android AppWidgetProvider registrieren; echte Homescreen-Widgets benötigen die native Android-App.</li>
           <li>Deep Link: <code>/widgets/?platform=android</code></li>
         </ol>
         <h3 style="margin:14px 0 8px;font-size:14px">PWA / Web</h3>
@@ -214,13 +231,17 @@
       var actions = document.getElementById("pwNativeAndroidActions");
       var lead = document.getElementById("pwNativeAndroidLead");
       var status = document.getElementById("pwNativeAndroidStatus");
+      var iconTools = document.getElementById("pwNativeIconTools");
+      var iconGrid = document.getElementById("pwNativeIconGrid");
       var nativeReady = !!(window.DarNative && typeof window.DarNative.requestWidget === "function");
       if (!nativeReady) {
         if (lead) lead.textContent = "Die Web-App/PWA kann keine nativen Android-Homescreen-Widgets registrieren. Diese Widgets stehen in der nativen DĀR-Android-App zur Verfügung.";
         return;
       }
+
       if (actions) actions.hidden = false;
       if (lead) lead.textContent = "Wähle ein Widget. Android öffnet danach die Systemabfrage zum Anheften auf dem Startbildschirm.";
+
       function request(kind, label) {
         try {
           var ok = !!window.DarNative.requestWidget(kind);
@@ -231,10 +252,85 @@
           if (status) status.textContent = "Widget konnte nicht angefordert werden.";
         }
       }
+
       var prayer = document.getElementById("pwPinPrayerWidget");
       var faith = document.getElementById("pwPinFaithWidget");
       if (prayer) prayer.onclick = function () { request("prayer", "Gebetszeiten"); };
-      if (faith) faith.onclick = function () { request("faith", "Duʿāʾ des Tages"); };
+      if (faith) faith.onclick = function () { request("faith", "Heute & Dhikr"); };
+
+      var iconApiReady = !!(window.DarNative &&
+        typeof window.DarNative.setAppIcon === "function" &&
+        typeof window.DarNative.currentAppIcon === "function");
+      if (!iconApiReady || !iconTools || !iconGrid) return;
+
+      var icons = [
+        ["type-creme-ar","Creme · Arabisch"],
+        ["emblem-creme-petrol","Emblem · Creme"],
+        ["emblem-nachtblau","Emblem · Nachtblau"],
+        ["emblem-schwarzgold","Emblem · Schwarzgold"],
+        ["type-anthrazit-ar","Anthrazit · Arabisch"],
+        ["type-anthrazit-fein","Anthrazit · Fein"],
+        ["type-creme","Creme · Name"],
+        ["type-weiss-ar","Weiß · Arabisch"],
+        ["type-schwarz-rund","Schwarz · Rund"],
+        ["type-schwarz-ar","Schwarz · Arabisch"],
+        ["type-schwarz","Schwarz · Name"],
+        ["type-navy-ar","Navy · Arabisch"],
+        ["type-navy","Navy · Name"],
+        ["type-bordeaux-ar","Bordeaux · Arabisch"],
+        ["type-bordeaux","Bordeaux · Name"],
+        ["type-gruen-ar","Grün · Arabisch"],
+        ["type-gruen","Grün · Name"],
+        ["type-schwarz-ar2","Schwarz · Fein"]
+      ];
+
+      function currentIcon() {
+        try { return String(window.DarNative.currentAppIcon() || "type-creme-ar"); }
+        catch (e) { return "type-creme-ar"; }
+      }
+
+      function paintIcons(selected) {
+        iconGrid.querySelectorAll("[data-native-app-icon]").forEach(function (btn) {
+          btn.classList.toggle("is-active", btn.getAttribute("data-native-app-icon") === selected);
+        });
+      }
+
+      var selected = currentIcon();
+      iconGrid.innerHTML = icons.map(function (row) {
+        var id=row[0], label=row[1];
+        return '<button type="button" class="pw-native-icon-btn'+(id===selected?' is-active':'')+'" data-native-app-icon="'+id+'" title="'+label+'">'+
+          '<img src="/assets/app-icons/'+id+'/icon-192.png?v=native-android-icon-v1" alt="">'+
+          '<span class="pw-native-icon-label">'+label+'</span></button>';
+      }).join("");
+      iconTools.hidden = false;
+
+      iconGrid.addEventListener("click", function (ev) {
+        var btn = ev.target && ev.target.closest && ev.target.closest("[data-native-app-icon]");
+        if (!btn) return;
+        var id = btn.getAttribute("data-native-app-icon") || "";
+        try {
+          var ok = !!window.DarNative.setAppIcon(id);
+          if (ok) {
+            paintIcons(id);
+            if (status) status.textContent = "App-Icon wird geändert. Manche Android-Launcher brauchen einige Sekunden, bis das neue Symbol erscheint.";
+          } else if (status) {
+            status.textContent = "Dieses App-Icon konnte nicht aktiviert werden.";
+          }
+        } catch (e) {
+          if (status) status.textContent = "App-Icon konnte nicht geändert werden.";
+        }
+      });
+
+      window.addEventListener("dar-native-icon-changed", function (ev) {
+        paintIcons(String(ev && ev.detail || currentIcon()));
+      });
+      window.addEventListener("dar-native-widget-result", function (ev) {
+        var detail = ev && ev.detail || {};
+        if (!status) return;
+        status.textContent = detail.requested
+          ? "Android hat die Widget-Systemabfrage geöffnet."
+          : "Der Launcher unterstützt das direkte Anheften hier nicht.";
+      });
     }
 
     function bind() {
