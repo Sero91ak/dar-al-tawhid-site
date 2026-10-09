@@ -15,6 +15,8 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.net.HttpURLConnection
 import java.net.URL
+import java.time.LocalDate
+import java.time.ZoneId
 import kotlin.concurrent.thread
 
 /**
@@ -171,7 +173,9 @@ class TvActivity : Activity() {
             }
             prayerTimesLabel.text =
                 if (lines.isEmpty()) "Zeitformat der Quelle muss noch angepasst werden."
-                else lines.joinToString("     ")
+                else lines.joinToString("     ") +
+                    (if (data?.optBoolean("_darCachedToday", false) == true)
+                        "   ·   heute gespeichert" else "")
             prayerTimesLabel.textSize = 24f
             prayerTimesLabel.setTextColor(cream)
             prayerTimesLabel.typeface = Typeface.create("sans-serif", Typeface.BOLD)
@@ -324,6 +328,9 @@ class TvActivity : Activity() {
 
     private fun fetchJson(url: String, done: (JSONObject?) -> Unit) {
         val prefs = getPreferences(MODE_PRIVATE)
+        val dailyPrayerTimes = url.contains("/api/prayer/times?")
+        // All TV city presets are in Germany, irrespective of the TV box time zone.
+        val berlinDate = LocalDate.now(ZoneId.of("Europe/Berlin")).toString()
         thread(name = "dar-tv-json-fetch") {
             var value: JSONObject? = null
             try {
@@ -335,7 +342,11 @@ class TvActivity : Activity() {
                     if (conn.responseCode in 200..299) {
                         val raw = conn.inputStream.bufferedReader(Charsets.UTF_8).use { it.readText() }
                         value = JSONObject(raw)
-                        if (raw.length < 800000) prefs.edit().putString("cache:$url", raw).apply()
+                        if (raw.length < 800000) {
+                            val editor = prefs.edit().putString("cache:$url", raw)
+                            if (dailyPrayerTimes) editor.putString("cache-date:$url", berlinDate)
+                            editor.apply()
+                        }
                     }
                 } finally {
                     conn.disconnect()
@@ -344,8 +355,19 @@ class TvActivity : Activity() {
                 // Fall back to the last successfully fetched JSON (per URL).
             }
             if (value == null) {
-                value = runCatching { JSONObject(prefs.getString("cache:$url", "{}") ?: "{}") }.getOrNull()
-                if (value?.length() == 0) value = null
+                // Offline prayer times must never be carried across midnight.
+                // Hadith and Tadabbur catalogue caches remain usable offline.
+                val cacheAllowed = !dailyPrayerTimes ||
+                    prefs.getString("cache-date:$url", null) == berlinDate
+                if (cacheAllowed) {
+                    value = runCatching {
+                        JSONObject(prefs.getString("cache:$url", "{}") ?: "{}")
+                    }.getOrNull()
+                    if (value?.length() == 0) value = null
+                    if (value != null && dailyPrayerTimes) {
+                        value?.put("_darCachedToday", true)
+                    }
+                }
             }
             val result = value
             runOnUiThread { if (!isFinishing && !isDestroyed) done(result) }
