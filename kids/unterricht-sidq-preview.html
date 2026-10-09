@@ -30,10 +30,62 @@ textarea{width:100%;min-height:86px;border-radius:15px;background:rgba(255,255,2
 .small{font-size:13px;color:var(--muted)}.response{min-height:62px;border-left:2px solid var(--accent);padding:8px 12px;margin-top:15px;color:#f5efd9}
 .progress{height:8px;background:rgba(255,255,255,.11);border-radius:99px;overflow:hidden;margin:12px 0}.progress span{display:block;background:var(--accent);height:100%;width:0;transition:width .2s}
 [hidden]{display:none!important}@media(min-width:850px){.grid{grid-template-columns:minmax(0,1.35fr) minmax(310px,.85fr);align-items:start}.panel{position:sticky;top:16px}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+
+/* KIDS-ACADEMY-OVERVIEW V2 · Bilder nur in Hero und Kategorien, niemals in Lektionen/Fragen */
+.overview-hero{min-height:clamp(320px,44vw,480px);position:relative;overflow:hidden;isolation:isolate;display:flex;align-items:end;border-bottom:1px solid var(--border);margin:20px -14px 28px;background:#0c3043}
+.overview-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:65% center;z-index:-2}
+.overview-hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,23,36,.91),rgba(5,23,36,.33) 66%,rgba(3,20,35,.12)),linear-gradient(0deg,rgba(6,26,40,.95),transparent 68%);z-index:-1}
+.overview-copy{padding:32px clamp(20px,5vw,68px);max-width:750px;text-shadow:0 2px 14px #061b2b}
+.overview-copy h1{margin:5px 0;font-size:clamp(39px,7.1vw,68px)}
+.overview-copy p{max-width:43ch;font-size:clamp(16px,2.8vw,21px);line-height:1.5;color:#fff4df}
+.overview-head{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:end;margin:10px 0 16px;padding:0 2px}
+.overview-head h2{font-family:Georgia,serif;font-size:clamp(27px,5vw,34px);margin:0}
+.overview-head p{font-size:14px;color:var(--muted);margin:2px 0}
+.category-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.category-card{min-height:210px;width:100%;border:1px solid var(--border);border-radius:22px;overflow:hidden;position:relative;text-align:left;padding:0;background:#143748;color:#fff;display:flex;align-items:end}
+.category-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;transition:none}
+.category-card:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(5,23,36,.96) 0%,rgba(6,26,40,.35) 68%,transparent)}
+.category-card-copy{position:relative;z-index:1;display:grid;gap:1px;padding:18px 17px}
+.category-name{font-family:Georgia,serif;font-size:clamp(22px,4.7vw,30px);font-weight:800;color:#fff1cc;line-height:1.2}
+.category-detail{font-size:12px;color:#d9e8e7;line-height:1.42}
+.category-state{color:#f6da98;font-size:10px;letter-spacing:.04em;font-weight:800}
+.category-card:not(:disabled):hover,.category-card:not(:disabled):focus-visible,.category-card:not(:disabled):active{border-color:#d7bf83;box-shadow:0 0 14px rgba(230,201,134,.15)}
+.category-card:disabled{cursor:default;opacity:.84}
+.overview-note{font-size:12px;color:var(--muted);padding:14px 2px 0}
+.lesson-topline{padding:24px 0 4px}
+.lesson-topline .pill{min-height:46px}
+.lesson-main .hero{padding:24px 2px 21px}
+.lesson-main .hero h1{font-size:clamp(31px,6.5vw,47px)}
+.lesson-main .grid{margin-top:22px}
+.lesson-main .panel{box-shadow:0 10px 34px rgba(0,0,0,.15)}
+.lesson-main .source{font-size:13px;overflow-wrap:anywhere}
+.lesson-main .eyebrow:before{content:"";display:inline-block;width:19px;height:1px;background:var(--gold);margin:0 9px 4px 0}
+.lesson-main .quote{font-family:Georgia,serif}
+.lesson-main .arabic{padding:13px 0;border-bottom:1px solid var(--border)}
+.lesson-main .panel button{transition:box-shadow .15s ease}
+.lesson-main .panel button:active{box-shadow:0 0 12px rgba(231,194,129,.15)}
+@media(min-width:850px){.category-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.category-card{min-height:265px}}
+@media(max-width:390px){.category-card{min-height:182px}.category-card-copy{padding:15px 12px}.category-name{font-size:21px}}
 </style></head>
 <body data-profile="boy"><main class="wrap">
 <header><div><div class="brand">DĀR AL TAWḤĪD · KIDS</div><div class="stage">Interaktiver Unterricht · HTML-Vorschau · nicht veröffentlicht</div></div>
 <div class="controls"><button class="pill active" type="button" data-profile="boy">Junge</button><button class="pill" type="button" data-profile="girl">Mädchen</button></div></header>
+
+<section class="academy-home" id="academyHome">
+  <section class="overview-hero" aria-label="Unterrichtsakademie">
+    <img src="https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3-pro-image/images/0103d2be-6a8b-40ee-b64d-6e3243b3b05b/bb6a8f67-950b-4235-be46-ebbd1b5a807e/Create_ONE_cinematic_high_end_3D_animated_feature_background.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiYjA4MTc3ZTBmZmFlNjRiZSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTY3ODA0OH0.bQc0VAugmoW7giDD7DbpETo2w41q-4f0MgmwN9xEoAQ" onerror="this.onerror=null;this.src='/kids/assets/deen/deen-entry.jpg?v=1205'" alt="" decoding="async" fetchpriority="high">
+    <div class="overview-copy"><div class="kicker">Deine islamische Lernakademie</div><h1>Den Dīn lernen</h1><p id="overviewGreeting">As-salāmu ʿalaykum, mein lieber Bruder. Gemeinsam lernen wir Wissen aus Qurʾān und Sunnah.</p></div>
+  </section>
+  <section class="overview-head"><div><h2>Wähle dein Unterrichtsfach</h2><p>Entdecke ein Thema – Schritt für Schritt, in deinem Tempo.</p></div><span class="stage">Unterrichts-Vorschau</span></section>
+  <div class="category-grid" aria-label="Unterrichtskategorien">
+    <button type="button" class="category-card" data-open-lesson="sidq"><img src="https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3-pro-image/images/8829f3d0-92d4-4e9b-a143-27bd56723e24/29ad152e-f266-42e4-934c-a1de4a822846/One_single_3D_animated_feature_film_quality__semi_realistic_.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNzkyMmViMWNmOTEzMWI3YSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTYyMTE0OH0.YJxnz2HR0o8ViTrh6HgiJ5X6yKmTGTCQAnfBvURgpM4" onerror="this.onerror=null;this.src='/kids/assets/deen/adab-akhlaq.jpg?v=1205'" alt="" loading="lazy" decoding="async"><span class="category-card-copy"><span class="category-state">1 Musterlektion verfügbar</span><strong class="category-name">Akhlāq</strong><span class="category-detail">Wahrhaftigkeit · Guter Charakter</span></span></button>
+    <button type="button" class="category-card" data-open-lesson="sidq"><img src="https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3-pro-image/images/5d0bcff1-15a7-4b68-ad57-04e9f84ff026/9bf1fd46-9658-46a9-86da-34144b2f4751/One_single_polished_mature_3D_animated_film_still_for_an_Isl.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNTM5NWYzNWI0NmZiYzdmNiIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTY1NDQ5MX0.8fwpQCGlXnQaQNSz010FODaR7taCVCES8U5RAp7-184" onerror="this.onerror=null;this.src='/kids/assets/deen/adab-akhlaq.jpg?v=1205'" alt="" loading="lazy" decoding="async"><span class="category-card-copy"><span class="category-state">Ṣidq-Musterlektion ansehen</span><strong class="category-name">Adab</strong><span class="category-detail">Benehmen · Guter Umgang</span></span></button>
+    <button type="button" class="category-card" disabled aria-label="Fiqh, Unterricht noch in Vorbereitung"><img src="/kids/assets/deen/ibadah.jpg?v=1205" alt="" loading="lazy" decoding="async"><span class="category-card-copy"><span class="category-state">In Vorbereitung</span><strong class="category-name">Fiqh</strong><span class="category-detail">Gebet · Reinheit · Praxis</span></span></button>
+    <button type="button" class="category-card" disabled aria-label="Aqida, Unterricht noch in Vorbereitung"><img src="/kids/assets/deen/tawhid.jpg?v=1205" alt="" loading="lazy" decoding="async"><span class="category-card-copy"><span class="category-state">In Vorbereitung</span><strong class="category-name">ʿAqīdah</strong><span class="category-detail">Tawḥīd · Ikhlāṣ · Īmān</span></span></button>
+  </div>
+  <p class="overview-note">Bilder nur in der Übersicht und auf Kategorie-Karten. Innerhalb des Unterrichts und der Verständnisfragen verwenden wir ausschließlich Text, Stimme und ruhige Bedienelemente.</p>
+</section>
+<div class="lesson-main" id="lessonMain" hidden><div class="lesson-topline"><button class="pill" id="backToAcademy" type="button">← Unterrichtsübersicht</button></div>
 <section class="hero"><div class="kicker">Akhlāq · Einheit 01</div><h1>Ṣidq · Wahrhaftigkeit</h1>
 <p id="greeting" class="intro">As-salāmu ʿalaykum, mein lieber Bruder. Heute lernen wir, weshalb Wahrheit so wichtig ist.</p>
 <div class="controls" aria-label="Lernmodus"><button class="pill active" data-mode="both">Hören & Lesen</button><button class="pill" data-mode="read">Nur lesen</button></div></section>
@@ -41,10 +93,10 @@ textarea{width:100%;min-height:86px;border-radius:15px;background:rgba(255,255,2
 <h2>Qurʾān und Sunnah</h2><div class="eyebrow">Qurʾān · at-Tawbah 9:119 (Versauszug)</div>
 <div class="arabic" lang="ar">وَكُونُوا مَعَ ٱلصَّـٰدِقِينَ</div>
 <p class="quote">„Und seid mit den Wahrhaftigen.“</p>
-<div class="source">📝 Qurʾān 9:119 · Deutsch sinngemäß · https://quran.com/9/119</div>
+<div class="source">Quelle: Qurʾān 9:119 · Deutsch sinngemäß · https://quran.com/9/119</div>
 <div class="eyebrow">Sunnah · Ṣaḥīḥ Muslim 2607</div>
 <p class="quote">Wahrhaftigkeit führt zur Rechtschaffenheit, und Rechtschaffenheit führt zum Paradies.</p>
-<div class="source">📝 Ṣaḥīḥ Muslim, Nr. 2607 · sinngemäßer Auszug aus der Überlieferung von ʿAbdullāh ibn Masʿūd · https://sunnah.com/muslim:2607</div>
+<div class="source">Quelle: Ṣaḥīḥ Muslim, Nr. 2607 · sinngemäßer Auszug aus der Überlieferung von ʿAbdullāh ibn Masʿūd · https://sunnah.com/muslim:2607</div>
 <div class="eyebrow">Erklärung</div>
 <p id="explanation" class="explain">Wer einen Fehler macht und die Wahrheit sagt, kann Verantwortung übernehmen und den Fehler wiedergutmachen. Eine Lüge kann andere verletzen und Vertrauen zerstören. Deshalb sagen wir die Wahrheit, auch wenn es uns schwerfällt.</p>
 <div class="eyebrow">Alltagsbeispiel</div><p class="explain">Du hast versehentlich ein Glas zerbrochen. Du darfst sagen: „Ich war das. Es tut mir leid. Ich helfe beim Aufräumen.“</p>
@@ -60,7 +112,7 @@ textarea{width:100%;min-height:86px;border-radius:15px;background:rgba(255,255,2
 <div class="answers"><button id="check" class="pill primary">Antwort prüfen</button><button id="hint" class="pill">Hinweis</button><button id="repeat" class="pill">Frage wiederholen</button></div>
 <div class="response" aria-live="polite" id="feedback">Denke erst nach. Du kannst sprechen oder schreiben.</div>
 <p class="small">Eine automatische Bewertung kann irren. Dies ist ein regelbasierter Demonstrator, kein freigegebener KI-Lehrer.</p>
-</aside></div></main>
+</aside></div></div></main>
 <script>
 (()=>{
 "use strict";
@@ -71,7 +123,7 @@ const greet=()=>`As-salāmu ʿalaykum, ${name()}. Heute lernen wir, weshalb Wahr
 function speechText(){return greet()+" Allah sagt: Und seid mit den Wahrhaftigen. Der Prophet, Allahs Segen und Frieden auf ihm, erklärte, dass Wahrhaftigkeit zur Rechtschaffenheit führt und Rechtschaffenheit zum Paradies. "+q("#explanation").textContent+" Was solltest du sagen, wenn du etwas kaputt gemacht hast?";}
 function stopSpeech(){if("speechSynthesis"in window){speechSynthesis.cancel();speaking=false;q("#play").textContent="Unterricht anhören";}}
 function speak(t){if(mode==="read"||!("speechSynthesis"in window)){q("#audioInfo").textContent="Audio in diesem Modus nicht verfügbar.";return}stopSpeech();const u=new SpeechSynthesisUtterance(t);u.lang="de-DE";u.rate=.87;u.onend=()=>{speaking=false;q("#play").textContent="Unterricht anhören"};speechSynthesis.speak(u);speaking=true;q("#play").textContent="Erneut anhören";}
-all("[data-profile]").forEach(b=>b.addEventListener("click",()=>{profile=b.dataset.profile;document.body.dataset.profile=profile;all("[data-profile]").forEach(x=>x.classList.toggle("active",x===b));q("#greeting").textContent=greet();stopSpeech()}));
+all("[data-profile]").forEach(b=>b.addEventListener("click",()=>{profile=b.dataset.profile;document.body.dataset.profile=profile;all("[data-profile]").forEach(x=>x.classList.toggle("active",x===b));q("#greeting").textContent=greet();q("#overviewGreeting").textContent=greet().replace("Heute lernen wir, weshalb Wahrheit so wichtig ist.","Gemeinsam lernen wir Wissen aus Qurʾān und Sunnah.");stopSpeech()}));
 all("[data-mode]").forEach(b=>b.addEventListener("click",()=>{mode=b.dataset.mode;all("[data-mode]").forEach(x=>x.classList.toggle("active",x===b));if(mode==="read")stopSpeech()}));
 q("#play").onclick=()=>speak(speechText());q("#stop").onclick=stopSpeech;
 q("#hint").onclick=()=>{q("#feedback").textContent="Denke an diese drei Schritte: Wahrheit sagen, sich entschuldigen und den Fehler wiedergutmachen."};
@@ -82,6 +134,16 @@ const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
 q("#mic").onclick=()=>{if(!SR){q("#micInfo").textContent="Spracherkennung ist auf diesem Gerät beziehungsweise in diesem Browser nicht verfügbar. Bitte tippe deine Antwort.";return}
 try{recognition=new SR();recognition.lang="de-DE";recognition.interimResults=false;recognition.maxAlternatives=1;recognition.onresult=e=>{q("#answer").value=e.results[0][0].transcript;q("#micInfo").textContent="Erkannte Antwort: Bitte prüfen oder korrigieren.";check()};recognition.onerror=()=>q("#micInfo").textContent="Die Erkennung konnte nicht abgeschlossen werden. Bitte antworte per Text.";recognition.onend=()=>{q("#mic").disabled=false;q("#cancelMic").hidden=true};q("#mic").disabled=true;q("#cancelMic").hidden=false;recognition.start();q("#micInfo").textContent="Du kannst jetzt sprechen."}catch(e){q("#mic").disabled=false;q("#micInfo").textContent="Mikrofon derzeit nicht verfügbar."}};
 q("#cancelMic").onclick=()=>{try{recognition?.stop()}catch(e){}};
+
+function setAcademyVisible(isHome){
+  q("#academyHome").hidden=!isHome;
+  q("#lessonMain").hidden=isHome;
+  if(isHome){stopSpeech();try{recognition?.stop()}catch(e){}}
+  window.scrollTo({top:0,behavior:"instant"});
+}
+all("[data-open-lesson]").forEach(b=>b.addEventListener("click",()=>setAcademyVisible(false)));
+q("#backToAcademy").addEventListener("click",()=>setAcademyVisible(true));
+
 document.addEventListener("visibilitychange",()=>{if(document.hidden){stopSpeech();try{recognition?.stop()}catch(e){}}});
 })();
 </script></body></html>
