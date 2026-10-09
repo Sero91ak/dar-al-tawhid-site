@@ -2382,9 +2382,26 @@ html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
  .dar-pwa-home-copy strong{font-size:13px}.dar-pwa-home-copy span{font-size:8.5px}.dar-pwa-home-action{min-height:34px;padding:0 9px}
  .download-hub-grid{grid-template-columns:1fr}.download-app-card{padding:18px}
 }
+/* darTapHighlightFixV1 */
+html,body,a,button,[role="button"],.desktop-link,.more-row,.category-card,.feature-card,.header-action,.main-nav a{
+  -webkit-tap-highlight-color:transparent!important;
+}
+a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:focus:not(:focus-visible){
+  outline:none!important;
+  box-shadow:none;
+}
 </style>
 <!-- android-pwa-direct-install-live-v3 -->
 </head>
+<style id="dar-touch-active-fix">
+@media (hover:none) and (pointer:coarse){
+  a:active,button:active,[role="button"]:active,.desktop-link:active,.more-row:active,.category-card:active,.feature-card:active{
+    filter:none!important;
+    box-shadow:none!important;
+    background-image:none!important;
+  }
+}
+</style>
 <body class="desktop-overhaul-v18">
 <div id="dar-soft-boot" data-dar-static-pwa-boot="1" role="status" aria-live="polite">
   <img class="dar-soft-boot__mark" src="/watermark-my-logo-full.png" alt="" width="148" height="148" decoding="sync">
@@ -2690,17 +2707,20 @@ html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
   root.classList.add("is-leaving");
   setTimeout(function(){render();root.classList.remove("is-leaving");window.scrollTo({top:0,behavior:"smooth"})},150)
  }
- // Reliability guard: public website navigation uses normal browser loads.
- // This keeps every link functional even if a page-specific SPA initializer fails.
+ // Stable internal SPA navigation for the public website.
+ // Keep page/search parameters inside the current document instead of round-tripping
+ // through the root Worker, which can otherwise fall back to the start page.
  document.addEventListener("click",function(e){
   var t=e.target&&e.target.closest?e.target:null;
   var a=t?t.closest("a.desktop-link"):null;
   if(!a)return;
+  if(e.defaultPrevented||e.button>0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
   var u=new URL(a.href,location.href);
   if(u.origin!==location.origin||(u.pathname!=="/"&&u.pathname!=="/desktop-preview/"))return;
-  // Intentionally do not preventDefault: use the anchor href as a full navigation.
+  e.preventDefault();
+  navigate(u.pathname+u.search+u.hash,true);
  });
- window.addEventListener("popstate",function(){location.reload()});
+ window.addEventListener("popstate",function(){navigate(location.pathname+location.search+location.hash,false)});
 
  // Public website PWA installer must work even when /desktop-preview/ was loaded directly.
  var darDeferredPwaPrompt=window.__darEarlyInstallPrompt||null;
