@@ -747,6 +747,14 @@
     loadZakatPrices,
     getConfig: () => effectiveConfig(),
     resetInput: resetZakatInput,
-    restoreInput: restoreZakatInput
+    restoreInput: restoreZakatInput,
+    // Read the complete calculation, including fields in collapsed accordions.
+    getInput: () => {
+      readInputFromDom();
+      return {
+        ...zakatInput,
+        manualPrices: { ...zakatInput.manualPrices }
+      };
+    }
   };
 })(typeof window !== "undefined" ? window : global);
