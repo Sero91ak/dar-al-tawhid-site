@@ -69,18 +69,26 @@ jobs:
           # dedicated v3 renders with Eleven v4 and Arabic-native delivery.
           expected_revisions={
             "kids/data/dua-arabic-audio.json":"dua-arabic-native-fusha-v3-20261007",
-            "kids/data/dua-arabic-slow-audio.json":"dua-arabic-native-fusha-slow-v3-20261007",
-            "kids/data/dua-word-audio.json":"dua-arabic-native-fusha-word-v4-20261007",
+            "kids/data/dua-arabic-slow-audio.json":(
+              "dua-arabic-native-fusha-slow-v3-20261007",
+              "dua-arabic-native-fusha-slow-v4-natural-20261009"
+            ),
+            "kids/data/dua-word-audio.json":(
+              "dua-arabic-native-fusha-word-v4-20261007",
+              "dua-arabic-native-fusha-word-v5-natural-20261009"
+            ),
           }
           for path,expected_revision in expected_revisions.items():
             data=json.loads((root/path).read_text(encoding="utf-8"))
-            assert data.get("arabicSynthesisRevision")==expected_revision,(path,data.get("arabicSynthesisRevision"),expected_revision)
+            allowed=expected_revision if isinstance(expected_revision,tuple) else (expected_revision,)
+            assert data.get("arabicSynthesisRevision") in allowed,(path,data.get("arabicSynthesisRevision"),allowed)
+            active_revision=data.get("arabicSynthesisRevision")
             assert data.get("pronunciationDictionaryApplied") is False,(path,data.get("pronunciationDictionaryApplied"))
             assert data.get("pronunciationDictionaryId") is None,(path,data.get("pronunciationDictionaryId"))
             assert int(data.get("pronunciationDictionaryRuleCount") or 0)==0,(path,data.get("pronunciationDictionaryRuleCount"))
             for entry in (data.get("entries") or {}).values():
               assert entry.get("pronunciationDictionaryApplied") is False,(path,entry.get("pronunciationDictionaryApplied"))
-              assert entry.get("arabicSynthesisRevision")==expected_revision,(path,entry.get("arabicSynthesisRevision"),expected_revision)
+              assert entry.get("arabicSynthesisRevision")==active_revision,(path,entry.get("arabicSynthesisRevision"),active_revision)
           print("Du'a manifests and audio assets OK")
           PY
 
