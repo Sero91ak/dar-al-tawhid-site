@@ -1,0 +1,117 @@
+name: DĀR AL TAWḤĪD TV · Native QA APK
+
+on:
+  push:
+    branches:
+      - feat/android-tv-apple-tv-layout-parity-20261009
+    paths:
+      - 'android/tv/**'
+      - 'android/settings.gradle.kts'
+      - '.github/workflows/android-tv-native-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dar-android-tv-native-qa-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  native-tv:
+    name: Compile TV APK and verify launcher
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      DAR_TV_VERSION_CODE: '155'
+      TV_KEYSTORE_B64: ${{ secrets.DAR_ANDROID_TV_KEYSTORE_BASE64 }}
+      TV_STORE_PASSWORD: ${{ secrets.DAR_ANDROID_TV_STORE_PASSWORD }}
+      TV_KEY_ALIAS: ${{ secrets.DAR_ANDROID_TV_KEY_ALIAS }}
+      TV_KEY_PASSWORD: ${{ secrets.DAR_ANDROID_TV_KEY_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Install Android 36 SDK
+        shell: bash
+        run: |
+          set -euo pipefail
+          SDKMGR="$(find "${ANDROID_HOME}/cmdline-tools" -type f -name sdkmanager | sort -V | tail -n 1)"
+          test -x "$SDKMGR"
+          yes | "$SDKMGR" --licenses >/dev/null || true
+          "$SDKMGR" 'platforms;android-36' 'build-tools;36.0.0'
+      - name: Compile TV debug APK and unit tests
+        working-directory: android
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon :tv:assembleDebug :tv:testDebugUnitTest
+      - name: Verify TV package, launcher and version
+        shell: bash
+        run: |
+          set -euo pipefail
+          sdk="$(find "$ANDROID_HOME/build-tools" -mindepth 1 -maxdepth 1 -type d | sort -V | tail -n 1)"
+          apk="android/tv/build/outputs/apk/debug/tv-debug.apk"
+          test -s "$apk"
+          "$sdk/apksigner" verify --verbose "$apk"
+          "$sdk/aapt" dump badging "$apk" > "$RUNNER_TEMP/tv-badging.txt"
+          grep -q "name='de.daraltawhid.tv.debug'" "$RUNNER_TEMP/tv-badging.txt"
+          grep -q 'leanback-launcher' "$RUNNER_TEMP/tv-badging.txt"
+          grep -q "versionCode='155'" "$RUNNER_TEMP/tv-badging.txt"
+          sha256sum "$apk"
+      - name: Publish internal TV test APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-al-tawhid-tv-parity-debug-apk
+          path: android/tv/build/outputs/apk/debug/tv-debug.apk
+          if-no-files-found: error
+          retention-days: 14
+      - name: Prepare existing TV upload signature if available
+        id: signature
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -n "$TV_KEYSTORE_B64" && -n "$TV_STORE_PASSWORD" && -n "$TV_KEY_ALIAS" && -n "$TV_KEY_PASSWORD" ]]; then
+            printf '%s' "$TV_KEYSTORE_B64" | base64 --decode > android/tv-upload-keystore.jks
+            chmod 600 android/tv-upload-keystore.jks
+            {
+              printf 'storeFile=tv-upload-keystore.jks\n'
+              printf 'storePassword=%s\n' "$TV_STORE_PASSWORD"
+              printf 'keyAlias=%s\n' "$TV_KEY_ALIAS"
+              printf 'keyPassword=%s\n' "$TV_KEY_PASSWORD"
+            } > android/tv-keystore.properties
+            chmod 600 android/tv-keystore.properties
+            echo 'available=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'available=false' >> "$GITHUB_OUTPUT"
+            echo '::notice::TV signing secrets missing; signed update is not available'
+          fi
+      - name: Build internally signed TV APK
+        if: steps.signature.outputs.available == 'true'
+        working-directory: android
+        run: ./gradlew --no-daemon :tv:assembleRelease
+      - name: Validate signed TV APK
+        if: steps.signature.outputs.available == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          sdk="$(find "$ANDROID_HOME/build-tools" -mindepth 1 -maxdepth 1 -type d | sort -V | tail -n 1)"
+          apk="android/tv/build/outputs/apk/release/tv-release.apk"
+          "$sdk/apksigner" verify --print-certs --verbose "$apk"
+          "$sdk/aapt" dump badging "$apk" > "$RUNNER_TEMP/tv-release-badging.txt"
+          grep -q "name='de.daraltawhid.tv'" "$RUNNER_TEMP/tv-release-badging.txt"
+          grep -q 'leanback-launcher' "$RUNNER_TEMP/tv-release-badging.txt"
+          sha256sum "$apk"
+      - name: Publish signed TV candidate internally (no public release)
+        if: steps.signature.outputs.available == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-al-tawhid-tv-parity-signed-candidate
+          path: android/tv/build/outputs/apk/release/tv-release.apk
+          if-no-files-found: error
+          retention-days: 14
+      - name: Clean up signing material
+        if: always()
+        run: rm -f android/tv-upload-keystore.jks android/tv-keystore.properties
