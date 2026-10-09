@@ -3,6 +3,7 @@
 /* KIDS_DUA_TRILINGUAL_INTEGRITY_V1
    Ensures all approved Du'a words have three exact-index display segments.
    This is a structural QA test, NOT a linguistic review or audio-forced alignment. */
+function runKidsDuaTrilingualGuard(){
 const fs=require("node:fs"),path=require("node:path"),vm=require("node:vm");
 const ROOT=path.resolve(__dirname,".."),errors=[];
 const read=p=>fs.readFileSync(path.join(ROOT,p),"utf8");
@@ -63,5 +64,9 @@ for(const entry of ["/kids/dua-smart-learn.js?v=1285","/kids/dua-word-meanings-v
 }
 check(sw.includes('dar-al-tawhid-kids-v1285'),"SW cache must advance after runtime update");
 check(arabicCount===meaningCount&&arabicCount===translitCount,"3-language word counts differ");
-if(errors.length){errors.forEach(e=>console.error("KIDS TRILINGUAL FAIL:",e));process.exit(1)}
+if(errors.length){errors.forEach(e=>console.error("KIDS TRILINGUAL FAIL:",e));return errors.length}
 console.log("KIDS TRILINGUAL PASS: "+items.length+" Duʿāʾs, "+arabicCount+" matching Arabic/Latin/German words, audio index and offline precache");
+return 0;
+}
+if(require.main===module)process.exit(runKidsDuaTrilingualGuard()?1:0);
+module.exports={runKidsDuaTrilingualGuard};
