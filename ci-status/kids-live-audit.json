@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-10-09T06:30:55Z",
+  "timestamp": "2026-10-09T06:40:38Z",
   "trigger": "workflow_run",
-  "finishedDeployConclusion": "failure",
-  "finishedDeployRun": "37893487509",
+  "finishedDeployConclusion": "cancelled",
+  "finishedDeployRun": "37894723745",
   "live": {
     "buildId": "kids-shell-v174-start-stable1278",
     "label": "KIDS · V1.08.95",
@@ -25,58 +25,58 @@
   },
   "lastDeployRuns": [
     {
-      "conclusion": "failure",
-      "created_at": "2026-10-09T06:25:56Z",
-      "head_sha": "13fa229a9a6ea07ca9585c279ddb859a92b3ec90",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37893487509",
-      "id": 37893487509,
-      "status": "completed",
-      "updated_at": "2026-10-09T06:30:48Z"
+      "conclusion": null,
+      "created_at": "2026-10-09T06:40:10Z",
+      "head_sha": "993fb9d02a96635090b8f2ca2e89e247661c60d8",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37894734883",
+      "id": 37894734883,
+      "status": "pending",
+      "updated_at": "2026-10-09T06:40:11Z"
     },
     {
       "conclusion": "cancelled",
-      "created_at": "2026-10-09T06:23:30Z",
-      "head_sha": "326652d1c8b0c8346eb5d397379d0791c908289e",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37893279751",
-      "id": 37893279751,
+      "created_at": "2026-10-09T06:40:04Z",
+      "head_sha": "597157da57826241ded310680e62d3723220e9e2",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37894723745",
+      "id": 37894723745,
       "status": "completed",
-      "updated_at": "2026-10-09T06:25:57Z"
+      "updated_at": "2026-10-09T06:40:12Z"
     },
     {
       "conclusion": "cancelled",
-      "created_at": "2026-10-09T06:23:25Z",
-      "head_sha": "a22233432b7ad928b4cc52a5b2361c5062ced80b",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37893271982",
-      "id": 37893271982,
+      "created_at": "2026-10-09T06:40:00Z",
+      "head_sha": "9942509df6ee4b8298d26260d1f973403da05f21",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37894718034",
+      "id": 37894718034,
       "status": "completed",
-      "updated_at": "2026-10-09T06:23:32Z"
+      "updated_at": "2026-10-09T06:40:05Z"
     },
     {
       "conclusion": "cancelled",
-      "created_at": "2026-10-09T06:23:22Z",
-      "head_sha": "e3cf25b3657e4533b61ce533de72fce33cc2fbc1",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37893267862",
-      "id": 37893267862,
+      "created_at": "2026-10-09T06:39:54Z",
+      "head_sha": "9516f86fb27e59ae66eb755e3a7c7556fb241e81",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37894709926",
+      "id": 37894709926,
       "status": "completed",
-      "updated_at": "2026-10-09T06:23:26Z"
+      "updated_at": "2026-10-09T06:40:01Z"
     },
     {
       "conclusion": "cancelled",
-      "created_at": "2026-10-09T06:23:19Z",
-      "head_sha": "1e39e1cb9787d395e98868eb8dc031e36f2e07a4",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37893263312",
-      "id": 37893263312,
+      "created_at": "2026-10-09T06:39:52Z",
+      "head_sha": "29c6a60f5442864a0f36af608177daa8c505ed60",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37894707373",
+      "id": 37894707373,
       "status": "completed",
-      "updated_at": "2026-10-09T06:23:24Z"
+      "updated_at": "2026-10-09T06:39:55Z"
     },
     {
       "conclusion": "cancelled",
-      "created_at": "2026-10-09T06:23:17Z",
-      "head_sha": "4636628d229328fe147590df315370165e7c4111",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37893259595",
-      "id": 37893259595,
+      "created_at": "2026-10-09T06:39:49Z",
+      "head_sha": "6a7f8dd101ad1d6bbd4e2ba02d8c891eb3707b00",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37894702754",
+      "id": 37894702754,
       "status": "completed",
-      "updated_at": "2026-10-09T06:23:21Z"
+      "updated_at": "2026-10-09T06:39:54Z"
     }
   ]
 }
