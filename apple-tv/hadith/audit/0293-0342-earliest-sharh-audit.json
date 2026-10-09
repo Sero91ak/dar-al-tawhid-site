@@ -4,8 +4,8 @@
   "auditedDate": "2026-10-09",
   "inspectionKind": "Eintrags-/Überlieferungstext gesichtet; klassische Direktnachweise nur bei verified vollständig eingetragen",
   "totalInspected": 50,
-  "newlyVerified": 41,
-  "remainingOpen": 9,
+  "newlyVerified": 42,
+  "remainingOpen": 8,
   "status": "partial-source-verification",
   "policy": {
     "sourceOfTruth": "apple-tv/hadith/series/",
@@ -18,13 +18,12 @@
     "compareBlobSHAOnMutation": true
   },
   "caution": "Verified bedeutet: arabischer Kommentar, Werk, Bd. und digitale Werkpagination eingetragen; die konkrete Druckausgabe ist nicht nachgewiesen (sharhEdition: null). Strenge Druckeditions-Nachprüfung bleibt ein separater Qualitätsauftrag.",
-  "nextAction": "Die neun verbliebenen Einträge nach konkreten arabischen Kommentaren sowie Isnāden prüfen, keine Schätzungen oder automatischen Dubletten-Transfers. Nächster 50er-Audit HAD-0343–0392 separat.",
+  "nextAction": "Noch 8 von 50 offen; Primärtext, Isnāde, Klassikkommentar und Edition einzeln prüfen. Bei Āṯār keine Echtheit aus Statuslabel folgern.",
   "entries": [
     {
       "id": "HAD-0293",
-      "sharh": "open-source-review",
-      "note": "Frühere, später aufgehobene Ġusl-Regel im Kontext von HAD-0292; genaue unmittelbare Kommentierung offen.",
-      "possibleSemanticParallel": "HAD-0292"
+      "sharh": "verified",
+      "commentary": "Direkter arabischer Kommentar im jeweiligen HAD-Eintrag belegt; Band und digitale Werkpagination enthalten; Druckedition noch unbestimmt."
     },
     {
       "id": "HAD-0294",
@@ -301,5 +300,6 @@
       "HAD-0341"
     ],
     "note": "Blobs der acht HAD-Dateien per SHA einzeln geändert; keine konkreten Druckeditionen verifiziert."
-  }
+  },
+  "date": "2026-10-09"
 }
