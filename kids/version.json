@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v182-unified-header1287",
-  "label": "KIDS · V1.09.03",
+  "buildId": "kids-shell-v183-header-lock1288",
+  "label": "KIDS · V1.09.04",
   "releasedAt": "2026-10-09T12:48:30Z",
-  "note": "KIDS V1.09.03: Globale, einheitliche Detail-Kopfzeilen nach dem freigegebenen Duʿāʾ-Detaildesign. Duʿāʾ-Lernmodus, Geschichten-Mitlesen, Gebetszeiten-Vollansicht und Beitragsleser nutzen nun einheitliche abgerundete Petroldesign-Kopfzeilen mit links platziertem Zurückpfeil, linksbündigem Titel, Untertitel und feiner Trennlinie. Ursprüngliche Zurück-Handler, Audio, Fortschrittsanzeige, Swipe und untere Tab-Navigation bleiben erhalten. Die Gebetszeiten-Kopfzeile bleibt kompakt, damit alle fünf Zeiten sichtbar bleiben.",
+  "note": "KIDS V1.09.04: Kopfzeile des Duʿāʾ-Lernmodus geometrisch an das freigegebene Bild der Duʿāʾ-Detailseite angeglichen. Abweichende Safe-Area-/Innenabstands-Regeln überschrieben, gleicher Button (44px, Pfeil, 15px Rundung), gleiche Titel-/Untertitel-Ausrichtung, Linien, Farben und Rundungen. Der Lernfortschritt 2/2 bzw. 7/7 wird als dezente dünne Linie innerhalb der Kopfzeile dargestellt, nicht als separater Abschlussstreifen. Lesen und Hörfunktionen bleiben unverändert.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1287",
+    "serviceWorkerCache": "v1288",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
