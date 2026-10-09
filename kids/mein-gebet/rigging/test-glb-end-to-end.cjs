@@ -13,6 +13,7 @@ const spec=require("./rig-acceptance-v1.json");
 const {parseGLB,validateDocument,main:validateMain}=require("./validate-glb.cjs");
 const {validateAnimationBytes}=require("./validate-glb-binary.cjs");
 const {validateGeometryBytes}=require("./validate-glb-geometry-binary.cjs");
+const {validatePoseBoneLengths}=require("./validate-pose-bone-lengths.cjs");
 const {main:releaseMain}=require("./audit-project-completion.cjs");
 const {main:forbidBoyMain}=require("./forbid-placeholder-release.cjs");
 const N=2400;
@@ -64,8 +65,35 @@ function glbFixture(){
     "UpperLeg.L":["LowerLeg.L"],"LowerLeg.L":["Foot.L"],"Foot.L":["Toe.L"],
     "UpperLeg.R":["LowerLeg.R"],"LowerLeg.R":["Foot.R"],"Foot.R":["Toe.R"]
   };
-  for(const [parent,childNames] of Object.entries(edges))
+  const parentOf=new Map();
+  for(const [parent,childNames] of Object.entries(edges)){
     nodes[lookup.get(parent)].children=childNames.map(name=>lookup.get(name));
+    for(const childName of childNames)parentOf.set(childName,parent);
+  }
+  // Explicit positive bone lengths: empty coincident bone nodes previously
+  // permitted a vacuous pass in tests without proving actual proportions.
+  const offsets={
+    Hips:[0,.82,0],Spine:[0,.19,0],Chest:[0,.24,0],
+    Neck:[0,.18,0],Head:[0,.13,0],
+    "UpperArm.L":[-.20,.11,0],"LowerArm.L":[-.21,-.12,0],"Hand.L":[-.16,-.10,0],
+    "UpperArm.R":[.20,.11,0],"LowerArm.R":[.21,-.12,0],"Hand.R":[.16,-.10,0],
+    "UpperLeg.L":[-.15,-.17,0],"LowerLeg.L":[0,-.29,0],
+    "Foot.L":[0,-.27,.07],"Toe.L":[0,-.04,.12],
+    "UpperLeg.R":[.15,-.17,0],"LowerLeg.R":[0,-.29,0],
+    "Foot.R":[0,-.27,.07],"Toe.R":[0,-.04,.12]
+  };
+  for(const [name,i] of lookup)nodes[i].translation=offsets[name];
+  const absolute=new Map();
+  function restPosition(name){
+    if(absolute.has(name))return absolute.get(name);
+    const local=offsets[name],parent=parentOf.get(name);
+    const world=parent?local.map((x,j)=>x+restPosition(parent)[j]):local.slice();
+    absolute.set(name,world);return world;
+  }
+  // Write matching glTF inverse bind translations (column-major).
+  for(const [name,i] of lookup)
+    for(let axis=0;axis<3;axis++)
+      ibm.writeFloatLE(-restPosition(name)[axis],i*64+(12+axis)*4);
   nodes.push({name:"Synthetic skinned test body; not original",mesh:0,skin:0});
   const animations=["Qiyam","Takbir"].map(name=>({name,
     channels:[{sampler:0,target:{node:0,path:"rotation"}}],
@@ -127,6 +155,9 @@ try{
     assert.equal(report.valid,true,JSON.stringify(report.errors));
     assert.equal(report.referencedVertices,N);
     assert.equal(report.productionApproved,false);
+    const pose=validatePoseBoneLengths(parsed.gltf,parsed.bin);
+    assert.equal(pose.valid,true,JSON.stringify(pose.errors));
+    assert.equal(pose.measuredSegments,18);
   });
   check("full CLI structural preflight accepts test fixture but does not approve original likeness",()=>{
     const r=quietMain(validateMain,[candidate,"boy"]);
