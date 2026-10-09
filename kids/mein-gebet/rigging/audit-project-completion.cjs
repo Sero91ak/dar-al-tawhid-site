@@ -24,7 +24,7 @@ function audit(status,boy,girl,story,hanbali){
    return flags.every(f=>a[f]===true)&&hex(checksum.sha256)&&
      Number.isSafeInteger(checksum.bytes)&&checksum.bytes>0&&
      typeof checksum.reviewRecordId==="string"&&checksum.reviewRecordId.trim().length>0&&
-     typeof checksum.approvedDate==="string"&&/^\\d{4}-\\d{2}-\\d{2}$/.test(checksum.approvedDate)&&
+     typeof checksum.approvedDate==="string"&&/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(checksum.approvedDate)&&
      Array.isArray(manifest.requiredReviewAngles)&&manifest.requiredReviewAngles.length>=5&&
      manifest.requiredReviewAngles.every(view=>angles.has(view));
  };
@@ -68,10 +68,11 @@ function audit(status,boy,girl,story,hanbali){
  need("offline test not complete",status.app?.offlineTestPassed===true);
  need("independent HTTPS staging test not complete",status.app?.independentWorkingHttpsStaging===true);
  need("manual visual and production user approvals missing",status.reviewGates?.originalHumanApproval===true&&status.reviewGates?.productionUserApproval===true);
- const ready=problems.length===0&&inconsistent.length===0;
- forbidden("status claims ready despite incomplete gates",status.productionReady===true&&!ready);
+ const allPassed=problems.length===0;
+ forbidden("status claims ready despite incomplete gates",status.productionReady===true&&!allPassed);
  forbidden("boy model claims approved in status without digest",status.boy?.productionRigApproved===true&&(!boy.accept?.productionReady||!boy.approvedModelChecksum?.sha256));
  forbidden("girl model claims approved in status without digest",status.girl?.productionRigApproved===true&&(!girl.accept?.productionReady||!girl.approvedModelChecksum?.sha256));
+ const ready=allPassed&&inconsistent.length===0;
  return {ready,blockingChecks:problems,inconsistent,passedChecks:checkCount-problems.length,totalChecks:checkCount};
 }
 function main(args){
