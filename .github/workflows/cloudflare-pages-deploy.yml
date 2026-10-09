@@ -347,7 +347,11 @@ jobs:
         run: npm install
 
       - name: Autonome Beitragsprüfung
-        run: node scripts/adult-content-publication-guard.js --self-test
+        shell: bash
+        run: |
+          node scripts/adult-content-publication-guard.js --self-test
+          NEW="$(git diff --diff-filter=A --name-only HEAD^ HEAD -- 'content/posts/*.md')"
+          CHANGED_POST_FILES="$NEW" node scripts/adult-content-publication-guard.js --validate
 
       - name: Test-App Staging aus test-library-canonical übernehmen
         run: |
