@@ -39,12 +39,12 @@ const cacheVersion=Number(String(v.visualSystem?.serviceWorkerCache||"").replace
 if(cacheVersion<1282||!String(v.buildId||"").endsWith(String(cacheVersion)))fail("Kids release cache/build version mismatch");
 for(const page of ["kids/index.html","kids/start.html","kids/shell.html"]){
  const html=read(page);
- for(const token of [v.buildId,"/kids/dua-word-meanings-v1.js?v=1","/kids/dua-smart-learn.js?v=1282","/kids/dua-learn-trilingual-v1282.css?v=1282"]){
+ for(const token of [v.buildId,"/kids/dua-word-meanings-v1.js?v=2","/kids/dua-smart-learn.js?v=1282","/kids/dua-learn-trilingual-v1282.css?v=1282"]){
   if(!html.includes(token))fail(page+" missing "+token);
  }
 }
 const sw=read("kids/sw.js");
-for(const token of ['dar-al-tawhid-kids-v1282',v.buildId,"/kids/dua-word-meanings-v1.js?v=1","/kids/dua-smart-learn.js?v=1282","/kids/dua-learn-trilingual-v1282.css?v=1282"]){
+for(const token of ['dar-al-tawhid-kids-v1283',v.buildId,"/kids/dua-word-meanings-v1.js?v=2","/kids/dua-smart-learn.js?v=1282","/kids/dua-learn-trilingual-v1282.css?v=1282"]){
  if(!sw.includes(token))fail("Offline precache missing "+token);
 }
 function runKidsDuaTrilingualGuard(){
