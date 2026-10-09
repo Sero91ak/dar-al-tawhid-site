@@ -4,7 +4,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1277';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1278';
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const OFFLINE_PREP_PENDING_KEY = '/__offline_prep_pending_v1__';
 const OFFLINE_PREP_PROGRESS_KEY = '/__offline_prep_progress_v1__';
@@ -13,6 +13,7 @@ const OFFLINE_BATCH_SIZE = 10;
 const APP_SHELL = [
   '/',
   '/?pwa=1',
+  '/pwa/?pwa=1',
   '/index.html',
   '/test/',
   '/test/index.html',
@@ -334,6 +335,7 @@ function isAudioRequest(request, url) {
 
 function isAppShellRequest(url) {
   if (url.origin !== self.location.origin) return false;
+  if (url.pathname === '/pwa' || url.pathname === '/pwa/' || url.pathname === '/pwa/index.html') return true;
   if (url.pathname === '/' || url.pathname === '/index.html') return true;
   if (url.pathname === '/test/' || url.pathname === '/test/index.html') return true;
   if (url.pathname === '/version.json' || url.pathname === '/test/version.json') return true;
@@ -381,6 +383,7 @@ async function refreshLiveCore(reason) {
   const targets = [
     '/',
     '/?pwa=1',
+    '/pwa/?pwa=1',
     '/index.html',
     '/version.json',
     '/assets/live-boot.js',
@@ -416,7 +419,8 @@ function isTadabburDataRequest(url) {
 }
 
 function navigationShellKey(url) {
-  if (url.searchParams && url.searchParams.get('pwa') === '1') return '/?pwa=1';
+  if (url.pathname === '/pwa' || url.pathname === '/pwa/' || url.pathname === '/pwa/index.html') return '/pwa/?pwa=1';
+  if (url.searchParams && url.searchParams.get('pwa') === '1') return '/pwa/?pwa=1';
   return url.pathname.startsWith('/test') ? '/test/index.html' : '/index.html';
 }
 
