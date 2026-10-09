@@ -285,7 +285,7 @@
       }
       let file="quran.png";
       if(btn.classList.contains("quran-ayah-action-btn--bookmark"))file="saved.png";
-      else if(btn.classList.contains("quran-ayah-action-btn--share")) { btn.remove(); return; }
+      else if(btn.classList.contains("quran-ayah-action-btn--share")) { return; }
       else if(btn.classList.contains("quran-ayah-action-btn--tafsir"))file="quran.png";
       const imgs=btn.querySelectorAll("img.dar3d-icon");
       if(imgs.length){
