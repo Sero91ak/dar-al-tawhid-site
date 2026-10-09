@@ -267,12 +267,19 @@ body[data-kids-age="4-5"] .lesson-stage .spoken-paragraph p,
 body[data-kids-age="4-5"] .lesson-stage .recap-lesson p{font-size:clamp(18px,2.7vw,21px);line-height:1.8}
 body[data-kids-age="4-5"] .lesson-stage .question-prompt{font-size:clamp(19px,3.1vw,24px)}
 body[data-kids-age="4-5"] .choice-button{font-size:clamp(17px,2.7vw,20px);min-height:61px}
+
+/* Profilkopf: gespeicherter Name sichtbar, Anrede konsistent mit Kinderprofil */
+.academy-profile{max-width:min(52%,290px);gap:10px;padding:5px 14px 5px 5px}
+.academy-profile-names{display:flex;flex-direction:column;align-items:flex-start;gap:0;min-width:0;max-width:100%;line-height:1.27}
+.academy-profile-names strong{color:var(--text);font-size:clamp(12px,2vw,15px);font-weight:800;line-height:1.35;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.academy-profile-names small{font-size:11px;color:var(--muted);font-weight:650;white-space:nowrap}
+@media(max-width:430px){.academy-profile{max-width:49%;padding-right:9px;gap:6px}.academy-profile-names strong{font-size:12px}.academy-profile-names small{font-size:10px}}
 </style></head>
 <body data-profile="boy"><main class="wrap">
 
 <header class="academy-header">
  <div class="academy-brand"><div class="brand">DĀR AL TAWḤĪD · KIDS</div><div class="stage">Meine Lernakademie · Unterrichtsvorschau</div></div>
- <div class="academy-profile" id="academyProfile"><img id="academyAvatar" alt="" src="/kids/assets/profile-avatars/boy-kufi-v1235.svg" width="42" height="42"><span id="profileLabel">Kinderprofil wird geladen</span></div>
+ <div class="academy-profile" id="academyProfile"><img id="academyAvatar" alt="" src="/kids/assets/profile-avatars/boy-kufi-v1235.svg" width="42" height="42"><span class="academy-profile-names"><strong id="profileLabel">Kinderprofil wird geladen</strong><small id="profileRole">Unterricht</small></span></div>
 </header>
 <section class="academy-home" id="academyHome">
  <section class="overview-hero" aria-label="Deine islamische Lernakademie">
@@ -362,13 +369,13 @@ const exercises={
     {type:"text",prompt:"Worin liegt der Unterschied zwischen einem versehentlichen Fehler und einer bewussten Lüge?",sample:"Einen Fehler kann man unbeabsichtigt machen. Eine bewusste Lüge bedeutet, absichtlich etwas Unwahres zu sagen. Nach einem Fehler sollte man ehrlich bleiben und ihn wiedergutmachen.",hint:"Denk an den Unterschied zwischen Versehen und absichtlicher Unwahrheit."}
   ]
 };
-let id="unassigned",gender="neutral",age="6-8",step=0,unlocked=0,qIndex=0,choice=null,answerMode="choices",answered=false,finished=false;
+let id="unassigned",gender="neutral",age="6-8",profileName="",step=0,unlocked=0,qIndex=0,choice=null,answerMode="choices",answered=false,finished=false;
 let score={done:0,correct:0,choices:0},recognition=null,voice=null,audio=null,audioKey="",fallbackTried=false,voiceToken=0;
 let recorder=null,micStream=null,micClock=null,micSince=0,micRequest=0,voiceObjectUrl=null,voiceReady=false;
 const TRACKS={"quran:9:119":{src:"/quran-audio/ar.alafasy/1354.mp3",fallback:"https://everyayah.com/data/Alafasy_128kbps/009119.mp3"}};
 const stages=all('.lesson-stage[data-lesson-step]');
 const questions=()=>exercises[age]||exercises["6-8"];
-const address=()=>gender==="girl"?"liebe Schwester":"lieber Bruder";
+const address=()=>{const role=gender==="girl"?"liebe Schwester":"lieber Bruder";const first=profileName.split(/\s+/)[0];return first?role+" "+first:role;};
 const storageKey=()=>["kids",VERSION,id,age,"sidq"].join(".");
 const oldRecord=()=>{try{return JSON.parse(localStorage.getItem(storageKey())||"null")}catch(_){return null}};
 function ageKey(x){const t=String(x||"").replace(/[–—]/g,"-");return exercises[t]?t:"6-8"}
@@ -516,10 +523,11 @@ function renderHome(){
  $(".today-button").firstChild.textContent=rec?"Lektion wiederholen ":"Unterricht beginnen ";
 }
 function syncProfile(force=false){
- const p=getProfile();if(!force&&p.id===id&&p.g===gender&&p.age===age)return;
+ const p=getProfile();const newName=typeof p.child?.name==="string"?p.child.name.trim().replace(/\s+/g," ").slice(0,72):"";if(!force&&p.id===id&&p.g===gender&&p.age===age&&newName===profileName)return;
  if(p.id!==id||p.g!==gender||p.age!==age){stopAll();hideLesson()}
- id=p.id;gender=p.g;age=p.age;document.body.dataset.profile=gender;
- $("#profileLabel").textContent=p.child?.name||(gender==="girl"?"Mädchenprofil · Vorschau":"Jungenprofil · Vorschau");
+ id=p.id;gender=p.g;age=p.age;profileName=newName;document.body.dataset.profile=gender;
+ $("#profileLabel").textContent=profileName||(gender==="girl"?"Mädchenprofil":"Jungenprofil");
+ $("#profileRole").textContent=gender==="girl"?"Schwester"+(profileName?"":" · Vorschau"):"Bruder"+(profileName?"":" · Vorschau");
  $("#academyProfile").classList.add("has-profile");
  $("#academyAvatar").src=gender==="girl"?"/kids/assets/profile-avatars/girl-hijab-pink-v1235.svg":"/kids/assets/profile-avatars/boy-kufi-v1235.svg";
  $("#overviewGreeting").textContent="As-salāmu ʿalaykum, "+address()+". Heute entdecken wir gemeinsam neues Wissen.";
