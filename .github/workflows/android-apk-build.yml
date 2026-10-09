@@ -1,0 +1,85 @@
+name: Build Android APK (native)
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feat/android-native-apk-reliability-20261009
+    paths:
+      - 'android/**'
+      - '.github/workflows/android-apk-build.yml'
+  pull_request:
+    paths:
+      - 'android/**'
+      - '.github/workflows/android-apk-build.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: native-android-apk-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-debug-apk:
+    name: Compile installable Android test APK
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Checkout native Android source
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Prepare Android 36 platform and tools
+        run: |
+          echo "Using Android SDK: ${ANDROID_HOME}"
+          SDKMGR="$(find "$ANDROID_HOME/cmdline-tools" -name sdkmanager -type f | sort -V | tail -n 1)"
+          test -x "$SDKMGR"
+          echo "Using sdkmanager: $SDKMGR"
+          yes | "$SDKMGR" --licenses >/dev/null || true
+          "$SDKMGR" 'platforms;android-36' 'build-tools;35.0.0'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Compile native APK and execute unit tests
+        working-directory: android
+        run: bash ./gradlew --no-daemon --stacktrace :app:assembleDebug :app:testDebugUnitTest
+
+      - name: Verify APK output and SHA-256
+        run: |
+          test -s android/app/build/outputs/apk/debug/app-debug.apk
+          sha256sum android/app/build/outputs/apk/debug/app-debug.apk
+          ls -lh android/app/build/outputs/apk/debug/app-debug.apk
+
+      - name: Audit OneSignal worker status (read only)
+        if: always()
+        run: |
+          HEALTH_JSON="$(curl -fsS --max-time 20 'https://dar-admin-publisher.sero91ak.workers.dev/health' 2>/dev/null || echo '{}')"
+          export HEALTH_JSON
+          node - <<'NODE'
+          try {
+            const health = JSON.parse(process.env.HEALTH_JSON || '{}');
+            const reachable = health.service === 'dar-admin-publisher';
+            const hasOneSignalKey = health.hasOneSignalKey === true;
+            console.log('Push worker health: reachable=' + reachable + ', hasOneSignalKey=' + hasOneSignalKey);
+            if (!reachable || !hasOneSignalKey) {
+              console.log('::warning::Android push blocked: worker unreachable or missing OneSignal key. No secrets were changed.');
+            }
+          } catch (_) {
+            console.log('::warning::Worker health response unavailable or invalid; no secrets were changed.');
+          }
+          NODE
+
+      - name: Publish installable DEBUG APK for device testing
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-al-tawhid-android-debug-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+          retention-days: 14

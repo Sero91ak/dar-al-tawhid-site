@@ -13,12 +13,12 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace = "de.daraltawhid.app"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "de.daraltawhid.app"
         minSdk = 26
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
         resourceConfigurations += listOf("de", "en")
@@ -78,4 +78,6 @@ dependencies {
     implementation("androidx.webkit:webkit:1.12.1")
     implementation("com.google.android.material:material:1.12.0")
     implementation("com.onesignal:OneSignal:5.1.28")
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("org.robolectric:robolectric:4.16.1")
 }

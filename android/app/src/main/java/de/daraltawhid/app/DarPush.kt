@@ -6,7 +6,6 @@ import android.os.Build
 import android.provider.Settings
 import com.onesignal.OneSignal
 import com.onesignal.debug.LogLevel
-import org.json.JSONObject
 import java.util.UUID
 
 object DarPush {
@@ -44,19 +43,23 @@ object DarPush {
         OneSignal.User.pushSubscription.optIn()
     }
 
+    fun enableAfterPermission() {
+        // SDK initialization belongs to Application.onCreate. Do not reinitialize
+        // it when POST_NOTIFICATIONS returns from the system permission dialog.
+        OneSignal.User.pushSubscription.optIn()
+    }
+
     fun subscriptionId(): String = OneSignal.User.pushSubscription.id.orEmpty()
 
     fun pushToken(): String = OneSignal.User.pushSubscription.token.orEmpty()
 
     fun applyWebSettings(json: String) {
+        // Only the documented adult-app settings may become OneSignal tags.
+        // The generic JSON->tags implementation could overwrite native_android
+        // with an arbitrary caller-provided platform and omitted scheduler fields.
         runCatching {
-            val obj = JSONObject(json)
-            val tags = mutableMapOf<String, String>()
-            obj.keys().forEach { key ->
-                val value = obj.opt(key) ?: return@forEach
-                tags[key] = value.toString()
-            }
-            if (tags.isNotEmpty()) OneSignal.User.addTags(tags)
+            val tags = DarPushTagMapper.fromJson(json)
+            OneSignal.User.addTags(tags)
         }
     }
 }
