@@ -131,8 +131,27 @@ function validateDocument(g, spec, profile = "boy", metadata = {}) {
   if (!nodes.length) fail("No GLB scene nodes.");
   const skin = skins[0] || {};
   const joints = Array.isArray(skin.joints) ? skin.joints : [];
-  const boneSet = new Set(joints.map(i => nodes[i]?.name).filter(Boolean));
+  const jointNames=joints.map(i=>nodes[i]?.name);
+  const boneSet = new Set(jointNames.filter(Boolean));
+  if(jointNames.some(name=>typeof name!=="string"||!name.trim()) ||
+     boneSet.size!==jointNames.length)
+    fail("Missing or duplicate joint names in primary skin.");
   for (const name of required) if (!boneSet.has(name)) fail("Missing required rig bone: " + name);
+  // A named list alone does NOT make a skeleton: every primary skin bone must
+  // reach the actual Hips root via a valid, non-cyclic node parent chain.
+  if(rootJointIndices.length===1) {
+    const root=rootJointIndices[0];
+    if(!joints.includes(root))fail("Primary skin does not include the Hips root.");
+    for(const joint of joints){
+      if(!Number.isInteger(joint)||!nodes[joint])continue;
+      let cursor=joint,seen=new Set(),connected=false;
+      while(cursor!==undefined&&!seen.has(cursor)){
+        if(cursor===root){connected=true;break;}
+        seen.add(cursor);cursor=parentByNode.get(cursor);
+      }
+      if(!connected)fail("Disconnected skin bone without Hips ancestor: "+(nodes[joint].name||joint));
+    }
+  }
   if (skin.inverseBindMatrices === undefined) fail("Missing inverseBindMatrices for skinned rig.");
   else {
     const bind = accessors[skin.inverseBindMatrices];
