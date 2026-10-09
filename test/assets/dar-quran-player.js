@@ -800,6 +800,7 @@
       url: engine.lastUrl,
       snap: snapAudio(a)
     });
+    var requestedAudioUrl = engine.lastUrl;
     var p = a.play();
     if (!p || !p.then) {
       engine.started = true;
@@ -807,7 +808,7 @@
       return;
     }
     p.then(function () {
-      if (gen !== playGen) return;
+      if (gen !== playGen || requestedAudioUrl !== engine.lastUrl) return;
       engine.started = true;
       engine.lastProgressAt = Date.now();
       state.playing = true;
@@ -817,7 +818,7 @@
       paintChrome();
       paintMini();
     }).catch(function (err) {
-      if (gen !== playGen) return;
+      if (gen !== playGen || requestedAudioUrl !== engine.lastUrl || !engine.wantPlay) return;
       var name = err && err.name;
       logAudio("play rejected", { name: name, message: err && err.message, snap: snapAudio(a) });
       if (name === "AbortError") {
