@@ -7286,6 +7286,18 @@
         "cloudflare/site-router.js"
       ],
       "expiresAt": "2026-11-30T23:59:00.000Z"
+    },
+    {
+      "id": "android-tv-parity-2026-10-09",
+      "approvedBy": "user-explicit-tv-app-1-to-1-apple-tv-2026-10-09",
+      "reason": "User installed native Android TV and reports incorrect screen vs existing Apple TV, asks exact layout/function alignment. Restore deleted Android TV source module from validated prior signed build; modify only Android TV native UI/navigation/background module, Android gradle settings and TV-only QA workflow; stage in PR, no iOS/Kids/Push changes and no public signed APK replacement before QA.",
+      "expiresAt": "2026-11-30T23:59:00.000Z",
+      "paths": [
+        "android/tv/",
+        "android/settings.gradle.kts",
+        ".github/workflows/android-tv-native-qa.yml",
+        "content/admin/change-scope-lock.json"
+      ]
     }
   ],
   "enabled": true
