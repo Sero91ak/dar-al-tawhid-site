@@ -55,7 +55,6 @@ function glbFixture(){
   quaternions.writeFloatLE(1,12);quaternions.writeFloatLE(1,28);
   const timeAccessor=add(times,"SCALAR",5126,2);
   const rotationAccessor=add(quaternions,"VEC4",5126,2);
-  const bin=Buffer.concat(parts);
   const nodes=bones.map(name=>({name}));
   const lookup=new Map(nodes.map((v,i)=>[v.name,i]));
   const edges={
@@ -95,6 +94,8 @@ function glbFixture(){
   for(const [name,i] of lookup)
     for(let axis=0;axis<3;axis++)
       parts[0].writeFloatLE(-restPosition(name)[axis],i*64+(12+axis)*4);
+  // Finalize BIN only AFTER rest offsets have been written to its matrix chunk.
+  const bin=Buffer.concat(parts);
   nodes.push({name:"Synthetic skinned test body; not original",mesh:0,skin:0});
   const animations=["Qiyam","Takbir"].map(name=>({name,
     channels:[{sampler:0,target:{node:0,path:"rotation"}}],
