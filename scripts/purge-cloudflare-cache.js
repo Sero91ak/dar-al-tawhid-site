@@ -134,8 +134,18 @@ async function verifyLiveHtmlOnce() {
   const testBuild = process.env.EXPECT_BUILD_TEST || process.env.EXPECT_TEST_BUILD || await readExpectedBuild("/test/version.json");
   const checks = [];
   if (PURGE_SCOPE === "both" || PURGE_SCOPE === "visitor") {
-    // Root document only — /index.html 307s to / and is not a separate asset.
-    checks.push({ label: "Besucher-App", expected: rootBuild, urls: [`${SITE_URL}/`] });
+    // Browser-Root und installierte Android-PWA sind absichtlich zwei verschiedene
+    // Oberflächen. Beide müssen nach einem Purge frisch sein.
+    checks.push({
+      label: "Öffentliche Website",
+      needles: ["DĀR AL TAWḤĪD", "desktop-overhaul"],
+      urls: [`${SITE_URL}/`]
+    });
+    checks.push({
+      label: "Android PWA",
+      needles: [rootBuild, "darDedicatedPwaBootV2", "__DAR_PWA_DEDICATED_APP=true"],
+      urls: [`${SITE_URL}/pwa/?pwa=1`]
+    });
   }
   if (PURGE_SCOPE === "both" || PURGE_SCOPE === "test") {
     checks.push({ label: "Dar Test", expected: testBuild, urls: [`${SITE_URL}/test/`] });
@@ -145,11 +155,12 @@ async function verifyLiveHtmlOnce() {
     let ok = false;
     for (const url of check.urls) {
       const { html, cf, status, finalUrl } = await fetchHtmlForVerify(url);
-      const hasBuild = html.includes(check.expected);
+      const needles = Array.isArray(check.needles) && check.needles.length ? check.needles : [check.expected];
+      const contentOk = status === 200 && needles.every((needle) => html.includes(String(needle || "")));
       console.log(
-        `Verify ${url} (${check.label}) → status=${status}, cf-cache=${cf}, expected=${check.expected}, build=${hasBuild}, final=${finalUrl}`
+        `Verify ${url} (${check.label}) → status=${status}, cf-cache=${cf}, expected=${needles.join(" | ")}, content=${contentOk}, final=${finalUrl}`
       );
-      ok = ok || hasBuild;
+      ok = ok || contentOk;
     }
     allOk = allOk && ok;
   }
@@ -217,6 +228,10 @@ function testPurgeFiles() {
   const files = [
     `${SITE_URL}/`,
     `${SITE_URL}/index.html`,
+    `${SITE_URL}/pwa/`,
+    `${SITE_URL}/pwa/?pwa=1`,
+    `${SITE_URL}/desktop-preview/index.html`,
+    `${SITE_URL}/manifest.json`,
     `${SITE_URL}/version.json`,
     `${SITE_URL}/service-worker.js`,
     `${SITE_URL}/content/updates/current.json`,
