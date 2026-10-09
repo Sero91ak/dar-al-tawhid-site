@@ -63,7 +63,10 @@
       "forbidAnimatedScale": true,
       "forbidVideoPlanesAndBillboards": true,
       "allowReparenting": false,
-      "poseChangesOnlyRotationAndTranslation": true
+      "poseChangesOnlyRotationAndTranslation": true,
+      "forbidNonRootJointTranslation": true,
+      "forbidInternalSkeletonHelperTranslation": true,
+      "allowTranslationForSkeletonRoot": "Hips"
     },
     "quality": {
       "noLegLengthChangeBetweenPoses": true,
