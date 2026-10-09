@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1294";
-const KIDS_BUILD_ID="kids-shell-v189-home-tablet1294";
+const CACHE_NAME="dar-al-tawhid-kids-v1295";
+const KIDS_BUILD_ID="kids-shell-v190-home-measured1295";
 const DUA_AUDIO_RUNTIME="1244";
 // QUIZ_HOME_RESTORE_V1225: refresh installed PWAs with the restored Quiz entry.
 const CORE_PRECACHE=[
@@ -11,8 +11,8 @@ const CORE_PRECACHE=[
   "/kids/assets/kids-salah-v1272/maghrib.png?v=1277",
   "/kids/assets/kids-salah-v1272/isha.png?v=1277",
   "/kids/assets/kids-salah-v1262/cinematic-still.jpg",
-  "/kids/prayer-stage-v1261.css?v=1294",
-  "/kids/prayer-stage-v1261.js?v=1287",
+  "/kids/prayer-stage-v1261.css?v=1295",
+  "/kids/prayer-stage-v1261.js?v=1295",
   "/kids/assets/kids-home-v1222/dar-title-reference-clean.svg?v=1229",
   "/kids/assets/kids-home-v1219/dar-title-reference.png?v=1229",
   "/kids/assets/kids-home-v1219/dar-title-reference.png?v=1229",
