@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v195-launch-fit1300",
-  "label": "KIDS · V1.09.16",
+  "buildId": "kids-shell-v196-launch-measure1301",
+  "label": "KIDS · V1.09.17",
   "releasedAt": "2026-10-09T18:46:00Z",
-  "note": "KIDS V1.09.16: Der Home-Startbildschirm nutzt vor der ersten Größenmessung bereits eine konservative, an die tatsächliche Viewporthöhe angepasste Hero-Höhe. Die bestehende präzise Messung von Gebetszeiten-Button und Tab-Leiste übernimmt danach ohne dauerhaftes Vorkappen. Dadurch weniger sichtbares Versetzen beim Öffnen, insbesondere auf kürzeren iPhones und Android-Smartphones. Originales Moscheebild, Statusleistendurchlauf, Gebetszeiten und Navigation bleiben unverändert. Extreme Kleinbildschirme behalten natürliches Scrollen.",
+  "note": "KIDS V1.09.17: Erste Startseitenmessung nimmt die tatsächlich gerenderte Hero-Höhe als Basis und rechnet die zusätzliche Safe-Area-Bildüberdeckung korrekt heraus. Die responsive Gebetszeiten-CTA wird damit ohne künstlichen Höhenzuwachs beim ersten Öffnen gegen die reale Tab-Leistenposition angepasst. Besonders auf kürzeren iPhones, Android-Smartphones und iPads in Querformat soll der sichtbare Nachsprung reduziert werden. Originalbild, Zeiten, Audio, Wischsteuerung und Navigation unverändert. Auf sehr kleinen Displays bleibt Scrollen möglich.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1300",
+    "serviceWorkerCache": "v1301",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
