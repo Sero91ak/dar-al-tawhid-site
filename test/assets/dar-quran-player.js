@@ -823,19 +823,27 @@
       var name = err && err.name;
       logAudio("play rejected", { name: name, message: err && err.message, snap: snapAudio(a) });
       if (name === "AbortError") {
-        engine.abortRetries = (engine.abortRetries || 0) + 1;
-        if (engine.abortRetries <= 2) {
-          setTimeout(function () {
-            if (gen !== playGen || !engine.wantPlay) return;
-            runPlay(a, gen);
-          }, 180);
-        } else {
-          engine.wantPlay = false;
-          state.playing = false;
-          state.error = "Wiedergabe unterbrochen. Tippe erneut auf Wiedergabe.";
-          paintError();
-          paintChrome();
+        // A source change or newer user action may interrupt a pending play().
+        // Do not report a failure if the audio is already running.
+        if (!engine.wantPlay || a !== audioEl()) return;
+        if (!a.paused) {
+          state.playing = true;
+          state.sessionActive = true;
           syncPublicAudioState(a);
+          return;
+        }
+        engine.abortRetries = (engine.abortRetries || 0) + 1;
+        if (engine.abortRetries === 1) {
+          var interruptedSrc = String(a.currentSrc || a.getAttribute("src") || "");
+          setTimeout(function () {
+            if (gen !== playGen || !engine.wantPlay || a !== audioEl()) return;
+            var stillSrc = String(a.currentSrc || a.getAttribute("src") || "");
+            if (stillSrc !== interruptedSrc || !a.paused) return;
+            runPlay(a, gen);
+          }, 400);
+        } else {
+          // This source failed twice: move to the next existing provider.
+          tryFallback();
         }
         return;
       }
@@ -968,7 +976,7 @@
     if (a.readyState >= 1) resumeFallback();
   }
   function tryFallback() {
-    if (!engine.blobTried) {
+    if (!engine.blobTried && isOffline()) {
       engine.blobTried = true;
       var genSaved = playGen;
       var sSaved = state.surah;
@@ -1017,6 +1025,7 @@
         allowAdvance = false;
         engine.lastUrl = hit.url;
         setAudioSrc(audioEl(), hit.url);
+        engine.abortRetries = 0;
         logAudio("fallback reciter", snapAudio(audioEl()));
         if (engine.wantPlay) runPlay(audioEl(), playGen);
         paintChrome();
@@ -1030,6 +1039,7 @@
     engine.lastUrl = urls[urlIndex];
     logAudio("fallback url", { url: engine.lastUrl, index: urlIndex });
     setFallbackSourceAtPosition(a, engine.lastUrl);
+    engine.abortRetries = 0;
     logAudio("src changed", snapAudio(a));
     if (engine.wantPlay) runPlay(a, playGen);
   }
@@ -1127,7 +1137,7 @@
     var failedUrl = engine.lastUrl;
     engine.fallbackTimer = setTimeout(function () {
       engine.fallbackTimer = 0;
-      if (failedGeneration !== playGen || failedUrl !== engine.lastUrl) return;
+      if (failedGeneration !== playGen || failedUrl !== engine.lastUrl || !engine.wantPlay) return;
       var el = audioEl();
       if (engine.started && !el.paused && el.readyState >= 2) return;
       if (el.readyState >= 3) return;
