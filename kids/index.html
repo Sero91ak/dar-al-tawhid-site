@@ -5768,7 +5768,8 @@ function renderQuizQuestion(){
     '<div id="quizHelp" class="quiz-help">'+help+'</div>'+
     '<div id="quizAnswers" class="quiz-answers" role="group" aria-label="Antworten"></div>'+
     '<div id="quizFeedback" class="quiz-feedback" aria-live="polite"></div>'+
-    '<div id="quizExplanation" class="quiz-explanation"></div>'+
+    '<div id="quizExplanation" class="quiz-explanation"></div>'+ 
+    '<div id="quizTermLearning" hidden></div>'+ 
     '<div id="quizSource" class="quiz-source"></div>'+
     '<button id="quizNext" class="quiz-next" type="button">'+(currentQuizIndex===currentQuiz.length-1?'Auswertung ansehen':'Weiter')+' ›</button>';
   var scene=document.getElementById("quizScene");
@@ -5829,6 +5830,14 @@ function chooseQuizAnswer(index,button){
     if(explanation&&q.explanation){
       explanation.textContent=String(q.explanation);
       explanation.classList.add("show");
+    }
+    // Erklärt Fachbegriffe beidseitig, ohne die freigegebenen Quiz-/Audio-Texte zu verändern.
+    var termSlot=document.getElementById("quizTermLearning");
+    if(termSlot&&window.DARKidsTermLearning&&typeof window.DARKidsTermLearning.render==="function"){
+      var correctTerms=(Array.isArray(q.answers)?q.answers:[]).filter(function(a){return a.correct}).map(function(a){return a.label||""});
+      window.DARKidsTermLearning.render(termSlot,
+        [q.question,q.explanation,q.topic,q.category].concat(correctTerms).join(" "),
+        {age:currentKidsQuizAgeBand(),max:2});
     }
     var src=document.getElementById("quizSource");
     if(src)src.innerHTML='<strong>Quelle:</strong> '+String(q.source||"");
@@ -7534,7 +7543,8 @@ html[data-view="stories"] #view-stories > :last-child{
 <script src="/kids/mubashshirun-stories.js?v=31"></script>
 <script src="/kids/sahabiyyat-stories.js?v=23"></script>\n<script src="/kids/deen-lessons.js?v=4"></script>
 <script src="/kids/global-story-glow-v1216.js?v=1239"></script>
-<script src="/kids/dua-hub-v1219.js?v=1278" data-kids-dua-hub="1259"></script>
+<script src="/kids/term-learning.js?v=1"></script>
+<script src="/kids/dua-hub-v1219.js?v=1279" data-kids-dua-hub="1259"></script>
 <script src="/kids/story-hub.js?v=25"></script>
 <script src="/kids/kids-age-typography.js?v=3"></script>
 <script src="/kids/quiz-library.js?v=9"></script>
