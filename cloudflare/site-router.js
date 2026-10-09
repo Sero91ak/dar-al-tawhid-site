@@ -339,17 +339,35 @@ function androidNativeToolsAddon() {
 }
 
 // DAR_ANDROID_PWA_INSTALL_RUNTIME_V3_20261009
-// DAR_ANDROID_PWA_DIRECT_INSTALL_TAP_CLEAN_LIVE_V2_20261009
+// DAR_ANDROID_PWA_DIRECT_INSTALL_TAP_CLEAN_LIVE_V3_20261009
 function publicWebsiteAddon() {
   return `
-<style id="darPublicTapCleanV2">
+<style id="darPublicTapCleanV3">
 *{-webkit-tap-highlight-color:transparent!important}
 @media(hover:none) and (pointer:coarse){
  a,button,[role="button"],summary,[tabindex],label,input,select,textarea{
-  -webkit-tap-highlight-color:transparent!important;
+  -webkit-tap-highlight-color:rgba(0,0,0,0)!important;
  }
  a:focus,button:focus,[role="button"]:focus,summary:focus,[tabindex]:focus{
   outline:none!important;
+ }
+ a:active,button:active,[role="button"]:active,.desktop-link:active,.more-row:active,.category-card:active,.feature-card:active,.header-action:active,.main-nav a:active{
+  filter:none!important;
+  opacity:1!important;
+  box-shadow:none!important;
+  transform:none!important;
+ }
+ a:active::before,a:active::after,
+ button:active::before,button:active::after,
+ [role="button"]:active::before,[role="button"]:active::after,
+ .desktop-link:active::before,.desktop-link:active::after,
+ .more-row:active::before,.more-row:active::after,
+ .category-card:active::before,.category-card:active::after,
+ .feature-card:active::before,.feature-card:active::after{
+  opacity:0!important;
+  box-shadow:none!important;
+  filter:none!important;
+  background:transparent!important;
  }
 }
 </style>
@@ -560,9 +578,36 @@ function publicWebsiteAddon() {
   document.addEventListener("click",function(event){
     var btn=event.target&&event.target.closest?event.target.closest("[data-dar-pwa-install]"):null;
     if(!btn)return;
+
+    // Prefer the stored install event immediately inside this tap.
+    // This keeps Chrome's transient user activation intact.
+    var directEvent=window.__darEarlyInstallPrompt||deferredInstall;
+    if(directEvent&&!window.__darInstallPromptBusy){
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      window.__darInstallPromptBusy=true;
+      try{
+        directEvent.prompt();
+        Promise.resolve(directEvent.userChoice).then(function(choice){
+          deferredInstall=null;
+          window.__darEarlyInstallPrompt=null;
+          window.__darInstallPromptBusy=false;
+          if(choice&&choice.outcome==="accepted")setPwaHint("Installation bestätigt.");
+          else setPwaHint("Installation wurde nicht bestätigt.");
+        }).catch(function(){
+          deferredInstall=null;
+          window.__darEarlyInstallPrompt=null;
+          window.__darInstallPromptBusy=false;
+        });
+        return;
+      }catch(eDirect){
+        window.__darInstallPromptBusy=false;
+      }
+    }
+
     event.preventDefault();
     window.darInstallAndroidPwa();
-  });
+  },true);
 
   document.addEventListener("click",function(event){
     var iconBtn=event.target&&event.target.closest?event.target.closest("button[data-dar-pwa-icon]"):null;
