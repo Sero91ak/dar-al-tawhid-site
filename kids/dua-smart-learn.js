@@ -575,7 +575,7 @@
         audio.onended=function(){finish(true)};
         audio.onerror=function(){finish(false)};
         try{audio.load()}catch(e){}
-        if((mode==="full"||mode==="slow")&&root&&root.classList.contains("open")&&currentDua){attachPhraseFollow(currentDua,false,token)}
+        if((mode==="full"||mode==="slow")&&root&&root.classList.contains("open")&&currentDua){attachPhraseFollow(currentDua,mode==="slow",token)}
         var p=audio.play();
         if(p&&p.catch)p.catch(function(){finish(false)});
       }catch(e){finish(false)}
