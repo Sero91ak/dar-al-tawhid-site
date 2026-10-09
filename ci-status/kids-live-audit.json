@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-10-09T09:04:10Z",
+  "timestamp": "2026-10-09T09:05:12Z",
   "trigger": "workflow_run",
   "finishedDeployConclusion": "cancelled",
-  "finishedDeployRun": "37908808622",
+  "finishedDeployRun": "37908834947",
   "live": {
     "buildId": "kids-shell-v179-trilingual1283",
     "label": "KIDS · V1.09.00",
@@ -26,12 +26,21 @@
   "lastDeployRuns": [
     {
       "conclusion": null,
+      "created_at": "2026-10-09T09:04:46Z",
+      "head_sha": "4d11cf9f6b4bf949c4fc9ba6208684e3c0e78ec4",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37908957258",
+      "id": 37908957258,
+      "status": "pending",
+      "updated_at": "2026-10-09T09:04:47Z"
+    },
+    {
+      "conclusion": "cancelled",
       "created_at": "2026-10-09T09:03:38Z",
       "head_sha": "f7aabee437f548fdcfa304807309f557ca6d16ec",
       "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37908834947",
       "id": 37908834947,
-      "status": "pending",
-      "updated_at": "2026-10-09T09:03:39Z"
+      "status": "completed",
+      "updated_at": "2026-10-09T09:04:47Z"
     },
     {
       "conclusion": "cancelled",
@@ -48,8 +57,8 @@
       "head_sha": "c3db9d2b9d4e7022487184f3733080dda03e3862",
       "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37908727082",
       "id": 37908727082,
-      "status": "queued",
-      "updated_at": "2026-10-09T09:03:22Z"
+      "status": "in_progress",
+      "updated_at": "2026-10-09T09:05:10Z"
     },
     {
       "conclusion": "cancelled",
@@ -68,15 +77,6 @@
       "id": 37908680785,
       "status": "completed",
       "updated_at": "2026-10-09T09:02:22Z"
-    },
-    {
-      "conclusion": "cancelled",
-      "created_at": "2026-10-09T09:02:03Z",
-      "head_sha": "0057fe3fc7537b91956624dc728cbcf4303b9929",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37908669931",
-      "id": 37908669931,
-      "status": "completed",
-      "updated_at": "2026-10-09T09:02:11Z"
     }
   ]
 }
