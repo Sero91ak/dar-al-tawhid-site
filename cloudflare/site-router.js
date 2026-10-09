@@ -275,9 +275,11 @@ function androidNativeToolsAddon() {
 (function(){
   "use strict";
   if(!/DarAlTawhidAndroid/i.test(String(navigator.userAgent||"")))return;
-  function onSettingsRoute(){
+  function currentToolsRoute(){
     var hash=String(location.hash||"").toLowerCase();
-    return /(^|[#/])settings(?:$|[/?&])/.test(hash)||document.body.classList.contains("is-settings-route")||!!document.querySelector(".settings-one-page");
+    if(/(^|[#/])settings(?:$|[/?&])/.test(hash)||document.body.classList.contains("is-settings-route")||!!document.querySelector(".settings-one-page"))return "settings";
+    if(/(^|[#/])more(?:$|[/?&])/.test(hash)||document.body.classList.contains("is-more-route")||!!document.querySelector(".more-page"))return "more";
+    return "";
   }
   function requestWidget(kind,label){
     var status=document.getElementById("darAndroidNativeToolsStatus");
@@ -292,8 +294,11 @@ function androidNativeToolsAddon() {
     }
   }
   function ensure(){
-    if(!onSettingsRoute())return;
-    var page=document.querySelector(".settings-one-page")||document.querySelector(".settings-page")||document.getElementById("appView");
+    var route=currentToolsRoute();
+    if(!route)return;
+    var page=route==="settings"
+      ? (document.querySelector(".settings-one-page")||document.querySelector(".settings-page")||document.getElementById("appView"))
+      : (document.querySelector(".more-page")||document.querySelector('[data-view="more"]')||document.getElementById("appView"));
     if(!page||document.getElementById("darAndroidNativeTools"))return;
     var section=document.createElement("section");
     section.id="darAndroidNativeTools";
@@ -323,7 +328,7 @@ function androidNativeToolsAddon() {
   window.addEventListener("pageshow",schedule);
   document.addEventListener("dar:render",schedule);
   try{
-    new MutationObserver(function(){if(onSettingsRoute())schedule()}).observe(document.documentElement,{childList:true,subtree:true});
+    new MutationObserver(function(){if(currentToolsRoute())schedule()}).observe(document.documentElement,{childList:true,subtree:true});
   }catch(e){}
 })();
 <\\/script>`;
