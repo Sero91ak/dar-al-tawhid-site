@@ -43,3 +43,22 @@ Die zwei SHA-256-Werte werden vor der Bildmessung erzwungen; kein Vergleich mit 
 5. Reale iPad- und iPhone-WebGL-/Touch-Prüfung und ausdrückliche Nutzerfreigabe vor jeder Veröffentlichung.
 
 **Freigabe: NEIN. Merge, Live-Deploy, kostenpflichtige KI-Generierung: NEIN.**
+
+## 5. Zusätzlicher Schutz des nächsten Sculpt-Kandidaten und vollständiger Release-Audit (09.10.)
+
+- `verify-animation-rig-freeze.cjs`: Vergleicht die **exakte, SHA-256-gepinnte V7.7-Basis** mit einem späteren tatsächlich vorhandenen GLB. Erfasst Knochen-/Bindpose-Struktur, Rohdaten der Qiyām-/Takbīr-Animationssampler und Skinning-JOINTS-/WEIGHTS-Zuordnungen getrennt. **POSITION-only**-Geometrieänderungen sind bewusst zulässig, Änderungen an Skelett, Skin oder Clips werden als Regression gemeldet.
+- `test-animation-rig-freeze.cjs`: 12 synthetische Abwehr- und Zulassungstests in isolierter V8-Umgebung bestanden; dort wurden Buffer/SHA-Funktionen nachgebildet, daher **noch kein Node.js-Dateisystem- oder echter SHA-256-/V7.7-Test**.
+- `audit-project-completion.cjs`: Der reine JSON-Audit liefert niemals `ready=true`. Erst `--require-ready` mit **beiden** tatsächlichen, unabhängig geprüften Jungen- und Mädchen-GLBs erlaubt überhaupt eine technische Bereit-Prüfung; jeweils exakte SHA-256-Dateibytes und Größe gegen das menschlich bestätigte Manifest werden geprüft. Die erforderliche menschliche Sicht- und fachliche Freigabe bleibt separat bestehen.
+- `test-audit-project-completion.cjs`: 17 negativ/positiv ausgerichtete Status-/CLI-Tests bestanden in isolierter V8-Umgebung mit simuliertem Dateizugriff. Kein echter GLB der beiden Profile wurde überprüft.
+
+**Befehle, sobald die echten Dateien in einer lokalen Node.js-Umgebung vorliegen:**
+
+```bash
+node kids/mein-gebet/rigging/validate-glb.test.cjs
+node kids/mein-gebet/rigging/test-audit-project-completion.cjs
+node kids/mein-gebet/rigging/test-animation-rig-freeze.cjs
+node kids/mein-gebet/rigging/verify-animation-rig-freeze.cjs /PFAD/V77.glb /PFAD/KANDIDAT.glb
+node kids/mein-gebet/rigging/audit-project-completion.cjs --require-ready --boy-glb=/PFAD/BOY.glb --girl-glb=/PFAD/GIRL.glb
+```
+
+**Erwartetes aktuelles Ergebnis:** Die synthetischen Unit-Tests können erfolgreich sein; die echten Modell-, Kamera- und Freigabeprüfungen müssen **BLOCKED / nicht bestanden** melden, bis die exakt gehashten Originaldaten und die Einzelprüfungen existieren. Kein automatischer Merge/Deploy, keine falsche 90%-Behauptung.
