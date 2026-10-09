@@ -1285,8 +1285,50 @@ body[data-profile="girl"] .today-class .today-button{background:linear-gradient(
 }
 @media(prefers-reduced-motion:reduce){.lesson-stage .pill,.lesson-stage .choice-button{transform:none!important;transition:none!important}}
 
+
+/* V6.9.1 – shorter pathway, recognizable learning companion */
+.lesson-main .lesson-topline .back-pill{border:1px solid rgba(231,214,163,.35);background:rgba(255,255,255,.07);border-radius:14px;padding:10px 14px;font-size:14px;font-weight:850}
+.lesson-main .stage-tracker{border-radius:16px;padding:11px 5px;margin:0 0 8px;background:rgba(255,255,255,.035)}
+.lesson-main .stage-tracker .tracker-item{min-width:0}
+.lesson-stage .academy-buddy-guide{display:flex;align-items:center;gap:11px;background:#fff!important;
+ border:1px solid var(--kids-border);border-radius:19px;padding:11px 12px;margin-bottom:13px;
+ box-shadow:0 4px 12px rgba(21,69,75,.055)}
+.lesson-stage .academy-buddy-guide img{flex:none;width:51px;height:51px;object-fit:contain;border-radius:14px;
+ background:linear-gradient(160deg,#effaf8,#ffedd1)}
+body[data-profile="girl"] .lesson-stage .academy-buddy-guide img{background:linear-gradient(160deg,#f6e6fb,#ffefed)}
+.lesson-stage .academy-buddy-guide strong{display:block;font-size:clamp(14px,2vw,17px);
+ color:#173b49;font-weight:850;line-height:1.35}
+.lesson-stage .academy-buddy-guide span{display:block;font-size:13px;color:#55717c;line-height:1.4;margin-top:3px}
+.lesson-stage .answer-mode-caption{margin:8px 0 9px;color:#325664!important;font-weight:830;font-size:14px}
+.lesson-stage .choice-audio-help{font-size:12px!important;line-height:1.3!important;margin:4px 0 10px!important}
+.lesson-stage .choice-listen{border-radius:16px!important}
+.lesson-stage .recap-reflection h3{font-size:clamp(18px,3vw,24px);line-height:1.25}
+.lesson-stage .academy-completion-kicker{width:max-content;border-radius:99px;padding:9px 14px;
+ background:#e6f5ec;color:#246e59!important;border:1px solid #b9dbc6;letter-spacing:0}
+body[data-profile="girl"] .lesson-stage .academy-completion-kicker{background:#f8e7f8;color:#84538c!important;border-color:#e3c5e4}
+.lesson-stage .recap-reflection .answers .pill:active{transform:scale(.985)}
+.lesson-stage .recap-item .recap-label{font-size:12px}
+.lesson-stage .answer-extra[hidden],.lesson-stage .choices[hidden]{display:none!important}
+@media(max-width:700px){
+ body[data-academy-step] .lesson-main .lesson-heading{display:none!important}
+ .lesson-main .lesson-topline{padding:3px 0 6px}
+ .lesson-main .lesson-topline .back-pill{min-height:43px}
+ .lesson-main .stage-tracker{scroll-margin-top:calc(env(safe-area-inset-top) + 12px)}
+ .lesson-stage .academy-buddy-guide img{width:47px;height:47px}
+ .lesson-stage .academy-buddy-guide{margin-bottom:11px;padding:9px}
+ .lesson-stage .academy-buddy-guide strong{font-size:14px}
+ .lesson-stage .academy-buddy-guide span{font-size:12px}
+ .lesson-stage .answer-mode-caption{font-size:13px}
+ .lesson-stage .question-prompt-card{border-radius:18px}
+ .lesson-stage .choice-row{gap:7px}
+ .lesson-stage .choice-button{padding:13px!important;font-size:clamp(16px,4.25vw,18px)}
+ .lesson-stage .choice-button[aria-pressed="true"]{padding-right:40px!important}
+ .lesson-stage .recap-reflection{margin-bottom:12px}
+}
+@media(min-width:701px){.lesson-stage .academy-buddy-guide{max-width:740px}}
+
 </style></head>
-<body data-profile="boy" data-preview-release="V6.9-20261010" data-preview-deploy="v6.9-fun-and-simple"><main class="wrap">
+<body data-profile="boy" data-preview-release="V6.9.1-20261010" data-preview-deploy="v6.9.1-learning-buddy"><main class="wrap">
 
 <header class="academy-header">
  <div class="academy-brand"><div class="brand">DĀR AL TAWḤĪD · KIDS</div><div class="stage">Dein Unterricht · Qurʾān & Sunnah</div></div>
@@ -1342,7 +1384,7 @@ body[data-profile="girl"] .today-class .today-button{background:linear-gradient(
 </section>
 </div><p class="teacher-explainer" data-spoken>Allah befiehlt uns, mit den Wahrhaftigen zu sein. Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt. Deshalb sollen wir ehrlich sprechen und uns um gutes Verhalten bemühen.</p><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="2">Deutsche Erklärung anhören</button><span class="voice-note">Qurʾān-Rezitation über den eigenen Button links am arabischen Text.</span></div></section>
   <section class="lesson-stage" data-lesson-step="3" aria-labelledby="practiceTitle" hidden><div class="question-top"><span class="kicker">Schritt 4 · Jetzt bist du dran</span><span class="question-index" id="questionIndex">Frage 1 von 3</span></div><h2 id="practiceTitle">Was würdest du tun?</h2><div class="progress"><span id="bar"></span></div>
-   <div class="question-panel" id="academyQuestionPanel"><div class="question-prompt-card"><span class="question-kicker">HÖREN · NACHDENKEN · ANTWORTEN</span><p id="question" class="question-prompt"></p><button id="repeat" class="pill" type="button">▶ Frage anhören</button></div><div class="answer-interaction"><p class="answer-mode-caption">Wähle, wie du antworten möchtest.</p><p class="small choice-audio-help" id="choiceAudioHelp" hidden>Tippe auf „Hören“, um dir eine Antwort vorlesen zu lassen. Das wählt noch keine Antwort aus.</p><div class="choices" id="choices" role="group" aria-label="Antwortmöglichkeiten"></div>
+   <div class="question-panel" id="academyQuestionPanel"><div class="question-prompt-card"><div class="academy-buddy-guide"><img id="academyBuddyAvatar" src="/kids/assets/profile-avatars/boy-kufi-v1235.svg" alt="" aria-hidden="true" width="51" height="51"><div><strong id="academyBuddyTitle">Du schaffst das!</strong><span id="academyBuddyText">Du kannst dir die Frage anhören.</span></div></div><span class="question-kicker">DEINE FRAGE</span><p id="question" class="question-prompt"></p><button id="repeat" class="pill" type="button">▶ Frage anhören</button></div><div class="answer-interaction"><p class="answer-mode-caption" id="answerModeCaption">So kannst du antworten:</p><p class="small choice-audio-help" id="choiceAudioHelp" hidden>🔊 Hören liest nur vor – tippe auf die Antwort, um sie auszuwählen.</p><div class="choices" id="choices" role="group" aria-label="Antwortmöglichkeiten"></div>
     <div class="answer-options" id="answerOptions"><button type="button" class="pill answer-open" id="openWrite">✎ Schreiben</button><button type="button" class="pill answer-open" id="openVoice">◉ Sprechen</button></div>
     <div class="answer-extra" id="answerExtra" hidden><label for="answer" id="answerLabel">Deine Antwort</label><textarea id="answer" spellcheck="true" maxlength="550" placeholder="Ich würde ..."></textarea><div class="voice-actions"><button type="button" class="pill accent" id="mic" hidden>Aufnahme starten</button><button type="button" class="pill" id="cancelMic" hidden>Aufnahme beenden</button><span id="recordingIndicator" class="recording-indicator" hidden aria-live="polite"><span class="recording-dot" aria-hidden="true"></span><span id="recordingTime">00:00</span></span></div><p class="small" id="micInfo" aria-live="polite">Tippe auf „Aufnahme starten“, wenn du bereit bist.</p><div class="voice-preview" id="voicePreview" hidden><label for="voicePlayback">Deine gesprochene Antwort</label><audio id="voicePlayback" controls preload="metadata" playsinline></audio><button type="button" class="pill primary voice-play-button" id="voicePlayButton" aria-pressed="false">▶ Meine Antwort anhören</button><p class="small voice-play-state" id="voicePlayState" role="status" aria-live="polite">Nach der Aufnahme kannst du dir deine Stimme hier anhören.</p><button type="button" class="pill voice-retake" id="voiceRetake">Noch einmal sprechen</button><p class="small">Nur auf diesem Gerät zum Anhören und Nachdenken. Deine Stimme wird hier nicht in Text umgewandelt oder inhaltlich bewertet. Nach der nächsten Frage wird die Aufnahme verworfen.</p></div></div>
     <div class="answer-bottom"><button id="check" class="pill primary" type="button">Antwort prüfen</button><button id="hint" class="pill" type="button">Kleiner Hinweis</button></div><div class="response" aria-live="polite" id="feedback">Du darfst in Ruhe nachdenken.</div><button type="button" class="pill primary" id="retryChoice" hidden>Noch einmal versuchen</button>
@@ -1350,7 +1392,7 @@ body[data-profile="girl"] .today-class .today-button{background:linear-gradient(
     </div>
    </div>
   </section>
-  <section class="lesson-stage" data-lesson-step="4" aria-labelledby="recapTitle" hidden><div class="academy-completion-kicker">✦ Dein Unterricht ist geschafft</div><span class="kicker">Schritt 5 · Das nehme ich mit</span><h2 id="recapTitle">Das habe ich heute gelernt</h2><div class="recap-lesson"><div class="recap-item"><span class="recap-label">1 · Das merke ich mir</span><p class="stage-lead"><strong>Wahrhaftigkeit</strong> bedeutet, ehrlich zu sprechen.</p></div><div class="recap-item"><span class="recap-label">2 · Qurʾān und Sunnah</span><p>Wir haben gelernt, dass Allah uns aufruft, mit den Wahrhaftigen zu sein, und dass der Prophet ﷺ die Wahrhaftigkeit als Weg zur Rechtschaffenheit erklärte.</p></div><div class="recap-item"><span class="recap-label">3 · So handle ich</span><p>Wenn mir ein Fehler passiert, sage ich die Wahrheit und versuche, ihn wiedergutzumachen.</p></div></div>
+  <section class="lesson-stage" data-lesson-step="4" aria-labelledby="recapTitle" hidden><div class="academy-completion-kicker">★ Geschafft! Das hast du gelernt</div><span class="kicker">Schritt 5 · Das nehme ich mit</span><h2 id="recapTitle">Das habe ich heute gelernt</h2><div class="recap-lesson"><div class="recap-item"><span class="recap-label">1 · Das merke ich mir</span><p class="stage-lead"><strong>Wahrhaftigkeit</strong> bedeutet, ehrlich zu sprechen.</p></div><div class="recap-item"><span class="recap-label">2 · Qurʾān und Sunnah</span><p>Wir haben gelernt, dass Allah uns aufruft, mit den Wahrhaftigen zu sein, und dass der Prophet ﷺ die Wahrhaftigkeit als Weg zur Rechtschaffenheit erklärte.</p></div><div class="recap-item"><span class="recap-label">3 · So handle ich</span><p>Wenn mir ein Fehler passiert, sage ich die Wahrheit und versuche, ihn wiedergutzumachen.</p></div></div>
    <p id="summaryText" class="feedback-final"></p><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="4">Merksatz anhören</button></div>
    <div class="recap-reflection"><h3>Wie geht es dir mit diesem Thema?</h3><p>Du darfst es jederzeit noch einmal üben.</p><div class="answers"><button class="pill" type="button" data-reflect="ready">Ich habe es verstanden</button><button class="pill" type="button" data-reflect="help">Ich möchte mehr üben</button></div><p id="nextDue" class="small" aria-live="polite">Deine Wiederholung wird nach deinem Lernstand vorgeschlagen.</p></div>
    <button class="pill primary" type="button" id="backAfterLesson">Zur Lernakademie</button>
@@ -1701,7 +1743,7 @@ function syncProfile(force=false){
  $("#academyAgeLabel").textContent=p.ageMissing?"Altersstufe fehlt":(p.demo?"Demo · ":"")+humanAge(age)+" Jahre";
  $("#academyProfile").classList.add("has-profile");
  $("#academyAvatar").src=gender==="girl"?"/kids/assets/profile-avatars/girl-hijab-pink-v1235.svg":"/kids/assets/profile-avatars/boy-kufi-v1235.svg";
- $("#academyHeroCharacter").src=$("#academyAvatar").src;
+ $("#academyHeroCharacter").src=$("#academyAvatar").src;$("#academyBuddyAvatar").src=$("#academyAvatar").src;
  const hero=$("#academyHeroImage");
  hero.classList.remove("is-ready");
  hero.onload=()=>hero.classList.add("is-ready");
@@ -1823,6 +1865,9 @@ function showQuestion(){
  $("#question").textContent=q.prompt;$("#bar").style.width=(qIndex/questions().length*100)+"%";
  $("#choices").replaceChildren();
  $("#choiceAudioHelp").hidden=q.type!=="choice";$("#academyQuestionPanel").dataset.questionType=q.type;
+ $("#answerModeCaption").textContent=q.type==="choice"?"Tippe auf eine Antwort oder sprich selbst:":"Du kannst sprechen oder schreiben:";
+ $("#academyBuddyTitle").textContent=age==="4-5"?"Wir schaffen das!":age==="9-10"?"Jetzt bist du dran!":"Du schaffst das!";
+ $("#academyBuddyText").textContent=age==="4-5"?"Tippe auf Hören. Dann wähle eine Antwort.":"Hör dir die Frage an oder lies selbst.";
  if(q.type==="choice")q.options.forEach((t,i)=>{
   const row=document.createElement("div");row.className="choice-row";
   const select=document.createElement("button");select.type="button";select.className="choice-button";
@@ -1833,7 +1878,7 @@ function showQuestion(){
     $("#answer").value="";
   };
   const listen=document.createElement("button");listen.type="button";listen.className="choice-listen";
-  listen.textContent="▶ Hören";
+  listen.textContent="🔊 Hören";
   listen.setAttribute("aria-label","Antwort "+(i+1)+" anhören, ohne sie auszuwählen");
   listen.setAttribute("aria-pressed","false");
   listen.onclick=()=>{
@@ -1881,7 +1926,7 @@ function check(){
 }
 function finish(){finished=true;unlocked=4;showStep(4)}
 function showRecap(){
- $("#summaryText").textContent=(AGE_UI[age]?.recapText||"Gut mitgemacht!")+" ("+score.done+" von "+questions().length+" Fragen bearbeitet.)";
+ $("#summaryText").textContent="Du hast "+score.done+" von "+questions().length+" Fragen bearbeitet. Du kannst jederzeit wiederholen.";
  all("[data-reflect]").forEach(b=>{b.classList.remove("active");b.setAttribute("aria-pressed","false")});
 }
 function persist(level){
