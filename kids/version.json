@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v190-home-measured1295",
-  "label": "KIDS · V1.09.11",
+  "buildId": "kids-shell-v191-home-safe1296",
+  "label": "KIDS · V1.09.12",
   "releasedAt": "2026-10-09T18:46:00Z",
-  "note": "KIDS V1.09.11: Startbild wird nun nicht nur per Prozenthöhe, sondern anhand der tatsächlich verfügbaren Displayhöhe, der realen Bottom-Navigation und der Position des Gebetszeiten-Buttons dimensioniert. Auf iPhone, Android, iPad/Tablet im Hoch- oder Querformat wird der Hero ohne künstliches Scrollen proportional verkürzt, sofern die Texte nicht überlappen. Auf sehr kleinen Anzeigen bleibt normales Scrollen statt unleserlicher Verkleinerung möglich. Freigegebenes Moscheefoto, Standort, fünf Gebetszeiten, Countdown, Hauptnavigation und Lernfunktionen bleiben erhalten.",
+  "note": "KIDS V1.09.12: Erstöffnungs-Höhe bleibt am tatsächlichen sichtbaren Viewport und der fixen unteren Tab-Leiste gemessen (V1295); jetzt läuft das freigegebene Moscheebild auch auf iPads/Tablets unter die iOS-Statusleiste, ohne Logo oder Gebetszeiten nach unten zu verschieben. Smartphones, Tablets, Hoch-/Querformat: kein automatisches Scrollen, Bild unverzerrt, die fünf Gebetszeiten und der Gebetszeiten-Button bleiben prioritär. Auf unzureichend hohen Bildschirmen bleibt reguläres Scrollen möglich, um Überlappung und unleserliche Verkleinerung zu vermeiden.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1295",
+    "serviceWorkerCache": "v1296",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
