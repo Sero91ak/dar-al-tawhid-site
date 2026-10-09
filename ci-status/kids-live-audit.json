@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-10-09T19:53:12Z",
+  "timestamp": "2026-10-09T19:54:35Z",
   "trigger": "workflow_run",
-  "finishedDeployConclusion": "success",
-  "finishedDeployRun": "37982452790",
+  "finishedDeployConclusion": "cancelled",
+  "finishedDeployRun": "37983387420",
   "live": {
     "buildId": "kids-shell-v189-home-tablet1294",
     "label": "KIDS · V1.09.10",
@@ -45,6 +45,24 @@
   "lastDeployRuns": [
     {
       "conclusion": null,
+      "created_at": "2026-10-09T19:54:32Z",
+      "head_sha": "2ebb366dd7b785b4bfae634d4e38afbd25738dc6",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37983412639",
+      "id": 37983412639,
+      "status": "pending",
+      "updated_at": "2026-10-09T19:54:33Z"
+    },
+    {
+      "conclusion": "cancelled",
+      "created_at": "2026-10-09T19:54:18Z",
+      "head_sha": "d0bea0f2d04b3512521ae71f0504695daefc8082",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37983387420",
+      "id": 37983387420,
+      "status": "completed",
+      "updated_at": "2026-10-09T19:54:21Z"
+    },
+    {
+      "conclusion": null,
       "created_at": "2026-10-09T19:52:56Z",
       "head_sha": "eb8d48c71a5ecc1660751782c889fea42f4446e7",
       "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37983237972",
@@ -78,24 +96,6 @@
       "id": 37981987327,
       "status": "completed",
       "updated_at": "2026-10-09T19:47:50Z"
-    },
-    {
-      "conclusion": "cancelled",
-      "created_at": "2026-10-09T19:41:47Z",
-      "head_sha": "1cd0f6e5322aba08fdad65b7ff0a83b31135052a",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37981973133",
-      "id": 37981973133,
-      "status": "completed",
-      "updated_at": "2026-10-09T19:41:56Z"
-    },
-    {
-      "conclusion": "cancelled",
-      "created_at": "2026-10-09T19:41:42Z",
-      "head_sha": "ba837884ece85bf65ba18f75516394dd8e27e2a8",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37981963196",
-      "id": 37981963196,
-      "status": "completed",
-      "updated_at": "2026-10-09T19:41:48Z"
     }
   ]
 }
