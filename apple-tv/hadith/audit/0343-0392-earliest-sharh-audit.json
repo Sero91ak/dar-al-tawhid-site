@@ -3,8 +3,8 @@
   "range": "HAD-0343–HAD-0392",
   "date": "2026-10-09",
   "totalInspected": 50,
-  "newlyVerified": 7,
-  "remainingOpen": 43,
+  "newlyVerified": 8,
+  "remainingOpen": 42,
   "hadithRecords": 28,
   "atharRecords": 22,
   "scope": "Primärbestände vollständig gesichtet; bei sechs Ḥadīṯ-Einträgen direkte klassische arabische Kommentare nachgetragen; die übrigen ausdrücklich nicht als Šarḥ-verifiziert gezählt",
@@ -19,7 +19,7 @@
     "avoidParallelOverwrites": true
   },
   "risk": "Ab HAD-0371 22 als athar kategorisierte Datensätze. Einige Quellenangaben sind zu allgemein; das bestehende grade-Label authentisch/athar ist ohne gesonderte Einzel-Isnādprüfung kein Nachweis für authentische Attribution.",
-  "nextAction": "43 offen im HAD-0343–0392-Block; Isnāde und arabische Primärstellen vor jeder weiteren Šarḥ-Veröffentlichung einzeln überprüfen. Kein Druckeditionsnachweis fingieren.",
+  "nextAction": "Noch 42 offen, davon 22 Āṯār mit einzeln zu prüfender Isnādkette. Nächste 50er-Spanne nach Abschluss HAD-0393–0442.",
   "entries": [
     {
       "id": "HAD-0343",
@@ -73,9 +73,9 @@
     {
       "id": "HAD-0350",
       "recordType": "hadith",
-      "sharh": "open-source-review",
+      "sharh": "verified",
       "sourceAudit": "Arabische Primärüberlieferung, frühester direkter Šarḥ, genaue Edition und Seitenangaben einzeln prüfen",
-      "note": "Zwei Rakʿah, Reise/Haḏar; frühesten präzisen Kommentar suchen"
+      "note": "Ibn Raǧab, Fatḥ al-Bārī, Bd. 2, S. 122–124, digital verifizierte Werkpagination. Druckausgabe offen. https://islamweb.net/ar/library/content/302/299"
     },
     {
       "id": "HAD-0351",
