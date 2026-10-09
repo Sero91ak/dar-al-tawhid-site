@@ -190,7 +190,26 @@ function kidsHeaders(assetResponse) {
   return headers;
 }
 
+const DAR_PWA_ICON_CATALOG = [{"id":"type-creme-ar","label":"Creme · Arabisch","theme":"#10282a","bg":"#f6f0e4","high":true},{"id":"emblem-creme-petrol","label":"Emblem · Creme/Petrol","theme":"#163b3a","bg":"#f3ead8","high":true},{"id":"emblem-nachtblau","label":"Emblem · Nachtblau","theme":"#101c34","bg":"#0c1630","high":true},{"id":"emblem-schwarzgold","label":"Emblem · Schwarz/Gold","theme":"#0a0a0c","bg":"#0a0a0c","high":true},{"id":"type-anthrazit-ar","label":"Anthrazit · Arabisch","theme":"#25292f","bg":"#25292f","high":false},{"id":"type-anthrazit-fein","label":"Anthrazit · Fein","theme":"#292d33","bg":"#292d33","high":false},{"id":"type-creme","label":"Creme · Name","theme":"#10282a","bg":"#f6f0e4","high":true},{"id":"type-weiss-ar","label":"Weiß · Arabisch","theme":"#111111","bg":"#ffffff","high":false},{"id":"type-schwarz-rund","label":"Schwarz · Rund","theme":"#101010","bg":"#101010","high":false},{"id":"type-schwarz-ar","label":"Schwarz · Arabisch","theme":"#0b0b0d","bg":"#0b0b0d","high":true},{"id":"type-schwarz","label":"Schwarz · Name","theme":"#0b0b0d","bg":"#0b0b0d","high":true},{"id":"type-navy-ar","label":"Navy · Arabisch","theme":"#102038","bg":"#102038","high":true},{"id":"type-navy","label":"Navy · Name","theme":"#102038","bg":"#102038","high":true},{"id":"type-bordeaux-ar","label":"Bordeaux · Arabisch","theme":"#581620","bg":"#581620","high":true},{"id":"type-bordeaux","label":"Bordeaux · Name","theme":"#581620","bg":"#581620","high":true},{"id":"type-gruen-ar","label":"Grün · Arabisch","theme":"#123024","bg":"#123024","high":true},{"id":"type-gruen","label":"Grün · Name","theme":"#123024","bg":"#123024","high":true},{"id":"type-schwarz-ar2","label":"Schwarz · Fein","theme":"#0b0b0d","bg":"#0b0b0d","high":true}];
+const DAR_PWA_ICON_MAP = Object.fromEntries(DAR_PWA_ICON_CATALOG.map((item) => [item.id, item]));
+
+function normalizePwaIconId(value) {
+  const id = String(value || "").trim().toLowerCase();
+  return DAR_PWA_ICON_MAP[id] ? id : "type-creme-ar";
+}
+
+function pwaIconPath(id, size) {
+  return "/assets/app-icons/" + normalizePwaIconId(id) + "/icon-" + size + ".png";
+}
+
 function browserManifestResponse(request, androidBrowser = false) {
+  const url = new URL(request.url);
+  const iconId = normalizePwaIconId(url.searchParams.get("icon"));
+  const icon = DAR_PWA_ICON_MAP[iconId] || DAR_PWA_ICON_MAP["type-creme-ar"];
+  const icon192 = pwaIconPath(iconId, 192);
+  const icon512 = icon.high ? pwaIconPath(iconId, 512) : pwaIconPath("type-creme-ar", 512);
+  const icon1024 = icon.high ? pwaIconPath(iconId, 1024) : pwaIconPath("type-creme-ar", 1024);
+  const stamp = "pwa-icon-v2-20261009-" + iconId;
   const manifest = {
     $schema: "https://json.schemastore.org/web-manifest-combined.json",
     name: "DĀR AL TAWḤĪD",
@@ -200,15 +219,17 @@ function browserManifestResponse(request, androidBrowser = false) {
     start_url: "/?page=start",
     scope: "/",
     id: "/",
-    theme_color: "#10282a",
-    background_color: "#f6f0e4",
+    theme_color: icon.theme,
+    background_color: icon.bg,
     description: "DĀR AL TAWḤĪD – installierbare Web-App mit Qurʾān, Sunnah, Āṯār, Beiträgen, Duʿāʾ und Bibliothek.",
     orientation: "any",
     prefer_related_applications: false,
     icons: [
-      { src: "/assets/app-icons/type-creme-ar/icon-192.png?v=pwa-native-ios-20261009", sizes: "192x192", type: "image/png", purpose: "any" },
-      { src: "/assets/app-icons/type-creme-ar/icon-512.png?v=pwa-native-ios-20261009", sizes: "512x512", type: "image/png", purpose: "any" },
-      { src: "/assets/app-icons/type-creme-ar/icon-1024.png?v=pwa-native-ios-20261009", sizes: "1024x1024", type: "image/png", purpose: "any" }
+      { src: icon192 + "?v=" + stamp, sizes: "192x192", type: "image/png", purpose: "any" },
+      { src: icon512 + "?v=" + stamp, sizes: "512x512", type: "image/png", purpose: "any" },
+      { src: icon192 + "?v=" + stamp, sizes: "192x192", type: "image/png", purpose: "maskable" },
+      { src: (icon.high ? icon512 : icon192) + "?v=" + stamp, sizes: icon.high ? "512x512" : "192x192", type: "image/png", purpose: "maskable" },
+      { src: icon1024 + "?v=" + stamp, sizes: "1024x1024", type: "image/png", purpose: "any" }
     ]
   };
   const headers = new Headers({
@@ -217,7 +238,8 @@ function browserManifestResponse(request, androidBrowser = false) {
     "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
     "CDN-Cache-Control": "no-store",
     "Cloudflare-CDN-Cache-Control": "no-store",
-    "X-Dar-Surface": androidBrowser ? "android-pwa-manifest" : "public-website-manifest"
+    "X-Dar-Surface": androidBrowser ? "android-pwa-manifest" : "public-website-manifest",
+    "X-Dar-PWA-Icon": iconId
   });
   return new Response(request.method === "HEAD" ? null : JSON.stringify(manifest, null, 2), { status: 200, headers });
 }
@@ -250,15 +272,15 @@ function publicWebsiteAddon() {
 .dar-download-fallback__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:22px}
 .dar-download-fallback__card{padding:22px;border:1px solid rgba(124,97,45,.2);border-radius:22px;background:linear-gradient(145deg,#fffdf8,#f5f0e6);box-shadow:0 10px 30px rgba(65,48,24,.07)}
 .dar-download-fallback__head{display:flex;align-items:center;gap:14px}
-.dar-download-fallback__icon{width:58px;height:58px;flex:0 0 58px;display:grid;place-items:center;border-radius:17px;background:#102b2b;color:#a4c639}
+.dar-download-fallback__icon{width:58px;height:58px;flex:0 0 58px;display:grid;place-items:center;border-radius:17px;background:#102b2b;color:#a4c639;overflow:hidden}
 .dar-download-fallback__icon.apple{background:#fff;color:#111}
-.dar-download-fallback__icon svg,.dar-download-fallback__icon img{width:36px;height:36px;display:block;object-fit:contain;border-radius:10px}
+.dar-download-fallback__icon svg{width:36px;height:36px;display:block}.dar-download-fallback__icon img{width:100%;height:100%;display:block;object-fit:cover;border-radius:17px;transform:scale(1.035)}
 .dar-download-fallback__card small{display:block;color:#8a6b2d;font-size:8px;font-weight:850;letter-spacing:.13em}
 .dar-download-fallback__card h2{margin:4px 0 0;font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;font-size:22px;font-weight:600;color:#2a2924}
 .dar-download-fallback__card p,.dar-download-fallback__card ol{color:#625c53;font-size:11px;line-height:1.7}
 .dar-download-fallback__btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 15px;border:1px solid #9a7738;border-radius:13px;background:#17342f;color:#fff9e9;text-decoration:none;font-size:10px;font-weight:850;cursor:pointer}
 .dar-download-fallback__btn.apple{background:#111820;border-color:#111820}
-.dar-download-fallback__btn svg{width:18px;height:18px}
+.dar-download-fallback__btn svg{width:18px;height:18px}.dar-pwa-icon-picker{margin-top:16px;padding-top:14px;border-top:1px solid rgba(124,97,45,.16)}.dar-pwa-icon-picker__title{margin-bottom:9px;color:#51483d;font-size:10px;font-weight:850;letter-spacing:.06em}.dar-pwa-icon-picker__strip{display:flex;gap:8px;overflow-x:auto;padding:2px 1px 8px;scrollbar-width:thin}.dar-pwa-icon-picker__strip button{width:48px;height:48px;flex:0 0 48px;padding:2px;border:2px solid transparent;border-radius:14px;background:#0f282a;overflow:hidden;cursor:pointer}.dar-pwa-icon-picker__strip button.is-active{border-color:#a77c32;box-shadow:0 0 0 2px rgba(167,124,50,.14)}.dar-pwa-icon-picker__strip img{width:100%;height:100%;display:block;object-fit:cover;border-radius:10px}.dar-pwa-icon-picker__status{margin-top:5px;color:#81776b;font-size:8.5px;line-height:1.45}
 @media(max-width:760px){.dar-download-fallback__grid{grid-template-columns:1fr}.dar-download-fallback__card{padding:18px}}
 </style>
 <section id="darIosAppStorePromo" aria-label="DĀR AL TAWḤĪD im App Store">
@@ -291,6 +313,49 @@ function publicWebsiteAddon() {
   var apple=/iPhone|iPad|iPod/i.test(ua)||(navigator.platform==="MacIntel"&&Number(navigator.maxTouchPoints||0)>1);
   var promo=document.getElementById("darIosAppStorePromo");
   if(apple&&promo)promo.classList.add("is-visible");
+
+  var pwaIcons=[{"id":"type-creme-ar","label":"Creme · Arabisch","theme":"#10282a","bg":"#f6f0e4","high":true},{"id":"emblem-creme-petrol","label":"Emblem · Creme/Petrol","theme":"#163b3a","bg":"#f3ead8","high":true},{"id":"emblem-nachtblau","label":"Emblem · Nachtblau","theme":"#101c34","bg":"#0c1630","high":true},{"id":"emblem-schwarzgold","label":"Emblem · Schwarz/Gold","theme":"#0a0a0c","bg":"#0a0a0c","high":true},{"id":"type-anthrazit-ar","label":"Anthrazit · Arabisch","theme":"#25292f","bg":"#25292f","high":false},{"id":"type-anthrazit-fein","label":"Anthrazit · Fein","theme":"#292d33","bg":"#292d33","high":false},{"id":"type-creme","label":"Creme · Name","theme":"#10282a","bg":"#f6f0e4","high":true},{"id":"type-weiss-ar","label":"Weiß · Arabisch","theme":"#111111","bg":"#ffffff","high":false},{"id":"type-schwarz-rund","label":"Schwarz · Rund","theme":"#101010","bg":"#101010","high":false},{"id":"type-schwarz-ar","label":"Schwarz · Arabisch","theme":"#0b0b0d","bg":"#0b0b0d","high":true},{"id":"type-schwarz","label":"Schwarz · Name","theme":"#0b0b0d","bg":"#0b0b0d","high":true},{"id":"type-navy-ar","label":"Navy · Arabisch","theme":"#102038","bg":"#102038","high":true},{"id":"type-navy","label":"Navy · Name","theme":"#102038","bg":"#102038","high":true},{"id":"type-bordeaux-ar","label":"Bordeaux · Arabisch","theme":"#581620","bg":"#581620","high":true},{"id":"type-bordeaux","label":"Bordeaux · Name","theme":"#581620","bg":"#581620","high":true},{"id":"type-gruen-ar","label":"Grün · Arabisch","theme":"#123024","bg":"#123024","high":true},{"id":"type-gruen","label":"Grün · Name","theme":"#123024","bg":"#123024","high":true},{"id":"type-schwarz-ar2","label":"Schwarz · Fein","theme":"#0b0b0d","bg":"#0b0b0d","high":true}];
+  var pwaIconMap={};pwaIcons.forEach(function(row){pwaIconMap[row.id]=row});
+  var pwaIconKey="dar_pwa_icon_v2";
+  function getPwaIconId(){
+    try{var saved=localStorage.getItem(pwaIconKey);if(saved&&pwaIconMap[saved])return saved}catch(e){}
+    return "type-creme-ar";
+  }
+  function pwaIconSrc(id){
+    id=pwaIconMap[id]?id:"type-creme-ar";
+    return "/assets/app-icons/"+id+"/icon-192.png?v=pwa-picker-v2-20261009";
+  }
+  function refreshManifestForIcon(id){
+    id=pwaIconMap[id]?id:"type-creme-ar";
+    try{
+      var link=document.querySelector('link[rel="manifest"]');
+      if(link)link.setAttribute("href","/manifest.json?icon="+encodeURIComponent(id)+"&v=pwa-picker-v2-20261009");
+      var row=pwaIconMap[id];
+      var meta=document.querySelector('meta[name="theme-color"]');
+      if(meta&&row)meta.setAttribute("content",row.theme);
+      document.documentElement.setAttribute("data-dar-pwa-icon",id);
+    }catch(e){}
+  }
+  function applyPwaIcon(id,persist){
+    id=pwaIconMap[id]?id:"type-creme-ar";
+    if(persist!==false){try{localStorage.setItem(pwaIconKey,id)}catch(e){}}
+    refreshManifestForIcon(id);
+    try{
+      document.querySelectorAll("[data-dar-pwa-logo]").forEach(function(img){img.setAttribute("src",pwaIconSrc(id))});
+      document.querySelectorAll("[data-dar-pwa-icon]").forEach(function(btn){btn.classList.toggle("is-active",btn.getAttribute("data-dar-pwa-icon")===id)});
+      document.querySelectorAll("[data-dar-pwa-icon-status]").forEach(function(el){
+        el.textContent=standalone
+          ?"Icon gespeichert. Android/Chrome übernimmt ein bereits installiertes Launcher-Icon beim Web-App-Metadatenupdate; für einen sofortigen Wechsel ist eine Neuinstallation nötig."
+          :"Dieses Icon wird für die nächste Android-Web-App-Installation verwendet.";
+      });
+      var nativeHandler=window.webkit&&window.webkit.messageHandlers&&window.webkit.messageHandlers.darAppIcon;
+      if(nativeHandler&&nativeHandler.postMessage)nativeHandler.postMessage({name:id,id:id});
+    }catch(e){}
+    return id;
+  }
+  window.darSetPwaIcon=applyPwaIcon;
+  window.darGetPwaIcon=getPwaIconId;
+  applyPwaIcon(getPwaIconId(),false);
 
   var deferredInstall=null;
   var installPromptWaiters=[];
@@ -381,6 +446,13 @@ function publicWebsiteAddon() {
     window.darInstallAndroidPwa();
   });
 
+  document.addEventListener("click",function(event){
+    var iconBtn=event.target&&event.target.closest?event.target.closest("[data-dar-pwa-icon]"):null;
+    if(!iconBtn)return;
+    event.preventDefault();
+    applyPwaIcon(iconBtn.getAttribute("data-dar-pwa-icon"),true);
+  });
+
   try{
     var u=new URL(location.href);
     ["homescreen","app","mobile","source"].forEach(function(k){u.searchParams.delete(k)});
@@ -424,7 +496,10 @@ function publicWebsiteAddon() {
     return '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.37 12.64c-.03-2.16 1.76-3.2 1.84-3.25-1-1.47-2.57-1.67-3.12-1.69-1.32-.14-2.59.78-3.26.78s-1.7-.76-2.81-.74c-1.44.02-2.78.84-3.52 2.14-1.51 2.62-.39 6.5 1.08 8.63.72 1.04 1.58 2.21 2.71 2.17 1.09-.05 1.5-.7 2.81-.7s1.68.7 2.82.68c1.17-.02 1.91-1.06 2.62-2.11.83-1.2 1.17-2.37 1.19-2.43-.03-.01-2.27-.87-2.3-3.48zM14.5 6.9c.6-.73 1-1.74.89-2.75-.86.03-1.9.57-2.52 1.3-.55.64-1.04 1.67-.91 2.65.96.07 1.95-.49 2.54-1.2z"/></svg>';
   }
   function androidLogoMarkup(){
-    return '<img src="/assets/app-icons/type-creme-ar/icon-512.png?v=pwa-native-ios-20261009" alt="" width="36" height="36" decoding="async">';
+    return '<img data-dar-pwa-logo src="'+pwaIconSrc(getPwaIconId())+'" alt="" width="58" height="58" decoding="async">';
+  }
+  function pwaIconPickerMarkup(){
+    return '<div class="dar-pwa-icon-picker"><div class="dar-pwa-icon-picker__title">App-Icon wählen</div><div class="dar-pwa-icon-picker__strip">'+pwaIcons.map(function(row){return '<button type="button" data-dar-pwa-icon="'+row.id+'" title="'+row.label+'"><img src="/assets/app-icons/'+row.id+'/icon-192.png?v=pwa-picker-v2-20261009" alt="'+row.label+'" loading="lazy"></button>'}).join('')+'</div><div class="dar-pwa-icon-picker__status" data-dar-pwa-icon-status></div></div>';
   }
   function ensurePublicDownloads(){
     var page="start";
@@ -443,9 +518,10 @@ function publicWebsiteAddon() {
       var root=document.getElementById("pageRoot");
       if(!root)return;
       root.innerHTML='<section class="dar-download-fallback"><div class="dar-download-fallback__intro"><small>DOWNLOADS</small><h1>DĀR AL TAWḤĪD als App nutzen.</h1><p>Android als Web-App installieren oder die offizielle iOS-App im Apple App Store öffnen.</p></div><div class="dar-download-fallback__grid">'+
-        '<article class="dar-download-fallback__card"><div class="dar-download-fallback__head"><span class="dar-download-fallback__icon">'+androidLogoMarkup()+'</span><div><small>ANDROID · SMARTPHONE & TABLET</small><h2>Web-App installieren</h2></div></div><p>Die öffentliche DĀR AL TAWḤĪD Website lässt sich auf Android direkt wie eine App installieren. Keine APK nötig.</p><ol><li>In Chrome, Edge oder Samsung Internet öffnen.</li><li>Auf Web-App installieren tippen.</li><li>Falls kein Dialog erscheint: Browser-Menü → App installieren bzw. Zum Startbildschirm hinzufügen.</li></ol><button class="dar-download-fallback__btn" type="button" data-dar-pwa-install>Web-App installieren</button></article>'+
+        '<article class="dar-download-fallback__card"><div class="dar-download-fallback__head"><span class="dar-download-fallback__icon">'+androidLogoMarkup()+'</span><div><small>ANDROID · SMARTPHONE & TABLET</small><h2>Web-App installieren</h2></div></div><p>Die öffentliche DĀR AL TAWḤĪD Website lässt sich auf Android direkt wie eine App installieren. Keine APK nötig.</p><ol><li>In Chrome, Edge oder Samsung Internet öffnen.</li><li>Auf Web-App installieren tippen.</li><li>Falls kein Dialog erscheint: Browser-Menü → App installieren bzw. Zum Startbildschirm hinzufügen.</li></ol><button class="dar-download-fallback__btn" type="button" data-dar-pwa-install>Web-App installieren</button>'+pwaIconPickerMarkup()+'</article>'+
         '<article class="dar-download-fallback__card"><div class="dar-download-fallback__head"><span class="dar-download-fallback__icon apple">'+appleLogoMarkup()+'</span><div><small>APPLE · IPHONE & IPAD</small><h2>iOS-App</h2></div></div><p>Für iPhone und iPad steht die native DĀR AL TAWḤĪD App im Apple App Store bereit.</p><a class="dar-download-fallback__btn apple" href="https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753" rel="noopener noreferrer">'+appleLogoMarkup()+'<span>Im App Store laden</span></a></article>'+
         '</div></section>';
+      applyPwaIcon(getPwaIconId(),false);
     }
   }
   function schedulePublicDownloads(){

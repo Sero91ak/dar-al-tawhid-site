@@ -37,7 +37,9 @@ if (fs.existsSync(publicRouterPath)) {
   assert.ok(router.includes('navigator.serviceWorker.register("/service-worker.js",{scope:"/"})'), "Android PWA service worker registration missing");
   assert.ok(router.includes("return !isNativeAppRequest(ua);"), "Android browsers must receive the public website");
   assert.ok(!router.includes('id="darAndroidDownloadPromo"'), "Obsolete APK promo must not cover the public website");
-  assert.ok(router.includes('/assets/app-icons/type-creme-ar/icon-192.png?v=pwa-native-ios-20261009'), "Android PWA must use the native iOS primary icon family");
+  assert.ok(router.includes("DAR_PWA_ICON_CATALOG"), "Android PWA icon catalog missing");
+  assert.ok(router.includes("normalizePwaIconId"), "Android PWA selected-icon manifest support missing");
+  assert.ok(router.includes('purpose: "maskable"'), "Android launcher must receive maskable artwork");
   assert.ok(router.includes('display: "standalone"'), "Android PWA manifest must be standalone");
   assert.ok(router.includes('id: "/"'), "Android PWA manifest must have a stable app id");
 }
@@ -46,6 +48,7 @@ assert.equal(pwaManifest.scope, "/", "PWA scope must cover the public website");
 assert.equal(pwaManifest.id, "/", "PWA id must be stable and query-free");
 assert.ok(pwaManifest.icons.some((icon) => icon.sizes === "192x192" && /assets\/app-icons\/type-creme-ar\/icon-192\.png/.test(icon.src)), "Native iOS-equivalent 192px PWA icon missing");
 assert.ok(pwaManifest.icons.some((icon) => icon.sizes === "512x512" && /assets\/app-icons\/type-creme-ar\/icon-512\.png/.test(icon.src)), "Native iOS-equivalent 512px PWA icon missing");
+assert.ok(pwaManifest.icons.some((icon) => String(icon.purpose || "").includes("maskable")), "Maskable Android launcher icon missing");
 
 assert.ok(links.includes('href="/download/"'), "Website links page must offer official Android downloads");
 assert.ok(!html.includes("apk-kids"), "Kids must not have a public download button");
