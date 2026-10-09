@@ -68,6 +68,20 @@ class IndexedProjectionTests(unittest.TestCase):
         g["accessors"][0]["byteOffset"] = 4
         self.assertEqual(decode_triangle_primitive(g, raw, p)[0][1], (1., 0., 0.))
 
+    def test_unused_outlier_vertices_cannot_skew_silhouette(self):
+        g, b, p = synthetic()
+        # Add a fifth unreferenced vertex a million units away.
+        extra = struct.pack("<fff", 1_000_000., 1_000_000., 1_000_000.)
+        original_indices = bytes(b[48:])
+        binary = bytearray(b[:48]) + bytearray(extra) + original_indices
+        g["accessors"][0]["count"] = 5
+        g["bufferViews"][0]["byteLength"] = 60
+        g["bufferViews"][1]["byteOffset"] = 60
+        verts, faces = decode_triangle_primitive(g, binary, p)
+        self.assertEqual(len(verts), 4)
+        self.assertEqual(max(x[0] for x in verts), 1.)
+        self.assertEqual(faces[1], [0, 2, 3])
+
     def test_uint32_triangle_indices(self):
         g, b, p = synthetic()
         g["accessors"][1]["componentType"] = 5125
