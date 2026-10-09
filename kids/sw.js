@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1296";
-const KIDS_BUILD_ID="kids-shell-v191-home-safe1296";
+const CACHE_NAME="dar-al-tawhid-kids-v1297";
+const KIDS_BUILD_ID="kids-shell-v192-sticky-header1297";
 const DUA_AUDIO_RUNTIME="1244";
 // QUIZ_HOME_RESTORE_V1225: refresh installed PWAs with the restored Quiz entry.
 const CORE_PRECACHE=[
@@ -67,7 +67,7 @@ const CORE_PRECACHE=[
   "/kids/deen-learning-v1199.css?v=1199",
   "/kids/deen-lessons.css?v=2",
   "/kids/deen-lessons.js?v=4",
-  "/kids/global-detail-dock-v1247.css?v=1289",
+  "/kids/global-detail-dock-v1247.css?v=1297",
   "/kids/global-detail-dock-v1247.js?v=1278",
   "/kids/data/deen-lessons.json?v=3",
   "/kids/assets/deen/deen-entry.jpg?v=1206",
