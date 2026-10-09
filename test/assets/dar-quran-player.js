@@ -645,7 +645,8 @@
       if (gen !== playGen || window.__DAR_ADHAN_ACTIVE === true) return;
       var live = audioEl();
       if (!state.playing || !state.sessionActive || live.ended) return;
-      if ((Number(live.currentTime) || 0) > at + 0.2 || live.readyState >= 3) return;
+      if ((Number(live.currentTime) || 0) > at + 0.2) return;
+      // readyState may report buffered data even when the playback clock has frozen.
       state.current = at;
       state.resumeAt = at;
       if (engine.wantPlay) tryFallback();
@@ -1075,7 +1076,7 @@
     }
   }
   function onPlayEv() {
-    if (!isAppleTvApp() && !isQuranArea()) {
+    if (!isAppleTvApp() && !isQuranArea() && !isFullPlayerRoute()) {
       try { audioEl().pause(); } catch (ePlayLeave) {}
       persistCurrent("blocked-play-off-quran");
       state.playing = false;
