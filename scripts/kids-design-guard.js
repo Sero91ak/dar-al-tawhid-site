@@ -181,8 +181,18 @@ function runKidsDesignGuard() {
     const release = JSON.parse(fs.readFileSync(path.join(ROOT, "kids/version.json"), "utf8"));
     const swVersion = String(release.visualSystem?.serviceWorkerCache || "").replace(/^v/, "");
     const compact = String(release.visualSystem?.compactGlobalTopDock || "");
-    const dockCssRef = "global-detail-dock-v1247.css?v=" + swVersion;
-    const dockJsRef = "global-detail-dock-v1247.js?v=" + (Number(swVersion)>=1249 ? swVersion : "1247");
+    // Bundle query versions are pinned independently from the global SW cache.
+    const mainPage = fs.readFileSync(path.join(ROOT, "kids/index.html"), "utf8");
+    function referencedAsset(fileName) {
+      const marker = "/kids/" + fileName + "?v=";
+      const start = mainPage.indexOf(marker);
+      if (start < 0) return "";
+      const version = mainPage.slice(start + marker.length).match(/^\d+/);
+      return version ? fileName + "?v=" + version[0] : "";
+    }
+    const dockCssRef = referencedAsset("global-detail-dock-v1247.css");
+    const dockJsRef = referencedAsset("global-detail-dock-v1247.js");
+    if (!dockCssRef || !dockJsRef) failed += fail("Kids: globaler Detail-Kopf CSS/JS-Verweise fehlen");
     if (!/^\d+$/.test(swVersion)) failed += fail("Kids: Service-Worker-Cacheversion fehlt");
     if (compact === "v1248") {
       if (!doc.includes("KIDS_COMPACT_GLOBAL_TOP_DOCK_V1248") || !dockCss.includes("KIDS_COMPACT_GLOBAL_TOP_DOCK_V1248")) {
@@ -224,12 +234,11 @@ function runKidsDesignGuard() {
         failed+=fail("Kids Duʿāʾ muss überprüfbare Quellen nur als lesbaren Text zeigen, ohne externen Nachweis-Button");
       }
       const kidsSw = fs.readFileSync(path.join(ROOT,"kids/sw.js"),"utf8");
-      // Die CSS-Datei folgt der Service-Worker-Version; der JS-Reader darf separat aktualisiert werden.
-      const kidsHome = fs.readFileSync(path.join(ROOT,"kids/index.html"),"utf8");
-      const readerScript = (kidsHome.match(/\/kids\/dua-hub-v1219\.js\?v=\d+/)||[])[0];
-      const offlineFiles = ["dua-hub-v1219.css?v="+swVersion];
-      if(readerScript)offlineFiles.push(readerScript.slice("/kids/".length));
-      else failed+=fail("Kids Duʿāʾ Reader Script-Verweis fehlt in kids/index.html");
+      // Validate the exact existing HTML references and SW precache entries.
+      const duaCssRef = referencedAsset("dua-hub-v1219.css");
+      const duaJsRef = referencedAsset("dua-hub-v1219.js");
+      const offlineFiles = [duaCssRef,duaJsRef].filter(Boolean);
+      if (!duaCssRef || !duaJsRef) failed+=fail("Kids Duʿāʾ Reader CSS/JS-Verweise fehlen in kids/index.html");
       for(const res of offlineFiles){
         if(!kidsSw.includes(res))failed+=fail("Kids Duʿāʾ Reader nicht offline-cached: "+res);
       }
