@@ -930,7 +930,7 @@
         var el = audioEl();
         logAudio("fallback saved offline copy", { surah: sSaved, ayah: aSaved });
         setAudioSrc(el, saved);
-        if (state.playing || state.sessionActive || engine.wantPlay) runPlay(el, playGen);
+        if (engine.wantPlay) runPlay(el, playGen);
       });
       return;
     }
@@ -962,7 +962,7 @@
         engine.lastUrl = hit.url;
         setAudioSrc(audioEl(), hit.url);
         logAudio("fallback reciter", snapAudio(audioEl()));
-        if (engine.wantPlay || state.playing) runPlay(audioEl(), playGen);
+        if (engine.wantPlay) runPlay(audioEl(), playGen);
         paintChrome();
       });
       return;
@@ -975,7 +975,7 @@
     logAudio("fallback url", { url: engine.lastUrl, index: urlIndex });
     setAudioSrc(a, engine.lastUrl);
     logAudio("src changed", snapAudio(a));
-    if (state.playing || state.sessionActive) runPlay(a, playGen);
+    if (engine.wantPlay) runPlay(a, playGen);
   }
   function onTime() {
     if (seekLock) return;
@@ -3034,13 +3034,16 @@
     }
     return learnSheet();
   }
+  var sheetEpoch = 0;
   function closeSheet() {
+    sheetEpoch += 1;
     var sh = activeSheetEl();
     if (!sh) return;
     sh.classList.remove("is-open");
     setTimeout(function () { if (sh && !sh.classList.contains("is-open")) { sh.hidden = true; sh.innerHTML = ""; } }, 280);
   }
   function openSheet(title, html) {
+    sheetEpoch += 1;
     var sh = activeSheetEl();
     if (!sh && !fullUiWanted) sh = learnSheet();
     if (!sh) return;
@@ -3071,7 +3074,9 @@
     return FALLBACK_QARI;
   }
   async function gotoAyah(ayah, autoplay) {
-    state.ayah = Math.max(1, Math.min(totalAyat() || 286, Number(ayah) || 1));
+    state.ayah = Math.max(1, Math.min(ayahCountHard(state.surah), Number(ayah) || 1));
+    var requestedSurah = Number(state.surah);
+    var requestedAyah = Number(state.ayah);
     state.resumeAt = 0;
     writeHash();
     saveState();
@@ -3079,7 +3084,8 @@
     paintAyah(false);
     paintProgress();
     loadAudio(autoplay !== false && (state.playing || autoplay === true), false);
-    ensureData().then(function () {
+    ensureData().then(function (ok) {
+      if (!ok || state.surah !== requestedSurah || state.ayah !== requestedAyah) return;
       paintInfo();
       paintAyah(false);
     });
@@ -3096,10 +3102,13 @@
     state.surah = next;
     state.ayah = Math.max(1, Math.min(ayahCountHard(next), Number(ayah) || 1));
     state.resumeAt = 0;
+    var requestedSurah = Number(state.surah);
+    var requestedAyah = Number(state.ayah);
     if (!keepReciter && (state.shuffle === "reciter" || state.shuffle === "both")) state.reciter = pickRandomReciter();
     writeHash();
     loadAudio(!!autoplay || state.playing, false);
-    ensureData().then(function () {
+    ensureData().then(function (ok) {
+      if (!ok || state.surah !== requestedSurah || state.ayah !== requestedAyah) return;
       paintInfo();
       paintAyah(false);
     });
@@ -3176,21 +3185,32 @@
         if (on && on.scrollIntoView) on.scrollIntoView({ block: "center" });
       });
     }
-    if (!verses.length) {
+    if (dataSurahLoaded !== Number(state.surah) || !verses.length) {
       openSheet("Āyah auswählen", "<p class=\"dqp-sheet-wait\">Āyāt werden geladen …</p>");
-      ensureData().then(draw);
+      var requestEpoch = sheetEpoch;
+      var requestedSurah = Number(state.surah);
+      ensureData().then(function (ok) {
+        var sh = activeSheetEl();
+        if (ok && requestEpoch === sheetEpoch && requestedSurah === Number(state.surah) && sh && !sh.hidden) draw();
+      });
     } else draw();
   }
   function openSurahSheet() {
-    function draw() {
+    function draw(retried) {
       var list = (window.quranMeta && window.quranMeta.surahs) || [];
       if (!list.length) {
-        openSheet("Sūrah auswählen", "<p class=\"dqp-sheet-wait\">Sūren werden geladen …</p>");
-        if (typeof window.loadQuranIndex === "function") {
-          window.loadQuranIndex().then(draw);
-        } else {
-          ensureData().then(draw);
+        if (retried) {
+          openSheet("Sūrah auswählen", "<p class=\"dqp-sheet-wait\">Sūrenliste derzeit nicht verfügbar.</p>");
+          return;
         }
+        openSheet("Sūrah auswählen", "<p class=\"dqp-sheet-wait\">Sūren werden geladen …</p>");
+        var requestEpoch = sheetEpoch;
+        var loader = typeof window.loadQuranIndex === "function" ? window.loadQuranIndex() : ensureData();
+        Promise.resolve(loader).then(function () {
+          if (requestEpoch === sheetEpoch) draw(true);
+        }, function () {
+          if (requestEpoch === sheetEpoch) draw(true);
+        });
         return;
       }
       var rows = list.map(function (s) {
