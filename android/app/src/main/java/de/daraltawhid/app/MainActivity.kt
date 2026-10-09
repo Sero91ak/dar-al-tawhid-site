@@ -120,8 +120,19 @@ class MainActivity : AppCompatActivity() {
                     window.DAR_NATIVE_PLATFORM="android";
                     window.DAR_ANDROID_NATIVE_APP=true;
                     window.DAR_ANDROID_ALTERNATE_ICONS_AVAILABLE=true;
-                    window.DAR_IOS_NATIVE_APP=false;
-                    window.DAR_OFFICIAL_IOS_APP=false;
+                    // The shared site's OneSignal initialization historically
+                    // sets DAR_IOS_NATIVE_APP=true for *both* native platforms.
+                    // Pin this Android-only property before that script runs.
+                    Object.defineProperty(window,"DAR_IOS_NATIVE_APP",{
+                      configurable:false, enumerable:true,
+                      get:function(){return false;},
+                      set:function(){}
+                    });
+                    Object.defineProperty(window,"DAR_OFFICIAL_IOS_APP",{
+                      configurable:false, enumerable:true,
+                      get:function(){return false;},
+                      set:function(){}
+                    });
                     if(document.documentElement){
                       document.documentElement.classList.add("dar-android-native-app","is-android");
                     }else{
@@ -212,6 +223,7 @@ class MainActivity : AppCompatActivity() {
                 window.DAR_ANDROID_NATIVE_APP=true;
                 window.DAR_ANDROID_ALTERNATE_ICONS_AVAILABLE=true;
                 window.DAR_OFFICIAL_IOS_APP=false;
+                window.DAR_IOS_NATIVE_APP=false;
                 // Same in-app picker message format as the existing iOS app.
                 // Only route app-icon events; never alter the push bridge.
                 try {
@@ -244,6 +256,7 @@ class MainActivity : AppCompatActivity() {
                 try{localStorage.setItem("darPushExternalIdV1", window.DAR_ANDROID_DEVICE_ID)}catch(e){}
                 var root=document.documentElement;
                 if(root){
+                  root.classList.remove("dar-ios-native-app","dar-ios-native-tabs");
                   root.classList.add("dar-android-native-app");
                   root.classList.add("is-android");
                 }
