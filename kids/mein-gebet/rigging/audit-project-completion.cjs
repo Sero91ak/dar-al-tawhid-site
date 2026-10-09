@@ -116,7 +116,7 @@ function main(args){
    result.localBinaryEvidence=checkActualBinaryArguments(args,boy,girl,acceptance);
    result.ready=result.ready&&result.localBinaryEvidence.pass;
  }
- process.stdout.write(JSON.stringify(result,null,2)+"\\n");
+ process.stdout.write(JSON.stringify(result,null,2)+"\n");
  if(result.inconsistent.length)return 2;
  if(args.includes("--require-ready")&&!result.ready)return 1;
  return 0;
