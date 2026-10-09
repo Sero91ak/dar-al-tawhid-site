@@ -9,6 +9,8 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.os.Message
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.webkit.CookieManager
 import android.webkit.GeolocationPermissions
@@ -43,6 +45,24 @@ class MainActivity : AppCompatActivity() {
     private var pendingGeoOrigin: String? = null
     private var pendingGeoCallback: GeolocationPermissions.Callback? = null
     private var pendingMicrophoneRequest: PermissionRequest? = null
+    private val pushRefreshHandler = Handler(Looper.getMainLooper())
+    private var pushRefreshRemaining = 0
+    private val pushRefreshTask = object : Runnable {
+        override fun run() {
+            if (isFinishing || isDestroyed || !::webView.isInitialized) return
+            injectBridge()
+            if (pushRefreshRemaining > 0) {
+                pushRefreshRemaining--
+                pushRefreshHandler.postDelayed(this, 2_000L)
+            }
+        }
+    }
+
+    private fun refreshNativePushState() {
+        pushRefreshRemaining = 25
+        pushRefreshHandler.removeCallbacks(pushRefreshTask)
+        pushRefreshHandler.post(pushRefreshTask)
+    }
 
     private val locationPermission = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
@@ -79,7 +99,8 @@ class MainActivity : AppCompatActivity() {
     private val notificationPermission = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { granted ->
-        if (granted) DarPush.bootstrap(application)
+        if (granted) DarPush.enableAfterPermission()
+        refreshNativePushState()
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -94,8 +115,12 @@ class MainActivity : AppCompatActivity() {
             webView.loadUrl(pendingUrl)
         }
 
-        if (android.os.Build.VERSION.SDK_INT >= 33) {
-            notificationPermission.launch(android.Manifest.permission.POST_NOTIFICATIONS)
+        if (android.os.Build.VERSION.SDK_INT >= 33 &&
+            ContextCompat.checkSelfPermission(
+                this, Manifest.permission.POST_NOTIFICATIONS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            notificationPermission.launch(Manifest.permission.POST_NOTIFICATIONS)
         }
 
         CookieManager.getInstance().setAcceptCookie(true)
@@ -155,7 +180,7 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         webView.onResume()
-        injectBridge()
+        refreshNativePushState()
     }
 
     override fun onPause() {
@@ -164,6 +189,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
+        pushRefreshHandler.removeCallbacks(pushRefreshTask)
         pendingGeoOrigin?.let { origin -> pendingGeoCallback?.invoke(origin, false, false) }
         pendingGeoOrigin = null
         pendingGeoCallback = null
@@ -207,12 +233,17 @@ class MainActivity : AppCompatActivity() {
             var granted = window.DAR_ANDROID_POST_NOTIFICATIONS_GRANTED === true;
             var sub = String(window.DAR_ANDROID_ONESIGNAL_ID || "").trim();
             var token = String(window.DAR_ANDROID_PUSH_TOKEN || "").trim();
+            var syncStatus = String(window.DAR_ANDROID_REGISTRATION_STATUS || "");
             var status = !granted ? "Android-Benachrichtigungen nicht freigegeben" :
                 !sub ? "Android-OneSignal-Registrierung fehlt" :
                 !token ? "Android-FCM-Token fehlt" :
+                syncStatus === "registration-error" ? "Android-Supabase-Abgleich fehlgeschlagen" :
+                syncStatus === "registration-unavailable" ? "Android-Serverregistrierung nicht verfügbar" :
+                syncStatus === "synced" ? "Android registriert · Gebets-/Tages-Einstellungen synchronisiert" :
                 "Android registriert · Server-Zustellung noch nicht bestätigt";
             if (line.textContent !== status) line.textContent = status;
-            var warning = !granted || !sub || !token;
+            var warning = !granted || !sub || !token ||
+              syncStatus === "registration-error" || syncStatus === "registration-unavailable";
             if (line.classList.contains("notification-health__line--warn") !== warning) {
               line.classList.toggle("notification-health__line--warn", warning);
             }
@@ -228,8 +259,9 @@ class MainActivity : AppCompatActivity() {
           });
           document.addEventListener("DOMContentLoaded", scheduleRepair);
           window.addEventListener("darAndroidBridgeUpdated", scheduleRepair);
+          window.addEventListener("darAndroidRegistrationUpdated", scheduleRepair);
         })();
-    """.trimIndent()
+    """.trimIndent() + "\n" + DarAndroidSettingsSync.javascript
 
     private fun injectBridge() {
         val notificationsGranted = NotificationManagerCompat.from(this).areNotificationsEnabled() &&
@@ -255,22 +287,38 @@ class MainActivity : AppCompatActivity() {
                   root.classList.add("is-android");
                 }
                 window.Notification=window.Notification||function(){};
-                try{Object.defineProperty(window.Notification,"permission",{configurable:true,get:function(){return "granted"}})}catch(e){}
-                window.Notification.requestPermission=function(){return Promise.resolve("granted")};
+                function androidPermission(){return window.DAR_ANDROID_POST_NOTIFICATIONS_GRANTED === true ? "granted" : "denied"}
+                try{Object.defineProperty(window.Notification,"permission",{configurable:true,get:androidPermission})}catch(e){}
+                window.Notification.requestPermission=function(){return window.requestNotificationPermission()};
                 window.hasNotificationApi=function(){return true};
-                window.getNotificationPermission=function(){return "granted"};
-                window.requestNotificationPermission=function(){return Promise.resolve("granted")};
+                window.getNotificationPermission=androidPermission;
+                window.requestNotificationPermission=function(){
+                  if(androidPermission()==="granted") return Promise.resolve("granted");
+                  try{window.DarNative.requestPushPermission()}catch(e){return Promise.resolve("denied")}
+                  return new Promise(function(resolve){
+                    var i=0,t=setInterval(function(){
+                      if(androidPermission()==="granted" || ++i>=40){
+                        clearInterval(t);
+                        resolve(androidPermission());
+                      }
+                    },250);
+                  });
+                };
                 function nativeReady(){
-                  return {ready:true,optedIn:true,subscriptionId:window.DAR_ANDROID_ONESIGNAL_ID||"",token:window.DAR_ANDROID_PUSH_TOKEN||"",os:window.OneSignal||{}};
+                  var id=window.DAR_ANDROID_ONESIGNAL_ID||"";
+                  var token=window.DAR_ANDROID_PUSH_TOKEN||"";
+                  var ready=androidPermission()==="granted"&&!!id&&!!token;
+                  return {ready:ready,optedIn:ready,subscriptionId:id,token:token,os:window.OneSignal||null};
                 }
                 window.waitForPushSubscriptionReady=function(){return Promise.resolve(nativeReady())};
-                window.waitForPushOptIn=function(){return Promise.resolve(true)};
-                window.ensureOneSignalPushSubscription=function(){return Promise.resolve(true)};
+                window.waitForPushOptIn=function(){return Promise.resolve(nativeReady().ready)};
+                window.ensureOneSignalPushSubscription=function(){return Promise.resolve(nativeReady().ready)};
                 window.ensureOneSignalServiceWorkerReady=function(){return Promise.resolve(null)};
                 window.getOneSignalServiceWorkerRegistration=function(){return Promise.resolve(null)};
                 if(typeof readOneSignalPushSubscriptionState==="function"){
                   readOneSignalPushSubscriptionState=function(){
-                    return {subscriptionId:window.DAR_ANDROID_ONESIGNAL_ID||"",token:window.DAR_ANDROID_PUSH_TOKEN||"",optedIn:true,ready:!!window.DAR_ANDROID_ONESIGNAL_ID};
+                    var state=nativeReady();
+                    return {subscriptionId:state.subscriptionId,token:state.token,optedIn:state.optedIn,ready:state.ready};
                   };
                 }
                 var hideSave=document.createElement("style");
@@ -290,6 +338,22 @@ class MainActivity : AppCompatActivity() {
         @JavascriptInterface
         fun pushSettings(json: String) {
             DarPush.applyWebSettings(json)
+        }
+
+        @JavascriptInterface
+        fun requestPushPermission() {
+            runOnUiThread {
+                if (android.os.Build.VERSION.SDK_INT >= 33 &&
+                    ContextCompat.checkSelfPermission(
+                        this@MainActivity, Manifest.permission.POST_NOTIFICATIONS
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    notificationPermission.launch(Manifest.permission.POST_NOTIFICATIONS)
+                } else {
+                    DarPush.enableAfterPermission()
+                    refreshNativePushState()
+                }
+            }
         }
 
         @JavascriptInterface
@@ -315,7 +379,10 @@ class MainActivity : AppCompatActivity() {
 
         override fun onPageFinished(view: WebView?, url: String?) {
             super.onPageFinished(view, url)
-            injectBridge()
+            if (!WebViewFeature.isFeatureSupported(WebViewFeature.DOCUMENT_START_SCRIPT)) {
+                webView.evaluateJavascript(androidPlatformIdentityScript(), null)
+            }
+            refreshNativePushState()
         }
 
         override fun onReceivedError(
