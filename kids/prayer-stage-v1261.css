@@ -2268,3 +2268,75 @@ html body #view-today .kids-salah-open-day{
     top:calc(clamp(40px,6dvh,65px) + var(--kids-start-compensation,0px))!important;
   }
 }
+
+
+/* KIDS_HOME_FIT_TIGHT_V1302
+   Activated only if the measured prayer CTA would otherwise be covered by
+   the fixed tab dock. Preserve every word/button and the approved photograph.
+   Geometry is condensed before the safe-minimum hero height is recalculated. */
+html body #view-today.view .kids-salah-home-world.kids-home-fit-tight .kids-wordmark{
+  top:calc(max(46px,env(safe-area-inset-top,0px) + 8px) + var(--kids-start-compensation,0px))!important;
+}
+html body #view-today.view .kids-salah-home-world.kids-home-fit-tight .kids-wordmark > img.wm-dar-reference-v1222{
+  width:min(75vw,350px)!important;
+  max-width:calc(100vw - 14px)!important;
+}
+html body #view-today.view .kids-salah-home-world.kids-home-fit-tight .wm-kids{
+  font-size:clamp(51px,15.6vw,71px)!important;
+  line-height:.85!important;
+  margin-top:-3px!important;
+}
+html body #view-today.view .kids-salah-home-world.kids-home-fit-tight .hero-copy{
+  bottom:3px!important;
+  padding:2px 7px!important;
+}
+html body #view-today.view .kids-salah-home-world.kids-home-fit-tight .hero-salam{
+  font-size:clamp(12px,3.6vw,15px)!important;
+  line-height:1.2!important;
+  margin-bottom:4px!important;
+}
+html body #view-today.view .kids-salah-home-world.kids-home-fit-tight .hero-kicker{
+  margin-bottom:4px!important;
+  padding:3px 10px!important;
+  min-height:25px!important;
+}
+html body #view-today.view .kids-salah-home-world.kids-home-fit-tight .hero h1{
+  font-size:clamp(22px,5.7vw,29px)!important;
+  line-height:1.1!important;
+}
+html body #view-today.view .kids-salah-home-world.kids-home-fit-tight .hero-copy > p:last-child{
+  font-size:clamp(11px,3vw,13px)!important;
+  margin-top:2px!important;
+}
+html body #view-today.view .kids-salah-home-world.kids-home-fit-tight > .kids-salah-stage{
+  margin-top:0!important;
+  padding-top:6px!important;
+  padding-bottom:7px!important;
+}
+html body #view-today.view .kids-salah-home-world.kids-home-fit-tight .kids-salah-heading{
+  margin:2px auto 5px!important;
+  font-size:clamp(25px,6.9vw,32px)!important;
+}
+html body #view-today.view .kids-salah-home-world.kids-home-fit-tight .kids-salah-next{
+  min-height:37px!important;
+  margin:5px auto!important;
+  padding:6px 10px!important;
+}
+html body #view-today.view .kids-salah-home-world.kids-home-fit-tight .kids-salah-five{
+  padding-top:5px!important;
+}
+html body #view-today.view .kids-salah-home-world.kids-home-fit-tight .kids-salah-open-day{
+  min-height:44px!important;
+  margin-top:6px!important;
+}
+@media(min-width:700px){
+  html body #view-today.view .kids-salah-home-world.kids-home-fit-tight .kids-wordmark{
+    top:clamp(41px,6dvh,70px)!important;
+  }
+  html body #view-today.view .kids-salah-home-world.kids-home-fit-tight .kids-wordmark > img.wm-dar-reference-v1222{
+    width:min(54vw,485px)!important;
+  }
+  html body #view-today.view .kids-salah-home-world.kids-home-fit-tight .wm-kids{
+    font-size:clamp(58px,8vw,77px)!important;
+  }
+}
