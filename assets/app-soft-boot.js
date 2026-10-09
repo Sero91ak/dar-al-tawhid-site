@@ -48,6 +48,7 @@
   window.__darSoftBootInstalled = true;
 
   var OVERLAY_ID = "dar-soft-boot";
+  var STANDARD_BOOT_LOGO = "/watermark-my-logo-full.png";
   var MAX_FAKE = 0.94;
   var FADE_HOLD_MS = 280;
   var HUNDRED_HOLD_MS = 380;
@@ -143,6 +144,33 @@
       }
     } catch (e) {}
   }
+  function standardOverlayMarkup() {
+    return '<img class="dar-soft-boot__mark" src="' + STANDARD_BOOT_LOGO + '" alt="" width="148" height="148" decoding="async">' +
+      '<p class="dar-soft-boot__title brand-title">' + (window.DAR_BRAND_NAME || "DĀR AL TAWḤĪD") + '</p>' +
+      '<p class="dar-soft-boot__sub">QUR’ĀN • SUNNAH • ĀTHĀR</p>' +
+      '<div class="dar-soft-boot__track" aria-hidden="true"><div class="dar-soft-boot__bar"></div></div>' +
+      '<p class="dar-soft-boot__pct">0%</p>';
+  }
+  function enforceStandardOverlay(el) {
+    if (!el) return;
+    try {
+      var mark = el.querySelector(".dar-soft-boot__mark");
+      var track = el.querySelector(".dar-soft-boot__track");
+      var bar = el.querySelector(".dar-soft-boot__bar");
+      var pct = el.querySelector(".dar-soft-boot__pct");
+      var title = el.querySelector(".dar-soft-boot__title");
+      if (!mark || !track || !bar || !pct || !title) {
+        el.innerHTML = standardOverlayMarkup();
+        return;
+      }
+      if (mark.getAttribute("src") !== STANDARD_BOOT_LOGO) mark.setAttribute("src", STANDARD_BOOT_LOGO);
+      mark.setAttribute("width", "148");
+      mark.setAttribute("height", "148");
+      mark.removeAttribute("data-dar-pwa-logo");
+    } catch (e) {
+      try { el.innerHTML = standardOverlayMarkup(); } catch (e2) {}
+    }
+  }
   function ensureOverlay() {
     if (finished) return overlayEl;
     var existing = document.querySelectorAll("#" + OVERLAY_ID);
@@ -152,6 +180,7 @@
       if (overlayEl.parentNode === document.documentElement && document.body) {
         try { document.body.appendChild(overlayEl); } catch (e) {}
       }
+      enforceStandardOverlay(overlayEl);
       barEl = overlayEl.querySelector(".dar-soft-boot__bar");
       pctEl = overlayEl.querySelector(".dar-soft-boot__pct");
       syncEdgeFill();
@@ -161,7 +190,7 @@
     overlayEl.id = OVERLAY_ID;
     overlayEl.setAttribute("role", "status");
     overlayEl.setAttribute("aria-live", "polite");
-    overlayEl.innerHTML = '<img class="dar-soft-boot__mark" src="/watermark-my-logo-full.png" alt="" width="148" height="148" decoding="async">' + '<p class="dar-soft-boot__title brand-title">' + (window.DAR_BRAND_NAME || "DĀR AL TAWḤĪD") + '</p>' + '<p class="dar-soft-boot__sub">QUR’ĀN • SUNNAH • ĀTHĀR</p>' + '<div class="dar-soft-boot__track" aria-hidden="true"><div class="dar-soft-boot__bar"></div></div>' + '<p class="dar-soft-boot__pct">0%</p>';
+    overlayEl.innerHTML = standardOverlayMarkup();
     var host = document.body || document.documentElement;
     host.appendChild(overlayEl);
     barEl = overlayEl.querySelector(".dar-soft-boot__bar");
