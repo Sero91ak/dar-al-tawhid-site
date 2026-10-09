@@ -60,7 +60,7 @@
       "range": "HAD-0393–HAD-0410",
       "kind": "poor-attribution",
       "status": "open",
-      "description": "Von 18 frühen Āṯār jetzt 2 Zuschreibungen überprüft, bei 2 weiteren Primärtexte und Ketten ermittelt; weitere 14 bislang nicht abschließend bearbeitet."
+      "description": "Arabische Fundstellen und Status der Zuschreibungen werden einzeln nachgetragen. In dieser Folge wurden HAD-0408 und HAD-0409 gegen die direkten Originalformulierungen berichtigt; übrige Einträge weiterhin individuell zu prüfen."
     },
     {
       "range": "HAD-0441–HAD-0442",
@@ -103,7 +103,7 @@
       "description": "Einige Autorenwerke und Kapitel sind direkt nachgewiesen, die genaue Druckedition und Einzelseite nicht für alle rekonstruiert. Kein Printseiten-Nachweis behaupten."
     }
   ],
-  "nextAction": "28/28 Ḥadīṯ-Šarḥ verifiziert; 5/22 Āṯār mit verifizierter Zuschreibung, 17 noch offen. Quellenfehler HAD-0398: al-Ḫaṭīb al-Ǧāmiʿ Nr. 8 (statt al-Faqīh), narratorische Unsicherheit notiert. HAD-0408: deutsche Mischparaphrase aus direktem Original neu bearbeiten, bis dahin nicht als 'verified' markieren. Bei HAD-0404/0405 direkte Kettenbewertung weiterhin ausstehend.",
+  "nextAction": "28/28 Ḥadīṯe mit verifiziertem Šarḥ; 5/22 Āṯār mit verifizierter Zuschreibung, 17 offen. HAD-0408/0409 enthalten jetzt direkte arabisch belegte Einzeltexte statt Mischparaphrasen. Nächste Einzelprüfung HAD-0406/0407/0410 und HAD-0441/0442; keine Scheinauthentifizierung.",
   "entries": [
     {
       "id": "HAD-0393",
@@ -227,15 +227,17 @@
       "id": "HAD-0408",
       "recordType": "athar",
       "sharh": "not-required",
-      "statusNote": "Qualitätswarnung: Vorhandene deutsche Zusammenfassung verbindet nicht belegte Elemente zu einer einheitlichen Fuḍayl-Aussage. Direkt überlieferte Fassung findet sich bei Abū Nuʿaym, Ḥilyat al-Awliyāʾ 8/103, über ʿAbd aṣ-Ṣamad ibn Yazīd. Vor einer Freigabe Text und Isnāde einzeln korrigieren.",
-      "attribution": "needs-review"
+      "statusNote": "Unbelegte Mischparaphrase durch exakten arabischen Wortlaut in al-Lālakāʾī Nr. 267 (digital Bd. 1, S. 157) ersetzt; Hörformel in der umliegenden ʿAbd-aṣ-Ṣamad-Überlieferungsfolge dokumentiert, vollständige Rijāl-Prüfung noch offen.",
+      "attribution": "isnad-located-pending-grading",
+      "primarySourceVerified": true
     },
     {
       "id": "HAD-0409",
       "recordType": "athar",
       "sharh": "not-required",
-      "statusNote": "Genauer arabischer Originaltext, Zuschreibung und Isnād müssen individuell verifiziert werden; bestehendes Label 'überliefert von den Salaf' ist kein Echtheitsnachweis.",
-      "attribution": "needs-review"
+      "statusNote": "Unbelegte vorherige Formulierung durch direkten Schülerbericht bei aḏ-Ḏahabī Siyar 9/144 ersetzt: Muḥammad b. Salām al-Baykandī sagt 'سمعت وكيعا يقول'; Kette bis zum Biografen offen.",
+      "attribution": "direct-disciple-hearing-reported-chain-to-compiler-pending",
+      "primarySourceVerified": true
     },
     {
       "id": "HAD-0410",
@@ -482,5 +484,5 @@
   "openTotal": 20,
   "reviewPolicyUpdate": "Projektregel AGENTS.md 2026-10-09: Hadith erfordert verifizierten Šarḥ; Athar kein Šarḥ nötig, aber Authentizitäts-/Isnādprüfung zwingend.",
   "atharAttributionPending": 17,
-  "atharIsnadLocatedPendingGrading": 5
+  "atharIsnadLocatedPendingGrading": 6
 }
