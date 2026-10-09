@@ -55,7 +55,7 @@ if(navigator.connection?.saveData)salahWorld.classList.add("kids-salah-save-data
  const dock=document.querySelector(".bottom-nav");
  const cta=stage.querySelector("#kidsSalahOpenDay");
  if(!dock||!cta)return;
- let queued=false,lastHeight=0,lastWidth=0;
+ let queued=false,lastHeight=0,lastWidth=0,lastViewportHeight=0;
  function desiredHeroMax(w,h){
    if(w>=700)return h<=840?Math.min(390,Math.max(306,.43*h)):Math.min(525,Math.max(350,.50*h));
    return Math.min(430,Math.max(292,.50*h));
@@ -78,13 +78,18 @@ if(navigator.connection?.saveData)salahWorld.classList.add("kids-salah-save-data
    const safeMinimum=Math.min(560,contentMinimum);
    const gap=12;
    const free=navRect.top-gap-ctaRect.bottom;
-   const wanted=Math.max(safeMinimum,Math.min(reference,Math.round(heroRect.height+free)));
+   // The actual hero height also includes the native safe-area image bleed.
+   // Calculate the target from the previously applied BASE height, not from
+   // the inflated visible rectangle, to prevent cumulative startup drift.
+   const base=(lastWidth===w&&Math.abs(lastViewportHeight-h)<1&&lastHeight>0)
+     ?lastHeight:reference;
+   const wanted=Math.max(safeMinimum,Math.min(reference,Math.round(base+free)));
    // Always measure against live dock; on very small screens keep scroll
    // instead of shrinking/overlapping words or obstructing touch controls.
    if(Math.abs(lastHeight-wanted)>2||Math.abs(lastWidth-w)>1){
      HERO.style.setProperty("--kids-home-measured-min",safeMinimum+"px");
      HERO.style.setProperty("--kids-home-measured-target",wanted+"px");
-     lastHeight=wanted;lastWidth=w;
+     lastHeight=wanted;lastWidth=w;lastViewportHeight=h;
    }
  }
  function schedule(){
@@ -102,6 +107,8 @@ if(navigator.connection?.saveData)salahWorld.classList.add("kids-salah-save-data
    if(e.target?.closest?.('.nav-btn[data-target="today"]'))setTimeout(schedule,80);
  },true);
  if(document.fonts?.ready)document.fonts.ready.then(schedule).catch(()=>{});
+ // Run the first fit before the page is painted; preserve post-font updates.
+ fit();
  schedule();
  setTimeout(schedule,450);
 })();
