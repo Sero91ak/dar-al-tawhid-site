@@ -56,9 +56,23 @@ jobs:
           assert.doesNotMatch(cleaned, /📥 Telegram|🌐 Website|📸 Instagram/);
           assert.match(cleaned, /title: "📖 Titel"/);
           assert.match(cleaned, /„Die Absicht wird geprüft.“/);
-          assert.match(cleaned, /📝 Quelle: \/q\/12/);
+          assert.doesNotMatch(cleaned.split('---').slice(2).join('---'), /📝 Quelle: \/q\/12/);
           assert.match(cleaned, /🌙 Fazit: Die Niyyah zählt/);
           assert.match(cleaned, /url: "\/q\/12"/);
+          const tagged = stripPublicExtras([
+            '---', 'type: "single"', 'id: "qa-source-separation"', 'source: "📝 al-Mizzī 21/445"',
+            'links:', '  - label: "🔗 q/38"', '    url: "/q/38/"',
+            '---',
+            '🖋️ Gelehrter sagte:', '„Die eigentliche Aussage bleibt stehen.“',
+            '📝 **Quelle:** al-Mizzī 21/445', '🔗 dar-al-tawhid.de/q/38',
+            '**Überlieferungsstatus:** Die Kette ist unterbrochen.',
+            '🌙 **Fazit:** Kurzes Fazit bleibt stehen.'
+          ].join('\\n'));
+          assert.doesNotMatch(tagged.split('---').slice(2).join('---'), /📝 \*\*Quelle|🔗 dar-al-tawhid|Überlieferungsstatus/u);
+          assert.match(tagged, /„Die eigentliche Aussage bleibt stehen.“/);
+          assert.match(tagged, /🌙 \*\*Fazit:\*\* Kurzes Fazit bleibt stehen/);
+          assert.match(tagged, /url: "\/q\/38\//);
+
           assert.match(stripPublicExtras('---\ntitle: "T"\n---\n# Überschrift\nhttps://www.islamweb.net/#:~:text=foo'), /#:~:text=foo/);
           console.log('Visitor hashtag filter: passed; quote, source, Fazit preserved.');
           NODE
