@@ -4,8 +4,8 @@
   "auditedDate": "2026-10-09",
   "inspectionKind": "Eintrags-/Überlieferungstext gesichtet; klassische Direktnachweise nur bei verified vollständig eingetragen",
   "totalInspected": 50,
-  "newlyVerified": 30,
-  "remainingOpen": 20,
+  "newlyVerified": 38,
+  "remainingOpen": 12,
   "status": "partial-source-verification",
   "policy": {
     "sourceOfTruth": "apple-tv/hadith/series/",
@@ -18,7 +18,7 @@
     "compareBlobSHAOnMutation": true
   },
   "caution": "Verified bedeutet: arabischer Kommentar, Werk, Bd. und digitale Werkpagination eingetragen; die konkrete Druckausgabe ist nicht nachgewiesen (sharhEdition: null). Strenge Druckeditions-Nachprüfung bleibt ein separater Qualitätsauftrag.",
-  "nextAction": "Zunächst diese 20 offenen Einzelbelege prüfen, anschließend den nächsten 50er-Bereich HAD-0343–0392; nie pending als verified zählen.",
+  "nextAction": "12 verbleibende offene Kommentare mit überprüfbarem frühem Direkttext ergänzen; dann HAD-0343–0392. Keine Schätzung oder pauschale Dubletten-Übernahme.",
   "entries": [
     {
       "id": "HAD-0293",
@@ -96,15 +96,15 @@
     },
     {
       "id": "HAD-0307",
-      "sharh": "open-source-review",
-      "note": "Blutreinigung Kleidung, direkter Frühkommentar bislang nicht punktgenau belegt.",
-      "possibleSemanticParallel": "HAD-0308"
+      "sharh": "verified",
+      "commentary": "Ibn Raǧab, Fatḥ al-Bārī, arabischer Direkttext und digitale Band-/Seitenangaben im HAD-Datensatz; gedruckte Edition nicht nachgewiesen",
+      "directSource": "https://www.islamweb.net/ar/library/content/302/222"
     },
     {
       "id": "HAD-0308",
-      "sharh": "open-source-review",
-      "note": "Blutreinigung Kleidung, Variantenabgleich offen.",
-      "possibleSemanticParallel": "HAD-0307"
+      "sharh": "verified",
+      "commentary": "Ibn Raǧab, Fatḥ al-Bārī, arabischer Direkttext und digitale Band-/Seitenangaben im HAD-Datensatz; gedruckte Edition nicht nachgewiesen",
+      "directSource": "https://www.islamweb.net/ar/library/content/302/222"
     },
     {
       "id": "HAD-0309",
@@ -123,9 +123,9 @@
     },
     {
       "id": "HAD-0312",
-      "sharh": "open-source-review",
-      "note": "Reinigungsmethode mit Speichel/Nagel: genaue arabische Kommentierungsstelle offen.",
-      "possibleSemanticParallel": null
+      "sharh": "verified",
+      "commentary": "Ibn Raǧab, Fatḥ al-Bārī, arabischer Direkttext und digitale Band-/Seitenangaben im HAD-Datensatz; gedruckte Edition nicht nachgewiesen",
+      "directSource": "https://www.islamweb.net/ar/library/content/302/222"
     },
     {
       "id": "HAD-0313",
@@ -139,9 +139,9 @@
     },
     {
       "id": "HAD-0315",
-      "sharh": "open-source-review",
-      "note": "Moschustuch, mögliche Parallele HAD-0314; genauer Kommentar und Edition offen.",
-      "possibleSemanticParallel": "HAD-0314"
+      "sharh": "verified",
+      "commentary": "Ibn Raǧab, Fatḥ al-Bārī, arabischer Direkttext und digitale Band-/Seitenangaben im HAD-Datensatz; gedruckte Edition nicht nachgewiesen",
+      "directSource": "https://www.islamweb.net/ar/library/content/302/228"
     },
     {
       "id": "HAD-0316",
@@ -200,9 +200,9 @@
     },
     {
       "id": "HAD-0326",
-      "sharh": "open-source-review",
-      "note": "Gelb-/Braunfärbung außerhalb Menstruation; Athar und direkte Kommentierung separat prüfen.",
-      "possibleSemanticParallel": null
+      "sharh": "verified",
+      "commentary": "Ibn Raǧab, Fatḥ al-Bārī, arabischer Direkttext und digitale Band-/Seitenangaben im HAD-Datensatz; gedruckte Edition nicht nachgewiesen",
+      "directSource": "https://www.islamweb.net/ar/library/content/302/256"
     },
     {
       "id": "HAD-0327",
@@ -237,9 +237,9 @@
     },
     {
       "id": "HAD-0333",
-      "sharh": "open-source-review",
-      "note": "Berührung der Kleidung während Gebet; Frühkommentar samt Seitenzahl offen.",
-      "possibleSemanticParallel": null
+      "sharh": "verified",
+      "commentary": "Ibn Raǧab, Fatḥ al-Bārī, arabischer Direkttext und digitale Band-/Seitenangaben im HAD-Datensatz; gedruckte Edition nicht nachgewiesen",
+      "directSource": "https://www.islamweb.net/ar/library/content/302/268"
     },
     {
       "id": "HAD-0334",
@@ -275,20 +275,34 @@
     },
     {
       "id": "HAD-0340",
-      "sharh": "open-source-review",
-      "note": "ʿAmmār/ʿUmar-Isnād, direkte Auslegung und Dublettenabgleich offen.",
-      "possibleSemanticParallel": "HAD-0338"
+      "sharh": "verified",
+      "commentary": "Ibn Raǧab, Fatḥ al-Bārī, arabischer Direkttext und digitale Band-/Seitenangaben im HAD-Datensatz; gedruckte Edition nicht nachgewiesen",
+      "directSource": "https://www.islamweb.net/ar/library/content/302/281"
     },
     {
       "id": "HAD-0341",
-      "sharh": "open-source-review",
-      "note": "ʿAmmār, Staub und Gesicht/Handflächen; genaue Fassung und Quellenstelle noch offen.",
-      "possibleSemanticParallel": "HAD-0338"
+      "sharh": "verified",
+      "commentary": "Ibn Raǧab, Fatḥ al-Bārī, arabischer Direkttext und digitale Band-/Seitenangaben im HAD-Datensatz; gedruckte Edition nicht nachgewiesen",
+      "directSource": "https://www.islamweb.net/ar/library/content/302/281"
     },
     {
       "id": "HAD-0342",
       "sharh": "verified",
       "commentary": "Ibn Raǧab: source, volume, digital work pagination in HAD file; print edition not established"
     }
-  ]
+  ],
+  "lastReviewedAt": "2026-10-09",
+  "lastFollowup": {
+    "newlyVerified": [
+      "HAD-0307",
+      "HAD-0308",
+      "HAD-0312",
+      "HAD-0315",
+      "HAD-0326",
+      "HAD-0333",
+      "HAD-0340",
+      "HAD-0341"
+    ],
+    "note": "Blobs der acht HAD-Dateien per SHA einzeln geändert; keine konkreten Druckeditionen verifiziert."
+  }
 }
