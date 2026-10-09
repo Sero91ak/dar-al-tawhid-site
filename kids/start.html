@@ -2897,7 +2897,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.09.02</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.09.03</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3283,7 +3283,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v181-elastic1286";
+const KIDS_BUILD_ID="kids-shell-v182-unified-header1287";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6558,18 +6558,18 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 </script>
 
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"cc4ac04648774872a036edb959747bd5","r":1,"spa":2}' crossorigin="anonymous"></script>
-<script src="/kids/content-studio-feed.js?v=studio7"></script>
+<script src="/kids/content-studio-feed.js?v=studio8"></script>
 <script src="/kids/owner-voice.js?v=8"></script>\n<script src="/kids/dua-word-meanings-v1.js?v=2"></script>
 <script src="/kids/dua-phonetic-alignment-v1.js?v=1"></script>
-<script src="/kids/dua-smart-learn.js?v=1286"></script>
+<script src="/kids/dua-smart-learn.js?v=1287"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v181-elastic1286";
+  var KIDS_BUILD_ID="kids-shell-v182-unified-header1287";
   // Stable start: do not reload a visible app when a service worker takes control.
   // The next navigation uses network-first and receives the latest release.
   if("serviceWorker" in navigator){
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1286",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1287",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     },{once:true});
@@ -7555,7 +7555,7 @@ html[data-view="stories"] #view-stories > :last-child{
 <link rel="stylesheet" href="/kids/dua-smart-learn.css?v=1261" data-kids-dua-smart="1">\n<link rel="stylesheet" href="/kids/quiz-library.css?v=1237">
 <link rel="stylesheet" href="/kids/kids-age-typography.css?v=5">
 <script src="/kids/screen-awake.js?v=1"></script>
-<script src="/kids/story-follow-reader.js?v=16"></script>
+<script src="/kids/story-follow-reader.js?v=17"></script>
 <script src="/kids/story-policy.js?v=2"></script>
 <script src="/kids/prophet-stories.js?v=42"></script>
 <script src="/kids/mubashshirun-stories.js?v=31"></script>
@@ -11150,7 +11150,7 @@ html[data-view="stories"] #view-stories > :last-child{
 
 
 <!-- KIDS_DUA_FULLBLEED_EXPLANATION_CTA_V1249: shared full-width header and explanation actions, original back controls, no bottom-nav changes -->
-<link rel="stylesheet" href="/kids/global-detail-dock-v1247.css?v=1278" data-kids-global-detail-dock="1257">
+<link rel="stylesheet" href="/kids/global-detail-dock-v1247.css?v=1287" data-kids-global-detail-dock="1257">
 <script src="/kids/global-detail-dock-v1247.js?v=1278" data-kids-global-detail-dock="1257"></script>
 
 <link rel="stylesheet" href="/kids/dua-layout-v1259.css?v=1261" data-kids-dua-layout="1259">
@@ -11184,5 +11184,5 @@ html.kids-ios-app #kidsLaunch,html.dar-ios-native-app #kidsLaunch{display:none!i
 }}
 </style>
 <!-- KIDS_SALAH_STAGE_V1261: placed after hero, before continue-listening -->
-<script defer src="/kids/prayer-stage-v1261.js?v=1279" data-kids-salah-stage="1275"></script>
+<script defer src="/kids/prayer-stage-v1261.js?v=1287" data-kids-salah-stage="1275"></script>
 </html>
