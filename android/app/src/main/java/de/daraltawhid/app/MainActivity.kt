@@ -276,20 +276,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         @JavascriptInterface
-        fun syncPrayerSettings(json: String) {
-            DarWidgetStore.savePrayerSettings(applicationContext, json)
-        }
-
-        @JavascriptInterface
-        fun requestWidget(kind: String): Boolean {
-            val supported = DarWidgetStore.canPinWidget(applicationContext, kind)
-            if (supported) {
-                runOnUiThread {
-                    DarWidgetStore.requestPinWidget(this@MainActivity, kind)
-                }
-            }
-            return supported
-        }
+        fun syncPrayerSettings(json: String): Boolean =
+            prayerSettings(json)
     }
 
     private inner class DarWebViewClient : WebViewClient() {
