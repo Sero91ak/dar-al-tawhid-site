@@ -53,6 +53,8 @@ if (fs.existsSync(publicRouterPath)) {
   assert.ok(router.includes("btn.disabled=installed"), "Install button must remain clickable while Chrome prepares beforeinstallprompt and only disable after installation");
   assert.ok(!router.includes("btn.disabled=installed||preparing"), "Install button must not be disabled merely while Chrome prepares beforeinstallprompt");
   assert.ok(router.includes('start_url: "/pwa/?pwa=1"'), "Dynamic Android PWA manifest must launch the dedicated visitor app shell");
+  assert.ok(router.includes('const target = new URL("/", url.origin);'), "Dedicated Android PWA must fetch the canonical root asset without /index.html redirect");
+  assert.ok(router.includes('a redirect that escapes into the public desktop website'), "Dedicated PWA Static Assets redirect guard missing");
   assert.ok(router.includes('new URL("/desktop-preview/", url.origin)'), "Public root must fetch the canonical desktop directory internally");
   assert.ok(!router.includes('new URL("/desktop-preview/index.html", url.origin)'), "Public root must not leak the Static Assets index.html canonical redirect");
   assert.ok(router.includes('const legacyPwaLaunch = url.searchParams.get("homescreen") === "1"'), "Legacy Android home-screen launches must migrate into /pwa/");
