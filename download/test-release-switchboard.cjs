@@ -15,7 +15,7 @@ function release(n, { draft = false, invalidTv = false, published = "2026-10-08T
   const url = "https://github.com/" + repo + "/releases/download/" + tag + "/";
   return {
     tag_name: tag, draft, prerelease: false, published_at: published,
-    body: "ANDROID_VERSION=1.0." + n + "\\nTV_VERSION=0.1." + n + "\\nBUILD_CREATED_AT=2026-10-07T19:00:00Z",
+    body: ["ANDROID_VERSION=1.0." + n, "TV_VERSION=0.1." + n, "BUILD_CREATED_AT=2026-10-07T19:00:00Z"].join(String.fromCharCode(10)),
     assets: ["dar-al-tawhid-android.apk", "dar-al-tawhid-tv.apk"].map((name) => ({
       name, state: "uploaded", size: 20480,
       digest: invalidTv && name.includes("-tv") ? null : "sha256:" + "a".repeat(64),
