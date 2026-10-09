@@ -94,6 +94,18 @@ textarea{width:100%;min-height:86px;border-radius:15px;background:rgba(255,255,2
 .policy-note{border-top:1px solid var(--border);padding-top:15px}
 .lesson-main .grid{grid-template-columns:1fr}
 @media(min-width:850px){.lesson-main .grid{grid-template-columns:minmax(0,1.24fr) minmax(310px,.85fr)}}
+
+/* Unterricht: Quelldaten statt Webseitenlinks; Audio nur links vom arabischen Original */
+.lesson-source-block{margin:16px 0 25px}
+.lesson-source-block .source{padding:11px 0 0;margin:12px 0 0;border-top:1px solid var(--border);font-size:clamp(12px,1.7vw,14px);line-height:1.6;color:#ead6a9}
+.lesson-source-block .source strong{color:var(--gold)}
+.arabic-listen-row{display:grid;grid-template-columns:72px minmax(0,1fr);gap:12px;align-items:center;padding:15px 0 9px;border-bottom:1px solid var(--border)}
+.arabic-verse{font-family:"Geeza Pro","Noto Naskh Arabic",serif;direction:rtl;font-size:clamp(26px,4.8vw,42px);line-height:1.95;text-align:center;color:#fff0cd;min-width:0;border-radius:12px}
+.arabic-verse.is-audio-playing{background:rgba(217,191,130,.06);text-shadow:0 0 13px rgba(252,225,161,.24)}
+.arabic-play-button{border:1px solid var(--border);border-radius:16px;background:rgba(226,200,145,.09);min-height:64px;width:72px;color:var(--gold);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;font-size:12px;font-weight:800}
+.arabic-play-button[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 12px rgba(231,196,131,.2)}
+.audio-caption{font-size:12px;color:var(--muted);margin:7px 0 17px;min-height:1.5em}
+@media(max-width:450px){.arabic-listen-row{grid-template-columns:56px minmax(0,1fr);gap:6px}.arabic-play-button{width:56px;min-height:57px;font-size:10px}.arabic-verse{font-size:clamp(24px,6.4vw,32px)}}
 </style></head>
 <body data-profile="boy"><main class="wrap">
 <header><div><div class="brand">DĀR AL TAWḤĪD · KIDS</div><div class="stage">Interaktiver Unterricht · eigenständige Vorschau · noch nicht in der Kids-App</div></div>
@@ -127,13 +139,25 @@ textarea{width:100%;min-height:86px;border-radius:15px;background:rgba(255,255,2
 <p id="greeting" class="intro">As-salāmu ʿalaykum, mein lieber Bruder. Heute lernen wir, weshalb Wahrheit so wichtig ist.</p>
 <div class="controls" aria-label="Lernmodus"><button class="pill active" data-mode="both">Hören & Lesen</button><button class="pill" data-mode="read">Nur lesen</button></div></section>
 <div class="grid"><article class="lesson" id="lessonText">
-<h2>Qurʾān und Sunnah</h2><div class="eyebrow">Qurʾān · at-Tawbah 9:119 (Versauszug)</div>
-<div class="arabic" lang="ar">وَكُونُوا مَعَ ٱلصَّـٰدِقِينَ</div>
-<p class="quote">„Und seid mit den Wahrhaftigen.“</p>
-<div class="source">Quelle: Qurʾān 9:119 · Deutsch sinngemäß · https://quran.com/9/119</div>
-<div class="eyebrow">Sunnah · Ṣaḥīḥ Muslim 2607</div>
-<p class="quote">Wahrhaftigkeit führt zur Rechtschaffenheit, und Rechtschaffenheit führt zum Paradies.</p>
-<div class="source">Quelle: Ṣaḥīḥ Muslim, Nr. 2607a · sinngemäßer Auszug aus der Überlieferung von ʿAbdullāh ibn Masʿūd · https://sunnah.com/muslim:2607a</div>
+<h2>Qurʾān und Sunnah</h2>
+<section class="lesson-source-block">
+  <div class="eyebrow">Qurʾān · Sūrat at-Tawbah · Vers 119</div>
+  <div class="arabic-listen-row">
+    <button type="button" class="arabic-play-button" data-arabic-audio="quran:9:119" aria-label="Sūrat at-Tawbah, Vers 119 auf Arabisch anhören" aria-pressed="false">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true"><path d="M5 9v6h4l5 4V5L9 9H5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M17 9a4 4 0 0 1 0 6m2.5-9a8 8 0 0 1 0 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <span>Anhören</span>
+    </button>
+    <div class="arabic-verse" data-audio-text="quran:9:119" lang="ar" dir="rtl">يَا أَيُّهَا الَّذِينَ آمَنُوا اتَّقُوا اللَّهَ وَكُونُوا مَعَ الصَّادِقِينَ</div>
+  </div>
+  <p class="audio-caption" id="arabicAudioStatus" aria-live="polite">Rezitation des vollständigen Verses</p>
+  <p class="quote">„O die ihr glaubt, fürchtet Allah und seid mit den Wahrhaftigen.“</p>
+  <p class="source"><strong>Quelle:</strong> Qurʾān · Sūrat at-Tawbah · 9:119</p>
+</section>
+<section class="lesson-source-block">
+  <div class="eyebrow">Sunnah · Wahrhaftigkeit</div>
+  <p class="quote">Wahrhaftigkeit führt zur Rechtschaffenheit, und Rechtschaffenheit führt zum Paradies.</p>
+  <p class="source"><strong>Quelle:</strong> Prophet Muḥammad ﷺ · Überliefert von ʿAbdullāh ibn Masʿūd · Ṣaḥīḥ Muslim, Kitāb al-Birr waṣ-Ṣilah wa-l-Ādāb, Nr. 2607a</p>
+</section>
 <div class="eyebrow">Erklärung</div>
 <p id="explanation" class="explain">Wer einen Fehler macht und die Wahrheit sagt, kann Verantwortung übernehmen und den Fehler wiedergutmachen. Eine Lüge kann andere verletzen und Vertrauen zerstören. Deshalb sagen wir die Wahrheit, auch wenn es uns schwerfällt.</p>
 <div class="eyebrow">Alltagsbeispiel</div><p class="explain">Du hast versehentlich ein Glas zerbrochen. Du darfst sagen: „Ich war das. Es tut mir leid. Ich helfe beim Aufräumen.“</p>
@@ -218,10 +242,47 @@ const showLesson=()=>{
   window.scrollTo(0,0);
 };
 const showHome=()=>{
+  stopArabicAudio();
   $("#academyHome").hidden=false;$("#lessonMain").hidden=true;
   stopSpeech();stopRecognition();renderStatus();
   window.scrollTo(0,0);
 };
+
+/* Nur freigegebene arabische Audios verwenden; keine arabische System-TTS. */
+const arabicTracks=Object.freeze({
+  "quran:9:119":{type:"quran",primary:"/quran-audio/ar.alafasy/1354.mp3",fallback:"https://everyayah.com/data/Alafasy_128kbps/009119.mp3"}
+});
+let arabicPlayer=null,arabicKey=null,arabicFallbackUsed=false;
+function updateArabicButton(active){
+  const b=document.querySelector('[data-arabic-audio="quran:9:119"]');
+  const t=document.querySelector('[data-audio-text="quran:9:119"]');
+  if(b){b.setAttribute("aria-pressed",String(active));b.querySelector("span").textContent=active?"Stopp":"Anhören"}
+  if(t)t.classList.toggle("is-audio-playing",active);
+}
+function stopArabicAudio(message){
+  if(arabicPlayer){arabicPlayer.onended=null;arabicPlayer.onerror=null;try{arabicPlayer.pause();arabicPlayer.removeAttribute("src");arabicPlayer.load()}catch(e){}}
+  arabicPlayer=null;arabicKey=null;arabicFallbackUsed=false;updateArabicButton(false);
+  const status=$("#arabicAudioStatus");if(status)status.textContent=message||"Rezitation des vollständigen Verses";
+}
+function playArabicAudio(key){
+  const t=arabicTracks[key],status=$("#arabicAudioStatus");if(!t){status.textContent="Für diesen arabischen Text ist keine geprüfte Aufnahme hinterlegt.";return}
+  if(arabicPlayer&&arabicKey===key&&!arabicPlayer.paused){stopArabicAudio();return}
+  stopSpeech();stopRecognition();stopArabicAudio();arabicKey=key;
+  const a=new Audio();arabicPlayer=a;a.preload="none";a.playsInline=true;
+  const error=()=>{
+    if(arabicPlayer!==a)return;
+    if(!arabicFallbackUsed&&t.fallback){
+      arabicFallbackUsed=true;status.textContent="Rezitation wird geladen …";
+      a.src=t.fallback;a.load();const p=a.play();if(p&&p.catch)p.catch(()=>{if(arabicPlayer===a)stopArabicAudio("Rezitation momentan nicht verfügbar.")});
+    }else stopArabicAudio("Rezitation momentan nicht verfügbar.");
+  };
+  a.onerror=error;
+  a.onended=()=>{if(arabicPlayer===a)stopArabicAudio("Rezitation beendet. Du kannst sie erneut anhören.")};
+  a.src=t.primary;status.textContent="Rezitation wird geladen …";updateArabicButton(true);
+  const p=a.play();if(p&&p.then)p.then(()=>{if(arabicPlayer===a)status.textContent="Du hörst Sūrat at-Tawbah, Vers 119."}).catch(error);
+}
+allEls("[data-arabic-audio]").forEach(b=>b.addEventListener("click",()=>playArabicAudio(b.dataset.arabicAudio)));
+
 let utterance=null;
 function stopSpeech(){
   try{window.speechSynthesis?.cancel()}catch(_){}
@@ -229,12 +290,13 @@ function stopSpeech(){
 }
 function germanLessonText(){
   return "As-salāmu ʿalaykum, "+greeting()+". "+
-  "Heute lernen wir die Wahrhaftigkeit. Im Qurʾān, Sūrat at-Tawbah, Vers 119, steht sinngemäß: Und seid mit den Wahrhaftigen. "+
+  "Heute lernen wir die Wahrhaftigkeit. Im Qurʾān, Sūrat at-Tawbah, Vers 119, steht sinngemäß: O die ihr glaubt, fürchtet Allah und seid mit den Wahrhaftigen. "+
   "Von ʿAbdullāh ibn Masʿūd ist in Ṣaḥīḥ Muslim 2607 a überliefert, dass der Prophet, Allahs Segen und Frieden auf ihm, lehrte: Wahrhaftigkeit führt zur Rechtschaffenheit und Rechtschaffenheit führt zum Paradies. "+
   $("#explanation").textContent+" "+
   "Wir üben jetzt gemeinsam. Du kannst sprechen, schreiben oder eine Antwort auswählen.";
 }
 function speak(t){
+  stopArabicAudio();
   if(mode==="read"){ $("#audioInfo").textContent="Du befindest dich im Lesemodus. Wechsel zu Hören & Lesen, um die deutsche Demo-Stimme zu testen.";return }
   if(!("speechSynthesis" in window)){$("#audioInfo").textContent="Die Sprachwiedergabe ist in diesem Browser nicht verfügbar.";return}
   stopSpeech();
@@ -255,7 +317,7 @@ function resetQuestions(){
   questionIndex=0;renderQuestion();
 }
 function renderQuestion(){
-  restoreControls();stopSpeech();stopRecognition();
+  restoreControls();stopSpeech();stopRecognition();stopArabicAudio();
   const ex=currentQuestions()[questionIndex];
   if(!ex){showSummary();return}
   choice=null;recognized=null;answered=false;
@@ -348,7 +410,7 @@ $("#answer").addEventListener("input",()=>{if($("#answer").value.trim()){choice=
 $("#mic").addEventListener("click",()=>{
   const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
   if(!SR){$("#micInfo").textContent="Spracherkennung ist hier nicht verfügbar. Du kannst per Tastatur oder Auswahl antworten.";return}
-  stopSpeech();stopRecognition();
+  stopSpeech();stopRecognition();stopArabicAudio();
   try{
     recognition=new SR();recognition.lang="de-DE";recognition.interimResults=false;recognition.continuous=false;recognition.maxAlternatives=1;
     recognition.onresult=e=>{const value=e.results?.[0]?.[0]?.transcript||"";$("#answer").value=value;choice=null;allEls(".choice-button").forEach(x=>x.setAttribute("aria-pressed","false"));$("#micInfo").textContent="Bitte prüfe den erkannten Text und tippe anschließend auf „Antwort prüfen“.";};
@@ -359,8 +421,8 @@ $("#mic").addEventListener("click",()=>{
   }catch(e){stopRecognition();$("#micInfo").textContent="Mikrofon derzeit nicht verfügbar. Bitte schreibe oder wähle eine Antwort."}
 });
 $("#cancelMic").addEventListener("click",()=>{try{recognition?.stop()}catch(_){}});
-document.addEventListener("visibilitychange",()=>{if(document.hidden){stopSpeech();stopRecognition()}});
-window.addEventListener("pagehide",()=>{stopSpeech();stopRecognition()});
+document.addEventListener("visibilitychange",()=>{if(document.hidden){stopSpeech();stopRecognition();stopArabicAudio()}});
+window.addEventListener("pagehide",()=>{stopSpeech();stopRecognition();stopArabicAudio()});
 restoreControls();applyProfile();renderStatus();
 })();
 </script></body></html>
