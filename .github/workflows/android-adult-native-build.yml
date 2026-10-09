@@ -48,6 +48,19 @@ jobs:
       - name: Gradle einrichten
         uses: gradle/actions/setup-gradle@v4
 
+      - name: Android-Version festlegen
+        shell: bash
+        run: |
+          set -euo pipefail
+          VERSION_CODE="$(date -u +%s)"
+          if (( VERSION_CODE > 2100000000 )); then
+            echo "::error::Android versionCode außerhalb des zulässigen Bereichs: $VERSION_CODE"
+            exit 1
+          fi
+          echo "DAR_ANDROID_VERSION_CODE=$VERSION_CODE" >> "$GITHUB_ENV"
+          echo "DAR_ANDROID_VERSION_NAME=1.0.$VERSION_CODE" >> "$GITHUB_ENV"
+          echo "Android Version: 1.0.$VERSION_CODE" >> "$GITHUB_STEP_SUMMARY"
+
       - name: Native Icons und Widgets prüfen
         shell: bash
         run: |
@@ -108,7 +121,7 @@ jobs:
           "$sdk/apksigner" verify --verbose --print-certs android/app/build/outputs/apk/release/app-release.apk > "$RUNNER_TEMP/apksigner.txt"
           grep -q '^Verified' "$RUNNER_TEMP/apksigner.txt"
           sha256sum android/app/build/outputs/apk/release/app-release.apk
-          echo "Android Version: 1.0.$GITHUB_RUN_NUMBER" >> "$GITHUB_STEP_SUMMARY"
+          echo "Verifizierte Android Version: $DAR_ANDROID_VERSION_NAME" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Signierte Pakete intern bereitstellen
         if: steps.signing.outputs.enabled == 'true'
