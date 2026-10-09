@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-10-09T14:16:51.000Z",
+  "generated": "2026-10-09T16:43:00.000Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -1221,6 +1221,49 @@
             "channel": "ios",
             "successful": 74,
             "failed": 3
+          },
+          {
+            "channel": "safari_web_push",
+            "successful": 10,
+            "failed": 0
+          },
+          {
+            "channel": "chrome_web_push",
+            "successful": 4,
+            "failed": 0
+          }
+        ]
+      }
+    },
+    "sufyan-ath-thawri-fremde-rechte-zurueckgeben-20261009": {
+      "postId": "sufyan-ath-thawri-fremde-rechte-zurueckgeben-20261009",
+      "filename": "adab-sufyan-thawri-unrecht-vor-dhikr-20261009.md",
+      "postTitle": "📖 Erst das Unrecht beheben – dann den Dhikr vermehren",
+      "postPath": "content/posts/adab-sufyan-thawri-unrecht-vor-dhikr-20261009.md",
+      "publishedAt": "2026-10-09T16:18:00.000Z",
+      "status": "sent",
+      "pushApproved": true,
+      "pushApprovedAt": "2026-10-09T16:42:58.000Z",
+      "approvalOrigin": "Expliziter Nutzerbefehl nach Hinweis auf erforderliche Vorab-Freigabe: 'erzeug denn quellen link un jetzt global pushen' 2026-10-09",
+      "sentAt": "2026-10-09T16:43:00.000Z",
+      "updatedAt": "2026-10-09T16:43:00.000Z",
+      "lastError": "",
+      "pushResult": {
+        "target": "segment:DAR_PUSH|all",
+        "targetUrl": "https://dar-al-tawhid.de/?post=sufyan-ath-thawri-fremde-rechte-zurueckgeben-20261009#post/sufyan-ath-thawri-fremde-rechte-zurueckgeben-20261009",
+        "sourcePage": "https://dar-al-tawhid.de/q/39/",
+        "notificationId": "d0b747d7-de0d-44c4-b3f1-05578003a427",
+        "idempotencyKey": "fae71b39-e301-42e6-95c7-cc16047e5913",
+        "provider": "OneSignal",
+        "successful": 88,
+        "failed": 0,
+        "errored": 0,
+        "confirmedReceived": 0,
+        "channelResults": [
+          {
+            "channel": "ios",
+            "successful": 74,
+            "failed": 0
           },
           {
             "channel": "safari_web_push",
