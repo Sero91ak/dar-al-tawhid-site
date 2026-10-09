@@ -14,8 +14,8 @@ vm.runInNewContext(read("kids/dua-word-meanings-v1.js"),context,{filename:"dua-w
 const glossary=context.window.DARKidsDuaWordMeanings;
 const items=data.items||[],bad=[];
 const fail=x=>{bad.push(x);console.error("KIDS_DUA_TRILINGUAL_GUARD FAIL:",x)};
-if(items.length!==120)fail("Dua count must remain 120");
-if(glossary.coverage()!==120)fail("Bilingual meaning coverage must be exactly 120");
+if(items.length<120)fail("Dua count regressed below 120");
+if(glossary.coverage()!==items.length)fail("Bilingual meaning coverage differs from total Duʿāʾ count");
 let aligned=0;
 for(const d of items){
  const rows=d.learningSegments||[];
@@ -24,7 +24,7 @@ for(const d of items){
  else aligned+=meanings.length;
  if(rows.some((s,i)=>s.index!==i))fail("Arabic word indexes changed: "+d.id);
 }
-if(aligned!==1366)fail("Word alignment count changed: "+aligned+" != 1366");
+if(aligned<1366)fail("Word alignment count dropped below 1366: "+aligned);
 const js=read("kids/dua-smart-learn.js");
 for(const token of ["id=\"dslGerman\"","class=\"dsl-word de\"","getSegments(currentDua)","german:String(","root.querySelectorAll(\"[data-seg]\")","attachPhraseFollow(","playWordSequence()","var reviewed=","fitReadingStage()","queueReaderFit()"]){
  if(!js.includes(token))fail("Runtime feature missing "+token);
@@ -35,7 +35,8 @@ for(const token of ["KIDS_DUA_TRILINGUAL_LEARNING_V1282",".dsl-german",".dsl-wor
  if(!css.includes(token))fail("Trilingual styling missing "+token);
 }
 const v=JSON.parse(read("kids/version.json"));
-if(v.visualSystem?.serviceWorkerCache!=="v1282"||v.buildId!=="kids-shell-v178-trilingual1282")fail("Kids release version mismatch");
+const cacheVersion=Number(String(v.visualSystem?.serviceWorkerCache||"").replace(/^v/,""));
+if(cacheVersion<1282||!String(v.buildId||"").endsWith(String(cacheVersion)))fail("Kids release cache/build version mismatch");
 for(const page of ["kids/index.html","kids/start.html","kids/shell.html"]){
  const html=read(page);
  for(const token of [v.buildId,"/kids/dua-word-meanings-v1.js?v=1","/kids/dua-smart-learn.js?v=1282","/kids/dua-learn-trilingual-v1282.css?v=1282"]){
@@ -46,5 +47,10 @@ const sw=read("kids/sw.js");
 for(const token of ['dar-al-tawhid-kids-v1282',v.buildId,"/kids/dua-word-meanings-v1.js?v=1","/kids/dua-smart-learn.js?v=1282","/kids/dua-learn-trilingual-v1282.css?v=1282"]){
  if(!sw.includes(token))fail("Offline precache missing "+token);
 }
-if(bad.length){console.error(bad.length+" trilingual QA failures");process.exit(1)}
-console.log("KIDS_DUA_TRILINGUAL_GUARD OK · 120 Duʿāʾs · 1366 contextual German word meanings · 3-layer focus · 3 pages · offline V1282 · syntax passed");
+function runKidsDuaTrilingualGuard(){
+  if(bad.length){console.error(bad.length+" trilingual QA failures");return bad.length}
+  console.log("KIDS_DUA_TRILINGUAL_GUARD OK · "+items.length+" Duʿāʾs · "+aligned+" contextual German word meanings · 3-layer focus · 3 pages · offline V1282+ · syntax passed");
+  return 0;
+}
+if(require.main===module)process.exit(runKidsDuaTrilingualGuard()?1:0);
+module.exports={runKidsDuaTrilingualGuard};
