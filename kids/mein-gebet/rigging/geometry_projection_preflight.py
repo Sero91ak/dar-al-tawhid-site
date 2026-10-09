@@ -32,6 +32,32 @@ def assert_projection_safe(g):
             counts[i] += 1
     if any(count != 1 for count in counts.values()):
         raise ValueError("Every mesh must have exactly one scene instance")
+    # A glTF can contain inactive scenes. Raw POSITION comparison would
+    # otherwise include hidden models in silhouette framing and inflate IoU.
+    scenes = g.get("scenes")
+    if scenes is not None:
+        if not isinstance(scenes, list) or not scenes:
+            raise ValueError("Missing active glTF scene declaration")
+        scene_id = g.get("scene", 0)
+        if (type(scene_id) is not int or scene_id < 0 or
+                scene_id >= len(scenes)):
+            raise ValueError("Invalid default glTF scene")
+        roots = scenes[scene_id].get("nodes")
+        if not isinstance(roots, list) or not roots:
+            raise ValueError("Active glTF scene has no root nodes")
+        reachable = set()
+        pending = list(roots)
+        while pending:
+            i = pending.pop()
+            if type(i) is not int or i < 0 or i >= len(nodes):
+                raise ValueError("Invalid active scene node reference")
+            if i in reachable:
+                continue
+            reachable.add(i)
+            pending.extend(nodes[i].get("children", []))
+        mesh_nodes = {i for i, node in enumerate(nodes) if "mesh" in node}
+        if not mesh_nodes.issubset(reachable):
+            raise ValueError("Inactive/unreachable mesh would corrupt five-view IoU")
 
     def identity_trs(node):
         for key, target in (
