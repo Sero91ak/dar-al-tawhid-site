@@ -48,7 +48,7 @@ function bad(name,edit,expected){
    assert.ok(result.errors.some(x=>x.includes(expected)),JSON.stringify(result.errors));});
 }
 test("positive actual-buffer mesh with 1 bind matrix and 1 triangle",()=>{
- const {g,bin}=fixture(),r=validateGeometryBytes(g,bin);
+ const {g,bin}=fixture(),r=validateGeometryBytes(g,bin,{minimumReferencedVertices:3});
  assert.equal(r.valid,true,JSON.stringify(r.errors));assert.equal(r.vertices,3);
  assert.equal(r.triangles,1);assert.equal(r.productionApproved,false);
 });
