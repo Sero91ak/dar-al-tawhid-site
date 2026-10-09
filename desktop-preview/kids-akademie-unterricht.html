@@ -217,7 +217,7 @@ body[data-profile="girl"] .overview-hero:after{background:linear-gradient(90deg,
 @media(prefers-reduced-motion:reduce){.journey-bar span{transition:none}}
 
 </style></head>
-<body data-profile="boy"><main class="wrap">
+<body data-profile="neutral"><main class="wrap">
 
 <header class="academy-header">
  <div class="academy-brand"><div class="brand">DĀR AL TAWḤĪD · KIDS</div><div class="stage">Meine Lernakademie · Unterrichtsvorschau</div></div>
@@ -293,10 +293,8 @@ body[data-profile="girl"] .overview-hero:after{background:linear-gradient(90deg,
 <script>
 (()=>{
 "use strict";
-const $=s=>document.querySelector(s);
-const allEls=s=>Array.from(document.querySelectorAll(s));
-const DATA_VERSION="2026-10-09";
-const intervals=[1,3,7,14,30,60,90];
+const $=s=>document.querySelector(s),all=s=>[...document.querySelectorAll(s)];
+const VERSION="academy-v4",INTERVALS=[1,3,7,14,30,60,90];
 const exercises={
   "4-5":[
     {type:"choice",prompt:"Du hast etwas kaputt gemacht. Was sagst du?",options:["Ich sage ehrlich: Ich war das.","Ich sage: Jemand anders war es."],correct:0,hint:"Überlege: Was bedeutet ehrlich sein?",explain:"Wahrhaftigkeit bedeutet: Ich sage, was wirklich passiert ist."},
@@ -313,220 +311,184 @@ const exercises={
     {type:"text",prompt:"Worin liegt der Unterschied zwischen einem versehentlichen Fehler und einer bewussten Lüge?",sample:"Einen Fehler kann man unbeabsichtigt machen. Eine bewusste Lüge bedeutet, absichtlich etwas Unwahres zu sagen. Nach einem Fehler sollte man ehrlich bleiben und ihn wiedergutmachen.",hint:"Denk an den Unterschied zwischen Versehen und absichtlicher Unwahrheit."}
   ]
 };
-let profile="boy",age="6-8",mode="both",questionIndex=0,choice=null,recognized=null,answered=false;
-let session={checked:0,answeredChoices:0,correctChoices:0,usedHelp:false};
-const greeting=()=>profile==="boy"?"mein lieber Bruder":"meine liebe Schwester";
-const currentQuestions=()=>exercises[age];
-const storageKey=()=>["kids","unterricht","preview",DATA_VERSION,"sidq",profile,age].join(".");
-const withDate=(days)=>{
-  const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()+days);
-  return d.toLocaleDateString("de-DE",{day:"2-digit",month:"long",year:"numeric"});
-};
-const safeRead=()=>{try{return JSON.parse(localStorage.getItem(storageKey())||"null")}catch(_){return null}};
-function applyProfile(){
-  document.body.dataset.profile=profile;
-  $("#academyHome [data-open-lesson]").forEach(b=>b.setAttribute("aria-label",b.getAttribute("aria-label")||"Unterricht öffnen"));
-  allEls("[data-profile]").forEach(b=>{const a=b.dataset.profile===profile;b.classList.toggle("active",a);b.setAttribute("aria-pressed",String(a))});
-  const intro="As-salāmu ʿalaykum, "+greeting()+". ";
-  $("#overviewGreeting").textContent=intro+"Gemeinsam lernen wir Wissen aus Qurʾān und Sunnah.";
-  $("#greeting").textContent=intro+"Heute lernen wir, weshalb Wahrheit so wichtig ist.";
-  renderStatus();
+let id="unassigned",gender="neutral",age="6-8",step=0,unlocked=0,qIndex=0,choice=null,answerMode="choices",answered=false,finished=false;
+let score={done:0,correct:0,choices:0},recognition=null,voice=null,audio=null,audioKey="",fallbackTried=false,voiceToken=0;
+const TRACKS={"quran:9:119":{src:"/quran-audio/ar.alafasy/1354.mp3",fallback:"https://everyayah.com/data/Alafasy_128kbps/009119.mp3"}};
+const stages=all('.lesson-stage[data-lesson-step]');
+const questions=()=>exercises[age]||exercises["6-8"];
+const address=()=>gender==="boy"?"mein lieber Bruder":gender==="girl"?"meine liebe Schwester":"liebes Kind";
+const storageKey=()=>["kids",VERSION,id,age,"sidq"].join(".");
+const oldRecord=()=>{try{return JSON.parse(localStorage.getItem(storageKey())||"null")}catch(_){return null}};
+function ageKey(x){const t=String(x||"").replace(/[–—]/g,"-");return exercises[t]?t:"6-8"}
+function getProfile(){
+ let child=null,guest="",a="";try{
+  const data=JSON.parse(localStorage.getItem("kids.profiles.v1")||"[]"),active=localStorage.getItem("kids.activeProfile");
+  if(Array.isArray(data))child=data.find(p=>active&&String(p?.id)===String(active))||null;
+  guest=localStorage.getItem("kids.guest.gender.v1")||"";a=localStorage.getItem("kids.age")||"";
+ }catch(_){}
+ const g=child?.gender==="girl"?"girl":child?.gender==="boy"?"boy":guest==="girl"?"girl":guest==="boy"?"boy":"neutral";
+ return {child,g,age:ageKey(child?.age||a),id:child?.id?String(child.id):guest?"guest-"+g:"preview"};
 }
-function renderStatus(){
-  const record=safeRead(),status=$("#courseStatus"),note=$("#reviewNotice"),b=$("#repeatReview");
-  if(!record){status.textContent="Noch nicht begonnen";note.textContent="Deine erste Unterrichtsstunde ist bereit.";b.hidden=true;return}
-  const due=Number(record.nextDue||0),ready=due<=Date.now();
-  status.textContent=ready?"Wiederholung bereit":"Bereits gelernt";
-  note.textContent=ready?"Eine kurze Erinnerung hilft, das Gelernte zu behalten.":"Nächste empfohlene Erinnerung: "+new Date(due).toLocaleDateString("de-DE")+".";
-  b.hidden=false;b.textContent=ready?"Jetzt wiederholen":"Freiwillig wiederholen";
-}
-const showLesson=()=>{
-  $("#academyHome").hidden=true;$("#lessonMain").hidden=false;
-  stopSpeech();resetQuestions();
-  window.scrollTo(0,0);
-};
-const showHome=()=>{
-  stopArabicAudio();
-  $("#academyHome").hidden=false;$("#lessonMain").hidden=true;
-  stopSpeech();stopRecognition();renderStatus();
-  window.scrollTo(0,0);
-};
-
-/* Nur freigegebene arabische Audios verwenden; keine arabische System-TTS. */
-const arabicTracks=Object.freeze({
-  "quran:9:119":{type:"quran",primary:"/quran-audio/ar.alafasy/1354.mp3",fallback:"https://everyayah.com/data/Alafasy_128kbps/009119.mp3"}
-});
-let arabicPlayer=null,arabicKey=null,arabicFallbackUsed=false;
-function updateArabicButton(active){
-  const b=document.querySelector('[data-arabic-audio="quran:9:119"]');
-  const t=document.querySelector('[data-audio-text="quran:9:119"]');
-  if(b){b.setAttribute("aria-pressed",String(active));b.querySelector("span").textContent=active?"Stopp":"Anhören"}
-  if(t)t.classList.toggle("is-audio-playing",active);
-}
-function stopArabicAudio(message){
-  if(arabicPlayer){arabicPlayer.onended=null;arabicPlayer.onerror=null;try{arabicPlayer.pause();arabicPlayer.removeAttribute("src");arabicPlayer.load()}catch(e){}}
-  arabicPlayer=null;arabicKey=null;arabicFallbackUsed=false;updateArabicButton(false);
-  const status=$("#arabicAudioStatus");if(status)status.textContent=message||"Rezitation des vollständigen Verses";
-}
-function playArabicAudio(key){
-  const t=arabicTracks[key],status=$("#arabicAudioStatus");if(!t){status.textContent="Für diesen arabischen Text ist keine geprüfte Aufnahme hinterlegt.";return}
-  if(arabicPlayer&&arabicKey===key&&!arabicPlayer.paused){stopArabicAudio();return}
-  stopSpeech();stopRecognition();stopArabicAudio();arabicKey=key;
-  const a=new Audio();arabicPlayer=a;a.preload="none";a.playsInline=true;
-  const error=()=>{
-    if(arabicPlayer!==a)return;
-    if(!arabicFallbackUsed&&t.fallback){
-      arabicFallbackUsed=true;status.textContent="Rezitation wird geladen …";
-      a.src=t.fallback;a.load();const p=a.play();if(p&&p.catch)p.catch(()=>{if(arabicPlayer===a)stopArabicAudio("Rezitation momentan nicht verfügbar.")});
-    }else stopArabicAudio("Rezitation momentan nicht verfügbar.");
-  };
-  a.onerror=error;
-  a.onended=()=>{if(arabicPlayer===a)stopArabicAudio("Rezitation beendet. Du kannst sie erneut anhören.")};
-  a.src=t.primary;status.textContent="Rezitation wird geladen …";updateArabicButton(true);
-  const p=a.play();if(p&&p.then)p.then(()=>{if(arabicPlayer===a)status.textContent="Du hörst Sūrat at-Tawbah, Vers 119."}).catch(error);
-}
-allEls("[data-arabic-audio]").forEach(b=>b.addEventListener("click",()=>playArabicAudio(b.dataset.arabicAudio)));
-
-let utterance=null;
+function stopMic(){if(recognition){try{recognition.abort()}catch(_){}recognition=null}$("#mic").disabled=false;$("#cancelMic").hidden=true}
 function stopSpeech(){
-  try{window.speechSynthesis?.cancel()}catch(_){}
-  utterance=null;$("#play").textContent="Unterricht anhören";
+ voiceToken++;try{speechSynthesis.cancel()}catch(_){}voice=null;
+ all(".is-reading").forEach(x=>x.classList.remove("is-reading"));
+ all("[data-speak-stage]").forEach(x=>{x.disabled=false;x.setAttribute("aria-pressed","false")});
 }
-function germanLessonText(){
-  return "As-salāmu ʿalaykum, "+greeting()+". "+
-  "Heute lernen wir die Wahrhaftigkeit. Im Qurʾān, Sūrat at-Tawbah, Vers 119, steht sinngemäß: O die ihr glaubt, fürchtet Allah und seid mit den Wahrhaftigen. "+
-  "Von ʿAbdullāh ibn Masʿūd ist in Ṣaḥīḥ Muslim 2607 a überliefert, dass der Prophet, Allahs Segen und Frieden auf ihm, lehrte: Wahrhaftigkeit führt zur Rechtschaffenheit und Rechtschaffenheit führt zum Paradies. "+
-  $("#explanation").textContent+" "+
-  "Wir üben jetzt gemeinsam. Du kannst sprechen, schreiben oder eine Antwort auswählen.";
+function stopAudio(note){
+ if(audio){audio.onerror=null;audio.onended=null;try{audio.pause();audio.removeAttribute("src");audio.load()}catch(_){}}
+ audio=null;audioKey="";fallbackTried=false;
+ all("[data-arabic-audio]").forEach(x=>{x.setAttribute("aria-pressed","false");x.querySelector("span").textContent="Anhören"});
+ all(".arabic-verse").forEach(x=>x.classList.remove("is-audio-playing"));
+ $("#arabicAudioStatus").textContent=note||"Rezitation des vollständigen Verses";
 }
-function speak(t){
-  stopArabicAudio();
-  if(mode==="read"){ $("#audioInfo").textContent="Du befindest dich im Lesemodus. Wechsel zu Hören & Lesen, um die deutsche Demo-Stimme zu testen.";return }
-  if(!("speechSynthesis" in window)){$("#audioInfo").textContent="Die Sprachwiedergabe ist in diesem Browser nicht verfügbar.";return}
-  stopSpeech();
-  utterance=new SpeechSynthesisUtterance(t);utterance.lang="de-DE";utterance.rate=.88;utterance.pitch=1;
-  utterance.onend=()=>$("#play").textContent="Unterricht anhören";
-  utterance.onerror=()=>$("#audioInfo").textContent="Audio ist momentan nicht verfügbar. Der Lesemodus bleibt verwendbar.";
-  window.speechSynthesis.speak(utterance);
-  $("#play").textContent="Erneut anhören";
-  $("#audioInfo").textContent="Dies ist nur eine deutsche Systemstimmen-Demo. Die geprüfte Serhat-Masterstimme und Qurʾān-Rezitation werden separat angeschlossen.";
+function stopAll(){stopSpeech();stopAudio();stopMic()}
+function hideLesson(){$("#academyHome").hidden=false;$("#lessonMain").hidden=true}
+function renderHome(){
+ const rec=oldRecord(),due=Number(rec?.nextDue||0),pending=rec&&due<=Date.now();
+ $("#courseStatus").textContent=!rec?"Bereit":pending?"Wiederholen":"Bereits gelernt";
+ $("#reviewNotice").textContent=!rec?"Eine neue Lektion wartet auf dich.":pending?"Heute ist eine kurze Wiederholung dran.":"Du hast Ṣidq schon geübt!";
+ $("#todaySummary").textContent=!rec?"Eine neue Unterrichtsstunde ist bereit.":pending?"Erinnere dich an das Gelernte.":"Diese Lektion kannst du jederzeit erneut anhören.";
+ $("#journeyBar").style.width=rec?"100%":"12%";
+ $("#journeyDetail").textContent=!rec?"Schritt für Schritt lernen.":pending?"Wiederholung ist bereit.":"Nächste Erinnerung: "+new Date(due).toLocaleDateString("de-DE");
+ $(".today-button").firstChild.textContent=rec?"Lektion wiederholen ":"Unterricht beginnen ";
 }
-let recognition=null;
-function stopRecognition(){
-  try{recognition?.abort()}catch(_){}
-  recognition=null;$("#mic").disabled=false;$("#cancelMic").hidden=true;
+function syncProfile(force=false){
+ const p=getProfile();if(!force&&p.id===id&&p.g===gender&&p.age===age)return;
+ if(p.id!==id||p.g!==gender||p.age!==age){stopAll();hideLesson()}
+ id=p.id;gender=p.g;age=p.age;document.body.dataset.profile=gender;
+ $("#profileLabel").textContent=p.child?.name|| (gender==="neutral"?"Lernvorschau":"Mein Profil");
+ $("#academyProfile").classList.toggle("has-profile",gender!=="neutral");
+ if(gender!=="neutral")$("#academyAvatar").src=gender==="girl"?"/kids/assets/profile-avatars/girl-hijab-pink-v1235.svg":"/kids/assets/profile-avatars/boy-kufi-v1235.svg";
+ $("#overviewGreeting").textContent="As-salāmu ʿalaykum, "+address()+". Heute entdecken wir gemeinsam neues Wissen.";
+ $("#welcomeGreeting").textContent="As-salāmu ʿalaykum, "+address()+". Schön, dass du heute mitlernst!";
+ renderHome();
 }
-function resetQuestions(){
-  session={checked:0,answeredChoices:0,correctChoices:0,usedHelp:false};
-  questionIndex=0;renderQuestion();
+function home(){stopAll();hideLesson();renderHome();window.scrollTo(0,0)}
+function begin(){
+ syncProfile();$("#academyHome").hidden=true;$("#lessonMain").hidden=false;
+ step=0;unlocked=0;qIndex=0;finished=false;score={done:0,correct:0,choices:0};
+ showStep(0,false);window.scrollTo(0,0);
 }
-function renderQuestion(){
-  restoreControls();stopSpeech();stopRecognition();stopArabicAudio();
-  const ex=currentQuestions()[questionIndex];
-  if(!ex){showSummary();return}
-  choice=null;recognized=null;answered=false;
-  $("#summaryPanel").hidden=true;$("#questionStage").textContent="Mitdenken · Ṣidq";
-  $("#questionIndex").textContent="Frage "+(questionIndex+1)+" von "+currentQuestions().length;
-  $("#questionTitle").textContent="Denke selbst nach";
-  $("#question").textContent=ex.prompt;
-  $("#choices").innerHTML="";
-  if(ex.type==="choice"){
-    ex.options.forEach((label,index)=>{
-      const b=document.createElement("button");b.type="button";b.className="choice-button";b.textContent=label;b.setAttribute("aria-pressed","false");
-      b.addEventListener("click",()=>{choice=index;allEls(".choice-button").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));$("#answer").value="";});
-      $("#choices").appendChild(b);
-    });
-  }
-  $("#choices").hidden=ex.type!=="choice";
-  $("#answer").value="";
-  $("#answer").placeholder=ex.type==="choice"?"Alternativ mit eigenen Worten antworten …":"Deine Erklärung in eigenen Worten …";
-  $("#check").disabled=false;$("#check").hidden=false;
-  $("#hint").hidden=false;$("#repeat").hidden=false;
-  $("#nextQuestion").hidden=true;$("#finishLesson").hidden=true;
-  $("#feedback").textContent=age==="4-5"?"Nimm dir Zeit. Du kannst eine Antwort auswählen.":"Erkläre es in deinem Tempo. Du darfst sprechen oder schreiben.";
-  $("#micInfo").textContent="Erst antippen, dann sprechen. Eine Erkennung kann Fehler enthalten; prüfe ihren Text.";
-  $("#bar").style.width=(questionIndex/currentQuestions().length*100)+"%";
+function showStep(n,scroll=true){
+ if(n<0||n>unlocked||n>=5)return;
+ stopAll();step=n;stages.forEach((el,i)=>el.hidden=i!==n);
+ all("[data-jump-step]").forEach(b=>{const i=+b.dataset.jumpStep;b.disabled=i>unlocked;b.classList.toggle("is-current",i===n);b.classList.toggle("is-done",i<n);b.setAttribute("aria-current",i===n?"step":"false")});
+ $("#previousStep").hidden=n===0;$("#forwardStep").hidden=n>=3;$("#lessonNavigation").hidden=n>=3;
+ if(n<3)$("#forwardStep").firstChild.textContent=["Zur Erklärung ","Zu Qurʾān und Sunnah ","Jetzt mitdenken "][n];
+ if(n===3&&!finished)showQuestion();if(n===4)showRecap();
+ if(scroll)$("#stageSurface").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});
+}
+function nextStep(){if(step<3){unlocked=Math.max(unlocked,step+1);showStep(step+1)}}
+function playRecitation(key){
+ const data=TRACKS[key];if(!data)return;
+ if(audio&&audioKey===key&&!audio.paused){stopAudio();return}
+ stopAll();audioKey=key;const a=new Audio();audio=a;a.playsInline=true;
+ const fail=()=>{
+  if(audio!==a)return;
+  if(!fallbackTried&&data.fallback){fallbackTried=true;a.src=data.fallback;a.load();Promise.resolve(a.play()).catch(()=>{if(audio===a)stopAudio("Rezitation momentan nicht verfügbar.")})}
+  else stopAudio("Rezitation momentan nicht verfügbar.");
+ };
+ a.onerror=fail;a.onended=()=>{if(audio===a)stopAudio("Rezitation beendet. Du kannst erneut anhören.")};
+ a.src=data.src;$("#arabicAudioStatus").textContent="Rezitation wird geladen …";
+ const btn=$('[data-arabic-audio="'+key+'"]');btn.setAttribute("aria-pressed","true");btn.querySelector("span").textContent="Stopp";
+ $('[data-audio-text="'+key+'"]').classList.add("is-audio-playing");
+ Promise.resolve(a.play()).then(()=>{if(audio===a)$("#arabicAudioStatus").textContent="Du hörst Sūrat at-Tawbah, Vers 119."}).catch(fail);
+}
+function speak(index,custom){
+ if(!("speechSynthesis" in window))return;
+ stopAll();const token=++voiceToken;
+ const lines=custom||(index===0?[$("#welcomeGreeting").textContent,$('[data-lesson-step="0"] .stage-body').textContent]:index===1?all("#explainWords [data-spoken]").map(x=>x.textContent):index===2?[$(".teacher-explainer").textContent]:index===4?all(".recap-lesson p").map(x=>x.textContent):[]);
+ const highlights=index===1?all("#explainWords [data-spoken]"):index===2?[$(".teacher-explainer")]:[];
+ let k=0;
+ function next(){
+  if(token!==voiceToken||index!==step)return;
+  highlights.forEach((e,j)=>e.classList.toggle("is-reading",j===k));
+  if(k===lines.length){stopSpeech();return}
+  const u=new SpeechSynthesisUtterance(lines[k]);u.lang="de-DE";u.rate=.88;
+  u.onend=()=>{k++;next()};u.onerror=stopSpeech;voice=u;try{speechSynthesis.speak(u)}catch(_){stopSpeech()}
+ }
+ next();
+}
+function mode(m){
+ answerMode=m;const q=questions()[qIndex];
+ $("#choices").hidden=m!=="choices"||q.type!=="choice";
+ $("#answerExtra").hidden=m==="choices";$("#mic").hidden=m!=="voice";
+ $("#openWrite").setAttribute("aria-pressed",String(m==="text"));$("#openVoice").setAttribute("aria-pressed",String(m==="voice"));
+ if(m==="text")$("#answer").focus({preventScroll:true});
+ if(m==="voice")$("#micInfo").textContent="Tippe auf Aufnahme starten. Prüfe danach den erkannten Text.";
+}
+function showQuestion(){
+ const q=questions()[qIndex];if(!q){finish();return}
+ choice=null;answered=false;stopMic();
+ $("#questionIndex").textContent="Frage "+(qIndex+1)+" von "+questions().length;
+ $("#question").textContent=q.prompt;$("#bar").style.width=(qIndex/questions().length*100)+"%";
+ $("#choices").replaceChildren();
+ if(q.type==="choice")q.options.forEach((t,i)=>{const b=document.createElement("button");b.type="button";b.className="choice-button";b.textContent=t;b.setAttribute("aria-pressed","false");b.onclick=()=>{choice=i;all(".choice-button").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));$("#answer").value=""};$("#choices").appendChild(b)});
+ $("#answer").value="";$("#answer").placeholder=q.type==="text"?"Erkläre es mit eigenen Worten …":"Ich würde …";
+ $("#feedback").textContent="Nimm dir Zeit. Du kannst auswählen, schreiben oder sprechen.";
+ $("#check").hidden=false;$("#hint").hidden=false;$("#repeat").hidden=false;
+ $("#nextQuestion").hidden=true;$("#finishLesson").hidden=true;$("#openWrite").hidden=false;$("#openVoice").hidden=false;
+ mode(q.type==="text"?"text":"choices");
 }
 function check(){
-  if(answered)return;
-  const ex=currentQuestions()[questionIndex],written=$("#answer").value.trim();
-  if(choice===null && !written){$("#feedback").textContent="Wähle eine Antwort oder sage/schreibe deine eigenen Worte.";return}
-  answered=true;session.checked++;
-  let feedback="";
-  if(choice!==null && !written && ex.type==="choice"){
-    session.answeredChoices++;
-    if(choice===ex.correct){session.correctChoices++;feedback="Das passt zu unserem Beleg. "+ex.explain}
-    else{session.usedHelp=true;feedback="Wir wiederholen es gemeinsam: "+ex.explain+" Es ist in Ordnung, noch einmal nachzudenken."}
-  }else{
-    feedback="Danke, dass du dir Gedanken gemacht hast. Eine mögliche Erklärung ist: "+(ex.sample||ex.explain)+
-      " Vergleiche diese Erklärung mit deinen eigenen Worten. Ein Computer kann offene Antworten hier noch nicht zuverlässig als richtig oder falsch bewerten.";
-  }
-  $("#feedback").textContent=feedback;
-  $("#nextQuestion").hidden=questionIndex===currentQuestions().length-1;
-  $("#finishLesson").hidden=questionIndex!==currentQuestions().length-1;
-  $("#check").hidden=true;
-  $("#bar").style.width=((questionIndex+1)/currentQuestions().length*100)+"%";
+ if(answered)return;
+ const q=questions()[qIndex],typed=$("#answer").value.trim();
+ if(answerMode==="choices"&&choice===null){$("#feedback").textContent="Wähle bitte eine Antwort – oder nutze Sprechen oder Schreiben.";return}
+ if(answerMode!=="choices"&&!typed){$("#feedback").textContent="Bitte antworte erst mit eigenen Worten.";return}
+ answered=true;score.done++;let text;
+ if(answerMode==="choices"&&choice!==null){
+  score.choices++;
+  if(choice===q.correct){score.correct++;text="Sehr schön, "+address()+"! "+q.explain}
+  else text="Lass es uns noch einmal erklären: "+q.explain;
+ }else text="Danke fürs Mitdenken, "+address()+". Eine mögliche Erklärung lautet: "+(q.sample||q.explain)+" Vergleiche diese Erklärung mit deiner Antwort. Eine automatische Freitextbewertung findet noch nicht statt.";
+ $("#feedback").textContent=text;$("#bar").style.width=((qIndex+1)/questions().length*100)+"%";
+ $("#check").hidden=true;$("#hint").hidden=true;$("#repeat").hidden=true;$("#openWrite").hidden=true;$("#openVoice").hidden=true;
+ all(".choice-button").forEach(b=>b.disabled=true);
+ $("#nextQuestion").hidden=qIndex===questions().length-1;$("#finishLesson").hidden=qIndex!==questions().length-1;stopMic();
 }
-function showSummary(){
-  $("#questionStage").textContent="Unterricht abgeschlossen";
-  $("#questionIndex").textContent="Wiederholen ist erlaubt";
-  $("#questionTitle").textContent="Das hast du geübt";
-  $("#question").textContent="Wahrhaftigkeit bedeutet, die Wahrheit zu sagen und für Fehler Verantwortung zu übernehmen.";
-  $("#choices").hidden=true;$("#mic").hidden=true;$("#cancelMic").hidden=true;$("#micInfo").hidden=true;
-  $("#answer").hidden=true;document.querySelector('label[for="answer"]').hidden=true;
-  $("#check").hidden=true;$("#hint").hidden=true;$("#repeat").hidden=true;$("#nextQuestion").hidden=true;$("#finishLesson").hidden=true;
-  $("#summaryPanel").hidden=false;
-  $("#feedback").textContent="Du hast die Fragen bearbeitet. Entscheide selbst, ob du bald noch einmal üben möchtest.";
-  $("#summaryText").textContent="Du hast "+session.checked+" von "+currentQuestions().length+" Aufgaben bearbeitet. Bei offenen Antworten zählt deine eigene Erklärung und das gemeinsame Nachdenken – nicht eine automatische Schulnote.";
-  $("#bar").style.width="100%";
+function finish(){finished=true;unlocked=4;showStep(4)}
+function showRecap(){
+ $("#summaryText").textContent="Du hast "+score.done+" von "+questions().length+" Fragen bearbeitet. Die wichtigsten Aussagen darfst du später noch einmal üben.";
+ all("[data-reflect]").forEach(b=>{b.classList.remove("active");b.setAttribute("aria-pressed","false")});
 }
-function restoreControls(){
-  $("#mic").hidden=false;$("#micInfo").hidden=false;$("#answer").hidden=false;document.querySelector('label[for="answer"]').hidden=false;
+function persist(level){
+ const prev=oldRecord(),n=level==="help"?0:Math.min(Number(prev?.intervalIndex??-1)+1,INTERVALS.length-1);
+ const due=new Date();due.setHours(12,0,0,0);due.setDate(due.getDate()+INTERVALS[n]);
+ const item={id,age,lessonId:"sidq",completedAt:Date.now(),nextDue:due.getTime(),intervalIndex:n,reviewCount:(Number(prev?.reviewCount)||0)+1,answerCount:score.done,choiceCorrect:score.correct,choiceAnswered:score.choices,selfReport:level};
+ try{localStorage.setItem(storageKey(),JSON.stringify(item));$("#nextDue").textContent="Nächste Erinnerung: "+due.toLocaleDateString("de-DE")+". Du kannst jederzeit vorher üben."}catch(_){$("#nextDue").textContent="Lokal speichern ist nicht verfügbar. Du kannst trotzdem wiederholen."}
+ all("[data-reflect]").forEach(b=>{b.classList.toggle("active",b.dataset.reflect===level);b.setAttribute("aria-pressed",String(b.dataset.reflect===level))});renderHome();
 }
-function reflect(level){
-  const previous=safeRead(),prior=Number(previous?.intervalIndex??-1);
-  const nextIndex=level==="help"?0:Math.min(prior+1,intervals.length-1);
-  const days=intervals[nextIndex],d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()+days);
-  const record={version:DATA_VERSION,lessonId:"sidq",profile,age,completedAt:Date.now(),reviewCount:(Number(previous?.reviewCount)||0)+1,intervalIndex:nextIndex,nextDue:d.getTime(),selfReport:level,choiceExercises:session.answeredChoices,choiceCorrect:session.correctChoices};
-  try{localStorage.setItem(storageKey(),JSON.stringify(record));$("#nextDue").textContent=level==="help"?
-    "Gut, dass du weiter üben möchtest. Kurze Wiederholung empfohlen: "+withDate(days)+".":
-    "Nächste kurze Erinnerung vorgeschlagen: "+withDate(days)+"."}
-  catch(_){$("#nextDue").textContent="Lokal speichern ist in diesem Browser blockiert. Du kannst den Unterricht trotzdem bearbeiten."}
-  allEls("[data-reflect]").forEach(b=>{b.classList.toggle("active",b.dataset.reflect===level);b.setAttribute("aria-pressed",String(b.dataset.reflect===level))});
-  renderStatus();
+function mic(){
+ const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+ if(!SR){$("#micInfo").textContent="Spracherkennung ist hier nicht verfügbar. Bitte schreibe deine Antwort.";mode("text");return}
+ stopAll();mode("voice");
+ try{
+  recognition=new SR();recognition.lang="de-DE";recognition.interimResults=false;recognition.continuous=false;
+  recognition.onresult=e=>{$("#answer").value=e.results?.[0]?.[0]?.transcript||"";$("#micInfo").textContent="Lies den erkannten Text und korrigiere ihn bei Bedarf."};
+  recognition.onerror=()=>$("#micInfo").textContent="Spracherkennung konnte nicht abgeschlossen werden. Bitte schreibe deine Antwort.";
+  recognition.onend=()=>{$("#mic").disabled=false;$("#cancelMic").hidden=true;recognition=null};
+  $("#mic").disabled=true;$("#cancelMic").hidden=false;$("#micInfo").textContent="Du kannst jetzt sprechen. Die Spracherkennung benötigt möglicherweise Internet.";
+  recognition.start();
+ }catch(_){stopMic();$("#micInfo").textContent="Mikrofon nicht verfügbar. Bitte schreibe deine Antwort."}
 }
-allEls("[data-profile]").forEach(b=>b.addEventListener("click",()=>{profile=b.dataset.profile;applyProfile();showHome()}));
-$("#ageGroup").addEventListener("change",e=>{age=e.target.value;applyProfile();showHome()});
-allEls("[data-mode]").forEach(b=>b.addEventListener("click",()=>{mode=b.dataset.mode;allEls("[data-mode]").forEach(x=>{x.classList.toggle("active",x===b);x.setAttribute("aria-pressed",String(x===b))});if(mode==="read")stopSpeech()}));
-allEls("[data-open-lesson]").forEach(b=>b.addEventListener("click",showLesson));
-$("#backToAcademy").addEventListener("click",showHome);
-$("#backAfterLesson").addEventListener("click",showHome);
-$("#repeatReview").addEventListener("click",showLesson);
-$("#play").addEventListener("click",()=>speak(germanLessonText()));
-$("#stop").addEventListener("click",stopSpeech);
-$("#hint").addEventListener("click",()=>{session.usedHelp=true;$("#feedback").textContent=currentQuestions()[questionIndex]?.hint||"Lies den Beleg noch einmal."});
-$("#repeat").addEventListener("click",()=>speak(currentQuestions()[questionIndex]?.prompt||""));
-$("#check").addEventListener("click",check);
-$("#nextQuestion").addEventListener("click",()=>{questionIndex++;renderQuestion()});
-$("#finishLesson").addEventListener("click",showSummary);
-allEls("[data-reflect]").forEach(b=>b.addEventListener("click",()=>reflect(b.dataset.reflect)));
-$("#answer").addEventListener("input",()=>{if($("#answer").value.trim()){choice=null;allEls(".choice-button").forEach(x=>x.setAttribute("aria-pressed","false"))}});
-$("#mic").addEventListener("click",()=>{
-  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-  if(!SR){$("#micInfo").textContent="Spracherkennung ist hier nicht verfügbar. Du kannst per Tastatur oder Auswahl antworten.";return}
-  stopSpeech();stopRecognition();stopArabicAudio();
-  try{
-    recognition=new SR();recognition.lang="de-DE";recognition.interimResults=false;recognition.continuous=false;recognition.maxAlternatives=1;
-    recognition.onresult=e=>{const value=e.results?.[0]?.[0]?.transcript||"";$("#answer").value=value;choice=null;allEls(".choice-button").forEach(x=>x.setAttribute("aria-pressed","false"));$("#micInfo").textContent="Bitte prüfe den erkannten Text und tippe anschließend auf „Antwort prüfen“.";};
-    recognition.onerror=e=>{$("#micInfo").textContent="Die Spracherkennung konnte nicht abgeschlossen werden ("+(e.error||"unbekannt")+"). Bitte schreibe oder wähle eine Antwort.";};
-    recognition.onend=()=>{$("#mic").disabled=false;$("#cancelMic").hidden=true;recognition=null};
-    $("#mic").disabled=true;$("#cancelMic").hidden=false;$("#micInfo").textContent="Du kannst jetzt sprechen. Hinweis: Je nach Browser kann die Spracherkennung online erfolgen.";
-    recognition.start();
-  }catch(e){stopRecognition();$("#micInfo").textContent="Mikrofon derzeit nicht verfügbar. Bitte schreibe oder wähle eine Antwort."}
-});
-$("#cancelMic").addEventListener("click",()=>{try{recognition?.stop()}catch(_){}});
-document.addEventListener("visibilitychange",()=>{if(document.hidden){stopSpeech();stopRecognition();stopArabicAudio()}});
-window.addEventListener("pagehide",()=>{stopSpeech();stopRecognition();stopArabicAudio()});
-restoreControls();applyProfile();renderStatus();
+all("[data-open-lesson]").forEach(b=>b.onclick=begin);
+$("#backToAcademy").onclick=home;$("#backAfterLesson").onclick=home;
+$("#previousStep").onclick=()=>showStep(step-1);$("#forwardStep").onclick=nextStep;
+all("[data-jump-step]").forEach(b=>b.onclick=()=>showStep(Number(b.dataset.jumpStep)));
+all("[data-speak-stage]").forEach(b=>b.onclick=()=>speak(Number(b.dataset.speakStage)));
+all("[data-arabic-audio]").forEach(b=>b.onclick=()=>playRecitation(b.dataset.arabicAudio));
+$("#openWrite").onclick=()=>mode("text");$("#openVoice").onclick=()=>mode("voice");
+$("#check").onclick=check;$("#hint").onclick=()=>{$("#feedback").textContent=questions()[qIndex].hint};
+$("#repeat").onclick=()=>speak(3,[questions()[qIndex].prompt]);
+$("#nextQuestion").onclick=()=>{qIndex++;showQuestion()};$("#finishLesson").onclick=finish;
+$("#mic").onclick=mic;$("#cancelMic").onclick=()=>{try{recognition?.stop()}catch(_){}};
+$("#answer").oninput=()=>{if($("#answer").value.trim())choice=null};
+all("[data-reflect]").forEach(b=>b.onclick=()=>persist(b.dataset.reflect));
+window.addEventListener("storage",e=>{if(["kids.activeProfile","kids.profiles.v1","kids.guest.gender.v1","kids.age"].includes(e.key))syncProfile(true)});
+window.addEventListener("pageshow",()=>syncProfile(true));
+document.addEventListener("visibilitychange",()=>{if(document.hidden)stopAll();else syncProfile()});
+window.addEventListener("pagehide",stopAll);
+syncProfile(true);hideLesson();
 })();
 </script></body></html>
