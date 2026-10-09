@@ -427,6 +427,9 @@
     style.textContent=[
       "html.kids-nav-dragging,html.kids-nav-dragging body{overscroll-behavior-x:none!important;}",
       "html.kids-nav-dragging body{user-select:none!important;-webkit-user-select:none!important;}",
+      "html.kids-nav-just-returned .view.active{animation:none!important;opacity:1!important;}",
+      "html.kids-nav-transitioning .view.active{animation:none!important;opacity:1!important;}",
+      ".kids-nav-swipe-underlay{animation:none!important;pointer-events:none!important;contain:layout!important;}",
       ".kids-nav-swipe-surface{will-change:transform,opacity,box-shadow!important;backface-visibility:hidden!important;-webkit-backface-visibility:hidden!important;}",
       "@keyframes kidsNavSurfaceInV1246{from{opacity:.74;transform:translate3d(20px,0,0)}to{opacity:1;transform:translate3d(0,0,0)}}",
       "#psLibraryPage.open,#msLibraryPage.open,#syLibraryPage.open,#dlLibraryPage.open,#ghWorld.open{animation:kidsNavSurfaceInV1246 .34s cubic-bezier(.22,1,.36,1) both;}",
@@ -462,7 +465,9 @@
 
   function rememberSwipeInline(el){
     var state={};
-    ["transform","opacity","transition","will-change","box-shadow"].forEach(function(prop){
+    ["transform","opacity","transition","will-change","box-shadow","animation","display",
+      "position","top","left","right","width","height","overflow","padding-left","padding-right",
+      "z-index","pointer-events"].forEach(function(prop){
       state[prop]={value:el.style.getPropertyValue(prop),priority:el.style.getPropertyPriority(prop)};
     });
     return state;
@@ -476,6 +481,52 @@
       else el.style.removeProperty(prop);
     });
     el.classList.remove("kids-nav-swipe-surface");
+  }
+
+
+  /* The previous tab is normally display:none. If we translate the current
+     tab without revealing the previous one, the user sees an empty blue app
+     background (recording 09:16, around 7.5s). Paint the actual previous
+     view behind it before moving the foreground, not an empty placeholder. */
+  function prepareSwipeUnderlay(g){
+    if(!g||!g.surface||!g.surface.classList.contains("view")||index<=0)return;
+    var prev=stack[index-1];
+    if(!prev||!prev.signature)return;
+    var name=String(prev.signature).split("|")[0];
+    if(!/^(today|stories|dua|quran|parents)$/.test(name))return;
+    var target=q("#view-"+name);
+    if(!target||target===g.surface||target.classList.contains("active"))return;
+    var area=shell||q(".shell");
+    if(!area)return;
+    var rect=area.getBoundingClientRect();
+    var layout=getComputedStyle(area);
+    g.underlay=target;
+    g.underlayInline=rememberSwipeInline(target);
+    target.classList.add("kids-nav-swipe-underlay");
+    var css={
+      "display":"block","position":"fixed","top":(-Math.max(0,area.scrollTop||0))+"px",
+      "left":rect.left+"px","right":"auto","width":rect.width+"px",
+      "height":"100dvh","overflow":"hidden","z-index":"1",
+      "padding-left":layout.paddingLeft||"16px",
+      "padding-right":layout.paddingRight||"16px",
+      "animation":"none","pointer-events":"none"
+    };
+    Object.keys(css).forEach(function(k){target.style.setProperty(k,css[k],"important")});
+    g.surface.style.setProperty("position","relative","important");
+    g.surface.style.setProperty("z-index","8","important");
+  }
+  function releaseSwipeUnderlay(g){
+    if(g&&g.underlay){
+      restoreSwipeInline(g.underlay,g.underlayInline);
+      g.underlay.classList.remove("kids-nav-swipe-underlay");
+      g.underlay=null;
+    }
+  }
+  function finalizeSwipe(g){
+    restoreSwipeInline(g.surface,g.inline);
+    releaseSwipeUnderlay(g);
+    root.classList.remove("kids-nav-dragging","kids-nav-transitioning");
+    swipeAnimating=false;
   }
 
   function inwardDistance(g,x){return g.side==="left"?x-g.x:g.x-x}
@@ -499,6 +550,7 @@
     if(!g||!g.surface)return;
     var el=g.surface,reduced=false;
     swipeAnimating=true;
+    root.classList.add("kids-nav-transitioning");
     try{reduced=matchMedia("(prefers-reduced-motion: reduce)").matches}catch(_){}
     if(commit){
       var sign=g.side==="left"?1:-1;
@@ -507,19 +559,18 @@
       el.style.setProperty("transform","translate3d("+(sign*104)+"vw,0,0)","important");
       el.style.setProperty("opacity",".91","important");
       setTimeout(function(){
-        var didBack=false;
-        try{didBack=back()}finally{
+        root.classList.add("kids-nav-just-returned");
+        try{back()}finally{
+          /* The destination must render before the outgoing page and the
+             previous-page underlay are released. Double rAF = painted frame. */
           requestAnimationFrame(function(){
-            restoreSwipeInline(el,g.inline);
-            root.classList.remove("kids-nav-dragging");
-            swipeAnimating=false;
-            if(didBack){
-              root.classList.add("kids-nav-just-returned");
-              setTimeout(function(){root.classList.remove("kids-nav-just-returned")},330);
-            }
+            requestAnimationFrame(function(){
+              finalizeSwipe(g);
+              setTimeout(function(){root.classList.remove("kids-nav-just-returned")},360);
+            });
           });
         }
-      },Math.max(95,duration-28));
+      },duration);
       return;
     }
     var duration=reduced?130:285;
@@ -527,11 +578,7 @@
     el.style.setProperty("transform",g.inline.transform.value||"translate3d(0,0,0)",g.inline.transform.priority||"important");
     el.style.setProperty("opacity",g.inline.opacity.value||"1",g.inline.opacity.priority||"important");
     el.style.setProperty("box-shadow",g.inline["box-shadow"].value||"none",g.inline["box-shadow"].priority||"important");
-    setTimeout(function(){
-      restoreSwipeInline(el,g.inline);
-      root.classList.remove("kids-nav-dragging");
-      swipeAnimating=false;
-    },duration+28);
+    setTimeout(function(){finalizeSwipe(g)},duration+28);
   }
 
   function pointerDown(e){
@@ -540,7 +587,7 @@
     if(!visibleBackButton()&&index<=0)return;
     var width=Math.max(320,Number(innerWidth)||390);
     var edge=Math.max(72,Math.min(128,width*.15));
-    var side=e.clientX<=edge?"left":"";
+    var side=e.clientX<=edge?"left":(e.clientX>=width-edge?"right":"");
     if(!side)return;
     var surface=currentSwipeSurface();
     if(!surface)return;
@@ -554,6 +601,8 @@
     if(!g.claimed){
       if(dist>10&&dist>dy*1.18){
         g.claimed=true;
+        prepareSwipeUnderlay(g);
+        g.surface.style.setProperty("animation","none","important");
         g.surface.classList.add("kids-nav-swipe-surface");
         root.classList.add("kids-nav-dragging");
       }else if(dy>13&&dy>Math.max(12,Math.abs(dist))*1.18){
@@ -723,7 +772,7 @@
     resetMainTop:resetMainTop,
     captureScrolls:captureScrolls,
     signature:signature,
-    gestureVersion:"interactive-touch-edge-swipe-v1280"
+    gestureVersion:"interactive-previous-page-edge-swipe-v1281"
   };
 
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});
