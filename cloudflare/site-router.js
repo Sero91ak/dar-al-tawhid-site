@@ -415,7 +415,7 @@ function publicWebsiteAddon() {
       var row=pwaIconMap[id];
       var meta=document.querySelector('meta[name="theme-color"]');
       if(meta&&row)meta.setAttribute("content",row.theme);
-      document.documentElement.setAttribute("data-dar-pwa-icon",id);
+      document.documentElement.setAttribute("data-dar-pwa-icon-current",id);
       fetch("/manifest.json",{cache:"no-store",credentials:"same-origin"}).catch(function(){});
     }catch(e){}
   }
@@ -547,7 +547,7 @@ function publicWebsiteAddon() {
   });
 
   document.addEventListener("click",function(event){
-    var iconBtn=event.target&&event.target.closest?event.target.closest("[data-dar-pwa-icon]"):null;
+    var iconBtn=event.target&&event.target.closest?event.target.closest("button[data-dar-pwa-icon]"):null;
     if(!iconBtn)return;
     event.preventDefault();
     applyPwaIcon(iconBtn.getAttribute("data-dar-pwa-icon"),true);

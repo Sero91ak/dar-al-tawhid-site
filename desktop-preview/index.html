@@ -2665,7 +2665,8 @@ html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
   setTimeout(function(){render();root.classList.remove("is-leaving");window.scrollTo({top:0,behavior:"smooth"})},150)
  }
  document.addEventListener("click",function(e){
-  var a=e.target.closest("a.desktop-link");
+  var t=e.target&&e.target.closest?e.target:null;
+  var a=t?t.closest("a.desktop-link"):null;
   if(!a)return;
   var u=new URL(a.href,location.href);
   if(u.origin!==location.origin||(u.pathname!=="/"&&u.pathname!=="/desktop-preview/"))return;
@@ -2687,7 +2688,7 @@ html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
    var row=DAR_PWA_ICON_MAP[id];
    var meta=document.querySelector('meta[name="theme-color"]');
    if(meta&&row)meta.setAttribute("content",row.theme);
-   document.documentElement.setAttribute("data-dar-pwa-icon",id);
+   document.documentElement.setAttribute("data-dar-pwa-icon-current",id);
    fetch("/manifest.json",{cache:"no-store",credentials:"same-origin"}).catch(function(){})
   }catch(e){}
  }
@@ -2822,7 +2823,7 @@ html.dar-android-browser:not(.dar-pwa-standalone) #darAndroidPwaHome{
  }
  window.darInstallAndroidPwa=darInstallDesktopPwa;
  document.addEventListener("click",function(e){
-  var iconBtn=e.target&&e.target.closest?e.target.closest("[data-dar-pwa-icon]"):null;
+  var iconBtn=e.target&&e.target.closest?e.target.closest("button[data-dar-pwa-icon]"):null;
   if(iconBtn){
    e.preventDefault();
    e.stopImmediatePropagation();

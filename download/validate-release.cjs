@@ -44,6 +44,8 @@ if (fs.existsSync(publicRouterPath)) {
   assert.ok(router.includes("DAR_PWA_ICON_CATALOG"), "Android PWA icon catalog missing");
   assert.ok(router.includes("normalizePwaIconId"), "Android PWA selected-icon manifest support missing");
   assert.ok(router.includes("dar_pwa_icon"), "Android PWA selected icon must use a stable manifest URL with a cookie-backed preference");
+  assert.ok(router.includes("data-dar-pwa-icon-current"), "Current PWA icon state must not reuse the clickable icon selector attribute");
+  assert.ok(router.includes('button[data-dar-pwa-icon]'), "PWA icon click handler must be scoped to actual buttons");
   assert.ok(router.includes('purpose: "maskable"'), "Android launcher must receive maskable artwork");
   assert.ok(router.includes('display: "standalone"'), "Android PWA manifest must be standalone");
   assert.ok(router.includes('id: "/"'), "Android PWA manifest must have a stable app id");
