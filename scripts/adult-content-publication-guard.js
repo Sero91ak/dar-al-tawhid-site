@@ -48,3 +48,64 @@ function duplicate(a,b){
  if(a.number&&b.number&&norm(a.number)===norm(b.number)&&similarity>=0.78)return "same hadith number and statement";
  return "";
 }
+
+function allPosts(excluded){
+ const idx=JSON.parse(fs.readFileSync(posts+"/posts-index.json","utf8")),out=[];
+ for(const x of idx.files||[]){
+  if(x.name===excluded||!x.name.endsWith(".md"))continue;
+  const name=posts+"/"+x.name;if(!fs.existsSync(name))continue;
+  const p=readPost(fs.readFileSync(name,"utf8"),x.name);
+  if(!p.skip)out.push({ref:"content/posts/"+x.name,id:p.id,text:p.text,speaker:p.fm.scholar,q:short(p.body),number:p.fm.sourceHadithNumber});
+ }
+ return out;
+}
+function allTv(){
+ const out=[];
+ for(const dir of fs.readdirSync(series).filter(x=>/^\d+-\d+$/.test(x))){
+  for(const file of fs.readdirSync(series+"/"+dir).filter(x=>/^HAD-\d+\.json$/.test(x))){
+   const r=JSON.parse(fs.readFileSync(series+"/"+dir+"/"+file,"utf8"));
+   out.push({ref:r.id,id:r.id,text:r.textMarkdown,speaker:(r.narratorLine||"")+" "+(r.speakerLabel||""),
+    q:short((r.sourceSection||"")+" "+(r.verificationNote||"")),number:r.sourceHadithNumber,
+    origin:(r.verificationNote||"").match(/post-id:\s*([^;\s]+)/)?.[1]||""});
+  }
+ }
+ return out;
+}
+function selected(){
+ const at=process.argv.indexOf("--post"),all=at>=0?[process.argv[at+1]]:String(process.env.CHANGED_POST_FILES||"").split(/\r?\n/);
+ return [...new Set(all.map(x=>String(x||"").trim()).filter(x=>/^content\/posts\/[a-z0-9][\w-]*\.md$/.test(x)))];
+}
+function validate(p,otherPosts,existingTv){
+ if(p.skip)return "skip";
+ if(!p.fm.scholar||!p.fm.source||p.text.length<36||p.text.length>20000)block("missing speaker, source or statement",{post:p.file});
+ const q=short(p.body);
+ if(!q||!fs.existsSync(root+"/q/"+q+"/index.html"))block("own source page /q/ missing",{post:p.file});
+ const a={id:p.id,speaker:p.fm.scholar,text:p.text,q,number:p.fm.sourceHadithNumber};
+ for(const e of otherPosts){const reason=duplicate(a,e);if(reason)block("existing adult post: "+reason,{post:p.file,existing:e.ref});}
+ for(const e of existingTv){
+  if(e.origin===p.id)return "already-synced";
+  const reason=duplicate(a,e);if(reason)block("existing Apple TV statement: "+reason,{post:p.file,existing:e.ref});
+ }
+ if(p.type==="hadith"){
+  const required=["sharhText","sharhScholar","sharhBook","sharhReference","grade"];
+  if(p.fm.sharhStatus!=="verified"||required.some(k=>!p.fm[k]))
+   block("Hadith missing verified Sharh and bibliographic reference",{post:p.file,missing:required.filter(k=>!p.fm[k])});
+  if(/schwach|ungepruft|unterbrochen|da.if/i.test(norm(p.fm.grade)))block("Hadith grading requires manual verification",{post:p.file});
+ }
+ return q;
+}
+function makeRecord(p,q,n){
+ const f=p.fm,h=p.type==="hadith";
+ const r={id:"HAD-"+String(n).padStart(4,"0"),recordType:p.type,categoryLabel:h?"ḤADĪṮ":"ĀṮAR",language:"de",
+  narratorLine:h?(f.narratorLine||f.scholar+" berichtete:"):f.scholar+" رحمه الله:",
+  speakerLabel:h?(f.speakerLabel||"Der Prophet ﷺ sagte:"):"Überlieferte Aussage:",
+  textMarkdown:p.text,source:f.book||f.source,sourceBook:f.book||f.source,
+  sourceVolume:f.sourceVolume||null,sourcePage:f.sourcePage||null,sourceSection:"DAR AL TAWḤĪD /q/"+q+"/",
+  sourceHadithNumber:h?(f.sourceHadithNumber||null):null,
+  grade:h?f.grade:(f.atharGrade||"Athar; Überlieferungsstatus nicht abschließend geprüft"),
+  verificationNote:"post-id: "+p.id+"; "+f.source+"; Direktbelege /q/"+q+"/. "+(f.verificationNote||""),
+  sharhStatus:h?"verified":null,sharhText:h?f.sharhText:null};
+ if(h)Object.assign(r,{sharhLanguage:"de",sharhScholar:f.sharhScholar,sharhBook:f.sharhBook,
+  sharhReference:f.sharhReference,sharhVolume:f.sharhVolume||null,sharhPage:f.sharhPage||null});
+ return r;
+}
