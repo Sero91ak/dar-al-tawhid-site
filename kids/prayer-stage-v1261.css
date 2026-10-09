@@ -2199,3 +2199,21 @@ body.kids-salah-day-open{overflow:hidden!important}
 html body #view-today .kids-salah-open-day{
   scroll-margin-bottom:calc(115px + env(safe-area-inset-bottom,0px))!important;
 }
+
+/* KIDS_HOME_TABLET_EDGE_TO_EDGE_V1294
+   Tablet shell has up to 22px horizontal padding. The approved night-mosque
+   image must remain seamless to both physical device edges at any tablet
+   aspect ratio, without widening or moving the prayer content itself. */
+@media (min-width:700px){
+  html body #view-today.view .kids-salah-home-world{
+    box-sizing:border-box!important;
+    width:100vw!important;
+    max-width:100vw!important;
+    margin-left:calc(50% - 50vw)!important;
+    margin-right:calc(50% - 50vw)!important;
+    padding-left:max(22px,env(safe-area-inset-left,0px))!important;
+    padding-right:max(22px,env(safe-area-inset-right,0px))!important;
+    background-size:cover!important;
+    background-repeat:no-repeat!important;
+  }
+}
