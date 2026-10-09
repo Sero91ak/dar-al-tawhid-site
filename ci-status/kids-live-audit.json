@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-10-09T07:56:42Z",
+  "timestamp": "2026-10-09T07:58:37Z",
   "trigger": "workflow_run",
-  "finishedDeployConclusion": "success",
-  "finishedDeployRun": "37901453104",
+  "finishedDeployConclusion": "failure",
+  "finishedDeployRun": "37901839478",
   "live": {
     "buildId": "kids-shell-v177-swiperender1281",
     "label": "KIDS · V1.08.98",
@@ -26,12 +26,21 @@
   "lastDeployRuns": [
     {
       "conclusion": null,
+      "created_at": "2026-10-09T07:57:45Z",
+      "head_sha": "762a56666853206d43dc67244f9114f77869a9cc",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37902047720",
+      "id": 37902047720,
+      "status": "in_progress",
+      "updated_at": "2026-10-09T07:58:31Z"
+    },
+    {
+      "conclusion": "failure",
       "created_at": "2026-10-09T07:55:37Z",
       "head_sha": "0dc19707b568d3593e559d83ffe92a3d4d030b3c",
       "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37901839478",
       "id": 37901839478,
-      "status": "in_progress",
-      "updated_at": "2026-10-09T07:56:38Z"
+      "status": "completed",
+      "updated_at": "2026-10-09T07:58:29Z"
     },
     {
       "conclusion": "cancelled",
@@ -68,15 +77,6 @@
       "id": 37901729691,
       "status": "completed",
       "updated_at": "2026-10-09T07:55:03Z"
-    },
-    {
-      "conclusion": "cancelled",
-      "created_at": "2026-10-09T07:53:42Z",
-      "head_sha": "a07e6b93903facad2f23dcb0d5bf93f5cb56e948",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37901648628",
-      "id": 37901648628,
-      "status": "completed",
-      "updated_at": "2026-10-09T07:54:33Z"
     }
   ]
 }
