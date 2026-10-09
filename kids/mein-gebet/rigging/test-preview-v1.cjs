@@ -165,7 +165,9 @@ function match(n, sel) {
   if (sel === "main.shell > section.view.active") {
     return n.tagName === "SECTION" && n.classList.contains("view") && n.classList.contains("active");
   }
-  if (sel === ".nav-btn") return n.classList.contains("nav-btn");
+  if (sel.charAt(0) === "." && sel.indexOf(" ") < 0 && sel.indexOf("[") < 0) {
+    return n.classList.contains(sel.slice(1));
+  }
   if (sel === "[data-kmg-lesson]") return !!n.dataset.kmgLesson;
   if (sel === "[data-kmg-topic]") return n.dataset.kmgTopic != null;
   if (sel.charAt(0) === "#") return n.id === sel.slice(1);
@@ -255,6 +257,11 @@ function boot(gender) {
         this._stack.push({ state: copy });
         historyStack.push(copy);
       },
+      replaceState(state) {
+        const copy = JSON.parse(JSON.stringify(state));
+        this._stack[this._stack.length - 1] = { state: copy };
+        historyStack[historyStack.length - 1] = copy;
+      },
       back() {
         if (this._stack.length < 2) return;
         this._stack.pop();
@@ -327,6 +334,20 @@ check("browser back restores lesson, overview, then home", () => {
   ctx.history.back();
   assert.equal(ctx.document.getElementById("view-today").classList.contains("active"), true);
   assert.equal(ctx.document.getElementById("view-mein-gebet").classList.contains("active"), false);
+});
+
+check("next station replaces history so back returns to the lesson list", () => {
+  const ctx = boot("boy");
+  ctx.document.getElementById("kidsMeinGebetEntry").click();
+  ctx.document.querySelectorAll("[data-kmg-lesson]")[0].click();
+  ctx.document.querySelectorAll("[data-kmg-topic]")[0].click();
+  const next = ctx.document.querySelector(".kmg-primary");
+  assert.ok(next);
+  next.click();
+  assert.match(ctx.document.getElementById("kmgStationTitle").textContent, /fünf|Pflicht/i);
+  ctx.history.back();
+  assert.equal(ctx.document.getElementById("kmgStation").hidden, true);
+  assert.equal(ctx.document.getElementById("kmgDetail").hidden, false);
 });
 
 console.log("OK preview-v1 isolated checks: " + passed);

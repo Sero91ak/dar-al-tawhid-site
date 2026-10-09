@@ -28,7 +28,7 @@ shells.forEach(({ p, html }) => {
   check(p + " mounts the isolated preview script once", () => {
     const hits = html.match(/data-kids-mein-gebet-preview="1"/g) || [];
     assert.equal(hits.length, 1);
-    assert.match(html, /src="\/kids\/mein-gebet\/preview-v1\.js\?v=2"/);
+    assert.match(html, /src="\/kids\/mein-gebet\/preview-v1\.js\?v=3"/);
   });
   check(p + " keeps four existing bottom tabs and no Mein-Gebet tab", () => {
     const nav = html.match(/class="nav-btn[^"]*"/g) || [];

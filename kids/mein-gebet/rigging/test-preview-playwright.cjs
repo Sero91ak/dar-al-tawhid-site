@@ -93,6 +93,16 @@ async function main() {
     await page.waitForSelector("#kmgStation:not([hidden])");
     const title = await page.locator("#kmgStationTitle").innerText();
     assert.ok(title.length > 3);
+    if (viewport.width <= 400) {
+      const dir = await page.locator(".kmg-station-box").evaluate((el) => getComputedStyle(el).flexDirection);
+      assert.equal(dir, "column");
+    }
+    await page.locator(".kmg-primary").click();
+    await page.getByRole("button", { name: "Zurück zu den Lernstationen" }).click();
+    await page.waitForSelector("#kmgDetail:not([hidden])");
+    await page.waitForSelector("#kmgStation[hidden]", { state: "attached" });
+    await page.click("[data-kmg-topic='0']");
+    await page.waitForSelector("#kmgStation:not([hidden])");
     await page.goBack();
     await page.waitForSelector("#kmgDetail:not([hidden])");
     await page.goBack();

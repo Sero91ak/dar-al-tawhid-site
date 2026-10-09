@@ -50,3 +50,13 @@ Never mark production ready or amend failed tests into success without evidence.
 5. Browser: Chromium 390×844 / 768×1024 / Fixture; 0 Konsolenfehler. Junge weiß/gold, Mädchen pinkes Hijab, 4 Tabs Heute/Geschichten/Qurʾān/Eltern. **Echtes iPhone/iPad/WKWebView: absent.** Religiöse Freigabe: absent.
 6. Phase 2 dauerhafter Tab, Original-GLB, Audio, Fiqh-Animation: **BLOCKED** (Freigabe bzw. fehlende Bytes). Voice-Studio-Validate-Rot: fremde Spur, nicht angefasst.
 7. Status: **IMPLEMENTED** (History-Back, Swipe, Home-Vertrag). **AUTOMATED TESTED** (VM + Chromium). **VISUALLY VERIFIED**: Chromium-Emulation ja, reales Gerät nein. **HUMAN APPROVED**: nein.
+
+## 2026-10-09 — Navigation/Layout-Korrekturen (Fortsetzung PR #894)
+
+1. Cursor Cloud, Branch `cursor/kids-mein-gebet-dev-fa8f`.
+2. Fehler: „Nächste“-Station hat extra History-Einträge erzeugt, sodass Zurück in der vorherigen Station blieb statt bei den Lernstationen. Auf 390px-iPhone blieb die Stationskarte zweispaltig (`max-width:390px`). Versteckte Zurück-Buttons blieben ohne `inert` im Tab-Kreis.
+3. Fix in `preview-v1.js`: Stationswechsel `replaceState`; Station-Spalte bis 480px; Hero-Figur bis 430px; `inert` auf versteckten Ebenen. Cache-Pin `preview-v1.js?v=3`. Tests für History nach „Nächste“ und Chromium-Spaltenlayout.
+4. Lokal: Preview 11 PASS, Shell 11 PASS, Playwright 3 PASS. Kids-QA-CI der Vorgänger-SHA war grün; neue SHA nach diesem Commit.
+5. Screenshot `qa/screenshots/06-station-iphone-column.png` (Chromium 390×844, Figur über dem Text). Echtes Gerät / Fiqh / GLB: **absent**.
+6. Blocker unverändert: Original-GLB, v4-IoU, Hanbali, Gerät, Live. Voice-Studio/Admin-Publisher-Rot nicht angefasst.
+7. **IMPLEMENTED** + **AUTOMATED TESTED**. **VISUALLY VERIFIED**: Chromium-iPhone-Spalte. **HUMAN APPROVED**: nein.
