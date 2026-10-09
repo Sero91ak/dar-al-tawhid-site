@@ -165,7 +165,7 @@ function ensureModal() {
   document.body.insertAdjacentHTML("beforeend", `
     <div id="studioContentModal" class="studio-content-modal" aria-hidden="true">
       <div class="studio-content-sheet" role="dialog" aria-modal="true" aria-labelledby="studioContentTitle">
-        <div class="studio-content-top"><b>DĀR AL TAWḤĪD Kids</b><button id="studioContentClose" class="studio-content-close" type="button" aria-label="Schließen">×</button></div>
+        <header class="studio-content-top kids-detail-appbar" data-kids-unified-header="v1287"><button id="studioContentClose" class="studio-content-close kids-detail-dock-back" type="button" aria-label="Zurück zu den Beiträgen"></button><div class="kids-detail-appbar-copy"><strong class="kids-detail-appbar-title">Dein Lernbeitrag</strong><span class="kids-detail-appbar-subtitle">DĀR AL TAWḤĪD Kids · Hören &amp; Lesen</span></div></header>
         <div id="studioContentBody" class="studio-content-scroll"></div>
       </div>
     </div>`);
