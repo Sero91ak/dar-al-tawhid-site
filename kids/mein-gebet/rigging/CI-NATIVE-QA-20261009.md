@@ -37,3 +37,25 @@
 **Nächste richtige technische Produktionsarbeit:** Die tatsächlichen unveränderten Modell- und Referenzbytes in einem autorisierten Dateipfad bereitstellen, ihren SHA-256 vor jeder Rechnung erzwingen, Kamerasensitivität ohne Umdeutung der festen 45°-Messung prüfen und erst dann Kopf-/Gesichts-/Kufi-/Gewandform sculpten. Nach jedem Sculpt alle fünf IoU-Festansichten und Rig-Clip-Bytefences erneut prüfen. Die fünf Rohmasken und berechnete Sichttests ersetzen keine menschliche Originaltreue-Freigabe.
 
 **Freigabestatus bleibt unverändert: nicht freigegeben.**
+
+## Aktualisierung 09.10.2026 · native End-to-End-GLB-Datenprüfung
+
+**Neuer vollständig erfolgreicher GitHub-Actions-Lauf:** https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/37932645756, geprüfter Commit `b5a99c5c9cd07a50a14684e90f7eb7dff942cef7`.
+
+Logbelegte Testverteilung:
+
+| Suite | Bestanden |
+|---|---:|
+| GLB-/Rig-Struktur inklusive Bindpose | 36 |
+| Animationssample-BIN | 20 |
+| **NEU:** Vertex-/Topologie-/Skin-Gewichte-BIN | **27** |
+| **NEU:** echte auf Festplatte gespeicherte synthetische GLB-Dateien end-to-end | **8** |
+| Strenger Release-Audit | 18 |
+| Eingefrorene Animationen und Skin-Zuordnungen | 12 |
+| Dreiviertel-Kamerawinkel-Diagnose (Unit-Tests) | 7 |
+| Projektions-Sicherheitsfilter (Unit-Tests) | 14 |
+| **Gesamt** | **142** |
+
+**Konkret:** `validate-glb-geometry-binary.cjs` prüft im echten BIN-Chunk sämtliche referenzierten Positionen/Normalen, Gewichtsnormierung, Skin-Joint-Indizes, Dreiecksindices, bind-pose Matrixwerte und globalen räumlichen XYZ-Umfang. Ein GLB mit 2.400 angeblichen Vertices, aber nur drei benutzten Indices, wird abgelehnt. Ausführungswege: normaler `validate-glb.cjs`, `forbid-placeholder-release.cjs`, `audit-project-completion.cjs --require-ready`. Die End-to-End-Tests generieren kurzzeitig ein **synthetisches** GLB in einem temporären Verzeichnis, prüfen erfolgreiche strukturelle Verarbeitung, manipulieren anschließend unterschiedliche echte Binärbytes und stellen deren Ablehnung fest. Alle Testdateien werden danach gelöscht.
+
+**Trennung bleibt essenziell:** Die 142 Prüfungen sind Softwaretests, **keine** gemessene V7.7-Silhouette, keine rekonstruierte Originalfigur, keine echte GLB-Binärabnahme. V7.7 hat weiterhin 0 von 5 Silhouettenansichten über 90 %, 3/4 weiterhin 83,25 % unkalibriert. Ein neuer Sculpt wäre ohne exakt geprüfte Originalbytes eine unbelegte Veränderung. Keine Produktionsfreigabe/kein Merge/kein Deploy.
