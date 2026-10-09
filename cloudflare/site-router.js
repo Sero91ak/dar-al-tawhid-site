@@ -601,6 +601,14 @@ a,button,[role="button"],summary,[tabindex],label{-webkit-tap-highlight-color:tr
     window.__darEarlyInstallPrompt=null;
     setInstalledState();
   });
+  window.addEventListener("dar:pwa-install-choice",function(){
+    deferredInstall=null;
+    syncRouterInstallButtons();
+  });
+  window.addEventListener("dar:pwa-install-error",function(){
+    deferredInstall=null;
+    syncRouterInstallButtons();
+  });
   window.darInstallAndroidPwa=async function(){
     if(!android){
       setPwaHint("Bitte diese Seite auf einem Android-Gerät öffnen.");
@@ -615,6 +623,9 @@ a,button,[role="button"],summary,[tabindex],label{-webkit-tap-highlight-color:tr
     // Keep the native prompt inside the original user gesture.
     var installEvent=window.__darEarlyInstallPrompt||deferredInstall;
     if(installEvent){
+      window.__darEarlyInstallPrompt=null;
+      deferredInstall=null;
+      syncRouterInstallButtons();
       try{
         installEvent.prompt();
         var choice=await installEvent.userChoice;
@@ -652,6 +663,9 @@ a,button,[role="button"],summary,[tabindex],label{-webkit-tap-highlight-color:tr
       event.preventDefault();
       event.stopImmediatePropagation();
       window.__darInstallPromptBusy=true;
+      window.__darEarlyInstallPrompt=null;
+      deferredInstall=null;
+      syncRouterInstallButtons();
       try{
         directEvent.prompt();
         Promise.resolve(directEvent.userChoice).then(function(choice){

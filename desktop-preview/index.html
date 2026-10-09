@@ -2373,24 +2373,37 @@ button,input,select{font:inherit}
     if(!target)return;
     var promptEvent=window.__darEarlyInstallPrompt;
     if(!promptEvent){
-      // Keep the button clickable. Let the normal installer handle preparation/fallback.
+      // The button is disabled while Chrome is still preparing the native prompt.
+      event.preventDefault();
       return;
     }
     event.preventDefault();
     event.stopImmediatePropagation();
     if(window.__darInstallPromptBusy)return;
     window.__darInstallPromptBusy=true;
-    promptEvent.prompt();
+    // beforeinstallprompt events are single-use. Remove the shared reference before prompt().
+    window.__darEarlyInstallPrompt=null;
+    window.__darPwaInstallState="prompting";
+    window.__darSyncInstallButtons();
+    try{
+     promptEvent.prompt();
+    }catch(ePrompt){
+     window.__darInstallPromptBusy=false;
+     window.__darPwaInstallState="preparing";
+     window.__darSyncInstallButtons();
+     window.dispatchEvent(new CustomEvent("dar:pwa-install-error"));
+     return;
+    }
     Promise.resolve(promptEvent.userChoice).then(function(choice){
-     window.__darEarlyInstallPrompt=null;
      window.__darInstallPromptBusy=false;
      window.__darPwaInstallState=choice&&choice.outcome==="accepted"?"installed":"preparing";
      window.__darSyncInstallButtons();
      var outcome=choice&&choice.outcome?choice.outcome:"dismissed";
      window.dispatchEvent(new CustomEvent("dar:pwa-install-choice",{detail:{outcome:outcome}}));
     }).catch(function(){
-     window.__darEarlyInstallPrompt=null;
      window.__darInstallPromptBusy=false;
+     window.__darPwaInstallState="preparing";
+     window.__darSyncInstallButtons();
      window.dispatchEvent(new CustomEvent("dar:pwa-install-error"));
     });
    }catch(eClick){
@@ -3028,6 +3041,10 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
   darPwaHint("Web-App ist installiert.");
   darPwaToast("DĀR AL TAWḤĪD wurde als Web-App installiert.")
  });
+ window.addEventListener("dar:pwa-install-error",function(){
+  darDeferredPwaPrompt=null;
+  darPwaHint("Chrome hat den Installationsdialog zurückgesetzt. Bitte Seite neu laden und erneut installieren.");
+ });
  window.addEventListener("dar:pwa-install-choice",function(ev){
   var outcome=ev&&ev.detail&&ev.detail.outcome;
   darDeferredPwaPrompt=null;
@@ -3065,6 +3082,8 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
   // Important: prompt() must run from this user gesture. Do not await before it.
   var installEvent=window.__darEarlyInstallPrompt||darDeferredPwaPrompt;
   if(installEvent){
+   window.__darEarlyInstallPrompt=null;
+   darDeferredPwaPrompt=null;
    try{
     installEvent.prompt();
     var choice=await installEvent.userChoice;
