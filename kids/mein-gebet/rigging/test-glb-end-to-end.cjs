@@ -54,6 +54,17 @@ function glbFixture(){
   const rotationAccessor=add(quaternions,"VEC4",5126,2);
   const bin=Buffer.concat(parts);
   const nodes=bones.map(name=>({name}));
+  const lookup=new Map(nodes.map((v,i)=>[v.name,i]));
+  const edges={
+    Hips:["Spine","UpperLeg.L","UpperLeg.R"],
+    Spine:["Chest"],Chest:["Neck","UpperArm.L","UpperArm.R"],Neck:["Head"],
+    "UpperArm.L":["LowerArm.L"],"LowerArm.L":["Hand.L"],
+    "UpperArm.R":["LowerArm.R"],"LowerArm.R":["Hand.R"],
+    "UpperLeg.L":["LowerLeg.L"],"LowerLeg.L":["Foot.L"],"Foot.L":["Toe.L"],
+    "UpperLeg.R":["LowerLeg.R"],"LowerLeg.R":["Foot.R"],"Foot.R":["Toe.R"]
+  };
+  for(const [parent,childNames] of Object.entries(edges))
+    nodes[lookup.get(parent)].children=childNames.map(name=>lookup.get(name));
   nodes.push({name:"Synthetic skinned test body; not original",mesh:0,skin:0});
   const animations=["Qiyam","Takbir"].map(name=>({name,
     channels:[{sampler:0,target:{node:0,path:"rotation"}}],
@@ -163,6 +174,15 @@ try{
     const r=quietMain(validateMain,[file,"boy"]);
     assert.equal(r.exit,1,r.message);
     assert.ok(JSON.parse(r.message).errors.some(e=>e.includes("Static skeletal scaling")));
+  });
+  check("intact vertices and animation bytes cannot rescue a disconnected skeleton",()=>{
+    const fake=JSON.parse(JSON.stringify(g));
+    fake.nodes[3].children=[];
+    const file=path.join(tmp,"detached-head.glb");
+    fs.writeFileSync(file,encodeGLB(fake,bin));
+    const r=quietMain(validateMain,[file,"boy"]);
+    assert.equal(r.exit,1,r.message);
+    assert.ok(JSON.parse(r.message).errors.some(e=>e.includes("Disconnected skin bone")));
   });
 }finally{
   fs.rmSync(tmp,{recursive:true,force:true});
