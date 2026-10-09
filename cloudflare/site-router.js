@@ -423,6 +423,16 @@ a,button,[role="button"],summary,[tabindex],label{-webkit-tap-highlight-color:tr
 .dar-download-fallback__btn.apple{background:#111820;border-color:#111820}
 .dar-download-fallback__btn svg{width:18px;height:18px}.dar-pwa-icon-picker{margin-top:16px;padding-top:14px;border-top:1px solid rgba(124,97,45,.16)}.dar-pwa-icon-picker__title{margin-bottom:9px;color:#51483d;font-size:10px;font-weight:850;letter-spacing:.06em}.dar-pwa-icon-picker__strip{display:flex;gap:8px;overflow-x:auto;padding:2px 1px 8px;scrollbar-width:thin}.dar-pwa-icon-picker__strip button{width:48px;height:48px;flex:0 0 48px;padding:2px;border:2px solid transparent;border-radius:14px;background:#0f282a;overflow:hidden;cursor:pointer}.dar-pwa-icon-picker__strip button.is-active{border-color:#a77c32;box-shadow:0 0 0 2px rgba(167,124,50,.14)}.dar-pwa-icon-picker__strip img{width:100%;height:100%;display:block;object-fit:cover;border-radius:10px}.dar-pwa-icon-picker__status{margin-top:5px;color:#81776b;font-size:8.5px;line-height:1.45}
 @media(max-width:760px){.dar-download-fallback__grid{grid-template-columns:1fr}.dar-download-fallback__card{padding:18px}}
+@media (hover:none) and (pointer:coarse){
+  html,body,a,button,[role="button"],summary,[tabindex],label,.desktop-link,.more-row,.category-card,.feature-card,.header-action,.main-nav a,.download-app-btn,.dar-pwa-home-action,.dar-pwa-icon-choice{
+    -webkit-tap-highlight-color:rgba(0,0,0,0)!important;
+  }
+  a:focus,a:focus-visible,a:active,button:focus,button:focus-visible,button:active,[role="button"]:focus,[role="button"]:focus-visible,[role="button"]:active,
+  .desktop-link:focus,.desktop-link:focus-visible,.desktop-link:active,.more-row:focus,.more-row:focus-visible,.more-row:active,
+  .category-card:focus,.category-card:focus-visible,.category-card:active,.feature-card:focus,.feature-card:focus-visible,.feature-card:active{
+    outline:0!important;outline-offset:0!important;filter:none!important;transform:none!important;
+  }
+}
 </style>
 <section id="darIosAppStorePromo" aria-label="DĀR AL TAWḤĪD im App Store">
   <div class="dar-store-apple" aria-hidden="true">
@@ -556,10 +566,11 @@ a,button,[role="button"],summary,[tabindex],label{-webkit-tap-highlight-color:tr
       try{installed=window.matchMedia("(display-mode: standalone)").matches}catch(e){}
       document.querySelectorAll("[data-dar-pwa-install]").forEach(function(btn){
         if(!btn.dataset.darInstallLabel)btn.dataset.darInstallLabel=btn.textContent||"Web-App installieren";
-        btn.disabled=installed;
-        btn.setAttribute("aria-disabled",installed?"true":"false");
+        var preparing=android&&!installed&&!ready;
+        btn.disabled=installed||preparing;
+        btn.setAttribute("aria-disabled",(installed||preparing)?"true":"false");
         btn.setAttribute("data-dar-pwa-install-state",installed?"installed":(ready?"ready":"preparing"));
-        var nextLabel=installed?"Bereits installiert":btn.dataset.darInstallLabel;
+        var nextLabel=installed?"Bereits installiert":(preparing?"Installation wird vorbereitet …":btn.dataset.darInstallLabel);
         if(btn.textContent!==nextLabel)btn.textContent=nextLabel;
       });
     }catch(e){}

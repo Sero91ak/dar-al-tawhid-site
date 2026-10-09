@@ -2307,12 +2307,14 @@ button,input,select{font:inherit}
    try{
     var ready=!!window.__darEarlyInstallPrompt;
     var installed=!!(window.matchMedia&&window.matchMedia("(display-mode: standalone)").matches);
+    var android=/\bAndroid\b/i.test(String(navigator.userAgent||""));
     document.querySelectorAll("[data-dar-pwa-install]").forEach(function(btn){
-     btn.disabled=installed;
-     btn.setAttribute("aria-disabled",installed?"true":"false");
-     btn.setAttribute("data-dar-pwa-install-state",installed?"installed":(ready?"ready":"preparing"));
      if(!btn.dataset.darInstallLabel)btn.dataset.darInstallLabel=btn.textContent||"Web-App installieren";
-     var nextLabel=installed?"Bereits installiert":btn.dataset.darInstallLabel;
+     var preparing=android&&!installed&&!ready;
+     btn.disabled=installed||preparing;
+     btn.setAttribute("aria-disabled",(installed||preparing)?"true":"false");
+     btn.setAttribute("data-dar-pwa-install-state",installed?"installed":(ready?"ready":"preparing"));
+     var nextLabel=installed?"Bereits installiert":(preparing?"Installation wird vorbereitet …":btn.dataset.darInstallLabel);
      if(btn.textContent!==nextLabel)btn.textContent=nextLabel;
     });
    }catch(e){}
@@ -2333,6 +2335,16 @@ button,input,select{font:inherit}
   });
   document.addEventListener("DOMContentLoaded",function(){
    window.__darSyncInstallButtons();
+   try{
+    fetch("/manifest.json",{cache:"no-store",credentials:"same-origin"}).catch(function(){});
+    if("serviceWorker" in navigator){
+     navigator.serviceWorker.register("/service-worker.js",{scope:"/"}).then(function(){
+      return navigator.serviceWorker.ready;
+     }).then(function(){
+      window.__darSyncInstallButtons();
+     }).catch(function(){});
+    }
+   }catch(ePrime){}
    try{
     var mo=new MutationObserver(function(){window.__darSyncInstallButtons()});
     mo.observe(document.documentElement,{childList:true,subtree:true});
@@ -4465,5 +4477,28 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
 </script>
 <!-- desktop-content-sync-v12 -->
 <script defer src="/desktop-preview/desktop-overhaul.js?v=221"></script>
+<style id="darFinalTouchFeedbackV5">
+@media (hover:none) and (pointer:coarse){
+  :where(a,button,[role="button"],summary,[tabindex],label,.desktop-link,.more-row,.category-card,.feature-card,.header-action,.main-nav a,.download-app-btn,.dar-pwa-home-action,.dar-pwa-icon-choice){
+    -webkit-tap-highlight-color:rgba(0,0,0,0)!important;
+    -webkit-touch-callout:none;
+    touch-action:manipulation;
+  }
+  :where(a,button,[role="button"],summary,[tabindex],.desktop-link,.more-row,.category-card,.feature-card,.header-action,.main-nav a,.download-app-btn,.dar-pwa-home-action,.dar-pwa-icon-choice):is(:active,:focus,:focus-visible){
+    outline:0!important;
+    outline-offset:0!important;
+    filter:none!important;
+    transform:none!important;
+  }
+  :where(a,button,[role="button"],summary,[tabindex],.desktop-link,.more-row,.category-card,.feature-card,.header-action,.main-nav a,.download-app-btn,.dar-pwa-home-action,.dar-pwa-icon-choice):is(:active,:focus,:focus-visible)::before,
+  :where(a,button,[role="button"],summary,[tabindex],.desktop-link,.more-row,.category-card,.feature-card,.header-action,.main-nav a,.download-app-btn,.dar-pwa-home-action,.dar-pwa-icon-choice):is(:active,:focus,:focus-visible)::after{
+    opacity:0!important;
+    background:transparent!important;
+    background-image:none!important;
+    box-shadow:none!important;
+    filter:none!important;
+  }
+}
+</style>
 </body>
 </html>
