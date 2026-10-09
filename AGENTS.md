@@ -157,3 +157,13 @@ Diese Regel ersetzt alle früheren Regeln zu sichtbaren Quellenlinks in veröffe
 - `q/_registry/next-number.txt` und `nextNumber` in `q/_registry/shortlinks.json` muessen immer auf die naechste freie Nummer zeigen. Bestehende Nummern duerfen nicht ueberschrieben, umbenannt oder wiederverwendet werden.
 - In GitHub duerfen Nummern nicht unklar bleiben: Auch wenn der oeffentliche Link nur `dar-al-tawhid.de/q/<nummer>` lautet, muss intern in README/Registry klar stehen, welches Thema, welche Aussage und welcher Sprecher/Überlieferer zu dieser Nummer gehoeren.
 - Diese Regel ist **kanal-, format- und chatübergreifend** verbindlich und ersetzt ältere Beitrags- und Linkregeln, soweit sie ihr widersprechen.
+
+## Autonome globale Erwachsenen-Veröffentlichung · 09.10.2026
+
+- Bei neuem, gesondert freigegebenem Einzelbeitrag in `content/posts/`: vorher `scripts/adult-content-publication-guard.js` anwenden. Identische oder hochgradig überlappende Aussagen in den bestehenden Textbeiträgen und in `apple-tv/hadith/series/` werden abgelehnt. Abgelehnte Veröffentlichungen müssen mit bestehender Fundstelle nachvollziehbar gemeldet werden (GitHub-Workflow-Issue). Unsichere Ähnlichkeit nicht als endgültig identisch ausgeben.
+- Neuer **Ḥadīṯ** nur mit belegter Authentizitätsbewertung und **verifiziertem Šarḥ**, einschließlich Šarḥ-Gelehrtem, Werk und exaktem Quellenverweis. Fehlende Prüfung = Veröffentlichungssperre; keinen Šarḥ erfinden.
+- Neuer **Athar** erhält `recordType: athar`; **kein Šarḥ erforderlich** und die UI darf nicht „Šarḥ offen“ anzeigen. Überlieferungsstatus in `grade` sichtbar machen. Ein unterbrochener Isnād darf niemals stillschweigend als ṣaḥīḥ gekennzeichnet werden.
+- Ein eindeutiger neuer Datensatz erhält die nächste ungenutzte `HAD-xxxx`-Nummer und erscheint über den **kanonischen Apple-TV-/Ḥadīṯ-Datenbestand** in den Erwachsenen-Bibliotheken. Website, Desktop, iOS, Android-Web-/Native-WebView und Apple TV verwenden den freigegebenen gemeinsamen Datenstand. Separate App-Deploys und Versionsprüfungen bleiben erforderlich; einen Commit nicht als abgeschlossene Live-Auslieferung bezeichnen.
+- Textbeiträge für Erwachsene **ohne Hashtag-Zeilen und ohne Social-Media-Textfußzeilen**. Bei Quellenlink ist exakt **eine** passende `/q/<nummer>/`-Karte für den Einzelbeitrag maßgebend.
+- **Keine Änderungen an Kids und keine OneSignal-/Besucher-Benachrichtigungen** durch diesen Inhalts-Sync. Veröffentlichung auf einer Seite und Versand eines Pushs sind getrennte Aktionen.
+- Geschützte App-Spuren gemäß `scripts/app-lane-guard.js` getrennt committen; der kanonische Live-Workflow führt Inhaltssync und Live-Build aus. Bei blockierter Live-Auslieferung konkrete Workflow-Fehler melden statt Erfolg zu behaupten.
