@@ -5,11 +5,11 @@
   "totalInspected": 50,
   "hadithCount": 21,
   "atharCount": 29,
-  "hadithSharhVerified": 18,
-  "hadithSharhOpen": 3,
+  "hadithSharhVerified": 20,
+  "hadithSharhOpen": 1,
   "atharAttributionVerified": 4,
   "atharAttributionOpen": 25,
-  "openTotal": 28,
+  "openTotal": 26,
   "sourceOfTruth": "apple-tv/hadith/series/",
   "policy": {
     "hadith": "Authentische Primärquelle + direkt nachweisbarer klassischer Šarḥ",
@@ -40,7 +40,7 @@
       "note": "Viele vorhandene Werknachweise sind unspezifisch. Ohne Original-Überlieferer, Isnād und Band-/Seite kein verifizierter Zuschreibungsstatus."
     }
   ],
-  "nextAction": "Noch 25 Āṯār mit offener Attribution/Isnād und 3 Ḥadīṯe mit needs-review (0460, 0463, 0468) prüfen. Deren strittige Ketten nicht als authentisch ausgeben. Danach Block HAD-0493–0542.",
+  "nextAction": "HAD-0460 und HAD-0468 mit klassischen arabischen Direktkommentaren vervollständigt. HAD-0463 bleibt aufgrund stark umstrittener marfūʿ-/mursal-Kette needs-review trotz vorhandenem Ibn-Raǧab-Šarḥ. Daneben 25 Āṯār mit offener Zuschreibungsprüfung.",
   "entries": [
     {
       "id": "HAD-0443",
@@ -165,9 +165,9 @@
     {
       "id": "HAD-0460",
       "recordType": "hadith",
-      "sharh": "needs-review",
+      "sharh": "verified",
       "attribution": null,
-      "sourceAudit": "Konkrete Primärnummer, klassisch-arabischen Direktkommentar und Editionsangabe nachprüfen"
+      "sourceAudit": "Authentischer Primärtext mit klassisch-arabischer direkter Erklärung, digitaler Pagination und ausdrücklich unbestimmter Druckausgabe im kanonischen HAD-Datensatz abgeglichen."
     },
     {
       "id": "HAD-0461",
@@ -221,9 +221,9 @@
     {
       "id": "HAD-0468",
       "recordType": "hadith",
-      "sharh": "needs-review",
+      "sharh": "verified",
       "attribution": null,
-      "sourceAudit": "Konkrete Primärnummer, klassisch-arabischen Direktkommentar und Editionsangabe nachprüfen"
+      "sourceAudit": "Authentischer Primärtext mit klassisch-arabischer direkter Erklärung, digitaler Pagination und ausdrücklich unbestimmter Druckausgabe im kanonischen HAD-Datensatz abgeglichen."
     },
     {
       "id": "HAD-0469",
