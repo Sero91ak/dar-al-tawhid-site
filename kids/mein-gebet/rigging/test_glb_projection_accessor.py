@@ -101,11 +101,11 @@ class IndexedProjectionTests(unittest.TestCase):
 
     def test_bad_vertex_stride(self):
         self.assert_rejects(lambda g, b, p: g["bufferViews"][0].update(byteStride=8),
-                            "outside BIN view bounds")
+                            "exceeds BIN view bounds")
 
     def test_undersized_view(self):
         self.assert_rejects(lambda g, b, p: g["bufferViews"][0].update(byteLength=16),
-                            "outside BIN view bounds")
+                            "exceeds BIN view bounds")
 
     def test_nonzero_buffer_index(self):
         self.assert_rejects(lambda g, b, p: g["bufferViews"][0].update(buffer=1),
