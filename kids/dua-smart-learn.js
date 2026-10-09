@@ -599,9 +599,9 @@
     root.innerHTML=
       '<div class="dsl-backdrop" data-dsl="close"></div>'+
       '<section class="dsl-sheet" role="dialog" aria-modal="true" aria-labelledby="dslTitle">'+
-        '<header class="dsl-head">'+
-          '<button class="dsl-close" type="button" data-dsl="close" aria-label="Lernmodus schließen">×</button>'+
-          '<div class="dsl-headcopy"><small>DUʿĀʾ LERNEN</small><strong id="dslTitle">Duʿāʾ lernen</strong><span id="dslSub">Fuṣḥā · Wort für Wort</span></div>'+
+        '<header class="dsl-head kids-detail-appbar" data-kids-unified-header="v1287">'+
+          '<button class="dsl-close kids-detail-dock-back" type="button" data-dsl="close" aria-label="Zurück zu Mein Duʿāʾ"></button>'+
+          '<div class="dsl-headcopy kids-detail-appbar-copy"><strong class="kids-detail-appbar-title" id="dslTitle">Duʿāʾ lernen</strong><span class="kids-detail-appbar-subtitle" id="dslSub">Mein Duʿāʾ · Fuṣḥā &amp; Wort für Wort</span></div>'+
           '<div class="dsl-count" id="dslCount">1 / 1</div>'+
         '</header>'+
         '<div class="dsl-progress"><i id="dslProgress"></i></div>'+
