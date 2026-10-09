@@ -109,3 +109,47 @@ function makeRecord(p,q,n){
   sharhReference:f.sharhReference,sharhVolume:f.sharhVolume||null,sharhPage:f.sharhPage||null});
  return r;
 }
+
+function selfTest(){
+ const a={id:"X1",speaker:"Umar ibn Abd al Aziz",text:"Die Pflichten erfüllen und das Verbotene meiden ist wahre Taqwa.",q:"38"};
+ if(!duplicate(a,{...a,id:"X2"}))throw Error("duplicate detection broken");
+ if(duplicate(a,{id:"X3",speaker:"Abu Hurayrah",text:"Ein ganz anderes Gebet.",q:"99"}))throw Error("false duplicate");
+ const p=readPost('---\nid: "a"\nrecordType: "athar"\nscholar: "Umar"\nsource: "Werk"\n---\n🖋️ Umar\n\n„Die Pflichten erfüllen und die Verbote Allahs meiden ist wahre Taqwa.“\n\n📝 Quelle',"test.md");
+ if(p.type!=="athar"||makeRecord(p,"38",3351).sharhStatus!==null)throw Error("Athar is not supposed to have Sharh");
+ console.log("Adult content publication tests passed");
+}
+function main(){
+ if(process.argv.includes("--self-test"))return selfTest();
+ const write=process.argv.includes("--sync"),check=process.argv.includes("--validate");
+ if(!write&&!check)throw Error("Usage: --validate or --sync or --self-test");
+ const paths=selected();if(!paths.length){console.log("No new adult posts; no changes");return}
+ const previous=allTv(),batch=[],made=[];
+ let next=Math.max(0,...previous.map(x=>Number(x.id.match(/\d+/)?.[0]||0)));
+ for(const file of paths){
+  if(!fs.existsSync(root+"/"+file))block("Post file missing",{post:file});
+  const p=readPost(fs.readFileSync(root+"/"+file,"utf8"),file);
+  if(p.skip){console.log("SKIP: slide or non-hadith/athar",file);continue}
+  for(const e of batch){
+   const reason=duplicate({id:p.id,speaker:p.fm.scholar,text:p.text,q:short(p.body)},
+      {id:e.id,speaker:e.fm.scholar,text:e.text,q:short(e.body)});
+   if(reason)block("duplicate in new content batch: "+reason,{post:p.file,existing:e.file});
+  }
+  const q=validate(p,allPosts(path.basename(file)),[...previous,...made.map(x=>({id:x.id,ref:x.id,text:x.textMarkdown,speaker:x.narratorLine,q:short(x.sourceSection)}))]);
+  if(q==="already-synced"){console.log("Already synced",p.id);continue}
+  batch.push(p);
+  if(write){
+   const r=makeRecord(p,q,++next),start=Math.floor((next-1)/100)*100+1;
+   const dir=series+"/"+String(start).padStart(3,"0")+"-"+String(start+99);
+   fs.mkdirSync(dir,{recursive:true});
+   const dest=dir+"/"+r.id+".json";
+   if(fs.existsSync(dest))block("HAD number already allocated",{number:r.id});
+   fs.writeFileSync(dest,JSON.stringify(r,null,2)+"\n");made.push(r);
+   console.log("CREATED:",r.id,r.recordType);
+  }else console.log("VALIDATED:",file,p.type);
+ }
+ const result={ok:true,validated:paths.length,created:made.map(x=>x.id)};
+ if(report)fs.writeFileSync(report,JSON.stringify(result,null,2)+"\n");
+ console.log("ADULT_CANONICAL_AUTOPUBLISH:",JSON.stringify(result));
+}
+if(require.main===module)try{main()}catch(error){block(error.message||String(error))}
+module.exports={norm,sim,duplicate,readPost,makeRecord};
