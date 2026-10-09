@@ -109,7 +109,7 @@ function glbFixture(){
     animations,
   };
   return {g,bin,locations:{normalByte:views[normal].byteOffset,firstPositionByte:views[position].byteOffset,
-    animationTimeByte:views[timeAccessor].byteOffset}};
+    animationTimeByte:views[timeAccessor].byteOffset,indexByte:views[indicesAccessor].byteOffset}};
 }
 function encodeGLB(g,bin){
   const jsonRaw=Buffer.from(JSON.stringify(g),"utf8");
@@ -199,6 +199,28 @@ try{
     const r=quietMain(validateMain,[file,"boy"]);
     assert.equal(r.exit,1,r.message);
     assert.ok(JSON.parse(r.message).errors.some(e=>e.includes("NaN/Infinity")));
+  });
+  check("tilted zero-thickness billboard is rejected even though X Y Z extents look nonzero",()=>{
+    const copy=Buffer.from(bin);
+    for(let i=0;i<N;i++){
+      const o=locations.firstPositionByte+i*12;
+      copy.writeFloatLE(-copy.readFloatLE(o)-copy.readFloatLE(o+4),o+8);
+    }
+    // Use every one of the 2400 positions in nonzero-area triangles:
+    // a=i, b=i+800, c=1600+(i+1)%800; no unreferenced vertices.
+    for(let i=0;i<N/3;i++){
+      const offset=locations.indexByte+i*6;
+      copy.writeUInt16LE(i,offset);
+      copy.writeUInt16LE(i+800,offset+2);
+      copy.writeUInt16LE(1600+(i+1)%800,offset+4);
+    }
+    const file=path.join(tmp,"rotated-coplanar-billboard.glb");
+    fs.writeFileSync(file,encodeGLB(g,copy));
+    const r=quietMain(validateMain,[file,"boy"]);
+    assert.equal(r.exit,1,r.message);
+    const report=JSON.parse(r.message);
+    assert.ok(report.errors.some(e=>e.includes("Coplanar/zero-thickness")),r.message);
+    assert.equal(report.geometryVertexBytesVerified,false);
   });
   check("inflated vertex count with 1 reused triangle is blocked",()=>{
     const fake=JSON.parse(JSON.stringify(g));
