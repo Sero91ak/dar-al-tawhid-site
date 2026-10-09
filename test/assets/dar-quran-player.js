@@ -1396,9 +1396,12 @@
     cleanupLearningPlayerOnRouteLeave();
   }
   function surahMeta(id) {
-    return typeof window.quranSurahMeta === "function"
-      ? window.quranSurahMeta(id)
-      : ((window.quranMeta && window.quranMeta.surahs) || []).find(function (s) { return Number(s.id) === Number(id); });
+    var result = null;
+    try {
+      if (typeof window.quranSurahMeta === "function") result = window.quranSurahMeta(id);
+    } catch (eMeta) {}
+    if (!result) result = ((window.quranMeta && window.quranMeta.surahs) || []).find(function (s) { return Number(s.id) === Number(id); });
+    return result || (QURAN_PLAYER_SURAHS && QURAN_PLAYER_SURAHS[Number(id) - 1]) || null;
   }
   var dataLoadSerial = 0;
   var dataSurahLoaded = 0;
@@ -3317,9 +3320,6 @@
   function availablePlayerSurahs() {
     var items = (window.quranMeta && window.quranMeta.surahs) || [];
     if (items.length >= 114) return items;
-    if (!window.quranMeta || !window.quranMeta.surahs || !window.quranMeta.surahs.length) {
-      window.quranMeta = { surahs: QURAN_PLAYER_SURAHS };
-    }
     return QURAN_PLAYER_SURAHS;
   }
   function openSurahSheet() {
