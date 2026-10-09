@@ -2285,6 +2285,8 @@ button,input,select{font:inherit}
   try{
     var params=new URLSearchParams(location.search||"");
     var pwaLaunch=params.get("pwa")==="1";
+    var rememberedPwa=false;
+    try{rememberedPwa=sessionStorage.getItem("dar_pwa_launch_session_v1")==="1"}catch(eRemember){}
     var standalone=
       !!(window.matchMedia&&(
         window.matchMedia("(display-mode: standalone)").matches||
@@ -2292,7 +2294,9 @@ button,input,select{font:inherit}
         window.matchMedia("(display-mode: minimal-ui)").matches
       ))||
       window.navigator.standalone===true||
-      pwaLaunch;
+      pwaLaunch||
+      rememberedPwa;
+    if(standalone){try{sessionStorage.setItem("dar_pwa_launch_session_v1","1")}catch(eStore){}}
     if(standalone&&document.documentElement){
       window.__DAR_PWA_STANDARD_BOOT=true;
       window.__DAR_PWA_LAUNCH_MARKER=pwaLaunch;

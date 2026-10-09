@@ -17,6 +17,8 @@
     try {
       var __darBootParamsEarly = new URLSearchParams(location.search || "");
       var __darBootLaunchMarker = __darBootParamsEarly.get("pwa") === "1";
+      var __darBootRemembered = false;
+      try { __darBootRemembered = sessionStorage.getItem("dar_pwa_launch_session_v1") === "1"; } catch (__darRememberErr) {}
       __darBootStandalone =
         !!(window.matchMedia && (
           window.matchMedia("(display-mode: standalone)").matches ||
@@ -24,7 +26,11 @@
           window.matchMedia("(display-mode: minimal-ui)").matches
         )) ||
         window.navigator.standalone === true ||
-        __darBootLaunchMarker;
+        __darBootLaunchMarker ||
+        __darBootRemembered;
+      if (__darBootStandalone) {
+        try { sessionStorage.setItem("dar_pwa_launch_session_v1", "1"); } catch (__darRememberWriteErr) {}
+      }
     } catch (__darStandaloneErr) {}
     var __darDesktopPublic = !!document.querySelector('link[href*="/desktop-preview/desktop-overhaul.css"]');
     var __darPublicRoot = (__darBootPath === "/" || __darBootPath === "/index.html");
@@ -309,6 +315,8 @@
       try {
         var installParams = new URLSearchParams(location.search || "");
         var installLaunchMarker = installParams.get("pwa") === "1";
+        var installRemembered = false;
+        try { installRemembered = sessionStorage.getItem("dar_pwa_launch_session_v1") === "1"; } catch (eRememberInstall) {}
         standaloneReq =
           !!(window.matchMedia && (
             window.matchMedia("(display-mode: standalone)").matches ||
@@ -317,6 +325,7 @@
           )) ||
           window.navigator.standalone === true ||
           installLaunchMarker ||
+          installRemembered ||
           window.__DAR_PWA_STANDARD_BOOT === true;
       } catch (eStandalone) {}
       var desktopPublic = !!document.querySelector('link[href*="/desktop-preview/desktop-overhaul.css"]');
