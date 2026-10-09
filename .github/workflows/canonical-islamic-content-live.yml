@@ -61,7 +61,7 @@ jobs:
           {
             echo "CHANGED_POST_FILES<<ADULT_POSTS_EOF"
             if [ -n "$BASE" ] && git cat-file -e "$BASE^{commit}" 2>/dev/null; then
-              git diff --diff-filter=AM --name-only "$BASE" "${{ github.sha }}" -- 'content/posts/*.md'
+              git diff --diff-filter=A --name-only "$BASE" "${{ github.sha }}" -- 'content/posts/*.md'
             fi
             echo "ADULT_POSTS_EOF"
           } >> "$GITHUB_ENV"
@@ -129,6 +129,9 @@ jobs:
 
       - name: Build + Build-IDs synchronisieren
         run: npm run build
+
+      - name: Desktop-Beitragsindex aus gemeinsamer Quelle erstellen
+        run: node scripts/build-desktop-posts-index.js
 
       - name: Canonical-Inhalt prüfen
         run: node scripts/validate-canonical-content.js
