@@ -1327,8 +1327,8 @@ function showQuestion(){
       $("#feedback").textContent="Beende bitte zuerst deine Sprachaufnahme.";
       return;
     }
-    all(".choice-listen").forEach(x=>x.setAttribute("aria-pressed",String(x===listen)));
     speak(3,["Antwort "+(i+1)+": "+t]);
+    all(".choice-listen").forEach(x=>x.setAttribute("aria-pressed",String(x===listen)));
   };
   row.append(select,listen);$("#choices").appendChild(row);
  });
