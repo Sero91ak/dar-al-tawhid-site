@@ -1,0 +1,172 @@
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#182747"><meta name="robots" content="noindex,nofollow"><meta name="description" content="Eigenständige DĀR AL TAWḤĪD Quran Player Konzeptvorschau"><title>TAWḤĪD KIDS Quran Player · Design V7</title><link rel="stylesheet" href="/player-next-v7.css?v=7-clean"></head><body class="kids"><div class="app"><div class="desktop"><nav class="sidebar" aria-label="Bereiche"><div class="brand"><span class="brand-mark">۞</span><span>TAWḤĪD KIDS<small>QURʾĀN PLAYER</small></span></div><div class="navtitle">DEINE FUNKTIONEN</div><button class="navitem active" type="button" data-scroll="stage">Jetzt hören</button><button class="navitem" type="button" data-scroll="surahs">Sūren</button><button class="navitem" type="button" data-scroll="settings">Einstellungen</button><button class="navitem" type="button" data-scroll="progress">Fortschritt</button><div class="sidefoot">Isolierte Designvorschau V7<br>Keine Änderungen an den produktiven Apps</div></nav><div class="workspace"><div class="topline"><span class="breadcrumbs">TAWḤĪD KIDS Quran Player</span><span class="chip">DESIGNSTUDIO V7</span></div><header class="heading" hidden><h1>KIDS</h1></header><div class="content-grid"><main class="main-panel" id="stage"><section class="scene"><div><div class="scene-num">HÖREN · LERNEN · VERSTEHEN</div><h2 id="surahName">Al-Iḫlāṣ</h2><small id="suraCount">4 Āyāt · Schritt für Schritt</small></div><span id="suraArabic" class="arabic-name" lang="ar" dir="rtl">الإخلاص</span></section><div class="kid-steps"><div class="kid-step active" id="step1"><b>01</b> Hören</div><div class="kid-step" id="step2"><b>02</b> Üben</div><div class="kid-step" id="step3"><b>03</b> Gelernt</div></div><div class="reader-tools" aria-label="Versdarstellung"><button class="tab active" data-layer="ar">Arabisch</button><button class="tab active" data-layer="de">Bedeutung</button><button class="tab active" data-layer="lat">Lautschrift</button><button class="tab" data-layer="tad">Erklärung</button></div><section class="verse"><div class="versehead"><span id="verseReference">DEINE ĀYAH 01 / 04</span><div class="iconbar"><button class="iconbtn" id="bookmark" aria-label="Āyah merken" title="Āyah merken">☆</button></div></div><div class="verse-focus" id="verseFocus"><div id="quranText" class="quran-text" lang="ar" dir="rtl"></div><div class="translation" id="translation"></div><div class="latin" id="latin"></div><div class="tip" id="commentBox" hidden></div><div class="kid-note" id="coachStatus" aria-live="polite">Höre die Rezitation in deinem Tempo.</div></div><p class="versefade" id="verseFooter">Qurʾān · geprüfte Originaldaten</p></section><div class="kid-actions"><button class="kid-btn" id="kidHear">Hören</button><button class="kid-btn outline" id="kidSlow">Langsam hören</button><button class="kid-btn outline2" id="kidWords">Wörter üben</button><button class="kid-btn outline2" id="kidComplete">Gelernt</button></div><div class="navrow"><button class="secondary" id="prev">← Zurück</button><span class="number" id="counter">1 von 4</span><button class="secondary" id="next">Weiter →</button></div></main><aside class="sidecol" data-active-panel="surahs"><div class="v7-side-tabs" role="tablist" aria-label="Zusatzbereiche"><button type="button" data-v7-tab="surahs" class="active">Sūren</button><button type="button" data-v7-tab="settings">Audio</button><button type="button" data-v7-tab="progress">Merken</button></div><section class="card" id="surahs"><div class="ctitle"><h3>Wähle deine Sūrah</h3><span class="tag">QURʾĀN</span></div><p class="muted">Suche die Sūrah, die du lernen möchtest.</p><div id="surahList" class="sura-list"></div></section><section class="card" id="settings"><div class="ctitle"><h3>Deine Lernwelt</h3><span class="tag">OPTIONEN</span></div><div class="agebuttons" id="ages"><button data-age="4–5">4–5 Jahre</button><button data-age="6–8" class="active">6–8 Jahre</button><button data-age="9–10">9–10 Jahre</button></div><div class="inputrow"><label for="reciter">Stimme</label><select id="reciter"><option value="Husary_128kbps">al-Ḥuṣarī</option><option value="Alafasy_128kbps">al-ʿAfāsī</option><option value="Minshawy_Murattal_128kbps">al-Minšāwī</option></select></div>
+<div class="inputrow"><label for="rate">Tempo</label><select id="rate"><option value="1">Normal · 1×</option><option value="0.85">Ruhig · 0,85×</option><option value="0.75">Langsam · 0,75×</option></select></div>
+<div class="inputrow"><label for="latinMode">Lautschrift</label><select id="latinMode"><option value="tr_readable">Leicht lesbar</option><option value="tr">Standard</option><option value="tr_academic">Wissenschaftlich</option></select></div>
+<div class="inputrow"><label for="repeat">Wiederholen</label><select id="repeat"><option value="none">Aus</option><option value="ayah">Aktuelle Āyah</option><option value="surah">Ganze Sūrah</option></select></div><p class="warning">Wortübungen ohne automatischen Aussprache-Test.</p></section><section class="card" id="progress"><div class="ctitle"><h3>Meine Fortschritte</h3><span class="tag">AUF DIESEM GERÄT</span></div><p class="muted">Deine Position und gemerkte Āyāt bleiben lokal gespeichert.</p><div class="statgrid"><div class="stat"><b id="savedCount">0</b><span>Gemerkte</span></div><div class="stat"><b id="heardCount">0</b><span>Gehörte</span></div><div class="stat"><b id="learnCount">0</b><span>Geübt</span></div></div></section></aside></div></div></div></div><div class="miniplay" role="region" aria-label="Qurʾān Audioplayer"><div class="now-playing"><b id="playingTitle">Al-Iḫlāṣ · Āyah 1</b><span id="audioState" aria-live="polite">Bereit zum Hören</span></div><div class="controlbox"><button class="skip" id="dockPrev" aria-label="Voriger Vers"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M5 5v14M19 6l-9 6 9 6V6Z"/></svg></button><button class="play" id="play" aria-label="Abspielen">▶</button><button class="skip" id="dockNext" aria-label="Nächster Vers"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M19 5v14M5 6l9 6-9 6V6Z"/></svg></button><div class="seek-wrap"><span id="currentTime">0:00</span><input id="seek" type="range" min="0" max="100" value="0" aria-label="Abspielposition"><span id="duration">0:00</span></div></div><div class="playermore"><button class="pill-btn" id="reset">Neustart</button></div><audio id="audio" preload="none" playsinline></audio></div><script>
+(function(){'use strict';
+const KIDS=true, DEFAULT_SURAH=KIDS?112:1;
+const FALLBACK={"1":{"id":1,"name":"الفاتحة","transliteration":"Al-Fātiḥah","verses":[{"id":1,"ar":"بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ","tr_readable":"Bismillaahir Rahmaanir Raheem","tr":"Bismi Allahi alrrahmani alrraheemi","tr_academic":"bis'mi l-lahi l-raḥmāni l-raḥīmi","de":"Im Namen Allahs, des Allerbarmers, des Barmherzigen."},{"id":2,"ar":"ٱلۡحَمۡدُ لِلَّهِ رَبِّ ٱلۡعَٰلَمِينَ","tr_readable":"Alhamdu lillaahi Rabbil 'aalameen","tr":"Alhamdu lillahi rabbi alAAalameena","tr_academic":"al-ḥamdu lillahi rabbi l-ʿālamīna","de":"(Alles) Lob gehört Allah, dem Herrn der Welten,"},{"id":3,"ar":"ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ","tr_readable":"Ar-Rahmaanir-Raheem","tr":"Alrrahmani alrraheemi","tr_academic":"al-raḥmāni l-raḥīmi","de":"dem Allerbarmer, dem Barmherzigen,"},{"id":4,"ar":"مَٰلِكِ يَوۡمِ ٱلدِّينِ","tr_readable":"Maaliki Yawmid-Deen","tr":"Maliki yawmi alddeeni","tr_academic":"māliki yawmi l-dīni","de":"dem Herrscher am Tag des Gerichts."},{"id":5,"ar":"إِيَّاكَ نَعۡبُدُ وَإِيَّاكَ نَسۡتَعِينُ","tr_readable":"Iyyaaka na'budu wa iyyaaka nasta'een","tr":"Iyyaka naAAbudu waiyyaka nastaAAeenu","tr_academic":"iyyāka naʿbudu wa-iyyāka nastaʿīnu","de":"Dir allein dienen wir, und zu Dir allein flehen wir um Hilfe."},{"id":6,"ar":"ٱهۡدِنَا ٱلصِّرَٰطَ ٱلۡمُسۡتَقِيمَ","tr_readable":"Ihdinas-Siraatal-Mustaqeem","tr":"Ihdina alssirata almustaqeema","tr_academic":"ih'dinā l-ṣirāṭa l-mus'taqīma","de":"Leite uns den geraden Weg,"},{"id":7,"ar":"صِرَٰطَ ٱلَّذِينَ أَنۡعَمۡتَ عَلَيۡهِمۡ غَيۡرِ ٱلۡمَغۡضُوبِ عَلَيۡهِمۡ وَلَا ٱلضَّآلِّينَ","tr_readable":"Siraatal-lazeena an'amta 'alaihim ghayril-maghdoobi 'alaihim wa lad-daalleen","tr":"Sirata allatheena anAAamta AAalayhim ghayri almaghdoobi AAalayhim wala alddalleena","tr_academic":"ṣirāṭa alladhīna anʿamta ʿalayhim ghayri l-maghḍūbi ʿalayhim walā l-ḍālīna","de":"den Weg derjenigen, denen Du Gunst erwiesen hast, nicht derjenigen, die (Deinen) Zorn erregt haben, und nicht der Irregehenden!"}]},"112":{"id":112,"name":"الإخلاص","transliteration":"Al-Iḫlāṣ","verses":[{"id":1,"ar":"قُلۡ هُوَ ٱللَّهُ أَحَدٌ","tr_readable":"Qul huwal laahu ahad","tr":"Qul huwa Allahu ahadun","tr_academic":"qul huwa l-lahu aḥadun","de":"Sag: Er ist Allah, ein Einer,"},{"id":2,"ar":"ٱللَّهُ ٱلصَّمَدُ","tr_readable":"Allah hus-samad","tr":"Allahu alssamadu","tr_academic":"al-lahu l-ṣamadu","de":"Allah, der Überlegene."},{"id":3,"ar":"لَمۡ يَلِدۡ وَلَمۡ يُولَدۡ","tr_readable":"Lam yalid wa lam yoolad","tr":"Lam yalid walam yooladu","tr_academic":"lam yalid walam yūlad","de":"Er hat nicht gezeugt und ist nicht gezeugt worden,"},{"id":4,"ar":"وَلَمۡ يَكُن لَّهُۥ كُفُوًا أَحَدُۢ","tr_readable":"Wa lam yakul-lahu kufuwan ahad","tr":"Walam yakun lahu kufuwan ahadun","tr_academic":"walam yakun lahu kufuwan aḥadun","de":"und niemand ist Ihm jemals gleich."}]},"103":{"id":103,"name":"العصر","transliteration":"Al-ʿAṣr","verses":[{"id":1,"ar":"وَٱلۡعَصۡرِ","tr_readable":"Wal' asr","tr":"WaalAAasri","tr_academic":"wal-ʿaṣri","de":"Beim Zeitalter!"},{"id":2,"ar":"إِنَّ ٱلۡإِنسَٰنَ لَفِي خُسۡرٍ","tr_readable":"Innal insaana lafee khusr","tr":"Inna alinsana lafee khusrin","tr_academic":"inna l-insāna lafī khus'rin","de":"Der Mensch befindet sich wahrlich in Verlust,"},{"id":3,"ar":"إِلَّا ٱلَّذِينَ ءَامَنُواْ وَعَمِلُواْ ٱلصَّـٰلِحَٰتِ وَتَوَاصَوۡاْ بِٱلۡحَقِّ وَتَوَاصَوۡاْ بِٱلصَّبۡرِ","tr_readable":"Il lal lazeena aamanu wa 'amilus saali haati wa tawa saw bil haqqi wa tawa saw bis sabr","tr":"Illa allatheena amanoo waAAamiloo alssalihati watawasaw bialhaqqi watawasaw bialssabri","tr_academic":"illā alladhīna āmanū waʿamilū l-ṣāliḥāti watawāṣaw bil-ḥaqi watawāṣaw bil-ṣabri","de":"außer denjenigen, die glauben und rechtschaffene Werke tun und einander die Wahrheit eindringlich empfehlen und einander die Standhaftigkeit eindringlich empfehlen."}]}};
+const LIST=KIDS?[{id:112,name:'Al-Iḫlāṣ',ar:'الإخلاص'},{id:103,name:'Al-ʿAṣr',ar:'العصر'},{id:1,name:'Al-Fātiḥah',ar:'الفاتحة'}]:[{id:1,name:'Al-Fātiḥah',ar:'الفاتحة'},{id:103,name:'Al-ʿAṣr',ar:'العصر'},{id:112,name:'Al-Iḫlāṣ',ar:'الإخلاص'}];
+const key=KIDS?'dar-quran-preview-kids-v1':'dar-quran-preview-adult-v1';
+const $=id=>document.getElementById(id);
+const audio=$('audio');
+const safe=txt=>String(txt??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const initial={surah:DEFAULT_SURAH,ayah:1,age:'6–8',reciter:KIDS?'Husary_128kbps':'Alafasy_128kbps',rate:'1',repeat:'none',latinMode:'tr_readable',layers:{ar:true,de:true,lat:KIDS,tad:false,taf:false},saved:[],heard:[],learned:[]};
+let saved;try{saved=JSON.parse(localStorage.getItem(key)||'null')}catch(e){}
+const state={...initial,...(saved||{}),layers:{...initial.layers,...(saved?.layers||{})}};
+if(!LIST.some(x=>x.id===Number(state.surah)))state.surah=DEFAULT_SURAH;
+const dataCache={...FALLBACK}, pending=new Map(); let doc=dataCache[state.surah]||dataCache[DEFAULT_SURAH],playing=false, gen=0,wordIdx=-1,heardOnce=false,loadedSrc='',audioErrorOnce=false;
+function persist(){try{localStorage.setItem(key,JSON.stringify(state))}catch(e){}}
+function status(text){$('audioState').textContent=text;if(KIDS)$('coachStatus').textContent=text;}
+function pretty(s){return String(s).padStart(3,'0')}
+function audioUrl(){const s=pretty(doc.id),v=pretty(state.ayah);return 'https://everyayah.com/data/'+encodeURIComponent(state.reciter)+'/'+s+v+'.mp3'}
+async function getSurah(id){if(dataCache[id])return dataCache[id];if(pending.has(id))return pending.get(id);const request=fetch('/content/quran/'+pretty(id)+'.json',{cache:'force-cache'}).then(r=>{if(!r.ok)throw Error('data unavailable');return r.json()}).then(d=>{if(!Array.isArray(d.verses))throw Error('missing verses');dataCache[id]=d;return d}).finally(()=>pending.delete(id));pending.set(id,request);return request;}
+function setLayers(){document.querySelectorAll('[data-layer]').forEach(btn=>btn.classList.toggle('active',!!state.layers[btn.dataset.layer]));const latMode=$('latinMode');if(latMode)latMode.value=state.latinMode;}
+function layer(name){document.querySelectorAll('[data-layer="'+name+'"]').forEach(b=>b.classList.toggle('active',state.layers[name]));paintVerse();persist()}
+function verse(){return doc.verses[state.ayah-1]||doc.verses[0]||{id:1,ar:'',de:'',tr_readable:''}}
+function savedId(){return doc.id+':'+state.ayah}
+function paintVerse(){let v=verse();$('surahIndex')&&($('surahIndex').textContent=pretty(doc.id));$('surahName').textContent=doc.transliteration||LIST.find(i=>i.id===doc.id)?.name||('Sūrah '+doc.id);$('suraArabic').textContent=doc.name||LIST.find(i=>i.id===doc.id)?.ar||'';$('suraCount').textContent=doc.verses.length+' Āyāt · '+(KIDS?'Schritt für Schritt':'Hören & Verstehen');$('verseReference').textContent=(KIDS?'DEINE ĀYAH ':'ĀYAH ')+String(state.ayah).padStart(2,'0')+' / '+String(doc.verses.length).padStart(2,'0');$('counter').textContent=state.ayah+' von '+doc.verses.length;$('playingTitle').textContent=(doc.transliteration||'Sūrah '+doc.id)+' · Āyah '+state.ayah;
+$('quranText').hidden=!state.layers.ar;
+const words=String(v.ar||'').trim().split(/\s+/).filter(Boolean);
+if(KIDS){$('quranText').innerHTML=words.map((w,i)=>'<span tabindex="0" role="button" aria-label="Arabisches Wort '+(i+1)+' auswählen" data-word="'+i+'" class="kword'+(i===wordIdx?' on':'')+'">'+safe(w)+'</span>').join(' ')}else{$('quranText').textContent=v.ar||'';}
+$('translation').hidden=!state.layers.de;$('translation').textContent=v.de||'Keine deutsche Übersetzung in der Quelle';
+$('latin').hidden=!state.layers.lat;$('latin').textContent=v[state.latinMode]||v.tr_readable||v.tr||'Noch keine Lautschrift hinterlegt';
+const explanation=[];if(state.layers.tad)explanation.push('<strong>'+(KIDS?'Erklärung':'Tadabbur')+'</strong><div>Der geprüfte Tadabbur-Katalog wird in einer späteren Entwicklungsstufe angebunden. Hier wird keine ungeprüfte Aussage eingeblendet.</div>');if(state.layers.taf&&!KIDS)explanation.push('<strong>Tafsīr</strong><div>Die geprüften Tafsīr-Quellen werden mit Quellenangabe aus der bestehenden DĀR-App übernommen.</div>');$('commentBox').hidden=!explanation.length;$('commentBox').innerHTML=explanation.join('<hr style="border:0;border-top:1px solid var(--stroke);margin:11px 0">');
+$('verseFooter').textContent='Qurʾān · '+doc.id+':'+state.ayah+' · '+(KIDS?'Originaltext aus DĀR-Daten':'Arabisch und Übersetzung aus bestehendem DĀR-Datenbestand');$('bookmark').classList.toggle('saved',state.saved.includes(savedId()));$('bookmark').textContent=state.saved.includes(savedId())?'★':'☆';$('prev').disabled=state.ayah<=1;$('next').disabled=state.ayah>=doc.verses.length;paintStats();if(KIDS)paintLearning();}
+function paintLearning(){const step=state.learned.includes(savedId())?3:(heardOnce?2:1);[1,2,3].forEach(n=>$('step'+n).classList.toggle('active',step===n));if(step===3)status('Wunderbar! Du hast diese Āyah geübt. ✨');}
+function paintStats(){$('savedCount').textContent=state.saved.length;$('heardCount').textContent=state.heard.length;if(KIDS){$('learnCount').textContent=state.learned.length}else{$('progressSurah').textContent=state.surah;}}
+function paintList(){$('surahList').innerHTML=LIST.map(i=>'<button class="sura-button'+(i.id===doc.id?' active':'')+'" data-surah="'+i.id+'"><span><b>'+pretty(i.id)+' · '+safe(i.name)+'</b><small>'+ (i.id===doc.id?'Du bist hier':'Sūrah auswählen')+'</small></span><span class="ar" lang="ar" dir="rtl">'+safe(i.ar)+'</span></button>').join('')}
+function paint(){paintVerse();paintList();setLayers();if(KIDS){document.querySelectorAll('[data-age]').forEach(b=>b.classList.toggle('active',b.dataset.age===state.age));}['reciter','rate','repeat'].forEach(k=>{if($(k))$(k).value=state[k]});persist()}
+function stop(reset=false){gen++;audio.pause();playing=false;$('play').textContent='▶';$('play').setAttribute('aria-label','Abspielen');if(reset){audio.removeAttribute('src');loadedSrc='';$('seek').value=0;$('currentTime').textContent='0:00';$('duration').textContent='0:00';} }
+async function chooseSurah(id){stop(true);const token=gen;wordIdx=-1;heardOnce=false;status('Sūrah wird vorbereitet …');try{doc=await getSurah(id);if(token!==gen)return;state.surah=id;state.ayah=1;paint();status('Bereit zum Hören');}catch(e){if(token!==gen)return;status('Sūrah konnte nicht geladen werden. Bitte erneut versuchen.');}}
+function setVerse(n,auto=false){if(n<1||n>doc.verses.length)return;stop(true);state.ayah=n;wordIdx=-1;heardOnce=false;paint();status('Bereit zum Hören');if(auto)play();}
+async function play(forcedRate){if(playing){stop();status('Pausiert');return} const src=audioUrl(); const myGen=++gen; if(loadedSrc!==src){audio.src=src;audio.load();loadedSrc=src;}audio.playbackRate=forcedRate||Number(state.rate)||1;try{await audio.play();if(myGen!==gen){audio.pause();return;}playing=true;$('play').textContent='Ⅱ';$('play').setAttribute('aria-label','Pause');status('Originalrezitation wird abgespielt');if(!state.heard.includes(savedId())){state.heard.push(savedId());persist();paintStats();}if(KIDS){heardOnce=true;paintLearning();}}catch(e){playing=false;$('play').textContent='▶';status('Audio nicht verfügbar – Netzwerkverbindung oder Browser prüfen.');}}
+function fmt(t){t=Math.max(0,Math.floor(Number(t)||0));return Math.floor(t/60)+':'+String(t%60).padStart(2,'0')}
+$('play').addEventListener('click',()=>play());$('dockPrev').addEventListener('click',()=>{if(state.ayah>1)setVerse(state.ayah-1)});$('dockNext').addEventListener('click',()=>{if(state.ayah<doc.verses.length)setVerse(state.ayah+1)});$('prev').addEventListener('click',()=>setVerse(state.ayah-1));$('next').addEventListener('click',()=>setVerse(state.ayah+1));$('reset').addEventListener('click',()=>{stop(true);status('Wieder bereit');});$('bookmark').addEventListener('click',()=>{const id=savedId();state.saved=state.saved.includes(id)?state.saved.filter(x=>x!==id):[...state.saved,id];persist();paintVerse();});
+if($('copy'))$('copy').addEventListener('click',async()=>{const v=verse();try{await navigator.clipboard.writeText(v.ar+'\n'+v.de+'\nQurʾān '+doc.id+':'+state.ayah);status('Vers kopiert');}catch(e){status('Kopieren wird in diesem Browser nicht unterstützt')}});
+$('surahList').addEventListener('click',e=>{const t=e.target.closest('[data-surah]');if(t)chooseSurah(Number(t.dataset.surah))});
+document.querySelectorAll('[data-layer]').forEach(b=>b.addEventListener('click',()=>{const name=b.dataset.layer;state.layers[name]=!state.layers[name];layer(name)}));
+$('reciter').addEventListener('change',e=>{state.reciter=e.target.value;stop(true);persist();status('Rezitator gewechselt · bereit')});$('rate').addEventListener('change',e=>{state.rate=e.target.value;audio.playbackRate=Number(state.rate);persist()});$('repeat').addEventListener('change',e=>{state.repeat=e.target.value;persist()});$('latinMode').addEventListener('change',e=>{state.latinMode=e.target.value;paintVerse();persist()});
+audio.addEventListener('timeupdate',()=>{$('currentTime').textContent=fmt(audio.currentTime);if(audio.duration&&isFinite(audio.duration)){$('duration').textContent=fmt(audio.duration);$('seek').value=String(Math.min(100,Math.max(0,audio.currentTime/audio.duration*100)));}});
+audio.addEventListener('loadedmetadata',()=>{$('duration').textContent=fmt(audio.duration)});
+$('seek').addEventListener('input',e=>{if(isFinite(audio.duration)&&audio.duration>0)audio.currentTime=Number(e.target.value)*audio.duration/100});
+audio.addEventListener('ended',()=>{playing=false;$('play').textContent='▶';if(state.repeat==='ayah'){audio.currentTime=0;play();return}if(state.ayah<doc.verses.length){setVerse(state.ayah+1,true);return}if(state.repeat==='surah'){setVerse(1,true);return}status('Sūrah beendet. Möchtest du erneut hören?')});
+audio.addEventListener('error',()=>{if(!loadedSrc)return;playing=false;$('play').textContent='▶';status('Audiodatei momentan nicht erreichbar. Internetverbindung prüfen.');});
+document.querySelectorAll('[data-scroll]').forEach(b=>b.addEventListener('click',()=>$(b.dataset.scroll)?.scrollIntoView({behavior:'smooth',block:'start'})));
+if(KIDS){$('kidHear').addEventListener('click',()=>{if(playing){stop();status('Pausiert');return}play(1)});$('kidSlow').addEventListener('click',()=>{if(playing)stop();play(0.75)});$('kidWords').addEventListener('click',()=>{const words=String(verse().ar||'').trim().split(/\s+/).filter(Boolean);wordIdx=(wordIdx+1)%Math.max(1,words.length);paintVerse();status('Wort '+(wordIdx+1)+' von '+words.length+' markiert. Zum Hören des ganzen Verses auf „Hören“ tippen.');});$('kidComplete').addEventListener('click',()=>{if(!state.learned.includes(savedId()))state.learned.push(savedId());heardOnce=true;paintVerse();persist();});$('ages').addEventListener('click',e=>{const b=e.target.closest('[data-age]');if(!b)return;state.age=b.dataset.age;paint();status('Deine Lernwelt: '+state.age+' Jahre');});$('quranText').addEventListener('click',e=>{const b=e.target.closest('[data-word]');if(!b)return;wordIdx=Number(b.dataset.word);paintVerse();status('Dieses Wort ist ausgewählt. Die echte Wort-Audiofunktion folgt mit geprüften Segmenten.');});$('quranText').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){const b=e.target.closest('[data-word]');if(b){e.preventDefault();wordIdx=Number(b.dataset.word);paintVerse();status('Wort ausgewählt.');}}});}
+// Opening external HTML as a local file has no same-origin data service; embedded fallback is used.
+const query=new URLSearchParams(location.search);const s=Number(query.get('surah')||state.surah);if(LIST.some(x=>x.id===s)&&!dataCache[s]){chooseSurah(s)}else{doc=dataCache[s]||doc;state.surah=doc.id;paint();status('Bereit zum Hören');}
+})();
+
+/* QURAN_PLAYER_V3_FOCUS_SHELL — controls and accessible optional content panels */
+(function(){
+ 'use strict';
+ const root=document.body,work=document.querySelector('.workspace');
+ const topline=document.querySelector('.topline'), aside=document.querySelector('.sidecol');
+ if(!work||!topline||!aside||root.classList.contains('player-v3'))return;
+ root.classList.add('player-v3');
+ const kids=root.classList.contains('kids');
+ const brand=document.createElement('div');
+ brand.className='phone-brand';
+ brand.innerHTML='<span aria-hidden="true" class="mark">'+(kids?'✦':'۞')+'</span>';
+ const crumb=topline.querySelector('.breadcrumbs');
+ if(crumb){crumb.textContent=kids?'TAWḤĪD KIDS Quran Player':'DĀR AL TAWḤĪD Quran Player';brand.appendChild(crumb);topline.prepend(brand)}
+ const actions=document.createElement('div');actions.className='page-actions';
+ const controls=kids?[['surahs','▤','Sūren auswählen'],['settings','⚙','Lernwelt einstellen'],['progress','★','Lernfortschritt öffnen']]:[['surahs','▤','Sūren auswählen'],['settings','⚙','Audio-Studio öffnen'],['progress','☆','Merkliste öffnen']];
+ controls.forEach(([id,symbol,label])=>{const btn=document.createElement('button');btn.type='button';btn.textContent=symbol;btn.dataset.openPanel=id;btn.setAttribute('aria-label',label);btn.setAttribute('aria-haspopup','dialog');actions.appendChild(btn)});
+ topline.appendChild(actions);
+ let previousFocus=null;
+ aside.setAttribute('aria-label','Qurʾān Player Zusatzbereich');
+ ['surahs','settings','progress'].forEach(id=>{
+  const panel=document.getElementById(id);if(!panel)return;
+  const closer=document.createElement('button');closer.className='sheet-close';closer.type='button';closer.textContent='×';closer.setAttribute('aria-label','Bereich schließen');panel.prepend(closer);
+  closer.addEventListener('click',close);
+ });
+ function isPhone(){return window.matchMedia('(max-width:719px)').matches}
+ function syncA11y(){
+  if(isPhone()){aside.setAttribute('role','dialog');aside.setAttribute('aria-modal','true');aside.setAttribute('aria-hidden',aside.classList.contains('is-open')?'false':'true')}
+  else{aside.removeAttribute('role');aside.removeAttribute('aria-modal');aside.removeAttribute('aria-hidden')}
+ }
+ syncA11y();
+ function openPanel(id){
+  if(!isPhone()){document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'nearest'});return}
+  if(!document.getElementById(id))return;
+  previousFocus=document.activeElement;
+  aside.dataset.activePanel=id;
+  aside.classList.add('is-open');aside.setAttribute('aria-hidden','false');
+  aside.querySelector('#'+id+' .sheet-close')?.focus({preventScroll:true});
+ }
+ function close(){if(!aside.classList.contains('is-open'))return;aside.classList.remove('is-open');aside.setAttribute('aria-hidden','true');aside.removeAttribute('data-active-panel');if(previousFocus?.focus)previousFocus.focus({preventScroll:true})}
+ actions.addEventListener('click',e=>{let btn=e.target.closest('[data-open-panel]');if(btn)openPanel(btn.dataset.openPanel)});
+ aside.addEventListener('click',e=>{
+  if(e.target===aside){close();return}
+  if(isPhone()&&e.target.closest('[data-surah]'))close();
+ });
+ document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&aside.classList.contains('is-open')){e.preventDefault();close()}
+  if(e.key!=='Tab'||!aside.classList.contains('is-open'))return;
+  const active=aside.querySelector('#'+aside.dataset.activePanel);
+  if(!active)return;
+  const focusables=[...active.querySelectorAll('button:not([disabled]),select:not([disabled]),input:not([disabled]),a[href]')].filter(x=>x.getClientRects().length);
+  if(!focusables.length)return;
+  let first=focusables[0],last=focusables[focusables.length-1];
+  if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}
+  else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}
+ });
+ window.addEventListener('resize',()=>{if(!isPhone())close();syncA11y()},{passive:true});
+ // The page never scrolls on phones. Preserve readability in the verse viewport for long ayat.
+ // No artificial audio-word timing; real Qur'an text/data and existing controls stay untouched.
+})();
+
+
+/* V5_SURA_PAGINATION — no long-scroll list, reachable Sūrahs with search + pages. */
+(function(){
+ const list=document.getElementById('surahList'),panel=document.getElementById('surahs');
+ if(!list||!panel||panel.querySelector('.v5-surah-pager'))return;
+ const input=document.createElement('input');
+ input.className='v5-surah-search';input.type='search';input.autocomplete='off';input.spellcheck=false;
+ input.placeholder='Sūrah oder Nummer suchen';input.setAttribute('aria-label','Sūrah nach Name oder Nummer suchen');
+ const pager=document.createElement('div');pager.className='v5-surah-pager';
+ const prev=document.createElement('button'),next=document.createElement('button'),label=document.createElement('span');
+ prev.type='button';next.type='button';prev.textContent='← Zurück';next.textContent='Weiter →';
+ prev.setAttribute('aria-label','Vorherige Sūren');next.setAttribute('aria-label','Weitere Sūren');
+ label.setAttribute('aria-live','polite');pager.append(prev,label,next);
+ list.before(input);list.after(pager);
+ let page=0,lastActive='',running=false;
+ const normalize=t=>String(t||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+ function limit(){return window.innerHeight<=640?3:window.innerHeight<=740?4:window.innerHeight<=850?5:6}
+ function update(){
+  if(running)return;running=true;
+  const all=Array.from(list.querySelectorAll('[data-surah]'));
+  const query=normalize(input.value.trim());const matches=all.filter(b=>normalize(b.textContent).includes(query));
+  const per=limit(),total=Math.max(1,Math.ceil(matches.length/per));
+  const active=all.find(b=>b.classList.contains('active'))?.getAttribute('data-surah')||'';
+  if(!query&&active&&active!==lastActive){
+   let index=matches.findIndex(b=>b.getAttribute('data-surah')===active);
+   if(index>=0)page=Math.floor(index/per);
+  }
+  lastActive=active;page=Math.max(0,Math.min(page,total-1));
+  const visible=new Set(matches.slice(page*per,(page+1)*per));
+  all.forEach(b=>b.classList.toggle('v5-hidden',!visible.has(b)));
+  label.textContent=matches.length?((page+1)+' / '+total):'Keine Treffer';
+  prev.disabled=page<=0;next.disabled=page>=total-1;running=false;
+ }
+ prev.addEventListener('click',()=>{page--;update()});
+ next.addEventListener('click',()=>{page++;update()});
+ input.addEventListener('input',()=>{page=0;lastActive='';update()});
+ new MutationObserver(()=>update()).observe(list,{childList:true});
+ window.addEventListener('resize',update,{passive:true});
+ update();
+})();
+
+/* V7 tablet-only panel tabs — separate surfaces, no sidebar waterfall. */
+(function(){
+ const aside=document.querySelector('.sidecol');if(!aside)return;
+ function select(id){
+  aside.dataset.activePanel=id;
+  aside.querySelectorAll('[data-v7-tab]').forEach(b=>{b.classList.toggle('active',b.dataset.v7Tab===id);b.setAttribute('aria-selected',b.dataset.v7Tab===id?'true':'false')});
+ }
+ aside.querySelectorAll('[data-v7-tab]').forEach(btn=>btn.addEventListener('click',()=>select(btn.dataset.v7Tab)));
+ document.querySelectorAll('.page-actions [data-open-panel]').forEach(btn=>btn.addEventListener('click',()=>select(btn.dataset.openPanel),{capture:true}));
+ select('surahs');
+})();
+</script></body></html>
