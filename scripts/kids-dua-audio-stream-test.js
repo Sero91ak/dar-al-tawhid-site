@@ -34,7 +34,7 @@ function player(decodeDelayMs){
     destination:{}
   };
   const sandbox={
-    playToken:0,currentDua:{id:"test"},currentIndex:0,CLEAN_GAP:0.19,
+    playToken:0,currentDua:{id:"test"},currentIndex:0,CLEAN_GAP:0.19,frames:[],focusHistory:[],
     cleanPlayback:null,playing:false,mode:"",
     cleanContextReady:()=>context,
     stopAudio(){sandbox.playToken++;sandbox.cleanPlayback=null},
@@ -49,13 +49,13 @@ function player(decodeDelayMs){
         resolve({buffer:{id:url},start:0.15,end:0.91});
       },decodeDelayMs));
     },
-    requestAnimationFrame(){return 1},
+    requestAnimationFrame(callback){sandbox.frames.push(callback);return sandbox.frames.length},
     cancelAnimationFrame(){},
-    saveProgress(){},paintSelection(){},queueFocusedWord(){},
+    saveProgress(){},paintSelection(){sandbox.focusHistory.push(sandbox.currentIndex)},queueFocusedWord(){},
     Promise,Array,Math,Number,console
   };
   const run=vm.runInNewContext(fnText,sandbox,{timeout:2000});
-  return {run,sandbox,counts};
+  return {run,sandbox,counts,context};
 }
 async function check(){
   const words=Array.from({length:37},(_,i)=>"/audio/w"+i+".m4a");
@@ -69,6 +69,20 @@ async function check(){
   assert(full.counts.scheduled.every((x,i,a)=>i===0||x.when>a[i-1].when),
       "Word order must stay chronological");
   assert(full.counts.scheduled.every(x=>x.duration>=.5),"Expected complete word spans");
+  // Advance the real production RAF focus tracker past every scheduled word.
+  for(let i=0;i<37;i++){
+    full.context.currentTime=full.counts.scheduled[i].when+0.001;
+    const update=full.sandbox.frames.shift();
+    assert(update,"Focus RAF was not scheduled");
+    update();
+    assert.equal(full.sandbox.currentIndex,i,"Word marker drift at index "+i);
+  }
+  const last=full.counts.scheduled[36];
+  full.context.currentTime=last.when+last.duration+0.3;
+  const finalUpdate=full.sandbox.frames.shift();
+  assert(finalUpdate,"No end-of-phrase event loop");
+  finalUpdate();
+  assert.equal(full.sandbox.playing,false,"End-of-phrase did not reset playing state");
 
   // Cancelling midway must not start the next batch of URLs.
   const cancelled=player(12);
@@ -80,6 +94,6 @@ async function check(){
       "Cancelled player continued downloading words after mode change");
   assert.equal(cancelled.counts.scheduled.length,0,
       "Cancelled player scheduled old audio after mode change");
-  console.log("KIDS DUA STREAM PASS: 37/37 words, at most 5 parallel, ordered, cancellation blocks late audio");
+  console.log("KIDS DUA STREAM PASS: 37/37 words, exact word focus, phrase completion, max five parallel and cancellation");
 }
 check().catch(error=>{console.error(error);process.exitCode=1});
