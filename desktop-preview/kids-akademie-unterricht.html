@@ -3049,8 +3049,20 @@ body[data-academy-view="lesson"] #lessonMain .focus-page-navigation .focus-page-
  }
 }
 
+
+/* V7.6.1 – future steps remain clearly readable but cannot be opened early. */
+body[data-academy-view="lesson"] #lessonMain .stage-tracker .tracker-item:disabled{
+ opacity:.79!important;cursor:default!important;
+}
+body[data-academy-view="lesson"] #lessonMain .stage-tracker .tracker-item:disabled b{
+ color:#e4edf0!important;border-color:rgba(215,231,233,.52)!important;
+}
+body[data-academy-view="lesson"] #lessonMain .stage-tracker .tracker-item:disabled span{
+ color:#e3e9ec!important;
+}
+
 </style></head>
-<body data-profile="boy" data-preview-release="V7.6-20261010" data-preview-deploy="v7.6-viewport-lesson"><main class="wrap">
+<body data-profile="boy" data-preview-release="V7.6.1-20261010" data-preview-deploy="v7.6.1-readable-step-numbers"><main class="wrap">
 
 <header class="academy-header kids-detail-appbar" aria-label="Navigationsleiste Lernakademie">
  <button class="academy-nav-back" id="academyNavBack" type="button" aria-label="Zurück"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/><path d="M9 12h11"/></svg></button>
