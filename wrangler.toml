@@ -15,28 +15,9 @@ binding = "ASSETS"
 run_worker_first = true
 
 [build]
-watch_paths = [
-  "index.html",
-  "service-worker.js",
-  "manifest.json",
-  "version.json",
-  "assets/**",
-  "voice-studio/**",
-  "data/pronunciation/**",
-  "cloudflare/site-router.js",
-  "cloudflare/preview-gate.js",
-  "_redirects",
-  "_headers",
-  "content/posts/**",
-  "apple-tv/**",
-  "data/hadith-library/**",
-  "data/quran-search-index.json",
-  "content/updates/daily.json",
-  "q/**",
-  "quellen/**",
-  "links/**",
-  "download/**"
-]
+# PRODUCTION_SINGLE_OWNER_V1: Cloudflare repository builds must never auto-publish.
+# GitHub Actions "Deploy Besucher-App" is the sole production publisher.
+watch_paths = [".cloudflare-manual-only/**"]
 
 [vars]
 PREVIEW_GATE_USER = "Dawud"
