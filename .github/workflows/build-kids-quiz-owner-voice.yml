@@ -53,7 +53,7 @@ jobs:
       ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
       ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
       ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
-      VOICE_BUILD_SCOPE: ${{ github.event_name == 'workflow_dispatch' && inputs.scope || (github.event_name == 'schedule' || contains(github.event.head_commit.message, '[quiz-auto]') || contains(github.event.head_commit.message, '[quiz-batch]')) && 'quiz' || contains(github.event.head_commit.message, '[voice-pause]') && 'pause' || contains(github.event.head_commit.message, '[dua-only]') && 'dua' || contains(github.event.head_commit.message, '[quiz-only]') && 'quiz' || 'full' }}
+      VOICE_BUILD_SCOPE: ${{ github.event_name == 'workflow_dispatch' && inputs.scope || (github.event_name == 'schedule' || contains(github.event.head_commit.message, '[quiz-auto]') || contains(github.event.head_commit.message, '[quiz-batch]')) && 'quiz' || contains(github.event.head_commit.message, '[voice-pause]') && 'pause' || contains(github.event.head_commit.message, '[dua-only]') && 'dua' || contains(github.event.head_commit.message, '[quiz-only]') && 'quiz' || 'pause' }}
       QUIZ_BATCH_START: ${{ github.event_name == 'workflow_dispatch' && inputs.quiz_start || '' }}
       QUIZ_BATCH_COUNT: ${{ github.event_name == 'workflow_dispatch' && inputs.quiz_count || '' }}
       VOICE_AUTO_QUEUE: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.auto_queue) || (github.event_name == 'push' && contains(github.event.head_commit.message, '[quiz-auto]')) }}
@@ -63,20 +63,27 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: main
+          fetch-depth: 2 # needed to diff first parent after merge; avoid unauthorised full batch
 
-      - name: Auto-scope pure Dua data pushes
-        if: github.event_name == 'push' && env.VOICE_BUILD_SCOPE == 'full'
+      # Safe default: code/CI changes MUST NOT trigger a costly full quiz/Duʿāʾ render.
+      # Only explicitly selected workflow_dispatch and scoped source changes may render.
+      - name: Auto-scope actual voice source changes
+        if: github.event_name == 'push' && env.VOICE_BUILD_SCOPE == 'pause' && !contains(github.event.head_commit.message, '[voice-pause]')
         shell: bash
         run: |
           set -euo pipefail
-          mapfile -t changed < <(git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" | sed '/^$/d')
+          # First parent works for both normal pushes and GitHub merge commits.
+          mapfile -t changed < <(git diff --name-only "$GITHUB_SHA^1" "$GITHUB_SHA" | sed '/^$/d')
           if printf '%s\n' "${changed[@]}" | grep -Fxq 'kids/data/quiz-kids.json'; then
             echo "VOICE_BUILD_SCOPE=quiz" >> "$GITHUB_ENV"
             echo "VOICE_AUTO_QUEUE=true" >> "$GITHUB_ENV"
-            echo "Quiz source changed: generate only missing and corrected question audio."
+            echo "Quiz content changed: generate only missing/updated approved question audio."
           elif [ "${#changed[@]}" -eq 1 ] && [ "${changed[0]}" = "kids/data/dua-kids.json" ]; then
             echo "VOICE_BUILD_SCOPE=dua" >> "$GITHUB_ENV"
-            echo "Pure kids/data/dua-kids.json push detected -> VOICE_BUILD_SCOPE=dua"
+            echo "Exclusive Duʿāʾ source update: rendering its approved changes."
+          else
+            echo "VOICE_BUILD_SCOPE=pause" >> "$GITHUB_ENV"
+            echo "Non-voice code update: no paid synthesis is authorized."
           fi
 
       - name: Resolve available DĀR owner voice path
@@ -193,11 +200,49 @@ jobs:
           ELEVEN_QUIZ_HYBRID_MODEL=ELEVEN_QUIZ_DE_MODEL+"+"+ELEVEN_QUIZ_AR_MODEL
           ARABIC_SCRIPT_RE=re.compile(r"[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]+(?:\s+[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]+)*")
           ELEVEN_DUA_MODEL=ELEVEN_MODEL
+          ELEVEN_DUA_WORD_V3_MODEL="eleven_v3"
+          DUA_WORD_POLICY=ROOT/"kids/data/dua-audio-model-policy.json"
+          model_policy=json.loads(DUA_WORD_POLICY.read_text(encoding="utf-8"))
+          approved_v3=set()
+          if model_policy.get("voiceProfileId")!="serhat-owner-voice-2026" or model_policy.get("defaultWordModel")!="eleven_v4":
+              raise SystemExit("Duʿāʾ audio routing policy has an unsupported speaker or default model.")
+          if model_policy.get("allowAutomaticV3Promotion") is not False:
+              raise SystemExit("Duʿāʾ V3 must never be enabled automatically by simple word length.")
+          for approval in model_policy.get("approvedV3Words") or []:
+              if not isinstance(approval,dict) or approval.get("model")!="eleven_v3" or approval.get("status")!="human-audio-approved" or not approval.get("approvedBy"):
+                  raise SystemExit("V3 word approval needs an explicit Arabic-audio human review.")
+              text_key=unicodedata.normalize("NFC"," ".join(str(approval.get("arabic") or "").split()).strip())
+              if not text_key or text_key in approved_v3:
+                  raise SystemExit("Invalid or duplicate V3 word approval.")
+              approved_v3.add(text_key)
+          if len(approved_v3)>8:
+              raise SystemExit("V3 approvals must roll out in batches of at most eight words.")
+          if approved_v3:
+              # A model preview is not approval of the final published sound.
+              # V3 must refer to an existing, actually reviewed asset with
+              # verified SHA-256; never synthesize-and-publish a fresh take.
+              approved_items={unicodedata.normalize("NFC"," ".join(str(a["arabic"]).split()).strip()):a for a in model_policy["approvedV3Words"]}
+              existing=json.loads(DUA_WORD_MANIFEST.read_text(encoding="utf-8")).get("entries") or {}
+              canonical_existing={unicodedata.normalize("NFD",k):v for k,v in existing.items()}
+              for word in approved_v3:
+                  a=approved_items[word]
+                  row=canonical_existing.get(unicodedata.normalize("NFD",word)) or {}
+                  url=str(row.get("url") or "").split("?",1)[0]
+                  if row.get("modelId")!="eleven_v3" or row.get("audioListeningApproved") is not True or row.get("qaApproval")!="human-reviewed-natural-fusha":
+                      raise SystemExit("V3 blocked: final word recording not human-audio-approved: "+word)
+                  if not url.startswith("/kids/assets/kids-dua-word-audio/"):
+                      raise SystemExit("V3 blocked: imported audio outside approved word assets: "+word)
+                  actual_path=ROOT/url.lstrip("/")
+                  if not actual_path.is_file():
+                      raise SystemExit("V3 blocked: final reviewed audio file missing: "+word)
+                  real_hash=hashlib.sha256(actual_path.read_bytes()).hexdigest()
+                  if real_hash!=str(a.get("sha256") or "") or real_hash!=str(row.get("sha256") or ""):
+                      raise SystemExit("V3 blocked: reviewed asset checksum mismatch: "+word)
           ARABIC_PROFILES={"dua_arabic","dua_arabic_slow","dua_word","quiz_fusha"}
           ARABIC_SYNTHESIS_REVISIONS={
               "dua_arabic":"dua-arabic-native-fusha-v3-20261007",
-              "dua_arabic_slow":"dua-arabic-native-fusha-slow-v3-20261007",
-              "dua_word":"dua-arabic-native-fusha-word-v4-20261007"
+              "dua_arabic_slow":"dua-arabic-native-fusha-slow-v4-natural-20261009",
+              "dua_word":"dua-arabic-native-fusha-word-v5-natural-20261009"
           }
           DICT_CFG=PROD_CFG.get("pronunciationDictionary") or {}
           DICT_ID=str(DICT_CFG.get("id") or "").strip()
@@ -254,10 +299,9 @@ jobs:
                   if profile=="dua_word":
                       value=strip_initial_context_shadda(value)
                   # Keep the visible/key text untouched; this is hidden synthesis text only.
-                  if profile=="dua_arabic_slow":
-                      value="[slowly] "+value
-                  elif profile=="dua_word":
-                      value="[slowly] "+value.rstrip(".")+"."
+                  # Eleven v4 can voice stage directions and sentence-final
+                  # breaths. Pace with synthesis speed, not [slowly] / appended ".".
+                  # Keep the exact standalone Arabic word, preserving its phonemes.
                   return value
               return prepare_kids_voice_text(value,apply_pronunciation=not bool(ARABIC_SCRIPT_RE.search(value)))
 
@@ -461,12 +505,14 @@ jobs:
                           voice_settings={
                               "stability":0.76,
                               "similarity_boost":0.92,
+                              "speed":0.88,
                               "use_speaker_boost":True
                           }
                       elif profile=="dua_word":
                           voice_settings={
                               "stability":0.80,
                               "similarity_boost":0.93,
+                              "speed":0.92,
                               "use_speaker_boost":True
                           }
                       else:
@@ -479,7 +525,15 @@ jobs:
                           }
                       is_arabic_profile=profile in ARABIC_PROFILES
                       is_flash=model_id==ELEVEN_QUIZ_DE_MODEL
-                      if is_flash:
+                      # Eleven v4 documents only Stability + Similarity sliders.
+                      # Never send a speculative Speed/Style/Speaker-boost setting
+                      # and never label an unsupported slider as "native slow".
+                      if model_id=="eleven_v4":
+                          voice_settings={
+                              "stability":voice_settings.get("stability",0.72),
+                              "similarity_boost":voice_settings.get("similarity_boost",0.92)
+                          }
+                      elif is_flash:
                           voice_settings.pop("style",None)
                       payload={
                           "text":prepared,
@@ -487,8 +541,10 @@ jobs:
                           "voice_settings":voice_settings,
                           "apply_text_normalization":("off" if is_arabic_profile or is_flash else "on")
                       }
-                      if is_arabic_profile:
+                      if is_arabic_profile and model_id=="eleven_v4":
                           payload["language_code"]="ar"
+                      # On V3, prefer genuine Arabic-script autodetection over
+                      # an unverified language_code override.
                       # Flash v2.5 does not honour phoneme dictionary tags.
                       # For German Flash the curated inline master substitutions
                       # from prepare_kids_voice_text are used instead.
@@ -589,7 +645,7 @@ jobs:
                           time.sleep(2*attempt)
               raise RuntimeError(f"Generation failed for {text[:80]!r}: {last}")
 
-          def build_pack(*,texts,manifest_path,asset_dir,profile,pack_id,counts,model_id=None,require_model_match=False,profiles_by_text=None,models_by_text=None,preserve_existing=False):
+          def build_pack(*,texts,manifest_path,asset_dir,profile,pack_id,counts,model_id=None,require_model_match=False,profiles_by_text=None,models_by_text=None,preserve_existing=False,allow_reviewed_legacy=False):
               model_id=model_id or ELEVEN_MODEL
               unique=[]
               seen=set()
@@ -627,6 +683,17 @@ jobs:
                       text_profile,
                       expected_revision
                   )
+                  # Legacy published Arabic files must not be re-rendered merely
+                  # because the synthesis recipe changed. Only individually
+                  # approved model switches or genuinely missing clips may run.
+                  if p is None and allow_reviewed_legacy and text_profile in ("dua_word","dua_arabic_slow"):
+                      old_model=str(entry.get("modelId") or "")
+                      if old_model==str(text_model)=="eleven_v4" and entry.get("voiceProfileId")=="serhat-owner-voice-2026":
+                          p=local_from_entry(entry,asset_dir,old_model,text_profile)
+                          if p is not None:
+                              results[text]=(p,float(entry.get("durationSeconds") or duration(p)))
+                              prepared_hashes[text]=str(entry.get("preparedTextSha256") or "")
+                              continue
                   if text_profile in ARABIC_PROFILES:
                       if str(entry.get("preparedTextSha256") or "")!=prepared_hash:
                           p=None
@@ -638,6 +705,10 @@ jobs:
                   prepared_hashes[text]=prepared_hash
 
               missing=[text for text in unique if text not in results]
+              if profile in ("dua_word","dua_arabic_slow"):
+                  limit=8 if profile=="dua_word" else 3
+                  if len(missing)>limit:
+                      raise SystemExit(f"Zu viele kostenträchtige {profile}-Neurenderings ({len(missing)} > {limit}); kleinere geprüfte Pakete benutzen.")
               print(f"{pack_id}: {len(unique)} Texte · {len(results)} aktuell · {len(missing)} neu")
               serial={"done":0,"total":len(missing)}
               with concurrent.futures.ThreadPoolExecutor(max_workers=3) as ex:
@@ -686,6 +757,9 @@ jobs:
                       "speechProfile":text_profile,
                       "languageComposition":("de+ar" if text_model==ELEVEN_QUIZ_HYBRID_MODEL else "ar" if text_model==ELEVEN_QUIZ_AR_MODEL else "de"),
                       "pronunciationQaStatus":("needs-native-fusha-listening-review" if text_model in (ELEVEN_QUIZ_HYBRID_MODEL,ELEVEN_QUIZ_AR_MODEL) else "technical-qa-complete"),
+                      # No automatically generated Arabic track may assert a completed hearing review.
+                      "audioListeningApproved":(False if is_arabic else None),
+                      "qaApproval":("pending-native-listening" if is_arabic else "technical-qa-complete"),
                       "voiceProfileId":"serhat-owner-voice-2026",
                       "sourceVoice":"authorized-owner-voice",
                       "sourceType":"owner-voice-generated",
@@ -722,7 +796,7 @@ jobs:
                   "speaker":"Serhat Abu Malik",
                   "speechPreparation":("native-vocalized-arabic-nfc-no-dictionary-initial-shadda-safe-v5" if manifest_is_arabic else "explicit-german-numbers-and-quran-references"),
                   "initialContextShaddaStripped":(True if manifest_is_arabic else None),
-                  "manualPerClipApprovalRequired":False,
+                  "manualPerClipApprovalRequired":(manifest_is_arabic and profile in ("dua_arabic_slow","dua_word")),
                   "technicalQaRequired":True,
                   "systemTtsFallbackAllowed":False,
                   "modelId":model_id,
@@ -951,7 +1025,9 @@ jobs:
               pack_id="KIDS_DUA_ARABIC_SLOW_SERHAT_MASTER_V4",
               counts={"duaItems":len(dua_items),"slowArabicPrompts":len(dua_items)},
               model_id=ELEVEN_DUA_MODEL,
-              require_model_match=True
+              require_model_match=True,
+              preserve_existing=True,
+              allow_reviewed_legacy=True
           )
           dua_ar_slow_manifest.update({
               "schemaVersion":1,
@@ -984,6 +1060,7 @@ jobs:
                       seen_words.add(word)
                       word_texts.append(word)
 
+          word_models={word:(ELEVEN_DUA_WORD_V3_MODEL if unicodedata.normalize("NFC",word) in approved_v3 else ELEVEN_DUA_MODEL) for word in word_texts}
           dua_word_manifest=build_pack(
               texts=word_texts,
               manifest_path=DUA_WORD_MANIFEST,
@@ -996,7 +1073,10 @@ jobs:
                   "wordPositions":sum(len(arabic_tokens(arabic_text(d))) for d in dua_items)
               },
               model_id=ELEVEN_DUA_MODEL,
-              require_model_match=True
+              require_model_match=True,
+              models_by_text=word_models,
+              preserve_existing=True,
+              allow_reviewed_legacy=True
           )
           dua_word_manifest.update({
               "schemaVersion":1,
@@ -1006,7 +1086,10 @@ jobs:
               "clipMode":"isolated-word",
               "sourceRule":"exact-displayed-arabic-token",
               "browserSentenceSlicingAllowed":False,
-              "speaker":"Serhat Abu Malik – Master"
+              "speaker":"Serhat Abu Malik – Master",
+              "entryModelPolicy":"human-reviewed word-level eleven_v3 exceptions, otherwise eleven_v4",
+              "modelsUsed":sorted(set(str(v.get("modelId") or "eleven_v4") for v in dua_word_manifest["entries"].values())),
+              "approvedV3Words":sorted(approved_v3)
           })
           DUA_WORD_MANIFEST.write_text(json.dumps(dua_word_manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
 
