@@ -6686,7 +6686,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   // The next navigation uses network-first and receives the latest release.
   if("serviceWorker" in navigator){
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1319",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1323",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     },{once:true});
