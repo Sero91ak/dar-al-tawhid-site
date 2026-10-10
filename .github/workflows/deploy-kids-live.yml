@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: read
+  actions: write
 
 concurrency:
   # Manual emergency deploy still shares the production lock.
@@ -112,12 +113,12 @@ jobs:
           console.log("KIDS LIVE GUARD OK",quiz.items.length,sy.items.length,expected,swVersion);
           NODE
 
-      - name: Deploy Kids visitor assets
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: deploy
+      - name: Publish through sole production owner
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh workflow run "Deploy Besucher-App (Cloudflare Workers)" --ref main
+          echo "Kids publish delegated to central production lane."
 
       - name: Verify Kids live
         shell: bash
