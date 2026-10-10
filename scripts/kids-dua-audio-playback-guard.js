@@ -35,6 +35,10 @@ for(const key of [
 ])assert(js.includes(key),"Missing playback invariant: "+key);
 assert(!js.includes("speechSynthesis"),"Unexpected system TTS in Duʿāʾ player");
 assert(js.includes("if(playCleanSequence([e.url],[seg],"),"Word fallback must use WebAudio cleaning");
+assert(js.includes("var BATCH_SIZE=5;"),"Long Duʿāʾ word sequences must use bounded requests");
+assert(js.includes("urls.slice(offset,offset+BATCH_SIZE).map(cleanDecode)"),"Word batches must prefetch only five neighbouring clips");
+assert(!js.includes("Promise.all(urls.map(cleanDecode))"),"Unbounded word-audio fetch would overload iPhone");
+assert(js.includes("if(noWordsStarted&&typeof onFailure==="),"Fallback must not repeat a partially heard Duʿāʾ");
 assert(/function stopAudio\(\)\{[\s\S]*?playToken\+\+;\s*latestPhraseRequest\+\+;/.test(js),"Audio stops must invalidate pending asynchronous phrase requests");
 assert(/return loadPacks\(\)\.then\(run\)/.test(js),"No asynchronous manifest load path to protect");
 assert(!js.includes('attachPhraseFollow(currentDua,mode==="slow",token)'),"Wrong timestamps: slowed normal master is not a distinct native slow source");
