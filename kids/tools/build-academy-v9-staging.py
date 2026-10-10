@@ -70,6 +70,7 @@ def generate_audio(text:str, target:pathlib.Path, secret:str)->float:
 def main():
     parser=argparse.ArgumentParser()
     parser.add_argument("--dry-run",action="store_true")
+    parser.add_argument("--pilot-first-lesson",action="store_true",help="Only 4 exact Ṣidq welcome/lesson texts; staged without release")
     parser.add_argument("--limit",type=int,default=4)
     parser.add_argument("--max-chars",type=int,default=1200)
     args=parser.parse_args()
@@ -93,6 +94,20 @@ def main():
     phrases=plan.get("phrases") or []
     if len(phrases)!=plan.get("phraseCount") or len(phrases)<200:
         raise RuntimeError("Incomplete or changed voice plan")
+    if args.pilot_first_lesson:
+        pilot=[
+            "As-salāmu ʿalaykum, liebe Schwester.",
+            "Schön, dass du da bist!",
+            "Heute geht es darum, die Wahrheit zu sagen. Wir hören zu und überlegen zusammen. Du darfst eine Pause machen.",
+            "Manchmal geht etwas aus Versehen kaputt."
+        ]
+        if len(pilot)!=4 or len(set(pilot))!=len(pilot):
+            raise RuntimeError("Invalid bounded pilot request")
+        academy=(ROOT/"kids/akademie/index.html").read_text("utf-8")
+        for utterance in pilot:
+            if utterance not in academy and utterance!="As-salāmu ʿalaykum, liebe Schwester.":
+                raise RuntimeError("First lesson text changed: cannot generate "+utterance)
+        phrases=[{"text":utterance,"priority":0} for utterance in pilot]
     staged=json.loads(STAGING.read_text("utf-8")) if STAGING.exists() else {}
     previous=staged.get("entries",{})
     valid_current={}
@@ -143,6 +158,7 @@ def main():
         "schemaVersion":2,"id":"KIDS_ACADEMY_V9_SERHAT_STAGING",
         "voiceProfileId":PROFILE,"modelId":MODEL,"voiceSettingsProfile":MASTER_PROFILE,
         "reviewRequiredBeforePublicPlayback":True,
+        "stagingOnly":True,"pilotFirstLesson":bool(args.pilot_first_lesson),
         "entries":valid_current
     }
     STAGING.write_text(json.dumps(staged,ensure_ascii=False,indent=2)+"\n","utf-8")
