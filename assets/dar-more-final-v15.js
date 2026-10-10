@@ -54,6 +54,7 @@ function themeButtons(){
    return '<button type="button" class="dm15-theme" data-dm15-theme="'+escapeHtml(pair[0])+'" aria-pressed="'+(name===pair[0])+'"><span class="dm15-swatch dm15-swatch-'+escapeHtml(pair[0])+'"></span><span>'+escapeHtml(pair[1])+'</span>'+(name===pair[0]?'<b aria-hidden="true">✓</b>':'')+'</button>';
  }).join("");
 }
+var tastaturCard="<a class=\"dm15-tastatur-feature\" href=\"/tastatur/\" aria-label=\"Kostenlose arabische Textersetzungen – 565 Kürzel, Arabisch und Lautschrift\"><span class=\"dm15-tastatur-medallion\" aria-hidden=\"true\">﷽</span><span class=\"dm15-tastatur-copy\"><span class=\"dm15-tastatur-eyebrow\">NEU · KOSTENLOSE BIBLIOTHEK</span><strong>Arabische Textersetzungen</strong><small>565 Kürzel · Arabisch &amp; Lautschrift · Apple &amp; Android</small></span><span class=\"dm15-tastatur-cta\">Entdecken ↗</span></a>";
 function render(items,api){
  state.items=Array.isArray(items)?items.slice():[];
  state.api=api||{};
@@ -68,6 +69,7 @@ function render(items,api){
  '<button type="button" id="dm15AccountButton" class="dm15-circle" aria-label="Konto und Synchronisierung" aria-expanded="false" aria-controls="dm15AccountPanel">'+accountSvg+'</button></div></header>'+
  '<div id="dm15SearchPanel" class="dm15-panel dm15-search" hidden><input id="moreFeatureSearch" type="search" placeholder="Funktion suchen…" autocomplete="off" aria-label="Funktion suchen"><button data-dm15-close-search type="button" aria-label="Suche schließen">×</button></div>'+
  '<div id="dm15AccountPanel" class="dm15-panel dm15-account" hidden><b>Konto & Synchronisierung</b><p>Die App bleibt auch ohne Konto nutzbar. Daten auf allen Geräten sichern.</p><div><button type="button" data-dm15-go-account>Mein Bereich</button><button type="button" data-dm15-go-account>Am Konto anmelden</button></div></div>'+
+ tastaturCard+
  '<nav id="dm15Categories" class="dm15-categories" aria-label="Funktionsbereiche"></nav>'+
  '<div class="dm15-results"><div class="dm15-results-head"><h2 id="dm15GroupName"></h2><span id="dm15Count"></span></div><div class="dm15-grid" id="dm15Grid"></div></div>'+
  '<div class="dm15-scrim" id="dm15ThemeSheet" hidden><section class="dm15-sheet" role="dialog" aria-modal="true" aria-label="Erscheinungsbild wählen"><div class="dm15-handle"></div><div class="dm15-sheethead"><div><small>DĀR AL TAWḤĪD · DESIGN</small><h2>Erscheinungsbild</h2><p>Farbe und Darstellung wählen.</p></div><button type="button" data-dm15-close-theme aria-label="Schließen">×</button></div><div class="dm15-theme-list" id="dm15Themes">'+themeButtons()+'</div><h3>Darstellung</h3><div class="dm15-density"><button type="button" data-dm15-density="compact" aria-pressed="'+(state.density==="compact")+'">Kompakt</button><button type="button" data-dm15-density="comfort" aria-pressed="'+(state.density==="comfort")+'">Komfort</button></div></section></div></section>';
