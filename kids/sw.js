@@ -85,7 +85,7 @@ const CORE_PRECACHE=[
   "/kids/assets/kids-owner-voice/996533039c958c21c976.m4a",
   "/kids/assets/kids-owner-voice/cd31c4ca743ad8173e90.m4a",
   "/kids/data/verified-content.json",
-  "/kids/prophet-stories.css?v=42",
+  "/kids/prophet-stories.css?v=43",
   "/kids/story-policy.js?v=2",
   "/kids/prophet-stories.js?v=43",
   "/kids/mubashshirun-stories.css?v=29",
