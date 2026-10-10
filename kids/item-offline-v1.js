@@ -106,7 +106,14 @@ function oneButton(card,spec){
   }catch(err){mark(key,"↻ Erneut speichern","error");hint.textContent=err.message||"Verbindung prüfen";}
   finally{live.delete(key)}
  });
- refresh();
+ // Check cache status only when the card approaches the visible region.
+ // Hundreds of simultaneous CacheStorage checks would slow Kids start-up.
+ if("IntersectionObserver" in window){
+  const observer=new IntersectionObserver(entries=>{
+   if(entries.some(x=>x.isIntersecting)){observer.disconnect();refresh();}
+  },{rootMargin:"320px 0px"});
+  observer.observe(btn);
+ }else refresh();
 }
 function story(card,{category,item,sourceUrl,artwork,hero,audioMeta,readerUrl}){
  if(!item?.id)return;
