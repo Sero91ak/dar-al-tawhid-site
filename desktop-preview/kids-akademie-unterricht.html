@@ -1488,8 +1488,44 @@ body[data-embedded="true"] .subject-back{display:inline-flex!important}
  .hero-profile-chip{max-width:118px}
 }
 
+
+/* V7.1.1 – prevent generic background-image rules from swallowing the profile avatar */
+body .overview-hero .hero-profile-chip img{
+ position:static!important;inset:auto!important;top:auto!important;left:auto!important;
+ right:auto!important;bottom:auto!important;display:block!important;z-index:auto!important;
+ width:43px!important;height:43px!important;flex:0 0 43px!important;max-width:43px!important;
+ max-height:43px!important;opacity:1!important;visibility:visible!important;
+ filter:none!important;transform:none!important;object-fit:contain!important;
+ object-position:center!important;pointer-events:none!important;border:0!important;
+ border-radius:12px!important;background:rgba(255,255,255,.13)!important
+}
+body .overview-hero .hero-profile-chip{z-index:20!important}
+@media(max-width:700px){
+ body .overview-hero{min-height:clamp(280px,83vw,318px)!important;
+  padding-bottom:22px!important;justify-content:flex-start!important;align-items:flex-start!important}
+ body .overview-hero .overview-copy{padding-top:54px!important}
+ body .overview-hero .overview-greeting{padding-right:0!important;max-width:100%!important}
+ body .overview-hero #academyHeroCharacter{display:none!important}
+ body .overview-hero .hero-learning-pill{max-width:100%!important;line-height:1.25!important;margin-top:10px}
+ body .overview-hero .hero-profile-chip{min-width:0;max-width:158px;top:10px;right:10px;
+  padding:4px 8px 4px 4px;gap:6px}
+ body .overview-hero .hero-profile-chip img{width:40px!important;height:40px!important;
+  flex-basis:40px!important;max-width:40px!important;max-height:40px!important}
+ body .overview-hero .hero-profile-chip strong{font-size:12px;overflow-wrap:anywhere}
+ body .overview-hero .hero-profile-chip small{font-size:10px}
+}
+@media(max-width:365px){
+ body .overview-hero{min-height:310px!important}
+ body .overview-hero .overview-copy{padding-top:55px!important}
+ body .overview-hero .hero-profile-chip{max-width:146px}
+}
+@media(min-width:701px){
+ body .overview-hero #academyHeroCharacter{height:clamp(135px,16vw,184px)!important;
+  right:clamp(27px,5vw,68px)!important;bottom:8px!important}
+}
+
 </style></head>
-<body data-profile="boy" data-preview-release="V7.1-20261010" data-preview-deploy="v7.1-global-appbar"><main class="wrap">
+<body data-profile="boy" data-preview-release="V7.1.1-20261010" data-preview-deploy="v7.1.1-profile-chip-fix"><main class="wrap">
 
 <header class="academy-header kids-detail-appbar" aria-label="Navigationsleiste Lernakademie">
  <button class="academy-nav-back" id="academyNavBack" type="button" aria-label="Zurück"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/><path d="M9 12h11"/></svg></button>
