@@ -1324,6 +1324,32 @@ body[data-profile="girl"] .lesson-stage[data-lesson-step="4"]{background:linear-
  .category-card{min-height:242px!important}.category-card-copy .category-detail{font-size:10px!important}}
 @media(prefers-reduced-motion:reduce){.category-card{transition:none!important;transform:none!important}}
 
+
+/* V7.0 – subject study trail and narrow-screen cover safety */
+.subject-roadmap{margin-top:18px}
+.subject-roadmap h2{font:850 clamp(21px,3vw,28px)/1.25 ui-rounded,"Avenir Next Rounded",system-ui,sans-serif;color:#fff5d7;margin:0 0 13px}
+.subject-topic-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.subject-topic{min-width:0;border:1px solid #e6e3d9;border-radius:21px;padding:19px 18px;background:#fffbf1;
+ color:#1c4451;box-shadow:0 9px 21px rgba(4,31,43,.095)}
+.subject-topic:nth-child(1){background:#edfcf6;border-color:#b6e3d5}
+.subject-topic:nth-child(2){background:#fff2dc;border-color:#f4d6a0}
+.subject-topic:nth-child(3){background:#edf2ff;border-color:#cddbf5}
+body[data-profile="girl"] .subject-topic:nth-child(1){background:#fff0f9;border-color:#edc4df}
+body[data-profile="girl"] .subject-topic:nth-child(2){background:#fff0e5;border-color:#f2d0bc}
+body[data-profile="girl"] .subject-topic:nth-child(3){background:#f1ebff;border-color:#d4c2ee}
+.subject-topic strong{display:block;font-size:clamp(17px,2.5vw,21px);line-height:1.25;font-weight:850}
+.subject-topic span{display:inline-block;margin-top:9px;font-size:12px;font-weight:750;color:#4c6973}
+.subject-topic.is-ready span{color:#1d8066}
+@media(max-width:700px){
+ .overview-hero{padding-bottom:150px!important}
+ .overview-hero .hero-learning-pill{max-width:76%;white-space:normal;font-size:11px;line-height:1.35}
+ .academy-hero-character{bottom:12px!important;height:116px!important}
+ .subject-topic-grid{grid-template-columns:1fr;gap:10px}
+ .subject-topic{padding:15px 17px;border-radius:17px}
+ .subject-topic strong{font-size:19px}
+}
+@media(min-width:701px) and (max-width:850px){.subject-topic-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
 </style></head>
 <body data-profile="boy" data-preview-release="V7.0-20261010" data-preview-deploy="v7.0-all-categories"><main class="wrap">
 
@@ -1372,6 +1398,7 @@ body[data-profile="girl"] .lesson-stage[data-lesson-step="4"]{background:linear-
   <p id="subjectLessonNote">Lerne, weshalb die Wahrheit wichtig ist.</p>
   <button id="subjectStart" class="subject-start" type="button">Jetzt Unterricht beginnen →</button>
  </div>
+ <div class="subject-roadmap"><h2>Das erwartet dich</h2><div id="subjectTopicGrid" class="subject-topic-grid"></div></div>
 </section>
 <section class="lesson-main" id="lessonMain" hidden>
  <div class="lesson-topline"><button type="button" class="pill back-pill" id="backToAcademy"><span aria-hidden="true">←</span> Zur Lernakademie</button><span class="lesson-label">Akhlāq · Einheit 01</span></div>
@@ -1783,10 +1810,10 @@ function prepareOwnerVoice(){
 
 
 const SUBJECTS=Object.freeze({
- akhlaq:{title:"Akhlāq",description:"Guter Charakter macht unser Verhalten schön. Wir beginnen mit der Wahrhaftigkeit.",status:"1 Lektion bereit",lesson:"Ṣidq – Wahrhaftigkeit",note:"Warum ist die Wahrheit wichtig? Lass es uns gemeinsam entdecken.",image:"/desktop-preview/assets/kids-academy-akhlaq-v1.jpg",ready:true},
- adab:{title:"Adab",description:"Gutes Benehmen, freundliche Worte und Respekt im Alltag.",status:"Unterricht in Vorbereitung",lesson:"Adab – gutes Benehmen",note:"Diese Unterrichtsreihe wird vorbereitet. Hier findest du später passende Übungen für deine Altersstufe.",image:"/desktop-preview/assets/kids-academy-adab-v1.jpg",ready:false},
- fiqh:{title:"Fiqh",description:"Wir entdecken die islamischen Regeln für unseren Alltag Schritt für Schritt.",status:"Unterricht in Vorbereitung",lesson:"Reinheit und Gebet",note:"Altersgerechte Fiqh-Unterrichtseinheiten werden vorbereitet und vor der Freigabe fachlich geprüft.",image:"/kids/assets/deen/ibadah.jpg?v=1205",ready:false},
- aqidah:{title:"ʿAqīdah",description:"Wir lernen über Tawḥīd und den Glauben anhand von Qurʾān und Sunnah.",status:"Unterricht in Vorbereitung",lesson:"Tawḥīd und Īmān",note:"Dieser Bereich ist angelegt. Die Inhalte werden vor der Freigabe sorgfältig geprüft.",image:"/kids/assets/deen/tawhid.jpg?v=1205",ready:false}
+ akhlaq:{title:"Akhlāq",description:"Guter Charakter macht unser Verhalten schön. Wir beginnen mit der Wahrhaftigkeit.",status:"1 Lektion bereit",lesson:"Ṣidq – Wahrhaftigkeit",note:"Warum ist die Wahrheit wichtig? Lass es uns gemeinsam entdecken.",image:"/desktop-preview/assets/kids-academy-akhlaq-v1.jpg",ready:true,topics:["Wahrhaftigkeit","Geduld","Vertrauen"]},
+ adab:{title:"Adab",description:"Gutes Benehmen, freundliche Worte und Respekt im Alltag.",status:"Unterricht in Vorbereitung",lesson:"Adab – gutes Benehmen",note:"Diese Unterrichtsreihe wird vorbereitet. Hier findest du später passende Übungen für deine Altersstufe.",image:"/desktop-preview/assets/kids-academy-adab-v1.jpg",ready:false,topics:["Grüßen","Freundlich sprechen","Respekt"]},
+ fiqh:{title:"Fiqh",description:"Wir entdecken die islamischen Regeln für unseren Alltag Schritt für Schritt.",status:"Unterricht in Vorbereitung",lesson:"Reinheit und Gebet",note:"Altersgerechte Fiqh-Unterrichtseinheiten werden vorbereitet und vor der Freigabe fachlich geprüft.",image:"/kids/assets/deen/ibadah.jpg?v=1205",ready:false,topics:["Reinheit","Wuḍūʾ","Gebet"]},
+ aqidah:{title:"ʿAqīdah",description:"Wir lernen über Tawḥīd und den Glauben anhand von Qurʾān und Sunnah.",status:"Unterricht in Vorbereitung",lesson:"Tawḥīd und Īmān",note:"Dieser Bereich ist angelegt. Die Inhalte werden vor der Freigabe sorgfältig geprüft.",image:"/kids/assets/deen/tawhid.jpg?v=1205",ready:false,topics:["Tawḥīd","Īmān","Ikhlāṣ"]}
 });
 function openCategory(key){
  const data=SUBJECTS[key];if(!data)return;
@@ -1796,6 +1823,14 @@ function openCategory(key){
  $("#subjectStatus").textContent=data.status;$("#subjectLessonTitle").textContent=data.lesson;
  $("#subjectLessonNote").textContent=data.note;$("#subjectImage").src=data.image;
  $("#subjectStart").hidden=!data.ready;
+ const grid=$("#subjectTopicGrid");grid.replaceChildren();
+ data.topics.forEach((name,i)=>{
+  const card=document.createElement("div");
+  card.className="subject-topic"+(data.ready&&i===0?" is-ready":"");
+  const label=document.createElement("strong");label.textContent=name;
+  const state=document.createElement("span");state.textContent=data.ready&&i===0?"Jetzt lernen":"In Vorbereitung";
+  card.append(label,state);grid.appendChild(card);
+ });
  window.scrollTo(0,0);
 }
 function hideCategory(){$("#academySubject").hidden=true}
