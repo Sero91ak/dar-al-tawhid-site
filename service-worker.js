@@ -715,6 +715,17 @@ self.addEventListener('fetch', (event) => {
   if (request.mode === 'navigate') {
     event.respondWith((async () => {
       const fromPwa = await requestComesFromDedicatedPwa(event);
+      const explicitPwa = isDedicatedPwaUrl(url);
+      const requestUa = String(request.headers.get('User-Agent') || '');
+      const nativeDar = /DarAlTawhid(?:Android|-iOS|iOS)/i.test(requestUa);
+
+      // PUBLIC_WEBSITE_NETWORK_ONLY_V1
+      // Website und App/PWA dürfen niemals denselben /index.html-Fallback teilen.
+      // Normale Browser-Navigationen bleiben deshalb strikt Network-only.
+      if (!fromPwa && !explicitPwa && !nativeDar && !url.pathname.startsWith('/test')) {
+        return fetch(request, { cache: 'no-store' });
+      }
+
       if (fromPwa && url.origin === self.location.origin && (url.pathname === '/' || url.pathname === '/index.html')) {
         return Response.redirect(dedicatedPwaNavigationTarget(url), 307);
       }
