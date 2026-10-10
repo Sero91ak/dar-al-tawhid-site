@@ -7362,6 +7362,20 @@
         "assets/dar-more-v15.css"
       ],
       "expiresAt": "2026-11-30T23:59:00.000Z"
+    },
+    {
+      "id": "adult-mehr-v15-global-rollout-2026-10-10",
+      "at": "2026-10-10T10:00:00+02:00",
+      "approvedBy": "user-explicit-global-rollout-test-visitor-web-native-ios",
+      "reason": "Nutzer genehmigt explizit die finale und geprüfte Mehr-V1.5-HTML-Vorschau für Test-App, Besucher-Web-App und native iOS-App. Ausschließlich Mehr-Routen-UI, entsprechende gekapselte CSS/JS-Assets und scoped Footer-Skin; Originalnavigation, Kontofunktionen, Themes, Push, Kids, Service Worker, andere Routen und Apple TV unverändert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "assets/dar-more-final-v15.js",
+        "assets/dar-more-final-v15.css",
+        "test/index.html",
+        "index.html"
+      ],
+      "expiresAt": "2026-11-30T23:59:00.000Z"
     }
   ],
   "enabled": true
