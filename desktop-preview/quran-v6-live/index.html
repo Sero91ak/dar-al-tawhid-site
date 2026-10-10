@@ -508,12 +508,12 @@ document.addEventListener("DOMContentLoaded",()=>{
  }
  async function openReader(n,a,options={}){
   const sid=Math.max(1,Math.min(114,Number(n)||1)),wanted=Math.max(1,Math.min(surah(sid).v,Number(a)||1));
-  const changed=sid!==state.surah;state.surah=sid;state.ayah=wanted;state.shown=Math.max(22,wanted+4);
+  const changed=sid!==state.surah||wanted!==state.ayah;state.surah=sid;state.ayah=wanted;state.shown=Math.max(22,wanted+4);
   setPreviewMode("reader");$v("v6Verses").innerHTML="<p>Die geprüften Verse werden geladen …</p>";$v("v6MoreVerses").hidden=true;
   const token=++state.requestId;
   try{const doc=await loadSurah(sid);if(token!==state.requestId)return;state.doc=doc;repaint();markVerse(Boolean(options.scroll));}
   catch(e){if(token!==state.requestId)return;state.doc=null;$v("v6Verses").innerHTML='<p role="alert">Versdaten derzeit nicht erreichbar. Bitte die Verbindung prüfen oder eine andere Sūrah auswählen.</p>';}
-  if(changed&&state.audio){state.audio.pause();state.playing=false;}save();
+  if(changed&&state.audio){state.audio.pause();state.audio.removeAttribute("src");state.audio.load();state.playing=false;}save();
  }
  function syncPlayer(){
   $v("v6Player").hidden=!state.playerOpen;
@@ -544,7 +544,7 @@ document.addEventListener("DOMContentLoaded",()=>{
    });}
   const a=state.audio;a.pause();a.playbackRate=state.rate;
   let fallback=false;
-  a.onerror=async()=>{if(!fallback){fallback=true;a.src=audioUrl(false);try{await a.play();state.playing=true;}catch(e){flash("Audio aktuell nicht verfügbar.");}}else flash("Audio aktuell nicht verfügbar.");};
+  a.onerror=async()=>{if(state.playerStopped||!state.playerOpen)return;if(!fallback){fallback=true;a.src=audioUrl(false);try{await a.play();state.playing=true;}catch(e){flash("Audio aktuell nicht verfügbar.");}}else flash("Audio aktuell nicht verfügbar.");};
   a.src=audioUrl(true);
   try{await a.play();state.playing=true;save();}catch(e){if(e?.name!=="AbortError")flash("Audiowiedergabe nicht gestartet. Nochmals Play tippen.");}
  }
@@ -592,7 +592,7 @@ document.addEventListener("DOMContentLoaded",()=>{
   if(act==="close-tafsir"){closeOverlay("v6Tafsir");return;}
   if(act==="info"){await tafsir();return;}
   if(act==="settings"){state.arabic=!state.arabic;repaint();flash(state.arabic?"Arabischer Originaltext eingeblendet.":"Arabischer Originaltext ausgeblendet.");save();return;}
-  if(act==="wake"){if(document.querySelector("#wake"))document.querySelector("#wake").click();flash("Bildschirm-Wachhalten über die Übersicht steuerbar.");return;}
+  if(act==="wake"){await toggleWake();flash(wakeWanted?"Bildschirm-Wachhalten angefordert.":"Bildschirm-Wachhalten ausgeschaltet.");return;}
   if(act==="stop"){stopPlayer();return;}
   if(act==="pause"){pausePlayer();return;}
   if(act==="play"){if(state.audio&&state.playerOpen&&!state.audio.ended&&state.audio.paused&&state.audio.src){try{await state.audio.play();state.playing=true;return;}catch(e){}}
