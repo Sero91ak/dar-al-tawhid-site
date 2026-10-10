@@ -3696,14 +3696,14 @@ function kidsResetMainScroll(){
   if(document.body)document.body.scrollTop=0;
   try{window.scrollTo(0,0)}catch(e){}
 }
-/* KIDS_TAB_SCROLL_STABILITY_V1322
+/* KIDS_TAB_SCROLL_STABILITY_V1323
    iOS may continue an old scroll gesture, restore an anchor or scroll on
    focus AFTER the two initial frames. For 900ms after navigation, correct
    only unrequested movement. Do not fight a new touch, wheel or key action.
    Readers and detail panes are independent and are not observed. */
 var kidsTabEpoch=0;
-var kidsLastUserScroll=0;
-function kidsMarkUserScroll(){kidsLastUserScroll=Date.now();}
+var kidsScrollGestureSerial=0;
+function kidsMarkUserScroll(){kidsScrollGestureSerial++;}
 document.addEventListener("touchstart",kidsMarkUserScroll,{passive:true,capture:true});
 document.addEventListener("touchmove",kidsMarkUserScroll,{passive:true,capture:true});
 document.addEventListener("wheel",kidsMarkUserScroll,{passive:true,capture:true});
@@ -3713,12 +3713,12 @@ document.addEventListener("keydown",function(e){
 },true);
 function kidsFinishMainTabSwitch(){
   var epoch=++kidsTabEpoch;
-  var switchedAt=Date.now();
+  var initialGestureSerial=kidsScrollGestureSerial;
   var main=document.querySelector(".shell");
   var root=document.scrollingElement;
   var finished=false,queued=false;
   function userMoved(){
-    return kidsLastUserScroll>=switchedAt;
+    return kidsScrollGestureSerial!==initialGestureSerial;
   }
   function settle(){
     if(finished||epoch!==kidsTabEpoch||userMoved())return;
