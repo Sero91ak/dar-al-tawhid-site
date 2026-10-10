@@ -1,4 +1,5 @@
 name: Quran V5 Device and Interaction QA
+# V5 drawer QA includes Surah pagination, search, compact settings on all phone sizes.
 on:
   workflow_dispatch:
   push:
