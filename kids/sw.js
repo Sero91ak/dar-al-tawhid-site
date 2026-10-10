@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1323";
+const CACHE_NAME="dar-al-tawhid-kids-v1324";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 // KIDS_V202_DOWNLOAD_TABS_RELEASE_TRIGGER_20261010: detail-only offline controls; manifest V202 synchronized.
@@ -25,7 +25,7 @@ const CORE_PRECACHE=[
   "/kids/start.html",
   "/kids/manifest.webmanifest",
   "/kids/version.json",
-  "/kids/section-heroes-v1095.css?v=1255-parent-hero-safe",
+  "/kids/section-heroes-v1095.css?v=1256-parent-hero-full",
   "/kids/profile-stability-v1256.css?v=1258",
   "/kids/assets/kids-art/section-stories-v1097.png?v=1097-real3",
   "/kids/assets/kids-art/section-quran-v1090.jpg?v=1090",
