@@ -1,4 +1,5 @@
 name: Quran V4 Browser QA
+# Contrast assertions: adult dark text on parchment; KIDS blue text on ivory.
 on:
   workflow_dispatch:
   push:
