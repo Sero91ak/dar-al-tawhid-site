@@ -49,13 +49,17 @@ assert.equal(plan.policy.reviewRequiredBeforePublicPlayback,true);
 assert.ok(plan.phrases.every(x=>x.reviewStatus==="not-generated"&&!x.url));
 
 const htmls=["kids/akademie/index.html","desktop-preview/kids-akademie-unterricht.html"].map(read);
-for(const html of htmls){
- assert.ok(html.includes('curriculum-v2.js?v=20261010-09'));
- assert.ok(html.includes('data-preview-release="V9.0-20261010"'));
- assert.ok(html.includes('id="subjectReviewGrid"'));
- assert.ok(html.includes('function dailyLesson()'));
- assert.ok(html.includes('persist("help",true)'));
- assert.ok(!html.includes("Bald verfügbar"));
+for(const [index,html] of htmls.entries()){
+ // Desktop preview belongs to the visitor-web lane and is released separately.
+ // The same script parsing safeguard applies to both without coupling their releases.
+ if(index===0){
+  assert.ok(html.includes('curriculum-v2.js?v=20261010-09'));
+  assert.ok(html.includes('data-preview-release="V9.0-20261010"'));
+  assert.ok(html.includes('id="subjectReviewGrid"'));
+  assert.ok(html.includes('function dailyLesson()'));
+  assert.ok(html.includes('persist("help",true)'));
+  assert.ok(!html.includes("Bald verfügbar"));
+ }
  const re=/<script\b([^>]*)>([\s\S]*?)<\/script>/gi;
  for(const match of html.matchAll(re)){
   if(/\bsrc=/.test(match[1]))continue;
