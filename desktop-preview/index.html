@@ -2329,10 +2329,10 @@ button,input,select{font:inherit}
     document.querySelectorAll("[data-dar-pwa-install]").forEach(function(btn){
      if(!btn.dataset.darInstallLabel)btn.dataset.darInstallLabel=btn.textContent||"Web-App installieren";
      var preparing=android&&!installed&&!ready;
-     btn.disabled=installed||preparing;
-     btn.setAttribute("aria-disabled",(installed||preparing)?"true":"false");
+     btn.disabled=installed;
+     btn.setAttribute("aria-disabled",installed?"true":"false");
      btn.setAttribute("data-dar-pwa-install-state",installed?"installed":(ready?"ready":"preparing"));
-     var nextLabel=installed?"Bereits installiert":(preparing?"Installation wird vorbereitet…":btn.dataset.darInstallLabel);
+     var nextLabel=installed?"Bereits installiert":(preparing?"Installation / Anleitung öffnen":btn.dataset.darInstallLabel);
      if(btn.textContent!==nextLabel)btn.textContent=nextLabel;
     });
    }catch(e){}
@@ -2361,10 +2361,7 @@ button,input,select{font:inherit}
      }).catch(function(){});
     }
    }catch(ePrime){}
-   try{
-    var mo=new MutationObserver(function(){window.__darSyncInstallButtons()});
-    mo.observe(document.documentElement,{childList:true,subtree:true});
-   }catch(e){}
+   window.addEventListener("pageshow",function(){window.__darSyncInstallButtons()});
   });
 
   // Direct one-tap installer. The native prompt must be invoked synchronously from
@@ -2375,18 +2372,10 @@ button,input,select{font:inherit}
     if(!target)return;
     var promptEvent=window.__darEarlyInstallPrompt;
     if(!promptEvent){
+      if(!/\bAndroid\b/i.test(String(navigator.userAgent||"")))return;
       event.preventDefault();
-      try{
-        if("serviceWorker" in navigator){
-          navigator.serviceWorker.getRegistrations().then(function(regs){regs.forEach(function(reg){var worker=reg.active||reg.waiting||reg.installing;if(!worker||!worker.scriptURL)return;try{var sw=new URL(worker.scriptURL,location.href);if(sw.origin===location.origin&&sw.pathname==="/service-worker.js")reg.unregister()}catch(eSw){}})}).catch(function(){});
-        }
-      }catch(ePrime){}
-      window.__darPwaInstallState="preparing";
-      window.__darSyncInstallButtons();
-      try{
-        var hint=document.querySelector("[data-dar-pwa-hint]");
-        if(hint)hint.textContent="Installation wird vorbereitet. Der Button wird automatisch freigegeben, sobald Android den nativen Installationsdialog bereitstellt.";
-      }catch(eHint){}
+      event.stopImmediatePropagation();
+      location.assign("/pwa/install/");
       return;
     }
     event.preventDefault();
@@ -2894,8 +2883,8 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
  function downloads(){
   return intro("downloads")+
   '<section class="section reveal"><div class="section-head"><h2>Apps & Installation</h2><p>Android als Web-App · iPhone & iPad über den App Store</p></div><div class="download-hub-grid">'+
-  '<article class="download-app-card"><div class="download-app-card__head"><span class="download-app-card__icon">'+androidPwaLogo()+'</span><div><div class="kicker">ANDROID · SMARTPHONE & TABLET</div><h2>Web-App installieren</h2></div></div><p>Die DĀR AL TAWḤĪD Website wird direkt als eigenständige App auf deinem Android-Startbildschirm installiert. Keine APK nötig.</p><ol class="download-app-steps"><li>Diese Seite in Chrome, Edge oder Samsung Internet öffnen.</li><li>Auf <b>Web-App installieren</b> tippen.</li><li>Der Button wird aktiv, sobald Chrome den nativen Installationsdialog freigegeben hat.</li></ol><button class="download-app-btn" type="button" data-dar-pwa-install>Web-App installieren</button><span class="download-app-note" data-dar-pwa-hint>Installiert die DĀR Web-App im eigenen App-Fenster.</span></article>'+
-  '<article class="download-app-card"><div class="download-app-card__head"><span class="download-app-card__icon ios">'+appleLogo()+'</span><div><div class="kicker">APPLE · IPHONE & IPAD</div><h2>iOS-App</h2></div></div><p>Für iPhone und iPad bleibt die native DĀR AL TAWḤĪD App im Apple App Store verfügbar.</p><a class="download-app-btn ios" href="https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753" target="_blank" rel="noopener noreferrer">'+appleLogo()+'<span>Im App Store laden</span></a><span class="download-app-note">Offizielle native iOS-Version.</span></article>'+
+  '<article class="download-app-card"><div class="download-app-card__head"><span class="download-app-card__icon">'+androidPwaLogo()+'</span><div><div class="kicker">ANDROID · SMARTPHONE & TABLET</div><h2>Web-App installieren</h2></div></div><p>Die DĀR AL TAWḤĪD Website wird direkt als eigenständige App auf deinem Android-Startbildschirm installiert. Keine APK nötig.</p><ol class="download-app-steps"><li>Diese Seite in Chrome, Edge oder Samsung Internet öffnen.</li><li>Auf <b>Web-App installieren</b> tippen.</li><li>Falls kein direkter Installationsdialog erscheint, öffnet sich eine kurze Installationsanleitung.</li></ol><button class="download-app-btn" type="button" data-dar-pwa-install>Web-App installieren</button><span class="download-app-note" data-dar-pwa-hint>Installiert die DĀR Web-App im eigenen App-Fenster.</span></article>'+
+  '<article class="download-app-card"><div class="download-app-card__head"><span class="download-app-card__icon ios">'+appleLogo()+'</span><div><div class="kicker">APPLE · IPHONE & IPAD</div><h2>iOS-App</h2></div></div><p>Für iPhone und iPad bleibt die native DĀR AL TAWḤĪD App im Apple App Store verfügbar.</p><a class="download-app-btn ios" href="https://apps.apple.com/de/app/id6805988753">'+appleLogo()+'<span>Im App Store laden</span></a><span class="download-app-note">Offizielle native iOS-Version.</span></article>'+
   '</div></section>'+footer()
  }
 
@@ -3158,15 +3147,8 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
     window.__darEarlyInstallPrompt=null;
    }
   }
-  darPwaHint("Installation wird vorbereitet …");
-  await darEnsurePwaServiceWorker();
-  if(darDeferredPwaPrompt){
-   var ready="Installation ist bereit. Bitte jetzt noch einmal auf „Web-App installieren“ tippen.";
-   darPwaHint(ready);darPwaToast(ready);
-   return false
-  }
-  var msg="Die direkte Installation ist noch nicht freigegeben. Der Button wird automatisch aktiv, sobald Chrome den nativen Installationsdialog bereitstellt.";
-  darPwaHint(msg);darPwaToast(msg);
+  darPwaHint("Die Installationsseite wird geöffnet …");
+  location.assign("/pwa/install/");
   return false
  }
  window.darInstallAndroidPwa=darInstallDesktopPwa;
