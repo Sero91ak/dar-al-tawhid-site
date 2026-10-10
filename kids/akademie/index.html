@@ -3077,8 +3077,160 @@ body[data-academy-step] #lessonMain.lesson-main:not([hidden]) .lesson-stage{
   body .wrap > #lessonMain.lesson-main:not([hidden]){padding-block-start:18px!important}
 }
 
+
+/* V7.6 · KIDS FOKUS-MODUS (Smartphone, iPad, Desktop)
+   Dokument und Navigation ruhen. Nur die Lernkarte scrollt BEI Überlänge.
+   Keine Änderung am Home-Hero, an Profilfarben oder Fächern. */
+html:has(body[data-academy-view="lesson"]){
+ height:100%;overflow:hidden!important;overscroll-behavior:none!important;
+}
+body[data-academy-view="lesson"]{
+ height:100dvh!important;min-height:0!important;max-height:100dvh!important;
+ overflow:hidden!important;overscroll-behavior:none!important;
+}
+body[data-academy-view="lesson"] > main.wrap{
+ box-sizing:border-box!important;display:flex!important;flex-direction:column!important;
+ height:100dvh!important;min-height:0!important;max-height:100dvh!important;
+ overflow:hidden!important;
+ padding-block:0!important;
+}
+body[data-academy-view="lesson"] .academy-header.kids-detail-appbar{
+ position:relative!important;top:auto!important;flex:0 0 auto!important;
+ min-height:0!important;box-sizing:border-box!important;
+ border-radius:0!important;box-shadow:none!important;margin-bottom:0!important;
+ z-index:10!important;
+}
+body[data-academy-view="lesson"] > main.wrap > #lessonMain.lesson-main:not([hidden]){
+ box-sizing:border-box!important;position:relative!important;
+ display:flex!important;flex-direction:column!important;flex:1 1 auto!important;
+ width:100%!important;max-width:980px!important;min-width:0!important;
+ min-height:0!important;max-height:none!important;
+ overflow:hidden!important;
+ margin:0 auto!important;padding:clamp(11px,1.8vw,18px) 0
+  max(7px,env(safe-area-inset-bottom,0px))!important;
+}
+body[data-academy-view="lesson"] #lessonMain .lesson-heading,
+body[data-academy-view="lesson"] #lessonMain .lesson-topline,
+body[data-academy-view="lesson"] #lessonMain .lesson-meta{
+ display:none!important;
+}
+body[data-academy-view="lesson"] #lessonMain .stage-tracker{
+ box-sizing:border-box!important;display:grid!important;
+ grid-template-columns:repeat(5,minmax(0,1fr))!important;
+ align-items:stretch!important;gap:clamp(1px,.5vw,7px)!important;
+ width:100%!important;min-width:0!important;max-width:100%!important;
+ flex:0 0 auto!important;position:relative!important;inset:auto!important;
+ margin:0 0 clamp(11px,1.5vw,16px)!important;
+ padding:8px clamp(3px,.9vw,10px) 9px!important;
+ border-radius:clamp(14px,2vw,19px)!important;
+ box-shadow:0 6px 15px rgba(2,16,29,.10)!important;
+ border:1px solid rgba(157,211,212,.18)!important;
+ background:linear-gradient(125deg,#173e50,#153348)!important;
+ overflow:visible!important;z-index:auto!important;
+}
+body[data-profile="girl"][data-academy-view="lesson"] #lessonMain .stage-tracker{
+ background:linear-gradient(125deg,#4c3458,#372d4d)!important;
+ border-color:rgba(239,201,229,.25)!important;
+}
+body[data-academy-view="lesson"] #lessonMain .stage-tracker .tracker-item,
+body[data-kids-age="4-5"][data-academy-view="lesson"] #lessonMain .stage-tracker .tracker-item{
+ box-sizing:border-box!important;display:flex!important;
+ flex-direction:column!important;align-items:center!important;justify-content:center!important;
+ gap:4px!important;width:100%!important;min-width:0!important;
+ min-height:61px!important;padding:3px 0!important;overflow:visible!important;
+}
+body[data-academy-view="lesson"] #lessonMain .stage-tracker .tracker-item b{
+ display:grid!important;place-items:center!important;
+ flex:0 0 auto!important;
+ width:clamp(29px,3.2vw,36px)!important;height:clamp(29px,3.2vw,36px)!important;
+ font-size:clamp(13px,1.5vw,17px)!important;font-weight:850!important;
+ line-height:1!important;
+}
+body[data-academy-view="lesson"] #lessonMain .stage-tracker .tracker-item span,
+body[data-kids-age="4-5"][data-academy-view="lesson"] #lessonMain .stage-tracker .tracker-item span{
+ display:block!important;min-width:0!important;width:100%!important;
+ font-size:clamp(10px,1.45vw,13px)!important;line-height:1.2!important;
+ font-weight:800!important;text-align:center!important;
+ white-space:normal!important;overflow-wrap:normal!important;
+}
+body[data-academy-view="lesson"] #lessonMain #audioFeedback{
+ position:absolute!important;left:0!important;top:0!important;
+ width:1px!important;height:1px!important;
+ overflow:hidden!important;clip-path:inset(50%)!important;white-space:nowrap!important;
+ border:0!important;padding:0!important;margin:0!important;
+}
+body[data-academy-view="lesson"] #lessonMain #stageSurface{
+ box-sizing:border-box!important;
+ display:flex!important;flex-direction:column!important;align-items:stretch!important;
+ flex:1 1 auto!important;min-width:0!important;min-height:0!important;max-height:none!important;
+ width:100%!important;max-width:100%!important;
+ overflow-x:hidden!important;overflow-y:auto!important;
+ overscroll-behavior-y:contain!important;
+ -webkit-overflow-scrolling:touch;
+ scrollbar-width:thin;
+ scrollbar-color:rgba(112,169,175,.36) transparent;
+ margin:0!important;
+ padding:2px 2px 9px!important;
+}
+body[data-academy-view="lesson"] #lessonMain #stageSurface > .lesson-stage:not([hidden]){
+ display:block!important;box-sizing:border-box!important;
+ width:100%!important;max-width:100%!important;min-width:0!important;
+ margin:auto 0!important; /* centered if short; naturally top-aligned when long */
+ flex:none!important;overflow:visible!important;
+}
+body[data-academy-view="lesson"] #lessonMain #stageSurface .question-panel,
+body[data-academy-view="lesson"] #lessonMain #stageSurface .lesson-source-block{
+ max-height:none!important;overflow:visible!important;
+}
+body[data-academy-view="lesson"] #lessonMain #lessonNavigation:not([hidden]){
+ flex:0 0 auto!important;min-height:0!important;
+ margin:10px 0 0!important;max-height:none!important;
+ padding:0 2px!important;
+}
+body[data-academy-step="1"][data-academy-view="lesson"] #lessonMain #lessonNavigation,
+body[data-academy-step="2"][data-academy-view="lesson"] #lessonMain #lessonNavigation{
+ display:none!important; /* one forward/back row, not two */
+}
+body[data-academy-view="lesson"] #lessonMain .focus-page-navigation{
+ flex-wrap:nowrap!important;gap:clamp(7px,1vw,13px)!important;
+}
+body[data-academy-view="lesson"] #lessonMain .focus-page-navigation button{
+ min-width:0!important;min-height:44px!important;
+ padding:9px clamp(10px,1.5vw,16px)!important;
+}
+body[data-academy-view="lesson"] #lessonMain .focus-page-navigation .focus-page-count{
+ flex:0 0 auto!important;min-width:45px!important;
+ font-size:clamp(13px,1.7vw,16px)!important;
+}
+@media(max-width:700px){
+ body[data-academy-view="lesson"] > main.wrap > #lessonMain.lesson-main:not([hidden]){
+  padding-top:12px!important;
+  padding-bottom:max(6px,env(safe-area-inset-bottom,0px))!important;
+ }
+ body[data-academy-view="lesson"] #lessonMain .stage-tracker{
+  margin-bottom:11px!important;padding:8px 3px!important;
+ }
+ body[data-academy-view="lesson"] #lessonMain .stage-tracker .tracker-item span,
+ body[data-kids-age="4-5"][data-academy-view="lesson"] #lessonMain .stage-tracker .tracker-item span{
+  font-size:clamp(10px,2.5vw,12px)!important;letter-spacing:-.015em!important;
+ }
+ body[data-academy-view="lesson"] #lessonMain #stageSurface{
+  padding-bottom:8px!important;
+ }
+}
+@media(max-width:359px){
+ body[data-academy-view="lesson"] #lessonMain .stage-tracker .tracker-item span{
+  font-size:10px!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ body[data-academy-view="lesson"] #lessonMain #stageSurface{
+  scroll-behavior:auto!important;
+ }
+}
+
 </style></head>
-<body data-profile="boy" data-preview-release="V7.5.6-20261010" data-preview-deploy="v7.5.6-nonsticky-tracker-scroll-safety"><main class="wrap">
+<body data-profile="boy" data-preview-release="V7.6-20261010" data-preview-deploy="v7.6-viewport-lesson"><main class="wrap">
 
 <header class="academy-header kids-detail-appbar" aria-label="Navigationsleiste Lernakademie">
  <button class="academy-nav-back" id="academyNavBack" type="button" aria-label="Zurück"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/><path d="M9 12h11"/></svg></button>
@@ -3435,7 +3587,7 @@ function stopAudio(note){
  $("#arabicAudioStatus").textContent=note||"Rezitation des vollständigen Verses";
 }
 function stopAll(){stopSpeech();stopAudio();stopMic()}
-function hideLesson(){delete document.body.dataset.academyStep;$("#academyHome").hidden=false;$("#lessonMain").hidden=true}
+function hideLesson(){delete document.body.dataset.academyStep;delete document.body.dataset.academyView;$("#academyHome").hidden=false;$("#lessonMain").hidden=true}
 
 /* Derselbe geprüfte Beleg, unterschiedlich erklärte Lernschritte pro Altersstufe. */
 const AGE_EXPLANATIONS=Object.freeze({
@@ -3613,7 +3765,8 @@ function focusUpdate(stageNumber,target,{silent=false}={}){
  if(panel){
   panel.querySelector(".focus-page-count").textContent=(i+1)+" / "+parts.length;
   panel.querySelector("[data-focus-prev]").disabled=i===0;
-  panel.querySelector("[data-focus-next]").disabled=i===parts.length-1;
+  panel.querySelector("[data-focus-next]").disabled=i===parts.length-1 && stageNumber===4;
+  panel.querySelector("[data-focus-next]").textContent=i===parts.length-1&&stageNumber===1?"Zum Qurʾān →":i===parts.length-1&&stageNumber===2?"Zur Frage →":"Weiter →";
   const names=stageNumber===2?["Qurʾān","Sunnah","Erklärung"]:stageNumber===1?["Satz 1","Satz 2","Satz 3","Satz 4"]:["Merksatz","Qurʾān & Sunnah","Alltag","Abschluss"];
   panel.querySelector(".focus-page-count").setAttribute("aria-label",names[i]+" – Seite "+(i+1)+" von "+parts.length);
  }
@@ -3641,14 +3794,10 @@ function focusUpdate(stageNumber,target,{silent=false}={}){
 
 /* The appbar remains sticky; the step rail never overlays reading content.
    Scroll alignment is based on the real measured navigation height. */
+/* V7.6: Only the content panel scrolls when its contents exceed its viewport. */
 function scrollLessonToTop(){
- const tracker=$(".stage-tracker");
- if(!tracker || $("#lessonMain").hidden)return;
- const bar=document.querySelector(".academy-header.kids-detail-appbar");
- const headerHeight=bar?bar.getBoundingClientRect().height:0;
- const gap=parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--kids-lesson-nav-space"))||14;
- const target=Math.max(0,Math.round(window.scrollY+tracker.getBoundingClientRect().top-headerHeight-gap));
- window.scrollTo({top:target,behavior:"auto"});
+ const viewport=$("#stageSurface");
+ if(viewport&&!$("#lessonMain").hidden)viewport.scrollTo({top:0,behavior:"auto"});
 }
 
 function focusMove(stageNumber,delta){
@@ -3670,7 +3819,12 @@ function initFocusControls(){
   const count=document.createElement("span");count.className="focus-page-count";
   count.setAttribute("aria-live","polite");count.textContent="1 / 3";
   const next=document.createElement("button");next.type="button";next.dataset.focusNext="";
-  next.textContent="Weiter →";next.onclick=()=>focusMove(stageNumber,1);
+  next.textContent="Weiter →";next.onclick=()=>{
+   if((stageNumber===1||stageNumber===2)&&focusPages[stageNumber]>=focusPieces(stageNumber).length-1){
+     nextStep();return;
+   }
+   focusMove(stageNumber,1);
+  };
   bar.append(prev,count,next);el.appendChild(bar);
   focusUpdate(stageNumber,0,{silent:true});
  }
@@ -3685,10 +3839,10 @@ function initFocusControls(){
 
 function showStep(n,scroll=true){
  if(n<0||n>unlocked||n>=5)return;
- stopAll();step=n;document.body.dataset.academyStep=String(n);stages.forEach((el,i)=>el.hidden=i!==n);
+ stopAll();step=n;document.body.dataset.academyStep=String(n);document.body.dataset.academyView="lesson";stages.forEach((el,i)=>el.hidden=i!==n);
  if([1,2,4].includes(n))focusUpdate(n,focusPages[n],{silent:true});
  all("[data-jump-step]").forEach(b=>{const i=+b.dataset.jumpStep;b.disabled=i>unlocked;b.classList.toggle("is-current",i===n);b.classList.toggle("is-done",i<n);b.setAttribute("aria-current",i===n?"step":"false")});
- $("#previousStep").hidden=n===0;$("#forwardStep").hidden=n>=3;$("#lessonNavigation").hidden=n>=3;
+ $("#previousStep").hidden=n===0;$("#forwardStep").hidden=n>=3;$("#lessonNavigation").hidden=n!==0;
  if(n<3)$("#forwardStep").firstChild.textContent=
  (n===1&&focusPages[1]<3)?"Nächster Satz ":
  (n===2&&focusPages[2]===0)?"Zur Sunnah ":
