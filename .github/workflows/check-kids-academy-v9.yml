@@ -33,6 +33,10 @@ jobs:
           node --check kids/akademie/curriculum-v1.js
           node --check kids/akademie/curriculum-v2.js
           node --check kids/tools/export-academy-voice-plan.js
+      - name: Verify story voice staging without credits
+        run: |
+          python3 -m py_compile kids/tools/build-academy-v9-staging.py kids/tools/build-academy-audio.py
+          python3 kids/tools/build-academy-v9-staging.py --dry-run
       - name: Confirm reproducible voice plan remains unchanged
         run: |
           node kids/tools/export-academy-voice-plan.js
