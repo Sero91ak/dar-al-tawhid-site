@@ -18,6 +18,11 @@ on:
       - content/updates/daily.json
       - content/posts/**
       - desktop-preview/**
+      # KIDS Akademie V16: all classroom UI/voice changes must reach the
+      # SAME canonical Cloudflare Worker; GitHub Pages deploy is not enough.
+      - kids/akademie/**
+      - kids/owner-voice.js
+      - kids/data/academy-audio.json
       # KIDS Duʿāʾ V4 audio release through sole production Worker.
       - kids/dua-smart-learn.js
       - kids/data/dua-word-audio.json
