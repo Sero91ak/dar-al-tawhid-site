@@ -480,48 +480,17 @@ jobs:
         run: node scripts/purge-cloudflare-cache.js
         continue-on-error: true
 
-      - name: Reclaim visitor assets after Workers Builds race
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
-          CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
-          CLOUDFLARE_GLOBAL_API_KEY: ${{ secrets.CLOUDFLARE_GLOBAL_API_KEY }}
-          SITE_URL: "https://dar-al-tawhid.de"
-          PURGE_SCOPE: "visitor"
+      - name: Produktions-Build nach Publish einmalig bestätigen
+        shell: bash
         run: |
+          set -euo pipefail
           EXPECT="$(node -e "console.log(require('./version.json').buildId||require('./version.json').appBuildId||'')")"
-          echo "Erwarte Build $EXPECT"
-          stable=0
-          for attempt in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do
-            ts="$(date +%s)"
-            LIVE_WWW="$(curl -fsS "https://dar-al-tawhid.de/version.json?cb=${attempt}-${ts}" || true)"
-            LIVE_DEV="$(curl -fsS "https://dar-al-tawhid-site.sero91ak.workers.dev/version.json?cb=${attempt}-${ts}" || true)"
-            echo "www version: $LIVE_WWW"
-            echo "workers.dev version: $LIVE_DEV"
-            if printf '%s' "$LIVE_WWW" | grep -F -q "$EXPECT"; then
-              stable=$((stable + 1))
-              echo "Live hat $EXPECT (stabil ${stable}/3)"
-              if [ "$stable" -ge 3 ]; then
-                echo "Visitor-Worker Build stabil"
-                break
-              fi
-              sleep 20
-              continue
-            fi
-            stable=0
-            echo "Visitor overwrite/stale (Versuch $attempt) – wrangler deploy"
-            node -e 'const fs=require("fs"); const n=Date.now(); let h=fs.readFileSync("index.html","utf8"); h=h.replace(/workers-deploy-stamp:\d+/g,"workers-deploy-stamp:"+n); h=h.replace(/pages-deploy-stamp:\d+/g,"pages-deploy-stamp:"+n); fs.writeFileSync("index.html",h); const v=JSON.parse(fs.readFileSync("version.json","utf8")); v.updatedAt=new Date(n).toISOString(); fs.writeFileSync("version.json", JSON.stringify(v,null,2)+"\n");'
-            npx wrangler deploy
-            node scripts/purge-cloudflare-cache.js || true
-            sleep 25
-          done
-          LIVE_WWW="$(curl -fsS "https://dar-al-tawhid.de/version.json?cb=final-$(date +%s)" || true)"
-          echo "www final: $LIVE_WWW"
-          if ! printf '%s' "$LIVE_WWW" | grep -F -q "$EXPECT"; then
-            echo "::error::Live version.json ist nicht ${EXPECT}"
+          LIVE="$(curl -fsS --retry 4 --retry-delay 2 --max-time 25 "https://dar-al-tawhid.de/version.json?cb=${GITHUB_SHA}-$(date +%s)")"
+          printf '%s' "$LIVE" | grep -F -q "$EXPECT" || {
+            echo "::error::Live version.json ist nicht ${EXPECT}; Live-Verifikation/Rollback übernimmt."
             exit 1
-          fi
+          }
+          echo "Produktions-Build bestätigt: $EXPECT"
 
       - name: Live-Deploy verifizieren (nur Besucher-App)
         env:

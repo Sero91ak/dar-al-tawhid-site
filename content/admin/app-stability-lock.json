@@ -23,7 +23,7 @@
     "workflow": ".github/workflows/app-stability-watchdog.yml",
     "deployWorkflow": "Deploy Besucher-App (Cloudflare Workers)",
     "purgeWorkflow": "Purge live site cache",
-    "schedule": "15,45 * * * *"
+    "schedule": "*/5 * * * *"
   },
   "domains": [
     {
