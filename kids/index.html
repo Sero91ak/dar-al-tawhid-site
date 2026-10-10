@@ -11243,6 +11243,36 @@ html.kids-ios-app #kidsLaunch,html.dar-ios-native-app #kidsLaunch{display:none!i
  min-height:505px!important;max-height:540px!important
 }}
 </style>
+<!-- KIDS_AUDIOBOOKS_NAV_LABEL_V1317: keep short new title safely inside five-tab capsule -->
+<style id="kids-audiobooks-nav-label-v1317">
+html body .bottom-nav .nav-btn[data-target="stories"],
+html[data-kids-age] body .bottom-nav .nav-btn[data-target="stories"],
+html[data-kids-age]:has(#view-stories.active) body .bottom-nav .nav-btn[data-target="stories"]{
+  box-sizing:border-box!important;
+  min-width:0!important;
+  overflow:hidden!important;
+  padding-inline:clamp(3px,.8vw,8px)!important;
+}
+html body .bottom-nav .nav-btn[data-target="stories"] .lab,
+html[data-kids-age] body .bottom-nav .nav-btn[data-target="stories"] .lab,
+html[data-kids-age]:has(#view-stories.active) body .bottom-nav .nav-btn[data-target="stories"] .lab{
+  display:block!important;
+  box-sizing:border-box!important;
+  min-width:0!important;
+  max-width:calc(100% - 8px)!important;
+  margin-inline:auto!important;
+  padding:0!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  font-family:"Fredoka","SF Pro Rounded","Arial Rounded MT Bold",system-ui,sans-serif!important;
+  font-size:clamp(9px,2.8vw,18px)!important;
+  font-weight:900!important;
+  line-height:1.2!important;
+  letter-spacing:-.025em!important;
+  text-align:center!important;
+}
+</style>
 <!-- KIDS_OFFLINE_LIBRARY_V1: independent storage controls for the Parents tab -->
 <script defer src="/kids/offline-library-v1.js?v=1"></script>
 <!-- KIDS_SALAH_STAGE_V1261: placed after hero, before continue-listening -->
