@@ -1,0 +1,90 @@
+/* V9 isolated stage - additive refinement over stable V8, no production CSS */
+.topline{border-bottom:1px solid rgba(227,212,181,.08);background:rgba(5,20,26,.14);gap:9px}
+.app-label{max-width:calc(100% - 162px)}
+.app-label strong{font-size:11px;letter-spacing:.065em}
+.app-label span{font-size:12px;color:#e5d3ae;letter-spacing:.015em;font-weight:630;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.head-actions{margin-left:auto;gap:5px}
+.head-actions button{width:36px;height:36px;border-radius:12px;background:rgba(230,211,174,.045)}
+.head-actions button svg{width:19px;height:19px}
+.back-link{width:36px;height:36px;border-color:rgba(227,214,182,.12)}
+.surah-lead{padding:8px 16px 0;text-align:left;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.surah-overline{font-size:9px;white-space:nowrap;color:#e2cda6}
+.surah-line{display:none}
+.surah-meta{font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:right}
+.focus-switch{margin-top:8px}
+.focus-stage{min-height:0}
+.focus-copy{min-height:0;max-height:calc(100% - 54px);padding:10px 0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain}
+.quran-text{line-height:1.7}
+.translation{margin-top:12px}
+.v9-manual-actions{display:flex;align-items:center;justify-content:center;gap:10px;margin:0 auto 8px;flex:none}
+.v9-manual-actions button{padding:5px 10px;min-height:32px;border:1px solid rgba(221,205,167,.18);border-radius:999px;background:rgba(217,195,160,.065);color:#dec9a1;font-size:11px;font-weight:650}
+.v9-manual-actions button.active{background:rgba(228,203,156,.20);border-color:#cfb58b}
+.v9-manual-actions small{color:#90a7ad;font-size:10px}
+.long-ayah .quran-text{font-size:clamp(26px,4.3vw,57px);line-height:1.8}
+.very-long-ayah .quran-text{font-size:clamp(25px,3.9vw,49px);line-height:1.74}
+.long-ayah .focus-copy,.very-long-ayah .focus-copy{justify-content:flex-start}
+.long-ayah .comment-box,.very-long-ayah .comment-box{flex:none}
+/* Fix the graphical glyph's actual center rather than relying on fonts or flex baselines */
+.transport .play{position:relative;display:grid;place-items:center;padding:0;line-height:0;font-size:0}
+.transport .play:before{position:absolute;display:block!important;top:50%;left:50%;margin:0!important;
+ transform:translate(-43%,-50%)!important;width:20px;height:23px;clip-path:polygon(0 0,100% 50%,0 100%);
+ background:currentColor}
+.transport .play[aria-label="Pause"]:before{top:50%;left:50%;transform:translate(-50%,-50%)!important;
+ width:20px;height:23px;clip-path:none;background:linear-gradient(90deg,currentColor 0 7px,transparent 7px 13px,currentColor 13px 20px)}
+.canonical-source a{display:none!important}
+.v9-settings-title{grid-column:1/-1;color:#e8d1a6;font-size:12px;letter-spacing:.065em;font-weight:750;padding-top:6px}
+.v9-settings-note{grid-column:1/-1;color:#9eb7b9;font-size:11px;line-height:1.5}
+.v9-progress-extra{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:10px}
+.v9-progress-extra .stat{padding:11px 3px}
+.v9-stats-note{font-size:11px;line-height:1.55;color:#b7c7c7;margin-top:15px}
+body.kids .topline{background:rgba(36,67,124,.18);border-color:rgba(195,225,249,.11)}
+body.kids .app-label span{color:#b9ffeb}
+body.kids .v9-manual-actions button{color:#d8fbff;border-color:rgba(166,216,235,.25);background:rgba(103,167,219,.18)}
+body.kids .v9-manual-actions button.active{background:#b8f6df;color:#1c4466}
+body.kids .kids-actions button{border-radius:12px}
+body.kids .kids-steps .step{font-size:9px}
+body.kids .v9-settings-title{color:#b8ffee}
+body.kids .v9-progress-extra .stat{background:rgba(197,225,255,.095)}
+body.kids .v9-progress-extra .stat b{color:#b5f8e6}
+@media(max-width:719px){
+ .topline{height:46px;padding:calc(3px + env(safe-area-inset-top,0px)) 9px 0}
+ .app-label span{font-size:clamp(10px,2.75vw,12px)}
+ .app-label strong{font-size:10px}
+ .back-link,.head-actions button{width:34px;height:34px;border-radius:11px}
+ .surah-lead{padding:5px 13px 0;min-height:21px}
+ .surah-meta{font-size:9px}
+ .focus-switch{margin-top:5px}
+ .focus-stage{padding:3px 11px 0}
+ .stage-top{min-height:30px}
+ .focus-copy{max-height:calc(100% - 40px);padding:5px 0}
+ .stage-footer{min-height:20px}
+ .quran-text{font-size:clamp(31px,8.6vw,50px);line-height:1.7}
+ .long-ayah .quran-text{font-size:clamp(27px,7.3vw,40px);line-height:1.6}
+ .very-long-ayah .quran-text{font-size:clamp(26px,6.7vw,36px);line-height:1.6}
+ .translation{font-size:clamp(14px,3.9vw,18px);line-height:1.5;margin-top:9px}
+ .v9-manual-actions{margin-bottom:3px;gap:5px}
+ .v9-manual-actions button{min-height:29px;padding:4px 9px;font-size:10px}
+ .v9-manual-actions small{font-size:9px}
+ .comment-box{margin-top:10px;padding:9px 4px}
+ body.kids .surah-lead{padding-top:5px}
+ body.kids .kids-steps{margin-top:4px;min-height:22px}
+ body.kids .focus-stage{padding-left:9px;padding-right:9px}
+ body.kids .quran-text{font-size:clamp(29px,7.7vw,42px)}
+ body.kids .long-ayah .quran-text{font-size:clamp(25px,6.9vw,37px)}
+ body.kids .kids-actions{margin-bottom:0}
+}
+@media(max-width:719px) and (max-height:710px){
+ .topline{height:40px}
+ .surah-lead{min-height:16px;padding-top:2px}
+ .surah-overline{font-size:8px}
+ .focus-switch{margin-top:3px}
+ .focus-switch button{height:29px}
+ .stage-top{min-height:27px}
+ .v9-manual-actions{margin-bottom:2px}
+ .v9-manual-actions button{min-height:26px;font-size:9px}
+ body.kids .kids-actions button{height:29px}
+}
+@media(min-width:720px){
+ .surah-lead{padding:8px 25px 3px}
+ .focus-copy{max-height:calc(100% - 65px)}
+}
