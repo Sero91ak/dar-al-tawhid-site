@@ -1,0 +1,52 @@
+name: Qurʾān V11 Reciter Audio Probe
+on:
+  pull_request:
+    paths:
+      - "kids/index.html"
+      - "kids/quran-player-v11.js"
+      - ".github/workflows/quran-v11-reciter-audio-probe.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe-kids-reciters:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check selected V11 verse recordings without downloading a full reciter
+        shell: bash
+        run: |
+          node <<'NODE'
+          const folders = [
+            "Husary_128kbps",
+            "Alafasy_128kbps",
+            "Minshawy_Murattal_128kbps",
+            "Abdurrahmaan_As-Sudais_192kbps",
+            "MaherAlMuaiqly128kbps",
+            "Saood_ash-Shuraym_128kbps"
+          ];
+          async function probe(folder, verse) {
+            const url = 'https://everyayah.com/data/' + folder + '/' + verse + '.mp3';
+            const ac = new AbortController();
+            const timer = setTimeout(() => ac.abort(), 12000);
+            try {
+              let response = await fetch(url, {
+                method:'GET', headers:{Range:'bytes=0-512'},
+                signal:ac.signal, redirect:'follow'
+              });
+              const ct = (response.headers.get('content-type')||'').toLowerCase();
+              const ok = (response.status===200 || response.status===206) && !ct.includes('text/html');
+              if (response.body) await response.body.cancel();
+              console.log((ok?'OK':'FAIL')+' · '+folder+' · '+verse+' · HTTP '+response.status+' · '+ct);
+              if(!ok) throw Error('Audio unavailable or wrong response for '+folder+'/'+verse);
+            } finally { clearTimeout(timer); }
+          }
+          (async () => {
+            for (const folder of folders) await probe(folder,'001001');
+            await probe(folders[0],'112004');
+            await probe(folders[1],'112004');
+            console.log('All sample recitations returned usable HTTP audio responses.');
+          })().catch(e => { console.error('V11 RECITER PROBE BLOCKED: '+e.message); process.exitCode=1; });
+          NODE
