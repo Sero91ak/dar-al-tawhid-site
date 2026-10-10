@@ -34,7 +34,6 @@ on:
       - wrangler.toml
       - _headers
       - _redirects
-      - kids/**
       - admin/**
       - pwa/**
       - quelle/**
@@ -451,7 +450,7 @@ jobs:
             CHANGED="$(git diff --name-only "$GITHUB_SHA" "$LATEST" || true)"
             echo "Neuere main-Dateien seit diesem Lauf:"
             printf '%s\n' "$CHANGED"
-            if printf '%s\n' "$CHANGED" | grep -Eq '^(index\.html$|version\.json$|content/updates/daily\.json$|content/posts/|desktop-preview/|admin/|pwa/|quelle/|apple-tv/|content/quran-athar/de/|data/hadith-library/|data/quran-search-index\.json$|cloudflare/site-router\.js$|service-worker\.js$|manifest\.json$|assets/|voice-studio/|data/pronunciation/|data/frauen-.*\.json$|q/|quellen/|links/|download/|data/scholar-index-meta\.json$|data/scholar-history-curated\.json$|wrangler\.toml$|_headers$|_redirects$|kids/|test/index\.html$|test/version\.json$|test/assets/|test/service-worker\.js$|test/manifest\.json$|\.assetsignore$|package\.json$|scripts/cf-pages-build\.js$|scripts/sync-quellen-registry\.cjs$|scripts/sync-app-build-ids\.js$|scripts/verify-live-deploy\.js$|scripts/public-website-isolation-guard\.js$|scripts/purge-cloudflare-cache\.js$|scripts/kids-prophet-release-guard\.js$|\.github/workflows/cloudflare-pages-deploy\.yml$)'; then
+            if printf '%s\n' "$CHANGED" | grep -Eq '^(index\.html$|version\.json$|content/updates/daily\.json$|content/posts/|desktop-preview/|admin/|pwa/|quelle/|apple-tv/|content/quran-athar/de/|data/hadith-library/|data/quran-search-index\.json$|cloudflare/site-router\.js$|service-worker\.js$|manifest\.json$|assets/|voice-studio/|data/pronunciation/|data/frauen-.*\.json$|q/|quellen/|links/|download/|data/scholar-index-meta\.json$|data/scholar-history-curated\.json$|wrangler\.toml$|_headers$|_redirects$|test/index\.html$|test/version\.json$|test/assets/|test/service-worker\.js$|test/manifest\.json$|\.assetsignore$|package\.json$|scripts/cf-pages-build\.js$|scripts/sync-quellen-registry\.cjs$|scripts/sync-app-build-ids\.js$|scripts/verify-live-deploy\.js$|scripts/public-website-isolation-guard\.js$|scripts/purge-cloudflare-cache\.js$|scripts/kids-prophet-release-guard\.js$|\.github/workflows/cloudflare-pages-deploy\.yml$)'; then
               echo "::error::Dieser Produktionslauf ist überholt. Ein neuerer relevanter main-Stand übernimmt."
               exit 1
             fi
