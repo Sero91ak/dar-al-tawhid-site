@@ -370,6 +370,10 @@ function renderActive(){
   $("#syLife").textContent=active.lifeContext||active.summary||"";
   $("#syWitness").textContent=active.storyHighlight||active.witnessContext||active.summary||"";
   $("#syRead").innerHTML=activeText.split(/\n{2,}/).map(p=>'<p>'+esc(p)+'</p>').join("");
+  window.DARKidsItemDownloads?.storyDetail($("#syModal .ms-detail-modes"),{
+    category:"sahabiyyat",item:active,sourceUrl:"/kids/data/sahabiyyat-stories.json?v=1137",
+    artwork:art(active,"cover"),hero:art(active,"hero"),audioMeta:audioMeta(active)
+  });
   $("#sySources").innerHTML=sourceHtml(active);
   renderQuestion();applyMode();resetAudio();
 }
