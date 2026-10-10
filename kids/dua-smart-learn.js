@@ -108,51 +108,73 @@
     paintControls();setStatus(label,"");
     var audioGate={sources:[],raf:0};
     cleanPlayback=audioGate;
-    Promise.resolve(ctx.resume()).then(function(){
-      return Promise.all(urls.map(cleanDecode));
-    }).then(function(rows){
-      if(token!==playToken||cleanPlayback!==audioGate||currentDua!==dua)return;
-      var starts=[],elapsed=0,first=ctx.currentTime+.065;
-      rows.forEach(function(item,index){
-        var duration=Math.max(.06,item.end-item.start),when=first+elapsed;
-        starts.push(when);
-        var source=ctx.createBufferSource();
-        source.buffer=item.buffer;
-        var gain=ctx.createGain();
-        source.connect(gain);gain.connect(ctx.destination);
-        var fade=Math.min(.032,duration*.16);
-        gain.gain.setValueAtTime(0,when);
-        gain.gain.linearRampToValueAtTime(1,when+fade);
-        gain.gain.setValueAtTime(1,when+duration-fade);
-        gain.gain.linearRampToValueAtTime(0,when+duration);
-        source.start(when,item.start,duration);
-        source.stop(when+duration+.001);
-        audioGate.sources.push(source);
-        elapsed+=duration+(index===rows.length-1?0:CLEAN_GAP);
+    // Decode five neighbouring words at a time instead of downloading all
+    // 20–37 clips simultaneously. This keeps long Duʿāʾ lessons responsive on
+    // memory-constrained iPhones and starts the first words much sooner.
+    var starts=[],nextWhen=0,scheduledEnd=0,schedulingDone=false;
+    var BATCH_SIZE=5;
+    function stillCurrent(){
+      return token===playToken&&cleanPlayback===audioGate&&currentDua===dua;
+    }
+    function scheduleBatch(offset){
+      if(!stillCurrent())return Promise.resolve();
+      return Promise.all(urls.slice(offset,offset+BATCH_SIZE).map(cleanDecode)).then(function(rows){
+        if(!stillCurrent())return;
+        if(!nextWhen)nextWhen=ctx.currentTime+.065;
+        // If decoding took longer than playback, avoid scheduling into
+        // the past; a short gap is safer than a clipped Arabic consonant.
+        nextWhen=Math.max(nextWhen,ctx.currentTime+.055);
+        rows.forEach(function(item,index){
+          var absoluteIndex=offset+index;
+          var duration=Math.max(.06,item.end-item.start),when=nextWhen;
+          starts[absoluteIndex]=when;
+          var source=ctx.createBufferSource();
+          source.buffer=item.buffer;
+          var gain=ctx.createGain();
+          source.connect(gain);gain.connect(ctx.destination);
+          var fade=Math.min(.032,duration*.16);
+          gain.gain.setValueAtTime(0,when);
+          gain.gain.linearRampToValueAtTime(1,when+fade);
+          gain.gain.setValueAtTime(1,when+duration-fade);
+          gain.gain.linearRampToValueAtTime(0,when+duration);
+          source.start(when,item.start,duration);
+          source.stop(when+duration+.001);
+          audioGate.sources.push(source);
+          nextWhen=when+duration+(absoluteIndex===urls.length-1?0:CLEAN_GAP);
+        });
+        scheduledEnd=nextWhen;
+        if(offset+rows.length<urls.length)return scheduleBatch(offset+rows.length);
+        schedulingDone=true;
       });
-      function updateFocus(){
-        if(token!==playToken||cleanPlayback!==audioGate)return;
-        var now=ctx.currentTime,at=0;
-        for(var i=1;i<starts.length;i++){if(now>=starts[i])at=i;else break}
-        if(now>=starts[0]&&segs[at]&&currentIndex!==segs[at].index){
-          currentIndex=segs[at].index;
-          paintSelection();saveProgress();queueFocusedWord();
-        }
-        if(now>=first+elapsed+.08){
-          cleanPlayback=null;playing=false;mode="";paintControls();
-          setStatus(whichMode==="follow"?"Du hast die ganze Duʿāʾ gehört.":"Fertig.","good");
-          return;
-        }
-        audioGate.raf=requestAnimationFrame(updateFocus);
+    }
+    function updateFocus(){
+      if(!stillCurrent())return;
+      var now=ctx.currentTime,at=0;
+      for(var i=1;i<starts.length;i++){if(now>=starts[i])at=i;else break}
+      if(starts.length&&now>=starts[0]&&segs[at]&&currentIndex!==segs[at].index){
+        currentIndex=segs[at].index;
+        paintSelection();saveProgress();queueFocusedWord();
+      }
+      if(schedulingDone&&now>=scheduledEnd+.08){
+        cleanPlayback=null;playing=false;mode="";paintControls();
+        setStatus(whichMode==="follow"?"Du hast die ganze Duʿāʾ gehört.":"Fertig.","good");
+        return;
       }
       audioGate.raf=requestAnimationFrame(updateFocus);
+    }
+    Promise.resolve(ctx.resume()).then(function(){
+      if(!stillCurrent())return;
+      audioGate.raf=requestAnimationFrame(updateFocus);
+      return scheduleBatch(0);
     }).catch(function(){
-      if(token!==playToken||cleanPlayback!==audioGate)return;
+      if(!stillCurrent())return;
+      var noWordsStarted=starts.length===0;
       cleanStop();
-      // If decoding is unsupported for a particular iPhone, keep approved HTMLAudio fallback.
+      // Only restart as legacy playback if decoding failed BEFORE the first
+      // audible word. Never unexpectedly repeat a partly spoken Duʿāʾ.
       playing=false;mode="";paintControls();
-      if(typeof onFailure==="function")onFailure();
-      else setStatus("Diese Aufnahme ist derzeit nicht verfügbar.","bad");
+      if(noWordsStarted&&typeof onFailure==="function")onFailure();
+      else setStatus("Diese Wortaufnahme ist gerade nicht verfügbar.","bad");
     });
     return true;
   }
