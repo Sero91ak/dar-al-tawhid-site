@@ -59,7 +59,8 @@ function render(items,api){
  state.api=api||{};
  var savedGroup=state.group;
  if(!categories.some(function(c){return c[0]===savedGroup}))state.group=categories[0][0];
- return '<section class="dm15-shell" id="darMoreFinalV15" aria-label="Mehr">'+
+ requestAnimationFrame(draw);
+ return '<section class="dm15-shell" id="darMoreFinalV15" data-density="'+state.density+'" aria-label="Mehr">'+
  '<header class="dm15-head"><div class="dm15-copy"><div class="dm15-eyebrow">MEHR</div><h1>Mehr</h1><p>Funktionen geordnet nach Lernen, Alltag, Werkzeugen und Einstellungen</p></div>'+
  '<div class="dm15-actions">'+
  '<button type="button" id="dm15SearchButton" class="dm15-circle" aria-label="Funktion suchen" aria-controls="dm15SearchPanel" aria-expanded="false">'+searchSvg+'</button>'+
