@@ -194,12 +194,33 @@
   // allgemeiner Pack < Quiz < Duʿāʾ. So überschreibt nie wieder ein alter
   // generischer Clip einen frisch gerenderten Bereichs-Clip.
   // Akademie-Minipack wird vor den großen Archiven unabhängig freigegeben.
-  var academyReady=loadManifest("/kids/data/academy-audio.json?v=1",5,function(data){
+  var academyPublic=loadManifest("/kids/data/academy-audio.json?v=1",5,function(data){
     return !!(data&&data.id==="KIDS_ACADEMY_SERHAT_MASTER_V1"&&
       data.voiceProfileId==="serhat-owner-voice-2026"&&
       data.speaker==="Serhat Abu Malik"&&
       data.entries&&Object.keys(data.entries).every(function(k){return isMasterEntry(data.entries[k])}));
   });
+  // Explicit, temporary adult listening preview: NOT a public Academy audio release.
+  // Exact Serhat V4 kids_story audio can be tried only with ?voicePilot=1.
+  var pilotMode=false;
+  try{
+    pilotMode=location.pathname.indexOf("/kids/akademie/")!==-1&&
+      new URLSearchParams(location.search).get("voicePilot")==="1";
+  }catch(e){}
+  var pilotReady=pilotMode?loadManifest(
+    "/kids/data/academy-audio-staging-v9.json?v=pilot-v12-20261010",6,function(data){
+      return !!(data&&data.stagingOnly===true&&data.pilotFirstLesson===true&&
+        data.modelId==="eleven_v4"&&data.voiceSettingsProfile==="kids_story"&&
+        data.voiceProfileId==="serhat-owner-voice-2026"&&
+        data.entries&&Object.keys(data.entries).length<=4&&
+        Object.keys(data.entries).every(function(key){
+          var entry=data.entries[key];
+          return isMasterEntry(entry)&&entry.voiceId==="DkU7j9uO4ZEtLD2iRZSH"&&
+            entry.modelId==="eleven_v4"&&entry.voiceSettingsProfile==="kids_story"&&
+            entry.approvedForPlayback===false&&entry.qaStatus==="technical-passed-awaiting-human-review";
+        }));
+    }):Promise.resolve(null);
+  var academyReady=Promise.allSettled([academyPublic,pilotReady]);
   var loadCompletion=Promise.allSettled([
     academyReady,
     loadManifest("/kids/data/owner-voice-audio.json?v=2",1),
