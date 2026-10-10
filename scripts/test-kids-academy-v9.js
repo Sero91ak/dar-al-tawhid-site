@@ -83,7 +83,7 @@ for(const [index,html] of htmls.entries()){
  // The same script parsing safeguard applies to both without coupling their releases.
  if(index===0){
   assert.ok(html.includes('curriculum-v2.js?v=20261010-09'));
-  assert.ok(html.includes('data-preview-release="V11.0-20261010"'));
+  assert.ok(html.includes('data-preview-release="V12.0-voicepilot-20261010"'));
   assert.ok(html.includes('id="subjectReviewGrid"'));
   assert.ok(html.includes('function dailyLesson()'));
   assert.ok(html.includes('persist("help",true)'));
@@ -101,6 +101,20 @@ const main=htmls[0];
 assert.ok(main.includes('school-progress-v11.js?v=20261010-11'));
 assert.ok(main.includes('function academySchoolState(){'));
 assert.ok(main.includes('academySchoolState().access(chosen)'));
+const pilot=JSON.parse(read("kids/data/academy-v12-audio-pilot-request.json"));
+assert.equal(pilot.modelId,"eleven_v4");
+assert.equal(pilot.voiceSettingsProfile,"kids_story");
+assert.equal(pilot.maxClips,4);
+assert.equal(pilot.maxPreparedCharacters,420);
+assert.equal(pilot.stagingOnly,true);
+assert.equal(pilot.exactPhrases.length,4);
+const academyHtml=read("kids/akademie/index.html");
+assert.ok(academyHtml.includes("isAcademyStoryMaster"));
+assert.ok(academyHtml.includes('entry.modelId==="eleven_v4"'));
+assert.ok(academyHtml.includes('setTimeout(resolve,9000)'));
+const ownerScript=read("kids/owner-voice.js");
+assert.ok(ownerScript.includes('get("voicePilot")==="1"'));
+assert.ok(ownerScript.includes('entry.approvedForPlayback===false'));
 const annual=JSON.parse(read("kids/data/academy-year-52weeks-v1.json"));
 assert.equal(annual.weeks.length,52);
 assert.equal(annual.goals.newLessonSlots,208);
