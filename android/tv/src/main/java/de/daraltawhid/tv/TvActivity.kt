@@ -4,6 +4,7 @@ import android.app.Activity
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -33,6 +34,90 @@ class TvActivity : Activity() {
     private val base = "https://dar-al-tawhid.de/apple-tv/"
     private lateinit var body: LinearLayout
     private lateinit var footer: TextView
+    // One native player at a time; never autoplay when loading or changing verses.
+    private var quranPlayer: MediaPlayer? = null
+    private var audioGeneration = 0
+
+    private fun stopQuranAudio() {
+        audioGeneration += 1
+        val previous = quranPlayer
+        quranPlayer = null
+        try { previous?.release() } catch (_: Exception) { }
+    }
+
+    private fun isValidAyahReference(reference: String): Boolean {
+        val parts = reference.split(':')
+        val surah = parts.getOrNull(0)?.toIntOrNull()
+        val ayah = parts.getOrNull(1)?.toIntOrNull()
+        return parts.size == 2 && surah != null && ayah != null &&
+            surah in 1..114 && ayah in 1..286
+    }
+
+    private fun playQuranVerse(reference: String, status: TextView) {
+        if (!isValidAyahReference(reference)) {
+            status.text = "Ungültige Versreferenz – keine Wiedergabe."
+            return
+        }
+        stopQuranAudio()
+        val generation = audioGeneration
+        status.text = "Rezitation für $reference wird geladen …"
+        // Resolve the CDN file URL from the quran-ayah source instead of
+        // assuming the text endpoint contains playable audio bytes.
+        fetchJson("https://api.alquran.cloud/v1/ayah/$reference/ar.alafasy") { response ->
+            if (generation != audioGeneration) return@fetchJson
+            val audioUrl = response?.optJSONObject("data")?.optString("audio").orEmpty()
+            if (!audioUrl.startsWith("https://")) {
+                status.text = "Rezitation nicht erreichbar – bitte Verbindung prüfen."
+                return@fetchJson
+            }
+            try {
+                val player = MediaPlayer()
+                quranPlayer = player
+                player.setOnPreparedListener { prepared ->
+                    if (generation == audioGeneration && quranPlayer === prepared) {
+                        prepared.start()
+                        status.text = "▶ Qurʾān $reference · Rezitation läuft"
+                    }
+                }
+                player.setOnCompletionListener {
+                    if (generation == audioGeneration) {
+                        status.text = "Rezitation beendet"
+                        stopQuranAudio()
+                    }
+                }
+                player.setOnErrorListener { _, _, _ ->
+                    if (generation == audioGeneration) {
+                        status.text = "Wiedergabefehler – Audioquelle prüfen."
+                        stopQuranAudio()
+                    }
+                    true
+                }
+                player.setDataSource(audioUrl)
+                player.prepareAsync()
+            } catch (_: Exception) {
+                status.text = "Wiedergabe konnte nicht gestartet werden."
+                stopQuranAudio()
+            }
+        }
+    }
+
+    private fun addQuranAudioControls(reference: String, target: LinearLayout) {
+        val row = LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL
+            setPadding(0, dp(6), 0, dp(3))
+        }
+        val status = label("Qurʾān $reference · Audio bereit", 14f, muted, false)
+        row.addView(navButton("▶ Rezitation abspielen") {
+            playQuranVerse(reference, status)
+        }, LinearLayout.LayoutParams(0, dp(57), 1f).apply { marginEnd = dp(9) })
+        row.addView(navButton("■ Stopp") {
+            stopQuranAudio()
+            status.text = "Wiedergabe gestoppt"
+        }, LinearLayout.LayoutParams(0, dp(57), 1f))
+        target.addView(row)
+        target.addView(status)
+    }
+
     private var activeTab = "home"
     private var lastContentRefreshAt = 0L
     private val contentRefreshIntervalMs = 6L * 60L * 60L * 1000L
@@ -70,6 +155,7 @@ class TvActivity : Activity() {
     }
 
     override fun onPause() {
+        stopQuranAudio()
         contentRefreshHandler.removeCallbacks(contentRefreshTask)
         super.onPause()
     }
@@ -149,6 +235,7 @@ class TvActivity : Activity() {
     }
 
     private fun show(tab: String) {
+        stopQuranAudio()
         renderGeneration += 1
         lastContentRefreshAt = System.currentTimeMillis()
         activeTab = tab
@@ -252,6 +339,12 @@ class TvActivity : Activity() {
         val germanVerse = label("Deutsche Übersetzung wird geladen …", 17f, cream, false)
         body.addView(arabicVerse)
         body.addView(germanVerse)
+        // Remote ayah selection updates the reference, but not an active player.
+        // A dedicated row is only added once a validated daily entry is known.
+        val homeAudioContainer = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+        }
+        body.addView(homeAudioContainer)
         val tadabburTitle = label("Tadabbur", 23f, gold, true)
         body.addView(tadabburTitle)
         val tadabburHome = label("Geprüfte Aussage wird geladen …", 17f, cream, false)
@@ -266,6 +359,8 @@ class TvActivity : Activity() {
             val reference = if (parts.size == 2 && surah != null && ayah != null &&
                 surah in 1..114 && ayah in 1..286) "$surah:$ayah" else "2:183"
             val isExact = entry != null && input == reference
+            homeAudioContainer.removeAllViews()
+            addQuranAudioControls(reference, homeAudioContainer)
             tadabburTitle.text = "Tadabbur zu $reference"
             tadabburHome.text = if (isExact && !entry!!.optString("text").isNullOrBlank()) {
                 entry.optString("text") + "\n" +
@@ -432,7 +527,32 @@ class TvActivity : Activity() {
                     body.addView(label("Dieser Datensatz ist derzeit nicht verfügbar.", 18f, muted, false))
                     return@fetchJson
                 }
-                body.addView(label("Zu Qurʾān " + item.optString("reference"), 23f, gold, true))
+                val reference = item.optString("reference")
+                body.addView(label("Zu Qurʾān " + reference, 23f, gold, true))
+                if (isValidAyahReference(reference)) {
+                    val arabic = label("Qurʾān-Vers wird geladen …", 21f, cream, false).apply {
+                        gravity = Gravity.CENTER
+                        textDirection = View.TEXT_DIRECTION_RTL
+                        textAlignment = View.TEXT_ALIGNMENT_CENTER
+                    }
+                    val german = label("Deutsche Übersetzung wird geladen …", 18f, cream, false)
+                    body.addView(arabic)
+                    body.addView(german)
+                    fetchJson("https://api.alquran.cloud/v1/ayah/$reference/quran-uthmani") { verse ->
+                        if (generation == renderGeneration && activeTab == "tadabbur") {
+                            arabic.text = verse?.optJSONObject("data")?.optString("text")
+                                ?.takeIf { it.isNotBlank() } ?: "Arabischer Text nicht erreichbar."
+                        }
+                    }
+                    fetchJson("https://api.alquran.cloud/v1/ayah/$reference/de.bubenheim") { verse ->
+                        if (generation == renderGeneration && activeTab == "tadabbur") {
+                            german.text = verse?.optJSONObject("data")?.optString("text")
+                                ?.takeIf { it.isNotBlank() } ?: "Deutsche Übersetzung nicht erreichbar."
+                        }
+                    }
+                    addQuranAudioControls(reference, body)
+                }
+                body.addView(label("Tadabbur · geprüfte Überlieferung", 22f, gold, true))
                 body.addView(label(item.optString("text"), 27f, cream, false))
                 body.addView(label(item.optString("narrator") + " · " + item.optString("generation"), 18f, muted, false))
                 body.addView(label(item.optString("source") + " · " + item.optString("grading"), 16f, gold, false))
