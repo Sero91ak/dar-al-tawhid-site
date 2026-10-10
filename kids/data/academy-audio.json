@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 2,
+  "id": "KIDS_ACADEMY_SERHAT_MASTER_V1",
+  "voiceProfileId": "serhat-owner-voice-2026",
+  "speaker": "Serhat Abu Malik",
+  "policy": "Exact-match only. Never map a different recording onto a lesson phrase. No audio synthesis is triggered by this manifest.",
+  "manualReviewNote": "Only existing verified owner-voice clips are reused; new academy recordings are not produced here.",
+  "entries": {
+    "Allah ist Einer und hat keinen Teilhaber.": {
+      "url": "/kids/assets/kids-quiz-audio/e855b456578b8c2f.m4a?v=kids-quiz-owner-voice-hybrid-v1-20261008-172455",
+      "sha256": "55a95b586e1bb85087f9adf220fdc92890fde4b909a19560692c9ecc0a162e8f",
+      "durationSeconds": 1.904,
+      "modelId": "eleven_flash_v2_5",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceType": "owner-voice-generated",
+      "sourceSpeaker": "Serhat Abu Malik",
+      "sourceManifest": "KIDS_QUIZ_OWNER_VOICE_HYBRID_V1",
+      "sourceManifestBuild": "kids-quiz-owner-voice-hybrid-v1-20261008-181845"
+    }
+  }
+}
