@@ -53,6 +53,17 @@ jobs:
           grep -Fq 'QURAN_PLAYER_V3_FOCUS_SHELL' .quran-preview-assets/tawhid-kids-quran-player-v3.html
           for file in .quran-preview-assets/quran-player-cinema-v8.css .quran-preview-assets/player-next-v7.css .quran-preview-assets/player-capsule-v6.css .quran-preview-assets/player-refined-v5.css .quran-preview-assets/player-premium-v4.css .quran-preview-assets/visuals/{dar-quran-hero.webp,dar-quran-icon.png,kids-quran-banner.png,kids-quran-3d.png}; do test -s "$file"; done
           node --check cloudflare/quran-player-preview-worker.js
+          node - <<'NODE'
+          const fs=require('node:fs'),vm=require('node:vm');
+          for(const name of ['dar-al-tawhid-quran-player-v8.html','tawhid-kids-quran-player-v8.html']){
+            const html=fs.readFileSync('.quran-preview-assets/'+name,'utf8');
+            const match=/<script>([\s\S]*?)<\/script>/.exec(html);
+            if(!match)throw Error('V8 inline script missing '+name);
+            new vm.Script(match[1],{filename:name});
+            if(!html.includes('requestCanonicalTadabbur')||!html.includes('LIST.splice(0,LIST.length,...names)'))throw Error('V8 functions missing '+name);
+            console.log('QURAN_V8_SCRIPT_PARSE_OK '+name);
+          }
+          NODE
       - name: Deploy only dedicated preview worker (no production routes)
         uses: cloudflare/wrangler-action@v3
         with:
