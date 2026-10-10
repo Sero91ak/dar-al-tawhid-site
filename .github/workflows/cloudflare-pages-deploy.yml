@@ -54,6 +54,7 @@ on:
       - scripts/sync-app-build-ids.js
       - scripts/verify-live-deploy.js
       - scripts/public-website-isolation-guard.js
+      - scripts/production-lane-isolation-guard.js
       - scripts/purge-cloudflare-cache.js
       - scripts/kids-prophet-release-guard.js
       - .github/workflows/cloudflare-pages-deploy.yml
@@ -437,6 +438,7 @@ jobs:
           node scripts/push-lanes-guard.js
           node scripts/version-update-guard.js
           node scripts/public-website-isolation-guard.js
+          node scripts/production-lane-isolation-guard.js
           node scripts/app-stability-guard.js
 
       - name: Veralteten Produktionslauf vor Publish blockieren
