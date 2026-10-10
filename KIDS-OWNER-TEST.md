@@ -22,6 +22,7 @@ Die Akademie kann sämtliche in `DARKidsAcademySchool` registrierten Lektionen �
 Im Live-Modus gelten unverändert die täglichen Freischaltungen.
 
 **Einschränkung vor Phase 2:** Schreibende Test-APIs (z.B. separate Sprachbewertung oder Push-Test) sind absichtlich gesperrt. Sie müssen einzeln an isolierte Test-Backends gebunden werden, nie an Live.
+Die öffentliche Kinder-Hülle enthält eine Supabase-RPC-Verbindung zum produktiven Profilbackend. Der Owner-Test-Worker ersetzt dieses RPC-Ziel ausschließlich in ausgeliefertem Test-HTML durch einen blockierten Testpfad, entfernt dort den produktiven Publishable-Key und erzwingt per CSP `connect-src 'self'`. Damit sind echte Registrierung/Synchronisation und vollständige Backend-Funktionstests **noch nicht möglich**. Vorher ist ein getrenntes Supabase-Testprojekt oder eine isolierte Supabase-Branch mit eigener Auth/RPC-Konfiguration nötig. In der verbundenen Supabase-Organisation war zum Prüfzeitpunkt nur das Live-Projekt sichtbar. Keine Testdaten in Live anlegen.
 
 ## Vorbereitung der ersten Testbereitstellung (manuell, NICHT LIVE)
 1. Auf Mac den GitHub-Zweig `feature/kids-owner-studio-20261010` auschecken.
