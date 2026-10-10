@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1318";
+const CACHE_NAME="dar-al-tawhid-kids-v1319";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 // KIDS_V202_DOWNLOAD_TABS_RELEASE_TRIGGER_20261010: detail-only offline controls; manifest V202 synchronized.
