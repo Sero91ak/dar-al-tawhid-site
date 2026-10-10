@@ -130,6 +130,8 @@ jobs:
           ffmpeg -version | head -n 1
       - name: Diagnose 10 existing V4 Fuṣḥā word clips (non-destructive)
         run: python3 scripts/kids-dua-audio-acoustic-audit.py
+      - name: Scan all 696 V4 word clips for duration and quiet padding
+        run: python3 scripts/kids-dua-audio-acoustic-audit.py --all
       - name: Check all 120 Du'a runtime key matches
         run: |
           node <<'NODE'
