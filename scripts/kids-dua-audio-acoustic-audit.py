@@ -58,8 +58,9 @@ def inspect(word: str, entry: dict) -> dict:
     if not (0.1 <= duration <= 15):
         raise ValueError(f"Implausible duration for {word}: {duration:.2f} s")
     declared = float(entry.get("durationSeconds") or 0)
-    if declared and abs(duration - declared) > 0.3:
-        raise ValueError(f"Manifest duration mismatch for {word}: {duration:.2f} vs {declared:.2f}")
+    # An incorrect manifest value is an important QA finding, but stopping
+    # here would conceal the remaining affected samples.
+    declared_mismatch = bool(declared and abs(duration - declared) > 0.3)
 
     rms = []
     for i in range(0, len(pcm), FRAME_SIZE):
@@ -76,6 +77,8 @@ def inspect(word: str, entry: dict) -> dict:
     # Large trailing/leading padding and very long short-word clips merit review,
     # but breath noise may overlap speech and cannot be classified by RMS alone.
     flags = []
+    if declared_mismatch:
+        flags.append("manifest-duration-mismatch")
     if leading >= 0.40:
         flags.append("long-leading-padding")
     if trailing >= 0.50:
@@ -85,6 +88,7 @@ def inspect(word: str, entry: dict) -> dict:
     return {
         "word": word,
         "seconds": round(duration, 3),
+        "manifestSeconds": round(declared, 3),
         "leadingQuietSeconds": round(leading, 3),
         "trailingQuietSeconds": round(trailing, 3),
         "reviewFlags": flags,
