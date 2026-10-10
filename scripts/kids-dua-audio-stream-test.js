@@ -9,7 +9,7 @@ const source=fs.readFileSync("kids/dua-smart-learn.js","utf8");
 const start=source.indexOf("  function playCleanSequence(");
 const end=source.indexOf("  var layoutFrame=",start);
 assert(start>=0&&end>start,"Cannot isolate production word scheduler");
-const fnText=source.slice(start,end)+"\nplayCleanSequence;";
+const fnText=source.slice(start,end).replace("    }).catch(function(){\n      if(!stillCurrent())return;", "    }).catch(function(error){\n      if(error)console.error(error.stack||String(error));\n      if(!stillCurrent())return;")+"\nplayCleanSequence;";
 const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 
 function player(decodeDelayMs){
@@ -52,7 +52,7 @@ function player(decodeDelayMs){
     requestAnimationFrame(){return 1},
     cancelAnimationFrame(){},
     saveProgress(){},paintSelection(){},queueFocusedWord(){},
-    Promise,Array,Math,Number
+    Promise,Array,Math,Number,console
   };
   const run=vm.runInNewContext(fnText,sandbox,{timeout:2000});
   return {run,sandbox,counts};
