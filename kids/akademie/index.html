@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="robots" content="noindex,nofollow"><link rel="manifest" href="/kids/manifest.webmanifest"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="theme-color" content="#071d30">
+<meta name="robots" content="noindex,nofollow"><link rel="manifest" href="/kids/manifest.webmanifest"><link rel="stylesheet" href="/kids/item-offline-v1.css?v=1"><script src="/kids/item-offline-v1.js?v=1"></script><meta name="apple-mobile-web-app-capable" content="yes"><meta name="theme-color" content="#071d30">
 <title>Meine Lernakademie · DĀR AL TAWḤĪD KIDS</title>
 <style>
 :root{color-scheme:dark;--gold:#e6c886;--base:#071d30;--text:#fff4dd;--muted:#c5d7d7;--border:rgba(229,203,149,.26);--accent:#75b7c1}
@@ -4059,6 +4059,10 @@ function openCategory(key){
   card.append(label,meta);
   if(!locked)card.onclick=()=>begin(lessonId);
   (complete?history:grid).appendChild(card);
+  // Separate action: does not open a locked lesson or advance the curriculum.
+  window.DARKidsItemDownloads?.academy(card,{
+    id:lessonId,title:lessonTitle(lessonId),subject:key
+  });
  }
  updateAcademyAppbar();window.scrollTo(0,0);
 }
