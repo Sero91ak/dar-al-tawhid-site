@@ -329,4 +329,44 @@ const query=new URLSearchParams(location.search);const s=Number(query.get('surah
  // No artificial audio-word timing; real Qur'an text/data and existing controls stay untouched.
 })();
 
+
+/* V5_SURA_PAGINATION — no long-scroll list, reachable Sūrahs with search + pages. */
+(function(){
+ const list=document.getElementById('surahList'),panel=document.getElementById('surahs');
+ if(!list||!panel||panel.querySelector('.v5-surah-pager'))return;
+ const input=document.createElement('input');
+ input.className='v5-surah-search';input.type='search';input.autocomplete='off';input.spellcheck=false;
+ input.placeholder='Sūrah oder Nummer suchen';input.setAttribute('aria-label','Sūrah nach Name oder Nummer suchen');
+ const pager=document.createElement('div');pager.className='v5-surah-pager';
+ const prev=document.createElement('button'),next=document.createElement('button'),label=document.createElement('span');
+ prev.type='button';next.type='button';prev.textContent='← Zurück';next.textContent='Weiter →';
+ prev.setAttribute('aria-label','Vorherige Sūren');next.setAttribute('aria-label','Weitere Sūren');
+ label.setAttribute('aria-live','polite');pager.append(prev,label,next);
+ list.before(input);list.after(pager);
+ let page=0,lastActive='',running=false;
+ const normalize=t=>String(t||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+ function limit(){return window.innerHeight<=640?3:window.innerHeight<=740?4:window.innerHeight<=850?5:6}
+ function update(){
+  if(running)return;running=true;
+  const all=Array.from(list.querySelectorAll('[data-surah]'));
+  const query=normalize(input.value.trim());const matches=all.filter(b=>normalize(b.textContent).includes(query));
+  const per=limit(),total=Math.max(1,Math.ceil(matches.length/per));
+  const active=all.find(b=>b.classList.contains('active'))?.getAttribute('data-surah')||'';
+  if(!query&&active&&active!==lastActive){
+   let index=matches.findIndex(b=>b.getAttribute('data-surah')===active);
+   if(index>=0)page=Math.floor(index/per);
+  }
+  lastActive=active;page=Math.max(0,Math.min(page,total-1));
+  const visible=new Set(matches.slice(page*per,(page+1)*per));
+  all.forEach(b=>b.classList.toggle('v5-hidden',!visible.has(b)));
+  label.textContent=matches.length?((page+1)+' / '+total):'Keine Treffer';
+  prev.disabled=page<=0;next.disabled=page>=total-1;running=false;
+ }
+ prev.addEventListener('click',()=>{page--;update()});
+ next.addEventListener('click',()=>{page++;update()});
+ input.addEventListener('input',()=>{page=0;lastActive='';update()});
+ new MutationObserver(()=>update()).observe(list,{childList:true});
+ window.addEventListener('resize',update,{passive:true});
+ update();
+})();
 </script></body></html>
