@@ -249,3 +249,10 @@ body.kids.player-v3 .hero-object,body.player-v3 .hero-object{user-select:none}
  body.player-v3 .verse-focus{padding:7px}
 }
 @media(prefers-reduced-motion:reduce){body.player-v3 .play,body.player-v3 .kid-btn{transition:none!important}}
+
+/* Accessibility contrast lock for existing adult-specific V3 text selectors. */
+body.adult.player-v3 .verse .verse-focus .quran-text{color:#153a45;text-shadow:0 1px rgba(255,255,255,.75)}
+body.adult.player-v3 .verse .verse-focus .translation{color:#344950;text-shadow:none}
+body.adult.player-v3 .verse .verse-focus .latin{color:#4b6172}
+body.adult.player-v3 .verse .verse-focus .tip{color:#304751}
+body.adult.player-v3 .verse .verse-focus .tip strong{color:#775026}
