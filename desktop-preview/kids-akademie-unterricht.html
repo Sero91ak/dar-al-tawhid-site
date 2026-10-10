@@ -2081,8 +2081,230 @@ body .subject-detail .subject-topic span{margin-top:4px!important}
 }
 
 
+
+/* V7.4 · Eingebettete Hero-Bereiche – kein isolierter Bildkasten */
+body .academy-header.kids-detail-appbar{
+  border-radius:0!important;
+  margin-bottom:0!important;
+  box-shadow:none!important;
+  border-bottom:1px solid rgba(239,211,145,.14)!important;
+}
+body .academy-home{margin-top:0!important}
+body .academy-home > .overview-hero{
+  display:flex!important;
+  grid-column:1/-1!important;
+  position:relative!important;
+  isolation:isolate!important;
+  box-sizing:border-box!important;
+  width:100vw!important;
+  max-width:none!important;
+  min-height:0!important;
+  height:clamp(264px,29vw,332px)!important;
+  max-height:none!important;
+  left:50%!important;
+  transform:translateX(-50%)!important;
+  margin:0 0 8px!important;
+  padding:clamp(18px,3vw,32px) max(22px,calc((100vw - 1160px)/2 + 28px))!important;
+  border:0!important;
+  outline:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  overflow:hidden!important;
+  background:#113a43!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+}
+body[data-profile="girl"] .academy-home > .overview-hero{
+  border:0!important;border-radius:0!important;box-shadow:none!important;
+  background:#41304b!important;
+}
+/* Complete original photos, without profile-coloured full-surface wash. */
+body .academy-home > .overview-hero > #academyHeroImage,
+body .academy-home > .overview-hero > #academyHeroImage.is-ready{
+  position:absolute!important;inset:0!important;z-index:0!important;
+  width:100%!important;height:100%!important;max-width:none!important;
+  opacity:1!important;filter:none!important;
+  object-fit:cover!important;object-position:55% center!important;
+}
+/* Small local readability gradient only under the headline. */
+body .academy-home > .overview-hero::after{
+  content:""!important;position:absolute!important;display:block!important;
+  inset:0 auto 0 0!important;width:min(72%,900px)!important;height:100%!important;
+  z-index:1!important;pointer-events:none!important;
+  background:linear-gradient(90deg,rgba(5,26,36,.74) 0%,rgba(5,26,36,.56) 37%,rgba(5,26,36,.16) 72%,transparent 100%)!important;
+  opacity:1!important;filter:none!important;backdrop-filter:none!important;
+}
+body[data-profile="girl"] .academy-home > .overview-hero::after{
+  width:min(72%,900px)!important;
+  background:linear-gradient(90deg,rgba(40,23,49,.72) 0%,rgba(40,23,49,.54) 37%,rgba(40,23,49,.16) 72%,transparent 100%)!important;
+}
+body .academy-home > .overview-hero::before{
+  content:""!important;display:block!important;
+  position:absolute!important;inset:auto 0 0!important;
+  width:100%!important;height:36px!important;z-index:1!important;
+  border:0!important;border-radius:0!important;
+  background:linear-gradient(to bottom,transparent,rgba(7,29,48,.34))!important;
+  pointer-events:none!important;
+}
+body[data-profile="girl"] .academy-home > .overview-hero::before{
+  background:linear-gradient(to bottom,transparent,rgba(33,29,57,.30))!important;
+}
+body .academy-home > .overview-hero .overview-copy,
+body[data-profile="girl"] .academy-home > .overview-hero .overview-copy,
+body[data-profile="boy"] .academy-home > .overview-hero .overview-copy{
+  width:min(62%,720px)!important;max-width:min(62%,720px)!important;
+  min-width:0!important;padding:24px 0 0!important;
+  margin:0!important;align-self:center!important;position:relative!important;z-index:4!important;
+}
+body .academy-home > .overview-hero .overview-copy h1{
+  font-size:clamp(36px,5vw,61px)!important;
+  margin:10px 0 9px!important;
+  line-height:1.02!important;
+}
+body .academy-home > .overview-hero .overview-greeting{
+  max-width:100%!important;margin:8px 0!important;padding:0!important;
+}
+body .academy-home > .overview-hero .greeting-salam{
+  font-size:clamp(16px,1.9vw,21px)!important;line-height:1.3!important;
+}
+body .academy-home > .overview-hero .greeting-followup{
+  font-size:clamp(14px,1.6vw,17px)!important;line-height:1.3!important;
+}
+body .academy-home > .overview-hero .hero-profile-chip{
+  top:12px!important;right:max(17px,calc((100vw - 1160px)/2 + 18px))!important;
+  border-radius:16px!important;z-index:15!important;
+}
+body .academy-home > .overview-hero #academyHeroCharacter{
+  display:none!important;
+}
+/* Every academy subject uses the same integrated top-cover treatment. */
+body .subject-detail{padding-top:0!important}
+body .subject-detail .subject-cover{
+  display:flex!important;
+  position:relative!important;isolation:isolate!important;
+  box-sizing:border-box!important;
+  left:50%!important;
+  transform:translateX(-50%)!important;
+  width:100vw!important;max-width:none!important;
+  height:clamp(225px,25vw,300px)!important;min-height:0!important;max-height:none!important;
+  margin:0!important;
+  padding:clamp(18px,3.2vw,35px) max(22px,calc((100vw - 1100px)/2 + 22px))!important;
+  border:0!important;border-radius:0!important;box-shadow:none!important;
+  background:var(--base)!important;overflow:hidden!important;align-items:center!important;
+  justify-content:flex-start!important;
+}
+body .subject-detail .subject-cover > img,
+body .subject-detail .subject-cover > #subjectImage{
+  display:block!important;position:absolute!important;inset:0!important;z-index:0!important;
+  width:100%!important;height:100%!important;max-height:none!important;
+  max-width:none!important;
+  margin:0!important;flex:none!important;
+  border:0!important;border-radius:0!important;box-shadow:none!important;
+  object-fit:cover!important;object-position:60% center!important;opacity:1!important;filter:none!important;
+}
+body .subject-detail .subject-cover::before{
+  content:""!important;position:absolute!important;display:block!important;
+  inset:0 auto 0 0!important;z-index:1!important;
+  width:min(82%,960px)!important;height:100%!important;
+  background:linear-gradient(90deg,rgba(6,25,36,.84),rgba(6,25,36,.51) 45%,transparent)!important;
+  pointer-events:none!important;
+}
+body[data-profile="girl"] .subject-detail .subject-cover::before{
+  background:linear-gradient(90deg,rgba(42,23,53,.84),rgba(42,23,53,.51) 45%,transparent)!important;
+}
+body .subject-detail .subject-cover::after{
+  content:""!important;position:absolute!important;display:block!important;
+  inset:auto 0 0!important;z-index:1!important;height:36px!important;
+  background:linear-gradient(to bottom,transparent,var(--base))!important;
+  pointer-events:none!important;
+}
+body .subject-detail .subject-cover-copy{
+  position:relative!important;z-index:2!important;
+  width:min(66%,650px)!important;max-width:min(66%,650px)!important;
+  min-width:0!important;margin:0!important;
+  color:#fffaf0!important;flex:0 1 auto!important;
+}
+body .subject-detail .subject-cover-copy h1{
+  color:#fff2cf!important;text-shadow:0 3px 10px rgba(0,0,0,.35)!important;
+  font-size:clamp(35px,4.9vw,53px)!important;margin:8px 0!important;
+}
+body .subject-detail .subject-cover-copy p{
+  color:#fff9f2!important;text-shadow:0 2px 8px rgba(0,0,0,.45)!important;
+  font-size:clamp(16px,2vw,19px)!important;margin:5px 0!important;
+}
+body .subject-detail .subject-cover-copy .subject-kicker,
+body .subject-detail .subject-cover-copy .subject-status{
+  color:#fff4cf!important;text-shadow:0 1px 5px rgba(0,0,0,.28)!important;
+}
+body .subject-detail .subject-next{margin-top:14px!important}
+@media(max-width:700px){
+  body .academy-home > .overview-hero{
+    width:100vw!important;min-width:100vw!important;
+    height:clamp(266px,72vw,311px)!important;min-height:0!important;max-height:none!important;
+    margin:0 0 8px!important;
+    padding:13px 16px 16px!important;
+  }
+  body .academy-home > .overview-hero::after,
+  body[data-profile="girl"] .academy-home > .overview-hero::after{
+    width:91%!important;
+    background:linear-gradient(90deg,rgba(5,23,34,.76),rgba(5,23,34,.43) 55%,transparent)!important;
+  }
+  body[data-profile="girl"] .academy-home > .overview-hero::after{
+    background:linear-gradient(90deg,rgba(42,23,52,.76),rgba(42,23,52,.43) 55%,transparent)!important;
+  }
+  body .academy-home > .overview-hero .overview-copy,
+  body[data-profile="girl"] .academy-home > .overview-hero .overview-copy,
+  body[data-profile="boy"] .academy-home > .overview-hero .overview-copy{
+    width:100%!important;max-width:100%!important;
+    padding-top:39px!important;align-self:center!important;
+  }
+  body .academy-home > .overview-hero .overview-copy .kicker{
+    font-size:10px!important;max-width:70%!important;
+  }
+  body .academy-home > .overview-hero .overview-copy h1,
+  body[data-profile="girl"] .academy-home > .overview-hero .overview-copy h1,
+  body[data-kids-age="4-5"] .academy-home > .overview-hero .overview-copy h1{
+    font-size:clamp(35px,8.9vw,43px)!important;line-height:1.03!important;
+    margin:8px 0 8px!important;
+  }
+  body .academy-home > .overview-hero .greeting-salam{
+    font-size:clamp(14px,3.8vw,18px)!important;line-height:1.28!important;
+  }
+  body .academy-home > .overview-hero .greeting-followup{
+    font-size:clamp(12px,3.4vw,15px)!important;line-height:1.3!important;
+  }
+  body .academy-home > .overview-hero .hero-learning-pill{
+    margin-top:8px!important;font-size:10px!important;padding:5px 8px!important;
+  }
+  body .academy-home > .overview-hero .hero-profile-chip{
+    top:11px!important;right:11px!important;
+  }
+  body .subject-detail .subject-cover{
+    width:100vw!important;min-width:100vw!important;
+    height:clamp(216px,56vw,252px)!important;min-height:0!important;max-height:none!important;
+    padding:14px 17px!important;
+  }
+  body .subject-detail .subject-cover-copy{
+    width:82%!important;max-width:82%!important;
+  }
+  body .subject-detail .subject-cover-copy h1{font-size:clamp(30px,7.7vw,38px)!important}
+  body .subject-detail .subject-cover-copy p{font-size:clamp(14px,3.7vw,16px)!important}
+  body .subject-detail .subject-cover > img{
+    width:100%!important;height:100%!important;max-width:none!important;
+    object-fit:cover!important;
+  }
+}
+@media(max-width:365px){
+  body .academy-home > .overview-hero{height:291px!important}
+  body .academy-home > .overview-hero .overview-copy h1{font-size:34px!important}
+}
+@media (prefers-reduced-motion:reduce){
+  body .academy-home > .overview-hero,
+  body .subject-detail .subject-cover{transition:none!important}
+}
+
 </style></head>
-<body data-profile="boy" data-preview-release="V7.3.2-20261010" data-preview-deploy="v7.3.2-all-subjects-compact"><main class="wrap">
+<body data-profile="boy" data-preview-release="V7.4-20261010" data-preview-deploy="v7.4-integrated-hero-no-card"><main class="wrap">
 
 <header class="academy-header kids-detail-appbar" aria-label="Navigationsleiste Lernakademie">
  <button class="academy-nav-back" id="academyNavBack" type="button" aria-label="Zurück"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/><path d="M9 12h11"/></svg></button>
