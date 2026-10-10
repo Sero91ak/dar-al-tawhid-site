@@ -2,6 +2,22 @@ name: Validate Kids Dua Audio Runtime
 
 on:
   workflow_dispatch:
+  pull_request:
+    paths:
+      - 'kids/dua-smart-learn.js'
+      - 'kids/data/dua-arabic-audio.json'
+      - 'kids/data/dua-arabic-slow-audio.json'
+      - 'kids/data/dua-word-audio.json'
+      - 'kids/data/dua-audio-model-policy.json'
+      - 'kids/index.html'
+      - 'kids/start.html'
+      - 'kids/shell.html'
+      - 'kids/sw.js'
+      - 'scripts/kids-dua-audio-playback-guard.js'
+      - 'scripts/kids-dua-audio-acoustic-audit.py'
+      - 'scripts/kids-dua-audio-stream-test.js'
+      - '.github/workflows/build-kids-quiz-owner-voice.yml'
+      - '.github/workflows/validate-kids-dua-audio.yml'
   push:
     branches: [main]
     paths:
@@ -14,6 +30,7 @@ on:
       - 'kids/data/dua-arabic-audio.json'
       - 'kids/data/dua-arabic-slow-audio.json'
       - 'kids/data/dua-word-audio.json'
+      - 'kids/data/dua-audio-model-policy.json'
       - '.github/workflows/validate-kids-dua-audio.yml'
 
 permissions:
@@ -31,6 +48,21 @@ jobs:
           node --check kids/owner-voice.js
           node --check kids/dua-hub-v1219.js
           node --check kids/sw.js
+      - name: Check voice synthesis Python source before any paid request
+        run: |
+          python3 - <<'PY'
+          import pathlib, re, textwrap
+          text=pathlib.Path(".github/workflows/build-kids-quiz-owner-voice.yml").read_text(encoding="utf-8")
+          blocks=re.findall(r"(?ms)^          python3 - <<'PY'\n(.*?)^          PY\s*$",text)
+          candidates=[textwrap.dedent(part) for part in blocks if "def build_pack" in part]
+          assert len(candidates)==1,"Cannot uniquely extract Kids voice generator for static QA"
+          compile(candidates[0],"<Kids owner-voice generator>","exec")
+          print("VOICE PYTHON SYNTAX PASS (no synthesis, zero credits)")
+          PY
+      - name: Check targeted Du'a Fuṣḥā player regression
+        run: node scripts/kids-dua-audio-playback-guard.js
+      - name: Simulate 37-word V4 streaming and cancellation
+        run: node scripts/kids-dua-audio-stream-test.js
       - name: Check Du'a manifests and sample assets
         run: |
           python3 - <<'PY'
@@ -69,21 +101,40 @@ jobs:
           # dedicated v3 renders with Eleven v4 and Arabic-native delivery.
           expected_revisions={
             "kids/data/dua-arabic-audio.json":"dua-arabic-native-fusha-v3-20261007",
-            "kids/data/dua-arabic-slow-audio.json":"dua-arabic-native-fusha-slow-v3-20261007",
-            "kids/data/dua-word-audio.json":"dua-arabic-native-fusha-word-v4-20261007",
+            "kids/data/dua-arabic-slow-audio.json":(
+              "dua-arabic-native-fusha-slow-v3-20261007",
+              "dua-arabic-native-fusha-slow-v4-natural-20261009"
+            ),
+            "kids/data/dua-word-audio.json":(
+              "dua-arabic-native-fusha-word-v4-20261007",
+              "dua-arabic-native-fusha-word-v5-natural-20261009"
+            ),
           }
           for path,expected_revision in expected_revisions.items():
             data=json.loads((root/path).read_text(encoding="utf-8"))
-            assert data.get("arabicSynthesisRevision")==expected_revision,(path,data.get("arabicSynthesisRevision"),expected_revision)
+            allowed=expected_revision if isinstance(expected_revision,tuple) else (expected_revision,)
+            assert data.get("arabicSynthesisRevision") in allowed,(path,data.get("arabicSynthesisRevision"),allowed)
+            active_revision=data.get("arabicSynthesisRevision")
             assert data.get("pronunciationDictionaryApplied") is False,(path,data.get("pronunciationDictionaryApplied"))
             assert data.get("pronunciationDictionaryId") is None,(path,data.get("pronunciationDictionaryId"))
             assert int(data.get("pronunciationDictionaryRuleCount") or 0)==0,(path,data.get("pronunciationDictionaryRuleCount"))
             for entry in (data.get("entries") or {}).values():
               assert entry.get("pronunciationDictionaryApplied") is False,(path,entry.get("pronunciationDictionaryApplied"))
-              assert entry.get("arabicSynthesisRevision")==expected_revision,(path,entry.get("arabicSynthesisRevision"),expected_revision)
+              assert entry.get("arabicSynthesisRevision")==active_revision,(path,entry.get("arabicSynthesisRevision"),active_revision)
           print("Du'a manifests and audio assets OK")
           PY
 
+      - name: Provide FFmpeg decoder for real M4A acoustic inspection
+        run: |
+          if ! command -v ffmpeg >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq ffmpeg
+          fi
+          ffmpeg -version | head -n 1
+      - name: Diagnose 10 existing V4 Fuṣḥā word clips (non-destructive)
+        run: python3 scripts/kids-dua-audio-acoustic-audit.py
+      - name: Scan all 696 V4 word clips for duration and quiet padding
+        run: python3 scripts/kids-dua-audio-acoustic-audit.py --all
       - name: Check all 120 Du'a runtime key matches
         run: |
           node <<'NODE'
@@ -192,7 +243,10 @@ jobs:
           console.log("KIDS DUA CACHE-BUST OK",version.buildId,swVer,hubJsVer,hubCssVer);
           NODE
 
+      # Real production parity is verified AFTER Cloudflare publishes the release.
+      # A PR always points to a future build and cannot match current live.
       - name: Live delivery smoke test
+        if: github.event_name == 'workflow_dispatch'
         run: |
           set -euo pipefail
           EXPECT_BUILD="$(node -p 'require("./kids/version.json").buildId')"

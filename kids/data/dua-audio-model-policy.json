@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "id": "KIDS_DUA_ARABIC_MODEL_ROUTING_V1",
+  "voiceProfileId": "serhat-owner-voice-2026",
+  "speaker": "Serhat Abu Malik – Master",
+  "language": "ar",
+  "phraseModel": "eleven_v4",
+  "slowPhraseModel": "eleven_v4",
+  "defaultWordModel": "eleven_v4",
+  "comparisonWordModel": "eleven_v3",
+  "allowAutomaticV3Promotion": false,
+  "approvedV3Words": [],
+  "reviewRequirements": [
+    "identical vocalized Arabic",
+    "original approved Serhat owner voice",
+    "no synthetic stage directions",
+    "Arabic phonetic review (harakat, madd, shaddah, ayn, hamza, ha, ha emphatic)",
+    "A/B compare against V4",
+    "no audible gasp, exhale or breath tail",
+    "human signoff before publishing"
+  ],
+  "comparison": {
+    "status": "listener-prefers-v4-audio-still-requires-clip-level-QA",
+    "flowId": "U5BK7MLRAC0OaI3PgskC",
+    "tests": [
+      {
+        "text": "رَبِّ زِدْنِي عِلْمًا",
+        "models": {
+          "eleven_v3": {
+            "durationSeconds": 1.6
+          },
+          "eleven_v4": {
+            "durationSeconds": 1.76
+          }
+        },
+        "purpose": "continuous phrase: diction and natural pace"
+      },
+      {
+        "text": "لَا",
+        "models": {
+          "eleven_v3": {
+            "durationSeconds": 0.4
+          },
+          "eleven_v4": {
+            "durationSeconds": 0.8
+          }
+        },
+        "purpose": "isolated madd vowel and breath/tail, no automatic approval"
+      }
+    ],
+    "durationReviewNote": "Duration alone does not establish correctness. Assess vowel length and breath artifacts by listening to both recordings."
+  },
+  "guardrails": {
+    "maxNewArabicWordClipsPerRun": 8,
+    "maxNewSlowPhrasesPerRun": 3,
+    "explicitBatchOnly": true,
+    "untestedModelMustNotAutoReplaceOldFile": true,
+    "keepLiveUnchanged": true
+  },
+  "note": "V3 is not automatically better or cheaper for short words. A word can use V3 only after a quality-reviewed approvedV3Words entry; otherwise remain V4. No generation is started by this policy file.",
+  "listenerPreference": {
+    "preferredModel": "eleven_v4",
+    "comparedWith": "eleven_v3",
+    "notedAt": "2026-10-09",
+    "decision": "V4 sounds better to the app owner in the recent A/B comparison. Keep V4 as default for Arabic words, slow phrases and whole Dua; V3 samples remain unpublished.",
+    "pronunciationReviewStatus": "not-a-blanket-approval-of-the-696-word-library"
+  }
+}

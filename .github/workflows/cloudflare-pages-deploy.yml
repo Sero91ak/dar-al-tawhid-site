@@ -18,6 +18,11 @@ on:
       - content/updates/daily.json
       - content/posts/**
       - desktop-preview/**
+      # KIDS Duʿāʾ V4 audio release through sole production Worker.
+      - kids/dua-smart-learn.js
+      - kids/data/dua-word-audio.json
+      - kids/sw.js
+      - kids/version.json
       - cloudflare/site-router.js
       - service-worker.js
       - manifest.json
