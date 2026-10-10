@@ -105,3 +105,7 @@ body.kids .v9-progress-options button.active{background:#b4f2df;color:#214965}
  .v9-progress-options button{font-size:10px;min-height:39px}
  .v9-progress-extra .stat b{font-size:21px}
 }
+
+/* Visible saved-state feedback for the header bookmark */
+.head-actions #topBookmark.saved{color:#ffe0a2;background:rgba(234,192,123,.17);border-color:rgba(251,219,161,.5)}
+body.kids .head-actions #topBookmark.saved{color:#b7fff0;background:rgba(143,245,211,.2);border-color:rgba(179,248,226,.55)}
