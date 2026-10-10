@@ -8,6 +8,7 @@ on:
       - 'kids/data/academy-voice-plan-v9.json'
       - 'scripts/test-kids-academy-v9.js'
       - 'scripts/test-kids-academy-school-v11.js'
+      - 'scripts/test-kids-academy-direct-voice-v13.js'
       - '.github/workflows/check-kids-academy-v9.yml'
   push:
     branches: [main]
@@ -17,6 +18,7 @@ on:
       - 'kids/data/academy-voice-plan-v9.json'
       - 'scripts/test-kids-academy-v9.js'
       - 'scripts/test-kids-academy-school-v11.js'
+      - 'scripts/test-kids-academy-direct-voice-v13.js'
 
 permissions:
   contents: read
@@ -32,11 +34,14 @@ jobs:
         run: node scripts/test-kids-academy-v9.js
       - name: School unlock / account-local progress regression
         run: node scripts/test-kids-academy-school-v11.js
+      - name: Verify iOS direct Serhat greeting, QA buttons and V4 source clips
+        run: node scripts/test-kids-academy-direct-voice-v13.js
       - name: JavaScript syntax guard
         run: |
           node --check kids/akademie/curriculum-v1.js
           node --check kids/akademie/curriculum-v2.js
           node --check kids/akademie/school-progress-v11.js
+          node --check kids/akademie/pilot-audio-v13.js
           node --check kids/tools/export-academy-voice-plan.js
       - name: Verify story voice staging without credits
         run: |
