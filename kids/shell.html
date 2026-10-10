@@ -4,8 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0c2636">
+<!-- KIDS_FIRST_PAINT_HERO_V1313: same exact URL as final homepage CSS, requested before styles/scripts -->
+<link rel="preload" as="image" href="/kids/assets/kids-salah-v1272/hero-home.png?v=1274" fetchpriority="high">
 <link rel="stylesheet" href="https://use.typekit.net/jka5jda.css">
 <link rel="manifest" href="/kids/manifest.webmanifest">
+<link rel="stylesheet" href="/kids/offline-library-v1.css?v=1">
 <link rel="apple-touch-icon" sizes="180x180" href="/kids/icons/apple-touch-icon.png?v=logo28">
 <link rel="icon" type="image/png" sizes="32x32" href="/kids/icons/favicon-32.png?v=logo28">
 <link rel="icon" type="image/png" sizes="48x48" href="/kids/icons/favicon-48.png?v=logo28">
@@ -6624,7 +6627,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   // The next navigation uses network-first and receives the latest release.
   if("serviceWorker" in navigator){
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1312",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1313",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     },{once:true});
@@ -11238,6 +11241,8 @@ html.kids-ios-app #kidsLaunch,html.dar-ios-native-app #kidsLaunch{display:none!i
  min-height:505px!important;max-height:540px!important
 }}
 </style>
+<!-- KIDS_OFFLINE_LIBRARY_V1: independent storage controls for the Parents tab -->
+<script defer src="/kids/offline-library-v1.js?v=1"></script>
 <!-- KIDS_SALAH_STAGE_V1261: placed after hero, before continue-listening -->
 <script defer src="/kids/prayer-stage-v1261.js?v=1306" data-kids-salah-stage="1275"></script>
 </html>
