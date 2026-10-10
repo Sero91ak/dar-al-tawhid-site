@@ -11282,6 +11282,22 @@ html[data-kids-age]:has(#view-stories.active) body .bottom-nav .nav-btn[data-tar
   text-align:center!important;
 }
 </style>
+<!-- KIDS_MAIN_TAB_SAFE_TOP_LOCK_V1319: stable iOS status-bar clearance on main tabs -->
+<style id="kids-main-tab-safe-top-v1319">
+/* The shell must not change its top inset when data-view updates asynchronously.
+   Keep the approved initial safe-area clearance for every non-home main tab.
+   :has() follows the actual active view even before data-view is synchronized. */
+html[data-view="stories"] body .app .shell,
+html[data-view="dua"] body .app .shell,
+html[data-view="quran"] body .app .shell,
+html[data-view="parents"] body .app .shell,
+html body .app:has(#view-stories.view.active) .shell,
+html body .app:has(#view-dua.view.active) .shell,
+html body .app:has(#view-quran.view.active) .shell,
+html body .app:has(#view-parents.view.active) .shell{
+  padding-top:calc(var(--safe-top, max(16px, env(safe-area-inset-top, 0px))) + 8px)!important;
+}
+</style>
 <!-- KIDS_OFFLINE_LIBRARY_V1: independent storage controls for the Parents tab -->
 <script defer src="/kids/offline-library-v1.js?v=1"></script>
 <!-- KIDS_SALAH_STAGE_V1261: placed after hero, before continue-listening -->
