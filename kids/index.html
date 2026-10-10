@@ -2846,6 +2846,18 @@ html:not([data-view="today"]) .view.active{
 
 <link rel="stylesheet" href="/kids/profile-stability-v1256.css?v=1258" data-kids-profile-stability="1256">
 <link rel="stylesheet" href="/kids/prayer-stage-v1261.css?v=1304" data-kids-salah-stage="1275">
+<style id="kidsTapFocusSafeV821">
+/* KIDS APP TOUCH FOCUS SAFETY V8.2.1 – no grey Android rectangular tap flash */
+html body :where(a,button,summary,label,[role="button"],[role="tab"],[tabindex],
+ .choice,.quiz-answer,.bottom-nav .nav-btn,.kids-tap-card,.kids-touch-control){
+ -webkit-tap-highlight-color:transparent!important;
+}
+html body :where(a,button,summary,[role="button"],[role="tab"],[tabindex],
+ .choice,.quiz-answer,.bottom-nav .nav-btn,.kids-tap-card,.kids-touch-control):focus:not(:focus-visible){
+ outline:0!important;outline-offset:0!important;
+}
+/* Existing active selection and :focus-visible styles are deliberately preserved. */
+</style>
 </head>
 <body>
 <div id="kidsUpdateLayer" class="kids-update-layer">
