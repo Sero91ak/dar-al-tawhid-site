@@ -3134,6 +3134,18 @@ body[data-profile="girl"] #academySerhatLead:not([hidden]){
 #academySerhatStatus:not([hidden]){display:inline-block;margin:7px 10px;
  font-size:12px;color:var(--kids-ink,#173747);font-weight:690}
 
+
+/* V8.4 – touch focus without the intrusive Android/iOS rectangle. */
+html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button"],[role="tab"],[tabindex],.category-card,.subject-topic,.tracker-item,.choice-button,.choice-listen):is(:focus,:focus-visible){
+ outline:0!important;outline-offset:0!important;-webkit-tap-highlight-color:transparent!important;
+}
+html[data-kids-pointer-input="touch"] body :where(.category-card,.subject-topic,.tracker-item,.choice-button,.choice-listen):focus-visible{
+ box-shadow:none!important;
+}
+html[data-kids-pointer-input="touch"] body #academySubject.subject-detail .subject-topic-grid button.subject-topic:focus-visible{
+ outline:0!important;outline-offset:0!important;box-shadow:none!important;
+}
+
 </style><script data-kids-touch-focus-v83>
 (function(){
   "use strict";
@@ -3473,8 +3485,9 @@ async function beginVoiceRecording(){
 function setAudioFeedback(message){
  const detail=$("#audioDiagnostics");if(detail)detail.textContent=message;
  const failed=/nicht verfügbar|konnte nicht|nicht gestartet|nicht abgespielt/i.test(message);
+ const missing=/noch keine geprüfte Serhat-Masteraufnahme/i.test(message);
  const technical=/Gerätestimme|Masteraufnahme|Serhat-Masteraufnahme|Masterstimme|Für diesen Satz/i.test(message);
- const friendly=failed?"Das Vorlesen klappt gerade nicht. Bitte versuche es erneut.":technical?"Die Erklärung wird vorgelesen. Du kannst in deinem Tempo zuhören.":message;
+ const friendly=missing?"Für diesen Satz gibt es noch keine geprüfte Aufnahme deiner Masterstimme.":failed?"Das Vorlesen klappt gerade nicht. Bitte versuche es erneut.":technical?"Die Erklärung wird vorgelesen. Du kannst in deinem Tempo zuhören.":message;
  const el=$("#audioFeedback");if(el)el.textContent=friendly;
  const welcome=$("#voiceStatus");if(welcome)welcome.textContent=friendly;
 }
@@ -3926,13 +3939,8 @@ function speak(index,custom){
  }
  function deviceRead(t){
   if(!live())return;
-  if(!("speechSynthesis" in window)||typeof SpeechSynthesisUtterance==="undefined"){$("#voiceStatus").textContent="Vorlesen auf diesem Gerät nicht verfügbar.";return}
-  setAudioFeedback("Gerätestimme · Für diesen Satz fehlt noch deine Masteraufnahme.");
-  const u=new SpeechSynthesisUtterance(t);u.lang="de-DE";u.rate=age==="4-5"?.79:age==="9-10"?.93:.86;
-  u.onend=()=>{if(live()){k++;next()}};
-  u.onerror=()=>{if(live()){stopSpeech();setAudioFeedback("Gerätestimme konnte nicht abgespielt werden. Teste die Masterstimme.")}};
-  voice=u;
-  try{speechSynthesis.resume();speechSynthesis.speak(u)}catch(_){stopSpeech();setAudioFeedback("Gerätestimme konnte nicht gestartet werden. Teste die Masterstimme.")}
+  // V8.4: no native device voice masquerading as the authorized master recording.
+  setAudioFeedback("Noch keine geprüfte Serhat-Masteraufnahme für diesen Satz.");
  }
  function next(){
   if(!live())return;
