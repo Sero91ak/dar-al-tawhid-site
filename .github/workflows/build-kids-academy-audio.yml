@@ -1,78 +1,18 @@
-name: Kids Academy Serhat Master Speech
+name: Kids Academy legacy voice generator (disabled for credit safety)
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'kids/tools/build-academy-audio.py'
-      - '.github/workflows/build-kids-academy-audio.yml'
   workflow_dispatch:
 
 permissions:
-  contents: write
-
-concurrency:
-  group: kids-academy-serhat-master
-  cancel-in-progress: false
+  contents: read
 
 jobs:
-  generate:
+  legacy-safety:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
-    env:
-      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+    timeout-minutes: 5
     steps:
-      - name: Checkout main
-        uses: actions/checkout@v4
-        with:
-          ref: main
-
-      - name: Verify authorized voice and valid catalog without spending credits
+      - name: Explain legacy production lock
         run: |
-          set -euo pipefail
-          python3 kids/tools/build-academy-audio.py --dry-run
-          if [ -z "$ELEVENLABS_API_KEY" ]; then
-            echo "::error::ELEVENLABS_API_KEY unavailable – no generated audio is being claimed."
-            exit 1
-          fi
-          command -v ffmpeg
-          command -v ffprobe
-
-      - name: Generate exact Serhat lesson audio – bounded first batch
-        run: |
-          set -euo pipefail
-          python3 kids/tools/build-academy-audio.py
-          python3 - <<'PY'
-          import json, pathlib, subprocess
-          data=json.loads(pathlib.Path("kids/data/academy-audio.json").read_text("utf-8"))
-          assert data["voiceProfileId"]=="serhat-owner-voice-2026"
-          assert data["id"]=="KIDS_ACADEMY_SERHAT_MASTER_V1"
-          assert len(data["entries"])>=28
-          for phrase,entry in data["entries"].items():
-              path=pathlib.Path(entry["url"].lstrip("/"))
-              assert path.is_file() and path.stat().st_size>1800, phrase
-              assert entry["sourceSpeaker"]=="Serhat Abu Malik"
-              assert entry["sourceVoice"]=="authorized-owner-voice"
-          print("Master audio technical checks complete. Pronunciation still needs listening QA.")
-          PY
-
-      - name: Publish versioned manifest and audio clips
-        run: |
-          set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add kids/data/academy-audio.json kids/assets/kids-academy-audio/
-          if git diff --cached --quiet; then
-            echo "All academy master clips already up to date."
-            exit 0
-          fi
-          git commit -m "Kids: publish exact Serhat Academy narration clips [voice-pause]"
-          for attempt in $(seq 1 6); do
-            git pull --rebase origin main
-            if git push origin HEAD:main; then
-              echo "Academy audio committed. CDN deployment can now serve the new manifest."
-              exit 0
-            fi
-            sleep $((attempt * 3))
-          done
-          exit 1
+          echo "Previous Flash v2.5 batch production is deliberately disabled."
+          echo "Reuse Serhat Abu Malik – Master through the owner-approved V4 kids_story profile instead."
+          echo "Use kids/tools/build-academy-v9-staging.py --dry-run to inspect the staged production queue."

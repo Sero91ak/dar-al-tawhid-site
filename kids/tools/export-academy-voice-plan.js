@@ -10,6 +10,10 @@ const fs=require("node:fs");
 const path=require("node:path");
 const vm=require("node:vm");
 const ROOT=path.resolve(__dirname,"../..");
+const POLICY=JSON.parse(fs.readFileSync(path.join(ROOT,"kids/data/academy-voice-policy-v10.json"),"utf8"));
+if(POLICY.production.modelId!=="eleven_v4"||POLICY.production.profile!=="kids_story"||
+   POLICY.voiceIdentity.voiceProfileId!=="serhat-owner-voice-2026")
+ throw new Error("Academy audio model must match owner-approved Kids Story V4");
 const context={window:{}};
 for(const file of ["kids/akademie/curriculum-v1.js","kids/akademie/curriculum-v2.js"]){
  vm.runInNewContext(fs.readFileSync(path.join(ROOT,file),"utf8"),context,{filename:file,timeout:1200});
@@ -23,7 +27,7 @@ function add(s,lessonId,kind,age="all"){
  if(!text)return;
  if(text.length>700)throw Error("Too long voice request "+lessonId);
  const key=text;
- if(!unique.has(key))unique.set(key,{text,lang:"de-DE",voiceProfileId:"serhat-owner-voice-2026",modelId:"eleven_flash_v2_5",priority:3,reviewStatus:"not-generated",contexts:[]});
+ if(!unique.has(key))unique.set(key,{text,lang:"de-DE",voiceProfileId:"serhat-owner-voice-2026",modelId:POLICY.production.modelId,priority:3,reviewStatus:"not-generated",contexts:[]});
  const item=unique.get(key);
  const priority=kind==="narration"||kind==="summary"?1:kind==="question"?2:3;
  item.priority=Math.min(item.priority,priority);
@@ -54,7 +58,7 @@ const output={
  version:"academy-voice-plan-v9-20261010",
  voiceProfileId:"serhat-owner-voice-2026",
  voiceName:"Serhat Abu Malik – Master",
- modelId:"eleven_flash_v2_5",
+ modelId:POLICY.production.modelId,
  purpose:"German exact-match speech recording inventory; no generated audio URLs are claimed.",
  policy:{nativeTtsFallback:false,arabicQuranRecitationIsSeparate:true,reviewRequiredBeforePublicPlayback:true,autoPublishUnreviewed:false},
  lessonCount:lessons.length+1,

@@ -41,6 +41,35 @@ for(const [id,l] of Object.entries(curr)){
 }
 assert.equal(questionCount,264);
 const plan=JSON.parse(read("kids/data/academy-voice-plan-v9.json"));
+const voicePolicy=JSON.parse(read("kids/data/academy-voice-policy-v10.json"));
+assert.equal(voicePolicy.voiceIdentity.voiceId,"DkU7j9uO4ZEtLD2iRZSH");
+assert.equal(voicePolicy.voiceIdentity.voiceProfileId,"serhat-owner-voice-2026");
+assert.equal(voicePolicy.production.profile,"kids_story");
+assert.equal(voicePolicy.production.modelId,"eleven_v4");
+assert.equal(voicePolicy.production.voiceSettings.stability,0.62);
+assert.equal(voicePolicy.production.voiceSettings.similarity_boost,0.88);
+assert.equal(voicePolicy.production.voiceSettings.style,0.16);
+assert.equal(voicePolicy.production.voiceSettings.speed,0.91);
+assert.equal(voicePolicy.production.voiceSettings.use_speaker_boost,true);
+assert.equal(voicePolicy.costControls.maxClipsPerInvocation,4);
+assert.equal(voicePolicy.costControls.generateOnlyOnExplicitManualJob,true);
+assert.equal(voicePolicy.qa.verifiedSimilarityPercent,null);
+assert.ok(voicePolicy.approvedReferenceExamples.length>=3);
+const storyBackend=read("cloudflare/video-studio/voice.js");
+const storyProfile=storyBackend.split('profile === "kids_story"')[1].split('profile === "kids_lesson"')[0];
+assert.ok(storyBackend.includes('modelId !== "eleven_v4"'));
+for(const [setting,value] of Object.entries(voicePolicy.production.voiceSettings)){
+ assert.ok(storyProfile.includes(setting+": "+String(value)), "Story-profile mismatch: "+setting);
+}
+for(const workflow of [".github/workflows/build-kids-academy-v9-staging.yml",
+                       ".github/workflows/build-kids-academy-audio.yml",
+                       ".github/workflows/kids-master-fidelity-ab.yml"]){
+ const yaml=read(workflow);
+ assert.ok(yaml.includes("workflow_dispatch:"),"Manual trigger missing: "+workflow);
+ assert.ok(!/^  push:/m.test(yaml),"Unapproved costly auto-generation: "+workflow);
+}
+assert.equal(plan.modelId,"eleven_v4");
+assert.ok(plan.phrases.every(p=>p.modelId==="eleven_v4"));
 assert.equal(plan.lessonCount,34);
 assert.equal(plan.phraseCount,plan.phrases.length);
 assert.ok(plan.phraseCount>=400);

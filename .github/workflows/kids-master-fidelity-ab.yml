@@ -1,88 +1,19 @@
-name: Kids Serhat Master Fidelity A-B (staging only)
+name: Kids Serhat Master Fidelity A-B (archived, no automated billing)
 
 on:
-  pull_request:
-    paths:
-      - 'kids/tools/compare-academy-master-fidelity.py'
-      - '.github/workflows/kids-master-fidelity-ab.yml'
-  push:
-    branches: [main]
-    paths:
-      - 'kids/tools/compare-academy-master-fidelity.py'
-      - '.github/workflows/kids-master-fidelity-ab.yml'
   workflow_dispatch:
 
 permissions:
-  contents: write
-
-concurrency:
-  group: kids-serhat-master-fidelity-ab-v1
-  cancel-in-progress: false
+  contents: read
 
 jobs:
-  stage-comparison:
+  preserve-approved-voice:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
-    env:
-      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+    timeout-minutes: 5
     steps:
-      - name: Checkout repository main or PR
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || 'main' }}
-
-      - name: Ensure experiment is bounded and exact-source
+      - name: Keep owner-approved Kids Story V4 unchanged
         run: |
-          set -euo pipefail
-          python3 -m py_compile kids/tools/compare-academy-master-fidelity.py
-          python3 kids/tools/compare-academy-master-fidelity.py --dry-run
-
-      - name: Generate four sample clips only after main merge
-        if: github.event_name != 'pull_request'
-        run: |
-          set -euo pipefail
-          if [ -z "$ELEVENLABS_API_KEY" ]; then
-            echo "::error::No ElevenLabs key; A/B generation not claimed."
-            exit 1
-          fi
-          command -v ffmpeg
-          command -v ffprobe
-          python3 kids/tools/compare-academy-master-fidelity.py --run
-          python3 - <<'PY'
-          import json, hashlib, pathlib
-          manifest=pathlib.Path('kids/data/academy-master-fidelity-ab-v1.json')
-          data=json.loads(manifest.read_text('utf-8'))
-          assert len(data['samples']) == 4
-          assert data['publishedToAcademy'] is False
-          assert data['approvalRequired'] is True
-          for sample in data['samples']:
-              path=pathlib.Path(sample['url'].lstrip('/'))
-              assert path.is_file() and path.stat().st_size > 1800
-              assert hashlib.sha256(path.read_bytes()).hexdigest() == sample['sha256']
-              assert sample['humanApproved'] is False
-              assert sample['verifiedSimilarityPercent'] is None
-          print('A/B similarity samples staged, NOT live. Owner review is required.')
-          PY
-
-      - name: Commit A-B staging samples without touching public Academy manifest
-        if: github.event_name != 'pull_request'
-        run: |
-          set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add kids/data/academy-master-fidelity-ab-v1.json kids/assets/kids-academy-fidelity-staging/
-          if git diff --cached --quiet; then
-            echo "Four comparison clips already staged; no commit necessary."
-            exit 0
-          fi
-          git commit -m "Kids: stage Serhat master fidelity A/B samples [voice-pause]"
-          for attempt in $(seq 1 6); do
-            git pull --rebase origin main
-            if git push origin HEAD:main; then
-              echo "New A/B samples staged. Playback promotion requires listening approval."
-              exit 0
-            fi
-            sleep $((attempt * 3))
-          done
-          echo "::error::Could not publish the staging manifest safely"
-          exit 1
+          echo "The previous 0.96 similarity experiment is not an approved replacement for the existing narrator."
+          echo "Do not synthesize experiments automatically."
+          echo "Approved production: same owner Voice-ID, eleven_v4 and kids_story profile."
+          echo "See kids/data/academy-voice-policy-v10.json for the canonical settings."

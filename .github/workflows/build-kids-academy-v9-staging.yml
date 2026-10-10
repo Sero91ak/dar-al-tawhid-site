@@ -1,67 +1,76 @@
-name: Kids Academy V9 Serhat Voice Staging
+name: Kids Academy V10 Owner Voice V4 Staging (manual credit budget)
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'kids/data/academy-voice-plan-v9.json'
-      - 'kids/tools/build-academy-v9-staging.py'
-      - '.github/workflows/build-kids-academy-v9-staging.yml'
   workflow_dispatch:
+    inputs:
+      confirm:
+        description: "Explicit credit authorization: type GENERATE-FOUR"
+        type: string
+        required: true
+        default: "NO-CREDITS"
 
 permissions:
   contents: write
 
 concurrency:
-  group: kids-academy-v9-serhat-staging
+  group: kids-academy-approved-story-voice
   cancel-in-progress: false
 
 jobs:
-  first-batch:
+  generate:
+    if: inputs.confirm == 'GENERATE-FOUR'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
-      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+      ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
     steps:
-      - name: Checkout exact source
+      - name: Checkout exact main
         uses: actions/checkout@v4
         with:
           ref: main
 
-      - name: Check lesson voice plan before any synthesis
+      - name: Assert identical owner-approved V4 story profile (free)
         run: |
           set -euo pipefail
           python3 kids/tools/build-academy-v9-staging.py --dry-run
           command -v ffmpeg
           command -v ffprobe
-          if [ -z "$ELEVENLABS_API_KEY" ]; then
-            echo "::error::ELEVENLABS_API_KEY missing. No audio generated."
-            exit 1
-          fi
+          test -n "$ADMIN_PUBLISH_SECRET" || { echo "::error::No owner Voice Studio credential; nothing generated."; exit 1; }
 
-      - name: Generate capped first staged Serhat master batch
+      - name: Generate at most four staged clips (never published in player)
         run: |
           set -euo pipefail
-          python3 kids/tools/build-academy-v9-staging.py --limit 12 --max-chars 4000
+          python3 kids/tools/build-academy-v9-staging.py --limit 4 --max-chars 1200
+          python3 - <<'PY'
+          import pathlib,json,hashlib
+          p=pathlib.Path("kids/data/academy-audio-staging-v9.json")
+          data=json.loads(p.read_text("utf-8"))
+          assert data["modelId"]=="eleven_v4"
+          assert data["voiceSettingsProfile"]=="kids_story"
+          assert data["reviewRequiredBeforePublicPlayback"] is True
+          for txt,entry in data["entries"].items():
+              f=pathlib.Path(entry["url"].lstrip("/"))
+              assert f.is_file()
+              assert entry["approvedForPlayback"] is False
+              assert entry["sameAsApprovedKidsStoryProfile"] is True
+              assert hashlib.sha256(f.read_bytes()).hexdigest()==entry["sha256"]
+          print("Only staged clips available; never connected to production player")
+          PY
 
-      - name: Commit staging-only recordings (not live voice manifest)
+      - name: Commit only V4 staging samples, leave live voice archives unchanged
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add kids/data/academy-audio-staging-v9.json kids/assets/kids-academy-audio/
           if git diff --cached --quiet; then
-            echo "No new staged clips; no public audio was changed."
+            echo "Already generated with same prepared-text hash: 0 ElevenLabs credits needed."
             exit 0
           fi
-          git commit -m "Kids: stage Serhat V9 narration clips for listening approval [voice-pause]"
-          for attempt in $(seq 1 6); do
+          git commit -m "Kids: stage owner-approved V4 kids_story profile for manual listening QA [voice-pause]"
+          for attempt in $(seq 1 4); do
             git pull --rebase origin main
-            if git push origin HEAD:main; then
-              echo "Staging assets committed. Await listening review and explicit release."
-              exit 0
-            fi
+            if git push origin HEAD:main; then exit 0; fi
             sleep $((attempt * 3))
           done
-          echo "::error::Unable to commit staged audio without concurrency conflict"
           exit 1

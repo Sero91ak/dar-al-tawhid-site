@@ -106,6 +106,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
+    if not args.dry_run:
+        raise SystemExit("Legacy Flash batch disabled: use kids/tools/build-academy-v9-staging.py with the approved V4 kids_story profile; no credits spent.")
     if MASTER.get("name") != "Serhat Abu Malik – Master":
         raise RuntimeError("Unauthorized voice configured")
     prompts = catalog()
