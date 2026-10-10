@@ -3939,34 +3939,25 @@ function academyDay(){
  const ordinal=Math.floor(Date.UTC(now.getFullYear(),now.getMonth(),now.getDate())/86400000);
  return {day,ordinal,weekday:now.getDay()};
 }
-function dailyLesson(){
- const allIds=lessonIds(),now=Date.now(),day=academyDay();
- if(!allIds.length)return null;
- const key=["kids",VERSION,id,age,"daily-choice-v2",day.day].join(".");
- try{
-  const saved=JSON.parse(localStorage.getItem(key)||"null");
-  if(saved&&allIds.includes(saved.id)&&["new","due","review","practice","free"].includes(saved.kind))return saved;
- }catch(_){}
- const fresh=allIds.filter(x=>!recordFor(x));
- const reviewed=allIds.filter(x=>!!recordFor(x));
- const due=reviewed.filter(x=>Number(recordFor(x).nextDue)<=now)
-  .sort((a,b)=>Number(recordFor(a).nextDue)-Number(recordFor(b).nextDue));
- const groups=Object.keys(TOPIC_IDS),rotation=day.ordinal%groups.length;
- const subjectPriority=groups.map((key,i)=>({key,i:(i+groups.length-rotation)%groups.length,done:TOPIC_IDS[key].filter(x=>!!recordFor(x)).length})).sort((a,b)=>a.done-b.done||a.i-b.i);
- const nextFresh=subjectPriority.map(x=>TOPIC_IDS[x.key].find(y=>fresh.includes(y))).find(Boolean);
- const oldest=reviewed.slice().sort((a,b)=>Number(recordFor(a)?.completedAt||0)-Number(recordFor(b)?.completedAt||0))[0];
- const mode=ACADEMY_WEEK[day.weekday].mode;
- let selected,kind;
- if(mode==="new"&&nextFresh){selected=nextFresh;kind="new"}
- else if(mode==="free"){selected=due[0]||oldest||nextFresh;kind=reviewed.length?"free":"new"}
- else if(due.length){selected=due[0];kind="due"}
- else if(reviewed.length){selected=oldest;kind="review"}
- else if(nextFresh){selected=nextFresh;kind="new"}
- else {selected=allIds[0];kind="practice"}
- const result={id:selected,kind,date:day.day,mode};
- try{localStorage.setItem(key,JSON.stringify(result))}catch(_){}
- return result;
+/* V11: Daily recommended lesson is always access-checked, not an unlock token. */
+function academySchoolState(){
+ const records={},drafts={};
+ for(const lessonId of lessonIds()){
+  const rec=recordFor(lessonId),draft=draftFor(lessonId);
+  if(rec)records[lessonId]=rec;
+  if(draft)drafts[lessonId]=draft;
+ }
+ return window.DARKidsAcademySchool.evaluate({topics:TOPIC_IDS,records,drafts,now:new Date()});
 }
+function dailyLesson(){
+ const st=academySchoolState();
+ return st.recommendation?{
+  id:st.recommendation,kind:st.kind,date:st.today,mode:st.mode,
+  access:st.access(st.recommendation),
+  nextLocked:!!st.upcoming&&!st.active,nextLesson:st.upcoming
+ }:null;
+}
+
 function lessonTitle(lessonId){
  return lessonId==="sidq"?"Ṣidq – Wahrhaftigkeit":CURRICULUM[lessonId]?.title||"Unterricht";
 }
