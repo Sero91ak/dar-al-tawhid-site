@@ -1239,6 +1239,12 @@ export default {
       }
       let html = await assetResponse.text();
       if (assetResponse.ok) {
+        // The shared app HTML sets all non-test routes to visitor.
+        // In /pwa/ that overwrites our Android-PWA boot identity; patch only
+        // the isolated PWA response, leaving the public site and iOS intact.
+        const appPathMarker = "document.documentElement.dataset.appPath=(location.pathname.indexOf(\"/test/\")===0||location.pathname===\"/test\")?\"test\":\"visitor\"";
+        const pwaAppPathMarker = "document.documentElement.dataset.appPath=location.pathname.startsWith(\"/pwa\")?\"android-pwa\":((location.pathname.indexOf(\"/test/\")===0||location.pathname===\"/test\")?\"test\":\"visitor\")";
+        if (html.includes(appPathMarker)) html = html.replace(appPathMarker, pwaAppPathMarker);
         const pwaHead =
           '<base href="/">' +
           '<script id="darDedicatedPwaBootV2">' +
