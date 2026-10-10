@@ -2329,10 +2329,10 @@ button,input,select{font:inherit}
     document.querySelectorAll("[data-dar-pwa-install]").forEach(function(btn){
      if(!btn.dataset.darInstallLabel)btn.dataset.darInstallLabel=btn.textContent||"Web-App installieren";
      var preparing=android&&!installed&&!ready;
-     btn.disabled=installed;
-     btn.setAttribute("aria-disabled",installed?"true":"false");
+     btn.disabled=installed||preparing;
+     btn.setAttribute("aria-disabled",(installed||preparing)?"true":"false");
      btn.setAttribute("data-dar-pwa-install-state",installed?"installed":(ready?"ready":"preparing"));
-     var nextLabel=installed?"Bereits installiert":btn.dataset.darInstallLabel;
+     var nextLabel=installed?"Bereits installiert":(preparing?"Installation wird vorbereitet…":btn.dataset.darInstallLabel);
      if(btn.textContent!==nextLabel)btn.textContent=nextLabel;
     });
    }catch(e){}
@@ -2389,7 +2389,7 @@ button,input,select{font:inherit}
       window.__darSyncInstallButtons();
       try{
         var hint=document.querySelector("[data-dar-pwa-hint]");
-        if(hint)hint.textContent="Installation wird vorbereitet. Sobald Android bereit ist, erneut auf „Web-App installieren“ tippen.";
+        if(hint)hint.textContent="Installation wird vorbereitet. Der Button wird automatisch freigegeben, sobald Android den nativen Installationsdialog bereitstellt.";
       }catch(eHint){}
       return;
     }

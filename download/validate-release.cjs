@@ -52,8 +52,8 @@ if (fs.existsSync(publicRouterPath)) {
   assert.ok(router.includes('purpose: "maskable"'), "Android launcher must receive maskable artwork");
   assert.ok(router.includes('display: "standalone"'), "Android PWA manifest must be standalone");
   assert.ok(router.includes('id: "/pwa/"'), "Android PWA manifest must have the dedicated stable app id /pwa/");
-  assert.ok(router.includes("btn.disabled=installed"), "Install button must remain clickable while Chrome prepares beforeinstallprompt and only disable after installation");
-  assert.ok(!router.includes("btn.disabled=installed||preparing"), "Install button must not be disabled merely while Chrome prepares beforeinstallprompt");
+  assert.ok(router.includes("btn.disabled=installed||preparing"), "Android install CTA must stay disabled until beforeinstallprompt is actually ready");
+  assert.ok(router.includes("Installation wird vorbereitet…"), "Android install CTA must clearly show its preparing state before the native prompt is ready");
   assert.ok(router.includes('start_url: "/pwa/?pwa=1"'), "Dynamic Android PWA manifest must launch the dedicated visitor app shell");
   assert.ok(router.includes('const target = new URL("/", url.origin);'), "Dedicated Android PWA must fetch the canonical root asset without /index.html redirect");
   assert.ok(router.includes('a redirect that escapes into the public desktop website'), "Dedicated PWA Static Assets redirect guard missing");

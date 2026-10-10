@@ -583,10 +583,10 @@ a,button,[role="button"],summary,[tabindex],label{-webkit-tap-highlight-color:tr
       document.querySelectorAll("[data-dar-pwa-install]").forEach(function(btn){
         if(!btn.dataset.darInstallLabel)btn.dataset.darInstallLabel=btn.textContent||"Web-App installieren";
         var preparing=android&&!installed&&!ready;
-        btn.disabled=installed;
-        btn.setAttribute("aria-disabled",installed?"true":"false");
+        btn.disabled=installed||preparing;
+        btn.setAttribute("aria-disabled",(installed||preparing)?"true":"false");
         btn.setAttribute("data-dar-pwa-install-state",installed?"installed":(ready?"ready":"preparing"));
-        var nextLabel=installed?"Bereits installiert":btn.dataset.darInstallLabel;
+        var nextLabel=installed?"Bereits installiert":(preparing?"Installation wird vorbereitet…":btn.dataset.darInstallLabel);
         if(btn.textContent!==nextLabel)btn.textContent=nextLabel;
       });
     }catch(e){}
@@ -648,7 +648,8 @@ a,button,[role="button"],summary,[tabindex],label{-webkit-tap-highlight-color:tr
     setPwaHint("Installation wird vorbereitet …");
     await ensureAndroidServiceWorkerReady();
     if(deferredInstall){
-      setPwaHint("Installation ist bereit. Bitte jetzt noch einmal auf „Web-App installieren“ tippen.");
+      setPwaHint("Installation ist bereit. Der Installationsbutton ist jetzt freigegeben.");
+      syncRouterInstallButtons();
       return false;
     }
     setPwaHint("Die direkte Installation wird noch vorbereitet. Der Installationsbutton wird automatisch aktiv, sobald Chrome den nativen Dialog freigibt.");
