@@ -14,12 +14,8 @@ routes = []
 
 # Workers Builds nur bei Test-/Kids-Dateien, nicht bei jedem Repo-Commit.
 [build]
-watch_paths = [
-  "test/**",
-  "wrangler.test.toml",
-  "cloudflare/test-app-worker.js",
-  "cloudflare/preview-gate.js"
-]
+# Test worker is published only by its explicit GitHub workflow.
+watch_paths = [".cloudflare-test-manual-only/**"]
 
 [assets]
 directory = "."
