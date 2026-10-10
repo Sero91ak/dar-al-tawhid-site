@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "id": "KIDS_ACADEMY_USE_APPROVED_KIDS_STORY_VOICE_V10",
+  "decisionDate": "2026-10-10",
+  "voiceIdentity": {
+    "speaker": "Serhat Abu Malik – Master",
+    "voiceProfileId": "serhat-owner-voice-2026",
+    "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+    "useExistingClone": true,
+    "doNotCreateNewClone": true
+  },
+  "approvedReferenceExamples": [
+    "data/pronunciation/story-reference-adam-2026-10-04.json",
+    "data/pronunciation/story-reference-idris-2026-10-04.json",
+    "data/pronunciation/story-reference-muhammad-2026-10-04.json"
+  ],
+  "production": {
+    "provider": "DAR Voice Studio (Cloudflare ElevenLabs backend)",
+    "apiPath": "/voice-studio/api/generate-with-timings",
+    "profile": "kids_story",
+    "modelId": "eleven_v4",
+    "referenceImplementation": "cloudflare/video-studio/voice.js",
+    "voiceSettings": {
+      "stability": 0.62,
+      "similarity_boost": 0.88,
+      "style": 0.16,
+      "speed": 0.91,
+      "use_speaker_boost": true
+    },
+    "pronunciationDictionaryId": "Q8w3SxtoVo8NSjsnlJEd",
+    "pronunciationDictionaryVersionId": "wSzgkGpAwEDiTak8DApc",
+    "revision": "kids-story-v4-same-speaker-20261010",
+    "languagePolicy": "German lesson narration with correctly pronounced Fuṣḥā terminology. Quran Arabic recitation is always genuine recitation, never synthetic."
+  },
+  "costControls": {
+    "zeroCreditsForPlayback": true,
+    "generateOnlyOnExplicitManualJob": true,
+    "reuseOnlyExactPhraseAndOwnerVoice": true,
+    "noRegenerationWhenMatchingVerifiedAssetExists": true,
+    "generateOnceCacheByPhraseVoiceModelProfileAndSettings": true,
+    "maxClipsPerInvocation": 4,
+    "maxPreparedCharactersPerInvocation": 1200,
+    "abortIfVoiceModelOrProfileMismatch": true,
+    "keepStagingSeparateFromPublicManifest": true,
+    "autoPublishWithoutOwnerReview": false
+  },
+  "nonApprovedAlternatives": {
+    "eleven_flash_v2_5": "Used in parts of the Quiz and simple German term audio, but not proven to reproduce the approved Kids Story timbre. Academy generation only after owner A/B signoff.",
+    "eleven_v3": "Some Arabic/Word comparisons exist, but owner preferred V4. Never enable as automatic Academy fallback.",
+    "higherSimilarityBoost": "Not a literal percentage. Do not deviate from already-approved kids_story settings without a signed-off comparison."
+  },
+  "qa": {
+    "referenceClipsAreOwnerApproved": true,
+    "generatedClipsAreNotAutomaticallyApproved": true,
+    "speechListeningChecks": [
+      "same vocal character as Adam/Idris/Muhammad approved story audio",
+      "German articulation",
+      "Fuṣḥā Arabic words and honorifics",
+      "no breathing artifacts, abrupt endings or distorted pitch",
+      "no speed-shift from native generated recording"
+    ],
+    "verifiedSimilarityPercent": null
+  }
+}
