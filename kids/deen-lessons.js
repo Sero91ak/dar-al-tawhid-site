@@ -70,13 +70,9 @@ function renderCards(){
       (done(item.id)?'<span class="ms-done" aria-label="Abgeschlossen">✓</span>':'')+
     '</button>';
   }).join("");
-  grid.querySelectorAll("[data-dl-id]").forEach(b=>{
-    b.addEventListener("click",()=>openStory(b.dataset.dlId));
-    const item=items.find(x=>x.id===b.dataset.dlId);
-    if(item)window.DARKidsItemDownloads?.deen(b,{
-      item,audioMeta:audioMeta(item),cover:item.cover||art(item),hero:item.hero||art(item)
-    });
-  });
+  // No extra rows or buttons in the six Dīn category overview cards.
+  grid.querySelectorAll("[data-dl-id]").forEach(b=>
+    b.addEventListener("click",()=>openStory(b.dataset.dlId)));
 }
 function effectiveMode(){
   const m=mode();
@@ -215,6 +211,11 @@ function renderActive(){
   $("#dlSummary").textContent=active.summary||"";
   $("#dlRead").innerHTML=activeText.split(/\n{2,}/).map(p=>'<p>'+esc(p)+'</p>').join("");
   $("#dlSources").innerHTML=sourceHtml(active);
+  // The fourth tab lives alongside Hören · Mitlesen · Lesen in the opened lesson.
+  window.DARKidsItemDownloads?.deenDetail($(".dl-detail-modes"),{
+    item:active,audioMeta:audioMeta(active),
+    cover:active.cover||art(active),hero:active.hero||art(active)
+  });
   const has=!!audioMeta(active)?.url,note=$("#dlAudioNote");
   if(note)note.textContent=has
     ?"Hören, Hören & Mitlesen und Lesen sind bereit."
