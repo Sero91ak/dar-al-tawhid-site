@@ -16,5 +16,11 @@
     "Schön, dass du da bist!",
     "Heute geht es darum, die Wahrheit zu sagen. Wir hören zu und überlegen zusammen. Du darfst eine Pause machen.",
     "Manchmal geht etwas aus Versehen kaputt."
-  ]
+  ],
+  "retry": {
+    "iteration": 3,
+    "reason": "Isolated owner-voice generation job avoids independent Kids PWA version updates",
+    "noAdditionalText": true,
+    "expectedTotalClips": 4
+  }
 }
