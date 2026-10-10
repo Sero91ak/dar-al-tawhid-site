@@ -55,6 +55,11 @@
 /assets/*
   Cache-Control: no-cache, must-revalidate, max-age=0
 
+/public-pwa-install-sw.js
+  Content-Type: application/javascript; charset=utf-8
+  Cache-Control: no-store, no-cache, must-revalidate, max-age=0
+  Service-Worker-Allowed: /
+
 /service-worker.js
   Cache-Control: no-cache, must-revalidate, max-age=0
 
