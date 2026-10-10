@@ -1,0 +1,236 @@
+/* QURAN_PLAYER_V5_REFINED · isolated premium studio; mobile-first, original controls retained */
+body.adult.player-v3{
+  --bg:#07151c;--bg2:#0f232b;--gold:#c9aa74;--goldhi:#f3deb6;
+  --ink:#f4eee3;--muted:#abbfbd;--stroke:rgba(201,170,116,.25);
+  --v5-edge:rgba(213,183,126,.28);--v5-frame:#152a31;
+}
+body.adult.player-v3 .app{
+  background:radial-gradient(ellipse 64% 34% at 67% -14%,rgba(120,121,105,.14),transparent 76%),
+   linear-gradient(159deg,#0f252b 0%,#09191f 54%,#070e16 100%);
+}
+body.adult.player-v3 .app:before{opacity:.07}
+body.adult.player-v3 .glass{
+  border:1px solid var(--v5-edge);
+  background:linear-gradient(155deg,#152e34 0%,#0f252b 36%,#091a20 100%);
+  box-shadow:0 18px 54px #0005,inset 0 1px rgba(255,244,214,.085);
+}
+body.adult.player-v3 .main-panel{border-radius:18px}
+body.adult.player-v3 .scene{
+  isolation:isolate;position:relative;
+  background:#102832;
+  border-bottom:1px solid rgba(230,198,144,.38);
+  box-shadow:inset 0 -10px 28px rgba(0,0,0,.20);
+}
+body.adult.player-v3 .scene:before{
+  content:"";position:absolute;inset:0;width:auto;height:auto;
+  opacity:1;z-index:0;pointer-events:none;
+  background-image:url("/visuals/dar-quran-hero.webp");
+  background-repeat:no-repeat;background-size:cover;
+  background-position:69% 42%;
+  filter:saturate(.78) contrast(1.13) brightness(.81);
+}
+body.adult.player-v3 .scene:after{
+  content:"";position:absolute;inset:0;z-index:0;border:0;pointer-events:none;
+  background:linear-gradient(90deg,rgba(6,25,33,.93) 0%,rgba(6,25,33,.77) 37%,rgba(6,25,33,.22) 75%,rgba(6,25,33,.12)),
+   linear-gradient(0deg,rgba(6,17,24,.44),transparent 78%);
+}
+body.adult.player-v3 .scene>*{position:relative;z-index:1}
+body.adult.player-v3 .scene>div:first-child{max-width:73%;filter:none}
+body.adult.player-v3 .scene .hero-object{display:none!important}
+body.adult.player-v3 .scene h2{
+  margin:4px 0 5px;font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(25px,3vw,37px);font-weight:500;letter-spacing:-.024em;
+  color:#f4f0e7;text-shadow:0 2px 12px #0612199c;
+}
+body.adult.player-v3 .scene .scene-num{font-size:10px;letter-spacing:.19em;font-weight:760;color:#e0c493}
+body.adult.player-v3 .scene small{font-size:11px;color:#d3dcd9;text-shadow:0 1px 8px #07181ecf}
+body.adult.player-v3 .scene .arabic-name{
+  position:absolute;right:18px;top:12px;font-size:clamp(21px,2.8vw,33px);
+  color:#f0ddba;text-shadow:0 2px 10px #0a1416bd;font-weight:400;
+}
+body.adult.player-v3 .reader-tools{
+  background:linear-gradient(180deg,rgba(210,177,120,.055),transparent);
+  border-bottom:1px solid rgba(204,178,134,.12);
+}
+body.adult.player-v3 .reader-tools .tab{
+  background:#192f35;color:#d1dcd9;border:1px solid rgba(219,199,165,.17);
+  box-shadow:none;border-radius:9px;font-weight:650;
+}
+body.adult.player-v3 .reader-tools .tab.active{
+  color:#15272a;background:linear-gradient(180deg,#e9d6b2,#cdb183);
+  border-color:#dfc493;box-shadow:inset 0 1px rgba(255,255,255,.6);
+}
+body.adult.player-v3 .reader-tools .tab:focus-visible{outline:2px solid #f4d39b}
+body.adult.player-v3 .verse{
+  background:radial-gradient(ellipse at 50% 25%,rgba(129,112,77,.09),transparent 77%);
+}
+body.adult.player-v3 .versehead{
+  color:#e4d2b2;font-size:11px;letter-spacing:.085em;
+}
+body.adult.player-v3 .verse-focus{
+  border:1px solid rgba(196,176,135,.52);border-radius:13px;
+  background:linear-gradient(145deg,#f7f3e8 0%,#eee7d8 58%,#eae0ce 100%);
+  box-shadow:0 6px 25px #0003,inset 0 0 0 3px rgba(255,255,255,.43);
+}
+body.adult.player-v3 .verse-focus:before{
+  content:"";position:absolute;inset:8px;border:1px solid rgba(150,124,84,.095);
+  border-radius:8px;transform:none;top:8px;left:8px;pointer-events:none;
+}
+body.adult.player-v3 .verse .verse-focus .quran-text{
+  color:#193843;text-shadow:none;font-variant-ligatures:normal;
+}
+body.adult.player-v3 .verse .verse-focus .translation{color:#35464b;text-shadow:none}
+body.adult.player-v3 .verse .verse-focus .latin{color:#5b6a6e}
+body.adult.player-v3 .verse .verse-focus .tip{background:#e2d9c8;border:1px solid #c3ae8e;color:#425057}
+body.adult.player-v3 .verse .verse-focus .tip strong{color:#755a30}
+body.adult.player-v3 .versefade{color:#a9b9b5}
+body.adult.player-v3 .iconbtn,
+body.adult.player-v3 .page-actions button{
+  background:linear-gradient(180deg,#1c353c,#12272e);
+  color:#e9d4ab;border:1px solid rgba(226,197,142,.31);
+  box-shadow:inset 0 1px rgba(255,255,255,.055),0 3px 8px rgba(0,0,0,.17);
+  border-radius:10px;
+}
+body.adult.player-v3 .iconbtn.saved{
+  background:rgba(221,182,115,.2);color:#ffdda1;
+}
+body.adult.player-v3 .page-actions button:hover,
+body.adult.player-v3 .iconbtn:hover{border-color:#e1c08f;background:#254049}
+body.adult.player-v3 .page-actions button svg{width:20px;height:20px;stroke-width:1.8;display:block}
+body.adult.player-v3 .navrow{border-top:1px solid rgba(222,195,145,.12)}
+body.adult.player-v3 .navrow .secondary{
+  color:#e8d9bc;background:#152e35;border:1px solid rgba(215,188,145,.3);
+  border-radius:10px;box-shadow:inset 0 1px rgba(255,255,255,.055);
+}
+body.adult.player-v3 .navrow .secondary:active{background:#2b4750}
+body.adult.player-v3 .miniplay{
+  isolation:isolate;overflow:hidden;
+  background:linear-gradient(125deg,#192f37 0%,#102329 44%,#0b1a23 100%);
+  border:1px solid rgba(213,183,128,.37);border-top:2px solid rgba(226,199,151,.6);
+  box-shadow:0 -11px 35px #0005,inset 0 1px rgba(255,255,255,.055);
+  border-radius:16px;
+}
+body.adult.player-v3 .miniplay:before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(100deg,rgba(220,192,137,.065),transparent 40%);
+}
+body.adult.player-v3 .now-playing b{font-weight:730;color:#f5f0e8;letter-spacing:.008em}
+body.adult.player-v3 .now-playing span{color:#b2c7c3}
+body.adult.player-v3 .play{
+  background:linear-gradient(160deg,#e7d0a6,#b89a67);
+  border:1px solid #f1d9ad;border-radius:50%;
+  color:#15262b;box-shadow:inset 0 1px rgba(255,255,255,.6),0 2px 0 #785f3e,0 5px 17px #0007;
+  transition:transform .14s,filter .14s;
+}
+body.adult.player-v3 .play:hover{filter:brightness(1.08)}
+body.adult.player-v3 .play:active{transform:translateY(1px) scale(.975);box-shadow:inset 0 1px #fff9,0 1px 0 #785f3e,0 3px 9px #0006}
+body.adult.player-v3 .skip{
+  color:#e9d4ac;text-shadow:none;
+  background:rgba(236,220,186,.065);border:1px solid rgba(225,199,151,.11);
+  border-radius:10px;
+}
+body.adult.player-v3 .skip:active{background:#38515a}
+body.adult.player-v3 #seek{accent-color:#d8b87d}
+body.adult.player-v3 .seek-wrap span{color:#e7d6b8;font-weight:650}
+body.adult.player-v3 .pill-btn{background:#233e45;border-color:#ad926b;color:#f3dfbb}
+body.adult.player-v3 .sidecol .card{background:#11272e;border:1px solid rgba(223,189,137,.33)}
+body.adult.player-v3 .sura-button{background:#1d353b;border:1px solid rgba(214,190,154,.12);border-radius:11px}
+body.adult.player-v3 .sura-button.active{background:#27434a;border-color:#d6b789}
+body.adult.player-v3 .inputrow select{background:#1c3941;color:#f1e7d2}
+
+/* Mobile-first: five reading functions visible without horizontal scrolling */
+@media(max-width:719px){
+ body.adult.player-v3 .app{
+  background:radial-gradient(ellipse 100% 23% at 52% 0,rgba(110,109,92,.14),transparent 78%),linear-gradient(155deg,#102831,#07151d);
+ }
+ body.adult.player-v3 .workspace{padding-left:max(9px,env(safe-area-inset-left,0px));padding-right:max(9px,env(safe-area-inset-right,0px))}
+ body.adult.player-v3 .topline{margin-bottom:5px}
+ body.adult.player-v3 .phone-brand .mark{
+  background:linear-gradient(150deg,#1f3d43,#10272e);color:#dec9a1;
+  border:1px solid rgba(221,192,145,.34);border-radius:10px;
+ }
+ body.adult.player-v3 .topline .breadcrumbs{font-size:clamp(11px,3.1vw,13.5px);font-weight:720;color:#e9dfcd;max-width:158px}
+ body.adult.player-v3 .page-actions{gap:5px}
+ body.adult.player-v3 .page-actions button{height:39px;min-width:39px;padding:0 7px}
+ body.adult.player-v3 .scene{
+  height:clamp(76px,12.7dvh,122px);min-height:0;
+  padding:10px 15px;
+ }
+ body.adult.player-v3 .scene:before{background-position:70% 46%;filter:saturate(.74) contrast(1.12) brightness(.86)}
+ body.adult.player-v3 .scene:after{background:linear-gradient(92deg,rgba(7,28,36,.95),rgba(7,28,36,.76) 54%,rgba(7,28,36,.13))}
+ body.adult.player-v3 .scene h2{font-size:clamp(22px,6vw,29px);margin:2px 0}
+ body.adult.player-v3 .scene .scene-num{font-size:9px;letter-spacing:.12em}
+ body.adult.player-v3 .scene .arabic-name{top:8px;right:13px;font-size:clamp(17px,4.6vw,23px)}
+ body.adult.player-v3 .scene small{font-size:10px}
+ body.adult.player-v3 .reader-tools{
+  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:stretch;
+  gap:4px;padding:8px 8px 7px;overflow:visible;
+ }
+ body.adult.player-v3 .reader-tools .tab{
+  min-width:0;width:100%;min-height:40px;padding:6px 1px;
+  white-space:nowrap;text-align:center;overflow:hidden;
+  font-size:clamp(9px,2.53vw,11px);letter-spacing:-.015em;border-radius:8px;
+ }
+ body.adult.player-v3 .verse{padding:10px 11px 5px}
+ body.adult.player-v3 .versehead{min-height:38px}
+ body.adult.player-v3 .iconbtn{width:35px;height:35px;border-radius:9px}
+ body.adult.player-v3 .verse-focus{padding:11px 10px;scrollbar-width:thin}
+ body.adult.player-v3 .verse-focus .quran-text{font-size:clamp(29px,8.2vw,42px);line-height:1.7}
+ body.adult.player-v3 .verse-focus .translation{font-size:clamp(13px,3.7vw,17px);line-height:1.47}
+ body.adult.player-v3 .navrow{min-height:49px;padding:6px 10px 7px}
+ body.adult.player-v3 .navrow .secondary{min-height:38px;border-radius:9px}
+ body.adult.player-v3 .miniplay{border-radius:16px 16px 0 0;border-bottom:0}
+ body.adult.player-v3 .miniplay .controlbox{gap:7px}
+ body.adult.player-v3 .miniplay .skip{border-radius:9px}
+ body.adult.player-v3 .miniplay .play{width:54px;height:54px}
+ body.adult.player-v3 .sidecol .card{border-radius:22px 22px 0 0}
+}
+@media(max-width:719px) and (max-height:740px){
+ body.adult.player-v3 .scene{height:clamp(59px,10.5dvh,79px);padding:7px 12px}
+ body.adult.player-v3 .reader-tools{padding:5px 6px 5px}
+ body.adult.player-v3 .reader-tools .tab{min-height:35px;font-size:clamp(8.8px,2.6vw,10px)}
+ body.adult.player-v3 .verse{padding-top:6px}
+ body.adult.player-v3 .verse-focus{padding:6px 8px}
+ body.adult.player-v3 .navrow{min-height:41px;padding:3px 8px}
+}
+@media(max-width:350px){
+ body.adult.player-v3 .page-actions{gap:4px}
+ body.adult.player-v3 .page-actions button{height:36px;min-width:35px;padding:0 5px}
+ body.adult.player-v3 .topline .breadcrumbs{max-width:140px;font-size:10.5px}
+ body.adult.player-v3 .reader-tools{gap:2px;padding-left:4px;padding-right:4px}
+ body.adult.player-v3 .reader-tools .tab{font-size:8.8px}
+ body.adult.player-v3 .miniplay .controlbox{gap:4px}
+}
+@media(min-width:720px) and (max-width:1230px){
+ body.adult.player-v3 .main-panel{border-radius:18px}
+ body.adult.player-v3 .scene{height:clamp(115px,17dvh,192px);min-height:0;padding:22px 24px}
+ body.adult.player-v3 .scene h2{font-size:clamp(28px,3.5vw,39px)}
+ body.adult.player-v3 .reader-tools{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));padding:9px 11px}
+ body.adult.player-v3 .reader-tools .tab{min-width:0;padding:10px 4px}
+ body.adult.player-v3 .verse-focus{padding:15px}
+ body.adult.player-v3 .miniplay{border-radius:18px}
+}
+/* Fold posture: occupy each available physical pane without distorted crop. */
+@media(horizontal-viewport-segments:2){
+ body.adult.player-v3 .scene:before{background-position:70% center}
+}
+@media(prefers-reduced-motion:reduce){
+ body.adult.player-v3 .play{transition:none}
+}
+/* KIDS V5: preserve separate playful world, reduce visual noise and strengthen reachability */
+body.kids.player-v3 .main-panel{border-radius:21px}
+body.kids.player-v3 .scene .hero-object{max-width:28%}
+body.kids.player-v3 .kid-btn{transition:transform .14s,filter .14s}
+body.kids.player-v3 .kid-btn:focus-visible{outline:3px solid #ffe6ac;outline-offset:2px}
+body.kids.player-v3 .kid-steps{border-bottom:1px solid rgba(220,241,255,.14)}
+@media(max-width:719px){
+ body.kids.player-v3 .reader-tools{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;
+  overflow:visible;padding:6px 7px;
+ }
+ body.kids.player-v3 .reader-tools .tab{
+  min-height:39px;min-width:0;width:100%;padding:6px 2px;font-size:clamp(9px,2.6vw,11px);
+  overflow:hidden;white-space:nowrap;border-radius:10px;
+ }
+ body.kids.player-v3 .kid-actions .kid-btn{min-height:45px}
+}
