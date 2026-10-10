@@ -136,21 +136,6 @@ jobs:
       - name: Canonical-Inhalt prüfen
         run: node scripts/validate-canonical-content.js
 
-      - name: Deploy statische App (Workers Static Assets)
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: deploy
-
-      - name: Cloudflare CDN Cache leeren
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
-          CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
-          CLOUDFLARE_GLOBAL_API_KEY: ${{ secrets.CLOUDFLARE_GLOBAL_API_KEY }}
-          SITE_URL: "https://dar-al-tawhid.de"
-          CLOUDFLARE_DEV_MODE: "1"
-          PURGE_SCOPE: "visitor"
-        run: node scripts/purge-cloudflare-cache.js
-        continue-on-error: true
+      - name: Production publish ownership
+        run: |
+          echo "Canonical content is committed to main. Production publishing belongs exclusively to Deploy Besucher-App (Cloudflare Workers)."
