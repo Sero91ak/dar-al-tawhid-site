@@ -34,7 +34,8 @@ def catalog() -> list[str]:
     match = re.search(r"const AGE_EXPLANATIONS=Object\.freeze\((\{[\s\S]*?\})\);", html)
     if not match:
         raise RuntimeError("AGE_EXPLANATIONS source changed – refuse mismatched audio")
-    ages = json.loads(match.group(1))
+    literal = re.sub(r"(?m)^(\\s*)(lead|lines|evidence|recap):", r'\\1"\\2":', match.group(1))
+    ages = json.loads(literal)
     if set(ages) != {"4-5", "6-8", "9-10"}:
         raise RuntimeError("Unexpected age catalog")
     texts = [
