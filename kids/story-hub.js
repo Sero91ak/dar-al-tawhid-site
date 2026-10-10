@@ -203,7 +203,16 @@ function renderList(){
       '<span class="gh-story-art">'+(img?'<img src="'+esc(img)+'" alt="" decoding="async" loading="lazy">':'')+'</span>'+
       '<span class="gh-story-copy"><small>'+(m?.url?"HÖRBEREIT":"LESEN · AUDIO FOLGT")+'</small><strong>'+esc(storyName(item))+'</strong><em dir="rtl">'+esc(arabic(item,activeCategory))+'</em><span>'+esc(item.summary||"")+'</span></span></button>';
   }).join("");
-  $("#ghList").querySelectorAll("[data-gh-id]").forEach(b=>b.addEventListener("click",()=>selectStory(b.dataset.ghId)));
+  $("#ghList").querySelectorAll("[data-gh-id]").forEach(b=>{
+    b.addEventListener("click",()=>selectStory(b.dataset.ghId));
+    const entry=list.find(s=>s.id===b.dataset.ghId);
+    if(entry)window.DARKidsItemDownloads?.story(b,{
+      category:activeCategory,item:entry,sourceUrl:cat.url,
+      artwork:artFor(entry,activeCategory,false),
+      hero:artFor(entry,activeCategory,true),
+      audioMeta:audioMeta(entry)
+    });
+  });
 }
 function openWorld(){
   lastFocus=document.activeElement;
