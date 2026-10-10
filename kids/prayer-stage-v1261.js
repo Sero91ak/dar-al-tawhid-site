@@ -55,7 +55,7 @@ if(navigator.connection?.saveData)salahWorld.classList.add("kids-salah-save-data
  const dock=document.querySelector(".bottom-nav");
  const cta=stage.querySelector("#kidsSalahOpenDay");
  if(!dock||!cta)return;
- let queued=false,lastHeight=0,lastWidth=0;
+ let queued=false,lastHeight=0,lastWidth=0,settleCorrections=0;
  function desiredHeroMax(w,h){
    if(w>=700)return h<=840?Math.min(390,Math.max(306,.43*h)):Math.min(525,Math.max(350,.50*h));
    return Math.min(430,Math.max(292,.50*h));
@@ -118,14 +118,9 @@ if(navigator.connection?.saveData)salahWorld.classList.add("kids-salah-save-data
      schedule();
      return;
    }
-   // Keep the condensed state stable during scroll/address-bar movement.
-   // Only release on a substantially taller viewport (e.g. rotation).
-   if(tight&&h>900&&availableBase>safeMinimum+90){
-     salahWorld.classList.remove("kids-home-fit-tight");
-     lastHeight=0;
-     schedule();
-     return;
-   }
+   // Compact mode remains latched for this orientation. Releasing it
+   // based on geometry produced by compact mode itself caused rapid
+   // two-state flicker on tall iPhone screens.
    const wanted=Math.max(safeMinimum,Math.min(reference,availableBase));
    // Very short devices remain vertically scrollable when even condensed
    // text and 44px touch targets cannot physically fit above the dock.
@@ -134,28 +129,24 @@ if(navigator.connection?.saveData)salahWorld.classList.add("kids-salah-save-data
      HERO.style.setProperty("--kids-home-measured-target",wanted+"px");
      HERO.style.setProperty("--kids-home-preflight-cap","9999px");
      lastHeight=wanted;lastWidth=w;
-     // The browser applies the CSS custom properties on the next frame.
-     // Check the *painted* CTA/dock clearance again before declaring the
-     // opening geometry stable, rather than trusting the pre-layout rect.
-     schedule();
+     // Bound self-correction to three passes. Layout mutations must not
+     // drive an unbounded read/write/requestAnimationFrame feedback loop.
+     if(settleCorrections<3){settleCorrections++;schedule();}
    }
  }
  function schedule(){
    if(queued)return;queued=true;
    requestAnimationFrame(()=>requestAnimationFrame(fit));
  }
- const ro=typeof ResizeObserver==="function"?new ResizeObserver(schedule):null;
- ro?.observe(stage);ro?.observe(dock);
- // Fonts, profile artwork and the CTA can change height after the first
- // frame without changing the stage/dock dimensions. Cover those too.
- ro?.observe(cta);
- const wordmark=HERO.querySelector(".kids-wordmark");
- const introduction=HERO.querySelector(".hero-copy");
- if(wordmark)ro?.observe(wordmark);
- if(introduction)ro?.observe(introduction);
+ // Do not observe the elements resized by this fitter. Their ResizeObserver
+ // notifications can otherwise form a perpetual measurement/reflow loop.
  window.addEventListener("load",schedule,{once:true});
  window.addEventListener("resize",schedule,{passive:true});
- window.addEventListener("orientationchange",schedule,{passive:true});
+ window.addEventListener("orientationchange",()=>{
+   salahWorld.classList.remove("kids-home-fit-tight");
+   lastHeight=0;lastWidth=0;settleCorrections=0;
+   schedule();
+ },{passive:true});
  window.addEventListener("pageshow",schedule,{passive:true});
  window.visualViewport?.addEventListener("resize",schedule,{passive:true});
  document.addEventListener("visibilitychange",()=>{if(!document.hidden)schedule()});
