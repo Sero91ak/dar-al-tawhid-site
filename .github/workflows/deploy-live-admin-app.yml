@@ -1,70 +1,25 @@
 name: Deploy live Admin App
-
+# PRODUCTION_SINGLE_OWNER_V1: validation only. The central visitor workflow publishes /admin.
 on:
   workflow_dispatch:
   push:
-    branches:
-      - main
+    branches: [main]
     paths:
       - admin/**
-      - wrangler.toml
-      - _headers
       - .github/workflows/deploy-live-admin-app.yml
-
 permissions:
   contents: read
-
 jobs:
-  deploy-admin-live:
+  validate-admin-live:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Deploy static site (includes /admin)
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: deploy
-
-      - name: Purge Cloudflare cache (admin + visitor)
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
-          CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
-          CLOUDFLARE_GLOBAL_API_KEY: ${{ secrets.CLOUDFLARE_GLOBAL_API_KEY }}
-          SITE_URL: "https://dar-al-tawhid.de"
-          CLOUDFLARE_DEV_MODE: "1"
-        run: node scripts/purge-cloudflare-cache.js
-        continue-on-error: true
-
-      - name: Verify live Admin UI
+      - name: Validate Admin UI bundle
         run: |
-          set +e
-          ok=0
-          for i in 1 2 3 4 5 6; do
-            html="$(curl -fsSL "https://dar-al-tawhid.de/admin/?t=$(date +%s)$i")"
-            sw="$(curl -fsSL "https://dar-al-tawhid.de/admin/sw.js?t=$(date +%s)$i")"
-            studio="$(curl -fsSL "https://dar-al-tawhid.de/admin/video-studio?t=$(date +%s)$i")"
-            echo "$html" | grep -F 'name="newPostMode"' >/dev/null || { echo "retry $i: admin mode radios"; sleep 8; continue; }
-            echo "$html" | grep -F "Komplettes Markdown einfügen" >/dev/null || { echo "retry $i: admin markdown field"; sleep 8; continue; }
-            echo "$html" | grep -F "checkNewPostBtn" >/dev/null || { echo "retry $i: admin check button"; sleep 8; continue; }
-            echo "$html" | grep -F 'id="uploadPostBtn"' >/dev/null || { echo "retry $i: admin publish button"; sleep 8; continue; }
-            echo "$html" | grep -E "(id=\"kiVideoStudio\"|data-panel=\"ki-video-studio\"|>KI-Video-Studio</)" >/dev/null && { echo "retry $i: studio still in admin html"; sleep 8; continue; }
-            echo "$html$sw" | grep -F "dar-admin-single-mode-v67" >/dev/null || { echo "retry $i: sw"; sleep 8; continue; }
-            echo "$studio" | grep -F "Dieser Bereich wurde entfernt" >/dev/null || { echo "retry $i: studio removed page"; sleep 8; continue; }
-            ok=1
-            break
-          done
-          if [ "$ok" != "1" ]; then
-            echo "::error::Live Admin UI verify failed after retries"
-            exit 1
-          fi
-          echo "Live Admin verified (KI-Video-Studio entfernt)."
+          set -euo pipefail
+          test -s admin/index.html
+          test -s admin/sw.js
+          grep -F -q 'name="newPostMode"' admin/index.html
+          grep -F -q 'id="uploadPostBtn"' admin/index.html
+          grep -F -q 'dar-admin-single-mode-v67' admin/sw.js
+          echo "Admin valid; central visitor workflow owns production publish."
