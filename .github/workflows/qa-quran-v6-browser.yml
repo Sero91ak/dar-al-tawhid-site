@@ -1,0 +1,32 @@
+name: Quran V6 Compact Capsule Browser QA
+on:
+  workflow_dispatch:
+  push:
+    branches: [preview/quran-player-browser-links-20261010]
+    paths: [.github/workflows/qa-quran-v6-browser.yml]
+permissions:
+  contents: read
+jobs:
+  browser-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install Chromium browser for genuine rendering assertions
+        run: |
+          npm install --no-save --ignore-scripts --no-audit --no-fund playwright@1.57.0
+          npx playwright install --with-deps chromium
+      - name: Verify V6 mobile tabs, audio capsule, panels, Quran reader and KIDS layout
+        shell: bash
+        run: node scripts/qa-quran-v6-browser.cjs
+      - name: Save responsive screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: quran-v6-device-previews
+          path: .qa-quran-shots/
+          retention-days: 21
+          if-no-files-found: ignore
