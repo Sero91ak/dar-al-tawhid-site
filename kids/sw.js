@@ -315,7 +315,7 @@ self.addEventListener("activate",function(event){
       // Preserve the previous shell as a rescue/offline fallback until the
       // new version has been opened and its extended library downloaded.
       // The pinned version of each asset avoids cross-version collisions.
-      const versions=keys.filter(key=>/^dar-al-tawhid-kids-v\\d+$/.test(key))
+      const versions=keys.filter(key=>/^dar-al-tawhid-kids-v[0-9]+$/.test(key))
         .sort((a,b)=>Number(b.split("-v").pop())-Number(a.split("-v").pop()));
       const keep=new Set([CACHE_NAME,...versions.slice(0,2)]);
       return Promise.all(versions.filter(key=>!keep.has(key)).map(key=>caches.delete(key)));
