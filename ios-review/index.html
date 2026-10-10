@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#061b26">
+<meta name="color-scheme" content="dark">
+<title>App bewerten · DĀR AL TAWḤĪD</title>
+<style>
+:root{--gold:#efd196;--cream:#fff2da;--muted:#e7e6df;--night:#061b26}
+*{box-sizing:border-box}html{background:var(--night);min-height:100%;scroll-behavior:smooth}body{margin:0;color:var(--cream);font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.background{position:fixed;inset:0;background:radial-gradient(ellipse at 50% 40%,transparent 0 18%,#041721ac 70%),linear-gradient(0deg,#051d27,#08283c);z-index:-2}
+.background:before{content:"";position:absolute;inset:0;background:url("./moonlit-courtyard.svg") center center/cover no-repeat;opacity:.88}
+.background:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#0319244d,transparent 15% 85%,#03192459),linear-gradient(180deg,#061b260f 0%,#03192587 23%,#061b26d9 53%,#05182490 85%,#031b26eb)}
+a,button{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.shell{min-height:100dvh;display:flex;flex-direction:column;align-items:center;overflow:hidden}
+.content{width:min(100%,520px);padding:clamp(30px,6vh,70px) 22px 34px;min-height:calc(100dvh - 92px);display:flex;flex-direction:column;justify-content:center;gap:0;text-align:center;text-shadow:0 2px 10px #00141b}
+.ornament{display:flex;align-items:center;justify-content:center;gap:14px;color:var(--gold);font-size:22px;line-height:1}.ornament:before,.ornament:after{content:"";height:1px;max-width:95px;flex:1;background:linear-gradient(90deg,transparent,var(--gold))}.ornament:after{transform:rotate(180deg)}
+.greeting{font-family:Georgia,"Times New Roman",serif;color:var(--gold);font-size:clamp(18px,4.9vw,23px);line-height:1.45;margin:20px 0 14px;font-weight:600;text-wrap:balance}
+h1{font:400 clamp(38px,9vw,57px)/1.07 Georgia,"Times New Roman",serif;letter-spacing:-.04em;margin:0 0 22px;color:#fff3dd;text-wrap:balance}
+.description{font-size:clamp(16px,3.9vw,19px);line-height:1.58;color:#f8f1e7;margin:22px auto 14px;max-width:420px;text-wrap:balance}
+.emphasis{color:var(--gold);font-size:clamp(16px,3.85vw,18px);font-weight:700;line-height:1.45;margin:9px auto 0}
+.caveat{margin:3px 0 20px;font-size:clamp(15px,3.6vw,17px);line-height:1.5;color:#f1eae2}
+.stars{display:flex;gap:clamp(11px,5vw,24px);justify-content:center;color:var(--gold);margin:8px 0 26px}
+.stars svg{width:clamp(26px,7vw,37px);height:clamp(26px,7vw,37px);fill:none;stroke:currentColor;stroke-width:1.7;filter:drop-shadow(0 1px 8px #ffdb8740)}
+.review{display:flex;justify-content:center;align-items:center;gap:10px;text-shadow:none;text-decoration:none;color:#072333;font-size:clamp(16px,4.1vw,19px);font-weight:800;min-height:62px;border:1px solid #ffe4af;border-radius:19px;background:linear-gradient(110deg,#f4d99f,#d6ab60);box-shadow:0 8px 26px #0009,0 1px 0 #fff9 inset;padding:10px 18px;max-width:480px;width:100%}
+.review:focus-visible,.back:focus-visible,.tabs a:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.back{color:#f4d49c;font-size:clamp(16px,3.9vw,18px);display:inline-flex;align-self:center;margin:22px auto 20px;text-underline-offset:5px;line-height:1.4}
+.footnote{font-size:clamp(14px,3.65vw,16px);line-height:1.48;color:#f0ebe4;margin:6px 0 0;max-width:430px;text-wrap:balance}
+.barakah{display:block;font-family:Georgia,"Times New Roman",serif;font-size:clamp(19px,4.8vw,23px);font-weight:600;line-height:1.4;color:var(--gold);margin-top:6px}
+.tabs{width:100%;display:flex;justify-content:space-around;gap:4px;background:#061f2bec;border-top:1px solid #a68b5840;padding:13px 7px max(19px,env(safe-area-inset-bottom));min-height:85px;flex-shrink:0}
+.tabs a{min-width:60px;color:#bdd1cf;text-decoration:none;display:flex;align-items:center;flex-direction:column;justify-content:center;gap:5px;font-size:12px}
+.tabs svg{height:24px;width:24px;fill:none;stroke:currentColor;stroke-width:1.8}
+.tabs .selected{color:var(--gold)}
+@media(max-height:690px){.content{padding-top:18px;justify-content:flex-start}.description{margin-top:12px}.ornament{font-size:17px}.stars{margin-bottom:15px}.greeting{margin-top:10px}h1{margin-bottom:12px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="background" aria-hidden="true"></div>
+<div class="shell">
+<main class="content">
+<div class="ornament" aria-hidden="true">✧</div>
+<p class="greeting">As-salāmu ʿalaykum wa-raḥmatullāh</p>
+<h1>Deine Meinung<br>ist uns wertvoll.</h1>
+<div class="ornament" aria-hidden="true">✧</div>
+<p class="description">Al-ḥamdu lillāh, dass du unsere App nutzt. Mit Liebe und Sorgfalt möchten wir <strong>DĀR AL TAWḤĪD</strong> weiterentwickeln.</p>
+<p class="emphasis">Wir freuen uns über deine ehrliche Bewertung</p>
+<p class="caveat">– ob Lob, Anregung oder Kritik.</p>
+<div class="stars" aria-label="Im App Store sind Bewertungen von einem bis fünf Sternen möglich">
+<svg viewBox="0 0 24 24"><path d="m12 2 3.1 6.5 7.2 1-5.2 5.2 1.3 7.2-6.4-3.4-6.4 3.4 1.2-7.2-5.1-5.2 7.1-1z"/></svg>
+<svg viewBox="0 0 24 24"><path d="m12 2 3.1 6.5 7.2 1-5.2 5.2 1.3 7.2-6.4-3.4-6.4 3.4 1.2-7.2-5.1-5.2 7.1-1z"/></svg>
+<svg viewBox="0 0 24 24"><path d="m12 2 3.1 6.5 7.2 1-5.2 5.2 1.3 7.2-6.4-3.4-6.4 3.4 1.2-7.2-5.1-5.2 7.1-1z"/></svg>
+<svg viewBox="0 0 24 24"><path d="m12 2 3.1 6.5 7.2 1-5.2 5.2 1.3 7.2-6.4-3.4-6.4 3.4 1.2-7.2-5.1-5.2 7.1-1z"/></svg>
+<svg viewBox="0 0 24 24"><path d="m12 2 3.1 6.5 7.2 1-5.2 5.2 1.3 7.2-6.4-3.4-6.4 3.4 1.2-7.2-5.1-5.2 7.1-1z"/></svg>
+</div>
+<a class="review" id="reviewButton" href="https://apps.apple.com/de/app/id6805988753?action=write-review" rel="external" aria-label="Bewerte DĀR AL TAWḤĪD direkt im Apple App Store">★ &nbsp; Im App Store bewerten &nbsp; ↗</a>
+<a class="back" href="/#more">Zurück zu „Mehr“</a>
+<p class="footnote">Sterne und Bewertung gibst du direkt bei Apple ab.<span class="barakah">Bārakallāhu fīk.</span></p>
+</main>
+<nav class="tabs" aria-label="Hauptnavigation">
+<a href="/#home"><svg viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v11h-6v-7H9v7H3z"/></svg>Start</a>
+<a href="/#quran"><svg viewBox="0 0 24 24"><path d="M12 6C8 3 4 4 2 5v14c4-2 7-1 10 1m0-14c4-3 8-2 10-1v14c-4-2-7-1-10 1m0-14v14"/></svg>Qurʾān</a>
+<a href="/#quiz"><svg viewBox="0 0 24 24"><path d="M4 21V3h16v18M8 7h8M8 12h8M8 17h8"/></svg>Lernen</a>
+<a href="/#more" class="selected" aria-current="page"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg>Mehr</a>
+</nav>
+</div>
+<script>
+(function(){
+  "use strict";
+  // A review link click is not proof of a completed review.
+  // Keep the page voluntary; never show an unsolicited custom rating prompt.
+  var button=document.getElementById("reviewButton");
+  button.addEventListener("click",function(){
+    try{localStorage.setItem("dar.ios.rating.manualOpenAt",new Date().toISOString())}catch(_){}
+  });
+})();
+</script>
+</body>
+</html>
