@@ -27,7 +27,7 @@ for(const key of clipNames){
  assert.ok(Object.values(staging.entries).some(x=>x.url===keyUrl),"Direct asset not staged "+key);
 }
 assert.equal(Object.values(staging.entries).filter(e=>e.approvedForPlayback===false).length,4);
-function harness(search,who="girl",welcome="Heute geht es darum, die Wahrheit zu sagen. Wir hören zu und überlegen zusammen. Du darfst eine Pause machen."){
+function harness(search,who="girl",welcome="Heute geht es darum, die Wahrheit zu sagen. Wir hören zu und überlegen zusammen. Du darfst eine Pause machen.",mode="demo"){
  const listeners={},visible={};
  const playing=[];
  class FakeAudio{
@@ -36,7 +36,7 @@ function harness(search,who="girl",welcome="Heute geht es darum, die Wahrheit zu
   pause(){} load(){}
   play(){playing.push(this.src);return Promise.resolve()}
  }
- const body={dataset:{profile:who,kidsAge:"4-5"}};
+ const body={dataset:{profile:who,kidsAge:"4-5",academyChildMode:mode}};
  const document={
   body,readyState:"complete",hidden:false,
   addEventListener:(event,fn,capture)=>{listeners[event]=fn; if(event==="click")assert.equal(capture,true)},
@@ -85,7 +85,7 @@ assert.deepEqual(q.tap("[data-academy-pilot]",3),{stopped:true,prevented:true});
 assert.equal(q.playing.length,1);
 assert.ok(q.playing[0].includes(clipNames[3]));
 const preview=harness("?previewProfil=maedchen&previewAlter=4-5");
-assert.equal(preview.visible.panel.hidden,true,"Adult QA controls require explicit pilot authorization");
+assert.equal(preview.visible.panel.hidden,false,"Anonymous creator preview must show the four genuine V4 QA buttons");
 assert.ok(preview.listeners.click,"Explicit girl preview should be testable without hidden voicePilot parameter");
 assert.deepEqual(preview.tap('[data-speak-stage="0"]'),{stopped:true,prevented:true});
 assert.equal(preview.playing.length,1,"Exact matched greeting must start on the first iPhone tap");
@@ -96,7 +96,12 @@ assert.equal(wrongSubject.playing.length,0,"Never play Ṣidq greeting for an un
 const savedBoy=harness("?previewProfil=maedchen&previewAlter=4-5","boy");
 assert.deepEqual(savedBoy.tap('[data-speak-stage="0"]'),{stopped:false,prevented:false});
 assert.equal(savedBoy.playing.length,0,"Real boy profile overrides preview query");
+const realGirl=harness("?previewProfil=maedchen&previewAlter=4-5","girl",
+ "Heute geht es darum, die Wahrheit zu sagen. Wir hören zu und überlegen zusammen. Du darfst eine Pause machen.","child");
+assert.equal(realGirl.visible.panel.hidden,true,"Unapproved pilot clips cannot be offered in real child profiles");
+assert.deepEqual(realGirl.tap('[data-speak-stage="0"]'),{stopped:false,prevented:false});
+assert.equal(realGirl.playing.length,0);
 const ordinary=harness("?cb=v16-regular");
 assert.equal(ordinary.listeners.click,undefined,"No unapproved pilot override for normal signed-in pupils");
 assert.equal(ordinary.playing.length,0);
-console.log("KIDS ACADEMY V16 PASS: exact Serhat V4 first-tap greeting in explicit preview, subject match, real child profile protection, no regular lesson promotion.");
+console.log("KIDS ACADEMY V17 PASS: exact Serhat V4 first-tap greeting in explicit preview, subject match, real child profile protection, no regular lesson promotion.");
