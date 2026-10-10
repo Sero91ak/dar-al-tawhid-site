@@ -93,8 +93,7 @@ def inspect(word: str, entry: dict) -> dict:
 
 def main() -> int:
     if not shutil.which("ffmpeg"):
-        print("KIDS DUA ACOUSTIC AUDIT SKIPPED: ffmpeg unavailable; no QA certification")
-        return 0
+        raise RuntimeError("FFmpeg decoder unavailable: acoustic QA cannot pass without decoding audio")
     entries = json.loads(MANIFEST.read_text(encoding="utf-8")).get("entries") or {}
     indexed = {key(word): entry for word, entry in entries.items()}
     rows = []
