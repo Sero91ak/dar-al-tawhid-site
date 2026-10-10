@@ -41,3 +41,14 @@ Freigabe und Modelle je Wort sind in `kids/data/dua-audio-model-policy.json` ger
 ## Fortführung am 10.10.2026: Aktueller Hauptstand ohne Layout-Rückschritt
 
 Der ältere Entwurf PR #908 ist wegen der inzwischen erfolgten parallelen App-Änderungen stark überholt. Ein frischer Zweig `fix/kids-dua-v4-safe-mainline-20261010` enthält die gleichen sicheren V4-Audiokorrekturen ausgehend von der aktuellen App; **keine Übernahme älterer Home-, Kids-Version- oder Website-Dateien.** Scriptcache: `dua-smart-learn.js?v=1306`. Keine Freigabe vor Android/iPhone-Geräte-QA.
+
+## Technische V4-Audiodatei-Stichprobe – 10.10.2026
+
+**Tatsächlich dekodiert:** 10 vorhandene isolierte Fuṣḥā-V4-Wortclips mit FFmpeg, keine neuen kostenpflichtigen Generierungen. Alle zehn sind technisch lesbar. Gemessene Anfangsstille: 0,16–0,42 Sekunden, gemessene Endstille: 0,54–0,72 Sekunden, nach konservativer RMS-Schwelle. Das erklärt das Potenzial des Randstille-Filters, bestätigt aber **nicht**, dass sämtliche Atemgeräusche außerhalb der Sprache liegen.
+
+**Konkreter Datenfehler gefunden und behoben:** Bei `لَا` war in `kids/data/dua-word-audio.json` `durationSeconds=2.8` eingetragen; FFmpeg dekodiert aus der tatsächlich gespeicherten Datei `1.536` Sekunden. Nur dieser Metadatenwert wurde auf `1.536` berichtigt; Originalaufnahme, arabischer Text, SHA-256 und Dateipfad bleiben unverändert. Die QA überprüft jetzt die Übereinstimmung des gesamten Zehner-Samples und schlägt bei weiteren Abweichungen fehl.
+
+**Weitere gezielte Hörkandidaten:** `مَنْ` ist mit 2,56 Sekunden für ein kurzes Wort relativ lang und benötigt Prüfung auf natürliche Betonung und Endgeräusche; `وَأَنْتَ` weist circa 0,42 Sekunden leisen Anfang auf. Die Messung kann arabische `ه`-, `ح`-, `ع`-Laute oder echte Atemgeräusche nicht zuverlässig allein aus RMS unterscheiden; die weichen Anfangs-/Endränder dürfen daher keine Sprachlaute beschneiden.
+
+**GitHub-Sicherungsstand:** Nach dem konservativen Port vom alten, nicht gemergten PR #908 auf den Draft-PR #915 bestanden die Duʿāʾ-Audio-Spezialprüfung, App Health Check, Canonical State Guard und App Lane Guard auf Commit `5f327bda9ad1530cdd6b4cfd528990c7a6bbe56f`. Separate Voice-Studio-Alif-Bā-Validierung und menschliche Hör-/Gerätefreigabe bleiben eigenständige Voraussetzungen. Kein Merge nach `main` und keine Live-Veröffentlichung.
+
