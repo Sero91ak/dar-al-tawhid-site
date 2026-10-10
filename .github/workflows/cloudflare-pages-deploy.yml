@@ -45,12 +45,13 @@ on:
       - scripts/sync-quellen-registry.cjs
       - scripts/sync-app-build-ids.js
       - scripts/verify-live-deploy.js
+      - scripts/public-website-isolation-guard.js
       - scripts/purge-cloudflare-cache.js
       - scripts/kids-prophet-release-guard.js
       - .github/workflows/cloudflare-pages-deploy.yml
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   # Single production lock shared with the Kids live deploy.
@@ -426,9 +427,11 @@ jobs:
           node scripts/push-system-guard.js
           node scripts/push-lanes-guard.js
           node scripts/version-update-guard.js
+          node scripts/public-website-isolation-guard.js
           node scripts/app-stability-guard.js
 
       - name: Deploy statische App (Workers Static Assets)
+        id: publish
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -507,6 +510,48 @@ jobs:
           grep -F -q 'BILDBEITRAG_HISTORICAL_REPAIR_V1247' "$SHARE_JS" || { echo "::error::Historischer Bildbeitrag-Fix live nicht aktiv"; exit 1; }
           grep -F -q 'HISTORICAL_SHARE_FALLBACKS' "$SHARE_JS" || { echo "::error::Historischer Bildbeitrag-Fallback live fehlt"; exit 1; }
           echo "Live Bildbeitrag-Renderer: Syntax + historischer Fix OK"
+
+      - name: Notfall-Rollback bei kaputtem Live-Deploy
+        if: ${{ failure() && steps.publish.outcome == 'success' }}
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+          CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
+          CLOUDFLARE_GLOBAL_API_KEY: ${{ secrets.CLOUDFLARE_GLOBAL_API_KEY }}
+          SITE_URL: "https://dar-al-tawhid.de"
+          PURGE_SCOPE: "visitor"
+        run: |
+          set -euo pipefail
+          echo "::warning::Live-Verifikation nach Publish fehlgeschlagen – automatischer Rollback startet."
+          git fetch origin production-last-good || true
+          if git rev-parse --verify origin/production-last-good >/dev/null 2>&1; then
+            ROLLBACK_SHA="$(git rev-parse origin/production-last-good)"
+          else
+            ROLLBACK_SHA="$(git rev-parse "${GITHUB_SHA}^")"
+          fi
+          echo "Rollback auf ${ROLLBACK_SHA}"
+          git reset --hard "${ROLLBACK_SHA}"
+          npm install
+          node scripts/app-stability-repair.js || true
+          npm run build
+          node scripts/build-desktop-posts-index.js
+          npx wrangler deploy
+          node scripts/purge-cloudflare-cache.js || true
+          sleep 5
+          status="$(curl -sS -L --retry 4 --retry-delay 2 --max-time 25 -o /tmp/dar-public-rollback.html -w '%{http_code}' "https://dar-al-tawhid.de/?rollback=${ROLLBACK_SHA}")"
+          test "${status}" = "200" || { echo "::error::Rollback-Website HTTP ${status}"; exit 1; }
+          grep -F -q 'DĀR AL TAWḤĪD' /tmp/dar-public-rollback.html || { echo "::error::Rollback-Website Branding fehlt"; exit 1; }
+          grep -F -q 'desktop-overhaul' /tmp/dar-public-rollback.html || { echo "::error::Rollback-Website Shell fehlt"; exit 1; }
+          echo "Notfall-Rollback live und erreichbar."
+
+      - name: Letzten grünen Produktionsstand markieren
+        if: success()
+        shell: bash
+        run: |
+          git push origin "${GITHUB_SHA}:refs/heads/production-last-good" --force
+          echo "production-last-good -> ${GITHUB_SHA}"
 
   # Vergangenheit bleibt in Git. Live darf nur die letzten 4 Tage zurückliegen.
   # Liegt die veröffentlichte Hülle weiter zurück oder auf einer kleineren Build-ID,
