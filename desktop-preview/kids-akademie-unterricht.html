@@ -2834,8 +2834,48 @@ body #lessonMain.lesson-main:not([hidden]) .focus-page-navigation{
  }
 }
 
+
+/* V7.5.5 · Unterrichtsschritte: sichtbarer Abstand zur globalen Navigation.
+   Nur Akademie-Unterricht, Hero/Startseite/Fachkarten bleiben unangetastet. */
+:root{
+  --kids-lesson-nav-space:16px;
+  --kids-global-appbar-height:calc(74px + env(safe-area-inset-top,0px));
+}
+body .wrap > #lessonMain.lesson-main:not([hidden]){
+  margin-block-start:var(--kids-lesson-nav-space)!important;
+  padding-block-start:0!important;
+}
+body[data-academy-step] #lessonMain.lesson-main:not([hidden]) .stage-tracker{
+  margin-block-start:0!important;
+  margin-block-end:12px!important;
+  top:calc(var(--kids-global-appbar-height) + var(--kids-lesson-nav-space))!important;
+  scroll-margin-top:calc(var(--kids-global-appbar-height) + var(--kids-lesson-nav-space) + 3px)!important;
+  border-radius:17px!important;
+}
+body[data-academy-step] #lessonMain.lesson-main:not([hidden]) .stage-surface{
+  margin-block-start:0!important;
+}
+body[data-embedded="true"]{
+  --kids-global-appbar-height:0px;
+}
+@media (max-width:700px){
+  :root{
+    --kids-lesson-nav-space:14px;
+    --kids-global-appbar-height:calc(65px + env(safe-area-inset-top,0px));
+  }
+  body[data-academy-step] #lessonMain.lesson-main:not([hidden]) .stage-tracker{
+    margin-block-end:12px!important;
+  }
+}
+@media (min-width:701px) and (max-width:1023px){
+  :root{--kids-lesson-nav-space:16px}
+}
+@media (min-width:1024px){
+  :root{--kids-lesson-nav-space:18px}
+}
+
 </style></head>
-<body data-profile="boy" data-preview-release="V7.5.4-20261010" data-preview-deploy="v7.5.4-global-spacing"><main class="wrap">
+<body data-profile="boy" data-preview-release="V7.5.5-20261010" data-preview-deploy="v7.5.5-lesson-tracker-gap"><main class="wrap">
 
 <header class="academy-header kids-detail-appbar" aria-label="Navigationsleiste Lernakademie">
  <button class="academy-nav-back" id="academyNavBack" type="button" aria-label="Zurück"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/><path d="M9 12h11"/></svg></button>
