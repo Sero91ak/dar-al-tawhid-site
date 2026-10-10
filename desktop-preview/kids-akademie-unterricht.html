@@ -2874,8 +2874,31 @@ body[data-embedded="true"]{
   :root{--kids-lesson-nav-space:18px}
 }
 
+
+/* V7.5.6 – real scroll overlap repair: the step rail stays in normal document flow. */
+body .wrap > #lessonMain.lesson-main:not([hidden]){
+  margin-block-start:0!important;
+  padding-block-start:var(--kids-lesson-nav-space,16px)!important;
+}
+body[data-academy-step] #lessonMain.lesson-main:not([hidden]) .stage-tracker{
+  position:static!important;
+  inset:auto!important;top:auto!important;right:auto!important;
+  bottom:auto!important;left:auto!important;z-index:auto!important;
+  margin-block:0 12px!important;
+  scroll-margin-top:calc(var(--kids-global-appbar-height,74px) + var(--kids-lesson-nav-space,16px))!important;
+}
+body[data-academy-step] #lessonMain.lesson-main:not([hidden]) .lesson-stage{
+  scroll-margin-top:calc(var(--kids-global-appbar-height,74px) + var(--kids-lesson-nav-space,16px))!important;
+}
+@media(max-width:700px){
+  body .wrap > #lessonMain.lesson-main:not([hidden]){padding-block-start:14px!important}
+}
+@media(min-width:1024px){
+  body .wrap > #lessonMain.lesson-main:not([hidden]){padding-block-start:18px!important}
+}
+
 </style></head>
-<body data-profile="boy" data-preview-release="V7.5.5-20261010" data-preview-deploy="v7.5.5-lesson-tracker-gap"><main class="wrap">
+<body data-profile="boy" data-preview-release="V7.5.6-20261010" data-preview-deploy="v7.5.6-nonsticky-tracker-scroll-safety"><main class="wrap">
 
 <header class="academy-header kids-detail-appbar" aria-label="Navigationsleiste Lernakademie">
  <button class="academy-nav-back" id="academyNavBack" type="button" aria-label="Zurück"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/><path d="M9 12h11"/></svg></button>
@@ -3435,14 +3458,26 @@ function focusUpdate(stageNumber,target,{silent=false}={}){
  }
 }
 }
+
+/* The appbar remains sticky; the step rail never overlays reading content.
+   Scroll alignment is based on the real measured navigation height. */
+function scrollLessonToTop(){
+ const tracker=$(".stage-tracker");
+ if(!tracker || $("#lessonMain").hidden)return;
+ const bar=document.querySelector(".academy-header.kids-detail-appbar");
+ const headerHeight=bar?bar.getBoundingClientRect().height:0;
+ const gap=parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--kids-lesson-nav-space"))||14;
+ const target=Math.max(0,Math.round(window.scrollY+tracker.getBoundingClientRect().top-headerHeight-gap));
+ window.scrollTo({top:target,behavior:"auto"});
+}
+
 function focusMove(stageNumber,delta){
  const current=focusPages[stageNumber]||0;
  const items=focusPieces(stageNumber);const target=Math.max(0,Math.min(items.length-1,current+delta));
  if(target===current)return;
  focusUpdate(stageNumber,target);
- // Keep child in a stable focus area rather than scrolling through the entire page.
- const root=$(".stage-tracker");
- if(root)root.scrollIntoView({behavior:"auto",block:"start"});
+ // Keep the new card below the actual appbar instead of sticking over text.
+ requestAnimationFrame(scrollLessonToTop);
 }
 function initFocusControls(){
  for(const stageNumber of [1,2,4]){
@@ -3481,7 +3516,7 @@ function showStep(n,scroll=true){
  ["Zur Erklärung ","Zu Qurʾān und Sunnah ","Jetzt mitdenken "][n];
  if(n===3&&!finished)showQuestion();if(n===4)showRecap();
  saveDraft();
- if(scroll)$(".stage-tracker").scrollIntoView({behavior:"instant",block:"start"});
+ if(scroll)requestAnimationFrame(scrollLessonToTop);
 }
 function nextStep(){
  if((step===1||step===2)&&focusPages[step]<focusPieces(step).length-1){
