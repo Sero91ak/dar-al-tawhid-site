@@ -3146,6 +3146,17 @@ html[data-kids-pointer-input="touch"] body #academySubject.subject-detail .subje
  outline:0!important;outline-offset:0!important;box-shadow:none!important;
 }
 
+
+/* Academy V9 – compact review library and daily course status. */
+.subject-roadmap.subject-review{margin-top:12px!important;padding-top:14px!important;border-top:1px solid rgba(40,90,99,.16)!important}
+.subject-review[hidden],.subject-empty[hidden]{display:none!important}
+.subject-review-note{font-size:13px;line-height:1.45;color:var(--kids-ink,#234653);margin:2px 0 10px}
+.subject-topic.is-reviewed{border-color:rgba(48,129,113,.35)!important;background:rgba(237,250,242,.94)!important}
+.subject-topic .topic-review-meta{font-size:12px;font-weight:650;line-height:1.35;color:#285f58}
+.subject-topic.is-due{background:rgba(255,244,219,.95)!important}
+.subject-roadmap .subject-topic-grid{gap:8px!important}
+.subject-roadmap .subject-topic{min-height:66px!important}
+
 </style><script data-kids-touch-focus-v83>
 (function(){
   "use strict";
@@ -3166,7 +3177,7 @@ html[data-kids-pointer-input="touch"] body #academySubject.subject-detail .subje
   },true);
 })();
 </script></head>
-<body data-profile="boy" data-preview-release="V8.4-20261010" data-preview-deploy="v8.4-touch-focus-master-audio-production"><main class="wrap">
+<body data-profile="boy" data-preview-release="V9.0-20261010" data-preview-deploy="v9-daily-lessons-and-free-reviews"><main class="wrap">
 
 <header class="academy-header kids-detail-appbar" aria-label="Navigationsleiste Lernakademie">
  <button class="academy-nav-back" id="academyNavBack" type="button" aria-label="Zurück"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/><path d="M9 12h11"/></svg></button>
@@ -3220,7 +3231,8 @@ html[data-kids-pointer-input="touch"] body #academySubject.subject-detail .subje
   <p id="subjectLessonNote">Lerne, weshalb die Wahrheit wichtig ist.</p>
   <button id="subjectStart" class="subject-start" type="button">Jetzt Unterricht beginnen →</button>
  </div>
- <div class="subject-roadmap"><h2>Das erwartet dich</h2><div id="subjectTopicGrid" class="subject-topic-grid"></div></div>
+ <div class="subject-roadmap"><h2>Neue Themen</h2><p class="subject-review-note subject-empty" id="subjectEmpty" hidden>Alle Themen dieses Fachs sind gelernt. Du kannst sie unten jederzeit wiederholen.</p><div id="subjectTopicGrid" class="subject-topic-grid"></div></div>
+<div class="subject-roadmap subject-review" id="subjectReviewSection" hidden><h2>Schon gelernt · Wiederholen</h2><p class="subject-review-note">Hier darfst du jede Lektion beliebig oft und an jedem Tag erneut lernen.</p><div id="subjectReviewGrid" class="subject-topic-grid"></div></div>
 </section>
 <section class="lesson-main" id="lessonMain" hidden>
  <div class="lesson-topline"><button type="button" class="pill back-pill" id="backToAcademy"><span aria-hidden="true">←</span> Zur Lernakademie</button><span class="lesson-label">Akhlāq · Einheit 01</span></div>
@@ -3268,6 +3280,7 @@ html[data-kids-pointer-input="touch"] body #academySubject.subject-detail .subje
 </section>
 </main>
 <script src="/kids/akademie/curriculum-v1.js?v=20261010-01"></script>
+<script src="/kids/akademie/curriculum-v2.js?v=20261010-09"></script>
 <script>
 (()=>{
 "use strict";
@@ -3582,20 +3595,34 @@ function renderHome(){
  all("[data-open-lesson]").forEach(b=>b.disabled=!allowed);
  $("#academyAgeWarning").hidden=allowed;
  if(!allowed){
-   $("#courseStatus").textContent="Alter fehlt";
-   $("#reviewNotice").textContent="Bitte zuerst die Altersstufe im Profil festlegen.";
-   $("#todaySummary").textContent="Die Unterrichtsstufe konnte nicht erkannt werden.";
-   $("#journeyDetail").textContent="Kein Unterricht startet mit einer falschen Altersstufe.";
-   $("#journeyBar").style.width="0%";
-   return;
+  $("#courseStatus").textContent="Alter fehlt";
+  $("#reviewNotice").textContent="Bitte zuerst die Altersstufe im Profil festlegen.";
+  $("#todaySummary").textContent="Die Unterrichtsstufe konnte nicht erkannt werden.";
+  $("#journeyDetail").textContent="Bitte zuerst ein Kinderprofil festlegen.";
+  return;
  }
- const rec=oldRecord(),draft=readDraft(),canContinue=!!draft&&(draft.step>0||draft.qIndex>0),due=Number(rec?.nextDue||0),pending=rec&&due<=Date.now();
- $("#courseStatus").textContent=!rec?"Bereit":pending?"Wiederholen":"Schon geübt";
- $("#reviewNotice").textContent=!rec?ui.journeyNew:pending?ui.journeyDue:ui.journeyDone;
- $("#todaySummary").textContent=canContinue?"Du kannst deine Unterrichtsstunde dort fortsetzen, wo du pausiert hast.":!rec?"Dein nächster Schritt ist bereit.":pending?"Heute kannst du dich erinnern.":"Du darfst den Unterricht jederzeit wiederholen.";
- $("#journeyBar").style.width=rec?"100%":"12%";
- $("#journeyDetail").textContent=!rec?"Schritt für Schritt, in deinem Tempo.":pending?"Deine Wiederholung ist bereit.":"Nächste Erinnerung: "+new Date(due).toLocaleDateString("de-DE");
- $(".today-button").firstChild.textContent=canContinue?"Unterricht fortsetzen ":rec?ui.repeat+" ":ui.start+" ";
+ const allIds=lessonIds(),done=allIds.filter(x=>!!recordFor(x));
+ const due=done.filter(x=>Number(recordFor(x)?.nextDue)<=Date.now());
+ const daily=dailyLesson();
+ if(!daily)return;
+ const saved=recordFor(daily.id),draft=draftFor(daily.id);
+ const canContinue=!!draft&&(draft.step>0||draft.qIndex>0);
+ $("#todayTopicName").textContent=lessonTitle(daily.id);
+ $("#todayTopicIntro").textContent=lessonLead(daily.id);
+ $("#todaySummary").textContent=canContinue?"Setze diesen Unterricht dort fort, wo du pausiert hast.":daily.kind==="due"?"Heute erinnern wir uns an ein früheres Thema. Danach kannst du auch Neues lernen.":daily.kind==="new"?"Ein neues Thema wartet heute auf dich. Du kannst auch ältere Lektionen wiederholen.":"Alle vorbereiteten Themen kennst du schon. Heute darfst du dein Wissen festigen.";
+ $("#courseStatus").textContent=done.length+" / "+allIds.length+" gelernt";
+ $("#reviewNotice").textContent=due.length?due.length+" Wiederholung"+(due.length===1?"":"en")+" bereit · jederzeit frei üben":"Heute Neues entdecken oder bekannte Themen wiederholen.";
+ $("#journeyBar").style.width=Math.round(done.length/allIds.length*100)+"%";
+ $("#journeyDetail").textContent=done.length+" von "+allIds.length+" Lektionen abgeschlossen · Wiederholungen sind immer möglich.";
+ const button=$(".today-button");button.dataset.openLesson=daily.id;
+ button.firstChild.textContent=canContinue?"Unterricht fortsetzen ":daily.kind==="due"?"Wiederholung starten ":saved?"Noch einmal üben ":"Heute lernen ";
+ all("[data-open-category]").forEach(card=>{
+  const subject=card.dataset.openCategory;
+  const total=availableTopics(subject).length,learned=availableTopics(subject).filter(x=>!!recordFor(x)).length;
+  const tag=card.querySelector(".category-state");
+  if(tag)tag.textContent=learned+" von "+total+" gelernt";
+  card.setAttribute("aria-label",(SUBJECTS[subject]?.title||subject)+" – "+total+" Lektionen, "+learned+" gelernt; Fach öffnen");
+ });
 }
 
 function syncProfile(force=false){
@@ -3685,10 +3712,62 @@ function prepareOwnerVoice(){
 const QURAN_COUNTS=[7,286,200,176,120,165,206,75,129,109,123,111,43,52,99,128,111,110,98,135,112,78,118,64,77,227,93,88,69,60,34,30,73,54,45,83,182,88,75,85,54,53,89,59,37,35,38,29,18,45,60,49,62,55,78,96,29,22,24,13,14,11,11,18,12,12,30,52,52,44,28,28,20,56,40,31,50,40,46,42,29,19,36,25,22,17,19,26,30,20,15,21,11,8,8,19,5,8,8,11,11,8,3,9,5,4,7,3,6,3,5,4,5,6];
 const CURRICULUM=window.DARKidsAcademyCurriculum||{};
 const TOPIC_IDS={akhlaq:["sidq","akhlaq-sabr","akhlaq-amanah"],adab:["adab-salam","adab-worte","adab-respekt"],fiqh:["fiqh-taharah","fiqh-wudu","fiqh-salah"],aqidah:["aqidah-tawhid","aqidah-iman","aqidah-ikhlas"]};
+Object.keys(CURRICULUM).forEach(lessonId=>{
+ const subject=CURRICULUM[lessonId]?.subject;
+ if(TOPIC_IDS[subject]&&!TOPIC_IDS[subject].includes(lessonId))TOPIC_IDS[subject].push(lessonId);
+});
 let activeLessonId="sidq";
 const activeLesson=()=>CURRICULUM[activeLessonId]||null;
 const activeSubject=()=>activeLesson()?.subject||"akhlaq";
 const availableTopics=key=>(TOPIC_IDS[key]||[]).filter(x=>x==="sidq"||!!CURRICULUM[x]);
+function lessonIds(){return Object.values(TOPIC_IDS).flat().filter(lessonId=>lessonId==="sidq"||!!CURRICULUM[lessonId])}
+function recordFor(lessonId){
+ try{
+  const item=JSON.parse(localStorage.getItem(["kids",VERSION,id,age,lessonId].join("."))||"null");
+  return item&&item.lessonId===lessonId&&item.id===id&&item.age===age?item:null;
+ }catch(_){return null}
+}
+function draftFor(lessonId){
+ try{
+  const v=JSON.parse(localStorage.getItem(["kids",VERSION,id,age,lessonId,"draft-v1"].join("."))||"null");
+  return v&&v.id===id&&v.age===age&&v.lessonId===lessonId&&Date.now()-v.savedAt<7*86400000?v:null;
+ }catch(_){return null}
+}
+function academyDay(){
+ const now=new Date();
+ const day=[now.getFullYear(),String(now.getMonth()+1).padStart(2,"0"),String(now.getDate()).padStart(2,"0")].join("-");
+ const ordinal=Math.floor(Date.UTC(now.getFullYear(),now.getMonth(),now.getDate())/86400000);
+ return {day,ordinal};
+}
+function dailyLesson(){
+ const allIds=lessonIds(),now=Date.now(),day=academyDay();
+ if(!allIds.length)return null;
+ const key=["kids",VERSION,id,age,"daily-choice-v1",day.day].join(".");
+ try{
+  const saved=JSON.parse(localStorage.getItem(key)||"null");
+  if(saved&&allIds.includes(saved.id)&&["new","due","practice"].includes(saved.kind))return saved;
+ }catch(_){}
+ const fresh=allIds.filter(x=>!recordFor(x));
+ const due=allIds.filter(x=>{const r=recordFor(x);return r&&Number(r.nextDue)<=now}).sort((a,b)=>Number(recordFor(a).nextDue)-Number(recordFor(b).nextDue));
+ const groups=Object.keys(TOPIC_IDS),rotation=day.ordinal%groups.length;
+ const subjectPriority=groups.map((key,i)=>({key,i:(i+groups.length-rotation)%groups.length,done:TOPIC_IDS[key].filter(x=>!!recordFor(x)).length})).sort((a,b)=>a.done-b.done||a.i-b.i);
+ const nextFresh=subjectPriority.map(x=>TOPIC_IDS[x.key].find(y=>fresh.includes(y))).find(Boolean);
+ let selected,kind;
+ if(due.length&&(!fresh.length||day.ordinal%3===0)){selected=due[0];kind="due"}
+ else if(nextFresh){selected=nextFresh;kind="new"}
+ else if(due.length){selected=due[0];kind="due"}
+ else {selected=allIds.slice().sort((a,b)=>Number(recordFor(a)?.completedAt||0)-Number(recordFor(b)?.completedAt||0))[0];kind="practice"}
+ const result={id:selected,kind,date:day.day};
+ try{localStorage.setItem(key,JSON.stringify(result))}catch(_){}
+ return result;
+}
+function lessonTitle(lessonId){
+ return lessonId==="sidq"?"Ṣidq – Wahrhaftigkeit":CURRICULUM[lessonId]?.title||"Unterricht";
+}
+function lessonLead(lessonId){
+ return lessonId==="sidq"?"Warum sagen wir die Wahrheit?":CURRICULUM[lessonId]?.lead||"";
+}
+
 function applySelectedLesson(){
  applyAgeTeaching();
  const lesson=activeLesson(),ui=AGE_UI[age],blocks=all('[data-lesson-step="2"] .lesson-source-block'),qBlock=blocks[0],hadithBlock=blocks[1];
@@ -3737,31 +3816,44 @@ function applySelectedLesson(){
 }
 
 const SUBJECTS=Object.freeze({
- akhlaq:{title:"Akhlāq",description:"Wahrhaftigkeit, Geduld und Vertrauen im Alltag.",status:"3 Lektionen bereit",lesson:"Ṣidq – Wahrhaftigkeit",note:"Wähle eine Lektion und lerne in deinem Tempo.",image:"/desktop-preview/assets/kids-academy-akhlaq-v1.jpg",ready:true,topics:["Wahrhaftigkeit","Geduld","Vertrauen"]},
- adab:{title:"Adab",description:"Gutes Benehmen, freundliche Worte und Respekt im Alltag.",status:"3 Lektionen bereit",lesson:"Salām – Grüßen",note:"Grüßen, gute Worte und Respekt: drei Einheiten zum Mitmachen.",image:"/desktop-preview/assets/kids-academy-adab-v1.jpg",ready:true,topics:["Grüßen","Freundlich sprechen","Respekt"]},
- fiqh:{title:"Fiqh",description:"Reinheit, Wuḍūʾ und Gebet aus Qurʾān und Sunnah.",status:"3 Lektionen bereit",lesson:"Ṭahārah – Reinheit",note:"Reinheit, Gebetswaschung und Gebet Schritt für Schritt.",image:"/kids/assets/deen/ibadah.jpg?v=1205",ready:true,topics:["Reinheit","Wuḍūʾ","Gebet"]},
- aqidah:{title:"ʿAqīdah",description:"Tawḥīd, Īmān und Ikhlāṣ aus Qurʾān und Sunnah.",status:"3 Lektionen bereit",lesson:"Tawḥīd – Allah allein",note:"Die Grundlagen des Glaubens kennenlernen.",image:"/kids/assets/deen/tawhid.jpg?v=1205",ready:true,topics:["Tawḥīd","Īmān","Ikhlāṣ"]}
+ akhlaq:{title:"Akhlāq",description:"Wahrhaftigkeit, Geduld und Vertrauen im Alltag.",image:"/desktop-preview/assets/kids-academy-akhlaq-v1.jpg"},
+ adab:{title:"Adab",description:"Gutes Benehmen, freundliche Worte und Respekt im Alltag.",image:"/desktop-preview/assets/kids-academy-adab-v1.jpg"},
+ fiqh:{title:"Fiqh",description:"Reinheit, Wuḍūʾ und Gebet aus Qurʾān und Sunnah.",image:"/kids/assets/deen/ibadah.jpg?v=1205"},
+ aqidah:{title:"ʿAqīdah",description:"Tawḥīd, Īmān und Ikhlāṣ aus Qurʾān und Sunnah.",image:"/kids/assets/deen/tawhid.jpg?v=1205"}
 });
 function openCategory(key){
  const data=SUBJECTS[key];if(!data)return;
  stopAll();hideLesson();$("#academyHome").hidden=true;$("#academySubject").hidden=false;
  $("#academySubject").dataset.subject=key;
+ const ids=availableTopics(key),unseen=ids.filter(x=>!recordFor(x)),reviewed=ids.filter(x=>!!recordFor(x));
+ const due=reviewed.filter(x=>Number(recordFor(x).nextDue)<=Date.now());
+ const next=unseen[0]||due[0]||reviewed[0];
  $("#subjectTitle").textContent=data.title;$("#subjectDescription").textContent=data.description;
- $("#subjectStatus").textContent=availableTopics(key).length+" Lektionen bereit";$("#subjectLessonTitle").textContent=data.lesson;
- $("#subjectLessonNote").textContent=data.note;$("#subjectImage").src=data.image;
- $("#subjectStart").hidden=!availableTopics(key).length;
- const grid=$("#subjectTopicGrid");grid.replaceChildren();
- data.topics.forEach((name,i)=>{
-  const lessonId=TOPIC_IDS[key][i],enabled=availableTopics(key).includes(lessonId);
+ $("#subjectStatus").textContent=reviewed.length+" von "+ids.length+" gelernt";
+ $("#subjectLessonTitle").textContent=next?lessonTitle(next):"Lernmaterial in Vorbereitung";
+ $("#subjectLessonNote").textContent=unseen.length?"Nächstes neues Thema · jederzeit frei wählbar":due.length?"Deine nächste Wiederholung ist fällig.":"Du kannst alle abgeschlossenen Themen erneut lernen.";
+ $("#subjectImage").src=data.image;
+ $("#subjectStart").hidden=!next;$("#subjectStart").dataset.lessonId=next||"";
+ $("#subjectStart").textContent=unseen.length?"Nächstes Thema beginnen →":"Noch einmal lernen →";
+ const grid=$("#subjectTopicGrid"),history=$("#subjectReviewGrid"),reviewSection=$("#subjectReviewSection");
+ grid.replaceChildren();history.replaceChildren();
+ const empty=$("#subjectEmpty");
+ empty.hidden=unseen.length>0;reviewSection.hidden=reviewed.length===0;
+ for(const lessonId of ids){
+  const rec=recordFor(lessonId),complete=!!rec,isDue=complete&&Number(rec.nextDue)<=Date.now();
   const card=document.createElement("button");card.type="button";
-  card.className="subject-topic"+(enabled?" is-ready":"");card.disabled=!enabled;
-  card.dataset.lessonId=lessonId;card.setAttribute("aria-label",name+" – "+(enabled?"Unterricht öffnen":"In Vorbereitung"));
-  const label=document.createElement("strong");label.textContent=name;
-  const state=document.createElement("span");state.textContent=enabled?"Jetzt lernen":"In Vorbereitung";
-  card.append(label,state);if(enabled)card.onclick=()=>begin(lessonId);grid.appendChild(card);
- });
+  card.className="subject-topic is-ready"+(complete?" is-reviewed":"")+(isDue?" is-due":"");
+  card.dataset.lessonId=lessonId;
+  card.setAttribute("aria-label",lessonTitle(lessonId)+" – "+(isDue?"Wiederholung fällig":complete?"Noch einmal lernen":"Neues Thema beginnen"));
+  const label=document.createElement("strong");label.textContent=lessonTitle(lessonId);
+  const state=document.createElement("span");state.className=complete?"topic-review-meta":"";
+  state.textContent=isDue?"Heute wiederholen":complete?"✓ Gelernt · jederzeit wiederholen":"Neu · jetzt lernen";
+  card.append(label,state);card.onclick=()=>begin(lessonId);
+  (complete?history:grid).appendChild(card);
+ }
  updateAcademyAppbar();window.scrollTo(0,0);
 }
+
 function hideCategory(){$("#academySubject").hidden=true}
 function updateAcademyAppbar(){
  const lessonOpen=!$("#lessonMain").hidden,categoryOpen=!$("#academySubject").hidden;
@@ -3778,7 +3870,7 @@ function home(){stopAll();hideCategory();hideLesson();renderHome();updateAcademy
 function begin(requested){
  syncProfile();if(!AGE_UI[age]){renderHome();return}
  const subject=$("#academySubject").hidden?null:$("#academySubject").dataset.subject;
- const chosen=typeof requested==="string"?requested:subject?availableTopics(subject)[0]:"sidq";
+ const chosen=typeof requested==="string"?requested:subject?availableTopics(subject)[0]:dailyLesson()?.id||"sidq";
  if(!chosen||chosen!=="sidq"&&!CURRICULUM[chosen])return;
  activeLessonId=chosen;focusPages[1]=0;focusPages[2]=0;focusPages[4]=0;
  prepareOwnerVoice();hideCategory();$("#academyHome").hidden=true;$("#lessonMain").hidden=false;
@@ -4107,7 +4199,7 @@ $("#academySerhatLead").onclick=playSerhatLessonClip;
 $("#previewRefresh").onclick=()=>{const url=new URL(location.href);url.searchParams.set("cb","v7.1-"+Date.now());location.replace(url.toString())};
 all("[data-open-lesson]").forEach(b=>b.onclick=()=>begin(b.dataset.openLesson||"sidq"));
 all("[data-open-category]").forEach(b=>b.onclick=()=>openCategory(b.dataset.openCategory));
-$("#subjectBack").onclick=home;$("#subjectStart").onclick=()=>begin(availableTopics($("#academySubject").dataset.subject)[0]);
+$("#subjectBack").onclick=home;$("#subjectStart").onclick=()=>begin($("#subjectStart").dataset.lessonId);
  $("#academyNavBack").onclick=academyNavBack;
  $("#academyNavHome").onclick=()=>location.assign("/kids/");
 $("#backToAcademy").onclick=home;$("#backAfterLesson").onclick=home;
