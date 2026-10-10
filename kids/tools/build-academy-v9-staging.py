@@ -100,7 +100,9 @@ def main():
         phrase=item["text"]
         entry=previous.get(phrase) or {}
         path=ROOT/str(entry.get("url","")).lstrip("/")
-        if entry.get("sha256") and path.is_file() and path.stat().st_size>=1800 and hashlib.sha256(path.read_bytes()).hexdigest()==entry["sha256"]:
+        if (entry.get("sha256") and entry.get("modelId")==MODEL and entry.get("voiceId")==VOICE_ID and
+            entry.get("voiceSettingsProfile")==MASTER_PROFILE and entry.get("sameAsApprovedKidsStoryProfile") is True and
+            path.is_file() and path.stat().st_size>=1800 and hashlib.sha256(path.read_bytes()).hexdigest()==entry["sha256"]):
             valid_current[phrase]=entry
     pending=[r for r in phrases if r["text"] not in valid_current]
     print(f"Academy: {len(valid_current)}/{len(phrases)} staged, {len(pending)} waiting for synthesis",flush=True)
