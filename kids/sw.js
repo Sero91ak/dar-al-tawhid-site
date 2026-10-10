@@ -283,7 +283,7 @@ const KIDS_BOOT_PRECACHE=[
   "/kids/assets/kids-salah-v1272/hero-home.png?v=1274",
   "/kids/assets/kids-home-v1222/dar-title-reference-clean.svg?v=1229",
   "/kids/manifest.webmanifest",
-  "/kids/item-offline-v1.js?v=2",
+  "/kids/item-offline-v1.js?v=3",
   "/kids/item-offline-v1.css?v=2",
   "/kids/offline-library-v1.js?v=1",
   "/kids/offline-library-v1.css?v=1",
