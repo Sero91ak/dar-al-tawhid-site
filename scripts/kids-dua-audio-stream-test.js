@@ -38,6 +38,7 @@ function player(decodeDelayMs){
     cleanPlayback:null,playing:false,mode:"",
     cleanContextReady:()=>context,
     stopAudio(){sandbox.playToken++;sandbox.cleanPlayback=null},
+    cleanStop(){sandbox.cleanPlayback=null},
     paintControls(){},
     setStatus(message){counts.messages.push(message)},
     cleanDecode(url){
