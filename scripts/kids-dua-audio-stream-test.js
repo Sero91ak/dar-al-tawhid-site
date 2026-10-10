@@ -34,7 +34,7 @@ function player(decodeDelayMs){
     destination:{}
   };
   const sandbox={
-    playToken:0,currentDua:{id:"test"},currentIndex:0,
+    playToken:0,currentDua:{id:"test"},currentIndex:0,CLEAN_GAP:0.19,
     cleanPlayback:null,playing:false,mode:"",
     cleanContextReady:()=>context,
     stopAudio(){sandbox.playToken++;sandbox.cleanPlayback=null},
