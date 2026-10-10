@@ -155,6 +155,24 @@
   ],
   "unlockedScopes": [
     {
+      "id": "public-website-recovery-lock-20261010",
+      "at": "2026-10-10T02:47:00+02:00",
+      "approvedBy": "user-explicit-website-repair-restore-lock-autonomous-recovery",
+      "reason": "Nutzer verlangt ausdrücklich die sofortige Wiederherstellung der öffentlichen Webseite sowie eine Sperre gegen beschädigte Deploys und autonome Rückkehr zum letzten voll funktionsfähigen Zustand. Freigabe nur für Website/PWA-Isolation, Live-Verifikation, Watchdog und Rollback-Mechanik; Push-Funktionen bleiben gesperrt.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "service-worker.js",
+        "cloudflare/site-router.js",
+        "scripts/public-website-isolation-guard.js",
+        "scripts/verify-live-deploy.js",
+        ".github/workflows/app-health-check.yml",
+        ".github/workflows/canonical-state-guard.yml",
+        ".github/workflows/cloudflare-pages-deploy.yml",
+        ".github/workflows/app-stability-watchdog.yml"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "adult-athar-hadith-auto-global-20261009",
       "at": "2026-10-09T11:57:00+02:00",
       "approvedBy": "user-explicit-global-live-adult-ios-android-desktop-apple-tv-with-duplicate-block",
