@@ -4,6 +4,10 @@
 (function(){
 "use strict";
 const AGE_KEYS=["4-5","6-8","9-10"];
+// Direct-entry Academy installs the same Kids-only SW before an offline save.
+if(location.pathname.startsWith("/kids/akademie/")&&"serviceWorker" in navigator){
+ navigator.serviceWorker.register("/kids/sw.js?v=1314",{scope:"/kids/",updateViaCache:"none"}).catch(()=>{});
+}
 const DEFAULT_BASE=[
  "/kids/start.html","/kids/prayer-stage-v1261.js?v=1306",
  "/kids/akademie/index.html"
