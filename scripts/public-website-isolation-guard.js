@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * PUBLIC_WEBSITE_ISOLATION_GUARD
- * Release marker: WEB_RECOVERY_V2
+ * Release marker: WEB_RECOVERY_V3
  * Blockiert Deploys, bei denen Website, native App und PWA wieder denselben
  * Navigation-Fallback teilen oder die öffentliche Website-Shell beschädigt ist.
  */
