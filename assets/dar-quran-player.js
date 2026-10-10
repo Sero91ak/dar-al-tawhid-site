@@ -1970,6 +1970,7 @@
   function paintChrome() {
     var root = playerRoot();
     if (root) {
+      try { root.setAttribute('data-v11-ambient', localStorage.getItem('darQuranV11Ambient') === 'day' ? 'day' : 'night'); } catch (eV11Theme) { root.setAttribute('data-v11-ambient','night'); }
       var currentSurahMeta = meta || surahMeta(state.surah) || {};
       var currentName = String(currentSurahMeta.transliteration || currentSurahMeta.name || ('Sūrah ' + state.surah));
       var v11SurahName = root.querySelector('[data-v11-surah]');
@@ -3234,6 +3235,7 @@
       '<button type="button" class="dqp-opt" data-dqp="pick-surah">Sūrah wechseln</button>',
       '<button type="button" class="dqp-opt" data-dqp="pick-ayah">Āyah wechseln</button>',
       '<button type="button" class="dqp-opt" data-dqp="pick-reciter">Qāriʾ wechseln</button>',
+      '<button type="button" class="dqp-opt" data-dqp-opt="m-ambient">Darstellung · Tag / Nacht wechseln</button>',
       '<button type="button" class="dqp-opt" data-dqp-opt="m-read">Sūrah lesen</button>',
       '<button type="button" class="dqp-opt" data-dqp-opt="m-stop">Wiedergabe beenden</button>'
     ].join(""));
@@ -3334,6 +3336,10 @@
     if (id.indexOf("sleep-") === 0) {
       setSleepMinutes(Number(id.slice(6)));
       return;
+    }
+    if (id === "m-ambient") {
+      try { localStorage.setItem("darQuranV11Ambient", localStorage.getItem("darQuranV11Ambient") === "day" ? "night" : "day"); } catch (eTheme) {}
+      paintChrome(); openMenu(); return;
     }
     if (id === "m-read") {
       closeSheet();
