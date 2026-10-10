@@ -50,7 +50,7 @@ const service=context.__ownerTestWorker;
 const host="https://dar-al-tawhid-kids-owner-test.sero91ak.workers.dev";
 const pwd="isolated-test-credentials-not-live-2026";
 let reads=0;
-const assetHtml="<html><head></head><body><script src=\"/kids/akademie/school-progress-v11.js?v=20261010-11\"></script></body></html>";
+const assetHtml=`<html><head></head><body><script src="/kids/akademie/school-progress-v11.js?v=20261010-11"></script><script>var API="https://sample.supabase.co/rest/v1/rpc/";var APIKEY="sb_publishable_test-placeholder";</script></body></html>`;
 const env={
  KIDS_OWNER_TEST_USERNAME:"test-owner",
  KIDS_OWNER_TEST_PASSWORD:pwd,
@@ -79,7 +79,10 @@ response=await service.fetch(new Request("https://dar-al-tawhid.de/kids/start",{
 assert.equal(response.status,421,"Cannot bind test worker to live domain");
 response=await service.fetch(req("/kids/start",{headers:{Authorization:auth}}),env);
 assert.equal(response.status,200);
-assert.match(await response.text(),/owner-studio\.js/,"Owner control appears only in test");
+const indexMarkup=await response.text();
+assert.match(indexMarkup,/owner-studio\\.js/,"Owner control appears only in test");
+assert.match(indexMarkup,/blocked-rpc/,"Never embed production RPC target in test HTML");
+assert(!indexMarkup.includes("sb_publishable_test-placeholder"),"Strip production-style publishable key in test HTML");
 response=await service.fetch(req("/kids/akademie/index.html",{headers:{Authorization:auth}}),env);
 assert.equal(response.status,200);
 const markup=await response.text();
