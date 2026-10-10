@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Native Android-TV static backdrop.
+     Uses no unavailable Apple TV video or borrowed artwork.
+     Dark contrast keeps D-pad focus and five prayer cards readable on TVs. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="135"
+                android:startColor="#050812"
+                android:centerColor="#131B30"
+                android:endColor="#070A13" />
+        </shape>
+    </item>
+    <item android:gravity="top|right" android:width="620dp" android:height="620dp">
+        <shape android:shape="oval">
+            <gradient
+                android:type="radial"
+                android:gradientRadius="310dp"
+                android:startColor="#325A462A"
+                android:centerColor="#112A2730"
+                android:endColor="#00060A12" />
+        </shape>
+    </item>
+    <item android:gravity="bottom|left" android:width="480dp" android:height="480dp">
+        <shape android:shape="oval">
+            <gradient
+                android:type="radial"
+                android:gradientRadius="240dp"
+                android:startColor="#1D314A5D"
+                android:centerColor="#0E19273D"
+                android:endColor="#00070A14" />
+        </shape>
+    </item>
+</layer-list>
