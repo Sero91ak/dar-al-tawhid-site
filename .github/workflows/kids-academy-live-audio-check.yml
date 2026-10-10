@@ -51,7 +51,9 @@ jobs:
           resources=[
               ("/kids/akademie/index.html","V13.0-voicefix-20261010",None),
               ("/kids/akademie/pilot-audio-v13.js","kids-serhat-v13-20261010",None),
-              ("/kids/akademie/stimmen-test-v14.html","DĀR AL TAWḤĪD KIDS",None),
+              # v14 HTML returns HTTP 401 even with native-agent probing;
+              # keep Kids site access policy intact. Do not claim that page
+              # is a working public fallback. Verify actual MP4 bytes instead.
           ]
           for line,e in manifest["entries"].items():
               resources.append((e["url"],None,e["sha256"]))
@@ -94,5 +96,6 @@ jobs:
               print("LIVE AUDIO DELIVERY FAIL:",len(failed))
               for route,reason in failed:print("  ",route,reason)
               sys.exit(1)
-          print("LIVE VOICE DELIVERY PASS: academy, direct playback script, native iPhone controls and four SHA-matched V4 audio files accessible on dar-al-tawhid.de.")
+          print("LIVE VOICE DELIVERY PASS: Academy V13 HTML, direct iPhone playback JS and 4 SHA-matched Serhat V4 MP4s.")
+          print("PROTECTED DIAGNOSTIC: /kids/akademie/stimmen-test-v14.html is currently HTTP 401. Do not offer it as browser-accessible; do not bypass the Kids auth gate.")
           PY
