@@ -7346,6 +7346,22 @@
         "service-worker.js"
       ],
       "expiresAt": "2027-01-31T23:59:00.000Z"
+    },
+    {
+      "id": "more-v15-adult-test-visitor-ios-2026-10-10",
+      "at": "2026-10-10T10:00:00+02:00",
+      "approvedBy": "user-explicit-global-test-visitor-ios-native-more-v15",
+      "reason": "Nutzer freigegeben: geprüfte Mehr-V1.5-Struktur aus HTML-Vorschau in Dar Test, Besucher-Web-App und iOS native übertragen; nur Erwachsenen-Mehr, originale 23 dynamische Ziele, 3D-Symbole, Konto, Themes und Footer; keine Kids-, Push-, Home-, Quran- oder Apple-TV-Änderung; sequenzielle getrennte Commits.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/assets/dar-more-v15.js",
+        "test/assets/dar-more-v15.css",
+        "index.html",
+        "assets/dar-more-v15.js",
+        "assets/dar-more-v15.css"
+      ],
+      "expiresAt": "2026-11-30T23:59:00.000Z"
     }
   ],
   "enabled": true

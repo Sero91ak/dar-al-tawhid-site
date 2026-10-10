@@ -1,0 +1,63 @@
+/* DĀR AL TAWḤĪD Mehr V1.5. Only the adult Mehr screen. */
+body.is-more-route #appView:has(.dar-more-v15){overflow:visible!important;padding-bottom:18px!important}
+body.is-more-route .dar-more-v15{position:relative;width:100%;max-width:850px;margin:0 auto;padding:8px 12px 12px;color:var(--theme-text,var(--text,#19241e));--dm-line:var(--theme-border,rgba(143,126,85,.26));--dm-panel:var(--theme-card-bg,var(--card-bg,rgba(255,255,255,.07)));--dm-muted:var(--theme-muted,var(--muted,#5b655d));--dm-accent:var(--theme-accent,var(--gold2,#ad975e));font-size:14px;box-sizing:border-box}
+body.is-more-route .dar-more-v15 *{box-sizing:border-box}
+body.is-more-route .dar-more-v15 .view-head{margin:0 145px 14px 0!important;padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important;min-height:0!important}
+body.is-more-route .dar-more-v15 .view-head .eyebrow{font-size:10px!important;letter-spacing:.18em;color:var(--dm-accent)!important;font-weight:750}
+body.is-more-route .dar-more-v15 .view-head h2{font:400 clamp(32px,8.4vw,43px)/1.06 Georgia,serif!important;letter-spacing:0!important;margin:4px 0 5px!important;color:var(--theme-text,var(--text))!important}
+body.is-more-route .dar-more-v15 .view-desc{font-size:clamp(11px,2.75vw,13px)!important;line-height:1.4!important;color:var(--dm-muted)!important;margin:0!important}
+body.is-more-route .dar-more-v15 .dm-actions{position:absolute;right:12px;top:25px;display:flex;gap:5px}
+body.is-more-route .dar-more-v15 .dm-action{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;border:1px solid var(--dm-line);background:transparent;color:var(--theme-text,var(--text));padding:8px;box-shadow:none}
+body.is-more-route .dar-more-v15 .dm-action svg{width:21px;height:21px}
+body.is-more-route .dar-more-v15 .dm-search{display:flex;align-items:center;margin:0 0 9px;padding:3px 10px;border-radius:14px;border:1px solid var(--dm-line);background:var(--dm-panel)}
+body.is-more-route .dar-more-v15 .dm-search[hidden]{display:none!important}
+body.is-more-route .dar-more-v15 .dm-search input{min-width:0;width:100%;height:39px;border:0;background:transparent;box-shadow:none;color:inherit;font-size:14px}
+body.is-more-route .dar-more-v15 .dm-search button{border:0;background:transparent;color:inherit;font-size:20px;padding:4px}
+body.is-more-route .dar-more-v15 .dm-tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:2px;padding:4px;border:1px solid var(--dm-line);border-radius:18px;background:color-mix(in srgb,var(--dm-panel) 75%,transparent);margin:0 0 14px}
+body.is-more-route .dar-more-v15 .dm-cat{min-width:0;min-height:67px;padding:5px 2px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:3px;background:transparent;border:1px solid transparent;border-radius:14px;box-shadow:none;color:inherit}
+body.is-more-route .dar-more-v15 .dm-cat[aria-pressed=true]{background:var(--dm-panel);border-color:var(--dm-line)}
+body.is-more-route .dar-more-v15 .dm-cat img{width:31px;height:31px;object-fit:contain}
+body.is-more-route .dar-more-v15 .dm-cat span{font-size:clamp(9px,2.5vw,12px);font-weight:800;line-height:1.2;text-align:center;overflow-wrap:anywhere}
+body.is-more-route .dar-more-v15 .dm-group[hidden],body.is-more-route .dar-more-v15 .dm-card[hidden]{display:none!important}
+body.is-more-route .dar-more-v15 .dm-group-head{display:flex;align-items:baseline;justify-content:space-between;gap:9px;margin-bottom:10px}
+body.is-more-route .dar-more-v15 .dm-group-head h3{font-size:clamp(19px,4.8vw,24px);line-height:1.15;font-weight:810;letter-spacing:-.025em;margin:0;color:inherit}
+body.is-more-route .dar-more-v15 .dm-group-head>span{font-size:11px;white-space:nowrap;color:var(--dm-muted)}
+body.is-more-route .dar-more-v15 .dm-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;align-items:stretch}
+body.is-more-route .dar-more-v15 .dm-card{display:flex;flex-direction:column;justify-content:flex-start;min-width:0;width:100%;min-height:100px;overflow:visible;background:var(--dm-panel);border:1px solid var(--dm-line);border-radius:16px;padding:11px 10px;box-shadow:0 2px 8px rgba(0,0,0,.035);text-align:left;color:inherit}
+body.is-more-route .dar-more-v15 .dm-cardhead{display:flex;gap:7px;align-items:flex-start;min-width:0}
+body.is-more-route .dar-more-v15 .dm-cardicon{flex:0 0 36px;width:36px;height:39px;display:grid;place-items:center}
+body.is-more-route .dar-more-v15 .dm-cardicon img{width:36px;height:38px;object-fit:contain}
+body.is-more-route .dar-more-v15 .dm-cardtitle{display:block;min-width:0;flex:1;align-self:center}
+body.is-more-route .dar-more-v15 .dm-cardtitle strong{display:block;font-size:clamp(13px,3.6vw,16px);font-weight:800;line-height:1.21;overflow-wrap:normal;word-break:normal;hyphens:auto}
+body.is-more-route .dar-more-v15 .dm-badge{display:inline-block;vertical-align:middle;font-size:10px;line-height:1.24;font-weight:750;color:var(--dm-accent);border:1px solid var(--dm-line);border-radius:50px;padding:2px 6px;margin:3px 0 0}
+body.is-more-route .dar-more-v15 .dm-desc{display:block;margin-top:6px;font-size:clamp(11.7px,3.06vw,13px);line-height:1.4;color:var(--dm-muted);overflow-wrap:normal;hyphens:auto}
+body.is-more-route .dar-more-v15[data-dm-density=comfort] .dm-card{min-height:158px;padding:14px}
+body.is-more-route .dar-more-v15[data-dm-density=comfort] .dm-cardtitle strong{font-size:clamp(15px,4vw,17px)}
+body.is-more-route .dar-more-v15[data-dm-density=comfort] .dm-desc{font-size:clamp(12.5px,3.3vw,14px);margin-top:10px}
+body.is-more-route .dar-more-v15 .dm-theme-backdrop{position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.52);display:flex;align-items:flex-end;justify-content:center}
+body.is-more-route .dar-more-v15 .dm-theme-backdrop[hidden]{display:none!important}
+body.is-more-route .dar-more-v15 .dm-theme-sheet{width:min(100%,640px);max-height:calc(100dvh - 20px);overflow:auto;background:var(--theme-card-bg,var(--bg));color:var(--theme-text,var(--text));border:1px solid var(--dm-line);border-radius:25px 25px 0 0;padding:12px 18px calc(20px + env(safe-area-inset-bottom,0px));box-shadow:0 -9px 40px #0004}
+body.is-more-route .dar-more-v15 .dm-handle{width:44px;height:4px;border-radius:8px;background:var(--dm-line);margin:0 auto 16px}
+body.is-more-route .dar-more-v15 .dm-sheet-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+body.is-more-route .dar-more-v15 .dm-sheet-head small{font-size:10px;letter-spacing:.16em;color:var(--dm-accent)}
+body.is-more-route .dar-more-v15 .dm-sheet-head h3{font-size:23px;margin:5px 0;line-height:1.2}
+body.is-more-route .dar-more-v15 .dm-sheet-head p{font-size:12px;color:var(--dm-muted);margin:0 0 14px}
+body.is-more-route .dar-more-v15 .dm-sheet-head button{border:1px solid var(--dm-line);background:transparent;border-radius:50%;height:39px;width:39px;font-size:24px}
+body.is-more-route .dar-more-v15 .dm-theme-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3px 12px}
+body.is-more-route .dar-more-v15 .dm-theme-choice{min-height:48px;padding:7px 4px;display:flex;gap:9px;align-items:center;text-align:left;border:0;border-bottom:1px solid var(--dm-line);background:transparent;color:inherit;font-size:13px;font-weight:700}
+body.is-more-route .dar-more-v15 .dm-theme-choice i{width:20px;height:20px;flex:none;border:1px solid var(--dm-line);border-radius:50%}
+body.is-more-route .dar-more-v15 .dm-theme-choice[aria-pressed=true]:after{content:"✓";margin-left:auto;color:var(--dm-accent)}
+body.is-more-route .dar-more-v15 .dm-density-head{font-size:14px;font-weight:800;margin:17px 0 8px}
+body.is-more-route .dar-more-v15 .dm-density-row{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+body.is-more-route .dar-more-v15 .dm-density-row button{padding:11px 8px;border:1px solid var(--dm-line);border-radius:12px;background:transparent;color:inherit}
+body.is-more-route .dar-more-v15 .dm-density-row button[aria-pressed=true]{background:var(--dm-panel);border-color:var(--dm-accent)}
+body.is-more-route .dar-more-v15 [data-account-hub-card]{display:none!important}
+body.is-more-route.dm-account-open .dar-more-v15 [data-account-hub-card]{display:block!important;margin:0 0 12px!important}
+body.is-more-route .footer{background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;margin-top:16px!important;text-align:center!important}
+body.is-more-route .footer>strong{font:500 clamp(19px,5vw,26px)/1.2 Georgia,serif!important;letter-spacing:.1em!important}
+body.is-more-route .footer .footer-actions{display:flex!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:center!important;gap:7px!important;width:min(100%,430px)!important;margin:10px auto!important}
+body.is-more-route .footer .footer-actions .footer-action-btn:not(#footerAppSave){display:flex!important;flex:1 1 0!important;min-width:0!important;max-width:138px!important;min-height:40px!important;align-items:center!important;justify-content:center!important;gap:5px!important;border-radius:13px!important;font-size:clamp(10px,2.5vw,12px)!important;padding:6px!important}
+body.is-more-route .footer .footer-actions .footer-action-btn svg{width:20px;height:20px;flex:none}
+body.is-more-route .footer .signature{display:block!important;font-family:"Snell Roundhand","Brush Script MT","Segoe Script",cursive!important;font-size:clamp(24px,6vw,35px)!important;line-height:1.05!important;color:var(--theme-accent,var(--gold2))!important;margin:10px 0 0!important;white-space:nowrap}
+@media(max-width:390px){body.is-more-route .dar-more-v15{padding:8px 9px}body.is-more-route .dar-more-v15 .dm-card{padding:9px 8px}body.is-more-route .dar-more-v15 .dm-cardicon{flex-basis:32px;width:32px}body.is-more-route .dar-more-v15 .dm-cardicon img{width:32px}body.is-more-route .dar-more-v15 .dm-cardtitle strong{font-size:13.6px}body.is-more-route .dar-more-v15 .dm-desc{font-size:11.7px}body.is-more-route .dar-more-v15 .dm-action{width:35px;height:35px}body.is-more-route .dar-more-v15 .dm-actions{right:9px}}
+@media(min-width:700px){body.is-more-route .dar-more-v15{padding:18px 24px}body.is-more-route .dar-more-v15 .dm-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}body.is-more-route .dar-more-v15 .dm-card{padding:14px}body.is-more-route .dar-more-v15 .dm-cardtitle strong{font-size:16px}body.is-more-route .dar-more-v15 .dm-desc{font-size:13px}body.is-more-route .dar-more-v15 .dm-cat{min-height:85px}body.is-more-route .dar-more-v15 .dm-cat img{width:43px;height:43px}body.is-more-route .dar-more-v15 .dm-theme-list{grid-template-columns:repeat(3,minmax(0,1fr))}}

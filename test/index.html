@@ -59,6 +59,8 @@
 <link rel="stylesheet" href="/assets/dar-app-chrome.css?v=1">
 <link rel="stylesheet" href="/assets/dar-global-share-v1225.css?v=1268">
 <script src="/assets/dar-app-chrome.js?v=1"></script>
+<link rel="stylesheet" href="/test/assets/dar-more-v15.css?v=1510">
+<script src="/test/assets/dar-more-v15.js?v=1510" defer></script>
 
 <script src="/test/assets/dar-noble-3d-icons.js?v=1165"></script><!-- DAR_NOBLE_3D_HEAD -->
 <script>window.__DAR_EXPECTED_BUILD="app-shell-v1352";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
@@ -27308,7 +27310,8 @@ function renderMoreQuickAccessSection(){
   return `<section class="more-quick-access" aria-label="Schnellzugriff"><div class="more-quick-access__list"><button type="button" class="more-quick-access__chip" data-more-quick="orient" aria-label="Qibla" title="Qibla"><span class="more-quick-access__ico" aria-hidden="true">${ico("orient")}</span></button><button type="button" class="more-quick-access__chip" data-more-quick="saved" aria-label="Merkliste" title="Merkliste"><span class="more-quick-access__ico" aria-hidden="true">${ico("saved")}</span></button><button type="button" class="more-quick-access__chip" data-more-quick="notifications" aria-label="Erinnerungen" title="Erinnerungen"><span class="more-quick-access__ico" aria-hidden="true">${ico("notifications")}</span></button><button type="button" class="more-quick-access__chip" data-more-quick="settings" aria-label="Einstellungen" title="Einstellungen"><span class="more-quick-access__ico" aria-hidden="true">${ico("settings")}</span></button></div></section>`;
 }
 
-function renderMore(){const groups=["Lernen & Wissen","Alltag & Gebet","Werkzeuge & Assistenten","Persönlich","App"];const items=featureCatalog();return `${setPageHeader("Mehr","Funktionen geordnet nach Lernen, Alltag, Werkzeugen und Einstellungen","Mehr")}${renderMoreQuickAccessSection()}${typeof renderAdaptiveNavPanel==="function"?renderAdaptiveNavPanel():""}${safeHomeTile(renderZakatMoreFocus)}<section class="feature-section"><div class="feature-head"><div><h3>Funktion suchen</h3><span>Tippe z. B. Qibla, Rechner oder Qurʾān.</span></div></div><input id="moreFeatureSearch" class="more-search" type="search" placeholder="Funktion suchen…" autocomplete="off"></section>${groups.map(group=>renderMoreGroup(group,items.filter(item=>item.group===group))).join("")}`}
+function renderMoreLegacy(){const groups=["Lernen & Wissen","Alltag & Gebet","Werkzeuge & Assistenten","Persönlich","App"];const items=featureCatalog();return `${setPageHeader("Mehr","Funktionen geordnet nach Lernen, Alltag, Werkzeugen und Einstellungen","Mehr")}${renderMoreQuickAccessSection()}${typeof renderAdaptiveNavPanel==="function"?renderAdaptiveNavPanel():""}${safeHomeTile(renderZakatMoreFocus)}<section class="feature-section"><div class="feature-head"><div><h3>Funktion suchen</h3><span>Tippe z. B. Qibla, Rechner oder Qurʾān.</span></div></div><input id="moreFeatureSearch" class="more-search" type="search" placeholder="Funktion suchen…" autocomplete="off"></section>${groups.map(group=>renderMoreGroup(group,items.filter(item=>item.group===group))).join("")}`}
+function renderMore(){return window.DAR_MORE_V15 && typeof window.DAR_MORE_V15.render==='function'?window.DAR_MORE_V15.render(featureCatalog(),setPageHeader):renderMoreLegacy()}
 function notificationToggleButton(id,on,label){return `<button type="button" id="${id}" class="notification-toggle ${on?"is-on":""}" role="switch" aria-checked="${on?"true":"false"}" aria-label="${esc(label)}"></button>`}
 function renderNotificationCenter({embedded=false}={}){
   const s=getPrayerSettings();
