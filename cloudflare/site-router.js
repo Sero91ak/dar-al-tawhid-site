@@ -1245,6 +1245,12 @@ export default {
         const appPathMarker = "document.documentElement.dataset.appPath=(location.pathname.indexOf(\"/test/\")===0||location.pathname===\"/test\")?\"test\":\"visitor\"";
         const pwaAppPathMarker = "document.documentElement.dataset.appPath=location.pathname.startsWith(\"/pwa\")?\"android-pwa\":((location.pathname.indexOf(\"/test/\")===0||location.pathname===\"/test\")?\"test\":\"visitor\")";
         if (html.includes(appPathMarker)) html = html.replace(appPathMarker, pwaAppPathMarker);
+        // This old Android-wide watchdog strips the boot overlay after 3.5 s,
+        // even if the app has not rendered. Keep it for the regular website,
+        // but let the dedicated PWA finish only after its actual content is ready.
+        const prematureBootWipe = "/* SOFTBOOT_UNSTICK_V672 */(function(){";
+        const pwaSafeBootWipe = "/* SOFTBOOT_UNSTICK_V672 */(function(){if(location.pathname.indexOf(\"/pwa\")===0)return;";
+        if (html.includes(prematureBootWipe)) html = html.replace(prematureBootWipe, pwaSafeBootWipe);
         const pwaHead =
           '<base href="/">' +
           '<script id="darDedicatedPwaBootV2">' +
