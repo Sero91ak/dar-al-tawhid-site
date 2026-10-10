@@ -297,6 +297,88 @@ body.v6-is-reader .tabs .v6Dock .v6-3d{width:29px;height:29px}
  body.v6-is-reader .tabs .v6Dock button{height:32px}
 }
 
+
+/* V6.2 isolated responsive reader: rounded sticky player capsule and reading knowledge sheets */
+.v6ReaderTop{background:var(--bg)!important;z-index:38!important;padding-bottom:2px}
+.v6ReaderTop .v6Player{
+  margin:7px 0 9px!important;
+  padding:clamp(9px,2.4vw,15px)!important;
+  border:1px solid var(--border)!important;
+  border-radius:clamp(16px,4vw,23px)!important;
+  background:var(--paper)!important;
+  box-shadow:0 6px 18px rgba(44,32,20,.09)!important;
+}
+.v6ReaderTop .v6PlayerTitle strong{letter-spacing:-.015em}
+.v6ReaderTop .v6PlayerTitle small{line-height:1.3}
+.v6PlayerOptions button{min-width:0!important}
+.v6Ayah .v6TextPart{position:relative;padding:6px 0 10px}
+.v6Ayah .v6TextPart + .v6TextPart{
+  margin-top:8px;padding-top:13px;
+  border-top:1px solid color-mix(in srgb,var(--gold) 23%,var(--border));
+}
+.v6Ayah .v6TextPartLabel{display:flex;align-items:center;gap:9px;
+  color:var(--soft);font-size:10px;font-weight:780;letter-spacing:.075em;
+  text-transform:uppercase;margin:0 0 8px;opacity:.82}
+.v6Ayah .v6TextPartLabel::after{content:"";height:1px;min-width:12px;
+  background:color-mix(in srgb,var(--gold) 32%,var(--border));flex:1}
+.v6Ayah .v6Arabic{font-size:clamp(24px,calc(30px * var(--v6-font-scale,1)),46px)!important;
+  line-height:calc(1.82 * var(--v6-line-scale,1))!important}
+.v6Ayah .v6Translit{font-size:clamp(17px,calc(21px * var(--v6-font-scale,1)),35px)!important;
+  line-height:calc(1.45 * var(--v6-line-scale,1))!important;margin-bottom:0!important}
+.v6Ayah .v6Translation{font-size:clamp(16px,calc(19px * var(--v6-font-scale,1)),32px)!important;
+  line-height:calc(1.48 * var(--v6-line-scale,1))!important;margin-bottom:0!important}
+.v6Ayah[tabindex]{outline-offset:4px}
+.v6Ayah:focus-visible{outline:2px solid var(--gold);border-radius:12px}
+.v6Eyebrow{font-size:9.5px;letter-spacing:.12em;font-weight:750;color:var(--gold);margin-bottom:4px}
+.v6Dialog .v6InfoTabs[hidden]{display:none!important}
+.v6InfoTabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;
+  padding:5px;background:var(--bg);border:1px solid var(--border);
+  border-radius:15px;margin:12px 0 11px}
+.v6InfoTabs.is-full{grid-template-columns:repeat(3,minmax(0,1fr))}
+.v6InfoTabs:not(.is-full) [data-v6-info-tab="context"],
+.v6InfoTabs:not(.is-full) [data-v6-info-tab="hadith"],
+.v6InfoTabs:not(.is-full) [data-v6-info-tab="athar"]{display:none!important}
+.v6InfoTabs button{border:0;min-height:38px;border-radius:11px;background:transparent;
+  color:var(--soft);font-size:clamp(11px,2.9vw,13px);font-weight:790;padding:6px 5px}
+.v6InfoTabs button[aria-selected="true"]{background:var(--paper);color:var(--ink);
+  box-shadow:0 1px 7px rgba(0,0,0,.08)}
+.v6Overlay .v6Dialog{max-height:min(87dvh,780px)}
+.v6Overlay .v6Dialog.is-detail{max-height:95dvh;min-height:min(60dvh,680px)}
+.v6TafsirText{white-space:normal!important;max-height:none!important;overflow:visible!important;
+  font-size:14px;line-height:1.65}
+.v6KnowledgeCard{padding:13px 12px;background:var(--bg);border:1px solid var(--border);
+  border-radius:14px;margin:9px 0}
+.v6KnowledgeCard h4{font:700 14px/1.3 Georgia,serif;color:var(--ink);margin:0 0 9px}
+.v6KnowledgeCard p{font-size:13px;line-height:1.7;color:var(--ink);margin:0 0 8px}
+.v6KnowledgeCard p:last-child{margin-bottom:0}
+.v6KnowledgeCard.is-note{border-style:dashed;background:transparent}
+.v6InfoEmpty{padding:18px 10px;text-align:center;color:var(--soft);line-height:1.6;font-size:13px}
+.v6KnowledgeCard .v6Citation,.v6Citation{font-size:11.5px!important;line-height:1.55!important;color:var(--soft);margin-top:9px!important}
+.v6Citation a{color:var(--gold);text-decoration:underline;text-underline-offset:3px}
+.v6InfoCaution{font-size:12px!important;color:var(--soft)!important}
+.v6SettingsLead{font-size:12px!important}
+.v6SettingToggles{display:grid;grid-template-columns:1fr;gap:8px;margin:11px 0 17px}
+.v6SettingToggles label{display:flex;align-items:center;justify-content:space-between;
+  gap:12px;background:var(--bg);border:1px solid var(--border);
+  border-radius:13px;min-height:45px;padding:10px 12px;font-size:13px;font-weight:720}
+.v6SettingToggles input{width:19px;height:19px;accent-color:var(--gold)}
+.v6SettingRange{display:block;font-size:12px;font-weight:730;color:var(--ink);margin:13px 0}
+.v6SettingRange output{float:right;color:var(--gold)}
+.v6SettingRange input[type="range"]{display:block;width:100%;accent-color:var(--gold);margin:12px 0 8px}
+.v6SettingRange select{display:block;background:var(--paper);border:1px solid var(--border);border-radius:11px;
+  margin-top:9px;padding:8px 10px;min-height:43px;width:100%;font-size:14px;color:var(--ink)}
+.v6SettingsFootnote{margin-top:14px!important;padding-top:10px;border-top:1px solid var(--border)}
+@media(max-width:390px){
+ .v6ReaderTop .v6Player{padding:9px 8px!important;border-radius:18px!important}
+ .v6Ayah .v6TextPartLabel{font-size:9.5px}
+ .v6InfoTabs.is-full{grid-template-columns:repeat(3,minmax(0,1fr));gap:2px}
+ .v6InfoTabs button{font-size:11px}
+}
+@media(max-height:520px) and (orientation:landscape){
+ .v6ReaderTop{position:relative!important}
+ .v6Overlay .v6Dialog.is-detail{max-height:95dvh;min-height:0}
+}
+
 </style></head><body><main class="frame"><div class="v6Previewbar" aria-label="V6-Ansichten">
 <strong class="v6Tag">V6 · LIVE-VORSCHAU</strong>
 <button type="button" data-v6-mode="overview" aria-current="true">Surenliste</button>
@@ -364,7 +446,15 @@ body.v6-is-reader .tabs .v6Dock .v6-3d{width:29px;height:29px}
 <button type="button" data-v6="bookmarks" aria-label="Gemerkte Āyāt öffnen"><img class="v6-3d" src="/assets/dar-3d-icons/saved.png" alt="" loading="lazy" decoding="async"></button></div>
 <div class="v6Overlay" id="v6Picker" hidden><section class="v6Dialog" role="dialog" aria-modal="true" aria-labelledby="v6PickerHeading"><div class="v6DialogHead"><div><h3 id="v6PickerHeading">Qurʾān-Stelle öffnen</h3><p>Ǧuzʾ, Sūrah und Āyah auswählen – ohne schwarze Leerflächen.</p></div><button type="button" data-v6="close-picker" aria-label="Schließen">×</button></div>
 <div class="v6Wheels"><div class="v6WheelGroup"><strong>Ǧuzʾ</strong><div class="v6Wheel" id="v6JuzWheel" role="listbox" aria-label="Ǧuzʾ"></div></div><div class="v6WheelGroup"><strong>Sūrah</strong><div class="v6Wheel" id="v6SurahWheel" role="listbox" aria-label="Sūrah"></div></div><div class="v6WheelGroup"><strong>Āyah</strong><div class="v6Wheel" id="v6AyahWheel" role="listbox" aria-label="Āyah"></div></div></div><button type="button" id="v6PickerGo" class="v6DialogAction">STELLE ÖFFNEN</button></section></div>
-<div class="v6Overlay" id="v6Tafsir" hidden><section class="v6Dialog" role="dialog" aria-modal="true" aria-labelledby="v6TafsirHeading"><div class="v6DialogHead"><h3 id="v6TafsirHeading">Tafsīr</h3><button type="button" data-v6="close-tafsir" aria-label="Schließen">×</button></div><div class="v6TafsirText" id="v6TafsirText">Wird geladen …</div></section></div>
+<div class="v6Overlay" id="v6Tafsir" hidden><section class="v6Dialog" id="v6InfoDialog" role="dialog" aria-modal="true" aria-labelledby="v6TafsirHeading"><div class="v6DialogHead"><div><div class="v6Eyebrow">QURʾĀN · VERSWISSEN</div><h3 id="v6TafsirHeading">Tafsīr</h3></div><button type="button" data-v6="close-tafsir" aria-label="Schließen">×</button></div><div class="v6InfoTabs" id="v6InfoTabs" role="tablist" aria-label="Versinformationen" hidden><button type="button" role="tab" data-v6-info-tab="tafsir" aria-selected="true">Tafsīr</button><button type="button" role="tab" data-v6-info-tab="tadabbur" aria-selected="false">Tadabbur</button><button type="button" role="tab" data-v6-info-tab="context" aria-selected="false">Offenbarung</button><button type="button" role="tab" data-v6-info-tab="hadith" aria-selected="false">Ḥadīṯ</button><button type="button" role="tab" data-v6-info-tab="athar" aria-selected="false">Āthār</button></div><div class="v6TafsirText" id="v6TafsirText" role="tabpanel">Wird geladen …</div></section></div>
+<div class="v6Overlay" id="v6Settings" hidden><section class="v6Dialog v6SettingsDialog" role="dialog" aria-modal="true" aria-labelledby="v6SettingsTitle"><div class="v6DialogHead"><div><div class="v6Eyebrow">QURʾĀN · ANZEIGE</div><h3 id="v6SettingsTitle">Leseeinstellungen</h3></div><button type="button" data-v6="close-settings" aria-label="Schließen">×</button></div>
+<p class="v6SettingsLead">Lege individuell fest, welche Texte und in welcher Größe du sie lesen möchtest.</p>
+<div class="v6SettingToggles"><label><span>Arabischer Originaltext</span><input type="checkbox" data-v6-setting="arabic"></label><label><span>Lautschrift</span><input type="checkbox" data-v6-setting="translit"></label><label><span>Deutsche Übersetzung</span><input type="checkbox" data-v6-setting="german"></label></div>
+<label class="v6SettingRange">Schriftgröße <output id="v6FontScaleLabel">100 %</output><input type="range" data-v6-setting="font" min="85" max="145" step="5" value="100"></label>
+<label class="v6SettingRange">Zeilenabstand <output id="v6LineScaleLabel">100 %</output><input type="range" data-v6-setting="line" min="90" max="145" step="5" value="100"></label>
+<label class="v6SettingRange">Erscheinungsbild <select data-v6-setting="theme" id="v6ReaderTheme"></select></label>
+<p class="v6SettingsFootnote">Tafsīr und Tadabbur öffnest du direkt beim jeweiligen Vers – sie gehören nicht zu den Anzeigeeinstellungen.</p>
+</section></div>
 <div class="v6Toast" id="v6Toast" role="status" hidden></div><nav class="tabs" aria-label="App-Hauptnavigation"><a href="/#home"><img src="/assets/dar-3d-icons/home.png" alt="">Start</a><a href="/#quiz"><img src="/assets/dar-3d-icons/quiz.png" alt="">Quiz</a><a href="/#recent"><img src="/assets/dar-3d-icons/posts.png" alt="">Beiträge</a><a href="/#quran" aria-current="page"><img src="/assets/dar-3d-icons/quran.png" alt="">Qurʾān</a><a href="/#more"><img src="/assets/dar-3d-icons/more.png" alt="">Mehr</a></nav>
 <div class="scrim" id="sheetLayer"><section class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle"><div class="handle"></div><h3 id="sheetTitle">Erscheinungsbilder</h3><p>Teste die Qurʾān-Startseite mit deiner Farbwelt.</p><div class="themeGrid" id="themes"></div><button type="button" class="closeSheet" id="sheetClose">Schließen</button></section></div><script>
 const SURAHS=[{"i":1,"a":"الفاتحة","n":"Al-Fatihah","t":"meccan","v":7},{"i":2,"a":"البقرة","n":"Al-Baqarah","t":"medinan","v":286},{"i":3,"a":"آل عمران","n":"Ali 'Imran","t":"medinan","v":200},{"i":4,"a":"النساء","n":"An-Nisa","t":"medinan","v":176},{"i":5,"a":"المائدة","n":"Al-Ma'idah","t":"medinan","v":120},{"i":6,"a":"الأنعام","n":"Al-An'am","t":"meccan","v":165},{"i":7,"a":"الأعراف","n":"Al-A'raf","t":"meccan","v":206},{"i":8,"a":"الأنفال","n":"Al-Anfal","t":"medinan","v":75},{"i":9,"a":"التوبة","n":"At-Tawbah","t":"medinan","v":129},{"i":10,"a":"يونس","n":"Yunus","t":"meccan","v":109},{"i":11,"a":"هود","n":"Hud","t":"meccan","v":123},{"i":12,"a":"يوسف","n":"Yusuf","t":"meccan","v":111},{"i":13,"a":"الرعد","n":"Ar-Ra'd","t":"medinan","v":43},{"i":14,"a":"ابراهيم","n":"Ibrahim","t":"meccan","v":52},{"i":15,"a":"الحجر","n":"Al-Hijr","t":"meccan","v":99},{"i":16,"a":"النحل","n":"An-Nahl","t":"meccan","v":128},{"i":17,"a":"الإسراء","n":"Al-Isra","t":"meccan","v":111},{"i":18,"a":"الكهف","n":"Al-Kahf","t":"meccan","v":110},{"i":19,"a":"مريم","n":"Maryam","t":"meccan","v":98},{"i":20,"a":"طه","n":"Taha","t":"meccan","v":135},{"i":21,"a":"الأنبياء","n":"Al-Anbya","t":"meccan","v":112},{"i":22,"a":"الحج","n":"Al-Hajj","t":"medinan","v":78},{"i":23,"a":"المؤمنون","n":"Al-Mu'minun","t":"meccan","v":118},{"i":24,"a":"النور","n":"An-Nur","t":"medinan","v":64},{"i":25,"a":"الفرقان","n":"Al-Furqan","t":"meccan","v":77},{"i":26,"a":"الشعراء","n":"Ash-Shu'ara","t":"meccan","v":227},{"i":27,"a":"النمل","n":"An-Naml","t":"meccan","v":93},{"i":28,"a":"القصص","n":"Al-Qasas","t":"meccan","v":88},{"i":29,"a":"العنكبوت","n":"Al-'Ankabut","t":"meccan","v":69},{"i":30,"a":"الروم","n":"Ar-Rum","t":"meccan","v":60},{"i":31,"a":"لقمان","n":"Luqman","t":"meccan","v":34},{"i":32,"a":"السجدة","n":"As-Sajdah","t":"meccan","v":30},{"i":33,"a":"الأحزاب","n":"Al-Ahzab","t":"medinan","v":73},{"i":34,"a":"سبإ","n":"Saba","t":"meccan","v":54},{"i":35,"a":"فاطر","n":"Fatir","t":"meccan","v":45},{"i":36,"a":"يس","n":"Ya-Sin","t":"meccan","v":83},{"i":37,"a":"الصافات","n":"As-Saffat","t":"meccan","v":182},{"i":38,"a":"ص","n":"Sad","t":"meccan","v":88},{"i":39,"a":"الزمر","n":"Az-Zumar","t":"meccan","v":75},{"i":40,"a":"غافر","n":"Ghafir","t":"meccan","v":85},{"i":41,"a":"فصلت","n":"Fussilat","t":"meccan","v":54},{"i":42,"a":"الشورى","n":"Ash-Shuraa","t":"meccan","v":53},{"i":43,"a":"الزخرف","n":"Az-Zukhruf","t":"meccan","v":89},{"i":44,"a":"الدخان","n":"Ad-Dukhan","t":"meccan","v":59},{"i":45,"a":"الجاثية","n":"Al-Jathiyah","t":"meccan","v":37},{"i":46,"a":"الأحقاف","n":"Al-Ahqaf","t":"meccan","v":35},{"i":47,"a":"محمد","n":"Muhammad","t":"medinan","v":38},{"i":48,"a":"الفتح","n":"Al-Fath","t":"medinan","v":29},{"i":49,"a":"الحجرات","n":"Al-Hujurat","t":"medinan","v":18},{"i":50,"a":"ق","n":"Qaf","t":"meccan","v":45},{"i":51,"a":"الذاريات","n":"Adh-Dhariyat","t":"meccan","v":60},{"i":52,"a":"الطور","n":"At-Tur","t":"meccan","v":49},{"i":53,"a":"النجم","n":"An-Najm","t":"meccan","v":62},{"i":54,"a":"القمر","n":"Al-Qamar","t":"meccan","v":55},{"i":55,"a":"الرحمن","n":"Ar-Rahman","t":"medinan","v":78},{"i":56,"a":"الواقعة","n":"Al-Waqi'ah","t":"meccan","v":96},{"i":57,"a":"الحديد","n":"Al-Hadid","t":"medinan","v":29},{"i":58,"a":"المجادلة","n":"Al-Mujadila","t":"medinan","v":22},{"i":59,"a":"الحشر","n":"Al-Hashr","t":"medinan","v":24},{"i":60,"a":"الممتحنة","n":"Al-Mumtahanah","t":"medinan","v":13},{"i":61,"a":"الصف","n":"As-Saf","t":"medinan","v":14},{"i":62,"a":"الجمعة","n":"Al-Jumu'ah","t":"medinan","v":11},{"i":63,"a":"المنافقون","n":"Al-Munafiqun","t":"medinan","v":11},{"i":64,"a":"التغابن","n":"At-Taghabun","t":"medinan","v":18},{"i":65,"a":"الطلاق","n":"At-Talaq","t":"medinan","v":12},{"i":66,"a":"التحريم","n":"At-Tahrim","t":"medinan","v":12},{"i":67,"a":"الملك","n":"Al-Mulk","t":"meccan","v":30},{"i":68,"a":"القلم","n":"Al-Qalam","t":"meccan","v":52},{"i":69,"a":"الحاقة","n":"Al-Haqqah","t":"meccan","v":52},{"i":70,"a":"المعارج","n":"Al-Ma'arij","t":"meccan","v":44},{"i":71,"a":"نوح","n":"Nuh","t":"meccan","v":28},{"i":72,"a":"الجن","n":"Al-Jinn","t":"meccan","v":28},{"i":73,"a":"المزمل","n":"Al-Muzzammil","t":"meccan","v":20},{"i":74,"a":"المدثر","n":"Al-Muddaththir","t":"meccan","v":56},{"i":75,"a":"القيامة","n":"Al-Qiyamah","t":"meccan","v":40},{"i":76,"a":"الانسان","n":"Al-Insan","t":"medinan","v":31},{"i":77,"a":"المرسلات","n":"Al-Mursalat","t":"meccan","v":50},{"i":78,"a":"النبإ","n":"An-Naba","t":"meccan","v":40},{"i":79,"a":"النازعات","n":"An-Nazi'at","t":"meccan","v":46},{"i":80,"a":"عبس","n":"'Abasa","t":"meccan","v":42},{"i":81,"a":"التكوير","n":"At-Takwir","t":"meccan","v":29},{"i":82,"a":"الإنفطار","n":"Al-Infitar","t":"meccan","v":19},{"i":83,"a":"المطففين","n":"Al-Mutaffifin","t":"meccan","v":36},{"i":84,"a":"الإنشقاق","n":"Al-Inshiqaq","t":"meccan","v":25},{"i":85,"a":"البروج","n":"Al-Buruj","t":"meccan","v":22},{"i":86,"a":"الطارق","n":"At-Tariq","t":"meccan","v":17},{"i":87,"a":"الأعلى","n":"Al-A'la","t":"meccan","v":19},{"i":88,"a":"الغاشية","n":"Al-Ghashiyah","t":"meccan","v":26},{"i":89,"a":"الفجر","n":"Al-Fajr","t":"meccan","v":30},{"i":90,"a":"البلد","n":"Al-Balad","t":"meccan","v":20},{"i":91,"a":"الشمس","n":"Ash-Shams","t":"meccan","v":15},{"i":92,"a":"الليل","n":"Al-Layl","t":"meccan","v":21},{"i":93,"a":"الضحى","n":"Ad-Duhaa","t":"meccan","v":11},{"i":94,"a":"الشرح","n":"Ash-Sharh","t":"meccan","v":8},{"i":95,"a":"التين","n":"At-Tin","t":"meccan","v":8},{"i":96,"a":"العلق","n":"Al-'Alaq","t":"meccan","v":19},{"i":97,"a":"القدر","n":"Al-Qadr","t":"meccan","v":5},{"i":98,"a":"البينة","n":"Al-Bayyinah","t":"medinan","v":8},{"i":99,"a":"الزلزلة","n":"Az-Zalzalah","t":"medinan","v":8},{"i":100,"a":"العاديات","n":"Al-'Adiyat","t":"meccan","v":11},{"i":101,"a":"القارعة","n":"Al-Qari'ah","t":"meccan","v":11},{"i":102,"a":"التكاثر","n":"At-Takathur","t":"meccan","v":8},{"i":103,"a":"العصر","n":"Al-'Asr","t":"meccan","v":3},{"i":104,"a":"الهمزة","n":"Al-Humazah","t":"meccan","v":9},{"i":105,"a":"الفيل","n":"Al-Fil","t":"meccan","v":5},{"i":106,"a":"قريش","n":"Quraysh","t":"meccan","v":4},{"i":107,"a":"الماعون","n":"Al-Ma'un","t":"meccan","v":7},{"i":108,"a":"الكوثر","n":"Al-Kawthar","t":"meccan","v":3},{"i":109,"a":"الكافرون","n":"Al-Kafirun","t":"meccan","v":6},{"i":110,"a":"النصر","n":"An-Nasr","t":"medinan","v":3},{"i":111,"a":"المسد","n":"Al-Masad","t":"meccan","v":5},{"i":112,"a":"الإخلاص","n":"Al-Ikhlas","t":"meccan","v":4},{"i":113,"a":"الفلق","n":"Al-Falaq","t":"meccan","v":5},{"i":114,"a":"الناس","n":"An-Nas","t":"meccan","v":6}];
@@ -517,10 +607,12 @@ document.addEventListener("DOMContentLoaded",()=>{
  const state={surah:Math.max(1,Math.min(114,Number(saved.surah)||1)),ayah:Math.max(1,Number(saved.ayah)||1),shown:22,
   selected:1,repeat:1,stay:false,rate:1,edition:"ar.alafasy",reciter:"Mišārī Rāšid al-ʿAfāsī",
   playerOpen:!!saved.playerOpen,playing:false,audio:null,repeatsDone:0,playerStopped:!saved.playerOpen, arabic:!!saved.arabic,
+  translit:saved.translit!==false,german:saved.german!==false,fontScale:Math.max(.85,Math.min(1.45,Number(saved.fontScale)||1)),lineScale:Math.max(.9,Math.min(1.45,Number(saved.lineScale)||1)),
   doc:null,requestId:0,lastFocus:null,autoplayNext:false,fromPreview:true};
- const cache=new Map();let toastTimer=null,selection={juz:1,surah:1,ayah:1};
+ const cache=new Map();const notesCache=new Map();let toastTimer=null,selection={juz:1,surah:1,ayah:1};
+ let currentInfo=null, infoRenderCounter=0, lastVerseTap=null, tadabburLoader=null;
  const surah=n=>SURAHS[Math.max(1,Math.min(114,Number(n)||1))-1],maxAyah=()=>surah(state.surah).v;
- const save=()=>{try{sessionStorage.setItem("quranPreviewV6State",JSON.stringify({surah:state.surah,ayah:state.ayah,playerOpen:state.playerOpen,arabic:state.arabic}))}catch(e){}};
+ const save=()=>{try{sessionStorage.setItem("quranPreviewV6State",JSON.stringify({surah:state.surah,ayah:state.ayah,playerOpen:state.playerOpen,arabic:state.arabic,translit:state.translit,german:state.german,fontScale:state.fontScale,lineScale:state.lineScale}))}catch(e){}};
  function flash(m){$v("v6Toast").textContent=m;$v("v6Toast").hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$v("v6Toast").hidden=true,3000);}
  const fmt=t=>{let n=Math.max(0,Math.floor(Number(t)||0));return String(Math.floor(n/60)).padStart(2,"0")+":"+String(n%60).padStart(2,"0")};
  const juzFor=(s,a)=>{let out=1;for(const v of JUZ){if(s>v.s||(s===v.s&&a>=v.a))out=v.j}return out};
@@ -555,6 +647,7 @@ document.addEventListener("DOMContentLoaded",()=>{
  }
  function showBookmarks(){
   state.lastFocus=document.activeElement;document.body.style.overflow="hidden";
+  $v("v6InfoTabs").hidden=true;$v("v6InfoDialog").classList.remove("is-detail");
   $v("v6Tafsir").hidden=false;$v("v6TafsirHeading").textContent="Gemerkte Āyāt";
   $v("v6TafsirText").innerHTML=bookmarks.size?[...bookmarks].sort((a,b)=>{
    const [sa,aa]=a.split(":").map(Number),[sb,ab]=b.split(":").map(Number);
@@ -563,6 +656,7 @@ document.addEventListener("DOMContentLoaded",()=>{
  }
  function openVerseSearch(){
   state.lastFocus=document.activeElement;document.body.style.overflow="hidden";
+  $v("v6InfoTabs").hidden=true;$v("v6InfoDialog").classList.remove("is-detail");
   $v("v6Tafsir").hidden=false;$v("v6TafsirHeading").textContent="In dieser Sūrah suchen";
   $v("v6TafsirText").innerHTML='<label class="v6SearchLabel" for="v6VerseSearch">Deutscher Text oder Āyah-Nummer</label><input class="v6SearchInput" id="v6VerseSearch" type="search" autocomplete="off" placeholder="Begriff suchen …"><div id="v6SearchResults" class="v6SearchResults"></div>';
   const input=$v("v6VerseSearch"),results=$v("v6SearchResults");
@@ -592,16 +686,17 @@ document.addEventListener("DOMContentLoaded",()=>{
  function rowHTML(v){
   const a=Number(v.id),ident="v6Ayah-"+a;
   const translit=v.tr_academic||v.tr_readable||v.tr||"";
-  return '<article class="v6Ayah" id="'+ident+'" data-ayah="'+a+'" aria-current="'+(state.ayah===a)+'">'+
-    (state.arabic?'<p class="v6Arabic" lang="ar" dir="rtl">'+safe(v.ar)+'</p>':"")+
-    '<p class="v6Translit">'+safe(translit)+'</p><p class="v6Translation">'+safe(v.de)+'</p>'+
+  return '<article class="v6Ayah" id="'+ident+'" tabindex="0" aria-label="Āyah '+state.surah+':'+a+'. Zweimal tippen für vollständige Versdetails." data-ayah="'+a+'" aria-current="'+(state.ayah===a)+'">'+
+    (state.arabic?'<div class="v6TextPart"><div class="v6TextPartLabel"><span>Arabischer Originaltext</span></div><p class="v6Arabic" lang="ar" dir="rtl">'+safe(v.ar)+'</p></div>':"")+
+    (state.translit?'<div class="v6TextPart"><div class="v6TextPartLabel"><span>Lautschrift</span></div><p class="v6Translit">'+safe(translit)+'</p></div>':"")+
+    (state.german?'<div class="v6TextPart"><div class="v6TextPartLabel"><span>Deutsche Bedeutung</span></div><p class="v6Translation">'+safe(v.de)+'</p></div>':"")+
     '<span class="v6AyahNum">'+state.surah+':'+a+'</span>'+
     '<div class="v6AyahActions"><button type="button" data-v6-ayah-play="'+a+'" aria-label="Āyah '+a+' abspielen">▶</button>'+
     '<button type="button" data-v6-ayah-bookmark="'+a+'" aria-label="Āyah '+a+' merken" aria-pressed="'+bookmarks.has(state.surah+":"+a)+'"><img class="v6-3d" src="/assets/dar-3d-icons/saved.png" alt="" loading="lazy" decoding="async"></button>'+
     '<button type="button" data-v6-ayah-tafsir="'+a+'" aria-label="Tafsīr zu Āyah '+a+' öffnen"><img class="v6-3d" src="/assets/dar-3d-icons/quran.png" alt="" loading="lazy" decoding="async"></button></div></article>';
  }
  function repaint(){
-  if(!state.doc)return;$v("v6Verses").innerHTML=state.doc.verses.slice(0,state.shown).map(rowHTML).join("");
+  if(!state.doc)return; applyReaderPrefs();$v("v6Verses").innerHTML=state.doc.verses.slice(0,state.shown).map(rowHTML).join("");
   $v("v6MoreVerses").hidden=state.shown>=state.doc.verses.length;
  }
  function markVerse(scroll=false){
@@ -673,14 +768,162 @@ document.addEventListener("DOMContentLoaded",()=>{
   else{selection.ayah=n;selection.juz=juzFor(selection.surah,n);}
   updateWheels();
  }
- async function tafsir(ayah=state.ayah){const verse=Math.max(1,Number(ayah)||1);state.lastFocus=document.activeElement;
-  $v("v6Tafsir").hidden=false;$v("v6TafsirHeading").textContent="Tafsīr · "+state.surah+":"+verse;
-  $v("v6TafsirText").textContent="Tafsīr wird geladen …";document.body.style.overflow="hidden";
-  try{const res=await fetch("/content/tafsir/de/"+digits(state.surah)+".json");if(!res.ok)throw Error("HTTP "+res.status);
-   const doc=await res.json(),row=doc.verses?.find(x=>Number(x.id)===verse);
-   const txt=(row?.tafsir||[]).map(t=>(t.source||"Quelle")+"\n"+(t.text||"")).filter(Boolean).join("\n\n");
-   $v("v6TafsirText").textContent=txt||(row?.meaning||"Zu dieser Āyah liegen in der Vorschau keine Tafsīr-Einträge vor.");
-  }catch(e){$v("v6TafsirText").textContent="Tafsīr-Daten für diese Āyah sind aktuell nicht verfügbar.";}
+
+ // All knowledge in this preview is read from existing project sources.
+ // Generic/generated explanations without page-level documentation are NOT presented as scholar quotations.
+ function sourceLink(url){
+   try{const u=new URL(url,location.origin);if(u.protocol==="https:"||u.origin===location.origin)return '<a href="'+safe(u.href)+'" target="_blank" rel="noopener noreferrer">Originalquelle ↗</a>';}catch(e){}
+   return "";
+ }
+ function infoEmpty(msg){return '<p class="v6InfoEmpty">'+safe(msg)+'</p>';}
+ function verseInfoCard(title,body,kind=""){return '<section class="v6KnowledgeCard'+(kind?" "+kind:"")+'"><h4>'+safe(title)+'</h4>'+body+'</section>';}
+ async function noteForVerse(sid,ayah){
+  const n=Number(sid);if(!notesCache.has(n)){
+    const p=fetch("/content/tafsir/de/"+digits(n)+".json",{cache:"force-cache"})
+      .then(r=>r.ok?r.json():null).catch(()=>null);
+    notesCache.set(n,p);
+  }
+  const doc=await notesCache.get(n);
+  return doc?.verses?.find(v=>Number(v.id)===Number(ayah))||null;
+ }
+ async function loadTadabburModule(){
+  if(window.DarQuranTadabbur)return window.DarQuranTadabbur;
+  if(!tadabburLoader)tadabburLoader=new Promise((resolve,reject)=>{
+    const sc=document.createElement("script");sc.src="/assets/quran-tadabbur-shared.js";
+    sc.onload=()=>window.DarQuranTadabbur?resolve(window.DarQuranTadabbur):reject(Error("Tadabbur-Modul nicht verfügbar"));
+    sc.onerror=()=>reject(Error("Tadabbur-Modul konnte nicht geladen werden"));document.head.appendChild(sc);
+  }).catch(e=>{tadabburLoader=null;throw e});
+  return tadabburLoader;
+ }
+ function currentInfoValid(token){return token===infoRenderCounter&&!$v("v6Tafsir").hidden;}
+ async function renderInfoTab(tab){
+  if(!currentInfo)return;
+  const token=++infoRenderCounter,sid=currentInfo.surah,ayah=currentInfo.ayah;
+  currentInfo.tab=tab;
+  $v("v6InfoTabs").querySelectorAll("[data-v6-info-tab]").forEach(el=>{
+    el.setAttribute("aria-selected",String(el.dataset.v6InfoTab===tab));
+    el.tabIndex=el.dataset.v6InfoTab===tab?0:-1;
+  });
+  const body=$v("v6TafsirText");body.innerHTML=infoEmpty("Angaben werden geladen …");
+  if(tab==="tadabbur"){
+    try{
+      const loader=await loadTadabburModule(),file=await loader.loadSurah(sid);
+      if(!currentInfoValid(token))return;
+      if(!file?.verified){body.innerHTML=infoEmpty("Der Tadabbur-Katalog ist derzeit nicht erreichbar. Es werden keine Ersatzüberlieferungen erfunden.");return;}
+      const item=file.verses?.get(ayah);
+      const entries=Array.isArray(item?.athar)?item.athar:[];
+      body.innerHTML=entries.length?entries.map(v=>verseInfoCard(
+         (v.person||v.name||"Überlieferung")+" · "+(v.generation||""),
+         '<p>'+safe(v.text)+'</p><div class="v6Citation"><b>Quelle:</b> '+safe(v.source||"Nicht dokumentiert")+
+         (v.grading?'<br><b>Einstufung im Datenbestand:</b> '+safe(v.grading):"")+
+         (v.note?'<br>'+safe(v.note):"")+
+         (v.sourceUrl?"<br>"+sourceLink(v.sourceUrl):"")+"</div>"
+       )).join(""):infoEmpty("Für diese Āyah liegt im gemeinsamen Tadabbur-Katalog aktuell keine zugeordnete Überlieferung vor.");
+    }catch(e){if(currentInfoValid(token))body.innerHTML=infoEmpty("Tadabbur konnte nicht geladen werden. Bitte später erneut versuchen.");}
+    return;
+  }
+  const record=await noteForVerse(sid,ayah);
+  if(!currentInfoValid(token))return;
+  if(tab==="tafsir"){
+    // The existing generic Ibn-Kathīr/as-Saʿdī field often lacks direct references;
+    // never attribute non-sourced placeholder prose to those scholars.
+    const citations=(record?.tafsir||[]).filter(v=>
+      (v.sourceUrl||v.originalArabic||v.primarySourceUrl||v.bookReference)&&v.text&&
+      !/sobald der geprüfte Text vorliegt|wird in deutscher Übertragung ergänzt/i.test(v.text)
+    );
+    const verse=(state.doc?.verses||[]).find(v=>Number(v.id)===ayah);
+    body.innerHTML=verseInfoCard("Bedeutung der Āyah (deutsche Übersetzung)",'<p>'+safe(verse?.de||record?.meaning||"Keine geprüfte Übersetzung geladen.")+'</p>')+
+      (citations.length?citations.map(v=>verseInfoCard(
+        "Tafsīr · "+(v.source||"Quellenvermerk"),
+        '<p>'+safe(v.text)+'</p><div class="v6Citation">'+safe(v.bookReference||"")+sourceLink(v.sourceUrl||v.primarySourceUrl)+"</div>"
+      )).join(""):verseInfoCard("Tafsīr – Quellenprüfung ausstehend",
+       '<p>Der derzeitige Tafsīr-Datenbestand enthält hier keine präzise überprüfbare Werk- und Stellenangabe. Allgemeine Texte mit Gelehrtennamen werden deshalb nicht als Originalaussagen ausgegeben.</p>',"is-note"));
+    return;
+  }
+  if(tab==="context"){
+    const meta=surah(sid);
+    body.innerHTML=verseInfoCard("Suren-Einordnung",
+      '<p><b>'+safe(meta.n)+'</b> · '+(meta.t==="medinan"?"überwiegend medinensisch":"überwiegend mekkanisch")+'</p>'+
+      (record?.place?'<p>Im Datenbestand vermerkt: '+safe(record.place)+(record?.period?" · "+safe(record.period):"")+'</p>':"")+
+      '<p class="v6InfoCaution">Diese Einordnung betrifft die Sūrah und belegt nicht für sich allein Ort oder Zeitpunkt genau dieser einzelnen Āyah.</p>')+
+      verseInfoCard("Anlass der Offenbarung (Sabab an-Nuzūl)",
+      '<p>Ein individueller Offenbarungsanlass wird erst angezeigt, wenn eine überprüfbare Überlieferung mit konkretem Nachweis vorliegt.</p>',"is-note");
+    return;
+  }
+  if(tab==="hadith"){
+    const rows=(record?.hadiths||[]).filter(x=>
+      x.text&&!/Einordnung · Überlieferung|kein gesondertes Marfu/i.test(x.source+" "+x.text)&&
+      (x.sourceUrl||/\b(?:Nr\.?\s*\d+|Ṣaḥīḥ\s+(?:Muslim|al-Buḫārī))\b/i.test(x.source||""))
+    );
+    body.innerHTML=rows.length?rows.map(x=>verseInfoCard(
+      x.source||"Überlieferung",
+      '<p>'+safe(x.text)+'</p><p class="v6Citation">Einstufung gemäß Bestand: '+safe(x.grading||"nicht belegt")+'</p>'+sourceLink(x.sourceUrl||"")
+    )).join(""):infoEmpty("Für diese Āyah ist kein konkret belegter Ḥadīṯ in der verfügbaren Datei nachgewiesen. Allgemeine Standardtexte werden nicht als Überlieferung ausgegeben.");
+    return;
+  }
+  if(tab==="athar"){
+    try{
+      const rsp=await fetch("/content/quran-athar/de/"+digits(sid)+".json",{cache:"force-cache"});
+      const data=rsp.ok?await rsp.json():null;
+      if(!currentInfoValid(token))return;
+      const selected=data?.verses?.find(x=>Number(x.id)===ayah);
+      const verifiable=(selected?.athar||[]).filter(x=>
+        x.text&&x.sourceUrl&&!/maschinell|Kette in Tabari prüfen|nicht geprüft/i.test((x.note||"")+" "+(x.grading||""))
+      );
+      body.innerHTML=verifiable.length?verifiable.map(x=>verseInfoCard(
+        (x.person||x.name||"Athar")+" · "+(x.generation||""),
+        "<p>"+safe(x.text)+"</p><p class='v6Citation'>"+safe(x.source||"")+"</p>"+sourceLink(x.sourceUrl)
+      )).join(""):infoEmpty("Zu dieser Āyah liegen in der aktuellen Athār-Datei keine ausreichend direkt belegten und geprüften deutschen Zitate vor. Maschinell übertragene oder ungeprüfte Aussagen werden nicht ausgegeben.");
+    }catch(e){if(currentInfoValid(token))body.innerHTML=infoEmpty("Āthār-Datei momentan nicht erreichbar.");}
+  }
+ }
+ async function openInfoSheet(ayah=state.ayah,full=false,tab="tafsir"){
+  const verse=Math.max(1,Math.min(maxAyah(),Number(ayah)||1));
+  state.lastFocus=document.activeElement;
+  currentInfo={surah:state.surah,ayah:verse,full:!!full,tab};
+  $v("v6InfoDialog").classList.toggle("is-detail",!!full);
+  $v("v6InfoTabs").hidden=false;$v("v6InfoTabs").classList.toggle("is-full",!!full);
+  $v("v6TafsirHeading").textContent=(full?"Versinformationen · ":"Tafsīr & Tadabbur · ")+state.surah+":"+verse;
+  $v("v6Tafsir").hidden=false;document.body.style.overflow="hidden";
+  await renderInfoTab(tab);
+ }
+ function applyReaderPrefs(){
+  const el=$v("v6Reader");
+  el.style.setProperty("--v6-font-scale",String(state.fontScale));
+  el.style.setProperty("--v6-line-scale",String(state.lineScale));
+ }
+ function openSettings(){
+  state.lastFocus=document.activeElement;
+  $v("v6Settings").hidden=false;document.body.style.overflow="hidden";
+  $v("v6ReaderTheme").innerHTML=THEMES.map(t=>'<option value="'+safe(t[0])+'">'+safe(t[1])+'</option>').join("");
+  const setters={arabic:state.arabic,translit:state.translit,german:state.german};
+  $v("v6Settings").querySelectorAll("[data-v6-setting]").forEach(e=>{
+    const key=e.dataset.v6Setting;
+    if(key in setters)e.checked=!!setters[key];
+    else if(key==="font")e.value=String(Math.round(state.fontScale*100));
+    else if(key==="line")e.value=String(Math.round(state.lineScale*100));
+    else if(key==="theme")e.value=theme;
+  });
+  $v("v6FontScaleLabel").textContent=Math.round(state.fontScale*100)+" %";
+  $v("v6LineScaleLabel").textContent=Math.round(state.lineScale*100)+" %";
+ }
+ function changeReadingSetting(e){
+  const key=e.dataset.v6Setting;
+  if(key==="arabic"||key==="translit"||key==="german"){
+    if(!e.checked&&[state.arabic,state.translit,state.german].filter(Boolean).length<=1){
+      e.checked=true;flash("Mindestens eine Textart muss sichtbar bleiben.");return;
+    }
+    state[key]=!!e.checked;repaint();
+  }else if(key==="font"||key==="line"){
+    const pct=Math.max(85,Math.min(145,Number(e.value)||100));
+    if(key==="font"){state.fontScale=pct/100;$v("v6FontScaleLabel").textContent=pct+" %";}
+    else{state.lineScale=pct/100;$v("v6LineScaleLabel").textContent=pct+" %";}
+    applyReaderPrefs();
+  }else if(key==="theme"){
+    theme=e.value;document.documentElement.dataset.theme=theme;
+    document.querySelectorAll("[data-theme-choice]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.themeChoice===theme)));
+  }
+  save();
  }
  async function copyAyah(ayah){
   const v=state.doc?.verses?.find(x=>Number(x.id)===Number(ayah));if(!v)return;
@@ -693,10 +936,11 @@ document.addEventListener("DOMContentLoaded",()=>{
   if(act==="picker"){openPicker();return;}
   if(act==="close-picker"){closeOverlay("v6Picker");return;}
   if(act==="close-tafsir"){closeOverlay("v6Tafsir");return;}
-  if(act==="info"){await tafsir();return;}
+  if(act==="info"){await openInfoSheet(state.ayah,false,"tafsir");return;}
   if(act==="search"){openVerseSearch();return;}
   if(act==="bookmarks"){showBookmarks();return;}
-  if(act==="settings"){state.arabic=!state.arabic;repaint();flash(state.arabic?"Arabischer Originaltext eingeblendet.":"Arabischer Originaltext ausgeblendet.");save();return;}
+  if(act==="settings"){openSettings();return;}
+  if(act==="close-settings"){closeOverlay("v6Settings");return;}
   if(act==="wake"){await toggleWake();flash(wakeWanted?"Bildschirm-Wachhalten angefordert.":"Bildschirm-Wachhalten ausgeschaltet.");return;}
   if(act==="stop"){stopPlayer();return;}
   if(act==="pause"){pausePlayer();return;}
@@ -712,6 +956,13 @@ document.addEventListener("DOMContentLoaded",()=>{
   // Keep all V3 filters, 114 metadata, theme controls, and persistent preview URL.
   // Native Qurʾān context bar is physically inside the bottom navigation, as in production.
   document.querySelector(".tabs")?.prepend($v("v6Dock"));
+  $v("v6InfoTabs").addEventListener("click",e=>{
+    const b=e.target.closest("[data-v6-info-tab]");if(b)renderInfoTab(b.dataset.v6InfoTab);
+  });
+  $v("v6Settings").addEventListener("change",e=>{if(e.target.matches("[data-v6-setting]"))changeReadingSetting(e.target)});
+  $v("v6Settings").addEventListener("input",e=>{if(e.target.matches('[data-v6-setting="font"],[data-v6-setting="line"]'))changeReadingSetting(e.target)});
+  $v("v6Tafsir").addEventListener("click",e=>{if(e.target===$v("v6Tafsir"))closeOverlay("v6Tafsir")});
+  $v("v6Settings").addEventListener("click",e=>{if(e.target===$v("v6Settings"))closeOverlay("v6Settings")});
   document.querySelectorAll(".v6Previewbar button").forEach(b=>b.addEventListener("click",async()=>{
    const mode=b.dataset.v6Mode;
    if(mode==="overview")showOverview();
@@ -731,6 +982,14 @@ document.addEventListener("DOMContentLoaded",()=>{
    if(e.target.closest("#go")){e.preventDefault();e.stopImmediatePropagation();await openReader(+$v("surah").value,+$v("ayah").value,{scroll:true});return;}
    const playerLink=e.target.closest('.headButtons a[href*="quran-player"]');
    if(playerLink){e.preventDefault();e.stopImmediatePropagation();await openReader(state.surah,state.ayah,{scroll:true});state.playerOpen=true;state.playerStopped=false;syncPlayer();return;}
+   const tapped=e.target.closest(".v6Ayah");
+   if(tapped&&!e.target.closest("button,a,input,textarea,select,[contenteditable]")){
+     const n=Number(tapped.dataset.ayah),now=performance.now(),prior=lastVerseTap;
+     if(prior&&prior.ayah===n&&now-prior.when<360){
+       lastVerseTap=null;e.preventDefault();await openInfoSheet(n,true,"tafsir");return;
+     }
+     lastVerseTap={ayah:n,when:now};
+   }
    const wheel=e.target.closest("[data-v6-wheel]");
    if(wheel){wheelClick(wheel.dataset.v6Wheel,Number(wheel.dataset.val));return;}
    const act=e.target.closest("[data-v6]");
@@ -744,16 +1003,17 @@ document.addEventListener("DOMContentLoaded",()=>{
    const searchLink=e.target.closest("[data-v6-go-search]");
    if(searchLink){const aa=+searchLink.dataset.v6GoSearch;closeOverlay("v6Tafsir");state.ayah=aa;state.shown=Math.max(state.shown,aa+3);repaint();markVerse(true);return;}
    const tf=e.target.closest("[data-v6-ayah-tafsir]");
-   if(tf){await tafsir(+tf.dataset.v6AyahTafsir);return;}
+   if(tf){await openInfoSheet(+tf.dataset.v6AyahTafsir,false,"tafsir");return;}
   },true);
   $v("v6PickerGo").addEventListener("click",async()=>{const s=selection.surah,a=selection.ayah;closeOverlay("v6Picker");await openReader(s,a,{scroll:true});});
   $v("v6MoreVerses").addEventListener("click",()=>{state.shown=Math.min(maxAyah(),state.shown+24);repaint();markVerse(false);});
   $v("v6Reciter").addEventListener("change",e=>{state.edition=e.target.value;state.reciter=e.target.selectedOptions[0].textContent;syncHeader();if(state.audio){state.audio.pause();state.audio.removeAttribute("src");state.audio.load();state.playing=false;}flash("Qāriʾ gewählt. Play startet die neue Stimme.");});
   $v("v6Seek").addEventListener("input",e=>{if(state.audio&&Number.isFinite(state.audio.duration)&&state.audio.duration>0)state.audio.currentTime=state.audio.duration*Number(e.target.value)/100;});
   document.addEventListener("keydown",e=>{
-   if(e.key==="Escape"){if(!$v("v6Picker").hidden)closeOverlay("v6Picker");else if(!$v("v6Tafsir").hidden)closeOverlay("v6Tafsir");}
+   if(e.key==="Escape"){if(!$v("v6Picker").hidden)closeOverlay("v6Picker");else if(!$v("v6Settings").hidden)closeOverlay("v6Settings");else if(!$v("v6Tafsir").hidden)closeOverlay("v6Tafsir");}
+   if((e.key==="Enter"||e.key===" ")&&document.activeElement?.classList.contains("v6Ayah")){e.preventDefault();openInfoSheet(Number(document.activeElement.dataset.ayah),true,"tafsir");}
   });
-  window.addEventListener("pagehide",()=>{if(state.audio)state.audio.pause();save();});
+  window.addEventListener("pagehide",()=>{state.playerOpen=false;state.playerStopped=true;state.playing=false;if(state.audio){state.audio.pause();state.audio.removeAttribute("src");}save();});
   syncHeader();save();
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
