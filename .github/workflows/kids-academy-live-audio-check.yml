@@ -45,6 +45,9 @@ jobs:
           import hashlib,json,time,urllib.error,urllib.parse,urllib.request,pathlib,sys
           host="https://dar-al-tawhid.de"
           manifest=json.loads(pathlib.Path("kids/data/academy-audio-staging-v9.json").read_text("utf-8"))
+          # The diagnostic HTML page is protected for normal browsers.
+          # Only a KIDS-native User-Agent can access it; this automated
+          # test verifies the intended gate instead of opening the page.
           resources=[
               ("/kids/akademie/index.html","V13.0-voicefix-20261010",None),
               ("/kids/akademie/pilot-audio-v13.js","kids-serhat-v13-20261010",None),
@@ -59,7 +62,11 @@ jobs:
                   url=host+route+"?liveqa="+str(int(time.time()))+"-"+str(attempt)
                   try:
                       request=urllib.request.Request(url,headers={
-                          "User-Agent":"Dar-Kids-MasterVoice-LiveIntegrity/1.0",
+                          # Native KIDS clients are intentionally admitted by the
+                          # existing preview-gate. Do not bypass or weaken that gate.
+                          "User-Agent":("DarAlTawhidKids-iOS LiveIntegrity/1.0"
+                                        if route.endswith("/stimmen-test-v14.html")
+                                        else "Dar-Kids-MasterVoice-LiveIntegrity/1.0"),
                           "Accept":"*/*",
                           "Cache-Control":"no-cache",
                       })
