@@ -2354,11 +2354,23 @@ button,input,select{font:inherit}
   document.addEventListener("DOMContentLoaded",function(){
    window.__darSyncInstallButtons();
    try{
-    fetch("/manifest.json",{cache:"no-store",credentials:"same-origin"}).catch(function(){});
+    fetch("/install-manifest.json",{cache:"no-store",credentials:"same-origin"}).catch(function(){});
     if("serviceWorker" in navigator){
      navigator.serviceWorker.getRegistrations().then(function(regs){
-      regs.forEach(function(reg){var worker=reg.active||reg.waiting||reg.installing;if(!worker||!worker.scriptURL)return;try{var sw=new URL(worker.scriptURL,location.href);if(sw.origin===location.origin&&sw.pathname==="/service-worker.js")reg.unregister()}catch(eSw){}});
-     }).catch(function(){});
+      return Promise.all(regs.map(function(reg){
+       var worker=reg.active||reg.waiting||reg.installing;
+       if(!worker||!worker.scriptURL)return Promise.resolve();
+       try{var sw=new URL(worker.scriptURL,location.href);
+         if(sw.origin===location.origin&&sw.pathname==="/service-worker.js")return reg.unregister();
+       }catch(eSw){}
+       return Promise.resolve();
+      }));
+     }).catch(function(){}).then(function(){
+      // Public site install worker is network-only and never caches the app.
+      return navigator.serviceWorker.register("/public-pwa-install-sw.js",{scope:"/",updateViaCache:"none"});
+     }).then(function(){window.__darPublicInstallWorkerReady=true}).catch(function(e){console.warn("PWA install worker:",e)});
+     // /pwa/ remains controlled by its independent, more-specific worker.
+     navigator.serviceWorker.register("/pwa/service-worker.js",{scope:"/pwa/",updateViaCache:"none"}).catch(function(){});
     }
    }catch(ePrime){}
    window.addEventListener("pageshow",function(){window.__darSyncInstallButtons()});
@@ -2427,7 +2439,7 @@ button,input,select{font:inherit}
  }catch(e){}
 })();
 </script>
-<link rel="manifest" href="/manifest.json">
+<link rel="manifest" href="/install-manifest.json">
 <style id="darMobileTapCleanV2">
 *{-webkit-tap-highlight-color:transparent!important}
 @media(hover:none) and (pointer:coarse){
@@ -2994,7 +3006,7 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
    var meta=document.querySelector('meta[name="theme-color"]');
    if(meta&&row)meta.setAttribute("content",row.theme);
    document.documentElement.setAttribute("data-dar-pwa-icon-current",id);
-   fetch("/manifest.json",{cache:"no-store",credentials:"same-origin"}).catch(function(){})
+   fetch("/install-manifest.json",{cache:"no-store",credentials:"same-origin"}).catch(function(){})
   }catch(e){}
  }
  function darApplyPwaIcon(id,persist){
@@ -3067,7 +3079,7 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
  }
  async function darEnsurePwaServiceWorker(){
   try{
-   await fetch("/manifest.json",{cache:"no-store",credentials:"same-origin"});
+   await fetch("/install-manifest.json",{cache:"no-store",credentials:"same-origin"});
    if("serviceWorker" in navigator){
     var regs=await navigator.serviceWorker.getRegistrations();
     regs.forEach(function(reg){var worker=reg.active||reg.waiting||reg.installing;if(!worker||!worker.scriptURL)return;try{var sw=new URL(worker.scriptURL,location.href);if(sw.origin===location.origin&&sw.pathname==="/service-worker.js")reg.unregister()}catch(eSw){}});
