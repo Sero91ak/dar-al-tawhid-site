@@ -6616,7 +6616,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/content-studio-feed.js?v=studio8"></script>
 <script src="/kids/owner-voice.js?v=8"></script>\n<script src="/kids/dua-word-meanings-v1.js?v=2"></script>
 <script src="/kids/dua-phonetic-alignment-v1.js?v=1"></script>
-<script src="/kids/dua-smart-learn.js?v=1310"></script>
+<script src="/kids/dua-smart-learn.js?v=1312"></script>
 <script>
 (function(){
   var KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306";
@@ -6624,7 +6624,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   // The next navigation uses network-first and receives the latest release.
   if("serviceWorker" in navigator){
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1311",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1312",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     },{once:true});
