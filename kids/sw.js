@@ -497,7 +497,8 @@ const KIDS_OFFLINE_SEEDS=[
   "/kids/data/short-stories-voice.json",
   "/kids/data/academy-lessons.json"
 ];
-let kidsOfflineRunning=false,kidsOfflineCancel=false;
+let kidsOfflineRunning=false,kidsOfflineCancel=false,kidsOfflineNext=null;
+const KIDS_OFFLINE_META="/kids/data/offline-pack-status-v1.json";
 function kidsOfflineRequest(input){
   try{
     const u=new URL(input,self.location.origin);
@@ -516,7 +517,13 @@ async function kidsPutFull(url,cache){
   const full=kidsOfflineRequest(url);
   if(!full)return false;
   const key=new Request(full,{method:"GET"});
-  if(await caches.match(key))return true;
+  if(await cache.match(key))return true;
+  // Preserve a copy even if it was already present in a release-specific
+  // cache which may be cleaned during the next Kids SW activation.
+  const earlier=await caches.match(key);
+  if(earlier&&earlier.status===200){
+    try{await cache.put(key,earlier.clone());return true;}catch(_){}
+  }
   try{
     const response=await fetch(key,{cache:"no-store"});
     if(!response||!response.ok||response.status!==200)return false;
@@ -576,12 +583,21 @@ async function kidsSendOffline(source,type,detail){
   if(source&&typeof source.postMessage==="function")try{source.postMessage(Object.assign({type},detail||{}))}catch(_){}
 }
 async function kidsOfflineDownload(source,mode){
-  if(kidsOfflineRunning){kidsSendOffline(source,"KIDS_OFFLINE_BUSY");return;}
+  if(kidsOfflineRunning){
+    if(mode==="full"){
+      kidsOfflineCancel=true;
+      kidsOfflineNext={source,mode};
+      kidsSendOffline(source,"KIDS_OFFLINE_QUEUED");
+    }else kidsSendOffline(source,"KIDS_OFFLINE_BUSY");
+    return;
+  }
   kidsOfflineRunning=true;kidsOfflineCancel=false;
   const cache=await caches.open(KIDS_OFFLINE_CACHE);
   try{
+    // Tiny automatic visual warm-up, not a surprise multi-hundred-MB download.
+    // The explicit full package includes all known images, lessons and audio.
     const first=mode==="visual"
-      ?CORE_PRECACHE.filter(p=>/\.(?:png|jpe?g|webp|gif|svg|avif|woff2?|css|js|json|html|webmanifest)(?:\?|$)/i.test(p)).concat(KIDS_OFFLINE_SEEDS.filter(p=>/\.json$|\.html$/i.test(p)))
+      ?CORE_PRECACHE.filter(p=>/\.(?:png|jpe?g|webp|gif|svg|avif)(?:\?|$)/i.test(p)).slice(0,50)
       :CORE_PRECACHE.concat(KIDS_OFFLINE_SEEDS);
     const paths=new Map();
     function append(raw){
@@ -596,7 +612,7 @@ async function kidsOfflineDownload(source,mode){
       for(const seed of KIDS_OFFLINE_SEEDS){
         if(kidsOfflineCancel)break;
         const url=kidsOfflineRequest(seed);if(!url)continue;
-        if(!/\.json$/i.test(new URL(url).pathname))continue;
+        if(!/\.(?:json|html)$/i.test(new URL(url).pathname))continue;
         let response;
         try{response=await caches.match(url)||await fetch(url,{cache:"no-store"});}catch(_){continue;}
         if(!response||!response.ok)continue;
@@ -620,11 +636,27 @@ async function kidsOfflineDownload(source,mode){
       }
     }
     await Promise.all([worker(),worker(),worker()]);
+    const complete=!kidsOfflineCancel&&failed===0;
+    if(mode==="full"&&!kidsOfflineCancel){
+      try{
+        await cache.put(KIDS_OFFLINE_META,new Response(JSON.stringify({
+          complete,done,total:queue.length,failed,checkedAt:Date.now(),
+          shell:KIDS_BUILD_ID
+        }),{headers:{"Content-Type":"application/json"}}));
+      }catch(_){}
+    }
     await kidsSendOffline(source,"KIDS_OFFLINE_PROGRESS",{
       mode,done,total:queue.length,failed,
-      complete:!kidsOfflineCancel&&failed===0,cancelled:kidsOfflineCancel
+      complete:complete&&mode==="full",cancelled:kidsOfflineCancel,
+      visualReady:complete&&mode==="visual"
     });
-  }finally{kidsOfflineRunning=false;kidsOfflineCancel=false;}
+  }finally{
+    kidsOfflineRunning=false;kidsOfflineCancel=false;
+    if(kidsOfflineNext){
+      const next=kidsOfflineNext;kidsOfflineNext=null;
+      await kidsOfflineDownload(next.source,next.mode);
+    }
+  }
 }
 self.addEventListener("message",function(event){
   const msg=event.data||{};
@@ -632,7 +664,12 @@ self.addEventListener("message",function(event){
   if(msg.type==="KIDS_OFFLINE_STATUS"){
     event.waitUntil((async()=>{
       const cache=await caches.open(KIDS_OFFLINE_CACHE),keys=await cache.keys();
-      await kidsSendOffline(event.source,"KIDS_OFFLINE_STATUS",{count:keys.length});
+      let record={};try{record=await (await cache.match(KIDS_OFFLINE_META))?.json()||{}}catch(_){}
+      await kidsSendOffline(event.source,"KIDS_OFFLINE_STATUS",{
+        count:keys.filter(x=>!x.url.endsWith("/offline-pack-status-v1.json")).length,
+        complete:record.complete===true&&keys.length>=record.total,
+        failed:record.failed||0
+      });
     })());return;
   }
   if(msg.type==="KIDS_OFFLINE_START"&&(msg.mode==="full"||msg.mode==="visual")){
