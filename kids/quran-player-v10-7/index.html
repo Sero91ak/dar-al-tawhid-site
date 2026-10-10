@@ -477,7 +477,7 @@ html[data-app=adult][data-ambient=day] .reading-meta,
 html[data-app=adult][data-ambient=day] .reading-meta b,
 html[data-app=adult][data-ambient=day] .tile b{color:var(--gold-ink)!important}
 html[data-app=adult][data-ambient=day] .reading-verse.current{border-color:#aa8958!important}
-</style></head><body><div class="app">
+html[data-app=kids] .profile-label {cursor:default} html[data-app=kids] #profileSwitch{display:none!important}</style></head><body><div class="app">
 <header>
 <div class="toolbar">
 <div class="navbrand"><button aria-label="Zur Player-Auswahl" class="small-btn" id="back" type="button"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"></path></svg></button></div>
@@ -501,8 +501,14 @@ const FALLBACK={"1":[["بِسْمِ اللَّهِ الرَّحْمَٰنِ ال
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const initial={surah:KIDS?112:1,ayah:KIDS?4:1,mode:'listen',speed:1,sequence:'inorder',reciterMode:'fixed',reciter:RECITERS[0].id,repeat:'none',arabic:true,german:true,latin:false,tad:false,profile:"boy",tafsir:false,bookmarks:{},finished:{},errors:{},listens:0,seconds:0,kidsMode:'normal'};
-const key='dar-quran-v10-'+APP;let saved={};try{saved=JSON.parse(localStorage.getItem(key)||'{}')}catch(e){}
+const key='dar-quran-v10-'+APP+(KIDS?'-'+(localStorage.getItem('kids.activeProfile')||'guest'):'');let saved={};try{saved=JSON.parse(localStorage.getItem(key)||'{}')}catch(e){}
 const state={...initial,...saved};
+// Existing app links may request an exact surah and ayah.
+const urlArgs=new URLSearchParams(location.search);
+const reqSurah=Number(urlArgs.get('surah'));
+const reqAyah=Number(urlArgs.get('ayah'));
+if(Number.isInteger(reqSurah)&&reqSurah>=1&&reqSurah<=114){state.surah=reqSurah;state.ayah=Number.isInteger(reqAyah)&&reqAyah>=1&&reqAyah<=SURAHS[reqSurah-1].count?reqAyah:1;}
+
 // V10.7: Honor the host Kids app profile on first open.
 const urlProfile=new URLSearchParams(location.search).get('profile');
 if(['boy','girl','teen-boy','teen-girl'].includes(urlProfile)) state.profile=urlProfile; const audio=new Audio();audio.preload='none';audio.preservesPitch=true;audio.mozPreservesPitch=true;audio.webkitPreservesPitch=true;let verseCache={},currentList=[],activeSheet='',loadingId=0,startedAt=0,playIntent=false;
@@ -549,7 +555,7 @@ body.innerHTML=`<h3>Wiedergabefolge</h3><label for="sequence">Wie sollen die Āy
 for(const id of ['sequence','reciterMode','repeatSelect','tempo']){let el=$(id);el.value=state[{sequence:'sequence',reciterMode:'reciterMode',reciter:'reciter',repeatSelect:'repeat',tempo:'speed'}[id]];el.addEventListener('change',()=>{let k={sequence:'sequence',reciterMode:'reciterMode',reciter:'reciter',repeatSelect:'repeat',tempo:'speed'}[id];state[k]=k==='speed'?Number(el.value):el.value;persist();render();if(k==='speed')audio.playbackRate=state.speed;if(k==='reciter'&&!stopped())startAudio();status('Einstellung gespeichert.')})}
 body.querySelectorAll('[data-toggle]').forEach(btn=>btn.addEventListener('click',()=>{state[btn.dataset.toggle]=!state[btn.dataset.toggle];persist();render();renderSheet()}));}
 function renderLibrary(){const q=String($('searchSurah')?.value||'').trim().toLocaleLowerCase();const filtered=SURAHS.filter(s=>(s.name+' '+s.id+' '+String(s.id).padStart(3,'0')).toLocaleLowerCase().includes(q));$('surahList').innerHTML=filtered.map(s=>`<button type="button" data-surah="${s.id}"><b>${String(s.id).padStart(3,'0')}</b><span>${esc(s.name)}</span><small>${s.count} Āyāt</small></button>`).join('')||'<p>Keine Sūrah gefunden.</p>';$('surahList').querySelectorAll('[data-surah]').forEach(b=>b.addEventListener('click',()=>{state.surah=Number(b.dataset.surah);state.ayah=1;playIntent=false;persist();closeSheet();verseChange()}))}
-$('back').addEventListener('click',()=>{location.href='/kids/start.html'});$('bookmark').addEventListener('click',markBookmark);$('ayahBookmark').addEventListener('click',markBookmark);$('copy').addEventListener('click',async()=>{let v=currentList?.[state.ayah-1];if(!v)return;const txt=`${ss().name} ${identity()}
+$('back').addEventListener('click',()=>{location.href='/kids/start.html?page=quran'});$('bookmark').addEventListener('click',markBookmark);$('ayahBookmark').addEventListener('click',markBookmark);$('copy').addEventListener('click',async()=>{let v=currentList?.[state.ayah-1];if(!v)return;const txt=`${ss().name} ${identity()}
 ${v.arabic}
 ${v.de}`;try{await navigator.clipboard.writeText(txt);status('Vers kopiert.')}catch(e){status('Kopieren im Browser nicht verfügbar.')}});
 document.querySelectorAll('[data-sheet]').forEach(b=>b.addEventListener('click',()=>{openSheet(b.dataset.sheet);}));$('closeSheet').addEventListener('click',closeSheet);$('backdrop').addEventListener('click',e=>{if(e.target===$('backdrop'))closeSheet()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet()});
@@ -607,7 +613,7 @@ let stageResizeObserver=null;
 if(typeof ResizeObserver!=='undefined'){stageResizeObserver=new ResizeObserver(updateVerseOverflow);stageResizeObserver.observe($('stageScroll'));stageResizeObserver.observe($('verseBody'))}
 window.addEventListener('resize',updateVerseOverflow);
 const profileSwitcher=$('profileSwitch');
-if(profileSwitcher)profileSwitcher.addEventListener('click',()=>{
+if(profileSwitcher&&!urlProfile)profileSwitcher.addEventListener('click',()=>{
  const options=['boy','girl','teen-boy','teen-girl'];
  state.profile=options[(options.indexOf(state.profile)+1)%options.length];
  persist();render();status('Designprofil: '+profileLabels[state.profile]);
