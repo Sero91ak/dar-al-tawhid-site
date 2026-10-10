@@ -31,6 +31,7 @@ jobs:
           mkdir -p .quran-preview-assets/content/quran .quran-preview-assets/visuals
           cp test/preview/index.html .quran-preview-assets/index.html
           cp test/preview/player-premium-v4.css .quran-preview-assets/player-premium-v4.css
+          cp test/preview/player-refined-v5.css .quran-preview-assets/player-refined-v5.css
           cp test/assets/area-heroes-v1290/quran-player.webp .quran-preview-assets/visuals/dar-quran-hero.webp
           cp assets/dar-3d-icons/quran.png .quran-preview-assets/visuals/dar-quran-icon.png
           cp kids/assets/kids-art/quran-surah-banner-v11-clean.png .quran-preview-assets/visuals/kids-quran-banner.png
@@ -41,7 +42,7 @@ jobs:
           test "$(find .quran-preview-assets/content/quran -maxdepth 1 -name '*.json' | wc -l)" -ge 110
           grep -Fq 'QURAN_PLAYER_V3_FOCUS_SHELL' .quran-preview-assets/dar-al-tawhid-quran-player-v3.html
           grep -Fq 'QURAN_PLAYER_V3_FOCUS_SHELL' .quran-preview-assets/tawhid-kids-quran-player-v3.html
-          for file in .quran-preview-assets/player-premium-v4.css .quran-preview-assets/visuals/{dar-quran-hero.webp,dar-quran-icon.png,kids-quran-banner.png,kids-quran-3d.png}; do test -s "$file"; done
+          for file in .quran-preview-assets/player-refined-v5.css .quran-preview-assets/player-premium-v4.css .quran-preview-assets/visuals/{dar-quran-hero.webp,dar-quran-icon.png,kids-quran-banner.png,kids-quran-3d.png}; do test -s "$file"; done
           node --check cloudflare/quran-player-preview-worker.js
       - name: Deploy only dedicated preview worker (no production routes)
         uses: cloudflare/wrangler-action@v3
@@ -55,7 +56,7 @@ jobs:
           set -euo pipefail
           host="https://dar-quran-players-showcase-v3.sero91ak.workers.dev"
           ua='Mozilla/5.0 (iPhone; CPU iPhone OS 27_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.0 Mobile/15E148 Safari/604.1'
-          for path in /index.html /dar-al-tawhid-quran-player-v3.html /tawhid-kids-quran-player-v3.html /content/quran/001.json /content/quran/112.json /player-premium-v4.css /visuals/dar-quran-hero.webp /visuals/dar-quran-icon.png /visuals/kids-quran-banner.png /visuals/kids-quran-3d.png; do
+          for path in /index.html /dar-al-tawhid-quran-player-v3.html /tawhid-kids-quran-player-v3.html /content/quran/001.json /content/quran/112.json /player-premium-v4.css /player-refined-v5.css /visuals/dar-quran-hero.webp /visuals/dar-quran-icon.png /visuals/kids-quran-banner.png /visuals/kids-quran-3d.png; do
             ok=0
             for attempt in $(seq 1 14); do
               out=$(mktemp)
@@ -65,6 +66,7 @@ jobs:
                   /index.html) grep -Fq 'DĀR AL TAWḤĪD' "$out" && ok=1 ;;
                   /content/quran/*) grep -Fq '"verses"' "$out" && ok=1 ;;
                   /player-premium-v4.css) grep -Fq 'V4 VISUAL REFRESH' "$out" && ok=1 ;;
+                  /player-refined-v5.css) grep -Fq 'QURAN_PLAYER_V5_REFINED' "$out" && ok=1 ;;
                   /visuals/*) [ "$(wc -c < "$out")" -gt 30000 ] && ok=1 ;;
                   *) grep -Fq 'QURAN_PLAYER_V3_FOCUS_SHELL' "$out" && grep -Fq '<audio id="audio"' "$out" && ok=1 ;;
                 esac
