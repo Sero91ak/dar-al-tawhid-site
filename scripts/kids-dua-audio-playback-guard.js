@@ -13,7 +13,7 @@ for(const key of [
   'var CLEAN_GAP=0.19;',
   'var CLEAN_SLOW_RATE=0.86;',
   'var rate=slow?CLEAN_SLOW_RATE:1;',
-  'var direct=currentDua.audioArabicUrl;',
+  'var direct=requestedDua.audioArabicUrl;',
   'var approvedSlow=mode==="slow"?approvedNativeSlowUrl(currentDua):"";',
   'var nativeSlow=!!approvedSlow&&String(url)===approvedSlow;',
   'attachPhraseFollow(currentDua,nativeSlow,token)',
