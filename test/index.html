@@ -10547,23 +10547,27 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/scholars-index.js?v=589" defer></script>
 <script src="/test/assets/prophets/prophets.js?v=36" defer></script>
 <script src="/test/assets/dar-quran-audio-pack.js?v=1064" defer></script>
-<script src="/test/assets/dar-quran-player.js?v=983" defer></script>
+<script src="/test/assets/dar-quran-player.js?v=984" defer></script>
 <script src="/test/assets/dar-quran-learn-studio.js?v=3" defer></script>
 <link rel="stylesheet" href="/test/assets/dar-quran-learn-studio.css?v=2">
 <script>
 (function(){
-  var WANT=982;
+  var WANT=984, fallbackPending=false;
   function boot(){
     if(window.__DAR_QURAN_PLAYER_BUILD===WANT&&window.DARQuranPlayer)return;
+    if(fallbackPending)return;
+    fallbackPending=true;
     var s=document.createElement("script");
-    s.src="/test/assets/dar-quran-player.js?v="+WANT+"&r="+Date.now();
+    s.src="/test/assets/dar-quran-player.js?v="+WANT+"&recovery=1";
     s.onload=function(){
+      fallbackPending=false;
       try{if(window.DARQuranPlayer&&typeof window.DARQuranPlayer.bind==="function")window.DARQuranPlayer.bind();}catch(e){}
     };
+    s.onerror=function(){fallbackPending=false;};
     document.head.appendChild(s);
   }
-  window.addEventListener("load",boot);
-  setTimeout(boot,800);
+  // Defer finishes before load. Never start another player while an audio file is playing.
+  window.addEventListener("load",boot,{once:true});
 })();
 </script>
 <script src="/test/assets/frauen/frauen-fiqh.js?v=1293-nohint" defer></script>

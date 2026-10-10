@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 983;
+    var PLAYER_BUILD = 984;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App, iOS-App und Apple TV: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -125,7 +125,7 @@
   var trackHeard = false;
   var playGen = 0;
   var allowAdvance = false;
-  var engine = { started: false, lastUrl: "", loadedSurah: 0, loadedAyah: 0, stallTimer: 0, lastProgressAt: 0, wantPlay: false, objectUrl: "", blobTried: false, fallbackReciterTried: false, haltedOffline: false, watchReloadAt: 0, endedAt: 0 };
+  var engine = { started: false, lastUrl: "", loadedSurah: 0, loadedAyah: 0, stallTimer: 0, lastProgressAt: 0, wantPlay: false, objectUrl: "", blobTried: false, fallbackReciterTried: false, haltedOffline: false, watchReloadAt: 0, endedAt: 0, recoveryCount: 0, lastObservedTime: 0 };
 
   var lastSysVolAt = 0;
   function usesSystemVolume() {
@@ -614,6 +614,27 @@
     clearTimeout(engine.stallTimer);
     engine.stallTimer = 0;
   }
+  function recoverPlayback(kind) {
+    if (!engine.wantPlay || window.__DAR_ADHAN_ACTIVE === true) return;
+    engine.recoveryCount = (engine.recoveryCount || 0) + 1;
+    if (engine.recoveryCount > 3) {
+      clearStallRetry();
+      engine.wantPlay = false;
+      state.playing = false;
+      state.error = "Die Rezitation wurde wiederholt unterbrochen. Tippe auf Erneut versuchen.";
+      try { audioEl().pause(); } catch (ePauseRecovery) {}
+      paintError();
+      paintChrome();
+      paintMini();
+      syncPublicAudioState(audioEl());
+      return;
+    }
+    var a = audioEl();
+    state.resumeAt = Number(a.currentTime) || state.current || 0;
+    engine.watchReloadAt = Date.now();
+    logAudio("recovery " + engine.recoveryCount + " after " + kind, snapAudio(a));
+    loadAudio(true, true, true);
+  }
   function scheduleStallRetry(kind) {
     clearStallRetry();
     var gen = playGen;
@@ -624,11 +645,11 @@
       if (gen !== playGen || window.__DAR_ADHAN_ACTIVE === true) return;
       var live = audioEl();
       if (!state.playing || !state.sessionActive || live.ended) return;
-      if ((Number(live.currentTime) || 0) > at + 0.2 || live.readyState >= 3) return;
+      if ((Number(live.currentTime) || 0) > at + 0.2) return;
+      // readyState may report buffered data even when the playback clock has frozen.
       state.current = at;
       state.resumeAt = at;
-      logAudio("retry after " + kind, snapAudio(live));
-      loadAudio(true, true);
+      if (engine.wantPlay) tryFallback();
     }, 8000);
   }
   function onAudioSignal(ev) {
@@ -740,13 +761,18 @@
       if (path.indexOf("http") === 0) return path;
       return origin + path;
     }
-    if (pack && typeof pack.url === "function") list.push(absProxy(pack.url(rec.edition, g)));
-    list.push(absProxy("/quran-audio/" + rec.edition + "/" + g + ".mp3"));
+    // Use progressive audio hosts first: the app proxy buffers an entire MP3 before returning it.
+    // Keep the same proxy as a fallback, never remove an existing audio provider.
     list.push("https://everyayah.com/data/" + rec.folder + "/" + s + a + ".mp3");
     list.push("https://cdn.islamic.network/quran/audio/128/" + rec.edition + "/" + g + ".mp3");
+    if (pack && typeof pack.url === "function") list.push(absProxy(pack.url(rec.edition, g)));
+    list.push(absProxy("/quran-audio/" + rec.edition + "/" + g + ".mp3"));
     return list.filter(function (u, i, arr) { return u && arr.indexOf(u) === i; });
   }
   function missingAudioHalt(qari, surah, ayah, url) {
+    clearStallRetry();
+    try { audioEl().pause(); } catch (eNoAudio) {}
+    stopProgressClock();
     state.playing = false;
     allowAdvance = false;
     engine.started = false;
@@ -797,23 +823,32 @@
       var name = err && err.name;
       logAudio("play rejected", { name: name, message: err && err.message, snap: snapAudio(a) });
       if (name === "AbortError") {
-        engine.abortRetries = (engine.abortRetries || 0) + 1;
-        if (engine.abortRetries <= 2) {
-          setTimeout(function () {
-            if (gen !== playGen || !engine.wantPlay) return;
-            runPlay(a, gen);
-          }, 180);
-        } else {
-          engine.wantPlay = false;
-          state.playing = false;
-          state.error = "Wiedergabe unterbrochen. Tippe erneut auf Wiedergabe.";
-          paintError();
-          paintChrome();
+        // A source change or newer user action may interrupt a pending play().
+        // Do not report a failure if the audio is already running.
+        if (!engine.wantPlay || a !== audioEl()) return;
+        if (!a.paused) {
+          state.playing = true;
+          state.sessionActive = true;
           syncPublicAudioState(a);
+          return;
+        }
+        engine.abortRetries = (engine.abortRetries || 0) + 1;
+        if (engine.abortRetries === 1) {
+          var interruptedSrc = String(a.currentSrc || a.getAttribute("src") || "");
+          setTimeout(function () {
+            if (gen !== playGen || !engine.wantPlay || a !== audioEl()) return;
+            var stillSrc = String(a.currentSrc || a.getAttribute("src") || "");
+            if (stillSrc !== interruptedSrc || !a.paused) return;
+            runPlay(a, gen);
+          }, 400);
+        } else {
+          // This source failed twice: move to the next existing provider.
+          tryFallback();
         }
         return;
       }
       if (name === "NotAllowedError") {
+        engine.wantPlay = false;
         state.playing = false;
         state.error = "Tippe erneut auf Wiedergabe, um den Ton zu starten.";
         paintError();
@@ -824,8 +859,10 @@
       tryFallback();
     });
   }
-  function loadAudio(autoplay, keepTime) {
+  function loadAudio(autoplay, keepTime, recovery) {
     var gen = ++playGen;
+    if (!recovery) engine.recoveryCount = 0;
+    engine.lastObservedTime = Number(state.resumeAt || state.current) || 0;
     urlIndex = 0;
     state.error = "";
     trackHeard = false;
@@ -841,7 +878,7 @@
     var wantQari = state.reciter;
     var surah = state.surah;
     var ayah = state.ayah;
-    resolveSource(wantQari, surah, ayah).then(function (hit) {
+    function applySource(hit) {
       if (gen !== playGen) {
         if (hit && hit.saved) { try { URL.revokeObjectURL(hit.url); } catch (eStale) {} }
         return;
@@ -908,11 +945,38 @@
       paintChrome();
       paintMini();
       followPlayingAyah(false);
-    });
+    }
+    // iOS Safari requires the first audio.play() to occur in the direct tap gesture.
+    // Resolve the deterministic streaming URL synchronously on online sessions.
+    if (!isOffline()) {
+      var directUrls = urlsForWithRec(reciterById(wantQari), surah, ayah);
+      applySource(directUrls.length ? { qari: wantQari, url: directUrls[0] } : null);
+    } else {
+      resolveSource(wantQari, surah, ayah).then(applySource, function () {
+        if (gen === playGen) missingAudioHalt(wantQari, surah, ayah, "");
+      });
+    }
   }
   function preloadNext() {}
+  function setFallbackSourceAtPosition(a, url) {
+    // An alternate URL of the SAME reciter should continue the current Āyah.
+    var at = Number(a.currentTime) || Number(state.resumeAt) || Number(state.current) || 0;
+    var generation = playGen;
+    setAudioSrc(a, url);
+    if (at <= 0.2) return;
+    state.resumeAt = at;
+    function resumeFallback() {
+      a.removeEventListener("loadedmetadata", resumeFallback);
+      if (generation !== playGen || String(a.getAttribute("src") || "") !== url) return;
+      var d = Number(a.duration);
+      var target = isFinite(d) && d > 0 ? Math.min(at, Math.max(0, d - 0.15)) : at;
+      try { a.currentTime = target; } catch (eFallbackSeek) {}
+    }
+    a.addEventListener("loadedmetadata", resumeFallback);
+    if (a.readyState >= 1) resumeFallback();
+  }
   function tryFallback() {
-    if (!engine.blobTried) {
+    if (!engine.blobTried && isOffline()) {
       engine.blobTried = true;
       var genSaved = playGen;
       var sSaved = state.surah;
@@ -929,14 +993,14 @@
         engine.lastUrl = saved;
         var el = audioEl();
         logAudio("fallback saved offline copy", { surah: sSaved, ayah: aSaved });
-        setAudioSrc(el, saved);
+        setFallbackSourceAtPosition(el, saved);
         if (engine.wantPlay) runPlay(el, playGen);
       });
       return;
     }
     var urls = urlsFor(state.surah, state.ayah);
     urlIndex += 1;
-    if (urlIndex >= urls.length && isOffline()) {
+    if (isOffline()) {
       missingAudioHalt(state.reciter, state.surah, state.ayah, engine.lastUrl);
       return;
     }
@@ -961,6 +1025,7 @@
         allowAdvance = false;
         engine.lastUrl = hit.url;
         setAudioSrc(audioEl(), hit.url);
+        engine.abortRetries = 0;
         logAudio("fallback reciter", snapAudio(audioEl()));
         if (engine.wantPlay) runPlay(audioEl(), playGen);
         paintChrome();
@@ -973,7 +1038,8 @@
     var a = audioEl();
     engine.lastUrl = urls[urlIndex];
     logAudio("fallback url", { url: engine.lastUrl, index: urlIndex });
-    setAudioSrc(a, engine.lastUrl);
+    setFallbackSourceAtPosition(a, engine.lastUrl);
+    engine.abortRetries = 0;
     logAudio("src changed", snapAudio(a));
     if (engine.wantPlay) runPlay(a, playGen);
   }
@@ -982,8 +1048,13 @@
     var a = audioEl();
     state.duration = audioDuration(a);
     syncProgressSample(false);
-    engine.lastProgressAt = Date.now();
-    clearStallRetry();
+    var observedTime = Number(a.currentTime) || 0;
+    if (observedTime > (Number(engine.lastObservedTime) || 0) + 0.09) {
+      engine.lastProgressAt = Date.now();
+      engine.lastObservedTime = observedTime;
+      engine.recoveryCount = 0;
+      clearStallRetry();
+    }
     syncPublicAudioState(a);
     if (engine.started && (Number(state.current) || 0) > 0.25 && isFinite(state.duration) && state.duration > 1) {
       trackHeard = true;
@@ -1015,7 +1086,7 @@
     }
   }
   function onPlayEv() {
-    if (!isAppleTvApp() && !isQuranArea()) {
+    if (!isAppleTvApp() && !isQuranArea() && !isFullPlayerRoute()) {
       try { audioEl().pause(); } catch (ePlayLeave) {}
       persistCurrent("blocked-play-off-quran");
       state.playing = false;
@@ -1066,7 +1137,7 @@
     var failedUrl = engine.lastUrl;
     engine.fallbackTimer = setTimeout(function () {
       engine.fallbackTimer = 0;
-      if (failedGeneration !== playGen || failedUrl !== engine.lastUrl) return;
+      if (failedGeneration !== playGen || failedUrl !== engine.lastUrl || !engine.wantPlay) return;
       var el = audioEl();
       if (engine.started && !el.paused && el.readyState >= 2) return;
       if (el.readyState >= 3) return;
@@ -1080,8 +1151,12 @@
       logAudio("ended ignored: empty src");
       return false;
     }
-    if (Date.now() < ignoreEndedUntil) {
+    if (Date.now() < ignoreEndedUntil && !a.ended) {
       logAudio("ended ignored: src-change window");
+      return false;
+    }
+    if (engine.loadedSurah !== state.surah || engine.loadedAyah !== state.ayah) {
+      logAudio("ended ignored: obsolete verse", snapAudio(a));
       return false;
     }
     if (!engine.started) {
@@ -1331,45 +1406,70 @@
     cleanupLearningPlayerOnRouteLeave();
   }
   function surahMeta(id) {
-    return typeof window.quranSurahMeta === "function"
-      ? window.quranSurahMeta(id)
-      : ((window.quranMeta && window.quranMeta.surahs) || []).find(function (s) { return Number(s.id) === Number(id); });
+    var result = null;
+    try {
+      if (typeof window.quranSurahMeta === "function") result = window.quranSurahMeta(id);
+    } catch (eMeta) {}
+    if (!result) result = ((window.quranMeta && window.quranMeta.surahs) || []).find(function (s) { return Number(s.id) === Number(id); });
+    return result || (QURAN_PLAYER_SURAHS && QURAN_PLAYER_SURAHS[Number(id) - 1]) || null;
   }
   var dataLoadSerial = 0;
   var dataSurahLoaded = 0;
-  async function ensureData() {
+  var activeDataRequest = null;
+  function ensureData() {
     var requestedSurah = Number(state.surah);
-    if (dataSurahLoaded === requestedSurah && verses.length && meta && !state.loading) return true;
+    if (dataSurahLoaded === requestedSurah && verses.length && meta && !state.loading) return Promise.resolve(true);
+    if (activeDataRequest && activeDataRequest.surah === requestedSurah) return activeDataRequest.promise;
     var requestId = ++dataLoadSerial;
     state.loading = true;
     paintStatus();
-    try {
-      if (typeof window.loadQuranIndex === "function") await window.loadQuranIndex();
-      if (requestId !== dataLoadSerial || Number(state.surah) !== requestedSurah) return false;
-      var doc = typeof window.loadQuranSurah === "function"
-        ? await window.loadQuranSurah(requestedSurah) : null;
-      if (requestId !== dataLoadSerial || Number(state.surah) !== requestedSurah) return false;
-      verses = (doc && doc.verses) || [];
-      meta = surahMeta(requestedSurah);
-      dataSurahLoaded = requestedSurah;
-      if (state.ayah > totalAyat()) state.ayah = totalAyat();
-      if (state.ayah < 1) state.ayah = 1;
-      saveState();
-      ensureTadCatalog();
-      loadTranslit(requestedSurah);
-      loadTafsir(requestedSurah);
-      return true;
-    } catch (err) {
-      if (requestId !== dataLoadSerial || Number(state.surah) !== requestedSurah) return false;
-      state.error = "Die Qurʾān-Texte konnten nicht geladen werden. Bitte erneut versuchen.";
-      paintError();
-      return false;
-    } finally {
-      if (requestId === dataLoadSerial) {
-        state.loading = false;
-        paintStatus();
+    var promise = (async function () {
+      try {
+        if (typeof window.loadQuranIndex === "function") {
+          try { await window.loadQuranIndex(); } catch (eIndex) {}
+        }
+        if (requestId !== dataLoadSerial || Number(state.surah) !== requestedSurah) return false;
+        var doc = null;
+        if (typeof window.loadQuranSurah === "function") {
+          try { doc = await window.loadQuranSurah(requestedSurah); } catch (eSurah) {}
+        }
+        // Canonical text files exist independently of the global reader loader.
+        if (!doc || !Array.isArray(doc.verses) || !doc.verses.length) {
+          var path = "/content/quran/" + String(requestedSurah).padStart(3, "0") + ".json";
+          var res = await fetch(path, { cache: "force-cache", credentials: "same-origin" });
+          if (!res.ok) throw new Error("surah " + requestedSurah + ": HTTP " + res.status);
+          doc = await res.json();
+        }
+        if (requestId !== dataLoadSerial || Number(state.surah) !== requestedSurah) return false;
+        verses = Array.isArray(doc.verses) ? doc.verses : [];
+        meta = surahMeta(requestedSurah) || QURAN_PLAYER_SURAHS[requestedSurah - 1] || null;
+        dataSurahLoaded = requestedSurah;
+        if (state.ayah > totalAyat()) state.ayah = totalAyat();
+        if (state.ayah < 1) state.ayah = 1;
+        saveState();
+        ensureTadCatalog();
+        loadTranslit(requestedSurah);
+        loadTafsir(requestedSurah);
+        return true;
+      } catch (err) {
+        if (requestId !== dataLoadSerial || Number(state.surah) !== requestedSurah) return false;
+        state.error = "Die Qurʾān-Texte konnten nicht geladen werden. Bitte erneut versuchen.";
+        paintError();
+        return false;
+      } finally {
+        if (requestId === dataLoadSerial) {
+          state.loading = false;
+          paintStatus();
+        }
       }
-    }
+    })();
+    activeDataRequest = { surah: requestedSurah, promise: promise };
+    promise.then(function () {
+      if (activeDataRequest && activeDataRequest.promise === promise) activeDataRequest = null;
+    }, function () {
+      if (activeDataRequest && activeDataRequest.promise === promise) activeDataRequest = null;
+    });
+    return promise;
   }
   function parseRoute(value) {
     var parts = String(value || "").split("/").filter(Boolean);
@@ -1504,7 +1604,7 @@
     if (!root) return;
     var el = root.querySelector("[data-dqp-ayah]");
     if (!el) return;
-    var v = verseAt(state.ayah);
+    var v = dataSurahLoaded === Number(state.surah) ? verseAt(state.ayah) : null;
     var apply = function () {
       var st = el.querySelector(".dqp-status");
       if (st) st.remove();
@@ -2193,6 +2293,14 @@
   function dismissFullPlayer() {
     fullUiWanted = false;
     dismissUntil = Date.now() + 8000;
+    sheetEpoch += 1; // Invalidate any pending asynchronous menu redraw.
+    var root = playerRoot();
+    var openSheet = root && root.querySelector("[data-dqp-sheet]");
+    if (openSheet) {
+      openSheet.classList.remove("is-open");
+      openSheet.hidden = true;
+      openSheet.innerHTML = "";
+    }
     hideFullPlayerUi();
   }
   function wantFullPlayer() {
@@ -2230,6 +2338,10 @@
     return neu;
   }
   function navigateApp(view, value) {
+    if (value && typeof window.navigate === "function") {
+      window.navigate(view, value, { noAnim: true, skipPush: true });
+      return;
+    }
     if (typeof window.navigateToTabRootReplace === "function") {
       window.navigateToTabRootReplace(view, value || "");
       return;
@@ -2241,10 +2353,23 @@
       try { window.dispatchEvent(new HashChangeEvent("hashchange")); } catch (e2) {}
     }
   }
+  var returnQuranRoute = null;
+  function capturePlayerEntryRoute() {
+    var parts = String(location.hash || "").replace(/^#\/?/, "").split("/");
+    var view = parts.shift() || "";
+    if (view === "quran" || view === "quran-surah") {
+      returnQuranRoute = { view: view, value: parts.join("/") };
+    } else if (view !== "quran-player") {
+      returnQuranRoute = null;
+    }
+  }
   function leavePlayerRoute(kind) {
     persistCurrent("leave-full");
     writeMode("global-quran");
     dismissFullPlayer();
+    var target = kind === "read"
+      ? { view: "quran-surah", value: String(state.surah) + "/" + state.ayah }
+      : (returnQuranRoute || { view: "home", value: "" });
     function go() {
       document.documentElement.classList.remove("is-quran-player-route");
       if (document.body) {
@@ -2256,27 +2381,21 @@
         root.style.display = "none";
         try { root.setAttribute("inert", ""); } catch (e0) {}
       }
-      if (kind === "read") navigateApp("quran-surah", String(state.surah) + "/" + state.ayah);
-      else navigateApp("home");
-      try {
-        if (kind !== "read") {
-          history.replaceState(null, "", location.pathname + (location.search || "") + "#home");
-        }
-      } catch (e1) {}
+      navigateApp(target.view, target.value);
       paintMini();
       setTimeout(function () {
         dismissFullPlayer();
         hideFullPlayerUi();
         if (kind !== "read") {
           var hash = String(location.hash || "").replace(/^#\/?/, "");
-          if (hash.split("/")[0] === "quran-player") navigateApp("home");
+          if (hash.split("/")[0] === "quran-player") navigateApp(target.view, target.value);
         }
         paintMini();
       }, 40);
       setTimeout(function () {
         if (Date.now() < dismissUntil) {
           var hash2 = String(location.hash || "").replace(/^#\/?/, "");
-          if (hash2.split("/")[0] === "quran-player") navigateApp(kind === "read" ? "quran-surah" : "home", kind === "read" ? String(state.surah) + "/" + state.ayah : "");
+          if (hash2.split("/")[0] === "quran-player") navigateApp(target.view, target.value);
           hideFullPlayerUi();
           paintMini();
         }
@@ -2609,6 +2728,7 @@
       return;
     }
     qlog("[QURAN_STATE] restore global player state", opts);
+    capturePlayerEntryRoute();
     var snap = readGlobal();
     applyGlobalBlob(snap);
     state.learnMode = false;
@@ -2706,6 +2826,8 @@
     trackHeard = false;
     allowAdvance = false;
     engine.started = false;
+    engine.recoveryCount = 0;
+    clearStallRetry();
     stopProgressClock();
     if (engine.fallbackTimer) { clearTimeout(engine.fallbackTimer); engine.fallbackTimer = 0; }
     persistCurrent("stop");
@@ -2816,6 +2938,8 @@
         var a = audioEl();
         var d = Number(a.duration) || Number(state.duration) || 0;
         if (d) a.currentTime = (Number(range.value) / 1000) * d;
+        engine.lastObservedTime = Number(a.currentTime) || 0;
+        engine.lastProgressAt = Date.now();
         state.current = a.currentTime || 0;
         syncProgressSample(true);
         lastProgPct = -1;
@@ -3050,7 +3174,10 @@
     if (sh.id === "dqpLearnSheet") bindLearnSheet(sh);
     sh.hidden = false;
     sh.innerHTML = '<div class="dqp-sheet-card"><div class="dqp-sheet-head"><span>' + esc(title) + '</span><button type="button" class="dqp-hit" data-dqp="sheet-close">Fertig</button></div>' + html + "</div>";
-    requestAnimationFrame(function () { sh.classList.add("is-open"); });
+    var thisSheetEpoch = sheetEpoch;
+    requestAnimationFrame(function () {
+      if (thisSheetEpoch === sheetEpoch && !sh.hidden) sh.classList.add("is-open");
+    });
   }
   function cycle(list, cur) { return list[(list.indexOf(cur) + 1) % list.length]; }
   function pickRandomSurah() {
@@ -3159,6 +3286,8 @@
   function skip(d) {
     var a = audioEl();
     a.currentTime = Math.max(0, (a.currentTime || 0) + d);
+    engine.lastObservedTime = Number(a.currentTime) || 0;
+    engine.lastProgressAt = Date.now();
   }
   function clipTxt(s, n) {
     s = String(s || "").replace(/\s+/g, " ").trim();
@@ -3185,40 +3314,32 @@
         if (on && on.scrollIntoView) on.scrollIntoView({ block: "center" });
       });
     }
+    // The picker must work even without a network connection or text API.
+    // Render every Āyah number immediately; enrich the Arabic/German text later.
+    draw();
     if (dataSurahLoaded !== Number(state.surah) || !verses.length) {
-      openSheet("Āyah auswählen", "<p class=\"dqp-sheet-wait\">Āyāt werden geladen …</p>");
       var requestEpoch = sheetEpoch;
       var requestedSurah = Number(state.surah);
       ensureData().then(function (ok) {
         var sh = activeSheetEl();
         if (ok && requestEpoch === sheetEpoch && requestedSurah === Number(state.surah) && sh && !sh.hidden) draw();
       });
-    } else draw();
+    }
+  }
+  // Canonical 114-Sūrah index, validated against content/quran/surahs.json (6236 Āyāt).
+  // This is a local fallback for the picker, independent of global page-load timing.
+  var QURAN_PLAYER_SURAHS = [{"id":1,"name":"الفاتحة","transliteration":"Al-Fatihah","total_verses":7},{"id":2,"name":"البقرة","transliteration":"Al-Baqarah","total_verses":286},{"id":3,"name":"آل عمران","transliteration":"Ali 'Imran","total_verses":200},{"id":4,"name":"النساء","transliteration":"An-Nisa","total_verses":176},{"id":5,"name":"المائدة","transliteration":"Al-Ma'idah","total_verses":120},{"id":6,"name":"الأنعام","transliteration":"Al-An'am","total_verses":165},{"id":7,"name":"الأعراف","transliteration":"Al-A'raf","total_verses":206},{"id":8,"name":"الأنفال","transliteration":"Al-Anfal","total_verses":75},{"id":9,"name":"التوبة","transliteration":"At-Tawbah","total_verses":129},{"id":10,"name":"يونس","transliteration":"Yunus","total_verses":109},{"id":11,"name":"هود","transliteration":"Hud","total_verses":123},{"id":12,"name":"يوسف","transliteration":"Yusuf","total_verses":111},{"id":13,"name":"الرعد","transliteration":"Ar-Ra'd","total_verses":43},{"id":14,"name":"ابراهيم","transliteration":"Ibrahim","total_verses":52},{"id":15,"name":"الحجر","transliteration":"Al-Hijr","total_verses":99},{"id":16,"name":"النحل","transliteration":"An-Nahl","total_verses":128},{"id":17,"name":"الإسراء","transliteration":"Al-Isra","total_verses":111},{"id":18,"name":"الكهف","transliteration":"Al-Kahf","total_verses":110},{"id":19,"name":"مريم","transliteration":"Maryam","total_verses":98},{"id":20,"name":"طه","transliteration":"Taha","total_verses":135},{"id":21,"name":"الأنبياء","transliteration":"Al-Anbya","total_verses":112},{"id":22,"name":"الحج","transliteration":"Al-Hajj","total_verses":78},{"id":23,"name":"المؤمنون","transliteration":"Al-Mu'minun","total_verses":118},{"id":24,"name":"النور","transliteration":"An-Nur","total_verses":64},{"id":25,"name":"الفرقان","transliteration":"Al-Furqan","total_verses":77},{"id":26,"name":"الشعراء","transliteration":"Ash-Shu'ara","total_verses":227},{"id":27,"name":"النمل","transliteration":"An-Naml","total_verses":93},{"id":28,"name":"القصص","transliteration":"Al-Qasas","total_verses":88},{"id":29,"name":"العنكبوت","transliteration":"Al-'Ankabut","total_verses":69},{"id":30,"name":"الروم","transliteration":"Ar-Rum","total_verses":60},{"id":31,"name":"لقمان","transliteration":"Luqman","total_verses":34},{"id":32,"name":"السجدة","transliteration":"As-Sajdah","total_verses":30},{"id":33,"name":"الأحزاب","transliteration":"Al-Ahzab","total_verses":73},{"id":34,"name":"سبإ","transliteration":"Saba","total_verses":54},{"id":35,"name":"فاطر","transliteration":"Fatir","total_verses":45},{"id":36,"name":"يس","transliteration":"Ya-Sin","total_verses":83},{"id":37,"name":"الصافات","transliteration":"As-Saffat","total_verses":182},{"id":38,"name":"ص","transliteration":"Sad","total_verses":88},{"id":39,"name":"الزمر","transliteration":"Az-Zumar","total_verses":75},{"id":40,"name":"غافر","transliteration":"Ghafir","total_verses":85},{"id":41,"name":"فصلت","transliteration":"Fussilat","total_verses":54},{"id":42,"name":"الشورى","transliteration":"Ash-Shuraa","total_verses":53},{"id":43,"name":"الزخرف","transliteration":"Az-Zukhruf","total_verses":89},{"id":44,"name":"الدخان","transliteration":"Ad-Dukhan","total_verses":59},{"id":45,"name":"الجاثية","transliteration":"Al-Jathiyah","total_verses":37},{"id":46,"name":"الأحقاف","transliteration":"Al-Ahqaf","total_verses":35},{"id":47,"name":"محمد","transliteration":"Muhammad","total_verses":38},{"id":48,"name":"الفتح","transliteration":"Al-Fath","total_verses":29},{"id":49,"name":"الحجرات","transliteration":"Al-Hujurat","total_verses":18},{"id":50,"name":"ق","transliteration":"Qaf","total_verses":45},{"id":51,"name":"الذاريات","transliteration":"Adh-Dhariyat","total_verses":60},{"id":52,"name":"الطور","transliteration":"At-Tur","total_verses":49},{"id":53,"name":"النجم","transliteration":"An-Najm","total_verses":62},{"id":54,"name":"القمر","transliteration":"Al-Qamar","total_verses":55},{"id":55,"name":"الرحمن","transliteration":"Ar-Rahman","total_verses":78},{"id":56,"name":"الواقعة","transliteration":"Al-Waqi'ah","total_verses":96},{"id":57,"name":"الحديد","transliteration":"Al-Hadid","total_verses":29},{"id":58,"name":"المجادلة","transliteration":"Al-Mujadila","total_verses":22},{"id":59,"name":"الحشر","transliteration":"Al-Hashr","total_verses":24},{"id":60,"name":"الممتحنة","transliteration":"Al-Mumtahanah","total_verses":13},{"id":61,"name":"الصف","transliteration":"As-Saf","total_verses":14},{"id":62,"name":"الجمعة","transliteration":"Al-Jumu'ah","total_verses":11},{"id":63,"name":"المنافقون","transliteration":"Al-Munafiqun","total_verses":11},{"id":64,"name":"التغابن","transliteration":"At-Taghabun","total_verses":18},{"id":65,"name":"الطلاق","transliteration":"At-Talaq","total_verses":12},{"id":66,"name":"التحريم","transliteration":"At-Tahrim","total_verses":12},{"id":67,"name":"الملك","transliteration":"Al-Mulk","total_verses":30},{"id":68,"name":"القلم","transliteration":"Al-Qalam","total_verses":52},{"id":69,"name":"الحاقة","transliteration":"Al-Haqqah","total_verses":52},{"id":70,"name":"المعارج","transliteration":"Al-Ma'arij","total_verses":44},{"id":71,"name":"نوح","transliteration":"Nuh","total_verses":28},{"id":72,"name":"الجن","transliteration":"Al-Jinn","total_verses":28},{"id":73,"name":"المزمل","transliteration":"Al-Muzzammil","total_verses":20},{"id":74,"name":"المدثر","transliteration":"Al-Muddaththir","total_verses":56},{"id":75,"name":"القيامة","transliteration":"Al-Qiyamah","total_verses":40},{"id":76,"name":"الانسان","transliteration":"Al-Insan","total_verses":31},{"id":77,"name":"المرسلات","transliteration":"Al-Mursalat","total_verses":50},{"id":78,"name":"النبإ","transliteration":"An-Naba","total_verses":40},{"id":79,"name":"النازعات","transliteration":"An-Nazi'at","total_verses":46},{"id":80,"name":"عبس","transliteration":"'Abasa","total_verses":42},{"id":81,"name":"التكوير","transliteration":"At-Takwir","total_verses":29},{"id":82,"name":"الإنفطار","transliteration":"Al-Infitar","total_verses":19},{"id":83,"name":"المطففين","transliteration":"Al-Mutaffifin","total_verses":36},{"id":84,"name":"الإنشقاق","transliteration":"Al-Inshiqaq","total_verses":25},{"id":85,"name":"البروج","transliteration":"Al-Buruj","total_verses":22},{"id":86,"name":"الطارق","transliteration":"At-Tariq","total_verses":17},{"id":87,"name":"الأعلى","transliteration":"Al-A'la","total_verses":19},{"id":88,"name":"الغاشية","transliteration":"Al-Ghashiyah","total_verses":26},{"id":89,"name":"الفجر","transliteration":"Al-Fajr","total_verses":30},{"id":90,"name":"البلد","transliteration":"Al-Balad","total_verses":20},{"id":91,"name":"الشمس","transliteration":"Ash-Shams","total_verses":15},{"id":92,"name":"الليل","transliteration":"Al-Layl","total_verses":21},{"id":93,"name":"الضحى","transliteration":"Ad-Duhaa","total_verses":11},{"id":94,"name":"الشرح","transliteration":"Ash-Sharh","total_verses":8},{"id":95,"name":"التين","transliteration":"At-Tin","total_verses":8},{"id":96,"name":"العلق","transliteration":"Al-'Alaq","total_verses":19},{"id":97,"name":"القدر","transliteration":"Al-Qadr","total_verses":5},{"id":98,"name":"البينة","transliteration":"Al-Bayyinah","total_verses":8},{"id":99,"name":"الزلزلة","transliteration":"Az-Zalzalah","total_verses":8},{"id":100,"name":"العاديات","transliteration":"Al-'Adiyat","total_verses":11},{"id":101,"name":"القارعة","transliteration":"Al-Qari'ah","total_verses":11},{"id":102,"name":"التكاثر","transliteration":"At-Takathur","total_verses":8},{"id":103,"name":"العصر","transliteration":"Al-'Asr","total_verses":3},{"id":104,"name":"الهمزة","transliteration":"Al-Humazah","total_verses":9},{"id":105,"name":"الفيل","transliteration":"Al-Fil","total_verses":5},{"id":106,"name":"قريش","transliteration":"Quraysh","total_verses":4},{"id":107,"name":"الماعون","transliteration":"Al-Ma'un","total_verses":7},{"id":108,"name":"الكوثر","transliteration":"Al-Kawthar","total_verses":3},{"id":109,"name":"الكافرون","transliteration":"Al-Kafirun","total_verses":6},{"id":110,"name":"النصر","transliteration":"An-Nasr","total_verses":3},{"id":111,"name":"المسد","transliteration":"Al-Masad","total_verses":5},{"id":112,"name":"الإخلاص","transliteration":"Al-Ikhlas","total_verses":4},{"id":113,"name":"الفلق","transliteration":"Al-Falaq","total_verses":5},{"id":114,"name":"الناس","transliteration":"An-Nas","total_verses":6}];
+  function availablePlayerSurahs() {
+    var items = (window.quranMeta && window.quranMeta.surahs) || [];
+    if (items.length >= 114) return items;
+    return QURAN_PLAYER_SURAHS;
   }
   function openSurahSheet() {
-    function draw(retried) {
-      var list = (window.quranMeta && window.quranMeta.surahs) || [];
-      if (!list.length) {
-        if (retried) {
-          openSheet("Sūrah auswählen", "<p class=\"dqp-sheet-wait\">Sūrenliste derzeit nicht verfügbar.</p>");
-          return;
-        }
-        openSheet("Sūrah auswählen", "<p class=\"dqp-sheet-wait\">Sūren werden geladen …</p>");
-        var requestEpoch = sheetEpoch;
-        var loader = typeof window.loadQuranIndex === "function" ? window.loadQuranIndex() : ensureData();
-        Promise.resolve(loader).then(function () {
-          if (requestEpoch === sheetEpoch) draw(true);
-        }, function () {
-          if (requestEpoch === sheetEpoch) draw(true);
-        });
-        return;
-      }
-      var rows = list.map(function (s) {
-        return '<button type="button" class="dqp-opt dqp-opt-surah' + (Number(s.id) === state.surah ? " is-on" : "") + '" data-dqp-opt="s-' + s.id + '" data-q="' + esc((s.transliteration + " " + s.name + " " + s.id).toLowerCase()) + '"><span class="dqp-opt-kicker">' + s.id + " · " + esc(s.transliteration) + "</span><small>" + esc(s.name) + " · " + (s.total_verses || "") + " Āyāt</small></button>";
-      }).join("");
-      openSheet("Sūrah und Āyah", '<input class="dqp-search" data-dqp-search type="search" placeholder="Sūrah suchen" autocomplete="off"><div class="dqp-opt-list">' + rows + "</div>");
-    }
-    draw();
+    var list = availablePlayerSurahs();
+    var rows = list.map(function (s) {
+      return '<button type="button" class="dqp-opt dqp-opt-surah' + (Number(s.id) === state.surah ? " is-on" : "") + '" data-dqp-opt="s-' + s.id + '" data-q="' + esc((s.transliteration + " " + s.name + " " + s.id).toLowerCase()) + '"><span class="dqp-opt-kicker">' + s.id + " · " + esc(s.transliteration) + "</span><small>" + esc(s.name) + " · " + (s.total_verses || "") + " Āyāt</small></button>";
+    }).join("");
+    openSheet("Sūrah und Āyah", '<input class="dqp-search" data-dqp-search type="search" placeholder="Sūrah suchen" autocomplete="off"><div class="dqp-opt-list">' + rows + "</div>");
   }
   var dlLabelTimer = 0;
   function paintDownloadButtons() {
@@ -3506,6 +3627,8 @@
         seekLock = true;
         var a = audioEl();
         if (a.duration) a.currentTime = (Number(sl.value) / 1000) * a.duration;
+        engine.lastObservedTime = Number(a.currentTime) || 0;
+        engine.lastProgressAt = Date.now();
         state.current = a.currentTime || 0;
         paintProgress();
       });
@@ -4297,8 +4420,8 @@
     if (!a.paused && now - (engine.lastProgressAt || 0) > 20000 && now - (engine.watchReloadAt || 0) > 20000) {
       engine.watchReloadAt = now;
       state.resumeAt = Number(a.currentTime) || 0;
-      logAudio("watchdog reload after no progress", snapAudio(a));
-      loadAudio(true, true);
+      logAudio("watchdog try next audio source after no progress", snapAudio(a));
+      tryFallback();
     }
   }, 4000);
   window.addEventListener("online", function () {
