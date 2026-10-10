@@ -1,4 +1,4 @@
-<!doctype html><html lang="de" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><meta name="referrer" content="same-origin"><meta name="theme-color" content="#f7faf9"><title>DĀR AL TAWḤĪD · Qurʾān V6 · fortlaufende HTML-Vorschau</title><style>
+<!doctype html><html lang="de" data-theme="soft"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><meta name="referrer" content="same-origin"><meta name="theme-color" content="#f7faf9"><title>DĀR AL TAWḤĪD · Qurʾān V6 · fortlaufende HTML-Vorschau</title><style>
 :root{color-scheme:light;--bg:#f7faf9;--paper:#fff;--ink:#19241f;--soft:#50615a;--muted:#65716b;--border:#dcded5;--gold:#94794a;--tint:#f2ede2;--rail:#f7f7f3;--nav:#f9f8f2f4;--overlay:rgba(9,24,18,.56)}
 html[data-theme="soft"]{--bg:#f7f0e7;--paper:#fffdf9;--ink:#332c25;--soft:#64574c;--muted:#736659;--border:#e6d8c8;--gold:#97734b;--tint:#f7ecdd;--rail:#fbf5ed;--nav:#fff8f0f4}
 html[data-theme="salbei"]{--bg:#edf4ed;--paper:#fcfefb;--ink:#20382b;--soft:#4a6453;--muted:#5c7061;--border:#d3ded2;--gold:#80764e;--tint:#e7eddf;--rail:#f0f5ef;--nav:#f7fbf5f4}
@@ -306,7 +306,7 @@ const $=id=>document.getElementById(id);
 const norm=s=>String(s||"").normalize("NFKD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("de").replace(/[^\p{L}\p{N}]+/gu,"");
 const escapeHTML=x=>String(x??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const typeName=x=>x==="medinan"?"Medinensisch":"Mekkanisch";
-let filter="all",range="1",query="",sortAlpha=false,theme="light",wakeLock=null;
+let filter="all",range="1",query="",sortAlpha=false,theme="soft",wakeLock=null;
 let favorites=new Set();
 try{const f=JSON.parse(localStorage.getItem("darQuranPreviewFavoritesV1")||"null");if(Array.isArray(f))favorites=new Set(f.map(Number));else{const live=JSON.parse(localStorage.getItem("darQuranSurahFavoritesV1")||"[]");if(Array.isArray(live))favorites=new Set(live.map(Number));}}catch(e){}
 const url=(s,a)=>"/#quran-surah/"+Number(s)+(a?"/"+Number(a):"");
@@ -614,6 +614,7 @@ document.addEventListener("DOMContentLoaded",()=>{
   }));
   // Capture only target navigation inside the standalone preview. Never alter live app.
   document.addEventListener("click",async e=>{
+   const quranTab=e.target.closest(".tabs a[href=\"/#quran\"]");if(quranTab){e.preventDefault();e.stopImmediatePropagation();showOverview();return;}
    const btn=e.target.closest("[data-open]");
    if(btn&&btn.closest("#list")){e.preventDefault();e.stopImmediatePropagation();await openReader(Number(btn.dataset.open),1,{scroll:true});return;}
    const shortcut=e.target.closest("#learn,#resume");
