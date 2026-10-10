@@ -21701,12 +21701,11 @@ async function applyQuranSearch(){const searchBlock=$("quranSearchBlock");const 
  if(moreSearchV63)moreSearchV63.addEventListener("click",()=>{
   const next=allDirectHits.slice(shownDirectV63,shownDirectV63+40);shownDirectV63+=next.length;
   const group=searchResults.querySelector(".qov-search-group .qov-search-card-list");
-  if(group&&next.length){group.insertAdjacentHTML("beforeend",next.map(row=>renderQuranSearchResult(row,rawQuery)).join(""));
-   group.querySelectorAll('[data-quran-search-open]:not([data-v63-bound])').forEach(btn=>{
-    btn.dataset.v63Bound="1";btn.addEventListener("click",()=>{
-     const parts=String(btn.getAttribute("data-quran-search-open")||"").split(":");
-     openQuranSurah(Number(parts[0]),Number(parts[1])||1);
-    });
+  if(group&&next.length){const before=group.querySelectorAll("[data-quran-search-open]").length;
+   group.insertAdjacentHTML("beforeend",next.map(row=>renderQuranSearchResult(row,rawQuery)).join(""));
+   [...group.querySelectorAll("[data-quran-search-open]")].slice(before).forEach(btn=>{
+    btn.onclick=()=>{const parts=String(btn.getAttribute("data-quran-search-open")||"").split(":");
+     openQuranSurah(Number(parts[0]),Number(parts[1])||1);};
    });
   }
   moreSearchV63.textContent="Weitere Treffer anzeigen · "+shownDirectV63+" von "+allDirectHits.length;
