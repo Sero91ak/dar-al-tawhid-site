@@ -49,7 +49,7 @@ jobs:
           # Only a KIDS-native User-Agent can access it; this automated
           # test verifies the intended gate instead of opening the page.
           resources=[
-              ("/kids/akademie/index.html","V13.0-voicefix-20261010",None),
+              ("/kids/akademie/index.html","V16.0-voicepreview-20261010",None),
               ("/kids/akademie/pilot-audio-v13.js","kids-serhat-v13-20261010",None),
               # v14 HTML returns HTTP 401 even with native-agent probing;
               # keep Kids site access policy intact. Do not claim that page
