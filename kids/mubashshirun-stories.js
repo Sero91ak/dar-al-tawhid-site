@@ -336,6 +336,10 @@ function renderActive(){
   $("#msLife").textContent=active.lifeContext||active.summary||"";
   $("#msWitness").textContent=active.storyHighlight||active.witnessContext||active.summary||"";
   $("#msRead").innerHTML=activeText.split(/\n{2,}/).map(p=>'<p>'+esc(p)+'</p>').join("");
+  window.DARKidsItemDownloads?.storyDetail($("#msModal .ms-detail-modes"),{
+    category:"sahaba",item:active,sourceUrl:"/kids/data/mubashshirun-stories.json?v=21",
+    artwork:art(active,"cover"),hero:art(active,"hero"),audioMeta:audioMeta(active)
+  });
   $("#msSources").innerHTML=sourceHtml(active);
   renderQuestion();applyMode();resetAudio();
 }

@@ -26,3 +26,55 @@
  .kids-offline-entry > .kids-item-download{font-size:12px;min-height:44px}
  #academySubject .subject-topic-grid>.kids-offline-entry{min-width:0}
 }
+
+/* KIDS_DETAIL_DOWNLOAD_TABS_V2 — preserve category cards; one integrated fourth tab.
+   2x2 on phones, 4x1 on tablets; no clipped horizontally scrolling action bar. */
+#dlModal .dl-detail-modes,
+#psModal .ps-prophet-modes,
+#msModal .ms-detail-modes,
+#syModal .ms-detail-modes,
+#ghPlayer .gh-player-actions{
+ box-sizing:border-box!important;
+ display:grid!important;
+ grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:8px!important;overflow:visible!important;
+ align-items:stretch!important;
+}
+#dlModal .dl-detail-modes > button,
+#psModal .ps-prophet-modes > button,
+#msModal .ms-detail-modes > button,
+#syModal .ms-detail-modes > button,
+#ghPlayer .gh-player-actions > button{
+ box-sizing:border-box!important;display:flex!important;min-width:0!important;
+ width:100%!important;min-height:46px!important;
+ justify-content:center!important;align-items:center!important;
+ white-space:normal!important;text-align:center!important;
+ overflow-wrap:break-word!important;line-height:1.3!important;
+ padding:9px 8px!important;font-size:clamp(11px,2.7vw,14px)!important;
+}
+#dlModal .dl-detail-modes > button[hidden],
+#psModal .ps-prophet-modes > button[hidden],
+#msModal .ms-detail-modes > button[hidden],
+#syModal .ms-detail-modes > button[hidden],
+#ghPlayer .gh-player-actions > button[hidden]{display:none!important}
+.kids-offline-inline{box-sizing:border-box;min-width:0;width:100%;display:flex;flex-direction:column;justify-content:stretch}
+.kids-offline-inline > .kids-item-download{
+ box-sizing:border-box;width:100%;min-width:0;min-height:46px;
+ border-radius:999px;border:1px solid rgba(231,194,125,.6);
+ background:rgba(216,183,115,.15);color:#ffe8ab;
+ padding:9px 8px;
+ font:800 clamp(11px,2.7vw,14px)/1.3 system-ui,-apple-system,sans-serif;
+ white-space:normal;overflow-wrap:break-word;text-align:center;
+ cursor:pointer;-webkit-tap-highlight-color:transparent;
+}
+.kids-offline-inline > .kids-item-download:focus-visible{outline:2px solid #fff3ce;outline-offset:2px}
+.kids-offline-inline > .kids-item-download[data-offline-state="ready"]{background:rgba(30,105,75,.45);border-color:#8bdeb2;color:#e1ffe9}
+.kids-offline-inline > .kids-item-download[data-offline-state="busy"]{opacity:.7;cursor:progress}
+.kids-offline-inline > .kids-item-download[data-offline-state="error"]{color:#ffe1d9;border-color:#e1a7a1}
+.kids-offline-inline > .kids-download-hint{display:none;font-size:11px;line-height:1.35;color:#f2d7b9;text-align:center;margin:6px 0 0}
+.kids-offline-inline > .kids-item-download[data-offline-state="error"] + .kids-download-hint{display:block}
+@media(min-width:720px){
+ #dlModal .dl-detail-modes,#psModal .ps-prophet-modes,
+ #msModal .ms-detail-modes,#syModal .ms-detail-modes,
+ #ghPlayer .gh-player-actions{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+}

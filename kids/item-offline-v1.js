@@ -6,7 +6,7 @@
 const AGE_KEYS=["4-5","6-8","9-10"];
 // Direct-entry Academy installs the same Kids-only SW before an offline save.
 if(location.pathname.startsWith("/kids/akademie/")&&"serviceWorker" in navigator){
- navigator.serviceWorker.register("/kids/sw.js?v=1314",{scope:"/kids/",updateViaCache:"none"}).catch(()=>{});
+ navigator.serviceWorker.register("/kids/sw.js?v=1315",{scope:"/kids/",updateViaCache:"none"}).catch(()=>{});
 }
 const DEFAULT_BASE=[
  "/kids/start.html","/kids/prayer-stage-v1261.js?v=1306",
@@ -59,18 +59,24 @@ function mark(key,message,state){
    btn.setAttribute("aria-label",(btn.dataset.offlineTitle||"Inhalt")+": "+message);
  }
 }
-function oneButton(card,spec){
- if(!card||!card.parentNode||card.closest(".kids-offline-entry"))return;
+function oneButton(card,spec,inline=false){
+ if(!card||!card.parentNode||(!inline&&card.closest(".kids-offline-entry")))return;
  const key=String(spec.key||"");
  if(!/^(story|deen|academy):[\w-]+(?::[\w-]+){0,2}$/.test(key))return;
  const holder=document.createElement("div");
- holder.className="kids-offline-entry";
+ holder.className=inline?"kids-offline-inline":"kids-offline-entry";
+ if(inline){
+   // The detail view is reused for all stories. Replace the previous lesson's
+   // action instead of accumulating buttons or affecting the category cards.
+   card.querySelector(".kids-offline-inline")?.remove();
+ }
  const btn=document.createElement("button");btn.type="button";btn.className="kids-item-download";
  btn.textContent="↓ Offline speichern";btn.dataset.offlineState="idle";
  btn.dataset.offlineTitle=spec.title||"Inhalt";
  const hint=document.createElement("span");hint.className="kids-download-hint";
  hint.textContent=spec.audio?"Audio & Text für unterwegs":spec.kind==="academy"?"Unterricht für unterwegs":"Text & Bild · Audio folgt";
- card.replaceWith(holder);holder.append(card,btn,hint);
+ if(inline){holder.append(btn,hint);card.append(holder);}
+ else{card.replaceWith(holder);holder.append(card,btn,hint);}
  if(!labels.has(key))labels.set(key,new Set());
  labels.get(key).add(btn);
  const files=unique((spec.urls||[]).map(allowed).filter(Boolean));
@@ -106,8 +112,8 @@ function oneButton(card,spec){
   }catch(err){mark(key,"↻ Erneut speichern","error");hint.textContent=err.message||"Verbindung prüfen";}
   finally{live.delete(key)}
  });
- // Check cache status only when the card approaches the visible region.
- // Hundreds of simultaneous CacheStorage checks would slow Kids start-up.
+ // Detail buttons are checked immediately; long Academy card lists are lazy.
+ if(inline){refresh();return;}
  if("IntersectionObserver" in window){
   const observer=new IntersectionObserver(entries=>{
    if(entries.some(x=>x.isIntersecting)){observer.disconnect();refresh();}
@@ -115,27 +121,27 @@ function oneButton(card,spec){
   observer.observe(btn);
  }else refresh();
 }
-function story(card,{category,item,sourceUrl,artwork,hero,audioMeta,readerUrl}){
+function story(card,{category,item,sourceUrl,artwork,hero,audioMeta,readerUrl},inline=false){
  if(!item?.id)return;
  const audio=allowed(String(audioMeta?.url||""));
- const urls=[sourceUrl,readerUrl||"/kids/story-hub.js?v=26",
+ const urls=[sourceUrl,readerUrl||"/kids/story-hub.js?v=27",
   "/kids/data/story-hub.json?v=7",
   "/kids/story-follow-reader.js?v=17",
   "/kids/story-follow-reader.css?v=10","/kids/story-hub.css?v=12",
   "/kids/story-policy.js?v=2",
   artwork,hero,audio];
  oneButton(card,{key:"story:"+category+":"+String(item.id)+":"+currentAge(),
- title:item.name||item.title||"Geschichte",kind:"story",audio:!!audio,urls});
+ title:item.name||item.title||"Geschichte",kind:"story",audio:!!audio,urls},inline);
 }
-function deen(card,{item,audioMeta,cover,hero}){
+function deen(card,{item,audioMeta,cover,hero},inline=false){
  if(!item?.id)return;
  const audio=allowed(String(audioMeta?.url||""));
- const urls=["/kids/data/deen-lessons.json?v=3","/kids/deen-lessons.js?v=5",
+ const urls=["/kids/data/deen-lessons.json?v=3","/kids/deen-lessons.js?v=6",
   "/kids/deen-lessons.css?v=2","/kids/deen-learning-v1199.css?v=1199",
   "/kids/story-follow-reader.css?v=10","/kids/story-follow-reader.js?v=17",
   "/kids/story-policy.js?v=2",cover,hero,audio];
  oneButton(card,{key:"deen:"+String(item.id)+":"+currentAge(),
- title:item.title||item.name||"Unterricht",kind:"deen",audio:!!audio,urls});
+ title:item.title||item.name||"Unterricht",kind:"deen",audio:!!audio,urls},inline);
 }
 function academy(card,{id,title,subject}){
  if(!id)return;
@@ -161,5 +167,9 @@ function academy(card,{id,title,subject}){
   subjectPictures[subject]];
  oneButton(card,{key:"academy:"+String(id),title,kind:"academy",audio:false,urls});
 }
-window.DARKidsItemDownloads=Object.freeze({story,deen,academy});
+window.DARKidsItemDownloads=Object.freeze({
+ story,deen,academy,
+ storyDetail:(host,spec)=>story(host,spec,true),
+ deenDetail:(host,spec)=>deen(host,spec,true)
+});
 })();

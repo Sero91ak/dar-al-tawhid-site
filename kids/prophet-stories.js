@@ -380,6 +380,10 @@ function renderActive(){
 
     (active.disputed?'<span class="ps-pill warn">Prophetenstatus: Ikhtilāf</span>':'');
   $("#psRead").innerHTML=activeText.split(/\n{2,}/).map(p=>"<p>"+esc(p)+"</p>").join("");
+  window.DARKidsItemDownloads?.storyDetail($("#psModal .ps-prophet-modes"),{
+    category:"prophets",item:active,sourceUrl:"/kids/data/prophet-stories.json?v=29",
+    artwork:cardUrl(active),hero:heroUrl(active),audioMeta:audioMeta(active)
+  });
   $("#psSources").textContent=(active.sourceRefs||[]).join(" · ");
   renderQuestion();
   applyMode();
