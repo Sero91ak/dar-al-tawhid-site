@@ -15,7 +15,8 @@ taqwa:["taqwa","taqwā","تقوى","gottesfurcht"],
 sabr:["sabr","ṣabr","صبر","geduld"]
 };
 function norm(v){return String(v??"").toLocaleLowerCase("de").normalize("NFKD")
-.replace(/[\u0610-\u061A\u064B-\u065F\u0670\u06D6-\u06ED\u0640]/g,"")
+.replace(/\u0670/g,"ا") /* dagger alif is a written long ā, not disposable punctuation */
+.replace(/[\u0610-\u061A\u064B-\u065F\u06D6-\u06ED\u0640]/g,"")
 .replace(/[\u0300-\u036f]/g,"")
 .replace(/[أإآٱ]/g,"ا").replace(/ى/g,"ي").replace(/ؤ/g,"و").replace(/ئ/g,"ي").replace(/ة/g,"ه")
 .replace(/[ʿʾ‘’´']/g,"").replace(/\x60/g,"").replace(/[ḥḫẖ]/g,"h").replace(/[ṣšś]/g,"s")
