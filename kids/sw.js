@@ -392,7 +392,7 @@ self.addEventListener("fetch",function(event){
   if(request.method!=="GET")return;
   var url=new URL(request.url);
   // Narrow exception for Kids Academy artwork, not the adult application.
-  if(/^\/desktop-preview\/assets\/kids-academy-[a-zA-Z0-9-]+\.jpg$/i.test(url.pathname)){
+  if(url.origin===self.location.origin&&/^\/desktop-preview\/assets\/kids-academy-[a-zA-Z0-9-]+\.jpg$/i.test(url.pathname)){
     event.respondWith(cacheFirst(request));return;
   }
   if(!isKidsRequest(url))return;
