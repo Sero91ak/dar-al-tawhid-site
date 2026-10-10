@@ -4027,30 +4027,37 @@ function openCategory(key){
  const data=SUBJECTS[key];if(!data)return;
  stopAll();hideLesson();$("#academyHome").hidden=true;$("#academySubject").hidden=false;
  $("#academySubject").dataset.subject=key;
- const ids=availableTopics(key),unseen=ids.filter(x=>!recordFor(x)),reviewed=ids.filter(x=>!!recordFor(x));
+ const st=academySchoolState(),ids=availableTopics(key),reviewed=ids.filter(x=>st.access(x)==="review");
+ const newClass=ids.find(x=>["new","resume"].includes(st.access(x)))||null;
  const due=reviewed.filter(x=>Number(recordFor(x).nextDue)<=Date.now());
- const next=unseen[0]||due[0]||reviewed[0];
+ const next=newClass||due[0]||reviewed[0]||null;
  $("#subjectTitle").textContent=data.title;$("#subjectDescription").textContent=data.description;
  $("#subjectStatus").textContent=reviewed.length+" von "+ids.length+" gelernt";
- $("#subjectLessonTitle").textContent=next?lessonTitle(next):"Lernmaterial in Vorbereitung";
- $("#subjectLessonNote").textContent=unseen.length?"Nächstes neues Thema · jederzeit frei wählbar":due.length?"Deine nächste Wiederholung ist fällig.":"Du kannst alle abgeschlossenen Themen erneut lernen.";
+ $("#subjectLessonTitle").textContent=next?lessonTitle(next):"Deine nächsten Unterrichtsthemen";
+ $("#subjectLessonNote").textContent=newClass?"Deine neue Lektion ist freigeschaltet. Schließe sie zuerst ab.":
+  reviewed.length?"Hier kannst du Gelerntes wiederholen. Neue Lektionen folgen an Unterrichtstagen.":
+  "Du siehst die Themen, die Inhalte werden aber erst Schritt für Schritt freigeschaltet.";
  $("#subjectImage").src=data.image;
  $("#subjectStart").hidden=!next;$("#subjectStart").dataset.lessonId=next||"";
- $("#subjectStart").textContent=unseen.length?"Nächstes Thema beginnen →":"Noch einmal lernen →";
+ $("#subjectStart").textContent=newClass?"Unterricht beginnen →":"Bekanntes wiederholen →";
+ $("#subjectSchoolHint").textContent=st.active?"Ein neuer Unterricht ist geöffnet. Alle anderen warten bis zur nächsten Freischaltung.":
+  "Neue Themen werden nach dem vorherigen Abschluss am nächsten neuen Lerntag freigeschaltet (Mo, Di, Do oder Fr).";
  const grid=$("#subjectTopicGrid"),history=$("#subjectReviewGrid"),reviewSection=$("#subjectReviewSection");
  grid.replaceChildren();history.replaceChildren();
- const empty=$("#subjectEmpty");
- empty.hidden=unseen.length>0;reviewSection.hidden=reviewed.length===0;
+ $("#subjectEmpty").hidden=true;reviewSection.hidden=reviewed.length===0;
  for(const lessonId of ids){
-  const rec=recordFor(lessonId),complete=!!rec,isDue=complete&&Number(rec.nextDue)<=Date.now();
+  const access=st.access(lessonId),complete=access==="review",locked=access==="locked";
+  const rec=complete?recordFor(lessonId):null,isDue=!!rec&&Number(rec.nextDue)<=Date.now();
   const card=document.createElement("button");card.type="button";
-  card.className="subject-topic is-ready"+(complete?" is-reviewed":"")+(isDue?" is-due":"");
+  card.className="subject-topic "+(locked?"is-locked":complete?"is-ready is-reviewed":"is-ready is-current-class")+(isDue?" is-due":"");
+  card.disabled=locked;
   card.dataset.lessonId=lessonId;
-  card.setAttribute("aria-label",lessonTitle(lessonId)+" – "+(isDue?"Wiederholung fällig":complete?"Noch einmal lernen":"Neues Thema beginnen"));
+  card.setAttribute("aria-label",lessonTitle(lessonId)+" – "+(locked?"gesperrt":isDue?"Wiederholung fällig":complete?"noch einmal lernen":access==="resume"?"Unterricht fortsetzen":"jetzt freigeschaltet"));
   const label=document.createElement("strong");label.textContent=lessonTitle(lessonId);
-  const state=document.createElement("span");state.className=complete?"topic-review-meta":"";
-  state.textContent=isDue?"Heute wiederholen":complete?"✓ Gelernt · jederzeit wiederholen":"Neu · jetzt lernen";
-  card.append(label,state);card.onclick=()=>begin(lessonId);
+  const meta=document.createElement("span");meta.className=locked?"topic-lock-meta":complete?"topic-review-meta":"";
+  meta.textContent=locked?"🔒 Noch gesperrt":isDue?"Jetzt wiederholen":complete?"✓ Gelernt · jederzeit wiederholen":access==="resume"?"▶ Fortsetzen":"✓ Jetzt freigeschaltet";
+  card.append(label,meta);
+  if(!locked)card.onclick=()=>begin(lessonId);
   (complete?history:grid).appendChild(card);
  }
  updateAcademyAppbar();window.scrollTo(0,0);
