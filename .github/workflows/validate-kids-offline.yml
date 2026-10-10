@@ -1,0 +1,29 @@
+name: Validate Kids Offline Library
+on:
+  pull_request:
+    paths:
+      - "kids/**"
+      - "scripts/kids-offline-library-guard.cjs"
+      - ".github/workflows/validate-kids-offline.yml"
+  push:
+    branches: [main]
+    paths:
+      - "kids/**"
+      - "scripts/kids-offline-library-guard.cjs"
+      - ".github/workflows/validate-kids-offline.yml"
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Validate Kinder-App offline package and entry routes
+        run: |
+          node --check kids/sw.js
+          node --check kids/offline-library-v1.js
+          node scripts/kids-offline-library-guard.cjs
