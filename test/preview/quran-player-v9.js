@@ -15,6 +15,7 @@
    const button=$(id);if(button){const active=(x[key]||[]).includes(x.surah+':'+x.ayah);button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));}
   }
   const key=x.surah+':'+x.ayah;
+  if($('topBookmark')){const saved=(x.saved||[]).includes(key);$('topBookmark').classList.toggle('saved',saved);$('topBookmark').setAttribute('aria-pressed',String(saved));}
   if($('v9CurrentProgress'))$('v9CurrentProgress').textContent='Āyah '+x.ayah+' · '+(x.learned?.includes(key)?'als gelernt markiert':x.difficult?.includes(key)?'noch üben':'bereit');
  }
  $('v9MarkDifficult')?.addEventListener('click',()=>{bridge.toggle('difficult');recordStats()});
