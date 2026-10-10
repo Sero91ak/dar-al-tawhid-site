@@ -76,7 +76,7 @@ const htmlJsVersion = exactV106Snapshot ? "31" : prophetBundleVersion;
 // validated, with the cache never older than the shell build.
 const declaredCacheVersion = String(visual.serviceWorkerCache || "").replace(/^v/, "");
 const swVersion = exactV106Snapshot ? "117" : declaredCacheVersion;
-if (!exactV106Snapshot && (!/^\\d+$/.test(swVersion) || Number(swVersion) < Number(buildNumber))) {
+if (!exactV106Snapshot && (!/^\d+$/.test(swVersion) || Number(swVersion) < Number(buildNumber))) {
   error("kids/version.json: PWA cache version invalid or older than Kids shell build");
 }
 const prophetArtVersion = exactV106Snapshot ? "21" : assetVersion;
