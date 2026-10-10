@@ -1,4 +1,5 @@
 name: Quran V8 Full 114 Surah Browser QA
+# Persistence path excludes explicit Surah URL override.
 on:
   workflow_dispatch:
   push:
