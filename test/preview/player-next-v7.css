@@ -337,3 +337,60 @@ body.kids .page-actions button{background:#2a4376;color:#d9f4f4}
  .miniplay{bottom:5px;padding:7px 14px}
 }
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+
+/* V7.1 SCREENSHOT REVIEW: central reading theatre, no blank-page or blank-canvas problem. */
+@media(max-width:719px){
+ .topline .chip{display:none!important}
+ .topline .breadcrumbs{max-width:calc(100vw - 184px);font-size:clamp(12px,3.4vw,15px);line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ .main-panel{position:relative;isolation:isolate}
+ .verse{flex:0 1 auto;margin-top:auto;margin-bottom:auto;overflow:visible;padding:0}
+ .versehead{flex:none;min-height:34px;padding:0 6px}
+ .verse-focus{width:100%;max-height:min(43dvh,355px);flex:0 1 auto}
+ .versefade{display:none}
+ .navrow{margin-top:0;flex:none}
+ body.adult .main-panel{background:radial-gradient(ellipse at 55% 49%,rgba(72,105,100,.16),transparent 60%),transparent}
+ body.adult .verse-focus{
+  padding:12px 5px 13px;
+  border:0!important;background:transparent!important;
+  border-radius:0!important;box-shadow:none!important;
+ }
+ body.adult .verse-focus .quran-text{
+  font-size:clamp(39px,10.8vw,58px);line-height:1.74;
+  color:#f6eedc;letter-spacing:0;margin:0 0 15px;
+  text-shadow:0 1px 9px rgba(0,0,0,.20);
+ }
+ body.adult .verse-focus .translation{
+  max-width:390px;color:#c7d5d0;font-family:var(--font);
+  font-size:clamp(15px,3.75vw,18px);line-height:1.58;font-weight:420;
+ }
+ body.adult .verse-focus .latin{color:#b4c4c0;font-size:13px;margin-top:13px}
+ body.adult .verse-focus .tip{color:#dde4dd;border-color:#58716c;background:rgba(35,65,69,.65);
+  border-radius:10px;padding:11px}
+ body.adult .verse-focus .tip strong{color:#eddaad}
+ body.adult .versehead{color:#dacbab}
+ body.adult .scene:before{opacity:.35}
+ body.adult .scene:after{background:linear-gradient(90deg,#10252cf5,#10252ce0 52%,#10252c3d)}
+ body.kids .main-panel{
+  background:radial-gradient(ellipse 76% 40% at 50% 47%,rgba(87,138,201,.13),transparent 80%),transparent
+ }
+ body.kids .verse{flex:0 1 auto;margin-top:auto;margin-bottom:5px;padding:0}
+ body.kids .verse-focus{max-height:37dvh;border-radius:18px;padding:14px 11px;background:#f6faff}
+ body.kids .kid-actions{flex:none;margin-top:4px;margin-bottom:auto;gap:5px;padding:5px 0}
+ body.kids .navrow{margin-top:0}
+ body.kids .versefade{display:none}
+}
+@media(max-width:719px) and (max-height:685px){
+ .topline .breadcrumbs{max-width:calc(100vw - 160px)}
+ body.adult .verse-focus .quran-text{font-size:clamp(32px,9.5vw,46px);line-height:1.5;margin-bottom:7px}
+ body.adult .verse-focus .translation{font-size:clamp(12px,3.35vw,15px);line-height:1.34}
+ body.adult .verse-focus{padding:6px 2px 7px}
+ body.kids .verse-focus{max-height:32dvh;padding:9px 8px}
+ body.kids .verse-focus .kid-note{display:none}
+ body.kids .verse-focus .quran-text{font-size:clamp(27px,7.65vw,36px);line-height:1.47}
+ body.kids .verse-focus .translation{font-size:clamp(12px,3.4vw,14px);line-height:1.35}
+ body.kids .verse-focus .latin{margin-top:4px;font-size:10px}
+}
+@media(min-width:720px){
+ .verse{justify-content:center}
+ .verse-focus{margin:auto 0}
+}
