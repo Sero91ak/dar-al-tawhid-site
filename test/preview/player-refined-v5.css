@@ -234,3 +234,29 @@ body.kids.player-v3 .kid-steps{border-bottom:1px solid rgba(220,241,255,.14)}
  }
  body.kids.player-v3 .kid-actions .kid-btn{min-height:45px}
 }
+
+/* V5 dock repeat shortcut — the existing settings selector remains canonical. */
+body.adult.player-v3 .now-playing{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.92fr) 34px;gap:7px;align-items:center}
+body.adult.player-v3 .now-playing b{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+body.adult.player-v3 .now-playing span{max-width:none;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:right}
+body.adult.player-v3 .quick-repeat{
+  width:32px;height:30px;display:grid;place-items:center;flex:0 0 auto;
+  font-size:21px;color:#cfbaa0;background:rgba(226,192,143,.07);
+  border:1px solid rgba(223,190,145,.18);border-radius:8px;
+  padding:0;transition:color .14s,background .14s,border-color .14s;
+}
+body.adult.player-v3 .quick-repeat.is-active{
+  color:#192f34;background:#dac196;border-color:#f1ddba;
+  box-shadow:inset 0 1px rgba(255,255,255,.65);
+}
+body.adult.player-v3 .quick-repeat:focus-visible{outline:2px solid #ffdf9b;outline-offset:2px}
+@media(max-width:719px){
+ body.adult.player-v3 .now-playing{gap:4px;grid-template-columns:minmax(0,1fr) minmax(0,.9fr) 30px}
+ body.adult.player-v3 .now-playing b{font-size:11px}
+ body.adult.player-v3 .now-playing span{font-size:9px}
+ body.adult.player-v3 .quick-repeat{height:28px;width:29px;font-size:19px}
+}
+@media(max-width:350px){
+ body.adult.player-v3 .now-playing{grid-template-columns:minmax(0,1fr) minmax(0,.65fr) 28px}
+ body.adult.player-v3 .quick-repeat{width:27px;height:27px}
+}
