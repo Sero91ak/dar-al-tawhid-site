@@ -1,0 +1,23 @@
+name: Quran V9 Queue Model QA
+on:
+  workflow_dispatch:
+  push:
+    branches: [preview/quran-player-browser-links-20261010]
+    paths: [.github/workflows/qa-quran-v9-queue.yml]
+permissions:
+  contents: read
+jobs:
+  queue:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Browser prerequisites
+        run: |
+          npm install --no-save --ignore-scripts --no-audit --no-fund playwright@1.57.0
+          npx playwright install --with-deps chromium
+      - name: Validate V9 queue and randomized reciters
+        run: node scripts/qa-quran-v9-queue.cjs
