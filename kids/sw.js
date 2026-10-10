@@ -383,7 +383,18 @@ function staleWhileRevalidate(request){
         fresh.catch(function(){});
         return hit;
       }
-      return fresh.then(function(response){return response||Response.error()});
+      return fresh.then(function(response){
+        if(response)return response;
+        // Offline-Downloads use a persistent cache independent of shell releases.
+        // Prefer an exact URL, then the query-free alias for published lesson
+        // and story data (including different manifest cache-bust revisions).
+        return caches.match(request).then(function(saved){
+          if(saved)return saved;
+          return caches.match(new URL(request.url).pathname).then(function(bare){
+            return bare||Response.error();
+          });
+        });
+      });
     });
   });
 }
@@ -734,7 +745,16 @@ async function kidsItemPut(cache,url){
  if(old)await cache.delete(url);
  if(new URL(url).pathname.startsWith("/kids/")){
   const ok=await kidsPutFull(url,cache);
-  return ok&&kidsItemValid(url,await cache.match(url));
+  if(!ok)return false;
+  const stored=await cache.match(url);
+  if(!kidsItemValid(url,stored))return false;
+  // A lesson may reference the same JSON/JS with an older ?v= value.
+  // Persist a canonical path alias so the playback fetch can locate it offline.
+  const bare=new URL(url).pathname;
+  if(url!==new URL(bare,self.location.origin).href&&/\.(?:json|js|css|html)$/i.test(bare)){
+    try{await cache.put(bare,stored.clone())}catch(_){return false;}
+  }
+  return true;
  }
  try{
   const hit=await caches.match(url);
