@@ -91,7 +91,7 @@
   const current=Number(x.surah),v=Number(x.ayah),limit=Number(x.verseCount);
   if(cfg.mode==='shuffle_ayah'){
    const choices=Array.from({length:5},()=>sampleVerse(catalog,x));
-   return choices.find(([s,a])=>s!==current||a!==v)||choices[0];
+   return choices.find(([s,a])=>s!==current||a!==v)||(v<limit?[current,v+1]:[current>=114?1:current+1,1]);
   }
   if(cfg.mode==='shuffle_within'){
    const total=limit||1;
