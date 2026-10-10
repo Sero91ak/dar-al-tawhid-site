@@ -111,7 +111,7 @@ function oneButton(card,spec){
 function story(card,{category,item,sourceUrl,artwork,hero,audioMeta,readerUrl}){
  if(!item?.id)return;
  const audio=String(audioMeta?.url||"");
- const urls=[sourceUrl,readerUrl||"/kids/story-hub.js?v=25",
+ const urls=[sourceUrl,readerUrl||"/kids/story-hub.js?v=26",
   "/kids/data/story-hub.json?v=7",
   "/kids/story-follow-reader.js?v=17","/kids/story-policy.js?v=2",
   artwork,hero,audio];
@@ -121,7 +121,7 @@ function story(card,{category,item,sourceUrl,artwork,hero,audioMeta,readerUrl}){
 function deen(card,{item,audioMeta,cover,hero}){
  if(!item?.id)return;
  const audio=String(audioMeta?.url||"");
- const urls=["/kids/data/deen-lessons.json?v=3","/kids/deen-lessons.js?v=4",
+ const urls=["/kids/data/deen-lessons.json?v=3","/kids/deen-lessons.js?v=5",
   "/kids/deen-lessons.css?v=2","/kids/story-follow-reader.js?v=17",
   "/kids/story-policy.js?v=2",cover,hero,audio];
  oneButton(card,{key:"deen:"+String(item.id)+":"+currentAge(),
