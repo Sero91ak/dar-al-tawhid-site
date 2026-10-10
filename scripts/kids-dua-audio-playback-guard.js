@@ -179,9 +179,10 @@ assert(!activeArabic[1].includes("background:transparent"),"Continuous playback 
 assert(!activeLatin[1].includes("background:transparent"),"Continuous playback hides Latin focus");
 for(const page of ["kids/index.html","kids/start.html","kids/shell.html"]){
   assert(read(page).includes("/kids/dua-layout-v1259.css?v=1311"),page+" stale Arabic focus style");
-  assert(read(page).includes("/kids/sw.js?v=1312"),page+" stale focus PWA cache");
+  const swVersion=String(JSON.parse(read("kids/version.json")).visualSystem.serviceWorkerCache||"").replace(/^v/,"");
+  assert(read(page).includes("/kids/sw.js?v="+swVersion),page+" stale focus PWA cache");
 }
 assert(read("kids/sw.js").includes('"/kids/dua-layout-v1259.css?v=1311"'),"Offline yellow focus CSS stale");
-assert(read("kids/version.json").includes('"serviceWorkerCache": "v1312"'),"Offline cache revision stale");
+assert(read("kids/sw.js").includes('const CACHE_NAME="dar-al-tawhid-kids-v'+String(JSON.parse(read("kids/version.json")).visualSystem.serviceWorkerCache||"").replace(/^v/,"")+'"'),"Offline cache revision stale");
 console.log("KIDS DUA AUDIO PASS: full phrase unchanged, slow focus, soft word-boundary QA, 120/120/696 registered, PWA aligned");
 console.log("Not certified: real audible breaths, native Arabic pronunciation and device QA.");
