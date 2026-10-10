@@ -63,7 +63,7 @@
 <script src="/test/assets/dar-more-v15.js?v=1510" defer></script>
 
 <script src="/test/assets/dar-noble-3d-icons.js?v=1165"></script><!-- DAR_NOBLE_3D_HEAD -->
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v1352";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v1353";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>/* BOOT_RECOVERY_UNSTICK */(function(){try{var k="dar_repair_loops_v1060";var n=Number(sessionStorage.getItem(k)||0)||0;setTimeout(function(){try{var el=document.getElementById("appView");var t=el?(el.textContent||""):"";if(t.indexOf("App wird repariert")<0){try{sessionStorage.removeItem(k)}catch(e0){}return}if(n>=3)return;sessionStorage.setItem(k,String(n+1));var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(e){}},1800)}catch(e){}})();</script>
 
 <script>
@@ -28128,7 +28128,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v1352";
+const APP_BUILD_ID="app-shell-v1353";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -38142,4 +38142,82 @@ body.is-quran-reader-route .qrc-body .quran-ayah-tr-wrap:not([hidden]) + .quran-
  padding-top:13px!important;margin-top:12px!important;
 }
 </style>
+
+<style id="dar-ios-review-ask">
+#darIosReviewAsk{position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;padding:22px;background:rgba(0,0,0,.62);box-sizing:border-box}
+#darIosReviewAsk[hidden]{display:none!important}
+#darIosReviewAsk .dar-ios-review-card{width:min(420px,100%);margin:0 auto;padding:22px 20px 18px;border-radius:28px;border:1px solid rgba(219,189,117,.35);background:#120f0c;color:#f6f0e2;text-align:center;box-sizing:border-box;font-family:Manrope,Inter,system-ui,sans-serif}
+#darIosReviewAsk .dar-ios-review-salam{margin:0;font-family:Georgia,"Times New Roman",serif;font-size:22px;color:#dcbd75}
+#darIosReviewAsk .dar-ios-review-sub{margin:8px 0 0;font-size:13px;line-height:1.45;color:#ede4cc}
+#darIosReviewAsk .dar-ios-review-copy{margin:12px 0 0;font-size:15px;line-height:1.5;color:#f4efe6}
+#darIosReviewAsk .dar-ios-review-stars{display:flex;justify-content:center;gap:10px;margin:14px 0 0}
+#darIosReviewAsk .dar-ios-review-stars button{border:0;background:transparent;color:#dcbd75;font-size:30px;line-height:1;padding:0;cursor:pointer}
+#darIosReviewAsk textarea{width:100%;min-height:78px;margin-top:12px;box-sizing:border-box;border:0;border-radius:14px;background:rgba(255,255,255,.06);color:#fff;padding:12px;font:inherit;resize:vertical}
+#darIosReviewAsk .dar-ios-review-hint{margin:8px 0 0;font-size:12px;line-height:1.4;color:#dcbd75}
+#darIosReviewAsk .dar-ios-review-go{width:100%;margin-top:12px;min-height:46px;border:0;border-radius:16px;background:#dcbd75;color:#1e160a;font:600 16px/1.2 inherit;cursor:pointer}
+#darIosReviewAsk .dar-ios-review-later{margin-top:8px;border:0;background:transparent;color:#c7bfb2;font:500 14px inherit;cursor:pointer}
+</style>
+<div id="darIosReviewAsk" hidden>
+  <div class="dar-ios-review-card" role="dialog" aria-modal="true" aria-labelledby="darIosReviewTitle">
+    <p class="dar-ios-review-salam" id="darIosReviewTitle">السلام عليكم</p>
+    <p class="dar-ios-review-sub">Assalamu alaikum wa rahmatullahi wa barakatuh</p>
+    <p class="dar-ios-review-copy">Wenn dir DĀR AL TAWḤĪD nützt, schenke ihr eine ehrliche Bewertung. Ein Stern, drei oder fünf — ganz so, wie du es meinst. Deine Worte helfen anderen Muslimen, die App zu finden.</p>
+    <div class="dar-ios-review-stars" id="darIosReviewStars" aria-label="Sterne">
+      <button type="button" data-star="1" aria-label="1 Stern">☆</button>
+      <button type="button" data-star="2" aria-label="2 Sterne">☆</button>
+      <button type="button" data-star="3" aria-label="3 Sterne">☆</button>
+      <button type="button" data-star="4" aria-label="4 Sterne">☆</button>
+      <button type="button" data-star="5" aria-label="5 Sterne">☆</button>
+    </div>
+    <textarea id="darIosReviewText" maxlength="800" placeholder="Deine ehrliche Meinung"></textarea>
+    <p class="dar-ios-review-hint" id="darIosReviewHint"></p>
+    <button type="button" class="dar-ios-review-go" id="darIosReviewGo">Bewertung im App Store abgeben</button>
+    <button type="button" class="dar-ios-review-later" id="darIosReviewLater">Später</button>
+  </div>
+</div>
+<script id="dar-ios-review-ask-script">
+(function(){
+  try{
+    var ua=String(navigator.userAgent||"");
+    if(!/DarAlTawhid-iOS/i.test(ua)&&!window.DAR_IOS_NATIVE_APP) return;
+    var root=document.getElementById("darIosReviewAsk");
+    if(!root) return;
+    var launchesKey="dar.review.launches.v1";
+    var doneKey="dar.review.done.v1";
+    var snoozeKey="dar.review.snooze.v1";
+    var n=Number(localStorage.getItem(launchesKey)||0)+1;
+    localStorage.setItem(launchesKey,String(n));
+    if(localStorage.getItem(doneKey)==="1") return;
+    if(n<3) return;
+    var snooze=Number(localStorage.getItem(snoozeKey)||0);
+    if(snooze>Date.now()) return;
+    var stars=0;
+    function paint(){
+      root.querySelectorAll("[data-star]").forEach(function(btn){
+        var v=Number(btn.getAttribute("data-star"));
+        btn.textContent=v<=stars?"★":"☆";
+      });
+    }
+    root.querySelectorAll("[data-star]").forEach(function(btn){
+      btn.addEventListener("click",function(){stars=Number(btn.getAttribute("data-star"))||0;paint();});
+    });
+    document.getElementById("darIosReviewLater").addEventListener("click",function(){
+      localStorage.setItem(snoozeKey,String(Date.now()+21*24*60*60*1000));
+      root.hidden=true;
+    });
+    root.addEventListener("click",function(ev){if(ev.target===root){localStorage.setItem(snoozeKey,String(Date.now()+21*24*60*60*1000));root.hidden=true;}});
+    document.getElementById("darIosReviewGo").addEventListener("click",function(){
+      var hint=document.getElementById("darIosReviewHint");
+      if(stars<1){hint.textContent="Wähle zuerst die Sterne, die du geben möchtest.";return;}
+      var words=String((document.getElementById("darIosReviewText")||{}).value||"").trim();
+      if(words){try{navigator.clipboard.writeText(words);}catch(e){}}
+      hint.textContent="Apple öffnet die Bewertungsseite deines Kontos. Deine Worte kannst du dort einfügen.";
+      localStorage.setItem(doneKey,"1");
+      var url="itms-apps://apps.apple.com/app/id6805988753?action=write-review";
+      setTimeout(function(){location.href=url;},400);
+    });
+    setTimeout(function(){root.hidden=false;},1200);
+  }catch(e){}
+})();
+</script>
 </html>
