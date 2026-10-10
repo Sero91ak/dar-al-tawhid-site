@@ -3788,28 +3788,33 @@ function renderHome(){
   $("#journeyDetail").textContent="Bitte zuerst ein Kinderprofil festlegen.";
   return;
  }
- const allIds=lessonIds(),done=allIds.filter(x=>!!recordFor(x));
+ const school=academySchoolState(),allIds=lessonIds(),done=allIds.filter(x=>!!recordFor(x));
  const due=done.filter(x=>Number(recordFor(x)?.nextDue)<=Date.now());
  const daily=dailyLesson();
  if(!daily)return;
- const saved=recordFor(daily.id),draft=draftFor(daily.id);
+ const saved=recordFor(daily.id),draft=school.active?draftFor(school.active):null;
  const canContinue=!!draft&&(draft.step>0||draft.qIndex>0);
+ const waiting=!!school.upcoming&&!school.active;
  $("#todayTopicName").textContent=lessonTitle(daily.id);
  $("#todayTopicIntro").textContent=lessonLead(daily.id);
- $("#todaySummary").textContent=canContinue?"Setze diesen Unterricht dort fort, wo du pausiert hast.":daily.kind==="free"?"Heute ist freier Lerntag: Wiederhole etwas, lerne freiwillig Neues oder pausiere.":daily.kind==="due"||daily.kind==="review"?"Heute festigen wir Gelerntes. Du kannst trotzdem ein neues Thema auswählen.":daily.kind==="new"?"Ein neues Thema wartet auf dich. Frühere Lektionen kannst du jederzeit wiederholen.":"Heute darfst du dein Wissen festigen.";
+ $("#todaySummary").textContent=canContinue?"Dein Unterricht bleibt gespeichert. Mach genau dort weiter, wo du aufgehört hast.":
+  waiting?"Dein nächstes Thema heißt: "+lessonTitle(school.upcoming)+". Es ist noch gesperrt. "+school.nextUnlockHint+". Heute kannst du Gelerntes wiederholen.":
+  school.active?"Heute ist eine neue Lektion für dich freigeschaltet. Nach dem Abschluss öffnet sich die nächste am vorgesehenen Lerntag.":
+  school.mode==="free"?"Heute darfst du freiwillig Gelerntes wiederholen oder eine Pause machen.":
+  "Heute festigen wir dein Wissen. Bereits abgeschlossene Lektionen bleiben immer zugänglich.";
  $("#courseStatus").textContent=done.length+" / "+allIds.length+" gelernt";
- $("#reviewNotice").textContent=due.length?due.length+" Wiederholung"+(due.length===1?"":"en")+" bereit · jederzeit frei üben":"Heute Neues entdecken oder bekannte Themen wiederholen.";
+ $("#reviewNotice").textContent=due.length?due.length+" Wiederholung"+(due.length===1?"":"en")+" bereit · gelerntes Wissen jederzeit festigen":school.active?"Ein neuer Unterricht freigeschaltet · weitere Themen folgen Schritt für Schritt":"Nächstes Thema gesperrt · Wiederholungen jederzeit möglich";
  $("#journeyBar").style.width=Math.round(done.length/allIds.length*100)+"%";
- $("#journeyDetail").textContent=done.length+" von "+allIds.length+" Lektionen abgeschlossen · Wiederholungen sind immer möglich.";
+ $("#journeyDetail").textContent=done.length+" von "+allIds.length+" abgeschlossen · genau eine neue Lektion gleichzeitig";
  const button=$(".today-button");button.dataset.openLesson=daily.id;
- button.firstChild.textContent=canContinue?"Unterricht fortsetzen ":daily.kind==="free"?"Frei üben ":daily.kind==="due"||daily.kind==="review"?"Wiederholen ":saved?"Noch einmal üben ":"Heute lernen ";
+ button.firstChild.textContent=canContinue?"Unterricht fortsetzen ":daily.access==="review"?"Noch einmal lernen ":"Unterricht beginnen ";
  $("#academyTime").textContent="Heute: "+ACADEMY_WEEK[academyDay().weekday].label+" · etwa "+ui.duration+" · jederzeit freiwillig";
  all("[data-open-category]").forEach(card=>{
   const subject=card.dataset.openCategory;
   const total=availableTopics(subject).length,learned=availableTopics(subject).filter(x=>!!recordFor(x)).length;
   const tag=card.querySelector(".category-state");
-  if(tag)tag.textContent=learned+" von "+total+" gelernt";
-  card.setAttribute("aria-label",(SUBJECTS[subject]?.title||subject)+" – "+total+" Lektionen, "+learned+" gelernt; Fach öffnen");
+  if(tag)tag.textContent=availableTopics(subject).some(x=>["new","resume"].includes(school.access(x)))?"1 Unterricht frei · "+learned+" gelernt":learned+" gelernt · weitere gesperrt";
+  card.setAttribute("aria-label",(SUBJECTS[subject]?.title||subject)+" – "+total+" Themen, "+learned+" gelernt, noch gesperrte Themen nur mit Titeln sichtbar");
  });
 }
 
