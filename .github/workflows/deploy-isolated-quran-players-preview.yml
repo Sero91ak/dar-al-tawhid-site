@@ -1,0 +1,71 @@
+name: Deploy Isolated Quran Players V3
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - preview/quran-player-browser-links-20261010
+    paths:
+      - test/preview/**
+      - wrangler.quran-preview.toml
+      - cloudflare/quran-player-preview-worker.js
+      - .github/workflows/deploy-isolated-quran-players-preview.yml
+permissions:
+  contents: read
+concurrency:
+  group: isolated-quran-preview-v3
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Assemble isolated static content
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .quran-preview-assets/content/quran
+          cp test/preview/index.html .quran-preview-assets/index.html
+          cp test/preview/dar-al-tawhid-quran-player-v3.html .quran-preview-assets/
+          cp test/preview/tawhid-kids-quran-player-v3.html .quran-preview-assets/
+          cp content/quran/[0-9][0-9][0-9].json .quran-preview-assets/content/quran/
+          test "$(find .quran-preview-assets/content/quran -maxdepth 1 -name '*.json' | wc -l)" -ge 110
+          grep -Fq 'QURAN_PLAYER_V3_FOCUS_SHELL' .quran-preview-assets/dar-al-tawhid-quran-player-v3.html
+          grep -Fq 'QURAN_PLAYER_V3_FOCUS_SHELL' .quran-preview-assets/tawhid-kids-quran-player-v3.html
+          node --check cloudflare/quran-player-preview-worker.js
+      - name: Deploy only dedicated preview worker (no production routes)
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy -c wrangler.quran-preview.toml
+      - name: Verify all exact public destinations, including Safari user agent
+        shell: bash
+        run: |
+          set -euo pipefail
+          host="https://dar-quran-players-showcase-v3.sero91ak.workers.dev"
+          ua='Mozilla/5.0 (iPhone; CPU iPhone OS 27_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.0 Mobile/15E148 Safari/604.1'
+          for path in /index.html /dar-al-tawhid-quran-player-v3.html /tawhid-kids-quran-player-v3.html /content/quran/001.json /content/quran/112.json; do
+            ok=0
+            for attempt in $(seq 1 14); do
+              out=$(mktemp)
+              code=$(curl -sSL -A "$ua" --connect-timeout 10 --max-time 25 -o "$out" -w '%{http_code}' "$host$path?cb=$GITHUB_SHA-$attempt" || true)
+              if [ "$code" = "200" ]; then
+                case "$path" in
+                  /index.html) grep -Fq 'DĀR AL TAWḤĪD' "$out" && ok=1 ;;
+                  /content/quran/*) grep -Fq '"verses"' "$out" && ok=1 ;;
+                  *) grep -Fq 'QURAN_PLAYER_V3_FOCUS_SHELL' "$out" && grep -Fq '<audio id="audio"' "$out" && ok=1 ;;
+                esac
+              fi
+              rm -f "$out"
+              if [ "$ok" = 1 ]; then echo "PASS: HTTP 200 iPhone UA $host$path";break;fi
+              echo "Attempt $attempt: HTTP $code path $path"
+              sleep 5
+            done
+            if [ "$ok" != 1 ]; then echo "::error::Preview not ready: $host$path";exit 1;fi
+          done
+          curl -fsSL -A "$ua" --max-time 20 "$host/health"
