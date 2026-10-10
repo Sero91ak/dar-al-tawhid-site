@@ -15,6 +15,7 @@ on:
       - 'kids/sw.js'
       - 'scripts/kids-dua-audio-playback-guard.js'
       - 'scripts/kids-dua-audio-acoustic-audit.py'
+      - 'scripts/kids-dua-audio-stream-test.js'
       - '.github/workflows/build-kids-quiz-owner-voice.yml'
       - '.github/workflows/validate-kids-dua-audio.yml'
   push:
@@ -60,6 +61,8 @@ jobs:
           PY
       - name: Check targeted Du'a Fuṣḥā player regression
         run: node scripts/kids-dua-audio-playback-guard.js
+      - name: Simulate 37-word V4 streaming and cancellation
+        run: node scripts/kids-dua-audio-stream-test.js
       - name: Check Du'a manifests and sample assets
         run: |
           python3 - <<'PY'
