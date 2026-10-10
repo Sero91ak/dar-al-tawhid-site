@@ -555,10 +555,10 @@ a,button,[role="button"],summary,[tabindex],label{-webkit-tap-highlight-color:tr
       document.querySelectorAll("[data-dar-pwa-install]").forEach(function(btn){
         if(!btn.dataset.darInstallLabel)btn.dataset.darInstallLabel=btn.textContent||"Web-App installieren";
         var preparing=android&&!installed&&!ready;
-        btn.disabled=installed||preparing;
-        btn.setAttribute("aria-disabled",(installed||preparing)?"true":"false");
+        btn.disabled=installed;
+        btn.setAttribute("aria-disabled",installed?"true":"false");
         btn.setAttribute("data-dar-pwa-install-state",installed?"installed":(ready?"ready":"preparing"));
-        var nextLabel=installed?"Bereits installiert":(preparing?"Installation wird vorbereitet…":btn.dataset.darInstallLabel);
+        var nextLabel=installed?"Bereits installiert":(preparing?"Installation / Anleitung öffnen":btn.dataset.darInstallLabel);
         if(btn.textContent!==nextLabel)btn.textContent=nextLabel;
       });
     }catch(e){}
@@ -617,15 +617,8 @@ a,button,[role="button"],summary,[tabindex],label{-webkit-tap-highlight-color:tr
         window.__darEarlyInstallPrompt=null;
       }
     }
-    setPwaHint("Installation wird vorbereitet …");
-    await ensureAndroidServiceWorkerReady();
-    if(deferredInstall){
-      setPwaHint("Installation ist bereit. Der Installationsbutton ist jetzt freigegeben.");
-      syncRouterInstallButtons();
-      return false;
-    }
-    setPwaHint("Die direkte Installation wird noch vorbereitet. Der Installationsbutton wird automatisch aktiv, sobald Chrome den nativen Dialog freigibt.");
-    syncRouterInstallButtons();
+    setPwaHint("Die Installationsseite wird geöffnet …");
+    location.assign("/pwa/install/");
     return false;
   };
   document.addEventListener("click",function(event){
@@ -726,6 +719,7 @@ a,button,[role="button"],summary,[tabindex],label{-webkit-tap-highlight-color:tr
       if(!root)return;
       root.innerHTML='<section class="dar-download-fallback"><div class="dar-download-fallback__intro"><small>DOWNLOADS</small><h1>DĀR AL TAWḤĪD als App nutzen.</h1><p>Android direkt als Web-App installieren.</p></div><div class="dar-download-fallback__grid">'+
         '<article class="dar-download-fallback__card"><div class="dar-download-fallback__head"><span class="dar-download-fallback__icon">'+androidLogoMarkup()+'</span><div><small>ANDROID · SMARTPHONE & TABLET</small><h2>Web-App installieren</h2></div></div><p>Die öffentliche DĀR AL TAWḤĪD Website lässt sich auf Android direkt wie eine App installieren. Keine APK nötig.</p><ol><li>In Chrome, Edge oder Samsung Internet öffnen.</li><li>Auf Web-App installieren tippen.</li><li>Auf „Web-App installieren“ tippen – der native Android-Installationsdialog öffnet sich direkt, sobald Chrome die Web-App freigegeben hat.</li></ol><button class="dar-download-fallback__btn" type="button" data-dar-pwa-install>Web-App installieren</button></article>'+
+        '<article class="dar-download-fallback__card"><div class="dar-download-fallback__head"><span class="dar-download-fallback__icon">'+appleLogoMarkup()+'</span><div><small>APPLE · IPHONE & IPAD</small><h2>iOS-App</h2></div></div><p>Die offizielle iOS-App ist im Apple App Store erhältlich.</p><a class="dar-download-fallback__btn" href="https://apps.apple.com/de/app/id6805988753">Im App Store laden</a></article>'+
         '</div></section>';
       applyPwaIcon(getPwaIconId(),false);
       if(typeof syncRouterInstallButtons==="function")syncRouterInstallButtons();
@@ -752,13 +746,8 @@ a,button,[role="button"],summary,[tabindex],label{-webkit-tap-highlight-color:tr
       history[method]=wrapped;
     });
   }catch(eHistory){}
-  try{
-    var publicRoot=document.getElementById("pageRoot");
-    if(publicRoot&&window.MutationObserver){
-      var downloadsObserver=new MutationObserver(function(){schedulePublicDownloads()});
-      downloadsObserver.observe(publicRoot,{childList:true,subtree:true});
-    }
-  }catch(eObserver){}
+  // Route navigation already schedules download rendering; avoid a subtree-wide
+  // observer that otherwise queues three timers for every content mutation.
 })();
 </script>`;
 }
