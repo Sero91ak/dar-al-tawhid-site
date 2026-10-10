@@ -3556,7 +3556,7 @@ function readDraft(){
   const d=JSON.parse(localStorage.getItem(draftKey())||"null");
   if(!d||d.lessonId!==activeLessonId||d.id!==id||d.age!==age)return null;
   const elapsed=Date.now()-Number(d.savedAt);
-  if(!Number.isFinite(elapsed)||elapsed<0||elapsed>7*86400000)return null;
+  if(!Number.isFinite(elapsed)||elapsed<0)return null; /* Unfinished lessons never expire automatically. */
   if(!Number.isInteger(d.step)||d.step<0||d.step>4)return null;
   if(!Number.isInteger(d.qIndex)||d.qIndex<0||d.qIndex>=questions().length)return null;
   if(!d.score||!Number.isInteger(d.score.done)||d.score.done<0||d.score.done>questions().length)return null;
@@ -3923,7 +3923,7 @@ function recordFor(lessonId){
 function draftFor(lessonId){
  try{
   const v=JSON.parse(localStorage.getItem(["kids",VERSION,id,age,lessonId,"draft-v1"].join("."))||"null");
-  return v&&v.id===id&&v.age===age&&v.lessonId===lessonId&&Date.now()-v.savedAt<7*86400000?v:null;
+  return v&&v.id===id&&v.age===age&&v.lessonId===lessonId&&Number(v.savedAt)>0&&Date.now()>=v.savedAt?v:null;
  }catch(_){return null}
 }
 /* KIDS ACADEMY V9.1: four new lessons, two repetition days, one flexible day.
