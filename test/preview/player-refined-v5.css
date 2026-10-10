@@ -260,3 +260,64 @@ body.adult.player-v3 .quick-repeat:focus-visible{outline:2px solid #ffdf9b;outli
  body.adult.player-v3 .now-playing{grid-template-columns:minmax(0,1fr) minmax(0,.65fr) 28px}
  body.adult.player-v3 .quick-repeat{width:27px;height:27px}
 }
+
+/* V5 NO-SCROLL PANELS: paginate Sūrahs, compact form columns at small heights. */
+body.player-v3 .v5-surah-search{display:none}
+body.player-v3 .v5-surah-pager{display:none}
+@media(max-width:719px){
+ body.player-v3 .sidecol[data-active-panel="surahs"] #surahs{
+  overflow:hidden;display:flex;flex-direction:column;
+  max-height:min(82dvh,830px);
+ }
+ body.player-v3 .sidecol #surahs .ctitle,
+ body.player-v3 .sidecol #surahs p.muted{flex:0 0 auto}
+ body.player-v3 .sidecol #surahList{
+  display:grid;grid-template-columns:1fr;flex:1 1 auto;min-height:0;overflow:hidden;
+  gap:6px;align-content:start;
+ }
+ body.player-v3 .sidecol .v5-surah-search{
+  display:block;width:100%;min-height:42px;margin:2px 0 8px;
+  padding:10px 13px;border-radius:11px;border:1px solid rgba(225,194,141,.34);
+  background:#203b42;color:#f9efdb;font-size:14px;
+  -webkit-appearance:none;appearance:none;outline-offset:2px;
+ }
+ body.player-v3 .sidecol .v5-surah-search::placeholder{color:#b8caca}
+ body.player-v3 .sidecol .v5-surah-pager{
+  display:flex;flex:0 0 auto;justify-content:space-between;gap:8px;
+  align-items:center;margin-top:9px;padding-top:7px;border-top:1px solid rgba(219,196,154,.14)
+ }
+ body.player-v3 .v5-surah-pager button{
+  min-height:39px;padding:8px 12px;border-radius:9px;
+  border:1px solid rgba(235,205,159,.25);
+  color:#f4e3bf;background:#1c3540;font-size:13px;font-weight:650;
+ }
+ body.player-v3 .v5-surah-pager button:disabled{opacity:.35}
+ body.player-v3 .v5-surah-pager span{font-size:12px;color:#d4dacf;font-variant-numeric:tabular-nums}
+ body.player-v3 .sura-button.v5-hidden{display:none!important}
+ body.player-v3 .sidecol[data-active-panel="settings"] #settings{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-content:start;
+  column-gap:9px;row-gap:8px;overflow:hidden;
+ }
+ body.player-v3 #settings>.ctitle,body.player-v3 #settings>p,
+ body.player-v3 #settings>.agebuttons{grid-column:1/-1;margin:0}
+ body.player-v3 #settings .ctitle{margin-bottom:4px}
+ body.player-v3 #settings .muted{font-size:12px;line-height:1.45}
+ body.player-v3 #settings .inputrow{min-width:0;margin:0;display:flex;flex-direction:column;gap:5px}
+ body.player-v3 #settings .inputrow label{font-size:12px}
+ body.player-v3 #settings .inputrow select{
+  min-height:43px;width:100%;font-size:13px;padding:7px 5px;border-radius:9px;
+ }
+ body.player-v3 #settings .agebuttons{margin:0 0 3px}
+ body.player-v3 #settings .warning{font-size:10.5px;line-height:1.45}
+}
+@media(max-width:719px) and (max-height:740px){
+ body.player-v3 .sidecol .card{padding:49px 15px calc(13px + env(safe-area-inset-bottom,0px));max-height:88dvh}
+ body.player-v3 #settings .inputrow select{min-height:40px;font-size:12px}
+ body.player-v3 #settings .inputrow label{font-size:11px}
+ body.player-v3 #settings .muted{font-size:11px}
+ body.player-v3 .sidecol .sura-button{min-height:52px;padding:8px 11px}
+ body.player-v3 .sidecol .v5-surah-search{min-height:38px;margin:0 0 6px}
+ body.player-v3 .sidecol .v5-surah-pager{margin-top:6px}
+ body.player-v3 .sidecol .v5-surah-pager button{min-height:37px}
+ body.kids.player-v3 #settings .agebuttons button{min-height:40px;padding:6px 4px}
+}
