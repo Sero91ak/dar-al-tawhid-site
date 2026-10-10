@@ -119,6 +119,15 @@ async function main() {
       "__DAR_PWA_DEDICATED_APP=true",
       'dataset.appPath="android-pwa"'
     ]);
+    const pwaInstallerOk = await waitForHtmlIncludes(`${SITE_URL}/pwa/install/`, [
+      "Web-App installieren",
+      "/pwa/service-worker.js",
+      "Browser-Menü"
+    ]);
+    const downloadButtonsOk = await waitForHtmlIncludes(`${SITE_URL}/?page=downloads`, [
+      "/pwa/install/",
+      "https://apps.apple.com/de/app/id6805988753"
+    ]);
 
     const { text } = await fetchStatus(`${SITE_URL}/`, nativeHeaders);
     const zakatMatch = text.match(/zakat-app\.js\?v=(\d+)/);
@@ -136,9 +145,9 @@ async function main() {
       200
     );
 
-    if (!publicWebsiteOk || !publicIsolationSwOk || !visitorOk || !pwaOk || zakatVer < expectZakat || !voiceStudioOk || !voiceVersionOk || !pronunciationOk) {
+    if (!publicWebsiteOk || !publicIsolationSwOk || !visitorOk || !pwaOk || !pwaInstallerOk || !downloadButtonsOk || zakatVer < expectZakat || !voiceStudioOk || !voiceVersionOk || !pronunciationOk) {
       console.error(
-        `verify: Besucher-App fehlgeschlagen (public=${publicWebsiteOk ? "ok" : "fail"}, web-sw-isolation=${publicIsolationSwOk ? "ok" : "fail"}, native-build=${visitorOk ? visitorBuild : "fail"}, android-pwa=${pwaOk ? "ok" : "fail"}, zakat=v${zakatVer || "?"}, voice=${voiceStudioOk ? "ok" : "fail"}, voice-version=${voiceVersionOk ? "ok" : "fail"}, pronunciation=${pronunciationOk ? "ok" : "fail"})`
+        `verify: Besucher-App fehlgeschlagen (public=${publicWebsiteOk ? "ok" : "fail"}, web-sw-isolation=${publicIsolationSwOk ? "ok" : "fail"}, native-build=${visitorOk ? visitorBuild : "fail"}, android-pwa=${pwaOk ? "ok" : "fail"}, pwa-install=${pwaInstallerOk ? "ok" : "fail"}, downloads=${downloadButtonsOk ? "ok" : "fail"}, zakat=v${zakatVer || "?"}, voice=${voiceStudioOk ? "ok" : "fail"}, voice-version=${voiceVersionOk ? "ok" : "fail"}, pronunciation=${pronunciationOk ? "ok" : "fail"})`
       );
       failed += 1;
     } else {
