@@ -1,0 +1,39 @@
+name: Kids Academy V9 Curriculum Guard
+
+on:
+  pull_request:
+    paths:
+      - 'kids/akademie/**'
+      - 'desktop-preview/kids-akademie-unterricht.html'
+      - 'kids/data/academy-voice-plan-v9.json'
+      - 'scripts/test-kids-academy-v9.js'
+      - '.github/workflows/check-kids-academy-v9.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'kids/akademie/**'
+      - 'desktop-preview/kids-akademie-unterricht.html'
+      - 'kids/data/academy-voice-plan-v9.json'
+      - 'scripts/test-kids-academy-v9.js'
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Verify curriculum, devices, per-child daily planner and master audio inventory
+        run: node scripts/test-kids-academy-v9.js
+      - name: JavaScript syntax guard
+        run: |
+          node --check kids/akademie/curriculum-v1.js
+          node --check kids/akademie/curriculum-v2.js
+          node --check kids/tools/export-academy-voice-plan.js
+      - name: Confirm reproducible voice plan remains unchanged
+        run: |
+          node kids/tools/export-academy-voice-plan.js
+          git diff --exit-code -- kids/data/academy-voice-plan-v9.json
