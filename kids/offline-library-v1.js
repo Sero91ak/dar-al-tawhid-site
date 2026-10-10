@@ -63,7 +63,8 @@ function boot(){
       const done=Number(d.done)||0,total=Number(d.total)||0,failed=Number(d.failed)||0;
       progress.value=total?Math.floor(done*100/total):0;
       percent=progress.value;
-      if(d.complete){uiBusy(false);message("Offline-Bibliothek vollständig gespeichert: "+total+" Dateien. Jetzt auch unterwegs ohne Internet verfügbar.");storage();}
+      if(d.visualReady){uiBusy(false);progress.value=0;message("Startbilder vorbereitet. Für sämtliche Sprachaufnahmen und Geschichten bitte den Komplett-Download starten.");storage();}
+      else if(d.complete){uiBusy(false);message("Offline-Bibliothek vollständig gespeichert: "+total+" Dateien. Jetzt auch unterwegs ohne Internet verfügbar.");storage();}
       else if(d.cancelled){uiBusy(false);message("Download angehalten. "+done+" Dateien geprüft. Fortsetzen ist jederzeit möglich.");}
       else if(done>=total&&total){uiBusy(false);message("Download beendet: "+(total-failed)+" von "+total+" Dateien gesichert. "+failed+" fehlen noch. Erneut starten zum Nachladen.");storage();}
       else {uiBusy(true,d.mode);message((d.mode==="visual"?"Bilder werden vorbereitet":"Offline-Bibliothek wird gespeichert")+": "+done+" / "+total+(failed?" · "+failed+" bisher nicht erreichbar":""));}
