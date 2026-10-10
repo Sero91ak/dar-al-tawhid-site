@@ -19,7 +19,7 @@ on:
       - scripts/verify-live-deploy.js
       - scripts/cf-pages-build.js
       - service-worker.js
-      - wrangler.toml
+      - wrangler.test.toml
       - package.json
       - .github/workflows/deploy-test-library-canonical.yml
 
@@ -52,12 +52,11 @@ jobs:
           node scripts/push-lanes-guard.js
           node scripts/version-update-guard.js
 
-      - name: Deploy Test-App (Workers Static Assets)
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: deploy
+      - name: Deploy isolated Dar Test Worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx wrangler deploy -c wrangler.test.toml
 
       - name: Cloudflare CDN Cache leeren
         env:
