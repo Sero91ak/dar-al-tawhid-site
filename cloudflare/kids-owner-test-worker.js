@@ -61,7 +61,7 @@ function assetPath(path) {
 function htmlWithOwnerTools(html,path){
   // The public shell embeds a production Supabase RPC endpoint. Never expose it
   // as a working endpoint in owner test: a separate test DB is required first.
-  html=html.replace(/var API="https:\/\/[^"]+\\.supabase\\.co\/rest\/v1\/rpc\/";/,
+  html=html.replace(/var API="https:\/\/[^"]+\.supabase\.co\/rest\/v1\/rpc\/";/,
                     'var API="/kids/owner-test/blocked-rpc/";');
   html=html.replace(/var APIKEY="sb_publishable_[^"]*";/,'var APIKEY="";');
   // Bootstrap happens before page scripts. Storage is isolated by this origin.
