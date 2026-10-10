@@ -3612,7 +3612,7 @@ body .academy-header.kids-detail-appbar > .academy-nav-home{
   },true);
 })();
 </script></head>
-<body data-profile="boy" data-preview-release="V11.0-20261010" data-preview-deploy="v11-progressive-school-lessons"><main class="wrap">
+<body data-profile="boy" data-preview-release="V12.0-voicepilot-20261010" data-preview-deploy="v11-progressive-school-lessons"><main class="wrap">
 
 <header class="academy-header kids-detail-appbar" aria-label="Navigationsleiste Lernakademie">
  <button class="academy-nav-back" id="academyNavBack" type="button" aria-label="Zurück"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/><path d="M9 12h11"/></svg></button>
@@ -4098,6 +4098,11 @@ function syncProfile(force=false){
 }
 
 
+function isAcademyStoryMaster(text){
+ const entry=window.DARKidsOwnerVoice?.masterEntry?.(text);
+ return !!(entry&&entry.voiceId==="DkU7j9uO4ZEtLD2iRZSH"&&entry.modelId==="eleven_v4"&&entry.voiceSettingsProfile==="kids_story"&&
+  (entry.approvedForPlayback!==false||new URLSearchParams(location.search).get("voicePilot")==="1"));
+}
 function refreshSerhatLessonClip(){
  const button=$("#academySerhatLead"),status=$("#academySerhatStatus");
  const desired=activeLesson()?.lead||"";
@@ -4108,7 +4113,7 @@ function refreshSerhatLessonClip(){
   if(!owner)return;
   if(typeof owner.whenAcademyReady==="function")await owner.whenAcademyReady();
   if(activeLessonId!==currentLesson||$("#lessonMain").hidden)return;
-  if(typeof owner.hasMaster!=="function"||!owner.hasMaster(desired))return;
+  if(!isAcademyStoryMaster(desired))return;
   button.hidden=false;button.dataset.masterText=desired;
   button.setAttribute("aria-label",desired+" – mit Serhats Masterstimme anhören");
  }).catch(()=>{button.hidden=true;});
@@ -4116,7 +4121,7 @@ function refreshSerhatLessonClip(){
 function playSerhatLessonClip(){
  const button=$("#academySerhatLead"),status=$("#academySerhatStatus"),t=button.dataset.masterText||"";
  const owner=window.DARKidsOwnerVoice;
- if(!t||!owner||typeof owner.hasMaster!=="function"||!owner.hasMaster(t))return;
+ if(!t||!owner||!isAcademyStoryMaster(t))return;
  pauseVoiceClip();stopSpeech();stopAudio();status.hidden=false;
  status.textContent="Die Masterstimme wird abgespielt.";
  const failed=()=>{status.hidden=false;status.textContent="Diese Aufnahme lässt sich gerade nicht abspielen.";};
@@ -4136,7 +4141,7 @@ function prepareOwnerVoice(){
  window.__academyOwnerVoiceRequested=true;
  window.__academyOwnerVoicePromise=new Promise(resolve=>{
   const script=document.createElement("script");
-  script.src="/kids/owner-voice.js?v=academy-serhat-v1-20261010";script.async=true;
+  script.src="/kids/owner-voice.js?v=academy-serhat-pilot-v12-20261010";script.async=true;
   script.onload=()=>resolve(window.DARKidsOwnerVoice||null);
   script.onerror=()=>{
    window.__academyOwnerVoiceRequested=false;
@@ -4496,7 +4501,7 @@ function speak(index,custom){
  function certifiedOwnerHas(owner,t){
   if(!owner||typeof owner.entry!=="function")return false;
   const e=owner.entry(t);
-  return !!(e&&e.url&&e.voiceProfileId==="serhat-owner-voice-2026"&&
+  return isAcademyStoryMaster(t)&&!!(e&&e.url&&e.voiceProfileId==="serhat-owner-voice-2026"&&
    e.sourceVoice==="authorized-owner-voice"&&
    (e.sourceSpeaker==="Serhat Abu Malik"||e.sourceType==="local-owner-generated"));
  }
@@ -4513,14 +4518,11 @@ function speak(index,custom){
   const owner=window.DARKidsOwnerVoice;
   if(!waitedForMaster&&(!owner||typeof owner.isLoaded==="function"&&!owner.isLoaded())){
    waitedForMaster=true;
-   const completion=Promise.resolve(prepareOwnerVoice()).then(api=>{
-    if(!api)return null;
-    const quick=typeof api.whenAcademyReady==="function"?api.whenAcademyReady():null;
-    const allReady=typeof api.whenReady==="function"?api.whenReady():null;
-    return quick&&allReady?Promise.race([quick,allReady]):quick||allReady;
-   });
-   Promise.race([completion,new Promise(resolve=>setTimeout(resolve,1050))])
-    .then(()=>{if(live())next()}).catch(()=>{if(live())next()});
+   const completion=Promise.resolve(prepareOwnerVoice()).then(api=>
+    api&&typeof api.whenAcademyReady==="function"?api.whenAcademyReady():null);
+   setAudioFeedback("Serhat-Masteraufnahme wird geladen …");
+   Promise.race([completion,new Promise(resolve=>setTimeout(resolve,9000))])
+    .then(()=>{if(live())next()}).catch(()=>{if(live())deviceRead(t)});
    return;
   }
   if(certifiedOwnerHas(owner,t)){
