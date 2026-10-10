@@ -1,0 +1,19 @@
+name: DarAlTawhidKidsOwnerTest
+options:
+  bundleIdPrefix: de.daraltawhid.kids
+targets:
+  KidsOwnerTest:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - Sources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: de.daraltawhid.kids.owner.test
+        INFOPLIST_KEY_CFBundleDisplayName: "TAWḤĪD KIDS TEST"
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        GENERATE_INFOPLIST_FILE: YES
+        SWIFT_VERSION: "5.0"
+        TARGETED_DEVICE_FAMILY: "1,2"
+        CODE_SIGN_STYLE: Automatic
