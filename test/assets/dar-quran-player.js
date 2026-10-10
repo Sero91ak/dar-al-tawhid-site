@@ -1,6 +1,11 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 983;
+    var PLAYER_BUILD = 1101;
+  if (!document.querySelector('link[data-dqp-v11-skin]')) {
+    var v11Css = document.createElement('link');
+    v11Css.rel='stylesheet';v11Css.href='/assets/dar-quran-player-v11.css?v=1101';
+    v11Css.setAttribute('data-dqp-v11-skin','');document.head.appendChild(v11Css);
+  }
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App, iOS-App und Apple TV: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -1445,9 +1450,11 @@
     return (
       '<div id="darQuranPlayer" data-text="' + esc(state.text) + '">' +
         '<div class="dqp-topbar">' +
-          '<button class="dqp-back" type="button" data-dqp="home" aria-label="Zurück zur Startseite">Zurück</button>' +
+          '<button class="dqp-back" type="button" data-dqp="home" aria-label="Zurück zur Startseite">‹</button>' +
           '<button class="dqp-grab" type="button" tabindex="-1" aria-hidden="true"></button>' +
           '<button type="button" class="dqp-sleep-live" data-dqp-sleep-live data-dqp-opt="m-sleep" hidden aria-label="Sleep-Timer"></button>' +
+          '<div class="dqp-v11-heading"><span class="dqp-v11-title" data-v11-surah>Al-Fātiḥah</span><button type="button" class="dqp-v11-picker" data-dqp="pick-surah" aria-label="Sūrah wechseln">Sūrah <span data-v11-number>001</span><span class="arrow" aria-hidden="true"> ▾</span></button></div>' +
+          '<button type="button" class="dqp-v11-menu" data-dqp="menu" aria-label="Wiedergabe, Anzeige und weitere Optionen">☰</button>' +
         "</div>" +
         '<div class="dqp-art">' +
           '<div class="dqp-ayah" data-dqp-ayah>' +
@@ -1996,6 +2003,12 @@
   function paintChrome() {
     var root = playerRoot();
     if (root) {
+      var currentSurahMeta = meta || surahMeta(state.surah) || {};
+      var currentName = String(currentSurahMeta.transliteration || currentSurahMeta.name || ('Sūrah ' + state.surah));
+      var v11SurahName = root.querySelector('[data-v11-surah]');
+      if (v11SurahName) { v11SurahName.textContent = currentName; v11SurahName.dataset.length = currentName.length >= 17 ? 'xlong' : (currentName.length >= 12 ? 'long' : 'normal'); v11SurahName.title = currentName; }
+      var v11SurahNumber = root.querySelector('[data-v11-number]');
+      if (v11SurahNumber) v11SurahNumber.textContent = pad(state.surah, 3);
       root.setAttribute("data-text", state.text);
       root.setAttribute("data-ar", state.layers.ar ? "1" : "0");
       root.setAttribute("data-de", state.layers.de ? "1" : "0");
