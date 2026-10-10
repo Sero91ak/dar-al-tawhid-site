@@ -21,6 +21,8 @@ on:
       # KIDS Akademie V16: all classroom UI/voice changes must reach the
       # SAME canonical Cloudflare Worker; GitHub Pages deploy is not enough.
       - kids/akademie/**
+      # Separate Basic-gated creator review; no visitor-school unlock.
+      - test/kids/akademie/**
       - kids/owner-voice.js
       - kids/data/academy-audio.json
       # KIDS Duʿāʾ V4 audio release through sole production Worker.
