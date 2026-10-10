@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1319";
+const CACHE_NAME="dar-al-tawhid-kids-v1320";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 // KIDS_V202_DOWNLOAD_TABS_RELEASE_TRIGGER_20261010: detail-only offline controls; manifest V202 synchronized.
@@ -16,8 +16,8 @@ const CORE_PRECACHE=[
   "/kids/assets/kids-salah-v1272/maghrib.png?v=1277",
   "/kids/assets/kids-salah-v1272/isha.png?v=1277",
   "/kids/assets/kids-salah-v1262/cinematic-still.jpg",
-  "/kids/prayer-stage-v1261.css?v=1304",
-  "/kids/prayer-stage-v1261.js?v=1306",
+  "/kids/prayer-stage-v1261.css?v=1320",
+  "/kids/prayer-stage-v1261.js?v=1320",
   "/kids/assets/kids-home-v1222/dar-title-reference-clean.svg?v=1229",
   "/kids/assets/kids-home-v1219/dar-title-reference.png?v=1229",
   "/kids/assets/kids-home-v1219/dar-title-reference.png?v=1229",
@@ -278,8 +278,8 @@ const KIDS_BOOT_PRECACHE=[
   "/kids/start.html",
   "/kids/index.html",
   "/kids/akademie/index.html",
-  "/kids/prayer-stage-v1261.css?v=1304",
-  "/kids/prayer-stage-v1261.js?v=1306",
+  "/kids/prayer-stage-v1261.css?v=1320",
+  "/kids/prayer-stage-v1261.js?v=1320",
   "/kids/assets/kids-salah-v1272/hero-home.png?v=1274",
   "/kids/assets/kids-home-v1222/dar-title-reference-clean.svg?v=1229",
   "/kids/manifest.webmanifest",
