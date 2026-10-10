@@ -155,6 +155,17 @@
   ],
   "unlockedScopes": [
     {
+      "id": "website-mehr-tastatur-route-widget-cleanup-20261010",
+      "at": "2026-10-10T14:19:00+02:00",
+      "approvedBy": "user-explicit-two-widgets-remove-add-tastatur-in-active-website-mehr",
+      "reason": "Nur aktive Besucher-Desktop-Mehr-Ansicht: beide Widgets & App-Icon Links entfernen, neue edle Tastatur-Karte mit Link /tastatur/ hinzufügen, dazu die ausschließlich für Mehr zuständige Widget-Injektion im Website-Router deaktivieren. Keine Änderung an Push, Kids, Installationsseite oder anderen Apps.",
+      "paths": [
+        "desktop-preview/index.html",
+        "cloudflare/site-router.js"
+      ],
+      "expiresAt": "2026-11-10T23:59:00.000Z"
+    },
+    {
       "id": "public-tastatur-catalog-v7-20261010",
       "at": "2026-10-10T13:00:00+02:00",
       "approvedBy": "user-explicit-push-tastatur-live-und-mehr-seite-20261010",
