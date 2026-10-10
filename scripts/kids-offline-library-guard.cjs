@@ -18,6 +18,14 @@ ok(sw.includes('KIDS_FAST_FIRST_PAINT_V1313'),"fast install marker missing");
 ok(sw.includes('kidsCachedAudio(request,event)'),"audio cache bypass must be replaced");
 ok(sw.includes('Content-Range')&&sw.includes('status:206'),"offline Safari Range handling missing");
 ok(sw.includes('"/kids/akademie/index.html"'),"academy must have offline entry");
+for(const academyDep of [
+  "/kids/akademie/curriculum-v1.js?v=20261010-01",
+  "/kids/akademie/curriculum-v2.js?v=20261010-09",
+  "/kids/akademie/school-progress-v11.js?v=20261010-11",
+  "/kids/owner-voice.js?v=academy-serhat-v1-20261010",
+  "/kids/data/academy-audio.json?v=1"
+])ok(sw.includes('"'+academyDep+'"'),"academy first-start asset missing: "+academyDep);
+ok(sw.includes("CORE_PRECACHE.filter")&&sw.includes("KIDS_OFFLINE_SEEDS"),"offline library asset inventory missing");
 ok(sw.includes('"/kids/data/dua-word-audio.json"'),"V4 Dua word clips must be discoverable");
 ok(sw.includes('"/kids/data/academy-audio.json"'),"academy audio manifest must be discoverable");
 ok(!/if\(url.pathname.indexOf\("\/kids\/assets\/prophet-story-audio\/".{0,800}event.respondWith\(fetch\(request\)\)/s.test(sw),"story audio fetch-only bypass remains");
