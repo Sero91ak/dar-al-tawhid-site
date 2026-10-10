@@ -6,7 +6,7 @@
 const AGE_KEYS=["4-5","6-8","9-10"];
 // Direct-entry Academy installs the same Kids-only SW before an offline save.
 if(location.pathname.startsWith("/kids/akademie/")&&"serviceWorker" in navigator){
- navigator.serviceWorker.register("/kids/sw.js?v=1314",{scope:"/kids/",updateViaCache:"none"}).catch(()=>{});
+ navigator.serviceWorker.register("/kids/sw.js?v=1315",{scope:"/kids/",updateViaCache:"none"}).catch(()=>{});
 }
 const DEFAULT_BASE=[
  "/kids/start.html","/kids/prayer-stage-v1261.js?v=1306",
@@ -124,7 +124,7 @@ function oneButton(card,spec,inline=false){
 function story(card,{category,item,sourceUrl,artwork,hero,audioMeta,readerUrl},inline=false){
  if(!item?.id)return;
  const audio=allowed(String(audioMeta?.url||""));
- const urls=[sourceUrl,readerUrl||"/kids/story-hub.js?v=26",
+ const urls=[sourceUrl,readerUrl||"/kids/story-hub.js?v=27",
   "/kids/data/story-hub.json?v=7",
   "/kids/story-follow-reader.js?v=17",
   "/kids/story-follow-reader.css?v=10","/kids/story-hub.css?v=12",
@@ -136,7 +136,7 @@ function story(card,{category,item,sourceUrl,artwork,hero,audioMeta,readerUrl},i
 function deen(card,{item,audioMeta,cover,hero},inline=false){
  if(!item?.id)return;
  const audio=allowed(String(audioMeta?.url||""));
- const urls=["/kids/data/deen-lessons.json?v=3","/kids/deen-lessons.js?v=5",
+ const urls=["/kids/data/deen-lessons.json?v=3","/kids/deen-lessons.js?v=6",
   "/kids/deen-lessons.css?v=2","/kids/deen-learning-v1199.css?v=1199",
   "/kids/story-follow-reader.css?v=10","/kids/story-follow-reader.js?v=17",
   "/kids/story-policy.js?v=2",cover,hero,audio];
