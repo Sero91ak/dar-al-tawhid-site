@@ -598,6 +598,8 @@ function kidsAssetRefs(raw){
   const hits=String(raw||"").match(/\/kids\/(?:assets|data|icons)\/[^\s"'<>\\)]+/g)||[];
   const out=[];
   for(const hit of hits){
+    // CSS/JS template literals are not real published asset filenames.
+    if(/[{}$*]/.test(hit))continue;
     const found=kidsOfflineRequest(hit.replace(/[;,]+$/,""));
     if(found)out.push(found);
   }
@@ -633,12 +635,14 @@ async function kidsOfflineDownload(source,mode){
     first.forEach(append);
     if(mode!=="visual"){
       // Read the actual published manifests; never fabricate audio paths.
-      // Enumerate nested static audio/images referenced by stories, lessons,
-      // Du'a, quiz and academy, with a cap against accidental recursive bloat.
-      for(const seed of KIDS_OFFLINE_SEEDS){
+      // Enumerate nested static audio/images referenced by story and voice JSON,
+      // academy HTML, course scripts, and CSS illustrations. Ignore URL
+      // templates and keep a cap against accidental recursive bloat.
+      const scanInputs=[...new Set(KIDS_OFFLINE_SEEDS.concat(KIDS_BOOT_PRECACHE,CORE_PRECACHE,"/kids/index.html"))]
+        .filter(p=>/\.(?:json|html|css|js)(?:\?|$)/i.test(p));
+      for(const seed of scanInputs){
         if(kidsOfflineCancel)break;
         const url=kidsOfflineRequest(seed);if(!url)continue;
-        if(!/\.(?:json|html)$/i.test(new URL(url).pathname))continue;
         let response;
         try{response=await caches.match(url)||await fetch(url,{cache:"no-store"});}catch(_){continue;}
         if(!response||!response.ok)continue;
