@@ -2953,7 +2953,7 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.09.21</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.09.23</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3343,7 +3343,7 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306";
+const KIDS_BUILD_ID="kids-shell-v202-responsive-profile1316";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6624,12 +6624,12 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/dua-smart-learn.js?v=1312"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306";
+  var KIDS_BUILD_ID="kids-shell-v202-responsive-profile1316";
   // Stable start: do not reload a visible app when a service worker takes control.
   // The next navigation uses network-first and receives the latest release.
   if("serviceWorker" in navigator){
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1315",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1316",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     },{once:true});
@@ -11246,5 +11246,5 @@ html.kids-ios-app #kidsLaunch,html.dar-ios-native-app #kidsLaunch{display:none!i
 <!-- KIDS_OFFLINE_LIBRARY_V1: independent storage controls for the Parents tab -->
 <script defer src="/kids/offline-library-v1.js?v=1"></script>
 <!-- KIDS_SALAH_STAGE_V1261: placed after hero, before continue-listening -->
-<script defer src="/kids/prayer-stage-v1261.js?v=1306" data-kids-salah-stage="1275"></script>
+<script defer src="/kids/prayer-stage-v1261.js?v=1316" data-kids-salah-stage="1275"></script>
 </html>
