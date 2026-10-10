@@ -193,17 +193,19 @@
   // Priorität ist absichtlich unabhängig von Netzwerk-Reihenfolge:
   // allgemeiner Pack < Quiz < Duʿāʾ. So überschreibt nie wieder ein alter
   // generischer Clip einen frisch gerenderten Bereichs-Clip.
+  // Akademie-Minipack wird vor den großen Archiven unabhängig freigegeben.
+  var academyReady=loadManifest("/kids/data/academy-audio.json?v=1",5,function(data){
+    return !!(data&&data.id==="KIDS_ACADEMY_SERHAT_MASTER_V1"&&
+      data.voiceProfileId==="serhat-owner-voice-2026"&&
+      data.speaker==="Serhat Abu Malik"&&
+      data.entries&&Object.keys(data.entries).every(function(k){return isMasterEntry(data.entries[k])}));
+  });
   var loadCompletion=Promise.allSettled([
+    academyReady,
     loadManifest("/kids/data/owner-voice-audio.json?v=2",1),
     loadManifest("/kids/data/quiz-audio.json?v=2",2),
     loadManifest("/kids/data/dua-audio.json?v=8",3),
-    loadManifest("/kids/data/dua-arabic-audio.json?v=8",4,isSerhatV4DuaArabic),
-    loadManifest("/kids/data/academy-audio.json?v=1",5,function(data){
-      return !!(data&&data.id==="KIDS_ACADEMY_SERHAT_MASTER_V1"&&
-        data.voiceProfileId==="serhat-owner-voice-2026"&&
-        data.speaker==="Serhat Abu Malik"&&
-        data.entries&&Object.keys(data.entries).every(function(k){return isMasterEntry(data.entries[k])}));
-    })
+    loadManifest("/kids/data/dua-arabic-audio.json?v=8",4,isSerhatV4DuaArabic)
   ]).then(finishLoad).catch(finishLoad);
 
   window.DARKidsOwnerVoice={
@@ -214,6 +216,7 @@
     hasMaster:function(text){return isMasterEntry(entryFor(text))},
     masterEntry:function(text){var e=entryFor(text);return isMasterEntry(e)?e:null},
     whenReady:function(){return loadCompletion},
+    whenAcademyReady:function(){return academyReady},
     isLoaded:function(){return loaded},
     isReady:function(){return loaded&&Object.keys(manifest.entries||{}).length>0},
     count:function(){return Object.keys(manifest.entries||{}).length},
