@@ -88,3 +88,20 @@ body.kids .v9-progress-extra .stat b{color:#b5f8e6}
  .surah-lead{padding:8px 25px 3px}
  .focus-copy{max-height:calc(100% - 65px)}
 }
+
+/* V9 sheet-only extended controls and rich local progress */
+.v9-progress-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-top:12px}
+.v9-progress-options button,.v9-study-button{
+ min-height:43px;padding:8px 10px;border:1px solid rgba(225,207,175,.24);border-radius:11px;
+ background:rgba(225,207,175,.09);color:#f3e3c3;font-size:11px;font-weight:680;
+}
+.v9-progress-options button.active{background:rgba(214,183,129,.27);border-color:#e4c58f}
+.v9-study-button{width:100%;max-width:100%;margin:5px 0 10px}
+.v9-playback-settings{padding-top:8px}
+body.kids .v9-progress-options button,body.kids .v9-study-button{background:rgba(147,200,245,.14);border-color:rgba(176,222,250,.3);color:#dff9fa}
+body.kids .v9-progress-options button.active{background:#b4f2df;color:#214965}
+@media(max-width:719px) and (max-height:680px){
+ .sheet{height:min(89dvh,680px);max-height:89dvh}
+ .v9-progress-options button{font-size:10px;min-height:39px}
+ .v9-progress-extra .stat b{font-size:21px}
+}
