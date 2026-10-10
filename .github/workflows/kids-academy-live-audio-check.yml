@@ -55,11 +55,9 @@ jobs:
           # The diagnostic HTML page is protected for normal browsers.
           # Only a KIDS-native User-Agent can access it; this automated
           # test verifies the intended gate instead of opening the page.
-          # Pull requests check that the actual Academy page is served.
-          # Post-merge and post-deployment checks MUST prove the V16 marker.
-          expected_release=("data-preview-release"
-                            if __import__("os").environ.get("GITHUB_EVENT_NAME")=="pull_request"
-                            else "V16.0-voicepreview-20261010")
+          # V16 is already merged: require it on PRs and after production deploys.
+          # An old V13 page must never produce a false green live-audio result.
+          expected_release="V16.0-voicepreview-20261010"
           resources=[
               ("/kids/akademie/index.html",expected_release,None),
               ("/kids/akademie/pilot-audio-v13.js","kids-serhat-v13-20261010",None),
