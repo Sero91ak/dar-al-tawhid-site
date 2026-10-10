@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-10-10T13:27:29Z",
+  "timestamp": "2026-10-10T13:29:06Z",
   "trigger": "workflow_run",
-  "finishedDeployConclusion": "success",
-  "finishedDeployRun": "38055660254",
+  "finishedDeployConclusion": "failure",
+  "finishedDeployRun": "38055780613",
   "live": {
     "buildId": "kids-shell-v201-dua-v4-1306",
     "label": "KIDS · V1.09.22",
@@ -45,12 +45,21 @@
   "lastDeployRuns": [
     {
       "conclusion": null,
+      "created_at": "2026-10-10T13:28:12Z",
+      "head_sha": "d1df3eeddf7272fb71353239bca4e57778ba15a9",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38055827573",
+      "id": 38055827573,
+      "status": "in_progress",
+      "updated_at": "2026-10-10T13:29:00Z"
+    },
+    {
+      "conclusion": "failure",
       "created_at": "2026-10-10T13:27:26Z",
       "head_sha": "57d89550c2bb65a64c5b9cc229673b14c3843ae7",
       "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38055780613",
       "id": 38055780613,
-      "status": "queued",
-      "updated_at": "2026-10-10T13:27:26Z"
+      "status": "completed",
+      "updated_at": "2026-10-10T13:28:58Z"
     },
     {
       "conclusion": "success",
@@ -87,15 +96,6 @@
       "id": 38053160039,
       "status": "completed",
       "updated_at": "2026-10-10T12:48:29Z"
-    },
-    {
-      "conclusion": "cancelled",
-      "created_at": "2026-10-10T12:45:04Z",
-      "head_sha": "e1b41bb32755864da0165c6c5d19cead4ef1474f",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38053107339",
-      "id": 38053107339,
-      "status": "completed",
-      "updated_at": "2026-10-10T12:45:53Z"
     }
   ]
 }
