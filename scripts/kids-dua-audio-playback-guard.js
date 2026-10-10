@@ -34,6 +34,7 @@ for(const key of [
   'data-dsl="follow"'
 ])assert(js.includes(key),"Missing playback invariant: "+key);
 assert(!js.includes("speechSynthesis"),"Unexpected system TTS in Duʿāʾ player");
+assert(js.includes("if(playCleanSequence([e.url],[seg],"),"Word fallback must use WebAudio cleaning");
 assert(/function stopAudio\(\)\{[\s\S]*?playToken\+\+;\s*latestPhraseRequest\+\+;/.test(js),"Audio stops must invalidate pending asynchronous phrase requests");
 assert(/return loadPacks\(\)\.then\(run\)/.test(js),"No asynchronous manifest load path to protect");
 assert(!js.includes('attachPhraseFollow(currentDua,mode==="slow",token)'),"Wrong timestamps: slowed normal master is not a distinct native slow source");
