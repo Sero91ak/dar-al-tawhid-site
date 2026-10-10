@@ -3346,7 +3346,7 @@ html[data-kids-pointer-input="touch"] body #academySubject.subject-detail .subje
   },true);
 })();
 </script></head>
-<body data-profile="boy" data-preview-release="V8.3-20261010" data-preview-deploy="v8.3-serhat-exact-clip-and-focus"><main class="wrap">
+<body data-profile="boy" data-preview-release="V8.4-20261010" data-preview-deploy="v8.4-touch-focus-master-audio-production"><main class="wrap">
 
 <header class="academy-header kids-detail-appbar" aria-label="Navigationsleiste Lernakademie">
  <button class="academy-nav-back" id="academyNavBack" type="button" aria-label="Zurück"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/><path d="M9 12h11"/></svg></button>
@@ -4105,7 +4105,8 @@ function speak(index,custom){
  }
  pauseVoiceClip();stopSpeech();stopAudio();
  const token=++voiceToken;
- const lines=custom||(index===0?[$("#welcomeSalam").textContent,$("#welcomeFollowup").textContent,$('[data-lesson-step="0"] .stage-body').textContent]:index===1?all("#explainWords [data-spoken]").map(x=>x.textContent):index===2?[$(".teacher-explainer").textContent]:index===4?all(".recap-lesson p").map(x=>x.textContent):[]);
+ const spokenSalam=gender==="girl"?"As-salāmu ʿalaykum, liebe Schwester.":"As-salāmu ʿalaykum, lieber Bruder.";
+ const lines=custom||(index===0?[spokenSalam,$("#welcomeFollowup").textContent,$('[data-lesson-step="0"] .stage-body').textContent]:index===1?all("#explainWords [data-spoken]").map(x=>x.textContent):index===2?[$(".teacher-explainer").textContent]:index===4?all(".recap-lesson p").map(x=>x.textContent):[]);
  const highlights=index===1?(custom?[all("#explainWords [data-spoken]")[focusPages[1]]]:all("#explainWords [data-spoken]")):index===2?[$(".teacher-explainer")]:[];
  let k=0;
  const live=()=>token===voiceToken&&index===step;
