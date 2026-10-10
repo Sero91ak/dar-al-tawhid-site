@@ -121,6 +121,13 @@ jobs:
           print("Du'a manifests and audio assets OK")
           PY
 
+      - name: Provide FFmpeg decoder for real M4A acoustic inspection
+        run: |
+          if ! command -v ffmpeg >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq ffmpeg
+          fi
+          ffmpeg -version | head -n 1
       - name: Diagnose 10 existing V4 Fuṣḥā word clips (non-destructive)
         run: python3 scripts/kids-dua-audio-acoustic-audit.py
       - name: Check all 120 Du'a runtime key matches
