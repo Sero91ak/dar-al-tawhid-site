@@ -1188,12 +1188,15 @@ html.player-stopped.player-reader-dock #qrcChromeSpacer{
 html[data-theme] body.is-quran-overview #appView.view{
   min-height:0!important;height:auto!important;padding-bottom:0!important;
 }
-html[data-theme] body.is-quran-overview .qov-smart-page{
+html[data-theme] body.is-quran-overview .qov-page.qov-smart-page{
   min-height:0!important;height:auto!important;max-width:100%!important;
-  padding-bottom:0!important;overflow-x:clip!important;
+  /* More specific than the late inline qov-page padding-left/right !important rules. */
+  padding-inline:0!important;padding-bottom:0!important;overflow-x:clip!important;
 }
 html[data-theme] body.is-quran-overview .qov-smart-page .qov-main{
-  min-height:0!important;height:auto!important;
+  min-height:0!important;height:auto!important;min-width:0!important;
+  /* Mobile: same safe inset as the bottom tabs. Wide screens: fluid, bounded. */
+  max-width:min(100%,1240px)!important;
   padding-inline:max(12px,env(safe-area-inset-left,0px)) max(12px,env(safe-area-inset-right,0px))!important;
 }
 html[data-theme] body.is-quran-overview .qov-smart-page .qov-header{
@@ -1359,3 +1362,4 @@ html[data-theme] body.is-quran-overview.has-bottom-nav{
     grid-template-columns:repeat(4,minmax(0,1fr))!important;
   }
 }
+
