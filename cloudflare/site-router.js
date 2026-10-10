@@ -1251,6 +1251,10 @@ export default {
         const prematureBootWipe = "/* SOFTBOOT_UNSTICK_V672 */(function(){";
         const pwaSafeBootWipe = "/* SOFTBOOT_UNSTICK_V672 */(function(){if(location.pathname.indexOf(\"/pwa\")===0)return;";
         if (html.includes(prematureBootWipe)) html = html.replace(prematureBootWipe, pwaSafeBootWipe);
+        // The dedicated PWA must never register the website-wide worker from
+        // the shared app HTML. Keep OneSignal at /push/onesignal/ unchanged.
+        html = html.replace("navigator.serviceWorker.register(\"/service-worker.js\",{updateViaCache:\"none\"})", "navigator.serviceWorker.register(\"/pwa/service-worker.js\",{scope:\"/pwa/\",updateViaCache:\"none\"})");
+        html = html.replace("<script src=\"/assets/app-soft-boot.js?v=677\"></script>", "<script src=\"/assets/app-soft-boot.js?v=678\"></script>");
         const pwaHead =
           '<base href="/">' +
           '<script id="darDedicatedPwaBootV2">' +
