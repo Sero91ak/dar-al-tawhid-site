@@ -13,6 +13,7 @@ function check(ok,msg){if(ok)console.log(M+" OK: "+msg);else{failed++;console.er
 
 const rootSw=read("service-worker.js");
 const pwaSw=read("pwa/service-worker.js");
+const installSw=read("public-pwa-install-sw.js");
 const router=read("cloudflare/site-router.js");
 const desktop=read("desktop-preview/index.html");
 const desktopJs=read("desktop-preview/desktop-overhaul.js");
@@ -20,6 +21,12 @@ const manifest=JSON.parse(read("manifest.json"));
 
 check(rootSw.includes("PUBLIC_WEBSITE_NETWORK_ONLY_V1"),"legacy root SW serves website navigation network-only");
 check(!desktop.includes('navigator.serviceWorker.register("/service-worker.js",{scope:"/"})'),"public website never registers root SW");
+check(desktop.includes('rel="manifest" href="/install-manifest.json"'),"public website uses install manifest with root scope");
+check(desktop.includes('navigator.serviceWorker.register("/public-pwa-install-sw.js",{scope:"/"'),"public website registers isolated, network-only install bridge");
+check(installSw.includes('event.respondWith(fetch(event.request))'),"public installer always fetches navigation from network");
+check(installSw.includes('if(url.pathname!=="/"&&url.pathname!=="/desktop-preview/")return;'),"public installer intercepts only public website navigations");
+check(!installSw.includes("caches.open(")&&!installSw.includes("caches.put(")&&!installSw.includes("caches.match("),"public installer cannot cache website/app data");
+check(router.includes('scope: url.pathname === "/install-manifest.json" ? "/" : "/pwa/"'),"root install manifest scope widened only on installation endpoint");
 check(!router.includes('navigator.serviceWorker.register("/service-worker.js",{scope:"/"})'),"router public addon never registers root SW");
 check(router.includes('navigator.serviceWorker.register("/pwa/service-worker.js",{scope:"/pwa/"})'),"Android PWA registers dedicated worker");
 check(manifest.scope==="/pwa/"&&String(manifest.start_url||"").startsWith("/pwa/"),"manifest scope is isolated to /pwa/");
