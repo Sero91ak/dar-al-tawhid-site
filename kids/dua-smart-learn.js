@@ -22,6 +22,7 @@
   var playToken=0;
   // Cancels pending phrase/preview promises when a child switches audio modes.
   var latestPhraseRequest=0;
+  var latestWordRequest=0;
   // Seamless Fuṣḥā player: decode words once, schedule with an accurate audio clock.
   // Conservative silence cropping removes synthetic padding, not Arabic phonemes.
   var cleanContext=null, cleanPlayback=null;
@@ -559,6 +560,7 @@
   function stopAudio(){
     playToken++;
     latestPhraseRequest++;
+    latestWordRequest++;
     cleanStop();
     playing=false;
     mode="";
@@ -689,6 +691,7 @@
   }
   function playWhole(slow){
     if(!currentDua)return false;
+    stopAudio();
     var requestedDua=currentDua,requestId=++latestPhraseRequest;
     var nativeSlow=slow?approvedNativeSlowUrl(requestedDua):"";
     if(nativeSlow){
@@ -720,7 +723,8 @@
     });
   }
   function playWord(i){
-    var segs=getSegments(currentDua);
+    var requestedDua=currentDua,requestId=++latestWordRequest;
+    var segs=getSegments(requestedDua);
     var seg=segs[Number(i)];
     if(!seg)return false;
     selectIndex(i,{scroll:true,play:false});
@@ -731,6 +735,7 @@
       return playUrl(seg.audioUrl,"word","Nur dieses Wort: "+(seg.transliteration||seg.arabic));
     }
     var run=function(p){
+      if(requestId!==latestWordRequest||currentDua!==requestedDua)return false;
       var e=entry(p.word,seg.audioKey||seg.arabic);
       if(!e||!e.url)throw new Error("missing-word");
       var label="Nur dieses Wort: "+(seg.transliteration||seg.arabic);
@@ -745,7 +750,8 @@
       try{return run(packs)}catch(e){setStatus("Die Einzelaufnahme ist nicht verfügbar.","bad");return false}
     }
     return loadPacks().then(run).catch(function(){
-      setStatus("Die Einzelaufnahme konnte nicht geladen werden.","bad");
+      if(requestId===latestWordRequest&&currentDua===requestedDua)
+        setStatus("Die Einzelaufnahme konnte nicht geladen werden.","bad");
       return false;
     });
   }
@@ -937,6 +943,7 @@
   }
   function preview(dua,rate){
     if(!dua)return false;
+    stopAudio();
     var requestId=++latestPhraseRequest;
     var slow=Number(rate||1)<.9;
     currentDua=dua;
