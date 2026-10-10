@@ -1,4 +1,4 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content"><meta name="theme-color" content="#1d2b58"><meta name="robots" content="noindex,nofollow"><title>TAWḤĪD KIDS · Qurʾān Cinema V8</title><link rel="stylesheet" href="/quran-player-cinema-v8.css?v=8-1-cinema"></head><body class="kids"><div class="app"><div class="v8-shell">
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content"><meta name="theme-color" content="#1d2b58"><meta name="robots" content="noindex,nofollow"><title>TAWḤĪD KIDS · Qurʾān Cinema V8</title><link rel="stylesheet" href="/quran-player-cinema-v8.css?v=8-2-canonical"></head><body class="kids"><div class="app"><div class="v8-shell">
 <header class="topline"><a class="back-link" href="/" aria-label="Zur Vorschauübersicht"><svg viewBox="0 0 24 24" aria-hidden="true" width="21" height="21" stroke-width="1.8"><path d="m14.8 18-6-6 6-6"/></svg></a>
 <div class="app-label"><strong>TAWḤĪD KIDS</strong><span>QURʾĀN PLAYER</span></div>
 <div class="head-actions"><button id="topBookmark" type="button" aria-label="Vers merken"><svg viewBox="0 0 24 24" aria-hidden="true" width="21" height="21" stroke-width="1.8"><path d="m12 2.8 3 6.2 6.9 1-5 4.9 1.2 6.9L12 18.5l-6.1 3.3 1.2-6.9-5-4.9 6.9-1L12 2.8Z"/></svg></button><button id="openMenu" type="button" aria-haspopup="dialog" aria-label="Player-Menü öffnen"><svg viewBox="0 0 24 24" aria-hidden="true" width="21" height="21" stroke-width="1.8"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button></div>
@@ -67,12 +67,23 @@ const initial={surah:DEFAULT_SURAH,ayah:1,age:'6–8',reciter:KIDS?'Husary_128kb
 let saved;try{saved=JSON.parse(localStorage.getItem(key)||'null')}catch(e){}
 const state={...initial,...(saved||{}),layers:{...initial.layers,...(saved?.layers||{})}};
 if(!LIST.some(x=>x.id===Number(state.surah)))state.surah=DEFAULT_SURAH;
-const dataCache={...FALLBACK}, pending=new Map(); let doc=dataCache[state.surah]||dataCache[DEFAULT_SURAH],playing=false, gen=0,wordIdx=-1,heardOnce=false,loadedSrc='',audioErrorOnce=false;
+const dataCache={...FALLBACK}, pending=new Map();
+const tadCache=new Map(), tadPending=new Set(); let doc=dataCache[state.surah]||dataCache[DEFAULT_SURAH],playing=false, gen=0,wordIdx=-1,heardOnce=false,loadedSrc='',audioErrorOnce=false;
 function persist(){try{localStorage.setItem(key,JSON.stringify(state))}catch(e){}}
 function status(text){$('audioState').textContent=text;if(KIDS)$('coachStatus').textContent=text;}
 function pretty(s){return String(s).padStart(3,'0')}
 function audioUrl(){const s=pretty(doc.id),v=pretty(state.ayah);return 'https://everyayah.com/data/'+encodeURIComponent(state.reciter)+'/'+s+v+'.mp3'}
 async function getSurah(id){if(dataCache[id])return dataCache[id];if(pending.has(id))return pending.get(id);const request=fetch('/content/quran/'+pretty(id)+'.json',{cache:'force-cache'}).then(r=>{if(!r.ok)throw Error('data unavailable');return r.json()}).then(d=>{if(!Array.isArray(d.verses))throw Error('missing verses');dataCache[id]=d;return d}).finally(()=>pending.delete(id));pending.set(id,request);return request;}
+function requestCanonicalTadabbur(surah){
+ if(tadCache.has(surah)||tadPending.has(surah))return;
+ tadPending.add(surah);
+ fetch('/tadabbur/'+pretty(surah)+'.json',{cache:'force-cache'})
+  .then(r=>{if(!r.ok)throw Error('Source not available');return r.json()})
+  .then(payload=>{if(!payload||payload.surah!==surah||!payload.entries)throw Error('Tadabbur record mismatch');
+   tadCache.set(surah,payload.entries)})
+  .catch(()=>tadCache.set(surah,{}))
+  .finally(()=>{tadPending.delete(surah);if(doc.id===surah&&state.layers.tad)paintVerse()});
+}
 function setLayers(){document.querySelectorAll('[data-layer]').forEach(btn=>btn.classList.toggle('active',!!state.layers[btn.dataset.layer]));const latMode=$('latinMode');if(latMode)latMode.value=state.latinMode;}
 function layer(name){document.querySelectorAll('[data-layer="'+name+'"]').forEach(b=>b.classList.toggle('active',state.layers[name]));paintVerse();persist()}
 function verse(){return doc.verses[state.ayah-1]||doc.verses[0]||{id:1,ar:'',de:'',tr_readable:''}}
@@ -83,7 +94,20 @@ const words=String(v.ar||'').trim().split(/\s+/).filter(Boolean);
 if(KIDS){$('quranText').innerHTML=words.map((w,i)=>'<span tabindex="0" role="button" aria-label="Arabisches Wort '+(i+1)+' auswählen" data-word="'+i+'" class="kword'+(i===wordIdx?' on':'')+'">'+safe(w)+'</span>').join(' ')}else{$('quranText').textContent=v.ar||'';}
 $('translation').hidden=!state.layers.de;$('translation').textContent=v.de||'Keine deutsche Übersetzung in der Quelle';
 $('latin').hidden=!state.layers.lat;$('latin').textContent=v[state.latinMode]||v.tr_readable||v.tr||'Noch keine Lautschrift hinterlegt';
-const explanation=[];if(state.layers.tad)explanation.push('<strong>'+(KIDS?'Erklärung':'Tadabbur')+'</strong><div>Der geprüfte Tadabbur-Katalog wird in einer späteren Entwicklungsstufe angebunden. Hier wird keine ungeprüfte Aussage eingeblendet.</div>');if(state.layers.taf&&!KIDS)explanation.push('<strong>Tafsīr</strong><div>Die geprüften Tafsīr-Quellen werden mit Quellenangabe aus der bestehenden DĀR-App übernommen.</div>');$('commentBox').hidden=!explanation.length;$('commentBox').innerHTML=explanation.join('<hr style="border:0;border-top:1px solid var(--stroke);margin:11px 0">');
+const explanation=[];
+if(state.layers.tad){
+ const canonical=tadCache.get(doc.id);
+ if(!canonical)requestCanonicalTadabbur(doc.id);
+ const rec=canonical?.[state.ayah];
+ if(rec){
+  const sourceLink=rec.sourceUrl?'<a href="'+safe(rec.sourceUrl)+'" target="_blank" rel="noopener noreferrer">Direktnachweis ↗</a>':'';
+  explanation.push('<strong>'+(KIDS?'Zum Vers':'Tadabbur · überlieferte Erklärung')+'</strong><div>'+safe(rec.text)+'</div><div class="canonical-source">'+safe(rec.narrator)+' · '+safe(rec.source)+' '+(rec.grading?' · '+safe(rec.grading):'')+' '+sourceLink+'</div>');
+ }else{
+  explanation.push('<strong>'+(KIDS?'Zum Vers':'Tadabbur')+'</strong><div>'+(canonical?'Für diese Āyah liegt im eingebundenen DĀR-Tadabbur-Katalog kein Datensatz vor.':'Versgenaue Erläuterung wird aus dem DĀR-Tadabbur-Katalog geladen …')+'</div>');
+ }
+}
+if(state.layers.taf&&!KIDS)explanation.push('<strong>Tafsīr</strong><div>Für diese Āyah ist in der Vorschau noch keine geprüfte Tafsīr-Quelle eingebunden. Es wird keine ungeprüfte Erklärung ausgegeben.</div>');
+$('commentBox').hidden=!explanation.length;$('commentBox').innerHTML=explanation.join('<hr style="border:0;border-top:1px solid rgba(230,213,179,.15);margin:11px 0">');
 $('verseFooter').textContent='Qurʾān · '+doc.id+':'+state.ayah+' · '+(KIDS?'Originaltext aus DĀR-Daten':'Arabisch und Übersetzung aus bestehendem DĀR-Datenbestand');$('bookmark').classList.toggle('saved',state.saved.includes(savedId()));$('bookmark').textContent=state.saved.includes(savedId())?'★':'☆';$('prev').disabled=state.ayah<=1;$('next').disabled=state.ayah>=doc.verses.length;paintStats();if(KIDS)paintLearning();}
 function paintLearning(){const step=state.learned.includes(savedId())?3:(heardOnce?2:1);[1,2,3].forEach(n=>$('step'+n).classList.toggle('active',step===n));if(step===3)status('Wunderbar! Du hast diese Āyah geübt. ✨');}
 function paintStats(){$('savedCount').textContent=state.saved.length;$('heardCount').textContent=state.heard.length;if(KIDS){$('learnCount').textContent=state.learned.length}else{$('progressSurah').textContent=state.surah;}}
