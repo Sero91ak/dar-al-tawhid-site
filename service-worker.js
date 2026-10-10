@@ -351,12 +351,11 @@ async function requestComesFromDedicatedPwa(event) {
   }
 }
 
-function dedicatedPwaNavigationRequest(request, url) {
+function dedicatedPwaNavigationTarget(url) {
   const target = new URL('/pwa/', self.location.origin);
   for (const [key, value] of url.searchParams.entries()) target.searchParams.append(key, value);
   target.searchParams.set('pwa', '1');
-  target.hash = url.hash || '';
-  return new Request(target.toString(), request);
+  return target.toString();
 }
 
 function isAppShellRequest(url) {
@@ -482,14 +481,38 @@ function buildPostLaunchUrl(postId, cacheVersion) {
   const slug = String(postId || '').trim();
   const v = cacheVersion || Date.now();
   const origin = self.location.origin;
-  return `${origin}/?post=${encodeURIComponent(slug)}&v=${encodeURIComponent(v)}#post/${encodeURIComponent(slug)}`;
+  return `${origin}/pwa/?pwa=1&post=${encodeURIComponent(slug)}&v=${encodeURIComponent(v)}#post/${encodeURIComponent(slug)}`;
+}
+
+function normalizeDedicatedPwaLaunchUrl(rawUrl, postId) {
+  try {
+    const url = new URL(rawUrl || '/pwa/?pwa=1', self.location.origin);
+    if (url.origin !== self.location.origin) return url.toString();
+    const slug = String(postId || '').trim();
+    const appLikePath = url.pathname === '/'
+      || url.pathname === '/index.html'
+      || url.pathname === '/pwa'
+      || url.pathname === '/pwa/'
+      || url.pathname === '/pwa/index.html'
+      || /^\/post\//i.test(url.pathname);
+    if (!appLikePath) return url.toString();
+    url.pathname = '/pwa/';
+    url.searchParams.set('pwa', '1');
+    if (slug && !url.searchParams.get('post')) url.searchParams.set('post', slug);
+    if (slug && !url.hash) url.hash = `#post/${encodeURIComponent(slug)}`;
+    return url.toString();
+  } catch (e) {
+    return rawUrl || 'https://dar-al-tawhid.de/pwa/?pwa=1';
+  }
 }
 
 async function focusClientToPost(clientList, targetUrl, postId) {
   const targetUrlObj = new URL(targetUrl);
+  const targetIsDedicatedPwa = isDedicatedPwaUrl(targetUrlObj);
   for (const client of clientList) {
     const clientUrl = new URL(client.url);
     if (clientUrl.origin !== targetUrlObj.origin) continue;
+    if (targetIsDedicatedPwa && !isDedicatedPwaUrl(clientUrl)) continue;
     await client.focus();
     client.postMessage({
       type: 'NAVIGATE_POST',
@@ -641,11 +664,12 @@ self.addEventListener('notificationclick', (event) => {
 
   const data = event.notification.data || {};
   const postId = String(data.postId || data.slug || parsePostIdFromUrl(data.url || '')).trim();
-  const targetUrl = data.url
+  const rawTargetUrl = data.url
     || event.notification.data?.launchURL
     || (event.notification.data?.buttons?.[0]?.url)
     || event.notification.data?.additionalData?.launchURL
-    || (postId ? buildPostLaunchUrl(postId, data.cacheVersion || Date.now()) : 'https://dar-al-tawhid.de/');
+    || (postId ? buildPostLaunchUrl(postId, data.cacheVersion || Date.now()) : 'https://dar-al-tawhid.de/pwa/?pwa=1');
+  const targetUrl = normalizeDedicatedPwaLaunchUrl(rawTargetUrl, postId);
 
   event.waitUntil(
     self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(async (clientList) => {
@@ -685,20 +709,18 @@ self.addEventListener('fetch', (event) => {
   }
 
   // Navigation zuerst behandeln. Wenn eine bereits installierte PWA intern auf /
-  // oder /index.html springt (z. B. Push/Deep-Link/Reload), bleibt sie zwingend
-  // auf der dedizierten /pwa/-Shell und kann nicht in die öffentliche Website kippen.
+  // oder /index.html springt (z. B. Push/Deep-Link/Reload), wird die sichtbare URL
+  // selbst nach /pwa/ zurückgeführt. Nur so bleibt die PWA-Identität auch beim
+  // nächsten Reload/Update erhalten und kann nicht wieder zur Website werden.
   if (request.mode === 'navigate') {
     event.respondWith((async () => {
-      let effectiveRequest = request;
-      let effectiveUrl = url;
       const fromPwa = await requestComesFromDedicatedPwa(event);
       if (fromPwa && url.origin === self.location.origin && (url.pathname === '/' || url.pathname === '/index.html')) {
-        effectiveRequest = dedicatedPwaNavigationRequest(request, url);
-        effectiveUrl = new URL(effectiveRequest.url);
+        return Response.redirect(dedicatedPwaNavigationTarget(url), 307);
       }
-      const shellKey = navigationShellKey(effectiveUrl);
+      const shellKey = navigationShellKey(url);
       const fallbackKey = shellKey === '/pwa/?pwa=1' ? shellKey : '/index.html';
-      return fetchNavigationShell(effectiveRequest, shellKey)
+      return fetchNavigationShell(request, shellKey)
         .catch(() => caches.match(shellKey))
         .then((response) => response || caches.match(fallbackKey));
     })());

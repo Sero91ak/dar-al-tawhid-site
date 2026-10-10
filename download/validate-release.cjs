@@ -47,6 +47,8 @@ if (fs.existsSync(publicRouterPath)) {
   assert.ok(router.includes("No async work may happen before prompt()"), "Android install prompt must stay inside the original tap");
   assert.ok(router.includes('X-Dar-Surface", "android-pwa-app"'), "Installed Android PWA must have a dedicated app-shell surface");
   assert.ok(router.includes('target.pathname = "/pwa/"'), "Legacy PWA start must redirect into the dedicated /pwa/ shell");
+  assert.ok(router.includes('target.searchParams.set("pwa", "1")'), "PWA migration must preserve deep-link/query state while setting pwa=1");
+  assert.ok(!router.includes('target.search = "?pwa=1"'), "PWA migration must not discard existing deep-link query parameters");
   assert.ok(router.includes('purpose: "maskable"'), "Android launcher must receive maskable artwork");
   assert.ok(router.includes('display: "standalone"'), "Android PWA manifest must be standalone");
   assert.ok(router.includes('id: "/pwa/"'), "Android PWA manifest must have the dedicated stable app id /pwa/");
@@ -63,7 +65,11 @@ if (fs.existsSync(publicRouterPath)) {
 }
 const pwaServiceWorker = fs.readFileSync(path.join(root, "service-worker.js"), "utf8");
 assert.ok(pwaServiceWorker.includes("requestComesFromDedicatedPwa"), "Installed PWA client isolation is missing");
-assert.ok(pwaServiceWorker.includes("dedicatedPwaNavigationRequest"), "Installed PWA root-navigation rewrite is missing");
+assert.ok(pwaServiceWorker.includes("dedicatedPwaNavigationTarget"), "Installed PWA root-navigation target is missing");
+assert.ok(pwaServiceWorker.includes("Response.redirect(dedicatedPwaNavigationTarget(url), 307)"), "Installed PWA root navigation must redirect the visible URL back to /pwa/");
+assert.ok(pwaServiceWorker.includes("/pwa/?pwa=1&post="), "Push/post launches must open the dedicated PWA shell");
+assert.ok(pwaServiceWorker.includes("normalizeDedicatedPwaLaunchUrl"), "Push launch normalization for the dedicated PWA is missing");
+assert.ok(pwaServiceWorker.includes("targetIsDedicatedPwa && !isDedicatedPwaUrl(clientUrl)"), "Push must not hijack a normal website tab when targeting the installed PWA");
 assert.ok(pwaServiceWorker.includes("const fallbackKey = shellKey === '/pwa/?pwa=1' ? shellKey : '/index.html'"), "Installed PWA must never fall back to the public website shell");
 assert.equal(pwaManifest.display, "standalone", "Public manifest must be installable as standalone PWA");
 assert.equal(pwaManifest.start_url, "/pwa/?pwa=1", "Installed Android PWA must launch the dedicated visitor app shell");

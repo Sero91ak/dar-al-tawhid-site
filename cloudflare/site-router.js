@@ -1259,7 +1259,10 @@ export default {
     if ((request.method === "GET" || request.method === "HEAD") && isRoot && (url.searchParams.get("pwa") === "1" || legacyPwaLaunch) && !nativeApp) {
       const target = new URL(request.url);
       target.pathname = "/pwa/";
-      target.search = "?pwa=1";
+      target.searchParams.set("pwa", "1");
+      target.searchParams.delete("homescreen");
+      target.searchParams.delete("app");
+      target.searchParams.delete("mobile");
       return new Response(null, {
         status: 307,
         headers: {
