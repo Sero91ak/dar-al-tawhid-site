@@ -9,6 +9,50 @@ const root=path.resolve(__dirname,"..");
 const read=p=>fs.readFileSync(path.join(root,p),"utf8");
 const js=read("kids/dua-smart-learn.js");
 new vm.Script(js,{filename:"kids/dua-smart-learn.js"});
+
+/* KIDS_DUA_LOAD_RATE_REGRESSION
+ * Simulate a WebKit/HTMLMediaElement which resets playbackRate at load
+ * and once more at 'playing'. Normal, slow and isolated word must remain
+ * at their requested speeds using EXISTING recordings only.
+ */
+const extracted=js.match(/  function playUrl\(url,whichMode,label,playRate\)\{([\s\S]*?)\n  \}\n  \/\/ Each native/);
+assert(extracted,"Cannot isolate real whole-phrase player");
+const speedHarness=`(function(){
+  var playToken=0,playing=false,mode="",root=null;
+  var observations=[];
+  var audio={
+    playbackRate:1,defaultPlaybackRate:1,preservesPitch:true,
+    pause:function(){},
+    load:function(){this.playbackRate=1;},
+    play:function(){
+      var record={src:this.src,rate:this.playbackRate,defaultRate:this.defaultPlaybackRate,pitch:this.preservesPitch};
+      this.playbackRate=1;
+      if(this.onplaying)this.onplaying();
+      record.afterPlaying=this.playbackRate;
+      observations.push(record);
+      return Promise.resolve();
+    }
+  };
+  function stopAudio(){playToken++;playing=false;mode="";audio.pause();audio.defaultPlaybackRate=1;audio.playbackRate=1;audio.onplaying=null;}
+  function ensureAudioAttached(){}
+  function paintControls(){}
+  function setStatus(){}
+  ${"function playUrl(url,whichMode,label,playRate){"+extracted[1]+"\n}"}
+  playUrl("/existing-master.m4a","full","",1);
+  playUrl("/existing-master.m4a","slow","",.86);
+  playUrl("/existing-word.m4a","word","");
+  return observations;
+})()`;
+const rates=vm.runInNewContext(speedHarness,{Promise},{timeout:4000});
+assert.equal(rates.length,3);
+assert.equal(rates[0].rate,1,"Normal mode must remain original tempo");
+assert.equal(rates[1].rate,.86,"Slow mode must NOT reset to 1x on media load");
+assert.equal(rates[1].defaultRate,.86,"Slow mode must set the native default rate");
+assert.equal(rates[1].afterPlaying,.86,"iOS rate reset during play must be corrected");
+assert.equal(rates[2].rate,1,"Slow rate leaked into word mode");
+assert(rates.every(x=>x.pitch===true),"Time stretch must preserve the Arabic pitch");
+assert.equal(rates[0].src,rates[1].src,"Slow mode must reuse the existing Fuṣḥā master, with zero TTS synthesis");
+
 for(const key of [
   'var CLEAN_GAP=0.19;',
   'var CLEAN_SLOW_RATE=0.86;',
