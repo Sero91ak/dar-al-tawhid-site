@@ -1,0 +1,67 @@
+name: Kids Academy V9 Serhat Voice Staging
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'kids/data/academy-voice-plan-v9.json'
+      - 'kids/tools/build-academy-v9-staging.py'
+      - '.github/workflows/build-kids-academy-v9-staging.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-academy-v9-serhat-staging
+  cancel-in-progress: false
+
+jobs:
+  first-batch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Check lesson voice plan before any synthesis
+        run: |
+          set -euo pipefail
+          python3 kids/tools/build-academy-v9-staging.py --dry-run
+          command -v ffmpeg
+          command -v ffprobe
+          if [ -z "$ELEVENLABS_API_KEY" ]; then
+            echo "::error::ELEVENLABS_API_KEY missing. No audio generated."
+            exit 1
+          fi
+
+      - name: Generate capped first staged Serhat master batch
+        run: |
+          set -euo pipefail
+          python3 kids/tools/build-academy-v9-staging.py --limit 12 --max-chars 4000
+
+      - name: Commit staging-only recordings (not live voice manifest)
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add kids/data/academy-audio-staging-v9.json kids/assets/kids-academy-audio/
+          if git diff --cached --quiet; then
+            echo "No new staged clips; no public audio was changed."
+            exit 0
+          fi
+          git commit -m "Kids: stage Serhat V9 narration clips for listening approval [voice-pause]"
+          for attempt in $(seq 1 6); do
+            git pull --rebase origin main
+            if git push origin HEAD:main; then
+              echo "Staging assets committed. Await listening review and explicit release."
+              exit 0
+            fi
+            sleep $((attempt * 3))
+          done
+          echo "::error::Unable to commit staged audio without concurrency conflict"
+          exit 1
