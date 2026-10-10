@@ -711,7 +711,13 @@
     var run=function(p){
       var e=entry(p.word,seg.audioKey||seg.arabic);
       if(!e||!e.url)throw new Error("missing-word");
-      return playUrl(e.url,"word","Nur dieses Wort: "+(seg.transliteration||seg.arabic));
+      var label="Nur dieses Wort: "+(seg.transliteration||seg.arabic);
+      // Identical gentle edge handling also when a word URL arrives via the
+      // manifest rather than being embedded directly in the Duʿāʾ record.
+      if(playCleanSequence([e.url],[seg],"word",label,function(){
+        playUrl(e.url,"word",label);
+      }))return true;
+      return playUrl(e.url,"word",label);
     };
     if(packs){
       try{return run(packs)}catch(e){setStatus("Die Einzelaufnahme ist nicht verfügbar.","bad");return false}
