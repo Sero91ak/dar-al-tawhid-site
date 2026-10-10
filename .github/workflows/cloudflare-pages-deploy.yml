@@ -83,7 +83,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 2
 
       - id: scope
         name: Änderungstyp bestimmen
@@ -98,6 +98,9 @@ jobs:
             exit 0
           fi
           BASE="${{ github.event.before }}"
+          if [ -n "$BASE" ] && [ "$BASE" != "0000000000000000000000000000000000000000" ]; then
+            git fetch --no-tags --depth=1 origin "$BASE" || true
+          fi
           if [ -z "$BASE" ] || [ "$BASE" = "0000000000000000000000000000000000000000" ]; then
             echo "shortlinks_only=false" >> "$GITHUB_OUTPUT"
             echo "qsource_only=false" >> "$GITHUB_OUTPUT"
@@ -356,7 +359,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 2
 
       - name: Trigger-Commit unverändert deployen
         shell: bash
