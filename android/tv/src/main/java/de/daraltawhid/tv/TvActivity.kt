@@ -200,10 +200,11 @@ class TvActivity : Activity() {
             }
             prayerStatus.text = "Ort: ${city.first}  ·  Zeiten aus der DĀR-Gebetszeitenquelle"
         }
-        // Apple TV home contract: prayer times -> matching Quran verse -> Tadabbur.
-        // Qur'an wording must come from the Quran reader, never from a Tadabbur record.
+        // Apple TV home contract: prayer times -> Qur'an verse -> verified Tadabbur
+        // referring to exactly that verse. The shared Apple-TV index is updated
+        // globally; do not hard-code the first entry (2:183) forever.
         body.addView(label("Qurʾān-Vers", 25f, gold, true))
-        val arabicVerse = label("Qurʾān 2:183  ·  Arabischer Vers wird geladen …", 19f, cream, false).apply {
+        val arabicVerse = label("Arabischer Qurʾān-Vers wird geladen …", 19f, cream, false).apply {
             gravity = Gravity.CENTER
             textDirection = View.TEXT_DIRECTION_RTL
             textAlignment = View.TEXT_ALIGNMENT_CENTER
@@ -211,30 +212,79 @@ class TvActivity : Activity() {
         val germanVerse = label("Deutsche Übersetzung wird geladen …", 17f, cream, false)
         body.addView(arabicVerse)
         body.addView(germanVerse)
-        fetchJson("https://api.alquran.cloud/v1/ayah/2:183/quran-uthmani") { verse ->
-            if (generation == renderGeneration && activeTab == "home") {
-                arabicVerse.text = verse?.optJSONObject("data")?.optString("text")?.takeIf { it.isNotBlank() }
-                    ?: "Arabischer Qurʾān-Vers momentan nicht erreichbar"
-            }
-        }
-        fetchJson("https://api.alquran.cloud/v1/ayah/2:183/de.bubenheim") { verse ->
-            if (generation == renderGeneration && activeTab == "home") {
-                germanVerse.text = verse?.optJSONObject("data")?.optString("text")?.takeIf { it.isNotBlank() }
-                    ?: "Deutsche Qurʾān-Übersetzung momentan nicht erreichbar"
-            }
-        }
-        body.addView(label("Tadabbur zu 2:183", 23f, gold, true))
+        val tadabburTitle = label("Tadabbur", 23f, gold, true)
+        body.addView(tadabburTitle)
         val tadabburHome = label("Geprüfte Aussage wird geladen …", 17f, cream, false)
         body.addView(tadabburHome)
-        fetchJson(base + "quran/tadabbur/entries.json") { batch ->
+
+        fun displayHomeEntry(entry: JSONObject?) {
+            if (generation != renderGeneration || activeTab != "home") return
+            val input = entry?.optString("reference").orEmpty()
+            val parts = input.split(':')
+            val surah = parts.getOrNull(0)?.toIntOrNull()
+            val ayah = parts.getOrNull(1)?.toIntOrNull()
+            val reference = if (parts.size == 2 && surah != null && ayah != null &&
+                surah in 1..114 && ayah in 1..286) "$surah:$ayah" else "2:183"
+            val isExact = entry != null && input == reference
+            tadabburTitle.text = "Tadabbur zu $reference"
+            tadabburHome.text = if (isExact && !entry!!.optString("text").isNullOrBlank()) {
+                entry.optString("text") + "\n" +
+                    entry.optString("narrator") + " · " + entry.optString("source")
+            } else {
+                "Für diesen Vers liegt derzeit keine geprüfte Salaf-Überlieferung vor."
+            }
+            // These two requests load Qur'an wording exclusively from the reader;
+            // a Tadabbur statement is never displayed as Qur'an text.
+            fetchJson("https://api.alquran.cloud/v1/ayah/$reference/quran-uthmani") { verse ->
+                if (generation == renderGeneration && activeTab == "home") {
+                    arabicVerse.text = verse?.optJSONObject("data")?.optString("text")
+                        ?.takeIf { it.isNotBlank() }
+                        ?: "Arabischer Qurʾān-Vers momentan nicht erreichbar"
+                }
+            }
+            fetchJson("https://api.alquran.cloud/v1/ayah/$reference/de.bubenheim") { verse ->
+                if (generation == renderGeneration && activeTab == "home") {
+                    germanVerse.text = verse?.optJSONObject("data")?.optString("text")
+                        ?.takeIf { it.isNotBlank() }
+                        ?: "Deutsche Qurʾān-Übersetzung momentan nicht erreichbar"
+                }
+            }
+        }
+
+        fetchJson(base + "quran/tadabbur/entries-index.json") { index ->
             if (generation != renderGeneration || activeTab != "home") return@fetchJson
-            val entries = batch?.optJSONArray("entries")
-            val match = (0 until (entries?.length() ?: 0))
-                .mapNotNull { entries?.optJSONObject(it) }
-                .firstOrNull { it.optString("reference") == "2:183" }
-            tadabburHome.text = match?.let {
-                it.optString("text") + "\n" + it.optString("narrator") + " · " + it.optString("source")
-            } ?: "Für diesen Vers liegt derzeit keine geprüfte Salaf-Überlieferung vor."
+            val files = index?.optJSONArray("files")
+            val total = (0 until (files?.length() ?: 0)).sumOf {
+                files?.optJSONObject(it)?.optInt("count", 0)?.coerceAtLeast(0) ?: 0
+            }
+            if (total == 0 || files == null) {
+                displayHomeEntry(null)
+                return@fetchJson
+            }
+            // Stable for a UTC day, but refreshed from the published content index.
+            var position = ((System.currentTimeMillis() / 86_400_000L) % total).toInt()
+            var chosenPath: String? = null
+            for (i in 0 until files.length()) {
+                val file = files.optJSONObject(i) ?: continue
+                val count = file.optInt("count", 0).coerceAtLeast(0)
+                if (position < count) {
+                    chosenPath = file.optString("path").takeIf {
+                        it.matches(Regex("""entries(?:-batch-[a-zA-Z0-9-]+)?\\.json"""))
+                    }
+                    break
+                }
+                position -= count
+            }
+            val batchPath = chosenPath
+            if (batchPath == null) {
+                displayHomeEntry(null)
+                return@fetchJson
+            }
+            val entryPosition = position
+            fetchJson(base + "quran/tadabbur/" + batchPath) { batch ->
+                if (generation != renderGeneration || activeTab != "home") return@fetchJson
+                displayHomeEntry(batch?.optJSONArray("entries")?.optJSONObject(entryPosition))
+            }
         }
         body.addView(label("Mehr entdecken", 22f, gold, true))
         body.addView(navButton("Qurʾān & Tadabbur öffnen") { show("tadabbur") })
