@@ -61,9 +61,10 @@
   };
   next();
  }
+ function isDemo(){return document.body?.dataset?.academyChildMode==="demo"}
  function isGirl45(){
   // Never trust preview URL parameters over a real saved child profile.
-  return document.body?.dataset?.profile==="girl"&&document.body?.dataset?.kidsAge==="4-5";
+  return isDemo()&&document.body?.dataset?.profile==="girl"&&document.body?.dataset?.kidsAge==="4-5";
  }
  function matchesExactSidqText(){
   // Do not narrate Ṣidq audio over a different subject or another lesson.
@@ -72,7 +73,7 @@
  }
  document.addEventListener("click",event=>{
   const pilot=event.target.closest?.("[data-academy-pilot]");
-  if(pilot&&adultPilot){
+  if(pilot&&adultPilot&&isDemo()){
    const k=Number(pilot.dataset.academyPilot);
    if(!Number.isInteger(k)||k<0||k>=clips.length)return;
    event.preventDefault();event.stopImmediatePropagation();start([k]);return;
@@ -94,7 +95,13 @@
  window.addEventListener("pagehide",stop);
  function ready(){
   const panel=document.querySelector("#academyPilotControls");
-  if(panel)panel.hidden=!adultPilot;
+  if(panel){
+   const show=isDemo()&&(adultPilot||(explicitGirlPreview&&isGirl45()));
+   panel.hidden=!show;
+   // Make the four genuine pilot clips discoverable in the explicit creator demo.
+   const details=panel.closest?.("details");
+   if(details&&show)details.open=true;
+  }
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",ready,{once:true});
  else ready();
