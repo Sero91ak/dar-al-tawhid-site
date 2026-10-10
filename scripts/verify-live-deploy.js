@@ -119,6 +119,15 @@ async function main() {
       "__DAR_PWA_DEDICATED_APP=true",
       'dataset.appPath="android-pwa"'
     ]);
+    const publicInstallManifestOk = await waitForHtmlIncludes(`${SITE_URL}/install-manifest.json`, [
+      '"scope": "/"',
+      '"start_url": "/pwa/?pwa=1"',
+      '"id": "/pwa/"'
+    ]);
+    const publicInstallWorkerOk = await waitForHtmlIncludes(`${SITE_URL}/public-pwa-install-sw.js`, [
+      "DAR PUBLIC PWA INSTALL BRIDGE V1",
+      "event.respondWith(fetch(event.request))"
+    ]);
     const pwaInstallerOk = await waitForHtmlIncludes(`${SITE_URL}/pwa/install/`, [
       "Web-App installieren",
       "/pwa/service-worker.js",
@@ -146,9 +155,9 @@ async function main() {
       200
     );
 
-    if (!publicWebsiteOk || !publicIsolationSwOk || !visitorOk || !pwaOk || !pwaInstallerOk || !downloadButtonsOk || zakatVer < expectZakat || !voiceStudioOk || !voiceVersionOk || !pronunciationOk) {
+    if (!publicWebsiteOk || !publicIsolationSwOk || !publicInstallManifestOk || !publicInstallWorkerOk || !visitorOk || !pwaOk || !pwaInstallerOk || !downloadButtonsOk || zakatVer < expectZakat || !voiceStudioOk || !voiceVersionOk || !pronunciationOk) {
       console.error(
-        `verify: Besucher-App fehlgeschlagen (public=${publicWebsiteOk ? "ok" : "fail"}, web-sw-isolation=${publicIsolationSwOk ? "ok" : "fail"}, native-build=${visitorOk ? visitorBuild : "fail"}, android-pwa=${pwaOk ? "ok" : "fail"}, pwa-install=${pwaInstallerOk ? "ok" : "fail"}, downloads=${downloadButtonsOk ? "ok" : "fail"}, zakat=v${zakatVer || "?"}, voice=${voiceStudioOk ? "ok" : "fail"}, voice-version=${voiceVersionOk ? "ok" : "fail"}, pronunciation=${pronunciationOk ? "ok" : "fail"})`
+        `verify: Besucher-App fehlgeschlagen (public=${publicWebsiteOk ? "ok" : "fail"}, web-sw-isolation=${publicIsolationSwOk ? "ok" : "fail"}, public-install-manifest=${publicInstallManifestOk ? "ok" : "fail"}, public-install-sw=${publicInstallWorkerOk ? "ok" : "fail"}, native-build=${visitorOk ? visitorBuild : "fail"}, android-pwa=${pwaOk ? "ok" : "fail"}, pwa-install=${pwaInstallerOk ? "ok" : "fail"}, downloads=${downloadButtonsOk ? "ok" : "fail"}, zakat=v${zakatVer || "?"}, voice=${voiceStudioOk ? "ok" : "fail"}, voice-version=${voiceVersionOk ? "ok" : "fail"}, pronunciation=${pronunciationOk ? "ok" : "fail"})`
       );
       failed += 1;
     } else {
