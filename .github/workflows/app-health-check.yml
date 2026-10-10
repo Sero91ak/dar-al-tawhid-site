@@ -25,6 +25,9 @@ jobs:
       - name: Public website isolation guard
         run: node scripts/public-website-isolation-guard.js
 
+      - name: Production lane isolation guard
+        run: node scripts/production-lane-isolation-guard.js
+
       - name: Kids Duʿāʾ Arabic / Latin / German integrity
         run: node scripts/kids-dua-trilingual-guard.js
 
