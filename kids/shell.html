@@ -2846,6 +2846,48 @@ html:not([data-view="today"]) .view.active{
 
 <link rel="stylesheet" href="/kids/profile-stability-v1256.css?v=1258" data-kids-profile-stability="1256">
 <link rel="stylesheet" href="/kids/prayer-stage-v1261.css?v=1304" data-kids-salah-stage="1275">
+<style id="kidsTapFocusSafeV821">
+/* KIDS APP TOUCH FOCUS SAFETY V8.2.1 – no grey Android rectangular tap flash */
+html body :where(a,button,summary,label,[role="button"],[role="tab"],[tabindex],
+ .choice,.quiz-answer,.bottom-nav .nav-btn,.kids-tap-card,.kids-touch-control){
+ -webkit-tap-highlight-color:transparent!important;
+}
+html body :where(a,button,summary,[role="button"],[role="tab"],[tabindex],
+ .choice,.quiz-answer,.bottom-nav .nav-btn,.kids-tap-card,.kids-touch-control):focus:not(:focus-visible){
+ outline:0!important;outline-offset:0!important;
+}
+/* Existing active selection and :focus-visible styles are deliberately preserved. */
+
+/* KIDS MAIN TOUCH FOCUS V8.3 – no rectangular Android focus residue after a tap */
+html,html body :where(a,button,summary,label,[role="button"],[role="tab"],[tabindex],
+  .choice,.quiz-answer,.bottom-nav .nav-btn,.kids-tap-card,.kids-touch-control){
+ -webkit-tap-highlight-color:transparent!important;
+}
+html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button"],[role="tab"],[tabindex],
+ .choice,.quiz-answer,.bottom-nav .nav-btn,.kids-tap-card,.kids-touch-control):focus-visible{
+ outline:0!important;outline-offset:0!important;
+}
+/* Do not override selected/pressed states or keyboard focus when navigating with Tab. */
+
+</style>
+<script data-kids-touch-focus-v83>
+(function(){
+ "use strict";
+ if(window.__kidsTouchModalityV83)return;
+ window.__kidsTouchModalityV83=true;
+ const root=document.documentElement;
+ document.addEventListener("pointerdown",function(ev){
+  if(ev.pointerType==="touch"||ev.pointerType==="pen")root.dataset.kidsPointerInput="touch";
+  else delete root.dataset.kidsPointerInput;
+ },true);
+ document.addEventListener("touchstart",function(){root.dataset.kidsPointerInput="touch";},{capture:true,passive:true});
+ document.addEventListener("keydown",function(ev){
+  if(ev.key==="Tab"||ev.key.startsWith("Arrow")||ev.key==="Enter"||ev.key===" "){
+   delete root.dataset.kidsPointerInput;
+  }
+ },true);
+})();
+</script>
 </head>
 <body>
 <div id="kidsUpdateLayer" class="kids-update-layer">
@@ -2990,8 +3032,8 @@ html:not([data-view="today"]) .view.active{
           
         </button>
       </div>
-      <a href="/kids/akademie/index.html" class="academy-pilot-entry" aria-label="Neue Lernakademie auf dem Smartphone testen">
-        <span class="academy-pilot-text"><small>LERNEN · SMARTPHONE-PILOT V6.7</small><strong>Meine Lernakademie</strong><span>Ṣidq · Wahrhaftigkeit · 5 Unterrichtsschritte</span></span>
+      <a href="/kids/akademie/index.html" class="academy-pilot-entry" aria-label="Meine Lernakademie öffnen">
+        <span class="academy-pilot-text"><small>LERNEN · MEINE AKADEMIE</small><strong>Meine Lernakademie</strong><span>Ṣidq · Wahrhaftigkeit · 5 Unterrichtsschritte</span></span>
         <span class="academy-pilot-arrow" aria-hidden="true">→</span>
       </a>
 
@@ -3296,7 +3338,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306";
+const KIDS_BUILD_ID="kids-shell-v201-dua-v4-1307";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6574,15 +6616,15 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/content-studio-feed.js?v=studio8"></script>
 <script src="/kids/owner-voice.js?v=8"></script>\n<script src="/kids/dua-word-meanings-v1.js?v=2"></script>
 <script src="/kids/dua-phonetic-alignment-v1.js?v=1"></script>
-<script src="/kids/dua-smart-learn.js?v=1306"></script>
+<script src="/kids/dua-smart-learn.js?v=1307"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306";
+  var KIDS_BUILD_ID="kids-shell-v201-dua-v4-1307";
   // Stable start: do not reload a visible app when a service worker takes control.
   // The next navigation uses network-first and receives the latest release.
   if("serviceWorker" in navigator){
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1306",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1307",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     },{once:true});

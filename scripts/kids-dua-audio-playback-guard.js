@@ -78,6 +78,7 @@ for(const key of [
   'data-dsl="follow"'
 ])assert(js.includes(key),"Missing playback invariant: "+key);
 assert(!js.includes("speechSynthesis"),"Unexpected system TTS in Duʿāʾ player");
+assert(js.includes("audio.playbackRate=requestedRate"),"iOS post-load slow-speed correction missing");
 assert(js.includes("if(playCleanSequence([e.url],[seg],"),"Word fallback must use WebAudio cleaning");
 assert(js.includes("var BATCH_SIZE=5;"),"Long Duʿāʾ word sequences must use bounded requests");
 assert(js.includes("var latestWordRequest=0;"),"Word audio promises must be invalidated on mode change");
@@ -152,7 +153,7 @@ for(const [file,count] of [
   assert(entries.every(e=>Boolean(e.url)&&Number(e.durationSeconds)>.1),file+" clip metadata");
 }
 for(const page of ["kids/index.html","kids/start.html","kids/shell.html"])
-  assert(read(page).includes("/kids/dua-smart-learn.js?v=1306"),page+" stale script");
-assert(read("kids/sw.js").includes('"/kids/dua-smart-learn.js?v=1306"'),"SW precache mismatch");
+  assert(read(page).includes("/kids/dua-smart-learn.js?v=1307"),page+" stale script");
+assert(read("kids/sw.js").includes('"/kids/dua-smart-learn.js?v=1307"'),"SW precache mismatch");
 console.log("KIDS DUA AUDIO PASS: full phrase unchanged, slow focus, soft word-boundary QA, 120/120/696 registered, PWA aligned");
 console.log("Not certified: real audible breaths, native Arabic pronunciation and device QA.");
