@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1315";
+const CACHE_NAME="dar-al-tawhid-kids-v1317";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 const KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306";
