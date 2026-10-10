@@ -1,0 +1,20 @@
+/* KIDS_OFFLINE_LIBRARY_STYLE_V1 — parents-only, accessible, compact */
+#view-parents .kids-offline-library{
+ border:1px solid rgba(231,199,130,.30);
+ border-radius:22px;
+ padding:16px 18px;
+ background:linear-gradient(145deg,rgba(11,44,63,.96),rgba(10,35,55,.98));
+ color:#fff5e4;
+}
+#view-parents .kids-offline-library h3{font-size:clamp(19px,4.6vw,23px);line-height:1.2;margin:0 0 7px;color:#ffdf9d;font-weight:750}
+#view-parents .kids-offline-library p{line-height:1.5;margin:6px 0 11px}
+#view-parents .kids-offline-lead{font-size:14px;color:#f1f0e9}
+#view-parents .kids-offline-state{font-size:13px;font-weight:650;line-height:1.5;color:#fff4cf;min-height:22px;margin-top:10px}
+#view-parents .kids-offline-library progress{display:block;width:100%;height:9px;margin:10px 0 13px;accent-color:#e6bf72}
+#view-parents .kids-offline-actions{display:flex;flex-wrap:wrap;gap:8px}
+#view-parents .kids-offline-actions button{border-radius:14px;min-height:44px;padding:10px 15px;cursor:pointer;font-weight:750;line-height:1.2}
+#view-parents #kidsOfflineDownload{color:#152d3d;background:#f0d19a;border:1px solid #dfb972}
+#view-parents #kidsOfflineDownload:disabled{opacity:.6;cursor:progress}
+#view-parents #kidsOfflinePause{color:#fff4d8;border:1px solid rgba(255,224,159,.55);background:rgba(255,255,255,.07)}
+#view-parents .kids-offline-note{color:#d2dae0;font-size:12px;line-height:1.5}
+@media(max-width:360px){#view-parents .kids-offline-library{padding:14px 12px}#view-parents .kids-offline-actions button{width:100%}}
