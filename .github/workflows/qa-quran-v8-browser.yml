@@ -1,4 +1,5 @@
 name: Quran V8 Cinematic Player Browser QA
+# Device verification after final V8.1 deploy, no concurrent staged release.
 # Validates the corrected core-to-pagination script boundary and both player modes.
 on:
   workflow_dispatch:
