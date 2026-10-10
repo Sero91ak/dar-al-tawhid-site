@@ -2866,8 +2866,156 @@ body .subject-detail .subject-roadmap{box-sizing:border-box!important;max-width:
 }
 
 /* V7.5.3 — boys/neutral Aqidah: sand-gold; girl lavender intentionally retained. */
+
+/* V7.5.4 | Akademie-weites Abstandsprotokoll.
+   Eigenständige Karten dürfen niemals miteinander verschmelzen.
+   iPhone und iPad benutzen getrennte Anordnungen; der Hero bleibt unverändert. */
+body{
+ --academy-card-space:clamp(13px,1.8vw,20px);
+ --academy-section-space:clamp(17px,2.4vw,25px);
+}
+body #academyHome.academy-home:not([hidden]){
+ align-items:stretch!important;
+ row-gap:var(--academy-card-space)!important;
+ column-gap:var(--academy-card-space)!important;
+}
+body #academyHome.academy-home > .today-class,
+body #academyHome.academy-home > .journey{
+ position:relative!important;
+ min-width:0!important;
+ box-sizing:border-box!important;
+ border-radius:clamp(19px,2.3vw,24px)!important;
+ margin:0!important;
+ box-shadow:0 8px 19px rgba(6,27,41,.09)!important;
+}
+body #academyHome.academy-home > .today-class{
+ isolation:isolate!important;
+}
+body #academyHome.academy-home > .journey{
+ isolation:isolate!important;
+}
+body #academyHome.academy-home > .subjects{
+ margin:0!important;
+ padding:0 0 var(--academy-section-space)!important;
+ align-self:stretch!important;
+ min-width:0!important;
+}
+body #academyHome.academy-home > .subjects .subjects-title{
+ margin:0 0 clamp(10px,1.6vw,16px)!important;
+}
+body #academyHome.academy-home > .subjects .category-grid{
+ margin:0!important;
+ row-gap:clamp(11px,1.7vw,18px)!important;
+ column-gap:clamp(11px,1.7vw,18px)!important;
+}
+body #academyHome.academy-home > .subjects .category-card{
+ align-self:stretch!important;
+ border-radius:clamp(17px,2.2vw,23px)!important;
+ overflow:hidden!important;
+}
+/* Einheitliche Leseseiten-Abstände in sämtlichen vorhandenen Fachkategorien. */
+body #academySubject.subject-detail:not([hidden]) > .subject-next{
+ margin-block:var(--academy-card-space) 0!important;
+}
+body #academySubject.subject-detail:not([hidden]) > .subject-roadmap{
+ margin-block-start:var(--academy-section-space)!important;
+}
+body #academySubject.subject-detail:not([hidden]) .subject-topic-grid{
+ row-gap:clamp(10px,1.4vw,15px)!important;
+ column-gap:clamp(10px,1.4vw,15px)!important;
+}
+body #academySubject.subject-detail:not([hidden]) .subject-topic{
+ min-width:0!important;box-sizing:border-box!important;
+}
+/* Ein klarer Abstand zwischen Fortschrittsleiste, Lernkarte und Navigation. */
+body #lessonMain.lesson-main:not([hidden]) .stage-tracker{
+ margin-block:0 12px!important;
+}
+body #lessonMain.lesson-main:not([hidden]) .academy-audio-feedback{
+ margin-block:0 12px!important;
+}
+body #lessonMain.lesson-main:not([hidden]) .lesson-navigation{
+ margin-block:14px 0!important;
+}
+body #lessonMain.lesson-main:not([hidden]) .focus-page-navigation{
+ margin-block-start:clamp(12px,1.9vw,18px)!important;
+}
+@media (max-width:767px), (min-width:768px) and (max-height:649px){
+ body #academyHome.academy-home:not([hidden]){
+  display:flex!important;
+  flex-direction:column!important;
+  flex-wrap:nowrap!important;
+  gap:14px!important;
+ }
+ body #academyHome.academy-home > .overview-hero{
+  flex:0 0 auto!important;
+  align-self:stretch!important;
+  margin:0!important;
+ }
+ body #academyHome.academy-home > .today-class,
+ body #academyHome.academy-home > .journey,
+ body #academyHome.academy-home > .subjects{
+  width:100%!important;
+  max-width:100%!important;
+  flex:0 0 auto!important;
+  align-self:stretch!important;
+  margin:0!important;
+ }
+ body #academyHome.academy-home > .today-class,
+ body #academyHome.academy-home > .journey{
+  border-radius:20px!important;
+ }
+ body #academyHome.academy-home > .subjects{
+  padding-top:4px!important;
+ }
+ body #academySubject.subject-detail:not([hidden]) > .subject-next{
+  margin-top:14px!important;
+ }
+ body #academySubject.subject-detail:not([hidden]) > .subject-roadmap{
+  margin-top:19px!important;
+ }
+ body #lessonMain.lesson-main:not([hidden]) .stage-tracker{
+  margin-bottom:11px!important;
+ }
+ body #lessonMain.lesson-main:not([hidden]) .lesson-navigation{
+  margin-top:12px!important;
+ }
+}
+@media (min-width:768px) and (min-height:650px){
+ body #academyHome.academy-home:not([hidden]){
+  display:grid!important;
+  grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr)!important;
+  align-items:stretch!important;
+  row-gap:clamp(16px,2vw,22px)!important;
+  column-gap:clamp(15px,2vw,22px)!important;
+ }
+ body #academyHome.academy-home > .overview-hero{
+  grid-column:1/-1!important;
+  margin:0!important;
+ }
+ body #academyHome.academy-home > .today-class{
+  grid-column:1!important;
+  grid-row:auto!important;
+  align-self:stretch!important;
+ }
+ body #academyHome.academy-home > .journey{
+  grid-column:2!important;
+  grid-row:auto!important;
+  align-self:stretch!important;
+ }
+ body #academyHome.academy-home > .subjects{
+  grid-column:1/-1!important;
+  margin:0!important;
+  padding-top:4px!important;
+ }
+ body #academyHome.academy-home > .today-class,
+ body #academyHome.academy-home > .journey{
+  min-height:0!important;
+ }
+}
+
 </style></head>
-<body data-profile="boy" data-preview-release="V7.5.3-20261010" data-preview-deploy="v7.5.3-boy-colour-correction"><main class="wrap">
+<body data-profile="boy" data-preview-release="V7.5.4-20261010" data-preview-deploy="v7.5.4-global-spacing"><main class="wrap">
 
 <header class="academy-header kids-detail-appbar" aria-label="Navigationsleiste Lernakademie">
  <button class="academy-nav-back" id="academyNavBack" type="button" aria-label="Zurück"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/><path d="M9 12h11"/></svg></button>
