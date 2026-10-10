@@ -1160,7 +1160,7 @@ body[data-profile="girl"]{--kids-heading:#563b65;--kids-surface:#fff7fa;--kids-s
  align-items:center!important
 }
 body[data-profile="girl"] .overview-hero{background:linear-gradient(125deg,#794f99,#b87fbe 58%,#f5b7a0)!important;border-color:rgba(255,223,236,.7)!important}
-.overview-hero #academyHeroImage{opacity:.30!important;filter:saturate(1.15);object-position:center!important}
+.overview-hero #academyHeroImage{opacity:1!important;filter:none;object-position:center!important}
 .overview-hero:after,body[data-profile="girl"] .overview-hero:after{
  background:linear-gradient(90deg,rgba(5,56,66,.87),rgba(5,66,77,.47) 60%,rgba(18,76,81,.06))!important
 }
@@ -1306,7 +1306,7 @@ body[data-profile="girl"] .lesson-stage[data-lesson-step="4"]{background:linear-
  body[data-kids-age="4-5"] .overview-copy .greeting-followup{font-size:clamp(14px,3.7vw,17px)!important}
  .hero-learning-pill{font-size:12px;margin-top:12px}
  .academy-hero-character{height:118px!important;max-width:32%!important;right:12px!important;bottom:10px!important}
- .overview-hero #academyHeroImage{opacity:.24!important}
+ .overview-hero #academyHeroImage{opacity:1!important}
  .category-card{min-height:236px!important;border-radius:20px!important}
  .category-card-copy{padding:10px 12px 13px!important}
  .category-card-copy .category-name{font-size:clamp(21px,5.6vw,26px)!important}
@@ -1524,8 +1524,208 @@ body .overview-hero .hero-profile-chip{z-index:20!important}
   right:clamp(27px,5vw,68px)!important;bottom:8px!important}
 }
 
+
+/* KIDS ACADEMY V7.2 HERO PHOTO FIDELITY – readable words, uncovered image */
+body .academy-home > .overview-hero{
+ isolation:isolate!important;position:relative!important;overflow:hidden!important;
+ background:#193c49!important;border:1px solid rgba(243,218,171,.67)!important;
+ box-shadow:0 15px 30px rgba(5,23,35,.16)!important
+}
+body[data-profile="girl"] .academy-home > .overview-hero{
+ background:#513c55!important;border-color:rgba(241,198,219,.68)!important
+}
+/* The real image is fully opaque. Former global purple/turquoise filter MUST NOT apply. */
+body .academy-home > .overview-hero > #academyHeroImage{
+ position:absolute!important;inset:0!important;left:0!important;top:0!important;
+ display:block!important;width:100%!important;height:100%!important;
+ object-fit:cover!important;object-position:61% center!important;
+ filter:none!important;mix-blend-mode:normal!important;transform:none!important;
+ z-index:0!important;max-width:none!important;max-height:none!important;
+ transition:opacity .18s ease!important
+}
+body .academy-home > .overview-hero > #academyHeroImage.is-ready{
+ opacity:1!important;visibility:visible!important
+}
+body .academy-home > .overview-hero > #academyHeroImage:not(.is-ready){
+ opacity:0!important;visibility:hidden!important
+}
+/* Leave the right image completely untreated. The scrim stops at ~62% width. */
+body .academy-home > .overview-hero::after{
+ content:""!important;display:block!important;position:absolute!important;
+ inset:0 auto 0 0!important;left:0!important;top:0!important;
+ width:62%!important;height:100%!important;z-index:1!important;
+ background:linear-gradient(90deg,rgba(5,21,31,.63) 0%,rgba(5,23,31,.44) 27%,rgba(5,23,31,.20) 55%,rgba(5,23,31,0) 100%)!important;
+ opacity:1!important;filter:none!important;
+ -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+ -webkit-mask-image:none!important;mask-image:none!important;pointer-events:none!important
+}
+body[data-profile="girl"] .academy-home > .overview-hero::after{
+ width:63%!important;
+ background:linear-gradient(90deg,rgba(32,21,39,.61) 0%,rgba(32,21,39,.42) 27%,rgba(32,21,39,.18) 57%,rgba(32,21,39,0) 100%)!important
+}
+body .academy-home > .overview-hero::before{display:none!important}
+/* Text, not the photograph, receives the readability treatment. */
+body .academy-home > .overview-hero .overview-copy,
+body[data-profile="girl"] .academy-home > .overview-hero .overview-copy,
+body[data-profile="boy"] .academy-home > .overview-hero .overview-copy{
+ position:relative!important;z-index:5!important;isolation:isolate;
+ color:#fff9ed!important;text-shadow:none!important;
+ -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+ background:none!important;border:0!important;box-shadow:none!important
+}
+body .academy-home > .overview-hero .overview-copy::before{
+ content:""!important;display:block!important;position:absolute!important;
+ pointer-events:none!important;z-index:-1!important;
+ left:-20px;right:-25px;top:-12px;bottom:-14px;
+ background:radial-gradient(ellipse at 30% 48%,rgba(4,20,27,.22),transparent 72%)!important;
+ -webkit-mask-image:radial-gradient(ellipse at center,#000 30%,transparent 75%);
+ mask-image:radial-gradient(ellipse at center,#000 30%,transparent 75%);
+ filter:none!important;border:0!important;box-shadow:none!important
+}
+body .academy-home > .overview-hero .overview-copy h1,
+body[data-profile="girl"] .academy-home > .overview-hero .overview-copy h1,
+body[data-kids-age="4-5"] .academy-home > .overview-hero .overview-copy h1{
+ font-family:"Fredoka","Arial Rounded MT Bold",ui-rounded,"Avenir Next Rounded",system-ui,sans-serif!important;
+ font-weight:900!important;font-size:clamp(45px,6.4vw,74px)!important;
+ line-height:1.03!important;letter-spacing:-.044em!important;
+ color:#fffaf0!important;margin:13px 0 13px!important;
+ text-shadow:0 3px 1px rgba(4,17,24,.45),0 7px 17px rgba(3,18,27,.52),
+ 0 1px 0 rgba(255,255,255,.55)!important;
+ -webkit-text-stroke:.35px rgba(255,250,234,.46)!important;
+ overflow:visible!important
+}
+body .academy-home > .overview-hero .hero-title-line{
+ position:relative;display:block!important;width:max-content;max-width:100%;
+ white-space:normal!important;overflow:visible!important;
+ color:#fff9f0!important
+}
+body .academy-home > .overview-hero .hero-title-line:last-child{
+ color:#ffe49b!important;
+ text-shadow:0 3px 1px rgba(6,24,30,.44),0 7px 17px rgba(2,16,25,.55)!important
+}
+body[data-profile="girl"] .academy-home > .overview-hero .hero-title-line:last-child{
+ color:#ffe4b3!important
+}
+body .academy-home > .overview-hero .overview-copy .kicker{
+ background:rgba(11,34,41,.36)!important;
+ border:1px solid rgba(255,240,196,.52)!important;
+ border-radius:99px!important;padding:7px 11px!important;
+ font-size:clamp(11px,1.25vw,13px)!important;
+ letter-spacing:.04em!important;line-height:1.28!important;font-weight:850!important;
+ color:#fff6d6!important;text-shadow:0 1px 5px rgba(0,0,0,.34)!important
+}
+body[data-profile="girl"] .academy-home > .overview-hero .overview-copy .kicker{
+ background:rgba(61,35,73,.34)!important;border-color:rgba(255,228,238,.5)!important
+}
+body .academy-home > .overview-hero .greeting-salam{
+ color:#fffaf0!important;font-weight:850!important;
+ text-shadow:0 2px 10px rgba(2,18,28,.82),0 1px 2px rgba(4,12,18,.7)!important
+}
+body .academy-home > .overview-hero .greeting-followup{
+ color:#fff7dc!important;font-weight:720!important;
+ text-shadow:0 2px 9px rgba(2,16,23,.85)!important
+}
+body .academy-home > .overview-hero .hero-learning-pill{
+ background:rgba(8,36,38,.43)!important;border:1px solid rgba(255,241,207,.43)!important;
+ text-shadow:0 1px 4px rgba(0,0,0,.38)!important;font-weight:800!important;
+ box-shadow:0 5px 10px rgba(3,22,29,.11)!important
+}
+body[data-profile="girl"] .academy-home > .overview-hero .hero-learning-pill{
+ background:rgba(65,35,69,.47)!important
+}
+body .academy-home > .overview-hero .hero-profile-chip{
+ z-index:20!important;background:rgba(7,42,48,.72)!important;
+ border-color:rgba(251,235,202,.53)!important;box-shadow:0 6px 15px rgba(3,19,27,.24)!important
+}
+body[data-profile="girl"] .academy-home > .overview-hero .hero-profile-chip{
+ background:rgba(66,38,75,.75)!important;border-color:rgba(255,222,241,.68)!important
+}
+/* Supporting cards should feel lively, but stay secondary to the photo. */
+body .academy-home > .journey{
+ background:linear-gradient(125deg,rgba(36,116,124,.23),rgba(232,197,119,.09))!important;
+ border:1px solid rgba(120,206,200,.30)!important;
+ display:flex!important;flex-direction:column!important;justify-content:center!important;
+ gap:11px!important;padding:clamp(19px,3vw,28px)!important
+}
+body[data-profile="girl"] .academy-home > .journey{
+ background:linear-gradient(125deg,rgba(171,107,174,.20),rgba(238,169,183,.13))!important;
+ border-color:rgba(229,166,223,.32)!important
+}
+body .academy-home > .journey .journey-status{
+ display:flex!important;flex-direction:column!important;align-items:stretch!important;
+ width:100%!important;max-width:100%!important;text-align:left!important;gap:2px
+}
+body .academy-home > .journey .journey-bar{
+ width:100%!important;max-width:none!important;min-height:11px!important;
+ margin:5px 0!important
+}
+body .academy-home > .journey .journey-status small{
+ font-size:clamp(12px,1.5vw,15px)!important;line-height:1.5!important;
+ white-space:normal!important
+}
+body .academy-home > .journey h2{
+ font-family:"Fredoka","Arial Rounded MT Bold",ui-rounded,"Avenir Next Rounded",system-ui,sans-serif!important;
+ font-size:clamp(27px,3.4vw,35px)!important;line-height:1.1!important
+}
+body .academy-home .today-class h2,body .academy-home .subjects-title h2{
+ font-family:"Fredoka","Arial Rounded MT Bold",ui-rounded,"Avenir Next Rounded",system-ui,sans-serif!important;
+ font-weight:850!important;letter-spacing:-.035em!important
+}
+@media(min-width:701px){
+ body .academy-home > .overview-hero > #academyHeroImage{object-position:64% center!important}
+ body .academy-home > .overview-hero .overview-copy{max-width:55%!important;width:55%!important}
+}
+@media(max-width:700px){
+ body .academy-home > .overview-hero{min-height:clamp(290px,80vw,342px)!important;
+  max-height:none!important;padding:16px 15px 20px!important}
+ body .academy-home > .overview-hero > #academyHeroImage{
+  object-position:58% center!important;height:100%!important
+ }
+ body .academy-home > .overview-hero::after{
+  width:91%!important;background:linear-gradient(90deg,
+  rgba(5,22,29,.67) 0%,rgba(6,24,32,.49) 34%,
+  rgba(5,22,31,.26) 65%,transparent 100%)!important
+ }
+ body[data-profile="girl"] .academy-home > .overview-hero::after{
+  width:91%!important;background:linear-gradient(90deg,
+  rgba(33,22,43,.64) 0%,rgba(33,22,43,.47) 35%,
+  rgba(33,22,43,.23) 67%,transparent 100%)!important
+ }
+ body .academy-home > .overview-hero .overview-copy{
+  padding-top:56px!important;width:100%!important;max-width:100%!important
+ }
+ body .academy-home > .overview-hero .overview-copy h1,
+ body[data-profile="girl"] .academy-home > .overview-hero .overview-copy h1,
+ body[data-kids-age="4-5"] .academy-home > .overview-hero .overview-copy h1{
+  font-size:clamp(36px,8.95vw,45px)!important;margin:12px 0 10px!important;
+  line-height:1.06!important;letter-spacing:-.042em!important
+ }
+ body .academy-home > .overview-hero .hero-title-line{display:block!important}
+ body .academy-home > .overview-hero .hero-title-line + .hero-title-line::before{content:none!important}
+ body .academy-home > .overview-hero .overview-greeting{
+  padding:0!important;margin-top:10px!important;max-width:100%!important
+ }
+ body .academy-home > .overview-hero .greeting-salam{
+  font-size:clamp(16px,4.15vw,20px)!important;line-height:1.27!important
+ }
+ body .academy-home > .overview-hero .greeting-followup{
+  font-size:clamp(13px,3.65vw,16px)!important;line-height:1.34!important
+ }
+ body .academy-home > .overview-hero .hero-learning-pill{font-size:11px!important;max-width:100%;margin-top:10px!important}
+ body .academy-home > .journey{min-height:0!important}
+}
+@media(max-width:370px){
+ body .academy-home > .overview-hero{min-height:340px!important}
+ body .academy-home > .overview-hero .overview-copy h1{
+  font-size:clamp(34px,8.5vw,39px)!important
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ body .academy-home > .overview-hero > #academyHeroImage{transition:none!important}
+}
+
 </style></head>
-<body data-profile="boy" data-preview-release="V7.1.1-20261010" data-preview-deploy="v7.1.1-profile-chip-fix"><main class="wrap">
+<body data-profile="boy" data-preview-release="V7.2-20261010" data-preview-deploy="v7.2-visible-image-hero"><main class="wrap">
 
 <header class="academy-header kids-detail-appbar" aria-label="Navigationsleiste Lernakademie">
  <button class="academy-nav-back" id="academyNavBack" type="button" aria-label="Zurück"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/><path d="M9 12h11"/></svg></button>
