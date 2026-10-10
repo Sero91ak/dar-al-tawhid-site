@@ -588,3 +588,26 @@ html[data-view="parents"] body .app #view-parents.view > .page-head.page-head p{
   }
 }
 /* KIDS_PARENTS_HERO_TEXT_SAFE_V1255_END */
+
+
+/* KIDS_PARENTS_MOBILE_FULL_CHARACTER_V1256
+   Originale Jungen-/Mädchenbilder vollständig statt mobilem cover-Zoom zeigen.
+   Ausschließlich Eltern-Bereich, nur schmale Displays; Desktop/Tablet unverändert.
+   Die dunkle Blende schließt nahtlos an die vorhandene 4:3-Bildkante an. */
+@media(max-width:699px){
+  html body .app:not([data-gender="girl"]) #view-parents.view > .page-head.page-head,
+  html body .app[data-gender="girl"] #view-parents.view > .page-head.page-head{
+    background-size:cover,cover,100% auto!important;
+    background-position:center,center,center top!important;
+    background-repeat:no-repeat!important;
+  }
+  html body .app #view-parents.view > .page-head.page-head::before{
+    background:linear-gradient(180deg,
+      transparent 0,
+      transparent calc(100vw * .43),
+      rgba(12,38,54,.74) calc(100vw * .63),
+      #0c2636 calc(100vw * .75),
+      #0c2636 100%)!important;
+  }
+}
+/* KIDS_PARENTS_MOBILE_FULL_CHARACTER_V1256_END */
