@@ -3062,7 +3062,7 @@ body[data-academy-view="lesson"] #lessonMain .stage-tracker .tracker-item:disabl
 }
 
 </style></head>
-<body data-profile="boy" data-preview-release="V7.6.1-20261010" data-preview-deploy="v7.6.1-readable-step-numbers"><main class="wrap">
+<body data-profile="boy" data-preview-release="V8.0-20261010" data-preview-deploy="v8.0-curriculum-12-lessons"><main class="wrap">
 
 <header class="academy-header kids-detail-appbar" aria-label="Navigationsleiste Lernakademie">
  <button class="academy-nav-back" id="academyNavBack" type="button" aria-label="Zurück"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/><path d="M9 12h11"/></svg></button>
@@ -3081,7 +3081,7 @@ body[data-academy-view="lesson"] #lessonMain .stage-tracker .tracker-item:disabl
   <img class="academy-hero-character" id="academyHeroCharacter" src="/kids/assets/profile-avatars/boy-kufi-v1235.svg" alt="" aria-hidden="true" decoding="async"><div class="overview-copy"><div class="kicker" id="overviewKicker">Deine islamische Lernakademie</div><h1><span class="hero-title-line">Wissen</span> <span class="hero-title-line">entdecken</span></h1><p id="overviewGreeting" class="overview-greeting"><span id="overviewSalam" class="greeting-salam">As-salāmu ʿalaykum, lieber Bruder.</span><span id="overviewFollowup" class="greeting-followup">Heute lernen wir etwas Neues!</span></p><div class="hero-learning-pill">✦ Qurʾān &amp; Sunnah · Gemeinsam lernen</div></div>
  </section>
  <section class="today-class" aria-labelledby="todayTitle">
-  <div class="today-text"><span class="kicker" id="todayKicker">Für dich vorbereitet</span><h2 id="todayTitle">Dein Unterricht heute</h2><p><strong>Ṣidq – Wahrhaftigkeit</strong><br><span id="todayTopicIntro">Warum ist es gut, die Wahrheit zu sagen?</span></p><div class="today-summary" id="todaySummary">Deine erste Lektion wartet auf dich.</div><div class="academy-time" id="academyTime">Lernzeit: 8–12 Minuten · Pausen jederzeit</div></div>
+  <div class="today-text"><span class="kicker" id="todayKicker">Für dich vorbereitet</span><h2 id="todayTitle">Dein Unterricht heute</h2><p><strong id="todayTopicName">Ṣidq – Wahrhaftigkeit</strong><br><span id="todayTopicIntro">Warum ist es gut, die Wahrheit zu sagen?</span></p><div class="today-summary" id="todaySummary">Deine erste Lektion wartet auf dich.</div><div class="academy-time" id="academyTime">Lernzeit: 8–12 Minuten · Pausen jederzeit</div></div>
   <button type="button" class="pill primary today-button" data-open-lesson="sidq">Unterricht beginnen <span aria-hidden="true">→</span></button>
  </section>
  <section class="journey" aria-labelledby="journeyTitle">
@@ -3163,6 +3163,7 @@ body[data-academy-view="lesson"] #lessonMain .stage-tracker .tracker-item:disabl
  <div class="lesson-meta">Du lernst in deinem Tempo. Fragen kannst du per Auswahl, Sprache oder Text beantworten. Du kannst jederzeit eine Pause machen.</div>
 </section>
 </main>
+<script src="/kids/akademie/curriculum-v1.js?v=20261010-01"></script>
 <script>
 (()=>{
 "use strict";
@@ -3241,15 +3242,15 @@ const AGE_UI=Object.freeze({
 const humanAge=x=>String(x||"").replace(/-/g,"–");
 const TRACKS={"quran:9:119":{src:"/quran-audio/ar.alafasy/1354.mp3",fallback:"https://everyayah.com/data/Alafasy_128kbps/009119.mp3"}};
 const stages=all('.lesson-stage[data-lesson-step]');
-const questions=()=>exercises[age]||[];
+const questions=()=>activeLesson()?.questions?.[age]||exercises[age]||[];
 const address=()=>{const role=gender==="girl"?"liebe Schwester":"lieber Bruder";const first=profileName.split(/\s+/)[0];return first?role+" "+first:role;};
-const storageKey=()=>["kids",VERSION,id,age,"sidq"].join(".");
+const storageKey=()=>["kids",VERSION,id,age,activeLessonId].join(".");
 const oldRecord=()=>{try{return JSON.parse(localStorage.getItem(storageKey())||"null")}catch(_){return null}};
-const draftKey=()=>["kids",VERSION,id,age,"sidq","draft-v1"].join(".");
+const draftKey=()=>["kids",VERSION,id,age,activeLessonId,"draft-v1"].join(".");
 function readDraft(){
  try{
   const d=JSON.parse(localStorage.getItem(draftKey())||"null");
-  if(!d||d.lessonId!=="sidq"||d.id!==id||d.age!==age)return null;
+  if(!d||d.lessonId!==activeLessonId||d.id!==id||d.age!==age)return null;
   const elapsed=Date.now()-Number(d.savedAt);
   if(!Number.isFinite(elapsed)||elapsed<0||elapsed>7*86400000)return null;
   if(!Number.isInteger(d.step)||d.step<0||d.step>4)return null;
@@ -3263,7 +3264,7 @@ function readDraft(){
 function saveDraft(nextStep=step,nextIndex=qIndex){
  if(!AGE_UI[age])return;
  try{
-  const record={lessonId:"sidq",id,age,savedAt:Date.now(),step:nextStep,unlocked:Math.max(unlocked,nextStep),
+  const record={lessonId:activeLessonId,id,age,savedAt:Date.now(),step:nextStep,unlocked:Math.max(unlocked,nextStep),
    qIndex:nextIndex,score:{done:score.done,correct:score.correct,choices:score.choices,neededHelp:score.neededHelp}};
   localStorage.setItem(draftKey(),JSON.stringify(record));
  }catch(_){}
@@ -3531,11 +3532,62 @@ function prepareOwnerVoice(){
 }
 
 
+
+/* KIDS V8: shared curriculum and lesson-isolated progress */
+const CURRICULUM=window.DARKidsAcademyCurriculum||{};
+const TOPIC_IDS={akhlaq:["sidq","akhlaq-sabr","akhlaq-amanah"],adab:["adab-salam","adab-worte","adab-respekt"],fiqh:["fiqh-taharah","fiqh-wudu","fiqh-salah"],aqidah:["aqidah-tawhid","aqidah-iman","aqidah-ikhlas"]};
+let activeLessonId="sidq";
+const activeLesson=()=>CURRICULUM[activeLessonId]||null;
+const activeSubject=()=>activeLesson()?.subject||"akhlaq";
+const availableTopics=key=>(TOPIC_IDS[key]||[]).filter(x=>x==="sidq"||!!CURRICULUM[x]);
+function applySelectedLesson(){
+ applyAgeTeaching();
+ const lesson=activeLesson(),ui=AGE_UI[age],blocks=all('[data-lesson-step="2"] .lesson-source-block'),qBlock=blocks[0],hadithBlock=blocks[1];
+ const verse=qBlock.querySelector(".arabic-verse"),listen=qBlock.querySelector("[data-arabic-audio]");
+ if(!lesson){
+  $("#lessonWelcomeBody").textContent=ui.welcomeBody;$("#welcomeTitle").textContent="Schön, dass du da bist!";
+  $("#explainTitle").textContent="Wahrhaftigkeit verstehen";$("#evidenceLead").textContent=ui.evidenceLead;
+  qBlock.querySelector(".eyebrow").textContent="Qurʾān · Sūrat at-Tawbah · Vers 119";
+  verse.textContent="يَا أَيُّهَا الَّذِينَ آمَنُوا اتَّقُوا اللَّهَ وَكُونُوا مَعَ الصَّادِقِينَ";
+  qBlock.querySelector(".quote").textContent="„O die ihr glaubt, fürchtet Allah und seid mit den Wahrhaftigen.“";
+  qBlock.querySelector(".source").textContent="Quelle: Qurʾān · Sūrat at-Tawbah · 9:119";
+  hadithBlock.querySelector(".quote").textContent="Wahrhaftigkeit führt zur Rechtschaffenheit, und Rechtschaffenheit führt zum Paradies.";
+  hadithBlock.querySelector(".source").textContent="Quelle: Ṣaḥīḥ Muslim, Nr. 2607a";
+  $(".teacher-explainer").textContent=AGE_EXPLANATIONS[age].evidence;
+  all(".recap-lesson p").forEach((el,i)=>el.textContent=AGE_EXPLANATIONS[age].recap[i]);
+  listen.dataset.arabicAudio="quran:9:119";verse.dataset.audioText="quran:9:119";
+  $("#arabicAudioStatus").textContent="Rezitation des vollständigen Verses";
+  $("#todayTopicName").textContent="Ṣidq – Wahrhaftigkeit";
+  $("#todayTopicIntro").textContent=ui.topicIntro;
+  return;
+ }
+ const q=lesson.quran,k="quran:"+q.surah+":"+q.ayah;
+ TRACKS[k]={src:"https://everyayah.com/data/Alafasy_128kbps/"+String(q.surah).padStart(3,"0")+String(q.ayah).padStart(3,"0")+".mp3"};
+ $("#lessonIntroduction").textContent=lesson.goal;$("#welcomeTitle").textContent="Heute lernen wir: "+lesson.topic;
+ $("#lessonWelcomeBody").textContent=lesson.lead+" "+lesson.goal;
+ $("#explainTitle").textContent=lesson.topic+" verstehen";
+ $('[data-lesson-step="1"] .stage-lead').textContent=lesson.lead;
+ all("#explainWords [data-spoken]").forEach((el,i)=>el.textContent=lesson.lines[i]);
+ $("#evidenceLead").textContent=age==="4-5"?"Wir hören einen Qurʾān-Vers und eine Überlieferung des Propheten ﷺ.":"Wir verstehen die Belege für "+lesson.topic+".";
+ qBlock.querySelector(".eyebrow").textContent="Qurʾān · "+q.label;
+ verse.textContent=q.arabic;verse.dataset.audioText=k;listen.dataset.arabicAudio=k;
+ listen.setAttribute("aria-label","Sūrah "+q.surah+", Vers "+q.ayah+" auf Arabisch anhören");
+ qBlock.querySelector(".quote").textContent="„"+q.meaning+"“";
+ qBlock.querySelector(".source").textContent="Quelle: Qurʾān "+q.surah+":"+q.ayah+(q.excerpt?" · arabischer Textauszug":"");
+ $("#arabicAudioStatus").textContent=q.excerpt?"Textauszug · vollständiger Vers wird rezitiert":"Rezitation des vollständigen Verses";
+ hadithBlock.querySelector(".quote").textContent=lesson.hadith.text;
+ hadithBlock.querySelector(".source").textContent="Quelle: "+lesson.hadith.source;
+ $(".teacher-explainer").textContent="Qurʾān: "+q.meaning+" Sunnah: "+lesson.hadith.text;
+ all(".recap-lesson p").forEach((el,i)=>el.textContent=[lesson.goal,q.meaning+" "+lesson.hadith.text,lesson.sample][i]);
+ $("#practiceTitle").textContent=age==="4-5"?"Was machst du?":age==="9-10"?"Was weißt du darüber?":"Was würdest du tun?";
+ $("#todayTopicName").textContent=lesson.title;$("#todayTopicIntro").textContent=lesson.lead;
+}
+
 const SUBJECTS=Object.freeze({
- akhlaq:{title:"Akhlāq",description:"Guter Charakter macht unser Verhalten schön. Wir beginnen mit der Wahrhaftigkeit.",status:"1 Lektion bereit",lesson:"Ṣidq – Wahrhaftigkeit",note:"Warum ist die Wahrheit wichtig? Lass es uns gemeinsam entdecken.",image:"/desktop-preview/assets/kids-academy-akhlaq-v1.jpg",ready:true,topics:["Wahrhaftigkeit","Geduld","Vertrauen"]},
- adab:{title:"Adab",description:"Gutes Benehmen, freundliche Worte und Respekt im Alltag.",status:"Unterricht in Vorbereitung",lesson:"Adab – gutes Benehmen",note:"Diese Unterrichtsreihe wird vorbereitet. Hier findest du später passende Übungen für deine Altersstufe.",image:"/desktop-preview/assets/kids-academy-adab-v1.jpg",ready:false,topics:["Grüßen","Freundlich sprechen","Respekt"]},
- fiqh:{title:"Fiqh",description:"Wir entdecken die islamischen Regeln für unseren Alltag Schritt für Schritt.",status:"Unterricht in Vorbereitung",lesson:"Reinheit und Gebet",note:"Altersgerechte Fiqh-Unterrichtseinheiten werden vorbereitet und vor der Freigabe fachlich geprüft.",image:"/kids/assets/deen/ibadah.jpg?v=1205",ready:false,topics:["Reinheit","Wuḍūʾ","Gebet"]},
- aqidah:{title:"ʿAqīdah",description:"Wir lernen über Tawḥīd und den Glauben anhand von Qurʾān und Sunnah.",status:"Unterricht in Vorbereitung",lesson:"Tawḥīd und Īmān",note:"Dieser Bereich ist angelegt. Die Inhalte werden vor der Freigabe sorgfältig geprüft.",image:"/kids/assets/deen/tawhid.jpg?v=1205",ready:false,topics:["Tawḥīd","Īmān","Ikhlāṣ"]}
+ akhlaq:{title:"Akhlāq",description:"Wahrhaftigkeit, Geduld und Vertrauen im Alltag.",status:"3 Lektionen bereit",lesson:"Ṣidq – Wahrhaftigkeit",note:"Wähle eine Lektion und lerne in deinem Tempo.",image:"/desktop-preview/assets/kids-academy-akhlaq-v1.jpg",ready:true,topics:["Wahrhaftigkeit","Geduld","Vertrauen"]},
+ adab:{title:"Adab",description:"Gutes Benehmen, freundliche Worte und Respekt im Alltag.",status:"3 Lektionen bereit",lesson:"Salām – Grüßen",note:"Grüßen, gute Worte und Respekt: drei Einheiten zum Mitmachen.",image:"/desktop-preview/assets/kids-academy-adab-v1.jpg",ready:true,topics:["Grüßen","Freundlich sprechen","Respekt"]},
+ fiqh:{title:"Fiqh",description:"Reinheit, Wuḍūʾ und Gebet aus Qurʾān und Sunnah.",status:"3 Lektionen bereit",lesson:"Ṭahārah – Reinheit",note:"Reinheit, Gebetswaschung und Gebet Schritt für Schritt.",image:"/kids/assets/deen/ibadah.jpg?v=1205",ready:true,topics:["Reinheit","Wuḍūʾ","Gebet"]},
+ aqidah:{title:"ʿAqīdah",description:"Tawḥīd, Īmān und Ikhlāṣ aus Qurʾān und Sunnah.",status:"3 Lektionen bereit",lesson:"Tawḥīd – Allah allein",note:"Die Grundlagen des Glaubens kennenlernen.",image:"/kids/assets/deen/tawhid.jpg?v=1205",ready:true,topics:["Tawḥīd","Īmān","Ikhlāṣ"]}
 });
 function openCategory(key){
  const data=SUBJECTS[key];if(!data)return;
@@ -3544,14 +3596,16 @@ function openCategory(key){
  $("#subjectTitle").textContent=data.title;$("#subjectDescription").textContent=data.description;
  $("#subjectStatus").textContent=data.status;$("#subjectLessonTitle").textContent=data.lesson;
  $("#subjectLessonNote").textContent=data.note;$("#subjectImage").src=data.image;
- $("#subjectStart").hidden=!data.ready;
+ $("#subjectStart").hidden=!availableTopics(key).length;
  const grid=$("#subjectTopicGrid");grid.replaceChildren();
  data.topics.forEach((name,i)=>{
-  const card=document.createElement("div");
-  card.className="subject-topic"+(data.ready&&i===0?" is-ready":"");
+  const lessonId=TOPIC_IDS[key][i],enabled=availableTopics(key).includes(lessonId);
+  const card=document.createElement("button");card.type="button";
+  card.className="subject-topic"+(enabled?" is-ready":"");card.disabled=!enabled;
+  card.dataset.lessonId=lessonId;card.setAttribute("aria-label",name+" – "+(enabled?"Unterricht öffnen":"In Vorbereitung"));
   const label=document.createElement("strong");label.textContent=name;
-  const state=document.createElement("span");state.textContent=data.ready&&i===0?"Jetzt lernen":"In Vorbereitung";
-  card.append(label,state);grid.appendChild(card);
+  const state=document.createElement("span");state.textContent=enabled?"Jetzt lernen":"In Vorbereitung";
+  card.append(label,state);if(enabled)card.onclick=()=>begin(lessonId);grid.appendChild(card);
  });
  updateAcademyAppbar();window.scrollTo(0,0);
 }
@@ -3559,8 +3613,8 @@ function hideCategory(){$("#academySubject").hidden=true}
 function updateAcademyAppbar(){
  const lessonOpen=!$("#lessonMain").hidden,categoryOpen=!$("#academySubject").hidden;
  const category=categoryOpen?SUBJECTS[$("#academySubject").dataset.subject]:null;
- $("#academyNavTitle").textContent=lessonOpen?"Ṣidq · Wahrhaftigkeit":category?.title||"Lernakademie";
- $("#academyNavSubtitle").textContent=lessonOpen?"Akhlāq · Dein Unterricht":categoryOpen?"Meine Unterrichtsfächer":"DĀR AL TAWḤĪD · KIDS";
+ $("#academyNavTitle").textContent=lessonOpen?(activeLesson()?.title||"Ṣidq · Wahrhaftigkeit"):category?.title||"Lernakademie";
+ $("#academyNavSubtitle").textContent=lessonOpen?SUBJECTS[activeSubject()].title+" · Dein Unterricht":categoryOpen?"Meine Unterrichtsfächer":"DĀR AL TAWḤĪD · KIDS";
  $("#academyNavBack").setAttribute("aria-label",lessonOpen||categoryOpen?"Zur Lernakademie":"Zur Kids-App");
 }
 function academyNavBack(){
@@ -3568,8 +3622,14 @@ function academyNavBack(){
  location.assign("/kids/");
 }
 function home(){stopAll();hideCategory();hideLesson();renderHome();updateAcademyAppbar();window.scrollTo(0,0)}
-function begin(){
- syncProfile();if(!AGE_UI[age]){renderHome();return}prepareOwnerVoice();hideCategory();$("#academyHome").hidden=true;$("#lessonMain").hidden=false;
+function begin(requested){
+ syncProfile();if(!AGE_UI[age]){renderHome();return}
+ const subject=$("#academySubject").hidden?null:$("#academySubject").dataset.subject;
+ const chosen=typeof requested==="string"?requested:subject?availableTopics(subject)[0]:"sidq";
+ if(!chosen||chosen!=="sidq"&&!CURRICULUM[chosen])return;
+ activeLessonId=chosen;focusPages[1]=0;focusPages[2]=0;focusPages[4]=0;
+ prepareOwnerVoice();hideCategory();$("#academyHome").hidden=true;$("#lessonMain").hidden=false;
+ applySelectedLesson();
  const draft=readDraft();
  if(draft){
   step=draft.step;unlocked=draft.unlocked;qIndex=draft.qIndex;finished=step===4;score=draft.score;
@@ -3611,7 +3671,7 @@ function focusUpdate(stageNumber,target,{silent=false}={}){
   $("#backAfterLesson").classList.toggle("is-focus-selected",i===3);
  }
  if(stageNumber===1){
-  const title=$("#explainTitle");if(title)title.textContent="Wahrhaftigkeit verstehen";
+  const title=$("#explainTitle");if(title)title.textContent=activeLesson()?activeLesson().topic+" verstehen":"Wahrhaftigkeit verstehen";
  }
  if(!silent){
  stopSpeech();stopAudio();
@@ -3703,7 +3763,7 @@ function playRecitation(key){
  a.src=data.src;$("#arabicAudioStatus").textContent="Rezitation wird geladen …";
  const btn=$('[data-arabic-audio="'+key+'"]');btn.setAttribute("aria-pressed","true");btn.querySelector("span").textContent="Stopp";
  $('[data-audio-text="'+key+'"]').classList.add("is-audio-playing");
- Promise.resolve(a.play()).then(()=>{if(audio===a)$("#arabicAudioStatus").textContent="Du hörst Sūrat at-Tawbah, Vers 119."}).catch(fail);
+ Promise.resolve(a.play()).then(()=>{if(audio===a)$("#arabicAudioStatus").textContent="Du hörst Sūrah "+key.split(":")[1]+", Vers "+key.split(":")[2]+"."}).catch(fail);
 }
 function speak(index,custom){
  if(step===3&&(recorder?.state==="recording"||($("#mic").disabled&&answerMode==="voice"&&!voiceReady))){
@@ -3839,7 +3899,7 @@ function persist(level){
  const formerIndex=Number.isInteger(prev?.intervalIndex)?prev.intervalIndex:-1;
  const n=(level==="help"||wrongChoices)?0:Math.min(Math.max(-1,formerIndex)+1,intervals.length-1);
  const due=new Date();due.setHours(12,0,0,0);due.setDate(due.getDate()+intervals[n]);
- const item={id,age,lessonId:"sidq",completedAt:Date.now(),nextDue:due.getTime(),intervalIndex:n,reviewCount:(Number(prev?.reviewCount)||0)+1,answerCount:score.done,choiceCorrect:score.correct,choiceAnswered:score.choices,neededHelp:score.neededHelp,selfReport:level};
+ const item={id,age,lessonId:activeLessonId,completedAt:Date.now(),nextDue:due.getTime(),intervalIndex:n,reviewCount:(Number(prev?.reviewCount)||0)+1,answerCount:score.done,choiceCorrect:score.correct,choiceAnswered:score.choices,neededHelp:score.neededHelp,selfReport:level};
  try{localStorage.setItem(storageKey(),JSON.stringify(item));clearDraft();$("#nextDue").textContent="Nächste Erinnerung: "+due.toLocaleDateString("de-DE")+". Du kannst jederzeit vorher üben."}catch(_){$("#nextDue").textContent="Lokal speichern ist nicht verfügbar. Du kannst trotzdem wiederholen."}
  all("[data-reflect]").forEach(b=>{b.classList.toggle("active",b.dataset.reflect===level);b.setAttribute("aria-pressed",String(b.dataset.reflect===level))});renderHome();
 }
@@ -3875,9 +3935,9 @@ childPlayback.onerror=()=>{
 };
 $("#masterVoiceTest").onclick=playMasterProbe;
 $("#previewRefresh").onclick=()=>{const url=new URL(location.href);url.searchParams.set("cb","v7.1-"+Date.now());location.replace(url.toString())};
-all("[data-open-lesson]").forEach(b=>b.onclick=begin);
+all("[data-open-lesson]").forEach(b=>b.onclick=()=>begin(b.dataset.openLesson||"sidq"));
 all("[data-open-category]").forEach(b=>b.onclick=()=>openCategory(b.dataset.openCategory));
-$("#subjectBack").onclick=home;$("#subjectStart").onclick=begin;
+$("#subjectBack").onclick=home;$("#subjectStart").onclick=()=>begin(availableTopics($("#academySubject").dataset.subject)[0]);
  $("#academyNavBack").onclick=academyNavBack;
  $("#academyNavHome").onclick=()=>location.assign("/kids/");
 $("#backToAcademy").onclick=home;$("#backAfterLesson").onclick=home;
