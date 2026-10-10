@@ -67,6 +67,22 @@ if(navigator.connection?.saveData)salahWorld.classList.add("kids-salah-save-data
    if(appScroll&&appScroll.scrollTop>0)appScroll.scrollTop=0;
  }
  let queued=false,lastHeight=0,lastWidth=0;
+ /* KIDS_HOME_GEOMETRY_LATCH_V1320
+    Freeze the *approved first-paint layout* on navigation away from Today.
+    Returning from another tab, restoring a PWA or opening the status bar must
+    NEVER re-fit the hero against a temporarily moving bottom dock.
+    Re-measure only on a genuine layout-width change (rotation/split-screen). */
+ let lockedViewport=null;
+ function viewportDimensions(){
+   return {
+     w:window.innerWidth||document.documentElement.clientWidth,
+     h:window.visualViewport?.height||window.innerHeight||document.documentElement.clientHeight
+   };
+ }
+ function lockGeometry(){
+   if(lockedViewport||!lastHeight)return;
+   lockedViewport=viewportDimensions();
+ }
  // KIDS_HOME_TIGHT_LATCH_V1306: remember the viewport where compact mode started.
  // A 930px-high iPhone is not a rotation; ResizeObserver must not undo the
  // compact mode merely because the compact text makes its own space available.
@@ -88,8 +104,20 @@ if(navigator.connection?.saveData)salahWorld.classList.add("kids-salah-save-data
    const mainY=Math.max(0,Number(mainShell?.scrollTop)||0,
      Number(document.scrollingElement?.scrollTop)||0,Number(window.scrollY)||0);
    if(mainY>2)return;
-   const w=window.innerWidth||document.documentElement.clientWidth;
-   const h=window.visualViewport?.height||window.innerHeight||document.documentElement.clientHeight;
+   const {w,h}=viewportDimensions();
+   if(lockedViewport){
+     // Mobile browser chrome and iOS status-bar changes alter visualViewport.height,
+     // but do not change the layout width. Never interpret those as a new device.
+     if(Math.abs(w-lockedViewport.w)<44)return;
+     // Genuine rotation or large split-view width change: allow a new one-time fit.
+     lockedViewport=null;
+     tightViewport=null;
+     lastHeight=0;lastWidth=0;
+     salahWorld.classList.remove("kids-home-fit-tight");
+     HERO.style.removeProperty("--kids-home-measured-min");
+     HERO.style.removeProperty("--kids-home-measured-target");
+     HERO.style.removeProperty("--kids-home-preflight-cap");
+   }
    const heroRect=HERO.getBoundingClientRect(),ctaRect=cta.getBoundingClientRect();
    const navRect=dock.getBoundingClientRect();
    if(!heroRect.height||!ctaRect.height||!navRect.height)return;
@@ -181,15 +209,32 @@ if(navigator.connection?.saveData)salahWorld.classList.add("kids-salah-save-data
  window.addEventListener("orientationchange",schedule,{passive:true});
  window.addEventListener("pageshow",schedule,{passive:true});
  window.visualViewport?.addEventListener("resize",schedule,{passive:true});
- document.addEventListener("visibilitychange",()=>{if(!document.hidden)schedule()});
+ document.addEventListener("visibilitychange",()=>{
+   if(document.hidden)lockGeometry();
+   else schedule();
+ });
+ // All five main tabs share the same scroll container. A return to Today
+ // must reuse the original geometry instead of measuring a newly revealed
+ // page while WebKit is restoring its scroll anchor.
+ const homeVisibilityObserver=new MutationObserver(()=>{
+   if(!HOME.classList.contains("active"))lockGeometry();
+ });
+ homeVisibilityObserver.observe(HOME,{attributes:true,attributeFilter:["class"]});
  document.addEventListener("click",e=>{
-   if(e.target?.closest?.('.nav-btn[data-target="today"]'))setTimeout(schedule,80);
+   const tab=e.target?.closest?.(".bottom-nav .nav-btn[data-target]");
+   if(tab&&tab.dataset.target!=="today"&&HOME.classList.contains("active"))lockGeometry();
  },true);
  if(document.fonts?.ready)document.fonts.ready.then(schedule).catch(()=>{});
  // Run the first fit before the page is painted; preserve post-font updates.
  fit();
  schedule();
  setTimeout(schedule,450);
+ // Allow fonts and the first two layout passes to settle once. Thereafter
+ // do not let clocks, ResizeObserver or browser-toolbar changes move the hero.
+ setTimeout(()=>{
+   schedule();
+   setTimeout(lockGeometry,160);
+ },700);
 })();
 
 /* The old illustrated MP4 is deliberately suspended on the new photoreal scene.
