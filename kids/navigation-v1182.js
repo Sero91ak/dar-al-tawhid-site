@@ -100,9 +100,55 @@
       "}",
       "@media(min-width:700px){",
       "  #view-today .hero{min-height:var(--kids-home-hero-height-fixed,525px)!important;height:var(--kids-home-hero-height-fixed,525px)!important;max-height:var(--kids-home-hero-height-fixed,525px)!important;}",
-      "}"
+      "}",
+      "/* HOME_SCROLL_DRIFT_LOCK_V1247 — home must not creep under the status bar. */",
+      "html,body,.shell,#view-today,#view-today .hero{overflow-anchor:none!important;}",
+      "#view-today .kids-wordmark{top:max(64px,calc(env(safe-area-inset-top,0px) + 18px))!important;}"
     ].join("\n");
-    (document.head||root).appendChild(style);
+    (document.body||document.head||root).appendChild(style);
+  }
+
+  function installHomeDriftGuard(){
+    shell=shell||q(".shell");
+    if(!shell||shell.dataset.kidsHomeDriftGuard==="1")return;
+    shell.dataset.kidsHomeDriftGuard="1";
+    var gesture=false;
+    var settle=0;
+    var allowed=Math.max(0,Number(shell.scrollTop)||0);
+    function arm(){
+      gesture=true;
+      clearTimeout(settle);
+      allowed=Math.max(0,Number(shell.scrollTop)||0);
+    }
+    function release(){
+      clearTimeout(settle);
+      settle=setTimeout(function(){
+        gesture=false;
+        allowed=Math.max(0,Number(shell.scrollTop)||0);
+      },1200);
+    }
+    ["touchstart","touchmove","pointerdown","wheel"].forEach(function(type){
+      shell.addEventListener(type,arm,{passive:true});
+    });
+    ["touchend","touchcancel","pointerup","pointercancel"].forEach(function(type){
+      shell.addEventListener(type,release,{passive:true});
+    });
+    shell.addEventListener("scroll",function(){
+      var y=Math.max(0,Number(shell.scrollTop)||0);
+      if(activeTab()!=="today"||surfaceIds().length){
+        allowed=y;
+        return;
+      }
+      if(gesture){
+        allowed=y;
+        return;
+      }
+      if(y>allowed+1){
+        try{shell.scrollTo({top:allowed,left:0,behavior:"auto"})}catch(_){shell.scrollTop=allowed}
+        return;
+      }
+      allowed=y;
+    },{passive:true});
   }
 
   function activeTab(){
@@ -621,6 +667,7 @@
     if(shell){
       try{shell.scrollTo({top:0,left:0,behavior:"auto"})}catch(_){shell.scrollTop=0}
     }
+    installHomeDriftGuard();
     stack=[{desc:{type:"tab",target:activeTab()},signature:signature(),scrolls:captureScrolls()}];
     index=0;
     document.addEventListener("click",onClickCapture,true);
