@@ -500,8 +500,7 @@ const KIDS_OFFLINE_SEEDS=[
   "/kids/data/deen-lessons.json",
   "/kids/data/term-learning-audio.json",
   "/kids/data/verified-content.json",
-  "/kids/data/short-stories-voice.json",
-  "/kids/data/academy-lessons.json"
+  "/kids/data/short-stories-voice.json"
 ];
 let kidsOfflineRunning=false,kidsOfflineCancel=false,kidsOfflineNext=null;
 const KIDS_OFFLINE_META="/kids/data/offline-pack-status-v1.json";
