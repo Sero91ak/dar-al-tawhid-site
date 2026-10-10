@@ -32,6 +32,7 @@ const delay=ms=>new Promise(r=>setTimeout(r,ms));
        panelBottom:Math.round(box('.main-panel').bottom),
        textChars:document.querySelector('#quranText').textContent.trim().length,
        quranColor:style('.quran-text').color,
+       translationColor:style('.translation').color,
        bgColor:style('.verse-focus').backgroundColor,
        heroHeight:Math.round(box('.scene').height),
        actionsHeight:document.querySelector('.kid-actions')?.getBoundingClientRect().height||0
@@ -39,6 +40,10 @@ const delay=ms=>new Promise(r=>setTimeout(r,ms));
     });
     if(!v.loadedCss||!v.backgroundHero||!v.heroLoaded)throw new Error('Missing CSS/hero image: '+JSON.stringify(v));
     if(v.verseHeight<55)throw new Error('Verse viewport too small '+JSON.stringify(v));
+    if(file.startsWith('dar-') && (v.quranColor!=='rgb(21, 58, 69)' || v.translationColor!=='rgb(52, 73, 80)'))
+      throw new Error('Adult cream paper text contrast incorrect '+JSON.stringify(v));
+    if(file.startsWith('tawhid-') && v.quranColor!=='rgb(23, 74, 117)')
+      throw new Error('KIDS light reader contrast incorrect '+JSON.stringify(v));
     if(width<720&&v.bodyScroll>3)throw new Error('Phone document overflow '+JSON.stringify(v));
     if(width<720&&v.panelBottom>v.dockTop+15)throw new Error('Player overlaps audio dock '+JSON.stringify(v));
     if(errors.length)throw new Error('JS pageerror '+errors.join('; '));
