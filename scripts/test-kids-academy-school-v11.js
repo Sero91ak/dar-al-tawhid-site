@@ -67,7 +67,7 @@ assert.equal(graduate.upcoming,null);
 assert.equal(graduate.access(ids[33]),"review");
 const html=read("kids/akademie/index.html");
 assert.ok(html.includes('school-progress-v11.js?v=20261010-11'));
-assert.ok(html.includes('data-preview-release="V12.0-voicepilot-20261010"')||html.includes('data-preview-release="V11.0-20261010"'),"Supported sequential school release marker");
+assert.ok(html.includes('data-preview-release="V13.0-voicefix-20261010"')||html.includes('data-preview-release="V12.0-voicepilot-20261010"')||html.includes('data-preview-release="V11.0-20261010"'),"Supported sequential school release marker");
 assert.ok(html.includes('academySchoolState().access(chosen)'));
 assert.ok(html.includes('card.disabled=locked'));
 assert.ok(html.includes('firstCompletedAt:Number(prev?.firstCompletedAt||prev?.completedAt||Date.now())'));
