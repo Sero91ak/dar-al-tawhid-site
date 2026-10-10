@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive"><meta name="theme-color" content="#081e2a">
+<title>Erstellerprüfung · KIDS Akademie · DĀR AL TAWḤĪD</title>
+<style>
+:root{color-scheme:dark;--bg:#081e2a;--panel:#0e3040;--border:#426070;--ink:#faf1db;--muted:#c4d4d6;--gold:#e7cb88;--positive:#9fdfcf}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Avenir Next",sans-serif}
+body{background:radial-gradient(ellipse at top,#184454,transparent 65%),var(--bg)}
+main{max-width:1100px;margin:auto;padding:calc(20px + env(safe-area-inset-top)) max(15px,env(safe-area-inset-right)) calc(40px + env(safe-area-inset-bottom)) max(15px,env(safe-area-inset-left))}
+h1,h2,h3{font-family:Georgia,serif;line-height:1.2}h1{font-size:clamp(28px,6vw,46px);margin:8px 0 10px;color:var(--gold)}
+h2{font-size:clamp(22px,4vw,30px);margin:7px 0 16px}h3{font-size:20px}
+p{line-height:1.6}small,.hint{color:var(--muted)}a{color:var(--gold)}.tag{letter-spacing:.12em;font-size:11px;font-weight:900;color:var(--gold)}
+.top{border-bottom:1px solid var(--border);padding-bottom:20px}.top p{max-width:80ch}.note{padding:13px 17px;border-left:3px solid var(--gold);background:#122f3c;border-radius:8px}
+.toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:20px 0}.toolbar label{display:grid;gap:4px;color:var(--gold);font-size:12px;font-weight:700}
+select,input,button,textarea{font:inherit}select,input,textarea{background:#092332;color:var(--ink);border:1px solid var(--border);border-radius:10px;padding:11px;min-height:44px}
+button{background:#153e4d;color:var(--ink);border:1px solid var(--border);padding:10px 13px;border-radius:12px;min-height:44px;cursor:pointer}
+button:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+button.active{background:#e5c789;color:#132431;border-color:var(--gold);font-weight:850}
+.split{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:18px;align-items:start}
+.panel{background:rgba(8,32,46,.85);border:1px solid var(--border);border-radius:18px;padding:16px}
+.subjects{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px}.subjects button{font-size:13px}
+#topics{max-height:70vh;overflow:auto;padding-right:4px;display:grid;gap:8px}
+#topics button{width:100%;text-align:left;display:grid;gap:4px}#topics .small{font-size:12px;color:var(--muted)}
+.steps{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 20px}
+.steps button{flex:1 1 86px;font-size:13px}.spoken{padding:13px 0;border-top:1px solid var(--border)}
+.quoted{font-size:18px;line-height:1.5}.arabic{text-align:center;direction:rtl;line-height:1.9;font-size:clamp(24px,5vw,36px);color:#f8eac5}
+.source{color:var(--gold);font-size:12px}audio{display:block;width:100%;max-width:460px;margin:12px 0}
+.voice{margin:10px 0;padding:10px 13px;border:1px solid #45687a;border-radius:12px;background:#103343}
+.voice button{background:#dfc285;color:#132532;font-weight:800}.voice .state{display:inline-block;margin-left:9px;color:var(--muted);font-size:12px}
+.missing{color:#eedbaa;font-size:12px;margin:8px 0;line-height:1.5}
+.choices{display:grid;gap:9px}.choices button{text-align:left}.answer{padding:9px 0;color:var(--positive)}
+.controls{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+footer{border-top:1px solid var(--border);margin-top:30px;padding-top:16px;color:var(--muted);font-size:12px}
+@media(max-width:700px){.split{grid-template-columns:minmax(0,1fr)}#topics{max-height:235px}.panel{padding:13px}.toolbar{gap:10px}}
+</style>
+</head>
+<body><main>
+<div class="top"><div class="tag">DĀR AL TAWḤĪD KIDS · V17 · NUR ERSTELLERPRÜFUNG</div>
+<h1>Meine Lernakademie – Prüfstand</h1>
+<p>Hier kannst du <strong>alle vorhandenen Themen und Unterrichtsschritte</strong> unabhängig von den täglichen Kinder-Freischaltungen durchgehen. Diese Seite ist eine inhaltsbasierte Ersteller-Vorschau, keine zweite Besucher-Akademie.</p>
+<p class="note">Keine Änderungen an echten Kinderprofilen, Fortschritten oder Unterrichtssperren. Für die Original-Masterstimme sind bisher nur <strong>vier Aufnahmen</strong> für Ṣidq (Mädchen, 4–5 Jahre) nachgewiesen. Fehlende Aufnahmen werden klar bezeichnet – keine Ersatzstimme.</p>
+</div>
+<div class="toolbar">
+<label>Testprofil<select id="profile"><option value="girl">Mädchen</option><option value="boy">Junge</option></select></label>
+<label>Altersgruppe<select id="age"><option value="4-5">4–5 Jahre</option><option value="6-8">6–8 Jahre</option><option value="9-10">9–10 Jahre</option></select></label>
+<span class="hint" id="total">Lehrplan wird geladen …</span>
+</div>
+<div class="split">
+<aside class="panel" aria-label="Alle Unterrichtsthemen">
+<div class="subjects" id="subjects"></div><div id="topics"></div>
+</aside>
+<section class="panel" aria-live="polite">
+<div class="tag" id="subjectTitle">AKADEMIE</div><h2 id="lessonTitle">Thema wählen</h2>
+<p id="lessonIntro" class="hint">Hier erscheinen alle vorhandenen Unterrichtsschritte.</p>
+<div id="steps" class="steps" aria-label="Unterrichtsschritte"></div><div id="stage"></div>
+<div class="controls"><button type="button" id="previous">← Zurück</button><button type="button" class="active" id="next">Weiter →</button></div>
+<p class="hint" id="voiceStatus" role="status" aria-live="polite"></p>
+</section>
+</div>
+<footer>Prüfstand ohne Anmeldung an Kinderkonten und ohne Lernfortschritts-Speicherung. Für die eigentliche Besucher-App gelten weiterhin V11-Schulmodus und Altersfreigaben.</footer>
+</main>
+<script src="/kids/akademie/curriculum-v1.js?v=20261010-01"></script>
+<script src="/kids/akademie/curriculum-v2.js?v=20261010-09"></script>
+<script>
+(function(){
+"use strict";
+const $=s=>document.querySelector(s),cat={akhlaq:"Akhlāq",adab:"Adab",fiqh:"Fiqh",aqidah:"ʿAqīdah"};
+const data=window.DARKidsAcademyCurriculum||{};
+const extra={id:"sidq",subject:"akhlaq",topic:"Wahrhaftigkeit",title:"Ṣidq – Wahrhaftigkeit",
+ lead:"Die Wahrheit sagen – auch wenn es manchmal Mut kostet.",
+ goal:"Ich lerne ehrlich zu sprechen und einen Fehler zuzugeben.",
+ lines:["Manchmal geht etwas aus Versehen kaputt.","Du darfst ehrlich sagen: Das war ich.","Danach kannst du um Entschuldigung bitten und beim Aufräumen helfen.","Ehrlich sein ist gut. Das üben wir gemeinsam."],
+ quran:{surah:9,ayah:119,meaning:"O die ihr glaubt, fürchtet Allah und seid mit den Wahrhaftigen.",arabic:"يَا أَيُّهَا الَّذِينَ آمَنُوا اتَّقُوا اللَّهَ وَكُونُوا مَعَ الصَّادِقِينَ"},
+ hadith:{source:"Ṣaḥīḥ Muslim, Nr. 2607a",text:"Wahrhaftigkeit führt zur Rechtschaffenheit, und Rechtschaffenheit führt zum Paradies."},
+ sample:"Wenn mir ein Fehler passiert, sage ich die Wahrheit.",
+ questions:{"4-5":[{type:"choice",prompt:"Was sagst du, wenn dir etwas kaputtgeht?",options:["Das war ich. Es tut mir leid.","Ich verstecke es."],correct:0}],
+ "6-8":[{type:"choice",prompt:"Warum ist Wahrheit wichtig?",options:["Sie stärkt Vertrauen.","Sie ist unwichtig."],correct:0}],
+ "9-10":[{type:"text",prompt:"Was bedeutet Ṣidq?",sample:"Wahrhaftigkeit beim Sprechen und Handeln."}]}};
+const ids=Object.keys(data);ids.unshift("sidq");const lesson=id=>id==="sidq"?extra:data[id];
+let subject="akhlaq",id="sidq",step=0,player=null;
+const clips=[
+ {name:"Salām",text:"As-salāmu ʿalaykum, liebe Schwester.",src:"/kids/assets/kids-academy-audio/00ff589726b166dff6a9.m4a"},
+ {name:"Willkommen",text:"Schön, dass du da bist!",src:"/kids/assets/kids-academy-audio/f142bc78e8bcea3d8518.m4a"},
+ {name:"Unterrichtseinleitung",text:"Heute geht es darum, die Wahrheit zu sagen. Wir hören zu und überlegen zusammen. Du darfst eine Pause machen.",src:"/kids/assets/kids-academy-audio/08d1f46461d954d5e471.m4a"},
+ {name:"Erster Erklärungssatz",text:"Manchmal geht etwas aus Versehen kaputt.",src:"/kids/assets/kids-academy-audio/1a6097339111c8ac475c.m4a"}];
+const profile=$("#profile"),age=$("#age"),stage=$("#stage");
+function el(tag,content,cl){const n=document.createElement(tag);if(content!==undefined)n.textContent=content;if(cl)n.className=cl;return n}
+function add(tag,content,cl,to=stage){const n=el(tag,content,cl);to.appendChild(n);return n}
+function stop(){if(player){player.onended=player.onerror=player.onplaying=null;try{player.pause();player.removeAttribute("src");player.load()}catch(_){}player=null}}
+function audioClip(k){
+ const clip=clips[k],box=add("div",undefined,"voice");add("strong",clip.name+": "+clip.text,"",box);
+ const row=add("div",undefined,"",box),button=add("button","▶ Masterstimme anhören","",row),status=add("span","Bereit · Original V4","state",row);
+ button.type="button";button.onclick=()=>{
+  stop();const p=new Audio();player=p;p.volume=1;p.muted=false;p.playsInline=true;p.src=clip.src+"?v=creator-v17";p.playbackRate=1;
+  p.onplaying=()=>status.textContent="Wiedergabe läuft";p.onended=()=>{if(player===p){player=null;status.textContent="Abgespielt"}};
+  p.onerror=()=>{if(player===p){status.textContent="Datei nicht erreichbar";stop()}};
+  try{const result=p.play();if(result&&result.catch)result.catch(()=>{if(player===p){status.textContent="Audio blockiert oder nicht verfügbar";stop()}})}
+  catch(_){status.textContent="Wiedergabe nicht möglich";stop()}
+ };
+}
+function missing(what){add("p","Noch keine geprüfte Serhat-V4-Aufnahme für "+what+".","missing")}
+function ownerSidq(){return id==="sidq"&&profile.value==="girl"&&age.value==="4-5"}
+function selected(){return lesson(id)}
+function renderTopics(){
+ const s=$("#subjects"),t=$("#topics");s.replaceChildren();t.replaceChildren();
+ Object.keys(cat).forEach(key=>{const b=add("button",cat[key],"",s);b.type="button";b.classList.toggle("active",subject===key);b.onclick=()=>{subject=key;id=ids.find(x=>lesson(x)?.subject===key)||"sidq";step=0;render()}});
+ ids.filter(x=>lesson(x)?.subject===subject).forEach(x=>{const l=lesson(x),b=add("button",undefined,"",t);b.type="button";add("strong",l.title||l.topic||x,"",b);add("span","Alle Schritte für die Erstellerprüfung offen","small",b);b.classList.toggle("active",x===id);b.onclick=()=>{id=x;step=0;render()}});
+}
+function quranNumber(q){return String(q.surah).padStart(3,"0")+String(q.ayah).padStart(3,"0")}
+function quiz(l){
+ const questions=l.questions?.[age.value]||[];if(!questions.length){add("p","Für diese Altersgruppe ist noch keine Frage vorbereitet.","missing");return}
+ questions.forEach((q,n)=>{
+  const block=add("div",undefined,"spoken");add("h3","Frage "+(n+1), "",block);add("p",q.prompt||"","",block);
+  if(Array.isArray(q.options)&&q.options.length){
+   const choices=add("div",undefined,"choices",block),feedback=add("p","","answer",block);
+   q.options.forEach((opt,i)=>{const b=add("button",opt,"",choices);b.type="button";b.onclick=()=>{
+    [...choices.children].forEach(x=>x.classList.remove("active"));b.classList.add("active");
+    feedback.textContent=i===Number(q.correct)?"Richtig gewählt.":("Noch einmal überlegen. "+(q.hint||""));
+   }});
+  }else{const inp=add("textarea",undefined,"",block);inp.setAttribute("aria-label","Probeantwort");inp.rows=3;inp.placeholder="Antwort nur für diese Testansicht – wird nicht gespeichert";
+  const hint=add("p","Mögliche Antwort: "+(q.sample||l.sample||"Eigene Worte verwenden."),"hint",block);hint.hidden=true;
+  const b=add("button","Beispielantwort ansehen","",block);b.type="button";b.onclick=()=>{hint.hidden=!hint.hidden}};
+  missing("diese Frage und ihre Antwortmöglichkeiten");
+ });
+}
+function renderStage(){
+ stop();stage.replaceChildren();const l=selected(),sd=ownerSidq();
+ const names=["Hallo","Zuhören","Qurʾān & Sunnah","Mitdenken","Merken"];
+ const buttons=$("#steps");buttons.replaceChildren();names.forEach((name,i)=>{const b=add("button",(i+1)+". "+name,"",buttons);b.type="button";b.classList.toggle("active",i===step);b.onclick=()=>{step=i;renderStage()}});
+ if(step===0){
+  add("h3","As-salāmu ʿalaykum!");
+  add("p","Willkommen bei "+l.title+".", "quoted");
+  add("p",l.lead||"");
+  if(sd){audioClip(0);audioClip(1);audioClip(2)}else missing("Begrüßung und Unterrichtseinleitung in dieser Profil- und Alterskombination");
+ }else if(step===1){
+  add("h3","Heute lernen wir");
+  add("p",l.lead||l.goal||"", "quoted");
+  const lines=Array.isArray(l.lines)?l.lines:[];lines.forEach((line,i)=>{add("p",line,"spoken");if(sd&&i===0&&line===clips[3].text)audioClip(3);else missing("diesen Erklärungssatz")});
+ }else if(step===2){
+  add("h3","Qurʾān und Sunnah");
+  if(l.quran){add("p",l.quran.arabic||"","arabic");add("p",l.quran.meaning||"","quoted");add("p","Qurʾān "+l.quran.surah+":"+l.quran.ayah,"source");
+   const au=add("audio");au.controls=true;au.preload="none";au.src="https://everyayah.com/data/Alafasy_128kbps/"+quranNumber(l.quran)+".mp3";
+   add("p","Rezitation ist eine externe Qurʾān-Audioquelle, nicht die Serhat-Masterstimme.","hint");
+  }
+  if(l.hadith){add("p",l.hadith.text||"","quoted");add("p",l.hadith.source||"","source")}
+  missing("die deutschen Quellenerklärungen");
+ }else if(step===3){add("h3","Fragen überprüfen");quiz(l)}
+ else{add("h3","Das merke ich mir");add("p",l.goal||l.lead||"","quoted");if(l.sample)add("p",l.sample);missing("die Zusammenfassung")}
+ $("#previous").disabled=step===0;$("#next").disabled=step===4;
+ $("#voiceStatus").textContent=sd?"Vier unabhängige Originalclips stehen bei Hallo und Zuhören bereit. Der übrige Unterricht benötigt weitere Aufnahmen.":"Für diese Kombination sind noch keine originalgetreu zugeordneten V4-Klassenaufnahmen freigegeben.";
+}
+function render(){
+ renderTopics();const l=selected();
+ $("#subjectTitle").textContent=(cat[l.subject]||"Unterricht").toUpperCase()+" · NUR ERSTELLER";
+ $("#lessonTitle").textContent=l.title||l.topic||id;
+ $("#lessonIntro").textContent="Alle fünf Schritte sind in dieser Prüfversion offen. Es werden keine Kinder-Lernstände geändert.";
+ $("#total").textContent=ids.length+" vorhandene Lektionen · 4 Original-Masterclips · übrige Audiozuordnung offen";
+ renderStage();
+}
+const params=new URLSearchParams(location.search);
+if(params.get("profil")==="junge")profile.value="boy";
+if(["4-5","6-8","9-10"].includes(params.get("alter")))age.value=params.get("alter");
+profile.onchange=()=>{step=0;renderStage()};age.onchange=()=>{step=0;renderStage()};
+$("#previous").onclick=()=>{if(step>0){step--;renderStage()}};
+$("#next").onclick=()=>{if(step<4){step++;renderStage()}};
+render();
+})();
+</script></body></html>
