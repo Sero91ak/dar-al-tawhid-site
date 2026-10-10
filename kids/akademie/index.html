@@ -3337,6 +3337,12 @@ html[data-kids-pointer-input="touch"] body #academySubject.subject-detail .subje
 .subject-roadmap .subject-topic-grid{gap:8px!important}
 .subject-roadmap .subject-topic{min-height:66px!important}
 
+
+/* Academy V11 – titles visible while future lesson content is locked. */
+.subject-topic.is-locked,.subject-topic.is-locked:disabled{opacity:1!important;cursor:not-allowed!important;background:rgba(243,247,247,.9)!important;color:#435b62!important;border:1px solid rgba(72,94,99,.19)!important;box-shadow:none!important;transform:none!important}
+.subject-topic .topic-lock-meta{font-size:12px;line-height:1.4;color:#536970}
+.subject-topic.is-current-class{border:2px solid #2b7367!important;background:#e9f7ef!important}
+.academy-school-hint{font-size:13px;line-height:1.5;color:#34555e;margin:7px 0}
 </style><script data-kids-touch-focus-v83>
 (function(){
   "use strict";
@@ -3357,7 +3363,7 @@ html[data-kids-pointer-input="touch"] body #academySubject.subject-detail .subje
   },true);
 })();
 </script></head>
-<body data-profile="boy" data-preview-release="V9.1-20261010" data-preview-deploy="v9-daily-lessons-and-free-reviews"><main class="wrap">
+<body data-profile="boy" data-preview-release="V11.0-20261010" data-preview-deploy="v11-progressive-school-lessons"><main class="wrap">
 
 <header class="academy-header kids-detail-appbar" aria-label="Navigationsleiste Lernakademie">
  <button class="academy-nav-back" id="academyNavBack" type="button" aria-label="Zurück"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/><path d="M9 12h11"/></svg></button>
@@ -3406,12 +3412,12 @@ html[data-kids-pointer-input="touch"] body #academySubject.subject-detail .subje
   <img id="subjectImage" src="/desktop-preview/assets/kids-academy-akhlaq-v1.jpg" alt="" decoding="async">
  </div>
  <div class="subject-next">
-  <span class="subject-small">DEIN LERNBEREICH</span>
+  <span class="subject-small">DEIN LERNBEREICH · SCHRITT FÜR SCHRITT</span>
   <h2 id="subjectLessonTitle">Ṣidq – Wahrhaftigkeit</h2>
   <p id="subjectLessonNote">Lerne, weshalb die Wahrheit wichtig ist.</p>
   <button id="subjectStart" class="subject-start" type="button">Jetzt Unterricht beginnen →</button>
  </div>
- <div class="subject-roadmap"><h2>Neue Themen</h2><p class="subject-review-note subject-empty" id="subjectEmpty" hidden>Alle Themen dieses Fachs sind gelernt. Du kannst sie unten jederzeit wiederholen.</p><div id="subjectTopicGrid" class="subject-topic-grid"></div></div>
+ <div class="subject-roadmap"><h2>Dein Lehrplan · Freischaltungen</h2><p class="academy-school-hint" id="subjectSchoolHint">Eine neue Lektion gleichzeitig. Weitere Themen bleiben gesperrt.</p><p class="subject-review-note subject-empty" id="subjectEmpty" hidden>Alle Themen dieses Fachs sind gelernt. Du kannst sie unten jederzeit wiederholen.</p><div id="subjectTopicGrid" class="subject-topic-grid"></div></div>
 <div class="subject-roadmap subject-review" id="subjectReviewSection" hidden><h2>Schon gelernt · Wiederholen</h2><p class="subject-review-note">Hier darfst du jede Lektion beliebig oft und an jedem Tag erneut lernen.</p><div id="subjectReviewGrid" class="subject-topic-grid"></div></div>
 </section>
 <section class="lesson-main" id="lessonMain" hidden>
@@ -3461,6 +3467,7 @@ html[data-kids-pointer-input="touch"] body #academySubject.subject-detail .subje
 </main>
 <script src="/kids/akademie/curriculum-v1.js?v=20261010-01"></script>
 <script src="/kids/akademie/curriculum-v2.js?v=20261010-09"></script>
+<script src="/kids/akademie/school-progress-v11.js?v=20261010-11"></script>
 <script>
 (()=>{
 "use strict";
@@ -4071,6 +4078,13 @@ function begin(requested){
  const subject=$("#academySubject").hidden?null:$("#academySubject").dataset.subject;
  const chosen=typeof requested==="string"?requested:subject?availableTopics(subject)[0]:dailyLesson()?.id||"sidq";
  if(!chosen||chosen!=="sidq"&&!CURRICULUM[chosen])return;
+ const access=academySchoolState().access(chosen);
+ if(!["new","resume","review"].includes(access)){
+  hideLesson();$("#academyHome").hidden=false;
+  renderHome();
+  $("#todaySummary").textContent="Diese Lektion ist noch gesperrt. Schließe erst deinen Unterricht ab. Das nächste Thema öffnet sich am vorgesehenen Lerntag.";
+  updateAcademyAppbar();return;
+ }
  activeLessonId=chosen;sessionStamp=String(Date.now())+"-"+chosen;focusPages[1]=0;focusPages[2]=0;focusPages[4]=0;
  prepareOwnerVoice();hideCategory();$("#academyHome").hidden=true;$("#lessonMain").hidden=false;
  applySelectedLesson();refreshSerhatLessonClip();
@@ -4365,7 +4379,7 @@ function persist(level,automatic=false){
  const wrongChoices=score.choices>score.correct||score.neededHelp>0;
  const n=(automatic||level==="help"||wrongChoices)?0:Math.min(Math.max(-1,baseIndex)+1,intervals.length-1);
  const due=new Date();due.setHours(12,0,0,0);due.setDate(due.getDate()+intervals[n]);
- const item={id,age,lessonId:activeLessonId,completedAt:Date.now(),nextDue:due.getTime(),intervalIndex:n,baseIntervalIndex:baseIndex,sessionStamp,
+ const item={id,age,lessonId:activeLessonId,completedAt:Date.now(),firstCompletedAt:Number(prev?.firstCompletedAt||prev?.completedAt||Date.now()),nextDue:due.getTime(),intervalIndex:n,baseIntervalIndex:baseIndex,sessionStamp,
   reviewCount:(Number(prev?.reviewCount)||0)+(sameAttempt?0:1),answerCount:score.done,choiceCorrect:score.correct,choiceAnswered:score.choices,neededHelp:score.neededHelp,selfReport:automatic?"pending":level};
  try{
   localStorage.setItem(storageKey(),JSON.stringify(item));clearDraft();
@@ -4439,11 +4453,30 @@ $("#nextQuestion").onclick=()=>{qIndex++;showQuestion();saveDraft()};$("#finishL
 $("#mic").onclick=beginVoiceRecording;$("#cancelMic").onclick=finishRecording;$("#voiceRetake").onclick=beginVoiceRecording;
 $("#answer").oninput=()=>{if($("#answer").value.trim())choice=null};
 all("[data-reflect]").forEach(b=>b.onclick=()=>persist(b.dataset.reflect));
-window.addEventListener("storage",e=>{if(["kids.activeProfile","kids.profiles.v1","kids.guest.gender.v1","kids.age"].includes(e.key))syncProfile(true)});
+window.addEventListener("storage",e=>{
+ if(["kids.activeProfile","kids.profiles.v1","kids.guest.gender.v1","kids.age"].includes(e.key))syncProfile(true);
+ else if(e.key&&e.key.startsWith("kids."+VERSION+".")){
+  renderHome();
+  if(!$("#academySubject").hidden)openCategory($("#academySubject").dataset.subject);
+ }
+});
 window.addEventListener("pageshow",()=>syncProfile(true));
-document.addEventListener("visibilitychange",()=>{if(document.hidden)stopAll();else syncProfile()});
+document.addEventListener("visibilitychange",()=>{
+ if(document.hidden)stopAll();
+ else{syncProfile();renderHome();if(!$("#academySubject").hidden)openCategory($("#academySubject").dataset.subject);}
+});
 window.addEventListener("pagehide",stopAll);
 initFocusControls();syncProfile(true);hideLesson();updateAcademyAppbar();
+let __schoolLastDate=academyDay().day;
+setInterval(()=>{
+ if(document.hidden)return;
+ const current=academyDay().day;
+ if(__schoolLastDate!==current){
+  __schoolLastDate=current;
+  renderHome();
+  if(!$("#academySubject").hidden)openCategory($("#academySubject").dataset.subject);
+ }
+},60000);
  /* Direct preview links are only navigation helpers; profile selection still
     respects saved real child profiles over demonstration parameters. */
  const previewRoute=new URLSearchParams(location.search);
