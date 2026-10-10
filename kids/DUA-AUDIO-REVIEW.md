@@ -52,3 +52,11 @@ Der ältere Entwurf PR #908 ist wegen der inzwischen erfolgten parallelen App-Ä
 
 **GitHub-Sicherungsstand:** Nach dem konservativen Port vom alten, nicht gemergten PR #908 auf den Draft-PR #915 bestanden die Duʿāʾ-Audio-Spezialprüfung, App Health Check, Canonical State Guard und App Lane Guard auf Commit `5f327bda9ad1530cdd6b4cfd528990c7a6bbe56f`. Separate Voice-Studio-Alif-Bā-Validierung und menschliche Hör-/Gerätefreigabe bleiben eigenständige Voraussetzungen. Kein Merge nach `main` und keine Live-Veröffentlichung.
 
+
+## Vollständige V4-Wortdatei-Analyse – 10.10.2026
+
+`python3 scripts/kids-dua-audio-acoustic-audit.py --all` hat tatsächlich **696/696** gespeicherte Fuṣḥā-Einzelwort-M4A-Dateien dekodiert (GitHub Actions, FFmpeg). Ohne ElevenLabs-Generierung oder Änderung der Originaldateien. Ergebnis vor Metadatenkorrektur: **663/696** mit >0,5 Sekunden relativ ruhigem Auslauf, **5** auffällig lange kurze Wörter und **2** weitere fehlerhafte Dauerangaben: `مِنَ` (2,48 → 1,365 s) und `رَّبِّ` (2,64 → 1,536 s). Beide Manifestwerte wurden gezielt auf die realen Dekodierlängen berichtigt; `لَا` (2,80 → 1,536 s) war bereits korrigiert. Die gesamte 696er-Prüfung schlägt nun fehl, falls sich ein gespeicherter Dauerwert um mehr als 0,30 s von der echten M4A-Datei unterscheidet.
+
+**Wichtig für die Aussprache:** 663 stille/ruhige Ausläufe bedeuten **nicht** 663 nachgewiesene Atemfehler. Der konservative Player kürzt nur Ränder und darf schwache arabische Konsonanten nicht abschneiden. Nachbearbeitete und besonders lange Wörter benötigen menschliches Abhören; die technischen Prüfungen sind keine Fuṣḥā-/Tadschwīd-Freigabe.
+
+**V4-Player-Reparatur:** Bei langen Duʿāʾs mit bis zu 37 Lernwörtern werden künftig maximal fünf M4A-Clips gleichzeitig vorgeladen, statt alle auf einmal. Alte Ladeversuche für Duʿāʾ-Gesamtclip, Langsamclip, Vorschau und einzelne Wörter werden bei Modus-/Inhaltswechsel verworfen. Bereits angesagte Wörter werden bei einem Decode-Fehler nicht automatisch vollständig von vorne wiederholt.
