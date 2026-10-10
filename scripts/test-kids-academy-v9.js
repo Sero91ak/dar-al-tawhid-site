@@ -83,7 +83,7 @@ for(const [index,html] of htmls.entries()){
  // The same script parsing safeguard applies to both without coupling their releases.
  if(index===0){
   assert.ok(html.includes('curriculum-v2.js?v=20261010-09'));
-  assert.ok(html.includes('data-preview-release="V9.1-20261010"'));
+  assert.ok(html.includes('data-preview-release="V11.0-20261010"'));
   assert.ok(html.includes('id="subjectReviewGrid"'));
   assert.ok(html.includes('function dailyLesson()'));
   assert.ok(html.includes('persist("help",true)'));
@@ -95,44 +95,12 @@ for(const [index,html] of htmls.entries()){
   new vm.Script(match[2]);
  }
 }
+// The V9 daily-choice checks were advisory and are superseded by
+// the strict school-mode checks in test-kids-academy-school-v11.js.
 const main=htmls[0];
-const fragment=main.slice(main.indexOf("const TOPIC_IDS="),main.indexOf("function applySelectedLesson(){"));
-assert.ok(fragment.length>3000&&fragment.length<11000);
-const store=new Map();
-const localStorage={getItem:k=>store.get(k)??null,setItem:(k,v)=>store.set(k,String(v))};
-let simulated=Date.now();
-class FakeDate extends Date{
- constructor(...args){super(...(args.length?args:[simulated]))}
- static now(){return simulated}
-}
-const instantiate=(childId)=>new Function("CURRICULUM","VERSION","id","age","localStorage","Date",fragment+
-"\nreturn {dailyLesson,lessonIds,availableTopics,recordFor};")(curr,"academy-v4",childId,"6-8",localStorage,FakeDate);
-const boy=instantiate("kid-boy"),girl=instantiate("kid-girl");
-assert.equal(boy.lessonIds().length,34);
-assert.deepEqual(["akhlaq","adab","fiqh","aqidah"].map(k=>boy.availableTopics(k).length),[7,9,9,9]);
-const first=boy.dailyLesson();
-assert.equal(boy.dailyLesson().id,first.id);
-const key=["kids","academy-v4","kid-boy","6-8",first.id].join(".");
-localStorage.setItem(key,JSON.stringify({lessonId:first.id,id:"kid-boy",age:"6-8",completedAt:simulated,nextDue:simulated+86400000*3,intervalIndex:0}));
-assert.equal(boy.dailyLesson().id,first.id,"daily card should not jump after saving progress");
-assert.equal(girl.recordFor(first.id),null,"profile progress must remain independent");
-// The daily suggestion follows local calendar weekdays, not arbitrary every-third-day changes.
-const nextDay=(days)=>{simulated+=days*86400000};
-nextDay(1);
-const second=boy.dailyLesson();
-if(new FakeDate().getDay()===0){
- assert.equal(second.kind,"free","Sunday must be a voluntary learning day");
-}else if([3,6].includes(new FakeDate().getDay())){
- assert.ok(["due","review","new"].includes(second.kind));
-}else{
- assert.equal(second.kind,"new","Monday, Tuesday, Thursday, Friday favor new lessons");
-}
-assert.equal(girl.recordFor(first.id),null,"profiles must remain separate after day change");
-const weekdays=[0,1,2,3,4,5,6].map(d=>new FakeDate(Date.UTC(2026,9,11+d,12)).getDay());
-assert.deepEqual(weekdays,[0,1,2,3,4,5,6]);
-assert.deepEqual([0,1,2,3,4,5,6].map(x=>x===0?"free":[3,6].includes(x)?"review":"new"),["free","new","new","review","new","new","review"]);
-assert.ok(main.includes("daily-choice-v2"));
-assert.ok(main.includes("ACADEMY_WEEK"));
+assert.ok(main.includes('school-progress-v11.js?v=20261010-11'));
+assert.ok(main.includes('function academySchoolState(){'));
+assert.ok(main.includes('academySchoolState().access(chosen)'));
 const annual=JSON.parse(read("kids/data/academy-year-52weeks-v1.json"));
 assert.equal(annual.weeks.length,52);
 assert.equal(annual.goals.newLessonSlots,208);
