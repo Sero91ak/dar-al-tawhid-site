@@ -1327,8 +1327,185 @@ body[data-profile="girl"] .lesson-stage .academy-completion-kicker{background:#f
 }
 @media(min-width:701px){.lesson-stage .academy-buddy-guide{max-width:740px}}
 
+
+/* KIDS V7.0 – coherent cover, bright subjects and profile-safe responsive views */
+body{--kids-heading:#193d4a;--kids-surface:#fffaf0;--kids-stroke:#dde5df;--kids-primary:#127d85;--kids-highlight:#ffdf84}
+body[data-profile="girl"]{--kids-heading:#563b65;--kids-surface:#fff7fa;--kids-stroke:#e9d7e4;--kids-primary:#955bb4;--kids-highlight:#ffd4a5}
+.academy-home,.subject-detail{min-width:0}
+.overview-hero{
+ border-radius:30px!important;min-height:clamp(360px,36vw,430px)!important;
+ margin:14px 0 18px!important;padding:clamp(22px,3.3vw,43px)!important;
+ background:linear-gradient(125deg,#075a68,#15979a 55%,#e7b65f)!important;
+ border:2px solid rgba(255,237,192,.5)!important;box-shadow:0 22px 46px rgba(5,38,47,.23)!important;
+ align-items:center!important
+}
+body[data-profile="girl"] .overview-hero{background:linear-gradient(125deg,#794f99,#b87fbe 58%,#f5b7a0)!important;border-color:rgba(255,223,236,.7)!important}
+.overview-hero #academyHeroImage{opacity:.30!important;filter:saturate(1.15);object-position:center!important}
+.overview-hero:after,body[data-profile="girl"] .overview-hero:after{
+ background:linear-gradient(90deg,rgba(5,56,66,.87),rgba(5,66,77,.47) 60%,rgba(18,76,81,.06))!important
+}
+body[data-profile="girl"] .overview-hero:after{
+ background:linear-gradient(90deg,rgba(81,47,110,.89),rgba(95,53,123,.44) 60%,rgba(111,63,116,.06))!important
+}
+.overview-hero:before{content:"✦";position:absolute;z-index:1;pointer-events:none;top:17px;right:25px;
+ font-size:36px;color:#fff4cc;opacity:.62;filter:drop-shadow(0 3px 10px rgba(0,0,0,.2))}
+.overview-copy,body[data-profile="boy"] .overview-copy,body[data-profile="girl"] .overview-copy{
+ width:68%!important;max-width:68%!important;flex:0 0 auto!important;padding:0!important;
+ background:transparent!important;z-index:4!important
+}
+.overview-copy::before{display:none!important}
+.overview-copy .kicker{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.26);
+ padding:7px 12px;border-radius:99px;color:#fff9e9!important;letter-spacing:.04em!important;
+ font-size:clamp(11px,1.4vw,14px)!important;line-height:1.4!important}
+.overview-copy h1,body[data-profile="girl"] .overview-copy h1,
+body[data-kids-age="4-5"] .overview-copy h1{
+ display:block!important;width:100%!important;max-width:100%!important;color:#fff6d9!important;
+ font:850 clamp(42px,5.9vw,72px)/1.07 ui-rounded,"Avenir Next Rounded","Avenir Next",system-ui,sans-serif!important;
+ letter-spacing:-.045em!important;margin:17px 0 14px!important;text-shadow:0 4px 16px rgba(0,0,0,.26)!important;
+ overflow:visible!important;opacity:1!important
+}
+.overview-copy .hero-title-line{display:block!important;white-space:normal!important}
+.overview-copy .overview-greeting{display:block!important;margin:14px 0 0!important;max-width:100%!important;opacity:1!important}
+.overview-copy .greeting-salam,body[data-profile="girl"] .overview-copy .greeting-salam,
+body[data-kids-age="4-5"] .overview-copy .greeting-salam{
+ display:block!important;font-size:clamp(18px,2.15vw,24px)!important;font-weight:850!important;
+ color:#ffffff!important;line-height:1.42!important;text-shadow:0 2px 9px rgba(0,0,0,.22)!important
+}
+.overview-copy .greeting-followup,body[data-profile="girl"] .overview-copy .greeting-followup,
+body[data-kids-age="4-5"] .overview-copy .greeting-followup{
+ display:block!important;font-size:clamp(15px,1.7vw,19px)!important;color:#fff9e7!important;
+ font-weight:650!important;line-height:1.4!important;max-width:35ch!important
+}
+.hero-learning-pill{display:inline-flex;align-items:center;gap:8px;margin-top:14px;
+ padding:8px 13px;border:1px solid rgba(255,255,255,.25);border-radius:99px;
+ background:rgba(255,255,255,.17);color:#fff8db;font-size:13px;font-weight:770}
+.academy-hero-character{height:clamp(145px,22vw,248px)!important;max-width:26%!important;
+ width:auto!important;right:clamp(18px,5vw,75px)!important;bottom:24px!important;
+ background:radial-gradient(circle at 50% 40%,rgba(255,249,224,.72),rgba(255,241,200,.08) 70%);
+ border:2px solid rgba(255,244,204,.3);border-radius:50%!important;
+ filter:drop-shadow(0 16px 20px rgba(7,46,51,.24))!important}
+body[data-profile="girl"] .academy-hero-character{background:radial-gradient(circle at 50% 40%,rgba(255,232,241,.76),rgba(255,220,238,.06) 72%)}
+.today-class{border-radius:27px!important;border:2px solid #bce6da!important;
+ background:linear-gradient(135deg,#f0fff4,#fff4d8)!important;padding:clamp(18px,2.6vw,27px)!important}
+body[data-profile="girl"] .today-class{background:linear-gradient(135deg,#fff1fa,#fff1d8)!important;border-color:#f1cde4!important}
+.today-class .today-text h2{font:850 clamp(24px,3vw,32px)/1.2 ui-rounded,"Avenir Next Rounded",system-ui,sans-serif!important}
+.today-class .today-text p{font-size:clamp(16px,2vw,19px)!important}
+.today-class .today-text strong{font-weight:880}
+.today-class .today-button{min-height:64px!important;font-size:clamp(17px,2.2vw,20px)!important;letter-spacing:-.02em!important}
+.journey{border-radius:23px;padding:18px!important;border:1px solid rgba(220,196,144,.28);background:rgba(255,255,255,.045)}
+.journey .journey-bar{border-radius:20px;height:11px}
+.journey .journey-bar span{border-radius:20px;background:linear-gradient(90deg,#6dd0bd,#efc66f)!important}
+body[data-profile="girl"] .journey .journey-bar span{background:linear-gradient(90deg,#c39be2,#f4c295)!important}
+.subjects{padding:10px 0 25px}
+.subjects-title h2{font:850 clamp(25px,3.7vw,35px)/1.16 ui-rounded,"Avenir Next Rounded",system-ui,sans-serif!important}
+.category-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(10px,1.8vw,20px)!important}
+.category-card,.category-card:disabled{
+ min-width:0;min-height:270px!important;aspect-ratio:auto!important;
+ display:flex!important;align-items:flex-end!important;border-radius:25px!important;
+ border:2px solid var(--subject-stroke,#b7d9de)!important;
+ background:var(--subject-bg,#edfaf9)!important;color:var(--kids-heading)!important;
+ box-shadow:0 13px 26px rgba(6,38,43,.12)!important;overflow:hidden;opacity:1!important;
+ padding:0!important;cursor:pointer!important;transition:transform .2s ease,box-shadow .2s ease
+}
+.category-card:nth-child(1){--subject-bg:#e9fcf1;--subject-stroke:#99d9b3;--subject-pill:#2b8c6f}
+.category-card:nth-child(2){--subject-bg:#fff1de;--subject-stroke:#f0cc95;--subject-pill:#b57b26}
+.category-card:nth-child(3){--subject-bg:#eaf2ff;--subject-stroke:#b7ccef;--subject-pill:#537bb9}
+.category-card:nth-child(4){--subject-bg:#f7eefe;--subject-stroke:#d8bce8;--subject-pill:#9669b0}
+body[data-profile="girl"] .category-card:nth-child(1){--subject-bg:#ffecf5;--subject-stroke:#ebbad1;--subject-pill:#b95d86}
+body[data-profile="girl"] .category-card:nth-child(2){--subject-bg:#fff2e2;--subject-stroke:#f0c7a2;--subject-pill:#ba7a52}
+body[data-profile="girl"] .category-card:nth-child(3){--subject-bg:#edf0ff;--subject-stroke:#bec2ee;--subject-pill:#7674bd}
+body[data-profile="girl"] .category-card:nth-child(4){--subject-bg:#f4eaff;--subject-stroke:#d5b5ec;--subject-pill:#9261bd}
+.category-card img{inset:0 0 auto!important;width:100%!important;height:55%!important;object-fit:cover!important;
+ object-position:center!important;filter:saturate(1.09)!important}
+.category-card:after{inset:0 0 auto!important;height:57%!important;background:linear-gradient(180deg,transparent 65%,var(--subject-bg))!important}
+.category-card-copy{width:100%;min-height:45%;position:relative;z-index:2;
+ padding:13px 16px 16px!important;display:flex!important;flex-direction:column;gap:4px!important}
+.category-card-copy .category-state{order:1;align-self:flex-start;color:#fff!important;background:var(--subject-pill);
+ font-size:11px!important;padding:5px 9px;border-radius:99px;letter-spacing:0!important}
+.category-card-copy .category-name{order:2;color:var(--kids-heading)!important;font-size:clamp(22px,3vw,31px)!important;font-family:ui-rounded,"Avenir Next Rounded",system-ui,sans-serif!important}
+.category-card-copy .category-detail{order:3;color:#546878!important;font-size:clamp(12px,1.35vw,14px)!important;line-height:1.4!important}
+.category-card:active{transform:scale(.985)}
+.category-card:focus-visible{outline:3px solid var(--kids-highlight);outline-offset:4px}
+.subject-detail{padding:10px 0 28px;max-width:1100px;margin:auto}
+.subject-back{display:inline-flex;align-items:center;justify-content:center;min-height:49px;padding:10px 18px;
+ color:#fff7dc;background:rgba(255,255,255,.09);border:1px solid rgba(240,217,169,.35);
+ border-radius:14px;font-weight:850;margin-bottom:13px}
+.subject-cover{--subject-a:#0b8579;--subject-b:#68c8a7;
+ position:relative;overflow:hidden;min-height:clamp(310px,38vw,425px);
+ display:flex;align-items:center;gap:20px;padding:clamp(20px,4.1vw,50px);border:2px solid rgba(255,255,255,.28);
+ border-radius:30px;background:linear-gradient(115deg,var(--subject-a),var(--subject-b));
+ box-shadow:0 15px 38px rgba(4,31,43,.15)}
+.subject-detail[data-subject="adab"] .subject-cover{--subject-a:#b87536;--subject-b:#f3c477}
+.subject-detail[data-subject="fiqh"] .subject-cover{--subject-a:#4678b5;--subject-b:#8fc4df}
+.subject-detail[data-subject="aqidah"] .subject-cover{--subject-a:#7960b2;--subject-b:#cfaddd}
+body[data-profile="girl"] .subject-detail[data-subject="akhlaq"] .subject-cover{--subject-a:#b66a9c;--subject-b:#f3b6cf}
+body[data-profile="girl"] .subject-detail[data-subject="adab"] .subject-cover{--subject-a:#b8797c;--subject-b:#f3bf97}
+body[data-profile="girl"] .subject-detail[data-subject="fiqh"] .subject-cover{--subject-a:#7b83ca;--subject-b:#bfc5f7}
+body[data-profile="girl"] .subject-detail[data-subject="aqidah"] .subject-cover{--subject-a:#9966bc;--subject-b:#d6adeb}
+.subject-cover-copy{position:relative;z-index:2;flex:1 1 55%;min-width:0;color:#fffaf0}
+.subject-cover-copy .subject-kicker{font-size:13px;font-weight:850;letter-spacing:.08em;color:#fff0bd}
+.subject-cover-copy h1{font:850 clamp(37px,5.5vw,65px)/1.1 ui-rounded,"Avenir Next Rounded",system-ui,sans-serif;
+ color:#fff8de;margin:10px 0 14px}
+.subject-cover-copy p{font-size:clamp(17px,2.3vw,23px);line-height:1.5;font-weight:650;max-width:36ch}
+.subject-cover-copy .subject-status{display:inline-block;background:rgba(255,255,255,.18);
+ border-radius:99px;border:1px solid rgba(255,255,255,.3);padding:7px 12px;font-size:13px;font-weight:850;margin-top:12px}
+.subject-cover img{position:relative;z-index:1;flex:1 1 40%;min-width:0;width:40%;height:clamp(200px,25vw,300px);border-radius:21px;object-fit:cover;border:3px solid rgba(255,248,236,.6);box-shadow:0 12px 28px rgba(24,39,45,.23)}
+.subject-next{margin:16px 0 0;border-radius:23px;padding:23px;background:#fff9ed;border:1px solid #f5dfb7;color:var(--kids-heading)}
+body[data-profile="girl"] .subject-next{background:#fff5fa;border-color:#edcbdc}
+.subject-next h2{color:var(--kids-heading);font:850 clamp(23px,3vw,31px)/1.2 ui-rounded,"Avenir Next Rounded",system-ui,sans-serif;margin:7px 0}
+.subject-next p{font-size:clamp(15px,2vw,18px);line-height:1.55}
+.subject-next .subject-small{font-size:12px;letter-spacing:.07em;font-weight:850;color:var(--kids-primary)}
+.subject-next .subject-start{min-height:58px;margin-top:15px;border:0;border-radius:16px;
+ background:linear-gradient(120deg,#f2c572,#e8ae51);color:#25414d;padding:12px 24px;font-weight:850;font-size:18px}
+body[data-profile="girl"] .subject-start{background:linear-gradient(120deg,#ffd9ab,#eeadc6)}
+.lesson-stage[data-lesson-step="0"]{background:linear-gradient(150deg,#fff5e3,#fffdf8 62%)!important}
+.lesson-stage[data-lesson-step="1"]{background:linear-gradient(150deg,#e7faf5,#fffdf8 64%)!important}
+.lesson-stage[data-lesson-step="2"]{background:linear-gradient(150deg,#eef5ff,#fffdf9 61%)!important}
+.lesson-stage[data-lesson-step="3"]{background:linear-gradient(150deg,#eaf8f4,#fffdf7 62%)!important}
+.lesson-stage[data-lesson-step="4"]{background:linear-gradient(150deg,#fff3df,#fffefa 60%)!important}
+body[data-profile="girl"] .lesson-stage[data-lesson-step="0"]{background:linear-gradient(150deg,#ffedf4,#fffdf8 65%)!important}
+body[data-profile="girl"] .lesson-stage[data-lesson-step="1"]{background:linear-gradient(150deg,#f2e7ff,#fffaf8 66%)!important}
+body[data-profile="girl"] .lesson-stage[data-lesson-step="2"]{background:linear-gradient(150deg,#f4eafe,#fffdfa 65%)!important}
+body[data-profile="girl"] .lesson-stage[data-lesson-step="3"]{background:linear-gradient(150deg,#ffeef4,#fffefa 65%)!important}
+body[data-profile="girl"] .lesson-stage[data-lesson-step="4"]{background:linear-gradient(150deg,#fff0e1,#fffafd 66%)!important}
+.lesson-stage .welcome-greeting{padding:12px 16px;background:rgba(255,255,255,.85);border:1px solid #f2dfbc;border-radius:20px}
+.lesson-stage .stage-greeting-salam{font-size:clamp(18px,2.5vw,24px);font-weight:850}
+.lesson-stage .stage-greeting-followup{font-size:clamp(16px,2vw,19px)}
+@media(min-width:850px){.category-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:700px){
+ .overview-hero{min-height:365px!important;padding:20px 17px 120px!important;align-items:flex-start!important;border-radius:25px!important}
+ .overview-copy,body[data-profile="boy"] .overview-copy,body[data-profile="girl"] .overview-copy{width:100%!important;max-width:100%!important;padding:0!important}
+ .overview-copy .kicker{font-size:11px!important;padding:6px 10px}
+ .overview-copy h1,body[data-profile="girl"] .overview-copy h1,body[data-kids-age="4-5"] .overview-copy h1{
+ font-size:clamp(35px,9.4vw,47px)!important;line-height:1.03!important;margin:14px 0 8px!important}
+ .overview-copy .hero-title-line{display:inline!important}
+ .overview-copy .hero-title-line+.hero-title-line::before{content:" "}
+ .overview-copy .greeting-salam,body[data-profile="girl"] .overview-copy .greeting-salam,
+ body[data-kids-age="4-5"] .overview-copy .greeting-salam{font-size:clamp(17px,4.3vw,21px)!important}
+ .overview-copy .greeting-followup,body[data-profile="girl"] .overview-copy .greeting-followup,
+ body[data-kids-age="4-5"] .overview-copy .greeting-followup{font-size:clamp(14px,3.7vw,17px)!important}
+ .hero-learning-pill{font-size:12px;margin-top:12px}
+ .academy-hero-character{height:118px!important;max-width:32%!important;right:12px!important;bottom:10px!important}
+ .overview-hero #academyHeroImage{opacity:.24!important}
+ .category-card{min-height:236px!important;border-radius:20px!important}
+ .category-card-copy{padding:10px 12px 13px!important}
+ .category-card-copy .category-name{font-size:clamp(21px,5.6vw,26px)!important}
+ .category-card-copy .category-detail{font-size:11px!important}
+ .category-card-copy .category-state{font-size:10px!important;padding:4px 8px}
+ .subject-cover{display:flex;flex-direction:column;align-items:stretch;padding:21px;min-height:0}
+ .subject-cover-copy{flex:auto;width:100%}
+ .subject-cover-copy h1{font-size:clamp(33px,10vw,45px)}
+ .subject-cover-copy p{font-size:17px;max-width:none}
+ .subject-cover img{flex:none;width:100%;height:160px;margin-top:10px}
+ .subject-next{padding:17px}
+ .lesson-stage .stage-greeting-salam{font-size:19px}
+}
+@media(max-width:365px){.overview-hero{min-height:395px!important}
+ .category-card{min-height:242px!important}.category-card-copy .category-detail{font-size:10px!important}}
+@media(prefers-reduced-motion:reduce){.category-card{transition:none!important;transform:none!important}}
+
 </style></head>
-<body data-profile="boy" data-preview-release="V6.9.1-20261010" data-preview-deploy="v6.9.1-learning-buddy"><main class="wrap">
+<body data-profile="boy" data-preview-release="V7.0-20261010" data-preview-deploy="v7.0-all-categories"><main class="wrap">
 
 <header class="academy-header">
  <div class="academy-brand"><div class="brand">DĀR AL TAWḤĪD · KIDS</div><div class="stage">Dein Unterricht · Qurʾān & Sunnah</div></div>
@@ -1337,7 +1514,7 @@ body[data-profile="girl"] .lesson-stage .academy-completion-kicker{background:#f
 <section class="academy-home" id="academyHome">
  <section class="overview-hero" aria-label="Deine islamische Lernakademie">
   <img id="academyHeroImage" src="/desktop-preview/assets/kids-academy-hero-boys-v1.jpg" alt="" decoding="async" fetchpriority="high" onerror="this.onerror=null;this.classList.add('is-ready');this.src='/desktop-preview/assets/kids-academy-hero-v1.jpg'">
-  <img class="academy-hero-character" id="academyHeroCharacter" src="/kids/assets/profile-avatars/boy-kufi-v1235.svg" alt="" aria-hidden="true" decoding="async"><div class="overview-copy"><div class="kicker" id="overviewKicker">Deine islamische Lernakademie</div><h1><span class="hero-title-line">Wissen</span> <span class="hero-title-line">entdecken</span></h1><p id="overviewGreeting" class="overview-greeting"><span id="overviewSalam" class="greeting-salam">As-salāmu ʿalaykum, lieber Bruder.</span><span id="overviewFollowup" class="greeting-followup">Heute lernen wir etwas Neues!</span></p></div>
+  <img class="academy-hero-character" id="academyHeroCharacter" src="/kids/assets/profile-avatars/boy-kufi-v1235.svg" alt="" aria-hidden="true" decoding="async"><div class="overview-copy"><div class="kicker" id="overviewKicker">Deine islamische Lernakademie</div><h1><span class="hero-title-line">Wissen</span> <span class="hero-title-line">entdecken</span></h1><p id="overviewGreeting" class="overview-greeting"><span id="overviewSalam" class="greeting-salam">As-salāmu ʿalaykum, lieber Bruder.</span><span id="overviewFollowup" class="greeting-followup">Heute lernen wir etwas Neues!</span></p><div class="hero-learning-pill">✦ Qurʾān &amp; Sunnah · Gemeinsam lernen</div></div>
  </section>
  <section class="today-class" aria-labelledby="todayTitle">
   <div class="today-text"><span class="kicker" id="todayKicker">Für dich vorbereitet</span><h2 id="todayTitle">Dein Unterricht heute</h2><p><strong>Ṣidq – Wahrhaftigkeit</strong><br><span id="todayTopicIntro">Warum ist es gut, die Wahrheit zu sagen?</span></p><div class="today-summary" id="todaySummary">Deine erste Lektion wartet auf dich.</div><div class="academy-time" id="academyTime">Lernzeit: 8–12 Minuten · Pausen jederzeit</div></div>
@@ -1350,12 +1527,31 @@ body[data-profile="girl"] .lesson-stage .academy-completion-kicker{background:#f
  <section class="subjects" aria-labelledby="subjectsTitle">
   <div class="subjects-title"><div><span class="kicker">Wissen aus Qurʾān & Sunnah</span><h2 id="subjectsTitle">Wähle dein Unterrichtsfach</h2><p id="subjectsIntro">Jedes Fach begleitet dich auf deiner Lernreise.</p></div></div>
   <div class="category-grid" aria-label="Unterrichtskategorien">
-   <button type="button" class="category-card" data-open-lesson="sidq"><img src="/desktop-preview/assets/kids-academy-akhlaq-v1.jpg" alt="" loading="lazy" decoding="async"><span class="category-card-copy"><span class="category-state" id="akhlaqCardStatus">Jetzt lernen</span><strong class="category-name">Akhlāq</strong><span class="category-detail">Wahrhaftigkeit · Guter Charakter</span></span></button>
-   <button type="button" class="category-card" disabled aria-label="Adab, in Vorbereitung"><img src="/desktop-preview/assets/kids-academy-adab-v1.jpg" alt="" loading="lazy" decoding="async"><span class="category-card-copy"><span class="category-state">Bald verfügbar</span><strong class="category-name">Adab</strong><span class="category-detail">Gutes Benehmen · Respekt</span></span></button>
-   <button type="button" class="category-card" disabled aria-label="Fiqh, in Vorbereitung"><img src="/kids/assets/deen/ibadah.jpg?v=1205" alt="" loading="lazy" decoding="async"><span class="category-card-copy"><span class="category-state">Bald verfügbar</span><strong class="category-name">Fiqh</strong><span class="category-detail">Gebet · Reinheit · Praxis</span></span></button>
-   <button type="button" class="category-card" disabled aria-label="ʿAqīdah, in Vorbereitung"><img src="/kids/assets/deen/tawhid.jpg?v=1205" alt="" loading="lazy" decoding="async"><span class="category-card-copy"><span class="category-state">Bald verfügbar</span><strong class="category-name">ʿAqīdah</strong><span class="category-detail">Tawḥīd · Ikhlāṣ · Īmān</span></span></button>
+   <button type="button" class="category-card" data-open-category="akhlaq"><img src="/desktop-preview/assets/kids-academy-akhlaq-v1.jpg" alt="" loading="lazy" decoding="async"><span class="category-card-copy"><span class="category-state" id="akhlaqCardStatus">Jetzt lernen</span><strong class="category-name">Akhlāq</strong><span class="category-detail">Wahrhaftigkeit · Guter Charakter</span></span></button>
+   <button type="button" class="category-card" data-open-category="adab" aria-label="Adab ansehen, Unterricht in Vorbereitung"><img src="/desktop-preview/assets/kids-academy-adab-v1.jpg" alt="" loading="lazy" decoding="async"><span class="category-card-copy"><span class="category-state">Bald verfügbar</span><strong class="category-name">Adab</strong><span class="category-detail">Gutes Benehmen · Respekt</span></span></button>
+   <button type="button" class="category-card" data-open-category="fiqh" aria-label="Fiqh ansehen, Unterricht in Vorbereitung"><img src="/kids/assets/deen/ibadah.jpg?v=1205" alt="" loading="lazy" decoding="async"><span class="category-card-copy"><span class="category-state">Bald verfügbar</span><strong class="category-name">Fiqh</strong><span class="category-detail">Gebet · Reinheit · Praxis</span></span></button>
+   <button type="button" class="category-card" data-open-category="aqidah" aria-label="ʿAqīdah ansehen, Unterricht in Vorbereitung"><img src="/kids/assets/deen/tawhid.jpg?v=1205" alt="" loading="lazy" decoding="async"><span class="category-card-copy"><span class="category-state">Bald verfügbar</span><strong class="category-name">ʿAqīdah</strong><span class="category-detail">Tawḥīd · Ikhlāṣ · Īmān</span></span></button>
   </div>
  </section>
+</section>
+
+<section class="subject-detail" id="academySubject" data-subject="akhlaq" aria-label="Fachübersicht" hidden>
+ <button type="button" id="subjectBack" class="subject-back">← Alle Fächer</button>
+ <div class="subject-cover">
+  <div class="subject-cover-copy">
+   <span class="subject-kicker">DĀR AL TAWḤĪD · KIDS</span>
+   <h1 id="subjectTitle">Akhlāq</h1>
+   <p id="subjectDescription">Wir lernen guten Charakter aus Qurʾān und Sunnah.</p>
+   <span class="subject-status" id="subjectStatus">Eine Lektion bereit</span>
+  </div>
+  <img id="subjectImage" src="/desktop-preview/assets/kids-academy-akhlaq-v1.jpg" alt="" decoding="async">
+ </div>
+ <div class="subject-next">
+  <span class="subject-small">DEIN LERNBEREICH</span>
+  <h2 id="subjectLessonTitle">Ṣidq – Wahrhaftigkeit</h2>
+  <p id="subjectLessonNote">Lerne, weshalb die Wahrheit wichtig ist.</p>
+  <button id="subjectStart" class="subject-start" type="button">Jetzt Unterricht beginnen →</button>
+ </div>
 </section>
 <section class="lesson-main" id="lessonMain" hidden>
  <div class="lesson-topline"><button type="button" class="pill back-pill" id="backToAcademy"><span aria-hidden="true">←</span> Zur Lernakademie</button><span class="lesson-label">Akhlāq · Einheit 01</span></div>
@@ -1735,7 +1931,7 @@ function syncProfile(force=false){
  const p=getProfile();
  const newName=typeof p.child?.name==="string"?p.child.name.trim().replace(/\s+/g," ").slice(0,72):"";
  if(!force&&p.id===id&&p.g===gender&&p.age===age&&newName===profileName)return;
- if(p.id!==id||p.g!==gender||p.age!==age){stopAll();hideLesson()}
+ if(p.id!==id||p.g!==gender||p.age!==age){stopAll();hideCategory();hideLesson()}
  id=p.id;gender=p.g;age=p.age;profileName=newName;
  document.body.dataset.profile=gender;
  $("#profileLabel").textContent=profileName||(gender==="girl"?"Mädchenprofil":"Jungenprofil");
@@ -1765,9 +1961,27 @@ function prepareOwnerVoice(){
  document.head.appendChild(src);
 }
 
-function home(){stopAll();hideLesson();renderHome();window.scrollTo(0,0)}
+
+const SUBJECTS=Object.freeze({
+ akhlaq:{title:"Akhlāq",description:"Guter Charakter macht unser Verhalten schön. Wir beginnen mit der Wahrhaftigkeit.",status:"1 Lektion bereit",lesson:"Ṣidq – Wahrhaftigkeit",note:"Warum ist die Wahrheit wichtig? Lass es uns gemeinsam entdecken.",image:"/desktop-preview/assets/kids-academy-akhlaq-v1.jpg",ready:true},
+ adab:{title:"Adab",description:"Gutes Benehmen, freundliche Worte und Respekt im Alltag.",status:"Unterricht in Vorbereitung",lesson:"Adab – gutes Benehmen",note:"Diese Unterrichtsreihe wird vorbereitet. Hier findest du später passende Übungen für deine Altersstufe.",image:"/desktop-preview/assets/kids-academy-adab-v1.jpg",ready:false},
+ fiqh:{title:"Fiqh",description:"Wir entdecken die islamischen Regeln für unseren Alltag Schritt für Schritt.",status:"Unterricht in Vorbereitung",lesson:"Reinheit und Gebet",note:"Altersgerechte Fiqh-Unterrichtseinheiten werden vorbereitet und vor der Freigabe fachlich geprüft.",image:"/kids/assets/deen/ibadah.jpg?v=1205",ready:false},
+ aqidah:{title:"ʿAqīdah",description:"Wir lernen über Tawḥīd und den Glauben anhand von Qurʾān und Sunnah.",status:"Unterricht in Vorbereitung",lesson:"Tawḥīd und Īmān",note:"Dieser Bereich ist angelegt. Die Inhalte werden vor der Freigabe sorgfältig geprüft.",image:"/kids/assets/deen/tawhid.jpg?v=1205",ready:false}
+});
+function openCategory(key){
+ const data=SUBJECTS[key];if(!data)return;
+ stopAll();hideLesson();$("#academyHome").hidden=true;$("#academySubject").hidden=false;
+ $("#academySubject").dataset.subject=key;
+ $("#subjectTitle").textContent=data.title;$("#subjectDescription").textContent=data.description;
+ $("#subjectStatus").textContent=data.status;$("#subjectLessonTitle").textContent=data.lesson;
+ $("#subjectLessonNote").textContent=data.note;$("#subjectImage").src=data.image;
+ $("#subjectStart").hidden=!data.ready;
+ window.scrollTo(0,0);
+}
+function hideCategory(){$("#academySubject").hidden=true}
+function home(){stopAll();hideCategory();hideLesson();renderHome();window.scrollTo(0,0)}
 function begin(){
- syncProfile();if(!AGE_UI[age]){renderHome();return}prepareOwnerVoice();$("#academyHome").hidden=true;$("#lessonMain").hidden=false;
+ syncProfile();if(!AGE_UI[age]){renderHome();return}prepareOwnerVoice();hideCategory();$("#academyHome").hidden=true;$("#lessonMain").hidden=false;
  const draft=readDraft();
  if(draft){
   step=draft.step;unlocked=draft.unlocked;qIndex=draft.qIndex;finished=step===4;score=draft.score;
@@ -1973,6 +2187,8 @@ childPlayback.onerror=()=>{
 $("#masterVoiceTest").onclick=playMasterProbe;
 $("#previewRefresh").onclick=()=>{const url=new URL(location.href);url.searchParams.set("cb","v6.8-"+Date.now());location.replace(url.toString())};
 all("[data-open-lesson]").forEach(b=>b.onclick=begin);
+all("[data-open-category]").forEach(b=>b.onclick=()=>openCategory(b.dataset.openCategory));
+$("#subjectBack").onclick=home;$("#subjectStart").onclick=begin;
 $("#backToAcademy").onclick=home;$("#backAfterLesson").onclick=home;
 $("#previousStep").onclick=()=>showStep(step-1);$("#forwardStep").onclick=nextStep;
 all("[data-jump-step]").forEach(b=>b.onclick=()=>showStep(Number(b.dataset.jumpStep)));
