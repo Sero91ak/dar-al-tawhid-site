@@ -301,3 +301,13 @@ body.kids .kids-reward{color:#ffecbc;text-align:center}
 body.kids.award .kids-reward{animation:v8Reward .5s ease}
 @keyframes v8Reward{0%{transform:scale(.88);opacity:.6}50%{transform:scale(1.06);opacity:1}100%{transform:scale(1)}}
 @media(prefers-reduced-motion:reduce){body.kids.award .kids-reward{animation:none}}
+
+/* V8 visual review correction: no tablet artwork label on handheld screens. */
+.v8-side-art{display:none}
+@media(min-width:720px){.v8-side-art{display:flex}}
+@media(max-width:719px){
+ body.adult .app:before{opacity:.23;filter:grayscale(.28) saturate(.73);background-position:57% 21%}
+ body.adult .app:after{background:linear-gradient(180deg,rgba(7,23,28,.39),rgba(7,23,28,.75) 39%,rgba(9,26,34,.69) 73%,#0a1b22)}
+ body.kids .app:before{opacity:.30;filter:saturate(1.32)}
+ body.kids .app:after{background:linear-gradient(180deg,rgba(25,53,103,.25),rgba(27,48,95,.59) 34%,rgba(26,46,95,.82) 80%,#1d2b58)}
+}
