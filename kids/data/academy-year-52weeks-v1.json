@@ -1,0 +1,2367 @@
+{
+  "version": "academy-year-v1-20261010",
+  "scope": "Editorial calendar structure only. Not a verified 208-lesson curriculum. Pending slots must never be rendered as available lessons.",
+  "goals": {
+    "weeks": 52,
+    "newPerWeek": 4,
+    "reviewPerWeek": 2,
+    "flexiblePerWeek": 1,
+    "newLessonSlots": 208,
+    "currentlyInCatalog": 34,
+    "additionalAuthenticallyVerifiedLessonsNeeded": 174,
+    "ageGroups": [
+      "4-5",
+      "6-8",
+      "9-10"
+    ]
+  },
+  "approvalGates": [
+    "Qurʾān verse checked against Arabic original and German meaning",
+    "Authentic hadith checked against precise source and verified grading",
+    "Age-level German content checked for correct interpretation and absence of speculative claims",
+    "Independent QA of practical rulings (particularly Fiqh and ʿAqīdah)",
+    "Exact Serhat voice clip checked and approved before being linked into playback"
+  ],
+  "weeks": [
+    {
+      "week": 1,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 1,
+          "lessonId": "sidq",
+          "status": "currently-in-catalog"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 2,
+          "lessonId": "adab-salam",
+          "status": "currently-in-catalog"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 3,
+          "lessonId": "fiqh-taharah",
+          "status": "currently-in-catalog"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 4,
+          "lessonId": "aqidah-tawhid",
+          "status": "currently-in-catalog"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 2,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 5,
+          "lessonId": "akhlaq-sabr",
+          "status": "currently-in-catalog"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 6,
+          "lessonId": "adab-worte",
+          "status": "currently-in-catalog"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 7,
+          "lessonId": "fiqh-wudu",
+          "status": "currently-in-catalog"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 8,
+          "lessonId": "aqidah-iman",
+          "status": "currently-in-catalog"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 3,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 9,
+          "lessonId": "akhlaq-amanah",
+          "status": "currently-in-catalog"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 10,
+          "lessonId": "adab-respekt",
+          "status": "currently-in-catalog"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 11,
+          "lessonId": "fiqh-salah",
+          "status": "currently-in-catalog"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 12,
+          "lessonId": "aqidah-ikhlas",
+          "status": "currently-in-catalog"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 4,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 13,
+          "lessonId": "akhlaq-sabr-geduldig-warten",
+          "status": "currently-in-catalog"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 14,
+          "lessonId": "adab-salam-salam-erwidern",
+          "status": "currently-in-catalog"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 15,
+          "lessonId": "fiqh-taharah-saubere-kleidung",
+          "status": "currently-in-catalog"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 16,
+          "lessonId": "aqidah-tawhid-allah-ist-einer",
+          "status": "currently-in-catalog"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 5,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 17,
+          "lessonId": "akhlaq-sabr-nicht-aufgeben",
+          "status": "currently-in-catalog"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 18,
+          "lessonId": "adab-salam-zuerst-gru-en",
+          "status": "currently-in-catalog"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 19,
+          "lessonId": "fiqh-taharah-sauberer-lernplatz",
+          "status": "currently-in-catalog"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 20,
+          "lessonId": "aqidah-tawhid-nur-allah-anbeten",
+          "status": "currently-in-catalog"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 6,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 21,
+          "lessonId": "akhlaq-amanah-geliehene-dinge",
+          "status": "currently-in-catalog"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 22,
+          "lessonId": "adab-worte-bei-streit-sprechen",
+          "status": "currently-in-catalog"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 23,
+          "lessonId": "fiqh-wudu-gesicht-und-arme",
+          "status": "currently-in-catalog"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 24,
+          "lessonId": "aqidah-iman-die-engel",
+          "status": "currently-in-catalog"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 7,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 25,
+          "lessonId": "akhlaq-amanah-mein-versprechen",
+          "status": "currently-in-catalog"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 26,
+          "lessonId": "adab-worte-erst-nachdenken",
+          "status": "currently-in-catalog"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 27,
+          "lessonId": "fiqh-wudu-kopf-und-fu-e",
+          "status": "currently-in-catalog"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 28,
+          "lessonId": "aqidah-iman-die-gesandten",
+          "status": "currently-in-catalog"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 8,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 29,
+          "lessonId": "adab-respekt-eltern-zuhoren",
+          "status": "currently-in-catalog"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 30,
+          "lessonId": "fiqh-salah-allah-gedenken",
+          "status": "currently-in-catalog"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 31,
+          "lessonId": "aqidah-ikhlas-gutes-ohne-lob",
+          "status": "currently-in-catalog"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 32,
+          "lessonId": "adab-respekt-hilfsbereit-sein",
+          "status": "currently-in-catalog"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 9,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 33,
+          "lessonId": "fiqh-salah-gebet-lernen",
+          "status": "currently-in-catalog"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 34,
+          "lessonId": "aqidah-ikhlas-gute-absichten",
+          "status": "currently-in-catalog"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 35,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 36,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 10,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 37,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 38,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 39,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 40,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 11,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 41,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 42,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 43,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 44,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 12,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 45,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 46,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 47,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 48,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 13,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 49,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 50,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 51,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 52,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 14,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 53,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 54,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 55,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 56,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 15,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 57,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 58,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 59,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 60,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 16,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 61,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 62,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 63,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 64,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 17,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 65,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 66,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 67,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 68,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 18,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 69,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 70,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 71,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 72,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 19,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 73,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 74,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 75,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 76,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 20,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 77,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 78,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 79,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 80,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 21,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 81,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 82,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 83,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 84,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 22,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 85,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 86,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 87,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 88,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 23,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 89,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 90,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 91,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 92,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 24,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 93,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 94,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 95,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 96,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 25,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 97,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 98,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 99,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 100,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 26,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 101,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 102,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 103,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 104,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 27,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 105,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 106,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 107,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 108,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 28,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 109,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 110,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 111,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 112,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 29,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 113,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 114,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 115,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 116,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 30,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 117,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 118,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 119,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 120,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 31,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 121,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 122,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 123,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 124,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 32,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 125,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 126,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 127,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 128,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 33,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 129,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 130,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 131,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 132,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 34,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 133,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 134,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 135,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 136,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 35,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 137,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 138,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 139,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 140,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 36,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 141,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 142,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 143,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 144,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 37,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 145,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 146,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 147,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 148,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 38,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 149,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 150,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 151,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 152,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 39,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 153,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 154,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 155,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 156,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 40,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 157,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 158,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 159,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 160,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 41,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 161,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 162,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 163,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 164,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 42,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 165,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 166,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 167,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 168,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 43,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 169,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 170,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 171,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 172,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 44,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 173,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 174,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 175,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 176,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 45,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 177,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 178,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 179,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 180,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 46,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 181,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 182,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 183,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 184,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 47,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 185,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 186,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 187,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 188,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 48,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 189,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 190,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 191,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 192,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 49,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 193,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 194,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 195,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 196,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 50,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 197,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 198,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 199,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 200,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 51,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 201,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 202,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 203,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 204,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    },
+    {
+      "week": 52,
+      "days": [
+        {
+          "weekday": "Montag",
+          "mode": "new",
+          "editorialSlot": 205,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Dienstag",
+          "mode": "new",
+          "editorialSlot": 206,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Mittwoch",
+          "mode": "review"
+        },
+        {
+          "weekday": "Donnerstag",
+          "mode": "new",
+          "editorialSlot": 207,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Freitag",
+          "mode": "new",
+          "editorialSlot": 208,
+          "lessonId": null,
+          "status": "awaiting-authentic-source-and-content-review"
+        },
+        {
+          "weekday": "Samstag",
+          "mode": "review"
+        },
+        {
+          "weekday": "Sonntag",
+          "mode": "flexible"
+        }
+      ]
+    }
+  ]
+}

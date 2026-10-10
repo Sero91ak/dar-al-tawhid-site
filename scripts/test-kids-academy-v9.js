@@ -54,7 +54,7 @@ for(const [index,html] of htmls.entries()){
  // The same script parsing safeguard applies to both without coupling their releases.
  if(index===0){
   assert.ok(html.includes('curriculum-v2.js?v=20261010-09'));
-  assert.ok(html.includes('data-preview-release="V9.0-20261010"'));
+  assert.ok(html.includes('data-preview-release="V9.1-20261010"'));
   assert.ok(html.includes('id="subjectReviewGrid"'));
   assert.ok(html.includes('function dailyLesson()'));
   assert.ok(html.includes('persist("help",true)'));
@@ -87,7 +87,34 @@ const key=["kids","academy-v4","kid-boy","6-8",first.id].join(".");
 localStorage.setItem(key,JSON.stringify({lessonId:first.id,id:"kid-boy",age:"6-8",completedAt:simulated,nextDue:simulated+86400000*3,intervalIndex:0}));
 assert.equal(boy.dailyLesson().id,first.id,"daily card should not jump after saving progress");
 assert.equal(girl.recordFor(first.id),null,"profile progress must remain independent");
-simulated+=86400000;
+// The daily suggestion follows local calendar weekdays, not arbitrary every-third-day changes.
+const nextDay=(days)=>{simulated+=days*86400000};
+nextDay(1);
 const second=boy.dailyLesson();
-assert.notEqual(second.id,first.id,"new day must offer an unfinished lesson");
-console.log("KIDS ACADEMY V9 VERIFIED: 34 courses, 264 age-graded questions, "+plan.phraseCount+" planned voice lines, profile-safe daily lessons, free review.");
+if(new FakeDate().getDay()===0){
+ assert.equal(second.kind,"free","Sunday must be a voluntary learning day");
+}else if([3,6].includes(new FakeDate().getDay())){
+ assert.ok(["due","review","new"].includes(second.kind));
+}else{
+ assert.equal(second.kind,"new","Monday, Tuesday, Thursday, Friday favor new lessons");
+}
+assert.equal(girl.recordFor(first.id),null,"profiles must remain separate after day change");
+const weekdays=[0,1,2,3,4,5,6].map(d=>new FakeDate(Date.UTC(2026,9,11+d,12)).getDay());
+assert.deepEqual(weekdays,[0,1,2,3,4,5,6]);
+assert.deepEqual([0,1,2,3,4,5,6].map(x=>x===0?"free":[3,6].includes(x)?"review":"new"),["free","new","new","review","new","new","review"]);
+assert.ok(main.includes("daily-choice-v2"));
+assert.ok(main.includes("ACADEMY_WEEK"));
+const annual=JSON.parse(read("kids/data/academy-year-52weeks-v1.json"));
+assert.equal(annual.weeks.length,52);
+assert.equal(annual.goals.newLessonSlots,208);
+assert.equal(annual.goals.currentlyInCatalog,34);
+assert.equal(annual.goals.additionalAuthenticallyVerifiedLessonsNeeded,174);
+const allSlots=annual.weeks.flatMap(week=>week.days);
+assert.equal(allSlots.length,364);
+assert.equal(allSlots.filter(x=>x.mode==="new").length,208);
+assert.equal(allSlots.filter(x=>x.mode==="review").length,104);
+assert.equal(allSlots.filter(x=>x.mode==="flexible").length,52);
+assert.equal(allSlots.filter(x=>x.mode==="new"&&x.lessonId).length,34);
+assert.equal(allSlots.filter(x=>x.mode==="new"&&!x.lessonId).length,174);
+assert.ok(allSlots.filter(x=>x.mode==="new"&&!x.lessonId).every(x=>x.status==="awaiting-authentic-source-and-content-review"));
+console.log("KIDS ACADEMY V9.1 VERIFIED: 34 catalog lessons, 208 yearly new-lesson slots, 174 gated pending sources, weekly 4/2/1, 454 voice texts.");
