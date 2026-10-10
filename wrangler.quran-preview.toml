@@ -1,0 +1,8 @@
+name = "dar-quran-players-showcase-v3"
+main = "cloudflare/quran-player-preview-worker.js"
+compatibility_date = "2026-08-01"
+workers_dev = true
+[assets]
+directory = ".quran-preview-assets"
+binding = "ASSETS"
+run_worker_first = true
