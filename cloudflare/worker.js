@@ -1,3 +1,4 @@
+// ADMIN_WORKER_REDEPLOY_RECOVERY_20261010 — unchanged runtime; restore current admin worker and its scheduled trigger.
 /* PUSH_SYSTEM_GUARD: Gebets-Push + Tages-Duʿāʾ/Empfehlung + Willkommens-Push.
    Nicht entfernen oder vereinfachen – CI blockiert sonst (scripts/push-system-guard.js).
    Deploy-Marker: welcome-push-once-v677
