@@ -36,6 +36,10 @@ for(const key of [
 assert(!js.includes("speechSynthesis"),"Unexpected system TTS in Duʿāʾ player");
 assert(js.includes("if(playCleanSequence([e.url],[seg],"),"Word fallback must use WebAudio cleaning");
 assert(js.includes("var BATCH_SIZE=5;"),"Long Duʿāʾ word sequences must use bounded requests");
+assert(js.includes("var latestWordRequest=0;"),"Word audio promises must be invalidated on mode change");
+assert(js.includes("if(requestId!==latestWordRequest||currentDua!==requestedDua)return false;"),"Stale word audio must not restart when a newer word is selected");
+assert(js.includes("latestWordRequest++;"),"Stopping audio must invalidate late word requests");
+assert(/function playWhole\(slow\)\{\s*if\(!currentDua\)return false;\s*stopAudio\(\);/.test(js),"Whole-phrase pending downloads must cancel existing audio immediately");
 assert(js.includes("urls.slice(offset,offset+BATCH_SIZE).map(cleanDecode)"),"Word batches must prefetch only five neighbouring clips");
 assert(!js.includes("Promise.all(urls.map(cleanDecode))"),"Unbounded word-audio fetch would overload iPhone");
 assert(js.includes("if(noWordsStarted&&typeof onFailure==="),"Fallback must not repeat a partially heard Duʿāʾ");
