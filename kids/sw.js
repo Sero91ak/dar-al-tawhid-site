@@ -714,13 +714,27 @@ function kidsItemValidate(input){
  const urls=list.map(kidsItemAssetUrl);
  return urls.some(url=>!url)?null:{key,urls:[...new Set(urls)]};
 }
+function kidsItemValid(url,response){
+ if(!response||response.status!==200)return false;
+ const type=String(response.headers.get("Content-Type")||"").toLowerCase();
+ // A stale HTML error page must never masquerade as a saved MP3/JPG/JSON.
+ if(!new URL(url).pathname.endsWith(".html")&&type.includes("text/html"))return false;
+ const path=new URL(url).pathname;
+ if(/\\.(?:m4a|mp3)$/i.test(path)&&response.headers.get("Content-Length")==="0")return false;
+ return true;
+}
 async function kidsItemHas(cache,urls){
- for(const url of urls){const hit=await cache.match(url);if(!hit||hit.status!==200)return false;}
+ for(const url of urls){if(!kidsItemValid(url,await cache.match(url)))return false;}
  return true;
 }
 async function kidsItemPut(cache,url){
- if(await cache.match(url))return true;
- if(new URL(url).pathname.startsWith("/kids/"))return kidsPutFull(url,cache);
+ const old=await cache.match(url);
+ if(kidsItemValid(url,old))return true;
+ if(old)await cache.delete(url);
+ if(new URL(url).pathname.startsWith("/kids/")){
+  const ok=await kidsPutFull(url,cache);
+  return ok&&kidsItemValid(url,await cache.match(url));
+ }
  try{
   const hit=await caches.match(url);
   if(hit?.status===200){await cache.put(url,hit.clone());return true;}
