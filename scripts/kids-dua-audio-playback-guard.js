@@ -170,5 +170,17 @@ for(const [file,count] of [
 for(const page of ["kids/index.html","kids/start.html","kids/shell.html"])
   assert(read(page).includes("/kids/dua-smart-learn.js?v=1310"),page+" stale script");
 assert(read("kids/sw.js").includes('"/kids/dua-smart-learn.js?v=1310"'),"SW precache mismatch");
+const cssFocus=read("kids/dua-layout-v1259.css");
+const activeArabic=cssFocus.match(/html body \.dsl\.phrase-playing \.dsl-word\.active\.ar\{([^}]*)\}/);
+const activeLatin=cssFocus.match(/html body \.dsl\.phrase-playing \.dsl-word\.active\.tr\{([^}]*)\}/);
+assert(activeArabic&&activeLatin,"Missing full/slow word focus styles");
+assert(!activeArabic[1].includes("background:transparent"),"Continuous playback hides yellow Arabic focus");
+assert(!activeLatin[1].includes("background:transparent"),"Continuous playback hides Latin focus");
+for(const page of ["kids/index.html","kids/start.html","kids/shell.html"]){
+  assert(read(page).includes("/kids/dua-layout-v1259.css?v=1311"),page+" stale Arabic focus style");
+  assert(read(page).includes("/kids/sw.js?v=1311"),page+" stale focus PWA cache");
+}
+assert(read("kids/sw.js").includes('"/kids/dua-layout-v1259.css?v=1311"'),"Offline yellow focus CSS stale");
+assert(read("kids/version.json").includes('"serviceWorkerCache": "v1311"'),"Offline cache revision stale");
 console.log("KIDS DUA AUDIO PASS: full phrase unchanged, slow focus, soft word-boundary QA, 120/120/696 registered, PWA aligned");
 console.log("Not certified: real audible breaths, native Arabic pronunciation and device QA.");

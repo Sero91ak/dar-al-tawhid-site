@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1310";
+const CACHE_NAME="dar-al-tawhid-kids-v1311";
 const KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306";
 const DUA_AUDIO_RUNTIME="1244";
 // QUIZ_HOME_RESTORE_V1225: refresh installed PWAs with the restored Quiz entry.
@@ -183,7 +183,7 @@ const CORE_PRECACHE=[
   "/kids/kids-age-typography.js?v=3",
   "/kids/owner-voice.js?v=8",
   "/kids/dua-smart-learn.css?v=1261",
-  "/kids/dua-layout-v1259.css?v=1261",
+  "/kids/dua-layout-v1259.css?v=1311",
   "/kids/dua-learn-cinema-v1261.css?v=1261",
   "/kids/dua-word-meanings-v1.js?v=2",
   "/kids/dua-phonetic-alignment-v1.js?v=1",

@@ -6624,7 +6624,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   // The next navigation uses network-first and receives the latest release.
   if("serviceWorker" in navigator){
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1310",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1311",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     },{once:true});
@@ -11208,7 +11208,7 @@ html[data-view="stories"] #view-stories > :last-child{
 <link rel="stylesheet" href="/kids/global-detail-dock-v1247.css?v=1297" data-kids-global-detail-dock="1257">
 <script src="/kids/global-detail-dock-v1247.js?v=1278" data-kids-global-detail-dock="1257"></script>
 
-<link rel="stylesheet" href="/kids/dua-layout-v1259.css?v=1261" data-kids-dua-layout="1259">
+<link rel="stylesheet" href="/kids/dua-layout-v1259.css?v=1311" data-kids-dua-layout="1259">
 <link rel="stylesheet" href="/kids/dua-learn-cinema-v1261.css?v=1261" data-kids-dua-cinema="1261">
 <link rel="stylesheet" href="/kids/dua-learn-trilingual-v1282.css?v=1291" data-kids-dua-trilingual="1282">
 <link rel="stylesheet" href="/kids/dua-learn-elastic-v1286.css?v=1286" data-kids-dua-elastic="1286">
