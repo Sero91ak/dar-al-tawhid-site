@@ -1190,10 +1190,13 @@ html[data-theme] body.is-quran-overview #appView.view{
 }
 html[data-theme] body.is-quran-overview .qov-smart-page{
   min-height:0!important;height:auto!important;max-width:100%!important;
-  padding-bottom:0!important;overflow-x:clip!important;
+  /* Parent and qov-main previously each supplied mobile horizontal padding. */
+  padding-inline:0!important;padding-bottom:0!important;overflow-x:clip!important;
 }
 html[data-theme] body.is-quran-overview .qov-smart-page .qov-main{
-  min-height:0!important;height:auto!important;
+  min-height:0!important;height:auto!important;min-width:0!important;
+  /* Mobile: same safe inset as the bottom tabs. Wide screens: fluid, bounded. */
+  max-width:min(100%,1240px)!important;
   padding-inline:max(12px,env(safe-area-inset-left,0px)) max(12px,env(safe-area-inset-right,0px))!important;
 }
 html[data-theme] body.is-quran-overview .qov-smart-page .qov-header{
