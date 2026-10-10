@@ -229,7 +229,9 @@ function browserManifestResponse(request, androidBrowser = false) {
     display: "standalone",
     display_override: ["standalone", "minimal-ui"],
     start_url: "/pwa/?pwa=1",
-    scope: "/pwa/",
+    // Installation from public website has to include the current page in scope.
+    // The installed Android app continues using /manifest.json with /pwa/ scope.
+    scope: url.pathname === "/install-manifest.json" ? "/" : "/pwa/",
     id: "/pwa/",
     theme_color: icon.theme,
     background_color: "#050706",
@@ -473,7 +475,7 @@ a,button,[role="button"],summary,[tabindex],label{-webkit-tap-highlight-color:tr
       var meta=document.querySelector('meta[name="theme-color"]');
       if(meta&&row)meta.setAttribute("content",row.theme);
       document.documentElement.setAttribute("data-dar-pwa-icon-current",id);
-      fetch("/manifest.json",{cache:"no-store",credentials:"same-origin"}).catch(function(){});
+      fetch("/install-manifest.json",{cache:"no-store",credentials:"same-origin"}).catch(function(){});
     }catch(e){}
   }
   function applyPwaIcon(id,persist){
@@ -539,7 +541,7 @@ a,button,[role="button"],summary,[tabindex],label{-webkit-tap-highlight-color:tr
   }
   async function ensureAndroidServiceWorkerReady(){
     try{
-      await fetch("/manifest.json",{cache:"no-store",credentials:"same-origin"});
+      await fetch("/install-manifest.json",{cache:"no-store",credentials:"same-origin"});
       if("serviceWorker" in navigator){
         var regs=await navigator.serviceWorker.getRegistrations();
         regs.forEach(function(reg){var worker=reg.active||reg.waiting||reg.installing;if(!worker||!worker.scriptURL)return;try{var sw=new URL(worker.scriptURL,location.href);if(sw.origin===location.origin&&sw.pathname==="/service-worker.js")reg.unregister()}catch(eSw){}});
@@ -1178,7 +1180,7 @@ export default {
     const voicePath = url.pathname === "/voice-studio" || url.pathname.startsWith("/voice-studio/");
     const legacyVoicePath = url.pathname === "/test/voice-studio" || url.pathname.startsWith("/test/voice-studio/");
 
-    if ((request.method === "GET" || request.method === "HEAD") && url.pathname === "/manifest.json" && !nativeApp) {
+    if ((request.method === "GET" || request.method === "HEAD") && (url.pathname === "/manifest.json" || url.pathname === "/install-manifest.json") && !nativeApp) {
       return browserManifestResponse(request, androidBrowser);
     }
 
