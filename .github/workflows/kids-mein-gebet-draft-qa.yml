@@ -6,11 +6,17 @@ on:
     paths:
       - ".github/workflows/kids-mein-gebet-draft-qa.yml"
       - "kids/mein-gebet/rigging/**"
+      - "kids/mein-gebet/vorschau.html"
+      - "kids/mein-gebet/demo-*.html"
+      - "kids/mein-gebet/assets/**"
   pull_request:
     branches: [main]
     paths:
       - ".github/workflows/kids-mein-gebet-draft-qa.yml"
       - "kids/mein-gebet/rigging/**"
+      - "kids/mein-gebet/vorschau.html"
+      - "kids/mein-gebet/demo-*.html"
+      - "kids/mein-gebet/assets/**"
 
 # Isolated safety checks for the draft PR. No deploy, build, secrets or write token.
 permissions:
@@ -59,6 +65,8 @@ jobs:
           python kids/mein-gebet/rigging/test_geometry_projection_preflight.py
           python kids/mein-gebet/rigging/test_glb_projection_accessor.py
           python kids/mein-gebet/rigging/test_qa_v77_archive.py
+      - name: Verify mobile HTML preview hub and both profile demos
+        run: node --test kids/mein-gebet/rigging/test-preview-html.cjs
       - name: Ensure production release is blocked without real reviewed GLBs
         shell: bash
         run: |
