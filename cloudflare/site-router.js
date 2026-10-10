@@ -558,7 +558,7 @@ a,button,[role="button"],summary,[tabindex],label{-webkit-tap-highlight-color:tr
         btn.disabled=installed;
         btn.setAttribute("aria-disabled",installed?"true":"false");
         btn.setAttribute("data-dar-pwa-install-state",installed?"installed":(ready?"ready":"preparing"));
-        var nextLabel=installed?"Bereits installiert":(preparing?"Installation / Anleitung öffnen":btn.dataset.darInstallLabel);
+        var nextLabel=installed?"Bereits installiert":"Web-App installieren";
         if(btn.textContent!==nextLabel)btn.textContent=nextLabel;
       });
     }catch(e){}
@@ -617,8 +617,7 @@ a,button,[role="button"],summary,[tabindex],label{-webkit-tap-highlight-color:tr
         window.__darEarlyInstallPrompt=null;
       }
     }
-    setPwaHint("Die Installationsseite wird geöffnet …");
-    location.assign("/pwa/install/");
+    setPwaHint("Android bereitet den direkten Installationsdialog vor. Bitte erneut auf „Web-App installieren“ tippen.");
     return false;
   };
   document.addEventListener("click",function(event){
@@ -718,7 +717,7 @@ a,button,[role="button"],summary,[tabindex],label{-webkit-tap-highlight-color:tr
       var root=document.getElementById("pageRoot");
       if(!root)return;
       root.innerHTML='<section class="dar-download-fallback"><div class="dar-download-fallback__intro"><small>DOWNLOADS</small><h1>DĀR AL TAWḤĪD als App nutzen.</h1><p>Android direkt als Web-App installieren.</p></div><div class="dar-download-fallback__grid">'+
-        '<article class="dar-download-fallback__card"><div class="dar-download-fallback__head"><span class="dar-download-fallback__icon">'+androidLogoMarkup()+'</span><div><small>ANDROID · SMARTPHONE & TABLET</small><h2>Web-App installieren</h2></div></div><p>Die öffentliche DĀR AL TAWḤĪD Website lässt sich auf Android direkt wie eine App installieren. Keine APK nötig.</p><ol><li>In Chrome, Edge oder Samsung Internet öffnen.</li><li>Auf Web-App installieren tippen.</li><li>Auf „Web-App installieren“ tippen – der native Android-Installationsdialog öffnet sich direkt, sobald Chrome die Web-App freigegeben hat.</li></ol><button class="dar-download-fallback__btn" type="button" data-dar-pwa-install>Web-App installieren</button></article>'+
+        '<article class="dar-download-fallback__card"><div class="dar-download-fallback__head"><span class="dar-download-fallback__icon">'+androidLogoMarkup()+'</span><div><small>ANDROID · SMARTPHONE & TABLET</small><h2>Web-App installieren</h2></div></div><p>Die öffentliche DĀR AL TAWḤĪD Website lässt sich auf Android direkt wie eine App installieren. Keine APK nötig.</p><ol><li>In Chrome, Edge oder Samsung Internet öffnen.</li><li>Auf Web-App installieren tippen.</li><li>Der native Android-Installationsdialog erscheint direkt hier, sobald der Browser die Web-App freigegeben hat.</li></ol><button class="dar-download-fallback__btn" type="button" data-dar-pwa-install>Web-App installieren</button></article>'+
         '<article class="dar-download-fallback__card"><div class="dar-download-fallback__head"><span class="dar-download-fallback__icon">'+appleLogoMarkup()+'</span><div><small>APPLE · IPHONE & IPAD</small><h2>iOS-App</h2></div></div><p>Die offizielle iOS-App ist im Apple App Store erhältlich.</p><a class="dar-download-fallback__btn" href="https://apps.apple.com/de/app/id6805988753">Im App Store laden</a></article>'+
         '</div></section>';
       applyPwaIcon(getPwaIconId(),false);
