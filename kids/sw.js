@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1313";
+const CACHE_NAME="dar-al-tawhid-kids-v1314";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 const KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306";
@@ -70,7 +70,7 @@ const CORE_PRECACHE=[
   "/kids/data/story-hub.json?v=7",
   "/kids/deen-learning-v1199.css?v=1199",
   "/kids/deen-lessons.css?v=2",
-  "/kids/deen-lessons.js?v=4",
+  "/kids/deen-lessons.js?v=5",
   "/kids/global-detail-dock-v1247.css?v=1297",
   "/kids/global-detail-dock-v1247.js?v=1278",
   "/kids/data/deen-lessons.json?v=3",
@@ -99,7 +99,7 @@ const CORE_PRECACHE=[
   "/kids/story-hub.css?v=12",
   "/kids/stories-home-v1133.css?v=1152",
   "/kids/stories-home-v1138.css?v=1152",
-  "/kids/story-hub.js?v=25",
+  "/kids/story-hub.js?v=26",
   "/kids/global-story-glow-v1216.css?v=1217",
   "/kids/global-story-glow-v1216.js?v=1239",
   "/kids/dua-hub-v1219.css?v=1278",
@@ -282,6 +282,8 @@ const KIDS_BOOT_PRECACHE=[
   "/kids/assets/kids-salah-v1272/hero-home.png?v=1274",
   "/kids/assets/kids-home-v1222/dar-title-reference-clean.svg?v=1229",
   "/kids/manifest.webmanifest",
+  "/kids/item-offline-v1.js?v=1",
+  "/kids/item-offline-v1.css?v=1",
   "/kids/offline-library-v1.js?v=1",
   "/kids/offline-library-v1.css?v=1",
   "/kids/akademie/curriculum-v1.js?v=20261010-01",
@@ -389,6 +391,10 @@ self.addEventListener("fetch",function(event){
   var request=event.request;
   if(request.method!=="GET")return;
   var url=new URL(request.url);
+  // Narrow exception for Kids Academy artwork, not the adult application.
+  if(url.origin===self.location.origin&&/^\/desktop-preview\/assets\/kids-academy-[a-zA-Z0-9-]+\.jpg$/i.test(url.pathname)){
+    event.respondWith(cacheFirst(request));return;
+  }
   if(!isKidsRequest(url))return;
 
   if(request.mode==="navigate"||request.destination==="document"||url.pathname==="/kids/start"||url.pathname==="/kids/start.html"||url.pathname==="/kids/start/"||url.pathname==="/kids/"||url.pathname==="/kids/index.html"||url.pathname==="/kids/shell.html"){
@@ -689,6 +695,89 @@ async function kidsOfflineDownload(source,mode){
     }
   }
 }
+
+/* KIDS_PER_ITEM_OFFLINE_WORKER_V1: verified persistent per-item downloads. */
+let kidsItemBusy=false;
+function kidsItemAssetUrl(input){
+ try{
+  const u=new URL(String(input||""),self.location.origin);
+  if(u.origin!==self.location.origin)return null;
+  if(/^\/kids\/[a-zA-Z0-9/_%.+-]+\.(?:html|js|json|css|png|jpe?g|webp|svg|m4a|mp3)$/i.test(u.pathname)||
+    /^\/desktop-preview\/assets\/kids-academy-[a-zA-Z0-9-]+\.jpg$/i.test(u.pathname))return u.href;
+ }catch(_){}
+ return null;
+}
+function kidsItemValidate(input){
+ const key=String(input?.key||""),list=input?.files;
+ if(!/^(?:story|deen|academy):[a-zA-Z0-9_-]+(?::[a-zA-Z0-9_-]+){0,2}$/.test(key)||
+   !Array.isArray(list)||!list.length||list.length>24)return null;
+ const urls=list.map(kidsItemAssetUrl);
+ return urls.some(url=>!url)?null:{key,urls:[...new Set(urls)]};
+}
+function kidsItemValid(url,response){
+ if(!response||response.status!==200)return false;
+ const type=String(response.headers.get("Content-Type")||"").toLowerCase();
+ // A stale HTML error page must never masquerade as a saved MP3/JPG/JSON.
+ if(!new URL(url).pathname.endsWith(".html")&&type.includes("text/html"))return false;
+ const path=new URL(url).pathname;
+ if((path.endsWith(".m4a")||path.endsWith(".mp3"))&&response.headers.get("Content-Length")==="0")return false;
+ return true;
+}
+async function kidsItemHas(cache,urls){
+ for(const url of urls){if(!kidsItemValid(url,await cache.match(url)))return false;}
+ return true;
+}
+async function kidsItemPut(cache,url){
+ const old=await cache.match(url);
+ if(kidsItemValid(url,old))return true;
+ if(old)await cache.delete(url);
+ if(new URL(url).pathname.startsWith("/kids/")){
+  const ok=await kidsPutFull(url,cache);
+  return ok&&kidsItemValid(url,await cache.match(url));
+ }
+ try{
+  const hit=await caches.match(url);
+  if(hit?.status===200){await cache.put(url,hit.clone());return true;}
+  const r=await fetch(url,{cache:"no-store"});
+  if(!r.ok||r.status!==200||!/image\//i.test(r.headers.get("Content-Type")||""))return false;
+  await cache.put(url,r);return true;
+ }catch(_){return false;}
+}
+async function kidsItemHandle(event){
+ const msg=event.data||{},port=event.ports?.[0];
+ if(!port)return;
+ const send=d=>{try{port.postMessage(d)}catch(_){}};
+ const input=kidsItemValidate(msg);
+ if(!input){send({type:"KIDS_ITEM_RESULT",error:"Ungültige Offline-Dateiliste."});return;}
+ if(msg.type==="KIDS_ITEM_STATUS"){
+  try{const c=await caches.open(KIDS_OFFLINE_CACHE);
+   send({type:"KIDS_ITEM_RESULT",ready:await kidsItemHas(c,input.urls)});
+  }catch(_){send({type:"KIDS_ITEM_RESULT",ready:false})}
+  return;
+ }
+ if(msg.type!=="KIDS_ITEM_SAVE")return;
+ if(kidsItemBusy||kidsOfflineRunning){
+  send({type:"KIDS_ITEM_RESULT",ready:false,error:"Ein anderer Download läuft. Bitte erneut tippen."});return;
+ }
+ kidsItemBusy=true;
+ try{
+  const cache=await caches.open(KIDS_OFFLINE_CACHE);
+  let done=0,failed=0;
+  for(const url of input.urls){
+   if(!await kidsItemPut(cache,url))failed++;
+   send({type:"KIDS_ITEM_PROGRESS",done:++done,total:input.urls.length});
+  }
+  const ready=failed===0&&await kidsItemHas(cache,input.urls);
+  send({type:"KIDS_ITEM_RESULT",ready,error:ready?null:failed+" Datei(en) fehlen. Bitte erneut versuchen."});
+ }catch(_){send({type:"KIDS_ITEM_RESULT",ready:false,error:"Speicher voll oder Verbindung unterbrochen."})}
+ finally{kidsItemBusy=false}
+}
+self.addEventListener("message",event=>{
+ if(event.data?.type!=="KIDS_ITEM_STATUS"&&event.data?.type!=="KIDS_ITEM_SAVE")return;
+ const page=String(event.source?.url||"");
+ if(page){try{const u=new URL(page);if(u.origin!==self.location.origin||!u.pathname.startsWith("/kids/"))return;}catch(_){return}}
+ event.waitUntil(kidsItemHandle(event));
+});
 self.addEventListener("message",function(event){
   const msg=event.data||{};
   if(msg.type==="KIDS_OFFLINE_CANCEL"){kidsOfflineCancel=true;return;}
