@@ -72,7 +72,13 @@ const prophetBundleVersion = String(Number(visual.prophetStoriesBundleVersion ||
 const exactV106Snapshot = build === "kids-shell-v12-tab106" && label === "KIDS · V1.06";
 const htmlCssVersion = exactV106Snapshot ? "21" : prophetBundleVersion;
 const htmlJsVersion = exactV106Snapshot ? "31" : prophetBundleVersion;
-const swVersion = exactV106Snapshot ? "117" : buildNumber;
+// Shell build and PWA asset cache are intentionally independent. Keep both
+// validated, with the cache never older than the shell build.
+const declaredCacheVersion = String(visual.serviceWorkerCache || "").replace(/^v/, "");
+const swVersion = exactV106Snapshot ? "117" : declaredCacheVersion;
+if (!exactV106Snapshot && (!/^\d+$/.test(swVersion) || Number(swVersion) < Number(buildNumber))) {
+  error("kids/version.json: PWA cache version invalid or older than Kids shell build");
+}
 const prophetArtVersion = exactV106Snapshot ? "21" : assetVersion;
 
 const expectedIds = [
@@ -150,6 +156,7 @@ requireMatch(read("_headers"), "X-Kids-Build: " + build, "_headers");
 
 const sw = read("kids/sw.js");
 requireMatch(sw, 'const CACHE_NAME="dar-al-tawhid-kids-v' + swVersion + '";', "kids/sw.js");
+requireMatch(sw, 'const KIDS_BUILD_ID="' + build + '";', "kids/sw.js");
 requireMatch(sw, "/kids/prophet-stories.css?v=" + htmlCssVersion, "kids/sw.js");
 requireMatch(sw, "/kids/story-policy.js?v=" + String(Number(visual.storyPolicyVersion || 0)), "kids/sw.js");
 requireMatch(sw, "/kids/prophet-stories.js?v=" + htmlJsVersion, "kids/sw.js");
