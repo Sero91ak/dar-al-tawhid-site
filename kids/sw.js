@@ -282,7 +282,12 @@ const KIDS_BOOT_PRECACHE=[
   "/kids/assets/kids-home-v1222/dar-title-reference-clean.svg?v=1229",
   "/kids/manifest.webmanifest",
   "/kids/offline-library-v1.js?v=1",
-  "/kids/offline-library-v1.css?v=1"
+  "/kids/offline-library-v1.css?v=1",
+  "/kids/akademie/curriculum-v1.js?v=20261010-01",
+  "/kids/akademie/curriculum-v2.js?v=20261010-09",
+  "/kids/akademie/school-progress-v11.js?v=20261010-11",
+  "/kids/owner-voice.js?v=academy-serhat-v1-20261010",
+  "/kids/data/academy-audio.json?v=1"
 ];
 
 function addQuiet(cache,url){
@@ -339,7 +344,12 @@ function networkFirst(request,fallback){
   }).catch(function(){
     return caches.match(request).then(function(hit){
       if(hit)return hit;
-      return fallback?caches.match(fallback):Response.error();
+      // A previous offline pack may contain the unversioned JSON/JS resource
+      // while the page requests a cache-busted URL. Prefer that valid asset
+      // before routing an offline subpage back to the Kids home screen.
+      return caches.match(new URL(request.url).pathname).then(function(bare){
+        return bare||(fallback?caches.match(fallback):Response.error());
+      });
     });
   });
 }
@@ -484,6 +494,15 @@ self.addEventListener("fetch",function(event){
  */
 const KIDS_OFFLINE_SEEDS=[
   "/kids/akademie/index.html",
+  "/kids/akademie/curriculum-v1.js?v=20261010-01",
+  "/kids/akademie/curriculum-v2.js?v=20261010-09",
+  "/kids/akademie/school-progress-v11.js?v=20261010-11",
+  "/kids/owner-voice.js?v=academy-serhat-v1-20261010",
+  "/kids/data/academy-audio.json?v=1",
+  "/kids/data/owner-voice-audio.json?v=2",
+  "/kids/data/quiz-audio.json?v=2",
+  "/kids/data/dua-audio.json?v=8",
+  "/kids/data/dua-arabic-audio.json?v=8",
   "/kids/data/academy-audio.json",
   "/kids/data/prophet-stories.json",
   "/kids/data/mubashshirun-stories.json",
