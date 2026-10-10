@@ -2355,7 +2355,7 @@ button,input,select{font:inherit}
    window.__darSyncInstallButtons();
    try{
     fetch("/install-manifest.json",{cache:"no-store",credentials:"same-origin"}).catch(function(){});
-    if("serviceWorker" in navigator){
+    if("serviceWorker" in navigator && /\bAndroid\b/i.test(String(navigator.userAgent||""))){
      navigator.serviceWorker.getRegistrations().then(function(regs){
       return Promise.all(regs.map(function(reg){
        var worker=reg.active||reg.waiting||reg.installing;
