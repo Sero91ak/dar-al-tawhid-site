@@ -14,6 +14,7 @@ on:
       - 'kids/shell.html'
       - 'kids/sw.js'
       - 'scripts/kids-dua-audio-playback-guard.js'
+      - 'scripts/kids-dua-audio-acoustic-audit.py'
       - '.github/workflows/build-kids-quiz-owner-voice.yml'
       - '.github/workflows/validate-kids-dua-audio.yml'
   push:
@@ -120,6 +121,8 @@ jobs:
           print("Du'a manifests and audio assets OK")
           PY
 
+      - name: Diagnose 10 existing V4 Fuṣḥā word clips (non-destructive)
+        run: python3 scripts/kids-dua-audio-acoustic-audit.py
       - name: Check all 120 Du'a runtime key matches
         run: |
           node <<'NODE'
