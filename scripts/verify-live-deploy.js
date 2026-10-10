@@ -57,6 +57,24 @@ async function waitForHtmlIncludes(url, needles, extraHeaders = {}) {
   return false;
 }
 
+async function waitForPublicWebsite(url) {
+  for (let attempt = 1; attempt <= ATTEMPTS; attempt++) {
+    const { status, text, cf, surface } = await fetchStatus(url);
+    const htmlOk =
+      text.includes("DĀR AL TAWḤĪD") &&
+      text.includes("desktop-overhaul") &&
+      text.includes("darPublicWebsiteGuardV1") &&
+      !text.includes('id="darDedicatedPwaBootV2"');
+    const ok = status === 200 && surface === "public-website" && htmlOk;
+    console.log(
+      `verify-public: ${url} -> ${status} (cf=${cf}, surface=${surface || "n/a"}, attempt ${attempt}/${ATTEMPTS}, html=${htmlOk ? "ok" : "fail"})`
+    );
+    if (ok) return true;
+    if (attempt < ATTEMPTS) await sleep(DELAY_MS);
+  }
+  return false;
+}
+
 async function main() {
   const mode = process.env.DEPLOY_VERIFY_MODE || "all";
   let failed = 0;
@@ -86,10 +104,11 @@ async function main() {
 
     // Browser root intentionally serves the public desktop website, while the
     // installed/native app receives the canonical app shell. Validate both.
-    const publicWebsiteOk = await waitForHtmlIncludes(`${SITE_URL}/`, [
-      "DĀR AL TAWḤĪD",
-      "desktop-overhaul"
-    ]);
+    const publicWebsiteOk = await waitForPublicWebsite(`${SITE_URL}/`);
+    const publicIsolationSwOk = await waitForHtmlIncludes(
+      `${SITE_URL}/service-worker.js?cb=${Date.now()}`,
+      ["PUBLIC_WEBSITE_NETWORK_ONLY_V1"]
+    );
     let visitorOk = await waitForHtmlIncludes(`${SITE_URL}/`, [visitorBuild], nativeHeaders);
     if (!visitorOk) {
       visitorOk = await waitForHtmlIncludes(`${SITE_URL}/index.html`, [visitorBuild], nativeHeaders);
@@ -117,9 +136,9 @@ async function main() {
       200
     );
 
-    if (!publicWebsiteOk || !visitorOk || !pwaOk || zakatVer < expectZakat || !voiceStudioOk || !voiceVersionOk || !pronunciationOk) {
+    if (!publicWebsiteOk || !publicIsolationSwOk || !visitorOk || !pwaOk || zakatVer < expectZakat || !voiceStudioOk || !voiceVersionOk || !pronunciationOk) {
       console.error(
-        `verify: Besucher-App fehlgeschlagen (public=${publicWebsiteOk ? "ok" : "fail"}, native-build=${visitorOk ? visitorBuild : "fail"}, android-pwa=${pwaOk ? "ok" : "fail"}, zakat=v${zakatVer || "?"}, voice=${voiceStudioOk ? "ok" : "fail"}, voice-version=${voiceVersionOk ? "ok" : "fail"}, pronunciation=${pronunciationOk ? "ok" : "fail"})`
+        `verify: Besucher-App fehlgeschlagen (public=${publicWebsiteOk ? "ok" : "fail"}, web-sw-isolation=${publicIsolationSwOk ? "ok" : "fail"}, native-build=${visitorOk ? visitorBuild : "fail"}, android-pwa=${pwaOk ? "ok" : "fail"}, zakat=v${zakatVer || "?"}, voice=${voiceStudioOk ? "ok" : "fail"}, voice-version=${voiceVersionOk ? "ok" : "fail"}, pronunciation=${pronunciationOk ? "ok" : "fail"})`
       );
       failed += 1;
     } else {
