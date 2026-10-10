@@ -1,0 +1,23 @@
+name: Quran V7 Visual Render Review
+on:
+  workflow_dispatch:
+  push:
+    branches: [preview/quran-player-browser-links-20261010]
+    paths: [.github/workflows/qa-quran-v7-render.yml]
+permissions:
+  contents: read
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install browser
+        run: |
+          npm install --no-save --ignore-scripts --no-audit --no-fund playwright@1.57.0
+          npx playwright install --with-deps chromium
+      - name: Render four screenshots for visual review
+        run: node scripts/qa-quran-v7-render.cjs
