@@ -1,9 +1,12 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1312";
+const CACHE_NAME="dar-al-tawhid-kids-v1313";
+const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 const KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306";
 const DUA_AUDIO_RUNTIME="1244";
 // QUIZ_HOME_RESTORE_V1225: refresh installed PWAs with the restored Quiz entry.
 const CORE_PRECACHE=[
   "/kids/assets/kids-salah-v1272/hero-home.png?v=1272",
+  "/kids/assets/kids-salah-v1272/hero-home.png?v=1274",
+  "/kids/akademie/index.html",
   "/kids/assets/kids-salah-v1272/hero-day.png?v=1277",
   "/kids/assets/kids-salah-v1272/fajr.png?v=1277",
   "/kids/assets/kids-salah-v1272/dhuhr.png?v=1277",
@@ -265,6 +268,21 @@ const PRECACHE=CORE_PRECACHE.concat([
   "/kids/assets/prophet-symbols/ibrahim.webp"
 ]);
 
+// KIDS_FAST_FIRST_PAINT_V1313: do not block SW installation on 255+ heavy
+// illustrations/audio clips. Save the EXACT image used by the final homepage CSS.
+// Larger visual and voice libraries download separately in resumable packs.
+const KIDS_BOOT_PRECACHE=[
+  "/kids/start",
+  "/kids/start.html",
+  "/kids/index.html",
+  "/kids/akademie/index.html",
+  "/kids/prayer-stage-v1261.css?v=1304",
+  "/kids/prayer-stage-v1261.js?v=1306",
+  "/kids/assets/kids-salah-v1272/hero-home.png?v=1274",
+  "/kids/assets/kids-home-v1222/dar-title-reference-clean.svg?v=1229",
+  "/kids/manifest.webmanifest"
+];
+
 function addQuiet(cache,url){
   return cache.add(url).catch(function(){});
 }
@@ -279,20 +297,14 @@ function fillCache(urls){
 }
 
 self.addEventListener("install",function(event){
-  var precacheIndex=0;
+  // Install only the first-paint shell. Full downloads use KIDS_OFFLINE_START.
+  // Concurrent small requests allow the opening artwork to be ready sooner.
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(function(cache){
-        return Promise.all([0,1,2].map(function(){
-          var next=function(){
-            if(precacheIndex>=CORE_PRECACHE.length)return Promise.resolve();
-            var path=CORE_PRECACHE[precacheIndex++];
-            return addQuiet(cache,path).then(next);
-          };
-          return next();
-        }));
-      })
-      .then(function(){return self.skipWaiting()})
+    caches.open(CACHE_NAME).then(function(cache){
+      return Promise.all(KIDS_BOOT_PRECACHE.map(function(path){
+        return addQuiet(cache,path);
+      }));
+    }).then(function(){return self.skipWaiting()})
   );
 });
 
@@ -301,7 +313,7 @@ self.addEventListener("activate",function(event){
   event.waitUntil(
     caches.keys().then(function(keys){
       return Promise.all(keys.filter(function(key){
-        return key.indexOf("dar-al-tawhid-kids-")===0&&key!==CACHE_NAME;
+        return key.indexOf("dar-al-tawhid-kids-v")===0&&key!==CACHE_NAME;
       }).map(function(key){return caches.delete(key)}));
     }).then(function(){return self.clients.claim()})
   );
@@ -372,8 +384,10 @@ self.addEventListener("fetch",function(event){
     event.respondWith(fetch(request));
     return;
   }
-  if(url.pathname.indexOf("/kids/assets/prophet-story-audio/")===0||url.pathname.indexOf("/kids/assets/mubashshirun-story-audio/")===0||url.pathname.indexOf("/kids/assets/sahabiyyat-story-audio/")===0||url.pathname.indexOf("/kids/assets/kids-owner-voice/")===0||url.pathname.indexOf("/kids/assets/kids-quiz-audio/")===0||url.pathname.indexOf("/kids/assets/kids-dua-audio/")===0||url.pathname.indexOf("/kids/assets/kids-dua-arabic-audio/")===0||url.pathname.indexOf("/kids/assets/kids-dua-arabic-slow-audio/")===0||url.pathname.indexOf("/kids/assets/kids-dua-word-audio/")===0){
-    event.respondWith(fetch(request));
+  // Full audio is cached as soon as it is used; Range requests must receive
+  // valid 206 responses from stored full files on iOS/Safari in airplane mode.
+  if(/\.(?:m4a|mp3|ogg|wav|aac)$/i.test(url.pathname)){
+    event.respondWith(kidsCachedAudio(request,event));
     return;
   }
   // The quiz owner-voice router must update immediately after German speech fixes.
@@ -456,4 +470,172 @@ self.addEventListener("fetch",function(event){
     return;
   }
   event.respondWith(staleWhileRevalidate(request));
+});
+
+/* KIDS_RESUMABLE_OFFLINE_LIBRARY_V1
+ * Dedicated persistent cache: survives shell and PWA updates without purging
+ * student downloads. No cross-app URL may be stored in this namespace.
+ */
+const KIDS_OFFLINE_SEEDS=[
+  "/kids/akademie/index.html",
+  "/kids/data/academy-audio.json",
+  "/kids/data/prophet-stories.json",
+  "/kids/data/mubashshirun-stories.json",
+  "/kids/data/sahabiyyat-stories.json",
+  "/kids/data/story-hub.json",
+  "/kids/data/dua-kids.json",
+  "/kids/data/dua-audio.json",
+  "/kids/data/dua-arabic-audio.json",
+  "/kids/data/dua-arabic-slow-audio.json",
+  "/kids/data/dua-word-audio.json",
+  "/kids/data/quiz-audio.json",
+  "/kids/data/owner-voice-audio.json",
+  "/kids/data/quiz-kids.json",
+  "/kids/data/deen-lessons.json",
+  "/kids/data/term-learning-audio.json",
+  "/kids/data/verified-content.json",
+  "/kids/data/short-stories-voice.json",
+  "/kids/data/academy-lessons.json"
+];
+let kidsOfflineRunning=false,kidsOfflineCancel=false;
+function kidsOfflineRequest(input){
+  try{
+    const u=new URL(input,self.location.origin);
+    if(u.origin!==self.location.origin||!u.pathname.startsWith("/kids/"))return null;
+    // Do not store dynamic endpoints, cross-origin content, video/Range segments
+    // or guessed URLs. All offline files have a static extension.
+    if(!/\.(?:html|css|js|json|webmanifest|png|jpe?g|webp|gif|svg|avif|woff2?|m4a|mp3|ogg|wav|aac)$/i.test(u.pathname))return null;
+    return u.href;
+  }catch(_){return null;}
+}
+function kidsCachedFull(request){
+  const url=typeof request==="string"?request:request.url;
+  return caches.match(new Request(url));
+}
+async function kidsPutFull(url,cache){
+  const full=kidsOfflineRequest(url);
+  if(!full)return false;
+  const key=new Request(full,{method:"GET"});
+  if(await caches.match(key))return true;
+  try{
+    const response=await fetch(key,{cache:"no-store"});
+    if(!response||!response.ok||response.status!==200)return false;
+    const type=response.headers.get("content-type")||"";
+    const path=new URL(full).pathname;
+    if(/\.(?:m4a|mp3|ogg|wav|aac)$/i.test(path)&&/text\/html/i.test(type))return false;
+    await cache.put(key,response);
+    return true;
+  }catch(_){return false;}
+}
+async function kidsCachedAudio(request,event){
+  const full=await kidsCachedFull(request);
+  if(full&&full.status===200){
+    const range=request.headers.get("Range");
+    if(!range)return full;
+    const match=/^bytes=(\d*)-(\d*)$/i.exec(range.trim());
+    if(!match)return new Response(null,{status:416});
+    const file=await full.arrayBuffer(),length=file.byteLength;
+    const suffix=match[1]==="";
+    let from=suffix?Math.max(0,length-Number(match[2])):Number(match[1]);
+    let to=suffix?length-1:match[2]?Math.min(length-1,Number(match[2])):length-1;
+    if(!length||!Number.isFinite(from)||!Number.isFinite(to)||from>to||from>=length)
+      return new Response(null,{status:416,headers:{"Content-Range":"bytes */"+length}});
+    const headers=new Headers();
+    headers.set("Content-Type",full.headers.get("Content-Type")||"audio/mpeg");
+    headers.set("Accept-Ranges","bytes");
+    headers.set("Content-Range","bytes "+from+"-"+to+"/"+length);
+    headers.set("Content-Length",String(to-from+1));
+    return new Response(file.slice(from,to+1),{status:206,headers});
+  }
+  // Streaming remains instant while online. Warm a *complete* representation
+  // separately because HTTP 206 partial files cannot be safely cached as audio.
+  if(request.headers.has("Range")){
+    if(event&&event.waitUntil)event.waitUntil(
+      caches.open(KIDS_OFFLINE_CACHE).then(c=>kidsPutFull(request.url,c)).catch(()=>{})
+    );
+    return fetch(request);
+  }
+  return fetch(request).then(async response=>{
+    if(response&&response.status===200&&response.ok){
+      try{const copy=response.clone();event.waitUntil(caches.open(KIDS_OFFLINE_CACHE).then(c=>c.put(new Request(request.url),copy)).catch(()=>{}));}catch(_){}
+    }
+    return response;
+  });
+}
+function kidsAssetRefs(raw){
+  // Static /kids/ references only. JSON contains voice URLs and story artwork.
+  const hits=String(raw||"").match(/\/kids\/(?:assets|data|icons)\/[^\s"'<>\\)]+/g)||[];
+  const out=[];
+  for(const hit of hits){
+    const found=kidsOfflineRequest(hit.replace(/[;,]+$/,""));
+    if(found)out.push(found);
+  }
+  return out;
+}
+async function kidsSendOffline(source,type,detail){
+  if(source&&typeof source.postMessage==="function")try{source.postMessage(Object.assign({type},detail||{}))}catch(_){}
+}
+async function kidsOfflineDownload(source,mode){
+  if(kidsOfflineRunning){kidsSendOffline(source,"KIDS_OFFLINE_BUSY");return;}
+  kidsOfflineRunning=true;kidsOfflineCancel=false;
+  const cache=await caches.open(KIDS_OFFLINE_CACHE);
+  try{
+    const first=mode==="visual"
+      ?CORE_PRECACHE.filter(p=>/\.(?:png|jpe?g|webp|gif|svg|avif|woff2?|css|js|json|html|webmanifest)(?:\?|$)/i.test(p)).concat(KIDS_OFFLINE_SEEDS.filter(p=>/\.json$|\.html$/i.test(p)))
+      :CORE_PRECACHE.concat(KIDS_OFFLINE_SEEDS);
+    const paths=new Map();
+    function append(raw){
+      const u=kidsOfflineRequest(raw);
+      if(u&&!paths.has(u))paths.set(u,1);
+    }
+    first.forEach(append);
+    if(mode!=="visual"){
+      // Read the actual published manifests; never fabricate audio paths.
+      // Enumerate nested static audio/images referenced by stories, lessons,
+      // Du'a, quiz and academy, with a cap against accidental recursive bloat.
+      for(const seed of KIDS_OFFLINE_SEEDS){
+        if(kidsOfflineCancel)break;
+        const url=kidsOfflineRequest(seed);if(!url)continue;
+        if(!/\.json$/i.test(new URL(url).pathname))continue;
+        let response;
+        try{response=await caches.match(url)||await fetch(url,{cache:"no-store"});}catch(_){continue;}
+        if(!response||!response.ok)continue;
+        const text=await response.clone().text().catch(()=>"");
+        for(const item of kidsAssetRefs(text)){
+          if(paths.size>=6500)break;
+          append(item);
+        }
+        try{await cache.put(url,response)}catch(_){}
+      }
+    }
+    let queue=[...paths.keys()],done=0,failed=0;
+    const report=async(force)=>{if(force||done%10===0)await kidsSendOffline(source,"KIDS_OFFLINE_PROGRESS",{mode,done,total:queue.length,failed,complete:false});};
+    await report(true);
+    let cursor=0;
+    async function worker(){
+      while(cursor<queue.length&&!kidsOfflineCancel){
+        const url=queue[cursor++];
+        if(!await kidsPutFull(url,cache))failed++;
+        done++;await report(false);
+      }
+    }
+    await Promise.all([worker(),worker(),worker()]);
+    await kidsSendOffline(source,"KIDS_OFFLINE_PROGRESS",{
+      mode,done,total:queue.length,failed,
+      complete:!kidsOfflineCancel&&failed===0,cancelled:kidsOfflineCancel
+    });
+  }finally{kidsOfflineRunning=false;kidsOfflineCancel=false;}
+}
+self.addEventListener("message",function(event){
+  const msg=event.data||{};
+  if(msg.type==="KIDS_OFFLINE_CANCEL"){kidsOfflineCancel=true;return;}
+  if(msg.type==="KIDS_OFFLINE_STATUS"){
+    event.waitUntil((async()=>{
+      const cache=await caches.open(KIDS_OFFLINE_CACHE),keys=await cache.keys();
+      await kidsSendOffline(event.source,"KIDS_OFFLINE_STATUS",{count:keys.length});
+    })());return;
+  }
+  if(msg.type==="KIDS_OFFLINE_START"&&(msg.mode==="full"||msg.mode==="visual")){
+    event.waitUntil(kidsOfflineDownload(event.source,msg.mode));
+  }
 });
