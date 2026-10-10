@@ -51,7 +51,11 @@ class TvActivity : Activity() {
     private fun scheduleContentRefresh() {
         contentRefreshHandler.removeCallbacks(contentRefreshTask)
         val elapsed = (System.currentTimeMillis() - lastContentRefreshAt).coerceAtLeast(0L)
-        val delay = (contentRefreshIntervalMs - elapsed).coerceAtLeast(5_000L)
+        val delay = if (activeTab == "home") {
+            (contentRefreshIntervalMs - elapsed).coerceAtLeast(5_000L)
+        } else {
+            contentRefreshIntervalMs
+        }
         contentRefreshHandler.postDelayed(contentRefreshTask, delay)
     }
 
@@ -93,10 +97,8 @@ class TvActivity : Activity() {
         val shell = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             setPadding(dp(48), dp(25), dp(48), dp(22))
-            background = GradientDrawable(
-                GradientDrawable.Orientation.TL_BR,
-                intArrayOf(dark, Color.rgb(11, 13, 26), Color.rgb(2, 5, 12))
-            )
+            // Branded static Royal-Night artwork; deliberately no video dependency.
+            background = resources.getDrawable(R.drawable.tv_static_backdrop, theme)
         }
         shell.addView(label("DĀR AL TAWḤĪD", 32f, cream, true))
         shell.addView(label("WISSEN AUS QURʾĀN & SUNNAH  ·  TV", 13f, gold, false))
