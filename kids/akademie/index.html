@@ -3860,7 +3860,7 @@ function playSerhatLessonClip(){
  const failed=()=>{status.hidden=false;status.textContent="Diese Aufnahme lässt sich gerade nicht abspielen.";};
  try{
   const ok=owner.play(t,{source:"kids-academy-tawhid-verified-serhat",
-   rate:age==="4-5"?.95:1,
+   rate:1, /* Stimmfarbe unverändert statt verlangsamter Masteraufnahme */
    onended:()=>{status.textContent="Du kannst den Satz noch einmal anhören.";},
    onerror:failed});
   if(!ok)failed();
@@ -4257,7 +4257,7 @@ function speak(index,custom){
    let failed=false;
    const fallback=()=>{if(failed||!live())return;failed=true;deviceRead(t)};
    try{
-    const success=owner.play(t,{source:"kids-academy-preview",rate:age==="4-5"?.87:1,onended:()=>{if(live()){k++;next()}},onerror:fallback});
+    const success=owner.play(t,{source:"kids-academy-preview",rate:1, /* Originaltempo im normalen Vorlesen – Langsamlernen separat */onended:()=>{if(live()){k++;next()}},onerror:fallback});
     if(!success)fallback();
    }catch(_){fallback()}
    return;
