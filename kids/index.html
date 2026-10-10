@@ -2893,6 +2893,7 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
  },true);
 })();
 </script>
+<link rel="stylesheet" href="/kids/quran-player-v11.css?v=1101" data-kids-quran-v11>
 </head>
 <body>
 <div id="kidsUpdateLayer" class="kids-update-layer">
@@ -3514,6 +3515,16 @@ function pad3(n){return String(n).padStart(3,"0")}
 function padAyah(n){return String(n).padStart(3,"0")}
 function audioUrl(surah,ayah){
   return "https://everyayah.com/data/Husary_128kbps/"+pad3(surah)+padAyah(ayah)+".mp3";
+}
+// Qurʾān voice selection does not affect Duʿāʾ or stories.
+function kidsV11ReciterUrl(surah,ayah){
+  var folder='Husary_128kbps';
+  try{
+    var chosen=localStorage.getItem('kids.quran.reciter.v11')||'';
+    var allowed=['Husary_128kbps','Alafasy_128kbps','Minshawy_Murattal_128kbps','Abdurrahmaan_As-Sudais_192kbps','MaherAlMuaiqly128kbps','Saood_ash-Shuraym_128kbps'];
+    if(allowed.indexOf(chosen)>=0)folder=chosen;
+  }catch(e){}
+  return 'https://everyayah.com/data/'+folder+'/'+pad3(surah)+padAyah(ayah)+'.mp3';
 }
 function todayKey(){
   var d=new Date();
@@ -4782,7 +4793,7 @@ function playCurrent(after){
   if(!currentSurah)return;
   clearTimeout(speakAlongTimer);
   var v=currentSurah.verses[currentAyahIndex];
-  quranAudio.src=audioUrl(currentSurah.id,v.id);
+  quranAudio.src=kidsV11ReciterUrl(currentSurah.id,v.id);
   kidsNowPlaying((v&&(v.ar||v.de))||"Qurʾān","DĀR AL TAWḤĪD Kids");
   quranAudio.play().then(function(){
     setLessonStep("listen");
@@ -11350,4 +11361,5 @@ html body .app:has(#view-parents.view.active) .shell{
 <script defer src="/kids/offline-library-v1.js?v=1"></script>
 <!-- KIDS_SALAH_STAGE_V1261: placed after hero, before continue-listening -->
 <script defer src="/kids/prayer-stage-v1261.js?v=1320" data-kids-salah-stage="1275"></script>
+<script defer src="/kids/quran-player-v11.js?v=1101" data-kids-quran-v11></script>
 </html>
