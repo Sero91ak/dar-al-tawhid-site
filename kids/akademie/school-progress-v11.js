@@ -50,7 +50,7 @@
   const existingDrafts=ids.map(x=>({id:x,d:drafts[x]}))
    .filter(x=>!records[x.id]&&x.d&&Number.isFinite(Number(x.d.savedAt))&&Number(x.d.savedAt)>0
      &&Number(x.d.savedAt)<=date.getTime()
-     &&date.getTime()-Number(x.d.savedAt)<7*86400000
+     /* previously started class remains resumable indefinitely */
      &&(Number(x.d.step)>0||Number(x.d.qIndex)>0))
    .sort((a,b)=>Number(b.d.savedAt)-Number(a.d.savedAt));
   const resumeId=existingDrafts[0]?.id||null;
