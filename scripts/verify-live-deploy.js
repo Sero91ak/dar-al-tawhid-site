@@ -125,7 +125,8 @@ async function main() {
       "Browser-Menü"
     ]);
     const downloadButtonsOk = await waitForHtmlIncludes(`${SITE_URL}/?page=downloads`, [
-      "/pwa/install/",
+      // One-tap install stays on the site; the old /pwa/install/ fallback is no longer required.
+      "Android bereitet den direkten Installationsdialog vor.",
       "https://apps.apple.com/de/app/id6805988753"
     ]);
 
