@@ -4,6 +4,7 @@ on:
     paths:
       - "kids/**"
       - "scripts/kids-offline-library-guard.cjs"
+      - "scripts/kids-offline-playback-smoke.cjs"
       - ".github/workflows/validate-kids-offline.yml"
   push:
     branches: [main]
@@ -27,3 +28,4 @@ jobs:
           node --check kids/sw.js
           node --check kids/offline-library-v1.js
           node scripts/kids-offline-library-guard.cjs
+          node scripts/kids-offline-playback-smoke.cjs
