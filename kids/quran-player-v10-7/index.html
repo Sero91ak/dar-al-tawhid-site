@@ -533,7 +533,7 @@ verseCache[s]=list;return list;
 let fallback=fallbackData(s);if(fallback){verseCache[s]=fallback;return fallback}
 try{let response=await fetch('https://api.alquran.cloud/v1/surah/'+s+'/editions/quran-uthmani,de.aburida',{signal:AbortSignal.timeout?AbortSignal.timeout(9000):undefined});if(!response.ok)throw Error('HTTP '+response.status);let raw=await response.json();const arr=raw?.data;if(!Array.isArray(arr)||!arr[0]?.ayahs)throw Error('Ungültige Daten');const ar=arr[0].ayahs, de=arr[1]?.ayahs||[];const verses=ar.map((v,i)=>({numberInSurah:i+1,arabic:v.text,de:de[i]?.text||'',latin:''})); if(verses.length!==total(s))throw Error('Versanzahl widersprüchlich');verseCache[s]=verses;return verses}catch(e){return null}}
 async function verseChange(restartAudio=false){let token=++loadingId;const wasPlaying=playIntent&&!stopped();audio.pause();audio.removeAttribute('src');audio.load();startedAt=0;render();$('arabic').textContent='Vers wird geladen …';$('translation').textContent='';currentList=await getVerses(state.surah);if(token!==loadingId)return;render();$('stageScroll').scrollTop=0;if(restartAudio||wasPlaying)startAudio()}
-function render(){const s=ss(),v=currentList?.[state.ayah-1];$('surahTitle').textContent=s.name;$('surahTitle').title=s.name;$('surahTitle').classList.toggle('title-long',s.name.length>=13);$('surahTitle').classList.toggle('title-xlong',s.name.length>=17);$('surahMeta').textContent=`${s.count} Āyāt · ${KIDS?'Schritt für Schritt':'Hören & Verstehen'}`;$('surahJump').innerHTML='<span class="jump-prefix">Sūrah </span>'+String(s.id).padStart(3,'0')+' ▾';$('ayahMarker').textContent=(KIDS?'DEINE ĀYAH ':'ĀYAH ')+pad(state.ayah)+' / '+pad(s.count);$('nowTitle').textContent=s.name+' · Āyah '+state.ayah;
+function render(){const s=ss(),v=currentList?.[state.ayah-1];queueMicrotask(refreshMediaSession);$('surahTitle').textContent=s.name;$('surahTitle').title=s.name;$('surahTitle').classList.toggle('title-long',s.name.length>=13);$('surahTitle').classList.toggle('title-xlong',s.name.length>=17);$('surahMeta').textContent=`${s.count} Āyāt · ${KIDS?'Schritt für Schritt':'Hören & Verstehen'}`;$('surahJump').innerHTML='<span class="jump-prefix">Sūrah </span>'+String(s.id).padStart(3,'0')+' ▾';$('ayahMarker').textContent=(KIDS?'DEINE ĀYAH ':'ĀYAH ')+pad(state.ayah)+' / '+pad(s.count);$('nowTitle').textContent=s.name+' · Āyah '+state.ayah;
 $('arabic').classList.toggle('long',!!v&&v.arabic.length>88);if(v?.arabic){const words=v.arabic.split(/\s+/);$('arabic').innerHTML=state.arabic?words.map((word,i)=>`<button class="word" data-word="${i}" aria-label="Wort ${i+1}" type="button">${esc(word)}</button>`).join(' '):''}else{$('arabic').textContent=state.arabic?'Qurʾān-Text wird geladen …':''}
 $('arabic').hidden=!state.arabic;$('translation').hidden=!state.german;$('translation').textContent=v?.de||(!currentList?'Qurʾān-Daten zurzeit nicht abrufbar. Bitte Verbindung prüfen.':'Für diesen Vers ist noch keine geprüfte deutsche Übertragung hinterlegt.');$('transliteration').hidden=!state.latin;$('transliteration').textContent=v?.latin||'Für diese Āyah ist noch keine geprüfte Lautschrift hinterlegt.';
 $('tadabbur').hidden=!state.tad;$('tadText').textContent='Nur geprüfte, versgenau zugeordnete Tadabbur-Texte werden hier eingeblendet. In dieser eigenständigen Vorschau ist die produktive Quellenbibliothek nicht verbunden.';
@@ -635,4 +635,27 @@ if(profileSwitcher&&!urlProfile)profileSwitcher.addEventListener('click',()=>{
 
 // V10.7: Profil über lesbaren unteren Hinweis ebenfalls erreichbar.
 const profileLabelButton=$('profileLabel');if(profileLabelButton&&profileSwitcher){profileLabelButton.addEventListener('click',()=>profileSwitcher.click());profileLabelButton.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();profileSwitcher.click()}})}
+
+/* V10.7 native/browser transport controls (supported MediaSession implementations). */
+function refreshMediaSession(){
+  if(!('mediaSession' in navigator))return;
+  try{
+    const name=ss().name, reader=RECITERS.find(r=>r.id===state.reciter)?.name||'Qurʾān';
+    if(typeof MediaMetadata==='function')
+      navigator.mediaSession.metadata=new MediaMetadata({title:name+' · Āyah '+state.ayah,artist:reader,album:KIDS?'TAWḤĪD KIDS':'DĀR AL TAWḤĪD'});
+    navigator.mediaSession.playbackState=audio.paused?'paused':'playing';
+    if(audio.duration&&Number.isFinite(audio.duration)&&navigator.mediaSession.setPositionState){
+      navigator.mediaSession.setPositionState({duration:audio.duration,position:Math.max(0,Math.min(audio.currentTime,audio.duration)),playbackRate:audio.playbackRate||1});
+    }
+  }catch(e){}
+}
+if('mediaSession' in navigator){
+  const commands={
+    play:()=>playToggle(),pause:()=>pause(),
+    nexttrack:()=>navigate(1,true),previoustrack:()=>navigate(-1,true),
+    seekto:e=>{if(Number.isFinite(e.seekTime)&&audio.duration){audio.currentTime=Math.max(0,Math.min(e.seekTime,audio.duration));updateProgress();refreshMediaSession()}}
+  };
+  for(const [action,handler] of Object.entries(commands)){try{navigator.mediaSession.setActionHandler(action,handler)}catch(e){}}
+  ['play','pause','loadedmetadata','ended'].forEach(k=>audio.addEventListener(k,refreshMediaSession));
+}
 </script></body></html>
