@@ -3270,7 +3270,7 @@ body #academySubject.subject-detail .subject-topic-grid .subject-topic:is(button
 }
 
 </style></head>
-<body data-profile="boy" data-preview-release="V8.1-20261010" data-preview-deploy="v8.1-curriculum-audio-routing"><main class="wrap">
+<body data-profile="boy" data-preview-release="V8.2-20261010" data-preview-deploy="v8.2-deep-link-all-subjects"><main class="wrap">
 
 <header class="academy-header kids-detail-appbar" aria-label="Navigationsleiste Lernakademie">
  <button class="academy-nav-back" id="academyNavBack" type="button" aria-label="Zurück"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/><path d="M9 12h11"/></svg></button>
@@ -3769,6 +3769,8 @@ function applySelectedLesson(){
   $("#arabicAudioStatus").textContent="Rezitation des vollständigen Verses";
   $("#todayTopicName").textContent="Ṣidq – Wahrhaftigkeit";
   $("#todayTopicIntro").textContent=ui.topicIntro;
+  $(".lesson-heading h1").textContent="Ṣidq · Wahrhaftigkeit";
+  $(".lesson-label").textContent="Akhlāq · Wahrhaftigkeit";
   return;
  }
  const q=lesson.quran,k="quran:"+q.surah+":"+q.ayah;
@@ -3791,6 +3793,8 @@ function applySelectedLesson(){
  all(".recap-lesson p").forEach((el,i)=>el.textContent=[lesson.goal,q.meaning+" "+lesson.hadith.text,lesson.sample][i]);
  $("#practiceTitle").textContent=age==="4-5"?"Was machst du?":age==="9-10"?"Was weißt du darüber?":"Was würdest du tun?";
  $("#todayTopicName").textContent=lesson.title;$("#todayTopicIntro").textContent=lesson.lead;
+ $(".lesson-heading h1").textContent=lesson.title;
+ $(".lesson-label").textContent=SUBJECTS[lesson.subject].title+" · "+lesson.topic;
 }
 
 const SUBJECTS=Object.freeze({
@@ -4182,5 +4186,12 @@ window.addEventListener("pageshow",()=>syncProfile(true));
 document.addEventListener("visibilitychange",()=>{if(document.hidden)stopAll();else syncProfile()});
 window.addEventListener("pagehide",stopAll);
 initFocusControls();syncProfile(true);hideLesson();updateAcademyAppbar();
+ /* Direct preview links are only navigation helpers; profile selection still
+    respects saved real child profiles over demonstration parameters. */
+ const previewRoute=new URLSearchParams(location.search);
+ const directLesson=previewRoute.get("lektion");
+ const directSubject=previewRoute.get("fach");
+ if(directLesson&&(directLesson==="sidq"||CURRICULUM[directLesson]))begin(directLesson);
+ else if(directSubject&&SUBJECTS[directSubject])openCategory(directSubject);
 })();
 </script></body></html>
