@@ -1,0 +1,89 @@
+name: Kids Academy V12 first lesson 4-clip Serhat V4 pilot
+
+on:
+  pull_request:
+    paths:
+      - 'kids/tools/build-academy-v9-staging.py'
+      - 'kids/data/academy-v12-audio-pilot-request.json'
+      - '.github/workflows/kids-academy-v12-voice-pilot-once.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'kids/data/academy-v12-audio-pilot-request.json'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-academy-v12-voice-pilot-once-20261010
+  cancel-in-progress: false
+
+jobs:
+  pilot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    env:
+      ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
+    steps:
+      - name: Checkout exact current branch
+        uses: actions/checkout@v4
+
+      - name: Verify original text and strict credit budget – free
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/build-academy-v9-staging.py
+          python3 - <<'PY'
+          import json
+          p=json.load(open("kids/data/academy-v12-audio-pilot-request.json"))
+          assert p["id"]=="kids-academy-serhat-v4-first-lesson-20261010-pilot"
+          assert p["voiceId"]=="DkU7j9uO4ZEtLD2iRZSH"
+          assert p["modelId"]=="eleven_v4" and p["voiceSettingsProfile"]=="kids_story"
+          assert p["stagingOnly"] is True and p["approvedForPlayback"] is False
+          assert p["maxClips"]==4 and p["maxPreparedCharacters"]==420
+          assert len(set(p["exactPhrases"]))==4
+          PY
+          python3 kids/tools/build-academy-v9-staging.py --dry-run --pilot-first-lesson --limit 4 --max-chars 420
+
+      - name: Run once, on main only, with the existing owner credential
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          set -euo pipefail
+          test -n "$ADMIN_PUBLISH_SECRET" || { echo "::error::Owner DĀR Voice Studio credential unavailable – no clips generated."; exit 1; }
+          command -v ffmpeg
+          command -v ffprobe
+          python3 kids/tools/build-academy-v9-staging.py --pilot-first-lesson --limit 4 --max-chars 420
+          python3 - <<'PY'
+          import json,pathlib,hashlib
+          request=json.load(open("kids/data/academy-v12-audio-pilot-request.json"))
+          staged=json.load(open("kids/data/academy-audio-staging-v9.json"))
+          assert staged["stagingOnly"] is True and staged["pilotFirstLesson"] is True
+          assert staged["modelId"]=="eleven_v4" and staged["voiceSettingsProfile"]=="kids_story"
+          assert set(staged["entries"])==set(request["exactPhrases"])
+          for entry in staged["entries"].values():
+            assert entry["approvedForPlayback"] is False
+            assert entry["voiceId"]=="DkU7j9uO4ZEtLD2iRZSH"
+            f=pathlib.Path(entry["url"].lstrip("/"))
+            assert f.is_file() and f.stat().st_size>1800
+            assert hashlib.sha256(f.read_bytes()).hexdigest()==entry["sha256"]
+          print("Four Serhat V4 samples verified technically, still awaiting owner listening.")
+          PY
+
+      - name: Stage exactly the four samples for human review
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add kids/data/academy-audio-staging-v9.json kids/assets/kids-academy-audio/
+          if git diff --cached --quiet; then
+            echo "Already prepared. Reuse existing bytes, no more ElevenLabs credits."
+            exit 0
+          fi
+          git commit -m "Kids: stage 4 authentic Serhat V4 first-lesson clips for owner QA"
+          for n in 1 2 3 4 5; do
+            git pull --rebase origin main
+            if git push origin HEAD:main; then exit 0; fi
+            sleep "$((n * 3))"
+          done
+          echo "::error::Failed to publish approved staging metadata; no live voice replacements."
+          exit 1
