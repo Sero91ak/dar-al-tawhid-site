@@ -243,7 +243,10 @@ jobs:
           console.log("KIDS DUA CACHE-BUST OK",version.buildId,swVer,hubJsVer,hubCssVer);
           NODE
 
+      # Real production parity is verified AFTER Cloudflare publishes the release.
+      # A PR always points to a future build and cannot match current live.
       - name: Live delivery smoke test
+        if: github.event_name == 'workflow_dispatch'
         run: |
           set -euo pipefail
           EXPECT_BUILD="$(node -p 'require("./kids/version.json").buildId')"
