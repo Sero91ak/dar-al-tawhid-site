@@ -1,0 +1,34 @@
+name: Diagnose Quran Preview iPhone URLs
+on:
+  push:
+    branches: [preview/quran-player-browser-links-20261010]
+    paths: [.github/workflows/diagnose-quran-preview-iphone.yml]
+permissions:
+  contents: read
+jobs:
+  diagnose-iphone-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe independent direct host and site paths with iPhone UA
+        shell: bash
+        run: |
+          set -u
+          IUA='Mozilla/5.0 (iPhone; CPU iPhone OS 27_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.0 Mobile/15E148 Safari/604.1'
+          CUA='ChatGPT/1.2026.272 (iOS 27.0.1; iPhone18,2)'
+          bases=('https://dar-al-tawhid.de/test/preview' 'https://dar-al-tawhid-test.sero91ak.workers.dev/test/preview')
+          files=('dar-al-tawhid-quran-player-v3.html' 'tawhid-kids-quran-player-v3.html')
+          for base in "${bases[@]}"; do
+            for file in "${files[@]}"; do
+              for profile in safari chatgpt; do
+                ua="$IUA"; [ "$profile" = chatgpt ] && ua="$CUA"
+                tmp=$(mktemp)
+                headers=$(mktemp)
+                resp=$(curl -sSL --max-time 25 -A "$ua" -D "$headers" -o "$tmp" -w '%{http_code}|%{size_download}|%{url_effective}|%{content_type}' "${base}/${file}?cb=iphone-20261010" 2>&1)
+                marker=none; grep -Fq 'QURAN_PLAYER_V3_FOCUS_SHELL' "$tmp" && marker=present
+                title=none; grep -o '<title>[^<]*' "$tmp" | head -1 | cut -c 1-120 > /tmp/qtitle || true; [ -s /tmp/qtitle ] && title=$(cat /tmp/qtitle)
+                printf 'HOST_TEST profile=%s file=%s response=%s marker=%s title=%s\n' "$profile" "$file" "$resp" "$marker" "$title"
+                grep -Ei '^(http/|location:|content-security-policy:|service-worker-allowed:|x-frame-options:|content-type:|cache-control:|x-dar)' "$headers" | sed -E 's/[^[:print:]\t]//g' | head -18
+                rm -f "$tmp" "$headers"
+              done
+            done
+          done
