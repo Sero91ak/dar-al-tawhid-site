@@ -15,9 +15,66 @@ a{color:#e6c892}button,select{font:inherit}button{cursor:pointer}.wrap{max-width
 @media(max-width:1050px){.tv{aspect-ratio:auto;min-height:0}.tv-inner{min-height:560px}.brand-title{font-size:clamp(16px,3vw,30px)}.prayer{min-height:80px}.prayer strong{font-size:clamp(20px,2.9vw,30px)}.arabic{font-size:clamp(20px,2.7vw,27px)}.verse{font-size:13px}.tadtext{font-size:16px}}
 @media(max-width:640px){.wrap{padding:14px 9px 28px}.tv{border-radius:12px}.tv-inner{min-height:690px;padding:16px 12px}.emblem{width:35px;height:35px;font-size:15px}.brand{gap:8px}.brand-title{font-size:16px;letter-spacing:.04em}.tagline{font-size:7px;letter-spacing:.14em}.clock strong{font-size:20px}.clock small{font-size:10px}.tvnav{gap:4px;overflow-x:auto}.nav{min-width:auto;flex:1;padding:10px 6px;font-size:11px}.prayergrid{gap:4px}.prayer{min-height:69px;gap:7px;border-radius:8px}.prayer span{font-size:10px}.prayer strong{font-size:clamp(13px,3.8vw,21px)}.panes{grid-template-columns:1fr}.pane{padding:14px}.status{grid-template-columns:1fr}.tvfoot{font-size:10px;flex-wrap:wrap}.city{font-size:11px}.sectiontitle{font-size:19px}.stage{overflow-y:auto;overflow-x:hidden}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* TV review V2: full-size interface, no half-empty mock screen */
+html,body{width:100%;min-height:100%;overflow-x:hidden}
+.wrap{width:100%;max-width:none;min-height:100dvh;padding:59px 10px 16px;display:flex;align-items:center;justify-content:center}
+.utility{position:fixed;z-index:60;top:0;left:0;right:0;min-height:48px;display:flex;align-items:center;justify-content:flex-end;margin:0;padding:7px 16px;background:linear-gradient(180deg,rgba(4,9,20,.98),rgba(4,9,20,.92));border-bottom:1px solid #9a7a483a}
+.utility>div:first-child{display:none}.tools{gap:8px}.tool{font-size:13px;padding:8px 12px;color:#f0debf}
+.tv{container-type:inline-size;width:min(calc(100vw - 20px),calc((100dvh - 76px)*16/9));height:auto;min-height:0;aspect-ratio:16/9;flex:none;border-radius:14px;box-shadow:0 20px 70px #0009}
+.tv-inner{height:100%;min-height:0;padding:clamp(18px,2.5cqw,48px) clamp(20px,3.3cqw,63px) clamp(12px,1.5cqw,27px);gap:clamp(7px,1.1cqw,18px)}
+.emblem{width:clamp(38px,4.3cqw,82px);height:clamp(38px,4.3cqw,82px);font-size:clamp(18px,1.65cqw,32px)}
+.brand-title{font-size:clamp(23px,2.4cqw,46px)}.tagline{font-size:clamp(10px,.85cqw,16px)}
+.clock strong{font-size:clamp(27px,2.6cqw,50px)}.clock small{font-size:clamp(11px,.82cqw,16px)}
+.tvnav{gap:clamp(8px,1cqw,19px);padding-bottom:clamp(7px,1cqw,18px)}
+.nav{min-width:0;min-height:clamp(38px,3.9cqw,74px);font-size:clamp(14px,1.14cqw,22px);padding:8px clamp(12px,1.6cqw,30px)}
+.nav[aria-selected=true]{background:linear-gradient(160deg,#735a33,#3b2f21);color:#fff4d6}
+.stage{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;padding:0;scrollbar-width:thin}
+.stage [hidden]{display:none!important}
+.stage #home:not([hidden]){display:grid;height:100%;min-height:100%;grid-template-rows:auto auto minmax(0,1fr);gap:clamp(8px,1.23cqw,22px)}
+.stage #quran:not([hidden]){height:100%;min-height:100%;display:flex;flex-direction:column}
+.stage #quran .panes{flex:1}.stage #hadith:not([hidden]){min-height:100%;display:flex;flex-direction:column}
+.stage #hadith>.pane{flex:1}
+.sectiontitle{font-size:clamp(22px,2.04cqw,39px);margin-bottom:0}
+.kicker{font-size:clamp(11px,.9cqw,17px);margin-bottom:5px}
+.city{font-size:clamp(12px,.95cqw,18px);min-height:clamp(34px,3.5cqw,65px);padding:7px 12px}
+.prayergrid{margin:0;gap:clamp(7px,1cqw,19px)}
+.prayer{min-height:clamp(77px,9.1cqw,170px);gap:clamp(8px,1cqw,17px);border-radius:clamp(11px,1.1cqw,21px);background:linear-gradient(155deg,#192942f1,#0d182cf5)}
+.prayer span{font-size:clamp(14px,1.17cqw,23px)}.prayer strong{font-size:clamp(25px,2.45cqw,47px)}
+.panes{height:100%;min-height:0;grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);gap:clamp(12px,1.3cqw,25px)}
+.pane{display:flex;flex-direction:column;justify-content:center;min-height:0;padding:clamp(13px,1.62cqw,31px);border-radius:clamp(13px,1.2cqw,22px)}
+.arabic{font-size:clamp(25px,2.52cqw,49px);line-height:1.85;max-height:36%;margin:5px 0}
+.verse{font-size:clamp(15px,1.2cqw,23px);line-height:1.6;max-height:29%}
+.tadtext{font-size:clamp(17px,1.45cqw,28px);line-height:1.48;max-height:58%;margin:7px 0}
+.source{font-size:clamp(12px,.94cqw,18px)}
+.action{min-height:clamp(38px,3.4cqw,64px);font-size:clamp(14px,1cqw,20px);padding:9px 14px;align-self:flex-start}
+.tvfoot{font-size:clamp(11px,.85cqw,17px);padding-top:8px}.note{font-size:clamp(11px,.88cqw,17px)}
+.status{position:fixed;z-index:100;left:50%;bottom:16px;transform:translateX(-50%);width:min(1150px,calc(100vw - 28px));max-height:75dvh;overflow:auto;display:none;grid-template-columns:1.1fr .9fr;gap:12px;margin:0;background:#08111f;border:1px solid #8b6d3e;border-radius:16px;box-shadow:0 32px 90px #000c}
+body.show-tv-status .status{display:grid}
+#tv:fullscreen{width:100vw;height:100vh;aspect-ratio:auto;border:0;border-radius:0}
+@media(max-width:740px) and (orientation:portrait){
+.wrap{display:block;padding:57px 8px 15px}.utility{padding:6px}.tools{width:100%;justify-content:space-between;gap:4px;flex-wrap:nowrap}.tool{font-size:11px;padding:6px}
+.tv{width:100%;aspect-ratio:auto;min-height:calc(100dvh - 74px);border-radius:12px}
+.tv-inner{min-height:calc(100dvh - 74px);padding:17px 12px;gap:12px}
+.brand-title{font-size:18px}.tagline{font-size:8px}.emblem{width:37px;height:37px;font-size:16px}
+.clock strong{font-size:22px}.clock small{font-size:9px}.nav{min-height:42px;flex:1;font-size:11px;padding:7px 4px}.tvnav{gap:4px}
+.stage #home:not([hidden]){height:auto;min-height:100%;display:flex;flex-direction:column;gap:13px}
+.topline{align-items:flex-start}.sectiontitle{font-size:20px}.kicker{font-size:10px}.city{font-size:10px;padding:6px}
+.prayergrid{gap:4px}.prayer{min-height:75px;border-radius:8px}.prayer span{font-size:10px}.prayer strong{font-size:clamp(13px,3.7vw,20px)}
+.panes{height:auto;display:flex;flex-direction:column;gap:10px}.pane{min-height:190px;padding:16px 14px}
+.arabic{font-size:25px;max-height:none}.verse{font-size:14px;max-height:none}.tadtext{font-size:18px;max-height:none}
+.action{font-size:13px;min-height:40px}.tvfoot{font-size:10px}.status{grid-template-columns:1fr;width:calc(100vw - 16px)}
+}
+@media(max-height:600px) and (orientation:landscape){
+.wrap{padding-top:50px;padding-bottom:8px}.tv{width:min(calc(100vw - 16px),calc((100dvh - 60px)*16/9))}
+.tv-inner{padding-top:clamp(12px,1.6cqw,24px);padding-bottom:8px;gap:7px}
+.emblem{width:clamp(32px,3cqw,55px);height:clamp(32px,3cqw,55px)}
+.tvnav{padding-bottom:5px}.nav{min-height:32px;padding:5px 10px}
+.stage #home:not([hidden]){gap:7px}.prayer{min-height:clamp(56px,7.3cqw,120px)}.pane{padding:12px}
+}
 </style></head><body>
 <main class="wrap">
-<header class="utility"><div><div class="eyebrow">Eigenständiger TV-Entwicklungsmonitor · Vorschau</div><h1>DĀR AL TAWḤĪD TV</h1><p>16:9-HTML-Prototyp · keine installierte APK und kein Fernseh-Livestream</p></div><div class="tools"><button class="tool" id="refresh" type="button">↻ Daten aktualisieren</button><button class="tool" id="fullscreen" type="button">⛶ Vollbild</button><a class="tool" href="https://github.com/Sero91ak/dar-al-tawhid-site/pull/911" target="_blank" rel="noopener noreferrer">GitHub PR #911 ↗</a></div></header>
+<header class="utility"><div><div class="eyebrow">Eigenständiger TV-Entwicklungsmonitor · Vorschau</div><h1>DĀR AL TAWḤĪD TV</h1><p>16:9-HTML-Prototyp · keine installierte APK und kein Fernseh-Livestream</p></div><div class="tools"><button class="tool" id="refresh" type="button">↻ Daten aktualisieren</button><button class="tool" id="toggleTVStatus" type="button" aria-controls="tvStatus" aria-expanded="false">◉ Entwicklungsstand</button><button class="tool" id="fullscreen" type="button">⛶ Vollbild</button><a class="tool" href="https://github.com/Sero91ak/dar-al-tawhid-site/pull/911" target="_blank" rel="noopener noreferrer">GitHub PR #911 ↗</a></div></header>
 <section class="tv" id="tv" aria-label="Android TV Designvorschau">
 <div class="tv-inner"><header class="tvhead"><div class="brand"><div class="emblem" aria-hidden="true">دَار</div><div><div class="brand-title">DĀR AL TAWḤĪD <span style="color:var(--gold)">TV</span></div><div class="tagline">WISSEN AUS QURʾĀN &amp; SUNNAH</div></div></div><div class="clock"><strong id="clock">--:--</strong><small id="date">Europa/Berlin</small></div></header>
 <nav class="tvnav" aria-label="TV-Navigation"><button type="button" data-tv data-tab="home" class="nav" aria-selected="true">Startseite</button><button type="button" data-tv data-tab="quran" class="nav" aria-selected="false">Qurʾān &amp; Tadabbur</button><button type="button" data-tv data-tab="hadith" class="nav" aria-selected="false">Ḥadīṯe &amp; Āṯār</button></nav>
@@ -31,7 +88,7 @@ a{color:#e6c892}button,select{font:inherit}button{cursor:pointer}.wrap{max-width
 <section id="hadith" hidden><div class="kicker">Gemeinsamer DĀR-Katalog · Lesemodus</div><h2 class="sectiontitle">Ḥadīṯe &amp; Āṯār</h2><div class="pane"><div class="source" id="hNumber">Katalog wird geprüft …</div><div class="tadtext" id="hText">Überlieferung wird geladen …</div><div class="source" id="hSource"></div><button data-tv class="action" id="hPrev" type="button">← Vorherige</button><button data-tv class="action" id="hNext" type="button">Nächste →</button></div></section>
 </div><footer class="tvfoot"><span>HTML-ENTWICKLUNGSVORSCHAU <span class="sep">·</span> Fernbedienung: ▲ ▼ ◀ ▶ · OK · Zurück</span><span class="pilot" id="dataState">Verbindung wird geprüft …</span></footer>
 </div></section>
-<section class="status"><div class="info"><h2><span class="liveDot"></span>Live-Entwicklungsstand · GitHub</h2><div class="facts"><div class="fact"><b>Pull Request</b><span id="prstate">Lade …</span></div><div class="fact"><b>Letzter Commit</b><span id="sha">–</span></div><div class="fact"><b>GitHub-Aktualisierung</b><span id="updated">–</span></div><div class="fact"><b>Zuletzt geprüft</b><span id="checked">–</span></div><div class="fact"><b>Neuester TV-Build</b><span id="buildState">Lade …</span><br><a id="buildLink" href="https://github.com/Sero91ak/dar-al-tawhid-site/actions/workflows/android-tv-native-qa.yml" target="_blank" rel="noopener noreferrer">Build ansehen ↗</a></div></div><p id="gitNote">Status wird automatisch alle zwei Minuten erneut von GitHub abgefragt. Die geöffneten Inhaltsdaten werden regelmäßig aktualisiert.</p><a href="https://github.com/Sero91ak/dar-al-tawhid-site/actions/workflows/android-tv-native-qa.yml" target="_blank" rel="noopener noreferrer">Android-TV-Builds prüfen ↗</a><span class="sep">·</span><a href="https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38041669313" target="_blank" rel="noopener noreferrer">Bestätigter signierter Test-Build ↗</a></div>
+<section class="status" id="tvStatus" aria-label="Live-Entwicklungsstand"><div class="info"><h2><span class="liveDot"></span>Live-Entwicklungsstand · GitHub</h2><div class="facts"><div class="fact"><b>Pull Request</b><span id="prstate">Lade …</span></div><div class="fact"><b>Letzter Commit</b><span id="sha">–</span></div><div class="fact"><b>GitHub-Aktualisierung</b><span id="updated">–</span></div><div class="fact"><b>Zuletzt geprüft</b><span id="checked">–</span></div><div class="fact"><b>Neuester TV-Build</b><span id="buildState">Lade …</span><br><a id="buildLink" href="https://github.com/Sero91ak/dar-al-tawhid-site/actions/workflows/android-tv-native-qa.yml" target="_blank" rel="noopener noreferrer">Build ansehen ↗</a></div></div><p id="gitNote">Status wird automatisch alle zwei Minuten erneut von GitHub abgefragt. Die geöffneten Inhaltsdaten werden regelmäßig aktualisiert.</p><a href="https://github.com/Sero91ak/dar-al-tawhid-site/actions/workflows/android-tv-native-qa.yml" target="_blank" rel="noopener noreferrer">Android-TV-Builds prüfen ↗</a><span class="sep">·</span><a href="https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38041669313" target="_blank" rel="noopener noreferrer">Bestätigter signierter Test-Build ↗</a></div>
 <div class="info"><h2>Was diese Ansicht tatsächlich zeigt</h2><p class="legend">✓ Eigenständiger 16:9-TV-Prototyp mit Tastaturnavigation und Inhaltsanbindung.<br>✓ Aktueller GitHub-PR-Status, sofern die GitHub-API erreichbar ist.<br>○ Audio ist ein Browser-Test und keine Bestätigung der nativen APK.<br>○ Adhān, Bildschirmschoner, vollständige Apple-TV-Parität und Geräteprüfung sind weiterhin offen.<br>○ Kein automatischer APK-Austausch. Website, Android-PWA und iOS bleiben getrennt.</p><p>Die Vorschau aktualisiert sichtbare Daten, ohne die Seite neu laden zu müssen. Codeänderungen erscheinen erst nach ihrer separaten Veröffentlichung auf dieser Vorschau-Route.</p></div></section>
 </main>
 <audio id="audio" preload="none"></audio>
@@ -60,8 +117,19 @@ t('hPrev').addEventListener('click',()=>{hNumber=Math.max(1,hNumber-1);loadHadit
 async function latestBuild(){try{const url='https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/actions/workflows/android-tv-native-qa.yml/runs?branch=feat%2Fandroid-tv-apple-tv-layout-parity-20261009&per_page=1';const data=await pull(url);const run=data.workflow_runs?.[0];if(!run)throw Error('Kein aktueller TV-Build');const state=run.status!=='completed'?'Prüfung läuft':run.conclusion==='success'?'Erfolgreich':run.conclusion==='failure'?'Fehlgeschlagen':(run.conclusion||run.status);text('buildState',state+' · '+String(run.head_sha||'').slice(0,8));if(/^https:\/\/github\.com\/Sero91ak\/dar-al-tawhid-site\/actions\/runs\/\d+$/.test(String(run.html_url||'')))t('buildLink').href=run.html_url}catch(e){text('buildState','GitHub aktuell nicht abrufbar')}}
 async function github(){latestBuild();const now=new Date; text('checked',new Intl.DateTimeFormat('de-DE',{timeZone:TZ,hour:'2-digit',minute:'2-digit',second:'2-digit'}).format(now));try{const p=await pull('https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/pulls/911');text('prstate','#911 · '+(p.merged_at?'gemergt':p.state==='open'?'offen'+(p.draft?' · Entwurf':''):p.state));text('sha',p.head?.sha?.slice(0,10)||'–');text('updated',p.updated_at?new Intl.DateTimeFormat('de-DE',{timeZone:TZ,dateStyle:'short',timeStyle:'short'}).format(new Date(p.updated_at)):'–');text('gitNote','GitHub-Status automatisch alle 2 Minuten geprüft. Neue APK-Funktionen bleiben vom HTML-Prototyp getrennt.')}catch(e){text('prstate','Derzeit nicht abfragbar');text('gitNote','GitHub-API derzeit nicht erreichbar (z. B. Rate-Limit). Direkten PR-Link verwenden.');t('gitNote').classList.add('error')}}
 function refresh(){const gen=++refreshGeneration;prayers(gen);verse(gen);github()}
+t('toggleTVStatus').addEventListener('click',()=>{
+const show=!document.body.classList.contains('show-tv-status');
+document.body.classList.toggle('show-tv-status',show);
+t('toggleTVStatus').setAttribute('aria-expanded',String(show));
+if(show)github();
+});
 t('refresh').addEventListener('click',refresh);t('fullscreen').addEventListener('click',async()=>{try{if(!document.fullscreenElement)await t('tv').requestFullscreen();else await document.exitFullscreen()}catch(e){}});
-document.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','ArrowDown','ArrowUp','Enter','Escape','Backspace'].includes(e.key))return;if(e.target.tagName==='SELECT'||e.target.tagName==='INPUT')return;if(e.key==='Escape'||e.key==='Backspace'){if(document.fullscreenElement){document.exitFullscreen();return}tab('home');e.preventDefault();return}const els=[...document.querySelectorAll('.tv [data-tv]')].filter(el=>el.offsetParent!==null&&!el.disabled);if(!els.length)return;const active=document.activeElement;const index=els.indexOf(active);if(e.key==='Enter'){if(index>=0){e.preventDefault();active.click()}return}e.preventDefault();const a=index<0?els[0]:active;const ar=a.getBoundingClientRect(),ax=ar.left+ar.width/2,ay=ar.top+ar.height/2;let best=null,score=Infinity;for(const b of els){if(b===a)continue;const r=b.getBoundingClientRect(),dx=r.left+r.width/2-ax,dy=r.top+r.height/2-ay;const isH=e.key==='ArrowLeft'||e.key==='ArrowRight';if((e.key==='ArrowRight'&&dx<4)||(e.key==='ArrowLeft'&&dx>-4)||(e.key==='ArrowDown'&&dy<4)||(e.key==='ArrowUp'&&dy>-4))continue;const primary=isH?Math.abs(dx):Math.abs(dy),secondary=isH?Math.abs(dy):Math.abs(dx);const sc=primary+secondary*2.5;if(sc<score){score=sc;best=b}}(best||els[0]).focus({preventScroll:false})});
+document.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','ArrowDown','ArrowUp','Enter','Escape','Backspace'].includes(e.key))return;if(e.target.tagName==='SELECT'||e.target.tagName==='INPUT')return;if((e.key==='Escape'||e.key==='Backspace')&&document.body.classList.contains('show-tv-status')){
+document.body.classList.remove('show-tv-status');
+t('toggleTVStatus').setAttribute('aria-expanded','false');
+e.preventDefault();return;
+}
+if(e.key==='Escape'||e.key==='Backspace'){if(document.fullscreenElement){document.exitFullscreen();return}tab('home');e.preventDefault();return}const els=[...document.querySelectorAll('.tv [data-tv]')].filter(el=>el.offsetParent!==null&&!el.disabled);if(!els.length)return;const active=document.activeElement;const index=els.indexOf(active);if(e.key==='Enter'){if(index>=0){e.preventDefault();active.click()}return}e.preventDefault();const a=index<0?els[0]:active;const ar=a.getBoundingClientRect(),ax=ar.left+ar.width/2,ay=ar.top+ar.height/2;let best=null,score=Infinity;for(const b of els){if(b===a)continue;const r=b.getBoundingClientRect(),dx=r.left+r.width/2-ax,dy=r.top+r.height/2-ay;const isH=e.key==='ArrowLeft'||e.key==='ArrowRight';if((e.key==='ArrowRight'&&dx<4)||(e.key==='ArrowLeft'&&dx>-4)||(e.key==='ArrowDown'&&dy<4)||(e.key==='ArrowUp'&&dy>-4))continue;const primary=isH?Math.abs(dx):Math.abs(dy),secondary=isH?Math.abs(dy):Math.abs(dx);const sc=primary+secondary*2.5;if(sc<score){score=sc;best=b}}(best||els[0]).focus({preventScroll:false})});
 clock();setInterval(clock,20000);refresh();setInterval(github,120000);setInterval(()=>{if(!document.hidden){prayers(refreshGeneration);verse(refreshGeneration)}},3600000);
 })();
 </script></body></html>
