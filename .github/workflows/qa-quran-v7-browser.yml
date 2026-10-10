@@ -1,0 +1,31 @@
+name: Quran V7 Rebuild Browser QA
+on:
+  workflow_dispatch:
+  push:
+    branches: [preview/quran-player-browser-links-20261010]
+    paths: [.github/workflows/qa-quran-v7-browser.yml]
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install test browser
+        run: |
+          npm install --no-save --ignore-scripts --no-audit --no-fund playwright@1.57.0
+          npx playwright install --with-deps chromium
+      - name: Test 24 real-rendered device/view combinations
+        run: node scripts/qa-quran-v7-browser.cjs
+      - name: Device screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: quran-v7-device-screenshots
+          path: .qa-quran-shots/
+          retention-days: 21
+          if-no-files-found: ignore
