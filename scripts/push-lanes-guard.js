@@ -208,6 +208,13 @@ function runPushLanesGuard() {
 
   ok(`Berührte Spuren: ${touched.join(", ")}`);
 
+  // Reine Guard-/Workflow-Metadaten sind keine Push-Code-Änderung.
+  // Dafür dürfen weder Push-Passwort noch globale Push-Freigaben verlangt werden.
+  if (touched.length === 1 && touched[0] === "lock-meta") {
+    ok("Nur Push-Sperr-Metadaten geändert – keine Push-Funktion freizuschalten");
+    return failures;
+  }
+
   if (lock.passwordRequired === true && !passwordUnlocked(lock, rawMessage)) {
     fail(
       "Push-Kennwort fehlt oder ist falsch. Ohne Kennwort und ohne ausdrückliche Nutzer-Anfrage darf kein OneSignal-/Push-Code geändert werden. "
