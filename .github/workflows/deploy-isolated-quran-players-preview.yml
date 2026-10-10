@@ -46,6 +46,7 @@ jobs:
           cp test/preview/dar-al-tawhid-quran-player-v8.html .quran-preview-assets/
           cp test/preview/tawhid-kids-quran-player-v8.html .quran-preview-assets/
           cp content/quran/[0-9][0-9][0-9].json .quran-preview-assets/content/quran/
+          node scripts/build-quran-tadabbur-preview-v8.cjs
           test "$(find .quran-preview-assets/content/quran -maxdepth 1 -name '*.json' | wc -l)" -ge 110
           grep -Fq 'QURAN_PLAYER_V3_FOCUS_SHELL' .quran-preview-assets/dar-al-tawhid-quran-player-v3.html
           grep -Fq 'QURAN_PLAYER_V3_FOCUS_SHELL' .quran-preview-assets/tawhid-kids-quran-player-v3.html
@@ -63,7 +64,7 @@ jobs:
           set -euo pipefail
           host="https://dar-quran-players-showcase-v3.sero91ak.workers.dev"
           ua='Mozilla/5.0 (iPhone; CPU iPhone OS 27_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.0 Mobile/15E148 Safari/604.1'
-          for path in /index.html /dar-al-tawhid-quran-player-v3.html /tawhid-kids-quran-player-v3.html /content/quran/001.json /content/quran/112.json /player-premium-v4.css /player-refined-v5.css /player-capsule-v6.css /player-next-v7.css /dar-al-tawhid-quran-player-v7.html /tawhid-kids-quran-player-v7.html /quran-player-cinema-v8.css /dar-al-tawhid-quran-player-v8.html /tawhid-kids-quran-player-v8.html /visuals/dar-quran-hero.webp /visuals/dar-quran-icon.png /visuals/kids-quran-banner.png /visuals/kids-quran-3d.png; do
+          for path in /index.html /dar-al-tawhid-quran-player-v3.html /tawhid-kids-quran-player-v3.html /content/quran/001.json /content/quran/112.json /tadabbur/001.json /tadabbur/112.json /player-premium-v4.css /player-refined-v5.css /player-capsule-v6.css /player-next-v7.css /dar-al-tawhid-quran-player-v7.html /tawhid-kids-quran-player-v7.html /quran-player-cinema-v8.css /dar-al-tawhid-quran-player-v8.html /tawhid-kids-quran-player-v8.html /visuals/dar-quran-hero.webp /visuals/dar-quran-icon.png /visuals/kids-quran-banner.png /visuals/kids-quran-3d.png; do
             ok=0
             for attempt in $(seq 1 14); do
               out=$(mktemp)
@@ -72,6 +73,7 @@ jobs:
                 case "$path" in
                   /index.html) grep -Fq 'DĀR AL TAWḤĪD' "$out" && ok=1 ;;
                   /content/quran/*) grep -Fq '"verses"' "$out" && ok=1 ;;
+                  /tadabbur/*) grep -Fq '"entries"' "$out" && ok=1 ;;
                   /player-premium-v4.css) grep -Fq 'V4 VISUAL REFRESH' "$out" && ok=1 ;;
                   /player-refined-v5.css) grep -Fq 'QURAN_PLAYER_V5_REFINED' "$out" && ok=1 ;;
                   /player-capsule-v6.css) grep -Fq 'QURAN_PLAYER_V6_CAPSULE' "$out" && ok=1 ;;
