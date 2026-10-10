@@ -3300,6 +3300,20 @@ html[data-kids-pointer-input="touch"] body :where(.choice-button,.choice-listen,
   -webkit-tap-highlight-color:transparent!important;
 }
 
+
+/* KIDS ACADEMY SERHAT MASTER INTEGRATION V8.3 */
+#academySerhatLead:not([hidden]){display:inline-flex;align-items:center;justify-content:center;
+ margin:8px 0 12px;min-height:48px;padding:11px 17px;
+ border-radius:15px;border:1px solid rgba(93,173,164,.48)!important;
+ background:linear-gradient(125deg,#e6f7f3,#fff8e8)!important;
+ color:#155f61!important;font-weight:860!important;
+ -webkit-tap-highlight-color:transparent!important}
+body[data-profile="girl"] #academySerhatLead:not([hidden]){
+ background:linear-gradient(125deg,#fce5f8,#fff6e8)!important;color:#713e82!important;
+ border-color:rgba(173,119,188,.52)!important}
+#academySerhatStatus:not([hidden]){display:inline-block;margin:7px 10px;
+ font-size:12px;color:var(--kids-ink,#173747);font-weight:690}
+
 </style><script data-kids-touch-focus-v83>
 (function(){
   "use strict";
@@ -3320,7 +3334,7 @@ html[data-kids-pointer-input="touch"] body :where(.choice-button,.choice-listen,
   },true);
 })();
 </script></head>
-<body data-profile="boy" data-preview-release="V8.3-20261010" data-preview-deploy="v8.3-touch-focus-and-master"><main class="wrap">
+<body data-profile="boy" data-preview-release="V8.3-20261010" data-preview-deploy="v8.3-serhat-exact-clip-and-focus"><main class="wrap">
 
 <header class="academy-header kids-detail-appbar" aria-label="Navigationsleiste Lernakademie">
  <button class="academy-nav-back" id="academyNavBack" type="button" aria-label="Zurück"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/><path d="M9 12h11"/></svg></button>
@@ -3382,7 +3396,7 @@ html[data-kids-pointer-input="touch"] body :where(.choice-button,.choice-listen,
  <div class="stage-tracker" role="group" aria-label="Unterrichtsschritte"><button class="tracker-item is-current" data-jump-step="0"><b>1</b><span>Willkommen</span></button><button class="tracker-item" data-jump-step="1"><b>2</b><span>Verstehen</span></button><button class="tracker-item" data-jump-step="2"><b>3</b><span>Belege</span></button><button class="tracker-item" data-jump-step="3"><b>4</b><span>Mitdenken</span></button><button class="tracker-item" data-jump-step="4"><b>5</b><span>Merken</span></button></div>
  <p class="academy-audio-feedback" id="audioFeedback" role="status" aria-live="polite">Tippe auf „Anhören“, wenn du etwas hören möchtest.</p><div class="stage-surface" id="stageSurface">
   <section class="lesson-stage" data-lesson-step="0" aria-labelledby="welcomeTitle"><span class="kicker">Schritt 1 · Willkommen</span><h2 id="welcomeTitle">Schön, dass du da bist!</h2><p class="stage-lead welcome-greeting" id="welcomeGreeting"><span id="welcomeSalam" class="stage-greeting-salam">As-salāmu ʿalaykum, lieber Bruder.</span><span id="welcomeFollowup" class="stage-greeting-followup">Schön, dass du heute mitlernst!</span></p><p class="stage-body" id="lessonWelcomeBody">Heute sprechen wir darüber, weshalb <strong>Wahrhaftigkeit</strong> wichtig ist. Du kannst jederzeit anhalten, noch einmal zuhören oder etwas in deinem eigenen Tempo lesen.</p><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="0">Begrüßung anhören</button><span class="voice-note" id="voiceStatus" aria-live="polite">Du kannst die Begrüßung noch einmal anhören.</span><details class="academy-tech-details"><summary>Audio-Test für Erwachsene</summary><p id="audioDiagnostics">Aufnahmen werden geprüft.</p><button type="button" class="pill soft-gold master-voice-test" id="masterVoiceTest">▶ Masterstimme testen</button><p class="master-voice-sample-note" id="masterVoiceTestStatus" aria-live="polite">Masterprobe aus dem Duʿāʾ-Bereich – noch keine Aufnahme des Unterrichtssatzes.</p></details></div></section>
-  <section class="lesson-stage" data-lesson-step="1" aria-labelledby="explainTitle" hidden><span class="kicker">Schritt 2 · Heute lernen wir</span><h2 id="explainTitle">Was bedeutet Wahrhaftigkeit?</h2><p class="stage-lead">Die <strong>Wahrheit sagen</strong> – auch wenn es manchmal Mut kostet.</p><div class="spoken-paragraph" id="explainWords"><p data-spoken>Manchmal passiert uns aus Versehen ein Fehler.</p><p data-spoken>Wenn wir ehrlich sagen, was passiert ist, können wir Verantwortung übernehmen und etwas wiedergutmachen.</p><p data-spoken>Wenn wir stattdessen lügen, kann das Vertrauen anderer Menschen leiden.</p><p data-spoken>Wahrhaftigkeit ist deshalb ein wichtiger Teil unseres guten Charakters.</p></div><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="1">Erklärung anhören</button><span class="voice-note">Beim Hören wird der aktuelle Satz sanft hervorgehoben.</span></div></section>
+  <section class="lesson-stage" data-lesson-step="1" aria-labelledby="explainTitle" hidden><span class="kicker">Schritt 2 · Heute lernen wir</span><h2 id="explainTitle">Was bedeutet Wahrhaftigkeit?</h2><p class="stage-lead">Die <strong>Wahrheit sagen</strong> – auch wenn es manchmal Mut kostet.</p><button type="button" class="pill soft-gold academy-serhat-lead" id="academySerhatLead" hidden aria-label="Tawḥīd-Einführung mit Serhats Masterstimme anhören">▶ Serhat hören</button><span class="academy-serhat-status" id="academySerhatStatus" aria-live="polite" hidden></span><div class="spoken-paragraph" id="explainWords"><p data-spoken>Manchmal passiert uns aus Versehen ein Fehler.</p><p data-spoken>Wenn wir ehrlich sagen, was passiert ist, können wir Verantwortung übernehmen und etwas wiedergutmachen.</p><p data-spoken>Wenn wir stattdessen lügen, kann das Vertrauen anderer Menschen leiden.</p><p data-spoken>Wahrhaftigkeit ist deshalb ein wichtiger Teil unseres guten Charakters.</p></div><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="1">Erklärung anhören</button><span class="voice-note">Beim Hören wird der aktuelle Satz sanft hervorgehoben.</span></div></section>
   <section class="lesson-stage" data-lesson-step="2" aria-labelledby="evidenceTitle" hidden><span class="kicker">Schritt 3 · Qurʾān und Sunnah</span><h2 id="evidenceTitle">Was lernen wir aus den Quellen?</h2><p class="stage-lead" id="evidenceLead">Wir hören zuerst einen Vers aus dem Qurʾān und betrachten danach eine authentische Überlieferung.</p><div class="evidence-region"><section class="lesson-source-block">
   <div class="eyebrow">Qurʾān · Sūrat at-Tawbah · Vers 119</div>
   <div class="arabic-listen-row">
@@ -3780,6 +3794,38 @@ function syncProfile(force=false){
  renderHome();
 }
 
+
+function refreshSerhatLessonClip(){
+ const button=$("#academySerhatLead"),status=$("#academySerhatStatus");
+ const desired=activeLesson()?.lead||"";
+ button.hidden=true;status.hidden=true;status.textContent="";
+ if(!desired||$("#lessonMain").hidden)return;
+ const currentLesson=activeLessonId;
+ Promise.resolve(prepareOwnerVoice()).then(async owner=>{
+  if(!owner)return;
+  if(typeof owner.whenAcademyReady==="function")await owner.whenAcademyReady();
+  if(activeLessonId!==currentLesson||$("#lessonMain").hidden)return;
+  if(typeof owner.hasMaster!=="function"||!owner.hasMaster(desired))return;
+  button.hidden=false;button.dataset.masterText=desired;
+  button.setAttribute("aria-label",desired+" – mit Serhats Masterstimme anhören");
+ }).catch(()=>{button.hidden=true;});
+}
+function playSerhatLessonClip(){
+ const button=$("#academySerhatLead"),status=$("#academySerhatStatus"),t=button.dataset.masterText||"";
+ const owner=window.DARKidsOwnerVoice;
+ if(!t||!owner||typeof owner.hasMaster!=="function"||!owner.hasMaster(t))return;
+ pauseVoiceClip();stopSpeech();stopAudio();status.hidden=false;
+ status.textContent="Die Masterstimme wird abgespielt.";
+ const failed=()=>{status.hidden=false;status.textContent="Diese Aufnahme lässt sich gerade nicht abspielen.";};
+ try{
+  const ok=owner.play(t,{source:"kids-academy-tawhid-verified-serhat",
+   rate:age==="4-5"?.95:1,
+   onended:()=>{status.textContent="Du kannst den Satz noch einmal anhören.";},
+   onerror:failed});
+  if(!ok)failed();
+ }catch(_){failed();}
+}
+
 function prepareOwnerVoice(){
  // Die Serhat-Archive werden nur auf Unterrichtsseiten geladen, nicht beim Öffnen der Startseite.
  if(window.DARKidsOwnerVoice)return Promise.resolve(window.DARKidsOwnerVoice);
@@ -3903,7 +3949,7 @@ function begin(requested){
  if(!chosen||chosen!=="sidq"&&!CURRICULUM[chosen])return;
  activeLessonId=chosen;focusPages[1]=0;focusPages[2]=0;focusPages[4]=0;
  prepareOwnerVoice();hideCategory();$("#academyHome").hidden=true;$("#lessonMain").hidden=false;
- applySelectedLesson();
+ applySelectedLesson();refreshSerhatLessonClip();
  const draft=readDraft();
  if(draft){
   step=draft.step;unlocked=draft.unlocked;qIndex=draft.qIndex;finished=step===4;score=draft.score;
@@ -4228,6 +4274,7 @@ childPlayback.onerror=()=>{
  voicePlayButton.setAttribute("aria-pressed","false");
 };
 $("#masterVoiceTest").onclick=playMasterProbe;
+$("#academySerhatLead").onclick=playSerhatLessonClip;
 $("#previewRefresh").onclick=()=>{const url=new URL(location.href);url.searchParams.set("cb","v7.1-"+Date.now());location.replace(url.toString())};
 all("[data-open-lesson]").forEach(b=>b.onclick=()=>begin(b.dataset.openLesson||"sidq"));
 all("[data-open-category]").forEach(b=>b.onclick=()=>openCategory(b.dataset.openCategory));
