@@ -37,7 +37,7 @@ function post(type,data={},onProgress){
    if(finished)return;finished=true;clearTimeout(timer);channel.port1.close();
    if(error)reject(error);else resolve(response);
   };
-  const timer=setTimeout(()=>finish(Error("Download wurde unterbrochen. Erneut versuchen.")),180000);
+  const timer=setTimeout(()=>finish(Error("Offline-Dienst reagiert nicht. App neu öffnen und erneut versuchen.")),type==="KIDS_ITEM_STATUS"?8000:180000);
   channel.port1.onmessage=e=>{
    const msg=e.data||{};
    if(msg.type==="KIDS_ITEM_PROGRESS"){onProgress?.(msg);return;}
@@ -110,7 +110,7 @@ function oneButton(card,spec){
 }
 function story(card,{category,item,sourceUrl,artwork,hero,audioMeta,readerUrl}){
  if(!item?.id)return;
- const audio=String(audioMeta?.url||"");
+ const audio=allowed(String(audioMeta?.url||""));
  const urls=[sourceUrl,readerUrl||"/kids/story-hub.js?v=26",
   "/kids/data/story-hub.json?v=7",
   "/kids/story-follow-reader.js?v=17","/kids/story-policy.js?v=2",
@@ -120,7 +120,7 @@ function story(card,{category,item,sourceUrl,artwork,hero,audioMeta,readerUrl}){
 }
 function deen(card,{item,audioMeta,cover,hero}){
  if(!item?.id)return;
- const audio=String(audioMeta?.url||"");
+ const audio=allowed(String(audioMeta?.url||""));
  const urls=["/kids/data/deen-lessons.json?v=3","/kids/deen-lessons.js?v=5",
   "/kids/deen-lessons.css?v=2","/kids/story-follow-reader.js?v=17",
   "/kids/story-policy.js?v=2",cover,hero,audio];
