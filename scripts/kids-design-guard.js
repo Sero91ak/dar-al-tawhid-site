@@ -272,9 +272,9 @@ function runKidsDesignGuard() {
     const liveCacheVersion = liveCacheMatch ? Number(liveCacheMatch[1]) : 0;
     const buildCacheMatch = String(release.buildId || "").match(/(\d+)$/);
     const buildCacheVersion = buildCacheMatch ? Number(buildCacheMatch[1]) : 0;
-    // Release consistency: Kids shell build and live cache must move together.
+    // A verified audio-only PWA cache may advance independently; never allow it to lag behind the shell build.
     if (!liveCacheMatch || liveCacheVersion < Number(swVersion) ||
-        liveCacheVersion !== buildCacheVersion ||
+        liveCacheVersion < buildCacheVersion ||
         !sw.includes(dockCssRef) || !sw.includes(dockJsRef)) {
       failed += fail("Kids: Service Worker enthält nicht die aktuelle CSS/JS-Offlineversion "+swVersion);
     }
