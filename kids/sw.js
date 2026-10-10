@@ -312,9 +312,13 @@ self.addEventListener("activate",function(event){
   // Stable startup: claiming control must never navigate/reload an already-open app.
   event.waitUntil(
     caches.keys().then(function(keys){
-      return Promise.all(keys.filter(function(key){
-        return key.indexOf("dar-al-tawhid-kids-v")===0&&key!==CACHE_NAME;
-      }).map(function(key){return caches.delete(key)}));
+      // Preserve the previous shell as a rescue/offline fallback until the
+      // new version has been opened and its extended library downloaded.
+      // The pinned version of each asset avoids cross-version collisions.
+      const versions=keys.filter(key=>/^dar-al-tawhid-kids-v\\d+$/.test(key))
+        .sort((a,b)=>Number(b.split("-v").pop())-Number(a.split("-v").pop()));
+      const keep=new Set([CACHE_NAME,...versions.slice(0,2)]);
+      return Promise.all(versions.filter(key=>!keep.has(key)).map(key=>caches.delete(key)));
     }).then(function(){return self.clients.claim()})
   );
 });
@@ -641,7 +645,7 @@ async function kidsOfflineDownload(source,mode){
       try{
         await cache.put(KIDS_OFFLINE_META,new Response(JSON.stringify({
           complete,done,total:queue.length,failed,checkedAt:Date.now(),
-          shell:KIDS_BUILD_ID
+          shell:KIDS_BUILD_ID,urls:queue
         }),{headers:{"Content-Type":"application/json"}}));
       }catch(_){}
     }
@@ -665,9 +669,12 @@ self.addEventListener("message",function(event){
     event.waitUntil((async()=>{
       const cache=await caches.open(KIDS_OFFLINE_CACHE),keys=await cache.keys();
       let record={};try{record=await (await cache.match(KIDS_OFFLINE_META))?.json()||{}}catch(_){}
+      const known=new Set(keys.map(x=>x.url));
+      const verified=record.complete===true&&Array.isArray(record.urls)
+        &&record.urls.every(url=>known.has(url));
       await kidsSendOffline(event.source,"KIDS_OFFLINE_STATUS",{
         count:keys.filter(x=>!x.url.endsWith("/offline-pack-status-v1.json")).length,
-        complete:record.complete===true&&keys.length>=record.total,
+        complete:verified,
         failed:record.failed||0
       });
     })());return;
