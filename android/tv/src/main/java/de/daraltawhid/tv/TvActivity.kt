@@ -269,7 +269,7 @@ class TvActivity : Activity() {
                 val count = file.optInt("count", 0).coerceAtLeast(0)
                 if (position < count) {
                     chosenPath = file.optString("path").takeIf {
-                        it.matches(Regex("""entries(?:-batch-[a-zA-Z0-9-]+)?\\.json"""))
+                        it.matches(Regex("""entries(?:-batch-[a-zA-Z0-9-]+)?\.json"""))
                     }
                     break
                 }
