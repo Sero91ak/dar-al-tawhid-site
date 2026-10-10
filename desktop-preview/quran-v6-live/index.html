@@ -544,7 +544,7 @@ document.addEventListener("DOMContentLoaded",()=>{
  }
 
 // Saved verses are isolated to the HTML preview; production favourites remain untouched.
- const bookmarks=new Set((()=>{try{const data=JSON.parse(localStorage.getItem("darQuranPreviewAyahMarksV6")||"[]");return Array.isArray(data)?data.filter(x=>/^\\d+:\\d+$/.test(x)):[]}catch(e){return[]}})());
+ const bookmarks=new Set((()=>{try{const data=JSON.parse(localStorage.getItem("darQuranPreviewAyahMarksV6")||"[]");return Array.isArray(data)?data.filter(x=>/^\d+:\d+$/.test(x)):[]}catch(e){return[]}})());
  function toggleBookmark(ayah){
   const key=state.surah+":"+Number(ayah);
   if(bookmarks.has(key))bookmarks.delete(key);else bookmarks.add(key);
@@ -606,7 +606,7 @@ document.addEventListener("DOMContentLoaded",()=>{
  }
  function markVerse(scroll=false){
   document.querySelectorAll(".v6Ayah").forEach(el=>el.setAttribute("aria-current",String(Number(el.dataset.ayah)===state.ayah)));
-  if(scroll){const e=$v("v6Ayah-"+state.ayah);if(e){const pin=$v("v6ReaderTop");const offset=(pin?.getBoundingClientRect().height||0)+16+Number.parseFloat(getComputedStyle(pin).top||"0");const target=Math.max(0,window.scrollY+e.getBoundingClientRect().top-offset);window.scrollTo({top:target,behavior:window.matchMedia("(prefers-reduced-motion:reduce)").matches?"instant":"smooth"});}}
+  if(scroll){const e=$v("v6Ayah-"+state.ayah);if(e){const pin=$v("v6ReaderTop");const offset=(pin?.getBoundingClientRect().height||0)+16+(Number.parseFloat(getComputedStyle(pin).top||"0")||0);const target=Math.max(0,window.scrollY+e.getBoundingClientRect().top-offset);window.scrollTo({top:target,behavior:window.matchMedia("(prefers-reduced-motion:reduce)").matches?"instant":"smooth"});}}
   syncHeader();save();
  }
  async function openReader(n,a,options={}){
