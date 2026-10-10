@@ -2340,3 +2340,16 @@ html body #view-today.view .kids-salah-home-world.kids-home-fit-tight .kids-sala
     font-size:clamp(58px,8vw,77px)!important;
   }
 }
+
+/* KIDS_HOME_SCROLL_ANCHOR_GUARD_V1320
+   Prevent Safari/Chromium from compensating for asynchronously updated
+   prayer text while the fixed bottom dock remains stationary. This guard
+   applies only to Today, never to readers, Qurʾān lessons or other tabs. */
+html[data-view="today"] body .app .shell,
+html body .app:has(#view-today.view.active) .shell{
+  overflow-anchor:none!important;
+}
+html[data-view="today"] body #view-today .kids-salah-home-world,
+html body .app:has(#view-today.view.active) #view-today .kids-salah-home-world{
+  overflow-anchor:none!important;
+}
