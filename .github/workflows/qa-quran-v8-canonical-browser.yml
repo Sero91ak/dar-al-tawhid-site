@@ -1,4 +1,5 @@
 name: Quran V8 Canonical Tadabbur Browser QA
+# Regression: toggles are checked relative to their initial state, source headings case-insensitively.
 on:
   workflow_dispatch:
   push:
