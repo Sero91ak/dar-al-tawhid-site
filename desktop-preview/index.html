@@ -2600,6 +2600,24 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
   }
 }
 </style>
+<style id="darTastaturMehrCardV1">
+/* MEHR · Tastaturbibliothek V1 — einzig aktive öffentliche Desktop-Mehr-Ansicht */
+.more-tastatur-section{padding:20px 0 6px;min-width:0}
+.more-tastatur-link{position:relative;display:flex;align-items:center;gap:24px;min-width:0;min-height:146px;padding:23px 30px;border:1px solid #a99061;border-radius:23px;overflow:hidden;color:#fff5dc!important;text-decoration:none!important;background:radial-gradient(ellipse at 89% 18%,rgba(219,188,121,.21),transparent 36%),linear-gradient(115deg,#092c30 0%,#09212a 55%,#041820 100%);box-shadow:0 12px 29px rgba(30,39,28,.12)}
+.more-tastatur-link:before{content:"";position:absolute;right:23px;bottom:-74px;width:208px;height:208px;border:1px solid rgba(228,188,119,.23);border-radius:50%;pointer-events:none}
+.more-tastatur-link:after{content:"";position:absolute;right:53px;bottom:-48px;width:142px;height:142px;border:1px solid rgba(228,188,119,.17);border-radius:50%;pointer-events:none}
+.more-tastatur-ornament{display:grid;place-items:center;flex:none;width:87px;height:87px;border:1px solid rgba(255,244,209,.44);border-radius:21px;background:linear-gradient(143deg,#f6e2b4,#cbaa68);font-family:"Geeza Pro","Noto Naskh Arabic",serif;font-size:49px;color:#0a2930;line-height:1}
+.more-tastatur-text{display:flex;flex:1;flex-direction:column;gap:7px;min-width:0;position:relative;z-index:1}
+.more-tastatur-text small{font:700 11px/1.3 system-ui,-apple-system,sans-serif;letter-spacing:.13em;color:#e4c992}
+.more-tastatur-text strong{font:500 clamp(26px,3vw,40px)/1.13 Georgia,serif;letter-spacing:-.025em;color:#fff7e5}
+.more-tastatur-text>span{font:400 13px/1.5 system-ui,-apple-system,sans-serif;color:#d9e1dc}
+.more-tastatur-action{position:relative;z-index:1;flex:none;white-space:nowrap;border:1px solid #e2c68f;border-radius:999px;padding:13px 17px;background:#e6c88d;color:#10282a;font-size:12px;font-weight:800}
+.more-tastatur-link:hover .more-tastatur-action{background:#fff0c7}
+.more-tastatur-link:focus-visible{outline:3px solid #9b783d;outline-offset:4px}
+@media(max-width:740px){.more-tastatur-link{flex-wrap:wrap;gap:12px;padding:18px 20px}.more-tastatur-ornament{width:58px;height:58px;font-size:34px;border-radius:15px}.more-tastatur-text{flex-basis:calc(100% - 76px)}.more-tastatur-text strong{font-size:clamp(23px,5.2vw,30px)}.more-tastatur-text>span{font-size:12px}.more-tastatur-action{margin-left:70px;padding:10px 13px}}
+@media(max-width:365px){.more-tastatur-link{gap:10px;padding:15px}.more-tastatur-text small{font-size:9px}.more-tastatur-text strong{font-size:22px}.more-tastatur-action{margin-left:0}}
+@media(prefers-reduced-motion:reduce){.more-tastatur-link,.more-tastatur-action{transition:none!important}}
+</style>
 </head>
 <style id="dar-touch-active-fix">
 @media (hover:none) and (pointer:coarse){
@@ -3895,7 +3913,14 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
 
  renders.mehr=function(){
   return realIntro("MEHR","Weitere Bereiche entdecken.","Wissenssammlungen, Apps und Werkzeuge der Seite.")+
-   '<section class="section reveal"><div class="more-grid"><a class="more-row desktop-link" href="'+pUrl("downloads")+'" data-page="downloads"><div><h3>Downloads</h3><p>Android-Web-App installieren oder die offizielle iPhone-/iPad-App öffnen.</p></div><b>→</b></a><a class="more-row" href="/widgets/?platform=android"><div><h3>Widgets & App-Icon</h3><p>Gebetszeiten, Heute & Dhikr sowie App-Icon verwalten.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+pUrl("propheten")+'" data-page="propheten"><div><h3>Propheten</h3><p>25 geprüfte Profile aus Qurʾān, Sunnah und frühen Quellen.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+pUrl("frauen")+'" data-page="frauen"><div><h3>Frauen</h3><p>Geprüfte Bereiche zu Fiqh, Familie, Wissen und Adab.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+pUrl("quiz")+'" data-page="quiz"><div><h3>Quiz</h3><p>Geprüfte Fragen mit Erklärung und Quelle.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+pUrl("zakat")+'" data-page="zakat"><div><h3>Zakāt-Rechner</h3><p>Vermögen und fällige Schulden eingeben.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+pUrl("quellen")+'" data-page="quellen"><div><h3>Quellen</h3><p>Direktnachweise und verwendete Werke.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+pUrl("einstellungen")+'" data-page="einstellungen"><div><h3>Darstellung</h3><p>Lesemodus und Schriftgröße.</p></div><b>→</b></a></div></section>'+footer()
+   '<section class="more-tastatur-section reveal" aria-label="Arabische Textersetzungen">'+
+    '<a class="more-tastatur-link" href="/tastatur/" aria-label="Arabische Textersetzungen mit 565 Kürzeln öffnen">'+
+     '<span class="more-tastatur-ornament" aria-hidden="true">﷽</span>'+
+     '<span class="more-tastatur-text"><small>KOSTENLOS · FÜR APPLE & ANDROID</small><strong>Arabische Textersetzungen</strong><span>565 geprüfte Kürzel · Arabisch & Lautschrift · Installation und Kopieren</span></span>'+
+     '<span class="more-tastatur-action">Bibliothek öffnen <span aria-hidden="true">↗</span></span>'+
+    '</a>'+
+   '</section>'+
+   '<section class="section reveal"><div class="more-grid"><a class="more-row desktop-link" href="'+pUrl("downloads")+'" data-page="downloads"><div><h3>Downloads</h3><p>Android-Web-App installieren oder die offizielle iPhone-/iPad-App öffnen.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+pUrl("propheten")+'" data-page="propheten"><div><h3>Propheten</h3><p>25 geprüfte Profile aus Qurʾān, Sunnah und frühen Quellen.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+pUrl("frauen")+'" data-page="frauen"><div><h3>Frauen</h3><p>Geprüfte Bereiche zu Fiqh, Familie, Wissen und Adab.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+pUrl("quiz")+'" data-page="quiz"><div><h3>Quiz</h3><p>Geprüfte Fragen mit Erklärung und Quelle.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+pUrl("zakat")+'" data-page="zakat"><div><h3>Zakāt-Rechner</h3><p>Vermögen und fällige Schulden eingeben.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+pUrl("quellen")+'" data-page="quellen"><div><h3>Quellen</h3><p>Direktnachweise und verwendete Werke.</p></div><b>→</b></a><a class="more-row desktop-link" href="'+pUrl("einstellungen")+'" data-page="einstellungen"><div><h3>Darstellung</h3><p>Lesemodus und Schriftgröße.</p></div><b>→</b></a></div></section>'+footer()
  };
 
  // --- Smart browse v9 ---
