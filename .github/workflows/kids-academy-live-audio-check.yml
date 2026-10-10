@@ -1,0 +1,91 @@
+name: KIDS Academy V15 - verify live Serhat voice delivery
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/kids-academy-live-audio-check.yml'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/kids-academy-live-audio-check.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  live-audio:
+    name: Verify Cloudflare master audio from real domain
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate local metadata (zero credits)
+        run: |
+          python3 - <<'PY'
+          import hashlib,json,pathlib
+          root=pathlib.Path.cwd()
+          staging=json.loads((root/"kids/data/academy-audio-staging-v9.json").read_text("utf-8"))
+          assert staging["stagingOnly"] is True
+          assert staging["pilotFirstLesson"] is True
+          assert staging["modelId"] == "eleven_v4"
+          assert staging["voiceSettingsProfile"] == "kids_story"
+          assert len(staging["entries"]) == 4
+          for title, e in staging["entries"].items():
+              f=root/e["url"].lstrip("/")
+              assert e["voiceId"]=="DkU7j9uO4ZEtLD2iRZSH"
+              assert e["approvedForPlayback"] is False
+              assert f.is_file(),f
+              assert hashlib.sha256(f.read_bytes()).hexdigest() == e["sha256"],title
+          print("Four owner V4 clips present with valid hashes and QA-only status.")
+          PY
+      - name: Probe live Cloudflare HTML, JS and all 4 audio URLs
+        run: |
+          python3 - <<'PY'
+          import hashlib,json,time,urllib.error,urllib.parse,urllib.request,pathlib,sys
+          host="https://dar-al-tawhid.de"
+          manifest=json.loads(pathlib.Path("kids/data/academy-audio-staging-v9.json").read_text("utf-8"))
+          resources=[
+              ("/kids/akademie/index.html","V13.0-voicefix-20261010",None),
+              ("/kids/akademie/pilot-audio-v13.js","kids-serhat-v13-20261010",None),
+              ("/kids/akademie/stimmen-test-v14.html","DĀR AL TAWḤĪD KIDS",None),
+          ]
+          for line,e in manifest["entries"].items():
+              resources.append((e["url"],None,e["sha256"]))
+          failed=[]
+          for route,needle,expected in resources:
+              last=None
+              for attempt in range(3):
+                  url=host+route+"?liveqa="+str(int(time.time()))+"-"+str(attempt)
+                  try:
+                      request=urllib.request.Request(url,headers={
+                          "User-Agent":"Dar-Kids-MasterVoice-LiveIntegrity/1.0",
+                          "Accept":"*/*",
+                          "Cache-Control":"no-cache",
+                      })
+                      with urllib.request.urlopen(request,timeout=18) as response:
+                          body=response.read()
+                          code=response.status
+                          mime=response.headers.get("Content-Type","")
+                          dest=response.geturl()
+                      if code!=200:raise RuntimeError("HTTP "+str(code))
+                      if expected:
+                          if len(body)<1800:raise RuntimeError("Incomplete audio: "+str(len(body))+" bytes")
+                          actual=hashlib.sha256(body).hexdigest()
+                          if actual!=expected:raise RuntimeError("Wrong bytes/hash "+actual[:20])
+                          if body.startswith(b"<!doctype html") or body.startswith(b"<html"):raise RuntimeError("HTML returned in place of audio")
+                      elif needle and needle.encode("utf-8") not in body:
+                          raise RuntimeError("Missing release marker "+needle)
+                      print("LIVE OK",route,"bytes",len(body),"mime",mime,"URL",dest)
+                      last=None;break
+                  except Exception as e:
+                      last=str(e)
+                      print("Live retry",attempt+1,route,last)
+                      if attempt<2:time.sleep(5)
+              if last:failed.append((route,last))
+          if failed:
+              print("LIVE AUDIO DELIVERY FAIL:",len(failed))
+              for route,reason in failed:print("  ",route,reason)
+              sys.exit(1)
+          print("LIVE VOICE DELIVERY PASS: academy, direct playback script, native iPhone controls and four SHA-matched V4 audio files accessible on dar-al-tawhid.de.")
+          PY
