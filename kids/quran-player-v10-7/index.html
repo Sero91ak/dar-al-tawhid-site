@@ -503,6 +503,7 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const initial={surah:KIDS?112:1,ayah:KIDS?4:1,mode:'listen',speed:1,sequence:'inorder',reciterMode:'fixed',reciter:RECITERS[0].id,repeat:'none',arabic:true,german:true,latin:false,tad:false,profile:"boy",tafsir:false,bookmarks:{},finished:{},errors:{},listens:0,seconds:0,kidsMode:'normal'};
 const key='dar-quran-v10-'+APP+(KIDS?'-'+(localStorage.getItem('kids.activeProfile')||'guest'):'');let saved={};try{saved=JSON.parse(localStorage.getItem(key)||'{}')}catch(e){}
 const state={...initial,...saved};
+if(KIDS&&!Object.keys(saved).length){try{const legacy=JSON.parse(localStorage.getItem('kids.quran.resume')||'null');if(legacy&&SURAHS[Number(legacy.surah)-1]){state.surah=Number(legacy.surah);state.ayah=Math.max(1,Math.min(SURAHS[state.surah-1].count,Number(legacy.ayah||0)+1))}}catch(e){}}
 // Existing app links may request an exact surah and ayah.
 const urlArgs=new URLSearchParams(location.search);
 const reqSurah=Number(urlArgs.get('surah'));
@@ -512,7 +513,7 @@ if(Number.isInteger(reqSurah)&&reqSurah>=1&&reqSurah<=114){state.surah=reqSurah;
 // V10.7: Honor the host Kids app profile on first open.
 const urlProfile=new URLSearchParams(location.search).get('profile');
 if(['boy','girl','teen-boy','teen-girl'].includes(urlProfile)) state.profile=urlProfile; const audio=new Audio();audio.preload='none';audio.preservesPitch=true;audio.mozPreservesPitch=true;audio.webkitPreservesPitch=true;let verseCache={},currentList=[],activeSheet='',loadingId=0,startedAt=0,playIntent=false;
-function persist(){try{localStorage.setItem(key,JSON.stringify({...state,seconds:Math.floor(state.seconds)}))}catch(e){}}
+function persist(){try{localStorage.setItem(key,JSON.stringify({...state,seconds:Math.floor(state.seconds)}));if(KIDS&&state.surah>=1){localStorage.setItem('kids.quran.resume',JSON.stringify({surah:state.surah,ayah:Math.max(0,state.ayah-1),label:SURAHS[state.surah-1]?.name||'',updatedAt:Date.now()}))}}catch(e){}}
 function total(s){return SURAHS[s-1]?.count||1}function gid(s,a){return SURAHS.slice(0,s-1).reduce((x,v)=>x+v.count,0)+a}function ss(){return SURAHS[state.surah-1]};function identity(){return state.surah+':'+state.ayah}function pad(n){return String(n).padStart(2,'0')}function clock(t){if(!Number.isFinite(t))return '0:00';let n=Math.max(0,Math.floor(t));return Math.floor(n/60)+':'+pad(n%60)}
 function status(s){const el=$('status');el.textContent=s;el.classList.toggle('notice',/nicht erreichbar|fehler|nicht verfügbar|prüfen|fehlgeschlagen/i.test(s))}function stopped(){return audio.paused||audio.ended}
 function markBookmark(){const id=identity();state.bookmarks[id]=!state.bookmarks[id];if(!state.bookmarks[id])delete state.bookmarks[id];persist();renderBookmark()}
