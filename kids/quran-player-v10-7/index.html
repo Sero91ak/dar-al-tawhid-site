@@ -519,7 +519,18 @@ function status(s){const el=$('status');el.textContent=s;el.classList.toggle('no
 function markBookmark(){const id=identity();state.bookmarks[id]=!state.bookmarks[id];if(!state.bookmarks[id])delete state.bookmarks[id];persist();renderBookmark()}
 function renderBookmark(){const b=!!state.bookmarks[identity()];$('bookmark').setAttribute('aria-pressed',String(b));$('ayahBookmark').textContent=b?'★':'☆';$('ayahBookmark').classList.toggle('active',b)}
 function fallbackData(s){const entries=FALLBACK[String(s)];if(!entries)return null;return entries.map((v,i)=>({numberInSurah:i+1,arabic:v[0],de:v[1],latin:v[2]}))}
-async function getVerses(s){if(verseCache[s])return verseCache[s];let fallback=fallbackData(s);if(fallback){verseCache[s]=fallback;return fallback}
+async function getVerses(s){if(verseCache[s])return verseCache[s];
+// Prefer the local verified Quran corpus available in both apps; external API is a fallback.
+try{const uri='/content/quran/'+String(s).padStart(3,'0')+'.json';
+const response=await fetch(uri,{signal:AbortSignal.timeout?AbortSignal.timeout(9000):undefined});
+if(!response.ok)throw Error('Local Quran HTTP '+response.status);
+const raw=await response.json();
+if(!Array.isArray(raw.verses)||raw.verses.length!==total(s))throw Error('Local Quran verse count mismatch');
+const list=raw.verses.map((v,i)=>({numberInSurah:i+1,arabic:v.ar||'',de:v.de||'',latin:v.tr_academic||v.tr_readable||''}));
+if(list.some(v=>!v.arabic))throw Error('Missing Arabic Quran text');
+verseCache[s]=list;return list;
+}catch(localError){}
+let fallback=fallbackData(s);if(fallback){verseCache[s]=fallback;return fallback}
 try{let response=await fetch('https://api.alquran.cloud/v1/surah/'+s+'/editions/quran-uthmani,de.aburida',{signal:AbortSignal.timeout?AbortSignal.timeout(9000):undefined});if(!response.ok)throw Error('HTTP '+response.status);let raw=await response.json();const arr=raw?.data;if(!Array.isArray(arr)||!arr[0]?.ayahs)throw Error('Ungültige Daten');const ar=arr[0].ayahs, de=arr[1]?.ayahs||[];const verses=ar.map((v,i)=>({numberInSurah:i+1,arabic:v.text,de:de[i]?.text||'',latin:''})); if(verses.length!==total(s))throw Error('Versanzahl widersprüchlich');verseCache[s]=verses;return verses}catch(e){return null}}
 async function verseChange(restartAudio=false){let token=++loadingId;const wasPlaying=playIntent&&!stopped();audio.pause();audio.removeAttribute('src');audio.load();startedAt=0;render();$('arabic').textContent='Vers wird geladen …';$('translation').textContent='';currentList=await getVerses(state.surah);if(token!==loadingId)return;render();$('stageScroll').scrollTop=0;if(restartAudio||wasPlaying)startAudio()}
 function render(){const s=ss(),v=currentList?.[state.ayah-1];$('surahTitle').textContent=s.name;$('surahTitle').title=s.name;$('surahTitle').classList.toggle('title-long',s.name.length>=13);$('surahTitle').classList.toggle('title-xlong',s.name.length>=17);$('surahMeta').textContent=`${s.count} Āyāt · ${KIDS?'Schritt für Schritt':'Hören & Verstehen'}`;$('surahJump').innerHTML='<span class="jump-prefix">Sūrah </span>'+String(s.id).padStart(3,'0')+' ▾';$('ayahMarker').textContent=(KIDS?'DEINE ĀYAH ':'ĀYAH ')+pad(state.ayah)+' / '+pad(s.count);$('nowTitle').textContent=s.name+' · Āyah '+state.ayah;
