@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>KIDS Lernakademie · Geräte-Vorschau</title>
+<meta name="description" content="Separate iPhone- und iPad-Vorschau für DĀR AL TAWḤĪD KIDS Lernakademie.">
+<style>
+:root{font-family:system-ui,-apple-system,"Avenir Next",Arial,sans-serif;color:#fff7e9;background:#0b2733}
+*{box-sizing:border-box}
+body{margin:0;min-height:100dvh;background:radial-gradient(ellipse at 40% 0%,rgba(50,137,138,.16),transparent 70%),#0b2733}
+body[data-profile="maedchen"]{background:radial-gradient(ellipse at 30% 0%,rgba(173,100,181,.24),transparent 68%),#2f213f}
+main{max-width:1250px;margin:auto;padding:clamp(14px,3vw,26px);padding-bottom:calc(30px + env(safe-area-inset-bottom,0px))}
+header{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:17px}
+.brand{font-weight:850;font-size:clamp(18px,3vw,27px);letter-spacing:-.035em}
+.brand small{display:block;color:#f0ce87;font-size:11px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px}
+a{color:inherit}
+.toplink,.direct{
+display:inline-flex;align-items:center;justify-content:center;min-height:44px;
+padding:10px 15px;text-decoration:none;border-radius:14px;
+font-size:14px;font-weight:790;border:1px solid rgba(255,235,196,.24);background:rgba(255,255,255,.07)}
+.toplink:hover,.direct:hover{background:rgba(255,255,255,.12)}
+.toolbar{display:flex;flex-wrap:wrap;align-items:end;gap:10px;padding:13px;border:1px solid rgba(234,221,193,.21);
+border-radius:19px;background:rgba(255,255,255,.055);margin:0 0 14px}
+.field{display:flex;flex-direction:column;gap:6px;min-width:125px;flex:1 1 160px}
+.field label{font-weight:800;font-size:12px;color:#eddbbb}
+select{appearance:none;width:100%;min-height:43px;padding:9px 30px 9px 12px;border:1px solid rgba(248,229,191,.37);
+color:#fff9ec;border-radius:12px;background-color:#203e4b;font:750 14px system-ui,sans-serif;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='12'%3E%3Cpath d='m2 3 5.5 5L13 3' stroke='%23f5d698' fill='none' stroke-width='2'/%3E%3C/svg%3E");
+background-repeat:no-repeat;background-position:right 11px center}
+body[data-profile="maedchen"] select{background-color:#523c65}
+select:focus-visible,a:focus-visible{outline:3px solid #ffdb86;outline-offset:3px}
+.actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center;flex:1 1 230px;justify-content:flex-end}
+.direct{background:linear-gradient(115deg,#f0c978,#f2b96a);color:#203440;border:0}
+body[data-profile="maedchen"] .direct{background:linear-gradient(115deg,#ffd5b3,#f0b4d1);color:#4c3052}
+.actions .ghost{opacity:.92}
+.note{margin:0 0 15px;color:#c7d7db;font-size:clamp(12px,1.7vw,14px);line-height:1.55}
+.viewer{display:flex;align-items:flex-start;justify-content:center;overflow:auto;overscroll-behavior:contain;
+border:1px solid rgba(241,227,194,.15);border-radius:23px;padding:clamp(8px,2vw,18px);
+background:linear-gradient(160deg,rgba(255,255,255,.075),rgba(255,255,255,.015));min-height:350px}
+.screen{position:relative;flex:none;overflow:hidden;border:7px solid #202b32;border-radius:25px;background:#fff;
+box-shadow:0 15px 45px rgba(0,0,0,.42);box-sizing:content-box}
+.screen[data-device="iphone"]{border-radius:28px}
+.screen[data-device^="ipad"]{border-radius:16px}
+.screen iframe{position:absolute;top:0;left:0;border:0;transform-origin:top left;background:#fff}
+.caption{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 1px 0}
+.caption p{margin:0;font-size:13px;color:#d3ddd9}
+.caption output{font-variant-numeric:tabular-nums;font-size:12px;font-weight:800;color:#f0d6ab}
+footer{font-size:12px;color:#b6cbd0;line-height:1.6;margin-top:20px}
+footer p{margin:4px 0}
+@media(max-width:620px){.actions{justify-content:stretch}.actions>a{flex:1 1 auto}.toolbar{padding:12px}.viewer{border-radius:17px}}
+</style>
+</head>
+<body data-profile="junge">
+<main>
+<header>
+  <div class="brand"><small>DĀR AL TAWḤĪD · KIDS</small>Geräte-Vorschau der Lernakademie</div>
+  <a class="toplink" href="/kids/akademie/index.html">← Zur Lernakademie</a>
+</header>
+<form class="toolbar" id="controls" aria-label="Geräte- und Profilauswahl">
+  <div class="field">
+    <label for="device">Display</label>
+    <select id="device" name="device">
+      <option value="iphone">iPhone · 390 px</option>
+      <option value="ipad-portrait" selected>iPad hochkant · 820 px</option>
+      <option value="ipad-landscape">iPad quer · 1180 px</option>
+    </select>
+  </div>
+  <div class="field">
+    <label for="profile">Profil</label>
+    <select id="profile" name="profile">
+      <option value="junge">Junge</option>
+      <option value="maedchen">Mädchen</option>
+    </select>
+  </div>
+  <div class="field">
+    <label for="age">Altersstufe</label>
+    <select id="age" name="age">
+      <option value="4-5">4–5 Jahre</option>
+      <option value="6-8">6–8 Jahre</option>
+      <option value="9-10">9–10 Jahre</option>
+    </select>
+  </div>
+  <div class="actions">
+    <a class="direct" id="direct" href="/desktop-preview/kids-akademie-unterricht.html" target="_blank" rel="noopener">Vorschau direkt öffnen ↗</a>
+  </div>
+</form>
+<p class="note">Die Vorschau simuliert die gewählte Displaybreite – auch auf einem iPhone. Die direkte Ansicht nutzt immer die tatsächliche Größe des geöffneten Geräts.</p>
+<section class="viewer" id="viewer" aria-label="Gerätevorschau der Lernakademie">
+  <div class="screen" id="screen" data-device="ipad-portrait">
+    <iframe id="academyFrame" title="Vorschau DĀR AL TAWḤĪD KIDS Lernakademie" loading="eager" allow="microphone; autoplay" referrerpolicy="same-origin"></iframe>
+  </div>
+</section>
+<div class="caption"><p id="deviceLabel">iPad hochkant</p><output id="dimensions">820 × 1180 px</output></div>
+<footer>
+ <p><strong>Getrennte Vorschau:</strong> Diese Seite verändert keine Einstellungen und keine Darstellung der eigentlichen Kids-App.</p>
+ <p>Zum Aufnehmen, Rezitieren und ausführlichen Bedienen die Vorschau am besten über „Vorschau direkt öffnen“ auf dem gewünschten Gerät testen.</p>
+</footer>
+</main>
+<script>
+(()=>{"use strict";
+ const byId=id=>document.getElementById(id);
+ const sizes={"iphone":{w:390,h:844,label:"iPhone"},"ipad-portrait":{w:820,h:1180,label:"iPad hochkant"},"ipad-landscape":{w:1180,h:820,label:"iPad quer"}};
+ const device=byId("device"),profile=byId("profile"),age=byId("age"),viewer=byId("viewer"),
+ screen=byId("screen"),iframe=byId("academyFrame"),direct=byId("direct");
+ const p=new URLSearchParams(location.search);
+ const set=(control,v)=>{if([...control.options].some(opt=>opt.value===v))control.value=v};
+ set(device,p.get("device"));set(profile,p.get("profile"));set(age,p.get("age"));
+ let lastUrl="";
+ function url(){
+  const route=device.value==="iphone"?"/kids/akademie/index.html":"/desktop-preview/kids-akademie-unterricht.html";
+  const params=new URLSearchParams({previewProfil:profile.value,previewAlter:age.value,cb:"geraete-v753"});
+  return route+"?"+params.toString();
+ }
+ function resize(){
+  const spec=sizes[device.value]||sizes["ipad-portrait"];
+  const available=Math.max(260,viewer.clientWidth-20);
+  const scale=Math.min(1,available/spec.w);
+  const w=Math.round(spec.w*scale),h=Math.round(spec.h*scale);
+  screen.style.width=w+"px";screen.style.height=h+"px";
+  iframe.style.width=spec.w+"px";iframe.style.height=spec.h+"px";
+  iframe.style.transform="scale("+scale+")";
+  screen.dataset.device=device.value;
+  byId("dimensions").textContent=spec.w+" × "+spec.h+" px · "+Math.round(scale*100)+" %";
+  byId("deviceLabel").textContent=spec.label+" · "+(profile.value==="maedchen"?"Mädchen":"Junge")+" · "+age.value+" Jahre";
+ }
+ function update(){
+  document.body.dataset.profile=profile.value;
+  const src=url();direct.href=src;
+  if(src!==lastUrl){iframe.src=src;lastUrl=src;}
+  const q=new URLSearchParams({device:device.value,profile:profile.value,age:age.value});
+  history.replaceState(null,"",location.pathname+"?"+q.toString());
+  resize();
+ }
+ for(const input of [device,profile,age])input.addEventListener("change",update);
+ window.addEventListener("resize",resize,{passive:true});
+ if("ResizeObserver" in window){new ResizeObserver(resize).observe(viewer);}
+ update();
+})();
+</script>
+</body>
+</html>
