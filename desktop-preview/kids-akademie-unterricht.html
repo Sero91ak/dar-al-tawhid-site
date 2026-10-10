@@ -1350,16 +1350,161 @@ body[data-profile="girl"] .subject-topic:nth-child(3){background:#f1ebff;border-
 }
 @media(min-width:701px) and (max-width:850px){.subject-topic-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
-</style></head>
-<body data-profile="boy" data-preview-release="V7.0-20261010" data-preview-deploy="v7.0-all-categories"><main class="wrap">
 
-<header class="academy-header">
- <div class="academy-brand"><div class="brand">DĀR AL TAWḤĪD · KIDS</div><div class="stage">Meine Lernakademie · Vorschau V6.8 <span class="preview-release-stamp">Ehrliche Antworten</span></div></div>
- <div class="academy-header-actions"><button type="button" class="preview-refresh" id="previewRefresh" aria-label="HTML-Vorschau neu laden">↻ <span>Aktualisieren</span></button><div class="academy-profile" id="academyProfile"><img id="academyAvatar" alt="" src="/kids/assets/profile-avatars/boy-kufi-v1235.svg" width="42" height="42"><span class="academy-profile-names"><strong id="profileLabel">Kinderprofil wird geladen</strong><small id="profileRole">Unterricht</small><small id="academyAgeLabel" class="academy-age-label" aria-live="polite">Altersstufe</small></span></div></div>
+/* KIDS ACADEMY GLOBAL APPBAR V7.1 – matched to KIDS_GLOBAL_DETAIL_DOCK_V1247 */
+html,body{max-width:100%;overflow-x:clip}
+body .wrap{box-sizing:border-box;width:100%;max-width:1220px;padding-top:0!important}
+body .academy-header.kids-detail-appbar{
+ position:relative!important;isolation:isolate;z-index:40;
+ box-sizing:border-box!important;display:grid!important;
+ grid-template-columns:50px minmax(0,1fr) 44px;align-items:center!important;
+ gap:13px!important;width:100vw!important;max-width:100vw!important;
+ min-height:calc(74px + env(safe-area-inset-top,0px))!important;
+ margin:0 0 12px calc(50% - 50vw)!important;
+ padding:calc(11px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px))
+ 11px max(16px,env(safe-area-inset-left,0px))!important;
+ border:0!important;border-bottom:1px solid rgba(239,211,145,.18)!important;
+ border-radius:0 0 24px 24px!important;
+ background:radial-gradient(circle at 8% 0%,rgba(110,207,197,.09),transparent 35%),
+ linear-gradient(180deg,#05232e 0%,#062936 100%)!important;
+ box-shadow:0 13px 27px rgba(0,0,0,.15),inset 0 -1px 0 rgba(120,205,198,.05)!important
+}
+body[data-profile="girl"] .academy-header.kids-detail-appbar{
+ background:radial-gradient(circle at 13% 0%,rgba(239,171,218,.13),transparent 45%),
+ linear-gradient(180deg,#302240 0%,#352344 100%)!important;
+ border-bottom-color:rgba(242,198,224,.26)!important
+}
+body .academy-header .academy-nav-back,
+body .academy-header .academy-nav-home{
+ box-sizing:border-box;appearance:none;display:grid!important;place-items:center!important;
+ position:relative;min-width:0;padding:0!important;
+ width:50px;height:50px;min-height:50px;max-height:50px;
+ border-radius:17px;border:1px solid rgba(241,207,135,.26)!important;
+ background:linear-gradient(150deg,rgba(238,210,149,.12),rgba(9,48,59,.55))!important;
+ box-shadow:0 4px 11px rgba(0,0,0,.1);
+ color:#f5d68f!important;cursor:pointer;-webkit-tap-highlight-color:transparent;
+ touch-action:manipulation
+}
+body[data-profile="girl"] .academy-header .academy-nav-back,
+body[data-profile="girl"] .academy-header .academy-nav-home{
+ border-color:rgba(246,200,233,.32)!important;
+ background:linear-gradient(145deg,rgba(235,163,202,.17),rgba(53,34,68,.54))!important;
+ color:#ffe1cf!important
+}
+body .academy-header .academy-nav-home{
+ width:44px;height:44px;min-height:44px;max-height:44px;border-radius:15px;justify-self:end
+}
+.academy-header .academy-nav-back svg{width:24px;height:24px;stroke:currentColor;stroke-width:2.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.academy-header .academy-nav-home svg{width:21px;height:21px;stroke:currentColor;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.academy-header .academy-nav-copy{min-width:0;display:flex!important;flex-direction:column;
+ justify-content:center;gap:4px;padding-left:13px;border-left:1px solid rgba(239,211,145,.2)}
+.academy-header .academy-nav-title{min-width:0;color:#fbf5e7;
+ font:750 clamp(19px,4.8vw,27px)/1.08 ui-rounded,"Fredoka","Avenir Next Rounded",system-ui,sans-serif;
+ letter-spacing:-.025em;white-space:normal;overflow-wrap:anywhere}
+.academy-header .academy-nav-subtitle{font-size:clamp(10px,2.7vw,13px);line-height:1.22;
+ color:rgba(236,237,227,.78);font-weight:670}
+.academy-header .academy-nav-back:focus-visible,
+.academy-header .academy-nav-home:focus-visible{outline:3px solid #f4d58e;outline-offset:3px}
+body .academy-header .academy-brand,
+body .academy-header .academy-header-actions,
+body .academy-header .academy-profile{display:none!important}
+body #previewRefresh{display:none!important}
+/* The child's identity now belongs to the hero, not the navigation bar. */
+.hero-profile-chip{position:absolute;z-index:8;right:clamp(13px,2.8vw,27px);
+ top:clamp(13px,2.8vw,24px);display:flex;align-items:center;gap:8px;
+ padding:6px 12px 6px 6px;border:1px solid rgba(255,255,255,.39);border-radius:17px;
+ background:rgba(29,73,79,.45);color:#fffaf0;box-shadow:0 6px 14px rgba(5,27,36,.18);
+ max-width:clamp(145px,22vw,235px);box-sizing:border-box;backdrop-filter:blur(5px);
+ -webkit-backdrop-filter:blur(5px)}
+body[data-profile="girl"] .hero-profile-chip{background:rgba(96,53,114,.49);border-color:rgba(255,225,244,.5)}
+.hero-profile-chip img{width:clamp(35px,4.7vw,51px);height:clamp(35px,4.7vw,51px);
+ object-fit:contain;border-radius:13px;background:rgba(255,255,255,.13);flex:none}
+.hero-profile-chip .hero-profile-copy{display:flex;flex-direction:column;min-width:0;gap:2px}
+.hero-profile-chip strong{font-size:clamp(11px,1.55vw,15px);font-weight:850;line-height:1.14;
+ overflow-wrap:anywhere}
+.hero-profile-chip small{font-size:clamp(10px,1.25vw,12px);color:#ffefc8;font-weight:730;
+ line-height:1.23;overflow-wrap:anywhere}
+body[data-profile="girl"] .hero-profile-chip small{color:#ffe3f3}
+body .overview-hero{max-width:100%;overflow:hidden!important}
+body .overview-hero .overview-copy{padding-top:40px!important}
+body .overview-hero .kicker{font-size:12px!important}
+body .overview-hero #academyHeroCharacter{right:clamp(24px,6vw,95px)!important;bottom:12px!important;
+ border:0!important;border-radius:0!important;background:transparent!important;
+ max-width:21%!important;height:clamp(130px,19vw,224px)!important}
+body .lesson-topline{display:none!important}
+body .subject-back{display:none!important}
+body .lesson-main .lesson-heading{border-radius:22px!important}
+body .subject-detail .subject-cover{margin-top:5px}
+body[data-embedded="true"] .academy-header.kids-detail-appbar{display:none!important}
+body[data-embedded="true"] .lesson-topline{display:flex!important}
+body[data-embedded="true"] .subject-back{display:inline-flex!important}
+@media(min-width:701px){
+ body .academy-home{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:17px}
+ body .academy-home > .overview-hero{grid-column:1/-1!important;
+  min-height:clamp(310px,32vw,390px)!important;margin:3px 0 0!important}
+ body .academy-home > .today-class{grid-column:1!important;align-self:stretch;
+  margin:0!important;justify-content:center}
+ body .academy-home > .journey{grid-column:2!important;align-self:stretch;margin:0!important}
+ body .academy-home > .subjects{grid-column:1/-1!important}
+ body .overview-hero .overview-copy{padding-top:25px!important}
+}
+@media(max-width:700px){
+ body .academy-header.kids-detail-appbar{grid-template-columns:44px minmax(0,1fr) 42px!important;
+  gap:10px!important;min-height:calc(65px + env(safe-area-inset-top,0px))!important;
+  margin-bottom:7px!important;padding:calc(8px + env(safe-area-inset-top,0px))
+  max(11px,env(safe-area-inset-right,0px)) 8px max(11px,env(safe-area-inset-left,0px))!important}
+ body .academy-header .academy-nav-back{width:44px;min-height:44px;height:44px;max-height:44px;border-radius:15px}
+ body .academy-header .academy-nav-home{width:42px;min-height:42px;height:42px;max-height:42px;border-radius:14px}
+ body .academy-header .academy-nav-copy{padding-left:10px;gap:3px}
+ .academy-header .academy-nav-title{font-size:clamp(18px,5.05vw,22px)}
+ .academy-header .academy-nav-subtitle{font-size:clamp(10px,2.7vw,12px)}
+ body .overview-hero{min-height:325px!important;max-height:none!important;
+  margin:4px 0 12px!important;padding:14px 17px 125px!important;
+  border-radius:22px!important}
+ body .overview-hero .overview-copy{padding-top:51px!important;width:100%!important;max-width:100%!important}
+ body .overview-hero .kicker{font-size:11px!important;line-height:1.25!important}
+ body .overview-hero h1,body[data-profile="girl"] .overview-hero h1{
+  font-size:clamp(32px,9vw,42px)!important;margin:11px 0 7px!important;
+  letter-spacing:-.035em!important}
+ body .overview-hero .overview-greeting{margin:7px 0 0!important;max-width:100%!important;
+  padding-right:clamp(45px,18vw,76px)!important;box-sizing:border-box}
+ body .overview-hero .greeting-salam{font-size:clamp(16px,4.15vw,19px)!important;line-height:1.28!important}
+ body .overview-hero .greeting-followup{font-size:clamp(13px,3.55vw,15px)!important;line-height:1.35!important}
+ body .overview-hero .hero-learning-pill{font-size:11px!important;max-width:84%;margin-top:10px}
+ body .overview-hero #academyHeroCharacter{height:clamp(94px,29vw,126px)!important;
+  max-width:31%!important;right:10px!important;bottom:6px!important}
+ .hero-profile-chip{top:11px;right:11px;padding:4px 7px 4px 4px;gap:5px;max-width:129px;
+  border-radius:13px}
+ .hero-profile-chip img{width:33px;height:33px;border-radius:10px}
+ .hero-profile-chip strong{font-size:11px}
+ .hero-profile-chip small{font-size:10px}
+ body .lesson-heading{min-height:0!important;margin:5px 0 10px!important}
+ body .stage-tracker{margin-top:4px!important}
+}
+@media(max-width:370px){
+ body .overview-hero{min-height:348px!important;padding-bottom:122px!important}
+ body .overview-hero .overview-copy{padding-top:54px!important}
+ body .overview-hero h1{font-size:clamp(31px,8.8vw,36px)!important}
+ .hero-profile-chip{max-width:118px}
+}
+
+</style></head>
+<body data-profile="boy" data-preview-release="V7.1-20261010" data-preview-deploy="v7.1-global-appbar"><main class="wrap">
+
+<header class="academy-header kids-detail-appbar" aria-label="Navigationsleiste Lernakademie">
+ <button class="academy-nav-back" id="academyNavBack" type="button" aria-label="Zurück"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/><path d="M9 12h11"/></svg></button>
+ <div class="academy-nav-copy"><strong class="academy-nav-title" id="academyNavTitle">Lernakademie</strong><small class="academy-nav-subtitle" id="academyNavSubtitle">DĀR AL TAWḤĪD · KIDS</small></div>
+ <button class="academy-nav-home" id="academyNavHome" type="button" aria-label="Zur Kids-App"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7"/><path d="M5 9v11h14V9"/><path d="M9 20v-7h6v7"/></svg></button>
+ <div class="academy-brand" hidden><div class="brand">DĀR AL TAWḤĪD · KIDS</div></div>
+ <div class="academy-header-actions" hidden><button class="preview-refresh" id="previewRefresh" type="button" aria-label="Vorschau aktualisieren">Aktualisieren</button><div class="academy-profile" id="academyProfile" hidden><img id="academyAvatar" alt="" src="/kids/assets/profile-avatars/boy-kufi-v1235.svg"><span class="academy-profile-names"><strong id="profileLabel">Kinderprofil</strong><small id="profileRole"></small><small id="academyAgeLabel"></small></span></div></div>
 </header><p id="academyAgeWarning" class="academy-age-warning" role="alert" hidden>Bitte wähle im Kinderprofil eine passende Altersstufe aus.</p>
 <section class="academy-home" id="academyHome">
  <section class="overview-hero" aria-label="Deine islamische Lernakademie">
   <img id="academyHeroImage" src="/desktop-preview/assets/kids-academy-hero-boys-v1.jpg" alt="" decoding="async" fetchpriority="high" onerror="this.onerror=null;this.classList.add('is-ready');this.src='/desktop-preview/assets/kids-academy-hero-v1.jpg'">
+  <div class="hero-profile-chip" aria-label="Aktuelles Kinderprofil">
+   <img id="academyHeroProfileAvatar" src="/kids/assets/profile-avatars/boy-kufi-v1235.svg" alt="" width="44" height="44" aria-hidden="true">
+   <span class="hero-profile-copy"><strong id="academyHeroProfileLabel">Jungenprofil</strong><small id="academyHeroProfileAge">6–8 Jahre</small></span>
+  </div>
   <img class="academy-hero-character" id="academyHeroCharacter" src="/kids/assets/profile-avatars/boy-kufi-v1235.svg" alt="" aria-hidden="true" decoding="async"><div class="overview-copy"><div class="kicker" id="overviewKicker">Deine islamische Lernakademie</div><h1><span class="hero-title-line">Wissen</span> <span class="hero-title-line">entdecken</span></h1><p id="overviewGreeting" class="overview-greeting"><span id="overviewSalam" class="greeting-salam">As-salāmu ʿalaykum, lieber Bruder.</span><span id="overviewFollowup" class="greeting-followup">Heute lernen wir etwas Neues!</span></p><div class="hero-learning-pill">✦ Qurʾān &amp; Sunnah · Gemeinsam lernen</div></div>
  </section>
  <section class="today-class" aria-labelledby="todayTitle">
@@ -1786,7 +1931,11 @@ function syncProfile(force=false){
  $("#academyAgeLabel").textContent=p.ageMissing?"Altersstufe fehlt":(p.demo?"Demo · ":"")+humanAge(age)+" Jahre";
  $("#academyProfile").classList.add("has-profile");
  $("#academyAvatar").src=gender==="girl"?"/kids/assets/profile-avatars/girl-hijab-pink-v1235.svg":"/kids/assets/profile-avatars/boy-kufi-v1235.svg";
- $("#academyHeroCharacter").src=$("#academyAvatar").src;$("#academyBuddyAvatar").src=$("#academyAvatar").src;
+ $("#academyHeroCharacter").src=$("#academyAvatar").src;
+ $("#academyBuddyAvatar").src=$("#academyAvatar").src;
+ $("#academyHeroProfileAvatar").src=$("#academyAvatar").src;
+ $("#academyHeroProfileLabel").textContent=profileName||(gender==="girl"?"Mädchenprofil":"Jungenprofil");
+ $("#academyHeroProfileAge").textContent=p.ageMissing?"Altersstufe wählen":humanAge(age)+" Jahre";
  const hero=$("#academyHeroImage");
  hero.classList.remove("is-ready");
  hero.onload=()=>hero.classList.add("is-ready");
@@ -1831,10 +1980,21 @@ function openCategory(key){
   const state=document.createElement("span");state.textContent=data.ready&&i===0?"Jetzt lernen":"In Vorbereitung";
   card.append(label,state);grid.appendChild(card);
  });
- window.scrollTo(0,0);
+ updateAcademyAppbar();window.scrollTo(0,0);
 }
 function hideCategory(){$("#academySubject").hidden=true}
-function home(){stopAll();hideCategory();hideLesson();renderHome();window.scrollTo(0,0)}
+function updateAcademyAppbar(){
+ const lessonOpen=!$("#lessonMain").hidden,categoryOpen=!$("#academySubject").hidden;
+ const category=categoryOpen?SUBJECTS[$("#academySubject").dataset.subject]:null;
+ $("#academyNavTitle").textContent=lessonOpen?"Ṣidq · Wahrhaftigkeit":category?.title||"Lernakademie";
+ $("#academyNavSubtitle").textContent=lessonOpen?"Akhlāq · Dein Unterricht":categoryOpen?"Meine Unterrichtsfächer":"DĀR AL TAWḤĪD · KIDS";
+ $("#academyNavBack").setAttribute("aria-label",lessonOpen||categoryOpen?"Zur Lernakademie":"Zur Kids-App");
+}
+function academyNavBack(){
+ if(!$("#lessonMain").hidden||!$("#academySubject").hidden){home();return}
+ location.assign("/kids/");
+}
+function home(){stopAll();hideCategory();hideLesson();renderHome();updateAcademyAppbar();window.scrollTo(0,0)}
 function begin(){
  syncProfile();if(!AGE_UI[age]){renderHome();return}prepareOwnerVoice();hideCategory();$("#academyHome").hidden=true;$("#lessonMain").hidden=false;
  const draft=readDraft();
@@ -1843,7 +2003,7 @@ function begin(){
  }else{
   step=0;unlocked=0;qIndex=0;finished=false;score={done:0,correct:0,choices:0,neededHelp:0};
  }
- showStep(step,false);window.scrollTo(0,0);
+ showStep(step,false);updateAcademyAppbar();window.scrollTo(0,0);
 }
 function showStep(n,scroll=true){
  if(n<0||n>unlocked||n>=5)return;
@@ -2040,10 +2200,12 @@ childPlayback.onerror=()=>{
  voicePlayButton.setAttribute("aria-pressed","false");
 };
 $("#masterVoiceTest").onclick=playMasterProbe;
-$("#previewRefresh").onclick=()=>{const url=new URL(location.href);url.searchParams.set("cb","v6.8-"+Date.now());location.replace(url.toString())};
+$("#previewRefresh").onclick=()=>{const url=new URL(location.href);url.searchParams.set("cb","v7.1-"+Date.now());location.replace(url.toString())};
 all("[data-open-lesson]").forEach(b=>b.onclick=begin);
 all("[data-open-category]").forEach(b=>b.onclick=()=>openCategory(b.dataset.openCategory));
 $("#subjectBack").onclick=home;$("#subjectStart").onclick=begin;
+ $("#academyNavBack").onclick=academyNavBack;
+ $("#academyNavHome").onclick=()=>location.assign("/kids/");
 $("#backToAcademy").onclick=home;$("#backAfterLesson").onclick=home;
 $("#previousStep").onclick=()=>showStep(step-1);$("#forwardStep").onclick=nextStep;
 all("[data-jump-step]").forEach(b=>b.onclick=()=>showStep(Number(b.dataset.jumpStep)));
@@ -2067,6 +2229,6 @@ window.addEventListener("storage",e=>{if(["kids.activeProfile","kids.profiles.v1
 window.addEventListener("pageshow",()=>syncProfile(true));
 document.addEventListener("visibilitychange",()=>{if(document.hidden)stopAll();else syncProfile()});
 window.addEventListener("pagehide",stopAll);
-syncProfile(true);hideLesson();
+syncProfile(true);hideLesson();updateAcademyAppbar();
 })();
 </script></body></html>
