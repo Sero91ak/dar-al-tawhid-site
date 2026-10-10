@@ -31,8 +31,10 @@ for(const [type,file] of [['adult','dar-al-tawhid-quran-player-v8.html'],['kids'
    await page.locator('#openMenu').click();
    if(!await page.locator('.sheet-overlay').evaluate(el=>el.classList.contains('open')))throw Error('Menu did not open');
    await page.locator('[data-panel="display"]').click();
+   const latinBefore=await page.locator('[data-layer="lat"]').evaluate(el=>el.classList.contains('active'));
    await page.locator('[data-layer="lat"]').click();
-   if(!await page.locator('[data-layer="lat"]').evaluate(el=>el.classList.contains('active')))throw Error('Lautschrift display toggle failed');
+   const latinAfter=await page.locator('[data-layer="lat"]').evaluate(el=>el.classList.contains('active'));
+   if(latinAfter===latinBefore)throw Error('Lautschrift display toggle failed');
    await page.locator('[data-panel="settings"]').click();
    if(!await page.locator('#reciter').isVisible())throw Error('Reciter controls missing');
    await page.locator('#sheetClose').click();
@@ -41,7 +43,7 @@ for(const [type,file] of [['adult','dar-al-tawhid-quran-player-v8.html'],['kids'
    await page.waitForTimeout(800);
    if(!await page.locator('#commentBox').isVisible())throw Error('Tadabbur focus not visible');
    const exp=await page.locator('#commentBox').innerText();
-   if(!exp.includes('Tadabbur')&&!exp.includes('Erklärung'))throw Error('Tadabbur context missing: '+exp);
+   if(!/tadabbur|erklärung/i.test(exp))throw Error('Tadabbur context missing: '+exp);
    if(exp.includes('Der geprüfte Tadabbur-Katalog wird'))throw Error('Old unhelpful placeholder still visible');
    await page.locator('[data-mode="read"]').click();
    if(await page.locator('#commentBox').isVisible())throw Error('Tadabbur stayed visible in reading focus');
