@@ -27,7 +27,7 @@ for(const [type,file] of [['adult','dar-al-tawhid-quran-player-v8.html'],['kids'
   if(!await target.isVisible())throw Error('Sūrah 112 filter failed');
   await target.click();
   await page.waitForFunction(()=>document.getElementById('suraCount').textContent.includes('4 Āyāt'),null,{timeout:15000});
-  await page.reload({waitUntil:'domcontentloaded'});
+  await page.goto(host+'/'+file+'?qa=persistence-only',{waitUntil:'domcontentloaded'});
   await page.waitForFunction(()=>document.getElementById('suraCount').textContent.includes('4 Āyāt'),null,{timeout:15000});
   const all=await page.locator('#surahList .sura-button').count();
   if(all!==114)throw Error('Sūrah catalog lost on reload '+all);
