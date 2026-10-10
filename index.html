@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="/assets/dar-app-chrome.css?v=1">
 <link rel="stylesheet" href="/assets/dar-global-share-v1225.css?v=1268">
 <script src="/assets/dar-app-chrome.js?v=1"></script>
+<link rel="stylesheet" href="/assets/dar-more-v15.css?v=1510">
+<script src="/assets/dar-more-v15.js?v=1510" defer></script>
 
 <script src="/assets/dar-noble-3d-icons.js?v=1095"></script><!-- DAR_NOBLE_3D_HEAD -->
 <link rel="preload" as="image" href="/assets/dar-3d-icons/compass.png?v=1106">
@@ -27128,7 +27130,8 @@ function renderMoreQuickAccessSection(){
 
 function renderIosShellUpdateBar(){return""}
 function bindIosShellUpdateBar(){const btn=$("iosShellUpdateBtn");if(!btn||btn.dataset.bound==="1")return;btn.dataset.bound="1";btn.onclick=function(){if(typeof hardRefreshApp==="function")hardRefreshApp();else location.reload()}}
-function renderMore(){const groups=["Lernen & Wissen","Alltag & Gebet","Werkzeuge & Assistenten","Persönlich","App"];const items=featureCatalog();return `${setPageHeader("Mehr","Funktionen geordnet nach Lernen, Alltag, Werkzeugen und Einstellungen","Mehr")}${renderMoreQuickAccessSection()}${typeof renderAdaptiveNavPanel==="function"?renderAdaptiveNavPanel():""}${safeHomeTile(renderZakatMoreFocus)}<section class="feature-section"><div class="feature-head"><div><h3>Funktion suchen</h3><span>Tippe z. B. Qibla, Rechner oder Qurʾān.</span></div></div><input id="moreFeatureSearch" class="more-search" type="search" placeholder="Funktion suchen…" autocomplete="off"></section>${groups.map(group=>renderMoreGroup(group,items.filter(item=>item.group===group))).join("")}`}
+function renderMoreLegacy(){const groups=["Lernen & Wissen","Alltag & Gebet","Werkzeuge & Assistenten","Persönlich","App"];const items=featureCatalog();return `${setPageHeader("Mehr","Funktionen geordnet nach Lernen, Alltag, Werkzeugen und Einstellungen","Mehr")}${renderMoreQuickAccessSection()}${typeof renderAdaptiveNavPanel==="function"?renderAdaptiveNavPanel():""}${safeHomeTile(renderZakatMoreFocus)}<section class="feature-section"><div class="feature-head"><div><h3>Funktion suchen</h3><span>Tippe z. B. Qibla, Rechner oder Qurʾān.</span></div></div><input id="moreFeatureSearch" class="more-search" type="search" placeholder="Funktion suchen…" autocomplete="off"></section>${groups.map(group=>renderMoreGroup(group,items.filter(item=>item.group===group))).join("")}`}
+function renderMore(){return window.DAR_MORE_V15 && typeof window.DAR_MORE_V15.render==='function'?window.DAR_MORE_V15.render(featureCatalog(),setPageHeader):renderMoreLegacy()}
 function notificationToggleButton(id,on,label){return `<button type="button" id="${id}" class="notification-toggle ${on?"is-on":""}" role="switch" aria-checked="${on?"true":"false"}" aria-label="${esc(label)}"></button>`}
 function renderNotificationCenter({embedded=false}={}){
   const s=getPrayerSettings();
