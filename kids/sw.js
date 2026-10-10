@@ -187,7 +187,7 @@ const CORE_PRECACHE=[
   "/kids/dua-learn-cinema-v1261.css?v=1261",
   "/kids/dua-word-meanings-v1.js?v=2",
   "/kids/dua-phonetic-alignment-v1.js?v=1",
-  "/kids/dua-smart-learn.js?v=1291",
+  "/kids/dua-smart-learn.js?v=1306",
   "/kids/dua-learn-trilingual-v1282.css?v=1291",
   "/kids/dua-learn-elastic-v1286.css?v=1286",
   "/kids/content-studio-feed.js?v=studio8",
@@ -379,6 +379,11 @@ self.addEventListener("fetch",function(event){
   // The quiz owner-voice router must update immediately after German speech fixes.
   // Network-first prevents an installed Kids PWA from retaining an obsolete
   // audio lookup even while its 900-question catalogue and manifest are fresh.
+  // Keep the Kids Duʿāʾ V4 voice player fresh after an installed PWA update.
+  if(url.pathname==="/kids/dua-smart-learn.js"){
+    event.respondWith(networkFirst(request));
+    return;
+  }
   if(url.pathname==="/kids/owner-voice.js"){
     event.respondWith(networkFirst(request));
     return;
