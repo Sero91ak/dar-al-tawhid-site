@@ -156,11 +156,17 @@ html body .dsl .dsl-controls .dsl-play.follow{
  background:linear-gradient(135deg,rgba(172,129,65,.20),rgba(32,73,80,.4))!important;
  color:#f9dda0!important
 }
+/* Active focus stays visible in BOTH continuous modes (full and slow).
+   Keep all three Arabic / Latin / German rows synchronized on each source cue. */
 html body .dsl.phrase-playing .dsl-word.active.ar{
- color:#fff!important;background:transparent!important;box-shadow:none!important
+ color:#102738!important;
+ background:linear-gradient(135deg,#f5da87,#ddb153)!important;
+ box-shadow:0 3px 12px rgba(223,175,73,.23)!important
 }
 html body .dsl.phrase-playing .dsl-word.active.tr{
- color:#f1d99d!important;background:transparent!important;box-shadow:none!important
+ color:#102738!important;
+ background:linear-gradient(135deg,#f9e6b6,#d8b363)!important;
+ box-shadow:0 0 10px rgba(225,187,99,.18)!important
 }
 @media(max-height:700px){
  html body .dsl .dsl-scroll{padding-top:12px!important}
