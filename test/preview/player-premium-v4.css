@@ -1,0 +1,251 @@
+/* V4 VISUAL REFRESH — preview-only, no changes to Qur'an data/audio functionality */
+body.player-v3:not(.kids){
+ --gold:#e7bc73;--goldhi:#fff2cf;--ink:#fff9ed;--muted:#c4d8d6;
+ --stroke:rgba(241,214,164,.31);--bg:#061c29;--bg2:#113a4c;
+}
+body.player-v3:not(.kids) .app{
+ background:radial-gradient(ellipse 60% 48% at 85% -5%,rgba(39,139,149,.22),transparent 75%),radial-gradient(ellipse 48% 48% at 7% 88%,rgba(139,75,154,.14),transparent 75%),linear-gradient(155deg,#0b2734,#081c2e 50%,#081625);
+}
+body.player-v3 .sidebar{
+ background:linear-gradient(185deg,#0c2e3b,#091724 75%);border-right-color:rgba(246,195,123,.24);
+}
+body.player-v3 .brand-mark{background:linear-gradient(145deg,#124e5e,#071c29);box-shadow:inset 0 1px 2px #ffffff45,0 8px 20px #0005;border:1px solid #d2a96f}
+body.player-v3 .heading h1{letter-spacing:-.04em;text-shadow:0 2px 20px rgba(0,0,0,.22)}
+body.player-v3 .heading em{color:#f1d29c}
+body.player-v3:not(.kids) .topline .breadcrumbs{color:#fff1d3}
+body.player-v3 .chip{border-color:rgba(244,199,138,.36);background:linear-gradient(140deg,#183948e8,#0c2734bb);box-shadow:inset 0 1px #ffffff1e}
+body.player-v3 .glass{
+ border:1px solid rgba(242,196,124,.44);
+ background:linear-gradient(160deg,#163d4b,#0d2a38 50%,#0c2630);
+ box-shadow:0 22px 64px #0006,inset 0 1px #ffffff3b,0 0 0 3px rgba(255,211,137,.045);
+}
+body.player-v3 .main-panel{border-radius:27px}
+body.player-v3 .scene{
+ isolation:isolate;
+ background:linear-gradient(120deg,#104658,#152b40);
+ border-bottom:2px solid #eac18b;box-shadow:inset 0 -17px 25px rgba(0,0,0,.24);
+}
+body.player-v3 .scene:before{
+ content:"";top:0;right:0;left:0;bottom:0;width:auto;height:auto;opacity:1;
+ background:url('/visuals/dar-quran-hero.webp') 72% 48%/cover no-repeat;
+ filter:saturate(1.22) contrast(1.06);z-index:0;pointer-events:none;
+}
+body.player-v3 .scene:after{
+ content:"";inset:0;z-index:0;border:0;
+ background:linear-gradient(95deg,rgba(8,34,48,.94) 0%,rgba(10,45,54,.82) 42%,rgba(8,35,49,.12) 85%),linear-gradient(0deg,rgba(5,19,31,.32),transparent 68%);
+}
+body.player-v3 .scene>*{z-index:1;position:relative}
+body.player-v3 .scene>div:first-child{max-width:64%;filter:drop-shadow(0 3px 6px #001)}
+body.player-v3 .scene-num{font-size:11px;font-weight:800;color:#f5cd91;text-shadow:0 2px 7px #0008}
+body.player-v3 .scene h2{font-weight:600;color:#fff6e6;text-shadow:0 3px 12px #0009}
+body.player-v3 .scene small{color:#e6efe9;text-shadow:0 2px 7px #000a}
+body.player-v3 .scene .arabic-name{position:absolute;top:12px;right:17px;font-size:clamp(21px,2.7vw,33px);color:#fff0ca;text-shadow:0 2px 8px #001}
+body.player-v3 .hero-object{
+ position:absolute;z-index:1;right:5%;bottom:0;width:clamp(108px,19%,190px);height:92%;
+ object-fit:contain;object-position:bottom center;filter:drop-shadow(0 10px 19px #071118bb);
+ pointer-events:none;
+}
+body.player-v3 .reader-tools{background:linear-gradient(180deg,#174150aa,transparent);padding-top:13px}
+body.player-v3 .reader-tools .tab{
+ background:linear-gradient(160deg,#245060,#123441);border:1px solid #ffffff26;
+ color:#e4f1f3;border-radius:12px;box-shadow:inset 0 1px #ffffff18;
+}
+body.player-v3 .reader-tools .tab.active{background:linear-gradient(160deg,#efcf92,#c59661);border-color:#fce0a6;color:#19323b;box-shadow:0 6px 18px #0003,inset 0 1px #fff9}
+body.player-v3 .verse{
+ background:radial-gradient(circle at 50% 30%,rgba(38,115,130,.22),transparent 63%);
+}
+body.player-v3 .versehead{color:#e9cca1;font-weight:750}
+body.player-v3 .verse-focus{
+ position:relative;isolation:isolate;overflow-y:auto;
+ padding:16px 20px;
+ border:1px solid rgba(255,244,221,.94);border-radius:23px;
+ background:
+ radial-gradient(circle at 50% 35%,rgba(255,255,255,.93),transparent 70%),
+ radial-gradient(circle at 0 0,rgba(204,168,107,.14),transparent 38%),
+ linear-gradient(145deg,#f6edda,#e6d6b8);
+ box-shadow:0 14px 28px #02101948,inset 0 0 0 5px rgba(146,108,62,.12),inset 0 1px #fff;
+}
+body.player-v3 .verse-focus:before{
+ content:"۞";position:absolute;left:50%;top:50%;transform:translate(-50%,-53%);
+ font:clamp(120px,22vw,255px)/1 var(--arab);color:rgba(155,120,70,.065);
+ pointer-events:none;z-index:0;
+}
+body.player-v3 .verse-focus>*{position:relative;z-index:1}
+body.player-v3 .verse-focus .quran-text{color:#0f3640;text-shadow:0 1px #fff5}
+body.player-v3 .verse-focus .translation{color:#3a4041}
+body.player-v3 .verse-focus .latin{color:#496677}
+body.player-v3 .verse-focus .tip{background:rgba(225,204,157,.42);border-color:rgba(146,110,60,.33);color:#364e57}
+body.player-v3 .verse-focus .tip strong{color:#67471f}
+body.player-v3 .versefade{color:#b0c7c2}
+body.player-v3 .iconbtn{color:#f7d79b;background:linear-gradient(145deg,#2e5260,#16313d);box-shadow:inset 0 1px #fff3,0 5px 12px #0002}
+body.player-v3 .navrow .secondary{border-color:#e2bd8280}
+body.player-v3 .miniplay{
+ isolation:isolate;overflow:hidden;
+ border:1px solid #ffe2a288;
+ border-top:2px solid #ffd599;
+ background:linear-gradient(112deg,rgba(30,75,88,.98),rgba(10,38,55,.985) 57%,rgba(9,27,42,.99));
+ box-shadow:0 -5px 34px rgba(4,15,29,.48),0 17px 50px #0008,inset 0 1px #ffffff2e;
+}
+body.player-v3 .miniplay:before{
+ content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+ background:radial-gradient(circle at 12% 55%,rgba(255,207,130,.19),transparent 30%),repeating-linear-gradient(90deg,transparent 0 33px,rgba(255,255,255,.017) 34px 35px);
+}
+body.player-v3 .now-playing b{color:#fff7e8;letter-spacing:.015em;font-weight:750}
+body.player-v3 .now-playing span{color:#bedfdb}
+body.player-v3 .play{
+ background:radial-gradient(circle at 32% 23%,#fffad3,#f6d58d 40%,#c99550 77%,#7a552e 100%);
+ border:1px solid #fff5c6;box-shadow:inset 0 3px 3px #ffffffad,inset 0 -5px 8px #8b5e4a4d,0 5px 0 #6b4e32,0 11px 22px #0007;
+ color:#153342;transition:filter .2s,transform .15s;
+}
+body.player-v3 .play:hover{filter:brightness(1.07)}
+body.player-v3 .play:active{transform:translateY(2px) scale(.97);box-shadow:inset 0 2px 4px #fffc,inset 0 -4px 8px #8b5e4a4d,0 2px 0 #6b4e32,0 6px 14px #0007}
+body.player-v3 .skip{color:#f6d399;text-shadow:0 1px 5px #000}
+body.player-v3 .seek-wrap{gap:9px}
+body.player-v3 .seek-wrap span{min-width:34px;color:#fae1b2;font-size:11px;font-weight:700;font-variant-numeric:tabular-nums}
+body.player-v3 #seek{height:5px;accent-color:#ffc977}
+body.player-v3 .pill-btn{background:linear-gradient(145deg,#285b6a,#153442);border-color:#dfbd8480;color:#ffe4af}
+
+/* KIDS – a deliberately different cheerful world: sky blue, lilac, coral, sunshine */
+body.kids.player-v3{
+ --gold:#ffc56f;--goldhi:#fff1cf;--ink:#f9feff;--muted:#e9e8fc;
+ --stroke:rgba(191,226,255,.34);--bg:#162e67;--bg2:#274f8a;
+}
+body.kids.player-v3 .app{
+ background:radial-gradient(circle at 86% -10%,#ad83e766,transparent 52%),radial-gradient(circle at 3% 85%,#20c9bd26,transparent 65%),linear-gradient(145deg,#243f7c,#17395c 45%,#19295d);
+}
+body.kids.player-v3 .sidebar{background:linear-gradient(185deg,#354a96,#202f67);border-right-color:#edcfff4d}
+body.kids.player-v3 .glass{border:1px solid #b0d9ffa3;background:linear-gradient(180deg,#26618c,#285282 50%,#1e416b);box-shadow:0 17px 35px #051a3855,inset 0 1px #ffffff5c,0 0 0 3px #d3d7ff12}
+body.kids.player-v3 .scene{
+ border-bottom:3px solid #ffe4a9;
+ background:linear-gradient(115deg,#2c90bb,#9575d5);
+}
+body.kids.player-v3 .scene:before{
+ content:"";inset:0;width:auto;height:auto;top:0;right:0;left:0;bottom:0;font:inherit;opacity:1;
+ background:url('/visuals/kids-quran-banner.png') center 48%/cover no-repeat;
+ filter:saturate(1.17);z-index:0;
+}
+body.kids.player-v3 .scene:after{
+ content:"";inset:0;z-index:0;background:linear-gradient(100deg,rgba(23,70,115,.94) 0%,rgba(27,74,125,.81) 52%,rgba(54,88,161,.16) 100%);
+}
+body.kids.player-v3 .scene-num{color:#ffe6b0}
+body.kids.player-v3 .scene h2{color:#fffef9;font-weight:850;text-shadow:0 3px 10px #052b62b0}
+body.kids.player-v3 .scene .arabic-name{color:#fff2cb}
+body.kids.player-v3 .hero-object{
+ width:clamp(115px,24%,205px);height:98%;right:5%;bottom:-6px;
+ filter:drop-shadow(0 9px 13px #12275da9);
+}
+body.kids.player-v3 .reader-tools{background:linear-gradient(180deg,#4299b17a,transparent)}
+body.kids.player-v3 .reader-tools .tab{
+ color:#edfaff;background:linear-gradient(140deg,#2e74a7,#2f568a);
+ border-color:#b3e4f954;box-shadow:inset 0 1px #ffffff32
+}
+body.kids.player-v3 .reader-tools .tab.active{
+ color:#12385c;background:linear-gradient(140deg,#fff0ad,#ffbf8f);
+ border-color:#fff7db;box-shadow:inset 0 1px #fff,0 4px 14px #0e295048;
+}
+body.kids.player-v3 .kid-step{
+ background:linear-gradient(140deg,#324a8d,#315b87);border-color:#d2d9ff55;
+ box-shadow:inset 0 1px #ffffff24; color:#e0e4fa;
+}
+body.kids.player-v3 .kid-step.active{
+ background:linear-gradient(140deg,#ffda9e,#ffb47e);
+ color:#483d5a;border-color:#ffeaba;
+}
+body.kids.player-v3 .verse{
+ background:radial-gradient(ellipse at 40% 35%,#6d6ad827,transparent 72%);
+}
+body.kids.player-v3 .versehead{color:#fff2cc;font-weight:850}
+body.kids.player-v3 .verse-focus{
+ padding:16px 15px;border:2px solid #fffdf1;border-radius:24px;
+ background:radial-gradient(circle at 75% 3%,#fff5d2,transparent 55%),linear-gradient(155deg,#fffdf8,#e3efff 88%);
+ box-shadow:0 13px 25px #0717444a,inset 0 0 0 5px #91c9e335,inset 0 1px #fff;
+}
+body.kids.player-v3 .verse-focus:before{content:"✧";font:155px/1 Georgia,serif;color:#b4c9ed30;left:50%;top:49%}
+body.kids.player-v3 .verse-focus .quran-text{color:#174a75;text-shadow:0 1px #fff}
+body.kids.player-v3 .verse-focus .translation{color:#214161;font-family:var(--font);font-weight:750}
+body.kids.player-v3 .verse-focus .latin{color:#526b92}
+body.kids.player-v3 .verse-focus .kid-note{color:#446c8a}
+body.kids.player-v3 .verse-focus .tip{background:#f4f1ff;color:#264c6d;border-color:#babfe7}
+body.kids.player-v3 .kword{border:1px solid #95bce2;color:#224568;background:linear-gradient(140deg,#ffffff,#e3f3ff);box-shadow:0 2px 6px #26598426}
+body.kids.player-v3 .kword.on{background:linear-gradient(145deg,#ffdd92,#ffb889);border-color:#e7ac60;color:#3e3a4e;box-shadow:0 0 0 3px #ffd19755}
+body.kids.player-v3 .kid-btn{
+ border:1px solid #fff0b1;background:linear-gradient(140deg,#ffeaaf,#ffa66f);
+ box-shadow:inset 0 1px #fff,0 4px 0 #c37765,0 9px 16px #102c5247;
+ color:#29395e;
+}
+body.kids.player-v3 .kid-btn.outline{
+ background:linear-gradient(135deg,#7bf1de,#37bfc9);border-color:#c2fff6;color:#144a65;box-shadow:inset 0 1px #fff9,0 4px 0 #188b9b,0 9px 16px #102c5247;
+}
+body.kids.player-v3 .kid-btn.outline2{
+ background:linear-gradient(140deg,#c1c4ff,#a28bea);border-color:#e6d9ff;color:#253967;box-shadow:inset 0 1px #fff7,0 4px 0 #5f65b4,0 9px 16px #102c5247;
+}
+body.kids.player-v3 .kid-btn:active{transform:translateY(3px);box-shadow:0 1px 0 #637,0 4px 9px #1235}
+body.kids.player-v3 .miniplay{
+ border:1px solid #a4d7f8;border-top:2px solid #ffe5aa;
+ background:linear-gradient(110deg,#3b529b,#2b4d82 52%,#1c3767);
+ box-shadow:0 -7px 24px #13224966,0 16px 40px #06162980,inset 0 1px #ffffff4d;
+}
+body.kids.player-v3 .miniplay:before{
+ background:radial-gradient(circle at 9% 60%,#f8baca3c,transparent 32%),radial-gradient(circle at 90% 0%,#60dfc72b,transparent 45%);
+}
+body.kids.player-v3 .play{
+ background:radial-gradient(circle at 27% 23%,#fff9d4,#ffd18d 42%,#ee9b89 82%,#ab7085);
+ color:#273967;border-color:#fff5ce;box-shadow:inset 0 2px #fff8,0 4px 0 #ad6682,0 11px 20px #0e214b99;
+}
+body.kids.player-v3 .seek-wrap span{color:#fff3d7}
+body.kids.player-v3 #seek{accent-color:#ffe7ac}
+body.kids.player-v3 .pill-btn{background:#5478a1;border-color:#beeef9;color:#fff}
+body.kids.player-v3 .now-playing span{color:#d9f7f1}
+body.kids.player-v3 .iconbtn{background:linear-gradient(145deg,#756ab6,#435a9d);color:#fff4d7;border-color:#d7d0ff6e}
+body.kids.player-v3 .hero-object,body.player-v3 .hero-object{user-select:none}
+
+/* Phone layouts — no reader overflow, no covering the controls */
+@media(max-width:719px){
+ body.player-v3 .app{background:linear-gradient(165deg,#12374c,#0a1e30 90%)}
+ body.kids.player-v3 .app{background:linear-gradient(165deg,#3357a1,#1a3c68 65%,#243c77)}
+ body.player-v3 .glass{border-radius:24px}
+ body.player-v3 .scene{padding:13px 16px;box-shadow:inset 0 -8px 18px #0004}
+ body.player-v3 .scene:before{background-position:76% 48%}
+ body.player-v3 .scene:after{background:linear-gradient(92deg,#092e42eb 0%,#0b3b4bc9 50%,#13354748 100%)}
+ body.player-v3 .scene h2{font-size:clamp(24px,6.1vw,32px);margin:2px 0 3px}
+ body.player-v3 .scene .scene-num{font-size:8px;letter-spacing:.13em}
+ body.player-v3 .scene small{font-size:10px}
+ body.player-v3 .scene .arabic-name{font-size:18px;top:7px;right:12px}
+ body.player-v3 .hero-object{width:clamp(75px,21%,112px);height:87%;right:5%;bottom:0}
+ body.player-v3 .scene>div:first-child{max-width:70%}
+ body.player-v3 .reader-tools{padding:8px 8px 0;gap:5px}
+ body.player-v3 .reader-tools .tab{min-height:39px;padding:8px 9px;font-size:11px;border-radius:10px}
+ body.player-v3 .verse{padding:8px 10px 7px}
+ body.player-v3 .versehead{min-height:32px;padding:0 3px}
+ body.player-v3 .verse-focus{padding:9px 12px;border-radius:17px;box-shadow:inset 0 0 0 3px #b3975b2b,0 6px 13px #0003}
+ body.player-v3 .verse-focus .quran-text{font-size:clamp(28px,8vw,40px);line-height:1.8}
+ body.player-v3 .verse-focus .translation{font-size:clamp(13px,3.55vw,16px);line-height:1.53}
+ body.player-v3 .versefade{font-size:9px}
+ body.player-v3 .miniplay{
+  border-radius:21px 21px 0 0;
+  box-shadow:0 -9px 25px #051a2dbf,inset 0 1px #fff4;
+ }
+ body.player-v3 .play{width:54px;height:54px;box-shadow:inset 0 2px #fffa,0 4px 0 #6b4e32,0 8px 18px #0008}
+ body.player-v3 .seek-wrap{gap:5px}
+ body.player-v3 .seek-wrap span{font-size:10px;min-width:30px}
+ body.player-v3 .now-playing b{font-size:12px}
+ body.kids.player-v3 .scene:after{background:linear-gradient(94deg,#255b90ef 0%,#315e99d0 53%,#425fb657 100%)}
+ body.kids.player-v3 .hero-object{width:clamp(78px,23%,110px);height:97%;right:4%;bottom:-3px}
+ body.kids.player-v3 .kid-steps{padding:7px 8px 0;gap:5px}
+ body.kids.player-v3 .kid-step{min-width:55px;font-size:9px;padding:8px 4px;border-radius:11px}
+ body.kids.player-v3 .kid-actions{padding:5px 10px 10px;gap:7px}
+ body.kids.player-v3 .kid-btn{min-height:46px;padding:10px 5px;border-radius:13px;font-size:12px}
+ body.kids.player-v3 .verse-focus{padding:9px 9px;border-radius:17px}
+ body.kids.player-v3 .kword{margin:3px;padding:4px 6px}
+ body.kids.player-v3 .verse-focus .quran-text{font-size:clamp(29px,8.5vw,42px);line-height:1.65}
+ body.kids.player-v3 .verse-focus .translation{font-size:clamp(13px,3.6vw,17px)}
+ body.kids.player-v3 .kid-note{font-size:10px}
+}
+@media(max-width:719px) and (max-height:740px){
+ body.player-v3 .scene{padding:9px 13px}
+ body.player-v3 .reader-tools .tab{padding:6px 7px;min-height:34px;font-size:10px}
+ body.kids.player-v3 .kid-step{padding:5px 3px}
+ body.kids.player-v3 .kid-btn{min-height:39px;padding:7px 4px}
+ body.player-v3 .verse-focus{padding:7px}
+}
+@media(prefers-reduced-motion:reduce){body.player-v3 .play,body.player-v3 .kid-btn{transition:none!important}}
