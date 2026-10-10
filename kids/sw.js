@@ -280,7 +280,9 @@ const KIDS_BOOT_PRECACHE=[
   "/kids/prayer-stage-v1261.js?v=1306",
   "/kids/assets/kids-salah-v1272/hero-home.png?v=1274",
   "/kids/assets/kids-home-v1222/dar-title-reference-clean.svg?v=1229",
-  "/kids/manifest.webmanifest"
+  "/kids/manifest.webmanifest",
+  "/kids/offline-library-v1.js?v=1",
+  "/kids/offline-library-v1.css?v=1"
 ];
 
 function addQuiet(cache,url){
@@ -601,8 +603,10 @@ async function kidsOfflineDownload(source,mode){
     // Tiny automatic visual warm-up, not a surprise multi-hundred-MB download.
     // The explicit full package includes all known images, lessons and audio.
     const first=mode==="visual"
-      ?CORE_PRECACHE.filter(p=>/\.(?:png|jpe?g|webp|gif|svg|avif)(?:\?|$)/i.test(p)).slice(0,50)
-      :CORE_PRECACHE.concat(KIDS_OFFLINE_SEEDS);
+      ?CORE_PRECACHE.filter(p=>/\.(?:css|js|json|webmanifest)(?:\?|$)/i.test(p))
+        .concat(CORE_PRECACHE.filter(p=>/\.(?:png|jpe?g|webp|gif|svg|avif)(?:\?|$)/i.test(p)).slice(0,50))
+        .concat(KIDS_BOOT_PRECACHE)
+      :CORE_PRECACHE.concat(KIDS_OFFLINE_SEEDS,KIDS_BOOT_PRECACHE);
     const paths=new Map();
     function append(raw){
       const u=kidsOfflineRequest(raw);
