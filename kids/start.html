@@ -3694,12 +3694,34 @@ function kidsResetMainScroll(){
   if(document.body)document.body.scrollTop=0;
   try{window.scrollTo(0,0)}catch(e){}
 }
+/* KIDS_TAB_SCROLL_SETTLE_V1321
+   iOS momentum/scroll anchoring may outlive the first two frames after a
+   tab switch. Reconcile a bounded time later, but never override a genuine
+   user-initiated swipe or a newer tab change. */
+var kidsTabEpoch=0;
+var kidsLastUserScroll=0;
+document.addEventListener("touchmove",function(){kidsLastUserScroll=Date.now()},{passive:true,capture:true});
+document.addEventListener("wheel",function(){kidsLastUserScroll=Date.now()},{passive:true,capture:true});
 function kidsFinishMainTabSwitch(){
+  var epoch=++kidsTabEpoch;
+  var switchedAt=Date.now();
   kidsResetMainScroll();
   requestAnimationFrame(function(){
+    if(epoch!==kidsTabEpoch)return;
     kidsResetMainScroll();
-    requestAnimationFrame(kidsResetMainScroll);
+    requestAnimationFrame(function(){
+      if(epoch===kidsTabEpoch)kidsResetMainScroll();
+    });
   });
+  function settle(){
+    if(epoch!==kidsTabEpoch||kidsLastUserScroll>=switchedAt)return;
+    var main=document.querySelector(".shell");
+    var root=document.scrollingElement;
+    if((main&&main.scrollTop>1)||(root&&root.scrollTop>1)||window.scrollY>1)
+      kidsResetMainScroll();
+  }
+  setTimeout(settle,160);
+  setTimeout(settle,420);
 }
 window.DARKidsResetMainScroll=kidsFinishMainTabSwitch;
 function showTab(name){
