@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-10-10T11:27:04Z",
+  "timestamp": "2026-10-10T11:28:51Z",
   "trigger": "workflow_run",
-  "finishedDeployConclusion": "cancelled",
-  "finishedDeployRun": "38048345734",
+  "finishedDeployConclusion": "success",
+  "finishedDeployRun": "38048438212",
   "live": {
     "buildId": "kids-shell-v201-dua-v4-1307",
     "label": "KIDS · V1.09.23",
@@ -22,7 +22,7 @@
     },
     "allSevenArtworkFilesReachable": true,
     "versionJsonReadable": true,
-    "trilingualWordLearningReady": true,
+    "trilingualWordLearningReady": false,
     "trilingualAssets": {
       "learning": {
         "ref": "/kids/dua-smart-learn.js?v=1307",
@@ -45,12 +45,21 @@
   "lastDeployRuns": [
     {
       "conclusion": null,
+      "created_at": "2026-10-10T11:28:43Z",
+      "head_sha": "77db6e3ec665f229e7df8e71c42f8945f87e8da1",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38048541599",
+      "id": 38048541599,
+      "status": "in_progress",
+      "updated_at": "2026-10-10T11:28:46Z"
+    },
+    {
+      "conclusion": "success",
       "created_at": "2026-10-10T11:26:53Z",
       "head_sha": "8df94c888c5fd214611d7997fbbdf0c2525f01fa",
       "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38048438212",
       "id": 38048438212,
-      "status": "in_progress",
-      "updated_at": "2026-10-10T11:27:00Z"
+      "status": "completed",
+      "updated_at": "2026-10-10T11:28:43Z"
     },
     {
       "conclusion": "cancelled",
@@ -87,15 +96,6 @@
       "id": 38047904385,
       "status": "completed",
       "updated_at": "2026-10-10T11:19:04Z"
-    },
-    {
-      "conclusion": "cancelled",
-      "created_at": "2026-10-10T11:17:48Z",
-      "head_sha": "4106685ccb9205cf08c9b3ba5eddf96f531c5851",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38047902499",
-      "id": 38047902499,
-      "status": "completed",
-      "updated_at": "2026-10-10T11:17:51Z"
     }
   ]
 }
