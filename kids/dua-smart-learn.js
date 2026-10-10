@@ -20,6 +20,8 @@
   var playing=false;
   var mode="";
   var playToken=0;
+  // Cancels pending phrase/preview promises when a child switches audio modes.
+  var latestPhraseRequest=0;
   // Seamless Fuṣḥā player: decode words once, schedule with an accurate audio clock.
   // Conservative silence cropping removes synthetic padding, not Arabic phonemes.
   var cleanContext=null, cleanPlayback=null;
@@ -534,6 +536,7 @@
   }
   function stopAudio(){
     playToken++;
+    latestPhraseRequest++;
     cleanStop();
     playing=false;
     mode="";
@@ -664,7 +667,8 @@
   }
   function playWhole(slow){
     if(!currentDua)return false;
-    var nativeSlow=slow?approvedNativeSlowUrl(currentDua):"";
+    var requestedDua=currentDua,requestId=++latestPhraseRequest;
+    var nativeSlow=slow?approvedNativeSlowUrl(requestedDua):"";
     if(nativeSlow){
       return playUrl(nativeSlow,"slow","Natürlich langsame, freigegebene Fuṣḥā-Aufnahme …",1);
     }
@@ -672,13 +676,14 @@
     // synthesized 'slow' take carried audible pacing/breath artefacts.
     // Moderate native pitch-preserving playback slows evenly; no separately generated breath cues.
     var rate=slow?CLEAN_SLOW_RATE:1;
-    var direct=currentDua.audioArabicUrl;
+    var direct=requestedDua.audioArabicUrl;
     if(direct){
       return playUrl(direct,slow?"slow":"full",
         slow?"Gleichmäßig langsame Fuṣḥā-Aufnahme …":"Flüssige Fuṣḥā-Gesamtaufnahme …",rate);
     }
     var run=function(p){
-      var e=entry(p.normal,arabicText(currentDua));
+      if(requestId!==latestPhraseRequest||currentDua!==requestedDua)return false;
+      var e=entry(p.normal,arabicText(requestedDua));
       if(!e||!e.url)throw new Error("missing-phrase");
       return playUrl(e.url,slow?"slow":"full",
         slow?"Langsam und gleichmäßig zuhören …":"Duʿāʾ anhören …",rate);
@@ -687,7 +692,8 @@
       try{return run(packs)}catch(e){setStatus("Diese Aufnahme ist nicht verfügbar.","bad");return false}
     }
     return loadPacks().then(run).catch(function(){
-      setStatus("Diese Aufnahme konnte nicht geladen werden.","bad");
+      if(requestId===latestPhraseRequest&&currentDua===requestedDua)
+        setStatus("Diese Aufnahme konnte nicht geladen werden.","bad");
       return false;
     });
   }
@@ -903,6 +909,7 @@
   }
   function preview(dua,rate){
     if(!dua)return false;
+    var requestId=++latestPhraseRequest;
     var slow=Number(rate||1)<.9;
     currentDua=dua;
     var approved=slow?approvedNativeSlowUrl(dua):"";
@@ -912,6 +919,7 @@
     var direct=dua.audioArabicUrl,playRate=slow?CLEAN_SLOW_RATE:1;
     if(direct)return playUrl(direct,slow?"slow":"full",slow?"Ruhig und natürlich zuhören …":"Duʿāʾ anhören …",playRate);
     var run=function(p){
+      if(requestId!==latestPhraseRequest||currentDua!==dua)return false;
       var native=slow?approvedNativeSlowUrl(dua):"";
       var e=entry(p.normal,arabicText(dua));
       if(!native&&(!e||!e.url))throw new Error("missing-preview");
