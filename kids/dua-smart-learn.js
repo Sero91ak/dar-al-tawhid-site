@@ -565,6 +565,9 @@
     playing=false;
     mode="";
     try{audio.pause()}catch(e){}
+    // Do not leak the slow rate into individually played word clips.
+    try{audio.defaultPlaybackRate=1;audio.playbackRate=1}catch(e){}
+    audio.onplaying=null;
     audio.onended=null;
     audio.onerror=null;
     audio.oncanplay=null;
@@ -596,12 +599,21 @@
         audio.volume=1;
         audio.src=String(url);
         audio.currentTime=0;
-        audio.playbackRate=Number(playRate)||1;
+        var requestedRate=Math.max(0.75,Math.min(1,Number(playRate)||1));
+        // HTMLMediaElement.load() resets playbackRate to defaultPlaybackRate.
+        // Apply both so iOS/WebKit really plays the existing master at 0.86x.
+        try{audio.defaultPlaybackRate=requestedRate}catch(e){}
         audio.preservesPitch=true;
         if('webkitPreservesPitch' in audio)audio.webkitPreservesPitch=true;
         audio.onended=function(){finish(true)};
         audio.onerror=function(){finish(false)};
         try{audio.load()}catch(e){}
+        audio.playbackRate=requestedRate;
+        audio.onplaying=function(){
+          if(token===playToken&&Math.abs(audio.playbackRate-requestedRate)>.001){
+            audio.playbackRate=requestedRate;
+          }
+        };
         if((mode==="full"||mode==="slow")&&root&&root.classList.contains("open")&&currentDua){
           // HTMLAudio.currentTime is the SOURCE clock even when playbackRate
           // is 0.86. Use NORMAL word markers for slowed normal recordings.
