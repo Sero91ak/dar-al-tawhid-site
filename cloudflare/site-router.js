@@ -717,16 +717,9 @@ a,button,[role="button"],summary,[tabindex],label{-webkit-tap-highlight-color:tr
         link.innerHTML='<div><h3>Downloads</h3><p>Android-Web-App installieren · iPhone & iPad im Apple App Store.</p></div><b>→</b>';
         grid.insertBefore(link,grid.firstChild);
       }
-      if(grid&&!grid.querySelector('.dar-widgets-route')){
-        var widgetLink=document.createElement("a");
-        widgetLink.className="more-row dar-widgets-route";
-        widgetLink.href="/widgets/?platform=android";
-        widgetLink.innerHTML='<div><h3>Widgets & App-Icon</h3><p>Gebetszeiten, Heute & Dhikr sowie App-Icon verwalten.</p></div><b>→</b>';
-        var downloadLink=grid.querySelector('[data-page="downloads"],.dar-download-route');
-        if(downloadLink&&downloadLink.nextSibling)grid.insertBefore(widgetLink,downloadLink.nextSibling);
-        else if(downloadLink)grid.appendChild(widgetLink);
-        else grid.insertBefore(widgetLink,grid.firstChild);
-      }
+      // Widgets & App-Icon intentionally absent from the public Mehr route.
+      // Dedicated widgets page remains accessible at /widgets/.
+
     }
     if(page==="downloads"&&!document.querySelector(".download-hub-grid,.dar-download-fallback")){
       var root=document.getElementById("pageRoot");
