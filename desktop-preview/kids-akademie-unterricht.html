@@ -3061,8 +3061,36 @@ body[data-academy-view="lesson"] #lessonMain .stage-tracker .tracker-item:disabl
  color:#e3e9ec!important;
 }
 
+
+/* V8.1 – native accessible lesson cards, layouts preserved at all widths */
+body #academySubject.subject-detail .subject-topic-grid .subject-topic:is(button){
+ appearance:none!important;-webkit-appearance:none!important;
+ font:inherit!important;color:var(--kids-ink,#1c4451)!important;
+ display:flex!important;flex-direction:column!important;
+ justify-content:center!important;align-items:flex-start!important;
+ gap:4px!important;text-align:left!important;
+ cursor:pointer!important;touch-action:manipulation!important;
+ min-height:80px!important;
+}
+body #academySubject.subject-detail .subject-topic-grid .subject-topic:is(button) strong,
+body #academySubject.subject-detail .subject-topic-grid .subject-topic:is(button) span{
+ display:block!important;max-width:100%!important;overflow-wrap:break-word!important;
+ text-align:left!important;
+}
+body #academySubject.subject-detail .subject-topic-grid .subject-topic:is(button):focus-visible{
+ outline:3px solid #e0b85e!important;outline-offset:3px!important
+}
+body #academySubject.subject-detail .subject-topic-grid .subject-topic:is(button):disabled{
+ cursor:default!important;opacity:.65!important;
+}
+@media(max-width:700px){
+ body #academySubject.subject-detail .subject-topic-grid .subject-topic:is(button){
+  min-height:76px!important;padding:11px 13px!important
+ }
+}
+
 </style></head>
-<body data-profile="boy" data-preview-release="V8.0-20261010" data-preview-deploy="v8.0-curriculum-12-lessons"><main class="wrap">
+<body data-profile="boy" data-preview-release="V8.1-20261010" data-preview-deploy="v8.1-curriculum-audio-routing"><main class="wrap">
 
 <header class="academy-header kids-detail-appbar" aria-label="Navigationsleiste Lernakademie">
  <button class="academy-nav-back" id="academyNavBack" type="button" aria-label="Zurück"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/><path d="M9 12h11"/></svg></button>
@@ -3518,6 +3546,7 @@ function syncProfile(force=false){
  $("#overviewSalam").textContent="As-salāmu ʿalaykum, "+address()+".";
  $("#welcomeSalam").textContent="As-salāmu ʿalaykum, "+address()+".";
  applyAgeTeaching();
+ if(activeLesson())applySelectedLesson();
  renderHome();
 }
 
@@ -3534,6 +3563,7 @@ function prepareOwnerVoice(){
 
 
 /* KIDS V8: shared curriculum and lesson-isolated progress */
+const QURAN_COUNTS=[7,286,200,176,120,165,206,75,129,109,123,111,43,52,99,128,111,110,98,135,112,78,118,64,77,227,93,88,69,60,34,30,73,54,45,83,182,88,75,85,54,53,89,59,37,35,38,29,18,45,60,49,62,55,78,96,29,22,24,13,14,11,11,18,12,12,30,52,52,44,28,28,20,56,40,31,50,40,46,42,29,19,36,25,22,17,19,26,30,20,15,21,11,8,8,19,5,8,8,11,11,8,3,9,5,4,7,3,6,3,5,4,5,6];
 const CURRICULUM=window.DARKidsAcademyCurriculum||{};
 const TOPIC_IDS={akhlaq:["sidq","akhlaq-sabr","akhlaq-amanah"],adab:["adab-salam","adab-worte","adab-respekt"],fiqh:["fiqh-taharah","fiqh-wudu","fiqh-salah"],aqidah:["aqidah-tawhid","aqidah-iman","aqidah-ikhlas"]};
 let activeLessonId="sidq";
@@ -3562,7 +3592,7 @@ function applySelectedLesson(){
   return;
  }
  const q=lesson.quran,k="quran:"+q.surah+":"+q.ayah;
- TRACKS[k]={src:"https://everyayah.com/data/Alafasy_128kbps/"+String(q.surah).padStart(3,"0")+String(q.ayah).padStart(3,"0")+".mp3"};
+ TRACKS[k]={src:"/quran-audio/ar.alafasy/"+(QURAN_COUNTS.slice(0,q.surah-1).reduce((a,b)=>a+b,0)+q.ayah)+".mp3",fallback:"https://everyayah.com/data/Alafasy_128kbps/"+String(q.surah).padStart(3,"0")+String(q.ayah).padStart(3,"0")+".mp3"};
  $("#lessonIntroduction").textContent=lesson.goal;$("#welcomeTitle").textContent="Heute lernen wir: "+lesson.topic;
  $("#lessonWelcomeBody").textContent=lesson.lead+" "+lesson.goal;
  $("#explainTitle").textContent=lesson.topic+" verstehen";
@@ -3594,7 +3624,7 @@ function openCategory(key){
  stopAll();hideLesson();$("#academyHome").hidden=true;$("#academySubject").hidden=false;
  $("#academySubject").dataset.subject=key;
  $("#subjectTitle").textContent=data.title;$("#subjectDescription").textContent=data.description;
- $("#subjectStatus").textContent=data.status;$("#subjectLessonTitle").textContent=data.lesson;
+ $("#subjectStatus").textContent=availableTopics(key).length+" Lektionen bereit";$("#subjectLessonTitle").textContent=data.lesson;
  $("#subjectLessonNote").textContent=data.note;$("#subjectImage").src=data.image;
  $("#subjectStart").hidden=!availableTopics(key).length;
  const grid=$("#subjectTopicGrid");grid.replaceChildren();
