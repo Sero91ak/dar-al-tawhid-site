@@ -38,7 +38,7 @@
       return p === "/test" || p.indexOf("/test/") === 0;
     } catch (eT) { return false; }
   }
-  var LEARN_PLAYER_ONLY = !isOfficialIosApp() && !isTestAppPath() && !isAppleTvApp();
+  var LEARN_PLAYER_ONLY = false; /* User-authorized V11: full adult Qurʾān Player on website, PWA, iOS, Android and tvOS web surfaces; Kids is separate. */
   if (window.__DAR_QURAN_PLAYER_BUILD === PLAYER_BUILD && window.DARQuranPlayer) return;
   try {
     var staleAudio = document.getElementById("darQuranPlayerAudio");
