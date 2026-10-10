@@ -3343,6 +3343,139 @@ html[data-kids-pointer-input="touch"] body #academySubject.subject-detail .subje
 .subject-topic .topic-lock-meta{font-size:12px;line-height:1.4;color:#536970}
 .subject-topic.is-current-class{border:2px solid #2b7367!important;background:#e9f7ef!important}
 .academy-school-hint{font-size:13px;line-height:1.5;color:#34555e;margin:7px 0}
+
+/* KIDS_ACADEMY_PROFILE_IN_HEADER_V1101
+   Identity occupies the space between Lernakademie and Home on all screens.
+   The *same* profile element and IDs are moved from the Hero, not duplicated.
+   No additional pill on phones; larger iPads may use a restrained capsule.
+   Navigation and audio handlers remain unchanged. */
+body .academy-header.kids-detail-appbar{
+ grid-template-columns:50px minmax(0,1fr) minmax(145px,238px) 44px!important;
+ column-gap:clamp(7px,1.3vw,13px)!important;
+}
+body .academy-header.kids-detail-appbar > .academy-nav-copy{
+ grid-column:2;grid-row:1;min-width:0!important;overflow:hidden;
+}
+body .academy-header.kids-detail-appbar > .hero-profile-chip{
+ position:relative!important;inset:auto!important;top:auto!important;right:auto!important;
+ left:auto!important;bottom:auto!important;
+ grid-column:3;grid-row:1;
+ display:flex!important;flex-direction:row!important;align-items:center!important;
+ justify-self:end!important;align-self:center!important;
+ min-width:0!important;max-width:100%!important;width:auto!important;
+ margin:0!important;padding:4px 8px 4px 4px!important;
+ gap:8px!important;z-index:2!important;
+ background:rgba(24,65,73,.42)!important;
+ border:1px solid rgba(237,213,160,.28)!important;
+ border-radius:18px!important;box-shadow:none!important;
+ -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+ color:#fff9ec!important;
+ pointer-events:none!important;
+}
+body[data-profile="girl"] .academy-header.kids-detail-appbar > .hero-profile-chip{
+ background:rgba(90,52,104,.42)!important;
+ border-color:rgba(244,195,226,.33)!important;
+}
+body .academy-header.kids-detail-appbar > .hero-profile-chip img{
+ display:block!important;position:static!important;inset:auto!important;
+ flex:0 0 43px!important;width:43px!important;height:43px!important;
+ min-width:43px!important;max-width:43px!important;max-height:43px!important;
+ object-fit:contain!important;object-position:center!important;
+ margin:0!important;border:0!important;border-radius:12px!important;
+ background:rgba(255,255,255,.10)!important;opacity:1!important;visibility:visible!important;
+}
+body .academy-header.kids-detail-appbar > .hero-profile-chip .hero-profile-copy{
+ display:flex!important;flex-direction:column!important;justify-content:center!important;
+ flex:0 1 auto;min-width:0!important;gap:2px!important;
+ text-align:left!important;
+}
+body .academy-header.kids-detail-appbar > .hero-profile-chip strong,
+body .academy-header.kids-detail-appbar > .hero-profile-chip small{
+ display:block!important;min-width:0!important;max-width:100%!important;
+ overflow:hidden!important;text-overflow:ellipsis!important;
+ white-space:nowrap!important;overflow-wrap:normal!important;
+ line-height:1.22!important;
+}
+body .academy-header.kids-detail-appbar > .hero-profile-chip strong{
+ font-size:clamp(11px,1.5vw,15px)!important;font-weight:850!important;
+}
+body .academy-header.kids-detail-appbar > .hero-profile-chip small{
+ font-size:clamp(10px,1.2vw,12px)!important;
+}
+body .academy-header.kids-detail-appbar > .academy-nav-home{
+ grid-column:4;grid-row:1;
+}
+@media(max-width:700px){
+ body .academy-header.kids-detail-appbar{
+  grid-template-columns:44px minmax(0,1fr) minmax(85px,114px) 42px!important;
+  column-gap:clamp(5px,1.4vw,9px)!important;
+ }
+ body .academy-header.kids-detail-appbar > .academy-nav-copy{
+  padding-left:clamp(7px,1.8vw,11px)!important;
+ }
+ body .academy-header.kids-detail-appbar .academy-nav-title{
+  font-size:clamp(17px,4.7vw,21px)!important;
+  overflow:hidden!important;text-overflow:ellipsis!important;
+  white-space:nowrap!important;display:block!important;
+ }
+ body .academy-header.kids-detail-appbar .academy-nav-subtitle{
+  font-size:clamp(9px,2.4vw,11px)!important;
+  overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;
+ }
+ body .academy-header.kids-detail-appbar > .hero-profile-chip{
+  padding:0!important;border:0!important;border-radius:0!important;
+  background:transparent!important;box-shadow:none!important;
+  gap:5px!important;
+ }
+ body[data-profile="girl"] .academy-header.kids-detail-appbar > .hero-profile-chip{
+  background:transparent!important;border:0!important;
+ }
+ body .academy-header.kids-detail-appbar > .hero-profile-chip img{
+  flex:0 0 35px!important;width:35px!important;height:35px!important;
+  min-width:35px!important;max-width:35px!important;max-height:35px!important;
+  border-radius:10px!important;
+ }
+ body .academy-header.kids-detail-appbar > .hero-profile-chip strong{
+  font-size:clamp(10px,2.65vw,12px)!important;
+ }
+ body .academy-header.kids-detail-appbar > .hero-profile-chip small{
+  font-size:clamp(9px,2.4vw,11px)!important;
+ }
+ /* The Hero is purely the picture and greeting now. */
+ body .overview-hero .overview-copy{
+  padding-top:clamp(17px,4vw,28px)!important;
+ }
+}
+/* On very narrow phones, keep the full profile name and age in a second
+   header row rather than squeezing or hiding the Home button. */
+@media(max-width:365px){
+ body .academy-header.kids-detail-appbar{
+  grid-template-columns:40px minmax(0,1fr) 41px!important;
+  grid-template-rows:auto auto!important;column-gap:8px!important;row-gap:1px!important;
+ }
+ body .academy-header.kids-detail-appbar > .academy-nav-back{
+  grid-column:1;grid-row:1 / span 2;
+ }
+ body .academy-header.kids-detail-appbar > .academy-nav-copy{
+  grid-column:2;grid-row:1;
+ }
+ body .academy-header.kids-detail-appbar > .hero-profile-chip{
+  grid-column:2;grid-row:2;justify-self:start!important;
+  margin-left:9px!important;
+ }
+ body .academy-header.kids-detail-appbar > .academy-nav-home{
+  grid-column:3;grid-row:1 / span 2;
+ }
+}
+@media(min-width:701px) and (max-width:980px){
+ body .academy-header.kids-detail-appbar{
+  grid-template-columns:50px minmax(0,1fr) minmax(140px,210px) 44px!important;
+ }
+ body .academy-header.kids-detail-appbar > .hero-profile-chip img{
+  width:40px!important;height:40px!important;flex-basis:40px!important;
+  min-width:40px!important;max-width:40px!important;max-height:40px!important;
+ }
+}
 </style><script data-kids-touch-focus-v83>
 (function(){
   "use strict";
@@ -3368,6 +3501,10 @@ html[data-kids-pointer-input="touch"] body #academySubject.subject-detail .subje
 <header class="academy-header kids-detail-appbar" aria-label="Navigationsleiste Lernakademie">
  <button class="academy-nav-back" id="academyNavBack" type="button" aria-label="Zurück"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/><path d="M9 12h11"/></svg></button>
  <div class="academy-nav-copy"><strong class="academy-nav-title" id="academyNavTitle">Lernakademie</strong><small class="academy-nav-subtitle" id="academyNavSubtitle">DĀR AL TAWḤĪD · KIDS</small></div>
+ <div class="hero-profile-chip" aria-label="Aktuelles Kinderprofil">
+   <img id="academyHeroProfileAvatar" src="/kids/assets/profile-avatars/boy-kufi-v1235.svg" alt="" width="44" height="44" aria-hidden="true">
+   <span class="hero-profile-copy"><strong id="academyHeroProfileLabel">Jungenprofil</strong><small id="academyHeroProfileAge">6–8 Jahre</small></span>
+  </div>
  <button class="academy-nav-home" id="academyNavHome" type="button" aria-label="Zur Kids-App"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7"/><path d="M5 9v11h14V9"/><path d="M9 20v-7h6v7"/></svg></button>
  <div class="academy-brand" hidden><div class="brand">DĀR AL TAWḤĪD · KIDS</div></div>
  <div class="academy-header-actions" hidden><button class="preview-refresh" id="previewRefresh" type="button" aria-label="Vorschau aktualisieren">Aktualisieren</button><div class="academy-profile" id="academyProfile" hidden><img id="academyAvatar" alt="" src="/kids/assets/profile-avatars/boy-kufi-v1235.svg"><span class="academy-profile-names"><strong id="profileLabel">Kinderprofil</strong><small id="profileRole"></small><small id="academyAgeLabel"></small></span></div></div>
@@ -3375,10 +3512,7 @@ html[data-kids-pointer-input="touch"] body #academySubject.subject-detail .subje
 <section class="academy-home" id="academyHome">
  <section class="overview-hero" aria-label="Deine islamische Lernakademie">
   <img id="academyHeroImage" src="/desktop-preview/assets/kids-academy-hero-boys-v1.jpg" alt="" decoding="async" fetchpriority="high" onerror="this.onerror=null;this.classList.add('is-ready');this.src='/desktop-preview/assets/kids-academy-hero-v1.jpg'">
-  <div class="hero-profile-chip" aria-label="Aktuelles Kinderprofil">
-   <img id="academyHeroProfileAvatar" src="/kids/assets/profile-avatars/boy-kufi-v1235.svg" alt="" width="44" height="44" aria-hidden="true">
-   <span class="hero-profile-copy"><strong id="academyHeroProfileLabel">Jungenprofil</strong><small id="academyHeroProfileAge">6–8 Jahre</small></span>
-  </div>
+  
   <img class="academy-hero-character" id="academyHeroCharacter" src="/kids/assets/profile-avatars/boy-kufi-v1235.svg" alt="" aria-hidden="true" decoding="async"><div class="overview-copy"><div class="kicker" id="overviewKicker">Deine islamische Lernakademie</div><h1><span class="hero-title-line">Wissen</span> <span class="hero-title-line">entdecken</span></h1><p id="overviewGreeting" class="overview-greeting"><span id="overviewSalam" class="greeting-salam">As-salāmu ʿalaykum, lieber Bruder.</span><span id="overviewFollowup" class="greeting-followup">Heute lernen wir etwas Neues!</span></p><div class="hero-learning-pill">✦ Qurʾān &amp; Sunnah · Gemeinsam lernen</div></div>
  </section>
  <section class="today-class" aria-labelledby="todayTitle">
