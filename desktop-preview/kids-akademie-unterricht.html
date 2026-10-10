@@ -3089,6 +3089,24 @@ body #academySubject.subject-detail .subject-topic-grid .subject-topic:is(button
  }
 }
 
+
+/* KIDS ACADEMY V8.2.1 – transparent touch highlight; keyboard focus kept */
+:where(a,button,summary,label,[role="button"],[role="tab"],[tabindex],input,textarea,select,
+ .category-card,.subject-topic,.tracker-item,.choice-button,.choice-listen){
+ -webkit-tap-highlight-color:transparent!important;
+ touch-action:manipulation
+}
+:where(a,button,summary,[role="button"],[role="tab"],[tabindex],
+ .category-card,.subject-topic,.tracker-item,.choice-button,.choice-listen):focus:not(:focus-visible){
+ outline:0!important;outline-offset:0!important
+}
+/* Do NOT remove :focus-visible; hardware keyboards and screen-reader navigation still need it. */
+@media(hover:none) and (pointer:coarse){
+ :where(a,button,summary,[role="button"],[role="tab"],[tabindex]):active{
+  -webkit-tap-highlight-color:transparent!important
+ }
+}
+
 </style></head>
 <body data-profile="boy" data-preview-release="V8.2-20261010" data-preview-deploy="v8.2-deep-link-all-subjects"><main class="wrap">
 
