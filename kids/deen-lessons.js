@@ -70,7 +70,13 @@ function renderCards(){
       (done(item.id)?'<span class="ms-done" aria-label="Abgeschlossen">✓</span>':'')+
     '</button>';
   }).join("");
-  grid.querySelectorAll("[data-dl-id]").forEach(b=>b.addEventListener("click",()=>openStory(b.dataset.dlId)));
+  grid.querySelectorAll("[data-dl-id]").forEach(b=>{
+    b.addEventListener("click",()=>openStory(b.dataset.dlId));
+    const item=items.find(x=>x.id===b.dataset.dlId);
+    if(item)window.DARKidsItemDownloads?.deen(b,{
+      item,audioMeta:audioMeta(item),cover:item.cover||art(item),hero:item.hero||art(item)
+    });
+  });
 }
 function effectiveMode(){
   const m=mode();
