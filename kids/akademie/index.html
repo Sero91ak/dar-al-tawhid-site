@@ -3287,8 +3287,40 @@ body #academySubject.subject-detail .subject-topic-grid .subject-topic:is(button
  }
 }
 
-</style></head>
-<body data-profile="boy" data-preview-release="V8.2-20261010" data-preview-deploy="v8.2-deep-link-all-subjects"><main class="wrap">
+
+/* V8.3 touch-modality focus: no Android rectangular tap flash, keyboard cues retained */
+html,body,body :where(button,a,summary,label,[role="button"],[role="tab"],[tabindex],select,input,textarea,.category-card,.subject-topic,.tracker-item,.choice-row,.choice-button,.choice-listen){
+  -webkit-tap-highlight-color:transparent!important;
+}
+html[data-kids-pointer-input="touch"] body :where(button,a,summary,[role="button"],[role="tab"],[tabindex],.category-card,.subject-topic,.tracker-item,.choice-button,.choice-listen):focus-visible{
+  outline:0!important;outline-offset:0!important;
+}
+/* Press feedback remains on the actual button; checked/selected styles remain visible. */
+html[data-kids-pointer-input="touch"] body :where(.choice-button,.choice-listen,.category-card,.tracker-item,.academy-nav-back,.academy-nav-home):active{
+  -webkit-tap-highlight-color:transparent!important;
+}
+
+</style><script data-kids-touch-focus-v83>
+(function(){
+  "use strict";
+  if(window.__kidsTouchModalityV83)return;
+  window.__kidsTouchModalityV83=true;
+  const root=document.documentElement;
+  document.addEventListener("pointerdown",function(ev){
+    if(ev.pointerType==="touch"||ev.pointerType==="pen")root.dataset.kidsPointerInput="touch";
+    else delete root.dataset.kidsPointerInput;
+  },true);
+  document.addEventListener("touchstart",function(){
+    root.dataset.kidsPointerInput="touch";
+  },{capture:true,passive:true});
+  document.addEventListener("keydown",function(ev){
+    if(ev.key==="Tab"||ev.key.startsWith("Arrow")||ev.key==="Enter"||ev.key===" "){
+      delete root.dataset.kidsPointerInput;
+    }
+  },true);
+})();
+</script></head>
+<body data-profile="boy" data-preview-release="V8.3-20261010" data-preview-deploy="v8.3-touch-focus-and-master"><main class="wrap">
 
 <header class="academy-header kids-detail-appbar" aria-label="Navigationsleiste Lernakademie">
  <button class="academy-nav-back" id="academyNavBack" type="button" aria-label="Zurück"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/><path d="M9 12h11"/></svg></button>
