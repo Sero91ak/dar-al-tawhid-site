@@ -10,7 +10,9 @@ const TEXT_HEADERS = {
   "Referrer-Policy": "no-referrer",
   "X-Content-Type-Options": "nosniff",
   "X-Robots-Tag": "noindex, nofollow, noarchive",
-  "X-Kids-Environment": "owner-test"
+  "X-Kids-Environment": "owner-test",
+  // Never connect a test browser to live Supabase, push or other production APIs.
+  "Content-Security-Policy": "connect-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'"
 };
 function respond(message, status, extras = {}) {
   return new Response(message, {status, headers:{...TEXT_HEADERS,...extras}});
@@ -57,6 +59,11 @@ function assetPath(path) {
   return path;
 }
 function htmlWithOwnerTools(html,path){
+  // The public shell embeds a production Supabase RPC endpoint. Never expose it
+  // as a working endpoint in owner test: a separate test DB is required first.
+  html=html.replace(/var API="https:\/\/[^"]+\\.supabase\\.co\/rest\/v1\/rpc\/";/,
+                    'var API="/kids/owner-test/blocked-rpc/";');
+  html=html.replace(/var APIKEY="sb_publishable_[^"]*";/,'var APIKEY="";');
   // Bootstrap happens before page scripts. Storage is isolated by this origin.
   const boot='<script id="kidsOwnerTestBootstrap">window.__DAR_KIDS_OWNER_TEST__=true;try{if(!localStorage.getItem("kids.owner.test.initialized")){localStorage.setItem("kids.guest.gender.v1","boy");localStorage.setItem("kids.age","4-5");localStorage.setItem("kids.owner.test.initialized","1");}}catch(e){}</script>';
   if(html.includes("</head>"))html=html.replace("</head>",boot+"</head>");
