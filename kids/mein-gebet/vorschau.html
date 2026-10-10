@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>Mein Gebet · DĀR AL TAWḤĪD KIDS · HTML-Vorschau</title>
+<meta name="description" content="Isolierte mobile Testvorschau und transparenter Entwicklungsstatus des Kinder-Gebetsbereichs. Kein Live-Release.">
+<style>
+:root{color-scheme:dark;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--bg:#071925;--gold:#e6c47d;--white:#fff9ed;--muted:#b0c5ca}
+*{box-sizing:border-box}
+html{min-height:100%;scroll-behavior:smooth}
+body{margin:0;min-height:100svh;color:var(--white);background:radial-gradient(ellipse at 86% 0,rgba(43,102,111,.24),transparent 43%),linear-gradient(165deg,#0a2130 0%,#081923 65%,#06131d 100%);-webkit-tap-highlight-color:transparent}
+a{color:inherit}
+button{font:inherit}
+.wrap{width:min(100%,900px);margin:auto;padding:calc(env(safe-area-inset-top,0px) + 22px) 17px calc(env(safe-area-inset-bottom,0px) + 35px)}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid rgba(230,196,125,.17);padding:0 0 15px}
+.brand{font-size:12px;letter-spacing:.12em;font-weight:850;color:#edd5a0}
+.brand span{font-size:20px;color:#fff8e8;letter-spacing:0}
+.tag{font-size:10px;letter-spacing:.11em;font-weight:900;border:1px solid rgba(231,198,130,.43);padding:8px 10px;border-radius:30px;background:rgba(238,187,97,.09);color:#ffe0a6;white-space:nowrap}
+h1{font-size:clamp(30px,8.2vw,48px);line-height:1.04;letter-spacing:-.04em;margin:24px 0 8px}
+.lead{font-size:14px;line-height:1.6;color:#cbdbd8;margin:0 0 20px;max-width:650px}
+.notice{padding:13px 15px;border:1px solid rgba(229,190,121,.24);border-radius:17px;background:rgba(229,190,121,.07);font-size:12px;line-height:1.5;color:#eed7a9;margin-bottom:16px}
+.profiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.profile{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;min-height:280px;padding:17px 15px 15px;border:1px solid rgba(255,255,255,.12);border-radius:25px;text-decoration:none;background:#183b47;box-shadow:0 12px 26px rgba(0,0,0,.13);transition:transform .18s,border-color .18s}
+.profile:hover,.profile:focus-visible{transform:translateY(-2px);border-color:var(--gold);outline:none}
+.profile:active{transform:scale(.992)}
+.profile.girl{background:#382b4f}
+.profile:before{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(0deg,rgba(6,23,31,.93) 0%,rgba(10,25,44,.27) 75%),url("assets/hero-boy.jpg") center/cover}
+.profile.girl:before{background-image:linear-gradient(0deg,rgba(29,22,47,.96),rgba(40,34,60,.24)),url("assets/hero-girl.jpg")}
+.profile .label{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#eed3a2;font-weight:900}
+.profile.girl .label{color:#f5c4d7}
+.profile img{display:block;align-self:center;object-fit:contain;object-position:bottom;height:148px;width:100%;max-width:180px;filter:drop-shadow(0 12px 14px rgba(0,0,0,.26));margin:0 auto}
+.profile h2{font-size:clamp(20px,5.3vw,26px);line-height:1.1;margin:2px 0 5px}
+.profile p{margin:0 0 13px;font-size:11px;line-height:1.4;color:#dce7e4;max-width:22ch}
+.open{margin-top:auto;align-self:stretch;display:block;border-radius:12px;padding:12px 9px;text-align:center;font-size:13px;font-weight:850;background:#f1d39b;color:#1b2a31}
+.girl .open{background:#f2c4d8;color:#35243f}
+.section{margin-top:22px;border:1px solid rgba(255,255,255,.11);border-radius:22px;padding:18px 16px;background:rgba(255,255,255,.042)}
+.section h2{font-size:18px;letter-spacing:-.015em;margin:0 0 9px}
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0 2px}
+.tile{border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:12px;min-height:80px;background:rgba(255,255,255,.035)}
+.tile strong{display:block;font-size:13px;margin-bottom:7px}
+.tile span{display:block;font-size:11px;line-height:1.4;color:#bbced0}
+.status-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:14px 0}
+.state{padding:12px;border:1px solid rgba(255,255,255,.1);border-radius:13px;background:rgba(255,255,255,.035)}
+.state .name{display:block;font-size:11px;color:#ccdcdb;margin-bottom:5px}
+.state b{font-size:14px}
+.ok{color:#a7e0c2}.pending{color:#ffd49a}
+.small{font-size:11px;line-height:1.6;color:#b8cecc}
+.actionrow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:14px}
+.action{display:inline-flex;align-items:center;justify-content:center;min-height:43px;border-radius:12px;padding:10px 13px;text-decoration:none;background:#183e4b;border:1px solid rgba(243,205,143,.17);font-size:12px;font-weight:760;cursor:pointer}
+.action:hover,.action:focus-visible{outline:2px solid rgba(230,196,125,.7);outline-offset:2px}
+button.action{color:#fff7e6}
+.build{font-size:11px;line-height:1.55;color:#b6cbcb;margin-top:11px;overflow-wrap:anywhere}
+.build em{font-style:normal;color:#f2d7a3}
+.footer{font-size:11px;line-height:1.5;text-align:center;color:#8fa7ac;margin-top:20px}
+@media(max-width:350px){.wrap{padding-left:11px;padding-right:11px}.profile{padding:13px 10px}.profile img{height:120px}.profile{min-height:257px}.profile h2{font-size:20px}}
+@media(min-width:680px){.wrap{padding-left:26px;padding-right:26px}.profile{min-height:370px;padding:23px}.profile img{height:210px}.profile p{font-size:13px}.profile h2{font-size:28px}.tiles{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.profile{transition:none}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<header class="top"><div class="brand">DĀR AL TAWḤĪD · <span>KIDS</span></div><div class="tag">ENTWURF · NICHT LIVE</div></header>
+<h1>Mein Gebet</h1>
+<p class="lead">Die <strong>anklickbare HTML-Vorschau</strong> für deinen Gebets-Lernbereich. Öffne das Jungen- oder Mädchenprofil und teste Home, vier Lernbereiche, zwölf Stationen sowie die Navigation direkt auf deinem Smartphone.</p>
+<div class="notice"><strong>Ohne Anmeldung oder Passwort.</strong> Diese Vorschau ist bewusst von der produktiven Webseite getrennt. Du siehst den tatsächlichen HTML-Prototypen – <strong>noch keine fertige 3D-Gebetsanimation</strong>.</div>
+<section class="profiles" aria-label="Profilvorschau wählen">
+<a class="profile boy" href="demo-junge.html"><span class="label">Jungenprofil</span><img src="assets/figur-junge-original.png" alt="Freigegebene originale Jungenfigur" loading="eager"><h2>Jungenwelt</h2><p>Blau-goldene Vorschau mit der originalen Figur.</p><span class="open">HTML öffnen →</span></a>
+<a class="profile girl" href="demo-maedchen.html"><span class="label">Mädchenprofil</span><img src="assets/figur-maedchen-original.png" alt="Freigegebene originale Mädchenfigur mit vollständig bedeckendem Ḥiǧāb" loading="eager"><h2>Mädchenwelt</h2><p>Rosé-violette Vorschau mit der originalen Figur.</p><span class="open">HTML öffnen →</span></a>
+</section>
+<section class="section" aria-labelledby="inhalte"><h2 id="inhalte">Das kannst du bereits anklicken</h2><div class="tiles"><div class="tile"><strong>01 · Was ist das Gebet?</strong><span>Grundlagen · 3 Stationen</span></div><div class="tile"><strong>02 · Warum beten wir?</strong><span>Bedeutung · 3 Stationen</span></div><div class="tile"><strong>03 · Wie bete ich?</strong><span>Ablauf · 3 Stationen</span></div><div class="tile"><strong>04 · Mein 3D-Gebet</strong><span>Textvorschau · 3 Stationen; 3D noch nicht verfügbar</span></div></div></section>
+<section class="section" aria-labelledby="fortschritt"><h2 id="fortschritt">Entwicklungsfortschritt</h2>
+<div class="status-grid"><div class="state"><span class="name">HTML-Navigation</span><b class="ok">● Testbar</b></div><div class="state"><span class="name">Profilfiguren</span><b class="ok">● Originalbilder</b></div><div class="state"><span class="name">Echte 3D-Animation</span><b class="pending">○ Noch gesperrt</b></div><div class="state"><span class="name">Gebetsaudio</span><b class="pending">○ Noch offen</b></div><div class="state"><span class="name">Fachliche Freigabe</span><b class="pending">○ Noch offen</b></div><div class="state"><span class="name">Live-Veröffentlichung</span><b class="pending">○ Nicht freigegeben</b></div></div>
+<p class="small">Die technischen automatisierten Prüfungen verwenden unter anderem künstliche GLB-Testmodelle. Sie ersetzen <strong>keine</strong> Prüfung der Originalfigur, echten Gebetsbewegungen oder mobilen Darstellung.</p>
+<div class="actionrow"><a class="action" href="https://github.com/Sero91ak/dar-al-tawhid-site/pull/825" target="_blank" rel="noopener noreferrer">Änderungen ansehen ↗</a><a class="action" href="https://github.com/Sero91ak/dar-al-tawhid-site/actions/workflows/kids-mein-gebet-draft-qa.yml" target="_blank" rel="noopener noreferrer">Prüfläufe ansehen ↗</a><button class="action" id="refresh" type="button">Status aktualisieren ↻</button></div>
+<p class="build" id="build" role="status" aria-live="polite">Aktueller GitHub-Prüfstand wird abgefragt. Die Vorschau funktioniert auch ohne Status-Abfrage.</p>
+</section>
+<p class="footer">DĀR AL TAWḤĪD KIDS · isolierte HTML-Testansicht · keine Änderungen an der Live-Webseite</p>
+</main>
+<script>
+(function(){
+"use strict";
+var status=document.getElementById("build"),btn=document.getElementById("refresh");
+var root="https://api.github.com/repos/Sero91ak/dar-al-tawhid-site";
+function node(v){status.textContent=v}
+async function refresh(){
+ btn.disabled=true;node("Prüfstand wird gelesen …");
+ try{
+  var opt={headers:{Accept:"application/vnd.github+json"},cache:"no-store"};
+  var responses=await Promise.all([fetch(root+"/pulls/825",opt),fetch(root+"/actions/workflows/kids-mein-gebet-draft-qa.yml/runs?per_page=20",opt)]);
+  if(!responses.every(function(r){return r.ok}))throw new Error("Status-API nicht verfügbar");
+  var pr=await responses[0].json(),runs=await responses[1].json();
+  if(!pr.head||!pr.head.sha||!Array.isArray(runs.workflow_runs))throw new Error("Ungültige Statusantwort");
+  var hash=pr.head.sha.slice(0,9),current=runs.workflow_runs.find(function(x){return x.head_sha===pr.head.sha});
+  var msg="Entwurf: "+hash+" · PR #825: "+(pr.merged?"zusammengeführt":pr.draft?"Entwurf, nicht live":"offen, nicht live")+". ";
+  if(current)msg+="CI auf genau diesem Stand: "+(current.status==="completed"?(current.conclusion==="success"?"bestanden":"nicht bestanden ("+current.conclusion+")"):"läuft / wartet")+".";
+  else msg+="Noch kein passender CI-Prüflauf für diesen Stand sichtbar.";
+  node(msg+" · Abgerufen: "+new Date().toLocaleString("de-DE")+".");
+ }catch(err){node("Der automatische GitHub-Status konnte nicht geladen werden. Über die beiden Links oben sind Codeänderungen und Prüfläufe weiterhin einsehbar.");}
+ finally{btn.disabled=false}
+}
+btn.addEventListener("click",refresh);
+refresh();
+})();
+</script>
+</body></html>
