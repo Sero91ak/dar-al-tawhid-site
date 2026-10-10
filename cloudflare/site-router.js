@@ -1,3 +1,4 @@
+// PUBLIC_WEBSITE_RECOVERY_TRIGGER_20261010_V1
 /* pwa-dedicated-shell-live-20261009-2050 */
 /* public-pwa-emergency-repair-live-20261009-1824 */
 import { gateHiddenSurfaces } from "./preview-gate.js";
