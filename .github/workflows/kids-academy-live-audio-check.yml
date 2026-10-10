@@ -9,6 +9,12 @@ on:
     paths:
       - '.github/workflows/kids-academy-live-audio-check.yml'
   workflow_dispatch:
+  # Re-check the real Cloudflare domain after the canonical production deployment.
+  # GitHub Pages succeeding alone is not proof of the Workers asset release.
+  workflow_run:
+    workflows: ["Deploy Besucher-App (Cloudflare Workers)"]
+    types: [completed]
+    branches: [main]
 
 permissions:
   contents: read
@@ -16,6 +22,7 @@ permissions:
 jobs:
   live-audio:
     name: Verify Cloudflare master audio from real domain
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
@@ -48,11 +55,9 @@ jobs:
           # The diagnostic HTML page is protected for normal browsers.
           # Only a KIDS-native User-Agent can access it; this automated
           # test verifies the intended gate instead of opening the page.
-          # The PR cannot require an unpublished V16 deployment yet.
-          # After merge on main, require the new release marker.
-          expected_release=("V13.0-voicefix-20261010"
-                            if __import__("os").environ.get("GITHUB_EVENT_NAME")=="pull_request"
-                            else "V16.0-voicepreview-20261010")
+          # V16 is already merged: require it on PRs and after production deploys.
+          # An old V13 page must never produce a false green live-audio result.
+          expected_release="V16.0-voicepreview-20261010"
           resources=[
               ("/kids/akademie/index.html",expected_release,None),
               ("/kids/akademie/pilot-audio-v13.js","kids-serhat-v13-20261010",None),
@@ -85,6 +90,8 @@ jobs:
                       if code!=200:raise RuntimeError("HTTP "+str(code))
                       if expected:
                           if len(body)<1800:raise RuntimeError("Incomplete audio: "+str(len(body))+" bytes")
+                          if mime.split(";",1)[0].strip().lower() not in ("audio/mp4","audio/x-m4a","video/mp4"):
+                              raise RuntimeError("Wrong audio Content-Type "+mime)
                           actual=hashlib.sha256(body).hexdigest()
                           if actual!=expected:raise RuntimeError("Wrong bytes/hash "+actual[:20])
                           if body.startswith(b"<!doctype html") or body.startswith(b"<html"):raise RuntimeError("HTML returned in place of audio")
@@ -101,6 +108,6 @@ jobs:
               print("LIVE AUDIO DELIVERY FAIL:",len(failed))
               for route,reason in failed:print("  ",route,reason)
               sys.exit(1)
-          print("LIVE VOICE DELIVERY PASS: Academy V13 HTML, direct iPhone playback JS and 4 SHA-matched Serhat V4 MP4s.")
+          print("LIVE VOICE DELIVERY PASS: Academy release marker "+expected_release+", direct iPhone playback JS and 4 SHA-matched Serhat V4 MP4s.")
           print("PROTECTED DIAGNOSTIC: /kids/akademie/stimmen-test-v14.html is currently HTTP 401. Do not offer it as browser-accessible; do not bypass the Kids auth gate.")
           PY
