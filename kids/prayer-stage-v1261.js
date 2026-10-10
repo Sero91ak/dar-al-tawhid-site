@@ -55,6 +55,17 @@ if(navigator.connection?.saveData)salahWorld.classList.add("kids-salah-save-data
  const dock=document.querySelector(".bottom-nav");
  const cta=stage.querySelector("#kidsSalahOpenDay");
  if(!dock||!cta)return;
+ /* KIDS_HOME_COLD_START_AT_TOP_V1316
+    Restore the approved ZERO-scroll opening, including WebKit's outer
+    document scroll position. This only runs on a cold document creation:
+    returning from an audiobook or restoring a tab's scroll is unaffected.
+    Do not animate, jump after a delay or change the content geometry. */
+ if(HOME.classList.contains("active")){
+   const viewportScroll=document.scrollingElement;
+   const appScroll=document.querySelector(".shell");
+   if(viewportScroll&&viewportScroll.scrollTop>0)viewportScroll.scrollTop=0;
+   if(appScroll&&appScroll.scrollTop>0)appScroll.scrollTop=0;
+ }
  let queued=false,lastHeight=0,lastWidth=0;
  // KIDS_HOME_TIGHT_LATCH_V1306: remember the viewport where compact mode started.
  // A 930px-high iPhone is not a rotation; ResizeObserver must not undo the
