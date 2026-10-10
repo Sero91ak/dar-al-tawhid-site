@@ -4,7 +4,7 @@ name: App Stabilität Watchdog
 on:
   workflow_dispatch:
   schedule:
-    - cron: "15,45 * * * *"
+    - cron: "*/5 * * * *"
 
 permissions:
   contents: read
