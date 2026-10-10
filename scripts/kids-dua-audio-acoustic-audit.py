@@ -113,7 +113,10 @@ def main() -> int:
         "results": rows,
         "humanAudioReviewStillRequired": True,
     }, ensure_ascii=False, indent=2))
-    print("KIDS DUA ACOUSTIC AUDIT PASS: sample files decode; flagged timings require listening")
+    incorrect = [row["word"] for row in rows if "manifest-duration-mismatch" in row["reviewFlags"]]
+    if incorrect:
+        raise AssertionError(f"M4A duration differs from its published manifest: {incorrect}")
+    print("KIDS DUA ACOUSTIC AUDIT PASS: 10 clips decode and manifest durations match; timing flags still require listening")
     return 0
 
 
