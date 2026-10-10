@@ -5,6 +5,8 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.Gravity
 import android.view.View
 import android.widget.Button
@@ -32,6 +34,41 @@ class TvActivity : Activity() {
     private lateinit var body: LinearLayout
     private lateinit var footer: TextView
     private var activeTab = "home"
+    private var lastContentRefreshAt = 0L
+    private val contentRefreshIntervalMs = 6L * 60L * 60L * 1000L
+    private val contentRefreshHandler = Handler(Looper.getMainLooper())
+    private val contentRefreshTask = object : Runnable {
+        override fun run() {
+            if (!isFinishing && !isDestroyed && ::body.isInitialized) {
+                // Background content updates never replace native APK code.
+                // Refresh the home once, not a Hadith/Tadabbur page mid-reading.
+                if (activeTab == "home") show("home")
+                scheduleContentRefresh()
+            }
+        }
+    }
+
+    private fun scheduleContentRefresh() {
+        contentRefreshHandler.removeCallbacks(contentRefreshTask)
+        val elapsed = (System.currentTimeMillis() - lastContentRefreshAt).coerceAtLeast(0L)
+        val delay = (contentRefreshIntervalMs - elapsed).coerceAtLeast(5_000L)
+        contentRefreshHandler.postDelayed(contentRefreshTask, delay)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (::body.isInitialized) {
+            if (System.currentTimeMillis() - lastContentRefreshAt >= contentRefreshIntervalMs
+                && activeTab == "home"
+            ) show("home")
+            scheduleContentRefresh()
+        }
+    }
+
+    override fun onPause() {
+        contentRefreshHandler.removeCallbacks(contentRefreshTask)
+        super.onPause()
+    }
     private var renderGeneration = 0
     private var hadithNumber = 1
     private var hadithTotal = 3350
@@ -111,6 +148,7 @@ class TvActivity : Activity() {
 
     private fun show(tab: String) {
         renderGeneration += 1
+        lastContentRefreshAt = System.currentTimeMillis()
         activeTab = tab
         getPreferences(MODE_PRIVATE).edit().putString("tab", tab).apply()
         body.removeAllViews()
