@@ -1,4 +1,5 @@
-name: Quran V7 Rebuild Browser QA
+name: Quran V7.1 Rebuild Browser QA
+# Final device regression after browser-reviewed centered reader refinement.
 on:
   workflow_dispatch:
   push:
