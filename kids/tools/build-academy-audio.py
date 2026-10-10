@@ -31,7 +31,7 @@ from voice_text import prepare_kids_voice_text
 
 def catalog() -> list[str]:
     html = HTML.read_text(encoding="utf-8")
-    match = re.search(r"const AGE_EXPLANATIONS=Object\\.freeze\\((\\{[\\s\\S]*?\\})\\);", html)
+    match = re.search(r"const AGE_EXPLANATIONS=Object\.freeze\((\{[\s\S]*?\})\);", html)
     if not match:
         raise RuntimeError("AGE_EXPLANATIONS source changed – refuse mismatched audio")
     ages = json.loads(match.group(1))
@@ -42,7 +42,7 @@ def catalog() -> list[str]:
         "As-salāmu ʿalaykum, liebe Schwester.",
     ]
     for key in ("welcomeNext", "welcomeBody"):
-        values = re.findall(r"\\b" + key + r':"([^"]+)"', html)
+        values = re.findall(r"\b" + key + r':"([^"]+)"', html)
         if len(values) != 3:
             raise RuntimeError("Missing exact " + key + " phrases")
         texts.extend(values)
