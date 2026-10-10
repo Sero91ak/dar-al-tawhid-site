@@ -4091,6 +4091,8 @@ function syncProfile(force=false){
  if(p.id!==id||p.g!==gender||p.age!==age){stopAll();hideCategory();hideLesson()}
  id=p.id;gender=p.g;age=p.age;profileName=newName;
  document.body.dataset.profile=gender;
+ // Only anonymous demo profiles may hear unapproved owner-voice pilot recordings.
+ document.body.dataset.academyChildMode=p.demo?"demo":"child";
  $("#profileLabel").textContent=profileName||(gender==="girl"?"Mädchenprofil":"Jungenprofil");
  $("#profileRole").textContent=gender==="girl"?"Schwester"+(profileName?"":" · Vorschau"):"Bruder"+(profileName?"":" · Vorschau");
  $("#academyAgeLabel").textContent=p.ageMissing?"Altersstufe fehlt":(p.demo?"Demo · ":"")+humanAge(age)+" Jahre";
