@@ -155,6 +155,16 @@
   ],
   "unlockedScopes": [
     {
+      "id": "kids-dua-v4-pitch-safe-slow-player-test-20261010",
+      "at": "2026-10-10T09:43:00+02:00",
+      "approvedBy": "user-explicit-last-kids-dua-v4-repair-zero-new-generations-20261010",
+      "reason": "Ausschliesslich der regressionstestgesicherte Duʿāʾ-V4-Langsamplayer; kein neuer TTS-Aufruf, keine Kinder-Audio-Neugenerierung, keine Aenderung der Website- oder Push-Bereiche. Nur der bereits pruefende Testskriptpfad wird eng freigegeben.",
+      "paths": [
+        "scripts/kids-dua-audio-playback-guard.js"
+      ],
+      "expiresAt": "2026-10-11T22:00:00.000Z"
+    },
+    {
       "id": "public-website-recovery-lock-20261010",
       "at": "2026-10-10T02:47:00+02:00",
       "approvedBy": "user-explicit-website-repair-restore-lock-autonomous-recovery",
