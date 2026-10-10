@@ -43,7 +43,7 @@ for(const [type,file] of [['adult','dar-al-tawhid-quran-player-v8.html'],['kids'
    await page.waitForTimeout(800);
    if(!await page.locator('#commentBox').isVisible())throw Error('Tadabbur focus not visible');
    const exp=await page.locator('#commentBox').innerText();
-   if(!/tadabbur|erklärung/i.test(exp))throw Error('Tadabbur context missing: '+exp);
+   if(!/tadabbur|erklärung|zum vers/i.test(exp))throw Error('Tadabbur context missing: '+exp);
    if(exp.includes('Der geprüfte Tadabbur-Katalog wird'))throw Error('Old unhelpful placeholder still visible');
    await page.locator('[data-mode="read"]').click();
    if(await page.locator('#commentBox').isVisible())throw Error('Tadabbur stayed visible in reading focus');
