@@ -311,3 +311,31 @@ body.kids.award .kids-reward{animation:v8Reward .5s ease}
  body.kids .app:before{opacity:.30;filter:saturate(1.32)}
  body.kids .app:after{background:linear-gradient(180deg,rgba(25,53,103,.25),rgba(27,48,95,.59) 34%,rgba(26,46,95,.82) 80%,#1d2b58)}
 }
+
+/* V8.2 source-integrated reader and native-like glyph refinement */
+.transport .play{font-size:0}
+.transport .play:before{content:"";display:block;height:23px;width:20px;background:currentColor;transform:translateX(2px);clip-path:polygon(0 0,100% 50%,0 100%)}
+.transport .play[aria-label="Pause"]:before{
+ transform:none;width:20px;height:23px;clip-path:none;
+ background:linear-gradient(90deg,currentColor 0 7px,transparent 7px 13px,currentColor 13px 20px)
+}
+.comment-box .canonical-source{
+ padding-top:10px;margin-top:12px;border-top:1px solid rgba(231,213,181,.18);
+ color:#b4c9c7;font-size:clamp(11px,1vw,13px);line-height:1.65
+}
+.comment-box .canonical-source a{
+ display:inline-block;margin-left:4px;padding:3px 0;color:#f0d29c;
+ text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(237,210,167,.45)
+}
+body.kids .comment-box .canonical-source{color:#d8e7fb;border-color:rgba(177,231,232,.25)}
+body.kids .comment-box .canonical-source a{color:#b5ffea;text-decoration-color:#88c2b3}
+body.kids.award .kids-reward{
+ animation:v8-kid-reward .65s cubic-bezier(.24,.76,.34,1);
+ color:#ffedb6;
+}
+@keyframes v8-kid-reward{
+ 0%{transform:translateY(5px) scale(.94);opacity:.2}
+ 60%{transform:translateY(-3px) scale(1.055);opacity:1}
+ 100%{transform:translateY(0) scale(1);opacity:1}
+}
+@media(prefers-reduced-motion:reduce){body.kids.award .kids-reward{animation:none}}
