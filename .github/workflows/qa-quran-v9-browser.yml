@@ -1,0 +1,31 @@
+name: Quran V9 Cinema Device QA
+on:
+  workflow_dispatch:
+  push:
+    branches: [preview/quran-player-browser-links-20261010]
+    paths: [.github/workflows/qa-quran-v9-browser.yml]
+permissions:
+  contents: read
+jobs:
+  browser-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Chromium
+        run: |
+          npm install --no-save --ignore-scripts --no-audit --no-fund playwright@1.57.0
+          npx playwright install --with-deps chromium
+      - name: V9 independent player 16 viewport and playback tests
+        run: node scripts/qa-quran-v9-browser.cjs
+      - name: Capture real rendered mobile layouts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v9-quran-device-screenshots
+          path: .qa-v9-screens/
+          retention-days: 21
+          if-no-files-found: ignore
