@@ -67,6 +67,9 @@
   var HUNDRED_HOLD_MS = 380;
   var MIN_SHOW_MS = 1250;
   var HARD_TIMEOUT_MS = 6500;
+  // Isolated /pwa/ boot: never present 100% before the real app has rendered.
+  var IS_DEDICATED_PWA = /^\/pwa(?:\/|$)/.test(String(location.pathname || ""));
+  var PWA_READY_TIMEOUT_MS = 16000;
   var THEME_FILLS = {
     dark: "#050706",
     light: "#f7f0df",
@@ -232,6 +235,7 @@
   function clearRamp() { if (timer) { clearInterval(timer); timer = null; } }
   function finish() {
     if (finished) return;
+    if (IS_DEDICATED_PWA && !viewLooksReady()) return;
     var elapsed = Date.now() - startedAt;
     if (elapsed < MIN_SHOW_MS) {
       if (!finishScheduled) { finishScheduled = true; setTimeout(finish, MIN_SHOW_MS - elapsed); }
@@ -272,14 +276,36 @@
   }
   function viewLooksReady() {
     try {
-      if (window.__darAppBootOk) return true;
+      if (window.__darAppBootOk && !IS_DEDICATED_PWA) return true;
       var view = document.getElementById("appView") || document.getElementById("pageRoot");
       if (!view) return false;
       var text = (view.textContent || "").replace(/\s+/g, " ").trim();
-      if (!text || text === "App wird geladen…") return false;
+      if (!text || text === "App wird geladen…" || text === "App wird geladen...") return false;
       if (view.querySelector(".loading") && text.length < 40) return false;
       return text.length > 24 || !!view.querySelector("section, article, .premium-surface, .sf-app, .qov-page, .more-page, .quiz-home");
     } catch (e) { return false; }
+  }
+  function showPwaBootFailure() {
+    if (finished || !IS_DEDICATED_PWA || viewLooksReady()) { maybeFinish(); return; }
+    clearRamp();
+    progress = MAX_FAKE;
+    paint();
+    var host = ensureOverlay();
+    if (!host || host.querySelector("#dar-pwa-boot-retry")) return;
+    var message = document.createElement("p");
+    message.setAttribute("role", "alert");
+    message.style.cssText = "max-width:320px;text-align:center;font-size:13px;line-height:1.5;margin:2px 18px 0";
+    message.textContent = "Die App konnte nicht vollständig geladen werden. Bitte erneut versuchen.";
+    var retry = document.createElement("button");
+    retry.id = "dar-pwa-boot-retry";
+    retry.type = "button";
+    retry.style.cssText = "border:1px solid #d4b56a;border-radius:12px;padding:11px 22px;background:transparent;color:inherit;font:700 13px system-ui;cursor:pointer";
+    retry.textContent = "Erneut laden";
+    retry.addEventListener("click", function () {
+      location.replace("/pwa/?pwa=1&retry=" + Date.now());
+    });
+    host.appendChild(message);
+    host.appendChild(retry);
   }
   function maybeFinish() {
     if (finished || window.__darSoftBootLocked) return;
@@ -368,9 +394,12 @@
     ensureOverlay();
     paint();
     startRamp();
-    hardTimer = setTimeout(function () { finish(); }, HARD_TIMEOUT_MS);
+    hardTimer = setTimeout(function () {
+      if (IS_DEDICATED_PWA && !viewLooksReady()) showPwaBootFailure();
+      else finish();
+    }, IS_DEDICATED_PWA ? PWA_READY_TIMEOUT_MS : HARD_TIMEOUT_MS);
     try {
-      if (/Android/i.test(String(navigator.userAgent || ""))) {
+      if (/Android/i.test(String(navigator.userAgent || "")) && !IS_DEDICATED_PWA) {
         setTimeout(function () { if (!finished) finish(); }, 2200);
         setTimeout(function () { if (finished) return; try { releaseChrome(); finished = true; window.__darSoftBootLocked = true; } catch (e3) {} }, 3800);
       }
@@ -378,7 +407,7 @@
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", function () { ensureOverlay(); syncEdgeFill(); paint(); setTimeout(maybeFinish, 60); }, { once: true });
     } else { syncEdgeFill(); setTimeout(maybeFinish, 60); }
-    window.addEventListener("load", function () { setTimeout(maybeFinish, 40); setTimeout(function () { if (!finished) finish(); }, 4000); });
+    window.addEventListener("load", function () { setTimeout(maybeFinish, 40); setTimeout(function () { if (!finished && (!IS_DEDICATED_PWA || viewLooksReady())) finish(); }, 4000); });
     window.addEventListener("pageshow", function (ev) { try { if (ev && ev.persisted && /Android/i.test(String(navigator.userAgent || ""))) { location.reload(); return; } } catch (e) {} setTimeout(maybeFinish, 40); });
     window.addEventListener("hashchange", function () { if (finished || window.__darSoftBootLocked) return; setTimeout(maybeFinish, 60); });
     try {
