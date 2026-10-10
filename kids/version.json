@@ -1,7 +1,7 @@
 {
-  "buildId": "kids-shell-v201-dua-v4-1306",
-  "label": "KIDS · V1.09.22",
-  "releasedAt": "2026-10-10T05:00:00Z",
+  "buildId": "kids-shell-v201-dua-v4-1307",
+  "label": "KIDS · V1.09.23",
+  "releasedAt": "2026-10-10T11:00:00Z",
   "note": "KIDS V1.09.21: Startbildschirm wird beim Öffnen anhand der realen Bildschirmhöhe und der festen unteren Tabnavigation ausgerichtet. Während manuellen Scrollens bleibt die berechnete Hero- und Gebetszeiten-Geometrie stabil; kein störendes Nachwachsen des Bildes. Auf iPhone, Android und iPad bleibt die bestehende flexible 1304-Geometrie, das freigegebene Moscheemotiv und alle fünf Gebetszeiten erhalten. Sehr kleine Geräte bleiben scrollbar.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1306",
+    "serviceWorkerCache": "v1307",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
