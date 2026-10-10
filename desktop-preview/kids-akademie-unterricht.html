@@ -1724,8 +1724,223 @@ body .academy-home .today-class h2,body .academy-home .subjects-title h2{
  body .academy-home > .overview-hero > #academyHeroImage{transition:none!important}
 }
 
+
+/* KIDS V7.3 FOCUS LESSON – self-contained pages; vertical scroll only as accessible fallback */
+body .academy-home > .overview-hero{
+ display:flex!important;align-items:center!important;justify-content:flex-start!important;
+ min-height:0!important;height:clamp(270px,28vw,340px)!important;
+ max-height:clamp(270px,28vw,340px)!important;
+ padding:clamp(16px,2.6vw,27px)!important;
+ box-sizing:border-box!important
+}
+body .academy-home > .overview-hero .overview-copy,
+body[data-profile="girl"] .academy-home > .overview-hero .overview-copy{
+ padding-top:30px!important;width:61%!important;max-width:61%!important;
+ align-self:center!important
+}
+body .academy-home > .overview-hero .overview-copy h1,
+body[data-profile="girl"] .academy-home > .overview-hero .overview-copy h1{
+ font-size:clamp(35px,5.1vw,54px)!important;line-height:1.01!important;
+ margin:8px 0 8px!important
+}
+body .academy-home > .overview-hero .greeting-salam{
+ font-size:clamp(16px,2vw,20px)!important
+}
+body .academy-home > .overview-hero .greeting-followup{
+ font-size:clamp(13px,1.5vw,16px)!important
+}
+body .academy-home > .overview-hero .hero-learning-pill{
+ padding:6px 10px!important;margin-top:7px!important
+}
+body .academy-home > .overview-hero .kicker{
+ padding:5px 9px!important;max-width:100%!important
+}
+body .academy-home > .overview-hero .hero-profile-chip{
+ top:10px!important;right:11px!important
+}
+body .lesson-main{padding-bottom:calc(9px + env(safe-area-inset-bottom))!important}
+body .lesson-main .stage-tracker{
+ margin:3px 0 8px!important;padding:8px 5px!important;
+ scroll-margin-top:calc(74px + env(safe-area-inset-top))!important
+}
+body .lesson-main .lesson-stage{
+ padding:clamp(15px,3vw,23px)!important;overflow:hidden;
+ min-height:0!important
+}
+body .lesson-main .lesson-stage h2{
+ font-size:clamp(23px,4.8vw,32px)!important;line-height:1.16!important;
+ margin:5px 0 9px!important
+}
+body .lesson-main .lesson-stage .stage-lead{
+ font-size:clamp(16px,2.6vw,19px)!important;line-height:1.4!important;margin:6px 0 10px!important
+}
+body .lesson-main .lesson-stage .stage-audio{margin:12px 0 5px!important}
+body .lesson-main .lesson-stage .voice-note:not(#voiceStatus){
+ display:none!important
+}
+body .lesson-main .lesson-stage .choice-audio-help,
+body .lesson-main .lesson-stage #micInfo{
+ font-size:12px!important
+}
+body .lesson-main .lesson-stage .question-panel{gap:9px!important}
+body .lesson-main .lesson-stage .question-prompt-card{padding:12px 15px!important}
+body .lesson-main .lesson-stage .academy-buddy-guide{
+ padding:7px!important;gap:9px!important;margin-bottom:7px!important
+}
+body .lesson-main .lesson-stage .academy-buddy-guide img{width:37px!important;height:37px!important}
+body .lesson-main .lesson-stage .academy-buddy-guide span{display:none!important}
+body .lesson-main .lesson-stage .academy-buddy-guide strong{font-size:15px!important}
+body .lesson-main .lesson-stage .question-prompt{
+ margin:6px 0 10px!important;line-height:1.28!important;
+ font-size:clamp(18px,3vw,23px)!important
+}
+body .lesson-main .lesson-stage .question-prompt-card #repeat{min-height:42px!important;padding:8px 14px!important}
+body .lesson-main .lesson-stage .question-top{margin:0!important}
+body .lesson-main .lesson-stage .progress{margin:7px 0 10px!important}
+body .lesson-main .lesson-stage .answer-options{margin:8px 0!important}
+body .lesson-main .lesson-stage .answer-options .pill{min-height:47px!important}
+body .lesson-main .lesson-stage .choice-row{margin:5px 0!important}
+body .lesson-main .lesson-stage .choice-button,
+body .lesson-main .lesson-stage .choice-listen{
+ min-height:54px!important;padding:11px 12px!important
+}
+body .lesson-main .lesson-stage .answer-bottom{gap:7px!important;margin:9px 0!important}
+body .lesson-main .lesson-stage .answer-bottom #check{min-height:50px!important}
+body .lesson-main .lesson-stage .answer-bottom #hint{min-height:40px!important}
+body .lesson-main .lesson-meta{display:none!important}
+/* Focus pages within each lesson step. Full content remains in the DOM and accessible on its own card. */
+body .lesson-stage[data-lesson-step="1"] #explainWords [data-spoken],
+body .lesson-stage[data-lesson-step="2"] .lesson-source-block,
+body .lesson-stage[data-lesson-step="2"] .teacher-explainer,
+body .lesson-stage[data-lesson-step="4"] .recap-item,
+body .lesson-stage[data-lesson-step="4"] .recap-reflection{
+ display:none!important
+}
+body .lesson-stage[data-lesson-step="1"] #explainWords [data-spoken].is-focus-selected{
+ display:block!important;min-height:125px!important;
+ background:#fff!important;border:1px solid #cae5dc!important;
+ font-size:clamp(19px,3.3vw,25px)!important;line-height:1.43!important;
+ margin:10px 0!important;padding:25px 16px 25px 54px!important
+}
+body .lesson-stage[data-lesson-step="2"] .lesson-source-block.is-focus-selected{
+ display:block!important;margin:8px 0 0!important;padding:14px 16px!important
+}
+body .lesson-stage[data-lesson-step="2"] .teacher-explainer.is-focus-selected{
+ display:block!important;padding:16px 19px!important;font-size:clamp(18px,2.8vw,23px)!important;line-height:1.48!important
+}
+body .lesson-stage[data-lesson-step="2"] .stage-audio:not(.is-focus-selected){
+ display:none!important
+}
+body .lesson-stage[data-lesson-step="2"] .lesson-source-block .eyebrow{
+ font-size:clamp(12px,1.8vw,15px)!important;margin:4px 0!important
+}
+body .lesson-stage[data-lesson-step="2"] .lesson-source-block .arabic-verse{
+ font-size:clamp(28px,5.5vw,39px)!important;line-height:1.65!important;margin:9px 0!important
+}
+body .lesson-stage[data-lesson-step="2"] .lesson-source-block .audio-caption{
+ margin:4px 0!important;font-size:12px!important
+}
+body .lesson-stage[data-lesson-step="2"] .lesson-source-block .quote{
+ margin:8px 0!important;font-size:clamp(17px,2.9vw,22px)!important;line-height:1.36!important
+}
+body .lesson-stage[data-lesson-step="2"] .lesson-source-block .source{
+ margin:10px 0 0!important;padding:7px 0 0!important;font-size:clamp(12px,1.75vw,14px)!important;line-height:1.4!important
+}
+body .lesson-stage[data-lesson-step="2"] .lesson-source-block .arabic-listen-row{gap:7px!important;margin:8px 0!important}
+body .lesson-stage[data-lesson-step="2"] .lesson-source-block .arabic-play-button{
+ min-height:45px!important;padding:8px 10px!important
+}
+body .lesson-stage[data-lesson-step="4"] .recap-lesson{
+ display:block!important;min-height:0!important
+}
+body .lesson-stage[data-lesson-step="4"] .recap-item.is-focus-selected{
+ display:block!important;min-height:160px!important;
+ padding:23px 20px!important;font-size:clamp(19px,3vw,24px)!important
+}
+body .lesson-stage[data-lesson-step="4"] .recap-item p{
+ font-size:clamp(18px,3vw,23px)!important;line-height:1.45!important
+}
+body .lesson-stage[data-lesson-step="4"] .recap-reflection.is-focus-selected{
+ display:block!important;margin:10px 0!important
+}
+body .lesson-stage[data-lesson-step="4"] .recap-reflection:not(.is-focus-selected) + #backAfterLesson{
+ display:none!important
+}
+body .lesson-stage[data-lesson-step="4"] .stage-audio:not(.is-focus-selected){display:none!important}
+body .lesson-stage[data-lesson-step="4"] #summaryText:not(.is-focus-selected){display:none!important}
+body .lesson-stage[data-lesson-step="4"] #backAfterLesson:not(.is-focus-selected){display:none!important}
+body .focus-page-navigation{
+ display:flex!important;justify-content:center!important;align-items:center!important;
+ gap:10px!important;flex-wrap:wrap!important;max-width:100%;
+ margin:13px auto 0!important;padding:10px 0 0!important;
+ border-top:1px solid rgba(80,135,139,.16)
+}
+body .focus-page-navigation .focus-page-count{
+ flex:1 1 85px;min-width:77px;text-align:center;
+ font-size:clamp(13px,2vw,16px);font-weight:850;color:#607987
+}
+body .focus-page-navigation button{
+ flex:0 1 auto!important;border-radius:14px!important;min-height:44px!important;
+ background:#edf8f6!important;border:1px solid #b2d8d2!important;
+ color:#145967!important;padding:9px 14px!important;font-size:clamp(13px,2vw,16px)!important;
+ font-weight:850!important;min-width:78px
+}
+body .focus-page-navigation button[data-focus-next]{
+ background:#f1c977!important;color:#25414c!important;border-color:#e7b75c!important
+}
+body .focus-page-navigation button:disabled{opacity:.4!important;cursor:default}
+body[data-profile="girl"] .focus-page-navigation button{
+ background:#f7e9f7!important;border-color:#dfbddd!important;color:#693a73!important
+}
+body[data-profile="girl"] .focus-page-navigation button[data-focus-next]{
+ background:#f4c6af!important;color:#4d3b52!important
+}
+body .lesson-stage[data-lesson-step="1"] .spoken-paragraph{min-height:0!important}
+body .lesson-stage[data-lesson-step="2"] .evidence-region{display:block!important}
+body .lesson-stage[data-lesson-step="4"] .recap-lesson{gap:0!important}
+@media(max-width:700px){
+ body .academy-home > .overview-hero{
+  height:clamp(255px,70vw,303px)!important;max-height:clamp(255px,70vw,303px)!important;
+  min-height:0!important;padding:10px 14px!important
+ }
+ body .academy-home > .overview-hero .overview-copy{
+  width:100%!important;max-width:100%!important;
+  padding-top:39px!important;align-self:flex-start!important
+ }
+ body .academy-home > .overview-hero .overview-copy h1,
+ body[data-profile="girl"] .academy-home > .overview-hero .overview-copy h1{
+  font-size:clamp(33px,8.8vw,40px)!important;margin:6px 0 6px!important
+ }
+ body .academy-home > .overview-hero .overview-copy .kicker{
+  font-size:10px!important;max-width:70%!important
+ }
+ body .academy-home > .overview-hero .greeting-salam{font-size:clamp(14px,3.85vw,17px)!important}
+ body .academy-home > .overview-hero .greeting-followup{font-size:clamp(12px,3.3vw,14px)!important}
+ body .academy-home > .overview-hero .hero-learning-pill{font-size:10px!important;padding:4px 8px!important}
+ body .academy-home > .overview-hero > #academyHeroImage{object-position:57% center!important}
+ body .lesson-main .stage-tracker{padding:6px 3px!important;margin:2px 0 6px!important}
+ body .lesson-main .lesson-stage{padding:12px 13px!important;border-radius:21px!important}
+ body .lesson-main .lesson-stage h2{font-size:clamp(21px,5.7vw,27px)!important;margin:4px 0 8px!important}
+ body .lesson-main .lesson-stage .kicker{font-size:11px!important}
+ body .lesson-main .lesson-stage .question-prompt-card{padding:10px!important}
+ body .lesson-main .lesson-stage .question-prompt{font-size:clamp(18px,4.9vw,21px)!important}
+ body .lesson-main .lesson-stage .choice-button,
+ body .lesson-main .lesson-stage .choice-listen{min-height:51px!important}
+ body .lesson-stage[data-lesson-step="2"] .lesson-source-block.is-focus-selected{padding:11px!important}
+ body .lesson-stage[data-lesson-step="2"] .lesson-source-block .arabic-verse{
+  font-size:clamp(27px,7.5vw,35px)!important;line-height:1.75!important
+ }
+ body .lesson-stage[data-lesson-step="2"] .lesson-source-block .source{font-size:12px!important}
+ body .focus-page-navigation{gap:7px!important;margin-top:10px!important;padding-top:8px!important}
+ body .focus-page-navigation button{min-height:43px!important;padding:8px 10px!important}
+}
+@media(max-height:700px) and (max-width:700px){
+ body .lesson-main .stage-tracker{margin:0 0 4px!important}
+ body .lesson-main .lesson-stage .stage-lead{font-size:15px!important}
+}
+
 </style></head>
-<body data-profile="boy" data-preview-release="V7.2-20261010" data-preview-deploy="v7.2-visible-image-hero"><main class="wrap">
+<body data-profile="boy" data-preview-release="V7.3-20261010" data-preview-deploy="v7.3-focus-cards"><main class="wrap">
 
 <header class="academy-header kids-detail-appbar" aria-label="Navigationsleiste Lernakademie">
  <button class="academy-nav-back" id="academyNavBack" type="button" aria-label="Zurück"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/><path d="M9 12h11"/></svg></button>
@@ -2241,17 +2456,104 @@ function begin(){
  }
  showStep(step,false);updateAcademyAppbar();window.scrollTo(0,0);
 }
+
+/* Single-focus lesson cards: full text remains present, no page is silently discarded. */
+const focusPages={1:0,2:0,4:0};
+function focusPieces(stageNumber){
+ if(stageNumber===1)return all("#explainWords [data-spoken]");
+ if(stageNumber===2)return [...all('[data-lesson-step="2"] .lesson-source-block'),$('.teacher-explainer')];
+ if(stageNumber===4)return [...all('[data-lesson-step="4"] .recap-item'),$('.recap-reflection')];
+ return [];
+}
+function focusUpdate(stageNumber,target,{silent=false}={}){
+ const parts=focusPieces(stageNumber);if(!parts.length)return;
+ const i=Math.max(0,Math.min(parts.length-1,target));focusPages[stageNumber]=i;
+ parts.forEach((element,index)=>element.classList.toggle("is-focus-selected",i===index));
+ const el=stages[stageNumber];
+ el.dataset.focusPage=String(i);
+ const panel=el.querySelector(".focus-page-navigation");
+ if(panel){
+  panel.querySelector(".focus-page-count").textContent=(i+1)+" / "+parts.length;
+  panel.querySelector("[data-focus-prev]").disabled=i===0;
+  panel.querySelector("[data-focus-next]").disabled=i===parts.length-1;
+  const names=stageNumber===2?["Qurʾān","Sunnah","Erklärung"]:stageNumber===1?["Satz 1","Satz 2","Satz 3","Satz 4"]:["Merksatz","Qurʾān & Sunnah","Alltag","Abschluss"];
+  panel.querySelector(".focus-page-count").setAttribute("aria-label",names[i]+" – Seite "+(i+1)+" von "+parts.length);
+ }
+ if(stageNumber===2){
+  el.querySelector(".stage-audio").classList.toggle("is-focus-selected",i===2);
+ }
+ if(stageNumber===4){
+  el.querySelector(".stage-audio").classList.toggle("is-focus-selected",i<3);
+  $("#summaryText").classList.toggle("is-focus-selected",i===3);
+  $("#backAfterLesson").classList.toggle("is-focus-selected",i===3);
+ }
+ if(stageNumber===1){
+  const title=$("#explainTitle");if(title)title.textContent="Wahrhaftigkeit verstehen";
+ }
+ if(!silent){
+ stopSpeech();stopAudio();
+ if(stageNumber===1||stageNumber===2){
+ const b=$("#forwardStep");
+ if(b&&!b.hidden)b.firstChild.textContent=
+ stageNumber===1?(i<3?"Nächster Satz ":"Zu Qurʾān und Sunnah "):
+ i===0?"Zur Sunnah ":i===1?"Zur Erklärung ":"Jetzt mitdenken ";
+ }
+}
+}
+function focusMove(stageNumber,delta){
+ const current=focusPages[stageNumber]||0;
+ const items=focusPieces(stageNumber);const target=Math.max(0,Math.min(items.length-1,current+delta));
+ if(target===current)return;
+ focusUpdate(stageNumber,target);
+ // Keep child in a stable focus area rather than scrolling through the entire page.
+ const root=$(".stage-tracker");
+ if(root)root.scrollIntoView({behavior:"instant",block:"start"});
+}
+function initFocusControls(){
+ for(const stageNumber of [1,2,4]){
+  const el=stages[stageNumber];
+  if(el.querySelector(".focus-page-navigation"))continue;
+  const bar=document.createElement("nav");bar.className="focus-page-navigation";
+  bar.setAttribute("aria-label","Seiten innerhalb des Lernschritts");
+  const prev=document.createElement("button");prev.type="button";prev.dataset.focusPrev="";
+  prev.textContent="← Zurück";prev.onclick=()=>focusMove(stageNumber,-1);
+  const count=document.createElement("span");count.className="focus-page-count";
+  count.setAttribute("aria-live","polite");count.textContent="1 / 3";
+  const next=document.createElement("button");next.type="button";next.dataset.focusNext="";
+  next.textContent="Weiter →";next.onclick=()=>focusMove(stageNumber,1);
+  bar.append(prev,count,next);el.appendChild(bar);
+  focusUpdate(stageNumber,0,{silent:true});
+ }
+ const hadith=all('[data-lesson-step="2"] .lesson-source-block')[1];
+ if(hadith&&!hadith.querySelector(".focus-hadith-play")){
+  const b=document.createElement("button");b.type="button";
+  b.className="pill soft-gold focus-hadith-play";b.textContent="Hadith anhören";
+  b.onclick=()=>speak(2,[hadith.querySelector(".quote").textContent]);
+  hadith.querySelector(".quote").before(b);
+ }
+}
+
 function showStep(n,scroll=true){
  if(n<0||n>unlocked||n>=5)return;
  stopAll();step=n;document.body.dataset.academyStep=String(n);stages.forEach((el,i)=>el.hidden=i!==n);
+ if([1,2,4].includes(n))focusUpdate(n,focusPages[n],{silent:true});
  all("[data-jump-step]").forEach(b=>{const i=+b.dataset.jumpStep;b.disabled=i>unlocked;b.classList.toggle("is-current",i===n);b.classList.toggle("is-done",i<n);b.setAttribute("aria-current",i===n?"step":"false")});
  $("#previousStep").hidden=n===0;$("#forwardStep").hidden=n>=3;$("#lessonNavigation").hidden=n>=3;
- if(n<3)$("#forwardStep").firstChild.textContent=["Zur Erklärung ","Zu Qurʾān und Sunnah ","Jetzt mitdenken "][n];
+ if(n<3)$("#forwardStep").firstChild.textContent=
+ (n===1&&focusPages[1]<3)?"Nächster Satz ":
+ (n===2&&focusPages[2]===0)?"Zur Sunnah ":
+ (n===2&&focusPages[2]===1)?"Zur Erklärung ":
+ ["Zur Erklärung ","Zu Qurʾān und Sunnah ","Jetzt mitdenken "][n];
  if(n===3&&!finished)showQuestion();if(n===4)showRecap();
  saveDraft();
- if(scroll)$(".stage-tracker").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});
+ if(scroll)$(".stage-tracker").scrollIntoView({behavior:"instant",block:"start"});
 }
-function nextStep(){if(step<3){unlocked=Math.max(unlocked,step+1);showStep(step+1)}}
+function nextStep(){
+ if((step===1||step===2)&&focusPages[step]<focusPieces(step).length-1){
+  focusMove(step,1);return;
+ }
+ if(step<3){unlocked=Math.max(unlocked,step+1);showStep(step+1);}
+}
 function playRecitation(key){
  const data=TRACKS[key];if(!data)return;
  if(audio&&audioKey===key&&!audio.paused){stopAudio();return}
@@ -2275,7 +2577,7 @@ function speak(index,custom){
  pauseVoiceClip();stopSpeech();stopAudio();
  const token=++voiceToken;
  const lines=custom||(index===0?[$("#welcomeSalam").textContent,$("#welcomeFollowup").textContent,$('[data-lesson-step="0"] .stage-body').textContent]:index===1?all("#explainWords [data-spoken]").map(x=>x.textContent):index===2?[$(".teacher-explainer").textContent]:index===4?all(".recap-lesson p").map(x=>x.textContent):[]);
- const highlights=index===1?all("#explainWords [data-spoken]"):index===2?[$(".teacher-explainer")]:[];
+ const highlights=index===1?(custom?[all("#explainWords [data-spoken]")[focusPages[1]]]:all("#explainWords [data-spoken]")):index===2?[$(".teacher-explainer")]:[];
  let k=0;
  const live=()=>token===voiceToken&&index===step;
  function deviceRead(t){
@@ -2443,9 +2745,17 @@ $("#subjectBack").onclick=home;$("#subjectStart").onclick=begin;
  $("#academyNavBack").onclick=academyNavBack;
  $("#academyNavHome").onclick=()=>location.assign("/kids/");
 $("#backToAcademy").onclick=home;$("#backAfterLesson").onclick=home;
-$("#previousStep").onclick=()=>showStep(step-1);$("#forwardStep").onclick=nextStep;
+$("#previousStep").onclick=()=>{
+ if((step===1||step===2)&&focusPages[step]>0){focusMove(step,-1);return;}
+ showStep(step-1);
+ };$("#forwardStep").onclick=nextStep;
 all("[data-jump-step]").forEach(b=>b.onclick=()=>showStep(Number(b.dataset.jumpStep)));
-all("[data-speak-stage]").forEach(b=>b.onclick=()=>speak(Number(b.dataset.speakStage)));
+all("[data-speak-stage]").forEach(b=>b.onclick=()=>{
+ const num=Number(b.dataset.speakStage);
+ if(num===1)return speak(1,[focusPieces(1)[focusPages[1]].textContent]);
+ if(num===4&&focusPages[4]<3)return speak(4,[focusPieces(4)[focusPages[4]].textContent]);
+ speak(num);
+ });
 all("[data-arabic-audio]").forEach(b=>b.onclick=()=>playRecitation(b.dataset.arabicAudio));
 $("#openWrite").onclick=()=>mode("text");$("#openVoice").onclick=()=>mode("voice");
 $("#check").onclick=check;
@@ -2465,6 +2775,6 @@ window.addEventListener("storage",e=>{if(["kids.activeProfile","kids.profiles.v1
 window.addEventListener("pageshow",()=>syncProfile(true));
 document.addEventListener("visibilitychange",()=>{if(document.hidden)stopAll();else syncProfile()});
 window.addEventListener("pagehide",stopAll);
-syncProfile(true);hideLesson();updateAcademyAppbar();
+initFocusControls();syncProfile(true);hideLesson();updateAcademyAppbar();
 })();
 </script></body></html>
