@@ -1,5 +1,5 @@
 (function(){
-  /* DUA_AUDIO_RELEASE_1244_FINAL_SYNCED · V4_SAFE_BREATH_TAIL_1308 · V4_SLOW_POST_LOAD_FIX_VERIFIED */
+  /* DUA_AUDIO_RELEASE_1244_FINAL_SYNCED · V4_SEPARATE_SLOW_1310 · V4_BREATH_EDGE_1310 */
   "use strict";
 
   // FUSHA_AUDIO_RELEASE_20261007_V3 · full v2 · slow/word v3 · exact vocalized Arabic
@@ -29,7 +29,7 @@
   var cleanWordCache=new Map();
   var cleanCacheMax=55;
   var CLEAN_GAP=0.19;
-  var CLEAN_SLOW_RATE=0.86;
+  var CLEAN_SLOW_RATE=0.77;
   function cleanContextReady(){
     try{
       var Ctor=window.AudioContext||window.webkitAudioContext;
@@ -75,18 +75,21 @@
     var quietRun=0,frameSeconds=step/rate;
     for(var cut=first+1;cut<last;cut++){
       quietRun=rms[cut]<quietGate?quietRun+1:0;
-      if(quietRun*frameSeconds<.180)continue;
+      if(quietRun*frameSeconds<.090)continue;
       var before=cut-quietRun+1,spokenPeak=0,afterPeak=0;
       if((before-first)*frameSeconds<.20||(last-cut)*frameSeconds>.48)continue;
       for(var head=first;head<before;head++)spokenPeak=Math.max(spokenPeak,rms[head]);
       for(var tail=cut+1;tail<=last;tail++)afterPeak=Math.max(afterPeak,rms[tail]);
-      if(afterPeak>0&&afterPeak<spokenPeak*.46){
+      // A 90-179ms gap is only enough for a VERY quiet detached exhale.
+      // Broader 180ms gaps retain the previous conservative 46% threshold.
+      var strength=quietRun*frameSeconds>=.180?.46:.22;
+      if(afterPeak>0&&afterPeak<spokenPeak*strength){
         last=Math.max(first+1,before-1);
         break;
       }
     }
     var start=Math.max(0,first*step/rate-.090);
-    var end=Math.min(duration,(last+1)*step/rate+.095);
+    var end=Math.min(duration,(last+1)*step/rate+.075);
     if(end-start<Math.min(.22,duration*.28))return whole;
     return{buffer:buffer,start:start,end:end};
   }
@@ -379,7 +382,11 @@
     var slow=root.querySelector('[data-dsl="slow"]');
     var follow=root.querySelector('[data-dsl="follow"]');
     if(full)full.textContent=playing&&mode==="full"?"Stopp":"Ganz hören";
-    if(slow)slow.textContent=playing&&mode==="slow"?"Stopp":"Langsam hören";
+    if(slow){
+      slow.textContent=playing&&mode==="slow"?"Stopp · 0,77×":"Langsam · 0,77×";
+      slow.setAttribute("aria-label","Langsam hören: deutlich verlangsamte Fuṣḥā-Aufnahme mit 77 Prozent Tempo");
+      slow.setAttribute("aria-pressed",String(playing&&mode==="slow"));
+    }
     if(follow)follow.textContent=playing&&mode==="follow"?"Stopp":"Wort für Wort";
     root.classList.toggle("phrase-playing",playing&&(mode==="full"||mode==="slow"));
   }
@@ -589,6 +596,7 @@
     audio.onerror=null;
     audio.oncanplay=null;
     audio.onloadedmetadata=null;
+    audio.onratechange=null;
     audio.ontimeupdate=null;
     audio.onseeked=null;
     paintControls();
@@ -618,7 +626,8 @@
         audio.currentTime=0;
         var requestedRate=Math.max(0.75,Math.min(1,Number(playRate)||1));
         // HTMLMediaElement.load() resets playbackRate to defaultPlaybackRate.
-        // Apply both so iOS/WebKit really plays the existing master at 0.86x.
+        // Apply and reassert on WebKit ratechange/loadedmetadata, including when
+        // Safari resets a slow clip after switching normal -> slow -> word.
         try{audio.defaultPlaybackRate=requestedRate}catch(e){}
         audio.preservesPitch=true;
         if('webkitPreservesPitch' in audio)audio.webkitPreservesPitch=true;
@@ -626,14 +635,17 @@
         audio.onerror=function(){finish(false)};
         try{audio.load()}catch(e){}
         audio.playbackRate=requestedRate;
-        audio.onplaying=function(){
+        function ensureRequestedRate(){
           if(token===playToken&&Math.abs(audio.playbackRate-requestedRate)>.001){
             audio.playbackRate=requestedRate;
           }
-        };
+        }
+        audio.onloadedmetadata=ensureRequestedRate;
+        audio.onratechange=ensureRequestedRate;
+        audio.onplaying=ensureRequestedRate;
         if((mode==="full"||mode==="slow")&&root&&root.classList.contains("open")&&currentDua){
           // HTMLAudio.currentTime is the SOURCE clock even when playbackRate
-          // is 0.86. Use NORMAL word markers for slowed normal recordings.
+          // is the original recording clock even at the explicit 0.77× rate.
           // Use SLOW markers only for a distinct approved native slow clip.
           var approvedSlow=mode==="slow"?approvedNativeSlowUrl(currentDua):"";
           var nativeSlow=!!approvedSlow&&String(url)===approvedSlow;
@@ -728,19 +740,20 @@
     }
     // Reuse the same uninterrupted Fuṣḥā master. The prior separately
     // synthesized 'slow' take carried audible pacing/breath artefacts.
-    // Moderate native pitch-preserving playback slows evenly; no separately generated breath cues.
+    // A clearly audible 0.77× pitch-preserving slowdown (vs subtle old 0.86×)
+    // remains continuous; no stage cues or synthetic breath prompts.
     var rate=slow?CLEAN_SLOW_RATE:1;
     var direct=requestedDua.audioArabicUrl;
     if(direct){
       return playUrl(direct,slow?"slow":"full",
-        slow?"Gleichmäßig langsame Fuṣḥā-Aufnahme …":"Flüssige Fuṣḥā-Gesamtaufnahme …",rate);
+        slow?"Deutlich langsamer (0,77×), ruhig und flüssig …":"Flüssige Fuṣḥā-Gesamtaufnahme …",rate);
     }
     var run=function(p){
       if(requestId!==latestPhraseRequest||currentDua!==requestedDua)return false;
       var e=entry(p.normal,arabicText(requestedDua));
       if(!e||!e.url)throw new Error("missing-phrase");
       return playUrl(e.url,slow?"slow":"full",
-        slow?"Langsam und gleichmäßig zuhören …":"Duʿāʾ anhören …",rate);
+        slow?"Deutlich langsamer (0,77×) zuhören …":"Duʿāʾ anhören …",rate);
     };
     if(packs){
       try{return run(packs)}catch(e){setStatus("Diese Aufnahme ist nicht verfügbar.","bad");return false}
@@ -855,11 +868,11 @@
           '<div class="dsl-bottom-block">'+
           '<div class="dsl-controls">'+
             '<button class="dsl-play primary" type="button" data-dsl="full">Ganz hören</button>'+
-            '<button class="dsl-play slow" type="button" data-dsl="slow">Langsam hören</button>'+
+            '<button class="dsl-play slow" type="button" data-dsl="slow">Langsam · 0,77×</button>'+
  
             '<button class="dsl-play follow" type="button" data-dsl="follow">Wort für Wort</button>'+
           '</div>'+
-          '<div class="dsl-speednote">Flüssig hören · Langsam mitlesen · Wörter einzeln lernen</div>'+
+          '<div class="dsl-speednote">Ganz: natürlich · Langsam: echtes 0,77×-Tempo · Wort: einzeln</div>'+
           '<div class="dsl-stepnav">'+
             '<button type="button" data-dsl="prev">‹ Vorheriges Wort</button>'+
             '<button type="button" data-dsl="next">Nächstes Wort ›</button>'+
@@ -981,14 +994,14 @@
     // Keep preview and full-screen lesson on the SAME verified phrase source.
     // Do not route preview through the old [slowly] master with breath artefacts.
     var direct=dua.audioArabicUrl,playRate=slow?CLEAN_SLOW_RATE:1;
-    if(direct)return playUrl(direct,slow?"slow":"full",slow?"Ruhig und natürlich zuhören …":"Duʿāʾ anhören …",playRate);
+    if(direct)return playUrl(direct,slow?"slow":"full",slow?"Langsam hören (0,77×) …":"Duʿāʾ anhören …",playRate);
     var run=function(p){
       if(requestId!==latestPhraseRequest||currentDua!==dua)return false;
       var native=slow?approvedNativeSlowUrl(dua):"";
       var e=entry(p.normal,arabicText(dua));
       if(!native&&(!e||!e.url))throw new Error("missing-preview");
       return playUrl(native||(e&&e.url),slow?"slow":"full",
-        slow?"Ruhig und natürlich zuhören …":"Duʿāʾ anhören …",native?1:playRate);
+        slow?"Langsam hören (0,77×) …":"Duʿāʾ anhören …",native?1:playRate);
     };
     if(packs)return run(packs);
     return loadPacks().then(run);
