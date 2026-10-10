@@ -3864,8 +3864,12 @@ function speak(index,custom){
   const owner=window.DARKidsOwnerVoice;
   if(!waitedForMaster&&(!owner||typeof owner.isLoaded==="function"&&!owner.isLoaded())){
    waitedForMaster=true;
-   const completion=Promise.resolve(prepareOwnerVoice()).then(api=>
-    api&&typeof api.whenReady==="function"?api.whenReady():null);
+   const completion=Promise.resolve(prepareOwnerVoice()).then(api=>{
+    if(!api)return null;
+    const quick=typeof api.whenAcademyReady==="function"?api.whenAcademyReady():null;
+    const allReady=typeof api.whenReady==="function"?api.whenReady():null;
+    return quick&&allReady?Promise.race([quick,allReady]):quick||allReady;
+   });
    Promise.race([completion,new Promise(resolve=>setTimeout(resolve,1050))])
     .then(()=>{if(live())next()}).catch(()=>{if(live())next()});
    return;
