@@ -13,7 +13,7 @@ const kids=read("kids/start.html");
 const native=read("ios/DarAlTawhidKidsOwnerTest/Sources/KidsOwnerTestApp.swift");
 const nativeProject=read("ios/DarAlTawhidKidsOwnerTest/project.yml");
 for(const [name,code] of [
- ["worker",worker],["owner studio",studio],["academy access",unlock]
+ ["worker",worker.replace(/export default\\s*\\{/,"const __worker = {")],["owner studio",studio],["academy access",unlock]
 ])assert.doesNotThrow(()=>new vm.Script(code,{filename:name}),name+" must parse");
 assert.match(config,/name = "dar-al-tawhid-kids-owner-test"/);
 assert.match(config,/main = "cloudflare\/kids-owner-test-worker\.js"/);
