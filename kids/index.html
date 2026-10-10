@@ -3696,34 +3696,58 @@ function kidsResetMainScroll(){
   if(document.body)document.body.scrollTop=0;
   try{window.scrollTo(0,0)}catch(e){}
 }
-/* KIDS_TAB_SCROLL_SETTLE_V1321
-   iOS momentum/scroll anchoring may outlive the first two frames after a
-   tab switch. Reconcile a bounded time later, but never override a genuine
-   user-initiated swipe or a newer tab change. */
+/* KIDS_TAB_SCROLL_STABILITY_V1322
+   iOS may continue an old scroll gesture, restore an anchor or scroll on
+   focus AFTER the two initial frames. For 900ms after navigation, correct
+   only unrequested movement. Do not fight a new touch, wheel or key action.
+   Readers and detail panes are independent and are not observed. */
 var kidsTabEpoch=0;
 var kidsLastUserScroll=0;
-document.addEventListener("touchmove",function(){kidsLastUserScroll=Date.now()},{passive:true,capture:true});
-document.addEventListener("wheel",function(){kidsLastUserScroll=Date.now()},{passive:true,capture:true});
+function kidsMarkUserScroll(){kidsLastUserScroll=Date.now();}
+document.addEventListener("touchstart",kidsMarkUserScroll,{passive:true,capture:true});
+document.addEventListener("touchmove",kidsMarkUserScroll,{passive:true,capture:true});
+document.addEventListener("wheel",kidsMarkUserScroll,{passive:true,capture:true});
+document.addEventListener("keydown",function(e){
+  if(["ArrowDown","ArrowUp","PageDown","PageUp","Home","End"," "].indexOf(e.key)>=0)
+    kidsMarkUserScroll();
+},true);
 function kidsFinishMainTabSwitch(){
   var epoch=++kidsTabEpoch;
   var switchedAt=Date.now();
-  kidsResetMainScroll();
-  requestAnimationFrame(function(){
-    if(epoch!==kidsTabEpoch)return;
-    kidsResetMainScroll();
-    requestAnimationFrame(function(){
-      if(epoch===kidsTabEpoch)kidsResetMainScroll();
-    });
-  });
+  var main=document.querySelector(".shell");
+  var root=document.scrollingElement;
+  var finished=false,queued=false;
+  function userMoved(){
+    return kidsLastUserScroll>=switchedAt;
+  }
   function settle(){
-    if(epoch!==kidsTabEpoch||kidsLastUserScroll>=switchedAt)return;
-    var main=document.querySelector(".shell");
-    var root=document.scrollingElement;
+    if(finished||epoch!==kidsTabEpoch||userMoved())return;
     if((main&&main.scrollTop>1)||(root&&root.scrollTop>1)||window.scrollY>1)
       kidsResetMainScroll();
   }
+  function onScroll(){
+    if(queued||finished||epoch!==kidsTabEpoch||userMoved())return;
+    queued=true;
+    requestAnimationFrame(function(){queued=false;settle();});
+  }
+  function clean(){
+    if(finished)return;
+    settle();
+    finished=true;
+    if(main)main.removeEventListener("scroll",onScroll);
+    if(root&&root!==main)root.removeEventListener("scroll",onScroll);
+  }
+  kidsResetMainScroll();
+  if(main)main.addEventListener("scroll",onScroll,{passive:true});
+  if(root&&root!==main)root.addEventListener("scroll",onScroll,{passive:true});
+  requestAnimationFrame(function(){
+    if(epoch!==kidsTabEpoch)return clean();
+    kidsResetMainScroll();
+    requestAnimationFrame(settle);
+  });
   setTimeout(settle,160);
   setTimeout(settle,420);
+  setTimeout(clean,900);
 }
 window.DARKidsResetMainScroll=kidsFinishMainTabSwitch;
 function showTab(name){
