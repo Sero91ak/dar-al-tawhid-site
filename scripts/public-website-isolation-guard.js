@@ -1,67 +1,47 @@
 #!/usr/bin/env node
 /**
  * PUBLIC_WEBSITE_ISOLATION_GUARD
- * Release marker: WEB_RECOVERY_V3
- * Blockiert Deploys, bei denen Website, native App und PWA wieder denselben
- * Navigation-Fallback teilen oder die öffentliche Website-Shell beschädigt ist.
+ * Hard separation: public website and Android PWA must never share root control.
  */
-const fs = require("fs");
-const path = require("path");
+const fs=require("fs");
+const path=require("path");
+const ROOT=path.join(__dirname,"..");
+const M="PUBLIC_WEBSITE_ISOLATION_GUARD";
+let failed=0;
+const read=p=>fs.readFileSync(path.join(ROOT,p),"utf8");
+function check(ok,msg){if(ok)console.log(M+" OK: "+msg);else{failed++;console.error(M+" FAIL: "+msg)}}
 
-const ROOT = path.join(__dirname, "..");
-const MARKER = "PUBLIC_WEBSITE_ISOLATION_GUARD";
+const rootSw=read("service-worker.js");
+const pwaSw=read("pwa/service-worker.js");
+const router=read("cloudflare/site-router.js");
+const desktop=read("desktop-preview/index.html");
+const desktopJs=read("desktop-preview/desktop-overhaul.js");
+const manifest=JSON.parse(read("manifest.json"));
 
-function read(rel) {
-  return fs.readFileSync(path.join(ROOT, rel), "utf8");
+check(rootSw.includes("PUBLIC_WEBSITE_NETWORK_ONLY_V1"),"legacy root SW serves website navigation network-only");
+check(!desktop.includes('navigator.serviceWorker.register("/service-worker.js",{scope:"/"})'),"public website never registers root SW");
+check(!router.includes('navigator.serviceWorker.register("/service-worker.js",{scope:"/"})'),"router public addon never registers root SW");
+check(router.includes('navigator.serviceWorker.register("/pwa/service-worker.js",{scope:"/pwa/"})'),"Android PWA registers dedicated worker");
+check(manifest.scope==="/pwa/"&&String(manifest.start_url||"").startsWith("/pwa/"),"manifest scope is isolated to /pwa/");
+check(pwaSw.includes("CACHE_PREFIX='dar-al-tawhid-pwa-'"),"PWA uses dedicated cache namespace");
+check(pwaSw.includes("if(!u.pathname.startsWith('/pwa'))return"),"PWA worker rejects out-of-scope navigation");
+check(!pwaSw.includes("'/index.html'"),"PWA has no public website fallback");
+
+check(router.includes('headers.set("X-Dar-Surface", "public-website")'),"public website has explicit surface header");
+check(router.includes('const target = new URL("/desktop-preview/", url.origin);'),"browser root resolves to public website shell");
+check(router.includes("isRoot && wantsPublicWebsite(request)"),"public root route remains active");
+check(desktop.length>200000,"public website main HTML is complete");
+check(desktop.includes("DĀR AL TAWḤĪD"),"website branding present");
+check(desktop.includes("desktop-overhaul.js"),"website interaction bundle present");
+
+const openScripts=(desktop.match(/<script\b/gi)||[]).length;
+const closeScripts=(desktop.match(/<\/script>/gi)||[]).length;
+check(openScripts===closeScripts,"website script tags balanced");
+for(const m of desktop.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)){
+  if(/\bsrc\s*=/.test(m[1]||"")||!(m[2]||"").trim())continue;
+  try{new Function(m[2])}catch(e){failed++;console.error(M+" FAIL: inline JS: "+e.message)}
 }
-function check(ok, message) {
-  if (ok) {
-    console.log(`${MARKER} OK: ${message}`);
-    return;
-  }
-  console.error(`${MARKER} FAIL: ${message}`);
-  process.exitCode = 1;
-}
+try{new Function(desktopJs);console.log(M+" OK: desktop-overhaul.js syntax")}catch(e){failed++;console.error(M+" FAIL: desktop-overhaul.js: "+e.message)}
 
-const sw = read("service-worker.js");
-const router = read("cloudflare/site-router.js");
-const desktop = read("desktop-preview/index.html");
-const desktopJs = read("desktop-preview/desktop-overhaul.js");
-
-check(sw.includes("PUBLIC_WEBSITE_NETWORK_ONLY_V1"), "Website hat eigenen Network-only Navigationsweg");
-check(sw.includes("!fromPwa && !explicitPwa && !nativeDar"), "Website/PWA/native Navigation sind getrennt");
-check(router.includes('headers.set("X-Dar-Surface", "public-website")'), "öffentliche Website besitzt eindeutige Surface-Kennung");
-check(router.includes('const target = new URL("/desktop-preview/", url.origin);'), "Browser-Root zeigt auf die öffentliche Website");
-check(router.includes("isRoot && wantsPublicWebsite(request)"), "öffentliche Root-Route ist aktiv");
-
-check(desktop.length > 200000, "Website-Hauptdatei ist vollständig");
-check(desktop.includes("DĀR AL TAWḤĪD"), "Website-Branding vorhanden");
-check(desktop.includes("desktop-overhaul.js"), "Website-Interaktionsskript eingebunden");
-
-const openScripts = (desktop.match(/<script\b/gi) || []).length;
-const closeScripts = (desktop.match(/<\/script>/gi) || []).length;
-check(openScripts === closeScripts, "Script-Tags der Website sind ausgeglichen");
-
-const inlineScripts = [...desktop.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)]
-  .filter((m) => !/\bsrc\s*=/.test(m[1] || ""))
-  .map((m) => m[2])
-  .filter((code) => code.trim());
-
-for (let i = 0; i < inlineScripts.length; i += 1) {
-  try {
-    new Function(inlineScripts[i]);
-  } catch (error) {
-    console.error(`${MARKER} FAIL: Inline-Script ${i + 1}: ${error.message}`);
-    process.exitCode = 1;
-  }
-}
-
-try {
-  new Function(desktopJs);
-  console.log(`${MARKER} OK: desktop-overhaul.js Syntax`);
-} catch (error) {
-  console.error(`${MARKER} FAIL: desktop-overhaul.js: ${error.message}`);
-  process.exitCode = 1;
-}
-
-if (!process.exitCode) console.log(`${MARKER}: Website-Sperre aktiv`);
+if(failed)process.exit(1);
+console.log(M+": hard website/PWA isolation active");
