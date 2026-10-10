@@ -83,7 +83,7 @@ for(const [index,html] of htmls.entries()){
  // The same script parsing safeguard applies to both without coupling their releases.
  if(index===0){
   assert.ok(html.includes('curriculum-v2.js?v=20261010-09'));
-  assert.ok(html.includes('data-preview-release="V13.0-voicefix-20261010"'));
+  assert.ok(html.includes('data-preview-release="V16.0-voicepreview-20261010"'));
   assert.ok(html.includes('id="subjectReviewGrid"'));
   assert.ok(html.includes('function dailyLesson()'));
   assert.ok(html.includes('persist("help",true)'));
@@ -109,7 +109,7 @@ assert.equal(pilot.maxPreparedCharacters,420);
 assert.equal(pilot.stagingOnly,true);
 assert.equal(pilot.exactPhrases.length,4);
 const academyHtml=read("kids/akademie/index.html");
-assert.ok(academyHtml.includes('pilot-audio-v13.js?v=20261010-voicefix-v13'));
+assert.ok(academyHtml.includes('pilot-audio-v13.js?v=20261010-voicefix-v16'));
 assert.ok(academyHtml.includes('data-academy-pilot="0"'));
 
 assert.ok(academyHtml.includes("isAcademyStoryMaster"));
