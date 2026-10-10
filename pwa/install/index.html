@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#08191b">
+<meta name="description" content="DĀR AL TAWḤĪD als Android-Web-App installieren.">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/assets/app-icons/type-creme-ar/icon-192.png">
+<title>DĀR AL TAWḤĪD · Android-Installation</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}
+body{margin:0;min-height:100dvh;background:radial-gradient(ellipse at 50% -18%,#244540 0%,#091d20 48%,#071214 100%);color:#f5eedf;display:flex;align-items:center;justify-content:center;padding:max(28px,env(safe-area-inset-top,0px)) 18px max(28px,env(safe-area-inset-bottom,0px))}
+main{width:min(100%,480px);padding:clamp(23px,5vw,40px);border:1px solid #7e704e70;background:#071417b8;border-radius:26px;box-shadow:0 22px 90px #0005;text-align:center}
+.logo{width:84px;height:84px;object-fit:cover;border-radius:21px;border:1px solid #baa46c5e}
+.eyebrow{margin:20px 0 8px;color:#d9bb79;letter-spacing:.17em;text-transform:uppercase;font-size:10px;font-weight:750}
+h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(29px,7vw,39px);font-weight:500;line-height:1.16;margin:0 0 12px}
+.intro{margin:0 auto 22px;color:#d9d2c3;font-size:13px;line-height:1.65;max-width:360px}
+button,.link{display:flex;width:100%;align-items:center;justify-content:center;border-radius:13px;min-height:50px;padding:12px 18px;font:750 13px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif;text-decoration:none;cursor:pointer}
+#install{border:1px solid #e5c986;background:#e5c986;color:#152729}
+.link{border:1px solid #b6a17178;color:#eee1c3;background:transparent;margin-top:10px}
+#status{color:#e5c986;font-size:12px;line-height:1.6;min-height:20px;margin:14px 0 0}
+.guide{margin-top:19px;text-align:left;padding:15px 17px;border-radius:16px;border:1px solid #a08d6560;background:#ffffff0a}
+.guide strong{font-size:12px;color:#e5c986}
+.guide ol{margin:10px 0 0;padding-left:20px;font-size:12px;line-height:1.8;color:#e0d7c5}
+.guide[hidden]{display:none}
+.note{margin:20px 0 0;font-size:10px;line-height:1.7;color:#bfb9ac}
+a:focus-visible,button:focus-visible{outline:3px solid #e5c986;outline-offset:3px}
+</style>
+</head>
+<body>
+<main>
+<img class="logo" alt="" src="/assets/app-icons/type-creme-ar/icon-192.png" width="84" height="84">
+<p class="eyebrow">ANDROID · WEB-APP</p>
+<h1>DĀR AL TAWḤĪD installieren</h1>
+<p class="intro">Die App lässt sich direkt zum Startbildschirm hinzufügen – ohne APK-Datei und ohne Google-Play-Download.</p>
+<button id="install" type="button">Web-App installieren</button>
+<p id="status" role="status" aria-live="polite">Auf „Web-App installieren“ tippen.</p>
+<section class="guide" id="manual" hidden>
+<strong>Installation über das Browser-Menü</strong>
+<ol>
+<li>In Chrome oder Samsung Internet das Browser-Menü öffnen (⋮ oder ☰).</li>
+<li>„App installieren“, „Zum Startbildschirm hinzufügen“ oder „Seite hinzufügen“ auswählen. Der Wortlaut hängt vom Browser ab.</li>
+<li>Installation bestätigen. Anschließend die App über ihr Icon öffnen.</li>
+</ol>
+</section>
+<a class="link" href="/?page=downloads">Zurück zu den Downloads</a>
+<p class="note">Bereits installiert? Öffne DĀR AL TAWḤĪD direkt über das App-Icon auf deinem Startbildschirm.</p>
+</main>
+<script>
+(function(){
+"use strict";
+var button=document.getElementById("install");
+var status=document.getElementById("status");
+var manual=document.getElementById("manual");
+var promptEvent=null;
+var busy=false;
+var android=/\bAndroid\b/i.test(String(navigator.userAgent||""));
+function say(t){status.textContent=t}
+function showGuide(){manual.hidden=false;say("Falls kein automatischer Dialog erscheint, nutze das Browser-Menü wie unten beschrieben.")}
+if(!android){button.textContent="Android-Installation nur auf Android";say("Auf iPhone und iPad bitte unsere iOS-App im App Store verwenden.");button.addEventListener("click",function(){location.href="https://apps.apple.com/de/app/id6805988753"});return}
+try{
+if("serviceWorker" in navigator)navigator.serviceWorker.register("/pwa/service-worker.js",{scope:"/pwa/"}).catch(function(){});
+}catch(e){}
+window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();promptEvent=e;button.textContent="Jetzt installieren";say("Installation ist bereit. Bitte auf den Button tippen.")});
+window.addEventListener("appinstalled",function(){promptEvent=null;busy=false;button.disabled=false;button.textContent="Bereits installiert";say("Die App wurde installiert. Bitte über das Startbildschirm-Icon öffnen.")});
+button.addEventListener("click",function(){
+if(busy)return;
+if(!promptEvent){showGuide();return}
+var current=promptEvent;promptEvent=null;busy=true;button.disabled=true;
+try{current.prompt()}catch(e){busy=false;button.disabled=false;button.textContent="Installationshilfe anzeigen";showGuide();return}
+Promise.resolve(current.userChoice).then(function(result){
+busy=false;button.disabled=false;
+if(result&&result.outcome==="accepted"){button.textContent="Installation bestätigt";say("Die App wird dem Startbildschirm hinzugefügt.")}
+else{button.textContent="Installationshilfe anzeigen";showGuide()}
+}).catch(function(){busy=false;button.disabled=false;button.textContent="Installationshilfe anzeigen";showGuide()})
+});
+setTimeout(function(){if(!promptEvent&&!busy){button.textContent="Installation / Anleitung";say("Falls dein Browser keinen direkten Installationsdialog anbietet, öffnet der Button die manuelle Anleitung.")}},1600);
+})();
+</script>
+</body>
+</html>
