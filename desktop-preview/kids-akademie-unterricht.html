@@ -3296,119 +3296,125 @@ body .academy-header.kids-detail-appbar > .academy-nav-home{
  }
 }
 
-/* KIDS_ACADEMY_PROFILE_FREE_TEXT_V1102
-   Boy/girl heads are freestanding; the header profile name and age must be
-   completely readable at every width. The back/Home buttons keep fixed,
-   accessible tap targets; the identity gets flexible content width and may
-   wrap instead of being silently truncated. No avatar asset or profile
-   selection handler is replaced. */
+/* KIDS_ACADEMY_SINGLE_ROW_FREE_AVATAR_V1103
+   Single stable header: Back | Academy | child identity | Home.
+   Longer names consume space to the left, then wrap within the same header row.
+   No second profile row or avatar box; navigation and profile data unchanged. */
 body .academy-header.kids-detail-appbar{
-  box-sizing:border-box!important;
-  grid-template-columns:48px minmax(0,1fr) minmax(176px,1.4fr) 48px!important;
-  column-gap:clamp(8px,1.4vw,16px)!important;
-  row-gap:3px!important;
-  height:auto!important;
-  min-width:0!important;
+ box-sizing:border-box!important;display:flex!important;flex-wrap:nowrap!important;
+ align-items:center!important;justify-content:space-between!important;
+ gap:clamp(5px,1.3vw,13px)!important;
+ grid-template-columns:none!important;grid-template-rows:none!important;
+ height:auto!important;min-width:0!important;
+}
+body .academy-header.kids-detail-appbar > .academy-nav-back,
+body .academy-header.kids-detail-appbar > .academy-nav-home{
+ flex:0 0 auto!important;align-self:center!important;
+}
+body .academy-header.kids-detail-appbar > .academy-nav-copy{
+ flex:1 1 0!important;width:auto!important;min-width:0!important;
+ align-self:center!important;overflow:hidden!important;
+ padding-left:clamp(7px,1.7vw,13px)!important;
 }
 body .academy-header.kids-detail-appbar > .hero-profile-chip,
 body[data-profile="girl"] .academy-header.kids-detail-appbar > .hero-profile-chip{
-  box-sizing:border-box!important;
-  min-width:0!important;max-width:100%!important;
-  width:100%!important;
-  padding:0!important;margin:0!important;
-  display:flex!important;align-items:center!important;
-  justify-self:stretch!important;justify-content:flex-start!important;
-  gap:clamp(7px,1.4vw,12px)!important;
-  overflow:visible!important;
-  border:0!important;border-radius:0!important;
-  background:none!important;background-color:transparent!important;
-  box-shadow:none!important;
-  outline:0!important;
-  -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+ box-sizing:border-box!important;position:relative!important;inset:auto!important;
+ display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;
+ align-items:center!important;justify-content:flex-start!important;
+ flex:0 1 auto!important;width:max-content!important;
+ min-width:0!important;max-width:min(44vw,290px)!important;
+ align-self:center!important;
+ padding:0!important;margin:0!important;gap:clamp(5px,1.25vw,10px)!important;
+ border:0!important;border-radius:0!important;outline:0!important;
+ background:transparent!important;background-color:transparent!important;
+ box-shadow:none!important;filter:none!important;
+ -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+ overflow:visible!important;pointer-events:none!important;
 }
+body .academy-header.kids-detail-appbar > .hero-profile-chip::before,
+body .academy-header.kids-detail-appbar > .hero-profile-chip::after{content:none!important}
 body .academy-header.kids-detail-appbar > .hero-profile-chip img{
-  display:block!important;flex:0 0 clamp(39px,5.8vw,54px)!important;
-  width:clamp(39px,5.8vw,54px)!important;
-  height:clamp(39px,5.8vw,54px)!important;
-  min-width:0!important;max-width:none!important;max-height:none!important;
-  padding:0!important;margin:0!important;
-  background:none!important;background-color:transparent!important;
-  border:0!important;border-radius:0!important;box-shadow:none!important;
-  filter:none!important;object-fit:contain!important;
-  overflow:visible!important;
+ display:block!important;position:static!important;inset:auto!important;
+ flex:0 0 clamp(34px,4.3vw,47px)!important;
+ width:clamp(34px,4.3vw,47px)!important;
+ height:clamp(34px,4.3vw,47px)!important;
+ min-width:0!important;max-width:none!important;max-height:none!important;
+ padding:0!important;margin:0!important;
+ border:0!important;border-radius:0!important;
+ background:transparent!important;background-color:transparent!important;
+ box-shadow:none!important;filter:none!important;
+ object-fit:contain!important;object-position:center!important;
+ opacity:1!important;visibility:visible!important;
 }
 body .academy-header.kids-detail-appbar > .hero-profile-chip .hero-profile-copy{
-  flex:1 1 auto!important;min-width:0!important;max-width:none!important;
-  width:auto!important;overflow:visible!important;
-  display:flex!important;flex-direction:column!important;gap:2px!important;
+ display:flex!important;flex-direction:column!important;
+ flex:0 1 auto!important;min-width:0!important;
+ gap:2px!important;text-align:left!important;overflow:visible!important;
 }
 body .academy-header.kids-detail-appbar > .hero-profile-chip .hero-profile-copy strong,
 body .academy-header.kids-detail-appbar > .hero-profile-chip .hero-profile-copy small{
-  display:block!important;min-width:0!important;width:auto!important;
-  max-width:none!important;
-  white-space:normal!important;
-  overflow:visible!important;
-  text-overflow:clip!important;
-  overflow-wrap:anywhere!important;
-  word-break:normal!important;
-  hyphens:auto!important;
-  line-height:1.17!important;
+ display:block!important;width:auto!important;min-width:0!important;
+ max-width:100%!important;white-space:normal!important;
+ overflow:visible!important;text-overflow:clip!important;
+ overflow-wrap:anywhere!important;word-break:normal!important;
+ hyphens:auto!important;line-height:1.17!important;
 }
 body .academy-header.kids-detail-appbar > .hero-profile-chip .hero-profile-copy strong{
-  font-size:clamp(13px,1.9vw,17px)!important;
-  font-weight:850!important;
+ font-size:clamp(12px,2.8vw,16px)!important;font-weight:850!important;
 }
 body .academy-header.kids-detail-appbar > .hero-profile-chip .hero-profile-copy small{
-  font-size:clamp(11px,1.4vw,13px)!important;
+ font-size:clamp(10px,2.3vw,13px)!important;
 }
-body .academy-header.kids-detail-appbar > .academy-nav-home{
-  justify-self:end!important;align-self:center!important;
-}
-/* The phone cannot display back + screen title + full child identity +
-   Home in four tiny columns. Give the child's identity the full center
-   width on its own row, with fixed navigation at the edges. */
 @media(max-width:700px){
-  body .academy-header.kids-detail-appbar{
-    grid-template-columns:44px minmax(0,1fr) 44px!important;
-    grid-template-rows:auto auto!important;
-    column-gap:clamp(7px,2vw,12px)!important;
-    row-gap:4px!important;
-  }
-  body .academy-header.kids-detail-appbar > .academy-nav-back{
-    grid-column:1!important;grid-row:1 / span 2!important;
-    align-self:center!important;
-  }
-  body .academy-header.kids-detail-appbar > .academy-nav-copy{
-    grid-column:2!important;grid-row:1!important;
-    align-self:center!important;
-    padding-left:clamp(7px,1.8vw,11px)!important;
-  }
-  body .academy-header.kids-detail-appbar > .hero-profile-chip{
-    grid-column:2!important;grid-row:2!important;
-    margin-left:0!important;justify-self:stretch!important;
-  }
-  body .academy-header.kids-detail-appbar > .academy-nav-home{
-    grid-column:3!important;grid-row:1 / span 2!important;
-    align-self:center!important;
-  }
-  body .academy-header.kids-detail-appbar > .hero-profile-chip img{
-    flex:0 0 clamp(36px,10vw,46px)!important;
-    width:clamp(36px,10vw,46px)!important;
-    height:clamp(36px,10vw,46px)!important;
-  }
-  body .academy-header.kids-detail-appbar > .hero-profile-chip .hero-profile-copy strong{
-    font-size:clamp(13px,3.7vw,16px)!important;
-  }
-  body .academy-header.kids-detail-appbar > .hero-profile-chip .hero-profile-copy small{
-    font-size:clamp(11px,3.1vw,13px)!important;
-  }
+ body .academy-header.kids-detail-appbar{gap:clamp(4px,1.25vw,8px)!important}
+ body .academy-header.kids-detail-appbar > .academy-nav-back{
+  width:44px!important;min-width:44px!important;height:44px!important;
+ }
+ body .academy-header.kids-detail-appbar > .academy-nav-home{
+  width:42px!important;min-width:42px!important;height:42px!important;
+ }
+ body .academy-header.kids-detail-appbar > .academy-nav-copy{
+  padding-left:clamp(6px,1.7vw,10px)!important;
+ }
+ body .academy-header.kids-detail-appbar .academy-nav-title{
+  display:block!important;white-space:nowrap!important;
+  font-size:clamp(13px,4.25vw,21px)!important;
+  overflow:hidden!important;text-overflow:ellipsis!important;
+ }
+ body .academy-header.kids-detail-appbar .academy-nav-subtitle{
+  display:block!important;white-space:nowrap!important;
+  font-size:clamp(9px,2.35vw,11px)!important;
+  overflow:hidden!important;text-overflow:ellipsis!important;
+ }
+ body .academy-header.kids-detail-appbar > .hero-profile-chip,
+ body[data-profile="girl"] .academy-header.kids-detail-appbar > .hero-profile-chip{
+  max-width:44vw!important;gap:5px!important;
+ }
 }
-/* On tablets in landscape the center widths may tighten; a multiline name
-   grows the bar naturally rather than pushing the Home icon off-screen. */
-@media(min-width:701px) and (max-width:980px){
-  body .academy-header.kids-detail-appbar{
-    grid-template-columns:48px minmax(100px,1fr) minmax(174px,1.45fr) 48px!important;
-  }
+@media(max-width:370px){
+ body .academy-header.kids-detail-appbar{gap:4px!important}
+ body .academy-header.kids-detail-appbar > .academy-nav-back{
+  width:40px!important;min-width:40px!important;height:42px!important;
+ }
+ body .academy-header.kids-detail-appbar > .academy-nav-home{
+  width:40px!important;min-width:40px!important;height:42px!important;
+ }
+ body .academy-header.kids-detail-appbar > .academy-nav-copy{padding-left:5px!important}
+ body .academy-header.kids-detail-appbar .academy-nav-title{font-size:clamp(12px,3.8vw,15px)!important}
+ body .academy-header.kids-detail-appbar .academy-nav-subtitle{font-size:8px!important}
+ body .academy-header.kids-detail-appbar > .hero-profile-chip,
+ body[data-profile="girl"] .academy-header.kids-detail-appbar > .hero-profile-chip{
+  max-width:43vw!important;
+ }
+ body .academy-header.kids-detail-appbar > .hero-profile-chip img{
+  flex-basis:32px!important;width:32px!important;height:32px!important;
+ }
+ body .academy-header.kids-detail-appbar > .hero-profile-chip .hero-profile-copy strong{
+  font-size:11px!important;
+ }
+ body .academy-header.kids-detail-appbar > .hero-profile-chip .hero-profile-copy small{
+  font-size:9px!important;
+ }
 }
 
 </style><script data-kids-touch-focus-v83>
