@@ -1,0 +1,15 @@
+# Entire DAR AL TAWHID KIDS owner test. Independent from live and adult/test workers.
+# No automatic builds; publish manually only after credential and isolation checks.
+name = "dar-al-tawhid-kids-owner-test"
+main = "cloudflare/kids-owner-test-worker.js"
+compatibility_date = "2026-10-10"
+workers_dev = true
+routes = []
+
+[assets]
+directory = "."
+binding = "ASSETS"
+run_worker_first = true
+
+[build]
+watch_paths = [".cloudflare-kids-owner-test-manual-only/**"]
