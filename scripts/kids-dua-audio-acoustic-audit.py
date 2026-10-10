@@ -100,23 +100,38 @@ def main() -> int:
         raise RuntimeError("FFmpeg decoder unavailable: acoustic QA cannot pass without decoding audio")
     entries = json.loads(MANIFEST.read_text(encoding="utf-8")).get("entries") or {}
     indexed = {key(word): entry for word, entry in entries.items()}
+    full_catalogue = "--all" in sys.argv[1:]
+    selected = list(entries) if full_catalogue else list(WORDS)
     rows = []
-    for word in WORDS:
+    for word in selected:
         record = indexed.get(key(word))
         if not record:
             raise KeyError(f"Cannot find displayed Arabic word in V4 manifest: {word}")
         rows.append(inspect(word, record))
-    print(json.dumps({
+    incorrect = [row for row in rows if "manifest-duration-mismatch" in row["reviewFlags"]]
+    padding = [row for row in rows if "long-trailing-padding" in row["reviewFlags"]]
+    long_short_words = [row for row in rows if "short-word-overlong" in row["reviewFlags"]]
+    report = {
         "status": "AUDIT_ONLY_NOT_HUMAN_APPROVED",
         "model": "existing-eleven-v4",
         "samples": len(rows),
-        "results": rows,
+        "durationMismatchCount": len(incorrect),
+        "durationMismatches": incorrect[:100],
+        "longTrailingPaddingCount": len(padding),
+        "shortWordOverlongCount": len(long_short_words),
+        "longShortWordExamples": long_short_words[:20],
         "humanAudioReviewStillRequired": True,
-    }, ensure_ascii=False, indent=2))
-    incorrect = [row["word"] for row in rows if "manifest-duration-mismatch" in row["reviewFlags"]]
-    if incorrect:
-        raise AssertionError(f"M4A duration differs from its published manifest: {incorrect}")
-    print("KIDS DUA ACOUSTIC AUDIT PASS: 10 clips decode and manifest durations match; timing flags still require listening")
+    }
+    if not full_catalogue:
+        report["results"] = rows
+    print(json.dumps(report, ensure_ascii=False, indent=2))
+    # Full-library audit is discovery-only. It must not modify the manifest,
+    # regenerate audio or silently approve consonants on RMS alone.
+    if incorrect and not full_catalogue:
+        raise AssertionError(f"M4A duration differs from its published manifest: {[r['word'] for r in incorrect]}")
+    print(f"KIDS DUA ACOUSTIC AUDIT PASS: {len(rows)} decoded; "
+          f"{len(incorrect)} duration discrepancies; "
+          f"{len(padding)} clips with quiet tails; no speech quality auto-approval")
     return 0
 
 
