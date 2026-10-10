@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1317";
+const CACHE_NAME="dar-al-tawhid-kids-v1318";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 // KIDS_V202_DOWNLOAD_TABS_RELEASE_TRIGGER_20261010: detail-only offline controls; manifest V202 synchronized.
@@ -144,7 +144,7 @@ const CORE_PRECACHE=[
   "/kids/assets/kids-term-audio/shayatin-basic-61c60d5712f6.m4a",
   "/kids/assets/kids-term-audio/shayatin-deep-88325399338e.m4a",
     // KIDS_TERM_AUDIO_PRECACHE_END
-  "/kids/dua-hub-v1219.js?v=1279",
+  "/kids/dua-hub-v1219.js?v=1318",
   "/kids/assets/profile-avatars/boy-kufi-v1235.svg",
   "/kids/assets/profile-avatars/girl-hijab-pink-v1235.svg",
   "/kids/assets/dua-premium/hero-v1222.jpg?v=1233",
