@@ -19,7 +19,7 @@ const lessons=Object.values(all);
 if(lessons.length!==33)throw Error("Expected 33 curriculum entries plus the existing Ṣidq lesson; got "+lessons.length);
 const unique=new Map();
 function add(s,lessonId,kind,age="all"){
- const text=String(s||"").normalize("NFC").replace(/\\s+/g," ").trim();
+ const text=String(s||"").normalize("NFC").replace(/\s+/g," ").trim();
  if(!text)return;
  if(text.length>700)throw Error("Too long voice request "+lessonId);
  const key=text;
@@ -63,5 +63,5 @@ const output={
  phrases:[...unique.values()].sort((a,b)=>a.priority-b.priority||a.text.localeCompare(b.text,"de"))
 };
 const filename=path.join(ROOT,"kids/data/academy-voice-plan-v9.json");
-fs.writeFileSync(filename,JSON.stringify(output,null,2)+"\\n","utf8");
+fs.writeFileSync(filename,JSON.stringify(output,null,2)+"\n","utf8");
 console.log("ACADEMY VOICE PLAN:",output.lessonCount,"lessons /",output.phraseCount,"unique German phrases; all pending human approval");
