@@ -3684,26 +3684,35 @@ function launchNextDailyStep(){
   var next=plan.find(function(s){return !dailyDone(s.id)});
   if(next)launchDailyStep(next.id);
 }
+/* KIDS_TAB_POSITION_STABILITY_V1318: fix iOS document/shell scroll split on tabs. */
+function kidsResetMainScroll(){
+  var scroller=document.querySelector(".shell");
+  if(scroller)scroller.scrollTop=0;
+  var rootScroller=document.scrollingElement;
+  if(rootScroller&&rootScroller!==scroller)rootScroller.scrollTop=0;
+  document.documentElement.scrollTop=0;
+  if(document.body)document.body.scrollTop=0;
+  try{window.scrollTo(0,0)}catch(e){}
+}
+function kidsFinishMainTabSwitch(){
+  kidsResetMainScroll();
+  requestAnimationFrame(function(){
+    kidsResetMainScroll();
+    requestAnimationFrame(kidsResetMainScroll);
+  });
+}
+window.DARKidsResetMainScroll=kidsFinishMainTabSwitch;
 function showTab(name){
   var view=document.getElementById("view-"+name);
   if(!view)return;
   var current=document.querySelector(".view.active");
   document.querySelectorAll(".nav-btn").forEach(function(b){b.classList.toggle("active",b.dataset.target===name)});
-  if(current===view){
-    var sameScroll=document.querySelector(".shell");
-    requestAnimationFrame(function(){
-      if(sameScroll){try{sameScroll.scrollTo({top:0,left:0,behavior:"auto"})}catch(e){sameScroll.scrollTop=0}}
-      else window.scrollTo({top:0,behavior:"auto"});
-    });
-    return;
+  if(current!==view){
+    if(current)current.classList.remove("active");
+    view.classList.add("active");
   }
-  if(current)current.classList.remove("active");
-  view.classList.add("active");
-  var shellScroll=document.querySelector(".shell");
-  requestAnimationFrame(function(){
-    if(shellScroll){try{shellScroll.scrollTo({top:0,left:0,behavior:"auto"})}catch(e){shellScroll.scrollTop=0}}
-    else window.scrollTo({top:0,behavior:"auto"});
-  });
+  document.documentElement.setAttribute("data-view",name);
+  kidsFinishMainTabSwitch();
 }
 document.querySelectorAll(".nav-btn").forEach(function(b){b.addEventListener("click",function(){showTab(b.dataset.target)})});
 document.querySelectorAll("[data-go]").forEach(function(b){
