@@ -3157,6 +3157,11 @@ html[data-kids-pointer-input="touch"] body #academySubject.subject-detail .subje
 .subject-roadmap .subject-topic-grid{gap:8px!important}
 .subject-roadmap .subject-topic{min-height:66px!important}
 
+/* Academy V11 – titles visible while future lesson content is locked. */
+.subject-topic.is-locked,.subject-topic.is-locked:disabled{opacity:1!important;cursor:not-allowed!important;background:rgba(243,247,247,.9)!important;color:#435b62!important;border:1px solid rgba(72,94,99,.19)!important;box-shadow:none!important;transform:none!important}
+.subject-topic .topic-lock-meta{font-size:12px;line-height:1.4;color:#536970}
+.subject-topic.is-current-class{border:2px solid #2b7367!important;background:#e9f7ef!important}
+.academy-school-hint{font-size:13px;line-height:1.5;color:#34555e;margin:7px 0}
 </style><script data-kids-touch-focus-v83>
 (function(){
   "use strict";
@@ -3177,7 +3182,7 @@ html[data-kids-pointer-input="touch"] body #academySubject.subject-detail .subje
   },true);
 })();
 </script></head>
-<body data-profile="boy" data-preview-release="V9.1-20261010" data-preview-deploy="v9-daily-lessons-and-free-reviews"><main class="wrap">
+<body data-profile="boy" data-preview-release="V11.0-20261010" data-preview-deploy="v11-progressive-school-lessons"><main class="wrap">
 
 <header class="academy-header kids-detail-appbar" aria-label="Navigationsleiste Lernakademie">
  <button class="academy-nav-back" id="academyNavBack" type="button" aria-label="Zurück"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/><path d="M9 12h11"/></svg></button>
@@ -3226,12 +3231,12 @@ html[data-kids-pointer-input="touch"] body #academySubject.subject-detail .subje
   <img id="subjectImage" src="/desktop-preview/assets/kids-academy-akhlaq-v1.jpg" alt="" decoding="async">
  </div>
  <div class="subject-next">
-  <span class="subject-small">DEIN LERNBEREICH</span>
+  <span class="subject-small">DEIN LERNBEREICH · SCHRITT FÜR SCHRITT</span>
   <h2 id="subjectLessonTitle">Ṣidq – Wahrhaftigkeit</h2>
   <p id="subjectLessonNote">Lerne, weshalb die Wahrheit wichtig ist.</p>
   <button id="subjectStart" class="subject-start" type="button">Jetzt Unterricht beginnen →</button>
  </div>
- <div class="subject-roadmap"><h2>Neue Themen</h2><p class="subject-review-note subject-empty" id="subjectEmpty" hidden>Alle Themen dieses Fachs sind gelernt. Du kannst sie unten jederzeit wiederholen.</p><div id="subjectTopicGrid" class="subject-topic-grid"></div></div>
+ <div class="subject-roadmap"><h2>Dein Lehrplan · Freischaltungen</h2><p class="academy-school-hint" id="subjectSchoolHint">Eine neue Lektion gleichzeitig. Weitere Themen bleiben gesperrt.</p><p class="subject-review-note subject-empty" id="subjectEmpty" hidden>Alle Themen dieses Fachs sind gelernt. Du kannst sie unten jederzeit wiederholen.</p><div id="subjectTopicGrid" class="subject-topic-grid"></div></div>
 <div class="subject-roadmap subject-review" id="subjectReviewSection" hidden><h2>Schon gelernt · Wiederholen</h2><p class="subject-review-note">Hier darfst du jede Lektion beliebig oft und an jedem Tag erneut lernen.</p><div id="subjectReviewGrid" class="subject-topic-grid"></div></div>
 </section>
 <section class="lesson-main" id="lessonMain" hidden>
@@ -3281,6 +3286,7 @@ html[data-kids-pointer-input="touch"] body #academySubject.subject-detail .subje
 </main>
 <script src="/kids/akademie/curriculum-v1.js?v=20261010-01"></script>
 <script src="/kids/akademie/curriculum-v2.js?v=20261010-09"></script>
+<script src="/kids/akademie/school-progress-v11.js?v=20261010-11"></script>
 <script>
 (()=>{
 "use strict";
@@ -3369,7 +3375,7 @@ function readDraft(){
   const d=JSON.parse(localStorage.getItem(draftKey())||"null");
   if(!d||d.lessonId!==activeLessonId||d.id!==id||d.age!==age)return null;
   const elapsed=Date.now()-Number(d.savedAt);
-  if(!Number.isFinite(elapsed)||elapsed<0||elapsed>7*86400000)return null;
+  if(!Number.isFinite(elapsed)||elapsed<0)return null; /* Unfinished lessons never expire automatically. */
   if(!Number.isInteger(d.step)||d.step<0||d.step>4)return null;
   if(!Number.isInteger(d.qIndex)||d.qIndex<0||d.qIndex>=questions().length)return null;
   if(!d.score||!Number.isInteger(d.score.done)||d.score.done<0||d.score.done>questions().length)return null;
@@ -3601,28 +3607,33 @@ function renderHome(){
   $("#journeyDetail").textContent="Bitte zuerst ein Kinderprofil festlegen.";
   return;
  }
- const allIds=lessonIds(),done=allIds.filter(x=>!!recordFor(x));
+ const school=academySchoolState(),allIds=lessonIds(),done=allIds.filter(x=>!!recordFor(x));
  const due=done.filter(x=>Number(recordFor(x)?.nextDue)<=Date.now());
  const daily=dailyLesson();
  if(!daily)return;
- const saved=recordFor(daily.id),draft=draftFor(daily.id);
+ const saved=recordFor(daily.id),draft=school.active?draftFor(school.active):null;
  const canContinue=!!draft&&(draft.step>0||draft.qIndex>0);
+ const waiting=!!school.upcoming&&!school.active;
  $("#todayTopicName").textContent=lessonTitle(daily.id);
  $("#todayTopicIntro").textContent=lessonLead(daily.id);
- $("#todaySummary").textContent=canContinue?"Setze diesen Unterricht dort fort, wo du pausiert hast.":daily.kind==="free"?"Heute ist freier Lerntag: Wiederhole etwas, lerne freiwillig Neues oder pausiere.":daily.kind==="due"||daily.kind==="review"?"Heute festigen wir Gelerntes. Du kannst trotzdem ein neues Thema auswählen.":daily.kind==="new"?"Ein neues Thema wartet auf dich. Frühere Lektionen kannst du jederzeit wiederholen.":"Heute darfst du dein Wissen festigen.";
+ $("#todaySummary").textContent=canContinue?"Dein Unterricht bleibt gespeichert. Mach genau dort weiter, wo du aufgehört hast.":
+  waiting?"Dein nächstes Thema heißt: "+lessonTitle(school.upcoming)+". Es ist noch gesperrt. "+school.nextUnlockHint+". Heute kannst du Gelerntes wiederholen.":
+  school.active?"Heute ist eine neue Lektion für dich freigeschaltet. Nach dem Abschluss öffnet sich die nächste am vorgesehenen Lerntag.":
+  school.mode==="free"?"Heute darfst du freiwillig Gelerntes wiederholen oder eine Pause machen.":
+  "Heute festigen wir dein Wissen. Bereits abgeschlossene Lektionen bleiben immer zugänglich.";
  $("#courseStatus").textContent=done.length+" / "+allIds.length+" gelernt";
- $("#reviewNotice").textContent=due.length?due.length+" Wiederholung"+(due.length===1?"":"en")+" bereit · jederzeit frei üben":"Heute Neues entdecken oder bekannte Themen wiederholen.";
+ $("#reviewNotice").textContent=due.length?due.length+" Wiederholung"+(due.length===1?"":"en")+" bereit · gelerntes Wissen jederzeit festigen":school.active?"Ein neuer Unterricht freigeschaltet · weitere Themen folgen Schritt für Schritt":"Nächstes Thema gesperrt · Wiederholungen jederzeit möglich";
  $("#journeyBar").style.width=Math.round(done.length/allIds.length*100)+"%";
- $("#journeyDetail").textContent=done.length+" von "+allIds.length+" Lektionen abgeschlossen · Wiederholungen sind immer möglich.";
+ $("#journeyDetail").textContent=done.length+" von "+allIds.length+" abgeschlossen · genau eine neue Lektion gleichzeitig";
  const button=$(".today-button");button.dataset.openLesson=daily.id;
- button.firstChild.textContent=canContinue?"Unterricht fortsetzen ":daily.kind==="free"?"Frei üben ":daily.kind==="due"||daily.kind==="review"?"Wiederholen ":saved?"Noch einmal üben ":"Heute lernen ";
+ button.firstChild.textContent=canContinue?"Unterricht fortsetzen ":daily.access==="review"?"Noch einmal lernen ":"Unterricht beginnen ";
  $("#academyTime").textContent="Heute: "+ACADEMY_WEEK[academyDay().weekday].label+" · etwa "+ui.duration+" · jederzeit freiwillig";
  all("[data-open-category]").forEach(card=>{
   const subject=card.dataset.openCategory;
   const total=availableTopics(subject).length,learned=availableTopics(subject).filter(x=>!!recordFor(x)).length;
   const tag=card.querySelector(".category-state");
-  if(tag)tag.textContent=learned+" von "+total+" gelernt";
-  card.setAttribute("aria-label",(SUBJECTS[subject]?.title||subject)+" – "+total+" Lektionen, "+learned+" gelernt; Fach öffnen");
+  if(tag)tag.textContent=availableTopics(subject).some(x=>["new","resume"].includes(school.access(x)))?"1 Unterricht frei · "+learned+" gelernt":learned+" gelernt · weitere gesperrt";
+  card.setAttribute("aria-label",(SUBJECTS[subject]?.title||subject)+" – "+total+" Themen, "+learned+" gelernt, noch gesperrte Themen nur mit Titeln sichtbar");
  });
 }
 
@@ -3680,7 +3691,7 @@ function playSerhatLessonClip(){
  const failed=()=>{status.hidden=false;status.textContent="Diese Aufnahme lässt sich gerade nicht abspielen.";};
  try{
   const ok=owner.play(t,{source:"kids-academy-tawhid-verified-serhat",
-   rate:age==="4-5"?.95:1,
+   rate:1, /* Serhat story voice remains at normal original playback rate */
    onended:()=>{status.textContent="Du kannst den Satz noch einmal anhören.";},
    onerror:failed});
   if(!ok)failed();
@@ -3731,7 +3742,7 @@ function recordFor(lessonId){
 function draftFor(lessonId){
  try{
   const v=JSON.parse(localStorage.getItem(["kids",VERSION,id,age,lessonId,"draft-v1"].join("."))||"null");
-  return v&&v.id===id&&v.age===age&&v.lessonId===lessonId&&Date.now()-v.savedAt<7*86400000?v:null;
+  return v&&v.id===id&&v.age===age&&v.lessonId===lessonId&&Number(v.savedAt)>0&&Date.now()>=v.savedAt?v:null;
  }catch(_){return null}
 }
 function academyDay(){
@@ -3740,34 +3751,25 @@ function academyDay(){
  const ordinal=Math.floor(Date.UTC(now.getFullYear(),now.getMonth(),now.getDate())/86400000);
  return {day,ordinal,weekday:now.getDay()};
 }
-function dailyLesson(){
- const allIds=lessonIds(),now=Date.now(),day=academyDay();
- if(!allIds.length)return null;
- const key=["kids",VERSION,id,age,"daily-choice-v2",day.day].join(".");
- try{
-  const saved=JSON.parse(localStorage.getItem(key)||"null");
-  if(saved&&allIds.includes(saved.id)&&["new","due","review","practice","free"].includes(saved.kind))return saved;
- }catch(_){}
- const fresh=allIds.filter(x=>!recordFor(x));
- const reviewed=allIds.filter(x=>!!recordFor(x));
- const due=reviewed.filter(x=>Number(recordFor(x).nextDue)<=now)
-  .sort((a,b)=>Number(recordFor(a).nextDue)-Number(recordFor(b).nextDue));
- const groups=Object.keys(TOPIC_IDS),rotation=day.ordinal%groups.length;
- const subjectPriority=groups.map((key,i)=>({key,i:(i+groups.length-rotation)%groups.length,done:TOPIC_IDS[key].filter(x=>!!recordFor(x)).length})).sort((a,b)=>a.done-b.done||a.i-b.i);
- const nextFresh=subjectPriority.map(x=>TOPIC_IDS[x.key].find(y=>fresh.includes(y))).find(Boolean);
- const oldest=reviewed.slice().sort((a,b)=>Number(recordFor(a)?.completedAt||0)-Number(recordFor(b)?.completedAt||0))[0];
- const mode=ACADEMY_WEEK[day.weekday].mode;
- let selected,kind;
- if(mode==="new"&&nextFresh){selected=nextFresh;kind="new"}
- else if(mode==="free"){selected=due[0]||oldest||nextFresh;kind=reviewed.length?"free":"new"}
- else if(due.length){selected=due[0];kind="due"}
- else if(reviewed.length){selected=oldest;kind="review"}
- else if(nextFresh){selected=nextFresh;kind="new"}
- else {selected=allIds[0];kind="practice"}
- const result={id:selected,kind,date:day.day,mode};
- try{localStorage.setItem(key,JSON.stringify(result))}catch(_){}
- return result;
+/* V11: Daily recommended lesson is always access-checked, not an unlock token. */
+function academySchoolState(){
+ const records={},drafts={};
+ for(const lessonId of lessonIds()){
+  const rec=recordFor(lessonId),draft=draftFor(lessonId);
+  if(rec)records[lessonId]=rec;
+  if(draft)drafts[lessonId]=draft;
+ }
+ return window.DARKidsAcademySchool.evaluate({topics:TOPIC_IDS,records,drafts,now:new Date()});
 }
+function dailyLesson(){
+ const st=academySchoolState();
+ return st.recommendation?{
+  id:st.recommendation,kind:st.kind,date:st.today,mode:st.mode,
+  access:st.access(st.recommendation),
+  nextLocked:!!st.upcoming&&!st.active,nextLesson:st.upcoming
+ }:null;
+}
+
 function lessonTitle(lessonId){
  return lessonId==="sidq"?"Ṣidq – Wahrhaftigkeit":CURRICULUM[lessonId]?.title||"Unterricht";
 }
@@ -3832,30 +3834,37 @@ function openCategory(key){
  const data=SUBJECTS[key];if(!data)return;
  stopAll();hideLesson();$("#academyHome").hidden=true;$("#academySubject").hidden=false;
  $("#academySubject").dataset.subject=key;
- const ids=availableTopics(key),unseen=ids.filter(x=>!recordFor(x)),reviewed=ids.filter(x=>!!recordFor(x));
+ const st=academySchoolState(),ids=availableTopics(key),reviewed=ids.filter(x=>st.access(x)==="review");
+ const newClass=ids.find(x=>["new","resume"].includes(st.access(x)))||null;
  const due=reviewed.filter(x=>Number(recordFor(x).nextDue)<=Date.now());
- const next=unseen[0]||due[0]||reviewed[0];
+ const next=newClass||due[0]||reviewed[0]||null;
  $("#subjectTitle").textContent=data.title;$("#subjectDescription").textContent=data.description;
  $("#subjectStatus").textContent=reviewed.length+" von "+ids.length+" gelernt";
- $("#subjectLessonTitle").textContent=next?lessonTitle(next):"Lernmaterial in Vorbereitung";
- $("#subjectLessonNote").textContent=unseen.length?"Nächstes neues Thema · jederzeit frei wählbar":due.length?"Deine nächste Wiederholung ist fällig.":"Du kannst alle abgeschlossenen Themen erneut lernen.";
+ $("#subjectLessonTitle").textContent=next?lessonTitle(next):"Deine nächsten Unterrichtsthemen";
+ $("#subjectLessonNote").textContent=newClass?"Deine neue Lektion ist freigeschaltet. Schließe sie zuerst ab.":
+  reviewed.length?"Hier kannst du Gelerntes wiederholen. Neue Lektionen folgen an Unterrichtstagen.":
+  "Du siehst die Themen, die Inhalte werden aber erst Schritt für Schritt freigeschaltet.";
  $("#subjectImage").src=data.image;
  $("#subjectStart").hidden=!next;$("#subjectStart").dataset.lessonId=next||"";
- $("#subjectStart").textContent=unseen.length?"Nächstes Thema beginnen →":"Noch einmal lernen →";
+ $("#subjectStart").textContent=newClass?"Unterricht beginnen →":"Bekanntes wiederholen →";
+ $("#subjectSchoolHint").textContent=st.active?"Ein neuer Unterricht ist geöffnet. Alle anderen warten bis zur nächsten Freischaltung.":
+  "Neue Themen werden nach dem vorherigen Abschluss am nächsten neuen Lerntag freigeschaltet (Mo, Di, Do oder Fr).";
  const grid=$("#subjectTopicGrid"),history=$("#subjectReviewGrid"),reviewSection=$("#subjectReviewSection");
  grid.replaceChildren();history.replaceChildren();
- const empty=$("#subjectEmpty");
- empty.hidden=unseen.length>0;reviewSection.hidden=reviewed.length===0;
+ $("#subjectEmpty").hidden=true;reviewSection.hidden=reviewed.length===0;
  for(const lessonId of ids){
-  const rec=recordFor(lessonId),complete=!!rec,isDue=complete&&Number(rec.nextDue)<=Date.now();
+  const access=st.access(lessonId),complete=access==="review",locked=access==="locked";
+  const rec=complete?recordFor(lessonId):null,isDue=!!rec&&Number(rec.nextDue)<=Date.now();
   const card=document.createElement("button");card.type="button";
-  card.className="subject-topic is-ready"+(complete?" is-reviewed":"")+(isDue?" is-due":"");
+  card.className="subject-topic "+(locked?"is-locked":complete?"is-ready is-reviewed":"is-ready is-current-class")+(isDue?" is-due":"");
+  card.disabled=locked;
   card.dataset.lessonId=lessonId;
-  card.setAttribute("aria-label",lessonTitle(lessonId)+" – "+(isDue?"Wiederholung fällig":complete?"Noch einmal lernen":"Neues Thema beginnen"));
+  card.setAttribute("aria-label",lessonTitle(lessonId)+" – "+(locked?"gesperrt":isDue?"Wiederholung fällig":complete?"noch einmal lernen":access==="resume"?"Unterricht fortsetzen":"jetzt freigeschaltet"));
   const label=document.createElement("strong");label.textContent=lessonTitle(lessonId);
-  const state=document.createElement("span");state.className=complete?"topic-review-meta":"";
-  state.textContent=isDue?"Heute wiederholen":complete?"✓ Gelernt · jederzeit wiederholen":"Neu · jetzt lernen";
-  card.append(label,state);card.onclick=()=>begin(lessonId);
+  const meta=document.createElement("span");meta.className=locked?"topic-lock-meta":complete?"topic-review-meta":"";
+  meta.textContent=locked?"🔒 Noch gesperrt":isDue?"Jetzt wiederholen":complete?"✓ Gelernt · jederzeit wiederholen":access==="resume"?"▶ Fortsetzen":"✓ Jetzt freigeschaltet";
+  card.append(label,meta);
+  if(!locked)card.onclick=()=>begin(lessonId);
   (complete?history:grid).appendChild(card);
  }
  updateAcademyAppbar();window.scrollTo(0,0);
@@ -3879,6 +3888,13 @@ function begin(requested){
  const subject=$("#academySubject").hidden?null:$("#academySubject").dataset.subject;
  const chosen=typeof requested==="string"?requested:subject?availableTopics(subject)[0]:dailyLesson()?.id||"sidq";
  if(!chosen||chosen!=="sidq"&&!CURRICULUM[chosen])return;
+ const access=academySchoolState().access(chosen);
+ if(!["new","resume","review"].includes(access)){
+  hideLesson();$("#academyHome").hidden=false;
+  renderHome();
+  $("#todaySummary").textContent="Diese Lektion ist noch gesperrt. Schließe erst deinen Unterricht ab. Das nächste Thema öffnet sich am vorgesehenen Lerntag.";
+  updateAcademyAppbar();return;
+ }
  activeLessonId=chosen;sessionStamp=String(Date.now())+"-"+chosen;focusPages[1]=0;focusPages[2]=0;focusPages[4]=0;
  prepareOwnerVoice();hideCategory();$("#academyHome").hidden=true;$("#lessonMain").hidden=false;
  applySelectedLesson();refreshSerhatLessonClip();
@@ -4065,7 +4081,7 @@ function speak(index,custom){
    let failed=false;
    const fallback=()=>{if(failed||!live())return;failed=true;deviceRead(t)};
    try{
-    const success=owner.play(t,{source:"kids-academy-preview",rate:age==="4-5"?.87:1,onended:()=>{if(live()){k++;next()}},onerror:fallback});
+    const success=owner.play(t,{source:"kids-academy-preview",rate:1, /* Prevent low-speed pitch/prosody drift in normal classroom */onended:()=>{if(live()){k++;next()}},onerror:fallback});
     if(!success)fallback();
    }catch(_){fallback()}
    return;
@@ -4173,7 +4189,7 @@ function persist(level,automatic=false){
  const wrongChoices=score.choices>score.correct||score.neededHelp>0;
  const n=(automatic||level==="help"||wrongChoices)?0:Math.min(Math.max(-1,baseIndex)+1,intervals.length-1);
  const due=new Date();due.setHours(12,0,0,0);due.setDate(due.getDate()+intervals[n]);
- const item={id,age,lessonId:activeLessonId,completedAt:Date.now(),nextDue:due.getTime(),intervalIndex:n,baseIntervalIndex:baseIndex,sessionStamp,
+ const item={id,age,lessonId:activeLessonId,completedAt:Date.now(),firstCompletedAt:Number(prev?.firstCompletedAt||prev?.completedAt||Date.now()),nextDue:due.getTime(),intervalIndex:n,baseIntervalIndex:baseIndex,sessionStamp,
   reviewCount:(Number(prev?.reviewCount)||0)+(sameAttempt?0:1),answerCount:score.done,choiceCorrect:score.correct,choiceAnswered:score.choices,neededHelp:score.neededHelp,selfReport:automatic?"pending":level};
  try{
   localStorage.setItem(storageKey(),JSON.stringify(item));clearDraft();
@@ -4247,11 +4263,31 @@ $("#nextQuestion").onclick=()=>{qIndex++;showQuestion();saveDraft()};$("#finishL
 $("#mic").onclick=beginVoiceRecording;$("#cancelMic").onclick=finishRecording;$("#voiceRetake").onclick=beginVoiceRecording;
 $("#answer").oninput=()=>{if($("#answer").value.trim())choice=null};
 all("[data-reflect]").forEach(b=>b.onclick=()=>persist(b.dataset.reflect));
-window.addEventListener("storage",e=>{if(["kids.activeProfile","kids.profiles.v1","kids.guest.gender.v1","kids.age"].includes(e.key))syncProfile(true)});
+window.addEventListener("storage",e=>{
+ if(["kids.activeProfile","kids.profiles.v1","kids.guest.gender.v1","kids.age"].includes(e.key))syncProfile(true);
+ else if(e.key&&e.key.startsWith("kids."+VERSION+".")){
+  renderHome();
+  if(!$("#academySubject").hidden)openCategory($("#academySubject").dataset.subject);
+ }
+});
+
 window.addEventListener("pageshow",()=>syncProfile(true));
-document.addEventListener("visibilitychange",()=>{if(document.hidden)stopAll();else syncProfile()});
+document.addEventListener("visibilitychange",()=>{
+ if(document.hidden)stopAll();
+ else{syncProfile();renderHome();if(!$("#academySubject").hidden)openCategory($("#academySubject").dataset.subject);}
+});
 window.addEventListener("pagehide",stopAll);
 initFocusControls();syncProfile(true);hideLesson();updateAcademyAppbar();
+let __schoolLastDate=academyDay().day;
+setInterval(()=>{
+ if(document.hidden)return;
+ const current=academyDay().day;
+ if(__schoolLastDate!==current){
+  __schoolLastDate=current;
+  renderHome();
+  if(!$("#academySubject").hidden)openCategory($("#academySubject").dataset.subject);
+ }
+},60000);
  /* Direct preview links are only navigation helpers; profile selection still
     respects saved real child profiles over demonstration parameters. */
  const previewRoute=new URLSearchParams(location.search);
