@@ -388,7 +388,7 @@ self.addEventListener("fetch",function(event){
     event.respondWith(networkFirst(request));
     return;
   }
-  if(url.pathname==="/kids/data/quiz-audio.json"||url.pathname==="/kids/data/dua-audio.json"||url.pathname==="/kids/data/dua-arabic-audio.json"||url.pathname==="/kids/data/dua-arabic-slow-audio.json"||url.pathname==="/kids/data/dua-word-audio.json"||url.pathname==="/kids/data/dua-kids.json"||url.pathname==="/kids/data/owner-voice-audio.json"){
+  if(url.pathname==="/kids/data/quiz-audio.json"||url.pathname==="/kids/data/dua-audio.json"||url.pathname==="/kids/data/dua-arabic-audio.json"||url.pathname==="/kids/data/dua-arabic-slow-audio.json"||url.pathname==="/kids/data/dua-word-audio.json"||url.pathname==="/kids/data/dua-kids.json"||url.pathname==="/kids/data/owner-voice-audio.json"||url.pathname==="/kids/data/academy-audio.json"){
     event.respondWith(networkFirst(request));
     return;
   }
