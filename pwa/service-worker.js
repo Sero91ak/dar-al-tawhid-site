@@ -1,0 +1,10 @@
+/* DĀR AL TAWḤĪD — isolated Android PWA service worker. Scope /pwa/ only. */
+const CACHE_PREFIX='dar-al-tawhid-pwa-';
+const CACHE_VERSION=CACHE_PREFIX+'v1';
+const SHELL_URL='/pwa/?pwa=1';
+async function cacheShell(r){if(!r||!r.ok)return r;const c=await caches.open(CACHE_VERSION);await c.put(SHELL_URL,r.clone());return r}
+self.addEventListener('install',e=>e.waitUntil((async()=>{try{await cacheShell(await fetch(SHELL_URL,{cache:'no-store'}))}catch(x){}await self.skipWaiting()})()));
+self.addEventListener('activate',e=>e.waitUntil((async()=>{const ks=await caches.keys();await Promise.all(ks.filter(k=>k.startsWith(CACHE_PREFIX)&&k!==CACHE_VERSION).map(k=>caches.delete(k)));await self.clients.claim()})()));
+self.addEventListener('message',e=>{const t=String(e.data&&e.data.type||'');if(t==='SKIP_WAITING')self.skipWaiting();if(t==='CLEAR_PWA_CACHE')e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k.startsWith(CACHE_PREFIX)).map(k=>caches.delete(k)))))});
+function cacheable(u,r){if(r.method!=='GET'||u.origin!==self.location.origin||r.headers.has('range'))return false;if(u.pathname.startsWith('/admin/')||u.pathname.startsWith('/kids/')||u.pathname.startsWith('/test/')||u.pathname.startsWith('/push/onesignal/'))return false;return /^(?:\/assets\/|\/content\/|\/data\/|\/q\/|\/quellen\/|\/widgets\/|\/apple-tv\/)/.test(u.pathname)||/\.(?:css|js|json|png|jpe?g|webp|svg|woff2?|mp3|m4a|aac|ogg)$/i.test(u.pathname)}
+self.addEventListener('fetch',e=>{const r=e.request;if(r.method!=='GET')return;const u=new URL(r.url);if(r.mode==='navigate'){if(!u.pathname.startsWith('/pwa'))return;e.respondWith(fetch(r,{cache:'no-store'}).then(cacheShell).catch(()=>caches.open(CACHE_VERSION).then(c=>c.match(SHELL_URL))).then(x=>x||Response.error()));return}if(u.pathname==='/manifest.json'||u.pathname==='/version.json'){e.respondWith(fetch(r,{cache:'no-store'}));return}if(!cacheable(u,r))return;e.respondWith(fetch(r,{cache:'no-store'}).then(async x=>{if(x&&x.ok){const c=await caches.open(CACHE_VERSION);c.put(r,x.clone()).catch(()=>null)}return x}).catch(()=>caches.open(CACHE_VERSION).then(c=>c.match(r))))});

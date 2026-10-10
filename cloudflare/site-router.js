@@ -229,7 +229,7 @@ function browserManifestResponse(request, androidBrowser = false) {
     display: "standalone",
     display_override: ["standalone", "minimal-ui"],
     start_url: "/pwa/?pwa=1",
-    scope: "/",
+    scope: "/pwa/",
     id: "/pwa/",
     theme_color: icon.theme,
     background_color: "#050706",
@@ -566,13 +566,12 @@ a,button,[role="button"],summary,[tabindex],label{-webkit-tap-highlight-color:tr
     });
   }
   async function ensureAndroidServiceWorkerReady(){
-    if(!("serviceWorker" in navigator))return false;
     try{
-      await navigator.serviceWorker.register("/service-worker.js",{scope:"/"});
-      await Promise.race([
-        navigator.serviceWorker.ready,
-        new Promise(function(resolve){setTimeout(resolve,1800)})
-      ]);
+      await fetch("/manifest.json",{cache:"no-store",credentials:"same-origin"});
+      if("serviceWorker" in navigator){
+        var regs=await navigator.serviceWorker.getRegistrations();
+        regs.forEach(function(reg){var worker=reg.active||reg.waiting||reg.installing;if(!worker||!worker.scriptURL)return;try{var sw=new URL(worker.scriptURL,location.href);if(sw.origin===location.origin&&sw.pathname==="/service-worker.js")reg.unregister()}catch(eSw){}});
+      }
       return true;
     }catch(e){return false}
   }
@@ -720,34 +719,10 @@ a,button,[role="button"],summary,[tabindex],label{-webkit-tap-highlight-color:tr
 
   try{
     if("serviceWorker" in navigator){
-      if(android){
-        navigator.serviceWorker.register("/service-worker.js",{scope:"/"}).catch(function(){});
-      }else{
-        navigator.serviceWorker.getRegistrations().then(function(regs){
-          regs.forEach(function(reg){
-            var worker=reg.active||reg.waiting||reg.installing;
-            if(!worker||!worker.scriptURL)return;
-            try{
-              var sw=new URL(worker.scriptURL,location.href);
-              if(sw.origin===location.origin&&sw.pathname==="/service-worker.js")reg.unregister();
-            }catch(eSw){}
-          });
-        }).catch(function(){});
-      }
+      navigator.serviceWorker.getRegistrations().then(function(regs){regs.forEach(function(reg){var worker=reg.active||reg.waiting||reg.installing;if(!worker||!worker.scriptURL)return;try{var sw=new URL(worker.scriptURL,location.href);if(sw.origin===location.origin&&sw.pathname==="/service-worker.js")reg.unregister()}catch(eSw){}})}).catch(function(){});
     }
+    if("caches" in window)caches.keys().then(function(keys){keys.forEach(function(k){if(/^dar-al-tawhid-offline-light-/i.test(k))caches.delete(k)})}).catch(function(){});
   }catch(eReg){}
-
-  if(!android){
-    try{
-      if("caches" in window){
-        caches.keys().then(function(keys){
-          keys.forEach(function(k){
-            if(/^dar-al-tawhid-offline-light-/i.test(k))caches.delete(k);
-          });
-        }).catch(function(){});
-      }
-    }catch(eCache){}
-  }
 
   function appleLogoMarkup(){
     return '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.37 12.64c-.03-2.16 1.76-3.2 1.84-3.25-1-1.47-2.57-1.67-3.12-1.69-1.32-.14-2.59.78-3.26.78s-1.7-.76-2.81-.74c-1.44.02-2.78.84-3.52 2.14-1.51 2.62-.39 6.5 1.08 8.63.72 1.04 1.58 2.21 2.71 2.17 1.09-.05 1.5-.7 2.81-.7s1.68.7 2.82.68c1.17-.02 1.91-1.06 2.62-2.11.83-1.2 1.17-2.37 1.19-2.43-.03-.01-2.27-.87-2.3-3.48zM14.5 6.9c.6-.73 1-1.74.89-2.75-.86.03-1.9.57-2.52 1.3-.55.64-1.04 1.67-.91 2.65.96.07 1.95-.49 2.54-1.2z"/></svg>';
@@ -1307,6 +1282,7 @@ export default {
           'window.__DAR_PWA_DEDICATED_APP=true;' +
           'window.__DAR_PWA_LAUNCH_MARKER=true;' +
           'try{sessionStorage.setItem("dar_pwa_launch_session_v1","1")}catch(e){}' +
+          'try{if("serviceWorker" in navigator){navigator.serviceWorker.register("/pwa/service-worker.js",{scope:"/pwa/"}).catch(function(){})}}catch(eSw){}' +
           'try{var r=document.documentElement;r.classList.add("dar-pwa-standalone-boot","dar-soft-booting","dar-dedicated-pwa-app","is-standalone-pwa","is-android");r.dataset.appPath="android-pwa"}catch(e){}' +
           '<\/script>';
         if (!html.includes('id="darDedicatedPwaBootV2"')) {

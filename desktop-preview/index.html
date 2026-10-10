@@ -2356,10 +2356,8 @@ button,input,select{font:inherit}
    try{
     fetch("/manifest.json",{cache:"no-store",credentials:"same-origin"}).catch(function(){});
     if("serviceWorker" in navigator){
-     navigator.serviceWorker.register("/service-worker.js",{scope:"/"}).then(function(){
-      return navigator.serviceWorker.ready;
-     }).then(function(){
-      window.__darSyncInstallButtons();
+     navigator.serviceWorker.getRegistrations().then(function(regs){
+      regs.forEach(function(reg){var worker=reg.active||reg.waiting||reg.installing;if(!worker||!worker.scriptURL)return;try{var sw=new URL(worker.scriptURL,location.href);if(sw.origin===location.origin&&sw.pathname==="/service-worker.js")reg.unregister()}catch(eSw){}});
      }).catch(function(){});
     }
    }catch(ePrime){}
@@ -2380,9 +2378,7 @@ button,input,select{font:inherit}
       event.preventDefault();
       try{
         if("serviceWorker" in navigator){
-          navigator.serviceWorker.register("/service-worker.js",{scope:"/"}).then(function(){
-            return navigator.serviceWorker.ready;
-          }).catch(function(){});
+          navigator.serviceWorker.getRegistrations().then(function(regs){regs.forEach(function(reg){var worker=reg.active||reg.waiting||reg.installing;if(!worker||!worker.scriptURL)return;try{var sw=new URL(worker.scriptURL,location.href);if(sw.origin===location.origin&&sw.pathname==="/service-worker.js")reg.unregister()}catch(eSw){}})}).catch(function(){});
         }
       }catch(ePrime){}
       window.__darPwaInstallState="preparing";
@@ -2435,8 +2431,9 @@ button,input,select{font:inherit}
  }catch(e){}
  try{
   if("serviceWorker" in navigator){
-   navigator.serviceWorker.register("/service-worker.js",{scope:"/"}).catch(function(){});
+   navigator.serviceWorker.getRegistrations().then(function(regs){regs.forEach(function(reg){var worker=reg.active||reg.waiting||reg.installing;if(!worker||!worker.scriptURL)return;try{var sw=new URL(worker.scriptURL,location.href);if(sw.origin===location.origin&&sw.pathname==="/service-worker.js")reg.unregister()}catch(eSw){}})}).catch(function(){});
   }
+  if("caches" in window)caches.keys().then(function(keys){keys.forEach(function(k){if(/^dar-al-tawhid-offline-light-/i.test(k))caches.delete(k)})}).catch(function(){});
  }catch(e){}
 })();
 </script>
@@ -3061,10 +3058,12 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
   })
  }
  async function darEnsurePwaServiceWorker(){
-  if(!("serviceWorker" in navigator))return false;
   try{
-   await navigator.serviceWorker.register("/service-worker.js",{scope:"/"});
-   await Promise.race([navigator.serviceWorker.ready,new Promise(function(resolve){setTimeout(resolve,1800)})]);
+   await fetch("/manifest.json",{cache:"no-store",credentials:"same-origin"});
+   if("serviceWorker" in navigator){
+    var regs=await navigator.serviceWorker.getRegistrations();
+    regs.forEach(function(reg){var worker=reg.active||reg.waiting||reg.installing;if(!worker||!worker.scriptURL)return;try{var sw=new URL(worker.scriptURL,location.href);if(sw.origin===location.origin&&sw.pathname==="/service-worker.js")reg.unregister()}catch(eSw){}});
+   }
    if(window.__darEarlyInstallPrompt&&!darDeferredPwaPrompt)darDeferredPwaPrompt=window.__darEarlyInstallPrompt;
    return true
   }catch(e){return false}
@@ -3172,7 +3171,7 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
   var darAndroid=/\bAndroid\b/i.test(String(navigator.userAgent||""));
   if(darAndroid)document.documentElement.classList.add("dar-android-browser");
   if(darPwaStandalone())document.documentElement.classList.add("dar-pwa-standalone");
-  if(darAndroid&&"serviceWorker" in navigator)navigator.serviceWorker.register("/service-worker.js",{scope:"/"}).catch(function(){})
+  if("serviceWorker" in navigator)navigator.serviceWorker.getRegistrations().then(function(regs){regs.forEach(function(reg){var worker=reg.active||reg.waiting||reg.installing;if(!worker||!worker.scriptURL)return;try{var sw=new URL(worker.scriptURL,location.href);if(sw.origin===location.origin&&sw.pathname==="/service-worker.js")reg.unregister()}catch(eSw){}})}).catch(function(){})
  }catch(ePwa){}
 
  function initReveal(){

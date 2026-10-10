@@ -37,7 +37,8 @@ if (fs.existsSync(publicRouterPath)) {
   assert.ok(router.includes("window.darInstallAndroidPwa=async function"), "Main website Android PWA installer missing");
   assert.ok(router.includes("__darEarlyInstallPrompt"), "Early Android beforeinstallprompt capture missing");
   assert.ok(router.includes("var installEvent=window.__darEarlyInstallPrompt||deferredInstall;"), "Android install prompt must use the earliest captured native prompt directly inside the user gesture");
-  assert.ok(router.includes('navigator.serviceWorker.register("/service-worker.js",{scope:"/"})'), "Android PWA service worker registration missing");
+  assert.ok(router.includes('navigator.serviceWorker.register("/pwa/service-worker.js",{scope:"/pwa/"})'), "Dedicated Android PWA service worker registration missing");
+  assert.ok(!router.includes('navigator.serviceWorker.register("/service-worker.js",{scope:"/"})'), "Public website must never register the root visitor service worker");
   assert.ok(router.includes("return !isNativeAppRequest(ua);"), "Android browsers must receive the public website");
   assert.ok(!router.includes("isRoot && (nativeApp || androidBrowser)"), "Android browsers must not be intercepted by the native root shell");
   assert.ok(router.includes("isRoot && nativeApp"), "Only native app user agents may receive the native root shell");
@@ -63,18 +64,21 @@ if (fs.existsSync(publicRouterPath)) {
   assert.ok(router.includes('dataset.appPath="android-pwa"'), "Dedicated Android PWA must mark its app path before first paint");
   assert.ok(router.includes('"is-standalone-pwa","is-android"'), "Dedicated Android PWA must activate standalone/mobile styling before first paint");
 }
-const pwaServiceWorker = fs.readFileSync(path.join(root, "service-worker.js"), "utf8");
-assert.ok(pwaServiceWorker.includes("requestComesFromDedicatedPwa"), "Installed PWA client isolation is missing");
-assert.ok(pwaServiceWorker.includes("dedicatedPwaNavigationTarget"), "Installed PWA root-navigation target is missing");
-assert.ok(pwaServiceWorker.includes("Response.redirect(dedicatedPwaNavigationTarget(url), 307)"), "Installed PWA root navigation must redirect the visible URL back to /pwa/");
-assert.ok(pwaServiceWorker.includes("/pwa/?pwa=1&post="), "Push/post launches must open the dedicated PWA shell");
-assert.ok(pwaServiceWorker.includes("normalizeDedicatedPwaLaunchUrl"), "Push launch normalization for the dedicated PWA is missing");
-assert.ok(pwaServiceWorker.includes("targetIsDedicatedPwa && !isDedicatedPwaUrl(clientUrl)"), "Push must not hijack a normal website tab when targeting the installed PWA");
-assert.ok(pwaServiceWorker.includes("const fallbackKey = shellKey === '/pwa/?pwa=1' ? shellKey : '/index.html'"), "Installed PWA must never fall back to the public website shell");
+const pwaServiceWorker = fs.readFileSync(path.join(root, "pwa/service-worker.js"), "utf8");
+assert.ok(pwaServiceWorker.includes("CACHE_PREFIX='dar-al-tawhid-pwa-'"), "Installed PWA cache namespace isolation is missing");
+assert.ok(pwaServiceWorker.includes("const SHELL_URL='/pwa/?pwa=1'"), "Dedicated PWA shell fallback is missing");
+assert.ok(pwaServiceWorker.includes("if(!u.pathname.startsWith('/pwa'))return"), "PWA worker must reject out-of-scope navigations");
+assert.ok(!pwaServiceWorker.includes("'/index.html'"), "PWA worker must never fall back to public website shell");
+
+
+
+
+
+
 assert.equal(pwaManifest.display, "standalone", "Public manifest must be installable as standalone PWA");
 assert.equal(pwaManifest.start_url, "/pwa/?pwa=1", "Installed Android PWA must launch the dedicated visitor app shell");
 assert.equal(pwaManifest.background_color, "#050706", "PWA system splash background must match the standard boot surface");
-assert.equal(pwaManifest.scope, "/", "PWA scope must cover the public website");
+assert.equal(pwaManifest.scope, "/pwa/", "PWA scope must be isolated from the public website");
 assert.equal(pwaManifest.id, "/pwa/", "PWA id must be dedicated to the installed visitor app and query-free");
 assert.ok(pwaManifest.icons.some((icon) => icon.sizes === "192x192" && /assets\/app-icons\/type-creme-ar\/icon-192\.png/.test(icon.src)), "Native iOS-equivalent 192px PWA icon missing");
 assert.ok(pwaManifest.icons.some((icon) => icon.sizes === "512x512" && /assets\/app-icons\/type-creme-ar\/icon-512\.png/.test(icon.src)), "Native iOS-equivalent 512px PWA icon missing");
