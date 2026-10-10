@@ -1,5 +1,5 @@
 name: Quran V8 Canonical Tadabbur Browser QA
-# Regression: toggles are checked relative to their initial state, source headings case-insensitively.
+# Regression: test canonical source, both heading styles, and preset toggle state transitions.
 on:
   workflow_dispatch:
   push:
