@@ -720,7 +720,7 @@ function kidsItemValid(url,response){
  // A stale HTML error page must never masquerade as a saved MP3/JPG/JSON.
  if(!new URL(url).pathname.endsWith(".html")&&type.includes("text/html"))return false;
  const path=new URL(url).pathname;
- if(/\\.(?:m4a|mp3)$/i.test(path)&&response.headers.get("Content-Length")==="0")return false;
+ if((path.endsWith(".m4a")||path.endsWith(".mp3"))&&response.headers.get("Content-Length")==="0")return false;
  return true;
 }
 async function kidsItemHas(cache,urls){
