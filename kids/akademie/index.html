@@ -2484,6 +2484,8 @@ body .subject-detail .subject-next{margin-top:14px!important}
 }
 
 
+/* V7.5.1 – tablet-only responsive rules. V7.4 smartphone styles preserved EXACTLY. */
+@media (min-width:768px) and (min-height:650px){
 /* V7.5 • unified adaptive layouts — iPhone, iPad portrait/landscape, desktop.
    The existing full-bleed hero, lesson pager, profiles and data stay intact. */
 :root{--academy-gutter:clamp(12px,3vw,30px);--academy-content:1160px}
@@ -2650,85 +2652,8 @@ body .lesson-main .lesson-navigation .pill{
 body .subject-detail{width:100%!important;max-width:980px!important;margin-inline:auto!important}
 body .subject-detail .subject-next,
 body .subject-detail .subject-roadmap{box-sizing:border-box!important;max-width:100%!important}
-@media(max-width:430px){
- :root{--academy-gutter:12px}
- body .academy-home{display:flex!important;flex-direction:column!important;gap:9px!important}
- body .academy-home > .overview-hero{
-  align-self:stretch!important;flex:none!important;
-  height:clamp(250px,69vw,284px)!important;max-height:284px!important;
-  margin:0 0 1px!important
- }
- body .academy-home > .today-class,
- body .academy-home > .journey,
- body .academy-home > .subjects{width:100%!important;flex:none!important}
- body .academy-home > .today-class{
-  padding:14px 15px!important;gap:4px!important;border-radius:20px!important
- }
- body .academy-home > .today-class .kicker{font-size:11px!important}
- body .academy-home > .today-class .today-text h2{
-  font-size:clamp(21px,5.9vw,25px)!important;margin:3px 0!important
- }
- body .academy-home > .today-class .today-text p{
-  font-size:15px!important;margin:4px 0!important
- }
- body .academy-home > .today-class .today-summary{font-size:12px!important;margin:4px 0!important}
- body .academy-home > .today-class .academy-time{font-size:12px!important;margin:4px 0!important}
- body .academy-home > .today-class .today-button{min-height:48px!important;margin:5px 0 0!important}
- body .academy-home > .journey{
-  border-radius:17px!important;padding:11px 14px!important;
-  display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,.8fr)!important;
-  gap:12px!important;align-items:center!important
- }
- body .academy-home > .journey h2{font-size:clamp(17px,4.8vw,22px)!important}
- body .academy-home > .journey #reviewNotice{font-size:11px!important;margin:3px 0!important}
- body .academy-home > .journey #journeyDetail{font-size:10px!important}
- body .academy-home > .journey .kicker{font-size:10px!important}
- body .academy-home > .subjects{padding:5px 0 14px!important}
- body .academy-home > .subjects .subjects-title{margin-bottom:8px!important}
- body .academy-home > .subjects .subjects-title h2{font-size:clamp(21px,5.5vw,26px)!important}
- body .academy-home > .subjects .category-grid{
-  grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important
- }
- body .academy-home > .subjects .category-card{
-  min-height:198px!important;max-height:none!important
- }
- body .academy-home > .subjects .category-card-copy{padding:9px 10px 11px!important}
- body .academy-home > .subjects .category-name{font-size:clamp(20px,5.5vw,24px)!important}
- body .academy-home > .subjects .category-detail{font-size:11px!important}
- body .lesson-main .lesson-stage{padding:12px!important;border-radius:19px!important}
- body .lesson-main .lesson-stage h2{font-size:clamp(22px,5.7vw,26px)!important}
- body .lesson-main .lesson-stage .stage-lead{font-size:16px!important}
- body .lesson-main .question-panel .question-prompt-card{padding:11px!important}
- body .lesson-main .question-panel .question-prompt{
-  font-size:clamp(18px,4.95vw,21px)!important
- }
- body .lesson-main .question-panel .choice-row{
-  grid-template-columns:minmax(0,1fr) minmax(73px,81px)!important;gap:7px!important
- }
- body .lesson-main .question-panel .choice-listen{min-width:73px!important;padding:9px 7px!important}
- body .lesson-main .question-panel .choice-button{font-size:clamp(15px,4.2vw,18px)!important}
- body .lesson-main .lesson-navigation .pill{min-height:46px!important;font-size:14px!important}
 }
-@media(min-width:431px) and (max-width:767px){
- :root{--academy-gutter:clamp(14px,3vw,20px)}
- body .academy-home{display:grid!important;grid-template-columns:1fr!important;gap:11px!important}
- body .academy-home > .overview-hero{
-  height:clamp(255px,54vw,304px)!important;max-height:304px!important
- }
- body .academy-home > .today-class,
- body .academy-home > .journey,
- body .academy-home > .subjects{grid-column:1/-1!important}
- body .academy-home > .journey{
-  display:grid!important;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)!important;
-  gap:15px!important;padding:14px 18px!important
- }
- body .academy-home > .subjects .category-grid{
-  grid-template-columns:repeat(2,minmax(0,1fr))!important
- }
- body .academy-home > .subjects .category-card{min-height:220px!important}
- body .lesson-main .question-panel{grid-template-columns:1fr!important}
-}
-@media(min-width:768px) and (max-width:1023px){
+@media(min-width:768px) and (max-width:1023px and (min-height:650px)){
  :root{--academy-gutter:clamp(22px,3.6vw,36px)}
  body .academy-home{
   display:grid!important;
@@ -2758,7 +2683,7 @@ body .subject-detail .subject-roadmap{box-sizing:border-box!important;max-width:
  body .lesson-main .question-panel .answer-interaction{width:100%!important}
  body .subject-detail{max-width:800px!important}
 }
-@media(min-width:1024px) and (max-width:1365px){
+@media(min-width:1024px) and (max-width:1365px and (min-height:650px)){
  :root{--academy-gutter:clamp(28px,3.2vw,44px)}
  body .academy-home{
   display:grid!important;
@@ -2784,7 +2709,7 @@ body .subject-detail .subject-roadmap{box-sizing:border-box!important;max-width:
   position:static!important
  }
 }
-@media(min-width:1366px){
+@media(min-width:1366px and (min-height:650px)){
  :root{--academy-gutter:34px}
  body .academy-home{
   display:grid!important;
@@ -2808,12 +2733,12 @@ body .subject-detail .subject-roadmap{box-sizing:border-box!important;max-width:
  }
  body .lesson-main .question-panel .question-prompt-card{position:static!important}
 }
-@media (prefers-reduced-motion:reduce){
+@media (min-width:768px) and (min-height:650px) and (prefers-reduced-motion:reduce){
  body .academy-home > .subjects .category-card{transition:none!important}
 }
 
 </style></head>
-<body data-profile="boy" data-preview-release="V7.5-20261010" data-preview-deploy="v7.5-adaptive-sizes"><main class="wrap">
+<body data-profile="boy" data-preview-release="V7.5.1-20261010" data-preview-deploy="v7.5.1-mobile-rollback-tablet-only"><main class="wrap">
 
 <header class="academy-header kids-detail-appbar" aria-label="Navigationsleiste Lernakademie">
  <button class="academy-nav-back" id="academyNavBack" type="button" aria-label="Zurück"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/><path d="M9 12h11"/></svg></button>
