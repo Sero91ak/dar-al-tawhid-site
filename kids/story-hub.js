@@ -203,16 +203,9 @@ function renderList(){
       '<span class="gh-story-art">'+(img?'<img src="'+esc(img)+'" alt="" decoding="async" loading="lazy">':'')+'</span>'+
       '<span class="gh-story-copy"><small>'+(m?.url?"HÖRBEREIT":"LESEN · AUDIO FOLGT")+'</small><strong>'+esc(storyName(item))+'</strong><em dir="rtl">'+esc(arabic(item,activeCategory))+'</em><span>'+esc(item.summary||"")+'</span></span></button>';
   }).join("");
-  $("#ghList").querySelectorAll("[data-gh-id]").forEach(b=>{
-    b.addEventListener("click",()=>selectStory(b.dataset.ghId));
-    const entry=list.find(s=>s.id===b.dataset.ghId);
-    if(entry)window.DARKidsItemDownloads?.story(b,{
-      category:activeCategory,item:entry,sourceUrl:cat.url,
-      artwork:artFor(entry,activeCategory,false),
-      hero:artFor(entry,activeCategory,true),
-      audioMeta:audioMeta(entry)
-    });
-  });
+  // Category cards remain clean: download controls belong to the opened player.
+  $("#ghList").querySelectorAll("[data-gh-id]").forEach(b=>
+    b.addEventListener("click",()=>selectStory(b.dataset.ghId)));
 }
 function openWorld(){
   lastFocus=document.activeElement;
@@ -244,8 +237,14 @@ function renderPlayer(){
   const refs=Array.isArray(active.sourceRefs)?active.sourceRefs:[];$("#ghSources").innerHTML=refs.map(ref=>'<span class="gh-source-chip">'+esc(ref)+'</span>').join("");
   $("#ghReadToggle").hidden=isYoung();
   $("#ghFollow").hidden=isYoung()||!meta?.url;
-  $(".gh-player-actions").hidden=isYoung();
+  // A standalone Offline action must remain available to younger children too.
+  $(".gh-player-actions").hidden=false;
   $("#ghFollow").textContent="Hören & mitlesen";
+  window.DARKidsItemDownloads?.storyDetail($(".gh-player-actions"),{
+    category:activeCategory,item:active,sourceUrl:cat.url,
+    artwork:artFor(active,activeCategory,false),
+    hero:img,audioMeta:meta
+  });
   setReadMode("closed",{restore:false});
   const hasAudio=!!meta?.url;
   $("#ghProgress").hidden=!hasAudio;
