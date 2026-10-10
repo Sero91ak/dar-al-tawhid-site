@@ -1,0 +1,32 @@
+name: Quran V4 Browser QA
+on:
+  workflow_dispatch:
+  push:
+    branches: [preview/quran-player-browser-links-20261010]
+    paths: [.github/workflows/qa-quran-v4-browser.yml]
+permissions:
+  contents: read
+jobs:
+  browser-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install standalone browser QA (no app modifications)
+        run: |
+          npm install --no-save --ignore-scripts --no-audit --no-fund playwright@1.57.0
+          npx playwright install --with-deps chromium
+      - name: Run V4 layout and interaction QA against deployed URLs
+        shell: bash
+        run: node scripts/qa-quran-v4-browser.cjs
+      - name: Save mobile visual snapshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: quran-v4-device-previews
+          path: .qa-quran-shots/
+          retention-days: 14
+          if-no-files-found: ignore
