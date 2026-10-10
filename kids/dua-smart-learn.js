@@ -1,5 +1,5 @@
 (function(){
-  /* DUA_AUDIO_RELEASE_1244_FINAL_SYNCED · V4_NATURAL_WORD_EDGES_20261010 · V4_SLOW_POST_LOAD_FIX_VERIFIED */
+  /* DUA_AUDIO_RELEASE_1244_FINAL_SYNCED · V4_SAFE_BREATH_TAIL_1308 · V4_SLOW_POST_LOAD_FIX_VERIFIED */
   "use strict";
 
   // FUSHA_AUDIO_RELEASE_20261007_V3 · full v2 · slow/word v3 · exact vocalized Arabic
@@ -64,12 +64,29 @@
       if(rms[k]>=voiceGate&&rms[k-1]>=voiceGate){last=k;break}
     }
     if(first<0||last<=first)return whole;
-    // Keep quiet neighbouring consonants before/after the voiced nucleus.
+    // Keep weak neighbouring consonants, including ه / ح and the last vowel.
     var leadSteps=0,tailSteps=0;
     while(first>0&&leadSteps<8&&rms[first-1]>=quietGate){first--;leadSteps++}
     while(last<rms.length-1&&tailSteps<10&&rms[last+1]>=quietGate){last++;tailSteps++}
+    // A few V4 clips contain a separate soft exhale AFTER the spoken word.
+    // Remove it only after >=180 ms of genuine low-level separation AND
+    // when the later island is short and substantially quieter than speech.
+    // Connected h/ḥ, Madd, Shaddah and short vowels are never noise-gated.
+    var quietRun=0,frameSeconds=step/rate;
+    for(var cut=first+1;cut<last;cut++){
+      quietRun=rms[cut]<quietGate?quietRun+1:0;
+      if(quietRun*frameSeconds<.180)continue;
+      var before=cut-quietRun+1,spokenPeak=0,afterPeak=0;
+      if((before-first)*frameSeconds<.20||(last-cut)*frameSeconds>.48)continue;
+      for(var head=first;head<before;head++)spokenPeak=Math.max(spokenPeak,rms[head]);
+      for(var tail=cut+1;tail<=last;tail++)afterPeak=Math.max(afterPeak,rms[tail]);
+      if(afterPeak>0&&afterPeak<spokenPeak*.46){
+        last=Math.max(first+1,before-1);
+        break;
+      }
+    }
     var start=Math.max(0,first*step/rate-.090);
-    var end=Math.min(duration,(last+1)*step/rate+.120);
+    var end=Math.min(duration,(last+1)*step/rate+.095);
     if(end-start<Math.min(.22,duration*.28))return whole;
     return{buffer:buffer,start:start,end:end};
   }
@@ -133,7 +150,7 @@
           source.buffer=item.buffer;
           var gain=ctx.createGain();
           source.connect(gain);gain.connect(ctx.destination);
-          var fade=Math.min(.032,duration*.16);
+          var fade=Math.min(.022,duration*.10);
           gain.gain.setValueAtTime(0,when);
           gain.gain.linearRampToValueAtTime(1,when+fade);
           gain.gain.setValueAtTime(1,when+duration-fade);

@@ -112,6 +112,13 @@ const quiet=trim(signal(1.5,[[.4,.7,.0005]]));
 assert(quiet.start===0&&quiet.end===1.5,"Very soft words must not be cut");
 const short=trim(signal(.17,[[0,.16,.2]]));
 assert(short.start===0&&short.end===.17,"Short words must not be cut");
+const breathTail=trim(signal(2.65,[[.30,.40,.012],[.40,1.12,.18],[1.12,1.20,.018],[1.75,2.03,.045]]));
+assert(breathTail.end>=1.20&&breathTail.end<1.50,
+  "A separate lower-level exhale must be excluded, without clipping the final Arabic consonant");
+const joinedFinal=trim(signal(2.0,[[.25,1.00,.18],[1.08,1.46,.08]]));
+assert(joinedFinal.end>=1.46,
+  "A weak but connected final consonant must remain in the V4 word");
+
 
 const generator=read(".github/workflows/build-kids-quiz-owner-voice.yml");
 assert(!generator.includes('value="[slowly] "+value'),"Slow spoken directive is still in generator");
@@ -153,7 +160,7 @@ for(const [file,count] of [
   assert(entries.every(e=>Boolean(e.url)&&Number(e.durationSeconds)>.1),file+" clip metadata");
 }
 for(const page of ["kids/index.html","kids/start.html","kids/shell.html"])
-  assert(read(page).includes("/kids/dua-smart-learn.js?v=1307"),page+" stale script");
-assert(read("kids/sw.js").includes('"/kids/dua-smart-learn.js?v=1307"'),"SW precache mismatch");
+  assert(read(page).includes("/kids/dua-smart-learn.js?v=1308"),page+" stale script");
+assert(read("kids/sw.js").includes('"/kids/dua-smart-learn.js?v=1308"'),"SW precache mismatch");
 console.log("KIDS DUA AUDIO PASS: full phrase unchanged, slow focus, soft word-boundary QA, 120/120/696 registered, PWA aligned");
 console.log("Not certified: real audible breaths, native Arabic pronunciation and device QA.");
