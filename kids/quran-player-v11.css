@@ -1,0 +1,98 @@
+/* TAWḤĪD KIDS · Qurʾān V11 – integrated overlay; existing lesson/mic/progress IDs unchanged.
+   Fixed screen, internal scroll only. Profile color follows .app[data-gender]. */
+#quranModal { --kq-bg:#253f70;--kq-bg2:#19294e;--kq-ink:#fff9ef;--kq-accent:#adf3df;--kq-accent-ink:#153955;
+  --kq-edge:rgba(207,232,255,.23);--kq-soft:#cbdbea;
+}
+.app[data-gender="girl"] #quranModal,
+.app[data-gender="female"] #quranModal,
+.app[data-gender="maedchen"] #quranModal {
+  --kq-bg:#604a72;--kq-bg2:#302643;--kq-ink:#fff8fc;--kq-accent:#f5cce1;--kq-accent-ink:#58334f;--kq-edge:rgba(250,214,245,.28);--kq-soft:#ead7e8;
+}
+#quranModal.open{position:fixed!important;inset:0!important;width:100%!important;height:100dvh!important;
+ overflow:hidden!important;overscroll-behavior:none!important;z-index:450!important;
+ background:var(--kq-bg2)!important;color:var(--kq-ink)!important;}
+#quranModal .modal-shell{position:relative!important;width:100%!important;max-width:none!important;
+ min-height:0!important;height:100dvh!important;max-height:100dvh!important;overflow:hidden!important;
+ display:flex!important;flex-direction:column!important;gap:0!important;margin:0!important;
+ padding:calc(6px + env(safe-area-inset-top,0px)) clamp(10px,3vw,26px) calc(9px + env(safe-area-inset-bottom,0px))!important;
+ background:radial-gradient(ellipse at 52% 35%,rgba(255,255,255,.055),transparent 62%),
+ linear-gradient(155deg,var(--kq-bg),var(--kq-bg2))!important;
+ border:0!important;border-radius:0!important;box-shadow:none!important;}
+#quranModal .modal-top{flex:0 0 auto!important;display:grid!important;grid-template-columns:46px minmax(0,1fr) 46px!important;
+ min-height:52px!important;align-items:center!important;gap:8px!important;margin:0!important;padding:2px 0 7px!important;
+ border-bottom:1px solid var(--kq-edge)!important;}
+#quranModal .close-btn{width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;
+ display:grid!important;place-items:center!important;border:1px solid var(--kq-edge)!important;
+ background:rgba(255,255,255,.07)!important;border-radius:15px!important;color:var(--kq-ink)!important;
+ font-size:25px!important;padding:0!important;margin:0!important;transform:none!important;}
+#quranModal .modal-title{min-width:0!important;display:flex!important;justify-content:center!important;align-items:center!important;
+ overflow:hidden!important;margin:0!important;padding:0!important;}
+#quranModal .modal-title strong{font:500 clamp(22px,5.8vw,36px)/1.2 Georgia,'Times New Roman',serif!important;
+ color:var(--kq-ink)!important;text-align:center!important;white-space:nowrap!important;overflow:hidden!important;
+ text-overflow:ellipsis!important;letter-spacing:-.045em!important;}
+#quranModal .modal-title small{display:none!important}
+#quranModal .top-spacer{min-width:44px!important}
+#quranModal .quran-player{flex:1 1 0!important;min-height:0!important;max-height:100%!important;
+ display:grid!important;grid-template-rows:auto minmax(0,1fr) auto!important;gap:0!important;overflow:hidden!important}
+#quranModal #progressDots{display:none!important}
+#quranModal .lesson-steps{grid-row:1!important;min-height:48px!important;display:grid!important;
+ grid-template-columns:repeat(3,minmax(0,1fr))!important;padding:4px!important;margin:4px 0 0!important;gap:5px!important;
+ background:rgba(8,20,37,.35)!important;border:1px solid var(--kq-edge)!important;border-radius:17px!important;}
+#quranModal .lesson-step{display:grid!important;place-items:center!important;min-width:0!important;min-height:40px!important;
+ margin:0!important;padding:5px!important;border-radius:13px!important;border:0!important;
+ background:transparent!important;color:var(--kq-soft)!important;
+ font-size:clamp(11px,2.8vw,15px)!important;letter-spacing:.02em!important;font-weight:800!important;}
+#quranModal .lesson-step.active,#quranModal .lesson-step.done{background:var(--kq-accent)!important;
+ color:var(--kq-accent-ink)!important;}
+#quranModal .ayah-stage{grid-row:2!important;display:flex!important;flex:1 1 0!important;flex-direction:column!important;
+ justify-content:flex-start!important;align-items:stretch!important;overflow-y:auto!important;overflow-x:hidden!important;
+ overscroll-behavior:contain!important;min-height:0!important;height:100%!important;max-height:100%!important;
+ padding:10px 4px!important;margin:0!important;border:0!important;background:transparent!important;}
+#quranModal .ayah-box{flex:0 0 auto!important;align-self:stretch!important;margin:auto 0!important;max-width:960px!important;
+ width:100%!important;min-height:0!important;padding:6px 0 12px!important;background:transparent!important;
+ border:0!important;box-shadow:none!important;}
+#quranModal #learnStatus{font-size:clamp(12px,3vw,15px)!important;line-height:1.45!important;
+ color:var(--kq-accent)!important;font-weight:750!important}
+#quranModal #ayahAr{font:400 clamp(32px,8vw,58px)/1.8 'KFGQPC Uthman Taha Naskh','Amiri','Noto Naskh Arabic','Geeza Pro',serif!important;
+ color:var(--kq-ink)!important;direction:rtl!important;text-align:center!important;text-shadow:none!important;
+ overflow-wrap:normal!important;word-break:normal!important;margin:10px 0!important;}
+#quranModal .qword{display:inline-block!important;line-height:inherit!important}
+#quranModal #ayahTr,#quranModal #ayahDe{color:var(--kq-ink)!important;text-align:center!important;
+ font-size:clamp(14px,3.6vw,20px)!important;line-height:1.6!important;margin:10px auto!important;
+ max-width:820px!important;white-space:normal!important}
+#quranModal #ayahTr{color:var(--kq-soft)!important;font-style:italic}
+#quranModal .quran-controls{grid-row:3!important;flex:0 0 auto!important;min-height:0!important;
+ padding:10px 0 3px!important;margin:0!important;border-top:1px solid var(--kq-edge)!important;
+ background:linear-gradient(180deg,transparent,rgba(0,0,0,.07))!important}
+#quranModal .main-actions,#quranModal .lesson-nav{display:grid!important;
+ grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;margin:5px 0!important}
+#quranModal #ayahPlay,#quranModal #speakAlong,#quranModal #prevAyah,#quranModal #nextAyah{
+ min-height:46px!important;min-width:0!important;width:100%!important;max-width:none!important;
+ border-radius:16px!important;padding:8px 10px!important;font-size:clamp(12px,3vw,16px)!important;
+ background:rgba(255,255,255,.1)!important;color:var(--kq-ink)!important;
+ border:1px solid var(--kq-edge)!important;box-shadow:none!important;transform:none!important}
+#quranModal #ayahPlay{background:var(--kq-accent)!important;color:var(--kq-accent-ink)!important;font-weight:850!important}
+#quranModal #nextAyah:disabled{opacity:.53!important}
+#quranModal .quran-mini-note{display:none!important}
+#quranModal .quran-v11-reciters{display:flex;align-items:center;justify-content:space-between;gap:8px;
+ margin:2px 0 7px;padding:3px 9px;background:rgba(255,255,255,.075);border:1px solid var(--kq-edge);
+ border-radius:15px;min-height:44px;color:var(--kq-soft)}
+#quranModal .quran-v11-reciters label{font-size:clamp(11px,2.8vw,14px);font-weight:850}
+#quranModal #kidsQuranReciterV11{flex:1 1 auto;min-width:0;max-width:67%;height:37px;padding:0 8px;border-radius:10px;
+ font-size:clamp(12px,3vw,15px);font-weight:800;text-align:right;
+ border:1px solid var(--kq-edge);background:var(--kq-bg2);color:var(--kq-ink)}
+#quranModal button:focus-visible,#quranModal select:focus-visible{
+ outline:2px solid var(--kq-accent)!important;outline-offset:2px!important}
+@media(max-height:680px){
+ #quranModal .modal-top{min-height:45px!important;padding:0 0 3px!important}
+ #quranModal .lesson-steps{min-height:42px!important}
+ #quranModal .lesson-step{min-height:35px!important}
+ #quranModal .quran-controls{padding:4px 0 0!important}
+ #quranModal #ayahPlay,#quranModal #speakAlong,#quranModal #prevAyah,#quranModal #nextAyah{min-height:42px!important}
+ #quranModal #ayahAr{margin:5px 0!important;line-height:1.58!important}
+}
+@media(max-width:350px){
+ #quranModal .modal-title strong{font-size:21px!important}
+ #quranModal .quran-v11-reciters{padding-inline:5px}
+ #quranModal .lesson-step{font-size:10px!important}
+}
