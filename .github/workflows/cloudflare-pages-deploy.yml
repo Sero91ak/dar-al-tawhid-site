@@ -71,10 +71,11 @@ concurrency:
   # Prevents an older visitor run from finishing after a newer Kids/audio deploy
   # and rolling the same Cloudflare Worker back to stale static assets.
   group: dar-al-tawhid-production-worker-deploy
-  # Nur der neueste relevante Produktionsstand darf veröffentlichen.
-  # Ein neuerer Visitor/Kids/Web-Commit verwirft einen älteren Lauf, bevor dieser
-  # einen veralteten Worker über den aktuellen Stand legen kann.
-  cancel-in-progress: true
+  # Never cancel a running production publish on another Kids/Visitor/preview push.
+  # Pending runs serialize behind one production lock; the existing strict
+  # "Veralteten Produktionslauf vor Publish blockieren" check rejects stale
+  # relevant commits BEFORE wrangler, so no older Worker can overwrite newer assets.
+  cancel-in-progress: false
 
 jobs:
   classify:
