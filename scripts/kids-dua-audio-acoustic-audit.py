@@ -127,7 +127,7 @@ def main() -> int:
     print(json.dumps(report, ensure_ascii=False, indent=2))
     # Full-library audit is discovery-only. It must not modify the manifest,
     # regenerate audio or silently approve consonants on RMS alone.
-    if incorrect and not full_catalogue:
+    if incorrect:
         raise AssertionError(f"M4A duration differs from its published manifest: {[r['word'] for r in incorrect]}")
     print(f"KIDS DUA ACOUSTIC AUDIT PASS: {len(rows)} decoded; "
           f"{len(incorrect)} duration discrepancies; "
