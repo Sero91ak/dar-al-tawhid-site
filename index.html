@@ -24880,11 +24880,18 @@ function getPushConnectionStatus(){
   const pwa=isStandalonePwa();
   const ios=isIOSDevice();
   const native=isDarNativeApp();
-  if(native)return {permission,optedIn:true,subId:"native-app",pwa:true,ios:true,native:true,serverOk:true,ready:true};
+  if(native){
+    const android=window.DAR_ANDROID_NATIVE_APP===true||/DarAlTawhidAndroid/i.test(String(navigator.userAgent||""));
+    const nativeId=android?String(window.DAR_ANDROID_ONESIGNAL_ID||window.DAR_ANDROID_PUSH_TOKEN||""):"native-app";
+    return {permission,optedIn:android?!!nativeId:true,subId:nativeId,pwa:true,ios:!android,native:true,android,
+      serverOk:!!nativeId,ready:!!nativeId};
+  }
   return {permission,optedIn,subId,pwa,ios,native:false,serverOk:optedIn&&!!subId,ready:permission==="granted"&&optedIn&&!!subId&&(!ios||pwa)};
 }
 function pushConnectionStatusRows(s,serverMissingLabel){
-  if(s.native)return [["App",true,"iOS-App"],["Push",true,"über die App"],["Web-Push",true,"nicht nötig"]];
+  if(s.native)return [["App",true,s.android?"Android-App":"iOS-App"],
+    ["Push",s.android?s.ready:true,s.android?(s.ready?"Android-App verbunden":"Android-Push noch nicht verbunden"):"über die App"],
+    ["Web-Push",true,"nicht nötig"]];
   return [
     ["App gespeichert",s.pwa||!s.ios,s.pwa?"Home-Bildschirm":(s.ios?"Safari-Tab – bitte speichern":"Browser")],
     ["Erlaubnis",s.permission==="granted",s.permission==="granted"?"erlaubt":s.permission],
@@ -24895,7 +24902,7 @@ function pushSyncRefreshHint(){return "Startseite → ↻ Sync in der Statusleis
 function renderPushConnectionStatus(){
   const s=getPushConnectionStatus();
   const rows=pushConnectionStatusRows(s,"fehlt – Sync");
-  return `<details class="prayer-push-status"><summary>Push-Status auf diesem Gerät</summary><div class="prayer-push-status-body"><div class="prayer-push-status-grid">${rows.map(([label,ok,val])=>`<div class="prayer-push-status-item ${ok?"ok":"warn"}"><b>${esc(label)}</b><span>${esc(String(val))}</span></div>`).join("")}</div><p class="prayer-push-status-note">${s.native?"In der iOS-App laufen Pushs über die App, nicht über OneSignal im Browser.":"Bei rotem Status: "+esc(pushSyncRefreshHint())}</p></div></details>`;
+  return `<details class="prayer-push-status"><summary>Push-Status auf diesem Gerät</summary><div class="prayer-push-status-body"><div class="prayer-push-status-grid">${rows.map(([label,ok,val])=>`<div class="prayer-push-status-item ${ok?"ok":"warn"}"><b>${esc(label)}</b><span>${esc(String(val))}</span></div>`).join("")}</div><p class="prayer-push-status-note">${s.native?(s.android?"In der Android-App werden Benachrichtigungen über die native Android-App und nicht über Browser-Web-Push zugestellt.":"In der iOS-App laufen Pushs über die App, nicht über OneSignal im Browser."):"Bei rotem Status: "+esc(pushSyncRefreshHint())}</p></div></details>`;
 }
 function refreshPushConnectionStatusUI(){
   try{
@@ -24905,7 +24912,7 @@ function refreshPushConnectionStatusUI(){
     const rows=pushConnectionStatusRows(s,"fehlt – Aktualisieren");
     root.innerHTML=rows.map(([label,ok,val])=>`<div class="prayer-push-status-item ${ok?"ok":"warn"}"><b>${esc(label)}</b><span>${esc(String(val))}</span></div>`).join("");
     const note=root.closest(".prayer-push-status")?.querySelector(".prayer-push-status-note");
-    if(note)note.textContent=s.native?"In der iOS-App laufen Pushs über die App, nicht über OneSignal im Browser.":"Bei rotem Status: "+pushSyncRefreshHint();
+    if(note)note.textContent=s.native?(s.android?"In der Android-App werden Benachrichtigungen über die native Android-App und nicht über Browser-Web-Push zugestellt.":"In der iOS-App laufen Pushs über die App, nicht über OneSignal im Browser."):"Bei rotem Status: "+pushSyncRefreshHint();
   }catch(e){}
 }
 async function ensureOneSignalServiceWorkerReady(){
@@ -24920,7 +24927,7 @@ async function ensureOneSignalServiceWorkerReady(){
 }
 async function repairPushConnection({silent=false}={}){
   const issues=[];
-  if(isDarNativeApp()){if(!silent)alert("In der iOS-App laufen Pushs über die App. OneSignal-Web-Push ist hier nicht nötig.");return {ok:true,issues,subscriptionId:"native-app",welcomed:false};}
+  if(isDarNativeApp()){if(!silent)alert(window.DAR_ANDROID_NATIVE_APP===true?"Android-App: Benachrichtigungen kommen über die App, nicht über Browser-Web-Push.":"In der iOS-App laufen Pushs über die App. OneSignal-Web-Push ist hier nicht nötig.");return {ok:true,issues,subscriptionId:"native-app",welcomed:false};}
   if(!hasNotificationApi()){issues.push("Browser unterstützt keine Benachrichtigungen.");if(!silent)alert(issues.join("\n"));return {ok:false,issues};}
   if(isIOSDevice()&&!isStandalonePwa())issues.push("iPhone/iPad: App muss über Safari → Teilen → Zum Home-Bildschirm gespeichert sein.");
   await ensureOneSignalServiceWorkerReady();
@@ -27150,7 +27157,7 @@ function renderNotificationCenter({embedded=false}={}){
       <div id="notificationHealthBox" class="notification-health" hidden><p id="notificationHealthText">Push-Status wird geprüft…</p><button type="button" class="notification-action" id="notificationReenableBtn">Benachrichtigungen erneut aktivieren</button><button type="button" class="notification-action" id="notificationDeviceTestBtn" hidden>Testpush senden</button></div>
       <div class="notification-hero__status">
         <span class="notification-status-chip ${activeCount?"is-on":""}">${activeCount} Bereiche aktiv</span>
-        <span class="notification-status-chip ${native||permission==="granted"?"is-on":""}">${native?"iOS-App":permission==="granted"?"Mitteilungen erlaubt":"Erlaubnis ausstehend"}</span>
+        <span class="notification-status-chip ${native||permission==="granted"?"is-on":""}">${native?(window.DAR_ANDROID_NATIVE_APP===true?"Android-App":"iOS-App"):permission==="granted"?"Mitteilungen erlaubt":"Erlaubnis ausstehend"}</span>
         <span class="notification-status-chip ${locationReady?"is-on":""}">${locationReady?esc(s.city||"Standort aktiv"):"Standort fehlt"}</span>
       </div>
     </section>
