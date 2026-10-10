@@ -16,5 +16,11 @@
     "Schön, dass du da bist!",
     "Heute geht es darum, die Wahrheit zu sagen. Wir hören zu und überlegen zusammen. Du darfst eine Pause machen.",
     "Manchmal geht etwas aus Versehen kaputt."
-  ]
+  ],
+  "retry": {
+    "iteration": 2,
+    "reason": "Set up missing runner ffmpeg tools before starting the first bounded master voice generation",
+    "noAdditionalText": true,
+    "expectedTotalClips": 4
+  }
 }
