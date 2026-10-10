@@ -294,13 +294,19 @@
     qa(".bottom-nav .nav-btn").forEach(b => b.classList.toggle("active", b.dataset.target === "dua"));
     document.documentElement.setAttribute("data-view", "dua");
     closeDetail(false);
-    const shell = q(".shell");
-    requestAnimationFrame(() => {
-      if (shell) {
-        try { shell.scrollTo({ top: 0, left: 0, behavior: "auto" }); }
-        catch (_) { shell.scrollTop = 0; }
-      }
-    });
+    // Keep Duʿāʾ on the exact same zero-scroll baseline as all other tabs.
+    if (typeof window.DARKidsResetMainScroll === "function") {
+      window.DARKidsResetMainScroll();
+    } else {
+      const reset = () => {
+        const shell = q(".shell");
+        if (shell) shell.scrollTop = 0;
+        if (document.scrollingElement) document.scrollingElement.scrollTop = 0;
+        try { window.scrollTo(0, 0); } catch (_) {}
+      };
+      reset();
+      requestAnimationFrame(() => requestAnimationFrame(reset));
+    }
     renderResume();
     renderLibrary();
   }
