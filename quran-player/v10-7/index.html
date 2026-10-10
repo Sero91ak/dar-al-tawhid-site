@@ -679,7 +679,7 @@ function refreshMediaSession(){
 }
 if('mediaSession' in navigator){
   const commands={
-    play:()=>playToggle(),pause:()=>pause(),
+    play:()=>{if(audio.paused)playToggle()},pause:()=>{if(!audio.paused)pause()},
     nexttrack:()=>navigate(1,true),previoustrack:()=>navigate(-1,true),
     seekto:e=>{if(Number.isFinite(e.seekTime)&&audio.duration){audio.currentTime=Math.max(0,Math.min(e.seekTime,audio.duration));updateProgress();refreshMediaSession()}}
   };
