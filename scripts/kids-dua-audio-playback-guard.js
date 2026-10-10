@@ -39,23 +39,23 @@ const speedHarness=`(function(){
   function setStatus(){}
   ${"function playUrl(url,whichMode,label,playRate){"+extracted[1]+"\n}"}
   playUrl("/existing-master.m4a","full","",1);
-  playUrl("/existing-master.m4a","slow","",.86);
+  playUrl("/existing-master.m4a","slow","",.77);
   playUrl("/existing-word.m4a","word","");
   return observations;
 })()`;
 const rates=vm.runInNewContext(speedHarness,{Promise},{timeout:4000});
 assert.equal(rates.length,3);
 assert.equal(rates[0].rate,1,"Normal mode must remain original tempo");
-assert.equal(rates[1].rate,.86,"Slow mode must NOT reset to 1x on media load");
-assert.equal(rates[1].defaultRate,.86,"Slow mode must set the native default rate");
-assert.equal(rates[1].afterPlaying,.86,"iOS rate reset during play must be corrected");
+assert.equal(rates[1].rate,.77,"Slow mode must NOT reset to 1x on media load");
+assert.equal(rates[1].defaultRate,.77,"Slow mode must set the native default rate");
+assert.equal(rates[1].afterPlaying,.77,"iOS rate reset during play must be corrected");
 assert.equal(rates[2].rate,1,"Slow rate leaked into word mode");
 assert(rates.every(x=>x.pitch===true),"Time stretch must preserve the Arabic pitch");
 assert.equal(rates[0].src,rates[1].src,"Slow mode must reuse the existing Fuṣḥā master, with zero TTS synthesis");
 
 for(const key of [
   'var CLEAN_GAP=0.19;',
-  'var CLEAN_SLOW_RATE=0.86;',
+  'var CLEAN_SLOW_RATE=0.77;',
   'var rate=slow?CLEAN_SLOW_RATE:1;',
   'var direct=requestedDua.audioArabicUrl;',
   'var approvedSlow=mode==="slow"?approvedNativeSlowUrl(currentDua):"";',
@@ -79,6 +79,10 @@ for(const key of [
 ])assert(js.includes(key),"Missing playback invariant: "+key);
 assert(!js.includes("speechSynthesis"),"Unexpected system TTS in Duʿāʾ player");
 assert(js.includes("audio.playbackRate=requestedRate"),"iOS post-load slow-speed correction missing");
+assert(js.includes("audio.onratechange=ensureRequestedRate;"),"iOS ratechange reset protection missing");
+assert(js.includes("audio.onloadedmetadata=ensureRequestedRate;"),"iOS metadata reset protection missing");
+assert(js.includes("Langsam · 0,77×"),"Slow mode must be visibly distinguishable");
+
 assert(js.includes("if(playCleanSequence([e.url],[seg],"),"Word fallback must use WebAudio cleaning");
 assert(js.includes("var BATCH_SIZE=5;"),"Long Duʿāʾ word sequences must use bounded requests");
 assert(js.includes("var latestWordRequest=0;"),"Word audio promises must be invalidated on mode change");
@@ -118,6 +122,10 @@ assert(breathTail.end>=1.20&&breathTail.end<1.50,
 const joinedFinal=trim(signal(2.0,[[.25,1.00,.18],[1.08,1.46,.08]]));
 assert(joinedFinal.end>=1.46,
   "A weak but connected final consonant must remain in the V4 word");
+const softExhale=trim(signal(2.4,[[.25,1.07,.18],[1.18,1.46,.016]]));
+assert(softExhale.end>=1.07&&softExhale.end<1.16,
+  "A clearly separated very soft exhale must not remain audible after the Fuṣḥā word");
+
 
 
 const generator=read(".github/workflows/build-kids-quiz-owner-voice.yml");
@@ -160,7 +168,7 @@ for(const [file,count] of [
   assert(entries.every(e=>Boolean(e.url)&&Number(e.durationSeconds)>.1),file+" clip metadata");
 }
 for(const page of ["kids/index.html","kids/start.html","kids/shell.html"])
-  assert(read(page).includes("/kids/dua-smart-learn.js?v=1308"),page+" stale script");
-assert(read("kids/sw.js").includes('"/kids/dua-smart-learn.js?v=1308"'),"SW precache mismatch");
+  assert(read(page).includes("/kids/dua-smart-learn.js?v=1310"),page+" stale script");
+assert(read("kids/sw.js").includes('"/kids/dua-smart-learn.js?v=1310"'),"SW precache mismatch");
 console.log("KIDS DUA AUDIO PASS: full phrase unchanged, slow focus, soft word-boundary QA, 120/120/696 registered, PWA aligned");
 console.log("Not certified: real audible breaths, native Arabic pronunciation and device QA.");
