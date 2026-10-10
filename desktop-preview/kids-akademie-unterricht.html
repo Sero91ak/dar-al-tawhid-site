@@ -3569,13 +3569,23 @@ function syncProfile(force=false){
 }
 
 function prepareOwnerVoice(){
- // Bestehende große Stimmenarchive nur im Unterricht und niemals auf der Startseite laden.
- if(window.DARKidsOwnerVoice||window.__academyOwnerVoiceRequested)return;
+ // Die Serhat-Archive werden nur auf Unterrichtsseiten geladen, nicht beim Öffnen der Startseite.
+ if(window.DARKidsOwnerVoice)return Promise.resolve(window.DARKidsOwnerVoice);
+ if(window.__academyOwnerVoicePromise)return window.__academyOwnerVoicePromise;
  window.__academyOwnerVoiceRequested=true;
- const src=document.createElement("script");src.src="/kids/owner-voice.js?v=8";src.async=true;
- src.onerror=()=>{window.__academyOwnerVoiceRequested=false;
-  $("#voiceStatus").textContent="Du kannst weiterhin auf „Anhören“ tippen."};
- document.head.appendChild(src);
+ window.__academyOwnerVoicePromise=new Promise(resolve=>{
+  const script=document.createElement("script");
+  script.src="/kids/owner-voice.js?v=academy-serhat-v1-20261010";script.async=true;
+  script.onload=()=>resolve(window.DARKidsOwnerVoice||null);
+  script.onerror=()=>{
+   window.__academyOwnerVoiceRequested=false;
+   window.__academyOwnerVoicePromise=null;
+   const note=$("#audioDiagnostics");if(note)note.textContent="Das Stimmenarchiv konnte nicht geladen werden.";
+   resolve(null);
+  };
+  document.head.appendChild(script);
+ });
+ return window.__academyOwnerVoicePromise;
 }
 
 
@@ -3828,6 +3838,14 @@ function speak(index,custom){
  const highlights=index===1?(custom?[all("#explainWords [data-spoken]")[focusPages[1]]]:all("#explainWords [data-spoken]")):index===2?[$(".teacher-explainer")]:[];
  let k=0;
  const live=()=>token===voiceToken&&index===step;
+ let waitedForMaster=false;
+ function certifiedOwnerHas(owner,t){
+  if(!owner||typeof owner.entry!=="function")return false;
+  const e=owner.entry(t);
+  return !!(e&&e.url&&e.voiceProfileId==="serhat-owner-voice-2026"&&
+   e.sourceVoice==="authorized-owner-voice"&&
+   (e.sourceSpeaker==="Serhat Abu Malik"||e.sourceType==="local-owner-generated"));
+ }
  function deviceRead(t){
   if(!live())return;
   if(!("speechSynthesis" in window)||typeof SpeechSynthesisUtterance==="undefined"){$("#voiceStatus").textContent="Vorlesen auf diesem Gerät nicht verfügbar.";return}
@@ -3844,7 +3862,15 @@ function speak(index,custom){
   if(k>=lines.length){stopSpeech();return}
   const t=String(lines[k]||"").trim();if(!t){k++;next();return}
   const owner=window.DARKidsOwnerVoice;
-  if(owner&&typeof owner.has==="function"&&owner.has(t)){
+  if(!waitedForMaster&&(!owner||typeof owner.isLoaded==="function"&&!owner.isLoaded())){
+   waitedForMaster=true;
+   const completion=Promise.resolve(prepareOwnerVoice()).then(api=>
+    api&&typeof api.whenReady==="function"?api.whenReady():null);
+   Promise.race([completion,new Promise(resolve=>setTimeout(resolve,1050))])
+    .then(()=>{if(live())next()}).catch(()=>{if(live())next()});
+   return;
+  }
+  if(certifiedOwnerHas(owner,t)){
    setAudioFeedback("Serhat-Masteraufnahme für diesen Satz startet.");
    let failed=false;
    const fallback=()=>{if(failed||!live())return;failed=true;deviceRead(t)};
