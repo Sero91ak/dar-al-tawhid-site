@@ -56,6 +56,10 @@ if(navigator.connection?.saveData)salahWorld.classList.add("kids-salah-save-data
  const cta=stage.querySelector("#kidsSalahOpenDay");
  if(!dock||!cta)return;
  let queued=false,lastHeight=0,lastWidth=0;
+ // KIDS_HOME_TIGHT_LATCH_V1306: remember the viewport where compact mode started.
+ // A 930px-high iPhone is not a rotation; ResizeObserver must not undo the
+ // compact mode merely because the compact text makes its own space available.
+ let tightViewport=null;
  function desiredHeroMax(w,h){
    if(w>=700)return h<=840?Math.min(390,Math.max(306,.43*h)):Math.min(525,Math.max(350,.50*h));
    return Math.min(430,Math.max(292,.50*h));
@@ -113,15 +117,23 @@ if(navigator.connection?.saveData)salahWorld.classList.add("kids-salah-save-data
    // the bottom tabs merely to preserve generous heading whitespace.
    const tight=salahWorld.classList.contains("kids-home-fit-tight");
    if(!tight&&free< -4&&availableBase<safeMinimum-4){
+     tightViewport={w,h};
      salahWorld.classList.add("kids-home-fit-tight");
      lastHeight=0;
      schedule();
      return;
    }
-   // Keep the condensed state stable during scroll/address-bar movement.
-   // Only release on a substantially taller viewport (e.g. rotation).
-   if(tight&&h>900&&availableBase>safeMinimum+90){
+   // Keep compact geometry latched at its original viewport. Before this guard,
+   // a tall iPhone met h>900 even without any device-size change: the condensed
+   // layout created free space, so each ResizeObserver callback toggled the
+   // class back and forth (15+ visible jumps/s). Only a materially LARGER real
+   // viewport may release it; do not react to font, dock or countdown resize.
+   if(tight&&!tightViewport)tightViewport={w,h};
+   const grewSinceTight=tightViewport&&
+     (w>tightViewport.w+96||h>tightViewport.h+120);
+   if(tight&&grewSinceTight&&free>36&&availableBase>safeMinimum+90){
      salahWorld.classList.remove("kids-home-fit-tight");
+     tightViewport=null;
      lastHeight=0;
      schedule();
      return;
