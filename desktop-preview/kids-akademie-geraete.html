@@ -35,6 +35,9 @@ select:focus-visible,a:focus-visible{outline:3px solid #ffdb86;outline-offset:3p
 .direct{background:linear-gradient(115deg,#f0c978,#f2b96a);color:#203440;border:0}
 body[data-profile="maedchen"] .direct{background:linear-gradient(115deg,#ffd5b3,#f0b4d1);color:#4c3052}
 .actions .ghost{opacity:.92}
+.reload{appearance:none;cursor:pointer;min-height:44px;padding:10px 15px;border-radius:14px;border:1px solid rgba(255,235,196,.33);color:#fff1d2;background:rgba(255,255,255,.08);font:790 14px system-ui,sans-serif}
+.reload:focus-visible{outline:3px solid #ffdb86;outline-offset:3px}
+.reload:hover{background:rgba(255,255,255,.14)}
 .note{margin:0 0 15px;color:#c7d7db;font-size:clamp(12px,1.7vw,14px);line-height:1.55}
 .viewer{display:flex;align-items:flex-start;justify-content:center;overflow:auto;overscroll-behavior:contain;
 border:1px solid rgba(241,227,194,.15);border-radius:23px;padding:clamp(8px,2vw,18px);
@@ -83,6 +86,7 @@ footer p{margin:4px 0}
     </select>
   </div>
   <div class="actions">
+    <button type="button" class="reload" id="refresh">↻ Vorschau neu laden</button>
     <a class="direct" id="direct" href="/desktop-preview/kids-akademie-unterricht.html" target="_blank" rel="noopener">Vorschau direkt öffnen ↗</a>
   </div>
 </form>
@@ -108,9 +112,10 @@ footer p{margin:4px 0}
  const set=(control,v)=>{if([...control.options].some(opt=>opt.value===v))control.value=v};
  set(device,p.get("device"));set(profile,p.get("profile"));set(age,p.get("age"));
  let lastUrl="";
+ let cacheToken=String(Date.now());
  function url(){
   const route=device.value==="iphone"?"/kids/akademie/index.html":"/desktop-preview/kids-akademie-unterricht.html";
-  const params=new URLSearchParams({previewProfil:profile.value,previewAlter:age.value,cb:"geraete-v753"});
+  const params=new URLSearchParams({previewProfil:profile.value,previewAlter:age.value,cb:"geraete-v754-"+cacheToken});
   return route+"?"+params.toString();
  }
  function resize(){
@@ -134,6 +139,7 @@ footer p{margin:4px 0}
   resize();
  }
  for(const input of [device,profile,age])input.addEventListener("change",update);
+ byId("refresh").addEventListener("click",()=>{cacheToken=String(Date.now());lastUrl="";update();});
  window.addEventListener("resize",resize,{passive:true});
  if("ResizeObserver" in window){new ResizeObserver(resize).observe(viewer);}
  update();
