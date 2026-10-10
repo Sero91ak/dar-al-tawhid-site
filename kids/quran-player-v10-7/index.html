@@ -636,6 +636,11 @@ if(profileSwitcher&&!urlProfile)profileSwitcher.addEventListener('click',()=>{
 // V10.7: Profil über lesbaren unteren Hinweis ebenfalls erreichbar.
 const profileLabelButton=$('profileLabel');if(profileLabelButton&&profileSwitcher){profileLabelButton.addEventListener('click',()=>profileSwitcher.click());profileLabelButton.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();profileSwitcher.click()}})}
 
+// Open the real surah picker when the KIDS hub's "Ganzer Qurʾān" entry is used.
+if(new URLSearchParams(location.search).get('library')==='1'){
+  setTimeout(()=>{const picker=document.querySelector('[data-sheet="library"]');if(picker)picker.click();},130);
+}
+
 /* V10.7 native/browser transport controls (supported MediaSession implementations). */
 function refreshMediaSession(){
   if(!('mediaSession' in navigator))return;
