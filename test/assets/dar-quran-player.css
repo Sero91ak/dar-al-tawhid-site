@@ -1188,9 +1188,9 @@ html.player-stopped.player-reader-dock #qrcChromeSpacer{
 html[data-theme] body.is-quran-overview #appView.view{
   min-height:0!important;height:auto!important;padding-bottom:0!important;
 }
-html[data-theme] body.is-quran-overview .qov-smart-page{
+html[data-theme] body.is-quran-overview .qov-page.qov-smart-page{
   min-height:0!important;height:auto!important;max-width:100%!important;
-  /* Parent and qov-main previously each supplied mobile horizontal padding. */
+  /* More specific than the late inline qov-page padding-left/right !important rules. */
   padding-inline:0!important;padding-bottom:0!important;overflow-x:clip!important;
 }
 html[data-theme] body.is-quran-overview .qov-smart-page .qov-main{
