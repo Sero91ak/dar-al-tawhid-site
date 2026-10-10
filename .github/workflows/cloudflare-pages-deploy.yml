@@ -58,9 +58,10 @@ concurrency:
   # Prevents an older visitor run from finishing after a newer Kids/audio deploy
   # and rolling the same Cloudflare Worker back to stale static assets.
   group: dar-al-tawhid-production-worker-deploy
-  # Serialize shared Worker publishes. Rapid Kids/Test/Visitor commits must queue;
-  # cancelling an in-flight publish can leave one surface stale.
-  cancel-in-progress: false
+  # Nur der neueste relevante Produktionsstand darf veröffentlichen.
+  # Ein neuerer Visitor/Kids/Web-Commit verwirft einen älteren Lauf, bevor dieser
+  # einen veralteten Worker über den aktuellen Stand legen kann.
+  cancel-in-progress: true
 
 jobs:
   classify:
@@ -429,6 +430,23 @@ jobs:
           node scripts/version-update-guard.js
           node scripts/public-website-isolation-guard.js
           node scripts/app-stability-guard.js
+
+      - name: Veralteten Produktionslauf vor Publish blockieren
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main --depth=1
+          LATEST="$(git rev-parse origin/main)"
+          if [ "$LATEST" != "$GITHUB_SHA" ]; then
+            CHANGED="$(git diff --name-only "$GITHUB_SHA" "$LATEST" || true)"
+            echo "Neuere main-Dateien seit diesem Lauf:"
+            printf '%s\n' "$CHANGED"
+            if printf '%s\n' "$CHANGED" | grep -Eq '^(index\.html$|version\.json$|content/updates/daily\.json$|content/posts/|desktop-preview/|cloudflare/site-router\.js$|service-worker\.js$|manifest\.json$|assets/|voice-studio/|data/pronunciation/|data/frauen-.*\.json$|q/|quellen/|links/|download/|data/scholar-index-meta\.json$|data/scholar-history-curated\.json$|wrangler\.toml$|_headers$|_redirects$|kids/|test/index\.html$|test/version\.json$|test/assets/|test/service-worker\.js$|test/manifest\.json$|\.assetsignore$|package\.json$|scripts/cf-pages-build\.js$|scripts/sync-quellen-registry\.cjs$|scripts/sync-app-build-ids\.js$|scripts/verify-live-deploy\.js$|scripts/public-website-isolation-guard\.js$|scripts/purge-cloudflare-cache\.js$|scripts/kids-prophet-release-guard\.js$|\.github/workflows/cloudflare-pages-deploy\.yml$)'; then
+              echo "::error::Dieser Produktionslauf ist überholt. Ein neuerer relevanter main-Stand übernimmt."
+              exit 1
+            fi
+          fi
+          echo "Produktionslauf ist aktuell genug für Publish."
 
       - name: Deploy statische App (Workers Static Assets)
         id: publish
