@@ -12,7 +12,7 @@ ok(pages.every(x=>x===pages[0]),"Kids entry pages must match byte for byte");
 ok(/const CACHE_NAME="dar-al-tawhid-kids-v1313"/.test(sw),"new SW cache version missing");
 ok(ver.visualSystem.serviceWorkerCache==="v1313","Kids version JSON SW cache mismatch");
 ok(!sw.includes('key.indexOf("dar-al-tawhid-kids-")===0'),"offline cache may be purged on activate");
-ok(sw.includes('key.indexOf("dar-al-tawhid-kids-v")===0'),"release cache cleanup missing");
+ok(sw.includes("const keep=new Set([CACHE_NAME,...versions.slice(0,2)])"),"previous shell cache rescue must stay available");
 ok(sw.includes('KIDS_RESUMABLE_OFFLINE_LIBRARY_V1'),"persistent package absent");
 ok(sw.includes('KIDS_FAST_FIRST_PAINT_V1313'),"fast install marker missing");
 ok(sw.includes('kidsCachedAudio(request,event)'),"audio cache bypass must be replaced");
