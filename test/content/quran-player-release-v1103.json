@@ -1,17 +1,19 @@
 {
-  "release": "dar-test-quran-player-v1103",
+  "release": "dar-test-original-v108r-player-v1104",
   "branch": "test-quran-player-v108r-canonical",
-  "playerBuild": 1103,
+  "playerBuild": 1104,
   "scope": "test-only",
+  "designSource": "DAR-AL-TAWHID-Erwachsenen-Player-V10.8-R.html",
+  "features": [
+    "independent original day/night palettes",
+    "original branded header",
+    "surah and reciter row",
+    "fixed V10.8-R audio controls",
+    "existing canonical reciters, tajweed, tafsir and tadabbur"
+  ],
   "sourceFiles": [
     "test/assets/dar-quran-player.js",
     "test/assets/dar-quran-player.css"
   ],
-  "checks": [
-    "source-syntax",
-    "tajweed-data",
-    "theme-contrast",
-    "compact-layout"
-  ],
-  "notes": "Non-runtime release marker triggering only the dedicated Dar Test deploy; no visitor app or kids live changes."
+  "notes": "Only isolated Dar Test deployment. No public visitor, Kids live, service worker, or push implementation changes."
 }
