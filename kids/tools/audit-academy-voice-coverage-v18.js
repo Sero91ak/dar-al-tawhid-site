@@ -48,7 +48,7 @@ function audit(){
    if(!key||key!==p.text)throw Error("Noncanonical exact voice phrase");
    if(!phrases.has(key))phrases.set(key,{text:key,priority:p.priority,contexts:[]});
    const item=phrases.get(key);
-   item.priority=Math.min(item.priority,Number(p.priority)||3);
+   item.priority=Math.min(item.priority,Number.isFinite(Number(p.priority))?Number(p.priority):3);
    for(const c of p.contexts||[]){
     if(!c.lessonId||!c.kind)throw Error("Voice phrase lacks lesson/step attribution: "+key);
     coveredLessons.add(c.lessonId);
