@@ -155,6 +155,16 @@
   ],
   "unlockedScopes": [
     {
+      "id": "kids-test-v25-canonical-seven-course-transition-20261011",
+      "at": "2026-10-11T22:55:00+02:00",
+      "approvedBy": "user-explicit-continue-comprehensive-authentic-kids-lessons-20261011",
+      "reason": "Nur bestehende signierte Ersteller-Testkontrolle strikt fuer unabhaengige Kids-/Test-Deploys absichern; sieben Quellenpruefungen niemals ohne eigene Test-Freigabe als Live-Kurs bezeichnen.",
+      "paths": [
+        "test/kids/akademie/test-v23-roadmap-preview.cjs"
+      ],
+      "expiresAt": "2026-10-18T23:59:00.000Z"
+    },
+    {
       "id": "kids-test-v25-creator-voice-preview-upgrade-20261011",
       "at": "2026-10-11T22:30:00+02:00",
       "approvedBy": "user-explicit-authentic-age-curriculum-and-master-voice-20261011",
