@@ -90,3 +90,27 @@ test("Independent girl V02 geometry does NOT grant original face or finished pra
  assert.equal(f.release.productionReady,false);
  assert.equal(audit(f).pass,true);
 });
+
+test("Girl V06 real geometry is backed up and still fails human likeness review",()=>{
+ const f=fixture(),p=f.originals.girl.experimentalIndependent3DGeometricBlockout;
+ assert.equal(p.v06Sha256,"3021ad1e1ac9644af6d11e7b138ebfe1c7607dfd7947e18cbbcc9109bf4e197e");
+ assert.equal(p.v06Bytes,660088);
+ assert.equal(p.v06GeometryCount,159);
+ assert.equal(p.v06TriangleCount,74876);
+ assert.equal(p.v06SixRealCamerasVerified,true);
+ assert.equal(p.v06Independent3D,true);
+ assert.equal(p.v06GoogleDriveRoundTripSHA256Verified,true);
+ assert.match(p.v06VsOriginalPhotoComparisonResult,/REJECTED/);
+ assert.equal(p.v06HumanApproved,false);
+ assert.equal(p.v06HasSkin,false);
+ assert.equal(p.v06AnimationCount,0);
+ assert.equal(p.v06SourceOriginalsUnchanged,true);
+ assert.equal(f.originals.girl.actualOriginalGlbPresent,false);
+ assert.equal(f.originals.girl.actual3dIdentityApproved,false);
+ assert.equal(f.milestones[2].approved,false);
+ assert.equal(f.milestones.filter(m=>m.approved).length,0);
+ assert.equal(f.release.productionReady,false);
+ assert.equal(f.release.mergeMain,false);
+ assert.equal(f.release.liveDeploy,false);
+ assert.equal(audit(f).pass,true);
+});
