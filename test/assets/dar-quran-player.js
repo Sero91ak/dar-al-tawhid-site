@@ -1,10 +1,10 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 1105;
+    var PLAYER_BUILD = 1106;
   if (!document.querySelector('link[data-dqp-v11-skin]')) {
     var v11Css = document.createElement('link');
     v11Css.rel = 'stylesheet';
-    v11Css.href = '/test/assets/dar-quran-player.css?v=1105';
+    v11Css.href = '/test/assets/dar-quran-player.css?v=1106';
     v11Css.setAttribute('data-dqp-v11-skin', '');
     document.head.appendChild(v11Css);
   }
@@ -1621,7 +1621,7 @@
   }
   function isPlaceholderTad(text) {
     var t = String(text || "");
-    return /erklärt diese Ayah im Zusammenhang|deutsche Übertragung ergänzt|fasst den Sinn dieser Ayah|bereitet den Leser auf|gehört zum mekkanischen Offenbarungskorpus|kein gesondertes Marfuʿ|sobald der geprüfte Text vorliegt/i.test(t);
+    return /erklärt diese Ayah im Zusammenhang|deutsche Übertragung ergänzt|fasst den Sinn dieser Ayah|bereitet den Leser auf|gehört zum mekkanischen Offenbarungskorpus|kein gesondertes Marfuʿ|sobald der geprüfte Text vorliegt|^\s*[^.!?\n]{1,100}\s+erklärte (?:diesen|den) Vers\.\s*$/i.test(t);
   }
   function normTad(s) {
     return String(s || "").replace(/\s+/g, " ").trim().toLowerCase();
@@ -1835,7 +1835,7 @@
   }
   function tadPlain() {
     var catalog = tadEntryFor(state.surah, state.ayah);
-    if (!catalog || !catalog.reflection) return "";
+    if (!catalog || !catalog.reflection || isPlaceholderTad(catalog.reflection)) return "";
     var meta = [catalog.narrator, catalog.generation].filter(Boolean).join(" · ");
     var grade = catalog.grading ? ("Einstufung: " + catalog.grading) : "";
     var tail = [meta, catalog.source, grade].filter(Boolean).join("\n");
@@ -1861,7 +1861,7 @@
     var sec = el.querySelector('[data-sec="tad"]');
     var text = tadPlain();
     if (tadEl) {
-      var fallback = "Für diesen Vers liegt derzeit keine geprüfte Salaf-Überlieferung vor.";
+      var fallback = "Zu dieser Āyah ist derzeit keine überprüfte Erklärung im Player hinterlegt.";
       tadEl.textContent = text || (state.layers.tad && !window.__DAR_TADABBUR_READY ? "Tadabbur wird geladen …" : fallback);
     }
     if (sec) sec.hidden = !state.layers.tad;
@@ -2073,10 +2073,53 @@
     lastProgPct = -1;
     applyProgressVisual(currentProgressTime(), Number(state.duration) || 0);
   }
+  /* TEST ONLY: keep the iPhone viewport status-bar tint isolated from the app theme.
+     Restore the original theme-color meta when leaving the player route. */
+  var dqpOriginalMeta = null;
+  var dqpOriginalMetaColor = null;
+  var dqpOriginalMetaOwned = false;
+  function syncOriginalPlayerSafeArea(root) {
+    if (!isTestAppPath() || !root || root.getAttribute("data-v108-original") !== "1") return;
+    var hash = String(location.hash || "").replace(/^#\/?/, "");
+    if (hash.split("/")[0] !== "quran-player") return;
+    var tone = root.getAttribute("data-v11-ambient") === "day" ? "day" : "night";
+    document.documentElement.setAttribute("data-dqp-original-tone", tone);
+    if (document.body) document.body.setAttribute("data-dqp-original-tone", tone);
+    var meta = dqpOriginalMeta;
+    if (!meta || !meta.isConnected) {
+      meta = document.querySelector('meta[name="theme-color"]');
+      dqpOriginalMetaOwned = !meta;
+      if (!meta) {
+        meta = document.createElement("meta");
+        meta.setAttribute("name", "theme-color");
+        meta.setAttribute("data-dqp-test-owner", "1");
+        document.head.appendChild(meta);
+      }
+      dqpOriginalMeta = meta;
+      dqpOriginalMetaColor = dqpOriginalMetaOwned ? null : meta.getAttribute("content");
+    }
+    var target = tone === "day" ? "#faf5e9" : "#151719";
+    if (meta.getAttribute("content") !== target) meta.setAttribute("content", target);
+  }
+  function restoreOriginalPlayerSafeArea() {
+    if (!isTestAppPath()) return;
+    document.documentElement.removeAttribute("data-dqp-original-tone");
+    if (document.body) document.body.removeAttribute("data-dqp-original-tone");
+    var meta = dqpOriginalMeta;
+    if (meta && meta.isConnected) {
+      if (dqpOriginalMetaOwned) meta.remove();
+      else if (dqpOriginalMetaColor === null) meta.removeAttribute("content");
+      else meta.setAttribute("content", dqpOriginalMetaColor);
+    }
+    dqpOriginalMeta = null;
+    dqpOriginalMetaColor = null;
+    dqpOriginalMetaOwned = false;
+  }
   function paintChrome() {
     var root = playerRoot();
     if (root) {
       try { root.setAttribute('data-v11-ambient', localStorage.getItem('darQuranV108OriginalTheme') === 'day' ? 'day' : 'night'); } catch (eV108Theme) { root.setAttribute('data-v11-ambient','night'); }
+      syncOriginalPlayerSafeArea(root);
       var currentSurahMeta = meta || surahMeta(state.surah) || {};
       var currentName = String(currentSurahMeta.transliteration || currentSurahMeta.name || ('Sūrah ' + state.surah));
       var v11SurahName = root.querySelector('[data-v11-surah]');
@@ -2337,6 +2380,7 @@
     writeMode("global-quran");
     dismissFullPlayer();
     function go() {
+      restoreOriginalPlayerSafeArea();
       document.documentElement.classList.remove("is-quran-player-route");
       if (document.body) {
         document.body.classList.remove("is-quran-player-route", "dar-quran-player-open");
@@ -4445,6 +4489,7 @@
     routePaintT = setTimeout(function () {
       routePaintT = 0;
       persistCurrent("route");
+      if (String(location.hash || "").replace(/^#\/?/, "").split("/")[0] !== "quran-player") restoreOriginalPlayerSafeArea();
       ensureReaderLearnPlayer();
       cleanupLearningPlayerOnRouteLeave();
       paintMini();
