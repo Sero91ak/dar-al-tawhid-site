@@ -9,6 +9,8 @@ on:
       - 'scripts/sync-quellen-registry.cjs'
       - 'scripts/check-quellen-client.cjs'
       - 'service-worker.js'
+      - 'cloudflare/site-router.js'
+      - '_redirects'
       - '.github/workflows/check-quellen-library.yml'
 
 permissions:
@@ -28,6 +30,7 @@ jobs:
           set -euo pipefail
           node --check scripts/sync-quellen-registry.cjs
           node scripts/sync-quellen-registry.cjs --check
+          node --check cloudflare/site-router.js
           node scripts/check-quellen-client.cjs
           node - <<'NODE'
           const fs=require('fs'),assert=require('node:assert/strict');
