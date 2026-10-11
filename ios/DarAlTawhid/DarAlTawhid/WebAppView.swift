@@ -2047,10 +2047,17 @@ struct WebAppView: UIViewRepresentable {
 
             let kicker = UILabel()
             kicker.translatesAutoresizingMaskIntoConstraints = false
-            kicker.text = "Quran • Sunnah • Athar"
-            kicker.textColor = UIColor(red: 0.80, green: 0.72, blue: 0.52, alpha: 1.0)
-            kicker.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+            kicker.attributedText = NSAttributedString(
+                string: "QUR’ĀN • SUNNAH • ĀTHĀR",
+                attributes: [
+                    .font: UIFont.systemFont(ofSize: 16, weight: .bold),
+                    .foregroundColor: UIColor(red: 0.80, green: 0.72, blue: 0.52, alpha: 1.0),
+                    .kern: 1.6
+                ]
+            )
             kicker.textAlignment = .center
+            kicker.adjustsFontSizeToFitWidth = true
+            kicker.minimumScaleFactor = 0.85
 
             let progressWrap = UIView()
             progressWrap.translatesAutoresizingMaskIntoConstraints = false
