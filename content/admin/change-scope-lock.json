@@ -155,6 +155,16 @@
   ],
   "unlockedScopes": [
     {
+      "id": "kids-academy-v24-arabic-terms-voice-guard-20261011",
+      "at": "2026-10-11T22:20:00+02:00",
+      "approvedBy": "user-explicit-expand-authentic-kids-course-all-ages-arabic-term-master-voice-explanations-20261011",
+      "reason": "Nur geschuetzte Akademie-CI fuer 33 altersgetrennte arabische Fachbegriffe und streng freigegebene Original-Masterstimme. Keine automatische Audio-Erzeugung, keine Kinderfortschritts-Aenderungen oder andere App-Spuren.",
+      "paths": [
+        ".github/workflows/check-kids-academy-v9.yml"
+      ],
+      "expiresAt": "2026-10-18T23:59:00.000Z"
+    },
+    {
       "id": "test-quran-canonical-v1103-isolated-refresh-20261011",
       "at": "2026-10-11T21:34:00+02:00",
       "approvedBy": "user-explicit-fix-test-quran-player-20261011",
