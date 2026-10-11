@@ -3757,7 +3757,7 @@ body .lesson-source-block .source{font-size:12px}
  <label style="display:grid;gap:5px">Titel<input id="creatorDraftTitle" maxlength="150" style="width:100%;padding:11px;border-radius:9px;background:#082334;color:white;border:1px solid #9b9e9c" /></label>
  <label style="display:grid;gap:5px">Einführung<textarea id="creatorDraftLead" maxlength="900" rows="2" style="width:100%;padding:11px;border-radius:9px;background:#082334;color:white;border:1px solid #9b9e9c"></textarea></label>
  <label style="display:grid;gap:5px">Lernziel<textarea id="creatorDraftGoal" maxlength="900" rows="2" style="width:100%;padding:11px;border-radius:9px;background:#082334;color:white;border:1px solid #9b9e9c"></textarea></label>
- <label style="display:grid;gap:5px">Erklärung für die ausgewählte Altersgruppe<textarea id="creatorDraftExplanation" maxlength="1800" rows="4" style="width:100%;padding:11px;border-radius:9px;background:#082334;color:white;border:1px solid #9b9e9c"></textarea></label>
+ <label style="display:grid;gap:5px">Erster Erklärungsabsatz für die ausgewählte Altersgruppe<textarea id="creatorDraftExplanation" maxlength="1800" rows="4" style="width:100%;padding:11px;border-radius:9px;background:#082334;color:white;border:1px solid #9b9e9c"></textarea></label>
  </div>
  <p id="creatorDraftSources" style="font-size:12px;color:#cfdfdd"></p>
  <p style="font-size:11px;color:#e0c899">Qurʾān- und Ḥadīṯ-Belege bleiben unverändert und müssen vor einer späteren Veröffentlichung gesondert geprüft werden.</p>
@@ -4323,11 +4323,90 @@ function dailyLesson(){
  }:null;
 }
 
+const CREATOR_LESSON_DRAFT_KEY="kids.creator.academy.edits.v1";
+function creatorDrafts(){
+ if(!KIDS_CREATOR_PREVIEW)return {};
+ try{
+   const value=JSON.parse(localStorage.getItem(CREATOR_LESSON_DRAFT_KEY)||"{}");
+   return value&&typeof value==="object"&&!Array.isArray(value)?value:{};
+ }catch(_){return {}}
+}
+function creatorDraft(lessonId){
+ return KIDS_CREATOR_PREVIEW?creatorDrafts()[lessonId]||null:null;
+}
 function lessonTitle(lessonId){
- return lessonId==="sidq"?"Ṣidq – Wahrhaftigkeit":CURRICULUM[lessonId]?.title||"Unterricht";
+ const preview=creatorDraft(lessonId)?.title;
+ return preview|| (lessonId==="sidq"?"Ṣidq – Wahrhaftigkeit":CURRICULUM[lessonId]?.title||"Unterricht");
 }
 function lessonLead(lessonId){
- return lessonId==="sidq"?"Warum sagen wir die Wahrheit?":CURRICULUM[lessonId]?.lead||"";
+ const preview=creatorDraft(lessonId)?.lead;
+ return preview||(lessonId==="sidq"?"Warum sagen wir die Wahrheit?":CURRICULUM[lessonId]?.lead||"");
+}
+function applyCreatorLessonPreview(){
+ if(!KIDS_CREATOR_PREVIEW||$("#lessonMain").hidden)return;
+ const d=creatorDraft(activeLessonId);if(!d)return;
+ if(d.title){
+   $(".lesson-heading h1").textContent=d.title;
+   $("#todayTopicName").textContent=d.title;
+   $("#academyNavTitle").textContent=d.title;
+ }
+ if(d.lead){
+   $('[data-lesson-step="1"] .stage-lead').textContent=d.lead;
+   $("#todayTopicIntro").textContent=d.lead;
+ }
+ if(d.goal){
+   $("#lessonIntroduction").textContent=d.goal;
+   $("#lessonWelcomeBody").textContent=d.goal;
+   const recap=$(".recap-lesson p");if(recap)recap.textContent=d.goal;
+ }
+ const explain=d.explanations?.[age];
+ if(explain){
+   const first=$("#explainWords [data-spoken]");
+   if(first)first.textContent=explain;
+ }
+}
+function editCreatorLesson(){
+ if(!KIDS_CREATOR_PREVIEW)return;
+ const selected=$("#creatorAcademyLesson").value;
+ const candidate=selected||(!$("#lessonMain").hidden?activeLessonId:"");
+ const lessonId=lessonIds().includes(candidate)?candidate:null;
+ if(!lessonId){$("#creatorAcademyLesson").focus();return}
+ const dialog=$("#creatorAcademyDraftDialog"),l=CURRICULUM[lessonId],draft=creatorDraft(lessonId)||{};
+ dialog.dataset.lessonId=lessonId;dialog.dataset.editAge=age;
+ $("#creatorDraftTitle").value=draft.title||l?.title||"Ṣidq – Wahrhaftigkeit";
+ $("#creatorDraftLead").value=draft.lead||l?.lead||"Warum sagen wir die Wahrheit?";
+ $("#creatorDraftGoal").value=draft.goal||l?.goal||(AGE_EXPLANATIONS[age]?.recap?.[0]||"Ehrlich sprechen");
+ $("#creatorDraftExplanation").value=draft.explanations?.[age]||
+   l?.ageText?.[age]?.lines?.[0]||l?.lines?.[0]||AGE_EXPLANATIONS[age]?.lines?.[0]||"";
+ $("#creatorDraftSources").textContent=l?.quran?
+   "Originalquellen: Qurʾān "+l.quran.surah+":"+l.quran.ayah+" · "+(l.hadith?.source||"Ḥadīṯ-Nachweis vorhanden"):
+   "Originalquellen: Qurʾān 9:119 · Ṣaḥīḥ Muslim 2607a";
+ dialog.showModal();
+}
+function saveCreatorLessonDraft(){
+ if(!KIDS_CREATOR_PREVIEW)return;
+ const dialog=$("#creatorAcademyDraftDialog"),key=dialog.dataset.lessonId;
+ if(!lessonIds().includes(key))return;
+ const drafts=creatorDrafts(),prior=drafts[key]||{},draftAge=dialog.dataset.editAge;
+ const title=$("#creatorDraftTitle").value.trim().slice(0,150);
+ const lead=$("#creatorDraftLead").value.trim().slice(0,900);
+ const goal=$("#creatorDraftGoal").value.trim().slice(0,900);
+ const explanation=$("#creatorDraftExplanation").value.trim().slice(0,1800);
+ if(!title){$("#creatorDraftTitle").focus();return}
+ drafts[key]={title,lead,goal,explanations:{...(prior.explanations||{}),[draftAge]:explanation},savedAt:new Date().toISOString()};
+ try{localStorage.setItem(CREATOR_LESSON_DRAFT_KEY,JSON.stringify(drafts))}
+ catch(_){alert("Speichern im Test-Browser nicht verfügbar.");return}
+ dialog.close();$("#creatorAcademyLesson").value=key;
+ begin(key); // Same device / same isolated test origin; never modifies visitors.
+}
+function resetCreatorLessonDraft(){
+ if(!KIDS_CREATOR_PREVIEW)return;
+ const dialog=$("#creatorAcademyDraftDialog"),key=dialog.dataset.lessonId;
+ if(!lessonIds().includes(key))return;
+ if(!confirm("Nur deinen lokalen KIDS-TEST-Entwurf für diesen Unterricht entfernen?"))return;
+ const drafts=creatorDrafts();delete drafts[key];
+ try{localStorage.setItem(CREATOR_LESSON_DRAFT_KEY,JSON.stringify(drafts))}catch(_){}
+ dialog.close();$("#creatorAcademyLesson").value=key;begin(key);
 }
 
 function applySelectedLesson(){
@@ -4455,7 +4534,7 @@ function begin(requested){
  }
  activeLessonId=chosen;sessionStamp=String(Date.now())+"-"+chosen;focusPages[1]=0;focusPages[2]=0;focusPages[4]=0;
  warmAcademyMaster();hideCategory();$("#academyHome").hidden=true;$("#lessonMain").hidden=false;
- applySelectedLesson();refreshSerhatLessonClip();
+ applySelectedLesson();refreshSerhatLessonClip();applyCreatorLessonPreview();
  const draft=readDraft();
  if(draft){
   step=draft.step;unlocked=draft.unlocked;qIndex=draft.qIndex;finished=step===4;score=draft.score;
@@ -4863,6 +4942,10 @@ function initializeCreatorAcademy(){
  lessons.addEventListener("change",()=>{
    if(lessons.value)begin(lessons.value);
  });
+ $("#creatorAcademyEdit").addEventListener("click",editCreatorLesson);
+ $("#creatorDraftSave").addEventListener("click",saveCreatorLessonDraft);
+ $("#creatorDraftClose").addEventListener("click",()=>$("#creatorAcademyDraftDialog").close());
+ $("#creatorDraftReset").addEventListener("click",resetCreatorLessonDraft);
 }
 initFocusControls();syncProfile(true);hideLesson();updateAcademyAppbar();initializeCreatorAcademy();
 let __schoolLastDate=academyDay().day;
