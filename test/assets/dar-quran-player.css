@@ -1416,3 +1416,10 @@ html.player-learn #darQuranMiniPlayer.is-on .dqp-learn-btn{
   html.player-learn #darQuranMiniPlayer.is-on .dqp-top-text b{font-size:12px}
   html.player-learn #darQuranMiniPlayer.is-on .dqp-learn-btn{font-size:9px!important}
 }
+
+
+/* Reader dock without learning controls occupies only one compact line. */
+html.player-reader-dock:not(.player-learn) #darQuranMiniPlayer.is-on.is-reader-dock {
+  height:78px!important;min-height:78px!important;max-height:78px!important;
+  padding:6px 12px 7px!important;
+}
