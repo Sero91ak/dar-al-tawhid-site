@@ -12,6 +12,8 @@ on:
           - dar-test
           - kids-creator
   push:
+    branches:
+      - main
     paths:
       - index.html
       - test/**
