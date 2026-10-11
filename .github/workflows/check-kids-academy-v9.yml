@@ -74,6 +74,8 @@ jobs:
         run: node test/kids/akademie/test-v22-age-preview.cjs
       - name: Validate 208-slot curriculum, 12 pillars, 3 age profiles and hard source gates (zero credits)
         run: node kids/tools/test-academy-v23-roadmap.cjs
+      - name: Verify signed-session 208-slot editor and 12 age-tiered Islamic strands (zero credits)
+        run: node test/kids/akademie/test-v23-roadmap-preview.cjs
       - name: JavaScript syntax guard
         run: |
           node --check kids/akademie/curriculum-v1.js
