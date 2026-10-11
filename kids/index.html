@@ -6686,7 +6686,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   // The next navigation uses network-first and receives the latest release.
   if("serviceWorker" in navigator){
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1325",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1326",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     },{once:true});
@@ -11350,4 +11350,6 @@ html body .app:has(#view-parents.view.active) .shell{
 <script defer src="/kids/offline-library-v1.js?v=1"></script>
 <!-- KIDS_SALAH_STAGE_V1261: placed after hero, before continue-listening -->
 <script defer src="/kids/prayer-stage-v1261.js?v=1320" data-kids-salah-stage="1275"></script>
+<!-- KIDS_FIXED_NAV_AUTHORITY_V1326: one compact geometry shared across all Kids pages and devices -->
+<link rel="stylesheet" href="/kids/kids-nav-stable-v1326.css?v=1" data-kids-nav-fixed="1326">
 </html>
