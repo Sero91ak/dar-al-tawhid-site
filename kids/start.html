@@ -2386,6 +2386,31 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 #kidsJoin #deviceLoginSubmit{display:block;width:100%;background:#e5c47d;color:#112536}
 #kidsJoin #deviceLoginSubmit:disabled{opacity:.7;cursor:wait}
 #kidsJoin #deviceLoginStatus[hidden]{display:none!important}
+/* KIDS ACCOUNT SUPPORT V1 · parent-initiated help without password collection. */
+#kidsJoin .kids-support-link,#view-parents .kids-support-link{
+ display:flex;align-items:center;justify-content:center;
+ box-sizing:border-box;width:100%;min-height:48px;
+ margin-top:10px;padding:10px 13px;border-radius:14px;
+ border:1.5px solid #e5c47d;background:#163d4b;
+ color:#fff9eb!important;-webkit-text-fill-color:#fff9eb!important;
+ font-size:clamp(15px,3.8vw,18px);font-weight:800;
+ line-height:1.35;text-align:center;text-decoration:none;
+ overflow-wrap:anywhere;-webkit-tap-highlight-color:transparent;
+}
+.app[data-gender="girl"] #view-parents .kids-support-link{
+ background:#482e58;border-color:#edc5d7;color:#fff6f1!important;
+ -webkit-text-fill-color:#fff6f1!important;
+}
+#kidsJoin .kids-support-link:focus-visible,#view-parents .kids-support-link:focus-visible{
+ outline:3px solid #f9dc98;outline-offset:3px;
+}
+#kidsJoin .kids-support-privacy,#view-parents .kids-support-privacy{
+ margin:8px 0 6px;font-size:clamp(12px,3.3vw,14px);
+ line-height:1.45;color:#d6dbdc;
+ overflow-wrap:anywhere;
+}
+#view-parents .kids-support-privacy{color:#f1e8d7}
+
 .kids-join .step{display:none}
 .kids-join .step.on{display:block}
 .profile-list{display:grid;gap:8px;margin-top:8px}
@@ -2999,6 +3024,8 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
       <input type="password" id="deviceLoginPass" maxlength="40" autocomplete="current-password" placeholder="Passwort">
       <button type="button" id="deviceLoginSubmit">Anmelden und Lernstand laden</button>
       <p id="deviceLoginStatus" class="join-feedback" role="status" aria-live="polite" aria-atomic="true" hidden></p>
+      <a class="kids-support-link" href="mailto:dar.al.tauhid91@gmail.com?subject=DAR%20AL%20TAWHID%20KIDS%20-%20Kontohilfe&amp;body=As-salamu%20alaykum%2C%0Aich%20ben%C3%B6tige%20Hilfe%20beim%20Zugang%20zu%20einem%20Kinderkonto.%0A%0AIch%20werde%20keine%20Passw%C3%B6rter%20oder%20sensiblen%20Kinderdaten%20per%20E-Mail%20senden." aria-label="DĀR AL TAWḤĪD KIDS Support wegen eines Kinderkontos per E-Mail kontaktieren">Passwort vergessen? Support kontaktieren</a>
+      <p class="kids-support-privacy">Bitte keine Passwörter oder sensiblen Kinderdaten per E-Mail senden.</p>
       <button type="button" id="deviceLoginCancel" class="ghost" style="margin-top:9px;width:100%">Abbrechen</button>
     </div>
       <button type="button" id="joinCancel" class="ghost" style="display:none;margin-top:10px;width:100%">Abbrechen</button>
@@ -3220,6 +3247,8 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
         </div>
         <button type="button" id="profileAdd" class="daily-start" style="margin-top:10px">Konto anlegen</button>
         <button type="button" id="profileBring" aria-label="Vorhandenes Kinderkonto anmelden und Lernstand laden" class="ghost" style="margin-top:8px;width:100%">Vorhandenes Kind anmelden</button>
+        <a class="kids-support-link kids-support-link-parent" href="mailto:dar.al.tauhid91@gmail.com?subject=DAR%20AL%20TAWHID%20KIDS%20-%20Kontohilfe&amp;body=As-salamu%20alaykum%2C%0Aich%20ben%C3%B6tige%20Hilfe%20beim%20Zugang%20zu%20einem%20Kinderkonto.%0A%0AIch%20werde%20keine%20Passw%C3%B6rter%20oder%20sensiblen%20Kinderdaten%20per%20E-Mail%20senden." aria-label="DĀR AL TAWḤĪD KIDS Support für Kinderkonten per E-Mail kontaktieren">Hilfe mit einem Kinderkonto? Support kontaktieren</a>
+        <p class="kids-support-privacy">Support: dar.al.tauhid91@gmail.com · Bitte keine Passwörter verschicken.</p>
       </div>
 
     </section>
