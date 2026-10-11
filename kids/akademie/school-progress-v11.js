@@ -25,8 +25,10 @@
   // inserting newly released subject topics into the old round-robin would
   // shift completed lesson numbers and make the next unlock unpredictable.
   // Each new *verified* pack is explicitly appended after all prior lessons.
-  const extension=Array.isArray(root.DARKidsAcademyCurriculumV22?.ids)?
-   root.DARKidsAcademyCurriculumV22.ids:[];
+  const extension=[
+   ...(Array.isArray(root.DARKidsAcademyCurriculumV22?.ids)?root.DARKidsAcademyCurriculumV22.ids:[]),
+   ...(Array.isArray(root.DARKidsAcademyCurriculumV25?.ids)?root.DARKidsAcademyCurriculumV25.ids:[])
+  ];
   const extra=new Set(extension);
   const lists=groups.map(g=>(topics[g]||[]).filter(id=>!extra.has(id)));
   for(let i=0;i<Math.max(...lists.map(a=>a.length));i++){

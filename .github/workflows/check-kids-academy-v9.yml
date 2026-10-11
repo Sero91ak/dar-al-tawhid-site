@@ -7,6 +7,9 @@ on:
       - 'test/kids/akademie/**'
       - 'scripts/test-kids-academy-creator-v17.js'
       - 'desktop-preview/kids-akademie-unterricht.html'
+      - 'kids/data/academy-voice-plan-v25.json'
+      - 'kids/tools/test-academy-v25-authentic.cjs'
+      - 'kids/tools/export-academy-voice-plan-v25.cjs'
       - 'kids/data/academy-expansion-roadmap-v23.json'
       - 'kids/tools/test-academy-v23-roadmap.cjs'
       - 'kids/data/academy-voice-plan-v9.json'
@@ -26,6 +29,9 @@ on:
       - 'test/kids/akademie/**'
       - 'scripts/test-kids-academy-creator-v17.js'
       - 'desktop-preview/kids-akademie-unterricht.html'
+      - 'kids/data/academy-voice-plan-v25.json'
+      - 'kids/tools/test-academy-v25-authentic.cjs'
+      - 'kids/tools/export-academy-voice-plan-v25.cjs'
       - 'kids/data/academy-expansion-roadmap-v23.json'
       - 'kids/tools/test-academy-v23-roadmap.cjs'
       - 'kids/data/academy-voice-plan-v9.json'
@@ -81,11 +87,17 @@ jobs:
           node kids/tools/test-academy-term-coach-v24.cjs
           node kids/tools/export-academy-vocabulary-plan-v24.cjs
           git diff --exit-code -- kids/data/academy-vocabulary-voice-plan-v24.json
+      - name: Verify seven authentic V25 lessons, three ages and 163 protected next lessons
+        run: |
+          node kids/tools/test-academy-v25-authentic.cjs
+          node kids/tools/export-academy-voice-plan-v25.cjs
+          git diff --exit-code -- kids/data/academy-voice-plan-v25.json
       - name: JavaScript syntax guard
         run: |
           node --check kids/akademie/curriculum-v1.js
           node --check kids/akademie/curriculum-v2.js
           node --check kids/akademie/curriculum-v22.js
+          node --check kids/akademie/curriculum-v25.js
           node --check kids/akademie/term-coach-v24.js
           node --check kids/akademie/school-progress-v11.js
           node --check kids/akademie/pilot-audio-v13.js

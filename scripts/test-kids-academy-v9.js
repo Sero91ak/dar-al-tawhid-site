@@ -142,17 +142,17 @@ assert.ok(ownerScript.includes('entry.approvedForPlayback===false'));
 const annual=JSON.parse(read("kids/data/academy-year-52weeks-v1.json"));
 assert.equal(annual.weeks.length,52);
 assert.equal(annual.goals.newLessonSlots,208);
-assert.equal(annual.goals.currentlyInCatalog,38);
-assert.equal(annual.goals.additionalAuthenticallyVerifiedLessonsNeeded,170);
+assert.equal(annual.goals.currentlyInCatalog,45);
+assert.equal(annual.goals.additionalAuthenticallyVerifiedLessonsNeeded,163);
 const allSlots=annual.weeks.flatMap(week=>week.days);
 assert.equal(allSlots.length,364);
 assert.equal(allSlots.filter(x=>x.mode==="new").length,208);
 assert.equal(allSlots.filter(x=>x.mode==="review").length,104);
 assert.equal(allSlots.filter(x=>x.mode==="flexible").length,52);
-assert.equal(allSlots.filter(x=>x.mode==="new"&&x.lessonId).length,38);
-assert.equal(allSlots.filter(x=>x.mode==="new"&&!x.lessonId).length,170);
+assert.equal(allSlots.filter(x=>x.mode==="new"&&x.lessonId).length,45);
+assert.equal(allSlots.filter(x=>x.mode==="new"&&!x.lessonId).length,163);
 assert.ok(allSlots.filter(x=>x.mode==="new"&&!x.lessonId).every(x=>x.status==="awaiting-authentic-source-and-content-review"));
-console.log("KIDS ACADEMY V9.1+V22 VERIFIED: 38 catalog lessons, 208 yearly new-lesson slots, 170 gated pending sources, weekly 4/2/1, legacy V9 voice plan preserved.");
+console.log("KIDS ACADEMY V9.1+V22 VERIFIED: 45 catalog lessons, 208 yearly new-lesson slots, 163 gated pending sources, weekly 4/2/1, legacy V9 voice plan preserved.");
 
 // Creator voice preview must never overwrite or impersonate a real child account.
 require("./test-kids-academy-creator-voice-sandbox-v17.js");
