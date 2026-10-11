@@ -27,9 +27,17 @@ const script=html.match(/<script>([\s\S]*?)<\/script>/);
 assert.ok(script);new vm.Script(script[1],{filename:"academy-audio-audit-v20-inline.js"});
 const key=t=>String(t).normalize("NFC").replace(/\s+/g," ").trim();
 const all=new Set([...plan.phrases,...sidq.phrases].map(p=>key(p.text)));
-assert.equal(all.size,511,"Existing voice plan has 511 distinct Academy utterances");
+// The independent Kids lane can publish the next authenticated pack after this Test change.
+const extraPath="kids/data/academy-voice-plan-v22.json";
+const extra=fs.existsSync(path.join(root,extraPath))?JSON.parse(read(extraPath)):null;
+const combined=new Set([...all,...(extra?.phrases||[]).map(p=>key(p.text))]);
+assert.ok(all.size===511,"The original 511 exact phrases must remain immutable");
+assert.ok(combined.size>=511,"New lessons never remove original voice lines");
 assert.equal(Object.keys(stage.entries).length,4,"No unapproved batch production");
 assert.ok([...Object.keys(stage.entries)].every(k=>all.has(key(k))),"Every staged text must belong to the actual lesson plan");
-assert.equal(annual.goals.newLessonSlots,208);assert.equal(annual.goals.currentlyInCatalog,34);
-assert.equal(annual.goals.additionalAuthenticallyVerifiedLessonsNeeded,174);
-console.log("KIDS ACADEMY V20 VOICE REVIEW PASS: 511 unique utterances, four review-only V4 files, 34 lessons / 174 gated pending; no paid calls or child profile writes.");
+assert.equal(annual.goals.newLessonSlots,208);
+assert.equal(annual.goals.currentlyInCatalog,extra?38:34);
+assert.equal(annual.goals.additionalAuthenticallyVerifiedLessonsNeeded,extra?170:174);
+assert.ok(html.includes("academy-voice-plan-v22.json"),"Voice review must include the upcoming four real lessons");
+console.log("KIDS ACADEMY VOICE REVIEW PASS: "+combined.size+" unique utterances, four review-only V4 files, "+
+ annual.goals.currentlyInCatalog+" verified-content lessons; no paid calls or child profile writes.");
