@@ -533,7 +533,7 @@ async function sendPush(env, group, prayer, sendAfter, mode, stats, sentInRun) {
   const ids = uniqueSubscriptionIds(group).slice(0, 2000);
   if (!ids.length) return;
   const late = group.lateEntry === true;
-  const idKey = late ? `${schedId(group, prayer, sendAfter, mode)}|late-v1` : schedId(group, prayer, sendAfter, mode);
+  const idKey = schedId(group, prayer, sendAfter, mode);
   if (sentInRun.has(idKey)) {
     stats.duplicates += 1;
     return;
