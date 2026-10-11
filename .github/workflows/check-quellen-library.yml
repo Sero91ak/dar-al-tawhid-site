@@ -27,6 +27,36 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Royal V4.2 LIVE smoke test (read-only)
+        if: always()
+        shell: bash
+        run: |
+          set +e
+          for attempt in 1 2 3 4 5 6 7; do
+            echo "ROYAL CHECK ATTEMPT $attempt"
+            good=1
+            for route in /quellen/ /q/1/ /q/2/ /q/40/ /assets/q-royal-manuscript-v42.css /assets/q-royal-manuscript-v42.js /assets/quellen-library.css; do
+              hdr=$(mktemp)
+              body=$(mktemp)
+              code=$(curl --max-time 22 -sS -D "$hdr" -o "$body" -w '%{http_code}' "https://dar-al-tawhid.de${route}?check=ea1189b-$attempt")
+              marker=$(grep -i '^x-dar-q-layout:' "$hdr" | tr -d '\r' | tail -1)
+              echo "ROYAL LIVE $route HTTP=$code bytes=$(wc -c < "$body") $marker"
+              [ "$code" = "200" ] || good=0
+              if [ "$route" = "/quellen/" ]; then
+                grep -q 'qlSourceSnapshot' "$body" || good=0
+                grep -q 'Royal\|royal-v42' "$body" || good=0
+              fi
+              if [ "$route" = "/q/2/" ]; then
+                grep -q 'q-royal-manuscript-v42.css' "$body" || good=0
+                grep -q 'q-royal-manuscript-v42.js' "$body" || good=0
+              fi
+              rm -f "$hdr" "$body"
+            done
+            if [ "$good" = 1 ]; then echo 'ROYAL_V42_LIVE_OK';exit 0;fi
+            sleep 9
+          done
+          echo 'ROYAL_V42_LIVE_FAIL'
+          exit 1
       - name: Validate Q source-library synchronization and all source pages
         shell: bash
         run: |
