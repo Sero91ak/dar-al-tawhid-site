@@ -7,6 +7,9 @@ on:
       - 'test/kids/akademie/**'
       - 'scripts/test-kids-academy-creator-v17.js'
       - 'desktop-preview/kids-akademie-unterricht.html'
+      - 'kids/data/academy-voice-plan-v26.json'
+      - 'kids/tools/test-academy-v26-authentic.cjs'
+      - 'kids/tools/export-academy-voice-plan-v26.cjs'
       - 'kids/data/academy-voice-plan-v25.json'
       - 'kids/tools/test-academy-v25-authentic.cjs'
       - 'kids/tools/export-academy-voice-plan-v25.cjs'
@@ -29,6 +32,9 @@ on:
       - 'test/kids/akademie/**'
       - 'scripts/test-kids-academy-creator-v17.js'
       - 'desktop-preview/kids-akademie-unterricht.html'
+      - 'kids/data/academy-voice-plan-v26.json'
+      - 'kids/tools/test-academy-v26-authentic.cjs'
+      - 'kids/tools/export-academy-voice-plan-v26.cjs'
       - 'kids/data/academy-voice-plan-v25.json'
       - 'kids/tools/test-academy-v25-authentic.cjs'
       - 'kids/tools/export-academy-voice-plan-v25.cjs'
@@ -87,17 +93,24 @@ jobs:
           node kids/tools/test-academy-term-coach-v24.cjs
           node kids/tools/export-academy-vocabulary-plan-v24.cjs
           git diff --exit-code -- kids/data/academy-vocabulary-voice-plan-v24.json
-      - name: Verify seven authentic V25 lessons, three ages and 163 protected next lessons
+      - name: Verify seven authentic V25 lessons, three ages; 158 V26-following slots remain locked
         run: |
           node kids/tools/test-academy-v25-authentic.cjs
           node kids/tools/export-academy-voice-plan-v25.cjs
           git diff --exit-code -- kids/data/academy-voice-plan-v25.json
+      - name: Verify five exact Qurʾān and authentic Sunnah lessons in all ages, still behind source gates
+        run: node kids/tools/test-academy-v26-authentic.cjs
+      - name: Rebuild 149 V26 age-specific Serhat V4 requests with zero credits
+        run: |
+          node kids/tools/export-academy-voice-plan-v26.cjs
+          git diff --exit-code -- kids/data/academy-voice-plan-v26.json
       - name: JavaScript syntax guard
         run: |
           node --check kids/akademie/curriculum-v1.js
           node --check kids/akademie/curriculum-v2.js
           node --check kids/akademie/curriculum-v22.js
           node --check kids/akademie/curriculum-v25.js
+          node --check kids/akademie/curriculum-v26.js
           node --check kids/akademie/term-coach-v24.js
           node --check kids/akademie/school-progress-v11.js
           node --check kids/akademie/pilot-audio-v13.js

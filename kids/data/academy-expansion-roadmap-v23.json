@@ -1,10 +1,10 @@
 {
   "version": "academy-roadmap-v23-20261011",
-  "purpose": "163 remaining unapproved editorial lesson outlines plus 45 checked catalog lessons. No planned lesson unlocks before Qurʾān/Sunnah content and voice review.",
+  "purpose": "Remaining 158 editorial outlines only; 50 source-checked lessons released in the separate curriculum.",
   "curriculum": {
     "totalNewLessonSlots": 208,
-    "alreadyImplementedLessons": 45,
-    "proposedAdditionalLessons": 163,
+    "alreadyImplementedLessons": 50,
+    "proposedAdditionalLessons": 158,
     "weeks": 52,
     "newDaysPerWeek": 4,
     "reviewDaysPerWeek": 2,
@@ -85,31 +85,31 @@
     {
       "id": "fiqh",
       "label": "Fiqh und ʿIbādāt – gelebte Praxis",
-      "plannedAdditions": 22,
+      "plannedAdditions": 21,
       "underlyingCurrentSubject": "fiqh"
     },
     {
       "id": "quran",
       "label": "Qurʾān und Sunnah – Orientierung",
-      "plannedAdditions": 10,
+      "plannedAdditions": 9,
       "underlyingCurrentSubject": "quran"
     },
     {
       "id": "sirah",
       "label": "Sīrah und Propheten – kindgerechte Vorbilder",
-      "plannedAdditions": 10,
+      "plannedAdditions": 9,
       "underlyingCurrentSubject": "sirah"
     },
     {
       "id": "dua",
       "label": "Duʿāʾ und Adhkār – tägliche Praxis",
-      "plannedAdditions": 10,
+      "plannedAdditions": 9,
       "underlyingCurrentSubject": "dua"
     },
     {
       "id": "family",
       "label": "Familie, Gemeinschaft und Schutz",
-      "plannedAdditions": 10,
+      "plannedAdditions": 9,
       "underlyingCurrentSubject": "family"
     }
   ],
@@ -339,194 +339,34 @@
       "editorialSlot": 45,
       "lessonId": "akhlaq-nafs-gutes-herz",
       "status": "currently-in-catalog"
-    }
-  ],
-  "plannedUnits": [
+    },
     {
       "editorialSlot": 46,
-      "topicId": "editorial-046",
-      "week": 12,
-      "weekday": "Dienstag",
-      "pillar": "fiqh",
-      "title": "Reinheit und gewöhnliche Sauberkeit",
-      "classroomScenario": "Eine schmutzige Hand von ritueller Reinheit unterscheiden",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: eine schmutzige Hand von ritueller Reinheit unterscheiden.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: eine schmutzige Hand von ritueller Reinheit unterscheiden.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: eine schmutzige Hand von ritueller Reinheit unterscheiden.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": true,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "lessonId": "fiqh-reinheit-unterscheiden",
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 47,
-      "topicId": "editorial-047",
-      "week": 12,
-      "weekday": "Donnerstag",
-      "pillar": "quran",
-      "title": "Der Qurʾān als Allahs Wort",
-      "classroomScenario": "Beim Hören einer Sūrah respektvoll zuhören",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: beim Hören einer Sūrah respektvoll zuhören.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: beim Hören einer Sūrah respektvoll zuhören.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: beim Hören einer Sūrah respektvoll zuhören.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "lessonId": "aqidah-quran-allahs-wort",
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 48,
-      "topicId": "editorial-048",
-      "week": 12,
-      "weekday": "Freitag",
-      "pillar": "sirah",
-      "title": "Ādam عليه السلام als erster Mensch",
-      "classroomScenario": "Von Allahs Schöpfung lernen ohne bildliche Prophetendarstellung",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: von Allahs Schöpfung lernen ohne bildliche Prophetendarstellung.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: von Allahs Schöpfung lernen ohne bildliche Prophetendarstellung.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: von Allahs Schöpfung lernen ohne bildliche Prophetendarstellung.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "lessonId": "aqidah-sirah-adam-erschoepfung",
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 49,
-      "topicId": "editorial-049",
-      "week": 13,
-      "weekday": "Montag",
-      "pillar": "dua",
-      "title": "Morgens Allah gedenken",
-      "classroomScenario": "Eine kurze authentische Morgenformel mit Bedeutung lernen",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: eine kurze authentische Morgenformel mit Bedeutung lernen.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: eine kurze authentische Morgenformel mit Bedeutung lernen.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: eine kurze authentische Morgenformel mit Bedeutung lernen.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "lessonId": "adab-morgen-dhikr",
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 50,
-      "topicId": "editorial-050",
-      "week": 13,
-      "weekday": "Dienstag",
-      "pillar": "family",
-      "title": "Mit Eltern liebevoll umgehen",
-      "classroomScenario": "Den Eltern eine kleine Hilfsbereitschaft zeigen",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: den Eltern eine kleine Hilfsbereitschaft zeigen.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: den Eltern eine kleine Hilfsbereitschaft zeigen.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: den Eltern eine kleine Hilfsbereitschaft zeigen.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
-    },
+      "lessonId": "adab-eltern-freundlich",
+      "status": "currently-in-catalog"
+    }
+  ],
+  "plannedUnits": [
     {
       "editorialSlot": 51,
       "topicId": "editorial-051",
