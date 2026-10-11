@@ -22,15 +22,35 @@ assert.ok(!html.includes("ELEVENLABS_API_KEY"),"Editor never calls paid generati
 assert.ok(!html.includes(".innerHTML"),"Unverified text must render as textContent");
 assert.equal(catalog.weekly.length,52);
 assert.equal(catalog.entries.length,208);
-assert.equal(catalog.entries.filter(e=>e.type==="catalog").length,38);
-assert.equal(catalog.entries.filter(e=>e.type==="planned").length,170);
-assert.equal(catalog.editorialExpansion.addedEditorialTopics,170);
+const previewCatalogCount=catalog.entries.filter(e=>e.type==="catalog").length;
+const previewPlannedCount=catalog.entries.filter(e=>e.type==="planned").length;
+const liveCatalogCount=roadmap.existingLessonSlots.length;
+const remainingPlanned=roadmap.plannedUnits.length;
+// Dar Test and Kids are independently deployed, never report seven future
+// lesson slots as playable until the canonical Kids lane has been verified.
+const transitionalGap=previewPlannedCount-remainingPlanned;
+assert.ok(transitionalGap===0||transitionalGap===7,"Only the explicitly source-reviewed V25 release may lag the Test editor");
+assert.equal(previewCatalogCount+previewPlannedCount,208);
+assert.equal(liveCatalogCount+remainingPlanned,208);
+assert.equal(previewCatalogCount+transitionalGap,liveCatalogCount);
+assert.equal(catalog.editorialExpansion.addedEditorialTopics,previewPlannedCount);
 assert.equal(catalog.editorialExpansion.pillars.length,12);
-assert.equal(roadmap.plannedUnits.length,170);
 const titles=new Set();
 for(const item of catalog.entries.filter(e=>e.type==="planned")){
  const matching=roadmap.plannedUnits.find(u=>u.editorialSlot===item.slot);
- assert.ok(matching,"Missing annual slot "+item.slot);
+ if(!matching){
+  assert.equal(transitionalGap,7,"Missing editorial topic outside guarded Kids/Test transition");
+  assert.ok(item.slot>=39&&item.slot<=45,"Only the seven just-authenticated topics may differ");
+  assert.ok(roadmap.existingLessonSlots.some(x=>x.editorialSlot===item.slot),
+   "The editorial item must correspond to a source-reviewed Kids catalog lesson");
+  assert.equal(item.visitorReleaseVerified,false,"Lagging Test UI must NEVER claim a lesson is live");
+  assert.equal(item.releaseGate.childAppUnlocked,false);
+  assert.equal(item.releaseGate.reviewerApproved,false);
+  assert.equal(item.releaseGate.quranSourceVerified,false);
+  assert.equal(item.releaseGate.sunnahSourceVerified,false);
+  assert.equal(item.releaseGate.voiceApproved,false);
+  titles.add(item.title);continue;
+ }
  assert.equal(item.title,matching.title);
  assert.equal(item.pillar,matching.pillar);
  assert.equal(item.pillarLabel,roadmap.strandSummary.find(p=>p.id===matching.pillar).label);
@@ -46,7 +66,7 @@ for(const item of catalog.entries.filter(e=>e.type==="planned")){
  assert.ok(item.ageOutcomes["4-5"]&&item.ageOutcomes["6-8"]&&item.ageOutcomes["9-10"]);
  titles.add(item.title);
 }
-assert.equal(titles.size,170);
+assert.equal(titles.size,previewPlannedCount);
 const snippets=[...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)];
 assert.ok(snippets.length);for(const script of snippets)new vm.Script(script[1],{filename:"signed-owner-editor-v23.js"});
-console.log("KIDS SIGNED V23 EDITOR PASS: 208 slots, 170 proposed topics, 12 pillars, three age methods, source and voice gates intact; no new login path.");
+console.log("KIDS SIGNED V23 EDITOR PASS: 208 slots, "+previewPlannedCount+" conservative Test outlines, "+liveCatalogCount+" canonical source-reviewed Kids lessons, transition="+transitionalGap+"; strict child/audio gates intact.");
