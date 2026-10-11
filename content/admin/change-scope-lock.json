@@ -155,6 +155,16 @@
   ],
   "unlockedScopes": [
     {
+      "id": "public-library-blank-route-repair-20261011",
+      "at": "2026-10-11T14:38:00+02:00",
+      "approvedBy": "user-explicit-repair-blank-website-bibliothek-20261011",
+      "reason": "Ausschliesslich die leere oeffentliche Bibliothek-Seite absichern: SPA-Uebergang bei Renderfehler verlaesslich wieder sichtbar machen und Direkteinstieg zur vorhandenen Q-Quellenbibliothek anbieten. Keine Aenderungen an Quellenregister, Push, Service Worker, Kids oder native Apps; Freigabe zuerst nur als PR.",
+      "paths": [
+        "desktop-preview/index.html"
+      ],
+      "expiresAt": "2026-10-25T23:59:00.000Z"
+    },
+    {
       "id": "kids-test-v22-all-three-ages-preview-20261011",
       "at": "2026-10-11T13:40:00+02:00",
       "approvedBy": "user-explicit-continue-authentic-age-appropriate-kids-lessons-20261011",
