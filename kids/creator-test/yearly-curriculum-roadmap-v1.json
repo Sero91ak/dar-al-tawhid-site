@@ -1,5 +1,5 @@
 {
-  "version": "2026-10-11-kids-annual-editorial-outline-v3-with-14-test-drafts",
+  "version": "2026-10-11-kids-annual-editorial-outline-v4-with-18-test-drafts",
   "branch": "kids-creator-staging",
   "audience": "EDITORIAL THEMATIC PLAN, NOT FINAL LESSONS; no authentic religious claims until source review",
   "curriculumYear": {
@@ -17,7 +17,7 @@
       "Sonntag:flexible"
     ],
     "calendarNote": "52 teaching weeks=364 days; Gregorian annual anchoring needs 1 or 2 flexible bridge days, not false publication dates.",
-    "authoredTestDraftsPendingApproval": 14,
+    "authoredTestDraftsPendingApproval": 18,
     "additionalAuthenticallyApprovedLessonsNeeded": 170
   },
   "tiers": {
@@ -816,10 +816,13 @@
       "weeklyTheme": "Die Sunnah im Alltag",
       "category": "sunnah",
       "title": "Was bedeutet Sunnah?",
-      "status": "THEMATIC_PLAN_ONLY",
+      "status": "SOURCE_CHECKED_DRAFT_NOT_APPROVED",
       "completedLesson": false,
-      "originalSourcesVerified": false,
-      "originalSourceRefs": [],
+      "originalSourcesVerified": true,
+      "originalSourceRefs": [
+        "https://quran.com/4/80",
+        "https://dorar.net/hadith/sharh/21858"
+      ],
       "textByAgeApproved": {
         "4-5": false,
         "6-8": false,
@@ -832,7 +835,18 @@
       },
       "masterVoiceApproved": false,
       "previewPassed": false,
-      "visitorReleased": false
+      "visitorReleased": false,
+      "draftLessonId": "sunnah-was-bedeutet-sunnah",
+      "textByAgeDrafted": {
+        "4-5": true,
+        "6-8": true,
+        "9-10": true
+      },
+      "quizByAgeDrafted": {
+        "4-5": true,
+        "6-8": true,
+        "9-10": true
+      }
     },
     {
       "slot": 54,
@@ -841,10 +855,13 @@
       "weeklyTheme": "Die Sunnah im Alltag",
       "category": "sira",
       "title": "Den Propheten ﷺ als Vorbild kennenlernen",
-      "status": "THEMATIC_PLAN_ONLY",
+      "status": "SOURCE_CHECKED_DRAFT_NOT_APPROVED",
       "completedLesson": false,
-      "originalSourcesVerified": false,
-      "originalSourceRefs": [],
+      "originalSourcesVerified": true,
+      "originalSourceRefs": [
+        "https://quran.com/33/21",
+        "https://dorar.net/hadith/sharh/6702"
+      ],
       "textByAgeApproved": {
         "4-5": false,
         "6-8": false,
@@ -857,7 +874,18 @@
       },
       "masterVoiceApproved": false,
       "previewPassed": false,
-      "visitorReleased": false
+      "visitorReleased": false,
+      "draftLessonId": "sira-prophet-vorbild",
+      "textByAgeDrafted": {
+        "4-5": true,
+        "6-8": true,
+        "9-10": true
+      },
+      "quizByAgeDrafted": {
+        "4-5": true,
+        "6-8": true,
+        "9-10": true
+      }
     },
     {
       "slot": 55,
@@ -866,10 +894,13 @@
       "weeklyTheme": "Die Sunnah im Alltag",
       "category": "adab",
       "title": "Freundlichkeit aus der Sunnah",
-      "status": "THEMATIC_PLAN_ONLY",
+      "status": "SOURCE_CHECKED_DRAFT_NOT_APPROVED",
       "completedLesson": false,
-      "originalSourcesVerified": false,
-      "originalSourceRefs": [],
+      "originalSourcesVerified": true,
+      "originalSourceRefs": [
+        "https://quran.com/3/159",
+        "https://dorar.net/hadith/sharh/86738"
+      ],
       "textByAgeApproved": {
         "4-5": false,
         "6-8": false,
@@ -882,7 +913,18 @@
       },
       "masterVoiceApproved": false,
       "previewPassed": false,
-      "visitorReleased": false
+      "visitorReleased": false,
+      "draftLessonId": "adab-freundlichkeit-sunnah",
+      "textByAgeDrafted": {
+        "4-5": true,
+        "6-8": true,
+        "9-10": true
+      },
+      "quizByAgeDrafted": {
+        "4-5": true,
+        "6-8": true,
+        "9-10": true
+      }
     },
     {
       "slot": 56,
@@ -891,10 +933,13 @@
       "weeklyTheme": "Die Sunnah im Alltag",
       "category": "sunnah",
       "title": "Zwischen einer Überlieferung und einer Erzählung unterscheiden",
-      "status": "THEMATIC_PLAN_ONLY",
+      "status": "SOURCE_CHECKED_DRAFT_NOT_APPROVED",
       "completedLesson": false,
-      "originalSourcesVerified": false,
-      "originalSourceRefs": [],
+      "originalSourcesVerified": true,
+      "originalSourceRefs": [
+        "https://quran.com/49/6",
+        "https://dorar.net/hadith/sharh/64179"
+      ],
       "textByAgeApproved": {
         "4-5": false,
         "6-8": false,
@@ -907,7 +952,18 @@
       },
       "masterVoiceApproved": false,
       "previewPassed": false,
-      "visitorReleased": false
+      "visitorReleased": false,
+      "draftLessonId": "sunnah-ueberlieferung-pruefen",
+      "textByAgeDrafted": {
+        "4-5": true,
+        "6-8": true,
+        "9-10": true
+      },
+      "quizByAgeDrafted": {
+        "4-5": true,
+        "6-8": true,
+        "9-10": true
+      }
     },
     {
       "slot": 57,
