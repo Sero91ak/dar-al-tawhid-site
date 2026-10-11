@@ -38,11 +38,15 @@ function audit(){
  const main=read("kids/data/academy-voice-plan-v9.json");
  const sidq=read("kids/data/academy-sidq-voice-plan-v18.json");
  const next=read("kids/data/academy-voice-plan-v22.json");
+ const vocabulary=read("kids/data/academy-vocabulary-voice-plan-v24.json");
  if(main.modelId!==MODEL||sidq.modelId!==MODEL||main.voiceProfileId!==PROFILE||
     sidq.voiceProfileId!==PROFILE||sidq.voiceSettingsProfile!==SETTINGS||
-    next.modelId!==MODEL||next.voiceProfileId!==PROFILE)throw Error("Unauthorized plan voice");
+    next.modelId!==MODEL||next.voiceProfileId!==PROFILE||
+    vocabulary.modelId!==MODEL||vocabulary.voiceProfileId!==PROFILE||vocabulary.voiceSettingsProfile!==SETTINGS)throw Error("Unauthorized plan voice");
+ const knownLessonIds=curriculumIds();
+ const knownLessonSet=new Set([...knownLessonIds,"sidq"]);
  const phrases=new Map(),coveredLessons=new Set();
- for(const plan of [main,sidq,next]){
+ for(const plan of [main,sidq,next,vocabulary]){
   if(!Array.isArray(plan.phrases)||plan.phraseCount!==plan.phrases.length)throw Error("Invalid voice plan");
   for(const p of plan.phrases){
    if(p.modelId!==MODEL||p.voiceProfileId!==PROFILE)throw Error("Voice identity changed for: "+p.text);
@@ -53,12 +57,12 @@ function audit(){
    item.priority=Math.min(item.priority,Number.isFinite(Number(p.priority))?Number(p.priority):3);
    for(const c of p.contexts||[]){
     if(!c.lessonId||!c.kind)throw Error("Voice phrase lacks lesson/step attribution: "+key);
-    coveredLessons.add(c.lessonId);
+    if(knownLessonSet.has(c.lessonId))coveredLessons.add(c.lessonId);
     if(!item.contexts.some(x=>JSON.stringify(x)===JSON.stringify(c)))item.contexts.push(c);
    }
   }
  }
- const lessons=curriculumIds();
+ const lessons=knownLessonIds;
  const uncoveredLessons=lessons.filter(id=>!coveredLessons.has(id));
  if(!coveredLessons.has("sidq"))uncoveredLessons.unshift("sidq");
  const publicCatalog=read("kids/data/academy-audio.json");
@@ -84,6 +88,7 @@ function audit(){
   schemaVersion:1,id:"kids-academy-voice-coverage-v18",voiceId:VOICE,modelId:MODEL,voiceSettingsProfile:SETTINGS,
   policy:{generatesAudio:false,usesCredits:false,autoPublishes:false,requiresHumanReview:true},
   catalogLessonCount:lessons.length+1,coveredLessonCount:coveredLessons.size,
+  vocabularyTerms:vocabulary.termCount,vocabularyVoicePhrases:vocabulary.phraseCount,
   uncoveredLessons,uniquePhrases:rows.length,totals,rows
  };
 }
