@@ -159,7 +159,7 @@ function renderWordGuide(l){
    add("strong",term.term,"",detail);add("p",term.arabic,"word-arabic",detail);
    add("p",term.ageMeaning[age.value]||term.ageMeaning["4-5"],"",detail);
    const src=term.audioByAge?.[age.value];
-   if(src&&/^\\/kids\\/assets\\/kids-academy-audio\\/[a-zA-Z0-9_\\-]+\\.(?:m4a|mp3)$/.test(src)){
+   if(src&&/^\/kids\/assets\/kids-academy-audio\/[a-zA-Z0-9_-]+\.(?:m4a|mp3)$/.test(src)){
     const play=add("button","▶ Bedeutung mit Serhats Masterstimme hören","",detail);play.type="button";
     play.onclick=()=>{stop();const p=new Audio(src);player=p;p.playsInline=true;p.volume=1;p.playbackRate=1;
       p.onended=()=>{if(player===p)player=null};p.onerror=()=>{if(player===p)stop()};
