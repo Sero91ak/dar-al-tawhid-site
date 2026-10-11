@@ -24,6 +24,26 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Diagnostic live Q routes (read-only)
+        if: always()
+        shell: bash
+        run: |
+          set +e
+          for route in / /quellen /quellen/ /quellen/index.html /quellen/shortlinks.json /q /q/ /q/37/ /q/40/; do
+            out="$(mktemp)"
+            headfile="$(mktemp)"
+            url="https://dar-al-tawhid.de${route}?diagnostic=${GITHUB_SHA}"
+            code="$(curl --max-time 18 -sS -D "$headfile" -o "$out" -w '%{http_code}' "$url")"
+            echo "=== RAW $route HTTP=$code bytes=$(wc -c < "$out") ==="
+            grep -iE '^(HTTP/|location:|content-type:|server:|cf-ray:|x-dar-q-route:|x-dar-surface:|www-authenticate:|cf-cache-status:)' "$headfile" || true
+            head -c 140 "$out" | tr '\n' ' ' || true
+            echo
+            if [ "$code" != "200" ]; then
+              curl -L --max-redirs 6 --max-time 20 -sS -D "$headfile" -o "$out" -w "FOLLOW $route HTTP=%{http_code} REDIRECTS=%{num_redirects} FINAL=%{url_effective}\n" "$url" || true
+              grep -iE '^(HTTP/|location:|x-dar-q-route:)' "$headfile" || true
+            fi
+            rm -f "$headfile" "$out"
+          done
       - name: Validate Q source-library synchronization and all source pages
         shell: bash
         run: |
