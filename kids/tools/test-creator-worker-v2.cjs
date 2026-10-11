@@ -75,6 +75,18 @@ const get=(path,method="GET")=>handler.fetch(new Request("https://kids-preview.e
   assert.match(academySrc,/const access=stagingAccess\(chosen\)/);
   assert.match(academySrc,/kidsCreatorAcademyBar/);
   assert.match(academySrc,/KIDS TEST · 38 Unterrichte frei/);
+  assert.match(academySrc,/id="creatorAcademyEdit"/);
+  assert.match(academySrc,/id="creatorAcademyDraftDialog"/);
+  assert.match(academySrc,/const CREATOR_LESSON_DRAFT_KEY="kids.creator.academy.edits.v1"/);
+  assert.match(academySrc,/function saveCreatorLessonDraft\(\)/);
+  assert.match(academySrc,/applySelectedLesson\(\);refreshSerhatLessonClip\(\);applyCreatorLessonPreview\(\)/);
+  assert.match(academySrc,/previewRoute\.get\("editor"\)==="1"/);
+  assert.match(academySrc,/\.academy-tech-details,\.master-voice-sample-note/);
+  assert.match(academySrc,/Erklärung anhören/);
+  assert.doesNotMatch(academySrc,/src="\/desktop-preview\/assets\/kids-academy-/);
+  assert.match(consoleHtml,/window\.location\.assign\("\/kids\/akademie\/\?editor=1"\)/);
+  assert.match(studio,/location\.assign\("\/kids\/akademie\/\?lektion=/);
+
   assert.match(academySrc,/#academyCreatorVoiceBanner,#academyPilotStatus,#audioDiagnostics/);
   assert.ok(!academySrc.includes('const access=academySchoolState().access(chosen);'));
 
