@@ -122,7 +122,14 @@ class ArchiveAnalysisSeparationTests(unittest.TestCase):
             "modelBytesVerified": True,
             "referenceBytesVerified": True,
             "productionApproved": False,
-            "binaryRig": {"passed": True, "report": {"structureValid": True, "productionApproved": False}},
+            "binaryRig": {"passed": True, "report": {
+                "structureValid": True,
+                "animationSamplerBytesVerified": True,
+                "geometryVertexBytesVerified": True,
+                "boneLengthInvariantVerified": True,
+                "inverseBindMatchesRestPose": True,
+                "productionApproved": False,
+            }},
             # The V7.7 3/4 view is uncalibrated, so the five-view CLI EXITS 1
             # even when it has produced authentic measurement JSON.
             "fixedFiveViews": {"completed": True, "passed": False, "commandExitCode": 1, "report": {
@@ -159,6 +166,23 @@ class ArchiveAnalysisSeparationTests(unittest.TestCase):
     def test_failed_rig_validator_is_not_a_successful_intake(self):
         x = self.synthetic_result()
         x["binaryRig"]["passed"] = False
+        self.assertFalse(analysis_complete(x))
+
+    def test_missing_binary_evidence_fails_closed(self):
+        required = ("structureValid", "animationSamplerBytesVerified",
+                    "geometryVertexBytesVerified", "boneLengthInvariantVerified",
+                    "inverseBindMatchesRestPose")
+        for key in required:
+            with self.subTest(key=key):
+                x = self.synthetic_result()
+                x["binaryRig"]["report"][key] = False
+                self.assertFalse(analysis_complete(x))
+                del x["binaryRig"]["report"][key]
+                self.assertFalse(analysis_complete(x))
+
+    def test_forged_rig_production_approval_is_rejected(self):
+        x = self.synthetic_result()
+        x["binaryRig"]["report"]["productionApproved"] = True
         self.assertFalse(analysis_complete(x))
 
     def test_five_view_process_error_not_mistaken_for_shape_failure(self):
