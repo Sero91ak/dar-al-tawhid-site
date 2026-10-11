@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 1088;
+    var PLAYER_BUILD = 1089;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App, iOS-App und Apple TV: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -2246,7 +2246,7 @@
     return bodyOne || visible || nodes[0];
   }
   function ensureFreshShell(root) {
-    if (root && root.querySelector && root.querySelector(".dqp-back") && root.querySelector(".dqp-foot") && root.querySelector("[data-dqp-sleep-live]") && root.querySelector("[data-dqp=pick-ayah]")) return root;
+    if (root && root.querySelector && root.querySelector(".dqp-back") && root.querySelector(".dqp-foot") && root.querySelector("[data-dqp-sleep-live]") && root.querySelector(".dqp-v108r-brand") && root.querySelector(".dqp-v108r-tabs") && root.querySelector(".dqp-v108r-pills") && root.querySelector(".dqp-meta [data-dqp=pick-surah]")) { installV108RSkin(); return root; }
     var wrap = document.createElement("div");
     wrap.innerHTML = renderShell();
     var neu = wrap.firstElementChild;
