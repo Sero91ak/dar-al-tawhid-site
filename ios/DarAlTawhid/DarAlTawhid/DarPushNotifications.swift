@@ -26,6 +26,7 @@ enum DarPushNotifications {
     private static let clickListener = DarOneSignalClickListener()
 
     static func bootstrap(launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
+        cancelLocalPrayers()
         #if targetEnvironment(macCatalyst)
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, _ in
             DispatchQueue.main.async {
@@ -132,28 +133,9 @@ enum DarPushNotifications {
     }
 
     static func reschedulePrayers() {
-        let settings = storedWebSettings()
-        if bool(settings["reminder"]), isServerLaneActive() {
-            cancelLocalPrayers()
-            return
-        }
         scheduleJummahLocal()
-        guard bool(settings["reminder"]) else {
-            cancelLocalPrayers()
-            return
-        }
-        var snap = DarDailyContent.refresh(DarWidgetStore.load())
-        if let lat = number(settings["lat"]), let lon = number(settings["lon"]) {
-            snap.latitude = lat
-            snap.longitude = lon
-        }
-        DarWidgetStore.save(snap, reload: false)
-        let center = UNUserNotificationCenter.current()
-        center.getPendingNotificationRequests { pending in
-            let stale = pending.filter { $0.identifier.hasPrefix(prayerPrefix) }.map(\.identifier)
-            center.removePendingNotificationRequests(withIdentifiers: stale)
-            schedulePrayers(from: snap)
-        }
+        // Server sendet die Gebets-Erinnerung (mit Emoji). Die lokale Uhr darf daneben nicht noch einmal senden.
+        cancelLocalPrayers()
     }
 
     static func openFromNotification(userInfo: [AnyHashable: Any]) {
@@ -515,15 +497,7 @@ enum DarPushNotifications {
     }
 
     private static func applyPrayerReminderLane(settings: [String: Any]) {
-        guard bool(settings["reminder"]) else {
-            cancelLocalPrayers()
-            return
-        }
-        if isServerLaneActive() {
-            cancelLocalPrayers()
-        } else {
-            reschedulePrayers()
-        }
+        cancelLocalPrayers()
     }
 
     private static func cancelLocalPrayers() {
