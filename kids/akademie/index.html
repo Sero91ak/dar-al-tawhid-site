@@ -380,7 +380,7 @@ body[data-profile="girl"] .overview-copy{
 }
 .lesson-heading::before{
   content:"";position:absolute;inset:0;z-index:-2;
-  background:url("/desktop-preview/assets/kids-academy-akhlaq-v1.jpg") 72% 55%/cover no-repeat;
+  background:url("/kids/assets/academy-stage/kids-academy-akhlaq-v1.jpg") 72% 55%/cover no-repeat;
   filter:saturate(.9)
 }
 .lesson-heading::after{
@@ -3652,7 +3652,7 @@ body .lesson-source-block .source{font-size:12px}
 </aside>
 <section class="academy-home" id="academyHome">
  <section class="overview-hero" aria-label="Deine islamische Lernakademie">
-  <img id="academyHeroImage" src="/desktop-preview/assets/kids-academy-hero-boys-v1.jpg" alt="" decoding="async" fetchpriority="high" onerror="this.onerror=null;this.classList.add('is-ready');this.src='/desktop-preview/assets/kids-academy-hero-v1.jpg'">
+  <img id="academyHeroImage" src="/kids/assets/academy-stage/kids-academy-hero-boys-v1.jpg" alt="" decoding="async" fetchpriority="high" onerror="this.onerror=null;this.classList.add('is-ready');this.src='/kids/assets/academy-stage/kids-academy-hero-v1.jpg'">
   
   <img class="academy-hero-character" id="academyHeroCharacter" src="/kids/assets/profile-avatars/boy-kufi-v1235.svg" alt="" aria-hidden="true" decoding="async"><div class="overview-copy"><div class="kicker" id="overviewKicker">Deine islamische Lernakademie</div><h1><span class="hero-title-line">Wissen</span> <span class="hero-title-line">entdecken</span></h1><p id="overviewGreeting" class="overview-greeting"><span id="overviewSalam" class="greeting-salam">As-salāmu ʿalaykum, lieber Bruder.</span><span id="overviewFollowup" class="greeting-followup">Heute lernen wir etwas Neues!</span></p><div class="hero-learning-pill">✦ Qurʾān &amp; Sunnah · Gemeinsam lernen</div></div>
  </section>
@@ -3667,8 +3667,8 @@ body .lesson-source-block .source{font-size:12px}
  <section class="subjects" aria-labelledby="subjectsTitle">
   <div class="subjects-title"><div><span class="kicker">Wissen aus Qurʾān & Sunnah</span><h2 id="subjectsTitle">Wähle dein Unterrichtsfach</h2><p id="subjectsIntro">Jedes Fach begleitet dich auf deiner Lernreise.</p></div></div>
   <div class="category-grid" aria-label="Unterrichtskategorien">
-   <button type="button" class="category-card" data-open-category="akhlaq"><img src="/desktop-preview/assets/kids-academy-akhlaq-v1.jpg" alt="" loading="lazy" decoding="async"><span class="category-card-copy"><span class="category-state" id="akhlaqCardStatus">Jetzt lernen</span><strong class="category-name">Akhlāq</strong><span class="category-detail">Wahrhaftigkeit · Guter Charakter</span></span></button>
-   <button type="button" class="category-card" data-open-category="adab" aria-label="Adab öffnen"><img src="/desktop-preview/assets/kids-academy-adab-v1.jpg" alt="" loading="lazy" decoding="async"><span class="category-card-copy"><span class="category-state">Unterricht bereit</span><strong class="category-name">Adab</strong><span class="category-detail">Gutes Benehmen · Respekt</span></span></button>
+   <button type="button" class="category-card" data-open-category="akhlaq"><img src="/kids/assets/academy-stage/kids-academy-akhlaq-v1.jpg" alt="" loading="lazy" decoding="async"><span class="category-card-copy"><span class="category-state" id="akhlaqCardStatus">Jetzt lernen</span><strong class="category-name">Akhlāq</strong><span class="category-detail">Wahrhaftigkeit · Guter Charakter</span></span></button>
+   <button type="button" class="category-card" data-open-category="adab" aria-label="Adab öffnen"><img src="/kids/assets/academy-stage/kids-academy-adab-v1.jpg" alt="" loading="lazy" decoding="async"><span class="category-card-copy"><span class="category-state">Unterricht bereit</span><strong class="category-name">Adab</strong><span class="category-detail">Gutes Benehmen · Respekt</span></span></button>
    <button type="button" class="category-card" data-open-category="fiqh" aria-label="Fiqh öffnen"><img src="/kids/assets/deen/ibadah.jpg?v=1205" alt="" loading="lazy" decoding="async"><span class="category-card-copy"><span class="category-state">Unterricht bereit</span><strong class="category-name">Fiqh</strong><span class="category-detail">Gebet · Reinheit · Praxis</span></span></button>
    <button type="button" class="category-card" data-open-category="aqidah" aria-label="ʿAqīdah öffnen"><img src="/kids/assets/deen/tawhid.jpg?v=1205" alt="" loading="lazy" decoding="async"><span class="category-card-copy"><span class="category-state">Unterricht bereit</span><strong class="category-name">ʿAqīdah</strong><span class="category-detail">Tawḥīd · Ikhlāṣ · Īmān</span></span></button>
   </div>
@@ -3684,7 +3684,7 @@ body .lesson-source-block .source{font-size:12px}
    <p id="subjectDescription">Wir lernen guten Charakter aus Qurʾān und Sunnah.</p>
    <span class="subject-status" id="subjectStatus">Eine Lektion bereit</span>
   </div>
-  <img id="subjectImage" src="/desktop-preview/assets/kids-academy-akhlaq-v1.jpg" alt="" decoding="async">
+  <img id="subjectImage" src="/kids/assets/academy-stage/kids-academy-akhlaq-v1.jpg" alt="" decoding="async">
  </div>
  <div class="subject-next">
   <span class="subject-small">DEIN LERNBEREICH · SCHRITT FÜR SCHRITT</span>
@@ -4148,7 +4148,7 @@ function syncProfile(force=false){
  const hero=$("#academyHeroImage");
  hero.classList.remove("is-ready");
  hero.onload=()=>hero.classList.add("is-ready");
- hero.src=gender==="girl"?"/desktop-preview/assets/kids-academy-hero-girls-v1.jpg":"/desktop-preview/assets/kids-academy-hero-boys-v1.jpg";
+ hero.src=gender==="girl"?"/kids/assets/academy-stage/kids-academy-hero-girls-v1.jpg":"/kids/assets/academy-stage/kids-academy-hero-boys-v1.jpg";
  if(hero.complete&&hero.naturalWidth)hero.classList.add("is-ready");
  $("#overviewSalam").textContent="As-salāmu ʿalaykum, "+address()+".";
  $("#welcomeSalam").textContent="As-salāmu ʿalaykum, "+address()+".";
@@ -4361,8 +4361,8 @@ function applySelectedLesson(){
 }
 
 const SUBJECTS=Object.freeze({
- akhlaq:{title:"Akhlāq",description:"Wahrhaftigkeit, Geduld und Vertrauen im Alltag.",image:"/desktop-preview/assets/kids-academy-akhlaq-v1.jpg"},
- adab:{title:"Adab",description:"Gutes Benehmen, freundliche Worte und Respekt im Alltag.",image:"/desktop-preview/assets/kids-academy-adab-v1.jpg"},
+ akhlaq:{title:"Akhlāq",description:"Wahrhaftigkeit, Geduld und Vertrauen im Alltag.",image:"/kids/assets/academy-stage/kids-academy-akhlaq-v1.jpg"},
+ adab:{title:"Adab",description:"Gutes Benehmen, freundliche Worte und Respekt im Alltag.",image:"/kids/assets/academy-stage/kids-academy-adab-v1.jpg"},
  fiqh:{title:"Fiqh",description:"Reinheit, Wuḍūʾ und Gebet aus Qurʾān und Sunnah.",image:"/kids/assets/deen/ibadah.jpg?v=1205"},
  aqidah:{title:"ʿAqīdah",description:"Tawḥīd, Īmān und Ikhlāṣ aus Qurʾān und Sunnah.",image:"/kids/assets/deen/tawhid.jpg?v=1205"}
 });
