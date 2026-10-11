@@ -155,6 +155,16 @@
   ],
   "unlockedScopes": [
     {
+      "id": "kids-academy-v21-fix-broken-manual-master-voice-staging-20261011",
+      "at": "2026-10-11T13:15:00+02:00",
+      "approvedBy": "user-explicit-continue-and-complete-all-kids-akademie-lessons-20261011",
+      "reason": "Nur vorhandenen manuellen V4-kids_story-4-Clip-Workflow reparieren; keine automatische Generierung, keine Freigabe fuer kostenpflichtige Ausfuehrung ohne GENERATE-FOUR, Originalaufnahmen unveraendert.",
+      "paths": [
+        ".github/workflows/build-kids-academy-v9-staging.yml"
+      ],
+      "expiresAt": "2026-10-18T23:59:00.000Z"
+    },
+    {
       "id": "kids-academy-v20-all-lesson-voice-creator-audit-20261011",
       "at": "2026-10-11T13:00:00+02:00",
       "approvedBy": "user-explicit-continue-finish-all-established-kids-academy-lesson-series-20261011",
