@@ -243,16 +243,32 @@ jobs:
         run: |
           set -euo pipefail
           BASE="https://dar-al-tawhid-kids-creator.sero91ak.workers.dev"
+          # A newly created workers.dev hostname can take time to propagate.
           for PAGE in /kids/start.html /kids/akademie/index.html /kids/version.json; do
             URL="$BASE$PAGE"
-            CODE="$(curl -sS -L -o /tmp/kids-creator-body -w '%{http_code}' \
-              -A 'DarAlTawhidKids-iOS CreatorTest' -H 'Cache-Control: no-cache' "$URL")"
-            if [ "$CODE" != 200 ] || [ ! -s /tmp/kids-creator-body ]; then
-              echo "::error::Creator Worker verification failed for $PAGE (HTTP $CODE)"
+            OK=0
+            for ATTEMPT in $(seq 1 18); do
+              CODE="$(curl -sS -L -o /tmp/kids-creator-body -w '%{http_code}' \
+                --connect-timeout 8 --max-time 20 \
+                -A 'DarAlTawhidKids-iOS CreatorTest' \
+                -H 'Cache-Control: no-cache' "$URL" || true)"
+              if [ "$CODE" = 200 ] && [ -s /tmp/kids-creator-body ]; then
+                OK=1
+                break
+              fi
+              echo "KIDS Creator $PAGE: HTTP $CODE (attempt $ATTEMPT/18)"
+              if [ "$ATTEMPT" -lt 18 ]; then sleep 5; fi
+            done
+            if [ "$OK" != 1 ]; then
+              echo "::error::Creator Worker route unavailable after retries: $PAGE (HTTP $CODE)"
+              head -c 400 /tmp/kids-creator-body || true
               exit 1
             fi
-            echo "Kids Creator test route OK: $PAGE"
+            echo "KIDS Creator test route OK: $PAGE"
           done
           CODE="$(curl -sS -o /tmp/kids-creator-denied -w '%{http_code}' "$BASE/test/academy/login")"
-          test "$CODE" = "404" || { echo "::error::Adult/test route leaked through KIDS Worker ($CODE)"; exit 1; }
-          echo "Only KIDS workers.dev routes tested; adult/test and visitor routes not changed"
+          test "$CODE" = "404" || {
+            echo "::error::Adult/test route leaked through KIDS Worker ($CODE)"
+            exit 1
+          }
+          echo "KIDS-only Worker verified. Adult Test and visitor domains unchanged."
