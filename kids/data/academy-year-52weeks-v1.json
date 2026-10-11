@@ -1,5 +1,5 @@
 {
-  "version": "academy-year-v2-20261011-test-drafts-not-released",
+  "version": "academy-year-v3-20261011-14-test-drafts-not-released",
   "scope": "Editorial calendar structure only. Not a verified 208-lesson curriculum. Pending slots must never be rendered as available lessons.",
   "goals": {
     "weeks": 52,
@@ -14,7 +14,7 @@
       "6-8",
       "9-10"
     ],
-    "testDraftsNotApproved": 6
+    "testDraftsNotApproved": 14
   },
   "approvalGates": [
     "Qurʾān verse checked against Arabic original and German meaning",
@@ -533,14 +533,16 @@
           "mode": "new",
           "editorialSlot": 45,
           "lessonId": null,
-          "status": "awaiting-authentic-source-and-content-review"
+          "status": "source-checked-test-draft-not-approved",
+          "draftLessonId": "tawhid-allah-bitten-ibn-abbas"
         },
         {
           "weekday": "Dienstag",
           "mode": "new",
           "editorialSlot": 46,
           "lessonId": null,
-          "status": "awaiting-authentic-source-and-content-review"
+          "status": "source-checked-test-draft-not-approved",
+          "draftLessonId": "tawhid-dankbarkeit-allah"
         },
         {
           "weekday": "Mittwoch",
@@ -551,14 +553,16 @@
           "mode": "new",
           "editorialSlot": 47,
           "lessonId": null,
-          "status": "awaiting-authentic-source-and-content-review"
+          "status": "source-checked-test-draft-not-approved",
+          "draftLessonId": "aqidah-tawakkul-handeln"
         },
         {
           "weekday": "Freitag",
           "mode": "new",
           "editorialSlot": 48,
           "lessonId": null,
-          "status": "awaiting-authentic-source-and-content-review"
+          "status": "source-checked-test-draft-not-approved",
+          "draftLessonId": "dua-alltag-erklärt"
         },
         {
           "weekday": "Samstag",
@@ -578,14 +582,16 @@
           "mode": "new",
           "editorialSlot": 49,
           "lessonId": null,
-          "status": "awaiting-authentic-source-and-content-review"
+          "status": "source-checked-test-draft-not-approved",
+          "draftLessonId": "quran-warum-wichtig"
         },
         {
           "weekday": "Dienstag",
           "mode": "new",
           "editorialSlot": 50,
           "lessonId": null,
-          "status": "awaiting-authentic-source-and-content-review"
+          "status": "source-checked-test-draft-not-approved",
+          "draftLessonId": "quran-zuhoeren"
         },
         {
           "weekday": "Mittwoch",
@@ -596,14 +602,16 @@
           "mode": "new",
           "editorialSlot": 51,
           "lessonId": null,
-          "status": "awaiting-authentic-source-and-content-review"
+          "status": "source-checked-test-draft-not-approved",
+          "draftLessonId": "quran-kurze-suren-lernen"
         },
         {
           "weekday": "Freitag",
           "mode": "new",
           "editorialSlot": 52,
           "lessonId": null,
-          "status": "awaiting-authentic-source-and-content-review"
+          "status": "source-checked-test-draft-not-approved",
+          "draftLessonId": "quran-kurze-sura-bedeutung"
         },
         {
           "weekday": "Samstag",
