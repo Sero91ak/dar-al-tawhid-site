@@ -155,6 +155,19 @@
   ],
   "unlockedScopes": [
     {
+      "id": "kids-akademie-v26-five-sourced-age-lessons-20261012",
+      "at": "2026-10-12T01:15:00+02:00",
+      "approvedBy": "user-autonomous-finish-kids-source-verified-curriculum-in-stages-20261012",
+      "reason": "Five authenticated age-differentiated KIDS lessons; four specific regression files only. No paid audio calls, no child-profile migrations and no changes outside Kids Academy.",
+      "paths": [
+        "scripts/test-kids-academy-v9.js",
+        "scripts/test-kids-academy-school-v11.js",
+        "scripts/test-kids-academy-audio-queue-v18.js",
+        ".github/workflows/check-kids-academy-v9.yml"
+      ],
+      "expiresAt": "2026-10-19T23:59:00.000Z"
+    },
+    {
       "id": "kids-test-v26-owner-audio-50-lessons-20261012",
       "at": "2026-10-12T01:22:00+02:00",
       "approvedBy": "user-autonomous-staged-academy-build-20261012",
