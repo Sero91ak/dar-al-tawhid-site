@@ -695,6 +695,35 @@ self.addEventListener('fetch', (event) => {
   // Audio/Range immer direkt zum Netz: Cache API darf keine 200/206-Antworten vermischen.
   if (isAudioRequest(request, url)) return;
 
+  // Die Quellenbibliothek und nummerierten Q-Belege sind eigenständige Seiten,
+  // keine App-Shell. Auch iOS/Android/PWA dürfen diese Navigation niemals auf
+  // /index.html zurückführen. Bei Netzausfall nur dieselbe URL aus Cache nutzen.
+  if (url.origin === self.location.origin &&
+      (url.pathname === '/quellen' || url.pathname.startsWith('/quellen/') ||
+       url.pathname === '/q' || url.pathname.startsWith('/q/'))) {
+    event.respondWith(
+      fetch(request, { cache: 'no-store' })
+        .then((response) => {
+          if (response.ok) {
+            const copy = response.clone();
+            event.waitUntil(
+              caches.open(CACHE_VERSION).then(cache => cache.put(request, copy)).catch(() => {})
+            );
+          }
+          return response;
+        })
+        .catch(async () => {
+          const cached = await caches.match(request, { ignoreSearch: true });
+          if (cached) return cached;
+          return new Response('Quellen derzeit nicht erreichbar. Bitte Internetverbindung prüfen.', {
+            status: 503,
+            headers: { 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'no-store' }
+          });
+        })
+    );
+    return;
+  }
+
   // Fest gepinnte CDN-Bootdatei auf die aktuelle Origin-Datei umbiegen.
   if (isPinnedLiveBootRequest(url)) {
     event.respondWith(
