@@ -137,15 +137,35 @@ class ArchiveAnalysisSeparationTests(unittest.TestCase):
                 "original_sha256": REFERENCE_SHA,
                 "measurement_method_id": "fiveview-cropped-grabcut-seeded-v4-stride-scene-safe-20261009",
                 "production_approved": False,
+                "original_character_likeness_approved": False,
+                "prayer_poses_approved": False,
+                "real_ipad_test_done": False,
                 "all_five_90pct_pass": False,
-                "views": {x: {"whole_body_shape_iou_worst": .83} for x in
-                          ("front", "three_quarter_uncalibrated", "right_side", "back", "left_side")},
+                "views": {
+                    name: {"camera_azimuth_used": angle,
+                           "reference_camera_physically_calibrated": False,
+                           "reference_masks_stable": True,
+                           "reference_segmentation_agreement": .98,
+                           "whole_body_shape_iou_worst": .83,
+                           "head_region_iou_worst": .79,
+                           "requested_90pct_shape_prefilter_pass": False}
+                    for name, angle in (("front", 0), ("three_quarter_uncalibrated", 45),
+                                        ("right_side", 90), ("back", 180), ("left_side", 270))
+                },
             }},
             "angleDiagnostic": {"completed": True, "passed": True, "commandExitCode": 0, "report": {
                 "source_glb_sha256": V77_SHA,
                 "source_reference_sha256": REFERENCE_SHA,
+                "method": "v77-locked-angle-sweep-diagnostic-v2-stride-scene-safe",
                 "physical_camera_angle_established": False,
+                "substitutes_fixed_five_view_qa": False,
+                "three_quarter_90pct_release_gate_passed": False,
+                "boy_original_likeness_approved": False,
                 "production_approved": False,
+                "sweep": [{"angle_deg": degree,
+                           "whole_body_iou_worst": .82,
+                           "head_region_iou_worst": .79}
+                          for degree in range(5, 90, 5)],
             }},
         }
 
@@ -155,6 +175,52 @@ class ArchiveAnalysisSeparationTests(unittest.TestCase):
         self.assertFalse(x["fixedFiveViews"]["report"]["all_five_90pct_pass"])
         self.assertFalse(x["productionApproved"])
         self.assertTrue(analysis_complete(x))
+
+    def test_forged_success_exit_rejected_for_uncalibrated_v77(self):
+        x = self.synthetic_result()
+        x["fixedFiveViews"]["commandExitCode"] = 0
+        x["fixedFiveViews"]["passed"] = True
+        x["fixedFiveViews"]["report"]["all_five_90pct_pass"] = True
+        self.assertFalse(analysis_complete(x))
+
+    def test_missing_or_forged_five_view_measurement_rejected(self):
+        for key, value in (("head_region_iou_worst", None),
+                           ("whole_body_shape_iou_worst", float("nan")),
+                           ("reference_segmentation_agreement", 1.1),
+                           ("camera_azimuth_used", 135),
+                           ("reference_camera_physically_calibrated", True),
+                           ("reference_masks_stable", None),
+                           ("requested_90pct_shape_prefilter_pass", "false")):
+            with self.subTest(metric=key):
+                x = self.synthetic_result()
+                x["fixedFiveViews"]["report"]["views"]["front"][key] = value
+                self.assertFalse(analysis_complete(x))
+
+    def test_incomplete_view_count_rejected(self):
+        x = self.synthetic_result()
+        del x["fixedFiveViews"]["report"]["views"]["back"]
+        self.assertFalse(analysis_complete(x))
+
+    def test_angle_sweep_must_have_17_valid_independent_angles(self):
+        for edit in ("short", "duplicate", "nan", "out_of_range"):
+            with self.subTest(edit=edit):
+                x = self.synthetic_result()
+                sweep = x["angleDiagnostic"]["report"]["sweep"]
+                if edit == "short": sweep.pop()
+                elif edit == "duplicate": sweep[1]["angle_deg"] = 5
+                elif edit == "nan": sweep[0]["whole_body_iou_worst"] = float("nan")
+                else: sweep[0]["head_region_iou_worst"] = 2.0
+                self.assertFalse(analysis_complete(x))
+
+    def test_inaccurate_diagnostic_metadata_rejected(self):
+        for key, value in (("method", "old-method"),
+                           ("substitutes_fixed_five_view_qa", True),
+                           ("three_quarter_90pct_release_gate_passed", True),
+                           ("boy_original_likeness_approved", True)):
+            with self.subTest(key=key):
+                x = self.synthetic_result()
+                x["angleDiagnostic"]["report"][key] = value
+                self.assertFalse(analysis_complete(x))
 
     def test_corrupt_or_unavailable_original_bytes_block(self):
         for field in ("modelBytesVerified", "referenceBytesVerified"):
