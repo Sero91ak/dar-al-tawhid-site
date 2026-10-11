@@ -15,7 +15,7 @@ for(const name of ["kids_parent_contacts","kids_account_recovery_requests","kids
   assert.ok(sql.includes("alter table public."+name+" enable row level security"),"RLS missing for "+name);
 }
 assert.match(sql,/from public, anon, authenticated/);
-assert.match(sql,/status not in \('approved','reset_completed'\) or ownership_proven/);
+assert.match(sql,/status\s+not\s+in\s*\('approved','reset_completed'\)\s+or\s+ownership_proven/);
 assert.ok(!/create\s+(or replace\s+)?function\s+[^;]*reset_password/i.test(sql),"No unauthenticated reset RPC");
 assert.ok(!/\bupdate\s+public\.kids_accounts\b/i.test(sql),"Never rewrite existing kids accounts");
 
