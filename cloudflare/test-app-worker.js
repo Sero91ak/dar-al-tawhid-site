@@ -2,7 +2,7 @@ import { ILM_SCIENCE_SYSTEM_INSTRUCTIONS, ILM_SCIENCE_POLICY_VERSION } from "./i
 import { composeIlmWithGemini } from "./ilm-gemini-bridge.js";
 import { researchIlmWithGemini } from "./ilm-gemini-open-research.js";
 import { composeIlmWithGroqFree } from "./ilm-groq-free-bridge.js";
-import { gateHiddenSurfaces } from "./preview-gate.js";
+import { gateHiddenSurfaces, academyOwnerAccess, academyOwnerAssetPath } from "./preview-gate.js";
 const KIDS_VERSION_BODY = JSON.stringify({
   buildId: "kids-shell-v201-dua-v4-1306",
   label: "KIDS · V1.09.22"
@@ -516,6 +516,22 @@ export default {
     const url = new URL(request.url);
     if (url.pathname === "/test/api/ilm/compose") return ilmScienceCompose(request, env);
     if (url.pathname === "/test/api/ilm/research") return ilmOpenResearch(request, env);
+    // Owner Academy V19 is handled BEFORE generic Basic-Auth / Kids redirects.
+    // A signed HttpOnly cookie authorizes only Academy assets and never child accounts.
+    const ownerAccess = await academyOwnerAccess(request, url, env);
+    if (ownerAccess instanceof Response) return ownerAccess;
+    if (ownerAccess === true) {
+      const ownerUrl = new URL(request.url);
+      ownerUrl.pathname = academyOwnerAssetPath(url.pathname);
+      const asset = await env.ASSETS.fetch(new Request(ownerUrl.toString(), request));
+      const headers = new Headers(asset.headers);
+      headers.set("Cache-Control", "private, no-store, max-age=0");
+      headers.set("CDN-Cache-Control", "no-store");
+      headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
+      headers.set("X-Frame-Options", "DENY");
+      if (request.method === "HEAD") return new Response(null, { status: asset.status, statusText: asset.statusText, headers });
+      return new Response(asset.body, { status: asset.status, statusText: asset.statusText, headers });
+    }
     const gated = gateHiddenSurfaces(request, url, env, "live");
     if (gated) return gated;
 
