@@ -29,7 +29,7 @@ for(const file of ["kids/start.html","kids/index.html","kids/shell.html"]){
   assert.match(html,/joinParentPending=null/);
   assert.match(html,/Es wurde kein Konto angelegt/);
   assert.doesNotMatch(html,/rpc\("kids_register"/,"new staging registration must not bypass parent verification");
-  assert.match(html,/joinExistingHint\(\)/);
+  assert.match(html,/function joinExistingHint\(msg\)/);
   assert.match(html,/document\.getElementById\("joinLoginExisting"\)\.addEventListener/);
   assert.ok(!html.includes('if(p.name&&p.pass)rpc("kids_register"'),
     file+" may overwrite existing cloud progress when reopened");
