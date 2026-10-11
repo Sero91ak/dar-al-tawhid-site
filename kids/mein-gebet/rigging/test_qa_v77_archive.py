@@ -7,7 +7,7 @@ import stat
 import tempfile
 import unittest
 import zipfile
-from qa_v77_archive import pinned_members
+from qa_v77_archive import pinned_members, analysis_complete, V77_SHA, REFERENCE_SHA
 
 
 def sha(x):
@@ -110,6 +110,101 @@ class FrozenArchiveIntakeTests(unittest.TestCase):
     def test_nested_relative_names_are_allowed(self):
         self.pack([("a/b/c.glb", self.model), ("z/y/x.png", self.picture)])
         self.assertIn("reference", self.check())
+
+
+
+class ArchiveAnalysisSeparationTests(unittest.TestCase):
+    """No authentic V7.7 bytes in tests: synthetic reports validate the audit boundary."""
+
+    @staticmethod
+    def synthetic_result():
+        return {
+            "modelBytesVerified": True,
+            "referenceBytesVerified": True,
+            "productionApproved": False,
+            "binaryRig": {"passed": True, "report": {"structureValid": True, "productionApproved": False}},
+            # The V7.7 3/4 view is uncalibrated, so the five-view CLI EXITS 1
+            # even when it has produced authentic measurement JSON.
+            "fixedFiveViews": {"completed": True, "passed": False, "commandExitCode": 1, "report": {
+                "model_sha256": V77_SHA,
+                "original_sha256": REFERENCE_SHA,
+                "measurement_method_id": "fiveview-cropped-grabcut-seeded-v4-stride-scene-safe-20261009",
+                "production_approved": False,
+                "all_five_90pct_pass": False,
+                "views": {x: {"whole_body_shape_iou_worst": .83} for x in
+                          ("front", "three_quarter_uncalibrated", "right_side", "back", "left_side")},
+            }},
+            "angleDiagnostic": {"completed": True, "passed": True, "commandExitCode": 0, "report": {
+                "source_glb_sha256": V77_SHA,
+                "source_reference_sha256": REFERENCE_SHA,
+                "physical_camera_angle_established": False,
+                "production_approved": False,
+            }},
+        }
+
+    def test_verified_archive_qa_completes_despite_90pct_silhouette_failure(self):
+        x = self.synthetic_result()
+        self.assertFalse(x["fixedFiveViews"]["passed"])
+        self.assertFalse(x["fixedFiveViews"]["report"]["all_five_90pct_pass"])
+        self.assertFalse(x["productionApproved"])
+        self.assertTrue(analysis_complete(x))
+
+    def test_corrupt_or_unavailable_original_bytes_block(self):
+        for field in ("modelBytesVerified", "referenceBytesVerified"):
+            with self.subTest(field=field):
+                x = self.synthetic_result()
+                x[field] = False
+                self.assertFalse(analysis_complete(x))
+
+    def test_failed_rig_validator_is_not_a_successful_intake(self):
+        x = self.synthetic_result()
+        x["binaryRig"]["passed"] = False
+        self.assertFalse(analysis_complete(x))
+
+    def test_five_view_process_error_not_mistaken_for_shape_failure(self):
+        x = self.synthetic_result()
+        x["fixedFiveViews"]["commandExitCode"] = 2
+        self.assertFalse(analysis_complete(x))
+
+    def test_malformed_five_view_json_fails_closed(self):
+        for value in (None, [], {}, "bad data"):
+            with self.subTest(value=value):
+                x = self.synthetic_result()
+                x["fixedFiveViews"]["report"] = value
+                self.assertFalse(analysis_complete(x))
+
+    def test_wrong_original_or_model_sha_blocks(self):
+        for part, key in (("fixedFiveViews", "model_sha256"),
+                          ("fixedFiveViews", "original_sha256"),
+                          ("angleDiagnostic", "source_glb_sha256"),
+                          ("angleDiagnostic", "source_reference_sha256")):
+            with self.subTest(part=part, key=key):
+                x = self.synthetic_result()
+                x[part]["report"][key] = "bad-sha"
+                self.assertFalse(analysis_complete(x))
+
+    def test_camera_diagnostic_must_have_run_successfully(self):
+        x = self.synthetic_result()
+        x["angleDiagnostic"]["passed"] = False
+        self.assertFalse(analysis_complete(x))
+
+    def test_five_views_must_be_real_v4_method(self):
+        x = self.synthetic_result()
+        x["fixedFiveViews"]["report"]["measurement_method_id"] = "historical-incomplete"
+        self.assertFalse(analysis_complete(x))
+
+    def test_no_automatic_production_approval(self):
+        for part, key in (("", "productionApproved"), ("fixedFiveViews", "production_approved"),
+                          ("angleDiagnostic", "production_approved")):
+            with self.subTest(part=part, key=key):
+                x = self.synthetic_result()
+                (x[part]["report"] if part else x)[key] = True
+                self.assertFalse(analysis_complete(x))
+
+    def test_no_fabricated_physical_camera_calibration(self):
+        x = self.synthetic_result()
+        x["angleDiagnostic"]["report"]["physical_camera_angle_established"] = True
+        self.assertFalse(analysis_complete(x))
 
 
 if __name__ == "__main__":
