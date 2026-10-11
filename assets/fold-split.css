@@ -480,3 +480,70 @@ html[data-layout-surface="workspace"] .dar-fold[data-fold-mode="dual"] > .dar-fo
   max-width:100%!important;
   overflow:visible!important;
 }
+
+
+/* v1331 · Samsung Fold / tablet: independent master-detail scrolling.
+ * Apply only when the capacity engine has confirmed TWO real columns.
+ * Compact phone and phone-landscape keep their original single-pane routing.
+ * Older declarations above incorrectly left .dar-fold__pane overflow:visible,
+ * making the parent document scroll both columns at the same time.
+ */
+html[data-fold-dual="1"]:not([data-layout-surface="phone-landscape"]) .dar-fold[data-fold-mode="dual"],
+html.is-fold-dual:not([data-layout-surface="phone-landscape"]) .dar-fold[data-fold-mode="dual"]{
+  --dar-fold-viewport:clamp(350px,calc(100dvh - 158px),1050px);
+  align-items:stretch!important;
+  min-height:0!important;
+  max-width:100%!important;
+  height:var(--dar-fold-viewport)!important;
+  overflow:hidden!important;
+  overscroll-behavior:contain!important;
+}
+html[data-fold-dual="1"]:not([data-layout-surface="phone-landscape"]) .dar-fold[data-fold-mode="dual"] > .dar-fold__rail,
+html[data-fold-dual="1"]:not([data-layout-surface="phone-landscape"]) .dar-fold[data-fold-mode="dual"] > .dar-fold__pane,
+html.is-fold-dual:not([data-layout-surface="phone-landscape"]) .dar-fold[data-fold-mode="dual"] > .dar-fold__rail,
+html.is-fold-dual:not([data-layout-surface="phone-landscape"]) .dar-fold[data-fold-mode="dual"] > .dar-fold__pane{
+  position:relative!important;
+  top:auto!important;
+  display:block!important;
+  width:100%!important;
+  min-width:0!important;
+  height:100%!important;
+  min-height:0!important;
+  max-height:100%!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  overscroll-behavior-y:contain!important;
+  -webkit-overflow-scrolling:touch!important;
+  touch-action:pan-y!important;
+  scrollbar-gutter:stable!important;
+  scroll-padding-top:12px;
+  scroll-padding-bottom:calc(100px + env(safe-area-inset-bottom,0px));
+  padding-bottom:calc(108px + env(safe-area-inset-bottom,0px))!important;
+}
+html[data-fold-dual="1"]:not([data-layout-surface="phone-landscape"]) .dar-fold[data-fold-mode="dual"] > .dar-fold__pane{
+  padding-inline:clamp(10px,1.4vw,24px)!important;
+}
+html[data-fold-dual="1"]:not([data-layout-surface="phone-landscape"]) .dar-fold[data-fold-mode="dual"] > .dar-fold__rail{
+  padding-inline-end:clamp(10px,1.4vw,18px)!important;
+}
+
+/* Keep bottom navigation away from the final quiz and reader actions.
+ * Do not resize or move the navigation bar itself. */
+html[data-fold-dual="1"] #appView,
+html[data-layout-surface="workspace"] #appView{
+  scroll-padding-bottom:calc(112px + env(safe-area-inset-bottom,0px))!important;
+}
+html[data-fold-dual="1"] #appView :is(.quiz-shell,.quiz-shell-pro,.quiz-card,.topic-collection-page,.qov-page),
+html[data-layout-surface="workspace"] #appView :is(.quiz-shell,.quiz-shell-pro){
+  min-width:0!important;
+  box-sizing:border-box!important;
+}
+html[data-fold-dual="1"] #appView :is(.quiz-shell,.quiz-shell-pro),
+html[data-layout-surface="workspace"] #appView :is(.quiz-shell,.quiz-shell-pro){
+  padding-bottom:calc(120px + env(safe-area-inset-bottom,0px))!important;
+}
+html[data-fold-dual="1"] #appView :is(.quiz-shell,.quiz-shell-pro) :is(button,select,input),
+html[data-layout-surface="workspace"] #appView :is(.quiz-shell,.quiz-shell-pro) :is(button,select,input){
+  min-width:0;
+  max-width:100%;
+}
