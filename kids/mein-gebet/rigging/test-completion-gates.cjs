@@ -30,7 +30,7 @@ test("Live, merge, auto replacement and profile misrouting remain forbidden",()=
  }
 });
 test("Cannot approve the original-source stage without actual V7.7 bytes",()=>{
- const f=fixture();f.milestones[0].approved=true;f.milestones[0].status="approved";
+ const f=fixture();f.originals.boy.actualBinaryRead=false;f.milestones[0].approved=true;f.milestones[0].status="approved";
  f.milestones[0].evidence=evidenceFor(f.milestones[0]);f.activeGate=EXPECTED[1];
  const a=audit(f);assert.equal(a.pass,false);assert.match(a.errors.join(","),/V7.7 bytes/);
 });
