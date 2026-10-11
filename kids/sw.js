@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1324";
+const CACHE_NAME="dar-al-tawhid-kids-v1325";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 // KIDS_V202_DOWNLOAD_TABS_RELEASE_TRIGGER_20261010: detail-only offline controls; manifest V202 synchronized.
@@ -101,8 +101,8 @@ const CORE_PRECACHE=[
   "/kids/stories-home-v1133.css?v=1152",
   "/kids/stories-home-v1138.css?v=1152",
   "/kids/story-hub.js?v=27",
-  "/kids/global-story-glow-v1216.css?v=1217",
-  "/kids/global-story-glow-v1216.js?v=1239",
+  "/kids/global-story-glow-v1216.css?v=1218-calm",
+  "/kids/global-story-glow-v1216.js?v=1218-calm",
   "/kids/dua-hub-v1219.css?v=1278",
   "/kids/term-learning.js?v=1",
   // KIDS_TERM_AUDIO_PRECACHE_START
@@ -184,7 +184,7 @@ const CORE_PRECACHE=[
   "/kids/kids-age-typography.css?v=5",
   "/kids/story-library-cards.css?v=9",
   "/kids/kids-touch-rail.css?v=16",
-  "/kids/kids-card-interaction.js?v=6",
+  "/kids/kids-card-interaction.js?v=7",
   "/kids/kids-age-typography.js?v=3",
   "/kids/owner-voice.js?v=8",
   "/kids/dua-smart-learn.css?v=1261",
