@@ -4,6 +4,7 @@
 # Kurzlink-Assets /q/<nummer> werden mit dem Quellenlink-Deploy veröffentlicht.
 
 # Quellenbibliothek und nummerierte Q-Links werden im Cloudflare Site Router kanonisch bedient.
+# Q_LIBRARY_REDEPLOY_SCOPE_FIX_20261011: Schleifenfreie Live-Veröffentlichung nach Sperrfreigabe.
 # Keine 200-Rewrites auf /index.html: Workers Static Assets normalisiert diese Pfade bereits.
 
 # DAR AL TAWḤĪD – offizielle Kanal-Kurzlinks
