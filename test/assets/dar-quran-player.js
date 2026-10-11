@@ -4362,7 +4362,15 @@
   function ensureTestCanonicalPlayerRoute() {
     if (!isTestAppPath() || LEARN_PLAYER_ONLY || !document.body) return;
     var hash = String(location.hash || "").replace(/^#\/?/, "");
-    if (hash.split("/")[0] !== "quran-player") return;
+    if (hash.split("/")[0] !== "quran-player") {
+      if (fullUiWanted) {
+        fullUiWanted = false;
+        hideFullPlayerUi();
+        document.documentElement.classList.remove("is-quran-player-route");
+        document.body.classList.remove("is-quran-player-route", "dar-quran-player-open");
+      }
+      return;
+    }
     var value = hash.slice("quran-player".length).replace(/^\//, "");
     if (value) parseRoute(value);
     document.documentElement.classList.add("is-quran-player-route");
