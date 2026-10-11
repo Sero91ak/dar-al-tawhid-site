@@ -81,6 +81,8 @@ def main():
     args=parser.parse_args()
     if args.sidq_v18 and args.pilot_first_lesson:
         raise RuntimeError("Only one isolated staging mode may run")
+    if not args.dry_run and not args.sidq_v18 and not args.pilot_first_lesson:
+        raise RuntimeError("Legacy V9 manual workflow needs an explicitly authorized update before generating; no credits used")
     if not 1<=args.limit<=POLICY["costControls"]["maxClipsPerInvocation"] or not 100<=args.max_chars<=POLICY["costControls"]["maxPreparedCharactersPerInvocation"]:
         raise RuntimeError("Batch budget exceeded")
     config=json.loads((ROOT/"data/pronunciation/elevenlabs-production.json").read_text("utf-8"))
