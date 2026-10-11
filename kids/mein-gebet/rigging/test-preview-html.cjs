@@ -6,7 +6,7 @@ const fs=require("node:fs");
 const path=require("node:path");
 const vm=require("node:vm");
 const base=path.resolve(__dirname,"..");
-const pages=["vorschau.html","demo-junge.html","demo-maedchen.html","vorschau-v78-interaktiv.html"];
+const pages=["vorschau.html","demo-junge.html","demo-maedchen.html","vorschau-v78-interaktiv.html","vorschau-v79-3d-labor.html"];
 const read=n=>fs.readFileSync(path.join(base,n),"utf8");
 
 for(const file of pages){
@@ -69,6 +69,8 @@ test("The standalone preview pages remain independent from live Kids shell",()=>
  assert.ok(html.includes('href="demo-maedchen.html"'));
  assert.ok(html.includes('href="vorschau-v78-interaktiv.html"'));
  assert.ok(fs.statSync(path.join(base,"vorschau-v78-interaktiv.html")).size>20000);
+ assert.ok(html.includes('href="vorschau-v79-3d-labor.html"'));
+ assert.ok(fs.statSync(path.join(base,"vorschau-v79-3d-labor.html")).size>30000);
 });
 
 test("V7.8 offline creator preview has independently usable lesson navigation",()=>{
@@ -97,4 +99,25 @@ test("V7.8 test progress is isolated and no locked 3D step counts as viewed",()=
  assert.doesNotMatch(html, /https:\/\/dar-al-tawhid\.de\//);
  assert.match(html, /NICHT LIVE/);
  assert.match(html, /Keine echte Kinderanmeldung/);
+});
+
+test("V7.9 3D-lab is self-contained and never touches live Kids app",()=>{
+ const html=read("vorschau-v79-3d-labor.html");
+ assert.match(html, /webgl/);
+ assert.match(html, /Canvas projected 3D/);
+ assert.match(html, /requestAnimationFrame\(frameDraw\)/);
+ assert.match(html, /pointermove/);
+ assert.match(html, /function blendPose\(/);
+ assert.match(html, /const frames=\[/);
+ assert.match(html, /const poseNames=\[/);
+ assert.match(html, /modelType:'procedural-placeholder-3d'/);
+ assert.match(html, /productionApproved:false/);
+ assert.match(html, /PROTOTYP · NICHT FREIGEGEBEN/);
+ assert.match(html, /Original-GLB V7\.7/);
+ assert.match(html, /Gebetsstellungen erkunden/);
+ for(const id of ["stage","scene","play","prev","next","resetCam","speed","girl","boy","poses","stagefail"]){
+  assert.ok(html.includes('id="'+id+'"'),"Missing 3D control "+id);
+ }
+ assert.doesNotMatch(html, /<script[^>]+src|<iframe|<form|type="password"|rel="manifest"|serviceWorker|indexedDB|localStorage|sessionStorage|XMLHttpRequest|\bfetch\(|sendBeacon/i);
+ assert.doesNotMatch(html, /https:\/\/dar-al-tawhid\.de\//);
 });
