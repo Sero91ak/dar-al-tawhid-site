@@ -1,0 +1,112 @@
+/* DAR AL TAWḤĪD KIDS / Girls hero overlays v1334
+   Only color matrices, gradients, effects and borders; do NOT alter image assets,
+   crops, layout, navigation, user storage, service workers or the boys/guest theme.
+   Original hero images are maintained as the final background layer. */
+
+/* Full-bleed HÖRBÜCHER hero: image stays identical, blue mask becomes warm plum. */
+html body .app[data-gender="girl"] #view-stories.ps-stories-home > .stories-world-head.stories-hero{
+  background-color:#292034!important;
+  background-image:
+    linear-gradient(90deg,rgba(31,19,34,.88) 0%,rgba(34,24,37,.63) 45%,rgba(34,24,37,.16) 78%,rgba(33,22,36,.08) 100%),
+    linear-gradient(180deg,rgba(28,19,35,.02) 30%,rgba(39,25,39,.20) 62%,#2d2136 100%),
+    url("/kids/assets/kids-art/section-stories-v1097.png?v=1097-real3")!important;
+  border-bottom-color:rgba(232,181,199,.27)!important;
+}
+html body .app[data-gender="girl"] #view-stories.ps-stories-home > .stories-world-head.stories-hero::before{
+  background:
+    radial-gradient(circle at 78% 18%,rgba(248,217,168,.12),transparent 26%),
+    linear-gradient(180deg,transparent 43%,rgba(43,24,44,.08) 60%,rgba(41,27,46,.63) 100%)!important;
+}
+html body .app[data-gender="girl"] #view-stories.ps-stories-home > .stories-world-head.stories-hero::after{
+  background:linear-gradient(180deg,transparent,#302237 100%)!important;
+}
+
+/* DĪN-LERNEN + Hörwelten picture cards: change only the tinted overlay,
+   never the backdrop itself, labels, photos or card size. */
+html body .app[data-gender="girl"] #view-stories.ps-stories-home #psProphetEntry .ps-entry-panel,
+html body .app[data-gender="girl"] #view-stories.ps-stories-home #msEntry::before{
+  background:
+    linear-gradient(90deg,rgba(32,21,34,.85),rgba(35,24,38,.47) 48%,rgba(36,24,38,.04) 84%),
+    linear-gradient(180deg,rgba(28,20,33,.03) 25%,rgba(35,23,37,.86) 100%)!important;
+}
+/* The Ṣaḥābiyyāt card already uses a neutral overlay: leave its artwork alone. */
+
+/* DUʿĀʾ home hero: retain same real mosque/night-time artwork. */
+html body .app[data-gender="girl"] #view-dua .duahub-head{
+  background-color:#302335!important;
+  background-image:
+    linear-gradient(90deg,rgba(28,18,32,.88) 0%,rgba(32,21,37,.56) 44%,rgba(35,23,39,.12) 76%,rgba(35,23,39,.03) 100%),
+    linear-gradient(180deg,rgba(28,18,34,.02) 32%,rgba(36,24,42,.11) 58%,#302336 100%),
+    url("/kids/assets/dua-premium/hero-v1222.jpg?v=1233")!important;
+  border-bottom-color:rgba(238,191,218,.22)!important;
+}
+html body .app[data-gender="girl"] #view-dua .duahub-head::after{
+  background:linear-gradient(180deg,rgba(26,17,33,.02) 27%,rgba(39,25,42,.12) 52%,rgba(46,31,52,.86) 100%)!important;
+}
+html body .app[data-gender="girl"] #view-dua #duaHubDetail.open .duahub-detail-hero::after{
+  background:linear-gradient(180deg,transparent 32%,rgba(42,27,43,.12) 57%,rgba(47,31,51,.90) 100%)!important;
+}
+
+/* Main QURʾĀN full-width hero: keep the ORIGINAL photographed asset exactly. */
+html body .app[data-gender="girl"] #view-quran.view > .page-head.page-head{
+  background-color:#2b2137!important;
+  background-image:
+    linear-gradient(90deg,rgba(28,18,37,.88) 0%,rgba(30,20,38,.59) 41%,rgba(32,23,40,.16) 74%,rgba(34,24,40,.03) 100%),
+    linear-gradient(180deg,rgba(29,20,37,.01) 0%,rgba(31,21,38,.03) 49%,rgba(39,26,43,.26) 75%,#302339 100%),
+    url("/kids/assets/kids-art/section-quran-v1090.jpg?v=1094-compact1")!important;
+}
+html body .app[data-gender="girl"] #view-quran.view > .page-head.page-head::before{
+  background:linear-gradient(180deg,transparent 0%,rgba(32,23,40,.03) 47%,rgba(41,29,47,.24) 73%,#302339 100%)!important;
+}
+html body .app[data-gender="girl"] #view-quran.view > .page-head.page-head::after{
+  background:linear-gradient(180deg,transparent,#302339 100%)!important;
+}
+/* Smaller decorative Qurʾān illustration: only color its transparent vignette. */
+html body .app[data-gender="girl"] #view-quran .quran-hero-stage::after{
+  background:linear-gradient(180deg,rgba(36,24,38,.01),rgba(42,27,42,.11) 66%,rgba(45,29,45,.37))!important;
+}
+
+/* ELTERN hero: unchanged specific girl image, no petrol fade/blue separator.
+   Keep the mobile portrait-crop rules and character entirely untouched. */
+html body .app[data-gender="girl"] #view-parents.view > .page-head.page-head{
+  background-color:#2d2236!important;
+  background-image:
+    linear-gradient(90deg,rgba(27,19,37,.77) 0%,rgba(30,22,39,.43) 44%,rgba(31,23,39,.02) 78%),
+    linear-gradient(180deg,rgba(29,20,37,.01) 0%,rgba(30,21,38,.03) 44%,rgba(41,27,45,.17) 67%,#2d2236 100%),
+    url("/kids/assets/parents-hero/girl-profile-v1254.jpg")!important;
+}
+html body .app[data-gender="girl"] #view-parents.view > .page-head.page-head::after{
+  background:linear-gradient(180deg,transparent 0%,#2d2236 100%)!important;
+}
+@media(max-width:699px){
+  html body .app[data-gender="girl"] #view-parents.view > .page-head.page-head::before{
+    background:linear-gradient(180deg,
+      transparent 0,
+      transparent calc(100vw * .43),
+      rgba(42,27,43,.72) calc(100vw * .63),
+      #2d2236 calc(100vw * .75),
+      #2d2236 100%)!important;
+  }
+}
+/* The same violet at the image's lower edge eliminates the old navy strip.
+   Active profile is NOT a picture, it is a separate blue gradient. */
+html body .app[data-gender="girl"] #view-parents .kids-active-profile-banner{
+  background:linear-gradient(145deg,#604054,#402c42 55%,#302638)!important;
+  border-color:rgba(245,201,223,.43)!important;
+  box-shadow:0 9px 23px rgba(28,17,34,.20),inset 0 1px rgba(255,232,241,.09)!important;
+}
+html body .app[data-gender="girl"] #view-parents #profileList .profile-row .profile-person{
+  background:linear-gradient(145deg,rgba(88,60,80,.64),rgba(61,45,68,.68))!important;
+  border-color:rgba(238,192,214,.19)!important;
+}
+html body .app[data-gender="girl"] #view-parents .profile-active-badge{
+  background:rgba(240,196,208,.18)!important;
+  color:#ffe6d8!important;
+}
+
+/* Keep decorative borders warm without changing the underlying cards. */
+html body .app[data-gender="girl"] #view-stories.ps-stories-home #psProphetEntry,
+html body .app[data-gender="girl"] #view-stories.ps-stories-home #msEntry,
+html body .app[data-gender="girl"] #view-stories.ps-stories-home #syEntry{
+  border-color:rgba(241,194,212,.28)!important;
+}
