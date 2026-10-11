@@ -82,7 +82,11 @@ function assignSlot(num,scroll=true){
  setInput("studioNotes",local.notes||"");
  setInput("studioPlanDate",local.plannedDate||"");
  for(const key of ["quelle","alter","audio","ui"])$("check-"+key).checked=!!local.checks?.[key];
- if(scroll)$("studioEditor").scrollIntoView({block:"start",behavior:"smooth"});
+ if(scroll){
+    const container=document.getElementById("kidsAdvancedEditor");
+    if(container)container.open=true;
+    $("studioEditor").scrollIntoView({block:"start",behavior:"smooth"});
+  }
  notice("Unterrichtsplatz #"+id+" geladen. Änderungen werden erst nach „Lokal speichern“ gesichert.");
 }
 function saveCourse(){
