@@ -40,3 +40,28 @@ These are conversation uploads, **not committed binary assets in the repository*
 6. Alle Posen zu **Junge und Mädchen**, die tatsächlich gefunden werden, als Referenzarchiv einordnen, nicht neu generieren oder stillschweigend überschreiben; Kontaktpunkte/Fiqh gegen die Quelle pro Haltung prüfen. Die Suǧūd-Bildunterschrift 'nur die Stirn' ist **kein** fertiger Lehrtext; Nasenkontakt und weitere Auflagepunkte gesondert prüfen.
 
 **Projektstatus unverändert:** Wiederhergestellte V4-Geometrie nicht originalgetreu, V7.7-Binärdaten noch nicht verfügbar, noch keine freigegebenen kompletten 3D-Animationsclips für beide Figuren; `productionReady=false` und kein Merge in `main`.
+
+
+## 11.10.2026, professionelle Sicherung V8.5 — ausgeführt
+
+Die zehn oben bezeichneten **unveränderten** Nutzer-Bilddateien wurden inzwischen in der persistenten ChatGPT-Dateibibliothek unter
+`/Kinder App/Mein_Gebet_Originale_20261011/junge/` und
+`/Kinder App/Mein_Gebet_Originale_20261011/maedchen/` **physisch gesichert (zehn erfolgreiche Uploads)**.
+Dort existieren auch `original-reference-manifest.json` (einzeln gemessene SHA-256-Prüfsummen),
+`Originale_10_Ansichten_20261011.zip`, `Originalgalerie_V85_Offline.html` und
+`Originalgalerie_V85_iPhone.jpg`. GitHub beinhaltet aktuell **nur die referenzierenden Metadaten**, keine Kopien der zehn neuen Binärbilder. Das ist eine beabsichtigte Trennung, keine verlorene Quelle.
+
+Unter `rigging/REFERENCE-ASSET-REGISTRY-V1.json` sind alle zehn Identitätsansichten und
+**22 offene kindereigene Pose-Asset-Plätze (11× Junge, 11× Mädchen)** erfasst.
+Die vier tatsächlich wiedergefundenen historischen Gebetstafeln vom **11.08.2026** in der Library
+`/Meine App/` zeigen **erwachsene Figuren in dunkelblauer Kleidung**.
+Sie liefern elf **Bewegungskategorien**, aber **keine bereits fertigen Gebetsbilder unserer Kinderfiguren und keine GLB-Skelettanimationen**.
+Sie dürfen bei visuellen Freigaben niemals als optisch identisches Kindermodell gezählt werden.
+
+Die V8.5 Offline-HTML wurde tatsächlich im Chromium getestet: sechs Viewports
+320/375/390/440/820/1024 px; Profilwechsel, zehn Bilder, fünf Blickwinkel,
+Zurück/Weiter, Darstellung, Overflow und Null externe Netzwerkanfragen funktionierten.
+Direkte `file://` Navigation ist im Testbrowser blockiert; deshalb wurde der komplette HTML-Quelltext mit `page.set_content()` gerendert.
+Das bestätigt **nicht**, dass das iPhone der Nutzerin/des Nutzers die herunterladbare HTML-Datei direkt öffnet; daher bleibt die gesicherte, direkt angezeigte JPG-Kontaktübersicht wichtig.
+
+Meilenstein 01 bleibt offen, bis das originale V7.7-GLB und seine geprüfte Referenztafel wieder lesbar sind; kein Live- oder Main-Merge.
