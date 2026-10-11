@@ -6,7 +6,7 @@ const fs=require("node:fs");
 const path=require("node:path");
 const vm=require("node:vm");
 const base=path.resolve(__dirname,"..");
-const pages=["vorschau.html","demo-junge.html","demo-maedchen.html"];
+const pages=["vorschau.html","demo-junge.html","demo-maedchen.html","vorschau-v78-interaktiv.html"];
 const read=n=>fs.readFileSync(path.join(base,n),"utf8");
 
 for(const file of pages){
@@ -67,4 +67,32 @@ test("The standalone preview pages remain independent from live Kids shell",()=>
  assert.ok(!html.includes("localStorage.setItem"));
  assert.ok(html.includes('href="demo-junge.html"'));
  assert.ok(html.includes('href="demo-maedchen.html"'));
+});
+
+test("V7.8 offline creator preview has independently usable lesson navigation",()=>{
+ const html=read("vorschau-v78-interaktiv.html");
+ for(const id of ["home","module","station","cards","lessonlist","stationLock","markBtn","chooseBoy","chooseGirl","counter","reset"]){
+  assert.ok(html.includes('id="'+id+'"'),"Missing control "+id);
+ }
+ for(const text of ["Was ist das Gebet?","Warum beten wir?","Wie bete ich?","Mein 3D-Gebet"]){
+  assert.ok(html.includes(text),"Missing learning category "+text);
+ }
+ assert.match(html, /\bopenModule\(/);
+ assert.match(html, /\bopenStation\(/);
+ assert.match(html, /\bsetProfile\(/);
+ assert.match(html, /\bupdateProgress\(/);
+});
+test("V7.8 test progress is isolated and no locked 3D step counts as viewed",()=>{
+ const html=read("vorschau-v78-interaktiv.html");
+ assert.match(html, /sessionStorage\.setItem\(storageKey/);
+ assert.match(html, /dar\.kids\.mein-gebet\.v78\.TEST_ONLY/);
+ assert.match(html, /\['boy','girl'\]/);
+ assert.match(html, /get\('markBtn'\)\.hidden=!!m\.locked/);
+ assert.match(html, /if\(m\.locked\)return/);
+ assert.match(html, /if\(!seen\[profile\]\.includes\(key\)\)/);
+ assert.match(html, /3D-Stationen zählen nicht dazu/);
+ assert.doesNotMatch(html, /localStorage|indexedDB|serviceWorker|navigator\.sendBeacon|fetch\(|XMLHttpRequest|<iframe|<img|<form|type="password"|<script src=/i);
+ assert.doesNotMatch(html, /https:\/\/dar-al-tawhid\.de\//);
+ assert.match(html, /NICHT LIVE/);
+ assert.match(html, /Keine echte Kinderanmeldung/);
 });
