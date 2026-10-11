@@ -1473,7 +1473,7 @@
             '<button type="button" data-dqp="v108-mode" data-v108-mode="tad" role="tab">Tadabbur</button>' +
             '<button type="button" data-dqp="v108-mode" data-v108-mode="taf" role="tab">Tafsīr</button>' +
           '</div>' +
-          '<div class="dqp-ayah" data-dqp-ayah>'
+          '<div class="dqp-ayah" data-dqp-ayah>' +
             '<div class="dqp-ayah-ref" data-ref></div>' +
             '<section class="dqp-sec dqp-sec-ar" data-sec="ar"><div class="dqp-sec-h">عربي</div><div class="dqp-ayah-ar" lang="ar" dir="rtl"></div></section>' +
             '<section class="dqp-sec dqp-sec-de" data-sec="de"><div class="dqp-sec-h">Deutsch</div><div class="dqp-ayah-de"></div></section>' +
