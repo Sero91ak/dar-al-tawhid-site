@@ -24,11 +24,11 @@ for(const [word,id] of [["Tawḥīd","tawhid"],["Īmān","iman"],["Ikhlāṣ","i
  const found=api.termsFor({title:word}, "4-5");
  assert.ok(found.some(e=>e.id===id),"Arabic transliteration must work: "+word);
 }
-for(const src of ["kids/akademie/curriculum-v1.js","kids/akademie/curriculum-v2.js","kids/akademie/curriculum-v22.js"]){
+for(const src of ["kids/akademie/curriculum-v1.js","kids/akademie/curriculum-v2.js","kids/akademie/curriculum-v22.js","kids/akademie/curriculum-v25.js"]){
  new vm.Script(read(src),{filename:src}).runInContext(sandbox);
 }
 const lessons=sandbox.window.DARKidsAcademyCurriculum;
-assert.equal(Object.keys(lessons).length,37);
+assert.equal(Object.keys(lessons).length,44);
 for(const l of Object.values(lessons))for(const age of ages){
  const found=api.termsFor(l,age);
  assert.ok(found.length>=2&&found.length<=7,"Glossary must be available in every lesson and age: "+l.id+" "+age);
@@ -93,7 +93,7 @@ assert.ok(!read(helperFile).includes("speechSynthesis")&&!read(helperFile).inclu
  "Vocabulary cannot invent an AI voice or spend credits");
 const {audit}=require("./audit-academy-voice-coverage-v18.js");
 const counts=audit();
-assert.equal(counts.catalogLessonCount,38);
+assert.equal(counts.catalogLessonCount,45);
 assert.equal(counts.vocabularyTerms,33);
 assert.equal(counts.vocabularyVoicePhrases,99);
 assert.deepEqual(counts.uncoveredLessons,[]);

@@ -1,10 +1,10 @@
 {
   "version": "academy-roadmap-v23-20261011",
-  "purpose": "170 editorial outlines to complete a 52-week, 208-slot Academy. NO new lesson may enter the child app until its complete religious, pedagogical and audio QA passes.",
+  "purpose": "163 remaining unapproved editorial lesson outlines plus 45 checked catalog lessons. No planned lesson unlocks before Qurʾān/Sunnah content and voice review.",
   "curriculum": {
     "totalNewLessonSlots": 208,
-    "alreadyImplementedLessons": 38,
-    "proposedAdditionalLessons": 170,
+    "alreadyImplementedLessons": 45,
+    "proposedAdditionalLessons": 163,
     "weeks": 52,
     "newDaysPerWeek": 4,
     "reviewDaysPerWeek": 2,
@@ -43,43 +43,43 @@
     {
       "id": "tawhid",
       "label": "Tawḥīd – Allah allein",
-      "plannedAdditions": 16,
+      "plannedAdditions": 15,
       "underlyingCurrentSubject": "aqidah"
     },
     {
       "id": "iman",
       "label": "Īmān – Grundlagen des Glaubens",
-      "plannedAdditions": 16,
+      "plannedAdditions": 15,
       "underlyingCurrentSubject": "aqidah"
     },
     {
       "id": "ikhlas",
       "label": "Ikhlāṣ – Aufrichtigkeit",
-      "plannedAdditions": 12,
+      "plannedAdditions": 11,
       "underlyingCurrentSubject": "aqidah"
     },
     {
       "id": "akhlaq",
       "label": "Akhlāq – Charakter und Verhalten",
-      "plannedAdditions": 18,
+      "plannedAdditions": 17,
       "underlyingCurrentSubject": "akhlaq"
     },
     {
       "id": "adab",
       "label": "Adab – islamisches Benehmen",
-      "plannedAdditions": 18,
+      "plannedAdditions": 17,
       "underlyingCurrentSubject": "adab"
     },
     {
       "id": "tarbiyah",
       "label": "Tarbiyah – Erziehung, Gewohnheiten, Verantwortung",
-      "plannedAdditions": 12,
+      "plannedAdditions": 11,
       "underlyingCurrentSubject": "tarbiyah"
     },
     {
       "id": "nafs",
       "label": "Tazkiyat an-Nafs – Herz und Selbststeuerung",
-      "plannedAdditions": 16,
+      "plannedAdditions": 15,
       "underlyingCurrentSubject": "nafs"
     },
     {
@@ -304,268 +304,44 @@
       "editorialSlot": 38,
       "lessonId": "aqidah-dua-allah-bitten",
       "status": "currently-in-catalog"
-    }
-  ],
-  "plannedUnits": [
+    },
     {
       "editorialSlot": 39,
-      "topicId": "editorial-039",
-      "week": 10,
-      "weekday": "Donnerstag",
-      "pillar": "tawhid",
-      "title": "Wer hat uns erschaffen?",
-      "classroomScenario": "Beim Blick in den Spiegel und auf die Natur über Allah als Schöpfer sprechen",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: beim Blick in den Spiegel und auf die Natur über Allah als Schöpfer sprechen.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: beim Blick in den Spiegel und auf die Natur über Allah als Schöpfer sprechen.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: beim Blick in den Spiegel und auf die Natur über Allah als Schöpfer sprechen.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "lessonId": "aqidah-tawhid-recht-allahs",
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 40,
-      "topicId": "editorial-040",
-      "week": 10,
-      "weekday": "Freitag",
-      "pillar": "iman",
-      "title": "Die sechs Säulen des Īmān kennenlernen",
-      "classroomScenario": "Sechs Begriffe als Übersicht hören und wiedererkennen",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: sechs Begriffe als Übersicht hören und wiedererkennen.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: sechs Begriffe als Übersicht hören und wiedererkennen.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: sechs Begriffe als Übersicht hören und wiedererkennen.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "lessonId": "aqidah-iman-sechs-grundlagen",
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 41,
-      "topicId": "editorial-041",
-      "week": 11,
-      "weekday": "Montag",
-      "pillar": "ikhlas",
-      "title": "Warum mache ich etwas Gutes?",
-      "classroomScenario": "Beim Helfen überlegen, warum man helfen möchte",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: beim Helfen überlegen, warum man helfen möchte.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: beim Helfen überlegen, warum man helfen möchte.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: beim Helfen überlegen, warum man helfen möchte.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 42,
-      "topicId": "editorial-042",
-      "week": 11,
-      "weekday": "Dienstag",
-      "pillar": "akhlaq",
-      "title": "Sanftmut bei Ärger",
-      "classroomScenario": "Bei einem verlorenen Spiel freundlich bleiben",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: bei einem verlorenen Spiel freundlich bleiben.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: bei einem verlorenen Spiel freundlich bleiben.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: bei einem verlorenen Spiel freundlich bleiben.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "lessonId": "akhlaq-wut-ruhig-bleiben",
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 43,
-      "topicId": "editorial-043",
-      "week": 11,
-      "weekday": "Donnerstag",
-      "pillar": "adab",
-      "title": "Mit Erlaubnis eintreten",
-      "classroomScenario": "Vor einer geschlossenen Zimmertür anklopfen",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: vor einer geschlossenen Zimmertür anklopfen.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: vor einer geschlossenen Zimmertür anklopfen.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: vor einer geschlossenen Zimmertür anklopfen.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "lessonId": "adab-erlaubnis-anklopfen",
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 44,
-      "topicId": "editorial-044",
-      "week": 11,
-      "weekday": "Freitag",
-      "pillar": "tarbiyah",
-      "title": "Gute tägliche Routinen",
-      "classroomScenario": "Den Schultag mit einer kurzen festen Lernzeit beginnen",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: den Schultag mit einer kurzen festen Lernzeit beginnen.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: den Schultag mit einer kurzen festen Lernzeit beginnen.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: den Schultag mit einer kurzen festen Lernzeit beginnen.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 45,
-      "topicId": "editorial-045",
-      "week": 12,
-      "weekday": "Montag",
-      "pillar": "nafs",
-      "title": "Gefühle benennen",
-      "classroomScenario": "Nach einem Streit sagen, ob man traurig oder wütend ist",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: nach einem Streit sagen, ob man traurig oder wütend ist.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: nach einem Streit sagen, ob man traurig oder wütend ist.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: nach einem Streit sagen, ob man traurig oder wütend ist.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
-    },
+      "lessonId": "akhlaq-nafs-gutes-herz",
+      "status": "currently-in-catalog"
+    }
+  ],
+  "plannedUnits": [
     {
       "editorialSlot": 46,
       "topicId": "editorial-046",
