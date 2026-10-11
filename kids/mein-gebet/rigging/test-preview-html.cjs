@@ -6,7 +6,7 @@ const fs=require("node:fs");
 const path=require("node:path");
 const vm=require("node:vm");
 const base=path.resolve(__dirname,"..");
-const pages=["vorschau.html","demo-junge.html","demo-maedchen.html","vorschau-v78-interaktiv.html","vorschau-v79-3d-labor.html","vorschau-v80-salam-fix.html","vorschau-v81-betendenperspektive.html"];
+const pages=["vorschau.html","demo-junge.html","demo-maedchen.html","vorschau-v78-interaktiv.html","vorschau-v79-3d-labor.html","vorschau-v80-salam-fix.html","vorschau-v81-betendenperspektive.html","vorschau-v82-original-check.html"];
 const read=n=>fs.readFileSync(path.join(base,n),"utf8");
 
 for(const file of pages){
@@ -161,4 +161,22 @@ test("V8.1 Qibla perspective opens behind praying figure and preserves anatomica
  assert.match(html,/taslimKeys=\[\[0,0\],\[\.62,-1\.07\]/);
  assert.match(html,/productionApproved:false/);
  assert.doesNotMatch(html,/localStorage|sessionStorage|serviceWorker|\bfetch\(|XMLHttpRequest/i);
+});
+
+test("V8.2 original recovery accepts ONLY frozen V7.7 SHA256 GLB and PNG",()=>{
+ const html=read("vorschau-v82-original-check.html");
+ for(const id of ["drop","files","img","imagePreview","modelState","imageState","rigState","clipsState","reset","report","status"])
+   assert.ok(html.includes('id="'+id+'"'),"Missing original intake control "+id);
+ assert.match(html,/353b028862f91922d6288cf6ede09d5c8150815657c66c9c116b7775311c07fa/);
+ assert.match(html,/062b8555e861c680b1049ab6a3bee0212caa51cda5168a6b33a76be01aa987b9/);
+ assert.match(html,/function sha256pure\(/);
+ assert.match(html,/function parseGlb\(/);
+ assert.match(html,/function readZip\(/);
+ assert.match(html,/function unzipEntry\(/);
+ assert.match(html,/DecompressionStream\('deflate-raw'\)/);
+ assert.match(html,/let list=\[\.\.\.files\];clear\(\)/);
+ assert.match(html,/productionApproved:false/);
+ assert.match(html,/originalIdentityApproved:false/);
+ assert.match(html,/Kein Live-Push|kein Live-Push/);
+ assert.doesNotMatch(html, /\bfetch\(|XMLHttpRequest|sendBeacon|serviceWorker|localStorage|sessionStorage|<script[^>]+src|<iframe|<form|rel="manifest"/i);
 });
