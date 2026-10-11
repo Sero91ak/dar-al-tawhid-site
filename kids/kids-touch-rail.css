@@ -1931,3 +1931,54 @@ html body .kids-touch-control:is(:active,.is-kids-pressed,[aria-pressed="true"])
     transition:border-color .1s ease,box-shadow .1s ease!important;
   }
 }
+
+/* =========================================================
+   KIDS_HOME_GLOW_PARITY_V17 — SPECIFICITY LOCK
+   All story worlds / inner library cards use precisely the
+   calm Home/Hörbücher reference. The older V10/V11 ID rules
+   previously outranked the V16 generic :is() rules.
+   Only category/content cards; no back, header or tab buttons.
+   ========================================================= */
+@media(hover:hover) and (pointer:fine){
+html body #view-stories #deenEntry.kids-tap-card:hover,
+html body #view-stories #psProphetEntry.kids-tap-card:hover,
+html body #view-stories #msEntry.kids-tap-card:hover,
+html body #view-stories #syEntry.kids-tap-card:hover,
+html body #dlLibraryPage .dl-story-row.kids-tap-card:hover,
+html body #psLibraryPage .ps-story-row.kids-tap-card:hover,
+html body #msLibraryPage .ms-story-row.kids-tap-card:hover,
+html body #syLibraryPage .ms-story-row.kids-tap-card:hover{
+    border-color:var(--kids-home-glow-line-hover)!important;
+    box-shadow:var(--kids-home-glow-hover)!important;
+    filter:brightness(1.025)!important;
+    transform:none!important;
+  }
+}
+html body #view-stories #deenEntry.kids-tap-card:is(:active,.is-kids-pressed,.kids-story-touch-glow,[aria-selected='true'],[aria-current='page']),
+html body #view-stories #psProphetEntry.kids-tap-card:is(:active,.is-kids-pressed,.kids-story-touch-glow,[aria-selected='true'],[aria-current='page']),
+html body #view-stories #msEntry.kids-tap-card:is(:active,.is-kids-pressed,.kids-story-touch-glow,[aria-selected='true'],[aria-current='page']),
+html body #view-stories #syEntry.kids-tap-card:is(:active,.is-kids-pressed,.kids-story-touch-glow,[aria-selected='true'],[aria-current='page']),
+html body #dlLibraryPage .dl-story-row.kids-tap-card:is(:active,.is-kids-pressed,.kids-story-touch-glow,[aria-selected='true'],[aria-current='page']),
+html body #psLibraryPage .ps-story-row.kids-tap-card:is(:active,.is-kids-pressed,.kids-story-touch-glow,[aria-selected='true'],[aria-current='page']),
+html body #msLibraryPage .ms-story-row.kids-tap-card:is(:active,.is-kids-pressed,.kids-story-touch-glow,[aria-selected='true'],[aria-current='page']),
+html body #syLibraryPage .ms-story-row.kids-tap-card:is(:active,.is-kids-pressed,.kids-story-touch-glow,[aria-selected='true'],[aria-current='page']){
+  border-color:var(--kids-home-glow-line-press)!important;
+  box-shadow:var(--kids-home-glow-press)!important;
+  filter:brightness(1.045)!important;
+  transform:none!important;
+  translate:none!important;
+}
+html body #view-stories #deenEntry.kids-tap-card:focus-visible,
+html body #view-stories #psProphetEntry.kids-tap-card:focus-visible,
+html body #view-stories #msEntry.kids-tap-card:focus-visible,
+html body #view-stories #syEntry.kids-tap-card:focus-visible,
+html body #dlLibraryPage .dl-story-row.kids-tap-card:focus-visible,
+html body #psLibraryPage .ps-story-row.kids-tap-card:focus-visible,
+html body #msLibraryPage .ms-story-row.kids-tap-card:focus-visible,
+html body #syLibraryPage .ms-story-row.kids-tap-card:focus-visible{
+  outline:2px solid rgba(247,214,132,.38)!important;
+  outline-offset:2px!important;
+  border-color:var(--kids-home-glow-line-press)!important;
+  box-shadow:var(--kids-home-glow-press)!important;
+  filter:brightness(1.04)!important;
+}
