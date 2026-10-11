@@ -65,7 +65,7 @@ const get=(path,method="GET")=>handler.fetch(new Request("https://kids-preview.e
   assert.equal(manifest.display,"standalone");
   assert.equal(manifest.id,"/kids/test-console/");
   assert.equal(manifest.start_url,"/kids/test-console/");
-  assert.equal(manifest.scope,"/kids/test-console/");
+  assert.equal(manifest.scope,"/kids/","Installed TEST app must also contain the real KIDS interface");
   assert.match(consoleHtml,/href="\/kids\/test-console\/manifest\.webmanifest"/);
   assert.match(consoleHtml,/src="\/kids\/test-console\/studio-v1\.js"/);
   assert.match(consoleHtml,/LIVE-PUSH GESPERRT/);
@@ -84,8 +84,15 @@ const get=(path,method="GET")=>handler.fetch(new Request("https://kids-preview.e
   assert.match(studio,/localStorage\.setItem\(STORAGE_KEY/);
   assert.doesNotMatch(studio,/fetch\([^)]*,\s*\{[^}]*method\s*:\s*["'](?:POST|PUT|PATCH|DELETE)/i);
   assert.doesNotMatch(studio,/dar-al-tawhid\.de|github\.com\/.*\/pulls|fetch\("\/kids\/api/);
+  const bridge=fs.readFileSync(path.join(root,"kids/test-console/return-to-studio.js"),"utf8");
+  new vm.Script(bridge,{filename:"kids-test-return-to-studio.js"});
+  assert.ok(bridge.includes('location.hostname!==HOST'));
+  assert.ok(bridge.includes('button.href="/kids/test-console/"'));
+  const realHome=fs.readFileSync(path.join(root,"kids/start.html"),"utf8");
+  const realAcademy=fs.readFileSync(path.join(root,"kids/akademie/index.html"),"utf8");
+  for(const doc of [realHome,realAcademy])assert.ok(doc.includes('src="/kids/test-console/return-to-studio.js"'));
   assert.match(styles,/\.release-lock/);
-  for(const file of ["manifest.webmanifest","studio-v1.js","studio-v1.css","sw.js"]){
+  for(const file of ["manifest.webmanifest","studio-v1.js","studio-v1.css","sw.js","return-to-studio.js"]){
     const response=await get("/kids/test-console/"+file);
     assert.equal(response.status,200,"PWA asset route "+file);
   }
