@@ -3618,7 +3618,7 @@ body .academy-header.kids-detail-appbar > .hero-profile-chip .hero-profile-copy 
   },true);
 })();
 </script><style id="kids-academy-child-qa-separation">
-.master-voice-sample-note,[data-academy-pilot],.master-voice-test,
+.academy-tech-details,.master-voice-sample-note,[data-academy-pilot],.master-voice-test,
 #academyCreatorVoiceBanner,#academyPilotStatus,#audioDiagnostics{display:none!important}
 body .lesson-source-block .source{font-size:12px}
 </style>
@@ -3710,7 +3710,7 @@ body .lesson-source-block .source{font-size:12px}
 </div>
 <p class="master-voice-sample-note" id="academyPilotStatus" aria-live="polite">Tippe auf eine Hörprobe.</p>
 </div><p class="master-voice-sample-note"><a href="/kids/akademie/stimmen-test-v14.html?v=serhat-native-v14-20261010" rel="nofollow">▶ Unabhängiger iPhone-Audiotest (Standard-Player)</a></p><button type="button" class="pill soft-gold master-voice-test" id="masterVoiceTest">▶ Masterstimme testen</button><p class="master-voice-sample-note" id="masterVoiceTestStatus" aria-live="polite">Masterprobe aus dem Duʿāʾ-Bereich – noch keine Aufnahme des Unterrichtssatzes.</p></details></div></section>
-  <section class="lesson-stage" data-lesson-step="1" aria-labelledby="explainTitle" hidden><span class="kicker">Schritt 2 · Heute lernen wir</span><h2 id="explainTitle">Was bedeutet Wahrhaftigkeit?</h2><p class="stage-lead">Die <strong>Wahrheit sagen</strong> – auch wenn es manchmal Mut kostet.</p><button type="button" class="pill soft-gold academy-serhat-lead" id="academySerhatLead" hidden aria-label="Tawḥīd-Einführung mit Serhats Masterstimme anhören">▶ Serhat hören</button><span class="academy-serhat-status" id="academySerhatStatus" aria-live="polite" hidden></span><div class="spoken-paragraph" id="explainWords"><p data-spoken>Manchmal passiert uns aus Versehen ein Fehler.</p><p data-spoken>Wenn wir ehrlich sagen, was passiert ist, können wir Verantwortung übernehmen und etwas wiedergutmachen.</p><p data-spoken>Wenn wir stattdessen lügen, kann das Vertrauen anderer Menschen leiden.</p><p data-spoken>Wahrhaftigkeit ist deshalb ein wichtiger Teil unseres guten Charakters.</p></div><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="1">Erklärung anhören</button><span class="voice-note">Beim Hören wird der aktuelle Satz sanft hervorgehoben.</span></div></section>
+  <section class="lesson-stage" data-lesson-step="1" aria-labelledby="explainTitle" hidden><span class="kicker">Schritt 2 · Heute lernen wir</span><h2 id="explainTitle">Was bedeutet Wahrhaftigkeit?</h2><p class="stage-lead">Die <strong>Wahrheit sagen</strong> – auch wenn es manchmal Mut kostet.</p><button type="button" class="pill soft-gold academy-serhat-lead" id="academySerhatLead" hidden aria-label="Erklärung anhören">▶ Erklärung anhören</button><span class="academy-serhat-status" id="academySerhatStatus" aria-live="polite" hidden></span><div class="spoken-paragraph" id="explainWords"><p data-spoken>Manchmal passiert uns aus Versehen ein Fehler.</p><p data-spoken>Wenn wir ehrlich sagen, was passiert ist, können wir Verantwortung übernehmen und etwas wiedergutmachen.</p><p data-spoken>Wenn wir stattdessen lügen, kann das Vertrauen anderer Menschen leiden.</p><p data-spoken>Wahrhaftigkeit ist deshalb ein wichtiger Teil unseres guten Charakters.</p></div><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="1">Erklärung anhören</button><span class="voice-note">Beim Hören wird der aktuelle Satz sanft hervorgehoben.</span></div></section>
   <section class="lesson-stage" data-lesson-step="2" aria-labelledby="evidenceTitle" hidden><span class="kicker">Schritt 3 · Qurʾān und Sunnah</span><h2 id="evidenceTitle">Was lernen wir aus den Quellen?</h2><p class="stage-lead" id="evidenceLead">Wir hören zuerst einen Vers aus dem Qurʾān und betrachten danach eine authentische Überlieferung.</p><div class="evidence-region"><section class="lesson-source-block">
   <div class="eyebrow">Qurʾān · Sūrat at-Tawbah · Vers 119</div>
   <div class="arabic-listen-row">
@@ -3993,7 +3993,7 @@ function setAudioFeedback(message){
  const failed=/nicht verfügbar|konnte nicht|nicht gestartet|nicht abgespielt/i.test(message);
  const missing=/noch keine geprüfte Serhat-Masteraufnahme/i.test(message);
  const technical=/Gerätestimme|Masteraufnahme|Serhat-Masteraufnahme|Masterstimme|Für diesen Satz/i.test(message);
- const friendly=missing?"Für diesen Satz gibt es noch keine geprüfte Aufnahme deiner Masterstimme.":failed?"Das Vorlesen klappt gerade nicht. Bitte versuche es erneut.":technical?"Die Erklärung wird vorgelesen. Du kannst in deinem Tempo zuhören.":message;
+ const friendly=missing?"Für diesen Satz gibt es derzeit noch keine geprüfte Aufnahme.":failed?"Das Vorlesen klappt gerade nicht. Bitte versuche es erneut.":technical?"Die Erklärung wird vorgelesen. Du kannst in deinem Tempo zuhören.":message;
  const el=$("#audioFeedback");if(el)el.textContent=friendly;
  const welcome=$("#voiceStatus");if(welcome)welcome.textContent=friendly;
 }
@@ -4187,7 +4187,7 @@ function refreshSerhatLessonClip(){
   if(activeLessonId!==currentLesson||$("#lessonMain").hidden)return;
   if(!isAcademyStoryMaster(desired))return;
   button.hidden=false;button.dataset.masterText=desired;
-  button.setAttribute("aria-label",desired+" – mit Serhats Masterstimme anhören");
+  button.setAttribute("aria-label",desired+" – Erklärung anhören");
  }).catch(()=>{button.hidden=true;});
 }
 function playSerhatLessonClip(){
@@ -4195,7 +4195,7 @@ function playSerhatLessonClip(){
  const owner=window.DARKidsOwnerVoice;
  if(!t||!owner||!isAcademyStoryMaster(t))return;
  pauseVoiceClip();stopSpeech();stopAudio();status.hidden=false;
- status.textContent="Die Masterstimme wird abgespielt.";
+ status.textContent="Die Erklärung wird vorgelesen.";
  const failed=()=>{status.hidden=false;status.textContent="Diese Aufnahme lässt sich gerade nicht abspielen.";};
  try{
   const ok=owner.play(t,{source:"kids-academy-tawhid-verified-serhat",
