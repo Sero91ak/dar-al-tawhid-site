@@ -1120,6 +1120,52 @@ async function serveKidsIntroVideo(request, url, env) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    // Q_SOURCE_LIBRARY_DIRECT_ROUTING_V2
+    // These are standalone public sources, NOT an SPA shell. Cloudflare's
+    // default HTML handling already maps /quellen/ to quellen/index.html.
+    // Do not rewrite /quellen/ to /quellen/index.html in _redirects.
+    if (request.method === "GET" || request.method === "HEAD") {
+      const sourcePath = url.pathname;
+      const numericSource = sourcePath.match(/^\/q\/([1-9][0-9]*)(?:\/index\.html|\/?)$/);
+      const canonicalSourcePath = numericSource ? "/q/" + numericSource[1] + "/" : "";
+      const sourceIsLibrary = sourcePath === "/quellen" || sourcePath === "/quellen/" ||
+        sourcePath === "/quellen/index.html" || sourcePath === "/quellen/shortlinks.json";
+      const sourceIsArchive = sourcePath === "/q" || sourcePath === "/q/" || sourcePath === "/q/index.html";
+      if (sourceIsLibrary || sourceIsArchive || canonicalSourcePath) {
+        const canonicalPath = sourceIsArchive ? "/quellen/" :
+          canonicalSourcePath || (sourcePath === "/quellen/shortlinks.json" ? sourcePath : "/quellen/");
+        if (sourcePath !== canonicalPath) {
+          const location = canonicalPath + (url.search || "");
+          return new Response(null, { status: 308, headers: {
+            "Location": location,
+            "Cache-Control": "no-store, max-age=0",
+            "X-DAR-Q-Route": "canonical-redirect"
+          } });
+        }
+        try {
+          const asset = await env.ASSETS.fetch(request);
+          const headers = new Headers(asset.headers);
+          headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+          headers.set("CDN-Cache-Control", "no-store");
+          headers.set("Cloudflare-CDN-Cache-Control", "no-store");
+          headers.set("X-DAR-Q-Route", "direct-static-asset-v2");
+          headers.delete("Content-Length");
+          if (asset.status >= 300 && asset.status < 400) {
+            // Never loop a canonical asset back to itself.
+            return new Response("Quellen-Routingfehler", { status: 502, headers });
+          }
+          return new Response(request.method === "HEAD" ? null : asset.body, {
+            status: asset.status, statusText: asset.statusText, headers
+          });
+        } catch (error) {
+          return new Response("Quellenbibliothek vorübergehend nicht erreichbar", {
+            status: 503,
+            headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-store",
+              "X-DAR-Q-Route": "asset-error" }
+          });
+        }
+      }
+    }
     if (request.method === "GET" || request.method === "HEAD") {
       const audio = await proxyQuranAudio(request, url);
       if (audio) return audio;
