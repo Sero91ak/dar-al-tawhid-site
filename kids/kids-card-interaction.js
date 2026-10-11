@@ -1,4 +1,4 @@
-/* DĀR AL TAWḤĪD KIDS — Global Card Interaction Runtime v6
+/* DĀR AL TAWḤĪD KIDS — Global Card Interaction Runtime v7
    KIDS_GLOBAL_TOUCH_GLOW
    Applies one touch language to all current and future Kids card/capsule surfaces.
 */
@@ -84,6 +84,15 @@
     ".bottom-nav button",
     ".tab-bar button",
     ".ms-back",
+    ".sy-back",
+    ".ps-library-back",
+    ".ms-library-back",
+    ".dl-library-back",
+    ".kids-detail-dock-back",
+    ".kids-detail-appbar button",
+    "[aria-label^='Zurück']",
+    "[title^='Zurück']",
+    "[data-kids-back]",
     ".ps-back",
     ".ps-library-back",
     ".ps-library-nav button",
@@ -206,7 +215,7 @@
 
   document.addEventListener("pointerdown",e=>{
     const el=e.target.closest?.(".kids-tap-card,.kids-touch-control");
-    if(!el || el.disabled || el.getAttribute("aria-disabled")==="true") return;
+    if(!el || el.matches(EXCLUDE_SELECTORS) || el.disabled || el.getAttribute("aria-disabled")==="true") return;
     setPressed(el);
   },{passive:true,capture:true});
 
@@ -221,14 +230,14 @@
   document.addEventListener("touchstart",e=>{
     if(performance.now()-lastPointerAt<220)return;
     const el=e.target.closest?.(".kids-tap-card,.kids-touch-control");
-    if(!el||el.disabled||el.getAttribute("aria-disabled")==="true")return;
+    if(!el||el.matches(EXCLUDE_SELECTORS)||el.disabled||el.getAttribute("aria-disabled")==="true")return;
     setPressed(el);
   },{passive:true,capture:true});
   document.addEventListener("touchend",()=>clearPressed(165),{passive:true,capture:true});
   document.addEventListener("touchcancel",()=>clearPressed(0),{passive:true,capture:true});
 
   window.DARKidsCardInteraction={
-    version:6,
+    version:7,
     mark,
     tapSelector:TAP_SELECTORS
   };
