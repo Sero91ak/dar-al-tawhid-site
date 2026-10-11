@@ -21,6 +21,15 @@ for(const file of ["kids/start.html","kids/index.html","kids/shell.html"]){
   assert.match(html,/document\.getElementById\("joinLoginExisting"\)\.addEventListener/);
   assert.ok(!html.includes('if(p.name&&p.pass)rpc("kids_register"'),
     file+" may overwrite existing cloud progress when reopened");
+  // Kids support address must be available to parents in login and account settings.
+  assert.equal((html.match(/mailto:dar\.al\.tauhid91@gmail\.com\?/g)||[]).length,2,file+" needs both support links");
+  assert.match(html,/Passwort vergessen\? Support kontaktieren/);
+  assert.match(html,/Hilfe mit einem Kinderkonto\? Support kontaktieren/);
+  assert.match(html,/Bitte keine Passwörter oder sensiblen Kinderdaten per E-Mail senden/);
+  assert.match(html,/KIDS ACCOUNT SUPPORT V1/);
+  assert.match(html,/#view-parents \.kids-support-link/);
+  assert.match(html,/\.app\[data-gender="girl"\] #view-parents \.kids-support-link/);
+  assert.ok(!html.includes('mailto:dar.al.tauhid91@gmail.com?subject=Passwort%3A'),"Never embed a password in email");
   // Login must never depend on blocking browser-native prompts in iOS WKWebView.
   assert.match(html,/data-step="login" role="group"/);
   assert.match(html,/id="deviceLoginStatus"[^>]*aria-live="polite"/);
