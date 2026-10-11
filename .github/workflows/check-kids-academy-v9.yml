@@ -8,6 +8,12 @@ on:
       - 'scripts/test-kids-academy-creator-v17.js'
       - 'desktop-preview/kids-akademie-unterricht.html'
       - 'kids/data/academy-voice-plan-v9.json'
+      - 'kids/data/academy-sidq-voice-plan-v18.json'
+      - 'kids/data/academy-sidq-v18-request.json'
+      - 'kids/tools/export-academy-sidq-voice-v18.js'
+      - 'kids/tools/build-academy-v9-staging.py'
+      - 'scripts/test-kids-academy-sidq-v18.js'
+      - '.github/workflows/kids-academy-sidq-v18-manual.yml'
       - 'scripts/test-kids-academy-v9.js'
       - 'scripts/test-kids-academy-school-v11.js'
       - 'scripts/test-kids-academy-direct-voice-v13.js'
@@ -20,6 +26,12 @@ on:
       - 'scripts/test-kids-academy-creator-v17.js'
       - 'desktop-preview/kids-akademie-unterricht.html'
       - 'kids/data/academy-voice-plan-v9.json'
+      - 'kids/data/academy-sidq-voice-plan-v18.json'
+      - 'kids/data/academy-sidq-v18-request.json'
+      - 'kids/tools/export-academy-sidq-voice-v18.js'
+      - 'kids/tools/build-academy-v9-staging.py'
+      - 'scripts/test-kids-academy-sidq-v18.js'
+      - '.github/workflows/kids-academy-sidq-v18-manual.yml'
       - 'scripts/test-kids-academy-v9.js'
       - 'scripts/test-kids-academy-school-v11.js'
       - 'scripts/test-kids-academy-direct-voice-v13.js'
@@ -53,6 +65,12 @@ jobs:
         run: |
           python3 -m py_compile kids/tools/build-academy-v9-staging.py kids/tools/build-academy-audio.py
           python3 kids/tools/build-academy-v9-staging.py --dry-run
+      - name: Check isolated Ṣidq V18 exact voice inventory and manual-cost guards
+        run: |
+          node --check kids/tools/export-academy-sidq-voice-v18.js
+          node kids/tools/export-academy-sidq-voice-v18.js --check
+          node scripts/test-kids-academy-sidq-v18.js
+          python3 kids/tools/build-academy-v9-staging.py --dry-run --sidq-v18 --limit 4 --max-chars 350
       - name: Confirm reproducible voice plan remains unchanged
         run: |
           node kids/tools/export-academy-voice-plan.js

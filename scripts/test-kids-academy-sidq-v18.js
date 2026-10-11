@@ -1,0 +1,46 @@
+#!/usr/bin/env node
+"use strict";
+const fs=require("node:fs"),path=require("node:path"),assert=require("node:assert/strict");
+const root=path.resolve(__dirname,".."),read=f=>fs.readFileSync(path.join(root,f),"utf8"),json=f=>JSON.parse(read(f));
+const old=json("kids/data/academy-voice-plan-v9.json");
+const sidq=json("kids/data/academy-sidq-voice-plan-v18.json");
+const pilot=json("kids/data/academy-audio-staging-v9.json");
+const request=json("kids/data/academy-sidq-v18-request.json");
+const generator=read("kids/tools/build-academy-v9-staging.py");
+const workflow=read(".github/workflows/kids-academy-sidq-v18-manual.yml");
+assert.equal(old.lessonCount,34);
+assert.equal(old.phraseCount,454);
+assert.equal(old.phrases.length,454);
+assert.ok(!old.phrases.some(p=>p.contexts.some(c=>c.lessonId==="sidq")),"Original V9 plan has no foundation Ṣidq lesson");
+assert.equal(sidq.lessonId,"sidq");
+assert.equal(sidq.lessonCount,1);
+assert.ok(sidq.phraseCount>=50);
+assert.equal(sidq.phrases.length,sidq.phraseCount);
+assert.equal(new Set(sidq.phrases.map(p=>p.text)).size,sidq.phraseCount);
+assert.equal(sidq.modelId,"eleven_v4");
+assert.equal(sidq.voiceSettingsProfile,"kids_story");
+assert.equal(sidq.additionalTo,"kids/data/academy-voice-plan-v9.json");
+assert.deepEqual(sidq.ageKeys,["4-5","6-8","9-10"]);
+assert.ok(sidq.phrases.every(p=>p.contexts.length&&p.contexts.every(c=>c.lessonId==="sidq")));
+assert.ok(sidq.phrases.every(p=>p.reviewStatus==="not-generated"));
+assert.equal(pilot.pilotFirstLesson,true);
+assert.equal(Object.keys(pilot.entries).length,4);
+for(const phrase of Object.keys(pilot.entries))assert.ok(sidq.phrases.some(p=>p.text===phrase),"Missing existing pilot phrase "+phrase);
+assert.equal(request.id,"kids-academy-sidq-v18-manual-batch");
+assert.equal(request.maxClips,4);
+assert.equal(request.maxPreparedCharacters,350);
+assert.equal(request.voiceId,"DkU7j9uO4ZEtLD2iRZSH");
+assert.equal(request.modelId,"eleven_v4");
+assert.equal(request.voiceSettingsProfile,"kids_story");
+assert.equal(request.requireManualWorkflowDispatch,true);
+assert.ok(request.stagingOnly&&!request.approvedForPlayback);
+assert.ok(request.exactPhrases.every(t=>sidq.phrases.some(p=>p.text===t)),"Requested clip absent from verified text source");
+assert.ok(request.exactPhrases.every(t=>!Object.hasOwn(pilot.entries,t)),"Batch would repeat an existing paid clip");
+for(const s of ["STAGING_EXPANSION","STAGING_SIDQ","if args.sidq_v18:","staging_path.write_text","approvedForPlayback\":False"]){
+ assert.ok(generator.includes(s),"Missing isolated manual generator safeguard: "+s);
+}
+assert.match(workflow,/workflow_dispatch:/);
+assert.match(workflow,/inputs\.confirm == 'GENERATE-SIDQ-FOUR'/);
+assert.ok(!/\n  push:/.test(workflow),"Paid production may NEVER start on push");
+assert.ok(workflow.includes("git diff --exit-code -- kids/data/academy-audio-staging-v9.json kids/data/academy-audio.json"));
+console.log("KIDS SIDQ V18 PASS:",sidq.phraseCount,"exact foundation phrases alongside 454 V9 phrases, 4 existing pilot clips, no automatic charge/publish");
