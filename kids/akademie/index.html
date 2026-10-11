@@ -3736,6 +3736,7 @@ body .academy-header.kids-detail-appbar > .hero-profile-chip .hero-profile-copy 
 </main>
 <script src="/kids/akademie/curriculum-v1.js?v=20261010-01"></script>
 <script src="/kids/akademie/curriculum-v2.js?v=20261010-09"></script>
+<script src="/kids/akademie/curriculum-v22.js?v=20261011-01"></script>
 <script src="/kids/akademie/school-progress-v11.js?v=20261010-11"></script>
 <script src="/kids/akademie/pilot-audio-v13.js?v=20261010-voicefix-v16&amp;rev=20261011-v19-creator-audio"></script>
 <script>
@@ -4306,10 +4307,11 @@ function applySelectedLesson(){
  const q=lesson.quran,k="quran:"+q.surah+":"+q.ayah;
  TRACKS[k]={src:"/quran-audio/ar.alafasy/"+(QURAN_COUNTS.slice(0,q.surah-1).reduce((a,b)=>a+b,0)+q.ayah)+".mp3",fallback:"https://everyayah.com/data/Alafasy_128kbps/"+String(q.surah).padStart(3,"0")+String(q.ayah).padStart(3,"0")+".mp3"};
  $("#lessonIntroduction").textContent=lesson.goal;$("#welcomeTitle").textContent="Heute lernen wir: "+lesson.topic;
- $("#lessonWelcomeBody").textContent=lesson.lead+" "+lesson.goal;
+ const ageTeaching=lesson.ageText?.[age];
+ $("#lessonWelcomeBody").textContent=ageTeaching?.intro||lesson.lead+" "+lesson.goal;
  $("#explainTitle").textContent=lesson.topic+" verstehen";
  $('[data-lesson-step="1"] .stage-lead').textContent=lesson.lead;
- all("#explainWords [data-spoken]").forEach((el,i)=>el.textContent=lesson.lines[i]);
+ all("#explainWords [data-spoken]").forEach((el,i)=>el.textContent=(ageTeaching?.lines||lesson.lines)[i]);
  $("#evidenceLead").textContent=age==="4-5"?"Wir hören einen Qurʾān-Vers und eine Überlieferung des Propheten ﷺ.":"Wir verstehen die Belege für "+lesson.topic+".";
  qBlock.querySelector(".eyebrow").textContent="Qurʾān · "+q.label;
  verse.textContent=q.arabic;verse.dataset.audioText=k;listen.dataset.arabicAudio=k;
@@ -4319,7 +4321,7 @@ function applySelectedLesson(){
  $("#arabicAudioStatus").textContent=q.excerpt?"Textauszug · vollständiger Vers wird rezitiert":"Rezitation des vollständigen Verses";
  hadithBlock.querySelector(".quote").textContent=lesson.hadith.text;
  hadithBlock.querySelector(".source").textContent="Quelle: "+lesson.hadith.source;
- $(".teacher-explainer").textContent="Qurʾān: "+q.meaning+" Sunnah: "+lesson.hadith.text;
+ $(".teacher-explainer").textContent=ageTeaching?.evidence||"Qurʾān: "+q.meaning+" Sunnah: "+lesson.hadith.text;
  all(".recap-lesson p").forEach((el,i)=>el.textContent=[lesson.goal,q.meaning+" "+lesson.hadith.text,lesson.sample][i]);
  $("#practiceTitle").textContent=age==="4-5"?"Was machst du?":age==="9-10"?"Was weißt du darüber?":"Was würdest du tun?";
  $("#todayTopicName").textContent=lesson.title;$("#todayTopicIntro").textContent=lesson.lead;

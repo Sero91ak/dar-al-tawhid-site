@@ -3,9 +3,9 @@
 const assert=require("node:assert/strict");
 const {audit,validV4,normalize}=require("../kids/tools/audit-academy-voice-coverage-v18.js");
 const r=audit();
-assert.equal(r.catalogLessonCount,34);
+assert.equal(r.catalogLessonCount,38);
 assert.deepEqual(r.uncoveredLessons,[]);
-assert.ok(r.uniquePhrases>=454);
+assert.ok(r.uniquePhrases>=600);
 assert.equal(Object.values(r.totals).reduce((a,b)=>a+b,0),r.uniquePhrases);
 assert.equal(r.totals.approved,0,"Old Flash clip is NOT an approved V4 story voice");
 assert.ok(r.totals.stagedAwaitingReview>=4,"Four original pilot V4 recordings stay staged");

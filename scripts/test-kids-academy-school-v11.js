@@ -7,7 +7,7 @@ const path=require("node:path");
 const ROOT=path.resolve(__dirname,"..");
 const read=(p)=>fs.readFileSync(path.join(ROOT,p),"utf8");
 const sandbox=vm.createContext({window:{}});
-for(const src of ["kids/akademie/curriculum-v1.js","kids/akademie/curriculum-v2.js","kids/akademie/school-progress-v11.js"])
+for(const src of ["kids/akademie/curriculum-v1.js","kids/akademie/curriculum-v2.js","kids/akademie/curriculum-v22.js","kids/akademie/school-progress-v11.js"])
  new vm.Script(read(src),{filename:src}).runInContext(sandbox,{timeout:1500});
 const curriculum=sandbox.window.DARKidsAcademyCurriculum;
 const school=sandbox.window.DARKidsAcademySchool;
@@ -16,8 +16,8 @@ const topics={akhlaq:["sidq","akhlaq-sabr","akhlaq-amanah"],adab:["adab-salam","
 for(const [lessonId,lesson] of Object.entries(curriculum))
  if(!topics[lesson.subject].includes(lessonId))topics[lesson.subject].push(lessonId);
 const ids=Array.from(school.sequence(topics));
-assert.equal(ids.length,34);
-assert.equal(new Set(ids).size,34);
+assert.equal(ids.length,38);
+assert.equal(new Set(ids).size,38);
 assert.deepEqual(ids.slice(0,4),["sidq","adab-salam","fiqh-taharah","aqidah-tawhid"]);
 const day=(day,month=9)=>new Date(2026,month,day,12,0,0);
 const run=(date,records={},drafts={})=>school.evaluate({topics,records,drafts,now:date});
@@ -64,7 +64,7 @@ const full=Object.fromEntries(ids.map(lessonId=>[lessonId,{lessonId,completedAt:
 const graduate=run(day(13),full);
 assert.equal(graduate.active,null);
 assert.equal(graduate.upcoming,null);
-assert.equal(graduate.access(ids[33]),"review");
+assert.equal(graduate.access(ids[37]),"review");
 const html=read("kids/akademie/index.html");
 assert.ok(html.includes('school-progress-v11.js?v=20261010-11'));
 assert.ok(html.includes('data-preview-release="V17.0-voice-sandbox-20261011"')||html.includes('data-preview-release="V12.0-voicepilot-20261010"')||html.includes('data-preview-release="V11.0-20261010"'),"Supported sequential school release marker");
@@ -74,4 +74,4 @@ assert.ok(html.includes('firstCompletedAt:Number(prev?.firstCompletedAt||prev?.c
 assert.ok(!html.includes("elapsed>7*86400000"),"Unfinished lessons never expire");
 const inline=html.slice(html.lastIndexOf("<script>")+8,html.lastIndexOf("</script>"));
 new vm.Script(inline);
-console.log("KIDS SCHOOL V11 PASSED: 34 lessons, one active at a time, next-day gate, Wed/Sat review, indefinite resume, locked deep links.");
+console.log("KIDS SCHOOL V11 PASSED: 38 lessons, one active at a time, next-day gate, Wed/Sat review, indefinite resume, locked deep links.");

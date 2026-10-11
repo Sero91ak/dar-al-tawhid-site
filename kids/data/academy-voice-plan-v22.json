@@ -1,0 +1,2084 @@
+{
+  "schemaVersion": 1,
+  "version": "academy-voice-plan-v22-20261011",
+  "voiceProfileId": "serhat-owner-voice-2026",
+  "voiceName": "Serhat Abu Malik – Master",
+  "modelId": "eleven_v4",
+  "purpose": "Prepared exact-match V22 German teaching; NOT GENERATED, never speech synthesis fallback",
+  "policy": {
+    "nativeTtsFallback": false,
+    "arabicQuranRecitationIsSeparate": true,
+    "reviewRequiredBeforePublicPlayback": true,
+    "autoPublishUnreviewed": false
+  },
+  "lessonCount": 4,
+  "curriculumIds": [
+    "adab-essen-bismillah",
+    "akhlaq-tiere-barmherzigkeit",
+    "adab-nachbarn-gutes",
+    "aqidah-dua-allah-bitten"
+  ],
+  "phraseCount": 124,
+  "phrases": [
+    {
+      "text": "Al-Fātiḥah 1:5 lehrt uns, Allah allein zu dienen und Ihn um Hilfe zu bitten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Allah hört unser Bittgebet. Wir dürfen Ihn bitten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Allah lehrt uns, beim Essen nicht maßlos zu sein. Der Prophet ﷺ zeigte einem Kind gute Tischsitten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Allah nennt die guten Rechte der Nachbarn. Der Prophet ﷺ zeigte, wie wichtig freundliche Nachbarschaft ist.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Allah nennt Tiere und Vögel Gemeinschaften.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Allah spricht im Qurʾān auch über Tiere. Der Prophet ﷺ lobte die Hilfe für einen durstigen Hund.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Allahs Geschöpfe sollen wir freundlich behandeln.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Als Kind achte ich auf Sicherheit: Besuche und Hilfe erfolgen mit Zustimmung der Eltern.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Auch die Tiere auf der Erde und die Vögel sind Gemeinschaften wie ihr. Der Prophet ﷺ berichtete von einem Mann, der einem durstigen Hund Wasser gab, und erklärte, dass es für Güte gegenüber Lebewesen Lohn gibt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Auch Menschen, die neben uns wohnen, verdienen freundliche Worte.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Auch unseren Nachbarn begegnen wir freundlich.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Barmherzigkeit bedeutet: Ich nehme die Bedürfnisse eines Tieres ernst.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Bei Fragen an fremde Menschen bitte ich meine Eltern um Hilfe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Bei fremden, kranken oder verletzten Tieren hole ich Erwachsene.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Beim Bittgebet bleiben wir geduldig und geben nicht auf.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Bevor ich esse, sage ich: Bismillāh.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Der Ḥadīṯ 6014 beschreibt eine wiederholte Mahnung durch Ǧibrīl. Er behauptet nicht, dass Nachbarn tatsächlich automatisch erben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ berichtete über die Hilfe für einen durstigen Hund.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ berichtete von einem Mann, der einem durstigen Hund Wasser gab, und erklärte, dass es für Güte gegenüber Lebewesen Lohn gibt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ bestätigte den Lohn für Barmherzigkeit gegenüber Lebewesen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ betonte wiederholt die Rechte des Nachbarn.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ lehrte den jungen ʿUmar ibn Abī Salamah: Nenne Allahs Namen, iss mit deiner rechten Hand und iss von dem, was vor dir liegt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ lehrte einem Jungen, Allahs Namen zu nennen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ lehrte, beim Bittgebet nicht ungeduldig zu werden und nicht vorschnell zu sagen, man habe gebetet, aber keine Antwort erhalten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ sagte, dass Ǧibrīl ihm die gute Behandlung des Nachbarn so oft ans Herz legte, dass er annahm, der Nachbar könne erbberechtigt werden.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ warnte davor, aus Ungeduld zu behaupten, unser Bittgebet sei vergeblich.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Der Qurʾān erlaubt Essen und Trinken und warnt davor, verschwenderisch zu sein.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Der Qurʾān erwähnt ausdrücklich nahe und fernere Nachbarn.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Der Qurʾān spricht von ausschließlicher Anbetung und Hilfe durch Allah; der authentische Ḥadīṯ 6340 lehrt Geduld im Duʿāʾ. Alltagshilfe durch Menschen wird dadurch nicht verboten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Der Qurʾān-Vers beschreibt die Schöpfung; der Ḥadīṯ belegt den Lohn guter Behandlung. Daraus folgt keine Aufforderung, unbekannte Tiere selbst anzufassen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Der Vers 7:31 thematisiert Maßhalten; der Ḥadīṯ 5376 nennt drei konkrete Tischsitten. Beides ergänzen wir, ohne die Quellen zu vermischen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Deshalb vermeide ich unnötige Störungen und begegne Menschen respektvoll.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Dir allein dienen wir, und Dich allein bitten wir um Hilfe. Der Prophet ﷺ lehrte, beim Bittgebet nicht ungeduldig zu werden und nicht vorschnell zu sagen, man habe gebetet, aber keine Antwort erhalten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Duʿāʾ ist eine Anbetung und richtet sich an Allah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ein an Allah gerichtetes Bittgebet gehört zur Anbetung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Ein Vogel braucht Ruhe und einen sicheren Platz.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Esst und trinkt, aber seid nicht maßlos. Der Prophet ﷺ lehrte den jungen ʿUmar ibn Abī Salamah: Nenne Allahs Namen, iss mit deiner rechten Hand und iss von dem, was vor dir liegt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ǧibrīl erinnerte den Propheten ﷺ häufig an die Rechte der Nachbarn.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Ich bin achtsam und mache niemandem absichtlich Angst.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich bitte Allah im Duʿāʾ und darf Menschen um praktische Hilfe bitten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich bleibe geduldig und vertraue Allah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich erschrecke oder verletze Tiere nicht.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ich esse mit meiner rechten Hand und nehme von meiner Seite.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ich esse mit meiner rechten Hand.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich gehe achtsam mit Tieren um und hole bei Bedarf Erwachsene dazu.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich grüße höflich und nehme Rücksicht auf andere im Haus.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich kann Allah mit einfachen eigenen Worten bitten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich kann freundlich grüßen, wenn meine Eltern dabei sind.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich nehme das Essen, das vor mir liegt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich nehme eine passende Menge und verschwende kein Essen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ich nehme Rücksicht und helfe, wenn es sicher und möglich ist.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich sage Bismillāh und esse achtsam.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich sage Bismillāh, esse mit der rechten Hand und nehme von meiner Seite.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich setze mich ruhig an den Tisch.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich tue Tieren nicht weh und bitte bei einem hilfsbedürftigen Tier um Hilfe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich unterscheide die wörtliche Lehre der Sunnah von unseren heutigen Übungsbeispielen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Ich weiß: Duʿāʾ richten wir an Allah und bleiben geduldig.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich werfe nicht nach Tieren und ärgere sie nicht.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Im Alltag achten wir auf Tierwohl und Sicherheit und bitten bei Gefahr Erwachsene um Hilfe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "In al-Buḫārī 2363 wird berichtet, wie ein Mann einem durstigen Hund Wasser gab.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "In al-Fātiḥah 1:5 sagen wir: Dir allein dienen wir und Dich allein bitten wir um Hilfe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "In al-Fātiḥah bitten wir Allah um Hilfe. Der Prophet ﷺ lehrte uns, im Duʿāʾ geduldig zu sein.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "In Qurʾān 4:36 wird gutes Verhalten zu Nachbarn genannt. Ṣaḥīḥ al-Buḫārī 6014 zeigt, wie nachdrücklich dieses Recht ist.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "In Qurʾān 7:31 verbietet Allah Maßlosigkeit. In al-Buḫārī 5376 lehrt der Prophet ﷺ das Essen mit der rechten Hand und von der nahen Seite.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "In unserem Bittgebet wenden wir uns an Allah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Menschen dürfen wir um alltägliche Hilfe bitten, zum Beispiel beim Lernen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 1:5 lehrt die Hinwendung zu Allah; in Ṣaḥīḥ al-Buḫārī 6340 wird davor gewarnt, ein Bittgebet aus Ungeduld aufzugeben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 4:36 nennt sowohl Nachbarn mit Nähe als auch fernere Nachbarn.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 6:38 beschreibt Tiere und Vögel als Gemeinschaften.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 6:38 nennt Tiere als Gemeinschaften. Der authentische Ḥadīṯ 2363 zeigt, dass Güte zu einem Tier eine gute Tat sein kann.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Tiere können hungrig, durstig oder ängstlich sein.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Und seid gut zu nahen und ferneren Nachbarn. Der Prophet ﷺ sagte, dass Ǧibrīl ihm die gute Behandlung des Nachbarn so oft ans Herz legte, dass er annahm, der Nachbar könne erbberechtigt werden.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Unsere Nachbarn wohnen in unserer Nähe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Vor dem Essen denken wir an Allah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Vor dem Essen sage ich Bismillāh.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wenn ein Tier Hilfe braucht, rufe ich einen Erwachsenen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wenn ich Duʿāʾ mache, bitte ich Allah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wenn ich Hilfe brauche, darf ich auch Mama oder Papa fragen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wenn jemand Hilfe braucht, fragen wir zuerst unsere Eltern.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wir dürfen Menschen um natürliche Hilfe bitten, beispielsweise um Rat oder Unterstützung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wir können freundlich sein, ohne fremde Tiere anzufassen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wir lernen drei Tischsitten aus der Sunnah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wir lernen, warum wir auf Nachbarn Rücksicht nehmen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wir lernen, was Duʿāʾ ist und wie wir geduldig bleiben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wir nennen Allahs Namen, essen mit der rechten Hand und von der nahen Seite.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wir sprechen höflich und vermeiden absichtliche Störungen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wir üben ein kleines Wort vor dem Essen: Bismillāh.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wir unterscheiden Duʿāʾ als ʿIbādah und alltägliche praktische Hilfe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wir unterscheiden höfliche Alltagshandlungen und den starken Nachbarschaftsauftrag in den Quellen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wir untersuchen, was die Quellen über den Umgang mit Tieren lehren.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wir verbinden Qurʾān 7:31 mit der authentischen Überlieferung über die Tischsitten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "ʿUmar ibn Abī Salamah wurde als Kind vom Propheten ﷺ freundlich angeleitet.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Beschreibe eine sichere Alltagssituation zu „Allah um Hilfe bitten“ und begründe sie mit beiden Belegen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Beschreibe eine sichere Alltagssituation zu „Barmherzig zu Tieren“ und begründe sie mit beiden Belegen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Beschreibe eine sichere Alltagssituation zu „Essen mit Bismillāh“ und begründe sie mit beiden Belegen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Beschreibe eine sichere Alltagssituation zu „Gute Nachbarschaft“ und begründe sie mit beiden Belegen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Erkläre an einem eigenen Beispiel: Allah um Hilfe bitten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Erkläre an einem eigenen Beispiel: Barmherzig zu Tieren.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Erkläre an einem eigenen Beispiel: Essen mit Bismillāh.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Erkläre an einem eigenen Beispiel: Gute Nachbarschaft.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Warum passen Qurʾān 6:38 und der Ḥadīṯ über den durstigen Hund zusammen?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Was ist der Unterschied zwischen Duʿāʾ und der Bitte an einen Menschen, etwas zu erklären?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Was ist hier eine gute Handlung?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "question",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "question",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "question",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "question",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Was möchtest du dir heute merken?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "question",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "question",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "question",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "question",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Welche drei Handlungen lehrte der Prophet ﷺ dem Jungen ʿUmar ibn Abī Salamah?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Welche Entscheidung entspricht dem Unterricht?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "question",
+          "age": "9-10"
+        },
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "question",
+          "age": "9-10"
+        },
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "question",
+          "age": "9-10"
+        },
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Welche Handlung passt zu unserem Unterricht?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "question",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "question",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "question",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wie verdeutlicht Ṣaḥīḥ al-Buḫārī 6014 die Rechte des Nachbarn?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Woher stammen die religiösen Belege?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "question",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "question",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "question",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Aus dem Qurʾān und einer authentischen Überlieferung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ich bitte Allah im Duʿāʾ und darf Menschen um praktische Hilfe bitten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ich bitte Allah um Hilfe und frage auch meine Eltern oder Lehrkraft.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ich grüße höflich und nehme Rücksicht auf andere im Haus.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ich halte Abstand und bitte einen Erwachsenen, sicher zu helfen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ich sage Bismillāh und esse achtsam.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ich sage Bismillāh und esse von der Seite vor mir.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ich spreche leise und nehme Rücksicht.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ich tue Tieren nicht weh und bitte bei einem hilfsbedürftigen Tier um Hilfe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Aus einer erfundenen Geschichte ohne Quelle.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Ich ärgere den Hund oder renne auf ihn zu.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Ich darf andere absichtlich verletzen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "akhlaq-tiere-barmherzigkeit",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Ich glaube, nach einem Duʿāʾ darf ich niemanden mehr um praktische Hilfe bitten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "aqidah-dua-allah-bitten",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Ich greife ungefragt quer durch die Schüssel.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "adab-essen-bismillah",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Ich schreie absichtlich vor der Nachbartür.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "adab-nachbarn-gutes",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    }
+  ]
+}

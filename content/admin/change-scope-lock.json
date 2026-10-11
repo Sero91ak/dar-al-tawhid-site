@@ -155,6 +155,19 @@
   ],
   "unlockedScopes": [
     {
+      "id": "kids-akademie-v22-authentisch-altersgerecht-35-38-20261011",
+      "at": "2026-10-11T13:35:00+02:00",
+      "approvedBy": "user-explicit-go-authentic-age-appropriate-kids-lessons-20261011",
+      "reason": "Vier Qurʾān/Ṣaḥīḥ-gepruefte altersgerechte Lektionen, 52-Wochen-Gates und Masterstimmen-Bedarfspruefung. Nur Schulfolgetest, Audio-Queue-Test und Akademie-CI. Kein Audio-Generate, keine Aenderung echter Kinderprofile.",
+      "paths": [
+        "scripts/test-kids-academy-school-v11.js",
+        "scripts/test-kids-academy-audio-queue-v18.js",
+        ".github/workflows/check-kids-academy-v9.yml",
+        "scripts/test-kids-academy-v9.js"
+      ],
+      "expiresAt": "2026-10-18T23:59:00.000Z"
+    },
+    {
       "id": "kids-test-v22-readonly-audio-audit-20261011",
       "at": "2026-10-11T13:25:00+02:00",
       "approvedBy": "user-explicit-authentic-age-appropriate-academy-lessons-20261011",
