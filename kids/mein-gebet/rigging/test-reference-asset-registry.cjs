@@ -55,3 +55,36 @@ test("Rig release cannot be inferred from the pose-board illustrations",()=>{
  assert.equal(d.lessonPolicy.religiousApprovalRequiredBeforeChildren,true);
  assert.equal(d.productionApproved,false);
 });
+
+
+test("Profile view coverage rejects mirrored left-side placeholders as originals",()=>{
+ const registry=load();
+ const coverage=JSON.parse(fs.readFileSync(path.join(__dirname,"VIEW-COVERAGE-V1.json"),"utf8"));
+ assert.equal(coverage.schemaVersion,1);
+ assert.deepEqual(coverage.requiredDistinctDirections,
+   ["front","threeQuarterFaceRight","profileFaceRight","back","profileFaceLeft"]);
+ const sourcePrefix="/Kinder App/Mein_Gebet_Originale_20261011/";
+ for(const gender of ["boy","girl"]){
+  const entry=coverage.profiles[gender],sources=registry.original2DViews[gender];
+  const archiveName=i=>sources[i].libraryPath.substring(sourcePrefix.length);
+  assert.equal(entry.front,archiveName(0));
+  assert.equal(entry.threeQuarterFaceRight,archiveName(1));
+  assert.equal(entry.profileFaceRight,archiveName(2));
+  assert.equal(entry.back,archiveName(3));
+  assert.equal(entry.extraDuplicateDirection,archiveName(4));
+  assert.equal(entry.profileFaceLeft,null,gender+" missing an independent left profile");
+  assert.equal(entry.mirrorTest.source,entry.profileFaceRight);
+  assert.equal(entry.mirrorTest.actualLeftSideCaptured,false);
+  assert.equal(entry.mirrorTest.approvedAsOriginal,false);
+  assert.equal(new Set([entry.front,entry.threeQuarterFaceRight,
+    entry.profileFaceRight,entry.back,entry.extraDuplicateDirection]).size,5);
+ }
+ assert.equal(coverage.checks.original2DReferencesUnchanged,true);
+ assert.equal(coverage.checks.realOppositeSideImagesProvided,false);
+ assert.equal(coverage.checks.mirrorIsNotIndependentView,true);
+ assert.equal(coverage.checks.viewCompletenessApproved,false);
+ assert.equal(coverage.checks.characterIdentityApproved,false);
+ assert.equal(coverage.checks.animatedPrayerApproved,false);
+ assert.equal(coverage.checks.productionReady,false);
+ assert.equal(registry.productionApproved,false);
+});
