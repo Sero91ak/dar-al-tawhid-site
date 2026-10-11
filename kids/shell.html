@@ -6467,6 +6467,9 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
       gender:res.gender||"boy",age:res.age||"6–8",data:res.data||{}};
     save(old.filter(function(x){return x.id!==p.id&&(x.name||"").toLowerCase()!==name.toLowerCase()}).concat([p]));
     applyBag(p.data);localStorage.setItem(ACTIVE,p.id);applyProfile(p);
+    /* Remote login explicitly wins over any stale pending local write. */
+    delete syncPending[p.id];writeSyncPending();
+    syncConfirmed[p.id]=profileSnapshot(p);
     joinFeedback("Anmeldung erfolgreich.","success");closeJoin();renderList();
     try{sessionStorage.setItem("kids.profile.restoreTab","view-parents")}catch(e){}
     location.reload();
@@ -6561,16 +6564,63 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     var id=localStorage.getItem(ACTIVE);
     return load().find(function(x){return x.id===id})||null;
   }
+  /* KIDS ACCOUNT SYNC V3: only upload changed progress. A durable, non-
+     content pending marker survives interrupted iOS background requests. */
+  var SYNC_PENDING_KEY="dar.kids.account.pendingSync.v1";
+  var syncConfirmed={},syncBusy={};
+  function readSyncPending(){
+    try{
+      var data=JSON.parse(localStorage.getItem(SYNC_PENDING_KEY)||"{}");
+      return data&&typeof data==="object"&&!Array.isArray(data)?data:{};
+    }catch(e){return {}}
+  }
+  var syncPending=readSyncPending();
+  function writeSyncPending(){
+    try{localStorage.setItem(SYNC_PENDING_KEY,JSON.stringify(syncPending))}catch(e){}
+  }
+  function profileSnapshot(p){
+    var data=p&&p.data||{},ordered={};
+    Object.keys(data).sort().forEach(function(k){ordered[k]=data[k]});
+    return JSON.stringify([p&&p.gender||"boy",p&&p.age||"6–8",ordered]);
+  }
+  function flushProfileSync(id){
+    if(syncBusy[id]||!syncPending[id])return;
+    var p=load().find(function(x){return x.id===id});
+    if(!p||!p.pass)return;
+    var stamp=profileSnapshot(p);
+    syncBusy[id]=true;
+    rpc("kids_save",{p_name:p.name,p_hash:p.pass,p_data:p.data||{},p_gender:p.gender,p_age:p.age})
+      .then(function(res){
+        if(!res||res.ok!==true)return;
+        syncConfirmed[id]=stamp;
+        var current=load().find(function(x){return x.id===id});
+        if(current&&profileSnapshot(current)===stamp){
+          delete syncPending[id];
+          writeSyncPending();
+        }
+      }).catch(function(){}).finally(function(){
+        syncBusy[id]=false;
+        var newest=load().find(function(x){return x.id===id});
+        if(syncPending[id]&&newest&&profileSnapshot(newest)!==stamp&&syncConfirmed[id]===stamp){
+          setTimeout(function(){flushProfileSync(id)},300);
+        }
+      });
+  }
   function rememberCurrent(){
     var p=currentProfile();
     if(!p)return;
-    p.data=bag();
+    var newData=bag();
     var app=document.querySelector(".app");
-    p.gender=app&&app.getAttribute("data-gender")||p.gender;
-    p.age=localStorage.getItem("kids.age")||p.age;
-    var list=load().map(function(x){return x.id===p.id?p:x});
-    save(list);
-    if(p.pass)rpc("kids_save",{p_name:p.name,p_hash:p.pass,p_data:p.data,p_gender:p.gender,p_age:p.age});
+    var newGender=app&&app.getAttribute("data-gender")||p.gender;
+    var newAge=localStorage.getItem("kids.age")||p.age;
+    p.data=newData;p.gender=newGender;p.age=newAge;
+    var stamp=profileSnapshot(p);
+    if(syncConfirmed[p.id]===stamp&&!syncPending[p.id])return;
+    save(load().map(function(x){return x.id===p.id?p:x}));
+    if(!p.pass)return;
+    syncPending[p.id]=true;
+    writeSyncPending();
+    flushProfileSync(p.id);
   }
   function renderList(){
     var box=document.getElementById("profileList");
@@ -6675,6 +6725,8 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   var known=load().find(function(p){return p.id===active});
   if(known){
     applyProfile(known);
+    syncConfirmed[known.id]=profileSnapshot(known);
+    if(syncPending[known.id])setTimeout(function(){flushProfileSync(known.id)},1200);
     try{
       var resumeProfileTab=sessionStorage.getItem("kids.profile.restoreTab")||"";
       sessionStorage.removeItem("kids.profile.restoreTab");
@@ -6693,6 +6745,16 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   /* Never re-register local profiles at startup: this can overwrite cloud progress. */
   window.addEventListener("pagehide",rememberCurrent);
   document.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden")rememberCurrent()});
+  /* Progress can change in any Kids learning module without a page change. */
+  setInterval(function(){
+    if(document.visibilityState!=="hidden")rememberCurrent();
+    var p=currentProfile();
+    if(p&&syncPending[p.id]&&!syncBusy[p.id])flushProfileSync(p.id);
+  },20000);
+  window.addEventListener("online",function(){
+    rememberCurrent();
+    var p=currentProfile();if(p)flushProfileSync(p.id);
+  });
 })();
 </script>
 
