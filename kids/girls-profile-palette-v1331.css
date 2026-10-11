@@ -1,0 +1,146 @@
+/* DAR AL TAWHID KIDS | Mädchenprofil Farbautorität v1331
+   Ausschließlich Farben/Effekte; keine Bild-, Layout-, Safe-Area-,
+   Scroll-, Touch-, Schriftgrößen- oder Navigationsänderungen.
+   Gast und Jungen erhalten KEINE Regeln dieses Stylesheets. */
+
+html body .app[data-gender="girl"]{
+  --night:#241b35;
+  --deep:#191324;
+  --blue:#51365f;
+  --sky:#e9c5df;
+  --aqua:#e6b9d3;
+  --gold:#f2c6da;
+  --sage:#e6c2d4;
+  --line:rgba(243,192,217,.20);
+  --cine-night:#1b1428;
+  --cine-deep:#291e3a;
+  --cine-blue:#50355e;
+  --cine-blue2:#674567;
+  --cine-cyan:#e9c7df;
+  --cine-line:rgba(241,186,216,.28);
+  --duahub-navy:#422743;
+  --duahub-navy-2:#321b39;
+  --duahub-ink:#422943;
+  background:
+    radial-gradient(circle at 80% 4%,rgba(193,126,174,.12),transparent 28%),
+    linear-gradient(180deg,#1b162b 0%,#281d3c 53%,#30223f 100%)!important;
+}
+html body .app[data-gender="girl"] .shell{
+  background:linear-gradient(180deg,#21182f 0%,#2d203e 52%,#382543 100%)!important;
+}
+html body:has(.app[data-gender="girl"]){
+  background:#21182f!important;
+}
+
+/* Untere Tab-Leiste: dunkelviolett statt Petrol oder Blau. */
+html body .app[data-gender="girl"] .bottom-nav,
+html[data-kids-age] body .app[data-gender="girl"] .bottom-nav{
+  background:
+    radial-gradient(ellipse at 20% 0%,rgba(234,167,205,.10),transparent 55%),
+    linear-gradient(140deg,rgba(31,22,46,.97),rgba(40,26,56,.97))!important;
+  border-color:rgba(244,193,221,.32)!important;
+  box-shadow:0 12px 34px rgba(21,11,31,.34),inset 0 1px rgba(255,222,239,.11)!important;
+}
+html body .app[data-gender="girl"] .bottom-nav .nav-btn:not(.active){
+  background:transparent!important;
+  border-color:transparent!important;
+  color:rgba(245,221,235,.71)!important;
+}
+html body .app[data-gender="girl"] .bottom-nav .nav-btn.active,
+html[data-kids-age] body .app[data-gender="girl"] .bottom-nav .nav-btn.active{
+  color:#ffe0ec!important;
+  border-color:rgba(247,202,225,.49)!important;
+  background:linear-gradient(145deg,rgba(215,132,177,.27),rgba(140,93,162,.18))!important;
+  box-shadow:inset 0 0 0 1px rgba(255,214,234,.12),
+    0 0 12px rgba(218,139,184,.12)!important;
+}
+html body .app[data-gender="girl"] .bottom-nav .nav-btn .lab{
+  color:inherit!important;
+}
+html body .app[data-gender="girl"] .bottom-nav .nav-btn:focus-visible{
+  outline:2px solid #ffe5f0!important;
+  outline-offset:2px!important;
+}
+
+/* Grundflächen ohne Motive: abgestimmtes Nachtviolett. Bildkarten bleiben unberührt. */
+html body .app[data-gender="girl"] #view-today .resume,
+html body .app[data-gender="girl"] #view-today .daily-journey{
+  background:linear-gradient(160deg,rgba(53,32,66,.93),rgba(42,27,57,.95))!important;
+  border-color:rgba(238,174,209,.22)!important;
+  box-shadow:0 12px 28px rgba(19,12,31,.23)!important;
+}
+html body .app[data-gender="girl"] .daily-step:not(.done),
+html body .app[data-gender="girl"] .story-row:not(.verified),
+html body .app[data-gender="girl"] .quran-action,
+html body .app[data-gender="girl"] .verse-card,
+html body .app[data-gender="girl"] .parent-card,
+html body .app[data-gender="girl"] .parent-progress-stat{
+  background:rgba(79,49,88,.30)!important;
+  border-color:rgba(239,191,214,.21)!important;
+}
+html body .app[data-gender="girl"] .daily-step.current{
+  background:rgba(197,127,170,.20)!important;
+  border-color:rgba(250,209,232,.36)!important;
+}
+html body .app[data-gender="girl"] #view-today .knowledge-card{
+  background:linear-gradient(145deg,rgba(87,55,92,.55),rgba(58,38,77,.45))!important;
+  border-color:rgba(241,188,219,.29)!important;
+}
+html body .app[data-gender="girl"] .knowledge-card .kicon,
+html body .app[data-gender="girl"] .daily-step .dnum{
+  background-color:rgba(230,166,200,.12)!important;
+}
+html body .app[data-gender="girl"] .full-quran{
+  background:linear-gradient(145deg,#493357,#362646)!important;
+  border-color:rgba(243,188,221,.26)!important;
+}
+html body .app[data-gender="girl"] .age-tabs{
+  background:rgba(227,160,202,.10)!important;
+}
+html body .app[data-gender="girl"] .age-tabs button.active{
+  background:rgba(240,188,219,.23)!important;
+  color:#fff0f7!important;
+}
+html body .app[data-gender="girl"] .page-head{
+  border-bottom-color:rgba(243,191,217,.28)!important;
+}
+/* Erhaltene Qurʾān-/Eltern-/Hörbuch-Motivbilder niemals durch gradients ersetzen. */
+
+/* Gebetszeiten: nur Controls und Leuchten, das neue Moscheebild bleibt unangetastet. */
+html body .app[data-gender="girl"] #view-today .kids-salah-home-world .kids-salah-next{
+  background:rgba(51,29,65,.77)!important;
+  border-color:rgba(248,192,222,.58)!important;
+  box-shadow:0 0 12px rgba(222,150,191,.10),inset 0 1px rgba(255,230,242,.07)!important;
+}
+html body .app[data-gender="girl"] #view-today .kids-salah-home-world .kids-salah-open-day{
+  background:linear-gradient(90deg,rgba(67,37,77,.86),rgba(79,46,83,.77))!important;
+  border-color:rgba(251,202,226,.78)!important;
+  color:#ffe3f1!important;
+  box-shadow:0 0 13px rgba(239,157,198,.13)!important;
+}
+html body .app[data-gender="girl"] .daily-start{
+  color:#25192e!important;
+}
+
+/* Leseflächen in Pop-ups, ohne ihre Illustrationen anzufassen. */
+html body:has(.app[data-gender="girl"]) .modal,
+html body .app[data-gender="girl"] .modal{
+  background:linear-gradient(180deg,#24182f,#34213f 55%,#26182f)!important;
+}
+html body:has(.app[data-gender="girl"]) .modal-shell,
+html body .app[data-gender="girl"] .modal-shell{
+  background:linear-gradient(180deg,#24182f,#34213f 55%,#26182f)!important;
+}
+html body:has(.app[data-gender="girl"]) .kids-detail-appbar,
+html body .app[data-gender="girl"] .kids-detail-appbar{
+  background:linear-gradient(180deg,#36213e,#291a35)!important;
+  border-bottom-color:rgba(245,192,223,.23)!important;
+  box-shadow:0 11px 27px rgba(22,13,29,.22),inset 0 -1px rgba(247,194,225,.09)!important;
+}
+/* Im Duʿāʾ-Bereich bleiben die hellen Karten hell, nur ihre Texttöne
+   folgen dem Profil statt globalem Marineblau. */
+
+/* Volle Gebetszeiten liegen als eigene Ebene außerhalb von .app. */
+html body .kids-salah-day[data-gender="girl"]{
+  background:linear-gradient(180deg,#211831 0%,#32233f 60%,#281d35 100%)!important;
+}
