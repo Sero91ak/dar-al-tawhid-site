@@ -115,15 +115,13 @@ Verbindlich für `/kids/` und alle künftigen Kids-Erweiterungen.
 - Hero-/Bildbühnen, Detail-Heroes und deren Overlay-Navigation sind weiterhin ausdrücklich ausgeschlossen.
 
 
-## Interaktives Zurück-Wischen — `KIDS_INTERACTIVE_EDGE_SWIPE_V1246`
+## Kinderfreundliche Button-Navigation — `KIDS_TAP_ONLY_NAVIGATION_V1325`
 
-- In geöffneten Unterseiten kann **von der rechten Displaykante nach links** gewischt werden, um den Bereich zu verlassen.
-- Zusätzlich bleibt die iOS-Gewohnheit **von der linken Kante nach rechts** erhalten.
-- Die aktive Fläche folgt dem Finger kontinuierlich; es gibt keinen harten Sprung am Ende der Geste.
-- Eine nicht abgeschlossene Geste federt weich in die Ausgangsposition zurück. Eine abgeschlossene Geste gleitet aus dem Viewport und aktiviert erst danach den vorherigen Zustand.
-- Vertikales Scrollen, Slider sowie Audio-/Qurʾān-Fortschrittsflächen dürfen nicht als Zurück-Geste übernommen werden.
-- Hero-/Bildbühnen werden durch diese Regel nicht optisch verändert.
-
+- **Heute, Hörbücher, Duʿāʾ, Qurʾān und Eltern** wechseln ausschließlich über die fünf Tab-Buttons.
+- Geschichts- und Lernunterseiten sowie Player werden nur über sichtbare Zurück-/Schließen-Buttons verlassen.
+- Keine Seitenwechsel per Wischbewegung, keine Gesten am linken/rechten Bildschirmrand, kein Herunterwischen zum Schließen.
+- Vertikales Inhaltsscrollen, Fortschrittsregler und bewusste horizontale Inhaltsleisten bleiben bedienbar.
+- Ruhige Übergänge nur nach Button-Tipps; `prefers-reduced-motion` bleibt berücksichtigt.
 
 ## Globaler Glow wie Startseite — `KIDS_HOME_GLOW_PARITY_V16`
 
@@ -139,7 +137,7 @@ Verbindlich für `/kids/` und alle künftigen Kids-Erweiterungen.
 - Die bisherigen ovalen, frei im Hero liegenden Zurück-Controls auf den **Detail- und Leseseiten** werden ab V1247 durch denselben **eingedockten Top-Header** wie bei „Den Dīn lernen“ ersetzt.
 - Diese neue, ausdrücklich angeforderte Regel **überstimmt für Detailseiten** die älteren V13–V15-Ausnahmen für Hero-Overlay-Zurück-Buttons. Die Hero-Grafiken selbst bleiben unverändert und folgen direkt unter dem Header.
 - Pflichtaufbau: links 46–50 px Zurück-Control mit Chevron, feine vertikale Akzentlinie, rechts dynamischer Seitentitel und ruhiger Untertitel; ganze Breite, untere Rundung, feiner Gold-/Petrol-Glow und iOS-Safe-Area.
-- Der ursprüngliche Button samt seinem Event-Handler wird in die Kopfzeile verschoben, **niemals durch einen funktionslosen Klon ersetzt**. Wisch-Navigation, Fokus, Lesetext, Audio-Player und Scroll-Position bleiben erhalten.
+- Der ursprüngliche Button samt seinem Event-Handler wird in die Kopfzeile verschoben, **niemals durch einen funktionslosen Klon ersetzt**. Button-Navigation, Fokus, Lesetext, Audio-Player und Scroll-Position bleiben erhalten.
 - Gilt für die Detailansichten von Propheten, Ṣaḥābah, Ṣaḥābiyyāt, Dīn-Lektionen, Geschichten des Īmān, Duʿāʾ sowie die vorhandenen Wissen-, Qurʾān- und Quiz-Dialoge.
 - Für künftige Detailmodule `kids/global-detail-dock-v1247.js` als zentrale Registrierung verwenden statt neue ovale Einzelcontrols zu bauen.
 - **Nicht betroffen:** Startseiten-Hero, normale Bereichs-Header und insbesondere die untere schwebende Haupt-Tab-Leiste.
@@ -150,7 +148,7 @@ Verbindlich für `/kids/` und alle künftigen Kids-Erweiterungen.
 - Detail- und Bibliotheksköpfe verwenden denselben kompakten eingedockten Aufbau auf Smartphones und iPads (auch im Querformat).
 - Mindesthöhe **60 CSS-px + genau einmal die OS-Safe-Area** auf Smartphones, **64 CSS-px + Safe-Area** auf Tablets; längere Titel dürfen die Höhe automatisch erweitern.
 - Kein Text wird abgeschnitten oder mit Ellipsen verborgen. Die Überschrift bleibt lesbar, der Untertitel bleibt direkt darunter.
-- Jeder Zurück-Button bleibt mindestens **44 × 44 CSS-px** als echte anklickbare Fläche; bestehende Handler, Swipe-Back, Tastaturfokus und Screenreader-Namen bleiben erhalten.
+- Jeder Zurück-Button bleibt mindestens **44 × 44 CSS-px** als echte anklickbare Fläche; bestehende Handler, Zurück-Button, Tastaturfokus und Screenreader-Namen bleiben erhalten.
 - Nur vertikale Abstände, Kopfzeilenbreiten, Schriftgröße und Eckradius wurden verringert. Bildbühnen, untere Navigation, Ton, Lesetext, Spielstände und Inhalte ändern sich nicht.
 - Die Regeln werden im letzten Abschnitt von `kids/global-detail-dock-v1247.css` definiert und mit `?v=1248` geladen; keine doppelte Safe-Area-Anrechnung oder iPad-Hochskalierung.
 

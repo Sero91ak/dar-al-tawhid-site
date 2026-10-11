@@ -30,29 +30,6 @@ function stopOtherPlayers(){
   try{window.DARKidsSahabiyyat?.stop?.()}catch(_){}
   try{window.DARKidsStoryHub?.stop?.()}catch(_){}
 }
-function installSwipeBack(el,onBack){
-  if(!el||el.dataset.swipeBackReady==="1")return;
-  el.dataset.swipeBackReady="1";el.style.touchAction="pan-y";
-  let sx=0,sy=0,lx=0,st=0,tracking=false,claimed=false;
-  const reset=()=>{tracking=claimed=false;sx=sy=lx=st=0};
-  el.addEventListener("pointerdown",e=>{
-    if(e.pointerType==="mouse"&&e.button!==0)return;
-    const edge=Math.max(34,Math.min(56,window.innerWidth*.11));
-    if(e.clientX>edge)return;
-    sx=lx=e.clientX;sy=e.clientY;st=performance.now();tracking=true;
-  },{passive:true});
-  el.addEventListener("pointermove",e=>{
-    if(!tracking)return;const dx=e.clientX-sx,dy=Math.abs(e.clientY-sy);lx=e.clientX;
-    if(!claimed&&dx>12&&dx>dy*1.25)claimed=true;if(claimed&&dx<0)reset();
-  },{passive:true});
-  const finish=e=>{
-    if(!tracking)return;
-    const dx=(e.clientX??lx)-sx,dy=Math.abs((e.clientY??sy)-sy),dt=Math.max(1,performance.now()-st),vx=dx/dt;
-    const go=claimed&&dx>Math.min(110,window.innerWidth*.22)&&dx>dy*1.35&&(vx>.18||dx>150);reset();
-    if(go)onBack();
-  };
-  el.addEventListener("pointerup",finish,{passive:true});el.addEventListener("pointercancel",reset,{passive:true});
-}
 function sourceHtml(item){
   return (Array.isArray(item?.sourceRefs)?item.sourceRefs:[]).map(ref=>'<span class="ms-source-ref">'+esc(ref)+'</span>').join("");
 }
@@ -124,7 +101,7 @@ function ensureUi(){
     '<div><strong>Den Dīn lernen</strong><span>6 Lernbereiche · Qurʾān &amp; authentische Sunnah</span></div></div>'+
     '<div class="ms-library-scroll" id="dlLibraryScroll"><div id="dlGrid" class="ms-list dl-list"></div></div>';
   document.body.appendChild(page);
-  $("#dlBack").addEventListener("click",closeLibrary);installSwipeBack($("#dlLibraryScroll"),closeLibrary);
+  $("#dlBack").addEventListener("click",closeLibrary);
 
   const modal=document.createElement("div");
   modal.id="dlModal";modal.className="ms-modal dl-modal";
@@ -146,7 +123,7 @@ function ensureUi(){
       '</div>'+
     '</div>';
   document.body.appendChild(modal);
-  $("#dlClose").addEventListener("click",closeStory);installSwipeBack($("#dlScroll"),closeStory);
+  $("#dlClose").addEventListener("click",closeStory);
   modal.querySelectorAll("[data-dl-mode]").forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.dlMode)));
   audio.preload="metadata";
   audio.addEventListener("play",()=>{playing=true});

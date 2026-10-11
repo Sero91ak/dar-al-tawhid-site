@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0c2636">
+<link rel="stylesheet" href="/kids/kids-nav-stable-v1326.css?v=1327" data-kids-nav-first-paint="1327">
 <!-- KIDS_FIRST_PAINT_HERO_V1313: same exact URL as final homepage CSS, requested before styles/scripts -->
 <link rel="preload" as="image" href="/kids/assets/kids-salah-v1272/hero-home.png?v=1274" fetchpriority="high">
 <link rel="stylesheet" href="https://use.typekit.net/jka5jda.css">
@@ -3684,7 +3685,9 @@ function launchNextDailyStep(){
   var next=plan.find(function(s){return !dailyDone(s.id)});
   if(next)launchDailyStep(next.id);
 }
-/* KIDS_TAB_POSITION_STABILITY_V1318: fix iOS document/shell scroll split on tabs. */
+/* KIDS_TAB_POSITION_STABILITY_V1318: reset every possible iOS scroll layer.
+   Synchronize data-view BEFORE measuring the new page; correct WebKit's
+   post-layout scroll anchoring for two frames without affecting detail readers. */
 function kidsResetMainScroll(){
   var scroller=document.querySelector(".shell");
   if(scroller)scroller.scrollTop=0;
@@ -6684,7 +6687,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   // The next navigation uses network-first and receives the latest release.
   if("serviceWorker" in navigator){
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1324",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1328",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     },{once:true});
@@ -7673,12 +7676,12 @@ html[data-view="stories"] #view-stories > :last-child{
 <script src="/kids/story-follow-reader.js?v=17"></script>
 <script src="/kids/story-policy.js?v=2"></script>
 <script src="/kids/prophet-stories.js?v=43"></script>
-<script src="/kids/mubashshirun-stories.js?v=32"></script>
-<script src="/kids/sahabiyyat-stories.js?v=24"></script>\n<script src="/kids/deen-lessons.js?v=6"></script>
+<script src="/kids/mubashshirun-stories.js?v=33"></script>
+<script src="/kids/sahabiyyat-stories.js?v=25"></script>\n<script src="/kids/deen-lessons.js?v=7"></script>
 <script src="/kids/global-story-glow-v1216.js?v=1239"></script>
 <script src="/kids/term-learning.js?v=1"></script>
 <script src="/kids/dua-hub-v1219.js?v=1318" data-kids-dua-hub="1259"></script>
-<script src="/kids/story-hub.js?v=27"></script>
+<script src="/kids/story-hub.js?v=28"></script>
 <script src="/kids/kids-age-typography.js?v=3"></script>
 <script src="/kids/quiz-library.js?v=9"></script>
 <link rel="stylesheet" href="/kids/section-heroes-v1095.css?v=1256-parent-hero-full" data-kids-section-heroes-late="1">
@@ -9422,7 +9425,7 @@ html[data-view="stories"] #view-stories > :last-child{
 }
 </style>
 
-<script src="/kids/navigation-v1182.js?v=1299"></script>
+<script src="/kids/navigation-v1182.js?v=1327"></script>
 
 <style id="kids-home-cinema-v1185">
 #view-today{--home-v1185-deep:#061b26;--home-v1185-petrol:#082b37}
@@ -11347,5 +11350,7 @@ html body .app:has(#view-parents.view.active) .shell{
 <!-- KIDS_OFFLINE_LIBRARY_V1: independent storage controls for the Parents tab -->
 <script defer src="/kids/offline-library-v1.js?v=1"></script>
 <!-- KIDS_SALAH_STAGE_V1261: placed after hero, before continue-listening -->
-<script defer src="/kids/prayer-stage-v1261.js?v=1320" data-kids-salah-stage="1275"></script>
+<script defer src="/kids/prayer-stage-v1261.js?v=1328" data-kids-salah-stage="1275"></script>
+<!-- KIDS_FIXED_NAV_AUTHORITY_V1326: one compact geometry shared across all Kids pages and devices -->
+<link rel="stylesheet" href="/kids/kids-nav-stable-v1326.css?v=1327" data-kids-nav-fixed="1327">
 </html>

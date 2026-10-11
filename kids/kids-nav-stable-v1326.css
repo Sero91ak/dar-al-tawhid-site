@@ -1,0 +1,183 @@
+/* DĀR AL TAWḤĪD KIDS · Compact, fixed navigation authority V1326
+   A single fixed geometry for all five main tabs, every child age, each page.
+   No gesture handlers. Scrolling, audio controls and content remain untouched. */
+html body nav.bottom-nav,
+html[data-kids-age] body nav.bottom-nav,
+html[data-kids-age]:has(#view-stories.active) body nav.bottom-nav{
+  box-sizing:border-box!important;
+  position:fixed!important;
+  left:50%!important;
+  right:auto!important;
+  top:auto!important;
+  bottom:max(9px,env(safe-area-inset-bottom,0px))!important;
+  transform:translateX(-50%)!important;
+  translate:none!important;
+  width:min(calc(100% - 28px - env(safe-area-inset-left,0px) - env(safe-area-inset-right,0px)),740px)!important;
+  min-width:0!important;
+  max-width:740px!important;
+  height:62px!important;
+  min-height:62px!important;
+  max-height:62px!important;
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  grid-template-rows:50px!important;
+  grid-auto-rows:50px!important;
+  grid-auto-flow:column!important;
+  gap:3px!important;
+  align-items:center!important;
+  justify-items:stretch!important;
+  padding:5px 6px!important;
+  margin:0!important;
+  border-radius:32px!important;
+  overflow:visible!important;
+  animation:none!important;
+  transition:none!important;
+  will-change:auto!important;
+}
+html body nav.bottom-nav > .nav-btn,
+html[data-kids-age] body nav.bottom-nav > .nav-btn,
+html[data-kids-age]:has(#view-stories.active) body nav.bottom-nav > .nav-btn{
+  box-sizing:border-box!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  align-items:center!important;
+  align-self:center!important;
+  min-width:0!important;
+  width:100%!important;
+  min-height:50px!important;
+  height:50px!important;
+  max-height:50px!important;
+  padding:3px 1px!important;
+  margin:0!important;
+  gap:2px!important;
+  border-radius:25px!important;
+  transform:none!important;
+  translate:none!important;
+  animation:none!important;
+}
+html body nav.bottom-nav > .nav-btn .ico,
+html[data-kids-age] body nav.bottom-nav > .nav-btn .ico,
+html[data-kids-age]:has(#view-stories.active) body nav.bottom-nav > .nav-btn .ico{
+  box-sizing:border-box!important;
+  display:block!important;
+  width:27px!important;
+  height:27px!important;
+  min-width:27px!important;
+  min-height:27px!important;
+  max-height:27px!important;
+  flex:0 0 27px!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
+}
+html body nav.bottom-nav > .nav-btn .lab,
+html[data-kids-age] body nav.bottom-nav > .nav-btn .lab,
+html[data-kids-age]:has(#view-stories.active) body nav.bottom-nav > .nav-btn .lab{
+  box-sizing:border-box!important;
+  display:block!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  padding:0!important;
+  margin:0!important;
+  font-size:clamp(10px,2.65vw,11px)!important;
+  font-weight:850!important;
+  letter-spacing:-.02em!important;
+  line-height:1.08!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  text-align:center!important;
+}
+@media(max-width:355px){
+  html body nav.bottom-nav,
+  html[data-kids-age] body nav.bottom-nav,
+  html[data-kids-age]:has(#view-stories.active) body nav.bottom-nav{
+    gap:1px!important;
+    padding-inline:4px!important;
+  }
+  html body nav.bottom-nav > .nav-btn .lab,
+  html[data-kids-age] body nav.bottom-nav > .nav-btn .lab,
+  html[data-kids-age]:has(#view-stories.active) body nav.bottom-nav > .nav-btn .lab{
+    font-size:9.5px!important;
+  }
+}
+@media(min-width:700px){
+  html body nav.bottom-nav,
+  html[data-kids-age] body nav.bottom-nav,
+  html[data-kids-age]:has(#view-stories.active) body nav.bottom-nav{
+    grid-template-rows:54px!important;
+    grid-auto-rows:54px!important;
+    height:66px!important;
+    min-height:66px!important;
+    max-height:66px!important;
+  }
+  html body nav.bottom-nav > .nav-btn,
+  html[data-kids-age] body nav.bottom-nav > .nav-btn,
+  html[data-kids-age]:has(#view-stories.active) body nav.bottom-nav > .nav-btn{
+    min-height:54px!important;
+    height:54px!important;
+    max-height:54px!important;
+  }
+  html body nav.bottom-nav > .nav-btn .ico,
+  html[data-kids-age] body nav.bottom-nav > .nav-btn .ico,
+  html[data-kids-age]:has(#view-stories.active) body nav.bottom-nav > .nav-btn .ico{
+    width:29px!important;
+    height:29px!important;
+    min-width:29px!important;
+    min-height:29px!important;
+    max-height:29px!important;
+    flex-basis:29px!important;
+  }
+  html body nav.bottom-nav > .nav-btn .lab,
+  html[data-kids-age] body nav.bottom-nav > .nav-btn .lab,
+  html[data-kids-age]:has(#view-stories.active) body nav.bottom-nav > .nav-btn .lab{
+    font-size:11px!important;
+  }
+}
+/* The parent .shell already owns top safe-area spacing.
+   On the inline Duʿāʾ detail only, prevent a second notch inset from
+   inflating the sticky back-and-title header after navigating or returning. */
+html body .shell #view-dua.view.active #duaHubDetail.open > .kids-detail-appbar{
+  box-sizing:border-box!important;
+  min-height:66px!important;
+  height:auto!important;
+  padding:8px max(14px,env(safe-area-inset-right,0px)) 8px max(14px,env(safe-area-inset-left,0px))!important;
+  gap:11px!important;
+}
+html body .shell #view-dua.view.active #duaHubDetail.open > .kids-detail-appbar .kids-detail-dock-back{
+  flex:0 0 44px!important;
+  width:44px!important;
+  min-width:44px!important;
+  max-width:44px!important;
+  height:44px!important;
+  min-height:44px!important;
+  max-height:44px!important;
+}
+@media(prefers-reduced-motion:reduce){
+  html body nav.bottom-nav,html body nav.bottom-nav > .nav-btn{transition:none!important;animation:none!important}
+}
+
+/* KIDS_HOME_ANCHOR_GUARD_V1327: automatic scroll anchoring must not
+   pull the whole first screen behind the iOS status bar while Today
+   reactivates or prayer times update. Native vertical scrolling still works. */
+html[data-view="today"] body .app .shell,
+html body .app:has(#view-today.view.active) .shell{
+  overflow-anchor:none!important;
+  scroll-behavior:auto!important;
+}
+
+/* KIDS_MAIN_TAB_NO_SHIFT_V1327: fade the new content in place.
+   The older runtime animated tab views with translated coordinates;
+   that visually looked like the whole Kids app sliding on every switch. */
+html.kids-nav-tab-switching body .app .shell > .view.active{
+  animation:kidsStableTabFade1327 .14s ease-out both!important;
+  transform:none!important;
+}
+@keyframes kidsStableTabFade1327{
+  from{opacity:.96}
+  to{opacity:1}
+}
+@media(prefers-reduced-motion:reduce){
+  html.kids-nav-tab-switching body .app .shell > .view.active{animation:none!important}
+}
