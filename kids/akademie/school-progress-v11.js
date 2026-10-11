@@ -21,11 +21,23 @@
  }
  function sequence(topics){
   const groups=["akhlaq","adab","fiqh","aqidah"],ordered=[],seen=new Set();
-  const lists=groups.map(g=>topics[g]||[]);
+  // Stable historical course positions are a child-progress contract:
+  // inserting newly released subject topics into the old round-robin would
+  // shift completed lesson numbers and make the next unlock unpredictable.
+  // Each new *verified* pack is explicitly appended after all prior lessons.
+  const extension=Array.isArray(root.DARKidsAcademyCurriculumV22?.ids)?
+   root.DARKidsAcademyCurriculumV22.ids:[];
+  const extra=new Set(extension);
+  const lists=groups.map(g=>(topics[g]||[]).filter(id=>!extra.has(id)));
   for(let i=0;i<Math.max(...lists.map(a=>a.length));i++){
    for(const group of lists){
     const id=group[i];
     if(id&&!seen.has(id)){seen.add(id);ordered.push(id)}
+   }
+  }
+  for(const id of extension){
+   if(!seen.has(id)&&groups.some(g=>(topics[g]||[]).includes(id))){
+    seen.add(id);ordered.push(id);
    }
   }
   return ordered;

@@ -60,10 +60,17 @@ jobs:
         run: node test/kids/akademie/test-voice-audit-v20.cjs
       - name: Verify safe V21 four-clip manual audio request (zero credits)
         run: node kids/tools/test-academy-v21-manual-queue.cjs
+      - name: Verify 4 exact-source V22 lessons and all 3 age groups (zero credits)
+        run: node kids/tools/test-academy-v22-authentic.cjs
+      - name: Verify deterministic V22 voice plan (zero credits)
+        run: |
+          node kids/tools/export-academy-voice-plan-v22.cjs
+          git diff --exit-code -- kids/data/academy-voice-plan-v22.json
       - name: JavaScript syntax guard
         run: |
           node --check kids/akademie/curriculum-v1.js
           node --check kids/akademie/curriculum-v2.js
+          node --check kids/akademie/curriculum-v22.js
           node --check kids/akademie/school-progress-v11.js
           node --check kids/akademie/pilot-audio-v13.js
           node --check kids/tools/export-academy-voice-plan.js
