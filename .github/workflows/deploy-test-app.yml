@@ -245,7 +245,7 @@ jobs:
           set -euo pipefail
           BASE="https://dar-al-tawhid-kids-creator.sero91ak.workers.dev"
           # A newly created workers.dev hostname can take time to propagate.
-          for PAGE in /kids/start.html /kids/akademie/index.html /kids/version.json /kids/test-console/index.html /kids/test-console/catalogue-v1.json /kids/test-console/manifest.webmanifest /kids/test-console/studio-v1.js /kids/test-console/studio-v1.css /kids/test-console/sw.js; do
+          for PAGE in /kids/start.html /kids/akademie/index.html /kids/version.json /kids/test-console/ /kids/test-console/index.html /kids/test-console/catalogue-v1.json /kids/test-console/manifest.webmanifest /kids/test-console/studio-v1.js /kids/test-console/studio-v1.css /kids/test-console/sw.js /kids/test-console/return-to-studio.js; do
             URL="$BASE$PAGE"
             OK=0
             for ATTEMPT in $(seq 1 18); do
@@ -280,11 +280,16 @@ jobs:
           curl -fsSL -A 'DarAlTawhidKids-iOS CreatorTest' -H 'Cache-Control: no-cache' "$BASE/kids/test-console/catalogue-v1.json" > /tmp/kids-creator-catalogue.json
           node -e 'const x=JSON.parse(require("fs").readFileSync("/tmp/kids-creator-catalogue.json","utf8")); if(x.weeks!==52||x.entries.length!==208||x.entries.filter(e=>e.catalogued).length!==38){throw Error("KIDS Creator yearly catalogue invalid")}; console.log("KIDS Creator console live: 52 weeks, 38 built, 170 open")'
           curl -fsSL "$BASE/kids/test-console/manifest.webmanifest" > /tmp/kids-creator-manifest.json
-          node -e 'const x=JSON.parse(require("fs").readFileSync("/tmp/kids-creator-manifest.json","utf8")); if(x.id!=="/kids/test-console/"||x.start_url!=="/kids/test-console/"||x.display!=="standalone"){throw Error("KIDS TEST PWA manifest invalid")};console.log("KIDS TEST Web App live: installed scope only /kids/test-console/")'
+          node -e 'const x=JSON.parse(require("fs").readFileSync("/tmp/kids-creator-manifest.json","utf8")); if(x.id!=="/kids/test-console/"||x.start_url!=="/kids/test-console/"||x.scope!=="/kids/"||x.display!=="standalone"){throw Error("KIDS TEST PWA manifest invalid")};console.log("KIDS TEST Web App live: installed scope only /kids/test-console/")'
           grep -q 'Push-Thread global' /tmp/kids-creator-console.html || { echo "::error::Release lock missing on Creator UI"; exit 1; }
           CODE="$(curl -sS -o /tmp/kids-creator-denied -w '%{http_code}' "$BASE/test/academy/login")"
           test "$CODE" = "404" || {
             echo "::error::Adult/test route leaked through KIDS Worker ($CODE)"
             exit 1
           }
+          # Follow PWA scope and verify Safari iPhone behavior separately from the native test UA.
+          IOS_SAFARI_UA="Mozilla/5.0 (iPhone; CPU iPhone OS 18_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.6 Mobile/15E148 Safari/604.1"
+          curl -fsSL -A "$IOS_SAFARI_UA" "$BASE/kids/test-console/" > /tmp/kids-creator-safari.html
+          grep -Fq "KIDS TEST · Ersteller-Web-App" /tmp/kids-creator-safari.html || { echo "::error::Safari cannot receive standalone KIDS TEST web app"; exit 1; }
+          echo "KIDS TEST iPhone Safari HTML delivery verified, no visitor domain involved."
           echo "KIDS-only Worker verified. Adult Test and visitor domains unchanged."
