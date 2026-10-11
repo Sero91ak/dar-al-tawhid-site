@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "kids-academy-sidq-v18-manual-batch",
+  "request": "manual-staging-only-after-approved-voice-listening",
+  "speaker": "Serhat Abu Malik – Master",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "modelId": "eleven_v4",
+  "voiceSettingsProfile": "kids_story",
+  "maxClips": 4,
+  "maxPreparedCharacters": 350,
+  "stagingOnly": true,
+  "approvedForPlayback": false,
+  "runOnMainOnly": true,
+  "requireManualWorkflowDispatch": true,
+  "sourcePlan": "kids/data/academy-sidq-voice-plan-v18.json",
+  "exactPhrases": [
+    "As-salāmu ʿalaykum, lieber Bruder.",
+    "Du darfst ehrlich sagen: Das war ich.",
+    "Danach kannst du um Entschuldigung bitten und beim Aufräumen helfen.",
+    "Ehrlich sein ist gut. Das üben wir gemeinsam."
+  ],
+  "expectedTotalClips": 4
+}
