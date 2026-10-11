@@ -1,0 +1,17 @@
+# KIDS TEST: a *dedicated* workers.dev-only preview Worker.
+# Deployed from kids-creator-staging, NEVER from main or an Adult Test branch.
+name = "dar-al-tawhid-kids-creator"
+main = "worker.js"
+compatibility_date = "2026-08-01"
+workers_dev = true
+routes = []
+
+[build]
+watch_paths = [".kids-creator-manual-only/**"]
+
+[assets]
+# Static KIDS URLs remain rooted at /kids; no copy of public app state.
+directory = "../.."
+binding = "ASSETS"
+# The Worker must reject all non-KIDS routes before assets are served.
+run_worker_first = true
