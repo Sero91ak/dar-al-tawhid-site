@@ -66,6 +66,8 @@ jobs:
         run: |
           node kids/tools/export-academy-voice-plan-v22.cjs
           git diff --exit-code -- kids/data/academy-voice-plan-v22.json
+      - name: Verify all 38 creator-preview lessons and three authentic age levels
+        run: node test/kids/akademie/test-v22-age-preview.cjs
       - name: JavaScript syntax guard
         run: |
           node --check kids/akademie/curriculum-v1.js

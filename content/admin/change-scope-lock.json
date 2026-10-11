@@ -155,6 +155,17 @@
   ],
   "unlockedScopes": [
     {
+      "id": "kids-test-v22-all-three-ages-preview-20261011",
+      "at": "2026-10-11T13:40:00+02:00",
+      "approvedBy": "user-explicit-continue-authentic-age-appropriate-kids-lessons-20261011",
+      "reason": "Geschuetzte Erstellerpruefung alle 38 Qurʾān/Sahih-Lektionen in 3 Altersstufen, Alters- und Quellen-Tests. Ohne Kinderfortschritt, Audio-Generate und ohne Aenderungen an Erwachsenen-/Live-App.",
+      "paths": [
+        "test/kids/akademie/",
+        ".github/workflows/check-kids-academy-v9.yml"
+      ],
+      "expiresAt": "2026-10-18T23:59:00.000Z"
+    },
+    {
       "id": "kids-akademie-v22-authentisch-altersgerecht-35-38-20261011",
       "at": "2026-10-11T13:35:00+02:00",
       "approvedBy": "user-explicit-go-authentic-age-appropriate-kids-lessons-20261011",
