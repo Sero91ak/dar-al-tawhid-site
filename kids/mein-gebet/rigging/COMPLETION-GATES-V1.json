@@ -20,7 +20,10 @@
         "bytes": 704320,
         "existsInDraftGitTree": true,
         "originalVisualCompared": false
-      }
+      },
+      "sourceImageDecodedInConnectedRepository": true,
+      "sourceImageVisualTraitsInspected": true,
+      "glbAppearanceComparedToSource": false
     },
     "girl": {
       "source": "kids/mein-gebet/assets/figur-maedchen-original.png",
@@ -33,7 +36,10 @@
         "bytes": 785802,
         "existsInDraftGitTree": true,
         "originalVisualCompared": false
-      }
+      },
+      "sourceImageDecodedInConnectedRepository": true,
+      "sourceImageVisualTraitsInspected": true,
+      "glbAppearanceComparedToSource": false
     }
   },
   "previewIsNotReleaseEvidence": true,
@@ -65,7 +71,22 @@
       ],
       "approved": false,
       "status": "in_progress",
-      "evidence": []
+      "evidence": [
+        {
+          "type": "boy_source_visual",
+          "ref": "github-blob://Sero91ak/dar-al-tawhid-site/8cd94ec07210985aeb2e5d7fe6d2c8219e407369",
+          "verified": true,
+          "source": "Repository original 2D image decoded and visually inspected; NOT compared to real GLB.",
+          "humanApproved": false
+        },
+        {
+          "type": "girl_source_visual",
+          "ref": "github-blob://Sero91ak/dar-al-tawhid-site/9a9dcdb0499894b95a36c82d42e89d3483aad313",
+          "verified": true,
+          "source": "Repository original 2D image decoded and visually inspected; NOT compared to real GLB.",
+          "humanApproved": false
+        }
+      ]
     },
     {
       "id": "02-original-boy",
