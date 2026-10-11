@@ -23,7 +23,21 @@
       },
       "sourceImageDecodedInConnectedRepository": true,
       "sourceImageVisualTraitsInspected": true,
-      "glbAppearanceComparedToSource": false
+      "glbAppearanceComparedToSource": false,
+      "earlierV4Recovery": {
+        "source": "Google Drive / DAR AL TAWḤĪD Kids – 3D-Test V4 / Mein_Gebet_Junge_V4_iPad_3D.usdz",
+        "sourceSha256": "b4729a1a7c4e58806a968bcb257a91a971bbe3d5580df1d00d2d601bcc3df60a",
+        "v4ConvertedGeometryGlbSha256": "a008f06dc876067fdf37c299382fe9e3fb9320c853b7836c21cb00c61ddecb41",
+        "staticMeshPieces": 19,
+        "vertices": 34104,
+        "triangles": 66480,
+        "hasSkinnedRig": false,
+        "hasAnimations": false,
+        "isV77": false,
+        "looksLikeOriginalBoy": false,
+        "approved": false,
+        "report": "rigging/V4-RECOVERY-FINDINGS.md"
+      }
     },
     "girl": {
       "source": "kids/mein-gebet/assets/figur-maedchen-original.png",
