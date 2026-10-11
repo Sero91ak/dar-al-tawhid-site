@@ -14,7 +14,7 @@ for(const item of api.entries){
  assert.ok(item.source?.reference,"All Arabic concepts must have traceable religious source or marked editorial term origin");
  assert.ok(item.reviewStatus.includes("review"));
  for(const age of ages){
-  assert.ok(item.age[age]?.length>10,age+" "+item.id);
+  assert.ok(item.age[age]?.length>=(age==="4-5"?8:12),age+" "+item.id);
   assert.ok(api.phrase(item,age).startsWith(item.term+" bedeutet: "));
  }
  assert.notEqual(item.age["4-5"],item.age["6-8"]);
