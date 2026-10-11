@@ -97,13 +97,14 @@ export function isAcademyOwnerRoute(pathname) {
 }
 
 function academyOwnerSecret(env) {
-  // Never use the public legacy DEFAULT_PASS to grant a new signed session.
-  return String(env && (env.ACADEMY_OWNER_SESSION_SECRET || env.PREVIEW_GATE_PASS || env.KIDS_GATE_PASS) || "");
+  // This HMAC key MUST be a private Cloudflare Worker secret, not a tracked
+  // wrangler [vars] value or the frontend PIN exposed in public JavaScript.
+  return String(env && env.ACADEMY_OWNER_SESSION_SECRET || "");
 }
 function academyOwnerPassword(env) {
-  // Optional dedicated password allows the site's existing PIN to be configured
-  // privately in Cloudflare, never exposed in bundled HTML or GitHub.
-  return String(env && (env.ACADEMY_OWNER_PASSWORD || env.PREVIEW_GATE_PASS || env.KIDS_GATE_PASS) || "");
+  // Configure the familiar site PIN privately in Cloudflare under this name.
+  // A public/legacy Basic-Auth fallback is deliberately NOT accepted.
+  return String(env && env.ACADEMY_OWNER_PASSWORD || "");
 }
 function academySafeDestination(path) {
   const value = String(path || "");
