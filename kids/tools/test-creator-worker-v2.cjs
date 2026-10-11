@@ -56,6 +56,41 @@ const get=(path,method="GET")=>handler.fetch(new Request("https://kids-preview.e
   assert.equal(consoleRoute.status,200,"Creator console must remain within KIDS-only Worker");
   const catalogueRoute=await get("/kids/test-console/catalogue-v1.json");
   assert.equal(catalogueRoute.status,200);
+  // Installable standalone web app: content and editor stay ONLY on test host.
+  const manifest=JSON.parse(fs.readFileSync(path.join(root,"kids/test-console/manifest.webmanifest"),"utf8"));
+  const studio=fs.readFileSync(path.join(root,"kids/test-console/studio-v1.js"),"utf8");
+  const styles=fs.readFileSync(path.join(root,"kids/test-console/studio-v1.css"),"utf8");
+  const sw=fs.readFileSync(path.join(root,"kids/test-console/sw.js"),"utf8");
+  const releasePolicy=fs.readFileSync(path.join(root,"kids/creator-test/GLOBAL-RELEASE-LOCK.md"),"utf8");
+  assert.equal(manifest.display,"standalone");
+  assert.equal(manifest.id,"/kids/test-console/");
+  assert.equal(manifest.start_url,"/kids/test-console/");
+  assert.equal(manifest.scope,"/kids/test-console/");
+  assert.match(consoleHtml,/href="\/kids\/test-console\/manifest\.webmanifest"/);
+  assert.match(consoleHtml,/src="\/kids\/test-console\/studio-v1\.js"/);
+  assert.match(consoleHtml,/LIVE-PUSH GESPERRT/);
+  assert.match(consoleHtml,/Push-Thread global/);
+  assert.match(releasePolicy,/Push-Thread global/);
+  assert.match(releasePolicy,/kein Merge|Keine.*Merge|kein.*main/i);
+  for(const id of ["studioSlot","studioNotes","studioSave","studioExport","studioImport",
+      "testAge","testProfile","testModule","cycleMonday","studioDrafts","studioModules",
+      "studioReady","moduleChoose","moduleSave","studioMessage"]){
+    assert.match(consoleHtml,new RegExp('id="'+id+'"'),"missing editor "+id);
+  }
+  new vm.Script(studio,{filename:"kids-test-studio-v1.js"});
+  new vm.Script(sw,{filename:"kids-test-sw.js"});
+  assert.match(sw,/url\.pathname\.startsWith\("\/kids\/test-console\/"\)/);
+  assert.doesNotMatch(sw,/\/kids\/start\.html|\/kids\/akademie/);
+  assert.match(studio,/localStorage\.setItem\(STORAGE_KEY/);
+  assert.doesNotMatch(studio,/fetch\([^)]*,\s*\{[^}]*method\s*:\s*["'](?:POST|PUT|PATCH|DELETE)/i);
+  assert.doesNotMatch(studio,/dar-al-tawhid\.de|github\.com\/.*\/pulls|fetch\("\/kids\/api/);
+  assert.match(styles,/\.release-lock/);
+  for(const file of ["manifest.webmanifest","studio-v1.js","studio-v1.css","sw.js"]){
+    const response=await get("/kids/test-console/"+file);
+    assert.equal(response.status,200,"PWA asset route "+file);
+  }
+  console.log("KIDS TEST WEB APP V1 PASS: PWA, narrow-scope SW, local-only editing, release lock, all settings wired.");
+
   console.log("KIDS CREATOR CONSOLE V3 PASS: 52 weeks, 208 slots, 38 titles, no private records or unsafe unlocks.");
   const home=await get("/kids/start.html");
   assert.equal(home.status,200);
