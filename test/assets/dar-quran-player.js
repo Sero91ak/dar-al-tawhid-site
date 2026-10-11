@@ -1,6 +1,13 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 1089;
+    var PLAYER_BUILD = 1102;
+  if (!document.querySelector('link[data-dqp-v11-skin]')) {
+    var v11Css = document.createElement('link');
+    v11Css.rel = 'stylesheet';
+    v11Css.href = '/test/assets/dar-quran-player.css?v=1102';
+    v11Css.setAttribute('data-dqp-v11-skin', '');
+    document.head.appendChild(v11Css);
+  }
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App, iOS-App und Apple TV: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -1449,20 +1456,14 @@
     document.head.appendChild(st);
   }
   function renderShell() {
-    installV108RSkin();
     return (
-      '<div id="darQuranPlayer" data-v108-theme="' + readV108Theme() + '" data-text="' + esc(state.text) + '">' +
+      '<div id="darQuranPlayer" data-text="' + esc(state.text) + '">' +
         '<div class="dqp-topbar">' +
-          '<button class="dqp-back" type="button" data-dqp="home" aria-label="Zurück zur Startseite"><span aria-hidden="true">‹</span></button>' +
+          '<button class="dqp-back" type="button" data-dqp="home" aria-label="Zurück zur Startseite">‹</button>' +
           '<button class="dqp-grab" type="button" tabindex="-1" aria-hidden="true"></button>' +
-          '<div class="dqp-v108r-brand"><b>DĀR AL TAWḤĪD</b><span>QURʾĀN · REZITATION & WISSEN</span></div>' +
-          '<button class="dqp-v108r-theme" type="button" data-dqp="v108-theme" aria-label="Tag-/Nachtmodus wechseln">☀</button>' +
           '<button type="button" class="dqp-sleep-live" data-dqp-sleep-live data-dqp-opt="m-sleep" hidden aria-label="Sleep-Timer"></button>' +
-        "</div>" +
-        '<div class="dqp-meta">' +
-          '<button type="button" class="dqp-title" data-dqp="pick-surah">—</button>' +
-          '<button type="button" class="dqp-more" data-dqp="menu" aria-label="Optionen">' + icon("more") + "</button>" +
-          '<button type="button" class="dqp-artist" data-dqp="pick-reciter">—</button>' +
+          '<div class="dqp-v11-heading"><span class="dqp-v11-title" data-v11-surah>Al-Fātiḥah</span><button type="button" class="dqp-v11-picker" data-dqp="pick-surah" aria-label="Sūrah wechseln">Sūrah <span data-v11-number>001</span><span class="arrow" aria-hidden="true"> ▾</span></button></div>' +
+          '<button type="button" class="dqp-v11-menu" data-dqp="menu" aria-label="Wiedergabe, Anzeige und weitere Optionen">☰</button>' +
         "</div>" +
         '<div class="dqp-art">' +
           '<div class="dqp-v108r-tabs" role="tablist" aria-label="Qurʾān Ansicht">' +
@@ -1472,7 +1473,7 @@
             '<button type="button" data-dqp="v108-mode" data-v108-mode="tad" role="tab">Tadabbur</button>' +
             '<button type="button" data-dqp="v108-mode" data-v108-mode="taf" role="tab">Tafsīr</button>' +
           '</div>' +
-          '<div class="dqp-ayah" data-dqp-ayah>' +
+          '<div class="dqp-ayah" data-dqp-ayah>'
             '<div class="dqp-ayah-ref" data-ref></div>' +
             '<section class="dqp-sec dqp-sec-ar" data-sec="ar"><div class="dqp-sec-h">عربي</div><div class="dqp-ayah-ar" lang="ar" dir="rtl"></div></section>' +
             '<section class="dqp-sec dqp-sec-de" data-sec="de"><div class="dqp-sec-h">Deutsch</div><div class="dqp-ayah-de"></div></section>' +
@@ -1483,6 +1484,11 @@
           "</div>" +
         "</div>" +
         '<div class="dqp-foot">' +
+        '<div class="dqp-meta">' +
+          '<button type="button" class="dqp-title" data-dqp="pick-ayah">—</button>' +
+          '<button type="button" class="dqp-more" data-dqp="menu" aria-label="Optionen">' + icon("more") + "</button>" +
+          '<button type="button" class="dqp-artist" data-dqp="pick-reciter">—</button>' +
+        "</div>" +
         '<section class="dqp-progress">' +
           '<div class="dqp-track" data-dqp-seek-track>' +
             '<span class="dqp-groove" aria-hidden="true"></span>' +
@@ -1496,14 +1502,6 @@
           '<button class="dqp-play" type="button" data-dqp="play" aria-label="Wiedergabe">' + icon("play") + "</button>" +
           '<button class="dqp-skip" type="button" data-dqp="next" aria-label="Nächste Āyah">' + icon("next") + "</button>" +
         "</div>" +
-        '<div class="dqp-v108r-pills" role="group" aria-label="Audiofunktionen">' +
-          '<button type="button" data-dqp="v108-speed" aria-label="Wiedergabegeschwindigkeit" data-v108-speed-label>♫ 1× Tempo</button>' +
-          '<button type="button" data-dqp="v108-repeat" aria-label="Wiederholung" data-v108-repeat-label>↻ Loop</button>' +
-          '<button type="button" data-dqp-opt="m-sleep" aria-label="Sleep-Timer">◷ Timer</button>' +
-          '<button type="button" data-dqp="v108-audio" aria-label="Audio und Lautstärke">◉ Audio</button>' +
-        '</div>' +
-
-        
         '<div class="dqp-volume">' +
           icon("volmin") +
           '<div class="dqp-track" data-dqp-vol-track>' +
@@ -1514,12 +1512,10 @@
           icon("volmax") +
           '<p class="dqp-vol-note" data-dqp-vol-hint hidden></p>' +
         "</div>" +
-        '<div class="dqp-v108r-output" data-v108-output><span>Audio-Lautstärke</span><button type="button" data-dqp="v108-output">Ausgabegerät wählen</button></div>' +
         '<div class="dqp-dock">' +
-          '<button type="button" data-dqp="pick-surah" aria-label="Sūren auswählen">' + icon("queue") + '<span>Sūren</span></button>' +
-          '<button type="button" data-dqp="pick-reciter" aria-label="Rezitatoren auswählen">' + icon("reciter") + '<span>Rezitatoren</span></button>' +
-          '<button type="button" data-dqp="v108-audio" aria-label="Audioeinstellungen">' + icon("volmax") + '<span>Audio</span></button>' +
-          '<button type="button" data-dqp="menu" aria-label="Mehr Optionen">' + icon("more") + '<span>Mehr</span></button>' +
+          '<button type="button" data-dqp="text" aria-label="Textmodus">' + icon("lyrics") + "</button>" +
+          '<button type="button" data-dqp="pick-reciter" aria-label="Qāriʾ wählen">' + icon("reciter") + "</button>" +
+          '<button type="button" data-dqp="pick-surah" aria-label="Sūrah wählen">' + icon("queue") + "</button>" +
         "</div>" +
         "</div>" +
         '<div class="dqp-sheet" data-dqp-sheet hidden></div>' +
@@ -2022,6 +2018,13 @@
   function paintChrome() {
     var root = playerRoot();
     if (root) {
+      try { root.setAttribute('data-v11-ambient', localStorage.getItem('darQuranV11Ambient') === 'day' ? 'day' : 'night'); } catch (eV11Theme) { root.setAttribute('data-v11-ambient','night'); }
+      var currentSurahMeta = meta || surahMeta(state.surah) || {};
+      var currentName = String(currentSurahMeta.transliteration || currentSurahMeta.name || ('Sūrah ' + state.surah));
+      var v11SurahName = root.querySelector('[data-v11-surah]');
+      if (v11SurahName) { v11SurahName.textContent = currentName; v11SurahName.dataset.length = currentName.length >= 17 ? 'xlong' : (currentName.length >= 12 ? 'long' : 'normal'); v11SurahName.title = currentName; }
+      var v11SurahNumber = root.querySelector('[data-v11-number]');
+      if (v11SurahNumber) v11SurahNumber.textContent = pad(state.surah, 3);
       root.setAttribute("data-text", state.text);
       root.setAttribute("data-ar", state.layers.ar ? "1" : "0");
       root.setAttribute("data-de", state.layers.de ? "1" : "0");
@@ -2041,22 +2044,13 @@
       if (rp) rp.classList.toggle("is-on", state.repeat !== "off");
       if (tx) tx.classList.toggle("is-on", !!(state.layers.lat || state.layers.tad || state.layers.taf));
       applyVolume();
-      var speedCapsule=root.querySelector("[data-v108-speed-label]");
-      if(speedCapsule)speedCapsule.textContent="♫ "+String(Number(state.learnRate)||1).replace(".",",")+"× Tempo";
-      var repeatCapsule=root.querySelector("[data-v108-repeat-label]");
-      if(repeatCapsule){repeatCapsule.textContent="↻ "+(state.repeat==="off"?"Loop":state.repeat==="ayah"?"Āyah":"Sūrah");repeatCapsule.classList.toggle("is-on",state.repeat!=="off");}
-      root.querySelectorAll(".dqp-v108r-tabs [data-v108-mode]").forEach(function(b){var current=root.dataset.v108Mode||"listen";b.classList.toggle("is-on",b.getAttribute("data-v108-mode")===current);b.setAttribute("aria-selected",String(b.getAttribute("data-v108-mode")===current));});
       var ayah = root.querySelector("[data-dqp-ayah]");
       if (ayah) fitAyah(ayah);
       syncMediaSession();
+      root.querySelectorAll(".dqp-v108r-tabs [data-v108-mode]").forEach(function(b){var current=root.dataset.v108Mode||"listen";b.classList.toggle("is-on",b.getAttribute("data-v108-mode")===current);b.setAttribute("aria-selected",String(b.getAttribute("data-v108-mode")===current));});
     }
     paintMini();
   }
-  var posTick = 0;
-  var lastMediaMetaKey = "";
-  var lastNowPlayingKey = "";
-  var lastNowPlayingAt = 0;
-  var mediaHandlersBound = false;
   function isTestShell() {
     try {
       var p = String(location.pathname || "");
@@ -3309,6 +3303,7 @@
       '<button type="button" class="dqp-opt" data-dqp="pick-surah">Sūrah wechseln</button>',
       '<button type="button" class="dqp-opt" data-dqp="pick-ayah">Āyah wechseln</button>',
       '<button type="button" class="dqp-opt" data-dqp="pick-reciter">Qāriʾ wechseln</button>',
+      '<button type="button" class="dqp-opt" data-dqp-opt="m-ambient">Darstellung · Tag / Nacht wechseln</button>',
       '<button type="button" class="dqp-opt" data-dqp-opt="m-read">Sūrah lesen</button>',
       '<button type="button" class="dqp-opt" data-dqp-opt="m-stop">Wiedergabe beenden</button>'
     ].join(""));
@@ -3415,6 +3410,10 @@
     if (id.indexOf("sleep-") === 0) {
       setSleepMinutes(Number(id.slice(6)));
       return;
+    }
+    if (id === "m-ambient") {
+      try { localStorage.setItem("darQuranV11Ambient", localStorage.getItem("darQuranV11Ambient") === "day" ? "night" : "day"); } catch (eTheme) {}
+      paintChrome(); openMenu(); return;
     }
     if (id === "m-read") {
       closeSheet();
