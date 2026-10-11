@@ -27,6 +27,16 @@ for(const key of clipNames){
  assert.ok(Object.values(staging.entries).some(x=>x.url===keyUrl),"Direct asset not staged "+key);
 }
 assert.equal(Object.values(staging.entries).filter(e=>e.approvedForPlayback===false).length,4);
+const ownerRuntime=read("kids/owner-voice.js");
+assert.ok(ownerRuntime.includes('previewParams.get("creatorSandbox")==="1"'),"Staging may load only for isolated creator");
+assert.ok(ownerRuntime.includes('document.body.dataset.academyChildMode==="demo"'),"Saved real children may not load unreviewed Master audio");
+assert.ok(html.includes('entry.approvedForPlayback===true'),"Public Academy clips require explicit human approval");
+assert.ok(html.includes('entry.approvedForPlayback===false&&creatorV4Sandbox()'),"Staging cannot leak into ordinary learner audio");
+assert.ok(html.includes('activeLessonId==="sidq"'),"Do not allow preview clips over unrelated lessons");
+assert.ok(html.includes('warmAcademyMaster();hideCategory();'),"All lesson series must prewarm the approved Master catalog");
+assert.ok(html.includes('Jetzt bitte erneut auf Anhören tippen.'),"iPhone playback must never wait for a fetch and lose tap activation");
+assert.ok(!html.includes('.then(()=>{if(live())next()})'),"Do not auto-resume audio after a lost iPhone tap");
+
 function harness(search,who="girl",welcome="Heute geht es darum, die Wahrheit zu sagen. Wir hören zu und überlegen zusammen. Du darfst eine Pause machen.",mode="demo"){
  const listeners={},visible={};
  const playing=[];
