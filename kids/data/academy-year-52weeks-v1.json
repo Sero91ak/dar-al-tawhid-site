@@ -1,5 +1,5 @@
 {
-  "version": "academy-year-v3-20261011-14-test-drafts-not-released",
+  "version": "academy-year-v4-20261011-18-test-drafts-not-released",
   "scope": "Editorial calendar structure only. Not a verified 208-lesson curriculum. Pending slots must never be rendered as available lessons.",
   "goals": {
     "weeks": 52,
@@ -14,7 +14,7 @@
       "6-8",
       "9-10"
     ],
-    "testDraftsNotApproved": 14
+    "testDraftsNotApproved": 18
   },
   "approvalGates": [
     "Qurʾān verse checked against Arabic original and German meaning",
@@ -631,14 +631,16 @@
           "mode": "new",
           "editorialSlot": 53,
           "lessonId": null,
-          "status": "awaiting-authentic-source-and-content-review"
+          "status": "source-checked-test-draft-not-approved",
+          "draftLessonId": "sunnah-was-bedeutet-sunnah"
         },
         {
           "weekday": "Dienstag",
           "mode": "new",
           "editorialSlot": 54,
           "lessonId": null,
-          "status": "awaiting-authentic-source-and-content-review"
+          "status": "source-checked-test-draft-not-approved",
+          "draftLessonId": "sira-prophet-vorbild"
         },
         {
           "weekday": "Mittwoch",
@@ -649,14 +651,16 @@
           "mode": "new",
           "editorialSlot": 55,
           "lessonId": null,
-          "status": "awaiting-authentic-source-and-content-review"
+          "status": "source-checked-test-draft-not-approved",
+          "draftLessonId": "adab-freundlichkeit-sunnah"
         },
         {
           "weekday": "Freitag",
           "mode": "new",
           "editorialSlot": 56,
           "lessonId": null,
-          "status": "awaiting-authentic-source-and-content-review"
+          "status": "source-checked-test-draft-not-approved",
+          "draftLessonId": "sunnah-ueberlieferung-pruefen"
         },
         {
           "weekday": "Samstag",
