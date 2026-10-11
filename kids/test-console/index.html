@@ -99,6 +99,7 @@ button{cursor:pointer}button:hover,a:hover{filter:brightness(1.14)}button:focus-
   </div>
   <p id="studioMessage" role="status" aria-live="polite"></p>
 </section>
+<div id="testBuildInfo" class="notice" aria-live="polite"><b>Testversion:</b> GitHub-Staging-Version wird geprüft. <span id="testBuildSha">–</span><br><small id="testBuildDate">KIDS TEST · nicht die Besucher-App.</small></div>
 <div class="stats" aria-label="52-Wochen-Plan"><div class="stat"><b>52</b><small>Wochen pro Zyklus</small></div><div class="stat"><b>208</b><small>Unterrichtsplätze</small></div><div class="stat"><b id="built">–</b><small>Im Code vorhanden</small></div><div class="stat"><b id="missing">–</b><small>Weiter auszuarbeiten</small></div></div>
 <section id="bereiche"><div class="top"><h2>Alle KIDS-Bereiche</h2><span class="tag">Eigener Test-Server</span></div>
 <div class="modules">
@@ -136,6 +137,19 @@ data=j.entries;$("built").textContent="38";$("missing").textContent="170";const 
 for(const key of ["akhlaq","adab","fiqh","aqidah"]){const c=element("div",null,"subject");c.appendChild(element("b",sums[key]||0));c.appendChild(element("span",subjectNames[key]));$("subjects").appendChild(c)}
 reset();
 }).catch(err=>{$("message").textContent="Der KIDS-Testkatalog ist noch nicht bereit: "+err.message;});
+})();
+</script>
+<script>
+(()=>{"use strict";
+const sha=document.getElementById("testBuildSha"),date=document.getElementById("testBuildDate");
+fetch("/kids/test-console/build-meta-v1.json",{credentials:"omit",cache:"no-store"})
+.then(r=>{if(!r.ok)throw Error("HTTP "+r.status);return r.json()})
+.then(j=>{
+ if(j.schemaVersion!==1||j.gitBranch!=="kids-creator-staging"||j.isProduction!==false||j.hasVisitorRelease!==false||!(/^[a-f0-9]{40}$/).test(j.gitCommit))throw Error("Keine gültige isolierte Testversion");
+ sha.textContent="Staging-Commit "+j.gitCommit.slice(0,12);
+ const time=new Date(j.buildCreatedAt);
+ date.textContent="Testbuild: "+(Number.isFinite(time.valueOf())?time.toLocaleString("de-DE"):"Zeit unbekannt")+" · KEIN Besucher-Push";
+}).catch(()=>{sha.textContent="Version nicht bestätigt";date.textContent="Bitte später erneut laden; Besucher-App unverändert";});
 })();
 </script>
 <script defer src="/kids/test-console/studio-v1.js"></script></body></html>
