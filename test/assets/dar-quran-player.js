@@ -1,10 +1,10 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 1107;
+    var PLAYER_BUILD = 1108;
   if (!document.querySelector('link[data-dqp-v11-skin]')) {
     var v11Css = document.createElement('link');
     v11Css.rel = 'stylesheet';
-    v11Css.href = '/test/assets/dar-quran-player.css?v=1107';
+    v11Css.href = '/test/assets/dar-quran-player.css?v=1108';
     v11Css.setAttribute('data-dqp-v11-skin', '');
     document.head.appendChild(v11Css);
   }
@@ -135,8 +135,15 @@
   var engine = { started: false, lastUrl: "", loadedSurah: 0, loadedAyah: 0, stallTimer: 0, lastProgressAt: 0, wantPlay: false, objectUrl: "", blobTried: false, fallbackReciterTried: false, haltedOffline: false, watchReloadAt: 0, endedAt: 0 };
 
   var lastSysVolAt = 0;
+  function isIosSystemVolumeOnly() {
+    var ua = String(navigator.userAgent || "");
+    return /iPhone|iPad|iPod/i.test(ua) ||
+      (/Macintosh/i.test(ua) && Number(navigator.maxTouchPoints) > 1);
+  }
   function usesSystemVolume() {
-    return isOfficialIosApp() && !isAppleTvApp();
+    // iOS WebKit does not permit setting the hardware output volume from JS.
+    // Do not show a slider that appears to move but has no audible effect.
+    return !isAppleTvApp() && (isOfficialIosApp() || isIosSystemVolumeOnly());
   }
   function unlockSpeaker(a) {
     a = a || document.getElementById("darQuranPlayerAudio");
@@ -173,30 +180,41 @@
     if (!isFinite(v)) v = 1;
     state.volume = v;
     var a = audioEl();
+    var systemOnly = usesSystemVolume();
+    var root = document.getElementById("darQuranPlayer");
+    if (root) root.setAttribute("data-dqp-volume-system", systemOnly ? "1" : "0");
     a.defaultMuted = false;
-    if (usesSystemVolume()) {
+    if (systemOnly) {
       try { a.muted = false; } catch (eM) {}
       try { a.volume = 1; } catch (e) {}
-      if (fromUi) postSystemVolume(v);
+      // The native bridge (when available) may control device volume, but the
+      // website cannot verify or adjust iPhone system volume. Never fake it.
+      if (fromUi && isOfficialIosApp()) postSystemVolume(v);
     } else {
       a.muted = v === 0;
       try { a.volume = v; } catch (e2) {}
     }
-    var track = document.querySelector("#darQuranPlayer [data-dqp-vol-track]");
+    var track = root && root.querySelector("[data-dqp-vol-track]");
     var fillPct = (v * 100) + "%";
     if (track) track.style.setProperty("--dqp-fill", fillPct);
-    var vfill = document.querySelector("#darQuranPlayer .dqp-volume .dqp-fill");
+    var vfill = root && root.querySelector(".dqp-volume .dqp-fill");
     if (vfill) vfill.style.transform = "scaleX(" + Math.max(0, Math.min(1, v)).toFixed(4) + ")";
-    var vol = document.querySelector("#darQuranPlayer [data-dqp=vol]");
+    var vol = root && root.querySelector("[data-dqp=vol]");
     if (vol) {
-      if (!fromUi) vol.value = String(Math.round(v * 100));
+      vol.disabled = systemOnly;
+      vol.setAttribute("aria-disabled", systemOnly ? "true" : "false");
+      vol.setAttribute("aria-label", systemOnly ? "iPhone-Lautstärke über die Seitentasten einstellen" : "Lautstärke");
+      if (!fromUi || systemOnly) vol.value = String(Math.round(v * 100));
       vol.style.setProperty("--dqp-fill", fillPct);
     }
-    var hint = document.querySelector("[data-dqp-vol-hint]");
-    if (hint) hint.hidden = true;
+    var hint = root && root.querySelector("[data-dqp-vol-hint]");
+    if (hint) {
+      hint.hidden = !systemOnly;
+      if (systemOnly) hint.textContent = "Lautstärke am iPhone über die Seitentasten einstellen. Dieser Browser darf die Systemlautstärke nicht verändern.";
+    }
   }
   function volumeFromPointer(track, clientX, clientY) {
-    if (!track) return;
+    if (!track || usesSystemVolume()) return;
     var r = track.getBoundingClientRect();
     var w = r.width || 1;
     var h = r.height || 1;
@@ -213,6 +231,7 @@
     if (!vol || vol.getAttribute("data-dqp-vol-bound") === "1") return;
     vol.setAttribute("data-dqp-vol-bound", "1");
     function onInput() {
+      if (usesSystemVolume()) return;
       armVolumeFromGesture();
       var n = Number(vol.value) / 100;
       state.volume = isFinite(n) ? Math.max(0, Math.min(1, n)) : 1;
@@ -229,6 +248,7 @@
       var drag = false;
       track.addEventListener("pointerdown", function (e) {
         e.stopPropagation();
+        if (usesSystemVolume()) return;
         drag = true;
         try { track.setPointerCapture(e.pointerId); } catch (eCap) {}
         armVolumeFromGesture();
@@ -905,13 +925,8 @@
         state.sessionActive = true;
         runPlay(a, gen);
       }
-      try {
-        var pack = window.DARQuranAudioPack;
-        var recNow = reciterById(hit.qari || wantQari);
-        if (pack && recNow) {
-          pack.ensure(recNow.edition, surah, ayah);
-        }
-      } catch (ePack) {}
+      // Standard online streaming: the same-origin audio response may be
+      // HTTP-cached by the browser. No offline pack is queued here.
       applyLearnRate();
       syncProgressSample(true);
       if (state.playing) startProgressClock();
