@@ -83,7 +83,7 @@ footer{border-top:1px solid var(--border);margin-top:30px;padding-top:16px;color
 <script>
 (function(){
 "use strict";
-const $=s=>document.querySelector(s),cat={akhlaq:"Akhlāq",adab:"Adab",fiqh:"Fiqh",aqidah:"ʿAqīdah"};
+const $=s=>document.querySelector(s),cat={akhlaq:"Akhlāq",adab:"Adab",fiqh:"Fiqh",aqidah:"ʿAqīdah",tawhid:"Tawḥīd",iman:"Īmān",quran:"Qurʾān",dua:"Duʿāʾ",familie:"Familie",tarbiyyah:"Tarbiyyah",nafs:"Nafs",sira:"Sīrah",sunnah:"Sunnah"};
 const data=window.DARKidsAcademyCurriculum||{};
 const glossary=window.DARKidsAcademyTermsV1||null;
 const extra={id:"sidq",subject:"akhlaq",topic:"Wahrhaftigkeit",title:"Ṣidq – Wahrhaftigkeit",
@@ -97,6 +97,7 @@ const extra={id:"sidq",subject:"akhlaq",topic:"Wahrhaftigkeit",title:"Ṣidq –
  "6-8":[{type:"choice",prompt:"Warum ist Wahrheit wichtig?",options:["Sie stärkt Vertrauen.","Sie ist unwichtig."],correct:0}],
  "9-10":[{type:"text",prompt:"Was bedeutet Ṣidq?",sample:"Wahrhaftigkeit beim Sprechen und Handeln."}]}};
 const ids=Object.keys(data);ids.unshift("sidq");const lesson=id=>id==="sidq"?extra:data[id];
+const categoryOf=l=>l?.editorialCategory||l?.subject||"akhlaq";
 const draftIds=ids.filter(key=>lesson(key)?.editorialStatus==="SOURCE_CHECKED_DRAFT_NOT_APPROVED");
 const publishedCount=ids.length-draftIds.length;
 let subject="akhlaq",id="sidq",step=0,player=null;
@@ -125,8 +126,8 @@ function ownerSidq(){return id==="sidq"&&profile.value==="girl"&&age.value==="4-
 function selected(){return lesson(id)}
 function renderTopics(){
  const s=$("#subjects"),t=$("#topics");s.replaceChildren();t.replaceChildren();
- Object.keys(cat).forEach(key=>{const b=add("button",cat[key],"",s);b.type="button";b.classList.toggle("active",subject===key);b.onclick=()=>{subject=key;id=ids.find(x=>lesson(x)?.subject===key)||"sidq";step=0;render()}});
- ids.filter(x=>lesson(x)?.subject===subject).forEach(x=>{const l=lesson(x),b=add("button",undefined,"",t);b.type="button";add("strong",l.title||l.topic||x,"",b);add("span",l.editorialStatus==="SOURCE_CHECKED_DRAFT_NOT_APPROVED"?"Redaktioneller Entwurf · nur KIDS TEST":"Vorhandener Unterricht · Erstellerprüfung","small",b);b.classList.toggle("active",x===id);b.onclick=()=>{id=x;step=0;render()}});
+ Object.keys(cat).filter(key=>ids.some(x=>categoryOf(lesson(x))===key)).forEach(key=>{const b=add("button",cat[key],"",s);b.type="button";b.classList.toggle("active",subject===key);b.onclick=()=>{subject=key;id=ids.find(x=>categoryOf(lesson(x))===key)||"sidq";step=0;render()}});
+ ids.filter(x=>categoryOf(lesson(x))===subject).forEach(x=>{const l=lesson(x),b=add("button",undefined,"",t);b.type="button";add("strong",(l.editorialSlot?"Unterricht "+l.editorialSlot+" · ":"")+(l.title||l.topic||x),"",b);add("span",l.editorialStatus==="SOURCE_CHECKED_DRAFT_NOT_APPROVED"?"Redaktioneller Entwurf · nur KIDS TEST":"Vorhandener Unterricht · Erstellerprüfung","small",b);b.classList.toggle("active",x===id);b.onclick=()=>{id=x;step=0;render()}});
 }
 function quranNumber(q){return String(q.surah).padStart(3,"0")+String(q.ayah).padStart(3,"0")}
 function quiz(l){
@@ -221,7 +222,7 @@ function renderStage(){
 }
 function render(){
  renderTopics();const l=selected();
- $("#subjectTitle").textContent=(cat[l.subject]||"Unterricht").toUpperCase()+" · NUR ERSTELLER";
+ $("#subjectTitle").textContent=(cat[categoryOf(l)]||"Unterricht").toUpperCase()+" · NUR ERSTELLER";
  $("#lessonTitle").textContent=l.title||l.topic||id;
  $("#lessonIntro").textContent=l.editorialStatus==="SOURCE_CHECKED_DRAFT_NOT_APPROVED"?"Entwurf mit geprüften Quellenverweisen · Text, Quiz und Stimme noch nicht freigegeben. Keine Kinder-Lernstände werden geändert.":"Alle fünf Schritte sind in dieser Prüfversion offen. Es werden keine Kinder-Lernstände geändert.";
  $("#total").textContent=publishedCount+" vorhandene Lektionen · "+draftIds.length+" redaktionelle Entwürfe · 4 Original-Masterclips · übrige Audiozuordnung offen";
