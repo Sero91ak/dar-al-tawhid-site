@@ -92,9 +92,8 @@ const ACADEMY_NEW_ROOT = "/test/academy";
 const ACADEMY_OLD_ROOT = "/test/kids/akademie";
 
 export function isAcademyOwnerRoute(pathname) {
-  // Only these two owner QA documents and the login route exist. Never use a
-  // wildcard that could make an authenticated path traverse other /test files.
-  const allowed = ["", "/", "/index.html", "/audio-audit-v18.html", "/login"];
+  // Explicit allowlist: no wildcard, no traversal into unrelated test assets.
+  const allowed = ["", "/", "/index.html", "/audio-audit-v18.html", "/unterrichtszentrale-v23.html", "/redaktion-katalog-v1.json", "/login"];
   return allowed.some(suffix => pathname === ACADEMY_NEW_ROOT + suffix ||
     pathname === ACADEMY_OLD_ROOT + suffix);
 }
@@ -256,5 +255,7 @@ export function academyOwnerAssetPath(pathname) {
     ? pathname.slice(ACADEMY_NEW_ROOT.length) : pathname.slice(ACADEMY_OLD_ROOT.length);
   if (suffix === "" || suffix === "/" || suffix === "/index.html") return ACADEMY_OLD_ROOT + "/index.html";
   if (suffix === "/audio-audit-v18.html") return ACADEMY_OLD_ROOT + "/audio-audit-v18.html";
+  if (suffix === "/unterrichtszentrale-v23.html") return ACADEMY_OLD_ROOT + "/unterrichtszentrale-v23.html";
+  if (suffix === "/redaktion-katalog-v1.json") return ACADEMY_OLD_ROOT + "/redaktion-katalog-v1.json";
   return null;
 }
