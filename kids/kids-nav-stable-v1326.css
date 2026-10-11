@@ -166,3 +166,18 @@ html body .app:has(#view-today.view.active) .shell{
   overflow-anchor:none!important;
   scroll-behavior:auto!important;
 }
+
+/* KIDS_MAIN_TAB_NO_SHIFT_V1327: fade the new content in place.
+   The older runtime animated tab views with translated coordinates;
+   that visually looked like the whole Kids app sliding on every switch. */
+html.kids-nav-tab-switching body .app .shell > .view.active{
+  animation:kidsStableTabFade1327 .14s ease-out both!important;
+  transform:none!important;
+}
+@keyframes kidsStableTabFade1327{
+  from{opacity:.96}
+  to{opacity:1}
+}
+@media(prefers-reduced-motion:reduce){
+  html.kids-nav-tab-switching body .app .shell > .view.active{animation:none!important}
+}
