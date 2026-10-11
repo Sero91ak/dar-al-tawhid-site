@@ -67,6 +67,8 @@ test("The standalone preview pages remain independent from live Kids shell",()=>
  assert.ok(!html.includes("localStorage.setItem"));
  assert.ok(html.includes('href="demo-junge.html"'));
  assert.ok(html.includes('href="demo-maedchen.html"'));
+ assert.ok(html.includes('href="vorschau-v78-interaktiv.html"'));
+ assert.ok(fs.statSync(path.join(base,"vorschau-v78-interaktiv.html")).size>20000);
 });
 
 test("V7.8 offline creator preview has independently usable lesson navigation",()=>{
