@@ -38,6 +38,8 @@ jobs:
         run: |
           node scripts/kids-prophet-release-guard.js
           node --check cloudflare/site-router.js
+          node --check kids/navigation-v1182.js
+          node --check kids/prayer-stage-v1261.js
           node --check kids/story-hub.js
           node --check kids/story-follow-reader.js
           node <<'NODE'
