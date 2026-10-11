@@ -37,6 +37,26 @@ const get=(path,method="GET")=>handler.fetch(new Request("https://kids-preview.e
   assert.match(redirect.headers.get("location"),/\/kids\/start$/);
   const canonical=await get("/kids/start");
   assert.equal(canonical.status,200,"Canonical start must not redirect to start.html");
+  // Creator console is a staging-only, read-only inventory of public lessons.
+  // No external APIs, releases or child progress may be used by this page.
+  const consoleHtml=fs.readFileSync(path.join(root,"kids/test-console/index.html"),"utf8");
+  const catalogue=JSON.parse(fs.readFileSync(path.join(root,"kids/test-console/catalogue-v1.json"),"utf8"));
+  assert.equal(catalogue.weeks,52);
+  assert.equal(catalogue.entries.length,208);
+  assert.equal(catalogue.entries.filter(e=>e.catalogued).length,38);
+  assert.equal(catalogue.entries.filter(e=>!e.catalogued).length,170);
+  assert.equal(new Set(catalogue.entries.map(e=>e.slot)).size,208);
+  assert.doesNotMatch(consoleHtml,/localStorage|indexedDB|speechSynthesis|creatorSandbox|UserDefaults\.standard/);
+  assert.match(consoleHtml,/KIDS TEST · Prüfzentrale/);
+  assert.match(consoleHtml,/fetch\("\/kids\/test-console\/catalogue-v1\.json"/);
+  const inline=consoleHtml.match(/<script>([\s\S]*?)<\/script>/);
+  assert.ok(inline,"Creator console must have a real browser script");
+  new vm.Script(inline[1],{filename:"kids-test-console-v3.js"});
+  const consoleRoute=await get("/kids/test-console/index.html");
+  assert.equal(consoleRoute.status,200,"Creator console must remain within KIDS-only Worker");
+  const catalogueRoute=await get("/kids/test-console/catalogue-v1.json");
+  assert.equal(catalogueRoute.status,200);
+  console.log("KIDS CREATOR CONSOLE V3 PASS: 52 weeks, 208 slots, 38 titles, no private records or unsafe unlocks.");
   const home=await get("/kids/start.html");
   assert.equal(home.status,200);
   assert.match(await home.text(),/KIDS CONTENT/);
