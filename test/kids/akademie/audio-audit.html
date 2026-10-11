@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="theme-color" content="#091d2b">
+<title>Masterstimme · Audio-Prüfung · DĀR AL TAWḤĪD KIDS</title>
+<style>
+:root{color-scheme:dark;--bg:#091d2b;--panel:#102e3b;--panel2:#0d2734;--line:#385260;--ink:#f9f1df;--muted:#c7d2d4;--gold:#edce8b}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Avenir Next",sans-serif;background:var(--bg);color:var(--ink)}
+body{background:radial-gradient(circle at 45% -14%,#285262 0,transparent 52%),var(--bg)}
+main{width:min(100%,1040px);margin:auto;padding:calc(22px + env(safe-area-inset-top)) max(14px,env(safe-area-inset-right)) calc(36px + env(safe-area-inset-bottom)) max(14px,env(safe-area-inset-left))}
+h1,h2,h3{font-family:Georgia,serif}h1{font-size:clamp(26px,4vw,39px);line-height:1.15;color:var(--gold);margin:10px 0}h2{font-size:21px;color:var(--gold)}
+p{line-height:1.48}a{color:var(--gold)}.eyebrow{font-weight:800;letter-spacing:.12em;color:var(--gold);font-size:11px}
+.note{padding:12px 14px;border-left:2px solid var(--gold);background:#113441;border-radius:5px;color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:18px 0}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:12px}.stat b{display:block;font-size:clamp(21px,3vw,30px);color:var(--gold)}.stat span{font-size:12px;color:var(--muted)}
+.filters{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:9px;margin:18px 0}
+label{font-size:12px;color:var(--muted);display:grid;gap:6px}
+input,select,button{font:inherit;color:var(--ink)}input,select{min-width:0;width:100%;background:var(--panel);border:1px solid var(--line);padding:11px;border-radius:10px;min-height:44px}
+button{background:#1b4452;border:1px solid #5b7380;border-radius:10px;padding:9px 12px;min-height:44px;cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+button:hover{border-color:var(--gold)}button:disabled{opacity:.58;cursor:not-allowed}
+.count{color:var(--muted);font-size:12px;padding:7px 0}
+#items{display:grid;gap:9px}.item{padding:13px 15px;background:var(--panel2);border:1px solid var(--line);border-radius:13px}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}.badge{font-size:11px;border:1px solid #617480;border-radius:30px;padding:4px 8px;color:var(--gold)}
+.phrase{font-size:15px;line-height:1.47;overflow-wrap:anywhere;margin:10px 0}
+.contexts{font-size:12px;color:var(--muted);overflow-wrap:anywhere}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.actions button{font-size:13px;min-height:38px}.actions .listen{background:var(--gold);color:#172d37;border-color:var(--gold);font-weight:800}
+#more{display:block;margin:18px auto;width:min(100%,230px)}#resultState{min-height:20px;color:var(--muted)}
+.summary{margin-top:19px;border-top:1px solid var(--line);padding-top:12px;font-size:13px;color:var(--muted)}
+@media(max-width:700px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.filters{grid-template-columns:repeat(2,minmax(0,1fr))}h1{font-size:29px}}
+@media(max-width:380px){.filters{grid-template-columns:minmax(0,1fr)}}
+</style>
+</head>
+<body>
+<main>
+<header>
+<div class="eyebrow">DĀR AL TAWḤĪD KIDS · ERSTELLER-PRÜFUNG V20</div>
+<h1>Masterstimme · Alle Unterrichtsreihen</h1>
+<p><a href="/test/kids/akademie/">← Zur Unterrichtsvorschau</a></p>
+<p>Hier werden die vorhandenen Unterrichts-Sprechtexte aus Akhlāq, Adab, Fiqh und ʿAqīdah geprüft – für alle drei Altersgruppen. Identische Texte werden nur einmal gezählt und ihren Unterrichtsschritten zugeordnet.</p>
+<p class="note">Nur Lesen und Anhören. Es werden keine Kinderprofile oder Lernstände verändert. Keine automatische Stimmenerzeugung, keine ElevenLabs-Credits und keine Veröffentlichung ungeprüfter Aufnahmen. Arabische Qurʾān-Rezitation bleibt getrennt.</p>
+</header>
+<section class="grid" aria-label="Audio-Übersicht">
+<div class="stat"><b id="total">–</b><span>verschiedene Texte</span></div>
+<div class="stat"><b id="approved">–</b><span>freigegebene V4</span></div>
+<div class="stat"><b id="staged">–</b><span>V4 nur zur Hörprüfung</span></div>
+<div class="stat"><b id="missing">–</b><span>V4 noch aufzunehmen</span></div>
+</section>
+<p class="count" id="yearStatus">Jahreslehrplan wird geprüft …</p>
+<section class="filters" aria-label="Audiotexte filtern">
+<label>Suchtext<input id="search" type="search" placeholder="Ṣabr, Qurʾān, Begrüßung …" autocomplete="off"></label>
+<label>Fach<select id="subject"><option value="">Alle Fachbereiche</option><option value="akhlaq">Akhlāq</option><option value="adab">Adab</option><option value="fiqh">Fiqh</option><option value="aqidah">ʿAqīdah</option></select></label>
+<label>Alter<select id="age"><option value="">Alle Altersgruppen</option><option value="4-5">4–5</option><option value="6-8">6–8</option><option value="9-10">9–10</option></select></label>
+<label>Status<select id="status"><option value="">Alle Audios</option><option value="missing">Aufnahme fehlt</option><option value="staged">Staging, Hörprüfung offen</option><option value="approved">Freigegeben</option></select></label>
+</section>
+<p class="count" id="resultCount" role="status" aria-live="polite">Prüfdaten werden geladen …</p>
+<div id="items" aria-label="Sprechtexte"></div>
+<button id="more" type="button" hidden>Weitere Texte anzeigen</button>
+<p id="resultState" role="status" aria-live="polite"></p>
+<footer class="summary">Master: Serhat Abu Malik · ElevenLabs V4 · Profil kids_story. Die Aufnahmen sind nur dann für Kinder zulässig, wenn sie separat geprüft und ausdrücklich freigegeben wurden.</footer>
+</main>
+<script>
+(function(){
+"use strict";
+const $=s=>document.querySelector(s);
+const voiceId="DkU7j9uO4ZEtLD2iRZSH";
+const paths=["/kids/data/academy-voice-plan-v9.json","/kids/data/academy-sidq-voice-plan-v18.json","/kids/data/academy-audio.json","/kids/data/academy-audio-staging-v9.json","/kids/data/academy-year-52weeks-v1.json"];
+const normalize=s=>String(s||"").normalize("NFC").replace(/\s+/g," ").trim();
+const labels={approved:"V4 freigegeben",staged:"V4 · Hörprüfung offen",missing:"V4 · Aufnahme fehlt"};
+let rows=[],shown=0,filtered=[],currentAudio=null;
+function strictV4(e){
+ return !!(e&&e.url&&e.voiceId===voiceId&&e.modelId==="eleven_v4"&&
+  e.voiceSettingsProfile==="kids_story"&&e.voiceProfileId==="serhat-owner-voice-2026"&&
+  e.sourceVoice==="authorized-owner-voice"&&e.sourceSpeaker==="Serhat Abu Malik");
+}
+function validAudioURL(url){
+ const value=String(url||"").split("?")[0];
+ return /^\/kids\/assets\/kids-academy-audio\/[a-zA-Z0-9_-]+\.m4a$/.test(value);
+}
+function setText(selector,value){$(selector).textContent=String(value)}
+function field(tag,className,value){const el=document.createElement(tag);if(className)el.className=className;el.textContent=value;return el}
+function stop(){
+ const active=currentAudio;currentAudio=null;
+ if(active){active.onended=active.onerror=null;try{active.pause();active.removeAttribute("src");active.load()}catch(_){}}
+}
+function play(url,label){
+ if(!validAudioURL(url))return;
+ stop();
+ const audio=new Audio(url);currentAudio=audio;audio.preload="auto";audio.setAttribute("playsinline","");
+ audio.volume=1;audio.muted=false;
+ audio.onended=()=>{if(currentAudio===audio){stop();setText("#resultState","Hörprobe beendet.")}};
+ audio.onerror=()=>{if(currentAudio===audio){stop();setText("#resultState","Aufnahme nicht abrufbar. Bitte Verbindung prüfen.")}};
+ setText("#resultState","Masterstimme wird abgespielt: "+label);
+ try{const promise=audio.play();if(promise&&promise.catch)promise.catch(()=>setText("#resultState","Wiedergabe blockiert – erneut auf Anhören tippen."))}
+ catch(_){setText("#resultState","Wiedergabe auf diesem Gerät nicht möglich.")}
+}
+function buildRow(row){
+ const article=document.createElement("article");article.className="item";
+ const top=field("div","row","");const index=field("strong","",String(row.index)+". "+(row.contexts[0]?.lessonId||"Sprechtext"));const badge=field("span","badge",labels[row.state]);top.append(index,badge);article.append(top);
+ article.append(field("p","phrase",row.text));
+ article.append(field("p","contexts",row.contexts.map(x=>x.lessonId+" · "+x.kind+" · "+(x.age||"alle")).join("  |  ")));
+ const actions=field("div","actions","");
+ const copy=field("button","","Text kopieren");copy.type="button";copy.addEventListener("click",()=>{
+  if(!navigator.clipboard?.writeText){setText("#resultState","Bitte Text markieren und kopieren.");return}
+  navigator.clipboard.writeText(row.text).then(()=>setText("#resultState","Text kopiert. Keine Aufnahme erzeugt."),()=>setText("#resultState","Kopieren hier nicht möglich."));
+ });actions.append(copy);
+ if(row.audio&&validAudioURL(row.audio)){
+  const listen=field("button","listen",row.state==="approved"?"▶ Freigegebene Aufnahme":"▶ Staging-Hörprobe");listen.type="button";listen.addEventListener("click",()=>play(row.audio,row.text));actions.append(listen);
+ }
+ article.append(actions);return article;
+}
+function matches(row){
+ const s=normalize($("#search").value).toLocaleLowerCase("de");
+ if(s&&!((row.text+" "+row.contexts.map(x=>x.lessonId).join(" ")).toLocaleLowerCase("de").includes(s)))return false;
+ if($("#status").value&&row.state!==$("#status").value)return false;
+ const sub=$("#subject").value,age=$("#age").value;
+ return row.contexts.some(c=>(!sub||(c.lessonId==="sidq"?"akhlaq":c.lessonId.split("-")[0])===sub)&&
+  (!age||!c.age||c.age==="all"||c.age===age));
+}
+function append(){
+ const slice=filtered.slice(shown,shown+24),frag=document.createDocumentFragment();
+ for(const item of slice)frag.append(buildRow(item));
+ $("#items").append(frag);shown+=slice.length;$("#more").hidden=shown>=filtered.length;
+}
+function filter(){
+ stop();filtered=rows.filter(matches);shown=0;$("#items").replaceChildren();append();
+ setText("#resultCount",filtered.length+" Texte gefunden · "+shown+" angezeigt.");
+ setText("#resultState",filtered.length?"":"Keine passenden Texte.");
+}
+function combine(plans,publicAudio,stage,year){
+ if(plans.some(p=>p.modelId!=="eleven_v4"||p.voiceProfileId!=="serhat-owner-voice-2026"))throw Error("Unzulässiges Sprecherprofil im Plan");
+ if(!stage.stagingOnly||stage.modelId!=="eleven_v4"||stage.voiceSettingsProfile!=="kids_story")throw Error("Staging-Modellprüfung fehlgeschlagen");
+ const map=new Map();
+ for(const plan of plans){
+  for(const phrase of plan.phrases||[]){
+   const text=normalize(phrase.text);if(!text)continue;
+   if(!map.has(text))map.set(text,{text,contexts:[]});
+   const entry=map.get(text);
+   for(const c of phrase.contexts||[]){
+    if(!entry.contexts.some(old=>JSON.stringify(old)===JSON.stringify(c)))entry.contexts.push(c);
+   }
+  }
+ }
+ let approved=0,staged=0,missing=0,position=0;
+ rows=[...map.values()].map(row=>{
+  const pub=publicAudio.entries?.[row.text],draft=stage.entries?.[row.text];
+  const ok=pub?.approvedForPlayback===true&&strictV4(pub)&&validAudioURL(pub.url);
+  const pending=draft?.approvedForPlayback===false&&strictV4(draft)&&validAudioURL(draft.url);
+  row.state=ok?"approved":pending?"staged":"missing";row.audio=ok?pub.url:pending?draft.url:null;
+  row.index=++position;if(ok)approved++;else if(pending)staged++;else missing++;
+  return row;
+ });
+ setText("#total",rows.length);setText("#approved",approved);setText("#staged",staged);setText("#missing",missing);
+ const goal=year.goals||{};
+ setText("#yearStatus",String(goal.weeks||0)+" Wochen · "+String(goal.newLessonSlots||0)+" neue Unterrichtsplätze · "+
+  String(goal.currentlyInCatalog||0)+" vorhandene Lektionen · "+String(goal.additionalAuthenticallyVerifiedLessonsNeeded||0)+
+  " Lektionen warten auf authentische Quellen, Ausarbeitung und Prüfung.");
+ filter();
+}
+async function boot(){
+ try{
+  const result=await Promise.all(paths.map(async url=>{
+   const response=await fetch(url,{cache:"no-store",credentials:"same-origin"});
+   if(!response.ok)throw Error(url+" HTTP "+response.status);
+   return response.json();
+  }));
+  combine([result[0],result[1]],result[2],result[3],result[4]);
+ }catch(e){setText("#resultCount","Audio-Prüfung konnte nicht geladen werden.");setText("#resultState",e.message||"Unbekannter Fehler");}
+}
+for(const id of ["search","subject","age","status"])$(id==="search"?"#search":"#"+id).addEventListener(id==="search"?"input":"change",()=>{if(rows.length)filter()});
+$("#more").addEventListener("click",()=>{append();setText("#resultCount",filtered.length+" Texte gefunden · "+shown+" angezeigt.")});
+window.addEventListener("pagehide",stop);document.addEventListener("visibilitychange",()=>{if(document.hidden)stop()});
+boot();
+})();
+</script>
+</body>
+</html>
