@@ -6,8 +6,8 @@ import Foundation
 enum KidsAppShell {
 #if KIDS_CREATOR_TEST
     static let isCreatorTest = true
-    private static let canonicalHost = "dar-al-tawhid-test.sero91ak.workers.dev"
-    static let launchURL = URL(string: "https://dar-al-tawhid-test.sero91ak.workers.dev/kids/start.html")!
+    private static let canonicalHost = "dar-al-tawhid-kids-creator.sero91ak.workers.dev"
+    static let launchURL = URL(string: "https://dar-al-tawhid-kids-creator.sero91ak.workers.dev/kids/start.html")!
     static let hosts: Set<String> = [canonicalHost]
 #else
     static let isCreatorTest = false

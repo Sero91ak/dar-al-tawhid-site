@@ -10,7 +10,7 @@ App-Store-Besucher-App. **Noch keine vollständige Creator-Freischaltung.**
 | Build | Debug/Release | CreatorDebug/CreatorRelease |
 | Bundle-ID | de.daraltawhid.kids | de.daraltawhid.kids.creator |
 | Appname | TAWḤĪD KIDS | KIDS TEST |
-| Launch-Origin | https://dar-al-tawhid.de/kids/start | https://dar-al-tawhid-test.sero91ak.workers.dev/kids/start.html |
+| Launch-Origin | https://dar-al-tawhid.de/kids/start | https://dar-al-tawhid-kids-creator.sero91ak.workers.dev/kids/start.html |
 | URL-Scheme | daraltawhidkids:// | daraltawhidkidstest:// |
 | Browser-Appdaten | Eigener WKWebView-Container | Anderer WKWebView-Container |
 | Echte Kinderprofile | Nur hier | Nicht übernommen |
@@ -32,8 +32,7 @@ Die Besucher-App nutzt weiterhin `/kids/start` auf der Live-Domain.
 
 ## Stand der Funktion und Grenzen
 
-- Die Test-App nutzt derzeit dieselbe bekannte KIDS-Web-Oberfläche aus den
-  Static Assets des getrennten *Dar Test Worker*; der Host ist unabhängig.
+- Die Test-App nutzt bereits einen eigenen dedizierten KIDS-only Worker (noch nicht live verifiziert), der nur /kids-Dateien aus dem manuellen `kids-creator-staging`-Deploy ausliefert. Keine Abhängigkeit vom Dar-Test-Worker für Erwachsene.
 - Die **vollständige eigenständige Redaktions-Pipeline** (zuerst im Test ändern,
   kontrollieren, dann explizit freigeben) muss als Folgephase eingerichtet
   werden. Solange dort keine andere Kids-Build-Version ausgeliefert wird,
@@ -64,3 +63,10 @@ Die Besucher-App nutzt weiterhin `/kids/start` auf der Live-Domain.
    Eltern, Audio/Downloads, iPhone, iPad.
 5. Expliziten Freigabeprozess Test → Besucher einbauen und QA auf dem
    echten iPhone durchführen.
+
+## V2: Native Testnavigation
+Die getrennte Xcode-Bauvariante hat einen kleinen goldenen **TEST**-Button.
+Er öffnet die Module Start, Qurʾān, Hörbücher, Duʿāʾ, Eltern und Akademie.
+Diese Shortcuts ändern weder Besucher-Konfiguration noch öffentlich sichtbare
+Unterrichtssperren. Für KIDS-Test-Änderungen gilt ausschließlich der neue
+Staging-Branch, niemals ein direkter Live-Push.

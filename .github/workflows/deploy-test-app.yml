@@ -2,7 +2,18 @@ name: Deploy Dar Test App
 
 on:
   workflow_dispatch:
+    inputs:
+      target:
+        description: "Isoliertes Deployment-Ziel (KIDS nur vom Staging-Branch)"
+        required: true
+        type: choice
+        default: dar-test
+        options:
+          - dar-test
+          - kids-creator
   push:
+    branches:
+      - main
     paths:
       - index.html
       - test/**
@@ -44,6 +55,9 @@ permissions:
 
 jobs:
   deploy-test:
+    # Existing adult Dar Test deployment remains unchanged for every normal push.
+    # Creator dispatch MUST NOT overwrite Dar Test.
+    if: ${{ github.ref == 'refs/heads/main' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.target == 'dar-test')) }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -184,3 +198,59 @@ jobs:
             export SITE_URL="https://dar-al-tawhid.de/test"
           fi
           node scripts/verify-test-app-deploy.js
+
+  deploy-kids-creator:
+    # Explicitly selected developer staging branch. NEVER runs on main or push.
+    # Uses a new workers.dev-only Worker with no production route or domain.
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.target == 'kids-creator' && github.ref == 'refs/heads/kids-creator-staging' }}
+    runs-on: ubuntu-latest
+    concurrency:
+      group: dar-kids-creator-worker-only
+      cancel-in-progress: false
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout separate KIDS Creator staging branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: kids-creator-staging
+      - name: Node 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Dependencies
+        run: npm ci
+      - name: Independent Kids creator preflight
+        run: |
+          set -euo pipefail
+          test "$(git branch --show-current)" = "kids-creator-staging"
+          node --check kids/creator-test/worker.js
+          node kids/tools/test-creator-worker-v2.cjs
+          node kids/tools/test-native-creator-v2.cjs
+          node scripts/test-app-health-check.js
+          echo "Staging: no production route, no visitor commit, no App Store upload"
+      - name: Publish KIDS Creator Worker only
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          npx wrangler deploy -c kids/creator-test/wrangler.toml
+      - name: Verify isolated KIDS web UI (native test user agent)
+        run: |
+          set -euo pipefail
+          BASE="https://dar-al-tawhid-kids-creator.sero91ak.workers.dev"
+          for PAGE in /kids/start.html /kids/akademie/index.html /kids/version.json; do
+            URL="$BASE$PAGE"
+            CODE="$(curl -sS -L -o /tmp/kids-creator-body -w '%{http_code}' \
+              -A 'DarAlTawhidKids-iOS CreatorTest' -H 'Cache-Control: no-cache' "$URL")"
+            if [ "$CODE" != 200 ] || [ ! -s /tmp/kids-creator-body ]; then
+              echo "::error::Creator Worker verification failed for $PAGE (HTTP $CODE)"
+              exit 1
+            fi
+            echo "Kids Creator test route OK: $PAGE"
+          done
+          CODE="$(curl -sS -o /tmp/kids-creator-denied -w '%{http_code}' "$BASE/test/academy/login")"
+          test "$CODE" = "404" || { echo "::error::Adult/test route leaked through KIDS Worker ($CODE)"; exit 1; }
+          echo "Only KIDS workers.dev routes tested; adult/test and visitor routes not changed"
