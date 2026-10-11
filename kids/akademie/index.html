@@ -3618,7 +3618,7 @@ body .academy-header.kids-detail-appbar > .hero-profile-chip .hero-profile-copy 
   },true);
 })();
 </script></head>
-<body data-profile="boy" data-preview-release="V16.0-voicepreview-20261010" data-preview-deploy="v11-progressive-school-lessons"><main class="wrap">
+<body data-profile="boy" data-preview-release="V17.0-voice-sandbox-20261011" data-preview-deploy="v11-progressive-school-lessons"><main class="wrap">
 
 <header class="academy-header kids-detail-appbar" aria-label="Navigationsleiste Lernakademie">
  <button class="academy-nav-back" id="academyNavBack" type="button" aria-label="Zurück"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/><path d="M9 12h11"/></svg></button>
@@ -3631,6 +3631,10 @@ body .academy-header.kids-detail-appbar > .hero-profile-chip .hero-profile-copy 
  <div class="academy-brand" hidden><div class="brand">DĀR AL TAWḤĪD · KIDS</div></div>
  <div class="academy-header-actions" hidden><button class="preview-refresh" id="previewRefresh" type="button" aria-label="Vorschau aktualisieren">Aktualisieren</button><div class="academy-profile" id="academyProfile" hidden><img id="academyAvatar" alt="" src="/kids/assets/profile-avatars/boy-kufi-v1235.svg"><span class="academy-profile-names"><strong id="profileLabel">Kinderprofil</strong><small id="profileRole"></small><small id="academyAgeLabel"></small></span></div></div>
 </header><p id="academyAgeWarning" class="academy-age-warning" role="alert" hidden>Bitte wähle im Kinderprofil eine passende Altersstufe aus.</p>
+<aside id="academyCreatorVoiceBanner" hidden aria-label="Isolierter Ersteller-Hörtest" style="margin:8px 0;padding:9px 12px;border:1px solid rgba(160,205,198,.48);border-radius:12px;color:#e6f7f4;background:#143942;font-size:13px;line-height:1.5">
+<strong>🎧 Ersteller-Hörtest</strong> · eigenes Testprofil, echte Kinder-Lernstände bleiben unverändert.
+<a href="/kids/akademie/stimmen-test-v14.html?v=serhat-owner-voice-v17" style="color:#f5d597;margin-left:7px;text-decoration:underline">Alle vier V4-Aufnahmen direkt anhören ↗</a>
+</aside>
 <section class="academy-home" id="academyHome">
  <section class="overview-hero" aria-label="Deine islamische Lernakademie">
   <img id="academyHeroImage" src="/desktop-preview/assets/kids-academy-hero-boys-v1.jpg" alt="" decoding="async" fetchpriority="high" onerror="this.onerror=null;this.classList.add('is-ready');this.src='/desktop-preview/assets/kids-academy-hero-v1.jpg'">
@@ -3858,12 +3862,19 @@ function getProfile(){
  const previewParam=params.get("previewProfil");
  const demoGender=previewParam==="maedchen"?"girl":previewParam==="junge"?"boy":null;
  const previewAge=ageKey(params.get("previewAlter"));
+ // Only the explicit three-part owner QA URL enters a fully isolated learning
+ // identity. Saved child profiles are READ ONLY and remain selected normally.
+ const creatorVoiceSandbox=params.get("creatorSandbox")==="1"&&params.get("voicePilot")==="1"&&
+   demoGender==="girl"&&previewAge==="4-5";
+ if(creatorVoiceSandbox)child=null;
  const profileAge=child?ageKey(child.age):null;
- // Echte Profile werden niemals nach den Demo-Parametern eingeordnet.
+ // Real accounts ignore ordinary preview params. QA uses a separate id.
  const selectedAge=child?profileAge:(previewAge||ageKey(storedAge)||"6-8");
  const g=child?.gender==="girl"?"girl":child?.gender==="boy"?"boy":demoGender||(guest==="girl"?"girl":"boy");
- const previewId=demoGender?"demo-"+demoGender:guest?"guest-"+g:"demo-boy";
- return {child,g,age:selectedAge,id:child?.id?String(child.id):previewId,demo:!child,ageMissing:!!child&&!profileAge};
+ const previewId=creatorVoiceSandbox?"owner-voice-test-v17-girl-4-5":
+   demoGender?"demo-"+demoGender:guest?"guest-"+g:"demo-boy";
+ return {child,g,age:selectedAge,id:child?.id?String(child.id):previewId,
+   demo:!child,creatorVoiceSandbox,ageMissing:!!child&&!profileAge};
 }
 function stopMicTracks(){
  if(micStream){micStream.getTracks().forEach(t=>{try{t.stop()}catch(_){}});micStream=null}
@@ -4093,6 +4104,8 @@ function syncProfile(force=false){
  document.body.dataset.profile=gender;
  // Only anonymous demo profiles may hear unapproved owner-voice pilot recordings.
  document.body.dataset.academyChildMode=p.demo?"demo":"child";
+ const creatorBanner=$("#academyCreatorVoiceBanner");
+ if(creatorBanner)creatorBanner.hidden=!p.creatorVoiceSandbox;
  $("#profileLabel").textContent=profileName||(gender==="girl"?"Mädchenprofil":"Jungenprofil");
  $("#profileRole").textContent=gender==="girl"?"Schwester"+(profileName?"":" · Vorschau"):"Bruder"+(profileName?"":" · Vorschau");
  $("#academyAgeLabel").textContent=p.ageMissing?"Altersstufe fehlt":(p.demo?"Demo · ":"")+humanAge(age)+" Jahre";
