@@ -72,6 +72,32 @@ jobs:
                       if st.get("conclusion")=="failure": print("FAILED STEP:",j.get("name"),st.get("name"))
           except Exception as exc: print("DIAGNOSTIC ERROR",type(exc).__name__,str(exc))
           PY
+      - name: Verify fixed source library on production (read-only)
+        if: always()
+        shell: bash
+        run: |
+          set +e
+          echo "Expect X-DAR-Q-Route: direct-static-asset-v2 and 40 numbered links."
+          for n in 1 2 3 4 5 6; do
+            header="$(mktemp)"; page="$(mktemp)"
+            status="$(curl --max-time 20 -sS -D "$header" -o "$page" -w '%{http_code}' "https://dar-al-tawhid.de/quellen/?verify=c5f77ee5-$n")"
+            route="$(grep -i '^x-dar-q-route:' "$header" | tr -d '\r' | tail -1)"
+            echo "LIVE Q CHECK $n HTTP=$status route=$route size=$(wc -c < "$page")"
+            if [ "$status" = "200" ] && grep -q 'qlSourceSnapshot' "$page" && echo "$route" | grep -qi 'direct-static-asset-v2'; then
+              echo "LIVE_Q_LIBRARY_OK"
+              for direct in /quellen/shortlinks.json /q/37/ /q/40/; do
+                code="$(curl --max-time 20 -sS -o "$page" -w '%{http_code}' "https://dar-al-tawhid.de${direct}?verify=c5f77ee5-$n")"
+                echo "LIVE_DIRECT $direct HTTP=$code"
+                [ "$code" = "200" ] || exit 1
+              done
+              rm "$header" "$page"
+              exit 0
+            fi
+            rm "$header" "$page"
+            sleep 9
+          done
+          echo "LIVE_Q_LIBRARY_STILL_NOT_FIXED"
+          exit 1
       - name: Validate Q source-library synchronization and all source pages
         shell: bash
         run: |
