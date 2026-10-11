@@ -32,6 +32,13 @@ button.active{background:#e5c789;color:#132431;border-color:var(--gold);font-wei
 .missing{color:#eedbaa;font-size:12px;margin:8px 0;line-height:1.5}
 .choices{display:grid;gap:9px}.choices button{text-align:left}.answer{padding:9px 0;color:var(--positive)}
 .controls{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.word-guide{margin-top:18px;padding:13px 0 3px;border-top:1px solid var(--border)}
+.word-guide h3{font-size:17px;margin:0 0 9px}.word-chips{display:flex;flex-wrap:wrap;gap:7px}
+.word-chips button{min-height:41px;border-color:#927c4e;font-weight:750;font-size:13px}
+.word-detail{margin:12px 0 6px;padding:14px;background:#133643;border:1px solid var(--border);border-radius:13px}
+.word-detail p{line-height:1.6;margin:6px 0}.word-detail strong{color:var(--gold)}.word-detail .word-arabic{font-size:27px;direction:rtl;text-align:right}
+.word-detail .voice-pending{font-size:12px;color:var(--muted)}
+@media(max-width:700px){.word-chips button{font-size:14px;max-width:100%}.word-detail{padding:12px}}
 footer{border-top:1px solid var(--border);margin-top:30px;padding-top:16px;color:var(--muted);font-size:12px}
 @media(max-width:700px){.split{grid-template-columns:minmax(0,1fr)}#topics{max-height:235px}.panel{padding:13px}.toolbar{gap:10px}}
 </style>
@@ -67,11 +74,13 @@ footer{border-top:1px solid var(--border);margin-top:30px;padding-top:16px;color
 <script src="/kids/akademie/curriculum-v2.js?v=20261010-09"></script>
 <script src="/kids/akademie/curriculum-v22.js?v=20261011-01"></script>
 <script src="/kids/creator-test/lessons-039-044.js?v=20261011-v23-1"></script>
+<script src="/kids/creator-test/term-glossary-v1.js?v=20261011-glossary-1"></script>
 <script>
 (function(){
 "use strict";
 const $=s=>document.querySelector(s),cat={akhlaq:"Akhlāq",adab:"Adab",fiqh:"Fiqh",aqidah:"ʿAqīdah"};
 const data=window.DARKidsAcademyCurriculum||{};
+const glossary=window.DARKidsAcademyTermsV1||null;
 const extra={id:"sidq",subject:"akhlaq",topic:"Wahrhaftigkeit",title:"Ṣidq – Wahrhaftigkeit",
  lead:"Die Wahrheit sagen – auch wenn es manchmal Mut kostet.",
  goal:"Ich lerne ehrlich zu sprechen und einen Fehler zuzugeben.",
@@ -131,6 +140,34 @@ function quiz(l){
   missing("diese Frage und ihre Antwortmöglichkeiten");
  });
 }
+function renderWordGuide(l){
+ if(!glossary||!l||[3].includes(step))return;
+ const allText=[l.title,l.topic,l.lead,l.goal,l.ageText?.[age.value]?.intro,
+  ...(l.ageText?.[age.value]?.lines||l.lines||[]),
+  l.ageText?.[age.value]?.evidence,l.quran?.label,l.hadith?.text].filter(Boolean).join(" ");
+ const terms=glossary.find(allText,10);if(!terms.length)return;
+ const box=add("section",undefined,"word-guide");box.setAttribute("aria-label","Arabische Begriffe einfach erklärt");
+ add("h3","Neue Wörter einfach erklärt",undefined,box);
+ add("p","Tippe auf ein Wort: Du siehst die Bedeutung für dein Alter. Nur echte, freigegebene Master-Aufnahmen dürfen vorgespielt werden.","hint",box);
+ const row=add("div",undefined,"word-chips",box),detail=add("div",undefined,"word-detail",box);detail.hidden=true;
+ terms.forEach(term=>{
+  const b=add("button",term.term+" · ?","",row);b.type="button";b.setAttribute("aria-expanded","false");
+  b.onclick=()=>{
+   stop();detail.replaceChildren();detail.hidden=false;
+   [...row.children].forEach(k=>{k.classList.toggle("active",k===b);k.setAttribute("aria-expanded",String(k===b))});
+   add("strong",term.term,"",detail);add("p",term.arabic,"word-arabic",detail);
+   add("p",term.ageMeaning[age.value]||term.ageMeaning["4-5"],"",detail);
+   const src=term.audioByAge?.[age.value];
+   if(src&&/^\\/kids\\/assets\\/kids-academy-audio\\/[a-zA-Z0-9_\\-]+\\.(?:m4a|mp3)$/.test(src)){
+    const play=add("button","▶ Bedeutung mit Serhats Masterstimme hören","",detail);play.type="button";
+    play.onclick=()=>{stop();const p=new Audio(src);player=p;p.playsInline=true;p.volume=1;p.playbackRate=1;
+      p.onended=()=>{if(player===p)player=null};p.onerror=()=>{if(player===p)stop()};
+      try{let promise=p.play();if(promise?.catch)promise.catch(()=>{if(player===p)stop()})}catch(_){stop()}
+    };
+   }else add("p","Master-Audio für diese Worterklärung noch nicht aufgenommen. Der Erklärtext ist vollständig sichtbar.","voice-pending",detail);
+  };
+ });
+}
 function renderStage(){
  stop();stage.replaceChildren();const l=selected(),sd=ownerSidq();
  const names=["Hallo","Zuhören","Qurʾān & Sunnah","Mitdenken","Merken"];
@@ -160,6 +197,7 @@ function renderStage(){
   missing("die deutschen Quellenerklärungen");
  }else if(step===3){add("h3","Fragen überprüfen");quiz(l)}
  else{add("h3","Das merke ich mir");add("p",l.goal||l.lead||"","quoted");if(l.sample)add("p",l.sample);if(l.ageText?.[age.value]?.lines)add("p",l.ageText[age.value].lines[3],"spoken");if(l.ageText?.[age.value]?.activity){add("h3","Meine praktische Übung");add("p",l.ageText[age.value].activity,"spoken")}missing("die Zusammenfassung")}
+ renderWordGuide(l);
  $("#previous").disabled=step===0;$("#next").disabled=step===4;
  $("#voiceStatus").textContent=sd?"Vier unabhängige Originalclips stehen bei Hallo und Zuhören bereit. Der übrige Unterricht benötigt weitere Aufnahmen.":"Für diese Kombination sind noch keine originalgetreu zugeordneten V4-Klassenaufnahmen freigegeben.";
 }
