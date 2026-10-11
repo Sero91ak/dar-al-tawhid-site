@@ -3617,9 +3617,24 @@ body .academy-header.kids-detail-appbar > .hero-profile-chip .hero-profile-copy 
     }
   },true);
 })();
-</script></head>
+</script><style id="kids-academy-child-qa-separation">
+.master-voice-sample-note,[data-academy-pilot],.master-voice-test,
+#academyCreatorVoiceBanner,#academyPilotStatus,#audioDiagnostics{display:none!important}
+body .lesson-source-block .source{font-size:12px}
+</style>
+</head>
 <body data-profile="boy" data-preview-release="V17.0-voice-sandbox-20261011" data-preview-deploy="v11-progressive-school-lessons"><main class="wrap">
 
+<aside id="kidsCreatorAcademyBar" hidden style="position:sticky;top:env(safe-area-inset-top,0px);z-index:3000;background:#092b3cf5;border:1px solid #ad9471;border-radius:14px;padding:8px;margin:8px 0;box-shadow:0 8px 23px #0005;max-width:100%">
+  <div style="display:flex;align-items:center;gap:6px;justify-content:space-between;margin-bottom:7px">
+    <strong style="font-size:13px;color:#f6dc9e">KIDS TEST · 38 Unterrichte frei</strong><a href="/kids/test-console/" style="color:#e8d197;font-size:12px;text-decoration:none;padding:6px">← Übersicht</a>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;align-items:end">
+    <label style="font-size:11px">Alter<select id="creatorAcademyAge" aria-label="Test-Altersgruppe" style="width:100%;min-height:38px;border-radius:8px;background:#143a4a;color:white;border:1px solid #9b9e9c;padding:5px"><option value="4-5">4–5 Jahre</option><option value="6-8">6–8 Jahre</option><option value="9-10">9–10 Jahre</option></select></label>
+    <label style="font-size:11px">Profil<select id="creatorAcademyGender" aria-label="Testprofil" style="width:100%;min-height:38px;border-radius:8px;background:#143a4a;color:white;border:1px solid #9b9e9c;padding:5px"><option value="girl">Mädchen</option><option value="boy">Junge</option></select></label>
+    <label style="grid-column:1 / -1;font-size:11px">Unterricht direkt öffnen<select id="creatorAcademyLesson" aria-label="Alle vorhandenen Unterrichtslektionen" style="width:100%;min-height:42px;border-radius:8px;background:#143a4a;color:white;border:1px solid #9b9e9c;padding:6px"><option value="">38 vorhandene Lektionen auswählen …</option></select></label>
+  </div>
+</aside>
 <header class="academy-header kids-detail-appbar" aria-label="Navigationsleiste Lernakademie">
  <button class="academy-nav-back" id="academyNavBack" type="button" aria-label="Zurück"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/><path d="M9 12h11"/></svg></button>
  <div class="academy-nav-copy"><strong class="academy-nav-title" id="academyNavTitle">Lernakademie</strong><small class="academy-nav-subtitle" id="academyNavSubtitle">DĀR AL TAWḤĪD · KIDS</small></div>
@@ -4805,7 +4820,33 @@ document.addEventListener("visibilitychange",()=>{
  else{syncProfile();renderHome();if(!$("#academySubject").hidden)openCategory($("#academySubject").dataset.subject);}
 });
 window.addEventListener("pagehide",stopAll);
-initFocusControls();syncProfile(true);hideLesson();updateAcademyAppbar();
+function initializeCreatorAcademy(){
+ if(!KIDS_CREATOR_PREVIEW)return;
+ const bar=$("#kidsCreatorAcademyBar"),ageSelect=$("#creatorAcademyAge"),
+   genderSelect=$("#creatorAcademyGender"),lessons=$("#creatorAcademyLesson");
+ bar.hidden=false;
+ const profile=getProfile();ageSelect.value=profile.age;genderSelect.value=profile.g;
+ const titles=lessonIds().slice().sort((x,y)=>lessonTitle(x).localeCompare(lessonTitle(y),"de"));
+ for(const lessonId of titles){
+   const option=document.createElement("option");option.value=lessonId;
+   const title=SUBJECTS[lessonId==="sidq"?"akhlaq":CURRICULUM[lessonId]?.subject]?.title||"Unterricht";
+   option.textContent=title+" · "+lessonTitle(lessonId);
+   lessons.appendChild(option);
+ }
+ const refresh=()=>{
+   try{
+     localStorage.setItem("kids.creator.previewAge",ageSelect.value);
+     localStorage.setItem("kids.creator.previewGender",genderSelect.value);
+   }catch(_){}
+   syncProfile(true);home(); // Never touch real visitor profiles or progression.
+ };
+ ageSelect.addEventListener("change",refresh);
+ genderSelect.addEventListener("change",refresh);
+ lessons.addEventListener("change",()=>{
+   if(lessons.value)begin(lessons.value);
+ });
+}
+initFocusControls();syncProfile(true);hideLesson();updateAcademyAppbar();initializeCreatorAcademy();
 let __schoolLastDate=academyDay().day;
 setInterval(()=>{
  if(document.hidden)return;
