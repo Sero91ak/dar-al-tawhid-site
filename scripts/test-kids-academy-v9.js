@@ -123,6 +123,14 @@ assert.ok(academyHtml.includes('function scrollAcademyViewTop(){'));
 assert.equal(academyHtml.split('updateAcademyAppbar();scrollAcademyViewTop()').length-1,3);
 // Existing focus lesson keeps its own stageSurface-only scrolling.
 assert.ok(academyHtml.includes('body[data-academy-view="lesson"] #lessonMain #stageSurface'));
+// Full-bleed hero regression: the scrollport must not clip 100vw imagery.
+assert.ok(academyHtml.includes("V7.6.3 · Full-bleed academy covers"));
+assert.ok(academyHtml.includes("width:100vw!important;min-width:100vw!important;max-width:100vw!important;"));
+assert.ok(academyHtml.includes("margin-left:calc(50% - 50vw)!important;"));
+assert.ok(academyHtml.includes("--academy-scroll-inset-left:max(12px,env(safe-area-inset-left,0px))"));
+assert.ok(academyHtml.includes("padding-left:max(var(--academy-scroll-inset-left),calc((100vw - 980px)/2))!important;"));
+assert.ok(academyHtml.includes('body[data-profile="girl"] .academy-home > .overview-hero::after'));
+assert.ok(academyHtml.includes("body .academy-home > .overview-hero::before"));
 assert.ok(academyHtml.includes("isAcademyStoryMaster"));
 assert.ok(academyHtml.includes('entry.modelId==="eleven_v4"'));
 assert.ok(academyHtml.includes('setTimeout(resolve,9000)'));
