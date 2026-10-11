@@ -8,6 +8,11 @@ on:
       - 'scripts/test-kids-academy-creator-v17.js'
       - 'desktop-preview/kids-akademie-unterricht.html'
       - 'kids/data/academy-voice-plan-v9.json'
+      - 'kids/data/academy-sidq-voice-plan-v18.json'
+      - 'kids/data/academy-audio.json'
+      - 'kids/data/academy-audio-staging-v9*.json'
+      - 'kids/tools/audit-academy-voice-coverage-v18.js'
+      - 'scripts/test-kids-academy-audio-queue-v18.js'
       - 'scripts/test-kids-academy-v9.js'
       - 'scripts/test-kids-academy-school-v11.js'
       - 'scripts/test-kids-academy-direct-voice-v13.js'
@@ -20,6 +25,11 @@ on:
       - 'scripts/test-kids-academy-creator-v17.js'
       - 'desktop-preview/kids-akademie-unterricht.html'
       - 'kids/data/academy-voice-plan-v9.json'
+      - 'kids/data/academy-sidq-voice-plan-v18.json'
+      - 'kids/data/academy-audio.json'
+      - 'kids/data/academy-audio-staging-v9*.json'
+      - 'kids/tools/audit-academy-voice-coverage-v18.js'
+      - 'scripts/test-kids-academy-audio-queue-v18.js'
       - 'scripts/test-kids-academy-v9.js'
       - 'scripts/test-kids-academy-school-v11.js'
       - 'scripts/test-kids-academy-direct-voice-v13.js'
@@ -42,6 +52,10 @@ jobs:
         run: node scripts/test-kids-academy-direct-voice-v13.js
       - name: "Verify protected creator preview: full 34 topics and no real child state"
         run: node scripts/test-kids-academy-creator-v17.js
+      - name: Verify exact Serhat V4 Academy audio needs without credits
+        run: |
+          node scripts/test-kids-academy-audio-queue-v18.js
+          node kids/tools/audit-academy-voice-coverage-v18.js
       - name: JavaScript syntax guard
         run: |
           node --check kids/akademie/curriculum-v1.js
