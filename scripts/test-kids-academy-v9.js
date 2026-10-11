@@ -132,3 +132,6 @@ assert.equal(allSlots.filter(x=>x.mode==="new"&&x.lessonId).length,34);
 assert.equal(allSlots.filter(x=>x.mode==="new"&&!x.lessonId).length,174);
 assert.ok(allSlots.filter(x=>x.mode==="new"&&!x.lessonId).every(x=>x.status==="awaiting-authentic-source-and-content-review"));
 console.log("KIDS ACADEMY V9.1 VERIFIED: 34 catalog lessons, 208 yearly new-lesson slots, 174 gated pending sources, weekly 4/2/1, 454 voice texts.");
+
+// Creator voice preview must never overwrite or impersonate a real child account.
+require("./test-kids-academy-creator-voice-sandbox-v17.js");
