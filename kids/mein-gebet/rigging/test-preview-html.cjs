@@ -6,7 +6,7 @@ const fs=require("node:fs");
 const path=require("node:path");
 const vm=require("node:vm");
 const base=path.resolve(__dirname,"..");
-const pages=["vorschau.html","demo-junge.html","demo-maedchen.html","vorschau-v78-interaktiv.html","vorschau-v79-3d-labor.html","vorschau-v80-salam-fix.html","vorschau-v81-betendenperspektive.html","vorschau-v82-original-check.html"];
+const pages=["vorschau.html","demo-junge.html","demo-maedchen.html","vorschau-v78-interaktiv.html","vorschau-v79-3d-labor.html","vorschau-v80-salam-fix.html","vorschau-v81-betendenperspektive.html","vorschau-v82-original-check.html","vorschau-v83-originalidentitaet.html"];
 const read=n=>fs.readFileSync(path.join(base,n),"utf8");
 
 for(const file of pages){
@@ -179,4 +179,19 @@ test("V8.2 original recovery accepts ONLY frozen V7.7 SHA256 GLB and PNG",()=>{
  assert.match(html,/originalIdentityApproved:false/);
  assert.match(html,/Kein Live-Push|kein Live-Push/);
  assert.doesNotMatch(html, /\bfetch\(|XMLHttpRequest|sendBeacon|serviceWorker|localStorage|sessionStorage|<script[^>]+src|<iframe|<form|rel="manifest"/i);
+});
+
+test("V8.3 original identity comparator is viewable and never auto-approves a GLB",()=>{
+ const html=read("vorschau-v83-originalidentitaet.html");
+ for(const id of ["boy","girl","original","candidate","referenceFallback","sourceFile","renderFile","specs","angles","downloadReport"])
+  assert.ok(html.includes('id="'+id+'"'),"missing identity-preview element "+id);
+ for(const name of ["figur-junge-original.png","figur-maedchen-original.png"])
+  assert.ok(html.includes(name),name+" original image missing");
+ assert.match(html,/original3DIdenticalApproved:false/);
+ assert.match(html,/poseReviewApproved:false/);
+ assert.match(html,/productionApproved:false/);
+ assert.match(html,/0 \/ 2/);
+ assert.match(html,/0 \/ 5/);
+ assert.match(html,/Nur internes Entwicklungslabor/);
+ assert.doesNotMatch(html, /<script[^>]+src|<iframe|serviceWorker|indexedDB|localStorage|sessionStorage|\bfetch\(|XMLHttpRequest|sendBeacon/i);
 });
