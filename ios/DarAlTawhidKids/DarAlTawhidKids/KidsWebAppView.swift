@@ -18,12 +18,17 @@ struct KidsWebAppView: UIViewRepresentable {
         configuration.userContentController.add(context.coordinator, name: "darKidsNowPlaying")
         configuration.userContentController.add(context.coordinator, name: "darKidsScreenAwake")
 
+#if KIDS_CREATOR_TEST
+        let officialMarker = ""
+#else
+        let officialMarker = "window.DAR_OFFICIAL_IOS_APP=true;"
+#endif
         let bridge = """
         (function(){
           try{
             window.DAR_KIDS_IOS_APP=true;
             window.DAR_IOS_NATIVE_APP=true;
-            window.DAR_OFFICIAL_IOS_APP=true;
+            \(officialMarker)
             window.DAR_KIDS_NATIVE_NOW_PLAYING=true;
             var root=document.documentElement;
             if(root){
