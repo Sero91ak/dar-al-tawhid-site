@@ -43,7 +43,7 @@ button{cursor:pointer}button:hover,a:hover{filter:brightness(1.14)}button:focus-
 <div class="kidstest-main-choices" aria-label="KIDS TEST Hauptauswahl">
  <a href="/kids/start" class="kidstest-main-choice"><span aria-hidden="true">📱</span><strong>Kinder-App ansehen</strong><small>Start · Qurʾān · Hörbücher · Duʿāʾ · Eltern</small></a>
  <a href="/kids/akademie/" class="kidstest-main-choice"><span aria-hidden="true">📚</span><strong>38 Unterrichte öffnen</strong><small>Alle vorhandenen Lektionen · Altersgruppen testen</small></a>
- <button type="button" class="kidstest-main-choice" id="openKidsEditor"><span aria-hidden="true">✏️</span><strong>Unterricht bearbeiten</strong><small>Entwürfe & Änderungen vorbereiten</small></button>
+ <button type="button" class="kidstest-main-choice" id="openKidsEditor"><span aria-hidden="true">✏️</span><strong>Unterricht bearbeiten</strong><small>Vorhandenen Unterricht direkt in der App bearbeiten</small></button>
 </div>
 <p class="kidstest-mini-note">Nur diese drei Schritte brauchst du: <b>öffnen → testen → bearbeiten</b>. Kein Live-Push.</p>
 <details id="kidsAdvancedEditor" class="kidstest-editor-details"><summary>Meine Entwürfe & Test-Einstellungen anzeigen</summary><section id="studio" class="studio-shell" aria-label="KIDS TEST lokaler Arbeitsbereich">
@@ -139,9 +139,7 @@ button{cursor:pointer}button:hover,a:hover{filter:brightness(1.14)}button:focus-
 </section>
 <script>
 document.getElementById("openKidsEditor").addEventListener("click",()=>{
- const details=document.getElementById("kidsAdvancedEditor");
- details.open=true;
- details.scrollIntoView({behavior:"smooth",block:"start"});
+ window.location.assign("/kids/akademie/?editor=1");
 });
 </script>
 <footer class="foot">KIDS TEST · eigenständiger Worker und lokale App-Daten. Jahresplan: 52 × 7 Tage = 364 Tage, anschließend beginnt der Plan erneut. Kein erfundenes Veröffentlichungsdatum, keine ElevenLabs-Kosten, keine Veränderung von Kinderprofilen.</footer></main>
