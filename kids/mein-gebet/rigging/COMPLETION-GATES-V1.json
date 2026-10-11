@@ -37,7 +37,10 @@
         "looksLikeOriginalBoy": false,
         "approved": false,
         "report": "rigging/V4-RECOVERY-FINDINGS.md"
-      }
+      },
+      "multiviewReferencesRecoveredInCurrentChat": true,
+      "referencesPersistentRepoBinaryCopy": false,
+      "multiviewReferenceManifest": "rigging/REFERENCE-RECOVERY-CORRECTION-20261011.md"
     },
     "girl": {
       "source": "kids/mein-gebet/assets/figur-maedchen-original.png",
@@ -53,7 +56,10 @@
       },
       "sourceImageDecodedInConnectedRepository": true,
       "sourceImageVisualTraitsInspected": true,
-      "glbAppearanceComparedToSource": false
+      "glbAppearanceComparedToSource": false,
+      "multiviewReferencesRecoveredInCurrentChat": true,
+      "referencesPersistentRepoBinaryCopy": false,
+      "multiviewReferenceManifest": "rigging/REFERENCE-RECOVERY-CORRECTION-20261011.md"
     }
   },
   "previewIsNotReleaseEvidence": true,
@@ -74,7 +80,7 @@
       "criteria": [
         "Unveränderte Originale für Jungen- und Mädchenidentität sowie referenzierte Ansichten prüfen",
         "V7.7-GLB und Original-Turnaround als lesbare Bytes mit SHA-256 prüfen",
-        "Für Mädchen fehlende Seiten- und Rückansichten dokumentieren und Originaltreue ermöglichen"
+        "Die vom Nutzer bereitgestellten fünf Mädchen- und fünf Jungenansichten prüfen, im persistenten Referenzarchiv sichern und mit realen GLB-Rendern vergleichen"
       ],
       "evidenceTypes": [
         "boy_source_visual",
