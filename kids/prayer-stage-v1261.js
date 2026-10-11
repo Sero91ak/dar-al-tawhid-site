@@ -335,9 +335,24 @@ dayBack.addEventListener("click",closeDay);
 dayPage.querySelector("#kidsSalahDayLocation").addEventListener("click",()=>{
  closeDay();openSettings();
 });
+/* Returning from full-screen prayer surfaces must not scroll Today's
+   shell to reveal the focused source button (WebKit scroll-into-view).
+   Preserve keyboard focus without moving the first-screen geometry. */
+function restoreHomeFocusWithoutScroll(target){
+ try{target?.focus({preventScroll:true})}catch(_){try{target?.focus()}catch(__){}}
+ if(HOME.classList.contains("active")){
+   try{
+     if(typeof window.DARKidsNavigation?.resetMainTop==="function")window.DARKidsNavigation.resetMainTop();
+     else{
+       const homeScroller=document.querySelector(".shell");
+       if(homeScroller)homeScroller.scrollTop=0;
+     }
+   }catch(_){}
+ }
+}
 function closeDay(){
  dayPage.hidden=true;document.body.classList.remove("kids-salah-day-open");
- $("#kidsSalahOpenDay").focus();
+ restoreHomeFocusWithoutScroll($("#kidsSalahOpenDay"));
 }
 document.addEventListener("keydown",e=>{
  if(e.key==="Escape"&&!dayPage.hidden&&overlay.hidden)closeDay();
@@ -422,7 +437,7 @@ function openSettings(){
  angle.value=String(place?.angle||12);asr.value=String(place?.asr||1);
  overlay.querySelector("#kidsSalahClose").focus();
 }
-function closeSettings(){overlay.hidden=true;$("#kidsSalahLocation").focus();}
+function closeSettings(){overlay.hidden=true;restoreHomeFocusWithoutScroll($("#kidsSalahLocation"));}
 overlay.querySelector("#kidsSalahSaveMethod").addEventListener("click",()=>{
  if(!place){err.textContent="Wähle bitte zuerst deinen Gebetsort.";return;}
  setPlace({...place,angle:Number(angle.value),asr:Number(asr.value)});closeSettings();
