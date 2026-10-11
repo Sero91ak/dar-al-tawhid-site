@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="theme-color" content="#071c2b">
+<title>KIDS · Unterrichtsredaktion · 52-Wochen-Plan</title>
+<style>
+:root{color-scheme:dark;--bg:#071c2b;--navy:#0d2c3b;--card:#102f40;--card2:#092435;--border:#426274;--gold:#efd59c;--text:#f8f0dd;--muted:#c3d5da;--accent:#a8e1d0}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 30% -7%,#205467 0,transparent 50%),var(--bg);color:var(--text);font:15px/1.52 -apple-system,BlinkMacSystemFont,"Avenir Next",Arial,sans-serif}
+a{color:var(--gold);text-underline-offset:3px}main{max-width:1250px;margin:auto;padding:calc(20px + env(safe-area-inset-top)) max(15px,env(safe-area-inset-right)) calc(36px + env(safe-area-inset-bottom)) max(15px,env(safe-area-inset-left))}
+.eyebrow{font-size:11px;letter-spacing:.18em;font-weight:850;color:var(--gold)}h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:500;line-height:1.2}h1{font-size:clamp(31px,5vw,53px);color:var(--gold);margin:10px 0}h2{font-size:clamp(23px,3vw,31px);color:var(--gold);margin:0 0 10px}h3{font-size:19px;margin:0 0 7px;color:#f8e9c8}
+.intro{max-width:960px;color:var(--muted);font-size:16px;margin:7px 0 22px}nav{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:21px}nav a{border:1px solid var(--border);padding:9px 12px;border-radius:11px;text-decoration:none;font-weight:700}
+.statgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}.stat,.panel,.card,.weekday,.alert{border:1px solid var(--border);background:var(--card);border-radius:16px}.stat{padding:16px}.stat b{display:block;font-size:clamp(26px,3.6vw,38px);color:var(--gold);line-height:1.1}.stat small{display:block;color:var(--muted);margin-top:9px;font-weight:650}
+.progress{height:11px;border:1px solid #536c76;border-radius:99px;margin:15px 0 22px;background:#061723;overflow:hidden}.progress span{display:block;height:100%;background:linear-gradient(90deg,#e6ca8b,#9ed7c6);width:0}
+.alert{padding:13px 15px;background:#173648;margin:15px 0 20px;color:#f0e5cb}.alert strong{color:var(--gold)}
+.toolbar{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:11px;align-items:end}.toolbar label,.dategrid label,dialog label{display:grid;gap:7px;font-size:13px;font-weight:760;color:var(--muted)}
+input,select,textarea,button{font:inherit;min-height:44px;border-radius:10px;border:1px solid #688191;background:#061b2b;color:#fff3de;max-width:100%}input,select,textarea{width:100%;padding:10px}select{appearance:auto}textarea{min-height:105px;resize:vertical}button{cursor:pointer;padding:10px 14px;background:#224b58;font-weight:760}button:hover,.card:hover{border-color:var(--gold)}button:focus-visible,a:focus-visible,textarea:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.panel{padding:18px;margin-top:18px}.dategrid{display:grid;grid-template-columns:minmax(0,220px) minmax(0,190px) 1fr;gap:12px;align-items:end}.micro{font-size:12px;color:var(--muted)}.headline{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.weekgrid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:9px;margin-top:15px}.weekday{padding:12px 10px;min-height:103px;background:var(--card2)}.weekday b{display:block;color:var(--gold)}.weekday span{display:block;margin-top:6px;font-size:13px;color:var(--muted)}.weekday em{font-style:normal;font-size:11px;color:#9fe0cf}
+.filters{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:10px;margin:13px 0}.resultbar{display:flex;align-items:center;gap:10px;justify-content:space-between;flex-wrap:wrap;margin:14px 0 10px}.resultbar span{color:var(--muted);font-size:13px}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.card{padding:15px;background:var(--card2)}.card-top{display:flex;gap:9px;justify-content:space-between;align-items:center;flex-wrap:wrap}.badge{display:inline-block;padding:3px 9px;font-size:12px;font-weight:850;color:var(--gold);border:1px solid #72838b;border-radius:30px}.badge.ready{color:var(--accent)}.badge.todo{color:#f3cb9e}.card h3{margin:12px 0 8px}.card p{color:var(--muted);margin:7px 0}.card .meta{font-size:12px}.card button{margin-top:8px;min-height:42px}
+#loadMore{display:block;margin:18px auto;min-width:210px}.hidden{display:none!important}
+#state{min-height:22px;font-weight:700}.footer{border-top:1px solid var(--border);margin-top:27px;padding-top:16px;color:var(--muted);font-size:13px}dialog{border:1px solid var(--border);border-radius:20px;background:#0d2e3e;color:var(--text);width:min(720px,calc(100vw - 26px));max-height:calc(100dvh - 30px);overflow-y:auto;padding:22px}dialog::backdrop{background:#000b}dialog .facts{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:15px 0}dialog .fact{background:#071d2c;border:1px solid #3b5b68;padding:10px;border-radius:10px}dialog .fact small{display:block;color:var(--muted)}dialog .fact strong{display:block;overflow-wrap:anywhere}dialog h2{font-size:27px}dialog .actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}dialog form{display:grid;gap:10px}.textlink{overflow-wrap:anywhere}
+@media(max-width:950px){.toolbar{grid-template-columns:repeat(3,minmax(0,1fr))}.weekgrid{grid-template-columns:repeat(4,minmax(0,1fr))}}@media(max-width:620px){.statgrid{grid-template-columns:repeat(2,1fr)}.stat{padding:12px}.cards{grid-template-columns:minmax(0,1fr)}.toolbar,.filters{grid-template-columns:repeat(2,minmax(0,1fr))}.toolbar label:first-child,.filters label:first-child{grid-column:span 2}.dategrid{grid-template-columns:repeat(2,minmax(0,1fr))}.dategrid p{grid-column:span 2}.weekgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.weekday{min-height:90px}dialog .facts{grid-template-columns:1fr}nav a{font-size:13px}}@media(max-width:365px){.toolbar,.filters,.dategrid{grid-template-columns:1fr}.toolbar label:first-child,.filters label:first-child,.dategrid p{grid-column:auto}}
+</style>
+</head>
+<body><main>
+<nav aria-label="Ersteller-Navigation"><a href="/test/academy/index.html">← Akademie-Prüfung</a><a href="/test/academy/audio-audit-v18.html">Masterstimme prüfen</a><a href="#jahresplan">52-Wochen-Plan</a></nav>
+<div class="eyebrow">DĀR AL TAWḤĪD KIDS · SEPARATE ERSTELLER-REDAKTION V23</div>
+<h1>Unterrichtszentrale</h1>
+<p class="intro">Dein vollständiger, wiederkehrender Jahreslehrplan. Hier siehst du, welche Lektionen bereits im Code vorhanden sind, was noch erstellt werden muss, welche Quellen und Altersstufen dokumentiert sind und welche Veröffentlichungsnachweise fehlen. <strong>Diese Seite veröffentlicht nichts.</strong></p>
+<div id="state" role="status" aria-live="polite">Redaktionskatalog wird geladen …</div>
+<section class="statgrid" aria-label="Redaktionsfortschritt">
+<div class="stat"><b id="kTotal">208</b><small>Neue Unterrichtsplätze pro 52-Wochen-Zyklus</small></div>
+<div class="stat"><b id="kBuilt">–</b><small>Im KIDS-Unterrichtscode vorhanden</small></div>
+<div class="stat"><b id="kOpen">–</b><small>Unterrichtsinhalte noch offen</small></div>
+<div class="stat"><b id="kRelease">–</b><small>Besucherfreigaben nachweisbar</small></div>
+</section>
+<div class="progress" role="progressbar" aria-label="Belegte Unterrichtsplätze" aria-valuemin="0" aria-valuemax="208" aria-valuenow="0"><span id="progressFill"></span></div>
+<div class="alert"><strong>Wichtig:</strong> „Im Code vorhanden“ bedeutet nicht „für Besucher freigegeben“. Veröffentlichungsdatum, Erstellungsdatum und letzte Änderung werden nur angezeigt, wenn ein überprüfbarer Nachweis vorliegt. Fehlt er, steht ausdrücklich „nicht erfasst“.</div>
+<section class="panel" id="jahresplan"><div class="headline"><h2>Jahresplan · 52 Wochen</h2><span class="badge" id="weekCaption">Woche 1 / 52</span></div>
+<div class="dategrid"><label>Beginn des ersten Zyklus (Montag)<input id="startMonday" type="date" aria-describedby="startHelp"></label>
+<label>Zyklus<select id="cycle"><option value="0">1. Durchlauf</option><option value="1">2. Durchlauf</option><option value="2">3. Durchlauf</option><option value="3">4. Durchlauf</option><option value="4">5. Durchlauf</option></select></label>
+<p class="micro" id="startHelp">Die Originalplanung enthält <b>kein</b> festes Startdatum. Wähle selbst einen Montag. Dann werden die Termine für alle 52 Wochen berechnet; jeder neue Durchlauf folgt nach genau 364 Tagen. Das sind Plantermine, keine Veröffentlichungsnachweise.</p></div>
+<div class="toolbar" style="margin-top:15px">
+<label>Woche<select id="week"></select></label><label>Fach<select id="weekSubject"><option value="">Alle Fächer</option><option value="akhlaq">Akhlāq</option><option value="adab">Adab</option><option value="fiqh">Fiqh</option><option value="aqidah">ʿAqīdah</option></select></label>
+<label>Anzeige<button id="showWeek" type="button">Diese Woche anzeigen</button></label>
+</div>
+<div class="weekgrid" id="weekgrid" aria-label="Unterrichtstage"></div></section>
+<section class="panel" id="unterricht"><div class="headline"><h2>Alle Unterrichtsplätze</h2><button type="button" id="exportPlan">Plan als CSV exportieren</button></div>
+<div class="filters">
+<label>Suche nach Titel, ID, Quelle<input id="search" type="search" placeholder="Ṣidq, Fiqh, Gebet, Ḥadīṯ …"></label>
+<label>Status<select id="status"><option value="">Alle</option><option value="im-code">38 bestehende Lektionen</option><option value="offen">170 offene Plätze</option><option value="quelle">Quellenprüfung nicht dokumentiert</option><option value="audio">Master-Audio nicht freigegeben</option></select></label>
+<label>Fach<select id="subject"><option value="">Alle Fächer</option><option value="akhlaq">Akhlāq</option><option value="adab">Adab</option><option value="fiqh">Fiqh</option><option value="aqidah">ʿAqīdah</option></select></label>
+<label>Altersgruppe<select id="age"><option value="">Alle Altersstufen</option><option value="4-5">4–5 Jahre</option><option value="6-8">6–8 Jahre</option><option value="9-10">9–10 Jahre</option></select></label>
+</div>
+<div class="resultbar"><span id="resultInfo">–</span><button type="button" id="reset">Filter zurücksetzen</button></div>
+<div class="cards" id="cards"></div><button type="button" id="loadMore" class="hidden">Weitere 20 anzeigen</button>
+</section>
+<section class="panel" id="notizen"><h2>Deine privaten Planungsnotizen</h2><p class="micro">Beim Öffnen einer Unterrichtskarte kannst du lokal eine Notiz und ein gewünschtes Planungsdatum speichern. <strong>Diese Angaben bleiben ausschließlich in diesem Browser auf diesem Gerät</strong> und werden weder nach GitHub übertragen noch für Besucher veröffentlicht. Mit Export kannst du sie später in die zentrale Redaktion übernehmen.</p><button type="button" id="exportNotes">Meine Notizen als JSON sichern</button><span class="micro" id="noteCount" style="padding-left:12px"></span></section>
+<div class="footer">Datenstand: GitHub-Katalog V22 vom 11.10.2026 · 38 Lektionen (einschließlich Ṣidq) + 170 offene Plätze. Für 52 Wochen: Montag, Dienstag, Donnerstag und Freitag neuer Unterricht; Mittwoch/Samstag Wiederholung, Sonntag flexibel. <strong>Keine Änderung an Kinderprofilen, Lernständen, App-Store-Version oder Besucherfreigaben.</strong></div>
+</main>
+<dialog id="detail" aria-label="Unterrichtsdetails"><div class="headline"><span class="eyebrow">KIDS · REDAKTIONSDETAILS</span><button type="button" id="closeDetail">Schließen ×</button></div><h2 id="detailTitle"></h2><p id="detailLead"></p><div class="facts" id="detailFacts"></div><div id="detailSources"></div><form id="noteForm"><label>Deine Notiz (nur dieses Gerät)<textarea id="noteText" maxlength="2000" placeholder="Was muss verbessert, ergänzt oder geprüft werden?"></textarea></label><label>Geplanter Veröffentlichungstag (nur Entwurf)<input id="noteDate" type="date"></label><div class="actions"><button type="submit">Notiz lokal speichern</button><button type="button" id="deleteNote">Lokale Notiz entfernen</button></div><p class="micro" id="noteFeedback" aria-live="polite"></p></form></dialog>
+<script>
+(function(){
+"use strict";
+const CATALOG_URL="/test/academy/redaktion-katalog-v1.json", STORE="dar_kids_editor_notes_v23", ANCHOR="dar_kids_editor_start_monday_v23";
+const $=id=>document.getElementById(id), names={akhlaq:"Akhlāq",adab:"Adab",fiqh:"Fiqh",aqidah:"ʿAqīdah"};
+const dayIndex={Montag:0,Dienstag:1,Mittwoch:2,Donnerstag:3,Freitag:4,Samstag:5,Sonntag:6};
+let data=null,filtered=[],shown=20,activeEntry=null,notes={},selectedWeekOnly=null;
+try{const n=JSON.parse(localStorage.getItem(STORE)||"{}");if(n&&typeof n==="object"&&!Array.isArray(n))notes=n;const a=localStorage.getItem(ANCHOR)||"";if(a)$("startMonday").value=a}catch(_){}
+function el(tag,text,cl){const x=document.createElement(tag);if(text!=null)x.textContent=String(text);if(cl)x.className=cl;return x}
+function set(id,value){$(id).textContent=String(value)}
+function fact(label,value){const f=el("div",null,"fact");f.appendChild(el("small",label));f.appendChild(el("strong",value==null||value===""?"nicht erfasst":value));$("detailFacts").appendChild(f)}
+function dayDate(e){const str=$("startMonday").value;if(!str)return null;const t=new Date(str+"T12:00:00Z");if(!Number.isFinite(t.getTime())||t.getUTCDay()!==1)return null;const cycle=Number($("cycle").value)||0;t.setUTCDate(t.getUTCDate()+((cycle*52+e.week-1)*7)+dayIndex[e.day]);return t}
+function deDate(e){const d=dayDate(e);return d?new Intl.DateTimeFormat("de-DE",{day:"2-digit",month:"2-digit",year:"numeric",timeZone:"UTC"}).format(d):"Datum erst nach Startwahl"}
+function dateCell(week,day){return deDate({week,day})}
+function safeHref(url){try{const u=new URL(url,location.origin);return u.protocol==="https:"&&["dorar.net","www.dorar.net"].includes(u.hostname)?u.href:null}catch(_){return null}}
+function renderWeek(){
+if(!data)return;const wk=Number($("week").value)||1;
+set("weekCaption","Woche "+wk+" / 52 · Durchlauf "+(Number($("cycle").value)+1));
+$("weekgrid").replaceChildren();const one=data.weekly.find(x=>x.week===wk);if(!one)return;
+one.days.forEach(d=>{const cell=el("div",null,"weekday");const entry=data.entries.find(x=>x.slot===d.slot);
+cell.appendChild(el("b",d.day));if(d.mode==="new"){cell.appendChild(el("span",entry&&entry.type==="catalog"?entry.title:"Neuer Unterricht · noch offen"));cell.appendChild(el("em","Platz "+d.slot+" · "+(entry?.type==="catalog"?"im Code":"geplant")))}
+else{cell.appendChild(el("span",d.mode==="review"?"Wiederholen und vertiefen":"Flexibler Unterricht / Familie"))}
+if($("startMonday").value)cell.appendChild(el("em",dateCell(wk,d.day)));$("weekgrid").appendChild(cell)});
+}
+function matches(e){
+if(selectedWeekOnly!==null && e.week!==selectedWeekOnly)return false;
+const q=$("search").value.trim().toLocaleLowerCase("de"),st=$("status").value,subject=$("subject").value,age=$("age").value,ws=$("weekSubject").value;
+if(q&&!([e.id,e.title,e.hadith?.source,e.quran?.label,e.topic,e.goal,e.slot].join(" ").toLocaleLowerCase("de").includes(q)))return false;
+if(st==="im-code"&&e.type!=="catalog")return false;
+if(st==="offen"&&e.type!=="planned")return false;
+if(st==="quelle"&&(e.type!=="catalog"||e.sourceCheckedAt))return false;
+if(st==="audio"&&e.type!=="catalog")return false;
+if(subject&&e.subject!==subject)return false;if(ws&&e.subject!==ws)return false;
+if(age&&e.type==="catalog"&&!e.questions?.some(x=>x.age===age&&x.implemented))return false;
+if(age&&e.type==="planned")return false;
+return true
+}
+function renderCards(reset){
+if(!data)return;if(reset)shown=20;filtered=data.entries.filter(matches);
+set("resultInfo",filtered.length+" von 208 Unterrichtsplätzen · "+Math.min(filtered.length,shown)+" angezeigt");
+$("cards").replaceChildren();filtered.slice(0,shown).forEach(e=>{
+const c=el("article",null,"card");const top=el("div",null,"card-top");
+top.appendChild(el("span","Woche "+e.week+" · "+e.day+" · #"+e.slot,"badge"));
+top.appendChild(el("span",e.type==="catalog"?"Im Code":"Noch offen","badge "+(e.type==="catalog"?"ready":"todo")));c.appendChild(top);
+c.appendChild(el("h3",e.title));c.appendChild(el("p",e.type==="catalog"?(names[e.subject]||"Ohne Fach")+" · "+(e.goal||e.topic||"Lektion dokumentiert"):"Für diesen Platz sind noch keine geprüften Unterrichtsinhalte hinterlegt."));
+c.appendChild(el("p",e.type==="catalog"?"Geplante Audiofreigabe: noch nicht bestätigt":"Quellen, Altersstufen, Audio: müssen noch erstellt werden","meta"));
+const b=el("button","Details und Planung öffnen");b.type="button";b.addEventListener("click",()=>openDetail(e));c.appendChild(b);$("cards").appendChild(c);
+});
+$("loadMore").classList.toggle("hidden",filtered.length<=shown);
+}
+function openDetail(e){
+activeEntry=e;set("detailTitle",e.title);set("detailLead",e.type==="catalog"?(e.goal||e.lead||e.topic||"Bestehende Unterrichtseinheit"):"Geplanter Unterrichtsplatz; Thema und geprüfte Quellen noch offen.");
+$("detailFacts").replaceChildren();
+fact("Fach",names[e.subject]||"noch nicht festgelegt");fact("Jahresplatz / Woche",e.slot+" / "+e.week);fact("Wochentag",e.day);
+fact("Geplantes Zyklusdatum",dayDate(e)?deDate(e):null);fact("Status im Code",e.type==="catalog"?"Lektion vorhanden":"noch nicht erstellt");fact("Unterrichts-ID",e.id);
+fact("Erstellt am",e.createdAt);fact("Zuletzt bearbeitet am",e.changedAt);fact("Codeintegration (belegt)",e.codeIntegratedAt);
+fact("Test-App verfügbar seit",e.testPublishedAt);fact("Besucherfreigabe am",e.visitorPublishedAt);
+fact("Altersstufen",e.questions?.filter(x=>x.implemented).map(x=>x.age).join(", ")||null);
+fact("Quellenprüfung (dokumentiert)",e.sourceCheckedAt);fact("Masterstimme",e.voiceStatus);
+$("detailSources").replaceChildren();if(e.type==="catalog"){
+const h=el("h3","Quellen & Unterrichtsinhalt");$("detailSources").appendChild(h);
+const q=el("p","Qurʾān: "+(e.quran?.label||"nicht erfasst")+(e.quran?.excerpt?" · ausgewiesener Auszug":""));$("detailSources").appendChild(q);
+$("detailSources").appendChild(el("p","Ḥadīṯ: "+(e.hadith?.source||"nicht erfasst")));
+if(e.hadithUrl&&safeHref(e.hadithUrl)){const a=el("a","Nachweis bei Dorar öffnen ↗","textlink");a.href=safeHref(e.hadithUrl);a.target="_blank";a.rel="noopener noreferrer";$("detailSources").appendChild(a);}
+if(e.sourceId)$("detailSources").appendChild(el("p","Vertiefung auf Grundlage von: "+e.sourceId,"micro"));
+if(e.codeIntegratedCommit){const a=el("a","GitHub-Codeintegration vom "+e.codeIntegratedAt+" nachsehen ↗","textlink");a.href="https://github.com/Sero91ak/dar-al-tawhid-site/commit/"+e.codeIntegratedCommit;a.target="_blank";a.rel="noopener noreferrer";$("detailSources").appendChild(el("p")).appendChild(a)}
+}
+const n=notes[String(e.slot)]||{};$("noteText").value=n.text||"";$("noteDate").value=n.targetDate||"";set("noteFeedback",n.savedAt?"Lokal notiert: "+n.savedAt:"Noch keine lokale Notiz.");$("detail").showModal();
+}
+function exportFile(name,mime,body){const a=el("a");const url=URL.createObjectURL(new Blob([body],{type:mime}));a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+function csvVal(v){let s=String(v==null?"":v);if(/^[\s\t]*[=+\-@]/.test(s))s="\u0027"+s;return '"' + s.replace(/"/g,'""') + '"'}
+function csvExport(){if(!data)return;const cols=["Unterrichtsplatz","Woche","Wochentag","Zyklusdatum (Plan)","Fach","Titel","ID","Im Code","Erstellt am","Codeintegration","Test-App veröffentlicht","Besucher-App veröffentlicht","Quran","Hadith","Quellenprüfdatum","Audio","Lokale Notiz"];
+const rows=[cols.join(";")].concat(data.entries.map(e=>[e.slot,e.week,e.day,dayDate(e)?deDate(e):"",names[e.subject]||"",e.title,e.id||"",e.type==="catalog"?"ja":"nein",e.createdAt||"",e.codeIntegratedAt||"",e.testPublishedAt||"",e.visitorPublishedAt||"",e.quran?.label||"",e.hadith?.source||"",e.sourceCheckedAt||"",e.voiceStatus||"",notes[e.slot]?.text||""].map(csvVal).join(";")));
+exportFile("dar-kids-unterrichtsplan-52-wochen.csv","text/csv;charset=utf-8","\uFEFF"+rows.join("\r\n"))}
+function updateNotesCount(){set("noteCount",Object.keys(notes).length+" lokal notierte Plätze")}
+function saveNotes(){try{localStorage.setItem(STORE,JSON.stringify(notes));updateNotesCount();return true}catch(_){set("noteFeedback","Speichern in diesem Browser nicht möglich; bitte JSON-Export nutzen.");return false}}
+function mondayCheck(){const val=$("startMonday").value;if(!val){$("startMonday").setCustomValidity("");return true}const d=new Date(val+"T12:00:00Z");const ok=d.getUTCDay()===1;$("startMonday").setCustomValidity(ok?"":"Bitte einen Montag auswählen.");if(!ok)$("startMonday").reportValidity();return ok}
+$("startMonday").addEventListener("change",()=>{if(!mondayCheck())return;try{localStorage.setItem(ANCHOR,$("startMonday").value)}catch(_){}renderWeek();renderCards(true)});
+$("cycle").addEventListener("change",()=>{renderWeek();renderCards(true)});
+$("week").addEventListener("change",renderWeek);
+$("showWeek").addEventListener("click",()=>{if(!data||!mondayCheck())return;selectedWeekOnly=Number($("week").value);$("search").value="";$("status").value="";renderCards(true);$("unterricht").scrollIntoView({behavior:"smooth"});});
+["search","status","subject","age","weekSubject"].forEach(k=>$(k).addEventListener(k==="search"?"input":"change",()=>renderCards(true)));
+$("loadMore").addEventListener("click",()=>{shown+=20;renderCards(false)});
+$("reset").addEventListener("click",()=>{selectedWeekOnly=null;["search","status","subject","age","weekSubject"].forEach(k=>$(k).value="");$("search").placeholder="Ṣidq, Fiqh, Gebet, Ḥadīṯ …";renderCards(true)});
+$("closeDetail").addEventListener("click",()=>$("detail").close());
+$("noteForm").addEventListener("submit",e=>{e.preventDefault();if(!activeEntry)return;const k=String(activeEntry.slot),t=$("noteText").value.trim(),d=$("noteDate").value;
+if(t||d)notes[k]={text:t,targetDate:d,savedAt:new Date().toISOString()};else delete notes[k];
+if(saveNotes())set("noteFeedback","Auf diesem Gerät gespeichert. Nicht veröffentlicht.");});
+$("deleteNote").addEventListener("click",()=>{if(!activeEntry)return;delete notes[String(activeEntry.slot)];$("noteText").value="";$("noteDate").value="";if(saveNotes())set("noteFeedback","Lokale Notiz entfernt.")});
+$("exportPlan").addEventListener("click",csvExport);
+$("exportNotes").addEventListener("click",()=>exportFile("dar-kids-redaktionsnotizen.json","application/json;charset=utf-8",JSON.stringify({source:"personal-local-browser-notes-v23",exportedAt:new Date().toISOString(),notes},null,2)));
+for(let wk=1;wk<=52;wk++){const o=el("option","Woche "+wk);o.value=String(wk);$("week").appendChild(o)}
+updateNotesCount();
+fetch(CATALOG_URL,{credentials:"same-origin",cache:"no-store"}).then(r=>{if(!r.ok)throw Error("HTTP "+r.status);return r.json()}).then(j=>{
+if(j.schemaVersion!==1||j.weekly?.length!==52||j.entries?.length!==208||j.entries.filter(e=>e.type==="catalog").length!==38)throw Error("Unvollständiger Unterrichtsplan / fehlerhafter Datenstand");
+data=j;const built=data.entries.filter(e=>e.type==="catalog").length;
+set("kBuilt",built);set("kOpen",208-built);set("kRelease",data.entries.filter(e=>!!e.visitorReleaseVerified).length+" belegt");
+$("progressFill").style.width=(built/208*100).toFixed(1)+"%";document.querySelector('[role="progressbar"]').setAttribute("aria-valuenow",String(built));
+set("state","Katalog vollständig geladen · "+built+" Unterrichtseinheiten · "+(208-built)+" offene Plätze");
+renderWeek();renderCards(true);
+}).catch(err=>{set("state","Katalog konnte nicht geladen werden: "+err.message+". Der geschützte Ersteller-Zugang und die Test-Worker-Dateien müssen bereitstehen.");});
+})();
+</script>
+</body></html>
