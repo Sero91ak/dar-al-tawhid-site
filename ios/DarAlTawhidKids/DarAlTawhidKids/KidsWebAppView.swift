@@ -139,13 +139,13 @@ struct KidsWebAppView: UIViewRepresentable {
                   ["home", "quran", "stories", "dua", "parents", "academy"].contains(key),
                   let page = webView else { return }
             if key == "academy" {
-                guard let url = URL(string: "https://dar-al-tawhid-test.sero91ak.workers.dev/kids/akademie/index.html") else { return }
+                guard let url = URL(string: "https://dar-al-tawhid-kids-creator.sero91ak.workers.dev/kids/akademie/index.html") else { return }
                 pendingCreatorTab = nil
                 page.load(URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 30))
                 return
             }
             let target = key == "home" ? "today" : key
-            let onHome = page.url?.host?.lowercased() == "dar-al-tawhid-test.sero91ak.workers.dev"
+            let onHome = page.url?.host?.lowercased() == "dar-al-tawhid-kids-creator.sero91ak.workers.dev"
                 && ["/kids/start", "/kids/start.html", "/kids/", "/kids"].contains(page.url?.path ?? "")
             if onHome {
                 activateCreatorTab(target, in: page)
