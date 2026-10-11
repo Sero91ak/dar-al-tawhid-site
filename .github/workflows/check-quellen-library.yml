@@ -18,6 +18,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 jobs:
   verify:
@@ -27,6 +28,27 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Read production Cloudflare deploy failures (read-only)
+        if: always()
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import os,json,urllib.request
+          url="https://api.github.com/repos/"+os.getenv("GITHUB_REPOSITORY")+"/actions/workflows/cloudflare-pages-deploy.yml/runs?branch=main&per_page=9"
+          h={"Authorization":"Bearer "+os.getenv("GH_TOKEN"),"Accept":"application/vnd.github+json","User-Agent":"quellen-iphone-deploy-diagnostic"}
+          try:
+            data=json.load(urllib.request.urlopen(urllib.request.Request(url,headers=h),timeout=16))
+            for x in data.get("workflow_runs",[]):
+              print("CLOUDFLARE_DEPLOY",x["id"],x.get("head_sha"),x.get("created_at"),x.get("status"),x.get("conclusion"))
+              if x.get("conclusion") in ("failure","cancelled","timed_out"):
+                j=json.load(urllib.request.urlopen(urllib.request.Request(x["jobs_url"],headers=h),timeout=16))
+                for job in j.get("jobs",[]):
+                  for step in job.get("steps",[]):
+                    if step.get("conclusion")=="failure": print("DEPLOY_FAILED_STEP",job["id"],job["name"],step["name"])
+          except Exception as e: print("DEPLOY_DIAG_ERROR",type(e).__name__,str(e))
+          PY
       - name: Verify iPhone safe-area fix is served LIVE (read-only)
         if: always()
         shell: bash
