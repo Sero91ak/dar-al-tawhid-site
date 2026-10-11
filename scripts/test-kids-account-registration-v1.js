@@ -17,17 +17,25 @@ for(const file of ["kids/start.html","kids/index.html","kids/shell.html"]){
   assert.match(html,/if\(existing&&existing\.ok===true\)\{acceptExistingAccount/);
   assert.match(html,/rpc\("kids_login",\{p_name:name,p_hash:h\}\)/);
   // Registration is stage-gated behind parent-email verification. Existing account sign-in stays available.
-  for(const id of ["joinParentEmail","joinParentCode","joinParentVerify","joinParentStatus"]){
+  for(const id of ["joinParentEmail","joinParentConsent","joinParentCode","joinParentVerify","joinParentStatus"]){
     assert.equal(html.split('id="'+id+'"').length-1,1,file+" missing or duplicate "+id);
   }
   assert.match(html,/id="joinParentEmail"[^>]*type="email"[^>]*required/);
   assert.match(html,/data-step="parentverify"/);
   assert.match(html,/function verifyParentRegistration\(\)/);
-  assert.match(html,/rpc\("kids_parent_registration_begin"/);
-  assert.match(html,/rpc\("kids_parent_registration_finish"/);
+  assert.match(html,/fetch\(AUTH_API\+"otp"/);
+  assert.match(html,/create_user:true/);
+  assert.match(html,/fetch\(AUTH_API\+"verify"/);
+  assert.match(html,/type:"email"/);
+  assert.match(html,/fetch\(PARENT_REGISTER_EDGE/);
+  assert.match(html,/Authorization":"Bearer "\+auth\.access_token/);
   assert.match(html,/res\.verified!==true/);
   assert.match(html,/joinParentPending=null/);
-  assert.match(html,/Es wurde kein Konto angelegt/);
+  assert.match(html,/parent_consent:true/);
+  assert.match(html,/id="joinParentCode"[^>]*pattern="\[0-9\]\{6\}"[^>]*maxlength="6"/);
+  assert.match(html,/wurde kein neues Kinderkonto freigeschaltet/);
+  assert.ok(!html.includes("pendingId") && !html.includes("kids_parent_registration_begin"),
+    file+" must not use unimplemented custom OTP RPCs");
   assert.doesNotMatch(html,/rpc\("kids_register"/,"new staging registration must not bypass parent verification");
   assert.match(html,/function joinExistingHint\(msg\)/);
   assert.match(html,/document\.getElementById\("joinLoginExisting"\)\.addEventListener/);
@@ -134,3 +142,4 @@ exerciseAccountSync().catch(e=>{console.error(e);process.exitCode=1});
 
 // Service-only recovery foundation and simulated Gmail intake regression.
 require("../kids/recovery/tests/foundation.test.cjs");
+require("../kids/recovery/tests/parent-registration.test.cjs");
