@@ -27,6 +27,38 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Verify iPhone safe-area fix is served LIVE (read-only)
+        if: always()
+        shell: bash
+        run: |
+          set +e
+          for attempt in 1 2 3 4 5 6; do
+            echo "MOBILE HEADER LIVE ATTEMPT $attempt"
+            html=$(mktemp);css=$(mktemp)
+            hs=$(curl --max-time 20 -sS -o "$html" -w '%{http_code}' "https://dar-al-tawhid.de/quellen/?check=8ec2282-$attempt")
+            cs=$(curl --max-time 20 -sS -o "$css" -w '%{http_code}' "https://dar-al-tawhid.de/assets/quellen-library.css?v=royal-v42-ios-safe-20261011&check=$attempt")
+            echo "MOBILE_HEADER_LIVE html_http=$hs css_http=$cs html_bytes=$(wc -c < "$html") css_bytes=$(wc -c < "$css")"
+            good=1
+            [ "$hs" = 200 ] && [ "$cs" = 200 ] || good=0
+            grep -q 'royal-v42-ios-safe-20261011' "$html" || good=0
+            grep -q 'iPhone header reachability / safe-area hotfix' "$css" || good=0
+            grep -q -- '--ql-safe-header-offset' "$css" || good=0
+            grep -q 'position:sticky' "$css" || good=0
+            if [ "$good" = 1 ]; then
+              echo 'MOBILE_HEADER_LIVE_OK'
+              for route in /q/1/ /q/2/ /q/40/; do
+                code=$(curl --max-time 20 -sS -o /dev/null -w '%{http_code}' "https://dar-al-tawhid.de${route}?check=8ec2282")
+                echo "UNCHANGED_SOURCE $route HTTP=$code"
+                [ "$code" = 200 ] || exit 1
+              done
+              rm -f "$html" "$css"
+              exit 0
+            fi
+            rm -f "$html" "$css"
+            sleep 8
+          done
+          echo "MOBILE_HEADER_NOT_YET_LIVE"
+          exit 1
       - name: Validate Q source-library synchronization and all source pages
         shell: bash
         run: |
