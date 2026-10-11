@@ -1154,6 +1154,24 @@ export default {
             // Never loop a canonical asset back to itself.
             return new Response("Quellen-Routingfehler", { status: 502, headers });
           }
+          // ROYAL_Q_MANUSCRIPT_V42: apply one presentation to all existing and
+          // future numbered Q pages. Original HTML text, links, isnads and SEO
+          // metadata are retained byte-for-byte except new stylesheet/script tags.
+          if (canonicalSourcePath && request.method === "GET" && asset.ok &&
+              /text\/html/i.test(asset.headers.get("Content-Type") || "")) {
+            let documentHtml = await asset.text();
+            if (!documentHtml.includes("q-royal-manuscript-v42.css") &&
+                /<\/head>/i.test(documentHtml)) {
+              documentHtml = documentHtml.replace(/<\/head>/i,
+                '<link rel="stylesheet" href="/assets/q-royal-manuscript-v42.css?v=20261011" data-q-royal="v42">' +
+                '<script src="/assets/q-royal-manuscript-v42.js?v=20261011" defer><\\/script>'.replace('<\\/script>', '</script>') +
+                '</head>');
+            }
+            headers.set("Content-Type", "text/html; charset=utf-8");
+            headers.set("X-DAR-Q-Layout", "royal-manuscript-v42");
+            return new Response(documentHtml, { status: asset.status,
+              statusText: asset.statusText, headers });
+          }
           return new Response(request.method === "HEAD" ? null : asset.body, {
             status: asset.status, statusText: asset.statusText, headers
           });
