@@ -20,3 +20,17 @@ For each milestone, append:
 7. Status: IMPLEMENTED, AUTOMATED TESTED, VISUALLY VERIFIED, HUMAN APPROVED or BLOCKED.
 
 Never mark production ready or amend failed tests into success without evidence.
+
+
+## 2026-10-11 — V7.7 archive recovery audit split (ChatGPT)
+
+1. The ChatGPT Library metadata exposes the original generated archive `/Kinder App/Mein_Gebet_V77_STRICT_NICHT_FREIGEGEBEN.zip` (6,635,848 bytes). Its raw bytes are NOT accessible: `files.materialize` explicitly reports that no authorized raw-byte materialization path exists. This is **not** a verified GLB recovery.
+2. The source intake tool `rigging/qa_v77_archive.py` previously conflated a valid completed five-angle measurement returning exit 1 (the expected V7.7 quality-gate failure; 3/4 angle physically uncalibrated) with a corrupt/unreadable archive. It now separates:
+   - pinned SHA-256 bytes + a successful structural rig check;
+   - completed five-view measurements on pinned model/reference, accepting the documented research CLI exit 1;
+   - completed successful angle sensitivity diagnostic on the same immutable files.
+   The resulting `qaAnalysisComplete` is **not** a likeness, silhouette, prayer teaching, or production approval; every production flag remains false.
+3. `rigging/test_qa_v77_archive.py` now includes synthetic outcome tests that reject bad checksums, rig failures, malformed five-view data, missing evidence, failed diagnostics, fabricated calibration, or forged production approval. No original figure bytes were invented.
+4. The existing release-gate status remains `draft_not_complete`; no original GLB binary was obtained or remeasured, and no new 3D mesh / clip was created. No change to `main`, the live Kids app, children's progress, profile storage, SW, or audio.
+5. Next: obtain an authorized raw-file reference to the exact archived V7.7 ZIP; rerun archive intake against its SHA-pinned GLB+PNG, and only then attempt camera calibration, sculpt comparison, animations, and real device QA. CI results for this commit must be verified independently before marking tests passed.
+
