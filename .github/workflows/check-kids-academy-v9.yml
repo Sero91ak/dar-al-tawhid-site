@@ -76,11 +76,17 @@ jobs:
         run: node kids/tools/test-academy-v23-roadmap.cjs
       - name: Verify signed-session 208-slot editor and 12 age-tiered Islamic strands (zero credits)
         run: node test/kids/akademie/test-v23-roadmap-preview.cjs
+      - name: Verify 33 Islamic terms and 99 exact age-specific Master voice phrases (zero credits)
+        run: |
+          node kids/tools/test-academy-term-coach-v24.cjs
+          node kids/tools/export-academy-vocabulary-plan-v24.cjs
+          git diff --exit-code -- kids/data/academy-vocabulary-voice-plan-v24.json
       - name: JavaScript syntax guard
         run: |
           node --check kids/akademie/curriculum-v1.js
           node --check kids/akademie/curriculum-v2.js
           node --check kids/akademie/curriculum-v22.js
+          node --check kids/akademie/term-coach-v24.js
           node --check kids/akademie/school-progress-v11.js
           node --check kids/akademie/pilot-audio-v13.js
           node --check kids/tools/export-academy-voice-plan.js
