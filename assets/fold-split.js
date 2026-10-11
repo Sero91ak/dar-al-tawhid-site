@@ -154,8 +154,62 @@
     });
   }
 
+  // v1331: Keep the left navigation position when a new right-hand
+  // route replaces the master/detail markup. Each column owns its scroll.
+  // This is scoped to real Fold/tablet dual mode; compact phones are untouched.
+  var scrollMemory = Object.create(null);
+  var lastRenderedShell = null;
+  var lastRenderedRoute = "";
+  var restoreFrame = 0;
+  function rememberFoldScroll(event) {
+    if (!isDual() || !event || !event.target || !event.target.closest) return;
+    var el = event.target;
+    if (!el.classList || (!el.classList.contains("dar-fold__rail") && !el.classList.contains("dar-fold__pane"))) return;
+    var shell = el.closest(".dar-fold[data-fold-mode='dual']");
+    if (!shell) return;
+    var family = shell.getAttribute("data-fold-family") || "other";
+    var type = el.classList.contains("dar-fold__rail") ? "rail" : "pane";
+    scrollMemory[family + ":" + type] = Math.max(0, el.scrollTop || 0);
+  }
+  function restoreFoldScrollAfterRender() {
+    if (!isDual() || !document.querySelector) return;
+    var shell = document.querySelector(".dar-fold[data-fold-mode='dual']");
+    if (!shell || shell === lastRenderedShell) return;
+    var route = String(global.location && global.location.hash || "");
+    var family = shell.getAttribute("data-fold-family") || "other";
+    var routeChanged = lastRenderedRoute !== route;
+    lastRenderedShell = shell;
+    lastRenderedRoute = route;
+    if (restoreFrame) global.cancelAnimationFrame(restoreFrame);
+    restoreFrame = global.requestAnimationFrame(function () {
+      restoreFrame = 0;
+      if (!shell.isConnected) return;
+      var rail = shell.querySelector(".dar-fold__rail");
+      var pane = shell.querySelector(".dar-fold__pane");
+      if (rail) rail.scrollTop = scrollMemory[family + ":rail"] || 0;
+      if (pane) pane.scrollTop = routeChanged ? 0 : (scrollMemory[family + ":pane"] || 0);
+    });
+  }
+  function bindFoldScrollRetention() {
+    if (document.__darFoldScrollRetentionV1331) return;
+    document.__darFoldScrollRetentionV1331 = true;
+    document.addEventListener("scroll", rememberFoldScroll, { capture: true, passive: true });
+    var host = document.getElementById("appView") || document.body;
+    if (host && typeof MutationObserver === "function") {
+      var mo = new MutationObserver(function () { restoreFoldScrollAfterRender(); });
+      mo.observe(host, { childList: true, subtree: true });
+    }
+    global.addEventListener("hashchange", function () {
+      // Keep the rail position, but the newly opened reader starts at its top.
+      scrollMemory[String(document.querySelector(".dar-fold")?.getAttribute("data-fold-family") || "other") + ":pane"] = 0;
+      global.requestAnimationFrame(restoreFoldScrollAfterRender);
+    }, { passive: true });
+    restoreFoldScrollAfterRender();
+  }
+
   function start() {
     syncRootClass();
+    bindFoldScrollRetention();
     global.addEventListener(
       "dar:layoutchange",
       function () {
