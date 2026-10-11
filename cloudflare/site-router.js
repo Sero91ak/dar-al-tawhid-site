@@ -1274,6 +1274,8 @@ export default {
         // the shared app HTML. Keep OneSignal at /push/onesignal/ unchanged.
         html = html.replace("navigator.serviceWorker.register(\"/service-worker.js\",{updateViaCache:\"none\"})", "navigator.serviceWorker.register(\"/pwa/service-worker.js\",{scope:\"/pwa/\",updateViaCache:\"none\"})");
         html = html.replace("<script src=\"/assets/app-soft-boot.js?v=677\"></script>", "<script src=\"/assets/app-soft-boot.js?v=678\"></script>");
+        // Refresh only the isolated Android Fold workspace CSS after this layout fix.
+        html = html.replace('/assets/fold-split.css?v=2', '/assets/fold-split.css?v=3');
         const pwaHead =
           '<base href="/">' +
           '<script id="darDedicatedPwaBootV2">' +
