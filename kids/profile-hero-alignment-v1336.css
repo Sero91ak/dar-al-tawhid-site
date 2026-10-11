@@ -1,0 +1,59 @@
+/* KIDS PROFILE HERO ALIGNMENT V1336: Boys receive girls' established full-bleed
+   iOS hero geometry. Parent portraits both receive safe visual breathing
+   room beneath the status bar. No image/content/navigation changes. */
+
+/* Match the synchronous data-view and actual active tab. */
+html[data-view="stories"] body .app[data-gender="boy"] .shell,
+html[data-view="dua"] body .app[data-gender="boy"] .shell,
+html[data-view="quran"] body .app[data-gender="boy"] .shell,
+html[data-view="parents"] body .app[data-gender="boy"] .shell,
+html body .app[data-gender="boy"]:has(#view-stories.view.active) .shell,
+html body .app[data-gender="boy"]:has(#view-dua.view.active) .shell,
+html body .app[data-gender="boy"]:has(#view-quran.view.active) .shell,
+html body .app[data-gender="boy"]:has(#view-parents.view.active) .shell{padding-top:0!important}
+
+/* Preserve clear iOS indicators without adding a hard status-bar strip. */
+html body:has(.app[data-gender="boy"]):has(
+ #view-stories.view.active,#view-dua.view.active,
+ #view-quran.view.active,#view-parents.view.active)::before{
+ content:"";position:fixed;top:0;left:0;right:0;
+ height:calc(env(safe-area-inset-top,0px) + 30px);
+ pointer-events:none;z-index:12;
+ background:linear-gradient(180deg,rgba(5,18,31,.55),rgba(8,25,41,.31) 53%,transparent 100%);
+}
+
+/* Use the established navy when scrolling beyond the image edge. */
+html body .app[data-gender="boy"]:has(#view-stories.view.active) .shell,
+html body .app[data-gender="boy"]:has(#view-dua.view.active) .shell,
+html body .app[data-gender="boy"]:has(#view-quran.view.active) .shell,
+html body .app[data-gender="boy"]:has(#view-parents.view.active) .shell{
+ background-color:#0c2636!important;
+}
+
+/* Portraits: shift the original photograph ~30-40px lower, fade the
+   leading image edge into the approved profile palette, keep original
+   100% auto scale and separate h2/p positioning unchanged. */
+@media(max-width:699px){
+ html body .app[data-gender="girl"] #view-parents.view > .page-head.page-head{
+  background-color:#2d2236!important;
+  background-image:
+   linear-gradient(180deg,rgba(43,29,49,.92),rgba(43,29,49,.73) 46px,rgba(43,29,49,0) 106px),
+   linear-gradient(90deg,rgba(27,19,37,.77),rgba(30,22,39,.43) 44%,rgba(31,23,39,.02) 78%),
+   linear-gradient(180deg,rgba(29,20,37,.01),rgba(30,21,38,.03) 44%,rgba(41,27,45,.17) 67%,#2d2236),
+   url("/kids/assets/parents-hero/girl-profile-v1254.jpg")!important;
+  background-size:cover,cover,cover,100% auto!important;
+  background-position:center,center,center,center clamp(28px,9vw,40px)!important;
+  background-repeat:no-repeat!important;
+ }
+ html body .app[data-gender="boy"] #view-parents.view > .page-head.page-head{
+  background-color:#0c2636!important;
+  background-image:
+   linear-gradient(180deg,rgba(8,26,41,.90),rgba(8,26,41,.70) 44px,rgba(8,26,41,0) 100px),
+   linear-gradient(90deg,rgba(3,17,31,.76),rgba(3,17,31,.46) 43%,rgba(3,17,31,.06) 76%),
+   linear-gradient(180deg,rgba(3,18,29,.02),rgba(3,18,29,.05) 43%,rgba(4,24,38,.20) 66%,#0c2636),
+   url("/kids/assets/parents-hero/boy-profile-v1254.jpg")!important;
+  background-size:cover,cover,cover,100% auto!important;
+  background-position:center,center,center,center clamp(24px,7vw,34px)!important;
+  background-repeat:no-repeat!important;
+ }
+}
