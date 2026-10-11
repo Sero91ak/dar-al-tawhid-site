@@ -4511,7 +4511,7 @@ function hideCategory(){$("#academySubject").hidden=true}
 function updateAcademyAppbar(){
  const lessonOpen=!$("#lessonMain").hidden,categoryOpen=!$("#academySubject").hidden;
  const category=categoryOpen?SUBJECTS[$("#academySubject").dataset.subject]:null;
- $("#academyNavTitle").textContent=lessonOpen?(activeLesson()?.title||"Ṣidq · Wahrhaftigkeit"):category?.title||"Lernakademie";
+ $("#academyNavTitle").textContent=lessonOpen?lessonTitle(activeLessonId):category?.title||"Lernakademie";
  $("#academyNavSubtitle").textContent=lessonOpen?SUBJECTS[activeSubject()].title+" · Dein Unterricht":categoryOpen?"Meine Unterrichtsfächer":"DĀR AL TAWḤĪD · KIDS";
  $("#academyNavBack").setAttribute("aria-label",lessonOpen||categoryOpen?"Zur Lernakademie":"Zur Kids-App");
 }
@@ -4965,5 +4965,11 @@ setInterval(()=>{
  const directSubject=previewRoute.get("fach");
  if(directLesson&&(directLesson==="sidq"||CURRICULUM[directLesson]))begin(directLesson);
  else if(directSubject&&SUBJECTS[directSubject])openCategory(directSubject);
+ if(KIDS_CREATOR_PREVIEW&&previewRoute.get("editor")==="1"){
+   const target=lessonIds().includes(directLesson)?directLesson:"sidq";
+   $("#creatorAcademyLesson").value=target;
+   if(!directLesson)begin(target);
+   setTimeout(editCreatorLesson,0);
+ }
 })();
 </script><script defer src="/kids/test-console/return-to-studio.js"></script></body></html>
