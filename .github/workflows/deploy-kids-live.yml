@@ -105,8 +105,11 @@ jobs:
           if(storyHubJs.includes("scrollPlayerElementIntoView")||storyHubJs.includes("gh-podcast-meta"))throw new Error("Later inline podcast/page-flow reader regression returned");
           if(storyHubCss.includes("position:sticky!important")||storyHubCss.includes(".gh-podcast-meta")||storyHubCss.includes(".gh-readonly"))throw new Error("Later sticky podcast StoryPlayer styling returned");
           if(!navigationJs.includes('gestureVersion:"disabled-tap-only-v1325"'))throw new Error("Kids tap-only navigation missing");
-          if(![index,start,shell].every(html=>html.includes('/kids/kids-nav-stable-v1326.css?v=1')))throw new Error("Kids fixed navigation CSS missing in one entry shell");
-          if(!sw.includes('/kids/kids-nav-stable-v1326.css?v=1'))throw new Error("Kids fixed navigation not offline cached");
+          if(!navigationJs.includes("KIDS_HOME_SCROLL_AUTHORITY_V1327")||!navigationJs.includes('shell.addEventListener("scroll"')||!navigationJs.includes("homeAtEntry"))throw new Error("Kids home scroll authority missing");
+          if(!stableNavCss.includes("KIDS_HOME_ANCHOR_GUARD_V1327")||!stableNavCss.includes("KIDS_MAIN_TAB_NO_SHIFT_V1327"))throw new Error("Kids home scroll anchor/animation regression");
+          if(![index,start,shell].every(html=>html.includes("/kids/navigation-v1182.js?v=1327")))throw new Error("Kids navigation v1327 not loaded in every entry shell");
+          if(![index,start,shell].every(html=>html.includes('/kids/kids-nav-stable-v1326.css?v=1327')))throw new Error("Kids fixed navigation CSS missing in one entry shell");
+          if(!sw.includes('/kids/kids-nav-stable-v1326.css?v=1327'))throw new Error("Kids fixed navigation not offline cached");
           if(!stableNavCss.includes("position:fixed!important")||!stableNavCss.includes("grid-template-columns:repeat(5,minmax(0,1fr))!important")||!stableNavCss.includes("height:62px!important")||!stableNavCss.includes("#duaHubDetail.open > .kids-detail-appbar"))throw new Error("Kids stable navigation geometry regression");
           if(['pointerdown','pointermove','pointerup','touchstart','touchmove','touchend'].some(evt=>navigationJs.includes('document.addEventListener("'+evt+'"')))throw new Error("Global Kids swipe handlers returned");
           if([sahabaJs,sahabiyyatJs,deenJs].some(js=>js.includes("installSwipeBack(")))throw new Error("Story swipe-back returned");
