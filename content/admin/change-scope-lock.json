@@ -155,6 +155,16 @@
   ],
   "unlockedScopes": [
     {
+      "id": "test-quran-canonical-v1103-isolated-refresh-20261011",
+      "at": "2026-10-11T21:34:00+02:00",
+      "approvedBy": "user-explicit-fix-test-quran-player-20261011",
+      "reason": "Nur Dar-Test-Vollplayer V1103 durch isolierten Test-Deploy aktualisieren. Kein Besucher-, Kids- oder Push-Code. Marker ist reine Test-Release-Metadatei und darf keinen Besucher-Deploy anstoßen.",
+      "paths": [
+        "test/content/quran-player-release-v1103.json"
+      ],
+      "expiresAt": "2026-10-18T23:59:00.000Z"
+    },
+    {
       "id": "quellen-royal-manuskript-v42-only-20261011",
       "at": "2026-10-11T19:15:00+02:00",
       "approvedBy": "user-explicit-quellen-seite-komplett-umbauen-live-push-20261011",
