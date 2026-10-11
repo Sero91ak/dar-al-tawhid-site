@@ -657,8 +657,15 @@ function termsFor(lesson,age,limit=7){
  }).filter(t=>t.found).sort((a,b)=>Number(b.priority)-Number(a.priority)).slice(0,limit).map(t=>t.entry);
 }
 function phrase(entry,age){
- const a=entry?.age?.[age]||entry?.age?.["6-8"];
- return a?entry.term+" bedeutet: "+a:null;
+ const a=String(entry?.age?.[age]||entry?.age?.["6-8"]||"").trim();
+ if(!a)return null;
+ // An age-level definition that already begins with its term must not be
+ // prefixed a second time. It is a pedagogical explanation, not a quote.
+ const spoken=plain(a),word=plain(entry.term);
+ const startsWithTerm=spoken===word||spoken.startsWith(word+" ")||spoken.startsWith(word+":");
+ const startsWithVariant=(entry.id==="tazkiyah"&&spoken.startsWith("tazkiyat an nafs"))||
+  (entry.id==="salam"&&spoken.startsWith("as salamu"));
+ return startsWithTerm||startsWithVariant?a:entry.term+" bedeutet: "+a;
 }
 function approvedVoiceFor(entry,age,owner){
  const text=phrase(entry,age);
