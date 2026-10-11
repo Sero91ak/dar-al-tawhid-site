@@ -1,5 +1,5 @@
 {
-  "version": "academy-year-v1-20261010",
+  "version": "academy-year-v2-20261011-test-drafts-not-released",
   "scope": "Editorial calendar structure only. Not a verified 208-lesson curriculum. Pending slots must never be rendered as available lessons.",
   "goals": {
     "weeks": 52,
@@ -13,7 +13,8 @@
       "4-5",
       "6-8",
       "9-10"
-    ]
+    ],
+    "testDraftsNotApproved": 6
   },
   "approvalGates": [
     "Qurʾān verse checked against Arabic original and German meaning",
@@ -454,14 +455,16 @@
           "mode": "new",
           "editorialSlot": 39,
           "lessonId": null,
-          "status": "awaiting-authentic-source-and-content-review"
+          "status": "source-checked-test-draft-not-approved",
+          "draftLessonId": "tarbiyyah-kleine-aufgaben"
         },
         {
           "weekday": "Freitag",
           "mode": "new",
           "editorialSlot": 40,
           "lessonId": null,
-          "status": "awaiting-authentic-source-and-content-review"
+          "status": "source-checked-test-draft-not-approved",
+          "draftLessonId": "familie-geschwister-freundlich"
         },
         {
           "weekday": "Samstag",
@@ -481,14 +484,16 @@
           "mode": "new",
           "editorialSlot": 41,
           "lessonId": null,
-          "status": "awaiting-authentic-source-and-content-review"
+          "status": "source-checked-test-draft-not-approved",
+          "draftLessonId": "iman-offenbarte-buecher"
         },
         {
           "weekday": "Dienstag",
           "mode": "new",
           "editorialSlot": 42,
           "lessonId": null,
-          "status": "awaiting-authentic-source-and-content-review"
+          "status": "source-checked-test-draft-not-approved",
+          "draftLessonId": "iman-juengster-tag"
         },
         {
           "weekday": "Mittwoch",
@@ -499,14 +504,16 @@
           "mode": "new",
           "editorialSlot": 43,
           "lessonId": null,
-          "status": "awaiting-authentic-source-and-content-review"
+          "status": "source-checked-test-draft-not-approved",
+          "draftLessonId": "iman-allahs-wissen-weisheit"
         },
         {
           "weekday": "Freitag",
           "mode": "new",
           "editorialSlot": 44,
           "lessonId": null,
-          "status": "awaiting-authentic-source-and-content-review"
+          "status": "source-checked-test-draft-not-approved",
+          "draftLessonId": "aqidah-fragen-respektvoll"
         },
         {
           "weekday": "Samstag",
