@@ -19,7 +19,7 @@ assert.match(sql,/insert into public\.kids_parent_contacts/);
 assert.match(sql,/insert into public\.kids_accounts/);
 assert.ok(!/update\s+public\.kids_accounts/i.test(sql),"No password or legacy-learning-progress change");
 assert.match(legacy,/create or replace function public\.kids_register\(/i);
-assert.ok(!/insert\s+into\s+public\.kids_accounts/i.test(legacy),"Legacy public register must not INSERT");
+assert.ok(!/insert\s+into\s+public\.kids_accounts/i.test(legacy.replace(/^\s*--.*$/gm,"")),"Legacy public register must not INSERT");
 assert.match(edge,/admin\.auth\.getUser\(tokenMatch\[1\]\)/);
 assert.match(edge,/user\.email_confirmed_at/);
 assert.match(edge,/user\.email\?\.toLowerCase\(\) !== email/);
