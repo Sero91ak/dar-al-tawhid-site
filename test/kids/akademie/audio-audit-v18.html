@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive"><meta name="theme-color" content="#081e2b">
+<title>KIDS · 511-Stimmenprüfstand · DĀR AL TAWḤĪD</title>
+<style>
+:root{color-scheme:dark;--bg:#081c2c;--panel:#102e3e;--line:rgba(233,203,140,.24);--ink:#fff4e1;--muted:#d5dfdf;--gold:#ebd195;--sea:#a5ded8}
+*{box-sizing:border-box}html{background:var(--bg)}body{margin:0;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Avenir Next",sans-serif;background:radial-gradient(ellipse at 50% 0,#1a4b59,transparent 50%),var(--bg);line-height:1.5;min-height:100dvh}
+main{max-width:1150px;margin:auto;padding:calc(18px + env(safe-area-inset-top)) max(15px,env(safe-area-inset-right)) calc(28px + env(safe-area-inset-bottom)) max(15px,env(safe-area-inset-left))}
+h1,h2{font-family:Georgia,serif}h1{font-size:clamp(29px,6vw,47px);line-height:1.16;color:var(--gold);margin:9px 0}h2{font-size:clamp(20px,4vw,26px)}p{margin:9px 0;color:var(--muted)}
+a{color:var(--gold)}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.eyebrow{font-size:12px;color:var(--gold);letter-spacing:.13em;font-weight:850}
+.top{border-bottom:1px solid var(--line);padding:0 0 18px}.lead{max-width:77ch}.top a{display:inline-block;min-height:38px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:19px 0 24px}
+.stat{background:rgba(9,36,51,.76);border:1px solid var(--line);border-radius:15px;padding:13px}
+.stat strong{font-size:clamp(21px,4.5vw,36px);font-variant-numeric:tabular-nums;display:block;color:var(--gold)}
+.stat span{display:block;font-size:12px;color:var(--muted)}
+.note{border-left:3px solid var(--gold);padding:12px 14px;background:#173440;border-radius:9px}
+.toolbar{display:grid;grid-template-columns:minmax(180px,2fr) repeat(3,minmax(120px,1fr));gap:10px;margin:18px 0 12px}
+label{font-size:12px;display:grid;gap:5px;color:var(--gold);font-weight:800}
+input,select{font:inherit;font-size:15px;min-width:0;width:100%;min-height:44px;padding:9px 10px;border-radius:11px;color:var(--ink);background:#071e2c;border:1px solid var(--line)}
+.results-head{display:flex;justify-content:space-between;flex-wrap:wrap;gap:7px;align-items:center}
+#list{display:grid;gap:10px;margin-top:9px}.clip{border:1px solid var(--line);border-radius:17px;padding:15px;background:#0e2c3c}
+.clip-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:center}
+.clip .phrase{font-size:clamp(15px,2vw,17px);line-height:1.55;color:var(--ink);overflow-wrap:anywhere;margin:9px 0}
+.clip .meta{font-size:12px;color:var(--muted)}.flag{padding:5px 9px;border-radius:9px;background:rgba(217,192,132,.1);border:1px solid rgba(217,192,132,.32);font-weight:750;font-size:11px;color:var(--gold)}
+.flag.ready{color:var(--sea);border-color:rgba(155,231,218,.35)}
+.voice-controls{margin-top:11px;border-top:1px solid var(--line);padding-top:9px}.voice-controls audio{max-width:480px;width:100%;min-height:51px}
+.soundlink{display:inline-block;margin-top:5px;font-size:12px}
+button{font:inherit;border:1px solid var(--line);background:#184353;color:var(--ink);border-radius:10px;padding:10px 15px;min-height:44px;cursor:pointer}
+#more{margin:15px auto;display:block}#error{color:#ffe1ba}
+footer{margin-top:27px;padding:17px 0;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+@media(max-width:720px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.toolbar{grid-template-columns:repeat(2,minmax(0,1fr))}.search-label{grid-column:1/-1}}
+@media(max-width:390px){.clip{padding:12px}}
+</style></head><body><main>
+<header class="top"><a href="/test/kids/akademie/index.html">← Zum Ersteller-Prüfstand</a>
+<div class="eyebrow">DĀR AL TAWḤĪD KIDS · V18 · GESCHÜTZTE AUDIOKONTROLLE</div>
+<h1>Masterstimme · Audio-Inventar</h1>
+<p class="lead">Hier kontrollierst du jede für den Unterricht vorgesehene deutsche Sprachphrase. Der Prüfstand verbindet die <strong>454 bisherigen Texte</strong> mit den <strong>57 bisher fehlenden Ṣidq-Texten</strong>. Nur wirklich gespeicherte Aufnahmen bekommen einen Player.</p>
+<p class="note">Vorhandene Hörproben sind nicht automatisch für Kinder freigegeben. Dieser Prüfstand erzeugt keine Sprache, verwendet keine Gerätestimme und speichert keine Kinder-Lernstände. Qurʾān-Rezitationen bleiben separat.</p>
+</header>
+<div class="stats" aria-live="polite">
+<div class="stat"><strong id="total">–</strong><span>Geplante Sprachtexte</span></div>
+<div class="stat"><strong id="existing">–</strong><span>Audio in QA-Staging</span></div>
+<div class="stat"><strong id="approved">–</strong><span>Davon freigegeben</span></div>
+<div class="stat"><strong id="missing">–</strong><span>Ohne Aufnahme</span></div>
+</div>
+<div class="toolbar">
+<label class="search-label">Inhalt suchen<input type="search" id="search" placeholder="Wahrheit, Qurʾān, Gruß …" autocomplete="off"></label>
+<label>Fach<select id="subject"><option value="all">Alle Fächer</option><option value="sidq">Ṣidq – erste Lektion</option><option value="akhlaq">Akhlāq</option><option value="adab">Adab</option><option value="fiqh">Fiqh</option><option value="aqidah">ʿAqīdah</option></select></label>
+<label>Altersgruppe<select id="age"><option value="all">Alle Altersgruppen</option><option value="4-5">4–5 Jahre</option><option value="6-8">6–8 Jahre</option><option value="9-10">9–10 Jahre</option></select></label>
+<label>Audio-Status<select id="status"><option value="all">Alle</option><option value="qa">Vorhanden – Hörprüfung</option><option value="missing">Noch nicht erzeugt</option><option value="approved">Freigegeben</option></select></label>
+</div>
+<div class="results-head"><h2>Unterrichtssätze</h2><span id="matched" aria-live="polite"></span></div>
+<p id="error" role="alert" hidden></p><div id="list" aria-live="polite"></div>
+<button id="more" type="button" hidden>Weitere 40 Einträge anzeigen</button>
+<footer>Alle Dateipfade werden vor der Wiedergabe auf eigene KIDS-M4A-Assets geprüft. Keine TTS-Ersatzstimmen. Lernfortschritte und Freischaltungen werden hier nicht verändert.</footer>
+</main>
+<script>
+(function(){
+"use strict";
+const $=s=>document.querySelector(s);
+const jpath={
+ v9:"/kids/data/academy-voice-plan-v9.json",
+ sidq:"/kids/data/academy-sidq-voice-plan-v18.json",
+ pilot:"/kids/data/academy-audio-staging-v9.json",
+ extra:"/kids/data/academy-audio-staging-sidq-v18.json",
+ expanded:"/kids/data/academy-audio-staging-v9-expansion.json"
+};
+const subjects=["akhlaq","adab","fiqh","aqidah"];
+const safeAudio=/^\/kids\/assets\/kids-academy-audio\/[0-9a-f]{20}\.m4a$/i;
+let all=[],audio=new Map(),filtered=[],limit=40;
+async function getJSON(key,required){
+ try{
+  const resp=await fetch(jpath[key],{cache:"no-store"});
+  if(!resp.ok)throw Error("HTTP "+resp.status);
+  const data=await resp.json();
+  if(!data||typeof data!=="object")throw Error("Ungültige JSON-Datei");
+  return data;
+ }catch(e){if(required)throw Error(key+": "+String(e.message||e));return null}
+}
+function node(tag,content,parent,cl){
+ const e=document.createElement(tag);if(content!=null)e.textContent=content;
+ if(cl)e.className=cl;(parent||$("#list")).appendChild(e);return e
+}
+function statusOf(entry){
+ if(!entry)return "missing";
+ return entry.approvedForPlayback===true?"approved":"qa";
+}
+function passes(p){
+ const q=$("#search").value.normalize("NFC").trim().toLocaleLowerCase("de");
+ if(q&&!p.text.toLocaleLowerCase("de").includes(q)&&!p.contexts.some(x=>x.lessonId.toLocaleLowerCase("de").includes(q)))return false;
+ const subj=$("#subject").value;
+ if(subj!=="all"&&!p.contexts.some(x=>subj==="sidq"?x.lessonId==="sidq":x.lessonId.startsWith(subj+"-")))return false;
+ const age=$("#age").value;
+ if(age!=="all"&&!p.contexts.some(x=>x.age==="all"||x.age===age))return false;
+ const s=$("#status").value;
+ if(s!=="all"&&statusOf(audio.get(p.text))!==s)return false;
+ return true;
+}
+function draw(){
+ $("#list").replaceChildren();const rows=filtered.slice(0,limit);
+ for(const p of rows){
+  const a=audio.get(p.text),state=statusOf(a);
+  const box=node("article",null,null,"clip");
+  const head=node("div",null,box,"clip-head");
+  node("strong",p.contexts?.[0]?.lessonId==="sidq"?"Ṣidq · Wahrhaftigkeit":(p.contexts?.[0]?.lessonId||"Unterricht"),head);
+  const flag=node("span",state==="approved"?"Freigegeben":state==="qa"?"Originalclip · Hörprüfung":"Aufnahme fehlt",head,"flag"+(state!=="missing"?" ready":""));
+  node("p",p.text,box,"phrase");
+  const meta=p.contexts.map(x=>x.kind+" · "+x.age).slice(0,3).join(" | ")+(p.contexts.length>3?" · +"+(p.contexts.length-3):"");
+  node("p",meta,box,"meta");
+  if(state!=="missing"&&a&&safeAudio.test(a.url)){
+   const area=node("div",null,box,"voice-controls");
+   const player=node("audio",null,area);player.controls=true;player.preload="none";player.playsInline=true;
+   const source=node("source",null,player);source.type="audio/mp4";source.src=a.url+"?qa=v18";
+   const link=node("a","Audiodatei direkt öffnen",area,"soundlink");link.href=a.url+"?qa=v18";link.rel="nofollow";
+   if(state!=="approved")node("p","Noch keine Freigabe für regulären Kinderunterricht.","meta",area);
+  }
+ }
+ $("#matched").textContent=filtered.length+" Treffer · "+Math.min(limit,filtered.length)+" angezeigt";
+ $("#more").hidden=filtered.length<=limit;
+}
+function apply(){limit=40;filtered=all.filter(passes);draw()}
+async function init(){
+ const [v9,sidq,pilot,extra,expanded]=await Promise.all([
+  getJSON("v9",true),getJSON("sidq",true),getJSON("pilot",true),
+  getJSON("extra",false),getJSON("expanded",false)
+ ]);
+ if(v9.modelId!=="eleven_v4"||sidq.modelId!=="eleven_v4"||sidq.lessonId!=="sidq"||pilot.modelId!=="eleven_v4")throw Error("Falsche Modell-/Lektionsdaten");
+ if(v9.phraseCount!==454||sidq.phraseCount!==57)throw Error("Audio-Lernplan wurde geändert – bitte V18-Plan aktualisieren");
+ const byText=new Map();
+ for(const p of [...v9.phrases,...sidq.phrases]){
+  if(!p||typeof p.text!=="string"||!Array.isArray(p.contexts))throw Error("Ungültiger Satzdatensatz");
+  if(byText.has(p.text)){byText.get(p.text).contexts.push(...p.contexts);continue}
+  byText.set(p.text,{text:p.text,contexts:[...p.contexts]});
+ }
+ all=[...byText.values()];
+ for(const manifest of [pilot,extra,expanded]){
+  if(!manifest||!manifest.stagingOnly||manifest.modelId!=="eleven_v4"||manifest.voiceSettingsProfile!=="kids_story")continue;
+  for(const [text,entry] of Object.entries(manifest.entries||{})){
+   if(!byText.has(text)||!entry||!safeAudio.test(entry.url)||entry.modelId!=="eleven_v4")continue;
+   if(!audio.has(text))audio.set(text,entry);
+  }
+ }
+ $("#total").textContent=all.length;
+ $("#existing").textContent=audio.size;
+ $("#approved").textContent=[...audio.values()].filter(x=>x.approvedForPlayback===true).length;
+ $("#missing").textContent=all.length-audio.size;
+ apply();
+}
+for(const id of ["search","subject","age","status"])$(("#"+id)).addEventListener(id==="search"?"input":"change",apply);
+$("#more").addEventListener("click",()=>{limit+=40;draw()});
+init().catch(e=>{$("#error").hidden=false;$("#error").textContent="Inventar derzeit nicht vollständig verfügbar: "+String(e.message||e);
+ $("#matched").textContent="Quelle prüfen";$("#more").hidden=true});
+})();
+</script>
+</body></html>
