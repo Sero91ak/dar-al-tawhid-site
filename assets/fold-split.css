@@ -547,3 +547,40 @@ html[data-layout-surface="workspace"] #appView :is(.quiz-shell,.quiz-shell-pro) 
   min-width:0;
   max-width:100%;
 }
+
+
+/* v1331.1 · Qurʾān rail readability on unfolded Fold/tablets:
+   four filters must not shrink into unreadable touching labels. */
+html[data-fold-dual="1"]:not([data-layout-surface="phone-landscape"]) .dar-fold[data-fold-family="quran"] .qov-segment-bar{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:6px!important;
+  overflow-x:visible!important;
+  width:100%!important;
+  min-width:0!important;
+}
+html[data-fold-dual="1"]:not([data-layout-surface="phone-landscape"]) .dar-fold[data-fold-family="quran"] .qov-segment-btn{
+  min-width:0!important;
+  width:100%!important;
+  min-height:42px!important;
+  white-space:normal!important;
+  overflow-wrap:normal!important;
+  font-size:clamp(12px,1.4vw,14px)!important;
+  line-height:1.25!important;
+  padding:8px 5px!important;
+  text-align:center!important;
+}
+html[data-fold-dual="1"]:not([data-layout-surface="phone-landscape"]) .dar-fold[data-fold-family="quran"] .qov-resume-stack{
+  grid-template-columns:minmax(0,1fr)!important;
+  min-width:0!important;
+}
+html[data-fold-dual="1"]:not([data-layout-surface="phone-landscape"]) .dar-fold[data-fold-family="quran"] :is(.qov-nav-stack,.qov-search-wrap,.qov-search-shell,.qov-filter-bar,.qov-jump-wrap,.qov-page,.qov-main){
+  min-width:0!important;
+  max-width:100%!important;
+  box-sizing:border-box!important;
+}
+html[data-fold-dual="1"]:not([data-layout-surface="phone-landscape"]) .dar-fold[data-fold-family="quran"] .qov-search{
+  width:100%!important;
+  min-width:0!important;
+  font-size:max(14px,1rem)!important;
+}
