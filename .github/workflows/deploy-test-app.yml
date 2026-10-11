@@ -77,6 +77,27 @@ jobs:
           node scripts/overlay-test-staging-from-branch.js
           node scripts/app-stability-repair.js
 
+      # Keep the approved adult Test Quran Player independent of other branches.
+      # This affects only /test resources, never visitor or KIDS application code.
+      - name: Dar Test Adult Quran V10.8-R canonical assets
+        run: |
+          git fetch origin test-quran-player-v108r-canonical
+          git checkout origin/test-quran-player-v108r-canonical -- test/assets/dar-quran-player.js test/assets/dar-quran-player.css
+          node - <<'NODE'
+          const fs=require('fs');
+          const script=fs.readFileSync('test/assets/dar-quran-player.js','utf8');
+          const match=script.match(/PLAYER_BUILD\s*=\s*(\d+)/);
+          if(!match)throw Error('Test Quran player build missing');
+          const version=match[1], file='test/index.html';
+          let html=fs.readFileSync(file,'utf8');
+          if(!/\/test\/assets\/dar-quran-player\.js\?v=\d+/.test(html)||!/var WANT=\d+;/.test(html))
+            throw Error('Test shell missing player script or boot version');
+          html=html.replace(/(\/test\/assets\/dar-quran-player\.js\?v=)\d+/g, '$1'+version)
+                   .replace(/var WANT=\d+;/g, 'var WANT='+version+';');
+          fs.writeFileSync(file,html);
+          console.log('Dar Test Quran Player canonical version',version);
+          NODE
+
       - name: Build + Build-IDs synchronisieren
         run: npm run build
 
