@@ -167,7 +167,14 @@ async function boot(){
    if(!response.ok)throw Error(url+" HTTP "+response.status);
    return response.json();
   }));
-  combine([result[0],result[1]],result[2],result[3],result[4]);
+  // Additional reviewed lesson packs are optional until their separate Kids-app deploy.
+  // A missing/new manifest never blocks the existing 34-lesson creator audit.
+  let next=null;
+  try{
+   const extra=await fetch("/kids/data/academy-voice-plan-v22.json",{cache:"no-store",credentials:"same-origin"});
+   if(extra.ok)next=await extra.json();
+  }catch(_){}
+  combine(next?[result[0],result[1],next]:[result[0],result[1]],result[2],result[3],result[4]);
  }catch(e){setText("#resultCount","Audio-Prüfung konnte nicht geladen werden.");setText("#resultState",e.message||"Unbekannter Fehler");}
 }
 for(const id of ["search","subject","age","status"])$(id==="search"?"#search":"#"+id).addEventListener(id==="search"?"input":"change",()=>{if(rows.length)filter()});
