@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-10-11T22:41:30Z",
+  "timestamp": "2026-10-11T22:46:56Z",
   "trigger": "workflow_run",
-  "finishedDeployConclusion": "success",
-  "finishedDeployRun": "38181162899",
+  "finishedDeployConclusion": "failure",
+  "finishedDeployRun": "38181658941",
   "live": {
     "buildId": "kids-shell-v201-dua-v4-1306",
     "label": "KIDS · V1.09.22",
@@ -44,6 +44,24 @@
   },
   "lastDeployRuns": [
     {
+      "conclusion": null,
+      "created_at": "2026-10-11T22:45:25Z",
+      "head_sha": "c6700e4ccd37ee8a2f41e5085cca93dd52afe675",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38181678846",
+      "id": 38181678846,
+      "status": "in_progress",
+      "updated_at": "2026-10-11T22:46:50Z"
+    },
+    {
+      "conclusion": "failure",
+      "created_at": "2026-10-11T22:45:07Z",
+      "head_sha": "4240b8f0922d975f37ac010de74a6025d9eee34b",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38181658941",
+      "id": 38181658941,
+      "status": "completed",
+      "updated_at": "2026-10-11T22:46:47Z"
+    },
+    {
       "conclusion": "success",
       "created_at": "2026-10-11T22:37:33Z",
       "head_sha": "25433ec8b911adf6e2413d499536ac519a0debd1",
@@ -78,24 +96,6 @@
       "id": 38179638767,
       "status": "completed",
       "updated_at": "2026-10-11T22:17:54Z"
-    },
-    {
-      "conclusion": "success",
-      "created_at": "2026-10-11T22:13:38Z",
-      "head_sha": "27cdc2cd3eb9b02e08b08c77b00da6e808f05751",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38179569503",
-      "id": 38179569503,
-      "status": "completed",
-      "updated_at": "2026-10-11T22:15:42Z"
-    },
-    {
-      "conclusion": "success",
-      "created_at": "2026-10-11T22:00:43Z",
-      "head_sha": "09ba876fb13201a7ef1350bdd4a4b5acfcf73a88",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38178685818",
-      "id": 38178685818,
-      "status": "completed",
-      "updated_at": "2026-10-11T22:02:57Z"
     }
   ]
 }
