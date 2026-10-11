@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#081923">
+<title>Mein Gebet in 3D · V8.0 Salām-Test · DĀR AL TAWḤĪD KIDS</title>
+<style>
+:root{color-scheme:dark;--base:#061a27;--panel:#0c2a38;--panel2:#102e3d;--gold:#f4d29b;--cream:#fffaf0;--pale:#b8cbd0;--rim:rgba(241,207,149,.28);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100svh;color:var(--cream);background:radial-gradient(ellipse at 90% 0%,rgba(25,91,114,.27),transparent 55%),linear-gradient(160deg,#081c2b,#04131c 80%);-webkit-tap-highlight-color:transparent}button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid #fcdba8;outline-offset:3px}button:disabled{cursor:not-allowed;opacity:.45}.wrap{max-width:1360px;margin:auto;padding:20px clamp(12px,2.6vw,30px) 85px}.top{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:0 2px 17px;border-bottom:1px solid var(--rim)}.brand{color:#f2d5a3;font-size:12px;font-weight:900;letter-spacing:.13em;line-height:1.3}.brand strong{display:block;font-size:20px;color:#fff8e9;letter-spacing:0}.release{flex:none;font-size:10px;font-weight:900;letter-spacing:.04em;padding:9px 11px;border:1px solid #927d57;border-radius:99px;color:#f4d398}.intro{display:flex;gap:18px;align-items:flex-end;justify-content:space-between;padding:21px 0 16px}.eyebrow{color:var(--gold);font-size:11px;letter-spacing:.21em;font-weight:900;margin:0 0 8px}.intro h1{font-size:clamp(30px,5.7vw,56px);letter-spacing:-.055em;line-height:1;margin:0 0 9px}.intro p{color:#bfd1d6;max-width:640px;font-size:13px;line-height:1.55;margin:0}.buildtag{color:#f0d1a2;font-size:12px;white-space:nowrap}.workspace{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(315px,.82fr);gap:17px;align-items:start}.viewer,.side,.statusbox,.below{border:1px solid var(--rim);border-radius:24px;background:linear-gradient(142deg,rgba(17,50,65,.95),rgba(8,30,42,.97));box-shadow:0 22px 55px rgba(0,0,0,.22);min-width:0}.viewer{padding:15px;overflow:hidden}.viewhead{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:2px 3px 11px;flex-wrap:wrap}.vtitle{font-size:14px;font-weight:850}.vtitle small{display:block;color:#a9c1c9;font-size:11px;font-weight:500;margin-top:4px}.modelbadge{font-size:10px;font-weight:900;letter-spacing:.04em;color:#ffdfa9;border:1px solid rgba(245,215,158,.35);padding:8px 10px;border-radius:99px;background:#273746}.stage{position:relative;min-height:390px;height:clamp(390px,53vw,650px);max-height:75svh;border-radius:20px;overflow:hidden;border:1px solid rgba(190,223,227,.17);background:radial-gradient(ellipse at 50% 40%,#19536a 0,#103445 49%,#071f2e 83%);touch-action:pan-y;isolation:isolate}.stage:before{position:absolute;content:"";inset:0;pointer-events:none;background:radial-gradient(circle at 48% 37%,transparent 36%,rgba(3,14,22,.54) 100%);z-index:1}.stage canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}.stage canvas:active{cursor:grabbing}.view-label{position:absolute;left:15px;top:14px;pointer-events:none;z-index:2;display:flex;gap:7px;align-items:center;color:#eddec4;font-size:11px;background:rgba(5,22,31,.56);border:1px solid #65828e77;padding:9px 11px;border-radius:100px}.live-dot{width:8px;height:8px;border-radius:50%;background:#99dfc1;box-shadow:0 0 10px #99dfc18a}.angle-label{position:absolute;right:13px;top:14px;z-index:2;color:#d9e8e5;font-size:11px;background:rgba(3,25,36,.69);border-radius:50px;padding:9px 10px}.watermark{position:absolute;bottom:15px;left:50%;transform:translateX(-50%);width:max-content;max-width:calc(100% - 15px);z-index:2;padding:7px 12px;border-radius:8px;background:rgba(4,24,32,.63);color:#ead29e;font-size:10px;letter-spacing:.06em;font-weight:900;text-align:center;pointer-events:none}.stagefail{position:absolute;inset:0;display:none;z-index:5;align-items:center;justify-content:center;padding:30px;text-align:center;background:#102a36;color:#ffdbac}.controls{display:flex;flex-wrap:wrap;gap:9px;align-items:center;justify-content:space-between;padding:13px 2px 5px}.group{display:flex;gap:7px;flex-wrap:wrap;align-items:center}.btn,.smallbtn,.pose{border:1px solid var(--rim);color:#fff6e5;background:#153b4b;border-radius:13px;min-height:43px;padding:10px 13px;font-weight:740;font-size:12px}.btn.active,.pose[aria-pressed="true"]{background:#ebcc96;color:#142c39;border-color:#ebcc96}.btn.icon{font-size:17px;padding:8px 14px}.btngold{background:#f0d5a0;color:#1b3240}.speed{color:#e0ded4;font-size:12px;display:flex;align-items:center;gap:7px;padding:5px 2px}.speed input{accent-color:var(--gold);width:85px}.hint{padding:9px 4px 0;font-size:11px;color:#a8c0c9}.side{padding:17px}.label{font-size:10px;font-weight:900;color:var(--gold);letter-spacing:.13em;margin:0 0 7px}.side h2{font-size:24px;letter-spacing:-.03em;line-height:1.12;margin:0 0 9px}.side p{font-size:12px;color:#c2d1d2;line-height:1.55;margin:0 0 16px}.profile-tabs{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:12px 0 17px}.tab{border:1px solid var(--rim);border-radius:13px;color:#e2e7e5;padding:11px 8px;background:#162e3d;min-height:44px;font-weight:750;font-size:13px}.tab[aria-pressed="true"]{border-color:#efc985;background:#efc985;color:#12303f}.tab.girl[aria-pressed="true"]{border-color:#f7b4d2;background:#f7b4d2;color:#282235}.pose-title{font-size:15px;font-weight:850;margin:20px 0 9px}.poses{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.pose{text-align:center;padding:12px 4px;min-height:69px;white-space:normal;line-height:1.15}.pose span{display:block;font-size:10px;opacity:.8;margin-top:5px;font-weight:650}.pose[aria-pressed="true"] span{color:#273e4b}.current{margin-top:14px;border:1px solid var(--rim);background:rgba(245,203,146,.07);border-radius:16px;padding:14px}.current h3{margin:0 0 5px;font-size:19px}.current p{margin:0;font-size:12px;line-height:1.55;color:#d9ddd6}.warning{background:rgba(236,172,95,.10);border:1px solid #9e825c;border-radius:14px;padding:12px;color:#f6dbb9;font-size:11px;line-height:1.55;margin-top:15px}.below{margin-top:17px;padding:16px 19px}.below h2{font-size:17px;margin:0 0 10px}.rows{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.row{background:#132f3c;border:1px solid #ffffff16;border-radius:13px;padding:12px}.row .v{font-size:17px;font-weight:850;color:#f1d397}.row .k{color:#b2c8cf;font-size:11px;line-height:1.5;margin-top:3px}.foot{color:#8faab3;font-size:11px;line-height:1.7;margin:14px 4px}.footerlink{color:#f3d99f}.progress{height:5px;background:#263e49;border-radius:9px;margin:13px 0;overflow:hidden}.progress>div{width:0;height:100%;background:#f4d29b;transition:width .12s}.navrow{display:flex;justify-content:space-between;align-items:center;gap:7px}.steptext{font-size:11px;color:#d8c69e}.privacy{font-size:11px;margin-top:12px;color:#c4d0cf}.prefers{font-size:10px;color:#c1cfd1}.back{color:#eed6a5;text-decoration:none;font-size:11px;font-weight:700}.not-app{display:inline-block;font-size:10px;color:#fcdb9f}
+@media(max-width:950px){.workspace{grid-template-columns:1fr}.side{order:2}.stage{height:clamp(400px,65vw,570px)}.rows{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.wrap{padding:14px 10px 65px}.intro{padding:15px 3px 12px}.intro h1{font-size:36px}.release{font-size:9px;padding:8px}.buildtag{display:none}.viewer{padding:9px;border-radius:19px}.side{padding:14px;border-radius:20px}.stage{height:410px;min-height:350px;border-radius:15px}.poses{grid-template-columns:repeat(3,1fr)}.pose{font-size:12px}.controls{padding:9px 3px}.rows{grid-template-columns:1fr 1fr}.watermark{font-size:9px}.hint{font-size:10px}.stage:before{background:none}}
+@media(max-width:350px){.stage{height:355px}.intro h1{font-size:32px}.pose{font-size:11px}.btn{padding:8px 10px}.smallbtn{font-size:11px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style></head><body><div class="wrap">
+<header class="top"><div class="brand">DĀR AL TAWḤĪD<strong>KIDS · MEIN GEBET</strong></div><div class="release">V8.0 · SALĀM-TEST</div></header>
+<section class="intro"><div><div class="eyebrow">ECHTE 3D-BEWEGUNGSTECHNIK · ENTWICKLUNGSLABOR</div><h1>Mein Gebet in 3D</h1><p>Drehe die Figur mit deinem Finger. Wähle eine Gebetsstellung oder starte den animierten Ablauf – direkt in dieser HTML-Vorschau, auch ohne Internet.</p></div><span class="buildtag">3D-Engine · Offline · Kein Live-Push</span></section>
+<main class="workspace"><section class="viewer" aria-label="Drehbare 3D-Gebetsfigur"><div class="viewhead"><div class="vtitle">Bewegliche Gebetsfigur <small>3D-Testmodell · keine freigegebene Originalfigur</small></div><div class="modelbadge">PROTOTYP · NICHT FREIGEGEBEN</div></div>
+<div class="stage" id="stage"><canvas id="scene" aria-label="Interaktive dreidimensionale Vorschau der Gebetsfigur. Mit Finger oder Maus um 360 Grad drehen."></canvas><div class="view-label"><i class="live-dot"></i><span id="viewMode">3D-Bewegungsansicht</span></div><div class="angle-label" id="angleValue">45° · Ansicht</div><div class="watermark">DĀR AL TAWḤĪD · 3D-RIG-VERSUCH · KEIN ORIGINAL-GLB</div><div class="stagefail" id="stagefail" role="alert">WebGL ist auf diesem Gerät nicht verfügbar. Die 3D-Ansicht benötigt einen Browser mit WebGL-Unterstützung.</div></div>
+<div class="controls"><div class="group"><button class="btn btngold" id="play" type="button" aria-label="Alle Gebetsstellungen abspielen">▶ Ablauf starten</button><button class="btn icon" id="prev" type="button" aria-label="Vorherige Stellung">‹</button><button class="btn icon" id="next" type="button" aria-label="Nächste Stellung">›</button><button class="btn" id="resetCam" type="button">Ansicht ↺</button></div><div class="speed"><label for="speed">Tempo</label><input id="speed" type="range" min="0.4" max="2" step="0.2" value="1" aria-label="Animationsgeschwindigkeit"><output id="speedLabel">1,0×</output></div></div><div class="progress" aria-label="Animationsfortschritt"><div id="animationProgress"></div></div><div class="hint">☝ Ziehen = 360° drehen · Mausrad = vergrößern · Gesten funktionieren auf Touchscreen und Tablet. Keine Anmeldung nötig.</div></section>
+<aside class="side"><div class="label">FIGURENWAHL</div><h2>Gebetsstellungen erkunden</h2><p>Das erste funktionsfähige 3D-Bewegungsgerüst mit animierten Gelenkpositionen. Die Gestaltung ist nur eine technische Arbeitsfigur, die nicht mit deinem gesicherten V7.7-Original verwechselt werden darf.</p>
+<div class="profile-tabs"><button class="tab" id="boy" aria-pressed="true" type="button">👦 Junge · Blau</button><button class="tab girl" id="girl" aria-pressed="false" type="button">🧕 Mädchen · Rosé</button></div>
+<div class="label">9 UNABHÄNGIGE TESTSTELLUNGEN</div><div class="poses" id="poses" role="group" aria-label="Gebetsstellungen auswählen"></div>
+<div class="current" aria-live="polite"><div class="navrow"><span class="label" id="poseIndex">01 / 09</span><span class="steptext" id="motionState">Bereit</span></div><h3 id="poseTitle">Qiyām · Stehen</h3><p id="poseDesc">Technischer Test: Hände vor der Brust. Winkel und Kontaktpunkte müssen vor dem Unterricht religiös und visuell geprüft werden.</p><p id="taslimPhase" aria-live="polite" hidden style="border:1px solid rgba(234,199,136,.5);border-radius:14px;background:rgba(240,207,149,.09);padding:12px;color:#ffe1ac;font-weight:700">Salām: zuerst rechts, dann links.</p></div>
+<div class="warning"><strong>Verbindliche Sicherheit:</strong> Keine Gebetsstellung ist fachlich abgenommen. Körperkontakt zum Boden, Hände, Kleidung und Gelenkbewegungen müssen anhand der Originalfiguren und der Quellen einzeln geprüft werden. Die Mädchenanimationen sind <strong>keine</strong> bestätigten eigenständigen Fiqh-Posen.</div><div class="privacy">Keine Speicherung echter Kinder-Lernstände · kein Tracking · keine externen 3D-Bibliotheken.</div></aside></main>
+<section class="below"><h2>3D-Produktion · was jetzt technisch vorhanden ist</h2><div class="rows"><div class="row"><div class="v">3D aktiv</div><div class="k">Geometrie im Browser, frei um 360° drehbar</div></div><div class="row"><div class="v">9 Posen</div><div class="k">Animierte Gelenkkoordinaten und Übergänge</div></div><div class="row"><div class="v">0 externe</div><div class="k">Bibliotheken oder Serverabrufe · offline nutzbar</div></div><div class="row"><div class="v">Noch offen</div><div class="k">Original-GLB V7.7, Skinning, Gewebeprüfung, Geräte-/Religionsabnahme</div></div></div><p class="foot">V8.0 ist die Versionsnummer dieser interaktiven Laborvorschau, nicht die Version eines freigegebenen 3D-Modells. Das geprüfte Original-V7.7-Archiv ist derzeit nicht roh zugänglich; dieses Labor ist ein separater technischer Schritt und keine Nachbildung mit behaupteter Originaltreue. <span class="not-app">Besucher-App unverändert.</span></p></section>
+</div>
+<script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id);
+const canvas=$('scene');let gl;
+try{gl=canvas.getContext('webgl',{antialias:true,alpha:false,depth:true,preserveDrawingBuffer:true});}catch(e){}
+const useGL=!!gl,ctx2d=useGL?null:canvas.getContext('2d');
+if(!useGL&&!ctx2d){$('stagefail').style.display='flex';$('viewMode').textContent='Grafik-Canvas fehlt';return}
+// 3D math: Column-major matrices. All coordinates are genuine 3D positions (x,y,z).
+const vec=(x=0,y=0,z=0)=>[x,y,z],sum=(a,b)=>[a[0]+b[0],a[1]+b[1],a[2]+b[2]],sub=(a,b)=>[a[0]-b[0],a[1]-b[1],a[2]-b[2]],times=(a,s)=>a.map(v=>v*s),len=a=>Math.hypot(...a),norm=a=>{const m=len(a)||1;return times(a,1/m)},cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]],lerp=(a,b,t)=>a.map((v,i)=>v+(b[i]-v)*t),mix=(a,b,t)=>a+(b-a)*t,clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
+function mul(a,b){let o=new Float32Array(16);for(let c=0;c<4;c++)for(let r=0;r<4;r++)for(let k=0;k<4;k++)o[c*4+r]+=a[k*4+r]*b[c*4+k];return o}
+const ident=()=>new Float32Array([1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]);
+function transform(x,y,z,sx=1,sy=1,sz=1){let m=ident();m[0]=sx;m[5]=sy;m[10]=sz;m[12]=x;m[13]=y;m[14]=z;return m}
+function persp(fovy,aspect,near,far){const f=1/Math.tan(fovy/2),nf=1/(near-far);return new Float32Array([f/aspect,0,0,0,0,f,0,0,0,0,(far+near)*nf,-1,0,0,2*far*near*nf,0])}
+function lookAt(eye,target){const z=norm(sub(eye,target)),x=norm(cross([0,1,0],z)),y=cross(z,x);return new Float32Array([x[0],y[0],z[0],0,x[1],y[1],z[1],0,x[2],y[2],z[2],0,-(x[0]*eye[0]+x[1]*eye[1]+x[2]*eye[2]),-(y[0]*eye[0]+y[1]*eye[1]+y[2]*eye[2]),-(z[0]*eye[0]+z[1]*eye[1]+z[2]*eye[2]),1])}
+function oriented(a,b,radiusX,radiusZ){let d=sub(b,a),l=len(d);if(l<1e-5)l=1e-5;const up=norm(d),axis=Math.abs(up[1])>.98?[1,0,0]:[0,1,0],right=norm(cross(axis,up)),fore=cross(right,up);
+return new Float32Array([right[0]*radiusX,right[1]*radiusX,right[2]*radiusX,0,up[0]*l,up[1]*l,up[2]*l,0,fore[0]*radiusZ,fore[1]*radiusZ,fore[2]*radiusZ,0,a[0],a[1],a[2],1])}
+function makeShader(type,src){const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(s));return s}
+const vert=`attribute vec3 aPos; attribute vec3 aNormal; uniform mat4 uVP,uM; varying vec3 vNormal,vWorld; void main(){vec4 w=uM*vec4(aPos,1.0);vWorld=w.xyz;vNormal=normalize(mat3(uM)*aNormal);gl_Position=uVP*w;}`;
+const frag=`precision mediump float; varying vec3 vNormal,vWorld; uniform vec3 uCol;uniform float uDim; void main(){vec3 n=normalize(vNormal);vec3 light=normalize(vec3(-0.44,0.80,0.58));float brightness=0.47+0.58*max(dot(n,light),0.0)+0.1*max(dot(n,normalize(vec3(0.35,0.5,-0.7))),0.0);float edge=pow(1.0-max(dot(n,normalize(vec3(0.15,0.25,1.0))),0.0),2.0);vec3 c=uCol*brightness*uDim+vec3(0.11,0.18,0.20)*edge*0.30;gl_FragColor=vec4(c,1.0);}`;
+let prog,loc; if(useGL){try{prog=gl.createProgram();gl.attachShader(prog,makeShader(gl.VERTEX_SHADER,vert));gl.attachShader(prog,makeShader(gl.FRAGMENT_SHADER,frag));gl.linkProgram(prog);if(!gl.getProgramParameter(prog,gl.LINK_STATUS))throw Error(gl.getProgramInfoLog(prog))}catch(e){$('stagefail').style.display='flex';$('stagefail').textContent='3D-Shader konnte nicht gestartet werden: '+e.message;return}
+gl.useProgram(prog);loc={pos:gl.getAttribLocation(prog,'aPos'),normal:gl.getAttribLocation(prog,'aNormal'),vp:gl.getUniformLocation(prog,'uVP'),m:gl.getUniformLocation(prog,'uM'),col:gl.getUniformLocation(prog,'uCol'),dim:gl.getUniformLocation(prog,'uDim')};gl.enableVertexAttribArray(loc.pos);gl.enableVertexAttribArray(loc.normal)}
+function mesh(vertices,indices){if(!useGL)return{vertices,indices,count:indices.length};const vbo=gl.createBuffer(),ibo=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,vbo);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(vertices),gl.STATIC_DRAW);gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,ibo);gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,new Uint16Array(indices),gl.STATIC_DRAW);return{vbo,ibo,count:indices.length}}
+function sphere(segments=24,rings=16){const v=[],idx=[];for(let y=0;y<=rings;y++){let t=y/rings*Math.PI;for(let x=0;x<=segments;x++){let p=x/segments*Math.PI*2,n=[Math.sin(t)*Math.cos(p),Math.cos(t),Math.sin(t)*Math.sin(p)];v.push(...n,...n)}}for(let y=0;y<rings;y++)for(let x=0;x<segments;x++){let a=y*(segments+1)+x,b=a+segments+1;idx.push(a,b,a+1,b,b+1,a+1)}return mesh(v,idx)}
+function tube(rBottom=1,rTop=1,sides=24){const v=[],idx=[];for(let row=0;row<=1;row++){const y=row,r=row?rTop:rBottom;for(let j=0;j<=sides;j++){const th=j/sides*Math.PI*2,ca=Math.cos(th),sa=Math.sin(th);const n=norm([ca,rBottom-rTop,sa]);v.push(ca*r,y,sa*r,...n)}}for(let j=0;j<sides;j++){let a=j,b=j+sides+1;idx.push(a,b,a+1,b,b+1,a+1)}for(let y=0;y<=1;y++){let base=v.length/6;const normal=y?[0,1,0]:[0,-1,0];v.push(0,y,0,...normal);for(let j=0;j<=sides;j++){let th=j/sides*Math.PI*2,r=y?rTop:rBottom;v.push(Math.cos(th)*r,y,Math.sin(th)*r,...normal)}for(let j=0;j<sides;j++)if(y)idx.push(base,base+j+1,base+j+2);else idx.push(base,base+j+2,base+j+1)}return mesh(v,idx)}
+function disc(){const v=[0,0,0,0,1,0],idx=[];for(let i=0;i<=48;i++){let a=2*Math.PI*i/48;v.push(Math.cos(a),0,Math.sin(a),0,1,0);if(i)idx.push(0,i,i+1)}return mesh(v,idx)}
+const meshes={sphere:sphere(useGL?24:11,useGL?16:8),tube:tube(1,1,useGL?24:12),dress:tube(1,.55,useGL?24:12),sleeve:tube(.63,1,useGL?24:12),disc:disc()};
+let cpuFaces=[],cpuVP=null,cpuEye=[0,0,0],cpuWidth=1,cpuHeight=1;
+function project(v){let m=cpuVP,x=v[0],y=v[1],z=v[2],w=m[3]*x+m[7]*y+m[11]*z+m[15];if(w<.05)return null;return [(.5+.5*(m[0]*x+m[4]*y+m[8]*z+m[12])/w)*cpuWidth,(.5-.5*(m[1]*x+m[5]*y+m[9]*z+m[13])/w)*cpuHeight]}
+function mulpoint(m,x,y,z){return [m[0]*x+m[4]*y+m[8]*z+m[12],m[1]*x+m[5]*y+m[9]*z+m[13],m[2]*x+m[6]*y+m[10]*z+m[14]]}
+function cpuDrawMesh(a,m,color,dim){const verts=a.vertices,indices=a.indices,points=[];for(let j=0;j<verts.length;j+=6)points.push(mulpoint(m,verts[j],verts[j+1],verts[j+2]));
+for(let k=0;k<indices.length;k+=3){const A=points[indices[k]],B=points[indices[k+1]],C=points[indices[k+2]];const pA=project(A),pB=project(B),pC=project(C);if(!pA||!pB||!pC)continue;const avg=times(sum(sum(A,B),C),1/3),direction=norm(sub(cpuEye,avg));const n=norm(cross(sub(B,A),sub(C,A)));const toViewer=n[0]*direction[0]+n[1]*direction[1]+n[2]*direction[2];if(toViewer<-.03)continue;const light=norm([-.44,.8,.58]);const b=clamp((.48+.57*Math.max(0,Math.abs(n[0]*light[0]+n[1]*light[1]+n[2]*light[2])))*dim,.1,1.18);const rgb=color.map(c=>Math.floor(clamp(c*b,0,1)*255));const key=(cpuEye[0]-avg[0])**2+(cpuEye[1]-avg[1])**2+(cpuEye[2]-avg[2])**2;cpuFaces.push({pA,pB,pC,key,color:'rgb('+rgb.join(',')+')'})}}
+function rgba(col,factor){return 'rgb('+col.map(c=>Math.floor(clamp(c*factor,0,1)*255)).join(',')+')'}
+function cameraDistance(v){return (cpuEye[0]-v[0])**2+(cpuEye[1]-v[1])**2+(cpuEye[2]-v[2])**2}
+function cpuSphere(m,col,dim){
+ const center=[m[12],m[13],m[14]],p=project(center);if(!p)return;
+ const c1=project([center[0]+m[0],center[1]+m[1],center[2]+m[2]]),c2=project([center[0]+m[4],center[1]+m[5],center[2]+m[6]]),c3=project([center[0]+m[8],center[1]+m[9],center[2]+m[10]]);
+ if(!c1||!c2||!c3)return;
+ const u=[c1[0]-p[0],c1[1]-p[1]],v=[c2[0]-p[0],c2[1]-p[1]],w=[c3[0]-p[0],c3[1]-p[1]];
+ const rx=Math.max(1,Math.hypot(u[0],v[0],w[0])),ry=Math.max(1,Math.hypot(u[1],v[1],w[1]));
+ cpuFaces.push({primitive:'sphere',key:cameraDistance(center),p,rx,ry,col,dim});
+}
+function cpuCylinder(m,col,dim,type){
+ const a=[m[12],m[13],m[14]],b=[a[0]+m[4],a[1]+m[5],a[2]+m[6]],pa=project(a),pb=project(b);if(!pa||!pb)return;
+ const mid=lerp(a,b,.5),pMid=project(mid);if(!pMid)return;
+ const worldRadius=Math.max(len([m[0],m[1],m[2]]),len([m[8],m[9],m[10]]));
+ const projection=project(sum(mid,[worldRadius,0,0]));if(!projection)return;
+ const baseRadius=clamp(Math.hypot(projection[0]-pMid[0],projection[1]-pMid[1]),2,200);
+ const r1=baseRadius*(type==='dress'?1:type==='sleeve'?.63:1),r2=baseRadius*(type==='dress'?.55:1);
+ const vecx=pb[0]-pa[0],vecy=pb[1]-pa[1],dist=Math.hypot(vecx,vecy),nx=dist>1?vecy/dist:1,ny=dist>1?-vecx/dist:0;
+ cpuFaces.push({primitive:'tube',key:cameraDistance(mid),pa,pb,nx,ny,r1,r2,col,dim});
+}
+function cpuPresent(){
+ cpuFaces.sort((a,b)=>b.key-a.key);ctx2d.fillStyle='#103447';ctx2d.fillRect(0,0,cpuWidth,cpuHeight);
+ for(const f of cpuFaces){
+  if(f.primitive==='rug'){
+   if(f.p.some(v=>!v))continue;
+   ctx2d.beginPath();ctx2d.moveTo(...f.p[0]);for(let i=1;i<4;i++)ctx2d.lineTo(...f.p[i]);ctx2d.closePath();
+   const rug=ctx2d.createLinearGradient(...f.p[0],...f.p[3]);rug.addColorStop(0,'#064443');rug.addColorStop(.5,'#0b5c53');rug.addColorStop(1,'#063e3b');ctx2d.fillStyle=rug;ctx2d.fill();
+   ctx2d.strokeStyle='#c8a362';ctx2d.lineWidth=3;ctx2d.stroke();
+   // modest geometric pattern, explicitly not depicting qiblah direction
+   ctx2d.beginPath();ctx2d.moveTo(...f.p[0]);ctx2d.lineTo(...f.p[2]);ctx2d.moveTo(...f.p[1]);ctx2d.lineTo(...f.p[3]);ctx2d.strokeStyle='rgba(232,197,126,.14)';ctx2d.lineWidth=1.1;ctx2d.stroke();
+  }else if(f.primitive==='sphere'){
+   const {p,rx,ry,col,dim}=f;
+   ctx2d.save();ctx2d.translate(p[0],p[1]);ctx2d.scale(rx,ry);
+   const shade=ctx2d.createRadialGradient(-.31,-.37,.06,-.06,-.02,1.17);
+   shade.addColorStop(0,rgba(col,1.17*dim));shade.addColorStop(.5,rgba(col,.97*dim));shade.addColorStop(1,rgba(col,.61*dim));
+   ctx2d.fillStyle=shade;ctx2d.beginPath();ctx2d.arc(0,0,1,0,Math.PI*2);ctx2d.fill();ctx2d.restore();
+  } else if(f.primitive==='tube'){
+   const {pa,pb,nx,ny,r1,r2,col,dim}=f;
+   ctx2d.beginPath();ctx2d.moveTo(pa[0]+nx*r1,pa[1]+ny*r1);ctx2d.lineTo(pb[0]+nx*r2,pb[1]+ny*r2);ctx2d.lineTo(pb[0]-nx*r2,pb[1]-ny*r2);ctx2d.lineTo(pa[0]-nx*r1,pa[1]-ny*r1);ctx2d.closePath();
+   const tint=ctx2d.createLinearGradient(pa[0]+nx*r1,pa[1]+ny*r1,pa[0]-nx*r1,pa[1]-ny*r1);
+   tint.addColorStop(0,rgba(col,.62*dim));tint.addColorStop(.35,rgba(col,1.05*dim));tint.addColorStop(.72,rgba(col,.96*dim));tint.addColorStop(1,rgba(col,.74*dim));ctx2d.fillStyle=tint;ctx2d.fill();
+  }else{
+   ctx2d.beginPath();ctx2d.moveTo(...f.pA);ctx2d.lineTo(...f.pB);ctx2d.lineTo(...f.pC);ctx2d.closePath();ctx2d.fillStyle=f.color;ctx2d.fill();
+  }
+ }
+}
+function draw(type,m,color,dim=1){let a=meshes[type];if(!useGL){if(type==='sphere')cpuSphere(m,color,dim);else if(type==='disc')cpuDrawMesh(a,m,color,dim);else cpuCylinder(m,color,dim,type);return}gl.bindBuffer(gl.ARRAY_BUFFER,a.vbo);gl.vertexAttribPointer(loc.pos,3,gl.FLOAT,false,24,0);gl.vertexAttribPointer(loc.normal,3,gl.FLOAT,false,24,12);gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,a.ibo);gl.uniformMatrix4fv(loc.m,false,m);gl.uniform3fv(loc.col,color);gl.uniform1f(loc.dim,dim);gl.drawElements(gl.TRIANGLES,a.count,gl.UNSIGNED_SHORT,0)}
+function ell(x,y,z,rx,ry,rz,color){draw('sphere',transform(x,y,z,rx,ry,rz),color)}
+function cyl(a,b,rx,rz,col,kind='tube'){draw(kind,oriented(a,b,rx,rz),col)}
+function boxish(x,y,z,rx,ry,rz,col){ell(x,y,z,rx,ry,rz,col)}
+const palette={boy:{dress:[.93,.93,.93],sleeve:[.92,.92,.94],trim:[.82,.66,.40],scarf:[.30,.18,.12],hair:[.26,.13,.07],band:[.92,.73,.42],shoes:[.9,.9,.85]},girl:{dress:[.80,.40,.58],sleeve:[.87,.52,.70],trim:[.95,.68,.78],scarf:[.89,.49,.68],hair:[.30,.17,.13],band:[.94,.73,.80],shoes:[.93,.70,.77]}};
+const skin=[.91,.62,.45],skinSh=[.99,.72,.53],dark=[.16,.075,.05],white=[.98,.97,.94],iris=[.29,.13,.09],gold=[.88,.67,.39],matCol=[.08,.29,.27],matGold=[.64,.54,.29];
+// Discrete anatomical landmarks for a test rig. No baked teaching-grade motion or limb-length approval.
+const poseNames=[['Qiyām','Stehen','Hände vor der Brust · Gelenk-/Höhenprüfung offen'],['Takbīr','Hände heben','Test des Handhebens bis etwa Schulterhöhe'],['Rukūʿ','Verbeugung','Gerader Rücken und Knie-/Armposition werden noch geprüft'],['Iʿtidāl','Aufrichten','Rückkehr zum geraden Stand'],['Suǧūd','Niederwerfung','Bodenkontakt Stirn/Nase und sieben Kontaktstellen noch NICHT geprüft'],['Ǧalsah','Sitzen','Sitzhaltung zwischen den Niederwerfungen in Arbeit'],['Zweiter Suǧūd','Niederwerfen','Wiederholte Niederwerfung – Kontaktmessung ausstehend'],['Tašahhud','Sitzen','Sitzhaltung und Zeigefinger sind noch nicht geprüft'],['Salām','Abschluss','Zwei getrennte Kopfdrehungen: zuerst rechts, dann links; Rumpf bleibt ausgerichtet. Ohne Ton, noch nicht freigegeben.']];
+function frame({pelvis=[0,1.43,0],chest=[0,2.26,0],head=[0,2.94,.015],shoulderY=2.4,shoulderZ=0,elbowY=2.03,elbowZ=.29,handY=2.16,handZ=.40,kneeY=.61,kneeZ=.10,ankleY=.16,ankleZ=0,headTurn=0}){
+ const S=sgn=>sgn*.43,H=sgn=>sgn*.135;
+ return{pelvis,chest,head,shoulderL:[S(-1),shoulderY,shoulderZ],shoulderR:[S(1),shoulderY,shoulderZ],elbowL:[S(-1)*1.15,elbowY,elbowZ],elbowR:[S(1)*1.15,elbowY,elbowZ],handL:[H(-1),handY,handZ],handR:[H(1),handY,handZ+.03],kneeL:[-.21,kneeY,kneeZ],kneeR:[.21,kneeY,kneeZ],ankleL:[-.22,ankleY,ankleZ],ankleR:[.22,ankleY,ankleZ],headTurn};}
+const frames=[
+ frame({}),
+ frame({elbowY:2.15,elbowZ:.34,handY:2.41,handZ:.34}),
+ frame({pelvis:[0,1.45,-.02],chest:[0,1.63,.81],head:[0,1.55,1.24],shoulderY:1.69,shoulderZ:.79,elbowY:1.16,elbowZ:1.02,handY:.80,handZ:.39,kneeY:.68,kneeZ:.03}),
+ frame({shoulderY:2.4,elbowY:1.48,handY:1.01,handZ:.18}),
+ frame({pelvis:[0,.83,-.36],chest:[0,.39,.46],head:[0,.40,1.05],shoulderY:.52,shoulderZ:.43,elbowY:.27,elbowZ:.89,handY:.14,handZ:1.37,kneeY:.14,kneeZ:.41,ankleY:.10,ankleZ:-.55}),
+ frame({pelvis:[0,.55,-.35],chest:[0,1.22,-.21],head:[0,1.85,-.16],shoulderY:1.35,shoulderZ:-.22,elbowY:.93,elbowZ:.04,handY:.63,handZ:.37,kneeY:.26,kneeZ:.55,ankleY:.10,ankleZ:-.49}),
+ frame({pelvis:[0,.83,-.36],chest:[0,.39,.46],head:[0,.40,1.05],shoulderY:.52,shoulderZ:.43,elbowY:.27,elbowZ:.89,handY:.14,handZ:1.37,kneeY:.14,kneeZ:.41,ankleY:.10,ankleZ:-.55}),
+ frame({pelvis:[0,.55,-.35],chest:[0,1.22,-.21],head:[0,1.85,-.16],shoulderY:1.35,shoulderZ:-.22,elbowY:.93,elbowZ:.04,handY:.63,handZ:.37,kneeY:.26,kneeZ:.55,ankleY:.10,ankleZ:-.49}),
+ frame({pelvis:[0,.55,-.35],chest:[0,1.22,-.21],head:[0,1.85,-.16],shoulderY:1.35,shoulderZ:-.22,elbowY:.93,elbowZ:.04,handY:.63,handZ:.37,kneeY:.26,kneeZ:.55,ankleY:.10,ankleZ:-.49,headTurn:0}),
+];
+const keys=Object.keys(frames[0]);function blendPose(a,b,t){let p={};for(let k of keys)p[k]=Array.isArray(a[k])?lerp(a[k],b[k],t):mix(a[k],b[k],t);return p}
+// Independent Taslīm rehearsal: head yaw only. Torso, shoulders and legs remain in Tashahhud.
+// +yaw points to the FIGURE'S right (local +X); -yaw points to its left.
+// The keyframes are software exercises, not certified physiological/fiqh animation.
+const TASLIM_END=2.85;
+const taslimKeys=[[0,0],[.62,1.07],[1.14,1.07],[1.63,0],[2.24,-1.07],[2.85,-1.07]];
+function sampleTaslim(seconds){
+ const t=clamp(Number.isFinite(seconds)?seconds:0,0,TASLIM_END);
+ for(let j=1;j<taslimKeys.length;j++){
+  if(t<=taslimKeys[j][0]){
+   const prev=taslimKeys[j-1],next=taslimKeys[j],f=(t-prev[0])/(next[0]-prev[0]);
+   const smooth=f*f*(3-2*f);return mix(prev[1],next[1],smooth);
+  }
+ }
+ return -1.07;
+}
+function taslimPhase(seconds){
+ if(seconds<.25)return 'Start: Blick nach vorn';
+ if(seconds<1.38)return '1. Salām · Kopf zur RECHTEN Schulter';
+ if(seconds<1.81)return 'Übergang · Blick über die Mitte';
+ if(seconds<TASLIM_END)return '2. Salām · Kopf zur LINKEN Schulter';
+ return 'Ende · Kopf nach links · ungeprüfte Testbewegung';
+}
+function renderPerson(p,gender){const c=palette[gender],girl=gender==='girl';
+ const h=p.head,ch=p.chest,hip=p.pelvis;
+ // Thobe / skirt and tunic are separate 3D solids, intentionally non-skinned placeholder volumes.
+ const skirtDown=gender==='boy'?.89:.98;
+ const skirtEnd=[hip[0],Math.max(.18,hip[1]-skirtDown),hip[2]+(ch[2]-hip[2])*.14];
+ cyl(skirtEnd,hip,girl?.57:.51,girl?.48:.45,c.dress,'dress');
+ cyl(hip,ch,.35,.26,c.dress,'dress');
+ ell(ch[0],ch[1]-.04,ch[2],.39,.26,.28,c.dress);
+ // neckline, fabric collar
+ const neck=lerp(ch,h,.27);ell(...neck,.15,.13,.15,girl?c.scarf:c.dress);
+ for(const side of ['L','R']){const s=side==='L'?-1:1;const shoulder=p['shoulder'+side],elbow=p['elbow'+side],hand=p['hand'+side],knee=p['knee'+side],ankle=p['ankle'+side];
+  cyl(shoulder,elbow,.20,.18,c.sleeve,'sleeve');cyl(elbow,lerp(elbow,hand,.84),.16,.15,c.sleeve,'sleeve');ell(...hand,.105,.105,.12,skin);
+  cyl(hip.map((v,i)=>i===0?s*.20:v),knee,.19,.15,c.dress);cyl(knee,ankle,.14,.13,c.dress);
+  const shoe=[ankle[0],Math.max(.1,ankle[1]-.05),ankle[2]+.18];ell(...shoe,.20,.1,.34,c.shoes);
+ }
+ // Head/face, deliberately a stylized engineering proxy (NOT original likeness).
+ ell(...h,.38,.43,.37,skinSh);
+ const face=[Math.sin(p.headTurn),0,Math.cos(p.headTurn)], sideways=[Math.cos(p.headTurn),0,-Math.sin(p.headTurn)];
+ const at=(side,dy,depth)=>sum(h,sum(times(sideways,side),[face[0]*depth,dy,face[2]*depth]));
+ for(const sign of [-1,1]){
+ const eye=at(sign*.145,.065,.321);ell(...eye,.108,.122,.075,white);
+ const pup=sum(eye,times(face,.06));ell(...pup,.061,.079,.049,iris);ell(...sum(pup,[-.011,.022,.035]),.018,.02,.016,white);
+ const brow=at(sign*.15,.229,.315);ell(...brow,.105,.028,.042,c.hair);
+ const ear=sum(h,times(sideways,sign*.378));ell(...ear,.082,.12,.08,skin);
+ }
+ const nose=at(0,-.075,.368);ell(...nose,.08,.09,.084,skin);
+ const mouth=at(0,-.22,.336);ell(...mouth,.104,.018,.04,[.61,.23,.21]);
+ if(girl){
+  // Separate pink hijab shape, not claimed to prove full coverage in motion.
+  const hood=at(0,.15,-.075);ell(...hood,.465,.46,.41,c.scarf);
+  ell(...h,.343,.365,.345,skinSh);
+  // Facial features must be drawn after scarf hood for readability.
+  for(const sign of [-1,1]){const eye=at(sign*.145,.045,.32);ell(...eye,.105,.12,.075,white);ell(...sum(eye,times(face,.052)),.063,.07,.052,iris)}
+  ell(...nose,.076,.09,.086,skin);ell(...mouth,.10,.02,.043,[.58,.21,.24]);
+  cyl(sum(h,[-.27,-.20,-.13]),sum(ch,[-.34,.15,-.02]),.20,.19,c.scarf);
+  cyl(sum(h,[.27,-.20,-.13]),sum(ch,[.34,.15,-.02]),.20,.19,c.scarf);
+ } else{
+  // Rotate cap/hair centers and band circumference with facial yaw.
+  ell(...at(0,.29,-.12),.35,.23,.31,c.hair);
+  ell(...at(0,.37,-.07),.36,.18,.34,white);
+  for(let i=0;i<20;i++){let th=2*Math.PI*i/20;ell(...at(.33*Math.cos(th),.285,-.07+.315*Math.sin(th)),.05,.018,.05,c.band)}
+ }
+ // modest torso seam/buttons
+ if(!girl){for(let i=0;i<3;i++){const ctr=lerp(ch,hip,.21+i*.11);ell(ctr[0],ctr[1],ctr[2]+.279,.035,.035,.028,c.trim)}}
+}
+function renderMat(){ // decorative rug, no religious placement approval
+ if(!useGL){
+  const p=[[-.95,-.055,-1.65],[.95,-.055,-1.65],[.95,-.055,2.15],[-.95,-.055,2.15]].map(project);
+  cpuFaces.push({primitive:'rug',key:100000,p});return;
+ }
+ draw('disc',transform(0,-.065,0,3,1,3),[.025,.08,.085]);
+ ell(0,-.045,.3,.99,.02,2.00,matCol);
+ ell(0,-.035,.3,.91,.018,1.90,[.055,.36,.32]);
+ ell(0,-.02,-1.40,.9,.021,.07,matGold);ell(0,-.02,1.95,.9,.021,.07,matGold);
+ for(let j=0;j<9;j++){let z=-1.18+j*.34;ell(-.81,-.009,z,.028,.008,.06,matGold);ell(.81,-.009,z,.028,.008,.06,matGold)}
+}
+let gender='boy',selected=0,pose=frames[0],from=frames[0],target=frames[0],transition=1,play=false,last=0,hold=0,yaw=.66,pitch=.19,zoom=6.85,dragging=false,oldX=0,oldY=0,taslimTime=0,taslimActive=false,taslimPaused=false;
+const stage=$('stage'),posBtns=[];
+function choose(i,keepPlaying=false){selected=(i+poseNames.length)%poseNames.length;from=pose;target=frames[selected];transition=0;hold=0;taslimTime=0;taslimActive=selected===8;taslimPaused=false;if(!keepPlaying)play=false;sync()}
+function sync(){posBtns.forEach((b,i)=>{b.setAttribute('aria-pressed',String(selected===i));b.tabIndex=selected===i?0:-1});$('poseIndex').textContent=String(selected+1).padStart(2,'0')+' / 09';$('poseTitle').textContent=poseNames[selected][0]+' · '+poseNames[selected][1];$('poseDesc').textContent=poseNames[selected][2];$('motionState').textContent=selected===8?(taslimActive?(taslimPaused?'Salām pausiert':'Salām läuft'):'Salām-Test beendet'):(play?'Ablauf läuft':'Teststellung');$('play').textContent=selected===8?(taslimActive?(taslimPaused?'▶ Salām fortsetzen':'❚❚ Salām pausieren'):'↻ Salām erneut'):(play?'❚❚ Pausieren':'▶ Ablauf starten');$('animationProgress').style.width=(selected/(poseNames.length-1)*100)+'%';$('taslimPhase').hidden=selected!==8;}
+function setGender(g){gender=g;$('boy').setAttribute('aria-pressed',String(g==='boy'));$('girl').setAttribute('aria-pressed',String(g==='girl'));$('viewMode').textContent=(g==='girl'?'Mädchen':'Junge')+' · 3D-Bewegungsansicht';}
+$('boy').onclick=()=>setGender('boy');$('girl').onclick=()=>setGender('girl');
+$('prev').onclick=()=>choose(selected-1);$('next').onclick=()=>choose(selected+1);
+$('play').onclick=()=>{if(selected===8){if(taslimActive){taslimPaused=!taslimPaused;play=!taslimPaused;}else{taslimTime=0;taslimActive=true;taslimPaused=false;pose={...pose,headTurn:0};play=true;}}else play=!play;hold=0;sync()};$('resetCam').onclick=()=>{yaw=.66;pitch=.19;zoom=6.85};
+$('speed').oninput=e=>$('speedLabel').textContent=Number(e.target.value).toFixed(1).replace('.',',')+'×';
+for(let i=0;i<poseNames.length;i++){let b=document.createElement('button');b.className='pose';b.type='button';b.setAttribute('aria-label','Stellung '+(i+1)+': '+poseNames[i][0]);b.innerHTML=(i+1).toString().padStart(2,'0')+' · '+poseNames[i][0]+'<span>'+poseNames[i][1]+'</span>';b.onclick=()=>choose(i);$('poses').appendChild(b);posBtns.push(b)}setGender('boy');sync();
+function pointerMove(e){if(!dragging)return;yaw+=(e.clientX-oldX)*.009;pitch=clamp(pitch-(e.clientY-oldY)*.006,-.1,.95);oldX=e.clientX;oldY=e.clientY}
+canvas.addEventListener('pointerdown',e=>{dragging=true;oldX=e.clientX;oldY=e.clientY;canvas.setPointerCapture(e.pointerId)});canvas.addEventListener('pointermove',pointerMove);canvas.addEventListener('pointerup',()=>dragging=false);canvas.addEventListener('pointercancel',()=>dragging=false);canvas.addEventListener('wheel',e=>{e.preventDefault();zoom=clamp(zoom+Math.sign(e.deltaY)*.43,4.5,10.5)},{passive:false});
+window.addEventListener('keydown',e=>{if(e.target&&/INPUT|TEXTAREA/.test(e.target.tagName))return;if(e.key==='ArrowRight')choose(selected+1);if(e.key==='ArrowLeft')choose(selected-1);if(e.key===' '){e.preventDefault();$('play').click()}});
+function frameDraw(timestamp){try{
+ let delta=Math.min(.06,(timestamp-last)/1000||0);last=timestamp;
+ if(transition<1){transition=clamp(transition+delta*Number($('speed').value)/.85,0,1);const t=transition*transition*(3-2*transition);pose=blendPose(from,target,t)}
+ else if(selected===8){
+  if(taslimActive&&!taslimPaused){taslimTime=Math.min(TASLIM_END,taslimTime+delta*Number($('speed').value));
+   if(taslimTime>=TASLIM_END){taslimActive=false;play=false;sync();}
+  }
+  pose={...pose,headTurn:sampleTaslim(taslimTime)};
+  $('taslimPhase').textContent=taslimPhase(taslimTime);
+ }
+ else if(play){hold+=delta*Number($('speed').value);if(hold>1.65)choose(selected+1,true);}
+ const bounds=stage.getBoundingClientRect();let w=Math.min(1600,Math.max(300,Math.round(bounds.width*Math.min(devicePixelRatio||1,2)))),h=Math.min(1500,Math.max(350,Math.round(bounds.height*Math.min(devicePixelRatio||1,2))));
+ if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;if(useGL)gl.viewport(0,0,w,h)}
+ if(useGL){gl.clearColor(.045,.15,.20,1);gl.enable(gl.DEPTH_TEST);gl.enable(gl.CULL_FACE);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT)}
+ const eye=[Math.sin(yaw)*Math.cos(pitch)*zoom,1.30+Math.sin(pitch)*zoom*.75,Math.cos(yaw)*Math.cos(pitch)*zoom],focus=[0,1.52,0];
+ const vp=mul(persp(.72,w/h,.1,50),lookAt(eye,focus));if(useGL)gl.uniformMatrix4fv(loc.vp,false,vp);else{cpuVP=vp;cpuEye=eye;cpuWidth=w;cpuHeight=h;cpuFaces=[]}
+ renderMat();renderPerson(pose,gender);if(!useGL)cpuPresent();
+ $('angleValue').textContent=((Math.round((yaw%(Math.PI*2))*180/Math.PI)+360)%360)+'° · Ansicht';
+ window.__KIDS_3D_LAB={webgl:useGL,engine:useGL?'WebGL 3D':'Canvas projected 3D',profile:gender,poseIndex:selected,transition,playing:play,ready:true,modelType:'procedural-placeholder-3d',productionApproved:false,taslimHeadYaw:pose.headTurn,taslimPhase:selected===8?taslimPhase(taslimTime):null,taslimPaused,torsoFixedDuringTaslim:selected===8};
+ }catch(e){$('stagefail').style.display='flex';$('stagefail').textContent='3D-Laufzeitfehler: '+e.message;window.__KIDS_3D_LAB={webgl:useGL,ready:false,error:e.message};return}requestAnimationFrame(frameDraw)}
+requestAnimationFrame(frameDraw);
+})();
+</script></body></html>
