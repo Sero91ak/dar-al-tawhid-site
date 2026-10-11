@@ -291,6 +291,16 @@ jobs:
             fi
             echo "KIDS Creator test route OK: $PAGE"
           done
+          # KIDS Academy art was previously broken: Worker blocked five
+          # /desktop-preview/ images. Explicitly verify all five real assets.
+          for IMAGE in kids-academy-hero-boys-v1.jpg kids-academy-hero-girls-v1.jpg kids-academy-hero-v1.jpg kids-academy-akhlaq-v1.jpg kids-academy-adab-v1.jpg; do
+            CODE="$(curl -fsSL -o /tmp/kids-creator-art -w '%{http_code}' "$BASE/desktop-preview/assets/$IMAGE" || true)"
+            test "$CODE" = "200" && test "$(wc -c < /tmp/kids-creator-art)" -gt 4000 || {
+              echo "::error::Kids Academy broken artwork: $IMAGE (HTTP $CODE)"
+              exit 1
+            }
+            echo "KIDS Academy image OK: $IMAGE"
+          done
           # Verify actual new owner dashboard content, not merely a 200 fallback.
           # Cloudflare canonicalizes /index.html with a redirect; follow it before inspecting the actual page.
           curl -fsSL -A 'DarAlTawhidKids-iOS CreatorTest' -H 'Cache-Control: no-cache' "$BASE/kids/test-console/index.html" > /tmp/kids-creator-console.html
@@ -306,6 +316,7 @@ jobs:
           curl -fsSL "$BASE/kids/test-console/manifest.webmanifest" > /tmp/kids-creator-manifest.json
           node -e 'const x=JSON.parse(require("fs").readFileSync("/tmp/kids-creator-manifest.json","utf8")); if(x.id!=="/kids/test-console/"||x.start_url!=="/kids/test-console/"||x.scope!=="/kids/"||x.display!=="standalone"){throw Error("KIDS TEST PWA manifest invalid")};console.log("KIDS TEST Web App live: installed scope only /kids/test-console/")'
           grep -q 'Push-Thread global' /tmp/kids-creator-console.html || { echo "::error::Release lock missing on Creator UI"; exit 1; }
+          grep -Fq '38 Unterrichte öffnen' /tmp/kids-creator-console.html || { echo "::error::Simplified Creator entry missing"; exit 1; }
           CODE="$(curl -sS -o /tmp/kids-creator-denied -w '%{http_code}' "$BASE/test/academy/login")"
           test "$CODE" = "404" || {
             echo "::error::Adult/test route leaked through KIDS Worker ($CODE)"
