@@ -17,7 +17,7 @@ assert.equal(staging.modelId,"eleven_v4");
 assert.equal(staging.voiceSettingsProfile,"kids_story");
 assert.equal(staging.pilotFirstLesson,true);
 assert.equal(staging.stagingOnly,true);
-assert.ok(html.includes('data-preview-release="V16.0-voicepreview-20261010"'));
+assert.ok(html.includes('data-preview-release="V17.0-voice-sandbox-20261011"'));
 assert.ok(html.includes('pilot-audio-v13.js?v=20261010-voicefix-v16'));
 const clipNames=["00ff589726b166dff6a9","f142bc78e8bcea3d8518","08d1f46461d954d5e471","1a6097339111c8ac475c"];
 for(const key of clipNames){
