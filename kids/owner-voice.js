@@ -204,8 +204,17 @@
   // Exact Serhat V4 kids_story audio can be tried only with ?voicePilot=1.
   var pilotMode=false;
   try{
+    var previewParams=new URLSearchParams(location.search);
+    // V19: unapproved staging may ONLY load inside the explicit isolated owner
+    // sandbox. A voicePilot=1 URL attached to a real child profile is insufficient.
     pilotMode=location.pathname.indexOf("/kids/akademie/")!==-1&&
-      new URLSearchParams(location.search).get("voicePilot")==="1";
+      previewParams.get("voicePilot")==="1"&&
+      previewParams.get("creatorSandbox")==="1"&&
+      previewParams.get("previewProfil")==="maedchen"&&
+      previewParams.get("previewAlter")==="4-5"&&
+      document.body.dataset.academyChildMode==="demo"&&
+      document.body.dataset.profile==="girl"&&
+      document.body.dataset.kidsAge==="4-5";
   }catch(e){}
   var pilotReady=pilotMode?loadManifest(
     "/kids/data/academy-audio-staging-v9.json?v=pilot-v12-20261010",6,function(data){
