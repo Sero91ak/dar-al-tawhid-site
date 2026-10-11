@@ -46,3 +46,13 @@ Never mark production ready or amend failed tests into success without evidence.
 - Original-V7.7-ZIP in Library `/Kinder App/Mein_Gebet_V77_STRICT_NICHT_FREIGEGEBEN.zip` weiterhin nur per Metadaten sichtbar, Rohdatenzugriff verweigert. Keine neue 5-View-Messung möglich, kein reales iPhone/iPad-Gerät geprüft.
 - `productionReady=false`, kein `main`-Merge, kein Live-Push. Weitere Modellierung und jede religiöse Lehrfreigabe strikt gesperrt bis zu echter Originaldateneinsicht und anschließender Abnahme.
 
+
+## 2026-10-11 — Interaktive HTML-Ersteller-Vorschau V7.8 (nicht 3D-Modellversion)
+
+- Eigenständige vollständige HTML-Datei `kids/mein-gebet/vorschau-v78-interaktiv.html` im separaten Draft-Branch abgelegt; Dashboard `kids/mein-gebet/vorschau.html` verlinkt sie, ohne Produktions-Kids-Shell oder `main` zu verändern.
+- Vier Lernbereiche, zwölf einzeln anklickbare Stationen, Vorherige/Nächste/Zurück, getrennte Jungen-/Mädchen-Farbgebung und lokale `sessionStorage`-Testmarkierungen nur für neun zugängliche **redaktionelle** Textstationen. Keine der drei gesperrten 3D-Stationen darf den Testfortschritt erhöhen. Kinderprofil-Speicherkeys werden nicht verwendet, keine Anmeldung/Netzwerkanfrage erforderlich.
+- Noch kein originaler 3D-GLB in dieser HTML-Datei: 3D-Bewegungen, Audio, fachliche Lehrfreigabe, individuelle Mädchen-Rig-Prüfung und echte Kinder-Lernstände bleiben explizit ausstehend. **V7.8 bezeichnet ausschließlich die HTML-Vorschau, nicht eine neue 3D-Modellversion.**
+- Lokale Chromium-Testläufe via Playwright auf 320, 375, 440, 820 und 1024 px: fünf von fünf Bedien-/Layoutfällen bestanden (horizontaler Overflow, Navigation, Profiltrennung, 3D-Lock, Test-Reset, JS-Laufzeitfehler). Isolierter SessionStorage-Mock testete Wiederherstellung von 1/9 und Reset nach Neuinitialisierung (kein echter Browser-Neustart/realer iPhone-/iPad-Test). In dieser Toolumgebung war direkte `file://`-/localhost-Navigation im Browser administrativ blockiert, deshalb wurden die HTML-Bytes über `page.set_content` getestet. Der lokale Preview-Code wurde zusätzlich mit Node `vm.Script` syntaktisch validiert.
+- GitHub-Workflow für V7.8-Pfad und neue `test-preview-html.cjs`-Invarianten ergänzt, aber CI-Lauf für den neuesten Commit **noch nicht nachgewiesen**. Nur Branch-Speicherung bestätigt.
+- Bestehende Produktionsfreigaben bleiben `false`, kein Merge, kein Deploy, kein Ersetzen bestehender Kids-App-Bereiche.
+
