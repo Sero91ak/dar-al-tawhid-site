@@ -1911,3 +1911,212 @@ html.is-quran-player-route #darQuranPlayer[data-v108-original="1"][data-dqp-volu
 html.is-quran-player-route #darQuranPlayer[data-v108-original="1"][data-dqp-volume-system="1"]:not([data-v108-audio-open="1"]) .dqp-volume {
   display:none!important;
 }
+
+
+/* V1110 – iOS visitor Qurʾān player: fixed tab controls, clean verse rows,
+   and sheet sliders with no native black range-input rectangle.
+   Scoped to the original full player; global app/KIDS/Apple TV untouched. */
+
+/* Only the passage scrolls. The caption and five mode tabs never become
+   descendants of a scrolling element and cannot be pushed offscreen. */
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-art {
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:stretch!important;
+  justify-content:flex-start!important;
+  min-height:0!important;
+  height:100%!important;
+  overflow:hidden!important;
+  isolation:isolate;
+  -webkit-transform:translateZ(0);
+}
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-v108-caption,
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-v108r-tabs {
+  position:relative!important;
+  z-index:3!important;
+  flex:0 0 auto!important;
+  transform:none!important;
+  overflow:visible!important;
+}
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-v108r-tabs {
+  width:100%!important;
+  background:var(--v108-panel2)!important;
+}
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-ayah[data-dqp-ayah] {
+  position:relative!important;
+  flex:1 1 0%!important;
+  min-height:0!important;
+  max-height:none!important;
+  height:auto!important;
+  width:100%!important;
+  margin:0 auto!important;
+  padding:clamp(10px,2vh,18px) 3px 16px!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  overscroll-behavior-y:contain!important;
+  -webkit-overflow-scrolling:touch;
+  scroll-padding-top:16px;
+  touch-action:pan-y;
+}
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-ayah[data-dqp-ayah] .dqp-sec {
+  flex-shrink:0!important;
+  min-height:0!important;
+  overflow:visible!important;
+}
+/* The Āyah picker owns its scrolling list: scrollIntoView must not drag
+   the sheet heading, search box, native app, or other verse rows. */
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-sheet:has(.dqp-opt-verse) .dqp-sheet-card {
+  display:flex!important;
+  flex-direction:column!important;
+  overflow:hidden!important;
+  height:min(76dvh,780px)!important;
+  max-height:76dvh!important;
+}
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-sheet:has(.dqp-opt-verse) .dqp-sheet-head,
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-sheet:has(.dqp-opt-verse) .dqp-search {
+  flex:0 0 auto!important;
+}
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-opt-list:has(.dqp-opt-verse) {
+  flex:1 1 auto!important;
+  min-height:0!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  overscroll-behavior:contain!important;
+  -webkit-overflow-scrolling:touch;
+  scroll-padding-block:12px;
+}
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-opt-list .dqp-opt-verse {
+  display:flex!important;
+  width:100%!important;
+  box-sizing:border-box!important;
+  margin:0!important;
+  padding:12px 12px 13px!important;
+  border:0!important;
+  border-bottom:1px solid var(--v108-stroke)!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  outline:none!important;
+  background:transparent!important;
+  overflow:visible!important;
+  isolation:isolate;
+  white-space:normal!important;
+  line-height:1.5!important;
+  text-align:start!important;
+  scroll-margin-block:8px;
+}
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-opt-list .dqp-opt-verse.is-on {
+  border-left:3px solid var(--v108-accent)!important;
+  padding-left:9px!important;
+  border-radius:10px!important;
+  background:var(--v108-panel)!important;
+  box-shadow:none!important;
+}
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-opt-verse .dqp-opt-ar {
+  display:block!important;
+  width:100%!important;
+  overflow:visible!important;
+  white-space:normal!important;
+  word-break:normal!important;
+  overflow-wrap:normal!important;
+  text-align:right!important;
+  unicode-bidi:plaintext;
+  line-height:1.8!important;
+}
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-opt-verse small {
+  display:block!important;
+  max-width:100%!important;
+  white-space:normal!important;
+  overflow-wrap:break-word!important;
+  line-height:1.5!important;
+}
+
+/* The timer is a modal, not a black browser range-input well.
+   Keep the entire track/knob on the original day/night panel surface. */
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-sleep,
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-sleep-slide {
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  filter:none!important;
+}
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] input.dqp-sleep-range {
+  display:block!important;
+  -webkit-appearance:none!important;
+  appearance:none!important;
+  width:100%!important;
+  max-width:100%!important;
+  height:42px!important;
+  padding:0!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  filter:none!important;
+  opacity:1!important;
+  color:var(--v108-accent)!important;
+  accent-color:var(--v108-accent)!important;
+  outline-offset:3px;
+}
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] input.dqp-sleep-range::-webkit-slider-runnable-track {
+  -webkit-appearance:none!important;
+  height:4px!important;
+  border:0!important;
+  border-radius:999px!important;
+  background:color-mix(in srgb,var(--v108-text) 24%,transparent)!important;
+  box-shadow:none!important;
+}
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] input.dqp-sleep-range::-webkit-slider-thumb {
+  -webkit-appearance:none!important;
+  width:21px!important;
+  height:21px!important;
+  border:2px solid var(--v108-panel)!important;
+  border-radius:50%!important;
+  background:var(--v108-accent)!important;
+  margin-top:-8.5px!important;
+  box-shadow:0 1px 6px rgba(0,0,0,.16)!important;
+}
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] input.dqp-sleep-range::-moz-range-track {
+  height:4px!important;
+  border:0!important;
+  border-radius:999px!important;
+  background:color-mix(in srgb,var(--v108-text) 24%,transparent)!important;
+}
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] input.dqp-sleep-range::-moz-range-thumb {
+  width:21px!important;
+  height:21px!important;
+  border:2px solid var(--v108-panel)!important;
+  border-radius:50%!important;
+  background:var(--v108-accent)!important;
+}
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-sleep-slide-lab {
+  color:var(--v108-muted)!important;
+  -webkit-text-fill-color:var(--v108-muted)!important;
+}
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-sleep-slide-lab b {
+  color:var(--v108-accent)!important;
+  -webkit-text-fill-color:var(--v108-accent)!important;
+}
+
+
+/* Prevent line breaks inside Arabic words and detached tajwīd marks.
+   Keep every Qurʾān glyph/diacritic unchanged; adjust layout only. */
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-ayah-ar {
+  direction:rtl!important;
+  unicode-bidi:plaintext!important;
+  word-break:normal!important;
+  overflow-wrap:normal!important;
+  white-space:normal!important;
+  hyphens:none!important;
+  text-align:center!important;
+  max-width:100%!important;
+  line-height:1.85!important;
+  font-kerning:normal!important;
+}
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-ayah-ar .tj {
+  word-break:normal!important;
+  overflow-wrap:normal!important;
+  white-space:normal!important;
+}

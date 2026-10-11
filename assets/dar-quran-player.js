@@ -22,11 +22,11 @@
   // V1109: this implementation is restricted to the official iOS visitor app.
   // Website, Dar Test, Kids and Apple TV retain their existing player engines.
   if (!isOfficialIosApp() || isAppleTvApp() || isTestAppPath()) return;
-    var PLAYER_BUILD = 1109;
+    var PLAYER_BUILD = 1110;
   if (!document.querySelector('link[data-dqp-v11-skin]')) {
     var v11Css = document.createElement('link');
     v11Css.rel = 'stylesheet';
-    v11Css.href = '/assets/dar-quran-player.css?v=1109';
+    v11Css.href = '/assets/dar-quran-player.css?v=1110';
     v11Css.setAttribute('data-dqp-v11-skin', '');
     document.head.appendChild(v11Css);
   }
@@ -1639,6 +1639,13 @@
     var el = root.querySelector("[data-dqp-ayah]");
     if (!el) return;
     var v = verseAt(state.ayah);
+    // Āyah content scroll is isolated from the fixed five-tab header.
+    // On a new verse start at its first line; same-verse repaints preserve scroll.
+    var scrollKey = String(state.surah) + ":" + String(state.ayah);
+    if (el.dataset.dqpScrollVerseKey !== scrollKey) {
+      el.dataset.dqpScrollVerseKey = scrollKey;
+      el.scrollTop = 0;
+    }
     var apply = function () {
       var st = el.querySelector(".dqp-status");
       if (st) st.remove();
@@ -3371,7 +3378,14 @@
       openSheet(head, '<input class="dqp-search" data-dqp-search type="search" placeholder="Āyah suchen" autocomplete="off"><div class="dqp-opt-list">' + rows + "</div>");
       requestAnimationFrame(function () {
         var on = document.querySelector("#darQuranPlayer .dqp-opt.is-on[data-dqp-opt^='a-']");
-        if (on && on.scrollIntoView) on.scrollIntoView({ block: "center" });
+        if (!on) return;
+        var list = on.closest(".dqp-opt-list");
+        if (!list) return;
+        // Scroll the selection list, not the modal heading or entire page.
+        var item = on.getBoundingClientRect();
+        var viewport = list.getBoundingClientRect();
+        var offset = item.top - viewport.top - Math.max(0, (viewport.height - item.height) / 2);
+        list.scrollTop = Math.max(0, list.scrollTop + offset);
       });
     }
     if (dataSurahLoaded !== Number(state.surah) || !verses.length) {
@@ -3748,6 +3762,8 @@
         root.dataset.v108Mode=mode;
         state.layers={ar:true,de:true,lat:mode==="learn",tad:mode==="tad",taf:mode==="taf"};
         state.text="both";
+        var verseScroll = root.querySelector("[data-dqp-ayah]");
+        if (verseScroll) verseScroll.scrollTop = 0;
         saveState();paintChrome();paintAyah(false);return;
       }
       if (act === "v108-speed") {
