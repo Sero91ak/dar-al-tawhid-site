@@ -225,7 +225,7 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git branch --show-current)" = "kids-creator-staging"
-          node --check cloudflare/test-app-worker.js
+          node --check kids/creator-test/worker.js
           node kids/tools/test-native-creator-v2.cjs
           node scripts/test-app-health-check.js
           echo "Staging: no production route, no visitor commit, no App Store upload"
@@ -235,7 +235,7 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           set -euo pipefail
-          npx wrangler deploy -c wrangler.test.toml --name dar-al-tawhid-kids-creator
+          npx wrangler deploy -c kids/creator-test/wrangler.toml
       - name: Verify isolated KIDS web UI (native test user agent)
         run: |
           set -euo pipefail
@@ -250,4 +250,6 @@ jobs:
             fi
             echo "Kids Creator test route OK: $PAGE"
           done
-          echo "Only workers.dev Creator tested; visitor /kids never altered"
+          CODE="$(curl -sS -o /tmp/kids-creator-denied -w '%{http_code}' "$BASE/test/academy/login")"
+          test "$CODE" = "404" || { echo "::error::Adult/test route leaked through KIDS Worker ($CODE)"; exit 1; }
+          echo "Only KIDS workers.dev routes tested; adult/test and visitor routes not changed"
