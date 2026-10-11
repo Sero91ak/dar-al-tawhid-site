@@ -3,7 +3,7 @@
 const assert=require("node:assert/strict");
 const fs=require("node:fs");
 const vm=require("node:vm");
-for(const file of ["kids/start.html","kids/index.html"]){
+for(const file of ["kids/start.html","kids/index.html","kids/shell.html"]){
   const html=fs.readFileSync(file,"utf8");
   for(const id of ["joinName","joinPass","joinSave","joinStatus","joinLoginExisting"]){
     assert.equal(html.split('id="'+id+'"').length-1,1,file+" duplicate or missing "+id);
@@ -27,4 +27,4 @@ for(const file of ["kids/start.html","kids/index.html"]){
     new vm.Script(b[2],{filename:file});
   }
 }
-console.log("KIDS account UI: both visitor entry pages, registration feedback, sign-in and JS syntax OK");
+console.log("KIDS account UI: all three visitor entry shells, registration feedback, sign-in and JS syntax OK");
