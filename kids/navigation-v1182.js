@@ -205,10 +205,43 @@
     stack[index].signature=signature();
   }
 
+  /* KIDS_HOME_SCROLL_AUTHORITY_V1327
+     The shell is the sole vertical scroller. WebKit can silently restore
+     its old offset when a tab or app resumes. Hold the Today entry at 0
+     until an actual content gesture starts; never fight a child's scroll. */
+  var homeAtEntry=true;
+  var homeRepairQueued=false;
+  function homeIsVisible(){
+    var today=q("#view-today");
+    return !!(today&&today.classList.contains("active")&&!surfaceIds().length);
+  }
+  function userStartedScrolling(e){
+    if(e&&e.target&&e.target.closest&&e.target.closest(".bottom-nav"))return;
+    if(homeIsVisible())homeAtEntry=false;
+  }
   function resetMainTop(){
     shell=shell||q(".shell");
     if(!shell)return;
-    try{shell.scrollTo({top:0,left:0,behavior:"auto"})}catch(_){shell.scrollTop=0}
+    if(homeIsVisible())homeAtEntry=true;
+    try{shell.scrollTo({top:0,left:0,behavior:"instant"})}catch(_){shell.scrollTop=0}
+    if(shell.scrollTop>0)shell.scrollTop=0;
+  }
+  function installHomeScrollAuthority(){
+    if(!shell)return;
+    shell.addEventListener("touchstart",userStartedScrolling,{passive:true});
+    shell.addEventListener("pointerdown",userStartedScrolling,{passive:true});
+    shell.addEventListener("wheel",userStartedScrolling,{passive:true});
+    shell.addEventListener("keydown",function(e){
+      if(["ArrowDown","ArrowUp","PageDown","PageUp","Home","End"," "].indexOf(e.key)>=0)userStartedScrolling(e);
+    },true);
+    shell.addEventListener("scroll",function(){
+      if(!homeAtEntry||!homeIsVisible()||shell.scrollTop<=1||homeRepairQueued)return;
+      homeRepairQueued=true;
+      requestAnimationFrame(function(){
+        homeRepairQueued=false;
+        if(homeAtEntry&&homeIsVisible()&&shell.scrollTop>1)resetMainTop();
+      });
+    },{passive:true});
   }
 
   /* On a genuine first open, WKWebView/Safari may restore the document
@@ -497,6 +530,7 @@
 
   function init(){
     shell=q(".shell");
+    installHomeScrollAuthority();
     /* Capture the approved first-entry geometry BEFORE the late lock is injected. */
     lockHomeGeometry(true);
     installLateLayout();
@@ -513,7 +547,7 @@
       lockHomeGeometry(false);
       var active=activeTab();
       if(!surfaceIds().length&&active)resetMainTop();
-      if(active==="today"){resetLaunchViewport();armHome();}
+      if(active==="today"){resetMainTop();resetLaunchViewport();armHome();}
     });
     window.addEventListener("orientationchange",function(){
       root.style.removeProperty("--kids-home-hero-height-fixed");
@@ -522,7 +556,14 @@
       setTimeout(function(){lockHomeGeometry(true);if(activeTab()==="today")armHome()},220);
     });
     document.addEventListener("visibilitychange",function(){
-      if(document.visibilityState==="visible"&&activeTab()==="today")armHome();
+      if(document.visibilityState==="visible"&&activeTab()==="today"){
+        resetMainTop();
+        resetLaunchViewport();
+        armHome();
+      }
+    });
+    window.addEventListener("focus",function(){
+      if(homeIsVisible()){resetMainTop();resetLaunchViewport();}
     });
     armHome();
     setTimeout(function(){if(activeTab()==="today")armHome()},320);
