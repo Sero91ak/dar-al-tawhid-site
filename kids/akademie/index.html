@@ -3626,6 +3626,19 @@ body:not([data-academy-view="lesson"]):not([data-embedded="true"]) > main.wrap >
  overscroll-behavior-y:contain!important;-webkit-overflow-scrolling:touch;
 }
 
+/* The outer centered desktop wrap must not clip the full-viewport scrollport.
+   The root viewport stays locked and only academyHome/academySubject may scroll. */
+body:not([data-academy-view="lesson"]):not([data-embedded="true"]) > main.wrap{
+ overflow:visible!important;
+}
+/* Fade directly into the existing theme background (turquoise or lilac),
+   so no hard horizontal boundary remains at the bottom of the artwork. */
+body:not([data-academy-view="lesson"]):not([data-embedded="true"]) .academy-home > .overview-hero::before,
+body[data-profile="girl"]:not([data-academy-view="lesson"]):not([data-embedded="true"]) .academy-home > .overview-hero::before{
+ height:clamp(58px,8vw,96px)!important;
+ background:linear-gradient(to bottom,transparent 0%,var(--base) 100%)!important;
+}
+
 /* V7.6.3 · Full-bleed academy covers inside the fixed-header scroll shell.
    V7.6.2 made the scrollport narrower than the 100vw hero/subject covers.
    Expand ONLY that scrollport to the viewport; retain the previous card insets,
