@@ -3,6 +3,20 @@
   if (window.__darQuranAudioPackBoot) return;
   window.__darQuranAudioPackBoot = true;
   var VER = "1063";
+  function officialVisitorIos() {
+    try {
+      if (window.DAR_APPLE_TV_APP === true) return false;
+      var ua = String(navigator.userAgent || "");
+      if (/AppleTV|Apple TV|tvOS|DarAlTawhid-tvOS/i.test(ua)) return false;
+      var p = String(location.pathname || "");
+      if (p === "/test" || p.indexOf("/test/") === 0) return false;
+      var root = document.documentElement;
+      return window.DAR_OFFICIAL_IOS_APP === true ||
+        window.DAR_IOS_NATIVE_APP === true ||
+        /DarAlTawhid-iOS|DarAlTawhidOfficialIOS/i.test(ua) ||
+        !!(root && (root.classList.contains("dar-ios-native-app") || root.classList.contains("dar-ios-native-tabs")));
+    } catch (e) { return false; }
+  }
   var DB_NAME = "dar-quran-audio-pack";
   var STORE = "mp3";
   var CACHE_NAME = "dar-quran-audio-v" + VER;
@@ -305,6 +319,7 @@
     }
   }
   function ensure(edition, surah, ayah) {
+    if (officialVisitorIos()) return; // Visitor playback streams without an offline job.
     if (!edition) return;
     if (isTvPlayback()) return;
     var g = globalAyah(surah, ayah);
@@ -312,6 +327,7 @@
   }
   function prefetchSurah() {}
   function startSeed() {
+    if (officialVisitorIos()) return; // No implicit offline seed on the visitor app.
     if (seeded) return;
     seeded = true;
     status.seed = true;
@@ -342,6 +358,12 @@
   }
   function downloadLabel(edition) {
     var p = reciterProgress(edition);
+    if (officialVisitorIos()) {
+      if (p.complete) return "Offline gespeichert";
+      if (isWanted(edition) && p.downloading) return "Offline lädt " + p.have + "/" + p.total;
+      if (isWanted(edition) && p.have > 0) return "Offline fortsetzen " + p.have + "/" + p.total;
+      return "Offline laden";
+    }
     if (p.complete) return "Gespeichert";
     if (p.downloading || p.have > 0) return "Lädt " + p.have + "/" + p.total;
     return "Download";
@@ -460,6 +482,8 @@
   (async function boot() {
     try { await loadCatalog(); } catch (eCat) {}
     await hydrate();
+    // Never resume 6,236-āyah packs by itself on the official iOS visitor app.
+    if (officialVisitorIos()) return;
     var wanted = readWanted();
     if (!wanted.length) return;
     setTimeout(function () {
