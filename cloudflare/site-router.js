@@ -1281,6 +1281,9 @@ export default {
           'window.__DAR_PWA_DEDICATED_APP=true;' +
           'window.__DAR_PWA_LAUNCH_MARKER=true;' +
           'try{sessionStorage.setItem("dar_pwa_launch_session_v1","1")}catch(e){}' +
+          // Ask Chrome to retain offline cache only after the PWA has loaded.
+          // This is best-effort and never blocks the first screen.
+          'try{window.addEventListener("load",function(){setTimeout(function(){try{var s=navigator.storage;if(s&&s.persist)s.persist().catch(function(){})}catch(e){}},3000)},{once:true})}catch(e){}' +
           'try{if("serviceWorker" in navigator){navigator.serviceWorker.register("/pwa/service-worker.js",{scope:"/pwa/"}).catch(function(){})}}catch(eSw){}' +
           'try{var r=document.documentElement;r.classList.add("dar-pwa-standalone-boot","dar-soft-booting","dar-dedicated-pwa-app","is-standalone-pwa","is-android");r.dataset.appPath="android-pwa"}catch(e){}' +
           '<\/script>';
