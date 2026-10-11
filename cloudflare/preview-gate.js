@@ -92,8 +92,11 @@ const ACADEMY_NEW_ROOT = "/test/academy";
 const ACADEMY_OLD_ROOT = "/test/kids/akademie";
 
 export function isAcademyOwnerRoute(pathname) {
-  return pathname === ACADEMY_NEW_ROOT || pathname.startsWith(ACADEMY_NEW_ROOT + "/")
-    || pathname === ACADEMY_OLD_ROOT || pathname.startsWith(ACADEMY_OLD_ROOT + "/");
+  // Only these two owner QA documents and the login route exist. Never use a
+  // wildcard that could make an authenticated path traverse other /test files.
+  const allowed = ["", "/", "/index.html", "/audio-audit-v18.html", "/login"];
+  return allowed.some(suffix => pathname === ACADEMY_NEW_ROOT + suffix ||
+    pathname === ACADEMY_OLD_ROOT + suffix);
 }
 
 function academyOwnerSecret(env) {
@@ -251,6 +254,7 @@ export function academyOwnerAssetPath(pathname) {
   if (!isAcademyOwnerRoute(pathname)) return null;
   const suffix = pathname.startsWith(ACADEMY_NEW_ROOT)
     ? pathname.slice(ACADEMY_NEW_ROOT.length) : pathname.slice(ACADEMY_OLD_ROOT.length);
-  if (suffix === "" || suffix === "/") return ACADEMY_OLD_ROOT + "/index.html";
-  return ACADEMY_OLD_ROOT + suffix;
+  if (suffix === "" || suffix === "/" || suffix === "/index.html") return ACADEMY_OLD_ROOT + "/index.html";
+  if (suffix === "/audio-audit-v18.html") return ACADEMY_OLD_ROOT + "/audio-audit-v18.html";
+  return null;
 }
