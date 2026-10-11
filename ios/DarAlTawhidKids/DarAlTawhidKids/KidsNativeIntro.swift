@@ -71,6 +71,7 @@ private struct KidsCreatorPanel: View {
                         .font(.footnote)
                         .foregroundStyle(Color.white.opacity(0.88))
 
+                    button("Prüfzentrale · Jahresplan & alle Bereiche", "square.grid.2x2.fill", "console")
                     button("Startseite & Testprofile", "house.fill", "home")
                     button("Qurʾān", "book.closed.fill", "quran")
                     button("Hörbücher & Prophetengeschichten", "headphones", "stories")
