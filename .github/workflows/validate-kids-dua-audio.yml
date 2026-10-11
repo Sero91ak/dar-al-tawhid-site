@@ -221,7 +221,27 @@ jobs:
           const hubJsVer=String(version.visualSystem.duaHubJsVersion||"");
           const hubCssVer=String(version.visualSystem.duaHubCssVersion||"");
           const must=(ok,label)=>{if(!ok)throw new Error(label);};
-          must(html===start&&html===shell,"Kids HTML entry shells differ");
+          // The entry routes have deliberately different markup. Compare their
+          // shared runtime URLs, not every byte of their page-specific HTML.
+          const entryPages=[["kids/index.html",html],["kids/start.html",start],["kids/shell.html",shell]];
+          const commonAssets=[
+            "sw.js","owner-voice.js","dua-smart-learn.js",
+            "dua-hub-v1219.js","dua-hub-v1219.css","global-detail-dock-v1247.js",
+            "kids-touch-rail.css","kids-card-interaction.js",
+            "global-story-glow-v1216.js","global-story-glow-v1216.css"
+          ];
+          for(const asset of commonAssets){
+            const prefix="/kids/"+asset+"?v=";
+            const pos=html.indexOf(prefix);
+            must(pos>=0,"Kids shared resource missing: "+asset);
+            const versionMatch=html.slice(pos+prefix.length).match(/^[A-Za-z0-9-]+/);
+            must(!!versionMatch,"Kids resource version missing: "+asset);
+            const ref=prefix+versionMatch[0];
+            for(const [name,body] of entryPages){
+              must(body.includes(ref),name+" shared asset stale: "+ref);
+            }
+            if(asset!=="sw.js")must(sw.includes(ref),"Kids offline precache missing: "+ref);
+          }
           must(version.buildId&&swVer&&hubJsVer&&hubCssVer,"Kids release versions missing");
           for(const [name,pat] of [["owner voice",/\/kids\/owner-voice\.js\?v=\d+/],["Du'a learning",/\/kids\/dua-smart-learn\.js\?v=\d+/]]){
             must(pat.test(html),name+" script reference missing");
