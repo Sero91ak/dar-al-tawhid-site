@@ -156,9 +156,9 @@ struct KidsWebAppView: UIViewRepresentable {
             if key == "dua" {
                 query = "document.getElementById('openDuaButton')?.click()"
             } else {
-                query = "document.querySelector('.bottom-nav .nav-btn[data-target=\\\"\\(key)\\\"]')?.click()"
+                query = "document.querySelector('.bottom-nav .nav-btn[data-target=\"\(key)\"]')?.click()"
             }
-            page.evaluateJavaScript("try{\\(query)}catch(e){}", completionHandler: nil)
+            page.evaluateJavaScript("try{\(query)}catch(e){}", completionHandler: nil)
         }
 #endif
 
