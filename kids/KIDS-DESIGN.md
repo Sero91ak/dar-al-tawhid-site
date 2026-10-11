@@ -206,3 +206,11 @@ In allen Kinderansichten bleibt der **konkrete Quellenbeleg als reiner, gut lesb
 - **Lange Duʿāʾs:** Bei mehr als 18 Wörtern oder Platzmangel werden die drei Leseebenen innerhalb des vorhandenen Raums getrennt scrollbar. Das aktive arabische Wort, die passende Lautschrift und die deutsche Bedeutung bleiben gemeinsam sichtbar. Fingerbedienung darf dabei nicht die äußere Seite scrollen.
 - **Audio bleibt authentisch:** „Ganz hören“ nutzt die durchgehende Fuṣḥā-Aufnahme, „Langsam hören“ ihre freigegebene langsamere Aufnahme und „Wort für Wort“ die einzelnen Wortdateien. Der Fokus läuft in allen drei Ebenen mit; beim ganzen Hören können Zeitmarker ohne freigegebene Wort-Timestamps nur näherungsweise synchronisiert sein.
 - **Release-Schutz:** `scripts/kids-dua-trilingual-guard.js` prüft die vollständigen Wort-/Lautschrift-/Bedeutungsindizes, den echten Asset-Verweis in allen Kids-Einstiegsseiten sowie die passende Service-Worker-Offline-Dateiliste. Es dürfen keine veralteten festgeschriebenen Abfrageversionen einen ansonsten gültigen Release verhindern.
+
+## Einheitliche dezente Kapsel-Rückmeldung — `KIDS_STORY_GLOW_PARITY_V1218`
+
+- Referenz ist die sanfte Goldkontur der **Hörbücher-Karte im Home-Bereich**: keine nachträglich stärkere Beleuchtung, kein Gold-/Türkis-Doppelhalo, keine animierte Lichtwelle.
+- Auf Themen-, Buch-, Unterrichts- und Geschichtenkarten gilt der gemeinsame Touch-/Hover-/Fokus-Effekt über `kids-touch-rail.css` und `kids-card-interaction.js`. Auch innerhalb geöffneter Themen bleibt die Rückmeldung gedämpft.
+- Das alte verzögerte `kids-story-touch-glow`-System (560 ms) ist deaktiviert; die alte CSS-Datei liefert nur einen zurückhaltenden Fallback nach denselben Variablen.
+- **Ausnahme:** Zurück- und Kopfzeilensteuerungen, globale Navigation und andere nicht als Inhaltskarte gedachte Funktionen erhalten keinen Themenkarten-Glow. Sichtbare Tastaturfokuszustände bleiben dennoch erhalten.
+- Änderungen der Kapsel-Interaktion dürfen keine Abstände, Safe-Areas, Audiofunktionen oder Seitenwechsel verändern.
