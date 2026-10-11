@@ -3332,6 +3332,11 @@
     paintSleepLive();
   }
   async function onOpt(id) {
+    if (id.indexOf("v108-speed-set-")===0) {
+      var rate=Number(id.slice("v108-speed-set-".length));
+      if ([0.75,1,1.25,1.5].indexOf(rate)<0) return;
+      state.learnRate=rate;applyLearnRate();saveState();closeSheet();paintChrome();return;
+    }
     if (id.indexOf("s-") === 0) {
       closeSheet();
       return gotoSurah(Number(id.slice(2)), 1, state.playing, true).then(function () {
@@ -3496,12 +3501,8 @@
       }
       if (act === "v108-speed") {
         openSheet("Wiedergabegeschwindigkeit",[0.75,1,1.25,1.5].map(function(v){
-          return '<button type="button" class="dqp-opt" data-dqp="v108-speed-set" data-v108-speed="'+v+'">'+String(v).replace(".",",")+'×'+(Number(state.learnRate)===v?' ✓':'')+'</button>';
+          return '<button type="button" class="dqp-opt" data-dqp-opt="v108-speed-set-'+v+'">'+String(v).replace(".",",")+'×'+(Number(state.learnRate)===v?' ✓':'')+'</button>';
         }).join(""));return;
-      }
-      if (act === "v108-speed-set") {
-        state.learnRate=Math.max(.75,Math.min(1.5,Number(t.getAttribute("data-v108-speed"))||1));
-        applyLearnRate();saveState();closeSheet();paintChrome();return;
       }
       if (act === "v108-repeat") {state.repeat=cycle(REPEAT,state.repeat);saveState();paintChrome();return;}
       if (act === "v108-audio") {
