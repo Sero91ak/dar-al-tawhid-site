@@ -25,7 +25,7 @@ function verifiedAsset(entry){
 }
 function curriculumIds(){
  const sandbox={window:{}};
- for(const filename of ["kids/akademie/curriculum-v1.js","kids/akademie/curriculum-v2.js","kids/akademie/curriculum-v22.js","kids/akademie/curriculum-v25.js"]){
+ for(const filename of ["kids/akademie/curriculum-v1.js","kids/akademie/curriculum-v2.js","kids/akademie/curriculum-v22.js","kids/akademie/curriculum-v25.js","kids/akademie/curriculum-v26.js"]){
   vm.runInNewContext(fs.readFileSync(path.join(ROOT,filename),"utf8"),sandbox,{filename,timeout:1500});
  }
  return Object.keys(sandbox.window.DARKidsAcademyCurriculum||{});
@@ -40,15 +40,17 @@ function audit(){
  const next=read("kids/data/academy-voice-plan-v22.json");
  const vocabulary=read("kids/data/academy-vocabulary-voice-plan-v24.json");
  const v25=read("kids/data/academy-voice-plan-v25.json");
+ const v26=read("kids/data/academy-voice-plan-v26.json");
  if(main.modelId!==MODEL||sidq.modelId!==MODEL||main.voiceProfileId!==PROFILE||
     sidq.voiceProfileId!==PROFILE||sidq.voiceSettingsProfile!==SETTINGS||
     next.modelId!==MODEL||next.voiceProfileId!==PROFILE||
     vocabulary.modelId!==MODEL||vocabulary.voiceProfileId!==PROFILE||vocabulary.voiceSettingsProfile!==SETTINGS||
-    v25.modelId!==MODEL||v25.voiceProfileId!==PROFILE)throw Error("Unauthorized plan voice");
+    v25.modelId!==MODEL||v25.voiceProfileId!==PROFILE||
+    v26.modelId!==MODEL||v26.voiceProfileId!==PROFILE)throw Error("Unauthorized plan voice");
  const knownLessonIds=curriculumIds();
  const knownLessonSet=new Set([...knownLessonIds,"sidq"]);
  const phrases=new Map(),coveredLessons=new Set();
- for(const plan of [main,sidq,next,v25,vocabulary]){
+ for(const plan of [main,sidq,next,v25,v26,vocabulary]){
   if(!Array.isArray(plan.phrases)||plan.phraseCount!==plan.phrases.length)throw Error("Invalid voice plan");
   for(const p of plan.phrases){
    if(p.modelId!==MODEL||p.voiceProfileId!==PROFILE)throw Error("Voice identity changed for: "+p.text);

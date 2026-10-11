@@ -27,7 +27,8 @@
   // Each new *verified* pack is explicitly appended after all prior lessons.
   const extension=[
    ...(Array.isArray(root.DARKidsAcademyCurriculumV22?.ids)?root.DARKidsAcademyCurriculumV22.ids:[]),
-   ...(Array.isArray(root.DARKidsAcademyCurriculumV25?.ids)?root.DARKidsAcademyCurriculumV25.ids:[])
+   ...(Array.isArray(root.DARKidsAcademyCurriculumV25?.ids)?root.DARKidsAcademyCurriculumV25.ids:[]),
+   ...(Array.isArray(root.DARKidsAcademyCurriculumV26?.ids)?root.DARKidsAcademyCurriculumV26.ids:[])
   ];
   const extra=new Set(extension);
   const lists=groups.map(g=>(topics[g]||[]).filter(id=>!extra.has(id)));
