@@ -70,7 +70,7 @@ function renderSummary(){
  $("studioSavedAt").textContent=state.updatedAt?new Date(state.updatedAt).toLocaleString("de-DE"):"noch nicht erfasst";
  $("releaseFlag").textContent="LIVE-PUSH GESPERRT · nur KIDS TEST";
 }
-function assignSlot(num){
+function assignSlot(num,scroll=true){
  const id=Number(num);
  if(!Number.isInteger(id)||id<1||id>208)return;
  chosen=id;
@@ -82,7 +82,7 @@ function assignSlot(num){
  setInput("studioNotes",local.notes||"");
  setInput("studioPlanDate",local.plannedDate||"");
  for(const key of ["quelle","alter","audio","ui"])$("check-"+key).checked=!!local.checks?.[key];
- $("studioEditor").scrollIntoView({block:"start",behavior:"smooth"});
+ if(scroll)$("studioEditor").scrollIntoView({block:"start",behavior:"smooth"});
  notice("Unterrichtsplatz #"+id+" geladen. Änderungen werden erst nach „Lokal speichern“ gesichert.");
 }
 function saveCourse(){
@@ -153,7 +153,7 @@ function renderInputs(){
  setInput("testAge",state.selection.age);setInput("testProfile",state.selection.profile);setInput("testModule",state.selection.module);
  setInput("cycleMonday",state.weekStart);
  renderUpcoming();renderSummary();chooseModule();
- if(chosen)assignSlot(chosen);
+ if(chosen)assignSlot(chosen,false);
 }
 function wire(){
  readStore();
@@ -166,7 +166,7 @@ function wire(){
  $("studioImport").addEventListener("change",e=>{importData(e.target.files?.[0]);e.target.value=""});
  $("studioClear").addEventListener("click",()=>{
    if(!confirm("ALLE lokalen KIDS-TEST-Einstellungen, Prüfnotizen und Entwürfe auf diesem Gerät löschen? Unumkehrbar ohne Export."))return;
-   state=initial();chosen=null;localStorage.removeItem(STORAGE_KEY);renderInputs();assignSlot(1);notice("Nur die lokalen KIDS-TEST-Daten wurden gelöscht.");
+   state=initial();chosen=null;localStorage.removeItem(STORAGE_KEY);renderInputs();assignSlot(1,false);notice("Nur die lokalen KIDS-TEST-Daten wurden gelöscht.");
  });
  $("studioProfileSave").addEventListener("click",()=>{prefsChanged();renderUpcoming()});
  $("moduleChoose").addEventListener("change",chooseModule);
