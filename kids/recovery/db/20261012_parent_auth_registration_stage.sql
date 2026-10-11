@@ -58,6 +58,9 @@ begin
   if exists (select 1 from public.kids_accounts a where a.name_key = k) then
     return jsonb_build_object('ok',false,'error','Registrierung konnte nicht abgeschlossen werden.');
   end if;
+  -- Serialize a single parent's simultaneous requests for DIFFERENT child names.
+  -- Without this lock, parallel registrations could all pass the hourly cap.
+  perform pg_advisory_xact_lock(hashtext('kids-parent-hourly:' || p_auth_user_id::text));
   select count(*) into count_recent
     from public.kids_parent_contacts c
     where c.auth_user_id = p_auth_user_id
