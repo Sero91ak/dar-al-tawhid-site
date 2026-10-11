@@ -12,7 +12,7 @@
     "repeat": "52-Wochen-Zyklus / 364 Tage; kein erfundenes fixes Veröffentlichungsdatum",
     "anchorMonday": null
   },
-  "provenancePolicy": "createdAt/changedAt/testPublishedAt/visitorPublishedAt remain null unless supported by a specific traceable event. codeIntegratedAt for only four V22 lessons refers to commit date, NOT visitor launch date.",
+  "provenancePolicy": "codeIntegratedAt is the date the *curriculum file* was first committed to GitHub, not the date every lesson was originally written or published. This is traceable via the versioned commit. createdAt/changedAt/testPublishedAt/visitorPublishedAt remain null where individual authoritative events are unknown.",
   "subjects": [
     "akhlaq",
     "adab",
@@ -2195,8 +2195,8 @@
       ],
       "createdAt": null,
       "changedAt": null,
-      "codeIntegratedAt": null,
-      "codeIntegratedCommit": null,
+      "codeIntegratedAt": "2026-10-10",
+      "codeIntegratedCommit": "fab3c6e8061d",
       "testPublishedAt": null,
       "visitorPublishedAt": null,
       "visitorReleaseVerified": false,
@@ -2243,8 +2243,8 @@
       ],
       "createdAt": null,
       "changedAt": null,
-      "codeIntegratedAt": null,
-      "codeIntegratedCommit": null,
+      "codeIntegratedAt": "2026-10-10",
+      "codeIntegratedCommit": "fab3c6e8061d",
       "testPublishedAt": null,
       "visitorPublishedAt": null,
       "visitorReleaseVerified": false,
@@ -2291,8 +2291,8 @@
       ],
       "createdAt": null,
       "changedAt": null,
-      "codeIntegratedAt": null,
-      "codeIntegratedCommit": null,
+      "codeIntegratedAt": "2026-10-10",
+      "codeIntegratedCommit": "fab3c6e8061d",
       "testPublishedAt": null,
       "visitorPublishedAt": null,
       "visitorReleaseVerified": false,
@@ -2339,8 +2339,8 @@
       ],
       "createdAt": null,
       "changedAt": null,
-      "codeIntegratedAt": null,
-      "codeIntegratedCommit": null,
+      "codeIntegratedAt": "2026-10-10",
+      "codeIntegratedCommit": "fab3c6e8061d",
       "testPublishedAt": null,
       "visitorPublishedAt": null,
       "visitorReleaseVerified": false,
@@ -2387,8 +2387,8 @@
       ],
       "createdAt": null,
       "changedAt": null,
-      "codeIntegratedAt": null,
-      "codeIntegratedCommit": null,
+      "codeIntegratedAt": "2026-10-10",
+      "codeIntegratedCommit": "fab3c6e8061d",
       "testPublishedAt": null,
       "visitorPublishedAt": null,
       "visitorReleaseVerified": false,
@@ -2435,8 +2435,8 @@
       ],
       "createdAt": null,
       "changedAt": null,
-      "codeIntegratedAt": null,
-      "codeIntegratedCommit": null,
+      "codeIntegratedAt": "2026-10-10",
+      "codeIntegratedCommit": "fab3c6e8061d",
       "testPublishedAt": null,
       "visitorPublishedAt": null,
       "visitorReleaseVerified": false,
@@ -2483,8 +2483,8 @@
       ],
       "createdAt": null,
       "changedAt": null,
-      "codeIntegratedAt": null,
-      "codeIntegratedCommit": null,
+      "codeIntegratedAt": "2026-10-10",
+      "codeIntegratedCommit": "fab3c6e8061d",
       "testPublishedAt": null,
       "visitorPublishedAt": null,
       "visitorReleaseVerified": false,
@@ -2531,8 +2531,8 @@
       ],
       "createdAt": null,
       "changedAt": null,
-      "codeIntegratedAt": null,
-      "codeIntegratedCommit": null,
+      "codeIntegratedAt": "2026-10-10",
+      "codeIntegratedCommit": "fab3c6e8061d",
       "testPublishedAt": null,
       "visitorPublishedAt": null,
       "visitorReleaseVerified": false,
@@ -2579,8 +2579,8 @@
       ],
       "createdAt": null,
       "changedAt": null,
-      "codeIntegratedAt": null,
-      "codeIntegratedCommit": null,
+      "codeIntegratedAt": "2026-10-10",
+      "codeIntegratedCommit": "fab3c6e8061d",
       "testPublishedAt": null,
       "visitorPublishedAt": null,
       "visitorReleaseVerified": false,
@@ -2627,8 +2627,8 @@
       ],
       "createdAt": null,
       "changedAt": null,
-      "codeIntegratedAt": null,
-      "codeIntegratedCommit": null,
+      "codeIntegratedAt": "2026-10-10",
+      "codeIntegratedCommit": "fab3c6e8061d",
       "testPublishedAt": null,
       "visitorPublishedAt": null,
       "visitorReleaseVerified": false,
@@ -2675,8 +2675,8 @@
       ],
       "createdAt": null,
       "changedAt": null,
-      "codeIntegratedAt": null,
-      "codeIntegratedCommit": null,
+      "codeIntegratedAt": "2026-10-10",
+      "codeIntegratedCommit": "fab3c6e8061d",
       "testPublishedAt": null,
       "visitorPublishedAt": null,
       "visitorReleaseVerified": false,
@@ -2705,7 +2705,7 @@
         "source": "Ṣaḥīḥ al-Buḫārī, Nr. 1469"
       },
       "hadithUrl": null,
-      "sourceId": null,
+      "sourceId": "akhlaq-sabr",
       "sourceCheckedAt": null,
       "questions": [
         {
@@ -2723,8 +2723,8 @@
       ],
       "createdAt": null,
       "changedAt": null,
-      "codeIntegratedAt": null,
-      "codeIntegratedCommit": null,
+      "codeIntegratedAt": "2026-10-10",
+      "codeIntegratedCommit": "932b929b9272",
       "testPublishedAt": null,
       "visitorPublishedAt": null,
       "visitorReleaseVerified": false,
@@ -2753,7 +2753,7 @@
         "source": "Ṣaḥīḥ Muslim, Nr. 54a"
       },
       "hadithUrl": null,
-      "sourceId": null,
+      "sourceId": "adab-salam",
       "sourceCheckedAt": null,
       "questions": [
         {
@@ -2771,8 +2771,8 @@
       ],
       "createdAt": null,
       "changedAt": null,
-      "codeIntegratedAt": null,
-      "codeIntegratedCommit": null,
+      "codeIntegratedAt": "2026-10-10",
+      "codeIntegratedCommit": "932b929b9272",
       "testPublishedAt": null,
       "visitorPublishedAt": null,
       "visitorReleaseVerified": false,
@@ -2801,7 +2801,7 @@
         "source": "Ṣaḥīḥ Muslim, Nr. 223"
       },
       "hadithUrl": null,
-      "sourceId": null,
+      "sourceId": "fiqh-taharah",
       "sourceCheckedAt": null,
       "questions": [
         {
@@ -2819,8 +2819,8 @@
       ],
       "createdAt": null,
       "changedAt": null,
-      "codeIntegratedAt": null,
-      "codeIntegratedCommit": null,
+      "codeIntegratedAt": "2026-10-10",
+      "codeIntegratedCommit": "932b929b9272",
       "testPublishedAt": null,
       "visitorPublishedAt": null,
       "visitorReleaseVerified": false,
@@ -2849,7 +2849,7 @@
         "source": "Ṣaḥīḥ al-Buḫārī, Nr. 2856"
       },
       "hadithUrl": null,
-      "sourceId": null,
+      "sourceId": "aqidah-tawhid",
       "sourceCheckedAt": null,
       "questions": [
         {
@@ -2867,8 +2867,8 @@
       ],
       "createdAt": null,
       "changedAt": null,
-      "codeIntegratedAt": null,
-      "codeIntegratedCommit": null,
+      "codeIntegratedAt": "2026-10-10",
+      "codeIntegratedCommit": "932b929b9272",
       "testPublishedAt": null,
       "visitorPublishedAt": null,
       "visitorReleaseVerified": false,
@@ -2897,7 +2897,7 @@
         "source": "Ṣaḥīḥ al-Buḫārī, Nr. 1469"
       },
       "hadithUrl": null,
-      "sourceId": null,
+      "sourceId": "akhlaq-sabr",
       "sourceCheckedAt": null,
       "questions": [
         {
@@ -2915,8 +2915,8 @@
       ],
       "createdAt": null,
       "changedAt": null,
-      "codeIntegratedAt": null,
-      "codeIntegratedCommit": null,
+      "codeIntegratedAt": "2026-10-10",
+      "codeIntegratedCommit": "932b929b9272",
       "testPublishedAt": null,
       "visitorPublishedAt": null,
       "visitorReleaseVerified": false,
@@ -2945,7 +2945,7 @@
         "source": "Ṣaḥīḥ Muslim, Nr. 54a"
       },
       "hadithUrl": null,
-      "sourceId": null,
+      "sourceId": "adab-salam",
       "sourceCheckedAt": null,
       "questions": [
         {
@@ -2963,8 +2963,8 @@
       ],
       "createdAt": null,
       "changedAt": null,
-      "codeIntegratedAt": null,
-      "codeIntegratedCommit": null,
+      "codeIntegratedAt": "2026-10-10",
+      "codeIntegratedCommit": "932b929b9272",
       "testPublishedAt": null,
       "visitorPublishedAt": null,
       "visitorReleaseVerified": false,
@@ -2993,7 +2993,7 @@
         "source": "Ṣaḥīḥ Muslim, Nr. 223"
       },
       "hadithUrl": null,
-      "sourceId": null,
+      "sourceId": "fiqh-taharah",
       "sourceCheckedAt": null,
       "questions": [
         {
@@ -3011,8 +3011,8 @@
       ],
       "createdAt": null,
       "changedAt": null,
-      "codeIntegratedAt": null,
-      "codeIntegratedCommit": null,
+      "codeIntegratedAt": "2026-10-10",
+      "codeIntegratedCommit": "932b929b9272",
       "testPublishedAt": null,
       "visitorPublishedAt": null,
       "visitorReleaseVerified": false,
@@ -3041,7 +3041,7 @@
         "source": "Ṣaḥīḥ al-Buḫārī, Nr. 2856"
       },
       "hadithUrl": null,
-      "sourceId": null,
+      "sourceId": "aqidah-tawhid",
       "sourceCheckedAt": null,
       "questions": [
         {
@@ -3059,8 +3059,8 @@
       ],
       "createdAt": null,
       "changedAt": null,
-      "codeIntegratedAt": null,
-      "codeIntegratedCommit": null,
+      "codeIntegratedAt": "2026-10-10",
+      "codeIntegratedCommit": "932b929b9272",
       "testPublishedAt": null,
       "visitorPublishedAt": null,
       "visitorReleaseVerified": false,
@@ -3089,7 +3089,7 @@
         "source": "Ṣaḥīḥ al-Buḫārī, Nr. 33"
       },
       "hadithUrl": null,
-      "sourceId": null,
+      "sourceId": "akhlaq-amanah",
       "sourceCheckedAt": null,
       "questions": [
         {
@@ -3107,8 +3107,8 @@
       ],
       "createdAt": null,
       "changedAt": null,
-      "codeIntegratedAt": null,
-      "codeIntegratedCommit": null,
+      "codeIntegratedAt": "2026-10-10",
+      "codeIntegratedCommit": "932b929b9272",
       "testPublishedAt": null,
       "visitorPublishedAt": null,
       "visitorReleaseVerified": false,
@@ -3137,7 +3137,7 @@
         "source": "Ṣaḥīḥ al-Buḫārī, Nr. 6018"
       },
       "hadithUrl": null,
-      "sourceId": null,
+      "sourceId": "adab-worte",
       "sourceCheckedAt": null,
       "questions": [
         {
@@ -3155,8 +3155,8 @@
       ],
       "createdAt": null,
       "changedAt": null,
-      "codeIntegratedAt": null,
-      "codeIntegratedCommit": null,
+      "codeIntegratedAt": "2026-10-10",
+      "codeIntegratedCommit": "932b929b9272",
       "testPublishedAt": null,
       "visitorPublishedAt": null,
       "visitorReleaseVerified": false,
@@ -3185,7 +3185,7 @@
         "source": "Ṣaḥīḥ al-Buḫārī, Nr. 135"
       },
       "hadithUrl": null,
-      "sourceId": null,
+      "sourceId": "fiqh-wudu",
       "sourceCheckedAt": null,
       "questions": [
         {
@@ -3203,8 +3203,8 @@
       ],
       "createdAt": null,
       "changedAt": null,
-      "codeIntegratedAt": null,
-      "codeIntegratedCommit": null,
+      "codeIntegratedAt": "2026-10-10",
+      "codeIntegratedCommit": "932b929b9272",
       "testPublishedAt": null,
       "visitorPublishedAt": null,
       "visitorReleaseVerified": false,
@@ -3233,7 +3233,7 @@
         "source": "Ṣaḥīḥ Muslim, Nr. 8a (Ḥadīṯ Ǧibrīl)"
       },
       "hadithUrl": null,
-      "sourceId": null,
+      "sourceId": "aqidah-iman",
       "sourceCheckedAt": null,
       "questions": [
         {
@@ -3251,8 +3251,8 @@
       ],
       "createdAt": null,
       "changedAt": null,
-      "codeIntegratedAt": null,
-      "codeIntegratedCommit": null,
+      "codeIntegratedAt": "2026-10-10",
+      "codeIntegratedCommit": "932b929b9272",
       "testPublishedAt": null,
       "visitorPublishedAt": null,
       "visitorReleaseVerified": false,
@@ -3281,7 +3281,7 @@
         "source": "Ṣaḥīḥ al-Buḫārī, Nr. 33"
       },
       "hadithUrl": null,
-      "sourceId": null,
+      "sourceId": "akhlaq-amanah",
       "sourceCheckedAt": null,
       "questions": [
         {
@@ -3299,8 +3299,8 @@
       ],
       "createdAt": null,
       "changedAt": null,
-      "codeIntegratedAt": null,
-      "codeIntegratedCommit": null,
+      "codeIntegratedAt": "2026-10-10",
+      "codeIntegratedCommit": "932b929b9272",
       "testPublishedAt": null,
       "visitorPublishedAt": null,
       "visitorReleaseVerified": false,
@@ -3329,7 +3329,7 @@
         "source": "Ṣaḥīḥ al-Buḫārī, Nr. 6018"
       },
       "hadithUrl": null,
-      "sourceId": null,
+      "sourceId": "adab-worte",
       "sourceCheckedAt": null,
       "questions": [
         {
@@ -3347,8 +3347,8 @@
       ],
       "createdAt": null,
       "changedAt": null,
-      "codeIntegratedAt": null,
-      "codeIntegratedCommit": null,
+      "codeIntegratedAt": "2026-10-10",
+      "codeIntegratedCommit": "932b929b9272",
       "testPublishedAt": null,
       "visitorPublishedAt": null,
       "visitorReleaseVerified": false,
@@ -3377,7 +3377,7 @@
         "source": "Ṣaḥīḥ al-Buḫārī, Nr. 135"
       },
       "hadithUrl": null,
-      "sourceId": null,
+      "sourceId": "fiqh-wudu",
       "sourceCheckedAt": null,
       "questions": [
         {
@@ -3395,8 +3395,8 @@
       ],
       "createdAt": null,
       "changedAt": null,
-      "codeIntegratedAt": null,
-      "codeIntegratedCommit": null,
+      "codeIntegratedAt": "2026-10-10",
+      "codeIntegratedCommit": "932b929b9272",
       "testPublishedAt": null,
       "visitorPublishedAt": null,
       "visitorReleaseVerified": false,
@@ -3425,7 +3425,7 @@
         "source": "Ṣaḥīḥ Muslim, Nr. 8a (Ḥadīṯ Ǧibrīl)"
       },
       "hadithUrl": null,
-      "sourceId": null,
+      "sourceId": "aqidah-iman",
       "sourceCheckedAt": null,
       "questions": [
         {
@@ -3443,8 +3443,8 @@
       ],
       "createdAt": null,
       "changedAt": null,
-      "codeIntegratedAt": null,
-      "codeIntegratedCommit": null,
+      "codeIntegratedAt": "2026-10-10",
+      "codeIntegratedCommit": "932b929b9272",
       "testPublishedAt": null,
       "visitorPublishedAt": null,
       "visitorReleaseVerified": false,
@@ -3473,7 +3473,7 @@
         "source": "Ṣaḥīḥ al-Buḫārī, Nr. 5971"
       },
       "hadithUrl": null,
-      "sourceId": null,
+      "sourceId": "adab-respekt",
       "sourceCheckedAt": null,
       "questions": [
         {
@@ -3491,8 +3491,8 @@
       ],
       "createdAt": null,
       "changedAt": null,
-      "codeIntegratedAt": null,
-      "codeIntegratedCommit": null,
+      "codeIntegratedAt": "2026-10-10",
+      "codeIntegratedCommit": "932b929b9272",
       "testPublishedAt": null,
       "visitorPublishedAt": null,
       "visitorReleaseVerified": false,
@@ -3521,7 +3521,7 @@
         "source": "Ṣaḥīḥ al-Buḫārī, Nr. 631"
       },
       "hadithUrl": null,
-      "sourceId": null,
+      "sourceId": "fiqh-salah",
       "sourceCheckedAt": null,
       "questions": [
         {
@@ -3539,8 +3539,8 @@
       ],
       "createdAt": null,
       "changedAt": null,
-      "codeIntegratedAt": null,
-      "codeIntegratedCommit": null,
+      "codeIntegratedAt": "2026-10-10",
+      "codeIntegratedCommit": "932b929b9272",
       "testPublishedAt": null,
       "visitorPublishedAt": null,
       "visitorReleaseVerified": false,
@@ -3569,7 +3569,7 @@
         "source": "Ṣaḥīḥ al-Buḫārī, Nr. 1"
       },
       "hadithUrl": null,
-      "sourceId": null,
+      "sourceId": "aqidah-ikhlas",
       "sourceCheckedAt": null,
       "questions": [
         {
@@ -3587,8 +3587,8 @@
       ],
       "createdAt": null,
       "changedAt": null,
-      "codeIntegratedAt": null,
-      "codeIntegratedCommit": null,
+      "codeIntegratedAt": "2026-10-10",
+      "codeIntegratedCommit": "932b929b9272",
       "testPublishedAt": null,
       "visitorPublishedAt": null,
       "visitorReleaseVerified": false,
@@ -3617,7 +3617,7 @@
         "source": "Ṣaḥīḥ al-Buḫārī, Nr. 5971"
       },
       "hadithUrl": null,
-      "sourceId": null,
+      "sourceId": "adab-respekt",
       "sourceCheckedAt": null,
       "questions": [
         {
@@ -3635,8 +3635,8 @@
       ],
       "createdAt": null,
       "changedAt": null,
-      "codeIntegratedAt": null,
-      "codeIntegratedCommit": null,
+      "codeIntegratedAt": "2026-10-10",
+      "codeIntegratedCommit": "932b929b9272",
       "testPublishedAt": null,
       "visitorPublishedAt": null,
       "visitorReleaseVerified": false,
@@ -3665,7 +3665,7 @@
         "source": "Ṣaḥīḥ al-Buḫārī, Nr. 631"
       },
       "hadithUrl": null,
-      "sourceId": null,
+      "sourceId": "fiqh-salah",
       "sourceCheckedAt": null,
       "questions": [
         {
@@ -3683,8 +3683,8 @@
       ],
       "createdAt": null,
       "changedAt": null,
-      "codeIntegratedAt": null,
-      "codeIntegratedCommit": null,
+      "codeIntegratedAt": "2026-10-10",
+      "codeIntegratedCommit": "932b929b9272",
       "testPublishedAt": null,
       "visitorPublishedAt": null,
       "visitorReleaseVerified": false,
@@ -3713,7 +3713,7 @@
         "source": "Ṣaḥīḥ al-Buḫārī, Nr. 1"
       },
       "hadithUrl": null,
-      "sourceId": null,
+      "sourceId": "aqidah-ikhlas",
       "sourceCheckedAt": null,
       "questions": [
         {
@@ -3731,8 +3731,8 @@
       ],
       "createdAt": null,
       "changedAt": null,
-      "codeIntegratedAt": null,
-      "codeIntegratedCommit": null,
+      "codeIntegratedAt": "2026-10-10",
+      "codeIntegratedCommit": "932b929b9272",
       "testPublishedAt": null,
       "visitorPublishedAt": null,
       "visitorReleaseVerified": false,
@@ -6821,5 +6821,22 @@
       "stage": "offen",
       "voiceStatus": "noch kein Text oder Audio"
     }
-  ]
+  ],
+  "sourceImportCommits": {
+    "v1": {
+      "date": "2026-10-10",
+      "commit": "fab3c6e8061d",
+      "count": 11
+    },
+    "v2": {
+      "date": "2026-10-10",
+      "commit": "932b929b9272",
+      "count": 22
+    },
+    "v22": {
+      "date": "2026-10-11",
+      "commit": "c4cbbea4033dc7a55fa5c13a914b97aae77cc9f1",
+      "count": 4
+    }
+  }
 }
