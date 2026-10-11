@@ -4307,6 +4307,53 @@
     logAudio("online again: resume", { surah: state.surah, ayah: state.ayah });
     loadAudio(true, true);
   });
+  /* Test-only canonical player owner: avoid duplicate route/player engines. */
+  var testPlayerRouteTick = 0;
+  function ensureTestCanonicalPlayerRoute() {
+    if (!isTestAppPath() || LEARN_PLAYER_ONLY || !document.body) return;
+    var hash = String(location.hash || "").replace(/^#\\/?/, "");
+    if (hash.split("/")[0] !== "quran-player") return;
+    var value = hash.slice("quran-player".length).replace(/^\\//, "");
+    if (value) parseRoute(value);
+    document.documentElement.classList.add("is-quran-player-route");
+    document.body.classList.add("is-quran-player-route", "dar-quran-player-open");
+    /* An older test-only prototype may still be loaded by the app shell. */
+    var prototype = document.getElementById("dar-quran-player-test");
+    if (prototype) {
+      prototype.hidden = true;
+      prototype.style.display = "none";
+      prototype.setAttribute("aria-hidden", "true");
+      try {
+        if (window.DARQuranPlayerTest && window.DARQuranPlayerTest.audio) {
+          window.DARQuranPlayerTest.audio.pause();
+        }
+      } catch (ePrototypeAudio) {}
+    }
+    var root = playerRoot();
+    if (!root) {
+      var shell = document.createElement("div");
+      shell.innerHTML = renderShell();
+      root = shell.firstElementChild;
+      if (!root) return;
+      document.body.appendChild(root);
+    }
+    if (root.parentNode !== document.body) document.body.appendChild(root);
+    root.hidden = false;
+    root.style.display = "";
+    root.removeAttribute("aria-hidden");
+    root.removeAttribute("inert");
+    wantFullPlayer();
+    window.DARQuranPlayer.bind();
+  }
+  function scheduleTestCanonicalPlayerRoute() {
+    if (!isTestAppPath()) return;
+    if (testPlayerRouteTick) clearTimeout(testPlayerRouteTick);
+    /* The SPA first swaps #appView; claim the player after its route commit. */
+    testPlayerRouteTick = setTimeout(function () {
+      testPlayerRouteTick = 0;
+      ensureTestCanonicalPlayerRoute();
+    }, 60);
+  }
   function onRoutePaint() {
     if (routePaintT) clearTimeout(routePaintT);
     routePaintT = setTimeout(function () {
@@ -4315,6 +4362,7 @@
       ensureReaderLearnPlayer();
       cleanupLearningPlayerOnRouteLeave();
       paintMini();
+      scheduleTestCanonicalPlayerRoute();
     }, 0);
   }
   var routePaintT = 0;
@@ -4392,6 +4440,7 @@
       cleanupLearningPlayerOnRouteLeave();
       resumeVisibleSession();
       paintMini();
+      scheduleTestCanonicalPlayerRoute();
     }, { once: true });
   } else {
     watchQuranBodyClass();
@@ -4399,5 +4448,6 @@
     cleanupLearningPlayerOnRouteLeave();
     resumeVisibleSession();
     paintMini();
+    scheduleTestCanonicalPlayerRoute();
   }
 })();
