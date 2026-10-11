@@ -120,7 +120,7 @@ assert.ok(academyHtml.includes(academyFixedShell+' > main.wrap > #academyHome.ac
 assert.ok(academyHtml.includes(academyFixedShell+' > main.wrap > #academySubject.subject-detail:not([hidden])'));
 assert.ok(academyHtml.includes('overscroll-behavior-y:contain!important;-webkit-overflow-scrolling:touch'));
 assert.ok(academyHtml.includes('function scrollAcademyViewTop(){'));
-assert.equal((academyHtml.match(/updateAcademyAppbar\\(\\);scrollAcademyViewTop\\(\\)/g)||[]).length,3);
+assert.equal(academyHtml.split('updateAcademyAppbar();scrollAcademyViewTop()').length-1,3);
 // Existing focus lesson keeps its own stageSurface-only scrolling.
 assert.ok(academyHtml.includes('body[data-academy-view="lesson"] #lessonMain #stageSurface'));
 assert.ok(academyHtml.includes("isAcademyStoryMaster"));
