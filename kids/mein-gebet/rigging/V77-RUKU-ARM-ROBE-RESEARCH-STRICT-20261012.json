@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-10-12",
+  "scope": "Kids Mein Gebet isolated PR 825. Reporting and release-gate integrity only. Real GLB files remain privately archived in Google Drive.",
+  "source": {
+    "profile": "boy",
+    "pinSHA256": "353b028862f91922d6288cf6ede09d5c8150815657c66c9c116b7775311c07fa",
+    "sizeBytes": 4382224
+  },
+  "experimentalModels": [
+    {
+      "kind": "arm rig refit",
+      "name": "JUNGE_V77_RUKU_RIG_ARMREACH_DRAFT_NICHT_FREIGEGEBEN.glb",
+      "sha256": "b72a4915dc796e8821265ba4726abd7c92786289a3186b2afc2b71be5d14f435",
+      "bytes": 4385600,
+      "approved": false
+    },
+    {
+      "kind": "arm rig and garment skin weight refit",
+      "name": "JUNGE_V77_RUKU_RIG_ROBE_SKIN_DRAFT_NICHT_FREIGEGEBEN.glb",
+      "sha256": "31860da87f7a140f6f0270e02e44ac1752fc86e59ecc8554a38c6a5062443c57",
+      "bytes": 4517892,
+      "modifiedGarmentWeightVertices": 5484,
+      "approved": false
+    }
+  ],
+  "jointMeasurement": {
+    "original85DegreeAttemptWristToKneeMeters": 0.2027687877565329,
+    "newRigCandidateWristToKneeMeters": 0.047039559605217565,
+    "bilateralSymmetric": true,
+    "conditionsComparable": false,
+    "whyNotComparable": "Original rig 85° attempt versus lengthened-arm (+0.10 m) and redistributed spine/chest rig (+95°/-8°). No true palm/knee contact measurement.",
+    "actualPalmKneeMeshContactVerified": false
+  },
+  "nonDestructiveInvariants": {
+    "originalMeshPositionAccessorsUnchanged": true,
+    "sourceOriginalBinaryPrefixIntact": true,
+    "originalQiyamAndTakbirClipsPreserved": true,
+    "standingRenderPixelIdenticalToOriginal": true,
+    "feetAndHipTransformsUnanimated": true,
+    "originalSourceOverwritten": false
+  },
+  "qualityFailures": [
+    "Artificial arm extension of 0.10 m not approved against original child proportions",
+    "Hands and sleeve alignment visibly unnatural",
+    "Garment deformation still not physically credible",
+    "No hand-palm surface contact certified",
+    "No collision-free cloth physics validation",
+    "Original face/hair/kufi likeness fails review",
+    "No independent female model",
+    "No real two-rakah animation or Islamic teaching signoff"
+  ],
+  "driveEvidenceFolder": {
+    "id": "1mlSNI3uG7tU6G-WrQDStCIYej4iU7_Z9",
+    "fileCount": 29,
+    "sourceCopyVerifiedSHA256": true,
+    "bothDraftGlbRoundTripSHA256Verified": true
+  },
+  "release": {
+    "originalBoyIdentityApproved": false,
+    "garmentApproved": false,
+    "rukuApproved": false,
+    "fiqhApproved": false,
+    "realTwoRakahApproved": false,
+    "profileGirlApproved": false,
+    "productionReady": false,
+    "mergeMain": false,
+    "liveDeploy": false
+  },
+  "nextRequiredWork": "Repair original child proportions and independently correct rig/garment contact physics without requiring unnatural arm lengthening. Physically inspect both hands resting upon true knees, posture and foot contact; perform independent human visual and religious review."
+}
