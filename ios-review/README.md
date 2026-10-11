@@ -1,37 +1,29 @@
-# DĀR AL TAWḤĪD – iOS-App-Bewertung (Test-Branch)
+# DĀR AL TAWḤĪD – iOS-Bewertungsseite
 
-## Aktueller Stand
-- `ios-review/index.html`: freiwillige, bildschirmfüllende Bewertungsseite im freigegebenen Nachtblau-/Gold-Stil.
-- `ios-review/moonlit-courtyard.svg`: verlustfreies, illustriertes Ersatzmotiv (noch nicht das freigegebene Foto selbst).
-- `assets/dar-more-final-v15.js`: eigener Link nur, wenn `window.DAR_OFFICIAL_IOS_APP === true`.
-- Apple-Link: https://apps.apple.com/de/app/id6805988753?action=write-review
-- Die Sterne sind dekorativ. Sterne und Text werden **nur im App Store** eingegeben; ein Klick beweist keine erfolgte Bewertung.
+## Freigegebenes Design
+- `ios-review/approved-night-courtyard.webp`: das tatsächliche, in der Unterhaltung freigegebene fotorealistische Nacht-Moscheehofmotiv (nicht die frühere SVG-Nachzeichnung); Quellversion mit Salām, Text, Goldbutton und Abschiedsgruß.
+- `ios-review/index.html`: responsives bildschirmfüllendes Artwork mit **echten transparenten Linkflächen** an den sichtbaren Positionen von „Im App Store bewerten“ und „Zurück zu Mehr“. Die mit dem Bild mitgelieferte Navigationsleiste wurde abgeschnitten und als echte HTML-Navigation nachgebildet. Es gibt keine opake Deckfläche über dem Bild.
+- `assets/dar-more-final-v15.js`: Einstieg „App bewerten“ in „Mehr“ nur, wenn `window.DAR_OFFICIAL_IOS_APP===true`.
+- App Store bestätigt: `https://apps.apple.com/de/app/id6805988753?action=write-review`.
+- Die fünf Sterne sind **rein illustrativ**; Sterneauswahl, Text und Absenden erfolgen ausschließlich bei Apple. Ein Linkklick ist keine bestätigte Bewertung.
+- Eingebettete Bildtypografie erhält exakt das freigegebene Erscheinungsbild. Bei späterer Neugestaltung sollten die Texte als echte dynamische HTML-Texte aus einer separaten Hintergrundaufnahme umgesetzt werden, ohne das Originalmotiv mit Dubletten zu überlagern.
 
-## Automatische Aufforderung – geplant, noch nicht aktiv
-Die automatisch einblendende native Aufforderung muss mit **StoreKit AppStore.requestReview(in:)**
-in der offiziellen iOS-App umgesetzt werden. Keine eigene automatische HTML- oder Push-Aufforderung.
+## Noch NICHT implementierte automatische Erinnerung
+Die eigene bildschirmfüllende HTML-Seite darf **nicht** automatisch als Bewertungspopup ausgelöst werden. Für automatische Anfragen ist ausschließlich Apples native StoreKit-Oberfläche vorgesehen.
 
-Freigaberegel (alle Bedingungen):
-1. Mindestens sieben Tage seit der ersten erfolgreichen App-Nutzung.
-2. Mindestens fünf sinnvolle App-Sitzungen (je >= 2 Minuten aktive Nutzung; zwischen Beginn zweier gezählter Sitzungen >= 30 Minuten).
-3. Mindestens ein abgeschlossener Lern-/Lesevorgang, durch die echte App signalisiert.
-4. Es gibt keinen aktiven Login-/Kauf-/Download-/Audio-/Leseschritt; die App ist im Vordergrund.
-5. Nicht bereits für dieselbe App-Version versucht und frühestens 180 Tage nach einem früheren Versuch.
-6. Vor der Systemanfrage zwei Sekunden warten. Apple entscheidet selbst, ob ein Dialog erscheint.
-7. Ein manueller Bewertungslink setzt **niemals** den Bewertungsstatus "hat bewertet".
+Vorgesehene Voraussetzungen:
+1. Mindestens sieben Tage seit erster erfolgreicher App-Nutzung.
+2. Mindestens fünf sinnvolle Sitzungen mit jeweils mindestens zwei Minuten aktiver Nutzung und 30 Minuten Abstand zwischen gezählten Sitzungen.
+3. Mindestens ein nachweislich abgeschlossener Lern- oder Lesevorgang.
+4. Kein aktiver Lese-, Audio-, Download- oder Formularvorgang; App im Vordergrund, passender ruhiger Zeitpunkt.
+5. Maximal ein Anfrageversuch je App-Version und mindestens 180 Tage Abstand zum vorigen Versuch.
+6. Keine Benachrichtigung/Push und keine automatische eigene HTML-Aufforderung.
+7. StoreKit entscheidet selbst, ob die Systemabfrage tatsächlich angezeigt wird. Rückschluss auf tatsächlich vergebene Bewertung ist nicht möglich.
 
-Apple: max. 3 automatische Anzeigen in 365 Tagen (abhängig von eigenen Systemregeln),
-in TestFlight wird der automatische Dialog nicht gezeigt. `AppStore.requestReview(in:)`
-ist nicht als Reaktion auf einen Button-Tipp aufzurufen.
+Die nativen Integrationsstellen (`DarAlTawhidApp.swift`, `WebAppView.swift`) sind durch `content/admin/push-lanes-lock.json` geschützt. Ohne korrekte Spur-/Globalfreigabe dürfen sie auch für diese Funktion nicht geändert werden.
 
-## Noch fehlende Schritte vor echter Freigabe
-- Die geschützten nativen Dateien `DarAlTawhidApp.swift`/`WebAppView.swift` sind
-  aktuell durch `content/admin/push-lanes-lock.json` gesperrt.
-  Diese Sperre nicht umgehen. Änderungen erst nach ausdrücklicher Spur-/Globalfreigabe nach Repository-Regel.
-- Erlebnissignale in der Erwachsenen-App tatsächlich verdrahten, StoreKit aufrufen,
-  Policy mit simulierten Zeiten testen.
-- Richtige Foto-Motivdatei statt SVG-Ersatz zuordnen und Safe-Area/kleine iPhones prüfen.
-- Getrennte TestFlight-/Gerätetests; anschließend Freigabe und neuer iOS-Build.
-- Kids, Android, Apple TV, Push und Live-Deployment dürfen von dieser Änderung nicht verändert werden.
-
-Offizielle Dokumentation: https://developer.apple.com/documentation/storekit/requesting-app-store-reviews
+## Test- und Veröffentlichungspfad
+- Der PR ist ein **Entwurf**; es gibt noch keinen Merge, keinen Live-Deploy und kein veröffentlichtes iOS-Build.
+- iPhone SE/klein, iPhone Pro Max und iPad testen; Linkklick und Zurück-Navigation prüfen.
+- Bei Änderungen an Live-Web-Assets zuvor App-Health-, Canonical-State- und Scope-Guards prüfen.
+- Kinder-App, Android, Apple TV, OneSignal/Push und native Swift-Dateien bleiben unberührt.
