@@ -174,7 +174,15 @@ async function boot(){
    const extra=await fetch("/kids/data/academy-voice-plan-v22.json",{cache:"no-store",credentials:"same-origin"});
    if(extra.ok)next=await extra.json();
   }catch(_){}
-  combine(next?[result[0],result[1],next]:[result[0],result[1]],result[2],result[3],result[4]);
+  const plans=next?[result[0],result[1],next]:[result[0],result[1]];
+  // Independently deployed Kids assets may be ahead of this read-only Test app.
+  for(const path of ["/kids/data/academy-voice-plan-v25.json","/kids/data/academy-vocabulary-voice-plan-v24.json"]){
+   try{
+    const res=await fetch(path,{cache:"no-store",credentials:"same-origin"});
+    if(res.ok)plans.push(await res.json());
+   }catch(_){}
+  }
+  combine(plans,result[2],result[3],result[4]);
  }catch(e){setText("#resultCount","Audio-Prüfung konnte nicht geladen werden.");setText("#resultState",e.message||"Unbekannter Fehler");}
 }
 for(const id of ["search","subject","age","status"])$(id==="search"?"#search":"#"+id).addEventListener(id==="search"?"input":"change",()=>{if(rows.length)filter()});
