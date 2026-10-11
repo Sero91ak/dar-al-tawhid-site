@@ -18,7 +18,11 @@ import urllib.request
 
 ROOT=pathlib.Path(__file__).resolve().parents[2]
 PLAN=ROOT/"kids/data/academy-voice-plan-v9.json"
-STAGING=ROOT/"kids/data/academy-audio-staging-v9.json"
+STAGING=ROOT/"kids/data/academy-audio-staging-v9.json"  # original 4-clip pilot: NEVER replace
+STAGING_EXPANSION=ROOT/"kids/data/academy-audio-staging-v9-expansion.json"
+STAGING_SIDQ=ROOT/"kids/data/academy-audio-staging-sidq-v18.json"
+SIDQ_PLAN=ROOT/"kids/data/academy-sidq-voice-plan-v18.json"
+SIDQ_REQUEST=ROOT/"kids/data/academy-sidq-v18-request.json"
 ASSETS=ROOT/"kids/assets/kids-academy-audio"
 POLICY=json.loads((ROOT/"kids/data/academy-voice-policy-v10.json").read_text("utf-8"))
 VOICE_ID=POLICY["voiceIdentity"]["voiceId"]
@@ -70,10 +74,13 @@ def generate_audio(text:str, target:pathlib.Path, secret:str)->float:
 def main():
     parser=argparse.ArgumentParser()
     parser.add_argument("--dry-run",action="store_true")
-    parser.add_argument("--pilot-first-lesson",action="store_true",help="Only 4 exact Ṣidq welcome/lesson texts; staged without release")
+    parser.add_argument("--pilot-first-lesson",action="store_true",help="Only 4 original Ṣidq welcome pilot texts")
+    parser.add_argument("--sidq-v18",action="store_true",help="Additional first-lesson phrases; isolated manual staging only")
     parser.add_argument("--limit",type=int,default=4)
     parser.add_argument("--max-chars",type=int,default=1200)
     args=parser.parse_args()
+    if args.sidq_v18 and args.pilot_first_lesson:
+        raise RuntimeError("Only one isolated staging mode may run")
     if not 1<=args.limit<=POLICY["costControls"]["maxClipsPerInvocation"] or not 100<=args.max_chars<=POLICY["costControls"]["maxPreparedCharactersPerInvocation"]:
         raise RuntimeError("Batch budget exceeded")
     config=json.loads((ROOT/"data/pronunciation/elevenlabs-production.json").read_text("utf-8"))
@@ -108,7 +115,28 @@ def main():
             if utterance not in academy and utterance!="As-salāmu ʿalaykum, liebe Schwester.":
                 raise RuntimeError("First lesson text changed: cannot generate "+utterance)
         phrases=[{"text":utterance,"priority":0} for utterance in pilot]
-    staged=json.loads(STAGING.read_text("utf-8")) if STAGING.exists() else {}
+    # CRITICAL: the legacy 454-phrase generator used to overwrite the four
+    # original pilot entries. Each purpose now has its OWN immutable staging lane.
+    staging_path=STAGING if args.pilot_first_lesson else (STAGING_SIDQ if args.sidq_v18 else STAGING_EXPANSION)
+    staging_id="KIDS_ACADEMY_V9_SERHAT_STAGING" if args.pilot_first_lesson else (
+        "KIDS_ACADEMY_SIDQ_V18_STAGING" if args.sidq_v18 else "KIDS_ACADEMY_V9_EXPANSION_STAGING")
+    if args.sidq_v18:
+        req=json.loads(SIDQ_REQUEST.read_text("utf-8"))
+        sidq=json.loads(SIDQ_PLAN.read_text("utf-8"))
+        if req.get("id")!="kids-academy-sidq-v18-manual-batch" or req.get("voiceId")!=VOICE_ID or (
+            req.get("modelId")!=MODEL or req.get("voiceSettingsProfile")!=MASTER_PROFILE or
+            req.get("sourcePlan")!="kids/data/academy-sidq-voice-plan-v18.json" or
+            req.get("requireManualWorkflowDispatch") is not True or
+            req.get("stagingOnly") is not True or req.get("approvedForPlayback") is not False or
+            sidq.get("modelId")!=MODEL or sidq.get("voiceSettingsProfile")!=MASTER_PROFILE):
+            raise RuntimeError("SIDQ V18 request/voice policy mismatch, no credits used")
+        exact=req.get("exactPhrases") or []
+        allowed={p["text"] for p in sidq.get("phrases",[])}
+        if len(exact)!=4 or len(set(exact))!=4 or not set(exact)<=allowed or (
+            args.limit>req.get("maxClips",0) or args.max_chars>req.get("maxPreparedCharacters",0)):
+            raise RuntimeError("SIDQ V18 exact phrase/credit budget mismatch")
+        phrases=[{"text":t,"priority":0} for t in exact]
+    staged=json.loads(staging_path.read_text("utf-8")) if staging_path.exists() else {}
     previous=staged.get("entries",{})
     valid_current={}
     for item in phrases:
@@ -155,14 +183,14 @@ def main():
         created+=1
         used_chars+=len(prepared)
     staged={
-        "schemaVersion":2,"id":"KIDS_ACADEMY_V9_SERHAT_STAGING",
+        "schemaVersion":2,"id":staging_id,
         "voiceProfileId":PROFILE,"modelId":MODEL,"voiceSettingsProfile":MASTER_PROFILE,
         "reviewRequiredBeforePublicPlayback":True,
         "stagingOnly":True,"pilotFirstLesson":bool(args.pilot_first_lesson),
         "entries":valid_current
     }
-    STAGING.write_text(json.dumps(staged,ensure_ascii=False,indent=2)+"\n","utf-8")
-    print(f"Audio staging created {created} clips, {used_chars} chars. Nothing was published to /kids/data/academy-audio.json.",flush=True)
+    staging_path.write_text(json.dumps(staged,ensure_ascii=False,indent=2)+"\n","utf-8")
+    print(f"Audio staging {staging_path.name}: {created} clips, {used_chars} prepared chars. Public /kids/data/academy-audio.json unchanged.",flush=True)
 
 
 if __name__=="__main__":
