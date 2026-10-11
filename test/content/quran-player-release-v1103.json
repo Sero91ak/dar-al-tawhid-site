@@ -1,7 +1,7 @@
 {
-  "release": "dar-test-original-v108r-player-v1107",
+  "release": "dar-test-original-v108r-player-v1108",
   "branch": "test-quran-player-v108r-canonical",
-  "playerBuild": 1107,
+  "playerBuild": 1108,
   "scope": "test-only",
   "designSource": "DAR-AL-TAWHID-Erwachsenen-Player-V10.8-R.html",
   "features": [
@@ -21,11 +21,17 @@
     "per-reciter offline download cancellation and confirmed deletion",
     "opaque reciter panel in original independent day/night player palettes",
     "synchronous iOS user-gesture start for online qari playback",
-    "resume-position metadata rewind fix"
+    "resume-position metadata rewind fix",
+    "streaming with standard 24-hour HTTP cache, no automatic IndexedDB offline jobs",
+    "full 6,236-ayah downloads only on deliberate Offline laden click",
+    "previous partial packs are never auto-resumed at boot",
+    "iPhone system-volume instruction replaces unsupported fake in-web volume slider",
+    "working browser volume slider remains for Android/desktop"
   ],
   "sourceFiles": [
     "test/assets/dar-quran-player.js",
-    "test/assets/dar-quran-player.css"
+    "test/assets/dar-quran-player.css",
+    "test/assets/dar-quran-audio-pack.js"
   ],
-  "notes": "Only V1107 Dar Test canonical player JS/CSS source modified; in-browser iOS system-status area remains host-controlled outside Web content. No visitor or Kids Live modification."
+  "notes": "Isolated Dar Test deployment; canonical player JS/CSS and main test-only audio-pack source updated. HTTP cache duration is advisory and browser may evict. Public visitor and Kids live source unchanged."
 }
