@@ -111,6 +111,10 @@ function academySafeDestination(path) {
   let pathname = "";
   try { pathname = new URL(value, "https://dar-al-tawhid.de").pathname; } catch (_) {}
   if (!isAcademyOwnerRoute(pathname) || pathname.endsWith("/login")) return ACADEMY_NEW_ROOT + "/index.html";
+  // Migrate old /test/kids/ links away from cached 301 Kids-app redirects.
+  if (pathname === ACADEMY_OLD_ROOT || pathname.startsWith(ACADEMY_OLD_ROOT + "/")) {
+    return ACADEMY_NEW_ROOT + pathname.slice(ACADEMY_OLD_ROOT.length) + new URL(value, "https://dar-al-tawhid.de").search;
+  }
   return value;
 }
 function academyB64(bytes) {
