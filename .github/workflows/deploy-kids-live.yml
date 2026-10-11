@@ -53,6 +53,8 @@ jobs:
           const sahabaJs=fs.readFileSync("kids/mubashshirun-stories.js","utf8");
           const sahabiyyatJs=fs.readFileSync("kids/sahabiyyat-stories.js","utf8");
           const storyHubJs=fs.readFileSync("kids/story-hub.js","utf8");
+          const navigationJs=fs.readFileSync("kids/navigation-v1182.js","utf8");
+          const deenJs=fs.readFileSync("kids/deen-lessons.js","utf8");
           const storyHubCss=fs.readFileSync("kids/story-hub.css","utf8");
           const storyFollowReaderJs=fs.readFileSync("kids/story-follow-reader.js","utf8");
           const storyFollowReaderCss=fs.readFileSync("kids/story-follow-reader.css","utf8");
@@ -101,7 +103,10 @@ jobs:
           if(!storyFollowReaderCss.includes("max-height:92dvh")||!storyFollowReaderCss.includes("overflow:auto"))throw new Error("Popup reader internal scroll/readability missing");
           if(storyHubJs.includes("scrollPlayerElementIntoView")||storyHubJs.includes("gh-podcast-meta"))throw new Error("Later inline podcast/page-flow reader regression returned");
           if(storyHubCss.includes("position:sticky!important")||storyHubCss.includes(".gh-podcast-meta")||storyHubCss.includes(".gh-readonly"))throw new Error("Later sticky podcast StoryPlayer styling returned");
-          if(!storyHubJs.includes("playerAtTop"))throw new Error("Story swipe-down guard missing");
+          if(!navigationJs.includes('gestureVersion:"disabled-tap-only-v1325"'))throw new Error("Kids tap-only navigation missing");
+          if(['pointerdown','pointermove','pointerup','touchstart','touchmove','touchend'].some(evt=>navigationJs.includes('document.addEventListener("'+evt+'"')))throw new Error("Global Kids swipe handlers returned");
+          if([sahabaJs,sahabiyyatJs,deenJs].some(js=>js.includes("installSwipeBack(")))throw new Error("Story swipe-back returned");
+          if(storyHubJs.includes("installGestures("))throw new Error("Story hub swipe/drag-close returned");
           if(!sw.includes("dar-al-tawhid-kids-v"+swVersion)||!sw.includes("client.navigate"))throw new Error("Kids SW activation recovery missing");
           if(!index.includes('id="syEntry"'))throw new Error("Ṣaḥābiyyāt static hub card missing");
           if(index.includes('class="stories-area-jump"')||index.includes('data-story-area='))throw new Error("Redundant Geschichten capsule navigation returned");
