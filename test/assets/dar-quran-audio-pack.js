@@ -1,4 +1,4 @@
-/* Qurʾān recitation availability + opt-in offline pack. No audio downloads at app boot. */
+/* Qurʾān recitation availability + explicit opt-in offline pack. V1108: normal streaming only uses HTTP cache; no automatic offline requests. */
 (function () {
   if (window.__darQuranAudioPackBoot) return;
   window.__darQuranAudioPackBoot = true;
@@ -311,18 +311,16 @@
       });
     }
   }
-  function ensure(edition, surah, ayah) {
-    if (!edition) return;
-    if (isTvPlayback()) return;
-    var g = globalAyah(surah, ayah);
-    if (g < AYAH_TOTAL) enqueue(edition, g + 1, true);
-  }
-  function prefetchSurah() {}
+  // Streaming (<audio> requests) uses the standard HTTP/Cloudflare cache.
+  // This API must NOT enqueue persistent offline downloads as a side effect.
+  function ensure() { return Promise.resolve(false); }
+  function prefetchSurah() { return Promise.resolve(false); }
   function startSeed() {
-    if (seeded) return;
+    // Legacy callers may invoke this at boot; explicitly do nothing.
+    // Offline packs are started ONLY by downloadReciter from a real user click.
     seeded = true;
-    status.seed = true;
-    seedAyahs().forEach(function (n) { enqueue(DEFAULT_EDITION, n, true); });
+    status.seed = false;
+    return Promise.resolve(false);
   }
   function haveCount(edition) {
     var n = 0;
@@ -349,10 +347,12 @@
   }
   function downloadLabel(edition) {
     var p = reciterProgress(edition);
-    if (p.complete) return "Gespeichert";
-    if (p.downloading) return "Lädt " + p.have + "/" + p.total;
-    if (p.have > 0) return "Fortsetzen " + p.have + "/" + p.total;
-    return "Download";
+    if (p.complete) return "Offline gespeichert";
+    // Old opportunistic auto-cache samples are not an opt-in offline pack.
+    var optedIn = isWanted(edition);
+    if (optedIn && p.downloading) return "Offline lädt " + p.have + "/" + p.total;
+    if (optedIn && p.have > 0) return "Offline fortsetzen " + p.have + "/" + p.total;
+    return "Offline laden";
   }
   function downloadReciter(edition) {
     if (!edition) return;
@@ -471,14 +471,7 @@
   (async function boot() {
     try { await loadCatalog(); } catch (eCat) {}
     await hydrate();
-    var wanted = readWanted();
-    if (!wanted.length) return;
-    setTimeout(function () {
-      readWanted().forEach(function (ed) {
-        if (reciterProgress(ed).complete) return;
-        cancelled[ed] = false;
-        for (var n = 1; n <= AYAH_TOTAL; n++) enqueue(ed, n, false);
-      });
-    }, 20000);
+    // Never auto-resume old partial packs: the user must tap Offline fortsetzen.
+    // Existing downloaded blobs remain available until explicitly removed.
   })();
 })();
