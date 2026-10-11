@@ -1,6 +1,12 @@
 <!doctype html>
 <html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow,noarchive"><meta name="theme-color" content="#071b2b">
-<title>KIDS TEST · Ersteller-Prüfzentrale</title>
+<title>KIDS TEST · Ersteller-Web-App</title>
+<link rel="manifest" href="/kids/test-console/manifest.webmanifest">
+<link rel="stylesheet" href="/kids/test-console/studio-v1.css">
+<link rel="apple-touch-icon" href="/kids/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="KIDS TEST">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <style>
 :root{color-scheme:dark;--bg:#081b2a;--panel:#102e3e;--surface:#0b2736;--line:#496878;--gold:#e9d49d;--ink:#fbf3df;--muted:#c3d5d9;--teal:#a1dbca}*{box-sizing:border-box}
 body{margin:0;background:radial-gradient(ellipse at top,#185264,transparent 65%),var(--bg);color:var(--ink);font:15px/1.52 -apple-system,BlinkMacSystemFont,"Avenir Next",Arial,sans-serif}
@@ -20,8 +26,79 @@ button{cursor:pointer}button:hover,a:hover{filter:brightness(1.14)}button:focus-
 </style></head><body><main>
 <div class="kicker">DĀR AL TAWḤĪD KIDS · GETRENNTE ENTWICKLUNGSVERSION</div>
 <h1>KIDS TEST · Prüfzentrale</h1>
-<p class="intro">Hier überprüfst du die komplette vorhandene Kinderoberfläche und den Jahresunterrichtsplan auf dem <strong>separaten KIDS-Testserver</strong>. Die Besucher-App und ihre Lernstände werden nicht verändert.</p>
-<div class="notice"><b>Ersteller-Freigaben noch in Vorbereitung:</b> Diese Seite zeigt ausschließlich bestehende KIDS-Module und öffentliche Unterrichtsmetadaten. Sie ist keine private Admin-Anmeldung, schaltet keine verborgenen Inhalte frei und veröffentlicht nichts. Änderungen an der Besucher-App erfordern eine gesonderte, ausdrückliche Freigabe.</div>
+<p class="intro">Deine <strong>eigenständig installierbare KIDS-Test-Web-App</strong> für den Jahresunterricht, alle vorhandenen KIDS-Bereiche und deine privaten Bearbeitungsnotizen. Testprofile und Entwürfe bleiben vom Besucherstand getrennt.</p>
+<aside class="release-lock" role="note" aria-label="Verbindliche Veröffentlichungsregel"><span>🔒 <b id="releaseFlag">LIVE-PUSH GESPERRT · nur KIDS TEST</b></span><span class="lock-pill">Freigabe nur auf „Push-Thread global“</span></aside>
+<div class="notice"><b>Entwicklung nur im TEST:</b> Du kannst hier Unterrichtsentwürfe, geplante Termine, Quellen- und Audio-Checklisten und Prüfnotizen auf diesem Gerät bearbeiten. <strong>Nichts davon schreibt in GitHub, ändert echte Kinderprofile oder veröffentlicht Inhalte.</strong> Diese öffentliche Test-Web-App enthält keine privaten Erstellerdateien; die vollständige zentrale Redaktion mit Login folgt später.</div>
+<section id="studio" class="studio-shell" aria-label="KIDS TEST lokaler Arbeitsbereich">
+  <div class="studio-head"><div><div class="kicker">KIDS TEST · MEIN ARBEITSBEREICH</div><h2>Unterrichten, einstellen & prüfen</h2></div><a class="action" href="/kids/start.html">Kinder-Test-App öffnen ↗</a></div>
+  <p class="studio-note">Deine KIDS-Web-App hat <strong>eigene Testdaten</strong>. Änderungen hier sind lokale, unveröffentlichte Entwürfe. In der Kinder-Test-App können daneben eigene Test-Kinderprofile erstellt werden, ohne echte Besucher-Lernstände zu verwenden.</p>
+  <div class="studio-tiles">
+    <div class="studio-tile"><b id="studioDrafts">0</b><small>Lokale Unterrichtsentwürfe</small></div>
+    <div class="studio-tile"><b id="studioReady">0</b><small>Als testbereit notiert</small></div>
+    <div class="studio-tile"><b id="studioModules">0/6</b><small>Module lokal geprüft</small></div>
+  </div>
+  <div class="studio-setup" aria-label="Als eigenständige iPhone Web-App installieren">
+    <strong>📱 Als eigenständige KIDS TEST Web-App installieren</strong>
+    <p>Öffne diese Seite in <strong>Safari</strong> auf deinem iPhone. Tippe auf <strong>Teilen → Zum Home-Bildschirm → Hinzufügen</strong>. Es erscheint „KIDS TEST“ als eigene App. Auf Android: Browsermenü → App installieren beziehungsweise Zum Startbildschirm.</p>
+    <p>Die Web-App funktioniert nach dem ersten Aufruf für die Unterrichtsübersicht und lokal gespeicherte Notizen auch offline. Hörbücher und weitere KIDS-Bereiche können eine Internetverbindung benötigen.</p>
+  </div>
+  <div class="studio-panel" id="studioProfile">
+    <h3>Testprofil & Jahreszyklus einstellen</h3>
+    <div class="studio-row three">
+      <label>Test-Alter<select id="testAge"><option value="4-5">4–5 Jahre</option><option value="6-8">6–8 Jahre</option><option value="9-10">9–10 Jahre</option></select></label>
+      <label>Testdarstellung<select id="testProfile"><option value="maedchen">Mädchen</option><option value="junge">Junge</option></select></label>
+      <label>Zu prüfender Bereich<select id="testModule"><option value="home">Start & Profile</option><option value="quran">Qurʾān</option><option value="stories">Hörbücher</option><option value="dua">Duʿāʾ</option><option value="parents">Eltern</option><option value="academy">Akademie</option></select></label>
+    </div>
+    <div class="studio-row" style="margin-top:10px">
+      <label>Erster Montag des 52-Wochen-Zyklus<input id="cycleMonday" type="date"></label>
+      <div><small id="studioWeekDate">Kein Startdatum erfasst</small><p class="studio-hint">Wiederholung alle 364 Tage. Das ist ein Planungsdatum, keine Freigabe.</p></div>
+    </div>
+    <div class="studio-actions"><button id="studioProfileSave" type="button" class="primary">Testplanung lokal speichern</button><a class="action" href="/kids/start.html">Echte Kinderoberfläche im TEST prüfen ↗</a></div>
+    <p class="studio-hint">Die Auswahl simuliert deine Redaktionseinstellung. Die Kinder-Test-App übernimmt sie nicht automatisch; dort kannst du eigene Testprofile anlegen.</p>
+  </div>
+  <div class="studio-panel" id="studioEditor">
+    <h3>Unterricht bearbeiten · privater Testentwurf</h3>
+    <label>Unterricht aus 208 Plätzen auswählen<select id="studioSlot"><option value="">Unterricht wählen</option></select></label>
+    <p id="studioSlotInfo" aria-live="polite">Bitte einen Unterricht auswählen.</p>
+    <div class="studio-row">
+      <label>Eigener Entwurfstitel<input id="studioTitle" type="text" maxlength="180" placeholder="Optionales neues Thema oder Arbeitstitel"></label>
+      <label>Redaktionsstand<select id="studioStatus">
+        <option value="unbearbeitet">Noch unbearbeitet</option><option value="entwurf">Entwurf</option>
+        <option value="in-arbeit">In Arbeit</option><option value="quellenpruefung">Quellenprüfung</option>
+        <option value="audio-pruefung">Audio prüfen</option><option value="testbereit">Lokal als testbereit markiert</option>
+      </select></label>
+    </div>
+    <label style="margin-top:10px">Aufgaben, Verbesserungen, Unterrichtstext-Entwurf (nur auf diesem Gerät)
+    <textarea id="studioNotes" maxlength="3500" rows="5" placeholder="Was soll ergänzt, verbessert, geprüft oder neu entwickelt werden?"></textarea></label>
+    <div class="studio-row"><label>Geplantes Datum<input id="studioPlanDate" type="date"></label><div><p class="studio-hint">Datum ist nur deine interne Planung, nicht die Veröffentlichung der Lektion.</p></div></div>
+    <div class="studio-checks">
+      <label><input type="checkbox" id="check-quelle"> Quelle überprüft (lokaler Prüfvermerk)</label>
+      <label><input type="checkbox" id="check-alter"> Altersstufen überprüft</label>
+      <label><input type="checkbox" id="check-audio"> Master-Audio überprüft</label>
+      <label><input type="checkbox" id="check-ui"> iPhone & Layout getestet</label>
+    </div>
+    <div class="studio-actions"><button class="primary" type="button" id="studioSave">Unterricht lokal speichern</button><button class="warn" type="button" id="studioDiscard">Diesen lokalen Entwurf löschen</button></div>
+    <p class="studio-hint">Die Checkliste ist deine interne Dokumentation, kein unabhängiger Quellen- oder Audio-Freigabenachweis.</p>
+  </div>
+  <div class="studio-panel">
+    <h3>Modul-Tests protokollieren</h3>
+    <div class="studio-row three">
+      <label>Modul<select id="moduleChoose"><option value="home">Start & Profile</option><option value="quran">Qurʾān</option><option value="stories">Hörbücher</option><option value="dua">Duʿāʾ</option><option value="parents">Eltern</option><option value="academy">Akademie</option></select></label>
+      <label>Prüfstand<select id="moduleState"><option value="offen">Noch offen</option><option value="geprueft">Lokal geprüft</option><option value="fehler">Fehler gefunden</option></select></label>
+      <div style="align-self:end"><button type="button" id="moduleSave" class="primary">Prüfung speichern</button></div>
+    </div>
+    <label style="margin-top:10px">Testergebnis / Fehlerbeschreibung<textarea id="moduleNote" maxlength="1000" rows="3" placeholder="Beobachtung zur Tablet-Ansicht, Tab-Leiste, Hörbücher, Download usw."></textarea></label>
+    <p class="studio-hint">Noch offen: zentraler, serverseitiger Ersteller-Login mit revisionssicherer Freigabehistorie.</p>
+  </div>
+  <div class="studio-panel"><h3>Deinen Arbeitsstand sichern</h3>
+    <p class="studio-note">Deine Entwürfe liegen ausschließlich im Speicher dieser KIDS-TEST-Web-App auf diesem Gerät. Für ein zweites iPhone/iPad oder nach Browser-Löschung brauchst du eine Sicherung.</p>
+    <div class="studio-actions"><button id="studioExport" type="button" class="primary">Arbeitsstand als JSON exportieren</button>
+      <label for="studioImport">Arbeitsstand importieren<input id="studioImport" type="file" accept=".json,application/json"></label>
+      <button id="studioClear" type="button" class="warn">Lokale Daten löschen</button>
+    </div><p class="studio-hint">Zuletzt lokal gespeichert: <span id="studioSavedAt">nicht erfasst</span></p>
+  </div>
+  <p id="studioMessage" role="status" aria-live="polite"></p>
+</section>
 <div class="stats" aria-label="52-Wochen-Plan"><div class="stat"><b>52</b><small>Wochen pro Zyklus</small></div><div class="stat"><b>208</b><small>Unterrichtsplätze</small></div><div class="stat"><b id="built">–</b><small>Im Code vorhanden</small></div><div class="stat"><b id="missing">–</b><small>Weiter auszuarbeiten</small></div></div>
 <section id="bereiche"><div class="top"><h2>Alle KIDS-Bereiche</h2><span class="tag">Eigener Test-Server</span></div>
 <div class="modules">
@@ -47,7 +124,7 @@ button{cursor:pointer}button:hover,a:hover{filter:brightness(1.14)}button:focus-
 const element=(tag,value,cls)=>{const e=document.createElement(tag);if(value!==undefined&&value!==null)e.textContent=String(value);if(cls)e.className=cls;return e};
 const render=()=>{const term=$("search").value.trim().toLocaleLowerCase("de"),sub=$("subject").value,stage=$("stage").value,week=$("week").value;
 filtered=data.filter(x=>(!term||[x.title,x.id,x.slot,x.week].join(" ").toLocaleLowerCase("de").includes(term))&&(!sub||x.subject===sub)&&(!stage||(stage==="ready"?x.catalogued:!x.catalogued))&&(!week||x.week===Number(week)));
-$("cards").replaceChildren();for(const x of filtered.slice(0,visible)){const c=element("article",null,"card"),meta=element("div",null,"meta");meta.appendChild(element("span","Woche "+x.week+" · "+x.day+" · Platz "+x.slot,"tag"));meta.appendChild(element("span",x.catalogued?"Im Code":"Offen","tag"+(x.catalogued?"":" todo")));c.appendChild(meta);c.appendChild(element("h3",x.title||("Platz "+x.slot+" – Unterricht noch offen")));c.appendChild(element("p",x.catalogued?(subjectNames[x.subject]||"Ohne Fach"):"Noch kein Thema oder verifizierter Unterricht dokumentiert"));$("cards").appendChild(c)}
+$("cards").replaceChildren();for(const x of filtered.slice(0,visible)){const c=element("article",null,"card"),meta=element("div",null,"meta");meta.appendChild(element("span","Woche "+x.week+" · "+x.day+" · Platz "+x.slot,"tag"));meta.appendChild(element("span",x.catalogued?"Im Code":"Offen","tag"+(x.catalogued?"":" todo")));c.appendChild(meta);c.appendChild(element("h3",x.title||("Platz "+x.slot+" – Unterricht noch offen")));c.appendChild(element("p",x.catalogued?(subjectNames[x.subject]||"Ohne Fach"):"Noch kein Thema oder verifizierter Unterricht dokumentiert"));const edit=element("button","Lokal bearbeiten · Platz "+x.slot,"studio-edit");edit.type="button";edit.setAttribute("data-test-slot",x.slot);c.appendChild(edit);$("cards").appendChild(c)}
 $("more").hidden=visible>=filtered.length;$("message").textContent=filtered.length+" Plätze gefunden · "+Math.min(visible,filtered.length)+" sichtbar. Unterricht im Code ≠ für Kinder veröffentlicht.";
 };const reset=()=>{visible=20;render()};
 for(let i=1;i<=52;i++){const o=element("option","Woche "+i);o.value=String(i);$("week").appendChild(o)}
@@ -60,4 +137,5 @@ for(const key of ["akhlaq","adab","fiqh","aqidah"]){const c=element("div",null,"
 reset();
 }).catch(err=>{$("message").textContent="Der KIDS-Testkatalog ist noch nicht bereit: "+err.message;});
 })();
-</script></body></html>
+</script>
+<script defer src="/kids/test-console/studio-v1.js"></script></body></html>
