@@ -3,11 +3,8 @@
 # Externe Originalnachweise werden vom Leser bewusst über Buttons geöffnet.
 # Kurzlink-Assets /q/<nummer> werden mit dem Quellenlink-Deploy veröffentlicht.
 
-# Zentrale Quellenbibliothek
-/quellen /quellen/ 301
-/quellen/ /quellen/index.html 200
-/q /q/ 301
-/q/ /quellen/index.html 200
+# Quellenbibliothek und nummerierte Q-Links werden im Cloudflare Site Router kanonisch bedient.
+# Keine 200-Rewrites auf /index.html: Workers Static Assets normalisiert diese Pfade bereits.
 
 # DAR AL TAWḤĪD – offizielle Kanal-Kurzlinks
 /telegram https://t.me/dar_al_tauhid 302
