@@ -83,6 +83,8 @@ const extra={id:"sidq",subject:"akhlaq",topic:"Wahrhaftigkeit",title:"Ṣidq –
  "6-8":[{type:"choice",prompt:"Warum ist Wahrheit wichtig?",options:["Sie stärkt Vertrauen.","Sie ist unwichtig."],correct:0}],
  "9-10":[{type:"text",prompt:"Was bedeutet Ṣidq?",sample:"Wahrhaftigkeit beim Sprechen und Handeln."}]}};
 const ids=Object.keys(data);ids.unshift("sidq");const lesson=id=>id==="sidq"?extra:data[id];
+const draftIds=ids.filter(key=>lesson(key)?.editorialStatus==="SOURCE_CHECKED_DRAFT_NOT_APPROVED");
+const publishedCount=ids.length-draftIds.length;
 let subject="akhlaq",id="sidq",step=0,player=null;
 const clips=[
  {name:"Salām",text:"As-salāmu ʿalaykum, liebe Schwester.",src:"/kids/assets/kids-academy-audio/00ff589726b166dff6a9.m4a"},
@@ -110,7 +112,7 @@ function selected(){return lesson(id)}
 function renderTopics(){
  const s=$("#subjects"),t=$("#topics");s.replaceChildren();t.replaceChildren();
  Object.keys(cat).forEach(key=>{const b=add("button",cat[key],"",s);b.type="button";b.classList.toggle("active",subject===key);b.onclick=()=>{subject=key;id=ids.find(x=>lesson(x)?.subject===key)||"sidq";step=0;render()}});
- ids.filter(x=>lesson(x)?.subject===subject).forEach(x=>{const l=lesson(x),b=add("button",undefined,"",t);b.type="button";add("strong",l.title||l.topic||x,"",b);add("span","Alle Schritte für die Erstellerprüfung offen","small",b);b.classList.toggle("active",x===id);b.onclick=()=>{id=x;step=0;render()}});
+ ids.filter(x=>lesson(x)?.subject===subject).forEach(x=>{const l=lesson(x),b=add("button",undefined,"",t);b.type="button";add("strong",l.title||l.topic||x,"",b);add("span",l.editorialStatus==="SOURCE_CHECKED_DRAFT_NOT_APPROVED"?"Redaktioneller Entwurf · nur KIDS TEST":"Vorhandener Unterricht · Erstellerprüfung","small",b);b.classList.toggle("active",x===id);b.onclick=()=>{id=x;step=0;render()}});
 }
 function quranNumber(q){return String(q.surah).padStart(3,"0")+String(q.ayah).padStart(3,"0")}
 function quiz(l){
@@ -150,14 +152,14 @@ function renderStage(){
   }
   if(l.hadith){add("p",l.hadith.text||"","quoted");add("p",l.hadith.source||"","source")}
   if(l.quran?.excerpt)add("p","Arabischer Textauszug – die Rezitation gibt den vollständigen Qurʾān-Vers wieder.","hint");
-  if(/^https:\/\/dorar\.net\/hadith\/sharh\/[0-9]+$/.test(l.sourceAudit?.hadithUrl||"")){
+  if(/^https:\/\/dorar\.net\/(?:hadith\/sharh\/[0-9]+|hadith-category\/cat\/[a-f0-9]+|h\/[a-zA-Z0-9]+)$/.test(l.sourceAudit?.hadithUrl||"")){
    const sourceLink=add("a","Authentischen Ḥadīṯ im Original überprüfen ↗","source");
    sourceLink.href=l.sourceAudit.hadithUrl;sourceLink.target="_blank";sourceLink.rel="noopener noreferrer";
   }
   if(l.ageText?.[age.value]?.evidence)add("p",l.ageText[age.value].evidence,"quoted");
   missing("die deutschen Quellenerklärungen");
  }else if(step===3){add("h3","Fragen überprüfen");quiz(l)}
- else{add("h3","Das merke ich mir");add("p",l.goal||l.lead||"","quoted");if(l.sample)add("p",l.sample);if(l.ageText?.[age.value]?.lines)add("p",l.ageText[age.value].lines[3],"spoken");missing("die Zusammenfassung")}
+ else{add("h3","Das merke ich mir");add("p",l.goal||l.lead||"","quoted");if(l.sample)add("p",l.sample);if(l.ageText?.[age.value]?.lines)add("p",l.ageText[age.value].lines[3],"spoken");if(l.ageText?.[age.value]?.activity){add("h3","Meine praktische Übung");add("p",l.ageText[age.value].activity,"spoken")}missing("die Zusammenfassung")}
  $("#previous").disabled=step===0;$("#next").disabled=step===4;
  $("#voiceStatus").textContent=sd?"Vier unabhängige Originalclips stehen bei Hallo und Zuhören bereit. Der übrige Unterricht benötigt weitere Aufnahmen.":"Für diese Kombination sind noch keine originalgetreu zugeordneten V4-Klassenaufnahmen freigegeben.";
 }
@@ -165,8 +167,8 @@ function render(){
  renderTopics();const l=selected();
  $("#subjectTitle").textContent=(cat[l.subject]||"Unterricht").toUpperCase()+" · NUR ERSTELLER";
  $("#lessonTitle").textContent=l.title||l.topic||id;
- $("#lessonIntro").textContent="Alle fünf Schritte sind in dieser Prüfversion offen. Es werden keine Kinder-Lernstände geändert.";
- $("#total").textContent=ids.length+" vorhandene Lektionen · 4 Original-Masterclips · übrige Audiozuordnung offen";
+ $("#lessonIntro").textContent=l.editorialStatus==="SOURCE_CHECKED_DRAFT_NOT_APPROVED"?"Entwurf mit geprüften Quellenverweisen · Text, Quiz und Stimme noch nicht freigegeben. Keine Kinder-Lernstände werden geändert.":"Alle fünf Schritte sind in dieser Prüfversion offen. Es werden keine Kinder-Lernstände geändert.";
+ $("#total").textContent=publishedCount+" vorhandene Lektionen · "+draftIds.length+" redaktionelle Entwürfe · 4 Original-Masterclips · übrige Audiozuordnung offen";
  renderStage();
 }
 const params=new URLSearchParams(location.search);
