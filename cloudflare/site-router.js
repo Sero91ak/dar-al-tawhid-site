@@ -1284,6 +1284,8 @@ export default {
           // Ask Chrome to retain offline cache only after the PWA has loaded.
           // This is best-effort and never blocks the first screen.
           'try{window.addEventListener("load",function(){setTimeout(function(){try{var s=navigator.storage;if(s&&s.persist)s.persist().catch(function(){})}catch(e){}},3000)},{once:true})}catch(e){}' +
+          // Warm only small cached resources after the first paint, never while loading.
+          'try{window.addEventListener("load",function(){setTimeout(function(){try{var w=navigator.serviceWorker;if(w){w.ready.then(function(reg){var active=w.controller||reg.active;if(active)active.postMessage({type:"PWA_WARM_CORE"})}).catch(function(){})}}catch(e){}},9000)},{once:true})}catch(e){}' +
           'try{if("serviceWorker" in navigator){navigator.serviceWorker.register("/pwa/service-worker.js",{scope:"/pwa/"}).catch(function(){})}}catch(eSw){}' +
           'try{var r=document.documentElement;r.classList.add("dar-pwa-standalone-boot","dar-soft-booting","dar-dedicated-pwa-app","is-standalone-pwa","is-android");r.dataset.appPath="android-pwa"}catch(e){}' +
           '<\/script>';
