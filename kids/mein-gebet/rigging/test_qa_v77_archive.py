@@ -163,8 +163,11 @@ class ArchiveAnalysisSeparationTests(unittest.TestCase):
                 "three_quarter_90pct_release_gate_passed": False,
                 "boy_original_likeness_approved": False,
                 "production_approved": False,
+                "fixed_nominal_45_degree_result": {"angle_deg": 45,
+                                                   "whole_body_iou_worst": .83,
+                                                   "head_region_iou_worst": .79},
                 "sweep": [{"angle_deg": degree,
-                           "whole_body_iou_worst": .82,
+                           "whole_body_iou_worst": .83,
                            "head_region_iou_worst": .79}
                           for degree in range(5, 90, 5)],
             }},
@@ -212,6 +215,18 @@ class ArchiveAnalysisSeparationTests(unittest.TestCase):
                 elif edit == "nan": sweep[0]["whole_body_iou_worst"] = float("nan")
                 else: sweep[0]["head_region_iou_worst"] = 2.0
                 self.assertFalse(analysis_complete(x))
+
+    def test_nominal_45_must_match_independent_sweep(self):
+        x = self.synthetic_result()
+        x["angleDiagnostic"]["report"]["fixed_nominal_45_degree_result"]["whole_body_iou_worst"] = .82
+        self.assertFalse(analysis_complete(x))
+
+    def test_nominal_45_must_match_original_fiveview_measurement(self):
+        x = self.synthetic_result()
+        sweep = x["angleDiagnostic"]["report"]["sweep"]
+        sweep[8]["whole_body_iou_worst"] = .84
+        x["angleDiagnostic"]["report"]["fixed_nominal_45_degree_result"]["whole_body_iou_worst"] = .84
+        self.assertFalse(analysis_complete(x))
 
     def test_inaccurate_diagnostic_metadata_rejected(self):
         for key, value in (("method", "old-method"),
