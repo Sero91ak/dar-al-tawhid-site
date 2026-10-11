@@ -74,7 +74,7 @@ private struct KidsCreatorPanel: View {
                     button("Startseite & Testprofile", "house.fill", "home")
                     button("Qurʾān", "book.closed.fill", "quran")
                     button("Hörbücher & Prophetengeschichten", "headphones", "stories")
-                    button("Duʿāʾ", "hands.sparkles.fill", "dua")
+                    button("Duʿāʾ", "heart.text.square.fill", "dua")
                     button("Elternbereich", "person.2.fill", "parents")
                     button("Akademie · 38 vorhandene Lektionen", "graduationcap.fill", "academy")
 
