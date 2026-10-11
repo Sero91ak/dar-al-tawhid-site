@@ -157,3 +157,12 @@ html body .shell #view-dua.view.active #duaHubDetail.open > .kids-detail-appbar 
 @media(prefers-reduced-motion:reduce){
   html body nav.bottom-nav,html body nav.bottom-nav > .nav-btn{transition:none!important;animation:none!important}
 }
+
+/* KIDS_HOME_ANCHOR_GUARD_V1327: automatic scroll anchoring must not
+   pull the whole first screen behind the iOS status bar while Today
+   reactivates or prayer times update. Native vertical scrolling still works. */
+html[data-view="today"] body .app .shell,
+html body .app:has(#view-today.view.active) .shell{
+  overflow-anchor:none!important;
+  scroll-behavior:auto!important;
+}
