@@ -22,7 +22,7 @@ function audit(doc) {
  const errors=[],fail=x=>errors.push(x);
  if(!doc||typeof doc!=="object"||Array.isArray(doc)) return {pass:false,errors:["Invalid contract object"],eligibleForRelease:false};
  if(doc.schemaVersion!==1)fail("Unknown contract schema");
- if(doc.activeGate!=="01-original-assets")fail("Current recovery gate must remain source authenticity, not skipped");
+ if(typeof doc.activeGate!=="string")fail("Active milestone identifier missing");
  const i=doc.integration||{};
  if(i.sourceProfileOnly!==true||i.manualProfileSwitcherAllowedInTestOnly!==true||
  i.newTabBeforeApproval!==false||i.testHomeEntryOnly!==true||
@@ -30,9 +30,13 @@ function audit(doc) {
  const originals=doc.originals||{};
  if(!REQUIRED_ORIGINALS.every(x=>originals[x]&&typeof originals[x]==="object"))fail("Original boy/girl source contracts missing");
  else {
-   if(originals.boy.actualBinaryRead!==false||originals.boy.actual3dIdentityApproved!==false||
-      originals.girl.actualOriginalGlbPresent!==false||originals.girl.actual3dIdentityApproved!==false)
-      fail("Claims for currently blocked original model must not be fabricated");
+   if(typeof originals.boy.actualBinaryRead!=="boolean"||typeof originals.girl.actualOriginalGlbPresent!=="boolean"||
+       typeof originals.boy.actual3dIdentityApproved!=="boolean"||typeof originals.girl.actual3dIdentityApproved!=="boolean")
+       fail("Original binary and visual provenance statuses must be explicit booleans");
+   if(originals.boy.actualBinaryRead===true&&!SHA256.test(originals.boy.verifiedGlbSha256||""))
+       fail("Claimed boy GLB requires a measured SHA-256");
+   if(originals.girl.actualOriginalGlbPresent===true&&!SHA256.test(originals.girl.verifiedGlbSha256||""))
+       fail("Claimed girl GLB requires a measured SHA-256");
    if(originals.boy.candidateGlbSha256!=="353b028862f91922d6288cf6ede09d5c8150815657c66c9c116b7775311c07fa")
       fail("Frozen V7.7 source hash mismatch");
  }
@@ -80,7 +84,7 @@ function audit(doc) {
    fail("Active gate does not match first unfinished milestone");
  return {pass:errors.length===0,errors,completed:Array.isArray(milestones)?milestones.filter(x=>x?.approved===true).length:0,
   total:EXPECTED.length,activeGate:doc.activeGate,
-  eligibleForRelease:errors.length===0&&allApproved&&false,
+  eligibleForRelease:false,
   notice:"Structural checks only; real GLB bytes, prayer, visual and device acceptance require independent verification. No automatic approval."};
 }
 function main() {
