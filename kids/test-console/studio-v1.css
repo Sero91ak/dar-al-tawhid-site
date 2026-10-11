@@ -1,0 +1,41 @@
+/* Standalone KIDS TEST editor-only components, isolated to /kids/test-console */
+.release-lock{position:sticky;top:calc(0px + env(safe-area-inset-top));z-index:12;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:7px;border:1px solid #bf9d6d;border-radius:14px;background:#2d382f;color:#fff2cc;box-shadow:0 9px 35px #0006;padding:10px 14px;margin:12px 0 17px;font-size:12px;font-weight:820;letter-spacing:.01em}
+.release-lock b{color:#f5d393}
+.release-lock .lock-pill{border:1px solid #d5af7a;border-radius:30px;padding:4px 10px;background:#493a2a;white-space:normal}
+#studio{scroll-margin-top:100px}
+.studio-shell{border:1px solid #637985;border-radius:17px;background:#0d2b3b;padding:17px;box-shadow:0 13px 28px #0002}
+.studio-head{display:flex;align-items:start;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.studio-head h2{margin:0;color:#e9d49d}
+.studio-note{font-size:13px;line-height:1.55;color:#cbdbe1;max-width:800px;margin:10px 0 14px}
+.studio-note strong{color:#f8deb1}
+.studio-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:12px 0}
+.studio-tile{border:1px solid #506d79;background:#092334;border-radius:12px;padding:13px}
+.studio-tile b{display:block;color:#e9d49d;font-size:29px;line-height:1.12}
+.studio-tile small{display:block;color:#c5dadd}
+.studio-panel{margin:14px 0;border:1px solid #4a6775;border-radius:14px;background:#082233;padding:15px}
+.studio-panel h3{margin:0 0 11px;color:#f2d9a4}
+.studio-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.studio-row.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.studio-panel label{font-size:13px;font-weight:760;color:#d0e1e4;display:grid;gap:6px}
+.studio-panel input,.studio-panel select,.studio-panel textarea{font:inherit;color:#f9f4e7;background:#031a29;border:1px solid #7e98a5;width:100%;padding:10px;min-height:44px;border-radius:9px}
+.studio-panel textarea{resize:vertical;min-height:110px}
+.studio-panel input[type=checkbox]{min-height:20px;width:20px;accent-color:#e9d49d}
+.studio-checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}
+.studio-checks label{display:flex;align-items:center;gap:9px;padding:9px;border:1px solid #4b6372;border-radius:9px;font-size:12px}
+.studio-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:12px}
+.studio-actions button,.studio-actions label{display:inline-flex;align-items:center;justify-content:center;width:auto;min-width:145px;min-height:44px;border:1px solid #8c9ba3;border-radius:10px;padding:9px 12px;font:inherit;font-weight:800;background:#183f4f;color:#f9eacc;text-align:center;cursor:pointer}
+.studio-actions button.primary{background:#e9d49d;color:#102636;border-color:#e9d49d}
+.studio-actions button.warn{background:#382831;color:#ffe0cc}
+.studio-actions input[type=file]{display:none}
+#studioMessage{min-height:22px;color:#a8dbc7;font-size:13px;font-weight:780}
+#studioMessage.warning{color:#ffddae}
+#studioSlotInfo{color:#e9d49d;font-weight:750;margin:9px 0}
+#studioSavedAt,#studioWeekDate{color:#cedbdd;font-size:12px}
+#studioEditor{scroll-margin-top:100px}
+.studio-edit{margin-top:9px;width:auto;padding:9px 14px;min-height:42px;background:#e9d49d;color:#142838;border-color:#e9d49d;font-weight:820}
+.studio-hint{font-size:12px;color:#bbd2d5;margin:10px 0 0}
+.studio-setup{border:1px dashed #77919d;border-radius:12px;padding:12px;background:#0e3445;margin:12px 0}
+.studio-setup p{font-size:13px;color:#d4e0e3;margin:8px 0}
+.studio-setup ol{margin:8px 0 0;padding-left:20px;font-size:13px;color:#e2edef}
+@media(max-width:650px){.studio-tiles{grid-template-columns:repeat(3,minmax(0,1fr))}.studio-shell{padding:12px}.studio-panel{padding:12px}.studio-row.three{grid-template-columns:1fr 1fr}.studio-row.three label:first-child{grid-column:span 2}.studio-actions button,.studio-actions label{flex:1 1 100%}.release-lock{position:relative;top:auto}}
+@media(max-width:430px){.studio-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.studio-tile:last-child{grid-column:span 2}.studio-checks{grid-template-columns:1fr}.studio-row{grid-template-columns:1fr}.studio-row.three{grid-template-columns:1fr}.studio-row.three label:first-child{grid-column:auto}}
