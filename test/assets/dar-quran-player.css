@@ -2256,3 +2256,47 @@ html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-err butt
   min-height:40px!important;
   padding:7px 14px!important;
 }
+
+
+/* V1108 SYSTEM VOLUME: iOS browser may not set hardware output volume.
+   Never display a nonfunctional range control; native buttons remain the source.
+   The standard volume slider stays fully functional on supporting platforms. */
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"][data-dqp-volume-system="1"] .dqp-volume {
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:100%!important;
+  min-height:39px!important;
+  padding:2px 4px 7px!important;
+  background:transparent!important;
+}
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"][data-dqp-volume-system="1"] .dqp-volume > .dqp-track,
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"][data-dqp-volume-system="1"] .dqp-volume > svg,
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"][data-dqp-volume-system="1"] .dqp-volume > .dqp-range,
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"][data-dqp-volume-system="1"] [data-dqp="vol"] {
+  display:none!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"][data-dqp-volume-system="1"] .dqp-vol-note {
+  display:block!important;
+  width:100%!important;
+  max-width:550px!important;
+  margin:0 auto!important;
+  padding:8px 11px!important;
+  text-align:center!important;
+  font-size:clamp(11px,2.75vw,13px)!important;
+  font-weight:550!important;
+  line-height:1.45!important;
+  color:var(--v108-muted)!important;
+  -webkit-text-fill-color:var(--v108-muted)!important;
+  background:var(--v108-panel)!important;
+  border:1px solid var(--v108-stroke)!important;
+  border-radius:12px!important;
+}
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"][data-dqp-volume-system="1"] .dqp-vol-note[hidden] {
+  display:none!important;
+}
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"][data-dqp-volume-system="1"]:not([data-v108-audio-open="1"]) .dqp-volume {
+  display:none!important;
+}
