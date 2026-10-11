@@ -6,7 +6,7 @@ const fs=require("node:fs");
 const path=require("node:path");
 const vm=require("node:vm");
 const base=path.resolve(__dirname,"..");
-const pages=["vorschau.html","demo-junge.html","demo-maedchen.html","vorschau-v78-interaktiv.html","vorschau-v79-3d-labor.html"];
+const pages=["vorschau.html","demo-junge.html","demo-maedchen.html","vorschau-v78-interaktiv.html","vorschau-v79-3d-labor.html","vorschau-v80-salam-fix.html"];
 const read=n=>fs.readFileSync(path.join(base,n),"utf8");
 
 for(const file of pages){
@@ -120,4 +120,33 @@ test("V7.9 3D-lab is self-contained and never touches live Kids app",()=>{
  }
  assert.doesNotMatch(html, /<script[^>]+src|<iframe|<form|type="password"|rel="manifest"|serviceWorker|indexedDB|localStorage|sessionStorage|XMLHttpRequest|\bfetch\(|sendBeacon/i);
  assert.doesNotMatch(html, /https:\/\/dar-al-tawhid\.de\//);
+});
+
+test("V8.0 salam movement is two real head-only yaw phases, right then left",()=>{
+ const html=read("vorschau-v80-salam-fix.html");
+ assert.match(html,/function sampleTaslim\(seconds\)/);
+ assert.match(html,/function taslimPhase\(seconds\)/);
+ assert.match(html,/taslimActive&&!taslimPaused/);
+ assert.match(html,/torsoFixedDuringTaslim:selected===8/);
+ assert.match(html,/PROTOTYP · NICHT FREIGEGEBEN/);
+ assert.match(html,/modelType:'procedural-placeholder-3d'/);
+ assert.match(html,/productionApproved:false/);
+ assert.doesNotMatch(html, /<script[^>]+src|<iframe|serviceWorker|localStorage|sessionStorage|\bfetch\(|XMLHttpRequest|https:\/\/dar-al-tawhid\.de\//i);
+ const script=[...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)][0][1];
+ const start=script.indexOf("const TASLIM_END");
+ const end=script.indexOf("function renderPerson",start);
+ assert.ok(start>0&&end>start);
+ const excerpt=script.slice(start,end);
+ const values=vm.runInNewContext('const clamp=(v,a,b)=>Math.min(b,Math.max(a,v));'+
+  'const mix=(a,b,t)=>a+(b-a)*t;'+excerpt+
+  '[sampleTaslim(0),sampleTaslim(.8),sampleTaslim(1.63),sampleTaslim(2.45),sampleTaslim(3)];');
+ assert.equal(values[0],0);
+ assert.ok(values[1]>1&&values[1]<1.15,"first head turn MUST point to figurative right");
+ assert.ok(Math.abs(values[2])<1e-6,"passes through centered view");
+ assert.ok(values[3]<-1,"second head turn MUST point to figurative left");
+ assert.ok(values[4]<-1,"left head turn must remain visible on completion");
+ const poses=script.slice(script.indexOf("const frames=["),script.indexOf("const keys=",script.indexOf("const frames=[")));
+ const array=vm.runInNewContext('function frame(o={}){const d={pelvis:[0,1.43,0],chest:[0,2.26,0],head:[0,2.94,.015],shoulderY:2.4,shoulderZ:0,elbowY:2.03,elbowZ:.29,handY:2.16,handZ:.40,kneeY:.61,kneeZ:.10,ankleY:.16,ankleZ:0,headTurn:0,...o};const S=sgn=>sgn*.43,H=sgn=>sgn*.135;return{pelvis:d.pelvis,chest:d.chest,head:d.head,shoulderL:[S(-1),d.shoulderY,d.shoulderZ],shoulderR:[S(1),d.shoulderY,d.shoulderZ],elbowL:[S(-1)*1.15,d.elbowY,d.elbowZ],elbowR:[S(1)*1.15,d.elbowY,d.elbowZ],handL:[H(-1),d.handY,d.handZ],handR:[H(1),d.handY,d.handZ+.03],kneeL:[-.21,d.kneeY,d.kneeZ],kneeR:[.21,d.kneeY,d.kneeZ],ankleL:[-.22,d.ankleY,d.ankleZ],ankleR:[.22,d.ankleY,d.ankleZ],headTurn:d.headTurn}};'+poses+'frames');
+ assert.equal(array.length,9);
+ assert.deepEqual(JSON.parse(JSON.stringify(array[8])),JSON.parse(JSON.stringify(array[7])),"taslim torso must exactly equal Tashahhud torso");
 });
