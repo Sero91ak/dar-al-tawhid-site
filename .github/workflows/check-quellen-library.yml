@@ -27,6 +27,30 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Verify identical Q iOS header clearance on production
+        if: always()
+        shell: bash
+        run: |
+          set +e
+          for attempt in 1 2 3 4 5 6 7; do
+            css=$(mktemp); hdr=$(mktemp); body=$(mktemp)
+            code=$(curl -sS --max-time 18 -D "$hdr" -o "$css" -w '%{http_code}' "https://dar-al-tawhid.de/assets/q-royal-manuscript-v42.css?v=20261011&heightcheck=$attempt")
+            q1=$(curl -sS --max-time 18 -o "$body" -w '%{http_code}' "https://dar-al-tawhid.de/q/1/?heightcheck=$attempt")
+            q40=$(curl -sS --max-time 18 -o "$body" -w '%{http_code}' "https://dar-al-tawhid.de/q/40/?heightcheck=$attempt")
+            echo "Q_IOS_HEIGHT_CHECK attempt=$attempt css_http=$code q1_http=$q1 q40_http=$q40 bytes=$(wc -c < "$css")"
+            if [ "$code" = 200 ] && [ "$q1" = 200 ] && [ "$q40" = 200 ] && \
+               grep -q 'Q ROYAL iOS HEADER HEIGHT LOCK' "$css" && \
+               grep -q -- '--ql-safe-header-offset:max(58px,env(safe-area-inset-top,0px))' "$css" && \
+               grep -q 'position:sticky' "$css"; then
+              echo 'Q_IOS_HEIGHT_LIVE_OK'
+              rm -f "$css" "$hdr" "$body"
+              exit 0
+            fi
+            rm -f "$css" "$hdr" "$body"
+            sleep 8
+          done
+          echo 'Q_IOS_HEIGHT_LIVE_PENDING'
+          exit 1
       - name: Validate Q source-library synchronization and all source pages
         shell: bash
         run: |
