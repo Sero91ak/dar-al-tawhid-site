@@ -155,6 +155,19 @@
   ],
   "unlockedScopes": [
     {
+      "id": "kids-akademie-v25-seven-authentic-basic-lessons-20261011",
+      "at": "2026-10-11T22:45:00+02:00",
+      "approvedBy": "user-explicit-extensive-authentic-quran-sunnah-sahaba-salaf-kids-curriculum-20261011",
+      "reason": "Nur sieben geprüfte Kinderlektionen für Tawhid/Iman/Ikhlas/Akhlaq/Adab/Tarbiyah/Nafs inkl. streng geschuetzter 52-Wochen-Progression und Null-Credit-Masteraudio. Keine Erwachsen-App, keine Kinderprofile, keine kostenpflichtige Audioerzeugung.",
+      "paths": [
+        "scripts/test-kids-academy-v9.js",
+        "scripts/test-kids-academy-school-v11.js",
+        "scripts/test-kids-academy-audio-queue-v18.js",
+        ".github/workflows/check-kids-academy-v9.yml"
+      ],
+      "expiresAt": "2026-10-18T23:59:00.000Z"
+    },
+    {
       "id": "kids-test-v25-canonical-seven-course-transition-20261011",
       "at": "2026-10-11T22:55:00+02:00",
       "approvedBy": "user-explicit-continue-comprehensive-authentic-kids-lessons-20261011",
