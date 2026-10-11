@@ -155,6 +155,17 @@
   ],
   "unlockedScopes": [
     {
+      "id": "kids-academy-v20-all-lesson-voice-creator-audit-20261011",
+      "at": "2026-10-11T13:00:00+02:00",
+      "approvedBy": "user-explicit-continue-finish-all-established-kids-academy-lesson-series-20261011",
+      "reason": "Nur bestehende geschuetzte Erstellerseite, pruefbare read-only Stimmuebersicht und Akademie-CI; keine Freigabe fuer kostenpflichtige Erzeugung, keine Aenderung echter Kinderprofile, keine globale Entsperrung.",
+      "paths": [
+        "test/kids/akademie/",
+        ".github/workflows/check-kids-academy-v9.yml"
+      ],
+      "expiresAt": "2026-10-18T23:59:00.000Z"
+    },
+    {
       "id": "kids-academy-v19-voice-ios-and-live-qa-20261011",
       "at": "2026-10-11T12:30:00+02:00",
       "approvedBy": "user-explicit-continue-complete-all-existing-kids-academy-lesson-series-in-app-20261011",

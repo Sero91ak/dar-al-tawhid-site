@@ -56,6 +56,8 @@ jobs:
         run: |
           node scripts/test-kids-academy-audio-queue-v18.js
           node kids/tools/audit-academy-voice-coverage-v18.js
+      - name: Verify creator-only comprehensive voice audit (no credits)
+        run: node test/kids/akademie/test-voice-audit-v20.cjs
       - name: JavaScript syntax guard
         run: |
           node --check kids/akademie/curriculum-v1.js
