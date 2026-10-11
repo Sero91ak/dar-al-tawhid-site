@@ -11,6 +11,7 @@ const p=[
  "kids/akademie/curriculum-v22.js",
  "kids/creator-test/lessons-039-044.js",
  "kids/creator-test/lessons-045-052.js",
+ "kids/creator-test/lessons-053-056.js",
  "kids/creator-test/term-glossary-v1.js",
  "kids/creator-test/academy-narration-script-v1.js"
 ];
@@ -18,17 +19,17 @@ const rootWindow={},context=vm.createContext({window:rootWindow});
 for(const file of p)new vm.Script(read(file),{filename:file}).runInContext(context);
 const catalog=rootWindow.DARKidsAcademyCurriculum,gloss=rootWindow.DARKidsAcademyTermsV1,voice=rootWindow.DARKidsAcademyNarrationV1;
 assert.ok(catalog&&gloss&&voice);
-assert.equal(Object.keys(catalog).length,51,"51 curriculum files + separate ṣidq foundation = 52 editorial entries");
-const ids=[...rootWindow.DARKidsAcademyCreatorDraftsV23.ids,...rootWindow.DARKidsAcademyCreatorDraftsV24.ids];
-assert.equal(ids.length,14);
-assert.equal(new Set(ids).size,14);
+assert.equal(Object.keys(catalog).length,55,"55 curriculum files + separate ṣidq foundation = 56 editorial entries");
+const ids=[...rootWindow.DARKidsAcademyCreatorDraftsV23.ids,...rootWindow.DARKidsAcademyCreatorDraftsV24.ids,...rootWindow.DARKidsAcademyCreatorDraftsV25.ids];
+assert.equal(ids.length,18);
+assert.equal(new Set(ids).size,18);
 assert.equal(Object.keys(gloss.terms).length,36);
 const roadmap=JSON.parse(read("kids/creator-test/yearly-curriculum-roadmap-v1.json"));
 const year=JSON.parse(read("kids/data/academy-year-52weeks-v1.json"));
 assert.equal(year.weeks.length,52);assert.equal(roadmap.plannedSlots.length,170);
-assert.equal(year.goals.currentlyInCatalog,38);assert.equal(year.goals.testDraftsNotApproved,14);
+assert.equal(year.goals.currentlyInCatalog,38);assert.equal(year.goals.testDraftsNotApproved,18);
 let questionCount=0;
-for(let slot=39;slot<=52;slot++){
+for(let slot=39;slot<=56;slot++){
  const item=roadmap.plannedSlots.find(x=>x.slot===slot);
  assert.ok(item&&item.draftLessonId&&item.status==="SOURCE_CHECKED_DRAFT_NOT_APPROVED",String(slot));
  assert.equal(item.completedLesson,false);assert.equal(item.visitorReleased,false);
@@ -65,8 +66,8 @@ for(let slot=39;slot<=52;slot++){
   assert.ok(spoken.text.length>=100);
  }
 }
-assert.equal(questionCount,112);
-for(let slot=53;slot<=208;slot++){
+assert.equal(questionCount,144);
+for(let slot=57;slot<=208;slot++){
  const item=roadmap.plannedSlots.find(x=>x.slot===slot);
  assert.ok(item&&item.status==="THEMATIC_PLAN_ONLY");
  assert.equal(item.completedLesson,false);
@@ -79,4 +80,4 @@ const inline=html.split("<script>").at(-1).split("</script>")[0];
 new vm.Script(inline,{filename:"creator-test-html-inline"});
 const worker=read("kids/creator-test/worker.js");
 assert.ok(worker.includes('creator-test|tools'),"no direct public editorial asset access");
-console.log(JSON.stringify({passed:true,existingHistorical:38,newDrafts:14,ageVersions:42,quizQuestions:112,glossaryTerms:36,annualSlots:208,remainingUnwritten:156,masterAudioGenerated:0,visitorPublished:0,delivery:"git-staging-editorial-only; worker restricted"},null,2));
+console.log(JSON.stringify({passed:true,existingHistorical:38,newDrafts:18,ageVersions:54,quizQuestions:144,glossaryTerms:36,annualSlots:208,remainingUnwritten:152,masterAudioGenerated:0,visitorPublished:0,delivery:"git-staging-editorial-only; worker restricted"},null,2));
