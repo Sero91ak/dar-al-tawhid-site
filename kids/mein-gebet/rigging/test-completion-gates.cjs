@@ -71,3 +71,22 @@ test("Each step lists real review criteria and multiple evidence requirements",(
  const f=fixture();assert.deepEqual(f.milestones.map(m=>m.id),EXPECTED);
  for(const m of f.milestones){assert.ok(m.criteria.length>=2);assert.ok(m.evidenceTypes.length>=2);}
 });
+
+test("Independent girl V02 geometry does NOT grant original face or finished prayer model",()=>{
+ const f=fixture(),p=f.originals.girl.experimentalIndependent3DGeometricBlockout;
+ assert.equal(p.present,true);
+ assert.equal(p.isBoyMeshRecolor,false);
+ assert.equal(p.v02Sha256,"f14746ebcdd629b93ed8ec83dc7c752447de5d266f7fc93c10aa96b2d19e080d");
+ assert.equal(p.v02GeometryCount,147);
+ assert.equal(p.v02TriangleCount,63060);
+ assert.equal(p.googleDriveByteRoundTripSHA256Verified,true);
+ assert.equal(p.sourceIdentitySimilarityApproved,false);
+ assert.equal(p.skinnedRigPresent,false);
+ assert.equal(p.prayerAnimationsAvailable,false);
+ assert.equal(f.originals.girl.actualOriginalGlbPresent,false);
+ assert.equal(f.originals.girl.actual3dIdentityApproved,false);
+ assert.equal(f.originals.girl.original3DModelProduced,false);
+ assert.equal(f.milestones[2].approved,false);
+ assert.equal(f.release.productionReady,false);
+ assert.equal(audit(f).pass,true);
+});
