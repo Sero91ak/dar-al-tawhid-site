@@ -1,10 +1,10 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 1104;
+    var PLAYER_BUILD = 1105;
   if (!document.querySelector('link[data-dqp-v11-skin]')) {
     var v11Css = document.createElement('link');
     v11Css.rel = 'stylesheet';
-    v11Css.href = '/test/assets/dar-quran-player.css?v=1104';
+    v11Css.href = '/test/assets/dar-quran-player.css?v=1105';
     v11Css.setAttribute('data-dqp-v11-skin', '');
     document.head.appendChild(v11Css);
   }
@@ -2076,7 +2076,7 @@
   function paintChrome() {
     var root = playerRoot();
     if (root) {
-      try { root.setAttribute('data-v11-ambient', localStorage.getItem('darQuranV11Ambient') === 'day' ? 'day' : 'night'); } catch (eV11Theme) { root.setAttribute('data-v11-ambient','night'); }
+      try { root.setAttribute('data-v11-ambient', localStorage.getItem('darQuranV108OriginalTheme') === 'day' ? 'day' : 'night'); } catch (eV108Theme) { root.setAttribute('data-v11-ambient','night'); }
       var currentSurahMeta = meta || surahMeta(state.surah) || {};
       var currentName = String(currentSurahMeta.transliteration || currentSurahMeta.name || ('Sūrah ' + state.surah));
       var v11SurahName = root.querySelector('[data-v11-surah]');
@@ -2305,7 +2305,13 @@
     return bodyOne || visible || nodes[0];
   }
   function ensureFreshShell(root) {
-    if (root && root.querySelector && root.querySelector(".dqp-back") && root.querySelector(".dqp-foot") && root.querySelector("[data-dqp-sleep-live]") && root.querySelector(".dqp-v108r-brand") && root.querySelector(".dqp-v108r-tabs") && root.querySelector(".dqp-v108r-pills") && root.querySelector(".dqp-meta [data-dqp=pick-surah]")) { installV108RSkin(); return root; }
+    /* A complete V10.8-R root must not be rebuilt on every route/bind event.
+       Rebuilding it discarded event handlers and could interrupt playback. */
+    if (root && root.matches && root.matches('#darQuranPlayer[data-v108-original="1"]')
+        && root.querySelector(".dqp-back") && root.querySelector(".dqp-foot")
+        && root.querySelector("[data-dqp-sleep-live]")
+        && root.querySelector(".dqp-v108-nowbar [data-dqp=pick-ayah]")
+        && root.querySelector(".dqp-v108r-tabs")) return root;
     var wrap = document.createElement("div");
     wrap.innerHTML = renderShell();
     var neu = wrap.firstElementChild;
@@ -3472,8 +3478,8 @@
       return;
     }
     if (id === "m-ambient") {
-      try { localStorage.setItem("darQuranV11Ambient", localStorage.getItem("darQuranV11Ambient") === "day" ? "night" : "day"); } catch (eTheme) {}
-      paintChrome(); openMenu(); return;
+      try { localStorage.setItem("darQuranV108OriginalTheme", localStorage.getItem("darQuranV108OriginalTheme") === "day" ? "night" : "day"); } catch (eTheme) {}
+      paintChrome(); return;
     }
     if (id === "m-read") {
       closeSheet();
@@ -3573,7 +3579,7 @@
       if (act === "v108-repeat") {state.repeat=cycle(REPEAT,state.repeat);saveState();paintChrome();return;}
       if (act === "v108-theme") {
         var next = root.getAttribute("data-v11-ambient") === "day" ? "night" : "day";
-        try { localStorage.setItem("darQuranV11Ambient", next); } catch (_e) {}
+        try { localStorage.setItem("darQuranV108OriginalTheme", next); } catch (_e) {}
         paintChrome();
         return;
       }
