@@ -112,6 +112,17 @@ const academyHtml=read("kids/akademie/index.html");
 assert.ok(academyHtml.includes('pilot-audio-v13.js?v=20261010-voicefix-v16'));
 assert.ok(academyHtml.includes('data-academy-pilot="0"'));
 
+// The standalone academy header must not be part of the home/subject scrollport.
+const academyFixedShell='body:not([data-academy-view="lesson"]):not([data-embedded="true"])';
+assert.ok(academyHtml.includes('html:has('+academyFixedShell+')'));
+assert.ok(academyHtml.includes(academyFixedShell+' > main.wrap > .academy-header.kids-detail-appbar'));
+assert.ok(academyHtml.includes(academyFixedShell+' > main.wrap > #academyHome.academy-home:not([hidden])'));
+assert.ok(academyHtml.includes(academyFixedShell+' > main.wrap > #academySubject.subject-detail:not([hidden])'));
+assert.ok(academyHtml.includes('overscroll-behavior-y:contain!important;-webkit-overflow-scrolling:touch'));
+assert.ok(academyHtml.includes('function scrollAcademyViewTop(){'));
+assert.equal((academyHtml.match(/updateAcademyAppbar\\(\\);scrollAcademyViewTop\\(\\)/g)||[]).length,3);
+// Existing focus lesson keeps its own stageSurface-only scrolling.
+assert.ok(academyHtml.includes('body[data-academy-view="lesson"] #lessonMain #stageSurface'));
 assert.ok(academyHtml.includes("isAcademyStoryMaster"));
 assert.ok(academyHtml.includes('entry.modelId==="eleven_v4"'));
 assert.ok(academyHtml.includes('setTimeout(resolve,9000)'));
