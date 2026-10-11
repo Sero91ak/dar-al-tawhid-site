@@ -35,11 +35,14 @@ const get=(path,method="GET")=>handler.fetch(new Request("https://kids-preview.e
     "kids-academy-hero-v1.jpg","kids-academy-hero-boys-v1.jpg",
     "kids-academy-hero-girls-v1.jpg"];
   for(const asset of allowedArt){
+    assert.ok(fs.existsSync(path.join(root,"kids/assets/academy-stage",asset)),
+      "Original Academy image missing from isolated test asset bundle: "+asset);
     assert.ok(fs.existsSync(path.join(root,"desktop-preview/assets",asset)),
       "Missing deployed KIDS artwork source: "+asset);
-    const result=await get("/desktop-preview/assets/"+asset);
+    const result=await get("/kids/assets/academy-stage/"+asset);
     assert.equal(result.status,200,"Allowed KIDS artwork "+asset);
   }
+  assert.equal((await get("/desktop-preview/assets/kids-academy-hero-boys-v1.jpg")).status,404);
   assert.equal((await get("/desktop-preview/assets/secret.html")).status,404);
   assert.equal((await get("/desktop-preview/")).status,404);
   const before=calls;
