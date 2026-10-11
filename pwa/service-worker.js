@@ -37,10 +37,10 @@ function cacheable(url,request){
 self.addEventListener('fetch',event=>{
   const request=event.request;
   if(request.method!=='GET')return;
-  const url=new URL(request.url);
+  const u=new URL(request.url);
   if(request.mode==='navigate'){
-    if(url.pathname==='/pwa/install'||url.pathname.startsWith('/pwa/install/'))return;
-    if(!url.pathname.startsWith('/pwa'))return;
+    if(u.pathname==='/pwa/install'||u.pathname.startsWith('/pwa/install/'))return;
+    if(!u.pathname.startsWith('/pwa'))return;
     event.respondWith((async()=>{
       try {
         const response=await fetch(request,{cache:'no-store'});
@@ -57,11 +57,11 @@ self.addEventListener('fetch',event=>{
     })());
     return;
   }
-  if(url.pathname==='/manifest.json'||url.pathname==='/version.json'){
+  if(u.pathname==='/manifest.json'||u.pathname==='/version.json'){
     event.respondWith(fetch(request,{cache:'no-store'}));
     return;
   }
-  if(!cacheable(url,request))return;
+  if(!cacheable(u,request))return;
   event.respondWith(fetch(request,{cache:'no-store'}).then(async response=>{
     if(response&&response.ok){
       const cache=await caches.open(CACHE_VERSION);
