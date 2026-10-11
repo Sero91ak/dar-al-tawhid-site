@@ -1,0 +1,29 @@
+{
+  "name": "DĀR AL TAWḤĪD KIDS TEST – Ersteller-Web-App",
+  "short_name": "KIDS TEST",
+  "id": "/kids/test-console/",
+  "start_url": "/kids/test-console/",
+  "scope": "/kids/test-console/",
+  "description": "Isolierte KIDS-Ersteller-Web-App: 52-Wochen-Unterrichtsplan, redaktionelle Testnotizen und Prüfung. Kein Live-Push.",
+  "display": "standalone",
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
+  "background_color": "#081b2a",
+  "theme_color": "#071b2b",
+  "icons": [
+    {
+      "src": "/kids/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/kids/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
