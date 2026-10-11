@@ -43,7 +43,7 @@ for(let i=0;i<plan.plannedUnits.length;i++){
  if(unit.pillar==="fiqh")assert.equal(g.fiqhSchoolReviewRequired,true);
  for(const age of ages){
   const a=unit.ageOutcomes[age];assert.ok(a?.goal?.length>38&&a.method?.length>45&&a.targetMinutes);
-  assert.ok(a.goal.includes(unit.classroomScenario.slice(0,8).toLowerCase())||a.goal.includes(unit.classroomScenario.slice(0,8)),
+  assert.ok(a.goal.toLocaleLowerCase("de").includes(unit.classroomScenario.slice(0,12).toLocaleLowerCase("de")),
    "Each age goal must reference that lesson's unique classroom example");
  }
  assert.notEqual(unit.ageOutcomes["4-5"].method,unit.ageOutcomes["6-8"].method);
