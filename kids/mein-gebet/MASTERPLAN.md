@@ -4,6 +4,7 @@
 **Gültigkeit:** nur Kids-App (Web, iOS-Kids-WebView und kompatible Kids-Ansichten). Keine Änderung der Erwachsenen-App.  
 **Freigabe:** Nur Staging/Entwurfs-PR. Nicht auf `main` oder live ausrollen, bis ausdrücklich genehmigt.  
 **Grundsatz:** „Mein Gebet zurückstellen“ muss ausschließlich dieses Feature aus der App entfernen. Kein globaler App-Rollback.
+**Verbindliche Abschlussreihenfolge (11.10.2026):** [ORIGINAL-TO-APP-ABNAHME.md](ORIGINAL-TO-APP-ABNAHME.md) und die zwölf einzeln nachweispflichtigen Meilensteine in `rigging/COMPLETION-GATES-V1.json`. Keine spätere Modell-, Fiqh-, Inhalts-, Design- oder Live-Abnahme darf als abgeschlossen gelten, solange vorherige Gate-Nachweise fehlen. Original-Junge und Original-Mädchen müssen beide ihre eigene visuelle Identität behalten; die getrennten HTML-Labore sind keine Abnahme einer Originalfigur.
 **Nutzerkorrektur vom 08.10.2026:** Kein permanenter Tab und keine neue Hörwelten-Kapsel in der Erprobungsphase. Nur ein kleiner Home-Testzugang innerhalb des bestehenden Home-Tabs. Profilfigur ist immer automatisch und ausschließlich von der aktiven Kinderprofil-Einstellung abhängig; keine zweite Gender-Auswahl im Gebetsbereich.
 
 ---
