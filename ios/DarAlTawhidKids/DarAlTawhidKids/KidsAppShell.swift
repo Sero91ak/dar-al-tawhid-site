@@ -1,12 +1,20 @@
 import Foundation
 
+/// Independent native development flavor, never shipped in the App Store build.
+/// Separate bundle ID + workers.dev origin keep cookies, child profiles and
+/// local lesson progress separate from the visitor app.
 enum KidsAppShell {
-    static let hosts: Set<String> = [
-        "dar-al-tawhid.de",
-        "www.dar-al-tawhid.de"
-    ]
-
+#if KIDS_CREATOR_TEST
+    static let isCreatorTest = true
+    private static let canonicalHost = "dar-al-tawhid-test.sero91ak.workers.dev"
+    static let launchURL = URL(string: "https://dar-al-tawhid-test.sero91ak.workers.dev/kids/start.html")!
+    static let hosts: Set<String> = [canonicalHost]
+#else
+    static let isCreatorTest = false
+    private static let canonicalHost = "dar-al-tawhid.de"
     static let launchURL = URL(string: "https://dar-al-tawhid.de/kids/start")!
+    static let hosts: Set<String> = ["dar-al-tawhid.de", "www.dar-al-tawhid.de"]
+#endif
 
     static func isOwnHost(_ url: URL) -> Bool {
         guard let host = url.host?.lowercased() else { return false }
@@ -15,20 +23,26 @@ enum KidsAppShell {
 
     static func isKidsURL(_ url: URL) -> Bool {
         let scheme = url.scheme?.lowercased() ?? ""
+#if KIDS_CREATOR_TEST
+        if scheme == "daraltawhidkidstest" { return true }
+#else
         if scheme == "daraltawhidkids" { return true }
+#endif
         guard isOwnHost(url) else { return false }
         let path = url.path.lowercased()
-        return path == "/kids" || path.hasPrefix("/kids/") || path == "/test/kids" || path.hasPrefix("/test/kids/")
+        return path == "/kids" || path.hasPrefix("/kids/")
+            || path == "/test/kids" || path.hasPrefix("/test/kids/")
     }
 
     static func inAppURL(from incoming: URL) -> URL {
-        if incoming.scheme?.lowercased() == "daraltawhidkids" {
+        let scheme = incoming.scheme?.lowercased() ?? ""
+        if scheme == "daraltawhidkids" || scheme == "daraltawhidkidstest" {
             return launchURL
         }
         if isKidsURL(incoming) {
             var components = URLComponents(url: incoming, resolvingAgainstBaseURL: false) ?? URLComponents()
             components.scheme = "https"
-            components.host = "dar-al-tawhid.de"
+            components.host = canonicalHost
             let path = components.path
             if path.hasPrefix("/test/kids") {
                 components.path = "/kids" + String(path.dropFirst("/test/kids".count))
