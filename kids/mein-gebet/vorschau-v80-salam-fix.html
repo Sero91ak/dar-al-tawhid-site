@@ -122,10 +122,10 @@ const frames=[
 ];
 const keys=Object.keys(frames[0]);function blendPose(a,b,t){let p={};for(let k of keys)p[k]=Array.isArray(a[k])?lerp(a[k],b[k],t):mix(a[k],b[k],t);return p}
 // Independent Taslīm rehearsal: head yaw only. Torso, shoulders and legs remain in Tashahhud.
-// +yaw points to the FIGURE'S right (local +X); -yaw points to its left.
+// -yaw points to the FIGURE'S anatomically RIGHT shoulder (world -X); +yaw to its LEFT (world +X), while facing +Z.
 // The keyframes are software exercises, not certified physiological/fiqh animation.
 const TASLIM_END=2.85;
-const taslimKeys=[[0,0],[.62,1.07],[1.14,1.07],[1.63,0],[2.24,-1.07],[2.85,-1.07]];
+const taslimKeys=[[0,0],[.62,-1.07],[1.14,-1.07],[1.63,0],[2.24,1.07],[2.85,1.07]];
 function sampleTaslim(seconds){
  const t=clamp(Number.isFinite(seconds)?seconds:0,0,TASLIM_END);
  for(let j=1;j<taslimKeys.length;j++){
@@ -134,7 +134,7 @@ function sampleTaslim(seconds){
    const smooth=f*f*(3-2*f);return mix(prev[1],next[1],smooth);
   }
  }
- return -1.07;
+ return 1.07;
 }
 function taslimPhase(seconds){
  if(seconds<.25)return 'Start: Blick nach vorn';
