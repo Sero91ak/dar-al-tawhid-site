@@ -12,7 +12,7 @@
       "candidateGlbSha256": "353b028862f91922d6288cf6ede09d5c8150815657c66c9c116b7775311c07fa",
       "candidateArchive": "/Kinder App/Mein_Gebet_V77_STRICT_NICHT_FREIGEGEBEN.zip",
       "archiveMetadataLocated": true,
-      "actualBinaryRead": false,
+      "actualBinaryRead": true,
       "actual3dIdentityApproved": false,
       "gitSourceInventory": {
         "path": "kids/mein-gebet/assets/figur-junge-original.png",
@@ -23,7 +23,7 @@
       },
       "sourceImageDecodedInConnectedRepository": true,
       "sourceImageVisualTraitsInspected": true,
-      "glbAppearanceComparedToSource": false,
+      "glbAppearanceComparedToSource": true,
       "earlierV4Recovery": {
         "source": "Google Drive / DAR AL TAWḤĪD Kids – 3D-Test V4 / Mein_Gebet_Junge_V4_iPad_3D.usdz",
         "sourceSha256": "b4729a1a7c4e58806a968bcb257a91a971bbe3d5580df1d00d2d601bcc3df60a",
@@ -46,10 +46,20 @@
         "manifest": "/Kinder App/Mein_Gebet_Originale_20261011/original-reference-manifest.json",
         "verifiedFiles": 5,
         "sha256Verified": true,
-        "modelComparedToRender": false,
+        "modelComparedToRender": true,
         "rigApproved": false
       },
-      "referencesPersistentLibraryCopy": true
+      "referencesPersistentLibraryCopy": true,
+      "verifiedGlbSha256": "353b028862f91922d6288cf6ede09d5c8150815657c66c9c116b7775311c07fa",
+      "verifiedGlbBytes": 4382224,
+      "v77RecoveryDriveFolderId": "1EYqdSQ4e0ueoKhIQyY0ZxeAG6MYUQ4AM",
+      "v77RecoveryEvidenceFile": "V77_WIEDERHERSTELLUNG_BYTE_AUDIT_20261012.json",
+      "glbOriginalIdentityGapConfirmed": true,
+      "leftSideRealCameraRenderAvailable": true,
+      "leftSideApproved2DReferenceAvailable": false,
+      "salamHeadDraftGlbSha256": "b703087b31b2feffc25732594bf9af621af0dacade3e6b374ca0904fae97530f",
+      "salamHeadDraftApproved": false,
+      "latestReal3DQAReport": "V77_REAL_3D_LEFTVIEW_AND_SALAM_AUDIT_20261012.json"
     },
     "girl": {
       "source": "kids/mein-gebet/assets/figur-maedchen-original.png",
@@ -77,7 +87,9 @@
         "modelComparedToRender": false,
         "rigApproved": false
       },
-      "referencesPersistentLibraryCopy": true
+      "referencesPersistentLibraryCopy": true,
+      "leftSideApproved2DReferenceAvailable": false,
+      "original3DModelProduced": false
     }
   },
   "previewIsNotReleaseEvidence": true,
@@ -137,6 +149,22 @@
           "verified": true,
           "humanApproved": false,
           "source": "Five original 2D boy views uploaded to persistent Library, individual SHA-256 checks measured; visual 3D identity unapproved."
+        },
+        {
+          "type": "boy_v77_binary_sha",
+          "ref": "drive://1UxSpsnrNwcdp7h3GXOAJermApS0pKD3K",
+          "sha256": "353b028862f91922d6288cf6ede09d5c8150815657c66c9c116b7775311c07fa",
+          "verified": true,
+          "humanApproved": false,
+          "source": "Physically read V7.7 source archive restored from Google Drive; individual GLB SHA-256 and 19 joints verified; NOT identity approved."
+        },
+        {
+          "type": "boy_turnaround_sha",
+          "ref": "drive://11DxfS33vHyZoxNPV4EzcIICFpcz7P3q_",
+          "sha256": "062b8555e861c680b1049ab6a3bee0212caa51cda5168a6b33a76be01aa987b9",
+          "verified": true,
+          "humanApproved": false,
+          "source": "1448x1086 pixel original 5-view boy turnaround restored and SHA-256 verified; real GLB six-camera visual comparison remains rejected for likeness."
         }
       ]
     },
