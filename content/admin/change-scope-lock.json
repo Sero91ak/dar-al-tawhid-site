@@ -155,6 +155,19 @@
   ],
   "unlockedScopes": [
     {
+      "id": "quellen-royal-manuskript-v42-only-20261011",
+      "at": "2026-10-11T19:15:00+02:00",
+      "approvedBy": "user-explicit-quellen-seite-komplett-umbauen-live-push-20261011",
+      "reason": "Nur Quellenbibliothek und bestehende Q-Detailseiten zentral auf die freigegebene Royal-Manuskript-V4.2-Darstellung (nahezu weiss, Original-Logo, Signatur) umbauen und automatischen Stil fuer neue Q-Links sicherstellen. Keine Veraenderung an Quelleninhalten, Kids, Apps, Push, Admin, Domain-Secrets oder Zahlungsfunktionen.",
+      "paths": [
+        "assets/quellen-library.css",
+        "assets/q-royal-manuscript-v42.css",
+        "assets/q-royal-manuscript-v42.js",
+        ".github/workflows/check-quellen-library.yml"
+      ],
+      "expiresAt": "2026-11-11T23:59:00.000Z"
+    },
+    {
       "id": "kids-test-v23-editorial-roadmap-viewer-20261011",
       "at": "2026-10-11T19:28:00+02:00",
       "approvedBy": "user-expand-kids-lessons-tawhid-iman-ikhlas-adab-akhlaq-tarbiyah-nafs-all-ages-20261011",
