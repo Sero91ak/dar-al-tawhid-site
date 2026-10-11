@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "project": "DAR AL TAWḤĪD KIDS · Mein Gebet · Blickrichtungen",
+  "asOf": "2026-10-12",
+  "scope": "KIDS draft PR #825 only; neither app live nor original model approved",
+  "requiredDistinctDirections": [
+    "front",
+    "threeQuarterFaceRight",
+    "profileFaceRight",
+    "back",
+    "profileFaceLeft"
+  ],
+  "profiles": {
+    "boy": {
+      "front": "junge/01_vorne.jpeg",
+      "threeQuarterFaceRight": "junge/02_dreiviertel_rechts.png",
+      "profileFaceRight": "junge/03_seite.png",
+      "back": "junge/04_hinten.png",
+      "profileFaceLeft": null,
+      "extraDuplicateDirection": "junge/05_dreiviertel.png",
+      "mirrorTest": {
+        "source": "junge/03_seite.png",
+        "method": "horizontal flip, equivalent view only if bilateral symmetry",
+        "actualLeftSideCaptured": false,
+        "approvedAsOriginal": false
+      }
+    },
+    "girl": {
+      "front": "maedchen/01_vorne.jpeg",
+      "threeQuarterFaceRight": "maedchen/02_dreiviertel.jpeg",
+      "profileFaceRight": "maedchen/03_seite.png",
+      "back": "maedchen/04_hinten.jpeg",
+      "profileFaceLeft": null,
+      "extraDuplicateDirection": "maedchen/05_dreiviertel_zweite_ansicht.jpeg",
+      "mirrorTest": {
+        "source": "maedchen/03_seite.png",
+        "method": "horizontal flip, equivalent view only if bilateral symmetry",
+        "actualLeftSideCaptured": false,
+        "approvedAsOriginal": false
+      }
+    }
+  },
+  "checks": {
+    "original2DReferencesUnchanged": true,
+    "realOppositeSideImagesProvided": false,
+    "mirrorIsNotIndependentView": true,
+    "no3DRigLeftSideVerified": true,
+    "viewCompletenessApproved": false,
+    "characterIdentityApproved": false,
+    "animatedPrayerApproved": false,
+    "productionReady": false
+  },
+  "nextRequirements": [
+    "Secure independent physical image from left or genuine left camera render from the exact original GLB for boy and girl",
+    "Compare facial/hair/kufi and pink hijab/clothing asymmetries with original photos",
+    "Reject mirrored preview as independent camera evidence and prohibit any 3D/teaching/release approval"
+  ]
+}
