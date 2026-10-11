@@ -77,6 +77,9 @@ struct KidsWebAppView: UIViewRepresentable {
         private var hasKidsNowPlaying = false
         private var currentDeepLink = ""
         private var readingKeepsScreenAwake = false
+#if KIDS_CREATOR_TEST
+        private var pendingCreatorTab: String?
+#endif
 
         func attach(_ webView: WKWebView) {
             self.webView = webView
@@ -92,6 +95,14 @@ struct KidsWebAppView: UIViewRepresentable {
                 name: UIApplication.didEnterBackgroundNotification,
                 object: nil
             )
+#if KIDS_CREATOR_TEST
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(creatorNavigate(_:)),
+                name: Notification.Name("DarKidsCreatorNavigate"),
+                object: nil
+            )
+#endif
         }
 
         deinit {
@@ -114,6 +125,42 @@ struct KidsWebAppView: UIViewRepresentable {
                 )
             )
         }
+
+#if KIDS_CREATOR_TEST
+        // The native menu never grants creator permissions. Only navigation
+        // to existing KIDS modules on the separate test Worker is permitted.
+        @objc private func creatorNavigate(_ notice: Notification) {
+            guard let key = notice.object as? String,
+                  ["home", "quran", "stories", "dua", "parents", "academy"].contains(key),
+                  let page = webView else { return }
+            if key == "academy" {
+                guard let url = URL(string: "https://dar-al-tawhid-test.sero91ak.workers.dev/kids/akademie/index.html") else { return }
+                pendingCreatorTab = nil
+                page.load(URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 30))
+                return
+            }
+            let target = key == "home" ? "today" : key
+            let onHome = page.url?.host?.lowercased() == "dar-al-tawhid-test.sero91ak.workers.dev"
+                && ["/kids/start", "/kids/start.html", "/kids/", "/kids"].contains(page.url?.path ?? "")
+            if onHome {
+                activateCreatorTab(target, in: page)
+            } else {
+                pendingCreatorTab = target
+                loadKidsHome(in: page)
+            }
+        }
+
+        private func activateCreatorTab(_ key: String, in page: WKWebView) {
+            // Values come from the hardcoded whitelist, not from a web parameter.
+            let query: String
+            if key == "dua" {
+                query = "document.getElementById('openDuaButton')?.click()"
+            } else {
+                query = "document.querySelector('.bottom-nav .nav-btn[data-target=\\\"\\(key)\\\"]')?.click()"
+            }
+            page.evaluateJavaScript("try{\\(query)}catch(e){}", completionHandler: nil)
+        }
+#endif
 
         @objc private func appDidBecomeActive() {
             UIApplication.shared.isIdleTimerDisabled = readingKeepsScreenAwake
@@ -270,6 +317,12 @@ struct KidsWebAppView: UIViewRepresentable {
         }
 
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+#if KIDS_CREATOR_TEST
+            if let tab = pendingCreatorTab {
+                pendingCreatorTab = nil
+                activateCreatorTab(tab, in: webView)
+            }
+#endif
             guard !hasPresentedInitialPage else { return }
             hasPresentedInitialPage = true
             UIView.animate(
@@ -316,7 +369,7 @@ struct KidsWebAppView: UIViewRepresentable {
                 return
             }
 
-            if scheme == "daraltawhidkids" {
+            if scheme == "daraltawhidkids" || scheme == "daraltawhidkidstest" {
                 decisionHandler(.cancel)
                 webView.load(
                     URLRequest(
@@ -329,6 +382,19 @@ struct KidsWebAppView: UIViewRepresentable {
             }
 
             if KidsAppShell.isKidsURL(url) {
+#if KIDS_CREATOR_TEST
+                // CRITICAL: never enter the public visitor host even if an
+                // absolute /kids/ deep link is embedded in the test document.
+                if !KidsAppShell.isOwnHost(url) {
+                    decisionHandler(.cancel)
+                    webView.load(URLRequest(
+                        url: KidsAppShell.inAppURL(from: url),
+                        cachePolicy: .reloadIgnoringLocalCacheData,
+                        timeoutInterval: 30
+                    ))
+                    return
+                }
+#endif
                 decisionHandler(.allow)
                 return
             }
