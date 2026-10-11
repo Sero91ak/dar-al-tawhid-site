@@ -13,13 +13,27 @@
       "candidateArchive": "/Kinder App/Mein_Gebet_V77_STRICT_NICHT_FREIGEGEBEN.zip",
       "archiveMetadataLocated": true,
       "actualBinaryRead": false,
-      "actual3dIdentityApproved": false
+      "actual3dIdentityApproved": false,
+      "gitSourceInventory": {
+        "path": "kids/mein-gebet/assets/figur-junge-original.png",
+        "blobSha": "8cd94ec07210985aeb2e5d7fe6d2c8219e407369",
+        "bytes": 704320,
+        "existsInDraftGitTree": true,
+        "originalVisualCompared": false
+      }
     },
     "girl": {
       "source": "kids/mein-gebet/assets/figur-maedchen-original.png",
       "required": "identical girl face, complete vivid-pink hijab with covered hair and neck, matching pink dress and shoes",
       "actualOriginalGlbPresent": false,
-      "actual3dIdentityApproved": false
+      "actual3dIdentityApproved": false,
+      "gitSourceInventory": {
+        "path": "kids/mein-gebet/assets/figur-maedchen-original.png",
+        "blobSha": "9a9dcdb0499894b95a36c82d42e89d3483aad313",
+        "bytes": 785802,
+        "existsInDraftGitTree": true,
+        "originalVisualCompared": false
+      }
     }
   },
   "previewIsNotReleaseEvidence": true,
