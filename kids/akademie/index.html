@@ -3743,6 +3743,10 @@ body .academy-header.kids-detail-appbar > .hero-profile-chip .hero-profile-copy 
 (()=>{
 "use strict";
 const $=s=>document.querySelector(s),all=s=>[...document.querySelectorAll(s)];
+// Preview all 38 already bundled lessons on the isolated staging host only.
+// This is NOT privileged authentication or permission to publish.
+const KIDS_CREATOR_PREVIEW=location.hostname==="dar-al-tawhid-kids-creator.sero91ak.workers.dev";
+if(KIDS_CREATOR_PREVIEW)document.documentElement.dataset.creatorPreview="true";
 if(new URLSearchParams(location.search).get("embedded")==="1")document.body.dataset.embedded="true";
 const VERSION="academy-v4"; /* Bestehende Lernstände bleiben erhalten */
 const INTERVALS_BY_AGE={"4-5":[1,3,7,14,30],"6-8":[1,3,7,14,30,60],"9-10":[1,3,7,14,30,60,90]};
@@ -3867,7 +3871,16 @@ function getProfile(){
  // identity. Saved child profiles are READ ONLY and remain selected normally.
  const creatorVoiceSandbox=params.get("creatorSandbox")==="1"&&params.get("voicePilot")==="1"&&
    demoGender==="girl"&&previewAge==="4-5";
- if(creatorVoiceSandbox)child=null;
+ if(KIDS_CREATOR_PREVIEW){
+    let testAge="4-5",testGender="girl";
+    try{
+      testAge=ageKey(localStorage.getItem("kids.creator.previewAge"))||"4-5";
+      testGender=localStorage.getItem("kids.creator.previewGender")==="boy"?"boy":"girl";
+    }catch(_){}
+    return {child:null,g:testGender,age:testAge,id:"creator-staging-preview-v1",
+      demo:true,creatorVoiceSandbox:false,ageMissing:false};
+  }
+  if(creatorVoiceSandbox)child=null;
  const profileAge=child?ageKey(child.age):null;
  // Real accounts ignore ordinary preview params. QA uses a separate id.
  const selectedAge=child?profileAge:(previewAge||ageKey(storedAge)||"6-8");
@@ -4072,7 +4085,7 @@ function renderHome(){
  if(!daily)return;
  const saved=recordFor(daily.id),draft=school.active?draftFor(school.active):null;
  const canContinue=!!draft&&(draft.step>0||draft.qIndex>0);
- const waiting=!!school.upcoming&&!school.active;
+ const waiting=!KIDS_CREATOR_PREVIEW&&!!school.upcoming&&!school.active;
  $("#todayTopicName").textContent=lessonTitle(daily.id);
  $("#todayTopicIntro").textContent=lessonLead(daily.id);
  $("#todaySummary").textContent=canContinue?"Dein Unterricht bleibt gespeichert. Mach genau dort weiter, wo du aufgehört hast.":
@@ -4091,7 +4104,7 @@ function renderHome(){
   const subject=card.dataset.openCategory;
   const total=availableTopics(subject).length,learned=availableTopics(subject).filter(x=>!!recordFor(x)).length;
   const tag=card.querySelector(".category-state");
-  if(tag)tag.textContent=availableTopics(subject).some(x=>["new","resume"].includes(school.access(x)))?"1 Unterricht frei · "+learned+" gelernt":learned+" gelernt · weitere gesperrt";
+  if(tag)tag.textContent=KIDS_CREATOR_PREVIEW?"Alle "+total+" Unterrichte ansehen":availableTopics(subject).some(x=>["new","resume"].includes(school.access(x)))?"1 Unterricht frei · "+learned+" gelernt":learned+" gelernt · weitere gesperrt";
   card.setAttribute("aria-label",(SUBJECTS[subject]?.title||subject)+" – "+total+" Themen, "+learned+" gelernt, noch gesperrte Themen nur mit Titeln sichtbar");
  });
 }
@@ -4215,6 +4228,9 @@ function prepareOwnerVoice(){
 /* KIDS V8: shared curriculum and lesson-isolated progress */
 const QURAN_COUNTS=[7,286,200,176,120,165,206,75,129,109,123,111,43,52,99,128,111,110,98,135,112,78,118,64,77,227,93,88,69,60,34,30,73,54,45,83,182,88,75,85,54,53,89,59,37,35,38,29,18,45,60,49,62,55,78,96,29,22,24,13,14,11,11,18,12,12,30,52,52,44,28,28,20,56,40,31,50,40,46,42,29,19,36,25,22,17,19,26,30,20,15,21,11,8,8,19,5,8,8,11,11,8,3,9,5,4,7,3,6,3,5,4,5,6];
 const CURRICULUM=window.DARKidsAcademyCurriculum||{};
+function stagingAccess(lessonId,school){
+  return KIDS_CREATOR_PREVIEW?"new":(school||academySchoolState()).access(lessonId);
+}
 const TOPIC_IDS={akhlaq:["sidq","akhlaq-sabr","akhlaq-amanah"],adab:["adab-salam","adab-worte","adab-respekt"],fiqh:["fiqh-taharah","fiqh-wudu","fiqh-salah"],aqidah:["aqidah-tawhid","aqidah-iman","aqidah-ikhlas"]};
 Object.keys(CURRICULUM).forEach(lessonId=>{
  const subject=CURRICULUM[lessonId]?.subject;
@@ -4339,8 +4355,8 @@ function openCategory(key){
  const data=SUBJECTS[key];if(!data)return;
  stopAll();hideLesson();$("#academyHome").hidden=true;$("#academySubject").hidden=false;
  $("#academySubject").dataset.subject=key;
- const st=academySchoolState(),ids=availableTopics(key),reviewed=ids.filter(x=>st.access(x)==="review");
- const newClass=ids.find(x=>["new","resume"].includes(st.access(x)))||null;
+ const st=academySchoolState(),ids=availableTopics(key),reviewed=ids.filter(x=>stagingAccess(x,st)==="review");
+ const newClass=ids.find(x=>["new","resume"].includes(stagingAccess(x,st)))||null;
  const due=reviewed.filter(x=>Number(recordFor(x).nextDue)<=Date.now());
  const next=newClass||due[0]||reviewed[0]||null;
  $("#subjectTitle").textContent=data.title;$("#subjectDescription").textContent=data.description;
@@ -4358,7 +4374,7 @@ function openCategory(key){
  grid.replaceChildren();history.replaceChildren();
  $("#subjectEmpty").hidden=true;reviewSection.hidden=reviewed.length===0;
  for(const lessonId of ids){
-  const access=st.access(lessonId),complete=access==="review",locked=access==="locked";
+  const access=stagingAccess(lessonId,st),complete=access==="review",locked=access==="locked";
   const rec=complete?recordFor(lessonId):null,isDue=!!rec&&Number(rec.nextDue)<=Date.now();
   const card=document.createElement("button");card.type="button";
   card.className="subject-topic "+(locked?"is-locked":complete?"is-ready is-reviewed":"is-ready is-current-class")+(isDue?" is-due":"");
@@ -4397,7 +4413,7 @@ function begin(requested){
  const subject=$("#academySubject").hidden?null:$("#academySubject").dataset.subject;
  const chosen=typeof requested==="string"?requested:subject?availableTopics(subject)[0]:dailyLesson()?.id||"sidq";
  if(!chosen||chosen!=="sidq"&&!CURRICULUM[chosen])return;
- const access=academySchoolState().access(chosen);
+ const access=stagingAccess(chosen);
  if(!["new","resume","review"].includes(access)){
   hideLesson();$("#academyHome").hidden=false;
   renderHome();
