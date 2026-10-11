@@ -76,8 +76,15 @@ function runKidsDesignGuard() {
   if (!/KIDS_NO_PRECLICK_DURATION/.test(doc)) {
     failed += fail(`${KIDS_DOC}: Pre-Click-Dauer/Alter-Regel fehlt`);
   }
-  if (!html.includes("/kids/kids-touch-rail.css?v=16")) {
-    failed += fail(`${KIDS_HTML}: globales Karten-Interaktionssystem v16 fehlt`);
+  // Read the currently released CSS/JS URLs rather than freezing the v16 query.
+  // Still block missing assets, stale downgrades, or incomplete offline precache.
+  const touchCssRef = html.match(/\/kids\/kids-touch-rail\.css\?v=(\d+)/);
+  const touchJsRef = html.match(/\/kids\/kids-card-interaction\.js\?v=(\d+)/);
+  const kidsSw = fs.readFileSync(path.join(ROOT, "kids/sw.js"), "utf8");
+  if (!touchCssRef || Number(touchCssRef[1]) < 16 ||
+      !touchJsRef || Number(touchJsRef[1]) < 6 ||
+      !kidsSw.includes(touchCssRef[0]) || !kidsSw.includes(touchJsRef[0])) {
+    failed += fail(`${KIDS_HTML}: aktuelle Karten-Interaktionsdateien fehlen oder sind nicht im Offline-Cache`);
   }
 
   // Approved start hero reference (V1199): keep the exact static scene and
