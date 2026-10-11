@@ -15,6 +15,10 @@ assert.match(sql,/lower\(u\.email\) = e/);
 assert.match(sql,/from public,anon,authenticated/);
 assert.match(sql,/to service_role/);
 assert.match(sql,/perform pg_advisory_xact_lock/);
+assert.match(sql,/pg_advisory_xact_lock\(hashtext\('kids-parent-hourly:' \|\| p_auth_user_id::text\)\)/,
+  "Simultaneous registrations with separate child names must share a parent quota lock");
+assert.match(sql,/if count_recent >= 5 then/,
+  "At most 5 new child accounts per verified auth identity and hour");
 assert.match(sql,/insert into public\.kids_parent_contacts/);
 assert.match(sql,/insert into public\.kids_accounts/);
 assert.ok(!/update\s+public\.kids_accounts/i.test(sql),"No password or legacy-learning-progress change");
