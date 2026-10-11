@@ -132,6 +132,7 @@ enum DarPushNotifications {
     }
 
     static func reschedulePrayers() {
+        cancelLocalPrayerEntries()
         let settings = storedWebSettings()
         if bool(settings["reminder"]), isServerLaneActive() {
             cancelLocalPrayers()
@@ -526,6 +527,15 @@ enum DarPushNotifications {
         }
     }
 
+    private static func cancelLocalPrayerEntries() {
+        UNUserNotificationCenter.current().getPendingNotificationRequests { pending in
+            let ids = pending.filter { $0.identifier.hasPrefix(prayerPrefix) && $0.identifier.contains(".on.") }.map(\.identifier)
+            if !ids.isEmpty {
+                UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ids)
+            }
+        }
+    }
+
     private static func cancelLocalPrayers() {
         UNUserNotificationCenter.current().getPendingNotificationRequests { pending in
             let ids = pending.filter { $0.identifier.hasPrefix(prayerPrefix) }.map(\.identifier)
@@ -615,9 +625,6 @@ enum DarPushNotifications {
                     continue
                 }
                 guard let fire = DarPrayerEngine.date(for: slot, on: day) else { continue }
-                if fire > now {
-                    candidates.append(.init(slot: slot, fire: fire, advance: false))
-                }
                 let advanceFire = fire.addingTimeInterval(TimeInterval(-minutes * 60))
                 if advanceFire > now, slot.id != "tahajjud" {
                     candidates.append(.init(slot: slot, fire: advanceFire, advance: true))
