@@ -3737,7 +3737,7 @@ body .academy-header.kids-detail-appbar > .hero-profile-chip .hero-profile-copy 
 <script src="/kids/akademie/curriculum-v1.js?v=20261010-01"></script>
 <script src="/kids/akademie/curriculum-v2.js?v=20261010-09"></script>
 <script src="/kids/akademie/school-progress-v11.js?v=20261010-11"></script>
-<script src="/kids/akademie/pilot-audio-v13.js?v=20261010-voicefix-v16"></script>
+<script src="/kids/akademie/pilot-audio-v13.js?v=20261010-voicefix-v16&amp;rev=20261011-v19-creator-audio"></script>
 <script>
 (()=>{
 "use strict";
@@ -4129,10 +4129,22 @@ function syncProfile(force=false){
 }
 
 
+function creatorV4Sandbox(){
+ const p=new URLSearchParams(location.search);
+ return p.get("creatorSandbox")==="1"&&p.get("voicePilot")==="1"&&
+  p.get("previewProfil")==="maedchen"&&p.get("previewAlter")==="4-5"&&
+  document.body.dataset.academyChildMode==="demo"&&
+  document.body.dataset.profile==="girl"&&document.body.dataset.kidsAge==="4-5"&&
+  activeLessonId==="sidq";
+}
 function isAcademyStoryMaster(text){
  const entry=window.DARKidsOwnerVoice?.masterEntry?.(text);
- return !!(entry&&entry.voiceId==="DkU7j9uO4ZEtLD2iRZSH"&&entry.modelId==="eleven_v4"&&entry.voiceSettingsProfile==="kids_story"&&
-  (entry.approvedForPlayback!==false||new URLSearchParams(location.search).get("voicePilot")==="1"));
+ // Never mistake an older Flash/quiz file for the approved V4 story voice.
+ // Unreviewed staging remains audible ONLY in the exact owner-only Ṣidq QA context.
+ return !!(entry&&entry.voiceId==="DkU7j9uO4ZEtLD2iRZSH"&&entry.modelId==="eleven_v4"&&
+  entry.voiceSettingsProfile==="kids_story"&&entry.sourceVoice==="authorized-owner-voice"&&
+  (entry.approvedForPlayback===true||
+   (entry.approvedForPlayback===false&&creatorV4Sandbox())));
 }
 function refreshSerhatLessonClip(){
  const button=$("#academySerhatLead"),status=$("#academySerhatStatus");
@@ -4165,6 +4177,18 @@ function playSerhatLessonClip(){
  }catch(_){failed();}
 }
 
+let academyMasterReady=false;
+let academyMasterWarmup=null;
+function warmAcademyMaster(){
+ if(academyMasterWarmup)return academyMasterWarmup;
+ academyMasterWarmup=Promise.resolve(prepareOwnerVoice()).then(async owner=>{
+  if(!owner)return false;
+  if(typeof owner.whenAcademyReady==="function")await owner.whenAcademyReady();
+  academyMasterReady=true;
+  return true;
+ }).catch(()=>false);
+ return academyMasterWarmup;
+}
 function prepareOwnerVoice(){
  // Die Serhat-Archive werden nur auf Unterrichtsseiten geladen, nicht beim Öffnen der Startseite.
  if(window.DARKidsOwnerVoice)return Promise.resolve(window.DARKidsOwnerVoice);
@@ -4379,7 +4403,7 @@ function begin(requested){
   updateAcademyAppbar();return;
  }
  activeLessonId=chosen;sessionStamp=String(Date.now())+"-"+chosen;focusPages[1]=0;focusPages[2]=0;focusPages[4]=0;
- prepareOwnerVoice();hideCategory();$("#academyHome").hidden=true;$("#lessonMain").hidden=false;
+ warmAcademyMaster();hideCategory();$("#academyHome").hidden=true;$("#lessonMain").hidden=false;
  applySelectedLesson();refreshSerhatLessonClip();
  const draft=readDraft();
  if(draft){
@@ -4547,13 +4571,20 @@ function speak(index,custom){
   if(k>=lines.length){stopSpeech();return}
   const t=String(lines[k]||"").trim();if(!t){k++;next();return}
   const owner=window.DARKidsOwnerVoice;
-  if(!waitedForMaster&&(!owner||typeof owner.isLoaded==="function"&&!owner.isLoaded())){
-   waitedForMaster=true;
-   const completion=Promise.resolve(prepareOwnerVoice()).then(api=>
-    api&&typeof api.whenAcademyReady==="function"?api.whenAcademyReady():null);
-   setAudioFeedback("Serhat-Masteraufnahme wird geladen …");
-   Promise.race([completion,new Promise(resolve=>setTimeout(resolve,9000))])
-    .then(()=>{if(live())next()}).catch(()=>{if(live())deviceRead(t)});
+  if(!academyMasterReady||!owner){
+   if(!waitedForMaster){
+    waitedForMaster=true;
+    setAudioFeedback("Die Masterstimme wird vorbereitet. Bitte tippe danach erneut auf Anhören.");
+    // Do not try to play() after an awaited fetch: the iPhone's tap activation
+    // has ended. The *next* explicit tap plays synchronously in owner.play().
+    const completion=warmAcademyMaster();
+    Promise.race([completion,new Promise(resolve=>setTimeout(resolve,9000))])
+     .then(ready=>{
+      if(!live())return;
+      setAudioFeedback(ready?"Aufnahme vorbereitet. Jetzt bitte erneut auf Anhören tippen.":
+       "Die Aufnahme lädt noch. Tippe gleich erneut auf Anhören.");
+     }).catch(()=>{if(live())deviceRead(t)});
+   }
    return;
   }
   if(certifiedOwnerHas(owner,t)){

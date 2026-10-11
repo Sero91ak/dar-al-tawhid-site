@@ -47,6 +47,7 @@ jobs:
           print("Four owner V4 clips present with valid hashes and QA-only status.")
           PY
       - name: Probe live Cloudflare HTML, JS and all 4 audio URLs
+        if: github.event_name != 'pull_request'
         run: |
           python3 - <<'PY'
           import hashlib,json,time,urllib.error,urllib.parse,urllib.request,pathlib,sys
@@ -55,9 +56,9 @@ jobs:
           # The diagnostic HTML page is protected for normal browsers.
           # Only a KIDS-native User-Agent can access it; this automated
           # test verifies the intended gate instead of opening the page.
-          # V16 is already merged: require it on PRs and after production deploys.
+          # V17 is merged; require it only after the canonical Cloudflare deploy.
           # An old V13 page must never produce a false green live-audio result.
-          expected_release="V16.0-voicepreview-20261010"
+          expected_release="V17.0-voice-sandbox-20261011"
           resources=[
               ("/kids/akademie/index.html",expected_release,None),
               ("/kids/akademie/pilot-audio-v13.js","kids-serhat-v13-20261010",None),

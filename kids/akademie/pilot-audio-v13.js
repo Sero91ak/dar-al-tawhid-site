@@ -7,8 +7,10 @@
  const qp=new URLSearchParams(location.search);
  const adultPilot=qp.get("voicePilot")==="1";
  const explicitGirlPreview=qp.get("previewProfil")==="maedchen"&&qp.get("previewAlter")==="4-5";
- // This is a QA-only preview. Real children's lessons do NOT auto-play unapproved clips.
- if(!(adultPilot||explicitGirlPreview)||!location.pathname.includes("/kids/akademie/"))return;
+ const creatorPilot=adultPilot&&explicitGirlPreview&&qp.get("creatorSandbox")==="1";
+ // Only the full creator sandbox may play still-unreviewed V4 clips.
+ // A saved real child never enters that sandbox without the exact four URL flags.
+ if(!creatorPilot||!location.pathname.includes("/kids/akademie/"))return;
  const clips=[
   {text:"As-salāmu ʿalaykum, liebe Schwester.",src:"/kids/assets/kids-academy-audio/00ff589726b166dff6a9.m4a"},
   {text:"Schön, dass du da bist!",src:"/kids/assets/kids-academy-audio/f142bc78e8bcea3d8518.m4a"},
@@ -73,17 +75,17 @@
  }
  document.addEventListener("click",event=>{
   const pilot=event.target.closest?.("[data-academy-pilot]");
-  if(pilot&&adultPilot&&isDemo()){
+  if(pilot&&creatorPilot&&isGirl45()){
    const k=Number(pilot.dataset.academyPilot);
    if(!Number.isInteger(k)||k<0||k>=clips.length)return;
    event.preventDefault();event.stopImmediatePropagation();start([k]);return;
   }
   const welcome=event.target.closest?.('[data-speak-stage="0"]');
-  if(welcome&&isGirl45()&&matchesExactSidqText()&&!document.querySelector("#lessonMain")?.hidden){
+  if(welcome&&creatorPilot&&isGirl45()&&matchesExactSidqText()&&!document.querySelector("#lessonMain")?.hidden){
    event.preventDefault();event.stopImmediatePropagation();start([0,1,2]);return;
   }
   const stage=event.target.closest?.('[data-speak-stage="1"]');
-  if(stage&&isGirl45()&&matchesExactSidqText()&&!document.querySelector("#lessonMain")?.hidden&&
+  if(stage&&creatorPilot&&isGirl45()&&matchesExactSidqText()&&!document.querySelector("#lessonMain")?.hidden&&
    document.querySelectorAll("#explainWords [data-spoken]")?.[0]?.textContent?.trim()===clips[3].text){
    event.preventDefault();event.stopImmediatePropagation();start([3]);return;
   }
@@ -96,7 +98,7 @@
  function ready(){
   const panel=document.querySelector("#academyPilotControls");
   if(panel){
-   const show=isDemo()&&(adultPilot||(explicitGirlPreview&&isGirl45()));
+   const show=creatorPilot&&isGirl45();
    panel.hidden=!show;
    // Make the four genuine pilot clips discoverable in the explicit creator demo.
    const details=panel.closest?.("details");
