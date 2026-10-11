@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-12",
+  "scope": "isolated_KIDS_draft_PR_825",
+  "source": {
+    "model": "recovered actual V7.7 boy glTF 2.0",
+    "sha256": "353b028862f91922d6288cf6ede09d5c8150815657c66c9c116b7775311c07fa",
+    "bytes": 4382224,
+    "rigJoints": 19
+  },
+  "measurement": {
+    "type": "world-space joint-to-joint distance, not mesh-to-mesh palm/knee contact",
+    "method": "actual GLB 19-node forward-kinematics and CPU-skinned VTK render, no fabricated asset",
+    "samples": [
+      {
+        "spineForwardBendDegrees": 85,
+        "handToKneeJointGapMetres": {
+          "left": 0.2027687877565329,
+          "right": 0.2027687877565329
+        },
+        "feetBonesUnchanged": true,
+        "physicallyAccepted": false
+      },
+      {
+        "spineForwardBendDegrees": 103,
+        "handToKneeJointGapMetres": {
+          "left": 0.09485159229998863,
+          "right": 0.09485159229998863
+        },
+        "feetBonesUnchanged": true,
+        "physicallyAccepted": false
+      }
+    ],
+    "targetJointDistanceMeters": 0.03,
+    "thresholdNote": "This 3 cm diagnostic threshold is NOT a religious standard and does not substitute physical mesh contact or review."
+  },
+  "visibleBlockers": [
+    "hands do not reliably reach knees in current rig",
+    "garment bends unnaturally / appearance deviates",
+    "head and neck orientation not approved",
+    "standing-to-ruku transition not modelled or reviewed",
+    "no independent girl GLB"
+  ],
+  "output": {
+    "candidateRukuGLBWritten": false,
+    "sourceModelOverwritten": false,
+    "realPreviewRenderMade": true,
+    "physicalMeshContactVerified": false,
+    "fullOutfitDeformationApproved": false,
+    "humanPrayerReviewApproved": false,
+    "rukuApproved": false,
+    "productionApproved": false
+  },
+  "driveEvidence": "https://drive.google.com/drive/folders/1EYqdSQ4e0ueoKhIQyY0ZxeAG6MYUQ4AM",
+  "repairPlan": [
+    "Refit spine/neck bending and revise long thawb skin weights; inspect seam and garment collisions",
+    "Correct shoulder arm reach toward actual surface knees, keep palm placement and feet grounded",
+    "Render front, left and right physical cameras and inspect original character likeness",
+    "Run direct GLB reach+mesh-surface-distance tests plus independent human fiqh/pose approval; only then export any Ruku animation"
+  ],
+  "risk": "Do not call test posture a complete Ruku; animation is blocked until visible failures are fixed."
+}
