@@ -1,0 +1,52 @@
+/* DAR AL TAWḤĪD KIDS — girls hero-to-status seamless V1335.
+   The historical KIDS_MAIN_TAB_SAFE_TOP_LOCK_V1319 inserted a shell
+   spacer ABOVE the full-bleed hero. This cancels that spacer only for
+   girls profiles on the four main content tabs. Hero child text retains
+   its existing safe-area padding. No scroll, route or image file changes. */
+
+/* Match BOTH asynchronous data-view and :has(active) safe-top locks,
+   including the id-specific :has() selector specificity. */
+html[data-view="stories"] body .app[data-gender="girl"] .shell,
+html[data-view="dua"] body .app[data-gender="girl"] .shell,
+html[data-view="quran"] body .app[data-gender="girl"] .shell,
+html[data-view="parents"] body .app[data-gender="girl"] .shell,
+html body .app[data-gender="girl"]:has(#view-stories.view.active) .shell,
+html body .app[data-gender="girl"]:has(#view-dua.view.active) .shell,
+html body .app[data-gender="girl"]:has(#view-quran.view.active) .shell,
+html body .app[data-gender="girl"]:has(#view-parents.view.active) .shell{
+  padding-top:0!important;
+}
+
+/* Dark top-only scrim sits above moving hero art while remaining
+   below buttons, dialogs and the iOS status indicators. It avoids a
+   harsh bright patch below white clock/network text on small iPhones.
+   No fixed full-screen picture: page scroll remains natural. */
+html body:has(.app[data-gender="girl"]):has(
+  #view-stories.view.active,
+  #view-dua.view.active,
+  #view-quran.view.active,
+  #view-parents.view.active
+)::before{
+  content:"";
+  position:fixed;
+  pointer-events:none;
+  z-index:12;
+  top:0;
+  left:0;
+  right:0;
+  height:calc(env(safe-area-inset-top,0px) + 30px);
+  background:linear-gradient(180deg,
+    rgba(21,17,31,.54) 0%,
+    rgba(28,21,36,.29) 53%,
+    rgba(34,24,42,0) 100%);
+}
+
+/* The .shell is the only scroll container: fill its background with
+   the same matte plum used by the hero fades during iOS rubber-band
+   overscroll. No touch-action or overscroll locking added. */
+html body .app[data-gender="girl"]:has(#view-stories.view.active) .shell,
+html body .app[data-gender="girl"]:has(#view-dua.view.active) .shell,
+html body .app[data-gender="girl"]:has(#view-quran.view.active) .shell,
+html body .app[data-gender="girl"]:has(#view-parents.view.active) .shell{
+  background-color:#2d2136!important;
+}
