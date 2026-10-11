@@ -98,6 +98,45 @@ def probe(command, timeout):
         return {"completed": False, "passed": False, "error": str(e)[:350]}
 
 
+
+def analysis_complete(result):
+    """An authentic, *measured* model may still fail silhouette acceptance.
+
+    Do not confuse a 90%-shape FAIL (the expected V7.7 result) with
+    corrupt archive bytes or an analyzer that never ran. This only marks
+    forensic QA as completed; it can NEVER grant production approval.
+    """
+    if result.get("modelBytesVerified") is not True or result.get("referenceBytesVerified") is not True:
+        return False
+    rig = result.get("binaryRig") or {}
+    shape = result.get("fixedFiveViews") or {}
+    angle = result.get("angleDiagnostic") or {}
+    if rig.get("passed") is not True or not isinstance(rig.get("report"), dict):
+        return False
+    if shape.get("completed") is not True or shape.get("commandExitCode") not in (0, 1):
+        return False
+    views = (shape.get("report") or {}).get("views")
+    fixed = shape.get("report") or {}
+    if not isinstance(views, dict) or not {
+        "front", "three_quarter_uncalibrated", "right_side", "back", "left_side"
+    }.issubset(views):
+        return False
+    if (fixed.get("model_sha256") != V77_SHA or
+        fixed.get("original_sha256") != REFERENCE_SHA or
+        fixed.get("measurement_method_id") != "fiveview-cropped-grabcut-seeded-v4-stride-scene-safe-20261009" or
+        fixed.get("production_approved") is not False):
+        return False
+    if angle.get("passed") is not True or not isinstance(angle.get("report"), dict):
+        return False
+    diagnostic = angle["report"]
+    if (diagnostic.get("source_glb_sha256") != V77_SHA or
+        diagnostic.get("source_reference_sha256") != REFERENCE_SHA or
+        diagnostic.get("production_approved") is not False or
+        diagnostic.get("physical_camera_angle_established") is not False):
+        return False
+    return result.get("productionApproved") is False
+
+
 def run(archive):
     root = pathlib.Path(__file__).resolve().parent
     files = pinned_members(archive)  # fails BEFORE executing any model analysis
@@ -120,6 +159,10 @@ def run(archive):
             sys.executable, str(root / "three_quarter_camera_diagnostic.py"),
             str(model), str(reference)], 180)
         # IoU research is not a human image, girl-clothing, or fiqh approval.
+    report["qaAnalysisComplete"] = analysis_complete(report)
+    report["fiveView90PctAccepted"] = bool((report["fixedFiveViews"].get("report") or {}).get("all_five_90pct_pass") is True)
+    report["originalLikenessApproved"] = False
+    report["productionApproved"] = False
     return report
 
 
@@ -138,10 +181,9 @@ def main():
     if args.json:
         pathlib.Path(args.json).write_text(output, encoding="utf-8")
     print(output, end="")
-    return 0 if (result.get("modelBytesVerified") and result.get("referenceBytesVerified")
-                 and result.get("binaryRig", {}).get("passed")
-                 and result.get("fixedFiveViews", {}).get("passed")
-                 and result.get("angleDiagnostic", {}).get("completed")) else 1
+    # Exit zero means verified original bytes AND successful diagnostic execution,
+    # not that the 90% goal, character likeness or teaching approval passed.
+    return 0 if analysis_complete(result) else 1
 
 
 if __name__ == "__main__":
