@@ -247,6 +247,15 @@ jobs:
           node-version: "24"
       - name: Dependencies
         run: npm ci
+      - name: Copy original Academy images to isolated KIDS assets
+        run: |
+          set -euo pipefail
+          mkdir -p kids/assets/academy-stage
+          for image in kids-academy-hero-boys-v1.jpg kids-academy-hero-girls-v1.jpg kids-academy-hero-v1.jpg kids-academy-akhlaq-v1.jpg kids-academy-adab-v1.jpg; do
+            test -s "desktop-preview/assets/$image"
+            cp "desktop-preview/assets/$image" "kids/assets/academy-stage/$image"
+          done
+          echo "Exact original Academy images copied into KIDS TEST assets; no visitor changes."
       - name: Independent Kids creator preflight
         run: |
           set -euo pipefail
@@ -291,10 +300,9 @@ jobs:
             fi
             echo "KIDS Creator test route OK: $PAGE"
           done
-          # KIDS Academy art was previously broken: Worker blocked five
-          # /desktop-preview/ images. Explicitly verify all five real assets.
+          # KIDS Academy original art is copied from desktop-preview only into this isolated build.
           for IMAGE in kids-academy-hero-boys-v1.jpg kids-academy-hero-girls-v1.jpg kids-academy-hero-v1.jpg kids-academy-akhlaq-v1.jpg kids-academy-adab-v1.jpg; do
-            CODE="$(curl -fsSL -o /tmp/kids-creator-art -w '%{http_code}' "$BASE/desktop-preview/assets/$IMAGE" || true)"
+            CODE="$(curl -fsSL -o /tmp/kids-creator-art -w '%{http_code}' "$BASE/kids/assets/academy-stage/$IMAGE" || true)"
             test "$CODE" = "200" && test "$(wc -c < /tmp/kids-creator-art)" -gt 4000 || {
               echo "::error::Kids Academy broken artwork: $IMAGE (HTTP $CODE)"
               exit 1
