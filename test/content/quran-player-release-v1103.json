@@ -1,0 +1,17 @@
+{
+  "release": "dar-test-quran-player-v1103",
+  "branch": "test-quran-player-v108r-canonical",
+  "playerBuild": 1103,
+  "scope": "test-only",
+  "sourceFiles": [
+    "test/assets/dar-quran-player.js",
+    "test/assets/dar-quran-player.css"
+  ],
+  "checks": [
+    "source-syntax",
+    "tajweed-data",
+    "theme-contrast",
+    "compact-layout"
+  ],
+  "notes": "Non-runtime release marker triggering only the dedicated Dar Test deploy; no visitor app or kids live changes."
+}
