@@ -2851,7 +2851,7 @@ html:not([data-view="today"]) .view.active{
 </style>
 
 <link rel="stylesheet" href="/kids/profile-stability-v1256.css?v=1258" data-kids-profile-stability="1256">
-<link rel="stylesheet" href="/kids/prayer-stage-v1261.css?v=1304" data-kids-salah-stage="1275">
+<link rel="stylesheet" href="/kids/prayer-stage-v1261.css?v=1320" data-kids-salah-stage="1275">
 <style id="kidsTapFocusSafeV821">
 /* KIDS APP TOUCH FOCUS SAFETY V8.2.1 – no grey Android rectangular tap flash */
 html body :where(a,button,summary,label,[role="button"],[role="tab"],[tabindex],
@@ -3685,26 +3685,83 @@ function launchNextDailyStep(){
   var next=plan.find(function(s){return !dailyDone(s.id)});
   if(next)launchDailyStep(next.id);
 }
+/* KIDS_TAB_POSITION_STABILITY_V1318: reset every possible iOS scroll layer.
+   Synchronize data-view BEFORE measuring the new page; correct WebKit's
+   post-layout scroll anchoring for two frames without affecting detail readers. */
+function kidsResetMainScroll(){
+  var scroller=document.querySelector(".shell");
+  if(scroller)scroller.scrollTop=0;
+  var rootScroller=document.scrollingElement;
+  if(rootScroller&&rootScroller!==scroller)rootScroller.scrollTop=0;
+  document.documentElement.scrollTop=0;
+  if(document.body)document.body.scrollTop=0;
+  try{window.scrollTo(0,0)}catch(e){}
+}
+/* KIDS_TAB_SCROLL_STABILITY_V1323
+   iOS may continue an old scroll gesture, restore an anchor or scroll on
+   focus AFTER the two initial frames. For 900ms after navigation, correct
+   only unrequested movement. Do not fight a new touch, wheel or key action.
+   Readers and detail panes are independent and are not observed. */
+var kidsTabEpoch=0;
+var kidsScrollGestureSerial=0;
+function kidsMarkUserScroll(){kidsScrollGestureSerial++;}
+document.addEventListener("touchstart",kidsMarkUserScroll,{passive:true,capture:true});
+document.addEventListener("touchmove",kidsMarkUserScroll,{passive:true,capture:true});
+document.addEventListener("wheel",kidsMarkUserScroll,{passive:true,capture:true});
+document.addEventListener("keydown",function(e){
+  if(["ArrowDown","ArrowUp","PageDown","PageUp","Home","End"," "].indexOf(e.key)>=0)
+    kidsMarkUserScroll();
+},true);
+function kidsFinishMainTabSwitch(){
+  var epoch=++kidsTabEpoch;
+  var initialGestureSerial=kidsScrollGestureSerial;
+  var main=document.querySelector(".shell");
+  var root=document.scrollingElement;
+  var finished=false,queued=false;
+  function userMoved(){
+    return kidsScrollGestureSerial!==initialGestureSerial;
+  }
+  function settle(){
+    if(finished||epoch!==kidsTabEpoch||userMoved())return;
+    if((main&&main.scrollTop>1)||(root&&root.scrollTop>1)||window.scrollY>1)
+      kidsResetMainScroll();
+  }
+  function onScroll(){
+    if(queued||finished||epoch!==kidsTabEpoch||userMoved())return;
+    queued=true;
+    requestAnimationFrame(function(){queued=false;settle();});
+  }
+  function clean(){
+    if(finished)return;
+    settle();
+    finished=true;
+    if(main)main.removeEventListener("scroll",onScroll);
+    if(root&&root!==main)root.removeEventListener("scroll",onScroll);
+  }
+  kidsResetMainScroll();
+  if(main)main.addEventListener("scroll",onScroll,{passive:true});
+  if(root&&root!==main)root.addEventListener("scroll",onScroll,{passive:true});
+  requestAnimationFrame(function(){
+    if(epoch!==kidsTabEpoch)return clean();
+    kidsResetMainScroll();
+    requestAnimationFrame(settle);
+  });
+  setTimeout(settle,160);
+  setTimeout(settle,420);
+  setTimeout(clean,900);
+}
+window.DARKidsResetMainScroll=kidsFinishMainTabSwitch;
 function showTab(name){
   var view=document.getElementById("view-"+name);
   if(!view)return;
   var current=document.querySelector(".view.active");
   document.querySelectorAll(".nav-btn").forEach(function(b){b.classList.toggle("active",b.dataset.target===name)});
-  if(current===view){
-    var sameScroll=document.querySelector(".shell");
-    requestAnimationFrame(function(){
-      if(sameScroll){try{sameScroll.scrollTo({top:0,left:0,behavior:"auto"})}catch(e){sameScroll.scrollTop=0}}
-      else window.scrollTo({top:0,behavior:"auto"});
-    });
-    return;
+  if(current!==view){
+    if(current)current.classList.remove("active");
+    view.classList.add("active");
   }
-  if(current)current.classList.remove("active");
-  view.classList.add("active");
-  var shellScroll=document.querySelector(".shell");
-  requestAnimationFrame(function(){
-    if(shellScroll){try{shellScroll.scrollTo({top:0,left:0,behavior:"auto"})}catch(e){shellScroll.scrollTop=0}}
-    else window.scrollTo({top:0,behavior:"auto"});
-  });
+  document.documentElement.setAttribute("data-view",name);
+  kidsFinishMainTabSwitch();
 }
 document.querySelectorAll(".nav-btn").forEach(function(b){b.addEventListener("click",function(){showTab(b.dataset.target)})});
 document.querySelectorAll("[data-go]").forEach(function(b){
@@ -7623,7 +7680,7 @@ html[data-view="stories"] #view-stories > :last-child{
 <script src="/kids/sahabiyyat-stories.js?v=25"></script>\n<script src="/kids/deen-lessons.js?v=7"></script>
 <script src="/kids/global-story-glow-v1216.js?v=1239"></script>
 <script src="/kids/term-learning.js?v=1"></script>
-<script src="/kids/dua-hub-v1219.js?v=1279" data-kids-dua-hub="1259"></script>
+<script src="/kids/dua-hub-v1219.js?v=1318" data-kids-dua-hub="1259"></script>
 <script src="/kids/story-hub.js?v=28"></script>
 <script src="/kids/kids-age-typography.js?v=3"></script>
 <script src="/kids/quiz-library.js?v=9"></script>
@@ -11272,6 +11329,22 @@ html[data-kids-age]:has(#view-stories.active) body .bottom-nav .nav-btn[data-tar
   line-height:1.2!important;
   letter-spacing:-.025em!important;
   text-align:center!important;
+}
+</style>
+<!-- KIDS_MAIN_TAB_SAFE_TOP_LOCK_V1319: stable iOS status-bar clearance on main tabs -->
+<style id="kids-main-tab-safe-top-v1319">
+/* The shell must not change its top inset when data-view updates asynchronously.
+   Keep the approved initial safe-area clearance for every non-home main tab.
+   :has() follows the actual active view even before data-view is synchronized. */
+html[data-view="stories"] body .app .shell,
+html[data-view="dua"] body .app .shell,
+html[data-view="quran"] body .app .shell,
+html[data-view="parents"] body .app .shell,
+html body .app:has(#view-stories.view.active) .shell,
+html body .app:has(#view-dua.view.active) .shell,
+html body .app:has(#view-quran.view.active) .shell,
+html body .app:has(#view-parents.view.active) .shell{
+  padding-top:calc(var(--safe-top, max(16px, env(safe-area-inset-top, 0px))) + 8px)!important;
 }
 </style>
 <!-- KIDS_OFFLINE_LIBRARY_V1: independent storage controls for the Parents tab -->
