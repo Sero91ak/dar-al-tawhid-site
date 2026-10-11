@@ -20,6 +20,10 @@ on:
       - desktop-preview/**
       # KIDS Akademie V16: all classroom UI/voice changes must reach the
       # SAME canonical Cloudflare Worker; GitHub Pages deploy is not enough.
+      # KIDS account sign-in and shell changes must publish via the sole Cloudflare Worker.
+      - kids/index.html
+      - kids/start.html
+      - kids/shell.html
       - kids/akademie/**
       # Separate Basic-gated creator review; no visitor-school unlock.
       - test/kids/akademie/**
