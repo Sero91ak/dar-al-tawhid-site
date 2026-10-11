@@ -193,5 +193,10 @@ test("V8.3 original identity comparator is viewable and never auto-approves a GL
  assert.match(html,/0 \/ 2/);
  assert.match(html,/0 \/ 5/);
  assert.match(html,/Nur internes Entwicklungslabor/);
+ assert.match(html,/const noLeft=angle==='left'/);
+ assert.match(html,/originalLeftProfileLocated:false/);
+ assert.match(html,/mirrorIsNotIndependentView:true/);
+ assert.match(html,/viewCompletenessApproved:false/);
+ assert.match(html,/\$\('original'\)\.hidden=noLeft\|\|!sourceOk/);
  assert.doesNotMatch(html, /<script[^>]+src|<iframe|serviceWorker|indexedDB|localStorage|sessionStorage|\bfetch\(|XMLHttpRequest|sendBeacon/i);
 });
