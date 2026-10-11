@@ -57,7 +57,7 @@ jobs:
   deploy-test:
     # Existing adult Dar Test deployment remains unchanged for every normal push.
     # Creator dispatch MUST NOT overwrite Dar Test.
-    if: ${{ github.event_name != 'workflow_dispatch' || inputs.target != 'kids-creator' }}
+    if: ${{ github.ref == 'refs/heads/main' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.target == 'dar-test')) }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
