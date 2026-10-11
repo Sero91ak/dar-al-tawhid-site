@@ -1,0 +1,415 @@
+{
+  "schemaVersion": 1,
+  "project": "DĀR AL TAWḤĪD KIDS · Mein Gebet",
+  "asOf": "2026-10-11",
+  "meaning": "Source-artwork inventory. These are NOT approved 3D GLBs nor completed pose animation clips.",
+  "original2DViews": {
+    "boy": [
+      {
+        "libraryPath": "/Kinder App/Mein_Gebet_Originale_20261011/junge/01_vorne.jpeg",
+        "sha256": "0c7b73601cb1bcd86d262bb114e9933a214e360b1dbed2f6f2c2c1c765d0e4cf",
+        "original2D": true,
+        "approved3D": false
+      },
+      {
+        "libraryPath": "/Kinder App/Mein_Gebet_Originale_20261011/junge/02_dreiviertel_rechts.png",
+        "sha256": "752addf3d60c659b215fa1cadab941d661003050bf5571a8d7b2804520bedbb1",
+        "original2D": true,
+        "approved3D": false
+      },
+      {
+        "libraryPath": "/Kinder App/Mein_Gebet_Originale_20261011/junge/03_seite.png",
+        "sha256": "e56edc83447be88ef174eeea291ebcb7183f86d35682d0f8ad50b13aba18692f",
+        "original2D": true,
+        "approved3D": false
+      },
+      {
+        "libraryPath": "/Kinder App/Mein_Gebet_Originale_20261011/junge/04_hinten.png",
+        "sha256": "0c5043be127edfa13349bbde9009efa0ce752a8f54b88d3ccf51388d901f5d1d",
+        "original2D": true,
+        "approved3D": false
+      },
+      {
+        "libraryPath": "/Kinder App/Mein_Gebet_Originale_20261011/junge/05_dreiviertel.png",
+        "sha256": "4078f510b9589921d7fc1a090cc332f9299ed6f65522efb88c6da28afc3fd063",
+        "original2D": true,
+        "approved3D": false
+      }
+    ],
+    "girl": [
+      {
+        "libraryPath": "/Kinder App/Mein_Gebet_Originale_20261011/maedchen/01_vorne.jpeg",
+        "sha256": "8d4c25c0be2781224ab447bed3fe88a03f3a65a87be269379c706b1362df1a2d",
+        "original2D": true,
+        "approved3D": false
+      },
+      {
+        "libraryPath": "/Kinder App/Mein_Gebet_Originale_20261011/maedchen/02_dreiviertel.jpeg",
+        "sha256": "bd6691ae29efd0932a94119d7cdb892bb3bf91f2b8ca6e66b9a3062976e9fa89",
+        "original2D": true,
+        "approved3D": false
+      },
+      {
+        "libraryPath": "/Kinder App/Mein_Gebet_Originale_20261011/maedchen/03_seite.png",
+        "sha256": "e4895261ce9917ca889c580b72a529137b0150e4a7c36cd7820c482fb9211dc7",
+        "original2D": true,
+        "approved3D": false
+      },
+      {
+        "libraryPath": "/Kinder App/Mein_Gebet_Originale_20261011/maedchen/04_hinten.jpeg",
+        "sha256": "5e0778a8397b8a2c868134e4c15c7b16953ba19ab3aa60cc8a84ea0ac5ca8d0e",
+        "original2D": true,
+        "approved3D": false
+      },
+      {
+        "libraryPath": "/Kinder App/Mein_Gebet_Originale_20261011/maedchen/05_dreiviertel_zweite_ansicht.jpeg",
+        "sha256": "fab7a97457566c972d53525b06c85a9fec99f4ba8f943bfa58183917724ea115",
+        "original2D": true,
+        "approved3D": false
+      }
+    ]
+  },
+  "sourceLibraryArchive": "/Kinder App/Mein_Gebet_Originale_20261011/Originale_10_Ansichten_20261011.zip",
+  "historicalPoseSheets": [
+    {
+      "libraryPath": "/Meine App/Gebetsposen-Referenzblatt für Mann und Frau.png",
+      "fileId": "file_00000000e9dc81f4ac1d2ab14ede9005",
+      "created": "2026-08-11",
+      "contains": "11 categories in multiple camera views; NAVY ADULT FIGURES ONLY",
+      "sourceKind": "historical_adult_pose_reference",
+      "isChildCharacter": false,
+      "isRiggedGLB": false
+    },
+    {
+      "libraryPath": "/Meine App/Infografik: Gebetsablauf in 11 Schritten.png",
+      "fileId": "file_0000000038a881f498add3d58ffdd00a",
+      "created": "2026-08-11",
+      "contains": "11-step adult visual teaching chart",
+      "sourceKind": "historical_adult_pose_reference",
+      "isChildCharacter": false,
+      "isRiggedGLB": false
+    },
+    {
+      "libraryPath": "/Meine App/Gebetspositionen: Schritt-für-Schritt-Anleitung.png",
+      "fileId": "file_0000000047e081f48a5387ec01e2da51",
+      "created": "2026-08-11",
+      "contains": "11 adult male teaching poses",
+      "sourceKind": "historical_adult_pose_reference",
+      "isChildCharacter": false,
+      "isRiggedGLB": false
+    },
+    {
+      "libraryPath": "/Meine App/Gebetsleitfaden in elf Schritten.png",
+      "fileId": "file_00000000ff308246930f489de6734c40",
+      "created": "2026-08-11",
+      "contains": "11 adult female teaching poses",
+      "sourceKind": "historical_adult_pose_reference",
+      "isChildCharacter": false,
+      "isRiggedGLB": false
+    }
+  ],
+  "poseLabels": [
+    {
+      "id": "takbir",
+      "label": "Takbīr / Rafʿ al-Yadayn"
+    },
+    {
+      "id": "qiyam",
+      "label": "Qiyām (rechte Hand auf linker an der Brust)"
+    },
+    {
+      "id": "ruku",
+      "label": "Rukūʿ"
+    },
+    {
+      "id": "standing_after_ruku",
+      "label": "Iʿtidāl (Aufrichten aus Rukūʿ)"
+    },
+    {
+      "id": "sujud",
+      "label": "Suǧūd (vollständige Kontaktprüfung)"
+    },
+    {
+      "id": "sitting_between_sujud",
+      "label": "Ǧalsah (Sitzen zwischen Suǧūd)"
+    },
+    {
+      "id": "rise_next_rakah",
+      "label": "Aufstehen zur nächsten Rakʿah (falls zutreffend)"
+    },
+    {
+      "id": "middle_tashahhud",
+      "label": "Mittlerer Tašahhud (nur wenn zutreffend)"
+    },
+    {
+      "id": "final_tashahhud",
+      "label": "Abschließender Tašahhud"
+    },
+    {
+      "id": "taslim_right",
+      "label": "Salām zur eigenen RECHTEN Schulter"
+    },
+    {
+      "id": "taslim_left",
+      "label": "Salām zur eigenen LINKEN Schulter"
+    }
+  ],
+  "childPoseSlots": [
+    {
+      "profile": "boy",
+      "id": "takbir",
+      "label": "Takbīr / Rafʿ al-Yadayn",
+      "childImagePoseLocated": false,
+      "sourceApproved": false,
+      "actualOriginalGLBAnimation": false,
+      "reviewedStillRender": false,
+      "reviewedPhysicalPrayer": false,
+      "notes": "This slot remains open. Historical adult chart does not satisfy this child-specific asset requirement."
+    },
+    {
+      "profile": "boy",
+      "id": "qiyam",
+      "label": "Qiyām (rechte Hand auf linker an der Brust)",
+      "childImagePoseLocated": false,
+      "sourceApproved": false,
+      "actualOriginalGLBAnimation": false,
+      "reviewedStillRender": false,
+      "reviewedPhysicalPrayer": false,
+      "notes": "This slot remains open. Historical adult chart does not satisfy this child-specific asset requirement."
+    },
+    {
+      "profile": "boy",
+      "id": "ruku",
+      "label": "Rukūʿ",
+      "childImagePoseLocated": false,
+      "sourceApproved": false,
+      "actualOriginalGLBAnimation": false,
+      "reviewedStillRender": false,
+      "reviewedPhysicalPrayer": false,
+      "notes": "This slot remains open. Historical adult chart does not satisfy this child-specific asset requirement."
+    },
+    {
+      "profile": "boy",
+      "id": "standing_after_ruku",
+      "label": "Iʿtidāl (Aufrichten aus Rukūʿ)",
+      "childImagePoseLocated": false,
+      "sourceApproved": false,
+      "actualOriginalGLBAnimation": false,
+      "reviewedStillRender": false,
+      "reviewedPhysicalPrayer": false,
+      "notes": "This slot remains open. Historical adult chart does not satisfy this child-specific asset requirement."
+    },
+    {
+      "profile": "boy",
+      "id": "sujud",
+      "label": "Suǧūd (vollständige Kontaktprüfung)",
+      "childImagePoseLocated": false,
+      "sourceApproved": false,
+      "actualOriginalGLBAnimation": false,
+      "reviewedStillRender": false,
+      "reviewedPhysicalPrayer": false,
+      "notes": "This slot remains open. Historical adult chart does not satisfy this child-specific asset requirement."
+    },
+    {
+      "profile": "boy",
+      "id": "sitting_between_sujud",
+      "label": "Ǧalsah (Sitzen zwischen Suǧūd)",
+      "childImagePoseLocated": false,
+      "sourceApproved": false,
+      "actualOriginalGLBAnimation": false,
+      "reviewedStillRender": false,
+      "reviewedPhysicalPrayer": false,
+      "notes": "This slot remains open. Historical adult chart does not satisfy this child-specific asset requirement."
+    },
+    {
+      "profile": "boy",
+      "id": "rise_next_rakah",
+      "label": "Aufstehen zur nächsten Rakʿah (falls zutreffend)",
+      "childImagePoseLocated": false,
+      "sourceApproved": false,
+      "actualOriginalGLBAnimation": false,
+      "reviewedStillRender": false,
+      "reviewedPhysicalPrayer": false,
+      "notes": "This slot remains open. Historical adult chart does not satisfy this child-specific asset requirement."
+    },
+    {
+      "profile": "boy",
+      "id": "middle_tashahhud",
+      "label": "Mittlerer Tašahhud (nur wenn zutreffend)",
+      "childImagePoseLocated": false,
+      "sourceApproved": false,
+      "actualOriginalGLBAnimation": false,
+      "reviewedStillRender": false,
+      "reviewedPhysicalPrayer": false,
+      "notes": "This slot remains open. Historical adult chart does not satisfy this child-specific asset requirement."
+    },
+    {
+      "profile": "boy",
+      "id": "final_tashahhud",
+      "label": "Abschließender Tašahhud",
+      "childImagePoseLocated": false,
+      "sourceApproved": false,
+      "actualOriginalGLBAnimation": false,
+      "reviewedStillRender": false,
+      "reviewedPhysicalPrayer": false,
+      "notes": "This slot remains open. Historical adult chart does not satisfy this child-specific asset requirement."
+    },
+    {
+      "profile": "boy",
+      "id": "taslim_right",
+      "label": "Salām zur eigenen RECHTEN Schulter",
+      "childImagePoseLocated": false,
+      "sourceApproved": false,
+      "actualOriginalGLBAnimation": false,
+      "reviewedStillRender": false,
+      "reviewedPhysicalPrayer": false,
+      "notes": "This slot remains open. Historical adult chart does not satisfy this child-specific asset requirement."
+    },
+    {
+      "profile": "boy",
+      "id": "taslim_left",
+      "label": "Salām zur eigenen LINKEN Schulter",
+      "childImagePoseLocated": false,
+      "sourceApproved": false,
+      "actualOriginalGLBAnimation": false,
+      "reviewedStillRender": false,
+      "reviewedPhysicalPrayer": false,
+      "notes": "This slot remains open. Historical adult chart does not satisfy this child-specific asset requirement."
+    },
+    {
+      "profile": "girl",
+      "id": "takbir",
+      "label": "Takbīr / Rafʿ al-Yadayn",
+      "childImagePoseLocated": false,
+      "sourceApproved": false,
+      "actualOriginalGLBAnimation": false,
+      "reviewedStillRender": false,
+      "reviewedPhysicalPrayer": false,
+      "notes": "This slot remains open. Historical adult chart does not satisfy this child-specific asset requirement."
+    },
+    {
+      "profile": "girl",
+      "id": "qiyam",
+      "label": "Qiyām (rechte Hand auf linker an der Brust)",
+      "childImagePoseLocated": false,
+      "sourceApproved": false,
+      "actualOriginalGLBAnimation": false,
+      "reviewedStillRender": false,
+      "reviewedPhysicalPrayer": false,
+      "notes": "This slot remains open. Historical adult chart does not satisfy this child-specific asset requirement."
+    },
+    {
+      "profile": "girl",
+      "id": "ruku",
+      "label": "Rukūʿ",
+      "childImagePoseLocated": false,
+      "sourceApproved": false,
+      "actualOriginalGLBAnimation": false,
+      "reviewedStillRender": false,
+      "reviewedPhysicalPrayer": false,
+      "notes": "This slot remains open. Historical adult chart does not satisfy this child-specific asset requirement."
+    },
+    {
+      "profile": "girl",
+      "id": "standing_after_ruku",
+      "label": "Iʿtidāl (Aufrichten aus Rukūʿ)",
+      "childImagePoseLocated": false,
+      "sourceApproved": false,
+      "actualOriginalGLBAnimation": false,
+      "reviewedStillRender": false,
+      "reviewedPhysicalPrayer": false,
+      "notes": "This slot remains open. Historical adult chart does not satisfy this child-specific asset requirement."
+    },
+    {
+      "profile": "girl",
+      "id": "sujud",
+      "label": "Suǧūd (vollständige Kontaktprüfung)",
+      "childImagePoseLocated": false,
+      "sourceApproved": false,
+      "actualOriginalGLBAnimation": false,
+      "reviewedStillRender": false,
+      "reviewedPhysicalPrayer": false,
+      "notes": "This slot remains open. Historical adult chart does not satisfy this child-specific asset requirement."
+    },
+    {
+      "profile": "girl",
+      "id": "sitting_between_sujud",
+      "label": "Ǧalsah (Sitzen zwischen Suǧūd)",
+      "childImagePoseLocated": false,
+      "sourceApproved": false,
+      "actualOriginalGLBAnimation": false,
+      "reviewedStillRender": false,
+      "reviewedPhysicalPrayer": false,
+      "notes": "This slot remains open. Historical adult chart does not satisfy this child-specific asset requirement."
+    },
+    {
+      "profile": "girl",
+      "id": "rise_next_rakah",
+      "label": "Aufstehen zur nächsten Rakʿah (falls zutreffend)",
+      "childImagePoseLocated": false,
+      "sourceApproved": false,
+      "actualOriginalGLBAnimation": false,
+      "reviewedStillRender": false,
+      "reviewedPhysicalPrayer": false,
+      "notes": "This slot remains open. Historical adult chart does not satisfy this child-specific asset requirement."
+    },
+    {
+      "profile": "girl",
+      "id": "middle_tashahhud",
+      "label": "Mittlerer Tašahhud (nur wenn zutreffend)",
+      "childImagePoseLocated": false,
+      "sourceApproved": false,
+      "actualOriginalGLBAnimation": false,
+      "reviewedStillRender": false,
+      "reviewedPhysicalPrayer": false,
+      "notes": "This slot remains open. Historical adult chart does not satisfy this child-specific asset requirement."
+    },
+    {
+      "profile": "girl",
+      "id": "final_tashahhud",
+      "label": "Abschließender Tašahhud",
+      "childImagePoseLocated": false,
+      "sourceApproved": false,
+      "actualOriginalGLBAnimation": false,
+      "reviewedStillRender": false,
+      "reviewedPhysicalPrayer": false,
+      "notes": "This slot remains open. Historical adult chart does not satisfy this child-specific asset requirement."
+    },
+    {
+      "profile": "girl",
+      "id": "taslim_right",
+      "label": "Salām zur eigenen RECHTEN Schulter",
+      "childImagePoseLocated": false,
+      "sourceApproved": false,
+      "actualOriginalGLBAnimation": false,
+      "reviewedStillRender": false,
+      "reviewedPhysicalPrayer": false,
+      "notes": "This slot remains open. Historical adult chart does not satisfy this child-specific asset requirement."
+    },
+    {
+      "profile": "girl",
+      "id": "taslim_left",
+      "label": "Salām zur eigenen LINKEN Schulter",
+      "childImagePoseLocated": false,
+      "sourceApproved": false,
+      "actualOriginalGLBAnimation": false,
+      "reviewedStillRender": false,
+      "reviewedPhysicalPrayer": false,
+      "notes": "This slot remains open. Historical adult chart does not satisfy this child-specific asset requirement."
+    }
+  ],
+  "lessonPolicy": {
+    "completeTwoRakatsNotEquivalentToOnePassThrough11PoseLabels": true,
+    "taslimOrder": [
+      "taslim_right",
+      "taslim_left"
+    ],
+    "bodyStillDuringTaslim": true,
+    "qiyamRightHandAboveLeftAtChest": true,
+    "sujudMultiPointContactMustBeReviewed": true,
+    "girlsHijabCoverageDuringAllPosesMustBeReviewed": true,
+    "religiousApprovalRequiredBeforeChildren": true
+  },
+  "productionApproved": false,
+  "protected": "No replacement character, no merge into main, no live release, no unsafe automatic 100% likeness claims"
+}
