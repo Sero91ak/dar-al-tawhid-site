@@ -2344,6 +2344,11 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 .kids-join button,.kids-join-go{min-height:52px;border:0;border-radius:16px;background:#e2bd72;color:#1a2430;font-weight:800;cursor:pointer}
 .kids-join .ghost{background:rgba(255,255,255,.08);color:#fff}
 .kids-join input{width:100%;min-height:48px;border-radius:14px;border:0;margin:0 0 10px;padding:0 12px;background:rgba(255,255,255,.08);color:#fff}
+.kids-join .join-feedback{display:block;margin:10px 0 8px;padding:10px 12px;border-radius:12px;line-height:1.4;font-size:14px;font-weight:650;background:rgba(127,196,205,.12);color:#f6f0de;border:1px solid rgba(232,203,151,.35)}
+.kids-join .join-feedback[hidden],.kids-join #joinLoginExisting[hidden]{display:none!important}
+.kids-join .join-feedback[data-kind="error"]{background:rgba(174,68,71,.22);border-color:rgba(249,158,159,.65);color:#fff2ec}
+.kids-join .join-feedback[data-kind="success"]{background:rgba(73,149,111,.20);color:#e3ffed}
+.kids-join #joinSave:disabled,.kids-join #joinLoginExisting:disabled{cursor:wait;opacity:.75}
 .kids-join .step{display:none}
 .kids-join .step.on{display:block}
 .profile-list{display:grid;gap:8px;margin-top:8px}
@@ -2943,6 +2948,8 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
       <input id="joinName" maxlength="24" placeholder="Name des Kindes" autocomplete="off">
       <input id="joinPass" type="password" maxlength="40" placeholder="Passwort" autocomplete="new-password">
       <button type="button" id="joinSave">Konto anlegen</button>
+      <p id="joinStatus" class="join-feedback" role="status" aria-live="polite" aria-atomic="true" hidden></p>
+      <button type="button" id="joinLoginExisting" class="ghost" style="margin-top:8px;width:100%" hidden>Vorhandenes Konto anmelden</button>
       <button type="button" class="ghost join-skip" style="margin-top:8px;width:100%">Ohne Konto weitermachen</button>
       <button type="button" class="ghost" data-back="age" style="margin-top:8px;width:100%">Zurück</button>
     </div>
@@ -6437,8 +6444,72 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     if(btn)btn.click();
     else if(app)app.setAttribute("data-age",p.age||"6–8");
   }
+
+  /* Inline feedback works even when iOS WKWebView suppresses window.alert. */
+  var joinBusy=false;
+  function joinFeedback(msg,kind){
+    var s=document.getElementById("joinStatus");if(!s)return;
+    s.textContent=msg||"";s.hidden=!msg;s.dataset.kind=kind||"info";
+  }
+  function joinPending(v){
+    joinBusy=!!v;
+    var save=document.getElementById("joinSave"),login=document.getElementById("joinLoginExisting");
+    save.disabled=joinBusy;save.textContent=joinBusy?"Bitte warten …":"Konto anlegen";
+    if(login)login.disabled=joinBusy;
+  }
+  function joinExistingHint(msg){
+    joinFeedback(msg||"Dieser Name ist bereits vergeben. Bitte mit dem vorhandenen Passwort anmelden oder einen anderen Namen wählen.","error");
+    document.getElementById("joinLoginExisting").hidden=false;
+  }
+  function acceptExistingAccount(name,h,res){
+    if(!res||res.ok!==true){joinExistingHint("Anmeldung fehlgeschlagen. Prüfe Name und Passwort oder wähle einen anderen Namen.");return}
+    rememberCurrent();
+    var old=load(), known=old.find(function(p){return (p.name||"").toLowerCase()===name.toLowerCase()});
+    var p={id:known?known.id:String(Date.now()),name:res.name||name,pass:h,
+      gender:res.gender||"boy",age:res.age||"6–8",data:res.data||{}};
+    save(old.filter(function(x){return x.id!==p.id&&(x.name||"").toLowerCase()!==name.toLowerCase()}).concat([p]));
+    applyBag(p.data);localStorage.setItem(ACTIVE,p.id);applyProfile(p);
+    joinFeedback("Anmeldung erfolgreich.","success");closeJoin();renderList();
+    try{sessionStorage.setItem("kids.profile.restoreTab","view-parents")}catch(e){}
+    location.reload();
+  }
+  function submitJoin(mode){
+    if(joinBusy)return;
+    var name=(document.getElementById("joinName").value||"").trim();
+    var pw=document.getElementById("joinPass").value||"";
+    if(name.length<2){joinFeedback("Bitte einen Namen mit mindestens zwei Zeichen eingeben.","error");return}
+    if(pw.length<4){joinFeedback("Bitte ein Passwort mit mindestens vier Zeichen eingeben.","error");return}
+    if(mode!=="login")document.getElementById("joinLoginExisting").hidden=true;
+    joinPending(true);
+    joinFeedback(mode==="login"?"Anmeldung wird geprüft …":"Konto wird geprüft …","info");
+    hash(pw).then(function(h){
+      return rpc("kids_login",{p_name:name,p_hash:h}).then(function(existing){
+        if(existing&&existing.ok===true){acceptExistingAccount(name,h,existing);return}
+        if(mode==="login"){joinExistingHint("Name oder Passwort passt nicht. Bitte erneut versuchen.");return}
+        if(existing&&/Keine Verbindung/i.test(existing.error||"")){joinFeedback(existing.error,"error");return}
+        return rpc("kids_register",{p_name:name,p_hash:h,p_gender:draft.gender,p_age:draft.age,p_data:bag()}).then(function(res){
+          if(!res||res.ok!==true){
+            if(/vergeben/i.test(res&&res.error||""))joinExistingHint();
+            else joinFeedback(res&&res.error||"Konto konnte nicht angelegt werden. Bitte erneut versuchen.","error");
+            return;
+          }
+          if(res.linked){return rpc("kids_login",{p_name:name,p_hash:h}).then(function(r){acceptExistingAccount(name,h,r)})}
+          rememberCurrent();
+          var app=document.querySelector(".app");
+          if(app)app.setAttribute("data-gender",draft.gender);
+          var ageBtn=document.querySelector('.age-tabs [data-age="'+draft.age+'"]');
+          if(ageBtn)ageBtn.click();
+          var p={id:String(Date.now()),name:name,pass:h,gender:draft.gender,age:draft.age,data:bag()};
+          var list=load();list.push(p);save(list);localStorage.setItem(ACTIVE,p.id);
+          joinFeedback("Konto erfolgreich angelegt.","success");closeJoin();renderList();
+        });
+      });
+    }).catch(function(){joinFeedback("Verbindung oder Passwortverarbeitung fehlgeschlagen. Bitte erneut versuchen.","error")})
+      .finally(function(){joinPending(false)});
+  }
   function step(name){
     if(name==="place")name="name";
+    joinFeedback("","info");document.getElementById("joinLoginExisting").hidden=true;
     join.querySelectorAll(".step").forEach(function(s){s.classList.toggle("on",s.getAttribute("data-step")===name)});
     var card=join.querySelector(".kids-join-card");
     if(card)card.scrollTop=0;
@@ -6467,6 +6538,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     var has=!!localStorage.getItem(ACTIVE);
     join.querySelectorAll(".join-skip").forEach(function(b){b.style.display=has?"none":"block"});
     if(cancel)cancel.style.display=has?"block":"none";
+    joinFeedback("","info");document.getElementById("joinLoginExisting").hidden=true;
     step(from||"hello");
   }
   function closeJoin(){
@@ -6573,28 +6645,8 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   });
   var cancel=document.getElementById("joinCancel");
   if(cancel)cancel.addEventListener("click",function(){if(localStorage.getItem(ACTIVE))closeJoin()});
-  document.getElementById("joinSave").addEventListener("click",function(){
-    var name=(document.getElementById("joinName").value||"").trim();
-    var pw=document.getElementById("joinPass").value||"";
-    if(name.length<2||pw.length<4){window.alert("Name und ein Passwort mit mindestens 4 Zeichen.");return}
-    hash(pw).then(function(h){
-      rememberCurrent();
-      rpc("kids_register",{p_name:name,p_hash:h,p_gender:draft.gender,p_age:draft.age,p_data:bag()}).then(function(res){
-        if(!res||res.ok!==true){window.alert((res&&res.error)||"Dieser Anmeldename ist schon vergeben.");return}
-        var app=document.querySelector(".app");
-        if(app)app.setAttribute("data-gender",draft.gender);
-        var ageBtn=document.querySelector('.age-tabs [data-age="'+draft.age+'"]');
-        if(ageBtn)ageBtn.click();
-        var p={id:String(Date.now()),name:name,pass:h,gender:draft.gender,age:draft.age,data:bag()};
-        var list=load();
-        list.push(p);
-        save(list);
-        localStorage.setItem(ACTIVE,p.id);
-        closeJoin();
-        renderList();
-      });
-    });
-  });
+  document.getElementById("joinSave").addEventListener("click",function(){submitJoin("register")});
+  document.getElementById("joinLoginExisting").addEventListener("click",function(){submitJoin("login")});
   var add=document.getElementById("profileAdd");
   if(add)add.addEventListener("click",function(){draft={gender:"boy",age:"6–8"};openJoin(load().length?"who":"hello")});
   join.querySelectorAll(".join-skip").forEach(function(b){b.addEventListener("click",skipJoin)});
@@ -6665,9 +6717,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   }else openJoin("hello");
   renderList();
   if(add)add.textContent=load().length?"Weiteres Kind":"Konto anlegen";
-  load().forEach(function(p){
-    if(p.name&&p.pass)rpc("kids_register",{p_name:p.name,p_hash:p.pass,p_gender:p.gender||"boy",p_age:p.age||"6–8",p_data:p.data||{}});
-  });
+  /* Never re-register local profiles at startup: this can overwrite cloud progress. */
   window.addEventListener("pagehide",rememberCurrent);
 })();
 </script>

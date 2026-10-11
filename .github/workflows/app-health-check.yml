@@ -19,6 +19,9 @@ jobs:
         with:
           node-version: "20"
 
+      - name: Kids visitor account registration guard
+        run: node scripts/test-kids-account-registration-v1.js
+
       - name: Run app health check
         run: node scripts/app-health-check.js
 
