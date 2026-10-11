@@ -155,14 +155,17 @@
   ],
   "unlockedScopes": [
     {
-      "id": "kids-akademie-v23-208-planning-stems-12-strands-20261011",
+      "id": "quellen-royal-manuskript-v42-only-20261011",
       "at": "2026-10-11T19:15:00+02:00",
-      "approvedBy": "user-request-expand-all-kids-lessons-including-tawhid-iman-ikhlas-adab-akhlaq-tarbiyah-nafs-all-ages-20261011",
-      "reason": "208-Unterrichts-Sollplan, 170 unfreigeschaltete Redaktionsentwuerfe und Null-Credit-Verifikation aller 3 Alterskonzepte; nur bestehende Akademie-CI beruehren, keine unverifizierte religioese Aussage oder Audio im Kinderplayer.",
+      "approvedBy": "user-explicit-quellen-seite-komplett-umbauen-live-push-20261011",
+      "reason": "Nur Quellenbibliothek und bestehende Q-Detailseiten zentral auf die freigegebene Royal-Manuskript-V4.2-Darstellung (nahezu weiss, Original-Logo, Signatur) umbauen und automatischen Stil fuer neue Q-Links sicherstellen. Keine Veraenderung an Quelleninhalten, Kids, Apps, Push, Admin, Domain-Secrets oder Zahlungsfunktionen.",
       "paths": [
-        ".github/workflows/check-kids-academy-v9.yml"
+        "assets/quellen-library.css",
+        "assets/q-royal-manuscript-v42.css",
+        "assets/q-royal-manuscript-v42.js",
+        ".github/workflows/check-quellen-library.yml"
       ],
-      "expiresAt": "2026-10-18T23:59:00.000Z"
+      "expiresAt": "2026-11-11T23:59:00.000Z"
     },
     {
       "id": "public-website-app-loader-removal-20261011",
