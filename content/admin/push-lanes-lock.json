@@ -7,7 +7,7 @@
   "unlockPolicy": "Strenge Dreifach-Sperre: 1) ausdrücklicher Nutzerauftrag in dieser Unterhaltung, 2) Kennwort push-password:… im Commit, 3) globale Freigabe plus Spur-Freigabe. Ohne Anfrage bleibt jeder Push-Code unverändert, auch bei Layout-, PDF-, Build- oder Inhaltsänderungen.",
   "globalApprovalRequired": true,
   "passwordRequired": true,
-  "unlockPasswordSha256": "88c5d00e83bd7611814a2ecaac762beeed85a518c2690eada74260e5cea9ccf7",
+  "unlockPasswordSha256": "323b8fa03b8a039dab86e95d99da3fd65397abc63c89f381e4a7c8d818f5df8d",
   "globalUnlockPhrases": ["push-global-freigabe"],
   "liveOnExplicitPushCommand": true,
   "requiredGuardMarker": "PUSH_LANES_GUARD",
