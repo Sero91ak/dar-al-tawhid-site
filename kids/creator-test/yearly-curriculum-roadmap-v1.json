@@ -1,5 +1,5 @@
 {
-  "version": "2026-10-11-kids-annual-editorial-outline-v1",
+  "version": "2026-10-11-kids-annual-editorial-outline-v2-with-6-test-drafts",
   "branch": "kids-creator-staging",
   "audience": "EDITORIAL THEMATIC PLAN, NOT FINAL LESSONS; no authentic religious claims until source review",
   "curriculumYear": {
@@ -16,7 +16,9 @@
       "Samstag:review",
       "Sonntag:flexible"
     ],
-    "calendarNote": "52 teaching weeks=364 days; Gregorian annual anchoring needs 1 or 2 flexible bridge days, not false publication dates."
+    "calendarNote": "52 teaching weeks=364 days; Gregorian annual anchoring needs 1 or 2 flexible bridge days, not false publication dates.",
+    "authoredTestDraftsPendingApproval": 6,
+    "additionalAuthenticallyApprovedLessonsNeeded": 170
   },
   "tiers": {
     "4-5": "Kurze sprachlich einfache Erklärung, Anschauung und Bewegung/Zuordnung mit Eltern; kein Leistungsdruck",
@@ -268,10 +270,13 @@
       "weeklyTheme": "Familie und Verantwortung",
       "category": "tarbiyyah",
       "title": "Kleine Aufgaben mit Freude übernehmen",
-      "status": "THEMATIC_PLAN_ONLY",
+      "status": "SOURCE_CHECKED_DRAFT_NOT_APPROVED",
       "completedLesson": false,
-      "originalSourcesVerified": false,
-      "originalSourceRefs": [],
+      "originalSourcesVerified": true,
+      "originalSourceRefs": [
+        "https://quran.com/5/2",
+        "https://dorar.net/hadith/sharh/6702"
+      ],
       "textByAgeApproved": {
         "4-5": false,
         "6-8": false,
@@ -284,7 +289,18 @@
       },
       "masterVoiceApproved": false,
       "previewPassed": false,
-      "visitorReleased": false
+      "visitorReleased": false,
+      "draftLessonId": "tarbiyyah-kleine-aufgaben",
+      "textByAgeDrafted": {
+        "4-5": true,
+        "6-8": true,
+        "9-10": true
+      },
+      "quizByAgeDrafted": {
+        "4-5": true,
+        "6-8": true,
+        "9-10": true
+      }
     },
     {
       "slot": 40,
@@ -293,10 +309,13 @@
       "weeklyTheme": "Familie und Verantwortung",
       "category": "familie",
       "title": "Geschwister freundlich behandeln",
-      "status": "THEMATIC_PLAN_ONLY",
+      "status": "SOURCE_CHECKED_DRAFT_NOT_APPROVED",
       "completedLesson": false,
-      "originalSourcesVerified": false,
-      "originalSourceRefs": [],
+      "originalSourcesVerified": true,
+      "originalSourceRefs": [
+        "https://quran.com/49/10",
+        "https://dorar.net/hadith/sharh/7323"
+      ],
       "textByAgeApproved": {
         "4-5": false,
         "6-8": false,
@@ -309,7 +328,18 @@
       },
       "masterVoiceApproved": false,
       "previewPassed": false,
-      "visitorReleased": false
+      "visitorReleased": false,
+      "draftLessonId": "familie-geschwister-freundlich",
+      "textByAgeDrafted": {
+        "4-5": true,
+        "6-8": true,
+        "9-10": true
+      },
+      "quizByAgeDrafted": {
+        "4-5": true,
+        "6-8": true,
+        "9-10": true
+      }
     },
     {
       "slot": 41,
@@ -318,10 +348,13 @@
       "weeklyTheme": "Īmān: Grundlagen vertiefen",
       "category": "iman",
       "title": "Die offenbarten Bücher kennenlernen",
-      "status": "THEMATIC_PLAN_ONLY",
+      "status": "SOURCE_CHECKED_DRAFT_NOT_APPROVED",
       "completedLesson": false,
-      "originalSourcesVerified": false,
-      "originalSourceRefs": [],
+      "originalSourcesVerified": true,
+      "originalSourceRefs": [
+        "https://quran.com/2/285",
+        "https://dorar.net/hadith-category/cat/03b822dd45180cf718df7318ece60018"
+      ],
       "textByAgeApproved": {
         "4-5": false,
         "6-8": false,
@@ -334,7 +367,18 @@
       },
       "masterVoiceApproved": false,
       "previewPassed": false,
-      "visitorReleased": false
+      "visitorReleased": false,
+      "draftLessonId": "iman-offenbarte-buecher",
+      "textByAgeDrafted": {
+        "4-5": true,
+        "6-8": true,
+        "9-10": true
+      },
+      "quizByAgeDrafted": {
+        "4-5": true,
+        "6-8": true,
+        "9-10": true
+      }
     },
     {
       "slot": 42,
@@ -343,10 +387,13 @@
       "weeklyTheme": "Īmān: Grundlagen vertiefen",
       "category": "iman",
       "title": "Der Glaube an den Jüngsten Tag",
-      "status": "THEMATIC_PLAN_ONLY",
+      "status": "SOURCE_CHECKED_DRAFT_NOT_APPROVED",
       "completedLesson": false,
-      "originalSourcesVerified": false,
-      "originalSourceRefs": [],
+      "originalSourcesVerified": true,
+      "originalSourceRefs": [
+        "https://quran.com/2/4",
+        "https://dorar.net/hadith-category/cat/03b822dd45180cf718df7318ece60018"
+      ],
       "textByAgeApproved": {
         "4-5": false,
         "6-8": false,
@@ -359,7 +406,18 @@
       },
       "masterVoiceApproved": false,
       "previewPassed": false,
-      "visitorReleased": false
+      "visitorReleased": false,
+      "draftLessonId": "iman-juengster-tag",
+      "textByAgeDrafted": {
+        "4-5": true,
+        "6-8": true,
+        "9-10": true
+      },
+      "quizByAgeDrafted": {
+        "4-5": true,
+        "6-8": true,
+        "9-10": true
+      }
     },
     {
       "slot": 43,
@@ -368,10 +426,13 @@
       "weeklyTheme": "Īmān: Grundlagen vertiefen",
       "category": "iman",
       "title": "Allahs Wissen und Weisheit",
-      "status": "THEMATIC_PLAN_ONLY",
+      "status": "SOURCE_CHECKED_DRAFT_NOT_APPROVED",
       "completedLesson": false,
-      "originalSourcesVerified": false,
-      "originalSourceRefs": [],
+      "originalSourcesVerified": true,
+      "originalSourceRefs": [
+        "https://quran.com/2/32",
+        "https://dorar.net/h/HkHepnlN"
+      ],
       "textByAgeApproved": {
         "4-5": false,
         "6-8": false,
@@ -384,7 +445,18 @@
       },
       "masterVoiceApproved": false,
       "previewPassed": false,
-      "visitorReleased": false
+      "visitorReleased": false,
+      "draftLessonId": "iman-allahs-wissen-weisheit",
+      "textByAgeDrafted": {
+        "4-5": true,
+        "6-8": true,
+        "9-10": true
+      },
+      "quizByAgeDrafted": {
+        "4-5": true,
+        "6-8": true,
+        "9-10": true
+      }
     },
     {
       "slot": 44,
@@ -393,10 +465,13 @@
       "weeklyTheme": "Īmān: Grundlagen vertiefen",
       "category": "aqidah",
       "title": "Fragen über den Glauben respektvoll stellen",
-      "status": "THEMATIC_PLAN_ONLY",
+      "status": "SOURCE_CHECKED_DRAFT_NOT_APPROVED",
       "completedLesson": false,
-      "originalSourcesVerified": false,
-      "originalSourceRefs": [],
+      "originalSourcesVerified": true,
+      "originalSourceRefs": [
+        "https://quran.com/16/43",
+        "https://dorar.net/hadith-category/cat/03b822dd45180cf718df7318ece60018"
+      ],
       "textByAgeApproved": {
         "4-5": false,
         "6-8": false,
@@ -409,7 +484,18 @@
       },
       "masterVoiceApproved": false,
       "previewPassed": false,
-      "visitorReleased": false
+      "visitorReleased": false,
+      "draftLessonId": "aqidah-fragen-respektvoll",
+      "textByAgeDrafted": {
+        "4-5": true,
+        "6-8": true,
+        "9-10": true
+      },
+      "quizByAgeDrafted": {
+        "4-5": true,
+        "6-8": true,
+        "9-10": true
+      }
     },
     {
       "slot": 45,
