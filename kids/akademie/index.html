@@ -3633,6 +3633,7 @@ body .lesson-source-block .source{font-size:12px}
     <label style="font-size:11px">Alter<select id="creatorAcademyAge" aria-label="Test-Altersgruppe" style="width:100%;min-height:38px;border-radius:8px;background:#143a4a;color:white;border:1px solid #9b9e9c;padding:5px"><option value="4-5">4–5 Jahre</option><option value="6-8">6–8 Jahre</option><option value="9-10">9–10 Jahre</option></select></label>
     <label style="font-size:11px">Profil<select id="creatorAcademyGender" aria-label="Testprofil" style="width:100%;min-height:38px;border-radius:8px;background:#143a4a;color:white;border:1px solid #9b9e9c;padding:5px"><option value="girl">Mädchen</option><option value="boy">Junge</option></select></label>
     <label style="grid-column:1 / -1;font-size:11px">Unterricht direkt öffnen<select id="creatorAcademyLesson" aria-label="Alle vorhandenen Unterrichtslektionen" style="width:100%;min-height:42px;border-radius:8px;background:#143a4a;color:white;border:1px solid #9b9e9c;padding:6px"><option value="">38 vorhandene Lektionen auswählen …</option></select></label>
+    <button type="button" id="creatorAcademyEdit" style="grid-column:1 / -1;min-height:38px;border:1px solid #e5c887;border-radius:9px;background:#e9d39e;color:#133341;font-weight:800;font-size:13px">✏️ Diese Lektion bearbeiten</button>
   </div>
 </aside>
 <header class="academy-header kids-detail-appbar" aria-label="Navigationsleiste Lernakademie">
@@ -3749,6 +3750,23 @@ body .lesson-source-block .source{font-size:12px}
  <div class="lesson-meta">Du lernst in deinem Tempo. Fragen kannst du per Auswahl, Sprache oder Text beantworten. Du kannst jederzeit eine Pause machen.</div>
 </section>
 </main>
+<dialog id="creatorAcademyDraftDialog" aria-label="Unterricht in KIDS TEST bearbeiten" style="width:min(95vw,580px);max-height:calc(100dvh - 24px);overflow-y:auto;border:1px solid #bda477;border-radius:18px;background:#0c3040;color:#fdf2dd;padding:18px">
+ <h2 style="margin:0 0 9px;font-size:23px;color:#ead498">Unterricht bearbeiten · KIDS TEST</h2>
+ <p style="font-size:13px;color:#d3e3e4;margin:0 0 12px">Bearbeite den Text und prüfe das Ergebnis direkt im Unterricht. Nur auf diesem Gerät gespeichert – kein Besucher-Push.</p>
+ <div style="display:grid;gap:9px">
+ <label style="display:grid;gap:5px">Titel<input id="creatorDraftTitle" maxlength="150" style="width:100%;padding:11px;border-radius:9px;background:#082334;color:white;border:1px solid #9b9e9c" /></label>
+ <label style="display:grid;gap:5px">Einführung<textarea id="creatorDraftLead" maxlength="900" rows="2" style="width:100%;padding:11px;border-radius:9px;background:#082334;color:white;border:1px solid #9b9e9c"></textarea></label>
+ <label style="display:grid;gap:5px">Lernziel<textarea id="creatorDraftGoal" maxlength="900" rows="2" style="width:100%;padding:11px;border-radius:9px;background:#082334;color:white;border:1px solid #9b9e9c"></textarea></label>
+ <label style="display:grid;gap:5px">Erklärung für die ausgewählte Altersgruppe<textarea id="creatorDraftExplanation" maxlength="1800" rows="4" style="width:100%;padding:11px;border-radius:9px;background:#082334;color:white;border:1px solid #9b9e9c"></textarea></label>
+ </div>
+ <p id="creatorDraftSources" style="font-size:12px;color:#cfdfdd"></p>
+ <p style="font-size:11px;color:#e0c899">Qurʾān- und Ḥadīṯ-Belege bleiben unverändert und müssen vor einer späteren Veröffentlichung gesondert geprüft werden.</p>
+ <div style="display:flex;gap:8px;flex-wrap:wrap">
+ <button id="creatorDraftSave" type="button" style="flex:1;min-height:45px;border-radius:10px;background:#e9d39e;color:#132b38;font-weight:800">Speichern &amp; ansehen</button>
+ <button id="creatorDraftClose" type="button" style="flex:1;min-height:45px;border-radius:10px;background:#214b5d;color:white">Schließen</button>
+ <button id="creatorDraftReset" type="button" style="width:100%;min-height:43px;border-radius:10px;background:#352b35;color:#ffdcc5">Nur lokalen Entwurf entfernen</button>
+ </div>
+</dialog>
 <script src="/kids/akademie/curriculum-v1.js?v=20261010-01"></script>
 <script src="/kids/akademie/curriculum-v2.js?v=20261010-09"></script>
 <script src="/kids/akademie/curriculum-v22.js?v=20261011-01"></script>
