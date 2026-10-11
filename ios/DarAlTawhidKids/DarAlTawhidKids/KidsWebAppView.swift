@@ -35,7 +35,20 @@ struct KidsWebAppView: UIViewRepresentable {
         configuration.userContentController.addUserScript(
             WKUserScript(source: bridge, injectionTime: .atDocumentStart, forMainFrameOnly: true)
         )
+        // Keep playback/user-agent compatibility, but never use this marker
+        // as proof of owner authorization on the website.
+#if KIDS_CREATOR_TEST
+        configuration.applicationNameForUserAgent = "DarAlTawhidKids-iOS CreatorTest"
+        configuration.userContentController.addUserScript(
+            WKUserScript(
+                source: "window.DAR_KIDS_TEST_CONTAINER=true;document.documentElement.setAttribute('data-kids-container','creator-test');",
+                injectionTime: .atDocumentStart,
+                forMainFrameOnly: true
+            )
+        )
+#else
         configuration.applicationNameForUserAgent = "DarAlTawhidKids-iOS"
+#endif
 
         let webView = WKWebView(frame: .zero, configuration: configuration)
         webView.scrollView.contentInsetAdjustmentBehavior = .never
