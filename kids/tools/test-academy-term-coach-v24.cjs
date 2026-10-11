@@ -15,7 +15,11 @@ for(const item of api.entries){
  assert.ok(item.reviewStatus.includes("review"));
  for(const age of ages){
   assert.ok(item.age[age]?.length>=(age==="4-5"?8:12),age+" "+item.id);
-  assert.ok(api.phrase(item,age).startsWith(item.term+" bedeutet: "));
+  const spoken=api.phrase(item,age);
+  assert.ok(spoken&&spoken.length>10,"Every age needs a natural explanation for "+item.id);
+  assert.ok(!spoken.includes(item.term+" bedeutet: "+item.term),"Never repeat the same Islamic term within a spoken definition: "+item.id+" "+age);
+  assert.ok(spoken.startsWith(item.term)||item.id==="tazkiyah"&&spoken.startsWith("Tazkiyat an-Nafs")||
+   item.id==="salam"&&spoken.startsWith("As-salāmu"),"Speak the term naturally: "+item.id+" "+age);
  }
  assert.notEqual(item.age["4-5"],item.age["6-8"]);
  assert.notEqual(item.age["6-8"],item.age["9-10"]);
