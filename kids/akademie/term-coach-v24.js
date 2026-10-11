@@ -687,9 +687,9 @@ function mount(host,lesson,age,options={}){
   btn.setAttribute("aria-expanded","false");btn.setAttribute("aria-label",term.term+" einfach erklären");
   btn.addEventListener("click",()=>{
    options.stopAudio?.();
-   const previouslyOpen=active===term.id&&!detail.hidden;
+   // Preschool sees the first explanation already expanded. Tapping the word
+   // must still start its approved voice clip; do not interpret it as a close.
    for(const x of line.children)x.setAttribute("aria-expanded","false");
-   if(previouslyOpen){detail.hidden=true;active=null;return}
    active=term.id;btn.setAttribute("aria-expanded","true");detail.hidden=false;
    title.textContent=term.term;
    desc.textContent=term.age[age]||term.age["6-8"];
