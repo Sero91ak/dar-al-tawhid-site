@@ -7,6 +7,7 @@ on:
       - ".github/workflows/kids-mein-gebet-draft-qa.yml"
       - "kids/mein-gebet/rigging/**"
       - "kids/mein-gebet/vorschau.html"
+      - "kids/mein-gebet/vorschau-v78-interaktiv.html"
       - "kids/mein-gebet/demo-*.html"
       - "kids/mein-gebet/assets/**"
   pull_request:
@@ -15,6 +16,7 @@ on:
       - ".github/workflows/kids-mein-gebet-draft-qa.yml"
       - "kids/mein-gebet/rigging/**"
       - "kids/mein-gebet/vorschau.html"
+      - "kids/mein-gebet/vorschau-v78-interaktiv.html"
       - "kids/mein-gebet/demo-*.html"
       - "kids/mein-gebet/assets/**"
 
