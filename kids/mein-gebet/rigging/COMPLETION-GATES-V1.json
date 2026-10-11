@@ -75,7 +75,7 @@
       },
       "sourceImageDecodedInConnectedRepository": true,
       "sourceImageVisualTraitsInspected": true,
-      "glbAppearanceComparedToSource": false,
+      "glbAppearanceComparedToSource": true,
       "multiviewReferencesRecoveredInCurrentChat": true,
       "referencesPersistentRepoBinaryCopy": false,
       "multiviewReferenceManifest": "rigging/REFERENCE-RECOVERY-CORRECTION-20261011.md",
@@ -84,7 +84,7 @@
         "manifest": "/Kinder App/Mein_Gebet_Originale_20261011/original-reference-manifest.json",
         "verifiedFiles": 5,
         "sha256Verified": true,
-        "modelComparedToRender": false,
+        "modelComparedToRender": true,
         "rigApproved": false
       },
       "referencesPersistentLibraryCopy": true,
@@ -106,7 +106,23 @@
         "buildAndSixIndependentCameraRendersVerified": true,
         "googleDriveFolderUrl": "https://drive.google.com/drive/folders/1P7KV_hNQentSF9g-oMS-ssIikDUjYFQu",
         "googleDriveByteRoundTripSHA256Verified": true,
-        "nextBlockingWork": "Rebuild face, scarf folds, dress silhouette exactly from original images; independently approve likeness; then rig and animate; do not merge."
+        "nextBlockingWork": "Model exact source girl face and naturally folding full-coverage hijab in all directions; preserve child proportions. No rig or prayer action until human likeness review.",
+        "v03v06DriveFolderUrl": "https://drive.google.com/drive/folders/1gziPdSbzcOUuVSmJRGrKGLFQuBoM8Nos",
+        "v06Sha256": "3021ad1e1ac9644af6d11e7b138ebfe1c7607dfd7947e18cbbcc9109bf4e197e",
+        "v06Bytes": 660088,
+        "v06GeometryCount": 159,
+        "v06TriangleCount": 74876,
+        "v06SixRealCamerasVerified": true,
+        "v06VsOriginalPhotoComparisonPerformed": true,
+        "v06VsOriginalPhotoComparisonResult": "REJECTED: face, hijab drape, sleeve shape, side facial alignment and original identity still noticeably different",
+        "v06Independent3D": true,
+        "v06HasSkin": false,
+        "v06AnimationCount": 0,
+        "v06HumanApproved": false,
+        "v06SourceOriginalsUnchanged": true,
+        "v06GoogleDriveRoundTripSHA256Verified": true,
+        "v06BuildScriptsAndFilesCount": 24,
+        "v04Rejected": "Rectangular hijab side curtains: visually failed; retained only as historical draft"
       }
     }
   },
