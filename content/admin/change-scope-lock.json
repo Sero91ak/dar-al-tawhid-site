@@ -155,6 +155,14 @@
   ],
   "unlockedScopes": [
     {
+      "id": "quellen-library-regression-test-hotfix-20261011",
+      "at": "2026-10-11T14:55:00+02:00",
+      "approvedBy": "user-explicit-quellenbibliothek-sofort-reparieren-20261011",
+      "reason": "Sichere Quellenseiten-Routing-Reparatur Q1-Q40: nur bereits geprueftes, read-only Q-Regressions-Testskript fuer den gesperrten Produktionsdeploy freischalten. Globale Sperre, Kinder-App, Push und alle Quellen bleiben unveraendert.",
+      "paths": ["scripts/check-quellen-client.cjs"],
+      "expiresAt": "2026-10-18T23:59:00.000Z"
+    },
+    {
       "id": "kids-test-v22-all-three-ages-preview-20261011",
       "at": "2026-10-11T13:40:00+02:00",
       "approvedBy": "user-explicit-continue-authentic-age-appropriate-kids-lessons-20261011",
