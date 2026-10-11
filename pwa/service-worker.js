@@ -1,10 +1,72 @@
-/* DĀR AL TAWḤĪD — isolated Android PWA service worker. Scope /pwa/ only. */
+/* DĀR AL TAWḤĪD — isolated Android PWA service worker. Scope /pwa/ only.
+ * Cold-start v3: return navigation immediately; cache the app shell in the
+ * background. In particular, NEVER fetch the 2.5 MB shell during install.
+ * The public website, OneSignal, iOS and Kids workers are unaffected.
+ */
 const CACHE_PREFIX='dar-al-tawhid-pwa-';
-const CACHE_VERSION=CACHE_PREFIX+'v2';
+const CACHE_VERSION=CACHE_PREFIX+'v3';
 const SHELL_URL='/pwa/?pwa=1';
-async function cacheShell(r){if(!r||!r.ok)return r;const c=await caches.open(CACHE_VERSION);await c.put(SHELL_URL,r.clone());return r}
-self.addEventListener('install',e=>e.waitUntil((async()=>{try{await cacheShell(await fetch(SHELL_URL,{cache:'no-store'}))}catch(x){}await self.skipWaiting()})()));
-self.addEventListener('activate',e=>e.waitUntil((async()=>{const ks=await caches.keys();await Promise.all(ks.filter(k=>k.startsWith(CACHE_PREFIX)&&k!==CACHE_VERSION).map(k=>caches.delete(k)));await self.clients.claim()})()));
-self.addEventListener('message',e=>{const t=String(e.data&&e.data.type||'');if(t==='SKIP_WAITING')self.skipWaiting();if(t==='CLEAR_PWA_CACHE')e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k.startsWith(CACHE_PREFIX)).map(k=>caches.delete(k)))))});
-function cacheable(u,r){if(r.method!=='GET'||u.origin!==self.location.origin||r.headers.has('range'))return false;if(u.pathname.startsWith('/admin/')||u.pathname.startsWith('/kids/')||u.pathname.startsWith('/test/')||u.pathname.startsWith('/push/onesignal/'))return false;return /^(?:\/assets\/|\/content\/|\/data\/|\/q\/|\/quellen\/|\/widgets\/|\/apple-tv\/)/.test(u.pathname)||/\.(?:css|js|json|png|jpe?g|webp|svg|woff2?|mp3|m4a|aac|ogg)$/i.test(u.pathname)}
-self.addEventListener('fetch',e=>{const r=e.request;if(r.method!=='GET')return;const u=new URL(r.url);if(r.mode==='navigate'){if(u.pathname==='/pwa/install'||u.pathname.startsWith('/pwa/install/'))return;if(!u.pathname.startsWith('/pwa'))return;e.respondWith(fetch(r,{cache:'no-store'}).then(cacheShell).catch(()=>caches.open(CACHE_VERSION).then(c=>c.match(SHELL_URL))).then(x=>x||Response.error()));return}if(u.pathname==='/manifest.json'||u.pathname==='/version.json'){e.respondWith(fetch(r,{cache:'no-store'}));return}if(!cacheable(u,r))return;e.respondWith(fetch(r,{cache:'no-store'}).then(async x=>{if(x&&x.ok){const c=await caches.open(CACHE_VERSION);c.put(r,x.clone()).catch(()=>null)}return x}).catch(()=>caches.open(CACHE_VERSION).then(c=>c.match(r))))});
+
+async function cacheShell(response) {
+  if (!response || !response.ok) return;
+  const cache=await caches.open(CACHE_VERSION);
+  await cache.put(SHELL_URL,response);
+}
+
+self.addEventListener('install',event=>{
+  // Pre-fetching the large app shell here can compete with the first launch.
+  event.waitUntil(self.skipWaiting());
+});
+self.addEventListener('activate',event=>event.waitUntil((async()=>{
+  const names=await caches.keys();
+  await Promise.all(names.filter(name=>name.startsWith(CACHE_PREFIX)&&name!==CACHE_VERSION).map(name=>caches.delete(name)));
+  await self.clients.claim();
+})()));
+self.addEventListener('message',event=>{
+  const type=String(event.data&&event.data.type||'');
+  if(type==='SKIP_WAITING')self.skipWaiting();
+  if(type==='CLEAR_PWA_CACHE')event.waitUntil(caches.keys().then(names=>
+    Promise.all(names.filter(name=>name.startsWith(CACHE_PREFIX)).map(name=>caches.delete(name)))));
+});
+function cacheable(url,request){
+  if(request.method!=='GET'||url.origin!==self.location.origin||request.headers.has('range'))return false;
+  if(url.pathname.startsWith('/admin/')||url.pathname.startsWith('/kids/')||url.pathname.startsWith('/test/')||url.pathname.startsWith('/push/onesignal/'))return false;
+  return /^(?:\/assets\/|\/content\/|\/data\/|\/q\/|\/quellen\/|\/widgets\/|\/apple-tv\/)/.test(url.pathname)||
+    /\.(?:css|js|json|png|jpe?g|webp|svg|woff2?|mp3|m4a|aac|ogg)$/i.test(url.pathname);
+}
+self.addEventListener('fetch',event=>{
+  const request=event.request;
+  if(request.method!=='GET')return;
+  const url=new URL(request.url);
+  if(request.mode==='navigate'){
+    if(url.pathname==='/pwa/install'||url.pathname.startsWith('/pwa/install/'))return;
+    if(!url.pathname.startsWith('/pwa'))return;
+    event.respondWith((async()=>{
+      try {
+        const response=await fetch(request,{cache:'no-store'});
+        if(response && response.ok){
+          // Do not await CacheStorage.put: it must not block the first frame.
+          const writing=cacheShell(response.clone()).catch(()=>null);
+          event.waitUntil(writing);
+        }
+        return response;
+      } catch(error) {
+        const cache=await caches.open(CACHE_VERSION);
+        return (await cache.match(SHELL_URL))||Response.error();
+      }
+    })());
+    return;
+  }
+  if(url.pathname==='/manifest.json'||url.pathname==='/version.json'){
+    event.respondWith(fetch(request,{cache:'no-store'}));
+    return;
+  }
+  if(!cacheable(url,request))return;
+  event.respondWith(fetch(request,{cache:'no-store'}).then(async response=>{
+    if(response&&response.ok){
+      const cache=await caches.open(CACHE_VERSION);
+      cache.put(request,response.clone()).catch(()=>null);
+    }
+    return response;
+  }).catch(()=>caches.open(CACHE_VERSION).then(cache=>cache.match(request))));
+});
