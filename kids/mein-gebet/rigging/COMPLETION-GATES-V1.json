@@ -40,7 +40,16 @@
       },
       "multiviewReferencesRecoveredInCurrentChat": true,
       "referencesPersistentRepoBinaryCopy": false,
-      "multiviewReferenceManifest": "rigging/REFERENCE-RECOVERY-CORRECTION-20261011.md"
+      "multiviewReferenceManifest": "rigging/REFERENCE-RECOVERY-CORRECTION-20261011.md",
+      "multiviewReferenceArchive": {
+        "path": "/Kinder App/Mein_Gebet_Originale_20261011/Originale_10_Ansichten_20261011.zip",
+        "manifest": "/Kinder App/Mein_Gebet_Originale_20261011/original-reference-manifest.json",
+        "verifiedFiles": 5,
+        "sha256Verified": true,
+        "modelComparedToRender": false,
+        "rigApproved": false
+      },
+      "referencesPersistentLibraryCopy": true
     },
     "girl": {
       "source": "kids/mein-gebet/assets/figur-maedchen-original.png",
@@ -59,7 +68,16 @@
       "glbAppearanceComparedToSource": false,
       "multiviewReferencesRecoveredInCurrentChat": true,
       "referencesPersistentRepoBinaryCopy": false,
-      "multiviewReferenceManifest": "rigging/REFERENCE-RECOVERY-CORRECTION-20261011.md"
+      "multiviewReferenceManifest": "rigging/REFERENCE-RECOVERY-CORRECTION-20261011.md",
+      "multiviewReferenceArchive": {
+        "path": "/Kinder App/Mein_Gebet_Originale_20261011/Originale_10_Ansichten_20261011.zip",
+        "manifest": "/Kinder App/Mein_Gebet_Originale_20261011/original-reference-manifest.json",
+        "verifiedFiles": 5,
+        "sha256Verified": true,
+        "modelComparedToRender": false,
+        "rigApproved": false
+      },
+      "referencesPersistentLibraryCopy": true
     }
   },
   "previewIsNotReleaseEvidence": true,
@@ -105,6 +123,20 @@
           "verified": true,
           "source": "Repository original 2D image decoded and visually inspected; NOT compared to real GLB.",
           "humanApproved": false
+        },
+        {
+          "type": "girl_multiview_reference",
+          "ref": "/Kinder App/Mein_Gebet_Originale_20261011/original-reference-manifest.json",
+          "verified": true,
+          "humanApproved": false,
+          "source": "Five matching original 2D girl views uploaded to persistent Library, their individual SHA-256 checks measured; visual 3D identity unapproved."
+        },
+        {
+          "type": "boy_multiview_reference",
+          "ref": "/Kinder App/Mein_Gebet_Originale_20261011/original-reference-manifest.json",
+          "verified": true,
+          "humanApproved": false,
+          "source": "Five original 2D boy views uploaded to persistent Library, individual SHA-256 checks measured; visual 3D identity unapproved."
         }
       ]
     },
