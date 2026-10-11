@@ -80,3 +80,36 @@ Der Kids-Worker verwendet `kids/creator-test/wrangler.toml` und
 KIDS-only-Routenfilter. Der Worker verweigert alle nicht-KIDS-Pfade, Tools,
 API-Aufrufe und Administratorbereiche. Die öffentlich bekannte workers.dev-
 URL ist derzeit **noch keine private Ersteller-Authentifizierung**.
+
+## KIDS TEST Web-App · eigenständig auf iPhone installieren (11.10.2026)
+**Web-App:** https://dar-al-tawhid-kids-creator.sero91ak.workers.dev/kids/test-console/
+
+Safari auf iPhone → Teilen → **Zum Home-Bildschirm** → **Hinzufügen**.
+Der App-Name ist **KIDS TEST**; die Web-App besitzt ein eigenes Manifest,
+eigenen Service Worker ausschließlich für `/kids/test-console/` und
+lokal gespeicherte, exportierbare Bearbeitungsnotizen und Testsettings.
+Diese PWA ist eine **echte Web-App** und benötigt für die erste Nutzung Internet.
+Nach dem ersten Aufruf sind die Katalog-/Redaktionsansichten auch offline nutzbar;
+Hörbücher, Qurʾān-Medien und alle Unterbereiche können online erforderlich sein.
+
+### Innerhalb der KIDS TEST Web-App
+- Redaktionsentwürfe für alle 208 Unterrichtsplätze, lokale Quellen-/Alters-
+  und Audio-Prüfvermerke, Wunschdatum und sechs Module mit QA-Notizen.
+- Lokaler Altersgruppen-/Jungen-/Mädchen-Testplan als Simulation; für die
+  **eigentliche** Kinderoberfläche legt man getrennte Test-Kinderprofile in
+  `/kids/start.html` an. Es gibt KEINEN versteckten Freischaltparameter.
+- JSON-Export/Import der lokalen Planung; keine Synchronisierung zwischen
+  Geräten ohne diese Sicherung; kein Server-Write oder GitHub-Push.
+- Das Häkchen »Testbereit« ist **keine Besucherfreigabe**.
+- Die Web-App kann nicht sämtliche systemseitig gesperrten Lektionen öffnen,
+  bevor echte serverseitige Ersteller-Authentifizierung eingerichtet ist.
+
+**Verbindliche, dauerhaft angeheftete Nutzerregel:**
+`kids/creator-test/GLOBAL-RELEASE-LOCK.md`.
+Es darf unter keinen Umständen KIDS-Testcode in `main`, die Besucher-Web-App,
+die native App-Store-KIDS-App oder App Store Connect gelangen, bevor der Nutzer
+explizit **»Push-Thread global«** sagt. Allgemeine Weiterarbeitsaufträge sind
+keine Live-Freigabe. Der CI-Prüfschritt
+`node kids/tools/verify-global-release-lock.cjs` blockiert den separaten
+KIDS-Creator-Deploy bei Abweichungen. Die bestehende Produktions-CI auf
+`main` ist separat zu härten; bis dahin **NICHT** in `main` mergen.
