@@ -26,7 +26,7 @@ Die neue Test-App verwendet:
 5. Nur der Worker `dar-al-tawhid-kids-creator` unter workers.dev wird
    deployed. Der normale Dar-Test-Worker und die öffentliche Domain
    `dar-al-tawhid.de` werden in diesem Job nicht berührt.
-6. Job prüft drei KIDS-Routen. Erst wenn er grün ist, gilt die Website
+6. Job prüft drei KIDS-Routen und weist die Erwachsenen-Test-Anmeldung mit HTTP 404 ab. Erst wenn er grün ist, gilt die Website
    als technisch erreichbar.
 
 **Nicht `dar-test` aus dem Staging-Branch auswählen.** Die vorhandene
@@ -72,3 +72,11 @@ TestFlight/App-Store-Publishing, kein neuer kostenpflichtiger KI-Dienst.
   Unterrichtszentrale verbinden.
 - Test-Simulationen für drei Altersgruppen, verschiedene Lernstände,
   Hörbücher/Offline-Downloads und Tabletansicht real prüfen.
+
+## Isolierte Serverkonfiguration
+Der Kids-Worker verwendet `kids/creator-test/wrangler.toml` und
+`kids/creator-test/worker.js`; kein Adult-Test-Worker wird geklont.
+`run_worker_first = true` bedeutet: Auch statische Assets passieren den
+KIDS-only-Routenfilter. Der Worker verweigert alle nicht-KIDS-Pfade, Tools,
+API-Aufrufe und Administratorbereiche. Die öffentlich bekannte workers.dev-
+URL ist derzeit **noch keine private Ersteller-Authentifizierung**.
