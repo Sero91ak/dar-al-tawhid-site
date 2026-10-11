@@ -14,7 +14,9 @@ on:
   push:
     branches:
       - main
+      - kids-creator-staging
     paths:
+      - kids/creator-test/STAGING_DEPLOY_TRIGGER.txt
       - index.html
       - test/**
       - assets/**
@@ -200,9 +202,9 @@ jobs:
           node scripts/verify-test-app-deploy.js
 
   deploy-kids-creator:
-    # Explicitly selected developer staging branch. NEVER runs on main or push.
+    # Dedicated creator staging ONLY. Automatic runs require the one staging-trigger file.
     # Uses a new workers.dev-only Worker with no production route or domain.
-    if: ${{ github.event_name == 'workflow_dispatch' && inputs.target == 'kids-creator' && github.ref == 'refs/heads/kids-creator-staging' }}
+    if: ${{ github.ref == 'refs/heads/kids-creator-staging' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.target == 'kids-creator')) }}
     runs-on: ubuntu-latest
     concurrency:
       group: dar-kids-creator-worker-only
