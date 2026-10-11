@@ -3626,6 +3626,51 @@ body:not([data-academy-view="lesson"]):not([data-embedded="true"]) > main.wrap >
  overscroll-behavior-y:contain!important;-webkit-overflow-scrolling:touch;
 }
 
+/* The outer centered desktop wrap must not clip the full-viewport scrollport.
+   The root viewport stays locked and only academyHome/academySubject may scroll. */
+body:not([data-academy-view="lesson"]):not([data-embedded="true"]) > main.wrap{
+ overflow:visible!important;
+}
+/* Fade directly into the existing theme background (turquoise or lilac),
+   so no hard horizontal boundary remains at the bottom of the artwork. */
+body:not([data-academy-view="lesson"]):not([data-embedded="true"]) .academy-home > .overview-hero::before,
+body[data-profile="girl"]:not([data-academy-view="lesson"]):not([data-embedded="true"]) .academy-home > .overview-hero::before{
+ height:clamp(58px,8vw,96px)!important;
+ background:linear-gradient(to bottom,transparent 0%,var(--base) 100%)!important;
+}
+
+/* V7.6.3 · Full-bleed academy covers inside the fixed-header scroll shell.
+   V7.6.2 made the scrollport narrower than the 100vw hero/subject covers.
+   Expand ONLY that scrollport to the viewport; retain the previous card insets,
+   edge-to-edge imagery, fade and separate girl/boy image treatments. */
+body:not([data-academy-view="lesson"]):not([data-embedded="true"]){
+ --academy-scroll-inset-left:clamp(14px,3.2vw,30px);
+ --academy-scroll-inset-right:clamp(14px,3.2vw,30px);
+}
+@media(max-width:700px){
+ body:not([data-academy-view="lesson"]):not([data-embedded="true"]){
+  --academy-scroll-inset-left:max(12px,env(safe-area-inset-left,0px));
+  --academy-scroll-inset-right:max(12px,env(safe-area-inset-right,0px));
+ }
+}
+@media(min-width:768px) and (min-height:650px){
+ body:not([data-academy-view="lesson"]):not([data-embedded="true"]){
+  --academy-scroll-inset-left:var(--academy-gutter,30px);
+  --academy-scroll-inset-right:var(--academy-gutter,30px);
+ }
+}
+body:not([data-academy-view="lesson"]):not([data-embedded="true"]) > main.wrap > #academyHome.academy-home:not([hidden]),
+body:not([data-academy-view="lesson"]):not([data-embedded="true"]) > main.wrap > #academySubject.subject-detail:not([hidden]){
+ width:100vw!important;min-width:100vw!important;max-width:100vw!important;
+ margin-left:calc(50% - 50vw)!important;margin-right:0!important;
+ padding-left:max(var(--academy-scroll-inset-left),calc((100vw - 1220px)/2 + var(--academy-scroll-inset-left)))!important;
+ padding-right:max(var(--academy-scroll-inset-right),calc((100vw - 1220px)/2 + var(--academy-scroll-inset-right)))!important;
+}
+body:not([data-academy-view="lesson"]):not([data-embedded="true"]) > main.wrap > #academySubject.subject-detail:not([hidden]){
+ padding-left:max(var(--academy-scroll-inset-left),calc((100vw - 980px)/2))!important;
+ padding-right:max(var(--academy-scroll-inset-right),calc((100vw - 980px)/2))!important;
+}
+
 </style><script data-kids-touch-focus-v83>
 (function(){
   "use strict";
