@@ -848,7 +848,7 @@
     var wantQari = state.reciter;
     var surah = state.surah;
     var ayah = state.ayah;
-    resolveSource(wantQari, surah, ayah).then(function (hit) {
+    function applyResolvedSource(hit) {
       if (gen !== playGen) {
         if (hit && hit.saved) { try { URL.revokeObjectURL(hit.url); } catch (eStale) {} }
         return;
@@ -880,22 +880,26 @@
       setAudioSrc(a, hit.url);
       logAudio("src changed", { saved: !!hit.saved, snap: snapAudio(a) });
       syncPublicAudioState(a);
-      function seekStart() {
-        if (gen !== playGen) return;
-        var t = keepTime ? (Number(state.resumeAt) || 0) : 0;
-        if (!keepTime) {
-          state.resumeAt = 0;
-          state.current = 0;
-          t = 0;
-        }
-        try { a.currentTime = t; } catch (eSeek0) {}
-        if (keepTime) state.resumeAt = 0;
+      // Save resume position ONCE. The previous loadedmetadata callback
+      // read the already-reset resumeAt and rewound playback to 00:00.
+      var initialSeek = keepTime ? Math.max(0, Number(state.resumeAt) || 0) : 0;
+      state.resumeAt = 0;
+      if (!keepTime) state.current = 0;
+      if (keepTime && initialSeek > 0.05) {
+        var applyInitialSeek = function () {
+          if (gen !== playGen || a.readyState < 1) return;
+          try {
+            var d = Number(a.duration);
+            a.currentTime = Number.isFinite(d) && d > 0
+              ? Math.min(initialSeek, Math.max(0, d - .1)) : initialSeek;
+          } catch (eSeekResume) {}
+        };
+        a.addEventListener("loadedmetadata", function onceSeek() {
+          a.removeEventListener("loadedmetadata", onceSeek);
+          applyInitialSeek();
+        });
+        applyInitialSeek();
       }
-      a.addEventListener("loadedmetadata", function once() {
-        a.removeEventListener("loadedmetadata", once);
-        seekStart();
-      });
-      seekStart();
       if (autoplay) {
         state.playing = true;
         state.sessionActive = true;
@@ -915,7 +919,20 @@
       paintChrome();
       paintMini();
       followPlayingAyah(false);
-    });
+    }
+    // Online sources are known locally: set src + play in the click gesture.
+    // This avoids losing iOS WebKit audio user activation across a Promise.
+    if (!isOffline()) {
+      var chosen = reciterById(wantQari) || reciterById(FALLBACK_QARI);
+      var candidates = urlsForWithRec(chosen, surah, ayah);
+      applyResolvedSource(candidates[0] ? { qari: chosen.id, url: candidates[0], saved: false } : null);
+    } else {
+      resolveSource(wantQari, surah, ayah).then(applyResolvedSource).catch(function (err) {
+        if (gen !== playGen) return;
+        logAudio("offline source failed", String(err && err.message || err));
+        missingAudioHalt(wantQari, surah, ayah, "");
+      });
+    }
   }
   function preloadNext() {}
   function tryFallback() {
