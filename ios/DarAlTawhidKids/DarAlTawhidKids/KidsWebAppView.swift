@@ -136,8 +136,14 @@ struct KidsWebAppView: UIViewRepresentable {
         // to existing KIDS modules on the separate test Worker is permitted.
         @objc private func creatorNavigate(_ notice: Notification) {
             guard let key = notice.object as? String,
-                  ["home", "quran", "stories", "dua", "parents", "academy"].contains(key),
+                  ["home", "quran", "stories", "dua", "parents", "academy", "console"].contains(key),
                   let page = webView else { return }
+            if key == "console" {
+                guard let url = URL(string: "https://dar-al-tawhid-kids-creator.sero91ak.workers.dev/kids/test-console/index.html") else { return }
+                pendingCreatorTab = nil
+                page.load(URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 30))
+                return
+            }
             if key == "academy" {
                 guard let url = URL(string: "https://dar-al-tawhid-kids-creator.sero91ak.workers.dev/kids/akademie/index.html") else { return }
                 pendingCreatorTab = nil

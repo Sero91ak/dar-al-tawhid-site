@@ -14,8 +14,8 @@ const tests=[
 ["visitor root remains direct WKWebView",view.includes("#else\n    var body: some View {\n        KidsWebAppView()")],
 ["test button not a website password or query unlock",!view.includes("password")&&!view.includes("creatorSandbox=")&&!view.includes("localStorage")],
 ["creator menu requires explicit user tap",view.includes("showCreatorPanel = true")&&view.includes(".sheet(isPresented: $showCreatorPanel)")],
-["six visible module links",["home","quran","stories","dua","parents","academy"].every(id=>view.includes('"'+id+'"'))],
-["all module selectors backend-whitelisted",web.includes('["home", "quran", "stories", "dua", "parents", "academy"].contains(key)')],
+["six visible module links",["home","quran","stories","dua","parents","academy","console"].every(id=>view.includes('"'+id+'"'))],
+["all module selectors backend-whitelisted",web.includes('["home", "quran", "stories", "dua", "parents", "academy", "console"].contains(key)')],
 ["owner notification exists only in compiled test",web.includes("#if KIDS_CREATOR_TEST\n            NotificationCenter.default.addObserver(")],
 ["home tab exists in live shell",home.includes('data-target="today"')],
 ["stories tab exists",home.includes('data-target="stories"')],
@@ -31,6 +31,7 @@ const tests=[
 ["synchronous native test routes only on test host",web.includes('page.url?.host?.lowercased() == "dar-al-tawhid-kids-creator.sero91ak.workers.dev"')],
 ["creator maps production kids urls to test host",web.includes("if !KidsAppShell.isOwnHost(url)")&&web.includes("KidsAppShell.inAppURL(from: url)")],
 ["no website based unlock path in code",!web.includes("ACADEMY_OWNER_PASSWORD")&&!view.includes("ACADEMY_OWNER_PASSWORD")],
+["creator console opens only on dedicated Worker",web.includes("dar-al-tawhid-kids-creator.sero91ak.workers.dev/kids/test-console/index.html")],
 ["creator panel never writes a child record",!view.includes("UserDefaults.standard")&&!view.includes("localStorage.setItem")]
 ];
 for(const [name,pass] of tests)assert.ok(pass,name);
