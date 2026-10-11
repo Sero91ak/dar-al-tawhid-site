@@ -1529,7 +1529,7 @@
           if (node.nodeType === 3) {
             target.appendChild(document.createTextNode(node.textContent || ""));
           } else if (node.nodeType === 1 && node.tagName === "SPAN") {
-            var classes = (node.getAttribute("class") || "").split(/\\s+/);
+            var classes = (node.getAttribute("class") || "").split(/\s+/);
             var kind = classes.filter(function (cls) { return /^tj-[a-z_]+$/.test(cls); })[0];
             if (!kind) { safeNodes(node, target); return; }
             var span = document.createElement("span");
@@ -4361,9 +4361,9 @@
   var testPlayerRouteTick = 0;
   function ensureTestCanonicalPlayerRoute() {
     if (!isTestAppPath() || LEARN_PLAYER_ONLY || !document.body) return;
-    var hash = String(location.hash || "").replace(/^#\\/?/, "");
+    var hash = String(location.hash || "").replace(/^#\/?/, "");
     if (hash.split("/")[0] !== "quran-player") return;
-    var value = hash.slice("quran-player".length).replace(/^\\//, "");
+    var value = hash.slice("quran-player".length).replace(/^\//, "");
     if (value) parseRoute(value);
     document.documentElement.classList.add("is-quran-player-route");
     document.body.classList.add("is-quran-player-route", "dar-quran-player-open");
