@@ -2029,3 +2029,97 @@ html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-ayah-ar 
  html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-v108-actions{gap:3px}
  html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-v108-actions button{font-size:9px!important}
 }
+
+
+/* V1106: ORIGINAL PLAYER SCREENSHOT FIX · strictly scoped to Dar Test V10.8-R.
+   App UI themes must never control the V10.8-R standalone player palette. */
+/* Old .dqp-artist {grid-column:1} incorrectly forced both selectors into one column. */
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-v108-nowbar {
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  grid-auto-flow:row!important;
+  grid-auto-rows:minmax(0,auto)!important;
+  gap:8px!important;
+  min-height:0!important;
+  align-items:stretch!important;
+}
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-v108-nowbar > button.dqp-title {
+  grid-column:1!important;
+  grid-row:1!important;
+  align-self:stretch!important;
+  margin:0!important;
+}
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-v108-nowbar > button.dqp-artist {
+  grid-column:2!important;
+  grid-row:1!important;
+  align-self:stretch!important;
+  margin:0!important;
+}
+/* The native iPhone safe area / outer viewport use the player theme, not the app theme. */
+html.is-quran-player-route[data-dqp-original-tone="night"],
+html.is-quran-player-route[data-dqp-original-tone="night"] body,
+html.is-quran-player-route[data-dqp-original-tone="night"] .app,
+html.is-quran-player-route[data-dqp-original-tone="night"] #appView.view,
+html.is-quran-player-route[data-dqp-original-tone="night"] body.dar-quran-player-open {
+  background:#151719!important;
+  background-color:#151719!important;
+  color-scheme:dark!important;
+}
+html.is-quran-player-route[data-dqp-original-tone="day"],
+html.is-quran-player-route[data-dqp-original-tone="day"] body,
+html.is-quran-player-route[data-dqp-original-tone="day"] .app,
+html.is-quran-player-route[data-dqp-original-tone="day"] #appView.view,
+html.is-quran-player-route[data-dqp-original-tone="day"] body.dar-quran-player-open {
+  background:#faf5e9!important;
+  background-color:#faf5e9!important;
+  color-scheme:light!important;
+}
+/* Explicit values, including descendant spans: inherited app --muted remains forbidden. */
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-times,
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-times span,
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-v108-progress-top,
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-v108-progress-top span {
+  color:var(--v108-muted)!important;
+  -webkit-text-fill-color:var(--v108-muted)!important;
+  opacity:1!important;
+  text-shadow:none!important;
+}
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-v108-progress-top strong {
+  color:var(--v108-text)!important;
+  -webkit-text-fill-color:var(--v108-text)!important;
+}
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-ayah {
+  /* Allow long Tāfsīr/Tadabbur to scroll inside the stage without extending the page. */
+  flex:0 0 auto!important;
+  min-height:0!important;
+  height:auto!important;
+  margin:clamp(8px,1.8vh,22px) auto 14px!important;
+  padding:6px 2px 15px!important;
+  justify-content:flex-start!important;
+  overflow:visible!important;
+}
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-art {
+  min-height:0!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  -webkit-overflow-scrolling:touch;
+}
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-v108r-tabs {
+  flex:0 0 auto!important;
+}
+@media(max-width:370px) {
+  html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-v108-nowbar {
+    gap:5px!important;
+  }
+  html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-v108-nowbar > button {
+    padding:6px 7px!important;
+    min-height:45px!important;
+    font-size:clamp(10px,2.6vw,13px)!important;
+  }
+}
+@media(max-height:700px) {
+  html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-ayah {
+    margin-top:5px!important;
+    padding-top:3px!important;
+  }
+}
