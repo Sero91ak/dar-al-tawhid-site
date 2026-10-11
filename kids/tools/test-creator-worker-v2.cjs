@@ -76,7 +76,7 @@ const get=(path,method="GET")=>handler.fetch(new Request("https://kids-preview.e
   assert.ok(!academySrc.includes('const access=academySchoolState().access(chosen);'));
 
   assert.match(consoleHtml,/fetch\("\/kids\/test-console\/catalogue-v1\.json"/);
-  const scripts=[...consoleHtml.matchAll(/<script>([\\s\\S]*?)<\\/script>/g)];
+  const scripts=[...consoleHtml.matchAll(/<script>([\s\S]*?)<\/script>/g)];
   assert.ok(scripts.length>=2,"Creator console must have navigation and lesson JS");
   scripts.forEach((match,i)=>new vm.Script(match[1],{filename:"kids-test-console-v"+i+".js"}));
   const consoleRoute=await get("/kids/test-console/index.html");
