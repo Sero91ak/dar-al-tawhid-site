@@ -111,7 +111,16 @@ def analysis_complete(result):
     rig = result.get("binaryRig") or {}
     shape = result.get("fixedFiveViews") or {}
     angle = result.get("angleDiagnostic") or {}
-    if rig.get("passed") is not True or not isinstance(rig.get("report"), dict):
+    rig_report = rig.get("report")
+    if rig.get("passed") is not True or not isinstance(rig_report, dict):
+        return False
+    required_binary_evidence = (
+        "structureValid", "animationSamplerBytesVerified",
+        "geometryVertexBytesVerified", "boneLengthInvariantVerified",
+        "inverseBindMatchesRestPose"
+    )
+    if (any(rig_report.get(key) is not True for key in required_binary_evidence) or
+        rig_report.get("productionApproved") is not False):
         return False
     if shape.get("completed") is not True or shape.get("commandExitCode") not in (0, 1):
         return False
