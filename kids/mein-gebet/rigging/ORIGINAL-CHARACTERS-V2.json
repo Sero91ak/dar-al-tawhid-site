@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 2,
+  "status": "original_2d_references_available_3d_identity_not_approved",
+  "verifiedThrough": "GitHub draft source images visually inspected and blob SHAs retrieved 2026-10-11",
+  "meaningOf100Percent": "Exact same approved character identity across render angles, scale, face, hair/headwear, dress and footwear. Not an automatically computable guarantee from single 2D picture; needs multi-view human sign-off.",
+  "referenceAssetScope": "Immutable bytes under kids/mein-gebet/assets on draft branch; do not overwrite.",
+  "profiles": {
+    "boy": {
+      "reference": "../assets/figur-junge-original.png",
+      "gitBlobSha1": "8cd94ec07210985aeb2e5d7fe6d2c8219e407369",
+      "gitBlobBytes": 704320,
+      "pngDimensions": [
+        1254,
+        1254
+      ],
+      "poseReferences": [
+        "../assets/qiyam-brusthoehe-user-approved-ref-v1.jpg",
+        "../assets/gebetspositionen-sieben-schritte-user-approved-review.jpg"
+      ],
+      "appearance": {
+        "head": "Rounded child's head; integrated large glossy brown irises with dark pupils, curved dark eyebrows and soft cheeks; normal eye sockets, not detached/protruding ball eyeballs.",
+        "hair": "Layered soft brown wavy/side-swept locks visible underneath the kufi at the temples and back. Not a bare scalp or rigid circular hair band.",
+        "kufi": "White finely perforated domed cap; continuous orange-gold embroidered repeating pointed-arch/geometric pattern, consistent around all sides; NOT a floating ring or plain gold pixels.",
+        "face": "Small rounded nose; natural closed friendly smile; matching ears and original skin tone, no adult beard/mustache.",
+        "clothing": "Warm white collar-up ankle-length thawb with three-button upper placket and naturally draped long sleeves; garment should not break into angular rigid skirt and separate cylinders.",
+        "hands": "Anatomically believable small hands, five fingers; right hand above left on upper chest for chosen Qiyam teaching reference.",
+        "feet": "White closed child shoes and unchanged child leg/foot proportions in reference avatar. Indoor prayer footwear requires separate fiqh/design review."
+      },
+      "knownPrototypeErrors": [
+        "V7.9/8.1 eyes protrude on stems and do not resemble original eyes.",
+        "V7.9 cap decorative ring and face silhouette do not match embroidered kufi / boy head.",
+        "V7.9 arms and clothing are unattached-looking geometric tubes with abrupt intersections.",
+        "V7.9 fingers, skin weights and clothing folds cannot match original identity.",
+        "V7.9 contains no original scanned sculpt or bound original source mesh."
+      ],
+      "requiredReviewViews": [
+        "front",
+        "three_quarter_left",
+        "right_side",
+        "left_side",
+        "back"
+      ],
+      "release": {
+        "actualApprovedGLB": false,
+        "renderedSameOriginalInFiveViews": false,
+        "humanIdentityApproval": false,
+        "productionReady": false
+      }
+    },
+    "girl": {
+      "reference": "../assets/figur-maedchen-original.png",
+      "gitBlobSha1": "9a9dcdb0499894b95a36c82d42e89d3483aad313",
+      "gitBlobBytes": 785802,
+      "pngDimensions": [
+        1254,
+        1254
+      ],
+      "appearance": {
+        "face": "Same young girl's soft round peach-toned face, large naturally embedded brown eyes, arched brown eyebrows, small nose and gentle smile.",
+        "hijab": "Rich vivid pink multilayer headscarf wrapped and tucked around cheeks, complete cover of forehead hairline, ears, neck and shoulders; prominent soft concentric fabric folds.",
+        "clothing": "Full long rose/pink dress with matching loose sleeves and gathers at wrists, waist and skirt, hem near ankles; no substituted white garment.",
+        "footwear": "Original soft pale pink round-toe shoes, scale and placement matching reference.",
+        "hands": "Natural small hands in source portrait; portrait placement is NOT evidence for required Qiyam clasp position.",
+        "full360": "No approved independent back and side pose references for this exact model; human garment silhouette and hair/neck coverage must be independently reviewed from actual new 3D renders."
+      },
+      "knownPrototypeErrors": [
+        "V7.9 girl is a simple recoloring with crude cylinders, not the specific original girl identity.",
+        "Headwear and cloth folds must follow motion and remain covering hair/neck for all reviewed movements.",
+        "Copying boy skinning/fiqh poses without independent cloth and teaching review is prohibited."
+      ],
+      "requiredReviewViews": [
+        "front",
+        "three_quarter_left",
+        "right_side",
+        "left_side",
+        "back"
+      ],
+      "release": {
+        "actualApprovedGLB": false,
+        "renderedSameOriginalInFiveViews": false,
+        "fullHijabCoverageDuringAllPosesApproved": false,
+        "humanIdentityApproval": false,
+        "productionReady": false
+      }
+    }
+  },
+  "strictRules": {
+    "these2dSourcesAreNotRiggedGLB": true,
+    "noReplacementPlaceholderAsOriginal": true,
+    "noManualGenderSelectorInFinalKidsView": true,
+    "noAutoreleaseFromSimilarityScores": true,
+    "noAutomaticApprovalWithoutUser": true,
+    "doNotInferGirlSalahPoseFromNeutralPortrait": true,
+    "allScaleChangesInPoseAnimationsForbidden": true,
+    "restoreOriginalGLBBeforeSculptAcceptance": true
+  },
+  "openSourceConflict": {
+    "reference": "../assets/gebetspositionen-sieben-schritte-user-approved-review.jpg",
+    "problem": "Seven-step teaching sheet caption for Sujud says 'Nur die Stirn auf dem Boden', while approved teaching requirements include forehead, nose lightly, both hands, both knees and toes. Do not reuse the caption unchanged as final instructions.",
+    "reviewRequired": true,
+    "theologicalTeachingApproved": false
+  }
+}
