@@ -1257,6 +1257,19 @@ export default {
         const prematureBootWipe = "/* SOFTBOOT_UNSTICK_V672 */(function(){";
         const pwaSafeBootWipe = "/* SOFTBOOT_UNSTICK_V672 */(function(){if(location.pathname.indexOf(\"/pwa\")===0)return;";
         if (html.includes(prematureBootWipe)) html = html.replace(prematureBootWipe, pwaSafeBootWipe);
+        // Freshly installed apps must not reload themselves during their first
+        // navigation. The shared root app purges visual caches and redirects on
+        // first build; that races Android's OS splash on an empty PWA cache.
+        // The /pwa/ worker already has independent build-scoped cache handling.
+        const visualPurgeStart = "/* VISUAL_PAST_PURGE_V588: alte Optik-Caches löschen – aktuelle Darstellung bleibt Autorität */(function(){";
+        const pwaVisualPurgeStart = "/* VISUAL_PAST_PURGE_V588: alte Optik-Caches löschen – aktuelle Darstellung bleibt Autorität */(function(){if(location.pathname.indexOf(\"/pwa\")===0)return;";
+        if (html.includes(visualPurgeStart)) html = html.replace(visualPurgeStart, pwaVisualPurgeStart);
+        // Other shared-app recovery code forces another hard navigation after
+        // 11 seconds. For /pwa/, preserve its soft render retry and let the
+        // dedicated loader show the existing retry control at 16 seconds.
+        const legacyHardReload = "function hard(){try{var r=sessionStorage.getItem(K)";
+        const pwaNoHardReload = "function hard(){if(location.pathname.indexOf(\"/pwa\")===0)return;try{var r=sessionStorage.getItem(K)";
+        if (html.includes(legacyHardReload)) html = html.replace(legacyHardReload, pwaNoHardReload);
         // The dedicated PWA must never register the website-wide worker from
         // the shared app HTML. Keep OneSignal at /push/onesignal/ unchanged.
         html = html.replace("navigator.serviceWorker.register(\"/service-worker.js\",{updateViaCache:\"none\"})", "navigator.serviceWorker.register(\"/pwa/service-worker.js\",{scope:\"/pwa/\",updateViaCache:\"none\"})");
