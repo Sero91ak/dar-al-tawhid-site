@@ -29,7 +29,7 @@ const remainingPlanned=roadmap.plannedUnits.length;
 // Dar Test and Kids are independently deployed, never report seven future
 // lesson slots as playable until the canonical Kids lane has been verified.
 const transitionalGap=previewPlannedCount-remainingPlanned;
-assert.ok(transitionalGap===0||transitionalGap===7,"Only the explicitly source-reviewed V25 release may lag the Test editor");
+assert.ok([0,7,12].includes(transitionalGap),"Only V25 seven and V26 five authenticated topic releases may lag behind signed Test editor");
 assert.equal(previewCatalogCount+previewPlannedCount,208);
 assert.equal(liveCatalogCount+remainingPlanned,208);
 assert.equal(previewCatalogCount+transitionalGap,liveCatalogCount);
@@ -39,8 +39,8 @@ const titles=new Set();
 for(const item of catalog.entries.filter(e=>e.type==="planned")){
  const matching=roadmap.plannedUnits.find(u=>u.editorialSlot===item.slot);
  if(!matching){
-  assert.equal(transitionalGap,7,"Missing editorial topic outside guarded Kids/Test transition");
-  assert.ok(item.slot>=39&&item.slot<=45,"Only the seven just-authenticated topics may differ");
+  assert.ok(transitionalGap===7||transitionalGap===12,"No unapproved editorial topic may disappear from the protected editor");
+  assert.ok(item.slot>=39&&item.slot<=50,"Only the 12 source-reviewed V25+V26 topics may differ");
   assert.ok(roadmap.existingLessonSlots.some(x=>x.editorialSlot===item.slot),
    "The editorial item must correspond to a source-reviewed Kids catalog lesson");
   assert.equal(item.visitorReleaseVerified,false,"Lagging Test UI must NEVER claim a lesson is live");
