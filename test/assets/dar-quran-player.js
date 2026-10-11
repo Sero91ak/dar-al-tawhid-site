@@ -1499,6 +1499,55 @@
       "</div>"
     );
   }
+  /* Dar Test: read the existing, verified 114-sūrah Tajwīd corpus.
+     Build DOM nodes from an allowlist; never execute markup from JSON. */
+  var testTajweedCache = Object.create(null);
+  function testTajweedFor(surah) {
+    if (!isTestAppPath()) return Promise.resolve(null);
+    var key = String(Number(surah));
+    if (testTajweedCache[key]) return testTajweedCache[key];
+    testTajweedCache[key] = fetch("/content/quran-tajweed/" + pad(surah, 3) + ".json", { cache: "force-cache" })
+      .then(function (response) {
+        if (!response.ok) throw new Error("Tajweed HTTP " + response.status);
+        return response.json();
+      })
+      .then(function (data) { return Array.isArray(data.verses) ? data.verses : []; })
+      .catch(function () { return null; });
+    return testTajweedCache[key];
+  }
+  function paintTestTajweed(el, surah, ayah) {
+    if (!isTestAppPath() || !el || !state.layers.ar) return;
+    testTajweedFor(surah).then(function (rows) {
+      if (!rows || !el.isConnected || Number(state.surah) !== Number(surah) || Number(state.ayah) !== Number(ayah)) return;
+      var verse = rows.find(function (row) { return Number(row.id) === Number(ayah); });
+      if (!verse || typeof verse.tajweed !== "string") return;
+      var raw = document.createElement("template");
+      raw.innerHTML = verse.tajweed;
+      var result = document.createDocumentFragment();
+      function safeNodes(source, target) {
+        Array.prototype.forEach.call(source.childNodes, function (node) {
+          if (node.nodeType === 3) {
+            target.appendChild(document.createTextNode(node.textContent || ""));
+          } else if (node.nodeType === 1 && node.tagName === "SPAN") {
+            var classes = (node.getAttribute("class") || "").split(/\\s+/);
+            var kind = classes.filter(function (cls) { return /^tj-[a-z_]+$/.test(cls); })[0];
+            if (!kind) { safeNodes(node, target); return; }
+            var span = document.createElement("span");
+            span.className = "tj " + kind;
+            if (kind === "tj-end" || node.hasAttribute("hidden")) span.hidden = true;
+            safeNodes(node, span);
+            target.appendChild(span);
+          }
+        });
+      }
+      safeNodes(raw.content, result);
+      var ar = el.querySelector(".dqp-ayah-ar");
+      if (!ar) return;
+      ar.replaceChildren(result);
+      ar.dataset.tajweedReady = String(surah) + ":" + String(ayah);
+      fitAyah(el);
+    });
+  }
   function paintAyah(animate) {
     var root = playerRoot();
     if (!root) return;
@@ -1513,6 +1562,7 @@
       var de = el.querySelector(".dqp-ayah-de");
       if (ref) ref.textContent = state.surah + " · Āyah " + state.ayah;
       if (ar) ar.textContent = (v && (v.ar || v.arabic)) || (state.loading ? "" : "Āyah wird geladen …");
+      if (ar && v) paintTestTajweed(el, state.surah, state.ayah);
       if (de) de.textContent = (v && (v.de || v.translation)) || "";
       paintLat(el);
       paintTad(el);
