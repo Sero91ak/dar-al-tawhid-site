@@ -23,9 +23,10 @@ export default {
       // Paid APIs and mutating calls remain disabled until owner auth exists.
       return textResponse("Creator staging: API currently disabled", 405);
     }
-    if (url.pathname === "/kids" || url.pathname === "/kids/"
-        || url.pathname === "/kids/start") {
-      const out = new URL("/kids/start.html", url);
+    if (url.pathname === "/kids" || url.pathname === "/kids/") {
+      // Cloudflare HTML handling canonically serves start.html at /kids/start.
+      // Never redirect /kids/start back to start.html: that creates a 307 loop.
+      const out = new URL("/kids/start", url);
       return Response.redirect(out.toString(), 302);
     }
     if (!url.pathname.startsWith("/kids/")) {
