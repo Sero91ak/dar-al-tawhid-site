@@ -36374,4 +36374,40 @@ body.is-quran-reader-route .qrc-body .quran-ayah-tr-wrap:not([hidden]) + .quran-
   }catch(e){}
 })();
 </script>
+
+<style id="dar-home-footer-no-dead-space-20261011">
+/* Adult home only: a single bottom-navigation clearance instead of stacked empty scroll zones. */
+html body.is-home-route #appView.view,
+html[data-theme] body.is-home-route #appView.view{
+  height:auto!important;
+  min-height:0!important;
+  margin-bottom:0!important;
+  padding-bottom:0!important;
+}
+html body.is-home-route #appView .home-v380-shell{
+  height:auto!important;
+  min-height:0!important;
+  margin-bottom:0!important;
+  padding-bottom:0!important;
+}
+html body.is-home-route #appView .home-v380-search-wrap,
+html body.is-home-route #appView .home-v380-search-wrap--noble{
+  margin-bottom:0!important;
+  padding-bottom:0!important;
+}
+html body.is-home-route .footer,
+html body.has-bottom-nav.is-home-route .footer{
+  height:auto!important;
+  min-height:0!important;
+  margin-top:0!important;
+  padding-top:10px!important;
+  padding-bottom:8px!important;
+}
+html body.has-bottom-nav.is-home-route{
+  padding-bottom:calc(var(--bottom-navigation-height,70px) + env(safe-area-inset-bottom,0px) + 12px)!important;
+}
+@media(min-width:760px){
+  html body.has-bottom-nav.is-home-route{padding-bottom:calc(var(--bottom-navigation-height,70px) + 16px)!important}
+}
+</style>
 </html>
