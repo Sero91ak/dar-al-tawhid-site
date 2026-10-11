@@ -74,6 +74,7 @@ footer{border-top:1px solid var(--border);margin-top:30px;padding-top:16px;color
 <script src="/kids/akademie/curriculum-v2.js?v=20261010-09"></script>
 <script src="/kids/akademie/curriculum-v22.js?v=20261011-01"></script>
 <script src="/kids/creator-test/lessons-039-044.js?v=20261011-v23-1"></script>
+<script src="/kids/creator-test/lessons-045-052.js?v=20261011-v24-1"></script>
 <script src="/kids/creator-test/term-glossary-v1.js?v=20261011-glossary-1"></script>
 <script>
 (function(){
@@ -188,6 +189,7 @@ function renderStage(){
    add("p","Rezitation ist eine externe Qurʾān-Audioquelle, nicht die Serhat-Masterstimme.","hint");
   }
   if(l.hadith){add("p",l.hadith.text||"","quoted");add("p",l.hadith.source||"","source")}
+  if(l.earlyGenerations){add("h3","Überlieferung der frühen Muslime");add("p",l.earlyGenerations.subject||"","source");add("p",l.earlyGenerations.evidence||"","quoted");add("p","Fundstelle: "+(l.earlyGenerations.source||""),"source")}
   if(l.quran?.excerpt)add("p","Arabischer Textauszug – die Rezitation gibt den vollständigen Qurʾān-Vers wieder.","hint");
   if(/^https:\/\/dorar\.net\/(?:hadith\/sharh\/[0-9]+|hadith-category\/cat\/[a-f0-9]+|h\/[a-zA-Z0-9]+)$/.test(l.sourceAudit?.hadithUrl||"")){
    const sourceLink=add("a","Authentischen Ḥadīṯ im Original überprüfen ↗","source");
