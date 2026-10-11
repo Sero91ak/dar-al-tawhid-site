@@ -1,7 +1,7 @@
 {
-  "release": "dar-test-original-v108r-player-v1106",
+  "release": "dar-test-original-v108r-player-v1107",
   "branch": "test-quran-player-v108r-canonical",
-  "playerBuild": 1106,
+  "playerBuild": 1107,
   "scope": "test-only",
   "designSource": "DAR-AL-TAWHID-Erwachsenen-Player-V10.8-R.html",
   "features": [
@@ -16,11 +16,16 @@
     "independent day/night Safe Area and theme-color metadata restored on exit",
     "readable 00:00/total-duration labels in night and day",
     "scrollable verse panel without extra height",
-    "generic unverified Tadabbur filler hidden"
+    "generic unverified Tadabbur filler hidden",
+    "reciter selector stays open until explicitly dismissed",
+    "per-reciter offline download cancellation and confirmed deletion",
+    "opaque reciter panel in original independent day/night player palettes",
+    "synchronous iOS user-gesture start for online qari playback",
+    "resume-position metadata rewind fix"
   ],
   "sourceFiles": [
     "test/assets/dar-quran-player.js",
     "test/assets/dar-quran-player.css"
   ],
-  "notes": "Isolated Dar Test deployment: only canonical test/assets/dar-quran-player.js and .css changed; visitor and Kids live source unaffected."
+  "notes": "Only V1107 Dar Test canonical player JS/CSS source modified; in-browser iOS system-status area remains host-controlled outside Web content. No visitor or Kids Live modification."
 }
