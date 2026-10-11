@@ -141,10 +141,10 @@ test("V8.0 salam movement is two real head-only yaw phases, right then left",()=
   'const mix=(a,b,t)=>a+(b-a)*t;'+excerpt+
   '[sampleTaslim(0),sampleTaslim(.8),sampleTaslim(1.63),sampleTaslim(2.45),sampleTaslim(3)];');
  assert.equal(values[0],0);
- assert.ok(values[1]>1&&values[1]<1.15,"first head turn MUST point to figurative right");
+ assert.ok(values[1]<-1&&values[1]>-1.15,"first head turn MUST point to the figure's own anatomical right (-X)");
  assert.ok(Math.abs(values[2])<1e-6,"passes through centered view");
- assert.ok(values[3]<-1,"second head turn MUST point to figurative left");
- assert.ok(values[4]<-1,"left head turn must remain visible on completion");
+ assert.ok(values[3]>1,"second head turn MUST point to the figure's own anatomical left (+X)");
+ assert.ok(values[4]>1,"left head turn must remain visible on completion");
  const poses=script.slice(script.indexOf("const frames=["),script.indexOf("const keys=",script.indexOf("const frames=[")));
  const array=vm.runInNewContext('function frame(o={}){const d={pelvis:[0,1.43,0],chest:[0,2.26,0],head:[0,2.94,.015],shoulderY:2.4,shoulderZ:0,elbowY:2.03,elbowZ:.29,handY:2.16,handZ:.40,kneeY:.61,kneeZ:.10,ankleY:.16,ankleZ:0,headTurn:0,...o};const S=sgn=>sgn*.43,H=sgn=>sgn*.135;return{pelvis:d.pelvis,chest:d.chest,head:d.head,shoulderL:[S(-1),d.shoulderY,d.shoulderZ],shoulderR:[S(1),d.shoulderY,d.shoulderZ],elbowL:[S(-1)*1.15,d.elbowY,d.elbowZ],elbowR:[S(1)*1.15,d.elbowY,d.elbowZ],handL:[H(-1),d.handY,d.handZ],handR:[H(1),d.handY,d.handZ+.03],kneeL:[-.21,d.kneeY,d.kneeZ],kneeR:[.21,d.kneeY,d.kneeZ],ankleL:[-.22,d.ankleY,d.ankleZ],ankleR:[.22,d.ankleY,d.ankleZ],headTurn:d.headTurn}};'+poses+'frames');
  assert.equal(array.length,9);
