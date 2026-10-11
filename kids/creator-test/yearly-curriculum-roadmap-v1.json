@@ -1,0 +1,4515 @@
+{
+  "version": "2026-10-11-kids-annual-editorial-outline-v1",
+  "branch": "kids-creator-staging",
+  "audience": "EDITORIAL THEMATIC PLAN, NOT FINAL LESSONS; no authentic religious claims until source review",
+  "curriculumYear": {
+    "weeks": 52,
+    "plannedNewLessons": 208,
+    "alreadyImplementedLessons": 38,
+    "newThemesNeeded": 170,
+    "weeklySequence": [
+      "Montag:new",
+      "Dienstag:new",
+      "Mittwoch:review",
+      "Donnerstag:new",
+      "Freitag:new",
+      "Samstag:review",
+      "Sonntag:flexible"
+    ],
+    "calendarNote": "52 teaching weeks=364 days; Gregorian annual anchoring needs 1 or 2 flexible bridge days, not false publication dates."
+  },
+  "tiers": {
+    "4-5": "Kurze sprachlich einfache Erklärung, Anschauung und Bewegung/Zuordnung mit Eltern; kein Leistungsdruck",
+    "6-8": "Anschauliche Alltagssituation, Leitfrage, kindgerechte Übung und drei Verständnisfragen",
+    "9-10": "Vertiefte Begründung, Quellenbezug unter Begleitung, Anwendung im eigenen Alltag und Reflexion"
+  },
+  "releaseGates": [
+    "authentischen Text aus Qurʾān oder verifizierter Sunnah festlegen",
+    "genauen Wortlaut und Seiten-/Hadithnachweis prüfen",
+    "kindgerechte separate Texte für drei Altersgruppen erstellen",
+    "altersgerechte Übungen und Quiz aufbauen",
+    "Master-Audio produzieren und hörbar abnehmen",
+    "Kinder-Test-App auf Smartphone und Tablet prüfen",
+    "ausdrückliche Nutzerfreigabe Push-Thread global abwarten"
+  ],
+  "categories": [
+    {
+      "category": "tarbiyyah",
+      "count": 19
+    },
+    {
+      "category": "familie",
+      "count": 16
+    },
+    {
+      "category": "iman",
+      "count": 10
+    },
+    {
+      "category": "aqidah",
+      "count": 9
+    },
+    {
+      "category": "tawhid",
+      "count": 5
+    },
+    {
+      "category": "dua",
+      "count": 10
+    },
+    {
+      "category": "quran",
+      "count": 15
+    },
+    {
+      "category": "sunnah",
+      "count": 2
+    },
+    {
+      "category": "sira",
+      "count": 9
+    },
+    {
+      "category": "adab",
+      "count": 20
+    },
+    {
+      "category": "fiqh",
+      "count": 24
+    },
+    {
+      "category": "akhlaq",
+      "count": 18
+    },
+    {
+      "category": "nafs",
+      "count": 13
+    }
+  ],
+  "weeks": [
+    {
+      "week": 10,
+      "weeklyTheme": "Familie und Verantwortung"
+    },
+    {
+      "week": 11,
+      "weeklyTheme": "Īmān: Grundlagen vertiefen"
+    },
+    {
+      "week": 12,
+      "weeklyTheme": "Tawḥīd und Vertrauen"
+    },
+    {
+      "week": 13,
+      "weeklyTheme": "Den Qurʾān lieben"
+    },
+    {
+      "week": 14,
+      "weeklyTheme": "Die Sunnah im Alltag"
+    },
+    {
+      "week": 15,
+      "weeklyTheme": "Ṣalāh Schritt für Schritt"
+    },
+    {
+      "week": 16,
+      "weeklyTheme": "Reinheit und Pflege"
+    },
+    {
+      "week": 17,
+      "weeklyTheme": "Gute Gewohnheiten am Tisch"
+    },
+    {
+      "week": 18,
+      "weeklyTheme": "Eltern, Kinder und Zuhause"
+    },
+    {
+      "week": 19,
+      "weeklyTheme": "Wahrhaftigkeit im Alltag"
+    },
+    {
+      "week": 20,
+      "weeklyTheme": "Das eigene Nafs erziehen"
+    },
+    {
+      "week": 21,
+      "weeklyTheme": "Propheten im Qurʾān I"
+    },
+    {
+      "week": 22,
+      "weeklyTheme": "Īmān und das Unsichtbare"
+    },
+    {
+      "week": 23,
+      "weeklyTheme": "Gebet und Tagesrhythmus"
+    },
+    {
+      "week": 24,
+      "weeklyTheme": "Ramaḍān verstehen"
+    },
+    {
+      "week": 25,
+      "weeklyTheme": "Teilen und helfen"
+    },
+    {
+      "week": 26,
+      "weeklyTheme": "Worte und Duʿāʾ"
+    },
+    {
+      "week": 27,
+      "weeklyTheme": "Gesundheit als Verantwortung"
+    },
+    {
+      "week": 28,
+      "weeklyTheme": "Freundschaft und Gemeinschaft"
+    },
+    {
+      "week": 29,
+      "weeklyTheme": "Sicher und verantwortungsvoll"
+    },
+    {
+      "week": 30,
+      "weeklyTheme": "Tawḥīd im Tagesleben"
+    },
+    {
+      "week": 31,
+      "weeklyTheme": "Ikhlāṣ und das Herz"
+    },
+    {
+      "week": 32,
+      "weeklyTheme": "Lernen, Üben und Durchhalten"
+    },
+    {
+      "week": 33,
+      "weeklyTheme": "Familie als Lernort"
+    },
+    {
+      "week": 34,
+      "weeklyTheme": "Schöpfung und Umwelt"
+    },
+    {
+      "week": 35,
+      "weeklyTheme": "Duʿāʾ und Dhikr"
+    },
+    {
+      "week": 36,
+      "weeklyTheme": "Die Ṣaḥābah als Vorbilder"
+    },
+    {
+      "week": 37,
+      "weeklyTheme": "Sīrah des Propheten ﷺ"
+    },
+    {
+      "week": 38,
+      "weeklyTheme": "Weitere Qurʾān-Geschichten"
+    },
+    {
+      "week": 39,
+      "weeklyTheme": "Gebet mit Aufmerksamkeit"
+    },
+    {
+      "week": 40,
+      "weeklyTheme": "Gerecht und barmherzig"
+    },
+    {
+      "week": 41,
+      "weeklyTheme": "Moschee und Gemeinschaft"
+    },
+    {
+      "week": 42,
+      "weeklyTheme": "Sprache und Respekt"
+    },
+    {
+      "week": 43,
+      "weeklyTheme": "Geschwister und Miteinander"
+    },
+    {
+      "week": 44,
+      "weeklyTheme": "Wissen mit Adab suchen"
+    },
+    {
+      "week": 45,
+      "weeklyTheme": "Allahs Namen kindgerecht"
+    },
+    {
+      "week": 46,
+      "weeklyTheme": "Īmān, Hoffnung und Vertrauen"
+    },
+    {
+      "week": 47,
+      "weeklyTheme": "Fiqh im Alltag"
+    },
+    {
+      "week": 48,
+      "weeklyTheme": "Islamische Feste und Jahreszeiten"
+    },
+    {
+      "week": 49,
+      "weeklyTheme": "Prüfungen und Dankbarkeit"
+    },
+    {
+      "week": 50,
+      "weeklyTheme": "Kinder übernehmen Verantwortung"
+    },
+    {
+      "week": 51,
+      "weeklyTheme": "Wissen in Taten umsetzen"
+    },
+    {
+      "week": 52,
+      "weeklyTheme": "Jahresabschluss und Neubeginn"
+    }
+  ],
+  "plannedSlots": [
+    {
+      "slot": 39,
+      "week": 10,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Familie und Verantwortung",
+      "category": "tarbiyyah",
+      "title": "Kleine Aufgaben mit Freude übernehmen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 40,
+      "week": 10,
+      "weekday": "Freitag",
+      "weeklyTheme": "Familie und Verantwortung",
+      "category": "familie",
+      "title": "Geschwister freundlich behandeln",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 41,
+      "week": 11,
+      "weekday": "Montag",
+      "weeklyTheme": "Īmān: Grundlagen vertiefen",
+      "category": "iman",
+      "title": "Die offenbarten Bücher kennenlernen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 42,
+      "week": 11,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Īmān: Grundlagen vertiefen",
+      "category": "iman",
+      "title": "Der Glaube an den Jüngsten Tag",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 43,
+      "week": 11,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Īmān: Grundlagen vertiefen",
+      "category": "iman",
+      "title": "Allahs Wissen und Weisheit",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 44,
+      "week": 11,
+      "weekday": "Freitag",
+      "weeklyTheme": "Īmān: Grundlagen vertiefen",
+      "category": "aqidah",
+      "title": "Fragen über den Glauben respektvoll stellen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 45,
+      "week": 12,
+      "weekday": "Montag",
+      "weeklyTheme": "Tawḥīd und Vertrauen",
+      "category": "tawhid",
+      "title": "Allah allein um Hilfe bitten",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 46,
+      "week": 12,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Tawḥīd und Vertrauen",
+      "category": "tawhid",
+      "title": "Dankbarkeit gehört Allah",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 47,
+      "week": 12,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Tawḥīd und Vertrauen",
+      "category": "aqidah",
+      "title": "Vertrauen auf Allah und selbst handeln",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 48,
+      "week": 12,
+      "weekday": "Freitag",
+      "weeklyTheme": "Tawḥīd und Vertrauen",
+      "category": "dua",
+      "title": "Was bedeutet Duʿāʾ im Alltag?",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 49,
+      "week": 13,
+      "weekday": "Montag",
+      "weeklyTheme": "Den Qurʾān lieben",
+      "category": "quran",
+      "title": "Warum der Qurʾān für uns wichtig ist",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 50,
+      "week": 13,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Den Qurʾān lieben",
+      "category": "quran",
+      "title": "Zuhören, wenn der Qurʾān rezitiert wird",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 51,
+      "week": 13,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Den Qurʾān lieben",
+      "category": "quran",
+      "title": "Kurze Sūren achtsam lernen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 52,
+      "week": 13,
+      "weekday": "Freitag",
+      "weeklyTheme": "Den Qurʾān lieben",
+      "category": "quran",
+      "title": "Bedeutungen einer kurzen Sūrah besprechen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 53,
+      "week": 14,
+      "weekday": "Montag",
+      "weeklyTheme": "Die Sunnah im Alltag",
+      "category": "sunnah",
+      "title": "Was bedeutet Sunnah?",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 54,
+      "week": 14,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Die Sunnah im Alltag",
+      "category": "sira",
+      "title": "Den Propheten ﷺ als Vorbild kennenlernen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 55,
+      "week": 14,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Die Sunnah im Alltag",
+      "category": "adab",
+      "title": "Freundlichkeit aus der Sunnah",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 56,
+      "week": 14,
+      "weekday": "Freitag",
+      "weeklyTheme": "Die Sunnah im Alltag",
+      "category": "sunnah",
+      "title": "Zwischen einer Überlieferung und einer Erzählung unterscheiden",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 57,
+      "week": 15,
+      "weekday": "Montag",
+      "weeklyTheme": "Ṣalāh Schritt für Schritt",
+      "category": "fiqh",
+      "title": "Vor dem Gebet bereit werden",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 58,
+      "week": 15,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Ṣalāh Schritt für Schritt",
+      "category": "fiqh",
+      "title": "Die Gebetsrichtung verstehen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 59,
+      "week": 15,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Ṣalāh Schritt für Schritt",
+      "category": "fiqh",
+      "title": "Stehen und Verbeugen im Gebet",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 60,
+      "week": 15,
+      "weekday": "Freitag",
+      "weeklyTheme": "Ṣalāh Schritt für Schritt",
+      "category": "fiqh",
+      "title": "Suǧūd richtig kennenlernen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 61,
+      "week": 16,
+      "weekday": "Montag",
+      "weeklyTheme": "Reinheit und Pflege",
+      "category": "fiqh",
+      "title": "Wann brauche ich die Gebetswaschung?",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 62,
+      "week": 16,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Reinheit und Pflege",
+      "category": "fiqh",
+      "title": "Nach dem Toilettengang sauber werden",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 63,
+      "week": 16,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Reinheit und Pflege",
+      "category": "tarbiyyah",
+      "title": "Körper und Kleidung gut pflegen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 64,
+      "week": 16,
+      "weekday": "Freitag",
+      "weeklyTheme": "Reinheit und Pflege",
+      "category": "fiqh",
+      "title": "Sauberer Gebetsplatz und reine Kleidung",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 65,
+      "week": 17,
+      "weekday": "Montag",
+      "weeklyTheme": "Gute Gewohnheiten am Tisch",
+      "category": "adab",
+      "title": "Mit der rechten Hand essen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 66,
+      "week": 17,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Gute Gewohnheiten am Tisch",
+      "category": "adab",
+      "title": "Essen wertschätzen und nichts verschwenden",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 67,
+      "week": 17,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Gute Gewohnheiten am Tisch",
+      "category": "akhlaq",
+      "title": "Beim Essen an andere denken",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 68,
+      "week": 17,
+      "weekday": "Freitag",
+      "weeklyTheme": "Gute Gewohnheiten am Tisch",
+      "category": "adab",
+      "title": "Gäste freundlich bewirten",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 69,
+      "week": 18,
+      "weekday": "Montag",
+      "weeklyTheme": "Eltern, Kinder und Zuhause",
+      "category": "familie",
+      "title": "Den Eltern mit Güte begegnen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 70,
+      "week": 18,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Eltern, Kinder und Zuhause",
+      "category": "familie",
+      "title": "Im Haushalt gemeinsam helfen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 71,
+      "week": 18,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Eltern, Kinder und Zuhause",
+      "category": "tarbiyyah",
+      "title": "Wenn ich etwas nicht darf",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 72,
+      "week": 18,
+      "weekday": "Freitag",
+      "weeklyTheme": "Eltern, Kinder und Zuhause",
+      "category": "adab",
+      "title": "Um Erlaubnis bitten und anklopfen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 73,
+      "week": 19,
+      "weekday": "Montag",
+      "weeklyTheme": "Wahrhaftigkeit im Alltag",
+      "category": "akhlaq",
+      "title": "Einen Fehler ehrlich zugeben",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 74,
+      "week": 19,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Wahrhaftigkeit im Alltag",
+      "category": "akhlaq",
+      "title": "Die Wahrheit sagen, auch wenn es schwerfällt",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 75,
+      "week": 19,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Wahrhaftigkeit im Alltag",
+      "category": "akhlaq",
+      "title": "Was tun, wenn jemand unfair ist?",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 76,
+      "week": 19,
+      "weekday": "Freitag",
+      "weeklyTheme": "Wahrhaftigkeit im Alltag",
+      "category": "tarbiyyah",
+      "title": "Nach einem Fehler Wiedergutmachung üben",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 77,
+      "week": 20,
+      "weekday": "Montag",
+      "weeklyTheme": "Das eigene Nafs erziehen",
+      "category": "nafs",
+      "title": "Gefühle erkennen und benennen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 78,
+      "week": 20,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Das eigene Nafs erziehen",
+      "category": "nafs",
+      "title": "Ruhig werden, bevor ich reagiere",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 79,
+      "week": 20,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Das eigene Nafs erziehen",
+      "category": "nafs",
+      "title": "Neid bemerken und Gutes wünschen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 80,
+      "week": 20,
+      "weekday": "Freitag",
+      "weeklyTheme": "Das eigene Nafs erziehen",
+      "category": "akhlaq",
+      "title": "Versöhnung nach einem Streit",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 81,
+      "week": 21,
+      "weekday": "Montag",
+      "weeklyTheme": "Propheten im Qurʾān I",
+      "category": "quran",
+      "title": "Ādam: Verantwortung und Vergebung",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 82,
+      "week": 21,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Propheten im Qurʾān I",
+      "category": "quran",
+      "title": "Nūḥ: Geduld im Guten",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 83,
+      "week": 21,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Propheten im Qurʾān I",
+      "category": "quran",
+      "title": "Ibrāhīm: Vertrauen auf Allah",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 84,
+      "week": 21,
+      "weekday": "Freitag",
+      "weeklyTheme": "Propheten im Qurʾān I",
+      "category": "quran",
+      "title": "Ismāʿīl: Gutes und Gehorsam",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 85,
+      "week": 22,
+      "weekday": "Montag",
+      "weeklyTheme": "Īmān und das Unsichtbare",
+      "category": "iman",
+      "title": "Engel und ihre Aufgaben kindgerecht",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 86,
+      "week": 22,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Īmān und das Unsichtbare",
+      "category": "iman",
+      "title": "Was bedeutet Offenbarung?",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 87,
+      "week": 22,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Īmān und das Unsichtbare",
+      "category": "iman",
+      "title": "Rechenschaft für gute und schlechte Taten",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 88,
+      "week": 22,
+      "weekday": "Freitag",
+      "weeklyTheme": "Īmān und das Unsichtbare",
+      "category": "aqidah",
+      "title": "Allah hört unser Bittgebet",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 89,
+      "week": 23,
+      "weekday": "Montag",
+      "weeklyTheme": "Gebet und Tagesrhythmus",
+      "category": "fiqh",
+      "title": "Die fünf Gebete im Tageslauf",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 90,
+      "week": 23,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Gebet und Tagesrhythmus",
+      "category": "fiqh",
+      "title": "Der Gebetsruf und seine Bedeutung",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 91,
+      "week": 23,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Gebet und Tagesrhythmus",
+      "category": "fiqh",
+      "title": "Rukūʿ und Suǧūd achtsam üben",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 92,
+      "week": 23,
+      "weekday": "Freitag",
+      "weeklyTheme": "Gebet und Tagesrhythmus",
+      "category": "tarbiyyah",
+      "title": "Meine Gebetsroutine mit der Familie",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 93,
+      "week": 24,
+      "weekday": "Montag",
+      "weeklyTheme": "Ramaḍān verstehen",
+      "category": "fiqh",
+      "title": "Warum Muslime im Ramaḍān fasten",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 94,
+      "week": 24,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Ramaḍān verstehen",
+      "category": "tarbiyyah",
+      "title": "Gute Taten im Ramaḍān",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 95,
+      "week": 24,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Ramaḍān verstehen",
+      "category": "familie",
+      "title": "Iftār und Rücksicht auf andere",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 96,
+      "week": 24,
+      "weekday": "Freitag",
+      "weeklyTheme": "Ramaḍān verstehen",
+      "category": "fiqh",
+      "title": "Kinder und das Fasten altersgerecht",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 97,
+      "week": 25,
+      "weekday": "Montag",
+      "weeklyTheme": "Teilen und helfen",
+      "category": "fiqh",
+      "title": "Zakāh und Ṣadaqah unterscheiden",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 98,
+      "week": 25,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Teilen und helfen",
+      "category": "akhlaq",
+      "title": "Geben ohne Gegenleistung",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 99,
+      "week": 25,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Teilen und helfen",
+      "category": "familie",
+      "title": "Mit der Familie ein Hilfsprojekt planen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 100,
+      "week": 25,
+      "weekday": "Freitag",
+      "weeklyTheme": "Teilen und helfen",
+      "category": "adab",
+      "title": "Menschen würdevoll helfen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 101,
+      "week": 26,
+      "weekday": "Montag",
+      "weeklyTheme": "Worte und Duʿāʾ",
+      "category": "dua",
+      "title": "Bittgebet beim Aufstehen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 102,
+      "week": 26,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Worte und Duʿāʾ",
+      "category": "dua",
+      "title": "Bittgebet vor dem Schlafen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 103,
+      "week": 26,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Worte und Duʿāʾ",
+      "category": "dua",
+      "title": "Bittgebet beim Verlassen des Hauses",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 104,
+      "week": 26,
+      "weekday": "Freitag",
+      "weeklyTheme": "Worte und Duʿāʾ",
+      "category": "adab",
+      "title": "Beim Bittgebet aufmerksam sein",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 105,
+      "week": 27,
+      "weekday": "Montag",
+      "weeklyTheme": "Gesundheit als Verantwortung",
+      "category": "tarbiyyah",
+      "title": "Schlaf und gesunde Gewohnheiten",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 106,
+      "week": 27,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Gesundheit als Verantwortung",
+      "category": "tarbiyyah",
+      "title": "Sich bewegen und den Körper pflegen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 107,
+      "week": 27,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Gesundheit als Verantwortung",
+      "category": "fiqh",
+      "title": "Krank sein und um Hilfe bitten",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 108,
+      "week": 27,
+      "weekday": "Freitag",
+      "weeklyTheme": "Gesundheit als Verantwortung",
+      "category": "familie",
+      "title": "Kranke Menschen rücksichtsvoll begleiten",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 109,
+      "week": 28,
+      "weekday": "Montag",
+      "weeklyTheme": "Freundschaft und Gemeinschaft",
+      "category": "akhlaq",
+      "title": "Ein guter Freund sein",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 110,
+      "week": 28,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Freundschaft und Gemeinschaft",
+      "category": "adab",
+      "title": "Neue Kinder willkommen heißen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 111,
+      "week": 28,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Freundschaft und Gemeinschaft",
+      "category": "akhlaq",
+      "title": "Niemanden auslachen oder ausschließen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 112,
+      "week": 28,
+      "weekday": "Freitag",
+      "weeklyTheme": "Freundschaft und Gemeinschaft",
+      "category": "nafs",
+      "title": "Mit Gruppendruck umgehen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 113,
+      "week": 29,
+      "weekday": "Montag",
+      "weeklyTheme": "Sicher und verantwortungsvoll",
+      "category": "tarbiyyah",
+      "title": "Persönliche Grenzen erkennen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 114,
+      "week": 29,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Sicher und verantwortungsvoll",
+      "category": "familie",
+      "title": "Mit vertrauten Erwachsenen über Sorgen sprechen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 115,
+      "week": 29,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Sicher und verantwortungsvoll",
+      "category": "adab",
+      "title": "Gute Regeln für Handy und Internet",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 116,
+      "week": 29,
+      "weekday": "Freitag",
+      "weeklyTheme": "Sicher und verantwortungsvoll",
+      "category": "nafs",
+      "title": "Was tue ich bei unangenehmen Nachrichten?",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 117,
+      "week": 30,
+      "weekday": "Montag",
+      "weeklyTheme": "Tawḥīd im Tagesleben",
+      "category": "tawhid",
+      "title": "Nur Allah gehört die Anbetung",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 118,
+      "week": 30,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Tawḥīd im Tagesleben",
+      "category": "aqidah",
+      "title": "Was bedeutet Tawakkul im Alltag?",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 119,
+      "week": 30,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Tawḥīd im Tagesleben",
+      "category": "tawhid",
+      "title": "Duʿāʾ und Hilfe durch Menschen unterscheiden",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 120,
+      "week": 30,
+      "weekday": "Freitag",
+      "weeklyTheme": "Tawḥīd im Tagesleben",
+      "category": "iman",
+      "title": "Dankbar für Allahs Gaben sein",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 121,
+      "week": 31,
+      "weekday": "Montag",
+      "weeklyTheme": "Ikhlāṣ und das Herz",
+      "category": "nafs",
+      "title": "Gute Absichten überprüfen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 122,
+      "week": 31,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Ikhlāṣ und das Herz",
+      "category": "akhlaq",
+      "title": "Gutes tun, ohne gesehen zu werden",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 123,
+      "week": 31,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Ikhlāṣ und das Herz",
+      "category": "nafs",
+      "title": "Hochmut erkennen und Bescheidenheit lernen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 124,
+      "week": 31,
+      "weekday": "Freitag",
+      "weeklyTheme": "Ikhlāṣ und das Herz",
+      "category": "tarbiyyah",
+      "title": "Mein persönliches Gute-Taten-Ziel",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 125,
+      "week": 32,
+      "weekday": "Montag",
+      "weeklyTheme": "Lernen, Üben und Durchhalten",
+      "category": "tarbiyyah",
+      "title": "Schritt für Schritt besser werden",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 126,
+      "week": 32,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Lernen, Üben und Durchhalten",
+      "category": "adab",
+      "title": "Lehrerinnen und Lehrern zuhören",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 127,
+      "week": 32,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Lernen, Üben und Durchhalten",
+      "category": "nafs",
+      "title": "Fehler als Lernchance nutzen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 128,
+      "week": 32,
+      "weekday": "Freitag",
+      "weeklyTheme": "Lernen, Üben und Durchhalten",
+      "category": "quran",
+      "title": "Eine Sūrah mit Wiederholungsplan lernen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 129,
+      "week": 33,
+      "weekday": "Montag",
+      "weeklyTheme": "Familie als Lernort",
+      "category": "familie",
+      "title": "Liebe und Respekt zuhause zeigen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 130,
+      "week": 33,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Familie als Lernort",
+      "category": "familie",
+      "title": "Auf Jüngere Rücksicht nehmen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 131,
+      "week": 33,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Familie als Lernort",
+      "category": "familie",
+      "title": "Älteren mit Würde begegnen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 132,
+      "week": 33,
+      "weekday": "Freitag",
+      "weeklyTheme": "Familie als Lernort",
+      "category": "tarbiyyah",
+      "title": "Familienregeln gemeinsam verstehen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 133,
+      "week": 34,
+      "weekday": "Montag",
+      "weeklyTheme": "Schöpfung und Umwelt",
+      "category": "aqidah",
+      "title": "Zeichen von Allahs Schöpfung betrachten",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 134,
+      "week": 34,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Schöpfung und Umwelt",
+      "category": "akhlaq",
+      "title": "Wasser verantwortungsvoll nutzen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 135,
+      "week": 34,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Schöpfung und Umwelt",
+      "category": "tarbiyyah",
+      "title": "Pflanzen pflegen und schützen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 136,
+      "week": 34,
+      "weekday": "Freitag",
+      "weeklyTheme": "Schöpfung und Umwelt",
+      "category": "adab",
+      "title": "Sauberkeit an gemeinsamen Orten",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 137,
+      "week": 35,
+      "weekday": "Montag",
+      "weeklyTheme": "Duʿāʾ und Dhikr",
+      "category": "dua",
+      "title": "Allah loben und danken",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 138,
+      "week": 35,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Duʿāʾ und Dhikr",
+      "category": "dua",
+      "title": "Um Vergebung bitten",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 139,
+      "week": 35,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Duʿāʾ und Dhikr",
+      "category": "dua",
+      "title": "Duʿāʾ für Eltern und Familie",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 140,
+      "week": 35,
+      "weekday": "Freitag",
+      "weeklyTheme": "Duʿāʾ und Dhikr",
+      "category": "dua",
+      "title": "Morgen- und Abendgedenken kennenlernen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 141,
+      "week": 36,
+      "weekday": "Montag",
+      "weeklyTheme": "Die Ṣaḥābah als Vorbilder",
+      "category": "sira",
+      "title": "Abū Bakr: Treue und Großzügigkeit",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 142,
+      "week": 36,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Die Ṣaḥābah als Vorbilder",
+      "category": "sira",
+      "title": "ʿUmar: Gerechtigkeit und Verantwortung",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 143,
+      "week": 36,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Die Ṣaḥābah als Vorbilder",
+      "category": "sira",
+      "title": "ʿUṯmān: Bescheidenheit und Geben",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 144,
+      "week": 36,
+      "weekday": "Freitag",
+      "weeklyTheme": "Die Ṣaḥābah als Vorbilder",
+      "category": "sira",
+      "title": "ʿAlī: Wissen und Mut im Guten",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 145,
+      "week": 37,
+      "weekday": "Montag",
+      "weeklyTheme": "Sīrah des Propheten ﷺ",
+      "category": "sira",
+      "title": "Die Kindheit des Propheten ﷺ",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 146,
+      "week": 37,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Sīrah des Propheten ﷺ",
+      "category": "sira",
+      "title": "Ehrlichkeit vor der Prophetenschaft",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 147,
+      "week": 37,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Sīrah des Propheten ﷺ",
+      "category": "sira",
+      "title": "Die erste Offenbarung altersgerecht",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 148,
+      "week": 37,
+      "weekday": "Freitag",
+      "weeklyTheme": "Sīrah des Propheten ﷺ",
+      "category": "sira",
+      "title": "Barmherzigkeit im Umgang mit Kindern",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 149,
+      "week": 38,
+      "weekday": "Montag",
+      "weeklyTheme": "Weitere Qurʾān-Geschichten",
+      "category": "quran",
+      "title": "Mūsā: Vertrauen in Schwierigkeiten",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 150,
+      "week": 38,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Weitere Qurʾān-Geschichten",
+      "category": "quran",
+      "title": "Yūsuf: Geduld und Vergebung",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 151,
+      "week": 38,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Weitere Qurʾān-Geschichten",
+      "category": "quran",
+      "title": "Maryam: Hingabe und Standhaftigkeit",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 152,
+      "week": 38,
+      "weekday": "Freitag",
+      "weeklyTheme": "Weitere Qurʾān-Geschichten",
+      "category": "quran",
+      "title": "Yūnus: Reue und Duʿāʾ",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 153,
+      "week": 39,
+      "weekday": "Montag",
+      "weeklyTheme": "Gebet mit Aufmerksamkeit",
+      "category": "fiqh",
+      "title": "Worte und Bedeutungen im Gebet",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 154,
+      "week": 39,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Gebet mit Aufmerksamkeit",
+      "category": "fiqh",
+      "title": "Ruhe und Aufmerksamkeit beim Beten",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 155,
+      "week": 39,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Gebet mit Aufmerksamkeit",
+      "category": "fiqh",
+      "title": "Das gemeinsame Gebet kennenlernen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 156,
+      "week": 39,
+      "weekday": "Freitag",
+      "weeklyTheme": "Gebet mit Aufmerksamkeit",
+      "category": "tarbiyyah",
+      "title": "Mit Freude das Gebet üben",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 157,
+      "week": 40,
+      "weekday": "Montag",
+      "weeklyTheme": "Gerecht und barmherzig",
+      "category": "akhlaq",
+      "title": "Fair teilen und niemanden bevorzugen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 158,
+      "week": 40,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Gerecht und barmherzig",
+      "category": "akhlaq",
+      "title": "Sich entschuldigen und verzeihen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 159,
+      "week": 40,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Gerecht und barmherzig",
+      "category": "nafs",
+      "title": "Ärger ohne verletzende Worte ausdrücken",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 160,
+      "week": 40,
+      "weekday": "Freitag",
+      "weeklyTheme": "Gerecht und barmherzig",
+      "category": "adab",
+      "title": "Rücksicht auf Menschen mit Einschränkungen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 161,
+      "week": 41,
+      "weekday": "Montag",
+      "weeklyTheme": "Moschee und Gemeinschaft",
+      "category": "fiqh",
+      "title": "Die Moschee kennenlernen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 162,
+      "week": 41,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Moschee und Gemeinschaft",
+      "category": "adab",
+      "title": "Verhalten in der Moschee",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 163,
+      "week": 41,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Moschee und Gemeinschaft",
+      "category": "familie",
+      "title": "Freundlicher Besuch bei Verwandten",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 164,
+      "week": 41,
+      "weekday": "Freitag",
+      "weeklyTheme": "Moschee und Gemeinschaft",
+      "category": "akhlaq",
+      "title": "Gemeinsam helfen in der Nachbarschaft",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 165,
+      "week": 42,
+      "weekday": "Montag",
+      "weeklyTheme": "Sprache und Respekt",
+      "category": "adab",
+      "title": "Nicht lästern oder spotten",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 166,
+      "week": 42,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Sprache und Respekt",
+      "category": "adab",
+      "title": "Jemanden ausreden lassen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 167,
+      "week": 42,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Sprache und Respekt",
+      "category": "akhlaq",
+      "title": "Ein aufrichtiges Kompliment machen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 168,
+      "week": 42,
+      "weekday": "Freitag",
+      "weeklyTheme": "Sprache und Respekt",
+      "category": "nafs",
+      "title": "Wenn ich wütend werde: Pause und Duʿāʾ",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 169,
+      "week": 43,
+      "weekday": "Montag",
+      "weeklyTheme": "Geschwister und Miteinander",
+      "category": "familie",
+      "title": "Streit unter Geschwistern lösen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 170,
+      "week": 43,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Geschwister und Miteinander",
+      "category": "tarbiyyah",
+      "title": "Rücksicht auf kleine Kinder",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 171,
+      "week": 43,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Geschwister und Miteinander",
+      "category": "familie",
+      "title": "Wenn ich mich ungerecht behandelt fühle",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 172,
+      "week": 43,
+      "weekday": "Freitag",
+      "weeklyTheme": "Geschwister und Miteinander",
+      "category": "akhlaq",
+      "title": "Trost und Mitgefühl zeigen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 173,
+      "week": 44,
+      "weekday": "Montag",
+      "weeklyTheme": "Wissen mit Adab suchen",
+      "category": "adab",
+      "title": "Respektvoll Fragen stellen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 174,
+      "week": 44,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Wissen mit Adab suchen",
+      "category": "quran",
+      "title": "Qurʾān-Bedeutungen mit Erwachsenen lernen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 175,
+      "week": 44,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Wissen mit Adab suchen",
+      "category": "tarbiyyah",
+      "title": "Wichtiges wiederholen und behalten",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 176,
+      "week": 44,
+      "weekday": "Freitag",
+      "weeklyTheme": "Wissen mit Adab suchen",
+      "category": "nafs",
+      "title": "Geduldig bleiben, wenn etwas schwer ist",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 177,
+      "week": 45,
+      "weekday": "Montag",
+      "weeklyTheme": "Allahs Namen kindgerecht",
+      "category": "aqidah",
+      "title": "Allah ist ar-Raḥmān: Seine Barmherzigkeit",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 178,
+      "week": 45,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Allahs Namen kindgerecht",
+      "category": "aqidah",
+      "title": "Allah ist al-ʿAlīm: Sein Wissen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 179,
+      "week": 45,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Allahs Namen kindgerecht",
+      "category": "aqidah",
+      "title": "Allah ist as-Samīʿ: Er hört",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 180,
+      "week": 45,
+      "weekday": "Freitag",
+      "weeklyTheme": "Allahs Namen kindgerecht",
+      "category": "aqidah",
+      "title": "Allah ist al-Baṣīr: Er sieht",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 181,
+      "week": 46,
+      "weekday": "Montag",
+      "weeklyTheme": "Īmān, Hoffnung und Vertrauen",
+      "category": "iman",
+      "title": "Hoffnung auf Allahs Barmherzigkeit",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 182,
+      "week": 46,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Īmān, Hoffnung und Vertrauen",
+      "category": "iman",
+      "title": "Verantwortung für eigene Entscheidungen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 183,
+      "week": 46,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Īmān, Hoffnung und Vertrauen",
+      "category": "nafs",
+      "title": "Mit Enttäuschungen umgehen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 184,
+      "week": 46,
+      "weekday": "Freitag",
+      "weeklyTheme": "Īmān, Hoffnung und Vertrauen",
+      "category": "dua",
+      "title": "In Schwierigkeiten Allah bitten",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 185,
+      "week": 47,
+      "weekday": "Montag",
+      "weeklyTheme": "Fiqh im Alltag",
+      "category": "fiqh",
+      "title": "Wie bereite ich mich auf Jumuʿah vor?",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 186,
+      "week": 47,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Fiqh im Alltag",
+      "category": "fiqh",
+      "title": "Grundideen des Gemeinschaftsgebets",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 187,
+      "week": 47,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Fiqh im Alltag",
+      "category": "fiqh",
+      "title": "Ehrlich handeln beim Kaufen und Tauschen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 188,
+      "week": 47,
+      "weekday": "Freitag",
+      "weeklyTheme": "Fiqh im Alltag",
+      "category": "adab",
+      "title": "Umgang mit fremdem Eigentum",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 189,
+      "week": 48,
+      "weekday": "Montag",
+      "weeklyTheme": "Islamische Feste und Jahreszeiten",
+      "category": "fiqh",
+      "title": "ʿĪd al-Fiṭr altersgerecht kennenlernen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 190,
+      "week": 48,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Islamische Feste und Jahreszeiten",
+      "category": "fiqh",
+      "title": "ʿĪd al-Aḍḥā kindgerecht kennenlernen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 191,
+      "week": 48,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Islamische Feste und Jahreszeiten",
+      "category": "familie",
+      "title": "Feste mit Dankbarkeit und Rücksicht",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 192,
+      "week": 48,
+      "weekday": "Freitag",
+      "weeklyTheme": "Islamische Feste und Jahreszeiten",
+      "category": "adab",
+      "title": "Gutes Verhalten bei Einladungen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 193,
+      "week": 49,
+      "weekday": "Montag",
+      "weeklyTheme": "Prüfungen und Dankbarkeit",
+      "category": "nafs",
+      "title": "Wenn ein Plan nicht gelingt",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 194,
+      "week": 49,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Prüfungen und Dankbarkeit",
+      "category": "tarbiyyah",
+      "title": "Hilfreich statt perfektionistisch sein",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 195,
+      "week": 49,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Prüfungen und Dankbarkeit",
+      "category": "akhlaq",
+      "title": "Andere in schweren Momenten unterstützen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 196,
+      "week": 49,
+      "weekday": "Freitag",
+      "weeklyTheme": "Prüfungen und Dankbarkeit",
+      "category": "dua",
+      "title": "Allah in guten und schweren Zeiten gedenken",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 197,
+      "week": 50,
+      "weekday": "Montag",
+      "weeklyTheme": "Kinder übernehmen Verantwortung",
+      "category": "familie",
+      "title": "Ein Familienprojekt planen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 198,
+      "week": 50,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Kinder übernehmen Verantwortung",
+      "category": "tarbiyyah",
+      "title": "Für einen eigenen Gegenstand sorgen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 199,
+      "week": 50,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Kinder übernehmen Verantwortung",
+      "category": "adab",
+      "title": "Pünktlichkeit und Zusagen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 200,
+      "week": 50,
+      "weekday": "Freitag",
+      "weeklyTheme": "Kinder übernehmen Verantwortung",
+      "category": "akhlaq",
+      "title": "Verantwortung für einen Fehler übernehmen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 201,
+      "week": 51,
+      "weekday": "Montag",
+      "weeklyTheme": "Wissen in Taten umsetzen",
+      "category": "quran",
+      "title": "Eine gelernte Sūrah erklären und anwenden",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 202,
+      "week": 51,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Wissen in Taten umsetzen",
+      "category": "fiqh",
+      "title": "Wuḍūʾ und Ṣalāh im Übungsparcours",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 203,
+      "week": 51,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Wissen in Taten umsetzen",
+      "category": "adab",
+      "title": "Alltagsadab in Rollenspielen üben",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 204,
+      "week": 51,
+      "weekday": "Freitag",
+      "weeklyTheme": "Wissen in Taten umsetzen",
+      "category": "akhlaq",
+      "title": "Mein persönliches Barmherzigkeitsprojekt",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 205,
+      "week": 52,
+      "weekday": "Montag",
+      "weeklyTheme": "Jahresabschluss und Neubeginn",
+      "category": "tawhid",
+      "title": "Was habe ich über Tawḥīd gelernt?",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 206,
+      "week": 52,
+      "weekday": "Dienstag",
+      "weeklyTheme": "Jahresabschluss und Neubeginn",
+      "category": "iman",
+      "title": "Die Glaubensgrundlagen wiederholen",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 207,
+      "week": 52,
+      "weekday": "Donnerstag",
+      "weeklyTheme": "Jahresabschluss und Neubeginn",
+      "category": "tarbiyyah",
+      "title": "Mein Lernweg: Fortschritt feiern",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    },
+    {
+      "slot": 208,
+      "week": 52,
+      "weekday": "Freitag",
+      "weeklyTheme": "Jahresabschluss und Neubeginn",
+      "category": "familie",
+      "title": "Mit der Familie Ziele für den nächsten Zyklus",
+      "status": "THEMATIC_PLAN_ONLY",
+      "completedLesson": false,
+      "originalSourcesVerified": false,
+      "originalSourceRefs": [],
+      "textByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "quizByAgeApproved": {
+        "4-5": false,
+        "6-8": false,
+        "9-10": false
+      },
+      "masterVoiceApproved": false,
+      "previewPassed": false,
+      "visitorReleased": false
+    }
+  ]
+}
