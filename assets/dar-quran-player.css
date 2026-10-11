@@ -2099,3 +2099,24 @@ html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-sleep-sl
   color:var(--v108-accent)!important;
   -webkit-text-fill-color:var(--v108-accent)!important;
 }
+
+
+/* Prevent line breaks inside Arabic words and detached tajwīd marks.
+   Keep every Qurʾān glyph/diacritic unchanged; adjust layout only. */
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-ayah-ar {
+  direction:rtl!important;
+  unicode-bidi:plaintext!important;
+  word-break:normal!important;
+  overflow-wrap:normal!important;
+  white-space:normal!important;
+  hyphens:none!important;
+  text-align:center!important;
+  max-width:100%!important;
+  line-height:1.85!important;
+  font-kerning:normal!important;
+}
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-ayah-ar .tj {
+  word-break:normal!important;
+  overflow-wrap:normal!important;
+  white-space:normal!important;
+}
