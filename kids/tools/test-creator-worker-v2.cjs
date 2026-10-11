@@ -32,9 +32,11 @@ const get=(path,method="GET")=>handler.fetch(new Request("https://kids-preview.e
   const reject=await get("/kids/start.html","POST");
   assert.equal(reject.status,405);
   assert.equal(calls,before,"blocked requests never reach asset namespace");
-  const redirect=await get("/kids/start");
+  const redirect=await get("/kids/");
   assert.equal(redirect.status,302);
-  assert.match(redirect.headers.get("location"),/\/kids\/start\.html$/);
+  assert.match(redirect.headers.get("location"),/\/kids\/start$/);
+  const canonical=await get("/kids/start");
+  assert.equal(canonical.status,200,"Canonical start must not redirect to start.html");
   const home=await get("/kids/start.html");
   assert.equal(home.status,200);
   assert.match(await home.text(),/KIDS CONTENT/);
