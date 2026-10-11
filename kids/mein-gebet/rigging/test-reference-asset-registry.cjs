@@ -119,3 +119,32 @@ test("Actual V7.7 Ruku physical reach gap blocks prayer pose approval",()=>{
  assert.equal(locked.release.productionReady,false);
  assert.equal(locked.milestones.filter(m=>m.approved).length,0);
 });
+
+test("V7.7 Ruku arm/robe research trial remains rejected until true physical approval",()=>{
+ const x=JSON.parse(fs.readFileSync(path.join(__dirname,"V77-RUKU-ARM-ROBE-RESEARCH-STRICT-20261012.json"),"utf8"));
+ const gates=JSON.parse(fs.readFileSync(path.join(__dirname,"COMPLETION-GATES-V1.json"),"utf8"));
+ assert.equal(x.schemaVersion,1);
+ assert.equal(x.source.pinSHA256,gates.originals.boy.candidateGlbSha256);
+ assert.equal(x.experimentalModels.length,2);
+ assert.equal(x.experimentalModels[0].sha256,"b72a4915dc796e8821265ba4726abd7c92786289a3186b2afc2b71be5d14f435");
+ assert.equal(x.experimentalModels[1].sha256,"31860da87f7a140f6f0270e02e44ac1752fc86e59ecc8554a38c6a5062443c57");
+ assert.equal(x.experimentalModels[1].modifiedGarmentWeightVertices,5484);
+ for(const m of x.experimentalModels) assert.equal(m.approved,false);
+ assert.equal(x.jointMeasurement.conditionsComparable,false);
+ assert.equal(x.jointMeasurement.actualPalmKneeMeshContactVerified,false);
+ assert.ok(x.jointMeasurement.newRigCandidateWristToKneeMeters<.05);
+ assert.ok(x.jointMeasurement.original85DegreeAttemptWristToKneeMeters>.20);
+ assert.ok(x.qualityFailures.some(t=>t.includes("0.10 m")));
+ assert.ok(x.qualityFailures.length>=7);
+ assert.equal(x.nonDestructiveInvariants.sourceOriginalBinaryPrefixIntact,true);
+ assert.equal(x.nonDestructiveInvariants.originalSourceOverwritten,false);
+ assert.equal(x.driveEvidenceFolder.fileCount,29);
+ assert.equal(x.driveEvidenceFolder.bothDraftGlbRoundTripSHA256Verified,true);
+ for(const [key,value] of Object.entries(x.release)){
+  assert.equal(value,false,"release guard must stay blocked: "+key);
+ }
+ assert.equal(gates.milestones.filter(m=>m.approved).length,0);
+ assert.equal(gates.release.productionReady,false);
+ assert.equal(gates.release.mergeMain,false);
+ assert.equal(gates.release.liveDeploy,false);
+});
