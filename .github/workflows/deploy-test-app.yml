@@ -268,7 +268,13 @@ jobs:
           done
           # Verify actual new owner dashboard content, not merely a 200 fallback.
           curl -fsS -H 'Cache-Control: no-cache' "$BASE/kids/test-console/index.html" > /tmp/kids-creator-console.html
-          grep -q 'KIDS TEST · Prüfzentrale' /tmp/kids-creator-console.html || { echo "::error::Creator console title missing"; exit 1; }
+          if ! grep -Fq 'KIDS TEST · Prüfzentrale' /tmp/kids-creator-console.html; then
+            echo "::error::Creator console title missing in served HTML; first 500 bytes:"
+            head -c 500 /tmp/kids-creator-console.html
+            echo
+            wc -c /tmp/kids-creator-console.html
+            exit 1
+          fi
           curl -fsS -H 'Cache-Control: no-cache' "$BASE/kids/test-console/catalogue-v1.json" > /tmp/kids-creator-catalogue.json
           node -e 'const x=JSON.parse(require("fs").readFileSync("/tmp/kids-creator-catalogue.json","utf8")); if(x.weeks!==52||x.entries.length!==208||x.entries.filter(e=>e.catalogued).length!==38){throw Error("KIDS Creator yearly catalogue invalid")}; console.log("KIDS Creator console live: 52 weeks, 38 built, 170 open")'
           CODE="$(curl -sS -o /tmp/kids-creator-denied -w '%{http_code}' "$BASE/test/academy/login")"
