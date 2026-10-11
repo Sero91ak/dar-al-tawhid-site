@@ -590,6 +590,152 @@ const terms={
       "9-10": "Aṣ-Ṣamad. Aṣ-Ṣamad gehört zu den Namen Allahs in Sūrat al-Iḫlāṣ. Alle Geschöpfe sind auf Ihn angewiesen; Er braucht niemanden."
     },
     "audioByAge": {}
+  },
+  "term-30": {
+    "id": "term-30",
+    "term": "Ḥamd",
+    "arabic": "حمد",
+    "aliases": [
+      "Ḥamd",
+      "Hamd",
+      "Al-ḥamdu lillāh",
+      "Alhamdulillah"
+    ],
+    "ageMeaning": {
+      "4-5": "Allah loben und Ihm danken.",
+      "6-8": "Al-ḥamdu lillāh heißt: Alles Lob gehört Allah.",
+      "9-10": "Ḥamd ist das Lob Allahs. Mit Al-ḥamdu lillāh loben wir Allah für Seine Vollkommenheit und Seine Gaben."
+    },
+    "voiceScript": {
+      "4-5": "Ḥamd. Das heißt: Allah loben und Ihm danken.",
+      "6-8": "Ḥamd. Al-ḥamdu lillāh heißt: Alles Lob gehört Allah.",
+      "9-10": "Ḥamd. Ḥamd ist das Lob Allahs. Mit Al-ḥamdu lillāh loben wir Allah für Seine Vollkommenheit und Seine Gaben."
+    },
+    "audioByAge": {}
+  },
+  "term-31": {
+    "id": "term-31",
+    "term": "Schukr",
+    "arabic": "شكر",
+    "aliases": [
+      "Schukr",
+      "Shukr",
+      "Dankbarkeit"
+    ],
+    "ageMeaning": {
+      "4-5": "Dankbar sein.",
+      "6-8": "Schukr ist das arabische Wort für Dankbarkeit.",
+      "9-10": "Schukr bezeichnet Dankbarkeit im Herzen, mit Worten und durch gute Handlungen."
+    },
+    "voiceScript": {
+      "4-5": "Schukr. Das heißt: Dankbar sein.",
+      "6-8": "Schukr. Schukr ist das arabische Wort für Dankbarkeit.",
+      "9-10": "Schukr. Schukr bezeichnet Dankbarkeit im Herzen, mit Worten und durch gute Handlungen."
+    },
+    "audioByAge": {}
+  },
+  "term-32": {
+    "id": "term-32",
+    "term": "Tartīl",
+    "arabic": "ترتيل",
+    "aliases": [
+      "Tartīl",
+      "Tartil"
+    ],
+    "ageMeaning": {
+      "4-5": "Qurʾān langsam und deutlich lesen.",
+      "6-8": "Tartīl heißt: Wir sprechen die Wörter des Qurʾāns ruhig und deutlich.",
+      "9-10": "Tartīl meint einen sorgfältigen, geordneten Vortrag des Qurʾāns nach den Regeln des Lesens."
+    },
+    "voiceScript": {
+      "4-5": "Tartīl. Das heißt: Qurʾān langsam und deutlich lesen.",
+      "6-8": "Tartīl. Tartīl heißt: Wir sprechen die Wörter des Qurʾāns ruhig und deutlich.",
+      "9-10": "Tartīl. Tartīl meint einen sorgfältigen, geordneten Vortrag des Qurʾāns nach den Regeln des Lesens."
+    },
+    "audioByAge": {}
+  },
+  "term-33": {
+    "id": "term-33",
+    "term": "Ḥadīṯ",
+    "arabic": "حديث",
+    "aliases": [
+      "Ḥadīṯ",
+      "Hadith",
+      "Hadis"
+    ],
+    "ageMeaning": {
+      "4-5": "Eine überlieferte Aussage oder Handlung des Propheten ﷺ.",
+      "6-8": "Ein Ḥadīṯ berichtet uns etwas über die Worte oder Taten des Propheten ﷺ.",
+      "9-10": "Ein Ḥadīṯ ist eine Überlieferung über den Propheten ﷺ. Seine Zuverlässigkeit muss wissenschaftlich geprüft werden."
+    },
+    "voiceScript": {
+      "4-5": "Ḥadīṯ. Das heißt: Eine überlieferte Aussage oder Handlung des Propheten ﷺ.",
+      "6-8": "Ḥadīṯ. Ein Ḥadīṯ berichtet uns etwas über die Worte oder Taten des Propheten ﷺ.",
+      "9-10": "Ḥadīṯ. Ein Ḥadīṯ ist eine Überlieferung über den Propheten ﷺ. Seine Zuverlässigkeit muss wissenschaftlich geprüft werden."
+    },
+    "audioByAge": {}
+  },
+  "term-34": {
+    "id": "term-34",
+    "term": "Ṣaḥīḥ",
+    "arabic": "صحيح",
+    "aliases": [
+      "Ṣaḥīḥ",
+      "Sahih",
+      "sahih"
+    ],
+    "ageMeaning": {
+      "4-5": "Zuverlässig überliefert.",
+      "6-8": "Ṣaḥīḥ bedeutet bei einem Ḥadīṯ: Die Überlieferung gilt als authentisch.",
+      "9-10": "Ṣaḥīḥ ist eine fachliche Einstufung einer Überlieferung nach Kriterien der Ḥadīṯ-Wissenschaft."
+    },
+    "voiceScript": {
+      "4-5": "Ṣaḥīḥ. Das heißt: Zuverlässig überliefert.",
+      "6-8": "Ṣaḥīḥ. Ṣaḥīḥ bedeutet bei einem Ḥadīṯ: Die Überlieferung gilt als authentisch.",
+      "9-10": "Ṣaḥīḥ. Ṣaḥīḥ ist eine fachliche Einstufung einer Überlieferung nach Kriterien der Ḥadīṯ-Wissenschaft."
+    },
+    "audioByAge": {}
+  },
+  "term-35": {
+    "id": "term-35",
+    "term": "Fuṣḥā",
+    "arabic": "فصحى",
+    "aliases": [
+      "Fuṣḥā",
+      "Fusha",
+      "Fussah"
+    ],
+    "ageMeaning": {
+      "4-5": "Klares Hocharabisch.",
+      "6-8": "Fuṣḥā ist die arabische Hochsprache, die wir beim Lernen vieler arabischer Wörter hören.",
+      "9-10": "Fuṣḥā bedeutet arabische Hochsprache. Die Qurʾān-Rezitation ist davon gesondert korrekt nach ihren Regeln vorzutragen."
+    },
+    "voiceScript": {
+      "4-5": "Fuṣḥā. Das heißt: Klares Hocharabisch.",
+      "6-8": "Fuṣḥā. Fuṣḥā ist die arabische Hochsprache, die wir beim Lernen vieler arabischer Wörter hören.",
+      "9-10": "Fuṣḥā. Fuṣḥā bedeutet arabische Hochsprache. Die Qurʾān-Rezitation ist davon gesondert korrekt nach ihren Regeln vorzutragen."
+    },
+    "audioByAge": {}
+  },
+  "term-36": {
+    "id": "term-36",
+    "term": "Al-ḥamdu lillāh",
+    "arabic": "الحمد لله",
+    "aliases": [
+      "Al-ḥamdu lillāh",
+      "Alhamdu lillah"
+    ],
+    "ageMeaning": {
+      "4-5": "Alles Lob gehört Allah.",
+      "6-8": "Al-ḥamdu lillāh heißt: Alles Lob gebührt Allah. Wir danken Allah.",
+      "9-10": "Al-ḥamdu lillāh ist ein Lobpreis Allahs. Er drückt Anerkennung und Dankbarkeit gegenüber Allah aus."
+    },
+    "voiceScript": {
+      "4-5": "Al-ḥamdu lillāh. Das heißt: Alles Lob gehört Allah.",
+      "6-8": "Al-ḥamdu lillāh. Al-ḥamdu lillāh heißt: Alles Lob gebührt Allah. Wir danken Allah.",
+      "9-10": "Al-ḥamdu lillāh. Al-ḥamdu lillāh ist ein Lobpreis Allahs. Er drückt Anerkennung und Dankbarkeit gegenüber Allah aus."
+    },
+    "audioByAge": {}
   }
 };
 const order=Object.values(terms).sort((a,b)=>b.term.length-a.term.length);
