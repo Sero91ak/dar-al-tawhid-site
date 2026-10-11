@@ -28,6 +28,20 @@ const get=(path,method="GET")=>handler.fetch(new Request("https://kids-preview.e
     const res=await get(p);
     assert.equal(res.status,404,"blocked "+p);
   }
+  // Only the five existing KIDS academy artwork assets may use the legacy
+  // /desktop-preview/assets path. No unrestricted desktop-preview routing.
+  const allowedArt=[
+    "kids-academy-akhlaq-v1.jpg","kids-academy-adab-v1.jpg",
+    "kids-academy-hero-v1.jpg","kids-academy-hero-boys-v1.jpg",
+    "kids-academy-hero-girls-v1.jpg"];
+  for(const asset of allowedArt){
+    assert.ok(fs.existsSync(path.join(root,"desktop-preview/assets",asset)),
+      "Missing deployed KIDS artwork source: "+asset);
+    const result=await get("/desktop-preview/assets/"+asset);
+    assert.equal(result.status,200,"Allowed KIDS artwork "+asset);
+  }
+  assert.equal((await get("/desktop-preview/assets/secret.html")).status,404);
+  assert.equal((await get("/desktop-preview/")).status,404);
   const before=calls;
   const reject=await get("/kids/start.html","POST");
   assert.equal(reject.status,405);
@@ -48,10 +62,23 @@ const get=(path,method="GET")=>handler.fetch(new Request("https://kids-preview.e
   assert.equal(new Set(catalogue.entries.map(e=>e.slot)).size,208);
   assert.doesNotMatch(consoleHtml,/localStorage|indexedDB|speechSynthesis|creatorSandbox|UserDefaults\.standard/);
   assert.match(consoleHtml,/KIDS TEST · Prüfzentrale/);
+  assert.match(consoleHtml,/id="openKidsEditor"/,"Simplified three-way KIDS TEST navigation");
+  assert.match(consoleHtml,/38 Unterrichte öffnen/);
+  assert.match(consoleHtml,/kidstest-editor-details/);
+  assert.match(consoleHtml,/selected>38 vorhandene Lektionen/);
+  const academySrc=fs.readFileSync(path.join(root,"kids/akademie/index.html"),"utf8");
+  assert.match(academySrc,/KIDS_CREATOR_PREVIEW=location\.hostname===/);
+  assert.match(academySrc,/stagingAccess\(lessonId,st\)/);
+  assert.match(academySrc,/const access=stagingAccess\(chosen\)/);
+  assert.match(academySrc,/kidsCreatorAcademyBar/);
+  assert.match(academySrc,/KIDS TEST · 38 Unterrichte frei/);
+  assert.match(academySrc,/#academyCreatorVoiceBanner,#academyPilotStatus,#audioDiagnostics/);
+  assert.ok(!academySrc.includes('const access=academySchoolState().access(chosen);'));
+
   assert.match(consoleHtml,/fetch\("\/kids\/test-console\/catalogue-v1\.json"/);
-  const inline=consoleHtml.match(/<script>([\s\S]*?)<\/script>/);
-  assert.ok(inline,"Creator console must have a real browser script");
-  new vm.Script(inline[1],{filename:"kids-test-console-v3.js"});
+  const scripts=[...consoleHtml.matchAll(/<script>([\\s\\S]*?)<\\/script>/g)];
+  assert.ok(scripts.length>=2,"Creator console must have navigation and lesson JS");
+  scripts.forEach((match,i)=>new vm.Script(match[1],{filename:"kids-test-console-v"+i+".js"}));
   const consoleRoute=await get("/kids/test-console/index.html");
   assert.equal(consoleRoute.status,200,"Creator console must remain within KIDS-only Worker");
   const catalogueRoute=await get("/kids/test-console/catalogue-v1.json");
