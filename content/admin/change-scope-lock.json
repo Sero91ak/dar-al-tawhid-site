@@ -155,6 +155,16 @@
   ],
   "unlockedScopes": [
     {
+      "id": "kids-akademie-v23-208-planning-stems-12-strands-20261011",
+      "at": "2026-10-11T19:15:00+02:00",
+      "approvedBy": "user-request-expand-all-kids-lessons-including-tawhid-iman-ikhlas-adab-akhlaq-tarbiyah-nafs-all-ages-20261011",
+      "reason": "208-Unterrichts-Sollplan, 170 unfreigeschaltete Redaktionsentwuerfe und Null-Credit-Verifikation aller 3 Alterskonzepte; nur bestehende Akademie-CI beruehren, keine unverifizierte religioese Aussage oder Audio im Kinderplayer.",
+      "paths": [
+        ".github/workflows/check-kids-academy-v9.yml"
+      ],
+      "expiresAt": "2026-10-18T23:59:00.000Z"
+    },
+    {
       "id": "public-website-app-loader-removal-20261011",
       "at": "2026-10-11T17:20:00+02:00",
       "approvedBy": "user-explicit-website-only-no-loader-no-app-changes-20261011",
