@@ -226,6 +226,7 @@ jobs:
           set -euo pipefail
           test "$(git branch --show-current)" = "kids-creator-staging"
           node --check kids/creator-test/worker.js
+          node kids/tools/test-creator-worker-v2.cjs
           node kids/tools/test-native-creator-v2.cjs
           node scripts/test-app-health-check.js
           echo "Staging: no production route, no visitor commit, no App Store upload"
