@@ -88,3 +88,34 @@ test("Profile view coverage rejects mirrored left-side placeholders as originals
  assert.equal(coverage.checks.productionReady,false);
  assert.equal(registry.productionApproved,false);
 });
+
+test("Actual V7.7 Ruku physical reach gap blocks prayer pose approval",()=>{
+ const x=JSON.parse(fs.readFileSync(path.join(__dirname,"V77-RUKU-REAL-RIG-REACH-20261012.json"),"utf8"));
+ const locked=JSON.parse(fs.readFileSync(path.join(__dirname,"COMPLETION-GATES-V1.json"),"utf8"));
+ assert.equal(x.schemaVersion,1);
+ assert.equal(x.source.sha256,locked.originals.boy.candidateGlbSha256);
+ assert.equal(x.source.sha256,"353b028862f91922d6288cf6ede09d5c8150815657c66c9c116b7775311c07fa");
+ assert.equal(x.source.bytes,4382224);
+ assert.equal(x.source.rigJoints,19);
+ assert.match(x.measurement.type,/joint-to-joint.*not mesh-to-mesh/);
+ assert.equal(x.measurement.targetJointDistanceMeters,.03);
+ assert.equal(x.measurement.samples.length,2);
+ for(const [i,degrees,gap] of [[0,85,.2027687877565329],[1,103,.09485159229998863]]){
+  const sample=x.measurement.samples[i];
+  assert.equal(sample.spineForwardBendDegrees,degrees);
+  assert.equal(sample.physicallyAccepted,false);
+  assert.equal(sample.feetBonesUnchanged,true);
+  for(const side of ["left","right"]){
+   assert.ok(Math.abs(sample.handToKneeJointGapMetres[side]-gap)<.00002);
+   assert.ok(sample.handToKneeJointGapMetres[side]>x.measurement.targetJointDistanceMeters);
+  }
+ }
+ assert.ok(x.visibleBlockers.length>=5);
+ for(const field of ["candidateRukuGLBWritten","sourceModelOverwritten","physicalMeshContactVerified",
+   "fullOutfitDeformationApproved","humanPrayerReviewApproved","rukuApproved","productionApproved"]){
+  assert.equal(x.output[field],false,field+" must stay explicitly unapproved");
+ }
+ assert.equal(x.output.realPreviewRenderMade,true);
+ assert.equal(locked.release.productionReady,false);
+ assert.equal(locked.milestones.filter(m=>m.approved).length,0);
+});
