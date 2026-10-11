@@ -3685,7 +3685,9 @@ function launchNextDailyStep(){
   var next=plan.find(function(s){return !dailyDone(s.id)});
   if(next)launchDailyStep(next.id);
 }
-/* KIDS_TAB_POSITION_STABILITY_V1318: fix iOS document/shell scroll split on tabs. */
+/* KIDS_TAB_POSITION_STABILITY_V1318: reset every possible iOS scroll layer.
+   Synchronize data-view BEFORE measuring the new page; correct WebKit's
+   post-layout scroll anchoring for two frames without affecting detail readers. */
 function kidsResetMainScroll(){
   var scroller=document.querySelector(".shell");
   if(scroller)scroller.scrollTop=0;
