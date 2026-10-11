@@ -7486,6 +7486,19 @@
         "index.html"
       ],
       "expiresAt": "2026-11-30T23:59:00.000Z"
+    },
+    {
+      "id": "dar-test-foldable-whatsapp-40-60-2026-10-11",
+      "at": "2026-10-11T18:09:00+02:00",
+      "approvedBy": "user-explicit-foldable-40-60-samsung-fold-whatsapp-reference-test-first",
+      "reason": "Nutzer verlangt das im Screenshot gezeigte vollwertige, unabhängige 40/60 Master-Detail-Layout: linke Themen/Surenauswahl und rechte lesbare Details auf aufgeklappten Foldables, mit vollständigen Labels. Ausschließlich DAR Test als erste Prüfphase; keine Besucher-, Kids-, Push- oder native Live-Freigabe.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/assets/adaptive-layout.js",
+        "test/assets/fold-master-detail-v1340.css",
+        "cloudflare/test-app-worker.js"
+      ],
+      "expiresAt": "2026-11-30T23:59:00.000Z"
     }
   ],
   "enabled": true

@@ -391,6 +391,20 @@ async function finalizeDarTestHomeV1193(asset) {
     else if (html.includes("<body")) html = html.replace("<body", welcomeLink + "<body");
     else html = welcomeLink + html;
   }
+  // DAR TEST v1340 · 40:60 Foldable layout. Test-only: the original app
+  // routes/data/media stay intact, without iframe or duplicate application.
+  // Replace the shared controller only in the TEST HTML response.
+  html = html.replace(
+    /(?:\/test)?\/assets\/adaptive-layout\.js(?:\?v=[^"']*)?/g,
+    "/test/assets/adaptive-layout.js?v=1340-fold-40-60"
+  );
+  if (!html.includes('id="darFoldMasterDetailV1340"')) {
+    const styleLink =
+      '<link rel="stylesheet" id="darFoldMasterDetailV1340" href="/test/assets/fold-master-detail-v1340.css?v=1340-fold-40-60">';
+    if (html.includes("</html>")) html = html.replace("</html>", styleLink + "</html>");
+    else html += styleLink;
+  }
+
   const headers = new Headers(asset.headers);
   headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
   headers.set("Pragma", "no-cache");

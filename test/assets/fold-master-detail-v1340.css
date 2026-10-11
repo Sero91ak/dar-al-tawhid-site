@@ -1,0 +1,112 @@
+/**
+ * DĀR AL TAWḤĪD · DAR TEST ONLY · Foldable Master/Detail v1340
+ * WhatsApp Business-like 40% index / 60% reader. Real viewport capacity is
+ * computed in /test/assets/adaptive-layout.js; this file styles only dual mode.
+ * No copied posts/media. No changes to visitors, Kids, service workers or push.
+ */
+html[data-fold-dual="1"]:not([data-layout-surface="phone-landscape"])
+.dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"]){
+  display:grid!important;
+  grid-template-columns:minmax(0,var(--fold-rail-current,40%)) minmax(0,1fr)!important;
+  grid-template-rows:minmax(0,1fr)!important;
+  align-items:stretch!important;
+  gap:12px!important;
+  min-width:0!important;
+  width:100%!important;
+  max-width:100%!important;
+  height:var(--dar-fold-pane-height,calc(100dvh - 148px))!important;
+  min-height:0!important;
+  overflow:hidden!important;
+  overscroll-behavior:contain!important;
+}
+html[data-fold-dual="1"]:not([data-layout-surface="phone-landscape"])
+.dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"]) > .dar-fold__rail,
+html[data-fold-dual="1"]:not([data-layout-surface="phone-landscape"])
+.dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"]) > .dar-fold__pane{
+  position:relative!important;
+  inset:auto!important;
+  grid-row:1!important;
+  display:block!important;
+  min-width:0!important;
+  max-width:100%!important;
+  min-height:0!important;
+  max-height:100%!important;
+  height:100%!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  overscroll-behavior-y:contain!important;
+  -webkit-overflow-scrolling:touch!important;
+  touch-action:pan-y!important;
+  box-sizing:border-box!important;
+  transition:none!important;
+  transform:none!important;
+}
+html[data-fold-dual="1"]:not([data-layout-surface="phone-landscape"])
+.dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"]) > .dar-fold__rail{
+  grid-column:1!important;
+  width:100%!important;
+  padding:10px 12px 110px 4px!important;
+  background:linear-gradient(90deg,transparent calc(100% - 1px),var(--fold-divider,rgba(180,154,93,.25)) calc(100% - 1px))!important;
+}
+html[data-fold-dual="1"]:not([data-layout-surface="phone-landscape"])
+.dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"]) > .dar-fold__pane{
+  grid-column:2!important;
+  width:100%!important;
+  padding:10px 12px 120px 4px!important;
+}
+/* A side tab rail may be left or right. The selection itself stays left;
+   no master/detail reversal, regardless of the tab preference. */
+html.dar-test-side-nav[data-dar-nav-position="left"][data-fold-dual="1"]
+.dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"]){
+  grid-template-columns:minmax(0,var(--fold-rail-current,40%)) minmax(0,1fr)!important;
+}
+html.dar-test-side-nav[data-dar-nav-position="left"][data-fold-dual="1"]
+.dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"]) > .dar-fold__rail{
+  grid-column:1!important;
+  grid-row:1!important;
+  padding:10px 12px 110px 4px!important;
+}
+html.dar-test-side-nav[data-dar-nav-position="left"][data-fold-dual="1"]
+.dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"]) > .dar-fold__pane{
+  grid-column:2!important;
+  grid-row:1!important;
+  padding:10px 12px 120px 4px!important;
+}
+/* Label readability: never squeeze navigation labels into single-line ellipses. */
+html[data-fold-dual="1"] .dar-fold__rail :is(
+  .quran-surah-card,.qov-segment-btn,.post-card,.dua-card,.lib-card,
+  .qsrc-card,.topic-card,[data-nav],[data-qsrc-open],[data-library-open]
+){
+  min-width:0!important;
+  max-width:100%!important;
+  white-space:normal!important;
+  overflow-wrap:break-word!important;
+  word-break:normal!important;
+  line-height:1.35!important;
+  box-sizing:border-box!important;
+}
+html[data-fold-dual="1"] .dar-fold__rail :is(
+  .quran-surah-card,.post-card,.dua-card,.lib-card,.qsrc-card,.topic-card
+) :is(span,strong,p,small){
+  min-width:0!important;
+  white-space:normal!important;
+  overflow-wrap:break-word!important;
+  text-overflow:clip!important;
+}
+html[data-fold-dual="1"] .dar-fold[data-fold-family="quran"] .qov-segment-bar{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:8px!important;
+  min-width:0!important;
+  max-width:100%!important;
+}
+html[data-fold-dual="1"] .dar-fold[data-fold-family="quran"] .qov-segment-btn{
+  width:100%!important;
+  min-height:44px!important;
+  padding:8px 6px!important;
+  white-space:normal!important;
+  line-height:1.3!important;
+}
+@media (max-width:779.98px), (max-height:559.98px){
+  html .dar-fold[data-fold-mode="dual"]{height:auto!important}
+}
