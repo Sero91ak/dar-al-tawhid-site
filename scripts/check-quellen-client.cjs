@@ -66,6 +66,12 @@ assert.match(offline.getNode("sourceList").innerHTML, /href="\/q\/37\/"/);
   assert.match(royalCss, /qsource-arabic/, "Arabic text formatting must be retained");
   assert.match(royalCss, /Snell Roundhand/, "Signature font must be retained");
   assert.match(libraryCss, /--page:#fcfdfc/, "Library must use approved near-white style");
+  assert.match(libraryCss, /--ql-safe-header-offset/, "Library must reserve top iPhone safe area");
+  assert.match(libraryCss, /safe-area-inset-top/, "iOS notch/safe-area accommodation is missing");
+  assert.match(libraryCss, /position:sticky/, "Header must remain reachable while scrolling");
+  assert.match(libraryCss, /z-index:40/, "Header must remain above scrolling Q cards");
+  assert.match(html, /royal-v42-ios-safe-20261011/, "Refresh the mobile stylesheet cache");
+
   assert.match(html, /watermark-my-logo-full\.png/, "Original official logo required");
   assert.match(html, /PRIMARY_CATEGORIES/, "Editorial categories must be explicitly curated");
   assert.match(html, /s\.work/, "Source-work search must be supported");
