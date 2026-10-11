@@ -2960,6 +2960,8 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
   }
   document.querySelectorAll("#mainNav [data-page]").forEach(function(a){a.classList.toggle("active",a.getAttribute("data-page")===key)});
   initReveal();
+  // Keep the public library readable if Safari delays IntersectionObserver callbacks.
+  if(key==="bibliothek")root.querySelectorAll(".reveal").forEach(function(el){el.classList.add("is-visible")});
   if(key==="quran")initBook();
   if(document.getElementById("prayerRiver"))initPrayerTicker();
   if(key==="zakat")initZakat();
@@ -2974,7 +2976,16 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
  function navigate(url,push){
   if(push!==false)history.pushState({desktop:true},"",url);
   root.classList.add("is-leaving");
-  setTimeout(function(){render();root.classList.remove("is-leaving");window.scrollTo({top:0,behavior:"smooth"})},150)
+  setTimeout(function(){
+   try{render()}
+   catch(err){
+    try{console.error("Desktop navigation render:",currentPage(),err)}catch(_){}
+    if(currentPage()==="bibliothek"){
+     root.innerHTML='<section class="page-intro is-visible"><div><div class="eyebrow">BIBLIOTHEK</div><h1>Quellenbibliothek öffnen</h1><p>Die Bibliotheksansicht konnte nicht vollständig geladen werden. Alle nummerierten Q-Quellen bleiben über die direkte Quellenübersicht erreichbar.</p><p><a class="source-open" href="/quellen/">Q-Quellenbibliothek öffnen ↗</a></p></div></section>';
+    }
+   }
+   finally{root.classList.remove("is-leaving");try{window.scrollTo({top:0,behavior:"smooth"})}catch(_){}}
+  },150)
  }
  // Stable internal SPA navigation for the public website.
  // Keep page/search parameters inside the current document instead of round-tripping
@@ -4146,11 +4157,12 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
  }
  renders.bibliothek=function(){
   return realIntro("BIBLIOTHEK","Publikationen und klassische Quellenwerke.","Suche nach Titel, Autor, Kategorie oder Thema.")+
+   '<section class="section parchment reveal" aria-label="Q-Quellenlinks"><div class="section-head"><h2>Q-Quellenbibliothek</h2><p>Alle nummerierten Quellenverweise und Originalnachweise</p></div><p>Die geprüften Q-Links findest du vollständig in der eigenständigen Quellenübersicht.</p><a class="source-open" href="/quellen/">Alle Q-Quellenlinks öffnen ↗</a></section>'+
    '<section class="section reveal">'+smartSearchHtml("librarySmartSearch","Titel, Autor oder Thema suchen …","librarySmartStatus")+
    '<div id="libraryDefault"><section class="parchment" style="padding:20px 0;background:transparent"><div class="section-head"><h2>DĀR AL TAWḤĪD Publikationen</h2><p>'+realData.publications.length+' Werke</p></div><div class="real-cover-grid">'+realData.publications.map(function(b){return '<a class="real-cover desktop-link" data-page="werk" href="'+pUrl("werk","type=pub&id="+encodeURIComponent(b.id))+'"><div class="real-cover-visual">'+(b.coverUrl?'<img src="'+escBook(b.coverUrl)+'" alt="">':"")+'</div><h3>'+escBook(b.title)+'</h3><small>'+escBook(b.category||"")+(b.fileSize?' · '+escBook(b.fileSize):"")+'</small></a>'}).join("")+'</div></section><section class="section"><div class="section-head"><h2>Quellenwerke</h2><p>Verifizierter Bibliotheksindex</p></div><div class="list-lines">'+realData.books.map(function(b){return '<a class="list-row desktop-link" data-page="werk" href="'+pUrl("werk","type=book&id="+encodeURIComponent(b.id))+'"><span class="meta">'+escBook(b.category||"Werk")+'</span><strong>'+escBook(b.title)+'</strong><small>'+escBook(b.author||"")+'</small></a>'}).join("")+'</div></section></div><div id="librarySearchResults" class="library-search-results"></div></section>'+footer()
  };
  function initLibraryBrowser(){
-  var input=document.getElementById("librarySmartSearch"),out=document.getElementById("librarySearchResults"),def=document.getElementById("libraryDefault"),status=document.getElementById("librarySmartStatus");if(!input||!out)return;
+  var input=document.getElementById("librarySmartSearch"),out=document.getElementById("librarySearchResults"),def=document.getElementById("libraryDefault"),status=document.getElementById("librarySmartStatus");if(!input||!out||!def||!status)return;
   function paint(){
    var term=normText(input.value.trim());if(!term){def.style.display="block";out.classList.remove("is-active");out.innerHTML="";status.textContent=(realData.publications.length+realData.books.length)+" Werke";return}
    var rows=[];
