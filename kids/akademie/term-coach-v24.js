@@ -647,7 +647,7 @@ function termsFor(lesson,age,limit=7){
  const t=lesson||{},a=t.ageText?.[age]||{};
  const leading=[t.title,t.topic,t.lead,a.intro].filter(Boolean).join(" ");
  const others=[...(a.lines||t.lines||[]),a.evidence,t.hadith?.text,t.quran?.label].filter(Boolean).join(" ");
- const all=plain(leading+" "+others);
+ const all=plain(leading+" "+others+" Qurʾān Sunnah");
  const primary=plain(leading);
  return entries.map(entry=>{
   const aliases=[entry.term,...entry.aliases].map(plain).filter(Boolean);
@@ -674,12 +674,12 @@ function mount(host,lesson,age,options={}){
  const matches=termsFor(lesson,age);
  host.hidden=!matches.length;
  if(!matches.length)return [];
- const heading=document.createElement("strong");heading.className="academy-term-heading";heading.textContent="Schwierige Wörter leicht erklärt";
- const note=document.createElement("p");note.className="academy-term-note";note.textContent="Tippe auf ein Wort. Du siehst sofort, was es bedeutet.";
+ const heading=document.createElement("strong");heading.className="academy-term-heading";heading.textContent="Wörter einfach erklärt";
+ const note=document.createElement("p");note.className="academy-term-note";note.textContent="Tippe auf ein Wort. Wir erklären es dir.";
  const line=document.createElement("div");line.className="academy-term-list";
  const detail=document.createElement("section");detail.className="academy-term-detail";detail.hidden=true;
  const title=document.createElement("strong"),desc=document.createElement("p"),source=document.createElement("p"),audioStatus=document.createElement("p");
- source.className="academy-term-source";audioStatus.className="academy-term-audio-status";audioStatus.setAttribute("role","status");
+ source.className="academy-term-source";source.hidden=age==="4-5";audioStatus.className="academy-term-audio-status";audioStatus.setAttribute("role","status");
  detail.append(title,desc,source,audioStatus);
  let active=null;
  for(const term of matches){
@@ -696,10 +696,10 @@ function mount(host,lesson,age,options={}){
    source.textContent="Lernbezug: "+term.source.reference+" · kindgerechte Erklärung, kein Originalzitat.";
    const owner=window.DARKidsOwnerVoice;
    if(!approvedVoiceFor(term,age,owner)){
-    audioStatus.textContent="Die Erklärung ist lesbar. Eine geprüfte Serhat-Masteraufnahme ist für diesen Wortlaut noch nicht freigegeben.";
+    audioStatus.textContent="Du kannst die Erklärung lesen. Zum Anhören fehlt noch die passende Aufnahme.";
     return;
    }
-   audioStatus.textContent="Serhats Masterstimme liest die Erklärung vor.";
+   audioStatus.textContent="Du hörst jetzt die Erklärung.";
    const spoken=phrase(term,age);
    try{
     const ok=owner.play(spoken,{source:"kids-academy-term-v24",rate:1,
@@ -711,6 +711,13 @@ function mount(host,lesson,age,options={}){
   line.append(btn);
  }
  host.append(heading,note,line,detail);
+ if(age==="4-5"&&matches.length){
+  const first=matches[0];active=first.id;detail.hidden=false;
+  line.firstChild?.setAttribute("aria-expanded","true");
+  title.textContent=first.term;desc.textContent=first.age[age];
+  source.textContent="Lernbezug: "+first.source.reference+" · kindgerechte Erklärung, kein Originalzitat.";
+  audioStatus.textContent="Zum Anhören tippe auf das Wort.";
+ }
  return matches;
 }
 window.DARKidsAcademyTermCoach=Object.freeze({version:"v24",entries,plain,termsFor,phrase,approvedVoiceFor,mount});
