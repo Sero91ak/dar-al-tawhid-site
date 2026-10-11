@@ -187,6 +187,16 @@ def analysis_complete(result):
             not valid_ratio(row.get("whole_body_iou_worst")) or
             not valid_ratio(row.get("head_region_iou_worst"))):
             return False
+    # Both independent analyzers project the same SHA-pinned GLB at nominal
+    # 45 degrees against the same SHA-pinned GrabCut source/masks. Their
+    # rounded five-decimal IoUs MUST agree; this is NOT camera calibration.
+    nominal = diagnostic.get("fixed_nominal_45_degree_result")
+    if not isinstance(nominal, dict) or nominal != sweep[8]:
+        return False
+    fixed_45 = views["three_quarter_uncalibrated"]
+    if (abs(nominal["whole_body_iou_worst"] - fixed_45["whole_body_shape_iou_worst"]) > 0.00002 or
+        abs(nominal["head_region_iou_worst"] - fixed_45["head_region_iou_worst"]) > 0.00002):
+        return False
     return result.get("productionApproved") is False
 
 
