@@ -131,6 +131,8 @@ assert.ok(academyHtml.includes("--academy-scroll-inset-left:max(12px,env(safe-ar
 assert.ok(academyHtml.includes("padding-left:max(var(--academy-scroll-inset-left),calc((100vw - 980px)/2))!important;"));
 assert.ok(academyHtml.includes('body[data-profile="girl"] .academy-home > .overview-hero::after'));
 assert.ok(academyHtml.includes("body .academy-home > .overview-hero::before"));
+assert.ok(academyHtml.includes('body:not([data-academy-view="lesson"]):not([data-embedded="true"]) > main.wrap{\\n overflow:visible!important;'.replace('\\n','\n')));
+assert.ok(academyHtml.includes('background:linear-gradient(to bottom,transparent 0%,var(--base) 100%)!important;'));
 assert.ok(academyHtml.includes("isAcademyStoryMaster"));
 assert.ok(academyHtml.includes('entry.modelId==="eleven_v4"'));
 assert.ok(academyHtml.includes('setTimeout(resolve,9000)'));
