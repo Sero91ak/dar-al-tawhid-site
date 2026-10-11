@@ -347,7 +347,7 @@ const additions={
     },
     "sourceAudit": {
       "quranUrl": "https://quran.com/2/285",
-      "hadithUrl": "https://dorar.net/hadith-category/cat/03b822dd45180cf718df7318ece60018",
+      "hadithUrl": "https://dorar.net/hadith/sharh/138657",
       "quranReference": "2:285",
       "authenticity": "Ṣaḥīḥ",
       "arabicTextType": "excerpt",
@@ -505,7 +505,7 @@ const additions={
     },
     "sourceAudit": {
       "quranUrl": "https://quran.com/2/4",
-      "hadithUrl": "https://dorar.net/hadith-category/cat/03b822dd45180cf718df7318ece60018",
+      "hadithUrl": "https://dorar.net/hadith/sharh/138657",
       "quranReference": "2:4",
       "authenticity": "Ṣaḥīḥ",
       "arabicTextType": "excerpt",
@@ -821,7 +821,7 @@ const additions={
     },
     "sourceAudit": {
       "quranUrl": "https://quran.com/16/43",
-      "hadithUrl": "https://dorar.net/hadith-category/cat/03b822dd45180cf718df7318ece60018",
+      "hadithUrl": "https://dorar.net/hadith/sharh/138657",
       "quranReference": "16:43",
       "authenticity": "Ṣaḥīḥ",
       "arabicTextType": "excerpt",
