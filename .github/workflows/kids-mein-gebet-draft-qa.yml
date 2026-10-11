@@ -79,6 +79,7 @@ jobs:
           node --test kids/mein-gebet/rigging/test-completion-gates.cjs
           node kids/mein-gebet/rigging/verify-original-reference-assets.cjs
           node --test kids/mein-gebet/rigging/test-original-reference-assets.cjs
+          node --test kids/mein-gebet/rigging/test-reference-asset-registry.cjs
       - name: Exercise deterministic camera diagnostic tests
         run: |
           python kids/mein-gebet/rigging/test_three_quarter_camera_diagnostic.py
