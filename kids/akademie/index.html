@@ -3598,6 +3598,34 @@ body .academy-header.kids-detail-appbar > .hero-profile-chip .hero-profile-copy 
  }
 }
 
+
+/* KIDS ACADEMY V7.6.2 · fixed navigation, independently scrollable content.
+   Home and subject screens use the same stable shell as the focus lesson.
+   Preserve appbar sizing, child identity, colors and iOS safe-area padding. */
+html:has(body:not([data-academy-view="lesson"]):not([data-embedded="true"])){
+ height:100%!important;overflow:hidden!important;overscroll-behavior:none!important;
+}
+body:not([data-academy-view="lesson"]):not([data-embedded="true"]){
+ height:100dvh!important;min-height:0!important;max-height:100dvh!important;
+ overflow:hidden!important;overscroll-behavior:none!important;
+}
+body:not([data-academy-view="lesson"]):not([data-embedded="true"]) > main.wrap{
+ display:flex!important;flex-direction:column!important;box-sizing:border-box!important;
+ height:100dvh!important;min-height:0!important;max-height:100dvh!important;
+ overflow:hidden!important;padding-block:0!important;
+}
+body:not([data-academy-view="lesson"]):not([data-embedded="true"]) > main.wrap > .academy-header.kids-detail-appbar{
+ position:relative!important;inset:auto!important;flex:0 0 auto!important;
+ z-index:40!important;
+}
+body:not([data-academy-view="lesson"]):not([data-embedded="true"]) > main.wrap > #academyHome.academy-home:not([hidden]),
+body:not([data-academy-view="lesson"]):not([data-embedded="true"]) > main.wrap > #academySubject.subject-detail:not([hidden]){
+ box-sizing:border-box!important;flex:1 1 auto!important;min-height:0!important;
+ width:100%!important;max-width:100%!important;
+ overflow-x:hidden!important;overflow-y:auto!important;
+ overscroll-behavior-y:contain!important;-webkit-overflow-scrolling:touch;
+}
+
 </style><script data-kids-touch-focus-v83>
 (function(){
   "use strict";
@@ -4003,6 +4031,13 @@ function stopAudio(note){
  $("#arabicAudioStatus").textContent=note||"Rezitation des vollständigen Verses";
 }
 function stopAll(){stopSpeech();stopAudio();stopMic()}
+/* Reset the visible inner scrollport on view changes; window scrolling stays locked. */
+function scrollAcademyViewTop(){
+ const pane=!$("#academySubject").hidden?$("#academySubject"):
+   !$("#lessonMain").hidden?$("#stageSurface"):$("#academyHome");
+ if(pane)pane.scrollTop=0;
+ window.scrollTo(0,0);
+}
 function hideLesson(){delete document.body.dataset.academyStep;delete document.body.dataset.academyView;$("#academyHome").hidden=false;$("#lessonMain").hidden=true}
 
 /* Derselbe geprüfte Beleg, unterschiedlich erklärte Lernschritte pro Altersstufe. */
@@ -4376,7 +4411,7 @@ function openCategory(key){
     id:lessonId,title:lessonTitle(lessonId),subject:key
   });
  }
- updateAcademyAppbar();window.scrollTo(0,0);
+ updateAcademyAppbar();scrollAcademyViewTop();
 }
 
 function hideCategory(){$("#academySubject").hidden=true}
@@ -4391,7 +4426,7 @@ function academyNavBack(){
  if(!$("#lessonMain").hidden||!$("#academySubject").hidden){home();return}
  location.assign("/kids/");
 }
-function home(){stopAll();hideCategory();hideLesson();renderHome();updateAcademyAppbar();window.scrollTo(0,0)}
+function home(){stopAll();hideCategory();hideLesson();renderHome();updateAcademyAppbar();scrollAcademyViewTop()}
 function begin(requested){
  syncProfile();if(!AGE_UI[age]){renderHome();return}
  const subject=$("#academySubject").hidden?null:$("#academySubject").dataset.subject;
@@ -4413,7 +4448,7 @@ function begin(requested){
  }else{
   step=0;unlocked=0;qIndex=0;finished=false;score={done:0,correct:0,choices:0,neededHelp:0};
  }
- showStep(step,false);updateAcademyAppbar();window.scrollTo(0,0);
+ showStep(step,false);updateAcademyAppbar();scrollAcademyViewTop();
 }
 
 /* Single-focus lesson cards: full text remains present, no page is silently discarded. */
