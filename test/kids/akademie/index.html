@@ -38,6 +38,9 @@ button.active{background:#e5c789;color:#132431;border-color:var(--gold);font-wei
 .word-detail{margin:12px 0 6px;padding:14px;background:#133643;border:1px solid var(--border);border-radius:13px}
 .word-detail p{line-height:1.6;margin:6px 0}.word-detail strong{color:var(--gold)}.word-detail .word-arabic{font-size:27px;direction:rtl;text-align:right}
 .word-detail .voice-pending{font-size:12px;color:var(--muted)}
+.narration-preview{margin:18px 0 8px;border:1px solid var(--border);border-radius:12px;padding:12px}
+.narration-preview summary{cursor:pointer;font-weight:750;color:var(--gold);line-height:1.4}
+.narration-preview pre{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;line-height:1.65;color:var(--ink);font-size:14px}
 @media(max-width:700px){.word-chips button{font-size:14px;max-width:100%}.word-detail{padding:12px}}
 footer{border-top:1px solid var(--border);margin-top:30px;padding-top:16px;color:var(--muted);font-size:12px}
 @media(max-width:700px){.split{grid-template-columns:minmax(0,1fr)}#topics{max-height:235px}.panel{padding:13px}.toolbar{gap:10px}}
@@ -75,7 +78,8 @@ footer{border-top:1px solid var(--border);margin-top:30px;padding-top:16px;color
 <script src="/kids/akademie/curriculum-v22.js?v=20261011-01"></script>
 <script src="/kids/creator-test/lessons-039-044.js?v=20261011-v23-1"></script>
 <script src="/kids/creator-test/lessons-045-052.js?v=20261011-v24-1"></script>
-<script src="/kids/creator-test/term-glossary-v1.js?v=20261011-glossary-1"></script>
+<script src="/kids/creator-test/term-glossary-v1.js?v=20261011-glossary-2"></script>
+<script src="/kids/creator-test/academy-narration-script-v1.js?v=20261011-voice-script-1"></script>
 <script>
 (function(){
 "use strict";
@@ -141,6 +145,17 @@ function quiz(l){
   missing("diese Frage und ihre Antwortmöglichkeiten");
  });
 }
+function renderNarrationPreview(l){
+ const planner=window.DARKidsAcademyNarrationV1;
+ if(!planner)return;
+ const script=planner.build(l,age.value);
+ if(!script)return;
+ const d=add("details",undefined,"narration-preview");
+ add("summary","Vorlesetext mit erklärten Wörtern ansehen · noch kein Audio","",d);
+ const code=add("pre",script.text,"",d);
+ code.setAttribute("aria-label","Redaktioneller Vorlesetext für Serhats Masterstimme");
+ add("p","Sprechtext zur Quellen- und Ausspracheprüfung. Er ist noch keine freigegebene Masteraufnahme.","hint",d);
+}
 function renderWordGuide(l){
  if(!glossary||!l||[3].includes(step))return;
  const allText=[l.title,l.topic,l.lead,l.goal,l.ageText?.[age.value]?.intro,
@@ -182,6 +197,7 @@ function renderStage(){
   add("h3","Heute lernen wir");
   add("p",l.ageText?.[age.value]?.intro||l.lead||l.goal||"", "quoted");
   const lines=l.ageText?.[age.value]?.lines||l.lines||[];lines.forEach((line,i)=>{add("p",line,"spoken");if(sd&&i===0&&line===clips[3].text)audioClip(3);else missing("diesen Erklärungssatz")});
+ renderNarrationPreview(l);
  }else if(step===2){
   add("h3","Qurʾān und Sunnah");
   if(l.quran){add("p",l.quran.arabic||"","arabic");add("p",l.quran.meaning||"","quoted");add("p","Qurʾān "+l.quran.surah+":"+l.quran.ayah,"source");
