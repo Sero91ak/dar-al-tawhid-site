@@ -1,5 +1,5 @@
 {
-  "version": "2026-10-11-kids-annual-editorial-outline-v2-with-6-test-drafts",
+  "version": "2026-10-11-kids-annual-editorial-outline-v3-with-14-test-drafts",
   "branch": "kids-creator-staging",
   "audience": "EDITORIAL THEMATIC PLAN, NOT FINAL LESSONS; no authentic religious claims until source review",
   "curriculumYear": {
@@ -17,7 +17,7 @@
       "Sonntag:flexible"
     ],
     "calendarNote": "52 teaching weeks=364 days; Gregorian annual anchoring needs 1 or 2 flexible bridge days, not false publication dates.",
-    "authoredTestDraftsPendingApproval": 6,
+    "authoredTestDraftsPendingApproval": 14,
     "additionalAuthenticallyApprovedLessonsNeeded": 170
   },
   "tiers": {
@@ -504,10 +504,13 @@
       "weeklyTheme": "Tawḥīd und Vertrauen",
       "category": "tawhid",
       "title": "Allah allein um Hilfe bitten",
-      "status": "THEMATIC_PLAN_ONLY",
+      "status": "SOURCE_CHECKED_DRAFT_NOT_APPROVED",
       "completedLesson": false,
-      "originalSourcesVerified": false,
-      "originalSourceRefs": [],
+      "originalSourcesVerified": true,
+      "originalSourceRefs": [
+        "https://quran.com/1/5",
+        "https://dorar.net/hadith/sharh/80750"
+      ],
       "textByAgeApproved": {
         "4-5": false,
         "6-8": false,
@@ -520,7 +523,18 @@
       },
       "masterVoiceApproved": false,
       "previewPassed": false,
-      "visitorReleased": false
+      "visitorReleased": false,
+      "draftLessonId": "tawhid-allah-bitten-ibn-abbas",
+      "textByAgeDrafted": {
+        "4-5": true,
+        "6-8": true,
+        "9-10": true
+      },
+      "quizByAgeDrafted": {
+        "4-5": true,
+        "6-8": true,
+        "9-10": true
+      }
     },
     {
       "slot": 46,
@@ -529,10 +543,13 @@
       "weeklyTheme": "Tawḥīd und Vertrauen",
       "category": "tawhid",
       "title": "Dankbarkeit gehört Allah",
-      "status": "THEMATIC_PLAN_ONLY",
+      "status": "SOURCE_CHECKED_DRAFT_NOT_APPROVED",
       "completedLesson": false,
-      "originalSourcesVerified": false,
-      "originalSourceRefs": [],
+      "originalSourcesVerified": true,
+      "originalSourceRefs": [
+        "https://quran.com/14/7",
+        "https://dorar.net/hadith/sharh/152585"
+      ],
       "textByAgeApproved": {
         "4-5": false,
         "6-8": false,
@@ -545,7 +562,18 @@
       },
       "masterVoiceApproved": false,
       "previewPassed": false,
-      "visitorReleased": false
+      "visitorReleased": false,
+      "draftLessonId": "tawhid-dankbarkeit-allah",
+      "textByAgeDrafted": {
+        "4-5": true,
+        "6-8": true,
+        "9-10": true
+      },
+      "quizByAgeDrafted": {
+        "4-5": true,
+        "6-8": true,
+        "9-10": true
+      }
     },
     {
       "slot": 47,
@@ -554,10 +582,13 @@
       "weeklyTheme": "Tawḥīd und Vertrauen",
       "category": "aqidah",
       "title": "Vertrauen auf Allah und selbst handeln",
-      "status": "THEMATIC_PLAN_ONLY",
+      "status": "SOURCE_CHECKED_DRAFT_NOT_APPROVED",
       "completedLesson": false,
-      "originalSourcesVerified": false,
-      "originalSourceRefs": [],
+      "originalSourcesVerified": true,
+      "originalSourceRefs": [
+        "https://quran.com/65/3",
+        "https://dorar.net/hadith/sharh/135180"
+      ],
       "textByAgeApproved": {
         "4-5": false,
         "6-8": false,
@@ -570,7 +601,18 @@
       },
       "masterVoiceApproved": false,
       "previewPassed": false,
-      "visitorReleased": false
+      "visitorReleased": false,
+      "draftLessonId": "aqidah-tawakkul-handeln",
+      "textByAgeDrafted": {
+        "4-5": true,
+        "6-8": true,
+        "9-10": true
+      },
+      "quizByAgeDrafted": {
+        "4-5": true,
+        "6-8": true,
+        "9-10": true
+      }
     },
     {
       "slot": 48,
@@ -579,10 +621,13 @@
       "weeklyTheme": "Tawḥīd und Vertrauen",
       "category": "dua",
       "title": "Was bedeutet Duʿāʾ im Alltag?",
-      "status": "THEMATIC_PLAN_ONLY",
+      "status": "SOURCE_CHECKED_DRAFT_NOT_APPROVED",
       "completedLesson": false,
-      "originalSourcesVerified": false,
-      "originalSourceRefs": [],
+      "originalSourcesVerified": true,
+      "originalSourceRefs": [
+        "https://quran.com/40/60",
+        "https://dorar.net/hadith/sharh/127468"
+      ],
       "textByAgeApproved": {
         "4-5": false,
         "6-8": false,
@@ -595,7 +640,18 @@
       },
       "masterVoiceApproved": false,
       "previewPassed": false,
-      "visitorReleased": false
+      "visitorReleased": false,
+      "draftLessonId": "dua-alltag-erklärt",
+      "textByAgeDrafted": {
+        "4-5": true,
+        "6-8": true,
+        "9-10": true
+      },
+      "quizByAgeDrafted": {
+        "4-5": true,
+        "6-8": true,
+        "9-10": true
+      }
     },
     {
       "slot": 49,
@@ -604,10 +660,13 @@
       "weeklyTheme": "Den Qurʾān lieben",
       "category": "quran",
       "title": "Warum der Qurʾān für uns wichtig ist",
-      "status": "THEMATIC_PLAN_ONLY",
+      "status": "SOURCE_CHECKED_DRAFT_NOT_APPROVED",
       "completedLesson": false,
-      "originalSourcesVerified": false,
-      "originalSourceRefs": [],
+      "originalSourcesVerified": true,
+      "originalSourceRefs": [
+        "https://quran.com/2/2",
+        "https://dorar.net/hadith/sharh/129109"
+      ],
       "textByAgeApproved": {
         "4-5": false,
         "6-8": false,
@@ -620,7 +679,18 @@
       },
       "masterVoiceApproved": false,
       "previewPassed": false,
-      "visitorReleased": false
+      "visitorReleased": false,
+      "draftLessonId": "quran-warum-wichtig",
+      "textByAgeDrafted": {
+        "4-5": true,
+        "6-8": true,
+        "9-10": true
+      },
+      "quizByAgeDrafted": {
+        "4-5": true,
+        "6-8": true,
+        "9-10": true
+      }
     },
     {
       "slot": 50,
@@ -629,10 +699,13 @@
       "weeklyTheme": "Den Qurʾān lieben",
       "category": "quran",
       "title": "Zuhören, wenn der Qurʾān rezitiert wird",
-      "status": "THEMATIC_PLAN_ONLY",
+      "status": "SOURCE_CHECKED_DRAFT_NOT_APPROVED",
       "completedLesson": false,
-      "originalSourcesVerified": false,
-      "originalSourceRefs": [],
+      "originalSourcesVerified": true,
+      "originalSourceRefs": [
+        "https://quran.com/7/204",
+        "https://dorar.net/hadith/sharh/70716"
+      ],
       "textByAgeApproved": {
         "4-5": false,
         "6-8": false,
@@ -645,7 +718,18 @@
       },
       "masterVoiceApproved": false,
       "previewPassed": false,
-      "visitorReleased": false
+      "visitorReleased": false,
+      "draftLessonId": "quran-zuhoeren",
+      "textByAgeDrafted": {
+        "4-5": true,
+        "6-8": true,
+        "9-10": true
+      },
+      "quizByAgeDrafted": {
+        "4-5": true,
+        "6-8": true,
+        "9-10": true
+      }
     },
     {
       "slot": 51,
@@ -654,10 +738,13 @@
       "weeklyTheme": "Den Qurʾān lieben",
       "category": "quran",
       "title": "Kurze Sūren achtsam lernen",
-      "status": "THEMATIC_PLAN_ONLY",
+      "status": "SOURCE_CHECKED_DRAFT_NOT_APPROVED",
       "completedLesson": false,
-      "originalSourcesVerified": false,
-      "originalSourceRefs": [],
+      "originalSourcesVerified": true,
+      "originalSourceRefs": [
+        "https://quran.com/73/4",
+        "https://dorar.net/hadith/sharh/129109"
+      ],
       "textByAgeApproved": {
         "4-5": false,
         "6-8": false,
@@ -670,7 +757,18 @@
       },
       "masterVoiceApproved": false,
       "previewPassed": false,
-      "visitorReleased": false
+      "visitorReleased": false,
+      "draftLessonId": "quran-kurze-suren-lernen",
+      "textByAgeDrafted": {
+        "4-5": true,
+        "6-8": true,
+        "9-10": true
+      },
+      "quizByAgeDrafted": {
+        "4-5": true,
+        "6-8": true,
+        "9-10": true
+      }
     },
     {
       "slot": 52,
@@ -679,10 +777,13 @@
       "weeklyTheme": "Den Qurʾān lieben",
       "category": "quran",
       "title": "Bedeutungen einer kurzen Sūrah besprechen",
-      "status": "THEMATIC_PLAN_ONLY",
+      "status": "SOURCE_CHECKED_DRAFT_NOT_APPROVED",
       "completedLesson": false,
-      "originalSourcesVerified": false,
-      "originalSourceRefs": [],
+      "originalSourcesVerified": true,
+      "originalSourceRefs": [
+        "https://quran.com/112/1",
+        "https://dorar.net/hadith/sharh/134184"
+      ],
       "textByAgeApproved": {
         "4-5": false,
         "6-8": false,
@@ -695,7 +796,18 @@
       },
       "masterVoiceApproved": false,
       "previewPassed": false,
-      "visitorReleased": false
+      "visitorReleased": false,
+      "draftLessonId": "quran-kurze-sura-bedeutung",
+      "textByAgeDrafted": {
+        "4-5": true,
+        "6-8": true,
+        "9-10": true
+      },
+      "quizByAgeDrafted": {
+        "4-5": true,
+        "6-8": true,
+        "9-10": true
+      }
     },
     {
       "slot": 53,
