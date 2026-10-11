@@ -16,7 +16,19 @@ for(const file of ["kids/start.html","kids/index.html","kids/shell.html"]){
   assert.match(html,/joinPending\(false\)/);
   assert.match(html,/if\(existing&&existing\.ok===true\)\{acceptExistingAccount/);
   assert.match(html,/rpc\("kids_login",\{p_name:name,p_hash:h\}\)/);
-  assert.match(html,/rpc\("kids_register",\{p_name:name,p_hash:h/);
+  // Registration is stage-gated behind parent-email verification. Existing account sign-in stays available.
+  for(const id of ["joinParentEmail","joinParentCode","joinParentVerify","joinParentStatus"]){
+    assert.equal(html.split('id="'+id+'"').length-1,1,file+" missing or duplicate "+id);
+  }
+  assert.match(html,/id="joinParentEmail"[^>]*type="email"[^>]*required/);
+  assert.match(html,/data-step="parentverify"/);
+  assert.match(html,/function verifyParentRegistration\(\)/);
+  assert.match(html,/rpc\("kids_parent_registration_begin"/);
+  assert.match(html,/rpc\("kids_parent_registration_finish"/);
+  assert.match(html,/res\.verified!==true/);
+  assert.match(html,/joinParentPending=null/);
+  assert.match(html,/Es wurde kein Konto angelegt/);
+  assert.doesNotMatch(html,/rpc\("kids_register"/,"new staging registration must not bypass parent verification");
   assert.match(html,/joinExistingHint\(\)/);
   assert.match(html,/document\.getElementById\("joinLoginExisting"\)\.addEventListener/);
   assert.ok(!html.includes('if(p.name&&p.pass)rpc("kids_register"'),
