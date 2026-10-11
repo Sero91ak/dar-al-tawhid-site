@@ -10,7 +10,8 @@ const html = fs.readFileSync("quellen/index.html", "utf8");
 const source = html.match(/<script id="qlSourceSnapshot" type="application\/json">([\s\S]*?)<\/script>/);
 assert.ok(source, "Embedded Q registry is missing");
 const registry = JSON.parse(source[1]);
-assert.equal(registry.links.length, 40, "Expected all 40 currently registered Q pages");
+const canonical = JSON.parse(fs.readFileSync("q/_registry/shortlinks.json", "utf8")).links.filter(item=>item.status!=="inactive");
+assert.equal(registry.links.length, canonical.length, "The full dynamically sized canonical registry must be rendered");
 const start = html.lastIndexOf("\n<script>"), end = html.lastIndexOf("\n</script>");
 assert.ok(start >= 0 && end > start, "Standalone page JS is missing");
 const script = html.slice(start + "\n<script>".length, end);
@@ -46,17 +47,34 @@ function runLibrary(fetchImpl) {
 }
 
 const offline = runLibrary(async () => { throw new Error("Simulated offline"); });
-assert.equal(offline.getNode("resultCount").textContent, "40 Quellen");
-assert.equal((offline.getNode("sourceList").innerHTML.match(/class="ql-card"/g) || []).length, 40);
+assert.equal(offline.getNode("resultCount").textContent, canonical.length + " Quellen");
+assert.equal((offline.getNode("sourceList").innerHTML.match(/class="ql-card"/g) || []).length, canonical.length);
 assert.match(offline.getNode("sourceList").innerHTML, /href="\/q\/40\/"/);
 offline.handlers["search:input"]({ target: { value: "q37" } });
 assert.equal(offline.getNode("resultCount").textContent, "1 Quelle");
 assert.match(offline.getNode("sourceList").innerHTML, /href="\/q\/37\/"/);
 
 (async () => {
-  const stale = runLibrary(async () => ({ ok: true, json: async () => ({ links: registry.links.slice(0, 37) }) }));
+  const stale = runLibrary(async () => ({ ok: true, json: async () => ({ links: registry.links.slice(0, Math.max(1,registry.links.length-3)) }) }));
   for (let i = 0; i < 8; i++) await Promise.resolve();
-  assert.equal(stale.getNode("resultCount").textContent, "40 Quellen", "Stale network must not remove Q38–Q40");
+  assert.equal(stale.getNode("resultCount").textContent, canonical.length+" Quellen", "Stale network must never remove newer Q pages");
+  const royalCss=fs.readFileSync("assets/q-royal-manuscript-v42.css", "utf8");
+  const libraryCss=fs.readFileSync("assets/quellen-library.css", "utf8");
+  const royalJs=fs.readFileSync("assets/q-royal-manuscript-v42.js", "utf8");
+  new vm.Script(royalJs, { filename: "assets/q-royal-manuscript-v42.js" });
+  assert.match(royalCss, /#fcfdfc/, "Near-white approved background missing");
+  assert.match(royalCss, /qsource-arabic/, "Arabic text formatting must be retained");
+  assert.match(royalCss, /Snell Roundhand/, "Signature font must be retained");
+  assert.match(libraryCss, /--page:#fcfdfc/, "Library must use approved near-white style");
+  assert.match(html, /watermark-my-logo-full\.png/, "Original official logo required");
+  assert.match(html, /PRIMARY_CATEGORIES/, "Editorial categories must be explicitly curated");
+  assert.match(html, /s\.work/, "Source-work search must be supported");
+  const filtered=runLibrary(async () => {throw Error("Offline test");});
+  filtered.handlers["search:input"]({target:{value:"Q1"}});
+  assert.equal(filtered.getNode("resultCount").textContent,"1 Quelle","Q1 must not match Q10-Q19");
+  const byWork=runLibrary(async () => {throw Error("Offline test");});
+  byWork.handlers["search:input"]({target:{value:"Maʿānī al-Qurʾān"}});
+  assert.equal(byWork.getNode("resultCount").textContent,"1 Quelle","Source-work search should find Q40");
   const router=fs.readFileSync("cloudflare/site-router.js", "utf8");
   new vm.Script(router.replace(/^import .*$/gm, "").replace(/export default\s*\{/, "const darRouter = {"), { filename: "cloudflare/site-router.js" });
   assert.match(router, /Q_SOURCE_LIBRARY_DIRECT_ROUTING_V2/, "Direct Q router missing");
@@ -80,7 +98,9 @@ assert.match(offline.getNode("sourceList").innerHTML, /href="\/q\/37\/"/);
       pathname === "/quellen/shortlinks.json" ? "quellen/shortlinks.json" :
       /^\/q\/[1-9][0-9]*\/$/.test(pathname) ? pathname.slice(1) + "index.html" : null;
     if (!file || !fs.existsSync(file)) return new Response("missing", { status: 404 });
-    return new Response(fs.readFileSync(file), { status: 200 });
+    return new Response(fs.readFileSync(file), { status: 200, headers:{
+      "Content-Type":file.endsWith(".html")?"text/html":"application/json"
+    }});
   }};
   async function checkRoute(route, method="GET") {
     return sandbox.darRouter.fetch(new Request("https://dar-al-tawhid.de" + route, { method }), { ASSETS: assets });
@@ -91,10 +111,14 @@ assert.match(offline.getNode("sourceList").innerHTML, /href="\/q\/37\/"/);
   assert.equal(library.headers.get("X-DAR-Q-Route"), "direct-static-asset-v2");
   const json = await checkRoute("/quellen/shortlinks.json");
   assert.equal(json.status, 200);
-  assert.equal((await json.json()).links.length, 40);
+  assert.equal((await json.json()).links.length, canonical.length);
   const lastSource = await checkRoute("/q/40/");
   assert.equal(lastSource.status, 200);
-  assert.match(await lastSource.text(), /DAR AL TAWḤĪD/);
+  const lastHtml=await lastSource.text();
+  assert.match(lastHtml, /DAR AL TAWḤĪD/);
+  assert.match(lastHtml, /q-royal-manuscript-v42\.css/, "Every Q page must receive Royal CSS");
+  assert.match(lastHtml, /q-royal-manuscript-v42\.js/, "Every Q page must receive theme and navigation");
+  assert.equal(lastSource.headers.get("X-DAR-Q-Layout"),"royal-manuscript-v42");
   const sourceHead = await checkRoute("/q/37/", "HEAD");
   assert.equal(sourceHead.status, 200);
   assert.equal(await sourceHead.text(), "");
@@ -115,5 +139,5 @@ assert.match(offline.getNode("sourceList").innerHTML, /href="\/q\/37\/"/);
   new vm.Script(sw, { filename: "service-worker.js" });
   assert.match(sw, /url\.pathname\.startsWith\('\/quellen\/'\)/, "SW must isolate /quellen/");
   assert.match(sw, /url\.pathname\.startsWith\('\/q\/'\)/, "SW must isolate numbered Q pages");
-  console.log("Q library: 40 links visible immediately, search works offline, stale JSON cannot overwrite, app-shell bypass present.");
+  console.log("Q Royal V4.2: "+canonical.length+" links, near-white library, exact Q lookup, work search, shared CSS/JS and future Q routing verified.");
 })().catch(error => { console.error(error); process.exitCode = 1; });
