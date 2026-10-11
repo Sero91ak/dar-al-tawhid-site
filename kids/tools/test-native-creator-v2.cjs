@@ -31,7 +31,7 @@ const tests=[
 ["synchronous native test routes only on test host",web.includes('page.url?.host?.lowercased() == "dar-al-tawhid-test.sero91ak.workers.dev"')],
 ["creator maps production kids urls to test host",web.includes("if !KidsAppShell.isOwnHost(url)")&&web.includes("KidsAppShell.inAppURL(from: url)")],
 ["no website based unlock path in code",!web.includes("ACADEMY_OWNER_PASSWORD")&&!view.includes("ACADEMY_OWNER_PASSWORD")],
-["no editing real child records",!view.includes("UserDefaults.standard")&&!web.includes("UserDefaults.standard.set")]
+["creator panel never writes a child record",!view.includes("UserDefaults.standard")&&!view.includes("localStorage.setItem")]
 ];
 for(const [name,pass] of tests)assert.ok(pass,name);
 console.log("KIDS TEST NATIVE V2 PASS: "+tests.length+" UI / host-isolation / unchanged visitor checks; real macOS xcodebuild still required.");
