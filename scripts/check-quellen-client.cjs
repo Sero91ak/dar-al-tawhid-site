@@ -64,6 +64,53 @@ assert.match(offline.getNode("sourceList").innerHTML, /href="\/q\/37\/"/);
   const redirects=fs.readFileSync("_redirects", "utf8");
   assert.doesNotMatch(redirects, /^\/quellen\/\s+\/quellen\/index\.html\s+200/m, "Recursive source rewrite forbidden");
   assert.doesNotMatch(redirects, /^\/q\/\s+\/quellen\/index\.html\s+200/m, "Recursive archive rewrite forbidden");
+  // Exercise the real Cloudflare Worker routing function using a local asset mock.
+  const sandbox = { URL, Request, Response, Headers };
+  vm.createContext(sandbox);
+  vm.runInContext(
+    router.replace(/^import .*$/gm, "").replace(/export default\s*\{/, "const darRouter = {") +
+      "\nthis.darRouter = darRouter;",
+    sandbox, { timeout: 3000 }
+  );
+  const requested = [];
+  const assets = { fetch: async req => {
+    const pathname = new URL(req.url).pathname;
+    requested.push(pathname);
+    const file = pathname === "/quellen/" ? "quellen/index.html" :
+      pathname === "/quellen/shortlinks.json" ? "quellen/shortlinks.json" :
+      /^\/q\/[1-9][0-9]*\/$/.test(pathname) ? pathname.slice(1) + "index.html" : null;
+    if (!file || !fs.existsSync(file)) return new Response("missing", { status: 404 });
+    return new Response(fs.readFileSync(file), { status: 200 });
+  }};
+  async function checkRoute(route, method="GET") {
+    return sandbox.darRouter.fetch(new Request("https://dar-al-tawhid.de" + route, { method }), { ASSETS: assets });
+  }
+  const library = await checkRoute("/quellen/");
+  assert.equal(library.status, 200);
+  assert.match(await library.text(), /id="qlSourceSnapshot"/);
+  assert.equal(library.headers.get("X-DAR-Q-Route"), "direct-static-asset-v2");
+  const json = await checkRoute("/quellen/shortlinks.json");
+  assert.equal(json.status, 200);
+  assert.equal((await json.json()).links.length, 40);
+  const lastSource = await checkRoute("/q/40/");
+  assert.equal(lastSource.status, 200);
+  assert.match(await lastSource.text(), /DAR AL TAWḤĪD/);
+  const sourceHead = await checkRoute("/q/37/", "HEAD");
+  assert.equal(sourceHead.status, 200);
+  assert.equal(await sourceHead.text(), "");
+  for (const [path, target] of [
+    ["/quellen", "/quellen/"],
+    ["/quellen/index.html", "/quellen/"],
+    ["/q", "/quellen/"],
+    ["/q/", "/quellen/"],
+    ["/q/40", "/q/40/"],
+    ["/q/40/index.html", "/q/40/"]
+  ]) {
+    const response = await checkRoute(path);
+    assert.equal(response.status, 308, path);
+    assert.equal(response.headers.get("Location"), target, path);
+  }
+  assert.deepEqual(requested, ["/quellen/", "/quellen/shortlinks.json", "/q/40/", "/q/37/"]);
   const sw = fs.readFileSync("service-worker.js", "utf8");
   new vm.Script(sw, { filename: "service-worker.js" });
   assert.match(sw, /url\.pathname\.startsWith\('\/quellen\/'\)/, "SW must isolate /quellen/");
