@@ -28,6 +28,9 @@ html body .app[data-gender="girl"]{
 html body .app[data-gender="girl"] .shell{
   background:linear-gradient(180deg,#21182f 0%,#2d203e 52%,#382543 100%)!important;
 }
+html:has(.app[data-gender="girl"]){
+  background:#21182f!important;
+}
 html body:has(.app[data-gender="girl"]){
   background:#21182f!important;
 }
