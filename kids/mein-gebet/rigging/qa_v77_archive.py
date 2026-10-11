@@ -8,6 +8,7 @@ are NOT automatically approved. No arbitrary shell / archive filename launch.
 import argparse
 import hashlib
 import json
+import math
 import pathlib
 import stat
 import subprocess
@@ -128,9 +129,37 @@ def analysis_complete(result):
     if not isinstance(fixed, dict):
         return False
     views = fixed.get("views")
-    if not isinstance(views, dict) or not {
-        "front", "three_quarter_uncalibrated", "right_side", "back", "left_side"
-    }.issubset(views):
+    # The exact V7.7 reference has an uncalibrated 3/4 camera, so its
+    # five-view acceptance CLI must return 1 with an explicit rejection.
+    if (shape.get("commandExitCode") != 1 or shape.get("passed") is not False or
+        fixed.get("all_five_90pct_pass") is not False):
+        return False
+    expected_angles = {
+        "front": 0,
+        "three_quarter_uncalibrated": 45,
+        "right_side": 90,
+        "back": 180,
+        "left_side": 270,
+    }
+    if not isinstance(views, dict) or set(views) != set(expected_angles):
+        return False
+    def valid_ratio(value):
+        return type(value) in (int, float) and math.isfinite(value) and 0 <= value <= 1
+    for name, azimuth in expected_angles.items():
+        view = views[name]
+        if not isinstance(view, dict) or view.get("camera_azimuth_used") != azimuth:
+            return False
+        if (view.get("reference_camera_physically_calibrated") is not False or
+            type(view.get("reference_masks_stable")) is not bool or
+            type(view.get("requested_90pct_shape_prefilter_pass")) is not bool or
+            any(not valid_ratio(view.get(metric)) for metric in (
+                "reference_segmentation_agreement", "whole_body_shape_iou_worst",
+                "head_region_iou_worst"))):
+            return False
+    # Research output must never claim signed-off identity or prayer teaching.
+    if (fixed.get("original_character_likeness_approved") is not False or
+        fixed.get("prayer_poses_approved") is not False or
+        fixed.get("real_ipad_test_done") is not False):
         return False
     if (fixed.get("model_sha256") != V77_SHA or
         fixed.get("original_sha256") != REFERENCE_SHA or
@@ -142,9 +171,22 @@ def analysis_complete(result):
     diagnostic = angle["report"]
     if (diagnostic.get("source_glb_sha256") != V77_SHA or
         diagnostic.get("source_reference_sha256") != REFERENCE_SHA or
+        diagnostic.get("method") != "v77-locked-angle-sweep-diagnostic-v2-stride-scene-safe" or
         diagnostic.get("production_approved") is not False or
-        diagnostic.get("physical_camera_angle_established") is not False):
+        diagnostic.get("physical_camera_angle_established") is not False or
+        diagnostic.get("substitutes_fixed_five_view_qa") is not False or
+        diagnostic.get("three_quarter_90pct_release_gate_passed") is not False or
+        diagnostic.get("boy_original_likeness_approved") is not False):
         return False
+    sweep = diagnostic.get("sweep")
+    if not isinstance(sweep, list) or len(sweep) != 17:
+        return False
+    for angle_degrees, row in zip(range(5, 90, 5), sweep):
+        if (not isinstance(row, dict) or type(row.get("angle_deg")) is not int or
+            row["angle_deg"] != angle_degrees or
+            not valid_ratio(row.get("whole_body_iou_worst")) or
+            not valid_ratio(row.get("head_region_iou_worst"))):
+            return False
     return result.get("productionApproved") is False
 
 
@@ -171,7 +213,8 @@ def run(archive):
             str(model), str(reference)], 180)
         # IoU research is not a human image, girl-clothing, or fiqh approval.
     report["qaAnalysisComplete"] = analysis_complete(report)
-    report["fiveView90PctAccepted"] = bool((report["fixedFiveViews"].get("report") or {}).get("all_five_90pct_pass") is True)
+    # An unapproved / failed analysis cannot advertise a passing shape gate.
+    report["fiveView90PctAccepted"] = False  # 3/4 view is uncalibrated in V7.7
     report["originalLikenessApproved"] = False
     report["productionApproved"] = False
     return report
