@@ -370,7 +370,10 @@
       var root = document.documentElement;
       var isIosNative = (root && root.classList.contains("dar-ios-native-app")) || /DarAlTawhid-iOS/i.test(ua);
       var isAndroidNative = (root && root.classList.contains("dar-android-native-app")) || !!window.DAR_ANDROID_NATIVE_APP || /DarAlTawhidAndroid/i.test(ua);
-      if (isIosNative || isAndroidNative) {
+      // Web-first iOS boot is opt-in and requires an explicitly updated native shell.
+      // The currently released iOS app remains on its original native loading overlay.
+      var iosWebFirstBoot = isIosNative && window.DAR_IOS_WEB_FIRST_BOOT_V1 === true;
+      if ((isIosNative && !iosWebFirstBoot) || isAndroidNative) {
         try {
           if (isAndroidNative) {
             window.DAR_ANDROID_NATIVE_APP = true;
