@@ -1,7 +1,7 @@
 // PUBLIC_WEBSITE_RECOVERY_TRIGGER_20261010_V2
 /* pwa-dedicated-shell-live-20261009-2050 */
 /* public-pwa-emergency-repair-live-20261009-1824 */
-import { gateHiddenSurfaces } from "./preview-gate.js";
+import { gateHiddenSurfaces, academyOwnerAccess, academyOwnerAssetPath } from "./preview-gate.js";
 /* Dar Test (/test) ohne Browser-Anmeldefenster. Kids bleibt geschützt. v1096 */
 function isNativeAppRequest(ua) {
   return /DarAlTawhid-iOS|DarAlTawhidOfficialIOS|DarAlTawhidAndroid/i.test(String(ua || ""));
@@ -1145,6 +1145,22 @@ export default {
     // Die öffentliche KIDS-Web-App und Lernakademie benötigen kein HTTP-Basic-Login.
     // Nur /kids (einschließlich CSS, JSON, Audio und Unterricht) freigeben;
     // /test/kids und andere interne Routen bleiben hinter der bisherigen Sperre.
+    // Owner Academy V19 is handled BEFORE generic Basic-Auth / Kids redirects.
+    // A signed HttpOnly cookie authorizes only Academy assets and never child accounts.
+    const ownerAccess = await academyOwnerAccess(request, url, env);
+    if (ownerAccess instanceof Response) return ownerAccess;
+    if (ownerAccess === true) {
+      const ownerUrl = new URL(request.url);
+      ownerUrl.pathname = academyOwnerAssetPath(url.pathname);
+      const asset = await env.ASSETS.fetch(new Request(ownerUrl.toString(), request));
+      const headers = new Headers(asset.headers);
+      headers.set("Cache-Control", "private, no-store, max-age=0");
+      headers.set("CDN-Cache-Control", "no-store");
+      headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
+      headers.set("X-Frame-Options", "DENY");
+      if (request.method === "HEAD") return new Response(null, { status: asset.status, statusText: asset.statusText, headers });
+      return new Response(asset.body, { status: asset.status, statusText: asset.statusText, headers });
+    }
     const gated = isLiveKidsPath(url.pathname) ? null : gateHiddenSurfaces(request, url, env, "live");
     if (gated) return gated;
     // TV-only stable short URL, pinned to a verified signed public GitHub release.
