@@ -62,7 +62,7 @@ test("Unsigned human originality review is not approval",()=>{
  f.originals.boy.actual3dIdentityApproved=true;assert.equal(audit(f).pass,false);
 });
 test("Cannot claim actual original binary without measured SHA",()=>{
- const f=fixture();f.originals.boy.actualBinaryRead=true;assert.equal(audit(f).pass,false);
+ const f=fixture();f.originals.boy.actualBinaryRead=true;delete f.originals.boy.verifiedGlbSha256;assert.equal(audit(f).pass,false);
 });
 test("Preview is never a release authorization",()=>{
  const f=fixture();f.previewIsNotReleaseEvidence=false;assert.equal(audit(f).pass,false);
