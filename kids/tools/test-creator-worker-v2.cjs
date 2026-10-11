@@ -85,7 +85,6 @@ const get=(path,method="GET")=>handler.fetch(new Request("https://kids-preview.e
   assert.match(academySrc,/Erklärung anhören/);
   assert.doesNotMatch(academySrc,/src="\/desktop-preview\/assets\/kids-academy-/);
   assert.match(consoleHtml,/window\.location\.assign\("\/kids\/akademie\/\?editor=1"\)/);
-  assert.match(studio,/location\.assign\("\/kids\/akademie\/\?lektion=/);
 
   assert.match(academySrc,/#academyCreatorVoiceBanner,#academyPilotStatus,#audioDiagnostics/);
   assert.ok(!academySrc.includes('const access=academySchoolState().access(chosen);'));
@@ -101,6 +100,7 @@ const get=(path,method="GET")=>handler.fetch(new Request("https://kids-preview.e
   // Installable standalone web app: content and editor stay ONLY on test host.
   const manifest=JSON.parse(fs.readFileSync(path.join(root,"kids/test-console/manifest.webmanifest"),"utf8"));
   const studio=fs.readFileSync(path.join(root,"kids/test-console/studio-v1.js"),"utf8");
+  assert.match(studio,/location\.assign\("\/kids\/akademie\/\?lektion=/);
   const styles=fs.readFileSync(path.join(root,"kids/test-console/studio-v1.css"),"utf8");
   const sw=fs.readFileSync(path.join(root,"kids/test-console/sw.js"),"utf8");
   const releasePolicy=fs.readFileSync(path.join(root,"kids/creator-test/GLOBAL-RELEASE-LOCK.md"),"utf8");
