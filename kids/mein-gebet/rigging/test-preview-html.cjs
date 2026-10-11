@@ -6,7 +6,7 @@ const fs=require("node:fs");
 const path=require("node:path");
 const vm=require("node:vm");
 const base=path.resolve(__dirname,"..");
-const pages=["vorschau.html","demo-junge.html","demo-maedchen.html","vorschau-v78-interaktiv.html","vorschau-v79-3d-labor.html","vorschau-v80-salam-fix.html"];
+const pages=["vorschau.html","demo-junge.html","demo-maedchen.html","vorschau-v78-interaktiv.html","vorschau-v79-3d-labor.html","vorschau-v80-salam-fix.html","vorschau-v81-betendenperspektive.html"];
 const read=n=>fs.readFileSync(path.join(base,n),"utf8");
 
 for(const file of pages){
@@ -149,4 +149,16 @@ test("V8.0 salam movement is two real head-only yaw phases, right then left",()=
  const array=vm.runInNewContext('function frame(o={}){const d={pelvis:[0,1.43,0],chest:[0,2.26,0],head:[0,2.94,.015],shoulderY:2.4,shoulderZ:0,elbowY:2.03,elbowZ:.29,handY:2.16,handZ:.40,kneeY:.61,kneeZ:.10,ankleY:.16,ankleZ:0,headTurn:0,...o};const S=sgn=>sgn*.43,H=sgn=>sgn*.135;return{pelvis:d.pelvis,chest:d.chest,head:d.head,shoulderL:[S(-1),d.shoulderY,d.shoulderZ],shoulderR:[S(1),d.shoulderY,d.shoulderZ],elbowL:[S(-1)*1.15,d.elbowY,d.elbowZ],elbowR:[S(1)*1.15,d.elbowY,d.elbowZ],handL:[H(-1),d.handY,d.handZ],handR:[H(1),d.handY,d.handZ+.03],kneeL:[-.21,d.kneeY,d.kneeZ],kneeR:[.21,d.kneeY,d.kneeZ],ankleL:[-.22,d.ankleY,d.ankleZ],ankleR:[.22,d.ankleY,d.ankleZ],headTurn:d.headTurn}};'+poses+'frames');
  assert.equal(array.length,9);
  assert.deepEqual(JSON.parse(JSON.stringify(array[8])),JSON.parse(JSON.stringify(array[7])),"taslim torso must exactly equal Tashahhud torso");
+});
+
+test("V8.1 Qibla perspective opens behind praying figure and preserves anatomically correct order",()=>{
+ const html=read("vorschau-v81-betendenperspektive.html");
+ assert.match(html,/yaw=Math\.PI,pitch=\.19/);
+ assert.match(html,/id="viewPoint"/);
+ assert.match(html,/cameraYaw:yaw,viewerFromBehind:Math\.cos\(yaw\)<0/);
+ assert.match(html,/eigene RECHTE|DEINER RECHTEN/);
+ assert.match(html,/eigenen linken|DEINER LINKEN/i);
+ assert.match(html,/taslimKeys=\[\[0,0\],\[\.62,-1\.07\]/);
+ assert.match(html,/productionApproved:false/);
+ assert.doesNotMatch(html,/localStorage|sessionStorage|serviceWorker|\bfetch\(|XMLHttpRequest/i);
 });
