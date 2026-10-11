@@ -1374,9 +1374,9 @@ html.player-learn #darQuranMiniPlayer.is-on.is-learn,
 html.player-reader-dock #darQuranMiniPlayer.is-on.is-reader-dock{
   top:var(--qrc-chrome-h,calc(env(safe-area-inset-top,0px) + 92px))!important;
   bottom:auto!important;
-  height:108px!important;
-  min-height:108px!important;
-  max-height:108px!important;
+  height:124px!important;
+  min-height:124px!important;
+  max-height:124px!important;
   padding:8px 12px 9px!important;
   box-sizing:border-box!important;
   display:flex!important;
@@ -1386,8 +1386,8 @@ html.player-reader-dock #darQuranMiniPlayer.is-on.is-reader-dock{
   transform:translate3d(0,0,0)!important;
 }
 html.player-learn #qrcChromeSpacer{
-  height:calc(var(--qrc-chrome-h,92px) + 116px)!important;
-  min-height:calc(var(--qrc-chrome-h,92px) + 116px)!important;
+  height:calc(var(--qrc-chrome-h,92px) + 132px)!important;
+  min-height:calc(var(--qrc-chrome-h,92px) + 132px)!important;
 }
 html.player-reader-dock #qrcChromeSpacer{
   height:calc(var(--qrc-chrome-h,92px) + 86px)!important;
