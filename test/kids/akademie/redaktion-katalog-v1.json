@@ -1,0 +1,6825 @@
+{
+  "schemaVersion": 1,
+  "generatedFrom": "kids/data/academy-year-52weeks-v1.json + kids/akademie/curriculum-v1.js, curriculum-v2.js, curriculum-v22.js + Ṣidq-Akademiegrundlage",
+  "snapshotDate": "2026-10-11",
+  "calendarModel": {
+    "weeks": 52,
+    "daysPerWeek": 7,
+    "newPerWeek": 4,
+    "reviewsPerWeek": 2,
+    "flexiblePerWeek": 1,
+    "slots": 208,
+    "repeat": "52-Wochen-Zyklus / 364 Tage; kein erfundenes fixes Veröffentlichungsdatum",
+    "anchorMonday": null
+  },
+  "provenancePolicy": "createdAt/changedAt/testPublishedAt/visitorPublishedAt remain null unless supported by a specific traceable event. codeIntegratedAt for only four V22 lessons refers to commit date, NOT visitor launch date.",
+  "subjects": [
+    "akhlaq",
+    "adab",
+    "fiqh",
+    "aqidah"
+  ],
+  "ages": [
+    "4-5",
+    "6-8",
+    "9-10"
+  ],
+  "weekly": [
+    {
+      "week": 1,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 1
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 2
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 3
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 4
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 2,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 5
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 6
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 7
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 8
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 3,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 9
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 10
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 11
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 12
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 4,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 13
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 14
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 15
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 16
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 5,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 17
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 18
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 19
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 20
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 6,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 21
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 22
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 23
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 24
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 7,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 25
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 26
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 27
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 28
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 8,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 29
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 30
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 31
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 32
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 9,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 33
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 34
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 35
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 36
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 10,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 37
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 38
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 39
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 40
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 11,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 41
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 42
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 43
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 44
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 12,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 45
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 46
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 47
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 48
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 13,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 49
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 50
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 51
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 52
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 14,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 53
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 54
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 55
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 56
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 15,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 57
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 58
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 59
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 60
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 16,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 61
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 62
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 63
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 64
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 17,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 65
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 66
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 67
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 68
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 18,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 69
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 70
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 71
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 72
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 19,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 73
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 74
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 75
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 76
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 20,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 77
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 78
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 79
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 80
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 21,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 81
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 82
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 83
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 84
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 22,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 85
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 86
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 87
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 88
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 23,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 89
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 90
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 91
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 92
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 24,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 93
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 94
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 95
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 96
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 25,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 97
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 98
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 99
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 100
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 26,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 101
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 102
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 103
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 104
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 27,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 105
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 106
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 107
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 108
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 28,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 109
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 110
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 111
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 112
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 29,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 113
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 114
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 115
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 116
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 30,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 117
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 118
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 119
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 120
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 31,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 121
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 122
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 123
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 124
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 32,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 125
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 126
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 127
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 128
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 33,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 129
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 130
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 131
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 132
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 34,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 133
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 134
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 135
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 136
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 35,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 137
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 138
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 139
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 140
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 36,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 141
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 142
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 143
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 144
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 37,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 145
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 146
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 147
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 148
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 38,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 149
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 150
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 151
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 152
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 39,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 153
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 154
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 155
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 156
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 40,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 157
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 158
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 159
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 160
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 41,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 161
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 162
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 163
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 164
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 42,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 165
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 166
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 167
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 168
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 43,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 169
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 170
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 171
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 172
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 44,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 173
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 174
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 175
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 176
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 45,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 177
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 178
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 179
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 180
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 46,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 181
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 182
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 183
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 184
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 47,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 185
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 186
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 187
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 188
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 48,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 189
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 190
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 191
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 192
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 49,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 193
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 194
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 195
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 196
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 50,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 197
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 198
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 199
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 200
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 51,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 201
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 202
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 203
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 204
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    },
+    {
+      "week": 52,
+      "days": [
+        {
+          "day": "Montag",
+          "mode": "new",
+          "slot": 205
+        },
+        {
+          "day": "Dienstag",
+          "mode": "new",
+          "slot": 206
+        },
+        {
+          "day": "Mittwoch",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Donnerstag",
+          "mode": "new",
+          "slot": 207
+        },
+        {
+          "day": "Freitag",
+          "mode": "new",
+          "slot": 208
+        },
+        {
+          "day": "Samstag",
+          "mode": "review",
+          "slot": null
+        },
+        {
+          "day": "Sonntag",
+          "mode": "flexible",
+          "slot": null
+        }
+      ]
+    }
+  ],
+  "entries": [
+    {
+      "week": 1,
+      "day": "Montag",
+      "slot": 1,
+      "id": "sidq",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Ṣidq – Wahrhaftigkeit",
+      "topic": "Wahrhaftigkeit",
+      "subject": "akhlaq",
+      "lead": "Die Wahrheit sagen – auch wenn es manchmal Mut kostet.",
+      "goal": "Ich lerne ehrlich zu sprechen und einen Fehler zuzugeben.",
+      "quran": {
+        "surah": 9,
+        "ayah": 119,
+        "label": "9:119",
+        "excerpt": false
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ Muslim, Nr. 2607a"
+      },
+      "hadithUrl": null,
+      "sourceId": null,
+      "sourceCheckedAt": null,
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": null,
+      "codeIntegratedCommit": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "4 vorhandene V4-Hörproben · nicht freigegeben"
+    },
+    {
+      "week": 1,
+      "day": "Dienstag",
+      "slot": 2,
+      "id": "adab-salam",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Salām – Grüßen",
+      "topic": "Grüßen",
+      "subject": "adab",
+      "lead": "Ein schöner Gruß bringt Freundlichkeit in unsere Begegnung.",
+      "goal": "Wir üben den islamischen Friedensgruß und eine gute Antwort.",
+      "quran": {
+        "surah": 4,
+        "ayah": 86,
+        "label": "Sūrat an-Nisāʾ · 4:86",
+        "excerpt": false
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ Muslim, Nr. 54a"
+      },
+      "hadithUrl": null,
+      "sourceId": null,
+      "sourceCheckedAt": null,
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": null,
+      "codeIntegratedCommit": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "keine freigegebene V4 nachgewiesen"
+    },
+    {
+      "week": 1,
+      "day": "Donnerstag",
+      "slot": 3,
+      "id": "fiqh-taharah",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Ṭahārah – Reinheit",
+      "topic": "Reinheit",
+      "subject": "fiqh",
+      "lead": "Reinheit hat im Islam einen hohen Stellenwert.",
+      "goal": "Wir lernen, uns selbst, unsere Kleidung und unsere Umgebung sauber zu halten.",
+      "quran": {
+        "surah": 74,
+        "ayah": 4,
+        "label": "Sūrat al-Muddaṯṯir · 74:4",
+        "excerpt": false
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ Muslim, Nr. 223"
+      },
+      "hadithUrl": null,
+      "sourceId": null,
+      "sourceCheckedAt": null,
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": null,
+      "codeIntegratedCommit": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "keine freigegebene V4 nachgewiesen"
+    },
+    {
+      "week": 1,
+      "day": "Freitag",
+      "slot": 4,
+      "id": "aqidah-tawhid",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Tawḥīd – Allah allein",
+      "topic": "Tawḥīd",
+      "subject": "aqidah",
+      "lead": "Allah ist Einer und hat keinen Teilhaber.",
+      "goal": "Wir lernen, dass nur Allah angebetet wird.",
+      "quran": {
+        "surah": 112,
+        "ayah": 1,
+        "label": "Sūrat al-Iḫlāṣ · 112:1",
+        "excerpt": false
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ al-Buḫārī, Nr. 2856"
+      },
+      "hadithUrl": null,
+      "sourceId": null,
+      "sourceCheckedAt": null,
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": null,
+      "codeIntegratedCommit": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "keine freigegebene V4 nachgewiesen"
+    },
+    {
+      "week": 2,
+      "day": "Montag",
+      "slot": 5,
+      "id": "akhlaq-sabr",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Ṣabr – Geduld",
+      "topic": "Geduld",
+      "subject": "akhlaq",
+      "lead": "Allah hilft den Geduldigen.",
+      "goal": "Ich übe Geduld, wenn etwas nicht sofort klappt.",
+      "quran": {
+        "surah": 2,
+        "ayah": 153,
+        "label": "Sūrat al-Baqarah · 2:153",
+        "excerpt": false
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ al-Buḫārī, Nr. 1469"
+      },
+      "hadithUrl": null,
+      "sourceId": null,
+      "sourceCheckedAt": null,
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": null,
+      "codeIntegratedCommit": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "keine freigegebene V4 nachgewiesen"
+    },
+    {
+      "week": 2,
+      "day": "Dienstag",
+      "slot": 6,
+      "id": "adab-worte",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Gute Worte",
+      "topic": "Freundlich sprechen",
+      "subject": "adab",
+      "lead": "Freundliche Worte sind Teil guten Benehmens.",
+      "goal": "Wir sprechen ehrlich und freundlich, auch wenn wir anderer Meinung sind.",
+      "quran": {
+        "surah": 17,
+        "ayah": 53,
+        "label": "Sūrat al-Isrāʾ · 17:53",
+        "excerpt": false
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ al-Buḫārī, Nr. 6018"
+      },
+      "hadithUrl": null,
+      "sourceId": null,
+      "sourceCheckedAt": null,
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": null,
+      "codeIntegratedCommit": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "keine freigegebene V4 nachgewiesen"
+    },
+    {
+      "week": 2,
+      "day": "Donnerstag",
+      "slot": 7,
+      "id": "fiqh-wudu",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Wuḍūʾ – Gebetswaschung",
+      "topic": "Wuḍūʾ",
+      "subject": "fiqh",
+      "lead": "Für das Gebet lernen wir die rituelle Waschung.",
+      "goal": "Wir erkennen die grundlegenden Glieder der Gebetswaschung, ohne einzelne Sonderfälle vorwegzunehmen.",
+      "quran": {
+        "surah": 5,
+        "ayah": 6,
+        "label": "Sūrat al-Māʾidah · 5:6 (Textauszug)",
+        "excerpt": true
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ al-Buḫārī, Nr. 135"
+      },
+      "hadithUrl": null,
+      "sourceId": null,
+      "sourceCheckedAt": null,
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": null,
+      "codeIntegratedCommit": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "keine freigegebene V4 nachgewiesen"
+    },
+    {
+      "week": 2,
+      "day": "Freitag",
+      "slot": 8,
+      "id": "aqidah-iman",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Īmān – Glaube",
+      "topic": "Īmān",
+      "subject": "aqidah",
+      "lead": "Wir lernen, woran Muslime glauben.",
+      "goal": "Der Glaube umfasst die im Qurʾān und in der Sunnah genannten Grundlagen.",
+      "quran": {
+        "surah": 2,
+        "ayah": 3,
+        "label": "Sūrat al-Baqarah · 2:3",
+        "excerpt": false
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ Muslim, Nr. 8a (Ḥadīṯ Ǧibrīl)"
+      },
+      "hadithUrl": null,
+      "sourceId": null,
+      "sourceCheckedAt": null,
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": null,
+      "codeIntegratedCommit": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "keine freigegebene V4 nachgewiesen"
+    },
+    {
+      "week": 3,
+      "day": "Montag",
+      "slot": 9,
+      "id": "akhlaq-amanah",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Amānah – Vertrauen",
+      "topic": "Vertrauen",
+      "subject": "akhlaq",
+      "lead": "Eine anvertraute Sache soll ich sorgfältig behandeln.",
+      "goal": "Ich bin zuverlässig, wenn mir jemand etwas anvertraut.",
+      "quran": {
+        "surah": 23,
+        "ayah": 8,
+        "label": "Sūrat al-Muʾminūn · 23:8",
+        "excerpt": false
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ al-Buḫārī, Nr. 33"
+      },
+      "hadithUrl": null,
+      "sourceId": null,
+      "sourceCheckedAt": null,
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": null,
+      "codeIntegratedCommit": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "keine freigegebene V4 nachgewiesen"
+    },
+    {
+      "week": 3,
+      "day": "Dienstag",
+      "slot": 10,
+      "id": "adab-respekt",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Respekt und Fürsorge",
+      "topic": "Respekt",
+      "subject": "adab",
+      "lead": "Menschen verdienen einen freundlichen Umgang.",
+      "goal": "Wir üben Respekt für Eltern, Familie und Mitmenschen.",
+      "quran": {
+        "surah": 17,
+        "ayah": 23,
+        "label": "Sūrat al-Isrāʾ · 17:23",
+        "excerpt": false
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ al-Buḫārī, Nr. 5971"
+      },
+      "hadithUrl": null,
+      "sourceId": null,
+      "sourceCheckedAt": null,
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": null,
+      "codeIntegratedCommit": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "keine freigegebene V4 nachgewiesen"
+    },
+    {
+      "week": 3,
+      "day": "Donnerstag",
+      "slot": 11,
+      "id": "fiqh-salah",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Ṣalāh – das Gebet",
+      "topic": "Gebet",
+      "subject": "fiqh",
+      "lead": "Das Gebet erinnert uns an Allah.",
+      "goal": "Wir beginnen mit dem Sinn des Gebets und lernen die Praxis anschließend Schritt für Schritt.",
+      "quran": {
+        "surah": 20,
+        "ayah": 14,
+        "label": "Sūrat Ṭā Hā · 20:14",
+        "excerpt": false
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ al-Buḫārī, Nr. 631"
+      },
+      "hadithUrl": null,
+      "sourceId": null,
+      "sourceCheckedAt": null,
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": null,
+      "codeIntegratedCommit": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "keine freigegebene V4 nachgewiesen"
+    },
+    {
+      "week": 3,
+      "day": "Freitag",
+      "slot": 12,
+      "id": "aqidah-ikhlas",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Ikhlāṣ – Aufrichtigkeit",
+      "topic": "Ikhlāṣ",
+      "subject": "aqidah",
+      "lead": "Wir bemühen uns, Allah aufrichtig zu dienen.",
+      "goal": "Gute Taten sollen nicht nur zum Angeben getan werden.",
+      "quran": {
+        "surah": 39,
+        "ayah": 11,
+        "label": "Sūrat az-Zumar · 39:11",
+        "excerpt": false
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ al-Buḫārī, Nr. 1"
+      },
+      "hadithUrl": null,
+      "sourceId": null,
+      "sourceCheckedAt": null,
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": null,
+      "codeIntegratedCommit": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "keine freigegebene V4 nachgewiesen"
+    },
+    {
+      "week": 4,
+      "day": "Montag",
+      "slot": 13,
+      "id": "akhlaq-sabr-geduldig-warten",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Geduldig warten · Warten ohne Streit",
+      "topic": "Geduldig warten",
+      "subject": "akhlaq",
+      "lead": "Ich lerne ruhig zu bleiben, wenn ich warten muss.",
+      "goal": "Ich kann warten, ohne andere anzuschreien.",
+      "quran": {
+        "surah": 2,
+        "ayah": 153,
+        "label": "Sūrat al-Baqarah · 2:153",
+        "excerpt": false
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ al-Buḫārī, Nr. 1469"
+      },
+      "hadithUrl": null,
+      "sourceId": null,
+      "sourceCheckedAt": null,
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": null,
+      "codeIntegratedCommit": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "keine freigegebene V4 nachgewiesen"
+    },
+    {
+      "week": 4,
+      "day": "Dienstag",
+      "slot": 14,
+      "id": "adab-salam-salam-erwidern",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Salām erwidern · Freundlich antworten",
+      "topic": "Salām erwidern",
+      "subject": "adab",
+      "lead": "Auf einen Gruß antworte ich freundlich.",
+      "goal": "Ich übe eine gute Antwort auf den Salām.",
+      "quran": {
+        "surah": 4,
+        "ayah": 86,
+        "label": "Sūrat an-Nisāʾ · 4:86",
+        "excerpt": false
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ Muslim, Nr. 54a"
+      },
+      "hadithUrl": null,
+      "sourceId": null,
+      "sourceCheckedAt": null,
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": null,
+      "codeIntegratedCommit": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "keine freigegebene V4 nachgewiesen"
+    },
+    {
+      "week": 4,
+      "day": "Donnerstag",
+      "slot": 15,
+      "id": "fiqh-taharah-saubere-kleidung",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Saubere Kleidung · Reinheit beachten",
+      "topic": "Saubere Kleidung",
+      "subject": "fiqh",
+      "lead": "Für den Alltag und das Gebet achte ich auf Sauberkeit.",
+      "goal": "Ich lerne, warum saubere Kleidung wichtig ist.",
+      "quran": {
+        "surah": 74,
+        "ayah": 4,
+        "label": "Sūrat al-Muddaṯṯir · 74:4",
+        "excerpt": false
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ Muslim, Nr. 223"
+      },
+      "hadithUrl": null,
+      "sourceId": null,
+      "sourceCheckedAt": null,
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": null,
+      "codeIntegratedCommit": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "keine freigegebene V4 nachgewiesen"
+    },
+    {
+      "week": 4,
+      "day": "Freitag",
+      "slot": 16,
+      "id": "aqidah-tawhid-allah-ist-einer",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Allah ist Einer · Tawḥīd verstehen",
+      "topic": "Allah ist Einer",
+      "subject": "aqidah",
+      "lead": "Sūrat al-Ikhlāṣ lehrt uns, dass Allah Einer ist.",
+      "goal": "Ich lerne, dass nur Allah angebetet wird.",
+      "quran": {
+        "surah": 112,
+        "ayah": 1,
+        "label": "Sūrat al-Iḫlāṣ · 112:1",
+        "excerpt": false
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ al-Buḫārī, Nr. 2856"
+      },
+      "hadithUrl": null,
+      "sourceId": null,
+      "sourceCheckedAt": null,
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": null,
+      "codeIntegratedCommit": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "keine freigegebene V4 nachgewiesen"
+    },
+    {
+      "week": 5,
+      "day": "Montag",
+      "slot": 17,
+      "id": "akhlaq-sabr-nicht-aufgeben",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Nicht aufgeben · Geduld beim Üben",
+      "topic": "Nicht aufgeben",
+      "subject": "akhlaq",
+      "lead": "Auch schwierige Dinge darf ich Schritt für Schritt lernen.",
+      "goal": "Ich kann bei einem Fehler erneut üben.",
+      "quran": {
+        "surah": 2,
+        "ayah": 153,
+        "label": "Sūrat al-Baqarah · 2:153",
+        "excerpt": false
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ al-Buḫārī, Nr. 1469"
+      },
+      "hadithUrl": null,
+      "sourceId": null,
+      "sourceCheckedAt": null,
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": null,
+      "codeIntegratedCommit": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "keine freigegebene V4 nachgewiesen"
+    },
+    {
+      "week": 5,
+      "day": "Dienstag",
+      "slot": 18,
+      "id": "adab-salam-zuerst-gru-en",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Zuerst grüßen · Frieden verbreiten",
+      "topic": "Zuerst grüßen",
+      "subject": "adab",
+      "lead": "Mit einem freundlichen Gruß kann ich beginnen.",
+      "goal": "Ich grüße Menschen höflich.",
+      "quran": {
+        "surah": 4,
+        "ayah": 86,
+        "label": "Sūrat an-Nisāʾ · 4:86",
+        "excerpt": false
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ Muslim, Nr. 54a"
+      },
+      "hadithUrl": null,
+      "sourceId": null,
+      "sourceCheckedAt": null,
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": null,
+      "codeIntegratedCommit": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "keine freigegebene V4 nachgewiesen"
+    },
+    {
+      "week": 5,
+      "day": "Donnerstag",
+      "slot": 19,
+      "id": "fiqh-taharah-sauberer-lernplatz",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Sauberer Lernplatz · Ordnung und Reinheit",
+      "topic": "Sauberer Lernplatz",
+      "subject": "fiqh",
+      "lead": "Ich halte meinen Platz so sauber, wie ich kann.",
+      "goal": "Ich übe sorgsamen Umgang mit meiner Umgebung.",
+      "quran": {
+        "surah": 74,
+        "ayah": 4,
+        "label": "Sūrat al-Muddaṯṯir · 74:4",
+        "excerpt": false
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ Muslim, Nr. 223"
+      },
+      "hadithUrl": null,
+      "sourceId": null,
+      "sourceCheckedAt": null,
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": null,
+      "codeIntegratedCommit": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "keine freigegebene V4 nachgewiesen"
+    },
+    {
+      "week": 5,
+      "day": "Freitag",
+      "slot": 20,
+      "id": "aqidah-tawhid-nur-allah-anbeten",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Nur Allah anbeten · Allahs Recht",
+      "topic": "Nur Allah anbeten",
+      "subject": "aqidah",
+      "lead": "Die Anbetung gehört Allah allein.",
+      "goal": "Ich erkenne die Bedeutung des Tawḥīd im Gebet.",
+      "quran": {
+        "surah": 112,
+        "ayah": 1,
+        "label": "Sūrat al-Iḫlāṣ · 112:1",
+        "excerpt": false
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ al-Buḫārī, Nr. 2856"
+      },
+      "hadithUrl": null,
+      "sourceId": null,
+      "sourceCheckedAt": null,
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": null,
+      "codeIntegratedCommit": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "keine freigegebene V4 nachgewiesen"
+    },
+    {
+      "week": 6,
+      "day": "Montag",
+      "slot": 21,
+      "id": "akhlaq-amanah-geliehene-dinge",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Geliehene Dinge · Amānah im Alltag",
+      "topic": "Geliehene Dinge",
+      "subject": "akhlaq",
+      "lead": "Anvertraute Sachen behandle ich sorgfältig.",
+      "goal": "Ich gebe Geliehenes verlässlich zurück.",
+      "quran": {
+        "surah": 23,
+        "ayah": 8,
+        "label": "Sūrat al-Muʾminūn · 23:8",
+        "excerpt": false
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ al-Buḫārī, Nr. 33"
+      },
+      "hadithUrl": null,
+      "sourceId": null,
+      "sourceCheckedAt": null,
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": null,
+      "codeIntegratedCommit": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "keine freigegebene V4 nachgewiesen"
+    },
+    {
+      "week": 6,
+      "day": "Dienstag",
+      "slot": 22,
+      "id": "adab-worte-bei-streit-sprechen",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Bei Streit sprechen · Freundliche Worte",
+      "topic": "Bei Streit sprechen",
+      "subject": "adab",
+      "lead": "Auch wenn ich verärgert bin, wähle ich gute Worte.",
+      "goal": "Ich spreche ohne Beleidigungen.",
+      "quran": {
+        "surah": 17,
+        "ayah": 53,
+        "label": "Sūrat al-Isrāʾ · 17:53",
+        "excerpt": false
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ al-Buḫārī, Nr. 6018"
+      },
+      "hadithUrl": null,
+      "sourceId": null,
+      "sourceCheckedAt": null,
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": null,
+      "codeIntegratedCommit": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "keine freigegebene V4 nachgewiesen"
+    },
+    {
+      "week": 6,
+      "day": "Donnerstag",
+      "slot": 23,
+      "id": "fiqh-wudu-gesicht-und-arme",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Gesicht und Arme · Wuḍūʾ kennenlernen",
+      "topic": "Gesicht und Arme",
+      "subject": "fiqh",
+      "lead": "Der Qurʾān nennt Glieder der Gebetswaschung.",
+      "goal": "Ich erkenne Gesicht und Arme als Teile des Wuḍūʾ.",
+      "quran": {
+        "surah": 5,
+        "ayah": 6,
+        "label": "Sūrat al-Māʾidah · 5:6 (Textauszug)",
+        "excerpt": true
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ al-Buḫārī, Nr. 135"
+      },
+      "hadithUrl": null,
+      "sourceId": null,
+      "sourceCheckedAt": null,
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": null,
+      "codeIntegratedCommit": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "keine freigegebene V4 nachgewiesen"
+    },
+    {
+      "week": 6,
+      "day": "Freitag",
+      "slot": 24,
+      "id": "aqidah-iman-die-engel",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Die Engel · Grundlagen des Īmān",
+      "topic": "Die Engel",
+      "subject": "aqidah",
+      "lead": "Der Prophet ﷺ nannte den Glauben an die Engel.",
+      "goal": "Ich kann die Engel als einen Bestandteil des Īmān nennen.",
+      "quran": {
+        "surah": 2,
+        "ayah": 3,
+        "label": "Sūrat al-Baqarah · 2:3",
+        "excerpt": false
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ Muslim, Nr. 8a (Ḥadīṯ Ǧibrīl)"
+      },
+      "hadithUrl": null,
+      "sourceId": null,
+      "sourceCheckedAt": null,
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": null,
+      "codeIntegratedCommit": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "keine freigegebene V4 nachgewiesen"
+    },
+    {
+      "week": 7,
+      "day": "Montag",
+      "slot": 25,
+      "id": "akhlaq-amanah-mein-versprechen",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Mein Versprechen · Zuverlässig sein",
+      "topic": "Mein Versprechen",
+      "subject": "akhlaq",
+      "lead": "Ich überlege gut, bevor ich etwas verspreche.",
+      "goal": "Ich bemühe mich, Zusagen einzuhalten.",
+      "quran": {
+        "surah": 23,
+        "ayah": 8,
+        "label": "Sūrat al-Muʾminūn · 23:8",
+        "excerpt": false
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ al-Buḫārī, Nr. 33"
+      },
+      "hadithUrl": null,
+      "sourceId": null,
+      "sourceCheckedAt": null,
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": null,
+      "codeIntegratedCommit": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "keine freigegebene V4 nachgewiesen"
+    },
+    {
+      "week": 7,
+      "day": "Dienstag",
+      "slot": 26,
+      "id": "adab-worte-erst-nachdenken",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Erst nachdenken · Schön sprechen",
+      "topic": "Erst nachdenken",
+      "subject": "adab",
+      "lead": "Vor dem Sprechen überlege ich, ob meine Worte gut sind.",
+      "goal": "Ich lerne, unnötige verletzende Worte zu vermeiden.",
+      "quran": {
+        "surah": 17,
+        "ayah": 53,
+        "label": "Sūrat al-Isrāʾ · 17:53",
+        "excerpt": false
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ al-Buḫārī, Nr. 6018"
+      },
+      "hadithUrl": null,
+      "sourceId": null,
+      "sourceCheckedAt": null,
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": null,
+      "codeIntegratedCommit": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "keine freigegebene V4 nachgewiesen"
+    },
+    {
+      "week": 7,
+      "day": "Donnerstag",
+      "slot": 27,
+      "id": "fiqh-wudu-kopf-und-fu-e",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Kopf und Füße · Wuḍūʾ verstehen",
+      "topic": "Kopf und Füße",
+      "subject": "fiqh",
+      "lead": "Ich höre aufmerksam zu, welche Glieder genannt werden.",
+      "goal": "Ich erkenne das Streichen über den Kopf.",
+      "quran": {
+        "surah": 5,
+        "ayah": 6,
+        "label": "Sūrat al-Māʾidah · 5:6 (Textauszug)",
+        "excerpt": true
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ al-Buḫārī, Nr. 135"
+      },
+      "hadithUrl": null,
+      "sourceId": null,
+      "sourceCheckedAt": null,
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": null,
+      "codeIntegratedCommit": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "keine freigegebene V4 nachgewiesen"
+    },
+    {
+      "week": 7,
+      "day": "Freitag",
+      "slot": 28,
+      "id": "aqidah-iman-die-gesandten",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Die Gesandten · Glaube an Gesandte",
+      "topic": "Die Gesandten",
+      "subject": "aqidah",
+      "lead": "Zum Īmān gehört der Glaube an Allahs Gesandte.",
+      "goal": "Ich kenne einen weiteren Bestandteil des Īmān.",
+      "quran": {
+        "surah": 2,
+        "ayah": 3,
+        "label": "Sūrat al-Baqarah · 2:3",
+        "excerpt": false
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ Muslim, Nr. 8a (Ḥadīṯ Ǧibrīl)"
+      },
+      "hadithUrl": null,
+      "sourceId": null,
+      "sourceCheckedAt": null,
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": null,
+      "codeIntegratedCommit": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "keine freigegebene V4 nachgewiesen"
+    },
+    {
+      "week": 8,
+      "day": "Montag",
+      "slot": 29,
+      "id": "adab-respekt-eltern-zuhoren",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Eltern zuhören · Mit Respekt sprechen",
+      "topic": "Eltern zuhören",
+      "subject": "adab",
+      "lead": "Ich übe, meinen Eltern freundlich zu antworten.",
+      "goal": "Ich antworte respektvoll, auch wenn ich müde bin.",
+      "quran": {
+        "surah": 17,
+        "ayah": 23,
+        "label": "Sūrat al-Isrāʾ · 17:23",
+        "excerpt": false
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ al-Buḫārī, Nr. 5971"
+      },
+      "hadithUrl": null,
+      "sourceId": null,
+      "sourceCheckedAt": null,
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": null,
+      "codeIntegratedCommit": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "keine freigegebene V4 nachgewiesen"
+    },
+    {
+      "week": 8,
+      "day": "Dienstag",
+      "slot": 30,
+      "id": "fiqh-salah-allah-gedenken",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Allah gedenken · Warum wir beten",
+      "topic": "Allah gedenken",
+      "subject": "fiqh",
+      "lead": "Im Gebet wenden wir uns Allah zu.",
+      "goal": "Ich verstehe, warum das Gebet wichtig ist.",
+      "quran": {
+        "surah": 20,
+        "ayah": 14,
+        "label": "Sūrat Ṭā Hā · 20:14",
+        "excerpt": false
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ al-Buḫārī, Nr. 631"
+      },
+      "hadithUrl": null,
+      "sourceId": null,
+      "sourceCheckedAt": null,
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": null,
+      "codeIntegratedCommit": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "keine freigegebene V4 nachgewiesen"
+    },
+    {
+      "week": 8,
+      "day": "Donnerstag",
+      "slot": 31,
+      "id": "aqidah-ikhlas-gutes-ohne-lob",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Gutes ohne Lob · Aufrichtig helfen",
+      "topic": "Gutes ohne Lob",
+      "subject": "aqidah",
+      "lead": "Gute Taten sollen nicht nur dem Lob anderer dienen.",
+      "goal": "Ich helfe mit guter Absicht.",
+      "quran": {
+        "surah": 39,
+        "ayah": 11,
+        "label": "Sūrat az-Zumar · 39:11",
+        "excerpt": false
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ al-Buḫārī, Nr. 1"
+      },
+      "hadithUrl": null,
+      "sourceId": null,
+      "sourceCheckedAt": null,
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": null,
+      "codeIntegratedCommit": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "keine freigegebene V4 nachgewiesen"
+    },
+    {
+      "week": 8,
+      "day": "Freitag",
+      "slot": 32,
+      "id": "adab-respekt-hilfsbereit-sein",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Hilfsbereit sein · Für andere da sein",
+      "topic": "Hilfsbereit sein",
+      "subject": "adab",
+      "lead": "In der Familie kann ich mit kleinen Dingen helfen.",
+      "goal": "Ich bemerke, wenn jemand Unterstützung braucht.",
+      "quran": {
+        "surah": 17,
+        "ayah": 23,
+        "label": "Sūrat al-Isrāʾ · 17:23",
+        "excerpt": false
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ al-Buḫārī, Nr. 5971"
+      },
+      "hadithUrl": null,
+      "sourceId": null,
+      "sourceCheckedAt": null,
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": null,
+      "codeIntegratedCommit": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "keine freigegebene V4 nachgewiesen"
+    },
+    {
+      "week": 9,
+      "day": "Montag",
+      "slot": 33,
+      "id": "fiqh-salah-gebet-lernen",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Gebet lernen · Vom Propheten lernen",
+      "topic": "Gebet lernen",
+      "subject": "fiqh",
+      "lead": "Wir lernen das Gebet nach der Sunnah.",
+      "goal": "Ich übe das Gebet Schritt für Schritt.",
+      "quran": {
+        "surah": 20,
+        "ayah": 14,
+        "label": "Sūrat Ṭā Hā · 20:14",
+        "excerpt": false
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ al-Buḫārī, Nr. 631"
+      },
+      "hadithUrl": null,
+      "sourceId": null,
+      "sourceCheckedAt": null,
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": null,
+      "codeIntegratedCommit": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "keine freigegebene V4 nachgewiesen"
+    },
+    {
+      "week": 9,
+      "day": "Dienstag",
+      "slot": 34,
+      "id": "aqidah-ikhlas-gute-absichten",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Gute Absichten · Warum ich etwas tue",
+      "topic": "Gute Absichten",
+      "subject": "aqidah",
+      "lead": "Die Absicht gehört zu unseren guten Taten.",
+      "goal": "Ich denke darüber nach, warum ich Gutes tue.",
+      "quran": {
+        "surah": 39,
+        "ayah": 11,
+        "label": "Sūrat az-Zumar · 39:11",
+        "excerpt": false
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ al-Buḫārī, Nr. 1"
+      },
+      "hadithUrl": null,
+      "sourceId": null,
+      "sourceCheckedAt": null,
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": null,
+      "codeIntegratedCommit": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "keine freigegebene V4 nachgewiesen"
+    },
+    {
+      "week": 9,
+      "day": "Donnerstag",
+      "slot": 35,
+      "id": "adab-essen-bismillah",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Bismillāh · Tischsitten",
+      "topic": "Essen mit Bismillāh",
+      "subject": "adab",
+      "lead": "Vor dem Essen denken wir an Allah.",
+      "goal": "Ich sage Bismillāh, esse mit der rechten Hand und nehme von meiner Seite.",
+      "quran": {
+        "surah": 7,
+        "ayah": 31,
+        "label": "Sūrat al-Aʿrāf · 7:31",
+        "excerpt": true
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ al-Buḫārī, Nr. 5376; Ṣaḥīḥ Muslim, Nr. 2022"
+      },
+      "hadithUrl": "https://dorar.net/hadith/sharh/14362",
+      "sourceId": null,
+      "sourceCheckedAt": "2026-10-11",
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": "2026-10-11",
+      "codeIntegratedCommit": "c4cbbea4033dc7a55fa5c13a914b97aae77cc9f1",
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "keine freigegebene V4 nachgewiesen"
+    },
+    {
+      "week": 9,
+      "day": "Freitag",
+      "slot": 36,
+      "id": "akhlaq-tiere-barmherzigkeit",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Tiere schützen · Raḥmah",
+      "topic": "Barmherzig zu Tieren",
+      "subject": "akhlaq",
+      "lead": "Allahs Geschöpfe sollen wir freundlich behandeln.",
+      "goal": "Ich gehe achtsam mit Tieren um und hole bei Bedarf Erwachsene dazu.",
+      "quran": {
+        "surah": 6,
+        "ayah": 38,
+        "label": "Sūrat al-Anʿām · 6:38",
+        "excerpt": true
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ al-Buḫārī, Nr. 2363; Ṣaḥīḥ Muslim, Nr. 2244"
+      },
+      "hadithUrl": "https://dorar.net/hadith/sharh/72367",
+      "sourceId": null,
+      "sourceCheckedAt": "2026-10-11",
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": "2026-10-11",
+      "codeIntegratedCommit": "c4cbbea4033dc7a55fa5c13a914b97aae77cc9f1",
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "keine freigegebene V4 nachgewiesen"
+    },
+    {
+      "week": 10,
+      "day": "Montag",
+      "slot": 37,
+      "id": "adab-nachbarn-gutes",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Nachbarn · Freundlich und rücksichtsvoll",
+      "topic": "Gute Nachbarschaft",
+      "subject": "adab",
+      "lead": "Auch unseren Nachbarn begegnen wir freundlich.",
+      "goal": "Ich nehme Rücksicht und helfe, wenn es sicher und möglich ist.",
+      "quran": {
+        "surah": 4,
+        "ayah": 36,
+        "label": "Sūrat an-Nisāʾ · 4:36",
+        "excerpt": true
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ al-Buḫārī, Nr. 6014; Ṣaḥīḥ Muslim, Nr. 2624"
+      },
+      "hadithUrl": "https://dorar.net/hadith/sharh/13223",
+      "sourceId": null,
+      "sourceCheckedAt": "2026-10-11",
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": "2026-10-11",
+      "codeIntegratedCommit": "c4cbbea4033dc7a55fa5c13a914b97aae77cc9f1",
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "keine freigegebene V4 nachgewiesen"
+    },
+    {
+      "week": 10,
+      "day": "Dienstag",
+      "slot": 38,
+      "id": "aqidah-dua-allah-bitten",
+      "status": "currently-in-catalog",
+      "type": "catalog",
+      "title": "Duʿāʾ · Allah um Hilfe bitten",
+      "topic": "Allah um Hilfe bitten",
+      "subject": "aqidah",
+      "lead": "In unserem Bittgebet wenden wir uns an Allah.",
+      "goal": "Ich weiß: Duʿāʾ richten wir an Allah und bleiben geduldig.",
+      "quran": {
+        "surah": 1,
+        "ayah": 5,
+        "label": "Sūrat al-Fātiḥah · 1:5",
+        "excerpt": false
+      },
+      "hadith": {
+        "source": "Ṣaḥīḥ al-Buḫārī, Nr. 6340; Ṣaḥīḥ Muslim, Nr. 2735"
+      },
+      "hadithUrl": "https://dorar.net/hadith/sharh/10635",
+      "sourceId": null,
+      "sourceCheckedAt": "2026-10-11",
+      "questions": [
+        {
+          "age": "4-5",
+          "implemented": true
+        },
+        {
+          "age": "6-8",
+          "implemented": true
+        },
+        {
+          "age": "9-10",
+          "implemented": true
+        }
+      ],
+      "createdAt": null,
+      "changedAt": null,
+      "codeIntegratedAt": "2026-10-11",
+      "codeIntegratedCommit": "c4cbbea4033dc7a55fa5c13a914b97aae77cc9f1",
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "im-code",
+      "voiceStatus": "keine freigegebene V4 nachgewiesen"
+    },
+    {
+      "week": 10,
+      "day": "Donnerstag",
+      "slot": 39,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 39 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 10,
+      "day": "Freitag",
+      "slot": 40,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 40 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 11,
+      "day": "Montag",
+      "slot": 41,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 41 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 11,
+      "day": "Dienstag",
+      "slot": 42,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 42 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 11,
+      "day": "Donnerstag",
+      "slot": 43,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 43 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 11,
+      "day": "Freitag",
+      "slot": 44,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 44 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 12,
+      "day": "Montag",
+      "slot": 45,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 45 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 12,
+      "day": "Dienstag",
+      "slot": 46,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 46 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 12,
+      "day": "Donnerstag",
+      "slot": 47,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 47 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 12,
+      "day": "Freitag",
+      "slot": 48,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 48 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 13,
+      "day": "Montag",
+      "slot": 49,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 49 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 13,
+      "day": "Dienstag",
+      "slot": 50,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 50 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 13,
+      "day": "Donnerstag",
+      "slot": 51,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 51 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 13,
+      "day": "Freitag",
+      "slot": 52,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 52 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 14,
+      "day": "Montag",
+      "slot": 53,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 53 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 14,
+      "day": "Dienstag",
+      "slot": 54,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 54 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 14,
+      "day": "Donnerstag",
+      "slot": 55,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 55 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 14,
+      "day": "Freitag",
+      "slot": 56,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 56 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 15,
+      "day": "Montag",
+      "slot": 57,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 57 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 15,
+      "day": "Dienstag",
+      "slot": 58,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 58 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 15,
+      "day": "Donnerstag",
+      "slot": 59,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 59 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 15,
+      "day": "Freitag",
+      "slot": 60,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 60 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 16,
+      "day": "Montag",
+      "slot": 61,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 61 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 16,
+      "day": "Dienstag",
+      "slot": 62,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 62 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 16,
+      "day": "Donnerstag",
+      "slot": 63,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 63 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 16,
+      "day": "Freitag",
+      "slot": 64,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 64 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 17,
+      "day": "Montag",
+      "slot": 65,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 65 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 17,
+      "day": "Dienstag",
+      "slot": 66,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 66 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 17,
+      "day": "Donnerstag",
+      "slot": 67,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 67 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 17,
+      "day": "Freitag",
+      "slot": 68,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 68 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 18,
+      "day": "Montag",
+      "slot": 69,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 69 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 18,
+      "day": "Dienstag",
+      "slot": 70,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 70 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 18,
+      "day": "Donnerstag",
+      "slot": 71,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 71 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 18,
+      "day": "Freitag",
+      "slot": 72,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 72 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 19,
+      "day": "Montag",
+      "slot": 73,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 73 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 19,
+      "day": "Dienstag",
+      "slot": 74,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 74 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 19,
+      "day": "Donnerstag",
+      "slot": 75,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 75 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 19,
+      "day": "Freitag",
+      "slot": 76,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 76 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 20,
+      "day": "Montag",
+      "slot": 77,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 77 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 20,
+      "day": "Dienstag",
+      "slot": 78,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 78 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 20,
+      "day": "Donnerstag",
+      "slot": 79,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 79 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 20,
+      "day": "Freitag",
+      "slot": 80,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 80 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 21,
+      "day": "Montag",
+      "slot": 81,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 81 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 21,
+      "day": "Dienstag",
+      "slot": 82,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 82 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 21,
+      "day": "Donnerstag",
+      "slot": 83,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 83 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 21,
+      "day": "Freitag",
+      "slot": 84,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 84 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 22,
+      "day": "Montag",
+      "slot": 85,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 85 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 22,
+      "day": "Dienstag",
+      "slot": 86,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 86 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 22,
+      "day": "Donnerstag",
+      "slot": 87,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 87 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 22,
+      "day": "Freitag",
+      "slot": 88,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 88 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 23,
+      "day": "Montag",
+      "slot": 89,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 89 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 23,
+      "day": "Dienstag",
+      "slot": 90,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 90 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 23,
+      "day": "Donnerstag",
+      "slot": 91,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 91 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 23,
+      "day": "Freitag",
+      "slot": 92,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 92 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 24,
+      "day": "Montag",
+      "slot": 93,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 93 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 24,
+      "day": "Dienstag",
+      "slot": 94,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 94 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 24,
+      "day": "Donnerstag",
+      "slot": 95,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 95 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 24,
+      "day": "Freitag",
+      "slot": 96,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 96 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 25,
+      "day": "Montag",
+      "slot": 97,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 97 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 25,
+      "day": "Dienstag",
+      "slot": 98,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 98 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 25,
+      "day": "Donnerstag",
+      "slot": 99,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 99 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 25,
+      "day": "Freitag",
+      "slot": 100,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 100 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 26,
+      "day": "Montag",
+      "slot": 101,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 101 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 26,
+      "day": "Dienstag",
+      "slot": 102,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 102 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 26,
+      "day": "Donnerstag",
+      "slot": 103,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 103 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 26,
+      "day": "Freitag",
+      "slot": 104,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 104 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 27,
+      "day": "Montag",
+      "slot": 105,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 105 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 27,
+      "day": "Dienstag",
+      "slot": 106,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 106 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 27,
+      "day": "Donnerstag",
+      "slot": 107,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 107 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 27,
+      "day": "Freitag",
+      "slot": 108,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 108 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 28,
+      "day": "Montag",
+      "slot": 109,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 109 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 28,
+      "day": "Dienstag",
+      "slot": 110,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 110 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 28,
+      "day": "Donnerstag",
+      "slot": 111,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 111 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 28,
+      "day": "Freitag",
+      "slot": 112,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 112 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 29,
+      "day": "Montag",
+      "slot": 113,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 113 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 29,
+      "day": "Dienstag",
+      "slot": 114,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 114 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 29,
+      "day": "Donnerstag",
+      "slot": 115,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 115 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 29,
+      "day": "Freitag",
+      "slot": 116,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 116 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 30,
+      "day": "Montag",
+      "slot": 117,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 117 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 30,
+      "day": "Dienstag",
+      "slot": 118,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 118 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 30,
+      "day": "Donnerstag",
+      "slot": 119,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 119 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 30,
+      "day": "Freitag",
+      "slot": 120,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 120 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 31,
+      "day": "Montag",
+      "slot": 121,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 121 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 31,
+      "day": "Dienstag",
+      "slot": 122,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 122 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 31,
+      "day": "Donnerstag",
+      "slot": 123,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 123 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 31,
+      "day": "Freitag",
+      "slot": 124,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 124 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 32,
+      "day": "Montag",
+      "slot": 125,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 125 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 32,
+      "day": "Dienstag",
+      "slot": 126,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 126 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 32,
+      "day": "Donnerstag",
+      "slot": 127,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 127 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 32,
+      "day": "Freitag",
+      "slot": 128,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 128 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 33,
+      "day": "Montag",
+      "slot": 129,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 129 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 33,
+      "day": "Dienstag",
+      "slot": 130,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 130 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 33,
+      "day": "Donnerstag",
+      "slot": 131,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 131 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 33,
+      "day": "Freitag",
+      "slot": 132,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 132 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 34,
+      "day": "Montag",
+      "slot": 133,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 133 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 34,
+      "day": "Dienstag",
+      "slot": 134,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 134 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 34,
+      "day": "Donnerstag",
+      "slot": 135,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 135 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 34,
+      "day": "Freitag",
+      "slot": 136,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 136 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 35,
+      "day": "Montag",
+      "slot": 137,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 137 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 35,
+      "day": "Dienstag",
+      "slot": 138,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 138 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 35,
+      "day": "Donnerstag",
+      "slot": 139,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 139 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 35,
+      "day": "Freitag",
+      "slot": 140,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 140 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 36,
+      "day": "Montag",
+      "slot": 141,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 141 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 36,
+      "day": "Dienstag",
+      "slot": 142,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 142 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 36,
+      "day": "Donnerstag",
+      "slot": 143,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 143 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 36,
+      "day": "Freitag",
+      "slot": 144,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 144 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 37,
+      "day": "Montag",
+      "slot": 145,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 145 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 37,
+      "day": "Dienstag",
+      "slot": 146,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 146 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 37,
+      "day": "Donnerstag",
+      "slot": 147,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 147 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 37,
+      "day": "Freitag",
+      "slot": 148,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 148 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 38,
+      "day": "Montag",
+      "slot": 149,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 149 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 38,
+      "day": "Dienstag",
+      "slot": 150,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 150 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 38,
+      "day": "Donnerstag",
+      "slot": 151,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 151 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 38,
+      "day": "Freitag",
+      "slot": 152,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 152 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 39,
+      "day": "Montag",
+      "slot": 153,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 153 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 39,
+      "day": "Dienstag",
+      "slot": 154,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 154 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 39,
+      "day": "Donnerstag",
+      "slot": 155,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 155 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 39,
+      "day": "Freitag",
+      "slot": 156,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 156 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 40,
+      "day": "Montag",
+      "slot": 157,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 157 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 40,
+      "day": "Dienstag",
+      "slot": 158,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 158 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 40,
+      "day": "Donnerstag",
+      "slot": 159,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 159 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 40,
+      "day": "Freitag",
+      "slot": 160,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 160 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 41,
+      "day": "Montag",
+      "slot": 161,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 161 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 41,
+      "day": "Dienstag",
+      "slot": 162,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 162 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 41,
+      "day": "Donnerstag",
+      "slot": 163,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 163 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 41,
+      "day": "Freitag",
+      "slot": 164,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 164 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 42,
+      "day": "Montag",
+      "slot": 165,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 165 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 42,
+      "day": "Dienstag",
+      "slot": 166,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 166 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 42,
+      "day": "Donnerstag",
+      "slot": 167,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 167 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 42,
+      "day": "Freitag",
+      "slot": 168,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 168 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 43,
+      "day": "Montag",
+      "slot": 169,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 169 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 43,
+      "day": "Dienstag",
+      "slot": 170,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 170 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 43,
+      "day": "Donnerstag",
+      "slot": 171,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 171 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 43,
+      "day": "Freitag",
+      "slot": 172,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 172 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 44,
+      "day": "Montag",
+      "slot": 173,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 173 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 44,
+      "day": "Dienstag",
+      "slot": 174,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 174 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 44,
+      "day": "Donnerstag",
+      "slot": 175,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 175 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 44,
+      "day": "Freitag",
+      "slot": 176,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 176 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 45,
+      "day": "Montag",
+      "slot": 177,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 177 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 45,
+      "day": "Dienstag",
+      "slot": 178,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 178 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 45,
+      "day": "Donnerstag",
+      "slot": 179,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 179 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 45,
+      "day": "Freitag",
+      "slot": 180,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 180 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 46,
+      "day": "Montag",
+      "slot": 181,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 181 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 46,
+      "day": "Dienstag",
+      "slot": 182,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 182 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 46,
+      "day": "Donnerstag",
+      "slot": 183,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 183 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 46,
+      "day": "Freitag",
+      "slot": 184,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 184 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 47,
+      "day": "Montag",
+      "slot": 185,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 185 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 47,
+      "day": "Dienstag",
+      "slot": 186,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 186 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 47,
+      "day": "Donnerstag",
+      "slot": 187,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 187 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 47,
+      "day": "Freitag",
+      "slot": 188,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 188 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 48,
+      "day": "Montag",
+      "slot": 189,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 189 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 48,
+      "day": "Dienstag",
+      "slot": 190,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 190 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 48,
+      "day": "Donnerstag",
+      "slot": 191,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 191 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 48,
+      "day": "Freitag",
+      "slot": 192,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 192 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 49,
+      "day": "Montag",
+      "slot": 193,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 193 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 49,
+      "day": "Dienstag",
+      "slot": 194,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 194 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 49,
+      "day": "Donnerstag",
+      "slot": 195,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 195 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 49,
+      "day": "Freitag",
+      "slot": 196,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 196 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 50,
+      "day": "Montag",
+      "slot": 197,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 197 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 50,
+      "day": "Dienstag",
+      "slot": 198,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 198 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 50,
+      "day": "Donnerstag",
+      "slot": 199,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 199 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 50,
+      "day": "Freitag",
+      "slot": 200,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 200 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 51,
+      "day": "Montag",
+      "slot": 201,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 201 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 51,
+      "day": "Dienstag",
+      "slot": 202,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 202 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 51,
+      "day": "Donnerstag",
+      "slot": 203,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 203 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 51,
+      "day": "Freitag",
+      "slot": 204,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 204 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 52,
+      "day": "Montag",
+      "slot": 205,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 205 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 52,
+      "day": "Dienstag",
+      "slot": 206,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 206 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 52,
+      "day": "Donnerstag",
+      "slot": 207,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 207 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    },
+    {
+      "week": 52,
+      "day": "Freitag",
+      "slot": 208,
+      "id": null,
+      "status": "awaiting-authentic-source-and-content-review",
+      "type": "planned",
+      "subject": null,
+      "title": "Unterrichtsplatz 208 · noch nicht erstellt",
+      "createdAt": null,
+      "sourceCheckedAt": null,
+      "testPublishedAt": null,
+      "visitorPublishedAt": null,
+      "visitorReleaseVerified": false,
+      "stage": "offen",
+      "voiceStatus": "noch kein Text oder Audio"
+    }
+  ]
+}
