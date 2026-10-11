@@ -31,6 +31,30 @@ async function periodicallyRefreshShell(request){
     if(current&&current.ok)await storeShell(current.clone());
   }catch(error){}
 }
+// Small background package for the first offline visit. Never prefetch
+// streaming media, whole libraries or gigabytes of application projects.
+const CORE_OFFLINE_URLS=[
+  '/assets/app-soft-boot.css?v=668',
+  '/assets/app-soft-boot.js?v=678',
+  '/watermark-my-logo-full.png',
+  '/content/quran/surahs.json',
+  '/content/duas/duas.json',
+  '/data/offline-content-manifest.json'
+];
+async function prewarmCore(){
+  const cache=await caches.open(CACHE_VERSION);
+  // Limit work and use cached copies whenever possible.
+  for(const path of CORE_OFFLINE_URLS){
+    try{
+      if(await cache.match(path))continue;
+      const live=await fetch(path,{cache:'no-store'});
+      if(!live||!live.ok||live.redirected||live.type==='opaque')continue;
+      const length=Number(live.headers&&live.headers.get('content-length')||0);
+      if(length>1500000)continue;
+      await cache.put(path,live.clone());
+    }catch(error){}
+  }
+}
 self.addEventListener('install',event=>{
   // Never prefetch the 2.5 MB shell during installation.
   event.waitUntil(self.skipWaiting());
@@ -42,6 +66,7 @@ self.addEventListener('activate',event=>{
 self.addEventListener('message',event=>{
   const type=String(event.data&&event.data.type||'');
   if(type==='SKIP_WAITING')self.skipWaiting();
+  if(type==='PWA_WARM_CORE')event.waitUntil(prewarmCore().catch(()=>null));
   if(type==='CLEAR_PWA_CACHE')event.waitUntil(caches.keys().then(keys=>
     Promise.all(keys.filter(key=>key.startsWith(CACHE_PREFIX)).map(key=>caches.delete(key)))));
 });
