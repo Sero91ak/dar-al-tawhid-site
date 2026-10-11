@@ -119,3 +119,6 @@ async function exerciseAccountSync(){
   console.log("KIDS cloud sync: change-only saves, durable pending, offline retry OK");
 }
 exerciseAccountSync().catch(e=>{console.error(e);process.exitCode=1});
+
+// Service-only recovery foundation and simulated Gmail intake regression.
+require("../kids/recovery/tests/foundation.test.cjs");
