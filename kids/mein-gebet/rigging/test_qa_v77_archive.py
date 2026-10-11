@@ -6,8 +6,9 @@ import pathlib
 import stat
 import tempfile
 import unittest
+from unittest import mock
 import zipfile
-from qa_v77_archive import pinned_members, analysis_complete, V77_SHA, REFERENCE_SHA
+from qa_v77_archive import pinned_members, analysis_complete, run, V77_SHA, REFERENCE_SHA
 
 
 def sha(x):
@@ -221,6 +222,36 @@ class ArchiveAnalysisSeparationTests(unittest.TestCase):
                 x = self.synthetic_result()
                 x["angleDiagnostic"]["report"][key] = value
                 self.assertFalse(analysis_complete(x))
+
+    def test_archive_run_integrates_report_without_releasing_model(self):
+        """Mock only the unavailable original asset; exercise the real orchestration."""
+        expected = self.synthetic_result()
+        with mock.patch("qa_v77_archive.pinned_members", return_value={
+            "model": b"UNREAL_SYNTHETIC_GLB", "reference": b"UNREAL_SYNTHETIC_PNG"
+        }) as archive, mock.patch("qa_v77_archive.probe", side_effect=[
+            expected["binaryRig"], expected["fixedFiveViews"], expected["angleDiagnostic"]
+        ]) as runner:
+            result = run("synthetic-only.zip")
+        archive.assert_called_once_with("synthetic-only.zip")
+        self.assertEqual(runner.call_count, 3)
+        self.assertTrue(result["qaAnalysisComplete"])
+        self.assertFalse(result["fiveView90PctAccepted"])
+        self.assertFalse(result["productionApproved"])
+        self.assertFalse(result["originalLikenessApproved"])
+        self.assertFalse(result["prayerPoseApproved"])
+
+    def test_archive_run_blocks_incomplete_binary_rig_evidence(self):
+        expected = self.synthetic_result()
+        expected["binaryRig"]["report"]["inverseBindMatchesRestPose"] = False
+        with mock.patch("qa_v77_archive.pinned_members", return_value={
+            "model": b"SYNTHETIC_ONLY", "reference": b"SYNTHETIC_ONLY"
+        }), mock.patch("qa_v77_archive.probe", side_effect=[
+            expected["binaryRig"], expected["fixedFiveViews"], expected["angleDiagnostic"]
+        ]):
+            result = run("synthetic-only.zip")
+        self.assertFalse(result["qaAnalysisComplete"])
+        self.assertFalse(result["fiveView90PctAccepted"])
+        self.assertFalse(result["productionApproved"])
 
     def test_corrupt_or_unavailable_original_bytes_block(self):
         for field in ("modelBytesVerified", "referenceBytesVerified"):
