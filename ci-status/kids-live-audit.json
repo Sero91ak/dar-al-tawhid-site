@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-10-11T23:09:07Z",
+  "timestamp": "2026-10-11T23:27:59Z",
   "trigger": "workflow_run",
   "finishedDeployConclusion": "success",
-  "finishedDeployRun": "38183041838",
+  "finishedDeployRun": "38184239663",
   "live": {
     "buildId": "kids-shell-v201-dua-v4-1306",
     "label": "KIDS · V1.09.22",
@@ -44,6 +44,24 @@
   },
   "lastDeployRuns": [
     {
+      "conclusion": null,
+      "created_at": "2026-10-11T23:26:01Z",
+      "head_sha": "8b25f9caf5c22157e780abc4caac3c03b4e61539",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38184258486",
+      "id": 38184258486,
+      "status": "in_progress",
+      "updated_at": "2026-10-11T23:27:54Z"
+    },
+    {
+      "conclusion": "success",
+      "created_at": "2026-10-11T23:25:41Z",
+      "head_sha": "7a7392fab77e7c9a33a761b8dd6a9c1e2a410f93",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38184239663",
+      "id": 38184239663,
+      "status": "completed",
+      "updated_at": "2026-10-11T23:27:52Z"
+    },
+    {
       "conclusion": "success",
       "created_at": "2026-10-11T23:06:49Z",
       "head_sha": "5ef8af67860c1214c84e579a556850d7002b6670",
@@ -78,24 +96,6 @@
       "id": 38181658941,
       "status": "completed",
       "updated_at": "2026-10-11T22:46:47Z"
-    },
-    {
-      "conclusion": "success",
-      "created_at": "2026-10-11T22:37:33Z",
-      "head_sha": "25433ec8b911adf6e2413d499536ac519a0debd1",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38181162899",
-      "id": 38181162899,
-      "status": "completed",
-      "updated_at": "2026-10-11T22:41:23Z"
-    },
-    {
-      "conclusion": "cancelled",
-      "created_at": "2026-10-11T22:37:28Z",
-      "head_sha": "35902a2075b981b20ebb7081b536ea55e6702d06",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38181157574",
-      "id": 38181157574,
-      "status": "completed",
-      "updated_at": "2026-10-11T22:37:34Z"
     }
   ]
 }
