@@ -29,27 +29,6 @@ export default {
       const out = new URL("/kids/start", url);
       return Response.redirect(out.toString(), 302);
     }
-    // KIDS academy uses five genuine artwork assets below /desktop-preview/.
-    // Those assets are already part of the deployed public site, but the
-    // dedicated test Worker previously rejected the paths and broke images.
-    // Serve only these explicit five, never open the rest of desktop-preview.
-    const publicAcademyArt = new Set([
-      "/desktop-preview/assets/kids-academy-akhlaq-v1.jpg",
-      "/desktop-preview/assets/kids-academy-adab-v1.jpg",
-      "/desktop-preview/assets/kids-academy-hero-v1.jpg",
-      "/desktop-preview/assets/kids-academy-hero-boys-v1.jpg",
-      "/desktop-preview/assets/kids-academy-hero-girls-v1.jpg"
-    ]);
-    if (publicAcademyArt.has(url.pathname)) {
-      const art=await env.ASSETS.fetch(request);
-      const headers=new Headers(art.headers);
-      headers.set("X-Robots-Tag", ROBOT);
-      headers.set("X-Content-Type-Options","nosniff");
-      headers.set("Cache-Control","public, max-age=3600");
-      return new Response(request.method==="HEAD"?null:art.body,{
-        status:art.status,statusText:art.statusText,headers
-      });
-    }
     if (!url.pathname.startsWith("/kids/")) {
       return textResponse("This private-purpose preview Worker serves KIDS only", 404);
     }
