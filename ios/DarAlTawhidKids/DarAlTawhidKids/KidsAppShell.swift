@@ -28,7 +28,14 @@ enum KidsAppShell {
 #else
         if scheme == "daraltawhidkids" { return true }
 #endif
+        // Explicitly remap KIDS-only absolute links from the live domain to
+        // the separate test origin. Adult and unrelated URLs stay external.
+#if KIDS_CREATOR_TEST
+        let host = url.host?.lowercased() ?? ""
+        guard hosts.contains(host) || host == "dar-al-tawhid.de" || host == "www.dar-al-tawhid.de" else { return false }
+#else
         guard isOwnHost(url) else { return false }
+#endif
         let path = url.path.lowercased()
         return path == "/kids" || path.hasPrefix("/kids/")
             || path == "/test/kids" || path.hasPrefix("/test/kids/")
