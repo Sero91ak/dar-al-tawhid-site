@@ -58,6 +58,8 @@ jobs:
           node kids/tools/audit-academy-voice-coverage-v18.js
       - name: Verify creator-only comprehensive voice audit (no credits)
         run: node test/kids/akademie/test-voice-audit-v20.cjs
+      - name: Verify safe V21 four-clip manual audio request (zero credits)
+        run: node kids/tools/test-academy-v21-manual-queue.cjs
       - name: JavaScript syntax guard
         run: |
           node --check kids/akademie/curriculum-v1.js
