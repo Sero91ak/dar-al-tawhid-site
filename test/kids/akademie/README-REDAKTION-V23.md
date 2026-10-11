@@ -19,7 +19,7 @@ serverseitiger Cookieprüfung abrufbar.
 - 52 Wochen × (4 neue Unterrichtstage + 2 Wiederholungstage + 1 flexibler Tag).
 - 208 Unterrichtsplätze, 38 aus Quellcode importierte Inhalte inkl. Ṣidq, 170 offen.
 - Alle drei Altersgruppen; vier Fächer.
-- V22-Codeintegration nur bei den vier neuen Lektionen über echten GitHub-Commit belegt.
+- Einführungsdatum der jeweiligen Katalogdatei bei 37 Lektionen (11 V1, 22 V2, 4 V22) über echte GitHub-Commits belegt. Dies ist NICHT das individuelle Erstellungs- oder Freigabedatum; für Ṣidq fehlt diese Zuordnung.
 - Created / edited / Test-Publish / Visitor-Publish sind NULL, solange keine
   nachprüfbaren Einzelereignisse vorliegen. Niemals „im Code“ automatisch
   als „Besucher veröffentlicht“ werten.
