@@ -2280,32 +2280,7 @@ button,input,select{font:inherit}
 }
 
 </style>
-<script id="darPwaStandardBootEarlyV5">
-(function(){
-  try{
-    var params=new URLSearchParams(location.search||"");
-    var pwaLaunch=params.get("pwa")==="1";
-    var rememberedPwa=false;
-    try{rememberedPwa=sessionStorage.getItem("dar_pwa_launch_session_v1")==="1"}catch(eRemember){}
-    var standalone=
-      !!(window.matchMedia&&(
-        window.matchMedia("(display-mode: standalone)").matches||
-        window.matchMedia("(display-mode: fullscreen)").matches||
-        window.matchMedia("(display-mode: minimal-ui)").matches
-      ))||
-      window.navigator.standalone===true||
-      pwaLaunch||
-      rememberedPwa;
-    if(standalone){try{sessionStorage.setItem("dar_pwa_launch_session_v1","1")}catch(eStore){}}
-    if(standalone&&document.documentElement){
-      window.__DAR_PWA_STANDARD_BOOT=true;
-      window.__DAR_PWA_LAUNCH_MARKER=pwaLaunch;
-      document.documentElement.classList.add("dar-pwa-standalone-boot","dar-soft-booting");
-    }
-  }catch(e){}
-})();
-</script>
-<link rel="stylesheet" href="/assets/app-soft-boot.css?v=pwa-standard-boot-v6-20261009">
+<!-- PUBLIC WEBSITE ONLY: no App-/PWA-Ladeschirm. Die installierbare App nutzt /pwa/ mit eigener Shell. -->
 <link rel="stylesheet" href="/desktop-preview/desktop-overhaul.css?v=282">
 <link rel="stylesheet" href="/assets/app-card-layout.css?v=1297">
 <link rel="stylesheet" href="/desktop-preview/zakat-desktop.css?v=desktop-20261009-4">
@@ -2313,8 +2288,6 @@ button,input,select{font:inherit}
 <link rel="stylesheet" href="/test/assets/frauen/frauen-authority-v1292.css?v=frauen-authority-v1292">
 <script src="/test/assets/frauen/frauen-fiqh.js?v=1294-share-brand" defer></script>
 
-<script src="/assets/app-soft-boot.js?v=pwa-standard-boot-v6-20261009"></script>
-<!-- Android PWA startup v5: fixed standard DĀR logo + 0–100% loader; launcher icon selection stays separate. -->
 <script id="darPwaIconCookieBoot">
 (function(){
  try{
@@ -2671,23 +2644,6 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
 }
 </style>
 <body class="desktop-overhaul-v18">
-<div id="dar-soft-boot" data-dar-static-pwa-boot="1" role="status" aria-live="polite">
-  <img class="dar-soft-boot__mark" src="/watermark-my-logo-full.png" alt="" width="148" height="148" decoding="sync">
-  <p class="dar-soft-boot__title brand-title">DĀR AL TAWḤĪD</p>
-  <p class="dar-soft-boot__sub">QUR’ĀN • SUNNAH • ĀTHĀR</p>
-  <div class="dar-soft-boot__track" aria-hidden="true"><div class="dar-soft-boot__bar"></div></div>
-  <p class="dar-soft-boot__pct">0%</p>
-</div>
-<script id="darPwaStaticBootGateV5">
-(function(){
-  try{
-    if(!document.documentElement.classList.contains("dar-pwa-standalone-boot")){
-      var el=document.querySelector('#dar-soft-boot[data-dar-static-pwa-boot="1"]');
-      if(el&&el.parentNode)el.parentNode.removeChild(el);
-    }
-  }catch(e){}
-})();
-</script>
 <header class="site-header">
  <div class="header-inner">
   <a class="brand desktop-link" href="/?page=start" data-page="start">

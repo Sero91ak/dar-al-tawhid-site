@@ -155,11 +155,23 @@
   ],
   "unlockedScopes": [
     {
+      "id": "public-website-app-loader-removal-20261011",
+      "at": "2026-10-11T17:20:00+02:00",
+      "approvedBy": "user-explicit-website-only-no-loader-no-app-changes-20261011",
+      "reason": "Nur den 0–100%-App-Loader aus der oeffentlichen Website-Vorlage entfernen; /pwa/, iOS, Android, Kids, Apple TV, gemeinsame Loader-Assets und Worker bleiben unangetastet. Zuerst PR-Staging und Tests, keine Live-Freigabe.",
+      "paths": [
+        "desktop-preview/index.html"
+      ],
+      "expiresAt": "2026-10-25T23:59:00.000Z"
+    },
+    {
       "id": "quellen-library-regression-test-hotfix-20261011",
       "at": "2026-10-11T14:55:00+02:00",
       "approvedBy": "user-explicit-quellenbibliothek-sofort-reparieren-20261011",
       "reason": "Sichere Quellenseiten-Routing-Reparatur Q1-Q40: nur bereits geprueftes, read-only Q-Regressions-Testskript fuer den gesperrten Produktionsdeploy freischalten. Globale Sperre, Kinder-App, Push und alle Quellen bleiben unveraendert.",
-      "paths": ["scripts/check-quellen-client.cjs"],
+      "paths": [
+        "scripts/check-quellen-client.cjs"
+      ],
       "expiresAt": "2026-10-18T23:59:00.000Z"
     },
     {
