@@ -25,7 +25,7 @@ function verifiedAsset(entry){
 }
 function curriculumIds(){
  const sandbox={window:{}};
- for(const filename of ["kids/akademie/curriculum-v1.js","kids/akademie/curriculum-v2.js"]){
+ for(const filename of ["kids/akademie/curriculum-v1.js","kids/akademie/curriculum-v2.js","kids/akademie/curriculum-v22.js"]){
   vm.runInNewContext(fs.readFileSync(path.join(ROOT,filename),"utf8"),sandbox,{filename,timeout:1500});
  }
  return Object.keys(sandbox.window.DARKidsAcademyCurriculum||{});
@@ -37,10 +37,12 @@ function audit(){
    throw Error("Voice production or manual approval policy has changed");
  const main=read("kids/data/academy-voice-plan-v9.json");
  const sidq=read("kids/data/academy-sidq-voice-plan-v18.json");
+ const next=read("kids/data/academy-voice-plan-v22.json");
  if(main.modelId!==MODEL||sidq.modelId!==MODEL||main.voiceProfileId!==PROFILE||
-    sidq.voiceProfileId!==PROFILE||sidq.voiceSettingsProfile!==SETTINGS)throw Error("Unauthorized plan voice");
+    sidq.voiceProfileId!==PROFILE||sidq.voiceSettingsProfile!==SETTINGS||
+    next.modelId!==MODEL||next.voiceProfileId!==PROFILE)throw Error("Unauthorized plan voice");
  const phrases=new Map(),coveredLessons=new Set();
- for(const plan of [main,sidq]){
+ for(const plan of [main,sidq,next]){
   if(!Array.isArray(plan.phrases)||plan.phraseCount!==plan.phrases.length)throw Error("Invalid voice plan");
   for(const p of plan.phrases){
    if(p.modelId!==MODEL||p.voiceProfileId!==PROFILE)throw Error("Voice identity changed for: "+p.text);
