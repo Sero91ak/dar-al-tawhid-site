@@ -1,4 +1,4 @@
-name: Kids Academy V10 Owner Voice V4 Staging (manual credit budget)
+name: Kids Academy V21 Owner Voice V4 Staging (manual 4-clip budget)
 
 on:
   workflow_dispatch:
@@ -32,7 +32,7 @@ jobs:
       - name: Assert identical owner-approved V4 story profile (free)
         run: |
           set -euo pipefail
-          python3 kids/tools/build-academy-v9-staging.py --dry-run
+          python3 kids/tools/build-academy-v9-staging.py --dry-run --sidq-v18 --limit 4 --max-chars 350
           command -v ffmpeg
           command -v ffprobe
           test -n "$ADMIN_PUBLISH_SECRET" || { echo "::error::No owner Voice Studio credential; nothing generated."; exit 1; }
@@ -40,11 +40,16 @@ jobs:
       - name: Generate at most four staged clips (never published in player)
         run: |
           set -euo pipefail
-          python3 kids/tools/build-academy-v9-staging.py --limit 4 --max-chars 1200
+          python3 kids/tools/build-academy-v9-staging.py --sidq-v18 --limit 4 --max-chars 350
           python3 - <<'PY'
           import pathlib,json,hashlib
-          p=pathlib.Path("kids/data/academy-audio-staging-v9.json")
+          p=pathlib.Path("kids/data/academy-audio-staging-sidq-v18.json")
+          request=json.loads(pathlib.Path("kids/data/academy-sidq-v18-request.json").read_text("utf-8"))
           data=json.loads(p.read_text("utf-8"))
+          assert data["id"]=="KIDS_ACADEMY_SIDQ_V18_STAGING"
+          assert data["stagingOnly"] is True and data["pilotFirstLesson"] is False
+          assert set(data["entries"])==set(request["exactPhrases"])
+          assert request["maxClips"]==4 and request["maxPreparedCharacters"]==350
           assert data["modelId"]=="eleven_v4"
           assert data["voiceSettingsProfile"]=="kids_story"
           assert data["reviewRequiredBeforePublicPlayback"] is True
@@ -52,6 +57,7 @@ jobs:
               f=pathlib.Path(entry["url"].lstrip("/"))
               assert f.is_file()
               assert entry["approvedForPlayback"] is False
+              assert entry["voiceId"]=="DkU7j9uO4ZEtLD2iRZSH"
               assert entry["sameAsApprovedKidsStoryProfile"] is True
               assert hashlib.sha256(f.read_bytes()).hexdigest()==entry["sha256"]
           print("Only staged clips available; never connected to production player")
@@ -62,7 +68,7 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add kids/data/academy-audio-staging-v9.json kids/assets/kids-academy-audio/
+          git add kids/data/academy-audio-staging-sidq-v18.json kids/assets/kids-academy-audio/
           if git diff --cached --quiet; then
             echo "Already generated with same prepared-text hash: 0 ElevenLabs credits needed."
             exit 0
