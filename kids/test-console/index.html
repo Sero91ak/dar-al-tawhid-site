@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow,noarchive"><meta name="theme-color" content="#071b2b">
+<title>KIDS TEST · Ersteller-Prüfzentrale</title>
+<style>
+:root{color-scheme:dark;--bg:#081b2a;--panel:#102e3e;--surface:#0b2736;--line:#496878;--gold:#e9d49d;--ink:#fbf3df;--muted:#c3d5d9;--teal:#a1dbca}*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at top,#185264,transparent 65%),var(--bg);color:var(--ink);font:15px/1.52 -apple-system,BlinkMacSystemFont,"Avenir Next",Arial,sans-serif}
+main{width:min(100%,1160px);margin:auto;padding:calc(19px + env(safe-area-inset-top)) max(14px,env(safe-area-inset-right)) calc(30px + env(safe-area-inset-bottom)) max(14px,env(safe-area-inset-left))}
+a{color:var(--gold)}h1,h2,h3{font-family:Georgia,serif;font-weight:500;line-height:1.2}h1{font-size:clamp(30px,6vw,48px);color:var(--gold);margin:10px 0}h2{font-size:clamp(22px,3.4vw,29px);color:var(--gold);margin:0 0 12px}h3{font-size:19px;margin:0 0 8px;color:var(--gold)}
+.kicker{color:var(--gold);font-size:12px;font-weight:900;letter-spacing:.13em}.intro{color:var(--muted);max-width:810px}
+.notice{margin:18px 0;border:1px solid #827353;background:#2a352f;padding:12px 16px;border-radius:13px;font-size:13px;color:#f8e9c7}.notice b{color:var(--gold)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.stat,.card,.subject,.module{border:1px solid var(--line);background:var(--panel);border-radius:16px}.stat{padding:13px}.stat b{display:block;font-size:clamp(27px,4vw,35px);color:var(--gold);line-height:1.15}.stat small{color:var(--muted)}
+section{margin-top:24px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}a.action{display:inline-flex;align-items:center;justify-content:center;min-height:43px;padding:10px 12px;text-align:center;border:1px solid #a6b7b7;text-decoration:none;background:var(--surface);border-radius:11px;font-weight:770}
+.modules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.module{display:flex;flex-direction:column;justify-content:space-between;gap:12px;padding:15px}.module strong{font-size:17px}.module p{color:var(--muted);font-size:13px;margin:0}.module a{display:block;border-radius:10px;text-align:center;text-decoration:none;background:var(--gold);color:#172939;font-weight:850;padding:10px}
+.subjects{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:12px 0}.subject{padding:13px}.subject b{display:block;color:var(--gold);font-size:22px}.subject span{display:block;color:var(--muted);font-size:12px}
+.toolbar{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:9px;margin:15px 0}.toolbar label{display:grid;gap:6px;font-size:12px;font-weight:700;color:var(--muted)}
+input,select,button{font:inherit;color:var(--ink);background:#071e2d;border:1px solid #8299a3;min-height:43px;width:100%;border-radius:10px;padding:9px 11px}
+button{cursor:pointer}button:hover,a:hover{filter:brightness(1.14)}button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.cardgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.card{padding:14px}.card h3{margin:10px 0 6px}.card p{margin:6px 0;color:var(--muted)}.meta{display:flex;gap:7px;align-items:center;justify-content:space-between}.tag{border-radius:40px;border:1px solid #617e85;font-size:12px;font-weight:800;padding:3px 9px;color:#cde3de}.tag.todo{color:#ffdcab}#more{max-width:210px;display:block;margin:20px auto}#more[hidden]{display:none}.status{color:var(--teal);font-size:13px;margin:10px 0}.foot{padding:16px 0;color:var(--muted);border-top:1px solid var(--line);margin-top:24px;font-size:13px}
+@media(max-width:850px){.modules{grid-template-columns:repeat(2,minmax(0,1fr))}.toolbar{grid-template-columns:repeat(2,minmax(0,1fr))}.subjects{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.modules,.cardgrid{grid-template-columns:1fr}.toolbar label:first-child{grid-column:span 2}.module{gap:8px}.module a{min-height:44px}}@media(max-width:360px){.toolbar{grid-template-columns:1fr}.toolbar label:first-child{grid-column:auto}}
+</style></head><body><main>
+<div class="kicker">DĀR AL TAWḤĪD KIDS · GETRENNTE ENTWICKLUNGSVERSION</div>
+<h1>KIDS TEST · Prüfzentrale</h1>
+<p class="intro">Hier überprüfst du die komplette vorhandene Kinderoberfläche und den Jahresunterrichtsplan auf dem <strong>separaten KIDS-Testserver</strong>. Die Besucher-App und ihre Lernstände werden nicht verändert.</p>
+<div class="notice"><b>Ersteller-Freigaben noch in Vorbereitung:</b> Diese Seite zeigt ausschließlich bestehende KIDS-Module und öffentliche Unterrichtsmetadaten. Sie ist keine private Admin-Anmeldung, schaltet keine verborgenen Inhalte frei und veröffentlicht nichts. Änderungen an der Besucher-App erfordern eine gesonderte, ausdrückliche Freigabe.</div>
+<div class="stats" aria-label="52-Wochen-Plan"><div class="stat"><b>52</b><small>Wochen pro Zyklus</small></div><div class="stat"><b>208</b><small>Unterrichtsplätze</small></div><div class="stat"><b id="built">–</b><small>Im Code vorhanden</small></div><div class="stat"><b id="missing">–</b><small>Weiter auszuarbeiten</small></div></div>
+<section id="bereiche"><div class="top"><h2>Alle KIDS-Bereiche</h2><span class="tag">Eigener Test-Server</span></div>
+<div class="modules">
+<div class="module"><strong>Startseite & Profile</strong><p>Startbildschirm, Tab-Leiste, Bildschirmgrößen, Kinderprofile und Navigation kontrollieren</p><a href="/kids/start.html">KIDS-Test-App öffnen</a></div>
+<div class="module"><strong>Qurʾān</strong><p>Den Qurʾān-Bereich über den Tab „Qurʾān“ in der Test-App prüfen</p><a href="/kids/start.html">Qurʾān prüfen</a></div>
+<div class="module"><strong>Hörbücher</strong><p>Audios, Geschichten, Prophetenbereich, Player und Downloads prüfen</p><a href="/kids/start.html">Hörbücher prüfen</a></div>
+<div class="module"><strong>Duʿāʾ</strong><p>Duʿāʾ öffnen, Aussprache, Rezitation und Lernschritte prüfen</p><a href="/kids/start.html">Duʿāʾ prüfen</a></div>
+<div class="module"><strong>Eltern</strong><p>Elternoberfläche, Einstellungen und Altersstufen prüfen</p><a href="/kids/start.html">Elternbereich prüfen</a></div>
+<div class="module"><strong>Akademie</strong><p>Die vorhandene Akademie in der KIDS-Test-App öffnen; reguläre Unterrichtssperren bleiben aktiv</p><a href="/kids/akademie/index.html">Akademie öffnen</a></div>
+</div></section>
+<section id="lehrplan"><div class="top"><h2>Unterrichtsübersicht</h2><span class="tag">52 Wochen · jährlich wiederholbar</span></div>
+<p class="intro">38 vorhandene Lektionen. Für die restlichen 170 Plätze müssen Themen, authentische Quellen, drei Altersstufen und geprüfte Audios noch erarbeitet werden. Mittwoch und Samstag sind Wiederholungstage, Sonntag ist flexibel.</p>
+<div class="subjects" id="subjects"></div>
+<div class="toolbar"><label>Suchen<input id="search" type="search" placeholder="Ṣidq, Wudūʾ, Gebet …"></label>
+<label>Fach<select id="subject"><option value="">Alle Fächer</option><option value="akhlaq">Akhlāq</option><option value="adab">Adab</option><option value="fiqh">Fiqh</option><option value="aqidah">ʿAqīdah</option></select></label>
+<label>Status<select id="stage"><option value="">Alle Plätze</option><option value="ready">Bereits im Code</option><option value="open">Noch nicht erstellt</option></select></label>
+<label>Woche<select id="week"><option value="">Alle 52 Wochen</option></select></label></div>
+<p class="status" id="message" role="status" aria-live="polite">Der Unterrichtskatalog wird geladen …</p><div class="cardgrid" id="cards"></div><button id="more" type="button" hidden>Weitere Plätze anzeigen</button>
+</section>
+<footer class="foot">KIDS TEST · eigenständiger Worker und lokale App-Daten. Jahresplan: 52 × 7 Tage = 364 Tage, anschließend beginnt der Plan erneut. Kein erfundenes Veröffentlichungsdatum, keine ElevenLabs-Kosten, keine Veränderung von Kinderprofilen.</footer></main>
+<script>
+(()=>{"use strict";const $=id=>document.getElementById(id),subjectNames={akhlaq:"Akhlāq",adab:"Adab",fiqh:"Fiqh",aqidah:"ʿAqīdah"};let data=[],filtered=[],visible=20;
+const element=(tag,value,cls)=>{const e=document.createElement(tag);if(value!==undefined&&value!==null)e.textContent=String(value);if(cls)e.className=cls;return e};
+const render=()=>{const term=$("search").value.trim().toLocaleLowerCase("de"),sub=$("subject").value,stage=$("stage").value,week=$("week").value;
+filtered=data.filter(x=>(!term||[x.title,x.id,x.slot,x.week].join(" ").toLocaleLowerCase("de").includes(term))&&(!sub||x.subject===sub)&&(!stage||(stage==="ready"?x.catalogued:!x.catalogued))&&(!week||x.week===Number(week)));
+$("cards").replaceChildren();for(const x of filtered.slice(0,visible)){const c=element("article",null,"card"),meta=element("div",null,"meta");meta.appendChild(element("span","Woche "+x.week+" · "+x.day+" · Platz "+x.slot,"tag"));meta.appendChild(element("span",x.catalogued?"Im Code":"Offen","tag"+(x.catalogued?"":" todo")));c.appendChild(meta);c.appendChild(element("h3",x.title||("Platz "+x.slot+" – Unterricht noch offen")));c.appendChild(element("p",x.catalogued?(subjectNames[x.subject]||"Ohne Fach"):"Noch kein Thema oder verifizierter Unterricht dokumentiert"));$("cards").appendChild(c)}
+$("more").hidden=visible>=filtered.length;$("message").textContent=filtered.length+" Plätze gefunden · "+Math.min(visible,filtered.length)+" sichtbar. Unterricht im Code ≠ für Kinder veröffentlicht.";
+};const reset=()=>{visible=20;render()};
+for(let i=1;i<=52;i++){const o=element("option","Woche "+i);o.value=String(i);$("week").appendChild(o)}
+["search","subject","stage","week"].forEach(id=>$(id).addEventListener(id==="search"?"input":"change",reset));
+$("more").addEventListener("click",()=>{visible+=20;render()});
+fetch("/kids/test-console/catalogue-v1.json",{cache:"no-store",credentials:"omit"}).then(r=>{if(!r.ok)throw Error("HTTP "+r.status);return r.json()}).then(j=>{
+if(j.weeks!==52||j.slots!==208||j.entries?.length!==208||j.entries.filter(x=>x.catalogued).length!==38)throw Error("Datenprüfung nicht bestanden");
+data=j.entries;$("built").textContent="38";$("missing").textContent="170";const sums={};for(const x of data)if(x.catalogued)sums[x.subject]=(sums[x.subject]||0)+1;
+for(const key of ["akhlaq","adab","fiqh","aqidah"]){const c=element("div",null,"subject");c.appendChild(element("b",sums[key]||0));c.appendChild(element("span",subjectNames[key]));$("subjects").appendChild(c)}
+reset();
+}).catch(err=>{$("message").textContent="Der KIDS-Testkatalog ist noch nicht bereit: "+err.message;});
+})();
+</script></body></html>
