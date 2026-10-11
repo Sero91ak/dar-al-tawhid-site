@@ -1,0 +1,102 @@
+name: KIDS Academy V18 - manual Serhat Ṣidq V4 follow-up (4 clips)
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: "Type GENERATE-SIDQ-FOUR to spend credits on exactly four new QA-only Serhat V4 recordings"
+        required: true
+        type: string
+        default: "NO-CREDITS"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-academy-v18-sidq-manual-production
+  cancel-in-progress: false
+
+jobs:
+  sidq-v18:
+    if: inputs.confirm == 'GENERATE-SIDQ-FOUR' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
+    steps:
+      - name: Checkout exact main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Verify 4 exact sentences, owner model and credit ceiling before any generation
+        run: |
+          set -euo pipefail
+          node kids/tools/export-academy-sidq-voice-v18.js --check
+          python3 -m py_compile kids/tools/build-academy-v9-staging.py
+          python3 kids/tools/build-academy-v9-staging.py --dry-run --sidq-v18 --limit 4 --max-chars 350
+          python3 - <<'PY'
+          import json
+          p=json.load(open('kids/data/academy-sidq-v18-request.json'))
+          assert p['id']=='kids-academy-sidq-v18-manual-batch'
+          assert p['voiceId']=='DkU7j9uO4ZEtLD2iRZSH'
+          assert p['modelId']=='eleven_v4'
+          assert p['voiceSettingsProfile']=='kids_story'
+          assert p['maxClips']==4 and p['maxPreparedCharacters']==350
+          assert p['requireManualWorkflowDispatch'] is True
+          assert p['stagingOnly'] is True and p['approvedForPlayback'] is False
+          assert len(set(p['exactPhrases']))==4
+          print('V18 MANUAL QA-ONLY: exact owner model and capped four-clip request verified.')
+          PY
+          test -n "$ADMIN_PUBLISH_SECRET" || { echo "::error::Owner backend secret missing. No credits used."; exit 1; }
+          if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null; then
+            sudo apt-get update -qq -o Acquire::Retries=2
+            sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq ffmpeg
+          fi
+          command -v ffmpeg && command -v ffprobe
+
+      - name: Generate or reuse four SHA-keyed V4 clips in isolated staging only
+        run: |
+          set -euo pipefail
+          python3 kids/tools/build-academy-v9-staging.py --sidq-v18 --limit 4 --max-chars 350
+          python3 - <<'PY'
+          import json,hashlib,pathlib
+          req=json.load(open('kids/data/academy-sidq-v18-request.json'))
+          stage=json.load(open('kids/data/academy-audio-staging-sidq-v18.json'))
+          pilot=json.load(open('kids/data/academy-audio-staging-v9.json'))
+          assert stage['id']=='KIDS_ACADEMY_SIDQ_V18_STAGING'
+          assert stage['modelId']=='eleven_v4' and stage['voiceSettingsProfile']=='kids_story'
+          assert stage['stagingOnly'] and stage['reviewRequiredBeforePublicPlayback']
+          assert stage['pilotFirstLesson'] is False
+          assert set(stage['entries'])==set(req['exactPhrases'])
+          assert len(pilot['entries'])==4, 'Original pilot must not be changed'
+          for text, entry in stage['entries'].items():
+              assert entry['approvedForPlayback'] is False
+              assert entry['qaStatus']=='technical-passed-awaiting-human-review'
+              assert entry['voiceId']=='DkU7j9uO4ZEtLD2iRZSH'
+              f=pathlib.Path(entry['url'].lstrip('/'))
+              assert f.is_file() and f.stat().st_size>=1800
+              assert hashlib.sha256(f.read_bytes()).hexdigest()==entry['sha256']
+          print('Four additional exact V4 audio files verified; NOT approved for child playback.')
+          PY
+          git diff --exit-code -- kids/data/academy-audio-staging-v9.json kids/data/academy-audio.json
+
+      - name: Commit only four new review clips and their isolated manifest
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add kids/data/academy-audio-staging-sidq-v18.json kids/assets/kids-academy-audio/
+          if git diff --cached --quiet; then
+            echo "Already SHA-verified: no duplicate generation and no new credit spend."
+            exit 0
+          fi
+          git commit -m "Kids: stage four additional Serhat V4 Ṣidq QA-only recordings"
+          for n in 1 2 3 4 5; do
+            git pull --rebase origin main
+            if git push origin HEAD:main; then exit 0; fi
+            sleep "$((n * 3))"
+          done
+          echo "::error::Could not push isolated QA-only audio; no public manifest was changed."
+          exit 1
