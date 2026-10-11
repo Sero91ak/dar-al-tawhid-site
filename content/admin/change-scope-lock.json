@@ -7520,6 +7520,16 @@
         "index.html"
       ],
       "expiresAt": "2026-11-30T23:59:00.000Z"
+    },
+    {
+      "id": "kids-cross-device-login-regression-2026-10-11",
+      "at": "2026-10-11T20:18:00+02:00",
+      "approvedBy": "user-explicit-fix-kids-account-login-contrast-cross-device-and-direct-live-github-push",
+      "reason": "Gezielter Nutzerauftrag 11.10.2026: Kinder-Besucher-App für Jungen und Mädchen lesbar anmelden; bestehendes Konto und gespeicherten Lernstand auf anderen Geräten wiederherstellen. Der neue Konto-Regressionstest wird durch den bisherigen globalen Change-Scope-Guard blockiert; ausschließlich diese Testdatei für CI- und Cloudflare-Verifikation freigeben. Globale Schutzsperre bleibt aktiv.",
+      "paths": [
+        "scripts/test-kids-account-registration-v1.js"
+      ],
+      "expiresAt": "2026-11-30T23:59:00.000Z"
     }
   ],
   "enabled": true
