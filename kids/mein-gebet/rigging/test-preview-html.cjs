@@ -15,7 +15,7 @@ for(const file of pages){
   assert.match(html,/^<!doctype html>/i);
   assert.match(html,/<html lang="de">/);
   assert.match(html,/<meta name="viewport"/);
-  assert.match(html,/<\/body><\/html>\s*$/);
+  assert.match(html,/<\/body>\s*<\/html>\s*$/);
   assert.doesNotMatch(html,/<form\b|type="password"|serviceWorker\.register|rel="manifest"/i);
  });
  test(file+" has syntactically valid inline JS",()=>{
