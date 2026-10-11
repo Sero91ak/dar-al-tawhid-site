@@ -1,0 +1,1506 @@
+{
+  "schemaVersion": 1,
+  "id": "academy-vocabulary-voice-plan-v24",
+  "version": "academy-vocabulary-v24-20261011",
+  "voiceProfileId": "serhat-owner-voice-2026",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "voiceSettingsProfile": "kids_story",
+  "voiceName": "Serhat Abu Malik – Master",
+  "modelId": "eleven_v4",
+  "purpose": "Age-specific spoken explanations for 33 reviewed pedagogical concepts. No audio is generated, no clips authorized.",
+  "policy": {
+    "arabicQuranRecitationIsSeparate": true,
+    "autoPublishUnreviewed": false,
+    "noSyntheticFallback": true,
+    "reviewRequiredBeforePublicPlayback": true
+  },
+  "termCount": 33,
+  "phraseCount": 99,
+  "phrases": [
+    {
+      "text": "Tawḥīd bedeutet: Allah allein anbeten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-tawhid",
+          "kind": "term-explanation",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Tawḥīd bedeutet: Wir glauben, dass Allah Einer ist, und wir beten nur Ihn an.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-tawhid",
+          "kind": "term-explanation",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Tawḥīd bedeutet: Tawḥīd bedeutet, Allah als den Einen anzuerkennen und die Anbetung allein an Ihn zu richten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-tawhid",
+          "kind": "term-explanation",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Īmān bedeutet: An Allah glauben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-iman",
+          "kind": "term-explanation",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Īmān bedeutet: Īmān heißt Glaube an Allah und das, was Er uns gelehrt hat.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-iman",
+          "kind": "term-explanation",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Īmān bedeutet: Īmān umfasst die Glaubensgrundlagen, über die uns der Qurʾān und die authentische Sunnah berichten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-iman",
+          "kind": "term-explanation",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Ikhlāṣ bedeutet: Etwas Gutes für Allah tun.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-ikhlas",
+          "kind": "term-explanation",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ikhlāṣ bedeutet: Ikhlāṣ bedeutet, eine gute Tat aufrichtig für Allah zu tun, statt nur gelobt zu werden.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-ikhlas",
+          "kind": "term-explanation",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ikhlāṣ bedeutet: Ikhlāṣ ist Aufrichtigkeit in der Anbetung: Die Absicht richtet sich an Allah und nicht an die Bewunderung anderer.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-ikhlas",
+          "kind": "term-explanation",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "ʿAqīdah bedeutet: Das, was wir über Allah glauben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-aqidah",
+          "kind": "term-explanation",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "ʿAqīdah bedeutet: ʿAqīdah heißt unsere Glaubenslehre: was wir über Allah und die Grundlagen des Glaubens lernen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-aqidah",
+          "kind": "term-explanation",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "ʿAqīdah bedeutet: ʿAqīdah bezeichnet die islamischen Glaubensgrundlagen aus Qurʾān und authentischer Sunnah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-aqidah",
+          "kind": "term-explanation",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Adab bedeutet: Gutes Benehmen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-adab",
+          "kind": "term-explanation",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Adab bedeutet: Adab bedeutet freundliches, rücksichtsvolles Verhalten und gute Umgangsformen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-adab",
+          "kind": "term-explanation",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Adab bedeutet: Adab beschreibt angemessenes Benehmen, Respekt und Rücksicht, die wir aus islamischen Lehren lernen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-adab",
+          "kind": "term-explanation",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Akhlāq bedeutet: Ein guter Charakter.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-akhlaq",
+          "kind": "term-explanation",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Akhlāq bedeutet: Akhlāq bedeutet, wie wir uns verhalten, zum Beispiel ehrlich und freundlich.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-akhlaq",
+          "kind": "term-explanation",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Akhlāq bedeutet: Akhlāq umfasst die Eigenschaften und Gewohnheiten eines Menschen, etwa Ehrlichkeit, Geduld und Güte.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-akhlaq",
+          "kind": "term-explanation",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Tarbiyah bedeutet: Schritt für Schritt Gutes lernen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-tarbiyah",
+          "kind": "term-explanation",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Tarbiyah bedeutet: Tarbiyah bedeutet, beim Lernen und Großwerden liebevoll begleitet zu werden.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-tarbiyah",
+          "kind": "term-explanation",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Tarbiyah bedeutet: Tarbiyah ist Erziehung und Förderung guter Gewohnheiten, Wissen und verantwortlichen Handelns.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-tarbiyah",
+          "kind": "term-explanation",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Nafs bedeutet: Dein eigenes Ich und deine Gefühle.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-nafs",
+          "kind": "term-explanation",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Nafs bedeutet: Nafs ist ein arabisches Wort für die eigene Person. Auch unsere Wünsche gehören zu uns.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-nafs",
+          "kind": "term-explanation",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Nafs bedeutet: Nafs kann die eigene Person und das innere Selbst bezeichnen. Im Unterricht lernen wir, Wünsche und Gefühle verantwortlich zu lenken.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-nafs",
+          "kind": "term-explanation",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Tazkiyah bedeutet: Gute Dinge im Herzen wachsen lassen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-tazkiyah",
+          "kind": "term-explanation",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Tazkiyah bedeutet: Tazkiyah bedeutet, an unserem Verhalten zu arbeiten und schlechte Gewohnheiten zu verbessern.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-tazkiyah",
+          "kind": "term-explanation",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Tazkiyah bedeutet: Tazkiyat an-Nafs ist die Arbeit an der eigenen inneren Haltung und an guten Taten, wie es der Qurʾān beim Reinigen der Seele anspricht.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-tazkiyah",
+          "kind": "term-explanation",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Ṣabr bedeutet: Geduldig bleiben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-sabr",
+          "kind": "term-explanation",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ṣabr bedeutet: Ṣabr bedeutet, ruhig und standhaft zu bleiben, auch wenn etwas schwer ist.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-sabr",
+          "kind": "term-explanation",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ṣabr bedeutet: Ṣabr ist Geduld und Standhaftigkeit: nicht aufgeben, eine schwierige Lage gut bewältigen und Allah um Hilfe bitten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-sabr",
+          "kind": "term-explanation",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Amānah bedeutet: Auf etwas gut aufpassen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-amanah",
+          "kind": "term-explanation",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Amānah bedeutet: Amānah bedeutet etwas, das dir anvertraut wurde, sorgsam zu behandeln.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-amanah",
+          "kind": "term-explanation",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Amānah bedeutet: Amānah ist eine anvertraute Sache oder Verantwortung, die wir ehrlich und zuverlässig erfüllen sollen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-amanah",
+          "kind": "term-explanation",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Ṣidq bedeutet: Die Wahrheit sagen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-sidq",
+          "kind": "term-explanation",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ṣidq bedeutet: Ṣidq bedeutet Ehrlichkeit und Wahrhaftigkeit beim Sprechen und Handeln.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-sidq",
+          "kind": "term-explanation",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ṣidq bedeutet: Ṣidq heißt Wahrhaftigkeit. Sie umfasst ehrliche Worte und ein Verhalten, das zu diesen Worten passt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-sidq",
+          "kind": "term-explanation",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Salām bedeutet: Ein Friedensgruß.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-salam",
+          "kind": "term-explanation",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Salām bedeutet: Salām ist unser freundlicher Gruß. Wir wünschen Frieden.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-salam",
+          "kind": "term-explanation",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Salām bedeutet: As-salāmu ʿalaykum ist ein islamischer Friedensgruß. Wir antworten respektvoll und freundlich.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-salam",
+          "kind": "term-explanation",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wuḍūʾ bedeutet: Die Waschung vor dem Gebet.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-wudu",
+          "kind": "term-explanation",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wuḍūʾ bedeutet: Wuḍūʾ heißt Gebetswaschung. Dabei reinigen wir bestimmte Körperteile.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-wudu",
+          "kind": "term-explanation",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wuḍūʾ bedeutet: Wuḍūʾ ist die rituelle Gebetswaschung nach den im Qurʾān und der Sunnah beschriebenen Schritten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-wudu",
+          "kind": "term-explanation",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Ṭahārah bedeutet: Rein sein.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-taharah",
+          "kind": "term-explanation",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ṭahārah bedeutet: Ṭahārah bedeutet Reinheit; dazu gehört auch, auf Sauberkeit zu achten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-taharah",
+          "kind": "term-explanation",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ṭahārah bedeutet: Ṭahārah umfasst im Fiqh die religiöse Reinheit. Sie ist nicht mit gewöhnlichem Aufräumen gleichzusetzen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-taharah",
+          "kind": "term-explanation",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Ṣalāh bedeutet: Das Gebet für Allah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-salah",
+          "kind": "term-explanation",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ṣalāh bedeutet: Ṣalāh ist das islamische Gebet, das wir Schritt für Schritt lernen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-salah",
+          "kind": "term-explanation",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ṣalāh bedeutet: Ṣalāh ist das vorgeschriebene rituelle Gebet. Seine Durchführung lernen wir aus Qurʾān und authentischer Sunnah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-salah",
+          "kind": "term-explanation",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Duʿāʾ bedeutet: Allah um etwas bitten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-dua",
+          "kind": "term-explanation",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Duʿāʾ bedeutet: Duʿāʾ ist ein Bittgebet. Wir wenden uns dabei an Allah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-dua",
+          "kind": "term-explanation",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Duʿāʾ bedeutet: Duʿāʾ ist die Hinwendung an Allah im Bittgebet. Menschen dürfen wir um gewöhnliche praktische Hilfe bitten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-dua",
+          "kind": "term-explanation",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Sunnah bedeutet: Was der Prophet ﷺ uns gelehrt hat.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-sunnah",
+          "kind": "term-explanation",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Sunnah bedeutet: Sunnah nennen wir die überlieferte Lehre und das Vorbild des Propheten Muḥammad ﷺ.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-sunnah",
+          "kind": "term-explanation",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Sunnah bedeutet: Sunnah umfasst die authentisch überlieferten Aussagen, Handlungen und Bestätigungen des Propheten ﷺ.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-sunnah",
+          "kind": "term-explanation",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān bedeutet: Allahs Wort.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-quran",
+          "kind": "term-explanation",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān bedeutet: Der Qurʾān ist Allahs Offenbarung, die wir auf Arabisch hören und lesen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-quran",
+          "kind": "term-explanation",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān bedeutet: Der Qurʾān ist die von Allah offenbarte Schrift. Der arabische Vers und seine deutsche Übersetzung sind nicht dasselbe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-quran",
+          "kind": "term-explanation",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Ḥadīṯ bedeutet: Ein Bericht über den Propheten ﷺ.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-hadith",
+          "kind": "term-explanation",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ḥadīṯ bedeutet: Ein Ḥadīṯ berichtet, was der Prophet ﷺ gesagt oder getan hat.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-hadith",
+          "kind": "term-explanation",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ḥadīṯ bedeutet: Ein Ḥadīṯ ist eine Überlieferung über den Propheten ﷺ; wir prüfen die Authentizität der Überlieferung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-hadith",
+          "kind": "term-explanation",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Ṣaḥābah bedeutet: Die Gefährten des Propheten ﷺ.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-sahabah",
+          "kind": "term-explanation",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ṣaḥābah bedeutet: Ṣaḥābah nennen wir die muslimischen Menschen, die dem Propheten ﷺ begegnet sind.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-sahabah",
+          "kind": "term-explanation",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ṣaḥābah bedeutet: Ṣaḥābah sind die Gefährten des Propheten ﷺ. Ihre Berichte müssen mit der Überlieferung und ihrem Zusammenhang geprüft werden.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-sahabah",
+          "kind": "term-explanation",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Tābiʿīn bedeutet: Die Generation nach den Gefährten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-tabiin",
+          "kind": "term-explanation",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Tābiʿīn bedeutet: Tābiʿīn nennt man Muslime, die Gefährten des Propheten ﷺ kennengelernt haben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-tabiin",
+          "kind": "term-explanation",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Tābiʿīn bedeutet: Tābiʿīn sind Angehörige der nachfolgenden Generation, die Ṣaḥābah trafen. Einzelne Aussagen benötigen überprüfbare Überlieferungen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-tabiin",
+          "kind": "term-explanation",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Salaf bedeutet: Die frühen rechtschaffenen Muslime.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-salaf",
+          "kind": "term-explanation",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Salaf bedeutet: Salaf bezeichnet die frühen Generationen der Muslime, von denen wir belegtes Wissen lernen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-salaf",
+          "kind": "term-explanation",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Salaf bedeutet: Mit as-Salaf aṣ-Ṣāliḥ werden die rechtschaffenen frühen muslimischen Generationen bezeichnet. Ihre einzelnen Aussagen müssen quellenkritisch belegt werden.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-salaf",
+          "kind": "term-explanation",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Raḥmah bedeutet: Barmherzigkeit.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-rahmah",
+          "kind": "term-explanation",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Raḥmah bedeutet: Raḥmah ist Barmherzigkeit: Wir gehen freundlich mit anderen und mit Tieren um.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-rahmah",
+          "kind": "term-explanation",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Raḥmah bedeutet: Raḥmah heißt Barmherzigkeit und liebevolle Fürsorge. Allahs Barmherzigkeit ist nicht wie die der Geschöpfe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-rahmah",
+          "kind": "term-explanation",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Bismillāh bedeutet: Im Namen Allahs.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-bismillah",
+          "kind": "term-explanation",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Bismillāh bedeutet: Bismillāh sagen wir zum Beispiel vor dem Essen. Es heißt: Im Namen Allahs.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-bismillah",
+          "kind": "term-explanation",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Bismillāh bedeutet: Bismillāh heißt Im Namen Allahs. Der Prophet ﷺ lehrte den Jungen ʿUmar ibn Abī Salamah, Allahs Namen vor dem Essen zu nennen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-bismillah",
+          "kind": "term-explanation",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "ʿIbādah bedeutet: Allah dienen und Ihn anbeten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-ibadah",
+          "kind": "term-explanation",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "ʿIbādah bedeutet: ʿIbādah ist Anbetung. Wir beten Allah allein an und richten unser Bittgebet an Ihn.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-ibadah",
+          "kind": "term-explanation",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "ʿIbādah bedeutet: ʿIbādah umfasst gottesdienstliche Handlungen, die wir allein Allah widmen, nach Qurʾān und authentischer Sunnah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-ibadah",
+          "kind": "term-explanation",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Niyyah bedeutet: Eine Absicht haben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-niyyah",
+          "kind": "term-explanation",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Niyyah bedeutet: Niyyah bedeutet Absicht. Ich weiß, warum ich etwas tue.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-niyyah",
+          "kind": "term-explanation",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Niyyah bedeutet: Niyyah ist die innere Absicht hinter einer Handlung. Der Prophet ﷺ erklärte die Bedeutung der Absichten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-niyyah",
+          "kind": "term-explanation",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Ḏikr bedeutet: An Allah denken.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-dhikr",
+          "kind": "term-explanation",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ḏikr bedeutet: Ḏikr bedeutet, Allah mit guten Worten zu gedenken.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-dhikr",
+          "kind": "term-explanation",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ḏikr bedeutet: Ḏikr ist das bewusste Gedenken Allahs; Aḏkār sind mehrere überlieferte Gedenkformeln.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-dhikr",
+          "kind": "term-explanation",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Qadar bedeutet: Allahs Wissen und Bestimmung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-qadar",
+          "kind": "term-explanation",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Qadar bedeutet: Qadar gehört zu unserem Glauben. Allah kennt alles, und wir bemühen uns, Gutes zu tun.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-qadar",
+          "kind": "term-explanation",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Qadar bedeutet: Qadar ist der Glaube an Allahs Bestimmung. Allahs vollkommenes Wissen hebt unsere Verantwortung zum Handeln nicht auf.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-qadar",
+          "kind": "term-explanation",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Shirk bedeutet: Allah jemanden gleichstellen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-shirk",
+          "kind": "term-explanation",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Shirk bedeutet: Shirk heißt, jemandem oder etwas die Anbetung zu geben, die nur Allah zusteht.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-shirk",
+          "kind": "term-explanation",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Shirk bedeutet: Shirk bezeichnet das Beigesellen bei Allah in der Anbetung. Kinder sollen dies als Glaubensgrundlage verstehen, nicht Menschen beurteilen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-shirk",
+          "kind": "term-explanation",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Sīrah bedeutet: Die Lebensgeschichte des Propheten ﷺ.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-sira",
+          "kind": "term-explanation",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Sīrah bedeutet: Sīrah erzählt von der Lebensgeschichte des Propheten Muḥammad ﷺ.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-sira",
+          "kind": "term-explanation",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Sīrah bedeutet: Die Sīrah beschreibt das Leben des Propheten ﷺ. Berichte werden nach ihrer Überlieferung und dem historischen Zusammenhang geprüft.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-sira",
+          "kind": "term-explanation",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Zakāh bedeutet: Etwas vom eigenen Vermögen abgeben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-zakat",
+          "kind": "term-explanation",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Zakāh bedeutet: Zakāh ist eine vorgeschriebene Abgabe für Menschen, die die Voraussetzungen erfüllen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-zakat",
+          "kind": "term-explanation",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Zakāh bedeutet: Zakāh ist eine verpflichtende Vermögensabgabe unter bestimmten Voraussetzungen; diese werden im Fiqh genauer erklärt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-zakat",
+          "kind": "term-explanation",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Ramaḍān bedeutet: Der Monat des Fastens.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-ramadan",
+          "kind": "term-explanation",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ramaḍān bedeutet: Ramaḍān ist ein besonderer Monat für Muslime. Kinder lernen darüber ohne Zwang zu fasten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-ramadan",
+          "kind": "term-explanation",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ramaḍān bedeutet: Ramaḍān ist der neunte islamische Monat, in dem erwachsene, verpflichtete Muslime fasten; Kinder lernen altersgerecht darüber.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "vocabulary-ramadan",
+          "kind": "term-explanation",
+          "age": "9-10"
+        }
+      ]
+    }
+  ]
+}

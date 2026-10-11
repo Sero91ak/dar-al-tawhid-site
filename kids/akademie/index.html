@@ -3671,6 +3671,18 @@ body:not([data-academy-view="lesson"]):not([data-embedded="true"]) > main.wrap >
  padding-right:max(var(--academy-scroll-inset-right),calc((100vw - 980px)/2))!important;
 }
 
+/* V24: age-sensitive glossary stays inside the lesson; no overlays and no extra page scroll. */
+.academy-term-coach[hidden],.academy-term-detail[hidden]{display:none!important}
+.academy-term-coach{border:1px solid color-mix(in srgb,var(--accent,#c9ab73) 45%,transparent);background:rgba(120,118,96,.055);border-radius:14px;padding:10px 12px;margin:10px 0;min-width:0}
+.academy-term-heading{display:block;font-size:clamp(13px,3.4vw,16px);line-height:1.35}
+.academy-term-note{font-size:12px;line-height:1.4;margin:3px 0 7px;opacity:.82}
+.academy-term-list{display:flex;flex-wrap:wrap;gap:5px}
+.academy-term-button{font:inherit;font-size:clamp(12px,3.1vw,14px);border:1px solid color-mix(in srgb,var(--accent,#ba9f6b) 56%,transparent);background:transparent;color:inherit;border-radius:999px;padding:7px 11px;min-height:38px;max-width:100%;overflow-wrap:anywhere}
+.academy-term-button[aria-expanded="true"]{background:color-mix(in srgb,var(--accent,#c9ab73) 15%,transparent);font-weight:800}
+.academy-term-button:focus-visible{outline:2px solid var(--accent,#d3bb86);outline-offset:2px}
+.academy-term-detail{border-top:1px solid color-mix(in srgb,var(--accent,#c9ab73) 33%,transparent);padding-top:8px;margin-top:9px;font-size:clamp(13px,3.4vw,15px);line-height:1.52}
+.academy-term-detail p{margin:5px 0 3px}
+.academy-term-source,.academy-term-audio-status{font-size:12px;opacity:.8}
 </style><script data-kids-touch-focus-v83>
 (function(){
   "use strict";
@@ -3768,7 +3780,7 @@ body:not([data-academy-view="lesson"]):not([data-embedded="true"]) > main.wrap >
 </div>
 <p class="master-voice-sample-note" id="academyPilotStatus" aria-live="polite">Tippe auf eine Hörprobe.</p>
 </div><p class="master-voice-sample-note"><a href="/kids/akademie/stimmen-test-v14.html?v=serhat-native-v14-20261010" rel="nofollow">▶ Unabhängiger iPhone-Audiotest (Standard-Player)</a></p><button type="button" class="pill soft-gold master-voice-test" id="masterVoiceTest">▶ Masterstimme testen</button><p class="master-voice-sample-note" id="masterVoiceTestStatus" aria-live="polite">Masterprobe aus dem Duʿāʾ-Bereich – noch keine Aufnahme des Unterrichtssatzes.</p></details></div></section>
-  <section class="lesson-stage" data-lesson-step="1" aria-labelledby="explainTitle" hidden><span class="kicker">Schritt 2 · Heute lernen wir</span><h2 id="explainTitle">Was bedeutet Wahrhaftigkeit?</h2><p class="stage-lead">Die <strong>Wahrheit sagen</strong> – auch wenn es manchmal Mut kostet.</p><button type="button" class="pill soft-gold academy-serhat-lead" id="academySerhatLead" hidden aria-label="Tawḥīd-Einführung mit Serhats Masterstimme anhören">▶ Serhat hören</button><span class="academy-serhat-status" id="academySerhatStatus" aria-live="polite" hidden></span><div class="spoken-paragraph" id="explainWords"><p data-spoken>Manchmal passiert uns aus Versehen ein Fehler.</p><p data-spoken>Wenn wir ehrlich sagen, was passiert ist, können wir Verantwortung übernehmen und etwas wiedergutmachen.</p><p data-spoken>Wenn wir stattdessen lügen, kann das Vertrauen anderer Menschen leiden.</p><p data-spoken>Wahrhaftigkeit ist deshalb ein wichtiger Teil unseres guten Charakters.</p></div><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="1">Erklärung anhören</button><span class="voice-note">Beim Hören wird der aktuelle Satz sanft hervorgehoben.</span></div></section>
+  <section class="lesson-stage" data-lesson-step="1" aria-labelledby="explainTitle" hidden><span class="kicker">Schritt 2 · Heute lernen wir</span><h2 id="explainTitle">Was bedeutet Wahrhaftigkeit?</h2><p class="stage-lead">Die <strong>Wahrheit sagen</strong> – auch wenn es manchmal Mut kostet.</p><button type="button" class="pill soft-gold academy-serhat-lead" id="academySerhatLead" hidden aria-label="Tawḥīd-Einführung mit Serhats Masterstimme anhören">▶ Serhat hören</button><span class="academy-serhat-status" id="academySerhatStatus" aria-live="polite" hidden></span><div class="spoken-paragraph" id="explainWords"><p data-spoken>Manchmal passiert uns aus Versehen ein Fehler.</p><p data-spoken>Wenn wir ehrlich sagen, was passiert ist, können wir Verantwortung übernehmen und etwas wiedergutmachen.</p><p data-spoken>Wenn wir stattdessen lügen, kann das Vertrauen anderer Menschen leiden.</p><p data-spoken>Wahrhaftigkeit ist deshalb ein wichtiger Teil unseres guten Charakters.</p></div><div id="academyTermCoach" class="academy-term-coach" hidden aria-label="Arabische Wörter leicht erklärt"></div><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="1">Erklärung anhören</button><span class="voice-note">Beim Hören wird der aktuelle Satz sanft hervorgehoben.</span></div></section>
   <section class="lesson-stage" data-lesson-step="2" aria-labelledby="evidenceTitle" hidden><span class="kicker">Schritt 3 · Qurʾān und Sunnah</span><h2 id="evidenceTitle">Was lernen wir aus den Quellen?</h2><p class="stage-lead" id="evidenceLead">Wir hören zuerst einen Vers aus dem Qurʾān und betrachten danach eine authentische Überlieferung.</p><div class="evidence-region"><section class="lesson-source-block">
   <div class="eyebrow">Qurʾān · Sūrat at-Tawbah · Vers 119</div>
   <div class="arabic-listen-row">
@@ -3787,7 +3799,7 @@ body:not([data-academy-view="lesson"]):not([data-embedded="true"]) > main.wrap >
   <p class="quote">Wahrhaftigkeit führt zur Rechtschaffenheit, und Rechtschaffenheit führt zum Paradies.</p>
   <p class="source"><strong>Quelle:</strong> Prophet Muḥammad ﷺ · Überliefert von ʿAbdullāh ibn Masʿūd · Ṣaḥīḥ Muslim, Kitāb al-Birr waṣ-Ṣilah wa-l-Ādāb, Nr. 2607a</p>
 </section>
-</div><p class="teacher-explainer" data-spoken>Allah befiehlt uns, mit den Wahrhaftigen zu sein. Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt. Deshalb sollen wir ehrlich sprechen und uns um gutes Verhalten bemühen.</p><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="2">Deutsche Erklärung anhören</button><span class="voice-note">Qurʾān-Rezitation über den eigenen Button links am arabischen Text.</span></div></section>
+</div><div id="academyTermCoachSources" class="academy-term-coach" hidden aria-label="Begriffe aus den religiösen Quellen"></div><p class="teacher-explainer" data-spoken>Allah befiehlt uns, mit den Wahrhaftigen zu sein. Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt. Deshalb sollen wir ehrlich sprechen und uns um gutes Verhalten bemühen.</p><div class="stage-audio"><button type="button" class="pill soft-gold" data-speak-stage="2">Deutsche Erklärung anhören</button><span class="voice-note">Qurʾān-Rezitation über den eigenen Button links am arabischen Text.</span></div></section>
   <section class="lesson-stage" data-lesson-step="3" aria-labelledby="practiceTitle" hidden><div class="question-top"><span class="kicker">Schritt 4 · Jetzt bist du dran</span><span class="question-index" id="questionIndex">Frage 1 von 3</span></div><h2 id="practiceTitle">Was würdest du tun?</h2><div class="progress"><span id="bar"></span></div>
    <div class="question-panel" id="academyQuestionPanel"><div class="question-prompt-card"><div class="academy-buddy-guide"><img id="academyBuddyAvatar" src="/kids/assets/profile-avatars/boy-kufi-v1235.svg" alt="" aria-hidden="true" width="51" height="51"><div><strong id="academyBuddyTitle">Du schaffst das!</strong><span id="academyBuddyText">Du kannst dir die Frage anhören.</span></div></div><span class="question-kicker">DEINE FRAGE</span><p id="question" class="question-prompt"></p><button id="repeat" class="pill" type="button">▶ Frage anhören</button></div><div class="answer-interaction"><p class="answer-mode-caption" id="answerModeCaption">So kannst du antworten:</p><p class="small choice-audio-help" id="choiceAudioHelp" hidden>🔊 Hören liest nur vor – tippe auf die Antwort, um sie auszuwählen.</p><div class="choices" id="choices" role="group" aria-label="Antwortmöglichkeiten"></div>
     <div class="answer-options" id="answerOptions"><button type="button" class="pill answer-open" id="openWrite">✎ Schreiben</button><button type="button" class="pill answer-open" id="openVoice">◉ Sprechen</button></div>
@@ -3810,6 +3822,7 @@ body:not([data-academy-view="lesson"]):not([data-embedded="true"]) > main.wrap >
 <script src="/kids/akademie/curriculum-v1.js?v=20261010-01"></script>
 <script src="/kids/akademie/curriculum-v2.js?v=20261010-09"></script>
 <script src="/kids/akademie/curriculum-v22.js?v=20261011-01"></script>
+<script src="/kids/akademie/term-coach-v24.js?v=20261011-01"></script>
 <script src="/kids/akademie/school-progress-v11.js?v=20261010-11"></script>
 <script src="/kids/akademie/pilot-audio-v13.js?v=20261010-voicefix-v16&amp;rev=20261011-v19-creator-audio"></script>
 <script>
@@ -4586,9 +4599,22 @@ function initFocusControls(){
  }
 }
 
+function refreshAcademyVocabulary(){
+ const helper=window.DARKidsAcademyTermCoach;
+ if(!helper)return;
+ const l=activeLesson()||{
+  title:"Ṣidq – Wahrhaftigkeit",topic:"Ṣidq",lead:AGE_EXPLANATIONS[age]?.lead,
+  lines:AGE_EXPLANATIONS[age]?.lines||[],hadith:{text:"Ṣidq"},
+  quran:{label:"Qurʾān 9:119"}
+ };
+ const options={stopAudio:()=>{stopSpeech();stopAudio();}};
+ helper.mount($("#academyTermCoach"),l,age,options);
+ helper.mount($("#academyTermCoachSources"),l,age,options);
+}
 function showStep(n,scroll=true){
  if(n<0||n>unlocked||n>=5)return;
  stopAll();step=n;document.body.dataset.academyStep=String(n);document.body.dataset.academyView="lesson";stages.forEach((el,i)=>el.hidden=i!==n);
+ if(n===1||n===2)refreshAcademyVocabulary();
  if([1,2,4].includes(n))focusUpdate(n,focusPages[n],{silent:true});
  all("[data-jump-step]").forEach(b=>{const i=+b.dataset.jumpStep;b.disabled=i>unlocked;b.classList.toggle("is-current",i===n);b.classList.toggle("is-done",i<n);b.setAttribute("aria-current",i===n?"step":"false")});
  $("#previousStep").hidden=n===0;$("#forwardStep").hidden=n>=3;$("#lessonNavigation").hidden=n!==0;
