@@ -11,6 +11,7 @@ on:
       - 'scripts/test-kids-academy-v9.js'
       - 'scripts/test-kids-academy-school-v11.js'
       - 'scripts/test-kids-academy-direct-voice-v13.js'
+      - 'scripts/test-kids-academy-creator-voice-sandbox-v17.js'
       - '.github/workflows/check-kids-academy-v9.yml'
   push:
     branches: [main]
@@ -23,6 +24,7 @@ on:
       - 'scripts/test-kids-academy-v9.js'
       - 'scripts/test-kids-academy-school-v11.js'
       - 'scripts/test-kids-academy-direct-voice-v13.js'
+      - 'scripts/test-kids-academy-creator-voice-sandbox-v17.js'
 
 permissions:
   contents: read
@@ -42,6 +44,8 @@ jobs:
         run: node scripts/test-kids-academy-direct-voice-v13.js
       - name: Verify protected creator preview: full 34 topics and no real child state
         run: node scripts/test-kids-academy-creator-v17.js
+      - name: Verify creator sandbox cannot overwrite saved child profile
+        run: node scripts/test-kids-academy-creator-voice-sandbox-v17.js
       - name: JavaScript syntax guard
         run: |
           node --check kids/akademie/curriculum-v1.js
