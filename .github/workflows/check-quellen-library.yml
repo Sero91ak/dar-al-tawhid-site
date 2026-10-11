@@ -6,6 +6,9 @@ on:
     paths:
       - 'quellen/**'
       - 'q/_registry/shortlinks.json'
+      - 'assets/quellen-library.css'
+      - 'assets/q-royal-manuscript-v42.css'
+      - 'assets/q-royal-manuscript-v42.js'
       - 'scripts/sync-quellen-registry.cjs'
       - 'scripts/check-quellen-client.cjs'
       - 'service-worker.js'
@@ -31,6 +34,7 @@ jobs:
           node --check scripts/sync-quellen-registry.cjs
           node scripts/sync-quellen-registry.cjs --check
           node --check cloudflare/site-router.js
+          node --check assets/q-royal-manuscript-v42.js
           node scripts/check-quellen-client.cjs
           node - <<'NODE'
           const fs=require('fs'),assert=require('node:assert/strict');
