@@ -200,6 +200,9 @@ export async function academyOwnerAccess(request, url, env) {
     || (isLogin ? ACADEMY_NEW_ROOT + "/index.html" : url.pathname + url.search));
 
   if (!secret || !password) {
+    // Zero-regression rollout: retain the old Basic gate for the former URL
+    // until both private Cloudflare secrets have been provisioned.
+    if (url.pathname === ACADEMY_OLD_ROOT || url.pathname.startsWith(ACADEMY_OLD_ROOT + "/")) return null;
     return academyLoginPage(destination, 503, "Der geschützte Serverzugang ist noch nicht eingerichtet. Bitte den Betreiber informieren.");
   }
 
