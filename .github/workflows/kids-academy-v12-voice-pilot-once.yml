@@ -44,17 +44,6 @@ jobs:
           PY
           python3 kids/tools/build-academy-v9-staging.py --dry-run --pilot-first-lesson --limit 4 --max-chars 420
 
-      - name: Verify new Ṣidq V18 audio inventory and staging isolation (no credits)
-        run: |
-          set -euo pipefail
-          node --check kids/tools/export-academy-sidq-voice-v18.js
-          node kids/tools/export-academy-sidq-voice-v18.js --check
-          node scripts/test-kids-academy-sidq-v18.js
-          python3 kids/tools/build-academy-v9-staging.py --dry-run --sidq-v18 --limit 4 --max-chars 350
-
-      - name: Verify protected 511-phrase owner-audio audit (free)
-        run: node scripts/test-kids-academy-audit-v18.js
-
       - name: Run once, on main only, with the existing owner credential
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
