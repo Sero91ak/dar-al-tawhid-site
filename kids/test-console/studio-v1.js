@@ -177,7 +177,14 @@ function wire(){
  $("moduleSave").addEventListener("click",saveModule);
  document.getElementById("cards").addEventListener("click",e=>{
    const b=e.target.closest("button[data-test-slot]");
-   if(b)assignSlot(b.getAttribute("data-test-slot"));
+   if(!b)return;
+   const slot=Number(b.getAttribute("data-test-slot"));
+   const item=slots.find(x=>x.slot===slot);
+   if(item?.catalogued&&item.id){
+     location.assign("/kids/akademie/?lektion="+encodeURIComponent(item.id)+"&editor=1");
+   }else{
+     assignSlot(slot); // Unwritten curriculum slots remain local planning only.
+   }
  });
  renderInputs();assignSlot(1);
 }
