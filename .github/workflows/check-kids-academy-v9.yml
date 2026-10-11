@@ -40,7 +40,7 @@ jobs:
         run: node scripts/test-kids-academy-school-v11.js
       - name: Verify iOS direct Serhat greeting, QA buttons and V4 source clips
         run: node scripts/test-kids-academy-direct-voice-v13.js
-      - name: Verify protected creator preview: full 34 topics and no real child state
+      - name: "Verify protected creator preview: full 34 topics and no real child state"
         run: node scripts/test-kids-academy-creator-v17.js
       - name: JavaScript syntax guard
         run: |
