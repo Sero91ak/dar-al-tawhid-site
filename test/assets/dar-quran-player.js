@@ -1464,25 +1464,6 @@
           '<button type="button" class="dqp-more" data-dqp="menu" aria-label="Optionen">' + icon("more") + "</button>" +
           '<button type="button" class="dqp-artist" data-dqp="pick-reciter">—</button>' +
         "</div>" +
-        '<section class="dqp-progress">' +
-          '<div class="dqp-track" data-dqp-seek-track>' +
-            '<span class="dqp-groove" aria-hidden="true"></span>' +
-            '<span class="dqp-fill" aria-hidden="true"></span>' +
-            '<input class="dqp-range" data-dqp="seek" type="range" min="0" max="1000" value="0" aria-label="Fortschritt">' +
-          "</div>" +
-          '<div class="dqp-times"><span data-dqp-cur>––:––</span><span data-dqp-dur>––:––</span></div>' +
-        "</section>" +
-        '<div class="dqp-controls">' +
-          '<button class="dqp-skip" type="button" data-dqp="prev" aria-label="Vorige Āyah">' + icon("prev") + "</button>" +
-          '<button class="dqp-play" type="button" data-dqp="play" aria-label="Wiedergabe">' + icon("play") + "</button>" +
-          '<button class="dqp-skip" type="button" data-dqp="next" aria-label="Nächste Āyah">' + icon("next") + "</button>" +
-        "</div>" +
-        '<div class="dqp-v108r-pills" role="group" aria-label="Audiofunktionen">' +
-          '<button type="button" data-dqp="v108-speed" aria-label="Wiedergabegeschwindigkeit" data-v108-speed-label>♫ 1× Tempo</button>' +
-          '<button type="button" data-dqp="v108-repeat" aria-label="Wiederholung" data-v108-repeat-label>↻ Loop</button>' +
-          '<button type="button" data-dqp-opt="m-sleep" aria-label="Sleep-Timer">◷ Timer</button>' +
-          '<button type="button" data-dqp="v108-audio" aria-label="Audio und Lautstärke">◉ Audio</button>' +
-        '</div>' +
         '<div class="dqp-art">' +
           '<div class="dqp-v108r-tabs" role="tablist" aria-label="Qurʾān Ansicht">' +
             '<button type="button" data-dqp="v108-mode" data-v108-mode="listen" role="tab">Hören</button>' +
@@ -1502,6 +1483,26 @@
           "</div>" +
         "</div>" +
         '<div class="dqp-foot">' +
+        '<section class="dqp-progress">' +
+          '<div class="dqp-track" data-dqp-seek-track>' +
+            '<span class="dqp-groove" aria-hidden="true"></span>' +
+            '<span class="dqp-fill" aria-hidden="true"></span>' +
+            '<input class="dqp-range" data-dqp="seek" type="range" min="0" max="1000" value="0" aria-label="Fortschritt">' +
+          "</div>" +
+          '<div class="dqp-times"><span data-dqp-cur>––:––</span><span data-dqp-dur>––:––</span></div>' +
+        "</section>" +
+        '<div class="dqp-controls">' +
+          '<button class="dqp-skip" type="button" data-dqp="prev" aria-label="Vorige Āyah">' + icon("prev") + "</button>" +
+          '<button class="dqp-play" type="button" data-dqp="play" aria-label="Wiedergabe">' + icon("play") + "</button>" +
+          '<button class="dqp-skip" type="button" data-dqp="next" aria-label="Nächste Āyah">' + icon("next") + "</button>" +
+        "</div>" +
+        '<div class="dqp-v108r-pills" role="group" aria-label="Audiofunktionen">' +
+          '<button type="button" data-dqp="v108-speed" aria-label="Wiedergabegeschwindigkeit" data-v108-speed-label>♫ 1× Tempo</button>' +
+          '<button type="button" data-dqp="v108-repeat" aria-label="Wiederholung" data-v108-repeat-label>↻ Loop</button>' +
+          '<button type="button" data-dqp-opt="m-sleep" aria-label="Sleep-Timer">◷ Timer</button>' +
+          '<button type="button" data-dqp="v108-audio" aria-label="Audio und Lautstärke">◉ Audio</button>' +
+        '</div>' +
+
         
         '<div class="dqp-volume">' +
           icon("volmin") +
