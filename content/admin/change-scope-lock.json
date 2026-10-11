@@ -155,6 +155,17 @@
   ],
   "unlockedScopes": [
     {
+      "id": "kids-test-v23-editorial-roadmap-viewer-20261011",
+      "at": "2026-10-11T19:28:00+02:00",
+      "approvedBy": "user-expand-kids-lessons-tawhid-iman-ikhlas-adab-akhlaq-tarbiyah-nafs-all-ages-20261011",
+      "reason": "Nur geschuetzte Erstelleransicht fuer redaktionellen 208-Platz-Lehrplan und dazugehoerige Tests; no writes to children, no audio generation, no publication of unverified source claims.",
+      "paths": [
+        "test/kids/akademie/",
+        ".github/workflows/check-kids-academy-v9.yml"
+      ],
+      "expiresAt": "2026-10-18T23:59:00.000Z"
+    },
+    {
       "id": "kids-akademie-v23-208-planning-stems-12-strands-20261011",
       "at": "2026-10-11T19:15:00+02:00",
       "approvedBy": "user-request-expand-all-kids-lessons-including-tawhid-iman-ikhlas-adab-akhlaq-tarbiyah-nafs-all-ages-20261011",
