@@ -1,0 +1,284 @@
+{
+  "schemaVersion": 1,
+  "project": "DĀR AL TAWḤĪD KIDS – Mein Gebet",
+  "asOf": "2026-10-11",
+  "scope": "Only kids/mein-gebet draft; no live production edits or automatically approved character.",
+  "gatePolicy": "A gate cannot be approved or counted complete until all preceding gates have approved=true, all required distinct evidence types are recorded and individually verified, and explicit user sign-off is supplied wherever required.",
+  "activeGate": "01-original-assets",
+  "originals": {
+    "boy": {
+      "source": "kids/mein-gebet/assets/figur-junge-original.png",
+      "required": "identical child face, brown eyes and hair, white/gold embroidered kufi, white ankle-length thawb and original shoes",
+      "candidateGlbSha256": "353b028862f91922d6288cf6ede09d5c8150815657c66c9c116b7775311c07fa",
+      "candidateArchive": "/Kinder App/Mein_Gebet_V77_STRICT_NICHT_FREIGEGEBEN.zip",
+      "archiveMetadataLocated": true,
+      "actualBinaryRead": false,
+      "actual3dIdentityApproved": false
+    },
+    "girl": {
+      "source": "kids/mein-gebet/assets/figur-maedchen-original.png",
+      "required": "identical girl face, complete vivid-pink hijab with covered hair and neck, matching pink dress and shoes",
+      "actualOriginalGlbPresent": false,
+      "actual3dIdentityApproved": false
+    }
+  },
+  "previewIsNotReleaseEvidence": true,
+  "currentPreview": "kids/mein-gebet/vorschau-v81-betendenperspektive.html",
+  "integration": {
+    "sourceProfileOnly": true,
+    "manualProfileSwitcherAllowedInTestOnly": true,
+    "newTabBeforeApproval": false,
+    "testHomeEntryOnly": true,
+    "preserveExistingKidsState": true,
+    "isolatedRollback": true
+  },
+  "milestones": [
+    {
+      "id": "01-original-assets",
+      "title": "Originalreferenzen und echte Quelldaten sichern",
+      "needs": [],
+      "criteria": [
+        "Unveränderte Originale für Jungen- und Mädchenidentität sowie referenzierte Ansichten prüfen",
+        "V7.7-GLB und Original-Turnaround als lesbare Bytes mit SHA-256 prüfen",
+        "Für Mädchen fehlende Seiten- und Rückansichten dokumentieren und Originaltreue ermöglichen"
+      ],
+      "evidenceTypes": [
+        "boy_source_visual",
+        "girl_source_visual",
+        "boy_v77_binary_sha",
+        "boy_turnaround_sha",
+        "girl_multiview_reference"
+      ],
+      "approved": false,
+      "status": "in_progress",
+      "evidence": []
+    },
+    {
+      "id": "02-original-boy",
+      "title": "Originalgetreue 3D-Jungenfigur fertigstellen",
+      "needs": [
+        "01-original-assets"
+      ],
+      "criteria": [
+        "Gesicht, Haarsträhnen, Kufi-Ornament, Thawb, Schuhe und Proportionen stimmen mit gelieferten Originalbildern überein",
+        "Front, beide Seiten, Dreiviertel und Rückseite an echtem GLB visuell prüfen",
+        "Ausdrückliche visuelle Freigabe des unveränderten Jungenmodells"
+      ],
+      "evidenceTypes": [
+        "boy_real_glb_sha",
+        "boy_five_angle_renders",
+        "boy_identity_signoff"
+      ],
+      "approved": false,
+      "status": "blocked",
+      "evidence": []
+    },
+    {
+      "id": "03-original-girl",
+      "title": "Originalgetreue 3D-Mädchenfigur fertigstellen",
+      "needs": [
+        "02-original-boy"
+      ],
+      "criteria": [
+        "Originalgesicht, kräftig rosa Hijab, vollständig bedeckte Haare/Hals, rosa Kleid und Schuhe",
+        "Eigenständiges 360°-Modell und dokumentierte weibliche Kleidungs-/Posenprüfung",
+        "Ausdrückliche visuelle Freigabe des unveränderten Mädchenmodells"
+      ],
+      "evidenceTypes": [
+        "girl_real_glb_sha",
+        "girl_five_angle_renders",
+        "girl_clothing_signoff"
+      ],
+      "approved": false,
+      "status": "blocked",
+      "evidence": []
+    },
+    {
+      "id": "04-rig",
+      "title": "Beide Originalmodelle echt riggen",
+      "needs": [
+        "03-original-girl"
+      ],
+      "criteria": [
+        "GLB 2.0 mit Skin, Gelenkgewichten, unveränderten Knochenlängen und stabiler Bindepose",
+        "Keine neue Ersatzidentität, kein Kopf-/Kleidungsverzug, kein Skalen-Trick",
+        "GLB-Binärprüfung und reale 360°-Rigprüfung für beide Profile"
+      ],
+      "evidenceTypes": [
+        "boy_rig_binary_validation",
+        "girl_rig_binary_validation",
+        "motion_invariant_report"
+      ],
+      "approved": false,
+      "status": "blocked",
+      "evidence": []
+    },
+    {
+      "id": "05-prayer-poses",
+      "title": "Alle Gebetsstellungen echt animieren",
+      "needs": [
+        "04-rig"
+      ],
+      "criteria": [
+        "Takbīr, Qiyām, Rukūʿ, Iʿtidāl, Suǧūd, Ǧalsah, zweiter Suǧūd, Tašahhud und Salām vollständig",
+        "Qiyām rechte Hand über linker auf Brust; Rafʿ al-Yadayn zur gewählten Schulterhöhe",
+        "Rukūʿ gerader Rücken, Suǧūd mit richtigen Bodenkontakten und freiem Mund/Kinn",
+        "Salām aus Sicht des Betenden zuerst zur eigenen rechten Schulter, dann links, Oberkörper stabil",
+        "Mädchenstellungen und Kleidung in jeder Bewegung separat prüfen"
+      ],
+      "evidenceTypes": [
+        "all_clips_boy_glb",
+        "all_clips_girl_glb",
+        "pose_contact_reports",
+        "taslim_right_left_device_video"
+      ],
+      "approved": false,
+      "status": "blocked",
+      "evidence": []
+    },
+    {
+      "id": "06-fiqh",
+      "title": "Jede Stellung fachlich und quellenbezogen abnehmen",
+      "needs": [
+        "05-prayer-poses"
+      ],
+      "criteria": [
+        "Hanbalitische Lehrvariante mit Qurʾān und authentischer Sunnah vergleichen",
+        "Text, Körperposition, Handbewegung und Mädchenvariation jeweils einzeln prüfen",
+        "Keine automatische Freigabe aus technischen Tests oder 2D-Referenzen"
+      ],
+      "evidenceTypes": [
+        "pose_by_pose_fiqh_review",
+        "girl_specific_religious_review",
+        "teaching_signoff"
+      ],
+      "approved": false,
+      "status": "blocked",
+      "evidence": []
+    },
+    {
+      "id": "07-two-rakah",
+      "title": "Vollständigen 2-Rakʿah-Ablauf testen",
+      "needs": [
+        "06-fiqh"
+      ],
+      "criteria": [
+        "Alle Abfolgen, Wiederholungen, Rezitationsphasen, Sitzpositionen und Taslīm korrekt",
+        "Kein zusätzliches Rafʿ nach zwei Rakʿāt wenn das Gebet endet",
+        "Zurück, Pause, Wiederholen und freies Anschauen ohne Verlust der richtigen Reihenfolge"
+      ],
+      "evidenceTypes": [
+        "two_rakah_sequence_tests",
+        "two_rakah_review_video"
+      ],
+      "approved": false,
+      "status": "blocked",
+      "evidence": []
+    },
+    {
+      "id": "08-all-prayers",
+      "title": "Drei- und Vier-Rakʿah-Abläufe ergänzen",
+      "needs": [
+        "07-two-rakah"
+      ],
+      "criteria": [
+        "Pflichtrakʿāt 2/3/4 und jeweilige Bewegungen vollständig korrekt",
+        "Rafʿ beim Aufstehen zur dritten Rakʿah nur wenn tatsächlich eine dritte folgt",
+        "Gebetsunterschiede und Textvarianten durch fachliche Abnahme gedeckt"
+      ],
+      "evidenceTypes": [
+        "three_four_rakah_tests",
+        "all_prayer_fiqh_review"
+      ],
+      "approved": false,
+      "status": "blocked",
+      "evidence": []
+    },
+    {
+      "id": "09-lessons-media",
+      "title": "Kinderunterricht, Audio und Lernfunktionen fertigstellen",
+      "needs": [
+        "08-all-prayers"
+      ],
+      "criteria": [
+        "Vier vorhandene Lernbereiche mit echten altersgerechten Inhalten und geprüften Anleitungen",
+        "Funktionierende Audios, Offline-Download, Wiederholen und Lernstand in echter Kinderprofilverwaltung",
+        "Barrierefreie Interaktionen ohne Platzhaltertexte oder unfreigegebene Gebetsschritte"
+      ],
+      "evidenceTypes": [
+        "content_audio_qa",
+        "offline_and_progress_qa",
+        "accessibility_review"
+      ],
+      "approved": false,
+      "status": "blocked",
+      "evidence": []
+    },
+    {
+      "id": "10-page",
+      "title": "Vollständige Mein-Gebet-Seite technisch prüfen",
+      "needs": [
+        "09-lessons-media"
+      ],
+      "criteria": [
+        "Visuell fertig auf kleinem iPhone, Pro Max, Android, Foldables und Tablets",
+        "Alle Karten, Filter, 3D-Bedienung, Buttons, Safe Areas und Scrollpositionen sauber",
+        "Kein neuer unnötiger Tab und kein manueller Gender-Switch in der Besucheroberfläche"
+      ],
+      "evidenceTypes": [
+        "responsive_matrix",
+        "navigation_and_ux_tests",
+        "profile_binding_tests"
+      ],
+      "approved": false,
+      "status": "blocked",
+      "evidence": []
+    },
+    {
+      "id": "11-staging",
+      "title": "Isoliert in Kids-Test-App integrieren",
+      "needs": [
+        "10-page"
+      ],
+      "criteria": [
+        "Nur geschützter Home-Testzugang in der isolierten Kids-Vorschau",
+        "Aktives Profil setzt automatische passende Originalfigur, echte Lernstände separat",
+        "Offline- und reale iOS-WebView-/Android-Tests, isolierter Rollback jederzeit"
+      ],
+      "evidenceTypes": [
+        "staging_url_and_build_sha",
+        "real_device_acceptance",
+        "rollback_exercise"
+      ],
+      "approved": false,
+      "status": "blocked",
+      "evidence": []
+    },
+    {
+      "id": "12-release",
+      "title": "Endabnahme und kontrollierte Besucherfreigabe",
+      "needs": [
+        "11-staging"
+      ],
+      "criteria": [
+        "Alle früheren Gates mit echten Nachweisen abgeschlossen",
+        "Fachliche und visuelle Nutzereinzelabnahme, Performance und Sicherheit",
+        "Ausdrückliche Entscheidung des Nutzers vor Merge oder Live-Deployment"
+      ],
+      "evidenceTypes": [
+        "all_gate_audit",
+        "final_user_signoff",
+        "release_approval_record"
+      ],
+      "approved": false,
+      "status": "blocked",
+      "evidence": []
+    }
+  ],
+  "release": {
+    "productionReady": false,
+    "mergeMain": false,
+    "liveDeploy": false,
+    "automatedModelSubstitutionAllowed": false
+  }
+}
