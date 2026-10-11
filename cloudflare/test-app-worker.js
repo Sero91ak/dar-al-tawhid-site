@@ -170,15 +170,13 @@ async function finalizeDarTestHomeV1193(asset) {
   const type = String(asset && asset.headers && asset.headers.get("content-type") || "");
   if (!asset || !asset.ok || !type.includes("text/html")) return asset;
   let html = await asset.text();
-  // Adult Quran V10.8-R — test-only asset version coherence.
-  // The existing Test shell loads Player v983 but separately demands v982 after
-  // load. That creates a second engine initialization and stale UI on iOS.
-  // Rewrite only the Test HTML response; never touch the visitor shell.
-  html = html.replace(/\/test\/assets\/dar-quran-player\.js\?v=983/g,
-    "/test/assets/dar-quran-player.js?v=984");
-  html = html.replace(/var WANT=982;/g, "var WANT=984;");
-  html = html.replace(/\/test\/assets\/dar-quran-player\.css\?v=964/g,
-    "/test/assets/dar-quran-player.css?v=984");
+  // Adult Qur'an V10.8-R: unify legacy test shell cache busts with build 1088.
+  // Only the /test HTML response is rewritten; the visitor app stays unchanged.
+  html = html.replace(/\/test\/assets\/dar-quran-player\.js\?v=(?:982|983|984)/g,
+    "/test/assets/dar-quran-player.js?v=1088");
+  html = html.replace(/var WANT=(?:982|983|984);/g, "var WANT=1088;");
+  html = html.replace(/\/test\/assets\/dar-quran-player\.css\?v=(?:964|984)/g,
+    "/test/assets/dar-quran-player.css?v=1088");
 
   // Test v1200: exactly one Home authority. Remove the obsolete v1193 runtime
   // injection so it cannot race the v1194 home observer and recreate duplicate blocks.
