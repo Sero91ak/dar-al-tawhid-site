@@ -51,7 +51,7 @@ footer{margin-top:27px;padding:17px 0;border-top:1px solid var(--line);font-size
 <label>Altersgruppe<select id="age"><option value="all">Alle Altersgruppen</option><option value="4-5">4–5 Jahre</option><option value="6-8">6–8 Jahre</option><option value="9-10">9–10 Jahre</option></select></label>
 <label>Audio-Status<select id="status"><option value="all">Alle</option><option value="qa">Vorhanden – Hörprüfung</option><option value="missing">Noch nicht erzeugt</option><option value="approved">Freigegeben</option></select></label>
 </div>
-<div class="results-head"><h2>Unterrichtssätze</h2><span id="matched" aria-live="polite"></span></div>
+<div class="results-head"><h2>Unterrichtssätze</h2><button id="refresh" type="button">Audio-Bestand erneut prüfen</button><span id="matched" aria-live="polite"></span></div>
 <p id="error" role="alert" hidden></p><div id="list" aria-live="polite"></div>
 <button id="more" type="button" hidden>Weitere 40 Einträge anzeigen</button>
 <footer>Alle Dateipfade werden vor der Wiedergabe auf eigene KIDS-M4A-Assets geprüft. Keine TTS-Ersatzstimmen. Lernfortschritte und Freischaltungen werden hier nicht verändert.</footer>
@@ -122,6 +122,7 @@ function draw(){
 }
 function apply(){limit=40;filtered=all.filter(passes);draw()}
 async function init(){
+ audio.clear();
  const [v9,sidq,pilot,extra,expanded]=await Promise.all([
   getJSON("v9",true),getJSON("sidq",true),getJSON("pilot",true),
   getJSON("extra",false),getJSON("expanded",false)
@@ -150,6 +151,8 @@ async function init(){
 }
 for(const id of ["search","subject","age","status"])$(("#"+id)).addEventListener(id==="search"?"input":"change",apply);
 $("#more").addEventListener("click",()=>{limit+=40;draw()});
+$("#refresh").addEventListener("click",()=>{const button=$("#refresh");button.disabled=true;
+ init().then(()=>{$("#error").hidden=true}).catch(e=>{$("#error").hidden=false;$("#error").textContent="Aktualisierung fehlgeschlagen: "+String(e.message||e)}).finally(()=>{button.disabled=false})});
 init().catch(e=>{$("#error").hidden=false;$("#error").textContent="Inventar derzeit nicht vollständig verfügbar: "+String(e.message||e);
  $("#matched").textContent="Quelle prüfen";$("#more").hidden=true});
 })();
