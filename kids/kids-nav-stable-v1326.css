@@ -12,7 +12,7 @@ html[data-kids-age]:has(#view-stories.active) body nav.bottom-nav{
   bottom:max(9px,env(safe-area-inset-bottom,0px))!important;
   transform:translateX(-50%)!important;
   translate:none!important;
-  width:min(calc(100% - 28px),740px)!important;
+  width:min(calc(100% - 28px - env(safe-area-inset-left,0px) - env(safe-area-inset-right,0px)),740px)!important;
   min-width:0!important;
   max-width:740px!important;
   height:62px!important;
