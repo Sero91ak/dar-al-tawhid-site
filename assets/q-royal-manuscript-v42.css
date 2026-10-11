@@ -68,3 +68,39 @@ body.qsource-body .qsource-social svg{width:18px;height:18px;fill:var(--rq-gold-
 body.qsource-body .qsource-footer{color:var(--rq-muted);font-size:11px;text-align:center;line-height:1.5;padding:12px 0 5px}
 @media(max-width:500px){body.qsource-body .qsource-page{width:calc(100% - 28px)}body.qsource-body .qsource-header{gap:8px;min-height:74px;padding:12px 0}body.qsource-body .qsource-logo{width:48px;height:48px;flex-basis:48px}body.qsource-body .qsource-brand-top{font-size:7.5px;letter-spacing:.08em}body.qsource-body .qsource-brand{font-size:clamp(18px,5.4vw,25px)}body.qsource-body .qsource-sign{font-size:17px}body.qsource-body .rq-theme{width:36px;flex-basis:36px;height:36px}body.qsource-body .qsource-meta{grid-template-columns:1fr}body.qsource-body .qsource-meta-row,body.qsource-body .qsource-meta-row:nth-last-child(-n+2){border-bottom:1px solid var(--rq-thin)}body.qsource-body .qsource-meta-row:last-child{border-bottom:0}body.qsource-body .qsource-quote{padding:18px 13px}body.qsource-body .qsource-section p.qsource-arabic,body.qsource-body .qsource-section [lang="ar"][dir="rtl"]{padding:16px 12px}}
 @media(prefers-reduced-motion:reduce){html:has(body.qsource-body){scroll-behavior:auto}}
+
+
+/* Q ROYAL iOS HEADER HEIGHT LOCK · 2026-10-11
+   Use exactly the same status-bar clearance as /quellen/.
+   The screenshot-approved branding begins BELOW Apple's glass status area.
+   On scroll the header remains below, never behind, the system chrome.
+   This shared stylesheet applies automatically to current and future /q/N/. */
+:root{--ql-safe-header-offset:max(8px,env(safe-area-inset-top,0px))}
+body.qsource-body .qsource-page{
+  padding-top:var(--ql-safe-header-offset);
+}
+@media(max-width:699px){
+  html:has(body.qsource-body),
+  body.qsource-body{
+    overflow-x:clip!important;
+  }
+  body.qsource-body .qsource-header{
+    position:sticky;
+    top:var(--ql-safe-header-offset);
+    z-index:40;
+    isolation:isolate;
+    background:var(--rq-page);
+    padding-top:10px;
+    padding-bottom:12px;
+  }
+  body.qsource-body .qsource-header-text{min-width:0}
+  body.qsource-body .rq-theme{
+    flex-shrink:0;
+    touch-action:manipulation;
+  }
+}
+@supports (-webkit-touch-callout:none){
+  @media(max-width:699px){
+    :root{--ql-safe-header-offset:max(58px,env(safe-area-inset-top,0px))}
+  }
+}
