@@ -103,30 +103,49 @@ function embeddedSourceRegistry(){
   if(!node)return null;
   try{const data=JSON.parse(node.textContent||'{}');return data&&Array.isArray(data.links)&&data.links.length?data:null;}catch(_){return null;}
 }
+function useSourceRegistry(data, origin) {
+  const items = data && Array.isArray(data.links) ? data.links : [];
+  const next = items
+    .filter(x => x && Number.isSafeInteger(Number(x.number)) && Number(x.number)>0 && x.status!=='inactive')
+    .map(toSource);
+  // A stale CDN response may never replace a newer embedded registry.
+  if (!next.length || next.length < SOURCES.length) return false;
+  SOURCES = next;
+  buildScholars();
+  if (activeScholar !== 'all' && !Array.from(scholar.options).some(o => o.value === activeScholar)) {
+    activeScholar = 'all';
+  }
+  scholar.value = activeScholar;
+  render();
+  if (origin === 'snapshot') activeInfo.textContent = 'Gesicherte Quellenliste';
+  return true;
+}
 async function loadSources(){
   buildTabs();
-  let data=null,usedFallback=false;
-  try{
-    // Stable public path: /q/_registry is internal and can be hidden by asset routing.
-    data=await fetchSourceRegistry('/quellen/shortlinks.json');
-  }catch(firstError){
-    try{data=await fetchSourceRegistry('/q/_registry/shortlinks.json');}
-    catch(secondError){data=embeddedSourceRegistry();usedFallback=true;}
+  // Render immediately, even if the network is slow or a PWA runs offline.
+  const snapshot = embeddedSourceRegistry();
+  useSourceRegistry(snapshot, 'snapshot');
+  let data = null;
+  try {
+    data = await fetchSourceRegistry('/quellen/shortlinks.json');
+  } catch (firstError) {
+    try { data = await fetchSourceRegistry('/q/_registry/shortlinks.json'); }
+    catch (secondError) { /* The embedded snapshot is authoritative offline. */ }
   }
-  SOURCES=(data&&Array.isArray(data.links)?data.links:[])
-    .filter(x=>x&&Number.isSafeInteger(Number(x.number))&&Number(x.number)>0&&x.status!=='inactive')
-    .map(toSource);
-  buildScholars();
-  render();
-  if(!SOURCES.length){
-    count.textContent='Quellen konnten nicht geladen werden';
-    empty.textContent='Die Quellenübersicht konnte nicht geladen werden. Bitte erneut versuchen oder einen bekannten Q-Link direkt öffnen.';
-    const retry=document.createElement('button');retry.type='button';retry.className='ql-reset';retry.textContent='Erneut laden';retry.addEventListener('click',loadSources);
-    empty.appendChild(document.createElement('br'));empty.appendChild(retry);empty.style.display='block';
-  }else if(usedFallback){
-    activeInfo.textContent='Gesicherte Quellenliste · Offline-Fallback';
+  if (data) useSourceRegistry(data, 'network');
+  if (!SOURCES.length) {
+    count.textContent = 'Quellen konnten nicht geladen werden';
+    empty.textContent = 'Die Quellenübersicht konnte nicht geladen werden. Bitte erneut versuchen oder einen bekannten Q-Link direkt öffnen.';
+    const retry=document.createElement('button');
+    retry.type='button';retry.className='ql-reset';retry.textContent='Erneut laden';
+    retry.addEventListener('click',loadSources);
+    empty.appendChild(document.createElement('br'));
+    empty.appendChild(retry);empty.style.display='block';
+  } else if (!data) {
+    activeInfo.textContent = 'Gesicherte Quellenliste · Offline-Fallback';
   }
 }
+
 document.addEventListener('click',async e=>{const tab=e.target.closest('[data-cat]');if(tab){activeCategory=tab.dataset.cat;tabs.querySelectorAll('.ql-tab').forEach(b=>b.classList.toggle('is-active',b===tab));render();return;}const copy=e.target.closest('[data-copy]');if(copy){const url=new URL(copy.dataset.copy,location.origin).href;try{await navigator.clipboard.writeText(url);copy.textContent='Kopiert';}catch(_){copy.textContent=url;}setTimeout(()=>copy.textContent='Link kopieren',1400);}});
 search.addEventListener('input',e=>{activeQuery=e.target.value;render();});
 scholar.addEventListener('change',e=>{activeScholar=e.target.value;render();});
