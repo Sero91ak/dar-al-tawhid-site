@@ -521,8 +521,13 @@
     });
   }
 
+  /* Do not force reflow/restart the wordmark on every tab return:
+     this previously caused a visible frame jump on iOS. */
+  var initialHomeMotionStarted=false;
   function armHome(){
     lockHomeGeometry(false);
+    if(initialHomeMotionStarted)return;
+    initialHomeMotionStarted=true;
     requestAnimationFrame(function(){
       requestAnimationFrame(restartHomeMotion);
     });
