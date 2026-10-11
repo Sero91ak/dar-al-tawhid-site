@@ -115,8 +115,10 @@ def analysis_complete(result):
         return False
     if shape.get("completed") is not True or shape.get("commandExitCode") not in (0, 1):
         return False
-    views = (shape.get("report") or {}).get("views")
-    fixed = shape.get("report") or {}
+    fixed = shape.get("report")
+    if not isinstance(fixed, dict):
+        return False
+    views = fixed.get("views")
     if not isinstance(views, dict) or not {
         "front", "three_quarter_uncalibrated", "right_side", "back", "left_side"
     }.issubset(views):
