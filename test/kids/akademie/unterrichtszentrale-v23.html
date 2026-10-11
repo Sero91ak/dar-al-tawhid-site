@@ -67,7 +67,7 @@ input,select,textarea,button{font:inherit;min-height:44px;border-radius:10px;bor
 const CATALOG_URL="/test/academy/redaktion-katalog-v1.json", STORE="dar_kids_editor_notes_v23", ANCHOR="dar_kids_editor_start_monday_v23";
 const $=id=>document.getElementById(id), names={akhlaq:"Akhlāq",adab:"Adab",fiqh:"Fiqh",aqidah:"ʿAqīdah"};
 const dayIndex={Montag:0,Dienstag:1,Mittwoch:2,Donnerstag:3,Freitag:4,Samstag:5,Sonntag:6};
-let data=null,filtered=[],shown=20,activeEntry=null,notes={};
+let data=null,filtered=[],shown=20,activeEntry=null,notes={},selectedWeekOnly=null;
 try{const n=JSON.parse(localStorage.getItem(STORE)||"{}");if(n&&typeof n==="object"&&!Array.isArray(n))notes=n;const a=localStorage.getItem(ANCHOR)||"";if(a)$("startMonday").value=a}catch(_){}
 function el(tag,text,cl){const x=document.createElement(tag);if(text!=null)x.textContent=String(text);if(cl)x.className=cl;return x}
 function set(id,value){$(id).textContent=String(value)}
@@ -86,6 +86,7 @@ else{cell.appendChild(el("span",d.mode==="review"?"Wiederholen und vertiefen":"F
 if($("startMonday").value)cell.appendChild(el("em",dateCell(wk,d.day)));$("weekgrid").appendChild(cell)});
 }
 function matches(e){
+if(selectedWeekOnly!==null && e.week!==selectedWeekOnly)return false;
 const q=$("search").value.trim().toLocaleLowerCase("de"),st=$("status").value,subject=$("subject").value,age=$("age").value,ws=$("weekSubject").value;
 if(q&&!([e.id,e.title,e.hadith?.source,e.quran?.label,e.topic,e.goal,e.slot].join(" ").toLocaleLowerCase("de").includes(q)))return false;
 if(st==="im-code"&&e.type!=="catalog")return false;
@@ -130,7 +131,7 @@ if(e.codeIntegratedCommit){const a=el("a","GitHub-Codeintegration vom "+e.codeIn
 const n=notes[String(e.slot)]||{};$("noteText").value=n.text||"";$("noteDate").value=n.targetDate||"";set("noteFeedback",n.savedAt?"Lokal notiert: "+n.savedAt:"Noch keine lokale Notiz.");$("detail").showModal();
 }
 function exportFile(name,mime,body){const a=el("a");const url=URL.createObjectURL(new Blob([body],{type:mime}));a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
-function csvVal(v){return '"'+String(v==null?"":v).replace(/"/g,'""')+'"'}
+function csvVal(v){let s=String(v==null?"":v);if(/^[\s\t]*[=+\-@]/.test(s))s="\u0027"+s;return '"' + s.replace(/"/g,'""') + '"'}
 function csvExport(){if(!data)return;const cols=["Unterrichtsplatz","Woche","Wochentag","Zyklusdatum (Plan)","Fach","Titel","ID","Im Code","Erstellt am","Codeintegration","Test-App veröffentlicht","Besucher-App veröffentlicht","Quran","Hadith","Quellenprüfdatum","Audio","Lokale Notiz"];
 const rows=[cols.join(";")].concat(data.entries.map(e=>[e.slot,e.week,e.day,dayDate(e)?deDate(e):"",names[e.subject]||"",e.title,e.id||"",e.type==="catalog"?"ja":"nein",e.createdAt||"",e.codeIntegratedAt||"",e.testPublishedAt||"",e.visitorPublishedAt||"",e.quran?.label||"",e.hadith?.source||"",e.sourceCheckedAt||"",e.voiceStatus||"",notes[e.slot]?.text||""].map(csvVal).join(";")));
 exportFile("dar-kids-unterrichtsplan-52-wochen.csv","text/csv;charset=utf-8","\uFEFF"+rows.join("\r\n"))}
@@ -140,13 +141,10 @@ function mondayCheck(){const val=$("startMonday").value;if(!val){$("startMonday"
 $("startMonday").addEventListener("change",()=>{if(!mondayCheck())return;try{localStorage.setItem(ANCHOR,$("startMonday").value)}catch(_){}renderWeek();renderCards(true)});
 $("cycle").addEventListener("change",()=>{renderWeek();renderCards(true)});
 $("week").addEventListener("change",renderWeek);
-$("showWeek").addEventListener("click",()=>{if(!mondayCheck())return;const wk=Number($("week").value);$("status").value="";$("search").value="";filtered=data.entries.filter(e=>e.week===wk);shown=20;
-$("cards").replaceChildren();$("weekSubject").value&&($("subject").value=$("weekSubject").value);
-renderCards(true);$("unterricht").scrollIntoView({behavior:"smooth"});$("search").placeholder="Aktuell: Woche "+wk+" (Wochenfilter über Auswahl oben)";
-});
+$("showWeek").addEventListener("click",()=>{if(!data||!mondayCheck())return;selectedWeekOnly=Number($("week").value);$("search").value="";$("status").value="";renderCards(true);$("unterricht").scrollIntoView({behavior:"smooth"});});
 ["search","status","subject","age","weekSubject"].forEach(k=>$(k).addEventListener(k==="search"?"input":"change",()=>renderCards(true)));
 $("loadMore").addEventListener("click",()=>{shown+=20;renderCards(false)});
-$("reset").addEventListener("click",()=>{["search","status","subject","age","weekSubject"].forEach(k=>$(k).value="");$("search").placeholder="Ṣidq, Fiqh, Gebet, Ḥadīṯ …";renderCards(true)});
+$("reset").addEventListener("click",()=>{selectedWeekOnly=null;["search","status","subject","age","weekSubject"].forEach(k=>$(k).value="");$("search").placeholder="Ṣidq, Fiqh, Gebet, Ḥadīṯ …";renderCards(true)});
 $("closeDetail").addEventListener("click",()=>$("detail").close());
 $("noteForm").addEventListener("submit",e=>{e.preventDefault();if(!activeEntry)return;const k=String(activeEntry.slot),t=$("noteText").value.trim(),d=$("noteDate").value;
 if(t||d)notes[k]={text:t,targetDate:d,savedAt:new Date().toISOString()};else delete notes[k];
