@@ -83,7 +83,7 @@ for(const [index,html] of htmls.entries()){
  // The same script parsing safeguard applies to both without coupling their releases.
  if(index===0){
   assert.ok(html.includes('curriculum-v2.js?v=20261010-09'));
-  assert.ok(html.includes('data-preview-release="V16.0-voicepreview-20261010"'));
+  assert.ok(html.includes('data-preview-release="V17.0-voice-sandbox-20261011"'));
   assert.ok(html.includes('id="subjectReviewGrid"'));
   assert.ok(html.includes('function dailyLesson()'));
   assert.ok(html.includes('persist("help",true)'));
