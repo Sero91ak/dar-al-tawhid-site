@@ -61,6 +61,8 @@ jobs:
           node --check kids/mein-gebet/rigging/verify-animation-rig-freeze.cjs
           node --check kids/mein-gebet/rigging/validate-completion-gates.cjs
           node --check kids/mein-gebet/rigging/test-completion-gates.cjs
+          node --check kids/mein-gebet/rigging/verify-original-reference-assets.cjs
+          node --check kids/mein-gebet/rigging/test-original-reference-assets.cjs
       - name: Validate all synthetic structure and release gates
         run: |
           node kids/mein-gebet/rigging/validate-glb.test.cjs
@@ -73,6 +75,8 @@ jobs:
           node kids/mein-gebet/rigging/test-animation-rig-freeze.cjs
           node kids/mein-gebet/rigging/validate-completion-gates.cjs
           node --test kids/mein-gebet/rigging/test-completion-gates.cjs
+          node kids/mein-gebet/rigging/verify-original-reference-assets.cjs
+          node --test kids/mein-gebet/rigging/test-original-reference-assets.cjs
       - name: Exercise deterministic camera diagnostic tests
         run: |
           python kids/mein-gebet/rigging/test_three_quarter_camera_diagnostic.py
