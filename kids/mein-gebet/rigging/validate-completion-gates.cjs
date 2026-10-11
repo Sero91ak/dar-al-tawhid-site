@@ -60,6 +60,13 @@ function audit(doc) {
    if(m.approved===true) {
      if(m.status!=="approved")fail("Approval status mismatch on "+m.id);
      if(n&&milestones[n-1]?.approved!==true)fail("Cannot approve "+m.id+" before predecessor");
+     if(m.id==="01-original-assets"&&originals.boy?.actualBinaryRead!==true)
+        fail("First milestone cannot approve without real original V7.7 bytes");
+     if(m.id==="02-original-boy"&&originals.boy?.actual3dIdentityApproved!==true)
+        fail("Unapproved original boy cannot pass identity gate");
+     if(m.id==="03-original-girl"&&(originals.girl?.actualOriginalGlbPresent!==true||
+        originals.girl?.actual3dIdentityApproved!==true))
+        fail("Unapproved original girl cannot pass identity gate");
      const available=new Map((Array.isArray(m.evidence)?m.evidence:[]).filter(e=>
         e&&typeof e.type==="string"&&e.verified===true&&typeof e.ref==="string"&&e.ref.length>10&&
         (e.sha256===undefined||SHA256.test(e.sha256))).map(e=>[e.type,e]));
