@@ -83,7 +83,7 @@ for(const [index,html] of htmls.entries()){
  // The same script parsing safeguard applies to both without coupling their releases.
  if(index===0){
   assert.ok(html.includes('curriculum-v2.js?v=20261010-09'));
-  assert.ok(html.includes('data-preview-release="V16.0-voicepreview-20261010"'));
+  assert.ok(html.includes('data-preview-release="V17.0-voice-sandbox-20261011"'));
   assert.ok(html.includes('id="subjectReviewGrid"'));
   assert.ok(html.includes('function dailyLesson()'));
   assert.ok(html.includes('persist("help",true)'));
@@ -132,3 +132,6 @@ assert.equal(allSlots.filter(x=>x.mode==="new"&&x.lessonId).length,34);
 assert.equal(allSlots.filter(x=>x.mode==="new"&&!x.lessonId).length,174);
 assert.ok(allSlots.filter(x=>x.mode==="new"&&!x.lessonId).every(x=>x.status==="awaiting-authentic-source-and-content-review"));
 console.log("KIDS ACADEMY V9.1 VERIFIED: 34 catalog lessons, 208 yearly new-lesson slots, 174 gated pending sources, weekly 4/2/1, 454 voice texts.");
+
+// Creator voice preview must never overwrite or impersonate a real child account.
+require("./test-kids-academy-creator-voice-sandbox-v17.js");
