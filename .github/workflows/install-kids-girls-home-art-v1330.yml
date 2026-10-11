@@ -1,0 +1,68 @@
+name: Install Kids Girls Home Background v1330
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/install-kids-girls-home-art-v1330.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-girls-home-art-v1330
+  cancel-in-progress: false
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout approved Kids app
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: true
+          filter: blob:none
+
+      - name: Download the approved text-free girls background
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p kids/assets/kids-home-girls-v1330
+          curl --fail --location --retry 3 --connect-timeout 20 --max-time 120 \
+            "https://at.adobe.com/zT91dTnFov32pHV1" \
+            --output /tmp/kids-girls-bg-source.png
+          test "$(wc -c </tmp/kids-girls-bg-source.png)" -gt 50000
+          file /tmp/kids-girls-bg-source.png
+          python -m pip install --quiet Pillow
+          python - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+          source=Path("/tmp/kids-girls-bg-source.png")
+          with Image.open(source) as im:
+              im.load()
+              if im.width<500 or im.height<900:
+                  raise RuntimeError("Background image size is invalid")
+              im=im.convert("RGB")
+              output=Path("kids/assets/kids-home-girls-v1330/mosque-rose-night.webp")
+              im.save(output,"WEBP",quality=86,method=6)
+              print(f"Original girls artwork installed: {im.width}x{im.height}, {output.stat().st_size} bytes")
+          PY
+
+      - name: Commit local permanently hosted image to main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "DAR Kids Artwork Bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add kids/assets/kids-home-girls-v1330/mosque-rose-night.webp
+          if git diff --cached --quiet; then echo "Asset already imported"; exit 0; fi
+          git commit -m "kids: import permanently hosted girls home artwork"
+          for attempt in 1 2 3 4 5; do
+            git pull --rebase origin main
+            if git push origin HEAD:main; then exit 0; fi
+            sleep 3
+          done
+          exit 1
