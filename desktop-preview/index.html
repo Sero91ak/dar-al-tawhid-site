@@ -2960,6 +2960,8 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
   }
   document.querySelectorAll("#mainNav [data-page]").forEach(function(a){a.classList.toggle("active",a.getAttribute("data-page")===key)});
   initReveal();
+  // Keep the public library readable if Safari delays IntersectionObserver callbacks.
+  if(key==="bibliothek")root.querySelectorAll(".reveal").forEach(function(el){el.classList.add("is-visible")});
   if(key==="quran")initBook();
   if(document.getElementById("prayerRiver"))initPrayerTicker();
   if(key==="zakat")initZakat();
