@@ -15,6 +15,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 jobs:
   verify:
@@ -44,6 +45,33 @@ jobs:
             fi
             rm -f "$headfile" "$out"
           done
+      - name: Read-only production deploy history
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json,os,urllib.request
+          root="https://api.github.com/repos/"+os.environ["GITHUB_REPOSITORY"]
+          url=root+"/actions/workflows/cloudflare-pages-deploy.yml/runs?branch=main&per_page=12"
+          request=urllib.request.Request(url,headers={
+            "Accept":"application/vnd.github+json",
+            "Authorization":"Bearer "+os.environ["GH_TOKEN"],
+            "User-Agent":"dar-q-source-diagnostic"})
+          try:
+            data=json.load(urllib.request.urlopen(request,timeout=20))
+            for x in data.get("workflow_runs",[]):
+              print("DEPLOY",x.get("id"),x.get("created_at"),x.get("head_sha"),x.get("status"),x.get("conclusion"),x.get("event"))
+              if x.get("conclusion") not in ("success",None):
+                jobs_url=x.get("jobs_url")
+                if jobs_url:
+                  jobs=json.load(urllib.request.urlopen(urllib.request.Request(jobs_url,headers={"Accept":"application/vnd.github+json","Authorization":"Bearer "+os.environ["GH_TOKEN"],"User-Agent":"dar-q-diagnostic"}),timeout=20))
+                  for j in jobs.get("jobs",[]):
+                    for st in j.get("steps",[]):
+                      if st.get("conclusion")=="failure": print("FAILED STEP:",j.get("name"),st.get("name"))
+          except Exception as exc: print("DIAGNOSTIC ERROR",type(exc).__name__,str(exc))
+          PY
       - name: Validate Q source-library synchronization and all source pages
         shell: bash
         run: |
