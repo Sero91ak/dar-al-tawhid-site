@@ -1,27 +1,32 @@
-/* Home-only social footer regression: visitor and test must not append a
- * second scroll-length footer to inner routes. Run with Node 20. */
+/* Home-only social footer regression for the current app HTML. Node 20, no AI review. */
 "use strict";
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
 const html = fs.readFileSync(path.resolve(__dirname, "../index.html"), "utf8");
-function count(s){return html.split(s).length - 1;}
-const marker = "DAR_HOME_ONLY_SOCIAL_FOOTER_V1344";
-assert.equal(count(marker),1,"Home-only footer fix must exist exactly once");
-assert.equal(count('<footer class="footer">'),1,"There must be one shared app footer");
-assert.equal(count('by Serhat Abu Malik'),1,"Home signature must be preserved");
-assert.match(html,/<footer class="footer">[\\s\\S]*?Telegram[\\s\\S]*?WhatsApp[\\s\\S]*?Instagram[\\s\\S]*?by Serhat Abu Malik[\\s\\S]*?<\\/footer>/,
-  "Original social buttons and signature must stay intact");
-assert.match(html,/function isHomeRoute\\(route\\)\\{return String\\(route\\?\\.view\\|\\|"home"\\)==="home"\\}/,
-  "Home must be identified by current route, not bottom-nav section");
-assert.match(html,/document\\.body\\.classList\\.toggle\\("is-home-route",isHome\\)/,
-  "Route changes must synchronize home-only footer visibility");
-const css = html.match(/<style id="dar-home-only-social-footer-v1344">([\\s\\S]*?)<\\/style>/);
-assert.ok(css,"Footer-only rule must be a scoped style");
-assert.match(css[1],/body:not\\(\\.is-home-route\\) > \\.app > footer\\.footer/);
-assert.match(css[1],/display:none\\s*!important/,"Non-home footer must leave layout flow");
-assert.match(css[1],/margin:0\\s*!important/,"No stale footer margin");
-assert.match(css[1],/padding:0\\s*!important/,"No stale footer padding");
-assert.doesNotMatch(css[1],/\\#bottomNav|\\.bottom-nav/,"Do not modify fixed tab navigation");
-assert.doesNotMatch(css[1],/\\#appView\\.view\\s*\\{|\\#appView\\s*\\{/,"Do not remove navigation safe clearance from content");
-console.log("OK: shared footer is kept only on Startseite; all inner routes lose footer spacing; nav unaffected");
+const count = (fragment) => html.split(fragment).length - 1;
+assert.equal(count("DAR_HOME_ONLY_SOCIAL_FOOTER_V1344"), 1, "Exactly one footer repair marker");
+assert.equal(count('<footer class="footer">'), 1, "Exactly one shared brand footer");
+const first = html.indexOf('<footer class="footer">');
+const last = html.indexOf("</footer>", first);
+assert.ok(first > 0 && last > first, "Shared footer must close normally");
+const footer = html.slice(first, last);
+for (const label of ["DĀR AL TAWḤĪD", "Folgt für mehr Wissen", "Telegram", "WhatsApp", "Instagram", "by Serhat Abu Malik"]) {
+  assert.ok(footer.includes(label), "Home content missing: " + label);
+}
+assert.ok(html.includes('function isHomeRoute(route){return String(route?.view||"home")==="home"}'),
+  "Home route determination must remain exact");
+assert.ok(html.includes('document.body.classList.toggle("is-home-route",isHome)'),
+  "Route changes must update the existing body class");
+const style = html.match(/<style id="dar-home-only-social-footer-v1344">([\s\S]*?)<\/style>/);
+assert.ok(style, "Explicit home-only stylesheet must exist");
+const css = style[1];
+assert.ok(css.includes("body:not(.is-home-route) > .app > footer.footer"), "Only non-home footer hidden");
+assert.match(css, /display\s*:\s*none\s*!important/i, "Footer must leave the layout flow");
+assert.match(css, /margin\s*:\s*0\s*!important/i, "No residual footer margin");
+assert.match(css, /padding\s*:\s*0\s*!important/i, "No residual footer padding");
+assert.ok(!css.includes("#bottomNav") && !css.includes(".bottom-nav"),
+  "Fixed bottom nav must remain untouched");
+assert.ok(!css.includes("#appView") && !css.includes("safe-area-inset-bottom"),
+  "Existing reader and fixed-nav safe clearance must remain untouched");
+console.log("OK: branded footer remains on Startseite only; inner routes release its scroll space");
