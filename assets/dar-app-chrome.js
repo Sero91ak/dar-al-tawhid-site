@@ -5,6 +5,52 @@
     if(!el||!el.closest)return false;
     return !!el.closest("input,textarea,select,[contenteditable='true'],[contenteditable=''],[data-copy],[data-selectable],.allow-copy");
   }
+  /* DAR_TOUCH_INTENT_GUARD_V1
+     Navigation in the adult shell uses pointerup for fast activation. A finger
+     that is scrolling/brushing a nav card must never activate it on release.
+     Preserve immediate, deliberate taps and all normal scrolling. */
+  var navPointer=null,dragClickTarget=null,dragClickUntil=0;
+  function navHit(el){
+    return el&&el.closest?el.closest("[data-nav],[data-bottom-nav]"):null;
+  }
+  document.addEventListener("pointerdown",function(ev){
+    if(ev.pointerType!=="touch"&&ev.pointerType!=="pen")return;
+    if(ev.isPrimary===false){navPointer=null;return;}
+    navPointer={id:ev.pointerId,x:ev.clientX,y:ev.clientY,moved:false};
+  },{capture:true,passive:true});
+  document.addEventListener("pointermove",function(ev){
+    if(!navPointer||ev.pointerId!==navPointer.id)return;
+    var dx=ev.clientX-navPointer.x,dy=ev.clientY-navPointer.y;
+    if(dx*dx+dy*dy>144)navPointer.moved=true;
+  },{capture:true,passive:true});
+  document.addEventListener("pointerup",function(ev){
+    if(!navPointer||ev.pointerId!==navPointer.id)return;
+    var dx=ev.clientX-navPointer.x,dy=ev.clientY-navPointer.y;
+    var moved=navPointer.moved||dx*dx+dy*dy>144;
+    navPointer=null;
+    if(!moved)return;
+    var target=navHit(ev.target);
+    if(!target)return;
+    dragClickTarget=target;
+    dragClickUntil=performance.now()+800;
+    if(ev.cancelable)ev.preventDefault();
+    ev.stopImmediatePropagation();
+  },{capture:true,passive:false});
+  document.addEventListener("pointercancel",function(ev){
+    if(navPointer&&ev.pointerId===navPointer.id)navPointer=null;
+  },{capture:true,passive:true});
+  document.addEventListener("click",function(ev){
+    if(!dragClickTarget||performance.now()>dragClickUntil){
+      dragClickTarget=null;return;
+    }
+    if(ev.isTrusted===false||ev.detail===0)return;
+    var target=navHit(ev.target);
+    if(target&&(target===dragClickTarget||dragClickTarget.contains(target)||target.contains(dragClickTarget))){
+      dragClickTarget=null;
+      ev.preventDefault();
+      ev.stopImmediatePropagation();
+    }
+  },true);
   document.addEventListener("gesturestart",function(ev){ev.preventDefault()},{passive:false,capture:true});
   document.addEventListener("gesturechange",function(ev){ev.preventDefault()},{passive:false,capture:true});
   document.addEventListener("gestureend",function(ev){ev.preventDefault()},{passive:false,capture:true});
