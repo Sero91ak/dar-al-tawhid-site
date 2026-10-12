@@ -4,8 +4,11 @@ on:
     branches: [main]
     paths:
       - 'assets/dar-app-chrome.js'
+      - 'assets/adaptive-layout.js'
+      - 'assets/fold-split.js'
       - 'ios/DarAlTawhid/**'
       - 'scripts/adult-touch-navigation-guard-test.cjs'
+      - 'scripts/adult-layout-performance-test.cjs'
       - '.github/workflows/adult-touch-navigation-guard.yml'
   push:
     branches: [main]
@@ -24,4 +27,7 @@ jobs:
       - name: Adult JS navigation syntax and touch intent
         run: |
           node --check assets/dar-app-chrome.js
+          node --check assets/adaptive-layout.js
+          node --check assets/fold-split.js
           node scripts/adult-touch-navigation-guard-test.cjs
+          node scripts/adult-layout-performance-test.cjs
