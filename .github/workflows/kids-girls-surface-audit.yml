@@ -1,0 +1,21 @@
+name: Audit all Girls Kids main-tab surfaces
+on:
+  push:
+    branches: [preview/kids-ipad-qa-20261012]
+    paths: [".github/workflows/kids-girls-surface-audit.yml"]
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - run: |
+          npm ci --ignore-scripts
+          npm install --no-save --ignore-scripts playwright@1.56.1
+          npx playwright install chromium
+      - run: node kids/tools/audit-girls-surface-v1348.cjs
