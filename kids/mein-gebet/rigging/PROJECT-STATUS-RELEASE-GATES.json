@@ -183,6 +183,32 @@
     "zeroAreaTriangleRatioGateCommitted": true,
     "geometryCountsOnlyNondegenerateTriangles": true,
     "geometrySpatialThicknessGuardCommitted": true,
-    "rotatedBillboardRealGLBIntegrationTestPassed": true
+    "rotatedBillboardRealGLBIntegrationTestPassed": true,
+    "girlV13Research": {
+      "date": "2026-10-12",
+      "sha256": "3447a84a522c1a007bea3e09b59dfc0830576a198e740629070f096f95ec5547",
+      "bytes": 2730300,
+      "meshes": 213,
+      "triangles": 198328,
+      "sixRealCameraAngles": [
+        0,
+        45,
+        90,
+        180,
+        270,
+        315
+      ],
+      "independentlyConstructedGirlGLB": true,
+      "newSculptedCowl": true,
+      "originalVisualIdentityApproved": false,
+      "actualRigApproved": false,
+      "hasSkin": false,
+      "prayerAnimations": 0,
+      "glbGoogleDriveUploaded": false,
+      "previewDriveUploaded": true,
+      "driveFolder": "https://drive.google.com/drive/folders/1I-xURIysEvsueitu4pZ6Jq4HokREwPZK",
+      "reason": "Container session expired during binary Drive upload; source and GLB only in ephemeral runtime. Do not claim persistent binary backup.",
+      "productionApproved": false
+    }
   }
 }
