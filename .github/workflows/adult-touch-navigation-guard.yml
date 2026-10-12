@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths:
       - 'assets/dar-app-chrome.js'
+      - 'assets/dar-app-chrome.css'
       - 'index.html'
       - 'scripts/adult-footer-route-guard.cjs'
       - 'assets/adaptive-layout.js'
@@ -17,6 +18,7 @@ on:
     branches: [main]
     paths:
       - 'assets/dar-app-chrome.js'
+      - 'assets/dar-app-chrome.css'
       - 'index.html'
       - 'scripts/adult-footer-route-guard.cjs'
       - 'ios/DarAlTawhid/**'
