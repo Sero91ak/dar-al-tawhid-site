@@ -131,7 +131,7 @@
    The normal bottom dock stays available as a user choice. */
 (function(){
   try{
-    if(!window.location || !/^(\\/|\\/index\\.html)$/.test(window.location.pathname))return;
+    if(!window.location || (window.location.pathname!=="/" && window.location.pathname!=="/index.html"))return;
     if(window.__darVisitorDuoSideNavLoading)return;
     window.__darVisitorDuoSideNavLoading=true;
     var css=document.createElement("link");
