@@ -32,6 +32,33 @@ jobs:
           node-version: '22'
       - name: Check code syntax
         run: node --check scripts/dar-daily-release-dry-run.cjs
+      - name: Public q41 availability probe (read-only; no push; advisory)
+        shell: bash
+        continue-on-error: true
+        run: |
+          set -u
+          BASE="https://dar-al-tawhid.de"
+          POST="2026-10-12-quran-24-22-vergeben-und-nachsicht.md"
+          URLS=("/q/41/" "/content/posts/$POST" "/content/posts/posts-index.json")
+          ok=0
+          echo "### Q41 live availability (advisory)" >> "$GITHUB_STEP_SUMMARY"
+          for p in "${URLS[@]}"; do
+            tmp="$(mktemp)"
+            status="$(curl -sSL --connect-timeout 10 --max-time 25 -H 'Cache-Control: no-cache' -o "$tmp" -w '%{http_code}' "$BASE$p?cb=${GITHUB_RUN_ID}" || true)"
+            valid=0
+            if [ "$status" = "200" ]; then
+              case "$p" in
+                /q/41/) grep -q 'Sūrat an-Nūr 24:22\|an-Nūr 24:22' "$tmp" && grep -q 'qsource-page' "$tmp" && valid=1 ;;
+                */posts-index.json) grep -q "$POST" "$tmp" && valid=1 ;;
+                *) grep -q 'quran-24-22-vergeben-und-nachsicht-20261012' "$tmp" && grep -q '/q/41/' "$tmp" && valid=1 ;;
+              esac
+            fi
+            echo "- `$p`: HTTP $status, expected content: $([ "$valid" = "1" ] && echo present || echo MISSING)" >> "$GITHUB_STEP_SUMMARY"
+            if [ "$valid" = "1" ]; then ok=$((ok+1)); fi
+            rm -f "$tmp"
+          done
+          echo "- Verified resources: $ok/3. No OneSignal request made." >> "$GITHUB_STEP_SUMMARY"
+          if [ "$ok" = "3" ]; then echo "PUBLIC_Q41_PROBE: LIVE_VERIFIED"; else echo "::warning::PUBLIC_Q41_PROBE: NOT VERIFIED ($ok/3)"; fi
       - name: Dry-run publisher (no GitHub writes or pushes)
         run: node scripts/dar-daily-release-dry-run.cjs
       - name: Validate previously published real adult requests - CHECK ONLY
