@@ -38,16 +38,44 @@
       });
     }catch(e){}
   }
+  /* Avoid scheduling three full-document brand scans for every unrelated
+     childList mutation (Qurʾān, feed, players and progress frequently update). */
+  var sourceLineFramePending=false;
+  var sourceLineFollowUp=0;
   function scheduleSourceLine(){
-    syncSourceLine();
-    setTimeout(syncSourceLine,80);
-    setTimeout(syncSourceLine,360);
+    if(!sourceLineFramePending){
+      sourceLineFramePending=true;
+      requestAnimationFrame(function(){
+        sourceLineFramePending=false;
+        syncSourceLine();
+      });
+    }
+    if(!sourceLineFollowUp){
+      sourceLineFollowUp=setTimeout(function(){
+        sourceLineFollowUp=0;
+        syncSourceLine();
+      },220);
+    }
   }
   document.addEventListener("DOMContentLoaded",scheduleSourceLine);
   window.addEventListener("hashchange",scheduleSourceLine);
   window.addEventListener("pageshow",scheduleSourceLine);
   document.addEventListener("dar:view-rendered",scheduleSourceLine);
   try{
-    new MutationObserver(function(){scheduleSourceLine()}).observe(document.documentElement,{childList:true,subtree:true});
+    new MutationObserver(function(records){
+      for(var i=0;i<records.length;i++){
+        var r=records[i],parent=r.target&&r.target.nodeType===1?r.target:r.target&&r.target.parentElement;
+        if(parent&&parent.closest&&parent.closest(".brand-kicker-row,.dar-library-brandbar__meta")){
+          scheduleSourceLine();return;
+        }
+        for(var j=0;j<r.addedNodes.length;j++){
+          var n=r.addedNodes[j];
+          if(n.nodeType===1&&(
+            n.matches(".brand-kicker-row,.brand-kicker-row small,.dar-library-brandbar__meta")||
+            n.querySelector(".brand-kicker-row small,.dar-library-brandbar__meta")
+          )){scheduleSourceLine();return;}
+        }
+      }
+    }).observe(document.documentElement,{childList:true,subtree:true});
   }catch(e){}
 })();
