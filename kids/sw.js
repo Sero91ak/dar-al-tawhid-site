@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1345";
+const CACHE_NAME="dar-al-tawhid-kids-v1346";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 // KIDS_V202_DOWNLOAD_TABS_RELEASE_TRIGGER_20261010: detail-only offline controls; manifest V202 synchronized.
@@ -71,7 +71,7 @@ const CORE_PRECACHE=[
   "/kids/data/story-hub.json?v=7",
   "/kids/deen-learning-v1199.css?v=1199",
   "/kids/deen-lessons.css?v=2",
-  "/kids/deen-lessons.js?v=7",
+  "/kids/deen-lessons.js?v=8",
   "/kids/global-detail-dock-v1247.css?v=1297",
   "/kids/girls-profile-deep-fix-v1339.css?v=1339",
   "/kids/girls-profile-reader-v1340.css?v=1340",
