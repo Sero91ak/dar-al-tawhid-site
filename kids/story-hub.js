@@ -136,30 +136,6 @@ function ensureUi(){
   document.addEventListener("click",e=>{const nav=e.target.closest?.(".nav-btn[data-target]");if(nav&&nav.dataset.target!=="stories"){setReadMode("closed",{restore:false});stopAudio(true);active=null;renderMini()}},true);
   $("#ghRead")?.addEventListener("pointerdown",()=>{manualReadUntil=performance.now()+5000},{passive:true});
   $("#ghRead")?.addEventListener("wheel",()=>{manualReadUntil=performance.now()+5000},{passive:true});
-  installGestures();
-}
-
-function installGestures(){
-  const world=$("#ghWorld"),player=$("#ghPlayer");if(!world||!player)return;
-  const bind=(el,onBack,onDown)=>{
-    let sx=0,sy=0,lx=0,ly=0,start=0,edge=false,blocked=false;
-    el.addEventListener("pointerdown",e=>{
-      if(e.pointerType==="mouse"&&e.button!==0)return;
-      const target=e.target instanceof Element?e.target:null;
-      blocked=!!target?.closest("button,a,input,textarea,select,[role='slider'],#ghRead");
-      sx=lx=e.clientX;sy=ly=e.clientY;start=performance.now();
-      edge=!blocked&&e.clientX<=Math.max(36,Math.min(58,innerWidth*.12));
-    },{passive:true});
-    el.addEventListener("pointermove",e=>{lx=e.clientX;ly=e.clientY},{passive:true});
-    el.addEventListener("pointerup",e=>{
-      if(blocked)return;
-      const x=e.clientX??lx,y=e.clientY??ly,dx=x-sx,dy=y-sy,dt=Math.max(1,performance.now()-start);
-      if(edge&&dx>Math.min(120,innerWidth*.24)&&Math.abs(dx)>Math.abs(dy)*1.3&&(dx/dt>.16||dx>160)){onBack?.();return}
-      const playerAtTop=el!==player||Number($("#ghPlayerScroll")?.scrollTop||0)<=4;
-      if(onDown&&playerAtTop&&dy>Math.min(150,innerHeight*.18)&&Math.abs(dy)>Math.abs(dx)*1.35&&(dy/dt>.18||dy>190))onDown();
-    },{passive:true});
-  };
-  bind(world,closeWorld,null);bind(player,minimizePlayer,minimizeAll);
 }
 
 function renderContinue(){
