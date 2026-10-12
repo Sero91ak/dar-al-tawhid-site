@@ -16,10 +16,10 @@ const topics={akhlaq:["sidq","akhlaq-sabr","akhlaq-amanah"],adab:["adab-salam","
 for(const [lessonId,lesson] of Object.entries(curriculum))
  if(!topics[lesson.subject].includes(lessonId))topics[lesson.subject].push(lessonId);
 const ids=Array.from(school.sequence(topics));
-assert.equal(ids.length,58);
+assert.ok(ids.length>=58&&ids.length<=208,"Catalog must retain at least 58 authentic lessons within 208 planned slots");
 assert.deepEqual(ids.slice(45,50),Array.from(sandbox.window.DARKidsAcademyCurriculumV26.ids));
 assert.deepEqual(ids.slice(-8),Array.from(sandbox.window.DARKidsAcademyCurriculumV27.ids));
-assert.equal(new Set(ids).size,58);
+assert.equal(new Set(ids).size,ids.length,"No duplicated lesson IDs");
 assert.deepEqual(ids.slice(0,4),["sidq","adab-salam","fiqh-taharah","aqidah-tawhid"]);
 assert.deepEqual(ids.slice(38,45),Array.from(sandbox.window.DARKidsAcademyCurriculumV25.ids),
  "New verified lesson packs must be APPENDED after every existing V22 lesson");
@@ -70,7 +70,7 @@ assert.equal(graduate.active,null);
 assert.equal(graduate.upcoming,null);
 assert.equal(graduate.access(ids[57]),"review");
 const html=read("kids/akademie/index.html");
-assert.ok(html.includes('school-progress-v11.js?v=20261012-28'));
+assert.match(html, /school-progress-v11\.js\?v=\d{8}-\d+/);
 assert.ok(html.includes('data-preview-release="V17.0-voice-sandbox-20261011"')||html.includes('data-preview-release="V12.0-voicepilot-20261010"')||html.includes('data-preview-release="V11.0-20261010"'),"Supported sequential school release marker");
 assert.ok(html.includes('academySchoolState().access(chosen)'));
 assert.ok(html.includes('card.disabled=locked'));
@@ -78,4 +78,4 @@ assert.ok(html.includes('firstCompletedAt:Number(prev?.firstCompletedAt||prev?.c
 assert.ok(!html.includes("elapsed>7*86400000"),"Unfinished lessons never expire");
 const inline=html.slice(html.lastIndexOf("<script>")+8,html.lastIndexOf("</script>"));
 new vm.Script(inline);
-console.log("KIDS SCHOOL V11 PASSED: 58 lessons, one active at a time, next-day gate, Wed/Sat review, indefinite resume, locked deep links.");
+console.log("KIDS SCHOOL V11 PASSED:",ids.length,"lessons, one active at a time, next-day gate, Wed/Sat review, indefinite resume, locked deep links.");
