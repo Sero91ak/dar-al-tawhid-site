@@ -214,7 +214,19 @@ html body:has(.app[data-gender="girl"]) #dlLibraryPage .dl-story-row{
     radial-gradient(circle at 95% 0%,var(--dl-card-shine),transparent 55%),
     linear-gradient(140deg,var(--dl-card-a),var(--dl-card-b))!important;
   border-color:var(--dl-card-border)!important;
-  box-shadow:inset 0 1px rgba(255,230,235,.07),0 9px 23px rgba(18,10,25,.15)!important;
+}
+/* Maintain visible interaction feedback without lift or separate arrows. */
+@media(hover:hover) and (pointer:fine){
+  html body:has(.app[data-gender="girl"]) #dlLibraryPage .dl-story-row:hover{
+    border-color:rgba(247,199,220,.56)!important;
+    box-shadow:0 0 0 1px rgba(244,189,214,.09),0 0 18px rgba(219,149,195,.11)!important;
+  }
+}
+html body:has(.app[data-gender="girl"]) #dlLibraryPage .dl-story-row:is(
+  :active,.is-kids-pressed,.kids-story-touch-glow,:focus-visible
+){
+  border-color:rgba(250,210,229,.76)!important;
+  box-shadow:0 0 0 1px rgba(249,207,225,.16),0 0 24px rgba(218,155,199,.17)!important;
 }
 html body:has(.app[data-gender="girl"]) #dlLibraryPage .dl-story-row .ms-row-visual::after{
   background:
@@ -229,5 +241,4 @@ html body:has(.app[data-gender="girl"]) #dlLibraryPage .dl-story-row .ms-rank{
   border-color:rgba(241,194,211,.47)!important;
   color:#ffe0d6!important;
 }
-/* Let the centralized, calm whole-card hover/pressed/focus glow continue
-   to win; this file changes only the resting state and content layout. */
+/* Interaction remains subtle and static for both profiles. */
