@@ -114,3 +114,33 @@ test("Girl V06 real geometry is backed up and still fails human likeness review"
  assert.equal(f.release.liveDeploy,false);
  assert.equal(audit(f).pass,true);
 });
+
+test("Girl V07-V09 actual mesh study rejects the angular V08 and cannot unlock girl",()=>{
+ const p=fixture().originals.girl.experimentalIndependent3DGeometricBlockout;
+ const q=JSON.parse(fs.readFileSync(path.join(__dirname,"GIRL-V07-V09-REAL-GLB-QUALITY-20261012.json"),"utf8"));
+ assert.equal(q.schemaVersion,1);
+ assert.equal(p.v07Sha256,q.vers[1].sha256);
+ assert.equal(p.v08Sha256,q.vers[2].sha256);
+ assert.equal(p.v09Sha256,q.vers[3].sha256);
+ assert.equal(p.v08Rejected,true);
+ assert.equal(q.vers[2].rejected,true);
+ assert.equal(p.v09Bytes,1510248);
+ assert.equal(p.v09Meshes,213);
+ assert.equal(p.v09Triangles,137532);
+ assert.equal(p.v09SixCameraViewsRendered,true);
+ assert.equal(p.v09GoogleDriveByteRoundTripSHA256Verified,true);
+ assert.equal(p.v09GirlStillNotOriginalIdentity,true);
+ assert.equal(p.v09GirlStillNotRigged,true);
+ assert.ok(q.vers[0].eyeBrowDistanceFromFaceMedianModelUnits>.07);
+ assert.ok(q.vers[3].browMaximumSignedOffsetModelUnits<.015);
+ assert.equal(q.vers[3].approved,false);
+ for(const [flag,val] of Object.entries(q.gates))assert.equal(val,false,flag+" must remain blocked");
+ const d=fixture();
+ assert.equal(d.originals.girl.actualOriginalGlbPresent,false);
+ assert.equal(d.originals.girl.actual3dIdentityApproved,false);
+ assert.equal(d.milestones[2].approved,false);
+ assert.equal(d.release.productionReady,false);
+ assert.equal(d.release.mergeMain,false);
+ assert.equal(d.release.liveDeploy,false);
+ assert.equal(audit(d).pass,true);
+});
