@@ -2383,3 +2383,17 @@ html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-scale-ro
   html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-sheet-card { padding-inline:11px!important; }
   html.is-quran-player-route #darQuranPlayer[data-v108-original="1"] .dqp-sheet-card .dqp-opt-list > .dqp-opt-verse {padding-inline:8px!important}
 }
+
+
+/* V1111 LIGHT SHEET ACCENT CONTRAST:
+   The original bronze #9E763E stays in decorative surfaces. Its small text
+   on light cream is below WCAG AA; darken only modal text to #805A27. */
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"][data-v11-ambient="day"] .dqp-sheet-card .dqp-sheet-head .dqp-hit,
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"][data-v11-ambient="day"] .dqp-sheet-card .dqp-opt.is-on,
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"][data-v11-ambient="day"] .dqp-sheet-card .dqp-opt-kicker,
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"][data-v11-ambient="day"] .dqp-sheet-card .dqp-layer-chip.is-on,
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"][data-v11-ambient="day"] .dqp-sheet-card .dqp-text-modes button.is-on,
+html.is-quran-player-route #darQuranPlayer[data-v108-original="1"][data-v11-ambient="day"] .dqp-sheet-card .dqp-scale-btn {
+  color:#805a27!important;
+  -webkit-text-fill-color:#805a27!important;
+}
