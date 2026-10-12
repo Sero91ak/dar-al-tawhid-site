@@ -22,6 +22,7 @@
 - Die vorhandene `updateChrome(route)`-Funktion setzt bei jeder Route die Body-Klasse `is-home-route` ausschließlich für `route.view === "home"`.
 - Neue CSS-Regel `body:not(.is-home-route) > .app > footer.footer { display:none!important; ... }`: auf allen Inner-Routen kein Footer und keine überzählige Footer-Höhe/Abstände, auf der Startseite **keine Änderung**. Das `#bottomNav` und dessen Safe-Area-/Scrollreserve werden nicht angefasst.
 - Keine Änderungen an funktionsbezogenen Teilen-/Quellbutton-Leisten in Beiträgen oder Qurʾān-Ansichten.
+- Vor Live-Freigabe manuell den tatsächlichen unteren Scrollabschluss auf mindestens `#home`, `#topics`, `#post/{id}`, `#quran`, `#quran-surah/1`, `#more`, `#duas`, Bibliotheks- und Detailrouten kontrollieren. Nur Footer-Leerraum entfernen; die Safe-Area für die fest positionierte Tab-Leiste darf nicht abgeschafft werden.
 - Getrennte PRs gemäß App-Lane-Schutz: Besucher-/iOS-Web-App #1071, Dar Test #1073. Nicht live. Statische Regressionstests `scripts/adult-footer-route-guard.cjs` bzw. `test/tests/test-home-footer-route-guard.cjs`, anschließend visuelle iPhone-/iPad-Prüfung.
 
 ## Weitere konkrete Risiken, für die eine Geräte- oder Browser-Profilierung fehlt
