@@ -1,0 +1,27 @@
+name: Adult Touch Navigation Guard
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'assets/dar-app-chrome.js'
+      - 'ios/DarAlTawhid/**'
+      - 'scripts/adult-touch-navigation-guard-test.cjs'
+      - '.github/workflows/adult-touch-navigation-guard.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'assets/dar-app-chrome.js'
+      - 'ios/DarAlTawhid/**'
+      - 'scripts/adult-touch-navigation-guard-test.cjs'
+jobs:
+  touch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Adult JS navigation syntax and touch intent
+        run: |
+          node --check assets/dar-app-chrome.js
+          node scripts/adult-touch-navigation-guard-test.cjs
