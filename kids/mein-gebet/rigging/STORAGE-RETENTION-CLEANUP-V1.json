@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "project": "DAR AL TAWHID KIDS Mein Gebet",
+  "rule": "Delete only individually proven redundant rejected generation artifacts, after two verified preserved copies of current model and protected sources. Never bulk-delete by version string without dependency examination.",
+  "protected": [
+    "Girl/boy ten original reference images and original reference ZIP + manifest + hashes",
+    "Any genuine recovered original 3D binary including boy V7.7 and its pin",
+    "Current model V13 and last stable fallback model V11 until true release/approved successor",
+    "All source scripts needed to regenerate rejected versions and reproducible gate/audit reports",
+    "All actual public assets, user accounts, learning progress, iOS builds, active dependencies"
+  ],
+  "eligibleForDeletion": [
+    "Explicitly rejected unapproved GLB geometry versions V08/V10/V12 once latest draft and fallback SHA roundtrip verified",
+    "Their redundant per-angle preview PNGs and six-angle contact JPGs, when original comparison composite and technical QA remain"
+  ],
+  "process": [
+    "Read actual current GitHub/Drive references and select exact file IDs, don't guess",
+    "Confirm source+current+fallback files and SHA-256 roundtrip",
+    "Delete only exact inspected rejected files, preferably in groups and verify listing after deletion",
+    "Update cleanup ledger and model QA without changing approved:false",
+    "Never delete source originals or change the deployed visitor app"
+  ],
+  "latestCompletedCleanup": {
+    "asOf": "2026-10-12",
+    "filesDeleted": 24,
+    "versions": [
+      "V08",
+      "V10",
+      "V12"
+    ],
+    "rejectedSourcesPreservedAsScripts": true,
+    "permanentDriveDeletion": true
+  },
+  "release": {
+    "productionReady": false,
+    "mergeMain": false,
+    "liveDeploy": false
+  }
+}
