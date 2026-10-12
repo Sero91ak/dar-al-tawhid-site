@@ -29,7 +29,7 @@ assert.ok(script);new vm.Script(script[1],{filename:"academy-audio-audit-v20-inl
 const key=t=>String(t).normalize("NFC").replace(/\s+/g," ").trim();
 const all=new Set([...plan.phrases,...sidq.phrases].map(p=>key(p.text)));
 // The independent Kids lane can publish the next authenticated pack after this Test change.
-const followUpPaths=["kids/data/academy-voice-plan-v22.json","kids/data/academy-voice-plan-v25.json","kids/data/academy-voice-plan-v26.json","kids/data/academy-vocabulary-voice-plan-v24.json"];
+const followUpPaths=["kids/data/academy-voice-plan-v22.json","kids/data/academy-voice-plan-v25.json","kids/data/academy-voice-plan-v26.json","kids/data/academy-voice-plan-v27.json","kids/data/academy-voice-plan-v28.json","kids/data/academy-voice-plan-v29.json","kids/data/academy-voice-plan-v30.json","kids/data/academy-vocabulary-voice-plan-v24.json"];
 const followUps=followUpPaths.filter(x=>fs.existsSync(path.join(root,x))).map(x=>JSON.parse(read(x)));
 const combined=new Set([...all,...followUps.flatMap(p=>p.phrases).map(p=>key(p.text))]);
 assert.ok(all.size===511,"The original 511 exact phrases must remain immutable");
@@ -37,11 +37,12 @@ assert.ok(combined.size>=511,"Additional verified lessons or glossary must not r
 const hasV25=followUps.some(p=>p.version==="academy-voice-plan-v25-20261011");
 const hasV26=followUps.some(p=>p.version==="academy-voice-plan-v26-20261012");
 const hasV27=read("kids/akademie/index.html").includes("curriculum-v27.js?v=20261012-27");
+const hasV30=read("kids/akademie/index.html").includes("curriculum-v30.js?v=20261012-30");
 assert.equal(Object.keys(stage.entries).length,4,"No unapproved batch production");
 assert.ok([...Object.keys(stage.entries)].every(k=>all.has(key(k))),"Every staged text must belong to the actual lesson plan");
 assert.equal(annual.goals.newLessonSlots,208);
-assert.equal(annual.goals.currentlyInCatalog,hasV27?58:hasV26?50:hasV25?45:38);
-assert.equal(annual.goals.additionalAuthenticallyVerifiedLessonsNeeded,hasV27?150:hasV26?158:hasV25?163:170);
+assert.equal(annual.goals.currentlyInCatalog,hasV30?70:hasV27?58:hasV26?50:hasV25?45:38);
+assert.equal(annual.goals.additionalAuthenticallyVerifiedLessonsNeeded,hasV30?138:hasV27?150:hasV26?158:hasV25?163:170);
 assert.ok(html.includes("academy-voice-plan-v22.json"),"Voice review must include the upcoming four real lessons");
 console.log("KIDS ACADEMY VOICE REVIEW PASS: "+combined.size+" unique utterances, four review-only V4 files, "+
  annual.goals.currentlyInCatalog+" verified-content lessons; no paid calls or child profile writes.");
