@@ -8,7 +8,7 @@ const script=read("kids/akademie/pilot-audio-v13.js");
 const html=read("kids/akademie/index.html");
 const staging=JSON.parse(read("kids/data/academy-audio-staging-v9.json"));
 const native=read("kids/akademie/stimmen-test-v14.html");
-assert.ok(html.includes("/kids/akademie/stimmen-test-v14.html?v=serhat-native-v14-20261010"));
+assert.ok(!html.includes("/kids/akademie/stimmen-test-v14.html"),"Visitor Academy must not link to audio tests");
 assert.ok(native.includes('<meta name="robots" content="noindex,nofollow">'));
 assert.equal((native.match(/<audio controls preload="none" playsinline/g)||[]).length,4);
 assert.equal((native.match(/type="audio\/mp4"/g)||[]).length,4);
@@ -18,7 +18,7 @@ assert.equal(staging.voiceSettingsProfile,"kids_story");
 assert.equal(staging.pilotFirstLesson,true);
 assert.equal(staging.stagingOnly,true);
 assert.ok(html.includes('data-preview-release="V17.0-voice-sandbox-20261011"'));
-assert.ok(html.includes('pilot-audio-v13.js?v=20261010-voicefix-v16'));
+assert.ok(!html.includes('<script src="/kids/akademie/pilot-audio-v13.js'),"Unapproved pilot may not ship in visitor HTML");
 const clipNames=["00ff589726b166dff6a9","f142bc78e8bcea3d8518","08d1f46461d954d5e471","1a6097339111c8ac475c"];
 for(const key of clipNames){
  const keyUrl="/kids/assets/kids-academy-audio/"+key+".m4a";
