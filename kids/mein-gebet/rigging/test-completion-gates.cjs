@@ -218,3 +218,38 @@ test("V13 mesh changes are limited, old rejected models removed, no false approv
  assert.equal(d.release.liveDeploy,false);
  assert.equal(audit(d).pass,true);
 });
+
+test("Girl V14 real cloth mesh remains visibly unapproved after 6-angle review",()=>{
+ const d=fixture(),p=d.originals.girl.experimentalIndependent3DGeometricBlockout;
+ const a=JSON.parse(fs.readFileSync(path.join(__dirname,"GIRL-V14-REAL-3D-QUALITY-20261012.json"),"utf8"));
+ assert.equal(a.schemaVersion,1);
+ assert.equal(a.source.sha256,p.v13Sha256);
+ assert.equal(a.source.unmodified,true);
+ assert.equal(a.model.sha256,p.v14Sha256);
+ assert.equal(a.model.bytes,2682192);
+ assert.equal(a.model.meshCount,213);
+ assert.equal(a.model.triangles,195544);
+ assert.equal(a.model.changedMeshes.length,3);
+ assert.equal(a.model.unchangedMeshes,210);
+ assert.equal(a.model.sixRealCameraRenders,true);
+ assert.equal(a.model.originalFaceHandsShoesDressUnchanged,true);
+ assert.equal(a.model.humanOriginalLikenessApproved,false);
+ assert.equal(a.model.meshCollisionApproved,false);
+ assert.equal(a.model.clothSimulationApproved,false);
+ assert.equal(a.model.skinnedRig,false);
+ assert.equal(a.model.animations,0);
+ assert.equal(p.v14DriveSha256RoundtripVerified,true);
+ assert.equal(p.v14DriveFilesCount,13);
+ assert.equal(p.v13KeepAsProtectedFallback,true);
+ assert.equal(p.v14ModelLikenessApproved,false);
+ assert.ok(a.review.stillFailing.length>=6);
+ assert.equal(a.data.sourceOriginalsUntouched,true);
+ for(const value of Object.values(a.release)) assert.equal(value,false);
+ assert.equal(d.originals.girl.actualOriginalGlbPresent,false);
+ assert.equal(d.originals.girl.actual3dIdentityApproved,false);
+ assert.equal(d.milestones.filter(m=>m.approved).length,0);
+ assert.equal(d.release.productionReady,false);
+ assert.equal(d.release.mergeMain,false);
+ assert.equal(d.release.liveDeploy,false);
+ assert.equal(audit(d).pass,true);
+});
