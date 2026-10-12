@@ -25,6 +25,8 @@ on:
       - kids/start.html
       - kids/shell.html
       - kids/akademie/**
+      # Separate read-only KIDS lesson catalog; no new Cloudflare secrets.
+      - kids/unterrichtsarchiv.html
       # Separate Basic-gated creator review; no visitor-school unlock.
       - test/kids/akademie/**
       # Story master narration: live-publish new V4 MP3s, age metadata and player scripts.
