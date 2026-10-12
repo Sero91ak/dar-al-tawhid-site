@@ -27,6 +27,17 @@ on:
       - kids/akademie/**
       # Separate Basic-gated creator review; no visitor-school unlock.
       - test/kids/akademie/**
+      # Story master narration: live-publish new V4 MP3s, age metadata and player scripts.
+      - kids/prophet-stories.js
+      - kids/sahabiyyat-stories.js
+      - kids/mubashshirun-stories.js
+      - kids/story-hub.js
+      - kids/story-follow-reader.js
+      - kids/data/prophet-stories.json
+      - kids/data/sahabiyyat-stories.json
+      - kids/data/story-hub.json
+      - kids/assets/prophet-story-audio/**
+      - kids/assets/sahabiyyat-story-audio/**
       - kids/owner-voice.js
       - kids/data/academy-audio.json
       # KIDS Duʿāʾ V4 audio release through sole production Worker.
