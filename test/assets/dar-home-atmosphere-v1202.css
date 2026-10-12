@@ -968,52 +968,52 @@ html.dar-home-v1194 body.is-home-route .home-line-row p{
   line-height:1.28!important;
 }
 
-/* 6 · GLOBAL TEST-APP: remove duplicated bottom reserves and keep footer compact.
-   The fixed bottom tab bar remains untouched. */
-html[data-theme] body.has-bottom-nav:has(.footer){
-  padding-bottom:0!important;
+/* 6 · HOME ONLY: footer and social actions match adult Live app.
+   Inner routes must keep their independent scroll/nav clearance. */
+html[data-theme] body.has-bottom-nav.is-home-route:has(footer.footer){
+  padding-bottom:calc(var(--bottom-navigation-height,70px) + env(safe-area-inset-bottom,0px) + 12px)!important;
 }
-html[data-theme] body.has-bottom-nav:has(.footer) #appView.view{
+html[data-theme] body.has-bottom-nav.is-home-route:has(footer.footer) #appView.view{
   min-height:0!important;
   height:auto!important;
   margin-bottom:0!important;
   padding-bottom:0!important;
 }
-html[data-theme] body.has-bottom-nav:has(.footer) .footer{
+html[data-theme] body.has-bottom-nav.is-home-route:has(footer.footer) .footer{
   min-height:0!important;
   height:auto!important;
   margin:0!important;
-  padding:14px max(14px,env(safe-area-inset-left,0px)) calc(76px + env(safe-area-inset-bottom,0px)) max(14px,env(safe-area-inset-right,0px))!important;
+  padding:10px max(14px,env(safe-area-inset-left,0px)) 8px max(14px,env(safe-area-inset-right,0px))!important;
   text-align:center!important;
 }
-html[data-theme] body.has-bottom-nav:has(.footer) .footer-actions{
+html[data-theme] body.has-bottom-nav.is-home-route:has(footer.footer) .footer-actions{
   display:flex!important;
   flex-direction:row!important;
   flex-wrap:nowrap!important;
   align-items:center!important;
   justify-content:center!important;
-  gap:7px!important;
-  width:min(100%,430px)!important;
+  gap:8px!important;
+  width:min(430px,calc(100% - 16px))!important;
   max-width:430px!important;
-  margin:9px auto 0!important;
+  margin:12px auto 0!important;
 }
-html[data-theme] body.has-bottom-nav:has(.footer) .footer-actions :is(
+html[data-theme] body.has-bottom-nav.is-home-route:has(footer.footer) .footer-actions :is(
   .footer-action-btn,.footer-social-link,a,button
 ){
   flex:1 1 0!important;
   min-width:0!important;
   max-width:138px!important;
-  min-height:34px!important;
+  min-height:36px!important;
   margin:0!important;
   padding:6px 7px!important;
-  font-size:clamp(9px,2.35vw,11px)!important;
+  font-size:11px!important;
   white-space:nowrap!important;
   overflow:hidden!important;
   text-overflow:ellipsis!important;
 }
-html[data-theme] body.has-bottom-nav:has(.footer) #footerAppSave,
-html[data-theme] body.has-bottom-nav:has(.footer) .footer-app-save,
-html[data-theme] body.has-bottom-nav:has(.footer) .footer-action-save{
+html[data-theme] body.has-bottom-nav.is-home-route:has(footer.footer) #footerAppSave,
+html[data-theme] body.has-bottom-nav.is-home-route:has(footer.footer) .footer-app-save,
+html[data-theme] body.has-bottom-nav.is-home-route:has(footer.footer) .footer-action-save{
   display:none!important;
   visibility:hidden!important;
   width:0!important;
@@ -1023,17 +1023,17 @@ html[data-theme] body.has-bottom-nav:has(.footer) .footer-action-save{
   padding:0!important;
   overflow:hidden!important;
 }
-html[data-theme] body.has-bottom-nav:has(.footer) .footer .signature{
+html[data-theme] body.has-bottom-nav.is-home-route:has(footer.footer) .footer .signature{
   margin:9px 0 0!important;
   line-height:1!important;
 }
-html[data-theme] body.has-bottom-nav:has(.footer) .footer strong{
+html[data-theme] body.has-bottom-nav.is-home-route:has(footer.footer) .footer strong{
   margin-bottom:4px!important;
 }
-html[data-theme] body.has-bottom-nav:has(.footer) .footer > :first-child{
+html[data-theme] body.has-bottom-nav.is-home-route:has(footer.footer) .footer > :first-child{
   margin-top:0!important;
 }
-html[data-theme] body.has-bottom-nav:has(.footer) .footer > :last-child{
+html[data-theme] body.has-bottom-nav.is-home-route:has(footer.footer) .footer > :last-child{
   margin-bottom:0!important;
 }
 
@@ -1055,17 +1055,17 @@ html[data-theme] body.has-bottom-nav:has(.footer) .footer > :last-child{
     grid-template-columns:minmax(0,1fr) minmax(112px,.86fr)!important;
     column-gap:9px!important;
   }
-  html[data-theme] body.has-bottom-nav:has(.footer) .footer{
+  html[data-theme] body.has-bottom-nav.is-home-route:has(footer.footer) .footer{
     padding-top:11px!important;
-    padding-bottom:calc(72px + env(safe-area-inset-bottom,0px))!important;
+    padding-bottom:8px!important;
   }
-  html[data-theme] body.has-bottom-nav:has(.footer) .footer-actions{
-    gap:5px!important;
+  html[data-theme] body.has-bottom-nav.is-home-route:has(footer.footer) .footer-actions{
+    gap:8px!important;
   }
-  html[data-theme] body.has-bottom-nav:has(.footer) .footer-actions :is(.footer-action-btn,.footer-social-link,a,button){
-    min-height:32px!important;
+  html[data-theme] body.has-bottom-nav.is-home-route:has(footer.footer) .footer-actions :is(.footer-action-btn,.footer-social-link,a,button){
+    min-height:36px!important;
     padding:5px 5px!important;
-    font-size:9px!important;
+    font-size:11px!important;
   }
 }
 
