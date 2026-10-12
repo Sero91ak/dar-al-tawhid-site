@@ -580,8 +580,14 @@ jobs:
         if: success()
         shell: bash
         run: |
-          git push origin "${GITHUB_SHA}:refs/heads/production-last-good" --force
-          echo "production-last-good -> ${GITHUB_SHA}"
+          # Live was already deployed and verified. The GitHub App token cannot
+          # update the rollback ref when this release includes workflow changes.
+          # Do not classify a verified-live deployment as failed for that reason.
+          if git push origin "${GITHUB_SHA}:refs/heads/production-last-good" --force; then
+            echo "production-last-good -> ${GITHUB_SHA}"
+          else
+            echo "::warning::Production LIVE verified, but updating production-last-good requires GitHub App workflows permission. Existing rollback pointer remains unchanged."
+          fi
 
   # Vergangenheit bleibt in Git. Live darf nur die letzten 4 Tage zurückliegen.
   # Liegt die veröffentlichte Hülle weiter zurück oder auf einer kleineren Build-ID,
