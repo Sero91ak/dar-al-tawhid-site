@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1346";
+const CACHE_NAME="dar-al-tawhid-kids-v1347";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 // KIDS_V202_DOWNLOAD_TABS_RELEASE_TRIGGER_20261010: detail-only offline controls; manifest V202 synchronized.
@@ -292,7 +292,7 @@ const KIDS_BOOT_PRECACHE=[
   "/kids/offline-library-v1.css?v=1",
   "/kids/akademie/curriculum-v1.js?v=20261010-01",
   "/kids/akademie/curriculum-v2.js?v=20261010-09",
-  "/kids/akademie/school-progress-v11.js?v=20261010-11",
+  "/kids/akademie/school-progress-v11.js?v=20261012-27",
   "/kids/owner-voice.js?v=academy-serhat-v1-20261010",
   "/kids/data/academy-audio.json?v=1"
 ];
@@ -528,7 +528,7 @@ const KIDS_OFFLINE_SEEDS=[
   "/kids/akademie/index.html",
   "/kids/akademie/curriculum-v1.js?v=20261010-01",
   "/kids/akademie/curriculum-v2.js?v=20261010-09",
-  "/kids/akademie/school-progress-v11.js?v=20261010-11",
+  "/kids/akademie/school-progress-v11.js?v=20261012-27",
   "/kids/owner-voice.js?v=academy-serhat-v1-20261010",
   "/kids/data/academy-audio.json?v=1",
   "/kids/data/owner-voice-audio.json?v=2",
