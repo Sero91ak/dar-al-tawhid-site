@@ -22,9 +22,9 @@ jobs:
       - name: Record true Github Actions importer outcome
         shell: bash
         env:
-          GH_TOKEN: \${{ github.token }}
-          REPO: \${{ github.repository }}
-          TRIGGER: \${{ github.event_name }}
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          TRIGGER: ${{ github.event_name }}
         run: |
           set -euo pipefail
           mkdir -p ci-status
