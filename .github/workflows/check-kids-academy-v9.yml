@@ -64,6 +64,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Guard iPad Mini/Air academy and home layout without child-state changes
+        run: node kids/akademie/test-responsive-v29.cjs
       - name: Verify curriculum, devices, per-child daily planner and master audio inventory
         run: node scripts/test-kids-academy-v9.js
       - name: School unlock / account-local progress regression
@@ -114,8 +116,6 @@ jobs:
         run: node kids/tools/test-academy-sequential-lock-v27.cjs
       - name: Verify dedicated signed-owner lesson archive and current 58/150 truth (zero credits)
         run: node test/kids/akademie/test-archive-v27.cjs
-      - name: Guard iPad Mini/Air academy and home layout without child-state changes
-        run: node kids/akademie/test-responsive-v29.cjs
       - name: JavaScript syntax guard
         run: |
           node --check kids/akademie/curriculum-v1.js
