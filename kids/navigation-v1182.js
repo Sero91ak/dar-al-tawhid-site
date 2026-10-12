@@ -327,8 +327,50 @@
     }
   }
 
+  /* KIDS_TOUCH_INTENT_GUARD_V1344
+     A short drag/brush must never activate a tab, story or Back control.
+     Observe without preventing scroll; intercept only the subsequent trusted
+     click if the finger moved more than the tap tolerance. Keyboard and
+     scripted clicks remain functional, and regular taps have zero delay. */
+  var touchIntent=null;
+  function onIntentTouchStart(e){
+    if(!e.touches||e.touches.length!==1){touchIntent=null;return}
+    var t=e.touches[0];
+    touchIntent={id:t.identifier,x:t.clientX,y:t.clientY,moved:false,endedAt:-1};
+  }
+  function updateIntentMovement(t){
+    if(!touchIntent||!t||t.identifier!==touchIntent.id)return;
+    var dx=t.clientX-touchIntent.x,dy=t.clientY-touchIntent.y;
+    if(dx*dx+dy*dy>144)touchIntent.moved=true;
+  }
+  function onIntentTouchMove(e){
+    if(!touchIntent||!e.touches)return;
+    for(var i=0;i<e.touches.length;i++)updateIntentMovement(e.touches[i]);
+  }
+  function onIntentTouchEnd(e){
+    if(!touchIntent||!e.changedTouches)return;
+    for(var i=0;i<e.changedTouches.length;i++){
+      var t=e.changedTouches[i];
+      if(t.identifier!==touchIntent.id)continue;
+      updateIntentMovement(t);
+      touchIntent.endedAt=performance.now();
+      return;
+    }
+  }
+  function accidentalTouchActivation(e){
+    if(!touchIntent||!touchIntent.moved||touchIntent.endedAt<0||
+       e.isTrusted===false||e.detail===0)return false;
+    var age=performance.now()-touchIntent.endedAt;
+    return age>=0&&age<800&&(isBackControl(e.target)||!!descriptorFor(e.target));
+  }
+
   function onClickCapture(e){
     if(replaying)return;
+    if(accidentalTouchActivation(e)){
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      return;
+    }
     var back=isBackControl(e.target);
     var desc=back?null:descriptorFor(e.target);
     if(!back&&!desc)return;
@@ -484,6 +526,10 @@
     resetLaunchViewport();
     stack=[{desc:{type:"tab",target:activeTab()},signature:signature(),scrolls:captureScrolls()}];
     index=0;
+    document.addEventListener("touchstart",onIntentTouchStart,{capture:true,passive:true});
+    document.addEventListener("touchmove",onIntentTouchMove,{capture:true,passive:true});
+    document.addEventListener("touchend",onIntentTouchEnd,{capture:true,passive:true});
+    document.addEventListener("touchcancel",function(){touchIntent=null},{capture:true,passive:true});
     document.addEventListener("click",onClickCapture,true);
 
     window.addEventListener("pageshow",function(){
