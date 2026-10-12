@@ -27,6 +27,7 @@ assert.match(css, /margin\s*:\s*0\s*!important/i, "No residual footer margin");
 assert.match(css, /padding\s*:\s*0\s*!important/i, "No residual footer padding");
 assert.ok(!css.includes("#bottomNav") && !css.includes(".bottom-nav"),
   "Fixed bottom nav must remain untouched");
-assert.ok(!css.includes("#appView") && !css.includes("safe-area-inset-bottom"),
+const appliedCss = css.replace(/\/\*[\s\S]*?\*\//g, "");
+assert.ok(!appliedCss.includes("#appView") && !appliedCss.includes("safe-area-inset-bottom"),
   "Existing reader and fixed-nav safe clearance must remain untouched");
 console.log("OK: branded footer remains on Startseite only; inner routes release its scroll space");
