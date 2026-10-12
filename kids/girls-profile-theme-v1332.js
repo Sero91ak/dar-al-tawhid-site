@@ -5,7 +5,7 @@
   var app=document.querySelector(".app");
   var meta=document.querySelector('meta[name="theme-color"]');
   if(!app||!meta)return;
-  var neutral=meta.getAttribute("content")||"#0c2636";
+  var neutral="#0c2636";
   function apply(){
     var next=app.getAttribute("data-gender")==="girl"?"#241b35":neutral;
     if(meta.getAttribute("content")!==next)meta.setAttribute("content",next);

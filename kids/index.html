@@ -4,6 +4,68 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0c2636">
+<script id="kids-profile-first-paint-v1348">
+(function(){
+  "use strict";
+  var gender="",age="";
+  try{
+    var id=localStorage.getItem("kids.activeProfile");
+    var profiles=JSON.parse(localStorage.getItem("kids.profiles.v1")||"[]");
+    var p=Array.isArray(profiles)?profiles.find(function(x){return String(x&&x.id)===String(id)}):null;
+    if(p&&(p.gender==="girl"||p.gender==="boy")){
+      gender=p.gender;age=p.age||"";
+    }else if(!id&&localStorage.getItem("kids.guest.v1")==="1"){
+      var g=localStorage.getItem("kids.guest.gender.v1");
+      if(g==="girl"||g==="boy")gender=g;
+      age=localStorage.getItem("kids.age")||"";
+    }
+  }catch(e){}
+  document.documentElement.dataset.kidsBootGender=gender||"neutral";
+  document.documentElement.dataset.kidsBootAge=age;
+  if(gender==="girl"){
+    var meta=document.querySelector('meta[name="theme-color"]');
+    if(meta)meta.setAttribute("content","#241b35");
+  }
+})();
+</script>
+<style id="kids-home-first-paint-v1348">
+/* Block old temporary blue painting without hiding the entire page.
+   The same APPROVED final hero-home.png remains in both profiles. */
+html[data-kids-boot-gender="girl"],
+html[data-kids-boot-gender="girl"] body{
+  background:#241b35!important;
+}
+html[data-kids-boot-gender="girl"] body .app:not([data-gender="boy"]){
+  background:#241b35!important;
+  background-image:none!important;
+}
+html[data-kids-boot-gender="boy"],
+html[data-kids-boot-gender="boy"] body{
+  background:#0c2636!important;
+}
+/* Before prayer-stage.js wraps .hero into .kids-salah-home-world,
+   show ONLY the final mosque photograph instead of legacy warm-world art. */
+html body .app #view-today > .hero{
+  background:
+    linear-gradient(180deg,rgba(3,16,32,.10) 0%,rgba(4,22,38,.14) 39%,rgba(3,23,39,.52) 68%,#082536 100%),
+    url("/kids/assets/kids-salah-v1272/hero-home.png?v=1274") center 44%/cover no-repeat!important;
+  background-color:#082536!important;
+}
+html body .app[data-gender="girl"] #view-today > .hero{
+  background:
+    linear-gradient(180deg,rgba(31,19,42,.11) 0%,rgba(37,23,45,.17) 41%,rgba(44,26,48,.47) 69%,#2d203b 100%),
+    url("/kids/assets/kids-salah-v1272/hero-home.png?v=1274") center 44%/cover no-repeat!important;
+  background-color:#2d203b!important;
+}
+html body .app #view-today > .hero::before,
+html body .app #view-today > .hero::after{
+  content:none!important;display:none!important;
+  background:none!important;animation:none!important;
+}
+html body .app #view-today > .hero :is(.cloud,.shooting-star,.city,.arch,.dune,.lantern){
+  display:none!important;animation:none!important;
+}
+</style>
 <!-- KIDS_FIRST_PAINT_HERO_V1313: same exact URL as final homepage CSS, requested before styles/scripts -->
 <link rel="preload" as="image" href="/kids/assets/kids-salah-v1272/hero-home.png?v=1274" fetchpriority="high">
 <link rel="stylesheet" href="https://use.typekit.net/jka5jda.css">
@@ -3034,6 +3096,13 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
 
 
 <div class="app">
+  <script id="kids-profile-apply-first-paint-v1348">
+  (function(){
+    var el=document.currentScript.parentElement;
+    var g=document.documentElement.dataset.kidsBootGender;
+    if(el&&(g==="girl"||g==="boy"))el.setAttribute("data-gender",g);
+  })();
+  </script>
   <div class="ambient"></div>
   <div class="dev-ribbon" hidden>KIDS · V1.09.23</div>
 
@@ -11533,7 +11602,8 @@ html body .app:has(#view-parents.view.active) .shell{
 <link rel="stylesheet" href="/kids/kids-story-action-contrast-v1345.css?v=1346" data-kids-story-action-contrast="1345">
 <link rel="stylesheet" href="/kids/deen-library-polish-v1346.css?v=1346" data-kids-deen-library-polish="1346">
 <link rel="stylesheet" href="/kids/ipad-home-audio-grid-v1347.css?v=1347" data-kids-ipad-home-audio-grid="1347">
-<script defer src="/kids/girls-profile-theme-v1332.js?v=1332" data-kids-girls-system-tint="1332"></script>
+<link rel="stylesheet" href="/kids/girls-home-photo-palette-v1348.css?v=1348" data-kids-girls-home-palette="1348">
+<script defer src="/kids/girls-profile-theme-v1332.js?v=1348" data-kids-girls-system-tint="1332"></script>
 <!-- KIDS_OFFLINE_LIBRARY_V1: independent storage controls for the Parents tab -->
 <script defer src="/kids/offline-library-v1.js?v=1"></script>
 <!-- KIDS_SALAH_STAGE_V1261: placed after hero, before continue-listening -->
