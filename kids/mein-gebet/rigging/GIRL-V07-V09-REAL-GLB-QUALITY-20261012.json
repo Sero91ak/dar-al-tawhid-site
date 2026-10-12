@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "project": "DAR AL TAWḤĪD KIDS Mein Gebet - original girl, isolated model research",
+  "date": "2026-10-12",
+  "source": "Unmodified 5 user-supplied girl 2D originals SHA pinned in REFERENCE-ASSET-REGISTRY-V1.json",
+  "driveFolderUrl": "https://drive.google.com/drive/folders/13TLOjok-U6ShnkzmdWCCsLUlEGJWgnei",
+  "driveTotalFiles": 37,
+  "vers": [
+    {
+      "version": "V06",
+      "sha256": "3021ad1e1ac9644af6d11e7b138ebfe1c7607dfd7947e18cbbcc9109bf4e197e",
+      "eyeBrowDistanceFromFaceMedianModelUnits": 0.07559018690321462,
+      "real3D": true,
+      "approved": false
+    },
+    {
+      "version": "V07",
+      "sha256": "b487d15063bfc93c6ce6b99bada3c175f94a2211aaadc641531477dd5435643d",
+      "bytes": 1199960,
+      "meshes": 183,
+      "triangles": 120020,
+      "continuousScarf": true,
+      "fingersModeled": true,
+      "eyeBrowDistanceFromFaceMedianModelUnits": 0.07288957104888588,
+      "real3D": true,
+      "approved": false
+    },
+    {
+      "version": "V08",
+      "sha256": "d0f479b304fee5ca06882eed6b5841c794b2c25d58d0aebb0f5dc3bd17d9a649",
+      "bytes": 1223416,
+      "meshes": 213,
+      "triangles": 123196,
+      "real3D": true,
+      "approved": false,
+      "rejected": true,
+      "rejectionReason": "Artificial pointed/angular crown introduced by sectional hood loft"
+    },
+    {
+      "version": "V09",
+      "sha256": "92ce0379e98211776f6f2c5c34ba9af1494ef295012f0ef349ef9a994ac3eefc",
+      "bytes": 1510248,
+      "meshes": 213,
+      "triangles": 137532,
+      "browMedianSignedOffsetModelUnits": 0.006999994377802243,
+      "browMaximumSignedOffsetModelUnits": 0.007000008590569928,
+      "sixCameraViewsUniqueSHA": true,
+      "continuouslySculptedHijab": true,
+      "taperedUVHood": true,
+      "source2DSHAallFiveConfirmed": true,
+      "googleDriveRoundTripSHAconfirmed": true,
+      "real3D": true,
+      "approved": false
+    }
+  ],
+  "observations": {
+    "technicalGeometryImproved": true,
+    "originalFaceLikenessStillWrong": true,
+    "faceSideEdgeAndEyeStillSeparated": true,
+    "backHijabStillUnnatural": true,
+    "sleevesHandsShoesNeedOriginalSculpt": true,
+    "left2DSourceIndependentViewAvailable": false,
+    "allFiveGirl2DReferencesUnchanged": true
+  },
+  "gates": {
+    "humanGirlIdentityApproved": false,
+    "actualApprovedGirlRigPresent": false,
+    "physicalClothApproved": false,
+    "prayerPoseApproved": false,
+    "productionReady": false,
+    "mergeMain": false,
+    "liveDeploy": false
+  },
+  "releaseSignoff": "BLOCKED: six render views and technical mesh improvements do not certify original likeness, skinning, prayer animation or app compatibility."
+}
