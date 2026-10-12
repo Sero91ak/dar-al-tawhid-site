@@ -1,7 +1,27 @@
 {
-  "checkedAt": "2026-10-12T09:55:49.489868+00:00",
+  "checkedAt": "2026-10-12T09:58:34.976376+00:00",
   "trigger": "workflow_run",
   "recentRuns": [
+    {
+      "conclusion": null,
+      "created_at": "2026-10-12T09:58:05Z",
+      "event": "push",
+      "head_sha": "02212ec1295c31ec74194d25ecbecbdc53fd63c2",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38233293410",
+      "id": 38233293410,
+      "status": "in_progress",
+      "updated_at": "2026-10-12T09:58:13Z"
+    },
+    {
+      "conclusion": "skipped",
+      "created_at": "2026-10-12T09:57:58Z",
+      "event": "workflow_run",
+      "head_sha": "778564d84404ed85fcc7cdd0f3cc63215f21db68",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38233281586",
+      "id": 38233281586,
+      "status": "completed",
+      "updated_at": "2026-10-12T09:58:07Z"
+    },
     {
       "conclusion": "skipped",
       "created_at": "2026-10-12T09:55:28Z",
