@@ -155,6 +155,19 @@
   ],
   "unlockedScopes": [
     {
+      "id": "kids-owner-unterrichtsarchiv-v27-20261012",
+      "at": "2026-10-12T11:30:00+02:00",
+      "approvedBy": "user-explicit-create-dedicated-owner-only-all-lessons-reference-age-sorted-page-20261012",
+      "reason": "Stand-alone passwortgeschuetztes Unterrichtsarchiv ausserhalb der Test-App, 50 bestehende und 158 redaktionelle Einheiten, automatisch aus Kindercode synchronisiert. Nur Academy-Owner-Zugang, interne Archivansicht und CI; kein Kinderfortschritt, keine kostenpflichtige Audiogenerierung.",
+      "paths": [
+        "cloudflare/preview-gate.js",
+        "test/kids/akademie/archiv.html",
+        "test/kids/akademie/test-archive-v27.cjs",
+        ".github/workflows/check-kids-academy-v9.yml"
+      ],
+      "expiresAt": "2026-10-19T23:59:00.000Z"
+    },
+    {
       "id": "touch-stability-audit-and-repair-20261012",
       "at": "2026-10-12T08:21:00+02:00",
       "approvedBy": "user-explicit-intensively-repair-unintended-touch-navigation-scroll-jank-web-app-and-native-ios-apps-20261012",
