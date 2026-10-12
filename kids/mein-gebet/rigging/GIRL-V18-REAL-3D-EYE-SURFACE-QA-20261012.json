@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-10-12",
+  "project": "DAR AL TAWḤĪD KIDS – Mein Gebet",
+  "scope": "isolated original girl V18 eye-rigging preview; not production",
+  "source": {
+    "model": "V15 actual GLB",
+    "sha256": "44e75d268426d36a5f6e040437c5874bfc81d9ff5e07adf15def49f845f20321",
+    "original2DProtected": true,
+    "sourceGLBUnmodified": true
+  },
+  "candidate": {
+    "model": "V18 separate GLB research file",
+    "sha256": "a8e9cea28945c60e1b6d6416d36bc73988694070b73340096797db81a907d54b",
+    "bytes": 2729708,
+    "totalMeshes": 223,
+    "unchangedSourceMeshes": 205,
+    "changedSourceMeshes": 8,
+    "newTrue3dEyelidAndLashMeshes": 10,
+    "independentRealCameraRenders": [
+      0,
+      45,
+      90,
+      180,
+      270,
+      315
+    ],
+    "sourceEyeGeometryRetained": true,
+    "real3DCurvesNot2DBillboards": true,
+    "sourceOriginalLikenessApproved": false,
+    "skinRigPresent": false,
+    "prayerAnimationCount": 0
+  },
+  "measurement": {
+    "type": "median nearest original sclera mesh-VERTEX distance from real 3D eyelid geometry, not physical signed surface distance",
+    "discardedV17MedianUpperMm": 12.05694,
+    "v18LidCenterlineNearestEyeVertexMm": 4.62211,
+    "v18TubularMeshNearestEyeVertexMedianUpperMm": 4.734,
+    "sourceMeshInvariantsVerified": true,
+    "humanLidContactAndCollisionReviewApproved": false
+  },
+  "review": {
+    "status": "RESEARCH ONLY – 1:1 identity still fails",
+    "confirmedGeometricImprovement": "On-surface 3D lid support and compact outward lashes with smaller nearest-vertex gap than discarded floating V17 lids",
+    "notPassed": [
+      "Eyes/pupils still differ in shape and expression",
+      "Skin/cheeks/chin, nose, smile and face oval visibly unlike original",
+      "Pink hijab layered shape and body/cloth silhouettes still unlike original",
+      "No physically approved eyelid contact or no intersections",
+      "No girl skeleton or any authenticated prayer pose",
+      "Human original-identity approval absent"
+    ]
+  },
+  "preservation": {
+    "v17RejectedAndNotSavedInGoogleDrive": true,
+    "v15StableSourcePreserved": true,
+    "allTenOriginal2DSourceViewsPreserved": true,
+    "v18IsolatedFromProduction": true
+  },
+  "drive": {
+    "folder": "https://drive.google.com/drive/folders/1cHMj_uG5NNu4CK2zmwIWBzCcirZILOMc",
+    "savedFiles": 16,
+    "glbDownloadRoundTripSha256Confirmed": true,
+    "sourceScriptsAndActualCameraRendersSaved": true
+  },
+  "nextRequiredStep": "Source-calibrated true 3D full face: realistic cheeks, nose, mouth, exact eye form and layered original hijab contours. Retest with front, calibrated ~50 degree source side, back and other real 3D cameras; no artificial scale changes.",
+  "release": {
+    "originalGirlIdentityApproved": false,
+    "originalBoyIdentityApproved": false,
+    "rigApproved": false,
+    "prayerPosesApproved": false,
+    "productionReady": false,
+    "mergeMain": false,
+    "liveDeploy": false
+  }
+}
