@@ -30,6 +30,37 @@ function stopOtherPlayers(){
   try{window.DARKidsSahabiyyat?.stop?.()}catch(_){}
   try{window.DARKidsStoryHub?.stop?.()}catch(_){}
 }
+/* Restore original Dīn category rendering + source listing.
+ * No swipe navigation and no offline action on category rows:
+ * navigation uses Back button; offline belongs inside the detail player.
+ */
+function sourceHtml(item){
+  return (Array.isArray(item?.sourceRefs)?item.sourceRefs:[])
+    .filter(ref=>typeof ref==="string"&&ref.trim())
+    .map(ref=>'<span class="ms-source-ref">'+esc(ref)+'</span>').join("");
+}
+function renderCards(){
+  const grid=$("#dlGrid");if(!grid)return;
+  grid.innerHTML=items.map((item,index)=>{
+    const src=art(item);
+    return '<button class="ms-story-row dl-story-row" type="button" data-dl-id="'+esc(item.id)+'">'+
+      '<span class="ms-row-visual" aria-hidden="true">'+(src?'<img src="'+esc(src)+'" alt="" decoding="async" loading="'+(index<3?"eager":"lazy")+'">':'')+
+      '<span class="ms-rank">'+String(index+1).padStart(2,"0")+'</span></span>'+
+      '<span class="ms-row-copy"><span class="ms-row-kicker">LERNBEREICH '+String(index+1).padStart(2,"0")+'</span>'+
+      '<strong class="ms-row-title">'+esc(item.categoryTitle||item.series||item.title||"")+'</strong>'+
+      '<span class="dl-row-lesson">'+esc(item.categoryLessonLabel||item.title||"")+'</span>'+
+      '<span class="ms-row-summary">'+esc(item.categorySummary||item.summary||"")+'</span></span>'+
+      (done(item.id)?'<span class="ms-done" aria-label="Abgeschlossen">✓</span>':'')+
+    '</button>';
+  }).join("");
+  grid.querySelectorAll("[data-dl-id]").forEach(b=>{
+    b.addEventListener("click",()=>openStory(b.dataset.dlId));
+  });
+}
+function effectiveMode(){
+  const m=mode(),has=!!audioMeta(active)?.url;
+  return !has&&(m==="listen"||m==="both")?"read":m;
+}
 function renderModeButtons(){
   const m=effectiveMode(),has=!!audioMeta(active)?.url;
   document.querySelectorAll("[data-dl-mode]").forEach(b=>{
