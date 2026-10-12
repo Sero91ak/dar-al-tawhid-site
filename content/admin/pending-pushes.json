@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-10-12T15:31:00.000Z",
+  "generated": "2026-10-12T16:24:56.000Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -1311,11 +1311,32 @@
       "postTitle": "📖 Vergebung – wer wünscht sie sich nicht?",
       "postPath": "content/posts/2026-10-12-quran-24-22-vergeben-und-nachsicht.md",
       "sourcePage": "https://dar-al-tawhid.de/q/41/",
-      "status": "blocked",
+      "status": "sent",
       "pushApproved": false,
       "createdAt": "2026-10-12T15:31:00.000Z",
-      "updatedAt": "2026-10-12T15:31:00.000Z",
-      "lastError": "SICHERHEITSGATE: Automatischer Beitrags-Push nicht freigegeben. OneSignal-Sender verwendet zu breite Segmente; nur explizite sichere manuelle Zielgruppe nach Live-Prüfung. Kein Cron-/GitHub-Broadcast."
+      "updatedAt": "2026-10-12T16:24:56.000Z",
+      "lastError": "",
+      "sentAt": "2026-10-12T16:24:56.000Z",
+      "pushResult": {
+        "target": "manual-adult-optin-tags",
+        "targetUrl": "https://dar-al-tawhid.de/?post=quran-24-22-vergeben-und-nachsicht-20261012#post/quran-24-22-vergeben-und-nachsicht-20261012",
+        "oneSignalId": "e9f0b2c4-7bc1-45ed-a790-0478c175bc91",
+        "idempotencyKey": "005bc42e-1dbc-5dc1-96fe-bf0cbcf9de6a",
+        "providerSuccessful": 2,
+        "providerFailed": 0,
+        "filters": [
+          {
+            "key": "dar_push",
+            "value": "true"
+          },
+          {
+            "key": "post_notifications",
+            "value": "true"
+          }
+        ],
+        "manualRelease": true,
+        "notes": "Provider accepted 2 opt-in subscriptions; no unfiltered broadcast. 'received' is not a confirmed device-open count."
+      }
     }
   }
 }
