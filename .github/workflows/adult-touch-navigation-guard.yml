@@ -6,6 +6,7 @@ on:
       - 'assets/dar-app-chrome.js'
       - 'assets/adaptive-layout.js'
       - 'assets/fold-split.js'
+      - 'assets/app-soft-boot.js'
       - 'ios/DarAlTawhid/**'
       - 'scripts/adult-touch-navigation-guard-test.cjs'
       - 'scripts/adult-layout-performance-test.cjs'
@@ -29,5 +30,6 @@ jobs:
           node --check assets/dar-app-chrome.js
           node --check assets/adaptive-layout.js
           node --check assets/fold-split.js
+          node --check assets/app-soft-boot.js
           node scripts/adult-touch-navigation-guard-test.cjs
           node scripts/adult-layout-performance-test.cjs
