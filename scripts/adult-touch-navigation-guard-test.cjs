@@ -12,10 +12,10 @@ const adultSwift = fs.readFileSync(path.join(root, "ios/DarAlTawhid/DarAlTawhid/
 const alternateSwift = fs.readFileSync(path.join(root, "ios/DarAlTawhid/DarAlTawhid/FreshWebAppView.swift"), "utf8");
 
 assert.match(chrome, /DAR_TOUCH_INTENT_GUARD_V1/);
-assert.match(adultSwift, /allowsBackForwardNavigationGestures = false/);
-assert.match(alternateSwift, /allowsBackForwardNavigationGestures = false/);
-assert.doesNotMatch(adultSwift, /allowsBackForwardNavigationGestures = true/);
-assert.doesNotMatch(alternateSwift, /allowsBackForwardNavigationGestures = true/);
+assert.match(adultSwift, /allowsBackForwardNavigationGestures = true/);
+assert.match(alternateSwift, /allowsBackForwardNavigationGestures = true/);
+assert.doesNotMatch(adultSwift, /allowsBackForwardNavigationGestures = false/);
+assert.doesNotMatch(alternateSwift, /allowsBackForwardNavigationGestures = false/);
 
 const listeners = new Map();
 let now = 1000;
