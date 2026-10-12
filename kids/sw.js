@@ -287,7 +287,7 @@ const KIDS_BOOT_PRECACHE=[
   "/kids/manifest.webmanifest",
   "/kids/item-offline-v1.js?v=2",
   "/kids/item-offline-v1.css?v=2",
-  "/kids/kids-story-action-contrast-v1345.css?v=1345",
+  "/kids/kids-story-action-contrast-v1345.css?v=1346",
   "/kids/offline-library-v1.js?v=1",
   "/kids/offline-library-v1.css?v=1",
   "/kids/akademie/curriculum-v1.js?v=20261010-01",
