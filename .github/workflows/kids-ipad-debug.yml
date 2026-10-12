@@ -1,4 +1,4 @@
-name: Verify live Kids iPad release HTTP
+name: Verify live KIDS girl palette and first paint V1348
 on:
   push:
     branches: [preview/kids-ipad-qa-20261012]
@@ -8,30 +8,36 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 6
+    timeout-minutes: 7
     steps:
-      - name: Check live KIDS shell, academy, CSS and test entry
+      - name: Verify public KIDS vs redirected Test KIDS, new assets and boot
         shell: bash
         run: |
           set -euo pipefail
           BASE="https://dar-al-tawhid.de"
-          CODE=$(curl -sS -L --max-time 30 --retry 3 --retry-delay 2 -H "Cache-Control: no-cache" -o /tmp/kids-live-home.html -w '%{http_code}' "$BASE/kids/start?live-audit=ipad-v29-20261012")
-          test "$CODE" = 200 || { echo "::error::Kids home HTTP $CODE"; exit 1; }
-          grep -q 'ipad-home-audio-grid-v1347.css?v=1347' /tmp/kids-live-home.html
-          CODE=$(curl -sS -L --max-time 30 --retry 3 --retry-delay 2 -H "Cache-Control: no-cache" -o /tmp/kids-live-academy.html -w '%{http_code}' "$BASE/kids/akademie/?live-audit=ipad-v29-20261012")
-          test "$CODE" = 200 || { echo "::error::Kids academy HTTP $CODE"; exit 1; }
-          grep -q 'responsive-integrity-v29.css?v=29' /tmp/kids-live-academy.html
-          CODE=$(curl -sS -L --max-time 30 --retry 3 --retry-delay 2 -o /tmp/kids-live-academy.css -w '%{http_code}' "$BASE/kids/akademie/responsive-integrity-v29.css?v=29")
-          test "$CODE" = 200 || { echo "::error::Kids academy CSS HTTP $CODE"; exit 1; }
-          grep -q 'KIDS_ACADEMY_RESPONSIVE_INTEGRITY_V29' /tmp/kids-live-academy.css
-          CODE=$(curl -sS -L --max-time 30 --retry 3 --retry-delay 2 -o /tmp/kids-live-home.css -w '%{http_code}' "$BASE/kids/ipad-home-audio-grid-v1347.css?v=1347")
-          test "$CODE" = 200 || { echo "::error::Kids home CSS HTTP $CODE"; exit 1; }
-          grep -q 'KIDS_IPAD_HOME_AUDIO_GRID_V1347' /tmp/kids-live-home.css
-          # Dar Test KIDS intentionally redirects to canonical live Kids:
-          CODE=$(curl -sS -L --max-time 30 --retry 3 --retry-delay 2 -o /tmp/kids-test-redirect.html -w '%{http_code}' "$BASE/test/kids/start?live-audit=ipad-v29-20261012")
-          test "$CODE" = 200 || { echo "::error::Dar Test Kids redirect HTTP $CODE"; exit 1; }
-          grep -q 'ipad-home-audio-grid-v1347.css?v=1347' /tmp/kids-test-redirect.html
-          echo "LIVE KIDS HOME HTTP 200 with new iPad CSS"
-          echo "LIVE KIDS AKADEMIE HTTP 200 with new responsive CSS"
-          echo "LIVE 2 CSS ASSETS HTTP 200 and exact marker"
-          echo "TEST /test/kids/start redirects to updated canonical Kids HTML, HTTP 200"
+          TS="v1348-${GITHUB_SHA}"
+          get(){
+            local path="$1" dest="$2"
+            code="$(curl -fsSL --retry 4 --retry-delay 2 --max-time 30 \
+              -A 'Kids-LiveQA/1.0' -H 'Cache-Control: no-cache' \
+              -o "$dest" -w '%{http_code}' "$BASE$path")"
+            echo "$path -> HTTP $code"
+            test "$code" = 200 && test -s "$dest"
+          }
+          get "/kids/start?qa=$TS" /tmp/kids-v1348-home.html
+          grep -Fq 'id="kids-profile-first-paint-v1348"' /tmp/kids-v1348-home.html
+          grep -Fq 'id="kids-profile-apply-first-paint-v1348"' /tmp/kids-v1348-home.html
+          grep -Fq 'girls-home-photo-palette-v1348.css?v=1348' /tmp/kids-v1348-home.html
+          grep -Fq 'girls-profile-theme-v1332.js?v=1348' /tmp/kids-v1348-home.html
+          grep -Fq 'hero-home.png?v=1274' /tmp/kids-v1348-home.html
+          get "/kids/girls-home-photo-palette-v1348.css?v=1348&qa=$TS" /tmp/kids-v1348-girls.css
+          grep -Fq 'KIDS_GIRLS_HOME_PALETTE_FIRSTPAINT_V1348' /tmp/kids-v1348-girls.css
+          grep -Fq '.academy-pilot-entry' /tmp/kids-v1348-girls.css
+          grep -Fq '.choice.quran::before' /tmp/kids-v1348-girls.css
+          get "/kids/girls-profile-theme-v1332.js?v=1348&qa=$TS" /tmp/kids-v1348-meta.js
+          grep -Fq 'var neutral="#0c2636"' /tmp/kids-v1348-meta.js
+          get "/kids/assets/kids-salah-v1272/hero-home.png?v=1274&qa=$TS" /tmp/kids-v1348-hero.png
+          test "$(wc -c < /tmp/kids-v1348-hero.png)" -gt 20000
+          get "/test/kids/start?qa=$TS" /tmp/kids-v1348-test.html
+          grep -Fq 'id="kids-profile-first-paint-v1348"' /tmp/kids-v1348-test.html
+          echo 'KIDS V1348 LIVE OK: start, first paint, girls colors, metadata, approved image, /test/kids redirect'
