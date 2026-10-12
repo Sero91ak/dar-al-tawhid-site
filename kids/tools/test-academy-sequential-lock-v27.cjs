@@ -44,7 +44,7 @@ assert.equal(run(monday,{},validDraft).access(first),"resume");
 const app=read("kids/akademie/index.html");
 assert.ok(app.includes("score.done<questions().length"),"Lesson completion cannot skip questions");
 assert.ok(app.includes("if(!finished||score.done<questions().length||questions().length===0)return;"),"Storage must reject unfinished lesson");
-assert.ok(app.includes("school-progress-v11.js?v=20261012-27"),"New progression runtime must be cache-busted");
+assert.ok(app.includes("school-progress-v11.js?v=20261012-28"),"New progression runtime must be cache-busted");
 for(const version of ["v1","v2","v22","v25","v26","v27"])assert.ok(app.includes("/kids/akademie/curriculum-"+version+".js"),"Missing release pack "+version);
 const year=JSON.parse(read("kids/data/academy-year-52weeks-v1.json"));
 assert.equal(year.goals.currentlyInCatalog,58);assert.equal(year.goals.additionalAuthenticallyVerifiedLessonsNeeded,150);
