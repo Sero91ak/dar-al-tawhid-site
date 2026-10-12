@@ -28,6 +28,8 @@
   var started = false;
   var resizeObserver = null;
   var orientTimers = [];
+  var lastAppliedViewportKey = "";
+  var pendingForcedLayout = false;
 
   function measureViewport() {
     var vv = global.visualViewport;
@@ -199,7 +201,13 @@
     nav.style.setProperty("z-index", "40", "important");
 
     if (target > 0 && (forceWidth || orientChanged || now >= widthLockUntil)) {
-      var from = Math.round((nav.getBoundingClientRect() && nav.getBoundingClientRect().width) || target);
+      /* Layout reads force style calculation: only measure for actual rotation.
+         Ordinary resize/route checks can set the target width directly. */
+      var from = target;
+      if (orientChanged) {
+        var bounds = nav.getBoundingClientRect();
+        from = Math.round((bounds && bounds.width) || target);
+      }
       if (orientChanged && Math.abs(from - target) > 8) {
         nav.style.setProperty("width", from + "px", "important");
         nav.style.setProperty("max-width", from + "px", "important");
@@ -249,6 +257,13 @@
 
   function applyLayout(force) {
     var metrics = measureViewport();
+    /* The body/document ResizeObservers fire frequently on content rendering,
+       but only actual viewport changes require recalculating root CSS tokens.
+       Forced route/orientation updates still run unconditionally. */
+    var viewportKey = metrics.width + "|" + metrics.height + "|" + (metrics.offsetTop || 0) +
+      "|" + navPreference();
+    if (!force && viewportKey === lastAppliedViewportKey) return;
+    lastAppliedViewportKey = viewportKey;
     var mode = resolveLayoutMode(metrics.width, metrics.height);
     var dual = isDualViewport(metrics.width, metrics.height);
     var root = document.documentElement;
@@ -298,10 +313,15 @@
   }
 
   function scheduleApply(force) {
+    /* A forced update arriving during a pending ordinary resize must not get
+       lost. Collapse all callbacks into one frame and preserve the force bit. */
+    pendingForcedLayout = pendingForcedLayout || !!force;
     if (rafId) return;
     rafId = global.requestAnimationFrame(function () {
       rafId = 0;
-      applyLayout(!!force);
+      var mustForce = pendingForcedLayout;
+      pendingForcedLayout = false;
+      applyLayout(mustForce);
     });
   }
 
