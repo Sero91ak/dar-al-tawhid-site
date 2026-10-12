@@ -6855,7 +6855,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   // The next navigation uses network-first and receives the latest release.
   if("serviceWorker" in navigator){
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1345",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1346",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     },{once:true});
@@ -7847,7 +7847,7 @@ html[data-view="stories"] #view-stories > :last-child{
 <script src="/kids/prophet-stories.js?v=43"></script>
 <script src="/kids/mubashshirun-stories.js?v=33"></script>
 <script src="/kids/sahabiyyat-stories.js?v=25"></script>
-<script src="/kids/deen-lessons.js?v=7"></script>
+<script src="/kids/deen-lessons.js?v=8"></script>
 <script src="/kids/global-story-glow-v1216.js?v=1218-calm"></script>
 <script src="/kids/term-learning.js?v=1"></script>
 <script src="/kids/dua-hub-v1219.js?v=1318" data-kids-dua-hub="1259"></script>
