@@ -4,8 +4,6 @@ on:
     workflows: [Import DĀR KIDS V4 story masters]
     types: [completed]
   workflow_dispatch:
-  schedule:
-    - cron: '00 10 12 10 *' # one-off recheck on 2026-10-12 10:00 UTC
 
 permissions:
   actions: read
