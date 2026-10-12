@@ -1,6 +1,9 @@
 name: Import DĀR KIDS V4 story masters
 
 on:
+  workflow_dispatch:
+  schedule:
+    - cron: '40 9 12 10 *' # one-time 2026-10-12 09:40 UTC; remove after run
   push:
     branches: [main]
     paths:
