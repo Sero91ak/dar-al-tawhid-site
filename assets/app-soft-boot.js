@@ -90,6 +90,12 @@
   var barEl = null;
   var pctEl = null;
   var overlayEl = null;
+  var bootObserver = null;
+  function stopBootObserver() {
+    if (!bootObserver) return;
+    try { bootObserver.disconnect(); } catch (e) {}
+    bootObserver = null;
+  }
 
   function prefersReducedMotion() {
     try { return !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches); }
@@ -246,6 +252,7 @@
     window.__darAppBootPainted = true;
     finishScheduled = false;
     clearRamp();
+    stopBootObserver();
     if (hardTimer) { clearTimeout(hardTimer); hardTimer = null; }
     progress = 1;
     paint();
@@ -317,6 +324,11 @@
     finish();
   }
   function releaseChrome() {
+    /* The Android emergency path can mark finished without calling finish().
+       Stop the 60ms progress interval, timeout and active observers here too. */
+    clearRamp();
+    stopBootObserver();
+    if (hardTimer) { clearTimeout(hardTimer); hardTimer = null; }
     try {
       var root = document.documentElement;
       if (root) {
@@ -414,7 +426,7 @@
     window.addEventListener("pageshow", function (ev) { try { if (ev && ev.persisted && /Android/i.test(String(navigator.userAgent || ""))) { location.reload(); return; } } catch (e) {} setTimeout(maybeFinish, 40); });
     window.addEventListener("hashchange", function () { if (finished || window.__darSoftBootLocked) return; setTimeout(maybeFinish, 60); });
     try {
-      var mo = new MutationObserver(function (records) {
+      bootObserver = new MutationObserver(function (records) {
         if (finished || syncing) return;
         var themeChanged = false;
         for (var i = 0; i < records.length; i++) { if (records[i].attributeName === "data-theme") themeChanged = true; }
@@ -422,10 +434,13 @@
         maybeFinish();
       });
       var startObserve = function () {
+        /* A fast first paint can finish before DOMContentLoaded. Do not
+           reattach a boot observer after its work is already complete. */
+        if (finished || !bootObserver) return;
         var view = document.getElementById("appView") || document.getElementById("pageRoot");
-        if (view) mo.observe(view, { childList: true, subtree: true, characterData: true });
-        if (document.body) mo.observe(document.body, { attributes: true, attributeFilter: ["class"] });
-        mo.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme", "class"] });
+        if (view) bootObserver.observe(view, { childList: true, subtree: true, characterData: true });
+        if (document.body) bootObserver.observe(document.body, { attributes: true, attributeFilter: ["class"] });
+        bootObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme", "class"] });
       };
       if (document.body) startObserve(); else document.addEventListener("DOMContentLoaded", startObserve, { once: true });
     } catch (e) {}
