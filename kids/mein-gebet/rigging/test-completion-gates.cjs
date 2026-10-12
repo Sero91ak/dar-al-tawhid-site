@@ -198,7 +198,7 @@ test("V13 mesh changes are limited, old rejected models removed, no false approv
  assert.equal(report.real3DGeometry.original3DFaceHandsDressShoesUnchanged,true);
  assert.equal(p.v13SixRealCameraRendersVerified,true);
  assert.equal(p.v13DriveSha256RoundTripVerified,true);
- assert.equal(p.latestPreferredResearchDraft,"V13");
+ assert.equal(report.currentDraft,"V13"); // historical V13 report, independent of later versions
  assert.equal(p.v11KeepAsProtectedFallback,true);
  assert.equal(p.v13VisualIdentityApproved,false);
  assert.equal(p.v13SkinnedRigPresent,false);
