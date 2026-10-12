@@ -46,17 +46,33 @@ try {
   const firstTarget = calls[0].included_segments?.[0] || '<no segment>';
   const isBroad = calls.some(call => (call.included_segments || []).includes('Subscribed Users')
     || (call.included_segments || []).includes('Total Subscriptions'));
+  // DAR_PUSH by NAME is not an opt-in guarantee: on 2026-10-12 OneSignal showed
+  // 95 DAR_PUSH = 95 total subscribers and the segment had NO filters.
+  // A name-based replacement of Subscribed Users with DAR_PUSH is NOT a fix.
+  const requiredTags = { post_notifications: 'true', dar_push: 'true', dar_env: 'live' };
+  const scopedFilter = call => {
+    if ((call.included_segments || []).length || !Array.isArray(call.filters)) return false;
+    return Object.entries(requiredTags).every(([key, value]) =>
+      call.filters.some(f => f.field === 'tag' && f.key === key && f.relation === '=' && f.value === value));
+  };
+  const directOptInFilter = calls.length > 0 && calls.every(scopedFilter);
+  const workerSource = (await import('node:fs')).readFileSync(
+    new URL('../cloudflare/post-push-admin.js', import.meta.url), 'utf8');
+  // Reject broad fallback logic even if the mocked first attempt succeeds.
+  const broadFallbackInSource = /included_segments\s*:\s*\[\s*["'](?:Subscribed Users|Total Subscriptions)["']\s*\]/.test(workerSource);
   const result = {
     kind: 'offline-mocked-OneSignal-contract',
     requestsToRealOneSignal: 0,
     mockedCalls: calls.length,
     firstTarget,
     broadSegmentRequested: isBroad,
+    strictAdultTagFilterUsed: directOptInFilter,
+    broadFallbackInSource,
     stableWorkerIdempotency: sameIdempotency,
-    productionSafe: !isBroad && firstTarget === 'DAR_PUSH',
-    warning: isBroad
-      ? 'BLOCKED: Worker tries a broad segment before scoped adult recipients.'
-      : 'Code-side target review passed; actual OneSignal segment filters and opt-ins remain unverified.'
+    productionSafe: directOptInFilter && !broadFallbackInSource && sameIdempotency,
+    warning: directOptInFilter && !broadFallbackInSource
+      ? 'Offline contract passed, but real opt-ins, Cloudflare and delivery are STILL unverified.'
+      : 'BLOCKED: a broad/unfiltered segment or unsafe fallback remains in the Worker.'
   };
   console.log('DAR_POST_ONESIGNAL_CONTRACT ' + JSON.stringify(result, null, 2));
   if (process.env.GITHUB_STEP_SUMMARY) {
