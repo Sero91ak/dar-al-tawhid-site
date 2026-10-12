@@ -213,6 +213,53 @@
       "driveBackupFileId": "1tObLp0akkxJcKL0Vpsv6JhN3e2YVgqdm",
       "driveBackupType": "PNG containing byte-exact recoverable GLB, Python builder and QA; not a native GLB",
       "driveReadbackGLBSha256": "3447a84a522c1a007bea3e09b59dfc0830576a198e740629070f096f95ec5547"
+    },
+    "girlV20Research": {
+      "date": "2026-10-12",
+      "status": "NOT_APPROVED_DRAFT",
+      "sourceV19Sha256": "a621dab36b2ff3471c1e1112cca270a76868dfcbbfd9bb7c20b8e9ecb54a093e",
+      "sourceV18Sha256": "a8e9cea28945c60e1b6d6416d36bc73988694070b73340096797db81a907d54b",
+      "newV20Sha256": "c86e958bca638ca4e1d602994fec905c6c7fcf311769d0a16610357960bbf16a",
+      "bytes": 2730144,
+      "meshes": 223,
+      "modifiedOnly": [
+        "v18_3d_-1_upper_lid",
+        "v18_3d_-1_lower_lid",
+        "v18_3d_1_upper_lid",
+        "v18_3d_1_lower_lid"
+      ],
+      "allOtherBinaryBytesUnchanged": true,
+      "perLidPenetrationGreaterThan0_5mmBeforePct": 22.222,
+      "perLidPenetrationGreaterThan0_5mmAfterPct": 0,
+      "minSignedScleraClearanceAfterMm": 0.3346,
+      "maximumRigidRingShiftMm": 2.2975,
+      "upperLidMedianSurfaceDistanceWorsenedFromMm": 2.0717,
+      "upperLidMedianSurfaceDistanceWorsenedToMm": 4.1097,
+      "hasSkins": false,
+      "animationCount": 0,
+      "original2DLikenessApproved": false,
+      "original2DComparisonPerformed": [
+        "MAEDCHEN_01_vorne.jpeg",
+        "MAEDCHEN_03_seite.png"
+      ],
+      "original2DVisualMismatchStillSignificant": true,
+      "humanApproval": false,
+      "fiqhApproval": false,
+      "productionApproved": false,
+      "googleDriveFolderId": "1rw-JcQ_4ighp_Fp9OphcMIyN-HVYruyB",
+      "googleDriveGLBFileId": "1G0FGU5EoCyADdSQbB7I15txtZMSgg98f",
+      "googleDriveRoundtripSHA256Verified": true,
+      "qaFileId": "1kRvU8s80Rm7T4Px4kOEclRGcEf99j5N9",
+      "cameraAngles": [
+        0,
+        45,
+        90,
+        180,
+        270,
+        315
+      ],
+      "sourceScriptFileId": "1c9HjTcjD8UQC2xrAV8Utr2Fm9ce89dQ1",
+      "caution": "Fixes sampled signed sclera penetration but worsens median eye-to-lid distance; visual identity, full collision, rig, animation, fiqh, staging and device gates remain blocked. Do not replace protected V18/V19 or publish."
     }
   }
 }
