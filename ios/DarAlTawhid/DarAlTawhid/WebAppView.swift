@@ -656,7 +656,7 @@ struct WebAppView: UIViewRepresentable {
         webView.scrollView.canCancelContentTouches = true
         webView.scrollView.backgroundColor = bootInk
         webView.scrollView.alwaysBounceVertical = false
-        webView.allowsBackForwardNavigationGestures = true
+        webView.allowsBackForwardNavigationGestures = false
         webView.isOpaque = true
         webView.backgroundColor = bootInk
         if #available(iOS 15.0, *) {
