@@ -1,6 +1,24 @@
 {
-  "version": "academy-voice-v30-zero-credit",
+  "schemaVersion": 1,
+  "version": "academy-voice-plan-v30-20261012",
+  "voiceProfileId": "serhat-owner-voice-2026",
+  "voiceName": "Serhat Abu Malik – Master",
+  "modelId": "eleven_v4",
+  "purpose": "Only exact text queue; no generated or approved V4 master recordings.",
+  "policy": {
+    "nativeTtsFallback": false,
+    "arabicQuranRecitationIsSeparate": true,
+    "reviewRequiredBeforePublicPlayback": true,
+    "autoPublishUnreviewed": false,
+    "generateCreditsUsed": 0
+  },
   "lessonCount": 4,
+  "curriculumIds": [
+    "adab-gespraechspartner-ausreden-lassen",
+    "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+    "akhlaq-nafs-enttaeuschung-verarbeiten",
+    "fiqh-wudu-wasser-sparen"
+  ],
   "lessonIds": [
     "adab-gespraechspartner-ausreden-lassen",
     "akhlaq-tarbiyah-aufgaben-kleine-schritte",
@@ -13,726 +31,1445 @@
     "9-10"
   ],
   "phraseCount": 72,
-  "modelId": "eleven_v4",
   "approvalRequiredBeforePlayback": true,
   "creditsUsed": 0,
   "phrases": [
     {
-      "lessonId": "adab-gespraechspartner-ausreden-lassen",
-      "age": "4-5",
-      "kind": "intro",
       "text": "Dein Freund möchte etwas erzählen. Hörst du erst zu?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "adab-gespraechspartner-ausreden-lassen",
+      "kind": "intro",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "adab-gespraechspartner-ausreden-lassen",
+          "kind": "intro",
+          "age": "4-5"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "adab-gespraechspartner-ausreden-lassen",
-      "age": "4-5",
-      "kind": "line-1",
       "text": "Mein Freund erzählt mir etwas.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "adab-gespraechspartner-ausreden-lassen",
+      "kind": "line-1",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "adab-gespraechspartner-ausreden-lassen",
+          "kind": "line-1",
+          "age": "4-5"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "adab-gespraechspartner-ausreden-lassen",
-      "age": "4-5",
-      "kind": "line-2",
       "text": "Ich schaue hin und höre zu.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "adab-gespraechspartner-ausreden-lassen",
+      "kind": "line-2",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "adab-gespraechspartner-ausreden-lassen",
+          "kind": "line-2",
+          "age": "4-5"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "adab-gespraechspartner-ausreden-lassen",
-      "age": "4-5",
-      "kind": "line-3",
       "text": "Wenn er fertig ist, darf ich antworten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "adab-gespraechspartner-ausreden-lassen",
+      "kind": "line-3",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "adab-gespraechspartner-ausreden-lassen",
+          "kind": "line-3",
+          "age": "4-5"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "adab-gespraechspartner-ausreden-lassen",
-      "age": "4-5",
-      "kind": "line-4",
       "text": "Braucht jemand dringend Hilfe, hole ich sofort einen Erwachsenen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "adab-gespraechspartner-ausreden-lassen",
+      "kind": "line-4",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "adab-gespraechspartner-ausreden-lassen",
+          "kind": "line-4",
+          "age": "4-5"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "adab-gespraechspartner-ausreden-lassen",
-      "age": "4-5",
-      "kind": "evidence",
       "text": "Im Qurʾān geht es um gute Worte; die Sunnah lehrt gutes Sprechen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "adab-gespraechspartner-ausreden-lassen",
+      "kind": "evidence",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "adab-gespraechspartner-ausreden-lassen",
+          "kind": "evidence",
+          "age": "4-5"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "adab-gespraechspartner-ausreden-lassen",
-      "age": "6-8",
-      "kind": "intro",
       "text": "Wir üben Gesprächsrollen: Eine Person erzählt, die andere hört zu.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "adab-gespraechspartner-ausreden-lassen",
+      "kind": "intro",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "adab-gespraechspartner-ausreden-lassen",
+          "kind": "intro",
+          "age": "6-8"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "adab-gespraechspartner-ausreden-lassen",
-      "age": "6-8",
-      "kind": "line-1",
       "text": "Qurʾān 17:53 lehrt, gute Worte zu wählen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "adab-gespraechspartner-ausreden-lassen",
+      "kind": "line-1",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "adab-gespraechspartner-ausreden-lassen",
+          "kind": "line-1",
+          "age": "6-8"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "adab-gespraechspartner-ausreden-lassen",
-      "age": "6-8",
-      "kind": "line-2",
       "text": "Im Ḥadīṯ lernen wir, Gutes zu sagen oder still zu sein.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "adab-gespraechspartner-ausreden-lassen",
+      "kind": "line-2",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "adab-gespraechspartner-ausreden-lassen",
+          "kind": "line-2",
+          "age": "6-8"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "adab-gespraechspartner-ausreden-lassen",
-      "age": "6-8",
-      "kind": "line-3",
       "text": "Ich unterbreche andere nicht unnötig.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "adab-gespraechspartner-ausreden-lassen",
+      "kind": "line-3",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "adab-gespraechspartner-ausreden-lassen",
+          "kind": "line-3",
+          "age": "6-8"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "adab-gespraechspartner-ausreden-lassen",
-      "age": "6-8",
-      "kind": "line-4",
       "text": "Danach frage ich freundlich nach und darf meine Meinung äußern.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "adab-gespraechspartner-ausreden-lassen",
+      "kind": "line-4",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "adab-gespraechspartner-ausreden-lassen",
+          "kind": "line-4",
+          "age": "6-8"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "adab-gespraechspartner-ausreden-lassen",
-      "age": "6-8",
-      "kind": "evidence",
       "text": "Das Nicht-Unterbrechen ist eine Übung für freundliche Gespräche, kein wörtliches Quellenzitat.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "adab-gespraechspartner-ausreden-lassen",
+      "kind": "evidence",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "adab-gespraechspartner-ausreden-lassen",
+          "kind": "evidence",
+          "age": "6-8"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "adab-gespraechspartner-ausreden-lassen",
-      "age": "9-10",
-      "kind": "intro",
       "text": "Wir prüfen, was Qurʾān und Sunnah sagen, und was unsere Unterrichtsregel hinzufügt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "adab-gespraechspartner-ausreden-lassen",
+      "kind": "intro",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "adab-gespraechspartner-ausreden-lassen",
+          "kind": "intro",
+          "age": "9-10"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "adab-gespraechspartner-ausreden-lassen",
-      "age": "9-10",
-      "kind": "line-1",
       "text": "Qurʾān 17:53 fordert dazu auf, gut zu sprechen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "adab-gespraechspartner-ausreden-lassen",
+      "kind": "line-1",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "adab-gespraechspartner-ausreden-lassen",
+          "kind": "line-1",
+          "age": "9-10"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "adab-gespraechspartner-ausreden-lassen",
-      "age": "9-10",
-      "kind": "line-2",
       "text": "Abū Hurayrah überliefert den authentischen Ḥadīṯ über gutes Reden.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "adab-gespraechspartner-ausreden-lassen",
+      "kind": "line-2",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "adab-gespraechspartner-ausreden-lassen",
+          "kind": "line-2",
+          "age": "9-10"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "adab-gespraechspartner-ausreden-lassen",
-      "age": "9-10",
-      "kind": "line-3",
       "text": "Ich lasse mein Gegenüber ausreden, um es zuerst zu verstehen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "adab-gespraechspartner-ausreden-lassen",
+      "kind": "line-3",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "adab-gespraechspartner-ausreden-lassen",
+          "kind": "line-3",
+          "age": "9-10"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "adab-gespraechspartner-ausreden-lassen",
-      "age": "9-10",
-      "kind": "line-4",
       "text": "Wenn jemand verletzt wird oder Gefahr besteht, darf ich sofort Unterstützung suchen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
-      "reviewStatus": "not-generated",
-      "url": null,
-      "voiceApproved": false
-    },
-    {
+      "priority": 2,
       "lessonId": "adab-gespraechspartner-ausreden-lassen",
+      "kind": "line-4",
       "age": "9-10",
-      "kind": "evidence",
+      "contexts": [
+        {
+          "lessonId": "adab-gespraechspartner-ausreden-lassen",
+          "kind": "line-4",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
       "text": "Gutes Sprechen ist direkt belegt. Die Gesprächsübung ist eine eigene altersgerechte Anwendung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "adab-gespraechspartner-ausreden-lassen",
+      "kind": "evidence",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "adab-gespraechspartner-ausreden-lassen",
+          "kind": "evidence",
+          "age": "9-10"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
-      "age": "4-5",
-      "kind": "intro",
       "text": "Ein großer Tisch ist unordentlich. Wir beginnen einfach.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+      "kind": "intro",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+          "kind": "intro",
+          "age": "4-5"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
-      "age": "4-5",
-      "kind": "line-1",
       "text": "Ich darf Allah um mehr Wissen bitten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+      "kind": "line-1",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+          "kind": "line-1",
+          "age": "4-5"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
-      "age": "4-5",
-      "kind": "line-2",
       "text": "Zuerst räume ich eine Sache weg.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+      "kind": "line-2",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+          "kind": "line-2",
+          "age": "4-5"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
-      "age": "4-5",
-      "kind": "line-3",
       "text": "Dann versuche ich einen zweiten kleinen Schritt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+      "kind": "line-3",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+          "kind": "line-3",
+          "age": "4-5"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
-      "age": "4-5",
-      "kind": "line-4",
       "text": "Wenn es schwierig ist, frage ich nach Hilfe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+      "kind": "line-4",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+          "kind": "line-4",
+          "age": "4-5"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
-      "age": "4-5",
-      "kind": "evidence",
       "text": "Der Qurʾān lehrt die Bitte um Wissen; der Ḥadīṯ lobt Beständigkeit.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+      "kind": "evidence",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+          "kind": "evidence",
+          "age": "4-5"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
-      "age": "6-8",
-      "kind": "intro",
       "text": "Zwei kleine Schritte statt einer überwältigenden Aufgabe: So probieren wir es.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+      "kind": "intro",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+          "kind": "intro",
+          "age": "6-8"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
-      "age": "6-8",
-      "kind": "line-1",
       "text": "Qurʾān 20:114 enthält die Bitte um mehr Wissen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+      "kind": "line-1",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+          "kind": "line-1",
+          "age": "6-8"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
-      "age": "6-8",
-      "kind": "line-2",
       "text": "ʿĀʾishah überlieferte den Ḥadīṯ über regelmäßige gute Taten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+      "kind": "line-2",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+          "kind": "line-2",
+          "age": "6-8"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
-      "age": "6-8",
-      "kind": "line-3",
       "text": "Ich teile eine Aufgabe sinnvoll auf.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+      "kind": "line-3",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+          "kind": "line-3",
+          "age": "6-8"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
-      "age": "6-8",
-      "kind": "line-4",
       "text": "Nach jedem kleinen Schritt prüfe ich, ob ich Hilfe brauche.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+      "kind": "line-4",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+          "kind": "line-4",
+          "age": "6-8"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
-      "age": "6-8",
-      "kind": "evidence",
       "text": "Die Zweischritt-Aufgabe ist unsere Lernmethode, keine zusätzliche Religionsvorschrift.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+      "kind": "evidence",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+          "kind": "evidence",
+          "age": "6-8"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
-      "age": "9-10",
-      "kind": "intro",
       "text": "Wir unterscheiden das religiöse Ziel vom pädagogischen Weg, es zu üben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+      "kind": "intro",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+          "kind": "intro",
+          "age": "9-10"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
-      "age": "9-10",
-      "kind": "line-1",
       "text": "Die Qurʾān-Bitte lautet: Mein Herr, mehre mein Wissen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+      "kind": "line-1",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+          "kind": "line-1",
+          "age": "9-10"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
-      "age": "9-10",
-      "kind": "line-2",
       "text": "Im Ṣaḥīḥ-Ḥadīṯ wird Beständigkeit guter Taten hervorgehoben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+      "kind": "line-2",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+          "kind": "line-2",
+          "age": "9-10"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
-      "age": "9-10",
-      "kind": "line-3",
       "text": "Ich setze mir erreichbare kleine Lernziele statt alles auf einmal schaffen zu wollen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+      "kind": "line-3",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+          "kind": "line-3",
+          "age": "9-10"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
-      "age": "9-10",
-      "kind": "line-4",
       "text": "Lernmethoden bleiben Hilfsmittel; eine Pause ist keine Sünde.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
-      "reviewStatus": "not-generated",
-      "url": null,
-      "voiceApproved": false
-    },
-    {
+      "priority": 2,
       "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+      "kind": "line-4",
       "age": "9-10",
-      "kind": "evidence",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+          "kind": "line-4",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
       "text": "Der Ḥadīṯ betrifft gute Taten allgemein, keinen vorgeschriebenen heutigen Stundenplan.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+      "kind": "evidence",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+          "kind": "evidence",
+          "age": "9-10"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
-      "age": "4-5",
-      "kind": "intro",
       "text": "Der geplante Ausflug fällt aus. Vielleicht bist du traurig.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
+      "kind": "intro",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
+          "kind": "intro",
+          "age": "4-5"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
-      "age": "4-5",
-      "kind": "line-1",
       "text": "Ich darf traurig sein.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
+      "kind": "line-1",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
+          "kind": "line-1",
+          "age": "4-5"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
-      "age": "4-5",
-      "kind": "line-2",
       "text": "Ich kann sagen: Das macht mich traurig.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
+      "kind": "line-2",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
+          "kind": "line-2",
+          "age": "4-5"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
-      "age": "4-5",
-      "kind": "line-3",
       "text": "Ich bitte jemanden um Trost.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
+      "kind": "line-3",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
+          "kind": "line-3",
+          "age": "4-5"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
-      "age": "4-5",
-      "kind": "line-4",
       "text": "Später kann ich etwas anderes versuchen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
+      "kind": "line-4",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
+          "kind": "line-4",
+          "age": "4-5"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
-      "age": "4-5",
-      "kind": "evidence",
       "text": "Allah erinnert uns an Erleichterung; der Prophet ﷺ lehrte Geduld.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
+      "kind": "evidence",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
+          "kind": "evidence",
+          "age": "4-5"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
-      "age": "6-8",
-      "kind": "intro",
       "text": "Eine Verabredung fällt aus. Wir überlegen einen freundlichen Umgang damit.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
+      "kind": "intro",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
+          "kind": "intro",
+          "age": "6-8"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
-      "age": "6-8",
-      "kind": "line-1",
       "text": "Enttäuschung ist ein normales Gefühl.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
+      "kind": "line-1",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
+          "kind": "line-1",
+          "age": "6-8"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
-      "age": "6-8",
-      "kind": "line-2",
       "text": "Qurʾān 94:5 spricht von Erleichterung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
+      "kind": "line-2",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
+          "kind": "line-2",
+          "age": "6-8"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
-      "age": "6-8",
-      "kind": "line-3",
       "text": "Im authentischen Ḥadīṯ wird Geduld bei Schwierigkeiten gelehrt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
+      "kind": "line-3",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
+          "kind": "line-3",
+          "age": "6-8"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
-      "age": "6-8",
-      "kind": "line-4",
       "text": "Ich darf um Trost bitten und einen neuen Termin suchen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
+      "kind": "line-4",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
+          "kind": "line-4",
+          "age": "6-8"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
-      "age": "6-8",
-      "kind": "evidence",
       "text": "Eine abgesagte Verabredung ist unser Beispiel, nicht Teil des Ḥadīṯ.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
+      "kind": "evidence",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
+          "kind": "evidence",
+          "age": "6-8"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
-      "age": "9-10",
-      "kind": "intro",
       "text": "Gefühle ausdrücken und geduldig handeln schließen sich nicht aus.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
+      "kind": "intro",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
+          "kind": "intro",
+          "age": "9-10"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
-      "age": "9-10",
-      "kind": "line-1",
       "text": "Qurʾān 94:5 nennt Erleichterung mit Schwierigkeit.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
+      "kind": "line-1",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
+          "kind": "line-1",
+          "age": "9-10"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
-      "age": "9-10",
-      "kind": "line-2",
       "text": "Ṣuhayb überlieferte den Ṣaḥīḥ-Ḥadīṯ über Dankbarkeit und Geduld.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
+      "kind": "line-2",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
+          "kind": "line-2",
+          "age": "9-10"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
-      "age": "9-10",
-      "kind": "line-3",
       "text": "Ich kann Ärger und Traurigkeit ausdrücken, ohne andere zu verletzen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
+      "kind": "line-3",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
+          "kind": "line-3",
+          "age": "9-10"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
-      "age": "9-10",
-      "kind": "line-4",
       "text": "Es ist erlaubt, Unterstützung zu suchen und nicht sofort eine Lösung zu haben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
-      "reviewStatus": "not-generated",
-      "url": null,
-      "voiceApproved": false
-    },
-    {
+      "priority": 2,
       "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
+      "kind": "line-4",
       "age": "9-10",
-      "kind": "evidence",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
+          "kind": "line-4",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
       "text": "Die Quellen garantieren keinen bestimmten Zeitpunkt, an dem Schwierigkeiten verschwinden.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
+      "kind": "evidence",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
+          "kind": "evidence",
+          "age": "9-10"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "fiqh-wudu-wasser-sparen",
-      "age": "4-5",
-      "kind": "intro",
       "text": "Wir achten auf Wasser, wenn wir Wuḍūʾ lernen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "fiqh-wudu-wasser-sparen",
+      "kind": "intro",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wudu-wasser-sparen",
+          "kind": "intro",
+          "age": "4-5"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "fiqh-wudu-wasser-sparen",
-      "age": "4-5",
-      "kind": "line-1",
       "text": "Wasser ist wertvoll.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "fiqh-wudu-wasser-sparen",
+      "kind": "line-1",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wudu-wasser-sparen",
+          "kind": "line-1",
+          "age": "4-5"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "fiqh-wudu-wasser-sparen",
-      "age": "4-5",
-      "kind": "line-2",
       "text": "Ich drehe den Hahn zu, wenn ich ihn nicht brauche.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "fiqh-wudu-wasser-sparen",
+      "kind": "line-2",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wudu-wasser-sparen",
+          "kind": "line-2",
+          "age": "4-5"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "fiqh-wudu-wasser-sparen",
-      "age": "4-5",
-      "kind": "line-3",
       "text": "Ich wasche alle notwendigen Stellen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "fiqh-wudu-wasser-sparen",
+      "kind": "line-3",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wudu-wasser-sparen",
+          "kind": "line-3",
+          "age": "4-5"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "fiqh-wudu-wasser-sparen",
-      "age": "4-5",
-      "kind": "line-4",
       "text": "Ein Erwachsener zeigt mir die richtige Gebetswaschung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
-      "reviewStatus": "not-generated",
-      "url": null,
-      "voiceApproved": false
-    },
-    {
+      "priority": 2,
       "lessonId": "fiqh-wudu-wasser-sparen",
+      "kind": "line-4",
       "age": "4-5",
-      "kind": "evidence",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wudu-wasser-sparen",
+          "kind": "line-4",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
       "text": "Der Qurʾān verbietet Verschwendung; der Prophet ﷺ nutzte beim Wuḍūʾ wenig Wasser.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "fiqh-wudu-wasser-sparen",
+      "kind": "evidence",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wudu-wasser-sparen",
+          "kind": "evidence",
+          "age": "4-5"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "fiqh-wudu-wasser-sparen",
-      "age": "6-8",
-      "kind": "intro",
       "text": "Wir lernen: sparsam sein und trotzdem richtig waschen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
-      "reviewStatus": "not-generated",
-      "url": null,
-      "voiceApproved": false
-    },
-    {
+      "priority": 2,
       "lessonId": "fiqh-wudu-wasser-sparen",
-      "age": "6-8",
-      "kind": "line-1",
-      "text": "Qurʾān 7:31 warnt vor Verschwendung.",
-      "modelId": "eleven_v4",
-      "reviewStatus": "not-generated",
-      "url": null,
-      "voiceApproved": false
-    },
-    {
-      "lessonId": "fiqh-wudu-wasser-sparen",
-      "age": "6-8",
-      "kind": "line-2",
-      "text": "Anas berichtete über die Wassermenge beim Wuḍūʾ des Propheten ﷺ.",
-      "modelId": "eleven_v4",
-      "reviewStatus": "not-generated",
-      "url": null,
-      "voiceApproved": false
-    },
-    {
-      "lessonId": "fiqh-wudu-wasser-sparen",
-      "age": "6-8",
-      "kind": "line-3",
-      "text": "Ich lasse den Hahn nicht unnötig laufen.",
-      "modelId": "eleven_v4",
-      "reviewStatus": "not-generated",
-      "url": null,
-      "voiceApproved": false
-    },
-    {
-      "lessonId": "fiqh-wudu-wasser-sparen",
-      "age": "6-8",
-      "kind": "line-4",
-      "text": "Sparen heißt nicht, vorgeschriebene Stellen auszulassen.",
-      "modelId": "eleven_v4",
-      "reviewStatus": "not-generated",
-      "url": null,
-      "voiceApproved": false
-    },
-    {
-      "lessonId": "fiqh-wudu-wasser-sparen",
-      "age": "6-8",
-      "kind": "evidence",
-      "text": "Der überlieferte Mudd ist ein Beispiel der Prophetenspraxis, keine starre Obergrenze für alle.",
-      "modelId": "eleven_v4",
-      "reviewStatus": "not-generated",
-      "url": null,
-      "voiceApproved": false
-    },
-    {
-      "lessonId": "fiqh-wudu-wasser-sparen",
-      "age": "9-10",
       "kind": "intro",
-      "text": "Wir unterscheiden Sunnah-Praxis, hanbalitische Fiqh-Erläuterung und heutige Anwendung.",
-      "modelId": "eleven_v4",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wudu-wasser-sparen",
+          "kind": "intro",
+          "age": "6-8"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
+      "text": "Qurʾān 7:31 warnt vor Verschwendung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
       "lessonId": "fiqh-wudu-wasser-sparen",
-      "age": "9-10",
       "kind": "line-1",
-      "text": "Qurʾān 7:31 verbietet Verschwendung allgemein.",
-      "modelId": "eleven_v4",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wudu-wasser-sparen",
+          "kind": "line-1",
+          "age": "6-8"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
+      "text": "Anas berichtete über die Wassermenge beim Wuḍūʾ des Propheten ﷺ.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
       "lessonId": "fiqh-wudu-wasser-sparen",
-      "age": "9-10",
       "kind": "line-2",
-      "text": "Al-Buḫārī 201 berichtet, dass der Prophet ﷺ mit einem Mudd Wuḍūʾ machte.",
-      "modelId": "eleven_v4",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wudu-wasser-sparen",
+          "kind": "line-2",
+          "age": "6-8"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
+      "text": "Ich lasse den Hahn nicht unnötig laufen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
       "lessonId": "fiqh-wudu-wasser-sparen",
-      "age": "9-10",
       "kind": "line-3",
-      "text": "Ibn Qudāmah behandelt diese überlieferte Wassermenge im al-Muġnī.",
-      "modelId": "eleven_v4",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wudu-wasser-sparen",
+          "kind": "line-3",
+          "age": "6-8"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
+      "text": "Sparen heißt nicht, vorgeschriebene Stellen auszulassen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
       "lessonId": "fiqh-wudu-wasser-sparen",
-      "age": "9-10",
       "kind": "line-4",
-      "text": "Der Hahn soll nicht unnötig laufen, aber die notwendigen Waschungen müssen vollständig sein.",
-      "modelId": "eleven_v4",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wudu-wasser-sparen",
+          "kind": "line-4",
+          "age": "6-8"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
     },
     {
-      "lessonId": "fiqh-wudu-wasser-sparen",
-      "age": "9-10",
-      "kind": "evidence",
-      "text": "Die Menge variiert nach Bedarf; es gibt hier kein universelles Ein-Mudd-Maximum.",
+      "text": "Der überlieferte Mudd ist ein Beispiel der Prophetenspraxis, keine starre Obergrenze für alle.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "fiqh-wudu-wasser-sparen",
+      "kind": "evidence",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wudu-wasser-sparen",
+          "kind": "evidence",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Wir unterscheiden Sunnah-Praxis, hanbalitische Fiqh-Erläuterung und heutige Anwendung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "fiqh-wudu-wasser-sparen",
+      "kind": "intro",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wudu-wasser-sparen",
+          "kind": "intro",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Qurʾān 7:31 verbietet Verschwendung allgemein.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "fiqh-wudu-wasser-sparen",
+      "kind": "line-1",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wudu-wasser-sparen",
+          "kind": "line-1",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Al-Buḫārī 201 berichtet, dass der Prophet ﷺ mit einem Mudd Wuḍūʾ machte.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "fiqh-wudu-wasser-sparen",
+      "kind": "line-2",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wudu-wasser-sparen",
+          "kind": "line-2",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Ibn Qudāmah behandelt diese überlieferte Wassermenge im al-Muġnī.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "fiqh-wudu-wasser-sparen",
+      "kind": "line-3",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wudu-wasser-sparen",
+          "kind": "line-3",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Der Hahn soll nicht unnötig laufen, aber die notwendigen Waschungen müssen vollständig sein.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "fiqh-wudu-wasser-sparen",
+      "kind": "line-4",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wudu-wasser-sparen",
+          "kind": "line-4",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Die Menge variiert nach Bedarf; es gibt hier kein universelles Ein-Mudd-Maximum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "fiqh-wudu-wasser-sparen",
+      "kind": "evidence",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wudu-wasser-sparen",
+          "kind": "evidence",
+          "age": "9-10"
+        }
+      ],
       "reviewStatus": "not-generated",
       "url": null,
       "voiceApproved": false
