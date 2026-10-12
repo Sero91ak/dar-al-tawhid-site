@@ -496,15 +496,24 @@
     root.dataset.kidsHomeGeometryBucket=bucket;
   }
 
+  var lastHomeMotionAt=-10000;
   function restartHomeMotion(){
     var today=q("#view-today");
     if(!today||!today.classList.contains("active"))return;
+    /* pageshow/initialization can request a restart several times within
+       milliseconds. One motion cycle is enough and avoids repeated repaints. */
+    var now=performance.now();
+    if(now-lastHomeMotionAt<1000)return;
     var letters=qa("#view-today .kids-wordmark > .wm-kids span");
     if(!letters.length)return;
+    lastHomeMotionAt=now;
     letters.forEach(function(el){el.style.setProperty("animation","none","important")});
-    void today.offsetHeight;
+    /* Two frames restart CSS animation without forcing a synchronous layout
+       read (offsetHeight) on each home/tab entry. */
     requestAnimationFrame(function(){
-      letters.forEach(function(el){el.style.removeProperty("animation")});
+      requestAnimationFrame(function(){
+        letters.forEach(function(el){el.style.removeProperty("animation")});
+      });
     });
   }
 
