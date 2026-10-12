@@ -14,6 +14,7 @@
 | P01 | Mittel | Erwachsenen-Web-App | `assets/dar-app-chrome.js` beobachtet sämtliche DOM-Kinderänderungen und startete pro Änderung drei komplette Markentext-Prüfungen. | Auf relevante Markenelemente eingegrenzt; Ausführung durch Animation Frame + einzigen kurzen Nachlauf koalesziert. |
 | P12 | Mittel | Adaptive App-Navigation | `assets/adaptive-layout.js` berechnete Navigationsrechtecke auch ohne Orientierungswechsel, schrieb Root-Tokens trotz unveränderter Viewportgröße und verlor einen Force-Request bei bereits eingeplantem Frame. | Geometriemessung auf echten Orientierungswechsel reduziert, Viewport-Änderungen zwischengespeichert, Forced-Layout-Flag beim Scheduling erhalten. |
 | P13 | Mittel | Fold-/Tablet-Scroll | `assets/fold-split.js` rief die Scroll-Wiederherstellungsprüfung nach beliebigen DOM-Änderungen unter `#appView` auf. | MutationObserver prüft nur neue Dual-Shells; Reader-Inhaltsänderungen lösen keine unnötige Shell-Suche aus. |
+| P14 | Hoch | Erwachsenen-Startbildschirm/PWA | Der Boot-Observer blieb nach `finish()` registriert. Beim Android-Notfallpfad konnte `finished=true` gesetzt werden, ohne den 60-ms-Fortschrittstimer zu stoppen. | `assets/app-soft-boot.js`: Observer bei normalem Abschluss und Notfall-Abbau trennen; Intervall/Timeout im zentralen `releaseChrome()` aufräumen, keine spätere Reaktivierung nach DOMContentLoaded. |
 
 ## Weitere konkrete Risiken, für die eine Geräte- oder Browser-Profilierung fehlt
 
@@ -36,7 +37,7 @@
 
 Automatisch auf PRs nach `main` vorgesehen:
 - JavaScript-Syntax von `assets/dar-app-chrome.js` und `kids/navigation-v1182.js`.
-- Erwachsenen-PR #1071: `scripts/adult-touch-navigation-guard-test.cjs` und `scripts/adult-layout-performance-test.cjs`.
+- Erwachsenen-PR #1071: `scripts/adult-touch-navigation-guard-test.cjs` und `scripts/adult-layout-performance-test.cjs` einschließlich Boot-Lebenszyklusprüfung.
 - KIDS-PR #1072: `kids/test-navigation-touch-v1344.cjs`. Beide PRs besitzen getrennte nicht-AI-GitHub-Actions-Workflows.
 - Bestehende App-Health-, Inhalts-, Deploy-Lane-, Repo- und Update-Schutzchecks.
 
