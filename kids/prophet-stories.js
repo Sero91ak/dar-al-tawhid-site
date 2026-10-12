@@ -496,7 +496,7 @@ function stopAudio(){
 async function init(){
   if(!ensureUi())return;
   try{
-    const r=await fetch(DATA_URL+"?v=28",{cache:"force-cache"});
+    const r=await fetch(DATA_URL+"?v=20261012-v4",{cache:"no-store"});
     if(!r.ok)throw new Error("Propheten-Geschichten "+r.status);
     const data=await r.json();
     items=uniqueItems(data.items);
