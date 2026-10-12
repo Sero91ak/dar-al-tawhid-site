@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-10-12",
+  "project": "DAR AL TAWḤĪD KIDS Mein Gebet",
+  "scope": "Draft-only independent girl real GLB V14; not iOS/web app integration",
+  "originalReference": "Protected 10-image original-source ZIP in separate Google Drive originals folder",
+  "source": {
+    "version": "V13",
+    "sha256": "ad9368c3a1e939964cc18f8c8aff770fcc348e8ae6b1aa3d787e3be84a905e12",
+    "unmodified": true
+  },
+  "model": {
+    "version": "V14",
+    "sha256": "ec5df2b264ee87f20ff399446abbc89f344cd084d14133c64ebe38fba4a1b578",
+    "bytes": 2682192,
+    "meshCount": 213,
+    "triangles": 195544,
+    "changedMeshes": [
+      "hijab_hood_continuous_sculpted_v13",
+      "hijab_continuous_sculpted_chest_drape",
+      "hijab_shoulder_shawl"
+    ],
+    "unchangedMeshes": 210,
+    "newShoulderShawlVertices": 3602,
+    "sixRealCameraRenders": true,
+    "originalFaceHandsShoesDressUnchanged": true,
+    "shoulderShawlWatertightGeometry": true,
+    "meshCollisionApproved": false,
+    "clothSimulationApproved": false,
+    "humanOriginalLikenessApproved": false,
+    "originalGirlReady": false,
+    "skinnedRig": false,
+    "animations": 0
+  },
+  "review": {
+    "actualOriginalVsV13V14Sheet": true,
+    "confirmedImprovements": [
+      "broader, more downward-draped rear shawl rather than rigid lower tube",
+      "more organic continuous front fabric fold relief",
+      "less spherical lower rear hood transition"
+    ],
+    "stillFailing": [
+      "face and side-profile not identical to girl originals",
+      "pink hijab layered shoulder drape still visibly different from original",
+      "head silhouette still too geometric",
+      "hands, shoes and child proportions still diverge",
+      "no skinned rig",
+      "no prayer movements",
+      "no human religious/source acceptance"
+    ]
+  },
+  "data": {
+    "driveFolder": "https://drive.google.com/drive/folders/1As_6EZ6Oy1eW1llpT89zfIRxHlgXWucz",
+    "filesInFolder": 13,
+    "glbSha256VerifiedByDownloading": true,
+    "preserveV13Fallback": true,
+    "sourceOriginalsUntouched": true,
+    "cleanup": "No deletion of V13 or V11 because independent continuity and original-likeness review not passed"
+  },
+  "release": {
+    "modelApproved": false,
+    "rigApproved": false,
+    "prayerApproved": false,
+    "productionReady": false,
+    "mergeMain": false,
+    "liveDeploy": false
+  }
+}
