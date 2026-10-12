@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-10-12",
+  "source": "Google Drive original boy V7.7 GLB (read and SHA256 verified in this run)",
+  "sourceDriveFileId": "1ZBHGVbr6c25Hxpz1KDKnkpYb7f_FV7y3",
+  "sourceSha256": "353b028862f91922d6288cf6ede09d5c8150815657c66c9c116b7775311c07fa",
+  "sourceBytes": 4382224,
+  "skinCount": 1,
+  "joints": 19,
+  "primitives": 19,
+  "weightedVertices": 60996,
+  "invalidWeightVertices": 0,
+  "multiJointWeightVertices": 704,
+  "multiJointWeightFraction": 0.011542,
+  "rigidSingleJointVertices": 60292,
+  "notable": {
+    "robe-white": {
+      "vertices": 2274,
+      "blended": 704
+    },
+    "robe-seam": {
+      "vertices": 6474,
+      "blended": 0
+    },
+    "robe-ivory": {
+      "vertices": 3210,
+      "blended": 0
+    },
+    "skin": {
+      "vertices": 10646,
+      "blended": 0
+    }
+  },
+  "restInverseBindMaxAbsoluteResidual": 5.2452087562215866e-8,
+  "animationNames": [
+    "Qiyam",
+    "Takbir"
+  ],
+  "conclusion": "Only 1.1542% of weighted vertices blend more than one joint (threshold >0.001). Most cloth and body vertices are rigidly weighted; this is a measurable deformation risk, not a proof of a particular collision. The prior failed Ruku cloth/contact and original-identity gates remain blocked.",
+  "reproducer": "python kids/mein-gebet/rigging/qa_v77_skin_weight_distribution.py <verified-original-V7.7.glb>",
+  "manualVisualApproval": false,
+  "fiqhApproval": false,
+  "productionApproved": false,
+  "releaseGatesApproved": 0,
+  "releaseGatesTotal": 12,
+  "sourceUnmodified": true,
+  "modelModified": false,
+  "liveDeployment": false
+}
