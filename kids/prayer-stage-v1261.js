@@ -571,11 +571,17 @@ async function refresh(){
 }
 draw();
 if(place)refresh();
+// Keep the visible second-by-second countdown. Do not repaint the
+// hidden Home screen or poll prayer data while the app is backgrounded.
+let lastRefreshPoll=0;
 setInterval(()=>{
- if(!place)return;
- draw();
+ if(!place||document.hidden)return;
+ if(HOME.classList.contains("active")||!dayPage.hidden)draw();
+ const now=Date.now();
+ if(now-lastRefreshPoll<30000)return;
+ lastRefreshPoll=now;
  const current=dateInZone(new Date(),place.tz);
- if(Date.now()-lastAttempt>60*1000&&(current!==lastDay||!days[current]||Date.now()-lastFetch>65*60*1000))refresh();
+ if(now-lastAttempt>60*1000&&(current!==lastDay||!days[current]||now-lastFetch>65*60*1000))refresh();
 },1000);
 window.addEventListener("online",()=>{if(place)refresh();});
 document.addEventListener("visibilitychange",()=>{if(!document.hidden&&place)refresh();});

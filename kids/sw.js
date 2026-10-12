@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1340";
+const CACHE_NAME="dar-al-tawhid-kids-v1342";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 // KIDS_V202_DOWNLOAD_TABS_RELEASE_TRIGGER_20261010: detail-only offline controls; manifest V202 synchronized.
@@ -17,7 +17,7 @@ const CORE_PRECACHE=[
   "/kids/assets/kids-salah-v1272/isha.png?v=1277",
   "/kids/assets/kids-salah-v1262/cinematic-still.jpg",
   "/kids/prayer-stage-v1261.css?v=1320",
-  "/kids/prayer-stage-v1261.js?v=1320",
+  "/kids/prayer-stage-v1261.js?v=1342",
   "/kids/assets/kids-home-v1222/dar-title-reference-clean.svg?v=1229",
   "/kids/assets/kids-home-v1219/dar-title-reference.png?v=1229",
   "/kids/assets/kids-home-v1219/dar-title-reference.png?v=1229",
@@ -71,7 +71,7 @@ const CORE_PRECACHE=[
   "/kids/data/story-hub.json?v=7",
   "/kids/deen-learning-v1199.css?v=1199",
   "/kids/deen-lessons.css?v=2",
-  "/kids/deen-lessons.js?v=6",
+  "/kids/deen-lessons.js?v=7",
   "/kids/global-detail-dock-v1247.css?v=1297",
   "/kids/girls-profile-deep-fix-v1339.css?v=1339",
   "/kids/girls-profile-reader-v1340.css?v=1340",
@@ -94,15 +94,15 @@ const CORE_PRECACHE=[
   "/kids/mubashshirun-stories.css?v=29",
   "/kids/sahabiyyat-stories.css?v=7",
   "/kids/story-card-system.css?v=2",
-  "/kids/mubashshirun-stories.js?v=32",
-  "/kids/sahabiyyat-stories.js?v=24",
+  "/kids/mubashshirun-stories.js?v=33",
+  "/kids/sahabiyyat-stories.js?v=25",
   "/kids/story-follow-reader.css?v=10",
   "/kids/screen-awake.js?v=1",
   "/kids/story-follow-reader.js?v=17",
   "/kids/story-hub.css?v=12",
   "/kids/stories-home-v1133.css?v=1152",
   "/kids/stories-home-v1138.css?v=1152",
-  "/kids/story-hub.js?v=27",
+  "/kids/story-hub.js?v=28",
   "/kids/global-story-glow-v1216.css?v=1218-calm",
   "/kids/global-story-glow-v1216.js?v=1218-calm",
   "/kids/dua-hub-v1219.css?v=1278",
@@ -182,7 +182,7 @@ const CORE_PRECACHE=[
   "/kids/assets/dua-3d/home.svg?v=1221",
   "/kids/assets/dua-3d/mosque.svg?v=1221",
   "/kids/assets/dua-3d/shield.svg?v=1221",
-  "/kids/navigation-v1182.js?v=1299",
+  "/kids/navigation-v1182.js?v=1342",
   "/kids/kids-age-typography.css?v=5",
   "/kids/story-library-cards.css?v=9",
   "/kids/kids-touch-rail.css?v=17",
@@ -281,7 +281,7 @@ const KIDS_BOOT_PRECACHE=[
   "/kids/index.html",
   "/kids/akademie/index.html",
   "/kids/prayer-stage-v1261.css?v=1320",
-  "/kids/prayer-stage-v1261.js?v=1320",
+  "/kids/prayer-stage-v1261.js?v=1342",
   "/kids/assets/kids-salah-v1272/hero-home.png?v=1274",
   "/kids/assets/kids-home-v1222/dar-title-reference-clean.svg?v=1229",
   "/kids/manifest.webmanifest",
@@ -466,6 +466,12 @@ self.addEventListener("fetch",function(event){
      On an offline first-open, networkFirst transparently returns the cached
      matching release; avoid one-launch stale hero geometry from SWR. */
   if(url.pathname==="/kids/prayer-stage-v1261.css"||url.pathname==="/kids/prayer-stage-v1261.js"){
+    event.respondWith(networkFirst(request));
+    return;
+  }
+  /* Tap-only KIDS navigation, universal story hub: never replay stale gesture
+     handlers from previous releases on online iOS/Android WebViews. */
+  if(url.pathname==="/kids/navigation-v1182.js"||url.pathname==="/kids/story-hub.js"){
     event.respondWith(networkFirst(request));
     return;
   }

@@ -3012,7 +3012,6 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
       <button type="button" id="joinSave">Konto anlegen</button>
       <p id="joinStatus" class="join-feedback" role="status" aria-live="polite" aria-atomic="true" hidden></p>
       <button type="button" id="joinLoginExisting" class="ghost" style="margin-top:8px;width:100%" hidden>Vorhandenes Konto anmelden</button>
-      
       <button type="button" class="ghost join-skip" style="margin-top:8px;width:100%">Ohne Konto weitermachen</button>
       <button type="button" class="ghost" data-back="age" style="margin-top:8px;width:100%">Zurück</button>
     </div>
@@ -3769,26 +3768,83 @@ function launchNextDailyStep(){
   var next=plan.find(function(s){return !dailyDone(s.id)});
   if(next)launchDailyStep(next.id);
 }
+/* KIDS_TAB_POSITION_STABILITY_V1318: reset every possible iOS scroll layer.
+   Synchronize data-view BEFORE measuring the new page; correct WebKit's
+   post-layout scroll anchoring for two frames without affecting detail readers. */
+function kidsResetMainScroll(){
+  var scroller=document.querySelector(".shell");
+  if(scroller)scroller.scrollTop=0;
+  var rootScroller=document.scrollingElement;
+  if(rootScroller&&rootScroller!==scroller)rootScroller.scrollTop=0;
+  document.documentElement.scrollTop=0;
+  if(document.body)document.body.scrollTop=0;
+  try{window.scrollTo(0,0)}catch(e){}
+}
+/* KIDS_TAB_SCROLL_STABILITY_V1323
+   iOS may continue an old scroll gesture, restore an anchor or scroll on
+   focus AFTER the two initial frames. For 900ms after navigation, correct
+   only unrequested movement. Do not fight a new touch, wheel or key action.
+   Readers and detail panes are independent and are not observed. */
+var kidsTabEpoch=0;
+var kidsScrollGestureSerial=0;
+function kidsMarkUserScroll(){kidsScrollGestureSerial++;}
+document.addEventListener("touchstart",kidsMarkUserScroll,{passive:true,capture:true});
+document.addEventListener("touchmove",kidsMarkUserScroll,{passive:true,capture:true});
+document.addEventListener("wheel",kidsMarkUserScroll,{passive:true,capture:true});
+document.addEventListener("keydown",function(e){
+  if(["ArrowDown","ArrowUp","PageDown","PageUp","Home","End"," "].indexOf(e.key)>=0)
+    kidsMarkUserScroll();
+},true);
+function kidsFinishMainTabSwitch(){
+  var epoch=++kidsTabEpoch;
+  var initialGestureSerial=kidsScrollGestureSerial;
+  var main=document.querySelector(".shell");
+  var root=document.scrollingElement;
+  var finished=false,queued=false;
+  function userMoved(){
+    return kidsScrollGestureSerial!==initialGestureSerial;
+  }
+  function settle(){
+    if(finished||epoch!==kidsTabEpoch||userMoved())return;
+    if((main&&main.scrollTop>1)||(root&&root.scrollTop>1)||window.scrollY>1)
+      kidsResetMainScroll();
+  }
+  function onScroll(){
+    if(queued||finished||epoch!==kidsTabEpoch||userMoved())return;
+    queued=true;
+    requestAnimationFrame(function(){queued=false;settle();});
+  }
+  function clean(){
+    if(finished)return;
+    settle();
+    finished=true;
+    if(main)main.removeEventListener("scroll",onScroll);
+    if(root&&root!==main)root.removeEventListener("scroll",onScroll);
+  }
+  kidsResetMainScroll();
+  if(main)main.addEventListener("scroll",onScroll,{passive:true});
+  if(root&&root!==main)root.addEventListener("scroll",onScroll,{passive:true});
+  requestAnimationFrame(function(){
+    if(epoch!==kidsTabEpoch)return clean();
+    kidsResetMainScroll();
+    requestAnimationFrame(settle);
+  });
+  setTimeout(settle,160);
+  setTimeout(settle,420);
+  setTimeout(clean,900);
+}
+window.DARKidsResetMainScroll=kidsFinishMainTabSwitch;
 function showTab(name){
   var view=document.getElementById("view-"+name);
   if(!view)return;
   var current=document.querySelector(".view.active");
   document.querySelectorAll(".nav-btn").forEach(function(b){b.classList.toggle("active",b.dataset.target===name)});
-  if(current===view){
-    var sameScroll=document.querySelector(".shell");
-    requestAnimationFrame(function(){
-      if(sameScroll){try{sameScroll.scrollTo({top:0,left:0,behavior:"auto"})}catch(e){sameScroll.scrollTop=0}}
-      else window.scrollTo({top:0,behavior:"auto"});
-    });
-    return;
+  if(current!==view){
+    if(current)current.classList.remove("active");
+    view.classList.add("active");
   }
-  if(current)current.classList.remove("active");
-  view.classList.add("active");
-  var shellScroll=document.querySelector(".shell");
-  requestAnimationFrame(function(){
-    if(shellScroll){try{shellScroll.scrollTo({top:0,left:0,behavior:"auto"})}catch(e){shellScroll.scrollTop=0}}
-    else window.scrollTo({top:0,behavior:"auto"});
-  });
+  document.documentElement.setAttribute("data-view",name);
+  kidsFinishMainTabSwitch();
 }
 document.querySelectorAll(".nav-btn").forEach(function(b){b.addEventListener("click",function(){showTab(b.dataset.target)})});
 document.querySelectorAll("[data-go]").forEach(function(b){
@@ -6397,7 +6453,14 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     moon.style.opacity=String(mins<6*60||mins>=18*60?1:0);
   }
   fillStars();fillRain();
-  window.addEventListener("resize",function(){fillStars();fillRain()});
+  // Mobile browser chrome can resize the height without changing the width.
+  // Avoid rebuilding star/rain DOM on those toolbar-only resizes.
+  var lastSkyWidth=Math.round(window.innerWidth);
+  window.addEventListener("resize",function(){
+    var width=Math.round(window.innerWidth);
+    if(Math.abs(width-lastSkyWidth)<2)return;
+    lastSkyWidth=width;fillStars();fillRain();
+  },{passive:true});
   placeSky();
   setInterval(placeSky,30000);
   paint();
@@ -6408,16 +6471,6 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
       mo.observe(el,{attributes:true,attributeFilter:["class"]});
     });
   }
-  document.addEventListener("pointerdown",function(ev){
-    var el=ev.target.closest&&ev.target.closest(".choice,.resume,.daily-step,.daily-start,.story-feature,.story-row,.surah-card,.verse-card,.quran-action,.close-btn,.quiz-answer");
-    if(!el)return;
-    el.classList.remove("kid-pop");
-    void el.offsetWidth;
-    var fx="kid-pop";
-    if(el.classList.contains("nav-btn"))fx="kid-pop";
-    if(el.classList.contains("close-btn"))fx="kid-pop";
-    el.classList.add("kid-pop");
-  },true);
 })();
 </script>
 
@@ -6467,6 +6520,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     if(btn)btn.click();
     else if(app)app.setAttribute("data-age",p.age||"6–8");
   }
+
   /* Inline feedback works even when iOS WKWebView suppresses window.alert. */
   var joinBusy=false;
   function joinFeedback(msg,kind){
@@ -6790,7 +6844,8 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"cc4ac04648774872a036edb959747bd5","r":1,"spa":2}' crossorigin="anonymous"></script>
 <script src="/kids/content-studio-feed.js?v=studio8"></script>
-<script src="/kids/owner-voice.js?v=8"></script>\n<script src="/kids/dua-word-meanings-v1.js?v=2"></script>
+<script src="/kids/owner-voice.js?v=8"></script>
+<script src="/kids/dua-word-meanings-v1.js?v=2"></script>
 <script src="/kids/dua-phonetic-alignment-v1.js?v=1"></script>
 <script src="/kids/dua-smart-learn.js?v=1312"></script>
 <script>
@@ -6800,7 +6855,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   // The next navigation uses network-first and receives the latest release.
   if("serviceWorker" in navigator){
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1339",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1342",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     },{once:true});
@@ -7783,24 +7838,27 @@ html[data-view="stories"] #view-stories > :last-child{
 }
 
 </style>
-<link rel="stylesheet" href="/kids/dua-smart-learn.css?v=1261" data-kids-dua-smart="1">\n<link rel="stylesheet" href="/kids/quiz-library.css?v=1237">
+<link rel="stylesheet" href="/kids/dua-smart-learn.css?v=1261" data-kids-dua-smart="1">
+<link rel="stylesheet" href="/kids/quiz-library.css?v=1237">
 <link rel="stylesheet" href="/kids/kids-age-typography.css?v=5">
 <script src="/kids/screen-awake.js?v=1"></script>
 <script src="/kids/story-follow-reader.js?v=17"></script>
 <script src="/kids/story-policy.js?v=2"></script>
 <script src="/kids/prophet-stories.js?v=43"></script>
-<script src="/kids/mubashshirun-stories.js?v=32"></script>
-<script src="/kids/sahabiyyat-stories.js?v=24"></script>\n<script src="/kids/deen-lessons.js?v=6"></script>
+<script src="/kids/mubashshirun-stories.js?v=33"></script>
+<script src="/kids/sahabiyyat-stories.js?v=25"></script>
+<script src="/kids/deen-lessons.js?v=7"></script>
 <script src="/kids/global-story-glow-v1216.js?v=1218-calm"></script>
 <script src="/kids/term-learning.js?v=1"></script>
 <script src="/kids/dua-hub-v1219.js?v=1318" data-kids-dua-hub="1259"></script>
-<script src="/kids/story-hub.js?v=27"></script>
+<script src="/kids/story-hub.js?v=28"></script>
 <script src="/kids/kids-age-typography.js?v=3"></script>
 <script src="/kids/quiz-library.js?v=9"></script>
 <link rel="stylesheet" href="/kids/section-heroes-v1095.css?v=1256-parent-hero-full" data-kids-section-heroes-late="1">
 <link rel="stylesheet" href="/kids/stories-home-v1133.css?v=1148" data-kids-stories-home-late="1">
 <link rel="stylesheet" href="/kids/stories-home-v1138.css?v=1152" data-kids-stories-home-polish="1">
-<link rel="stylesheet" href="/kids/deen-learning-v1199.css?v=1199" data-kids-deen-learning="1">\n<link rel="stylesheet" href="/kids/deen-lessons.css?v=2" data-kids-deen-lessons="1">
+<link rel="stylesheet" href="/kids/deen-learning-v1199.css?v=1199" data-kids-deen-learning="1">
+<link rel="stylesheet" href="/kids/deen-lessons.css?v=2" data-kids-deen-lessons="1">
 <link rel="stylesheet" href="/kids/global-story-glow-v1216.css?v=1218-calm" data-kids-global-story-glow="1">
 <link rel="stylesheet" href="/kids/dua-hub-v1219.css?v=1278" data-kids-dua-hub="1259">
 <link rel="stylesheet" href="/kids/story-card-system.css?v=2" data-kids-story-card-system="1">
@@ -9538,7 +9596,7 @@ html[data-view="stories"] #view-stories > :last-child{
 }
 </style>
 
-<script src="/kids/navigation-v1182.js?v=1299"></script>
+<script src="/kids/navigation-v1182.js?v=1342"></script>
 
 <style id="kids-home-cinema-v1185">
 #view-today{--home-v1185-deep:#061b26;--home-v1185-petrol:#082b37}
@@ -11444,6 +11502,22 @@ html[data-kids-age]:has(#view-stories.active) body .bottom-nav .nav-btn[data-tar
   text-align:center!important;
 }
 </style>
+<!-- KIDS_MAIN_TAB_SAFE_TOP_LOCK_V1319: stable iOS status-bar clearance on main tabs -->
+<style id="kids-main-tab-safe-top-v1319">
+/* The shell must not change its top inset when data-view updates asynchronously.
+   Keep the approved initial safe-area clearance for every non-home main tab.
+   :has() follows the actual active view even before data-view is synchronized. */
+html[data-view="stories"] body .app .shell,
+html[data-view="dua"] body .app .shell,
+html[data-view="quran"] body .app .shell,
+html[data-view="parents"] body .app .shell,
+html body .app:has(#view-stories.view.active) .shell,
+html body .app:has(#view-dua.view.active) .shell,
+html body .app:has(#view-quran.view.active) .shell,
+html body .app:has(#view-parents.view.active) .shell{
+  padding-top:calc(var(--safe-top, max(16px, env(safe-area-inset-top, 0px))) + 8px)!important;
+}
+</style>
 <link rel="stylesheet" href="/kids/girls-profile-palette-v1331.css?v=1331" data-kids-girls-palette="1331">
 <link rel="stylesheet" href="/kids/girls-profile-complete-v1333.css?v=1333" data-kids-girls-complete="1333">
 <link rel="stylesheet" href="/kids/girls-profile-hero-tints-v1334.css?v=1334" data-kids-hero-tints="1334">
@@ -11452,9 +11526,11 @@ html[data-kids-age]:has(#view-stories.active) body .bottom-nav .nav-btn[data-tar
 <link rel="stylesheet" href="/kids/salah-day-profile-v1337.css?v=1337" data-kids-salah-day-profile="1337">
 <link rel="stylesheet" href="/kids/prayer-day-profile-v1337.css?v=1337" data-kids-prayer-day-profile="1337">
 <link rel="stylesheet" href="/kids/prayer-detail-theme-v1338.css?v=1338" data-kids-prayer-theme="1338">
+<link rel="stylesheet" href="/kids/girls-profile-deep-fix-v1339.css?v=1339" data-kids-girls-deep-fix="1339">
+<link rel="stylesheet" href="/kids/girls-profile-reader-v1340.css?v=1340" data-kids-girls-reader="1340">
 <script defer src="/kids/girls-profile-theme-v1332.js?v=1332" data-kids-girls-system-tint="1332"></script>
 <!-- KIDS_OFFLINE_LIBRARY_V1: independent storage controls for the Parents tab -->
 <script defer src="/kids/offline-library-v1.js?v=1"></script>
 <!-- KIDS_SALAH_STAGE_V1261: placed after hero, before continue-listening -->
-<script defer src="/kids/prayer-stage-v1261.js?v=1316" data-kids-salah-stage="1275"></script>
+<script defer src="/kids/prayer-stage-v1261.js?v=1342" data-kids-salah-stage="1275"></script>
 </html>
