@@ -40,8 +40,8 @@ const hasV27=read("kids/akademie/index.html").includes("curriculum-v27.js?v=2026
 assert.equal(Object.keys(stage.entries).length,4,"No unapproved batch production");
 assert.ok([...Object.keys(stage.entries)].every(k=>all.has(key(k))),"Every staged text must belong to the actual lesson plan");
 assert.equal(annual.goals.newLessonSlots,208);
-assert.equal(annual.goals.currentlyInCatalog,hasV27?58:hasV26?50:hasV25?45:38);
-assert.equal(annual.goals.additionalAuthenticallyVerifiedLessonsNeeded,hasV27?150:hasV26?158:hasV25?163:170);
+assert.equal(annual.goals.currentlyInCatalog,70);
+assert.equal(annual.goals.additionalAuthenticallyVerifiedLessonsNeeded,138);
 assert.ok(html.includes("academy-voice-plan-v22.json"),"Voice review must include the upcoming four real lessons");
 console.log("KIDS ACADEMY VOICE REVIEW PASS: "+combined.size+" unique utterances, four review-only V4 files, "+
  annual.goals.currentlyInCatalog+" verified-content lessons; no paid calls or child profile writes.");
