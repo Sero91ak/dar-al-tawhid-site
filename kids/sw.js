@@ -493,6 +493,11 @@ self.addEventListener("fetch",function(event){
     event.respondWith(staleWhileRevalidate(request));
     return;
   }
+  /* Always retrieve latest story master-audio metadata while online; retain offline fallback. */
+  if(url.pathname==="/kids/data/prophet-stories.json"||url.pathname==="/kids/data/sahabiyyat-stories.json"){
+    event.respondWith(networkFirst(request));
+    return;
+  }
   if(url.pathname.indexOf("/kids/data/")===0){
     event.respondWith(staleWhileRevalidate(request));
     return;
