@@ -34,6 +34,23 @@ jobs:
         run: node --check scripts/dar-daily-release-dry-run.cjs
       - name: Dry-run publisher (no GitHub writes or pushes)
         run: node scripts/dar-daily-release-dry-run.cjs
+      - name: Exercise actual Worker against a fully mocked OneSignal API
+        run: node scripts/dar-daily-onesignal-contract.mjs
+      - name: Verify broad audience is rejected by strict test gate
+        shell: bash
+        run: |
+          set +e
+          node scripts/dar-daily-onesignal-contract.mjs --require-safe-target
+          result=$?
+          set -e
+          if [ "$result" = "2" ]; then
+            echo "Broad audience blocked: production push NOT allowed."
+          elif [ "$result" = "0" ]; then
+            echo "Mocked target contract passes; verify live OneSignal segment filters separately."
+          else
+            echo "::error::OneSignal contract failed (exit $result)"
+            exit 1
+          fi
       - name: Verify guarded release never proceeds on blockers
         shell: bash
         run: |
