@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1342";
+const CACHE_NAME="dar-al-tawhid-kids-v1343";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 // KIDS_V202_DOWNLOAD_TABS_RELEASE_TRIGGER_20261010: detail-only offline controls; manifest V202 synchronized.
@@ -182,7 +182,7 @@ const CORE_PRECACHE=[
   "/kids/assets/dua-3d/home.svg?v=1221",
   "/kids/assets/dua-3d/mosque.svg?v=1221",
   "/kids/assets/dua-3d/shield.svg?v=1221",
-  "/kids/navigation-v1182.js?v=1342",
+  "/kids/navigation-v1182.js?v=1343",
   "/kids/kids-age-typography.css?v=5",
   "/kids/story-library-cards.css?v=9",
   "/kids/kids-touch-rail.css?v=17",

@@ -2,7 +2,7 @@
    Global rule:
    - Main tabs always open at the top.
    - Detail/library back returns to the exact parent scroll position.
-   - Edge swipe: left edge -> back, right edge -> forward.
+   - Pages change only through taps on tabs, category cards and explicit back buttons.
    - One bottom clearance only; no stacked empty scroll tail. */
 (function(){
   "use strict";
@@ -512,7 +512,7 @@
     resetMainTop:resetMainTop,
     captureScrolls:captureScrolls,
     signature:signature,
-    gestureVersion:"button-only-navigation-v1342"
+    gestureVersion:"button-only-navigation-v1343"
   };
 
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});
