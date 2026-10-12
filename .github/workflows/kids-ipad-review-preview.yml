@@ -64,7 +64,8 @@ jobs:
           done
           curl -sS -L --retry 3 "$BASE/kids/start?qa=v1348" -o /tmp/kids-girls-preview.html
           grep -q 'kids-profile-first-paint-v1348' /tmp/kids-girls-preview.html
-          grep -q 'girls-home-photo-palette-v1348.css?v=1348' /tmp/kids-girls-preview.html
+          grep -q 'girls-home-photo-palette-v1348.css?v=1349' /tmp/kids-girls-preview.html
+          curl -fsSL "$BASE/kids/girls-home-photo-palette-v1348.css?v=1349" | grep -q 'Girls Duʿāʾ art slots'
           for path in / /test/ /admin/ /kids/creator-test/worker.js; do
             case "$path" in
               /) continue;;
