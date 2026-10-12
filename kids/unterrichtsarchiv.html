@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive"><meta name="referrer" content="no-referrer"><meta name="theme-color" content="#071d2a">
+<title>Unterrichtsübersicht · DĀR AL TAWḤĪD KIDS AKADEMIE</title>
+<style>
+:root{color-scheme:dark;--bg:#071a25;--surface:#102f3b;--surface2:#0b2532;--line:#39535e;--gold:#edcf92;--ink:#f8f0dd;--quiet:#bfd0d5;--sea:#a5d9cd;--warn:#eed2ac}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font:15px/1.52 -apple-system,BlinkMacSystemFont,"Avenir Next",Arial,sans-serif}body{background:radial-gradient(ellipse at 55% -10%,#224758 0,transparent 52%),var(--bg)}
+a{color:var(--gold);text-underline-offset:3px}button,input,select{font:inherit}button{cursor:pointer;min-height:44px;background:#214756;border:1px solid #66808b;border-radius:12px;padding:9px 13px;color:var(--ink);font-weight:760}button:hover{border-color:var(--gold)}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+input,select{width:100%;min-width:0;min-height:44px;border:1px solid #627b88;border-radius:10px;background:#081f2c;color:#f9f1df;padding:9px 11px}
+h1,h2,h3,h4{font-family:Georgia,"Times New Roman",serif;line-height:1.22;font-weight:500}h1{font-size:clamp(32px,5vw,51px);color:var(--gold);margin:5px 0 9px}h2{font-size:clamp(24px,3vw,32px);margin:4px 0 9px;color:var(--gold)}h3{font-size:20px;color:#f6dfaa;margin:7px 0 12px}h4{font-size:17px;color:#f7e8c7;margin:3px 0 9px}p{margin:8px 0;overflow-wrap:anywhere}
+main{width:min(100%,1400px);margin:auto;padding:calc(20px + env(safe-area-inset-top)) max(14px,env(safe-area-inset-right)) calc(38px + env(safe-area-inset-bottom)) max(14px,env(safe-area-inset-left))}
+.topline{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;color:var(--gold);font-weight:850;letter-spacing:.13em;font-size:11px}.topline a{font-weight:750;letter-spacing:0;color:var(--quiet)}.intro{color:var(--quiet);max-width:890px;font-size:16px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:18px 0 20px}.stat{border:1px solid var(--line);border-radius:15px;padding:14px 16px;background:#102b37}.stat strong{display:block;font-size:clamp(25px,3.3vw,37px);line-height:1.2;color:var(--gold)}.stat small{color:var(--quiet);font-weight:690}
+.note{background:#123441;border-left:3px solid var(--gold);border-radius:10px;padding:12px 15px;color:#f4e8ce;margin:12px 0}
+.layout{display:grid;grid-template-columns:minmax(285px,355px) minmax(0,1fr);gap:17px;align-items:start}.pane{background:rgba(12,39,53,.92);border:1px solid var(--line);border-radius:18px;min-width:0}
+.catalog{position:sticky;top:12px;max-height:calc(100dvh - 24px);display:flex;flex-direction:column;overflow:hidden}.catalog-head{padding:15px 15px 10px}.catalog-head h2{font-size:22px}.filter-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}label{display:grid;gap:5px;font-size:12px;color:var(--quiet);font-weight:730}.filter-wide{grid-column:1/-1}.results{color:var(--quiet);font-size:12px;padding:0 15px 9px}.list{overflow-y:auto;min-height:120px;overscroll-behavior:contain;padding:3px 9px 12px;display:grid;align-content:start;gap:7px}
+.item{width:100%;text-align:left;min-height:64px;background:#0d2733;border:1px solid #405b66;padding:10px 12px;display:block}.item.selected{background:#244853;border-color:var(--gold)}.item strong{display:block;font-size:14px;font-weight:790;line-height:1.35}.item small{display:block;color:var(--quiet);font-size:12px;margin-top:4px;font-weight:500}.meta{color:var(--quiet);font-size:12px}.marker{color:var(--sea);font-weight:830}.marker.todo{color:var(--warn)}
+.reader{padding:20px 22px;min-height:550px}.reader-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;align-items:start}.overline{font-size:11px;color:var(--sea);font-weight:870;letter-spacing:.11em}.age-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}.age-tabs button{min-height:43px;flex:1 1 96px}.age-tabs button.on{background:var(--gold);color:#152f39;border-color:var(--gold)}
+.block{border-top:1px solid #385763;padding-top:17px;margin-top:17px}.lesson-goal{font-size:18px;line-height:1.55}.lesson-intro{font-size:17px;line-height:1.6;color:#fbebcc}
+.lesson-lines{display:grid;gap:8px;counter-reset:sentence}.lesson-lines p{border:1px solid #45616c;border-radius:12px;background:#102e3b;padding:12px 13px;margin:0;line-height:1.55}.arabic{font:clamp(25px,4vw,36px)/1.95 "Geeza Pro","Noto Naskh Arabic","Traditional Arabic",serif;text-align:right;direction:rtl;color:#f5e2b5;unicode-bidi:plaintext;padding:10px 8px;overflow-wrap:anywhere}
+.sourcebox{border:1px solid #526874;background:#082331;border-radius:14px;padding:13px 15px;margin-top:12px}.sourcebox p{line-height:1.62}.sourcebox a{display:inline-block;margin-top:7px;overflow-wrap:anywhere}.sourcebox small{display:block;color:var(--quiet);font-size:12px}
+.qa{border:1px solid var(--line);border-radius:12px;padding:13px 15px;margin:11px 0;background:#0d2936}.qa strong{display:block;color:var(--gold)}.qa ul{margin:7px 0;padding-left:19px}.qa li{padding:3px 0}.answer{color:var(--sea);font-size:13px}
+.glossary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.term{border:1px solid #4b6872;background:#0e2d3a;padding:11px 12px;border-radius:11px}.term strong{color:var(--gold)}.term p{color:var(--ink);font-size:13px}
+.empty{padding:35px 15px;text-align:center;color:var(--quiet)}.policy{margin:19px 0;padding:14px 17px;border:1px solid var(--line);background:#102e3a;border-radius:16px}.policy summary{cursor:pointer;font-weight:780;color:var(--gold)}.policy p{font-size:13px;color:var(--quiet);margin:10px 0}
+.footer{border-top:1px solid var(--line);margin:30px 0 0;padding:18px 0;color:var(--quiet);font-size:12px}
+@media(max-width:920px){.layout{grid-template-columns:minmax(0,1fr)}.catalog{position:static;max-height:none}.list{max-height:260px;overflow:auto}.reader{padding:16px}.glossary{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:520px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.reader{padding:13px}.catalog-head{padding:12px}h1{font-size:30px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body><main>
+<div class="topline"><span>DĀR AL TAWḤĪD KIDS AKADEMIE · UNTERRICHTSÜBERSICHT</span><a href="https://dar-al-tawhid.de/">Website ↗</a></div>
+<h1>Unterrichtsübersicht</h1>
+<p class="intro">Die direkte Leseübersicht über den gesamten islamischen Jahreslehrplan. Jeden vorhandenen Unterricht vollständig mitlesen, Quellen nachprüfen, Altersgruppen vergleichen und zukünftige Themen getrennt einsehen.</p>
+<section class="stats" aria-label="Aktueller Lehrplan">
+<div class="stat"><strong id="readyCount">–</strong><small>Vorhandene Lektionen</small></div>
+<div class="stat"><strong id="planCount">–</strong><small>Geplante Themen</small></div>
+<div class="stat"><strong id="totalCount">208</strong><small>Plätze im Jahresplan</small></div>
+<div class="stat"><strong>3</strong><small>Altersbereiche</small></div>
+</section>
+<p class="note" id="archiveState" role="status" aria-live="polite">Unterrichtsdateien werden eingelesen …</p>
+<div class="layout">
+<aside class="pane catalog" aria-label="Unterricht auswählen">
+<div class="catalog-head"><h2>Alle Unterrichtsreihen</h2>
+<div class="filter-grid">
+<label class="filter-wide">Suchen<input id="search" type="search" placeholder="Tawḥīd, Īmān, ṣabr, Quelle …" autocomplete="off"></label>
+<label>Bestand<select id="stateFilter"><option value="ready">Ausgearbeitet</option><option value="planned">In Planung</option><option value="all">Alles</option></select></label>
+<label>Bereich<select id="pillar"><option value="">Alle Fachbereiche</option></select></label>
+<label class="filter-wide">Unterrichtsalter<select id="age"><option value="4-5">4–5 Jahre</option><option value="6-8">6–8 Jahre</option><option value="9-10">9–10 Jahre</option></select></label>
+</div></div>
+<div class="results" id="resultCount">–</div>
+<div id="lessonList" class="list" role="list" aria-label="Alle Lektionen"></div>
+</aside>
+<section class="pane reader" id="reader" aria-live="polite" aria-label="Unterricht vollständig lesen">
+<p class="empty">Wähle einen Unterricht aus der Liste.</p>
+</section>
+</div>
+<details class="policy"><summary>Quellenmaßstab und Freigaberegeln anzeigen</summary>
+<p><strong>Primär:</strong> Qurʾān im arabischen Original, authentische Sunnah und gesicherte Überlieferungen der Ṣaḥābah und Ṣaḥābiyyāt, Tābiʿīn/Tābiʿiyyāt und der folgenden Generationen.</p>
+<p><strong>Ergänzend:</strong> frühe Ahl-as-Sunnah-Werke, die überlieferten Athār und zuverlässige Erklärungen der Salaf aṣ-Ṣāliḥ; für Fiqh bevorzugt die hanbalitische Schule. Spätere Gelehrte werden nur als überprüfbare Erläuterung herangezogen, nicht als Ersatz für Qurʾān und authentische Sunnah.</p>
+<p><strong>Bevorzugte Werke zur Quellenprüfung:</strong> Ṣaḥīḥ al-Buḫārī, Ṣaḥīḥ Muslim, Musnad Aḥmad, Kitāb as-Sunnah (ʿAbdullāh ibn Aḥmad), die überlieferten Werke von al-Khallāl, al-Lālikāʾī, ad-Dārimī, Ḥarb al-Kirmānī, Tafsīr aṭ-Ṭabarī sowie – für geeignete Themen – Ibn Qudāma, Ibn Taymiyyah und Ibn al-Qayyim. Eine bibliografische Nennung ist noch kein Nachweis für eine einzelne Aussage.</p>
+<p><strong>Prüfpflicht:</strong> Bei jedem Zitat genaue Stelle und Beurteilung, klare Kennzeichnung von Paraphrasen und arabischen Qurʾān-Auszügen. Wo kein belastbarer Direktbeleg vorliegt, bleibt die Detailprüfung offen. Keine erfundenen Ṣaḥābah-/Salaf-Aussagen und keine selbstständigen Glaubensurteile über Personen.</p>
+</details>
+<p class="footer">Schreibgeschützte Leseansicht · keine Änderung an Kinderprofilen, keine Audio-Generierung, keine kostenpflichtigen Anfragen. Die Vorlesestimme wird erst nach Prüfung und ausdrücklicher Freigabe verwendet. Diese Ansicht verwendet ausschließlich bereits öffentlich abrufbare Unterrichtsdateien und ist über ihre URL ohne Anmeldung erreichbar.</p>
+</main>
+<script>
+(function(){
+"use strict";
+const $=s=>document.querySelector(s),AGES=["4-5","6-8","9-10"];
+const pillars={
+ tawhid:"Tawḥīd",iman:"Īmān",ikhlas:"Ikhlāṣ",akhlaq:"Akhlāq",adab:"Adab",tarbiyah:"Tarbiyah",nafs:"Tazkiyat an-Nafs",
+ fiqh:"Fiqh und ʿIbādāt",quran:"Qurʾān und Sunnah",sirah:"Sīrah",dua:"Duʿāʾ und Adhkār",family:"Familie",aqidah:"ʿAqīdah"
+};
+let lessons=[],selected="",age="4-5",ready=0,planned=0,visible=[];
+const tx=s=>String(s==null?"":s),clean=s=>tx(s).normalize("NFC").toLocaleLowerCase("de");
+function el(tag,content="",cls=""){const n=document.createElement(tag);n.textContent=tx(content);if(cls)n.className=cls;return n}
+function line(parent,tag,value,cls=""){const n=el(tag,value,cls);parent.appendChild(n);return n}
+function block(parent,title){const b=el("section","","block");line(b,"h3",title);parent.appendChild(b);return b}
+function safeDorar(raw){const value=tx(raw);return /^https:\/\/dorar\.net\/hadith\/sharh\/[0-9]+(?:[?#][^\s]*)?$/.test(value)?value:null}
+function link(parent,url,label){const a=el("a",label);a.href=url;a.target="_blank";a.rel="noopener noreferrer";parent.appendChild(a);return a}
+function getPillar(l){if(l.pillar&&pillars[l.pillar])return l.pillar;const id=l.id||"";
+ for(const idp of ["tawhid","iman","ikhlas","nafs","tarbiyah","dua"])if(id.includes(idp))return idp;
+ return l.subject||"aqidah";
+}
+// Ṣidq baseline reproduced from live AGE_EXPLANATIONS + exercises (all 3 ages).
+const SIDQ_ARCHIVE=Object.freeze({
+ "id": "sidq",
+ "subject": "akhlaq",
+ "pillar": "akhlaq",
+ "title": "Ṣidq – Wahrhaftigkeit",
+ "topic": "Wahrhaftigkeit",
+ "lead": "Die Wahrheit sagen – auch wenn es manchmal Mut kostet.",
+ "goal": "Ich lerne ehrlich zu sprechen und einen Fehler zuzugeben.",
+ "quran": {
+  "surah": 9,
+  "ayah": 119,
+  "arabic": "يَا أَيُّهَا الَّذِينَ آمَنُوا اتَّقُوا اللَّهَ وَكُونُوا مَعَ الصَّادِقِينَ",
+  "meaning": "O die ihr glaubt, fürchtet Allah und seid mit den Wahrhaftigen.",
+  "excerpt": false
+ },
+ "hadith": {
+  "source": "Ṣaḥīḥ Muslim, Nr. 2607a",
+  "text": "Wahrhaftigkeit führt zur Rechtschaffenheit, und Rechtschaffenheit führt zum Paradies."
+ },
+ "sourceNote": "Original-Altersfassungen und Fragen aus der produktiven Ṣidq-Lektion. Arabischer Vers 9:119 und Ḥadīṯ Muslim 2607a.",
+ "ageText": {
+  "4-5": {
+   "intro": "Die Wahrheit sagen – das ist ehrlich.",
+   "lines": [
+    "Manchmal geht etwas aus Versehen kaputt.",
+    "Du darfst ehrlich sagen: Das war ich.",
+    "Danach kannst du um Entschuldigung bitten und beim Aufräumen helfen.",
+    "Ehrlich sein ist gut. Das üben wir gemeinsam."
+   ],
+   "evidence": "Allah sagt uns im Qurʾān, dass wir mit den Wahrhaftigen sein sollen. Der Prophet ﷺ erklärte, wie gut Wahrhaftigkeit ist. Deshalb sagen wir die Wahrheit, auch wenn wir einen Fehler machen.",
+   "recap": [
+    "Wahrhaftigkeit bedeutet: Ich sage die Wahrheit.",
+    "Allah lehrt uns, mit den Wahrhaftigen zu sein.",
+    "Wenn mir ein Fehler passiert, sage ich ehrlich, was geschehen ist."
+   ]
+  },
+  "6-8": {
+   "intro": "Die Wahrheit sagen – auch wenn es manchmal Mut kostet.",
+   "lines": [
+    "Manchmal passiert uns aus Versehen ein Fehler.",
+    "Wenn wir ehrlich sagen, was passiert ist, können wir Verantwortung übernehmen und etwas wiedergutmachen.",
+    "Wenn wir stattdessen lügen, kann das Vertrauen anderer Menschen leiden.",
+    "Wahrhaftigkeit ist deshalb ein wichtiger Teil unseres guten Charakters."
+   ],
+   "evidence": "Allah befiehlt uns, mit den Wahrhaftigen zu sein. Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt. Deshalb sollen wir ehrlich sprechen und uns um gutes Verhalten bemühen.",
+   "recap": [
+    "Wahrhaftigkeit bedeutet, ehrlich zu sprechen.",
+    "Allah ruft uns dazu auf, mit den Wahrhaftigen zu sein. Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt.",
+    "Wenn mir ein Fehler passiert, sage ich die Wahrheit und versuche, ihn wiedergutzumachen."
+   ]
+  },
+  "9-10": {
+   "intro": "Wahrhaftigkeit heißt, bewusst bei der Wahrheit zu bleiben – selbst wenn das schwierig ist.",
+   "lines": [
+    "Jeder Mensch kann aus Versehen einen Fehler machen. Entscheidend ist, wie wir danach handeln.",
+    "Wer die Wahrheit sagt, übernimmt Verantwortung und schafft die Grundlage, den Fehler wiedergutzumachen.",
+    "Eine bewusste Lüge kann das Vertrauen anderer Menschen beschädigen und weitere falsche Aussagen nach sich ziehen.",
+    "Wahrhaftigkeit ist mehr als ein einzelnes richtiges Wort: Sie ist eine Haltung, die wir im Alltag immer wieder üben."
+   ],
+   "evidence": "Allah fordert die Gläubigen in Sūrat at-Tawbah 9:119 auf, mit den Wahrhaftigen zu sein. In Ṣaḥīḥ Muslim 2607a beschreibt der Prophet ﷺ Wahrhaftigkeit als einen Weg zur Rechtschaffenheit. Daraus lernen wir, beim Sprechen und Handeln aufrichtig zu bleiben.",
+   "recap": [
+    "Ṣidq bedeutet Wahrhaftigkeit. Sie zeigt sich auch dann, wenn Ehrlichkeit Mut kostet.",
+    "Qurʾān 9:119 und der Ḥadīṯ in Ṣaḥīḥ Muslim 2607a verdeutlichen die Bedeutung der Wahrhaftigkeit.",
+    "Ich möchte ehrlich bleiben, Verantwortung übernehmen und einen Fehler nach Möglichkeit wiedergutmachen."
+   ]
+  }
+ },
+ "questions": {
+  "4-5": [
+   {
+    "type": "choice",
+    "prompt": "Du hast etwas kaputt gemacht. Was sagst du?",
+    "options": [
+     "Ich sage ehrlich: Ich war das.",
+     "Ich sage: Jemand anders war es."
+    ],
+    "correct": 0,
+    "hint": "Überlege: Was bedeutet ehrlich sein?",
+    "explain": "Wahrhaftigkeit bedeutet: Ich sage, was wirklich passiert ist."
+   },
+   {
+    "type": "choice",
+    "prompt": "Was kannst du danach Gutes tun?",
+    "options": [
+     "Ich entschuldige mich und helfe.",
+     "Ich verstecke den Fehler."
+    ],
+    "correct": 0,
+    "hint": "Wenn jemand Hilfe braucht, kannst du mithelfen.",
+    "explain": "Nach einem Fehler können wir um Entschuldigung bitten und ihn wiedergutmachen."
+   }
+  ],
+  "6-8": [
+   {
+    "type": "choice",
+    "prompt": "Du hast versehentlich ein Glas zerbrochen. Was ist eine ehrliche Antwort?",
+    "options": [
+     "Ich war das. Es tut mir leid.",
+     "Das war bestimmt jemand anders.",
+     "Ich tue so, als hätte ich nichts gesehen."
+    ],
+    "correct": 0,
+    "hint": "Was ist wirklich passiert? Sprich es freundlich aus.",
+    "explain": "Die Wahrheit zu sagen ist besser, als jemand anderem die Schuld zuzuschieben."
+   },
+   {
+    "type": "text",
+    "prompt": "Was kannst du tun, nachdem du einen Fehler ehrlich zugegeben hast?",
+    "sample": "Ich kann mich entschuldigen und helfen, den Fehler wiedergutzumachen.",
+    "hint": "Denke an Entschuldigung und Hilfe."
+   },
+   {
+    "type": "choice",
+    "prompt": "Was lehrt uns der Vers aus Sūrat at-Tawbah 9:119?",
+    "options": [
+     "Wir sollen mit den Wahrhaftigen sein.",
+     "Wir dürfen lügen, wenn wir Angst haben.",
+     "Man soll eigene Fehler immer verstecken."
+    ],
+    "correct": 0,
+    "hint": "Lies dir die kurze deutsche Bedeutung des Qurʾān-Verses noch einmal durch.",
+    "explain": "Allah befiehlt den Gläubigen, mit den Wahrhaftigen zu sein."
+   }
+  ],
+  "9-10": [
+   {
+    "type": "choice",
+    "prompt": "Welche Aussage entspricht dem Ḥadīṯ über Wahrhaftigkeit?",
+    "options": [
+     "Wahrhaftigkeit führt zur Rechtschaffenheit.",
+     "Wahrheit spielt beim guten Charakter keine Rolle.",
+     "Eine Lüge ist immer die leichtere und richtige Lösung."
+    ],
+    "correct": 0,
+    "hint": "Was führt laut der authentischen Sunnah zur Rechtschaffenheit?",
+    "explain": "Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt und diese zum Paradies."
+   },
+   {
+    "type": "text",
+    "prompt": "Erkläre in eigenen Worten: Warum gehört Wahrhaftigkeit zu einem guten Charakter?",
+    "sample": "Wahrhaftigkeit führt zu rechtschaffenem Verhalten. Sie bewahrt das Vertrauen und hilft uns, Verantwortung zu übernehmen.",
+    "hint": "Denke an Vertrauen und das Wort des Propheten ﷺ."
+   },
+   {
+    "type": "text",
+    "prompt": "Worin liegt der Unterschied zwischen einem versehentlichen Fehler und einer bewussten Lüge?",
+    "sample": "Einen Fehler kann man unbeabsichtigt machen. Eine bewusste Lüge bedeutet, absichtlich etwas Unwahres zu sagen. Nach einem Fehler sollte man ehrlich bleiben und ihn wiedergutmachen.",
+    "hint": "Denk an den Unterschied zwischen Versehen und absichtlicher Unwahrheit."
+   }
+  ]
+ },
+ "sample": "Wenn mir ein Fehler passiert, sage ich die Wahrheit."
+});
+function sidq(){return SIDQ_ARCHIVE}
+function readyEntry(l,slot,week,day){return {type:"ready",id:l.id,title:l.title||l.topic||l.id,topic:l.topic||"",pillar:getPillar(l),subject:l.subject||"",slot,week,day,lesson:l}}
+function plannedEntry(p){return {type:"planned",id:p.topicId,title:p.title,pillar:p.pillar||"",subject:p.pillar||"",slot:p.editorialSlot,week:p.week,day:p.weekday,plan:p}}
+function renderList(){
+ const q=clean($("#search").value.trim()),f=$("#stateFilter").value,p=$("#pillar").value;
+ visible=lessons.filter(l=>(f==="all"||l.type===f)&&(!p||l.pillar===p||l.subject===p)&&
+ (!q||clean([l.title,l.topic,l.id,l.pillar,l.type==="ready"?l.lesson?.lead:l.plan?.classroomScenario,
+  l.type==="ready"?l.lesson?.quran?.label:"",l.type==="ready"?l.lesson?.hadith?.source:""].join(" ")).includes(q)));
+ $("#lessonList").replaceChildren();const frag=document.createDocumentFragment();
+ for(const l of visible){
+  const btn=el("button","","item"+(l.id===selected?" selected":""));btn.type="button";btn.setAttribute("role","listitem");
+  line(btn,"small","UNTERRICHT "+String(l.slot).padStart(3,"0")+" · WOCHE "+l.week+" · "+(pillars[l.pillar]||l.pillar||"Lernbereich"),"meta");
+  line(btn,"strong",l.title);
+  line(btn,"small",l.type==="ready"?"Unterrichtstext vorhanden · Altersfragen prüfen":"Thema geplant · Quellen und Inhalte offen","marker"+(l.type==="ready"?"":" todo"));
+  btn.addEventListener("click",()=>{selected=l.id;renderReader(l);renderList();if(matchMedia("(max-width:920px)").matches)$("#reader").scrollIntoView({behavior:"smooth",block:"start"})});frag.append(btn);
+ }$("#lessonList").append(frag);$("#resultCount").textContent=visible.length+" von "+lessons.length+" Unterrichtsplätzen";
+ if(!visible.length){$("#lessonList").appendChild(el("p","Keine Treffer. Bitte Filter ändern.","empty"));$("#reader").replaceChildren(el("p","Bitte wähle einen anderen Suchbegriff.","empty"))}
+}
+function addGlossary(target,l,a,record){
+ const coach=window.DARKidsAcademyTermCoach,defs=coach?.entries||[];if(!defs.length)return;
+ const words=clean([l.title,l.lead,record.intro,...(record.lines||[]),record.evidence||"",l.goal].join(" "));
+ const matches=defs.filter(x=>[x.term,...(x.aliases||[])].some(alias=>alias&&words.includes(clean(alias))));
+ if(!matches.length)return;
+ const b=block(target,"Arabische Begriffe einfach erklärt");
+ line(b,"p","Diese Erklärungen sind kindgerechte Bedeutungen, keine wörtlichen Gelehrtenzitate. Die passende Serhat-Aufnahme wird nur nach Freigabe im Kinderunterricht abgespielt.","meta");
+ const grid=el("div","","glossary");
+ for(const t of matches.slice(0,14)){
+  const item=el("section","","term");line(item,"strong",t.term);
+  line(item,"p",t.age?.[a]||"Erklärung noch nicht hinterlegt.");
+  line(item,"small","Bezug: "+(t.source?.reference||"Quellenangabe offen"),"meta");
+  grid.appendChild(item);
+ }
+ b.appendChild(grid);
+}
+function renderReader(e){
+ const area=$("#reader");area.replaceChildren();
+ const heading=el("header","","reader-head"),titleWrap=el("div");line(titleWrap,"span","UNTERRICHT "+String(e.slot).padStart(3,"0")+" VON 208 · WOCHE "+e.week+" · "+e.day,"overline");
+ line(titleWrap,"h2",e.title);line(titleWrap,"p",pillars[e.pillar]||e.pillar,"meta");heading.append(titleWrap);
+ const status=el("span",e.type==="ready"?"Unterrichtstext vorhanden":"Redaktionsentwurf","marker"+(e.type==="ready"?"":" todo"));heading.append(status);area.append(heading);
+ const tabs=el("div","","age-tabs");tabs.setAttribute("role","group");tabs.setAttribute("aria-label","Altersstufe wählen");
+ for(const a of AGES){const btn=el("button",a+" Jahre",a===age?"on":"");btn.type="button";btn.setAttribute("aria-pressed",a===age?"true":"false");btn.addEventListener("click",()=>{age=a;$("#age").value=a;renderReader(e)});tabs.append(btn)}
+ area.append(tabs);
+ if(e.type==="planned"){const p=e.plan;line(area,"p","Dieses Thema ist erst geplant. Noch kein religiöser Originalbeleg, keine ausgearbeiteten Unterrichte und keine freigegebene Masteraufnahme.","note");
+ const b=block(area,"Geplante Alltagssituation");line(b,"p",p.classroomScenario);
+ const a=p.ageOutcomes?.[age];const g=block(area,"Altersgerechtes Lernziel");line(g,"p",a?.goal||"Noch nicht ausgearbeitet.","lesson-intro");line(g,"p",a?.method||"Didaktische Planung offen.");line(g,"p","Daueridee: "+(a?.targetMinutes||"noch offen")+" Minuten · nur Orientierung","meta");
+ const release=block(area,"Freigabestand");line(release,"p","Qurʾān-Stelle, Hadith, Überliefererkette, Unterrichtstexte, Altersprüfung und Masterstimme: noch nicht abschließend geprüft. Kinder können diesen Unterricht nicht öffnen.");return}
+ const l=e.lesson,record=l.ageText?.[age]||{};
+ const intro=block(area,"1 · Willkommen und Lernziel");line(intro,"p",record.intro||l.lead||"Noch kein gesonderter Einführungstext.","lesson-intro");
+ line(intro,"p",l.goal||"","lesson-goal");
+ if(!l.ageText?.[age])line(intro,"p","Hinweis: Der Einführungstext ist bisher für mehrere Altersgruppen gemeinsam. Nur die Fragen sind altersgestaffelt.","meta");
+ const speak=block(area,"2 · Erklärung und Beispiele");
+ const lines=record.lines||l.lines||[];const wrapper=el("div","","lesson-lines");for(const s of lines)line(wrapper,"p",s);speak.append(wrapper);
+ if(l.hint)line(speak,"p","Merkhilfe: "+l.hint,"meta");
+ const evidence=block(area,"3 · Qurʾān und authentische Sunnah");
+ const q=l.quran||{};const qb=el("section","","sourcebox");line(qb,"h4","Qurʾān");if(q.arabic)line(qb,"div",q.arabic,"arabic");
+ line(qb,"p",q.meaning||"Übersetzung nicht hinterlegt.");line(qb,"small","Qurʾān "+(q.label||String(q.surah||"?")+":"+String(q.ayah||"?"))+(q.excerpt?" · nur arabischer Textauszug":""));
+ evidence.append(qb);
+ const hb=el("section","","sourcebox");line(hb,"h4","Sunnah / Ḥadīṯ");line(hb,"p",l.hadith?.text||"Noch kein Erklärungstext erfasst.");line(hb,"small",l.hadith?.source||"Fundstelle noch nicht eingetragen.");
+ const approvedLink=safeDorar(l.sourceAudit?.hadithUrl);if(approvedLink)link(hb,approvedLink,"Originalnachweis bei Dorar öffnen ↗");
+ else line(hb,"small","Direkter überprüfbarer Link noch nicht eingetragen. Angabe aus dem bisherigen Katalog; Einzelprüfung offen.");
+ evidence.append(hb);
+ const extra=record.evidence||"";if(extra)line(evidence,"p",extra,"lesson-intro");
+ if(l.sourceLesson)line(evidence,"p","Vertiefung auf Grundlage der Lektion: "+l.sourceLesson,"meta");
+ if(l.sourceAudit?.note)line(evidence,"p",l.sourceAudit.note,"meta");
+ if(l.sourceAudit?.hadithMeaningIsParaphrase||!l.hadith?.arabic)line(evidence,"p","Deutsche Darstellung ist eine sinngemäße Unterrichtserklärung; nicht als arabisches Originalzitat ausgeben.","meta");
+ if(!l.sourceAudit)line(evidence,"p","Quellennachweis aus dem Grundkatalog: exakte Originalstelle und Überlieferungsprüfung separat dokumentieren.","meta");
+ const exercise=block(area,"4 · Verständnisfragen für "+age+" Jahre");
+ const qs=l.questions?.[age]||[];if(!qs.length)line(exercise,"p","Für dieses Alter liegen noch keine getrennten Fragen vor.");
+ for(const [i,item] of qs.entries()){
+  const qa=el("section","","qa");line(qa,"strong",(i+1)+". "+(item.prompt||"Frage"));
+  if(Array.isArray(item.options)){const list=el("ul");for(let n=0;n<item.options.length;n++)line(list,"li",item.options[n]+(n===item.correct?" ✓":""));qa.append(list)}
+  if(item.sample)line(qa,"p","Musterantwort: "+item.sample,"answer");
+  if(item.explain)line(qa,"p","Erklärung: "+item.explain,"answer");
+  if(item.hint)line(qa,"p","Hilfestellung: "+item.hint,"meta");
+  exercise.appendChild(qa);
+ }
+ const recap=block(area,"5 · Das merke ich mir");line(recap,"p",l.sample||l.goal||l.lead||"","lesson-goal");
+ for(const s of record.recap||[])line(recap,"p",s);
+ addGlossary(area,l,age,record);
+ const voice=block(area,"Masterstimme und Freigabe");line(voice,"p","Das Unterrichtsarchiv zeigt den Text zum Lesen. Die exakten ElevenLabs-V4-Masteraufnahmen werden separat geprüft und freigegeben; ein Text allein bedeutet keine vorhandene Sprachaufnahme.","meta");
+}
+async function loadScript(src){
+ return new Promise((resolve,reject)=>{
+  const node=document.createElement("script");node.src=src;node.async=false;
+  node.onload=()=>resolve();node.onerror=()=>reject(Error("Datei nicht erreichbar: "+src));
+  document.head.appendChild(node);
+ });
+}
+function buildSlots(year,catalog,roadmap){
+ const newSlots=(year.weeks||[]).flatMap(w=>(w.days||[]).filter(d=>d.mode==="new").map(d=>({...d,week:w.week})));
+ const plannedBySlot=new Map((roadmap.plannedUnits||[]).map(x=>[x.editorialSlot,x]));
+ const arr=[];
+ for(const s of newSlots){
+  if(s.lessonId){const actual=s.lessonId==="sidq"?sidq():catalog[s.lessonId];
+   if(actual)arr.push(readyEntry(actual,s.editorialSlot,s.week,s.weekday));
+   else arr.push({type:"planned",id:"missing-"+s.editorialSlot,title:"Unterrichtsdatei fehlt: "+s.lessonId,pillar:"",slot:s.editorialSlot,week:s.week,day:s.weekday,plan:{classroomScenario:"Die verknüpfte Unterrichtsdatei ist nicht geladen.",ageOutcomes:{},releaseGate:{childAppUnlocked:false}}});
+  }else{const p=plannedBySlot.get(s.editorialSlot);if(p)arr.push(plannedEntry(p));else arr.push({type:"planned",id:"unassigned-"+s.editorialSlot,title:"Quellenprüfung noch offen",pillar:"",slot:s.editorialSlot,week:s.week,day:s.weekday,plan:{classroomScenario:"Unterricht noch nicht geplant.",ageOutcomes:{},releaseGate:{childAppUnlocked:false}}})}
+ }
+ return arr;
+}
+async function start(){
+ try{
+  const [page,yr,rp]=await Promise.all([
+   fetch("/kids/akademie/index.html",{cache:"no-store",credentials:"same-origin"}),
+   fetch("/kids/data/academy-year-52weeks-v1.json",{cache:"no-store",credentials:"same-origin"}),
+   fetch("/kids/data/academy-expansion-roadmap-v23.json",{cache:"no-store",credentials:"same-origin"})
+  ]);
+  if(!page.ok||!yr.ok||!rp.ok)throw Error("Eine aktuelle Quelle wurde nicht geladen. Bitte Zugang und Verbindung prüfen.");
+  const pageText=await page.text(),year=await yr.json(),roadmap=await rp.json();
+  const scripts=[...pageText.matchAll(/<script\b[^>]*\bsrc="([^"]+)"[^>]*><\/script>/gi)]
+   .map(m=>m[1].replace(/&amp;/g,"&")).filter(path=>/^\/kids\/akademie\/curriculum-v\d+\.js(?:\?[^"<>]*)?$/.test(path));
+  const unique=[...new Set(scripts)];
+  if(unique.length<3)throw Error("Die Unterrichtsdateien wurden nicht vollständig erkannt.");
+  for(const file of unique)await loadScript(file);
+  try{await loadScript("/kids/akademie/term-coach-v24.js")}catch(_){}
+  const catalog=window.DARKidsAcademyCurriculum||{};
+  lessons=buildSlots(year,catalog,roadmap);
+  ready=lessons.filter(e=>e.type==="ready").length;planned=lessons.length-ready;
+  if(lessons.length!==208||ready!==year.goals.currentlyInCatalog||planned!==year.goals.additionalAuthenticallyVerifiedLessonsNeeded)
+   throw Error("Unterrichtsbestand und Jahresplan sind nicht identisch. Keine ungeprüfte Zahl ausgeben.");
+  $("#readyCount").textContent=ready;$("#planCount").textContent=planned;$("#totalCount").textContent=lessons.length;
+  $("#archiveState").textContent="Aktuelle Unterrichtsdateien direkt aus der Kinderakademie · "+ready+" ausgearbeitet · "+planned+" in Quellen- und Inhaltsplanung. Keine Änderungen an Kinderprofilen.";
+  const pillarsUsed=[...new Set(lessons.map(x=>x.pillar))].filter(Boolean);
+  pillarsUsed.sort((a,b)=>(pillars[a]||a).localeCompare(pillars[b]||b,"de"));
+  for(const p of pillarsUsed){const opt=el("option",pillars[p]||p);opt.value=p;$("#pillar").append(opt)}
+  const params=new URLSearchParams(location.search),chosen=params.get("alter");if(AGES.includes(chosen)){age=chosen;$("#age").value=age}
+  renderList();const first=lessons.find(x=>x.type==="ready");if(first){selected=first.id;renderReader(first);renderList()}
+ }catch(err){$("#archiveState").textContent="Unterrichtsarchiv nicht vollständig geladen: "+(err?.message||"unbekannter Fehler");$("#readyCount").textContent="–";$("#planCount").textContent="–";}
+}
+$("#search").addEventListener("input",renderList);
+$("#stateFilter").addEventListener("change",()=>{renderList();const item=visible.find(l=>l.id===selected)||visible[0];if(item){selected=item.id;renderReader(item);renderList()}});
+$("#pillar").addEventListener("change",()=>{renderList();const item=visible.find(l=>l.id===selected)||visible[0];if(item){selected=item.id;renderReader(item);renderList()}});
+$("#age").addEventListener("change",()=>{age=$("#age").value;const e=lessons.find(x=>x.id===selected);if(e)renderReader(e)});
+start();
+})();
+</script>
+</body></html>
