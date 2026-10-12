@@ -24,11 +24,11 @@ for(const item of Object.values(curriculum)){
 }
 const school=sandbox.window.DARKidsAcademySchool;
 const ids=Array.from(school.sequence(topics));
-assert.equal(ids.length,70);assert.equal(new Set(ids).size,66);
+assert.equal(ids.length,70);assert.equal(new Set(ids).size,70);
 const newIds=Array.from(sandbox.window.DARKidsAcademyCurriculumV27.ids);
-assert.deepEqual(ids.slice(-16,-8),newIds,"V27 must preserve slots 51-58");
+assert.deepEqual(ids.slice(-20,-12),newIds,"V27 must preserve slots 51-58");
 const v28Ids=Array.from(sandbox.window.DARKidsAcademyCurriculumV28.ids);
-assert.deepEqual(ids.slice(-8,-4),v28Ids,"V28 must append exactly after V27 without shifting old progress");
+assert.deepEqual(ids.slice(-12,-8),v28Ids,"V28 must append exactly after V27 without shifting old progress");
 for(const id of v28Ids){const item=curriculum[id];assert.ok(item?.sourceAudit?.hadithUrl?.startsWith("https://dorar.net/"),id+" must have verified direct link");assert.equal(item.voiceApproved,false);assert.equal(item.sourceAudit.hadithMeaningIsParaphrase,true);assert.equal(item.ageText["4-5"].lines.length,4);}
 const v29Ids=Array.from(sandbox.window.DARKidsAcademyCurriculumV29.ids);
 assert.deepEqual(ids.slice(-8,-4),v29Ids,"V29 must append without shifting existing learning progress");
