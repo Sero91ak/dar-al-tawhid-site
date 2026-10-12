@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "requestedIdentityStandard": "1:1 appearance match to the preserved user-supplied original child characters, not merely comparable cartoon style",
+  "asOf": "2026-10-12",
+  "scope": "DAR AL TAWHID KIDS Mein Gebet; separate draft PR 825 only; no public integration",
+  "reference": {
+    "libraryArchive": "/Kinder App/Mein_Gebet_Originale_20261011/Originale_10_Ansichten_20261011.zip",
+    "pinRegistry": "rigging/REFERENCE-ASSET-REGISTRY-V1.json",
+    "immutable": true,
+    "independentLeftProfileStillMissing": true,
+    "note": "Mirrored original reference is NOT an independent left-side photograph. Render both 3D camera angles, compare to approved reference views, mark uncovered angles unverified."
+  },
+  "mustPassBeforeIdentityApproval": [
+    "Original calibrated front and both available angled 2D views visually match independent real GLB front and angled renders; no side contour drift",
+    "Face proportions, cheek/kinn/nose form, eye lids/size/shape/iris spacing and original expression consistent",
+    "Head length/width, body proportions and height consistent with original in all supplied views",
+    "Boy: actual original kufi white with exact gold trim, eyes, hair, white thawb/sleeves/shoes all faithfully modelled",
+    "Girl: original vivid-pink hijab hood and layered folds over shoulders/chest/back, all hair/neck covered from any camera",
+    "Girl: original pink long sleeve dress folds and hem silhouette, finger/palm size and shoes match reference",
+    "Physical 3D mesh, not pasted 2D front decal, mirror image or screenshot",
+    "No exposed hair/neck, disconnected scarf edges, clipping of eye/face/hijab, or damaged sleeves from any independent render",
+    "Human owner visually signs off on scaled original/render comparisons; automated image-metrics only support, never substitute for approval"
+  ],
+  "actualV15": {
+    "realGlbSHA256": "44e75d268426d36a5f6e040437c5874bfc81d9ff5e07adf15def49f845f20321",
+    "sourceV14SHA256": "ec5df2b264ee87f20ff399446abbc89f344cd084d14133c64ebe38fba4a1b578",
+    "bytes": 2682324,
+    "changedMeshCount": 10,
+    "unchangedMeshCount": 203,
+    "eyeForwardOffsetReducedMetres": 0.0085,
+    "sixIndependentRealGlbCameraRenders": true,
+    "realBackreadDriveSHA256Matches": true,
+    "driveFolder": "https://drive.google.com/drive/folders/1w80kvOA-1inUzBnhPGoH0RIMUkUpSZXG",
+    "foundMismatches": [
+      "V15 face still flat and stylized compared to source",
+      "Eye expression/size, cheeks and chin contour do not match original",
+      "Head and hijab outline visibly differs especially in side profile",
+      "Pink layered shoulder scarf and dress silhouette differ",
+      "Hands and shoes do not match original size and shape"
+    ],
+    "rigPresent": false,
+    "prayerAnimations": 0,
+    "humanOriginal1to1Approval": false,
+    "identityApproved": false,
+    "productionApproved": false
+  },
+  "boy": {
+    "humanOriginal1to1Approval": false,
+    "identityApproved": false
+  },
+  "release": {
+    "productionReady": false,
+    "mergeMain": false,
+    "liveDeploy": false
+  },
+  "nextRepair": "Stop incremental arbitrary stylization; reconstruct head geometry and garment silhouette with calibrated reference photos and stable camera parameters, then re-render and do 1:1 compare. Never call approximate visual similarity an approved original."
+}
