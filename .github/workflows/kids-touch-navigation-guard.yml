@@ -1,0 +1,25 @@
+name: KIDS Touch Navigation Guard
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/navigation-v1182.js'
+      - 'kids/test-navigation-touch-v1344.cjs'
+      - '.github/workflows/kids-touch-navigation-guard.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'kids/navigation-v1182.js'
+      - 'kids/test-navigation-touch-v1344.cjs'
+jobs:
+  touch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Kids navigation syntax and real tap vs dragged finger
+        run: |
+          node --check kids/navigation-v1182.js
+          node kids/test-navigation-touch-v1344.cjs
