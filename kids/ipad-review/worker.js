@@ -12,9 +12,11 @@ export default {
  async fetch(request,env){
   const u=new URL(request.url),path=u.pathname;
   if(!["GET","HEAD"].includes(request.method))return denied("Read-only preview",405);
-  if(path==="/"||path==="/kids"||path==="/kids/"||path==="/kids/start"){
-    return Response.redirect(new URL("/kids/start.html",u),302);
+  if(path==="/"||path==="/kids"||path==="/kids/"){
+    return Response.redirect(new URL("/kids/start",u),302);
   }
+  // Cloudflare Assets resolves /kids/start to start.html automatically.
+  // Never redirect /kids/start back to /kids/start.html (would loop 307/302).
   if(path.includes("\\")||/%(?:2f|5c|00)/i.test(path)||/\.\./.test(path))return denied("Invalid URL",400);
   const allowed=path.startsWith("/kids/") ||
     /^\/desktop-preview\/assets\/kids-academy-[\w-]+\.(?:jpg|jpeg|png|webp|svg)$/i.test(path);
