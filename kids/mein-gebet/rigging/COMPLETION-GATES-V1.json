@@ -106,7 +106,7 @@
         "buildAndSixIndependentCameraRendersVerified": true,
         "googleDriveFolderUrl": "https://drive.google.com/drive/folders/1P7KV_hNQentSF9g-oMS-ssIikDUjYFQu",
         "googleDriveByteRoundTripSHA256Verified": true,
-        "nextBlockingWork": "1:1 original source match required, not approximate; rebuild face and original scarf/clothing silhouette with calibrated source anchors, do independent 3D camera comparison and mandatory human visual signoff. Current V15 rejected as original.",
+        "nextBlockingWork": "Do NOT scale skirt in depth based on unmatched 90-degree render. Calibrate source camera and corresponding projected facial/hijab landmarks first; sculpt true 3D geometry from reference under controlled pose. V15 remains unapproved research GLB; local V16 face experiment rejected.",
         "v03v06DriveFolderUrl": "https://drive.google.com/drive/folders/1gziPdSbzcOUuVSmJRGrKGLFQuBoM8Nos",
         "v06Sha256": "3021ad1e1ac9644af6d11e7b138ebfe1c7607dfd7947e18cbbcc9109bf4e197e",
         "v06Bytes": 660088,
@@ -211,7 +211,20 @@
         "v15SkinPresent": false,
         "v15AnimationCount": 0,
         "v14KeepAsProtectedFallback": true,
-        "strictOriginal1to1VisualGate": "rigging/STRICT-ORIGINAL-IDENTITY-1TO1-GATE-20261012.json"
+        "strictOriginal1to1VisualGate": "rigging/STRICT-ORIGINAL-IDENTITY-1TO1-GATE-20261012.json",
+        "v15SourceCameraComparison": {
+          "evidence": "rigging/GIRL-SOURCE-ANGLE-CALIBRATION-13CAM-20261012.json",
+          "candidateAnglesChecked": 13,
+          "lowestSilhouetteErrorYaw": 50,
+          "bestMeanHeightNormalizedWidthError": 0.024385,
+          "ninetyDegreeMeanHeightNormalizedWidthError": 0.040806,
+          "cameraAngleFullyCalibrated": false,
+          "immediateDressDepthScaleCorrectiveAuthorized": false,
+          "glbGeometricFaceV16LocalTrialApproved": false,
+          "v16GlbUploaded": false,
+          "source1to1AppearanceApproved": false,
+          "driveFolder": "https://drive.google.com/drive/folders/1Bchd2qH_pIyHfidL2JlReNRs9X64HDdy"
+        }
       }
     }
   },
