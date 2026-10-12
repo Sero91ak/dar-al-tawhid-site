@@ -1,7 +1,17 @@
 {
-  "checkedAt": "2026-10-12T10:05:16.840691+00:00",
+  "checkedAt": "2026-10-12T10:09:44.550932+00:00",
   "trigger": "workflow_run",
   "recentRuns": [
+    {
+      "conclusion": "success",
+      "created_at": "2026-10-12T10:08:04Z",
+      "event": "workflow_run",
+      "head_sha": "3bc9d9fdcb57eeb1df47d34192c72b651aa5694e",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38234390808",
+      "id": 38234390808,
+      "status": "completed",
+      "updated_at": "2026-10-12T10:08:59Z"
+    },
     {
       "conclusion": "skipped",
       "created_at": "2026-10-12T10:04:37Z",
@@ -71,16 +81,6 @@
       "id": 38233014551,
       "status": "completed",
       "updated_at": "2026-10-12T09:55:29Z"
-    },
-    {
-      "conclusion": "failure",
-      "created_at": "2026-10-12T09:54:57Z",
-      "event": "workflow_run",
-      "head_sha": "8171081f56d84c4c457c05ce30f2f16c2f137491",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38232956539",
-      "id": 38232956539,
-      "status": "completed",
-      "updated_at": "2026-10-12T09:55:20Z"
     }
   ],
   "importReportExists": true,
