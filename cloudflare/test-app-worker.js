@@ -395,7 +395,7 @@ async function finalizeDarTestHomeV1193(asset) {
   // DAR_TOPICS_LIBRARY_ASSETS_V1362: actual staged CSS/JS files, scoped to /test.
   // CSS comes after late authoring layers; JS loads before DOMContentLoaded.
   if (!html.includes('id="darTopicsLibraryRuntimeV1362"')) {
-    const script = '<script id="darTopicsLibraryRuntimeV1362" src="/test/assets/ilm-topics-library-v1362.js?v=1362" defer><\\/script>';
+    const script = '<script id="darTopicsLibraryRuntimeV1362" src="/test/assets/ilm-topics-library-v1362.js?v=1362" defer></scr' + 'ipt>';
     if (html.includes("</body>")) html = html.replace("</body>", script + "</body>");
     else if (html.includes("</html>")) html = html.replace("</html>", script + "</html>");
     else html += script;
