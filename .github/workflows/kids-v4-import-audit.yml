@@ -1,0 +1,65 @@
+name: Diagnose Kids V4 master import
+on:
+  workflow_run:
+    workflows: [Import DĀR KIDS V4 story masters]
+    types: [completed]
+  workflow_dispatch:
+  schedule:
+    - cron: '00 10 12 10 *' # one-off recheck on 2026-10-12 10:00 UTC
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Record true Github Actions importer outcome
+        shell: bash
+        env:
+          GH_TOKEN: \${{ github.token }}
+          REPO: \${{ github.repository }}
+          TRIGGER: \${{ github.event_name }}
+        run: |
+          set -euo pipefail
+          mkdir -p ci-status
+          gh api "repos/$REPO/actions/workflows/kids-story-v4-import.yml/runs?per_page=8" \
+            --jq '[.workflow_runs[] | {id,head_sha,status,conclusion,event,created_at,updated_at,html_url}]' \
+            > /tmp/kids-v4-runs.json
+          python3 - <<'PY'
+          import datetime,json,pathlib,os
+          root=pathlib.Path('.')
+          runs=json.loads(pathlib.Path('/tmp/kids-v4-runs.json').read_text())
+          report=root/'scripts/voice-studio/production/kids-v4-import-report.json'
+          output={
+            "checkedAt":datetime.datetime.now(datetime.timezone.utc).isoformat(),
+            "trigger":os.getenv("TRIGGER"),
+            "recentRuns":runs,
+            "importReportExists":report.exists(),
+          }
+          if report.exists():
+            imported=json.loads(report.read_text())
+            output["importedCount"]=len(imported.get('imported',[]))
+            output["skippedCount"]=len(imported.get('skipped_existing',[]))
+          (root/'ci-status/kids-v4-import-audit.json').write_text(json.dumps(output,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps({"recentRun":runs[:2],"importReportExists":output["importReportExists"],"imported":output.get("importedCount")},ensure_ascii=False))
+          PY
+      - name: Publish audit status
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "dar-kids-import-audit"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ci-status/kids-v4-import-audit.json
+          git commit -m "ci(kids): capture V4 import run status and report" || exit 0
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then exit 0; fi
+            git fetch origin main
+            git rebase origin/main || { git rebase --abort || true; exit 1; }
+          done
+          exit 1
