@@ -22,6 +22,12 @@ jobs:
       - name: Kids visitor account registration guard
         run: node scripts/test-kids-account-registration-v1.js
 
+      - name: Touch and swipe navigation regression
+        run: |
+          node --check assets/dar-app-chrome.js
+          node --check kids/navigation-v1182.js
+          node scripts/touch-navigation-guard-test.cjs
+
       - name: Run app health check
         run: node scripts/app-health-check.js
 
