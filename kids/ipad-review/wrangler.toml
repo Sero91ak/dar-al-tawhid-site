@@ -1,0 +1,15 @@
+# Temporary, isolated DĀR AL TAWḤĪD KIDS iPad review Worker.
+# No dar-al-tawhid.de route, adult Test or owner privileges.
+name = "dar-kids-ipad-preview"
+main = "worker.js"
+compatibility_date = "2026-08-01"
+workers_dev = true
+routes = []
+
+[build]
+watch_paths = [".kids-ipad-preview-only/**"]
+
+[assets]
+directory = "../.."
+binding = "ASSETS"
+run_worker_first = true
