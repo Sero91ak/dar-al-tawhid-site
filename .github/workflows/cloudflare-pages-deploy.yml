@@ -25,6 +25,8 @@ on:
       - kids/start.html
       - kids/shell.html
       - kids/akademie/**
+      # Any change to academy guard tests must trigger the same production CI.
+      - kids/tools/test-academy-sequential-lock-v27.cjs
       # Separate read-only KIDS lesson catalog; no new Cloudflare secrets.
       - kids/unterrichtsarchiv.html
       # Separate Basic-gated creator review; no visitor-school unlock.
