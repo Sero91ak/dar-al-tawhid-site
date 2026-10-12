@@ -1,0 +1,50 @@
+name: Import DĀR KIDS V4 story masters
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - scripts/voice-studio/production/import-v4-download-manifest.json
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dar-kids-story-v4-import
+  cancel-in-progress: false
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+
+      - name: Verify audio tools
+        shell: bash
+        run: |
+          command -v ffmpeg
+          command -v ffprobe
+          python3 -V
+
+      - name: Download and validate V4 master recordings
+        run: |
+          python3 scripts/voice-studio/production/import-kids-v4-audio.py scripts/voice-studio/production/import-v4-download-manifest.json
+
+      - name: Commit and publish imported audio only
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "dar-kids-audio-import"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add kids/assets/prophet-story-audio kids/assets/sahabiyyat-story-audio kids/data/prophet-stories.json kids/data/sahabiyyat-stories.json scripts/voice-studio/production/kids-v4-import-report.json
+          if git diff --cached --quiet; then
+            echo "No new audio assets were imported."
+            exit 0
+          fi
+          git commit -m "feat(kids): publish generated V4 story master recordings for all ages"
+          git push origin HEAD:main
