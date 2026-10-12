@@ -448,6 +448,11 @@ self.addEventListener("fetch",function(event){
     event.respondWith(networkFirst(request));
     return;
   }
+  /* DĪN category catalog: refresh exact six lessons online; keep offline fallback. */
+  if(url.pathname==="/kids/data/deen-lessons.json"){
+    event.respondWith(networkFirst(request));
+    return;
+  }
   /* DĪN DETAIL RUNTIME: network-first so reading/mode repairs are immediate. */
   if(url.pathname==="/kids/deen-lessons.js"){
     event.respondWith(networkFirst(request));
