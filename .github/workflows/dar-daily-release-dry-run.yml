@@ -34,6 +34,19 @@ jobs:
         run: node --check scripts/dar-daily-release-dry-run.cjs
       - name: Dry-run publisher (no GitHub writes or pushes)
         run: node scripts/dar-daily-release-dry-run.cjs
+      - name: Validate previously published real adult requests - CHECK ONLY
+        shell: bash
+        run: |
+          set -euo pipefail
+          for f in \
+            content/admin/chat-publish-requests/sufyan-niyyah-live-20261008.json \
+            content/admin/chat-publish-requests/isa-nuzul-q35-slides-live-20261008.json \
+            content/admin/chat-publish-requests/miraj-ruyah-q36-slides-live-20261008.json
+          do
+            echo "Check-only: $f"
+            test -s "$f"
+            node scripts/chat-admin-publish.js --check "$f"
+          done
       - name: Exercise actual Worker against a fully mocked OneSignal API
         run: node scripts/dar-daily-onesignal-contract.mjs
       - name: Verify broad audience is rejected by strict test gate
