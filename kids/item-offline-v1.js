@@ -160,6 +160,7 @@ function academy(card,{id,title,subject}){
   "/kids/akademie/curriculum-v27.js?v=20261012-27",
   "/kids/akademie/curriculum-v28.js?v=20261012-28",
   "/kids/akademie/curriculum-v29.js?v=20261012-29",
+  "/kids/akademie/curriculum-v30.js?v=20261012-30",
   "/kids/akademie/school-progress-v11.js?v=20261012-30",
   "/kids/owner-voice.js?v=academy-serhat-v1-20261010",
   "/kids/data/academy-audio.json?v=1",
