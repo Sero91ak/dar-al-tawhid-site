@@ -35,6 +35,7 @@ jobs:
           test "$(cmp -s kids/index.html kids/shell.html && echo yes)" = yes
           node --check kids/ipad-review/worker.js
           node kids/akademie/test-responsive-v29.cjs
+          node kids/tools/test-girls-firstpaint-v1348.cjs
           grep -q 'workers_dev = true' kids/ipad-review/wrangler.toml
           grep -q '^routes = \[\]' kids/ipad-review/wrangler.toml
           ! grep -E '^name[[:space:]]*=[[:space:]]*"(dar-al-tawhid-site|dar-al-tawhid-test|dar-al-tawhid-kids-creator)"' kids/ipad-review/wrangler.toml
@@ -55,12 +56,15 @@ jobs:
         run: |
           set -euo pipefail
           BASE="https://dar-kids-ipad-preview.sero91ak.workers.dev"
-          for path in /kids/start.html /kids/akademie/index.html /kids/ipad-home-audio-grid-v1347.css /kids/akademie/responsive-integrity-v29.css /desktop-preview/assets/kids-academy-hero-boys-v1.jpg; do
+          for path in /kids/start.html /kids/akademie/index.html /kids/ipad-home-audio-grid-v1347.css /kids/akademie/responsive-integrity-v29.css /kids/girls-home-photo-palette-v1348.css /desktop-preview/assets/kids-academy-hero-boys-v1.jpg; do
             code=$(curl -sSL --retry 4 --retry-delay 3 -A "Kids-iPad-Review" -H "Cache-Control: no-cache" -o /tmp/kids-preview-result -w "%{http_code}" "$BASE$path?build=${GITHUB_SHA}")
             echo "$path -> $code"
             test "$code" = 200
             test -s /tmp/kids-preview-result
           done
+          curl -sS -L --retry 3 "$BASE/kids/start?qa=v1348" -o /tmp/kids-girls-preview.html
+          grep -q 'kids-profile-first-paint-v1348' /tmp/kids-girls-preview.html
+          grep -q 'girls-home-photo-palette-v1348.css?v=1348' /tmp/kids-girls-preview.html
           for path in / /test/ /admin/ /kids/creator-test/worker.js; do
             case "$path" in
               /) continue;;
