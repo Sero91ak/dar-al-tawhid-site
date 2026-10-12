@@ -16,6 +16,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: dar-kids-story-v4-import
@@ -45,6 +46,7 @@ jobs:
           python3 scripts/voice-studio/production/import-kids-v4-audio.py scripts/voice-studio/production/import-v4-download-manifest.json
 
       - name: Commit and publish imported audio only
+        id: publish
         shell: bash
         run: |
           set -euo pipefail
@@ -53,15 +55,29 @@ jobs:
           git add kids/assets/prophet-story-audio kids/assets/sahabiyyat-story-audio kids/data/prophet-stories.json kids/data/sahabiyyat-stories.json scripts/voice-studio/production/kids-v4-import-report.json
           if git diff --cached --quiet; then
             echo "No new audio assets were imported."
+            echo "published=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           git commit -m "feat(kids): publish generated V4 story master recordings for all ages"
           # Independent live-audit commits may land while a large MP3 batch is uploading.
           # Never force-push; rebase only unrelated commits and fail safely on conflicts.
           for attempt in 1 2 3; do
-            if git push origin HEAD:main; then exit 0; fi
+            if git push origin HEAD:main; then
+              echo "published=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
             git fetch origin main
             git rebase origin/main || { git rebase --abort || true; exit 1; }
           done
           echo "Unable to fast-forward story master release" >&2
           exit 1
+
+      - name: Deploy new story masters through canonical Cloudflare production workflow
+        if: steps.publish.outputs.published == 'true'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          gh api --method POST "repos/$REPO/actions/workflows/cloudflare-pages-deploy.yml/dispatches" -f ref=main
+          echo "Canonical Cloudflare production deployment dispatched."
