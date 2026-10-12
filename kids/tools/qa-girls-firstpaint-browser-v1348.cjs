@@ -1,6 +1,6 @@
 "use strict";
 /* Visual computation guard for independent KIDS V1348 preview; no child account data. */
-const {chromium}=require("playwright");
+const {chromium,webkit}=require("playwright");
 const assert=require("node:assert/strict");
 const BASE="https://dar-kids-ipad-preview.sero91ak.workers.dev";
 const devices=[
@@ -10,7 +10,8 @@ const devices=[
 ];
 const results=[];
 (async()=>{
-  const browser=await chromium.launch({headless:true,args:["--no-sandbox"]});
+  const engine=process.env.KIDS_QA_ENGINE==="webkit"?webkit:chromium;
+  const browser=await engine.launch({headless:true,...(engine===chromium?{args:["--no-sandbox"]}:{})});
   try{
     for(const device of devices)for(const gender of ["boy","girl"]){
       const ctx=await browser.newContext({viewport:{width:device.width,height:device.height},deviceScaleFactor:1,hasTouch:true,isMobile:device.width<700});
@@ -64,6 +65,34 @@ const results=[];
       console.log("BROWSER_V1348_OK",device.name,gender,JSON.stringify({boot:state.boot,cardCount:state.cardCount,theme:state.theme,homeVisible:state.homeVisible,academy:state.academyBackground.slice(0,85),pageErrors:pageErrors.slice(0,2)}));
       await ctx.close();
       results.push(state);
+    }
+    /* Simulate the exact pre-prayer-module startup window.
+       The approved hero must paint immediately, without obsolete images. */
+    for(const gender of ["girl","boy"]){
+      const c=await browser.newContext({viewport:{width:414,height:896},deviceScaleFactor:1,isMobile:true,hasTouch:true});
+      await c.addInitScript(g=>{
+        try{
+          const id="qa-firstpaint-"+g;
+          localStorage.setItem("kids.activeProfile",id);
+          localStorage.setItem("kids.profiles.v1",JSON.stringify([{id,gender:g,age:"6–8",name:"QA",data:{}}]));
+        }catch(e){}
+      },gender);
+      const page=await c.newPage();
+      await page.route("**/kids/prayer-stage-v1261.js*",route=>route.abort("failed"));
+      const response=await page.goto(BASE+"/kids/start?qa=before-prayer-v1348",{waitUntil:"domcontentloaded",timeout:60000});
+      assert.equal(response.status(),200);
+      const first=await page.evaluate(()=>{
+        const hero=document.querySelector("#view-today > .hero");
+        return {gender:document.querySelector(".app")?.dataset.gender,
+          background:hero?getComputedStyle(hero).backgroundImage:"",
+          oldPseudo:hero?getComputedStyle(hero,"::before").display:""};
+      });
+      assert.equal(first.gender,gender,"first-frame gender");
+      assert.ok(first.background.includes("hero-home.png?v=1274"),"Initial old artwork still appears");
+      assert.ok(!/warm-world|hero-clean-reference|hero-poster/.test(first.background),"Legacy wallpaper in initial frame");
+      assert.equal(first.oldPseudo,"none","Legacy hero pseudo still paints");
+      console.log("KIDS_FIRST_FRAME_V1348_OK",gender,engine===webkit?"WebKit":"Chromium");
+      await c.close();
     }
     console.log("KIDS_GIRLS_BROWSER_V1348_COMPLETE: "+results.length+" views, all computed palette and photo checks passed");
   }finally{await browser.close();}
