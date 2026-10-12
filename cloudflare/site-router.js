@@ -1506,8 +1506,15 @@ export default {
             paths.push(p);
           }
           if (url.pathname.endsWith(".html")) {
-            add(url.pathname.replace(/\.html$/, ""));
-            add(url.pathname);
+            // The teacher's standalone archive must load its exact reading
+            // document, not an extensionless Kids app-shell fallback.
+            if (url.pathname === "/kids/unterrichtsarchiv.html") {
+              add(url.pathname);
+              add(url.pathname.replace(/\.html$/, ""));
+            } else {
+              add(url.pathname.replace(/\.html$/, ""));
+              add(url.pathname);
+            }
           } else {
             // Prefer the explicit canonical HTML asset first. Cloudflare pretty-URL
             // resolution may otherwise return a stale extensionless /kids/start.
