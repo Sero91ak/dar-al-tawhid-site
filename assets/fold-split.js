@@ -196,7 +196,24 @@
     document.addEventListener("scroll", rememberFoldScroll, { capture: true, passive: true });
     var host = document.getElementById("appView") || document.body;
     if (host && typeof MutationObserver === "function") {
-      var mo = new MutationObserver(function () { restoreFoldScrollAfterRender(); });
+      /* Child updates inside an existing reader (audio, progress, cards) do
+         not replace the fold shell. Only inspect additions that contain a
+         newly mounted fold shell; avoid a DOM-wide query every mutation. */
+      var mo = new MutationObserver(function (records) {
+        if (!isDual()) return;
+        for (var i = 0; i < records.length; i++) {
+          var nodes = records[i].addedNodes;
+          for (var j = 0; j < nodes.length; j++) {
+            var node = nodes[j];
+            if (node.nodeType !== 1) continue;
+            if ((node.matches && node.matches(".dar-fold[data-fold-mode='dual']")) ||
+                (node.querySelector && node.querySelector(".dar-fold[data-fold-mode='dual']"))) {
+              restoreFoldScrollAfterRender();
+              return;
+            }
+          }
+        }
+      });
       mo.observe(host, { childList: true, subtree: true });
     }
     global.addEventListener("hashchange", function () {

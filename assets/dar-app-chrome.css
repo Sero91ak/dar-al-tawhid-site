@@ -39,3 +39,21 @@ html.dar-android-native-app,
 html.is-standalone-pwa{
   touch-action:manipulation;
 }
+
+/* DAR_HOME_ONLY_SOCIAL_FOOTER_GLOBAL_V1345
+   One branded social/signature footer belongs to the adult HOME route.
+   display:none also removes its margins/padding/border from scroll height.
+   Root and Dar Test update body.is-home-route via updateChrome(route).
+   The fixed bottom tabbar remains outside .app and is never modified. */
+html body:not(.is-home-route) > div.app > footer.footer,
+html[data-theme] body:not(.is-home-route) > div.app > footer.footer,
+html.dar-ios-native-app body:not(.is-home-route) > div.app > footer.footer,
+html.dar-android-native-app body:not(.is-home-route) > div.app > footer.footer,
+html.is-standalone-pwa body:not(.is-home-route) > div.app > footer.footer{
+  display:none!important;
+  height:0!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+}
