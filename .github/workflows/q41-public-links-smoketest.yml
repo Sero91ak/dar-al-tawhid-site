@@ -1,0 +1,56 @@
+name: Q41 Public Link Smoke Test (read only)
+
+# No deployment, no push notification, no secrets, no GitHub write permissions.
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/q41-public-links-smoketest.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Verify exact live links and adult visitor shell
+        shell: bash
+        run: |
+          set -euo pipefail
+          site='https://dar-al-tawhid.de'
+          post='2026-10-12-quran-24-22-vergeben-und-nachsicht.md'
+          post_id='quran-24-22-vergeben-und-nachsicht-20261012'
+          cb="$(date +%s)-$RANDOM"
+
+          http_q=$(curl -sSLf --max-time 25 --retry 3 --retry-delay 2 -o /tmp/dar-q41.html -w '%{http_code}' "$site/q/41/?qa=$cb")
+          test "$http_q" = 200
+          grep -Fq 'Vergeben und Nachsicht üben' /tmp/dar-q41.html
+          grep -Fq 'وَلْيَعْفُوا' /tmp/dar-q41.html
+          grep -Fq 'href="/q/41/"' /tmp/dar-q41.html
+          echo 'Q41 live: HTTP 200 + original Arabic + internal link OK'
+
+          http_post=$(curl -sSLf --max-time 25 --retry 3 --retry-delay 2 -o /tmp/dar-post.md -w '%{http_code}' "$site/content/posts/$post?qa=$cb")
+          test "$http_post" = 200
+          grep -Fq "$post_id" /tmp/dar-post.md
+          grep -Fq 'url: "/q/41/"' /tmp/dar-post.md
+          grep -Fq 'Liebt ihr es nicht' /tmp/dar-post.md
+          echo 'Adult post live: HTTP 200 + correct post ID + source link OK'
+
+          http_index=$(curl -sSLf --max-time 25 --retry 3 --retry-delay 2 -o /tmp/dar-posts-index.json -w '%{http_code}' "$site/content/posts/posts-index.json?qa=$cb")
+          test "$http_index" = 200
+          node - <<'NODE'
+          const fs=require('node:fs');
+          const x=JSON.parse(fs.readFileSync('/tmp/dar-posts-index.json','utf8'));
+          const filename='2026-10-12-quran-24-22-vergeben-und-nachsicht.md';
+          if (!(x.files||[]).some(y=>y.name===filename)) throw Error('New post not in live post index');
+          if (Number(x.count||0)<473) throw Error('Live adult post count unexpectedly too small');
+          console.log('Live index includes approved adult post ('+x.count+' total)');
+          NODE
+
+          http_nav=$(curl -sSLf --max-time 25 --retry 3 --retry-delay 2 -o /tmp/dar-site.html -w '%{http_code}' "$site/?qa=$cb")
+          test "$http_nav" = 200
+          grep -Fq 'DĀR AL TAWḤĪD' /tmp/dar-site.html
+          echo 'Visitor homepage live: HTTP 200 + branding OK'
+          echo 'VERIFIED: exact live routes; NO OneSignal message or account mutation.'
