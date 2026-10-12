@@ -90,14 +90,19 @@ function inspect() {
     blockers.push("GitHub fallback sender uses fresh random OneSignal idempotency keys; repeated runs can duplicate notifications.");
   if (github.includes('EVENT_NAME === "workflow_dispatch"') && publishWorkflow.includes("push:"))
     blockers.push("Post push manual-dispatch testing must never be invoked for visitors; current sender has a broadcast test branch.");
-  if (!fs.existsSync(path.join(ROOT, "editorial/drafts")))
-    blockers.push("No checked-in editorial/drafts staging directory in current checkout; unattended editorial handoff not proven.");
+  // The editorial drafts belong to a SEPARATE branch, never to main or a deploy.
+  // Even if that branch exists, the offline checkout cannot authenticate today's
+  // source-reviewed draft or verify its provenance.
+  blockers.push("Today's source-reviewed draft on automation/dar-daily-editorial has not been verified by this checkout.");
+  blockers.push("The offline gate cannot verify live OneSignal opt-in filters, Cloudflare deployment, published Q source or actual delivery.");
   const result = {
     mode: "offline-no-send",
     testsPassed: passed.length,
     passed,
     sources: {currentQMaximum: qNumber, nextReservedNumber: reg.nextNumber, adultIndexEntries: index.files.length},
-    releaseAllowed: blockers.length === 0,
+    // Read-only CI can NEVER grant production release by itself.
+    releaseAllowed: false,
+    codePathReady: blockers.length === 0,
     blockers,
     siteDeploymentVerified: false,
     oneSignalDeliveryVerified: false
