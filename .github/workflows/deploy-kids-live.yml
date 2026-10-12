@@ -39,6 +39,11 @@ jobs:
           node scripts/kids-prophet-release-guard.js
           node --check cloudflare/site-router.js
           node --check kids/story-hub.js
+          node --check kids/navigation-v1182.js
+          node --check kids/deen-lessons.js
+          node --check kids/mubashshirun-stories.js
+          node --check kids/sahabiyyat-stories.js
+          node --check kids/prayer-stage-v1261.js
           node --check kids/story-follow-reader.js
           node <<'NODE'
           const fs=require("fs");
@@ -101,7 +106,7 @@ jobs:
           if(!storyFollowReaderCss.includes("max-height:92dvh")||!storyFollowReaderCss.includes("overflow:auto"))throw new Error("Popup reader internal scroll/readability missing");
           if(storyHubJs.includes("scrollPlayerElementIntoView")||storyHubJs.includes("gh-podcast-meta"))throw new Error("Later inline podcast/page-flow reader regression returned");
           if(storyHubCss.includes("position:sticky!important")||storyHubCss.includes(".gh-podcast-meta")||storyHubCss.includes(".gh-readonly"))throw new Error("Later sticky podcast StoryPlayer styling returned");
-          if(!storyHubJs.includes("playerAtTop"))throw new Error("Story swipe-down guard missing");
+          if(storyHubJs.includes("installGestures()")||storyHubJs.includes("playerAtTop"))throw new Error("Swipe-back/down story player navigation forbidden");
           if(!sw.includes("dar-al-tawhid-kids-v"+swVersion)||!sw.includes("client.navigate"))throw new Error("Kids SW activation recovery missing");
           if(!index.includes('id="syEntry"'))throw new Error("Ṣaḥābiyyāt static hub card missing");
           if(index.includes('class="stories-area-jump"')||index.includes('data-story-area='))throw new Error("Redundant Geschichten capsule navigation returned");
