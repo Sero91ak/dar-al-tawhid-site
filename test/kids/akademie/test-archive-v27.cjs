@@ -28,4 +28,27 @@ for(const l of Object.values(topics)){
  for(const age of ["4-5","6-8","9-10"])assert.ok(l.questions?.[age]?.length,l.id+" "+age);
 }
 assert.ok(roadmap.plannedUnits.every(p=>p.releaseGate?.childAppUnlocked===false));
+// Verify that the first Ṣidq lesson is a byte-faithful copy of the three
+// actual production teaching tiers, including EVERY question and answer.
+function takeObject(src,tag){
+ const at=src.indexOf(tag);assert.ok(at>=0,tag);
+ const first=src.indexOf("{",at+tag.length);let depth=0,quote="",escaped=false;
+ for(let i=first;i<src.length;i++){
+  const c=src[i];if(quote){if(escaped){escaped=false;continue}
+   if(c==="\\"){escaped=true;continue}if(c===quote)quote="";continue}
+  if(c==='"'||c==="'"||c==="`"){quote=c;continue}
+  if(c==="{")depth++;else if(c==="}"&&--depth===0)return src.slice(first,i+1);
+ }throw Error("Unclosed source object "+tag);
+}
+const actualAge=vm.runInNewContext("("+takeObject(page,"const AGE_EXPLANATIONS=Object.freeze(")+")");
+const actualQuestions=vm.runInNewContext("("+takeObject(page,"const exercises=")+")");
+const savedSidq=vm.runInNewContext("("+takeObject(html,"const SIDQ_ARCHIVE=Object.freeze(")+")");
+for(const a of ["4-5","6-8","9-10"]){
+ assert.equal(savedSidq.ageText[a].intro,actualAge[a].lead);
+ assert.deepEqual(JSON.parse(JSON.stringify(savedSidq.ageText[a].lines)),JSON.parse(JSON.stringify(actualAge[a].lines)));
+ assert.equal(savedSidq.ageText[a].evidence,actualAge[a].evidence);
+ assert.deepEqual(JSON.parse(JSON.stringify(savedSidq.ageText[a].recap)),JSON.parse(JSON.stringify(actualAge[a].recap)));
+ assert.deepEqual(JSON.parse(JSON.stringify(savedSidq.questions[a])),JSON.parse(JSON.stringify(actualQuestions[a])));
+}
+assert.deepEqual(["4-5","6-8","9-10"].map(a=>savedSidq.questions[a].length),[2,3,3]);
 console.log("KIDS OWNER ARCHIVE V27 PASS: 50 courses, 158 source-gated plans, 3 age levels, private signed-session URL, no billing or child state changes.");
