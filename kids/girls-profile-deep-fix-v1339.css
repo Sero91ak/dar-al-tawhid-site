@@ -1,0 +1,315 @@
+/* DAR AL TAWḤĪD KIDS · Girls-only deep palette correction V1339
+   Source: the girl's profile, not global appearance/theme settings.
+   Scope includes BODY-mounted libraries and modal learners, which are
+   outside .app and were missed by V1331–V1338.
+   No image replacements, geometry, content, audio or progress changes.
+   Every selector below is guarded by the active girl profile. */
+
+html body:has(.app[data-gender="girl"]){
+  --girls-rose:#e8a8b8;
+  --girls-lavender:#b79ad9;
+  --girls-peach:#ffdccb;
+  --girls-gold:#e3b76a;
+  --girls-cream:#fff8f4;
+  --girls-mauve:#6e4c72;
+  --girls-paper:#302337;
+  --girls-panel:#3b2a40;
+  --girls-outline:rgba(232,168,184,.30);
+}
+
+/* Unified navigation: replace the remaining petrol body and turquoise
+   sheen, also in fixed standalone overlays outside .app. */
+html body:has(.app[data-gender="girl"]) :is(
+  .kids-detail-appbar,.ps-library-nav,.ms-library-nav,
+  .dl-library-nav,.gh-world-nav,.kids-subpage-nav
+){
+  background-color:#312239!important;
+  background-image:linear-gradient(165deg,#34243e 0%,#2b2034 100%)!important;
+  border-bottom-color:var(--girls-outline)!important;
+  box-shadow:0 7px 18px rgba(23,14,30,.19),inset 0 -1px rgba(248,208,223,.07)!important;
+  -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+}
+html body:has(.app[data-gender="girl"]) :is(
+  .kids-detail-appbar,.ps-library-nav,.ms-library-nav,
+  .dl-library-nav,.gh-world-nav,.kids-subpage-nav
+)::after{
+  background:linear-gradient(90deg,rgba(227,183,106,.33),rgba(232,168,184,.17),transparent)!important;
+}
+html body:has(.app[data-gender="girl"]) :is(
+  .kids-detail-appbar-copy,.gh-world-nav-copy,
+  .ps-library-nav-copy,.ms-library-nav-copy
+){border-left-color:rgba(232,168,184,.30)!important}
+html body:has(.app[data-gender="girl"]) :is(
+  .kids-detail-appbar-subtitle,.kids-detail-appbar-copy > small,
+  .gh-world-nav-copy span
+){color:rgba(255,236,238,.79)!important}
+html body:has(.app[data-gender="girl"]) :is(
+  .kids-detail-appbar .kids-detail-dock-back,
+  .ps-library-nav .ps-library-back,.ms-library-nav .ms-back,
+  .dl-library-nav .ms-back,.gh-world-nav .gh-back,
+  .kids-subpage-nav .kids-subpage-back
+){
+  background:#513750!important;
+  background-image:linear-gradient(145deg,#62445c,#3e2e46)!important;
+  border-color:rgba(232,168,184,.45)!important;
+  box-shadow:inset 0 1px rgba(255,241,238,.09)!important;
+  -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+}
+html body:has(.app[data-gender="girl"]) :is(
+  .kids-detail-appbar .kids-detail-dock-back,
+  .gh-world-nav .gh-back
+){color:var(--girls-peach)!important}
+html body:has(.app[data-gender="girl"]) :is(
+  .ps-library-nav .ps-library-back,.ms-library-nav .ms-back,
+  .dl-library-nav .ms-back,.kids-subpage-nav .kids-subpage-back
+)::before{
+  border-left-color:var(--girls-peach)!important;
+  border-bottom-color:var(--girls-peach)!important;
+}
+/* The Quran has a higher-specificity legacy header rule. */
+html body:has(.app[data-gender="girl"]) #quranModal.modal.open >
+.modal-shell > .modal-top.kids-legacy-appbar.kids-detail-appbar{
+  background:#302238!important;
+  background-image:linear-gradient(165deg,#342540,#292034)!important;
+  border-bottom-color:var(--girls-outline)!important;
+  box-shadow:0 7px 18px rgba(23,14,30,.2)!important;
+}
+html body:has(.app[data-gender="girl"]) #quranModal.modal.open
+.modal-top.kids-legacy-appbar .close-btn.kids-detail-dock-back{
+  background:linear-gradient(145deg,#604059,#3d2b46)!important;
+  border-color:rgba(232,168,184,.45)!important;
+  color:var(--girls-peach)!important;
+  box-shadow:none!important;
+}
+html body:has(.app[data-gender="girl"]) #quranModal.modal.open
+.modal-top.kids-legacy-appbar .modal-title.kids-detail-appbar-copy{
+  border-left-color:var(--girls-outline)!important;
+}
+html body:has(.app[data-gender="girl"]) #quranModal .modal-title small{
+  color:rgba(255,234,242,.77)!important;
+}
+
+/* DĪN, PROPHETS, ṢAḤĀBAH and ṢAḤĀBIYYĀT:
+   recolor the blue backplates AND the image-to-copy fades.
+   Illustration src and image CSS remain completely untouched. */
+html body:has(.app[data-gender="girl"]) :is(
+  .gh-world,.gh-player,.ps-library-page,.ms-library-page,
+  .sy-library-page,.dl-library-page
+){background:#291e33!important;background-image:linear-gradient(180deg,#2d2137,#241b2d)!important}
+html body:has(.app[data-gender="girl"]) :is(
+  #psLibraryPage .ps-library-list,
+  #msLibraryPage .ms-list,#syLibraryPage .ms-list,
+  .dl-library-page .dl-list
+){background-color:transparent!important}
+html body:has(.app[data-gender="girl"]) #psLibraryPage .ps-story-row{
+  background:#35263c!important;
+  border-color:rgba(232,168,184,.29)!important;
+  box-shadow:0 7px 21px rgba(21,13,26,.16)!important;
+}
+html body:has(.app[data-gender="girl"]) #psLibraryPage .ps-story-row::before{
+  background:linear-gradient(90deg,rgba(42,28,47,.01) 0%,
+    rgba(42,28,47,.06) 34%,rgba(42,28,47,.25) 47%,
+    rgba(45,31,51,.69) 64%,rgba(45,31,51,.95) 82%,#2d1f33 100%)!important;
+}
+html body:has(.app[data-gender="girl"]) #psLibraryPage .ps-story-row::after{
+  background:linear-gradient(90deg,rgba(227,183,106,.31),rgba(232,168,184,.22),transparent)!important;
+}
+html body:has(.app[data-gender="girl"]) #psLibraryPage .ps-row-meta{
+  color:#f1c4d5!important;
+}
+html body:has(.app[data-gender="girl"]) #psLibraryPage :is(.ps-row-rank,.ps-row-go){
+  background:rgba(52,33,53,.83)!important;
+  border-color:rgba(232,168,184,.40)!important;
+  -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+}
+html body:has(.app[data-gender="girl"]) :is(
+  #msLibraryPage .ms-story-row,#syLibraryPage .ms-story-row,
+  .dl-library-page .dl-story-row
+){
+  background:#34283e!important;
+  background-image:linear-gradient(145deg,#412d42,#302537)!important;
+  border-color:var(--girls-outline)!important;
+  box-shadow:0 7px 21px rgba(21,13,26,.15)!important;
+}
+html body:has(.app[data-gender="girl"]) :is(
+  #msLibraryPage .ms-row-visual,#syLibraryPage .ms-row-visual,
+  .dl-library-page .ms-row-visual
+){background-color:#3a2940!important}
+html body:has(.app[data-gender="girl"]) :is(
+  #msLibraryPage .ms-row-visual::after,
+  #syLibraryPage .ms-row-visual::after,
+  .dl-library-page .ms-row-visual::after
+){
+  background:linear-gradient(90deg,transparent 45%,rgba(53,39,60,.12) 61%,
+    rgba(53,39,60,.53) 81%,#35273c 100%)!important;
+}
+html body:has(.app[data-gender="girl"]) :is(
+  #msLibraryPage .ms-rank,#syLibraryPage .ms-rank,
+  .dl-library-page .ms-rank
+){
+  background:#39283e!important;
+  border-color:rgba(227,183,106,.46)!important;
+  -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+}
+html body:has(.app[data-gender="girl"]) .ps-muhammad-card{
+  background-color:#39273d!important;border-color:var(--girls-outline)!important;
+}
+html body:has(.app[data-gender="girl"]) .ps-muhammad-panel{
+  background:#443044!important;background-image:linear-gradient(145deg,#4c3548,#37263d)!important;
+}
+html body:has(.app[data-gender="girl"]) :is(
+  .ps-sequence-head,.ms-library-page .ms-row-copy,
+  .sy-library-page .ms-row-copy
+){text-shadow:none!important}
+html body:has(.app[data-gender="girl"]) .dl-story-row .ms-row-kicker{
+  color:#f1b6ce!important;
+}
+html body:has(.app[data-gender="girl"]) .dl-library-page .ms-row-visual::after{
+  background:linear-gradient(90deg,transparent 43%,rgba(54,39,59,.55) 75%,#38273f)!important;
+}
+html body:has(.app[data-gender="girl"]) .gh-world-hero{
+  background-color:#33253d!important;
+}
+html body:has(.app[data-gender="girl"]) #ghWorld[data-category="deen"] .gh-world-hero::before{
+  background-image:linear-gradient(90deg,rgba(43,29,47,.75),rgba(43,29,47,.16)),
+    url("/kids/assets/deen/deen-entry.jpg?v=1199")!important;
+}
+html body:has(.app[data-gender="girl"]) :is(.gh-story,.gh-category,.gh-controls,.gh-mini){
+  background:#39283e!important;
+  border-color:var(--girls-outline)!important;
+}
+html body:has(.app[data-gender="girl"]) .gh-story-art{
+  background:#34263b!important;
+}
+html body:has(.app[data-gender="girl"]) .gh-story-art::after{
+  background:linear-gradient(90deg,transparent 43%,rgba(56,40,62,.43) 74%,#39283e)!important;
+}
+html body:has(.app[data-gender="girl"]) .gh-category::after{
+  background:linear-gradient(180deg,rgba(41,27,46,.06),rgba(43,29,48,.85))!important;
+}
+html body:has(.app[data-gender="girl"]) :is(.gh-list-head small,.gh-story-copy small){
+  color:#f4bdce!important;
+}
+html body:has(.app[data-gender="girl"]) .gh-player-shade{
+  background:linear-gradient(180deg,rgba(34,23,39,.05),
+    rgba(39,26,43,.18) 40%,rgba(40,28,47,.85) 83%,#291f32 100%)!important;
+}
+html body:has(.app[data-gender="girl"]) .gh-progress span{
+  background:linear-gradient(90deg,var(--girls-rose),var(--girls-gold))!important;
+}
+
+/* Du'a detail: existing artwork stays; hardcoded teal HÖREN becomes
+   soft rose, while LERNEN retains a legible warm gold. */
+html body:has(.app[data-gender="girl"]) #view-dua #duaHubDetail.open{
+  background:#302138!important;
+  color:var(--girls-cream)!important;
+}
+html body:has(.app[data-gender="girl"]) #view-dua #duaHubDetail.open .duahub-detail-scroll{
+  background:#302138!important;
+}
+html body:has(.app[data-gender="girl"]) #view-dua #duaHubDetail.open .duahub-detail-hero{
+  background-color:#352641!important;
+  background-image:linear-gradient(180deg,rgba(47,29,50,.12) 0%,
+    rgba(49,30,52,.22) 43%,#302138 100%),
+    var(--duahub-detail-image,url("/kids/assets/dua-premium/hero-v1222.jpg?v=1233"))!important;
+}
+html body:has(.app[data-gender="girl"]) #view-dua #duaHubDetail.open .duahub-detail-hero::after{
+  background:linear-gradient(180deg,transparent 35%,rgba(45,28,49,.16) 57%,#302138 100%)!important;
+}
+html body:has(.app[data-gender="girl"]) #view-dua #duaHubDetail.open .duahub-detail-actions .duahub-listen{
+  background:#ad728c!important;
+  background-image:linear-gradient(120deg,#b77d98,#8e648d)!important;
+  border-color:rgba(255,220,203,.42)!important;
+  box-shadow:inset 0 1px rgba(255,248,244,.10)!important;
+  color:#fff8f4!important;
+}
+html body:has(.app[data-gender="girl"]) #view-dua #duaHubDetail.open .duahub-detail-actions .duahub-learn{
+  background:linear-gradient(120deg,#f4d6a2,#e3b76a)!important;
+  border-color:rgba(255,233,199,.55)!important;
+  box-shadow:inset 0 1px rgba(255,248,244,.13)!important;
+  color:#36283a!important;
+}
+html body:has(.app[data-gender="girl"]) #view-dua #duaHubDetail.open .duahub-detail-actions .duahub-listen.is-playing{
+  box-shadow:0 0 0 2px rgba(232,168,184,.22)!important;
+}
+html body:has(.app[data-gender="girl"]) #view-dua #duaHubDetail.open .duahub-textcard{
+  background:#38283d!important;
+  background-image:linear-gradient(165deg,#422d42,#312338)!important;
+  border-color:var(--girls-outline)!important;
+}
+
+/* Full-screen Quran memorization is a BODY-level modal. No geometry
+   and no changes to green/orange/red correctness states. */
+html body:has(.app[data-gender="girl"]) #quranModal.modal{
+  background:#251b30!important;
+}
+html body:has(.app[data-gender="girl"]) #quranModal .modal-shell{
+  background:#251b30!important;
+  background-image:linear-gradient(175deg,#2b2037,#21192e)!important;
+}
+html body:has(.app[data-gender="girl"]) #quranModal .lesson-step{
+  background:#36293f!important;
+  border-color:rgba(232,168,184,.17)!important;
+  color:rgba(254,230,240,.66)!important;
+  box-shadow:none!important;
+}
+html body:has(.app[data-gender="girl"]) #quranModal .lesson-step.active{
+  background:linear-gradient(140deg,#58405b,#46344f)!important;
+  border-color:rgba(227,183,106,.55)!important;
+  color:var(--girls-cream)!important;
+}
+html body:has(.app[data-gender="girl"]) #quranModal .lesson-step.done{
+  background:rgba(79,132,92,.24)!important;
+  border-color:rgba(154,202,162,.40)!important;
+  color:#e0f5df!important;
+}
+html body:has(.app[data-gender="girl"]) #quranModal .learn-status:not(.error):not(.success){
+  background:#3d2c44!important;
+  border-color:rgba(232,168,184,.24)!important;
+  color:#fff0f4!important;
+  animation:none!important;
+}
+html body:has(.app[data-gender="girl"]) #quranModal .learn-status.you{
+  background:#533e59!important;border-color:rgba(232,168,184,.46)!important;
+}
+html body:has(.app[data-gender="girl"]) #quranModal .progress-dots span.active{
+  background:var(--girls-rose)!important;
+  box-shadow:none!important;
+}
+html body:has(.app[data-gender="girl"]) #quranModal .ayah-tr{
+  color:#f7cad8!important;
+}
+html body:has(.app[data-gender="girl"]) #quranModal .big-speak{
+  background:#9b739e!important;
+  background-image:linear-gradient(125deg,#b79ad9,#8e6d9c)!important;
+  color:#251d32!important;
+  box-shadow:0 7px 15px rgba(28,18,38,.18)!important;
+}
+html body:has(.app[data-gender="girl"]) #quranModal .big-speak.active{
+  box-shadow:0 0 0 2px rgba(232,168,184,.38)!important;
+}
+html body:has(.app[data-gender="girl"]) #quranModal .big-play{
+  background-image:linear-gradient(125deg,#f7dba8,#e3b76a)!important;
+  color:#332633!important;
+  box-shadow:0 7px 15px rgba(28,18,38,.18)!important;
+}
+html body:has(.app[data-gender="girl"]) #quranModal .lesson-nav button{
+  background:#392c43!important;
+  border-color:rgba(232,168,184,.22)!important;
+}
+html body:has(.app[data-gender="girl"]) #quranModal #nextAyah:disabled{
+  background:#2b2335!important;color:#8c8194!important;
+}
+
+/* Profile bottom tab: no lingering teal translucent layer or blue halo. */
+html body .app[data-gender="girl"] > .bottom-nav{
+  background:#33243b!important;
+  background-image:linear-gradient(150deg,#3e2b43,#2b2237)!important;
+  box-shadow:0 7px 20px rgba(26,15,31,.24)!important;
+  -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+}
+html body .app[data-gender="girl"] > .bottom-nav .nav-btn.active{
+  background:linear-gradient(140deg,rgba(232,168,184,.27),rgba(183,154,217,.17))!important;
+  box-shadow:inset 0 0 0 1px rgba(255,220,203,.11)!important;
+  border-color:rgba(232,168,184,.55)!important;
+}
