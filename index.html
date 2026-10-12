@@ -36410,4 +36410,20 @@ html body.has-bottom-nav.is-home-route{
   html body.has-bottom-nav.is-home-route{padding-bottom:calc(var(--bottom-navigation-height,70px) + 16px)!important}
 }
 </style>
+
+<!-- DAR_HOME_ONLY_SOCIAL_FOOTER_V1344: one shared branded footer, home route only. -->
+<style id="dar-home-only-social-footer-v1344">
+/* The shared footer is a sibling of #appView, not page content. Keep it on
+   Startseite only. display:none removes its height/margins from every other
+   route without changing the bottom navigation's independent safe clearance. */
+html body:not(.is-home-route) > .app > footer.footer,
+html[data-theme] body:not(.is-home-route) > .app > footer.footer {
+  display:none!important;
+  height:0!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+}
+</style>
 </html>
