@@ -1,0 +1,23 @@
+name: Diagnose isolated KIDS iPad preview
+on:
+  push:
+    branches: [preview/kids-ipad-qa-20261012]
+    paths: [".github/workflows/kids-ipad-debug.yml"]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inspect static route and worker responses without secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE="https://dar-kids-ipad-preview.sero91ak.workers.dev"
+          for path in / /kids/start.html /kids/akademie/index.html /kids/ipad-home-audio-grid-v1347.css /desktop-preview/assets/kids-academy-hero-boys-v1.jpg /test; do
+            curl -sSL --max-time 15 -D /tmp/review-head -o /tmp/review-body "$BASE$path" || true
+            echo "--- $path ---"
+            grep -Ei '^(HTTP/|content-type:|cache-control:|server:|cf-ray:|location:|x-robots-tag:)' /tmp/review-head || true
+            head -c 190 /tmp/review-body || true
+            echo
+          done
