@@ -280,3 +280,31 @@ test("One-to-one original appearance gate explicitly blocks V15 and both figures
  assert.equal(d.milestones.filter(m=>m.approved).length,0);
  assert.equal(audit(d).pass,true);
 });
+
+test("Original-side camera calibration forbids false 90-degree refit",()=>{
+ const d=fixture(),p=d.originals.girl.experimentalIndependent3DGeometricBlockout;
+ const c=JSON.parse(fs.readFileSync(path.join(__dirname,"GIRL-SOURCE-ANGLE-CALIBRATION-13CAM-20261012.json"),"utf8"));
+ assert.equal(c.schemaVersion,1);
+ assert.equal(c.sourceMesh.sha256,p.v15Sha256);
+ assert.equal(c.anglesTested.length,13);
+ assert.equal(c.angleErrors.length,13);
+ assert.equal(c.bestSampledAngle,50);
+ assert.equal(c.errorAt50,.024385);
+ assert.equal(c.errorAt90,.040806);
+ assert.equal(c.errorAt50< c.errorAt90,true);
+ assert.equal(p.v15SourceCameraComparison.lowestSilhouetteErrorYaw,50);
+ assert.equal(p.v15SourceCameraComparison.cameraAngleFullyCalibrated,false);
+ assert.equal(p.v15SourceCameraComparison.immediateDressDepthScaleCorrectiveAuthorized,false);
+ assert.equal(p.v15SourceCameraComparison.glbGeometricFaceV16LocalTrialApproved,false);
+ assert.equal(p.v15SourceCameraComparison.v16GlbUploaded,false);
+ assert.equal(c.decision.originalSidePhotoIsConfirmedTrue90DegreeProfile,false);
+ assert.equal(c.decision.automaticGownDepthEnlargementApproved,false);
+ assert.equal(c.decision.originality1to1Approved,false);
+ assert.equal(c.decision.currentModelStillV15,true);
+ assert.equal(c.release.productionReady,false);
+ assert.equal(c.release.mergeMain,false);
+ assert.equal(c.release.liveDeploy,false);
+ assert.equal(d.originals.girl.actual3dIdentityApproved,false);
+ assert.equal(d.milestones.filter(m=>m.approved).length,0);
+ assert.equal(audit(d).pass,true);
+});
