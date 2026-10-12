@@ -122,6 +122,9 @@ jobs:
           node --check kids/akademie/curriculum-v25.js
           node --check kids/akademie/curriculum-v26.js
           node --check kids/akademie/curriculum-v27.js
+          node --check kids/akademie/curriculum-v28.js
+          node --check kids/akademie/curriculum-v29.js
+          node --check kids/akademie/curriculum-v30.js
           node --check kids/akademie/term-coach-v24.js
           node --check kids/akademie/school-progress-v11.js
           node --check kids/akademie/pilot-audio-v13.js
