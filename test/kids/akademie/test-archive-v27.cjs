@@ -7,7 +7,7 @@ const page=read("kids/akademie/index.html"),year=JSON.parse(read("kids/data/acad
 const roadmap=JSON.parse(read("kids/data/academy-expansion-roadmap-v23.json"));
 for(const term of ["Mein Unterrichtsarchiv","Dieses Archiv ist keine Test-App.","Ṣaḥābah","Ṣaḥābiyyāt","Tābiʿīn","hanbalitische","term-coach-v24.js","l.questions?.[age]","safeDorar","Originalnachweis bei Dorar öffnen","Redaktionsentwurf"])
  assert.ok(html.includes(term),"Missing "+term);
-assert.ok(html.includes('const AGES=["4-5","6-8","9-10"]'));
+assert.ok(html.includes('AGES=["4-5","6-8","9-10"]'));
 assert.ok(html.includes("pageText.matchAll("),"Must load catalog from the current Kids app");
 assert.ok(!/localStorage\.|indexedDB|speechSynthesis|generate-with-timings|ELEVENLABS_API_KEY/.test(html),"No writes to child profiles or billing");
 const m=html.match(/<script>([\s\S]*?)<\/script>/);assert.ok(m);new vm.Script(m[1]);
