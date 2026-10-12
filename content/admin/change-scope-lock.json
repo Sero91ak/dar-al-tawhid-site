@@ -7649,6 +7649,17 @@
         "scripts/test-kids-account-registration-v1.js"
       ],
       "expiresAt": "2026-11-30T23:59:00.000Z"
+    },
+    {
+      "id": "adult-daily-publish-dry-run-20261012",
+      "at": "2026-10-12T11:00:00+02:00",
+      "approvedBy": "user-explicit-test-github-and-onesignal-daily-adult-publishing-20261012",
+      "reason": "Ausschließlich read-only GitHub PR-Dry-Run mit negativen Tests der bestehenden genehmigten Erwachsenen-Beitragsveröffentlichung; keine OneSignal-Sendefunktion, keine Push-Codeänderung und kein Live-Deploy.",
+      "paths": [
+        "scripts/dar-daily-release-dry-run.cjs",
+        ".github/workflows/dar-daily-release-dry-run.yml"
+      ],
+      "expiresAt": "2026-10-19T23:59:00.000Z"
     }
   ],
   "enabled": true
