@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-12",
+  "scope": "isolated KIDS original-girl GLB source-camera yaw audit, research-only",
+  "sourceImage": "preserved independently supplied original girl right-side image (maedchen/03_seite.png)",
+  "sourceMesh": {
+    "model": "girl V15 actual mesh",
+    "sha256": "44e75d268426d36a5f6e040437c5874bfc81d9ff5e07adf15def49f845f20321",
+    "geometryMeshes": 213
+  },
+  "metric": "mean absolute discrepancy of 17 sampled silhouette widths normalized by subject height; reference alpha mask versus connected saturated foreground GLB render",
+  "anglesTested": [
+    30,
+    35,
+    40,
+    45,
+    50,
+    55,
+    60,
+    65,
+    70,
+    75,
+    80,
+    85,
+    90
+  ],
+  "angleErrors": [
+    0.039339,
+    0.035427,
+    0.030811,
+    0.025614,
+    0.024385,
+    0.027462,
+    0.030776,
+    0.0309,
+    0.032314,
+    0.035154,
+    0.039217,
+    0.039978,
+    0.040806
+  ],
+  "bestSampledAngle": 50,
+  "errorAt50": 0.024385,
+  "errorAt90": 0.040806,
+  "evidence": "https://drive.google.com/drive/folders/1Bchd2qH_pIyHfidL2JlReNRs9X64HDdy",
+  "reproductionCode": "qa_true_camera_alignment.py (Google Drive folder above)",
+  "decision": {
+    "originalSidePhotoIsConfirmedTrue90DegreeProfile": false,
+    "automaticGownDepthEnlargementApproved": false,
+    "earlierV16LocalCheekSculptApproved": false,
+    "v16ExperimentalGLBUploaded": false,
+    "currentModelStillV15": true,
+    "originality1to1Approved": false,
+    "humanIdentityReviewApproved": false,
+    "rigApproved": false,
+    "releaseApproved": false
+  },
+  "nextAction": "Calibrate source focal length/perspective and derive consistent front/3-quarter/side landmark correspondences before re-sculpting head; do not use arbitrary geometric depth scaling or mirror views as identity evidence.",
+  "caveats": [
+    "50° is the smallest measured SILHOUETTE error among 13 samples, not an exact camera-pose measurement or a validated texture/face match",
+    "The 2D image may use perspective and artistic projection not reproduced by orthographic GLB rendering",
+    "Other camera angles and full 3D true left view still require independent reviews"
+  ],
+  "release": {
+    "productionReady": false,
+    "mergeMain": false,
+    "liveDeploy": false
+  }
+}
