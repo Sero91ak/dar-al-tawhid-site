@@ -60,6 +60,8 @@ Dieser Ordner ist die zentrale Ablage für alle nummerierten Quellenlinks.
 | `q/38` | Taqwā, Pflichten und freiwillige Gottesdienste | `ʿUmar ibn ʿAbd al-ʿAzīz` | Taqwā besteht im Meiden der Verbote und Erfüllen der Pflichten; freiwillige Taten sind eine Ergänzung. |
 | `q/40` | Tawḥīd, Ikhlāṣ und ʿIbādah (al-Kahf 18:28) | `Abū Isḥāq az-Zaǧǧāǧ` | Sie rufen Allah mit Tawḥīd und Aufrichtigkeit an und dienen Ihm. |
 
+| `q/41` | Vergebung und Nachsicht – an-Nūr 24:22 | `Allah` | Sie sollen vergeben und Nachsicht üben; Allahs Vergebung wird in Erinnerung gerufen. |
+
 ## Sonderbereiche
 
 - `q/_registry/` ist nur Verwaltung: Nummerierung, Vorlage und Registry.
