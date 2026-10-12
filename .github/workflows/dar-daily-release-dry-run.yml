@@ -48,7 +48,7 @@ jobs:
             valid=0
             if [ "$status" = "200" ]; then
               case "$p" in
-                /q/41/) grep -q 'Sūrat an-Nūr 24:22\|an-Nūr 24:22' "$tmp" && grep -q 'qsource-page' "$tmp" && valid=1 ;;
+                /q/41/) grep -q 'Sūrat an-Nūr 24:22\|an-Nūr 24:22' "$tmp" && grep -q 'qsource-page' "$tmp" && grep -q 'dorar.net/h/nrNaND4d' "$tmp" && valid=1 ;;
                 */posts-index.json) grep -q "$POST" "$tmp" && valid=1 ;;
                 *) grep -q 'quran-24-22-vergeben-und-nachsicht-20261012' "$tmp" && grep -q '/q/41/' "$tmp" && valid=1 ;;
               esac
