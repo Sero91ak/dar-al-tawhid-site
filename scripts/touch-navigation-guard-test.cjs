@@ -99,4 +99,75 @@ assert.equal(result.release.stopped, true, "Further drags stay protected");
 const keyboard = fire("click", nav, { detail: 0 });
 assert.equal(keyboard.stopped, false, "Keyboard activation must remain available");
 
-console.log("OK: touch intent, scroll drag, pointerup/click, keyboard and iOS history-gesture guards");
+// Exercise the Kids click-capture guard in a minimal DOM simulation.
+const kidListeners = new Map();
+let kidNow = 500;
+const styleStore = Object.create(null);
+const kidRoot = {
+  dataset: {},
+  style: {
+    setProperty(key, value) { styleStore[key] = value; },
+    getPropertyValue(key) { return styleStore[key] || ""; }
+  }
+};
+const kidDoc = {
+  readyState: "loading",
+  documentElement: kidRoot,
+  head: { appendChild() {} },
+  scrollingElement: { scrollTop: 0 },
+  getElementById() { return null; },
+  createElement() { return { id: "", textContent: "" }; },
+  querySelector() { return null; },
+  querySelectorAll() { return []; },
+  addEventListener(type, cb) {
+    if (!kidListeners.has(type)) kidListeners.set(type, []);
+    kidListeners.get(type).push(cb);
+  }
+};
+const kidWindow = { innerWidth: 390, scrollY: 0, addEventListener() {} };
+vm.runInNewContext(kids, {
+  window: kidWindow, document: kidDoc,
+  requestAnimationFrame() {},
+  setTimeout() {},
+  performance: { now: () => kidNow }
+}, { filename: "navigation-v1182.js" });
+assert.equal(kidListeners.get("DOMContentLoaded").length, 1);
+kidListeners.get("DOMContentLoaded")[0]();
+
+const kidTab = {
+  dataset: { target: "stories" },
+  closest(selector) {
+    if (selector.startsWith("button,a,")) return this;
+    if (selector === ".nav-btn[data-target]") return this;
+    return null;
+  }
+};
+function fireKid(type, overrides = {}) {
+  const e = {
+    target: kidTab, touches: [], changedTouches: [],
+    detail: 1, isTrusted: true, cancelable: true,
+    ...overrides, stopped: false, prevented: false,
+    stopImmediatePropagation() { this.stopped = true; },
+    preventDefault() { this.prevented = true; }
+  };
+  for (const fn of kidListeners.get(type) || []) {
+    fn(e);
+    if (e.stopped) break;
+  }
+  return e;
+}
+function finger(id, x, y = 20) { return { identifier: id, clientX: x, clientY: y }; }
+fireKid("touchstart", { touches: [finger(23, 20)] });
+fireKid("touchmove", { touches: [finger(23, 38)] });
+fireKid("touchend", { changedTouches: [finger(23, 38)] });
+assert.equal(fireKid("click").stopped, true, "Kids: after a drag, tab click must be suppressed");
+kidNow += 1000;
+fireKid("touchstart", { touches: [finger(24, 20)] });
+fireKid("touchend", { changedTouches: [finger(24, 23)] });
+assert.equal(fireKid("click").stopped, false, "Kids: genuine short tab tap must remain");
+fireKid("touchstart", { touches: [finger(25, 20)] });
+fireKid("touchmove", { touches: [finger(25, 39)] });
+fireKid("touchcancel");
+assert.equal(fireKid("click").stopped, false, "Kids: cancelled touch must not poison next click");
+
+console.log("OK: touch intent, scroll drag, pointerup/click, Kids, keyboard and iOS history-gesture guards");
