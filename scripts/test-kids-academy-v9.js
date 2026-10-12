@@ -109,8 +109,8 @@ assert.equal(pilot.maxPreparedCharacters,420);
 assert.equal(pilot.stagingOnly,true);
 assert.equal(pilot.exactPhrases.length,4);
 const academyHtml=read("kids/akademie/index.html");
-assert.ok(academyHtml.includes('pilot-audio-v13.js?v=20261010-voicefix-v16'));
-assert.ok(academyHtml.includes('data-academy-pilot="0"'));
+assert.ok(!academyHtml.includes('pilot-audio-v13.js?v=20261010-voicefix-v16'),"Visitor Academy must not load unapproved pilot audio");
+assert.ok(!academyHtml.includes('data-academy-pilot="0"'),"Visitor Academy must not contain QA pilot buttons");
 
 // The standalone academy header must not be part of the home/subject scrollport.
 const academyFixedShell='body:not([data-academy-view="lesson"]):not([data-embedded="true"])';
