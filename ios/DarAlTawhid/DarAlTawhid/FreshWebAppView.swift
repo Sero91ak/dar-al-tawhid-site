@@ -65,7 +65,7 @@ struct WebAppView: UIViewRepresentable {
         webView.isOpaque = true
         webView.scrollView.backgroundColor = host.backgroundColor
         webView.scrollView.contentInsetAdjustmentBehavior = .never
-        webView.allowsBackForwardNavigationGestures = false
+        webView.allowsBackForwardNavigationGestures = true
         webView.customUserAgent = "DarAlTawhid-iOS/1.0 WKWebView"
         webView.navigationDelegate = context.coordinator
         webView.uiDelegate = context.coordinator
