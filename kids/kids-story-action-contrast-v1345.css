@@ -237,3 +237,15 @@ html body:has(.app[data-gender="girl"]) :is(#msModal,#syModal,#dlModal)
     min-height:72px!important;
   }
 }
+
+/* Match the iOS rubber-band/outer backdrop to the same profile color. */
+html body:has(.app[data-gender="girl"]) :is(#psModal,#msModal,#syModal,#dlModal) {
+  background:#251b30!important;
+  background-image:none!important;
+}
+/* Every individual reading/listening selector in the existing story modals
+   uses the same generous letter scale, regardless of JS-added classes. */
+html body:has(.app[data-gender="girl"]) #psModal .ps-hero-copy .ps-meta,
+html body:has(.app[data-gender="girl"]) #psModal .ps-hero-copy .ps-summary {
+  border-color:rgba(242,188,212,.27)!important;
+}
