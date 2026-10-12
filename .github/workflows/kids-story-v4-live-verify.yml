@@ -1,0 +1,109 @@
+name: Verify DĀR KIDS V4 story masters on live site
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows:
+      - Deploy Besucher-App (Cloudflare Workers)
+    types: [completed]
+    branches: [main]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-v4-story-live-audit
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    if: github.event_name != 'workflow_run' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_repository.full_name == github.repository)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Verify published story files and player metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -f scripts/voice-studio/production/kids-v4-import-report.json ]; then
+            echo "No successful import report yet: live verification not due."
+            exit 0
+          fi
+          if [ -f ci-status/kids-v4-live.json ] && python3 -c 'import json; d=json.load(open("ci-status/kids-v4-live.json")); exit(0 if d.get("passed") and d.get("readyCount")==34 else 1)'; then
+            echo "34 audio files already checked live. Nothing to repeat."
+            exit 0
+          fi
+          python3 - <<'PY'
+          import datetime,json,pathlib,time,urllib.request
+          root=pathlib.Path('.')
+          expected=json.loads((root/'scripts/voice-studio/production/kids-master-v4-20261012.json').read_text())['items']
+          urlBase='https://dar-al-tawhid.de'
+          headers={'User-Agent':'DarAlTawhidKids-V4-LiveVerifier','Cache-Control':'no-cache'}
+          names={'prophet':'prophet-stories.json','sahabiyyah':'sahabiyyat-stories.json'}
+          result={'checkedAt':datetime.datetime.now(datetime.timezone.utc).isoformat(),'expectedCount':34,'readyCount':0,'passed':False,'results':[],'errors':[]}
+          source={}
+          for kind,name in names.items():
+            try:
+              req=urllib.request.Request(f'{urlBase}/kids/data/{name}?kidsV4Audit={int(time.time())}',headers=headers)
+              with urllib.request.urlopen(req,timeout=40) as res: source[kind]={str(x.get('id')):x for x in json.load(res)['items']}
+            except Exception as exc:
+              result['errors'].append(f'{kind}: cannot fetch live metadata: {type(exc).__name__} {exc}')
+          for row in expected:
+            kind,story_id=row['kind'],row['id']
+            item=source.get(kind,{}).get(story_id,{})
+            age_items=[(item.get('audio') or {}).get(a) or {} for a in ('4-5','6-8','9-10')]
+            urls=[a.get('url') for a in age_items]
+            errors=[]
+            if not urls[0] or len(set(urls))!=1 or any(a.get('status')!='ready' for a in age_items):
+              errors.append('Age profile metadata missing or not identical')
+            elif not urls[0].startswith('/kids/assets/'):
+              errors.append('Invalid live master URL')
+            else:
+              full=urlBase+urls[0]
+              for attempt in range(3):
+                try:
+                  req=urllib.request.Request(full,headers=dict(headers,Range='bytes=0-255'))
+                  with urllib.request.urlopen(req,timeout=35) as res:
+                    head=res.read(64)
+                    code=res.status
+                    contentType=res.headers.get('Content-Type','')
+                  if code not in (200,206) or not (head.startswith(b'ID3') or (len(head)>1 and head[0]==255 and (head[1]&224)==224)):
+                    raise RuntimeError(f'invalid HTTP {code}, content-type {contentType}, mp3 header {head[:8]!r}')
+                  break
+                except Exception as exc:
+                  if attempt==2: errors.append('Audio unreachable: '+str(exc)[:180])
+                  else: time.sleep(8)
+            ok=not errors
+            result['results'].append({'kind':kind,'id':story_id,'ready':ok,'errors':errors})
+            if ok: result['readyCount']+=1
+            else: result['errors'].append(kind+':'+story_id+': '+';'.join(errors))
+          result['passed']=result['readyCount']==34 and len(result['errors'])==0
+          target=root/'ci-status/kids-v4-live.json'
+          target.parent.mkdir(parents=True,exist_ok=True)
+          target.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+          print('KIDS V4 STORY LIVE:',result['readyCount'],'/34', 'PASS' if result['passed'] else 'FAIL')
+          PY
+      - name: Record live verification audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -f ci-status/kids-v4-live.json ]; then exit 0; fi
+          git config user.name "dar-kids-live-audit"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ci-status/kids-v4-live.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "ci(kids): record independent verification of 34 live V4 story MP3s"
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then exit 0; fi
+            git fetch origin main
+            git rebase origin/main || { git rebase --abort || true; exit 1; }
+          done
+          exit 1
+      - name: Fail if any live master missing
+        shell: bash
+        run: |
+          if [ ! -f ci-status/kids-v4-live.json ]; then exit 0; fi
+          python3 -c 'import json; d=json.load(open("ci-status/kids-v4-live.json")); assert d["passed"], f"Only {d.get(chr(114)+chr(101)+chr(97)+chr(100)+chr(121)+chr(67)+chr(111)+chr(117)+chr(110)+chr(116))} of 34 V4 audios live"'
