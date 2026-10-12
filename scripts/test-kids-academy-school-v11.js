@@ -70,7 +70,7 @@ assert.equal(graduate.active,null);
 assert.equal(graduate.upcoming,null);
 assert.equal(graduate.access(ids[57]),"review");
 const html=read("kids/akademie/index.html");
-assert.ok(html.includes('school-progress-v11.js?v=20261012-28'));
+assert.ok(html.includes('school-progress-v11.js?v=20261012-31'));
 assert.ok(html.includes('data-preview-release="V17.0-voice-sandbox-20261011"')||html.includes('data-preview-release="V12.0-voicepilot-20261010"')||html.includes('data-preview-release="V11.0-20261010"'),"Supported sequential school release marker");
 assert.ok(html.includes('academySchoolState().access(chosen)'));
 assert.ok(html.includes('card.disabled=locked'));
@@ -78,4 +78,4 @@ assert.ok(html.includes('firstCompletedAt:Number(prev?.firstCompletedAt||prev?.c
 assert.ok(!html.includes("elapsed>7*86400000"),"Unfinished lessons never expire");
 const inline=html.slice(html.lastIndexOf("<script>")+8,html.lastIndexOf("</script>"));
 new vm.Script(inline);
-console.log("KIDS SCHOOL V11 PASSED: 58 lessons, one active at a time, next-day gate, Wed/Sat review, indefinite resume, locked deep links.");
+console.log("KIDS SCHOOL V11 PASSED: 58 historical lessons through V27, one active at a time, next-day gate, Wed/Sat review, indefinite resume, locked deep links.");
