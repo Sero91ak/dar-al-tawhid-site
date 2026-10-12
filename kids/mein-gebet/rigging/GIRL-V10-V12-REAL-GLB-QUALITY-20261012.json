@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-10-12",
+  "scope": "isolated KIDS girl 3D geometry trials, PR #825, no live integration",
+  "immutableSource": {
+    "girlViews": 5,
+    "verifiedSha256": true,
+    "independentLeftViewVerified": false,
+    "originalsModified": false
+  },
+  "preferredDraft": {
+    "version": "V11",
+    "filename": "MAEDCHEN_ORIGINALGEOMETRIE_V11_IN_ARBEIT_NICHT_FREIGEGEBEN.glb",
+    "sha256": "ac64f569746398788f0449140315601315b1a2838ec59dea133b773a848b0c26",
+    "bytes": 2539424,
+    "geometryMeshes": 213,
+    "triangles": 188888,
+    "realDistinctCameraAngles": [
+      0,
+      45,
+      90,
+      180,
+      270,
+      315
+    ],
+    "changes": [
+      "Sculpted continuous 3D hood surface replaces simple sphere",
+      "Conforming 3D aperture bridge from facial border onto hood; no loose flat rim"
+    ],
+    "closestVertexToHoodMaxMetres": 0.009568295904355583,
+    "distanceMeaning": "nearest hood VERTEX support gap, not watertight/nonintersecting skin mesh approval",
+    "originalIdentityApproved": false,
+    "realSkinRigPresent": false,
+    "animationCount": 0,
+    "productionApproved": false
+  },
+  "rejectedDrafts": [
+    {
+      "version": "V10",
+      "sha256": "2d91f9bbfd9b7f8ea549044475b5495e63b5892f72a0eda719d08e1c50a55fd5",
+      "reason": "Detached flat 2D facial rim visible at oblique camera angles",
+      "productionApproved": false
+    },
+    {
+      "version": "V12",
+      "sha256": "6a2425896e5e466526cf75d568f2bdfac89c4902a2ff8f2fb5ab84e1bed3e590",
+      "reason": "Excess skin visible on side/back of head due overextended face patch; scarf coverage failed",
+      "productionApproved": false
+    }
+  ],
+  "permanentArchive": {
+    "driveFolder": "https://drive.google.com/drive/folders/1pjLiyLwZNX4DzyeOVdYijLIAEOWwl9GK",
+    "savedFiles": 37,
+    "v11GlbDownloadedAgainAndSha256Matched": true,
+    "v12GlbDownloadedAgainAndSha256Matched": true
+  },
+  "qualityBlockers": [
+    "V11 face still unlike original reference",
+    "Hood still too smooth / helmet-like versus pleated 2D scarf",
+    "Hands, wrists and shoes still unlike original",
+    "No tested seam watertightness and no cloth dynamics",
+    "No skin armature and no prayer clips",
+    "Independent user sight and fiqh approval absent"
+  ],
+  "releaseLocks": {
+    "identityApproved": false,
+    "hijabApproved": false,
+    "rigApproved": false,
+    "prayerApproved": false,
+    "releaseApproved": false,
+    "mergeMain": false,
+    "liveDeploy": false
+  }
+}
