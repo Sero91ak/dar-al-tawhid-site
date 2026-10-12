@@ -47,7 +47,7 @@ vm.runInNewContext(chrome, {
 function el(nav = false) {
   return {
     closest(selector) {
-      return nav && selector === "[data-nav],[data-bottom-nav]" ? this : null;
+      return nav && selector === "[data-nav],[data-bottom-nav],#backBtn,#homeBtn,#qovBackBtn,#qrcBackBtn" ? this : null;
     },
     contains(other) { return other === this; }
   };
