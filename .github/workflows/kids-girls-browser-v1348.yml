@@ -20,7 +20,8 @@ jobs:
         run: |
           npm ci --ignore-scripts
           npm install --no-save --ignore-scripts playwright@1.56.1
-          npx playwright install chromium webkit
+          npx playwright install chromium
+          npx playwright install --with-deps webkit
       - name: Check girl's and boy's computed artwork/palette at 3 viewports
         run: |
           KIDS_QA_ENGINE=chromium node kids/tools/qa-girls-firstpaint-browser-v1348.cjs
