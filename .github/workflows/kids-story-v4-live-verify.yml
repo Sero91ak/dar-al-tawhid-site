@@ -2,11 +2,6 @@ name: Verify DĀR KIDS V4 story masters on live site
 
 on:
   workflow_dispatch:
-  workflow_run:
-    workflows:
-      - Deploy Besucher-App (Cloudflare Workers)
-    types: [completed]
-    branches: [main]
 
 permissions:
   contents: write
