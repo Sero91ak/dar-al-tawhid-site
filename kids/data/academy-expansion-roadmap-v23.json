@@ -1,10 +1,10 @@
 {
   "version": "academy-roadmap-v23-20261011",
-  "purpose": "Remaining 158 editorial outlines only; 50 source-checked lessons released in the separate curriculum.",
+  "purpose": "138 redaktionelle Entwürfe; 70 quellengeprüfte Unterrichtseinheiten im Kinder-Katalog (je drei Altersstufen).",
   "curriculum": {
     "totalNewLessonSlots": 208,
-    "alreadyImplementedLessons": 66,
-    "proposedAdditionalLessons": 142,
+    "alreadyImplementedLessons": 70,
+    "proposedAdditionalLessons": 138,
     "weeks": 52,
     "newDaysPerWeek": 4,
     "reviewDaysPerWeek": 2,
@@ -500,157 +500,29 @@
       "editorialSlot": 66,
       "lessonId": "akhlaq-fehler-ehrlich-zugeben",
       "status": "currently-in-catalog"
-    }
-  ],
-  "plannedUnits": [
+    },
     {
       "editorialSlot": 67,
-      "topicId": "editorial-067",
-      "week": 17,
-      "weekday": "Donnerstag",
-      "pillar": "adab",
-      "title": "Gesprächspartner ausreden lassen",
-      "classroomScenario": "Warten, bis eine andere Person fertig gesprochen hat",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: warten, bis eine andere Person fertig gesprochen hat.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: warten, bis eine andere Person fertig gesprochen hat.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: warten, bis eine andere Person fertig gesprochen hat.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "lessonId": "adab-gespraechspartner-ausreden-lassen",
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 68,
-      "topicId": "editorial-068",
-      "week": 17,
-      "weekday": "Freitag",
-      "pillar": "tarbiyah",
-      "title": "Aufgaben in kleinen Schritten",
-      "classroomScenario": "Eine schwierige Aufgabe in zwei einfache Schritte aufteilen",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: eine schwierige Aufgabe in zwei einfache Schritte aufteilen.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: eine schwierige Aufgabe in zwei einfache Schritte aufteilen.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: eine schwierige Aufgabe in zwei einfache Schritte aufteilen.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "lessonId": "akhlaq-tarbiyah-aufgaben-kleine-schritte",
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 69,
-      "topicId": "editorial-069",
-      "week": 18,
-      "weekday": "Montag",
-      "pillar": "nafs",
-      "title": "Mit Enttäuschungen umgehen",
-      "classroomScenario": "Eine Absage annehmen und über Gefühle reden",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: eine Absage annehmen und über Gefühle reden.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: eine Absage annehmen und über Gefühle reden.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: eine Absage annehmen und über Gefühle reden.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "lessonId": "akhlaq-nafs-enttaeuschung-verarbeiten",
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 70,
-      "topicId": "editorial-070",
-      "week": 18,
-      "weekday": "Dienstag",
-      "pillar": "fiqh",
-      "title": "Wasser beim Wuḍūʾ sparen",
-      "classroomScenario": "Den Wasserhahn bei der Waschung nicht unnötig laufen lassen",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: den Wasserhahn bei der Waschung nicht unnötig laufen lassen.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: den Wasserhahn bei der Waschung nicht unnötig laufen lassen.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: den Wasserhahn bei der Waschung nicht unnötig laufen lassen.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": true,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
-    },
+      "lessonId": "fiqh-wudu-wasser-sparen",
+      "status": "currently-in-catalog"
+    }
+  ],
+  "plannedUnits": [
     {
       "editorialSlot": 71,
       "topicId": "editorial-071",
