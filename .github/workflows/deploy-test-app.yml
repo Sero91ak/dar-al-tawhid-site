@@ -221,6 +221,30 @@ jobs:
           fi
           node scripts/verify-test-app-deploy.js
 
+      - name: Dar Test Themenbibliothek V1362 tatsächlich ausgeliefert
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check test/assets/ilm-topics-library-v1362.js
+          grep -F -q 'DAR_TOPICS_LIBRARY_V1360' test/assets/ilm-topics-v1242.css
+          grep -F -q 'DAR_TOPICS_THEME_PALETTE_V1350' test/assets/ilm-topics-v1242.css
+          grep -F -q 'darTopicsLibraryRuntimeV1362' cloudflare/test-app-worker.js
+          for BASE in "https://dar-al-tawhid-test.sero91ak.workers.dev/test" "https://dar-al-tawhid.de/test"; do
+            TMP="$(mktemp -d)"
+            curl --fail --location --silent --show-error --retry 5 --retry-delay 3 --max-time 35 \
+              "$BASE/assets/ilm-topics-library-v1362.js?deploy=${GITHUB_SHA}" > "$TMP/library.js"
+            curl --fail --location --silent --show-error --retry 5 --retry-delay 3 --max-time 35 \
+              "$BASE/assets/ilm-topics-v1242.css?deploy=${GITHUB_SHA}" > "$TMP/topics.css"
+            curl --fail --location --silent --show-error --retry 5 --retry-delay 3 --max-time 35 \
+              "$BASE/?deploy=${GITHUB_SHA}" > "$TMP/test.html"
+            grep -F -q 'DAR_TOPICS_LIBRARY_V1360' "$TMP/library.js"
+            grep -F -q 'DAR_TOPICS_LIBRARY_V1360' "$TMP/topics.css"
+            grep -F -q 'darTopicsLibraryRuntimeV1362' "$TMP/test.html"
+            grep -F -q 'darTopicsLibraryStylesV1362' "$TMP/test.html"
+            echo "Dar Test Themenbibliothek V1362 ausgeliefert: $BASE"
+            rm -rf "$TMP"
+          done
+
   deploy-kids-creator:
     # Explicitly selected developer staging branch. NEVER runs on main or push.
     # Uses a new workers.dev-only Worker with no production route or domain.
