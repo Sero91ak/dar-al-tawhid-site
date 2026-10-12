@@ -60,15 +60,15 @@
   const newDay=firstIndex===0||(previousDay!==null&&today>previousDay);
   // A child's first class can start immediately on any weekday.
   const canOpenNew=!!fresh&&hasPrior&&newDay&&(firstIndex===0&&forceFirst||mode==="new");
-  // One grandfathered unfinished pre-V11 draft may always be resumed,
-  // never several independent drafts: preserve learning without mass unlock.
-  const existingDrafts=ids.map(x=>({id:x,d:drafts[x]}))
-   .filter(x=>!records[x.id]&&x.d&&Number.isFinite(Number(x.d.savedAt))&&Number(x.d.savedAt)>0
-     &&Number(x.d.savedAt)<=date.getTime()
-     /* previously started class remains resumable indefinitely */
-     &&(Number(x.d.step)>0||Number(x.d.qIndex)>0))
-   .sort((a,b)=>Number(b.d.savedAt)-Number(a.d.savedAt));
-  const resumeId=existingDrafts[0]?.id||null;
+  // A saved draft is resumable only if it belongs to the NEXT unfinished
+  // lesson in the canonical sequence. An older draft of a later lesson must
+  // never bypass unfinished prerequisites or unlock several classes.
+  const resumeDraft=fresh?drafts[fresh]:null;
+  const validDraft=!!resumeDraft&&Number.isFinite(Number(resumeDraft.savedAt))
+   &&Number(resumeDraft.savedAt)>0&&Number(resumeDraft.savedAt)<=date.getTime()
+   &&(Number(resumeDraft.step)>0||Number(resumeDraft.qIndex)>0)
+   &&hasPrior&&(firstIndex===0||Number(resumeDraft.savedAt)>=previousAt);
+  const resumeId=validDraft?fresh:null;
   const nextId=resumeId||fresh;
   const accessibleNew=resumeId||canOpenNew?nextId:null;
   const due=complete.filter(x=>Number(records[x].nextDue)>0&&Number(records[x].nextDue)<=date.getTime())
