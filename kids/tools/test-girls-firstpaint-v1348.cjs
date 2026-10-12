@@ -15,7 +15,7 @@ assert(head.includes(art),"first-paint must use same approved image");
 assert(fs.existsSync("kids/assets/kids-salah-v1272/hero-home.png"),"approved image missing");
 assert(head.includes("html body .app #view-today > .hero::before"),"legacy pre-wrap image not disabled");
 assert(!head.includes("hero-clean-reference.jpg"),"old image must not be inside early paint");
-assert(h.includes('/kids/girls-home-photo-palette-v1348.css?v=1348'),"new girl stylesheet missing");
+assert(h.includes('/kids/girls-home-photo-palette-v1348.css?v=1349'),"new girl stylesheet missing");
 assert(h.includes('/kids/girls-profile-theme-v1332.js?v=1348'),"theme-color cache bust missing");
 const css=fs.readFileSync("kids/girls-home-photo-palette-v1348.css","utf8");
 for(const selector of [".choice.story::before",".choice.quran::before",".choice.dua::before",
