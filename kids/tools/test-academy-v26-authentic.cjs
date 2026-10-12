@@ -49,13 +49,13 @@ for(const [id] of expected)for(const age of ["4-5","6-8","9-10"]){
 }
 const year=JSON.parse(read("kids/data/academy-year-52weeks-v1.json"));
 const news=year.weeks.flatMap(w=>w.days).filter(x=>x.mode==="new");
-assert.equal(year.goals.currentlyInCatalog,50);assert.equal(year.goals.additionalAuthenticallyVerifiedLessonsNeeded,158);
+assert.equal(year.goals.currentlyInCatalog,58);assert.equal(year.goals.additionalAuthenticallyVerifiedLessonsNeeded,150);
 assert.deepEqual(news.slice(45,50).map(x=>x.lessonId),expected.map(x=>x[0]));
-assert.equal(news.filter(x=>!x.lessonId).length,158);
-assert.ok(news.slice(50).every(x=>x.lessonId===null&&x.status==="awaiting-authentic-source-and-content-review"));
+assert.equal(news.filter(x=>!x.lessonId).length,150);
+assert.ok(news.slice(58).every(x=>x.lessonId===null&&x.status==="awaiting-authentic-source-and-content-review"));
 const index=read("kids/akademie/index.html"),school=read("kids/akademie/school-progress-v11.js");
 assert.ok(index.includes('curriculum-v26.js?v=20261012-01'));
 assert.ok(school.includes("DARKidsAcademyCurriculumV26?.ids"));
 assert.ok(read("kids/tools/audit-academy-voice-coverage-v18.js").includes("academy-voice-plan-v26.json"));
 assert.ok(!index.includes("academy-expansion-roadmap-v23.json"),"Unreviewed editorial outlines cannot become regular lesson objects");
-console.log("KIDS ACADEMY V26 VERIFIED: 5 independently sourced Qurʾān/Ṣaḥīḥ lessons, 15 age adaptations, "+audio.phraseCount+" non-generated master clips, 50 live catalog / 158 locked.");
+console.log("KIDS ACADEMY V26 VERIFIED: 5 independently sourced Qurʾān/Ṣaḥīḥ lessons, 15 age adaptations, "+audio.phraseCount+" non-generated master clips, 58 live catalog / 150 locked.");
