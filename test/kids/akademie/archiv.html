@@ -84,24 +84,161 @@ function getPillar(l){if(l.pillar&&pillars[l.pillar])return l.pillar;const id=l.
  for(const idp of ["tawhid","iman","ikhlas","nafs","tarbiyah","dua"])if(id.includes(idp))return idp;
  return l.subject||"aqidah";
 }
-function sidq(){
- return {id:"sidq",subject:"akhlaq",pillar:"akhlaq",title:"Ṣidq – Wahrhaftigkeit",topic:"Wahrhaftigkeit",lead:"Die Wahrheit sagen – auch wenn es manchmal Mut kostet.",
- goal:"Ich lerne ehrlich zu sprechen und einen Fehler zuzugeben.",
- quran:{surah:9,ayah:119,arabic:"يَا أَيُّهَا الَّذِينَ آمَنُوا اتَّقُوا اللَّهَ وَكُونُوا مَعَ الصَّادِقِينَ",meaning:"O die ihr glaubt, fürchtet Allah und seid mit den Wahrhaftigen.",excerpt:false},
- hadith:{source:"Ṣaḥīḥ Muslim, Nr. 2607a",text:"Wahrhaftigkeit führt zur Rechtschaffenheit, und Rechtschaffenheit führt zum Paradies."},
- sourceNote:"Grundlage aus der bestehenden Ṣidq-Akademielektion. Diese Archivfassung ist eine Lesezusammenstellung.",
- ageText:{
-  "4-5":{intro:"Die Wahrheit sagen – das ist ehrlich.",lines:["Manchmal geht etwas aus Versehen kaputt.","Du darfst ehrlich sagen: Das war ich.","Danach kannst du um Entschuldigung bitten und beim Aufräumen helfen.","Ehrlich sein ist gut. Das üben wir gemeinsam."],evidence:"Allah sagt uns im Qurʾān, dass wir mit den Wahrhaftigen sein sollen. Der Prophet ﷺ erklärte, wie gut Wahrhaftigkeit ist.",recap:["Wahrhaftigkeit bedeutet: Ich sage die Wahrheit.","Wenn mir ein Fehler passiert, sage ich ehrlich, was geschehen ist."]},
-  "6-8":{intro:"Die Wahrheit sagen – auch wenn es manchmal Mut kostet.",lines:["Manchmal passiert uns aus Versehen ein Fehler.","Wenn wir ehrlich sagen, was passiert ist, können wir Verantwortung übernehmen und etwas wiedergutmachen.","Wenn wir stattdessen lügen, kann das Vertrauen anderer Menschen leiden.","Wahrhaftigkeit ist deshalb ein wichtiger Teil unseres guten Charakters."],evidence:"Qurʾān 9:119 und Ṣaḥīḥ Muslim 2607a lehren die Bedeutung der Wahrhaftigkeit."},
-  "9-10":{intro:"Wahrhaftigkeit verbindet ehrliche Worte mit verantwortlichem Verhalten.",lines:["Der Qurʾān fordert auf, mit den Wahrhaftigen zu sein.","Der Prophet ﷺ erklärte den Wert der Wahrhaftigkeit für gutes Handeln.","Auch nach einem Fehler kann man die Wahrheit sagen und Verantwortung übernehmen.","Wir unterscheiden die überlieferten Quellen von unseren heutigen Anwendungsbeispielen."],evidence:"Qurʾān 9:119 und Ṣaḥīḥ Muslim 2607a sind die Quellen; die Alltagssituation ist ein pädagogisches Beispiel."}
+// Ṣidq baseline reproduced from live AGE_EXPLANATIONS + exercises (all 3 ages).
+const SIDQ_ARCHIVE=Object.freeze({
+ "id": "sidq",
+ "subject": "akhlaq",
+ "pillar": "akhlaq",
+ "title": "Ṣidq – Wahrhaftigkeit",
+ "topic": "Wahrhaftigkeit",
+ "lead": "Die Wahrheit sagen – auch wenn es manchmal Mut kostet.",
+ "goal": "Ich lerne ehrlich zu sprechen und einen Fehler zuzugeben.",
+ "quran": {
+  "surah": 9,
+  "ayah": 119,
+  "arabic": "يَا أَيُّهَا الَّذِينَ آمَنُوا اتَّقُوا اللَّهَ وَكُونُوا مَعَ الصَّادِقِينَ",
+  "meaning": "O die ihr glaubt, fürchtet Allah und seid mit den Wahrhaftigen.",
+  "excerpt": false
  },
- questions:{
-  "4-5":[{type:"choice",prompt:"Du hast etwas kaputt gemacht. Was sagst du?",options:["Ich sage ehrlich: Ich war das.","Ich sage: Jemand anders war es."],correct:0,hint:"Was bedeutet ehrlich sein?",explain:"Ich sage, was wirklich passiert ist."}],
-  "6-8":[{type:"choice",prompt:"Warum ist die Wahrheit wichtig?",options:["Sie hilft beim Vertrauen.","Weil Lügen immer leichter ist."],correct:0,hint:"Denke an unsere Worte."}],
-  "9-10":[{type:"text",prompt:"Wie kann ehrliches Verhalten nach einem Fehler aussehen?",sample:"Ich sage die Wahrheit, entschuldige mich und versuche den Fehler wiedergutzumachen."}]
- }
- };
-}
+ "hadith": {
+  "source": "Ṣaḥīḥ Muslim, Nr. 2607a",
+  "text": "Wahrhaftigkeit führt zur Rechtschaffenheit, und Rechtschaffenheit führt zum Paradies."
+ },
+ "sourceNote": "Original-Altersfassungen und Fragen aus der produktiven Ṣidq-Lektion. Arabischer Vers 9:119 und Ḥadīṯ Muslim 2607a.",
+ "ageText": {
+  "4-5": {
+   "intro": "Die Wahrheit sagen – das ist ehrlich.",
+   "lines": [
+    "Manchmal geht etwas aus Versehen kaputt.",
+    "Du darfst ehrlich sagen: Das war ich.",
+    "Danach kannst du um Entschuldigung bitten und beim Aufräumen helfen.",
+    "Ehrlich sein ist gut. Das üben wir gemeinsam."
+   ],
+   "evidence": "Allah sagt uns im Qurʾān, dass wir mit den Wahrhaftigen sein sollen. Der Prophet ﷺ erklärte, wie gut Wahrhaftigkeit ist. Deshalb sagen wir die Wahrheit, auch wenn wir einen Fehler machen.",
+   "recap": [
+    "Wahrhaftigkeit bedeutet: Ich sage die Wahrheit.",
+    "Allah lehrt uns, mit den Wahrhaftigen zu sein.",
+    "Wenn mir ein Fehler passiert, sage ich ehrlich, was geschehen ist."
+   ]
+  },
+  "6-8": {
+   "intro": "Die Wahrheit sagen – auch wenn es manchmal Mut kostet.",
+   "lines": [
+    "Manchmal passiert uns aus Versehen ein Fehler.",
+    "Wenn wir ehrlich sagen, was passiert ist, können wir Verantwortung übernehmen und etwas wiedergutmachen.",
+    "Wenn wir stattdessen lügen, kann das Vertrauen anderer Menschen leiden.",
+    "Wahrhaftigkeit ist deshalb ein wichtiger Teil unseres guten Charakters."
+   ],
+   "evidence": "Allah befiehlt uns, mit den Wahrhaftigen zu sein. Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt. Deshalb sollen wir ehrlich sprechen und uns um gutes Verhalten bemühen.",
+   "recap": [
+    "Wahrhaftigkeit bedeutet, ehrlich zu sprechen.",
+    "Allah ruft uns dazu auf, mit den Wahrhaftigen zu sein. Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt.",
+    "Wenn mir ein Fehler passiert, sage ich die Wahrheit und versuche, ihn wiedergutzumachen."
+   ]
+  },
+  "9-10": {
+   "intro": "Wahrhaftigkeit heißt, bewusst bei der Wahrheit zu bleiben – selbst wenn das schwierig ist.",
+   "lines": [
+    "Jeder Mensch kann aus Versehen einen Fehler machen. Entscheidend ist, wie wir danach handeln.",
+    "Wer die Wahrheit sagt, übernimmt Verantwortung und schafft die Grundlage, den Fehler wiedergutzumachen.",
+    "Eine bewusste Lüge kann das Vertrauen anderer Menschen beschädigen und weitere falsche Aussagen nach sich ziehen.",
+    "Wahrhaftigkeit ist mehr als ein einzelnes richtiges Wort: Sie ist eine Haltung, die wir im Alltag immer wieder üben."
+   ],
+   "evidence": "Allah fordert die Gläubigen in Sūrat at-Tawbah 9:119 auf, mit den Wahrhaftigen zu sein. In Ṣaḥīḥ Muslim 2607a beschreibt der Prophet ﷺ Wahrhaftigkeit als einen Weg zur Rechtschaffenheit. Daraus lernen wir, beim Sprechen und Handeln aufrichtig zu bleiben.",
+   "recap": [
+    "Ṣidq bedeutet Wahrhaftigkeit. Sie zeigt sich auch dann, wenn Ehrlichkeit Mut kostet.",
+    "Qurʾān 9:119 und der Ḥadīṯ in Ṣaḥīḥ Muslim 2607a verdeutlichen die Bedeutung der Wahrhaftigkeit.",
+    "Ich möchte ehrlich bleiben, Verantwortung übernehmen und einen Fehler nach Möglichkeit wiedergutmachen."
+   ]
+  }
+ },
+ "questions": {
+  "4-5": [
+   {
+    "type": "choice",
+    "prompt": "Du hast etwas kaputt gemacht. Was sagst du?",
+    "options": [
+     "Ich sage ehrlich: Ich war das.",
+     "Ich sage: Jemand anders war es."
+    ],
+    "correct": 0,
+    "hint": "Überlege: Was bedeutet ehrlich sein?",
+    "explain": "Wahrhaftigkeit bedeutet: Ich sage, was wirklich passiert ist."
+   },
+   {
+    "type": "choice",
+    "prompt": "Was kannst du danach Gutes tun?",
+    "options": [
+     "Ich entschuldige mich und helfe.",
+     "Ich verstecke den Fehler."
+    ],
+    "correct": 0,
+    "hint": "Wenn jemand Hilfe braucht, kannst du mithelfen.",
+    "explain": "Nach einem Fehler können wir um Entschuldigung bitten und ihn wiedergutmachen."
+   }
+  ],
+  "6-8": [
+   {
+    "type": "choice",
+    "prompt": "Du hast versehentlich ein Glas zerbrochen. Was ist eine ehrliche Antwort?",
+    "options": [
+     "Ich war das. Es tut mir leid.",
+     "Das war bestimmt jemand anders.",
+     "Ich tue so, als hätte ich nichts gesehen."
+    ],
+    "correct": 0,
+    "hint": "Was ist wirklich passiert? Sprich es freundlich aus.",
+    "explain": "Die Wahrheit zu sagen ist besser, als jemand anderem die Schuld zuzuschieben."
+   },
+   {
+    "type": "text",
+    "prompt": "Was kannst du tun, nachdem du einen Fehler ehrlich zugegeben hast?",
+    "sample": "Ich kann mich entschuldigen und helfen, den Fehler wiedergutzumachen.",
+    "hint": "Denke an Entschuldigung und Hilfe."
+   },
+   {
+    "type": "choice",
+    "prompt": "Was lehrt uns der Vers aus Sūrat at-Tawbah 9:119?",
+    "options": [
+     "Wir sollen mit den Wahrhaftigen sein.",
+     "Wir dürfen lügen, wenn wir Angst haben.",
+     "Man soll eigene Fehler immer verstecken."
+    ],
+    "correct": 0,
+    "hint": "Lies dir die kurze deutsche Bedeutung des Qurʾān-Verses noch einmal durch.",
+    "explain": "Allah befiehlt den Gläubigen, mit den Wahrhaftigen zu sein."
+   }
+  ],
+  "9-10": [
+   {
+    "type": "choice",
+    "prompt": "Welche Aussage entspricht dem Ḥadīṯ über Wahrhaftigkeit?",
+    "options": [
+     "Wahrhaftigkeit führt zur Rechtschaffenheit.",
+     "Wahrheit spielt beim guten Charakter keine Rolle.",
+     "Eine Lüge ist immer die leichtere und richtige Lösung."
+    ],
+    "correct": 0,
+    "hint": "Was führt laut der authentischen Sunnah zur Rechtschaffenheit?",
+    "explain": "Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt und diese zum Paradies."
+   },
+   {
+    "type": "text",
+    "prompt": "Erkläre in eigenen Worten: Warum gehört Wahrhaftigkeit zu einem guten Charakter?",
+    "sample": "Wahrhaftigkeit führt zu rechtschaffenem Verhalten. Sie bewahrt das Vertrauen und hilft uns, Verantwortung zu übernehmen.",
+    "hint": "Denke an Vertrauen und das Wort des Propheten ﷺ."
+   },
+   {
+    "type": "text",
+    "prompt": "Worin liegt der Unterschied zwischen einem versehentlichen Fehler und einer bewussten Lüge?",
+    "sample": "Einen Fehler kann man unbeabsichtigt machen. Eine bewusste Lüge bedeutet, absichtlich etwas Unwahres zu sagen. Nach einem Fehler sollte man ehrlich bleiben und ihn wiedergutmachen.",
+    "hint": "Denk an den Unterschied zwischen Versehen und absichtlicher Unwahrheit."
+   }
+  ]
+ },
+ "sample": "Wenn mir ein Fehler passiert, sage ich die Wahrheit."
+});
+function sidq(){return SIDQ_ARCHIVE}
 function readyEntry(l,slot,week,day){return {type:"ready",id:l.id,title:l.title||l.topic||l.id,topic:l.topic||"",pillar:getPillar(l),subject:l.subject||"",slot,week,day,lesson:l}}
 function plannedEntry(p){return {type:"planned",id:p.topicId,title:p.title,pillar:p.pillar||"",subject:p.pillar||"",slot:p.editorialSlot,week:p.week,day:p.weekday,plan:p}}
 function renderList(){
