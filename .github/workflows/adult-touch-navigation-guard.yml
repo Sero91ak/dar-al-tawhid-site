@@ -4,6 +4,8 @@ on:
     branches: [main]
     paths:
       - 'assets/dar-app-chrome.js'
+      - 'assets/visitor-duo-side-nav.js'
+      - 'assets/visitor-duo-side-nav.css'
       - 'assets/dar-app-chrome.css'
       - 'index.html'
       - 'scripts/adult-footer-route-guard.cjs'
@@ -34,6 +36,7 @@ jobs:
       - name: Adult JS navigation syntax and touch intent
         run: |
           node --check assets/dar-app-chrome.js
+          node --check assets/visitor-duo-side-nav.js
           node --check assets/adaptive-layout.js
           node --check assets/fold-split.js
           node --check assets/app-soft-boot.js
