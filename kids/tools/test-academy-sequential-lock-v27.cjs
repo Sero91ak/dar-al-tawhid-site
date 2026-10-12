@@ -52,6 +52,8 @@ for(const version of ["v1","v2","v22","v25","v26","v27","v28"])assert.ok(app.inc
 const year=JSON.parse(read("kids/data/academy-year-52weeks-v1.json"));
 assert.equal(year.goals.currentlyInCatalog,62);assert.equal(year.goals.additionalAuthenticallyVerifiedLessonsNeeded,146);
 assert.equal(year.weeks.length,52);
+assert.deepEqual(year.weeks.flatMap(w=>w.days).filter(day=>day.editorialSlot>=59&&day.editorialSlot<=62)
+ .map(day=>day.lessonId),v28Ids,"Released V28 IDs must occupy exactly year slots 59–62");
 const archive=read("kids/unterrichtsarchiv.html"),prefix="const ARCHIVE_SNAPSHOT=";
 const start=archive.indexOf(prefix);assert.ok(start>0,"Embedded archive catalog missing");
 const finish=archive.indexOf("\nfunction populateArchive(",start);assert.ok(finish>start);
