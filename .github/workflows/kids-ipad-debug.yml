@@ -1,4 +1,4 @@
-name: Diagnose isolated KIDS iPad preview
+name: Verify live Kids iPad release HTTP
 on:
   push:
     branches: [preview/kids-ipad-qa-20261012]
@@ -6,18 +6,32 @@ on:
 permissions:
   contents: read
 jobs:
-  check:
+  verify:
     runs-on: ubuntu-latest
+    timeout-minutes: 6
     steps:
-      - name: Inspect static route and worker responses without secrets
+      - name: Check live KIDS shell, academy, CSS and test entry
         shell: bash
         run: |
           set -euo pipefail
-          BASE="https://dar-kids-ipad-preview.sero91ak.workers.dev"
-          for path in / /kids/start.html /kids/akademie/index.html /kids/ipad-home-audio-grid-v1347.css /desktop-preview/assets/kids-academy-hero-boys-v1.jpg /test; do
-            curl -sSL --max-time 15 -D /tmp/review-head -o /tmp/review-body "$BASE$path" || true
-            echo "--- $path ---"
-            grep -Ei '^(HTTP/|content-type:|cache-control:|server:|cf-ray:|location:|x-robots-tag:)' /tmp/review-head || true
-            head -c 190 /tmp/review-body || true
-            echo
-          done
+          BASE="https://dar-al-tawhid.de"
+          CODE=$(curl -sS -L --max-time 30 --retry 3 --retry-delay 2 -H "Cache-Control: no-cache" -o /tmp/kids-live-home.html -w '%{http_code}' "$BASE/kids/start?live-audit=ipad-v29-20261012")
+          test "$CODE" = 200 || { echo "::error::Kids home HTTP $CODE"; exit 1; }
+          grep -q 'ipad-home-audio-grid-v1347.css?v=1347' /tmp/kids-live-home.html
+          CODE=$(curl -sS -L --max-time 30 --retry 3 --retry-delay 2 -H "Cache-Control: no-cache" -o /tmp/kids-live-academy.html -w '%{http_code}' "$BASE/kids/akademie/?live-audit=ipad-v29-20261012")
+          test "$CODE" = 200 || { echo "::error::Kids academy HTTP $CODE"; exit 1; }
+          grep -q 'responsive-integrity-v29.css?v=29' /tmp/kids-live-academy.html
+          CODE=$(curl -sS -L --max-time 30 --retry 3 --retry-delay 2 -o /tmp/kids-live-academy.css -w '%{http_code}' "$BASE/kids/akademie/responsive-integrity-v29.css?v=29")
+          test "$CODE" = 200 || { echo "::error::Kids academy CSS HTTP $CODE"; exit 1; }
+          grep -q 'KIDS_ACADEMY_RESPONSIVE_INTEGRITY_V29' /tmp/kids-live-academy.css
+          CODE=$(curl -sS -L --max-time 30 --retry 3 --retry-delay 2 -o /tmp/kids-live-home.css -w '%{http_code}' "$BASE/kids/ipad-home-audio-grid-v1347.css?v=1347")
+          test "$CODE" = 200 || { echo "::error::Kids home CSS HTTP $CODE"; exit 1; }
+          grep -q 'KIDS_IPAD_HOME_AUDIO_GRID_V1347' /tmp/kids-live-home.css
+          # Dar Test KIDS intentionally redirects to canonical live Kids:
+          CODE=$(curl -sS -L --max-time 30 --retry 3 --retry-delay 2 -o /tmp/kids-test-redirect.html -w '%{http_code}' "$BASE/test/kids/start?live-audit=ipad-v29-20261012")
+          test "$CODE" = 200 || { echo "::error::Dar Test Kids redirect HTTP $CODE"; exit 1; }
+          grep -q 'ipad-home-audio-grid-v1347.css?v=1347' /tmp/kids-test-redirect.html
+          echo "LIVE KIDS HOME HTTP 200 with new iPad CSS"
+          echo "LIVE KIDS AKADEMIE HTTP 200 with new responsive CSS"
+          echo "LIVE 2 CSS ASSETS HTTP 200 and exact marker"
+          echo "TEST /test/kids/start redirects to updated canonical Kids HTML, HTTP 200"
