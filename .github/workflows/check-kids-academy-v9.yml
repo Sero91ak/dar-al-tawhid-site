@@ -104,6 +104,8 @@ jobs:
         run: |
           node kids/tools/export-academy-voice-plan-v26.cjs
           git diff --exit-code -- kids/data/academy-voice-plan-v26.json
+      - name: Verify dedicated signed-owner lesson archive and current 50/158 truth (zero credits)
+        run: node test/kids/akademie/test-archive-v27.cjs
       - name: JavaScript syntax guard
         run: |
           node --check kids/akademie/curriculum-v1.js
