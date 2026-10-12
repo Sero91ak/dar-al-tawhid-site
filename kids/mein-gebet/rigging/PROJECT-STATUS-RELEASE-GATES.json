@@ -207,8 +207,12 @@
       "glbGoogleDriveUploaded": false,
       "previewDriveUploaded": true,
       "driveFolder": "https://drive.google.com/drive/folders/1I-xURIysEvsueitu4pZ6Jq4HokREwPZK",
-      "reason": "Container session expired during binary Drive upload; source and GLB only in ephemeral runtime. Do not claim persistent binary backup.",
-      "productionApproved": false
+      "reason": "Direct GLB upload failed; lossless PNG backup stored and SHA-256 verified after Drive readback. Native GLB still pending.",
+      "productionApproved": false,
+      "driveLosslessBackupVerified": true,
+      "driveBackupFileId": "1tObLp0akkxJcKL0Vpsv6JhN3e2YVgqdm",
+      "driveBackupType": "PNG containing byte-exact recoverable GLB, Python builder and QA; not a native GLB",
+      "driveReadbackGLBSha256": "3447a84a522c1a007bea3e09b59dfc0830576a198e740629070f096f95ec5547"
     }
   }
 }
