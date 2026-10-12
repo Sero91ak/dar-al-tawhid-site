@@ -1,0 +1,78 @@
+/* KIDS_IPAD_HOME_AUDIO_GRID_V1347
+   Only the existing four "Deine Hörwelten" cards: avoid the three-plus-one
+   orphan row at iPad mini / Air landscape sizes. No new icons or behaviour. */
+@media (min-width:980px) and (min-height:650px){
+  html body .app #view-today .big-choice-grid{
+    display:grid!important;
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    grid-auto-rows:minmax(0,auto)!important;
+    gap:clamp(12px,1.3vw,17px)!important;
+    box-sizing:border-box!important;
+    width:100%!important;
+    max-width:100%!important;
+    margin-inline:0!important;
+    align-items:stretch!important;
+  }
+  html body .app #view-today .big-choice-grid > .choice{
+    min-width:0!important;
+    max-width:100%!important;
+    width:100%!important;
+    min-height:205px!important;
+    height:auto!important;
+    max-height:none!important;
+    box-sizing:border-box!important;
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    grid-template-rows:54px minmax(0,auto) auto!important;
+    align-content:end!important;
+    justify-items:start!important;
+    gap:5px!important;
+    padding:clamp(14px,1.55vw,20px)!important;
+    overflow:hidden!important;
+    border-radius:24px!important;
+    clip-path:inset(0 round 24px)!important;
+  }
+  html body .app #view-today .big-choice-grid > .choice .icon{
+    grid-column:1!important;
+    grid-row:1!important;
+    width:50px!important;
+    height:50px!important;
+    margin:0!important;
+  }
+  html body .app #view-today .big-choice-grid > .choice strong{
+    grid-column:1!important;
+    grid-row:2!important;
+    align-self:end!important;
+    max-width:100%!important;
+    min-width:0!important;
+    overflow:visible!important;
+    white-space:normal!important;
+    overflow-wrap:break-word!important;
+    font-size:clamp(21px,2.15vw,26px)!important;
+    line-height:1.13!important;
+  }
+  html body .app #view-today .big-choice-grid > .choice small{
+    grid-column:1!important;
+    grid-row:3!important;
+    max-width:100%!important;
+    min-width:0!important;
+    height:auto!important;
+    overflow:visible!important;
+    white-space:normal!important;
+    overflow-wrap:break-word!important;
+    font-size:clamp(11px,1.15vw,13px)!important;
+    line-height:1.25!important;
+  }
+}
+/* A narrow landscape iPad or Safari split view should return to two
+   balanced rows, never 3+1 or four squashed columns. */
+@media (min-width:700px) and (max-width:979px){
+  html body .app #view-today .big-choice-grid{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    grid-auto-rows:auto!important;
+    gap:14px!important;
+    width:100%!important;
+    max-width:100%!important;
+  }
+}
