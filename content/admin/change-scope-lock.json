@@ -155,6 +155,20 @@
   ],
   "unlockedScopes": [
     {
+      "id": "kids-visitor-qa-copy-removal-20261012",
+      "at": "2026-10-12T02:19:00+02:00",
+      "approvedBy": "user-explicit-remove-test-and-installation-text-from-official-kids-visitor-app-20261012",
+      "reason": "Visitor KIDS Academy only: remove internal voice tests, creator banners, preview phrasing and fix corresponding regression tests. No paid voice generation, child state mutation, or changes to adult app.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "kids/akademie/index.html",
+        "scripts/test-kids-academy-v9.js",
+        "scripts/test-kids-academy-creator-voice-sandbox-v17.js",
+        "scripts/test-kids-academy-direct-voice-v13.js"
+      ],
+      "expiresAt": "2026-10-20T23:59:00.000Z"
+    },
+    {
       "id": "kids-akademie-v26-five-sourced-age-lessons-20261012",
       "at": "2026-10-12T01:15:00+02:00",
       "approvedBy": "user-autonomous-finish-kids-source-verified-curriculum-in-stages-20261012",
