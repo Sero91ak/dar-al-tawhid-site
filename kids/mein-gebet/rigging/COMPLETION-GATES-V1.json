@@ -106,7 +106,7 @@
         "buildAndSixIndependentCameraRendersVerified": true,
         "googleDriveFolderUrl": "https://drive.google.com/drive/folders/1P7KV_hNQentSF9g-oMS-ssIikDUjYFQu",
         "googleDriveByteRoundTripSHA256Verified": true,
-        "nextBlockingWork": "Do NOT scale skirt in depth based on unmatched 90-degree render. Calibrate source camera and corresponding projected facial/hijab landmarks first; sculpt true 3D geometry from reference under controlled pose. V15 remains unapproved research GLB; local V16 face experiment rejected.",
+        "nextBlockingWork": "Real girl V18 improves 3D upper lids nearest-vertex gap but still FAILS 1:1 face/hijab and lacks rig. Preserve V15 original source, V18 strict lab only. Calibrate actual facial/scarf source contours and original likeness before any model or prayer release.",
         "v03v06DriveFolderUrl": "https://drive.google.com/drive/folders/1gziPdSbzcOUuVSmJRGrKGLFQuBoM8Nos",
         "v06Sha256": "3021ad1e1ac9644af6d11e7b138ebfe1c7607dfd7947e18cbbcc9109bf4e197e",
         "v06Bytes": 660088,
@@ -224,6 +224,25 @@
           "v16GlbUploaded": false,
           "source1to1AppearanceApproved": false,
           "driveFolder": "https://drive.google.com/drive/folders/1Bchd2qH_pIyHfidL2JlReNRs9X64HDdy"
+        },
+        "v18EyeSurfaceResearch": {
+          "candidateGlbSha256": "a8e9cea28945c60e1b6d6416d36bc73988694070b73340096797db81a907d54b",
+          "sourceVersion": "V15",
+          "unchangedSourceMeshes": 205,
+          "modifiedSourceEyeMeshes": 8,
+          "addedTrue3dEyeLashLidMeshes": 10,
+          "nearestEyeVertexMedianUpperMm": 4.734,
+          "discardedV17NearestEyeVertexMedianUpperMm": 12.05694,
+          "source1to1AppearanceApproved": false,
+          "actualSurfaceContactApproved": false,
+          "sourceOriginalsUnmodified": true,
+          "sourceV15Retained": true,
+          "rigged": false,
+          "prayerAnimations": 0,
+          "driveFolderUrl": "https://drive.google.com/drive/folders/1cHMj_uG5NNu4CK2zmwIWBzCcirZILOMc",
+          "driveFilesCount": 16,
+          "verifiedGlbRoundtripSha256": true,
+          "qa": "rigging/GIRL-V18-REAL-3D-EYE-SURFACE-QA-20261012.json"
         }
       }
     }
