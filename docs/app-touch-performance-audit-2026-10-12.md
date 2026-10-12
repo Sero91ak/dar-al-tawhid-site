@@ -16,6 +16,14 @@
 | P13 | Mittel | Fold-/Tablet-Scroll | `assets/fold-split.js` rief die Scroll-Wiederherstellungsprüfung nach beliebigen DOM-Änderungen unter `#appView` auf. | MutationObserver prüft nur neue Dual-Shells; Reader-Inhaltsänderungen lösen keine unnötige Shell-Suche aus. |
 | P14 | Hoch | Erwachsenen-Startbildschirm/PWA | Der Boot-Observer blieb nach `finish()` registriert. Beim Android-Notfallpfad konnte `finished=true` gesetzt werden, ohne den 60-ms-Fortschrittstimer zu stoppen. | `assets/app-soft-boot.js`: Observer bei normalem Abschluss und Notfall-Abbau trennen; Intervall/Timeout im zentralen `releaseChrome()` aufräumen, keine spätere Reaktivierung nach DOMContentLoaded. |
 
+## Startseiten-Footer – ergänzende Reparatur vom 12.10.2026
+
+- Die reguläre Erwachsenen-App `index.html` und Dar Test `test/index.html` haben jeweils exakt **einen** geteilten `<footer class="footer">` als direktes Kind von `.app`, nach `#appView`.
+- Die vorhandene `updateChrome(route)`-Funktion setzt bei jeder Route die Body-Klasse `is-home-route` ausschließlich für `route.view === "home"`.
+- Neue CSS-Regel `body:not(.is-home-route) > .app > footer.footer { display:none!important; ... }`: auf allen Inner-Routen kein Footer und keine überzählige Footer-Höhe/Abstände, auf der Startseite **keine Änderung**. Das `#bottomNav` und dessen Safe-Area-/Scrollreserve werden nicht angefasst.
+- Keine Änderungen an funktionsbezogenen Teilen-/Quellbutton-Leisten in Beiträgen oder Qurʾān-Ansichten.
+- Getrennte PRs gemäß App-Lane-Schutz: Besucher-/iOS-Web-App #1071, Dar Test #1073. Nicht live. Statische Regressionstests `scripts/adult-footer-route-guard.cjs` bzw. `test/tests/test-home-footer-route-guard.cjs`, anschließend visuelle iPhone-/iPad-Prüfung.
+
 ## Weitere konkrete Risiken, für die eine Geräte- oder Browser-Profilierung fehlt
 
 | ID | Priorität | Bereich | Indiz und nächste Prüfmethode |
