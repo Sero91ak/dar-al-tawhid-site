@@ -478,7 +478,7 @@ const additions={
       "text": "Anas überlieferte, dass der Prophet ﷺ für die Gebetswaschung ein Mudd Wasser verwendete. (Sinngemäß)"
     },
     "sourceAudit": {
-      "hadithUrl": "https://dorar.net/hadith/sharh/120730",
+      "hadithUrl": "https://dorar.net/hadith/sharh/531",
       "hadithNumber": "201",
       "narrator": "Anas ibn Mālik",
       "authenticity": "Ṣaḥīḥ",
