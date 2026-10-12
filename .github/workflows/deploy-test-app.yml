@@ -230,7 +230,8 @@ jobs:
           node --check test/assets/ilm-topics-library-v1362.js
           grep -F -q 'DAR_TOPICS_LIBRARY_V1360' test/assets/ilm-topics-v1242.css
           grep -F -q 'DAR_TOPICS_THEME_PALETTE_V1350' test/assets/ilm-topics-v1242.css
-          grep -F -q 'darTopicsLibraryRuntimeV1362' cloudflare/test-app-worker.js
+          grep -F -q 'darTopicsLibraryDirectV1362' test/index.html
+          grep -F -q 'darTopicsLibraryStyleDirectV1362' test/index.html
           for BASE in "https://dar-al-tawhid-test.sero91ak.workers.dev/test" "https://dar-al-tawhid.de/test"; do
             TMP="$(mktemp -d)"
             curl --fail --location --silent --show-error --retry 5 --retry-delay 3 --max-time 35 \
@@ -241,8 +242,8 @@ jobs:
               "$BASE/?deploy=${GITHUB_SHA}" > "$TMP/test.html"
             grep -F -q 'DAR_TOPICS_LIBRARY_V1360' "$TMP/library.js"
             grep -F -q 'DAR_TOPICS_LIBRARY_V1360' "$TMP/topics.css"
-            grep -F -q 'darTopicsLibraryRuntimeV1362' "$TMP/test.html"
-            grep -F -q 'darTopicsLibraryStylesV1362' "$TMP/test.html"
+            grep -F -q 'darTopicsLibraryDirectV1362' "$TMP/test.html"
+            grep -F -q 'darTopicsLibraryStyleDirectV1362' "$TMP/test.html"
             echo "Dar Test Themenbibliothek V1362 ausgeliefert: $BASE"
             rm -rf "$TMP"
           done
