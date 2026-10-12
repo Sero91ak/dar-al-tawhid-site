@@ -7,6 +7,7 @@ const vm=require("node:vm");
 const kids=fs.readFileSync(path.join(__dirname,"navigation-v1182.js"),"utf8");
 assert.match(kids,/KIDS_TOUCH_INTENT_GUARD_V1344/);
 assert.match(kids,/gestureVersion:"button-only-navigation-v1343"/);
+assert.doesNotMatch(kids,/void today\\.offsetHeight/,"Home animation must not force synchronous reflow");
 
 const kidListeners = new Map();
 let kidNow = 500;
