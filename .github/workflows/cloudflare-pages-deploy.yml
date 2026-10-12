@@ -460,6 +460,7 @@ jobs:
             echo "Kids-Spur geändert – Kids Release Guards ausführen."
             node scripts/kids-prophet-release-guard.js
             node scripts/kids-dua-trilingual-guard.js
+            node kids/tools/test-deen-lessons-regression.cjs
           else
             echo "Kids-Spur unverändert – Kids Release Guards blockieren diesen Visitor/Web-Deploy nicht."
           fi
