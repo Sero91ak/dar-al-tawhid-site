@@ -183,3 +183,38 @@ test("Girl V11 hood-face mesh bridge is research only and V10/V12 are rejected",
  assert.equal(d.release.liveDeploy,false);
  assert.equal(audit(d).pass,true);
 });
+
+test("V13 mesh changes are limited, old rejected models removed, no false approval",()=>{
+ const d=fixture(),p=d.originals.girl.experimentalIndependent3DGeometricBlockout;
+ const report=JSON.parse(fs.readFileSync(path.join(__dirname,"GIRL-V13-REAL-3D-QUALITY-20261012.json"),"utf8"));
+ const policy=JSON.parse(fs.readFileSync(path.join(__dirname,"STORAGE-RETENTION-CLEANUP-V1.json"),"utf8"));
+ assert.equal(report.schemaVersion,1);
+ assert.equal(p.v13Sha256,report.currentDraftSha256);
+ assert.equal(p.v13Bytes,2539424);
+ assert.equal(p.v13Meshes,213);
+ assert.equal(p.v13UnchangedMeshCount,211);
+ assert.equal(report.real3DGeometry.changedMeshCount,2);
+ assert.equal(report.real3DGeometry.original2DSourceUnmodified,true);
+ assert.equal(report.real3DGeometry.original3DFaceHandsDressShoesUnchanged,true);
+ assert.equal(p.v13SixRealCameraRendersVerified,true);
+ assert.equal(p.v13DriveSha256RoundTripVerified,true);
+ assert.equal(p.latestPreferredResearchDraft,"V13");
+ assert.equal(p.v11KeepAsProtectedFallback,true);
+ assert.equal(p.v13VisualIdentityApproved,false);
+ assert.equal(p.v13SkinnedRigPresent,false);
+ assert.equal(p.v13PrayerAnimationCount,0);
+ assert.equal(report.cleanup.removedFilesTotal,24);
+ assert.equal(report.cleanup.remainingCountsByFolder["V07-V09"],29);
+ assert.equal(report.cleanup.remainingCountsByFolder["V10-V12"],21);
+ assert.equal(p.v09DriveCurrentFileCount,29);
+ assert.equal(p.v10v12ArchiveCurrentFileCount,21);
+ assert.equal(policy.latestCompletedCleanup.filesDeleted,24);
+ assert.equal(policy.release.productionReady,false);
+ assert.equal(policy.release.mergeMain,false);
+ assert.equal(policy.release.liveDeploy,false);
+ assert.equal(d.originals.girl.actualOriginalGlbPresent,false);
+ assert.equal(d.originals.girl.actual3dIdentityApproved,false);
+ assert.equal(d.milestones.filter(m=>m.approved).length,0);
+ assert.equal(d.release.liveDeploy,false);
+ assert.equal(audit(d).pass,true);
+});
