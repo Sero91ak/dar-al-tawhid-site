@@ -11,7 +11,7 @@
      Preserve immediate, deliberate taps and all normal scrolling. */
   var navPointer=null,dragClickTarget=null,dragClickUntil=0;
   function navHit(el){
-    return el&&el.closest?el.closest("[data-nav],[data-bottom-nav]"):null;
+    return el&&el.closest?el.closest("[data-nav],[data-bottom-nav],#backBtn,#homeBtn,#qovBackBtn,#qrcBackBtn"):null;
   }
   document.addEventListener("pointerdown",function(ev){
     if(ev.pointerType!=="touch"&&ev.pointerType!=="pen")return;
