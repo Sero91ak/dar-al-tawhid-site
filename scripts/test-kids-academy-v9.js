@@ -98,7 +98,7 @@ for(const [index,html] of htmls.entries()){
 // The V9 daily-choice checks were advisory and are superseded by
 // the strict school-mode checks in test-kids-academy-school-v11.js.
 const main=htmls[0];
-assert.ok(main.includes('school-progress-v11.js?v=20261010-11'));
+assert.match(main, /<script\s+src="\/kids\/akademie\/school-progress-v11\.js\?v=\d{8}-\d+"/);
 assert.ok(main.includes('function academySchoolState(){'));
 assert.ok(main.includes('academySchoolState().access(chosen)'));
 const pilot=JSON.parse(read("kids/data/academy-v12-audio-pilot-request.json"));
