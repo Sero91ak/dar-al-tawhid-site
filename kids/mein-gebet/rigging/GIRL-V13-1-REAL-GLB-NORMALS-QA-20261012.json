@@ -1,0 +1,59 @@
+{
+  "date": "2026-10-12",
+  "scope": "Draft PR #825 only; local real GLB binary QA; not released",
+  "baselineV13": {
+    "sha256": "3447a84a522c1a007bea3e09b59dfc0830576a198e740629070f096f95ec5547",
+    "bytes": 2730300
+  },
+  "candidateV13_1": {
+    "sha256": "378ec9aa9b136ec8eccf4ae7a78acb09ef3efe0642a15e56cc872c14ef1c93b9",
+    "bytes": 3962744,
+    "meshes": 213,
+    "normalAccessors": 213,
+    "normalVertices": 100120,
+    "skins": 0,
+    "animations": 0
+  },
+  "checks": {
+    "originalBINPrefixByteIdentical": true,
+    "originalMeshIndicesUnchanged": true,
+    "originalPositionAndColorAccessorsUnchanged": true,
+    "finiteUnitLengthNormals": true,
+    "sixNative3DCameraRendersGenerated": true
+  },
+  "rendering": {
+    "azimuths": [
+      0,
+      45,
+      90,
+      180,
+      270,
+      315
+    ],
+    "imageSize": [
+      560,
+      700
+    ],
+    "allSixComparedToV13": true,
+    "meanAbsolutePixelDifferences": [
+      1.4200731293,
+      1.1680459184,
+      1.0190552721,
+      1.238712585,
+      1.0460671769,
+      1.2174328231
+    ],
+    "visualUserApproval": false
+  },
+  "permissions": {
+    "sourceIdentityApproved": false,
+    "rigApproved": false,
+    "prayerAnimationsApproved": false,
+    "fiqhApproved": false,
+    "deviceApproved": false,
+    "driveBinaryUploadVerified": false,
+    "mergeMain": false,
+    "liveDeploy": false
+  },
+  "note": "Additive normals improve mesh shading only, NOT the girl's original facial/hijab likeness. Original V13 untouched. The GLB candidate was created and verified locally; Drive upload was not possible via the available file_uri-only connector. SHA-pinned reproducible generator is in this Draft branch. No production claim."
+}
