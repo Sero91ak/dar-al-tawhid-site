@@ -4757,9 +4757,12 @@ function check(){
    qIndex===questions().length-1?qIndex:qIndex+1);
 }
 function finish(){
+ // A lesson may only be certified after the final comprehension question
+ // was actually answered. Never unlock another lesson via a skipped recap.
+ if(step!==3||!answered||questions().length===0||
+    qIndex!==questions().length-1||score.done<questions().length)return;
  finished=true;unlocked=4;showStep(4);
- // A completed lesson always enters spaced repetition, even if the child
- // leaves without answering the optional self-assessment.
+ // A completed lesson enters spaced repetition; the reflection is optional.
  persist("help",true);
 }
 function showRecap(){
@@ -4767,6 +4770,9 @@ function showRecap(){
  all("[data-reflect]").forEach(b=>{b.classList.remove("active");b.setAttribute("aria-pressed","false")});
 }
 function persist(level,automatic=false){
+ // Preserve all legacy records, but do not create a new completed record
+ // unless every age-specific question has been worked through.
+ if(!finished||score.done<questions().length||questions().length===0)return;
  const prev=oldRecord(),intervals=INTERVALS_BY_AGE[age];
  if(!intervals||!sessionStamp)return;
  const sameAttempt=prev?.sessionStamp===sessionStamp;
