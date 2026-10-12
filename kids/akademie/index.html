@@ -4037,7 +4037,7 @@ function setAudioFeedback(message){
  const failed=/nicht verfügbar|konnte nicht|nicht gestartet|nicht abgespielt/i.test(message);
  const missing=/noch keine Aufnahme verfügbar|noch keine geprüfte Serhat-Masteraufnahme/i.test(message);
  const technical=/Gerätestimme|Masteraufnahme|Serhat-Masteraufnahme|Masterstimme|Für diesen Satz/i.test(message);
- const friendly=missing?"Für diesen Satz gibt es noch keine Aufnahme. Du kannst den Text lesen.":failed?"Das Vorlesen klappt gerade nicht. Bitte versuche es erneut.":technical?"Die Erklärung wird vorgelesen. Du kannst in deinem Tempo zuhören.":message;
+ const friendly=missing?"Für diesen Satz gibt es noch keine Aufnahme. Du kannst den Text lesen.":failed?"Das Vorlesen klappt gerade nicht. Bitte versuche es erneut.":technical?"Tippe auf „Anhören“ oder lies den Text in Ruhe.":message;
  const el=$("#audioFeedback");if(el)el.textContent=friendly;
  const welcome=$("#voiceStatus");if(welcome)welcome.textContent=friendly;
 }
@@ -4261,7 +4261,7 @@ function prepareOwnerVoice(){
   script.onerror=()=>{
    window.__academyOwnerVoiceRequested=false;
    window.__academyOwnerVoicePromise=null;
-   const note=$("#audioDiagnostics");if(note)note.textContent="Das Stimmenarchiv konnte nicht geladen werden.";
+   /* Freigegebene Audioanzeige enthält keine internen Diagnosefelder. */
    resolve(null);
   };
   document.head.appendChild(script);
