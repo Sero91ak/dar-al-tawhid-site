@@ -176,7 +176,7 @@ async function boot(){
   }catch(_){}
   const plans=next?[result[0],result[1],next]:[result[0],result[1]];
   // Independently deployed Kids assets may be ahead of this read-only Test app.
-  for(const path of ["/kids/data/academy-voice-plan-v25.json","/kids/data/academy-voice-plan-v26.json","/kids/data/academy-vocabulary-voice-plan-v24.json"]){
+  for(const path of ["/kids/data/academy-voice-plan-v25.json","/kids/data/academy-voice-plan-v26.json","/kids/data/academy-voice-plan-v27.json","/kids/data/academy-voice-plan-v28.json","/kids/data/academy-voice-plan-v29.json","/kids/data/academy-voice-plan-v30.json","/kids/data/academy-vocabulary-voice-plan-v24.json"]){
    try{
     const res=await fetch(path,{cache:"no-store",credentials:"same-origin"});
     if(res.ok)plans.push(await res.json());
