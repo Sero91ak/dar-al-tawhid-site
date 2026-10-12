@@ -4,6 +4,8 @@ on:
     branches: [main]
     paths:
       - 'assets/dar-app-chrome.js'
+      - 'index.html'
+      - 'scripts/adult-footer-route-guard.cjs'
       - 'assets/adaptive-layout.js'
       - 'assets/fold-split.js'
       - 'assets/app-soft-boot.js'
@@ -15,6 +17,8 @@ on:
     branches: [main]
     paths:
       - 'assets/dar-app-chrome.js'
+      - 'index.html'
+      - 'scripts/adult-footer-route-guard.cjs'
       - 'ios/DarAlTawhid/**'
       - 'scripts/adult-touch-navigation-guard-test.cjs'
 jobs:
@@ -33,3 +37,4 @@ jobs:
           node --check assets/app-soft-boot.js
           node scripts/adult-touch-navigation-guard-test.cjs
           node scripts/adult-layout-performance-test.cjs
+          node scripts/adult-footer-route-guard.cjs
