@@ -14,6 +14,7 @@ on:
   push:
     branches:
       - main
+      - test/topics-library-v1362
     paths:
       - index.html
       - test/**
@@ -57,7 +58,7 @@ jobs:
   deploy-test:
     # Existing adult Dar Test deployment remains unchanged for every normal push.
     # Creator dispatch MUST NOT overwrite Dar Test.
-    if: ${{ github.ref == 'refs/heads/main' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.target == 'dar-test')) }}
+    if: ${{ (github.ref == 'refs/heads/main' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.target == 'dar-test'))) || (github.ref == 'refs/heads/test/topics-library-v1362' && github.event_name == 'push') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
