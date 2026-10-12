@@ -1,0 +1,71 @@
+name: Temporary KIDS iPad QA Preview
+
+on:
+  push:
+    branches:
+      - preview/kids-ipad-qa-20261012
+    paths:
+      - "kids/ipad-review/**"
+      - ".github/workflows/kids-ipad-review-preview.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: isolated-kids-ipad-preview
+  cancel-in-progress: false
+
+jobs:
+  qa-preview:
+    if: ${{ github.ref == 'refs/heads/preview/kids-ipad-qa-20261012' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Check review source and protected app boundaries
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git branch --show-current)" = "preview/kids-ipad-qa-20261012"
+          test "$(cmp -s kids/index.html kids/start.html && echo yes)" = yes
+          test "$(cmp -s kids/index.html kids/shell.html && echo yes)" = yes
+          node --check kids/ipad-review/worker.js
+          node kids/akademie/test-responsive-v29.cjs
+          grep -q 'workers_dev = true' kids/ipad-review/wrangler.toml
+          grep -q '^routes = \[\]' kids/ipad-review/wrangler.toml
+          ! grep -E '^name[[:space:]]*=[[:space:]]*"(dar-al-tawhid-site|dar-al-tawhid-test|dar-al-tawhid-kids-creator)"' kids/ipad-review/wrangler.toml
+      - name: Install Wrangler via the repository lockfile
+        run: npm ci --ignore-scripts
+      - name: Deploy review to independent workers.dev address only
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$CLOUDFLARE_API_TOKEN"
+          test -n "$CLOUDFLARE_ACCOUNT_ID"
+          npx wrangler deploy --config kids/ipad-review/wrangler.toml
+      - name: Smoke test preview, asset versions and isolation
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE="https://dar-kids-ipad-preview.sero91ak.workers.dev"
+          for path in /kids/start.html /kids/akademie/index.html /kids/ipad-home-audio-grid-v1347.css /kids/akademie/responsive-integrity-v29.css /desktop-preview/assets/kids-academy-hero-boys-v1.jpg; do
+            code=$(curl -sSL --retry 4 --retry-delay 3 -A "Kids-iPad-Review" -H "Cache-Control: no-cache" -o /tmp/kids-preview-result -w "%{http_code}" "$BASE$path?build=${GITHUB_SHA}")
+            echo "$path -> $code"
+            test "$code" = 200
+            test -s /tmp/kids-preview-result
+          done
+          for path in / /test/ /admin/ /kids/creator-test/worker.js; do
+            case "$path" in
+              /) continue;;
+            esac
+            code=$(curl -sSL -o /dev/null -w "%{http_code}" "$BASE$path")
+            test "$code" = 404
+          done
+          echo "KIDS ONLY iPad Preview Ready: $BASE/kids/akademie/index.html"
