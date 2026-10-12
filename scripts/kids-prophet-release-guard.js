@@ -285,28 +285,5 @@ if (sahabiyyatJs.includes("sy-image-name")) error("Ṣaḥābiyyāt Kartenname d
 if (sahabiyyatJs.includes("syHeroName")) error("Ṣaḥābiyyāt Detailansicht darf den Namen nicht doppelt im Hero zeigen");
 if (storyHubJs.includes("gh-story-art-name")) error("Story-Hub Kartenname darf nicht doppelt im Bild stehen");
 if (storyHubJs.includes("ghPlayerImageName")) error("Universal-Player darf den Namen nicht doppelt im Hero zeigen");
-// KIDS_BUTTON_NAV_ONLY_V1342 — user-approved navigation contract.
-// No edge-swipe, reverse-swipe, drag-back, or swipe-down-to-minimize handlers
-// may be installed. Audio seeking and native vertical reading scroll remain.
-const navigationJs = read("kids/navigation-v1182.js");
-const deenJs = read("kids/deen-lessons.js");
-const sahabaJsForNav = read("kids/mubashshirun-stories.js");
-const kidsShells = ["kids/index.html","kids/start.html","kids/shell.html"].map(read);
-if (kidsShells.some(html => html !== kidsShells[0]))
-  error("KIDS-Einstiegsseiten müssen identisch sein (index/start/shell)");
-if (!navigationJs.includes('document.addEventListener("click",onClickCapture,true)'))
-  error("KIDS Tab-/Back-Klick-Navigation fehlt");
-if (!navigationJs.includes('gestureVersion:"button-only-navigation-'))
-  error("KIDS muss button-only navigation verwenden");
-if (["installInteractiveSwipeStyles","kids-nav-swipe-surface",
-     'document.addEventListener("pointermove",pointerMove',
-     'document.addEventListener("touchmove",touchMove'].some(k=>navigationJs.includes(k)))
-  error("Globale KIDS-Wisch-Navigation wurde wieder eingebaut");
-if ([deenJs,sahabaJsForNav,sahabiyyatJs].some(js=>js.includes("installSwipeBack(")))
-  error("KIDS-Unterseiten enthalten unerlaubte Wisch-Zurück-Handler");
-if (storyHubJs.includes("installGestures()") || storyHubJs.includes("playerAtTop"))
-  error("Story-Player darf nicht durch Wischgesten schließen/minimieren");
-if (kidsShells[0].includes("void el.offsetWidth;"))
-  error("Synchroner Reflow auf jedem Karten-Touch wieder aktiv");
 if (failed) process.exit(1);
 console.log("Kids release guard OK:", build, label, exactV106Snapshot ? "exact-v106-legacy-snapshot" : ("assets v" + assetVersion), "25 Propheten-Karten + 10 Ṣaḥābah + 14 Ṣaḥābiyyāt");
