@@ -32,6 +32,21 @@ assert.ok(!appliedCss.includes("#appView") && !appliedCss.includes("safe-area-in
   "Existing reader and fixed-nav safe clearance must remain untouched");
 const sharedCss=fs.readFileSync(path.resolve(__dirname,"../assets/dar-app-chrome.css"),"utf8");
 const testHtml=fs.readFileSync(path.resolve(__dirname,"../test/index.html"),"utf8");
+const testFooterStart=testHtml.indexOf('<footer class="footer">');
+const testFooterEnd=testHtml.indexOf("</footer>",testFooterStart);
+assert.ok(testFooterStart>0&&testFooterEnd>testFooterStart,
+  "Dar Test must retain one complete home footer");
+assert.equal(testHtml.slice(testFooterStart,testFooterEnd+9),html.slice(first,last+9),
+  "Dar Test home footer markup must match the Live home footer exactly");
+const testAtmosphere=fs.readFileSync(
+  path.resolve(__dirname,"../test/assets/dar-home-atmosphere-v1202.css"),"utf8");
+assert.ok(!testAtmosphere.includes("body.has-bottom-nav:has(.footer)"),
+  "Test styles must never alter every route merely because a footer exists");
+assert.ok(testAtmosphere.includes("body.has-bottom-nav.is-home-route:has(footer.footer) #appView.view"),
+  "Test app content spacing may be modified only on the home route");
+assert.ok(testAtmosphere.includes("padding-bottom:8px!important"),
+  "Dar Test home footer must not have duplicate bottom navigation clearance");
+
 assert.ok(sharedCss.includes("DAR_HOME_ONLY_SOCIAL_FOOTER_GLOBAL_V1345"),
   "Shared adult stylesheet must contain home-only footer guard");
 const sharedRule=sharedCss.slice(sharedCss.indexOf("DAR_HOME_ONLY_SOCIAL_FOOTER_GLOBAL_V1345"));
