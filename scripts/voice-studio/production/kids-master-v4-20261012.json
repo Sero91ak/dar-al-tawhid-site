@@ -1,0 +1,382 @@
+{
+  "schemaVersion": 1,
+  "startedAt": "2026-10-12",
+  "project": "DĀR AL TAWḤĪD KIDS",
+  "productionKind": "story-master-audio",
+  "engine": "ElevenLabs",
+  "model": "eleven_v4",
+  "voice": {
+    "name": "Serhat Abu Malik – Master",
+    "voiceId": "DkU7j9uO4ZEtLD2iRZSH"
+  },
+  "policy": {
+    "oneMasterPerStory": true,
+    "ageGroups": [
+      "4-5",
+      "6-8",
+      "9-10"
+    ],
+    "sameAudioForBothProfiles": true,
+    "source": "kids/data/prophet-stories.json + kids/data/sahabiyyat-stories.json",
+    "doNotReplaceExistingMaster": true,
+    "sourceTextUnabridged": true,
+    "concatMultipartBeforePublishing": true
+  },
+  "releaseState": "generations-submitted-app-publication-not-yet-done",
+  "items": [
+    {
+      "kind": "prophet",
+      "id": "nuh",
+      "flow_id": "SuYMs2F0t32rH3IToWeT",
+      "session_ids": [
+        "B8X1bVhOt5LPuOEMqxrJ"
+      ],
+      "parts": 1,
+      "stage": "generation-started"
+    },
+    {
+      "kind": "prophet",
+      "id": "hud",
+      "flow_id": "F97pbdis3HTLkl9mvRnv",
+      "session_ids": [
+        "xmlTeltbzTfZoSRtr46o"
+      ],
+      "parts": 1,
+      "stage": "generation-started"
+    },
+    {
+      "kind": "prophet",
+      "id": "salih",
+      "flow_id": "sy9NryFxxl3QbsbvI4lO",
+      "session_ids": [
+        "P27fnNUHdTPajAWly3iH"
+      ],
+      "parts": 1,
+      "stage": "generation-started"
+    },
+    {
+      "kind": "prophet",
+      "id": "ibrahim",
+      "flow_id": "5kyJslf8T0nWtlDGfMHL",
+      "session_ids": [
+        "bX43iIBhLD6ix0exGiQq"
+      ],
+      "parts": 1,
+      "stage": "generation-started"
+    },
+    {
+      "kind": "prophet",
+      "id": "lut",
+      "flow_id": "Cf9VUlbD51Kj4NwnjMBb",
+      "session_ids": [
+        "cSP1YWGjYkbRE3SNklut"
+      ],
+      "parts": 1,
+      "stage": "generation-started"
+    },
+    {
+      "kind": "prophet",
+      "id": "ismail",
+      "flow_id": "xLgdDQY48nIzh3LDvWp9",
+      "session_ids": [
+        "mmlpdL14K10CxDvCn2g8"
+      ],
+      "parts": 1,
+      "stage": "generation-started"
+    },
+    {
+      "kind": "prophet",
+      "id": "ishaq",
+      "flow_id": "nikgcxBM9hu7UNHrUtp8",
+      "session_ids": [
+        "htpCr00Hvr7F04rJePKD"
+      ],
+      "parts": 1,
+      "stage": "generation-started"
+    },
+    {
+      "kind": "prophet",
+      "id": "yaqub",
+      "flow_id": "LMkNszUcWnZFIE2p8GHz",
+      "session_ids": [
+        "YV6FUHDUeDzyx7V5cqxU"
+      ],
+      "parts": 1,
+      "stage": "generation-started"
+    },
+    {
+      "kind": "prophet",
+      "id": "yusuf",
+      "flow_id": "xw7xZSvlcElWsjMZ5rGi",
+      "session_ids": [
+        "lvaY1yL7nuRefNPuxOz5",
+        "x3gybXu0H2MCrzrTiHAD"
+      ],
+      "parts": 2,
+      "stage": "generation-started"
+    },
+    {
+      "kind": "prophet",
+      "id": "ayyub",
+      "flow_id": "0czqezCBgstdeQsMBH75",
+      "session_ids": [
+        "b2cSVv0ZSmCRhRbXUoIY"
+      ],
+      "parts": 1,
+      "stage": "generation-started"
+    },
+    {
+      "kind": "prophet",
+      "id": "shuayb",
+      "flow_id": "cNwWKiGxH1E6wFTjj4Si",
+      "session_ids": [
+        "6IVavIraz9bdle0KJ3ty"
+      ],
+      "parts": 1,
+      "stage": "generation-started"
+    },
+    {
+      "kind": "prophet",
+      "id": "musa",
+      "flow_id": "iIbo8TRVelVUCQ2B2rTJ",
+      "session_ids": [
+        "4o7A5p0Q0lFKohZL82FA",
+        "eDobSrl2SqKE7ggM2EKs"
+      ],
+      "parts": 2,
+      "stage": "generation-started"
+    },
+    {
+      "kind": "prophet",
+      "id": "harun",
+      "flow_id": "MrqCx21PmQwJyPzRyqbx",
+      "session_ids": [
+        "S08Nc92exHO6tuogbidp"
+      ],
+      "parts": 1,
+      "stage": "generation-started"
+    },
+    {
+      "kind": "prophet",
+      "id": "dawud",
+      "flow_id": "o2AiD2dAY8FONPMYrE2j",
+      "session_ids": [
+        "HjfC8pSdSqFJ10gyL6dk"
+      ],
+      "parts": 1,
+      "stage": "generation-started"
+    },
+    {
+      "kind": "prophet",
+      "id": "sulayman",
+      "flow_id": "lEX8bOVCRuHm1NNt8enb",
+      "session_ids": [
+        "Als7AwmkiXSx84ZDUEBJ"
+      ],
+      "parts": 1,
+      "stage": "generation-started"
+    },
+    {
+      "kind": "prophet",
+      "id": "ilyas",
+      "flow_id": "QT57s0R9LGRgVQL7hxRo",
+      "session_ids": [
+        "X7xe3X3wpKyYCpcTNGSo"
+      ],
+      "parts": 1,
+      "stage": "generation-started"
+    },
+    {
+      "kind": "prophet",
+      "id": "alyasa",
+      "flow_id": "b4w98sWaeXxXpNzt9F2m",
+      "session_ids": [
+        "crivR5BuGJKyjcE6jWpz"
+      ],
+      "parts": 1,
+      "stage": "generation-started"
+    },
+    {
+      "kind": "prophet",
+      "id": "yunus",
+      "flow_id": "mV02bVkT3li0xm5f2pg6",
+      "session_ids": [
+        "pN4xzbx5U18j5kBVDgas"
+      ],
+      "parts": 1,
+      "stage": "generation-started"
+    },
+    {
+      "kind": "prophet",
+      "id": "zakariyya",
+      "flow_id": "B38WLfLMwn6VPFsIojtx",
+      "session_ids": [
+        "mwW4UDAFHwCcKGuiYJV6"
+      ],
+      "parts": 1,
+      "stage": "generation-started"
+    },
+    {
+      "kind": "prophet",
+      "id": "yahya",
+      "flow_id": "keIRKcSSdAUCeLO3ucJw",
+      "session_ids": [
+        "pOKL9f9XMO3IZmVZHDW2"
+      ],
+      "parts": 1,
+      "stage": "generation-started"
+    },
+    {
+      "kind": "prophet",
+      "id": "isa",
+      "flow_id": "VGeZ2U4jouIOQSb84VJ3",
+      "session_ids": [
+        "Tr3NpNZaXKoIgfTkw9dx"
+      ],
+      "parts": 1,
+      "stage": "generation-started"
+    },
+    {
+      "kind": "prophet",
+      "id": "dhul-kifl",
+      "flow_id": "oFSQ3diJoc84sH4Jcneq",
+      "session_ids": [
+        "STYdi2Vi3uTnef8DbCXv"
+      ],
+      "parts": 1,
+      "stage": "generation-started"
+    },
+    {
+      "kind": "sahabiyyah",
+      "id": "fatimah",
+      "flow_id": "18Xsv2cNm5FKRft5zdfz",
+      "session_ids": [
+        "0VcngAxXnOUlMZesdkPK",
+        "QOsIZMaGNDpXuwnw92Ga"
+      ],
+      "parts": 2,
+      "stage": "generation-started"
+    },
+    {
+      "kind": "sahabiyyah",
+      "id": "umm-salamah",
+      "flow_id": "xT4ICfaY5DciV6RMygfj",
+      "session_ids": [
+        "QcloV7soSmMllhj6ccqY",
+        "qtEe8vJGw5obms8DfYIC"
+      ],
+      "parts": 2,
+      "stage": "generation-started"
+    },
+    {
+      "kind": "sahabiyyah",
+      "id": "hafsah",
+      "flow_id": "UgP00UC8HWso4Rb0q4P7",
+      "session_ids": [
+        "3UI9CszeSN9lQiaoJmOJ",
+        "El3RVgyX9leBd6Nfz9Ks"
+      ],
+      "parts": 2,
+      "stage": "generation-started"
+    },
+    {
+      "kind": "sahabiyyah",
+      "id": "sawdah",
+      "flow_id": "cWEdOeeiEWk6aGQV6lOt",
+      "session_ids": [
+        "FcOjUHVTwqdlWMTw3MSi",
+        "t3L5lYGLvUCx1IxMRll9"
+      ],
+      "parts": 2,
+      "stage": "generation-started"
+    },
+    {
+      "kind": "sahabiyyah",
+      "id": "zaynab",
+      "flow_id": "OW5JBPc4S97dV4GBlyLv",
+      "session_ids": [
+        "0XCLKb7260bMAGCeP1TA",
+        "g0HP0MlGUTHVOxv5pCEU"
+      ],
+      "parts": 2,
+      "stage": "generation-started"
+    },
+    {
+      "kind": "sahabiyyah",
+      "id": "asma",
+      "flow_id": "JEHIgCoBW0o64NWnMt5f",
+      "session_ids": [
+        "mVGDIrTpRqi27bjwX2ZB",
+        "aGry2eafalr9Oo3jCtXT"
+      ],
+      "parts": 2,
+      "stage": "generation-started"
+    },
+    {
+      "kind": "sahabiyyah",
+      "id": "umm-sulaym",
+      "flow_id": "y2NZ2U44pPkrkYqw4qeA",
+      "session_ids": [
+        "s0zF1PjMLOUjc515kNK4",
+        "j0EoSaXo8VZjkJ53eN5B"
+      ],
+      "parts": 2,
+      "stage": "generation-started"
+    },
+    {
+      "kind": "sahabiyyah",
+      "id": "umm-atiyyah",
+      "flow_id": "Z4oBySiyVzwFntInLMVs",
+      "session_ids": [
+        "uwwQQ9wtqEwUt2szmcvj",
+        "Lqxz8UeYBJQ6j71iNOVR"
+      ],
+      "parts": 2,
+      "stage": "generation-started"
+    },
+    {
+      "kind": "sahabiyyah",
+      "id": "umm-habibah",
+      "flow_id": "g4HQuSarkBl3fugBgF4S",
+      "session_ids": [
+        "6Vsgw9DjQSCOpj3c9XHw",
+        "KKynPz9CSnuSL5ra9XQN"
+      ],
+      "parts": 2,
+      "stage": "generation-started"
+    },
+    {
+      "kind": "sahabiyyah",
+      "id": "juwayriyyah",
+      "flow_id": "0GBAD2N575t3SshCdiLB",
+      "session_ids": [
+        "wFtlM9NGkSCIdcL9izDw",
+        "NV52HiJZr7UhMV3ovHIK"
+      ],
+      "parts": 2,
+      "stage": "generation-started"
+    },
+    {
+      "kind": "sahabiyyah",
+      "id": "safiyyah",
+      "flow_id": "R80kLfar4udP2SRu01Tb",
+      "session_ids": [
+        "wDnzeVDthZ6lSjcGJNMf",
+        "GzPbqxVfuyXxOn8I7nFU"
+      ],
+      "parts": 2,
+      "stage": "generation-started"
+    },
+    {
+      "kind": "sahabiyyah",
+      "id": "maymunah",
+      "flow_id": "GhEtZ0EYFviAQ06I9Gbr",
+      "session_ids": [
+        "VisMk2NV39iE21mpctCO",
+        "uBsFExGLaXO2dv5iqWHi"
+      ],
+      "parts": 2,
+      "stage": "generation-started"
+    }
+  ]
+}
