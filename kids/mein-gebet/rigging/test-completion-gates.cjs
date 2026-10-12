@@ -253,3 +253,30 @@ test("Girl V14 real cloth mesh remains visibly unapproved after 6-angle review",
  assert.equal(d.release.liveDeploy,false);
  assert.equal(audit(d).pass,true);
 });
+
+test("One-to-one original appearance gate explicitly blocks V15 and both figures",()=>{
+ const d=fixture(),p=d.originals.girl.experimentalIndependent3DGeometricBlockout;
+ const x=JSON.parse(fs.readFileSync(path.join(__dirname,"STRICT-ORIGINAL-IDENTITY-1TO1-GATE-20261012.json"),"utf8"));
+ assert.equal(x.schemaVersion,1);
+ assert.match(x.requestedIdentityStandard,/1:1/);
+ assert.equal(x.reference.immutable,true);
+ assert.equal(x.reference.independentLeftProfileStillMissing,true);
+ assert.ok(x.mustPassBeforeIdentityApproval.length>=8);
+ assert.equal(p.v15Sha256,x.actualV15.realGlbSHA256);
+ assert.equal(p.v15Bytes,2682324);
+ assert.equal(p.v15ChangedMeshes,10);
+ assert.equal(p.v15UnchangedMeshes,203);
+ assert.equal(p.v15DriveRoundTripSha256Verified,true);
+ assert.equal(p.v15Model1to1Approved,false);
+ assert.equal(p.v15HumanApproved,false);
+ assert.equal(x.actualV15.humanOriginal1to1Approval,false);
+ assert.equal(x.actualV15.identityApproved,false);
+ assert.equal(x.actualV15.productionApproved,false);
+ assert.equal(x.boy.humanOriginal1to1Approval,false);
+ assert.equal(x.release.productionReady,false);
+ assert.equal(x.release.mergeMain,false);
+ assert.equal(x.release.liveDeploy,false);
+ assert.equal(d.originals.girl.actual3dIdentityApproved,false);
+ assert.equal(d.milestones.filter(m=>m.approved).length,0);
+ assert.equal(audit(d).pass,true);
+});
