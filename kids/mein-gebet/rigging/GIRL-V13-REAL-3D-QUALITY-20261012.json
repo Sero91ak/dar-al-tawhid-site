@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-12",
+  "subject": "DAR AL TAWHID KIDS – independent original-girl geometry experiments",
+  "currentDraft": "V13",
+  "currentDraftApproved": false,
+  "currentDraftSha256": "ad9368c3a1e939964cc18f8c8aff770fcc348e8ae6b1aa3d787e3be84a905e12",
+  "currentDraftBytes": 2539424,
+  "basedOn": {
+    "version": "V11",
+    "sha256": "ac64f569746398788f0449140315601315b1a2838ec59dea133b773a848b0c26",
+    "keepAsFallback": true
+  },
+  "real3DGeometry": {
+    "meshCount": 213,
+    "triangleCount": 188888,
+    "changedMeshCount": 2,
+    "untouchedMeshCount": 211,
+    "changeSummary": [
+      "hood rear/nape continuous mesh reshaped (15361 vertices)",
+      "front scarf chest pleats adjusted (8383 vertices)"
+    ],
+    "hoodMaxVertexChangeM": 0.06662336627616333,
+    "chestScarfMaxVertexChangeM": 0.03319600224494934,
+    "meshTopologiesUnchanged": true,
+    "allColorsUnchanged": true,
+    "original2DSourceUnmodified": true,
+    "original3DFaceHandsDressShoesUnchanged": true,
+    "sixActual3DCamerasRendered": true
+  },
+  "drive": {
+    "folder": "https://drive.google.com/drive/folders/1uENhA8rbMLYEuU1sZ-Y1LzRnlG-4sfJd",
+    "filesBackedUp": 14,
+    "glbSha256RoundTripVerified": true
+  },
+  "cleanup": {
+    "locations": [
+      "https://drive.google.com/drive/folders/13TLOjok-U6ShnkzmdWCCsLUlEGJWgnei",
+      "https://drive.google.com/drive/folders/1pjLiyLwZNX4DzyeOVdYijLIAEOWwl9GK"
+    ],
+    "permanentlyDeletedRejectedVersions": [
+      "V08",
+      "V10",
+      "V12"
+    ],
+    "removedFilesTotal": 24,
+    "breakdown": {
+      "V08": 8,
+      "V10": 8,
+      "V12": 8
+    },
+    "excludedFromDeletion": [
+      "all ten immutable source images",
+      "original reference ZIP",
+      "V7.7 boy source",
+      "girl V11 fallback",
+      "girl V13 current working source",
+      "builder scripts, QA reports and original-vs-draft comparison"
+    ],
+    "remainingCountsByFolder": {
+      "V07-V09": 29,
+      "V10-V12": 21
+    },
+    "scope": "only rejected girl GLBs and generated preview images; retained small scripts and audit reports"
+  },
+  "blockingQA": [
+    "face not source-identical",
+    "hijab still looks like a helmet/dome from profile",
+    "scarf folds and sleeves not source-identical",
+    "mesh not skinned to an armature",
+    "0 prayer animations",
+    "no human original-likeness review",
+    "no independent female-clothing prayer review"
+  ],
+  "approve": {
+    "identity": false,
+    "rig": false,
+    "prayer": false,
+    "productionReady": false,
+    "mergeMain": false,
+    "liveDeploy": false
+  }
+}
