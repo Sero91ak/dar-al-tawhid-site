@@ -7,7 +7,7 @@ const path=require("node:path");
 const ROOT=path.resolve(__dirname,"..");
 const read=(p)=>fs.readFileSync(path.join(ROOT,p),"utf8");
 const sandbox=vm.createContext({window:{}});
-for(const src of ["kids/akademie/curriculum-v1.js","kids/akademie/curriculum-v2.js","kids/akademie/curriculum-v22.js","kids/akademie/curriculum-v25.js","kids/akademie/curriculum-v26.js","kids/akademie/school-progress-v11.js"])
+for(const src of ["kids/akademie/curriculum-v1.js","kids/akademie/curriculum-v2.js","kids/akademie/curriculum-v22.js","kids/akademie/curriculum-v25.js","kids/akademie/curriculum-v26.js","kids/akademie/curriculum-v27.js","kids/akademie/school-progress-v11.js"])
  new vm.Script(read(src),{filename:src}).runInContext(sandbox,{timeout:1500});
 const curriculum=sandbox.window.DARKidsAcademyCurriculum;
 const school=sandbox.window.DARKidsAcademySchool;
@@ -16,11 +16,12 @@ const topics={akhlaq:["sidq","akhlaq-sabr","akhlaq-amanah"],adab:["adab-salam","
 for(const [lessonId,lesson] of Object.entries(curriculum))
  if(!topics[lesson.subject].includes(lessonId))topics[lesson.subject].push(lessonId);
 const ids=Array.from(school.sequence(topics));
-assert.equal(ids.length,50);
-assert.deepEqual(ids.slice(-5),Array.from(sandbox.window.DARKidsAcademyCurriculumV26.ids));
-assert.equal(new Set(ids).size,50);
+assert.equal(ids.length,58);
+assert.deepEqual(ids.slice(45,50),Array.from(sandbox.window.DARKidsAcademyCurriculumV26.ids));
+assert.deepEqual(ids.slice(-8),Array.from(sandbox.window.DARKidsAcademyCurriculumV27.ids));
+assert.equal(new Set(ids).size,58);
 assert.deepEqual(ids.slice(0,4),["sidq","adab-salam","fiqh-taharah","aqidah-tawhid"]);
-assert.deepEqual(ids.slice(-12,-5),Array.from(sandbox.window.DARKidsAcademyCurriculumV25.ids),
+assert.deepEqual(ids.slice(38,45),Array.from(sandbox.window.DARKidsAcademyCurriculumV25.ids),
  "New verified lesson packs must be APPENDED after every existing V22 lesson");
 const day=(day,month=9)=>new Date(2026,month,day,12,0,0);
 const run=(date,records={},drafts={})=>school.evaluate({topics,records,drafts,now:date});
@@ -58,18 +59,18 @@ assert.equal(run(day(15),{...progressB,[ids[0]]:repeated}).access(ids[2]),"new",
  "Reviewing the first topic must not reset graduation to a future date");
 const oldDrafts={[ids[4]]:{savedAt:day(11).getTime(),step:2,qIndex:1}};
 const resume=run(day(15),progressA,oldDrafts);
-assert.equal(resume.active,ids[4],"Previously started lesson stays resumable");
-assert.equal(resume.access(ids[4]),"resume");
+assert.equal(resume.active,ids[1],"The first unfinished prerequisite must stay active");
+assert.equal(resume.access(ids[4]),"locked","Old later draft cannot bypass prerequisites");
 assert.equal(resume.access(ids[5]),"locked");
-assert.equal(run(day(1,11),progressA,oldDrafts).access(ids[4]),"resume","Stored incomplete lesson must not expire in seven days");
+assert.equal(run(day(1,11),progressA,oldDrafts).access(ids[4]),"locked","A later draft remains locked even after a long delay");
 assert.equal(run(day(12)).access(ids[1]),"locked","Different child cannot inherit an earlier child's unlocks");
 const full=Object.fromEntries(ids.map(lessonId=>[lessonId,{lessonId,completedAt:day(11).getTime(),nextDue:day(12).getTime()}]));
 const graduate=run(day(13),full);
 assert.equal(graduate.active,null);
 assert.equal(graduate.upcoming,null);
-assert.equal(graduate.access(ids[49]),"review");
+assert.equal(graduate.access(ids[57]),"review");
 const html=read("kids/akademie/index.html");
-assert.ok(html.includes('school-progress-v11.js?v=20261010-11'));
+assert.ok(html.includes('school-progress-v11.js?v=20261012-28'));
 assert.ok(html.includes('data-preview-release="V17.0-voice-sandbox-20261011"')||html.includes('data-preview-release="V12.0-voicepilot-20261010"')||html.includes('data-preview-release="V11.0-20261010"'),"Supported sequential school release marker");
 assert.ok(html.includes('academySchoolState().access(chosen)'));
 assert.ok(html.includes('card.disabled=locked'));
@@ -77,4 +78,4 @@ assert.ok(html.includes('firstCompletedAt:Number(prev?.firstCompletedAt||prev?.c
 assert.ok(!html.includes("elapsed>7*86400000"),"Unfinished lessons never expire");
 const inline=html.slice(html.lastIndexOf("<script>")+8,html.lastIndexOf("</script>"));
 new vm.Script(inline);
-console.log("KIDS SCHOOL V11 PASSED: 50 lessons, one active at a time, next-day gate, Wed/Sat review, indefinite resume, locked deep links.");
+console.log("KIDS SCHOOL V11 PASSED: 58 lessons, one active at a time, next-day gate, Wed/Sat review, indefinite resume, locked deep links.");
