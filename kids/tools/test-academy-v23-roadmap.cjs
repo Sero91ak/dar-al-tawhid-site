@@ -17,7 +17,7 @@ assert.deepEqual(plan.curriculum.ageGroups,ages);
 assert.deepEqual(Object.fromEntries(plan.strandSummary.map(p=>[p.id,p.plannedAdditions])),expected);
 assert.equal(plan.plannedUnits.length,150);
 assert.equal(new Set(plan.plannedUnits.map(p=>p.title)).size,150,"Every new lesson needs a distinct title");
-assert.equal(new Set(plan.plannedUnits.map(p=>p.topicId)).size,158,"Never reuse a lesson plan ID");
+assert.equal(new Set(plan.plannedUnits.map(p=>p.topicId)).size,150,"Never reuse a lesson plan ID");
 const news=year.weeks.flatMap(w=>w.days.filter(d=>d.mode==="new"));
 const reviewed=news.filter(x=>!!x.lessonId),missing=news.filter(x=>!x.lessonId);
 assert.equal(news.length,208);
