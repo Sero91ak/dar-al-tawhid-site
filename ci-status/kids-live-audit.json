@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-10-12T09:55:03Z",
-  "trigger": "workflow_run",
-  "finishedDeployConclusion": "success",
-  "finishedDeployRun": "38232683787",
+  "timestamp": "2026-10-12T09:55:33Z",
+  "trigger": "push",
+  "finishedDeployConclusion": null,
+  "finishedDeployRun": null,
   "live": {
     "buildId": "kids-shell-v201-dua-v4-1306",
     "label": "KIDS · V1.09.22",
@@ -45,6 +45,24 @@
   "lastDeployRuns": [
     {
       "conclusion": null,
+      "created_at": "2026-10-12T09:55:25Z",
+      "head_sha": "55706bd3a90d1faa8be9bd8b86ec4c00f8ae875c",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38233008668",
+      "id": 38233008668,
+      "status": "pending",
+      "updated_at": "2026-10-12T09:55:26Z"
+    },
+    {
+      "conclusion": "cancelled",
+      "created_at": "2026-10-12T09:55:13Z",
+      "head_sha": "51ba39a4a13549b533abdebd8491df55eda07512",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38232986797",
+      "id": 38232986797,
+      "status": "completed",
+      "updated_at": "2026-10-12T09:55:26Z"
+    },
+    {
+      "conclusion": null,
       "created_at": "2026-10-12T09:54:07Z",
       "head_sha": "9b613bd68e5a6eda5be4fee01d1721eb582976be",
       "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38232865490",
@@ -78,24 +96,6 @@
       "id": 38232046638,
       "status": "completed",
       "updated_at": "2026-10-12T09:49:00Z"
-    },
-    {
-      "conclusion": "success",
-      "created_at": "2026-10-12T09:37:19Z",
-      "head_sha": "e224e7cf789d74a65ae7d284b4f250e06c15e959",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38231069198",
-      "id": 38231069198,
-      "status": "completed",
-      "updated_at": "2026-10-12T09:40:08Z"
-    },
-    {
-      "conclusion": "success",
-      "created_at": "2026-10-12T09:17:26Z",
-      "head_sha": "d2efa83c61159fb142dbee53299a27ef944576e1",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38228925165",
-      "id": 38228925165,
-      "status": "completed",
-      "updated_at": "2026-10-12T09:19:58Z"
     }
   ]
 }
