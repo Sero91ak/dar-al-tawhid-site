@@ -147,20 +147,24 @@ async function academyPasswordMatches(a, b) {
   for (let i = 0; i < aa.length; i++) diff |= aa[i] ^ bb[i];
   return diff === 0;
 }
-function academyCookieValue(request) {
+function academyCookieValues(request) {
   const cookie = String(request.headers.get("Cookie") || "");
-  const match = cookie.match(/(?:^|;\s*)dar_kids_academy_owner_v19=([^;]+)/);
-  return match ? match[1] : "";
+  // Legacy /test/ cookie and new site-root archive cookie can coexist.
+  // Validate either instead of getting stuck in a login loop on /test/academy.
+  return cookie.split(";").map(x => x.trim()).filter(x => x.startsWith(ACADEMY_SESSION_COOKIE + "="))
+    .map(x => x.slice(ACADEMY_SESSION_COOKIE.length + 1));
 }
 async function academyHasSession(request, secret) {
-  const value = academyCookieValue(request);
-  const parts = value.split(".");
-  if (parts.length !== 3 || parts[0] !== "v1" || !/^\d{10,13}$/.test(parts[1])) return false;
-  const until = Number(parts[1]);
-  const now = Math.floor(Date.now() / 1000);
-  if (!Number.isSafeInteger(until) || until <= now || until > now + ACADEMY_SESSION_SECONDS) return false;
-  const expected = await academySign(secret, "academy-owner-v19|" + parts[1]);
-  return await academyPasswordMatches(parts[2], expected);
+  for (const value of academyCookieValues(request)) {
+    const parts = value.split(".");
+    if (parts.length !== 3 || parts[0] !== "v1" || !/^\d{10,13}$/.test(parts[1])) continue;
+    const until = Number(parts[1]);
+    const now = Math.floor(Date.now() / 1000);
+    if (!Number.isSafeInteger(until) || until <= now || until > now + ACADEMY_SESSION_SECONDS) continue;
+    const expected = await academySign(secret, "academy-owner-v19|" + parts[1]);
+    if (await academyPasswordMatches(parts[2], expected)) return true;
+  }
+  return false;
 }
 function academyNoStore(headers = {}) {
   return { "Cache-Control": "private, no-store, max-age=0", "CDN-Cache-Control": "no-store",
