@@ -1,0 +1,23 @@
+name: Dar Test Home-Only Social Footer
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'test/index.html'
+      - 'test/tests/test-home-footer-route-guard.cjs'
+      - '.github/workflows/test-home-footer-route-guard.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'test/index.html'
+      - 'test/tests/test-home-footer-route-guard.cjs'
+jobs:
+  footer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Confirm Startseite only and no extra inner-page scroll area
+        run: node test/tests/test-home-footer-route-guard.cjs
