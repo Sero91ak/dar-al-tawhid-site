@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1343";
+const CACHE_NAME="dar-al-tawhid-kids-v1345";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 // KIDS_V202_DOWNLOAD_TABS_RELEASE_TRIGGER_20261010: detail-only offline controls; manifest V202 synchronized.
@@ -287,6 +287,7 @@ const KIDS_BOOT_PRECACHE=[
   "/kids/manifest.webmanifest",
   "/kids/item-offline-v1.js?v=2",
   "/kids/item-offline-v1.css?v=2",
+  "/kids/kids-story-action-contrast-v1345.css?v=1345",
   "/kids/offline-library-v1.js?v=1",
   "/kids/offline-library-v1.css?v=1",
   "/kids/akademie/curriculum-v1.js?v=20261010-01",
@@ -476,6 +477,11 @@ self.addEventListener("fetch",function(event){
     return;
   }
   /* GLOBAL TOUCH RAIL: always network-first so interaction styling updates immediately. */
+  /* One current style for all listening/reading buttons and offline download actions. */
+  if(url.pathname==="/kids/kids-story-action-contrast-v1345.css"){
+    event.respondWith(networkFirst(request));
+    return;
+  }
   if(url.pathname==="/kids/kids-touch-rail.css"){
     event.respondWith(networkFirst(request));
     return;
