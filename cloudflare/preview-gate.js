@@ -90,10 +90,18 @@ const ACADEMY_SESSION_COOKIE = "dar_kids_academy_owner_v19";
 const ACADEMY_SESSION_SECONDS = 12 * 60 * 60;
 const ACADEMY_NEW_ROOT = "/test/academy";
 const ACADEMY_OLD_ROOT = "/test/kids/akademie";
+const ACADEMY_OWNER_ARCHIVE = "/akademie/unterrichtsarchiv";
+// Distinct from Dar Test and public Kids. The archive is server-authenticated.
+// Never expose the private dataset from a native-app UA exemption.
 
 export function isAcademyOwnerRoute(pathname) {
   // Explicit allowlist: no wildcard, no traversal into unrelated test assets.
   const allowed = ["", "/", "/index.html", "/audio-audit-v18.html", "/unterrichtszentrale-v23.html", "/redaktion-katalog-v1.json", "/login"];
+  if (pathname === ACADEMY_OWNER_ARCHIVE || pathname === ACADEMY_OWNER_ARCHIVE + "/" ||
+      pathname === ACADEMY_OWNER_ARCHIVE + "/index.html" || pathname === ACADEMY_OWNER_ARCHIVE + "/daten.json") return true;
+  // The physical archive assets must ALSO require owner authentication.
+  if (pathname === ACADEMY_OLD_ROOT + "/archiv.html" ||
+      pathname === ACADEMY_OLD_ROOT + "/archiv-daten.json") return true;
   return allowed.some(suffix => pathname === ACADEMY_NEW_ROOT + suffix ||
     pathname === ACADEMY_OLD_ROOT + suffix);
 }
@@ -228,7 +236,7 @@ export async function academyOwnerAccess(request, url, env) {
     const expiry = String(Math.floor(Date.now() / 1000) + ACADEMY_SESSION_SECONDS);
     const signed = await academySign(secret, "academy-owner-v19|" + expiry);
     const cookie = ACADEMY_SESSION_COOKIE + "=v1." + expiry + "." + signed
-      + "; Path=/test/; Max-Age=" + ACADEMY_SESSION_SECONDS + "; HttpOnly; Secure; SameSite=Lax";
+      + "; Path=/; Max-Age=" + ACADEMY_SESSION_SECONDS + "; HttpOnly; Secure; SameSite=Lax";
     return academyRedirect(target, cookie);
   }
   if (isLogin && request.method !== "GET" && request.method !== "HEAD") {
@@ -251,6 +259,12 @@ export async function academyOwnerAccess(request, url, env) {
 
 export function academyOwnerAssetPath(pathname) {
   if (!isAcademyOwnerRoute(pathname)) return null;
+  if (pathname === ACADEMY_OWNER_ARCHIVE || pathname === ACADEMY_OWNER_ARCHIVE + "/" ||
+      pathname === ACADEMY_OWNER_ARCHIVE + "/index.html" || pathname === ACADEMY_OLD_ROOT + "/archiv.html")
+    return ACADEMY_OLD_ROOT + "/archiv.html";
+  if (pathname === ACADEMY_OWNER_ARCHIVE + "/daten.json" ||
+      pathname === ACADEMY_OLD_ROOT + "/archiv-daten.json")
+    return ACADEMY_OLD_ROOT + "/archiv-daten.json";
   const suffix = pathname.startsWith(ACADEMY_NEW_ROOT)
     ? pathname.slice(ACADEMY_NEW_ROOT.length) : pathname.slice(ACADEMY_OLD_ROOT.length);
   if (suffix === "" || suffix === "/" || suffix === "/index.html") return ACADEMY_OLD_ROOT + "/index.html";
