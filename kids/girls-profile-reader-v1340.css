@@ -1,0 +1,265 @@
+/* DĀR AL TAWḤĪD KIDS — Girl-profile reading, listening and overscroll V1340
+ * All rules are limited to the current GIRL profile. The story images,
+ * word data, gesture handling, audio functions, sources and status colors
+ * remain untouched. Covers body-mounted fullscreen overlays and fixed
+ * readers overlooked by the previous girls-only CSS versions.
+ */
+
+/* One matte plum canvas, also during iOS rubber-band pull / scrolling. */
+html:has(.app[data-gender="girl"]),
+html:has(.app[data-gender="girl"]) body{
+  background:#251b30!important;
+  background-color:#251b30!important;
+}
+html body .app[data-gender="girl"],
+html body .app[data-gender="girl"] .shell{
+  background-color:#2b2036!important;
+}
+html body:has(.app[data-gender="girl"]) :is(
+  .ps-modal,.ms-modal,.sy-modal,.dl-modal,
+  .ps-sheet,.ms-sheet,.ps-scroll,.ms-scroll,
+  .ms-library-scroll,.ps-library-scroll,
+  .gh-player,.gh-player-scroll,.gh-world,.gh-world-scroll
+){
+  background:#251b30!important;
+  background-color:#251b30!important;
+}
+/* The navigation bar's actual scroll-fixed variant uses a later and more
+   specific navy declaration: override its background explicitly too. */
+html body:has(.app[data-gender="girl"])
+.shell #view-dua.view.active #duaHubDetail.open > .kids-detail-appbar,
+html body:has(.app[data-gender="girl"])
+.shell > .view.active > .kids-detail-appbar,
+html body:has(.app[data-gender="girl"])
+.shell > .view.active > :is(.kids-subpage-nav,.ms-library-nav,.ps-library-nav,.gh-world-nav),
+html body:has(.app[data-gender="girl"]) :is(
+  .kids-detail-appbar,.ms-library-nav,.ps-library-nav,
+  .dl-library-nav,.gh-world-nav,.kids-subpage-nav
+){
+  background-color:#36263f!important;
+  background-image:linear-gradient(180deg,#35263f 0%,#2a1e35 100%)!important;
+  border-bottom-color:rgba(238,191,213,.32)!important;
+  box-shadow:0 6px 16px rgba(25,15,32,.15),inset 0 -1px rgba(244,203,224,.06)!important;
+}
+html body:has(.app[data-gender="girl"]) :is(
+  .kids-detail-appbar,.ms-library-nav,.ps-library-nav,
+  .dl-library-nav,.gh-world-nav,.kids-subpage-nav
+) :is(.kids-detail-appbar-copy,.ms-library-nav-copy,.ps-library-nav-copy,.gh-world-nav-copy){
+  border-left-color:rgba(238,191,213,.28)!important;
+}
+html body:has(.app[data-gender="girl"])
+.kids-detail-appbar .kids-detail-dock-back{
+  background:linear-gradient(145deg,#63445c,#443049)!important;
+  border-color:rgba(244,197,218,.45)!important;
+  box-shadow:inset 0 1px rgba(255,239,244,.09)!important;
+}
+
+/* All "Erklärung hören" buttons: rose/plum instead of petrol. This is
+   the real shared action class used on Duʿāʾ, lesson and story details. */
+html body:has(.app[data-gender="girl"]) button.kids-explain-action{
+  background-color:#754862!important;
+  background-image:linear-gradient(120deg,#815273 0%,#5b3c5c 100%)!important;
+  border-color:rgba(252,203,224,.48)!important;
+  box-shadow:inset 0 1px rgba(255,244,242,.09),0 5px 14px rgba(25,12,30,.14)!important;
+  color:#fff3ee!important;
+}
+html body:has(.app[data-gender="girl"]) button.kids-explain-action:not(:disabled):active,
+html body:has(.app[data-gender="girl"]) button.kids-explain-action:not(:disabled):hover{
+  background-image:linear-gradient(120deg,#92617d,#664566)!important;
+  border-color:rgba(255,216,233,.61)!important;
+  box-shadow:0 0 0 1px rgba(248,202,221,.17)!important;
+}
+html body:has(.app[data-gender="girl"]) button.kids-explain-action .kids-explain-copy strong{
+  color:#fff5ef!important;
+}
+html body:has(.app[data-gender="girl"]) button.kids-explain-action .kids-explain-copy small{
+  color:#f7dbe8!important;
+}
+html body:has(.app[data-gender="girl"]) button.kids-explain-action .kids-explain-icon{
+  background:linear-gradient(145deg,#f6d79e,#dfb96f)!important;
+  color:#382535!important;
+}
+
+/* The PROPHECY screen (Adam et al.) has its own full-height reading canvas.
+   Its lower title slab, buttons and quiz are still hard-coded navy. */
+html body:has(.app[data-gender="girl"]) #psModal .ps-sheet,
+html body:has(.app[data-gender="girl"]) #psModal .ps-scroll,
+html body:has(.app[data-gender="girl"]) #psModal .ps-body,
+html body:has(.app[data-gender="girl"]) #psModal .ps-hero{
+  background-color:#2a1e35!important;
+}
+html body:has(.app[data-gender="girl"]) #psModal .ps-hero-copy,
+html body:has(.app[data-gender="girl"]) #psModal .ps-hero[data-hero-copy="left"] .ps-hero-copy{
+  background:#3b2b43!important;
+  background-image:linear-gradient(180deg,#3d2b44 0%,#2c2139 100%)!important;
+  border-color:rgba(240,190,213,.20)!important;
+}
+html body:has(.app[data-gender="girl"]) #psModal .ps-hero::before,
+html body:has(.app[data-gender="girl"]) #psModal .ps-hero[data-hero-copy="left"]::before{
+  background:linear-gradient(180deg,rgba(34,22,41,.02),
+    rgba(38,24,43,.04) 53%,rgba(41,27,46,.60) 100%)!important;
+}
+html body:has(.app[data-gender="girl"]) #psModal :is(.ps-pill,.ps-detail-mode,.ps-mode){
+  background:#4a3650!important;
+  border-color:rgba(232,168,184,.42)!important;
+  color:#fff2ec!important;
+}
+html body:has(.app[data-gender="girl"]) #psModal .ps-detail-mode.active{
+  background:#78516f!important;
+  border-color:rgba(255,224,231,.65)!important;
+  color:#fff8f3!important;
+}
+html body:has(.app[data-gender="girl"]) #psModal :is(
+ .ps-read,.ps-read p,.ps-sources,.ps-body,.ps-question,.ps-facts,
+ .ps-info,.ps-reading-card,.ps-source-list
+){
+  border-color:rgba(241,193,216,.22)!important;
+}
+html body:has(.app[data-gender="girl"]) #psModal :is(
+ .ps-question,.ps-facts,.ps-info,.ps-reading-card
+){
+  background:#36273d!important;
+}
+html body:has(.app[data-gender="girl"]) #psModal :is(
+ .ps-question button,.ps-question .ps-answer,.ps-quiz button
+):not(.good):not(.bad):not(.correct):not(.wrong){
+  background:#4b3650!important;
+  border-color:rgba(239,197,218,.26)!important;
+  color:#fff4ed!important;
+}
+
+/* THE TEN COMPANIONS / SAHABIYYAT / DEEN
+   These modals reuse .ms-modal but never inherit .app styles. Their
+   large image-gradient, subtitle, reading cards and sources remain navy. */
+html body:has(.app[data-gender="girl"]) :is(#msModal,#syModal,#dlModal)
+:is(.ms-detail-hero,.ms-sheet,.ms-scroll,.ms-body,.ms-library-scroll){
+  background-color:#2a1f34!important;
+}
+html body:has(.app[data-gender="girl"]) :is(#msModal,#syModal,#dlModal)
+:is(.ms-detail-shade,.ms-hero-shade){
+  background:linear-gradient(180deg,
+    rgba(39,25,44,.04) 0%,rgba(39,25,44,.13) 39%,
+    rgba(41,28,47,.70) 75%,#2b2035 100%)!important;
+}
+html body:has(.app[data-gender="girl"]) :is(#msModal,#syModal,#dlModal)
+.ms-profile-grid section{
+  background:#37283e!important;
+  border-color:rgba(239,190,214,.27)!important;
+}
+html body:has(.app[data-gender="girl"]) :is(#msModal,#syModal,#dlModal)
+.ms-profile-grid small,
+html body:has(.app[data-gender="girl"]) :is(#msModal,#syModal,#dlModal)
+:is(.ms-q-kicker,.ms-question small,.ms-detail-mark){
+  color:#e9b2cd!important;
+}
+html body:has(.app[data-gender="girl"]) :is(#msModal,#syModal,#dlModal)
+:is(.ms-question,.ms-player,.ms-read,.ms-sources,.ms-source-group){
+  border-color:rgba(239,190,214,.25)!important;
+}
+html body:has(.app[data-gender="girl"]) :is(#msModal,#syModal,#dlModal)
+:is(.ms-question,.ms-player){
+  background:#38283e!important;
+}
+html body:has(.app[data-gender="girl"]) :is(#msModal,#syModal,#dlModal)
+.ms-question button:not(.good):not(.bad){
+  background:#4a3650!important;
+  border-color:rgba(244,197,219,.26)!important;
+  color:#fff3ed!important;
+}
+html body:has(.app[data-gender="girl"]) :is(#msModal,#syModal,#dlModal)
+:is(.ms-source-ref,.ms-source-link,.ms-meta span){
+  background:#3f2e43!important;
+  border-color:rgba(236,189,214,.30)!important;
+  color:#f2d3e0!important;
+}
+html body:has(.app[data-gender="girl"]) :is(#msModal,#syModal,#dlModal)
+:is(.ms-detail-mode,.ms-detail-modes button,.ms-follow-open){
+  background:#443249!important;
+  border-color:rgba(237,190,210,.36)!important;
+  color:#fff1eb!important;
+}
+html body:has(.app[data-gender="girl"]) :is(#msModal,#syModal,#dlModal)
+:is(.ms-read,.ms-read p,.ms-profile-grid span){
+  color:#eee0e8!important;
+}
+html body:has(.app[data-gender="girl"]) :is(#msModal,#syModal,#dlModal)
+.ms-detail-hero{
+  background:#302139!important;
+}
+
+/* Follow-along reader, reading-only and audio-only modes share a
+   separate slide-up root (not .app) and separate teal-highlight rules. */
+html body:has(.app[data-gender="girl"]) .kids-follow-reader{
+  background:rgba(30,20,37,.76)!important;
+  -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+}
+html body:has(.app[data-gender="girl"]) .kids-follow-reader .kfr-sheet{
+  background:#2e2239!important;
+  background-image:linear-gradient(180deg,#382843,#281f33)!important;
+  border-color:rgba(243,198,219,.37)!important;
+}
+html body:has(.app[data-gender="girl"]) .kids-follow-reader .kfr-controls{
+  background:#33263e!important;
+  border-color:rgba(239,188,214,.22)!important;
+}
+html body:has(.app[data-gender="girl"]) .kids-follow-reader .kfr-read{
+  background:#291f33!important;
+}
+html body:has(.app[data-gender="girl"]) .kids-follow-reader .kfr-read p.active{
+  background:rgba(191,134,178,.16)!important;
+  border-color:rgba(242,192,217,.36)!important;
+  box-shadow:none!important;
+}
+html body:has(.app[data-gender="girl"]) .kids-follow-reader .kfr-kicker{
+  color:#f2c3d6!important;
+}
+html body:has(.app[data-gender="girl"]) .kids-follow-reader :is(
+ .kfr-skip,.kfr-restart,.kfr-read-toggle
+){
+  background:#46324c!important;
+  border-color:rgba(240,191,211,.29)!important;
+  color:#f5e6ec!important;
+}
+html body:has(.app[data-gender="girl"]) .kids-follow-reader .kfr-progress > span{
+  background-image:linear-gradient(90deg,#d5a0c4,#e7bf7d)!important;
+}
+
+/* Reading + listening controller at bottom of full-size player. */
+html body:has(.app[data-gender="girl"]) #ghPlayer .gh-player-body,
+html body:has(.app[data-gender="girl"]) #ghPlayer .gh-read{
+  background-color:#281e32!important;
+}
+html body:has(.app[data-gender="girl"]) #ghPlayer .gh-player-hero{
+  background-color:#2e233b!important;
+}
+html body:has(.app[data-gender="girl"]) #ghPlayer .gh-controls{
+  background:#3a2b42!important;
+  background-image:linear-gradient(150deg,#45324b,#31263e)!important;
+  border-color:rgba(237,185,211,.31)!important;
+}
+html body:has(.app[data-gender="girl"]) #ghPlayer :is(
+ .gh-skip,.gh-read-toggle,.gh-mini-open,.gh-next button
+){
+  background:#4b3651!important;
+  border-color:rgba(243,194,217,.29)!important;
+  color:#fff0f4!important;
+}
+html body:has(.app[data-gender="girl"]) :is(
+ .ps-follow-open,.ms-follow-open,.studio-follow-open
+){
+  background:#503954!important;
+  border-color:rgba(243,194,217,.32)!important;
+  color:#f9e1ed!important;
+}
+
+/* Button/status labels, if they appear in shared bottom tabs, remain
+   warm and legible. No sizing/touch/position/safe-area changes. */
+html body .app[data-gender="girl"] .bottom-nav{
+  background-color:#34243d!important;
+  background-image:linear-gradient(150deg,#402d46,#302339)!important;
+  border-color:rgba(246,196,218,.39)!important;
+}
+html body .app[data-gender="girl"] .bottom-nav .nav-btn.active{
+  background-image:linear-gradient(135deg,#6c4965,#523852)!important;
+  box-shadow:inset 0 0 0 1px rgba(253,222,233,.14)!important;
+}
