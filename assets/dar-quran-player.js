@@ -22,11 +22,11 @@
   // V1109: this implementation is restricted to the official iOS visitor app.
   // Website, Dar Test, Kids and Apple TV retain their existing player engines.
   if (!isOfficialIosApp() || isAppleTvApp() || isTestAppPath()) return;
-    var PLAYER_BUILD = 1110;
+    var PLAYER_BUILD = 1111;
   if (!document.querySelector('link[data-dqp-v11-skin]')) {
     var v11Css = document.createElement('link');
     v11Css.rel = 'stylesheet';
-    v11Css.href = '/assets/dar-quran-player.css?v=1110';
+    v11Css.href = '/assets/dar-quran-player.css?v=1111';
     v11Css.setAttribute('data-dqp-v11-skin', '');
     document.head.appendChild(v11Css);
   }
@@ -3398,30 +3398,63 @@
       });
     } else draw();
   }
+
+  // V1111: The outer index.html uses lexical quranMeta/loadQuranIndex,
+  // not window.quranMeta. Use exactly its canonical JSON and cache key.
+  var dqpSurahCatalogue = null;
+  var dqpSurahCataloguePromise = null;
+  function validDqpCatalogue(doc) {
+    return !!(doc && Array.isArray(doc.surahs) && doc.surahs.length === 114 &&
+      doc.surahs.every(function(row,i) {
+        return row && Number(row.id) === i+1 && typeof row.transliteration === "string" &&
+          !!row.transliteration.trim() && typeof row.name === "string" && Number(row.total_verses)>0;
+      }));
+  }
+  function localDqpCatalogue() {
+    if(validDqpCatalogue(dqpSurahCatalogue)) return dqpSurahCatalogue;
+    if(validDqpCatalogue(window.quranMeta)) return window.quranMeta;
+    try {
+      var stored=JSON.parse(localStorage.getItem("darCachedQuranIndexV1") || "null");
+      if(validDqpCatalogue(stored)) return stored;
+    } catch(ignoreCache) {}
+    return null;
+  }
+  function loadDqpCatalogue() {
+    var cached=localDqpCatalogue();
+    if(cached) { dqpSurahCatalogue=cached; return Promise.resolve(cached); }
+    if(dqpSurahCataloguePromise) return dqpSurahCataloguePromise;
+    dqpSurahCataloguePromise=fetch("/content/quran/surahs.json",{cache:"force-cache"})
+      .then(function(res){if(!res.ok)throw Error("Qurʾān-Index "+res.status);return res.json();})
+      .then(function(doc){if(!validDqpCatalogue(doc))throw Error("114 Sūren unvollständig");dqpSurahCatalogue=doc;return doc;})
+      .catch(function(){return localDqpCatalogue();})
+      .then(function(doc){dqpSurahCataloguePromise=null;return doc;});
+    return dqpSurahCataloguePromise;
+  }
   function openSurahSheet() {
-    function draw(retried) {
-      var list = (window.quranMeta && window.quranMeta.surahs) || [];
-      if (!list.length) {
-        if (retried) {
-          openSheet("Sūrah auswählen", "<p class=\"dqp-sheet-wait\">Sūrenliste derzeit nicht verfügbar.</p>");
-          return;
-        }
-        openSheet("Sūrah auswählen", "<p class=\"dqp-sheet-wait\">Sūren werden geladen …</p>");
-        var requestEpoch = sheetEpoch;
-        var loader = typeof window.loadQuranIndex === "function" ? window.loadQuranIndex() : ensureData();
-        Promise.resolve(loader).then(function () {
-          if (requestEpoch === sheetEpoch) draw(true);
-        }, function () {
-          if (requestEpoch === sheetEpoch) draw(true);
-        });
+    var selected=Number(state.surah),epoch=0;
+    function draw(doc) {
+      if(epoch!==sheetEpoch) return; // no late rebuild after manually leaving
+      var active=activeSheetEl();
+      if(!active||active.hidden) return;
+      if(!validDqpCatalogue(doc)) {
+        openSheet("Sūrah auswählen",'<p class="dqp-sheet-wait">Die Sūrenliste konnte nicht geladen werden.</p><button type="button" class="dqp-opt" data-dqp="surah-retry">Erneut versuchen</button>');
         return;
       }
-      var rows = list.map(function (s) {
-        return '<button type="button" class="dqp-opt dqp-opt-surah' + (Number(s.id) === state.surah ? " is-on" : "") + '" data-dqp-opt="s-' + s.id + '" data-q="' + esc((s.transliteration + " " + s.name + " " + s.id).toLowerCase()) + '"><span class="dqp-opt-kicker">' + s.id + " · " + esc(s.transliteration) + "</span><small>" + esc(s.name) + " · " + (s.total_verses || "") + " Āyāt</small></button>";
+      var rows=doc.surahs.map(function(item) {
+        var id=Number(item.id), name=String(item.name), title=String(item.transliteration), count=Number(item.total_verses);
+        return '<button type="button" class="dqp-opt dqp-opt-surah'+(id===selected?' is-on':'')+
+          '" data-dqp-opt="s-'+id+'" data-q="'+esc((title+' '+name+' '+id).toLowerCase())+
+          '"><span class="dqp-opt-kicker">'+id+' · '+esc(title)+'</span>'+
+          '<span class="dqp-opt-surah-meta" dir="rtl" lang="ar">'+esc(name)+'</span>'+
+          '<small>'+count+' Āyāt</small></button>';
       }).join("");
-      openSheet("Sūrah und Āyah", '<input class="dqp-search" data-dqp-search type="search" placeholder="Sūrah suchen" autocomplete="off"><div class="dqp-opt-list">' + rows + "</div>");
+      openSheet("Sūrah auswählen",'<input class="dqp-search" data-dqp-search type="search" placeholder="Sūrah suchen" autocomplete="off" aria-label="Sūrah suchen"><div class="dqp-opt-list dqp-surah-list">'+rows+"</div>");
     }
-    draw();
+    openSheet("Sūrah auswählen",'<p class="dqp-sheet-wait">114 Sūren werden geladen …</p>');
+    epoch=sheetEpoch;
+    var cached=localDqpCatalogue();
+    if(cached) draw(cached);
+    else loadDqpCatalogue().then(draw,function(){draw(null);});
   }
   var dlLabelTimer = 0;
   /* Offline packs: status + deletion are independently controlled per edition.
@@ -3755,6 +3788,7 @@
       if (act === "back15") { skip(-15); return; }
       if (act === "fwd15") { skip(15); return; }
       if (act === "retry") { state.error = ""; loadAudio(true, false); return; }
+      if (act === "surah-retry") { openSurahSheet(); return; }
       if (act === "sheet-close") { closeSheet(); return; }
       if (act === "menu") { openMenu(); return; }
       if (act === "v108-mode") {
