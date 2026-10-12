@@ -3,8 +3,8 @@
   "purpose": "Remaining 158 editorial outlines only; 50 source-checked lessons released in the separate curriculum.",
   "curriculum": {
     "totalNewLessonSlots": 208,
-    "alreadyImplementedLessons": 50,
-    "proposedAdditionalLessons": 158,
+    "alreadyImplementedLessons": 58,
+    "proposedAdditionalLessons": 150,
     "weeks": 52,
     "newDaysPerWeek": 4,
     "reviewDaysPerWeek": 2,
@@ -43,49 +43,49 @@
     {
       "id": "tawhid",
       "label": "Tawḥīd – Allah allein",
-      "plannedAdditions": 15,
+      "plannedAdditions": 14,
       "underlyingCurrentSubject": "aqidah"
     },
     {
       "id": "iman",
       "label": "Īmān – Grundlagen des Glaubens",
-      "plannedAdditions": 15,
+      "plannedAdditions": 14,
       "underlyingCurrentSubject": "aqidah"
     },
     {
       "id": "ikhlas",
       "label": "Ikhlāṣ – Aufrichtigkeit",
-      "plannedAdditions": 11,
+      "plannedAdditions": 10,
       "underlyingCurrentSubject": "aqidah"
     },
     {
       "id": "akhlaq",
       "label": "Akhlāq – Charakter und Verhalten",
-      "plannedAdditions": 17,
+      "plannedAdditions": 16,
       "underlyingCurrentSubject": "akhlaq"
     },
     {
       "id": "adab",
       "label": "Adab – islamisches Benehmen",
-      "plannedAdditions": 17,
+      "plannedAdditions": 16,
       "underlyingCurrentSubject": "adab"
     },
     {
       "id": "tarbiyah",
       "label": "Tarbiyah – Erziehung, Gewohnheiten, Verantwortung",
-      "plannedAdditions": 11,
+      "plannedAdditions": 10,
       "underlyingCurrentSubject": "tarbiyah"
     },
     {
       "id": "nafs",
       "label": "Tazkiyat an-Nafs – Herz und Selbststeuerung",
-      "plannedAdditions": 15,
+      "plannedAdditions": 14,
       "underlyingCurrentSubject": "nafs"
     },
     {
       "id": "fiqh",
       "label": "Fiqh und ʿIbādāt – gelebte Praxis",
-      "plannedAdditions": 21,
+      "plannedAdditions": 20,
       "underlyingCurrentSubject": "fiqh"
     },
     {
@@ -113,7 +113,7 @@
       "underlyingCurrentSubject": "family"
     }
   ],
-  "progression": "Mix one topic per strand per round, preserving the 38 existing lesson positions. After an authentic source review, an editorial outline can be authored and released in a separate guarded PR; the roadmap itself never unlocks a child lesson.",
+  "progression": "Preserve historical child progress: verified lessons append to the sequential course; future lessons remain locked until previous completion and a new classroom day. New audio requires human approval.",
   "existingLessonSlots": [
     {
       "editorialSlot": 1,
@@ -364,305 +364,105 @@
       "editorialSlot": 50,
       "lessonId": "adab-eltern-freundlich",
       "status": "currently-in-catalog"
-    }
-  ],
-  "plannedUnits": [
+    },
     {
       "editorialSlot": 51,
-      "topicId": "editorial-051",
-      "week": 13,
-      "weekday": "Donnerstag",
-      "pillar": "tawhid",
-      "title": "Allah erschuf die Tiere",
-      "classroomScenario": "Ein Tier beobachten, ohne es zu erschrecken",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: ein Tier beobachten, ohne es zu erschrecken.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: ein Tier beobachten, ohne es zu erschrecken.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: ein Tier beobachten, ohne es zu erschrecken.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
+      "lessonId": "aqidah-allah-erschuf-tiere",
+      "status": "currently-in-catalog",
+      "sourceAudit": {
+        "quran": "16:5",
+        "hadith": "Ṣaḥīḥ al-Buḫārī, Nr. 2363; Ṣaḥīḥ Muslim, Nr. 2244 · Abū Hurayrah",
+        "directHadithUrl": "https://dorar.net/hadith/sharh/67134",
+        "originalHadithMeaningParaphrase": true,
+        "voiceApproved": false
       }
     },
     {
       "editorialSlot": 52,
-      "topicId": "editorial-052",
-      "week": 13,
-      "weekday": "Freitag",
-      "pillar": "iman",
-      "title": "Īmān an Allah vertiefen",
-      "classroomScenario": "Den Glauben an Allah mit einer kindgerechten Aussage ausdrücken",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: den Glauben an Allah mit einer kindgerechten Aussage ausdrücken.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: den Glauben an Allah mit einer kindgerechten Aussage ausdrücken.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: den Glauben an Allah mit einer kindgerechten Aussage ausdrücken.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
+      "lessonId": "aqidah-iman-an-allah-vertiefen",
+      "status": "currently-in-catalog",
+      "sourceAudit": {
+        "quran": "2:285",
+        "hadith": "Ṣaḥīḥ Muslim, Nr. 8 · überliefert von ʿUmar ibn al-Khaṭṭāb",
+        "directHadithUrl": "https://dorar.net/hadith/sharh/1189",
+        "originalHadithMeaningParaphrase": true,
+        "voiceApproved": false
       }
     },
     {
       "editorialSlot": 53,
-      "topicId": "editorial-053",
-      "week": 14,
-      "weekday": "Montag",
-      "pillar": "ikhlas",
-      "title": "Gute Absichten vor dem Lernen",
-      "classroomScenario": "Vor einer Unterrichtseinheit eine gute Absicht formulieren",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: vor einer Unterrichtseinheit eine gute Absicht formulieren.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: vor einer Unterrichtseinheit eine gute Absicht formulieren.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: vor einer Unterrichtseinheit eine gute Absicht formulieren.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
+      "lessonId": "aqidah-ikhlas-gute-lernabsicht",
+      "status": "currently-in-catalog",
+      "sourceAudit": {
+        "quran": "98:5",
+        "hadith": "Ṣaḥīḥ al-Buḫārī, Nr. 1 · ʿUmar ibn al-Khaṭṭāb",
+        "directHadithUrl": "https://dorar.net/hadith/sharh/3429",
+        "originalHadithMeaningParaphrase": true,
+        "voiceApproved": false
       }
     },
     {
       "editorialSlot": 54,
-      "topicId": "editorial-054",
-      "week": 14,
-      "weekday": "Dienstag",
-      "pillar": "akhlaq",
-      "title": "Gerecht zu Geschwistern sein",
-      "classroomScenario": "Ein Spielzeug fair abwechselnd benutzen",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: ein Spielzeug fair abwechselnd benutzen.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: ein Spielzeug fair abwechselnd benutzen.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: ein Spielzeug fair abwechselnd benutzen.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
+      "lessonId": "akhlaq-geschwister-fair-teilen",
+      "status": "currently-in-catalog",
+      "sourceAudit": {
+        "quran": "16:90",
+        "hadith": "Ṣaḥīḥ al-Buḫārī, Nr. 2587; Ṣaḥīḥ Muslim, Nr. 1623 · an-Nuʿmān ibn Bašīr",
+        "directHadithUrl": "https://dorar.net/hadith/sharh/14634",
+        "originalHadithMeaningParaphrase": true,
+        "voiceApproved": false
       }
     },
     {
       "editorialSlot": 55,
-      "topicId": "editorial-055",
-      "week": 14,
-      "weekday": "Donnerstag",
-      "pillar": "adab",
-      "title": "Privatsphäre anderer achten",
-      "classroomScenario": "Nicht ungefragt in fremde Sachen schauen",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: nicht ungefragt in fremde Sachen schauen.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: nicht ungefragt in fremde Sachen schauen.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: nicht ungefragt in fremde Sachen schauen.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
+      "lessonId": "adab-privatsphaere-andere-achten",
+      "status": "currently-in-catalog",
+      "sourceAudit": {
+        "quran": "24:27",
+        "hadith": "Ṣaḥīḥ al-Buḫārī, Nr. 6241; Ṣaḥīḥ Muslim, Nr. 2156 · Sahl ibn Saʿd",
+        "directHadithUrl": "https://dorar.net/hadith/sharh/9448",
+        "originalHadithMeaningParaphrase": true,
+        "voiceApproved": false
       }
     },
     {
       "editorialSlot": 56,
-      "topicId": "editorial-056",
-      "week": 14,
-      "weekday": "Freitag",
-      "pillar": "tarbiyah",
-      "title": "Eigene Sachen pflegen",
-      "classroomScenario": "Den eigenen Ranzen oder eine Tasche ordentlich halten",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: den eigenen Ranzen oder eine Tasche ordentlich halten.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: den eigenen Ranzen oder eine Tasche ordentlich halten.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: den eigenen Ranzen oder eine Tasche ordentlich halten.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
+      "lessonId": "akhlaq-tarbiyah-sachen-pflegen",
+      "status": "currently-in-catalog",
+      "sourceAudit": {
+        "quran": "17:34",
+        "hadith": "Ṣaḥīḥ al-Buḫārī, Nr. 893; Ṣaḥīḥ Muslim, Nr. 1829 · ʿAbdullāh ibn ʿUmar",
+        "directHadithUrl": "https://dorar.net/hadith/sharh/6192",
+        "originalHadithMeaningParaphrase": true,
+        "voiceApproved": false
       }
     },
     {
       "editorialSlot": 57,
-      "topicId": "editorial-057",
-      "week": 15,
-      "weekday": "Montag",
-      "pillar": "nafs",
-      "title": "Wut ohne Verletzungen ausdrücken",
-      "classroomScenario": "Bei Ärger Abstand nehmen und ruhig sprechen",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: bei Ärger Abstand nehmen und ruhig sprechen.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: bei Ärger Abstand nehmen und ruhig sprechen.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: bei Ärger Abstand nehmen und ruhig sprechen.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
+      "lessonId": "akhlaq-nafs-wut-sicher-ausdruecken",
+      "status": "currently-in-catalog",
+      "sourceAudit": {
+        "quran": "3:134",
+        "hadith": "Ṣaḥīḥ al-Buḫārī, Nr. 6116 · Abū Hurayrah",
+        "directHadithUrl": "https://dorar.net/hadith/sharh/151063",
+        "originalHadithMeaningParaphrase": true,
+        "voiceApproved": false
       }
     },
     {
       "editorialSlot": 58,
-      "topicId": "editorial-058",
-      "week": 15,
-      "weekday": "Dienstag",
-      "pillar": "fiqh",
-      "title": "Wuḍūʾ in der richtigen Reihenfolge",
-      "classroomScenario": "Die Gebetswaschung mit einem Erwachsenen üben",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: die Gebetswaschung mit einem Erwachsenen üben.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: die Gebetswaschung mit einem Erwachsenen üben.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: die Gebetswaschung mit einem Erwachsenen üben.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": true,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
+      "lessonId": "fiqh-wudu-schritte-reihenfolge",
+      "status": "currently-in-catalog",
+      "sourceAudit": {
+        "quran": "5:6",
+        "hadith": "Ṣaḥīḥ al-Buḫārī, Nr. 164; Ṣaḥīḥ Muslim, Nr. 226 · ʿUṯmān ibn ʿAffān",
+        "directHadithUrl": "https://dorar.net/hadith/sharh/3683",
+        "originalHadithMeaningParaphrase": true,
+        "voiceApproved": false
       }
-    },
+    }
+  ],
+  "plannedUnits": [
     {
       "editorialSlot": 59,
       "topicId": "editorial-059",
