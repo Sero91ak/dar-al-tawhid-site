@@ -196,7 +196,53 @@ function queue(){
  if(queued)return;queued=true;
  requestAnimationFrame(()=>{queued=false;sync()});
 }
+/* KIDS_TOP_SCROLL_BOUNDARY_V1411
+ * iOS PWA/WKWebView may rubber-band the single page scroller despite
+ * CSS overscroll-behavior. A portal-fixed header remains stationary while
+ * the transparent in-flow head spacer and hero move DOWN, revealing a gap.
+ *
+ * Clamp only downward finger motion when every scrollable ancestor is
+ * already at its top. Upward reading, momentum, horizontal gestures,
+ * nested scrollers, audio buttons and ordinary navigation remain native.
+ * Bound once in this shared controller: present and future Kids details.
+ */
+function installTopScrollBoundaryGuard(){
+  const shell=document.querySelector(".shell");
+  if(!shell||shell.dataset.kidsTopEdgeGuard)return;
+  shell.dataset.kidsTopEdgeGuard="v1411";
+  const detailSelector=".shell > .view.active.kids-detail-page, #salafDetail:not([hidden]), .modal.open, .duahub-detail.open";
+  let previousX=null,previousY=null,startTarget=null;
+  function scrollableAncestorAboveTop(target){
+    for(let node=target;node&&node!==document.body;node=node.parentElement){
+      if(!(node instanceof HTMLElement))continue;
+      const overflowY=getComputedStyle(node).overflowY;
+      if(!/^(auto|scroll|overlay)$/.test(overflowY))continue;
+      if(node.scrollHeight>node.clientHeight+1&&node.scrollTop>0.5)return true;
+    }
+    return false;
+  }
+  document.addEventListener("touchstart",event=>{
+    if(event.touches.length!==1){
+      startTarget=null;previousX=null;previousY=null;return;
+    }
+    const touch=event.touches[0];
+    previousX=touch.clientX;previousY=touch.clientY;
+    startTarget=event.target instanceof Element&&event.target.closest(detailSelector)?event.target:null;
+  },{capture:true,passive:true});
+  document.addEventListener("touchmove",event=>{
+    if(event.touches.length!==1||!startTarget||previousY===null)return;
+    const touch=event.touches[0];
+    const dx=touch.clientX-previousX,dy=touch.clientY-previousY;
+    previousX=touch.clientX;previousY=touch.clientY;
+    if(event.defaultPrevented||!event.cancelable||dy<=0||dy<=Math.abs(dx))return;
+    if(!scrollableAncestorAboveTop(startTarget))event.preventDefault();
+  },{capture:true,passive:false});
+  function reset(){startTarget=null;previousX=null;previousY=null;}
+  document.addEventListener("touchend",reset,{passive:true});
+  document.addEventListener("touchcancel",reset,{passive:true});
+}
 function start(){
+ installTopScrollBoundaryGuard();
  sync();
  const mo=new MutationObserver(queue);
  mo.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:["class","aria-hidden"]});
