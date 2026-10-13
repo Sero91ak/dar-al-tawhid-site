@@ -383,7 +383,7 @@ async function finalizeDarTestHomeV1193(asset) {
       'if(p==="left"||p==="right"||p==="bottom"){' +
       'localStorage.setItem("darNavPositionV2",p);' +
       'if(window.DarAdaptiveNavPlacement)window.DarAdaptiveNavPlacement.setPreference(p);' +
-      '}}catch(e){}})();<\\/script>';
+      '}}catch(e){}})();<\/script>';
     if (html.includes("</body>")) html = html.replace("</body>", navDirectChoice + "</body>");
     else if (html.includes("</html>")) html = html.replace("</html>", navDirectChoice + "</html>");
     else html += navDirectChoice;
