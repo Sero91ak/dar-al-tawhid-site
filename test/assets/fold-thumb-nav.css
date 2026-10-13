@@ -741,3 +741,179 @@ html.dar-test-side-nav body:is(.is-post-route,.is-news-detail-route) :is(
   margin-inline:auto!important;
   box-sizing:border-box!important;
 }
+
+
+/* DUOS_CONTENT_LANE_V1368 · adult Dar Test only.
+ * Source geometry: Duos LayoutModel.kt / LauncherScreen.kt.
+ * A proper 68px rail is inset 12px from the real viewport edge, with a
+ * dedicated 104px (68+12+24) content lane; no content may underlap controls.
+ * Never style the visitor/KIDS app here.
+ */
+html.dar-test-side-nav {
+  --dar-side-nav-size:68px!important;
+  --dar-side-nav-reserve:104px!important;
+  --dar-side-content-gap:12px!important;
+  --dar-duos-rail-top:50px;
+  --dar-duos-rail-height:268px;
+  --dar-duos-glass:color-mix(in srgb,var(--card,var(--bg,#080806)) 78%,transparent);
+  --dar-duos-ink:var(--text,currentColor);
+  --dar-duos-active:var(--gold2,var(--accent,var(--text,currentColor)));
+}
+/* Preserve the existing five links, touch handlers and native-looking 3D assets. */
+html.dar-test-side-nav #appChromeDock #bottomNav.bottom-nav,
+html.dar-test-side-nav #bottomNav.bottom-nav {
+  position:fixed!important;
+  top:var(--dar-duos-rail-top)!important;
+  bottom:auto!important;
+  width:68px!important;
+  min-width:68px!important;
+  max-width:68px!important;
+  height:var(--dar-duos-rail-height)!important;
+  min-height:0!important;
+  max-height:var(--dar-duos-rail-height)!important;
+  margin:0!important;
+  padding:8px!important;
+  flex-direction:column!important;
+  justify-content:space-evenly!important;
+  align-items:center!important;
+  gap:0!important;
+  box-sizing:border-box!important;
+  border-radius:30px!important;
+  border:1px solid color-mix(in srgb,var(--dar-duos-ink) 18%,transparent)!important;
+  background:var(--dar-duos-glass)!important;
+  box-shadow:0 10px 24px color-mix(in srgb,var(--bg,#000) 25%,transparent),
+    inset 0 1px 0 color-mix(in srgb,var(--dar-duos-ink) 10%,transparent)!important;
+  -webkit-backdrop-filter:blur(15px) saturate(1.25)!important;
+  backdrop-filter:blur(15px) saturate(1.25)!important;
+  -webkit-transform:none!important;
+  transform:none!important;
+  overflow:hidden!important;
+  pointer-events:auto!important;
+  touch-action:manipulation!important;
+  z-index:96!important;
+}
+html.dar-test-side-nav[data-dar-nav-position="right"] #appChromeDock #bottomNav.bottom-nav,
+html.dar-test-side-nav[data-dar-nav-position="right"] #bottomNav.bottom-nav {
+  right:max(12px,env(safe-area-inset-right,0px))!important;
+  left:auto!important;
+}
+html.dar-test-side-nav[data-dar-nav-position="left"] #appChromeDock #bottomNav.bottom-nav,
+html.dar-test-side-nav[data-dar-nav-position="left"] #bottomNav.bottom-nav {
+  left:max(12px,env(safe-area-inset-left,0px))!important;
+  right:auto!important;
+}
+html.dar-test-side-nav #bottomNav.bottom-nav .bottom-nav-btn {
+  width:52px!important;
+  min-width:52px!important;
+  max-width:52px!important;
+  min-height:44px!important;
+  max-height:52px!important;
+  height:auto!important;
+  padding:0!important;
+  margin:0!important;
+  display:grid!important;
+  place-items:center!important;
+  border-radius:17px!important;
+  box-sizing:border-box!important;
+  pointer-events:auto!important;
+  touch-action:manipulation!important;
+}
+html.dar-test-side-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon {
+  display:grid!important;
+  place-items:center!important;
+  width:40px!important;
+  min-width:40px!important;
+  max-width:40px!important;
+  height:40px!important;
+  min-height:40px!important;
+  max-height:40px!important;
+  margin:0 auto!important;
+  line-height:40px!important;
+}
+html.dar-test-side-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon img.dar3d-icon {
+  display:block!important;
+  width:40px!important;
+  height:40px!important;
+  max-width:40px!important;
+  max-height:40px!important;
+  margin:auto!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  pointer-events:none!important;
+}
+html.dar-test-side-nav #bottomNav.bottom-nav .bottom-nav-btn.active {
+  color:var(--dar-duos-active)!important;
+  background:color-mix(in srgb,var(--dar-duos-active) 12%,transparent)!important;
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--dar-duos-active) 28%,transparent)!important;
+}
+
+/* The original test viewport expands the qov hero to 100vw and offsets it
+ * by calc(50% - 50vw), escaping the reserved body padding. This is the exact
+ * source of the Qur'an header visibly going underneath the right-side rail.
+ * Restrict full-bleed elements to the usable CONTENT LANE, not the screen. */
+html.dar-test-side-nav body.has-bottom-nav,
+html.dar-test-side-nav body.is-feed-fullscreen {
+  box-sizing:border-box!important;
+  max-width:100vw!important;
+  min-width:0!important;
+}
+html.dar-test-side-nav[data-dar-nav-position="right"] body.has-bottom-nav,
+html.dar-test-side-nav[data-dar-nav-position="right"] body.is-feed-fullscreen {
+  padding-right:calc(var(--dar-side-nav-reserve) + env(safe-area-inset-right,0px))!important;
+  padding-left:0!important;
+}
+html.dar-test-side-nav[data-dar-nav-position="left"] body.has-bottom-nav,
+html.dar-test-side-nav[data-dar-nav-position="left"] body.is-feed-fullscreen {
+  padding-left:calc(var(--dar-side-nav-reserve) + env(safe-area-inset-left,0px))!important;
+  padding-right:0!important;
+}
+html.dar-test-side-nav :is(#appRoot,#appShell,#appView,#appView.view,.qov-page,.qrc-page) {
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  box-sizing:border-box!important;
+}
+html.dar-test-side-nav body.is-quran-overview .qov-header {
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin:0 0 18px!important;
+  padding-left:clamp(14px,2.3vw,28px)!important;
+  padding-right:clamp(14px,2.3vw,28px)!important;
+  box-sizing:border-box!important;
+}
+html.dar-test-side-nav body.is-quran-overview :is(.qov-main,.qov-sticky-tools,.qov-nav-stack,.qov-search-shell,.qov-resume-stack,.qov-filter-row,#quranSurahGrid) {
+  max-width:100%!important;
+  min-width:0!important;
+  box-sizing:border-box!important;
+}
+html.dar-test-side-nav body.is-quran-overview .qov-main {
+  width:min(980px,calc(100% - 24px))!important;
+  margin-inline:auto!important;
+}
+/* Fixed reader chrome must also stop before the reserved rail lane. */
+html.dar-test-side-nav[data-dar-nav-position="right"] body.is-quran-reader-route :is(.qrc-chrome,#darQuranMiniPlayer) {
+  left:0!important;
+  right:calc(var(--dar-side-nav-reserve) + env(safe-area-inset-right,0px))!important;
+  width:auto!important;
+  max-width:none!important;
+}
+html.dar-test-side-nav[data-dar-nav-position="left"] body.is-quran-reader-route :is(.qrc-chrome,#darQuranMiniPlayer) {
+  left:calc(var(--dar-side-nav-reserve) + env(safe-area-inset-left,0px))!important;
+  right:0!important;
+  width:auto!important;
+  max-width:none!important;
+}
+html.dar-test-side-nav[data-dar-nav-position="right"] body.is-quran-reader-route .qrc-context-bar.qrc-context-bar--dock {
+  left:calc((100vw - var(--dar-side-nav-reserve) - env(safe-area-inset-right,0px))/2)!important;
+  width:min(760px,calc(100vw - var(--dar-side-nav-reserve) - 28px))!important;
+}
+html.dar-test-side-nav[data-dar-nav-position="left"] body.is-quran-reader-route .qrc-context-bar.qrc-context-bar--dock {
+  left:calc((100vw + var(--dar-side-nav-reserve) + env(safe-area-inset-left,0px))/2)!important;
+  width:min(760px,calc(100vw - var(--dar-side-nav-reserve) - 28px))!important;
+}
+/* Compact portrait and keyboard view: the side class is removed in JS;
+ * all legacy bottom navigation styling stays untouched. */
+@media(prefers-reduced-motion:reduce) {
+  html.dar-test-side-nav #bottomNav.bottom-nav {transition:none!important}
+}
