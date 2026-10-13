@@ -423,8 +423,11 @@ jobs:
                   "flash-inline-master-rules-kids-v1" if model_id=="eleven_flash_v2_5" else
                   (DICT_ID+"|"+DICT_VERSION)
               )
+              # Quiz TTS fragments must not be cached across different voice IDs.
+              # Leave established Duʿāʾ cache fingerprints untouched.
+              master_cache_voice=ELEVEN_VOICE if profile.startswith("quiz") else ""
               digest=hashlib.sha1(
-                  (revision+"|"+str(model_id)+"|"+profile+"|"+dictionary_fingerprint+"|"+prepared).encode("utf-8")
+                  (revision+"|"+str(model_id)+"|"+master_cache_voice+"|"+profile+"|"+dictionary_fingerprint+"|"+prepared).encode("utf-8")
               ).hexdigest()[:16]
               target=asset_dir/(digest+".m4a")
               if target.exists() and target.stat().st_size>1200:
@@ -775,6 +778,7 @@ jobs:
                       "qaApproval":("pending-native-listening" if is_arabic else "technical-qa-complete"),
                       "voiceProfileId":"serhat-owner-voice-2026",
                       "sourceVoice":"authorized-owner-voice",
+                      "sourceVoiceId":ELEVEN_VOICE,
                       "sourceType":"owner-voice-generated",
                       "sourceProvider":"DĀR Voice Studio",
                       "sourceSpeaker":"Serhat Abu Malik",
