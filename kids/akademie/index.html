@@ -3822,7 +3822,7 @@ body:not([data-academy-view="lesson"]):not([data-embedded="true"]) > main.wrap >
 <script src="/kids/akademie/curriculum-v35.js?v=20261013-35"></script>
 <script src="/kids/akademie/curriculum-v36.js?v=20261013-36"></script>
 <script src="/kids/akademie/curriculum-v37.js?v=20261013-37"></script>
-<script src="/kids/akademie/curriculum-v38.js?v=20261013-38"></script>
+<script src="/kids/akademie/curriculum-v38.js?v=20261013-38-editorial"></script>
 <script src="/kids/akademie/term-coach-v24.js?v=20261011-01"></script>
 <script src="/kids/akademie/school-progress-v11.js?v=20261012-30"></script>
 <script>
@@ -4357,7 +4357,7 @@ function applySelectedLesson(){
  const lesson=activeLesson(),ui=AGE_UI[age],blocks=all('[data-lesson-step="2"] .lesson-source-block'),qBlock=blocks[0],hadithBlock=blocks[1];
  const verse=qBlock.querySelector(".arabic-verse"),listen=qBlock.querySelector("[data-arabic-audio]");
  if(!lesson){
-  hadithBlock.hidden=false;hadithBlock.style.display="";$("#evidenceTitle").textContent="Was lernen wir aus den Quellen?";
+  hadithBlock.hidden=false;hadithBlock.style.display="";$("#evidenceTitle").textContent="Was lernen wir aus den Quellen?";$('[data-lesson-step="2"] .kicker').textContent="Schritt 3 · Qurʾān und Sunnah";
   $("#lessonWelcomeBody").textContent=ui.welcomeBody;$("#welcomeTitle").textContent="Schön, dass du da bist!";
   $("#explainTitle").textContent="Wahrhaftigkeit verstehen";$("#evidenceLead").textContent=ui.evidenceLead;
   qBlock.querySelector(".eyebrow").textContent="Qurʾān · Sūrat at-Tawbah · Vers 119";
@@ -4386,6 +4386,7 @@ function applySelectedLesson(){
  all("#explainWords [data-spoken]").forEach((el,i)=>el.textContent=(ageTeaching?.lines||lesson.lines)[i]);
  const hasLessonHadith=!!lesson.hadith?.text&&!/kein nummerierter Hadith als Beleg/i.test(lesson.hadith?.source||"");
  hadithBlock.hidden=!hasLessonHadith;hadithBlock.style.display=hasLessonHadith?"":"none";
+ $('[data-lesson-step="2"] .kicker').textContent=hasLessonHadith?"Schritt 3 · Qurʾān und Sunnah":"Schritt 3 · Qurʾān";
  $("#evidenceTitle").textContent=hasLessonHadith?"Was lernen wir aus den Quellen?":"Was lernen wir aus dem Qurʾān?";
  $("#evidenceLead").textContent=hasLessonHadith?(age==="4-5"?"Wir hören einen Qurʾān-Vers und lernen eine Überlieferung kennen.":"Wir verstehen die Belege für "+lesson.topic+"."):"Wir entdecken, was uns der Qurʾān zu diesem Thema lehrt.";
  qBlock.querySelector(".eyebrow").textContent="Qurʾān · "+q.label;
