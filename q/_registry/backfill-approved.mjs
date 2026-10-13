@@ -18,7 +18,7 @@ function validUrl(value){
  }catch{return false;}
 }
 const reg=JSON.parse(fs.readFileSync(registryFile,"utf8"));
-const items=(fs.existsSync(folder)?fs.readdirSync(folder):[]).filter(n=>n.endsWith(".json")).sort().map(n=>JSON.parse(fs.readFileSync(path.join(folder,n),"utf8")))).filter(x=>x.approved===true);
+const items=(fs.existsSync(folder)?fs.readdirSync(folder):[]).filter(n=>n.endsWith(".json")).sort().map(n=>JSON.parse(fs.readFileSync(path.join(folder,n),"utf8"))).filter(x=>x.approved===true);
 const checked=[];
 for(const x of items){
  const r=x.review||{};
