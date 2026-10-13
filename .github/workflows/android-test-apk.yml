@@ -90,3 +90,69 @@ jobs:
             dist/SHA256SUMS.txt
           if-no-files-found: error
           retention-days: 14
+
+  emulator:
+    name: Android Emulator · render + tap + rotate
+    needs: apk
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: actions/download-artifact@v4
+        with:
+          name: dar-test-android-apk
+          path: android-test-ci
+      - name: Enable Android emulator acceleration
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -e /dev/kvm
+          sudo chmod 666 /dev/kvm
+      - name: Install, open and exercise test navigation
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 35
+          target: google_apis
+          arch: x86_64
+          profile: pixel_6
+          disable-animations: true
+          emulator-boot-timeout: 750
+          script: |
+            set -euo pipefail
+            mkdir -p android-test-ci/emulator-evidence
+            test -s android-test-ci/dar-test-android.apk
+            adb install -r android-test-ci/dar-test-android.apk
+            adb logcat -c
+            adb shell am start -W -n de.daraltawhid.testapp/.TestActivity --ez dar_test_smoke true
+            sleep 27
+            adb logcat -d -v time -s DarTestSmoke:V AndroidRuntime:E chromium:E > android-test-ci/emulator-evidence/logcat.txt
+            adb exec-out screencap -p > android-test-ci/emulator-evidence/portrait.png
+            cat android-test-ci/emulator-evidence/logcat.txt | tail -60
+            adb shell pidof de.daraltawhid.testapp
+            grep -Eq 'WEB_READY=true|FINAL_WEB_READY=true' android-test-ci/emulator-evidence/logcat.txt
+            grep -q 'TAP_TARGET_CLEAR=true' android-test-ci/emulator-evidence/logcat.txt
+            ! grep -q 'FATAL EXCEPTION' android-test-ci/emulator-evidence/logcat.txt
+            adb shell settings put system accelerometer_rotation 0
+            adb shell settings put system user_rotation 1
+            sleep 5
+            adb exec-out screencap -p > android-test-ci/emulator-evidence/landscape.png
+            adb shell settings put system user_rotation 0
+            sleep 5
+            adb exec-out screencap -p > android-test-ci/emulator-evidence/back-portrait.png
+            adb shell pidof de.daraltawhid.testapp
+            echo "Verified real Android startup, clickable nav target and rotation."
+      - name: Preserve evidence even on emulator failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-test-android-emulator-evidence
+          path: android-test-ci/emulator-evidence/
+          if-no-files-found: warn
+          retention-days: 7
