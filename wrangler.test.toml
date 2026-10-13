@@ -22,7 +22,9 @@ directory = "."
 binding = "ASSETS"
 # Owner-only QA files must always pass the Worker auth check BEFORE static assets.
 # Keep every other Dar Test/KIDS/visitor asset on its existing delivery path.
-run_worker_first = ["/test/academy", "/test/academy/*", "/test/kids/akademie", "/test/kids/akademie/*"]
+# Only Dar Test HTML is rewritten by the test Worker (Duos sidebar injection).
+# Kids, visitor, and ordinary /test/assets/* remain on static delivery.
+run_worker_first = ["/test", "/test/", "/test/index.html", "/test/academy", "/test/academy/*", "/test/kids/akademie", "/test/kids/akademie/*"]
 
 # Workers AI: Qurʾān-Wortprüfung im Kids-Lernmodus.
 [ai]
