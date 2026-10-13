@@ -260,6 +260,36 @@
       ],
       "sourceScriptFileId": "1c9HjTcjD8UQC2xrAV8Utr2Fm9ce89dQ1",
       "caution": "Fixes sampled signed sclera penetration but worsens median eye-to-lid distance; visual identity, full collision, rig, animation, fiqh, staging and device gates remain blocked. Do not replace protected V18/V19 or publish."
+    },
+    "girlV20DualSurfaceAudit20261013": {
+      "sourceGlbSha256": "c86e958bca638ca4e1d602994fec905c6c7fcf311769d0a16610357960bbf16a",
+      "realGlbRead": true,
+      "geometryCount": 223,
+      "skins": 0,
+      "animations": 0,
+      "eyeLidMeshCount": 4,
+      "eyelidVerticesEach": 495,
+      "watertightLids": 4,
+      "scleraPenetrationBelowMinus0_5mmPerLid": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "faceOccludedMoreThan0_5mmPerLid": [
+        133,
+        354,
+        133,
+        354
+      ],
+      "allFrontFaceVisible": false,
+      "originalIdentityApproved": false,
+      "humanVisualApproved": false,
+      "religiousApproved": false,
+      "productionReady": false,
+      "releaseGatesApproved": 0,
+      "code": "kids/mein-gebet/rigging/qa_girl_v20_dual_surface_20261013.py",
+      "note": "Independent unchanged V20 binary test confirms no sclera penetration above 0.5 mm, but significant front-face occlusion; vertex/ray metrics are not an anatomical or calibrated visual sign-off. Do not shift entire lids forward or modify protected original meshes without visual calibration."
     }
   }
 }
