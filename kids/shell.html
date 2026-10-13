@@ -6908,7 +6908,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     try{
       var resumeProfileTab=sessionStorage.getItem("kids.profile.restoreTab")||"";
       sessionStorage.removeItem("kids.profile.restoreTab");
-      if(/^view-(today|stories|quran|parents)$/.test(resumeProfileTab)){
+      if(/^view-(today|stories|salaf|quran|parents)$/.test(resumeProfileTab)){
         var targetTab=document.querySelector('.nav-btn[data-target="'+resumeProfileTab.slice(5)+'"]');
         if(targetTab)requestAnimationFrame(function(){targetTab.click()});
       }
@@ -6944,12 +6944,12 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/dua-smart-learn.js?v=1312"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306-listen-scroll-v18-salaf-visible-v1355";
+  var KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306-listen-scroll-v18-salaf-visible-v1360";
   // Stable start: do not reload a visible app when a service worker takes control.
   // The next navigation uses network-first and receives the latest release.
   if("serviceWorker" in navigator){
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1355",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1360",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     },{once:true});
@@ -6962,6 +6962,49 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
         if(live&&live!==KIDS_BUILD_ID)window.DARKidsUpdateAvailable=live;
       }).catch(function(){});
   },{once:true});
+
+  // Update only the Salaf page upon returning to a long-running iOS PWA.
+  // Never reload Today, Salah, an open story, or any other playback screen.
+  var refreshingSalaf=false;
+  function salafVisible(){
+    var view=document.getElementById("view-salaf");
+    return !!(view&&view.classList.contains("active"));
+  }
+  function refreshSalafIfStale(){
+    if(refreshingSalaf||!salafVisible()||navigator.onLine===false)return;
+    if(document.documentElement.classList.contains("salaf-detail-open"))return;
+    refreshingSalaf=true;
+    fetch("/kids/version.json?salaf-fresh="+Date.now(),{cache:"no-store"})
+      .then(function(r){return r.ok?r.json():null})
+      .then(function(v){
+        var live=String(v&&v.buildId||"");
+        if(!live||live===KIDS_BUILD_ID)return;
+        var prior=sessionStorage.getItem("kids.salaf.refreshedBuild")||"";
+        if(prior===live)return;
+        sessionStorage.setItem("kids.salaf.refreshedBuild",live);
+        sessionStorage.setItem("kids.profile.restoreTab","view-salaf");
+        location.replace("/kids/start.html?salaf-release="+encodeURIComponent(live));
+      }).catch(function(){}).finally(function(){refreshingSalaf=false});
+  }
+  document.addEventListener("click",function(event){
+    if(event.target.closest&&event.target.closest('.nav-btn[data-target="salaf"]')){
+      setTimeout(refreshSalafIfStale,80);
+    }
+  },true);
+  document.addEventListener("visibilitychange",function(){
+    if(document.visibilityState==="visible")refreshSalafIfStale();
+  });
+  window.addEventListener("pageshow",function(){refreshSalafIfStale()});
+  // Direct deep link for people who still have an earlier app loaded in memory.
+  if(new URL(location.href).searchParams.has("salaf-release")||
+     new URL(location.href).searchParams.get("open")==="salaf"){
+    window.addEventListener("load",function(){
+      setTimeout(function(){
+        if(document.getElementById("profileJoin")?.hidden===false)return;
+        document.querySelector('.nav-btn[data-target="salaf"]')?.click();
+      },220);
+    },{once:true});
+  }
 })();
 </script>
 
@@ -11634,7 +11677,7 @@ html body .app:has(#view-parents.view.active) .shell{
 <script defer src="/kids/girls-profile-theme-v1332.js?v=1348" data-kids-girls-system-tint="1332"></script>
 <!-- KIDS_SALAF_LIBRARY_V1: fifth tab, isolated source-gated library; after other profile palettes -->
 <link rel="stylesheet" href="/kids/salaf-library-v1.css?v=1">
-<script defer src="/kids/salaf-library-v1.js?v=1355"></script>
+<script defer src="/kids/salaf-library-v1.js?v=1360"></script>
 <!-- KIDS_OFFLINE_LIBRARY_V1: independent storage controls for the Parents tab -->
 <script defer src="/kids/offline-library-v1.js?v=1"></script>
 <!-- KIDS_SALAH_STAGE_V1261: placed after hero, before continue-listening -->
@@ -11679,5 +11722,5 @@ html body :is(
 /* Do not change touch-action, pointer-events, scrolling, tap targets, focus or keyboard editing. */
 </style>
 <!-- KIDS_SALAF_OPEN_WORLD_V1353: Salaf-only filmic full-bleed, profile-aware. Do not touch Home or floating dock. -->
-<link rel="stylesheet" href="/kids/salaf-open-world-v1353.css?v=1355">
+<link rel="stylesheet" href="/kids/salaf-open-world-v1353.css?v=1360">
 </html>
