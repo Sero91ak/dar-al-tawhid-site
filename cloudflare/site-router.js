@@ -1180,6 +1180,12 @@ export default {
                 '<script src="/assets/q-source-app-view.js?v=20261013-1" defer></script>' +
                 '</head>');
             }
+            // Future Q pages may already link Royal CSS. The in-app route
+            // handler must still be injected exactly once in those pages.
+            if (!documentHtml.includes("q-source-app-view.js") && /<\\/head>/i.test(documentHtml)) {
+              documentHtml = documentHtml.replace(/<\\/head>/i,
+                '<script src="/assets/q-source-app-view.js?v=20261013-1" defer></script></head>');
+            }
             headers.set("Content-Type", "text/html; charset=utf-8");
             headers.set("X-DAR-Q-Layout", "royal-manuscript-v42");
             return new Response(documentHtml, { status: asset.status,
