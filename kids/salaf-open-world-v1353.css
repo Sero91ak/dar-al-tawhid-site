@@ -338,3 +338,77 @@
 @media(prefers-reduced-motion:reduce){
   #view-salaf .salaf-topic{transition:none!important}
 }
+
+
+/* Salaf V1370 — Visual narrative. Topic detail replaces duplicated chrome;
+   each category is its own full-bleed scene, with a short age-aware prompt. */
+#view-salaf[data-topic-open="true"] > .salaf-hero,
+#view-salaf[data-topic-open="true"] .salaf-intro,
+#view-salaf[data-topic-open="true"] .salaf-switch {display:none!important}
+#view-salaf[data-topic-open="true"] > .salaf-wrap{
+  width:100%!important;max-width:none!important;padding:0 0 45px!important
+}
+#view-salaf .salaf-topic-stage {
+  position:relative;isolation:isolate;display:flex;flex-direction:column;
+  justify-content:space-between;box-sizing:border-box;overflow:hidden;
+  min-height:clamp(390px,68vh,680px);
+  width:100vw;max-width:none;margin:0;
+  padding:calc(max(env(safe-area-inset-top,0px),18px) + 42px) clamp(20px,5vw,52px) 44px;
+  background:#203b3e;
+}
+#view-salaf .salaf-topic-stage:before{content:"";position:absolute;inset:0;z-index:-2;
+  background-image:var(--salaf-stage-art);background-position:center 44%;background-size:cover;background-repeat:no-repeat}
+#view-salaf .salaf-topic-stage:after{content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(180deg,rgba(8,21,28,.43),transparent 24%,rgba(8,24,30,.04) 44%,rgba(5,23,33,.89) 100%)}
+.app[data-gender="girl"] #view-salaf .salaf-topic-stage:after,
+#view-salaf[data-profile="girl"] .salaf-topic-stage:after{
+ background:linear-gradient(180deg,rgba(34,19,38,.44),transparent 24%,rgba(40,20,40,.07) 43%,rgba(42,23,48,.91) 100%)
+}
+#view-salaf .salaf-topic-back{
+ align-self:flex-start;min-height:53px;border-radius:999px;
+ color:#fff8ee!important;font-size:clamp(15px,3.8vw,18px);font-weight:900;
+ padding:11px 18px;background:rgba(8,24,31,.58)!important;
+ border:1px solid rgba(255,245,220,.41)!important;
+ backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+}
+#view-salaf .salaf-topic-stage-copy{max-width:720px}
+#view-salaf .salaf-topic-stage-copy .salaf-eyebrow{color:var(--salaf-glow)!important}
+#view-salaf .salaf-topic-stage-copy h3{
+ color:#fff8f2!important;font-size:clamp(37px,9vw,68px)!important;
+ margin:7px 0!important;line-height:1.04!important;letter-spacing:-.035em!important;
+ text-shadow:0 2px 14px rgba(0,0,0,.2);
+}
+#view-salaf .salaf-topic-stage-copy p{
+ color:#fff9f0!important;font-size:clamp(17px,4vw,24px)!important;
+ margin:0!important;line-height:1.35!important;font-weight:760!important;
+}
+#view-salaf .salaf-topic-thought{
+ padding:clamp(21px,5.3vw,40px) clamp(20px,5.2vw,52px) 8px;
+ display:grid;gap:13px;max-width:960px;margin-inline:auto;
+}
+#view-salaf .salaf-topic-kicker{
+ color:var(--salaf-glow)!important;font-size:clamp(12px,3vw,15px);
+ letter-spacing:.09em;font-weight:950;
+}
+#view-salaf .salaf-topic-thought p{
+ font-size:clamp(18px,4vw,24px)!important;line-height:1.5!important;
+ color:var(--salaf-ink)!important;margin:0!important;
+}
+#view-salaf .salaf-topic-thought strong{
+ font-size:clamp(19px,4.25vw,27px);line-height:1.4;
+ font-weight:930;color:var(--salaf-glow)!important;
+}
+#view-salaf[data-topic-open="true"] .salaf-results{
+ max-width:960px;margin:3px auto 0!important;padding-inline:clamp(20px,5.2vw,52px);
+}
+#view-salaf .salaf-topic-note{border-top:1px solid var(--salaf-stroke)!important;
+ font-size:clamp(14px,3.4vw,16px)!important;font-weight:600!important}
+#view-salaf .salaf-topic{
+ min-height:clamp(185px,46vw,248px)!important;
+}
+#view-salaf .salaf-topic-image{filter:saturate(1.03) contrast(1.02) brightness(1.03)!important;}
+.app[data-gender="girl"] #view-salaf .salaf-topic-image,
+#view-salaf[data-profile="girl"] .salaf-topic-image{filter:saturate(.95) contrast(1.02) brightness(1.02)!important;}
+#view-salaf .salaf-topic:after{background:linear-gradient(180deg,transparent 0%,rgba(6,18,24,.03) 38%,rgba(4,21,29,.87) 100%)!important;}
+#view-salaf .salaf-topic-copy strong{font-size:clamp(18px,4.35vw,25px)!important}
+#view-salaf .salaf-topic-copy small{font-size:clamp(13px,3.1vw,16px)!important}
