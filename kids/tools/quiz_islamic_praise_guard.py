@@ -2,6 +2,7 @@
 """No-credit Islamic Academy feedback QA for every KIDS quiz age band."""
 from __future__ import annotations
 import json
+import hashlib
 from pathlib import Path
 from quiz_joy_v4_script import prepare, SUCCESS, RETRY
 
@@ -52,4 +53,22 @@ if 'feedback.textContent=""' in feedback_scope:
 worker=(ROOT/"kids/sw.js").read_text(encoding="utf-8")
 if "quiz-v4-bridge.js?v=20261013-academy1" not in worker or "quiz-v4-bridge.js?v=20261013-academy1" not in html:
     raise SystemExit("KIDS: Islamic voice bridge cache revision mismatch")
+# A paid V4 master-take already exists on this review branch.
+# Verify its actual MP3/M4A files; never mark a generated take as listening approved.
+review=ROOT/"kids/data/quiz-v4-islamic-praise-second-review.json"
+if review.is_file():
+    take=json.loads(review.read_text(encoding="utf-8"))
+    assert take["modelId"]=="eleven_v4", "Wrong praise audio model"
+    assert take["voiceId"]=="DkU7j9uO4ZEtLD2iRZSH", "Wrong master voice"
+    assert take["audioListeningApproved"] is False and take["published"] is False, "Pilot must not auto-publish"
+    assert take["text"] in SUCCESS[take["ageBand"]], "Recorded phrase no longer matches active learning text"
+    mp3=ROOT/take["originalMp3Path"].lstrip("/")
+    m4a=ROOT/take["reviewM4aPath"].lstrip("/")
+    if not (mp3.is_file() and mp3.stat().st_size>2000):
+        raise SystemExit("Original paid V4 MP3 not preserved")
+    if not (m4a.is_file() and m4a.stat().st_size>2000):
+        raise SystemExit("V4 review M4A missing or too small")
+    if hashlib.sha256(m4a.read_bytes()).hexdigest()!=take["sha256"]:
+        raise SystemExit("V4 praise review sound SHA256 mismatch")
+    print("PASS: existing original V4 praise and review file intact; not yet approved or published.")
 print("PASS: 900 KIDS questions, 15 Islamic blessings + 15 gentle retries; all 3 apps consistent, readable, no paid credits.")
