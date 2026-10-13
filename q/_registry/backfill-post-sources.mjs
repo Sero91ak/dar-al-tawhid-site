@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // DAR AL TAWHID: inspect EVERY canonical adult post without changing the visitor app.
 // Modes: --audit (inventory only), --prepare (inventory + review drafts).
-// Publication is deliberately delegated to publish-reviewed-sources.mjs.
+// Publication is deliberately delegated to backfill-approved.mjs.
 import fs from "node:fs";
 import path from "node:path";
 
