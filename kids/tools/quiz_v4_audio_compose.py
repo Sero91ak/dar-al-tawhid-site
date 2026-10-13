@@ -18,8 +18,8 @@ JOIN_REVISION = "quiz-v4-phrase-audio-v1"
 PAUSE_SECONDS = 0.24
 
 
-def composed_digest(full_text: str, voice_id: str, model_id: str, profile: str) -> str:
-    payload = "\n".join((JOIN_REVISION, voice_id, model_id, profile, full_text))
+def composed_digest(full_text: str, voice_id: str, model_id: str, profile: str, recipe_revision: str = "") -> str:
+    payload = "\n".join((JOIN_REVISION, voice_id, model_id, profile, recipe_revision, full_text))
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()[:24]
 
 
@@ -34,6 +34,7 @@ def compose_clips(
     voice_id: str,
     model_id: str,
     profile: str,
+    recipe_revision: str,
     output_dir: pathlib.Path,
     synth_part: Callable[[str], pathlib.Path],
     read_duration: Callable[[pathlib.Path], float],
@@ -48,7 +49,7 @@ def compose_clips(
         raise ValueError("Phrase composition requires two or more non-empty sentences")
     if " ".join(s.strip() for s in segments) != full_text:
         raise ValueError("Phrase text differs from the exact quiz manifest key")
-    target = output_dir / (composed_digest(full_text, voice_id, model_id, profile) + ".m4a")
+    target = output_dir / (composed_digest(full_text, voice_id, model_id, profile, recipe_revision) + ".m4a")
     output_dir.mkdir(parents=True, exist_ok=True)
     if target.exists() and target.stat().st_size > 1200:
         length = read_duration(target)
