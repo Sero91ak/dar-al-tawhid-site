@@ -1,0 +1,81 @@
+name: KIDS Quiz 002 - recover already paid V4 history (review only)
+# Strictly read-only API access: history GET, NEVER TTS generation.
+# Trigger only when this workflow/recovery script is updated on the isolated review branch.
+on:
+  push:
+    branches:
+      - review/kids-v4-pilot-002-import-20261013
+    paths:
+      - .github/workflows/kids-v4-002-recover-paid-history.yml
+      - kids/tools/recover_v4_pilot_002_history.py
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: kids-v4-002-history-readonly-review
+  cancel-in-progress: false
+jobs:
+  recover:
+    if: github.ref == 'refs/heads/review/kids-v4-pilot-002-import-20261013'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: review/kids-v4-pilot-002-import-20261013
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify zero-charge importer and recovery scripts
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/recover_v4_pilot_002_history.py kids/tools/import_quiz_v4_pilot_002.py
+          python3 - <<'PY'
+          from pathlib import Path
+          script=Path("kids/tools/recover_v4_pilot_002_history.py").read_text()
+          assert 'method="GET"' in script
+          assert "creative_generate" not in script and 'method="POST"' not in script
+          assert "META.exists()" in script and "model_id" in script and "voice_id" in script
+          print("PASS: history GET only; refuses wrong voice/model or replacing originals")
+          PY
+      - name: Ensure FFmpeg is available without TTS
+        run: |
+          set -euo pipefail
+          if command -v ffmpeg >/dev/null 2>&1; then exit 0; fi
+          python3 -m pip install -q --disable-pip-version-check imageio-ffmpeg==0.6.0
+          mkdir -p "$HOME/.local/bin"
+          python3 - <<'PY'
+          import imageio_ffmpeg
+          from pathlib import Path
+          dest=Path.home()/".local/bin/ffmpeg"
+          dest.symlink_to(imageio_ffmpeg.get_ffmpeg_exe())
+          PY
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - name: Restore original paid recordings or stop safely
+        run: |
+          set -euo pipefail
+          python3 kids/tools/recover_v4_pilot_002_history.py
+      - name: Archive ORIGINALS for review only
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-paid-v4-quiz-002-originals-review-${{ github.run_id }}
+          path: |
+            kids/assets/kids-quiz-audio/pilot-002-v4-review/*.mp3
+            kids/data/quiz-v4-pilot-002-recovered-review.json
+          retention-days: 14
+          if-no-files-found: error
+      - name: Preserve files on review branch, never publish to live quiz manifest
+        if: success()
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add kids/assets/kids-quiz-audio/pilot-002-v4-review/ kids/data/quiz-v4-pilot-002-recovered-review.json
+          git diff --cached --quiet && exit 0
+          git commit -m "review(kids-quiz): preserve three recovered paid V4 originals and merged pilot #002"
+          git pull --rebase origin review/kids-v4-pilot-002-import-20261013
+          git push origin HEAD:review/kids-v4-pilot-002-import-20261013
