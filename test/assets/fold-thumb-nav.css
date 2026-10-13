@@ -1393,9 +1393,9 @@ html.dar-test-side-nav body :is(.dar-fold__rail,.prophets-rail,.qov-nav-stack,.p
  * This prevents the rail jumping from the edge to the center on tap.
  */
 html.dar-test-side-nav {
-  --dar-side-nav-size:92px!important;
-  --dar-duos-rail-width:92px!important;
-  --dar-side-nav-reserve:124px!important;
+  --dar-side-nav-size:100px!important;
+  --dar-duos-rail-width:100px!important;
+  --dar-side-nav-reserve:136px!important;
   --dar-side-content-gap:16px!important;
 }
 html.dar-test-side-nav > #bottomNav.bottom-nav,
@@ -1407,14 +1407,14 @@ html[data-theme].dar-test-side-nav > #bottomNav.bottom-nav {
   justify-content:space-between!important;
   top:var(--dar-duos-rail-top,36px)!important;
   bottom:auto!important;
-  width:92px!important;
-  min-width:92px!important;
-  max-width:92px!important;
+  width:100px!important;
+  min-width:100px!important;
+  max-width:100px!important;
   height:var(--dar-duos-rail-height,348px)!important;
   min-height:0!important;
   max-height:calc(100dvh - 24px)!important;
-  padding:11px 12px!important;
-  gap:9px!important;
+  padding:10px 12px!important;
+  gap:8px!important;
   margin:0!important;
   margin-inline:0!important;
   box-sizing:border-box!important;
@@ -1448,15 +1448,15 @@ html[data-theme].dar-test-side-nav[data-dar-nav-position="left"] > #bottomNav.bo
 html.dar-test-side-nav > #bottomNav.bottom-nav .bottom-nav-btn,
 html[data-theme].dar-test-side-nav > #bottomNav.bottom-nav .bottom-nav-btn {
   position:relative!important;
-  flex:0 0 58px!important;
+  flex:0 0 62px!important;
   display:grid!important;
   place-items:center!important;
-  width:66px!important;
-  min-width:66px!important;
-  max-width:66px!important;
-  height:58px!important;
-  min-height:58px!important;
-  max-height:58px!important;
+  width:74px!important;
+  min-width:74px!important;
+  max-width:74px!important;
+  height:62px!important;
+  min-height:62px!important;
+  max-height:62px!important;
   box-sizing:border-box!important;
   margin:0!important;
   padding:2px!important;
@@ -1470,12 +1470,12 @@ html.dar-test-side-nav > #bottomNav.bottom-nav .bottom-nav-btn .nav-icon,
 html[data-theme].dar-test-side-nav > #bottomNav.bottom-nav .bottom-nav-btn .nav-icon {
   display:grid!important;
   place-items:center!important;
-  width:52px!important;
-  min-width:52px!important;
-  max-width:52px!important;
-  height:52px!important;
-  min-height:52px!important;
-  max-height:52px!important;
+  width:56px!important;
+  min-width:56px!important;
+  max-width:56px!important;
+  height:56px!important;
+  min-height:56px!important;
+  max-height:56px!important;
   margin:auto!important;
   padding:0!important;
   overflow:visible!important;
@@ -1487,12 +1487,12 @@ html[data-theme].dar-test-side-nav > #bottomNav.bottom-nav .bottom-nav-btn .nav-
 html.dar-test-side-nav > #bottomNav.bottom-nav .nav-icon img.dar3d-icon,
 html[data-theme].dar-test-side-nav > #bottomNav.bottom-nav .nav-icon img.dar3d-icon {
   display:block!important;
-  width:52px!important;
-  height:52px!important;
-  min-width:52px!important;
-  min-height:52px!important;
-  max-width:52px!important;
-  max-height:52px!important;
+  width:56px!important;
+  height:56px!important;
+  min-width:56px!important;
+  min-height:56px!important;
+  max-width:56px!important;
+  max-height:56px!important;
   object-fit:contain!important;
   opacity:1!important;
   visibility:visible!important;
@@ -1517,7 +1517,7 @@ html.dar-test-side-nav body.is-propheten-route #appView {
   width:100%!important;
   max-width:100%!important;
   min-width:0!important;
-  padding-inline:clamp(10px,1.35vw,20px)!important;
+  padding-inline:clamp(18px,2vw,28px)!important;
   margin-inline:0!important;
   box-sizing:border-box!important;
 }
@@ -1547,16 +1547,16 @@ html.dar-test-side-nav body .prophets-pane {
   padding-inline:clamp(12px,1.6vw,24px)!important;
   margin-inline:0!important;
 }
-@media (min-width:1120px) and (min-height:600px) {
+@media (min-width:1260px) and (min-height:600px) {
   html.dar-test-side-nav body .dar-fold[data-fold-mode="dual"],
   html.dar-test-side-nav body .prophets-layout--dual {
     display:grid!important;
-    grid-template-columns:minmax(410px,38%) minmax(0,1fr)!important;
+    grid-template-columns:clamp(460px,42%,560px) minmax(0,1fr)!important;
     column-gap:clamp(14px,1.6vw,24px)!important;
     align-items:start!important;
   }
 }
-@media (max-width:1119px) {
+@media (max-width:1259px) {
   html.dar-test-side-nav body .dar-fold[data-fold-mode="dual"],
   html.dar-test-side-nav body .prophets-layout--dual {
     display:grid!important;
@@ -1577,4 +1577,45 @@ html.dar-test-side-nav body :is(.dar-fold__rail,.prophets-rail)
   :is(h1,h2,h3,input,button) {
   max-width:100%;
   min-width:0;
+}
+
+/* DAR_TEST_NO_SIDE_JUMP_V1385 · canonical test-only viewport guard.
+   The rail is an HTML-level portal, not a child of a scrollable split pane. */
+html[data-theme].dar-test-side-nav[data-dar-nav-position="right"] > #bottomNav.bottom-nav,
+html.dar-test-side-nav[data-dar-nav-position="right"] > #bottomNav.bottom-nav {
+  position:fixed!important;
+  inset:auto max(12px,env(safe-area-inset-right,0px)) auto auto!important;
+  top:var(--dar-duos-rail-top,36px)!important;
+  left:auto!important;
+  width:100px!important;
+  margin-inline:0!important;
+  transform:none!important;
+  -webkit-transform:none!important;
+  transition:none!important;
+}
+html[data-theme].dar-test-side-nav[data-dar-nav-position="left"] > #bottomNav.bottom-nav,
+html.dar-test-side-nav[data-dar-nav-position="left"] > #bottomNav.bottom-nav {
+  position:fixed!important;
+  inset:auto auto auto max(12px,env(safe-area-inset-left,0px))!important;
+  top:var(--dar-duos-rail-top,36px)!important;
+  right:auto!important;
+  width:100px!important;
+  margin-inline:0!important;
+  transform:none!important;
+  -webkit-transform:none!important;
+  transition:none!important;
+}
+/* No more sidewards page shift when the user opens a tab or split detail. */
+html.dar-test-side-nav body {
+  overflow-x:clip!important;
+}
+html.dar-test-side-nav body :is(.dar-fold__rail,.prophets-rail) {
+  overflow-wrap:anywhere;
+}
+@media (max-width:1259px) {
+  html.dar-test-side-nav body .dar-fold[data-fold-mode="dual"] > :is(.dar-fold__rail,.dar-fold__pane),
+  html.dar-test-side-nav body .prophets-layout--dual > :is(.prophets-rail,.prophets-pane) {
+    grid-column:1!important;
+    grid-row:auto!important;
+  }
 }
