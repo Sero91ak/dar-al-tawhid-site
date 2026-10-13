@@ -25,7 +25,7 @@ function verifiedAsset(entry){
 }
 function curriculumIds(){
  const sandbox={window:{}};
- for(const filename of ["kids/akademie/curriculum-v1.js","kids/akademie/curriculum-v2.js","kids/akademie/curriculum-v22.js","kids/akademie/curriculum-v25.js","kids/akademie/curriculum-v26.js","kids/akademie/curriculum-v27.js","kids/akademie/curriculum-v28.js","kids/akademie/curriculum-v29.js","kids/akademie/curriculum-v30.js","kids/akademie/curriculum-v31.js","kids/akademie/curriculum-v32.js","kids/akademie/curriculum-v33.js"]){
+ for(const filename of ["kids/akademie/curriculum-v1.js","kids/akademie/curriculum-v2.js","kids/akademie/curriculum-v22.js","kids/akademie/curriculum-v25.js","kids/akademie/curriculum-v26.js","kids/akademie/curriculum-v27.js","kids/akademie/curriculum-v28.js","kids/akademie/curriculum-v29.js","kids/akademie/curriculum-v30.js","kids/akademie/curriculum-v31.js","kids/akademie/curriculum-v32.js","kids/akademie/curriculum-v33.js","kids/akademie/curriculum-v34.js"]){
   vm.runInNewContext(fs.readFileSync(path.join(ROOT,filename),"utf8"),sandbox,{filename,timeout:1500});
  }
  return Object.keys(sandbox.window.DARKidsAcademyCurriculum||{});
@@ -42,7 +42,7 @@ function audit(){
  const v25=read("kids/data/academy-voice-plan-v25.json");
  const v26=read("kids/data/academy-voice-plan-v26.json");
  const v27=read("kids/data/academy-voice-plan-v27.json");
- const newer=["v28","v29","v30","v31","v32","v33"].map(v=>read("kids/data/academy-voice-plan-"+v+".json"));
+ const newer=["v28","v29","v30","v31","v32","v33","v34"].map(v=>read("kids/data/academy-voice-plan-"+v+".json"));
  for(const pack of newer)if(pack.modelId!==MODEL||pack.voiceProfileId!==PROFILE||pack.lessonCount!==4||pack.phrases.some(p=>p.reviewStatus!=="not-generated"||p.url))throw Error("Unapproved or malformed new audio pack");
  if(main.modelId!==MODEL||sidq.modelId!==MODEL||main.voiceProfileId!==PROFILE||
     sidq.voiceProfileId!==PROFILE||sidq.voiceSettingsProfile!==SETTINGS||
