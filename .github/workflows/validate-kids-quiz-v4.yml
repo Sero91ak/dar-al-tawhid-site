@@ -1,0 +1,49 @@
+name: KIDS Quiz V4 Voice Contract
+on:
+  pull_request:
+    paths:
+      - 'kids/quiz-v4-bridge.js'
+      - 'kids/tools/quiz_joy_v4_script.py'
+      - 'kids/tools/quiz_v4_contract_guard.py'
+      - 'kids/data/quiz-kids.json'
+      - '.github/workflows/build-kids-quiz-owner-voice.yml'
+      - '.github/workflows/validate-kids-quiz-v4.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'kids/quiz-v4-bridge.js'
+      - 'kids/tools/quiz_joy_v4_script.py'
+      - 'kids/tools/quiz_v4_contract_guard.py'
+      - '.github/workflows/build-kids-quiz-owner-voice.yml'
+permissions:
+  contents: read
+jobs:
+  voice-parity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify 900 texts match frontend and V4 generator
+        run: |
+          python3 kids/tools/quiz_v4_contract_guard.py
+          python3 kids/tools/quiz_joy_v4_script.py --pilot --output /tmp/kids-quiz-v4-pilot.json
+          node --check kids/quiz-v4-bridge.js
+      - name: Require credit-safe V4 policy
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          c=json.loads(Path("kids/data/quiz-voice-batch.json").read_text())
+          w=Path(".github/workflows/build-kids-quiz-owner-voice.yml").read_text()
+          assert c["germanModelId"]==c["arabicModelId"]=="eleven_v4"
+          assert c["maxBatchQuestions"]==2
+          assert "ELEVEN_QUIZ_DE_MODEL=\"eleven_v4\"" in w
+          assert "cron: '17 * * * *'" not in w
+          assert "if: false # prohibit automatic V4" in w
+          print("PASS: no auto credit drain and no Flash v2.5 on new quiz renders")
+          PY

@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1352",
+    "serviceWorkerCache": "v1353",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -428,7 +428,10 @@
       "mistakeReview": true,
       "dueReview": true,
       "edgeToEdge": true,
-      "stickyNext": true
+      "stickyNext": true,
+      "audioScriptRevision": "quiz-joy-serhat-v4-20261013",
+      "newAudioPolicy": "eleven-v4-only",
+      "audioProgress": "prefer-manifest-v4-gradual"
     },
     "kidsQuizContentRevision": "001-900",
     "kidsQuizGenerationPaused": true,
