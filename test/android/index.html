@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0a2332">
+<meta name="description" content="DĀR AL TAWḤĪD – DAR TEST auf Android installieren. Testumgebung, getrennt von der Besucher-App.">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<link rel="manifest" href="/test/manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="/test/assets/dar-test-apple-icon-192.png">
+<link rel="apple-touch-icon" href="/test-apple-touch-icon.png">
+<title>DAR TEST · Android installieren</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#071724;color:#f5eedc}
+*{box-sizing:border-box}
+body{margin:0;min-height:100dvh;padding:calc(24px + env(safe-area-inset-top,0px)) max(18px,env(safe-area-inset-right,0px)) calc(38px + env(safe-area-inset-bottom,0px));background:radial-gradient(ellipse at top,#123d4a 0%,#081d2b 48%,#06141e 100%)}
+main{max-width:520px;margin:auto;padding:clamp(17px,5vw,34px);border:1px solid rgba(232,207,154,.2);border-radius:27px;background:rgba(8,29,41,.78);box-shadow:0 15px 50px #0004}
+.head{display:flex;align-items:center;gap:17px}
+.head img{width:82px;height:82px;border-radius:20px;object-fit:cover;box-shadow:0 9px 22px #0008}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:.15em;color:#e4c58b}
+h1{font-size:clamp(25px,6vw,35px);line-height:1.08;letter-spacing:-.025em;margin:9px 0 0}
+p{color:#dae4e4;line-height:1.6}
+.note{border-left:2px solid #bfa372;padding-left:13px;font-size:13px;color:#b9cccd;margin:23px 0}
+a,button{display:flex;width:100%;justify-content:center;align-items:center;min-height:52px;padding:11px 14px;border-radius:14px;font:inherit;font-weight:800;cursor:pointer;text-align:center}
+.primary{border:0;background:#dfc48c;color:#102433;text-decoration:none}
+.secondary{margin-top:11px;background:#122f3d;color:#fff2d5;border:1px solid rgba(227,205,151,.4);text-decoration:none}
+button[hidden]{display:none}
+ol{padding-left:24px;color:#e5e9e7;line-height:1.7}
+li{padding:5px 0}
+section{border-top:1px solid #52657077;margin-top:25px;padding-top:16px}
+small{display:block;font-size:12px;color:#b6c7c9;line-height:1.55}
+a:focus-visible,button:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.status{min-height:24px}
+</style>
+</head>
+<body>
+<main>
+<div class="head">
+<img src="/test/assets/dar-test-apple-icon-192.png" alt="DAR TEST App-Symbol" width="82" height="82">
+<div><span class="eyebrow">DĀR AL TAWḤĪD · INTERNER TEST</span><h1>DAR TEST für Android</h1></div>
+</div>
+<p>Installiere die vorhandene Test-Web-App auf deinem Android-Gerät. Sie läuft wie eine eigenständige Anwendung mit dem DAR-TEST-App-Symbol.</p>
+<button id="install" class="primary" type="button" hidden>Test-App installieren</button>
+<a class="primary" href="/test/?env=staging&source=android">Test-App jetzt öffnen</a>
+<section>
+<h2>Installation mit Google Chrome</h2>
+<ol>
+<li>Öffne diese Seite in <strong>Chrome</strong> auf deinem Android-Gerät.</li>
+<li>Tippe rechts oben auf <strong>⋮</strong>.</li>
+<li>Wähle <strong>„App installieren“</strong> oder <strong>„Zum Startbildschirm hinzufügen“</strong>.</li>
+<li>Öffne <strong>DAR TEST</strong> anschließend über dein App-Symbol.</li>
+</ol>
+<p class="status" id="status" aria-live="polite"></p>
+</section>
+<p class="note">Diese Test-App ist getrennt von der öffentlichen Besucher-App. Neue Änderungen müssen hier geprüft und anschließend bewusst für Live freigegeben werden. Die Kids-Testvorschau ist ein gesonderter Bereich; dieser Installer leitet nicht heimlich in die öffentliche Kids-App um.</p>
+<small>Hinweis: Das Android-Installationsfenster wird vom Browser gesteuert. Falls keine Installationsoption erscheint, zuerst Chrome aktualisieren und die Seite normal (nicht im In-App-Browser) öffnen.</small>
+</main>
+<script>
+(function(){
+"use strict";
+const button=document.getElementById("install"),status=document.getElementById("status");
+let deferred=null;
+window.addEventListener("beforeinstallprompt",function(event){
+  event.preventDefault();deferred=event;
+  button.hidden=false;
+});
+button.addEventListener("click",async function(){
+  if(!deferred)return;
+  const prompt=deferred;deferred=null;button.hidden=true;
+  try{await prompt.prompt();const choice=await prompt.userChoice;
+    status.textContent=choice&&choice.outcome==="accepted"?"Installation angefordert. Öffne DAR TEST über dein App-Symbol.":"Installation nicht bestätigt. Du kannst es jederzeit erneut über Chrome versuchen.";
+  }catch(_){status.textContent="Bitte verwende das Chrome-Menü ⋮ und wähle App installieren.";}
+});
+window.addEventListener("appinstalled",function(){
+  button.hidden=true;status.textContent="DAR TEST wurde installiert.";
+});
+if(window.matchMedia&&window.matchMedia("(display-mode: standalone)").matches){
+  status.textContent="Du verwendest bereits die installierte Web-App.";
+}
+})();
+</script>
+</body>
+</html>

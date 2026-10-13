@@ -124,6 +124,9 @@ jobs:
           }
           NODE
 
+      - name: Verify Android DAR TEST installation
+        run: node test/tools/check-android-install.cjs
+
       - name: Dar Test Health Check
         env:
           GITHUB_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
