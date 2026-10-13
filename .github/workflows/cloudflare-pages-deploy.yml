@@ -40,6 +40,14 @@ on:
       - kids/data/prophet-stories.json
       - kids/data/sahabiyyat-stories.json
       - kids/data/story-hub.json
+      # Salaf master narratives and reader belong to the canonical production Worker.
+      # GitHub Pages alone does not update dar-al-tawhid.de/kids/.
+      - kids/data/salaf-library-v1.json
+      - kids/salaf-library-v1.js
+      - kids/salaf-library-v1.css
+      - kids/salaf-master-v2.css
+      - kids/salaf-open-world-v1353.css
+      - kids/assets/salaf/**
       - kids/assets/prophet-story-audio/**
       - kids/assets/sahabiyyat-story-audio/**
       - kids/owner-voice.js
