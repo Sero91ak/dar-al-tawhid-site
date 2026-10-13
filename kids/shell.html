@@ -2853,7 +2853,7 @@ html:not([data-view="today"]) .view.active{
 <link rel="stylesheet" href="/kids/prophet-stories.css?v=43">
 <link rel="stylesheet" href="/kids/mubashshirun-stories.css?v=29">
 <link rel="stylesheet" href="/kids/sahabiyyat-stories.css?v=7">
-<link rel="stylesheet" href="/kids/story-follow-reader.css?v=10">
+<link rel="stylesheet" href="/kids/story-follow-reader.css?v=11">
 <link rel="stylesheet" href="/kids/story-hub.css?v=12">
 <link rel="stylesheet" href="/kids/section-heroes-v1095.css?v=1256-parent-hero-full">
 <link rel="stylesheet" href="/kids/stories-home-v1133.css?v=1152">
@@ -3496,7 +3496,7 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306";
+const KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306-listen-gradient-v11";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6919,12 +6919,12 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/dua-smart-learn.js?v=1312"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306";
+  var KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306-listen-gradient-v11";
   // Stable start: do not reload a visible app when a service worker takes control.
   // The next navigation uses network-first and receives the latest release.
   if("serviceWorker" in navigator){
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1350",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1351",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     },{once:true});
