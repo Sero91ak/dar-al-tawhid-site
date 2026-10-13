@@ -12,10 +12,19 @@ function isAndroidBrowserRequest(ua) {
   return /\bAndroid\b/i.test(String(ua || "")) && !isNativeAppRequest(ua);
 }
 
+// IOS_PUBLIC_WEBSITE_ONLY_V1: browser navigation on Apple mobile devices
+// always receives the public website. The official App Store WebView
+// has its own user agent and remains outside this restriction.
+function isAppleMobileBrowserRequest(ua) {
+  return /iPhone|iPad|iPod/i.test(String(ua || "")) && !isNativeAppRequest(ua);
+}
+
 function wantsPublicWebsite(request) {
   const ua = String(request.headers.get("User-Agent") || "");
   const url = new URL(request.url);
-  // Installed PWA launches must receive the visitor app shell, not the public desktop website.
+  // iPhone and iPad browser links never activate the deprecated visitor PWA.
+  if (isAppleMobileBrowserRequest(ua)) return true;
+  // Android PWA launches still receive their dedicated application shell.
   if (url.searchParams.get("pwa") === "1") return false;
   // Every normal browser, including Android, receives the public website.
   // Native iOS/Android shells stay on their own app route.
@@ -1277,6 +1286,7 @@ export default {
     const nativeApp = isNativeAppRequest(ua);
     const androidNativeApp = /DarAlTawhidAndroid/i.test(ua);
     const androidBrowser = isAndroidBrowserRequest(ua);
+    const appleMobileBrowser = isAppleMobileBrowserRequest(ua);
     const kidsPath = isKidsPath(url.pathname);
     const kidsRecitationGrade =
       url.pathname === "/kids/api/recitation/grade" ||
@@ -1292,7 +1302,18 @@ export default {
     const legacyPwaLaunch = url.searchParams.get("homescreen") === "1"
       || url.searchParams.get("app") === "1"
       || url.searchParams.get("mobile") === "1";
-    if ((request.method === "GET" || request.method === "HEAD") && isRoot && (url.searchParams.get("pwa") === "1" || legacyPwaLaunch) && !nativeApp) {
+    // Explicit iOS visitor-PWA links are canonicalized to the PUBLIC WEBSITE,
+    // never to /pwa/. Keep the existing native iOS application route intact.
+    if ((request.method === "GET" || request.method === "HEAD") && isRoot &&
+        appleMobileBrowser && (url.searchParams.get("pwa") === "1" || legacyPwaLaunch)) {
+      return new Response(null, { status: 307, headers: {
+        "Location": "/",
+        "Cache-Control": "no-store, max-age=0",
+        "Vary": "User-Agent",
+        "X-Dar-Surface": "ios-website-only"
+      } });
+    }
+    if ((request.method === "GET" || request.method === "HEAD") && isRoot && (url.searchParams.get("pwa") === "1" || legacyPwaLaunch) && !nativeApp && !appleMobileBrowser) {
       const target = new URL(request.url);
       target.pathname = "/pwa/";
       target.searchParams.set("pwa", "1");
@@ -1313,6 +1334,15 @@ export default {
 
     if ((request.method === "GET" || request.method === "HEAD") &&
         (url.pathname === "/pwa" || url.pathname === "/pwa/" || url.pathname === "/pwa/index.html")) {
+      // Apple browser requests cannot reach the Android-only visitor app shell.
+      if (appleMobileBrowser) {
+        return new Response(null, { status: 307, headers: {
+          "Location": "/",
+          "Cache-Control": "no-store, max-age=0",
+          "Vary": "User-Agent",
+          "X-Dar-Surface": "ios-website-only"
+        } });
+      }
       // Workers Static Assets canonicalizes /index.html to /. Fetch the
       // canonical root asset through the binding so /pwa/ receives HTML, not
       // a redirect that escapes into the public desktop website.
