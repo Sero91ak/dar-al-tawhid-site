@@ -190,17 +190,19 @@
     if(!i||!textFor(i))return;closeStory();active=i;
     q("#salafDetailTitle").textContent=i.title;q("#salafDetailPerson").textContent=i.person;
     q("#salafStoryNavTitle").textContent=i.title;
-    var art=safeAsset(i.hero||i.image||"")||"/kids/assets/deen/deen-entry.jpg";
+    var art=safeAsset((gender()==="girl"&&(i.heroGirl||i.hero))||i.hero||i.image||"")||"/kids/assets/deen/deen-entry.jpg";
     q("#salafDetailCover").style.backgroundImage="linear-gradient(0deg,#0a202b 1%,rgba(5,22,32,.08) 85%),url('"+art+"')";
     q("#salafText").innerHTML=textFor(i).split(/\n{2,}/).filter(Boolean).map(function(s){return "<p>"+esc(s)+"</p>"}).join("");
-    q("#salafText").hidden=true;
+    q("#salafText").hidden=!soundFor(i);
     var src=i.sources||[];
     q("#salafRefs").innerHTML=src.map(function(s){var link="";try{var u=new URL(s.url);if(u.protocol==="https:"&&(u.hostname==="islamweb.net"||u.hostname.endsWith(".islamweb.net")))link=u.href}catch(_){}return '<div class="salaf-ref"><strong>'+esc(s.author)+'</strong><span>'+esc(s.work)+" · "+esc(s.reference)+'</span>'+(link?'<a class="salaf-source-link" target="_blank" rel="noopener noreferrer" href="'+esc(link)+'">Originalquelle öffnen ↗</a>':"")+"</div>"}).join("");
     var url=soundFor(i);
     if(url){audio.src=url;audio.preload="metadata";q("#salafAudioStatus").textContent="Deine Hörposition wird automatisch gespeichert."}
     else{audio.removeAttribute("src");audio.load();q("#salafAudioStatus").textContent="Diese Geschichte kannst du schon lesen. Eine Aufnahme gibt es hier bald auch."}
     q("#salafPlay").disabled=!url;q("#salafBack15").disabled=!url;q("#salafNext15").disabled=!url;q("#salafSeek").disabled=!url;
-    q("#salafFollow").disabled=!url;updatePlay();updateTime();
+    q("#salafFollow").disabled=!url;q("#salafFollow").hidden=!url;
+    q(".salaf-player").hidden=!url;
+    q("#salafRead").textContent=url?"Lesen":"Geschichte lesen";updatePlay();updateTime();
     var act=q(".salaf-actions");act.querySelector(".kids-offline-inline")?.remove();
     if(url)window.DARKidsItemDownloads?.storyDetail(act,{category:"salaf",item:i,sourceUrl:MANIFEST,
       artwork:i.image,hero:i.hero||i.image,audioMeta:audioFor(i),readerUrl:"/kids/salaf-library-v1.js?v=2"});
@@ -218,7 +220,7 @@
   reader=window.DARKidsFollowReader?.create({
     id:"salaf-library",audio:audio,
     getContent:function(){var i=active;return {key:i?"salaf:"+i.id:"salaf-library",title:i?.title||"Geschichte",
-      subtitle:i?.person||"Schätze der Salaf",text:textFor(i),artwork:safeAsset(i?.hero||i?.image||""),
+      subtitle:i?.person||"Schätze der Salaf",text:textFor(i),artwork:safeAsset((gender()==="girl"&&i?.heroGirl)||i?.hero||i?.image||""),
       timings:audioFor(i)?.timings||[],audioOnly:false}},
     toggleAudio:toggleAudio,autoOpen:false,disabled:function(){return !soundFor(active)}
   })||null;
@@ -228,7 +230,7 @@
   q("#salafBack15").addEventListener("click",function(){audio.currentTime=Math.max(0,audio.currentTime-15)});
   q("#salafNext15").addEventListener("click",function(){audio.currentTime=Math.min(audio.duration||Infinity,audio.currentTime+15)});
   q("#salafSeek").addEventListener("input",function(e){if(Number(audio.duration))audio.currentTime=Number(e.target.value)*audio.duration/1000});
-  q("#salafRead").addEventListener("click",function(){q("#salafText").hidden=!q("#salafText").hidden;q("#salafText").scrollIntoView({block:"start",behavior:"smooth"})});
+  q("#salafRead").addEventListener("click",function(){q("#salafText").hidden=false;q("#salafText").scrollIntoView({block:"start",behavior:"smooth"})});
   q("#salafFollow").addEventListener("click",function(){reader?.openReadAlong?.()});
   q(".salaf-back").addEventListener("click",closeStory);
   root.addEventListener("click",function(e){
