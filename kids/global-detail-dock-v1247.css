@@ -1168,6 +1168,9 @@ html body .app > .shell {
   overscroll-behavior-y:none!important;
 }
 html body #salafDetail.salaf-detail:not([hidden]) .salaf-detail-scroll,
-html body .modal.open .modal-shell {
+html body .modal.open .modal-shell,
+html body #psModal.ps-modal.open #psScroll,
+html body :is(#msModal,#syModal,#dlModal).ms-modal.open .ms-scroll,
+html body #ghPlayer.open .gh-player-scroll {
   overscroll-behavior-y:none!important;
 }
