@@ -11642,4 +11642,40 @@ html body .app:has(#view-parents.view.active) .shell{
 <!-- KIDS_LISTENING_POLISH_V1350: sub-home & listening-only CSS; nav icons and geometry preserved -->
 <link rel="stylesheet" href="/kids/kids-listening-polish-v1350.css?v=1350">
 <script defer src="/kids/kids-listening-polish-v1350.js?v=1350"></script>
+<!-- KIDS_TOUCH_SELECTION_POLICY_V1354: UI controls never show native text-selection handles; educational text stays selectable. -->
+<style id="kids-touch-selection-policy-v1354">
+/* Scoped to actionable chrome. Do NOT apply to body, .app, reading text, Qur'an verses, Du'a or lessons. */
+html body :is(
+  .bottom-nav, .bottom-nav *,
+  nav, nav *,
+  button, button *,
+  summary, summary *,
+  label, label *,
+  [role="button"], [role="button"] *,
+  [role="tab"], [role="tab"] *,
+  [role="menuitem"], [role="menuitem"] *,
+  [role="option"], [role="option"] *,
+  [role="radio"], [role="radio"] *,
+  [role="checkbox"], [role="checkbox"] *,
+  .choice, .choice *,
+  .quiz-answer, .quiz-answer *,
+  .kids-tap-card, .kids-tap-card *,
+  .kids-touch-control, .kids-touch-control *,
+  .age-tabs, .age-tabs *,
+  [data-go], [data-go] *
+){
+  -webkit-user-select:none!important;
+  user-select:none!important;
+  -webkit-touch-callout:none!important;
+}
+html body :is(
+  .bottom-nav img, .bottom-nav svg,
+  button img, button svg,
+  [role="button"] img, [role="button"] svg,
+  .choice img, .kids-tap-card img
+){
+  -webkit-user-drag:none!important;
+}
+/* Do not change touch-action, pointer-events, scrolling, tap targets, focus or keyboard editing. */
+</style>
 </html>
