@@ -1,0 +1,42 @@
+name: Q Source Backfill Audit (Staging Only)
+on:
+  push:
+    branches:
+      - feature/q-source-backfill-20261013
+    paths:
+      - "q/_registry/backfill-post-sources.mjs"
+      - "q/_registry/backfill-approved.mjs"
+      - "q/_registry/BACKFILL.md"
+      - ".github/workflows/q-source-backfill-audit.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inventory:
+    name: Audit all canonical adult posts (no publish)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Validate migration scripts
+        run: |
+          node --check q/_registry/backfill-post-sources.mjs
+          node --check q/_registry/backfill-approved.mjs
+      - name: Build inventory and editorial review drafts
+        run: node q/_registry/backfill-post-sources.mjs --prepare
+      - name: Validate inventory report
+        run: |
+          node -e 'const f=require("./q/_registry/backfill-audit.json");if(f.scanned!==f.indexedCount||!f.scanned)process.exit(1);console.log(f.summary);'
+          node q/_registry/backfill-approved.mjs --check-reviewed
+      - name: Archive inventory and source review drafts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-adult-q-source-backfill-audit
+          path: |
+            q/_registry/backfill-audit.json
+            q/_registry/backfill-drafts/*.json
+          if-no-files-found: error
+          retention-days: 14
