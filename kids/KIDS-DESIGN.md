@@ -1,3 +1,40 @@
+## Globale, undurchsichtige Detailkopfzeile inklusive iOS-Statusleiste — `KIDS_GLOBAL_STATUS_SAFE_AREA_V1410`
+
+Für **alle** gegenwärtigen und künftigen KIDS-Unterseiten verpflichtend. Die
+obere Leiste soll sich wie die vorhandene Detailnavigation der Ṣaḥābah- und
+Prophetengeschichten anfühlen: ein zusammenhängender blickdichter Kopf,
+mit Original-Zurückpfeil links, Seitentitel/Untertitel daneben und dem
+Edge-to-Edge-Hero unmittelbar **unter** dem Kopf. Beim Scrollen ist weder
+Hero-Bild noch Lesetext **über oder hinter dem sichtbaren Kopf** zu sehen.
+
+Der globale, bereits bestehende body-Portal-Mechanismus bleibt erhalten,
+jedoch muss dessen Kopf an `top:0` beginnen, **nicht** an
+`top:var(--safe-top)`. Das mit `env(safe-area-inset-top)` bemessene
+Status-/Dynamic-Island-Feld liegt **innerhalb derselben opaken Header-Fläche**,
+niemals als externes transparentes Zwischenstück. Die reale Gesamthöhe
+(mit Safe-Area) bestimmt der zentrale Controller und setzt sie als
+`.kids-detail-head-spacer` am ursprünglichen Platz, sodass Hero und Text
+darunter starten. Nach Orientation-/Viewport-Änderung Höhe neu messen.
+Keine doppelten Appbars, keine zweite Statusleiste, keine schwebende Kapsel,
+keine transparente Glasschicht oder verschobenes Hintergrundbild.
+
+**Anwendung:** Der zentrale Standard gilt für jede
+`.view.kids-detail-page > .kids-detail-appbar`; bereits korrekt
+funktionierende Fullscreen-Dialoge behalten ihre eigene feste Leiste und
+ihren Original-Zurück-Handler. Jungen-/Mädchen-Farbvariablen werden aus
+der aktiven Seite übernommen. Floating-3D-Hauptnavigation, Gebetszeiten,
+Audio und die gespeicherten Geschichten bleiben unverändert.
+
+**Abnahme:** Auf iPhone-PWA (inkl. Status-/Dynamic-Island-Bereich),
+Android, Fold/Tablet und Desktop visuell am Start einer Kategorie, nach
+schnellem Scrollen, nach Zurück und nach Geräte-Drehung prüfen. Die
+vorhandene Kids-Design-Guard-Regel muss `top:0`, Safe-Area **im** Header,
+blickdichten Farb-Hintergrund, Linksausrichtung und dynamisch gemessenen
+Platzhalter verifizieren. Automatisierte Codeprüfungen ersetzen keine
+tatsächliche Screenshot-/Scrollprüfung.
+
+---
+
 
 ## Verbindliche globale feste Kopfzeile — `KIDS_GLOBAL_FIXED_DETAIL_V1400`
 

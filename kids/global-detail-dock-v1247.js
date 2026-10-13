@@ -140,7 +140,7 @@ function pinDetailPages(){
     }
     if(bar.parentElement!==document.body){
       bar.classList.add("kids-portal-appbar");
-      bar.dataset.kidsPinnedDetail="v1400";
+      bar.dataset.kidsPinnedDetail="v1410";
       document.body.appendChild(bar);
     }
     const css=getComputedStyle(root);
@@ -175,7 +175,7 @@ function dockSalafStoryHeader(){
   const scroll=detail.querySelector(".salaf-detail-scroll");
   const header=scroll?.querySelector(":scope > .salaf-story-nav");
   if(header){
-    header.dataset.kidsPinnedDetail="v1400";
+    header.dataset.kidsPinnedDetail="v1410";
     detail.insertBefore(header,scroll);
   }
 }
@@ -201,8 +201,14 @@ function start(){
  const mo=new MutationObserver(queue);
  mo.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:["class","aria-hidden"]});
  document.addEventListener("click",queue,true);
+ // The iPhone safe inset can change after rotation, standalone resume or
+ // address-bar transitions. Re-measure the exact fixed-rail height; never
+ // allow hero content to occupy the measured slot.
+ window.addEventListener("resize",queue,{passive:true});
+ window.visualViewport?.addEventListener("resize",queue,{passive:true});
+ window.addEventListener("orientationchange",queue,{passive:true});
  window.addEventListener("pageshow",queue);
- window.DARKidsDetailDock={ready:true,refresh:sync,version:"1400",pinDetailPages};
+ window.DARKidsDetailDock={ready:true,refresh:sync,version:"1410",pinDetailPages};
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
 })();

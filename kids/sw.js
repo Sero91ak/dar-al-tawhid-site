@@ -1,8 +1,8 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1400";
+const CACHE_NAME="dar-al-tawhid-kids-v1410";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 // KIDS_V202_DOWNLOAD_TABS_RELEASE_TRIGGER_20261010: detail-only offline controls; manifest V202 synchronized.
-const KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306-listen-scroll-v18-salaf-visible-v1400";
+const KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306-listen-scroll-v18-salaf-visible-v1410";
 const DUA_AUDIO_RUNTIME="1244";
 // QUIZ_HOME_RESTORE_V1225: refresh installed PWAs with the restored Quiz entry.
 const CORE_PRECACHE=[
@@ -72,10 +72,10 @@ const CORE_PRECACHE=[
   "/kids/deen-learning-v1199.css?v=1199",
   "/kids/deen-lessons.css?v=2",
   "/kids/deen-lessons.js?v=8",
-  "/kids/global-detail-dock-v1247.css?v=1400",
+  "/kids/global-detail-dock-v1247.css?v=1410",
   "/kids/girls-profile-deep-fix-v1339.css?v=1339",
   "/kids/girls-profile-reader-v1340.css?v=1340",
-  "/kids/global-detail-dock-v1247.js?v=1400",
+  "/kids/global-detail-dock-v1247.js?v=1410",
   "/kids/data/deen-lessons.json?v=3",
   "/kids/assets/deen/deen-entry.jpg?v=1206",
   "/kids/assets/deen/tawhid.jpg?v=1206",
@@ -182,7 +182,7 @@ const CORE_PRECACHE=[
   "/kids/assets/dua-3d/home.svg?v=1221",
   "/kids/assets/dua-3d/mosque.svg?v=1221",
   "/kids/assets/dua-3d/shield.svg?v=1221",
-  "/kids/navigation-v1182.js?v=1400",
+  "/kids/navigation-v1182.js?v=1410",
   "/kids/kids-age-typography.css?v=5",
   "/kids/story-library-cards.css?v=9",
   "/kids/kids-touch-rail.css?v=17",
@@ -292,13 +292,13 @@ const KIDS_BOOT_PRECACHE=[
   "/kids/kids-story-action-contrast-v1345.css?v=1346",
   "/kids/offline-library-v1.js?v=1",
   "/kids/offline-library-v1.css?v=1",
-  "/kids/salaf-library-v1.js?v=1400",
+  "/kids/salaf-library-v1.js?v=1410",
   "/kids/kids-listening-polish-v1350.css?v=1350",
   "/kids/kids-listening-polish-v1350.js?v=1350",
   "/kids/assets/kids-icons/library-real-v12.png?v=cut1",
   "/kids/assets/kids-icons/dua-real-v12.png?v=cut1",
   "/kids/salaf-library-v1.css?v=1",
-  "/kids/salaf-open-world-v1353.css?v=1400",
+  "/kids/salaf-open-world-v1353.css?v=1410",
   "/kids/assets/salaf/salaf-cinema-hero-boy-v1353.jpg",
   "/kids/assets/salaf/salaf-cinema-hero-girl-v1353.jpg",
   "/kids/data/salaf-library-v1.json?v=2",
