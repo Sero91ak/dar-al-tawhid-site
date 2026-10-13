@@ -23,7 +23,7 @@
   // Use real available CSS space, not model names or hardware pixels.
   // The rail needs 68px + 36px gutter and leaves >=536px for content.
   var SIDE_MIN_WIDTH = 640;
-  var SIDE_MIN_HEIGHT = 340;
+  var SIDE_MIN_HEIGHT = 390; // Five accessible tabs need vertical space
   var currentEffective = "bottom";
   var sideApplied = false;
   var lastRailSignature = "";
@@ -43,7 +43,7 @@
     "margin", "margin-left", "margin-right", "padding", "flex-direction",
     "justify-content", "align-items", "gap",
     "border-radius", "transform", "-webkit-transform",
-    "z-index", "transition"
+    "z-index", "transition", "pointer-events"
   ];
 
   function readPreference() {
@@ -146,19 +146,21 @@
   // vertical anchor; Dar uses its five genuine tabs (not launcher shortcuts).
   // A separate 36px lane/gutter prevents content from running under the dock.
   function ensureRailViewportParent(nav) {
-    // The legacy #appChromeDock is a transformed/narrow layout container on
-    // master/detail routes. fixed descendants are then positioned against that
-    // container, not the real viewport. Keep the SAME original nav and events.
-    if (nav.parentNode === document.body) return;
+    // Route layouts can transform BODY and its #appChromeDock. A fixed child
+    // of a transformed BODY is anchored to the content column, so the sidebar
+    // jumps to the middle on Qur'an/Beiträge transitions. Move the existing
+    // nav (and its attached listeners) to the viewport-level HTML element.
+    // It stays the SAME DOM node; there is no cloned navigation.
+    if (nav.parentNode === document.documentElement) return;
     if (!originalDockParent || !originalDockParent.isConnected) {
       originalDockParent = nav.parentNode;
       originalDockSibling = nav.nextSibling;
     }
-    document.body.appendChild(nav);
+    document.documentElement.appendChild(nav);
   }
 
   function restoreOriginalDockParent(nav) {
-    if (!nav || nav.parentNode !== document.body) return;
+    if (!nav || nav.parentNode !== document.documentElement) return;
     if (!originalDockParent || !originalDockParent.isConnected) return;
     if (originalDockSibling && originalDockSibling.parentNode === originalDockParent) {
       originalDockParent.insertBefore(nav, originalDockSibling);
@@ -168,18 +170,18 @@
   }
 
   // Position relative to the physical viewport, not to a transformed split
-  // container. 82px width, five 54px targets, eight-pixel inter-target gaps.
+  // container. 92px wide rail with five 58px targets, separated by 9px.
   function applySidePosition(nav, side, metrics) {
     if (!document.body) return;
     ensureRailViewportParent(nav);
     var screenHeight = Math.max(0, Number(metrics && metrics.height) || global.innerHeight || 0);
-    var desiredHeight = 5 * 54 + 4 * 8 + 18;
+    var desiredHeight = 5 * 58 + 4 * 9 + 22;
     var dockHeight = Math.min(desiredHeight, Math.max(0, screenHeight - 24));
     var dockTop = Math.max(12, Math.min(screenHeight - dockHeight - 12,
       Math.round(screenHeight * 0.56 - dockHeight / 2)));
     root.style.setProperty("--dar-duos-rail-top", dockTop + "px");
     root.style.setProperty("--dar-duos-rail-height", dockHeight + "px");
-    root.style.setProperty("--dar-duos-rail-width", "82px");
+    root.style.setProperty("--dar-duos-rail-width", "92px");
     nav.classList.remove("is-adaptive-centered");
     nav.classList.add("is-adaptive-rail");
     // Always refresh the side properties after a route/layout event. The
@@ -190,11 +192,11 @@
       left:side === "left" ? "max(12px, env(safe-area-inset-left, 0px))" : "auto",
       right:side === "right" ? "max(12px, env(safe-area-inset-right, 0px))" : "auto",
       top:dockTop + "px", bottom:"auto",
-      width:"82px", "min-width":"82px", "max-width":"82px",
+      width:"92px", "min-width":"92px", "max-width":"92px",
       height:dockHeight + "px", "min-height":"0", "max-height":dockHeight + "px",
       margin:"0", "margin-left":"0", "margin-right":"0",
-      padding:"9px 10px", "flex-direction":"column",
-      "justify-content":"space-between", "align-items":"center", gap:"8px",
+      padding:"11px 12px", "flex-direction":"column",
+      "justify-content":"space-between", "align-items":"center", gap:"9px",
       "border-radius":"30px", transform:"none", "-webkit-transform":"none",
       "z-index":"96", "pointer-events":"auto", transition:"none"
     };
@@ -466,8 +468,11 @@
     // Reassert viewport anchoring after SPA replaces a master/detail view.
     var clickedNav = event.target && event.target.closest && event.target.closest("#bottomNav .bottom-nav-btn");
     if (clickedNav) {
-      global.setTimeout(schedule, 50);
-      global.setTimeout(schedule, 210);
+      // Reassert immediately after a route swap, before the old bottom
+      // controller can paint its 50%-centered geometry for several frames.
+      global.setTimeout(schedule, 0);
+      global.setTimeout(schedule, 36);
+      global.setTimeout(schedule, 160);
     }
     var button = event.target && event.target.closest && event.target.closest("[data-dar-nav-choice]");
     if (!button) return;
