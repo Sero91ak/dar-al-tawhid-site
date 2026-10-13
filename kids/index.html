@@ -6203,13 +6203,15 @@ function renderQuizFinish(){
   updateParentProgress();
   document.getElementById("quizProgress").innerHTML="";
   document.getElementById("quizBody").innerHTML=
-    '<div class="quiz-finish"><div class="star">★</div><h3>Quiz geschafft!</h3>'+
-    '<p>Du hast '+quizCorrectCount+' von '+currentQuiz.length+' Fragen richtig gelöst.</p>'+
+    '<div class="quiz-finish"><div class="star">★</div><h3>Mā schāʾ Allāh! Quiz geschafft!</h3>'+
+    '<p>Al-ḥamdu lillāh – alles Lob gebührt Allah! Du hast '+quizCorrectCount+' von '+currentQuiz.length+' Fragen richtig gelöst. Lerne weiter, Schritt für Schritt.</p>'+
     '<div class="quiz-finish-reward" aria-hidden="true">'+Array(Math.max(1,Math.min(5,quizCorrectCount))).fill("★").join(" ")+'</div>'+
     '<button id="quizAgain" class="primary">Noch einmal spielen</button></div>';
   document.getElementById("quizAgain").addEventListener("click",openQuiz);
   markDailyDone("quiz");
-  quizSpeak("Sehr gut. Du hast das Quiz geschafft.");
+  var kidsFinishPraise="Mā schāʾ Allāh! Du hast das Quiz geschafft. Möge Allah dein Wissen segnen!";
+  var kidsFinishVoice=(window.DARKidsOwnerVoice&&window.DARKidsOwnerVoice.has&&window.DARKidsOwnerVoice.has(kidsFinishPraise))?kidsFinishPraise:"Sehr gut. Du hast das Quiz geschafft.";
+  quizSpeak(kidsFinishVoice);
 }
 document.getElementById("openQuizButton").addEventListener("click",function(){
   if(window.openKidsQuizHub){window.openKidsQuizHub();return}
