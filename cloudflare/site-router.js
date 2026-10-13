@@ -1396,6 +1396,16 @@ export default {
         // Refresh only the isolated Android Fold workspace CSS after this layout fix.
         html = html.replace('/assets/fold-split.css?v=2', '/assets/fold-split.css?v=4');
         html = html.replace('/assets/fold-split.js?v=4', '/assets/fold-split.js?v=5');
+        // iPadOS desktop-class Safari identifies as Macintosh, even on a tablet.
+        // Check touch capability synchronously before the Android PWA bootstrap.
+        const iosPwaGuard =
+          '<style id="darIosWebsiteOnlyStyleV1">html[data-ios-website-only="1"]{visibility:hidden!important}</style>' +
+          '<script id="darIosWebsiteOnlyPwaGuardV1">(function(){try{' +
+          'var u=navigator.userAgent||"";' +
+          'var apple=/iPhone|iPad|iPod/i.test(u)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);' +
+          'var nativeApp=/DarAlTawhid-iOS|DarAlTawhidOfficialIOS|DarAlTawhidAndroid/i.test(u)||window.DAR_IOS_NATIVE_APP===true;' +
+          'if(apple&&!nativeApp){document.documentElement.setAttribute("data-ios-website-only","1");location.replace("/")}' +
+          '}catch(e){}})();<\/script>';
         const pwaHead =
           '<base href="/">' +
           '<script id="darDedicatedPwaBootV2">' +
@@ -1412,7 +1422,7 @@ export default {
           'try{var r=document.documentElement;r.classList.add("dar-pwa-standalone-boot","dar-soft-booting","dar-dedicated-pwa-app","is-standalone-pwa","is-android");r.dataset.appPath="android-pwa"}catch(e){}' +
           '<\/script>';
         if (!html.includes('id="darDedicatedPwaBootV2"')) {
-          html = html.includes("<head>") ? html.replace("<head>", "<head>" + pwaHead) : pwaHead + html;
+          html = html.includes("<head>") ? html.replace("<head>", "<head>" + iosPwaGuard + pwaHead) : iosPwaGuard + pwaHead + html;
         }
       }
       headers.set("Content-Type", "text/html; charset=utf-8");
