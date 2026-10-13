@@ -1,10 +1,10 @@
 {
   "version": "academy-roadmap-v23-20261011",
-  "purpose": "Editorial roadmap: 70 source-checked lessons, 138 remaining editorial outlines. Pending lessons stay locked.",
+  "purpose": "Editorial roadmap: 74 source-checked lessons, 134 remaining editorial outlines; upcoming lessons retain sequential child locks.",
   "curriculum": {
     "totalNewLessonSlots": 208,
-    "alreadyImplementedLessons": 70,
-    "proposedAdditionalLessons": 138,
+    "alreadyImplementedLessons": 74,
+    "proposedAdditionalLessons": 134,
     "weeks": 52,
     "newDaysPerWeek": 4,
     "reviewDaysPerWeek": 2,
@@ -91,25 +91,25 @@
     {
       "id": "quran",
       "label": "Qurʾān und Sunnah – Orientierung",
-      "plannedAdditions": 8,
+      "plannedAdditions": 7,
       "underlyingCurrentSubject": "quran"
     },
     {
       "id": "sirah",
       "label": "Sīrah und Propheten – kindgerechte Vorbilder",
-      "plannedAdditions": 8,
+      "plannedAdditions": 7,
       "underlyingCurrentSubject": "sirah"
     },
     {
       "id": "dua",
       "label": "Duʿāʾ und Adhkār – tägliche Praxis",
-      "plannedAdditions": 8,
+      "plannedAdditions": 7,
       "underlyingCurrentSubject": "dua"
     },
     {
       "id": "family",
       "label": "Familie, Gemeinschaft und Schutz",
-      "plannedAdditions": 8,
+      "plannedAdditions": 7,
       "underlyingCurrentSubject": "family"
     }
   ],
@@ -520,157 +520,29 @@
       "editorialSlot": 70,
       "lessonId": "fiqh-wudu-wasser-sparen",
       "status": "currently-in-catalog"
-    }
-  ],
-  "plannedUnits": [
+    },
     {
       "editorialSlot": 71,
-      "topicId": "editorial-071",
-      "week": 18,
-      "weekday": "Donnerstag",
-      "pillar": "quran",
-      "title": "Sūrat al-Ikhlāṣ verstehen",
-      "classroomScenario": "Den Sūrah-Namen und zentrale Bedeutung lernen",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: den Sūrah-Namen und zentrale Bedeutung lernen.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: den Sūrah-Namen und zentrale Bedeutung lernen.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: den Sūrah-Namen und zentrale Bedeutung lernen.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "lessonId": "quran-al-ikhlas-verstehen",
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 72,
-      "topicId": "editorial-072",
-      "week": 18,
-      "weekday": "Freitag",
-      "pillar": "sirah",
-      "title": "Ibrāhīm عليه السلام und Tawḥīd",
-      "classroomScenario": "Ein Beispiel für Vertrauen auf Allah kennenlernen",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: ein Beispiel für Vertrauen auf Allah kennenlernen.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: ein Beispiel für Vertrauen auf Allah kennenlernen.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: ein Beispiel für Vertrauen auf Allah kennenlernen.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "lessonId": "sirah-ibrahim-tawhid-zeugen",
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 73,
-      "topicId": "editorial-073",
-      "week": 19,
-      "weekday": "Montag",
-      "pillar": "dua",
-      "title": "Vor dem Schlafen Allah gedenken",
-      "classroomScenario": "Ein authentisches Schlaf-Duʿāʾ mit Ruhe üben",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: ein authentisches Schlaf-Duʿāʾ mit Ruhe üben.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: ein authentisches Schlaf-Duʿāʾ mit Ruhe üben.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: ein authentisches Schlaf-Duʿāʾ mit Ruhe üben.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "lessonId": "dua-schlafengehen-allah-gedenken",
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 74,
-      "topicId": "editorial-074",
-      "week": 19,
-      "weekday": "Dienstag",
-      "pillar": "family",
-      "title": "Freundschaften ehrlich pflegen",
-      "classroomScenario": "Einem Freund gegenüber ehrlich und freundlich sein",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: einem Freund gegenüber ehrlich und freundlich sein.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: einem Freund gegenüber ehrlich und freundlich sein.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: einem Freund gegenüber ehrlich und freundlich sein.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
-    },
+      "lessonId": "family-ehrliche-freundschaften-pflegen",
+      "status": "currently-in-catalog"
+    }
+  ],
+  "plannedUnits": [
     {
       "editorialSlot": 75,
       "topicId": "editorial-075",
