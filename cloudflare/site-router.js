@@ -1182,8 +1182,8 @@ export default {
             }
             // Future Q pages may already link Royal CSS. The in-app route
             // handler must still be injected exactly once in those pages.
-            if (!documentHtml.includes("q-source-app-view.js") && /<\\/head>/i.test(documentHtml)) {
-              documentHtml = documentHtml.replace(/<\\/head>/i,
+            if (!documentHtml.includes("q-source-app-view.js") && documentHtml.toLowerCase().includes("</head>")) {
+              documentHtml = documentHtml.replace(new RegExp("</head>", "i"),
                 '<script src="/assets/q-source-app-view.js?v=20261013-1" defer></script></head>');
             }
             headers.set("Content-Type", "text/html; charset=utf-8");
