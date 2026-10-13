@@ -1,6 +1,105 @@
 {
-  "version": 1,
+  "version": 2,
   "collection": "Schätze der Salaf",
-  "releasePolicy": "Only editorialRelease=true and verification=approved with verified sources and an age-specific master text",
-  "items": []
+  "standard": "one-universal-master-text-and-one-universal-master-audio-per-story",
+  "agePolicy": {
+    "ageRange": "4–10",
+    "masterStoryTextAcrossAges": true,
+    "ageChangesPresentationOnly": true,
+    "noAgeBasedStoryShortening": true
+  },
+  "narration": {
+    "intro": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.",
+    "outro": "Und Allah weiß es am besten.\n\nMöge Allah euch nützliches Wissen schenken, euren Īmān stärken und euch al-Firdaws al-Aʿlā, die höchste Stufe des Paradieses, schenken.\n\nAs-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+    "noInventedDialogue": true,
+    "sourceDetailsOutsideNarration": true
+  },
+  "releasePolicy": "Only editorialRelease=true, verification=approved, verified named classical source, and complete masterStoryText. Voice audio optional until production; never synthesize or fall back to another voice.",
+  "items": [
+    {
+      "id": "malik-mut-zur-wahrheit",
+      "category": "ilm",
+      "title": "Imām Mālik und die ehrliche Antwort",
+      "person": "Imām Mālik ibn Anas",
+      "summary": "Ein Gelehrter zeigt, warum „Ich weiß es nicht“ eine starke Antwort sein kann.",
+      "image": "/kids/assets/salaf/topics-v1380/ilm.jpg",
+      "hero": "/kids/assets/salaf/salaf-library-hero-boys.jpg",
+      "sources": [
+        {
+          "author": "Ibn ʿAbd al-Barr",
+          "work": "Ǧāmiʿ Bayān al-ʿIlm wa-Faḍlihī",
+          "reference": "Band 2, S. 839, Bericht 1573 – Bāb mā yalzam al-ʿālim",
+          "assessment": "verified",
+          "url": "https://www.islamweb.net/ar/library/content/1040/1345/"
+        }
+      ],
+      "coreEvidence": "ʿAbd ar-Raḥmān ibn Mahdī berichtet aus eigener Anwesenheit: Ein Mann, nach sechsmonatiger Reise zu Mālik gekommen, fragt eine Frage. Mālik antwortet: lā uḥsinuhā (ich beherrsche das nicht). Auf die Rückfrage sagt er, der Mann solle zu Hause genau das berichten.",
+      "masterStoryText": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.\n\nMein lieber Bruder, meine liebe Schwester, heute besuchen wir in unserer Geschichte einen großen Gelehrten aus der frühen Zeit des Islām. Sein Name ist Mālik ibn Anas. Viele Menschen kennen ihn als Imām Mālik. Ein Imām ist hier ein Gelehrter, von dem andere Menschen Wissen über den Glauben und den richtigen Umgang im Leben gelernt haben.\n\nImām Mālik lebte vor langer Zeit in Madīnah, der Stadt, in der auch der Prophet Muḥammad, ṣallā llāhu ʿalayhi wa sallam, gelebt hatte. Die Menschen achteten Imām Mālik wegen seines Wissens. Sie wollten von ihm lernen und stellten ihm Fragen. Aber wusstest du, dass ein Mensch sehr viel lernen kann und trotzdem nicht auf jede Frage eine Antwort weiß?\n\nGenau darum geht es in unserer heutigen Geschichte.\n\nDer Gelehrte ʿAbd ar-Raḥmān ibn Mahdī berichtete, dass er einmal bei Imām Mālik war. Da kam ein Mann zu ihnen. Dieser Mann hatte eine unglaublich lange Reise hinter sich. Er erzählte, er sei von einem Ort gekommen, der eine Reise von sechs Monaten entfernt liege. Die Menschen aus seiner Heimat hatten ihm eine Frage mitgegeben, die er Imām Mālik stellen sollte.\n\nStell dir nur vor, liebe Kinder, wie viel Geduld man für eine solche Reise braucht! Damals konnte man nicht einfach in ein Auto steigen. Eine lange Reise war etwas Besonderes. Doch wir müssen nicht raten, wie der Mann unterwegs war oder was er alles erlebt hatte. Der überlieferte Bericht sagt uns: Er kam von weit her und hatte eine wichtige Frage.\n\nImām Mālik forderte ihn auf, seine Frage zu stellen. Der Mann fragte ihn. Und nun geschah etwas, das wir uns besonders merken wollen.\n\nImām Mālik tat nicht so, als wüsste er alles. Er erfand keine Antwort. Er sagte ganz ehrlich: „Lā uḥsinuhā.“ Das bedeutet ungefähr: „Das weiß ich nicht sicher zu beantworten.“\n\nDer Mann war überrascht. Er hatte erwartet, dass ein so berühmter Gelehrter bestimmt auf alles eine Antwort haben würde. Nun fragte er, was er den Menschen in seiner Heimat sagen solle, wenn er zurückkäme.\n\nImām Mālik gab ihm eine einfache und ehrliche Antwort: Er solle ihnen sagen, dass Mālik diese Frage nicht beantworten konnte.\n\nDas war der entscheidende Moment. Der Gelehrte wollte lieber die Wahrheit sagen, als etwas zu behaupten, das er nicht wusste. Seine Antwort war kurz. Aber in dieser kurzen Antwort steckte eine große Lehre.\n\nMein lieber Bruder, meine liebe Schwester, hast du schon einmal etwas gefragt bekommen und die Antwort nicht gewusst? Vielleicht in der Schule. Vielleicht beim Lernen einer Sūrah. Vielleicht hat jemand gefragt, was ein arabisches Wort bedeutet. Manchmal möchten wir dann schnell irgendetwas sagen, weil wir nicht zugeben wollen, dass wir etwas noch nicht gelernt haben.\n\nAber weißt du was? „Ich weiß es noch nicht“ ist keine schlechte Antwort. Es ist eine ehrliche Antwort. Sie hilft uns, weiterzulernen. Wer ehrlich sagt, dass ihm Wissen fehlt, kann anschließend jemanden fragen, der die Antwort wirklich kennt.\n\nAllah erinnert uns im Qurʾān daran, nichts zu behaupten, wovon wir kein Wissen haben. Das lesen wir in Sūrah al-Isrāʾ, Vers 36. Wir lernen daraus: Wissen ist ein wertvolles Geschenk, und wir sollen sorgsam damit umgehen.\n\nDas bedeutet nicht, dass wir immer schweigen müssen. Wenn wir etwas sicher gelernt haben, dürfen wir es natürlich richtig weitergeben. Aber wir sollten keinen Satz erfinden, nur damit andere denken, wir wüssten besonders viel.\n\nNun habe ich eine kleine Frage an dich: Was könntest du freundlich antworten, wenn dein kleiner Bruder, deine Schwester oder ein Freund dich etwas fragt, das du noch nicht weißt?\n\nDu könntest sagen: „Das weiß ich noch nicht. Wir können gemeinsam nachsehen oder jemanden fragen, der es weiß.“\n\nMā shāʾ Allāh! Wenn du ehrlich bleibst und bereit bist zu lernen, ist das ein schöner Schritt auf dem Weg zum Wissen.\n\nDenk heute an Imām Mālik. Eine sehr lange Reise, eine wichtige Frage und eine Antwort, die nicht ausgedacht war. Manchmal ist ein ehrliches „Ich weiß es nicht“ wertvoller als viele unsichere Worte.\n\nUnd Allah weiß es am besten.\n\nMöge Allah euch nützliches Wissen schenken, euren Īmān stärken und euch al-Firdaws al-Aʿlā, die höchste Stufe des Paradieses, schenken.\n\nAs-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+      "verification": "approved",
+      "editorialRelease": true,
+      "reviewType": "historical-biographical-report-with-source-verification",
+      "masterAudio": null,
+      "language": "de",
+      "audioStatus": "not-yet-produced"
+    },
+    {
+      "id": "shafii-freundschaft-trotz-unterschied",
+      "category": "adab",
+      "title": "Imām ash-Shāfiʿī und sein Freund",
+      "person": "Imām Muḥammad ibn Idrīs ash-Shāfiʿī",
+      "summary": "Zwei Gelehrte sind nicht einer Meinung – und bleiben trotzdem freundlich.",
+      "image": "/kids/assets/salaf/topics-v1380/adab.jpg",
+      "hero": "/kids/assets/salaf/salaf-library-hero-boys.jpg",
+      "sources": [
+        {
+          "author": "adh-Dhahabī",
+          "work": "Siyar Aʿlām an-Nubalāʾ",
+          "reference": "Band 10, S. 17, Biographie von Imām ash-Shāfiʿī – Bericht des Yūnus aṣ-Ṣadafī",
+          "assessment": "verified",
+          "url": "https://islamweb.net/ar/library/content/60/1668/"
+        }
+      ],
+      "coreEvidence": "Yūnus aṣ-Ṣadafī berichtet, dass er eines Tages mit ash-Shāfiʿī über eine Angelegenheit diskutierte. Später begegnete ash-Shāfiʿī ihm, nahm seine Hand und fragte, ob beide Brüder bleiben könnten, auch wenn sie in einer Frage nicht übereinstimmten.",
+      "masterStoryText": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.\n\nMein lieber Bruder, meine liebe Schwester, heute geht es um zwei Menschen, die viel Wissen hatten. Einer von ihnen ist besonders bekannt: Imām ash-Shāfiʿī, raḥimahu llāh. Vielleicht hast du seinen Namen schon gehört. Er gehörte zu den großen Gelehrten des Islām.\n\nIn unserer heutigen Geschichte geht es nicht darum, wie viele Bücher er kannte oder wie viele Fragen er beantworten konnte. Es geht um etwas, das du jeden Tag brauchen kannst: freundlich bleiben, wenn zwei Menschen unterschiedlicher Meinung sind.\n\nDie Geschichte wurde von einem Mann namens Yūnus aṣ-Ṣadafī erzählt. Yūnus kannte Imām ash-Shāfiʿī. Er berichtete, dass er einmal mit ihm über eine Frage gesprochen hatte, bei der sie nicht derselben Meinung waren. In den alten Büchern nennt man das manchmal eine Diskussion. Das bedeutet hier: Zwei Menschen erklären, was sie für richtig halten, und versuchen, eine Frage zu verstehen.\n\nWichtig ist: Der Bericht nennt nicht, worüber sie genau gesprochen haben. Darum werden wir auch keine erfundene Frage oder einen ausgedachten Streit hinzufügen. Wir wissen nur, dass sie in dieser Angelegenheit verschiedener Meinung waren.\n\nNach dem Gespräch gingen sie auseinander.\n\nDann traf Yūnus Imām ash-Shāfiʿī noch einmal. Und nun zeigte der Imām etwas sehr Schönes. Er nahm Yūnus bei der Hand und sagte sinngemäß: „Mein Bruder, können wir nicht Brüder bleiben, auch wenn wir uns in einer Frage nicht einig sind?“\n\nWas für eine freundliche Antwort!\n\nImām ash-Shāfiʿī wollte offenbar nicht, dass die unterschiedliche Meinung ihre freundschaftliche Verbundenheit zerstörte. Obwohl beide das Thema zuvor verschieden gesehen hatten, begegnete er dem anderen Mann herzlich.\n\nMein lieber Bruder, meine liebe Schwester, wir kennen solche Situationen auch aus unserem Alltag. Vielleicht möchte ein Kind dieses Spiel spielen und ein anderes lieber etwas anderes. Vielleicht denkt jemand, eine Aufgabe müsse auf eine andere Weise gelöst werden. Vielleicht habt ihr beim Lernen eine Frage unterschiedlich verstanden.\n\nNicht jede verschiedene Meinung bedeutet, dass jemand böse ist. Manchmal müssen wir ruhig zuhören. Manchmal brauchen wir mehr Wissen. Und manchmal können wir uns freundlich begegnen, auch wenn wir noch nicht einer Meinung sind.\n\nNatürlich gibt es Dinge, bei denen die Wahrheit wichtig ist und die wir nicht einfach nach unseren Wünschen verändern dürfen. Besonders beim Qurʾān und der Sunnah sollen wir zuverlässiges Wissen suchen. Aber daraus folgt nicht, dass wir andere Menschen beschimpfen oder unfreundlich werden sollen.\n\nDer Qurʾān lehrt uns, auf gute Weise zu sprechen. In Sūrah al-Isrāʾ, Vers 53, wird den Dienern Allahs aufgetragen, das zu sagen, was am besten ist. Das ist eine wertvolle Erinnerung, wenn wir mit Freunden, Geschwistern und anderen Menschen sprechen.\n\nStell dir eine ganz gewöhnliche Situation vor. Du und ein anderes Kind haben unterschiedliche Vorstellungen. Vielleicht wirst du zunächst ärgerlich. Dann kannst du dich an Imām ash-Shāfiʿī erinnern. Du kannst zuhören. Du kannst ruhig antworten. Du musst nicht gewinnen, indem du lauter wirst.\n\nUnd wenn du einen Fehler gemacht hast, kannst du ihn zugeben. Das ist keine Schwäche. Freundliche Worte machen es leichter, gemeinsam wieder weiterzumachen.\n\nDas Wichtigste in der überlieferten Geschichte war nicht ein großer Sieg in einer Diskussion. Es war die ausgestreckte Hand und die Frage, ob man trotzdem Brüder bleiben könne.\n\nMā shāʾ Allāh, mein lieber Bruder, meine liebe Schwester! Möge Allah uns helfen, freundlich zu sprechen, anderen zuzuhören und den guten Umgang miteinander zu bewahren.\n\nNimm dir heute eine kleine Aufgabe vor: Wenn du mit jemandem unterschiedlicher Meinung bist, versuche zuerst ruhig zuzuhören. Und sprich so, dass der andere Mensch sich nicht verletzt fühlen muss.\n\nUnd Allah weiß es am besten.\n\nMöge Allah euch nützliches Wissen schenken, euren Īmān stärken und euch al-Firdaws al-Aʿlā, die höchste Stufe des Paradieses, schenken.\n\nAs-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+      "verification": "approved",
+      "editorialRelease": true,
+      "reviewType": "historical-biographical-report-with-source-verification",
+      "masterAudio": null,
+      "language": "de",
+      "audioStatus": "not-yet-produced"
+    },
+    {
+      "id": "layth-das-grosse-honiggeschenk",
+      "category": "rahma",
+      "title": "Al-Layṯ und das großzügige Geschenk",
+      "person": "Imām al-Layṯ ibn Saʿd",
+      "summary": "Eine Frau bittet um ein wenig Honig. Der Gelehrte denkt großzügiger.",
+      "image": "/kids/assets/salaf/topics-v1380/rahma.jpg",
+      "hero": "/kids/assets/salaf/salaf-library-hero-boys.jpg",
+      "sources": [
+        {
+          "author": "al-Mizzī",
+          "work": "Tahdhīb al-Kamāl fī Asmāʾ ar-Riǧāl",
+          "reference": "Band 24, S. 274–275, Biographie von al-Layṯ ibn Saʿd – Bericht des Abū Ṣāliḥ",
+          "assessment": "verified",
+          "url": "https://islamweb.net/ar/library/content/1001/6145/"
+        },
+        {
+          "author": "Abū Nuʿaym al-Iṣfahānī",
+          "work": "Ḥilyat al-Awliyāʾ",
+          "reference": "Band 7, Abschnitt über Großzügigkeit des al-Layṯ – verwandter Bericht",
+          "assessment": "verified",
+          "url": "https://g1.islamweb.net/ar/library/content/131/1472/"
+        }
+      ],
+      "coreEvidence": "Abū Ṣāliḥ berichtet von einer Frau, die al-Layṯ um ein Maß Honig bat. Al-Layṯ ließ ihr einen großen Behälter geben. Als der Schreiber die Menge erwähnte, antwortete al-Layṯ, die Frau habe gemäß ihrem Bedarf gebeten, er gebe entsprechend seiner Möglichkeiten.",
+      "masterStoryText": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.\n\nMein lieber Bruder, meine liebe Schwester, heute möchte ich dir von einem Mann erzählen, der nicht nur Wissen hatte, sondern auch gerne anderen Menschen half. Sein Name war al-Layṯ ibn Saʿd, raḥimahu llāh.\n\nAl-Layṯ lebte vor langer Zeit in Ägypten. Er war ein bekannter Gelehrter. Menschen lernten bei ihm und schätzten sein Wissen. Doch ein Mensch kann sein Wissen auch dadurch zeigen, wie er mit anderen umgeht. Deshalb ist die Geschichte von al-Layṯ und dem Honig so schön.\n\nIn einem alten Buch wird berichtet, dass eine Frau zu al-Layṯ kam. Sie bat ihn um eine bestimmte Menge Honig.\n\nHonig kennst du vielleicht schon. Er ist süß und wird von Bienen hergestellt. In der damaligen Zeit war Honig auch etwas Wertvolles, das man nicht einfach überall in großen Mengen bekam.\n\nDie Frau bat also um eine kleine, abgemessene Menge. Al-Layṯ hörte ihre Bitte. Dann ließ er ihr nicht nur das geben, worum sie gebeten hatte. Er ordnete an, ihr einen viel größeren Behälter mit Honig zu geben.\n\nSein Schreiber machte ihn darauf aufmerksam, dass die Frau doch nur um eine kleinere Menge gebeten hatte. Ein Schreiber war damals jemand, der bei wichtigen Angelegenheiten half und Dinge festhielt. Vielleicht kennst du das Wort schon aus anderen Geschichten.\n\nNun kommt die Antwort, die wir uns merken möchten. Al-Layṯ erklärte sinngemäß: Die Frau hatte entsprechend dem gebeten, was sie brauchte. Er selbst wollte entsprechend den Möglichkeiten geben, die ihm zur Verfügung standen.\n\nDas ist eine wunderbare Lehre.\n\nDie Frau hatte nicht nach möglichst viel gefragt. Sie hatte eine Bitte. Und al-Layṯ dachte nicht nur daran, wie wenig er gerade geben musste. Er sah, dass er mehr helfen konnte.\n\nMein lieber Bruder, meine liebe Schwester, nicht jeder Mensch hat viele Dinge, die er verschenken kann. Manche Menschen haben nur wenig. Deshalb bedeutet Großzügigkeit nicht, dass jeder so viel Honig oder so viel Geld geben muss wie al-Layṯ.\n\nManchmal ist etwas ganz Kleines schon eine große Hilfe.\n\nWenn du ein Spielzeug mit deinem Bruder oder deiner Schwester teilst, kann das eine gute Tat sein. Wenn du zu Hause hilfst, ohne eine Belohnung dafür zu verlangen, kann das ebenfalls eine gute Tat sein. Und wenn du jemandem freundlich zuhörst, der traurig ist, zeigst du, dass dir dieser Mensch wichtig ist.\n\nIm Qurʾān erinnert Allah uns daran, Gutes zu tun. Auch der Prophet Muḥammad, ṣallā llāhu ʿalayhi wa sallam, hat die Menschen zu guten Taten ermutigt.\n\nAber wir müssen auch klug helfen. Du sollst nichts verschenken, das dir nicht gehört. Wenn du etwas Größeres geben möchtest, frage zuerst deine Eltern. Großzügigkeit heißt nicht, unüberlegt zu handeln. Sie bedeutet, mit einem guten Herzen das zu geben, was man geben darf und kann.\n\nWas können wir aus der Geschichte mit dem Honig lernen?\n\nErstens: Wir dürfen darauf achten, was andere Menschen brauchen. Zweitens: Eine Hilfe kann manchmal größer sein als die Bitte. Drittens: Wir müssen dafür nicht reich sein. Ein warmes Wort, eine gute Tat und ein wenig Zeit können sehr wertvoll sein.\n\nDie alte Überlieferung nennt den Honig und die Antwort von al-Layṯ. Sie erzählt uns nicht, was die Frau danach sagte oder was sie zu Hause mit dem Honig tat. Deshalb lassen wir diese Dinge offen. Wir erzählen nur das, was aus dem Bericht hervorgeht.\n\nJetzt frage ich dich, mein lieber Bruder, meine liebe Schwester: Wem möchtest du heute eine kleine Freude machen? Vielleicht kannst du beim Aufräumen helfen. Vielleicht kannst du etwas Erlaubtes mit jemandem teilen. Oder du sagst ein liebes Wort.\n\nAllāhumma bārik. Möge Allah deine guten Taten annehmen und dein Herz großzügig machen.\n\nUnd Allah weiß es am besten.\n\nMöge Allah euch nützliches Wissen schenken, euren Īmān stärken und euch al-Firdaws al-Aʿlā, die höchste Stufe des Paradieses, schenken.\n\nAs-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+      "verification": "approved",
+      "editorialRelease": true,
+      "reviewType": "historical-biographical-report-with-source-verification",
+      "masterAudio": null,
+      "language": "de",
+      "audioStatus": "not-yet-produced"
+    }
+  ]
 }
