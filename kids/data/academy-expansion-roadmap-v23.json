@@ -1,10 +1,10 @@
 {
   "version": "academy-roadmap-v23-20261011",
-  "purpose": "Editorial roadmap: 82 sourced lessons and 126 locked outlines. Audio/human content review separate from code integration.",
+  "purpose": "Editorial roadmap: 86 complete curricular modules and 122 locked editorial outlines. Audio review is an independent release requirement.",
   "curriculum": {
     "totalNewLessonSlots": 208,
-    "alreadyImplementedLessons": 82,
-    "proposedAdditionalLessons": 126,
+    "alreadyImplementedLessons": 86,
+    "proposedAdditionalLessons": 122,
     "weeks": 52,
     "newDaysPerWeek": 4,
     "reviewDaysPerWeek": 2,
@@ -91,25 +91,25 @@
     {
       "id": "quran",
       "label": "Qurʾān und Sunnah – Orientierung",
-      "plannedAdditions": 7,
+      "plannedAdditions": 6,
       "underlyingCurrentSubject": "quran"
     },
     {
       "id": "sirah",
       "label": "Sīrah und Propheten – kindgerechte Vorbilder",
-      "plannedAdditions": 7,
+      "plannedAdditions": 6,
       "underlyingCurrentSubject": "sirah"
     },
     {
       "id": "dua",
       "label": "Duʿāʾ und Adhkār – tägliche Praxis",
-      "plannedAdditions": 7,
+      "plannedAdditions": 6,
       "underlyingCurrentSubject": "dua"
     },
     {
       "id": "family",
       "label": "Familie, Gemeinschaft und Schutz",
-      "plannedAdditions": 7,
+      "plannedAdditions": 6,
       "underlyingCurrentSubject": "family"
     }
   ],
@@ -580,157 +580,29 @@
       "editorialSlot": 82,
       "lessonId": "fiqh-wann-wudu-noetig",
       "status": "currently-in-catalog"
-    }
-  ],
-  "plannedUnits": [
+    },
     {
       "editorialSlot": 83,
-      "topicId": "editorial-083",
-      "week": 21,
-      "weekday": "Donnerstag",
-      "pillar": "quran",
-      "title": "Sūrat al-Falaq kennenlernen",
-      "classroomScenario": "Die Sūrah mit echter Qurʾān-Rezitation hören",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: die Sūrah mit echter Qurʾān-Rezitation hören.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: die Sūrah mit echter Qurʾān-Rezitation hören.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: die Sūrah mit echter Qurʾān-Rezitation hören.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "lessonId": "quran-al-falaq-kennenlernen",
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 84,
-      "topicId": "editorial-084",
-      "week": 21,
-      "weekday": "Freitag",
-      "pillar": "sirah",
-      "title": "Ismāʿīl عليه السلام und Gehorsam gegenüber Allah",
-      "classroomScenario": "Eine gesicherte Geschichte ohne angstmachende Details hören",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: eine gesicherte Geschichte ohne angstmachende Details hören.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: eine gesicherte Geschichte ohne angstmachende Details hören.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: eine gesicherte Geschichte ohne angstmachende Details hören.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 85,
-      "topicId": "editorial-085",
-      "week": 22,
-      "weekday": "Montag",
-      "pillar": "dua",
-      "title": "Nach dem Aufwachen dankbar sein",
-      "classroomScenario": "Eine belegte Formel beim Aufwachen verstehen",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: eine belegte Formel beim Aufwachen verstehen.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: eine belegte Formel beim Aufwachen verstehen.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: eine belegte Formel beim Aufwachen verstehen.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "lessonId": "dua-nach-aufwachen-dankbar",
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 86,
-      "topicId": "editorial-086",
-      "week": 22,
-      "weekday": "Dienstag",
-      "pillar": "family",
-      "title": "Streit ohne Gewalt lösen",
-      "classroomScenario": "Bei einem Konflikt Hilfe einer erwachsenen Person holen",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: bei einem Konflikt Hilfe einer erwachsenen Person holen.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: bei einem Konflikt Hilfe einer erwachsenen Person holen.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: bei einem Konflikt Hilfe einer erwachsenen Person holen.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
-    },
+      "lessonId": "family-streit-ohne-gewalt-loesen",
+      "status": "currently-in-catalog"
+    }
+  ],
+  "plannedUnits": [
     {
       "editorialSlot": 87,
       "topicId": "editorial-087",
