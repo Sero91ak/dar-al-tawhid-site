@@ -89,6 +89,11 @@
       '<div class="salaf-empty"><span class="salaf-empty-icon" aria-hidden="true"></span><strong>Geschichten kommen bald dazu</strong>'+
       '<p>Hier gibt es bald Neues zum Hören und Lesen.</p></div>';
   }
+  function scrollSalafTop(){
+    var scroller=document.querySelector(".shell");
+    if(scroller){try{scroller.scrollTo({top:0,left:0,behavior:"auto"})}catch(_){scroller.scrollTop=0}}
+    else{try{root.scrollIntoView({block:"start",behavior:"auto"})}catch(_){}}
+  }
   function render(){
     root.dataset.profile=gender();
     root.dataset.topicOpen=(tab==="all"&&!!topic)?"true":"false";
@@ -118,7 +123,7 @@
         }else{
           list.innerHTML='<p class="salaf-upcoming salaf-topic-note">Hier sammeln wir sorgfältig geprüfte Geschichten. Bis dahin kannst du über die Frage oben nachdenken.</p>';
         }
-        q("#salafClear")?.addEventListener("click",function(){topic="";render();window.scrollTo({top:0,behavior:"smooth"})});
+        q("#salafClear")?.addEventListener("click",function(){topic="";render();scrollSalafTop()});
       }else{
         pane.innerHTML='<div class="salaf-topic-grid">'+CATEGORIES.map(function(c){
           var count=vis.filter(function(i){return i.category===c.id}).length;
@@ -216,7 +221,7 @@
     var story=e.target.closest("[data-story-id]");if(story&&story.closest(".salaf-story")){
       var i=items.find(function(x){return x.id===story.dataset.storyId});if(i)showStory(i);return;
     }
-    var cat=e.target.closest("[data-topic]");if(cat){topic=topic===cat.dataset.topic?"":cat.dataset.topic;render();window.scrollTo({top:0,behavior:"smooth"});return}
+    var cat=e.target.closest("[data-topic]");if(cat){topic=topic===cat.dataset.topic?"":cat.dataset.topic;render();scrollSalafTop();return}
     var switcher=e.target.closest("[data-salaf-tab]");if(switcher){tab=switcher.dataset.salafTab;topic="";render();}
   });
   document.addEventListener("click",function(e){var b=e.target.closest?.(".nav-btn[data-target]");if(b&&b.dataset.target!=="salaf"&&active)closeStory()},true);
