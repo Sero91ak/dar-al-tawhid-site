@@ -28,7 +28,7 @@ const findings={url:"https://dar-al-tawhid.de/test/?env=staging&source=pwa&v=137
     const nav=document.querySelector("#bottomNav"),v=document.querySelector("#appView"),ov=document.querySelector("#dar-soft-boot"),r=nav?.getBoundingClientRect();
     const buttons=[...(nav?.querySelectorAll(".bottom-nav-btn")||[])];
     const hit=buttons.map(btn=>{const a=btn.getBoundingClientRect(),el=document.elementFromPoint(a.left+a.width/2,a.top+a.height/2);return {text:btn.textContent?.trim().slice(0,40),label:btn.getAttribute("aria-label"),attr:btn.getAttribute("data-bottom-nav"),w:Math.round(a.width),h:Math.round(a.height),hit:!!(el&&(el===btn||btn.contains(el))),topElement:el?.tagName+"."+(el?.className||"").toString().slice(0,60)}});
-    return {hash:location.hash,path:location.pathname,viewLen:v?.textContent?.trim().length||0,viewVisible:!!(v&&v.getBoundingClientRect().height>10),overlay:ov?{className:ov.className,display:getComputedStyle(ov).display,pointer:getComputedStyle(ov).pointerEvents}:null,softBoot:document.documentElement.classList.contains("dar-soft-booting"),nav:nav?{rect:{x:Math.round(r.x),y:Math.round(r.y),w:Math.round(r.width),h:Math.round(r.height)},pointer:getComputedStyle(nav).pointerEvents}:null,buttons:hit,bodyClass:document.body?.className.slice(0,300)};
+    return {hash:location.hash,path:location.pathname,viewLen:v?.textContent?.trim().length||0,viewVisible:!!(v&&v.getBoundingClientRect().height>10),overlay:ov?{className:ov.className,display:getComputedStyle(ov).display,pointer:getComputedStyle(ov).pointerEvents}:null,softBoot:document.documentElement.classList.contains("dar-soft-booting"),nav:nav?{rect:{x:Math.round(r.x),y:Math.round(r.y),w:Math.round(r.width),h:Math.round(r.height)},pointer:getComputedStyle(nav).pointerEvents}:null,buttons:hit,bodyClass:document.body?.className.slice(0,300),manifest:document.querySelector('link[rel="manifest"]')?.href||null};
    });
    findings.screens.push({label,dom});
    await page.screenshot({path:path.join(out,label+".png"),fullPage:false});
@@ -37,7 +37,7 @@ const findings={url:"https://dar-al-tawhid.de/test/?env=staging&source=pwa&v=137
   const home=await snapshot("home");
   const nav=page.locator("#bottomNav .bottom-nav-btn");
   if(!home.nav||home.buttons.length<4)throw Error("Bottom nav missing in Android PWA");
-  if(home.softBoot||home.overlay?.pointer!=="none"&&home.overlay?.display!=="none")throw Error("Blocking loading overlay remains after 8.5 seconds");
+  if(home.softBoot||(home.overlay&&home.overlay.pointer!=="none"&&home.overlay.display!=="none"))throw Error("Blocking loading overlay remains after 8.5 seconds");
   if(home.buttons.filter(b=>b.hit).length<4)throw Error("Navigation touch targets covered");
   const texts=home.buttons.map(x=>(x.text||"")+" "+(x.label||"")+" "+(x.attr||""));
   const qidx=texts.findIndex(x=>/qur|koran/i.test(x));
