@@ -85,7 +85,7 @@ def main()->None:
     history_id=item.get("history_item_id")
     if not history_id:raise RuntimeError("Matched record has no history_item_id")
     audio,ctype=get("/history/"+urllib.parse.quote(history_id,safe="")+"/audio",key)
-    if len(audio)<1400 or not (audio.startswith(b"ID3") or audio[:1]==b"\\xff"):
+    if len(audio)<1400 or not (audio.startswith(b"ID3") or audio[:1]==b"\xff"):
         raise RuntimeError("History audio is missing, tiny or not an MP3 file")
     OUTPUT.parent.mkdir(parents=True,exist_ok=True)
     with tempfile.TemporaryDirectory(prefix="kids-paid-v4-recover-") as t:
