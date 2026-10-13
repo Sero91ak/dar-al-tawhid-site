@@ -1,405 +1,339 @@
 /**
- * DĀR AL TAWḤĪD · TEST ONLY · Adaptive navigation placement v1325
- *
- * One existing #bottomNav, three user positions:
- * - bottom: current centered glass capsule with labels
- * - left/right: narrow vertical glass rail, 3D icons only
- *
- * Side rails are enabled only when enough viewport space exists. On a narrow
- * phone the saved preference is preserved but the effective position falls
- * back to bottom. No route content is rebuilt and no scroll position changes.
+ * DĀR AL TAWḤĪD · Duos-inspired responsive navigation for the adult TEST app.
+ * Only repositions the existing #bottomNav. No app boot changes, body observer,
+ * extra floating status UI or visitor/KIDS dependencies.
+ * Upstream geometry reference: rmb707/Duos-Public (MIT), LayoutModel.kt.
  */
 (function (global) {
   "use strict";
 
   var path = String(global.location && global.location.pathname || "");
-  if (!(path === "/test" || path.indexOf("/test/") === 0)) return;
+  if (path !== "/test" && path.indexOf("/test/") !== 0) return;
   if (global.__DAR_ADAPTIVE_NAV_V1325) return;
   global.__DAR_ADAPTIVE_NAV_V1325 = true;
 
   var root = document.documentElement;
-  var STORAGE_KEY = "darNavPositionV2";
-  var VALID = { bottom: true, left: true, right: true };
-  var SIDE_MIN_WIDTH = 760;
-  var SIDE_MIN_HEIGHT = 360;
-  var currentEffective = "bottom";
-  var sideApplied = false;
-  var rafId = 0;
-  var idleTimer = 0;
-  var scrollFadeTimer = 0;
-  var burstTimers = [];
-  var observer = null;
-  var restoringBottom = false;
-
-  var navProperties = [
+  var STORE = "darNavPositionV2";
+  var SETTINGS = "darDuosNavMetricsV2";
+  var current = "bottom";
+  var activeNav = null;
+  var frame = 0;
+  var bursts = [];
+  var layoutKey = "";
+  var controlsId = "darNavPositionSettingsV1325";
+  var managedStyle = [
     "position", "left", "right", "top", "bottom",
     "width", "min-width", "max-width",
     "height", "min-height", "max-height",
-    "margin", "padding", "flex-direction",
-    "justify-content", "align-items", "gap",
-    "border-radius", "transform", "-webkit-transform",
-    "z-index", "transition"
+    "margin", "padding", "flex-direction", "justify-content",
+    "align-items", "gap", "border-radius",
+    "transform", "-webkit-transform", "z-index", "transition",
+    "pointer-events"
   ];
+  var good = { bottom: true, left: true, right: true };
 
-  function readPreference() {
+  function pref() {
     try {
-      var value = String(global.localStorage.getItem(STORAGE_KEY) || "bottom");
-      return VALID[value] ? value : "bottom";
-    } catch (error) {
-      return "bottom";
-    }
+      var value = String(global.localStorage.getItem(STORE) || "bottom");
+      return good[value] ? value : "bottom";
+    } catch (_) { return "bottom"; }
   }
-
-  function writePreference(value) {
-    var next = VALID[value] ? value : "bottom";
-    try {
-      global.localStorage.setItem(STORAGE_KEY, next);
-    } catch (error) {}
-    return next;
+  function clamp(value, min, max, fallback) {
+    var n = Number(value);
+    return isFinite(n) ? Math.max(min, Math.min(max, n)) : fallback;
   }
-
-
-  function renderAdaptiveNavPanelMarkup() {
-    var preference = readPreference();
-    function button(value,label,small,mark) {
-      var selected = preference === value;
-      return '<button type="button" class="' + (selected ? 'is-selected' : '') +
-        '" data-dar-nav-choice="' + value + '" aria-pressed="' + (selected ? 'true' : 'false') + '">' +
-        '<span class="dar-nav-choice-mark dar-nav-choice-mark--' + mark + '" aria-hidden="true"></span>' +
-        '<strong>' + label + '</strong><small>' + small + '</small></button>';
-    }
-    return '<section class="settings-section dar-nav-position-settings" id="darNavPositionSettingsV1325" aria-labelledby="darNavPositionTitleV1325">' +
-      '<div class="dar-nav-position-kicker">NAVIGATION</div>' +
-      '<div class="dar-nav-position-head"><div>' +
-        '<h3 id="darNavPositionTitleV1325">Position der Tab-Leiste</h3>' +
-        '<p>Unten wie bisher oder seitlich als schmale 3D-Icon-Leiste. Auf schmalen Displays bleibt sie automatisch unten.</p>' +
-      '</div></div>' +
-      '<div class="dar-nav-position-options" role="group" aria-label="Position der Tab-Leiste">' +
-        button("left","Links","Linkshänder","left") +
-        button("bottom","Unten","Standard","bottom") +
-        button("right","Rechts","Rechtshänder","right") +
-      '</div>' +
-      '<p class="dar-nav-position-status" id="darNavPositionStatusV1325"></p>' +
-    '</section>';
-  }
-
-  function installSettingsRenderer() {
-    try {
-      global.renderAdaptiveNavPanel = renderAdaptiveNavPanelMarkup;
-    } catch (error) {}
-  }
-
-  function measure() {
-    if (global.DarAdaptiveLayout && typeof global.DarAdaptiveLayout.measure === "function") {
-      try {
-        return global.DarAdaptiveLayout.measure();
-      } catch (error) {}
-    }
-    var viewport = global.visualViewport;
-    var clientWidth = document.documentElement ? document.documentElement.clientWidth : 0;
-    var clientHeight = document.documentElement ? document.documentElement.clientHeight : 0;
+  function metricsPref() {
+    var saved = {};
+    try { saved = JSON.parse(global.localStorage.getItem(SETTINGS) || "{}") || {}; } catch (_) {}
     return {
-      width: Math.round((viewport && viewport.width) || clientWidth || global.innerWidth || 0),
-      height: Math.round((viewport && viewport.height) || clientHeight || global.innerHeight || 0),
-      offsetTop: Math.round((viewport && viewport.offsetTop) || 0)
+      width: clamp(saved.width, 56, 84, 68),
+      spacing: clamp(saved.spacing, 0, 12, 0),
+      vertical: clamp(saved.vertical, 0, 1, .56)
+    };
+  }
+  function viewport() {
+    var el = document.documentElement;
+    var w = Math.round((el && el.clientWidth) || global.innerWidth || 0);
+    var h = Math.round((el && el.clientHeight) || global.innerHeight || 0);
+    // Safari's visualViewport may lag a rotation. Use it only when its
+    // orientation agrees with the layout viewport.
+    var visual = global.visualViewport;
+    if (visual && visual.width > 0 && visual.height > 0 &&
+        (visual.width >= visual.height) === (w >= h)) {
+      w = Math.round(visual.width);
+      h = Math.round(visual.height);
+    }
+    return { w: w, h: h };
+  }
+  function isKeyboardOpen(v) {
+    if (root.classList.contains("adaptive-keyboard-open")) return true;
+    var el = document.activeElement;
+    var editable = el && (el.isContentEditable ||
+      /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName || ""));
+    return !!(editable && global.visualViewport &&
+      (root.clientHeight || global.innerHeight) - global.visualViewport.height > 110);
+  }
+  function mode(preference, v) {
+    if (!good[preference] || preference === "bottom" || !document.body) return "bottom";
+    if (document.body.classList.contains("is-ilm-chat-route") || isKeyboardOpen(v)) return "bottom";
+    // Covers all form factors by available space, never user agent strings.
+    // Compact portrait and narrow split-window: keep full bottom navigation.
+    if (v.w < 640 || v.h < 318) return "bottom";
+    if (v.w < v.h && v.w < 760) return "bottom";
+    return preference;
+  }
+  function geometry(v, settings, count) {
+    var n = Math.max(1, count || 5);
+    var width = settings.width;
+    var safeTop = 12;
+    var safeBottom = 12;
+    var space = settings.spacing;
+    var minHeight = n * 44 + 16 + (n - 1) * space;
+    var idealHeight = n * 48 + 16 + (n - 1) * space;
+    var available = Math.max(0, v.h - safeTop - safeBottom);
+    if (available < minHeight) return null;
+    var height = Math.min(idealHeight, available);
+    // Original Duos uses a normalized dockPosition (0..1), clamped to fit.
+    var top = clamp(v.h * settings.vertical - height / 2,
+      safeTop, v.h - height - safeBottom, safeTop);
+    return {
+      width: width, height: height, top: top, reserve: width + 28,
+      icon: Math.min(42, Math.max(30, Math.round(width * 76 / 106))),
+      spacing: space
     };
   }
 
-  function sideAllowed(preference, metrics) {
-    if (preference !== "left" && preference !== "right") return false;
-    if (!document.body) return false;
-    var width = Number(metrics && metrics.width) || 0;
-    var height = Number(metrics && metrics.height) || 0;
-    if (width < SIDE_MIN_WIDTH || height < SIDE_MIN_HEIGHT) return false;
-    if (root.classList.contains("adaptive-keyboard-open")) return false;
-    if (document.body.classList.contains("is-ilm-chat-route")) return false;
-    return true;
-  }
-
-  function effectivePosition(preference, metrics) {
-    return sideAllowed(preference, metrics) ? preference : "bottom";
-  }
-
-  function setRootState(preference, effective) {
+  function setRoot(preference, effective, g) {
     root.setAttribute("data-dar-nav-preference", preference);
     root.setAttribute("data-dar-nav-position", effective);
-    root.classList.toggle("dar-test-side-nav", effective === "left" || effective === "right");
+    root.classList.toggle("dar-test-side-nav", effective !== "bottom");
     root.classList.remove("dar-test-thumb-nav");
+    if (g) {
+      root.style.setProperty("--dar-side-nav-size", g.width + "px");
+      root.style.setProperty("--dar-side-nav-reserve", g.reserve + "px");
+      root.style.setProperty("--dar-duos-nav-height", g.height + "px");
+      root.style.setProperty("--dar-duos-nav-top", g.top + "px");
+      root.style.setProperty("--dar-duos-nav-icon", g.icon + "px");
+      root.style.setProperty("--dar-duos-nav-gap", g.spacing + "px");
+    }
   }
 
-  function applySidePosition(nav, side) {
+  function takeSide(nav, side, g) {
     nav.classList.remove("is-adaptive-centered");
     nav.classList.add("is-adaptive-rail");
-    nav.style.setProperty("position", "fixed", "important");
-    nav.style.setProperty("left", side === "left" ? "max(2px, calc(env(safe-area-inset-left, 0px) - 38px))" : "auto", "important");
-    nav.style.setProperty("right", side === "right" ? "max(2px, calc(env(safe-area-inset-right, 0px) - 38px))" : "auto", "important");
-    nav.style.setProperty("top", "50%", "important");
-    nav.style.setProperty("bottom", "auto", "important");
-    nav.style.setProperty("width", "56px", "important");
-    nav.style.setProperty("min-width", "56px", "important");
-    nav.style.setProperty("max-width", "56px", "important");
-    nav.style.setProperty(
-      "height",
-      "min(340px, calc(100dvh - max(10px, env(safe-area-inset-top, 0px)) - max(10px, env(safe-area-inset-bottom, 0px))))",
-      "important"
-    );
-    nav.style.setProperty("min-height", "260px", "important");
-    nav.style.setProperty("max-height", "340px", "important");
-    nav.style.setProperty("margin", "0", "important");
-    nav.style.setProperty("padding", "4px", "important");
-    nav.style.setProperty("flex-direction", "column", "important");
-    nav.style.setProperty("justify-content", "space-between", "important");
-    nav.style.setProperty("align-items", "center", "important");
-    nav.style.setProperty("gap", "0px", "important");
-    nav.style.setProperty("border-radius", "22px", "important");
-    nav.style.setProperty("transform", "translate3d(0,-50%,0)", "important");
-    nav.style.setProperty("-webkit-transform", "translate3d(0,-50%,0)", "important");
-    nav.style.setProperty("z-index", "96", "important");
-    nav.style.setProperty("pointer-events", "auto", "important");
-    nav.style.setProperty("transition", "opacity .22s cubic-bezier(.22,1,.36,1), background-color .22s ease, border-color .22s ease", "important");
-    sideApplied = true;
+    var s = nav.style;
+    // The existing adaptive controller previously writes inline !important.
+    // Set these only on actual geometry changes, never per DOM mutation.
+    var pos = side === "right" ? "right" : "left";
+    s.setProperty("position", "fixed", "important");
+    s.setProperty("left", side === "left" ? "max(12px, env(safe-area-inset-left, 0px))" : "auto", "important");
+    s.setProperty("right", side === "right" ? "max(12px, env(safe-area-inset-right, 0px))" : "auto", "important");
+    s.setProperty("top", g.top + "px", "important");
+    s.setProperty("bottom", "auto", "important");
+    s.setProperty("width", g.width + "px", "important");
+    s.setProperty("min-width", g.width + "px", "important");
+    s.setProperty("max-width", g.width + "px", "important");
+    s.setProperty("height", g.height + "px", "important");
+    s.setProperty("min-height", "0", "important");
+    s.setProperty("max-height", g.height + "px", "important");
+    s.setProperty("margin", "0", "important");
+    s.setProperty("padding", "8px", "important");
+    s.setProperty("flex-direction", "column", "important");
+    s.setProperty("justify-content", "space-evenly", "important");
+    s.setProperty("align-items", "center", "important");
+    s.setProperty("gap", g.spacing + "px", "important");
+    s.setProperty("border-radius", "30px", "important");
+    s.setProperty("transform", "none", "important");
+    s.setProperty("-webkit-transform", "none", "important");
+    s.setProperty("z-index", "96", "important");
+    s.setProperty("pointer-events", "auto", "important");
+    s.setProperty("transition", "opacity .18s ease, background-color .18s ease", "important");
   }
-
-  function clearSidePosition(nav) {
-    if (!sideApplied) return;
-    navProperties.forEach(function (property) {
-      nav.style.removeProperty(property);
-    });
+  function restoreBottom(nav) {
+    if (!nav || !nav.classList.contains("is-adaptive-rail")) return;
+    managedStyle.forEach(function (key) { nav.style.removeProperty(key); });
     nav.classList.remove("is-adaptive-rail");
-    sideApplied = false;
-
-    if (!restoringBottom && global.DarAdaptiveLayout && typeof global.DarAdaptiveLayout.syncNav === "function") {
-      restoringBottom = true;
-      try {
+    layoutKey = "";
+    // Restore the already-existing bottom-capsule geometry, not a new one.
+    try {
+      if (global.DarAdaptiveLayout &&
+          typeof global.DarAdaptiveLayout.syncNav === "function")
         global.DarAdaptiveLayout.syncNav();
-      } catch (error) {}
-      restoringBottom = false;
+    } catch (_) {}
+  }
+  function navButtons(nav) {
+    return nav && nav.querySelectorAll ?
+      nav.querySelectorAll(".bottom-nav-btn").length || 5 : 5;
+  }
+
+  function choicesMarkup() {
+    var p = pref();
+    function option(value, title, desc) {
+      return '<button type="button" data-dar-nav-choice="' + value +
+        '" aria-pressed="' + (p === value ? "true" : "false") + '">' +
+        '<strong>' + title + '</strong><small>' + desc + '</small></button>';
     }
+    return '<section id="' + controlsId +
+      '" class="settings-section dar-nav-position-settings" aria-labelledby="darNavPositionTitleV1325">' +
+      '<div class="dar-nav-position-kicker">NAVIGATION</div>' +
+      '<h3 id="darNavPositionTitleV1325">Position der Tab-Leiste</h3>' +
+      '<p>Im Hochformat kompakt unten; im Querformat wahlweise als seitliche Icon-Leiste.</p>' +
+      '<div class="dar-nav-position-options" role="group" aria-label="Navigationsposition">' +
+      option("left", "Links", "Linkshänder") +
+      option("bottom", "Unten", "Standard") +
+      option("right", "Rechts", "Rechtshänder") +
+      '</div><p class="dar-nav-position-status" id="darNavPositionStatusV1325"></p>' +
+      '<div class="dar-duos-geometry-settings">' +
+      '<label>Leistenbreite <output data-metric-output="width"></output>' +
+      '<input type="range" data-duos-metric="width" min="56" max="84" step="1"></label>' +
+      '<label>Abstand <output data-metric-output="spacing"></output>' +
+      '<input type="range" data-duos-metric="spacing" min="0" max="12" step="1"></label>' +
+      '<label>Vertikale Position <output data-metric-output="vertical"></output>' +
+      '<input type="range" data-duos-metric="vertical" min="0" max="100" step="1"></label>' +
+      '</div></section>';
   }
-
-  function isReadingContext() {
-    var body = document.body;
-    if (!body) return false;
-    if (
-      body.classList.contains("is-post-route") ||
-      body.classList.contains("is-quran-route") ||
-      body.classList.contains("is-hadith-route") ||
-      body.classList.contains("reader-mode")
-    ) return true;
-    return !!document.querySelector(
-      ".article,.post-reader,.post-body,.quran-reader-shell,.quran-ayah-list,.dua-detail-box,.lib-detail,.qsrc-detail,.hadith-detail,.pdf-viewer,[data-pdf-viewer],iframe[src*='.pdf'],embed[type='application/pdf']"
-    );
+  function installSettingsRenderer() {
+    // Existing settings renderers may call this function during view creation.
+    global.renderAdaptiveNavPanel = choicesMarkup;
   }
-
-  function clearIdleTimer() {
-    if (idleTimer) {
-      global.clearTimeout(idleTimer);
-      idleTimer = 0;
-    }
-    if (scrollFadeTimer) {
-      global.clearTimeout(scrollFadeTimer);
-      scrollFadeTimer = 0;
-    }
-  }
-
-  function scheduleIdle() {
-    root.classList.remove("dar-nav-reader-idle");
-  }
-
-  function onScrollActivity() {
-    if (currentEffective !== "left" && currentEffective !== "right") return;
-    root.classList.add("dar-nav-scrolling");
-    if (scrollFadeTimer) global.clearTimeout(scrollFadeTimer);
-    scrollFadeTimer = global.setTimeout(function () {
-      scrollFadeTimer = 0;
-      root.classList.remove("dar-nav-scrolling");
-    }, 240);
-  }
-
-  function wakeNav() {
-    if (currentEffective !== "left" && currentEffective !== "right") return;
-    root.classList.remove("dar-nav-scrolling");
-  }
-
-  function settingsHost() {
-    return document.getElementById("appView") || document.querySelector(".view");
-  }
-
-  function ensureSettingsControl() {
+  function settingsPanel() {
     if (!document.body || !document.body.classList.contains("is-settings-route")) return null;
-    var host = settingsHost();
-    if (!host) return null;
-
-    var panel = document.getElementById("darNavPositionSettingsV1325");
-    if (!panel) {
-      panel = document.createElement("section");
-      panel.id = "darNavPositionSettingsV1325";
-      panel.className = "settings-section dar-nav-position-settings";
-      panel.setAttribute("aria-labelledby", "darNavPositionTitleV1325");
-      panel.innerHTML =
-        '<div class="dar-nav-position-kicker">NAVIGATION</div>' +
-        '<div class="dar-nav-position-head">' +
-          '<div><h3 id="darNavPositionTitleV1325">Position der Tab-Leiste</h3>' +
-          '<p>Unten mit Beschriftung oder seitlich als schmale 3D-Icon-Leiste.</p></div>' +
-        '</div>' +
-        '<div class="dar-nav-position-options" role="group" aria-label="Position der Tab-Leiste">' +
-          '<button type="button" data-dar-nav-choice="left" aria-pressed="false"><span class="dar-nav-choice-mark dar-nav-choice-mark--left" aria-hidden="true"></span><strong>Links</strong><small>für Linkshänder</small></button>' +
-          '<button type="button" data-dar-nav-choice="bottom" aria-pressed="false"><span class="dar-nav-choice-mark dar-nav-choice-mark--bottom" aria-hidden="true"></span><strong>Unten</strong><small>Standard</small></button>' +
-          '<button type="button" data-dar-nav-choice="right" aria-pressed="false"><span class="dar-nav-choice-mark dar-nav-choice-mark--right" aria-hidden="true"></span><strong>Rechts</strong><small>für Rechtshänder</small></button>' +
-        '</div>' +
-        '<p class="dar-nav-position-status" id="darNavPositionStatusV1325"></p>';
-
-      panel.addEventListener("click", function (event) {
-        var button = event.target && event.target.closest && event.target.closest("[data-dar-nav-choice]");
-        if (!button) return;
-        event.preventDefault();
-        setPreference(button.getAttribute("data-dar-nav-choice"));
-      });
-
-      var setup = document.getElementById("dar-setup-hub");
-      var heading = host.querySelector(".settings-page-head");
-      if (setup && setup.parentNode) {
-        setup.insertAdjacentElement("afterend", panel);
-      } else if (heading && heading.parentNode) {
-        heading.insertAdjacentElement("afterend", panel);
-      } else {
-        host.insertBefore(panel, host.firstChild || null);
-      }
-    }
+    var panel = document.getElementById(controlsId);
+    if (panel) return panel;
+    var host = document.getElementById("appView");
+    if (!host || !document.createElement) return null;
+    var element = document.createElement("section");
+    element.innerHTML = choicesMarkup();
+    panel = element.firstElementChild;
+    if (!panel) return null;
+    var heading = host.querySelector(".settings-page-head");
+    var hub = document.getElementById("dar-setup-hub");
+    if (hub && hub.insertAdjacentElement) hub.insertAdjacentElement("afterend", panel);
+    else if (heading && heading.insertAdjacentElement) heading.insertAdjacentElement("afterend", panel);
+    else host.appendChild(panel);
     return panel;
   }
-
-  function updateSettingsControl(preference, effective) {
-    var panel = ensureSettingsControl();
+  function updatePanel(p, effective) {
+    var panel = settingsPanel();
     if (!panel) return;
-    panel.querySelectorAll("[data-dar-nav-choice]").forEach(function (button) {
-      var selected = button.getAttribute("data-dar-nav-choice") === preference;
-      button.classList.toggle("is-selected", selected);
-      button.setAttribute("aria-pressed", selected ? "true" : "false");
+    panel.querySelectorAll("[data-dar-nav-choice]").forEach(function (b) {
+      var selected = b.getAttribute("data-dar-nav-choice") === p;
+      b.classList.toggle("is-selected", selected);
+      b.setAttribute("aria-pressed", String(selected));
     });
     var status = panel.querySelector("#darNavPositionStatusV1325");
-    if (!status) return;
-    if (preference !== "bottom" && effective === "bottom") {
-      status.textContent = "Gespeichert: " + (preference === "left" ? "Links" : "Rechts") + " · Auf diesem schmalen Display bleibt die Leiste automatisch unten.";
-    } else if (effective === "left") {
-      status.textContent = "Aktiv: links · Bereichsauswahl wird auf breiten Ansichten nach rechts gespiegelt.";
-    } else if (effective === "right") {
-      status.textContent = "Aktiv: rechts · Bereichsauswahl bleibt auf breiten Ansichten links.";
-    } else {
-      status.textContent = "Aktiv: unten · 3D-Icons und Beschriftungen bleiben wie gewohnt sichtbar.";
+    if (status) {
+      status.textContent = p !== "bottom" && effective === "bottom" ?
+        "Seitliche Leiste gespeichert · bei wenig Platz automatisch unten." :
+        effective === "bottom" ? "Navigation unten aktiv." :
+        "Navigation " + (effective === "left" ? "links" : "rechts") + " aktiv.";
     }
+    var m = metricsPref();
+    ["width", "spacing", "vertical"].forEach(function (name) {
+      var input = panel.querySelector('[data-duos-metric="' + name + '"]');
+      var value = name === "vertical" ? Math.round(m.vertical * 100) : m[name];
+      if (input && Number(input.value) !== value) input.value = String(value);
+      var output = panel.querySelector('[data-metric-output="' + name + '"]');
+      if (output) output.textContent = value + (name === "vertical" ? " %" : " px");
+    });
   }
-
   function apply() {
     var nav = document.getElementById("bottomNav");
-    if (!nav) {
-      ensureSettingsControl();
-      return false;
+    if (!nav || !document.body) return false;
+    if (activeNav && activeNav !== nav) restoreBottom(activeNav);
+    activeNav = nav;
+    var v = viewport();
+    var p = pref();
+    var effective = mode(p, v);
+    var m = metricsPref();
+    var g = effective === "bottom" ? null : geometry(v, m, navButtons(nav));
+    if (!g) effective = "bottom";
+    // Do not repeatedly mutate nav styles while route content renders.
+    var nextKey = effective + "|" + v.w + "|" + v.h + "|" +
+      (g ? [g.width, g.top, g.height, g.spacing].join(":") : "none");
+    var changed = nextKey !== layoutKey || effective !== current;
+    current = effective;
+    setRoot(p, effective, g);
+    if (changed) {
+      layoutKey = nextKey;
+      if (g) takeSide(nav, effective, g);
+      else restoreBottom(nav);
     }
-
-    var preference = readPreference();
-    var metrics = measure();
-    var effective = effectivePosition(preference, metrics);
-    setRootState(preference, effective);
-
-    currentEffective = effective;
-    if (effective === "left" || effective === "right") {
-      applySidePosition(nav, effective);
-    } else {
-      clearSidePosition(nav);
-      root.classList.remove("dar-nav-reader-idle","dar-nav-scrolling");
-      clearIdleTimer();
-    }
-    updateSettingsControl(preference, effective);
-    if (effective === "left" || effective === "right") scheduleIdle();
+    updatePanel(p, effective);
     return true;
   }
-
   function setPreference(value) {
-    var next = writePreference(value);
-    schedule(true);
+    var next = good[value] ? value : "bottom";
+    try { global.localStorage.setItem(STORE, next); } catch (_) {}
+    schedule();
     try {
       global.dispatchEvent(new CustomEvent("dar:navpositionchange", { detail: { preference: next } }));
-    } catch (error) {}
+    } catch (_) {}
     return next;
   }
-
+  function setMetric(name, value) {
+    if (!({width:1, spacing:1, vertical:1})[name]) return;
+    var m = metricsPref();
+    m[name] = name === "width" ? clamp(value,56,84,68) :
+      name === "spacing" ? clamp(value,0,12,0) : clamp(value / 100,0,1,.56);
+    try { global.localStorage.setItem(SETTINGS, JSON.stringify(m)); } catch (_) {}
+    schedule();
+  }
   function schedule() {
-    if (rafId) return;
-    rafId = global.requestAnimationFrame(function () {
-      rafId = 0;
+    if (frame) return;
+    frame = global.requestAnimationFrame(function () {
+      frame = 0;
       apply();
     });
   }
-
-  function clearBurst() {
-    burstTimers.forEach(function (id) { global.clearTimeout(id); });
-    burstTimers = [];
-  }
-
-  function scheduleBurst() {
-    clearBurst();
-    [0, 180, 520, 980].forEach(function (delay) {
-      burstTimers.push(global.setTimeout(schedule, delay));
+  function rotate() {
+    bursts.forEach(function (id) { global.clearTimeout(id); });
+    bursts = [];
+    schedule();
+    [140, 420, 850].forEach(function (delay) {
+      bursts.push(global.setTimeout(schedule, delay));
     });
   }
-
+  function onSettingsClick(event) {
+    var b = event.target && event.target.closest &&
+      event.target.closest("[data-dar-nav-choice]");
+    if (!b) return;
+    event.preventDefault();
+    setPreference(b.getAttribute("data-dar-nav-choice"));
+  }
+  function onMetricsInput(event) {
+    var field = event.target && event.target.closest &&
+      event.target.closest("[data-duos-metric]");
+    if (field) setMetric(field.getAttribute("data-duos-metric"), field.value);
+  }
   function start() {
     installSettingsRenderer();
     schedule();
-
-    global.addEventListener("dar:layoutchange", schedule);
-    global.addEventListener("dar:view-rendered", schedule);
-    global.addEventListener("dar:navpositionchange", schedule);
     global.addEventListener("resize", schedule, { passive: true });
-    global.addEventListener("orientationchange", scheduleBurst, { passive: true });
-    global.addEventListener("pageshow", scheduleBurst, { passive: true });
+    global.addEventListener("orientationchange", rotate, { passive: true });
+    global.addEventListener("pageshow", rotate, { passive: true });
+    global.addEventListener("hashchange", rotate, { passive: true });
     global.addEventListener("popstate", schedule, { passive: true });
-    global.addEventListener("hashchange", schedule, { passive: true });
-
-    if (global.visualViewport) {
+    global.addEventListener("dar:layoutchange", schedule);
+    global.addEventListener("dar:view-rendered", rotate);
+    if (global.visualViewport)
       global.visualViewport.addEventListener("resize", schedule, { passive: true });
-    }
-
-    global.addEventListener("scroll", onScrollActivity, { passive: true });
-    global.addEventListener("wheel", onScrollActivity, { passive: true });
-    global.addEventListener("pointerdown", wakeNav, { passive: true });
-    global.addEventListener("touchstart", wakeNav, { passive: true });
-    global.addEventListener("keydown", wakeNav);
-
-    if (document.body && typeof MutationObserver === "function") {
-      observer = new MutationObserver(function () {
-        schedule();
-      });
-      observer.observe(document.body, { childList: true, subtree: true });
-    }
+    document.addEventListener("click", onSettingsClick, true);
+    document.addEventListener("input", onMetricsInput, true);
   }
-
-  document.addEventListener("click", function (event) {
-    var button = event.target && event.target.closest && event.target.closest("[data-dar-nav-choice]");
-    if (!button) return;
-    event.preventDefault();
-    setPreference(button.getAttribute("data-dar-nav-choice"));
-  }, true);
-
   global.DarAdaptiveNavPlacement = {
-    getPreference: readPreference,
+    getPreference: pref,
     setPreference: setPreference,
-    getEffectivePosition: function () { return currentEffective; },
+    getEffectivePosition: function () { return current; },
     apply: apply,
-    measure: measure
+    measure: viewport
   };
-
-  /* Compatibility for the old test prototype name. */
   global.DarTestThumbNav = {
-    takeControl: function () { return apply(); },
+    takeControl: apply,
     apply: apply,
-    isActive: function () { return currentEffective === "left" || currentEffective === "right"; }
+    isActive: function () { return current !== "bottom"; }
   };
-
-  if (document.readyState === "loading") {
+  if (document.readyState === "loading")
     document.addEventListener("DOMContentLoaded", start, { once: true });
-  } else {
-    start();
-  }
+  else start();
 })(typeof window !== "undefined" ? window : this);
