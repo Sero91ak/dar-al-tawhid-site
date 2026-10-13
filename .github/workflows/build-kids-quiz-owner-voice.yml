@@ -395,7 +395,7 @@ jobs:
                   segments=speech_parts(text)
                   if len(segments)<2 or not any(lang=="ar" for lang,_ in segments):
                       raise RuntimeError("Bilingual clip needs German/Arabic fragments")
-                  digest=hashlib.sha1(("hybrid-v1|"+ELEVEN_VOICE+"|"+str(profile)+"|"+prepared).encode("utf-8")).hexdigest()[:16]
+                  digest=hashlib.sha1(("hybrid-v4-v2|"+str(model_id)+"|"+ELEVEN_VOICE+"|"+str(profile)+"|"+prepared).encode("utf-8")).hexdigest()[:16]
                   target=asset_dir/(digest+".m4a")
                   if target.exists() and target.stat().st_size>1200:
                       return text,target,duration(target),prepared
@@ -669,18 +669,19 @@ jobs:
                   # Reuse a verified old V4 German clip if it exactly matches the
                   # current text/profile/preparation. Never burn credits converting
                   # already-finished V4 takes into cheaper-model files.
-                  if preserve_existing and text_model==ELEVEN_QUIZ_DE_MODEL and \
-                          str(entry.get("modelId") or "")==ELEVEN_QUIZ_AR_MODEL and \
-                          str(entry.get("voiceProfileId") or "")=="serhat-owner-voice-2026" and \
-                          str(entry.get("preparedTextSha256") or "")==prepared_hash:
-                      expected_cache_model=None
-                  p=local_from_entry(
-                      entry,
-                      asset_dir,
-                      expected_cache_model,
-                      text_profile,
-                      expected_revision
+                  # Reuse only exact prepared-text/voice/profile V4 takes.
+                  can_reuse_verified_v4=(
+                      preserve_existing and str(text_model)=="eleven_v4"
+                      and str(entry.get("modelId") or "")=="eleven_v4"
+                      and str(entry.get("voiceProfileId") or "")=="serhat-owner-voice-2026"
+                      and str(entry.get("preparedTextSha256") or "")==prepared_hash
+                      and str(entry.get("speechProfile") or "")==str(text_profile)
                   )
+                  p=local_from_entry(
+                      entry,asset_dir,expected_cache_model,text_profile,expected_revision
+                  )
+                  if p is None and can_reuse_verified_v4:
+                      p=local_from_entry(entry,asset_dir,"eleven_v4",text_profile)
                   # Legacy published Arabic files must not be re-rendered merely
                   # because the synthesis recipe changed. Only individually
                   # approved model switches or genuinely missing clips may run.
@@ -753,8 +754,8 @@ jobs:
                       "initialContextShaddaStripped":(True if is_arabic else None),
                       "modelId":text_model,
                       "speechProfile":text_profile,
-                      "languageComposition":("de+ar" if text_model==ELEVEN_QUIZ_HYBRID_MODEL else "ar" if text_model==ELEVEN_QUIZ_AR_MODEL else "de"),
-                      "pronunciationQaStatus":("needs-native-fusha-listening-review" if text_model in (ELEVEN_QUIZ_HYBRID_MODEL,ELEVEN_QUIZ_AR_MODEL) else "technical-qa-complete"),
+                      "languageComposition":("de+ar" if text_model==ELEVEN_QUIZ_HYBRID_MODEL else "ar" if is_arabic else "de"),
+                      "pronunciationQaStatus":("needs-native-fusha-listening-review" if is_arabic or text_model==ELEVEN_QUIZ_HYBRID_MODEL else "technical-qa-complete"),
                       # No automatically generated Arabic track may assert a completed hearing review.
                       "audioListeningApproved":(False if is_arabic else None),
                       "qaApproval":("pending-native-listening" if is_arabic else "technical-qa-complete"),
@@ -883,17 +884,17 @@ jobs:
                   prompt=quiz_prompt(q)
                   quiz_texts.append(prompt)
                   quiz_models[prompt]=quiz_model_for_text(prompt)
-                  quiz_profiles[prompt]="quiz_fusha" if quiz_models[prompt]==ELEVEN_QUIZ_AR_MODEL else age_profile.get(str(q.get("ageBand") or ""),"quiz_9_10")
+                  quiz_profiles[prompt]="quiz_fusha" if ARABIC_SCRIPT_RE.fullmatch(prompt) else age_profile.get(str(q.get("ageBand") or ""),"quiz_9_10")
                   for feedback in (norm(q.get("success")),norm(q.get("retry"))):
                       if feedback:
                           quiz_texts.append(feedback)
                           quiz_models[feedback]=quiz_model_for_text(feedback)
-                          quiz_profiles[feedback]="quiz_fusha" if quiz_models[feedback]==ELEVEN_QUIZ_AR_MODEL else "quiz_feedback"
+                          quiz_profiles[feedback]="quiz_fusha" if ARABIC_SCRIPT_RE.fullmatch(feedback) else "quiz_feedback"
                   explanation=norm(q.get("explanation"))
                   if explanation:
                       quiz_texts.append(explanation)
                       quiz_models[explanation]=quiz_model_for_text(explanation)
-                      quiz_profiles[explanation]="quiz_fusha" if quiz_models[explanation]==ELEVEN_QUIZ_AR_MODEL else "quiz_feedback"
+                      quiz_profiles[explanation]="quiz_fusha" if ARABIC_SCRIPT_RE.fullmatch(explanation) else "quiz_feedback"
               final_feedback="Sehr gut. Du hast das Quiz geschafft."
               quiz_texts.append(final_feedback)
               quiz_profiles[final_feedback]="quiz_feedback"
