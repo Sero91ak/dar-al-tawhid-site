@@ -3517,7 +3517,7 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306-listen-scroll-v18";
+const KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306-listen-scroll-v18-salaf-visible-v1355";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6944,12 +6944,12 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/dua-smart-learn.js?v=1312"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306-listen-scroll-v18";
+  var KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306-listen-scroll-v18-salaf-visible-v1355";
   // Stable start: do not reload a visible app when a service worker takes control.
   // The next navigation uses network-first and receives the latest release.
   if("serviceWorker" in navigator){
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1353",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1355",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     },{once:true});
@@ -11634,7 +11634,7 @@ html body .app:has(#view-parents.view.active) .shell{
 <script defer src="/kids/girls-profile-theme-v1332.js?v=1348" data-kids-girls-system-tint="1332"></script>
 <!-- KIDS_SALAF_LIBRARY_V1: fifth tab, isolated source-gated library; after other profile palettes -->
 <link rel="stylesheet" href="/kids/salaf-library-v1.css?v=1">
-<script defer src="/kids/salaf-library-v1.js?v=1"></script>
+<script defer src="/kids/salaf-library-v1.js?v=1355"></script>
 <!-- KIDS_OFFLINE_LIBRARY_V1: independent storage controls for the Parents tab -->
 <script defer src="/kids/offline-library-v1.js?v=1"></script>
 <!-- KIDS_SALAH_STAGE_V1261: placed after hero, before continue-listening -->
@@ -11679,5 +11679,5 @@ html body :is(
 /* Do not change touch-action, pointer-events, scrolling, tap targets, focus or keyboard editing. */
 </style>
 <!-- KIDS_SALAF_OPEN_WORLD_V1353: Salaf-only filmic full-bleed, profile-aware. Do not touch Home or floating dock. -->
-<link rel="stylesheet" href="/kids/salaf-open-world-v1353.css?v=1354">
+<link rel="stylesheet" href="/kids/salaf-open-world-v1353.css?v=1355">
 </html>
