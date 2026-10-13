@@ -290,6 +290,9 @@ const KIDS_BOOT_PRECACHE=[
   "/kids/kids-story-action-contrast-v1345.css?v=1346",
   "/kids/offline-library-v1.js?v=1",
   "/kids/offline-library-v1.css?v=1",
+  "/kids/salaf-library-v1.js?v=1",
+  "/kids/salaf-library-v1.css?v=1",
+  "/kids/data/salaf-library-v1.json?v=1",
   "/kids/akademie/curriculum-v1.js?v=20261010-01",
   "/kids/akademie/curriculum-v2.js?v=20261010-09",
   "/kids/akademie/curriculum-v22.js?v=20261011-01",
@@ -508,6 +511,11 @@ self.addEventListener("fetch",function(event){
   }
   if(url.pathname==="/kids/version.json"){
     event.respondWith(staleWhileRevalidate(request));
+    return;
+  }
+  /* KIDS Salaf: newly authenticated releases must appear immediately online while retaining saved age audio/text offline. */
+  if(url.pathname==="/kids/data/salaf-library-v1.json"||url.pathname==="/kids/salaf-library-v1.js"||url.pathname==="/kids/salaf-library-v1.css"){
+    event.respondWith(networkFirst(request));
     return;
   }
   /* Always retrieve latest story master-audio metadata while online; retain offline fallback. */
