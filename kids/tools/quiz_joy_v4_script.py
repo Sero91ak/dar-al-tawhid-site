@@ -15,7 +15,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 QUIZ = ROOT / "kids" / "data" / "quiz-kids.json"
-REVISION = "quiz-joy-serhat-v4-20261013"
+REVISION = "quiz-academy-praise-v4-20261013"
 AGE_BANDS = ("4-6", "7-8", "9-10")
 
 YES_NO_GUIDANCE = (
