@@ -6145,12 +6145,9 @@ function chooseQuizAnswer(index,button){
     var src=document.getElementById("quizSource");
     if(src)src.innerHTML='<strong>Quelle:</strong> '+String(q.source||"");
     document.getElementById("quizNext").classList.add("show");
-    var masteryResult=recordQuizAttempt(q.id,!quizQuestionHadError);
-    if(masteryResult.entry&&masteryResult.entry.stage==="secure"){
-      document.getElementById("quizFeedback").textContent="✓ "+quizAcademyPraiseText(q)+" · sicher";
-    }else if(!quizQuestionHadError&&!masteryResult.counted){
-      document.getElementById("quizFeedback").textContent="✓ "+quizAcademyPraiseText(q)+" · Wiederholung später";
-    }
+    // Mastery still gets recorded, but technical learning states must not
+    // interrupt the age-appropriate Islamic congratulations.
+    recordQuizAttempt(q.id,!quizQuestionHadError);
     // Nach einer richtigen Antwort wird die kindgerechte Erklärung vollständig
     // in der Serhat-Masterstimme vorgelesen, aber nur mit echtem freigegebenem Clip.
     // Nicht auf System-TTS ausweichen und keine nächste Quizfrage übertönen.
