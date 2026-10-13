@@ -5067,19 +5067,19 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die Seite liefert keine nummerierte Bittformel für den Notfall. Die menschliche Hilfe ist die Schutzregel und kein Hadith. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Die Seite liefert keine nummerierte Bittformel für den Notfall. Die menschliche Hilfe ist die Schutzregel und kein Hadith. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe). Pädagogisch überprüfte Lektionstexte und Quizfragen, 13.10.2026. Wissenschaftliche Quellenprüfung nicht neu bestätigt."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Wenn uns etwas schwer wird, bitten wir Allah und holen bei Gefahr einen Menschen.",
     "ageText": {
       "4-5": {
         "goal": "Wenn uns etwas schwer wird, bitten wir Allah und holen bei Gefahr einen Menschen.",
-        "intro": "Wenn uns etwas schwer wird, bitten wir Allah und holen bei Gefahr einen Menschen. Der Vers beginnt damit, dass Allah sagt: Ruft Mich an, so erhöre Ich euch. Stell dir vor: Ein Kind versteht eine Aufgabe nicht und bittet Allah leise um Hilfe, dann fragt es die Lehrperson. Heute üben wir: Wir sprechen eine kurze eigene Bitte auf Deutsch und nennen danach die Person, die wir bei einer echten Not holen würden. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! Wenn dir etwas schwerfällt, darfst du Allah um Hilfe bitten. Im Qurʾān 40:60 steht sinngemäß: „Ruft Mich an, so erhöre Ich euch.“ Das ist eine Einladung zum Duʿāʾ. Du kannst Allah bitten und zugleich eine Lehrperson fragen, wenn du eine Aufgabe nicht verstehst. Bei Gefahr holst du immer sofort Hilfe von Menschen.",
         "lines": [
-          "Wenn uns etwas schwer wird, bitten wir Allah und holen bei Gefahr einen Menschen.",
-          "Der Vers beginnt damit, dass Allah sagt: Ruft Mich an, so erhöre Ich euch.",
-          "Ein Kind versteht eine Aufgabe nicht und bittet Allah leise um Hilfe, dann fragt es die Lehrperson.",
-          "Wir sprechen eine kurze eigene Bitte auf Deutsch und nennen danach die Person, die wir bei einer echten Not holen würden."
+          "Qurʾān 40:60 ruft zum Duʿāʾ auf.",
+          "Ich darf Allah um Gutes bitten.",
+          "Bei Problemen darf ich Erwachsene fragen.",
+          "Duʿāʾ und hilfreiches Handeln passen zusammen."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1654. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 40:60. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1654. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 40:60. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -5096,16 +5096,16 @@ const additions=
         "situation": "Ein Kind versteht eine Aufgabe nicht und bittet Allah leise um Hilfe, dann fragt es die Lehrperson.",
         "practice": "Wir sprechen eine kurze eigene Bitte auf Deutsch und nennen danach die Person, die wir bei einer echten Not holen würden.",
         "summary": "Wenn uns etwas schwer wird, bitten wir Allah und holen bei Gefahr einen Menschen. Die arabischen Worte spricht die Lehrperson.",
-        "audioScript": "In schwierigen Momenten Duʿāʾ. Wenn uns etwas schwer wird, bitten wir Allah und holen bei Gefahr einen Menschen. Der Vers beginnt damit, dass Allah sagt: Ruft Mich an, so erhöre Ich euch. Ein Kind versteht eine Aufgabe nicht und bittet Allah leise um Hilfe, dann fragt es die Lehrperson. Wir sprechen eine kurze eigene Bitte auf Deutsch und nennen danach die Person, die wir bei einer echten Not holen würden."
+        "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Wenn dir etwas schwerfällt, darfst du Allah um Hilfe bitten. Im Qurʾān 40:60 steht sinngemäß: „Ruft Mich an, so erhöre Ich euch.“ Das ist eine Einladung zum Duʿāʾ. Du kannst Allah bitten und zugleich eine Lehrperson fragen, wenn du eine Aufgabe nicht verstehst. Bei Gefahr holst du immer sofort Hilfe von Menschen."
       },
       "6-8": {
         "goal": "Wenn uns etwas schwer wird, bitten wir Allah und holen bei Gefahr einen Menschen.",
-        "intro": "Heute geht es um In schwierigen Momenten Duʿāʾ. Wenn uns etwas schwer wird, bitten wir Allah und holen bei Gefahr einen Menschen. Wir lesen Qurʾān 40:60. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers beginnt damit, dass Allah sagt: Ruft Mich an, so erhöre Ich euch. Der folgende Satz der Seite warnt die, die sich Seiner Anbetung gegenüber großtun. Diesen Satz machen wir nicht zu einem Angstbild. So kann das im Alltag aussehen: Ein Kind versteht eine Aufgabe nicht und bittet Allah leise um Hilfe, dann fragt es die Lehrperson. Die Aufgabe: Wir sprechen eine kurze eigene Bitte auf Deutsch und nennen danach die Person, die wir bei einer echten Not holen würden. udʿūnī bedeutet: ruft Mich an. astaǧib bedeutet: Ich erhöre. Die Grenze der Stunde: Die Seite liefert keine nummerierte Bittformel für den Notfall. Die menschliche Hilfe ist die Schutzregel und kein Hadith.",
+        "intro": "As-salāmu ʿalaikum! Qurʾān 40:60 beginnt mit Allahs Aufforderung, Ihn anzurufen. Wir lernen, Allah um Gutes zu bitten, und zwar auch mit eigenen Worten. Stell dir vor, du verstehst eine Aufgabe nicht. Du darfst ein kurzes Duʿāʾ sprechen und danach die Lehrperson um Hilfe bitten. Wenn etwas gefährlich ist, handelst du sofort und suchst Schutz. Niemand muss mit seinen Sorgen allein bleiben.",
         "lines": [
-          "Qurʾān 40:60 ist die gelesene Stelle.",
-          "Der Vers beginnt damit, dass Allah sagt: Ruft Mich an, so erhöre Ich euch.",
-          "Ein Kind versteht eine Aufgabe nicht und bittet Allah leise um Hilfe, dann fragt es die Lehrperson.",
-          "Die arabischen Worte spricht die Lehrperson."
+          "Qurʾān 40:60 ruft zum Duʿāʾ auf.",
+          "Ich darf Allah um Gutes bitten.",
+          "Bei Problemen darf ich Erwachsene fragen.",
+          "Duʿāʾ und hilfreiches Handeln passen zusammen."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1654. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 40:60. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1654. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 40:60. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -5122,16 +5122,16 @@ const additions=
         "situation": "Ein Kind versteht eine Aufgabe nicht und bittet Allah leise um Hilfe, dann fragt es die Lehrperson.",
         "practice": "Wir sprechen eine kurze eigene Bitte auf Deutsch und nennen danach die Person, die wir bei einer echten Not holen würden.",
         "summary": "Qurʾān 40:60 trägt diese Stunde. Der Vers beginnt damit, dass Allah sagt: Ruft Mich an, so erhöre Ich euch.",
-        "audioScript": "In schwierigen Momenten Duʿāʾ. Der Vers beginnt damit, dass Allah sagt: Ruft Mich an, so erhöre Ich euch. Ein Kind versteht eine Aufgabe nicht und bittet Allah leise um Hilfe, dann fragt es die Lehrperson. Wir sprechen eine kurze eigene Bitte auf Deutsch und nennen danach die Person, die wir bei einer echten Not holen würden."
+        "audioScript": "As-salāmu ʿalaikum! Qurʾān 40:60 beginnt mit Allahs Aufforderung, Ihn anzurufen. Wir lernen, Allah um Gutes zu bitten, und zwar auch mit eigenen Worten. Stell dir vor, du verstehst eine Aufgabe nicht. Du darfst ein kurzes Duʿāʾ sprechen und danach die Lehrperson um Hilfe bitten. Wenn etwas gefährlich ist, handelst du sofort und suchst Schutz. Niemand muss mit seinen Sorgen allein bleiben."
       },
       "9-10": {
         "goal": "Ich kann In schwierigen Momenten Duʿāʾ von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "In schwierigen Momenten Duʿāʾ. Das Lernziel ist: Wenn uns etwas schwer wird, bitten wir Allah und holen bei Gefahr einen Menschen. Sinngemäß, keine beglaubigte Übersetzung: Der Vers beginnt damit, dass Allah sagt: Ruft Mich an, so erhöre Ich euch. Der folgende Satz der Seite warnt die, die sich Seiner Anbetung gegenüber großtun. Diesen Satz machen wir nicht zu einem Angstbild. Alltag: Ein Kind versteht eine Aufgabe nicht und bittet Allah leise um Hilfe, dann fragt es die Lehrperson. Aufgabe: Wir sprechen eine kurze eigene Bitte auf Deutsch und nennen danach die Person, die wir bei einer echten Not holen würden. udʿūnī bedeutet: ruft Mich an. astaǧib bedeutet: Ich erhöre. Was nicht behauptet wird: Die Seite liefert keine nummerierte Bittformel für den Notfall. Die menschliche Hilfe ist die Schutzregel und kein Hadith.",
+        "intro": "As-salāmu ʿalaikum! In Qurʾān 40:60 sagt Allah sinngemäß: „Ruft Mich an, so erhöre Ich euch.“ Die Stelle ermutigt zu Duʿāʾ. Ein Bittgebet ersetzt nicht jede Handlung, die in einer schwierigen Situation nötig ist. Wir unterscheiden deshalb das Vertrauen zu Allah von der Aufgabe, konkrete Hilfe zu suchen. Im Beispiel mit einer schweren Lernaufgabe bitten wir Allah um Beistand und sprechen anschließend mit der Lehrperson. Der Vers wird nicht benutzt, um Kindern Schuld einzureden, wenn Probleme nicht sofort verschwinden.",
         "lines": [
-          "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 40:60.",
-          "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
-          "Die Seite liefert keine nummerierte Bittformel für den Notfall.",
-          "Eine Hadithnummer, die auf der Seite fehlt, wird nicht ergänzt."
+          "Qurʾān 40:60 ruft zum Duʿāʾ auf.",
+          "Ich darf Allah um Gutes bitten.",
+          "Bei Problemen darf ich Erwachsene fragen.",
+          "Duʿāʾ und hilfreiches Handeln passen zusammen."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1654. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 40:60. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1654. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 40:60. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -5148,90 +5148,90 @@ const additions=
         "situation": "Ein Kind versteht eine Aufgabe nicht und bittet Allah leise um Hilfe, dann fragt es die Lehrperson.",
         "practice": "Wir sprechen eine kurze eigene Bitte auf Deutsch und nennen danach die Person, die wir bei einer echten Not holen würden.",
         "summary": "Belegt ist Qurʾān 40:60. Ungeprüft bleibt: Die Seite liefert keine nummerierte Bittformel für den Notfall.",
-        "audioScript": "In schwierigen Momenten Duʿāʾ. Der Vers beginnt damit, dass Allah sagt: Ruft Mich an, so erhöre Ich euch. Nicht belegt und deshalb nicht behauptet: Die Seite liefert keine nummerierte Bittformel für den Notfall."
+        "audioScript": "As-salāmu ʿalaikum! In Qurʾān 40:60 sagt Allah sinngemäß: „Ruft Mich an, so erhöre Ich euch.“ Die Stelle ermutigt zu Duʿāʾ. Ein Bittgebet ersetzt nicht jede Handlung, die in einer schwierigen Situation nötig ist. Wir unterscheiden deshalb das Vertrauen zu Allah von der Aufgabe, konkrete Hilfe zu suchen. Im Beispiel mit einer schweren Lernaufgabe bitten wir Allah um Beistand und sprechen anschließend mit der Lehrperson. Der Vers wird nicht benutzt, um Kindern Schuld einzureden, wenn Probleme nicht sofort verschwinden."
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was passt zu dieser Stunde?",
+          "prompt": "Du verstehst eine Aufgabe nicht. Was darfst du tun?",
           "options": [
-            "Wir sprechen eine kurze eigene Bitte auf Deutsch und nennen danach die Person, die wir bei einer echten Not holen.",
-            "Ich bitte nur, wenn andere mich loben."
+            "Allah bitten und die Lehrperson fragen.",
+            "Schweigen und gar keine Hilfe suchen."
           ],
           "correct": 0,
-          "hint": "Schau auf die Übung.",
-          "explain": "Die Übung der Stunde ist der erste Satz. Der zweite Satz ist das Gegenteil von dem, was wir üben."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Duʿāʾ und Hilfeholen schließen sich nicht aus."
         },
         {
           "type": "choice",
-          "prompt": "Woran hält sich diese Stunde?",
+          "prompt": "Was bedeutet Duʿāʾ?",
           "options": [
-            "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "Bittgebet an Allah.",
+            "Jemanden verspotten."
           ],
           "correct": 0,
-          "hint": "Nur Gelesenes.",
-          "explain": "Die Stunde nennt Qurʾān 40:60 und trennt die Übung davon. Eine Nummer wird nicht erfunden."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Duʿāʾ ist eine Bitte an Allah."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Stelle trägt In schwierigen Momenten Duʿāʾ?",
+          "prompt": "Was sagt Allah am Anfang von Qurʾān 40:60?",
           "options": [
-            "Qurʾān 40:60",
-            "Eine Stelle ohne Suren- und Verszahl."
+            "Ruft Mich an, so erhöre Ich euch.",
+            "Versteckt jede Sorge vor anderen."
           ],
           "correct": 0,
-          "hint": "Die Fundstelle steht im Unterricht.",
-          "explain": "Die Stunde bleibt bei Qurʾān 40:60."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Der Vers ermutigt zum Bittgebet."
         },
         {
           "type": "choice",
-          "prompt": "Was sagt der Vers sinngemäß für diese Stunde?",
+          "prompt": "Was machst du bei einer echten Gefahr?",
           "options": [
-            "Der Vers beginnt damit, dass Allah sagt: Ruft Mich an, so erhöre Ich euch.",
-            "Ich bitte nur, wenn andere mich loben."
+            "Ich hole sofort Hilfe von Menschen.",
+            "Ich tue nichts und warte allein."
           ],
           "correct": 0,
-          "hint": "Der erste Satz folgt der gelesenen Stelle.",
-          "explain": "Die deutsche Zeile ist eine Unterrichtshilfe zu Qurʾān 40:60, keine beglaubigte Übersetzung."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Sicherheit geht vor."
         },
         {
           "type": "text",
-          "prompt": "Welche Übung gehört zu dieser Stunde?",
-          "sample": "Wir sprechen eine kurze eigene Bitte auf Deutsch und nennen danach die Person, die wir bei einer echten Not holen.",
-          "hint": "Die praktische Aufgabe.",
-          "explain": "Die Übung ist die genannte Handlung und nicht eine zusätzliche Formel."
+          "prompt": "Nenne eine eigene Bitte um Hilfe.",
+          "sample": "O Allah, hilf mir, meine Aufgabe gut zu verstehen.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Wir dürfen Allah mit eigenen Worten bitten."
         }
       ],
       "9-10": [
         {
           "type": "choice",
-          "prompt": "Welche Angabe wäre unehrlich?",
+          "prompt": "Welche Aussage stimmt mit Qurʾān 40:60 überein?",
           "options": [
-            "Ein Rechtsurteil oder eine Hadithnummer als gelesen auszugeben, obwohl die Seite sie nicht liefert.",
-            "Zu sagen, dass die deutsche Erklärung sinngemäß ist."
+            "Allah ruft dazu auf, Ihn anzurufen.",
+            "Kinder sollen keine Hilfe bei Erwachsenen suchen."
           ],
           "correct": 0,
-          "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Der Vers spricht von Allahs Antwort auf Duʿāʾ."
         },
         {
           "type": "text",
-          "prompt": "Was darf diese Stunde nicht behaupten?",
-          "sample": "Die Seite liefert keine nummerierte Bittformel für den Notfall.",
-          "hint": "Die Grenze steht im Text.",
-          "explain": "Die Grenze schützt davor, den Vers zu überdehnen."
+          "prompt": "Warum widerspricht menschliche Hilfe dem Duʿāʾ nicht?",
+          "sample": "Weil ich Allah bitte und zugleich sinnvolle Schritte unternehme.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Vertrauen und verantwortliches Handeln gehören zusammen."
         },
         {
           "type": "text",
-          "prompt": "Wie lautet die Qurʾān-Stelle?",
-          "sample": "Qurʾān 40:60",
-          "hint": "Sure und Vers.",
-          "explain": "Die Stelle ist Qurʾān 40:60 auf der genannten Islamweb-Seite."
+          "prompt": "Wie gehst du mit einer schwierigen Aufgabe um?",
+          "sample": "Ich bitte Allah um Gutes, versuche weiterzulernen und frage bei Bedarf nach Hilfe.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Die Situation ist ein Unterrichtsbeispiel."
         }
       ]
     },
@@ -5284,19 +5284,19 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers beschreibt nicht die Hausordnung einer bestimmten Moschee. Unsere konkreten Regeln bleiben Familien- und Hausregeln. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der Vers beschreibt nicht die Hausordnung einer bestimmten Moschee. Unsere konkreten Regeln bleiben Familien- und Hausregeln. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe). Pädagogisch überprüfte Lektionstexte und Quizfragen, 13.10.2026. Wissenschaftliche Quellenprüfung nicht neu bestätigt."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Im Gemeinschaftsraum nehmen wir auf andere Kinder Rücksicht.",
     "ageText": {
       "4-5": {
         "goal": "Im Gemeinschaftsraum nehmen wir auf andere Kinder Rücksicht.",
-        "intro": "Im Gemeinschaftsraum nehmen wir auf andere Kinder Rücksicht. Der Vers spricht von Häusern, die Allah erlaubt hat, dass sie erhoben werden und in denen Sein Name genannt wird, und in denen Er morgens und abends gepriesen wird. Stell dir vor: Zwei Kinder wollen denselben Platz. Sie rücken zusammen, statt zu schubsen. Heute üben wir: Wir üben, leise Platz zu machen und den Raum so zu verlassen, dass niemand angestoßen wird. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! In der Moschee denken wir an Allah und nehmen Rücksicht auf andere. Wenn zwei Kinder denselben Platz möchten, können sie freundlich miteinander sprechen und Platz machen. Qurʾān 24:36 spricht von Häusern, in denen Allahs Name genannt wird. Wir üben, ruhig und freundlich miteinander umzugehen.",
         "lines": [
-          "Im Gemeinschaftsraum nehmen wir auf andere Kinder Rücksicht.",
-          "Der Vers spricht von Häusern, die Allah erlaubt hat, dass sie erhoben werden und in denen Sein Name genannt wird, und in denen Er morgens und abends gepriesen wird.",
-          "Zwei Kinder wollen denselben Platz. Sie rücken zusammen, statt zu schubsen.",
-          "Wir üben, leise Platz zu machen und den Raum so zu verlassen, dass niemand angestoßen wird."
+          "Qurʾān 24:36 spricht von Orten des Gedenkens Allahs.",
+          "In der Moschee gehen wir rücksichtsvoll miteinander um.",
+          "Wir können Platz teilen, statt zu schubsen.",
+          "Wir lassen den Raum ordentlich zurück."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1272. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 24:36. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1272. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 24:36. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -5313,16 +5313,16 @@ const additions=
         "situation": "Zwei Kinder wollen denselben Platz. Sie rücken zusammen, statt zu schubsen.",
         "practice": "Wir üben, leise Platz zu machen und den Raum so zu verlassen, dass niemand angestoßen wird.",
         "summary": "Im Gemeinschaftsraum nehmen wir auf andere Kinder Rücksicht. Die arabischen Worte spricht die Lehrperson.",
-        "audioScript": "Gemeinsam in der Moschee lernen. Im Gemeinschaftsraum nehmen wir auf andere Kinder Rücksicht. Der Vers spricht von Häusern, die Allah erlaubt hat, dass sie erhoben werden und in denen Sein Name genannt wird, und in denen Er morgens und abends gepriesen wird. Zwei Kinder wollen denselben Platz. Sie rücken zusammen, statt zu schubsen. Wir üben, leise Platz zu machen und den Raum so zu verlassen, dass niemand angestoßen wird."
+        "audioScript": "As-salāmu ʿalaikum, liebe Kinder! In der Moschee denken wir an Allah und nehmen Rücksicht auf andere. Wenn zwei Kinder denselben Platz möchten, können sie freundlich miteinander sprechen und Platz machen. Qurʾān 24:36 spricht von Häusern, in denen Allahs Name genannt wird. Wir üben, ruhig und freundlich miteinander umzugehen."
       },
       "6-8": {
         "goal": "Im Gemeinschaftsraum nehmen wir auf andere Kinder Rücksicht.",
-        "intro": "Heute geht es um Gemeinsam in der Moschee lernen. Im Gemeinschaftsraum nehmen wir auf andere Kinder Rücksicht. Wir lesen Qurʾān 24:36. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers spricht von Häusern, die Allah erlaubt hat, dass sie erhoben werden und in denen Sein Name genannt wird, und in denen Er morgens und abends gepriesen wird. So kann das im Alltag aussehen: Zwei Kinder wollen denselben Platz. Sie rücken zusammen, statt zu schubsen. Die Aufgabe: Wir üben, leise Platz zu machen und den Raum so zu verlassen, dass niemand angestoßen wird. buyūt bedeutet: Häuser; hier die Orte, die der Vers nennt. tasbīḥ bedeutet: Allah preisen. Die Grenze der Stunde: Der Vers beschreibt nicht die Hausordnung einer bestimmten Moschee. Unsere konkreten Regeln bleiben Familien- und Hausregeln.",
+        "intro": "As-salāmu ʿalaikum! Qurʾān 24:36 beschreibt Häuser, in denen Allahs Name genannt und Er gepriesen wird. Im Gemeinschaftsraum einer Moschee achten wir deshalb auf einen freundlichen Umgang. Wenn zwei Kinder denselben Platz möchten, brauchen sie nicht zu schubsen. Sie können fragen, ob sie zusammen sitzen dürfen. Das Teilen des Platzes ist unsere Alltagsübung, keine wörtliche Anweisung aus dem Vers.",
         "lines": [
-          "Qurʾān 24:36 ist die gelesene Stelle.",
-          "Der Vers spricht von Häusern, die Allah erlaubt hat, dass sie erhoben werden und in denen Sein Name genannt wird, und in denen Er morgens und abends gepriesen wird.",
-          "Zwei Kinder wollen denselben Platz. Sie rücken zusammen, statt zu schubsen.",
-          "Die arabischen Worte spricht die Lehrperson."
+          "Qurʾān 24:36 spricht von Orten des Gedenkens Allahs.",
+          "In der Moschee gehen wir rücksichtsvoll miteinander um.",
+          "Wir können Platz teilen, statt zu schubsen.",
+          "Wir lassen den Raum ordentlich zurück."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1272. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 24:36. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1272. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 24:36. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -5339,16 +5339,16 @@ const additions=
         "situation": "Zwei Kinder wollen denselben Platz. Sie rücken zusammen, statt zu schubsen.",
         "practice": "Wir üben, leise Platz zu machen und den Raum so zu verlassen, dass niemand angestoßen wird.",
         "summary": "Qurʾān 24:36 trägt diese Stunde. Der Vers spricht von Häusern, die Allah erlaubt hat, dass sie erhoben werden und in denen Sein Name genannt wird, und in denen Er morgens und abends gepriesen wird.",
-        "audioScript": "Gemeinsam in der Moschee lernen. Der Vers spricht von Häusern, die Allah erlaubt hat, dass sie erhoben werden und in denen Sein Name genannt wird, und in denen Er morgens und abends gepriesen wird. Zwei Kinder wollen denselben Platz. Sie rücken zusammen, statt zu schubsen. Wir üben, leise Platz zu machen und den Raum so zu verlassen, dass niemand angestoßen wird."
+        "audioScript": "As-salāmu ʿalaikum! Qurʾān 24:36 beschreibt Häuser, in denen Allahs Name genannt und Er gepriesen wird. Im Gemeinschaftsraum einer Moschee achten wir deshalb auf einen freundlichen Umgang. Wenn zwei Kinder denselben Platz möchten, brauchen sie nicht zu schubsen. Sie können fragen, ob sie zusammen sitzen dürfen. Das Teilen des Platzes ist unsere Alltagsübung, keine wörtliche Anweisung aus dem Vers."
       },
       "9-10": {
         "goal": "Ich kann Gemeinsam in der Moschee lernen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Gemeinsam in der Moschee lernen. Das Lernziel ist: Im Gemeinschaftsraum nehmen wir auf andere Kinder Rücksicht. Sinngemäß, keine beglaubigte Übersetzung: Der Vers spricht von Häusern, die Allah erlaubt hat, dass sie erhoben werden und in denen Sein Name genannt wird, und in denen Er morgens und abends gepriesen wird. Alltag: Zwei Kinder wollen denselben Platz. Sie rücken zusammen, statt zu schubsen. Aufgabe: Wir üben, leise Platz zu machen und den Raum so zu verlassen, dass niemand angestoßen wird. buyūt bedeutet: Häuser; hier die Orte, die der Vers nennt. tasbīḥ bedeutet: Allah preisen. Was nicht behauptet wird: Der Vers beschreibt nicht die Hausordnung einer bestimmten Moschee. Unsere konkreten Regeln bleiben Familien- und Hausregeln.",
+        "intro": "As-salāmu ʿalaikum! In Qurʾān 24:36 ist von Häusern die Rede, in denen Allahs Name genannt und Er morgens und abends gepriesen wird. Die Stelle erinnert uns an den besonderen Zweck solcher Orte. Daraus gestalten wir eine Übung für Gemeinschaft: Platz für andere lassen, freundlich sprechen und einen gemeinsam benutzten Raum ordentlich verlassen. Diese Handlungen erklären respektvolles Verhalten; sie dürfen nicht fälschlich als eigene überlieferte Aussagen oder als wörtlicher Vers erscheinen.",
         "lines": [
-          "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 24:36.",
-          "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
-          "Der Vers beschreibt nicht die Hausordnung einer bestimmten Moschee.",
-          "Eine Hadithnummer, die auf der Seite fehlt, wird nicht ergänzt."
+          "Qurʾān 24:36 spricht von Orten des Gedenkens Allahs.",
+          "In der Moschee gehen wir rücksichtsvoll miteinander um.",
+          "Wir können Platz teilen, statt zu schubsen.",
+          "Wir lassen den Raum ordentlich zurück."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1272. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 24:36. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1272. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 24:36. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -5365,90 +5365,90 @@ const additions=
         "situation": "Zwei Kinder wollen denselben Platz. Sie rücken zusammen, statt zu schubsen.",
         "practice": "Wir üben, leise Platz zu machen und den Raum so zu verlassen, dass niemand angestoßen wird.",
         "summary": "Belegt ist Qurʾān 24:36. Ungeprüft bleibt: Der Vers beschreibt nicht die Hausordnung einer bestimmten Moschee.",
-        "audioScript": "Gemeinsam in der Moschee lernen. Der Vers spricht von Häusern, die Allah erlaubt hat, dass sie erhoben werden und in denen Sein Name genannt wird, und in denen Er morgens und abends gepriesen wird. Nicht belegt und deshalb nicht behauptet: Der Vers beschreibt nicht die Hausordnung einer bestimmten Moschee."
+        "audioScript": "As-salāmu ʿalaikum! In Qurʾān 24:36 ist von Häusern die Rede, in denen Allahs Name genannt und Er morgens und abends gepriesen wird. Die Stelle erinnert uns an den besonderen Zweck solcher Orte. Daraus gestalten wir eine Übung für Gemeinschaft: Platz für andere lassen, freundlich sprechen und einen gemeinsam benutzten Raum ordentlich verlassen. Diese Handlungen erklären respektvolles Verhalten; sie dürfen nicht fälschlich als eigene überlieferte Aussagen oder als wörtlicher Vers erscheinen."
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was passt zu dieser Stunde?",
+          "prompt": "Zwei Kinder möchten denselben Platz. Was können sie tun?",
           "options": [
-            "Wir üben, leise Platz zu machen und den Raum so zu verlassen, dass niemand angestoßen wird.",
-            "Ich behalte das für mich und sage niemandem etwas."
+            "Freundlich miteinander sprechen.",
+            "Einander schubsen."
           ],
           "correct": 0,
-          "hint": "Schau auf die Übung.",
-          "explain": "Die Übung der Stunde ist der erste Satz. Der zweite Satz ist das Gegenteil von dem, was wir üben."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Wir nehmen Rücksicht aufeinander."
         },
         {
           "type": "choice",
-          "prompt": "Woran hält sich diese Stunde?",
+          "prompt": "Was gehört zu einer Moschee?",
           "options": [
-            "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "Allahs Name wird dort genannt.",
+            "Kinder sollen absichtlich streiten."
           ],
           "correct": 0,
-          "hint": "Nur Gelesenes.",
-          "explain": "Die Stunde nennt Qurʾān 24:36 und trennt die Übung davon. Eine Nummer wird nicht erfunden."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Qurʾān 24:36 spricht von Allahs Gedenken."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Stelle trägt Gemeinsam in der Moschee lernen?",
+          "prompt": "Was beschreibt Qurʾān 24:36?",
           "options": [
-            "Qurʾān 24:36",
-            "Eine Stelle ohne Suren- und Verszahl."
+            "Häuser, in denen Allahs Name genannt wird.",
+            "Ein Wettlaufen um den besten Platz."
           ],
           "correct": 0,
-          "hint": "Die Fundstelle steht im Unterricht.",
-          "explain": "Die Stunde bleibt bei Qurʾān 24:36."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Der Vers spricht über Orte des Gedenkens."
         },
         {
           "type": "choice",
-          "prompt": "Was sagt der Vers sinngemäß für diese Stunde?",
+          "prompt": "Wie teilen wir einen Gemeinschaftsraum?",
           "options": [
-            "Der Vers spricht von Häusern, die Allah erlaubt hat, dass sie erhoben werden und in denen Sein Name genannt wird, und in denen Er morgens.",
-            "Ich behalte das für mich und sage niemandem etwas."
+            "Wir machen freundlich Platz.",
+            "Wir stoßen andere absichtlich weg."
           ],
           "correct": 0,
-          "hint": "Der erste Satz folgt der gelesenen Stelle.",
-          "explain": "Die deutsche Zeile ist eine Unterrichtshilfe zu Qurʾān 24:36, keine beglaubigte Übersetzung."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Rücksicht gehört zur Übung."
         },
         {
           "type": "text",
-          "prompt": "Welche Übung gehört zu dieser Stunde?",
-          "sample": "Wir üben, leise Platz zu machen und den Raum so zu verlassen, dass niemand angestoßen wird.",
-          "hint": "Die praktische Aufgabe.",
-          "explain": "Die Übung ist die genannte Handlung und nicht eine zusätzliche Formel."
+          "prompt": "Nenne eine freundliche Regel für die Moschee.",
+          "sample": "Ich rede ruhig und lasse anderen Platz.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Diese Regel ist eine praktische Anwendung."
         }
       ],
       "9-10": [
         {
           "type": "choice",
-          "prompt": "Welche Angabe wäre unehrlich?",
+          "prompt": "Worum geht es in Qurʾān 24:36?",
           "options": [
-            "Ein Rechtsurteil oder eine Hadithnummer als gelesen auszugeben, obwohl die Seite sie nicht liefert.",
-            "Zu sagen, dass die deutsche Erklärung sinngemäß ist."
+            "Um Häuser, in denen Allahs Name genannt und Er gepriesen wird.",
+            "Um ein vorgeschriebenes Sitzschema für Kinder."
           ],
           "correct": 0,
-          "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Das Sitzschema steht nicht wörtlich im Vers."
         },
         {
           "type": "text",
-          "prompt": "Was darf diese Stunde nicht behaupten?",
-          "sample": "Der Vers beschreibt nicht die Hausordnung einer bestimmten Moschee.",
-          "hint": "Die Grenze steht im Text.",
-          "explain": "Die Grenze schützt davor, den Vers zu überdehnen."
+          "prompt": "Wie kannst du Rücksicht im Gemeinschaftsraum zeigen?",
+          "sample": "Ich mache Platz und spreche freundlich.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Wir schützen die Gemeinschaft durch gutes Verhalten."
         },
         {
           "type": "text",
-          "prompt": "Wie lautet die Qurʾān-Stelle?",
-          "sample": "Qurʾān 24:36",
-          "hint": "Sure und Vers.",
-          "explain": "Die Stelle ist Qurʾān 24:36 auf der genannten Islamweb-Seite."
+          "prompt": "Was ist Versinhalt, was ist unser Beispiel?",
+          "sample": "Der Vers beschreibt Häuser des Gedenkens; das Teilen eines Platzes ist unsere Übung.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Beide Ebenen bleiben klar unterschieden."
         }
       ]
     },
@@ -5501,19 +5501,19 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die Seite enthält dazu einen Hinweis auf al-Buḫārī ohne dass wir seine Nummer in diese Stunde übernehmen. Wir zählen die Schlüssel nicht und erfinden keine Liste des Verborgenen. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Die Seite enthält dazu einen Hinweis auf al-Buḫārī ohne dass wir seine Nummer in diese Stunde übernehmen. Wir zählen die Schlüssel nicht und erfinden keine Liste des Verborgenen. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe). Pädagogisch überprüfte Lektionstexte und Quizfragen, 13.10.2026. Wissenschaftliche Quellenprüfung nicht neu bestätigt."
     },
     "hint": "Wir erfinden keine zusätzliche Geschichte.",
     "sample": "Wir können etwas verstecken.",
     "ageText": {
       "4-5": {
         "goal": "Wir können etwas verstecken.",
-        "intro": "Wir können etwas verstecken. Der Vers sagt, dass bei Ihm die Schlüssel des Verborgenen sind und niemand sie kennt außer Ihm, und dass Ihm kein Blatt fällt, ohne dass Er es weiß. Stell dir vor: Ein Kind legt einen Stein hinter den Rücken. Die anderen sehen ihn nicht. Die Stunde sagt: Allahs Wissen ist damit nicht begrenzt. Heute üben wir: Wir nennen ein kleines Ding, das Menschen gerade nicht sehen, und wiederholen: Allah weiß es. Wir erfinden keine zusätzliche Geschichte.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! Wir Menschen sehen manchmal etwas nicht. Vielleicht liegt ein kleiner Stein hinter einem Kissen. Allahs Wissen ist viel größer als unseres. Im Qurʾān 6:59 steht, dass Allah das Verborgene kennt und sogar weiß, wenn ein Blatt fällt. Das ist eine Erinnerung an Seine Größe, nicht dazu da, dich zu erschrecken.",
         "lines": [
-          "Wir können etwas verstecken.",
-          "Der Vers sagt, dass bei Ihm die Schlüssel des Verborgenen sind und niemand sie kennt außer Ihm, und dass Ihm kein Blatt fällt, ohne dass Er es weiß.",
-          "Ein Kind legt einen Stein hinter den Rücken. Die anderen sehen ihn nicht. Die Stunde sagt: Allahs Wissen ist damit nicht begrenzt.",
-          "Wir nennen ein kleines Ding, das Menschen gerade nicht sehen, und wiederholen: Allah weiß es."
+          "Allah kennt das Verborgene.",
+          "Qurʾān 6:59 erwähnt sogar ein fallendes Blatt.",
+          "Menschen wissen nicht alles.",
+          "Allahs Wissen ist nicht wie unser Wissen."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/434. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 6:59. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/434. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 6:59. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -5530,16 +5530,16 @@ const additions=
         "situation": "Ein Kind legt einen Stein hinter den Rücken. Die anderen sehen ihn nicht. Die Stunde sagt: Allahs Wissen ist damit nicht begrenzt.",
         "practice": "Wir nennen ein kleines Ding, das Menschen gerade nicht sehen, und wiederholen: Allah weiß es.",
         "summary": "Wir können etwas verstecken. Wir erfinden keine zusätzliche Geschichte.",
-        "audioScript": "Allahs Wissen verstehen. Wir können etwas verstecken. Der Vers sagt, dass bei Ihm die Schlüssel des Verborgenen sind und niemand sie kennt außer Ihm, und dass Ihm kein Blatt fällt, ohne dass Er es weiß. Ein Kind legt einen Stein hinter den Rücken. Die anderen sehen ihn nicht. Die Stunde sagt: Allahs Wissen ist damit nicht begrenzt. Wir nennen ein kleines Ding, das Menschen gerade nicht sehen, und wiederholen: Allah weiß es."
+        "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Wir Menschen sehen manchmal etwas nicht. Vielleicht liegt ein kleiner Stein hinter einem Kissen. Allahs Wissen ist viel größer als unseres. Im Qurʾān 6:59 steht, dass Allah das Verborgene kennt und sogar weiß, wenn ein Blatt fällt. Das ist eine Erinnerung an Seine Größe, nicht dazu da, dich zu erschrecken."
       },
       "6-8": {
         "goal": "Wir können etwas verstecken.",
-        "intro": "Heute geht es um Allahs Wissen verstehen. Wir können etwas verstecken. Wir lesen Qurʾān 6:59. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass bei Ihm die Schlüssel des Verborgenen sind und niemand sie kennt außer Ihm, und dass Ihm kein Blatt fällt, ohne dass Er es weiß. So kann das im Alltag aussehen: Ein Kind legt einen Stein hinter den Rücken. Die anderen sehen ihn nicht. Die Stunde sagt: Allahs Wissen ist damit nicht begrenzt. Die Aufgabe: Wir nennen ein kleines Ding, das Menschen gerade nicht sehen, und wiederholen: Allah weiß es. ġayb bedeutet: das Verborgene. mafātiḥ bedeutet: Schlüssel. Die Grenze der Stunde: Die Seite enthält dazu einen Hinweis auf al-Buḫārī ohne dass wir seine Nummer in diese Stunde übernehmen. Wir zählen die Schlüssel nicht und erfinden keine Liste des Verborgenen.",
+        "intro": "As-salāmu ʿalaikum! Qurʾān 6:59 spricht davon, dass Allah die Schlüssel des Verborgenen kennt und kein Blatt fällt, ohne dass Er es weiß. Wir Menschen wissen vieles nicht, und das ist normal. Das Beispiel mit einem versteckten Stein soll uns nur helfen, den Unterschied zu verstehen. Wir behaupten nicht, dass ein Mensch Allahs Wissen besitzt. Wir lernen, vor Allahs Wissen Respekt zu haben.",
         "lines": [
-          "Qurʾān 6:59 ist die gelesene Stelle.",
-          "Der Vers sagt, dass bei Ihm die Schlüssel des Verborgenen sind und niemand sie kennt außer Ihm, und dass Ihm kein Blatt fällt, ohne dass Er es weiß.",
-          "Ein Kind legt einen Stein hinter den Rücken. Die anderen sehen ihn nicht. Die Stunde sagt: Allahs Wissen ist damit nicht begrenzt.",
-          "Wir erfinden keine zusätzliche Geschichte."
+          "Allah kennt das Verborgene.",
+          "Qurʾān 6:59 erwähnt sogar ein fallendes Blatt.",
+          "Menschen wissen nicht alles.",
+          "Allahs Wissen ist nicht wie unser Wissen."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/434. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 6:59. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/434. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 6:59. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -5556,16 +5556,16 @@ const additions=
         "situation": "Ein Kind legt einen Stein hinter den Rücken. Die anderen sehen ihn nicht. Die Stunde sagt: Allahs Wissen ist damit nicht begrenzt.",
         "practice": "Wir nennen ein kleines Ding, das Menschen gerade nicht sehen, und wiederholen: Allah weiß es.",
         "summary": "Qurʾān 6:59 trägt diese Stunde. Der Vers sagt, dass bei Ihm die Schlüssel des Verborgenen sind und niemand sie kennt außer Ihm, und dass Ihm kein Blatt fällt, ohne dass Er es weiß.",
-        "audioScript": "Allahs Wissen verstehen. Der Vers sagt, dass bei Ihm die Schlüssel des Verborgenen sind und niemand sie kennt außer Ihm, und dass Ihm kein Blatt fällt, ohne dass Er es weiß. Ein Kind legt einen Stein hinter den Rücken. Die anderen sehen ihn nicht. Die Stunde sagt: Allahs Wissen ist damit nicht begrenzt. Wir nennen ein kleines Ding, das Menschen gerade nicht sehen, und wiederholen: Allah weiß es."
+        "audioScript": "As-salāmu ʿalaikum! Qurʾān 6:59 spricht davon, dass Allah die Schlüssel des Verborgenen kennt und kein Blatt fällt, ohne dass Er es weiß. Wir Menschen wissen vieles nicht, und das ist normal. Das Beispiel mit einem versteckten Stein soll uns nur helfen, den Unterschied zu verstehen. Wir behaupten nicht, dass ein Mensch Allahs Wissen besitzt. Wir lernen, vor Allahs Wissen Respekt zu haben."
       },
       "9-10": {
         "goal": "Ich kann Allahs Wissen verstehen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Allahs Wissen verstehen. Das Lernziel ist: Wir können etwas verstecken. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass bei Ihm die Schlüssel des Verborgenen sind und niemand sie kennt außer Ihm, und dass Ihm kein Blatt fällt, ohne dass Er es weiß. Alltag: Ein Kind legt einen Stein hinter den Rücken. Die anderen sehen ihn nicht. Die Stunde sagt: Allahs Wissen ist damit nicht begrenzt. Aufgabe: Wir nennen ein kleines Ding, das Menschen gerade nicht sehen, und wiederholen: Allah weiß es. ġayb bedeutet: das Verborgene. mafātiḥ bedeutet: Schlüssel. Was nicht behauptet wird: Die Seite enthält dazu einen Hinweis auf al-Buḫārī ohne dass wir seine Nummer in diese Stunde übernehmen. Wir zählen die Schlüssel nicht und erfinden keine Liste des Verborgenen.",
+        "intro": "As-salāmu ʿalaikum! In Qurʾān 6:59 wird das Wissen Allahs über das Verborgene beschrieben: Die Schlüssel des Ġayb liegen bei Ihm, und nichts entgeht Seinem Wissen. Wir können einen Gegenstand verstecken, sodass andere Menschen ihn nicht sehen. Dieses Beispiel zeigt unsere menschliche Begrenzung, ohne Allahs Wissen mit einem Menschen zu vergleichen. Der Vers dient uns nicht dazu, Kinder wegen ihrer Gedanken zu ängstigen. Er erinnert an Allahs vollkommenes Wissen.",
         "lines": [
-          "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 6:59.",
-          "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
-          "Die Seite enthält dazu einen Hinweis auf al-Buḫārī ohne dass wir seine Nummer in diese Stunde übernehmen.",
-          "Eine Hadithnummer, die auf der Seite fehlt, wird nicht ergänzt."
+          "Allah kennt das Verborgene.",
+          "Qurʾān 6:59 erwähnt sogar ein fallendes Blatt.",
+          "Menschen wissen nicht alles.",
+          "Allahs Wissen ist nicht wie unser Wissen."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/434. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 6:59. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/434. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 6:59. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -5582,90 +5582,90 @@ const additions=
         "situation": "Ein Kind legt einen Stein hinter den Rücken. Die anderen sehen ihn nicht. Die Stunde sagt: Allahs Wissen ist damit nicht begrenzt.",
         "practice": "Wir nennen ein kleines Ding, das Menschen gerade nicht sehen, und wiederholen: Allah weiß es.",
         "summary": "Belegt ist Qurʾān 6:59. Ungeprüft bleibt: Die Seite enthält dazu einen Hinweis auf al-Buḫārī ohne dass wir seine Nummer in diese Stunde übernehmen.",
-        "audioScript": "Allahs Wissen verstehen. Der Vers sagt, dass bei Ihm die Schlüssel des Verborgenen sind und niemand sie kennt außer Ihm, und dass Ihm kein Blatt fällt, ohne dass Er es weiß. Nicht belegt und deshalb nicht behauptet: Die Seite enthält dazu einen Hinweis auf al-Buḫārī ohne dass wir seine Nummer in diese Stunde übernehmen."
+        "audioScript": "As-salāmu ʿalaikum! In Qurʾān 6:59 wird das Wissen Allahs über das Verborgene beschrieben: Die Schlüssel des Ġayb liegen bei Ihm, und nichts entgeht Seinem Wissen. Wir können einen Gegenstand verstecken, sodass andere Menschen ihn nicht sehen. Dieses Beispiel zeigt unsere menschliche Begrenzung, ohne Allahs Wissen mit einem Menschen zu vergleichen. Der Vers dient uns nicht dazu, Kinder wegen ihrer Gedanken zu ängstigen. Er erinnert an Allahs vollkommenes Wissen."
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was passt zu dieser Stunde?",
+          "prompt": "Wissen Menschen alles?",
           "options": [
-            "Wir nennen ein kleines Ding, das Menschen gerade nicht sehen, und wiederholen: Allah weiß es.",
-            "Ich sage, Allah wisse das nicht."
+            "Nein, Allahs Wissen ist größer.",
+            "Ja, jeder Mensch weiß alles."
           ],
           "correct": 0,
-          "hint": "Schau auf die Übung.",
-          "explain": "Die Übung der Stunde ist der erste Satz. Der zweite Satz ist das Gegenteil von dem, was wir üben."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Unser Wissen ist begrenzt."
         },
         {
           "type": "choice",
-          "prompt": "Woran hält sich diese Stunde?",
+          "prompt": "Was weiß Allah laut Qurʾān 6:59?",
           "options": [
-            "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "Auch das Verborgene.",
+            "Nur das, was wir Menschen sehen."
           ],
           "correct": 0,
-          "hint": "Nur Gelesenes.",
-          "explain": "Die Stunde nennt Qurʾān 6:59 und trennt die Übung davon. Eine Nummer wird nicht erfunden."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Der Vers nennt Allahs Wissen über das Verborgene."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Stelle trägt Allahs Wissen verstehen?",
+          "prompt": "Welche Stelle spricht über das Verborgene?",
           "options": [
-            "Qurʾān 6:59",
-            "Eine Stelle ohne Suren- und Verszahl."
+            "Qurʾān 6:59.",
+            "Ein ausgedachter Vers."
           ],
           "correct": 0,
-          "hint": "Die Fundstelle steht im Unterricht.",
-          "explain": "Die Stunde bleibt bei Qurʾān 6:59."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Die Stelle nennt die Schlüssel des Verborgenen."
         },
         {
           "type": "choice",
-          "prompt": "Was sagt der Vers sinngemäß für diese Stunde?",
+          "prompt": "Was lernen wir aus dem versteckten Stein?",
           "options": [
-            "Der Vers sagt, dass bei Ihm die Schlüssel des Verborgenen sind und niemand sie kennt außer Ihm, und dass Ihm kein Blatt fällt, ohne dass Er.",
-            "Ich sage, Allah wisse das nicht."
+            "Menschen können etwas übersehen.",
+            "Menschen kennen immer jedes Versteck."
           ],
           "correct": 0,
-          "hint": "Der erste Satz folgt der gelesenen Stelle.",
-          "explain": "Die deutsche Zeile ist eine Unterrichtshilfe zu Qurʾān 6:59, keine beglaubigte Übersetzung."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Das Beispiel zeigt die Grenzen menschlichen Wissens."
         },
         {
           "type": "text",
-          "prompt": "Welche Übung gehört zu dieser Stunde?",
-          "sample": "Wir nennen ein kleines Ding, das Menschen gerade nicht sehen, und wiederholen: Allah weiß es.",
-          "hint": "Die praktische Aufgabe.",
-          "explain": "Die Übung ist die genannte Handlung und nicht eine zusätzliche Formel."
+          "prompt": "Was sagt Qurʾān 6:59 über ein Blatt?",
+          "sample": "Allah weiß, wenn ein Blatt fällt.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Der Vers zeigt Allahs umfassendes Wissen."
         }
       ],
       "9-10": [
         {
           "type": "choice",
-          "prompt": "Welche Angabe wäre unehrlich?",
+          "prompt": "Wie beschreibt Qurʾān 6:59 Allahs Wissen?",
           "options": [
-            "Ein Rechtsurteil oder eine Hadithnummer als gelesen auszugeben, obwohl die Seite sie nicht liefert.",
-            "Zu sagen, dass die deutsche Erklärung sinngemäß ist."
+            "Er kennt das Verborgene, das Menschen nicht vollständig kennen.",
+            "Allahs Wissen sei so begrenzt wie unseres."
           ],
           "correct": 0,
-          "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Der Vers unterscheidet Allahs Wissen von dem der Menschen."
         },
         {
           "type": "text",
-          "prompt": "Was darf diese Stunde nicht behaupten?",
-          "sample": "Die Seite enthält dazu einen Hinweis auf al-Buḫārī ohne dass wir seine Nummer in diese Stunde übernehmen.",
-          "hint": "Die Grenze steht im Text.",
-          "explain": "Die Grenze schützt davor, den Vers zu überdehnen."
+          "prompt": "Warum ist ein versteckter Stein nur ein Beispiel?",
+          "sample": "Weil das Beispiel unser begrenztes Sehen zeigt, nicht Allahs Wissen nachahmt.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Allahs Wissen kann nicht wie das eines Menschen gemessen werden."
         },
         {
           "type": "text",
-          "prompt": "Wie lautet die Qurʾān-Stelle?",
-          "sample": "Qurʾān 6:59",
-          "hint": "Sure und Vers.",
-          "explain": "Die Stelle ist Qurʾān 6:59 auf der genannten Islamweb-Seite."
+          "prompt": "Was bedeutet ġayb?",
+          "sample": "Das Verborgene.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Die Bedeutung gehört zum Vers."
         }
       ]
     },
@@ -5718,7 +5718,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Wir fügen keine Rangfolge und keine erfundene Begegnung zwischen den Gesandten hinzu. Dieselbe Fundstelle trägt hier das Lernziel des respektvollen Aussprechens. Dieselbe gelesene Fundstelle wurde schon in Slot 112 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
+      "note": "Wir fügen keine Rangfolge und keine erfundene Begegnung zwischen den Gesandten hinzu. Dieselbe Fundstelle trägt hier das Lernziel des respektvollen Aussprechens. Dieselbe gelesene Fundstelle wurde schon in Slot 112 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe). Pädagogisch überprüfte Lektionstexte und Quizfragen, 13.10.2026. Wissenschaftliche Quellenprüfung nicht neu bestätigt.",
       "sameLocusAsSlot": 112
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
@@ -5726,12 +5726,12 @@ const additions=
     "ageText": {
       "4-5": {
         "goal": "Wir sprechen die Namen der Gesandten respektvoll aus, ohne einen gering zu machen.",
-        "intro": "Wir sprechen die Namen der Gesandten respektvoll aus, ohne einen gering zu machen. Dieselbe gelesene Stelle wie in der Stunde über den Glauben an die Gesandten fordert, zwischen keinem Seiner Gesandten einen Unterschied zu machen. Stell dir vor: Jemand sagt einen Prophetnamen achtlos. Das Kind wiederholt den Namen ruhig und mit Respekt. Heute üben wir: Wir sprechen drei im Vers genannte Namen langsam und ohne einen Witz. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! Wir lieben und respektieren die Gesandten Allahs. Wenn wir ihre Namen sagen, sprechen wir freundlich und ohne Spott. Qurʾān 2:136 lehrt den Glauben an die Gesandten. Heute üben wir, drei Namen ruhig und respektvoll auszusprechen.",
         "lines": [
-          "Wir sprechen die Namen der Gesandten respektvoll aus, ohne einen gering zu machen.",
-          "Dieselbe gelesene Stelle wie in der Stunde über den Glauben an die Gesandten fordert, zwischen keinem Seiner Gesandten einen Unterschied zu machen.",
-          "Jemand sagt einen Prophetnamen achtlos. Das Kind wiederholt den Namen ruhig und mit Respekt.",
-          "Wir sprechen drei im Vers genannte Namen langsam und ohne einen Witz."
+          "Allah sandte Gesandte.",
+          "Qurʾān 2:136 nennt den Glauben an sie.",
+          "Wir verspotten keinen Gesandten.",
+          "Wir nennen ihre Namen mit Respekt."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/140. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:136. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/140. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:136. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -5748,16 +5748,16 @@ const additions=
         "situation": "Jemand sagt einen Prophetnamen achtlos. Das Kind wiederholt den Namen ruhig und mit Respekt.",
         "practice": "Wir sprechen drei im Vers genannte Namen langsam und ohne einen Witz.",
         "summary": "Wir sprechen die Namen der Gesandten respektvoll aus, ohne einen gering zu machen. Die arabischen Worte spricht die Lehrperson.",
-        "audioScript": "Allen Gesandten mit Respekt begegnen. Wir sprechen die Namen der Gesandten respektvoll aus, ohne einen gering zu machen. Dieselbe gelesene Stelle wie in der Stunde über den Glauben an die Gesandten fordert, zwischen keinem Seiner Gesandten einen Unterschied zu machen. Jemand sagt einen Prophetnamen achtlos. Das Kind wiederholt den Namen ruhig und mit Respekt. Wir sprechen drei im Vers genannte Namen langsam und ohne einen Witz."
+        "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Wir lieben und respektieren die Gesandten Allahs. Wenn wir ihre Namen sagen, sprechen wir freundlich und ohne Spott. Qurʾān 2:136 lehrt den Glauben an die Gesandten. Heute üben wir, drei Namen ruhig und respektvoll auszusprechen."
       },
       "6-8": {
         "goal": "Wir sprechen die Namen der Gesandten respektvoll aus, ohne einen gering zu machen.",
-        "intro": "Heute geht es um Allen Gesandten mit Respekt begegnen. Wir sprechen die Namen der Gesandten respektvoll aus, ohne einen gering zu machen. Wir lesen Qurʾān 2:136. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe gelesene Stelle wie in der Stunde über den Glauben an die Gesandten fordert, zwischen keinem Seiner Gesandten einen Unterschied zu machen. So kann das im Alltag aussehen: Jemand sagt einen Prophetnamen achtlos. Das Kind wiederholt den Namen ruhig und mit Respekt. Die Aufgabe: Wir sprechen drei im Vers genannte Namen langsam und ohne einen Witz. anbiyāʾ bedeutet: Propheten. salām bedeutet: Friede; der Gruß, den wir beim Namen sagen, steht nicht als Formel in diesem Vers. Die Grenze der Stunde: Wir fügen keine Rangfolge und keine erfundene Begegnung zwischen den Gesandten hinzu. Dieselbe Fundstelle trägt hier das Lernziel des respektvollen Aussprechens. Dieselbe gelesene Fundstelle wurde schon in Slot 112 mit einem anderen Lernziel verwendet.",
+        "intro": "As-salāmu ʿalaikum! Qurʾān 2:136 spricht darüber, keinen Gesandten Allahs vom Glauben auszuschließen. In dieser Stunde geht es besonders um respektvolles Sprechen. Wir nennen die Namen Ibrāhīm, Mūsā und ʿĪsā, Friede sei mit ihnen, und machen über keinen Witze. Der Glaubensinhalt stammt aus dem Vers; die Ausspracheübung ist unsere Anwendung.",
         "lines": [
-          "Qurʾān 2:136 ist die gelesene Stelle.",
-          "Dieselbe gelesene Stelle wie in der Stunde über den Glauben an die Gesandten fordert, zwischen keinem Seiner Gesandten einen Unterschied zu machen.",
-          "Jemand sagt einen Prophetnamen achtlos. Das Kind wiederholt den Namen ruhig und mit Respekt.",
-          "Die arabischen Worte spricht die Lehrperson."
+          "Allah sandte Gesandte.",
+          "Qurʾān 2:136 nennt den Glauben an sie.",
+          "Wir verspotten keinen Gesandten.",
+          "Wir nennen ihre Namen mit Respekt."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/140. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:136. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/140. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:136. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -5774,16 +5774,16 @@ const additions=
         "situation": "Jemand sagt einen Prophetnamen achtlos. Das Kind wiederholt den Namen ruhig und mit Respekt.",
         "practice": "Wir sprechen drei im Vers genannte Namen langsam und ohne einen Witz.",
         "summary": "Qurʾān 2:136 trägt diese Stunde. Dieselbe gelesene Stelle wie in der Stunde über den Glauben an die Gesandten fordert, zwischen keinem Seiner Gesandten einen Unterschied zu machen.",
-        "audioScript": "Allen Gesandten mit Respekt begegnen. Dieselbe gelesene Stelle wie in der Stunde über den Glauben an die Gesandten fordert, zwischen keinem Seiner Gesandten einen Unterschied zu machen. Jemand sagt einen Prophetnamen achtlos. Das Kind wiederholt den Namen ruhig und mit Respekt. Wir sprechen drei im Vers genannte Namen langsam und ohne einen Witz."
+        "audioScript": "As-salāmu ʿalaikum! Qurʾān 2:136 spricht darüber, keinen Gesandten Allahs vom Glauben auszuschließen. In dieser Stunde geht es besonders um respektvolles Sprechen. Wir nennen die Namen Ibrāhīm, Mūsā und ʿĪsā, Friede sei mit ihnen, und machen über keinen Witze. Der Glaubensinhalt stammt aus dem Vers; die Ausspracheübung ist unsere Anwendung."
       },
       "9-10": {
         "goal": "Ich kann Allen Gesandten mit Respekt begegnen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Allen Gesandten mit Respekt begegnen. Das Lernziel ist: Wir sprechen die Namen der Gesandten respektvoll aus, ohne einen gering zu machen. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe gelesene Stelle wie in der Stunde über den Glauben an die Gesandten fordert, zwischen keinem Seiner Gesandten einen Unterschied zu machen. Alltag: Jemand sagt einen Prophetnamen achtlos. Das Kind wiederholt den Namen ruhig und mit Respekt. Aufgabe: Wir sprechen drei im Vers genannte Namen langsam und ohne einen Witz. anbiyāʾ bedeutet: Propheten. salām bedeutet: Friede; der Gruß, den wir beim Namen sagen, steht nicht als Formel in diesem Vers. Was nicht behauptet wird: Wir fügen keine Rangfolge und keine erfundene Begegnung zwischen den Gesandten hinzu. Dieselbe Fundstelle trägt hier das Lernziel des respektvollen Aussprechens. Dieselbe gelesene Fundstelle wurde schon in Slot 112 mit einem anderen Lernziel verwendet.",
+        "intro": "As-salāmu ʿalaikum! Qurʾān 2:136 bekräftigt den Glauben an Allahs Gesandte. Diese Stunde ergänzt die frühere Lektion über ihren Platz im Īmān: Wir konzentrieren uns auf den Umgang mit ihren Namen und Berichten. Respekt bedeutet, niemanden abzuwerten und keine unbelegten Geschichten als Tatsachen auszugeben. Wir können mehrere Gesandte nennen und erläutern, warum der Glaube keinen von ihnen willkürlich ausschließt. Die Höflichkeitsübung ist eine Anwendung, keine zusätzliche wörtliche Stelle aus dem Vers.",
         "lines": [
-          "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 2:136.",
-          "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
-          "Wir fügen keine Rangfolge und keine erfundene Begegnung zwischen den Gesandten hinzu.",
-          "Eine Hadithnummer, die auf der Seite fehlt, wird nicht ergänzt."
+          "Allah sandte Gesandte.",
+          "Qurʾān 2:136 nennt den Glauben an sie.",
+          "Wir verspotten keinen Gesandten.",
+          "Wir nennen ihre Namen mit Respekt."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/140. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:136. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/140. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:136. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -5800,90 +5800,90 @@ const additions=
         "situation": "Jemand sagt einen Prophetnamen achtlos. Das Kind wiederholt den Namen ruhig und mit Respekt.",
         "practice": "Wir sprechen drei im Vers genannte Namen langsam und ohne einen Witz.",
         "summary": "Belegt ist Qurʾān 2:136. Ungeprüft bleibt: Wir fügen keine Rangfolge und keine erfundene Begegnung zwischen den Gesandten hinzu.",
-        "audioScript": "Allen Gesandten mit Respekt begegnen. Dieselbe gelesene Stelle wie in der Stunde über den Glauben an die Gesandten fordert, zwischen keinem Seiner Gesandten einen Unterschied zu machen. Nicht belegt und deshalb nicht behauptet: Wir fügen keine Rangfolge und keine erfundene Begegnung zwischen den Gesandten hinzu."
+        "audioScript": "As-salāmu ʿalaikum! Qurʾān 2:136 bekräftigt den Glauben an Allahs Gesandte. Diese Stunde ergänzt die frühere Lektion über ihren Platz im Īmān: Wir konzentrieren uns auf den Umgang mit ihren Namen und Berichten. Respekt bedeutet, niemanden abzuwerten und keine unbelegten Geschichten als Tatsachen auszugeben. Wir können mehrere Gesandte nennen und erläutern, warum der Glaube keinen von ihnen willkürlich ausschließt. Die Höflichkeitsübung ist eine Anwendung, keine zusätzliche wörtliche Stelle aus dem Vers."
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was passt zu dieser Stunde?",
+          "prompt": "Wie sprechen wir die Namen der Gesandten aus?",
           "options": [
-            "Wir sprechen drei im Vers genannte Namen langsam und ohne einen Witz.",
-            "Ich lasse einen Gesandten aus."
+            "Mit Respekt.",
+            "Mit Spott."
           ],
           "correct": 0,
-          "hint": "Schau auf die Übung.",
-          "explain": "Die Übung der Stunde ist der erste Satz. Der zweite Satz ist das Gegenteil von dem, was wir üben."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Wir achten Allahs Gesandte."
         },
         {
           "type": "choice",
-          "prompt": "Woran hält sich diese Stunde?",
+          "prompt": "An wie viele Gesandte glauben wir?",
           "options": [
-            "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An alle Gesandten Allahs.",
+            "Nur an einen beliebigen."
           ],
           "correct": 0,
-          "hint": "Nur Gelesenes.",
-          "explain": "Die Stunde nennt Qurʾān 2:136 und trennt die Übung davon. Eine Nummer wird nicht erfunden."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Der Glaube umfasst alle Gesandten."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Stelle trägt Allen Gesandten mit Respekt begegnen?",
+          "prompt": "Was lehrt Qurʾān 2:136?",
           "options": [
-            "Qurʾān 2:136",
-            "Eine Stelle ohne Suren- und Verszahl."
+            "Keinen Gesandten Allahs auszuschließen.",
+            "Propheten gegeneinander auszuspielen."
           ],
           "correct": 0,
-          "hint": "Die Fundstelle steht im Unterricht.",
-          "explain": "Die Stunde bleibt bei Qurʾān 2:136."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Wir glauben an die Gesandten."
         },
         {
           "type": "choice",
-          "prompt": "Was sagt der Vers sinngemäß für diese Stunde?",
+          "prompt": "Was ist ein respektvolles Verhalten?",
           "options": [
-            "Dieselbe gelesene Stelle wie in der Stunde über den Glauben an die Gesandten fordert, zwischen keinem Seiner Gesandten einen Unterschied.",
-            "Ich lasse einen Gesandten aus."
+            "Namen ohne Spott auszusprechen.",
+            "Über Gesandte Witze zu machen."
           ],
           "correct": 0,
-          "hint": "Der erste Satz folgt der gelesenen Stelle.",
-          "explain": "Die deutsche Zeile ist eine Unterrichtshilfe zu Qurʾān 2:136, keine beglaubigte Übersetzung."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Die Übung fördert Achtung."
         },
         {
           "type": "text",
-          "prompt": "Welche Übung gehört zu dieser Stunde?",
-          "sample": "Wir sprechen drei im Vers genannte Namen langsam und ohne einen Witz.",
-          "hint": "Die praktische Aufgabe.",
-          "explain": "Die Übung ist die genannte Handlung und nicht eine zusätzliche Formel."
+          "prompt": "Nenne zwei Gesandte mit Respekt.",
+          "sample": "Mūsā und ʿĪsā, Friede sei mit ihnen.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Beide Namen erscheinen im Qurʾān."
         }
       ],
       "9-10": [
         {
           "type": "choice",
-          "prompt": "Welche Angabe wäre unehrlich?",
+          "prompt": "Was bedeutet, keinen Gesandten auszuschließen?",
           "options": [
-            "Ein Rechtsurteil oder eine Hadithnummer als gelesen auszugeben, obwohl die Seite sie nicht liefert.",
-            "Zu sagen, dass die deutsche Erklärung sinngemäß ist."
+            "An Allahs Gesandte zu glauben, ohne einzelne willkürlich zu verwerfen.",
+            "Nur die liebsten Namen gelten zu lassen."
           ],
           "correct": 0,
-          "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "2:136 begründet den Glauben an die Gesandten."
         },
         {
           "type": "text",
-          "prompt": "Was darf diese Stunde nicht behaupten?",
-          "sample": "Wir fügen keine Rangfolge und keine erfundene Begegnung zwischen den Gesandten hinzu.",
-          "hint": "Die Grenze steht im Text.",
-          "explain": "Die Grenze schützt davor, den Vers zu überdehnen."
+          "prompt": "Wie unterscheiden sich diese und die frühere Stunde zum Īmān?",
+          "sample": "Früher ging es um den Glaubensinhalt, heute besonders um respektvolle Worte.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Unterschiedliche Lernziele dürfen denselben Vers verwenden."
         },
         {
           "type": "text",
-          "prompt": "Wie lautet die Qurʾān-Stelle?",
-          "sample": "Qurʾān 2:136",
-          "hint": "Sure und Vers.",
-          "explain": "Die Stelle ist Qurʾān 2:136 auf der genannten Islamweb-Seite."
+          "prompt": "Warum erfinden wir keine Geschichten über Gesandte?",
+          "sample": "Weil wir ihre Berichte mit geprüften Quellen erzählen wollen.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Achtung und Quellenwahrheit gehören zusammen."
         }
       ]
     },
@@ -5936,19 +5936,19 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Für die Jüngsten bleibt es beim guten Stäubchen. Der Satz über das Schlechte wird nicht als Strafszene ausgemalt. Eine Hadithnummer wurde nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Für die Jüngsten bleibt es beim guten Stäubchen. Der Satz über das Schlechte wird nicht als Strafszene ausgemalt. Eine Hadithnummer wurde nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe). Pädagogisch überprüfte Lektionstexte und Quizfragen, 13.10.2026. Wissenschaftliche Quellenprüfung nicht neu bestätigt."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Eine kleine Hilfe kann vor Allah Gewicht haben.",
     "ageText": {
       "4-5": {
         "goal": "Eine kleine Hilfe kann vor Allah Gewicht haben.",
-        "intro": "Eine kleine Hilfe kann vor Allah Gewicht haben. Im selben Ausdruck folgt der Satz über das Gewicht eines Stäubchens an Schlechtem. Stell dir vor: Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen. Heute üben wir: Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! Manchmal hilft schon eine kleine Tat. Wenn ein Stift herunterfällt, kannst du ihn jemandem aufheben. Im Qurʾān 99:7 steht, dass man sogar das Gute im Gewicht eines winzigen Stäubchens sehen wird. Wir helfen gern, auch wenn niemand uns dafür lobt.",
         "lines": [
-          "Eine kleine Hilfe kann vor Allah Gewicht haben.",
-          "Im selben Ausdruck folgt der Satz über das Gewicht eines Stäubchens an Schlechtem.",
-          "Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen.",
-          "Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war."
+          "Qurʾān 99:7 spricht von winzigem Gutem.",
+          "Kleine gute Taten können wertvoll sein.",
+          "Ich kann freundlich helfen.",
+          "Ich brauche nicht jedes Mal ein Lob."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1971. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 99:7. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1971. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 99:7. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -5965,16 +5965,16 @@ const additions=
         "situation": "Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen.",
         "practice": "Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war.",
         "summary": "Eine kleine Hilfe kann vor Allah Gewicht haben. Die arabischen Worte spricht die Lehrperson.",
-        "audioScript": "Kleine Taten können wertvoll sein. Eine kleine Hilfe kann vor Allah Gewicht haben. Im selben Ausdruck folgt der Satz über das Gewicht eines Stäubchens an Schlechtem. Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen. Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war."
+        "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Manchmal hilft schon eine kleine Tat. Wenn ein Stift herunterfällt, kannst du ihn jemandem aufheben. Im Qurʾān 99:7 steht, dass man sogar das Gute im Gewicht eines winzigen Stäubchens sehen wird. Wir helfen gern, auch wenn niemand uns dafür lobt."
       },
       "6-8": {
         "goal": "Eine kleine Hilfe kann vor Allah Gewicht haben.",
-        "intro": "Heute geht es um Kleine Taten können wertvoll sein. Eine kleine Hilfe kann vor Allah Gewicht haben. Wir lesen Qurʾān 99:7. Sinngemäß, ohne beglaubigte Übersetzung: Der gespeicherte Text sagt: Wer das Gewicht eines Stäubchens an Gutem tut, wird es sehen. Im selben Ausdruck folgt der Satz über das Gewicht eines Stäubchens an Schlechtem. So kann das im Alltag aussehen: Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen. Die Aufgabe: Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war. miṯqāl bedeutet: Gewicht. ḏarrah bedeutet: ein sehr kleines Stäubchen. Die Grenze der Stunde: Für die Jüngsten bleibt es beim guten Stäubchen. Der Satz über das Schlechte wird nicht als Strafszene ausgemalt. Eine Hadithnummer wurde nicht ergänzt.",
+        "intro": "As-salāmu ʿalaikum! Qurʾān 99:7 spricht vom Guten im Gewicht eines Stäubchens. Das erinnert uns, dass auch kleine Taten Bedeutung haben. Wenn du jemandem einen heruntergefallenen Stift aufhebst, ist das eine kleine Hilfe. Du musst nicht danach verkünden, wie gut du bist. Wir üben Freundlichkeit ohne Wettbewerb.",
         "lines": [
-          "Qurʾān 99:7 ist die gelesene Stelle.",
-          "Im selben Ausdruck folgt der Satz über das Gewicht eines Stäubchens an Schlechtem.",
-          "Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen.",
-          "Die arabischen Worte spricht die Lehrperson."
+          "Qurʾān 99:7 spricht von winzigem Gutem.",
+          "Kleine gute Taten können wertvoll sein.",
+          "Ich kann freundlich helfen.",
+          "Ich brauche nicht jedes Mal ein Lob."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1971. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 99:7. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1971. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 99:7. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -5991,16 +5991,16 @@ const additions=
         "situation": "Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen.",
         "practice": "Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war.",
         "summary": "Qurʾān 99:7 trägt diese Stunde. Im selben Ausdruck folgt der Satz über das Gewicht eines Stäubchens an Schlechtem.",
-        "audioScript": "Kleine Taten können wertvoll sein. Im selben Ausdruck folgt der Satz über das Gewicht eines Stäubchens an Schlechtem. Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen. Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war."
+        "audioScript": "As-salāmu ʿalaikum! Qurʾān 99:7 spricht vom Guten im Gewicht eines Stäubchens. Das erinnert uns, dass auch kleine Taten Bedeutung haben. Wenn du jemandem einen heruntergefallenen Stift aufhebst, ist das eine kleine Hilfe. Du musst nicht danach verkünden, wie gut du bist. Wir üben Freundlichkeit ohne Wettbewerb."
       },
       "9-10": {
         "goal": "Ich kann Kleine Taten können wertvoll sein von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Kleine Taten können wertvoll sein. Das Lernziel ist: Eine kleine Hilfe kann vor Allah Gewicht haben. Sinngemäß, keine beglaubigte Übersetzung: Der gespeicherte Text sagt: Wer das Gewicht eines Stäubchens an Gutem tut, wird es sehen. Im selben Ausdruck folgt der Satz über das Gewicht eines Stäubchens an Schlechtem. Alltag: Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen. Aufgabe: Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war. miṯqāl bedeutet: Gewicht. ḏarrah bedeutet: ein sehr kleines Stäubchen. Was nicht behauptet wird: Für die Jüngsten bleibt es beim guten Stäubchen. Der Satz über das Schlechte wird nicht als Strafszene ausgemalt. Eine Hadithnummer wurde nicht ergänzt.",
+        "intro": "As-salāmu ʿalaikum! In Qurʾān 99:7 wird sogar das Gute im Gewicht eines winzigen Stäubchens erwähnt. Dieser Vers regt uns an, den Wert kleiner guter Taten nicht zu unterschätzen. Eine aufrichtige kleine Hilfe kann wertvoll sein, selbst wenn niemand zuschaut. Im Alltag denken wir an praktische Schritte: etwas aufheben, freundlich Platz machen oder einem Kind helfen. Wir behaupten nicht, dass dieser Vers ein bestimmtes Spielzeug oder sofort sichtbare Belohnung verspricht.",
         "lines": [
-          "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 99:7.",
-          "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
-          "Für die Jüngsten bleibt es beim guten Stäubchen.",
-          "Eine Hadithnummer, die auf der Seite fehlt, wird nicht ergänzt."
+          "Qurʾān 99:7 spricht von winzigem Gutem.",
+          "Kleine gute Taten können wertvoll sein.",
+          "Ich kann freundlich helfen.",
+          "Ich brauche nicht jedes Mal ein Lob."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1971. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 99:7. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1971. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 99:7. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -6017,90 +6017,90 @@ const additions=
         "situation": "Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen.",
         "practice": "Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war.",
         "summary": "Belegt ist Qurʾān 99:7. Ungeprüft bleibt: Für die Jüngsten bleibt es beim guten Stäubchen.",
-        "audioScript": "Kleine Taten können wertvoll sein. Im selben Ausdruck folgt der Satz über das Gewicht eines Stäubchens an Schlechtem. Nicht belegt und deshalb nicht behauptet: Für die Jüngsten bleibt es beim guten Stäubchen."
+        "audioScript": "As-salāmu ʿalaikum! In Qurʾān 99:7 wird sogar das Gute im Gewicht eines winzigen Stäubchens erwähnt. Dieser Vers regt uns an, den Wert kleiner guter Taten nicht zu unterschätzen. Eine aufrichtige kleine Hilfe kann wertvoll sein, selbst wenn niemand zuschaut. Im Alltag denken wir an praktische Schritte: etwas aufheben, freundlich Platz machen oder einem Kind helfen. Wir behaupten nicht, dass dieser Vers ein bestimmtes Spielzeug oder sofort sichtbare Belohnung verspricht."
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was passt zu dieser Stunde?",
+          "prompt": "Du siehst einen heruntergefallenen Stift. Was ist eine gute Tat?",
           "options": [
-            "Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war.",
-            "Ich tue es, damit alle mich loben."
+            "Ihn dem Kind aufheben.",
+            "Ihn absichtlich verstecken."
           ],
           "correct": 0,
-          "hint": "Schau auf die Übung.",
-          "explain": "Die Übung der Stunde ist der erste Satz. Der zweite Satz ist das Gegenteil von dem, was wir üben."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Eine kleine Hilfe ist wertvoll."
         },
         {
           "type": "choice",
-          "prompt": "Woran hält sich diese Stunde?",
+          "prompt": "Muss dich für jede Hilfe jemand loben?",
           "options": [
-            "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "Nein, helfen ist auch ohne Lob gut.",
+            "Ja, sonst zählt es nicht."
           ],
           "correct": 0,
-          "hint": "Nur Gelesenes.",
-          "explain": "Die Stunde nennt Qurʾān 99:7 und trennt die Übung davon. Eine Nummer wird nicht erfunden."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Eine Tat bleibt gut, auch ohne Beifall."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Stelle trägt Kleine Taten können wertvoll sein?",
+          "prompt": "Was nennt Qurʾān 99:7?",
           "options": [
-            "Qurʾān 99:7",
-            "Eine Stelle ohne Suren- und Verszahl."
+            "Das Gewicht eines Stäubchens an Gutem.",
+            "Eine bestimmte Spielzeugbelohnung."
           ],
           "correct": 0,
-          "hint": "Die Fundstelle steht im Unterricht.",
-          "explain": "Die Stunde bleibt bei Qurʾān 99:7."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Der Vers spricht von kleinem Gutem."
         },
         {
           "type": "choice",
-          "prompt": "Was sagt der Vers sinngemäß für diese Stunde?",
+          "prompt": "Wie hilfst du aufrichtig?",
           "options": [
-            "Im selben Ausdruck folgt der Satz über das Gewicht eines Stäubchens an Schlechtem.",
-            "Ich tue es, damit alle mich loben."
+            "Ich helfe auch ohne Applaus.",
+            "Ich prahle über jede Hilfe."
           ],
           "correct": 0,
-          "hint": "Der erste Satz folgt der gelesenen Stelle.",
-          "explain": "Die deutsche Zeile ist eine Unterrichtshilfe zu Qurʾān 99:7, keine beglaubigte Übersetzung."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Kleine Taten brauchen keinen Wettbewerb."
         },
         {
           "type": "text",
-          "prompt": "Welche Übung gehört zu dieser Stunde?",
-          "sample": "Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war.",
-          "hint": "Die praktische Aufgabe.",
-          "explain": "Die Übung ist die genannte Handlung und nicht eine zusätzliche Formel."
+          "prompt": "Nenne eine kleine gute Tat.",
+          "sample": "Ich hebe jemandem einen Stift auf.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Jeder kann kleine Hilfen leisten."
         }
       ],
       "9-10": [
         {
           "type": "choice",
-          "prompt": "Welche Angabe wäre unehrlich?",
+          "prompt": "Was hebt Qurʾān 99:7 hervor?",
           "options": [
-            "Ein Rechtsurteil oder eine Hadithnummer als gelesen auszugeben, obwohl die Seite sie nicht liefert.",
-            "Zu sagen, dass die deutsche Erklärung sinngemäß ist."
+            "Dass selbst das Gewicht eines Stäubchens an Gutem gesehen wird.",
+            "Dass nur große Taten Bedeutung haben."
           ],
           "correct": 0,
-          "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Der Vers nennt auch das ganz Kleine."
         },
         {
           "type": "text",
-          "prompt": "Was darf diese Stunde nicht behaupten?",
-          "sample": "Für die Jüngsten bleibt es beim guten Stäubchen.",
-          "hint": "Die Grenze steht im Text.",
-          "explain": "Die Grenze schützt davor, den Vers zu überdehnen."
+          "prompt": "Warum ist eine kleine Tat ohne Publikum wertvoll?",
+          "sample": "Weil das Gute nicht nur durch das Lob anderer gut wird.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Wir lernen Aufrichtigkeit und Hilfsbereitschaft."
         },
         {
           "type": "text",
-          "prompt": "Wie lautet die Qurʾān-Stelle?",
-          "sample": "Qurʾān 99:7",
-          "hint": "Sure und Vers.",
-          "explain": "Die Stelle ist Qurʾān 99:7 auf der genannten Islamweb-Seite."
+          "prompt": "Warum ist der Vers kein Versprechen auf ein sofortiges Geschenk?",
+          "sample": "Weil er vom Sehen der Taten spricht, nicht von einem bestimmten irdischen Preis.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Wir überdehnen den Vers nicht."
         }
       ]
     },
