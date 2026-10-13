@@ -931,3 +931,121 @@ html.dar-test-side-nav:not(.dar-nav-scrolling) #bottomNav.bottom-nav {
 html.dar-test-side-nav #bottomNav.bottom-nav:is(:hover,:focus-within) {
   opacity:1!important;
 }
+
+
+/* DUOS_VIDEO_ICON_ROTATION_FIX_V1369 · 2026-10-13 iPhone 17 Pro Max.
+ * Source: user screen recording. The old .post-nav-hidden transform(-50%)
+ * wins specificity and physically displaces a correctly positioned rail.
+ * Side icons are still 3D image assets; no new fake drawings/filters on labels.
+ */
+html.dar-test-side-nav {
+  --dar-side-nav-reserve:120px!important;
+  /* Use THEME variables, not one universal black/gold style. */
+  --dar-duos-glass:color-mix(in srgb,var(--card,var(--bg,#101412)) 92%,var(--bg,#080806))!important;
+}
+html.dar-test-side-nav[data-dar-nav-position="right"] body,
+html.dar-test-side-nav[data-dar-nav-position="right"] body.has-bottom-nav,
+html.dar-test-side-nav[data-dar-nav-position="right"] body.is-feed-fullscreen {
+  padding-right:calc(var(--dar-side-nav-reserve) + env(safe-area-inset-right,0px))!important;
+  padding-left:0!important;
+  box-sizing:border-box!important;
+}
+html.dar-test-side-nav[data-dar-nav-position="left"] body,
+html.dar-test-side-nav[data-dar-nav-position="left"] body.has-bottom-nav,
+html.dar-test-side-nav[data-dar-nav-position="left"] body.is-feed-fullscreen {
+  padding-left:calc(var(--dar-side-nav-reserve) + env(safe-area-inset-left,0px))!important;
+  padding-right:0!important;
+  box-sizing:border-box!important;
+}
+html.dar-test-side-nav[data-dar-nav-position] :is(#appView,.qov-page,.qrc-page) {
+  box-sizing:border-box!important;
+  max-inline-size:100%!important;
+  min-inline-size:0!important;
+}
+html.dar-test-side-nav[data-dar-nav-position] body.is-quran-overview :is(
+  .qov-header,.qov-main,.qov-nav-stack,.qov-resume-stack,.qov-sticky-tools,.qov-search-shell,.qov-row
+) {
+  min-width:0!important;
+  max-width:100%!important;
+  box-sizing:border-box!important;
+}
+/* Defeat the more-specific old transform in BOTH nav visibility states. */
+html.dar-test-side-nav[data-dar-nav-position] #appChromeDock #bottomNav.bottom-nav.post-nav-hidden,
+html.dar-test-side-nav[data-dar-nav-position] #bottomNav.bottom-nav.post-nav-hidden,
+html.dar-test-side-nav[data-dar-nav-position] #appChromeDock #bottomNav.bottom-nav,
+html.dar-test-side-nav[data-dar-nav-position] #bottomNav.bottom-nav {
+  -webkit-transform:none!important;
+  transform:none!important;
+  opacity:1!important;
+  visibility:visible!important;
+  pointer-events:auto!important;
+}
+html.dar-test-side-nav #bottomNav.bottom-nav {
+  /* Eliminate transparent text shining through the navigation glass. */
+  -webkit-backdrop-filter:blur(10px) saturate(1.1)!important;
+  backdrop-filter:blur(10px) saturate(1.1)!important;
+}
+html.dar-test-side-nav #bottomNav.bottom-nav .bottom-nav-btn {
+  isolation:isolate!important;
+  opacity:1!important;
+  filter:none!important;
+}
+html.dar-test-side-nav #bottomNav.bottom-nav .bottom-nav-btn::before,
+html.dar-test-side-nav #bottomNav.bottom-nav .bottom-nav-btn::after {
+  display:none!important;
+  content:none!important;
+}
+html.dar-test-side-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon,
+html.dar-test-side-nav #bottomNav.bottom-nav .bottom-nav-btn.active .nav-icon,
+html.dar-test-side-nav #bottomNav.bottom-nav .bottom-nav-btn > span:last-child.nav-icon {
+  width:46px!important;
+  height:46px!important;
+  min-width:46px!important;
+  min-height:46px!important;
+  max-width:46px!important;
+  max-height:46px!important;
+  margin:auto!important;
+  padding:0!important;
+  display:grid!important;
+  place-items:center!important;
+  visibility:visible!important;
+  opacity:1!important;
+  overflow:visible!important;
+  position:relative!important;
+  z-index:2!important;
+  transform:none!important;
+  -webkit-transform:none!important;
+}
+html.dar-test-side-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon img.dar3d-icon {
+  width:46px!important;
+  height:46px!important;
+  min-width:46px!important;
+  min-height:46px!important;
+  max-width:46px!important;
+  max-height:46px!important;
+  padding:0!important;
+  margin:0 auto!important;
+  display:block!important;
+  object-fit:contain!important;
+  opacity:1!important;
+  visibility:visible!important;
+  mix-blend-mode:normal!important;
+  -webkit-filter:brightness(1.12) contrast(1.12) saturate(1.08) drop-shadow(0 1px 2px rgba(0,0,0,.48))!important;
+  filter:brightness(1.12) contrast(1.12) saturate(1.08) drop-shadow(0 1px 2px rgba(0,0,0,.48))!important;
+  transform:none!important;
+  -webkit-transform:none!important;
+}
+/* No slow capsule-width tween or lingering shifted rail while device rotates. */
+html.dar-test-nav-rotating #bottomNav.bottom-nav,
+html.dar-test-nav-rotating #appChromeDock #bottomNav.bottom-nav,
+html.dar-test-nav-rotating #bottomNav .bottom-nav-btn,
+html.dar-test-nav-rotating #bottomNav .nav-icon {
+  transition:none!important;
+  animation:none!important;
+  -webkit-animation:none!important;
+}
+/* Never apply side-only icon overrides after the rail has been disabled. */
+@media(prefers-reduced-motion:reduce) {
+  html.dar-test-side-nav #bottomNav.bottom-nav,
+  html.dar-test-nav-rotating #bottomNav.bottom-nav {transition:none!important}
+}
