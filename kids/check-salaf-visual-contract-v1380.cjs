@@ -37,7 +37,7 @@ assert.ok(css.includes("margin-inline:calc(50% - 50vw)!important"),"Full-bleed w
 assert.ok(css.includes("justify-content:flex-end!important"),"Stage heading must be bottom-aligned");
 for(const p of ["kids/index.html","kids/shell.html","kids/start.html"]){
   assert.equal(read(p),html,"Kids HTML entrypoints must be identical");
-  assert.ok(html.includes("salaf-library-v1.js?v=1380"),"JS cache bust missing");
+  assert.ok(html.includes("salaf-library-v1.js?v=1390"),"Single-master Salaf player v1390 JS cache bust missing");
   assert.ok(html.includes("salaf-open-world-v1353.css?v=1380"),"CSS cache bust missing");
 }
 for(const p of ["kids/version.json","kids/manifest.webmanifest",
@@ -48,4 +48,11 @@ for(const p of ["kids/version.json","kids/manifest.webmanifest",
 assert.ok(sw.includes(id)&&sw.includes("dar-al-tawhid-kids-v1380"));
 const content=JSON.parse(read("kids/data/salaf-library-v1.json"));
 assert.ok(Array.isArray(content.items));
+assert.equal(content.version,2,"Salaf manifest v2 is required for single master");
+assert.equal(content.narrationPolicy?.oneMasterStoryForAllAges,true);
+assert.equal(content.narrationPolicy?.oneMasterAudioForAllAges,true);
+assert.ok(js.includes("i?.masterStoryText"),"Universal master text required");
+assert.ok(js.includes("i?.audioMaster"),"Universal master audio required");
+assert.ok(!js.includes("i?.texts?.[age()]"),"Separate texts per age prohibited");
+assert.ok(!js.includes("i?.audio?.[age()]"),"Separate audio per age prohibited");
 console.log("PASS: 8 reviewed assets locked, global navigation, edge-to-edge layout and V1380 release IDs.");
