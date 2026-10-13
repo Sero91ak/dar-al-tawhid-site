@@ -3982,19 +3982,19 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers ist kein Katalog von Haushaltsregeln und kein Feuerbild für kleine Kinder. Die konkrete Hausregel ist Unterricht der Familie, nicht ein zusätzlicher Qurʾān-Satz. Für die Jüngsten sprechen wir nur über das Nicht-Gefährden, nicht über den Spendenteil. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der Vers ist kein Katalog von Haushaltsregeln und kein Feuerbild für kleine Kinder. Die konkrete Hausregel ist Unterricht der Familie, nicht ein zusätzlicher Qurʾān-Satz. Für die Jüngsten sprechen wir nur über das Nicht-Gefährden, nicht über den Spendenteil. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe). Kindertexte/Fragen unabhängig didaktisch überarbeitet 2026-10-13; Primärbelege nicht neu verifiziert. Fiqh-Freigabe ausstehend."
     },
     "hint": "Wir erzählen keine Gruselgeschichte.",
     "sample": "Eine Familienregel kann uns vor einer Gefahr schützen.",
     "ageText": {
       "4-5": {
         "goal": "Eine Familienregel kann uns vor einer Gefahr schützen.",
-        "intro": "Eine Familienregel kann uns vor einer Gefahr schützen. Eine Familienregel kann uns vor einer Gefahr schützen. Wir halten sie ein. Stell dir vor: Die Familie sagt: Auf die heiße Herdplatte fassen wir nicht. Das Kind bleibt bei dieser Regel. Heute üben wir: Wir nennen eine echte Regel aus dem eigenen Zuhause, die vor einer Gefahr schützt. Wir erzählen keine Gruselgeschichte.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! Zu Hause gibt es Regeln, die uns schützen. Eine heiße Herdplatte darf man nicht anfassen. Wenn du unsicher bist, frag einen Erwachsenen. Der Qurʾān 2:195 warnt davor, sich selbst ins Verderben zu bringen, und ruft zum Guten auf. Unsere Herd-Regel ist ein Beispiel für Sicherheit, kein wörtlicher Verssatz.",
         "lines": [
-          "Eine Familienregel kann uns vor einer Gefahr schützen.",
-          "Eine Familienregel kann uns vor einer Gefahr schützen. Wir halten sie ein.",
-          "Die Familie sagt: Auf die heiße Herdplatte fassen wir nicht. Das Kind bleibt bei dieser Regel.",
-          "Wir nennen eine echte Regel aus dem eigenen Zuhause, die vor einer Gefahr schützt."
+          "Familienregeln können uns schützen.",
+          "Qurʾān 2:195 warnt vor dem Sich-ins-Verderben-Stürzen.",
+          "Wir fassen keine heiße Herdplatte an.",
+          "Wenn wir unsicher sind, fragen wir Erwachsene."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/172. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:195. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/172. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:195. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -4011,16 +4011,16 @@ const additions=
         "situation": "Die Familie sagt: Auf die heiße Herdplatte fassen wir nicht. Das Kind bleibt bei dieser Regel.",
         "practice": "Wir nennen eine echte Regel aus dem eigenen Zuhause, die vor einer Gefahr schützt.",
         "summary": "Eine Familienregel kann uns vor einer Gefahr schützen. Wir erzählen keine Gruselgeschichte.",
-        "audioScript": "Sichere Regeln zu Hause. Eine Familienregel kann uns vor einer Gefahr schützen. Eine Familienregel kann uns vor einer Gefahr schützen. Wir halten sie ein. Die Familie sagt: Auf die heiße Herdplatte fassen wir nicht. Das Kind bleibt bei dieser Regel. Wir nennen eine echte Regel aus dem eigenen Zuhause, die vor einer Gefahr schützt."
+        "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Zu Hause gibt es Regeln, die uns schützen. Eine heiße Herdplatte darf man nicht anfassen. Wenn du unsicher bist, frag einen Erwachsenen. Der Qurʾān 2:195 warnt davor, sich selbst ins Verderben zu bringen, und ruft zum Guten auf. Unsere Herd-Regel ist ein Beispiel für Sicherheit, kein wörtlicher Verssatz."
       },
       "6-8": {
         "goal": "Eine Familienregel kann uns vor einer Gefahr schützen.",
-        "intro": "Heute geht es um Sichere Regeln zu Hause. Eine Familienregel kann uns vor einer Gefahr schützen. Wir lesen Qurʾān 2:195. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers befiehlt, auf Allahs Weg auszugeben, und sagt, man solle sich nicht mit eigenen Händen ins Verderben stürzen, und man solle Gutes tun. So kann das im Alltag aussehen: Die Familie sagt: Auf die heiße Herdplatte fassen wir nicht. Das Kind bleibt bei dieser Regel. Die Aufgabe: Wir nennen eine echte Regel aus dem eigenen Zuhause, die vor einer Gefahr schützt. tahluka bedeutet: Verderben, ins Unglück geraten. iḥsān bedeutet: Gutes tun. Die Grenze der Stunde: Der Vers ist kein Katalog von Haushaltsregeln und kein Feuerbild für kleine Kinder. Die konkrete Hausregel ist Unterricht der Familie, nicht ein zusätzlicher Qurʾān-Satz. Für die Jüngsten sprechen wir nur über das Nicht-Gefährden, nicht über den Spendenteil.",
+        "intro": "As-salāmu ʿalaikum! Qurʾān 2:195 enthält die Mahnung, sich nicht mit eigenen Händen ins Verderben zu stürzen, und ruft zu gutem Handeln auf. Die Stelle spricht in ihrem Zusammenhang auch vom Ausgeben auf Allahs Weg. Wir nehmen daraus eine allgemeine Erinnerung an Vorsicht und das Gute, ohne aus dem Vers eine konkrete Küchenanweisung zu machen. Eine sinnvolle Regel lautet: Heiße Dinge nicht berühren; bei Unsicherheit Erwachsene fragen.",
         "lines": [
-          "Qurʾān 2:195 ist die gelesene Stelle.",
-          "Eine Familienregel kann uns vor einer Gefahr schützen. Wir halten sie ein.",
-          "Die Familie sagt: Auf die heiße Herdplatte fassen wir nicht. Das Kind bleibt bei dieser Regel.",
-          "Wir erzählen keine Gruselgeschichte."
+          "Familienregeln können uns schützen.",
+          "Qurʾān 2:195 warnt vor dem Sich-ins-Verderben-Stürzen.",
+          "Wir fassen keine heiße Herdplatte an.",
+          "Wenn wir unsicher sind, fragen wir Erwachsene."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/172. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:195. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/172. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:195. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -4037,16 +4037,16 @@ const additions=
         "situation": "Die Familie sagt: Auf die heiße Herdplatte fassen wir nicht. Das Kind bleibt bei dieser Regel.",
         "practice": "Wir nennen eine echte Regel aus dem eigenen Zuhause, die vor einer Gefahr schützt.",
         "summary": "Qurʾān 2:195 trägt diese Stunde. Eine Familienregel kann uns vor einer Gefahr schützen. Wir halten sie ein.",
-        "audioScript": "Sichere Regeln zu Hause. Eine Familienregel kann uns vor einer Gefahr schützen. Wir halten sie ein. Die Familie sagt: Auf die heiße Herdplatte fassen wir nicht. Das Kind bleibt bei dieser Regel. Wir nennen eine echte Regel aus dem eigenen Zuhause, die vor einer Gefahr schützt."
+        "audioScript": "As-salāmu ʿalaikum! Qurʾān 2:195 enthält die Mahnung, sich nicht mit eigenen Händen ins Verderben zu stürzen, und ruft zu gutem Handeln auf. Die Stelle spricht in ihrem Zusammenhang auch vom Ausgeben auf Allahs Weg. Wir nehmen daraus eine allgemeine Erinnerung an Vorsicht und das Gute, ohne aus dem Vers eine konkrete Küchenanweisung zu machen. Eine sinnvolle Regel lautet: Heiße Dinge nicht berühren; bei Unsicherheit Erwachsene fragen."
       },
       "9-10": {
         "goal": "Ich kann Sichere Regeln zu Hause von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Sichere Regeln zu Hause. Das Lernziel ist: Eine Familienregel kann uns vor einer Gefahr schützen. Sinngemäß, keine beglaubigte Übersetzung: Der Vers befiehlt, auf Allahs Weg auszugeben, und sagt, man solle sich nicht mit eigenen Händen ins Verderben stürzen, und man solle Gutes tun. Alltag: Die Familie sagt: Auf die heiße Herdplatte fassen wir nicht. Das Kind bleibt bei dieser Regel. Aufgabe: Wir nennen eine echte Regel aus dem eigenen Zuhause, die vor einer Gefahr schützt. tahluka bedeutet: Verderben, ins Unglück geraten. iḥsān bedeutet: Gutes tun. Was nicht behauptet wird: Der Vers ist kein Katalog von Haushaltsregeln und kein Feuerbild für kleine Kinder. Die konkrete Hausregel ist Unterricht der Familie, nicht ein zusätzlicher Qurʾān-Satz. Für die Jüngsten sprechen wir nur über das Nicht-Gefährden, nicht über den Spendenteil.",
+        "intro": "As-salāmu ʿalaikum! Sicherheit und Verantwortung gehören zum Alltag. Qurʾān 2:195 spricht davon, auf Allahs Weg auszugeben, sich nicht mit eigenen Händen ins Verderben zu stürzen und Gutes zu tun. Die Herdplatte steht nicht ausdrücklich in diesem Vers. Sie ist unser praktisches Beispiel für eine Familienregel, die Schaden verhindert. Wir unterscheiden eine Qurʾān-Mahnung von einer altersgerechten Sicherheitsübung und überlegen, wann wir die Hilfe Erwachsener benötigen.",
         "lines": [
-          "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 2:195.",
-          "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
-          "Der Vers ist kein Katalog von Haushaltsregeln und kein Feuerbild für kleine Kinder.",
-          "Eine Hadithnummer, die auf der Seite fehlt, wird nicht ergänzt."
+          "Familienregeln können uns schützen.",
+          "Qurʾān 2:195 warnt vor dem Sich-ins-Verderben-Stürzen.",
+          "Wir fassen keine heiße Herdplatte an.",
+          "Wenn wir unsicher sind, fragen wir Erwachsene."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/172. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:195. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/172. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:195. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -4063,90 +4063,90 @@ const additions=
         "situation": "Die Familie sagt: Auf die heiße Herdplatte fassen wir nicht. Das Kind bleibt bei dieser Regel.",
         "practice": "Wir nennen eine echte Regel aus dem eigenen Zuhause, die vor einer Gefahr schützt.",
         "summary": "Belegt ist Qurʾān 2:195. Ungeprüft bleibt: Der Vers ist kein Katalog von Haushaltsregeln und kein Feuerbild für kleine Kinder.",
-        "audioScript": "Sichere Regeln zu Hause. Eine Familienregel kann uns vor einer Gefahr schützen. Wir halten sie ein. Nicht belegt und deshalb nicht behauptet: Der Vers ist kein Katalog von Haushaltsregeln und kein Feuerbild für kleine Kinder."
+        "audioScript": "As-salāmu ʿalaikum! Sicherheit und Verantwortung gehören zum Alltag. Qurʾān 2:195 spricht davon, auf Allahs Weg auszugeben, sich nicht mit eigenen Händen ins Verderben zu stürzen und Gutes zu tun. Die Herdplatte steht nicht ausdrücklich in diesem Vers. Sie ist unser praktisches Beispiel für eine Familienregel, die Schaden verhindert. Wir unterscheiden eine Qurʾān-Mahnung von einer altersgerechten Sicherheitsübung und überlegen, wann wir die Hilfe Erwachsener benötigen."
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was passt zu dieser Stunde?",
+          "prompt": "Du siehst eine heiße Herdplatte. Was ist sicher?",
           "options": [
-            "Wir nennen eine echte Regel aus dem eigenen Zuhause, die vor einer Gefahr schützt.",
-            "Ich tue so, als wäre nichts."
+            "Abstand halten und Erwachsene fragen.",
+            "Die Platte aus Neugier anfassen."
           ],
           "correct": 0,
-          "hint": "Schau auf die Übung.",
-          "explain": "Die Übung der Stunde ist der erste Satz. Der zweite Satz ist das Gegenteil von dem, was wir üben."
+          "hint": "Denk an unsere heutige Lektion.",
+          "explain": "Heiße Gegenstände können verletzen."
         },
         {
           "type": "choice",
-          "prompt": "Woran hält sich diese Stunde?",
+          "prompt": "Warum gibt es Sicherheitsregeln?",
           "options": [
-            "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "Damit niemand unnötig zu Schaden kommt.",
+            "Damit jemand absichtlich Angst bekommt."
           ],
           "correct": 0,
-          "hint": "Nur Gelesenes.",
-          "explain": "Die Stunde nennt Qurʾān 2:195 und trennt die Übung davon. Eine Nummer wird nicht erfunden."
+          "hint": "Denk an unsere heutige Lektion.",
+          "explain": "Eine gute Regel schützt."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Stelle trägt Sichere Regeln zu Hause?",
+          "prompt": "Was mahnt Qurʾān 2:195 unter anderem an?",
           "options": [
-            "Qurʾān 2:195",
-            "Eine Stelle ohne Suren- und Verszahl."
+            "Sich nicht ins Verderben zu stürzen.",
+            "Gefahren absichtlich auszuprobieren."
           ],
           "correct": 0,
-          "hint": "Die Fundstelle steht im Unterricht.",
-          "explain": "Die Stunde bleibt bei Qurʾān 2:195."
+          "hint": "Denk an unsere heutige Lektion.",
+          "explain": "Der Vers enthält eine Warnung vor Verderben."
         },
         {
           "type": "choice",
-          "prompt": "Was sagt der Vers sinngemäß für diese Stunde?",
+          "prompt": "Was ist unsere Alltagsübung?",
           "options": [
-            "Eine Familienregel kann uns vor einer Gefahr schützen. Wir halten sie ein.",
-            "Ich tue so, als wäre nichts."
+            "Eine echte Sicherheitsregel zu nennen.",
+            "Mutig eine heiße Platte anzufassen."
           ],
           "correct": 0,
-          "hint": "Der erste Satz folgt der gelesenen Stelle.",
-          "explain": "Die deutsche Zeile ist eine Unterrichtshilfe zu Qurʾān 2:195, keine beglaubigte Übersetzung."
+          "hint": "Denk an unsere heutige Lektion.",
+          "explain": "Das Beispiel ist eine pädagogische Übung."
         },
         {
           "type": "text",
-          "prompt": "Welche Übung gehört zu dieser Stunde?",
-          "sample": "Wir nennen eine echte Regel aus dem eigenen Zuhause, die vor einer Gefahr schützt.",
-          "hint": "Die praktische Aufgabe.",
-          "explain": "Die Übung ist die genannte Handlung und nicht eine zusätzliche Formel."
+          "prompt": "Nenne eine sichere Familienregel.",
+          "sample": "Ich fasse heiße Dinge nicht ohne Hilfe an.",
+          "hint": "Antworte mit eigenen Worten.",
+          "explain": "Kinder dürfen bei Gefahren Erwachsene fragen."
         }
       ],
       "9-10": [
         {
           "type": "choice",
-          "prompt": "Welche Angabe wäre unehrlich?",
+          "prompt": "Was steht nicht wörtlich in Qurʾān 2:195?",
           "options": [
-            "Ein Rechtsurteil oder eine Hadithnummer als gelesen auszugeben, obwohl die Seite sie nicht liefert.",
-            "Zu sagen, dass die deutsche Erklärung sinngemäß ist."
+            "Eine bestimmte Küchenregel über Herdplatten.",
+            "Die Mahnung, sich nicht ins Verderben zu stürzen."
           ],
           "correct": 0,
-          "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "hint": "Denk an unsere heutige Lektion.",
+          "explain": "Das Herd-Beispiel stammt aus unserer Übung."
         },
         {
           "type": "text",
-          "prompt": "Was darf diese Stunde nicht behaupten?",
-          "sample": "Der Vers ist kein Katalog von Haushaltsregeln und kein Feuerbild für kleine Kinder.",
-          "hint": "Die Grenze steht im Text.",
-          "explain": "Die Grenze schützt davor, den Vers zu überdehnen."
+          "prompt": "Wie unterscheidest du den Vers von der Übung?",
+          "sample": "Der Vers mahnt vor Gefahr; unsere Übung ist eine konkrete sichere Handlung zu Hause.",
+          "hint": "Antworte mit eigenen Worten.",
+          "explain": "Vers und Anwendung sind nicht derselbe Wortlaut."
         },
         {
           "type": "text",
-          "prompt": "Wie lautet die Qurʾān-Stelle?",
-          "sample": "Qurʾān 2:195",
-          "hint": "Sure und Vers.",
-          "explain": "Die Stelle ist Qurʾān 2:195 auf der genannten Islamweb-Seite."
+          "prompt": "Was machst du, wenn du eine Gefahr nicht einschätzen kannst?",
+          "sample": "Ich halte Abstand und frage eine erwachsene Person.",
+          "hint": "Antworte mit eigenen Worten.",
+          "explain": "Sicherheit geht vor einem riskanten Versuch."
         }
       ]
     },
@@ -4199,19 +4199,19 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers verspricht nicht, dass die Wartezeit verschwindet. Wir übertragen die Geduld nicht auf eine Gefahr, in der man Hilfe holen muss. Eine Hadithnummer wurde nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der Vers verspricht nicht, dass die Wartezeit verschwindet. Wir übertragen die Geduld nicht auf eine Gefahr, in der man Hilfe holen muss. Eine Hadithnummer wurde nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe). Kindertexte/Fragen unabhängig didaktisch überarbeitet 2026-10-13; Primärbelege nicht neu verifiziert. Fiqh-Freigabe ausstehend."
     },
     "hint": "Bei Gefahr holst du einen Menschen. Eine Bitte allein reicht dann nicht.",
     "sample": "Wenn wir warten müssen, merken wir die Eile und werden langsamer.",
     "ageText": {
       "4-5": {
         "goal": "Wenn wir warten müssen, merken wir die Eile und werden langsamer.",
-        "intro": "Wenn wir warten müssen, merken wir die Eile und werden langsamer. Der Vers lautet: So sei geduldig mit einem schönen Gedulden. Stell dir vor: Die Reihe an der Tür dauert. Ein Kind will schubsen und hält stattdessen die Hände still. Heute üben wir: Wir atmen einmal ruhig und sagen: Ich warte. Bei Gefahr holst du einen Menschen. Eine Bitte allein reicht dann nicht.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! Manchmal dauert das Warten lange. Dann möchten wir uns vordrängeln. Wir können stillstehen, einmal ruhig atmen und sagen: „Ich warte.“ Im Qurʾān 70:5 wird von schöner Geduld gesprochen. Unsere kleine Übung hilft uns, beim Warten freundlich zu bleiben.",
         "lines": [
-          "Wenn wir warten müssen, merken wir die Eile und werden langsamer.",
-          "Der Vers lautet: So sei geduldig mit einem schönen Gedulden.",
-          "Die Reihe an der Tür dauert. Ein Kind will schubsen und hält stattdessen die Hände still.",
-          "Wir atmen einmal ruhig und sagen: Ich warte."
+          "Qurʾān 70:5 spricht von schöner Geduld.",
+          "Warten kann sich schwer anfühlen.",
+          "Ich kann ruhig bleiben und niemanden schubsen.",
+          "Bei Gefahr darf ich sofort Hilfe holen."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1891. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 70:5. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1891. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 70:5. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -4228,16 +4228,16 @@ const additions=
         "situation": "Die Reihe an der Tür dauert. Ein Kind will schubsen und hält stattdessen die Hände still.",
         "practice": "Wir atmen einmal ruhig und sagen: Ich warte.",
         "summary": "Wenn wir warten müssen, merken wir die Eile und werden langsamer. Bei Gefahr holst du einen Menschen. Eine Bitte allein reicht dann nicht.",
-        "audioScript": "Ungeduld bemerken. Wenn wir warten müssen, merken wir die Eile und werden langsamer. Der Vers lautet: So sei geduldig mit einem schönen Gedulden. Die Reihe an der Tür dauert. Ein Kind will schubsen und hält stattdessen die Hände still. Wir atmen einmal ruhig und sagen: Ich warte."
+        "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Manchmal dauert das Warten lange. Dann möchten wir uns vordrängeln. Wir können stillstehen, einmal ruhig atmen und sagen: „Ich warte.“ Im Qurʾān 70:5 wird von schöner Geduld gesprochen. Unsere kleine Übung hilft uns, beim Warten freundlich zu bleiben."
       },
       "6-8": {
         "goal": "Wenn wir warten müssen, merken wir die Eile und werden langsamer.",
-        "intro": "Heute geht es um Ungeduld bemerken. Wenn wir warten müssen, merken wir die Eile und werden langsamer. Wir lesen Qurʾān 70:5. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers lautet: So sei geduldig mit einem schönen Gedulden. Die Erklärung auf der Seite richtet diese Geduld an den Propheten gegenüber der Ablehnung seines Volkes. So kann das im Alltag aussehen: Die Reihe an der Tür dauert. Ein Kind will schubsen und hält stattdessen die Hände still. Die Aufgabe: Wir atmen einmal ruhig und sagen: Ich warte. ṣabr bedeutet: Geduld, bleiben können. ǧamīl bedeutet: schön; hier ein geduldiges Aushalten ohne böses Auftreten. Die Grenze der Stunde: Der Vers verspricht nicht, dass die Wartezeit verschwindet. Wir übertragen die Geduld nicht auf eine Gefahr, in der man Hilfe holen muss. Eine Hadithnummer wurde nicht ergänzt.",
+        "intro": "As-salāmu ʿalaikum! In Qurʾān 70:5 wird zu schöner Geduld aufgerufen. Im ursprünglichen Zusammenhang wird der Prophet angesprochen. Wir benutzen den Vers nicht, um Kinder zu zwingen, Unrecht still auszuhalten. Heute geht es nur um alltägliches Warten: Ein Kind steht in der Reihe und möchte vordrängeln. Es hält die Hände bei sich und wartet ruhig. Wer dringend Hilfe braucht, darf sie sofort suchen.",
         "lines": [
-          "Qurʾān 70:5 ist die gelesene Stelle.",
-          "Der Vers lautet: So sei geduldig mit einem schönen Gedulden.",
-          "Die Reihe an der Tür dauert. Ein Kind will schubsen und hält stattdessen die Hände still.",
-          "Bei Gefahr holst du einen Menschen. Eine Bitte allein reicht dann nicht."
+          "Qurʾān 70:5 spricht von schöner Geduld.",
+          "Warten kann sich schwer anfühlen.",
+          "Ich kann ruhig bleiben und niemanden schubsen.",
+          "Bei Gefahr darf ich sofort Hilfe holen."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1891. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 70:5. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1891. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 70:5. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -4254,16 +4254,16 @@ const additions=
         "situation": "Die Reihe an der Tür dauert. Ein Kind will schubsen und hält stattdessen die Hände still.",
         "practice": "Wir atmen einmal ruhig und sagen: Ich warte.",
         "summary": "Qurʾān 70:5 trägt diese Stunde. Der Vers lautet: So sei geduldig mit einem schönen Gedulden.",
-        "audioScript": "Ungeduld bemerken. Der Vers lautet: So sei geduldig mit einem schönen Gedulden. Die Reihe an der Tür dauert. Ein Kind will schubsen und hält stattdessen die Hände still. Wir atmen einmal ruhig und sagen: Ich warte."
+        "audioScript": "As-salāmu ʿalaikum! In Qurʾān 70:5 wird zu schöner Geduld aufgerufen. Im ursprünglichen Zusammenhang wird der Prophet angesprochen. Wir benutzen den Vers nicht, um Kinder zu zwingen, Unrecht still auszuhalten. Heute geht es nur um alltägliches Warten: Ein Kind steht in der Reihe und möchte vordrängeln. Es hält die Hände bei sich und wartet ruhig. Wer dringend Hilfe braucht, darf sie sofort suchen."
       },
       "9-10": {
         "goal": "Ich kann Ungeduld bemerken von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Ungeduld bemerken. Das Lernziel ist: Wenn wir warten müssen, merken wir die Eile und werden langsamer. Sinngemäß, keine beglaubigte Übersetzung: Der Vers lautet: So sei geduldig mit einem schönen Gedulden. Die Erklärung auf der Seite richtet diese Geduld an den Propheten gegenüber der Ablehnung seines Volkes. Alltag: Die Reihe an der Tür dauert. Ein Kind will schubsen und hält stattdessen die Hände still. Aufgabe: Wir atmen einmal ruhig und sagen: Ich warte. ṣabr bedeutet: Geduld, bleiben können. ǧamīl bedeutet: schön; hier ein geduldiges Aushalten ohne böses Auftreten. Was nicht behauptet wird: Der Vers verspricht nicht, dass die Wartezeit verschwindet. Wir übertragen die Geduld nicht auf eine Gefahr, in der man Hilfe holen muss. Eine Hadithnummer wurde nicht ergänzt.",
+        "intro": "As-salāmu ʿalaikum! Ṣabr bedeutet Geduld. Qurʾān 70:5 spricht im Zusammenhang der Ablehnung des Propheten von schöner Geduld. Daraus können wir eine kleine Alltagsübung entwickeln, ohne den besonderen Zusammenhang zu vergessen. Beim Warten in einer Reihe merken wir, wenn Ärger entsteht, und entscheiden uns gegen Schubsen. Geduld heißt nicht, Gefahr oder Mobbing schweigend ertragen zu müssen. In solchen Situationen holen Kinder Hilfe.",
         "lines": [
-          "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 70:5.",
-          "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
-          "Der Vers verspricht nicht, dass die Wartezeit verschwindet.",
-          "Eine Hadithnummer, die auf der Seite fehlt, wird nicht ergänzt."
+          "Qurʾān 70:5 spricht von schöner Geduld.",
+          "Warten kann sich schwer anfühlen.",
+          "Ich kann ruhig bleiben und niemanden schubsen.",
+          "Bei Gefahr darf ich sofort Hilfe holen."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1891. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 70:5. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1891. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 70:5. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -4280,90 +4280,90 @@ const additions=
         "situation": "Die Reihe an der Tür dauert. Ein Kind will schubsen und hält stattdessen die Hände still.",
         "practice": "Wir atmen einmal ruhig und sagen: Ich warte.",
         "summary": "Belegt ist Qurʾān 70:5. Ungeprüft bleibt: Der Vers verspricht nicht, dass die Wartezeit verschwindet.",
-        "audioScript": "Ungeduld bemerken. Der Vers lautet: So sei geduldig mit einem schönen Gedulden. Nicht belegt und deshalb nicht behauptet: Der Vers verspricht nicht, dass die Wartezeit verschwindet."
+        "audioScript": "As-salāmu ʿalaikum! Ṣabr bedeutet Geduld. Qurʾān 70:5 spricht im Zusammenhang der Ablehnung des Propheten von schöner Geduld. Daraus können wir eine kleine Alltagsübung entwickeln, ohne den besonderen Zusammenhang zu vergessen. Beim Warten in einer Reihe merken wir, wenn Ärger entsteht, und entscheiden uns gegen Schubsen. Geduld heißt nicht, Gefahr oder Mobbing schweigend ertragen zu müssen. In solchen Situationen holen Kinder Hilfe."
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was passt zu dieser Stunde?",
+          "prompt": "Du wartest in einer Reihe. Was kannst du tun?",
           "options": [
-            "Wir atmen einmal ruhig und sagen: Ich warte.",
-            "Ich schäme mich und denke, ich sei der Fehler."
+            "Ruhig warten und die Hände bei dir lassen.",
+            "Andere Kinder schubsen."
           ],
           "correct": 0,
-          "hint": "Schau auf die Übung.",
-          "explain": "Die Übung der Stunde ist der erste Satz. Der zweite Satz ist das Gegenteil von dem, was wir üben."
+          "hint": "Denk an unsere heutige Lektion.",
+          "explain": "Geduld hilft uns beim Warten."
         },
         {
           "type": "choice",
-          "prompt": "Woran hält sich diese Stunde?",
+          "prompt": "Was heißt ṣabr?",
           "options": [
-            "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "Geduld.",
+            "Spott."
           ],
           "correct": 0,
-          "hint": "Nur Gelesenes.",
-          "explain": "Die Stunde nennt Qurʾān 70:5 und trennt die Übung davon. Eine Nummer wird nicht erfunden."
+          "hint": "Denk an unsere heutige Lektion.",
+          "explain": "Ṣabr bedeutet Geduld."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Stelle trägt Ungeduld bemerken?",
+          "prompt": "Welches Wort passt zu Qurʾān 70:5?",
           "options": [
-            "Qurʾān 70:5",
-            "Eine Stelle ohne Suren- und Verszahl."
+            "Schöne Geduld.",
+            "Andere auslachen."
           ],
           "correct": 0,
-          "hint": "Die Fundstelle steht im Unterricht.",
-          "explain": "Die Stunde bleibt bei Qurʾān 70:5."
+          "hint": "Denk an unsere heutige Lektion.",
+          "explain": "Der Vers spricht von Geduld."
         },
         {
           "type": "choice",
-          "prompt": "Was sagt der Vers sinngemäß für diese Stunde?",
+          "prompt": "Was ist gutes Verhalten in einer Warteschlange?",
           "options": [
-            "Der Vers lautet: So sei geduldig mit einem schönen Gedulden.",
-            "Ich schäme mich und denke, ich sei der Fehler."
+            "Niemanden schubsen und ruhig warten.",
+            "Mich mit Gewalt vordrängen."
           ],
           "correct": 0,
-          "hint": "Der erste Satz folgt der gelesenen Stelle.",
-          "explain": "Die deutsche Zeile ist eine Unterrichtshilfe zu Qurʾān 70:5, keine beglaubigte Übersetzung."
+          "hint": "Denk an unsere heutige Lektion.",
+          "explain": "Wir üben freundliches Warten."
         },
         {
           "type": "text",
-          "prompt": "Welche Übung gehört zu dieser Stunde?",
-          "sample": "Wir atmen einmal ruhig und sagen: Ich warte.",
-          "hint": "Die praktische Aufgabe.",
-          "explain": "Die Übung ist die genannte Handlung und nicht eine zusätzliche Formel."
+          "prompt": "Wann sollst du nicht einfach still warten?",
+          "sample": "Wenn ich in Gefahr bin oder Hilfe brauche, hole ich sofort einen Erwachsenen.",
+          "hint": "Antworte mit eigenen Worten.",
+          "explain": "Geduld ist kein Zwang, Unrecht auszuhalten."
         }
       ],
       "9-10": [
         {
           "type": "choice",
-          "prompt": "Welche Angabe wäre unehrlich?",
+          "prompt": "An wen richtet sich Qurʾān 70:5 in seinem Zusammenhang?",
           "options": [
-            "Ein Rechtsurteil oder eine Hadithnummer als gelesen auszugeben, obwohl die Seite sie nicht liefert.",
-            "Zu sagen, dass die deutsche Erklärung sinngemäß ist."
+            "An den Propheten im Umgang mit Ablehnung.",
+            "Als wörtliche Regel an Kinder in der Warteschlange."
           ],
           "correct": 0,
-          "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "hint": "Denk an unsere heutige Lektion.",
+          "explain": "Der ursprüngliche Zusammenhang wird gewahrt."
         },
         {
           "type": "text",
-          "prompt": "Was darf diese Stunde nicht behaupten?",
-          "sample": "Der Vers verspricht nicht, dass die Wartezeit verschwindet.",
-          "hint": "Die Grenze steht im Text.",
-          "explain": "Die Grenze schützt davor, den Vers zu überdehnen."
+          "prompt": "Wie kann Geduld im Alltag aussehen?",
+          "sample": "Ich atme ruhig und drängle nicht.",
+          "hint": "Antworte mit eigenen Worten.",
+          "explain": "Die Warteschlange ist unsere pädagogische Übung."
         },
         {
           "type": "text",
-          "prompt": "Wie lautet die Qurʾān-Stelle?",
-          "sample": "Qurʾān 70:5",
-          "hint": "Sure und Vers.",
-          "explain": "Die Stelle ist Qurʾān 70:5 auf der genannten Islamweb-Seite."
+          "prompt": "Warum heißt Geduld nicht, Mobbing auszuhalten?",
+          "sample": "Weil Schutz und Hilfeholen bei Unrecht wichtig bleiben.",
+          "hint": "Antworte mit eigenen Worten.",
+          "explain": "Kinder sollen sicher sein und Hilfe erhalten."
         }
       ]
     },
@@ -4416,19 +4416,19 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Welches Gebet das mittlere ist, entscheidet diese Stunde nicht, weil die Seite dafür kein abgeschlossenes hanbalitisches Urteil der Kinderstunde liefert. al-Mughnī wurde nicht gelesen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Welches Gebet das mittlere ist, entscheidet diese Stunde nicht, weil die Seite dafür kein abgeschlossenes hanbalitisches Urteil der Kinderstunde liefert. al-Mughnī wurde nicht gelesen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe). Kindertexte/Fragen unabhängig didaktisch überarbeitet 2026-10-13; Primärbelege nicht neu verifiziert. Fiqh-Freigabe ausstehend."
     },
     "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
     "sample": "Wir suchen einen ruhigen Platz, an dem wir das Gebet üben können.",
     "ageText": {
       "4-5": {
         "goal": "Wir suchen einen ruhigen Platz, an dem wir das Gebet üben können.",
-        "intro": "Wir suchen einen ruhigen Platz, an dem wir das Gebet üben können. Der Vers fordert auf, die Gebete zu hüten und das mittlere Gebet, und vor Allah demütig zu stehen. Stell dir vor: Im Zimmer liegt Spielzeug auf dem Teppich. Das Kind räumt mit Erlaubnis eine kleine Fläche frei. Heute üben wir: Wir legen eine saubere Unterlage gerade hin und stellen uns ruhig daneben, ohne das Gebet schon vollständig zu verrichten. Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! Wir wollen einen ruhigen Platz zum Gebetsüben vorbereiten. Wir räumen mit Erlaubnis etwas Spielzeug weg und legen eine saubere Unterlage hin. In Qurʾān 2:238 erinnert Allah daran, die Gebete zu bewahren. Unsere Übung ist nur eine Vorbereitung und noch keine vollständige Gebetsanleitung.",
         "lines": [
-          "Wir suchen einen ruhigen Platz, an dem wir das Gebet üben können.",
-          "Der Vers fordert auf, die Gebete zu hüten und das mittlere Gebet, und vor Allah demütig zu stehen.",
-          "Im Zimmer liegt Spielzeug auf dem Teppich. Das Kind räumt mit Erlaubnis eine kleine Fläche frei.",
-          "Wir legen eine saubere Unterlage gerade hin und stellen uns ruhig daneben, ohne das Gebet schon vollständig zu verrichten."
+          "Qurʾān 2:238 erinnert an die Gebete.",
+          "Wir können einen ruhigen Platz vorbereiten.",
+          "Eine Unterlage ist unsere praktische Übung.",
+          "Genauere Fiqh-Regeln brauchen eigene Belege."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/205. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:238. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/205. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:238. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -4445,16 +4445,16 @@ const additions=
         "situation": "Im Zimmer liegt Spielzeug auf dem Teppich. Das Kind räumt mit Erlaubnis eine kleine Fläche frei.",
         "practice": "Wir legen eine saubere Unterlage gerade hin und stellen uns ruhig daneben, ohne das Gebet schon vollständig zu verrichten.",
         "summary": "Wir suchen einen ruhigen Platz, an dem wir das Gebet üben können. Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
-        "audioScript": "Einen Gebetsplatz vorbereiten. Wir suchen einen ruhigen Platz, an dem wir das Gebet üben können. Der Vers fordert auf, die Gebete zu hüten und das mittlere Gebet, und vor Allah demütig zu stehen. Im Zimmer liegt Spielzeug auf dem Teppich. Das Kind räumt mit Erlaubnis eine kleine Fläche frei. Wir legen eine saubere Unterlage gerade hin und stellen uns ruhig daneben, ohne das Gebet schon vollständig zu verrichten."
+        "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Wir wollen einen ruhigen Platz zum Gebetsüben vorbereiten. Wir räumen mit Erlaubnis etwas Spielzeug weg und legen eine saubere Unterlage hin. In Qurʾān 2:238 erinnert Allah daran, die Gebete zu bewahren. Unsere Übung ist nur eine Vorbereitung und noch keine vollständige Gebetsanleitung."
       },
       "6-8": {
         "goal": "Wir suchen einen ruhigen Platz, an dem wir das Gebet üben können.",
-        "intro": "Heute geht es um Einen Gebetsplatz vorbereiten. Wir suchen einen ruhigen Platz, an dem wir das Gebet üben können. Wir lesen Qurʾān 2:238. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers fordert auf, die Gebete zu hüten und das mittlere Gebet, und vor Allah demütig zu stehen. So kann das im Alltag aussehen: Im Zimmer liegt Spielzeug auf dem Teppich. Das Kind räumt mit Erlaubnis eine kleine Fläche frei. Die Aufgabe: Wir legen eine saubere Unterlage gerade hin und stellen uns ruhig daneben, ohne das Gebet schon vollständig zu verrichten. ṣalawāt bedeutet: Gebete. qānitīn bedeutet: demütig Stehende. Die Grenze der Stunde: Welches Gebet das mittlere ist, entscheidet diese Stunde nicht, weil die Seite dafür kein abgeschlossenes hanbalitisches Urteil der Kinderstunde liefert. al-Mughnī wurde nicht gelesen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
+        "intro": "As-salāmu ʿalaikum! Qurʾān 2:238 mahnt, die Gebete sorgfältig zu bewahren und in Demut vor Allah zu stehen. Er nennt aber keine vollständige Anleitung für die Vorbereitung eines Gebetsplatzes. Wir machen deshalb eine praktische Übung: mit Erlaubnis eine kleine Fläche freiräumen und eine Unterlage ordentlich hinlegen. Wir behaupten keine neue Pflicht über Teppiche oder Unterlagen.",
         "lines": [
-          "Qurʾān 2:238 ist die gelesene Stelle.",
-          "Der Vers fordert auf, die Gebete zu hüten und das mittlere Gebet, und vor Allah demütig zu stehen.",
-          "Im Zimmer liegt Spielzeug auf dem Teppich. Das Kind räumt mit Erlaubnis eine kleine Fläche frei.",
-          "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers."
+          "Qurʾān 2:238 erinnert an die Gebete.",
+          "Wir können einen ruhigen Platz vorbereiten.",
+          "Eine Unterlage ist unsere praktische Übung.",
+          "Genauere Fiqh-Regeln brauchen eigene Belege."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/205. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:238. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/205. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:238. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -4471,16 +4471,16 @@ const additions=
         "situation": "Im Zimmer liegt Spielzeug auf dem Teppich. Das Kind räumt mit Erlaubnis eine kleine Fläche frei.",
         "practice": "Wir legen eine saubere Unterlage gerade hin und stellen uns ruhig daneben, ohne das Gebet schon vollständig zu verrichten.",
         "summary": "Qurʾān 2:238 trägt diese Stunde. Der Vers fordert auf, die Gebete zu hüten und das mittlere Gebet, und vor Allah demütig zu stehen.",
-        "audioScript": "Einen Gebetsplatz vorbereiten. Der Vers fordert auf, die Gebete zu hüten und das mittlere Gebet, und vor Allah demütig zu stehen. Im Zimmer liegt Spielzeug auf dem Teppich. Das Kind räumt mit Erlaubnis eine kleine Fläche frei. Wir legen eine saubere Unterlage gerade hin und stellen uns ruhig daneben, ohne das Gebet schon vollständig zu verrichten."
+        "audioScript": "As-salāmu ʿalaikum! Qurʾān 2:238 mahnt, die Gebete sorgfältig zu bewahren und in Demut vor Allah zu stehen. Er nennt aber keine vollständige Anleitung für die Vorbereitung eines Gebetsplatzes. Wir machen deshalb eine praktische Übung: mit Erlaubnis eine kleine Fläche freiräumen und eine Unterlage ordentlich hinlegen. Wir behaupten keine neue Pflicht über Teppiche oder Unterlagen."
       },
       "9-10": {
         "goal": "Ich kann Einen Gebetsplatz vorbereiten von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Einen Gebetsplatz vorbereiten. Das Lernziel ist: Wir suchen einen ruhigen Platz, an dem wir das Gebet üben können. Sinngemäß, keine beglaubigte Übersetzung: Der Vers fordert auf, die Gebete zu hüten und das mittlere Gebet, und vor Allah demütig zu stehen. Alltag: Im Zimmer liegt Spielzeug auf dem Teppich. Das Kind räumt mit Erlaubnis eine kleine Fläche frei. Aufgabe: Wir legen eine saubere Unterlage gerade hin und stellen uns ruhig daneben, ohne das Gebet schon vollständig zu verrichten. ṣalawāt bedeutet: Gebete. qānitīn bedeutet: demütig Stehende. Was nicht behauptet wird: Welches Gebet das mittlere ist, entscheidet diese Stunde nicht, weil die Seite dafür kein abgeschlossenes hanbalitisches Urteil der Kinderstunde liefert. al-Mughnī wurde nicht gelesen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
+        "intro": "As-salāmu ʿalaikum! Wir beschäftigen uns mit dem achtsamen Vorbereiten einer Gebetsübung. Qurʾān 2:238 gebietet, die Gebete zu wahren, und nennt das demütige Stehen vor Allah. Von dort können wir den Wert sorgfältiger Vorbereitung besprechen. Die konkreten Fragen, welche Voraussetzungen ein Gebetsplatz fiqh-rechtlich erfüllen muss, werden jedoch nicht allein durch 2:238 entschieden. Unsere heutige Übung ist, einen ruhigen und ordentlichen Platz zu schaffen. Verbindliche hanbalitische Einzelregeln bleiben der eigenen Quellenprüfung vorbehalten.",
         "lines": [
-          "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 2:238.",
-          "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
-          "Welches Gebet das mittlere ist, entscheidet diese Stunde nicht, weil die Seite dafür kein abgeschlossenes hanbalitisches Urteil der Kinderstunde liefert.",
-          "Eine Hadithnummer, die auf der Seite fehlt, wird nicht ergänzt."
+          "Qurʾān 2:238 erinnert an die Gebete.",
+          "Wir können einen ruhigen Platz vorbereiten.",
+          "Eine Unterlage ist unsere praktische Übung.",
+          "Genauere Fiqh-Regeln brauchen eigene Belege."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/205. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:238. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/205. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:238. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -4497,90 +4497,90 @@ const additions=
         "situation": "Im Zimmer liegt Spielzeug auf dem Teppich. Das Kind räumt mit Erlaubnis eine kleine Fläche frei.",
         "practice": "Wir legen eine saubere Unterlage gerade hin und stellen uns ruhig daneben, ohne das Gebet schon vollständig zu verrichten.",
         "summary": "Belegt ist Qurʾān 2:238. Ungeprüft bleibt: Welches Gebet das mittlere ist, entscheidet diese Stunde nicht, weil die Seite dafür kein abgeschlossenes hanbalitisches Urteil der Kinderstunde liefert.",
-        "audioScript": "Einen Gebetsplatz vorbereiten. Der Vers fordert auf, die Gebete zu hüten und das mittlere Gebet, und vor Allah demütig zu stehen. Nicht belegt und deshalb nicht behauptet: Welches Gebet das mittlere ist, entscheidet diese Stunde nicht, weil die Seite dafür kein abgeschlossenes hanbalitisches Urteil der Kinderstunde liefert."
+        "audioScript": "As-salāmu ʿalaikum! Wir beschäftigen uns mit dem achtsamen Vorbereiten einer Gebetsübung. Qurʾān 2:238 gebietet, die Gebete zu wahren, und nennt das demütige Stehen vor Allah. Von dort können wir den Wert sorgfältiger Vorbereitung besprechen. Die konkreten Fragen, welche Voraussetzungen ein Gebetsplatz fiqh-rechtlich erfüllen muss, werden jedoch nicht allein durch 2:238 entschieden. Unsere heutige Übung ist, einen ruhigen und ordentlichen Platz zu schaffen. Verbindliche hanbalitische Einzelregeln bleiben der eigenen Quellenprüfung vorbehalten."
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was passt zu dieser Stunde?",
+          "prompt": "Was kannst du vor der Gebetsübung tun?",
           "options": [
-            "Wir legen eine saubere Unterlage gerade hin und stellen uns ruhig daneben, ohne das Gebet schon vollständig.",
-            "Ich erfinde eine neue Gebetsregel."
+            "Mit Erlaubnis einen ruhigen Platz vorbereiten.",
+            "Absichtlich Spielzeug verstreuen."
           ],
           "correct": 0,
-          "hint": "Schau auf die Übung.",
-          "explain": "Die Übung der Stunde ist der erste Satz. Der zweite Satz ist das Gegenteil von dem, was wir üben."
+          "hint": "Denk an unsere heutige Lektion.",
+          "explain": "Wir machen eine ruhige Vorbereitung."
         },
         {
           "type": "choice",
-          "prompt": "Woran hält sich diese Stunde?",
+          "prompt": "Woran erinnert Qurʾān 2:238?",
           "options": [
-            "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An die Gebete.",
+            "An ein Wettlaufen."
           ],
           "correct": 0,
-          "hint": "Nur Gelesenes.",
-          "explain": "Die Stunde nennt Qurʾān 2:238 und trennt die Übung davon. Eine Nummer wird nicht erfunden."
+          "hint": "Denk an unsere heutige Lektion.",
+          "explain": "Der Vers spricht von den Gebeten."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Stelle trägt Einen Gebetsplatz vorbereiten?",
+          "prompt": "Was lehrt Qurʾān 2:238?",
           "options": [
-            "Qurʾān 2:238",
-            "Eine Stelle ohne Suren- und Verszahl."
+            "Die Gebete bewahren und demütig vor Allah stehen.",
+            "Jeder muss genau denselben Teppich besitzen."
           ],
           "correct": 0,
-          "hint": "Die Fundstelle steht im Unterricht.",
-          "explain": "Die Stunde bleibt bei Qurʾān 2:238."
+          "hint": "Denk an unsere heutige Lektion.",
+          "explain": "Der Vers enthält keine Teppichpflicht."
         },
         {
           "type": "choice",
-          "prompt": "Was sagt der Vers sinngemäß für diese Stunde?",
+          "prompt": "Was ist unsere Übung?",
           "options": [
-            "Der Vers fordert auf, die Gebete zu hüten und das mittlere Gebet, und vor Allah demütig zu stehen.",
-            "Ich erfinde eine neue Gebetsregel."
+            "Eine freie Fläche ordentlich vorbereiten.",
+            "Einen Gebetsplatz absichtlich verschmutzen."
           ],
           "correct": 0,
-          "hint": "Der erste Satz folgt der gelesenen Stelle.",
-          "explain": "Die deutsche Zeile ist eine Unterrichtshilfe zu Qurʾān 2:238, keine beglaubigte Übersetzung."
+          "hint": "Denk an unsere heutige Lektion.",
+          "explain": "Wir lernen Ordnung und Aufmerksamkeit."
         },
         {
           "type": "text",
-          "prompt": "Welche Übung gehört zu dieser Stunde?",
-          "sample": "Wir legen eine saubere Unterlage gerade hin und stellen uns ruhig daneben, ohne das Gebet schon vollständig.",
-          "hint": "Die praktische Aufgabe.",
-          "explain": "Die Übung ist die genannte Handlung und nicht eine zusätzliche Formel."
+          "prompt": "Warum nennen wir die Unterlage eine Übung?",
+          "sample": "Weil der Vers keine vollständige Pflichtliste für Unterlagen enthält.",
+          "hint": "Antworte mit eigenen Worten.",
+          "explain": "Die Vorbereitung ist kein neues Rechtsurteil."
         }
       ],
       "9-10": [
         {
           "type": "choice",
-          "prompt": "Welche Angabe wäre unehrlich?",
+          "prompt": "Welche Aussage lässt sich aus Qurʾān 2:238 belegen?",
           "options": [
-            "Ein Rechtsurteil oder eine Hadithnummer als gelesen auszugeben, obwohl die Seite sie nicht liefert.",
-            "Zu sagen, dass die deutsche Erklärung sinngemäß ist."
+            "Die Mahnung, die Gebete zu bewahren.",
+            "Eine vollständige Liste aller Anforderungen an den Gebetsplatz."
           ],
           "correct": 0,
-          "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "hint": "Denk an unsere heutige Lektion.",
+          "explain": "Der Vers ersetzt nicht die gesamte Fiqh-Literatur."
         },
         {
           "type": "text",
-          "prompt": "Was darf diese Stunde nicht behaupten?",
-          "sample": "Welches Gebet das mittlere ist, entscheidet diese Stunde nicht, weil die Seite dafür kein abgeschlossenes hanbalitisches Urteil der Kinderstunde liefert.",
-          "hint": "Die Grenze steht im Text.",
-          "explain": "Die Grenze schützt davor, den Vers zu überdehnen."
+          "prompt": "Wie trennst du Qurʾān-Vers und Gebetsplatzübung?",
+          "sample": "Der Vers erinnert an Gebete; die Unterlage ordnen wir nur zum Üben.",
+          "hint": "Antworte mit eigenen Worten.",
+          "explain": "Nicht jede Unterrichtshandlung ist religiöse Pflicht."
         },
         {
           "type": "text",
-          "prompt": "Wie lautet die Qurʾān-Stelle?",
-          "sample": "Qurʾān 2:238",
-          "hint": "Sure und Vers.",
-          "explain": "Die Stelle ist Qurʾān 2:238 auf der genannten Islamweb-Seite."
+          "prompt": "Was bleibt bei dieser Fiqh-Stunde offen?",
+          "sample": "Die verbindlichen Einzelvoraussetzungen eines Gebetsplatzes brauchen weitere Quellen.",
+          "hint": "Antworte mit eigenen Worten.",
+          "explain": "Wir erfinden keine Rechtsregeln."
         }
       ]
     },
@@ -4633,19 +4633,19 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Wir setzen die deutsche Erklärung nicht an die Stelle des arabischen Wortlauts. Eine künstliche Rezitation wird nicht erzeugt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Wir setzen die deutsche Erklärung nicht an die Stelle des arabischen Wortlauts. Eine künstliche Rezitation wird nicht erzeugt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe). Kindertexte/Fragen unabhängig didaktisch überarbeitet 2026-10-13; Primärbelege nicht neu verifiziert. Fiqh-Freigabe ausstehend."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Die arabischen Worte und der deutsche Sinn sind nicht dasselbe.",
     "ageText": {
       "4-5": {
         "goal": "Die arabischen Worte und der deutsche Sinn sind nicht dasselbe.",
-        "intro": "Die arabischen Worte und der deutsche Sinn sind nicht dasselbe. Die deutsche Zeile erklärt den Sinn und ist keine beglaubigte Übersetzung. Stell dir vor: Ein Kind hört die arabischen Worte und sagt danach mit eigenen deutschen Worten, was es verstanden hat. Heute üben wir: Wir zeigen auf die arabische Zeile und danach auf die deutsche Erklärung und sagen: Das eine ist der Vers, das andere ist unsere Hilfe zum Verstehen. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! Der Qurʾān ist auf Arabisch offenbart. Heute hören wir den Sinn von Qurʾān 1:2 auf Deutsch: „Alles Lob gehört Allah, dem Herrn der Welten.“ Die deutschen Worte helfen uns beim Verstehen. Die arabischen Worte sind der Qurʾān-Vers. Wir zeigen auf beide Zeilen und lernen den Unterschied.",
         "lines": [
-          "Die arabischen Worte und der deutsche Sinn sind nicht dasselbe.",
-          "Die deutsche Zeile erklärt den Sinn und ist keine beglaubigte Übersetzung.",
-          "Ein Kind hört die arabischen Worte und sagt danach mit eigenen deutschen Worten, was es verstanden hat.",
-          "Wir zeigen auf die arabische Zeile und danach auf die deutsche Erklärung und sagen: Das eine ist der Vers, das andere ist unsere Hilfe zum Verstehen."
+          "Der Qurʾān wurde auf Arabisch offenbart.",
+          "Qurʾān 1:2 lobt Allah, den Herrn der Welten.",
+          "Die deutsche Erklärung hilft beim Verstehen.",
+          "Arabischer Qurʾān und deutsche Sinnwiedergabe sind nicht dasselbe."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/40. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 1:2. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/40. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 1:2. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -4662,16 +4662,16 @@ const additions=
         "situation": "Ein Kind hört die arabischen Worte und sagt danach mit eigenen deutschen Worten, was es verstanden hat.",
         "practice": "Wir zeigen auf die arabische Zeile und danach auf die deutsche Erklärung und sagen: Das eine ist der Vers, das andere ist unsere Hilfe zum Verstehen.",
         "summary": "Die arabischen Worte und der deutsche Sinn sind nicht dasselbe. Die arabischen Worte spricht die Lehrperson.",
-        "audioScript": "Arabischen Text und Übersetzung unterscheiden. Die arabischen Worte und der deutsche Sinn sind nicht dasselbe. Die deutsche Zeile erklärt den Sinn und ist keine beglaubigte Übersetzung. Ein Kind hört die arabischen Worte und sagt danach mit eigenen deutschen Worten, was es verstanden hat. Wir zeigen auf die arabische Zeile und danach auf die deutsche Erklärung und sagen: Das eine ist der Vers, das andere ist unsere Hilfe zum Verstehen."
+        "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Der Qurʾān ist auf Arabisch offenbart. Heute hören wir den Sinn von Qurʾān 1:2 auf Deutsch: „Alles Lob gehört Allah, dem Herrn der Welten.“ Die deutschen Worte helfen uns beim Verstehen. Die arabischen Worte sind der Qurʾān-Vers. Wir zeigen auf beide Zeilen und lernen den Unterschied."
       },
       "6-8": {
         "goal": "Die arabischen Worte und der deutsche Sinn sind nicht dasselbe.",
-        "intro": "Heute geht es um Arabischen Text und Übersetzung unterscheiden. Die arabischen Worte und der deutsche Sinn sind nicht dasselbe. Wir lesen Qurʾān 1:2. Sinngemäß, ohne beglaubigte Übersetzung: Der gespeicherte Vers lautet: Alles Lob gehört Allah, dem Herrn der Welten. Die deutsche Zeile erklärt den Sinn und ist keine beglaubigte Übersetzung. So kann das im Alltag aussehen: Ein Kind hört die arabischen Worte und sagt danach mit eigenen deutschen Worten, was es verstanden hat. Die Aufgabe: Wir zeigen auf die arabische Zeile und danach auf die deutsche Erklärung und sagen: Das eine ist der Vers, das andere ist unsere Hilfe zum Verstehen. ḥamd bedeutet: Lob. rabb al-ʿālamīn bedeutet: Herr der Welten. Die Grenze der Stunde: Wir setzen die deutsche Erklärung nicht an die Stelle des arabischen Wortlauts. Eine künstliche Rezitation wird nicht erzeugt.",
+        "intro": "As-salāmu ʿalaikum! Qurʾān 1:2 beginnt mit dem Lob Allahs als Herrn der Welten. Wir lesen den arabischen Vers und eine deutsche sinngemäße Erklärung. Die deutsche Zeile erklärt die Bedeutung, sie ist nicht der arabische Wortlaut. Ḥamd bedeutet Lob, und Rabb al-ʿālamīn bedeutet Herr der Welten. Wir üben, bei Zitaten klar zu sagen, ob wir arabischen Qurʾān oder eine deutsche Erklärung nennen.",
         "lines": [
-          "Qurʾān 1:2 ist die gelesene Stelle.",
-          "Die deutsche Zeile erklärt den Sinn und ist keine beglaubigte Übersetzung.",
-          "Ein Kind hört die arabischen Worte und sagt danach mit eigenen deutschen Worten, was es verstanden hat.",
-          "Die arabischen Worte spricht die Lehrperson."
+          "Der Qurʾān wurde auf Arabisch offenbart.",
+          "Qurʾān 1:2 lobt Allah, den Herrn der Welten.",
+          "Die deutsche Erklärung hilft beim Verstehen.",
+          "Arabischer Qurʾān und deutsche Sinnwiedergabe sind nicht dasselbe."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/40. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 1:2. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/40. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 1:2. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -4688,16 +4688,16 @@ const additions=
         "situation": "Ein Kind hört die arabischen Worte und sagt danach mit eigenen deutschen Worten, was es verstanden hat.",
         "practice": "Wir zeigen auf die arabische Zeile und danach auf die deutsche Erklärung und sagen: Das eine ist der Vers, das andere ist unsere Hilfe zum Verstehen.",
         "summary": "Qurʾān 1:2 trägt diese Stunde. Die deutsche Zeile erklärt den Sinn und ist keine beglaubigte Übersetzung.",
-        "audioScript": "Arabischen Text und Übersetzung unterscheiden. Die deutsche Zeile erklärt den Sinn und ist keine beglaubigte Übersetzung. Ein Kind hört die arabischen Worte und sagt danach mit eigenen deutschen Worten, was es verstanden hat. Wir zeigen auf die arabische Zeile und danach auf die deutsche Erklärung und sagen: Das eine ist der Vers, das andere ist unsere Hilfe zum Verstehen."
+        "audioScript": "As-salāmu ʿalaikum! Qurʾān 1:2 beginnt mit dem Lob Allahs als Herrn der Welten. Wir lesen den arabischen Vers und eine deutsche sinngemäße Erklärung. Die deutsche Zeile erklärt die Bedeutung, sie ist nicht der arabische Wortlaut. Ḥamd bedeutet Lob, und Rabb al-ʿālamīn bedeutet Herr der Welten. Wir üben, bei Zitaten klar zu sagen, ob wir arabischen Qurʾān oder eine deutsche Erklärung nennen."
       },
       "9-10": {
         "goal": "Ich kann Arabischen Text und Übersetzung unterscheiden von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Arabischen Text und Übersetzung unterscheiden. Das Lernziel ist: Die arabischen Worte und der deutsche Sinn sind nicht dasselbe. Sinngemäß, keine beglaubigte Übersetzung: Der gespeicherte Vers lautet: Alles Lob gehört Allah, dem Herrn der Welten. Die deutsche Zeile erklärt den Sinn und ist keine beglaubigte Übersetzung. Alltag: Ein Kind hört die arabischen Worte und sagt danach mit eigenen deutschen Worten, was es verstanden hat. Aufgabe: Wir zeigen auf die arabische Zeile und danach auf die deutsche Erklärung und sagen: Das eine ist der Vers, das andere ist unsere Hilfe zum Verstehen. ḥamd bedeutet: Lob. rabb al-ʿālamīn bedeutet: Herr der Welten. Was nicht behauptet wird: Wir setzen die deutsche Erklärung nicht an die Stelle des arabischen Wortlauts. Eine künstliche Rezitation wird nicht erzeugt.",
+        "intro": "As-salāmu ʿalaikum! Qurʾān 1:2 enthält arabischen Wortlaut und kann sinngemäß als Lob Allahs, des Herrn der Welten, erklärt werden. Eine Übersetzung oder Paraphrase ist eine menschliche Wiedergabe des Sinns; der arabische Vers bleibt der ursprüngliche Qurʾān-Text. Deshalb kennzeichnen wir die deutsche Formulierung korrekt. An diesem kurzen Beispiel lernen wir die Begriffe ḥamd und Rabb al-ʿālamīn und üben, Verse nicht mit eigenen Erläuterungen zu vermischen.",
         "lines": [
-          "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 1:2.",
-          "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
-          "Wir setzen die deutsche Erklärung nicht an die Stelle des arabischen Wortlauts.",
-          "Eine Hadithnummer, die auf der Seite fehlt, wird nicht ergänzt."
+          "Der Qurʾān wurde auf Arabisch offenbart.",
+          "Qurʾān 1:2 lobt Allah, den Herrn der Welten.",
+          "Die deutsche Erklärung hilft beim Verstehen.",
+          "Arabischer Qurʾān und deutsche Sinnwiedergabe sind nicht dasselbe."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/40. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 1:2. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/40. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 1:2. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -4714,90 +4714,90 @@ const additions=
         "situation": "Ein Kind hört die arabischen Worte und sagt danach mit eigenen deutschen Worten, was es verstanden hat.",
         "practice": "Wir zeigen auf die arabische Zeile und danach auf die deutsche Erklärung und sagen: Das eine ist der Vers, das andere ist unsere Hilfe zum Verstehen.",
         "summary": "Belegt ist Qurʾān 1:2. Ungeprüft bleibt: Wir setzen die deutsche Erklärung nicht an die Stelle des arabischen Wortlauts.",
-        "audioScript": "Arabischen Text und Übersetzung unterscheiden. Die deutsche Zeile erklärt den Sinn und ist keine beglaubigte Übersetzung. Nicht belegt und deshalb nicht behauptet: Wir setzen die deutsche Erklärung nicht an die Stelle des arabischen Wortlauts."
+        "audioScript": "As-salāmu ʿalaikum! Qurʾān 1:2 enthält arabischen Wortlaut und kann sinngemäß als Lob Allahs, des Herrn der Welten, erklärt werden. Eine Übersetzung oder Paraphrase ist eine menschliche Wiedergabe des Sinns; der arabische Vers bleibt der ursprüngliche Qurʾān-Text. Deshalb kennzeichnen wir die deutsche Formulierung korrekt. An diesem kurzen Beispiel lernen wir die Begriffe ḥamd und Rabb al-ʿālamīn und üben, Verse nicht mit eigenen Erläuterungen zu vermischen."
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was passt zu dieser Stunde?",
+          "prompt": "Welche Zeile ist der arabische Qurʾān?",
           "options": [
-            "Wir zeigen auf die arabische Zeile und danach auf die deutsche Erklärung und sagen: Das eine ist der Vers, das andere.",
-            "Ich ergänze einen Vers aus dem Gedächtnis."
+            "Die Zeile mit den arabischen Versworten.",
+            "Eine eigene deutsche Geschichte."
           ],
           "correct": 0,
-          "hint": "Schau auf die Übung.",
-          "explain": "Die Übung der Stunde ist der erste Satz. Der zweite Satz ist das Gegenteil von dem, was wir üben."
+          "hint": "Denk an unsere heutige Lektion.",
+          "explain": "Der arabische Wortlaut ist der Qurʾān."
         },
         {
           "type": "choice",
-          "prompt": "Woran hält sich diese Stunde?",
+          "prompt": "Wozu ist die deutsche Erklärung da?",
           "options": [
-            "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "Damit wir den Sinn besser verstehen.",
+            "Damit wir den Vers durch neue Wörter ersetzen."
           ],
           "correct": 0,
-          "hint": "Nur Gelesenes.",
-          "explain": "Die Stunde nennt Qurʾān 1:2 und trennt die Übung davon. Eine Nummer wird nicht erfunden."
+          "hint": "Denk an unsere heutige Lektion.",
+          "explain": "Die deutsche Zeile erläutert die Bedeutung."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Stelle trägt Arabischen Text und Übersetzung unterscheiden?",
+          "prompt": "Was bedeutet ḥamd?",
           "options": [
-            "Qurʾān 1:2",
-            "Eine Stelle ohne Suren- und Verszahl."
+            "Lob.",
+            "Gebetsmatte."
           ],
           "correct": 0,
-          "hint": "Die Fundstelle steht im Unterricht.",
-          "explain": "Die Stunde bleibt bei Qurʾān 1:2."
+          "hint": "Denk an unsere heutige Lektion.",
+          "explain": "Ḥamd bedeutet Lob."
         },
         {
           "type": "choice",
-          "prompt": "Was sagt der Vers sinngemäß für diese Stunde?",
+          "prompt": "Was ist Rabb al-ʿālamīn?",
           "options": [
-            "Die deutsche Zeile erklärt den Sinn und ist keine beglaubigte Übersetzung.",
-            "Ich ergänze einen Vers aus dem Gedächtnis."
+            "Herr der Welten.",
+            "Der Name eines Gegenstands."
           ],
           "correct": 0,
-          "hint": "Der erste Satz folgt der gelesenen Stelle.",
-          "explain": "Die deutsche Zeile ist eine Unterrichtshilfe zu Qurʾān 1:2, keine beglaubigte Übersetzung."
+          "hint": "Denk an unsere heutige Lektion.",
+          "explain": "Der Ausdruck nennt Allah den Herrn der Welten."
         },
         {
           "type": "text",
-          "prompt": "Welche Übung gehört zu dieser Stunde?",
-          "sample": "Wir zeigen auf die arabische Zeile und danach auf die deutsche Erklärung und sagen: Das eine ist der Vers, das andere.",
-          "hint": "Die praktische Aufgabe.",
-          "explain": "Die Übung ist die genannte Handlung und nicht eine zusätzliche Formel."
+          "prompt": "Worin unterscheiden sich arabischer Vers und deutsche Erklärung?",
+          "sample": "Der arabische Text ist der Qurʾān; Deutsch erklärt seinen Sinn.",
+          "hint": "Antworte mit eigenen Worten.",
+          "explain": "Eine Sinnwiedergabe ist nicht der Originalwortlaut."
         }
       ],
       "9-10": [
         {
           "type": "choice",
-          "prompt": "Welche Angabe wäre unehrlich?",
+          "prompt": "Warum kennzeichnen wir deutsche Übersetzungen oder Paraphrasen?",
           "options": [
-            "Ein Rechtsurteil oder eine Hadithnummer als gelesen auszugeben, obwohl die Seite sie nicht liefert.",
-            "Zu sagen, dass die deutsche Erklärung sinngemäß ist."
+            "Weil sie menschliche Wiedergaben des Sinns sind.",
+            "Weil der arabische Vers dadurch bedeutungslos wird."
           ],
           "correct": 0,
-          "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "hint": "Denk an unsere heutige Lektion.",
+          "explain": "Quellenwahrheit verlangt klare Trennung."
         },
         {
           "type": "text",
-          "prompt": "Was darf diese Stunde nicht behaupten?",
-          "sample": "Wir setzen die deutsche Erklärung nicht an die Stelle des arabischen Wortlauts.",
-          "hint": "Die Grenze steht im Text.",
-          "explain": "Die Grenze schützt davor, den Vers zu überdehnen."
+          "prompt": "Erkläre den Sinn von Qurʾān 1:2.",
+          "sample": "Alles Lob gehört Allah, dem Herrn der Welten.",
+          "hint": "Antworte mit eigenen Worten.",
+          "explain": "Die deutsche Formulierung ist eine Sinnaussage."
         },
         {
           "type": "text",
-          "prompt": "Wie lautet die Qurʾān-Stelle?",
-          "sample": "Qurʾān 1:2",
-          "hint": "Sure und Vers.",
-          "explain": "Die Stelle ist Qurʾān 1:2 auf der genannten Islamweb-Seite."
+          "prompt": "Was bedeuten ḥamd und Rabb al-ʿālamīn?",
+          "sample": "Lob und Herr der Welten.",
+          "hint": "Antworte mit eigenen Worten.",
+          "explain": "Beide Begriffe gehören zu Qurʾān 1:2."
         }
       ]
     },
@@ -4850,19 +4850,19 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Eine bestimmte Unterrichtsszene mit einem Kind steht auf der gelesenen Seite nicht. Wir behaupten sie nicht. Die späteren Sätze des Verses über den Entschluss und das Vertrauen werden nicht als vollständige Sīrah-Erzählung ausgebaut. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Eine bestimmte Unterrichtsszene mit einem Kind steht auf der gelesenen Seite nicht. Wir behaupten sie nicht. Die späteren Sätze des Verses über den Entschluss und das Vertrauen werden nicht als vollständige Sīrah-Erzählung ausgebaut. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe). Kindertexte/Fragen unabhängig didaktisch überarbeitet 2026-10-13; Primärbelege nicht neu verifiziert. Fiqh-Freigabe ausstehend."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Der Vers beschreibt den Propheten, Friede sei mit ihm, als mild im Umgang.",
     "ageText": {
       "4-5": {
         "goal": "Der Vers beschreibt den Propheten, Friede sei mit ihm, als mild im Umgang.",
-        "intro": "Der Vers beschreibt den Propheten, Friede sei mit ihm, als mild im Umgang. Der Vers sagt, dass es durch Barmherzigkeit von Allah war, dass er mild zu den Menschen war, und dass sie sich zerstreut hätten, wenn er hartherzig gewesen wäre. Stell dir vor: Im Unterricht spricht die Lehrperson leise und lässt ein Kind ausreden. Heute üben wir: Wir üben einen freundlichen Satz zu einem anderen Kind. Wir erzählen dazu keine erfundene Kinderszene aus dem Leben des Propheten. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! Unser Prophet Muḥammad ﷺ war mild und freundlich im Umgang. Im Qurʾān 3:159 spricht Allah von seiner Milde durch Allahs Barmherzigkeit. Wir üben, einander freundlich zu antworten und andere ausreden zu lassen. Wir müssen dafür keine Geschichte erfinden.",
         "lines": [
-          "Der Vers beschreibt den Propheten, Friede sei mit ihm, als mild im Umgang.",
-          "Der Vers sagt, dass es durch Barmherzigkeit von Allah war, dass er mild zu den Menschen war, und dass sie sich zerstreut hätten, wenn er hartherzig gewesen wäre.",
-          "Im Unterricht spricht die Lehrperson leise und lässt ein Kind ausreden.",
-          "Wir üben einen freundlichen Satz zu einem anderen Kind. Wir erzählen dazu keine erfundene Kinderszene aus dem Leben des Propheten."
+          "Qurʾān 3:159 beschreibt die Milde des Propheten ﷺ.",
+          "Freundlichkeit ist beim Lernen wichtig.",
+          "Wir hören anderen zu und lassen sie ausreden.",
+          "Unser Beispiel ist keine erfundene Sīrah-Überlieferung."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/286. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 3:159. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/286. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 3:159. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -4879,16 +4879,16 @@ const additions=
         "situation": "Im Unterricht spricht die Lehrperson leise und lässt ein Kind ausreden.",
         "practice": "Wir üben einen freundlichen Satz zu einem anderen Kind. Wir erzählen dazu keine erfundene Kinderszene aus dem Leben des Propheten.",
         "summary": "Der Vers beschreibt den Propheten, Friede sei mit ihm, als mild im Umgang. Die arabischen Worte spricht die Lehrperson.",
-        "audioScript": "Muḥammad Friede sei mit ihm als barmherziger Lehrer. Der Vers beschreibt den Propheten, Friede sei mit ihm, als mild im Umgang. Der Vers sagt, dass es durch Barmherzigkeit von Allah war, dass er mild zu den Menschen war, und dass sie sich zerstreut hätten, wenn er hartherzig gewesen wäre. Im Unterricht spricht die Lehrperson leise und lässt ein Kind ausreden. Wir üben einen freundlichen Satz zu einem anderen Kind. Wir erzählen dazu keine erfundene Kinderszene aus dem Leben des Propheten."
+        "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Unser Prophet Muḥammad ﷺ war mild und freundlich im Umgang. Im Qurʾān 3:159 spricht Allah von seiner Milde durch Allahs Barmherzigkeit. Wir üben, einander freundlich zu antworten und andere ausreden zu lassen. Wir müssen dafür keine Geschichte erfinden."
       },
       "6-8": {
         "goal": "Der Vers beschreibt den Propheten, Friede sei mit ihm, als mild im Umgang.",
-        "intro": "Heute geht es um Muḥammad Friede sei mit ihm als barmherziger Lehrer. Der Vers beschreibt den Propheten, Friede sei mit ihm, als mild im Umgang. Wir lesen Qurʾān 3:159. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass es durch Barmherzigkeit von Allah war, dass er mild zu den Menschen war, und dass sie sich zerstreut hätten, wenn er hartherzig gewesen wäre. Er nennt auch Verzeihen, um Vergebung bitten und Beratung. So kann das im Alltag aussehen: Im Unterricht spricht die Lehrperson leise und lässt ein Kind ausreden. Die Aufgabe: Wir üben einen freundlichen Satz zu einem anderen Kind. Wir erzählen dazu keine erfundene Kinderszene aus dem Leben des Propheten. linta bedeutet: du warst mild. raḥmah bedeutet: Barmherzigkeit. Die Grenze der Stunde: Eine bestimmte Unterrichtsszene mit einem Kind steht auf der gelesenen Seite nicht. Wir behaupten sie nicht. Die späteren Sätze des Verses über den Entschluss und das Vertrauen werden nicht als vollständige Sīrah-Erzählung ausgebaut.",
+        "intro": "As-salāmu ʿalaikum! Qurʾān 3:159 beschreibt die Milde des Propheten Muḥammad ﷺ gegenüber den Menschen. Der Vers erwähnt auch Verzeihen und Beratung. Wir lernen daraus einen freundlichen Umgang: Wenn ein anderes Kind spricht, lassen wir es ausreden und antworten ruhig. Die Unterrichtsszene ist unser Beispiel und wird nicht als überlieferte Geschichte aus dem Leben des Propheten ausgegeben.",
         "lines": [
-          "Qurʾān 3:159 ist die gelesene Stelle.",
-          "Der Vers sagt, dass es durch Barmherzigkeit von Allah war, dass er mild zu den Menschen war, und dass sie sich zerstreut hätten, wenn er hartherzig gewesen wäre.",
-          "Im Unterricht spricht die Lehrperson leise und lässt ein Kind ausreden.",
-          "Die arabischen Worte spricht die Lehrperson."
+          "Qurʾān 3:159 beschreibt die Milde des Propheten ﷺ.",
+          "Freundlichkeit ist beim Lernen wichtig.",
+          "Wir hören anderen zu und lassen sie ausreden.",
+          "Unser Beispiel ist keine erfundene Sīrah-Überlieferung."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/286. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 3:159. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/286. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 3:159. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -4905,16 +4905,16 @@ const additions=
         "situation": "Im Unterricht spricht die Lehrperson leise und lässt ein Kind ausreden.",
         "practice": "Wir üben einen freundlichen Satz zu einem anderen Kind. Wir erzählen dazu keine erfundene Kinderszene aus dem Leben des Propheten.",
         "summary": "Qurʾān 3:159 trägt diese Stunde. Der Vers sagt, dass es durch Barmherzigkeit von Allah war, dass er mild zu den Menschen war, und dass sie sich zerstreut hätten, wenn er hartherzig gewesen wäre.",
-        "audioScript": "Muḥammad Friede sei mit ihm als barmherziger Lehrer. Der Vers sagt, dass es durch Barmherzigkeit von Allah war, dass er mild zu den Menschen war, und dass sie sich zerstreut hätten, wenn er hartherzig gewesen wäre. Im Unterricht spricht die Lehrperson leise und lässt ein Kind ausreden. Wir üben einen freundlichen Satz zu einem anderen Kind. Wir erzählen dazu keine erfundene Kinderszene aus dem Leben des Propheten."
+        "audioScript": "As-salāmu ʿalaikum! Qurʾān 3:159 beschreibt die Milde des Propheten Muḥammad ﷺ gegenüber den Menschen. Der Vers erwähnt auch Verzeihen und Beratung. Wir lernen daraus einen freundlichen Umgang: Wenn ein anderes Kind spricht, lassen wir es ausreden und antworten ruhig. Die Unterrichtsszene ist unser Beispiel und wird nicht als überlieferte Geschichte aus dem Leben des Propheten ausgegeben."
       },
       "9-10": {
         "goal": "Ich kann Muḥammad Friede sei mit ihm als barmherziger Lehrer von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Muḥammad Friede sei mit ihm als barmherziger Lehrer. Das Lernziel ist: Der Vers beschreibt den Propheten, Friede sei mit ihm, als mild im Umgang. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass es durch Barmherzigkeit von Allah war, dass er mild zu den Menschen war, und dass sie sich zerstreut hätten, wenn er hartherzig gewesen wäre. Er nennt auch Verzeihen, um Vergebung bitten und Beratung. Alltag: Im Unterricht spricht die Lehrperson leise und lässt ein Kind ausreden. Aufgabe: Wir üben einen freundlichen Satz zu einem anderen Kind. Wir erzählen dazu keine erfundene Kinderszene aus dem Leben des Propheten. linta bedeutet: du warst mild. raḥmah bedeutet: Barmherzigkeit. Was nicht behauptet wird: Eine bestimmte Unterrichtsszene mit einem Kind steht auf der gelesenen Seite nicht. Wir behaupten sie nicht. Die späteren Sätze des Verses über den Entschluss und das Vertrauen werden nicht als vollständige Sīrah-Erzählung ausgebaut.",
+        "intro": "As-salāmu ʿalaikum! In Qurʾān 3:159 erklärt Allah, dass der Prophet Muḥammad ﷺ durch Seine Barmherzigkeit mild zu den Menschen war. Wäre er hart und grob gewesen, hätten sie sich zerstreut. Der Vers spricht ebenfalls vom Verzeihen und Beraten. Für den Alltag können wir überlegen, wie Milde beim Lehren und Lernen sichtbar wird, etwa durch Zuhören, Geduld und freundliche Antworten. Unser heutiges Unterrichtsbeispiel ist keine historische Erzählung, sondern eine Anwendung der allgemeinen Bedeutung des Verses.",
         "lines": [
-          "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 3:159.",
-          "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
-          "Eine bestimmte Unterrichtsszene mit einem Kind steht auf der gelesenen Seite nicht.",
-          "Eine Hadithnummer, die auf der Seite fehlt, wird nicht ergänzt."
+          "Qurʾān 3:159 beschreibt die Milde des Propheten ﷺ.",
+          "Freundlichkeit ist beim Lernen wichtig.",
+          "Wir hören anderen zu und lassen sie ausreden.",
+          "Unser Beispiel ist keine erfundene Sīrah-Überlieferung."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/286. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 3:159. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/286. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 3:159. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -4931,90 +4931,90 @@ const additions=
         "situation": "Im Unterricht spricht die Lehrperson leise und lässt ein Kind ausreden.",
         "practice": "Wir üben einen freundlichen Satz zu einem anderen Kind. Wir erzählen dazu keine erfundene Kinderszene aus dem Leben des Propheten.",
         "summary": "Belegt ist Qurʾān 3:159. Ungeprüft bleibt: Eine bestimmte Unterrichtsszene mit einem Kind steht auf der gelesenen Seite nicht.",
-        "audioScript": "Muḥammad Friede sei mit ihm als barmherziger Lehrer. Der Vers sagt, dass es durch Barmherzigkeit von Allah war, dass er mild zu den Menschen war, und dass sie sich zerstreut hätten, wenn er hartherzig gewesen wäre. Nicht belegt und deshalb nicht behauptet: Eine bestimmte Unterrichtsszene mit einem Kind steht auf der gelesenen Seite nicht."
+        "audioScript": "As-salāmu ʿalaikum! In Qurʾān 3:159 erklärt Allah, dass der Prophet Muḥammad ﷺ durch Seine Barmherzigkeit mild zu den Menschen war. Wäre er hart und grob gewesen, hätten sie sich zerstreut. Der Vers spricht ebenfalls vom Verzeihen und Beraten. Für den Alltag können wir überlegen, wie Milde beim Lehren und Lernen sichtbar wird, etwa durch Zuhören, Geduld und freundliche Antworten. Unser heutiges Unterrichtsbeispiel ist keine historische Erzählung, sondern eine Anwendung der allgemeinen Bedeutung des Verses."
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was passt zu dieser Stunde?",
+          "prompt": "Wie antwortest du einem Kind, das eine Frage stellt?",
           "options": [
-            "Wir üben einen freundlichen Satz zu einem anderen Kind. Wir erzählen dazu keine erfundene Kinderszene aus dem Leben des.",
-            "Ich erfinde eine neue Geschichte dazu."
+            "Freundlich und ruhig.",
+            "Mit absichtlichem Spott."
           ],
           "correct": 0,
-          "hint": "Schau auf die Übung.",
-          "explain": "Die Übung der Stunde ist der erste Satz. Der zweite Satz ist das Gegenteil von dem, was wir üben."
+          "hint": "Denk an unsere heutige Lektion.",
+          "explain": "Wir üben Milde."
         },
         {
           "type": "choice",
-          "prompt": "Woran hält sich diese Stunde?",
+          "prompt": "Wie war der Prophet ﷺ im Umgang laut unserem Vers?",
           "options": [
-            "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "Mild.",
+            "Absichtlich grausam."
           ],
           "correct": 0,
-          "hint": "Nur Gelesenes.",
-          "explain": "Die Stunde nennt Qurʾān 3:159 und trennt die Übung davon. Eine Nummer wird nicht erfunden."
+          "hint": "Denk an unsere heutige Lektion.",
+          "explain": "Qurʾān 3:159 nennt seine Milde."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Stelle trägt Muḥammad Friede sei mit ihm als barmherziger Lehrer?",
+          "prompt": "Was sagt Qurʾān 3:159 über den Propheten ﷺ?",
           "options": [
-            "Qurʾān 3:159",
-            "Eine Stelle ohne Suren- und Verszahl."
+            "Er war durch Allahs Barmherzigkeit mild.",
+            "Er verletzte absichtlich die Fragenden."
           ],
           "correct": 0,
-          "hint": "Die Fundstelle steht im Unterricht.",
-          "explain": "Die Stunde bleibt bei Qurʾān 3:159."
+          "hint": "Denk an unsere heutige Lektion.",
+          "explain": "Der Vers spricht von Milde und Barmherzigkeit."
         },
         {
           "type": "choice",
-          "prompt": "Was sagt der Vers sinngemäß für diese Stunde?",
+          "prompt": "Wie verhalten wir uns im Unterricht?",
           "options": [
-            "Der Vers sagt, dass es durch Barmherzigkeit von Allah war, dass er mild zu den Menschen war, und dass sie sich zerstreut hätten, wenn er.",
-            "Ich erfinde eine neue Geschichte dazu."
+            "Wir lassen andere ausreden.",
+            "Wir lachen bei Fehlern andere aus."
           ],
           "correct": 0,
-          "hint": "Der erste Satz folgt der gelesenen Stelle.",
-          "explain": "Die deutsche Zeile ist eine Unterrichtshilfe zu Qurʾān 3:159, keine beglaubigte Übersetzung."
+          "hint": "Denk an unsere heutige Lektion.",
+          "explain": "Freundlichkeit macht Lernen leichter."
         },
         {
           "type": "text",
-          "prompt": "Welche Übung gehört zu dieser Stunde?",
-          "sample": "Wir üben einen freundlichen Satz zu einem anderen Kind. Wir erzählen dazu keine erfundene Kinderszene aus dem Leben des.",
-          "hint": "Die praktische Aufgabe.",
-          "explain": "Die Übung ist die genannte Handlung und nicht eine zusätzliche Formel."
+          "prompt": "Nenne ein Beispiel für einen milden Umgang.",
+          "sample": "Ich höre ruhig zu und antworte freundlich.",
+          "hint": "Antworte mit eigenen Worten.",
+          "explain": "Das ist unsere pädagogische Anwendung."
         }
       ],
       "9-10": [
         {
           "type": "choice",
-          "prompt": "Welche Angabe wäre unehrlich?",
+          "prompt": "Welche Wirkung hätte Härte laut Qurʾān 3:159 gehabt?",
           "options": [
-            "Ein Rechtsurteil oder eine Hadithnummer als gelesen auszugeben, obwohl die Seite sie nicht liefert.",
-            "Zu sagen, dass die deutsche Erklärung sinngemäß ist."
+            "Menschen hätten sich zerstreut.",
+            "Alle hätten sofort mehr gelernt."
           ],
           "correct": 0,
-          "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "hint": "Denk an unsere heutige Lektion.",
+          "explain": "Der Vers stellt Milde der Härte gegenüber."
         },
         {
           "type": "text",
-          "prompt": "Was darf diese Stunde nicht behaupten?",
-          "sample": "Eine bestimmte Unterrichtsszene mit einem Kind steht auf der gelesenen Seite nicht.",
-          "hint": "Die Grenze steht im Text.",
-          "explain": "Die Grenze schützt davor, den Vers zu überdehnen."
+          "prompt": "Welche weiteren Themen nennt der Vers neben Milde?",
+          "sample": "Verzeihen und Beratung.",
+          "hint": "Antworte mit eigenen Worten.",
+          "explain": "Auch diese Punkte stehen in Qurʾān 3:159."
         },
         {
           "type": "text",
-          "prompt": "Wie lautet die Qurʾān-Stelle?",
-          "sample": "Qurʾān 3:159",
-          "hint": "Sure und Vers.",
-          "explain": "Die Stelle ist Qurʾān 3:159 auf der genannten Islamweb-Seite."
+          "prompt": "Warum kennzeichnen wir die Unterrichtsszene als Beispiel?",
+          "sample": "Weil sie keine berichtete historische Szene aus der Sīrah ist.",
+          "hint": "Antworte mit eigenen Worten.",
+          "explain": "Wir trennen Überlieferung und Didaktik."
         }
       ]
     },
