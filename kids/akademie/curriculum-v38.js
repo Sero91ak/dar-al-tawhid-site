@@ -63,19 +63,19 @@ const additions=
           "note": "Die Glaubenden sind Geschwister. Frieden stiften und die Hoffnung auf Barmherzigkeit stehen im Vers. Für Kinder heißt Frieden stiften: eine erwachsene Person holen, die das Gemeine beendet. Nicht: allein mit dem Mobbing fertig werden."
         }
       ],
-      "note": "49:11 verbietet Spott, Herabsetzung und verletzende Namen und sagt, dass die Verspotteten besser sein können. Daraus lernen die Kinder: Gehänseltwerden macht sie nicht weniger wert. Der Satz, es sei nicht ihre Schuld, und der Weg zu einer vertrauten erwachsenen Person sind die Schutzregel der Stunde, kein eigener Verssatz. 16:90 trägt Gerechtigkeit und das Verbot des Übergriffs. 49:10 trägt Geschwisterlichkeit, Friedenstiften und Barmherzigkeit. Wir spielen die Gemeinheit nicht nach und verlangen keine Versöhnung, bevor Hilfe da ist. Keine Hadithnummer. Keine synthetische Rezitation. Keine Freigabe."
+      "note": "49:11 verbietet Spott, Herabsetzung und verletzende Namen und sagt, dass die Verspotteten besser sein können. Daraus lernen die Kinder: Gehänseltwerden macht sie nicht weniger wert. Der Satz, es sei nicht ihre Schuld, und der Weg zu einer vertrauten erwachsenen Person sind die Schutzregel der Stunde, kein eigener Verssatz. 16:90 trägt Gerechtigkeit und das Verbot des Übergriffs. 49:10 trägt Geschwisterlichkeit, Friedenstiften und Barmherzigkeit. Wir spielen die Gemeinheit nicht nach und verlangen keine Versöhnung, bevor Hilfe da ist. Keine Hadithnummer. Keine synthetische Rezitation. Keine Freigabe. Pädagogische Schutzergänzung: Hilfe auch bei einzelnen verletzenden Vorfällen und weitere Vertrauensperson, falls die erste nicht hilft. Keine erneute wissenschaftliche Verifikation beansprucht."
     },
     "hint": "Wiederholtes Hänseln ist kein Spaß. Du bist nicht schuld. Sag es einer erwachsenen Person, der du vertraust.",
     "sample": "Wenn jemand immer wieder gemein ist, bist du nicht schuld. Sag es einer erwachsenen Person, der du vertraust.",
     "ageText": {
       "4-5": {
         "goal": "Ich merke, wenn jemand immer wieder gemein ist, und sage es einer erwachsenen Person, der ich vertraue.",
-        "intro": "Manche Kinder lachen einmal aus Versehen. Das kann man klären. Mobbing ist etwas anderes: Es passiert immer wieder. Jemand lacht dich aus, nennt dich einen bösen Namen oder lässt dich absichtlich allein. Das ist kein Spaß. Du hast das nicht verursacht. Du bist nicht schuld. Geh zu Mama, Papa oder zu einer Lehrperson und sag: Das passiert immer wieder. Bitte hilf mir. Wenn du siehst, dass es einem anderen Kind so geht, holst du dieselbe Hilfe. Wir üben nur den Satz. Wir spielen nicht nach, wie jemand gemein ist.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! Wenn Kinder immer wieder ausgelacht, mit bösen Namen gerufen oder ausgeschlossen werden, ist das kein Spaß. Das nennt man Mobbing. Du bist nicht schuld. Auch wenn jemand nur einmal gemein ist und dich verletzt oder erschreckt, darfst du Hilfe holen. Sag Mama, Papa, einer Lehrperson oder einem anderen Erwachsenen, dem du vertraust: „Bitte hilf mir.“ Wenn die erste Person dir nicht hilft, erzähle es einer anderen. Du darfst auch Hilfe holen, wenn ein anderes Kind betroffen ist. Niemand muss Beleidigungen nachspielen.",
         "lines": [
           "Wenn jemand immer wieder gemein ist, ist das kein Spaß.",
           "Du bist nicht schuld.",
           "Sag es einer erwachsenen Person, der du vertraust.",
-          "Wir spielen die Gemeinheit nicht nach."
+          "Wenn die erste erwachsene Person nicht hilft, frage ich eine andere."
         ],
         "evidence": "Qurʾān 49:11 auf der gelesenen Ibn-Kaṯīr-Seite verbietet Spott und verletzende Namen. Die Hilfe durch eine erwachsene Person ist die Schutzregel dieser Stunde.",
         "sources": "Gelesen: Qurʾān 49:11, Ibn Kaṯīr auf Islamweb, Inhalt 49/1754. Dazu Qurʾān 16:90 über Gerechtigkeit und Qurʾān 49:10 über Geschwister und Barmherzigkeit. Keine Hadithnummer ergänzt.",
@@ -92,11 +92,11 @@ const additions=
         "situation": "In der Pause lachen drei Kinder jedes Mal, wenn ein Kind etwas sagt. Das Kind wird still und denkt, mit ihm stimme etwas nicht.",
         "practice": "Wir üben den Satz: Das ist nicht in Ordnung. Ich bin nicht schuld. Ich sage es einer Lehrperson.",
         "summary": "Immer wieder gemein sein ist kein Spaß. Du bist nicht schuld. Eine erwachsene Person, der du vertraust, soll davon erfahren.",
-        "audioScript": "Wenn jemand immer wieder gemein ist, ist das kein Spaß. Du bist nicht schuld. Sag es Mama, Papa oder einer Lehrperson. Wir spielen nicht nach, wie jemand gemein ist."
+        "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Wenn jemand gemein zu dir ist, bist du nicht schuld. Du darfst eine erwachsene Person um Hilfe bitten. Hilft sie nicht, frage eine andere. Das gilt auch, wenn etwas nur einmal passiert."
       },
       "6-8": {
         "goal": "Ich kann Mobbing von einem einmaligen Versehen unterscheiden, den Vers über Spott wiedergeben und Hilfe holen, ohne mir die Schuld zu geben.",
-        "intro": "Mobbing erkennst du daran, dass es wiederkommt. Auslachen, böse Namen, Wegschubsen oder Ausschließen, immer wieder und oft vor anderen. Ein einmaliges Versehen, nach dem sich jemand entschuldigt, ist etwas anderes. Qurʾān 49:11, gelesen auf der Ibn-Kaṯīr-Seite, verbietet, dass eine Gruppe eine andere verspottet und dass Menschen einander verletzende Namen geben. Der Vers sagt auch: Vielleicht sind die, über die gelacht wird, die Besseren. Deshalb bist du nicht weniger wert, und du bist nicht schuld. Qurʾān 16:90 sagt, dass Allah Gerechtigkeit und gutes Verhalten befiehlt und das Übergriffige verbietet. Qurʾān 49:10 nennt die Glaubenden Geschwister und spricht vom Friedenstiften und von Barmherzigkeit. Für dich heißt das: Du holst eine erwachsene Person, der du vertraust. Dieselbe Hilfe holst du, wenn es einem anderen Kind passiert. Frieden stiften Kinder nicht, indem sie das Gemeine allein aushalten.",
+        "intro": "Mobbing erkennst du daran, dass es wiederkommt. Auslachen, böse Namen, Wegschubsen oder Ausschließen, immer wieder und oft vor anderen. Ein einmaliges Versehen, nach dem sich jemand entschuldigt, ist etwas anderes. Qurʾān 49:11, gelesen auf der Ibn-Kaṯīr-Seite, verbietet, dass eine Gruppe eine andere verspottet und dass Menschen einander verletzende Namen geben. Der Vers sagt auch: Vielleicht sind die, über die gelacht wird, die Besseren. Deshalb bist du nicht weniger wert, und du bist nicht schuld. Qurʾān 16:90 sagt, dass Allah Gerechtigkeit und gutes Verhalten befiehlt und das Übergriffige verbietet. Qurʾān 49:10 nennt die Glaubenden Geschwister und spricht vom Friedenstiften und von Barmherzigkeit. Für dich heißt das: Du holst eine erwachsene Person, der du vertraust. Dieselbe Hilfe holst du, wenn es einem anderen Kind passiert. Frieden stiften Kinder nicht, indem sie das Gemeine allein aushalten. Auch wenn dich ein einzelner Vorfall verletzt oder erschreckt, darfst du direkt Hilfe holen. Hilft die erste erwachsene Person nicht, wende dich an eine weitere vertrauenswürdige Person.",
         "lines": [
           "Mobbing ist Gemeinheit, die immer wieder kommt.",
           "Qurʾān 49:11 verbietet Spott und verletzende Namen.",
@@ -126,7 +126,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann die drei gelesenen Verse von der Schutzregel unterscheiden und erklären, warum ein Kind sich bei Mobbing nicht selbst die Schuld gibt.",
-        "intro": "Diese Stunde hat drei gelesene Qurʾān-Stellen und eine klar bezeichnete Schutzregel. Qurʾān 49:11 auf Inhalt 49/1754 verbietet Spott, gegenseitiges Herabsetzen und verletzende Spitznamen. Der Satz, die Verspotteten seien vielleicht besser, steht im Vers. Daraus folgt für den Unterricht: Das Kind, das gehänselt wird, ist nicht der Fehler. Der zusätzliche Satz „Du bist nicht schuld“ ist unsere Schutzregel zu diesem Vers, nicht ein zweiter arabischer Wortlaut. Qurʾān 16:90 auf Inhalt 49/974 befiehlt Gerechtigkeit und gutes Verhalten und verbietet das Schändliche, das Verwerfliche und den Übergriff. Qurʾān 49:10 auf Inhalt 49/1753 nennt die Glaubenden Geschwister, fordert zum Friedenstiften auf und stellt Barmherzigkeit in Aussicht. Frieden stiften bedeutet hier nicht, dass das betroffene Kind dem Mobbing zustimmt oder sich vorher versöhnt. Es bedeutet, dass eine erwachsene Person das Unrecht beendet. Siehst du, dass ein anderes Kind betroffen ist, holst du dieselbe Person. Das ist Schutz, keine Mutprobe. Eine Hadithnummer steht auf diesen Seiten nicht als Beleg und wird nicht ergänzt. Die deutsche Wiedergabe bleibt sinngemäß. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen.",
+        "intro": "Diese Stunde hat drei gelesene Qurʾān-Stellen und eine klar bezeichnete Schutzregel. Qurʾān 49:11 auf Inhalt 49/1754 verbietet Spott, gegenseitiges Herabsetzen und verletzende Spitznamen. Der Satz, die Verspotteten seien vielleicht besser, steht im Vers. Daraus folgt für den Unterricht: Das Kind, das gehänselt wird, ist nicht der Fehler. Der zusätzliche Satz „Du bist nicht schuld“ ist unsere Schutzregel zu diesem Vers, nicht ein zweiter arabischer Wortlaut. Qurʾān 16:90 auf Inhalt 49/974 befiehlt Gerechtigkeit und gutes Verhalten und verbietet das Schändliche, das Verwerfliche und den Übergriff. Qurʾān 49:10 auf Inhalt 49/1753 nennt die Glaubenden Geschwister, fordert zum Friedenstiften auf und stellt Barmherzigkeit in Aussicht. Frieden stiften bedeutet hier nicht, dass das betroffene Kind dem Mobbing zustimmt oder sich vorher versöhnt. Es bedeutet, dass eine erwachsene Person das Unrecht beendet. Siehst du, dass ein anderes Kind betroffen ist, holst du dieselbe Person. Das ist Schutz, keine Mutprobe. Wenn eine erwachsene Person nicht hilft, sprich mit einer anderen. Hilfe ist bei jeder Verletzung erlaubt, nicht erst nach mehreren Vorfällen. Die Hilfesätze sind pädagogische Schutzregeln, keine wörtlichen Verse.",
         "lines": [
           "49:11 verbietet Spott und verletzende Namen und sagt, die Verspotteten seien vielleicht besser.",
           "16:90 befiehlt Gerechtigkeit und verbietet den Übergriff.",
@@ -152,7 +152,7 @@ const additions=
         "situation": "Ein Kind wird seit zwei Wochen bei jedem Gruppenwechsel zuletzt gewählt und mit einem bösen Namen gerufen. Es fängt an zu denken, es sei selbst das Problem, und sagt niemandem etwas.",
         "practice": "Schreibe drei Sätze: woran du das Mobbing erkennst, warum es nicht deine Schuld ist, und welcher erwachsenen Person du es heute sagen würdest. Wenn du selbst nicht betroffen bist, schreibe, wie du für ein anderes Kind Hilfe holst.",
         "summary": "Spott ist verboten, Gerechtigkeit ist geboten, und Barmherzigkeit zeigt sich darin, dass das Unrecht aufhört. Das Kind trägt nicht die Schuld und holt eine vertraute erwachsene Person.",
-        "audioScript": "Qurʾān 49:11 verbietet Spott und böse Namen. Die Verspotteten können die Besseren sein. Deshalb gibst du dir nicht selbst die Schuld. Qurʾān 16:90 befiehlt Gerechtigkeit. Qurʾān 49:10 spricht von Geschwistern, Frieden und Barmherzigkeit. Du holst eine erwachsene Person, der du vertraust. Eine Hadithnummer wurde dafür nicht ergänzt."
+        "audioScript": "Qurʾān 49:11 verbietet Spott und böse Namen. Die Verspotteten können die Besseren sein. Deshalb gibst du dir nicht selbst die Schuld. Qurʾān 16:90 befiehlt Gerechtigkeit. Qurʾān 49:10 spricht von Geschwistern, Frieden und Barmherzigkeit. Du holst eine erwachsene Person, der du vertraust. Wenn eine erwachsene Person nicht helfen kann, frage eine andere."
       }
     },
     "questions": {
@@ -170,14 +170,14 @@ const additions=
         },
         {
           "type": "choice",
-          "prompt": "Spielen wir in der Stunde nach, wie jemand gemein ist?",
+          "prompt": "Was tust du, wenn dir die erste erwachsene Person nicht hilft?",
           "options": [
-            "Nein.",
-            "Ja, damit es lustig wird."
+            "Ich bitte eine andere vertrauenswürdige erwachsene Person um Hilfe.",
+            "Ich gebe auf und schweige."
           ],
           "correct": 0,
-          "hint": "Wir üben nur den Hilfesatz.",
-          "explain": "Die Gemeinheit wird nicht nachgespielt. Geübt wird der Satz an die erwachsene Person."
+          "hint": "Du darfst weiter um Hilfe bitten.",
+          "explain": "Du musst das Unrecht nicht allein aushalten. Bitte eine weitere erwachsene Person um Hilfe."
         }
       ],
       "6-8": [
@@ -214,14 +214,14 @@ const additions=
       "9-10": [
         {
           "type": "choice",
-          "prompt": "Welcher Vers befiehlt Gerechtigkeit und verbietet den Übergriff?",
+          "prompt": "Was gebietet Qurʾān 16:90?",
           "options": [
-            "Qurʾān 16:90.",
-            "Eine Hadithnummer, die wir ergänzt haben."
+            "Gerechtigkeit und gutes Verhalten.",
+            "Dass betroffene Kinder Unrecht allein aushalten."
           ],
           "correct": 0,
-          "hint": "Die Stelle wurde auf der Ibn-Kaṯīr-Seite gelesen.",
-          "explain": "16:90 wurde gelesen. Eine Hadithnummer wurde nicht ergänzt."
+          "hint": "Denke an Gerechtigkeit.",
+          "explain": "16:90 gebietet Gerechtigkeit. Hilfeholen ist unsere Schutzregel für die Stunde."
         },
         {
           "type": "text",
