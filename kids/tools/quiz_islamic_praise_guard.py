@@ -29,4 +29,27 @@ for age in ("4-6","7-8","9-10"):
                 raise SystemExit(f"KIDS: feedback text length unsuitable for {age}: {q['id']}")
             if not s.endswith(("!",".")):
                 raise SystemExit(f"KIDS: feedback punctuation missing: {q['id']}")
-print("PASS: 900 KIDS questions (3 age bands) use 15 varied Islamic blessings and 15 gentle retries, zero paid credits.")
+# Guard real browser feedback and its text layout in the three KIDS entrypoints.
+htmls=[(ROOT/p).read_text(encoding="utf-8") for p in
+       ("kids/index.html","kids/start.html","kids/shell.html")]
+if len(set(htmls))!=1:
+    raise SystemExit("KIDS: Islamic quiz feedback differs between index/start/shell")
+html=htmls[0]
+required=(
+    "quizAcademyPraiseText(q)",
+    "quizAcademyRetryText(q)",
+    'quizSpeak(quizV4Text(q,"correctAudioText",q.success)',
+    'quizSpeak(quizV4Text(q,"retryAudioText",q.retry)',
+    "overflow-wrap:break-word",
+    "font-size:clamp(14px,2.5vw,17px)",
+)
+for pattern in required:
+    if pattern not in html:
+        raise SystemExit("KIDS: missing accessible Islamic feedback integration: "+pattern)
+feedback_scope=html[html.index("function chooseQuizAnswer("):html.index("function renderQuizFinish(")]
+if 'feedback.textContent=""' in feedback_scope:
+    raise SystemExit("KIDS: retry encouragement may disappear before a child finishes reading")
+worker=(ROOT/"kids/sw.js").read_text(encoding="utf-8")
+if "quiz-v4-bridge.js?v=20261013-academy1" not in worker or "quiz-v4-bridge.js?v=20261013-academy1" not in html:
+    raise SystemExit("KIDS: Islamic voice bridge cache revision mismatch")
+print("PASS: 900 KIDS questions, 15 Islamic blessings + 15 gentle retries; all 3 apps consistent, readable, no paid credits.")
