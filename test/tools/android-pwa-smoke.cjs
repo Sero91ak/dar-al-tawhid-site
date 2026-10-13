@@ -102,6 +102,26 @@ const findings={url:"https://dar-al-tawhid.de/test/?env=staging&source=pwa&v=137
       testMarker:document.documentElement.outerHTML.includes("Read the published library"),
       indexes:out}
   });
+  findings.runtime=await page.evaluate(()=>({
+    readyState:document.readyState,
+    active:document.activeElement?.tagName,
+    formEditing:typeof isFormEditingNow==="function"?isFormEditingNow():null,
+    refreshPending:typeof refreshContentPromise!=="undefined"?!!refreshContentPromise:null,
+    syncing:typeof postsSyncSilent!=="undefined"?postsSyncSilent:null,
+    busy:typeof postsSyncBusy!=="undefined"?postsSyncBusy:null,
+    canLoad:typeof loadPosts==="function",
+    canFetch:typeof fetchPostsIndexMeta==="function",
+    files:typeof posts!=="undefined"?posts.length:null
+  }));
+  findings.manualSample=await page.evaluate(async()=>{
+    try{
+      const list=await fetchPostsIndexMeta();
+      const first=list?.[0];
+      const loaded=first?await fetchPostFile(first):null;
+      return {indexCount:list?.length||0,sample:first?{name:first.name,dir:first.dir}:null,
+        parsed:loaded?{id:loaded.post?.id,category:loaded.post?.category}:null};
+    }catch(e){return {error:String(e)}}
+  });
   const pageText=await page.locator("#appView").innerText();
   findings.tap.posts.hasCategories=!/0\s+Bereiche|Noch keine Kategorien erkannt/i.test(pageText);
   await snapshot("posts-after-wait");
