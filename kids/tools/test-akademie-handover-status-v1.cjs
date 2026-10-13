@@ -1,0 +1,15 @@
+const fs = require("fs");
+const assert = require("assert");
+const status = JSON.parse(fs.readFileSync("kids-akademie/LESSON_STATUS.json", "utf8"));
+assert.strictEqual(status.lessons.length, 208);
+assert.strictEqual(status.counts.withLessonId, 90);
+assert.strictEqual(status.counts.outlineWithoutLessonId, 118);
+assert.strictEqual(status.counts.approvedLessons, 0);
+assert.strictEqual(status.counts.approvedAgeVersions, 0);
+const ids = status.lessons.map((lesson) => lesson.lessonId).filter(Boolean);
+assert.strictEqual(new Set(ids).size, ids.length);
+assert.ok(fs.existsSync("kids-akademie/PROJECT_HANDOVER.md"));
+assert.ok(fs.existsSync("kids-akademie/research/SOURCE_REGISTRY.json"));
+const registry = JSON.parse(fs.readFileSync("kids-akademie/research/SOURCE_REGISTRY.json", "utf8"));
+assert.ok(registry.sourceCount < 30, "registry must stay limited to actually recorded sources");
+console.log("KIDS AKADEMIE HANDOVER STATUS PASS");
