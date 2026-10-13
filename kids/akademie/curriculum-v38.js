@@ -6993,8 +6993,8 @@ const additions=
     "pillar": "fiqh",
     "topic": "Die Gebetszeiten kennenlernen",
     "title": "Fiqh · Die Gebetszeiten kennenlernen",
-    "lead": "Auf einem Plan erkennen wir, dass das Gebet Zeiten am Tag hat.",
-    "goal": "Auf einem Plan erkennen wir, dass das Gebet Zeiten am Tag hat.",
+    "lead": "Ich weiß, dass das Gebet bestimmte Zeiten hat.",
+    "goal": "Ich weiß, dass das Gebet bestimmte Zeiten hat.",
     "quran": {
       "surah": 17,
       "ayah": 78,
@@ -7023,17 +7023,17 @@ const additions=
       "scientificApproval": false,
       "note": "Die fünf Namen Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ stehen nicht in diesem Vers. Ein Stundenplan mit Uhrzeiten wurde auf der Seite nicht gelesen. Die Rechtsfrage der genauen Grenzen bleibt ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft."
     },
-    "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
-    "sample": "Auf einem Plan erkennen wir, dass das Gebet Zeiten am Tag hat.",
+    "hint": "Höre zu und stelle eine Frage, wenn du etwas nicht verstehst.",
+    "sample": "Ich weiß, dass das Gebet bestimmte Zeiten hat.",
     "ageText": {
       "4-5": {
-        "goal": "Auf einem Plan erkennen wir, dass das Gebet Zeiten am Tag hat.",
-        "intro": "Auf einem Plan erkennen wir, dass das Gebet Zeiten am Tag hat. Der Vers sagt: Verrichte das Gebet vom Neigen der Sonne bis zur Dunkelheit der Nacht, und die Lesung der Morgenfrühe. Stell dir vor: Ein Kind sieht auf dem bekannten Gebetsplan der App die Namen der Tagesgebete und sucht den Morgen. Heute üben wir: Wir ordnen nur, was der Vers selbst nennt: eine Zeit ab dem Neigen der Sonne, die Nacht und den Morgen. Die fünf Namen erklären wir als bekannte Bezeichnungen der App, nicht als. Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
+        "goal": "Ich weiß, dass das Gebet bestimmte Zeiten hat.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! Heute sprechen wir über Gebetszeiten. In Qurʾān 17:78 wird unter anderem die Morgenfrühe genannt. Schau mit einer vertrauten erwachsenen Person auf den Gebetsplan: Wo steht Faǧr? Die genauen Zeiten lernst du Schritt für Schritt. Möge Allah dir das Lernen erleichtern. As-salāmu ʿalaikum!",
         "lines": [
-          "Auf einem Plan erkennen wir, dass das Gebet Zeiten am Tag hat.",
-          "Der Vers sagt: Verrichte das Gebet vom Neigen der Sonne bis zur Dunkelheit der Nacht, und die Lesung der Morgenfrühe.",
-          "Ein Kind sieht auf dem bekannten Gebetsplan der App die Namen der Tagesgebete und sucht den Morgen.",
-          "Wir ordnen nur, was der Vers selbst nennt: eine Zeit ab dem Neigen der Sonne, die Nacht und den Morgen. Die fünf Namen erklären wir als bekannte Bezeichnungen der App, nicht als."
+          "Qurʾān 17:78 spricht vom Gebet.",
+          "Der Vers nennt auch die Morgenfrühe.",
+          "Wir betrachten einen Gebetsplan.",
+          "Wir fragen, wenn wir etwas noch nicht wissen."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1039. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:78. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1039. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:78. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -7048,18 +7048,18 @@ const additions=
           }
         ],
         "situation": "Ein Kind sieht auf dem bekannten Gebetsplan der App die Namen der Tagesgebete und sucht den Morgen.",
-        "practice": "Wir ordnen nur, was der Vers selbst nennt: eine Zeit ab dem Neigen der Sonne, die Nacht und den Morgen. Die fünf Namen erklären wir als bekannte Bezeichnungen der App, nicht als Aufdruck dieser Seite.",
-        "summary": "Auf einem Plan erkennen wir, dass das Gebet Zeiten am Tag hat. Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
-        "audioScript": "Die Gebetszeiten kennenlernen. Auf einem Plan erkennen wir, dass das Gebet Zeiten am Tag hat. Der Vers sagt: Verrichte das Gebet vom Neigen der Sonne bis zur Dunkelheit der Nacht, und die Lesung der Morgenfrühe. Ein Kind sieht auf dem bekannten Gebetsplan der App die Namen der Tagesgebete und sucht den Morgen. Wir ordnen nur, was der Vers selbst nennt: eine Zeit ab dem Neigen der Sonne, die Nacht und den Morgen. Die fünf Namen erklären wir als bekannte Bezeichnungen der App, nicht als."
+        "practice": "Sieh mit einer erwachsenen Person auf den Gebetsplan und suche die Morgenzeit.",
+        "summary": "Die Qurʾān-Stelle 17:78 erwähnt den Morgen und den Tages- und Nachtverlauf; genaue Gebetszeiten lernen wir gesondert. As-salāmu ʿalaikum wa raḥmatullāh!",
+        "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Heute sprechen wir über Gebetszeiten. In Qurʾān 17:78 wird unter anderem die Morgenfrühe genannt. Schau mit einer vertrauten erwachsenen Person auf den Gebetsplan: Wo steht Faǧr? Die genauen Zeiten lernst du Schritt für Schritt. Möge Allah dir das Lernen erleichtern. As-salāmu ʿalaikum!"
       },
       "6-8": {
-        "goal": "Auf einem Plan erkennen wir, dass das Gebet Zeiten am Tag hat.",
-        "intro": "Heute geht es um Die Gebetszeiten kennenlernen. Auf einem Plan erkennen wir, dass das Gebet Zeiten am Tag hat. Wir lesen Qurʾān 17:78. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt: Verrichte das Gebet vom Neigen der Sonne bis zur Dunkelheit der Nacht, und die Lesung der Morgenfrühe. Die Lesung der Morgenfrühe ist bezeugt. So kann das im Alltag aussehen: Ein Kind sieht auf dem bekannten Gebetsplan der App die Namen der Tagesgebete und sucht den Morgen. Die Aufgabe: Wir ordnen nur, was der Vers selbst nennt: eine Zeit ab dem Neigen der Sonne, die Nacht und den Morgen. Die fünf Namen erklären wir als bekannte Bezeichnungen der App, nicht als. dulūk bedeutet: das Neigen der Sonne, so der Versanfang. faǧr bedeutet: Morgenfrühe; das Wort steht im Vers, die fünf Namen insgesamt nicht. Die Grenze der Stunde: Die fünf Namen Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ stehen nicht in diesem Vers. Ein Stundenplan mit Uhrzeiten wurde auf der Seite nicht gelesen. Die Rechtsfrage der genauen Grenzen bleibt ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
+        "goal": "Ich weiß, dass das Gebet bestimmte Zeiten hat.",
+        "intro": "As-salāmu ʿalaikum, liebe Geschwister! Qurʾān 17:78 spricht vom Gebet, vom Neigen der Sonne bis zur Dunkelheit der Nacht und von der Morgenfrühe. Sinngemäß lernen wir: Gebet und Tageszeiten gehören zusammen. Die fünf Gebetsnamen und ihre genauen Zeitgrenzen stehen nicht vollständig in diesem einen Vers. Übe mit einem Erwachsenen, den Morgengebets-Eintrag auf deinem Gebetsplan zu finden. As-salāmu ʿalaikum wa raḥmatullāh!",
         "lines": [
-          "Qurʾān 17:78 ist die gelesene Stelle.",
-          "Der Vers sagt: Verrichte das Gebet vom Neigen der Sonne bis zur Dunkelheit der Nacht, und die Lesung der Morgenfrühe.",
-          "Ein Kind sieht auf dem bekannten Gebetsplan der App die Namen der Tagesgebete und sucht den Morgen.",
-          "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers."
+          "Qurʾān 17:78 nennt Tages- und Nachtzeiten.",
+          "Auch die Morgenfrühe wird erwähnt.",
+          "Die fünf Gebetsnamen lernen wir zusätzlich.",
+          "Genauere Zeitgrenzen werden gesondert erklärt."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1039. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:78. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1039. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:78. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -7074,18 +7074,18 @@ const additions=
           }
         ],
         "situation": "Ein Kind sieht auf dem bekannten Gebetsplan der App die Namen der Tagesgebete und sucht den Morgen.",
-        "practice": "Wir ordnen nur, was der Vers selbst nennt: eine Zeit ab dem Neigen der Sonne, die Nacht und den Morgen. Die fünf Namen erklären wir als bekannte Bezeichnungen der App, nicht als Aufdruck dieser Seite.",
-        "summary": "Qurʾān 17:78 trägt diese Stunde. Der Vers sagt: Verrichte das Gebet vom Neigen der Sonne bis zur Dunkelheit der Nacht, und die Lesung der Morgenfrühe.",
-        "audioScript": "Die Gebetszeiten kennenlernen. Der Vers sagt: Verrichte das Gebet vom Neigen der Sonne bis zur Dunkelheit der Nacht, und die Lesung der Morgenfrühe. Ein Kind sieht auf dem bekannten Gebetsplan der App die Namen der Tagesgebete und sucht den Morgen. Wir ordnen nur, was der Vers selbst nennt: eine Zeit ab dem Neigen der Sonne, die Nacht und den Morgen. Die fünf Namen erklären wir als bekannte Bezeichnungen der App, nicht als."
+        "practice": "Sieh mit einer erwachsenen Person auf den Gebetsplan und suche die Morgenzeit.",
+        "summary": "Die Qurʾān-Stelle 17:78 erwähnt den Morgen und den Tages- und Nachtverlauf; genaue Gebetszeiten lernen wir gesondert. As-salāmu ʿalaikum wa raḥmatullāh!",
+        "audioScript": "As-salāmu ʿalaikum, liebe Geschwister! Qurʾān 17:78 spricht vom Gebet, vom Neigen der Sonne bis zur Dunkelheit der Nacht und von der Morgenfrühe. Sinngemäß lernen wir: Gebet und Tageszeiten gehören zusammen. Die fünf Gebetsnamen und ihre genauen Zeitgrenzen stehen nicht vollständig in diesem einen Vers. Übe mit einem Erwachsenen, den Morgengebets-Eintrag auf deinem Gebetsplan zu finden. As-salāmu ʿalaikum wa raḥmatullāh!"
       },
       "9-10": {
-        "goal": "Ich kann Die Gebetszeiten kennenlernen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Die Gebetszeiten kennenlernen. Das Lernziel ist: Auf einem Plan erkennen wir, dass das Gebet Zeiten am Tag hat. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt: Verrichte das Gebet vom Neigen der Sonne bis zur Dunkelheit der Nacht, und die Lesung der Morgenfrühe. Die Lesung der Morgenfrühe ist bezeugt. Alltag: Ein Kind sieht auf dem bekannten Gebetsplan der App die Namen der Tagesgebete und sucht den Morgen. Aufgabe: Wir ordnen nur, was der Vers selbst nennt: eine Zeit ab dem Neigen der Sonne, die Nacht und den Morgen. Die fünf Namen erklären wir als bekannte Bezeichnungen der App, nicht als. dulūk bedeutet: das Neigen der Sonne, so der Versanfang. faǧr bedeutet: Morgenfrühe; das Wort steht im Vers, die fünf Namen insgesamt nicht. Was nicht behauptet wird: Die fünf Namen Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ stehen nicht in diesem Vers. Ein Stundenplan mit Uhrzeiten wurde auf der Seite nicht gelesen. Die Rechtsfrage der genauen Grenzen bleibt ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
+        "goal": "Ich weiß, dass das Gebet bestimmte Zeiten hat.",
+        "intro": "As-salāmu ʿalaikum, lieber Bruder, liebe Schwester! Heute betrachten wir Qurʾān 17:78 und die Zeitangaben im Vers. Wir erkennen darin die Begriffe vom Neigen der Sonne, von der Nacht und von der Morgenfrühe. Eine vollständige rechtliche Festlegung aller fünf Gebetszeiten lässt sich aus dem hier gespeicherten Ausschnitt allein nicht ableiten. Unterscheide deshalb Versinhalt und die ergänzende Erklärung auf deinem Gebetsplan. As-salāmu ʿalaikum wa raḥmatullāh!",
         "lines": [
-          "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 17:78.",
-          "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
-          "Die fünf Namen Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ stehen nicht in diesem Vers.",
-          "Eine Hadithnummer, die auf der Seite fehlt, wird nicht ergänzt."
+          "Qurʾān 17:78 beschreibt Zeitangaben zum Gebet.",
+          "Der gespeicherte Vers ersetzt keine vollständige Fiqh-Darstellung.",
+          "Die fünf Gebetsnamen stehen nicht alle in diesem Vers.",
+          "Unser Gebetsplan ist eine Lernhilfe, kein Verszitat."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1039. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:78. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1039. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:78. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -7100,92 +7100,96 @@ const additions=
           }
         ],
         "situation": "Ein Kind sieht auf dem bekannten Gebetsplan der App die Namen der Tagesgebete und sucht den Morgen.",
-        "practice": "Wir ordnen nur, was der Vers selbst nennt: eine Zeit ab dem Neigen der Sonne, die Nacht und den Morgen. Die fünf Namen erklären wir als bekannte Bezeichnungen der App, nicht als Aufdruck dieser Seite.",
-        "summary": "Belegt ist Qurʾān 17:78. Ungeprüft bleibt: Die fünf Namen Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ stehen nicht in diesem Vers.",
-        "audioScript": "Die Gebetszeiten kennenlernen. Der Vers sagt: Verrichte das Gebet vom Neigen der Sonne bis zur Dunkelheit der Nacht, und die Lesung der Morgenfrühe. Nicht belegt und deshalb nicht behauptet: Die fünf Namen Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ stehen nicht in diesem Vers."
+        "practice": "Sieh mit einer erwachsenen Person auf den Gebetsplan und suche die Morgenzeit.",
+        "summary": "Die Qurʾān-Stelle 17:78 erwähnt den Morgen und den Tages- und Nachtverlauf; genaue Gebetszeiten lernen wir gesondert. As-salāmu ʿalaikum wa raḥmatullāh!",
+        "audioScript": "As-salāmu ʿalaikum, lieber Bruder, liebe Schwester! Heute betrachten wir Qurʾān 17:78 und die Zeitangaben im Vers. Wir erkennen darin die Begriffe vom Neigen der Sonne, von der Nacht und von der Morgenfrühe. Eine vollständige rechtliche Festlegung aller fünf Gebetszeiten lässt sich aus dem hier gespeicherten Ausschnitt allein nicht ableiten. Unterscheide deshalb Versinhalt und die ergänzende Erklärung auf deinem Gebetsplan. As-salāmu ʿalaikum wa raḥmatullāh!"
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was passt zu dieser Stunde?",
+          "prompt": "Was erwähnt der Vers?",
           "options": [
-            "Wir ordnen nur, was der Vers selbst nennt: eine Zeit ab dem Neigen der Sonne, die Nacht und den Morgen. Die fünf Namen.",
-            "Ich erfinde eine neue Gebetsregel."
+            "Das Gebet und die Morgenfrühe.",
+            "Ein bestimmtes Spiel."
           ],
           "correct": 0,
-          "hint": "Schau auf die Übung.",
-          "explain": "Die Übung der Stunde ist der erste Satz. Der zweite Satz ist das Gegenteil von dem, was wir üben."
+          "hint": "Denke an den Vers und unsere Übung.",
+          "explain": "Qurʾān 17:78 nennt die Morgenfrühe."
         },
         {
           "type": "choice",
-          "prompt": "Woran hält sich diese Stunde?",
+          "prompt": "Wo suchen wir die Gebetszeiten?",
           "options": [
-            "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "Gemeinsam auf einem Gebetsplan.",
+            "In einem erfundenen Kalender."
           ],
           "correct": 0,
-          "hint": "Nur Gelesenes.",
-          "explain": "Die Stunde nennt Qurʾān 17:78 und trennt die Übung davon. Eine Nummer wird nicht erfunden."
+          "hint": "Denke an den Vers und unsere Übung.",
+          "explain": "Ein Gebetsplan hilft beim Kennenlernen."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Stelle trägt Die Gebetszeiten kennenlernen?",
+          "prompt": "Welche Stelle betrachten wir?",
           "options": [
-            "Qurʾān 17:78",
-            "Eine Stelle ohne Suren- und Verszahl."
+            "Qurʾān 17:78.",
+            "Qurʾān 17:5."
           ],
           "correct": 0,
-          "hint": "Die Fundstelle steht im Unterricht.",
-          "explain": "Die Stunde bleibt bei Qurʾān 17:78."
+          "hint": "Denke an den Vers und unsere Übung.",
+          "explain": "Unsere Stelle ist Qurʾān 17:78."
         },
         {
           "type": "choice",
-          "prompt": "Was sagt der Vers sinngemäß für diese Stunde?",
+          "prompt": "Was steht nicht vollständig in diesem einen Vers?",
           "options": [
-            "Der Vers sagt: Verrichte das Gebet vom Neigen der Sonne bis zur Dunkelheit der Nacht, und die Lesung der Morgenfrühe.",
-            "Ich erfinde eine neue Gebetsregel."
+            "Alle fünf Gebetsnamen und ihre genauen Grenzen.",
+            "Die Erwähnung der Morgenfrühe."
           ],
           "correct": 0,
-          "hint": "Der erste Satz folgt der gelesenen Stelle.",
-          "explain": "Die deutsche Zeile ist eine Unterrichtshilfe zu Qurʾān 17:78, keine beglaubigte Übersetzung."
+          "hint": "Denke an den Vers und unsere Übung.",
+          "explain": "Die genaue rechtliche Einteilung wird gesondert gelernt."
         },
         {
           "type": "text",
-          "prompt": "Welche Übung gehört zu dieser Stunde?",
-          "sample": "Wir ordnen nur, was der Vers selbst nennt: eine Zeit ab dem Neigen der Sonne, die Nacht und den Morgen. Die fünf Namen.",
-          "hint": "Die praktische Aufgabe.",
-          "explain": "Die Übung ist die genannte Handlung und nicht eine zusätzliche Formel."
+          "prompt": "Beschreibe die heutige Lernübung.",
+          "sample": "Sieh mit einer erwachsenen Person auf den Gebetsplan und suche die Morgenzeit.",
+          "hint": "Denke an den nächsten praktischen Schritt.",
+          "explain": "Die Übung ist eine Alltagshilfe, kein neues Verszitat."
         }
       ],
       "9-10": [
         {
           "type": "choice",
-          "prompt": "Welche Angabe wäre unehrlich?",
+          "prompt": "Was können wir aus dem gespeicherten Vers direkt entnehmen?",
           "options": [
-            "Ein Rechtsurteil oder eine Hadithnummer als gelesen auszugeben, obwohl die Seite sie nicht liefert.",
-            "Zu sagen, dass die deutsche Erklärung sinngemäß ist."
+            "Angaben zu Tages- und Nachtzeit und zur Morgenfrühe.",
+            "Eine fertige Tabelle mit allen fünf Zeitgrenzen."
           ],
           "correct": 0,
-          "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "hint": "Denke an den Vers und unsere Übung.",
+          "explain": "Wir unterscheiden den Vers von einer vollständigen Fiqh-Darstellung."
+        },
+        {
+          "type": "choice",
+          "prompt": "Wie nutzen wir den Gebetsplan?",
+          "options": [
+            "Als ergänzende Lernhilfe.",
+            "Als wörtlichen Bestandteil von Qurʾān 17:78."
+          ],
+          "correct": 0,
+          "hint": "Denke an den Vers und unsere Übung.",
+          "explain": "Der Plan ergänzt die Unterrichtsstelle."
         },
         {
           "type": "text",
-          "prompt": "Was darf diese Stunde nicht behaupten?",
-          "sample": "Die fünf Namen Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ stehen nicht in diesem Vers.",
-          "hint": "Die Grenze steht im Text.",
-          "explain": "Die Grenze schützt davor, den Vers zu überdehnen."
-        },
-        {
-          "type": "text",
-          "prompt": "Wie lautet die Qurʾān-Stelle?",
-          "sample": "Qurʾān 17:78",
-          "hint": "Sure und Vers.",
-          "explain": "Die Stelle ist Qurʾān 17:78 auf der genannten Islamweb-Seite."
+          "prompt": "Beschreibe die heutige Lernübung.",
+          "sample": "Sieh mit einer erwachsenen Person auf den Gebetsplan und suche die Morgenzeit.",
+          "hint": "Denke an den nächsten praktischen Schritt.",
+          "explain": "Die Übung ist eine Alltagshilfe, kein neues Verszitat."
         }
       ]
     },
@@ -7199,9 +7203,9 @@ const additions=
         "de": "Morgenfrühe; das Wort steht im Vers, die fünf Namen insgesamt nicht"
       }
     ],
-    "practice": "Wir ordnen nur, was der Vers selbst nennt: eine Zeit ab dem Neigen der Sonne, die Nacht und den Morgen. Die fünf Namen erklären wir als bekannte Bezeichnungen der App, nicht als Aufdruck dieser Seite.",
-    "summary": "Auf einem Plan erkennen wir, dass das Gebet Zeiten am Tag hat. Der Vers sagt: Verrichte das Gebet vom Neigen der Sonne bis zur Dunkelheit der Nacht, und die Lesung der Morgenfrühe.",
-    "audioScript": "Die Gebetszeiten kennenlernen. Auf einem Plan erkennen wir, dass das Gebet Zeiten am Tag hat. Der Vers sagt: Verrichte das Gebet vom Neigen der Sonne bis zur Dunkelheit der Nacht, und die Lesung der Morgenfrühe. Ein Kind sieht auf dem bekannten Gebetsplan der App die Namen der Tagesgebete und sucht den Morgen. Wir ordnen nur, was der Vers selbst nennt: eine Zeit ab dem Neigen der Sonne, die Nacht und den Morgen. Die fünf Namen erklären wir als bekannte Bezeichnungen der App, nicht als.",
+    "practice": "Sieh mit einer erwachsenen Person auf den Gebetsplan und suche die Morgenzeit.",
+    "summary": "Die Qurʾān-Stelle 17:78 erwähnt den Morgen und den Tages- und Nachtverlauf; genaue Gebetszeiten lernen wir gesondert.",
+    "audioScript": "As-salāmu ʿalaikum, liebe Geschwister! Qurʾān 17:78 spricht vom Gebet, vom Neigen der Sonne bis zur Dunkelheit der Nacht und von der Morgenfrühe. Sinngemäß lernen wir: Gebet und Tageszeiten gehören zusammen. Die fünf Gebetsnamen und ihre genauen Zeitgrenzen stehen nicht vollständig in diesem einen Vers. Übe mit einem Erwachsenen, den Morgengebets-Eintrag auf deinem Gebetsplan zu finden. As-salāmu ʿalaikum wa raḥmatullāh!",
     "voiceApproved": false
   },
   "quran-tajwid-hoeren": {
@@ -7210,8 +7214,8 @@ const additions=
     "pillar": "quran",
     "topic": "Einfaches Tajwīd-Hören",
     "title": "Qurʾān · Einfaches Tajwīd-Hören",
-    "lead": "Wir hören einer richtigen Rezitation zu und wiederholen sie nicht mit einer Computerstimme.",
-    "goal": "Wir hören einer richtigen Rezitation zu und wiederholen sie nicht mit einer Computerstimme.",
+    "lead": "Ich achte beim Vorlesen auf Ruhe, Klarheit und aufmerksames Zuhören.",
+    "goal": "Ich achte beim Vorlesen auf Ruhe, Klarheit und aufmerksames Zuhören.",
     "quran": {
       "surah": 73,
       "ayah": 4,
@@ -7240,17 +7244,17 @@ const additions=
       "scientificApproval": false,
       "note": "Die Seite beschreibt das langsame Lesen des Propheten, ohne dass wir eine Buchnummer übernehmen. Wir erfinden keine Tajwīd-Regel wie einen bestimmten Laut, der auf der Seite nicht steht."
     },
-    "hint": "Wir erfinden keine zusätzliche Geschichte.",
-    "sample": "Wir hören einer richtigen Rezitation zu und wiederholen sie nicht mit einer Computerstimme.",
+    "hint": "Höre zu und stelle eine Frage, wenn du etwas nicht verstehst.",
+    "sample": "Ich achte beim Vorlesen auf Ruhe, Klarheit und aufmerksames Zuhören.",
     "ageText": {
       "4-5": {
-        "goal": "Wir hören einer richtigen Rezitation zu und wiederholen sie nicht mit einer Computerstimme.",
-        "intro": "Wir hören einer richtigen Rezitation zu und wiederholen sie nicht mit einer Computerstimme. Der Vers lautet: Oder füge hinzu, und trag den Qurʾān deutlich vor. Stell dir vor: Die Lehrperson liest einen kurzen deutschen Satz einmal schnell und einmal deutlich. Die Kinder sagen, welches Hören leichter war. Heute üben wir: Wir hören nur zu, wenn ein Mensch wirklich rezitiert. In diesem Paket gibt es keine Aufnahme. Wir erfinden keine zusätzliche Geschichte.",
+        "goal": "Ich achte beim Vorlesen auf Ruhe, Klarheit und aufmerksames Zuhören.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! Heute üben wir gutes Zuhören. Allah lehrt in Qurʾān 73:4, den Qurʾān deutlich und bedächtig vorzutragen. Deine Lehrperson kann dir langsam etwas vorlesen. Höre zu: Kannst du die Wörter besser erkennen, wenn sie ruhig gesprochen werden? Wir freuen uns über jeden kleinen Lernschritt. As-salāmu ʿalaikum!",
         "lines": [
-          "Wir hören einer richtigen Rezitation zu und wiederholen sie nicht mit einer Computerstimme.",
-          "Der Vers lautet: Oder füge hinzu, und trag den Qurʾān deutlich vor.",
-          "Die Lehrperson liest einen kurzen deutschen Satz einmal schnell und einmal deutlich. Die Kinder sagen, welches Hören leichter war.",
-          "Wir hören nur zu, wenn ein Mensch wirklich rezitiert. In diesem Paket gibt es keine Aufnahme."
+          "Qurʾān 73:4 spricht vom deutlichen Vortragen.",
+          "Wir hören aufmerksam zu.",
+          "Ein ruhiger Vortrag hilft beim Zuhören.",
+          "Bei Fragen dürfen wir nachfragen."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1904. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 73:4. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1904. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 73:4. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -7261,22 +7265,22 @@ const additions=
           },
           {
             "say": "Qurʾān",
-            "de": "die Rezitation, die hier nicht künstlich erzeugt wird"
+            "de": "Allahs Offenbarung, die wir mit Sorgfalt lernen"
           }
         ],
         "situation": "Die Lehrperson liest einen kurzen deutschen Satz einmal schnell und einmal deutlich. Die Kinder sagen, welches Hören leichter war.",
-        "practice": "Wir hören nur zu, wenn ein Mensch wirklich rezitiert. In diesem Paket gibt es keine Aufnahme.",
-        "summary": "Wir hören einer richtigen Rezitation zu und wiederholen sie nicht mit einer Computerstimme. Wir erfinden keine zusätzliche Geschichte.",
-        "audioScript": "Einfaches Tajwīd-Hören. Wir hören einer richtigen Rezitation zu und wiederholen sie nicht mit einer Computerstimme. Der Vers lautet: Oder füge hinzu, und trag den Qurʾān deutlich vor. Die Lehrperson liest einen kurzen deutschen Satz einmal schnell und einmal deutlich. Die Kinder sagen, welches Hören leichter war. Wir hören nur zu, wenn ein Mensch wirklich rezitiert. In diesem Paket gibt es keine Aufnahme."
+        "practice": "Höre deiner Lehrperson aufmerksam zu, wenn sie einen kurzen Abschnitt deutlich vorliest. Beschreibe anschließend, was dir beim Verstehen hilft.",
+        "summary": "Qurʾān 73:4 spricht vom bedächtigen Vortragen. Wir hören aufmerksam zu und üben in unserem eigenen Tempo. As-salāmu ʿalaikum wa raḥmatullāh!",
+        "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Heute üben wir gutes Zuhören. Allah lehrt in Qurʾān 73:4, den Qurʾān deutlich und bedächtig vorzutragen. Deine Lehrperson kann dir langsam etwas vorlesen. Höre zu: Kannst du die Wörter besser erkennen, wenn sie ruhig gesprochen werden? Wir freuen uns über jeden kleinen Lernschritt. As-salāmu ʿalaikum!"
       },
       "6-8": {
-        "goal": "Wir hören einer richtigen Rezitation zu und wiederholen sie nicht mit einer Computerstimme.",
-        "intro": "Heute geht es um Einfaches Tajwīd-Hören. Wir hören einer richtigen Rezitation zu und wiederholen sie nicht mit einer Computerstimme. Wir lesen Qurʾān 73:4. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers lautet: Oder füge hinzu, und trag den Qurʾān deutlich vor. Die Seite erklärt das als langsames Lesen, das beim Verstehen hilft. So kann das im Alltag aussehen: Die Lehrperson liest einen kurzen deutschen Satz einmal schnell und einmal deutlich. Die Kinder sagen, welches Hören leichter war. Die Aufgabe: Wir hören nur zu, wenn ein Mensch wirklich rezitiert. In diesem Paket gibt es keine Aufnahme. tartīl bedeutet: deutliches, bedächtiges Vortragen. Qurʾān bedeutet: die Rezitation, die hier nicht künstlich erzeugt wird. Die Grenze der Stunde: Die Seite beschreibt das langsame Lesen des Propheten, ohne dass wir eine Buchnummer übernehmen. Wir erfinden keine Tajwīd-Regel wie einen bestimmten Laut, der auf der Seite nicht steht.",
+        "goal": "Ich achte beim Vorlesen auf Ruhe, Klarheit und aufmerksames Zuhören.",
+        "intro": "As-salāmu ʿalaikum, liebe Geschwister! Qurʾān 73:4 spricht vom deutlichen, bedächtigen Vortragen des Qurʾān. Das Wort tartīl hilft uns, daran zu denken. Heute achten wir darauf, wie ruhiges Zuhören und verständliches Vorlesen zusammenpassen. Lass dir von einer geeigneten Lehrperson etwas langsam vorlesen und beschreibe, was du gehört hast. Für eine korrekte Qurʾān-Rezitation lernen wir bei kundigen Menschen. As-salāmu ʿalaikum wa raḥmatullāh!",
         "lines": [
-          "Qurʾān 73:4 ist die gelesene Stelle.",
-          "Der Vers lautet: Oder füge hinzu, und trag den Qurʾān deutlich vor.",
-          "Die Lehrperson liest einen kurzen deutschen Satz einmal schnell und einmal deutlich. Die Kinder sagen, welches Hören leichter war.",
-          "Wir erfinden keine zusätzliche Geschichte."
+          "Tartīl bedeutet bedächtiges, deutliches Vortragen.",
+          "Qurʾān 73:4 nennt diese Art des Vortrags.",
+          "Wir üben zunächst aufmerksames Zuhören.",
+          "Korrekte Rezitation lernen wir mit einer fachkundigen Lehrperson."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1904. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 73:4. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1904. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 73:4. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -7287,22 +7291,22 @@ const additions=
           },
           {
             "say": "Qurʾān",
-            "de": "die Rezitation, die hier nicht künstlich erzeugt wird"
+            "de": "Allahs Offenbarung, die wir mit Sorgfalt lernen"
           }
         ],
         "situation": "Die Lehrperson liest einen kurzen deutschen Satz einmal schnell und einmal deutlich. Die Kinder sagen, welches Hören leichter war.",
-        "practice": "Wir hören nur zu, wenn ein Mensch wirklich rezitiert. In diesem Paket gibt es keine Aufnahme.",
-        "summary": "Qurʾān 73:4 trägt diese Stunde. Der Vers lautet: Oder füge hinzu, und trag den Qurʾān deutlich vor.",
-        "audioScript": "Einfaches Tajwīd-Hören. Der Vers lautet: Oder füge hinzu, und trag den Qurʾān deutlich vor. Die Lehrperson liest einen kurzen deutschen Satz einmal schnell und einmal deutlich. Die Kinder sagen, welches Hören leichter war. Wir hören nur zu, wenn ein Mensch wirklich rezitiert. In diesem Paket gibt es keine Aufnahme."
+        "practice": "Höre deiner Lehrperson aufmerksam zu, wenn sie einen kurzen Abschnitt deutlich vorliest. Beschreibe anschließend, was dir beim Verstehen hilft.",
+        "summary": "Qurʾān 73:4 spricht vom bedächtigen Vortragen. Wir hören aufmerksam zu und üben in unserem eigenen Tempo. As-salāmu ʿalaikum wa raḥmatullāh!",
+        "audioScript": "As-salāmu ʿalaikum, liebe Geschwister! Qurʾān 73:4 spricht vom deutlichen, bedächtigen Vortragen des Qurʾān. Das Wort tartīl hilft uns, daran zu denken. Heute achten wir darauf, wie ruhiges Zuhören und verständliches Vorlesen zusammenpassen. Lass dir von einer geeigneten Lehrperson etwas langsam vorlesen und beschreibe, was du gehört hast. Für eine korrekte Qurʾān-Rezitation lernen wir bei kundigen Menschen. As-salāmu ʿalaikum wa raḥmatullāh!"
       },
       "9-10": {
-        "goal": "Ich kann Einfaches Tajwīd-Hören von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Einfaches Tajwīd-Hören. Das Lernziel ist: Wir hören einer richtigen Rezitation zu und wiederholen sie nicht mit einer Computerstimme. Sinngemäß, keine beglaubigte Übersetzung: Der Vers lautet: Oder füge hinzu, und trag den Qurʾān deutlich vor. Die Seite erklärt das als langsames Lesen, das beim Verstehen hilft. Alltag: Die Lehrperson liest einen kurzen deutschen Satz einmal schnell und einmal deutlich. Die Kinder sagen, welches Hören leichter war. Aufgabe: Wir hören nur zu, wenn ein Mensch wirklich rezitiert. In diesem Paket gibt es keine Aufnahme. tartīl bedeutet: deutliches, bedächtiges Vortragen. Qurʾān bedeutet: die Rezitation, die hier nicht künstlich erzeugt wird. Was nicht behauptet wird: Die Seite beschreibt das langsame Lesen des Propheten, ohne dass wir eine Buchnummer übernehmen. Wir erfinden keine Tajwīd-Regel wie einen bestimmten Laut, der auf der Seite nicht steht.",
+        "goal": "Ich achte beim Vorlesen auf Ruhe, Klarheit und aufmerksames Zuhören.",
+        "intro": "As-salāmu ʿalaikum, lieber Bruder, liebe Schwester! In Qurʾān 73:4 steht die Aufforderung zu tartīl, also zu bedächtigem, deutlichem Vortrag. Wir unterscheiden diesen Versinhalt von zusätzlichen Einzelregeln des Taǧwīd, die der gespeicherte Ausschnitt nicht aufführt. Vergleiche, wie gut du einem ruhigen und einem hastigen Vorlesen folgen kannst. Für den korrekten arabischen Vortrag bleibt fachkundige Anleitung wichtig. As-salāmu ʿalaikum wa raḥmatullāh!",
         "lines": [
-          "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 73:4.",
-          "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
-          "Die Seite beschreibt das langsame Lesen des Propheten, ohne dass wir eine Buchnummer übernehmen.",
-          "Eine Hadithnummer, die auf der Seite fehlt, wird nicht ergänzt."
+          "Qurʾān 73:4 fordert zu tartīl auf.",
+          "Bedächtiger Vortrag und Zuhören hängen zusammen.",
+          "Die gespeicherte Stelle ist keine vollständige Liste von Taǧwīd-Regeln.",
+          "Detaillierte Aussprache üben wir unter fachkundiger Anleitung."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1904. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 73:4. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1904. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 73:4. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -7313,96 +7317,100 @@ const additions=
           },
           {
             "say": "Qurʾān",
-            "de": "die Rezitation, die hier nicht künstlich erzeugt wird"
+            "de": "Allahs Offenbarung, die wir mit Sorgfalt lernen"
           }
         ],
         "situation": "Die Lehrperson liest einen kurzen deutschen Satz einmal schnell und einmal deutlich. Die Kinder sagen, welches Hören leichter war.",
-        "practice": "Wir hören nur zu, wenn ein Mensch wirklich rezitiert. In diesem Paket gibt es keine Aufnahme.",
-        "summary": "Belegt ist Qurʾān 73:4. Ungeprüft bleibt: Die Seite beschreibt das langsame Lesen des Propheten, ohne dass wir eine Buchnummer übernehmen.",
-        "audioScript": "Einfaches Tajwīd-Hören. Der Vers lautet: Oder füge hinzu, und trag den Qurʾān deutlich vor. Nicht belegt und deshalb nicht behauptet: Die Seite beschreibt das langsame Lesen des Propheten, ohne dass wir eine Buchnummer übernehmen."
+        "practice": "Höre deiner Lehrperson aufmerksam zu, wenn sie einen kurzen Abschnitt deutlich vorliest. Beschreibe anschließend, was dir beim Verstehen hilft.",
+        "summary": "Qurʾān 73:4 spricht vom bedächtigen Vortragen. Wir hören aufmerksam zu und üben in unserem eigenen Tempo. As-salāmu ʿalaikum wa raḥmatullāh!",
+        "audioScript": "As-salāmu ʿalaikum, lieber Bruder, liebe Schwester! In Qurʾān 73:4 steht die Aufforderung zu tartīl, also zu bedächtigem, deutlichem Vortrag. Wir unterscheiden diesen Versinhalt von zusätzlichen Einzelregeln des Taǧwīd, die der gespeicherte Ausschnitt nicht aufführt. Vergleiche, wie gut du einem ruhigen und einem hastigen Vorlesen folgen kannst. Für den korrekten arabischen Vortrag bleibt fachkundige Anleitung wichtig. As-salāmu ʿalaikum wa raḥmatullāh!"
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was passt zu dieser Stunde?",
+          "prompt": "Was passt zu gutem Zuhören?",
           "options": [
-            "Wir hören nur zu, wenn ein Mensch wirklich rezitiert. In diesem Paket gibt es keine Aufnahme.",
-            "Ich ergänze einen Vers aus dem Gedächtnis."
+            "Ich höre aufmerksam zu.",
+            "Ich rufe ständig dazwischen."
           ],
           "correct": 0,
-          "hint": "Schau auf die Übung.",
-          "explain": "Die Übung der Stunde ist der erste Satz. Der zweite Satz ist das Gegenteil von dem, was wir üben."
+          "hint": "Denke an den Vers und unsere Übung.",
+          "explain": "Aufmerksames Zuhören ist unser Lernziel."
         },
         {
           "type": "choice",
-          "prompt": "Woran hält sich diese Stunde?",
+          "prompt": "Wie klingt bedächtiges Vorlesen?",
           "options": [
-            "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "Ruhig und deutlich.",
+            "Absichtlich unverständlich."
           ],
           "correct": 0,
-          "hint": "Nur Gelesenes.",
-          "explain": "Die Stunde nennt Qurʾān 73:4 und trennt die Übung davon. Eine Nummer wird nicht erfunden."
+          "hint": "Denke an den Vers und unsere Übung.",
+          "explain": "Deutlichkeit hilft beim Verstehen."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Stelle trägt Einfaches Tajwīd-Hören?",
+          "prompt": "Was bedeutet tartīl hier?",
           "options": [
-            "Qurʾān 73:4",
-            "Eine Stelle ohne Suren- und Verszahl."
+            "Bedächtiges, deutliches Vortragen.",
+            "So schnell wie möglich sprechen."
           ],
           "correct": 0,
-          "hint": "Die Fundstelle steht im Unterricht.",
-          "explain": "Die Stunde bleibt bei Qurʾān 73:4."
+          "hint": "Denke an den Vers und unsere Übung.",
+          "explain": "Qurʾān 73:4 nennt bedächtigen Vortrag."
         },
         {
           "type": "choice",
-          "prompt": "Was sagt der Vers sinngemäß für diese Stunde?",
+          "prompt": "Wen frage ich bei Aussprachefragen?",
           "options": [
-            "Der Vers lautet: Oder füge hinzu, und trag den Qurʾān deutlich vor.",
-            "Ich ergänze einen Vers aus dem Gedächtnis."
+            "Eine fachkundige Lehrperson.",
+            "Jemanden, der die Worte nur errät."
           ],
           "correct": 0,
-          "hint": "Der erste Satz folgt der gelesenen Stelle.",
-          "explain": "Die deutsche Zeile ist eine Unterrichtshilfe zu Qurʾān 73:4, keine beglaubigte Übersetzung."
+          "hint": "Denke an den Vers und unsere Übung.",
+          "explain": "Qurʾān-Rezitation lernen wir sorgfältig."
         },
         {
           "type": "text",
-          "prompt": "Welche Übung gehört zu dieser Stunde?",
-          "sample": "Wir hören nur zu, wenn ein Mensch wirklich rezitiert. In diesem Paket gibt es keine Aufnahme.",
-          "hint": "Die praktische Aufgabe.",
-          "explain": "Die Übung ist die genannte Handlung und nicht eine zusätzliche Formel."
+          "prompt": "Beschreibe die heutige Lernübung.",
+          "sample": "Höre deiner Lehrperson aufmerksam zu, wenn sie einen kurzen Abschnitt deutlich vorliest. Beschreibe anschließend, was dir beim Verstehen hilft.",
+          "hint": "Denke an den nächsten praktischen Schritt.",
+          "explain": "Die Übung ist eine Alltagshilfe, kein neues Verszitat."
         }
       ],
       "9-10": [
         {
           "type": "choice",
-          "prompt": "Welche Angabe wäre unehrlich?",
+          "prompt": "Worum geht es in Qurʾān 73:4?",
           "options": [
-            "Ein Rechtsurteil oder eine Hadithnummer als gelesen auszugeben, obwohl die Seite sie nicht liefert.",
-            "Zu sagen, dass die deutsche Erklärung sinngemäß ist."
+            "Um bedächtiges Vortragen des Qurʾān.",
+            "Um das Überspringen unklarer Wörter."
           ],
           "correct": 0,
-          "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "hint": "Denke an den Vers und unsere Übung.",
+          "explain": "Der Vers erwähnt tartīl."
+        },
+        {
+          "type": "choice",
+          "prompt": "Welche Behauptung wäre zu weitgehend?",
+          "options": [
+            "Dass der eine Vers alle Taǧwīd-Einzelregeln auflistet.",
+            "Dass wir beim Vortrag auf Deutlichkeit achten."
+          ],
+          "correct": 0,
+          "hint": "Denke an den Vers und unsere Übung.",
+          "explain": "Die Einzelregeln brauchen zusätzliche Belege."
         },
         {
           "type": "text",
-          "prompt": "Was darf diese Stunde nicht behaupten?",
-          "sample": "Die Seite beschreibt das langsame Lesen des Propheten, ohne dass wir eine Buchnummer übernehmen.",
-          "hint": "Die Grenze steht im Text.",
-          "explain": "Die Grenze schützt davor, den Vers zu überdehnen."
-        },
-        {
-          "type": "text",
-          "prompt": "Wie lautet die Qurʾān-Stelle?",
-          "sample": "Qurʾān 73:4",
-          "hint": "Sure und Vers.",
-          "explain": "Die Stelle ist Qurʾān 73:4 auf der genannten Islamweb-Seite."
+          "prompt": "Beschreibe die heutige Lernübung.",
+          "sample": "Höre deiner Lehrperson aufmerksam zu, wenn sie einen kurzen Abschnitt deutlich vorliest. Beschreibe anschließend, was dir beim Verstehen hilft.",
+          "hint": "Denke an den nächsten praktischen Schritt.",
+          "explain": "Die Übung ist eine Alltagshilfe, kein neues Verszitat."
         }
       ]
     },
@@ -7413,12 +7421,12 @@ const additions=
       },
       {
         "say": "Qurʾān",
-        "de": "die Rezitation, die hier nicht künstlich erzeugt wird"
+        "de": "Allahs Offenbarung, die wir mit Sorgfalt lernen"
       }
     ],
-    "practice": "Wir hören nur zu, wenn ein Mensch wirklich rezitiert. In diesem Paket gibt es keine Aufnahme.",
-    "summary": "Wir hören einer richtigen Rezitation zu und wiederholen sie nicht mit einer Computerstimme. Der Vers lautet: Oder füge hinzu, und trag den Qurʾān deutlich vor.",
-    "audioScript": "Einfaches Tajwīd-Hören. Wir hören einer richtigen Rezitation zu und wiederholen sie nicht mit einer Computerstimme. Der Vers lautet: Oder füge hinzu, und trag den Qurʾān deutlich vor. Die Lehrperson liest einen kurzen deutschen Satz einmal schnell und einmal deutlich. Die Kinder sagen, welches Hören leichter war. Wir hören nur zu, wenn ein Mensch wirklich rezitiert. In diesem Paket gibt es keine Aufnahme.",
+    "practice": "Höre deiner Lehrperson aufmerksam zu, wenn sie einen kurzen Abschnitt deutlich vorliest. Beschreibe anschließend, was dir beim Verstehen hilft.",
+    "summary": "Qurʾān 73:4 spricht vom bedächtigen Vortragen. Wir hören aufmerksam zu und üben in unserem eigenen Tempo.",
+    "audioScript": "As-salāmu ʿalaikum, liebe Geschwister! Qurʾān 73:4 spricht vom deutlichen, bedächtigen Vortragen des Qurʾān. Das Wort tartīl hilft uns, daran zu denken. Heute achten wir darauf, wie ruhiges Zuhören und verständliches Vorlesen zusammenpassen. Lass dir von einer geeigneten Lehrperson etwas langsam vorlesen und beschreibe, was du gehört hast. Für eine korrekte Qurʾān-Rezitation lernen wir bei kundigen Menschen. As-salāmu ʿalaikum wa raḥmatullāh!",
     "voiceApproved": false
   },
   "sirah-muhammad-in-makkah": {
