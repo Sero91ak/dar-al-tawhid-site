@@ -718,7 +718,8 @@ jobs:
                   prepared=prepare_profile_text(text,text_profile)
                   with speech_synth_lock:
                       def get_fragment(part):
-                          _,audio,_,_=synth(part,text_profile,asset_dir,
+                          part_profile="quiz_fusha" if ARABIC_SCRIPT_RE.fullmatch(part) else text_profile
+                          _,audio,_,_=synth(part,part_profile,asset_dir,
                               {"done":0,"total":len(parts)},quiz_model_for_text(part))
                           return audio
                       target,length=compose_clips(
@@ -912,6 +913,25 @@ jobs:
               quiz_profiles[final_feedback]="quiz_feedback"
               quiz_models[final_feedback]=ELEVEN_QUIZ_DE_MODEL
 
+              # Credit guard runs BEFORE a single ElevenLabs request.
+              # Counts unique V4 text fragments instead of whole repeated prompts.
+              # Conservative: may overcount already cached fragments, never undercount.
+              planned_v4=set()
+              for text in set(quiz_texts):
+                  text_profile=quiz_profiles.get(text,"quiz_feedback")
+                  parts=quiz_composed_parts.get(text) or [text]
+                  for part in parts:
+                      part_profile="quiz_fusha" if ARABIC_SCRIPT_RE.fullmatch(part) else text_profile
+                      part_model=quiz_model_for_text(part)
+                      planned_v4.add((part_profile,part_model,prepare_profile_text(part,part_profile)))
+              planned_chars=sum(len(prepared) for _,_,prepared in planned_v4)
+              max_chars=int(batch_config.get("maxPlannedV4CharactersPerRun") or 1400)
+              print(f"PREPAID QUIZ V4 GUARD: at most {planned_chars} new characters this batch, cap {max_chars}",flush=True)
+              if planned_chars>max_chars:
+                  raise SystemExit("Kids Quiz V4 spend guard: reduce manual batch size; no credits spent.")
+              if batch_config.get("creditSaver") is not True:
+                  raise SystemExit("Kids Quiz V4 creditSaver must remain enabled.")
+
               quiz_manifest=build_pack(
                   texts=quiz_texts,
                   manifest_path=QUIZ_MANIFEST,
@@ -947,6 +967,7 @@ jobs:
                   "v4OfflinePhraseReuse":True,
                   "v4PhraseJoinRevision":"quiz-v4-phrase-audio-v1",
                   "requiredAuditoryQualityReview":True,
+                  "maxPlannedV4CharactersPerRun":max_chars,
                   "voiceModelEnforced":True,
                   "germanPhonemeDictionaryCompatible":True,
                   "germanInlinePronunciationMaster":False,
