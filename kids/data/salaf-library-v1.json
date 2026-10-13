@@ -1,6 +1,22 @@
 {
-  "version": 1,
+  "version": 2,
   "collection": "Schätze der Salaf",
-  "releasePolicy": "Only editorialRelease=true and verification=approved with verified sources and an age-specific master text",
+  "narrationPolicy": {
+    "oneMasterStoryForAllAges": true,
+    "oneMasterAudioForAllAges": true,
+    "masterStoryField": "masterStoryText",
+    "masterAudioField": "audioMaster",
+    "sameNarrationForAges": [
+      "4-5",
+      "6-8",
+      "9-10"
+    ],
+    "childGreeting": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, mein lieber Bruder, meine liebe Schwester.",
+    "childFarewell": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+    "noInventedDialogues": true,
+    "verifiedHistoricalSourcesRequired": true,
+    "sourceDetailNotReadAloud": true
+  },
+  "releasePolicy": "Only editorialRelease=true, verification=approved, verified primary historical references, ONE full masterStoryText with Salam and loving address, ONE common audioMaster; no separate texts/audio by age",
   "items": []
 }
