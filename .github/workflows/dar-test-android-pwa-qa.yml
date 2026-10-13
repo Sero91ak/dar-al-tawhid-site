@@ -1,6 +1,11 @@
 name: Dar Test Android PWA · Touch QA
 on:
   workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - "test/tools/android-pwa-smoke.cjs"
+      - ".github/workflows/dar-test-android-pwa-qa.yml"
   workflow_run:
     workflows: ["Deploy Dar Test App"]
     types: [completed]
