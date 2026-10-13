@@ -3236,6 +3236,8 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
 
     </section>
 
+    <section id="view-salaf" class="view" aria-label="Schätze der Salaf"></section>
+
     <section id="view-quran" class="view">
       <div class="page-head quran-page-head">
         <div class="kicker">HÖREN · MITSPRECHEN · LERNEN</div>
@@ -3326,6 +3328,7 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
   <nav class="bottom-nav" aria-label="Hauptnavigation">
     <button class="nav-btn active" data-target="today"><span class="ico"></span><span class="lab">Heute</span></button>
     <button class="nav-btn" data-target="stories"><span class="ico"></span><span class="lab">Hörbücher</span></button>
+    <button class="nav-btn" data-target="salaf" aria-label="Schätze der Salaf"><span class="ico"></span><span class="lab">Schätze</span></button>
     <button class="nav-btn" data-target="quran"><span class="ico"></span><span class="lab">Qurʾān</span></button>
     <button class="nav-btn" data-target="parents"><span class="ico"></span><span class="lab">Eltern</span></button>
   </nav>
@@ -11577,10 +11580,12 @@ html[data-kids-age]:has(#view-stories.active) body .bottom-nav .nav-btn[data-tar
    Keep the approved initial safe-area clearance for every non-home main tab.
    :has() follows the actual active view even before data-view is synchronized. */
 html[data-view="stories"] body .app .shell,
+html[data-view="salaf"] body .app .shell,
 html[data-view="dua"] body .app .shell,
 html[data-view="quran"] body .app .shell,
 html[data-view="parents"] body .app .shell,
 html body .app:has(#view-stories.view.active) .shell,
+html body .app:has(#view-salaf.view.active) .shell,
 html body .app:has(#view-dua.view.active) .shell,
 html body .app:has(#view-quran.view.active) .shell,
 html body .app:has(#view-parents.view.active) .shell{
@@ -11604,6 +11609,9 @@ html body .app:has(#view-parents.view.active) .shell{
 <link rel="stylesheet" href="/kids/ipad-home-audio-grid-v1347.css?v=1347" data-kids-ipad-home-audio-grid="1347">
 <link rel="stylesheet" href="/kids/girls-home-photo-palette-v1348.css?v=1348" data-kids-girls-home-palette="1348">
 <script defer src="/kids/girls-profile-theme-v1332.js?v=1348" data-kids-girls-system-tint="1332"></script>
+<!-- KIDS_SALAF_LIBRARY_V1: fifth tab, isolated source-gated library; after other profile palettes -->
+<link rel="stylesheet" href="/kids/salaf-library-v1.css?v=1">
+<script defer src="/kids/salaf-library-v1.js?v=1"></script>
 <!-- KIDS_OFFLINE_LIBRARY_V1: independent storage controls for the Parents tab -->
 <script defer src="/kids/offline-library-v1.js?v=1"></script>
 <!-- KIDS_SALAH_STAGE_V1261: placed after hero, before continue-listening -->
