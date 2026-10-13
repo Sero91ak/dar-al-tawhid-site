@@ -222,3 +222,14 @@ html[data-theme="light"] .manuscript-reading{
     :root{--ql-safe-header-offset:max(28px,env(safe-area-inset-top,0px))}
   }
 }
+
+/* Q_BROWSER_SAFE_AREA_V2 · The OS browser already owns its status/address bar.
+   Only installed app/native shells reserve status-bar clearance in-page.
+   External chat and messenger browsers must not get a second 58px spacer. */
+html[data-q-shell="browser"]{--ql-safe-header-offset:0px}
+@supports (-webkit-touch-callout:none){
+  html[data-q-shell="installed"]{--ql-safe-header-offset:max(58px,env(safe-area-inset-top,0px))}
+  @media (min-width:700px) and (pointer:coarse){
+    html[data-q-shell="installed"]{--ql-safe-header-offset:max(28px,env(safe-area-inset-top,0px))}
+  }
+}
