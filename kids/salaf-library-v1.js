@@ -42,7 +42,7 @@
       '<span class="salaf-hero-light" aria-hidden="true"></span>'+
       '<div class="salaf-hero-copy"><span class="salaf-eyebrow">DĀR AL TAWḤĪD KIDS · WAHRE BEGEBENHEITEN</span>'+
       '<h2>Schätze der Salaf</h2><p>Wahre Geschichten. Sanfte Worte. Wertvolle Lehren für dein Herz.</p>'+
-      '<span class="salaf-hero-note">Sorgfältig ausgewählte Berichte aus frühen Quellen</span></div>'+
+      '</div>'+
     '</header>'+
     '<div class="salaf-wrap">'+
       '<div class="salaf-intro"><div><span class="salaf-eyebrow">DEINE GESCHICHTENWELT</span><h3>Was möchtest du entdecken?</h3><p>Wähle eine Themenwelt oder stöbere nach Persönlichkeiten.</p></div>'+
@@ -50,11 +50,11 @@
       '<div class="salaf-switch" role="group" aria-label="Bibliotheksansicht">'+
         '<button type="button" data-salaf-tab="all" class="selected">Themen</button>'+
         '<button type="button" data-salaf-tab="people">Personen</button>'+
-        '<button type="button" data-salaf-tab="offline">Downloads</button>'+
+        '<button type="button" data-salaf-tab="offline">Offline</button>'+
       '</div>'+
       '<section id="salafHome" class="salaf-pane" aria-label="Themen"></section>'+
       '<section id="salafList" class="salaf-results" aria-live="polite"></section>'+
-      '<aside class="salaf-trust"><strong>Nur nach Quellenprüfung</strong><p>Hier erscheinen ausschließlich freigegebene Geschichten. Jede Erzählung nennt die historische Persönlichkeit, den Quellenautor und das Werk. Ungeprüfte Texte und Hörproben werden nicht veröffentlicht.</p></aside>'+
+      ''+
     '</div>'+
     '<section id="salafDetail" class="salaf-detail" role="dialog" aria-modal="true" aria-label="Geschichte" aria-hidden="true" hidden>'+
       '<div class="salaf-detail-scroll"><button class="salaf-back" type="button" aria-label="Zur Geschichtenbibliothek zurück">‹ <span>Zurück</span></button>'+
@@ -81,12 +81,12 @@
       '<span class="salaf-story-art" style="background-image:url(&quot;'+esc(img)+'&quot;)"></span>'+
       '<span class="salaf-story-copy"><small>'+esc(i.person)+'</small><strong>'+esc(i.title)+'</strong>'+
       '<span>'+esc(i.summary||"Eine wahre Begebenheit entdecken")+'</span>'+
-      '<em>'+(soundFor(i)?"▶ Hören & lesen":"Lesen · Audio folgt")+'</em></span><span aria-hidden="true">›</span></button>';
+      '<em>'+(soundFor(i)?"▶ Hören & lesen":"Geschichte lesen")+'</em></span><span aria-hidden="true">›</span></button>';
   }
   function renderCards(target,arr){
     target.innerHTML=arr.length?'<div class="salaf-story-grid">'+arr.map(card).join("")+'</div>':
-      '<div class="salaf-empty"><span class="salaf-empty-icon" aria-hidden="true">✧</span><strong>Noch keine freigegebenen Geschichten</strong>'+
-      '<p>Hier werden nach der Quellenprüfung neue Erzählungen veröffentlicht. Wir zeigen dir keine ungeprüften Geschichten.</p></div>';
+      '<div class="salaf-empty"><span class="salaf-empty-icon" aria-hidden="true">✧</span><strong>Hier wachsen neue Geschichten</strong>'+
+      '<p>Schon bald warten hier schöne Erzählungen und wertvolle Lehren auf dich.</p></div>';
   }
   function render(){
     root.dataset.profile=gender();
@@ -111,7 +111,7 @@
       pane.innerHTML='<div class="salaf-section-title"><h3>Persönlichkeiten</h3><p>Entdecke die Menschen hinter den Überlieferungen.</p></div>';
       list.innerHTML=people.length?people.map(function(person){
         return '<section class="salaf-person"><h4>'+esc(person)+'</h4><div class="salaf-story-grid">'+vis.filter(function(i){return i.person===person}).map(card).join("")+'</div></section>';
-      }).join(""):'<div class="salaf-empty"><strong>Persönlichkeiten folgen</strong><p>Neue Namen erscheinen erst nach geprüften und freigegebenen Geschichten.</p></div>';
+      }).join(""):'<div class="salaf-empty"><strong>Hier lernst du besondere Menschen kennen</strong><p>Ihre schönen Geschichten kommen bald dazu.</p></div>';
     }else{
       pane.innerHTML='<div class="salaf-offline-hero"><strong>Deine Offline-Bibliothek</strong><p>Speichere fertige Erzählungen mit Text und deiner Altersaufnahme. Einmal herunterladen, danach auch ohne Internet hören.</p>'+
         '<button type="button" id="salafOpenParentsOffline">Alle Offline-Inhalte verwalten ↗</button></div>';
@@ -154,7 +154,7 @@
     q("#salafRefs").innerHTML=src.map(function(s){return '<div class="salaf-ref"><strong>'+esc(s.author)+'</strong><span>'+esc(s.work)+" · "+esc(s.reference)+'</span></div>'}).join("");
     var url=soundFor(i);
     if(url){audio.src=url;audio.preload="metadata";q("#salafAudioStatus").textContent="Deine Hörposition wird automatisch gespeichert."}
-    else{audio.removeAttribute("src");audio.load();q("#salafAudioStatus").textContent="Der Text ist freigegeben. Die Aufnahme für dieses Alter folgt."}
+    else{audio.removeAttribute("src");audio.load();q("#salafAudioStatus").textContent="Diese Geschichte kannst du schon lesen. Eine Aufnahme gibt es hier bald auch."}
     q("#salafPlay").disabled=!url;q("#salafBack15").disabled=!url;q("#salafNext15").disabled=!url;q("#salafSeek").disabled=!url;
     q("#salafFollow").disabled=!url;updatePlay();updateTime();
     var act=q(".salaf-actions");act.querySelector(".kids-offline-inline")?.remove();
