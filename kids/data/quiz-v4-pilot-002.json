@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "questionId": "kids-quiz-002",
+  "questionNumber": 2,
+  "ageBand": "4-6",
+  "question": "Ist Allah Einer?",
+  "status": "audio-segments-generated-awaiting-import-and-human-review",
+  "provider": "ElevenLabs",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "voiceName": "Serhat Abu Malik – Master",
+  "modelId": "eleven_v4",
+  "approvedCreditsUsed": 122.10232599118945,
+  "pauseBetweenPartsMs": 240,
+  "joinMode": "server-rendered-mp3-no-device-runtime-tts",
+  "textContract": "Schau, was du schon alles weißt. Ist Allah Einer? Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+  "parts": [
+    {
+      "index": 1,
+      "key": "opening",
+      "text": "Schau, was du schon alles weißt.",
+      "originalGenerationId": "FGX65uXKWBnjULDxg3X1",
+      "flowId": "aYXuImf6EV3mWygxuUDy",
+      "sessionId": "6rDA1ojEIGb8nOSaI8St",
+      "durationSec": 2.24,
+      "chargedCredits": 31.010114537444938,
+      "expectedLocalFile": "01-opening.mp3"
+    },
+    {
+      "index": 2,
+      "key": "question",
+      "text": "Ist Allah Einer?",
+      "originalGenerationId": "KIgCxJO3RDxhsIFJSYUB",
+      "flowId": "SajNftKxOfwSjirT92tM",
+      "sessionId": "5iKP9LVfpM0B5pELuypH",
+      "durationSec": 1.6,
+      "chargedCredits": 15.505057268722469,
+      "expectedLocalFile": "02-question.mp3"
+    },
+    {
+      "index": 3,
+      "key": "guidance",
+      "text": "Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+      "originalGenerationId": "UUmC2fDiXaV5W1IQSumA",
+      "flowId": "nyyQDHXF4GM0op4cBEKL",
+      "sessionId": "klZi4pse7ACu1SGIwv3W",
+      "durationSec": 5.68,
+      "chargedCredits": 75.58715418502203,
+      "expectedLocalFile": "03-guidance.mp3"
+    }
+  ],
+  "rule": "Import original clips only. Never regenerate, automate, or publish without final listening approval. Signed audio URLs expire; never commit signed URLs."
+}
