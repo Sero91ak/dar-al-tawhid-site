@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1351";
+const CACHE_NAME="dar-al-tawhid-kids-v1352";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 // KIDS_V202_DOWNLOAD_TABS_RELEASE_TRIGGER_20261010: detail-only offline controls; manifest V202 synchronized.
@@ -244,6 +244,8 @@ const PRECACHE=CORE_PRECACHE.concat([
   "/kids/data/owner-voice-audio.json",
   "/kids/quiz-library.css?v=1237",
   "/kids/quiz-library.js?v=9",
+  "/kids/quiz-joy-v1.css?v=20261013-joy1",
+  "/kids/quiz-joy-v1.js?v=20261013-joy1",
   "/kids/assets/sahaba-mubashshirun/abu-bakr.jpg",
   "/kids/assets/sahaba-mubashshirun/umar.jpg",
   "/kids/assets/sahaba-mubashshirun/uthman.jpg",
@@ -279,6 +281,8 @@ const KIDS_BOOT_PRECACHE=[
   "/kids/start",
   "/kids/start.html",
   "/kids/index.html",
+  "/kids/quiz-joy-v1.css?v=20261013-joy1",
+  "/kids/quiz-joy-v1.js?v=20261013-joy1",
   "/kids/akademie/index.html",
   "/kids/prayer-stage-v1261.css?v=1320",
   "/kids/prayer-stage-v1261.js?v=1342",
@@ -445,7 +449,7 @@ self.addEventListener("fetch",function(event){
     return;
   }
   /* QUIZ LEARNING CENTER: network-first so 900-question data, dashboard logic and layout never regress to a stale pack. */
-  if(url.pathname==="/kids/data/quiz-kids.json"||url.pathname==="/kids/quiz-library.js"||url.pathname==="/kids/quiz-library.css"){
+  if(url.pathname==="/kids/data/quiz-kids.json"||url.pathname==="/kids/quiz-library.js"||url.pathname==="/kids/quiz-library.css"||url.pathname==="/kids/quiz-joy-v1.js"||url.pathname==="/kids/quiz-joy-v1.css"){
     event.respondWith(networkFirst(request));
     return;
   }
@@ -570,6 +574,8 @@ const KIDS_OFFLINE_SEEDS=[
   "/kids/data/quiz-audio.json",
   "/kids/data/owner-voice-audio.json",
   "/kids/data/quiz-kids.json",
+  "/kids/quiz-joy-v1.css?v=20261013-joy1",
+  "/kids/quiz-joy-v1.js?v=20261013-joy1",
   "/kids/data/deen-lessons.json",
   "/kids/data/term-learning-audio.json",
   "/kids/data/verified-content.json",

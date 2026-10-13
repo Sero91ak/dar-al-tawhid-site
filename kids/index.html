@@ -2831,10 +2831,13 @@ html:not([data-view="today"]) .view.active{
  background:#173848!important;
 }
 #duaModal .dua-scene::before{background-image:var(--dua-art)!important;background-size:cover!important;background-position:center 52%!important;filter:saturate(1.03) brightness(.9)!important}
+/* Topic artwork stays local; the Quiz Joy round itself uses a child-friendly colored mission panel. */
 #quizModal .quiz-scene{
- --quiz-art:url("https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/cbe2efa5-f245-41e4-9262-be656af8ffc7/c22155b0-3b92-4227-a372-cfdaf600c518/Single_standalone_cinematic_16_9_hero_illustration_for_a_pre.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiZDEzNTA0YmI5ZTBiNjNjMyIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTMzMDM2M30.RWZGx2UrVdXyvfYQRM-noI7t5EVNJPS9cvcn4fawl40")!important;
- background-image:linear-gradient(180deg,rgba(4,17,28,.01),rgba(4,17,28,.08) 45%,rgba(4,17,28,.56) 100%),var(--quiz-art)!important;
- background-size:cover!important;background-position:center 50%!important;background-repeat:no-repeat!important;
+  background-image:linear-gradient(160deg,rgba(12,39,58,.12),rgba(12,39,58,.42)),
+    var(--quiz-art,url("/kids/assets/kids-art/quiz-courtyard-v11.jpg?v=18-clean"))!important;
+  background-size:cover!important;
+  background-position:var(--quiz-art-position,center)!important;
+  background-repeat:no-repeat!important;
 }
 
 /* Isolated KIDS Academy pilot entry: no change to the existing four home choices. */
@@ -6026,7 +6029,7 @@ function renderQuizQuestion(){
   quizQuestionHadError=false;
   renderQuizProgress();
   var band=currentKidsQuizAgeBand();
-  var help=band==="4-6"?"":(band==="9-10"?"Wähle die beste Antwort.":"Hör zu und tippe auf deine Antwort.");
+  var help=band==="4-6"?(isYesNoAnswers(q.answers)?"Denk in Ruhe nach. Tippe auf Ja oder Nein.":"Schau dir die Antworten an und wähle eine aus."):(band==="9-10"?"Überlege in Ruhe und wähle die beste Antwort.":"Hör gut zu und wähle die Antwort, die du für richtig hältst.");
   var kicker=band==="4-6"?String(q.category||"Quiz"):String(q.category||"Quiz")+" · "+(currentQuizIndex+1)+"/"+currentQuiz.length;
   var listenLabel=band==="4-6"?"Frage hören":"Frage noch einmal hören";
   var art=quizArtworkForBand(q)||{};
@@ -6087,6 +6090,21 @@ function quizRewardBurst(){
   scene.appendChild(burst);
   setTimeout(function(){if(burst&&burst.parentNode)burst.remove()},950);
 }
+/* Visible coaching only: approved audio remains keyed to original published q.success/q.retry. */
+function quizKindFeedback(q,correct){
+  var n=Number(q&&q.number||0),band=currentKidsQuizAgeBand();
+  var good=band==="4-6"?
+    ["Sehr schön! Du hast gut nachgedacht.","Prima! Du hast die richtige Antwort gefunden.","Gut aufgepasst! Das war richtig."]:
+    band==="9-10"?
+    ["Richtig erkannt. Gut begründet!","Sehr gut. Du hast es verstanden.","Das stimmt. Weiter so!"]:
+    ["Sehr gut überlegt!","Klasse, das hast du erkannt!","Richtig! Du bist aufmerksam."];
+  var again=band==="4-6"?
+    ["Das war noch nicht richtig. Versuch es noch einmal.","Überlege noch ein bisschen. Du kannst erneut wählen.","Schau noch einmal genau hin und probiere es wieder."]:
+    band==="9-10"?
+    ["Diese Antwort passt noch nicht. Vergleiche noch einmal.","Denk noch einmal über die Frage nach.","Versuche es erneut. Nimm dir Zeit zum Überlegen."]:
+    ["Noch nicht ganz. Schau dir die Antworten noch einmal an.","Das war noch nicht richtig. Versuch es in Ruhe erneut.","Überlege noch einmal. Du kannst es schaffen."];
+  return (correct?good:again)[n%3];
+}
 function chooseQuizAnswer(index,button){
   if(quizLocked)return;
   var q=currentQuiz[currentQuizIndex];
@@ -6098,7 +6116,7 @@ function chooseQuizAnswer(index,button){
     button.classList.add("correct");
     quizRewardBurst();
     document.getElementById("quizFeedback").className="quiz-feedback good";
-    document.getElementById("quizFeedback").textContent="✓ "+q.success;
+    document.getElementById("quizFeedback").textContent="✓ "+quizKindFeedback(q,true);
     var explanation=document.getElementById("quizExplanation");
     if(explanation&&q.explanation){
       explanation.textContent=String(q.explanation);
@@ -6117,9 +6135,9 @@ function chooseQuizAnswer(index,button){
     document.getElementById("quizNext").classList.add("show");
     var masteryResult=recordQuizAttempt(q.id,!quizQuestionHadError);
     if(masteryResult.entry&&masteryResult.entry.stage==="secure"){
-      document.getElementById("quizFeedback").textContent="✓ "+q.success+" · sicher";
+      document.getElementById("quizFeedback").textContent="✓ "+quizKindFeedback(q,true)+" · sicher gelernt";
     }else if(!quizQuestionHadError&&!masteryResult.counted){
-      document.getElementById("quizFeedback").textContent="✓ "+q.success+" · Wiederholung später";
+      document.getElementById("quizFeedback").textContent="✓ "+quizKindFeedback(q,true)+" · später noch einmal üben";
     }
     // Nach einer richtigen Antwort wird die kindgerechte Erklärung vollständig
     // in der Serhat-Masterstimme vorgelesen, aber nur mit echtem freigegebenem Clip.
@@ -6158,11 +6176,10 @@ function chooseQuizAnswer(index,button){
     recordQuizMistake(q.id);
     button.classList.add("wrong");
     document.getElementById("quizFeedback").className="quiz-feedback bad";
-    document.getElementById("quizFeedback").textContent=q.retry;
+    document.getElementById("quizFeedback").textContent=quizKindFeedback(q,false);
     quizSpeak(q.retry);
     setTimeout(function(){
       button.classList.remove("wrong");
-      document.getElementById("quizFeedback").textContent="";
     },1300);
   }
 }
@@ -6927,7 +6944,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   // The next navigation uses network-first and receives the latest release.
   if("serviceWorker" in navigator){
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1351",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1352",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     },{once:true});
@@ -7926,6 +7943,8 @@ html[data-view="stories"] #view-stories > :last-child{
 <script src="/kids/story-hub.js?v=28"></script>
 <script src="/kids/kids-age-typography.js?v=3"></script>
 <script src="/kids/quiz-library.js?v=9"></script>
+<link rel="stylesheet" href="/kids/quiz-joy-v1.css?v=20261013-joy1" data-kids-quiz-joy="1">
+<script src="/kids/quiz-joy-v1.js?v=20261013-joy1" defer></script>
 <link rel="stylesheet" href="/kids/section-heroes-v1095.css?v=1256-parent-hero-full" data-kids-section-heroes-late="1">
 <link rel="stylesheet" href="/kids/stories-home-v1133.css?v=1148" data-kids-stories-home-late="1">
 <link rel="stylesheet" href="/kids/stories-home-v1138.css?v=1152" data-kids-stories-home-polish="1">
