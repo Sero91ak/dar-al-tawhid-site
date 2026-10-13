@@ -4357,6 +4357,7 @@ function applySelectedLesson(){
  const lesson=activeLesson(),ui=AGE_UI[age],blocks=all('[data-lesson-step="2"] .lesson-source-block'),qBlock=blocks[0],hadithBlock=blocks[1];
  const verse=qBlock.querySelector(".arabic-verse"),listen=qBlock.querySelector("[data-arabic-audio]");
  if(!lesson){
+  hadithBlock.hidden=false;hadithBlock.style.display="";$("#evidenceTitle").textContent="Was lernen wir aus den Quellen?";
   $("#lessonWelcomeBody").textContent=ui.welcomeBody;$("#welcomeTitle").textContent="Schön, dass du da bist!";
   $("#explainTitle").textContent="Wahrhaftigkeit verstehen";$("#evidenceLead").textContent=ui.evidenceLead;
   qBlock.querySelector(".eyebrow").textContent="Qurʾān · Sūrat at-Tawbah · Vers 119";
@@ -4383,17 +4384,19 @@ function applySelectedLesson(){
  $("#explainTitle").textContent=lesson.topic+" verstehen";
  $('[data-lesson-step="1"] .stage-lead').textContent=lesson.lead;
  all("#explainWords [data-spoken]").forEach((el,i)=>el.textContent=(ageTeaching?.lines||lesson.lines)[i]);
- $("#evidenceLead").textContent=age==="4-5"?"Wir hören einen Qurʾān-Vers und eine Überlieferung des Propheten ﷺ.":"Wir verstehen die Belege für "+lesson.topic+".";
+ const hasLessonHadith=!!lesson.hadith?.text&&!/kein nummerierter Hadith als Beleg/i.test(lesson.hadith?.source||"");
+ hadithBlock.hidden=!hasLessonHadith;hadithBlock.style.display=hasLessonHadith?"":"none";
+ $("#evidenceTitle").textContent=hasLessonHadith?"Was lernen wir aus den Quellen?":"Was lernen wir aus dem Qurʾān?";
+ $("#evidenceLead").textContent=hasLessonHadith?(age==="4-5"?"Wir hören einen Qurʾān-Vers und lernen eine Überlieferung kennen.":"Wir verstehen die Belege für "+lesson.topic+"."):"Wir entdecken, was uns der Qurʾān zu diesem Thema lehrt.";
  qBlock.querySelector(".eyebrow").textContent="Qurʾān · "+q.label;
  verse.textContent=q.arabic;verse.dataset.audioText=k;listen.dataset.arabicAudio=k;
  listen.setAttribute("aria-label","Sūrah "+q.surah+", Vers "+q.ayah+" auf Arabisch anhören");
  qBlock.querySelector(".quote").textContent="„"+q.meaning+"“";
  qBlock.querySelector(".source").textContent="Quelle: Qurʾān "+q.surah+":"+q.ayah+(q.excerpt?" · arabischer Textauszug":"");
  $("#arabicAudioStatus").textContent=q.excerpt?"Textauszug · vollständiger Vers wird rezitiert":"Rezitation des vollständigen Verses";
- hadithBlock.querySelector(".quote").textContent=lesson.hadith.text;
- hadithBlock.querySelector(".source").textContent="Quelle: "+lesson.hadith.source;
- $(".teacher-explainer").textContent=ageTeaching?.evidence||"Qurʾān: "+q.meaning+" Sunnah: "+lesson.hadith.text;
- all(".recap-lesson p").forEach((el,i)=>el.textContent=[lesson.goal,q.meaning+" "+lesson.hadith.text,lesson.sample][i]);
+ if(hasLessonHadith){hadithBlock.querySelector(".quote").textContent=lesson.hadith.text;hadithBlock.querySelector(".source").textContent="Quelle: "+lesson.hadith.source;}
+ $(".teacher-explainer").textContent=ageTeaching?.evidence||(hasLessonHadith?"Qurʾān: "+q.meaning+" Sunnah: "+lesson.hadith.text:"Qurʾān: "+q.meaning);
+ all(".recap-lesson p").forEach((el,i)=>el.textContent=[lesson.goal,hasLessonHadith?q.meaning+" "+lesson.hadith.text:q.meaning,ageTeaching?.summary||lesson.sample][i]);
  $("#practiceTitle").textContent=age==="4-5"?"Was machst du?":age==="9-10"?"Was weißt du darüber?":"Was würdest du tun?";
  $("#todayTopicName").textContent=lesson.title;$("#todayTopicIntro").textContent=lesson.lead;
  $(".lesson-heading h1").textContent=lesson.title;
