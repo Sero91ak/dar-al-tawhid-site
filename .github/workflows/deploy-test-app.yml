@@ -105,6 +105,25 @@ jobs:
       - name: Build + Build-IDs synchronisieren
         run: npm run build
 
+      - name: Originales iOS-Dar-Test-Icon für Android-Web-App erzeugen
+        shell: bash
+        run: |
+          set -euo pipefail
+          node test/tools/build-apple-icons.cjs
+          test -s test/assets/dar-test-apple-icon-192.png
+          test -s test/assets/dar-test-apple-icon-512.png
+          node - <<'NODE'
+          const fs=require('fs');
+          const m=JSON.parse(fs.readFileSync('test/manifest.json','utf8'));
+          if(m.id!=='/test/?env=staging'||m.scope!=='/test/')throw Error('Test manifest scope mismatch');
+          for(const icon of m.icons||[]){
+            const name=icon.src.split('?')[0].replace(/^\//,'');
+            const png=fs.readFileSync(name);
+            const expected=Number(icon.sizes.split('x')[0]);
+            if(!png.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10]))||png.readUInt32BE(16)!==expected||png.readUInt32BE(20)!==expected)throw Error('PNG icon mismatch '+name);
+          }
+          NODE
+
       - name: Dar Test Health Check
         env:
           GITHUB_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
