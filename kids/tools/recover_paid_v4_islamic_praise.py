@@ -51,20 +51,29 @@ def find_paid_history_item(key:str,pilot:dict)->dict:
             return obj
     except (urllib.error.HTTPError,ValueError,json.JSONDecodeError):
         pass
-    cursor=""
-    seen=set()
-    for _ in range(4):
-        params={"page_size":"100","source":"TTS","search":"Allāhumma bārik"}
-        if cursor:params["start_after_history_item_id"]=cursor
-        raw,_=get("/history?"+urllib.parse.urlencode(params),key)
-        batch=json.loads(raw.decode("utf-8"))
-        rows=batch.get("history") or []
-        for row in rows:
-            if history_match(row,pilot):return row
-        if not batch.get("has_more") or not rows:break
-        cursor=rows[-1].get("history_item_id") or ""
-        if not cursor or cursor in seen:break
-        seen.add(cursor)
+    searched=0
+    # Some ElevenLabs workspaces do not index accented text under the same
+    # search spelling; fall back to unfiltered recent history without charges.
+    for filtered in (True,False):
+        cursor=""
+        seen=set()
+        for _ in range(4):
+            params={"page_size":"100"}
+            if filtered:
+                params["search"]="Allāhumma bārik"
+            if cursor:
+                params["start_after_history_item_id"]=cursor
+            raw,_=get("/history?"+urllib.parse.urlencode(params),key)
+            batch=json.loads(raw.decode("utf-8"))
+            rows=batch.get("history") or []
+            searched+=len(rows)
+            for row in rows:
+                if history_match(row,pilot):return row
+            if not batch.get("has_more") or not rows:break
+            cursor=rows[-1].get("history_item_id") or ""
+            if not cursor or cursor in seen:break
+            seen.add(cursor)
+    print(f"Read-only ElevenLabs history search checked {searched} records, no exact voice/model/text match.",flush=True)
     raise RuntimeError("Approved Serhat V4 original not found in ElevenLabs API-key history; DO NOT regenerate")
 
 def duration(path:Path)->float:
