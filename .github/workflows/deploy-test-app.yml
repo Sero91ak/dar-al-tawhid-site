@@ -55,6 +55,10 @@ permissions:
 
 jobs:
   deploy-test:
+    # A newer main commit must not be overwritten by an older parallel test deploy.
+    concurrency:
+      group: dar-test-worker-release
+      cancel-in-progress: true
     # Existing adult Dar Test deployment remains unchanged for every normal push.
     # Creator dispatch MUST NOT overwrite Dar Test.
     if: ${{ github.ref == 'refs/heads/main' && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.target == 'dar-test')) }}
