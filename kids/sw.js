@@ -1,8 +1,8 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1355";
+const CACHE_NAME="dar-al-tawhid-kids-v1360";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 // KIDS_V202_DOWNLOAD_TABS_RELEASE_TRIGGER_20261010: detail-only offline controls; manifest V202 synchronized.
-const KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306-listen-scroll-v18-salaf-visible-v1355";
+const KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306-listen-scroll-v18-salaf-visible-v1360";
 const DUA_AUDIO_RUNTIME="1244";
 // QUIZ_HOME_RESTORE_V1225: refresh installed PWAs with the restored Quiz entry.
 const CORE_PRECACHE=[
@@ -292,13 +292,13 @@ const KIDS_BOOT_PRECACHE=[
   "/kids/kids-story-action-contrast-v1345.css?v=1346",
   "/kids/offline-library-v1.js?v=1",
   "/kids/offline-library-v1.css?v=1",
-  "/kids/salaf-library-v1.js?v=1355",
+  "/kids/salaf-library-v1.js?v=1360",
   "/kids/kids-listening-polish-v1350.css?v=1350",
   "/kids/kids-listening-polish-v1350.js?v=1350",
   "/kids/assets/kids-icons/library-real-v12.png?v=cut1",
   "/kids/assets/kids-icons/dua-real-v12.png?v=cut1",
   "/kids/salaf-library-v1.css?v=1",
-  "/kids/salaf-open-world-v1353.css?v=1355",
+  "/kids/salaf-open-world-v1353.css?v=1360",
   "/kids/assets/salaf/salaf-cinema-hero-boy-v1353.jpg",
   "/kids/assets/salaf/salaf-cinema-hero-girl-v1353.jpg",
   "/kids/data/salaf-library-v1.json?v=1",
