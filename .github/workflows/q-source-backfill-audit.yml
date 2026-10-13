@@ -8,6 +8,13 @@ on:
       - "q/_registry/backfill-approved.mjs"
       - "q/_registry/BACKFILL.md"
       - ".github/workflows/q-source-backfill-audit.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "q/_registry/backfill-post-sources.mjs"
+      - "q/_registry/backfill-approved.mjs"
+      - "q/_registry/BACKFILL.md"
+      - ".github/workflows/q-source-backfill-audit.yml"
   workflow_dispatch:
 permissions:
   contents: read
