@@ -5,6 +5,18 @@
     if(!el||!el.closest)return false;
     return !!el.closest("input,textarea,select,[contenteditable='true'],[contenteditable=''],[data-copy],[data-selectable],.allow-copy");
   }
+  /* Q_SOURCE_IN_FRAME_V1: a source citation is an internal app route,
+     not a new browser/tab, on both official native shells and installed PWAs. */
+  document.addEventListener("click",function(ev){
+    if(ev.defaultPrevented||ev.button!==0||ev.metaKey||ev.ctrlKey||ev.altKey||ev.shiftKey)return;
+    var a=ev.target&&ev.target.closest?ev.target.closest("a[href]"):null;
+    if(!a||a.hasAttribute("download"))return;
+    var url;try{url=new URL(a.getAttribute("href"),location.href)}catch(_){return}
+    if(url.origin!==location.origin||!url.pathname.startsWith("/q/"))return;
+    if(!/^\/q\/[1-9][0-9]*\/?$/.test(url.pathname))return;
+    ev.preventDefault();ev.stopImmediatePropagation();
+    location.assign(url.pathname.replace(/\/?$/,"/")+url.search+url.hash);
+  },true);
   /* DAR_TOUCH_INTENT_GUARD_V1
      Navigation in the adult shell uses pointerup for fast activation. A finger
      that is scrolling/brushing a nav card must never activate it on release.
