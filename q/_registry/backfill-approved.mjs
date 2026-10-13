@@ -18,10 +18,22 @@ function validUrl(value){
  }catch{return false;}
 }
 const reg=JSON.parse(fs.readFileSync(registryFile,"utf8"));
+const normalizeTitle=s=>String(s||"").normalize("NFKD").replace(/\p{Mark}/gu,"").toLowerCase().replace(/[^\p{Letter}\p{Number}]+/gu," ").trim();
+const registeredTitles=new Map(reg.links.filter(e=>e.status!=="inactive").map(e=>[normalizeTitle(e.title),Number(e.number)]));
+const batchTitles=new Set();
 const items=(fs.existsSync(folder)?fs.readdirSync(folder):[]).filter(n=>n.endsWith(".json")).sort().map(n=>JSON.parse(fs.readFileSync(path.join(folder,n),"utf8"))).filter(x=>x.approved===true);
 const checked=[];
+const batchIds=new Set();
 for(const x of items){
  const r=x.review||{};
+ const titleKey=normalizeTitle(x.title);
+ if(!titleKey)throw Error("Missing title");
+ if(registeredTitles.has(titleKey))throw Error("EXISTING Q TITLE: "+x.postId+" duplicates Q"+registeredTitles.get(titleKey)+"; link existing Q after editorial comparison, do not mint Q number");
+ if(batchTitles.has(titleKey))throw Error("Duplicate source statement in same reviewed batch: "+x.title);
+ batchTitles.add(titleKey);
+ if(Array.isArray(x.suspectedExistingQ)&&x.suspectedExistingQ.length)throw Error("Possible existing Q must be cleared with a source-specific editorial decision: "+x.postId);
+ if(batchIds.has(x.postId))throw Error("Repeated post id in approved batch: "+x.postId);
+ batchIds.add(x.postId);
  if(x.reviewState!=="verified"||!r.approvedBy||!r.checkedAt||["originalChecked","translationChecked","bibliographyChecked","isnadChecked","linksChecked"].some(k=>r[k]!==true))throw Error("Review missing: "+x.postId);
  if(["postId","filename","speaker","title","bibliography","arabicOriginal","checkedGermanTranslation","attributionGrade"].some(k=>!clean(x[k])))throw Error("Missing source fields: "+x.postId);
  if(!/[\u0600-\u06ff]/.test(x.arabicOriginal))throw Error("Arabic original absent: "+x.postId);
