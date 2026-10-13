@@ -22,7 +22,7 @@
   var VALID = { bottom: true, left: true, right: true };
   // Use real available CSS space, not model names or hardware pixels.
   // The rail needs 68px + 36px gutter and leaves >=536px for content.
-  var SIDE_MIN_WIDTH = 720;
+  var SIDE_MIN_WIDTH = 640;
   var SIDE_MIN_HEIGHT = 340;
   var currentEffective = "bottom";
   var sideApplied = false;
