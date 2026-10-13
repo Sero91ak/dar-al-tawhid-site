@@ -81,6 +81,19 @@
   line-height:1.42!important;max-width:35ch!important;
   margin:0!important;color:#fff8ef!important;font-weight:750!important;
 }
+/* Permanent semi-realistic animated-film world images (no faces/persons).
+   Separate atmospheres, same geometry, no effects on Home or the floating dock. */
+#view-salaf > .salaf-hero::before{
+  background-image:
+    linear-gradient(90deg,rgba(3,20,29,.35),rgba(3,20,29,.02) 85%),
+    url("/kids/assets/salaf/salaf-cinema-hero-boy-v1353.jpg")!important;
+}
+.app[data-gender="girl"] #view-salaf > .salaf-hero::before,
+#view-salaf[data-profile="girl"] > .salaf-hero::before{
+  background-image:
+    linear-gradient(90deg,rgba(46,27,48,.36),rgba(46,27,48,.02) 85%),
+    url("/kids/assets/salaf/salaf-cinema-hero-girl-v1353.jpg")!important;
+}
 /* Edge-near content. Avoid an adult website's centered narrow column. */
 #view-salaf > .salaf-wrap{
   width:100%!important;max-width:none!important;margin:0!important;
