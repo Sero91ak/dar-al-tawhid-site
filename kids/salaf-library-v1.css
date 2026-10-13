@@ -1,0 +1,124 @@
+/* DAR AL TAWHID KIDS — Salaf library V1
+   Scoped reading / offline / listening system. Boy and girl palettes without blue bleed.
+*/
+#view-salaf{--sl-bg:#092736;--sl-panel:#102f3c;--sl-line:rgba(244,217,159,.19);--sl-text:#fff9ed;--sl-quiet:#d4ddd8;--sl-accent:#f4d58f;--sl-accent-ink:#293023;--sl-rose:#f5b9d1;color:var(--sl-text);background:var(--sl-bg)!important;padding-bottom:28px!important;min-height:0!important}
+.app[data-gender="girl"] #view-salaf{--sl-bg:#2b2035;--sl-panel:#392842;--sl-line:rgba(255,211,232,.25);--sl-quiet:#ead8e0;--sl-accent:#f6b9d5;--sl-accent-ink:#442a3a}
+#view-salaf button,.salaf-detail button{font-family:"Fredoka","SF Pro Rounded",system-ui,sans-serif;touch-action:manipulation;cursor:pointer;-webkit-tap-highlight-color:transparent}
+#view-salaf button:focus-visible,.salaf-detail button:focus-visible,.salaf-detail input:focus-visible{outline:3px solid var(--sl-accent,#f4d58f)!important;outline-offset:3px}
+#view-salaf .salaf-hero{position:relative;isolation:isolate;min-height:clamp(330px,61vw,580px);overflow:hidden;display:flex;align-items:flex-end;padding:clamp(40px,8vw,66px) max(21px,calc((100vw - 1000px)/2)) 35px;background:#122b36}
+#view-salaf .salaf-hero::before{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,rgba(5,23,31,.6),rgba(5,23,31,.04)),url("/kids/assets/deen/deen-entry.jpg") center 46%/cover no-repeat;filter:saturate(.92) brightness(.86)}
+#view-salaf .salaf-hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(7,24,32,.04) 4%,rgba(7,24,32,.14) 30%,rgba(7,24,32,.68) 73%,var(--sl-bg) 100%);pointer-events:none}
+.app[data-gender="girl"] #view-salaf .salaf-hero::before{filter:hue-rotate(18deg) saturate(.76) brightness(.83)}
+.app[data-gender="girl"] #view-salaf .salaf-hero::after{background:linear-gradient(180deg,rgba(34,20,37,.08) 4%,rgba(35,22,41,.28) 30%,rgba(40,25,44,.74) 73%,#2b2035 100%)}
+#view-salaf .salaf-hero-copy{z-index:1;width:min(100%,800px);padding-bottom:12px;text-shadow:0 3px 16px rgba(0,0,0,.26)}
+#view-salaf .salaf-eyebrow{display:block;color:var(--sl-accent);font-size:clamp(11px,2.7vw,13px);font-weight:950;letter-spacing:.08em;line-height:1.4}
+#view-salaf h2,#view-salaf h3,#view-salaf h4{color:var(--sl-text)}
+#view-salaf .salaf-hero h2{font-size:clamp(38px,10vw,73px);font-weight:950;letter-spacing:-.046em;line-height:.99;margin:12px 0 13px;max-width:780px;text-wrap:balance}
+#view-salaf .salaf-hero p{font-size:clamp(17px,3.7vw,23px);font-weight:750;line-height:1.45;color:#fff8ee;max-width:650px;margin:0 0 17px}
+#view-salaf .salaf-hero-note{display:inline-flex;align-items:center;padding:10px 14px;border-radius:999px;border:1px solid rgba(255,243,220,.33);background:rgba(3,18,25,.34);font-size:clamp(11px,2.6vw,13px);font-weight:800;color:#fff6e4;backdrop-filter:blur(7px)}
+#view-salaf .salaf-wrap{width:min(100%,1060px);padding:8px clamp(15px,4vw,36px) 35px;margin:auto}
+#view-salaf .salaf-intro{display:flex;justify-content:space-between;align-items:center;gap:16px;margin:18px 0 19px}
+#view-salaf .salaf-intro h3{font-size:clamp(25px,6vw,36px);line-height:1.12;letter-spacing:-.025em;margin:6px 0 8px;font-weight:950}
+#view-salaf .salaf-intro p,#view-salaf .salaf-section-title p{font-size:clamp(15px,3.3vw,17px);color:var(--sl-quiet);line-height:1.5;margin:0}
+#view-salaf .salaf-age{white-space:nowrap;align-self:flex-start;padding:10px 14px;border-radius:999px;border:1px solid var(--sl-line);font-size:13px;font-weight:900;color:var(--sl-accent);background:rgba(255,255,255,.05)}
+#view-salaf .salaf-switch{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;border-radius:22px;margin:0 0 21px;padding:6px;background:rgba(0,0,0,.17);border:1px solid var(--sl-line)}
+#view-salaf .salaf-switch button{min-height:58px;border:1px solid transparent;border-radius:17px;background:transparent;color:var(--sl-quiet);font-weight:950;font-size:clamp(13px,3vw,17px);padding:10px 8px;white-space:normal}
+#view-salaf .salaf-switch button.selected{background:var(--sl-accent);color:var(--sl-accent-ink);box-shadow:0 5px 14px rgba(0,0,0,.16)}
+#view-salaf .salaf-topic-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+#view-salaf .salaf-topic{isolation:isolate;position:relative;overflow:hidden;display:flex;align-items:flex-end;min-height:clamp(168px,27vw,240px);border-radius:24px;border:2px solid var(--sl-line);text-align:left;padding:15px;background:#162f38;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.12)}
+#view-salaf .salaf-topic:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(3,16,24,.94) 0%,rgba(3,16,24,.4) 58%,rgba(3,16,24,.12))}
+#view-salaf .salaf-topic-image{position:absolute;inset:0;z-index:-2;background-size:cover;background-position:center;filter:saturate(.86) brightness(.82);transform:scale(1.012)}
+#view-salaf .salaf-topic.selected{border-color:var(--sl-accent)}
+#view-salaf .salaf-topic-copy{display:grid;gap:4px;width:100%}
+#view-salaf .salaf-topic-copy strong{font-size:clamp(17px,4vw,23px);font-weight:950;line-height:1.1;color:#fffaf0;text-wrap:balance}
+#view-salaf .salaf-topic-copy small{font-size:clamp(12px,2.65vw,14px);color:#fbf1e4;line-height:1.3;font-weight:700}
+#view-salaf .salaf-topic-copy em{font-style:normal;font-size:clamp(11px,2.5vw,13px);color:var(--sl-accent);font-weight:950;margin-top:6px}
+#view-salaf .salaf-results{margin-top:27px}
+#view-salaf .salaf-list-head{display:flex;justify-content:space-between;gap:12px;align-items:center;margin:0 2px 15px}
+#view-salaf .salaf-list-head h3,#view-salaf .salaf-section-title h3{font-size:clamp(23px,5.5vw,30px);line-height:1.2;font-weight:950;margin:0}
+#view-salaf #salafClear{min-height:50px;padding:8px 13px;border-radius:16px;border:1px solid var(--sl-line);background:var(--sl-panel);color:var(--sl-accent);font-size:13px;font-weight:900}
+#view-salaf .salaf-empty{padding:24px 22px 28px;border:1px dashed var(--sl-line);border-radius:24px;background:linear-gradient(155deg,rgba(255,255,255,.055),rgba(255,255,255,.015));text-align:center}
+#view-salaf .salaf-empty-icon{display:block;font-size:38px;color:var(--sl-accent);margin-bottom:10px}
+#view-salaf .salaf-empty strong{display:block;font-size:clamp(18px,4.5vw,23px);line-height:1.3;color:var(--sl-text);font-weight:950}
+#view-salaf .salaf-empty p{font-size:clamp(15px,3.3vw,17px);color:var(--sl-quiet);line-height:1.55;margin:10px auto 0;max-width:590px}
+#view-salaf .salaf-trust{margin-top:28px;border-top:1px solid var(--sl-line);padding:22px 8px 2px}
+#view-salaf .salaf-trust strong{font-size:17px;font-weight:950;color:var(--sl-accent)}
+#view-salaf .salaf-trust p{font-size:clamp(14px,3.2vw,16px);line-height:1.6;color:var(--sl-quiet);margin:7px 0 0}
+#view-salaf .salaf-offline-hero{border-radius:26px;background:var(--sl-panel);padding:22px;border:1px solid var(--sl-line)}
+#view-salaf .salaf-offline-hero strong{font-size:clamp(22px,5vw,30px);font-weight:950;line-height:1.2;color:var(--sl-accent)}
+#view-salaf .salaf-offline-hero p{font-size:clamp(15px,3.3vw,17px);line-height:1.5;color:var(--sl-quiet)}
+#view-salaf #salafOpenParentsOffline{min-height:58px;border:0;background:var(--sl-accent);color:var(--sl-accent-ink);border-radius:18px;padding:12px 15px;font-size:clamp(14px,3vw,17px);font-weight:950;width:100%}
+#view-salaf .salaf-section-title{margin:4px 0 20px}
+#view-salaf .salaf-person{margin-bottom:26px}
+#view-salaf .salaf-person h4{margin:0 0 13px;font-size:21px;font-weight:950}
+#view-salaf .salaf-story-grid{display:grid;gap:12px;grid-template-columns:1fr}
+#view-salaf .salaf-story{display:grid;grid-template-columns:clamp(108px,27vw,150px) minmax(0,1fr) 20px;gap:12px;align-items:center;min-height:160px;width:100%;padding:9px 12px 9px 9px;background:var(--sl-panel);border:1px solid var(--sl-line);border-radius:22px;text-align:left;color:var(--sl-text)}
+#view-salaf .salaf-story-art{height:140px;background-size:cover;background-position:center;border-radius:16px}
+#view-salaf .salaf-story-copy{display:grid;gap:5px;min-width:0}
+#view-salaf .salaf-story-copy small{font-size:12px;font-weight:900;color:var(--sl-accent)}
+#view-salaf .salaf-story-copy strong{font-size:clamp(18px,4vw,23px);line-height:1.2;font-weight:950}
+#view-salaf .salaf-story-copy span{font-size:14px;color:var(--sl-quiet);line-height:1.45}
+#view-salaf .salaf-story-copy em{font-style:normal;color:var(--sl-accent);font-size:13px;font-weight:900}
+#view-salaf .kids-offline-entry > .kids-item-download{min-height:58px!important;font-size:16px!important}
+#view-salaf .kids-offline-entry .kids-download-hint{font-size:13px}
+.salaf-detail{--sl-bg:#092736;--sl-text:#fff9ed;--sl-accent:#f4d58f;--sl-accent-ink:#293023;--sl-line:rgba(244,217,159,.19);--sl-panel:#102f3c;position:fixed;inset:0;z-index:30020;background:var(--sl-bg);color:var(--sl-text)}
+body:has(.app[data-gender="girl"]) .salaf-detail{--sl-bg:#2b2035;--sl-panel:#392842;--sl-accent:#f6b9d5;--sl-accent-ink:#442a3a;--sl-line:rgba(255,211,232,.25)}
+.salaf-detail[hidden]{display:none!important}
+html.salaf-detail-open{overflow:hidden!important}
+.salaf-detail-scroll{height:100%;overflow-y:auto;overscroll-behavior:contain;padding-bottom:calc(28px + env(safe-area-inset-bottom,0px));-webkit-overflow-scrolling:touch}
+.salaf-detail .salaf-back{min-height:56px;position:fixed;top:max(12px,env(safe-area-inset-top,0px));left:max(12px,env(safe-area-inset-left,0px));z-index:3;border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:7px 17px;background:rgba(12,27,36,.76);color:#fff;font-size:19px;font-weight:900;backdrop-filter:blur(12px)}
+.salaf-detail-cover{min-height:clamp(280px,47vh,480px);padding:105px 23px 26px;display:flex;flex-direction:column;justify-content:flex-end;background-color:var(--sl-bg);background-position:center;background-size:cover}
+.salaf-detail-cover .salaf-eyebrow{color:var(--sl-accent);font-size:13px;font-weight:950;letter-spacing:.08em}
+.salaf-detail-cover h2{font-size:clamp(30px,8.5vw,53px);line-height:1.06;font-weight:950;margin:9px 0;color:#fff}
+.salaf-detail-cover p{color:#f5eade;font-size:18px;font-weight:900;margin:0}
+.salaf-detail-body{width:min(100%,850px);padding:18px clamp(15px,4vw,28px);margin:0 auto}
+.salaf-player{padding:20px 15px 16px;border:1px solid var(--sl-line);border-radius:25px;background:var(--sl-panel);text-align:center}
+.salaf-player>strong{font-size:23px;font-weight:950;color:var(--sl-text)}
+.salaf-player-row{display:grid;grid-template-columns:minmax(64px,1fr) minmax(116px,1.6fr) minmax(64px,1fr);gap:9px;align-items:center;margin:16px 0}
+.salaf-player-row button{min-height:72px;border:1px solid var(--sl-line);border-radius:18px;background:rgba(255,255,255,.055);color:var(--sl-text);font-size:clamp(15px,3.3vw,18px);font-weight:950}
+.salaf-player-row button.salaf-play{min-height:82px;background:var(--sl-accent);color:var(--sl-accent-ink);font-size:clamp(19px,4.3vw,25px)}
+.salaf-player-row button:disabled,.salaf-actions button:disabled{opacity:.48;cursor:default}
+.salaf-player input[type=range]{width:100%;min-height:40px;accent-color:var(--sl-accent);touch-action:pan-x}
+.salaf-times{display:flex;justify-content:space-between;font-size:15px;font-weight:900;color:var(--sl-text);font-variant-numeric:tabular-nums}
+.salaf-audio-status{font-size:clamp(14px,3vw,16px);line-height:1.5;color:var(--sl-text);opacity:.8;margin:14px 0 0}
+.salaf-detail .salaf-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:16px 0}
+.salaf-actions > button,.salaf-actions .kids-item-download{display:flex;align-items:center;justify-content:center;min-height:62px!important;font-size:clamp(15px,3.4vw,19px)!important;font-weight:950!important;border-radius:20px!important;padding:12px 8px!important;border:1px solid var(--sl-line)!important;background:var(--sl-panel)!important;color:var(--sl-text)!important;line-height:1.2;white-space:normal;text-align:center}
+.salaf-actions .kids-item-download:not([data-offline-state="ready"]){background:var(--sl-accent)!important;color:var(--sl-accent-ink)!important}
+.salaf-actions .kids-offline-inline{grid-column:1/-1}
+.salaf-detail .salaf-text{font-size:clamp(21px,4.7vw,25px);line-height:1.85;color:var(--sl-text);padding:12px 4px 25px}
+.salaf-detail .salaf-text p{margin:0 0 1.1em}
+.salaf-refs{margin:24px 0;padding:22px 4px;border-top:1px solid var(--sl-line)}
+.salaf-refs h3{font-size:21px;font-weight:950;margin:0 0 12px;color:var(--sl-accent)}
+.salaf-ref{display:grid;gap:4px;margin-bottom:15px;color:var(--sl-text);font-size:15px;line-height:1.5}
+.salaf-ref span{opacity:.8}
+html[data-kids-age] body .bottom-nav .nav-btn[data-target="salaf"] .ico{background-image:url("/kids/assets/kids-icons/library-real-v12.png?v=cut1")!important;background-position:center;background-repeat:no-repeat;background-size:88%}
+html[data-kids-age] body .bottom-nav .nav-btn[data-target="salaf"] .lab{font-size:clamp(10px,2.6vw,12px)!important;letter-spacing:-.02em!important}
+.app[data-gender="girl"] ~ .bottom-nav .nav-btn[data-target="salaf"].active{color:#ffd9e8!important}
+@media(min-width:760px){
+  #view-salaf .salaf-topic-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  #view-salaf .salaf-story-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #view-salaf .salaf-hero{min-height:500px}
+  #view-salaf .salaf-topic{min-height:210px}
+}
+@media(max-width:390px){
+  #view-salaf .salaf-intro{align-items:flex-start;flex-direction:column}
+  #view-salaf .salaf-topic{min-height:176px;padding:12px}
+  #view-salaf .salaf-topic-copy strong{font-size:17px}
+  #view-salaf .salaf-story{grid-template-columns:104px minmax(0,1fr) 13px}
+  .salaf-detail .salaf-back span{font-size:15px}
+}
+@media(prefers-reduced-motion:reduce){
+  #view-salaf .salaf-topic-image{transform:none}
+}
+/* Shared children's story controls, not Qur'an, Dua or parental forms. */
+html body :is(
+ #psModal .ps-prophet-modes > button,#msModal .ms-detail-modes > button,
+ #syModal .ms-detail-modes > button,#dlModal .dl-detail-modes > button,
+ #ghPlayer .gh-player-actions > button,
+ #psModal .kids-item-download,#msModal .kids-item-download,#syModal .kids-item-download,
+ #dlModal .kids-item-download,#ghPlayer .kids-item-download
+){min-height:58px!important;font-size:clamp(15px,3.3vw,19px)!important;font-weight:900!important;line-height:1.23!important;overflow-wrap:anywhere!important}
+html body :is(.kfr-play,.kfr-restart,.kfr-skip,.ps-follow-open,.ms-follow-open,.studio-follow-open){min-height:58px!important;font-size:clamp(15px,3.4vw,19px)!important;font-weight:900!important}
+html body .kfr-read p{font-size:clamp(21px,4.6vw,26px)!important;line-height:1.82!important}
+html body .kfr-help{font-size:14px!important;line-height:1.5!important}
+html body:has(.app[data-gender="girl"]) .kfr-read p{color:#fff1f7}
