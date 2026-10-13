@@ -114,6 +114,8 @@ jobs:
         run: node kids/tools/test-academy-sequential-lock-v27.cjs
       - name: Verify dedicated signed-owner lesson archive and current 58/150 truth (zero credits)
         run: node test/kids/akademie/test-archive-v27.cjs
+      - name: Verify 208-slot research dossier, exact source URLs and archive alignment
+        run: node kids/tools/test-academy-208-research-ledger-v1.cjs
       - name: JavaScript syntax guard
         run: |
           node --check kids/akademie/curriculum-v1.js
