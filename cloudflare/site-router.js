@@ -1131,8 +1131,17 @@ export default {
       const sourceIsLibrary = sourcePath === "/quellen" || sourcePath === "/quellen/" ||
         sourcePath === "/quellen/index.html" || sourcePath === "/quellen/shortlinks.json";
       const sourceIsArchive = sourcePath === "/q" || sourcePath === "/q/" || sourcePath === "/q/index.html";
-      if (sourceIsLibrary || sourceIsArchive || canonicalSourcePath) {
-        const canonicalPath = sourceIsArchive ? "/quellen/" :
+      if (sourceIsArchive) {
+        // A public /q/ index is never a doorway to the owner's register.
+        return new Response("Quellenbeleg nicht gefunden. Bitte den vollständigen Q-Link öffnen.", {
+          status: 404, headers: {
+            "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-store",
+            "X-Robots-Tag": "noindex,nofollow"
+          }
+        });
+      }
+      if (sourceIsLibrary || canonicalSourcePath) {
+        const canonicalPath =
           canonicalSourcePath || (sourcePath === "/quellen/shortlinks.json" ? sourcePath : "/quellen/");
         if (sourcePath !== canonicalPath) {
           const location = canonicalPath + (url.search || "");
@@ -1157,14 +1166,18 @@ export default {
           // ROYAL_Q_MANUSCRIPT_V42: apply one presentation to all existing and
           // future numbered Q pages. Original HTML text, links, isnads and SEO
           // metadata are retained byte-for-byte except new stylesheet/script tags.
+          if (sourceIsLibrary) {
+            headers.set("X-Robots-Tag", "noindex,nofollow,noarchive");
+          }
           if (canonicalSourcePath && request.method === "GET" && asset.ok &&
               /text\/html/i.test(asset.headers.get("Content-Type") || "")) {
             let documentHtml = await asset.text();
             if (!documentHtml.includes("q-royal-manuscript-v42.css") &&
                 /<\/head>/i.test(documentHtml)) {
               documentHtml = documentHtml.replace(/<\/head>/i,
-                '<link rel="stylesheet" href="/assets/q-royal-manuscript-v42.css?v=20261011" data-q-royal="v42">' +
-                '<script src="/assets/q-royal-manuscript-v42.js?v=20261011" defer><\\/script>'.replace('<\\/script>', '</script>') +
+                '<link rel="stylesheet" href="/assets/q-royal-manuscript-v42.css?v=qapp-20261013-1" data-q-royal="v42">' +
+                '<script src="/assets/q-royal-manuscript-v42.js?v=qapp-20261013-1" defer><\\/script>'.replace('<\\/script>', '</script>') +
+                '<script src="/assets/q-source-app-view.js?v=20261013-1" defer></script>' +
                 '</head>');
             }
             headers.set("Content-Type", "text/html; charset=utf-8");
