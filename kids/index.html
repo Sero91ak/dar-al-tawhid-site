@@ -5680,8 +5680,11 @@ function spokenChoices(q){
 }
 function quizPrompt(q){
   if(!q)return"";
-  if(currentKidsQuizAgeBand()==="4-6"&&isYesNoAnswers(q.answers))return q.question+" Ja oder Nein?";
-  return q.question+" "+spokenChoices(q);
+  var old=currentKidsQuizAgeBand()==="4-6"&&isYesNoAnswers(q.answers)?q.question+" Ja oder Nein?":q.question+" "+spokenChoices(q);
+  return window.DARKidsQuizV4?window.DARKidsQuizV4.pick(q,"questionAudioText",old):old;
+}
+function quizV4Text(q,part,old){
+  return window.DARKidsQuizV4?window.DARKidsQuizV4.pick(q,part,old):String(old||"");
 }
 function storyQuestionPrompt(q){
   if(!q)return"";
@@ -6033,9 +6036,9 @@ function renderQuizQuestion(){
     var quizVoice=window.DARKidsOwnerVoice;
     if(quizVoice&&typeof quizVoice.preload==="function"){
       quizVoice.preload(quizPrompt(q));
-      quizVoice.preload(q.success||"");
-      quizVoice.preload(q.retry||"");
-      quizVoice.preload(q.explanation||"");
+      quizVoice.preload(quizV4Text(q,"correctAudioText",q.success));
+      quizVoice.preload(quizV4Text(q,"retryAudioText",q.retry));
+      quizVoice.preload(quizV4Text(q,"explanationAudioText",q.explanation));
       var nextQuizVoice=currentQuiz[currentQuizIndex+1];
       if(nextQuizVoice)quizVoice.preload(quizPrompt(nextQuizVoice));
     }
@@ -6044,7 +6047,7 @@ function renderQuizQuestion(){
   quizQuestionHadError=false;
   renderQuizProgress();
   var band=currentKidsQuizAgeBand();
-  var help=band==="4-6"?"":(band==="9-10"?"Wähle die beste Antwort.":"Hör zu und tippe auf deine Antwort.");
+  var help=band==="4-6"?"Denk in Ruhe nach und wähle eine Antwort.":(band==="9-10"?"Überlege in Ruhe und wähle die beste Antwort.":"Hör gut zu und wähle die Antwort, die du für richtig hältst.");
   var kicker=band==="4-6"?String(q.category||"Quiz"):String(q.category||"Quiz")+" · "+(currentQuizIndex+1)+"/"+currentQuiz.length;
   var listenLabel=band==="4-6"?"Frage hören":"Frage noch einmal hören";
   var art=quizArtworkForBand(q)||{};
@@ -6116,7 +6119,7 @@ function chooseQuizAnswer(index,button){
     button.classList.add("correct");
     quizRewardBurst();
     document.getElementById("quizFeedback").className="quiz-feedback good";
-    document.getElementById("quizFeedback").textContent="✓ "+q.success;
+    document.getElementById("quizFeedback").textContent="✓ "+quizV4Text(q,"correctAudioText",q.success);
     var explanation=document.getElementById("quizExplanation");
     if(explanation&&q.explanation){
       explanation.textContent=String(q.explanation);
@@ -6135,17 +6138,18 @@ function chooseQuizAnswer(index,button){
     document.getElementById("quizNext").classList.add("show");
     var masteryResult=recordQuizAttempt(q.id,!quizQuestionHadError);
     if(masteryResult.entry&&masteryResult.entry.stage==="secure"){
-      document.getElementById("quizFeedback").textContent="✓ "+q.success+" · sicher";
+      document.getElementById("quizFeedback").textContent="✓ "+quizV4Text(q,"correctAudioText",q.success)+" · sicher";
     }else if(!quizQuestionHadError&&!masteryResult.counted){
-      document.getElementById("quizFeedback").textContent="✓ "+q.success+" · Wiederholung später";
+      document.getElementById("quizFeedback").textContent="✓ "+quizV4Text(q,"correctAudioText",q.success)+" · Wiederholung später";
     }
     // Nach einer richtigen Antwort wird die kindgerechte Erklärung vollständig
     // in der Serhat-Masterstimme vorgelesen, aber nur mit echtem freigegebenem Clip.
     // Nicht auf System-TTS ausweichen und keine nächste Quizfrage übertönen.
     var answeredQuestion=q,answeredIndex=currentQuizIndex;
+    var explanationAudio=quizV4Text(q,"explanationAudioText",q.explanation);
     var canExplain=!!(q.explanation&&window.DARKidsOwnerVoice&&
       typeof window.DARKidsOwnerVoice.has==="function"&&
-      window.DARKidsOwnerVoice.has(q.explanation));
+      window.DARKidsOwnerVoice.has(explanationAudio));
     function questionStillOpen(){
       var modal=document.getElementById("quizModal");
       return !!(modal&&modal.classList.contains("open")&&
@@ -6159,12 +6163,12 @@ function chooseQuizAnswer(index,button){
         {age:currentKidsQuizAgeBand(),max:2,stillValid:questionStillOpen}
       ).catch(function(){});
     }
-    quizSpeak(q.success,{
+    quizSpeak(quizV4Text(q,"correctAudioText",q.success),{
       source:"kids-quiz-feedback",
       onended:function(){
         if(!questionStillOpen())return;
         if(canExplain){
-          quizSpeak(answeredQuestion.explanation,{
+          quizSpeak(explanationAudio,{
             source:"kids-quiz-explanation",
             onended:playQuizTermExplanation
           });
@@ -6176,8 +6180,8 @@ function chooseQuizAnswer(index,button){
     recordQuizMistake(q.id);
     button.classList.add("wrong");
     document.getElementById("quizFeedback").className="quiz-feedback bad";
-    document.getElementById("quizFeedback").textContent=q.retry;
-    quizSpeak(q.retry);
+    document.getElementById("quizFeedback").textContent=quizV4Text(q,"retryAudioText",q.retry);
+    quizSpeak(quizV4Text(q,"retryAudioText",q.retry));
     setTimeout(function(){
       button.classList.remove("wrong");
       document.getElementById("quizFeedback").textContent="";
@@ -7943,6 +7947,7 @@ html[data-view="stories"] #view-stories > :last-child{
 <script src="/kids/dua-hub-v1219.js?v=1318" data-kids-dua-hub="1259"></script>
 <script src="/kids/story-hub.js?v=28"></script>
 <script src="/kids/kids-age-typography.js?v=3"></script>
+<script src="/kids/quiz-v4-bridge.js?v=20261013-v4bridge1"></script>
 <script src="/kids/quiz-library.js?v=9"></script>
 <link rel="stylesheet" href="/kids/section-heroes-v1095.css?v=1256-parent-hero-full" data-kids-section-heroes-late="1">
 <link rel="stylesheet" href="/kids/stories-home-v1133.css?v=1148" data-kids-stories-home-late="1">
