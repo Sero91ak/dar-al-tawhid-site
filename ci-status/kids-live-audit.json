@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-13T15:15:25Z",
+  "timestamp": "2026-10-13T15:16:20Z",
   "trigger": "push",
   "finishedDeployConclusion": null,
   "finishedDeployRun": null,
@@ -45,12 +45,30 @@
   "lastDeployRuns": [
     {
       "conclusion": null,
+      "created_at": "2026-10-13T15:16:19Z",
+      "head_sha": "35b16535b8d65e179adb18aa38f223ff2c974e5d",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38420613205",
+      "id": 38420613205,
+      "status": "queued",
+      "updated_at": "2026-10-13T15:16:19Z"
+    },
+    {
+      "conclusion": null,
+      "created_at": "2026-10-13T15:16:04Z",
+      "head_sha": "7842f5da27e3066474e7d2f455c8ee81e4b20024",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38420575014",
+      "id": 38420575014,
+      "status": "pending",
+      "updated_at": "2026-10-13T15:16:05Z"
+    },
+    {
+      "conclusion": null,
       "created_at": "2026-10-13T15:15:16Z",
       "head_sha": "d69395661dddaf769d65c3bc37db9363cc89a3cc",
       "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38420456024",
       "id": 38420456024,
       "status": "in_progress",
-      "updated_at": "2026-10-13T15:15:19Z"
+      "updated_at": "2026-10-13T15:15:59Z"
     },
     {
       "conclusion": "success",
@@ -78,24 +96,6 @@
       "id": 38418839812,
       "status": "completed",
       "updated_at": "2026-10-13T15:04:52Z"
-    },
-    {
-      "conclusion": "cancelled",
-      "created_at": "2026-10-13T15:04:03Z",
-      "head_sha": "1fa91d4b3e441494c115eeba9bc6bf287bc4ea98",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38418825274",
-      "id": 38418825274,
-      "status": "completed",
-      "updated_at": "2026-10-13T15:04:11Z"
-    },
-    {
-      "conclusion": "failure",
-      "created_at": "2026-10-13T15:03:37Z",
-      "head_sha": "8cccb7a9d327a5923e0d288589a097f9ce7a8947",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38418764276",
-      "id": 38418764276,
-      "status": "completed",
-      "updated_at": "2026-10-13T15:05:46Z"
     }
   ]
 }
