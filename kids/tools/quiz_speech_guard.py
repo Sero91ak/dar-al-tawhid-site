@@ -6,6 +6,7 @@ import argparse
 import json
 import re
 from pathlib import Path
+from quiz_joy_v4_script import prepare as prepare_quiz_v4
 
 ROOT = Path(__file__).resolve().parents[2]
 CATALOG = ROOT / "kids/data/quiz-kids.json"
@@ -35,14 +36,17 @@ def quiz_prompt(question: dict) -> str:
 
 
 def required_texts(question: dict) -> list[str]:
-    return [
-        text for text in (
-            quiz_prompt(question),
-            norm(question.get("success")),
-            norm(question.get("retry")),
-            norm(question.get("explanation")),
-        ) if text
-    ]
+    voice=prepare_quiz_v4(question)
+    return [voice[field] for field in ("questionAudioText","correctAudioText","retryAudioText","explanationAudioText")]
+
+
+def is_valid_v4(entry: object) -> bool:
+    if not isinstance(entry,dict) or not entry.get("url"):
+        return False
+    if str(entry.get("modelId") or "") not in ("eleven_v4","eleven_v4+eleven_v4"):
+        return False
+    return str(entry.get("voiceProfileId") or "")=="serhat-owner-voice-2026"
+
 
 
 def test_composition() -> None:
@@ -89,7 +93,7 @@ def audit(manifest_path: Path | None) -> None:
         for field in ("success", "retry", "explanation"):
             if not re.search(r"[.!?؟]$", norm(question.get(field))):
                 errors.append(f"#{number}: {field} must be a complete spoken sentence")
-        prompt = quiz_prompt(question)
+        prompt = prepare_quiz_v4(question)["questionAudioText"]
         if re.search(r"(?:\.\.|[?!؟]\.)", prompt):
             errors.append(f"#{number}: double or conflicting punctuation in spoken prompt")
         if prompt in prompts:
@@ -103,9 +107,9 @@ def audit(manifest_path: Path | None) -> None:
         entries = manifest.get("entries") or {}
         for question in questions:
             texts = required_texts(question)
-            if entries.get(texts[0]):
+            if is_valid_v4(entries.get(texts[0])):
                 ready_prompts += 1
-            if all(entries.get(text) for text in texts):
+            if all(is_valid_v4(entries.get(text)) for text in texts):
                 full_questions += 1
             else:
                 missing.append(question.get("number"))
