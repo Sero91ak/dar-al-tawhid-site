@@ -1260,6 +1260,36 @@ jobs:
           print("Synthesis revision:",SYNTHESIS_REVISION)
           PY
 
+      # If manifest QA or a later Git push fails, keep the already-paid V4 audio.
+      # Only NEW/UNTRACKED clips are uploaded, never all legacy Flash downloads.
+      - name: Preserve paid Quiz V4 audio before manifest validation
+        if: env.VOICE_BUILD_SCOPE == 'quiz' && env.DAR_VOICE_PROVIDER_AVAILABLE == '1'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import pathlib,subprocess,shutil
+          root=pathlib.Path(".")
+          out=pathlib.Path("/tmp/kids-quiz-v4-recovery")
+          out.mkdir(exist_ok=True)
+          tracked=set(subprocess.check_output(["git","ls-files","kids/assets/kids-quiz-audio"],text=True).splitlines())
+          copied=0
+          for path in (root/"kids/assets/kids-quiz-audio").glob("*.m4a"):
+              if str(path) in tracked:continue
+              shutil.copy2(path,out/path.name)
+              copied+=1
+          shutil.copy2(root/"kids/data/quiz-audio.json",out/"quiz-audio.json")
+          print(f"Paid V4 recovery prepared before validation: {copied} new clips + quiz manifest.")
+          PY
+      - name: Upload recoverable V4 audio (no rerender required if QA fails)
+        if: env.VOICE_BUILD_SCOPE == 'quiz' && env.DAR_VOICE_PROVIDER_AVAILABLE == '1'
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-quiz-v4-paid-recovery-${{ github.run_id }}
+          path: /tmp/kids-quiz-v4-recovery/
+          retention-days: 14
+          if-no-files-found: error
+
       - name: Audit source sentences against generated quiz voice manifest
         if: env.VOICE_BUILD_SCOPE == 'quiz' && env.DAR_VOICE_PROVIDER_AVAILABLE == '1'
         run: python3 kids/tools/quiz_speech_guard.py --manifest kids/data/quiz-audio.json
