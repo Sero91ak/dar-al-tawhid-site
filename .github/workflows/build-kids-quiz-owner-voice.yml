@@ -16,17 +16,15 @@ on:
         type: number
         default: 1
       quiz_count:
-        description: "Quizfragen je Durchlauf (maximal 12)"
+        description: "Quizfragen je Durchlauf (maximal 2; V4-Hörkontrolle)"
         required: true
         type: number
-        default: 12
+        default: 2
       auto_queue:
-        description: "Fehlende Quiz-Audios automatisch fortlaufend in Paketen erzeugen"
+        description: "Sicherheitsregel: automatische V4-Serienerzeugung ist gesperrt"
         type: boolean
         required: false
         default: false
-  schedule:
-    - cron: '17 * * * *'
   push:
     branches: [main]
     paths:
@@ -53,10 +51,10 @@ jobs:
       ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
       ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
       ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
-      VOICE_BUILD_SCOPE: ${{ github.event_name == 'workflow_dispatch' && inputs.scope || (github.event_name == 'schedule' || contains(github.event.head_commit.message, '[quiz-auto]') || contains(github.event.head_commit.message, '[quiz-batch]')) && 'quiz' || contains(github.event.head_commit.message, '[voice-pause]') && 'pause' || contains(github.event.head_commit.message, '[dua-only]') && 'dua' || contains(github.event.head_commit.message, '[quiz-only]') && 'quiz' || 'pause' }}
+      VOICE_BUILD_SCOPE: ${{ github.event_name == 'workflow_dispatch' && inputs.scope || 'pause' }}
       QUIZ_BATCH_START: ${{ github.event_name == 'workflow_dispatch' && inputs.quiz_start || '' }}
       QUIZ_BATCH_COUNT: ${{ github.event_name == 'workflow_dispatch' && inputs.quiz_count || '' }}
-      VOICE_AUTO_QUEUE: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.auto_queue) || (github.event_name == 'push' && contains(github.event.head_commit.message, '[quiz-auto]')) }}
+      VOICE_AUTO_QUEUE: 'false' # paid serial rendering disabled
 
     steps:
       - name: Checkout main
@@ -75,9 +73,9 @@ jobs:
           # First parent works for both normal pushes and GitHub merge commits.
           mapfile -t changed < <(git diff --name-only "$GITHUB_SHA^1" "$GITHUB_SHA" | sed '/^$/d')
           if printf '%s\n' "${changed[@]}" | grep -Fxq 'kids/data/quiz-kids.json'; then
-            echo "VOICE_BUILD_SCOPE=quiz" >> "$GITHUB_ENV"
-            echo "VOICE_AUTO_QUEUE=true" >> "$GITHUB_ENV"
-            echo "Quiz content changed: generate only missing/updated approved question audio."
+            echo "VOICE_BUILD_SCOPE=pause" >> "$GITHUB_ENV"
+            echo "VOICE_AUTO_QUEUE=false" >> "$GITHUB_ENV"
+            echo "Quiz source updated; no paid V4 audio generation without a manual, capped dispatch."
           elif [ "${#changed[@]}" -eq 1 ] && [ "${changed[0]}" = "kids/data/dua-kids.json" ]; then
             echo "VOICE_BUILD_SCOPE=dua" >> "$GITHUB_ENV"
             echo "Exclusive Duʿāʾ source update: rendering its approved changes."
@@ -194,8 +192,8 @@ jobs:
           ELEVEN_VOICE=(os.environ.get("ELEVENLABS_VOICE_ID","").strip() or str((PROD_CFG.get("masterVoice") or {}).get("voiceId") or "").strip())
           ELEVEN_MODEL=str(PROD_CFG.get("modelId") or "").strip()
           # Speech models are selected by LANGUAGE, not by the reusable master voice.
-          # Keep V4 for genuine Arabic/Fusha; Flash for NEW German quiz renders.
-          ELEVEN_QUIZ_DE_MODEL="eleven_flash_v2_5"
+          # KIDS QUIZ PERMANENT RULE: all newly generated German AND native Arabic audio uses V4.
+          ELEVEN_QUIZ_DE_MODEL="eleven_v4"
           ELEVEN_QUIZ_AR_MODEL=ELEVEN_MODEL
           ELEVEN_QUIZ_HYBRID_MODEL=ELEVEN_QUIZ_DE_MODEL+"+"+ELEVEN_QUIZ_AR_MODEL
           ARABIC_SCRIPT_RE=re.compile(r"[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]+(?:\s+[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]+)*")
@@ -397,7 +395,7 @@ jobs:
                   segments=speech_parts(text)
                   if len(segments)<2 or not any(lang=="ar" for lang,_ in segments):
                       raise RuntimeError("Bilingual clip needs German/Arabic fragments")
-                  digest=hashlib.sha1(("hybrid-v1|"+ELEVEN_VOICE+"|"+str(profile)+"|"+prepared).encode("utf-8")).hexdigest()[:16]
+                  digest=hashlib.sha1(("hybrid-v4-v2|"+str(model_id)+"|"+ELEVEN_VOICE+"|"+str(profile)+"|"+prepared).encode("utf-8")).hexdigest()[:16]
                   target=asset_dir/(digest+".m4a")
                   if target.exists() and target.stat().st_size>1200:
                       return text,target,duration(target),prepared
@@ -425,7 +423,7 @@ jobs:
               revision=profile_revision(profile)
               dictionary_fingerprint=(
                   "native-ar-no-dict" if profile in ARABIC_PROFILES else
-                  "flash-inline-master-rules-kids-v1" if model_id==ELEVEN_QUIZ_DE_MODEL else
+                  "flash-inline-master-rules-kids-v1" if model_id=="eleven_flash_v2_5" else
                   (DICT_ID+"|"+DICT_VERSION)
               )
               digest=hashlib.sha1(
@@ -524,7 +522,7 @@ jobs:
                               "use_speaker_boost":True
                           }
                       is_arabic_profile=profile in ARABIC_PROFILES
-                      is_flash=model_id==ELEVEN_QUIZ_DE_MODEL
+                      is_flash=model_id=="eleven_flash_v2_5"
                       # Eleven v4 documents only Stability + Similarity sliders.
                       # Never send a speculative Speed/Style/Speaker-boost setting
                       # and never label an unsupported slider as "native slow".
@@ -671,18 +669,19 @@ jobs:
                   # Reuse a verified old V4 German clip if it exactly matches the
                   # current text/profile/preparation. Never burn credits converting
                   # already-finished V4 takes into cheaper-model files.
-                  if preserve_existing and text_model==ELEVEN_QUIZ_DE_MODEL and \
-                          str(entry.get("modelId") or "")==ELEVEN_QUIZ_AR_MODEL and \
-                          str(entry.get("voiceProfileId") or "")=="serhat-owner-voice-2026" and \
-                          str(entry.get("preparedTextSha256") or "")==prepared_hash:
-                      expected_cache_model=None
-                  p=local_from_entry(
-                      entry,
-                      asset_dir,
-                      expected_cache_model,
-                      text_profile,
-                      expected_revision
+                  # Reuse only exact prepared-text/voice/profile V4 takes.
+                  can_reuse_verified_v4=(
+                      preserve_existing and str(text_model)=="eleven_v4"
+                      and str(entry.get("modelId") or "")=="eleven_v4"
+                      and str(entry.get("voiceProfileId") or "")=="serhat-owner-voice-2026"
+                      and str(entry.get("preparedTextSha256") or "")==prepared_hash
+                      and str(entry.get("speechProfile") or "")==str(text_profile)
                   )
+                  p=local_from_entry(
+                      entry,asset_dir,expected_cache_model,text_profile,expected_revision
+                  )
+                  if p is None and can_reuse_verified_v4:
+                      p=local_from_entry(entry,asset_dir,"eleven_v4",text_profile)
                   # Legacy published Arabic files must not be re-rendered merely
                   # because the synthesis recipe changed. Only individually
                   # approved model switches or genuinely missing clips may run.
@@ -743,7 +742,7 @@ jobs:
                       # Preserve the real original model metadata and exact URL.
                       entries[text]=dict(old_entries[text])
                       continue
-                  uses_dictionary=(not is_arabic and text_model not in (ELEVEN_QUIZ_DE_MODEL,ELEVEN_QUIZ_HYBRID_MODEL))
+                  uses_dictionary=(not is_arabic and text_model not in ("eleven_flash_v2_5",ELEVEN_QUIZ_HYBRID_MODEL))
                   entries[text]={
                       "url":rel+"?v="+build_id,
                       "sha256":hashlib.sha256(p.read_bytes()).hexdigest(),
@@ -755,8 +754,8 @@ jobs:
                       "initialContextShaddaStripped":(True if is_arabic else None),
                       "modelId":text_model,
                       "speechProfile":text_profile,
-                      "languageComposition":("de+ar" if text_model==ELEVEN_QUIZ_HYBRID_MODEL else "ar" if text_model==ELEVEN_QUIZ_AR_MODEL else "de"),
-                      "pronunciationQaStatus":("needs-native-fusha-listening-review" if text_model in (ELEVEN_QUIZ_HYBRID_MODEL,ELEVEN_QUIZ_AR_MODEL) else "technical-qa-complete"),
+                      "languageComposition":("de+ar" if text_model==ELEVEN_QUIZ_HYBRID_MODEL else "ar" if is_arabic else "de"),
+                      "pronunciationQaStatus":("needs-native-fusha-listening-review" if is_arabic or text_model==ELEVEN_QUIZ_HYBRID_MODEL else "technical-qa-complete"),
                       # No automatically generated Arabic track may assert a completed hearing review.
                       "audioListeningApproved":(False if is_arabic else None),
                       "qaApproval":("pending-native-listening" if is_arabic else "technical-qa-complete"),
@@ -843,15 +842,17 @@ jobs:
               if str(batch_config.get("voiceProfileId") or "")!="serhat-owner-voice-2026":
                   raise SystemExit("Die Quiz-Batch-Datei hat keine autorisierte Serhat-Masterstimme.")
               if str(batch_config.get("germanModelId") or "")!=ELEVEN_QUIZ_DE_MODEL:
-                  raise SystemExit("Quiz: German voice policy must use cost-saving Flash v2.5.")
+                  raise SystemExit("Quiz: German voice policy must use ElevenLabs V4.")
               if str(batch_config.get("arabicModelId") or "")!=ELEVEN_QUIZ_AR_MODEL:
                   raise SystemExit("Quiz: native Arabic/Fuṣḥā must use ElevenLabs V4.")
               quiz_start=int(os.environ.get("QUIZ_BATCH_START") or batch_config.get("batchStart") or 1)
-              quiz_count=int(os.environ.get("QUIZ_BATCH_COUNT") or batch_config.get("batchCount") or 7)
-              if not (1<=quiz_start<=900 and 1<=quiz_count<=12):
-                  raise SystemExit("Quiz-Batch muss mit 1–900 beginnen und 1–12 Fragen enthalten.")
+              quiz_count=int(os.environ.get("QUIZ_BATCH_COUNT") or batch_config.get("batchCount") or 2)
+              if not (1<=quiz_start<=900 and 1<=quiz_count<=2):
+                  raise SystemExit("Quiz-V4-Budget: nur 1–2 Fragen je manuellem Durchlauf erlaubt.")
               end_num=min(900,quiz_start+quiz_count-1)
-              auto_queue=os.environ.get("VOICE_AUTO_QUEUE","").strip().lower()=="true"
+              if os.environ.get("VOICE_AUTO_QUEUE","").strip().lower()=="true":
+                  raise SystemExit("Automatische V4-Quiz-Credits sind nicht erlaubt.")
+              auto_queue=False
               previous_entries=(load_manifest(QUIZ_MANIFEST).get("entries") or {})
               def missing_any_voice(q):
                   for speech in quiz_required_texts(q):
@@ -883,17 +884,17 @@ jobs:
                   prompt=quiz_prompt(q)
                   quiz_texts.append(prompt)
                   quiz_models[prompt]=quiz_model_for_text(prompt)
-                  quiz_profiles[prompt]="quiz_fusha" if quiz_models[prompt]==ELEVEN_QUIZ_AR_MODEL else age_profile.get(str(q.get("ageBand") or ""),"quiz_9_10")
+                  quiz_profiles[prompt]="quiz_fusha" if ARABIC_SCRIPT_RE.fullmatch(prompt) else age_profile.get(str(q.get("ageBand") or ""),"quiz_9_10")
                   for feedback in (norm(q.get("success")),norm(q.get("retry"))):
                       if feedback:
                           quiz_texts.append(feedback)
                           quiz_models[feedback]=quiz_model_for_text(feedback)
-                          quiz_profiles[feedback]="quiz_fusha" if quiz_models[feedback]==ELEVEN_QUIZ_AR_MODEL else "quiz_feedback"
+                          quiz_profiles[feedback]="quiz_fusha" if ARABIC_SCRIPT_RE.fullmatch(feedback) else "quiz_feedback"
                   explanation=norm(q.get("explanation"))
                   if explanation:
                       quiz_texts.append(explanation)
                       quiz_models[explanation]=quiz_model_for_text(explanation)
-                      quiz_profiles[explanation]="quiz_fusha" if quiz_models[explanation]==ELEVEN_QUIZ_AR_MODEL else "quiz_feedback"
+                      quiz_profiles[explanation]="quiz_fusha" if ARABIC_SCRIPT_RE.fullmatch(explanation) else "quiz_feedback"
               final_feedback="Sehr gut. Du hast das Quiz geschafft."
               quiz_texts.append(final_feedback)
               quiz_profiles[final_feedback]="quiz_feedback"
@@ -925,12 +926,12 @@ jobs:
               if any(p not in quiz_manifest["entries"] for p in batch_prompts):
                   raise SystemExit("Quiz-Batch unvollständig: mindestens ein freigegebener Frageclip fehlt.")
               quiz_manifest["languageModelPolicy"]={
-                  "de":"eleven_flash_v2_5",
+                  "de":"eleven_v4",
                   "ar":"eleven_v4",
                   "voiceProfileId":"serhat-owner-voice-2026",
                   "preserveExistingV4":True,
-                  "germanPhonemeDictionaryCompatible":False,
-                  "germanInlinePronunciationMaster":True,
+                  "germanPhonemeDictionaryCompatible":True,
+                  "germanInlinePronunciationMaster":False,
                   "arabicSegmentQaRequired":True
               }
               quiz_manifest["counts"]["readyQuestionPrompts"]=sum(p in quiz_manifest["entries"] for p in prompts)
@@ -1290,7 +1291,7 @@ jobs:
           fi
 
       - name: Continue auto-queue until all 900 voice prompts are complete
-        if: env.VOICE_AUTO_QUEUE == 'true' && env.VOICE_BUILD_SCOPE == 'quiz' && env.DAR_VOICE_PROVIDER_AVAILABLE == '1'
+        if: false # prohibit automatic V4 re-dispatch and unbounded credits
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
