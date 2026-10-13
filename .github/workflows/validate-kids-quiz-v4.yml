@@ -8,6 +8,7 @@ on:
       - 'kids/tools/quiz_v4_audio_compose.py'
       - 'kids/tools/quiz_v4_compose_test.py'
       - 'kids/tools/quiz_v4_cost_audit.py'
+      - 'kids/tools/quiz_v4_workflow_guard.py'
       - 'kids/tools/quiz_speech_guard.py'
       - 'kids/data/quiz-kids.json'
       - '.github/workflows/build-kids-quiz-owner-voice.yml'
@@ -21,6 +22,7 @@ on:
       - 'kids/tools/quiz_v4_audio_compose.py'
       - 'kids/tools/quiz_v4_compose_test.py'
       - 'kids/tools/quiz_v4_cost_audit.py'
+      - 'kids/tools/quiz_v4_workflow_guard.py'
       - 'kids/tools/quiz_speech_guard.py'
       - '.github/workflows/build-kids-quiz-owner-voice.yml'
 permissions:
@@ -54,6 +56,7 @@ jobs:
         run: |
           python3 kids/tools/quiz_v4_contract_guard.py
           python3 kids/tools/quiz_v4_cost_audit.py
+          python3 kids/tools/quiz_v4_workflow_guard.py
           python3 kids/tools/quiz_v4_compose_test.py
           python3 kids/tools/quiz_speech_guard.py --self-test
           python3 - <<'PY'
