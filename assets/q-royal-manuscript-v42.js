@@ -58,7 +58,7 @@
   for (const anchor of page.querySelectorAll('a[href]')) {
     try {
       const target = new URL(anchor.getAttribute("href"), location.href);
-      if (target.origin === location.origin && /^\\/quellen(?:\\/|$)/.test(target.pathname)) {
+      if (target.origin === location.origin && (target.pathname === "/quellen" || target.pathname.startsWith("/quellen/"))) {
         anchor.remove();
       }
     } catch (_) {}
