@@ -126,7 +126,7 @@ function story(card,{category,item,sourceUrl,artwork,hero,audioMeta,readerUrl},i
  const audio=allowed(String(audioMeta?.url||""));
  const urls=[sourceUrl,readerUrl||"/kids/story-hub.js?v=27",
   "/kids/data/story-hub.json?v=7",
-  "/kids/story-follow-reader.js?v=17",
+  "/kids/story-follow-reader.js?v=18",
   "/kids/story-follow-reader.css?v=11","/kids/story-hub.css?v=12",
   "/kids/story-policy.js?v=2",
   artwork,hero,audio];
@@ -138,7 +138,7 @@ function deen(card,{item,audioMeta,cover,hero},inline=false){
  const audio=allowed(String(audioMeta?.url||""));
  const urls=["/kids/data/deen-lessons.json?v=3","/kids/deen-lessons.js?v=6",
   "/kids/deen-lessons.css?v=2","/kids/deen-learning-v1199.css?v=1199",
-  "/kids/story-follow-reader.css?v=11","/kids/story-follow-reader.js?v=17",
+  "/kids/story-follow-reader.css?v=11","/kids/story-follow-reader.js?v=18",
   "/kids/story-policy.js?v=2",cover,hero,audio];
  oneButton(card,{key:"deen:"+String(item.id)+":"+currentAge(),
  title:item.title||item.name||"Unterricht",kind:"deen",audio:!!audio,urls},inline);
