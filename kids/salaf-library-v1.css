@@ -93,7 +93,10 @@ html.salaf-detail-open{overflow:hidden!important}
 .salaf-ref span{opacity:.8}
 html[data-kids-age] body .bottom-nav .nav-btn[data-target="salaf"] .ico{background-image:url("/kids/assets/kids-icons/library-real-v12.png?v=cut1")!important;background-position:center;background-repeat:no-repeat;background-size:88%}
 html[data-kids-age] body .bottom-nav .nav-btn[data-target="salaf"] .lab{font-size:clamp(10px,2.6vw,12px)!important;letter-spacing:-.02em!important}
-.app[data-gender="girl"] ~ .bottom-nav .nav-btn[data-target="salaf"].active{color:#ffd9e8!important}
+
+/* Edge-to-edge hero inside the existing padded KIDS scroll shell. */
+#view-salaf > .salaf-hero{width:100vw;max-width:none;margin-left:calc(50% - 50vw)}
+html[data-kids-age] body .app[data-gender="girl"] .bottom-nav .nav-btn[data-target="salaf"].active{color:#ffe3f0!important;border-color:rgba(255,205,229,.42)!important;background:linear-gradient(145deg,rgba(222,146,182,.22),rgba(149,92,133,.13))!important}
 @media(min-width:760px){
   #view-salaf .salaf-topic-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
   #view-salaf .salaf-story-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
