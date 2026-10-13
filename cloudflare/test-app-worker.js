@@ -439,6 +439,21 @@ async function finalizeDarTestHomeV1193(asset) {
   html = html.replace(/(?:\/test\/assets\/)?fold-thumb-nav\.(css|js)(?:\?v=[^"']*)?/g,
     function (_, kind) { return "/test/assets/duos-rail-v1361." + kind + "?v=1361"; });
 
+  // DUOS_INLINE_TEST_V1361: no new asset route and no visitor bundle.
+  // Remove all old test navigation references from this HTML and replace
+  // them with a single self-contained Duos version after all other authorities.
+  html = html.replace(/<script[^>]*src=["'][^"']*duos-rail-v1361\.js[^"']*["'][^>]*><\/script>\s*/gi, "");
+  html = html.replace(/<link[^>]*href=["'][^"']*duos-rail-v1361\.css[^"']*["'][^>]*>\s*/gi, "");
+  html = html.replace(/@import\s+url\(["']?\/test\/assets\/duos-rail-v1361\.css\?v=1361["']?\)\s*;?/gi, "");
+  if (!html.includes('id="darDuosInlineV1361"')) {
+    const jsSafe = DUOS_RAIL_JS.replace(/<\/script/gi, "<\\/script");
+    const inline = '<style id="darDuosInlineStyleV1361">' + DUOS_RAIL_CSS + '</style>' +
+      '<script id="darDuosInlineV1361">' + jsSafe + '<\/script>';
+    if (html.includes("</body>")) html = html.replace("</body>", inline + "</body>");
+    else if (html.includes("</html>")) html = html.replace("</html>", inline + "</html>");
+    else html += inline;
+  }
+
   const headers = new Headers(asset.headers);
   headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
   headers.set("Pragma", "no-cache");
