@@ -60,10 +60,22 @@ const additions=
           "url": "https://www.islamweb.net/ar/library/content/49/1753",
           "excerpt": false,
           "arabic": "إِنَّمَا الْمُؤْمِنُونَ إِخْوَةٌ فَأَصْلِحُوا بَيْنَ أَخَوَيْكُمْ وَاتَّقُوا اللَّهَ لَعَلَّكُمْ تُرْحَمُونَ",
-          "note": "Die Glaubenden sind Geschwister. Frieden stiften und die Hoffnung auf Barmherzigkeit stehen im Vers. Für Kinder heißt Frieden stiften: eine erwachsene Person holen, die das Gemeine beendet. Nicht: allein mit dem Mobbing fertig werden."
+          "note": "49:10 spricht im Zusammenhang von Konflikten unter Glaubenden über Glaubensgeschwister und Friedenstiften. Die Empfehlung, bei Mobbing erwachsene Hilfe zu holen, ist eine zusätzlich gekennzeichnete pädagogische Schutzregel und keine wörtliche Übersetzung dieses Verses."
         }
       ],
-      "note": "49:11 verbietet Spott, Herabsetzung und verletzende Namen und sagt, dass die Verspotteten besser sein können. Daraus lernen die Kinder: Gehänseltwerden macht sie nicht weniger wert. Der Satz, es sei nicht ihre Schuld, und der Weg zu einer vertrauten erwachsenen Person sind die Schutzregel der Stunde, kein eigener Verssatz. 16:90 trägt Gerechtigkeit und das Verbot des Übergriffs. 49:10 trägt Geschwisterlichkeit, Friedenstiften und Barmherzigkeit. Wir spielen die Gemeinheit nicht nach und verlangen keine Versöhnung, bevor Hilfe da ist. Keine Hadithnummer. Keine synthetische Rezitation. Keine Freigabe."
+      "note": "49:11 verbietet Spott, Herabsetzung und verletzende Namen und sagt, dass die Verspotteten besser sein können. Daraus lernen die Kinder: Gehänseltwerden macht sie nicht weniger wert. Der Satz, es sei nicht ihre Schuld, und der Weg zu einer vertrauten erwachsenen Person sind die Schutzregel der Stunde, kein eigener Verssatz. 16:90 trägt Gerechtigkeit und das Verbot des Übergriffs. 49:10 trägt Geschwisterlichkeit, Friedenstiften und Barmherzigkeit. Wir spielen die Gemeinheit nicht nach und verlangen keine Versöhnung, bevor Hilfe da ist. Keine Hadithnummer. Keine synthetische Rezitation. Keine Freigabe.",
+      "independentSourceReview": {
+        "status": "partial-text-and-meaning-cross-check-not-scientific-approval",
+        "checkedOn": "2026-10-13",
+        "method": "Search-indexed Islamweb Ibn Kathir results and Dorar tafsir. Direct Islamweb page open was inaccessible through this environment. Do not claim full source re-read.",
+        "references": [
+          "https://www.islamweb.net/ar/library/content/49/1754",
+          "https://www.islamweb.net/ar/library/content/49/974",
+          "https://dorar.net/tafseer/49/3",
+          "https://dorar.net/tafseer/49/4"
+        ],
+        "remaining": "Independently check the full source pages and pedagogical interpretation before scientific approval."
+      }
     },
     "hint": "Wiederholtes Hänseln ist kein Spaß. Du bist nicht schuld. Sag es einer erwachsenen Person, der du vertraust.",
     "sample": "Wenn jemand immer wieder gemein ist, bist du nicht schuld. Sag es einer erwachsenen Person, der du vertraust.",
@@ -126,7 +138,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann die drei gelesenen Verse von der Schutzregel unterscheiden und erklären, warum ein Kind sich bei Mobbing nicht selbst die Schuld gibt.",
-        "intro": "Diese Stunde hat drei gelesene Qurʾān-Stellen und eine klar bezeichnete Schutzregel. Qurʾān 49:11 verbietet Spott, gegenseitiges Herabsetzen und verletzende Spitznamen. Der Satz, die Verspotteten seien vielleicht besser, steht im Vers. Daraus folgt für den Unterricht: Das Kind, das gehänselt wird, ist nicht der Fehler. Der zusätzliche Satz „Du bist nicht schuld“ ist unsere Schutzregel zu diesem Vers, nicht ein zweiter arabischer Wortlaut. Qurʾān 16:90 befiehlt Gerechtigkeit und gutes Verhalten und verbietet das Schändliche, das Verwerfliche und den Übergriff. Qurʾān 49:10 nennt die Glaubenden Geschwister, fordert zum Friedenstiften auf und stellt Barmherzigkeit in Aussicht. Frieden stiften bedeutet hier nicht, dass das betroffene Kind dem Mobbing zustimmt oder sich vorher versöhnt. Es bedeutet, dass eine erwachsene Person das Unrecht beendet. Siehst du, dass ein anderes Kind betroffen ist, holst du dieselbe Person. Das ist Schutz, keine Mutprobe.",
+        "intro": "Diese Stunde hat drei gelesene Qurʾān-Stellen und eine klar bezeichnete Schutzregel. Qurʾān 49:11 verbietet Spott, gegenseitiges Herabsetzen und verletzende Spitznamen. Der Satz, die Verspotteten seien vielleicht besser, steht im Vers. Daraus folgt für den Unterricht: Das Kind, das gehänselt wird, ist nicht der Fehler. Der zusätzliche Satz „Du bist nicht schuld“ ist unsere Schutzregel zu diesem Vers, nicht ein zweiter arabischer Wortlaut. Qurʾān 16:90 befiehlt Gerechtigkeit und gutes Verhalten und verbietet das Schändliche, das Verwerfliche und den Übergriff. Qurʾān 49:10 nennt die Glaubenden Geschwister, fordert zum Friedenstiften auf und stellt Barmherzigkeit in Aussicht. Frieden stiften heißt nicht, dass ein betroffenes Kind dem Mobbing zustimmen oder sich vor einer Hilfe versöhnen muss. Unsere zusätzliche Schutzregel lautet: Eine vertraute erwachsene Person soll die Gemeinheit beenden. Siehst du, dass ein anderes Kind betroffen ist, holst du dieselbe Person. Das ist Schutz, keine Mutprobe.",
         "lines": [
           "49:11 verbietet Spott und verletzende Namen und sagt, die Verspotteten seien vielleicht besser.",
           "16:90 befiehlt Gerechtigkeit und verbietet den Übergriff.",
@@ -235,7 +247,7 @@ const additions=
           "prompt": "Warum bedeutet Friedenstiften in 49:10 hier nicht, dass das Kind das Mobbing aushält?",
           "sample": "Weil das Kind nicht allein Richter ist. Eine erwachsene Person beendet das Unrecht. Barmherzigkeit zeigt sich darin, dass die Gemeinheit aufhört.",
           "hint": "Hilfe geht vor einer erzwungenen Versöhnung.",
-          "explain": "49:10 fordert zum Friedenstiften auf und nennt die Barmherzigkeit. In dieser Stunde trägt die erwachsene Hilfe das Friedenstiften."
+          "explain": "Qurʾān 49:10 spricht vom Friedenstiften. Dass bei Mobbing eine vertraute erwachsene Person schützt, ist die zusätzliche Kinderschutzregel unserer Stunde."
         }
       ]
     },
@@ -24269,6 +24281,7 @@ const additions=
     "audioScript": "Zakāh und Ḥaǧǧ als Säulen. Zakāh und die Pilgerfahrt sind große Pflichten der Erwachsenen. Der Vers 2:43 sagt: Verrichtet das Gebet, gebt die Zakāh und verbeugt euch mit den sich Verbeugenden. Wir zeigen zwei Karten: Geben und Reise zum Haus. Wir sammeln kein echtes Geld und laufen keine Runden. Wir sagen die beiden Worte und erklären, dass die genaue Rechnung und die einzelnen Wege nicht in diesen zwei Auszügen stehen.",
     "voiceApproved": false
   }
+}
 };
 for(const [id,l] of Object.entries(additions)){
  if(prior[id]||!l.quran||!l.hadith||!l.sourceAudit?.hadithUrl?.startsWith("https://www.islamweb.net/")||l.voiceApproved!==false)throw Error("V38 invalid "+id);
