@@ -127,6 +127,13 @@
     if(q(".kids-salah-overlay:not([hidden])"))out.push("kidsSalahLocationOverlay");
     if(q("#duaSmartLearn.open"))out.push("duaSmartLearn");
     if(q("#studioContentModal.open"))out.push("studioContentModal");
+    /* Preserve the same back/restore behavior for Salaf categories and their
+       full-screen story reader as for Prophets, Ṣaḥābah and Ṣaḥābiyyāt. */
+    if(q("#view-salaf.view.active[data-topic-open='true']")){
+      out.push("salafTopic:"+String(document.getElementById("salafTopicLabel")?.textContent||""));
+    }
+    if(q("#salafDetail:not([hidden])"))out.push("salafDetail");
+
     return out;
   }
 
@@ -143,6 +150,7 @@
       "#ghWorldScroll","#ghPlayerScroll",
       "#knowledgeModal .modal-shell","#duaModal .modal-shell","#duaHubDetailScroll","#quizModal .modal-shell",
       "#quranModal .modal-shell","#fullQuranModal .modal-shell","#storyModal .modal-shell",
+      "#salafDetail .salaf-detail-scroll",
       ".kids-follow-reader.open .kfr-read"
     ];
     var seen=[],out=[];
@@ -267,7 +275,7 @@
     return !!target.closest(
       "[data-close],#duaHubBack,#psClose,#psLibraryBack,#msClose,#msBack,#syClose,#syBack,#dlClose,#dlBack,"+
       "#ghBack,#ghPlayerBack,#ghPlayerMin,.kfr-close,"+
-      "#kidsSalahDayBack,#kidsSalahClose,#studioContentClose,#duaSmartLearn [data-dsl='close']"
+      "#kidsSalahDayBack,#kidsSalahClose,#studioContentClose,#salafClear,.salaf-back,#duaSmartLearn [data-dsl='close']"
     );
   }
 
