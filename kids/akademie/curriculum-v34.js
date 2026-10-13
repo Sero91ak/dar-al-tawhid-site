@@ -175,7 +175,7 @@ const additions={
       "text": "Ibn ʿAbbās überlieferte die Geschichte, dass Ibrāhīm die Kaʿbah baute und Ismāʿīl ihm die Steine reichte, während beide Allah baten, das Werk anzunehmen. (Sinngemäßer Auszug aus einer längeren Überlieferung)"
     },
     "sourceAudit": {
-      "hadithUrl": "https://dorar.net/hadith/sharh/138076",
+      "hadithUrl": "https://dorar.net/hadith/sharh/1884",
       "hadithNumber": "3364",
       "narrator": "ʿAbdullāh ibn ʿAbbās",
       "authenticity": "Ṣaḥīḥ",
