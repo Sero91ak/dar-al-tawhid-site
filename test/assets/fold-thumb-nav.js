@@ -20,10 +20,13 @@
   var root = document.documentElement;
   var STORAGE_KEY = "darNavPositionV2";
   var VALID = { bottom: true, left: true, right: true };
-  var SIDE_MIN_WIDTH = 760;
-  var SIDE_MIN_HEIGHT = 360;
+  // Use real available CSS space, not model names or hardware pixels.
+  // The rail needs 68px + 36px gutter and leaves >=536px for content.
+  var SIDE_MIN_WIDTH = 640;
+  var SIDE_MIN_HEIGHT = 312;
   var currentEffective = "bottom";
   var sideApplied = false;
+  var lastRailSignature = "";
   var rafId = 0;
   var idleTimer = 0;
   var scrollFadeTimer = 0;
@@ -135,36 +138,45 @@
     root.classList.remove("dar-test-thumb-nav");
   }
 
-  function applySidePosition(nav, side) {
+  // Duos LayoutModel.kt: 68dp dock, 56–84dp supported, normalized 56%
+  // vertical anchor; Dar uses its five genuine tabs (not launcher shortcuts).
+  // A separate 36px lane/gutter prevents content from running under the dock.
+  function applySidePosition(nav, side, metrics) {
+    var screenHeight = Math.max(0, Math.round(Number(metrics && metrics.height) || global.innerHeight || 0));
+    var dockHeight = Math.min(268, Math.max(240, screenHeight - 24));
+    var dockTop = Math.max(12, Math.min(screenHeight - dockHeight - 12,
+      Math.round(screenHeight * 0.56 - dockHeight / 2)));
+    var signature = side + "|" + screenHeight + "|" + dockHeight + "|" + dockTop;
+    if (sideApplied && nav.classList.contains("is-adaptive-rail") &&
+        signature === lastRailSignature) return;
+    lastRailSignature = signature;
+    root.style.setProperty("--dar-duos-rail-top", dockTop + "px");
+    root.style.setProperty("--dar-duos-rail-height", dockHeight + "px");
     nav.classList.remove("is-adaptive-centered");
     nav.classList.add("is-adaptive-rail");
     nav.style.setProperty("position", "fixed", "important");
-    nav.style.setProperty("left", side === "left" ? "max(2px, calc(env(safe-area-inset-left, 0px) - 38px))" : "auto", "important");
-    nav.style.setProperty("right", side === "right" ? "max(2px, calc(env(safe-area-inset-right, 0px) - 38px))" : "auto", "important");
-    nav.style.setProperty("top", "50%", "important");
+    nav.style.setProperty("left", side === "left" ? "max(12px, env(safe-area-inset-left, 0px))" : "auto", "important");
+    nav.style.setProperty("right", side === "right" ? "max(12px, env(safe-area-inset-right, 0px))" : "auto", "important");
+    nav.style.setProperty("top", dockTop + "px", "important");
     nav.style.setProperty("bottom", "auto", "important");
-    nav.style.setProperty("width", "56px", "important");
-    nav.style.setProperty("min-width", "56px", "important");
-    nav.style.setProperty("max-width", "56px", "important");
-    nav.style.setProperty(
-      "height",
-      "min(340px, calc(100dvh - max(10px, env(safe-area-inset-top, 0px)) - max(10px, env(safe-area-inset-bottom, 0px))))",
-      "important"
-    );
-    nav.style.setProperty("min-height", "260px", "important");
-    nav.style.setProperty("max-height", "340px", "important");
+    nav.style.setProperty("width", "68px", "important");
+    nav.style.setProperty("min-width", "68px", "important");
+    nav.style.setProperty("max-width", "68px", "important");
+    nav.style.setProperty("height", dockHeight + "px", "important");
+    nav.style.setProperty("min-height", "0", "important");
+    nav.style.setProperty("max-height", dockHeight + "px", "important");
     nav.style.setProperty("margin", "0", "important");
-    nav.style.setProperty("padding", "4px", "important");
+    nav.style.setProperty("padding", "8px", "important");
     nav.style.setProperty("flex-direction", "column", "important");
-    nav.style.setProperty("justify-content", "space-between", "important");
+    nav.style.setProperty("justify-content", "space-evenly", "important");
     nav.style.setProperty("align-items", "center", "important");
     nav.style.setProperty("gap", "0px", "important");
-    nav.style.setProperty("border-radius", "22px", "important");
-    nav.style.setProperty("transform", "translate3d(0,-50%,0)", "important");
-    nav.style.setProperty("-webkit-transform", "translate3d(0,-50%,0)", "important");
+    nav.style.setProperty("border-radius", "30px", "important");
+    nav.style.setProperty("transform", "none", "important");
+    nav.style.setProperty("-webkit-transform", "none", "important");
     nav.style.setProperty("z-index", "96", "important");
     nav.style.setProperty("pointer-events", "auto", "important");
-    nav.style.setProperty("transition", "opacity .22s cubic-bezier(.22,1,.36,1), background-color .22s ease, border-color .22s ease", "important");
+    nav.style.setProperty("transition", "opacity .18s ease, background-color .18s ease", "important");
     sideApplied = true;
   }
 
@@ -175,6 +187,7 @@
     });
     nav.classList.remove("is-adaptive-rail");
     sideApplied = false;
+    lastRailSignature = "";
 
     if (!restoringBottom && global.DarAdaptiveLayout && typeof global.DarAdaptiveLayout.syncNav === "function") {
       restoringBottom = true;
@@ -312,7 +325,7 @@
 
     currentEffective = effective;
     if (effective === "left" || effective === "right") {
-      applySidePosition(nav, effective);
+      applySidePosition(nav, effective, metrics);
     } else {
       clearSidePosition(nav);
       root.classList.remove("dar-nav-reader-idle","dar-nav-scrolling");
@@ -375,12 +388,10 @@
     global.addEventListener("touchstart", wakeNav, { passive: true });
     global.addEventListener("keydown", wakeNav);
 
-    if (document.body && typeof MutationObserver === "function") {
-      observer = new MutationObserver(function () {
-        schedule();
-      });
-      observer.observe(document.body, { childList: true, subtree: true });
-    }
+    // A body-wide MutationObserver caused redundant repaints on every render.
+    // Route + layout + viewport events above are sufficient; add one bounded
+    // orientation/start recovery burst in case the app mounts the tab bar late.
+    scheduleBurst();
   }
 
   document.addEventListener("click", function (event) {
