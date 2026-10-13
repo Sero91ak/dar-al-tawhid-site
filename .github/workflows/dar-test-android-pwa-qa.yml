@@ -14,7 +14,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: dar-test-android-pwa-qa
+  group: dar-test-android-pwa-qa-${{ github.event_name }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
