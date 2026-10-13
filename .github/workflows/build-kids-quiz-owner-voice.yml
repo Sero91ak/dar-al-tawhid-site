@@ -51,7 +51,7 @@ jobs:
       ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
       ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
       ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
-      VOICE_BUILD_SCOPE: ${{ github.event_name == 'workflow_dispatch' && inputs.scope || (github.event_name == 'push' && contains(github.event.head_commit.message, '[quiz-v4-pilot-20261013]')) && 'quiz' || 'pause' }}
+      VOICE_BUILD_SCOPE: ${{ github.event_name == 'workflow_dispatch' && inputs.scope || 'pause' }}
       QUIZ_BATCH_START: ${{ github.event_name == 'workflow_dispatch' && inputs.quiz_start || '' }}
       QUIZ_BATCH_COUNT: ${{ github.event_name == 'workflow_dispatch' && inputs.quiz_count || '' }}
       VOICE_AUTO_QUEUE: 'false' # paid serial rendering disabled
@@ -172,7 +172,8 @@ jobs:
           ROOT=pathlib.Path(".")
           sys.path.insert(0,str(ROOT/"kids/tools"))
           from voice_text import SYNTHESIS_REVISION, prepare_kids_voice_text
-          from quiz_joy_v4_script import prepare as prepare_quiz_v4
+          from quiz_joy_v4_script import prepare as prepare_quiz_v4, segment_plan as quiz_segment_plan
+          from quiz_v4_audio_compose import compose_clips
 
           QUIZ=ROOT/"kids/data/quiz-kids.json"
           DUA=ROOT/"kids/data/dua-kids.json"
@@ -433,7 +434,9 @@ jobs:
               # was cost-saving Flash if the direct ElevenLabs API is unavailable.
               if (model_id==ELEVEN_QUIZ_DE_MODEL or profile=="quiz_fusha") and not ELEVEN_KEY:
                   raise RuntimeError("Exact Flash/Fusha model requires direct ElevenLabs credentials; refuse unknown Worker model")
-              for attempt in range(1,4):
+              # V4 timeouts may still have been charged. Never blindly retry them.
+              max_attempts=1 if model_id.startswith('eleven_v4') else 3
+              for attempt in range(1,max_attempts+1):
                   if ELEVEN_KEY:
                       if profile=="quiz_4_6":
                           voice_settings={
@@ -635,11 +638,11 @@ jobs:
                   except Exception as exc:
                       last=exc
                       target.unlink(missing_ok=True)
-                      if attempt<3:
+                      if attempt<max_attempts:
                           time.sleep(2*attempt)
               raise RuntimeError(f"Generation failed for {text[:80]!r}: {last}")
 
-          def build_pack(*,texts,manifest_path,asset_dir,profile,pack_id,counts,model_id=None,require_model_match=False,profiles_by_text=None,models_by_text=None,preserve_existing=False,allow_reviewed_legacy=False):
+          def build_pack(*,texts,manifest_path,asset_dir,profile,pack_id,counts,model_id=None,require_model_match=False,profiles_by_text=None,models_by_text=None,preserve_existing=False,allow_reviewed_legacy=False,composed_parts_by_text=None):
               model_id=model_id or ELEVEN_MODEL
               unique=[]
               seen=set()
@@ -706,18 +709,32 @@ jobs:
                       raise SystemExit(f"Zu viele kostenträchtige {profile}-Neurenderings ({len(missing)} > {limit}); kleinere geprüfte Pakete benutzen.")
               print(f"{pack_id}: {len(unique)} Texte · {len(results)} aktuell · {len(missing)} neu")
               serial={"done":0,"total":len(missing)}
+              def synth_with_reuse(text):
+                  text_profile=(profiles_by_text or {}).get(text,profile)
+                  text_model=(models_by_text or {}).get(text,model_id)
+                  parts=(composed_parts_by_text or {}).get(text)
+                  if not parts or len(parts)<2:
+                      return synth(text,text_profile,asset_dir,serial,text_model)
+                  prepared=prepare_profile_text(text,text_profile)
+                  with speech_synth_lock:
+                      def get_fragment(part):
+                          _,audio,_,_=synth(part,text_profile,asset_dir,
+                              {"done":0,"total":len(parts)},quiz_model_for_text(part))
+                          return audio
+                      target,length=compose_clips(
+                          full_text=text,segments=parts,
+                          voice_id=ELEVEN_VOICE,model_id=text_model,
+                          profile=text_profile,
+                          recipe_revision=profile_revision(text_profile)+"|"+SYNTHESIS_REVISION+"|"+DICT_ID+"|"+DICT_VERSION,
+                          output_dir=asset_dir,
+                          synth_part=get_fragment,read_duration=duration
+                      )
+                  with lock:
+                      serial["done"]+=1
+                      print(f"[{serial['done']}/{serial['total']}] reused V4 phrases · {text[:70]} · {length:.2f}s",flush=True)
+                  return text,target,length,prepared
               with concurrent.futures.ThreadPoolExecutor(max_workers=3) as ex:
-                  futures={
-                      ex.submit(
-                          synth,
-                          text,
-                          (profiles_by_text or {}).get(text,profile),
-                          asset_dir,
-                          serial,
-                          (models_by_text or {}).get(text,model_id)
-                      ):text
-                      for text in missing
-                  }
+                  futures={ex.submit(synth_with_reuse,text):text for text in missing}
                   for fut in concurrent.futures.as_completed(futures):
                       text,p,d,prepared=fut.result()
                       results[text]=(p,d)
@@ -871,6 +888,7 @@ jobs:
               quiz_texts=[]
               quiz_profiles={}
               quiz_models={}
+              quiz_composed_parts={}
               age_profile={
                   "4-6":"quiz_4_6",
                   "7-8":"quiz_7_8",
@@ -881,6 +899,8 @@ jobs:
                   for key in ("questionAudioText","correctAudioText","retryAudioText","explanationAudioText"):
                       speech=voice[key]
                       quiz_texts.append(speech)
+                      if key in ('questionAudioText','explanationAudioText'):
+                          quiz_composed_parts[speech]=quiz_segment_plan(q)[key]
                       quiz_models[speech]=quiz_model_for_text(speech)
                       quiz_profiles[speech]=(
                           "quiz_fusha" if ARABIC_SCRIPT_RE.fullmatch(speech) else
@@ -913,7 +933,8 @@ jobs:
                   require_model_match=True,
                   profiles_by_text=quiz_profiles,
                   models_by_text=quiz_models,
-                  preserve_existing=True
+                  preserve_existing=True,
+                  composed_parts_by_text=quiz_composed_parts
               )
               if any(p not in quiz_manifest["entries"] for p in batch_prompts):
                   raise SystemExit("Quiz-Batch unvollständig: mindestens ein freigegebener Frageclip fehlt.")
@@ -923,6 +944,9 @@ jobs:
                   "voiceProfileId":"serhat-owner-voice-2026",
                   "preserveExistingV4":True,
                   "speechScriptRevision":"quiz-joy-serhat-v4-20261013",
+                  "v4OfflinePhraseReuse":True,
+                  "v4PhraseJoinRevision":"quiz-v4-phrase-audio-v1",
+                  "requiredAuditoryQualityReview":True,
                   "voiceModelEnforced":True,
                   "germanPhonemeDictionaryCompatible":True,
                   "germanInlinePronunciationMaster":False,
