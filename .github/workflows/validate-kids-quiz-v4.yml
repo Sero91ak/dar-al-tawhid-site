@@ -5,6 +5,9 @@ on:
       - 'kids/quiz-v4-bridge.js'
       - 'kids/tools/quiz_joy_v4_script.py'
       - 'kids/tools/quiz_v4_contract_guard.py'
+      - 'kids/tools/import_quiz_v4_pilot_002.py'
+      - 'kids/tools/test_import_quiz_v4_pilot_002.py'
+      - 'kids/data/quiz-v4-pilot-002.json'
       - 'kids/tools/quiz_speech_guard.py'
       - 'kids/data/quiz-kids.json'
       - '.github/workflows/build-kids-quiz-owner-voice.yml'
@@ -15,6 +18,9 @@ on:
       - 'kids/quiz-v4-bridge.js'
       - 'kids/tools/quiz_joy_v4_script.py'
       - 'kids/tools/quiz_v4_contract_guard.py'
+      - 'kids/tools/import_quiz_v4_pilot_002.py'
+      - 'kids/tools/test_import_quiz_v4_pilot_002.py'
+      - 'kids/data/quiz-v4-pilot-002.json'
       - 'kids/tools/quiz_speech_guard.py'
       - '.github/workflows/build-kids-quiz-owner-voice.yml'
 permissions:
@@ -58,6 +64,23 @@ jobs:
           PY
           python3 kids/tools/quiz_joy_v4_script.py --pilot --output /tmp/kids-quiz-v4-pilot.json
           node --check kids/quiz-v4-bridge.js
+      - name: Verify paid V4 pilot MP3 import without ElevenLabs
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! command -v ffmpeg >/dev/null 2>&1; then
+            python3 -m pip install -q --disable-pip-version-check imageio-ffmpeg==0.6.0
+            mkdir -p "$HOME/.local/bin"
+            python3 - <<'PY'
+          import imageio_ffmpeg
+          from pathlib import Path
+          target=Path.home()/".local/bin/ffmpeg"
+          target.symlink_to(imageio_ffmpeg.get_ffmpeg_exe())
+          PY
+            echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+            export PATH="$HOME/.local/bin:$PATH"
+          fi
+          python3 kids/tools/test_import_quiz_v4_pilot_002.py
       - name: Require credit-safe V4 policy
         run: |
           python3 - <<'PY'
