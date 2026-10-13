@@ -92,7 +92,7 @@ function create(options){
   const currentEl=root.querySelector(".kfr-current");
   const totalEl=root.querySelector(".kfr-total");
   let paragraphs=[],weights=[],totalWeight=0,timingCues=[],syncPoints=[],lastIndex=-1,manualUntil=0;
-  let currentContent={},restoredToken="",lastPersistAt=0,mediaSessionActive=false,readerView="follow",backgroundLocks=[];
+  let currentContent={},restoredToken="",lastPersistAt=0,mediaSessionActive=false,readerView="follow",backgroundLocks=[],pendingHeroOpen=null;
   const READING_WAKE_REASON="shared-story-reader";
   function setReadingWake(enabled){
     try{
@@ -399,6 +399,45 @@ function create(options){
     postNativeNowPlaying(nativePayload(false),true);
     updatePositionState();
   }
+  /* When listening starts from deep inside a story, return its own nested
+     detail scroller to the artwork BEFORE the overlay locks the background.
+     Smooth on iOS/Android, bounded fallback if scrollend is unavailable. */
+  function cancelPendingHeroOpen(){
+    if(pendingHeroOpen){pendingHeroOpen.cancel();pendingHeroOpen=null}
+  }
+  function focusListeningArtwork(ready){
+    const scroller=document.querySelector(
+      "#psModal.open #psScroll, #syModal.open #syScroll, "+
+      "#msModal.open #msScroll, #ghPlayer.open #ghPlayerScroll"
+    );
+    if(!scroller||scroller.scrollTop<=2){
+      if(scroller)scroller.scrollTop=0;
+      ready();
+      return;
+    }
+    const reduced=!!window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+    let finished=false,timer=0;
+    function finish(){
+      if(finished)return;
+      finished=true;
+      clearTimeout(timer);
+      scroller.removeEventListener("scrollend",finish);
+      pendingHeroOpen=null;
+      // iOS nested scrollers can stop animating once a dialog sets inert.
+      // Confirm the artwork is at the top before the overlay is shown.
+      try{scroller.scrollTo({top:0,behavior:"instant"})}catch(_){scroller.scrollTop=0}
+      ready();
+    }
+    pendingHeroOpen={cancel(){
+      finished=true;
+      clearTimeout(timer);
+      scroller.removeEventListener("scrollend",finish);
+    }};
+    if(reduced){finish();return}
+    scroller.addEventListener("scrollend",finish,{once:true});
+    timer=setTimeout(finish,520);
+    try{scroller.scrollTo({top:0,behavior:"smooth"})}catch(_){finish()}
+  }
   function lockBackground(){
     unlockBackground();
     backgroundLocks=[];
@@ -436,23 +475,30 @@ function create(options){
     }
   }
   function openWithContent(value,mode="follow"){
+    cancelPendingHeroOpen();
     const c=value&&typeof value==="object"?value:content();
     if(c.text!=null)setContent(c);
     applyReaderView(mode);
     prepareHelpHint();
-    lockBackground();
-    root.classList.add("open");
-    root.removeAttribute("aria-hidden");
-    document.documentElement.classList.add("kids-follow-reader-open");
-    setReadingWake(!root.classList.contains("audio-only"));
-    manualUntil=0;
-    if(readerView==="read"){try{readEl.scrollTop=0}catch(_){}}
-    else{
-      restore();
-      sync(true);
-      requestAnimationFrame(()=>sync(true));
-    }
-    setTimeout(()=>(readerView==="read"?closeEl:playEl)?.focus(),0);
+    const showSheet=()=>{
+      lockBackground();
+      root.classList.add("open");
+      root.removeAttribute("aria-hidden");
+      document.documentElement.classList.add("kids-follow-reader-open");
+      setReadingWake(!root.classList.contains("audio-only"));
+      manualUntil=0;
+      if(readerView==="read"){try{readEl.scrollTop=0}catch(_){}}
+      else{
+        restore();
+        sync(true);
+        requestAnimationFrame(()=>sync(true));
+      }
+      setTimeout(()=>(readerView==="read"?closeEl:playEl)?.focus({preventScroll:true}),0);
+    };
+    // Never freeze the previous, scrolled-away story text under the player.
+    if(root.classList.contains("audio-only")&&!root.classList.contains("open")){
+      focusListeningArtwork(showSheet);
+    }else showSheet();
   }
   function open(){openWithContent(content(),"follow")}
   function openReadAlong(){
@@ -468,6 +514,7 @@ function create(options){
     openWithContent(c,"read");
   }
   function close(){
+    cancelPendingHeroOpen();
     persist(true);
     try{if(!audio.paused)audio.pause()}catch(_){}
     root.classList.remove("open");
@@ -526,5 +573,5 @@ function create(options){
     getSavedProgress:readProgress
   };
 }
-window.DARKidsFollowReader={version:16,create,formatTime,progressPrefix:PROGRESS_PREFIX,nowPlayingKey:NOW_PLAYING_KEY};
+window.DARKidsFollowReader={version:17,create,formatTime,progressPrefix:PROGRESS_PREFIX,nowPlayingKey:NOW_PLAYING_KEY};
 })();
