@@ -146,7 +146,7 @@ def main() -> None:
         for p in parts:
             history_id = found[p["index"]]["history_item_id"]
             audio = api_get(key, "/history/" + urllib.parse.quote(history_id, safe="") + "/audio")
-            if len(audio) < 2000 or not (audio.startswith(b"ID3") or audio[:1] == b"\\xff"):
+            if len(audio) < 2000 or not (audio.startswith(b"ID3") or audio[0] == 255):
                 raise RuntimeError("Missing or invalid paid history MP3: " + p["key"])
             outfile = originals / p["expectedLocalFile"]
             outfile.write_bytes(audio)
