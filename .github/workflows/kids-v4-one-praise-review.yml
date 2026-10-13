@@ -1,10 +1,7 @@
 name: KIDS One V4 Islamic Praise Pilot - Review Only
+# This is an archived one-shot review workflow.
+# Never trigger paid TTS from a git push or branch update.
 on:
-  push:
-    branches:
-      - review/kids-quiz-islamic-praise-v4-20261013
-    paths:
-      - .github/workflows/kids-v4-one-praise-review.yml
   workflow_dispatch:
 permissions:
   contents: write
