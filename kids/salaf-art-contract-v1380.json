@@ -1,0 +1,49 @@
+{
+  "policyVersion": "KIDS_SALAF_NO_PEOPLE_V1380",
+  "appliesTo": "Schätze der Salaf; category artwork and detail heroes",
+  "requiredSubject": "ONLY static scenes and objects; no humans, human faces, body silhouettes, hands, animals, birds, portraits, statues, or written text.",
+  "masterDirection": "Unified cinematic semi-realistic 3D historical Arabian still-life, softly illuminated warm amber and petrol, object-led storytelling, no framing or text.",
+  "releaseRule": "Only visually reviewed approved assets listed here may be shown on the 8 category cards. Further art changes require separate visual review and SHA update. This file alone cannot automatically detect faces.",
+  "allowlistedAssets": {
+    "rahma": {
+      "path": "kids/assets/salaf/topics-v1380/rahma.jpg",
+      "gitBlobSha": "7c4b99240d4d74563e85e7e1504cc030f07fbf2e",
+      "visualReview": "reviewed-no-people-no-faces-no-letters"
+    },
+    "sidq": {
+      "path": "kids/assets/salaf/topics-v1380/sidq.jpg",
+      "gitBlobSha": "dc8a7640d235af8bb09dd93f1b3c8c2d808d17de",
+      "visualReview": "reviewed-no-people-no-faces-no-letters"
+    },
+    "sabr": {
+      "path": "kids/assets/salaf/topics-v1380/sabr.jpg",
+      "gitBlobSha": "21fd6a9b3b4a61f01eeb9e0ab407f3ec88bc80b0",
+      "visualReview": "reviewed-no-people-no-faces-no-letters"
+    },
+    "ilm": {
+      "path": "kids/assets/salaf/topics-v1380/ilm.jpg",
+      "gitBlobSha": "98e75e6805ee179d5212c3c952b8b2b953a611a2",
+      "visualReview": "reviewed-no-people-no-faces-no-letters"
+    },
+    "adab": {
+      "path": "kids/assets/salaf/topics-v1380/adab.jpg",
+      "gitBlobSha": "1b76aa77e2e1219db1e56fb2d4e53238092d1231",
+      "visualReview": "reviewed-no-people-no-faces-no-letters"
+    },
+    "family": {
+      "path": "kids/assets/salaf/topics-v1380/family.jpg",
+      "gitBlobSha": "a419af45e7e9de5871550d49bf729c634400a376",
+      "visualReview": "reviewed-no-people-no-faces-no-letters"
+    },
+    "hikma": {
+      "path": "kids/assets/salaf/topics-v1380/hikma.jpg",
+      "gitBlobSha": "28af8c219f164ab198aafba3b5d3b9424902f4b3",
+      "visualReview": "reviewed-no-people-no-faces-no-letters"
+    },
+    "shukr": {
+      "path": "kids/assets/salaf/topics-v1380/shukr.jpg",
+      "gitBlobSha": "53e07b8b4f1a44824490da902ff9edc0b6f926fa",
+      "visualReview": "reviewed-no-people-no-faces-no-letters"
+    }
+  }
+}

@@ -412,3 +412,152 @@
 #view-salaf .salaf-topic:after{background:linear-gradient(180deg,transparent 0%,rgba(6,18,24,.03) 38%,rgba(4,21,29,.87) 100%)!important;}
 #view-salaf .salaf-topic-copy strong{font-size:clamp(18px,4.35vw,25px)!important}
 #view-salaf .salaf-topic-copy small{font-size:clamp(13px,3.1vw,16px)!important}
+
+/* SALAF_DESIGN_GUARD_V1380
+   Binding design: no human/animal faces in illustrations; separate upper
+   global detail navigation; unboxed edge-to-edge scenes, not oversized;
+   existing floating 3D bottom dock untouched. Applies ONLY to Salaf. */
+#view-salaf{
+  padding-bottom:calc(140px + env(safe-area-inset-bottom,0px))!important;
+  scroll-padding-bottom:135px!important;
+}
+/* The shell has a horizontal gutter; correct the wrapper itself rather than
+   pretending a 100vw picture within an offset container is full bleed. */
+#view-salaf > .salaf-wrap{
+  box-sizing:border-box!important;
+  width:100vw!important;max-width:none!important;
+  margin-inline:calc(50% - 50vw)!important;
+  padding:8px clamp(12px,3vw,28px) 26px!important;
+}
+#view-salaf[data-topic-open="true"] > .salaf-wrap{
+  box-sizing:border-box!important;
+  width:100vw!important;max-width:none!important;
+  margin-inline:calc(50% - 50vw)!important;
+  padding:0 0 28px!important;
+}
+#view-salaf[data-topic-open="true"] .salaf-pane{
+  box-sizing:border-box!important;width:100%!important;
+  margin:0!important;padding:0!important;
+  overflow:visible!important;
+}
+#view-salaf[data-topic-open="true"] .salaf-topic-nav.kids-detail-appbar{
+  box-sizing:border-box!important;
+  position:relative!important;left:auto!important;top:auto!important;
+  width:100vw!important;max-width:none!important;
+  margin-inline:0!important;
+  padding:11px max(15px,env(safe-area-inset-left,0px)) 11px max(15px,env(safe-area-inset-right,0px))!important;
+  min-height:72px!important;height:auto!important;
+  border:0!important;border-bottom:1px solid var(--salaf-stroke)!important;
+  border-radius:0!important;
+  background:linear-gradient(110deg,#103141,#092636)!important;
+  box-shadow:none!important;
+  display:flex!important;align-items:center!important;
+  z-index:20!important;
+}
+.app[data-gender="girl"] #view-salaf .salaf-topic-nav.kids-detail-appbar,
+#view-salaf[data-profile="girl"] .salaf-topic-nav.kids-detail-appbar{
+  background:linear-gradient(110deg,#483147,#2b2035)!important;
+}
+#view-salaf .salaf-topic-nav .kids-detail-appbar-title{
+  color:var(--salaf-ink)!important;
+  font-size:clamp(18px,4.6vw,25px)!important;
+}
+#view-salaf .salaf-topic-nav .kids-detail-appbar-subtitle{
+  color:var(--salaf-muted)!important;
+  font-size:clamp(12px,2.85vw,15px)!important;
+}
+#view-salaf[data-topic-open="true"] .salaf-topic-stage{
+  box-sizing:border-box!important;
+  width:100vw!important;max-width:none!important;
+  margin:0!important;
+  min-height:clamp(330px,52svh,570px)!important;
+  height:auto!important;
+  padding:clamp(18px,3.6vw,34px) clamp(17px,5vw,60px) clamp(28px,6vw,55px)!important;
+  display:flex!important;flex-direction:column!important;
+  justify-content:flex-end!important;align-items:stretch!important;
+  isolation:isolate!important;
+  border:0!important;border-radius:0!important;box-shadow:none!important;
+}
+#view-salaf .salaf-topic-stage:before{
+  background-position:center 46%!important;background-size:cover!important;
+}
+#view-salaf .salaf-topic-stage:after{
+  background:linear-gradient(180deg,
+    rgba(7,22,29,.06) 0%,
+    rgba(7,22,29,.03) 32%,
+    rgba(8,30,38,.22) 54%,
+    rgba(9,39,56,.70) 81%,
+    var(--salaf-color) 100%)!important;
+}
+.app[data-gender="girl"] #view-salaf .salaf-topic-stage:after,
+#view-salaf[data-profile="girl"] .salaf-topic-stage:after{
+  background:linear-gradient(180deg,
+    rgba(33,18,38,.05) 0%,
+    rgba(33,18,38,.02) 30%,
+    rgba(36,24,43,.26) 56%,
+    rgba(43,32,53,.75) 83%,
+    var(--salaf-color) 100%)!important;
+}
+#view-salaf .salaf-topic-stage-copy{
+  width:100%!important;max-width:min(100%,850px)!important;
+  margin:0!important;
+}
+#view-salaf .salaf-topic-stage-copy h3{
+  font-size:clamp(33px,7.2vw,60px)!important;
+  line-height:1.08!important;
+  text-wrap:balance!important;
+  max-width:100%!important;
+}
+#view-salaf .salaf-topic-thought{
+  box-sizing:border-box!important;
+  padding:clamp(15px,3.8vw,32px) clamp(17px,5vw,60px) 11px!important;
+  max-width:1050px!important;
+}
+#view-salaf .salaf-topic-thought p{
+  font-size:clamp(16px,3.6vw,21px)!important;line-height:1.52!important;
+}
+#view-salaf .salaf-topic-thought strong{
+  font-size:clamp(17px,3.8vw,23px)!important;
+  line-height:1.42!important;
+}
+#view-salaf .salaf-topic-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:clamp(9px,2.4vw,17px)!important;
+}
+#view-salaf .salaf-topic{
+  min-height:clamp(172px,43vw,252px)!important;
+  border-radius:clamp(16px,4.3vw,25px)!important;
+}
+/* Own header reuses the existing global detail dock CSS, not a special pill.
+   The story modal starts under the status bar and is scrollable beneath it. */
+html body .salaf-detail .salaf-story-nav.kids-detail-appbar{
+  position:sticky!important;top:0!important;z-index:60!important;
+  min-height:calc(65px + env(safe-area-inset-top,0px))!important;
+  padding:calc(10px + env(safe-area-inset-top,0px)) 16px 10px!important;
+  width:100%!important;margin:0!important;
+  border-radius:0!important;box-shadow:none!important;
+  background:linear-gradient(110deg,#123548,#082537)!important;
+}
+html body:has(.app[data-gender="girl"]) .salaf-detail .salaf-story-nav.kids-detail-appbar{
+  background:linear-gradient(110deg,#483147,#2b2035)!important;
+}
+html body .salaf-detail .salaf-story-nav .salaf-back.kids-detail-dock-back{
+  position:relative!important;top:auto!important;left:auto!important;
+  margin:0!important;width:50px!important;min-width:50px!important;height:50px!important;
+}
+html body .salaf-detail .salaf-detail-cover{
+  padding-top:clamp(25px,6vw,58px)!important;
+}
+#view-salaf .salaf-topic-nav,
+#view-salaf .salaf-topic-nav *,
+.salaf-detail .salaf-story-nav,
+.salaf-detail .salaf-story-nav *{
+  -webkit-user-select:none!important;user-select:none!important;
+  -webkit-touch-callout:none!important;
+}
+@media(min-width:800px){
+  #view-salaf .salaf-topic-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+  #view-salaf[data-topic-open="true"] .salaf-topic-stage{
+    min-height:clamp(350px,46svh,640px)!important;
+  }
+}

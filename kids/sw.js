@@ -1,8 +1,8 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1370";
+const CACHE_NAME="dar-al-tawhid-kids-v1380";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 // KIDS_V202_DOWNLOAD_TABS_RELEASE_TRIGGER_20261010: detail-only offline controls; manifest V202 synchronized.
-const KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306-listen-scroll-v18-salaf-visible-v1370";
+const KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306-listen-scroll-v18-salaf-visible-v1380";
 const DUA_AUDIO_RUNTIME="1244";
 // QUIZ_HOME_RESTORE_V1225: refresh installed PWAs with the restored Quiz entry.
 const CORE_PRECACHE=[
@@ -292,18 +292,26 @@ const KIDS_BOOT_PRECACHE=[
   "/kids/kids-story-action-contrast-v1345.css?v=1346",
   "/kids/offline-library-v1.js?v=1",
   "/kids/offline-library-v1.css?v=1",
-  "/kids/salaf-library-v1.js?v=1370",
+  "/kids/salaf-library-v1.js?v=1380",
   "/kids/kids-listening-polish-v1350.css?v=1350",
   "/kids/kids-listening-polish-v1350.js?v=1350",
   "/kids/assets/kids-icons/library-real-v12.png?v=cut1",
   "/kids/assets/kids-icons/dua-real-v12.png?v=cut1",
   "/kids/salaf-library-v1.css?v=1",
-  "/kids/salaf-open-world-v1353.css?v=1370",
+  "/kids/salaf-open-world-v1353.css?v=1380",
   "/kids/assets/salaf/salaf-cinema-hero-boy-v1353.jpg",
   "/kids/assets/salaf/salaf-cinema-hero-girl-v1353.jpg",
   "/kids/data/salaf-library-v1.json?v=1",
   "/kids/assets/salaf/salaf-library-hero-boys.jpg",
   "/kids/assets/salaf/salaf-library-hero-girls.jpg",
+  "/kids/assets/salaf/topics-v1380/rahma.jpg",
+  "/kids/assets/salaf/topics-v1380/sidq.jpg",
+  "/kids/assets/salaf/topics-v1380/sabr.jpg",
+  "/kids/assets/salaf/topics-v1380/ilm.jpg",
+  "/kids/assets/salaf/topics-v1380/adab.jpg",
+  "/kids/assets/salaf/topics-v1380/family.jpg",
+  "/kids/assets/salaf/topics-v1380/hikma.jpg",
+  "/kids/assets/salaf/topics-v1380/shukr.jpg",
   "/kids/akademie/curriculum-v1.js?v=20261010-01",
   "/kids/akademie/curriculum-v2.js?v=20261010-09",
   "/kids/akademie/curriculum-v22.js?v=20261011-01",

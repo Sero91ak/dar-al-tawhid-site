@@ -7,14 +7,14 @@
   var root=document.getElementById("view-salaf");
   if(!root)return;
   var CATEGORIES=[
-    {id:"rahma",title:"Barmherzigkeit & Helfen",short:"Barmherzigkeit",caption:"Helfen und Gutes tun",img:"/kids/assets/salaf/topics-v1370/rahma.jpg"},
-    {id:"sidq",title:"Ehrlichkeit & Vertrauen",short:"Ehrlichkeit",caption:"Die Wahrheit sagen",img:"/kids/assets/salaf/topics-v1370/sidq.jpg"},
-    {id:"sabr",title:"Geduld & Sanftmut",short:"Geduld",caption:"Ruhig und freundlich bleiben",img:"/kids/assets/salaf/topics-v1370/sabr.jpg"},
-    {id:"ilm",title:"Wissen & Lernen",short:"Wissen",caption:"Mit Freude Neues lernen",img:"/kids/assets/salaf/topics-v1370/ilm.jpg"},
-    {id:"adab",title:"Freundschaft & Adab",short:"Freundschaft",caption:"Gut miteinander umgehen",img:"/kids/assets/salaf/topics-v1370/adab.jpg"},
-    {id:"family",title:"Familie & Eltern",short:"Familie",caption:"Liebe und Fürsorge",img:"/kids/assets/salaf/topics-v1370/family.jpg"},
-    {id:"hikma",title:"Klugheit & Verantwortung",short:"Klugheit",caption:"Gute Entscheidungen",img:"/kids/assets/salaf/topics-v1370/hikma.jpg"},
-    {id:"shukr",title:"Dankbarkeit & Bescheidenheit",short:"Dankbarkeit",caption:"Das Gute erkennen",img:"/kids/assets/salaf/topics-v1370/shukr.jpg"}
+    {id:"rahma",title:"Barmherzigkeit & Helfen",short:"Barmherzigkeit",caption:"Helfen und Gutes tun",img:"/kids/assets/salaf/topics-v1380/rahma.jpg"},
+    {id:"sidq",title:"Ehrlichkeit & Vertrauen",short:"Ehrlichkeit",caption:"Die Wahrheit sagen",img:"/kids/assets/salaf/topics-v1380/sidq.jpg"},
+    {id:"sabr",title:"Geduld & Sanftmut",short:"Geduld",caption:"Ruhig und freundlich bleiben",img:"/kids/assets/salaf/topics-v1380/sabr.jpg"},
+    {id:"ilm",title:"Wissen & Lernen",short:"Wissen",caption:"Mit Freude Neues lernen",img:"/kids/assets/salaf/topics-v1380/ilm.jpg"},
+    {id:"adab",title:"Freundschaft & Adab",short:"Freundschaft",caption:"Gut miteinander umgehen",img:"/kids/assets/salaf/topics-v1380/adab.jpg"},
+    {id:"family",title:"Familie & Eltern",short:"Familie",caption:"Liebe und Fürsorge",img:"/kids/assets/salaf/topics-v1380/family.jpg"},
+    {id:"hikma",title:"Klugheit & Verantwortung",short:"Klugheit",caption:"Gute Entscheidungen",img:"/kids/assets/salaf/topics-v1380/hikma.jpg"},
+    {id:"shukr",title:"Dankbarkeit & Bescheidenheit",short:"Dankbarkeit",caption:"Das Gute erkennen",img:"/kids/assets/salaf/topics-v1380/shukr.jpg"}
   ];
   var INSIGHTS={"rahma":{"intro":{"4-5":"Barmherzig sein heißt: Du siehst, wenn jemand Hilfe braucht, und bist freundlich.","6-8":"Wer barmherzig ist, bemerkt, wenn andere Hilfe brauchen, und hilft mit einem guten Herzen.","9-10":"Barmherzigkeit zeigt sich darin, wie wir mit Menschen umgehen, besonders wenn sie unsere Hilfe brauchen."},"question":{"4-5":"Wem kannst du heute helfen?","6-8":"Welche kleine Hilfe könnte heute jemanden glücklich machen?","9-10":"Wie kannst du jemanden unterstützen, ohne dafür ein Lob zu erwarten?"}},"sidq":{"intro":{"4-5":"Ehrlich sein bedeutet: Du sagst die Wahrheit.","6-8":"Ehrlichkeit bedeutet, bei der Wahrheit zu bleiben – auch wenn es schwerfällt.","9-10":"Ehrlichkeit heißt, aufrichtig zu sprechen und zu handeln, selbst wenn wir einen Fehler zugeben müssen."},"question":{"4-5":"Was sagst du, wenn dir etwas kaputtgeht?","6-8":"Was hilft dir, einen Fehler ehrlich zuzugeben?","9-10":"Warum ist Vertrauen wichtig, wenn wir mit anderen umgehen?"}},"sabr":{"intro":{"4-5":"Geduld heißt: Du bleibst ruhig und gibst nicht gleich auf.","6-8":"Geduldig sein heißt, ruhig weiterzumachen, auch wenn etwas Zeit und Übung braucht.","9-10":"Geduld hilft uns, Schwierigkeiten mit Ruhe und Ausdauer zu begegnen, statt vorschnell aufzugeben."},"question":{"4-5":"Worauf kannst du geduldig warten?","6-8":"Wann hat dir Geduld schon einmal geholfen?","9-10":"Wie kannst du ruhig bleiben, wenn etwas nicht sofort gelingt?"}},"ilm":{"intro":{"4-5":"Lernen ist schön. Mit jeder neuen Sache weißt du ein bisschen mehr.","6-8":"Wissen hilft dir, deine Fragen zu verstehen, Gutes zu tun und Allah besser kennenzulernen.","9-10":"Wer Wissen sucht, lernt Fragen zu stellen, zuverlässig zu prüfen und das Gelernte gut anzuwenden."},"question":{"4-5":"Was willst du heute lernen?","6-8":"Welche Frage möchtest du heute jemandem stellen?","9-10":"Wie findest du heraus, ob eine Antwort zuverlässig ist?"}},"adab":{"intro":{"4-5":"Gute Freunde helfen sich und sprechen freundlich.","6-8":"Freundschaft wächst, wenn wir zuhören, freundlich reden und einander helfen.","9-10":"Guter Umgang zeigt sich durch Rücksicht, ehrliche Worte und Hilfe, auch wenn Freunde einmal verschiedener Meinung sind."},"question":{"4-5":"Wie machst du jemandem eine Freude?","6-8":"Was kannst du tun, wenn dein Freund traurig ist?","9-10":"Wie kannst du freundlich bleiben, wenn du anderer Meinung bist?"}},"family":{"intro":{"4-5":"In der Familie helfen wir einander und zeigen Liebe.","6-8":"Zu Hause zeigen wir Fürsorge, indem wir einander unterstützen und mit Respekt sprechen.","9-10":"Familie bedeutet Verantwortung füreinander: Wir achten aufeinander und helfen auch bei kleinen Alltagsaufgaben."},"question":{"4-5":"Wem hilfst du heute zu Hause?","6-8":"Welche Aufgabe könntest du heute für deine Familie übernehmen?","9-10":"Wie kannst du zu Hause Verantwortung übernehmen, ohne erst darum gebeten zu werden?"}},"hikma":{"intro":{"4-5":"Klug sein heißt: Erst denken, dann handeln.","6-8":"Eine kluge Entscheidung beginnt damit, dass du kurz nachdenkst, bevor du etwas tust.","9-10":"Verantwortung bedeutet, mögliche Folgen einer Entscheidung zu bedenken und das Gute bewusst zu wählen."},"question":{"4-5":"Was machst du, bevor du losrennst?","6-8":"Wer kann dir bei einer schweren Entscheidung helfen?","9-10":"Welche Fragen helfen dir, eine gute Entscheidung zu treffen?"}},"shukr":{"intro":{"4-5":"Dankbar sein heißt: Du freust dich über Gutes und sagst Danke.","6-8":"Dankbarkeit heißt, schöne Dinge und kleine Hilfen zu erkennen und dafür Danke zu sagen.","9-10":"Dankbarkeit zeigt sich nicht nur in Worten, sondern auch darin, wie sorgsam wir mit dem umgehen, was wir haben."},"question":{"4-5":"Wofür sagst du heute Danke?","6-8":"Für welche kleine Sache bist du heute dankbar?","9-10":"Wie kannst du deine Dankbarkeit durch eine gute Tat zeigen?"}}};
   var MANIFEST="/kids/data/salaf-library-v1.json?v=1";
@@ -58,7 +58,10 @@
       ''+
     '</div>'+
     '<section id="salafDetail" class="salaf-detail" role="dialog" aria-modal="true" aria-label="Geschichte" aria-hidden="true" hidden>'+
-      '<div class="salaf-detail-scroll"><button class="salaf-back" type="button" aria-label="Zur Geschichtenbibliothek zurück">‹ <span>Zurück</span></button>'+
+      '<div class="salaf-detail-scroll"><nav class="salaf-story-nav kids-detail-appbar" aria-label="Seitennavigation">'+
+      '<button class="salaf-back kids-detail-dock-back" type="button" aria-label="Zurück zur Geschichtenbibliothek"></button>'+
+      '<div class="kids-detail-appbar-copy"><strong class="kids-detail-appbar-title">Schätze der Salaf</strong>'+
+      '<small class="kids-detail-appbar-subtitle" id="salafStoryNavTitle">Geschichte</small></div></nav>'+
       '<div class="salaf-detail-cover" id="salafDetailCover"><span class="salaf-eyebrow">HÖRGESCHICHTE</span><h2 id="salafDetailTitle"></h2><p id="salafDetailPerson"></p></div>'+
       '<div class="salaf-detail-body"><div class="salaf-player"><strong>Deine Geschichte</strong>'+
         '<div class="salaf-player-row"><button type="button" id="salafBack15" aria-label="15 Sekunden zurück">−15 s</button>'+
@@ -106,8 +109,11 @@
         var matches=vis.filter(function(i){return i.category===topic});
         var insight=INSIGHTS[chosen.id]||INSIGHTS.rahma;
         var topicArt=safeAsset(chosen.img)||"";
-        pane.innerHTML='<header class="salaf-topic-stage" style="--salaf-stage-art:url(&quot;'+esc(topicArt)+'&quot;)">'+
-          '<button type="button" id="salafClear" class="salaf-topic-back">‹ Alle Themen</button>'+
+        pane.innerHTML='<nav class="salaf-topic-nav kids-detail-appbar" aria-label="Seitennavigation">'+
+          '<button type="button" id="salafClear" class="kids-detail-dock-back" aria-label="Zurück zu allen Themen"></button>'+
+          '<div class="kids-detail-appbar-copy"><strong class="kids-detail-appbar-title">Schätze der Salaf</strong>'+
+          '<small class="kids-detail-appbar-subtitle">'+esc(chosen.short)+'</small></div></nav>'+
+          '<header class="salaf-topic-stage" style="--salaf-stage-art:url(&quot;'+esc(topicArt)+'&quot;)">'+
           '<div class="salaf-topic-stage-copy"><span class="salaf-eyebrow">DEIN THEMA</span>'+
           '<h3>'+esc(chosen.short)+'</h3><p>'+esc(chosen.caption)+'</p></div></header>'+
           '<section class="salaf-topic-thought" aria-label="Über das Thema nachdenken">'+
@@ -176,6 +182,7 @@
   function showStory(i){
     if(!i||!textFor(i))return;closeStory();active=i;
     q("#salafDetailTitle").textContent=i.title;q("#salafDetailPerson").textContent=i.person;
+    q("#salafStoryNavTitle").textContent=i.title;
     var art=safeAsset(i.hero||i.image||"")||"/kids/assets/deen/deen-entry.jpg";
     q("#salafDetailCover").style.backgroundImage="linear-gradient(0deg,#0a202b 1%,rgba(5,22,32,.08) 85%),url('"+art+"')";
     q("#salafText").innerHTML=textFor(i).split(/\n{2,}/).filter(Boolean).map(function(s){return "<p>"+esc(s)+"</p>"}).join("");
