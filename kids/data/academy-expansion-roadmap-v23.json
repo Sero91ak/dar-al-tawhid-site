@@ -1,10 +1,10 @@
 {
   "version": "academy-roadmap-v23-20261011",
-  "purpose": "Editorial roadmap: 78 sourced lessons / 130 remaining locked plans. Human audio approval is separate.",
+  "purpose": "Editorial roadmap: 82 sourced lessons and 126 locked outlines. Audio/human content review separate from code integration.",
   "curriculum": {
     "totalNewLessonSlots": 208,
-    "alreadyImplementedLessons": 78,
-    "proposedAdditionalLessons": 130,
+    "alreadyImplementedLessons": 82,
+    "proposedAdditionalLessons": 126,
     "weeks": 52,
     "newDaysPerWeek": 4,
     "reviewDaysPerWeek": 2,
@@ -67,25 +67,25 @@
     {
       "id": "adab",
       "label": "Adab – islamisches Benehmen",
-      "plannedAdditions": 15,
+      "plannedAdditions": 14,
       "underlyingCurrentSubject": "adab"
     },
     {
       "id": "tarbiyah",
       "label": "Tarbiyah – Erziehung, Gewohnheiten, Verantwortung",
-      "plannedAdditions": 9,
+      "plannedAdditions": 8,
       "underlyingCurrentSubject": "tarbiyah"
     },
     {
       "id": "nafs",
       "label": "Tazkiyat an-Nafs – Herz und Selbststeuerung",
-      "plannedAdditions": 13,
+      "plannedAdditions": 12,
       "underlyingCurrentSubject": "nafs"
     },
     {
       "id": "fiqh",
       "label": "Fiqh und ʿIbādāt – gelebte Praxis",
-      "plannedAdditions": 19,
+      "plannedAdditions": 18,
       "underlyingCurrentSubject": "fiqh"
     },
     {
@@ -560,157 +560,29 @@
       "editorialSlot": 78,
       "lessonId": "akhlaq-mitgefuehl-andere-troesten",
       "status": "currently-in-catalog"
-    }
-  ],
-  "plannedUnits": [
+    },
     {
       "editorialSlot": 79,
-      "topicId": "editorial-079",
-      "week": 20,
-      "weekday": "Donnerstag",
-      "pillar": "adab",
-      "title": "Höflich um etwas bitten",
-      "classroomScenario": "Bei einer Bitte freundliche Worte verwenden",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: bei einer Bitte freundliche Worte verwenden.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: bei einer Bitte freundliche Worte verwenden.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: bei einer Bitte freundliche Worte verwenden.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "lessonId": "adab-freundlich-um-etwas-bitten",
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 80,
-      "topicId": "editorial-080",
-      "week": 20,
-      "weekday": "Freitag",
-      "pillar": "tarbiyah",
-      "title": "Lernziele freundlich planen",
-      "classroomScenario": "Ein erreichbares Wochenziel formulieren",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: ein erreichbares Wochenziel formulieren.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: ein erreichbares Wochenziel formulieren.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: ein erreichbares Wochenziel formulieren.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "lessonId": "tarbiyah-lernziel-freundlich-planen",
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 81,
-      "topicId": "editorial-081",
-      "week": 21,
-      "weekday": "Montag",
-      "pillar": "nafs",
-      "title": "Sich bei Angst Hilfe holen",
-      "classroomScenario": "Einer vertrauten erwachsenen Person eine Sorge erzählen",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: einer vertrauten erwachsenen Person eine Sorge erzählen.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: einer vertrauten erwachsenen Person eine Sorge erzählen.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: einer vertrauten erwachsenen Person eine Sorge erzählen.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "lessonId": "nafs-bei-angst-hilfe-holen",
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 82,
-      "topicId": "editorial-082",
-      "week": 21,
-      "weekday": "Dienstag",
-      "pillar": "fiqh",
-      "title": "Wann braucht man Wuḍūʾ?",
-      "classroomScenario": "Vor dem Gebet mit den Eltern über Reinigung sprechen",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: vor dem Gebet mit den Eltern über Reinigung sprechen.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: vor dem Gebet mit den Eltern über Reinigung sprechen.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: vor dem Gebet mit den Eltern über Reinigung sprechen.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": true,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
-    },
+      "lessonId": "fiqh-wann-wudu-noetig",
+      "status": "currently-in-catalog"
+    }
+  ],
+  "plannedUnits": [
     {
       "editorialSlot": 83,
       "topicId": "editorial-083",
