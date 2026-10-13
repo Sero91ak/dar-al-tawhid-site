@@ -549,7 +549,7 @@ const additions=
           "Qurʾān 2:2 ist die gelesene Stelle.",
           "Der Qurʾān ist Allahs Buch. Wir gehen achtsam damit um.",
           "Ein Kind sieht ein Qurʾān-Exemplar auf dem Boden liegen und hebt es mit den Eltern an einen sauberen Platz.",
-          ""
+          "Wir sagen mit eigenen Worten: Dieses Buch kommt von Allah."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 2:2. Sinngemäß: Der gespeicherte Auszug druckt: Das ist das Buch, an dem kein Zweifel ist. Die folgenden Worte des Verses stehen in diesem gespeicherten Auszug nicht.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/55. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:2. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -767,7 +767,7 @@ const additions=
           "Qurʾān 31:18 ist die gelesene Stelle.",
           "Der Vers verbietet, die Wange hochmütig von den Menschen wegzudrehen und eingebildet über die Erde zu gehen.",
           "Ein Kind hat beim Aufräumen geholfen und sagt danach: Ich bin der Beste, ihr seid langsam.",
-          ""
+          "Wir formulieren denselben Satz neu: Ich habe mitgeholfen. Ohne einen Vergleich."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 31:18. Sinngemäß: Der Vers verbietet, die Wange hochmütig von den Menschen wegzudrehen und eingebildet über die Erde zu gehen. Allah liebt nicht jeden Eingebildeten und Prahler.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1445. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 31:18. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -1611,7 +1611,7 @@ const additions=
         "intro": "Neid fühlt sich eng an. Stell dir vor: Ein Kind sieht, dass ein anderes Kind ein neues Buch bekommt, und merkt einen engen Gedanken. Heute üben wir: Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz. Die arabischen Worte spricht die Lehrperson.",
         "lines": [
           "Neid fühlt sich eng an.",
-          "",
+          "Sinngemäß: Der gespeicherte Surenteil bittet um Schutz vor dem Übel eines Neiders, wenn er neidet.",
           "Ein Kind sieht, dass ein anderes Kind ein neues Buch bekommt, und merkt einen engen Gedanken.",
           "Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz."
         ],
@@ -1637,7 +1637,7 @@ const additions=
         "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Neid fühlt sich eng an. Wir lesen Qurʾān 113:5. Der Vers bedeutet sinngemäß: Der gespeicherte Surenteil bittet um Schutz vor dem Übel eines Neiders, wenn er neidet. So kann das im Alltag aussehen: Ein Kind sieht, dass ein anderes Kind ein neues Buch bekommt, und merkt einen engen Gedanken. Die Aufgabe: Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz. ḥasad bedeutet: Neid, das Gute einer anderen Person nicht gönnen. aʿūḏu bedeutet: ich suche Schutz.",
         "lines": [
           "Qurʾān 113:5 ist die gelesene Stelle.",
-          "",
+          "Sinngemäß: Der gespeicherte Surenteil bittet um Schutz vor dem Übel eines Neiders, wenn er neidet.",
           "Ein Kind sieht, dass ein anderes Kind ein neues Buch bekommt, und merkt einen engen Gedanken.",
           "Die arabischen Worte spricht die Lehrperson."
         ],
@@ -1857,7 +1857,7 @@ const additions=
           "Qurʾān 74:4 ist die gelesene Stelle.",
           "Der Vers lautet: Und deine Kleider, reinige sie.",
           "Ein Kind sieht einen deutlichen Schmutzfleck am Ärmel und zieht vor dem Üben ein sauberes Oberteil an oder sagt Bescheid.",
-          ""
+          "Wir prüfen mit den Augen: Ist etwas deutlich schmutzig? Wir waschen nur, was die Eltern erlauben."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 74:4. Sinngemäß: Der Vers lautet: Und deine Kleider, reinige sie. Die Tafsīr-Seite erklärt ihn auch mit anderen Deutungen, darunter eine Absage an die Behauptung, der Prophet sei ein Wahrsager.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1907. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 74:4. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -2293,7 +2293,7 @@ const additions=
           "Qurʾān 4:171 ist die gelesene Stelle.",
           "Der Vers warnt die Leute der Schrift vor Übertreibung und davor, über Allah etwas anderes als die Wahrheit zu sagen.",
           "Jemand fragt: Wer ist ʿĪsā? Das Kind antwortet: Ein Gesandter Allahs.",
-          ""
+          "Wir üben den respektvollen Namen und fügen keine weitere Geschichte hinzu."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 4:171. Sinngemäß: Der Vers warnt die Leute der Schrift vor Übertreibung und davor, über Allah etwas anderes als die Wahrheit zu sagen. Er nennt den Masīḥ ʿĪsā, den Sohn Maryams, einen Gesandten Allahs und Sein Wort, das Er zu Maryam hinwarf.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/367. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:171. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -3166,7 +3166,7 @@ const additions=
           "Qurʾān 2:136 ist die gelesene Stelle.",
           "Der Vers fordert auf zu sagen: Wir glauben an Allah und an das, was zu uns und zu den genannten Propheten herabgesandt wurde, und wir machen zwischen keinem Seiner Gesandten einen.",
           "Ein Kind hört mehrere Prophetnamen und sagt bei jedem: Friede sei mit ihm.",
-          ""
+          "Wir nennen drei Namen nur so, wie sie im Vers stehen, und erfinden keine zusätzliche Geschichte."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 2:136. Sinngemäß: Der Vers fordert auf zu sagen: Wir glauben an Allah und an das, was zu uns und zu den genannten Propheten herabgesandt wurde, und wir machen zwischen keinem Seiner Gesandten einen Unterschied.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/140. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:136. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -4474,7 +4474,7 @@ const additions=
           "Qurʾān 2:238 ist die gelesene Stelle.",
           "Der Vers fordert auf, die Gebete zu hüten und das mittlere Gebet, und vor Allah demütig zu stehen.",
           "Im Zimmer liegt Spielzeug auf dem Teppich. Das Kind räumt mit Erlaubnis eine kleine Fläche frei.",
-          ""
+          "Wir legen eine saubere Unterlage gerade hin und stellen uns ruhig daneben, ohne das Gebet schon vollständig zu verrichten."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 2:238. Sinngemäß: Der Vers fordert auf, die Gebete zu hüten und das mittlere Gebet, und vor Allah demütig zu stehen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/205. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:238. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -5564,7 +5564,7 @@ const additions=
           "Qurʾān 6:59 ist die gelesene Stelle.",
           "Der Vers sagt, dass bei Ihm die Schlüssel des Verborgenen sind und niemand sie kennt außer Ihm, und dass Ihm kein Blatt fällt, ohne dass Er es weiß.",
           "Ein Kind legt einen Stein hinter den Rücken. Die anderen sehen ihn nicht. Die Stunde sagt: Allahs Wissen ist damit nicht begrenzt.",
-          ""
+          "Wir nennen ein kleines Ding, das Menschen gerade nicht sehen, und wiederholen: Allah weiß es."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 6:59. Sinngemäß: Der Vers sagt, dass bei Ihm die Schlüssel des Verborgenen sind und niemand sie kennt außer Ihm, und dass Ihm kein Blatt fällt, ohne dass Er es weiß.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/434. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 6:59. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -6219,7 +6219,7 @@ const additions=
           "Qurʾān 25:63 ist die gelesene Stelle.",
           "Der Vers beschreibt die Diener des Allerbarmers als Menschen, die bescheiden auf der Erde gehen und den Unwissenden mit Frieden begegnen.",
           "Ein Kind hat ein Rätsel gelöst und sagt: Schön, dass es geklappt hat, statt: Ihr seid dumm.",
-          ""
+          "Wir formulieren einen Satz über einen Erfolg ohne ein schlechtes Wort über ein anderes Kind."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 25:63. Sinngemäß: Der Vers beschreibt die Diener des Allerbarmers als Menschen, die bescheiden auf der Erde gehen und den Unwissenden mit Frieden begegnen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1305. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 25:63. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -7091,7 +7091,7 @@ const additions=
           "Qurʾān 17:78 ist die gelesene Stelle.",
           "Der Vers sagt: Verrichte das Gebet vom Neigen der Sonne bis zur Dunkelheit der Nacht, und die Lesung der Morgenfrühe.",
           "Ein Kind sieht auf dem bekannten Gebetsplan der App die Namen der Tagesgebete und sucht den Morgen.",
-          ""
+          "Wir ordnen nur, was der Vers selbst nennt: eine Zeit ab dem Neigen der Sonne, die Nacht und den Morgen. Die fünf Namen erklären wir als bekannte Bezeichnungen der App, nicht als Aufdruck dieser Seite."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 17:78. Sinngemäß: Der Vers sagt: Verrichte das Gebet vom Neigen der Sonne bis zur Dunkelheit der Nacht, und die Lesung der Morgenfrühe. Die Lesung der Morgenfrühe ist bezeugt.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1039. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:78. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -7309,7 +7309,7 @@ const additions=
           "Qurʾān 73:4 ist die gelesene Stelle.",
           "Der Vers lautet: Oder füge hinzu, und trag den Qurʾān deutlich vor.",
           "Die Lehrperson liest einen kurzen deutschen Satz einmal schnell und einmal deutlich. Die Kinder sagen, welches Hören leichter war.",
-          ""
+          "Wir hören nur zu, wenn ein Mensch wirklich rezitiert. In diesem Paket gibt es keine Aufnahme."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 73:4. Sinngemäß: Der Vers lautet: Oder füge hinzu, und trag den Qurʾān deutlich vor. Die Seite erklärt das als langsames Lesen, das beim Verstehen hilft.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1904. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 73:4. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -9054,7 +9054,7 @@ const additions=
           "Qurʾān 24:27 ist die gelesene Stelle.",
           "Der Vers verbietet den Glaubenden, andere Häuser als ihre eigenen zu betreten, bis sie um Erlaubnis gebeten und die Bewohner gegrüßt haben.",
           "Ein Kind steht vor der Wohnungstür der Nachbarn und wartet, bis geöffnet wird.",
-          ""
+          "Wir üben Anklopfen, Warten und einen friedlichen Gruß."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 24:27. Sinngemäß: Der Vers verbietet den Glaubenden, andere Häuser als ihre eigenen zu betreten, bis sie um Erlaubnis gebeten und die Bewohner gegrüßt haben.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1267. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 24:27. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -9708,7 +9708,7 @@ const additions=
           "Qurʾān 11:114 ist die gelesene Stelle.",
           "Der Vers sagt: Verrichte das Gebet an den beiden Enden des Tages und in den Nahzeiten der Nacht.",
           "Die Kinder legen fünf Karten mit den bekannten Namen in die Tagesfolge, die sie aus der App schon hören.",
-          ""
+          "Wir sagen danach laut: Diese fünf Namen stehen so nicht in diesem einen Vers."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 11:114. Sinngemäß: Der Vers sagt: Verrichte das Gebet an den beiden Enden des Tages und in den Nahzeiten der Nacht. Die guten Taten nehmen die schlechten hinweg.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/805. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 11:114. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -10580,7 +10580,7 @@ const additions=
           "Qurʾān 49:13 ist die gelesene Stelle.",
           "Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen.",
           "Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen.",
-          ""
+          "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 49:13. Sinngemäß: Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1756. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 49:13. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -12325,7 +12325,7 @@ const additions=
           "Qurʾān 6:162 ist die gelesene Stelle.",
           "Der Vers sagt: Mein Gebet, mein Opferritus, mein Leben und mein Sterben gehören Allah, dem Herrn der Welten.",
           "Die Lehrperson fragt: Welches Gebet üben wir jetzt? Die Kinder nennen den Namen, den der Plan der App schon verwendet.",
-          ""
+          "Wir sagen den Namen laut und beginnen nicht, während wir noch woanders hinschauen."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 6:162. Sinngemäß: Der Vers sagt: Mein Gebet, mein Opferritus, mein Leben und mein Sterben gehören Allah, dem Herrn der Welten. Er hat keinen Teilhaber.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/486. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 6:162. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -14480,7 +14480,7 @@ const additions=
           "Wenn etwas schiefgeht, versuchen wir es noch einmal.",
           "Ein Kind verschreibt ein Wort, radiert es aus und schreibt es noch einmal langsam.",
           "Wir planen einen zweiten Versuch und eine kleine Hilfe, zum Beispiel leiser lesen.",
-          ""
+          "Wir planen einen zweiten Versuch und eine kleine Hilfe, zum Beispiel leiser lesen."
         ],
         "evidence": "Wir lernen mit Qurʾān 94:5. Wenn etwas schiefgeht, versuchen wir es noch einmal.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1963. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 94:5. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -14506,7 +14506,7 @@ const additions=
           "Qurʾān 94:5 ist die gelesene Stelle.",
           "Wenn etwas schiefgeht, versuchen wir es noch einmal.",
           "Ein Kind verschreibt ein Wort, radiert es aus und schreibt es noch einmal langsam.",
-          ""
+          "Wir planen einen zweiten Versuch und eine kleine Hilfe, zum Beispiel leiser lesen."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 94:5. Sinngemäß: Der gespeicherte Ausdruck sagt zweimal: Mit der Schwierigkeit ist Erleichterung.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1963. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 94:5. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -14943,7 +14943,7 @@ const additions=
           "Qurʾān 2:238 ist die gelesene Stelle.",
           "Dieselbe Stelle wie in der Stunde über den Gebetsplatz fordert, die Gebete zu hüten und vor Allah demütig zu stehen.",
           "Die Kinder stehen nebeneinander, die Füße ruhig, die Hände nicht in den Taschen, und schauen nicht wild umher.",
-          ""
+          "Wir üben nur das ruhige Stehen. Die weiteren Bewegungen kommen in den späteren Stunden mit der Lehrperson."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 2:238. Sinngemäß: Dieselbe Stelle wie in der Stunde über den Gebetsplatz fordert, die Gebete zu hüten und vor Allah demütig zu stehen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/205. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:238. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -15161,7 +15161,7 @@ const additions=
           "Qurʾān 51:56 ist die gelesene Stelle.",
           "Der Vers sagt: Ich habe die Jinn und die Menschen nur erschaffen, damit sie Mir dienen.",
           "Ein Kind erklärt: Beten ist Dienen. Jemanden um ein Glas Wasser bitten ist gewöhnliche Hilfe.",
-          ""
+          "Wir sortieren zwei Beispiele: Gebet zu Allah, und ein Mensch, der uns den Stift reicht."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 51:56. Sinngemäß: Der Vers sagt: Ich habe die Jinn und die Menschen nur erschaffen, damit sie Mir dienen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1772. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 51:56. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -16689,7 +16689,7 @@ const additions=
           "Qurʾān 17:111 ist die gelesene Stelle.",
           "Der Vers endet damit, Allah zu loben, Ihm keinen Sohn und keinen Teilhaber zuzuschreiben, und sagt: Und rühme Ihn mit einem großen Rühmen.",
           "Die Lehrperson hebt die Hände so, wie sie es kennt, und sagt das erste Allāhu akbar. Die Kinder sprechen es nur mit, wenn sie es schon sicher können.",
-          ""
+          "Wir erkennen: Danach beginnt das Gebet. Vorher reden wir nicht weiter."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 17:111. Sinngemäß: Der Vers endet damit, Allah zu loben, Ihm keinen Sohn und keinen Teilhaber zuzuschreiben, und sagt: Und rühme Ihn mit einem großen Rühmen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1054. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:111. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -17779,7 +17779,7 @@ const additions=
           "Qurʾān 17:70 ist die gelesene Stelle.",
           "Der Vers sagt, dass Allah die Kinder Adams gewürdigt, sie an Land und Meer getragen, ihnen von den guten Dingen gegeben und sie vor vielen Seiner Geschöpfe ausgezeichnet hat.",
           "Ein Kind nennt etwas, das es kann, zum Beispiel freundlich grüßen, und fügt keinen Vergleich an.",
-          ""
+          "Wir sagen einen Satz über uns ohne das Wort besser als."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 17:70. Sinngemäß: Der Vers sagt, dass Allah die Kinder Adams gewürdigt, sie an Land und Meer getragen, ihnen von den guten Dingen gegeben und sie vor vielen Seiner Geschöpfe ausgezeichnet hat.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1035. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:70. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -17997,7 +17997,7 @@ const additions=
           "Qurʾān 15:87 ist die gelesene Stelle.",
           "Der Vers sagt, dass Allah sieben von den wiederholten und den gewaltigen Qurʾān gegeben hat.",
           "Die Lehrperson zeigt, dass im Gebet laut oder leise gelesen wird, je nach dem Gebet, das sie kennt. Die Kinder hören zu.",
-          ""
+          "Wir wiederholen keine arabische Sūrah mit einer erzeugten Stimme."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 15:87. Sinngemäß: Der Vers sagt, dass Allah sieben von den wiederholten und den gewaltigen Qurʾān gegeben hat. Der gespeicherte Ausdruck identifiziert diese sieben nicht mit einem zusätzlichen Satz.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/933. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 15:87. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -19307,7 +19307,7 @@ const additions=
           "Qurʾān 22:77 ist die gelesene Stelle.",
           "Der Vers fordert die Glaubenden auf: Verbeugt euch, werft euch nieder, dient eurem Herrn und tut das Gute.",
           "Die Lehrperson zeigt die Verbeugung. Die Kinder machen sie langsam mit und richten sich wieder auf, ohne ein Maß zu erfinden.",
-          ""
+          "Wir nennen das Wort Rukūʿ und sagen, dass der Winkel nicht aus diesem Vers stammt."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 22:77. Sinngemäß: Der Vers fordert die Glaubenden auf: Verbeugt euch, werft euch nieder, dient eurem Herrn und tut das Gute.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1229. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 22:77. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -19744,7 +19744,7 @@ const additions=
           "Qurʾān 21:7 ist die gelesene Stelle.",
           "Der Vers sagt, dass vor dem Propheten nur Männer gesandt wurden, denen eingegeben wird, und: Fragt die Leute der Erinnerung, wenn ihr nicht wisst.",
           "Ein Kind versteht ein Wort nicht und fragt die Lehrperson, statt eine eigene Bedeutung zu erfinden.",
-          ""
+          "Wir üben eine höfliche Frage und das Warten auf die Antwort."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 21:7. Sinngemäß: Der Vers sagt, dass vor dem Propheten nur Männer gesandt wurden, denen eingegeben wird, und: Fragt die Leute der Erinnerung, wenn ihr nicht wisst.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1163. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 21:7. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -20616,7 +20616,7 @@ const additions=
           "Qurʾān 2:43 ist die gelesene Stelle.",
           "Der Vers sagt: Verrichtet das Gebet, gebt die Zakāh und verbeugt euch mit den sich Verbeugenden.",
           "Die Kinder gehen mit der Lehrperson in die Verbeugung und kommen langsam wieder nach oben.",
-          ""
+          "Wir sagen: Der Vers nennt die Verbeugung mit den anderen. Das Aufrichten danach beschreibt er nicht."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 2:43. Sinngemäß: Der Vers sagt: Verrichtet das Gebet, gebt die Zakāh und verbeugt euch mit den sich Verbeugenden.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/83. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:43. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -21929,7 +21929,7 @@ const additions=
           "Qurʾān 22:77 ist die gelesene Stelle.",
           "Dieselbe Stelle wie in der Verbeugungsstunde sagt: Verbeugt euch und werft euch nieder.",
           "Auf einer weichen Unterlage setzt die Lehrperson Stirn und Nase auf. Kinder mit Schmerzen machen es nicht nach.",
-          ""
+          "Wir achten auf genügend Platz, damit niemand anstößt."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 22:77. Sinngemäß: Dieselbe Stelle wie in der Verbeugungsstunde sagt: Verbeugt euch und werft euch nieder.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1229. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 22:77. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -22585,7 +22585,7 @@ const additions=
           "Qurʾān 22:77 ist die gelesene Stelle.",
           "Dieselbe Stelle nennt Verbeugung und Niederwerfung.",
           "Die Kinder sehen das kurze Sitzen und machen es nur so weit mit, wie es ohne Eile geht.",
-          ""
+          "Wir sagen einen Satz: Das Sitzen zeigen wir. Die Worte dabei haben wir auf dieser Seite nicht gelesen."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 22:77. Sinngemäß: Dieselbe Stelle nennt Verbeugung und Niederwerfung. Das Sitzen dazwischen steht dort nicht.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1229. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 22:77. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -23241,7 +23241,7 @@ const additions=
           "Qurʾān 2:238 ist die gelesene Stelle.",
           "Dieselbe Stelle über das Hüten der Gebete und das demütige Stehen trägt hier nur den Hinweis, dass das Gebet mehr enthält als das Stehen.",
           "Die Lehrperson setzt sich so, wie sie es kennt, und sagt: Die Worte lernen wir später bei einem Menschen. Heute erkennen wir nur, dass es dieses Sitzen gibt.",
-          ""
+          "Wir wiederholen: Das sind keine Qurʾān-Worte aus dieser Stunde."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 2:238. Sinngemäß: Dieselbe Stelle über das Hüten der Gebete und das demütige Stehen trägt hier nur den Hinweis, dass das Gebet mehr enthält als das Stehen. Die Sitzworte selbst fehlen auf der Seite.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/205. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:238. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -23459,7 +23459,7 @@ const additions=
           "Qurʾān 4:86 ist die gelesene Stelle.",
           "Der Vers sagt: Wenn ihr mit einem Gruß gegrüßt werdet, dann grüßt mit einem schöneren oder erwidert ihn.",
           "Die Kinder erwidern einen Salam im Raum. Danach sagt die Lehrperson: Der Abschluss des Gebets sieht ähnlich aus und ist doch eine andere Handlung. Wir haben ihn auf dieser Seite.",
-          ""
+          "Wir üben nur den Gruß untereinander."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 4:86. Sinngemäß: Der Vers sagt: Wenn ihr mit einem Gruß gegrüßt werdet, dann grüßt mit einem schöneren oder erwidert ihn. Allah ist über alles Rechnender.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/334. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:86. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -23678,7 +23678,7 @@ const additions=
           "Qurʾān 21:7 ist die gelesene Stelle.",
           "Dieselbe Stelle wie in der Fragestunde sagt: Fragt die Leute der Erinnerung, wenn ihr nicht wisst.",
           "Ein Kind hat vergessen, ob es schon in der Verbeugung war. Es stoppt und fragt, statt allein eine Extra-Bewegung zu machen.",
-          ""
+          "Wir üben den Fragesatz: Ich bin unsicher. Bitte zeig es mir."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 21:7. Sinngemäß: Dieselbe Stelle wie in der Fragestunde sagt: Fragt die Leute der Erinnerung, wenn ihr nicht wisst.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1163. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 21:7. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -23896,7 +23896,7 @@ const additions=
           "Qurʾān 2:185 ist die gelesene Stelle.",
           "Er spricht auch von Krankheit und Reise.",
           "Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt.",
-          ""
+          "Wir lernen das Wort Ramaḍān und erfinden keine Uhrzeit für das Essen."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 2:185. Sinngemäß: Der gespeicherte Vers nennt den Monat Ramaḍān, die Herabsendung des Qurʾān darin als Rechtleitung, und dass der, der den Monat erlebt, in ihm fasten soll. Er spricht auch von Krankheit und Reise.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/165. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:185. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -24124,7 +24124,7 @@ const additions=
           "Qurʾān 2:43 ist die gelesene Stelle.",
           "Der Vers 2:43 sagt: Verrichtet das Gebet, gebt die Zakāh und verbeugt euch mit den sich Verbeugenden.",
           "Wir zeigen zwei Karten: Geben und Reise zum Haus. Wir sammeln kein echtes Geld und laufen keine Runden.",
-          ""
+          "Wir sagen die beiden Worte und erklären, dass die genaue Rechnung und die einzelnen Wege nicht in diesen zwei Auszügen stehen."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 2:43. Sinngemäß: Der Vers 2:43 sagt: Verrichtet das Gebet, gebt die Zakāh und verbeugt euch mit den sich Verbeugenden. Ein weiterer gelesener Ausdruck, 3:97, spricht vom Haus, zu dem die Menschen die Pilgerfahrt schulden, soweit sie den Weg vermögen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/83. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:43. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
