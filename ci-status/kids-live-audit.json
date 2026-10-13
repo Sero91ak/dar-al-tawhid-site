@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-10-13T17:21:10Z",
-  "trigger": "workflow_run",
-  "finishedDeployConclusion": "success",
-  "finishedDeployRun": "38437207345",
+  "timestamp": "2026-10-13T17:23:00Z",
+  "trigger": "push",
+  "finishedDeployConclusion": null,
+  "finishedDeployRun": null,
   "live": {
     "buildId": "kids-shell-v201-dua-v4-1306-listen-scroll-v18-salaf-visible-v1380",
     "label": "KIDS · V1.09.22",
@@ -43,6 +43,15 @@
     }
   },
   "lastDeployRuns": [
+    {
+      "conclusion": null,
+      "created_at": "2026-10-13T17:22:40Z",
+      "head_sha": "c7445eb98b059edba1532174424a27cc300d341c",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38438150760",
+      "id": 38438150760,
+      "status": "in_progress",
+      "updated_at": "2026-10-13T17:22:44Z"
+    },
     {
       "conclusion": "success",
       "created_at": "2026-10-13T17:15:36Z",
@@ -87,15 +96,6 @@
       "id": 38435206781,
       "status": "completed",
       "updated_at": "2026-10-13T17:01:04Z"
-    },
-    {
-      "conclusion": "cancelled",
-      "created_at": "2026-10-13T17:00:45Z",
-      "head_sha": "fff045f515bc17c8765213fbed82911b0b54422e",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38435185123",
-      "id": 38435185123,
-      "status": "completed",
-      "updated_at": "2026-10-13T17:00:56Z"
     }
   ]
 }
