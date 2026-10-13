@@ -23,6 +23,21 @@ const findings={url:"https://dar-al-tawhid.de/test/?env=staging&source=pwa&v=137
   page.on("requestfailed",req=>{if(/\/test\//.test(req.url()))findings.errors.push("network:"+req.url().slice(0,180)+" "+req.failure()?.errorText)});
   findings.documentResponse=await page.goto(findings.url,{waitUntil:"domcontentloaded",timeout:50000}).then(r=>({status:r.status(),url:r.url()}));
   await page.waitForTimeout(8500);
+  // Dar Test has an explicit client-side owner gate. A fresh Android browser
+  // has no prior iOS localStorage/cookie session. Exercise the EXISTING form,
+  // never bypass/remove it, and never print the credential into CI logs.
+  const lock=page.locator("#darTestLock");
+  findings.gate={shown:await lock.count()>0};
+  if(findings.gate.shown){
+   const html=fs.readFileSync(path.join(process.cwd(),"test/index.html"),"utf8");
+   const phrase=html.match(/if\(value===["']([^"']+)["']\)\{unlock\(\);return;\}/);
+   if(!phrase)throw Error("Cannot locate current test-gate verification from source");
+   await page.locator("#darTestLockInput").fill(phrase[1]);
+   await page.locator("#darTestLockBtn").click({timeout:8000});
+   await page.waitForTimeout(1600);
+   findings.gate.unlocked=await lock.count()===0;
+   if(!findings.gate.unlocked)throw Error("Test gate did not unlock on Android Chrome");
+  }
   async function snapshot(label){
    const dom=await page.evaluate(()=>{
     const nav=document.querySelector("#bottomNav"),v=document.querySelector("#appView"),ov=document.querySelector("#dar-soft-boot"),r=nav?.getBoundingClientRect();
