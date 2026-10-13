@@ -1,5 +1,13 @@
 # Architektur der KIDS AKADEMI
 
+## V38-Redaktions- und Sperrregel
+
+Bei Lektionen ohne tatsächlich übernommene Hadith-Überlieferung versteckt `kids/akademie/index.html` den Hadith-Quellenblock. Der Mangel an einer Nummer ist **keine** Kindererzählung und gehört in `sourceAudit`/Quellenregister, nicht in die sichtbaren Unterrichtssätze. Die Altersvarianten `ageText` und der Textplan `kids/data/academy-voice-plan-v38.json` müssen konsistent bleiben. Der Plan enthält aktuell **1.407** einzigartige deutsche Textbausteine und 2.109 Kontextverwendungen, alle unvertont. `religiousSourcesVerified` und `voiceRecordingsApproved` bleiben false.
+
+Audit vor irgendeiner Freigabe: `node kids/tools/audit-academy-visitor-copy-v1.cjs --strict` und sämtliche vorhandenen Akademie-Regressionen. Das Prüfskript kontrolliert sensible sichtbare Felder, 111 V38-Lektionen, Altersfragen, die Textplan-Referenzen und den Anzeigeschutz. Die spätere Fachprüfung bleibt unabhängig vom Code-Audit.
+
+
+
 Es gibt bereits eine Unterrichtsstruktur. Neue Lektionen gehören dort hinein, nicht in ein zweites System.
 
 ## Daten
