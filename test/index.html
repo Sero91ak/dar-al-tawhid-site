@@ -30,6 +30,15 @@
     if(lock)lock.remove();
     html.style.visibility="visible";
     try{document.body.style.visibility="visible";}catch(e){}
+    // Android fresh install: initial load skipped posts while password input was focused.
+    // Refresh test content once after the gate closes and editing debounce expires.
+    setTimeout(function(){
+      try{
+        if(typeof refreshContent==="function"){
+          Promise.resolve(refreshContent({forceRender:true})).catch(function(){});
+        }
+      }catch(e){}
+    },1800);
   }
   function tryOpen(input){
     var value=String(input&&input.value||"").replace(/\s+/g,"").toLowerCase();
