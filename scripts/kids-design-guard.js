@@ -290,6 +290,13 @@ function runKidsDesignGuard() {
   // Keep the three aligned Duʿāʾ learning levels and 120 verified mappings
   // consistent on all Kids entry routes before publishing.
   failed += require("./kids-dua-trilingual-guard.js").runKidsDuaTrilingualGuard();
+  // Salaf V1380: reviewed-only static images + original detail appbar +
+  // edge-to-edge geometry, without changing the global scope lock.
+  try {
+    require("../kids/check-salaf-visual-contract-v1380.cjs");
+  } catch (e) {
+    failed += fail("Salaf Bild-/Navigationsvertrag V1380: " + e.message);
+  }
   if (!failed) ok("Kids Design (Edge-to-Edge, V1199-Referenzhero, Adobe-Cinzel-Wortmarke, Glass-Nav, Whole-Card-Tap, keine Pre-Click-Dauer, keine Emojis, PNG-Icons)");
   return failed;
 }
