@@ -6023,7 +6023,7 @@ function renderQuizQuestion(){
   quizQuestionHadError=false;
   renderQuizProgress();
   var band=currentKidsQuizAgeBand();
-  var help=band==="4-6"?"":(band==="9-10"?"Wähle die beste Antwort.":"Hör zu und tippe auf deine Antwort.");
+  var help=band==="4-6"?(isYesNoAnswers(q.answers)?"Was denkst du? Tippe auf Ja oder Nein.":"Hör gut zu und wähle eine Antwort."):(band==="9-10"?"Überlege in Ruhe und wähle die beste Antwort.":"Hör genau zu und wähle die Antwort, die du für richtig hältst.");
   var kicker=band==="4-6"?String(q.category||"Quiz"):String(q.category||"Quiz")+" · "+(currentQuizIndex+1)+"/"+currentQuiz.length;
   var listenLabel=band==="4-6"?"Frage hören":"Frage noch einmal hören";
   var art=quizArtworkForBand(q)||{};
