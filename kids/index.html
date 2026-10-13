@@ -5687,10 +5687,13 @@ function quizV4Text(q,part,old){
   return window.DARKidsQuizV4?window.DARKidsQuizV4.pick(q,part,old):String(old||"");
 }
 function quizAcademyPraiseText(q){
-  // Kind sees Islamic encouragement even while old audio is retained until
-  // its exact Serhat V4 clip exists in the manifest; never pretend new audio is available.
+  // New UI text appears immediately. The voice only switches after a real V4 asset exists.
   var voice=window.DARKidsQuizV4&&window.DARKidsQuizV4.speech(q);
   return String(voice&&voice.correctAudioText||q&&q.success||"Sehr gut!");
+}
+function quizAcademyRetryText(q){
+  var voice=window.DARKidsQuizV4&&window.DARKidsQuizV4.speech(q);
+  return String(voice&&voice.retryAudioText||q&&q.retry||"Versuch es noch einmal!");
 }
 function storyQuestionPrompt(q){
   if(!q)return"";
@@ -6186,12 +6189,17 @@ function chooseQuizAnswer(index,button){
     recordQuizMistake(q.id);
     button.classList.add("wrong");
     document.getElementById("quizFeedback").className="quiz-feedback bad";
-    document.getElementById("quizFeedback").textContent=quizV4Text(q,"retryAudioText",q.retry);
+    var retryMessage=quizAcademyRetryText(q);
+    document.getElementById("quizFeedback").textContent=retryMessage;
     quizSpeak(quizV4Text(q,"retryAudioText",q.retry));
+    setTimeout(function(){button.classList.remove("wrong");},1300);
+    // Keep the longer age-appropriate encouragement readable on small screens.
     setTimeout(function(){
-      button.classList.remove("wrong");
-      document.getElementById("quizFeedback").textContent="";
-    },1300);
+      var feedback=document.getElementById("quizFeedback");
+      if(feedback&&feedback.classList.contains("bad")&&feedback.textContent===retryMessage){
+        feedback.textContent="";
+      }
+    },6500);
   }
 }
 function renderQuizFinish(){
@@ -7998,7 +8006,7 @@ html[data-view="stories"] #view-stories > :last-child{
 <script src="/kids/dua-hub-v1219.js?v=1318" data-kids-dua-hub="1259"></script>
 <script src="/kids/story-hub.js?v=28"></script>
 <script src="/kids/kids-age-typography.js?v=3"></script>
-<script src="/kids/quiz-v4-bridge.js?v=20261013-v4bridge1"></script>
+<script src="/kids/quiz-v4-bridge.js?v=20261013-academy1"></script>
 <script src="/kids/quiz-library.js?v=9"></script>
 <link rel="stylesheet" href="/kids/section-heroes-v1095.css?v=1256-parent-hero-full" data-kids-section-heroes-late="1">
 <link rel="stylesheet" href="/kids/stories-home-v1133.css?v=1148" data-kids-stories-home-late="1">
