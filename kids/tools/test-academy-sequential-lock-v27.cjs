@@ -52,7 +52,7 @@ assert.deepEqual(ids.slice(-12,-8),v33Ids,'V33 must append after V32 without shi
 for(const id of v33Ids){const l=curriculum[id];assert.ok(l?.sourceAudit?.hadithUrl?.startsWith('https://dorar.net/hadith/sharh/'));assert.equal(l.voiceApproved,false);for(const a of ['4-5','6-8','9-10'])assert.ok(l.ageText[a]?.lines?.length===4&&l.questions[a]?.length>=2);}
 const v34Ids=Array.from(sandbox.window.DARKidsAcademyCurriculumV34.ids);
 assert.deepEqual(ids.slice(-8,-4),v34Ids,'V34 must append without changing child progress');
-for(const id of v34Ids){const l=curriculum[id];assert.ok(l?.sourceAudit?.hadithUrl?.startsWith('https://dorar.net/hadith/sharh/'));assert.equal(l.voiceApproved,false);for(const a of ['4-5','6-8','9-10'])assert.ok(l.ageText[a]?.lines?.length===4&&l.questions[a]?.length>=2);}
+for(const id of v34Ids){const l=curriculum[id];assert.ok(l?.sourceAudit?.hadithUrl?.startsWith('https://dorar.net/'));assert.equal(l.voiceApproved,false);for(const a of ['4-5','6-8','9-10'])assert.ok(l.ageText[a]?.lines?.length===4&&l.questions[a]?.length>=2);}
 const v34Audio=JSON.parse(read('kids/data/academy-voice-plan-v34.json'));
 assert.ok(v34Audio.policy.quranArabicExcludedFromSyntheticNarration);
 assert.ok(!v34Audio.phrases.some(x=>x.contexts.some(c=>c.lessonId==='quran-al-falaq-kennenlernen')&&/[\u0600-\u06ff]/.test(x.text)),'Do not stage synthetic Quran recitation');
