@@ -1,13 +1,9 @@
 name: KIDS Quiz 002 - recover already paid V4 Flow originals (review only)
 # Strictly read-only Flow-generation GET, NEVER TTS generation.
 # Trigger only when this workflow/recovery script is updated on the isolated review branch.
+# Paused after read-only GET returned HTTP 402 from provider on 2026-10-13.
+# Manual-only; never retry automatically or request paid synthesis.
 on:
-  push:
-    branches:
-      - review/kids-v4-pilot-002-import-20261013
-    paths:
-      - .github/workflows/kids-v4-002-recover-paid-history.yml
-      - kids/tools/recover_v4_pilot_002_flow_api.py
   workflow_dispatch:
 permissions:
   contents: write
