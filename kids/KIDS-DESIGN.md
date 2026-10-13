@@ -1,4 +1,67 @@
 
+## Verbindliche globale feste Kopfzeile — `KIDS_GLOBAL_FIXED_DETAIL_V1400`
+
+Verbindlich für **sämtliche gegenwärtigen und künftig neu angelegten Unterseiten**
+innerhalb der Kinder-App: Propheten, Ṣaḥābah, Ṣaḥābiyyāt, Salaf, Dīn,
+Wissen, Quiz, Duʿāʾ und neue Geschichten/Unterrichtsmodule.
+Der bisherige `position:sticky`-Ansatz innerhalb animierter `.view`-
+und `.shell`-Container darf nicht als zuverlässige iPhone-PWA-
+Kopf-Fixierung betrachtet werden. Er kann mitten auf dem Bildschirm
+stehen bleiben oder mit dem Hero mitscrollen.
+
+**Standard:** Der zentrale Controller `kids/global-detail-dock-v1247.js`
+stellt die ECHTE obere Appbar eines aktiven `.view.kids-detail-page`
+an `document.body` bereit. Die UI verwendet unverändert ihren
+ursprünglichen Zurück-Button mit echten Click-Handlern, Titel und Untertitel.
+Der Controller legt am ursprünglichen Ort lediglich einen
+höhenangepassten, nicht interaktiven Platzhalter an.
+`kids/global-detail-dock-v1247.css` setzt diese Leiste als
+`position:fixed` mit korrekter iOS-Safe-Area und opakem Hintergrund.
+Die Kopfzeile bleibt sichtbar und ihre Position ist **unabhängig von jedem
+Scrollcontainer**, auch bei schnellen Scrollgesten und Kategorienwechsel.
+Beim Zurückgehen oder Tab-Wechsel wird sie ohne Klon in die Originalseite
+zurückgesetzt. Neue Detailseiten brauchen nur den bestehenden
+`.kids-detail-page > .kids-detail-appbar`-Vertrag und keinen eigenen
+Scroll-Handler.
+
+In Vollbild-Detaildialogen bleibt die Kopfzeile als eigenes Geschwister
+**vor** dem Scrollbereich. Beispiele: `#salafDetail` besitzt
+`> .salaf-story-nav` + `> .salaf-detail-scroll`, nicht einen Header
+INNERHALB von `.salaf-detail-scroll`. Andere bestehende Modalbereiche
+mit eigenen funktionierenden Dock-Layouts werden nicht überschrieben.
+
+**Einfache Unterseitenstruktur, dauerhaft verpflichtend:**
+oberer fester Dock (einzige Zurück-Funktion) →
+vollbreiter Hero `background-size:cover` ohne zweite Kapsel oder Abstand →
+lesbarer, zugänglicher Inhalt im Scrollbereich →
+unveränderte untere schwebende 3D-Tab-Leiste.
+Keine Gesichter, keine Menschen-/Tierfiguren oder unfreiwillige
+Bild-Schrift; Thema und Profilfarben beachten.
+Die Seiten müssen auf iOS PWA/WKWebView, Android, Smartphone, Fold,
+Tablet, iPad, Desktop und im Querformat gleich bedienbar sein.
+Niemals zusätzliche Testhinweise oder interne Build-Bezeichnungen
+auf öffentlich sichtbaren Oberflächen einsetzen.
+
+**Schätze der Salaf, weitere bindende Sonderregel:**
+Die acht Themenkacheln auf der Einstiegsseite sind selbst das
+Navigationsverzeichnis. **Keine doppelte „Alle Geschichten“-Gesamtliste**
+unterhalb der Themenkarten anzeigen, auch bei später gefülltem Manifest.
+Freigegebene Geschichten werden unter ihren Kategorien angezeigt;
+die gesonderten Personen-/Offline-Ansichten bleiben erreichbar.
+Der zentrale Navigationsmanager muss den Zustand beim Zurückgehen
+korrekt behandeln.
+
+**Verbindliche Freigabe:** Der bestehende
+`kids/check-salaf-visual-contract-v1380.cjs` innerhalb von
+`scripts/kids-design-guard.js` prüft Portal-JavaScript, direkte
+Appbar-/Hero-Struktur, gemessenen Platzhalter, fixierte CSS-Regeln,
+ursprüngliche Back-Listener, keine globale Doppelliste, eigene
+Story-Scrollfläche, Build-/Service-Worker-Versionen und freigegebene
+Bild-Hashes. Echte iPhone-/Android-/Tablet-Sichtprüfung bleibt
+zusätzlich erforderlich; reine CI-Green-Flags sind keine visuelle Freigabe.
+
+---
+
 ## Verbindliche globale Detailseiten-Architektur — `KIDS_GLOBAL_DETAIL_PAGE_ARCHITECTURE_V1390`
 
 **Für ALLE zukünftigen KIDS-Details verpflichtend:** Propheten, Ṣaḥābah,

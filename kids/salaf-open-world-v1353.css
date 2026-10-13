@@ -626,3 +626,56 @@ html body #view-salaf[data-profile="girl"][data-topic-open="true"]
     rgba(33,18,38,.03) 33%,rgba(36,24,43,.22) 52%,
     rgba(43,32,53,.77) 85%,var(--salaf-color) 100%)!important;
 }
+
+/* SALAF_FIXED_DETAIL_AND_STORY_V1400
+ * Salaf category uses the shared body-pinned rail with an in-flow spacer.
+ * A real opened Salaf story also has ONE rail OUTSIDE the story scroller.
+ */
+html body #salafDetail.salaf-detail:not([hidden]){
+  display:flex!important;
+  flex-direction:column!important;
+  height:100dvh!important;
+  max-height:100dvh!important;
+  min-height:0!important;
+  overflow:hidden!important;
+}
+html body #salafDetail.salaf-detail:not([hidden]) > .salaf-story-nav.kids-detail-appbar{
+  display:flex!important;
+  flex:0 0 auto!important;
+  position:relative!important;
+  top:auto!important;
+  inset-block-start:auto!important;
+  z-index:60!important;
+  width:100%!important;
+  margin:0!important;
+  min-height:calc(65px + env(safe-area-inset-top,0px))!important;
+  padding:calc(10px + env(safe-area-inset-top,0px))
+          max(16px,env(safe-area-inset-right,0px)) 10px
+          max(16px,env(safe-area-inset-left,0px))!important;
+  border:0!important;
+  border-bottom:1px solid var(--sl-line)!important;
+  border-radius:0!important;
+  background:linear-gradient(110deg,#123548,#082537)!important;
+  transform:none!important;
+  box-shadow:none!important;
+}
+html body:has(.app[data-gender="girl"]) #salafDetail.salaf-detail:not([hidden])
+ > .salaf-story-nav.kids-detail-appbar{
+  background:linear-gradient(110deg,#483147,#2b2035)!important;
+}
+html body #salafDetail.salaf-detail > .salaf-detail-scroll{
+  box-sizing:border-box!important;
+  flex:1 1 auto!important;
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  overscroll-behavior-y:contain!important;
+  -webkit-overflow-scrolling:touch!important;
+  scroll-padding-top:4px!important;
+}
+html body #salafDetail.salaf-detail .salaf-detail-cover{
+  margin-top:0!important;
+  border-top:0!important;
+}

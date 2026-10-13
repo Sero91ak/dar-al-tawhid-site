@@ -113,6 +113,72 @@ function upgradeExplanationActions(){
   }
 }
 
+/* KIDS_GLOBAL_PINNED_DETAIL_PORTAL_V1400
+ * One *real* pinned appbar for any in-tab detail with:
+ * .view.kids-detail-page > .kids-detail-appbar.
+ * iOS WKWebView may scroll a sticky header together with its transformed
+ * .view/.shell ancestors. Reparent the ORIGINAL bar to document.body while
+ * retaining its click listeners and a measured layout spacer at its origin.
+ * This is reusable for all future details, not a Salaf-specific clone.
+ */
+const pinned=new Map();
+function pinDetailPages(){
+  const eligible=Array.from(document.querySelectorAll(".shell > .view.active.kids-detail-page"));
+  for(const root of eligible){
+    let record=pinned.get(root);
+    const bar=record?.bar||root.querySelector(":scope > .kids-detail-appbar");
+    if(!bar)continue;
+    const modalOpen=root.id==="view-salaf"&&document.documentElement.classList.contains("salaf-detail-open");
+    if(bar.hidden||modalOpen)continue;
+    if(!record){
+      const spacer=document.createElement("div");
+      spacer.className="kids-detail-head-spacer";
+      spacer.setAttribute("aria-hidden","true");
+      root.insertBefore(spacer,bar);
+      record={bar,spacer};
+      pinned.set(root,record);
+    }
+    if(bar.parentElement!==document.body){
+      bar.classList.add("kids-portal-appbar");
+      bar.dataset.kidsPinnedDetail="v1400";
+      document.body.appendChild(bar);
+    }
+    const css=getComputedStyle(root);
+    for(const property of ["--kids-detail-head-bg","--kids-detail-head-line","--salaf-ink","--salaf-muted"]){
+      const value=css.getPropertyValue(property).trim();
+      if(value)bar.style.setProperty(property,value);
+    }
+    record.spacer.style.height=Math.max(68,Math.ceil(bar.getBoundingClientRect().height))+"px";
+  }
+  for(const [root,record] of pinned){
+    const active=eligible.includes(root)&&!record.bar.hidden&&
+      !(root.id==="view-salaf"&&document.documentElement.classList.contains("salaf-detail-open"));
+    if(active)continue;
+    if(record.spacer.isConnected&&record.bar.parentElement!==root){
+      root.insertBefore(record.bar,record.spacer.nextSibling);
+    }
+    record.bar.classList.remove("kids-portal-appbar");
+    record.bar.removeAttribute("data-kids-pinned-detail");
+    record.bar.style.removeProperty("--kids-detail-head-bg");
+    record.bar.style.removeProperty("--kids-detail-head-line");
+    record.bar.style.removeProperty("--salaf-ink");
+    record.bar.style.removeProperty("--salaf-muted");
+    record.spacer.remove();
+    pinned.delete(root);
+  }
+}
+/* Salaf stories have a distinct full-screen reading overlay. Its header
+ * belongs OUTSIDE the content's own overflow-y:auto scroller. */
+function dockSalafStoryHeader(){
+  const detail=document.getElementById("salafDetail");
+  if(!detail)return;
+  const scroll=detail.querySelector(".salaf-detail-scroll");
+  const header=scroll?.querySelector(":scope > .salaf-story-nav");
+  if(header){
+    header.dataset.kidsPinnedDetail="v1400";
+    detail.insertBefore(header,scroll);
+  }
+}
 let syncing=false,queued=false;
 function sync(){
  if(syncing)return;
@@ -120,6 +186,8 @@ function sync(){
  try{
    for(const c of S)initDetail(c);
    for(const id of LEGACY)initLegacy(id);
+   dockSalafStoryHeader();
+   pinDetailPages();
    upgradeExplanationActions();
    removeExternalSourceProofActions();
  }finally{syncing=false;}
@@ -134,7 +202,7 @@ function start(){
  mo.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:["class","aria-hidden"]});
  document.addEventListener("click",queue,true);
  window.addEventListener("pageshow",queue);
- window.DARKidsDetailDock={ready:true,refresh:sync,version:"1251"};
+ window.DARKidsDetailDock={ready:true,refresh:sync,version:"1400",pinDetailPages};
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
 })();

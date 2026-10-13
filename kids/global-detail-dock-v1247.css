@@ -1011,3 +1011,71 @@ html body .shell > .view.active.kids-detail-page .kids-detail-appbar
   text-overflow:clip!important;
   white-space:normal!important;
 }
+
+/* KIDS_FIXED_DETAIL_PORTAL_CSS_V1400
+ * The stable, global child-detail appbar is portalled to <body> by the
+ * central Dock controller, outside transformed/animated scroll parents.
+ * This ensures a true viewport-pinned rail in iOS PWA/WKWebView,
+ * Android, browser, tablet and landscape. Existing bottom dock unaffected.
+ * A measured in-flow spacer holds the hero immediately below the rail.
+ */
+html body .kids-detail-head-spacer {
+  display:block!important;
+  flex:none!important;
+  height:var(--kids-detail-head-height,68px);
+  min-height:68px;
+  width:100%;
+  pointer-events:none!important;
+  background:transparent!important;
+}
+html body > .kids-detail-appbar.kids-portal-appbar {
+  display:flex!important;
+  position:fixed!important;
+  inset-block-start:var(--safe-top,max(16px,env(safe-area-inset-top,0px)))!important;
+  top:var(--safe-top,max(16px,env(safe-area-inset-top,0px)))!important;
+  inset-inline:0!important;
+  left:0!important;
+  right:0!important;
+  width:100vw!important;
+  max-width:none!important;
+  box-sizing:border-box!important;
+  margin:0!important;
+  height:auto!important;
+  min-height:68px!important;
+  padding:10px max(16px,env(safe-area-inset-right,0px))
+          10px max(16px,env(safe-area-inset-left,0px))!important;
+  transform:none!important;
+  translate:none!important;
+  animation:none!important;
+  opacity:1!important;
+  z-index:30010!important;
+  border:0!important;
+  border-bottom:1px solid var(--kids-detail-head-line,rgba(242,213,156,.23))!important;
+  border-radius:0!important;
+  background:var(--kids-detail-head-bg,#092b3b)!important;
+  color:var(--salaf-ink,#fff9ee)!important;
+  box-shadow:none!important;
+  isolation:isolate!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  pointer-events:auto!important;
+  -webkit-user-select:none!important;
+  user-select:none!important;
+  -webkit-touch-callout:none!important;
+}
+html body > .kids-detail-appbar.kids-portal-appbar[hidden] {
+  display:none!important;
+}
+html body > .kids-detail-appbar.kids-portal-appbar .kids-detail-appbar-title {
+  color:var(--salaf-ink,#fff9ee)!important;
+  white-space:normal!important;
+  overflow-wrap:anywhere!important;
+}
+html body > .kids-detail-appbar.kids-portal-appbar .kids-detail-appbar-subtitle {
+  color:var(--salaf-muted,#d7e1df)!important;
+  white-space:normal!important;
+}
+html body > .kids-detail-appbar.kids-portal-appbar:after {content:none!important;}
+@media (prefers-reduced-motion:reduce) {
+ html body > .kids-detail-appbar.kids-portal-appbar {transition:none!important}
+}

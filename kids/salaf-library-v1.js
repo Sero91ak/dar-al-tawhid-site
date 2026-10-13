@@ -88,7 +88,10 @@
         '<section class="salaf-refs"><h3>Unsere Quellen</h3><div id="salafRefs"></div></section></div></div>'+
     '</section>';
   root.innerHTML=home;
-  var q=function(s){return root.querySelector(s)||(details&&(details.matches(s)?details:details.querySelector(s)))||null};
+  var q=function(s){
+    return root.querySelector(s)||(details&&(details.matches(s)?details:details.querySelector(s)))||
+      (s==="#salafTopicAppbar"||s==="#salafTopicLabel"||s==="#salafClear"?document.querySelector(s):null);
+  };
   var pane=q("#salafHome"),list=q("#salafList"),details=q("#salafDetail");
   /* Escape the shell stacking context so the full-screen player covers the bottom navigation. */
   document.body.appendChild(details);
@@ -152,9 +155,10 @@
             '<span class="salaf-topic-copy"><strong>'+esc(c.short)+'</strong><small>'+esc(c.caption)+'</small></span>'+
             (count?'<span class="salaf-card-count">'+count+' Geschichten</span>':"")+'</button>';
         }).join("")+'</div>';
-        list.innerHTML=vis.length
-          ?'<div class="salaf-list-head"><h3>Alle Geschichten</h3></div><div class="salaf-story-grid">'+vis.map(card).join("")+'</div>'
-          :'<p class="salaf-upcoming">Wähle ein Thema und entdecke, was es bedeutet. Die ersten geprüften Geschichten folgen nach ihrer Freigabe.</p>';
+        /* SALAF_CATEGORIES_ONLY_V1400: The overview contains ONLY the eight
+           topic categories. Story cards belong solely to their category.
+           "Personen" and "Offline" remain separate explicit user views. */
+        list.replaceChildren();
       }
     }else if(tab==="people"){
       var people=[...new Set(vis.map(function(i){return i.person}))].sort(function(a,b){return a.localeCompare(b,"de")});
@@ -240,10 +244,13 @@
   q("#salafRead").addEventListener("click",function(){q("#salafText").hidden=false;q("#salafText").scrollIntoView({block:"start",behavior:"smooth"})});
   q("#salafFollow").addEventListener("click",function(){reader?.openReadAlong?.()});
   q(".salaf-back").addEventListener("click",closeStory);
+  // Keep the original back button functional after the global dock moves
+  // its DOM element to the fixed top layer outside the scrollable .shell.
+  q("#salafClear").addEventListener("click",function(e){
+    e.preventDefault();
+    topic="";tab="all";render();scrollSalafTop();
+  });
   root.addEventListener("click",function(e){
-    if(e.target.closest("#salafClear")){
-      e.preventDefault();topic="";tab="all";render();scrollSalafTop();return;
-    }
     var story=e.target.closest("[data-story-id]");if(story&&story.closest(".salaf-story")){
       var i=items.find(function(x){return x.id===story.dataset.storyId});if(i)showStory(i);return;
     }

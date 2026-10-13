@@ -1,7 +1,7 @@
 {
-  "buildId": "kids-shell-v201-dua-v4-1306-listen-scroll-v18-salaf-visible-v1390",
+  "buildId": "kids-shell-v201-dua-v4-1306-listen-scroll-v18-salaf-visible-v1400",
   "label": "KIDS · V1.09.22",
-  "salafVisualPolicy": "V1390 · gesichtsfreie Motive · oben dauerhaft feste globale Detail-Navigation · vollbreiter Hero · prüfsummenfixiert",
+  "salafVisualPolicy": "V1400 · feste globale Detailnavigation unabhängig vom Scrollen · Kategorien ohne doppelte Gesamtliste · einheitlicher Hero · gesichtsfreie Motive",
   "releasedAt": "2026-10-10T11:00:00Z",
   "note": "KIDS V1.09.21: Startbildschirm wird beim Öffnen anhand der realen Bildschirmhöhe und der festen unteren Tabnavigation ausgerichtet. Während manuellen Scrollens bleibt die berechnete Hero- und Gebetszeiten-Geometrie stabil; kein störendes Nachwachsen des Bildes. Auf iPhone, Android und iPad bleibt die bestehende flexible 1304-Geometrie, das freigegebene Moscheemotiv und alle fünf Gebetszeiten erhalten. Sehr kleine Geräte bleiben scrollbar.",
   "visualSystem": {
@@ -28,7 +28,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1390",
+    "serviceWorkerCache": "v1400",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
