@@ -135,15 +135,8 @@ var observer=new MutationObserver(function(mutations){
   }
 });
 observer.observe(modal,{attributes:true,attributeFilter:["class","data-quiz-band"],subtree:false});
-if(body)observer.observe(body,{childList:true,subtree:true});
-var retry=0;
-function initPanels(){
-  if(!dashboard)dashboard=document.getElementById("quizLearningDashboard");
-  if(!library)library=document.getElementById("quizLibraryPanel");
-  if(dashboard)observer.observe(dashboard,{childList:true});
-  if(library)observer.observe(library,{childList:true});
-  refresh();
-  if((!dashboard||!library)&&retry++<20)setTimeout(initPanels,250);
-}
-initPanels();
+/* The catalog/dashboard are lazy-created on first open; follow the stage for life,
+   not just during a short loading timeout. */
+if(stage)observer.observe(stage,{childList:true,subtree:true});
+refresh();
 })();
