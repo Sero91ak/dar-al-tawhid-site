@@ -1,6 +1,17 @@
 # START HERE – CHATGPT HANDOVER
 
-DĀR AL TAWḤĪD KIDS AKADEMI. Stand vom 13. Oktober 2026. Alle 208 Slots haben auf diesem Zweig eine Lektion mit drei Altersfassungen. Die Meldung „97/208“ gehört zum Commit `3bd743a0b0`. Der Strukturentwurf 98–208 folgte in `21f1082990`. Danach wurden die Kindersätze der Slots 98–208 so geschrieben, dass die Gruppen 4–5 und 6–8 den Vers, den Alltag und die Übung lernen. Die Quellengrenze bleibt in der Quellenkarte und in der Fassung 9–10. Das ist keine wissenschaftliche Freigabe und kein Live-Deploy.
+## Aktueller Stand nach der redaktionellen Korrekturrunde
+
+**Aktueller Arbeitsstand: nur PR #1113, keine Veröffentlichung.** Seit der ursprünglichen Übergabe wurden die 111 Einheiten in `curriculum-v38.js` redaktionell bearbeitet: sichtbare QA-/Freigabe- und URL-Hinweise aus Kindertexten entfernt, fehlende Belege nicht als Hadithe angezeigt, 110 Quizpakete neu auf das Lernziel ausgerichtet und 33 leere gesprochene Textzeilen wiederhergestellt. Die gesonderte Kinderschutzlektion 98 behält ihren Schwerpunkt. Die Altersgruppe 9–10 sieht keine internen Quellenprüfvermerke mehr; die Grenzen stehen in `sourceAudit` und der Quellenakte.
+
+**Zählung aus der aktuellen Datei:** 111 V38-Entwürfe mit 333 Altersfassungen, 888 Quizfragen und 1.407 eindeutigen, nicht erzeugten deutschen Sprechtextbausteinen (2.109 Verwendungskontexte). Projektweit weiterhin 208 Unterrichts-IDs, 624 Altersfassungen als Entwurf und 0 wissenschaftlich freigegebene Fassungen.
+
+**Wichtig:** Die neue Inhalts-/Strukturprüfung wurde programmgesteuert anhand der GitHub-Dateien durchgeführt; der Repository-Node-Testlauf `node kids/tools/audit-academy-visitor-copy-v1.cjs --strict` ist als zusätzlicher verpflichtender Prüfschritt vorgesehen und in dieser Sitzung **noch nicht als ausgeführter Node-Lauf bestätigt**. Es wurde keine externe fachliche Quellenfreigabe vorgenommen. Die 17 offenen hanbalitischen Fiqh-Lektionen und die übrigen nicht unabhängig geprüften Belege bleiben gesperrt.
+
+Weiterarbeit: `kids-akademie/NEXT_TASKS.md`, `kids-akademie/QUALITY_AUDIT_V38.md` und `kids/tools/audit-academy-visitor-copy-v1.cjs`. Kein Audio, Merge oder Live-Deploy.
+
+
+DĀR AL TAWḤĪD KIDS AKADEMI. Stand vom 13. Oktober 2026. Alle 208 Slots haben auf diesem Zweig eine Lektion mit drei Altersfassungen. Die Meldung „97/208“ gehört zum Commit `3bd743a0b0`. Der Strukturentwurf 98–208 folgte in `21f1082990`. Danach wurden die Kindersätze der Slots 98–208 so geschrieben, dass die Gruppen 4–5 und 6–8 den Vers, den Alltag und die Übung lernen. Die Quellengrenzen bleiben im internen Quellenregister und in sourceAudit dokumentiert. Das ist keine wissenschaftliche Freigabe und kein Live-Deploy.
 
 ## Einstieg
 
@@ -26,7 +37,7 @@ Gezählt mit `node kids/tools/build-akademie-handover-status-v1.cjs` gegen Jahre
 - Die Slots 91–208 tragen `primary-page-read-islamweb-2026-10-13`.
 - Freigegebene Altersfassungen: 0 von 624. `religiousSourcesVerified` von Paket V38 steht auf false.
 - Live-Deploy: nicht ausgeführt.
-- Audioerzeugung: nicht ausgeführt. `kids/data/academy-voice-plan-v38.json` enthält 1521 ungenerierte deutsche Sprechtexte. `generateCreditsUsed` ist 0.
+- Audioerzeugung: nicht ausgeführt. `kids/data/academy-voice-plan-v38.json` enthält 1407 ungenerierte deutsche Sprechtexte. `generateCreditsUsed` ist 0.
 
 Die Slots 87–90 bleiben Entwürfe mit nicht erneut geprüfter Quellenmetadaten. Slots 98–208 bleiben Entwürfe aus gelesenen Ibn-Kaṯīr-Seiten, jetzt mit kindlicher Unterrichtssprache. Al-Mughnī wurde für die Fiqh-Stunden nicht gelesen. Lektion 98 verwendet zusätzlich die bereits gelesenen Stellen Qurʾān 16:90 und Qurʾān 49:10. „Du bist nicht schuld“ und der Weg zur vertrauten erwachsenen Person sind die Schutzregel der Stunde, kein eigener Verssatz.
 
