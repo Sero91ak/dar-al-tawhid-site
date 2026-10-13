@@ -1,0 +1,38 @@
+name: Dar Test Android PWA · Touch QA
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Deploy Dar Test App"]
+    types: [completed]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dar-test-android-pwa-qa
+  cancel-in-progress: true
+
+jobs:
+  android-chrome:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Browser-Bibliothek installieren
+        run: |
+          npm install --no-save --ignore-scripts playwright
+          npx playwright install --with-deps chromium
+      - name: Android Chrome · Qur'an, Beiträge und Tippen prüfen
+        run: node test/tools/android-pwa-smoke.cjs
+      - name: Screenshots, Klickziele und Fehlermeldungen sichern
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-test-android-pwa-touch-evidence
+          path: dar-test-android-pwa-evidence/
+          retention-days: 5
+          if-no-files-found: warn
