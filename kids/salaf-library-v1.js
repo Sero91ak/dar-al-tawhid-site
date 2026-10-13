@@ -7,15 +7,16 @@
   var root=document.getElementById("view-salaf");
   if(!root)return;
   var CATEGORIES=[
-    {id:"rahma",title:"Barmherzigkeit & Helfen",short:"Barmherzigkeit",caption:"Helfen und Gutes tun",img:"/kids/assets/deen/adab-akhlaq.jpg"},
-    {id:"sidq",title:"Ehrlichkeit & Vertrauen",short:"Ehrlichkeit",caption:"Die Wahrheit sagen",img:"/kids/assets/deen/iman.jpg"},
-    {id:"sabr",title:"Geduld & Sanftmut",short:"Geduld",caption:"Ruhig und freundlich bleiben",img:"/kids/assets/prophets-v2/ayyub-card.jpg"},
-    {id:"ilm",title:"Wissen & Lernen",short:"Wissen",caption:"Mit Freude Neues lernen",img:"/kids/assets/deen/deen-entry.jpg"},
-    {id:"adab",title:"Freundschaft & Adab",short:"Freundschaft",caption:"Gut miteinander umgehen",img:"/kids/assets/kids-art/knowledge-courtyard-v11.jpg"},
-    {id:"family",title:"Familie & Eltern",short:"Familie",caption:"Liebe und Fürsorge",img:"/kids/assets/prophets-v2/ismail-card.jpg"},
-    {id:"hikma",title:"Klugheit & Verantwortung",short:"Klugheit",caption:"Gute Entscheidungen",img:"/kids/assets/deen/ibadah.jpg"},
-    {id:"shukr",title:"Dankbarkeit & Bescheidenheit",short:"Dankbarkeit",caption:"Das Gute erkennen",img:"/kids/assets/deen/tawhid.jpg"}
+    {id:"rahma",title:"Barmherzigkeit & Helfen",short:"Barmherzigkeit",caption:"Helfen und Gutes tun",img:"/kids/assets/salaf/topics-v1370/rahma.jpg"},
+    {id:"sidq",title:"Ehrlichkeit & Vertrauen",short:"Ehrlichkeit",caption:"Die Wahrheit sagen",img:"/kids/assets/salaf/topics-v1370/sidq.jpg"},
+    {id:"sabr",title:"Geduld & Sanftmut",short:"Geduld",caption:"Ruhig und freundlich bleiben",img:"/kids/assets/salaf/topics-v1370/sabr.jpg"},
+    {id:"ilm",title:"Wissen & Lernen",short:"Wissen",caption:"Mit Freude Neues lernen",img:"/kids/assets/salaf/topics-v1370/ilm.jpg"},
+    {id:"adab",title:"Freundschaft & Adab",short:"Freundschaft",caption:"Gut miteinander umgehen",img:"/kids/assets/salaf/topics-v1370/adab.jpg"},
+    {id:"family",title:"Familie & Eltern",short:"Familie",caption:"Liebe und Fürsorge",img:"/kids/assets/salaf/topics-v1370/family.jpg"},
+    {id:"hikma",title:"Klugheit & Verantwortung",short:"Klugheit",caption:"Gute Entscheidungen",img:"/kids/assets/salaf/topics-v1370/hikma.jpg"},
+    {id:"shukr",title:"Dankbarkeit & Bescheidenheit",short:"Dankbarkeit",caption:"Das Gute erkennen",img:"/kids/assets/salaf/topics-v1370/shukr.jpg"}
   ];
+  var INSIGHTS={"rahma":{"intro":{"4-5":"Barmherzig sein heißt: Du siehst, wenn jemand Hilfe braucht, und bist freundlich.","6-8":"Wer barmherzig ist, bemerkt, wenn andere Hilfe brauchen, und hilft mit einem guten Herzen.","9-10":"Barmherzigkeit zeigt sich darin, wie wir mit Menschen umgehen, besonders wenn sie unsere Hilfe brauchen."},"question":{"4-5":"Wem kannst du heute helfen?","6-8":"Welche kleine Hilfe könnte heute jemanden glücklich machen?","9-10":"Wie kannst du jemanden unterstützen, ohne dafür ein Lob zu erwarten?"}},"sidq":{"intro":{"4-5":"Ehrlich sein bedeutet: Du sagst die Wahrheit.","6-8":"Ehrlichkeit bedeutet, bei der Wahrheit zu bleiben – auch wenn es schwerfällt.","9-10":"Ehrlichkeit heißt, aufrichtig zu sprechen und zu handeln, selbst wenn wir einen Fehler zugeben müssen."},"question":{"4-5":"Was sagst du, wenn dir etwas kaputtgeht?","6-8":"Was hilft dir, einen Fehler ehrlich zuzugeben?","9-10":"Warum ist Vertrauen wichtig, wenn wir mit anderen umgehen?"}},"sabr":{"intro":{"4-5":"Geduld heißt: Du bleibst ruhig und gibst nicht gleich auf.","6-8":"Geduldig sein heißt, ruhig weiterzumachen, auch wenn etwas Zeit und Übung braucht.","9-10":"Geduld hilft uns, Schwierigkeiten mit Ruhe und Ausdauer zu begegnen, statt vorschnell aufzugeben."},"question":{"4-5":"Worauf kannst du geduldig warten?","6-8":"Wann hat dir Geduld schon einmal geholfen?","9-10":"Wie kannst du ruhig bleiben, wenn etwas nicht sofort gelingt?"}},"ilm":{"intro":{"4-5":"Lernen ist schön. Mit jeder neuen Sache weißt du ein bisschen mehr.","6-8":"Wissen hilft dir, deine Fragen zu verstehen, Gutes zu tun und Allah besser kennenzulernen.","9-10":"Wer Wissen sucht, lernt Fragen zu stellen, zuverlässig zu prüfen und das Gelernte gut anzuwenden."},"question":{"4-5":"Was willst du heute lernen?","6-8":"Welche Frage möchtest du heute jemandem stellen?","9-10":"Wie findest du heraus, ob eine Antwort zuverlässig ist?"}},"adab":{"intro":{"4-5":"Gute Freunde helfen sich und sprechen freundlich.","6-8":"Freundschaft wächst, wenn wir zuhören, freundlich reden und einander helfen.","9-10":"Guter Umgang zeigt sich durch Rücksicht, ehrliche Worte und Hilfe, auch wenn Freunde einmal verschiedener Meinung sind."},"question":{"4-5":"Wie machst du jemandem eine Freude?","6-8":"Was kannst du tun, wenn dein Freund traurig ist?","9-10":"Wie kannst du freundlich bleiben, wenn du anderer Meinung bist?"}},"family":{"intro":{"4-5":"In der Familie helfen wir einander und zeigen Liebe.","6-8":"Zu Hause zeigen wir Fürsorge, indem wir einander unterstützen und mit Respekt sprechen.","9-10":"Familie bedeutet Verantwortung füreinander: Wir achten aufeinander und helfen auch bei kleinen Alltagsaufgaben."},"question":{"4-5":"Wem hilfst du heute zu Hause?","6-8":"Welche Aufgabe könntest du heute für deine Familie übernehmen?","9-10":"Wie kannst du zu Hause Verantwortung übernehmen, ohne erst darum gebeten zu werden?"}},"hikma":{"intro":{"4-5":"Klug sein heißt: Erst denken, dann handeln.","6-8":"Eine kluge Entscheidung beginnt damit, dass du kurz nachdenkst, bevor du etwas tust.","9-10":"Verantwortung bedeutet, mögliche Folgen einer Entscheidung zu bedenken und das Gute bewusst zu wählen."},"question":{"4-5":"Was machst du, bevor du losrennst?","6-8":"Wer kann dir bei einer schweren Entscheidung helfen?","9-10":"Welche Fragen helfen dir, eine gute Entscheidung zu treffen?"}},"shukr":{"intro":{"4-5":"Dankbar sein heißt: Du freust dich über Gutes und sagst Danke.","6-8":"Dankbarkeit heißt, schöne Dinge und kleine Hilfen zu erkennen und dafür Danke zu sagen.","9-10":"Dankbarkeit zeigt sich nicht nur in Worten, sondern auch darin, wie sorgsam wir mit dem umgehen, was wir haben."},"question":{"4-5":"Wofür sagst du heute Danke?","6-8":"Für welche kleine Sache bist du heute dankbar?","9-10":"Wie kannst du deine Dankbarkeit durch eine gute Tat zeigen?"}}};
   var MANIFEST="/kids/data/salaf-library-v1.json?v=1";
   var items=[],tab="all",topic="",active=null,reader=null,audio=new Audio(),playing=false;
   audio.preload="metadata";audio.setAttribute("playsinline","");
@@ -90,6 +91,7 @@
   }
   function render(){
     root.dataset.profile=gender();
+    root.dataset.topicOpen=(tab==="all"&&!!topic)?"true":"false";
     q("#salafAge").textContent="Für "+prettyAge()+" Jahre";
     root.querySelectorAll("[data-salaf-tab]").forEach(function(b){b.classList.toggle("selected",b.dataset.salafTab===tab);b.setAttribute("aria-pressed",String(b.dataset.salafTab===tab))});
     var vis=available();
@@ -97,13 +99,26 @@
       if(topic){
         var chosen=CATEGORIES.find(function(c){return c.id===topic});
         var matches=vis.filter(function(i){return i.category===topic});
-        pane.innerHTML='<div class="salaf-topic-focus">'+
-          '<button type="button" id="salafClear" class="salaf-return">‹ Alle Themen</button>'+
-          '<h3>'+esc(chosen?.short||"Geschichten")+'</h3>'+
-          '<p>'+esc(chosen?.caption||"Entdecke eine neue Geschichtenwelt")+'</p></div>';
+        var insight=INSIGHTS[chosen.id]||INSIGHTS.rahma;
+        var topicArt=safeAsset(chosen.img)||"";
+        pane.innerHTML='<header class="salaf-topic-stage" style="--salaf-stage-art:url(&quot;'+esc(topicArt)+'&quot;)">'+
+          '<button type="button" id="salafClear" class="salaf-topic-back">‹ Alle Themen</button>'+
+          '<div class="salaf-topic-stage-copy"><span class="salaf-eyebrow">DEIN THEMA</span>'+
+          '<h3>'+esc(chosen.short)+'</h3><p>'+esc(chosen.caption)+'</p></div></header>'+
+          '<section class="salaf-topic-thought" aria-label="Über das Thema nachdenken">'+
+          '<span class="salaf-topic-kicker">ENTDECKEN & NACHDENKEN</span>'+
+          '<p>'+esc(insight.intro[age()]||insight.intro["6-8"])+'</p>'+
+          '<strong>'+esc(insight.question[age()]||insight.question["6-8"])+'</strong></section>';
         list.innerHTML="";
-        renderCards(list,matches);
-        q("#salafClear")?.addEventListener("click",function(){topic="";render()});
+        if(matches.length){
+          list.innerHTML='<div class="salaf-list-head"><h3>Geschichten zu diesem Thema</h3></div>';
+          var storiesNode=document.createElement("div");
+          list.appendChild(storiesNode);
+          renderCards(storiesNode,matches);
+        }else{
+          list.innerHTML='<p class="salaf-upcoming salaf-topic-note">Hier sammeln wir sorgfältig geprüfte Geschichten. Bis dahin kannst du über die Frage oben nachdenken.</p>';
+        }
+        q("#salafClear")?.addEventListener("click",function(){topic="";render();window.scrollTo({top:0,behavior:"smooth"})});
       }else{
         pane.innerHTML='<div class="salaf-topic-grid">'+CATEGORIES.map(function(c){
           var count=vis.filter(function(i){return i.category===c.id}).length;
@@ -114,7 +129,7 @@
         }).join("")+'</div>';
         list.innerHTML=vis.length
           ?'<div class="salaf-list-head"><h3>Alle Geschichten</h3></div><div class="salaf-story-grid">'+vis.map(card).join("")+'</div>'
-          :'<p class="salaf-upcoming">Hier erwarten dich bald wunderschöne Geschichten.</p>';
+          :'<p class="salaf-upcoming">Wähle ein Thema und entdecke, was es bedeutet. Die ersten geprüften Geschichten folgen nach ihrer Freigabe.</p>';
       }
     }else if(tab==="people"){
       var people=[...new Set(vis.map(function(i){return i.person}))].sort(function(a,b){return a.localeCompare(b,"de")});
@@ -201,7 +216,7 @@
     var story=e.target.closest("[data-story-id]");if(story&&story.closest(".salaf-story")){
       var i=items.find(function(x){return x.id===story.dataset.storyId});if(i)showStory(i);return;
     }
-    var cat=e.target.closest("[data-topic]");if(cat){topic=topic===cat.dataset.topic?"":cat.dataset.topic;render();return}
+    var cat=e.target.closest("[data-topic]");if(cat){topic=topic===cat.dataset.topic?"":cat.dataset.topic;render();window.scrollTo({top:0,behavior:"smooth"});return}
     var switcher=e.target.closest("[data-salaf-tab]");if(switcher){tab=switcher.dataset.salafTab;topic="";render();}
   });
   document.addEventListener("click",function(e){var b=e.target.closest?.(".nav-btn[data-target]");if(b&&b.dataset.target!=="salaf"&&active)closeStory()},true);
