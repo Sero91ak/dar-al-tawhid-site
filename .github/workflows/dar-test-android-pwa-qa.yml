@@ -24,6 +24,12 @@ jobs:
     timeout-minutes: 18
     steps:
       - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            test/tools/
+            test/index.html
+            test-apple-touch-icon.png
+          sparse-checkout-cone-mode: false
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
