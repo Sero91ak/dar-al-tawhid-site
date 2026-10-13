@@ -172,6 +172,7 @@ jobs:
           ROOT=pathlib.Path(".")
           sys.path.insert(0,str(ROOT/"kids/tools"))
           from voice_text import SYNTHESIS_REVISION, prepare_kids_voice_text
+          from quiz_joy_v4_script import prepare as prepare_quiz_v4
 
           QUIZ=ROOT/"kids/data/quiz-kids.json"
           DUA=ROOT/"kids/data/dua-kids.json"
@@ -310,15 +311,10 @@ jobs:
               label=norm(label)
               return label if not label or label.endswith((".", "!", "?", "؟")) else label+"."
 
+          def quiz_v4_texts(q):
+              return prepare_quiz_v4(q)
           def quiz_prompt(q):
-              question=norm(q.get("question"))
-              labels=[norm((a or {}).get("label")) for a in (q.get("answers") or [])]
-              labels=[x for x in labels if x]
-              low=[x.casefold() for x in labels]
-              if str(q.get("ageBand") or "")=="4-6" and len(low)==2 and "ja" in low and "nein" in low:
-                  return norm(question+" Ja oder Nein?")
-              choices=" ".join(f"Antwort {i+1}: {speech_choice(label)}" for i,label in enumerate(labels))
-              return norm(question+" "+choices)
+              return quiz_v4_texts(q)["questionAudioText"]
 
           def duration(path):
               import shutil
@@ -386,8 +382,8 @@ jobs:
               return ELEVEN_QUIZ_HYBRID_MODEL if len(segments)>1 else ELEVEN_QUIZ_AR_MODEL
 
           def quiz_required_texts(q):
-              parts=[quiz_prompt(q),norm(q.get("success")),norm(q.get("retry")),norm(q.get("explanation"))]
-              return [p for p in parts if p]
+              row=quiz_v4_texts(q)
+              return [row[k] for k in ("questionAudioText","correctAudioText","retryAudioText","explanationAudioText")]
 
           def synth(text,profile,asset_dir,serial,model_id):
               prepared=prepare_profile_text(text,profile)
@@ -881,20 +877,16 @@ jobs:
                   "9-10":"quiz_9_10"
               }
               for q in selected_quiz_items:
-                  prompt=quiz_prompt(q)
-                  quiz_texts.append(prompt)
-                  quiz_models[prompt]=quiz_model_for_text(prompt)
-                  quiz_profiles[prompt]="quiz_fusha" if ARABIC_SCRIPT_RE.fullmatch(prompt) else age_profile.get(str(q.get("ageBand") or ""),"quiz_9_10")
-                  for feedback in (norm(q.get("success")),norm(q.get("retry"))):
-                      if feedback:
-                          quiz_texts.append(feedback)
-                          quiz_models[feedback]=quiz_model_for_text(feedback)
-                          quiz_profiles[feedback]="quiz_fusha" if ARABIC_SCRIPT_RE.fullmatch(feedback) else "quiz_feedback"
-                  explanation=norm(q.get("explanation"))
-                  if explanation:
-                      quiz_texts.append(explanation)
-                      quiz_models[explanation]=quiz_model_for_text(explanation)
-                      quiz_profiles[explanation]="quiz_fusha" if ARABIC_SCRIPT_RE.fullmatch(explanation) else "quiz_feedback"
+                  voice=quiz_v4_texts(q)
+                  for key in ("questionAudioText","correctAudioText","retryAudioText","explanationAudioText"):
+                      speech=voice[key]
+                      quiz_texts.append(speech)
+                      quiz_models[speech]=quiz_model_for_text(speech)
+                      quiz_profiles[speech]=(
+                          "quiz_fusha" if ARABIC_SCRIPT_RE.fullmatch(speech) else
+                          age_profile.get(str(q.get("ageBand") or ""),"quiz_9_10")
+                          if key=="questionAudioText" else "quiz_feedback"
+                      )
               final_feedback="Sehr gut. Du hast das Quiz geschafft."
               quiz_texts.append(final_feedback)
               quiz_profiles[final_feedback]="quiz_feedback"
@@ -930,6 +922,8 @@ jobs:
                   "ar":"eleven_v4",
                   "voiceProfileId":"serhat-owner-voice-2026",
                   "preserveExistingV4":True,
+                  "speechScriptRevision":"quiz-joy-serhat-v4-20261013",
+                  "voiceModelEnforced":True,
                   "germanPhonemeDictionaryCompatible":True,
                   "germanInlinePronunciationMaster":False,
                   "arabicSegmentQaRequired":True
