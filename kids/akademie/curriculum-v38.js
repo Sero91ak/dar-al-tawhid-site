@@ -63,7 +63,7 @@ const additions=
           "note": "Die Glaubenden sind Geschwister. Frieden stiften und die Hoffnung auf Barmherzigkeit stehen im Vers. Für Kinder heißt Frieden stiften: eine erwachsene Person holen, die das Gemeine beendet. Nicht: allein mit dem Mobbing fertig werden."
         }
       ],
-      "note": "49:11 verbietet Spott, Herabsetzung und verletzende Namen und sagt, dass die Verspotteten besser sein können. Daraus lernen die Kinder: Gehänseltwerden macht sie nicht weniger wert. Der Satz, es sei nicht ihre Schuld, und der Weg zu einer vertrauten erwachsenen Person sind die Schutzregel der Stunde, kein eigener Verssatz. 16:90 trägt Gerechtigkeit und das Verbot des Übergriffs. 49:10 trägt Geschwisterlichkeit, Friedenstiften und Barmherzigkeit. Wir spielen die Gemeinheit nicht nach und verlangen keine Versöhnung, bevor Hilfe da ist. Keine Hadithnummer. Keine synthetische Rezitation. Keine Freigabe. Pädagogische Schutzergänzung: Hilfe auch bei einzelnen verletzenden Vorfällen und weitere Vertrauensperson, falls die erste nicht hilft. Keine erneute wissenschaftliche Verifikation beansprucht."
+      "note": "49:11 verbietet Spott, Herabsetzung und verletzende Namen und sagt, dass die Verspotteten besser sein können. Daraus lernen die Kinder: Gehänseltwerden macht sie nicht weniger wert. Der Satz, es sei nicht ihre Schuld, und der Weg zu einer vertrauten erwachsenen Person sind die Schutzregel der Stunde, kein eigener Verssatz. 16:90 trägt Gerechtigkeit und das Verbot des Übergriffs. 49:10 trägt Geschwisterlichkeit, Friedenstiften und Barmherzigkeit. Wir spielen die Gemeinheit nicht nach und verlangen keine Versöhnung, bevor Hilfe da ist. Keine Hadithnummer. Keine Freigabe. Pädagogische Schutzergänzung: Hilfe auch bei einzelnen verletzenden Vorfällen und weitere Vertrauensperson, falls die erste nicht hilft. Keine erneute wissenschaftliche Verifikation beansprucht."
     },
     "hint": "Wiederholtes Hänseln ist kein Spaß. Du bist nicht schuld. Sag es einer erwachsenen Person, der du vertraust.",
     "sample": "Wenn jemand immer wieder gemein ist, bist du nicht schuld. Sag es einer erwachsenen Person, der du vertraust.",
@@ -292,7 +292,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die Seite erzählt zusätzlich Berichte darüber, wie der Vers herabkam. Diese Berichte werden nicht als nummerierter Hadith der Stunde übernommen. Eine Bitte ist kein Ersatz dafür, bei Gefahr einen Menschen zu holen. Keine synthetische Rezitation. Keine Freigabe für Besucher. Pädagogische Bearbeitung ohne zusätzliche Quellenbehauptung: altersspezifische Wortwahl, Bittgebet im Alltag und sachbezogene Fragen. Wissenschaftlicher Prüfstatus unverändert."
+      "note": "Die Seite erzählt zusätzlich Berichte darüber, wie der Vers herabkam. Diese Berichte werden nicht als nummerierter Hadith der Stunde übernommen. Eine Bitte ist kein Ersatz dafür, bei Gefahr einen Menschen zu holen. Pädagogische Bearbeitung ohne zusätzliche Quellenbehauptung: altersspezifische Wortwahl, Bittgebet im Alltag und sachbezogene Fragen. Wissenschaftlicher Prüfstatus unverändert."
     },
     "hint": "Bei Gefahr holst du einen Menschen. Eine Bitte allein reicht dann nicht.",
     "sample": "Allah ist nah.",
@@ -509,7 +509,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Auszug ist unvollständig gegenüber dem ganzen Vers. Wir ergänzen den fehlenden Teil nicht aus dem Gedächtnis in das arabische Feld. Eine beglaubigte deutsche Übersetzung liegt nicht vor. Keine synthetische Rezitation. Keine Freigabe für Besucher. Unabhängige didaktische Korrektur: Versauszug 2:2 als Teilzitat gekennzeichnet, Quellenprüfung und unfertige Produktionshinweise aus Kindertexten entfernt. Religionswissenschaftliche Freigabe bleibt false."
+      "note": "Der Auszug ist unvollständig gegenüber dem ganzen Vers. Wir ergänzen den fehlenden Teil nicht aus dem Gedächtnis in das arabische Feld. Eine beglaubigte deutsche Übersetzung liegt nicht vor. Unabhängige didaktische Korrektur: Versauszug 2:2 als Teilzitat gekennzeichnet, Quellenprüfung und unfertige Produktionshinweise aus Kindertexten entfernt. Religionswissenschaftliche Freigabe bleibt false."
     },
     "hint": "Wir erfinden keine zusätzliche Geschichte.",
     "sample": "Der Qurʾān ist Allahs Buch.",
@@ -726,7 +726,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers ist eine Mahnung Luqmāns an seinen Sohn auf dieser Tafsīr-Seite. Wir erfinden keine zusätzliche Geschichte über Luqmān. Keine synthetische Rezitation. Keine Freigabe für Besucher. Independenter didaktischer Review 2026-10-13: Kindertexte und Quizfragen umgeschrieben, Quellenstatus unverändert."
+      "note": "Der Vers ist eine Mahnung Luqmāns an seinen Sohn auf dieser Tafsīr-Seite. Wir erfinden keine zusätzliche Geschichte über Luqmān. Independenter didaktischer Review 2026-10-13: Kindertexte und Quizfragen umgeschrieben, Quellenstatus unverändert."
     },
     "hint": "Wir erfinden keine zusätzliche Geschichte.",
     "sample": "Wir erzählen von einer guten Tat, ohne uns wichtig zu machen.",
@@ -943,7 +943,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers erlaubt keine Rachegeschichte für Kinder. Die Grenze bei wiederholter Gemeinheit bleibt. Verzeihen heißt nicht, Gefahr zu verstecken. Keine synthetische Rezitation. Keine Freigabe für Besucher. Independenter didaktischer Review 2026-10-13: Kindertexte und Quizfragen umgeschrieben, Quellenstatus unverändert."
+      "note": "Der Vers erlaubt keine Rachegeschichte für Kinder. Die Grenze bei wiederholter Gemeinheit bleibt. Verzeihen heißt nicht, Gefahr zu verstecken. Independenter didaktischer Review 2026-10-13: Kindertexte und Quizfragen umgeschrieben, Quellenstatus unverändert."
     },
     "hint": "Bei Gefahr holst du einen Menschen. Eine Bitte allein reicht dann nicht.",
     "sample": "Wir können verzeihen.",
@@ -1160,7 +1160,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die Seite legt keine Kleiderordnung für Kinder fest, die wir hier ergänzen würden. Essen und Trinken aus demselben Vers gehören zur späteren Stunde über Essen. Hier üben wir die Ruhe im Gebetsraum. Keine synthetische Rezitation. Keine Freigabe für Besucher. Independenter didaktischer Review 2026-10-13: Kindertexte und Quizfragen umgeschrieben, Quellenstatus unverändert."
+      "note": "Die Seite legt keine Kleiderordnung für Kinder fest, die wir hier ergänzen würden. Essen und Trinken aus demselben Vers gehören zur späteren Stunde über Essen. Hier üben wir die Ruhe im Gebetsraum. Independenter didaktischer Review 2026-10-13: Kindertexte und Quizfragen umgeschrieben, Quellenstatus unverändert."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Im Gebetsraum bleiben wir ruhig und gehen achtsam mit den Dingen um.",
@@ -1377,7 +1377,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers ist eine Regel über Rede, keine Beschreibung einer bestimmten Berührung. Das Nein-Sagen und das Holen einer Vertrauensperson sind die Schutzregel der Stunde und werden nicht als Hadith ausgegeben. Keine synthetische Rezitation. Keine Freigabe für Besucher. Independenter didaktischer Review 2026-10-13: Kindertexte und Quizfragen umgeschrieben, Quellenstatus unverändert."
+      "note": "Der Vers ist eine Regel über Rede, keine Beschreibung einer bestimmten Berührung. Das Nein-Sagen und das Holen einer Vertrauensperson sind die Schutzregel der Stunde und werden nicht als Hadith ausgegeben. Independenter didaktischer Review 2026-10-13: Kindertexte und Quizfragen umgeschrieben, Quellenstatus unverändert."
     },
     "hint": "Du sagst es einer erwachsenen Person, der du vertraust.",
     "sample": "Wenn sich etwas falsch anfühlt, sagen wir Nein und holen Hilfe.",
@@ -1594,7 +1594,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die ganze Sūrat al-Falaq wurde in einer früheren Stunde nicht erneut als vollständiger Rezitationstext gesetzt. Hier ist nur der gelesene Versteil gespeichert. Eine Hadithnummer zum Schutz wurde nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Independenter didaktischer Review 2026-10-13: Kindertexte und Quizfragen umgeschrieben, Quellenstatus unverändert."
+      "note": "Die ganze Sūrat al-Falaq wurde in einer früheren Stunde nicht erneut als vollständiger Rezitationstext gesetzt. Hier ist nur der gelesene Versteil gespeichert. Eine Hadithnummer zum Schutz wurde nicht ergänzt. Independenter didaktischer Review 2026-10-13: Kindertexte und Quizfragen umgeschrieben, Quellenstatus unverändert."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Neid fühlt sich eng an.",
@@ -1811,7 +1811,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Wie viel Reinheit die Gebetsschule genau verlangt, steht auf dieser Seite nicht als gelesenes hanbalitisches Rechtsurteil. al-Mughnī wurde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Pädagogische Überarbeitung 2026-10-13: Unterrichtssprache, Kinderschutz und Fragen. Quelle nicht neu geprüft. Wissenschaftliche Freigabe bleibt aus."
+      "note": "Wie viel Reinheit die Gebetsschule genau verlangt, steht auf dieser Seite nicht als gelesenes hanbalitisches Rechtsurteil. al-Mughnī wurde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Pädagogische Überarbeitung 2026-10-13: Unterrichtssprache, Kinderschutz und Fragen. Quelle nicht neu geprüft. Wissenschaftliche Freigabe bleibt aus."
     },
     "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
     "sample": "Vor dem Gebet schauen wir, ob die Kleidung sauber ist.",
@@ -2028,7 +2028,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers spricht den Propheten beim Empfang der Offenbarung an. Wir machen daraus kein Verbot, Hausaufgaben zu lernen. Die anschließenden Worte gehören zum gespeicherten Ausdruck und werden nicht als zweite, eigene Prüfung ausgegeben. Keine synthetische Rezitation. Keine Freigabe für Besucher. Pädagogische Überarbeitung 2026-10-13: Unterrichtssprache, Kinderschutz und Fragen. Quelle nicht neu geprüft. Wissenschaftliche Freigabe bleibt aus."
+      "note": "Der Vers spricht den Propheten beim Empfang der Offenbarung an. Wir machen daraus kein Verbot, Hausaufgaben zu lernen. Die anschließenden Worte gehören zum gespeicherten Ausdruck und werden nicht als zweite, eigene Prüfung ausgegeben. Pädagogische Überarbeitung 2026-10-13: Unterrichtssprache, Kinderschutz und Fragen. Quelle nicht neu geprüft. Wissenschaftliche Freigabe bleibt aus."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Wir wiederholen einen kurzen Vers ohne Hetze.",
@@ -2245,7 +2245,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die Seite enthält eine lange theologische Erklärung. Wir übernehmen für Kinder nur die Bezeichnung als Gesandter und Wort Allahs, so wie der Vers sie nennt. Wir erfinden keine Kindheitsgeschichte und kein Wunder. Keine synthetische Rezitation. Keine Freigabe für Besucher. Pädagogische Überarbeitung 2026-10-13: Unterrichtssprache, Kinderschutz und Fragen. Quelle nicht neu geprüft. Wissenschaftliche Freigabe bleibt aus."
+      "note": "Die Seite enthält eine lange theologische Erklärung. Wir übernehmen für Kinder nur die Bezeichnung als Gesandter und Wort Allahs, so wie der Vers sie nennt. Wir erfinden keine Kindheitsgeschichte und kein Wunder. Pädagogische Überarbeitung 2026-10-13: Unterrichtssprache, Kinderschutz und Fragen. Quelle nicht neu geprüft. Wissenschaftliche Freigabe bleibt aus."
     },
     "hint": "Wir erfinden keine zusätzliche Geschichte.",
     "sample": "ʿĪsā, Friede sei mit ihm, ist ein Gesandter Allahs.",
@@ -2462,7 +2462,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der vorherige Vers über die Eltern ist eine andere Fundstelle. Hier ist nur 17:24 gespeichert. Eine zusätzliche Bittformel nach dem Essen oder vor dem Schlafen wird nicht als Sunnah dieser Seite ausgegeben. Keine synthetische Rezitation. Keine Freigabe für Besucher. Pädagogische Überarbeitung 2026-10-13: Unterrichtssprache, Kinderschutz und Fragen. Quelle nicht neu geprüft. Wissenschaftliche Freigabe bleibt aus."
+      "note": "Der vorherige Vers über die Eltern ist eine andere Fundstelle. Hier ist nur 17:24 gespeichert. Eine zusätzliche Bittformel nach dem Essen oder vor dem Schlafen wird nicht als Sunnah dieser Seite ausgegeben. Pädagogische Überarbeitung 2026-10-13: Unterrichtssprache, Kinderschutz und Fragen. Quelle nicht neu geprüft. Wissenschaftliche Freigabe bleibt aus."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Wir bitten Allah, den Eltern Barmherzigkeit zu schenken.",
@@ -2679,7 +2679,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers beschreibt keine Körperstelle und keine Strafe. Die Schutzregel ist Unterricht zum Kinderschutz und kein Hadith. Dieselbe Qurʾān-Stelle wird hier mit einem anderen Lernziel verwendet als in der Stunde über die eigene Grenze. Dieselbe gelesene Fundstelle wurde schon in Slot 104 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Pädagogische Überarbeitung 2026-10-13: Unterrichtssprache, Kinderschutz und Fragen. Quelle nicht neu geprüft. Wissenschaftliche Freigabe bleibt aus.",
+      "note": "Der Vers beschreibt keine Körperstelle und keine Strafe. Die Schutzregel ist Unterricht zum Kinderschutz und kein Hadith. Dieselbe Qurʾān-Stelle wird hier mit einem anderen Lernziel verwendet als in der Stunde über die eigene Grenze. Dieselbe gelesene Fundstelle wurde schon in Slot 104 mit einem anderen Lernziel verwendet. Pädagogische Überarbeitung 2026-10-13: Unterrichtssprache, Kinderschutz und Fragen. Quelle nicht neu geprüft. Wissenschaftliche Freigabe bleibt aus.",
       "sameLocusAsSlot": 104
     },
     "hint": "Wir erzählen keine Gruselgeschichte.",
@@ -2897,7 +2897,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers spricht vom Wissen Allahs über das Verborgene der Brust. Wir machen daraus keine Behauptung, ein Mensch könne Gedanken lesen. Eine Hadithnummer wurde nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe). Pädagogischer Review 2026-10-13 mit konkreten altersgerechten Fragen; vorhandene Qurʾān-Fundstellen beibehalten; keine unabhängige Vollverifikation. Fiqh-Urteile weiterhin offen."
+      "note": "Der Vers spricht vom Wissen Allahs über das Verborgene der Brust. Wir machen daraus keine Behauptung, ein Mensch könne Gedanken lesen. Eine Hadithnummer wurde nicht ergänzt. Pädagogischer Review 2026-10-13 mit konkreten altersgerechten Fragen; vorhandene Qurʾān-Fundstellen beibehalten; keine unabhängige Vollverifikation. Fiqh-Urteile weiterhin offen."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Allah kennt auch das, was kein Mensch lobt.",
@@ -3114,7 +3114,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der gespeicherte Auszug ist lang und nennt mehrere Gesandte. Was nach dem gespeicherten Stück im Vers noch folgt, wird nicht aus dem Gedächtnis ergänzt. Eine Hadithnummer fehlt auf der verwendeten Stelle. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe). Pädagogischer Review 2026-10-13 mit konkreten altersgerechten Fragen; vorhandene Qurʾān-Fundstellen beibehalten; keine unabhängige Vollverifikation. Fiqh-Urteile weiterhin offen."
+      "note": "Der gespeicherte Auszug ist lang und nennt mehrere Gesandte. Was nach dem gespeicherten Stück im Vers noch folgt, wird nicht aus dem Gedächtnis ergänzt. Eine Hadithnummer fehlt auf der verwendeten Stelle. Pädagogischer Review 2026-10-13 mit konkreten altersgerechten Fragen; vorhandene Qurʾān-Fundstellen beibehalten; keine unabhängige Vollverifikation. Fiqh-Urteile weiterhin offen."
     },
     "hint": "Wir erfinden keine zusätzliche Geschichte.",
     "sample": "Allah hat Gesandte geschickt.",
@@ -3331,7 +3331,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der berühmte Hadith über die Absicht, der in der Quellenbank mit einer Buḫārī-Nummer steht, wurde auf Dorar nicht erneut geöffnet und wird hier nicht als neuer Beleg benutzt. Die Stunde bleibt beim Vers. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe). Pädagogischer Review 2026-10-13 mit konkreten altersgerechten Fragen; vorhandene Qurʾān-Fundstellen beibehalten; keine unabhängige Vollverifikation. Fiqh-Urteile weiterhin offen."
+      "note": "Der berühmte Hadith über die Absicht, der in der Quellenbank mit einer Buḫārī-Nummer steht, wurde auf Dorar nicht erneut geöffnet und wird hier nicht als neuer Beleg benutzt. Die Stunde bleibt beim Vers. Pädagogischer Review 2026-10-13 mit konkreten altersgerechten Fragen; vorhandene Qurʾān-Fundstellen beibehalten; keine unabhängige Vollverifikation. Fiqh-Urteile weiterhin offen."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel.",
@@ -3548,7 +3548,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Dieselbe Qurʾān-Stelle wurde schon für die Stunde über Dank und für die Stunde über Dank im Herzen gelesen. Hier ist das Lernziel das sichtbare Danken. Der Hadith über den Dank an die Menschen wird nicht erneut als neue Nummer eingeführt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe). Pädagogischer Review 2026-10-13 mit konkreten altersgerechten Fragen; vorhandene Qurʾān-Fundstellen beibehalten; keine unabhängige Vollverifikation. Fiqh-Urteile weiterhin offen."
+      "note": "Dieselbe Qurʾān-Stelle wurde schon für die Stunde über Dank und für die Stunde über Dank im Herzen gelesen. Hier ist das Lernziel das sichtbare Danken. Der Hadith über den Dank an die Menschen wird nicht erneut als neue Nummer eingeführt. Pädagogischer Review 2026-10-13 mit konkreten altersgerechten Fragen; vorhandene Qurʾān-Fundstellen beibehalten; keine unabhängige Vollverifikation. Fiqh-Urteile weiterhin offen."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Wir sagen Danke, wenn uns jemand hilft.",
@@ -3765,7 +3765,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die Seite begründet damit nicht die Waschung vor jeder Berührung als gelesenes hanbalitisches Urteil. Diese Rechtsfrage bleibt ungeprüft. Wir erfinden die Menge der Waschung nicht. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe). Pädagogischer Review 2026-10-13 mit konkreten altersgerechten Fragen; vorhandene Qurʾān-Fundstellen beibehalten; keine unabhängige Vollverifikation. Fiqh-Urteile weiterhin offen."
+      "note": "Die Seite begründet damit nicht die Waschung vor jeder Berührung als gelesenes hanbalitisches Urteil. Diese Rechtsfrage bleibt ungeprüft. Wir erfinden die Menge der Waschung nicht. Pädagogischer Review 2026-10-13 mit konkreten altersgerechten Fragen; vorhandene Qurʾān-Fundstellen beibehalten; keine unabhängige Vollverifikation. Fiqh-Urteile weiterhin offen."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Wir legen das Qurʾān-Buch sauber hin und blättern ruhig.",
@@ -3982,7 +3982,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers ist kein Katalog von Haushaltsregeln und kein Feuerbild für kleine Kinder. Die konkrete Hausregel ist Unterricht der Familie, nicht ein zusätzlicher Qurʾān-Satz. Für die Jüngsten sprechen wir nur über das Nicht-Gefährden, nicht über den Spendenteil. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe). Kindertexte/Fragen unabhängig didaktisch überarbeitet 2026-10-13; Primärbelege nicht neu verifiziert. Fiqh-Freigabe ausstehend."
+      "note": "Der Vers ist kein Katalog von Haushaltsregeln und kein Feuerbild für kleine Kinder. Die konkrete Hausregel ist Unterricht der Familie, nicht ein zusätzlicher Qurʾān-Satz. Für die Jüngsten sprechen wir nur über das Nicht-Gefährden, nicht über den Spendenteil."
     },
     "hint": "Wir erzählen keine Gruselgeschichte.",
     "sample": "Eine Familienregel kann uns vor einer Gefahr schützen.",
@@ -4199,7 +4199,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers verspricht nicht, dass die Wartezeit verschwindet. Wir übertragen die Geduld nicht auf eine Gefahr, in der man Hilfe holen muss. Eine Hadithnummer wurde nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe). Kindertexte/Fragen unabhängig didaktisch überarbeitet 2026-10-13; Primärbelege nicht neu verifiziert. Fiqh-Freigabe ausstehend."
+      "note": "Der Vers verspricht nicht, dass die Wartezeit verschwindet. Wir übertragen die Geduld nicht auf eine Gefahr, in der man Hilfe holen muss. Eine Hadithnummer wurde nicht ergänzt."
     },
     "hint": "Bei Gefahr holst du einen Menschen. Eine Bitte allein reicht dann nicht.",
     "sample": "Wenn wir warten müssen, merken wir die Eile und werden langsamer.",
@@ -4416,7 +4416,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Welches Gebet das mittlere ist, entscheidet diese Stunde nicht, weil die Seite dafür kein abgeschlossenes hanbalitisches Urteil der Kinderstunde liefert. al-Mughnī wurde nicht gelesen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe). Kindertexte/Fragen unabhängig didaktisch überarbeitet 2026-10-13; Primärbelege nicht neu verifiziert. Fiqh-Freigabe ausstehend."
+      "note": "Welches Gebet das mittlere ist, entscheidet diese Stunde nicht, weil die Seite dafür kein abgeschlossenes hanbalitisches Urteil der Kinderstunde liefert. al-Mughnī wurde nicht gelesen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft."
     },
     "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
     "sample": "Wir suchen einen ruhigen Platz, an dem wir das Gebet üben können.",
@@ -4633,7 +4633,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Wir setzen die deutsche Erklärung nicht an die Stelle des arabischen Wortlauts. Eine künstliche Rezitation wird nicht erzeugt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe). Kindertexte/Fragen unabhängig didaktisch überarbeitet 2026-10-13; Primärbelege nicht neu verifiziert. Fiqh-Freigabe ausstehend."
+      "note": "Wir setzen die deutsche Erklärung nicht an die Stelle des arabischen Wortlauts. Eine künstliche Rezitation wird nicht erzeugt."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Die arabischen Worte und der deutsche Sinn sind nicht dasselbe.",
@@ -4850,7 +4850,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Eine bestimmte Unterrichtsszene mit einem Kind steht auf der gelesenen Seite nicht. Wir behaupten sie nicht. Die späteren Sätze des Verses über den Entschluss und das Vertrauen werden nicht als vollständige Sīrah-Erzählung ausgebaut. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe). Kindertexte/Fragen unabhängig didaktisch überarbeitet 2026-10-13; Primärbelege nicht neu verifiziert. Fiqh-Freigabe ausstehend."
+      "note": "Eine bestimmte Unterrichtsszene mit einem Kind steht auf der gelesenen Seite nicht. Wir behaupten sie nicht. Die späteren Sätze des Verses über den Entschluss und das Vertrauen werden nicht als vollständige Sīrah-Erzählung ausgebaut."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Der Vers beschreibt den Propheten, Friede sei mit ihm, als mild im Umgang.",
@@ -5067,7 +5067,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die Seite liefert keine nummerierte Bittformel für den Notfall. Die menschliche Hilfe ist die Schutzregel und kein Hadith. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe). Pädagogisch überprüfte Lektionstexte und Quizfragen, 13.10.2026. Wissenschaftliche Quellenprüfung nicht neu bestätigt."
+      "note": "Die Seite liefert keine nummerierte Bittformel für den Notfall. Die menschliche Hilfe ist die Schutzregel und kein Hadith."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Wenn uns etwas schwer wird, bitten wir Allah und holen bei Gefahr einen Menschen.",
@@ -5284,7 +5284,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers beschreibt nicht die Hausordnung einer bestimmten Moschee. Unsere konkreten Regeln bleiben Familien- und Hausregeln. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe). Pädagogisch überprüfte Lektionstexte und Quizfragen, 13.10.2026. Wissenschaftliche Quellenprüfung nicht neu bestätigt."
+      "note": "Der Vers beschreibt nicht die Hausordnung einer bestimmten Moschee. Unsere konkreten Regeln bleiben Familien- und Hausregeln."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Im Gemeinschaftsraum nehmen wir auf andere Kinder Rücksicht.",
@@ -5501,7 +5501,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die Seite enthält dazu einen Hinweis auf al-Buḫārī ohne dass wir seine Nummer in diese Stunde übernehmen. Wir zählen die Schlüssel nicht und erfinden keine Liste des Verborgenen. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe). Pädagogisch überprüfte Lektionstexte und Quizfragen, 13.10.2026. Wissenschaftliche Quellenprüfung nicht neu bestätigt."
+      "note": "Die Seite enthält dazu einen Hinweis auf al-Buḫārī ohne dass wir seine Nummer in diese Stunde übernehmen. Wir zählen die Schlüssel nicht und erfinden keine Liste des Verborgenen."
     },
     "hint": "Wir erfinden keine zusätzliche Geschichte.",
     "sample": "Wir können etwas verstecken.",
@@ -5718,7 +5718,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Wir fügen keine Rangfolge und keine erfundene Begegnung zwischen den Gesandten hinzu. Dieselbe Fundstelle trägt hier das Lernziel des respektvollen Aussprechens. Dieselbe gelesene Fundstelle wurde schon in Slot 112 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe). Pädagogisch überprüfte Lektionstexte und Quizfragen, 13.10.2026. Wissenschaftliche Quellenprüfung nicht neu bestätigt.",
+      "note": "Wir fügen keine Rangfolge und keine erfundene Begegnung zwischen den Gesandten hinzu. Dieselbe Fundstelle trägt hier das Lernziel des respektvollen Aussprechens. Dieselbe gelesene Fundstelle wurde schon in Slot 112 mit einem anderen Lernziel verwendet.",
       "sameLocusAsSlot": 112
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
@@ -5936,7 +5936,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Für die Jüngsten bleibt es beim guten Stäubchen. Der Satz über das Schlechte wird nicht als Strafszene ausgemalt. Eine Hadithnummer wurde nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe). Pädagogisch überprüfte Lektionstexte und Quizfragen, 13.10.2026. Wissenschaftliche Quellenprüfung nicht neu bestätigt."
+      "note": "Für die Jüngsten bleibt es beim guten Stäubchen. Der Satz über das Schlechte wird nicht als Strafszene ausgemalt. Eine Hadithnummer wurde nicht ergänzt."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Eine kleine Hilfe kann vor Allah Gewicht haben.",
@@ -6153,7 +6153,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers beschreibt ein Verhalten, keine Punkteliste. Wir erfinden keinen Anlass aus dem Leben eines bestimmten Gefährten. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der Vers beschreibt ein Verhalten, keine Punkteliste. Wir erfinden keinen Anlass aus dem Leben eines bestimmten Gefährten."
     },
     "hint": "Wir erfinden keine zusätzliche Geschichte.",
     "sample": "Wir können uns über etwas Gutes freuen, ohne andere kleiner zu machen.",
@@ -6370,7 +6370,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die Namen der Gäste, das Kalb und die weiteren Sätze der Geschichte stehen nicht in diesem gespeicherten Versteil. Wir erzählen sie nicht als geprüften Zusatz. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Die Namen der Gäste, das Kalb und die weiteren Sätze der Geschichte stehen nicht in diesem gespeicherten Versteil. Wir erzählen sie nicht als geprüften Zusatz."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Wenn Gäste kommen, helfen wir den Eltern, freundlich zu sein.",
@@ -6587,7 +6587,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers ist keine Minutenregel für Hausaufgaben. Die konkrete Pausenlänge ist eine Familienvereinbarung. Die anschließende Bitte des Verses wird hier nicht als vollständiger Bitttext auswendig gesetzt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der Vers ist keine Minutenregel für Hausaufgaben. Die konkrete Pausenlänge ist eine Familienvereinbarung. Die anschließende Bitte des Verses wird hier nicht als vollständiger Bitttext auswendig gesetzt."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Nach einer konzentrierten Zeit machen wir eine echte Pause.",
@@ -6804,7 +6804,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der gespeicherte Ausdruck geht am Ende in das erste Wort des nächsten Verses über. Wir bauen daraus keine Angst und kein Bild von Strafe. Verzeihung ersetzt nicht die Entschuldigung bei dem Menschen, den wir verletzt haben. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der gespeicherte Ausdruck geht am Ende in das erste Wort des nächsten Verses über. Wir bauen daraus keine Angst und kein Bild von Strafe. Verzeihung ersetzt nicht die Entschuldigung bei dem Menschen, den wir verletzt haben."
     },
     "hint": "Bei Gefahr holst du einen Menschen. Eine Bitte allein reicht dann nicht.",
     "sample": "Nach einem Fehler dürfen wir um Verzeihung bitten und etwas besser machen.",
@@ -7021,7 +7021,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Die fünf Namen Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ stehen nicht in diesem Vers. Ein Stundenplan mit Uhrzeiten wurde auf der Seite nicht gelesen. Die Rechtsfrage der genauen Grenzen bleibt ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Die fünf Namen Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ stehen nicht in diesem Vers. Ein Stundenplan mit Uhrzeiten wurde auf der Seite nicht gelesen. Die Rechtsfrage der genauen Grenzen bleibt ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft."
     },
     "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
     "sample": "Auf einem Plan erkennen wir, dass das Gebet Zeiten am Tag hat.",
@@ -7238,7 +7238,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die Seite beschreibt das langsame Lesen des Propheten, ohne dass wir eine Buchnummer übernehmen. Wir erfinden keine Tajwīd-Regel wie einen bestimmten Laut, der auf der Seite nicht steht. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Die Seite beschreibt das langsame Lesen des Propheten, ohne dass wir eine Buchnummer übernehmen. Wir erfinden keine Tajwīd-Regel wie einen bestimmten Laut, der auf der Seite nicht steht."
     },
     "hint": "Wir erfinden keine zusätzliche Geschichte.",
     "sample": "Wir hören einer richtigen Rezitation zu und wiederholen sie nicht mit einer Computerstimme.",
@@ -7455,7 +7455,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die Höhle, Ḫadīǧa, ein Datum und die weiteren Verse der Sūrah stehen in diesem gespeicherten Auszug nicht. Wir fügen sie nicht hinzu. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Die Höhle, Ḫadīǧa, ein Datum und die weiteren Verse der Sūrah stehen in diesem gespeicherten Auszug nicht. Wir fügen sie nicht hinzu."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat.",
@@ -7672,7 +7672,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Eine bestimmte arabische Formel nach dem Essen steht auf dieser Seite nicht. Wir geben sie nicht als geprüfte Sunnah aus. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Eine bestimmte arabische Formel nach dem Essen steht auf dieser Seite nicht. Wir geben sie nicht als geprüfte Sunnah aus."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Nach dem Essen erinnern wir uns, Allah zu danken.",
@@ -7889,7 +7889,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers ist keine Pflegeliste. Medizin und schwere Arbeit bleiben bei den Erwachsenen. Eine Hadithnummer wurde nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der Vers ist keine Pflegeliste. Medizin und schwere Arbeit bleiben bei den Erwachsenen. Eine Hadithnummer wurde nicht ergänzt."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Mit Erlaubnis der Eltern helfen wir einem kranken oder älteren Menschen auf eine kleine, sichere Weise.",
@@ -8106,7 +8106,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die Seite erklärt das Abirren mit einem Beispiel über einen falschen Namen. Wir zählen nicht neunundneunzig Namen, weil diese Zahl auf der verwendeten Stelle nicht als geprüfte Liste steht. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Die Seite erklärt das Abirren mit einem Beispiel über einen falschen Namen. Wir zählen nicht neunundneunzig Namen, weil diese Zahl auf der verwendeten Stelle nicht als geprüfte Liste steht."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Allah hat schöne Namen.",
@@ -8323,7 +8323,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die Seite legt damit nicht eine Erzählung über seine Kinder an, die wir ausbauen würden. Wir erfinden kein Datum und keine zusätzliche Amtsgeschichte. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Die Seite legt damit nicht eine Erzählung über seine Kinder an, die wir ausbauen würden. Wir erfinden kein Datum und keine zusätzliche Amtsgeschichte."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Muḥammad, Friede sei mit ihm, ist der Gesandte Allahs und das Siegel der Propheten.",
@@ -8540,7 +8540,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Dieselbe Fundstelle trägt ein anderes Lernziel. Der Warnton am Ende des Verses wird wieder nicht als Angstgeschichte verwendet. Eine feste Wortformel außer dem Versanfang wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 121 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
+      "note": "Dieselbe Fundstelle trägt ein anderes Lernziel. Der Warnton am Ende des Verses wird wieder nicht als Angstgeschichte verwendet. Eine feste Wortformel außer dem Versanfang wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 121 mit einem anderen Lernziel verwendet.",
       "sameLocusAsSlot": 121
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
@@ -8758,7 +8758,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers beginnt mit Regeln über die heiligen Zeichen und die Pilgerfahrt. Diese Regeln werden hier nicht zu einer Kinderrechtslehre ausgebaut. Das Melden des Spielzeugs ist das Beispiel der Stunde, nicht der Wortlaut des Verses. Wir benutzen nicht den Vers über das Töten einer Seele. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der Vers beginnt mit Regeln über die heiligen Zeichen und die Pilgerfahrt. Diese Regeln werden hier nicht zu einer Kinderrechtslehre ausgebaut. Das Melden des Spielzeugs ist das Beispiel der Stunde, nicht der Wortlaut des Verses. Wir benutzen nicht den Vers über das Töten einer Seele."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Wenn etwas gefährlich herumliegt, sagen wir Bescheid, statt wegzusehen.",
@@ -8975,7 +8975,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die Seite spricht danach davon, dass ein Stück abrogiert und ausgenommen wurde. Diese Rechtsgeschichte wird nicht als Kinderregel ausgebaut. Wir erfinden keine Zahl von Klopfzeichen. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Die Seite spricht danach davon, dass ein Stück abrogiert und ausgenommen wurde. Diese Rechtsgeschichte wird nicht als Kinderregel ausgebaut. Wir erfinden keine Zahl von Klopfzeichen."
     },
     "hint": "Wir erfinden keine zusätzliche Geschichte.",
     "sample": "Bevor wir ein Haus betreten, fragen wir und grüßen.",
@@ -9192,7 +9192,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers nennt keine Minuten und kein Gerät. Die Zeitgrenze ist eine Familienvereinbarung. Wir behaupten nicht, der Vers habe Bildschirme erwähnt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der Vers nennt keine Minuten und kein Gerät. Die Zeitgrenze ist eine Familienvereinbarung. Wir behaupten nicht, der Vers habe Bildschirme erwähnt."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Eine vereinbarte Bildschirmzeit halten wir ein.",
@@ -9409,7 +9409,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der letzte Satz des Verses spricht von Leuten, die an Allahs Erleichterung verzweifeln. Wir hängen dieses Wort keinem Kind an. Die Geschichte von Yūsuf wird nicht über den Vers hinaus erzählt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der letzte Satz des Verses spricht von Leuten, die an Allahs Erleichterung verzweifeln. Wir hängen dieses Wort keinem Kind an. Die Geschichte von Yūsuf wird nicht über den Vers hinaus erzählt."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Nach einem Fehler bleibt die Tür zur Besserung offen.",
@@ -9626,7 +9626,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ werden nicht als Wortlaut von 11:114 ausgegeben. Die genaue Zuordnung der Namen zu den Tagesenden bleibt ohne gelesenes Fiqh-Buch ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ werden nicht als Wortlaut von 11:114 ausgegeben. Die genaue Zuordnung der Namen zu den Tagesenden bleibt ohne gelesenes Fiqh-Buch ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft."
     },
     "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
     "sample": "Wir kennen die fünf Namen als Bezeichnungen der App und trennen sie von dem, was der Vers selbst sagt.",
@@ -9843,7 +9843,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die Stunde vergibt keine Hadithnummer. Was später Sunnah als überlieferte Gewohnheit heißt, wird in der Stunde über die Herkunft eines Hadith genauer begrenzt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Die Stunde vergibt keine Hadithnummer. Was später Sunnah als überlieferte Gewohnheit heißt, wird in der Stunde über die Herkunft eines Hadith genauer begrenzt."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Sunnah meint hier zuerst das Vorbild des Propheten, Friede sei mit ihm, nicht eine erfundene Nummer.",
@@ -10060,7 +10060,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Ein Datum, die Namen der Verfolger und die einzelnen Stationen stehen im gespeicherten Text nicht als Unterrichtsliste. Wir erfinden sie nicht. Der Name des Gefährten wird nicht über den Vers hinaus behauptet, wenn der Vers nur den Gefährten nennt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Ein Datum, die Namen der Verfolger und die einzelnen Stationen stehen im gespeicherten Text nicht als Unterrichtsliste. Wir erfinden sie nicht. Der Name des Gefährten wird nicht über den Vers hinaus behauptet, wenn der Vers nur den Gefährten nennt."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Der Prophet, Friede sei mit ihm, zog mit einem Gefährten aus.",
@@ -10277,7 +10277,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die bekannte kurze Formel beim Verlassen des Hauses steht auf dieser Seite nicht. Wir geben sie nicht als gelesene Sunnah aus. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Die bekannte kurze Formel beim Verlassen des Hauses steht auf dieser Seite nicht. Wir geben sie nicht als gelesene Sunnah aus."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten.",
@@ -10494,7 +10494,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers erlaubt keinen Witz über Herkunft, Kleidung oder Sprache. Wir erfinden keine Volksgruppe als Beispiel, das der Vers nicht nennt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der Vers erlaubt keinen Witz über Herkunft, Kleidung oder Sprache. Wir erfinden keine Volksgruppe als Beispiel, das der Vers nicht nennt."
     },
     "hint": "Wir erfinden keine zusätzliche Geschichte.",
     "sample": "Menschen haben verschiedene Familien und Sprachen.",
@@ -10711,7 +10711,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Eine ausführliche Unterschiedslehre der beiden Namen steht in diesem kurzen gespeicherten Vers nicht. Wir erfinden sie nicht. Eine künstliche Rezitation unterbleibt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Eine ausführliche Unterschiedslehre der beiden Namen steht in diesem kurzen gespeicherten Vers nicht. Wir erfinden sie nicht. Eine künstliche Rezitation unterbleibt."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Ar-Raḥmān und ar-Raḥīm sind Namen Allahs.",
@@ -10928,7 +10928,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers zählt noch weitere Handlungen auf. Was im gespeicherten Auszug fehlt, ergänzen wir nicht als arabischen Text. Für die Jüngsten gibt es keine Beschreibung von Grab, Feuer oder Strafe. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der Vers zählt noch weitere Handlungen auf. Was im gespeicherten Auszug fehlt, ergänzen wir nicht als arabischen Text. Für die Jüngsten gibt es keine Beschreibung von Grab, Feuer oder Strafe."
     },
     "hint": "Wir erzählen keine Gruselgeschichte.",
     "sample": "Wir glauben, dass es einen Jüngsten Tag gibt.",
@@ -11145,7 +11145,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Dieselbe Fundstelle trägt hier das Lernziel der gemeinsamen Arbeit. Wir machen aus dem Vers keine Vereinsregel und keine Stimmenzählung. Dieselbe gelesene Fundstelle wurde schon in Slot 138 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
+      "note": "Dieselbe Fundstelle trägt hier das Lernziel der gemeinsamen Arbeit. Wir machen aus dem Vers keine Vereinsregel und keine Stimmenzählung. Dieselbe gelesene Fundstelle wurde schon in Slot 138 mit einem anderen Lernziel verwendet.",
       "sameLocusAsSlot": 138
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
@@ -11363,7 +11363,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Frieden stiften heißt nicht, ein Unrecht zu verstecken. Wenn jemand weiter wehtut, holen wir eine erwachsene Person. Der Vers beschreibt keine bestimmte Strafe. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Frieden stiften heißt nicht, ein Unrecht zu verstecken. Wenn jemand weiter wehtut, holen wir eine erwachsene Person. Der Vers beschreibt keine bestimmte Strafe."
     },
     "hint": "Du sagst es einer erwachsenen Person, der du vertraust.",
     "sample": "Nach einem Streit können wir wieder miteinander reden.",
@@ -11580,7 +11580,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers legt keinen Speiseplan fest und nennt keine Zahl von Bissen. Die Zakāh-Erwähnung im weiteren Vers, falls sie im Ausdruck steht, wird nicht als berechnete Abgabe der Kinderstunde gelehrt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der Vers legt keinen Speiseplan fest und nennt keine Zahl von Bissen. Die Zakāh-Erwähnung im weiteren Vers, falls sie im Ausdruck steht, wird nicht als berechnete Abgabe der Kinderstunde gelehrt."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Wir nehmen so viel Essen, wie wir essen können.",
@@ -11797,7 +11797,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers steht in einer Sūrah, deren andere Bilder wir hier nicht ausmalen. Wir benutzen keinen Vers über das Feuer als Motiv für Verantwortung. Die konkrete Aufgabe ist ein Familienbeispiel. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der Vers steht in einer Sūrah, deren andere Bilder wir hier nicht ausmalen. Wir benutzen keinen Vers über das Feuer als Motiv für Verantwortung. Die konkrete Aufgabe ist ein Familienbeispiel."
     },
     "hint": "Wir erzählen keine Gruselgeschichte.",
     "sample": "Wir übernehmen eine kleine Aufgabe für jemand anderen und führen sie zu Ende.",
@@ -12014,7 +12014,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Das Bild im Vers, das die üble Nachrede mit dem Essen vom Fleisch des Bruders vergleicht, wird nicht nachgespielt. Für die Jüngsten sagen wir nur: Wir reden nicht schlecht über jemanden, der nicht dabei ist. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Das Bild im Vers, das die üble Nachrede mit dem Essen vom Fleisch des Bruders vergleicht, wird nicht nachgespielt. Für die Jüngsten sagen wir nur: Wir reden nicht schlecht über jemanden, der nicht dabei ist."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Bevor wir etwas Schlechtes über jemand sagen, prüfen wir, ob wir es wissen.",
@@ -12231,7 +12231,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Der Hadith über die Absicht mit der Buḫārī-Nummer aus der Quellenbank wurde nicht erneut gelesen und wird nicht zitiert. Der Vers sagt, wem das Gebet gehört. Er druckt nicht die fünf Namen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der Hadith über die Absicht mit der Buḫārī-Nummer aus der Quellenbank wurde nicht erneut gelesen und wird nicht zitiert. Der Vers sagt, wem das Gebet gehört. Er druckt nicht die fünf Namen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft."
     },
     "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
     "sample": "Bevor wir ein Gebet üben, wissen wir, welches Gebet es sein soll.",
@@ -12448,7 +12448,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Diese beiden Sätze beweisen nicht, dass jedes später gedruckte Buch automatisch richtig ist. Sie beschreiben die Rede des Propheten, nicht die Entstehungsgeschichte der Hadithbücher. Eine Buchnummer wird nicht vergeben. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Diese beiden Sätze beweisen nicht, dass jedes später gedruckte Buch automatisch richtig ist. Sie beschreiben die Rede des Propheten, nicht die Entstehungsgeschichte der Hadithbücher. Eine Buchnummer wird nicht vergeben."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Ein Qurʾān-Vers und ein Hadith sind zwei verschiedene Dinge.",
@@ -12665,7 +12665,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Eine einzelne Anekdote, ein Name außer den Gruppen und eine Jahreszahl stehen nicht als Kindererzählung auf der verwendeten Stelle. Wir erfinden sie nicht. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Eine einzelne Anekdote, ein Name außer den Gruppen und eine Jahreszahl stehen nicht als Kindererzählung auf der verwendeten Stelle. Wir erfinden sie nicht."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Die ersten Gefährten, die ausgezogen sind und die geholfen haben, haben ein gutes Vorbild.",
@@ -12882,7 +12882,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Eine bestimmte Morgenformel mit fester Anzahl steht auf dieser Stelle nicht als übernommene Sunnah. Zwang gibt es nicht. Die weiteren Worte im gespeicherten Ausdruck werden nicht als zweite Pflicht der Stunde ausgegeben. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Eine bestimmte Morgenformel mit fester Anzahl steht auf dieser Stelle nicht als übernommene Sunnah. Zwang gibt es nicht. Die weiteren Worte im gespeicherten Ausdruck werden nicht als zweite Pflicht der Stunde ausgegeben."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Wir erinnern uns an Allah mit kurzen Worten, ohne dass jemand gedrängt wird.",
@@ -13099,7 +13099,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers ist kein Auftrag, allein zu Fremden zu gehen. Die Nachbarschaftshilfe bleibt an der Hand der Eltern. Dieselbe Hilfe-Idee aus einem anderen Vers wird hier nicht noch einmal als zweite Quelle vermischt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der Vers ist kein Auftrag, allein zu Fremden zu gehen. Die Nachbarschaftshilfe bleibt an der Hand der Eltern. Dieselbe Hilfe-Idee aus einem anderen Vers wird hier nicht noch einmal als zweite Quelle vermischt."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Zusammen können wir etwas Gutes tun, das sicher ist.",
@@ -13316,7 +13316,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers macht die Hilfe eines Menschen nicht unsichtbar. Er sagt, woher die Gnade kommt. Eine feste Dankformel wurde nicht gelesen. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der Vers macht die Hilfe eines Menschen nicht unsichtbar. Er sagt, woher die Gnade kommt. Eine feste Dankformel wurde nicht gelesen."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Nach einem schönen Ereignis danken wir Allah.",
@@ -13533,7 +13533,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Wir behaupten nicht, der ganze Vers sei in einem kurzen Satz enthalten. Was im Auszug fehlt, bleibt ungeprüft als arabischer Zusatz. Keine Angstbilder. Dieselbe gelesene Fundstelle wurde schon in Slot 148 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
+      "note": "Wir behaupten nicht, der ganze Vers sei in einem kurzen Satz enthalten. Was im Auszug fehlt, bleibt ungeprüft als arabischer Zusatz. Keine Angstbilder. Dieselbe gelesene Fundstelle wurde schon in Slot 148 mit einem anderen Lernziel verwendet.",
       "sameLocusAsSlot": 148
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
@@ -13751,7 +13751,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers benutzt ein Bild für die verdorbene Gabe. Wir malen es nicht aus. Eine Hadithnummer wurde nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der Vers benutzt ein Bild für die verdorbene Gabe. Wir malen es nicht aus. Eine Hadithnummer wurde nicht ergänzt."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Wir helfen, weil es richtig ist, nicht damit alle klatschen.",
@@ -13968,7 +13968,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers ist keine Spielregel. Zurückhaltener Zorn heißt nicht, ein Unrecht zu verschweigen. Wenn jemand haut, holen wir eine erwachsene Person. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der Vers ist keine Spielregel. Zurückhaltener Zorn heißt nicht, ein Unrecht zu verschweigen. Wenn jemand haut, holen wir eine erwachsene Person."
     },
     "hint": "Du sagst es einer erwachsenen Person, der du vertraust.",
     "sample": "Wenn wir verlieren, bleiben wir bei unseren Worten freundlich.",
@@ -14185,7 +14185,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Eine feste arabische Schlussformel nach dem Essen steht hier nicht. Wir wiederholen nicht die andere Essensstelle, als wäre sie derselbe Vers. Diese Fundstelle ist 16:114. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Eine feste arabische Schlussformel nach dem Essen steht hier nicht. Wir wiederholen nicht die andere Essensstelle, als wäre sie derselbe Vers. Diese Fundstelle ist 16:114."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Nach dem Essen bleiben wir dankbar und stehen nicht sofort lärmend auf.",
@@ -14402,7 +14402,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers verspricht nicht, dass jede Schwierigkeit sofort weg ist. Wir erfinden keine Geschichte zur Offenbarung dieser Sūrah über den gespeicherten Wortlaut hinaus. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der Vers verspricht nicht, dass jede Schwierigkeit sofort weg ist. Wir erfinden keine Geschichte zur Offenbarung dieser Sūrah über den gespeicherten Wortlaut hinaus."
     },
     "hint": "Wir erfinden keine zusätzliche Geschichte.",
     "sample": "Wenn etwas schiefgeht, versuchen wir es noch einmal.",
@@ -14619,7 +14619,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers ist kein Haushaltsplan und keine Zahl von Geld. Der gespeicherte Ausdruck endet mit einem Anschlusswort. Wir bauen darauf keine Wirtschaftsstunde. Kaufen bleibt bei den Eltern. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der Vers ist kein Haushaltsplan und keine Zahl von Geld. Der gespeicherte Ausdruck endet mit einem Anschlusswort. Wir bauen darauf keine Wirtschaftsstunde. Kaufen bleibt bei den Eltern."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Nicht jeden Wunsch erfüllen wir sofort.",
@@ -14836,7 +14836,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Dieselbe Fundstelle trägt hier das Stehen. Wie die Hände genau liegen, steht in diesem Vers nicht. Das bleibt ungeprüft und wird nicht erfunden. al-Mughnī wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 118 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
+      "note": "Dieselbe Fundstelle trägt hier das Stehen. Wie die Hände genau liegen, steht in diesem Vers nicht. Das bleibt ungeprüft und wird nicht erfunden. al-Mughnī wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 118 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
       "sameLocusAsSlot": 118
     },
     "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
@@ -15054,7 +15054,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die Seite erklärt den Vers damit, dass Allah ihnen befohlen hat zu dienen und sie nicht aus Bedürftigkeit erschaffen hat. Wir übernehmen diese Richtung und erfinden keine weitere Geschichten über die Jinn. Für die Jüngsten sagen wir nur: Wir sind da, um Allah zu dienen. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Die Seite erklärt den Vers damit, dass Allah ihnen befohlen hat zu dienen und sie nicht aus Bedürftigkeit erschaffen hat. Wir übernehmen diese Richtung und erfinden keine weitere Geschichten über die Jinn. Für die Jüngsten sagen wir nur: Wir sind da, um Allah zu dienen."
     },
     "hint": "Wir erfinden keine zusätzliche Geschichte.",
     "sample": "ʿIbādah bedeutet, Allah so zu dienen, wie Er es will.",
@@ -15271,7 +15271,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers steht nicht in einem Scheidungszusammenhang, den wir dafür heranziehen würden. Eine Unglückstheologie für kleine Kinder gibt es nicht. Die Seite setzt den Vers neben einen anderen Ausdruck; wir übernehmen keine zusätzliche Behauptung. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der Vers steht nicht in einem Scheidungszusammenhang, den wir dafür heranziehen würden. Eine Unglückstheologie für kleine Kinder gibt es nicht. Die Seite setzt den Vers neben einen anderen Ausdruck; wir übernehmen keine zusätzliche Behauptung."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Allah weiß und bestimmt.",
@@ -15488,7 +15488,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Eine andere Stelle über die Aufrichtigkeit wurde schon benutzt. Hier ist die Fundstelle 39:2. Wir erfinden kein Punktsystem für die Woche. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Eine andere Stelle über die Aufrichtigkeit wurde schon benutzt. Hier ist die Fundstelle 39:2. Wir erfinden kein Punktsystem für die Woche."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Am Ende der Woche fragen wir: Für wen habe ich diese gute Tat getan?",
@@ -15705,7 +15705,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers selbst spricht vom Friedenstiften zwischen Geschwistern. Den Glückwunsch nennen wir als gutes Verhalten dazu, nicht als Wortlaut. Dieselbe Fundstelle, anderes Lernziel. Dieselbe gelesene Fundstelle wurde schon in Slot 150 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
+      "note": "Der Vers selbst spricht vom Friedenstiften zwischen Geschwistern. Den Glückwunsch nennen wir als gutes Verhalten dazu, nicht als Wortlaut. Dieselbe Fundstelle, anderes Lernziel. Dieselbe gelesene Fundstelle wurde schon in Slot 150 mit einem anderen Lernziel verwendet.",
       "sameLocusAsSlot": 150
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
@@ -15923,7 +15923,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Dieselbe Fundstelle trägt hier das Essen, nicht die Moscheeruhe. Eine Zahl von Bissen oder eine Sitzregel steht nicht im Vers. Dieselbe gelesene Fundstelle wurde schon in Slot 103 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
+      "note": "Dieselbe Fundstelle trägt hier das Essen, nicht die Moscheeruhe. Eine Zahl von Bissen oder eine Sitzregel steht nicht im Vers. Dieselbe gelesene Fundstelle wurde schon in Slot 103 mit einem anderen Lernziel verwendet.",
       "sameLocusAsSlot": 103
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
@@ -16141,7 +16141,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers ist an den Propheten gerichtet. Wir machen daraus keine Regel, dass ein Kind alles allein können muss. Was zu schwer oder gefährlich ist, bleibt bei den Erwachsenen. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der Vers ist an den Propheten gerichtet. Wir machen daraus keine Regel, dass ein Kind alles allein können muss. Was zu schwer oder gefährlich ist, bleibt bei den Erwachsenen."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Eine Aufgabe, die zum Alter passt, führen wir Schritt für Schritt selbst aus.",
@@ -16358,7 +16358,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers legt keine Minutenzahl fest. Die Furcht im Vers malen wir nicht als Angstbild. Für die Jüngsten sagen wir: Wir denken leise an Allah und werden still. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der Vers legt keine Minutenzahl fest. Die Furcht im Vers malen wir nicht als Angstbild. Für die Jüngsten sagen wir: Wir denken leise an Allah und werden still."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Bevor wir lesen, werden wir einen Moment ruhig.",
@@ -16575,7 +16575,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Der Vers beschreibt nicht die Handhaltung und nicht den Rechtsnamen Takbīrat al-Iḥrām. Diese Einzelheiten bleiben ohne gelesenes Fiqh-Buch ungeprüft. Wir erfinden den Winkel der Hände nicht. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der Vers beschreibt nicht die Handhaltung und nicht den Rechtsnamen Takbīrat al-Iḥrām. Diese Einzelheiten bleiben ohne gelesenes Fiqh-Buch ungeprüft. Wir erfinden den Winkel der Hände nicht. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft."
     },
     "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
     "sample": "Am Anfang des Gebets gibt es ein erstes Allāhu akbar.",
@@ -16792,7 +16792,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers verbietet nicht, einen Menschen um ein Glas Wasser zu bitten. Er richtet die Anbetung und die eigentliche Hilfe im Gottesdienst an Allah. Wir vermischen das nicht. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der Vers verbietet nicht, einen Menschen um ein Glas Wasser zu bitten. Er richtet die Anbetung und die eigentliche Hilfe im Gottesdienst an Allah. Wir vermischen das nicht."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Im Gebet sagen wir, dass wir Allah allein anbeten und Ihn um Hilfe bitten.",
@@ -17009,7 +17009,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Eine frühere Stunde hat einen anderen Vers über Geduld und Gebet. Hier ist die Fundstelle 2:45. Der Vers garantiert keine Note. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Eine frühere Stunde hat einen anderen Vers über Geduld und Gebet. Hier ist die Fundstelle 2:45. Der Vers garantiert keine Note."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Wir lernen für die Aufgabe und bitten Allah um Hilfe.",
@@ -17226,7 +17226,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers bewertet keine Farbe und keine Sprache als besser. Eine andere Stelle sagt, dass bei Allah die Gottesfurcht zählt. Wir ziehen sie nicht als zweiten arabischen Text heran, wenn wir sie hier nicht neu speichern. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der Vers bewertet keine Farbe und keine Sprache als besser. Eine andere Stelle sagt, dass bei Allah die Gottesfurcht zählt. Wir ziehen sie nicht als zweiten arabischen Text heran, wenn wir sie hier nicht neu speichern."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Verschiedene Sprachen und Aussehen gehören zu Allahs Zeichen.",
@@ -17443,7 +17443,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Drei Schlucke, das Sitzen oder eine andere Trinkgewohnheit stehen in diesem Vers nicht. Wir geben sie nicht als gelesene Sunnah aus. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Drei Schlucke, das Sitzen oder eine andere Trinkgewohnheit stehen in diesem Vers nicht. Wir geben sie nicht als gelesene Sunnah aus."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Wir trinken Wasser ruhig und verschütten es nicht absichtlich.",
@@ -17660,7 +17660,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers ist keine Erlaubnis, sich über andere zu stellen. Die Würdigung kommt von Allah. Wir erfinden keine Rangfolge unter den Kindern. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der Vers ist keine Erlaubnis, sich über andere zu stellen. Die Würdigung kommt von Allah. Wir erfinden keine Rangfolge unter den Kindern."
     },
     "hint": "Wir erfinden keine zusätzliche Geschichte.",
     "sample": "Allah hat den Menschen gewürdigt.",
@@ -17877,7 +17877,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Dass die sieben die Fātiḥah sind, steht in dem gespeicherten Versauszug nicht als eigener Satz. Wir behaupten diese Gleichsetzung nicht als gelesen. Dass die Fātiḥah die einzige Säule des Gebets sei, steht hier ebenfalls nicht. al-Mughnī wurde nicht gelesen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Dass die sieben die Fātiḥah sind, steht in dem gespeicherten Versauszug nicht als eigener Satz. Wir behaupten diese Gleichsetzung nicht als gelesen. Dass die Fātiḥah die einzige Säule des Gebets sei, steht hier ebenfalls nicht. al-Mughnī wurde nicht gelesen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft."
     },
     "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
     "sample": "Im Gebet wird der Qurʾān gelesen.",
@@ -18094,7 +18094,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die ganze Sūrah steht im gespeicherten Ausdruck. Wir fügen keine Polemik und kein Bild hinzu. Eine Hadithnummer zum Vorzug der Sūrah wird nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Die ganze Sūrah steht im gespeicherten Ausdruck. Wir fügen keine Polemik und kein Bild hinzu. Eine Hadithnummer zum Vorzug der Sūrah wird nicht ergänzt."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Allah ist einzig.",
@@ -18311,7 +18311,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers spricht in seinem Anfang von einer Zusage der Kinder Israels. Wir machen daraus keine Aussage über heutige Mitschüler. Für die Stunde nehmen wir das gute Wort und das Gute zu den Eltern, so wie es der Ausdruck trägt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der Vers spricht in seinem Anfang von einer Zusage der Kinder Israels. Wir machen daraus keine Aussage über heutige Mitschüler. Für die Stunde nehmen wir das gute Wort und das Gute zu den Eltern, so wie es der Ausdruck trägt."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Zum Glauben gehört auch ein gutes Wort zu den Menschen.",
@@ -18528,7 +18528,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Dieselbe Fundstelle wird zum dritten Mal verwendet, mit dem Lernziel der Grenze. Der Vers befiehlt nicht, jede Bitte zu erfüllen. Die Sicherheitsgrenze ist Unterricht und kein zusätzlicher Qurʾān-Satz. Dieselbe gelesene Fundstelle wurde schon in Slot 149 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
+      "note": "Dieselbe Fundstelle wird zum dritten Mal verwendet, mit dem Lernziel der Grenze. Der Vers befiehlt nicht, jede Bitte zu erfüllen. Die Sicherheitsgrenze ist Unterricht und kein zusätzlicher Qurʾān-Satz. Dieselbe gelesene Fundstelle wurde schon in Slot 149 mit einem anderen Lernziel verwendet.",
       "sameLocusAsSlot": 149
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
@@ -18746,7 +18746,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers spricht vom Vortrag des Qurʾān, nicht von jeder Schulstunde. Das ruhige Zuhören im Unterricht nennen wir eine passende Gewohnheit, nicht den Wortlaut des Verses. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der Vers spricht vom Vortrag des Qurʾān, nicht von jeder Schulstunde. Das ruhige Zuhören im Unterricht nennen wir eine passende Gewohnheit, nicht den Wortlaut des Verses."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Wenn der Qurʾān gelesen wird, hören wir zu und schweigen.",
@@ -18963,7 +18963,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Dieselbe Fundstelle, anderes Lernziel: das schwere Gefühl. Wir malen keine Hölle und kein Gericht. Die vertraute Person ist die Schutzregel und kein Hadith. Dieselbe gelesene Fundstelle wurde schon in Slot 129 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
+      "note": "Dieselbe Fundstelle, anderes Lernziel: das schwere Gefühl. Wir malen keine Hölle und kein Gericht. Die vertraute Person ist die Schutzregel und kein Hadith. Dieselbe gelesene Fundstelle wurde schon in Slot 129 mit einem anderen Lernziel verwendet.",
       "sameLocusAsSlot": 129
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
@@ -19181,7 +19181,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Der Vers nennt die Verbeugung und die Niederwerfung, beschreibt aber nicht, wie weit der Rücken geneigt ist. al-Mughnī wurde nicht gelesen. Die Rechtsform bleibt ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der Vers nennt die Verbeugung und die Niederwerfung, beschreibt aber nicht, wie weit der Rücken geneigt ist. al-Mughnī wurde nicht gelesen. Die Rechtsform bleibt ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft."
     },
     "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
     "sample": "Die Verbeugung im Gebet üben wir mit einer Lehrperson.",
@@ -19398,7 +19398,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Dieselbe Fundstelle trägt hier das Paar aus Tun und Vertrauen. Wir benutzen keinen Vers über eine Gruppe, die sich selbst ändert, weil wir ihn nicht neu gelesen haben. Dieselbe gelesene Fundstelle wurde schon in Slot 176 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
+      "note": "Dieselbe Fundstelle trägt hier das Paar aus Tun und Vertrauen. Wir benutzen keinen Vers über eine Gruppe, die sich selbst ändert, weil wir ihn nicht neu gelesen haben. Dieselbe gelesene Fundstelle wurde schon in Slot 176 mit einem anderen Lernziel verwendet.",
       "sameLocusAsSlot": 176
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
@@ -19616,7 +19616,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers nennt die Leute der Erinnerung. Wen das heute im Einzelnen ist, legen wir nicht mit einem neuen Rechtsurteil fest. Für die Stunde ist es die Lehrperson und die Eltern. Wir erfinden keine Antwort, die der Vers nicht gibt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der Vers nennt die Leute der Erinnerung. Wen das heute im Einzelnen ist, legen wir nicht mit einem neuen Rechtsurteil fest. Für die Stunde ist es die Lehrperson und die Eltern. Wir erfinden keine Antwort, die der Vers nicht gibt."
     },
     "hint": "Wir erfinden keine zusätzliche Geschichte.",
     "sample": "Eine ehrliche Frage zum Glauben darf gestellt werden.",
@@ -19833,7 +19833,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Ein anderer Vers über das Bezeugen gegen die eigenen Leute wurde gelesen, aber diese Stunde bleibt bei 33:70. Mut heißt nicht, jemanden bloßzustellen. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Ein anderer Vers über das Bezeugen gegen die eigenen Leute wurde gelesen, aber diese Stunde bleibt bei 33:70. Mut heißt nicht, jemanden bloßzustellen."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Die Wahrheit sagen wir höflich, auch wenn sie unbequem ist.",
@@ -20050,7 +20050,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers nennt die Eltern im Alter. Wir ziehen andere ältere Menschen als gute Gewohnheit mit ein und nennen das nicht den Wortlaut. Die Bittformel des nächsten Verses gehört in die andere Stunde. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der Vers nennt die Eltern im Alter. Wir ziehen andere ältere Menschen als gute Gewohnheit mit ein und nennen das nicht den Wortlaut. Die Bittformel des nächsten Verses gehört in die andere Stunde."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Mit älteren Menschen sprechen wir ruhig und freundlich.",
@@ -20267,7 +20267,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Regensatz wird nicht als Versprechen für das Wetter der Kinderstunde gelehrt. Eine feste Anzahl von Bitten steht hier nicht. Wir ergänzen sie nicht. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der Regensatz wird nicht als Versprechen für das Wetter der Kinderstunde gelehrt. Eine feste Anzahl von Bitten steht hier nicht. Wir ergänzen sie nicht."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Um Vergebung zu bitten heißt, Allah um Sein Vergeben zu bitten.",
@@ -20484,7 +20484,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Die Haltung der Hände nach dem Aufrichten steht nicht im Vers. Sie bleibt ungeprüft. Wir erfinden sie nicht und lesen al-Mughnī dafür nicht als schon geprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Die Haltung der Hände nach dem Aufrichten steht nicht im Vers. Sie bleibt ungeprüft. Wir erfinden sie nicht und lesen al-Mughnī dafür nicht als schon geprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft."
     },
     "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
     "sample": "Nach der Verbeugung richten wir uns wieder auf.",
@@ -20701,7 +20701,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Dieselbe Fundstelle, anderes Lernziel: das eigene Erklären. Wir erzeugen keine Rezitation und keine Zeichnung. Dieselbe gelesene Fundstelle wurde schon in Slot 181 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
+      "note": "Dieselbe Fundstelle, anderes Lernziel: das eigene Erklären. Wir erzeugen keine Rezitation und keine Zeichnung. Dieselbe gelesene Fundstelle wurde schon in Slot 181 mit einem anderen Lernziel verwendet.",
       "sameLocusAsSlot": 181
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
@@ -20919,7 +20919,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Hadith, in dem Ǧibrīl nach dem Glauben fragt, steht in der älteren Sammlung mit einer Nummer, die in diesem Lauf nicht erneut auf Dorar gelesen wurde. Wir geben die Nummer nicht als neue Prüfung aus. Der Jüngste Tag steht in einem anderen, schon gespeicherten Vers, nicht in diesem. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der Hadith, in dem Ǧibrīl nach dem Glauben fragt, steht in der älteren Sammlung mit einer Nummer, die in diesem Lauf nicht erneut auf Dorar gelesen wurde. Wir geben die Nummer nicht als neue Prüfung aus. Der Jüngste Tag steht in einem anderen, schon gespeicherten Vers, nicht in diesem."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Der Vers nennt den Glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten.",
@@ -21136,7 +21136,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Dieselbe Fundstelle, anderes Lernziel: die eigene Entschuldigung. Eine Vertrauensperson bleibt nötig, wenn der Spott weitergeht. Das Holen der Person ist Schutzregel, kein Hadith. Dieselbe gelesene Fundstelle wurde schon in Slot 98 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
+      "note": "Dieselbe Fundstelle, anderes Lernziel: die eigene Entschuldigung. Eine Vertrauensperson bleibt nötig, wenn der Spott weitergeht. Das Holen der Person ist Schutzregel, kein Hadith. Dieselbe gelesene Fundstelle wurde schon in Slot 98 mit einem anderen Lernziel verwendet.",
       "sameLocusAsSlot": 98
     },
     "hint": "Du sagst es einer erwachsenen Person, der du vertraust.",
@@ -21354,7 +21354,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers beschreibt nicht ein Altersprogramm. Die behutsame Hilfe ist die Anwendung. Dieselbe Fundstelle wurde schon für Versöhnung und Mitfreude verwendet. Dieselbe gelesene Fundstelle wurde schon in Slot 170 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
+      "note": "Der Vers beschreibt nicht ein Altersprogramm. Die behutsame Hilfe ist die Anwendung. Dieselbe Fundstelle wurde schon für Versöhnung und Mitfreude verwendet. Dieselbe gelesene Fundstelle wurde schon in Slot 170 mit einem anderen Lernziel verwendet.",
       "sameLocusAsSlot": 170
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
@@ -21572,7 +21572,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Dieselbe Fundstelle, anderes Lernziel: die Woche der kleinen Taten. Die Zakāh der Erwachsenen berechnen wir nicht. Der Hadith über die Absicht bleibt ungelesen in diesem Lauf. Dieselbe gelesene Fundstelle wurde schon in Slot 113 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
+      "note": "Dieselbe Fundstelle, anderes Lernziel: die Woche der kleinen Taten. Die Zakāh der Erwachsenen berechnen wir nicht. Der Hadith über die Absicht bleibt ungelesen in diesem Lauf. Dieselbe gelesene Fundstelle wurde schon in Slot 113 mit einem anderen Lernziel verwendet.",
       "sameLocusAsSlot": 113
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
@@ -21790,7 +21790,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Welche Körperteile die Gebetsschule außerdem verlangt, steht in diesem Vers nicht. Die Sicherheit von Stirn und Nase ist die Übungsregel und kein Hadith. al-Mughnī wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 186 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
+      "note": "Welche Körperteile die Gebetsschule außerdem verlangt, steht in diesem Vers nicht. Die Sicherheit von Stirn und Nase ist die Übungsregel und kein Hadith. al-Mughnī wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 186 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
       "sameLocusAsSlot": 186
     },
     "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
@@ -22008,7 +22008,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Dieselbe Fundstelle, hier mit dem Schwerpunkt Krankheit. Der Vers nennt die Kranken nicht als eigenes Wort in dem Satz, den wir als Anwendung nehmen. Wir sagen das ehrlich. Die Hilfe für die Genannten im Vers ist der Beleg, die Krankenszene ist das Beispiel. Dieselbe gelesene Fundstelle wurde schon in Slot 134 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
+      "note": "Dieselbe Fundstelle, hier mit dem Schwerpunkt Krankheit. Der Vers nennt die Kranken nicht als eigenes Wort in dem Satz, den wir als Anwendung nehmen. Wir sagen das ehrlich. Die Hilfe für die Genannten im Vers ist der Beleg, die Krankenszene ist das Beispiel. Dieselbe gelesene Fundstelle wurde schon in Slot 134 mit einem anderen Lernziel verwendet.",
       "sameLocusAsSlot": 134
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
@@ -22226,7 +22226,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die Seite erwähnt eine Lesart, die von der Sitzrunde in der Einzahl spricht. Wir machen daraus keinen Streit. Eine Belohnung in Zahlen erfinden wir nicht. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Die Seite erwähnt eine Lesart, die von der Sitzrunde in der Einzahl spricht. Wir machen daraus keinen Streit. Eine Belohnung in Zahlen erfinden wir nicht."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Wenn jemand Platz braucht, rücken wir zusammen.",
@@ -22443,7 +22443,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Eine Bittformel zwischen den Niederwerfungen wird nicht erfunden. al-Mughnī wurde nicht gelesen. Dieselbe Gebetsstelle trägt hier nur dieses Lernziel. Dieselbe gelesene Fundstelle wurde schon in Slot 198 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
+      "note": "Eine Bittformel zwischen den Niederwerfungen wird nicht erfunden. al-Mughnī wurde nicht gelesen. Dieselbe Gebetsstelle trägt hier nur dieses Lernziel. Dieselbe gelesene Fundstelle wurde schon in Slot 198 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
       "sameLocusAsSlot": 198
     },
     "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
@@ -22661,7 +22661,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers beschreibt den Propheten, nicht das Kind. Eine Liste seiner Charaktereigenschaften aus einem Hadith steht hier nicht. Wir ergänzen sie nicht. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der Vers beschreibt den Propheten, nicht das Kind. Eine Liste seiner Charaktereigenschaften aus einem Hadith steht hier nicht. Wir ergänzen sie nicht."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Der Vers sagt dem Propheten, Friede sei mit ihm, dass er auf einem gewaltigen Charakter ist.",
@@ -22878,7 +22878,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Das Prüfen der Nachricht ist die Übung der Stunde, nicht ein Satz des Verses. Dieselbe Fundstelle wurde schon für Mobbing und für die Entschuldigung verwendet. Eine technische Anleitung für ein bestimmtes Gerät geben wir nicht. Dieselbe gelesene Fundstelle wurde schon in Slot 195 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
+      "note": "Das Prüfen der Nachricht ist die Übung der Stunde, nicht ein Satz des Verses. Dieselbe Fundstelle wurde schon für Mobbing und für die Entschuldigung verwendet. Eine technische Anleitung für ein bestimmtes Gerät geben wir nicht. Dieselbe gelesene Fundstelle wurde schon in Slot 195 mit einem anderen Lernziel verwendet.",
       "sameLocusAsSlot": 195
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
@@ -23096,7 +23096,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Die At-taḥiyyāt-Formel wird nicht als Qurʾān ausgegeben und nicht aus dem Gedächtnis als geprüfter Hadith nachgetragen. al-Mughnī wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 166 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
+      "note": "Die At-taḥiyyāt-Formel wird nicht als Qurʾān ausgegeben und nicht aus dem Gedächtnis als geprüfter Hadith nachgetragen. al-Mughnī wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 166 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
       "sameLocusAsSlot": 166
     },
     "hint": "Wir erfinden keine zusätzliche Geschichte.",
@@ -23314,7 +23314,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Den Gebetsabschluss nennen wir als Lehrerhinweis ungeprüft. Wir setzen den Vers nicht mit dem Ende des Gebets gleich. Eine andere Qurʾān-Stelle über den Frieden der Engel wird dafür nicht herangezogen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Den Gebetsabschluss nennen wir als Lehrerhinweis ungeprüft. Wir setzen den Vers nicht mit dem Ende des Gebets gleich. Eine andere Qurʾān-Stelle über den Frieden der Engel wird dafür nicht herangezogen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft."
     },
     "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
     "sample": "Am Ende des Gebets gibt es einen Gruß nach rechts und links.",
@@ -23531,7 +23531,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Die Niederwerfung des Vergessens steht auf dieser Seite nicht. Wir beschreiben sie nicht und geben sie nicht als Pflicht dieser Stunde aus. Dieselbe Fundstelle, anderes Lernziel. Dieselbe gelesene Fundstelle wurde schon in Slot 188 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
+      "note": "Die Niederwerfung des Vergessens steht auf dieser Seite nicht. Wir beschreiben sie nicht und geben sie nicht als Pflicht dieser Stunde aus. Dieselbe Fundstelle, anderes Lernziel. Dieselbe gelesene Fundstelle wurde schon in Slot 188 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
       "sameLocusAsSlot": 188
     },
     "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
@@ -23749,7 +23749,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Ein bestimmtes Alter, ab dem ein Kind fasten muss, steht in diesem Vers nicht und wurde in keinem Fiqh-Buch dieses Laufs gelesen. Krankheit und Reise bleiben so stehen, wie der Vers sie nennt, ohne eine eigene Rechtsgrenze. Kein Kind wird in der Stunde zum Fasten gedrängt. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Ein bestimmtes Alter, ab dem ein Kind fasten muss, steht in diesem Vers nicht und wurde in keinem Fiqh-Buch dieses Laufs gelesen. Krankheit und Reise bleiben so stehen, wie der Vers sie nennt, ohne eine eigene Rechtsgrenze. Kein Kind wird in der Stunde zum Fasten gedrängt. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft."
     },
     "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
     "sample": "Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde.",
@@ -23966,7 +23966,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Die Nisab-Rechnung, die Empfängerlisten und die einzelnen Riten der Pilgerfahrt wurden nicht aus einem Fiqh-Buch gelesen. Der Ausdruck 3:97 beginnt auf der Seite mitten im Vers. Wir ergänzen den Anfang nicht aus dem Gedächtnis ins arabische Feld. al-Mughnī wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 192 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Zusätzlich gelesen: Qurʾān 3:97 auf https://www.islamweb.net/ar/library/content/49/271. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
+      "note": "Die Nisab-Rechnung, die Empfängerlisten und die einzelnen Riten der Pilgerfahrt wurden nicht aus einem Fiqh-Buch gelesen. Der Ausdruck 3:97 beginnt auf der Seite mitten im Vers. Wir ergänzen den Anfang nicht aus dem Gedächtnis ins arabische Feld. al-Mughnī wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 192 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Zusätzlich gelesen: Qurʾān 3:97 auf https://www.islamweb.net/ar/library/content/49/271.",
       "additionalQuran": {
         "surah": 3,
         "ayah": 97,
