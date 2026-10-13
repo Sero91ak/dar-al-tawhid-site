@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.ViewGroup;
@@ -11,10 +13,16 @@ import android.webkit.CookieManager;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.Button;
+import android.widget.TextView;
 
 /**
  * Standalone Dar Test Android shell, not the live Android visitor package.
@@ -26,6 +34,9 @@ public final class TestActivity extends Activity {
     private static final int FILE_CHOOSER_CODE = 3014;
     private WebView view;
     private ValueCallback<Uri[]> fileChooser;
+    private LinearLayout errorPanel;
+    private int pageSerial = 0;
+    private boolean loadFailed = false;
 
     @Override
     protected void onCreate(Bundle state) {
@@ -37,7 +48,12 @@ public final class TestActivity extends Activity {
             ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         view.setBackgroundColor(0xff050706);
         view.setOverScrollMode(WebView.OVER_SCROLL_NEVER);
-        setContentView(view);
+        FrameLayout shell = new FrameLayout(this);
+        shell.addView(view);
+        errorPanel = createErrorPanel();
+        shell.addView(errorPanel, new FrameLayout.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        setContentView(shell);
 
         WebSettings settings = view.getSettings();
         settings.setJavaScriptEnabled(true); // trusted test website
@@ -49,11 +65,37 @@ public final class TestActivity extends Activity {
         settings.setMediaPlaybackRequiresUserGesture(false);
         settings.setJavaScriptCanOpenWindowsAutomatically(false);
         settings.setCacheMode(WebSettings.LOAD_DEFAULT);
-        settings.setUserAgentString(settings.getUserAgentString() + " DarTestAndroid/1");
+        settings.setUserAgentString(settings.getUserAgentString() + " DarTestAndroid/2");
         CookieManager.getInstance().setAcceptCookie(true);
         CookieManager.getInstance().setAcceptThirdPartyCookies(view, false);
 
         view.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageStarted(WebView browser, String url, android.graphics.Bitmap favicon) {
+                pageSerial++;
+                loadFailed = false;
+                errorPanel.setVisibility(android.view.View.GONE);
+            }
+
+            @Override
+            public void onPageFinished(WebView browser, String url) {
+                final int serial = pageSerial;
+                // Never leave a permanently empty or non-interactive WebView.
+                browser.postDelayed(() -> checkAppReady(serial), 11000);
+            }
+
+            @Override
+            public void onReceivedError(WebView browser, WebResourceRequest req,
+                                        WebResourceError error) {
+                if (req.isForMainFrame()) showFailure();
+            }
+
+            @Override
+            public void onReceivedHttpError(WebView browser, WebResourceRequest req,
+                                            WebResourceResponse response) {
+                if (req.isForMainFrame() && response.getStatusCode() >= 400) showFailure();
+            }
+
             @Override
             public boolean shouldOverrideUrlLoading(WebView browser, WebResourceRequest req) {
                 if (!req.isForMainFrame()) return false;
@@ -86,6 +128,70 @@ public final class TestActivity extends Activity {
             } catch (IllegalArgumentException ignored) { }
         });
         view.loadUrl(TEST_URL);
+    }
+
+    private LinearLayout createErrorPanel() {
+        LinearLayout panel = new LinearLayout(this);
+        panel.setOrientation(LinearLayout.VERTICAL);
+        panel.setGravity(android.view.Gravity.CENTER);
+        panel.setPadding(28, 30, 28, 30);
+        panel.setBackgroundColor(Color.rgb(5, 7, 6));
+        panel.setVisibility(android.view.View.GONE);
+
+        TextView heading = new TextView(this);
+        heading.setText("Dar Test");
+        heading.setTextSize(26);
+        heading.setTypeface(null, Typeface.BOLD);
+        heading.setTextColor(Color.rgb(240, 221, 181));
+        heading.setGravity(android.view.Gravity.CENTER);
+        panel.addView(heading);
+
+        TextView message = new TextView(this);
+        message.setText("Die Test-App konnte nicht vollständig geöffnet werden. " +
+            "Bitte versuche es erneut oder öffne die Testseite im Browser.");
+        message.setTextSize(15);
+        message.setTextColor(Color.WHITE);
+        message.setGravity(android.view.Gravity.CENTER);
+        message.setPadding(0, 16, 0, 26);
+        panel.addView(message);
+
+        Button retry = new Button(this);
+        retry.setText("Erneut laden");
+        retry.setOnClickListener(v -> {
+            loadFailed = false;
+            panel.setVisibility(android.view.View.GONE);
+            view.clearCache(true);
+            view.loadUrl(TEST_URL);
+        });
+        panel.addView(retry);
+
+        Button browser = new Button(this);
+        browser.setText("Im Browser öffnen");
+        browser.setOnClickListener(v ->
+            openExternally(Uri.parse("https://dar-al-tawhid.de/test/#home")));
+        panel.addView(browser);
+        return panel;
+    }
+
+    private void showFailure() {
+        loadFailed = true;
+        if (errorPanel != null) errorPanel.setVisibility(android.view.View.VISIBLE);
+    }
+
+    private void checkAppReady(int serial) {
+        if (view == null || loadFailed || pageSerial != serial) return;
+        view.evaluateJavascript(
+            "(function(){try{" +
+            "var v=document.getElementById('appView');" +
+            "var n=document.getElementById('bottomNav');" +
+            "var txt=v&&v.textContent?v.textContent.trim():'';" +
+            "var blocked=!!document.querySelector('#dar-soft-boot:not(.is-done)');" +
+            "return !!(v&&n&&txt.length>25&&!blocked);" +
+            "}catch(e){return false}})()",
+            result -> {
+                if (pageSerial == serial && !loadFailed &&
+                    !"true".equals(result)) showFailure();
+            });
     }
 
     private static boolean isTestUrl(Uri target) {
@@ -125,9 +231,10 @@ public final class TestActivity extends Activity {
         super.onConfigurationChanged(config);
         // Android WebView keeps state while phone/fold posture changes.
         view.requestLayout();
-        notifyViewport();
-        view.postDelayed(this::notifyViewport, 180);
-        view.postDelayed(this::notifyViewport, 520);
+        // WebView recalculates CSS viewport automatically. Notify JS once after
+        // the native layout change and once after fold/rotation settles.
+        view.postDelayed(this::notifyViewport, 140);
+        view.postDelayed(this::notifyViewport, 440);
     }
 
     private void notifyViewport() {
