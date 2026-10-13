@@ -735,6 +735,7 @@ const DEFAULT_ADMIN_TABS=[
   ["settings","Einstellungen"],
   ["tech","Technik"],
   ["besucher","Besucher"],
+  ["wochenanalyse","Wochenanalyse"],
   ["quiz-stats","Quiz-Statistik"]
 ];
 const ADMIN_REFRESH_MS=30000;
@@ -2942,7 +2943,7 @@ function renderShell(){
   currentTab=normalizeAdminTab(currentTab);
   if(currentTab==="schedule")currentTab="actions";
   const refreshSec=currentTab==="besucher"?15:30;
-  const body=currentTab==="kennwoerter"?renderKennwoerter():currentTab==="live-edit"&&window.DARLiveEdit?window.DARLiveEdit.renderLiveEditTab():currentTab==="besucher"?renderVisitors(ctx):currentTab==="quiz-stats"&&window.DARQuizStatsAdmin?window.DARQuizStatsAdmin.renderQuizStatsTab():currentTab==="ordner"?renderOrdner():currentTab==="quellen"?renderQuellen():currentTab==="kurzlinks"?renderKurzlinks():currentTab==="zakat"?renderZakatAdmin():currentTab==="bibliothek"?(window.DARLibraryAdmin?window.DARLibraryAdmin.renderLibraryTab():'<section class="lib-admin"><p class="lib-admin-category">Bibliothek-Modul wird geladen…</p></section>'):currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows):currentTab==="news"?renderNews():currentTab==="feed"&&window.DARFeedAdmin?window.DARFeedAdmin.renderFeedTab():currentTab==="feed-bg"?renderFeedBgAdminPanel():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
+  const body=currentTab==="kennwoerter"?renderKennwoerter():currentTab==="live-edit"&&window.DARLiveEdit?window.DARLiveEdit.renderLiveEditTab():currentTab==="besucher"?renderVisitors(ctx):currentTab==="wochenanalyse"?renderWeeklyReport():currentTab==="quiz-stats"&&window.DARQuizStatsAdmin?window.DARQuizStatsAdmin.renderQuizStatsTab():currentTab==="ordner"?renderOrdner():currentTab==="quellen"?renderQuellen():currentTab==="kurzlinks"?renderKurzlinks():currentTab==="zakat"?renderZakatAdmin():currentTab==="bibliothek"?(window.DARLibraryAdmin?window.DARLibraryAdmin.renderLibraryTab():'<section class="lib-admin"><p class="lib-admin-category">Bibliothek-Modul wird geladen…</p></section>'):currentTab==="content"?renderContent():currentTab==="actions"?renderActions(rows):currentTab==="news"?renderNews():currentTab==="feed"&&window.DARFeedAdmin?window.DARFeedAdmin.renderFeedTab():currentTab==="feed-bg"?renderFeedBgAdminPanel():currentTab==="reports"?renderReports():currentTab==="users"?renderUsers(ctx):currentTab==="tech"?renderTech(ctx):currentTab==="settings"?renderSettings(ctx):renderStart(ctx);
   document.getElementById("panel").innerHTML=`
     <nav class="tab-picker" aria-label="Admin-Bereich wählen">
       <label class="tab-picker-label" for="adminTabSelect">Bereich</label>
@@ -2953,6 +2954,7 @@ function renderShell(){
     ${body}
     <div class="meta-line">Aktualisiert (Europe/Berlin): ${esc(formatAdminBerlin(data.updated,true))} · Auto-Refresh alle ${refreshSec} Sekunden${currentTab==="besucher"?" · Besucher-Live":""}</div>`;
   bindUi();
+  bindWeeklyReport();
   enhanceAdminCollapsibles();
   updateAdminBackButton();
   if(currentTab==="live-edit"&&window.DARLiveEdit)window.DARLiveEdit.bindLiveEditTab();
@@ -3048,6 +3050,7 @@ function renderStart(ctx){
     ${folderCard("⑦","Kennwörter","Liste · aktuell gültig.","kennwoerter","Face ID")}
     ${folderCard("⑧","Einstellungen","Worker und Technik.","settings","Admin")}
     ${folderCard("⑨","Besucher","Live-Zahlen und Aufrufe.","besucher",`${Number(ctx.live.live_now||0)} live`)}
+    ${folderCard("⑪","Wochenanalyse","Freitagsberichte und Beitrags-Trends.","wochenanalyse","Neu")}
     ${folderCard("⑩","Quiz-Statistik","Nutzer und Fragen.","quiz-stats","Hinten")}
   </section>
   <section class="command-grid">
@@ -3057,6 +3060,117 @@ function renderStart(ctx){
     <div class="command-card"><b>Letzter Fehler</b><span>${esc(lastAdminError())}</span><small>Aus lokalem Admin-Protokoll</small></div>
   </section>`;
 }
+
+/* DAR weekly read-only analytics; only aggregated figures (no individual event records). */
+const weeklyReportState={weeksBack:0,loadedIndex:null,data:null,loading:false,error:""};
+function weeklyNumber(n){return (Number(n)||0).toLocaleString("de-DE")}
+function weeklyChange(cur,prev){
+  const c=Number(cur)||0,p=Number(prev)||0;
+  if(!p)return "Vorwoche: "+weeklyNumber(p);
+  const val=((c-p)/p)*100;
+  return (val>0?"+":"")+val.toLocaleString("de-DE",{maximumFractionDigits:1,minimumFractionDigits:1})+" % zur Vorwoche";
+}
+function weeklyDate(d){
+  try{return new Intl.DateTimeFormat("de-DE",{day:"2-digit",month:"2-digit",year:"numeric"}).format(new Date(String(d)+"T12:00:00"))}
+  catch(e){return String(d||"")}
+}
+function renderWeeklyReport(){
+  const s=weeklyReportState,d=s.data,choices=Array.from({length:12},(_,i)=>'<option value="'+i+'" '+(s.weeksBack===i?"selected":"")+'>'+(i===0?"Letzte abgeschlossene Woche":("Vor "+(i+1)+" Wochen"))+'</option>').join("");
+  let out='<section class="visitor-shell weekly-analytics-panel">'+
+  '<div class="panel visitor-hero"><div class="section-head"><h3>Wochenanalyse</h3><span>Freitag – Donnerstag · Europe/Berlin</span></div>'+
+  '<p class="visitor-lead">Echte, anonym zusammengefasste Nutzungsereignisse aus Supabase. Kein Zugriff auf einzelne Nutzerdatensätze. Die wöchentlichen PDF-Berichte werden separat jeden Freitag erstellt.</p>'+
+  '<div style="display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin:12px 0 4px">'+
+  '<label style="font-size:11px;color:var(--soft)">Berichtszeitraum <select class="field" id="weeklyRange" style="max-width:240px">'+choices+'</select></label>'+
+  '<button class="btn" id="weeklyReloadBtn" type="button">Aktualisieren</button>'+
+  '<button class="btn primary" id="weeklyPrintBtn" type="button" '+(!d?"disabled":"")+'>PDF erstellen / Drucken</button></div>'+
+  '<p style="margin:8px 0 0;color:var(--soft);font-size:10px">PDF: Im Druckdialog „Als PDF sichern“ auswählen. Für automatische Freitag-PDFs ist der gesonderte Wochenauftrag aktiv.</p></div>';
+  if(s.error)out+='<div class="panel"><strong style="color:#ffb1a1">Daten aktuell nicht abrufbar:</strong> '+esc(s.error)+'</div>';
+  if(!d)return out+'<div class="panel"><div class="empty">'+(s.loading?"Wochenanalyse wird geladen …":"Warte auf Wochenanalyse …")+'</div></div></section>';
+  out+='<div class="panel"><div class="section-head"><h3>'+esc(weeklyDate(d.start))+' – '+esc(weeklyDate(d.end))+'</h3><span>Abgeschlossene Berichtswoche</span></div>'+
+  '<div class="metric-grid visitor-kpi">'+
+  metric("Seitenaufrufe",weeklyNumber(d.page_views),weeklyChange(d.page_views,d.previous_page_views))+
+  metric("Beitragsaufrufe",weeklyNumber(d.post_views),weeklyChange(d.post_views,d.previous_post_views))+
+  metric("Geteilt",weeklyNumber(d.shares),"Gemessene Teilaktionen")+
+  metric("Gespeichert",weeklyNumber(d.saves),"Gemessene Save-Aktionen")+
+  metric("Browser-Kennungen",weeklyNumber(d.distinct_browser_keys),"Keine verifizierten Einzelpersonen")+
+  metric("Datenstatus","7 Tage","Freitag bis Donnerstag")+'</div></div>';
+  const days=Array.isArray(d.daily)?d.daily:[];
+  const mx=Math.max(1,...days.map(row=>Number(row.page_views)||0));
+  out+='<div class="panel"><div class="section-head"><h3>Tägliche Entwicklung</h3><span>Seitenaufruf-Ereignisse</span></div>'+
+  '<div style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;align-items:end;min-height:165px">';
+  days.forEach(function(day){
+    const h=Math.max(6,Math.round((Number(day.page_views)||0)/mx*104));
+    out+='<div style="text-align:center;min-width:0"><b style="display:block;font-size:10px;color:var(--gold);margin-bottom:4px">'+esc(weeklyNumber(day.page_views))+'</b>'+
+    '<div style="height:'+h+'px;border-radius:7px 7px 0 0;background:linear-gradient(0deg,#21594b,#5e987d);max-width:55px;margin:auto"></div>'+
+    '<small style="font-size:10px;color:var(--soft)">'+esc(weeklyDate(day.day).slice(0,5))+'</small></div>';
+  });
+  out+='</div></div>';
+  out+='<div class="visitor-grid" style="grid-template-columns:repeat(auto-fit,minmax(255px,1fr))">';
+  const rows=Array.isArray(d.top_posts)?d.top_posts:[];
+  const sections=Array.isArray(d.top_sections)?d.top_sections:[];
+  out+='<div class="panel"><div class="section-head"><h3>Meistgelesene Beiträge</h3><span>Top 10</span></div><div class="status-list">';
+  rows.forEach(function(row,i){
+    out+='<div class="status-row"><span><b>'+(i+1)+'. '+esc(cleanTitle(row.title||row.id))+'</b></span><strong class="status-pill">'+weeklyNumber(row.views)+'</strong></div>';
+  });
+  out+=rows.length?'':'<p class="visitor-lead">Keine Beitragsaufrufe erfasst.</p>';
+  out+='</div></div><div class="panel"><div class="section-head"><h3>Beliebte Bereiche</h3><span>Seitenaufrufe</span></div><div class="status-list">';
+  const titles={home:"Startseite",more:"Mehr",quran:"Qurʾān",quiz:"Quiz",hadith:"Ḥadīṯ",frauen:"Frauen",topics:"Beiträge",feed:"Feed",prayer:"Gebetszeiten",account:"Konto",propheten:"Propheten"};
+  sections.forEach(function(row,i){
+    const name=titles[row.id]||row.id||"Unbekannt";
+    out+='<div class="status-row"><span><b>'+(i+1)+'. '+esc(name)+'</b></span><strong class="status-pill">'+weeklyNumber(row.views)+'</strong></div>';
+  });
+  out+='</div></div></div>';
+  out+='<div class="panel"><div class="section-head"><h3>Messqualität &amp; App-Kanäle</h3><span>Keine Schätzwerte</span></div>'+
+   '<p class="visitor-lead" style="max-width:none">Die vorhandenen Ereignisse unterscheiden derzeit native iOS-App, Web-App/PWA und Desktop-Website nicht zuverlässig. „Standalone“-Aufrufe sind <b>keine</b> verifizierten Neuinstallationen. App-Store-Downloads sind nur mit Zahlen aus App Store Connect belastbar. Browser-Kennungen sind weder eindeutige Menschen noch rechtssichere Sitzungszahlen. PDFs und tatsächliche Downloads müssen als eigene erfolgreiche Aktionen gemessen werden.</p>'+
+   '<p class="visitor-lead" style="max-width:none">Die Rohdaten bleiben in Supabase. Dieser Bereich zeigt ausschließlich aggregierte Wochenzahlen und öffentliche Beitragstitel.</p></div></section>';
+  return out;
+}
+async function loadWeeklyReport(){
+  if(weeklyReportState.loading||!hasSupabase())return;
+  const s=weeklyReportState,week=s.weeksBack;
+  s.loading=true;s.error="";
+  try{
+    const url=String(cfg().supabaseUrl||"").replace(/\/$/,"");
+    const r=await fetch(url+"/rest/v1/rpc/analytics_weekly_report?p_weeks_back="+week,{headers:headers(),cache:"no-store"});
+    if(!r.ok)throw new Error("Statistik-Schnittstelle: HTTP "+r.status);
+    const data=await r.json();
+    if(s.weeksBack===week){s.data=data;s.loadedIndex=week}
+  }catch(e){if(s.weeksBack===week){s.error=String(e.message||e);s.data=null;s.loadedIndex=week}}
+  finally{s.loading=false;if(currentTab==="wochenanalyse")renderShell()}
+}
+function printWeeklyReport(){
+  const d=weeklyReportState.data;
+  if(!d){toast("Noch kein Bericht geladen");return}
+  const top=Array.isArray(d.top_posts)?d.top_posts:[];
+  const daily=Array.isArray(d.daily)?d.daily:[];
+  const html='<!doctype html><html lang="de"><head><meta charset="utf-8"><title>DĀR AL TAWḤĪD – Wochenanalyse</title>'+
+  '<style>body{font-family:Arial,sans-serif;background:#091c2b;color:#f7f0df;margin:0;padding:38px;-webkit-print-color-adjust:exact;print-color-adjust:exact}h1{color:#ecd391;letter-spacing:.03em}h2{color:#dcbf7b;font-size:16px;border-bottom:1px solid #456760;padding-bottom:7px;margin-top:27px}.top{border-top:2px solid #dbbd76;padding-top:10px}small{color:#aac2bb}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.card{background:#103332;padding:18px;border:1px solid #345b50;border-radius:12px}.card b{display:block;font-size:21px;color:#fbe3a3;margin-top:9px}.row{display:flex;justify-content:space-between;gap:20px;padding:8px 4px;border-bottom:1px solid #30524e;font-size:12px}.note{margin-top:24px;font-size:11px;color:#b2c9bd;line-height:1.55}@page{size:A4;margin:13mm} @media print{body{padding:0}}</style></head><body>'+
+  '<p class="top">DĀR AL TAWḤĪD · ANALYSEZENTRUM</p><h1>Wöchentliche Nutzungsanalyse</h1>'+
+  '<p>'+esc(weeklyDate(d.start))+' – '+esc(weeklyDate(d.end))+' · Europe/Berlin</p>'+
+  '<div class="cards"><div class="card">Seitenaufrufe<b>'+weeklyNumber(d.page_views)+'</b><small>'+esc(weeklyChange(d.page_views,d.previous_page_views))+'</small></div>'+
+  '<div class="card">Beitragsaufrufe<b>'+weeklyNumber(d.post_views)+'</b><small>'+esc(weeklyChange(d.post_views,d.previous_post_views))+'</small></div>'+
+  '<div class="card">Geteilt<b>'+weeklyNumber(d.shares)+'</b></div>'+
+  '<div class="card">Gespeichert<b>'+weeklyNumber(d.saves)+'</b></div></div>'+
+  '<h2>Tagesverlauf</h2>'+daily.map(row=>'<div class="row"><span>'+esc(weeklyDate(row.day))+'</span><b>'+weeklyNumber(row.page_views)+' Seiten · '+weeklyNumber(row.post_views)+' Beiträge</b></div>').join("")+
+  '<h2>Meistgelesene Beiträge</h2>'+top.map((row,i)=>'<div class="row"><span>'+(i+1)+'. '+esc(cleanTitle(row.title||row.id))+'</span><b>'+weeklyNumber(row.views)+'</b></div>').join("")+
+  '<div class="note">Datenquelle: Supabase / site_events. Technische Ereigniszahlen, keine nachgewiesene Besucherzahl. iOS-Downloads und PWA-Neuinstallationen sind nicht verifiziert; keine künstlichen Schätzungen.</div>'+
+  '</body></html>';
+  const w=window.open("","_blank");
+  if(!w){toast("Pop-up blockiert. Bitte Pop-ups für das Admin-Zentrum erlauben.");return}
+  w.document.open();w.document.write(html);w.document.close();w.focus();
+  setTimeout(function(){try{w.print()}catch(e){}},250);
+}
+function bindWeeklyReport(){
+  if(currentTab!=="wochenanalyse")return;
+  const sel=document.getElementById("weeklyRange");
+  if(sel)sel.onchange=function(){weeklyReportState.weeksBack=Math.max(0,Math.min(11,Number(sel.value)||0));weeklyReportState.data=null;weeklyReportState.loadedIndex=null;weeklyReportState.error="";renderShell()};
+  const reload=document.getElementById("weeklyReloadBtn");
+  if(reload)reload.onclick=function(){weeklyReportState.data=null;weeklyReportState.loadedIndex=null;weeklyReportState.error="";renderShell()};
+  const print=document.getElementById("weeklyPrintBtn");
+  if(print)print.onclick=printWeeklyReport;
+  if(weeklyReportState.loadedIndex!==weeklyReportState.weeksBack&&!weeklyReportState.loading)loadWeeklyReport();
+}
+
 function renderVisitors(ctx){
   const live=Number(ctx.live.live_now||0);
   const sessions=Number(ctx.live.today_sessions||0);
