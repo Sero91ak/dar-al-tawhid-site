@@ -65,7 +65,7 @@ const additions={
         "intro": "Eine gute Bitte achtet die Würde und die Grenzen beider Seiten.",
         "lines": [
           "Qurʾān 2:83 gebietet im überlieferten Text gute Rede gegenüber Menschen.",
-          "Muslim 2593 lehrt die besondere Bedeutung von Rِifq, also sanfter Haltung.",
+          "Muslim 2593 lehrt die besondere Bedeutung von Rifq, also sanfter Haltung.",
           "Daraus üben wir eine konkrete Bitte: klar, höflich und ohne Druck.",
           "Eine Ablehnung bedeutet nicht, dass man die andere Person beleidigen darf; im Notfall darf man direkt und dringend um Hilfe rufen."
         ],
