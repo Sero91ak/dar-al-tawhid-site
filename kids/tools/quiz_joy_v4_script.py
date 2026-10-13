@@ -137,6 +137,50 @@ def prepare(question: dict) -> dict:
         "published": False,
     }
 
+def segment_plan(question: dict) -> dict[str, list[str]]:
+    """V4-only, no-credit audio composition plan; keys equal prepare() exactly.
+
+    Spoken parts are full phrases, never sliced inside a word, Arabic name,
+    Qurʾān quotation or answer. The playback key stays the full approved text.
+    The app receives a locally composed .m4a, not multiple network players.
+    """
+    full = prepare(question)
+    band = question["ageBand"]
+    n = int(question["number"])
+    title = normal(question["question"])
+    answers = question["answers"]
+    if band == "4-6":
+        opening = YOUNG_OPEN[n % len(YOUNG_OPEN)]
+        if is_yes_no(question):
+            core = title
+            closing = YES_NO_GUIDANCE[n % len(YES_NO_GUIDANCE)]
+        else:
+            options = " ".join(answer_line(a["label"], i) for i, a in enumerate(answers, 1))
+            core = f"{title} {options}"
+            closing = "Welche Antwort passt deiner Meinung nach?"
+        question_parts = [opening, core, closing]
+    elif band == "7-8":
+        opening = OLDER_OPEN[n % len(OLDER_OPEN)]
+        options = " ".join(answer_line(a["label"], i) for i, a in enumerate(answers, 1))
+        question_parts = [opening, f"{title} {options}", "Wähle die Antwort, die du für richtig hältst."]
+    else:
+        options = " ".join(answer_line(a["label"], i) for i, a in enumerate(answers, 1))
+        question_parts = [f"{title} {options}", "Überlege und wähle die beste Antwort."]
+    explanation_parts = ["Das merken wir uns:", normal(question["explanation"])]
+    plan = {
+        "questionAudioText": list(map(normal, question_parts)),
+        "correctAudioText": [full["correctAudioText"]],
+        "retryAudioText": [full["retryAudioText"]],
+        "explanationAudioText": list(map(normal, explanation_parts)),
+    }
+    for key, parts in plan.items():
+        if not parts or any(not part for part in parts):
+            raise ValueError(f"{question['id']}: empty audio fragment")
+        if normal(" ".join(parts)) != full[key]:
+            raise ValueError(f"{question['id']}: V4 audio fragment contract mismatch in {key}")
+    return plan
+
+
 def select_pilot(questions: list[dict]) -> list[dict]:
     chosen = []
     for band in AGE_BANDS:

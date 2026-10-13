@@ -51,7 +51,7 @@ jobs:
       ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
       ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
       ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
-      VOICE_BUILD_SCOPE: ${{ github.event_name == 'workflow_dispatch' && inputs.scope || (github.event_name == 'push' && contains(github.event.head_commit.message, '[quiz-v4-pilot-20261013]')) && 'quiz' || 'pause' }}
+      VOICE_BUILD_SCOPE: ${{ github.event_name == 'workflow_dispatch' && inputs.scope || 'pause' }}
       QUIZ_BATCH_START: ${{ github.event_name == 'workflow_dispatch' && inputs.quiz_start || '' }}
       QUIZ_BATCH_COUNT: ${{ github.event_name == 'workflow_dispatch' && inputs.quiz_count || '' }}
       VOICE_AUTO_QUEUE: 'false' # paid serial rendering disabled
@@ -172,7 +172,8 @@ jobs:
           ROOT=pathlib.Path(".")
           sys.path.insert(0,str(ROOT/"kids/tools"))
           from voice_text import SYNTHESIS_REVISION, prepare_kids_voice_text
-          from quiz_joy_v4_script import prepare as prepare_quiz_v4
+          from quiz_joy_v4_script import prepare as prepare_quiz_v4, segment_plan as quiz_segment_plan
+          from quiz_v4_audio_compose import compose_clips
 
           QUIZ=ROOT/"kids/data/quiz-kids.json"
           DUA=ROOT/"kids/data/dua-kids.json"
@@ -422,8 +423,11 @@ jobs:
                   "flash-inline-master-rules-kids-v1" if model_id=="eleven_flash_v2_5" else
                   (DICT_ID+"|"+DICT_VERSION)
               )
+              # Quiz TTS fragments must not be cached across different voice IDs.
+              # Leave established Duʿāʾ cache fingerprints untouched.
+              master_cache_voice=ELEVEN_VOICE if profile.startswith("quiz") else ""
               digest=hashlib.sha1(
-                  (revision+"|"+str(model_id)+"|"+profile+"|"+dictionary_fingerprint+"|"+prepared).encode("utf-8")
+                  (revision+"|"+str(model_id)+"|"+master_cache_voice+"|"+profile+"|"+dictionary_fingerprint+"|"+prepared).encode("utf-8")
               ).hexdigest()[:16]
               target=asset_dir/(digest+".m4a")
               if target.exists() and target.stat().st_size>1200:
@@ -433,7 +437,9 @@ jobs:
               # was cost-saving Flash if the direct ElevenLabs API is unavailable.
               if (model_id==ELEVEN_QUIZ_DE_MODEL or profile=="quiz_fusha") and not ELEVEN_KEY:
                   raise RuntimeError("Exact Flash/Fusha model requires direct ElevenLabs credentials; refuse unknown Worker model")
-              for attempt in range(1,4):
+              # V4 timeouts may still have been charged. Never blindly retry them.
+              max_attempts=1 if model_id.startswith('eleven_v4') else 3
+              for attempt in range(1,max_attempts+1):
                   if ELEVEN_KEY:
                       if profile=="quiz_4_6":
                           voice_settings={
@@ -635,11 +641,11 @@ jobs:
                   except Exception as exc:
                       last=exc
                       target.unlink(missing_ok=True)
-                      if attempt<3:
+                      if attempt<max_attempts:
                           time.sleep(2*attempt)
               raise RuntimeError(f"Generation failed for {text[:80]!r}: {last}")
 
-          def build_pack(*,texts,manifest_path,asset_dir,profile,pack_id,counts,model_id=None,require_model_match=False,profiles_by_text=None,models_by_text=None,preserve_existing=False,allow_reviewed_legacy=False):
+          def build_pack(*,texts,manifest_path,asset_dir,profile,pack_id,counts,model_id=None,require_model_match=False,profiles_by_text=None,models_by_text=None,preserve_existing=False,allow_reviewed_legacy=False,composed_parts_by_text=None):
               model_id=model_id or ELEVEN_MODEL
               unique=[]
               seen=set()
@@ -706,18 +712,33 @@ jobs:
                       raise SystemExit(f"Zu viele kostenträchtige {profile}-Neurenderings ({len(missing)} > {limit}); kleinere geprüfte Pakete benutzen.")
               print(f"{pack_id}: {len(unique)} Texte · {len(results)} aktuell · {len(missing)} neu")
               serial={"done":0,"total":len(missing)}
+              def synth_with_reuse(text):
+                  text_profile=(profiles_by_text or {}).get(text,profile)
+                  text_model=(models_by_text or {}).get(text,model_id)
+                  parts=(composed_parts_by_text or {}).get(text)
+                  if not parts or len(parts)<2:
+                      return synth(text,text_profile,asset_dir,serial,text_model)
+                  prepared=prepare_profile_text(text,text_profile)
+                  with speech_synth_lock:
+                      def get_fragment(part):
+                          part_profile="quiz_fusha" if ARABIC_SCRIPT_RE.fullmatch(part) else text_profile
+                          _,audio,_,_=synth(part,part_profile,asset_dir,
+                              {"done":0,"total":len(parts)},quiz_model_for_text(part))
+                          return audio
+                      target,length=compose_clips(
+                          full_text=text,segments=parts,
+                          voice_id=ELEVEN_VOICE,model_id=text_model,
+                          profile=text_profile,
+                          recipe_revision=profile_revision(text_profile)+"|"+SYNTHESIS_REVISION+"|"+DICT_ID+"|"+DICT_VERSION,
+                          output_dir=asset_dir,
+                          synth_part=get_fragment,read_duration=duration
+                      )
+                  with lock:
+                      serial["done"]+=1
+                      print(f"[{serial['done']}/{serial['total']}] reused V4 phrases · {text[:70]} · {length:.2f}s",flush=True)
+                  return text,target,length,prepared
               with concurrent.futures.ThreadPoolExecutor(max_workers=3) as ex:
-                  futures={
-                      ex.submit(
-                          synth,
-                          text,
-                          (profiles_by_text or {}).get(text,profile),
-                          asset_dir,
-                          serial,
-                          (models_by_text or {}).get(text,model_id)
-                      ):text
-                      for text in missing
-                  }
+                  futures={ex.submit(synth_with_reuse,text):text for text in missing}
                   for fut in concurrent.futures.as_completed(futures):
                       text,p,d,prepared=fut.result()
                       results[text]=(p,d)
@@ -757,6 +778,7 @@ jobs:
                       "qaApproval":("pending-native-listening" if is_arabic else "technical-qa-complete"),
                       "voiceProfileId":"serhat-owner-voice-2026",
                       "sourceVoice":"authorized-owner-voice",
+                      "sourceVoiceId":ELEVEN_VOICE,
                       "sourceType":"owner-voice-generated",
                       "sourceProvider":"DĀR Voice Studio",
                       "sourceSpeaker":"Serhat Abu Malik",
@@ -871,6 +893,7 @@ jobs:
               quiz_texts=[]
               quiz_profiles={}
               quiz_models={}
+              quiz_composed_parts={}
               age_profile={
                   "4-6":"quiz_4_6",
                   "7-8":"quiz_7_8",
@@ -881,6 +904,8 @@ jobs:
                   for key in ("questionAudioText","correctAudioText","retryAudioText","explanationAudioText"):
                       speech=voice[key]
                       quiz_texts.append(speech)
+                      if key in ('questionAudioText','explanationAudioText'):
+                          quiz_composed_parts[speech]=quiz_segment_plan(q)[key]
                       quiz_models[speech]=quiz_model_for_text(speech)
                       quiz_profiles[speech]=(
                           "quiz_fusha" if ARABIC_SCRIPT_RE.fullmatch(speech) else
@@ -891,6 +916,25 @@ jobs:
               quiz_texts.append(final_feedback)
               quiz_profiles[final_feedback]="quiz_feedback"
               quiz_models[final_feedback]=ELEVEN_QUIZ_DE_MODEL
+
+              # Credit guard runs BEFORE a single ElevenLabs request.
+              # Counts unique V4 text fragments instead of whole repeated prompts.
+              # Conservative: may overcount already cached fragments, never undercount.
+              planned_v4=set()
+              for text in set(quiz_texts):
+                  text_profile=quiz_profiles.get(text,"quiz_feedback")
+                  parts=quiz_composed_parts.get(text) or [text]
+                  for part in parts:
+                      part_profile="quiz_fusha" if ARABIC_SCRIPT_RE.fullmatch(part) else text_profile
+                      part_model=quiz_model_for_text(part)
+                      planned_v4.add((part_profile,part_model,prepare_profile_text(part,part_profile)))
+              planned_chars=sum(len(prepared) for _,_,prepared in planned_v4)
+              max_chars=int(batch_config.get("maxPlannedV4CharactersPerRun") or 1400)
+              print(f"PREPAID QUIZ V4 GUARD: at most {planned_chars} new characters this batch, cap {max_chars}",flush=True)
+              if planned_chars>max_chars:
+                  raise SystemExit("Kids Quiz V4 spend guard: reduce manual batch size; no credits spent.")
+              if batch_config.get("creditSaver") is not True:
+                  raise SystemExit("Kids Quiz V4 creditSaver must remain enabled.")
 
               quiz_manifest=build_pack(
                   texts=quiz_texts,
@@ -913,7 +957,8 @@ jobs:
                   require_model_match=True,
                   profiles_by_text=quiz_profiles,
                   models_by_text=quiz_models,
-                  preserve_existing=True
+                  preserve_existing=True,
+                  composed_parts_by_text=quiz_composed_parts
               )
               if any(p not in quiz_manifest["entries"] for p in batch_prompts):
                   raise SystemExit("Quiz-Batch unvollständig: mindestens ein freigegebener Frageclip fehlt.")
@@ -923,6 +968,10 @@ jobs:
                   "voiceProfileId":"serhat-owner-voice-2026",
                   "preserveExistingV4":True,
                   "speechScriptRevision":"quiz-joy-serhat-v4-20261013",
+                  "v4OfflinePhraseReuse":True,
+                  "v4PhraseJoinRevision":"quiz-v4-phrase-audio-v1",
+                  "requiredAuditoryQualityReview":True,
+                  "maxPlannedV4CharactersPerRun":max_chars,
                   "voiceModelEnforced":True,
                   "germanPhonemeDictionaryCompatible":True,
                   "germanInlinePronunciationMaster":False,
@@ -1214,6 +1263,36 @@ jobs:
           print("Dua isolated word pack:",dua_word_manifest["counts"])
           print("Synthesis revision:",SYNTHESIS_REVISION)
           PY
+
+      # If manifest QA or a later Git push fails, keep the already-paid V4 audio.
+      # Only NEW/UNTRACKED clips are uploaded, never all legacy Flash downloads.
+      - name: Preserve paid Quiz V4 audio before manifest validation
+        if: env.VOICE_BUILD_SCOPE == 'quiz' && env.DAR_VOICE_PROVIDER_AVAILABLE == '1'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import pathlib,subprocess,shutil
+          root=pathlib.Path(".")
+          out=pathlib.Path("/tmp/kids-quiz-v4-recovery")
+          out.mkdir(exist_ok=True)
+          tracked=set(subprocess.check_output(["git","ls-files","kids/assets/kids-quiz-audio"],text=True).splitlines())
+          copied=0
+          for path in (root/"kids/assets/kids-quiz-audio").glob("*.m4a"):
+              if str(path) in tracked:continue
+              shutil.copy2(path,out/path.name)
+              copied+=1
+          shutil.copy2(root/"kids/data/quiz-audio.json",out/"quiz-audio.json")
+          print(f"Paid V4 recovery prepared before validation: {copied} new clips + quiz manifest.")
+          PY
+      - name: Upload recoverable V4 audio (no rerender required if QA fails)
+        if: env.VOICE_BUILD_SCOPE == 'quiz' && env.DAR_VOICE_PROVIDER_AVAILABLE == '1'
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-quiz-v4-paid-recovery-${{ github.run_id }}
+          path: /tmp/kids-quiz-v4-recovery/
+          retention-days: 14
+          if-no-files-found: error
 
       - name: Audit source sentences against generated quiz voice manifest
         if: env.VOICE_BUILD_SCOPE == 'quiz' && env.DAR_VOICE_PROVIDER_AVAILABLE == '1'

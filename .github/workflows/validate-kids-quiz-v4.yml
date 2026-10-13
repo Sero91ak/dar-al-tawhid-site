@@ -5,6 +5,10 @@ on:
       - 'kids/quiz-v4-bridge.js'
       - 'kids/tools/quiz_joy_v4_script.py'
       - 'kids/tools/quiz_v4_contract_guard.py'
+      - 'kids/tools/quiz_v4_audio_compose.py'
+      - 'kids/tools/quiz_v4_compose_test.py'
+      - 'kids/tools/quiz_v4_cost_audit.py'
+      - 'kids/tools/quiz_v4_workflow_guard.py'
       - 'kids/tools/quiz_speech_guard.py'
       - 'kids/data/quiz-kids.json'
       - '.github/workflows/build-kids-quiz-owner-voice.yml'
@@ -15,6 +19,10 @@ on:
       - 'kids/quiz-v4-bridge.js'
       - 'kids/tools/quiz_joy_v4_script.py'
       - 'kids/tools/quiz_v4_contract_guard.py'
+      - 'kids/tools/quiz_v4_audio_compose.py'
+      - 'kids/tools/quiz_v4_compose_test.py'
+      - 'kids/tools/quiz_v4_cost_audit.py'
+      - 'kids/tools/quiz_v4_workflow_guard.py'
       - 'kids/tools/quiz_speech_guard.py'
       - '.github/workflows/build-kids-quiz-owner-voice.yml'
 permissions:
@@ -30,9 +38,26 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Provide FFmpeg for zero-credit audio stitching test
+        shell: bash
+        run: |
+          set -euo pipefail
+          if command -v ffmpeg >/dev/null 2>&1; then exit 0; fi
+          python3 -m pip install -q --disable-pip-version-check imageio-ffmpeg==0.6.0
+          mkdir -p "$HOME/.local/bin"
+          python3 - <<'PY'
+          import imageio_ffmpeg,pathlib,os
+          target=pathlib.Path.home()/".local/bin/ffmpeg"
+          target.symlink_to(imageio_ffmpeg.get_ffmpeg_exe())
+          print("Offline test FFmpeg:",target.resolve())
+          PY
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
       - name: Verify 900 texts match frontend and V4 generator
         run: |
           python3 kids/tools/quiz_v4_contract_guard.py
+          python3 kids/tools/quiz_v4_cost_audit.py
+          python3 kids/tools/quiz_v4_workflow_guard.py
+          python3 kids/tools/quiz_v4_compose_test.py
           python3 kids/tools/quiz_speech_guard.py --self-test
           python3 - <<'PY'
           import json,sys
