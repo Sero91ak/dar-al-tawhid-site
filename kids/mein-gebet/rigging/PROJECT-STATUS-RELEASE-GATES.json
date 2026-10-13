@@ -290,6 +290,27 @@
       "releaseGatesApproved": 0,
       "code": "kids/mein-gebet/rigging/qa_girl_v20_dual_surface_20261013.py",
       "note": "Independent unchanged V20 binary test confirms no sclera penetration above 0.5 mm, but significant front-face occlusion; vertex/ray metrics are not an anatomical or calibrated visual sign-off. Do not shift entire lids forward or modify protected original meshes without visual calibration."
+    },
+    "girlV20FloorContactRebuild20261013": {
+      "date": "2026-10-13",
+      "scope": "real V20 GLB research only; unapproved, no geometry/rig/animation change",
+      "sourceDriveFileId": "1G0FGU5EoCyADdSQbB7I15txtZMSgg98f",
+      "sourceSha256": "c86e958bca638ca4e1d602994fec905c6c7fcf311769d0a16610357960bbf16a",
+      "sourceBytes": 2730144,
+      "generatedDraftSha256": "30471634523d07511e39a6a0ad7ccd76a337a14799d847040047f36bd01ef02a",
+      "generatedDraftBytes": 2737140,
+      "transform": "223 existing mesh child nodes shifted y=-0.024 m; original glTF BIN chunk byte-identical",
+      "independentReload": "trimesh 4.11.1; 223 meshes; both sole world minY ~2.086e-10m (source 0.0240000002086m)",
+      "noRigOrAnimationAdded": true,
+      "sourceModelUntouched": true,
+      "productionReady": false,
+      "originalIdentityApproved": false,
+      "visualReviewApproved": false,
+      "fiqhReviewApproved": false,
+      "gatesApproved": 0,
+      "outputPersistence": "local /mnt/data only; three Google Drive uploads attempted to existing V20.1 folder and FAILED: container_session_expired; no Drive readback, no Drive GLB persisted",
+      "driveFolderId": "1M3usUd_20rozPjYV9xLlT6GtVvxd9Oh1",
+      "nextAction": "Restore/recreate V20.1 GLB from pinned V20 binary, save model+builder+QA in Drive, read back and SHA verify; then visual identity and floor/weight review. Do not release."
     }
   }
 }
