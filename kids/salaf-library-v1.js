@@ -6,6 +6,13 @@
   "use strict";
   var root=document.getElementById("view-salaf");
   if(!root)return;
+  /* Load the isolated master-reader stylesheet without changing Home, nav or shell markup. */
+  if(!document.querySelector('link[data-salaf-master-v2]')){
+    var masterStyles=document.createElement("link");masterStyles.rel="stylesheet";
+    masterStyles.href="/kids/salaf-master-v2.css?v=2";
+    masterStyles.setAttribute("data-salaf-master-v2","");
+    document.head.appendChild(masterStyles);
+  }
   var CATEGORIES=[
     {id:"rahma",title:"Barmherzigkeit & Helfen",short:"Barmherzigkeit",caption:"Helfen und Gutes tun",img:"/kids/assets/salaf/topics-v1380/rahma.jpg"},
     {id:"sidq",title:"Ehrlichkeit & Vertrauen",short:"Ehrlichkeit",caption:"Die Wahrheit sagen",img:"/kids/assets/salaf/topics-v1380/sidq.jpg"},
