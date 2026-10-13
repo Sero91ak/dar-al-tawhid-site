@@ -1,0 +1,65 @@
+name: Dar Test Android APK · Internal install package
+on:
+  push:
+    branches: [main]
+    paths:
+      - "android-test/**"
+      - ".github/workflows/android-test-apk.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dar-test-android-apk-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  apk:
+    name: Build installable Dar Test APK
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Build isolated TEST APK
+        shell: bash
+        working-directory: android-test
+        run: |
+          set -euo pipefail
+          chmod +x ../android/gradlew
+          ../android/gradlew --no-daemon -p . :app:assembleDebug --stacktrace
+      - name: Verify package ID, signature and test URL
+        shell: bash
+        run: |
+          set -euo pipefail
+          apk="android-test/app/build/outputs/apk/debug/app-debug.apk"
+          test -s "$apk"
+          grep -q 'de.daraltawhid.testapp' android-test/app/build.gradle.kts
+          grep -q 'https://dar-al-tawhid.de/test/' android-test/app/src/main/java/de/daraltawhid/testapp/TestActivity.java
+          ! grep -q 'DarPush.bootstrap' android-test/app/src/main/java/de/daraltawhid/testapp/TestActivity.java
+          sdk="$(find "$ANDROID_HOME/build-tools" -mindepth 1 -maxdepth 1 -type d | sort -V | tail -n 1)"
+          test -x "$sdk/aapt" && test -x "$sdk/apksigner"
+          "$sdk/apksigner" verify --verbose "$apk" | grep -q '^Verified'
+          "$sdk/aapt" dump badging "$apk" > "$RUNNER_TEMP/dar-test-badging.txt"
+          grep -q "package: name='de.daraltawhid.testapp'" "$RUNNER_TEMP/dar-test-badging.txt"
+          mkdir -p dist
+          cp "$apk" dist/dar-test-android.apk
+          (cd dist && sha256sum dar-test-android.apk > SHA256SUMS.txt)
+          echo "Dar Test APK (distinct app ID): de.daraltawhid.testapp" >> "$GITHUB_STEP_SUMMARY"
+          echo "Not the official visitor APK, not Kids, no native push." >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload Android installation file (internal test only)
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-test-android-apk
+          path: |
+            dist/dar-test-android.apk
+            dist/SHA256SUMS.txt
+          if-no-files-found: error
+          retention-days: 14
