@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1380",
+    "serviceWorkerCache": "v1381",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -431,7 +431,8 @@
       "stickyNext": true,
       "audioScriptRevision": "quiz-joy-serhat-v4-20261013",
       "newAudioPolicy": "eleven-v4-only",
-      "audioProgress": "prefer-manifest-v4-gradual"
+      "audioProgress": "prefer-manifest-v4-gradual",
+      "feedbackPolicy": "Islamic Academy Praise V4 - age-specific with safe voice fallback"
     },
     "kidsQuizContentRevision": "001-900",
     "kidsQuizGenerationPaused": true,
