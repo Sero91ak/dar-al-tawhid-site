@@ -24,9 +24,9 @@ var olderOpen=[
   "Nimm dir Zeit für deine Antwort."
 ];
 var good={
- "4-6":["Sehr schön! Du hast gut aufgepasst.","Prima! Das hast du richtig erkannt.","Gut gemacht! Du lernst immer mehr.","Ja, das ist richtig. Schön überlegt!","Sehr gut! Du hast die passende Antwort gewählt."],
- "7-8":["Das stimmt. Gut nachgedacht!","Richtig erkannt! Sehr gut.","Prima! Du hast aufmerksam zugehört.","Gut gemacht! Genau diese Antwort passt.","Sehr schön! Du hast die Frage verstanden."],
- "9-10":["Das ist richtig. Gut überlegt.","Sehr gut. Diese Antwort passt.","Richtig erkannt! Mach weiter so.","Gut durchdacht. Das stimmt.","Sehr schön. Du hast die passende Antwort gefunden."]
+ "4-6":["Mā schāʾ Allāh! Das heißt: Was Allah gewollt hat. Sehr gut gemacht!","Allāhumma bārik! O Allah, schenke Segen. Du hast richtig geantwortet!","Bārakallāhu fīk! Möge Allah dich segnen. Du lernst immer mehr!","Al-ḥamdu lillāh! Alles Lob gebührt Allah. Das hast du gut erkannt!","Mā schāʾ Allāh! Deine Antwort ist richtig. Schön, wie du dazulernst!"],
+ "7-8":["Mā schāʾ Allāh! Das bedeutet: Was Allah gewollt hat. Dein Wissen wächst!","Allāhumma bārik! O Allah, schenke Segen. Du hast gut nachgedacht!","Bārakallāhu fīk! Möge Allah dich segnen. Du hast die richtige Antwort gefunden!","Al-ḥamdu lillāh! Alles Lob gebührt Allah. Du lernst mit jeder Frage mehr!","Mā schāʾ Allāh! Du hast aufmerksam überlegt. Mach weiter so!"],
+ "9-10":["Mā schāʾ Allāh! Dein Wissen über den Dīn wächst. Sehr gut erkannt!","Allāhumma bārik! O Allah, schenke Segen. Diese Antwort ist richtig begründet!","Bārakallāhu fīk! Möge Allah dich segnen. Du hast die Frage gut durchdacht!","Al-ḥamdu lillāh! Alles Lob gebührt Allah. Du vertiefst dein Wissen!","Mā schāʾ Allāh! Du hast richtig entschieden. Vertiefe dein Wissen weiter!"]
 };
 var retry={
  "4-6":["Das war noch nicht richtig. Versuch es noch einmal in Ruhe.","Macht nichts, du darfst noch einmal nachdenken.","Schau dir die Antworten noch einmal an. Probiere es wieder.","Noch nicht ganz. Höre aufmerksam zu und versuche es erneut.","Nimm dir Zeit. Du kannst noch einmal wählen."],
@@ -55,5 +55,5 @@ function pick(q,kind,legacy){
  var s=speech(q);var v=s&&s[kind];
  return v&&has(v)?v:String(legacy||"");
 }
-root.DARKidsQuizV4={version:"quiz-joy-serhat-v4-20261013",speech:speech,has:has,pick:pick};
+root.DARKidsQuizV4={version:"quiz-academy-praise-v4-20261013",speech:speech,has:has,pick:pick};
 })(window);
