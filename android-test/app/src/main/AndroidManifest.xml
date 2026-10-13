@@ -6,7 +6,7 @@
         android:allowBackup="false"
         android:usesCleartextTraffic="false"
         android:label="@string/app_name"
-        android:icon="@drawable/ic_dar_test"
+        android:icon="@drawable/dar_test_brand_icon"
         android:theme="@style/Theme.DarTest">
         <activity
             android:name=".TestActivity"

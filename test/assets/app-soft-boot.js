@@ -351,7 +351,12 @@
         (root && root.classList.contains("dar-android-native-app")) ||
         !!window.DAR_ANDROID_NATIVE_APP ||
         /DarAlTawhidAndroid/i.test(ua);
-      if (isIosNative || isAndroidNative) {
+      // Standalone Dar Test APK has no visitor-native bridge. Skip only the
+      // blocking test soft-boot, without changing the live Android app flags.
+      var isDarTestNative =
+        (location.pathname === "/test" || location.pathname.indexOf("/test/") === 0) &&
+        /DarTestAndroid\/2(?:\b|$)/i.test(ua);
+      if (isIosNative || isAndroidNative || isDarTestNative) {
         try {
           if (isAndroidNative) {
             window.DAR_ANDROID_NATIVE_APP = true;
