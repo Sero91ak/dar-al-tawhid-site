@@ -2897,19 +2897,19 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers spricht vom Wissen Allahs über das Verborgene der Brust. Wir machen daraus keine Behauptung, ein Mensch könne Gedanken lesen. Eine Hadithnummer wurde nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der Vers spricht vom Wissen Allahs über das Verborgene der Brust. Wir machen daraus keine Behauptung, ein Mensch könne Gedanken lesen. Eine Hadithnummer wurde nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe). Pädagogischer Review 2026-10-13 mit konkreten altersgerechten Fragen; vorhandene Qurʾān-Fundstellen beibehalten; keine unabhängige Vollverifikation. Fiqh-Urteile weiterhin offen."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Allah kennt auch das, was kein Mensch lobt.",
     "ageText": {
       "4-5": {
         "goal": "Allah kennt auch das, was kein Mensch lobt.",
-        "intro": "Allah kennt auch das, was kein Mensch lobt. Der Vers sagt: Ob ihr eure Rede verbergt oder sie laut sagt, Er weiß, was in den Brüsten ist. Stell dir vor: Ein Kind räumt einen Stift weg, den niemand gesehen hat, und erwartet dafür kein Lob. Heute üben wir: Wir nennen eine kleine gute Tat, die man tun kann, ohne sie sofort zu erzählen. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! Du kannst etwas Gutes tun, auch wenn niemand zuschaut. Vielleicht räumst du ganz still ein Spielzeug weg. Allah weiß auch davon. Im Qurʾān 67:13 steht, dass Allah sogar das Verborgene kennt. Das soll uns an das Gute erinnern, nicht uns Angst machen.",
         "lines": [
-          "Allah kennt auch das, was kein Mensch lobt.",
-          "Der Vers sagt: Ob ihr eure Rede verbergt oder sie laut sagt, Er weiß, was in den Brüsten ist.",
-          "Ein Kind räumt einen Stift weg, den niemand gesehen hat, und erwartet dafür kein Lob.",
-          "Wir nennen eine kleine gute Tat, die man tun kann, ohne sie sofort zu erzählen."
+          "Allah kennt auch Verborgenes.",
+          "Qurʾān 67:13 spricht von Allahs Wissen.",
+          "Gute Taten brauchen nicht immer Lob.",
+          "Kein Mensch kann deshalb die Gedanken anderer lesen."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1875. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 67:13. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1875. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 67:13. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -2926,16 +2926,16 @@ const additions=
         "situation": "Ein Kind räumt einen Stift weg, den niemand gesehen hat, und erwartet dafür kein Lob.",
         "practice": "Wir nennen eine kleine gute Tat, die man tun kann, ohne sie sofort zu erzählen.",
         "summary": "Allah kennt auch das, was kein Mensch lobt. Die arabischen Worte spricht die Lehrperson.",
-        "audioScript": "Allah kennt unser Handeln. Allah kennt auch das, was kein Mensch lobt. Der Vers sagt: Ob ihr eure Rede verbergt oder sie laut sagt, Er weiß, was in den Brüsten ist. Ein Kind räumt einen Stift weg, den niemand gesehen hat, und erwartet dafür kein Lob. Wir nennen eine kleine gute Tat, die man tun kann, ohne sie sofort zu erzählen."
+        "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Du kannst etwas Gutes tun, auch wenn niemand zuschaut. Vielleicht räumst du ganz still ein Spielzeug weg. Allah weiß auch davon. Im Qurʾān 67:13 steht, dass Allah sogar das Verborgene kennt. Das soll uns an das Gute erinnern, nicht uns Angst machen."
       },
       "6-8": {
         "goal": "Allah kennt auch das, was kein Mensch lobt.",
-        "intro": "Heute geht es um Allah kennt unser Handeln. Allah kennt auch das, was kein Mensch lobt. Wir lesen Qurʾān 67:13. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt: Ob ihr eure Rede verbergt oder sie laut sagt, Er weiß, was in den Brüsten ist. So kann das im Alltag aussehen: Ein Kind räumt einen Stift weg, den niemand gesehen hat, und erwartet dafür kein Lob. Die Aufgabe: Wir nennen eine kleine gute Tat, die man tun kann, ohne sie sofort zu erzählen. asrara bedeutet: verbergen. ṣudūr bedeutet: Brüste, hier der Ort der inneren Gedanken im Vers. Die Grenze der Stunde: Der Vers spricht vom Wissen Allahs über das Verborgene der Brust. Wir machen daraus keine Behauptung, ein Mensch könne Gedanken lesen. Eine Hadithnummer wurde nicht ergänzt.",
+        "intro": "As-salāmu ʿalaikum! In Qurʾān 67:13 wird beschrieben, dass Allah das offen Gesagte und das Verborgene kennt. Wir lernen heute: Eine gute Tat ist wertvoll, auch wenn niemand uns dafür lobt. Stell dir vor, du findest einen Stift und legst ihn zurück. Du musst nicht allen davon erzählen. Wir nutzen den Vers nicht, um andere Kinder zu erschrecken oder ihre Gedanken zu beurteilen.",
         "lines": [
-          "Qurʾān 67:13 ist die gelesene Stelle.",
-          "Der Vers sagt: Ob ihr eure Rede verbergt oder sie laut sagt, Er weiß, was in den Brüsten ist.",
-          "Ein Kind räumt einen Stift weg, den niemand gesehen hat, und erwartet dafür kein Lob.",
-          "Die arabischen Worte spricht die Lehrperson."
+          "Allah kennt auch Verborgenes.",
+          "Qurʾān 67:13 spricht von Allahs Wissen.",
+          "Gute Taten brauchen nicht immer Lob.",
+          "Kein Mensch kann deshalb die Gedanken anderer lesen."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1875. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 67:13. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1875. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 67:13. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -2952,16 +2952,16 @@ const additions=
         "situation": "Ein Kind räumt einen Stift weg, den niemand gesehen hat, und erwartet dafür kein Lob.",
         "practice": "Wir nennen eine kleine gute Tat, die man tun kann, ohne sie sofort zu erzählen.",
         "summary": "Qurʾān 67:13 trägt diese Stunde. Der Vers sagt: Ob ihr eure Rede verbergt oder sie laut sagt, Er weiß, was in den Brüsten ist.",
-        "audioScript": "Allah kennt unser Handeln. Der Vers sagt: Ob ihr eure Rede verbergt oder sie laut sagt, Er weiß, was in den Brüsten ist. Ein Kind räumt einen Stift weg, den niemand gesehen hat, und erwartet dafür kein Lob. Wir nennen eine kleine gute Tat, die man tun kann, ohne sie sofort zu erzählen."
+        "audioScript": "As-salāmu ʿalaikum! In Qurʾān 67:13 wird beschrieben, dass Allah das offen Gesagte und das Verborgene kennt. Wir lernen heute: Eine gute Tat ist wertvoll, auch wenn niemand uns dafür lobt. Stell dir vor, du findest einen Stift und legst ihn zurück. Du musst nicht allen davon erzählen. Wir nutzen den Vers nicht, um andere Kinder zu erschrecken oder ihre Gedanken zu beurteilen."
       },
       "9-10": {
         "goal": "Ich kann Allah kennt unser Handeln von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Allah kennt unser Handeln. Das Lernziel ist: Allah kennt auch das, was kein Mensch lobt. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt: Ob ihr eure Rede verbergt oder sie laut sagt, Er weiß, was in den Brüsten ist. Alltag: Ein Kind räumt einen Stift weg, den niemand gesehen hat, und erwartet dafür kein Lob. Aufgabe: Wir nennen eine kleine gute Tat, die man tun kann, ohne sie sofort zu erzählen. asrara bedeutet: verbergen. ṣudūr bedeutet: Brüste, hier der Ort der inneren Gedanken im Vers. Was nicht behauptet wird: Der Vers spricht vom Wissen Allahs über das Verborgene der Brust. Wir machen daraus keine Behauptung, ein Mensch könne Gedanken lesen. Eine Hadithnummer wurde nicht ergänzt.",
+        "intro": "As-salāmu ʿalaikum! Qurʾān 67:13 spricht über Allahs Wissen um offene und verborgene Worte sowie das Innerste der Menschen. Daraus lernen wir nicht, dass andere Menschen Gedanken lesen können. Wir überlegen stattdessen, wie wir uns ohne Applaus für das Gute entscheiden können. Ein Beispiel ist eine kleine Hilfe, die niemand bemerkt. Aufrichtigkeit bedeutet nicht, ständig Angst vor eigenen Gedanken zu haben. Wir üben, eine gute Tat aus eigenem Antrieb zu wählen.",
         "lines": [
-          "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 67:13.",
-          "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
-          "Der Vers spricht vom Wissen Allahs über das Verborgene der Brust.",
-          "Eine Hadithnummer, die auf der Seite fehlt, wird nicht ergänzt."
+          "Allah kennt auch Verborgenes.",
+          "Qurʾān 67:13 spricht von Allahs Wissen.",
+          "Gute Taten brauchen nicht immer Lob.",
+          "Kein Mensch kann deshalb die Gedanken anderer lesen."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1875. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 67:13. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1875. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 67:13. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -2978,90 +2978,90 @@ const additions=
         "situation": "Ein Kind räumt einen Stift weg, den niemand gesehen hat, und erwartet dafür kein Lob.",
         "practice": "Wir nennen eine kleine gute Tat, die man tun kann, ohne sie sofort zu erzählen.",
         "summary": "Belegt ist Qurʾān 67:13. Ungeprüft bleibt: Der Vers spricht vom Wissen Allahs über das Verborgene der Brust.",
-        "audioScript": "Allah kennt unser Handeln. Der Vers sagt: Ob ihr eure Rede verbergt oder sie laut sagt, Er weiß, was in den Brüsten ist. Nicht belegt und deshalb nicht behauptet: Der Vers spricht vom Wissen Allahs über das Verborgene der Brust."
+        "audioScript": "As-salāmu ʿalaikum! Qurʾān 67:13 spricht über Allahs Wissen um offene und verborgene Worte sowie das Innerste der Menschen. Daraus lernen wir nicht, dass andere Menschen Gedanken lesen können. Wir überlegen stattdessen, wie wir uns ohne Applaus für das Gute entscheiden können. Ein Beispiel ist eine kleine Hilfe, die niemand bemerkt. Aufrichtigkeit bedeutet nicht, ständig Angst vor eigenen Gedanken zu haben. Wir üben, eine gute Tat aus eigenem Antrieb zu wählen."
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was passt zu dieser Stunde?",
+          "prompt": "Du räumst etwas auf, ohne dass es jemand sieht. Ist das gut?",
           "options": [
-            "Wir nennen eine kleine gute Tat, die man tun kann, ohne sie sofort zu erzählen.",
-            "Ich sage, Allah wisse das nicht."
+            "Ja, eine gute Tat bleibt gut.",
+            "Nein, Gutes zählt nur mit Publikum."
           ],
           "correct": 0,
-          "hint": "Schau auf die Übung.",
-          "explain": "Die Übung der Stunde ist der erste Satz. Der zweite Satz ist das Gegenteil von dem, was wir üben."
+          "hint": "Denke an die heutige Lektion.",
+          "explain": "Wir helfen auch ohne Applaus."
         },
         {
           "type": "choice",
-          "prompt": "Woran hält sich diese Stunde?",
+          "prompt": "Was weiß Allah nach unserem Vers?",
           "options": [
-            "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "Auch das Verborgene.",
+            "Nur das, was alle Menschen hören."
           ],
           "correct": 0,
-          "hint": "Nur Gelesenes.",
-          "explain": "Die Stunde nennt Qurʾān 67:13 und trennt die Übung davon. Eine Nummer wird nicht erfunden."
+          "hint": "Denke an die heutige Lektion.",
+          "explain": "Qurʾān 67:13 spricht von Allahs Wissen."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Stelle trägt Allah kennt unser Handeln?",
+          "prompt": "Was sagt Qurʾān 67:13?",
           "options": [
-            "Qurʾān 67:13",
-            "Eine Stelle ohne Suren- und Verszahl."
+            "Allah kennt offene und verborgene Worte.",
+            "Menschen können alle Gedanken lesen."
           ],
           "correct": 0,
-          "hint": "Die Fundstelle steht im Unterricht.",
-          "explain": "Die Stunde bleibt bei Qurʾān 67:13."
+          "hint": "Denke an die heutige Lektion.",
+          "explain": "Der Vers beschreibt Allahs Wissen."
         },
         {
           "type": "choice",
-          "prompt": "Was sagt der Vers sinngemäß für diese Stunde?",
+          "prompt": "Wann ist eine gute Tat wertvoll?",
           "options": [
-            "Der Vers sagt: Ob ihr eure Rede verbergt oder sie laut sagt, Er weiß, was in den Brüsten ist.",
-            "Ich sage, Allah wisse das nicht."
+            "Auch ohne Lob von anderen.",
+            "Nur wenn ich eine Belohnung bekomme."
           ],
           "correct": 0,
-          "hint": "Der erste Satz folgt der gelesenen Stelle.",
-          "explain": "Die deutsche Zeile ist eine Unterrichtshilfe zu Qurʾān 67:13, keine beglaubigte Übersetzung."
+          "hint": "Denke an die heutige Lektion.",
+          "explain": "Wir können aufrichtig Gutes tun."
         },
         {
           "type": "text",
-          "prompt": "Welche Übung gehört zu dieser Stunde?",
-          "sample": "Wir nennen eine kleine gute Tat, die man tun kann, ohne sie sofort zu erzählen.",
-          "hint": "Die praktische Aufgabe.",
-          "explain": "Die Übung ist die genannte Handlung und nicht eine zusätzliche Formel."
+          "prompt": "Nenne eine kleine gute Tat ohne Publikum.",
+          "sample": "Ich räume etwas auf oder helfe still.",
+          "hint": "Erkläre es in eigenen Worten.",
+          "explain": "Gute Taten müssen nicht vorgeführt werden."
         }
       ],
       "9-10": [
         {
           "type": "choice",
-          "prompt": "Welche Angabe wäre unehrlich?",
+          "prompt": "Wovon handelt Qurʾān 67:13?",
           "options": [
-            "Ein Rechtsurteil oder eine Hadithnummer als gelesen auszugeben, obwohl die Seite sie nicht liefert.",
-            "Zu sagen, dass die deutsche Erklärung sinngemäß ist."
+            "Von Allahs Wissen über das Offene und Verborgene.",
+            "Von der Fähigkeit eines Menschen, Gedanken zu lesen."
           ],
           "correct": 0,
-          "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "hint": "Denke an die heutige Lektion.",
+          "explain": "Allahs Wissen ist nicht menschliches Gedankenlesen."
         },
         {
           "type": "text",
-          "prompt": "Was darf diese Stunde nicht behaupten?",
-          "sample": "Der Vers spricht vom Wissen Allahs über das Verborgene der Brust.",
-          "hint": "Die Grenze steht im Text.",
-          "explain": "Die Grenze schützt davor, den Vers zu überdehnen."
+          "prompt": "Warum kann man ohne Lob Gutes tun?",
+          "sample": "Weil eine gute Tat nicht erst durch Beifall gut wird.",
+          "hint": "Erkläre es in eigenen Worten.",
+          "explain": "Lob ist kein Maßstab für den Wert jeder Handlung."
         },
         {
           "type": "text",
-          "prompt": "Wie lautet die Qurʾān-Stelle?",
-          "sample": "Qurʾān 67:13",
-          "hint": "Sure und Vers.",
-          "explain": "Die Stelle ist Qurʾān 67:13 auf der genannten Islamweb-Seite."
+          "prompt": "Was dürfen Menschen aus dem Vers nicht über andere behaupten?",
+          "sample": "Dass sie sicher die geheimen Gedanken anderer kennen.",
+          "hint": "Erkläre es in eigenen Worten.",
+          "explain": "Wir urteilen nicht über verborgene Absichten anderer."
         }
       ]
     },
@@ -3114,19 +3114,19 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der gespeicherte Auszug ist lang und nennt mehrere Gesandte. Was nach dem gespeicherten Stück im Vers noch folgt, wird nicht aus dem Gedächtnis ergänzt. Eine Hadithnummer fehlt auf der verwendeten Stelle. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der gespeicherte Auszug ist lang und nennt mehrere Gesandte. Was nach dem gespeicherten Stück im Vers noch folgt, wird nicht aus dem Gedächtnis ergänzt. Eine Hadithnummer fehlt auf der verwendeten Stelle. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe). Pädagogischer Review 2026-10-13 mit konkreten altersgerechten Fragen; vorhandene Qurʾān-Fundstellen beibehalten; keine unabhängige Vollverifikation. Fiqh-Urteile weiterhin offen."
     },
     "hint": "Wir erfinden keine zusätzliche Geschichte.",
     "sample": "Allah hat Gesandte geschickt.",
     "ageText": {
       "4-5": {
         "goal": "Allah hat Gesandte geschickt.",
-        "intro": "Allah hat Gesandte geschickt. Der Vers fordert auf zu sagen: Wir glauben an Allah und an das, was zu uns und zu den genannten Propheten herabgesandt wurde, und wir machen zwischen keinem Seiner Gesandten einen Unterschied. Stell dir vor: Ein Kind hört mehrere Prophetnamen und sagt bei jedem: Friede sei mit ihm. Heute üben wir: Wir nennen drei Namen nur so, wie sie im Vers stehen, und erfinden keine zusätzliche Geschichte. Wir erfinden keine zusätzliche Geschichte.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! Allah hat Gesandte geschickt. Zu ihnen gehören Ibrāhīm, Mūsā und ʿĪsā, Friede sei mit ihnen. Wir glauben an Allahs Gesandte und sprechen ihre Namen mit Respekt aus. Qurʾān 2:136 lehrt uns, keinen der Gesandten auszuschließen.",
         "lines": [
           "Allah hat Gesandte geschickt.",
-          "Der Vers fordert auf zu sagen: Wir glauben an Allah und an das, was zu uns und zu den genannten Propheten herabgesandt wurde, und wir machen zwischen keinem Seiner Gesandten einen.",
-          "Ein Kind hört mehrere Prophetnamen und sagt bei jedem: Friede sei mit ihm.",
-          "Wir nennen drei Namen nur so, wie sie im Vers stehen, und erfinden keine zusätzliche Geschichte."
+          "Qurʾān 2:136 nennt mehrere Gesandte.",
+          "Wir glauben an alle Gesandten Allahs.",
+          "Wir sprechen ihre Namen respektvoll aus."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/140. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:136. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/140. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:136. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -3143,16 +3143,16 @@ const additions=
         "situation": "Ein Kind hört mehrere Prophetnamen und sagt bei jedem: Friede sei mit ihm.",
         "practice": "Wir nennen drei Namen nur so, wie sie im Vers stehen, und erfinden keine zusätzliche Geschichte.",
         "summary": "Allah hat Gesandte geschickt. Wir erfinden keine zusätzliche Geschichte.",
-        "audioScript": "Īmān an die Gesandten. Allah hat Gesandte geschickt. Der Vers fordert auf zu sagen: Wir glauben an Allah und an das, was zu uns und zu den genannten Propheten herabgesandt wurde, und wir machen zwischen keinem Seiner Gesandten einen. Ein Kind hört mehrere Prophetnamen und sagt bei jedem: Friede sei mit ihm. Wir nennen drei Namen nur so, wie sie im Vers stehen, und erfinden keine zusätzliche Geschichte."
+        "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Allah hat Gesandte geschickt. Zu ihnen gehören Ibrāhīm, Mūsā und ʿĪsā, Friede sei mit ihnen. Wir glauben an Allahs Gesandte und sprechen ihre Namen mit Respekt aus. Qurʾān 2:136 lehrt uns, keinen der Gesandten auszuschließen."
       },
       "6-8": {
         "goal": "Allah hat Gesandte geschickt.",
-        "intro": "Heute geht es um Īmān an die Gesandten. Allah hat Gesandte geschickt. Wir lesen Qurʾān 2:136. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers fordert auf zu sagen: Wir glauben an Allah und an das, was zu uns und zu den genannten Propheten herabgesandt wurde, und wir machen zwischen keinem Seiner Gesandten einen Unterschied. So kann das im Alltag aussehen: Ein Kind hört mehrere Prophetnamen und sagt bei jedem: Friede sei mit ihm. Die Aufgabe: Wir nennen drei Namen nur so, wie sie im Vers stehen, und erfinden keine zusätzliche Geschichte. rusul bedeutet: Gesandte. lā nufarriqu bedeutet: wir machen keinen Unterschied. Die Grenze der Stunde: Der gespeicherte Auszug ist lang und nennt mehrere Gesandte. Was nach dem gespeicherten Stück im Vers noch folgt, wird nicht aus dem Gedächtnis ergänzt. Eine Hadithnummer fehlt auf der verwendeten Stelle.",
+        "intro": "As-salāmu ʿalaikum! In Qurʾān 2:136 werden mehrere Gesandte genannt, und die Glaubenden sprechen davon, dass sie keinen von ihnen ausschließen. Wir lernen, dass Allah die Gesandten mit einer Botschaft schickte und dass wir sie respektieren. Wir nennen einige Namen, die im Vers vorkommen, zum Beispiel Ibrāhīm, Mūsā und ʿĪsā. Wir erfinden keine Ereignisse aus ihren Leben.",
         "lines": [
-          "Qurʾān 2:136 ist die gelesene Stelle.",
-          "Der Vers fordert auf zu sagen: Wir glauben an Allah und an das, was zu uns und zu den genannten Propheten herabgesandt wurde, und wir machen zwischen keinem Seiner Gesandten einen.",
-          "Ein Kind hört mehrere Prophetnamen und sagt bei jedem: Friede sei mit ihm.",
-          "Wir erfinden keine zusätzliche Geschichte."
+          "Allah hat Gesandte geschickt.",
+          "Qurʾān 2:136 nennt mehrere Gesandte.",
+          "Wir glauben an alle Gesandten Allahs.",
+          "Wir sprechen ihre Namen respektvoll aus."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/140. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:136. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/140. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:136. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -3169,16 +3169,16 @@ const additions=
         "situation": "Ein Kind hört mehrere Prophetnamen und sagt bei jedem: Friede sei mit ihm.",
         "practice": "Wir nennen drei Namen nur so, wie sie im Vers stehen, und erfinden keine zusätzliche Geschichte.",
         "summary": "Qurʾān 2:136 trägt diese Stunde. Der Vers fordert auf zu sagen: Wir glauben an Allah und an das, was zu uns und zu den genannten Propheten herabgesandt wurde, und wir machen zwischen keinem Seiner Gesandten einen Unterschied.",
-        "audioScript": "Īmān an die Gesandten. Der Vers fordert auf zu sagen: Wir glauben an Allah und an das, was zu uns und zu den genannten Propheten herabgesandt wurde, und wir machen zwischen keinem Seiner Gesandten einen Unterschied. Ein Kind hört mehrere Prophetnamen und sagt bei jedem: Friede sei mit ihm. Wir nennen drei Namen nur so, wie sie im Vers stehen, und erfinden keine zusätzliche Geschichte."
+        "audioScript": "As-salāmu ʿalaikum! In Qurʾān 2:136 werden mehrere Gesandte genannt, und die Glaubenden sprechen davon, dass sie keinen von ihnen ausschließen. Wir lernen, dass Allah die Gesandten mit einer Botschaft schickte und dass wir sie respektieren. Wir nennen einige Namen, die im Vers vorkommen, zum Beispiel Ibrāhīm, Mūsā und ʿĪsā. Wir erfinden keine Ereignisse aus ihren Leben."
       },
       "9-10": {
         "goal": "Ich kann Īmān an die Gesandten von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Īmān an die Gesandten. Das Lernziel ist: Allah hat Gesandte geschickt. Sinngemäß, keine beglaubigte Übersetzung: Der Vers fordert auf zu sagen: Wir glauben an Allah und an das, was zu uns und zu den genannten Propheten herabgesandt wurde, und wir machen zwischen keinem Seiner Gesandten einen Unterschied. Alltag: Ein Kind hört mehrere Prophetnamen und sagt bei jedem: Friede sei mit ihm. Aufgabe: Wir nennen drei Namen nur so, wie sie im Vers stehen, und erfinden keine zusätzliche Geschichte. rusul bedeutet: Gesandte. lā nufarriqu bedeutet: wir machen keinen Unterschied. Was nicht behauptet wird: Der gespeicherte Auszug ist lang und nennt mehrere Gesandte. Was nach dem gespeicherten Stück im Vers noch folgt, wird nicht aus dem Gedächtnis ergänzt. Eine Hadithnummer fehlt auf der verwendeten Stelle.",
+        "intro": "As-salāmu ʿalaikum! Qurʾān 2:136 verbindet den Glauben an Allah mit dem Glauben an die Offenbarung, die zu den Gesandten kam. Wir sollen keinen Gesandten aus dem Glauben ausschließen. Das bedeutet nicht, dass alle Gesandten dieselbe Lebensgeschichte hatten. Wir können ihre Namen mit Achtung nennen und zwischen belegten Angaben aus dem Qurʾān und bloßen Erzählungen unterscheiden. Unser Lernziel lautet: Glaube an alle Gesandten und Respekt vor ihnen.",
         "lines": [
-          "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 2:136.",
-          "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
-          "Der gespeicherte Auszug ist lang und nennt mehrere Gesandte.",
-          "Eine Hadithnummer, die auf der Seite fehlt, wird nicht ergänzt."
+          "Allah hat Gesandte geschickt.",
+          "Qurʾān 2:136 nennt mehrere Gesandte.",
+          "Wir glauben an alle Gesandten Allahs.",
+          "Wir sprechen ihre Namen respektvoll aus."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/140. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:136. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/140. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:136. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -3195,90 +3195,90 @@ const additions=
         "situation": "Ein Kind hört mehrere Prophetnamen und sagt bei jedem: Friede sei mit ihm.",
         "practice": "Wir nennen drei Namen nur so, wie sie im Vers stehen, und erfinden keine zusätzliche Geschichte.",
         "summary": "Belegt ist Qurʾān 2:136. Ungeprüft bleibt: Der gespeicherte Auszug ist lang und nennt mehrere Gesandte.",
-        "audioScript": "Īmān an die Gesandten. Der Vers fordert auf zu sagen: Wir glauben an Allah und an das, was zu uns und zu den genannten Propheten herabgesandt wurde, und wir machen zwischen keinem Seiner Gesandten einen Unterschied. Nicht belegt und deshalb nicht behauptet: Der gespeicherte Auszug ist lang und nennt mehrere Gesandte."
+        "audioScript": "As-salāmu ʿalaikum! Qurʾān 2:136 verbindet den Glauben an Allah mit dem Glauben an die Offenbarung, die zu den Gesandten kam. Wir sollen keinen Gesandten aus dem Glauben ausschließen. Das bedeutet nicht, dass alle Gesandten dieselbe Lebensgeschichte hatten. Wir können ihre Namen mit Achtung nennen und zwischen belegten Angaben aus dem Qurʾān und bloßen Erzählungen unterscheiden. Unser Lernziel lautet: Glaube an alle Gesandten und Respekt vor ihnen."
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was passt zu dieser Stunde?",
+          "prompt": "An wen glauben wir?",
           "options": [
-            "Wir nennen drei Namen nur so, wie sie im Vers stehen, und erfinden keine zusätzliche Geschichte.",
-            "Ich lasse einen Gesandten aus."
+            "An die Gesandten Allahs.",
+            "Nur an einen selbst erfundenen Helden."
           ],
           "correct": 0,
-          "hint": "Schau auf die Übung.",
-          "explain": "Die Übung der Stunde ist der erste Satz. Der zweite Satz ist das Gegenteil von dem, was wir üben."
+          "hint": "Denke an die heutige Lektion.",
+          "explain": "Wir glauben an Allahs Gesandte."
         },
         {
           "type": "choice",
-          "prompt": "Woran hält sich diese Stunde?",
+          "prompt": "Wie sprechen wir über Gesandte?",
           "options": [
-            "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "Respektvoll.",
+            "Mit Spott."
           ],
           "correct": 0,
-          "hint": "Nur Gelesenes.",
-          "explain": "Die Stunde nennt Qurʾān 2:136 und trennt die Übung davon. Eine Nummer wird nicht erfunden."
+          "hint": "Denke an die heutige Lektion.",
+          "explain": "Wir achten die Propheten."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Stelle trägt Īmān an die Gesandten?",
+          "prompt": "Was lehrt Qurʾān 2:136?",
           "options": [
-            "Qurʾān 2:136",
-            "Eine Stelle ohne Suren- und Verszahl."
+            "Wir glauben an Allahs Gesandte.",
+            "Wir sollen einige Gesandte grundlos verwerfen."
           ],
           "correct": 0,
-          "hint": "Die Fundstelle steht im Unterricht.",
-          "explain": "Die Stunde bleibt bei Qurʾān 2:136."
+          "hint": "Denke an die heutige Lektion.",
+          "explain": "Der Vers beschreibt den Glauben an die Gesandten."
         },
         {
           "type": "choice",
-          "prompt": "Was sagt der Vers sinngemäß für diese Stunde?",
+          "prompt": "Welcher Name gehört zu den Gesandten im Vers?",
           "options": [
-            "Der Vers fordert auf zu sagen: Wir glauben an Allah und an das, was zu uns und zu den genannten Propheten herabgesandt wurde, und wir.",
-            "Ich lasse einen Gesandten aus."
+            "Mūsā.",
+            "Ein frei erfundener Prophet."
           ],
           "correct": 0,
-          "hint": "Der erste Satz folgt der gelesenen Stelle.",
-          "explain": "Die deutsche Zeile ist eine Unterrichtshilfe zu Qurʾān 2:136, keine beglaubigte Übersetzung."
+          "hint": "Denke an die heutige Lektion.",
+          "explain": "Mūsā wird im Vers genannt."
         },
         {
           "type": "text",
-          "prompt": "Welche Übung gehört zu dieser Stunde?",
-          "sample": "Wir nennen drei Namen nur so, wie sie im Vers stehen, und erfinden keine zusätzliche Geschichte.",
-          "hint": "Die praktische Aufgabe.",
-          "explain": "Die Übung ist die genannte Handlung und nicht eine zusätzliche Formel."
+          "prompt": "Nenne zwei Gesandte aus dem Qurʾān.",
+          "sample": "Ibrāhīm und ʿĪsā.",
+          "hint": "Erkläre es in eigenen Worten.",
+          "explain": "Ihre Namen stehen im Qurʾān."
         }
       ],
       "9-10": [
         {
           "type": "choice",
-          "prompt": "Welche Angabe wäre unehrlich?",
+          "prompt": "Welche Aussage entspricht Qurʾān 2:136?",
           "options": [
-            "Ein Rechtsurteil oder eine Hadithnummer als gelesen auszugeben, obwohl die Seite sie nicht liefert.",
-            "Zu sagen, dass die deutsche Erklärung sinngemäß ist."
+            "Wir schließen keinen Gesandten Allahs aus.",
+            "Wir wählen nur die Gesandten, die uns gefallen."
           ],
           "correct": 0,
-          "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "hint": "Denke an die heutige Lektion.",
+          "explain": "Der Glaube umfasst Allahs Gesandte."
         },
         {
           "type": "text",
-          "prompt": "Was darf diese Stunde nicht behaupten?",
-          "sample": "Der gespeicherte Auszug ist lang und nennt mehrere Gesandte.",
-          "hint": "Die Grenze steht im Text.",
-          "explain": "Die Grenze schützt davor, den Vers zu überdehnen."
+          "prompt": "Warum ist es wichtig, Prophetenberichte zu prüfen?",
+          "sample": "Weil wir erfundene Geschichten nicht als Tatsachen ausgeben wollen.",
+          "hint": "Erkläre es in eigenen Worten.",
+          "explain": "Nur belegte Geschichten sollen als religiöse Geschichte gelten."
         },
         {
           "type": "text",
-          "prompt": "Wie lautet die Qurʾān-Stelle?",
-          "sample": "Qurʾān 2:136",
-          "hint": "Sure und Vers.",
-          "explain": "Die Stelle ist Qurʾān 2:136 auf der genannten Islamweb-Seite."
+          "prompt": "Nenne drei im Vers vorkommende Namen.",
+          "sample": "Ibrāhīm, Mūsā und ʿĪsā.",
+          "hint": "Erkläre es in eigenen Worten.",
+          "explain": "Die genannten Namen gehören zu Qurʾān 2:136."
         }
       ]
     },
@@ -3331,19 +3331,19 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der berühmte Hadith über die Absicht, der in der Quellenbank mit einer Buḫārī-Nummer steht, wurde auf Dorar nicht erneut geöffnet und wird hier nicht als neuer Beleg benutzt. Die Stunde bleibt beim Vers. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Der berühmte Hadith über die Absicht, der in der Quellenbank mit einer Buḫārī-Nummer steht, wurde auf Dorar nicht erneut geöffnet und wird hier nicht als neuer Beleg benutzt. Die Stunde bleibt beim Vers. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe). Pädagogischer Review 2026-10-13 mit konkreten altersgerechten Fragen; vorhandene Qurʾān-Fundstellen beibehalten; keine unabhängige Vollverifikation. Fiqh-Urteile weiterhin offen."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel.",
     "ageText": {
       "4-5": {
         "goal": "Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel.",
-        "intro": "Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel. Der Vers sagt, dass ihnen nur befohlen wurde, Allah aufzurichtig im Dīn zu dienen, als Ḥunafāʾ, das Gebet zu verrichten und die Zakāh zu geben. Stell dir vor: Ein Kind beginnt, der Mutter zu helfen, schaut dann weg und kehrt zur Hilfe zurück. Heute üben wir: Wir sagen leise vor einer kleinen Tat: Ich mache das für Allah. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! Du möchtest jemandem helfen. Dann wirst du kurz abgelenkt. Das ist nicht schlimm: Du kannst wiederkommen und helfen. Eine gute Absicht bedeutet, dass du Allah zuliebe Gutes tun willst. Qurʾān 98:5 spricht davon, Allah aufrichtig zu dienen. Wir üben heute einen einfachen guten Vorsatz.",
         "lines": [
-          "Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel.",
-          "Der Vers sagt, dass ihnen nur befohlen wurde, Allah aufzurichtig im Dīn zu dienen, als Ḥunafāʾ, das Gebet zu verrichten und die Zakāh zu geben.",
-          "Ein Kind beginnt, der Mutter zu helfen, schaut dann weg und kehrt zur Hilfe zurück.",
-          "Wir sagen leise vor einer kleinen Tat: Ich mache das für Allah."
+          "Qurʾān 98:5 spricht von Aufrichtigkeit.",
+          "Wir wollen Allah zuliebe Gutes tun.",
+          "Wenn ich abgelenkt bin, kann ich neu beginnen.",
+          "Ich beurteile nicht die geheimen Absichten anderer."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1969. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 98:5. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1969. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 98:5. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -3360,16 +3360,16 @@ const additions=
         "situation": "Ein Kind beginnt, der Mutter zu helfen, schaut dann weg und kehrt zur Hilfe zurück.",
         "practice": "Wir sagen leise vor einer kleinen Tat: Ich mache das für Allah.",
         "summary": "Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel. Die arabischen Worte spricht die Lehrperson.",
-        "audioScript": "Eine gute Absicht erneuern. Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel. Der Vers sagt, dass ihnen nur befohlen wurde, Allah aufzurichtig im Dīn zu dienen, als Ḥunafāʾ, das Gebet zu verrichten und die Zakāh zu geben. Ein Kind beginnt, der Mutter zu helfen, schaut dann weg und kehrt zur Hilfe zurück. Wir sagen leise vor einer kleinen Tat: Ich mache das für Allah."
+        "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Du möchtest jemandem helfen. Dann wirst du kurz abgelenkt. Das ist nicht schlimm: Du kannst wiederkommen und helfen. Eine gute Absicht bedeutet, dass du Allah zuliebe Gutes tun willst. Qurʾān 98:5 spricht davon, Allah aufrichtig zu dienen. Wir üben heute einen einfachen guten Vorsatz."
       },
       "6-8": {
         "goal": "Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel.",
-        "intro": "Heute geht es um Eine gute Absicht erneuern. Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel. Wir lesen Qurʾān 98:5. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass ihnen nur befohlen wurde, Allah aufzurichtig im Dīn zu dienen, als Ḥunafāʾ, das Gebet zu verrichten und die Zakāh zu geben. So kann das im Alltag aussehen: Ein Kind beginnt, der Mutter zu helfen, schaut dann weg und kehrt zur Hilfe zurück. Die Aufgabe: Wir sagen leise vor einer kleinen Tat: Ich mache das für Allah. muḫliṣīn bedeutet: aufrichtig, die Tat für Allah rein machend. dīn bedeutet: die Lebensweise des Dienens Allahs. Die Grenze der Stunde: Der berühmte Hadith über die Absicht, der in der Quellenbank mit einer Buḫārī-Nummer steht, wurde auf Dorar nicht erneut geöffnet und wird hier nicht als neuer Beleg benutzt. Die Stunde bleibt beim Vers.",
+        "intro": "As-salāmu ʿalaikum! Qurʾān 98:5 spricht davon, Allah aufrichtig zu dienen. Aufrichtig heißt: Wir wollen Gutes um Allahs willen tun und nicht nur bewundert werden. Stell dir vor, du hilfst beim Aufräumen, wirst abgelenkt und erinnerst dich wieder an dein gutes Ziel. Du kannst einfach weitermachen. Niemand muss beweisen, was in seinem Herzen ist.",
         "lines": [
-          "Qurʾān 98:5 ist die gelesene Stelle.",
-          "Der Vers sagt, dass ihnen nur befohlen wurde, Allah aufzurichtig im Dīn zu dienen, als Ḥunafāʾ, das Gebet zu verrichten und die Zakāh zu geben.",
-          "Ein Kind beginnt, der Mutter zu helfen, schaut dann weg und kehrt zur Hilfe zurück.",
-          "Die arabischen Worte spricht die Lehrperson."
+          "Qurʾān 98:5 spricht von Aufrichtigkeit.",
+          "Wir wollen Allah zuliebe Gutes tun.",
+          "Wenn ich abgelenkt bin, kann ich neu beginnen.",
+          "Ich beurteile nicht die geheimen Absichten anderer."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1969. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 98:5. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1969. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 98:5. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -3386,16 +3386,16 @@ const additions=
         "situation": "Ein Kind beginnt, der Mutter zu helfen, schaut dann weg und kehrt zur Hilfe zurück.",
         "practice": "Wir sagen leise vor einer kleinen Tat: Ich mache das für Allah.",
         "summary": "Qurʾān 98:5 trägt diese Stunde. Der Vers sagt, dass ihnen nur befohlen wurde, Allah aufzurichtig im Dīn zu dienen, als Ḥunafāʾ, das Gebet zu verrichten und die Zakāh zu geben.",
-        "audioScript": "Eine gute Absicht erneuern. Der Vers sagt, dass ihnen nur befohlen wurde, Allah aufzurichtig im Dīn zu dienen, als Ḥunafāʾ, das Gebet zu verrichten und die Zakāh zu geben. Ein Kind beginnt, der Mutter zu helfen, schaut dann weg und kehrt zur Hilfe zurück. Wir sagen leise vor einer kleinen Tat: Ich mache das für Allah."
+        "audioScript": "As-salāmu ʿalaikum! Qurʾān 98:5 spricht davon, Allah aufrichtig zu dienen. Aufrichtig heißt: Wir wollen Gutes um Allahs willen tun und nicht nur bewundert werden. Stell dir vor, du hilfst beim Aufräumen, wirst abgelenkt und erinnerst dich wieder an dein gutes Ziel. Du kannst einfach weitermachen. Niemand muss beweisen, was in seinem Herzen ist."
       },
       "9-10": {
         "goal": "Ich kann Eine gute Absicht erneuern von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Eine gute Absicht erneuern. Das Lernziel ist: Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass ihnen nur befohlen wurde, Allah aufzurichtig im Dīn zu dienen, als Ḥunafāʾ, das Gebet zu verrichten und die Zakāh zu geben. Alltag: Ein Kind beginnt, der Mutter zu helfen, schaut dann weg und kehrt zur Hilfe zurück. Aufgabe: Wir sagen leise vor einer kleinen Tat: Ich mache das für Allah. muḫliṣīn bedeutet: aufrichtig, die Tat für Allah rein machend. dīn bedeutet: die Lebensweise des Dienens Allahs. Was nicht behauptet wird: Der berühmte Hadith über die Absicht, der in der Quellenbank mit einer Buḫārī-Nummer steht, wurde auf Dorar nicht erneut geöffnet und wird hier nicht als neuer Beleg benutzt. Die Stunde bleibt beim Vers.",
+        "intro": "As-salāmu ʿalaikum! Qurʾān 98:5 nennt das aufrichtige Dienen Allahs. Das Wort muḫliṣīn beschreibt Aufrichtigkeit. Wir können vor einer guten Tat über unsere Absicht nachdenken, zum Beispiel wenn wir Familienmitgliedern helfen. Wenn wir abgelenkt sind, dürfen wir uns wieder auf das gute Ziel konzentrieren. Wir prüfen dabei nicht die geheimen Absichten anderer Menschen: Das ist keine Aufgabe für Kinder. Unser Lernziel ist eine freundliche Erinnerung an aufrichtiges Handeln.",
         "lines": [
-          "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 98:5.",
-          "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
-          "Der berühmte Hadith über die Absicht, der in der Quellenbank mit einer Buḫārī-Nummer steht, wurde auf Dorar nicht erneut geöffnet und wird hier nicht als neuer Beleg benutzt.",
-          "Eine Hadithnummer, die auf der Seite fehlt, wird nicht ergänzt."
+          "Qurʾān 98:5 spricht von Aufrichtigkeit.",
+          "Wir wollen Allah zuliebe Gutes tun.",
+          "Wenn ich abgelenkt bin, kann ich neu beginnen.",
+          "Ich beurteile nicht die geheimen Absichten anderer."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1969. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 98:5. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1969. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 98:5. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -3412,90 +3412,90 @@ const additions=
         "situation": "Ein Kind beginnt, der Mutter zu helfen, schaut dann weg und kehrt zur Hilfe zurück.",
         "practice": "Wir sagen leise vor einer kleinen Tat: Ich mache das für Allah.",
         "summary": "Belegt ist Qurʾān 98:5. Ungeprüft bleibt: Der berühmte Hadith über die Absicht, der in der Quellenbank mit einer Buḫārī-Nummer steht, wurde auf Dorar nicht erneut geöffnet und wird hier nicht als neuer Beleg benutzt.",
-        "audioScript": "Eine gute Absicht erneuern. Der Vers sagt, dass ihnen nur befohlen wurde, Allah aufzurichtig im Dīn zu dienen, als Ḥunafāʾ, das Gebet zu verrichten und die Zakāh zu geben. Nicht belegt und deshalb nicht behauptet: Der berühmte Hadith über die Absicht, der in der Quellenbank mit einer Buḫārī-Nummer steht, wurde auf Dorar nicht erneut geöffnet und wird hier nicht als neuer Beleg benutzt."
+        "audioScript": "As-salāmu ʿalaikum! Qurʾān 98:5 nennt das aufrichtige Dienen Allahs. Das Wort muḫliṣīn beschreibt Aufrichtigkeit. Wir können vor einer guten Tat über unsere Absicht nachdenken, zum Beispiel wenn wir Familienmitgliedern helfen. Wenn wir abgelenkt sind, dürfen wir uns wieder auf das gute Ziel konzentrieren. Wir prüfen dabei nicht die geheimen Absichten anderer Menschen: Das ist keine Aufgabe für Kinder. Unser Lernziel ist eine freundliche Erinnerung an aufrichtiges Handeln."
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was passt zu dieser Stunde?",
+          "prompt": "Du wirst beim Helfen abgelenkt. Was kannst du tun?",
           "options": [
-            "Wir sagen leise vor einer kleinen Tat: Ich mache das für Allah.",
-            "Ich tue es, damit alle mich loben."
+            "Ruhig weitermachen.",
+            "Sagen: Jetzt darf ich nie wieder helfen."
           ],
           "correct": 0,
-          "hint": "Schau auf die Übung.",
-          "explain": "Die Übung der Stunde ist der erste Satz. Der zweite Satz ist das Gegenteil von dem, was wir üben."
+          "hint": "Denke an die heutige Lektion.",
+          "explain": "Du darfst eine gute Tat fortsetzen."
         },
         {
           "type": "choice",
-          "prompt": "Woran hält sich diese Stunde?",
+          "prompt": "Was ist eine gute Absicht?",
           "options": [
-            "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "Allah zuliebe Gutes tun.",
+            "Andere absichtlich kleinmachen."
           ],
           "correct": 0,
-          "hint": "Nur Gelesenes.",
-          "explain": "Die Stunde nennt Qurʾān 98:5 und trennt die Übung davon. Eine Nummer wird nicht erfunden."
+          "hint": "Denke an die heutige Lektion.",
+          "explain": "Wir bemühen uns um Aufrichtigkeit."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Stelle trägt Eine gute Absicht erneuern?",
+          "prompt": "Was betont Qurʾān 98:5?",
           "options": [
-            "Qurʾān 98:5",
-            "Eine Stelle ohne Suren- und Verszahl."
+            "Allah aufrichtig zu dienen.",
+            "Nur vor anderen zu prahlen."
           ],
           "correct": 0,
-          "hint": "Die Fundstelle steht im Unterricht.",
-          "explain": "Die Stunde bleibt bei Qurʾān 98:5."
+          "hint": "Denke an die heutige Lektion.",
+          "explain": "Der Vers nennt aufrichtiges Dienen."
         },
         {
           "type": "choice",
-          "prompt": "Was sagt der Vers sinngemäß für diese Stunde?",
+          "prompt": "Was tust du nach einer Ablenkung?",
           "options": [
-            "Der Vers sagt, dass ihnen nur befohlen wurde, Allah aufzurichtig im Dīn zu dienen, als Ḥunafāʾ, das Gebet zu verrichten und die Zakāh.",
-            "Ich tue es, damit alle mich loben."
+            "Mich an mein gutes Ziel erinnern.",
+            "Andere für meine Unruhe tadeln."
           ],
           "correct": 0,
-          "hint": "Der erste Satz folgt der gelesenen Stelle.",
-          "explain": "Die deutsche Zeile ist eine Unterrichtshilfe zu Qurʾān 98:5, keine beglaubigte Übersetzung."
+          "hint": "Denke an die heutige Lektion.",
+          "explain": "Du kannst deinen guten Vorsatz erneuern."
         },
         {
           "type": "text",
-          "prompt": "Welche Übung gehört zu dieser Stunde?",
-          "sample": "Wir sagen leise vor einer kleinen Tat: Ich mache das für Allah.",
-          "hint": "Die praktische Aufgabe.",
-          "explain": "Die Übung ist die genannte Handlung und nicht eine zusätzliche Formel."
+          "prompt": "Gib ein Beispiel für eine gute Absicht.",
+          "sample": "Ich helfe meiner Familie, um Gutes zu tun.",
+          "hint": "Erkläre es in eigenen Worten.",
+          "explain": "Eine gute Absicht begleitet eine gute Tat."
         }
       ],
       "9-10": [
         {
           "type": "choice",
-          "prompt": "Welche Angabe wäre unehrlich?",
+          "prompt": "Was bedeutet muḫliṣīn in unserer Stunde?",
           "options": [
-            "Ein Rechtsurteil oder eine Hadithnummer als gelesen auszugeben, obwohl die Seite sie nicht liefert.",
-            "Zu sagen, dass die deutsche Erklärung sinngemäß ist."
+            "Aufrichtig.",
+            "Überheblich."
           ],
           "correct": 0,
-          "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "hint": "Denke an die heutige Lektion.",
+          "explain": "Aufrichtigkeit ist ein zentraler Begriff des Verses."
         },
         {
           "type": "text",
-          "prompt": "Was darf diese Stunde nicht behaupten?",
-          "sample": "Der berühmte Hadith über die Absicht, der in der Quellenbank mit einer Buḫārī-Nummer steht, wurde auf Dorar nicht erneut geöffnet und wird hier nicht als neuer Beleg benutzt.",
-          "hint": "Die Grenze steht im Text.",
-          "explain": "Die Grenze schützt davor, den Vers zu überdehnen."
+          "prompt": "Wie erneuerst du eine gute Absicht im Alltag?",
+          "sample": "Ich halte inne, erinnere mich an das Gute und mache weiter.",
+          "hint": "Erkläre es in eigenen Worten.",
+          "explain": "Das ist eine freiwillige Lernübung."
         },
         {
           "type": "text",
-          "prompt": "Wie lautet die Qurʾān-Stelle?",
-          "sample": "Qurʾān 98:5",
-          "hint": "Sure und Vers.",
-          "explain": "Die Stelle ist Qurʾān 98:5 auf der genannten Islamweb-Seite."
+          "prompt": "Warum beurteilen wir nicht die inneren Absichten anderer?",
+          "sample": "Weil wir nicht sicher wissen, was andere im Herzen wollen.",
+          "hint": "Erkläre es in eigenen Worten.",
+          "explain": "Kinder lernen ihre eigene Haltung, nicht das Urteil über andere."
         }
       ]
     },
@@ -3548,19 +3548,19 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Dieselbe Qurʾān-Stelle wurde schon für die Stunde über Dank und für die Stunde über Dank im Herzen gelesen. Hier ist das Lernziel das sichtbare Danken. Der Hadith über den Dank an die Menschen wird nicht erneut als neue Nummer eingeführt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Dieselbe Qurʾān-Stelle wurde schon für die Stunde über Dank und für die Stunde über Dank im Herzen gelesen. Hier ist das Lernziel das sichtbare Danken. Der Hadith über den Dank an die Menschen wird nicht erneut als neue Nummer eingeführt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe). Pädagogischer Review 2026-10-13 mit konkreten altersgerechten Fragen; vorhandene Qurʾān-Fundstellen beibehalten; keine unabhängige Vollverifikation. Fiqh-Urteile weiterhin offen."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Wir sagen Danke, wenn uns jemand hilft.",
     "ageText": {
       "4-5": {
         "goal": "Wir sagen Danke, wenn uns jemand hilft.",
-        "intro": "Wir sagen Danke, wenn uns jemand hilft. Der Vers enthält die Zusage: Wenn ihr dankbar seid, werde Ich euch gewiss mehr geben. Stell dir vor: Jemand reicht ein Glas Wasser. Das Kind sagt Danke und blickt die Person an. Heute üben wir: Wir üben Danke auf Deutsch und erinnern uns, dass Dank gegenüber Menschen den Dank gegenüber Allah nicht ersetzt. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! Wenn dir jemand Wasser reicht oder dir hilft, darfst du freundlich Danke sagen. Auch Allah danken wir für Seine Gaben. Qurʾān 14:7 spricht davon, dass Allah Dankbarkeit mit Mehrung verbindet. Wir machen daraus kein Versprechen auf ein bestimmtes Geschenk oder Spielzeug. Heute üben wir ein freundliches Dankeschön.",
         "lines": [
-          "Wir sagen Danke, wenn uns jemand hilft.",
-          "Der Vers enthält die Zusage: Wenn ihr dankbar seid, werde Ich euch gewiss mehr geben.",
-          "Jemand reicht ein Glas Wasser. Das Kind sagt Danke und blickt die Person an.",
-          "Wir üben Danke auf Deutsch und erinnern uns, dass Dank gegenüber Menschen den Dank gegenüber Allah nicht ersetzt."
+          "Qurʾān 14:7 spricht von Dankbarkeit.",
+          "Wir danken Allah für Seine Gaben.",
+          "Wir sagen Menschen freundlich Danke.",
+          "Dankbarkeit ist mehr als ein Wunsch nach Geschenken."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/891. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 14:7. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/891. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 14:7. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -3577,16 +3577,16 @@ const additions=
         "situation": "Jemand reicht ein Glas Wasser. Das Kind sagt Danke und blickt die Person an.",
         "practice": "Wir üben Danke auf Deutsch und erinnern uns, dass Dank gegenüber Menschen den Dank gegenüber Allah nicht ersetzt.",
         "summary": "Wir sagen Danke, wenn uns jemand hilft. Die arabischen Worte spricht die Lehrperson.",
-        "audioScript": "Dankbarkeit zeigen. Wir sagen Danke, wenn uns jemand hilft. Der Vers enthält die Zusage: Wenn ihr dankbar seid, werde Ich euch gewiss mehr geben. Jemand reicht ein Glas Wasser. Das Kind sagt Danke und blickt die Person an. Wir üben Danke auf Deutsch und erinnern uns, dass Dank gegenüber Menschen den Dank gegenüber Allah nicht ersetzt."
+        "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Wenn dir jemand Wasser reicht oder dir hilft, darfst du freundlich Danke sagen. Auch Allah danken wir für Seine Gaben. Qurʾān 14:7 spricht davon, dass Allah Dankbarkeit mit Mehrung verbindet. Wir machen daraus kein Versprechen auf ein bestimmtes Geschenk oder Spielzeug. Heute üben wir ein freundliches Dankeschön."
       },
       "6-8": {
         "goal": "Wir sagen Danke, wenn uns jemand hilft.",
-        "intro": "Heute geht es um Dankbarkeit zeigen. Wir sagen Danke, wenn uns jemand hilft. Wir lesen Qurʾān 14:7. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers enthält die Zusage: Wenn ihr dankbar seid, werde Ich euch gewiss mehr geben. Der folgende Warnsatz der Seite wird in der Kinderstunde nicht als Drohbild verwendet. So kann das im Alltag aussehen: Jemand reicht ein Glas Wasser. Das Kind sagt Danke und blickt die Person an. Die Aufgabe: Wir üben Danke auf Deutsch und erinnern uns, dass Dank gegenüber Menschen den Dank gegenüber Allah nicht ersetzt. šukr bedeutet: Dankbarkeit. zīdah bedeutet: Mehrung; der Vers spricht davon, dass Allah mehrt. Die Grenze der Stunde: Dieselbe Qurʾān-Stelle wurde schon für die Stunde über Dank und für die Stunde über Dank im Herzen gelesen. Hier ist das Lernziel das sichtbare Danken. Der Hadith über den Dank an die Menschen wird nicht erneut als neue Nummer eingeführt.",
+        "intro": "As-salāmu ʿalaikum! In Qurʾān 14:7 steht die Zusage Allahs, dass Er den Dankbaren mehr gibt. Wir lernen dabei Dankbarkeit, nicht die Erwartung, dass jede gute Handlung sofort ein bestimmtes Geschenk bringt. Im Alltag können wir Allah danken und uns auch bei Menschen bedanken. Eine Person reicht dir ein Glas Wasser: Du schaust freundlich und sagst Danke.",
         "lines": [
-          "Qurʾān 14:7 ist die gelesene Stelle.",
-          "Der Vers enthält die Zusage: Wenn ihr dankbar seid, werde Ich euch gewiss mehr geben.",
-          "Jemand reicht ein Glas Wasser. Das Kind sagt Danke und blickt die Person an.",
-          "Die arabischen Worte spricht die Lehrperson."
+          "Qurʾān 14:7 spricht von Dankbarkeit.",
+          "Wir danken Allah für Seine Gaben.",
+          "Wir sagen Menschen freundlich Danke.",
+          "Dankbarkeit ist mehr als ein Wunsch nach Geschenken."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/891. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 14:7. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/891. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 14:7. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -3603,16 +3603,16 @@ const additions=
         "situation": "Jemand reicht ein Glas Wasser. Das Kind sagt Danke und blickt die Person an.",
         "practice": "Wir üben Danke auf Deutsch und erinnern uns, dass Dank gegenüber Menschen den Dank gegenüber Allah nicht ersetzt.",
         "summary": "Qurʾān 14:7 trägt diese Stunde. Der Vers enthält die Zusage: Wenn ihr dankbar seid, werde Ich euch gewiss mehr geben.",
-        "audioScript": "Dankbarkeit zeigen. Der Vers enthält die Zusage: Wenn ihr dankbar seid, werde Ich euch gewiss mehr geben. Jemand reicht ein Glas Wasser. Das Kind sagt Danke und blickt die Person an. Wir üben Danke auf Deutsch und erinnern uns, dass Dank gegenüber Menschen den Dank gegenüber Allah nicht ersetzt."
+        "audioScript": "As-salāmu ʿalaikum! In Qurʾān 14:7 steht die Zusage Allahs, dass Er den Dankbaren mehr gibt. Wir lernen dabei Dankbarkeit, nicht die Erwartung, dass jede gute Handlung sofort ein bestimmtes Geschenk bringt. Im Alltag können wir Allah danken und uns auch bei Menschen bedanken. Eine Person reicht dir ein Glas Wasser: Du schaust freundlich und sagst Danke."
       },
       "9-10": {
         "goal": "Ich kann Dankbarkeit zeigen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Dankbarkeit zeigen. Das Lernziel ist: Wir sagen Danke, wenn uns jemand hilft. Sinngemäß, keine beglaubigte Übersetzung: Der Vers enthält die Zusage: Wenn ihr dankbar seid, werde Ich euch gewiss mehr geben. Der folgende Warnsatz der Seite wird in der Kinderstunde nicht als Drohbild verwendet. Alltag: Jemand reicht ein Glas Wasser. Das Kind sagt Danke und blickt die Person an. Aufgabe: Wir üben Danke auf Deutsch und erinnern uns, dass Dank gegenüber Menschen den Dank gegenüber Allah nicht ersetzt. šukr bedeutet: Dankbarkeit. zīdah bedeutet: Mehrung; der Vers spricht davon, dass Allah mehrt. Was nicht behauptet wird: Dieselbe Qurʾān-Stelle wurde schon für die Stunde über Dank und für die Stunde über Dank im Herzen gelesen. Hier ist das Lernziel das sichtbare Danken. Der Hadith über den Dank an die Menschen wird nicht erneut als neue Nummer eingeführt.",
+        "intro": "As-salāmu ʿalaikum! Qurʾān 14:7 verbindet Dankbarkeit mit einer Zusage Allahs. Die Zusage ist keine feste Spielzeug-Belohnungsregel, die wir Kindern versprechen. Wir überlegen vielmehr, wie Dankbarkeit sichtbar wird. Wir danken Allah für das Gute in unserem Leben und bedanken uns bei Menschen, die helfen. Beim Beispiel mit dem Glas Wasser achten wir auf höfliche Worte und darauf, den anderen ernst zu nehmen. Dankbarkeit im Herzen und gezeigter Dank können einander ergänzen.",
         "lines": [
-          "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 14:7.",
-          "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
-          "Dieselbe Qurʾān-Stelle wurde schon für die Stunde über Dank und für die Stunde über Dank im Herzen gelesen.",
-          "Eine Hadithnummer, die auf der Seite fehlt, wird nicht ergänzt."
+          "Qurʾān 14:7 spricht von Dankbarkeit.",
+          "Wir danken Allah für Seine Gaben.",
+          "Wir sagen Menschen freundlich Danke.",
+          "Dankbarkeit ist mehr als ein Wunsch nach Geschenken."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/891. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 14:7. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/891. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 14:7. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -3629,90 +3629,90 @@ const additions=
         "situation": "Jemand reicht ein Glas Wasser. Das Kind sagt Danke und blickt die Person an.",
         "practice": "Wir üben Danke auf Deutsch und erinnern uns, dass Dank gegenüber Menschen den Dank gegenüber Allah nicht ersetzt.",
         "summary": "Belegt ist Qurʾān 14:7. Ungeprüft bleibt: Dieselbe Qurʾān-Stelle wurde schon für die Stunde über Dank und für die Stunde über Dank im Herzen gelesen.",
-        "audioScript": "Dankbarkeit zeigen. Der Vers enthält die Zusage: Wenn ihr dankbar seid, werde Ich euch gewiss mehr geben. Nicht belegt und deshalb nicht behauptet: Dieselbe Qurʾān-Stelle wurde schon für die Stunde über Dank und für die Stunde über Dank im Herzen gelesen."
+        "audioScript": "As-salāmu ʿalaikum! Qurʾān 14:7 verbindet Dankbarkeit mit einer Zusage Allahs. Die Zusage ist keine feste Spielzeug-Belohnungsregel, die wir Kindern versprechen. Wir überlegen vielmehr, wie Dankbarkeit sichtbar wird. Wir danken Allah für das Gute in unserem Leben und bedanken uns bei Menschen, die helfen. Beim Beispiel mit dem Glas Wasser achten wir auf höfliche Worte und darauf, den anderen ernst zu nehmen. Dankbarkeit im Herzen und gezeigter Dank können einander ergänzen."
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was passt zu dieser Stunde?",
+          "prompt": "Jemand reicht dir Wasser. Was sagst du?",
           "options": [
-            "Wir üben Danke auf Deutsch und erinnern uns, dass Dank gegenüber Menschen den Dank gegenüber Allah nicht ersetzt.",
-            "Ich mache es noch einmal extra."
+            "Danke für deine Hilfe.",
+            "Du bist mir egal."
           ],
           "correct": 0,
-          "hint": "Schau auf die Übung.",
-          "explain": "Die Übung der Stunde ist der erste Satz. Der zweite Satz ist das Gegenteil von dem, was wir üben."
+          "hint": "Denke an die heutige Lektion.",
+          "explain": "Ein freundliches Danke ist gut."
         },
         {
           "type": "choice",
-          "prompt": "Woran hält sich diese Stunde?",
+          "prompt": "Wem dürfen wir dankbar sein?",
           "options": [
-            "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "Allah und den Menschen, die uns helfen.",
+            "Nur einem Spielzeug."
           ],
           "correct": 0,
-          "hint": "Nur Gelesenes.",
-          "explain": "Die Stunde nennt Qurʾān 14:7 und trennt die Übung davon. Eine Nummer wird nicht erfunden."
+          "hint": "Denke an die heutige Lektion.",
+          "explain": "Wir danken Allah und Menschen für Gutes."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Stelle trägt Dankbarkeit zeigen?",
+          "prompt": "Wovon spricht Qurʾān 14:7?",
           "options": [
-            "Qurʾān 14:7",
-            "Eine Stelle ohne Suren- und Verszahl."
+            "Von Dankbarkeit und Allahs Zusage.",
+            "Von einem bestimmten Geschenk nach jeder Tat."
           ],
           "correct": 0,
-          "hint": "Die Fundstelle steht im Unterricht.",
-          "explain": "Die Stunde bleibt bei Qurʾān 14:7."
+          "hint": "Denke an die heutige Lektion.",
+          "explain": "Der Vers verspricht nicht ein bestimmtes Spielzeug."
         },
         {
           "type": "choice",
-          "prompt": "Was sagt der Vers sinngemäß für diese Stunde?",
+          "prompt": "Was machst du, wenn dir jemand hilft?",
           "options": [
-            "Der Vers enthält die Zusage: Wenn ihr dankbar seid, werde Ich euch gewiss mehr geben.",
-            "Ich mache es noch einmal extra."
+            "Ich bedanke mich freundlich.",
+            "Ich beleidige die Person."
           ],
           "correct": 0,
-          "hint": "Der erste Satz folgt der gelesenen Stelle.",
-          "explain": "Die deutsche Zeile ist eine Unterrichtshilfe zu Qurʾān 14:7, keine beglaubigte Übersetzung."
+          "hint": "Denke an die heutige Lektion.",
+          "explain": "Sichtbare Dankbarkeit kann höflich sein."
         },
         {
           "type": "text",
-          "prompt": "Welche Übung gehört zu dieser Stunde?",
-          "sample": "Wir üben Danke auf Deutsch und erinnern uns, dass Dank gegenüber Menschen den Dank gegenüber Allah nicht ersetzt.",
-          "hint": "Die praktische Aufgabe.",
-          "explain": "Die Übung ist die genannte Handlung und nicht eine zusätzliche Formel."
+          "prompt": "Nenne zwei Wege, Dankbarkeit zu zeigen.",
+          "sample": "Allah danken und einer helfenden Person Danke sagen.",
+          "hint": "Erkläre es in eigenen Worten.",
+          "explain": "Beides gehört zum Thema."
         }
       ],
       "9-10": [
         {
           "type": "choice",
-          "prompt": "Welche Angabe wäre unehrlich?",
+          "prompt": "Was sagt Qurʾān 14:7 über Dankbarkeit?",
           "options": [
-            "Ein Rechtsurteil oder eine Hadithnummer als gelesen auszugeben, obwohl die Seite sie nicht liefert.",
-            "Zu sagen, dass die deutsche Erklärung sinngemäß ist."
+            "Allah verbindet Dankbarkeit mit Mehrung.",
+            "Jedes Dankeschön bringt sofort ein bestimmtes Geschenk."
           ],
           "correct": 0,
-          "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "hint": "Denke an die heutige Lektion.",
+          "explain": "Die Zusage darf nicht auf Spielzeug verengt werden."
         },
         {
           "type": "text",
-          "prompt": "Was darf diese Stunde nicht behaupten?",
-          "sample": "Dieselbe Qurʾān-Stelle wurde schon für die Stunde über Dank und für die Stunde über Dank im Herzen gelesen.",
-          "hint": "Die Grenze steht im Text.",
-          "explain": "Die Grenze schützt davor, den Vers zu überdehnen."
+          "prompt": "Wie unterscheiden sich Dankbarkeit im Herzen und sichtbarer Dank?",
+          "sample": "Ich bin innerlich dankbar und zeige es durch freundliche Worte oder Taten.",
+          "hint": "Erkläre es in eigenen Worten.",
+          "explain": "Dankbarkeit kann sich in mehreren Formen zeigen."
         },
         {
           "type": "text",
-          "prompt": "Wie lautet die Qurʾān-Stelle?",
-          "sample": "Qurʾān 14:7",
-          "hint": "Sure und Vers.",
-          "explain": "Die Stelle ist Qurʾān 14:7 auf der genannten Islamweb-Seite."
+          "prompt": "Warum soll Dankbarkeit nicht zum Geschenk-Handel werden?",
+          "sample": "Weil wir nicht bestimmen, welche Gabe Allah wann und wie mehrt.",
+          "hint": "Erkläre es in eigenen Worten.",
+          "explain": "Wir lernen Dankbarkeit ohne falsche Versprechen."
         }
       ]
     },
@@ -3765,19 +3765,19 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die Seite begründet damit nicht die Waschung vor jeder Berührung als gelesenes hanbalitisches Urteil. Diese Rechtsfrage bleibt ungeprüft. Wir erfinden die Menge der Waschung nicht. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
+      "note": "Die Seite begründet damit nicht die Waschung vor jeder Berührung als gelesenes hanbalitisches Urteil. Diese Rechtsfrage bleibt ungeprüft. Wir erfinden die Menge der Waschung nicht. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe). Pädagogischer Review 2026-10-13 mit konkreten altersgerechten Fragen; vorhandene Qurʾān-Fundstellen beibehalten; keine unabhängige Vollverifikation. Fiqh-Urteile weiterhin offen."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Wir legen das Qurʾān-Buch sauber hin und blättern ruhig.",
     "ageText": {
       "4-5": {
         "goal": "Wir legen das Qurʾān-Buch sauber hin und blättern ruhig.",
-        "intro": "Wir legen das Qurʾān-Buch sauber hin und blättern ruhig. Wir legen das Qurʾān-Buch sauber hin und blättern ruhig. Stell dir vor: Ein Kind hat schmutzige Hände vom Malen und wäscht sie, bevor es das Exemplar anfasst, weil die Familie das so hält. Heute üben wir: Wir üben: Buch schließen, an einen hohen sauberen Platz legen, nicht darauf setzen. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! Der Qurʾān ist Allahs Buch. Wenn wir ein Qurʾān-Exemplar lesen, gehen wir sorgfältig damit um. Wir blättern ruhig und legen es an einen sauberen Ort. Qurʾān 56:79 spricht von den Gereinigten; dieser Vers wird von den Gelehrten erklärt. Wir üben heute den respektvollen Umgang mit dem Buch und machen daraus keine neue Vorschrift für Kinder.",
         "lines": [
-          "Wir legen das Qurʾān-Buch sauber hin und blättern ruhig.",
-          "Ein Kind hat schmutzige Hände vom Malen und wäscht sie, bevor es das Exemplar anfasst, weil die Familie das so hält.",
-          "Wir üben: Buch schließen, an einen hohen sauberen Platz legen, nicht darauf setzen.",
-          "Die arabischen Worte spricht die Lehrperson."
+          "Wir behandeln den Qurʾān mit Achtung.",
+          "Qurʾān 56:79 spricht von den Gereinigten.",
+          "Sorgfältiges Umblättern ist unsere Alltagsübung.",
+          "Fiqh-Einzelheiten dürfen nicht aus einem einzelnen Wort erfunden werden."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1811. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 56:79. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1811. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 56:79. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -3794,16 +3794,16 @@ const additions=
         "situation": "Ein Kind hat schmutzige Hände vom Malen und wäscht sie, bevor es das Exemplar anfasst, weil die Familie das so hält.",
         "practice": "Wir üben: Buch schließen, an einen hohen sauberen Platz legen, nicht darauf setzen.",
         "summary": "Wir legen das Qurʾān-Buch sauber hin und blättern ruhig. Die arabischen Worte spricht die Lehrperson.",
-        "audioScript": "Den Qurʾān sorgfältig behandeln. Wir legen das Qurʾān-Buch sauber hin und blättern ruhig. Ein Kind hat schmutzige Hände vom Malen und wäscht sie, bevor es das Exemplar anfasst, weil die Familie das so hält. Wir üben: Buch schließen, an einen hohen sauberen Platz legen, nicht darauf setzen. Die arabischen Worte spricht die Lehrperson."
+        "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Der Qurʾān ist Allahs Buch. Wenn wir ein Qurʾān-Exemplar lesen, gehen wir sorgfältig damit um. Wir blättern ruhig und legen es an einen sauberen Ort. Qurʾān 56:79 spricht von den Gereinigten; dieser Vers wird von den Gelehrten erklärt. Wir üben heute den respektvollen Umgang mit dem Buch und machen daraus keine neue Vorschrift für Kinder."
       },
       "6-8": {
         "goal": "Wir legen das Qurʾān-Buch sauber hin und blättern ruhig.",
-        "intro": "Heute geht es um Den Qurʾān sorgfältig behandeln. Wir legen das Qurʾān-Buch sauber hin und blättern ruhig. Wir lesen Qurʾān 56:79. Sinngemäß, ohne beglaubigte Übersetzung: Der gespeicherte Versteil lautet: Es berührt ihn niemand außer den Gereinigten. Die Tafsīr-Seite bezieht diese Worte in einer Erklärung auf das Buch im Himmel. So kann das im Alltag aussehen: Ein Kind hat schmutzige Hände vom Malen und wäscht sie, bevor es das Exemplar anfasst, weil die Familie das so hält. Die Aufgabe: Wir üben: Buch schließen, an einen hohen sauberen Platz legen, nicht darauf setzen. muṭahharūn bedeutet: Gereinigte; so das Wort im Vers. muṣḥaf bedeutet: das gebundene Qurʾān-Exemplar; das Wort selbst steht nicht in diesem Vers. Die Grenze der Stunde: Die Seite begründet damit nicht die Waschung vor jeder Berührung als gelesenes hanbalitisches Urteil. Diese Rechtsfrage bleibt ungeprüft. Wir erfinden die Menge der Waschung nicht.",
+        "intro": "As-salāmu ʿalaikum! Qurʾān 56:79 spricht davon, dass ihn nur Gereinigte berühren. Die Tafsīr-Seite erläutert diese Stelle auch im Zusammenhang mit dem Buch bei Allah. Wir behaupten deshalb nicht, der Vers allein enthalte schon jede Fiqh-Regel zur Berührung eines Qurʾān-Exemplars. Für unseren Alltag üben wir einen sorgfältigen Umgang: nicht auf das Buch setzen, Seiten achtsam umblättern und es gut ablegen.",
         "lines": [
-          "Qurʾān 56:79 ist die gelesene Stelle.",
-          "Wir legen das Qurʾān-Buch sauber hin und blättern ruhig.",
-          "Ein Kind hat schmutzige Hände vom Malen und wäscht sie, bevor es das Exemplar anfasst, weil die Familie das so hält.",
-          "Die arabischen Worte spricht die Lehrperson."
+          "Wir behandeln den Qurʾān mit Achtung.",
+          "Qurʾān 56:79 spricht von den Gereinigten.",
+          "Sorgfältiges Umblättern ist unsere Alltagsübung.",
+          "Fiqh-Einzelheiten dürfen nicht aus einem einzelnen Wort erfunden werden."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1811. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 56:79. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1811. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 56:79. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -3820,16 +3820,16 @@ const additions=
         "situation": "Ein Kind hat schmutzige Hände vom Malen und wäscht sie, bevor es das Exemplar anfasst, weil die Familie das so hält.",
         "practice": "Wir üben: Buch schließen, an einen hohen sauberen Platz legen, nicht darauf setzen.",
         "summary": "Qurʾān 56:79 trägt diese Stunde. Wir legen das Qurʾān-Buch sauber hin und blättern ruhig.",
-        "audioScript": "Den Qurʾān sorgfältig behandeln. Wir legen das Qurʾān-Buch sauber hin und blättern ruhig. Ein Kind hat schmutzige Hände vom Malen und wäscht sie, bevor es das Exemplar anfasst, weil die Familie das so hält. Wir üben: Buch schließen, an einen hohen sauberen Platz legen, nicht darauf setzen."
+        "audioScript": "As-salāmu ʿalaikum! Qurʾān 56:79 spricht davon, dass ihn nur Gereinigte berühren. Die Tafsīr-Seite erläutert diese Stelle auch im Zusammenhang mit dem Buch bei Allah. Wir behaupten deshalb nicht, der Vers allein enthalte schon jede Fiqh-Regel zur Berührung eines Qurʾān-Exemplars. Für unseren Alltag üben wir einen sorgfältigen Umgang: nicht auf das Buch setzen, Seiten achtsam umblättern und es gut ablegen."
       },
       "9-10": {
         "goal": "Ich kann Den Qurʾān sorgfältig behandeln von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Den Qurʾān sorgfältig behandeln. Das Lernziel ist: Wir legen das Qurʾān-Buch sauber hin und blättern ruhig. Sinngemäß, keine beglaubigte Übersetzung: Der gespeicherte Versteil lautet: Es berührt ihn niemand außer den Gereinigten. Die Tafsīr-Seite bezieht diese Worte in einer Erklärung auf das Buch im Himmel. Alltag: Ein Kind hat schmutzige Hände vom Malen und wäscht sie, bevor es das Exemplar anfasst, weil die Familie das so hält. Aufgabe: Wir üben: Buch schließen, an einen hohen sauberen Platz legen, nicht darauf setzen. muṭahharūn bedeutet: Gereinigte; so das Wort im Vers. muṣḥaf bedeutet: das gebundene Qurʾān-Exemplar; das Wort selbst steht nicht in diesem Vers. Was nicht behauptet wird: Die Seite begründet damit nicht die Waschung vor jeder Berührung als gelesenes hanbalitisches Urteil. Diese Rechtsfrage bleibt ungeprüft. Wir erfinden die Menge der Waschung nicht.",
+        "intro": "As-salāmu ʿalaikum! Qurʾān 56:79 enthält die Worte über die Gereinigten. In der Tafsīr-Erklärung wird die Stelle unter anderem auf das Buch bei Allah bezogen. Daraus folgt nicht automatisch eine vollständige hanbalitische Rechtsregel für jede Berührung eines Muṣḥaf. Wir trennen deshalb Auslegung, Fiqh-Frage und praktische Übung. Unsere Übung ist, ein Qurʾān-Exemplar respektvoll zu behandeln, ohne Kindern aus einer ungeprüften Detailfrage Angst zu machen. Für verbindliche Fiqh-Einzelheiten braucht es gesonderte Quellenarbeit.",
         "lines": [
-          "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 56:79.",
-          "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
-          "Die Seite begründet damit nicht die Waschung vor jeder Berührung als gelesenes hanbalitisches Urteil.",
-          "Eine Hadithnummer, die auf der Seite fehlt, wird nicht ergänzt."
+          "Wir behandeln den Qurʾān mit Achtung.",
+          "Qurʾān 56:79 spricht von den Gereinigten.",
+          "Sorgfältiges Umblättern ist unsere Alltagsübung.",
+          "Fiqh-Einzelheiten dürfen nicht aus einem einzelnen Wort erfunden werden."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1811. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 56:79. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1811. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 56:79. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -3846,90 +3846,90 @@ const additions=
         "situation": "Ein Kind hat schmutzige Hände vom Malen und wäscht sie, bevor es das Exemplar anfasst, weil die Familie das so hält.",
         "practice": "Wir üben: Buch schließen, an einen hohen sauberen Platz legen, nicht darauf setzen.",
         "summary": "Belegt ist Qurʾān 56:79. Ungeprüft bleibt: Die Seite begründet damit nicht die Waschung vor jeder Berührung als gelesenes hanbalitisches Urteil.",
-        "audioScript": "Den Qurʾān sorgfältig behandeln. Wir legen das Qurʾān-Buch sauber hin und blättern ruhig. Nicht belegt und deshalb nicht behauptet: Die Seite begründet damit nicht die Waschung vor jeder Berührung als gelesenes hanbalitisches Urteil."
+        "audioScript": "As-salāmu ʿalaikum! Qurʾān 56:79 enthält die Worte über die Gereinigten. In der Tafsīr-Erklärung wird die Stelle unter anderem auf das Buch bei Allah bezogen. Daraus folgt nicht automatisch eine vollständige hanbalitische Rechtsregel für jede Berührung eines Muṣḥaf. Wir trennen deshalb Auslegung, Fiqh-Frage und praktische Übung. Unsere Übung ist, ein Qurʾān-Exemplar respektvoll zu behandeln, ohne Kindern aus einer ungeprüften Detailfrage Angst zu machen. Für verbindliche Fiqh-Einzelheiten braucht es gesonderte Quellenarbeit."
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was passt zu dieser Stunde?",
+          "prompt": "Wie gehst du mit einem Qurʾān-Exemplar um?",
           "options": [
-            "Wir üben: Buch schließen, an einen hohen sauberen Platz legen, nicht darauf setzen.",
-            "Ich störe absichtlich weiter."
+            "Sorgfältig und ruhig.",
+            "Ich werfe es herum."
           ],
           "correct": 0,
-          "hint": "Schau auf die Übung.",
-          "explain": "Die Übung der Stunde ist der erste Satz. Der zweite Satz ist das Gegenteil von dem, was wir üben."
+          "hint": "Denke an die heutige Lektion.",
+          "explain": "Wir behandeln das Buch mit Achtung."
         },
         {
           "type": "choice",
-          "prompt": "Woran hält sich diese Stunde?",
+          "prompt": "Wo bewahren wir ein Qurʾān-Exemplar auf?",
           "options": [
-            "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einem passenden, sauberen Ort.",
+            "Unter nassen Bastelsachen."
           ],
           "correct": 0,
-          "hint": "Nur Gelesenes.",
-          "explain": "Die Stunde nennt Qurʾān 56:79 und trennt die Übung davon. Eine Nummer wird nicht erfunden."
+          "hint": "Denke an die heutige Lektion.",
+          "explain": "Die Übung zeigt sorgfältigen Umgang."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Stelle trägt Den Qurʾān sorgfältig behandeln?",
+          "prompt": "Wovon spricht Qurʾān 56:79?",
           "options": [
-            "Qurʾān 56:79",
-            "Eine Stelle ohne Suren- und Verszahl."
+            "Von den Gereinigten.",
+            "Von einer erfundenen Spielregel."
           ],
           "correct": 0,
-          "hint": "Die Fundstelle steht im Unterricht.",
-          "explain": "Die Stunde bleibt bei Qurʾān 56:79."
+          "hint": "Denke an die heutige Lektion.",
+          "explain": "Der Vers erwähnt die Gereinigten."
         },
         {
           "type": "choice",
-          "prompt": "Was sagt der Vers sinngemäß für diese Stunde?",
+          "prompt": "Welche Übung passt zu unserer Stunde?",
           "options": [
-            "Wir legen das Qurʾān-Buch sauber hin und blättern ruhig.",
-            "Ich störe absichtlich weiter."
+            "Sorgfältig die Seiten umblättern.",
+            "Mit dem Buch achtlos spielen."
           ],
           "correct": 0,
-          "hint": "Der erste Satz folgt der gelesenen Stelle.",
-          "explain": "Die deutsche Zeile ist eine Unterrichtshilfe zu Qurʾān 56:79, keine beglaubigte Übersetzung."
+          "hint": "Denke an die heutige Lektion.",
+          "explain": "Wir üben achtsamen Umgang."
         },
         {
           "type": "text",
-          "prompt": "Welche Übung gehört zu dieser Stunde?",
-          "sample": "Wir üben: Buch schließen, an einen hohen sauberen Platz legen, nicht darauf setzen.",
-          "hint": "Die praktische Aufgabe.",
-          "explain": "Die Übung ist die genannte Handlung und nicht eine zusätzliche Formel."
+          "prompt": "Warum reicht der Vers allein nicht für alle Fiqh-Einzelheiten?",
+          "sample": "Weil die Auslegung und weitere Rechtsquellen geprüft werden müssen.",
+          "hint": "Erkläre es in eigenen Worten.",
+          "explain": "Eine praktische Übung ist noch kein Rechtsurteil."
         }
       ],
       "9-10": [
         {
           "type": "choice",
-          "prompt": "Welche Angabe wäre unehrlich?",
+          "prompt": "Welche Schwierigkeit gibt es bei Qurʾān 56:79?",
           "options": [
-            "Ein Rechtsurteil oder eine Hadithnummer als gelesen auszugeben, obwohl die Seite sie nicht liefert.",
-            "Zu sagen, dass die deutsche Erklärung sinngemäß ist."
+            "Die Auslegung muss von einer vollständigen Fiqh-Regel unterschieden werden.",
+            "Der Vers ist eine komplette Liste aller Berührungsregeln."
           ],
           "correct": 0,
-          "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "hint": "Denke an die heutige Lektion.",
+          "explain": "Die Tafsīr-Seite kennt einen bestimmten Auslegungskontext."
         },
         {
           "type": "text",
-          "prompt": "Was darf diese Stunde nicht behaupten?",
-          "sample": "Die Seite begründet damit nicht die Waschung vor jeder Berührung als gelesenes hanbalitisches Urteil.",
-          "hint": "Die Grenze steht im Text.",
-          "explain": "Die Grenze schützt davor, den Vers zu überdehnen."
+          "prompt": "Was ist ein Muṣḥaf?",
+          "sample": "Ein gebundenes Qurʾān-Exemplar.",
+          "hint": "Erkläre es in eigenen Worten.",
+          "explain": "Der Begriff wird in dieser Stunde erklärt."
         },
         {
           "type": "text",
-          "prompt": "Wie lautet die Qurʾān-Stelle?",
-          "sample": "Qurʾān 56:79",
-          "hint": "Sure und Vers.",
-          "explain": "Die Stelle ist Qurʾān 56:79 auf der genannten Islamweb-Seite."
+          "prompt": "Nenne eine achtsame Handlung mit einem Qurʾān-Exemplar.",
+          "sample": "Ich blättere behutsam und lege es an einen sauberen Platz.",
+          "hint": "Erkläre es in eigenen Worten.",
+          "explain": "Achtung zeigen wir durch sorgfältigen Umgang."
         }
       ]
     },
