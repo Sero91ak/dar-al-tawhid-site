@@ -1811,19 +1811,19 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Wie viel Reinheit die Gebetsschule genau verlangt, steht auf dieser Seite nicht als gelesenes hanbalitisches Rechtsurteil. al-Mughnī wurde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Wie viel Reinheit die Gebetsschule genau verlangt, steht auf dieser Seite nicht als gelesenes hanbalitisches Rechtsurteil. al-Mughnī wurde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Pädagogische Überarbeitung 2026-10-13: Unterrichtssprache, Kinderschutz und Fragen. Quelle nicht neu geprüft. Wissenschaftliche Freigabe bleibt aus."
     },
     "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
     "sample": "Vor dem Gebet schauen wir, ob die Kleidung sauber ist.",
     "ageText": {
       "4-5": {
         "goal": "Vor dem Gebet schauen wir, ob die Kleidung sauber ist.",
-        "intro": "Vor dem Gebet schauen wir, ob die Kleidung sauber ist. Der Vers lautet: Und deine Kleider, reinige sie. Stell dir vor: Ein Kind sieht einen deutlichen Schmutzfleck am Ärmel und zieht vor dem Üben ein sauberes Oberteil an oder sagt Bescheid. Heute üben wir: Wir prüfen mit den Augen: Ist etwas deutlich schmutzig? Wir waschen nur, was die Eltern erlauben. Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! Saubere Kleidung ist schön. Im Qurʾān 74:4 steht sinngemäß: „Und deine Kleider, reinige sie.“ Wir üben heute, Kleidung achtsam zu behandeln. Wenn du einen schmutzigen Ärmel bemerkst, kannst du einen Erwachsenen fragen, ob du ihn reinigen oder ein sauberes Oberteil anziehen sollst. Wir lernen hier noch keine einzelnen Gebetsregeln.",
         "lines": [
-          "Vor dem Gebet schauen wir, ob die Kleidung sauber ist.",
-          "Der Vers lautet: Und deine Kleider, reinige sie.",
-          "Ein Kind sieht einen deutlichen Schmutzfleck am Ärmel und zieht vor dem Üben ein sauberes Oberteil an oder sagt Bescheid.",
-          "Wir prüfen mit den Augen: Ist etwas deutlich schmutzig? Wir waschen nur, was die Eltern erlauben."
+          "Qurʾān 74:4 spricht vom Reinigen der Kleidung.",
+          "Vor dem Gebet achten wir auf Sauberkeit.",
+          "Wenn etwas schmutzig ist, holen wir Hilfe von Erwachsenen.",
+          "Ein einzelner Vers erklärt nicht alle Fiqh-Einzelheiten."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1907. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 74:4. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1907. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 74:4. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -1840,16 +1840,16 @@ const additions=
         "situation": "Ein Kind sieht einen deutlichen Schmutzfleck am Ärmel und zieht vor dem Üben ein sauberes Oberteil an oder sagt Bescheid.",
         "practice": "Wir prüfen mit den Augen: Ist etwas deutlich schmutzig? Wir waschen nur, was die Eltern erlauben.",
         "summary": "Vor dem Gebet schauen wir, ob die Kleidung sauber ist. Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
-        "audioScript": "Reinheit der Gebetskleidung. Vor dem Gebet schauen wir, ob die Kleidung sauber ist. Der Vers lautet: Und deine Kleider, reinige sie. Ein Kind sieht einen deutlichen Schmutzfleck am Ärmel und zieht vor dem Üben ein sauberes Oberteil an oder sagt Bescheid. Wir prüfen mit den Augen: Ist etwas deutlich schmutzig? Wir waschen nur, was die Eltern erlauben."
+        "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Saubere Kleidung ist schön. Im Qurʾān 74:4 steht sinngemäß: „Und deine Kleider, reinige sie.“ Wir üben heute, Kleidung achtsam zu behandeln. Wenn du einen schmutzigen Ärmel bemerkst, kannst du einen Erwachsenen fragen, ob du ihn reinigen oder ein sauberes Oberteil anziehen sollst. Wir lernen hier noch keine einzelnen Gebetsregeln."
       },
       "6-8": {
         "goal": "Vor dem Gebet schauen wir, ob die Kleidung sauber ist.",
-        "intro": "Heute geht es um Reinheit der Gebetskleidung. Vor dem Gebet schauen wir, ob die Kleidung sauber ist. Wir lesen Qurʾān 74:4. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers lautet: Und deine Kleider, reinige sie. Die Tafsīr-Seite erklärt ihn auch mit anderen Deutungen, darunter eine Absage an die Behauptung, der Prophet sei ein Wahrsager. So kann das im Alltag aussehen: Ein Kind sieht einen deutlichen Schmutzfleck am Ärmel und zieht vor dem Üben ein sauberes Oberteil an oder sagt Bescheid. Die Aufgabe: Wir prüfen mit den Augen: Ist etwas deutlich schmutzig? Wir waschen nur, was die Eltern erlauben. ṯiyāb bedeutet: Kleider. ṭahhir bedeutet: reinige. Die Grenze der Stunde: Wie viel Reinheit die Gebetsschule genau verlangt, steht auf dieser Seite nicht als gelesenes hanbalitisches Rechtsurteil. al-Mughnī wurde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "As-salāmu ʿalaikum! Qurʾān 74:4 spricht vom Reinigen der Kleidung. Wir üben, vor dem Gebet aufmerksam auf unsere Kleidung zu schauen. Wenn etwas schmutzig ist, besprechen wir mit einer erwachsenen Person, wie wir es reinigen können. Der Vers wird in den Tafsīr-Werken unterschiedlich erläutert. Aus dieser Stelle allein leiten wir keine vollständige Vorschrift über jede Art von Schmutz oder die Gültigkeit eines Gebets ab.",
         "lines": [
-          "Qurʾān 74:4 ist die gelesene Stelle.",
-          "Der Vers lautet: Und deine Kleider, reinige sie.",
-          "Ein Kind sieht einen deutlichen Schmutzfleck am Ärmel und zieht vor dem Üben ein sauberes Oberteil an oder sagt Bescheid.",
-          "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers."
+          "Qurʾān 74:4 spricht vom Reinigen der Kleidung.",
+          "Vor dem Gebet achten wir auf Sauberkeit.",
+          "Wenn etwas schmutzig ist, holen wir Hilfe von Erwachsenen.",
+          "Ein einzelner Vers erklärt nicht alle Fiqh-Einzelheiten."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1907. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 74:4. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1907. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 74:4. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -1866,16 +1866,16 @@ const additions=
         "situation": "Ein Kind sieht einen deutlichen Schmutzfleck am Ärmel und zieht vor dem Üben ein sauberes Oberteil an oder sagt Bescheid.",
         "practice": "Wir prüfen mit den Augen: Ist etwas deutlich schmutzig? Wir waschen nur, was die Eltern erlauben.",
         "summary": "Qurʾān 74:4 trägt diese Stunde. Der Vers lautet: Und deine Kleider, reinige sie.",
-        "audioScript": "Reinheit der Gebetskleidung. Der Vers lautet: Und deine Kleider, reinige sie. Ein Kind sieht einen deutlichen Schmutzfleck am Ärmel und zieht vor dem Üben ein sauberes Oberteil an oder sagt Bescheid. Wir prüfen mit den Augen: Ist etwas deutlich schmutzig? Wir waschen nur, was die Eltern erlauben."
+        "audioScript": "As-salāmu ʿalaikum! Qurʾān 74:4 spricht vom Reinigen der Kleidung. Wir üben, vor dem Gebet aufmerksam auf unsere Kleidung zu schauen. Wenn etwas schmutzig ist, besprechen wir mit einer erwachsenen Person, wie wir es reinigen können. Der Vers wird in den Tafsīr-Werken unterschiedlich erläutert. Aus dieser Stelle allein leiten wir keine vollständige Vorschrift über jede Art von Schmutz oder die Gültigkeit eines Gebets ab."
       },
       "9-10": {
         "goal": "Ich kann Reinheit der Gebetskleidung von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Reinheit der Gebetskleidung. Das Lernziel ist: Vor dem Gebet schauen wir, ob die Kleidung sauber ist. Die Seite https://www.islamweb.net/ar/library/content/49/1907 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 74:4. Sinngemäß, keine beglaubigte Übersetzung: Der Vers lautet: Und deine Kleider, reinige sie. Die Tafsīr-Seite erklärt ihn auch mit anderen Deutungen, darunter eine Absage an die Behauptung, der Prophet sei ein Wahrsager. Alltag: Ein Kind sieht einen deutlichen Schmutzfleck am Ärmel und zieht vor dem Üben ein sauberes Oberteil an oder sagt Bescheid. Aufgabe: Wir prüfen mit den Augen: Ist etwas deutlich schmutzig? Wir waschen nur, was die Eltern erlauben. ṯiyāb bedeutet: Kleider. ṭahhir bedeutet: reinige. Was nicht behauptet wird: Wie viel Reinheit die Gebetsschule genau verlangt, steht auf dieser Seite nicht als gelesenes hanbalitisches Rechtsurteil. al-Mughnī wurde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "As-salāmu ʿalaikum! Qurʾān 74:4 enthält die Worte: „Und deine Kleider, reinige sie.“ In der Erklärung dieses Verses gibt es unterschiedliche Deutungen, daher genügt die eine Stelle allein nicht für alle Einzelheiten des Fiqh der Gebetskleidung. Wir können trotzdem etwas Sinnvolles lernen: Wir achten auf Sauberkeit, fragen bei Unsicherheiten nach und unterscheiden eine praktische Übung von einem verbindlichen Rechtsurteil. Eine konkrete Rechtsregel zur Gebetsgültigkeit lernen wir erst nach gesonderter Prüfung klassischer Fiqh-Quellen.",
         "lines": [
-          "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 74:4.",
-          "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
-          "Wie viel Reinheit die Gebetsschule genau verlangt, steht auf dieser Seite nicht als gelesenes hanbalitisches Rechtsurteil.",
-          "Eine Hadithnummer, die auf der Seite fehlt, wird nicht ergänzt."
+          "Qurʾān 74:4 spricht vom Reinigen der Kleidung.",
+          "Vor dem Gebet achten wir auf Sauberkeit.",
+          "Wenn etwas schmutzig ist, holen wir Hilfe von Erwachsenen.",
+          "Ein einzelner Vers erklärt nicht alle Fiqh-Einzelheiten."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1907. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 74:4. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1907. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 74:4. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -1892,90 +1892,90 @@ const additions=
         "situation": "Ein Kind sieht einen deutlichen Schmutzfleck am Ärmel und zieht vor dem Üben ein sauberes Oberteil an oder sagt Bescheid.",
         "practice": "Wir prüfen mit den Augen: Ist etwas deutlich schmutzig? Wir waschen nur, was die Eltern erlauben.",
         "summary": "Belegt ist Qurʾān 74:4. Ungeprüft bleibt: Wie viel Reinheit die Gebetsschule genau verlangt, steht auf dieser Seite nicht als gelesenes hanbalitisches Rechtsurteil.",
-        "audioScript": "Für die älteren Kinder. Reinheit der Gebetskleidung. Der Vers lautet: Und deine Kleider, reinige sie. Nicht belegt und deshalb nicht behauptet: Wie viel Reinheit die Gebetsschule genau verlangt, steht auf dieser Seite nicht als gelesenes hanbalitisches Rechtsurteil."
+        "audioScript": "As-salāmu ʿalaikum! Qurʾān 74:4 enthält die Worte: „Und deine Kleider, reinige sie.“ In der Erklärung dieses Verses gibt es unterschiedliche Deutungen, daher genügt die eine Stelle allein nicht für alle Einzelheiten des Fiqh der Gebetskleidung. Wir können trotzdem etwas Sinnvolles lernen: Wir achten auf Sauberkeit, fragen bei Unsicherheiten nach und unterscheiden eine praktische Übung von einem verbindlichen Rechtsurteil. Eine konkrete Rechtsregel zur Gebetsgültigkeit lernen wir erst nach gesonderter Prüfung klassischer Fiqh-Quellen."
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was passt zu dieser Stunde?",
+          "prompt": "Du bemerkst einen schmutzigen Ärmel. Was ist gut?",
           "options": [
-            "Wir prüfen mit den Augen: Ist etwas deutlich schmutzig? Wir waschen nur, was die Eltern erlauben.",
-            "Ich erfinde eine neue Gebetsregel."
+            "Einen Erwachsenen fragen, wie ich ihn reinigen kann.",
+            "Schmutz absichtlich auf andere Kleidung schmieren."
           ],
           "correct": 0,
-          "hint": "Schau auf die Übung.",
-          "explain": "Die Übung der Stunde ist der erste Satz. Der zweite Satz ist das Gegenteil von dem, was wir üben."
+          "hint": "Erinnere dich an unsere Stunde.",
+          "explain": "Wir üben sorgfältigen Umgang mit unserer Kleidung."
         },
         {
           "type": "choice",
-          "prompt": "Woran hält sich diese Stunde?",
+          "prompt": "Was sagt der gelesene Vers?",
           "options": [
-            "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "Und deine Kleider, reinige sie.",
+            "Wirf alle Kleidungsstücke weg."
           ],
           "correct": 0,
-          "hint": "Nur Gelesenes.",
-          "explain": "Die Stunde nennt Qurʾān 74:4 und trennt die Übung davon. Eine Nummer wird nicht erfunden."
+          "hint": "Erinnere dich an unsere Stunde.",
+          "explain": "Qurʾān 74:4 spricht über das Reinigen der Kleidung."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Stelle trägt Reinheit der Gebetskleidung?",
+          "prompt": "Welche Aussage steht in Qurʾān 74:4?",
           "options": [
-            "Qurʾān 74:4",
-            "Eine Stelle ohne Suren- und Verszahl."
+            "Und deine Kleider, reinige sie.",
+            "Jedes kleine Fleckchen macht jedes Gebet ungültig."
           ],
           "correct": 0,
-          "hint": "Die Fundstelle steht im Unterricht.",
-          "explain": "Die Stunde bleibt bei Qurʾān 74:4."
+          "hint": "Erinnere dich an unsere Stunde.",
+          "explain": "Der zweite Satz steht nicht im Vers und wird nicht behauptet."
         },
         {
           "type": "choice",
-          "prompt": "Was sagt der Vers sinngemäß für diese Stunde?",
+          "prompt": "Was machst du bei sichtbarem Schmutz?",
           "options": [
-            "Der Vers lautet: Und deine Kleider, reinige sie.",
-            "Ich erfinde eine neue Gebetsregel."
+            "Ich bespreche mit Erwachsenen, wie ich die Kleidung reinigen kann.",
+            "Ich verheimliche ihn absichtlich."
           ],
           "correct": 0,
-          "hint": "Der erste Satz folgt der gelesenen Stelle.",
-          "explain": "Die deutsche Zeile ist eine Unterrichtshilfe zu Qurʾān 74:4, keine beglaubigte Übersetzung."
+          "hint": "Erinnere dich an unsere Stunde.",
+          "explain": "Wir üben praktisches Saubermachen."
         },
         {
           "type": "text",
-          "prompt": "Welche Übung gehört zu dieser Stunde?",
-          "sample": "Wir prüfen mit den Augen: Ist etwas deutlich schmutzig? Wir waschen nur, was die Eltern erlauben.",
-          "hint": "Die praktische Aufgabe.",
-          "explain": "Die Übung ist die genannte Handlung und nicht eine zusätzliche Formel."
+          "prompt": "Warum ist unser Reinigen noch kein vollständiges Fiqh-Urteil?",
+          "sample": "Der Vers allein nennt nicht alle Einzelheiten über die Gebetskleidung.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Für genaue Regeln braucht es weitere überprüfte Quellen."
         }
       ],
       "9-10": [
         {
           "type": "choice",
-          "prompt": "Welche Angabe wäre unehrlich?",
+          "prompt": "Was kann Qurʾān 74:4 für unsere Stunde belegen?",
           "options": [
-            "Ein Rechtsurteil oder eine Hadithnummer als gelesen auszugeben, obwohl die Seite sie nicht liefert.",
-            "Zu sagen, dass die deutsche Erklärung sinngemäß ist."
+            "Dass der Vers vom Reinigen der Kleidung spricht.",
+            "Eine vollständige Liste aller Fiqh-Urteile zur Gebetskleidung."
           ],
           "correct": 0,
-          "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "hint": "Erinnere dich an unsere Stunde.",
+          "explain": "Die Stelle ist kein Ersatz für alle Rechtsquellen."
         },
         {
           "type": "text",
-          "prompt": "Was darf diese Stunde nicht behaupten?",
-          "sample": "Wie viel Reinheit die Gebetsschule genau verlangt, steht auf dieser Seite nicht als gelesenes hanbalitisches Rechtsurteil.",
-          "hint": "Die Grenze steht im Text.",
-          "explain": "Die Grenze schützt davor, den Vers zu überdehnen."
+          "prompt": "Wie unterscheiden wir Übung und Fiqh-Regel?",
+          "sample": "Die Übung ist, auf Sauberkeit zu achten; genaue verbindliche Regeln brauchen weitere Belege.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Eine pädagogische Übung ist nicht automatisch ein Rechtsurteil."
         },
         {
           "type": "text",
-          "prompt": "Wie lautet die Qurʾān-Stelle?",
-          "sample": "Qurʾān 74:4",
-          "hint": "Sure und Vers.",
-          "explain": "Die Stelle ist Qurʾān 74:4 auf der genannten Islamweb-Seite."
+          "prompt": "Was tust du bei Unsicherheit über Gebetskleidung?",
+          "sample": "Ich frage eine zuverlässige erwachsene Person, die sich mit der Frage auskennt.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Einzelheiten werden nicht aus diesem Vers allein abgeleitet."
         }
       ]
     },
@@ -2028,19 +2028,19 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers spricht den Propheten beim Empfang der Offenbarung an. Wir machen daraus kein Verbot, Hausaufgaben zu lernen. Die anschließenden Worte gehören zum gespeicherten Ausdruck und werden nicht als zweite, eigene Prüfung ausgegeben. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Vers spricht den Propheten beim Empfang der Offenbarung an. Wir machen daraus kein Verbot, Hausaufgaben zu lernen. Die anschließenden Worte gehören zum gespeicherten Ausdruck und werden nicht als zweite, eigene Prüfung ausgegeben. Keine synthetische Rezitation. Keine Freigabe für Besucher. Pädagogische Überarbeitung 2026-10-13: Unterrichtssprache, Kinderschutz und Fragen. Quelle nicht neu geprüft. Wissenschaftliche Freigabe bleibt aus."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Wir wiederholen einen kurzen Vers ohne Hetze.",
     "ageText": {
       "4-5": {
         "goal": "Wir wiederholen einen kurzen Vers ohne Hetze.",
-        "intro": "Wir wiederholen einen kurzen Vers ohne Hetze. Im selben Ausdruck folgt: Das Sammeln und das Lesen liegen bei Uns. Stell dir vor: Ein Kind will einen Satz fünfmal sehr schnell hintereinander sagen und verhaspelt sich. Heute üben wir: Wir wiederholen einen kurzen deutschen Merksatz langsam zweimal. Eine arabische Rezitation wird nicht vom Computer erzeugt. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! Manchmal will man einen Satz ganz schnell sagen und verhaspelt sich. Wir dürfen beim Lernen ruhig und geduldig sein. Im Qurʾān 75:16 wird der Prophet beim Empfang der Offenbarung angesprochen. Unsere heutige Übung ist ein langsamer deutscher Merksatz, den wir zweimal wiederholen, ohne Druck und ohne Eile.",
         "lines": [
-          "Wir wiederholen einen kurzen Vers ohne Hetze.",
-          "Im selben Ausdruck folgt: Das Sammeln und das Lesen liegen bei Uns.",
-          "Ein Kind will einen Satz fünfmal sehr schnell hintereinander sagen und verhaspelt sich.",
-          "Wir wiederholen einen kurzen deutschen Merksatz langsam zweimal. Eine arabische Rezitation wird nicht vom Computer erzeugt."
+          "Wir lernen ohne Hetze.",
+          "Qurʾān 75:16 hat einen besonderen Zusammenhang.",
+          "Wir wiederholen einen kurzen Merksatz ruhig.",
+          "Ein Fehler ist kein Grund, aufzugeben."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1912. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 75:16. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1912. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 75:16. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -2057,16 +2057,16 @@ const additions=
         "situation": "Ein Kind will einen Satz fünfmal sehr schnell hintereinander sagen und verhaspelt sich.",
         "practice": "Wir wiederholen einen kurzen deutschen Merksatz langsam zweimal. Eine arabische Rezitation wird nicht vom Computer erzeugt.",
         "summary": "Wir wiederholen einen kurzen Vers ohne Hetze. Die arabischen Worte spricht die Lehrperson.",
-        "audioScript": "Qurʾān respektvoll auswendig lernen. Wir wiederholen einen kurzen Vers ohne Hetze. Im selben Ausdruck folgt: Das Sammeln und das Lesen liegen bei Uns. Ein Kind will einen Satz fünfmal sehr schnell hintereinander sagen und verhaspelt sich. Wir wiederholen einen kurzen deutschen Merksatz langsam zweimal. Eine arabische Rezitation wird nicht vom Computer erzeugt."
+        "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Manchmal will man einen Satz ganz schnell sagen und verhaspelt sich. Wir dürfen beim Lernen ruhig und geduldig sein. Im Qurʾān 75:16 wird der Prophet beim Empfang der Offenbarung angesprochen. Unsere heutige Übung ist ein langsamer deutscher Merksatz, den wir zweimal wiederholen, ohne Druck und ohne Eile."
       },
       "6-8": {
         "goal": "Wir wiederholen einen kurzen Vers ohne Hetze.",
-        "intro": "Heute geht es um Qurʾān respektvoll auswendig lernen. Wir wiederholen einen kurzen Vers ohne Hetze. Wir lesen Qurʾān 75:16. Sinngemäß, ohne beglaubigte Übersetzung: Der gespeicherte Text beginnt mit: Bewege deine Zunge nicht damit, um dich damit zu beeilen. Im selben Ausdruck folgt: Das Sammeln und das Lesen liegen bei Uns. So kann das im Alltag aussehen: Ein Kind will einen Satz fünfmal sehr schnell hintereinander sagen und verhaspelt sich. Die Aufgabe: Wir wiederholen einen kurzen deutschen Merksatz langsam zweimal. Eine arabische Rezitation wird nicht vom Computer erzeugt. lisān bedeutet: Zunge. rattil bedeutet: deutlich und ruhig vortragen; das Wort steht in einer anderen Stunde. Die Grenze der Stunde: Der Vers spricht den Propheten beim Empfang der Offenbarung an. Wir machen daraus kein Verbot, Hausaufgaben zu lernen. Die anschließenden Worte gehören zum gespeicherten Ausdruck und werden nicht als zweite, eigene Prüfung ausgegeben. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "As-salāmu ʿalaikum! Qurʾān 75:16 spricht zum Propheten beim Empfang der Offenbarung: Er soll seine Zunge dabei nicht eilig bewegen. Das ist der Zusammenhang des Verses. Wir machen daraus keine allgemeine Verbotsregel für Hausaufgaben. Als freiwillige Lernübung sprechen wir einen kurzen deutschen Merksatz zweimal langsam. Wichtig ist, sorgfältig zu lernen, statt sich wegen eines Fehlers zu schämen.",
         "lines": [
-          "Qurʾān 75:16 ist die gelesene Stelle.",
-          "Im selben Ausdruck folgt: Das Sammeln und das Lesen liegen bei Uns.",
-          "Ein Kind will einen Satz fünfmal sehr schnell hintereinander sagen und verhaspelt sich.",
-          "Die arabischen Worte spricht die Lehrperson."
+          "Wir lernen ohne Hetze.",
+          "Qurʾān 75:16 hat einen besonderen Zusammenhang.",
+          "Wir wiederholen einen kurzen Merksatz ruhig.",
+          "Ein Fehler ist kein Grund, aufzugeben."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1912. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 75:16. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1912. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 75:16. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -2083,16 +2083,16 @@ const additions=
         "situation": "Ein Kind will einen Satz fünfmal sehr schnell hintereinander sagen und verhaspelt sich.",
         "practice": "Wir wiederholen einen kurzen deutschen Merksatz langsam zweimal. Eine arabische Rezitation wird nicht vom Computer erzeugt.",
         "summary": "Qurʾān 75:16 trägt diese Stunde. Im selben Ausdruck folgt: Das Sammeln und das Lesen liegen bei Uns.",
-        "audioScript": "Qurʾān respektvoll auswendig lernen. Im selben Ausdruck folgt: Das Sammeln und das Lesen liegen bei Uns. Ein Kind will einen Satz fünfmal sehr schnell hintereinander sagen und verhaspelt sich. Wir wiederholen einen kurzen deutschen Merksatz langsam zweimal. Eine arabische Rezitation wird nicht vom Computer erzeugt."
+        "audioScript": "As-salāmu ʿalaikum! Qurʾān 75:16 spricht zum Propheten beim Empfang der Offenbarung: Er soll seine Zunge dabei nicht eilig bewegen. Das ist der Zusammenhang des Verses. Wir machen daraus keine allgemeine Verbotsregel für Hausaufgaben. Als freiwillige Lernübung sprechen wir einen kurzen deutschen Merksatz zweimal langsam. Wichtig ist, sorgfältig zu lernen, statt sich wegen eines Fehlers zu schämen."
       },
       "9-10": {
         "goal": "Ich kann Qurʾān respektvoll auswendig lernen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Qurʾān respektvoll auswendig lernen. Das Lernziel ist: Wir wiederholen einen kurzen Vers ohne Hetze. Die Seite https://www.islamweb.net/ar/library/content/49/1912 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 75:16. Sinngemäß, keine beglaubigte Übersetzung: Der gespeicherte Text beginnt mit: Bewege deine Zunge nicht damit, um dich damit zu beeilen. Im selben Ausdruck folgt: Das Sammeln und das Lesen liegen bei Uns. Alltag: Ein Kind will einen Satz fünfmal sehr schnell hintereinander sagen und verhaspelt sich. Aufgabe: Wir wiederholen einen kurzen deutschen Merksatz langsam zweimal. Eine arabische Rezitation wird nicht vom Computer erzeugt. lisān bedeutet: Zunge. rattil bedeutet: deutlich und ruhig vortragen; das Wort steht in einer anderen Stunde. Was nicht behauptet wird: Der Vers spricht den Propheten beim Empfang der Offenbarung an. Wir machen daraus kein Verbot, Hausaufgaben zu lernen. Die anschließenden Worte gehören zum gespeicherten Ausdruck und werden nicht als zweite, eigene Prüfung ausgegeben. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "As-salāmu ʿalaikum! Bei Qurʾān 75:16 ist der Zusammenhang wichtig: Der Prophet wird während des Empfangs der Offenbarung angesprochen. Die Worte über das Nicht-Eilen sind deshalb keine direkte Schulregel für Kinder. Trotzdem können wir eine nützliche Lerntechnik daraus besprechen: Einen kurzen Satz ruhig hören, verstehen und wiederholen, statt ihn hektisch aufzusagen. Die Übung ist unser didaktisches Beispiel und nicht ein neues religiöses Gebot. Wir wiederholen einen deutschen Merksatz; eine Qurʾān-Rezitation ist hier nicht nötig.",
         "lines": [
-          "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 75:16.",
-          "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
-          "Der Vers spricht den Propheten beim Empfang der Offenbarung an.",
-          "Eine Hadithnummer, die auf der Seite fehlt, wird nicht ergänzt."
+          "Wir lernen ohne Hetze.",
+          "Qurʾān 75:16 hat einen besonderen Zusammenhang.",
+          "Wir wiederholen einen kurzen Merksatz ruhig.",
+          "Ein Fehler ist kein Grund, aufzugeben."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1912. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 75:16. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1912. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 75:16. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -2109,90 +2109,90 @@ const additions=
         "situation": "Ein Kind will einen Satz fünfmal sehr schnell hintereinander sagen und verhaspelt sich.",
         "practice": "Wir wiederholen einen kurzen deutschen Merksatz langsam zweimal. Eine arabische Rezitation wird nicht vom Computer erzeugt.",
         "summary": "Belegt ist Qurʾān 75:16. Ungeprüft bleibt: Der Vers spricht den Propheten beim Empfang der Offenbarung an.",
-        "audioScript": "Für die älteren Kinder. Qurʾān respektvoll auswendig lernen. Im selben Ausdruck folgt: Das Sammeln und das Lesen liegen bei Uns. Nicht belegt und deshalb nicht behauptet: Der Vers spricht den Propheten beim Empfang der Offenbarung an."
+        "audioScript": "As-salāmu ʿalaikum! Bei Qurʾān 75:16 ist der Zusammenhang wichtig: Der Prophet wird während des Empfangs der Offenbarung angesprochen. Die Worte über das Nicht-Eilen sind deshalb keine direkte Schulregel für Kinder. Trotzdem können wir eine nützliche Lerntechnik daraus besprechen: Einen kurzen Satz ruhig hören, verstehen und wiederholen, statt ihn hektisch aufzusagen. Die Übung ist unser didaktisches Beispiel und nicht ein neues religiöses Gebot. Wir wiederholen einen deutschen Merksatz; eine Qurʾān-Rezitation ist hier nicht nötig."
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was passt zu dieser Stunde?",
+          "prompt": "Wie lernen wir heute einen kurzen Satz?",
           "options": [
-            "Wir wiederholen einen kurzen deutschen Merksatz langsam zweimal. Eine arabische Rezitation wird nicht vom Computer.",
-            "Ich ergänze einen Vers aus dem Gedächtnis."
+            "Langsam und in Ruhe.",
+            "So schnell wie möglich mit Angst."
           ],
           "correct": 0,
-          "hint": "Schau auf die Übung.",
-          "explain": "Die Übung der Stunde ist der erste Satz. Der zweite Satz ist das Gegenteil von dem, was wir üben."
+          "hint": "Erinnere dich an unsere Stunde.",
+          "explain": "Langsames Wiederholen hilft uns beim Lernen."
         },
         {
           "type": "choice",
-          "prompt": "Woran hält sich diese Stunde?",
+          "prompt": "Du versprichst dich einmal. Was tust du?",
           "options": [
-            "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "Ich versuche es ruhig noch einmal.",
+            "Ich darf nie wieder üben."
           ],
           "correct": 0,
-          "hint": "Nur Gelesenes.",
-          "explain": "Die Stunde nennt Qurʾān 75:16 und trennt die Übung davon. Eine Nummer wird nicht erfunden."
+          "hint": "Erinnere dich an unsere Stunde.",
+          "explain": "Lernen braucht Geduld."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Stelle trägt Qurʾān respektvoll auswendig lernen?",
+          "prompt": "An wen richtet sich Qurʾān 75:16 im ursprünglichen Zusammenhang?",
           "options": [
-            "Qurʾān 75:16",
-            "Eine Stelle ohne Suren- und Verszahl."
+            "An den Propheten beim Empfang der Offenbarung.",
+            "An ein Kind beim Schreiben der Hausaufgaben."
           ],
           "correct": 0,
-          "hint": "Die Fundstelle steht im Unterricht.",
-          "explain": "Die Stunde bleibt bei Qurʾān 75:16."
+          "hint": "Erinnere dich an unsere Stunde.",
+          "explain": "Der Zusammenhang gehört zur Offenbarung."
         },
         {
           "type": "choice",
-          "prompt": "Was sagt der Vers sinngemäß für diese Stunde?",
+          "prompt": "Welche Lernübung machen wir?",
           "options": [
-            "Im selben Ausdruck folgt: Das Sammeln und das Lesen liegen bei Uns.",
-            "Ich ergänze einen Vers aus dem Gedächtnis."
+            "Einen deutschen Merksatz langsam wiederholen.",
+            "Ein Wettrennen beim Aufsagen."
           ],
           "correct": 0,
-          "hint": "Der erste Satz folgt der gelesenen Stelle.",
-          "explain": "Die deutsche Zeile ist eine Unterrichtshilfe zu Qurʾān 75:16, keine beglaubigte Übersetzung."
+          "hint": "Erinnere dich an unsere Stunde.",
+          "explain": "Wir üben ohne Zeitdruck."
         },
         {
           "type": "text",
-          "prompt": "Welche Übung gehört zu dieser Stunde?",
-          "sample": "Wir wiederholen einen kurzen deutschen Merksatz langsam zweimal. Eine arabische Rezitation wird nicht vom Computer.",
-          "hint": "Die praktische Aufgabe.",
-          "explain": "Die Übung ist die genannte Handlung und nicht eine zusätzliche Formel."
+          "prompt": "Warum darf ein Lernfehler passieren?",
+          "sample": "Weil wir üben und mit Ruhe weitermachen können.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Fehler gehören zum Lernen."
         }
       ],
       "9-10": [
         {
           "type": "choice",
-          "prompt": "Welche Angabe wäre unehrlich?",
+          "prompt": "Was ist der richtige Zusammenhang von Qurʾān 75:16?",
           "options": [
-            "Ein Rechtsurteil oder eine Hadithnummer als gelesen auszugeben, obwohl die Seite sie nicht liefert.",
-            "Zu sagen, dass die deutsche Erklärung sinngemäß ist."
+            "Der Empfang der Offenbarung durch den Propheten.",
+            "Ein direktes Verbot, Hausaufgaben schnell zu bearbeiten."
           ],
           "correct": 0,
-          "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "hint": "Erinnere dich an unsere Stunde.",
+          "explain": "Den ursprünglichen Zusammenhang dürfen wir nicht verändern."
         },
         {
           "type": "text",
-          "prompt": "Was darf diese Stunde nicht behaupten?",
-          "sample": "Der Vers spricht den Propheten beim Empfang der Offenbarung an.",
-          "hint": "Die Grenze steht im Text.",
-          "explain": "Die Grenze schützt davor, den Vers zu überdehnen."
+          "prompt": "Was ist der Unterschied zwischen Vers und Lerntechnik?",
+          "sample": "Der Vers spricht zum Propheten; unser langsames Wiederholen ist eine Übung für Kinder.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Die Übung wird nicht als religiöse Pflicht ausgegeben."
         },
         {
           "type": "text",
-          "prompt": "Wie lautet die Qurʾān-Stelle?",
-          "sample": "Qurʾān 75:16",
-          "hint": "Sure und Vers.",
-          "explain": "Die Stelle ist Qurʾān 75:16 auf der genannten Islamweb-Seite."
+          "prompt": "Beschreibe zwei hilfreiche Schritte beim Auswendiglernen.",
+          "sample": "Zuerst verstehen, dann langsam wiederholen.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Wir lernen sorgfältig, ohne unnötigen Leistungsdruck."
         }
       ]
     },
@@ -2245,19 +2245,19 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die Seite enthält eine lange theologische Erklärung. Wir übernehmen für Kinder nur die Bezeichnung als Gesandter und Wort Allahs, so wie der Vers sie nennt. Wir erfinden keine Kindheitsgeschichte und kein Wunder. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Die Seite enthält eine lange theologische Erklärung. Wir übernehmen für Kinder nur die Bezeichnung als Gesandter und Wort Allahs, so wie der Vers sie nennt. Wir erfinden keine Kindheitsgeschichte und kein Wunder. Keine synthetische Rezitation. Keine Freigabe für Besucher. Pädagogische Überarbeitung 2026-10-13: Unterrichtssprache, Kinderschutz und Fragen. Quelle nicht neu geprüft. Wissenschaftliche Freigabe bleibt aus."
     },
     "hint": "Wir erfinden keine zusätzliche Geschichte.",
     "sample": "ʿĪsā, Friede sei mit ihm, ist ein Gesandter Allahs.",
     "ageText": {
       "4-5": {
         "goal": "ʿĪsā, Friede sei mit ihm, ist ein Gesandter Allahs.",
-        "intro": "ʿĪsā, Friede sei mit ihm, ist ein Gesandter Allahs. Der Vers warnt die Leute der Schrift vor Übertreibung und davor, über Allah etwas anderes als die Wahrheit zu sagen. Stell dir vor: Jemand fragt: Wer ist ʿĪsā? Das Kind antwortet: Ein Gesandter Allahs. Heute üben wir: Wir üben den respektvollen Namen und fügen keine weitere Geschichte hinzu. Wir erfinden keine zusätzliche Geschichte.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! Heute lernen wir über ʿĪsā, Friede sei mit ihm. Er ist ein Gesandter Allahs und der Sohn Maryams. Das steht im Qurʾān 4:171. Wir sprechen seinen Namen mit Achtung und sagen: ʿĪsā, Friede sei mit ihm. Wir erzählen nur das, was zu dieser Stunde gehört.",
         "lines": [
           "ʿĪsā, Friede sei mit ihm, ist ein Gesandter Allahs.",
-          "Der Vers warnt die Leute der Schrift vor Übertreibung und davor, über Allah etwas anderes als die Wahrheit zu sagen.",
-          "Jemand fragt: Wer ist ʿĪsā? Das Kind antwortet: Ein Gesandter Allahs.",
-          "Wir üben den respektvollen Namen und fügen keine weitere Geschichte hinzu."
+          "Qurʾān 4:171 nennt ihn den Sohn Maryams.",
+          "Rasūl bedeutet Gesandter.",
+          "Wir sprechen respektvoll über alle Propheten."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/367. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:171. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/367. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:171. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -2274,16 +2274,16 @@ const additions=
         "situation": "Jemand fragt: Wer ist ʿĪsā? Das Kind antwortet: Ein Gesandter Allahs.",
         "practice": "Wir üben den respektvollen Namen und fügen keine weitere Geschichte hinzu.",
         "summary": "ʿĪsā, Friede sei mit ihm, ist ein Gesandter Allahs. Wir erfinden keine zusätzliche Geschichte.",
-        "audioScript": "ʿĪsā Friede sei mit ihm als Gesandter. ʿĪsā, Friede sei mit ihm, ist ein Gesandter Allahs. Der Vers warnt die Leute der Schrift vor Übertreibung und davor, über Allah etwas anderes als die Wahrheit zu sagen. Jemand fragt: Wer ist ʿĪsā? Das Kind antwortet: Ein Gesandter Allahs. Wir üben den respektvollen Namen und fügen keine weitere Geschichte hinzu."
+        "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Heute lernen wir über ʿĪsā, Friede sei mit ihm. Er ist ein Gesandter Allahs und der Sohn Maryams. Das steht im Qurʾān 4:171. Wir sprechen seinen Namen mit Achtung und sagen: ʿĪsā, Friede sei mit ihm. Wir erzählen nur das, was zu dieser Stunde gehört."
       },
       "6-8": {
         "goal": "ʿĪsā, Friede sei mit ihm, ist ein Gesandter Allahs.",
-        "intro": "Heute geht es um ʿĪsā Friede sei mit ihm als Gesandter. ʿĪsā, Friede sei mit ihm, ist ein Gesandter Allahs. Wir lesen Qurʾān 4:171. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers warnt die Leute der Schrift vor Übertreibung und davor, über Allah etwas anderes als die Wahrheit zu sagen. Er nennt den Masīḥ ʿĪsā, den Sohn Maryams, einen Gesandten Allahs und Sein Wort, das Er zu Maryam hinwarf. So kann das im Alltag aussehen: Jemand fragt: Wer ist ʿĪsā? Das Kind antwortet: Ein Gesandter Allahs. Die Aufgabe: Wir üben den respektvollen Namen und fügen keine weitere Geschichte hinzu. rasūl bedeutet: Gesandter. Masīḥ bedeutet: ein Name ʿĪsās im Vers. Die Grenze der Stunde: Die Seite enthält eine lange theologische Erklärung. Wir übernehmen für Kinder nur die Bezeichnung als Gesandter und Wort Allahs, so wie der Vers sie nennt. Wir erfinden keine Kindheitsgeschichte und kein Wunder. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "As-salāmu ʿalaikum! Qurʾān 4:171 nennt ʿĪsā, den Sohn Maryams, einen Gesandten Allahs. Der Vers mahnt außerdem dazu, über Allah nur die Wahrheit zu sagen und in Glaubensfragen nicht zu übertreiben. Wenn dich jemand fragt, wer ʿĪsā ist, kannst du sagen: „Er ist ein Gesandter Allahs.“ Wir erklären das Wort rasūl als Gesandter und sprechen respektvoll über die Propheten.",
         "lines": [
-          "Qurʾān 4:171 ist die gelesene Stelle.",
-          "Der Vers warnt die Leute der Schrift vor Übertreibung und davor, über Allah etwas anderes als die Wahrheit zu sagen.",
-          "Jemand fragt: Wer ist ʿĪsā? Das Kind antwortet: Ein Gesandter Allahs.",
-          "Wir erfinden keine zusätzliche Geschichte."
+          "ʿĪsā, Friede sei mit ihm, ist ein Gesandter Allahs.",
+          "Qurʾān 4:171 nennt ihn den Sohn Maryams.",
+          "Rasūl bedeutet Gesandter.",
+          "Wir sprechen respektvoll über alle Propheten."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/367. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:171. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/367. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:171. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -2300,16 +2300,16 @@ const additions=
         "situation": "Jemand fragt: Wer ist ʿĪsā? Das Kind antwortet: Ein Gesandter Allahs.",
         "practice": "Wir üben den respektvollen Namen und fügen keine weitere Geschichte hinzu.",
         "summary": "Qurʾān 4:171 trägt diese Stunde. Der Vers warnt die Leute der Schrift vor Übertreibung und davor, über Allah etwas anderes als die Wahrheit zu sagen.",
-        "audioScript": "ʿĪsā Friede sei mit ihm als Gesandter. Der Vers warnt die Leute der Schrift vor Übertreibung und davor, über Allah etwas anderes als die Wahrheit zu sagen. Jemand fragt: Wer ist ʿĪsā? Das Kind antwortet: Ein Gesandter Allahs. Wir üben den respektvollen Namen und fügen keine weitere Geschichte hinzu."
+        "audioScript": "As-salāmu ʿalaikum! Qurʾān 4:171 nennt ʿĪsā, den Sohn Maryams, einen Gesandten Allahs. Der Vers mahnt außerdem dazu, über Allah nur die Wahrheit zu sagen und in Glaubensfragen nicht zu übertreiben. Wenn dich jemand fragt, wer ʿĪsā ist, kannst du sagen: „Er ist ein Gesandter Allahs.“ Wir erklären das Wort rasūl als Gesandter und sprechen respektvoll über die Propheten."
       },
       "9-10": {
         "goal": "Ich kann ʿĪsā Friede sei mit ihm als Gesandter von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "ʿĪsā Friede sei mit ihm als Gesandter. Das Lernziel ist: ʿĪsā, Friede sei mit ihm, ist ein Gesandter Allahs. Die Seite https://www.islamweb.net/ar/library/content/49/367 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:171. Sinngemäß, keine beglaubigte Übersetzung: Der Vers warnt die Leute der Schrift vor Übertreibung und davor, über Allah etwas anderes als die Wahrheit zu sagen. Er nennt den Masīḥ ʿĪsā, den Sohn Maryams, einen Gesandten Allahs und Sein Wort, das Er zu Maryam hinwarf. Alltag: Jemand fragt: Wer ist ʿĪsā? Das Kind antwortet: Ein Gesandter Allahs. Aufgabe: Wir üben den respektvollen Namen und fügen keine weitere Geschichte hinzu. rasūl bedeutet: Gesandter. Masīḥ bedeutet: ein Name ʿĪsās im Vers. Was nicht behauptet wird: Die Seite enthält eine lange theologische Erklärung. Wir übernehmen für Kinder nur die Bezeichnung als Gesandter und Wort Allahs, so wie der Vers sie nennt. Wir erfinden keine Kindheitsgeschichte und kein Wunder. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "As-salāmu ʿalaikum! Qurʾān 4:171 nennt ʿĪsā, den Sohn Maryams, einen Gesandten Allahs. Der Vers untersagt übertriebene und falsche Aussagen über Allah. Unsere Stunde konzentriert sich auf das, was klar im Vers steht: ʿĪsā ist ein Gesandter Allahs; Maryam ist seine Mutter. Rasūl bedeutet Gesandter. Das Wort Masīḥ ist eine Bezeichnung ʿĪsās im Vers. Wir ergänzen zu dieser Stunde keine unbestätigten Kindheitsgeschichten oder Wunder. Für die Kinder ist das Wichtigste, den Qurʾān-Wortlaut wahrheitsgemäß und mit Achtung wiederzugeben.",
         "lines": [
-          "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 4:171.",
-          "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
-          "Die Seite enthält eine lange theologische Erklärung.",
-          "Eine Hadithnummer, die auf der Seite fehlt, wird nicht ergänzt."
+          "ʿĪsā, Friede sei mit ihm, ist ein Gesandter Allahs.",
+          "Qurʾān 4:171 nennt ihn den Sohn Maryams.",
+          "Rasūl bedeutet Gesandter.",
+          "Wir sprechen respektvoll über alle Propheten."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/367. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:171. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/367. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:171. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -2326,90 +2326,90 @@ const additions=
         "situation": "Jemand fragt: Wer ist ʿĪsā? Das Kind antwortet: Ein Gesandter Allahs.",
         "practice": "Wir üben den respektvollen Namen und fügen keine weitere Geschichte hinzu.",
         "summary": "Belegt ist Qurʾān 4:171. Ungeprüft bleibt: Die Seite enthält eine lange theologische Erklärung.",
-        "audioScript": "Für die älteren Kinder. ʿĪsā Friede sei mit ihm als Gesandter. Der Vers warnt die Leute der Schrift vor Übertreibung und davor, über Allah etwas anderes als die Wahrheit zu sagen. Nicht belegt und deshalb nicht behauptet: Die Seite enthält eine lange theologische Erklärung."
+        "audioScript": "As-salāmu ʿalaikum! Qurʾān 4:171 nennt ʿĪsā, den Sohn Maryams, einen Gesandten Allahs. Der Vers untersagt übertriebene und falsche Aussagen über Allah. Unsere Stunde konzentriert sich auf das, was klar im Vers steht: ʿĪsā ist ein Gesandter Allahs; Maryam ist seine Mutter. Rasūl bedeutet Gesandter. Das Wort Masīḥ ist eine Bezeichnung ʿĪsās im Vers. Wir ergänzen zu dieser Stunde keine unbestätigten Kindheitsgeschichten oder Wunder. Für die Kinder ist das Wichtigste, den Qurʾān-Wortlaut wahrheitsgemäß und mit Achtung wiederzugeben."
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was passt zu dieser Stunde?",
+          "prompt": "Wer ist ʿĪsā, Friede sei mit ihm?",
           "options": [
-            "Wir üben den respektvollen Namen und fügen keine weitere Geschichte hinzu.",
-            "Ich erfinde eine neue Geschichte dazu."
+            "Ein Gesandter Allahs.",
+            "Ein erfundener Held."
           ],
           "correct": 0,
-          "hint": "Schau auf die Übung.",
-          "explain": "Die Übung der Stunde ist der erste Satz. Der zweite Satz ist das Gegenteil von dem, was wir üben."
+          "hint": "Erinnere dich an unsere Stunde.",
+          "explain": "Qurʾān 4:171 nennt ihn einen Gesandten Allahs."
         },
         {
           "type": "choice",
-          "prompt": "Woran hält sich diese Stunde?",
+          "prompt": "Wie sprechen wir über Propheten?",
           "options": [
-            "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "Mit Achtung und Respekt.",
+            "Mit absichtlichen Beleidigungen."
           ],
           "correct": 0,
-          "hint": "Nur Gelesenes.",
-          "explain": "Die Stunde nennt Qurʾān 4:171 und trennt die Übung davon. Eine Nummer wird nicht erfunden."
+          "hint": "Erinnere dich an unsere Stunde.",
+          "explain": "Wir sprechen respektvoll über die Gesandten."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Stelle trägt ʿĪsā Friede sei mit ihm als Gesandter?",
+          "prompt": "Wie nennt Qurʾān 4:171 ʿĪsā?",
           "options": [
-            "Qurʾān 4:171",
-            "Eine Stelle ohne Suren- und Verszahl."
+            "Einen Gesandten Allahs.",
+            "Einen beliebigen Spielkameraden."
           ],
           "correct": 0,
-          "hint": "Die Fundstelle steht im Unterricht.",
-          "explain": "Die Stunde bleibt bei Qurʾān 4:171."
+          "hint": "Erinnere dich an unsere Stunde.",
+          "explain": "Der Vers nennt ihn einen Gesandten."
         },
         {
           "type": "choice",
-          "prompt": "Was sagt der Vers sinngemäß für diese Stunde?",
+          "prompt": "Wessen Sohn ist ʿĪsā nach Qurʾān 4:171?",
           "options": [
-            "Der Vers warnt die Leute der Schrift vor Übertreibung und davor, über Allah etwas anderes als die Wahrheit zu sagen.",
-            "Ich erfinde eine neue Geschichte dazu."
+            "Maryams.",
+            "Ibrāhīms."
           ],
           "correct": 0,
-          "hint": "Der erste Satz folgt der gelesenen Stelle.",
-          "explain": "Die deutsche Zeile ist eine Unterrichtshilfe zu Qurʾān 4:171, keine beglaubigte Übersetzung."
+          "hint": "Erinnere dich an unsere Stunde.",
+          "explain": "Der Vers nennt ihn den Sohn Maryams."
         },
         {
           "type": "text",
-          "prompt": "Welche Übung gehört zu dieser Stunde?",
-          "sample": "Wir üben den respektvollen Namen und fügen keine weitere Geschichte hinzu.",
-          "hint": "Die praktische Aufgabe.",
-          "explain": "Die Übung ist die genannte Handlung und nicht eine zusätzliche Formel."
+          "prompt": "Was bedeutet rasūl?",
+          "sample": "Gesandter.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Rasūl bedeutet Gesandter."
         }
       ],
       "9-10": [
         {
           "type": "choice",
-          "prompt": "Welche Angabe wäre unehrlich?",
+          "prompt": "Was lehrt Qurʾān 4:171 über ʿĪsā?",
           "options": [
-            "Ein Rechtsurteil oder eine Hadithnummer als gelesen auszugeben, obwohl die Seite sie nicht liefert.",
-            "Zu sagen, dass die deutsche Erklärung sinngemäß ist."
+            "Er ist der Sohn Maryams und ein Gesandter Allahs.",
+            "Er ist eine erfundene Figur."
           ],
           "correct": 0,
-          "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "hint": "Erinnere dich an unsere Stunde.",
+          "explain": "Der Vers nennt seine Mutter und seine Sendung."
         },
         {
           "type": "text",
-          "prompt": "Was darf diese Stunde nicht behaupten?",
-          "sample": "Die Seite enthält eine lange theologische Erklärung.",
-          "hint": "Die Grenze steht im Text.",
-          "explain": "Die Grenze schützt davor, den Vers zu überdehnen."
+          "prompt": "Warum dürfen wir keine unbekannten Geschichten hinzufügen?",
+          "sample": "Weil wir über Gesandte nur das als religiöse Tatsache sagen sollen, wofür wir einen Beleg haben.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Quellenwahrheit schützt vor erfundenen Erzählungen."
         },
         {
           "type": "text",
-          "prompt": "Wie lautet die Qurʾān-Stelle?",
-          "sample": "Qurʾān 4:171",
-          "hint": "Sure und Vers.",
-          "explain": "Die Stelle ist Qurʾān 4:171 auf der genannten Islamweb-Seite."
+          "prompt": "Was bedeuten rasūl und Masīḥ?",
+          "sample": "Rasūl heißt Gesandter; Masīḥ ist eine Bezeichnung für ʿĪsā im Vers.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Die Begriffe stehen im Zusammenhang von 4:171."
         }
       ]
     },
@@ -2462,19 +2462,19 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der vorherige Vers über die Eltern ist eine andere Fundstelle. Hier ist nur 17:24 gespeichert. Eine zusätzliche Bittformel nach dem Essen oder vor dem Schlafen wird nicht als Sunnah dieser Seite ausgegeben. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der vorherige Vers über die Eltern ist eine andere Fundstelle. Hier ist nur 17:24 gespeichert. Eine zusätzliche Bittformel nach dem Essen oder vor dem Schlafen wird nicht als Sunnah dieser Seite ausgegeben. Keine synthetische Rezitation. Keine Freigabe für Besucher. Pädagogische Überarbeitung 2026-10-13: Unterrichtssprache, Kinderschutz und Fragen. Quelle nicht neu geprüft. Wissenschaftliche Freigabe bleibt aus."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Wir bitten Allah, den Eltern Barmherzigkeit zu schenken.",
     "ageText": {
       "4-5": {
         "goal": "Wir bitten Allah, den Eltern Barmherzigkeit zu schenken.",
-        "intro": "Wir bitten Allah, den Eltern Barmherzigkeit zu schenken. Der Vers fordert, den Eltern den Flügel der Demut aus Barmherzigkeit zu senken, und sagt: Mein Herr, erbarme Dich ihrer, so wie sie mich klein aufgezogen haben. Stell dir vor: Ein Kind denkt an eine konkrete Hilfe der Eltern, zum Beispiel das Abendessen, und spricht die Bitte. Heute üben wir: Wir lernen den deutschen Sinn der Bitte und sprechen sie ruhig. Wer die arabischen Worte noch nicht sicher kann, bleibt beim deutschen Sinn. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! Wir dürfen Allah um Gutes für unsere Eltern bitten. In Qurʾān 17:24 steht eine Bitte um Barmherzigkeit für sie. Auf Deutsch können wir sagen: „O Allah, erbarme Dich meiner Eltern.“ Wenn du von anderen Menschen liebevoll versorgt wirst, darfst du auch für sie um Gutes bitten. Niemand muss beim Lernen über die eigene Familie sprechen, wenn er das nicht möchte.",
         "lines": [
-          "Wir bitten Allah, den Eltern Barmherzigkeit zu schenken.",
-          "Der Vers fordert, den Eltern den Flügel der Demut aus Barmherzigkeit zu senken, und sagt: Mein Herr, erbarme Dich ihrer, so wie sie mich klein aufgezogen haben.",
-          "Ein Kind denkt an eine konkrete Hilfe der Eltern, zum Beispiel das Abendessen, und spricht die Bitte.",
-          "Wir lernen den deutschen Sinn der Bitte und sprechen sie ruhig. Wer die arabischen Worte noch nicht sicher kann, bleibt beim deutschen Sinn."
+          "Qurʾān 17:24 lehrt eine Bitte für die Eltern.",
+          "Wir bitten Allah um Barmherzigkeit für sie.",
+          "Wir dürfen auch für Menschen bitten, die gut für uns sorgen.",
+          "Niemand muss private Familiensorgen vor anderen erzählen."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1005. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:24. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1005. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:24. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -2491,16 +2491,16 @@ const additions=
         "situation": "Ein Kind denkt an eine konkrete Hilfe der Eltern, zum Beispiel das Abendessen, und spricht die Bitte.",
         "practice": "Wir lernen den deutschen Sinn der Bitte und sprechen sie ruhig. Wer die arabischen Worte noch nicht sicher kann, bleibt beim deutschen Sinn.",
         "summary": "Wir bitten Allah, den Eltern Barmherzigkeit zu schenken. Die arabischen Worte spricht die Lehrperson.",
-        "audioScript": "Für Eltern Gutes erbitten. Wir bitten Allah, den Eltern Barmherzigkeit zu schenken. Der Vers fordert, den Eltern den Flügel der Demut aus Barmherzigkeit zu senken, und sagt: Mein Herr, erbarme Dich ihrer, so wie sie mich klein aufgezogen haben. Ein Kind denkt an eine konkrete Hilfe der Eltern, zum Beispiel das Abendessen, und spricht die Bitte. Wir lernen den deutschen Sinn der Bitte und sprechen sie ruhig. Wer die arabischen Worte noch nicht sicher kann, bleibt beim deutschen Sinn."
+        "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Wir dürfen Allah um Gutes für unsere Eltern bitten. In Qurʾān 17:24 steht eine Bitte um Barmherzigkeit für sie. Auf Deutsch können wir sagen: „O Allah, erbarme Dich meiner Eltern.“ Wenn du von anderen Menschen liebevoll versorgt wirst, darfst du auch für sie um Gutes bitten. Niemand muss beim Lernen über die eigene Familie sprechen, wenn er das nicht möchte."
       },
       "6-8": {
         "goal": "Wir bitten Allah, den Eltern Barmherzigkeit zu schenken.",
-        "intro": "Heute geht es um Für Eltern Gutes erbitten. Wir bitten Allah, den Eltern Barmherzigkeit zu schenken. Wir lesen Qurʾān 17:24. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers fordert, den Eltern den Flügel der Demut aus Barmherzigkeit zu senken, und sagt: Mein Herr, erbarme Dich ihrer, so wie sie mich klein aufgezogen haben. So kann das im Alltag aussehen: Ein Kind denkt an eine konkrete Hilfe der Eltern, zum Beispiel das Abendessen, und spricht die Bitte. Die Aufgabe: Wir lernen den deutschen Sinn der Bitte und sprechen sie ruhig. Wer die arabischen Worte noch nicht sicher kann, bleibt beim deutschen Sinn. irḥam bedeutet: erbarme Dich. ḏull bedeutet: Demut, hier der Vers über den gesenkten Flügel der Demut. Die Grenze der Stunde: Der vorherige Vers über die Eltern ist eine andere Fundstelle. Hier ist nur 17:24 gespeichert. Eine zusätzliche Bittformel nach dem Essen oder vor dem Schlafen wird nicht als Sunnah dieser Seite ausgegeben. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "As-salāmu ʿalaikum! Qurʾān 17:24 lehrt eine Bitte für die Eltern: Allah soll Sich ihrer erbarmen, so wie sie uns klein aufgezogen haben. Irḥam bedeutet „Erbarme Dich“. Wir lernen den deutschen Sinn dieser Bittworte. Als Übung denken wir an einen guten Moment mit einer Person, die für uns sorgt, und bitten Allah um Gutes. Wenn das Thema Familie für jemanden schwer ist, darf er still teilnehmen oder eine allgemeine Bitte sprechen.",
         "lines": [
-          "Qurʾān 17:24 ist die gelesene Stelle.",
-          "Der Vers fordert, den Eltern den Flügel der Demut aus Barmherzigkeit zu senken, und sagt: Mein Herr, erbarme Dich ihrer, so wie sie mich klein aufgezogen haben.",
-          "Ein Kind denkt an eine konkrete Hilfe der Eltern, zum Beispiel das Abendessen, und spricht die Bitte.",
-          "Die arabischen Worte spricht die Lehrperson."
+          "Qurʾān 17:24 lehrt eine Bitte für die Eltern.",
+          "Wir bitten Allah um Barmherzigkeit für sie.",
+          "Wir dürfen auch für Menschen bitten, die gut für uns sorgen.",
+          "Niemand muss private Familiensorgen vor anderen erzählen."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1005. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:24. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1005. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:24. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -2517,16 +2517,16 @@ const additions=
         "situation": "Ein Kind denkt an eine konkrete Hilfe der Eltern, zum Beispiel das Abendessen, und spricht die Bitte.",
         "practice": "Wir lernen den deutschen Sinn der Bitte und sprechen sie ruhig. Wer die arabischen Worte noch nicht sicher kann, bleibt beim deutschen Sinn.",
         "summary": "Qurʾān 17:24 trägt diese Stunde. Der Vers fordert, den Eltern den Flügel der Demut aus Barmherzigkeit zu senken, und sagt: Mein Herr, erbarme Dich ihrer, so wie sie mich klein aufgezogen haben.",
-        "audioScript": "Für Eltern Gutes erbitten. Der Vers fordert, den Eltern den Flügel der Demut aus Barmherzigkeit zu senken, und sagt: Mein Herr, erbarme Dich ihrer, so wie sie mich klein aufgezogen haben. Ein Kind denkt an eine konkrete Hilfe der Eltern, zum Beispiel das Abendessen, und spricht die Bitte. Wir lernen den deutschen Sinn der Bitte und sprechen sie ruhig. Wer die arabischen Worte noch nicht sicher kann, bleibt beim deutschen Sinn."
+        "audioScript": "As-salāmu ʿalaikum! Qurʾān 17:24 lehrt eine Bitte für die Eltern: Allah soll Sich ihrer erbarmen, so wie sie uns klein aufgezogen haben. Irḥam bedeutet „Erbarme Dich“. Wir lernen den deutschen Sinn dieser Bittworte. Als Übung denken wir an einen guten Moment mit einer Person, die für uns sorgt, und bitten Allah um Gutes. Wenn das Thema Familie für jemanden schwer ist, darf er still teilnehmen oder eine allgemeine Bitte sprechen."
       },
       "9-10": {
         "goal": "Ich kann Für Eltern Gutes erbitten von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Für Eltern Gutes erbitten. Das Lernziel ist: Wir bitten Allah, den Eltern Barmherzigkeit zu schenken. Die Seite https://www.islamweb.net/ar/library/content/49/1005 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:24. Sinngemäß, keine beglaubigte Übersetzung: Der Vers fordert, den Eltern den Flügel der Demut aus Barmherzigkeit zu senken, und sagt: Mein Herr, erbarme Dich ihrer, so wie sie mich klein aufgezogen haben. Alltag: Ein Kind denkt an eine konkrete Hilfe der Eltern, zum Beispiel das Abendessen, und spricht die Bitte. Aufgabe: Wir lernen den deutschen Sinn der Bitte und sprechen sie ruhig. Wer die arabischen Worte noch nicht sicher kann, bleibt beim deutschen Sinn. irḥam bedeutet: erbarme Dich. ḏull bedeutet: Demut, hier der Vers über den gesenkten Flügel der Demut. Was nicht behauptet wird: Der vorherige Vers über die Eltern ist eine andere Fundstelle. Hier ist nur 17:24 gespeichert. Eine zusätzliche Bittformel nach dem Essen oder vor dem Schlafen wird nicht als Sunnah dieser Seite ausgegeben. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "As-salāmu ʿalaikum! In Qurʾān 17:24 steht eine eindrucksvolle Bitte für die Eltern: „Mein Herr, erbarme Dich ihrer, wie sie mich klein aufgezogen haben.“ Wir unterscheiden den Wortlaut des Qurʾān von unseren Beispielen. Das Wort irḥam bedeutet „Erbarme Dich“, und der Vers spricht von Barmherzigkeit und Demut. Unsere Aufgabe ist, den Sinn der Bitte in eigenen Worten zu erklären. Wer schwierige familiäre Erfahrungen hat, muss sie nicht offenlegen. Kinder dürfen sich jederzeit an vertrauenswürdige Erwachsene wenden, wenn sie Schutz brauchen.",
         "lines": [
-          "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 17:24.",
-          "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
-          "Der vorherige Vers über die Eltern ist eine andere Fundstelle.",
-          "Eine Hadithnummer, die auf der Seite fehlt, wird nicht ergänzt."
+          "Qurʾān 17:24 lehrt eine Bitte für die Eltern.",
+          "Wir bitten Allah um Barmherzigkeit für sie.",
+          "Wir dürfen auch für Menschen bitten, die gut für uns sorgen.",
+          "Niemand muss private Familiensorgen vor anderen erzählen."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1005. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:24. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1005. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:24. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -2543,90 +2543,90 @@ const additions=
         "situation": "Ein Kind denkt an eine konkrete Hilfe der Eltern, zum Beispiel das Abendessen, und spricht die Bitte.",
         "practice": "Wir lernen den deutschen Sinn der Bitte und sprechen sie ruhig. Wer die arabischen Worte noch nicht sicher kann, bleibt beim deutschen Sinn.",
         "summary": "Belegt ist Qurʾān 17:24. Ungeprüft bleibt: Der vorherige Vers über die Eltern ist eine andere Fundstelle.",
-        "audioScript": "Für die älteren Kinder. Für Eltern Gutes erbitten. Der Vers fordert, den Eltern den Flügel der Demut aus Barmherzigkeit zu senken, und sagt: Mein Herr, erbarme Dich ihrer, so wie sie mich klein aufgezogen haben. Nicht belegt und deshalb nicht behauptet: Der vorherige Vers über die Eltern ist eine andere Fundstelle."
+        "audioScript": "As-salāmu ʿalaikum! In Qurʾān 17:24 steht eine eindrucksvolle Bitte für die Eltern: „Mein Herr, erbarme Dich ihrer, wie sie mich klein aufgezogen haben.“ Wir unterscheiden den Wortlaut des Qurʾān von unseren Beispielen. Das Wort irḥam bedeutet „Erbarme Dich“, und der Vers spricht von Barmherzigkeit und Demut. Unsere Aufgabe ist, den Sinn der Bitte in eigenen Worten zu erklären. Wer schwierige familiäre Erfahrungen hat, muss sie nicht offenlegen. Kinder dürfen sich jederzeit an vertrauenswürdige Erwachsene wenden, wenn sie Schutz brauchen."
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was passt zu dieser Stunde?",
+          "prompt": "Was können wir Allah für unsere Eltern erbitten?",
           "options": [
-            "Wir lernen den deutschen Sinn der Bitte und sprechen sie ruhig. Wer die arabischen Worte noch nicht sicher kann, bleibt.",
-            "Ich bitte nur, wenn andere mich loben."
+            "Barmherzigkeit.",
+            "Gemeinheit."
           ],
           "correct": 0,
-          "hint": "Schau auf die Übung.",
-          "explain": "Die Übung der Stunde ist der erste Satz. Der zweite Satz ist das Gegenteil von dem, was wir üben."
+          "hint": "Erinnere dich an unsere Stunde.",
+          "explain": "Der Vers enthält eine Bitte um Barmherzigkeit."
         },
         {
           "type": "choice",
-          "prompt": "Woran hält sich diese Stunde?",
+          "prompt": "Musst du anderen alles über deine Familie erzählen?",
           "options": [
-            "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "Nein, private Dinge darf ich für mich behalten und Hilfe suchen.",
+            "Ja, immer vor der ganzen Gruppe."
           ],
           "correct": 0,
-          "hint": "Nur Gelesenes.",
-          "explain": "Die Stunde nennt Qurʾān 17:24 und trennt die Übung davon. Eine Nummer wird nicht erfunden."
+          "hint": "Erinnere dich an unsere Stunde.",
+          "explain": "Die Stunde soll Kinder schützen."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Stelle trägt Für Eltern Gutes erbitten?",
+          "prompt": "Worum bittet Qurʾān 17:24 für die Eltern?",
           "options": [
-            "Qurʾān 17:24",
-            "Eine Stelle ohne Suren- und Verszahl."
+            "Um Barmherzigkeit.",
+            "Um einen Wettkampf."
           ],
           "correct": 0,
-          "hint": "Die Fundstelle steht im Unterricht.",
-          "explain": "Die Stunde bleibt bei Qurʾān 17:24."
+          "hint": "Erinnere dich an unsere Stunde.",
+          "explain": "Der Vers enthält eine Bittformel um Barmherzigkeit."
         },
         {
           "type": "choice",
-          "prompt": "Was sagt der Vers sinngemäß für diese Stunde?",
+          "prompt": "Was heißt irḥam?",
           "options": [
-            "Der Vers fordert, den Eltern den Flügel der Demut aus Barmherzigkeit zu senken, und sagt: Mein Herr, erbarme Dich ihrer, so wie sie mich.",
-            "Ich bitte nur, wenn andere mich loben."
+            "Erbarme Dich.",
+            "Ich prahle."
           ],
           "correct": 0,
-          "hint": "Der erste Satz folgt der gelesenen Stelle.",
-          "explain": "Die deutsche Zeile ist eine Unterrichtshilfe zu Qurʾān 17:24, keine beglaubigte Übersetzung."
+          "hint": "Erinnere dich an unsere Stunde.",
+          "explain": "Das Wort gehört zur Bittformel."
         },
         {
           "type": "text",
-          "prompt": "Welche Übung gehört zu dieser Stunde?",
-          "sample": "Wir lernen den deutschen Sinn der Bitte und sprechen sie ruhig. Wer die arabischen Worte noch nicht sicher kann, bleibt.",
-          "hint": "Die praktische Aufgabe.",
-          "explain": "Die Übung ist die genannte Handlung und nicht eine zusätzliche Formel."
+          "prompt": "Formuliere den Sinn der Bitte auf Deutsch.",
+          "sample": "Mein Herr, erbarme Dich meiner Eltern.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Wir lernen den Sinn der Qurʾān-Bitte."
         }
       ],
       "9-10": [
         {
           "type": "choice",
-          "prompt": "Welche Angabe wäre unehrlich?",
+          "prompt": "Welche Bitte steht in Qurʾān 17:24?",
           "options": [
-            "Ein Rechtsurteil oder eine Hadithnummer als gelesen auszugeben, obwohl die Seite sie nicht liefert.",
-            "Zu sagen, dass die deutsche Erklärung sinngemäß ist."
+            "Mein Herr, erbarme Dich ihrer, wie sie mich klein aufgezogen haben.",
+            "Ich will mehr haben als alle anderen."
           ],
           "correct": 0,
-          "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "hint": "Erinnere dich an unsere Stunde.",
+          "explain": "Der Vers verbindet Fürbitte und Barmherzigkeit."
         },
         {
           "type": "text",
-          "prompt": "Was darf diese Stunde nicht behaupten?",
-          "sample": "Der vorherige Vers über die Eltern ist eine andere Fundstelle.",
-          "hint": "Die Grenze steht im Text.",
-          "explain": "Die Grenze schützt davor, den Vers zu überdehnen."
+          "prompt": "Was bedeutet das Wort irḥam?",
+          "sample": "Erbarme Dich.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Es ist eine Bitte um Barmherzigkeit."
         },
         {
           "type": "text",
-          "prompt": "Wie lautet die Qurʾān-Stelle?",
-          "sample": "Qurʾān 17:24",
-          "hint": "Sure und Vers.",
-          "explain": "Die Stelle ist Qurʾān 17:24 auf der genannten Islamweb-Seite."
+          "prompt": "Wie kannst du eine persönliche Bitte respektvoll formulieren?",
+          "sample": "O Allah, schenke den Menschen, die für mich sorgen, Gutes.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Eigene Bitten sind Übungsbeispiele."
         }
       ]
     },
@@ -2679,7 +2679,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers beschreibt keine Körperstelle und keine Strafe. Die Schutzregel ist Unterricht zum Kinderschutz und kein Hadith. Dieselbe Qurʾān-Stelle wird hier mit einem anderen Lernziel verwendet als in der Stunde über die eigene Grenze. Dieselbe gelesene Fundstelle wurde schon in Slot 104 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+      "note": "Der Vers beschreibt keine Körperstelle und keine Strafe. Die Schutzregel ist Unterricht zum Kinderschutz und kein Hadith. Dieselbe Qurʾān-Stelle wird hier mit einem anderen Lernziel verwendet als in der Stunde über die eigene Grenze. Dieselbe gelesene Fundstelle wurde schon in Slot 104 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Pädagogische Überarbeitung 2026-10-13: Unterrichtssprache, Kinderschutz und Fragen. Quelle nicht neu geprüft. Wissenschaftliche Freigabe bleibt aus.",
       "sameLocusAsSlot": 104
     },
     "hint": "Wir erzählen keine Gruselgeschichte.",
@@ -2687,12 +2687,12 @@ const additions=
     "ageText": {
       "4-5": {
         "goal": "Bei einer Berührung, die sich falsch anfühlt, sagen wir Nein und holen eine Vertrauensperson.",
-        "intro": "Bei einer Berührung, die sich falsch anfühlt, sagen wir Nein und holen eine Vertrauensperson. Dieselbe gelesene Stelle wie in der Stunde über die eigene Grenze sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist. Stell dir vor: Ein Kind möchte nicht umarmt werden und sagt Nein. Es geht danach zu Mama, Papa oder einer Lehrperson. Heute üben wir: Wir üben nur den Satz und den Weg zu einer bekannten erwachsenen Person. Wir spielen keine Berührung nach. Wir erzählen keine Gruselgeschichte.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! Dein Körper gehört zu dir. Du darfst Nein sagen, wenn dich jemand berühren oder umarmen möchte und du das nicht willst. Du darfst weggehen und es Mama, Papa, einer Lehrperson oder einer anderen erwachsenen Person sagen, der du vertraust. Wenn die erste nicht hilft, frage eine andere. Du bist nicht schuld. Wir üben nur das Wort „Nein“ und den Hilfesatz. Niemand spielt Berührungen nach.",
         "lines": [
-          "Bei einer Berührung, die sich falsch anfühlt, sagen wir Nein und holen eine Vertrauensperson.",
-          "Dieselbe gelesene Stelle wie in der Stunde über die eigene Grenze sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist.",
-          "Ein Kind möchte nicht umarmt werden und sagt Nein. Es geht danach zu Mama, Papa oder einer Lehrperson.",
-          "Wir üben nur den Satz und den Weg zu einer bekannten erwachsenen Person. Wir spielen keine Berührung nach."
+          "Ich darf Nein sagen, wenn ich etwas nicht möchte.",
+          "Bei Angst oder einem Übergriff darf ich Hilfe holen.",
+          "Ich bin nicht schuld an der Gemeinheit anderer.",
+          "Niemand muss Berührungen nachspielen oder Geheimnisse bewahren, die Angst machen."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/357. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:148. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/357. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:148. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -2709,16 +2709,16 @@ const additions=
         "situation": "Ein Kind möchte nicht umarmt werden und sagt Nein. Es geht danach zu Mama, Papa oder einer Lehrperson.",
         "practice": "Wir üben nur den Satz und den Weg zu einer bekannten erwachsenen Person. Wir spielen keine Berührung nach.",
         "summary": "Bei einer Berührung, die sich falsch anfühlt, sagen wir Nein und holen eine Vertrauensperson. Wir erzählen keine Gruselgeschichte.",
-        "audioScript": "Nein sagen und persönliche Sicherheit. Bei einer Berührung, die sich falsch anfühlt, sagen wir Nein und holen eine Vertrauensperson. Dieselbe gelesene Stelle wie in der Stunde über die eigene Grenze sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist. Ein Kind möchte nicht umarmt werden und sagt Nein. Es geht danach zu Mama, Papa oder einer Lehrperson. Wir üben nur den Satz und den Weg zu einer bekannten erwachsenen Person. Wir spielen keine Berührung nach."
+        "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Dein Körper gehört zu dir. Du darfst Nein sagen, wenn dich jemand berühren oder umarmen möchte und du das nicht willst. Du darfst weggehen und es Mama, Papa, einer Lehrperson oder einer anderen erwachsenen Person sagen, der du vertraust. Wenn die erste nicht hilft, frage eine andere. Du bist nicht schuld. Wir üben nur das Wort „Nein“ und den Hilfesatz. Niemand spielt Berührungen nach."
       },
       "6-8": {
         "goal": "Bei einer Berührung, die sich falsch anfühlt, sagen wir Nein und holen eine Vertrauensperson.",
-        "intro": "Heute geht es um Nein sagen und persönliche Sicherheit. Bei einer Berührung, die sich falsch anfühlt, sagen wir Nein und holen eine Vertrauensperson. Wir lesen Qurʾān 4:148. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe gelesene Stelle wie in der Stunde über die eigene Grenze sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist. So kann das im Alltag aussehen: Ein Kind möchte nicht umarmt werden und sagt Nein. Es geht danach zu Mama, Papa oder einer Lehrperson. Die Aufgabe: Wir üben nur den Satz und den Weg zu einer bekannten erwachsenen Person. Wir spielen keine Berührung nach. amāna bedeutet: Vertrauen; hier die Person, der das Kind die Sache anvertrauen darf. ḥarām bedeutet: nicht erlaubt; ein Wort, das der Vers selbst nicht als Definition einer Berührung druckt. Die Grenze der Stunde: Der Vers beschreibt keine Körperstelle und keine Strafe. Die Schutzregel ist Unterricht zum Kinderschutz und kein Hadith. Dieselbe Qurʾān-Stelle wird hier mit einem anderen Lernziel verwendet als in der Stunde über die eigene Grenze. Dieselbe gelesene Fundstelle wurde schon in Slot 104 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "As-salāmu ʿalaikum! Kinder dürfen eigene Grenzen haben. Wenn du eine Berührung nicht möchtest oder dich etwas unsicher macht, darfst du klar Nein sagen, weggehen und Hilfe suchen. Qurʾān 4:148 berücksichtigt Menschen, denen Unrecht geschah und die darüber sprechen. Unsere konkrete Schutzregel lautet: Vertraue dich einem Erwachsenen an, der helfen kann; wenn nötig, frage mehrere Erwachsene. Diese Schritte sind unsere Anwendung und keine wörtliche Beschreibung einer Berührung im Vers.",
         "lines": [
-          "Qurʾān 4:148 ist die gelesene Stelle.",
-          "Dieselbe gelesene Stelle wie in der Stunde über die eigene Grenze sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist.",
-          "Ein Kind möchte nicht umarmt werden und sagt Nein. Es geht danach zu Mama, Papa oder einer Lehrperson.",
-          "Wir erzählen keine Gruselgeschichte."
+          "Ich darf Nein sagen, wenn ich etwas nicht möchte.",
+          "Bei Angst oder einem Übergriff darf ich Hilfe holen.",
+          "Ich bin nicht schuld an der Gemeinheit anderer.",
+          "Niemand muss Berührungen nachspielen oder Geheimnisse bewahren, die Angst machen."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/357. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:148. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/357. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:148. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -2735,16 +2735,16 @@ const additions=
         "situation": "Ein Kind möchte nicht umarmt werden und sagt Nein. Es geht danach zu Mama, Papa oder einer Lehrperson.",
         "practice": "Wir üben nur den Satz und den Weg zu einer bekannten erwachsenen Person. Wir spielen keine Berührung nach.",
         "summary": "Qurʾān 4:148 trägt diese Stunde. Dieselbe gelesene Stelle wie in der Stunde über die eigene Grenze sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist.",
-        "audioScript": "Nein sagen und persönliche Sicherheit. Dieselbe gelesene Stelle wie in der Stunde über die eigene Grenze sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist. Ein Kind möchte nicht umarmt werden und sagt Nein. Es geht danach zu Mama, Papa oder einer Lehrperson. Wir üben nur den Satz und den Weg zu einer bekannten erwachsenen Person. Wir spielen keine Berührung nach."
+        "audioScript": "As-salāmu ʿalaikum! Kinder dürfen eigene Grenzen haben. Wenn du eine Berührung nicht möchtest oder dich etwas unsicher macht, darfst du klar Nein sagen, weggehen und Hilfe suchen. Qurʾān 4:148 berücksichtigt Menschen, denen Unrecht geschah und die darüber sprechen. Unsere konkrete Schutzregel lautet: Vertraue dich einem Erwachsenen an, der helfen kann; wenn nötig, frage mehrere Erwachsene. Diese Schritte sind unsere Anwendung und keine wörtliche Beschreibung einer Berührung im Vers."
       },
       "9-10": {
         "goal": "Ich kann Nein sagen und persönliche Sicherheit von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Nein sagen und persönliche Sicherheit. Das Lernziel ist: Bei einer Berührung, die sich falsch anfühlt, sagen wir Nein und holen eine Vertrauensperson. Die Seite https://www.islamweb.net/ar/library/content/49/357 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:148. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe gelesene Stelle wie in der Stunde über die eigene Grenze sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist. Alltag: Ein Kind möchte nicht umarmt werden und sagt Nein. Es geht danach zu Mama, Papa oder einer Lehrperson. Aufgabe: Wir üben nur den Satz und den Weg zu einer bekannten erwachsenen Person. Wir spielen keine Berührung nach. amāna bedeutet: Vertrauen; hier die Person, der das Kind die Sache anvertrauen darf. ḥarām bedeutet: nicht erlaubt; ein Wort, das der Vers selbst nicht als Definition einer Berührung druckt. Was nicht behauptet wird: Der Vers beschreibt keine Körperstelle und keine Strafe. Die Schutzregel ist Unterricht zum Kinderschutz und kein Hadith. Dieselbe Qurʾān-Stelle wird hier mit einem anderen Lernziel verwendet als in der Stunde über die eigene Grenze. Dieselbe gelesene Fundstelle wurde schon in Slot 104 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "As-salāmu ʿalaikum! Persönliche Sicherheit bedeutet: Du darfst Grenzen setzen, Hilfe suchen und musst keine unangenehmen oder gefährlichen Geheimnisse für dich behalten. Qurʾān 4:148 spricht über die Möglichkeit, Unrecht zu benennen. Dieser Vers beschreibt keine bestimmte Berührung; deshalb führen wir das Nein-Sagen als praktische Kinderschutzregel ein, nicht als wörtliches Verszitat. Wenn ein Erwachsener deine Sorge nicht ernst nimmt, wende dich an eine weitere vertrauenswürdige Person. Niemand muss vor der Gruppe Erfahrungen erzählen oder Berührungen nachstellen. Verantwortung für übergriffiges Verhalten trägt nicht das betroffene Kind.",
         "lines": [
-          "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 4:148.",
-          "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
-          "Der Vers beschreibt keine Körperstelle und keine Strafe.",
-          "Eine Hadithnummer, die auf der Seite fehlt, wird nicht ergänzt."
+          "Ich darf Nein sagen, wenn ich etwas nicht möchte.",
+          "Bei Angst oder einem Übergriff darf ich Hilfe holen.",
+          "Ich bin nicht schuld an der Gemeinheit anderer.",
+          "Niemand muss Berührungen nachspielen oder Geheimnisse bewahren, die Angst machen."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/357. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:148. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/357. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:148. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -2761,90 +2761,90 @@ const additions=
         "situation": "Ein Kind möchte nicht umarmt werden und sagt Nein. Es geht danach zu Mama, Papa oder einer Lehrperson.",
         "practice": "Wir üben nur den Satz und den Weg zu einer bekannten erwachsenen Person. Wir spielen keine Berührung nach.",
         "summary": "Belegt ist Qurʾān 4:148. Ungeprüft bleibt: Der Vers beschreibt keine Körperstelle und keine Strafe.",
-        "audioScript": "Für die älteren Kinder. Nein sagen und persönliche Sicherheit. Dieselbe gelesene Stelle wie in der Stunde über die eigene Grenze sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist. Nicht belegt und deshalb nicht behauptet: Der Vers beschreibt keine Körperstelle und keine Strafe."
+        "audioScript": "As-salāmu ʿalaikum! Persönliche Sicherheit bedeutet: Du darfst Grenzen setzen, Hilfe suchen und musst keine unangenehmen oder gefährlichen Geheimnisse für dich behalten. Qurʾān 4:148 spricht über die Möglichkeit, Unrecht zu benennen. Dieser Vers beschreibt keine bestimmte Berührung; deshalb führen wir das Nein-Sagen als praktische Kinderschutzregel ein, nicht als wörtliches Verszitat. Wenn ein Erwachsener deine Sorge nicht ernst nimmt, wende dich an eine weitere vertrauenswürdige Person. Niemand muss vor der Gruppe Erfahrungen erzählen oder Berührungen nachstellen. Verantwortung für übergriffiges Verhalten trägt nicht das betroffene Kind."
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was passt zu dieser Stunde?",
+          "prompt": "Du möchtest keine Umarmung. Was darfst du sagen?",
           "options": [
-            "Wir üben nur den Satz und den Weg zu einer bekannten erwachsenen Person. Wir spielen keine Berührung nach.",
-            "Ich behalte das für mich und sage niemandem etwas."
+            "Nein, ich möchte das nicht.",
+            "Ich darf niemals Nein sagen."
           ],
           "correct": 0,
-          "hint": "Schau auf die Übung.",
-          "explain": "Die Übung der Stunde ist der erste Satz. Der zweite Satz ist das Gegenteil von dem, was wir üben."
+          "hint": "Erinnere dich an unsere Stunde.",
+          "explain": "Ein Kind darf seine Körpergrenzen schützen."
         },
         {
           "type": "choice",
-          "prompt": "Woran hält sich diese Stunde?",
+          "prompt": "Du hast Angst wegen einer Berührung. Was darfst du tun?",
           "options": [
-            "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "Einer erwachsenen Vertrauensperson davon erzählen.",
+            "Es für immer geheim halten."
           ],
           "correct": 0,
-          "hint": "Nur Gelesenes.",
-          "explain": "Die Stunde nennt Qurʾān 4:148 und trennt die Übung davon. Eine Nummer wird nicht erfunden."
+          "hint": "Erinnere dich an unsere Stunde.",
+          "explain": "Bei Angst und Übergriffen ist Hilfeholen richtig."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Stelle trägt Nein sagen und persönliche Sicherheit?",
+          "prompt": "Was kannst du bei einer unerwünschten Berührung tun?",
           "options": [
-            "Qurʾān 4:148",
-            "Eine Stelle ohne Suren- und Verszahl."
+            "Nein sagen, weggehen und eine Vertrauensperson suchen.",
+            "Schweigen, obwohl du Angst hast."
           ],
           "correct": 0,
-          "hint": "Die Fundstelle steht im Unterricht.",
-          "explain": "Die Stunde bleibt bei Qurʾān 4:148."
+          "hint": "Erinnere dich an unsere Stunde.",
+          "explain": "Wir üben einen sicheren Weg zur Hilfe."
         },
         {
           "type": "choice",
-          "prompt": "Was sagt der Vers sinngemäß für diese Stunde?",
+          "prompt": "Was bedeutet die Schutzregel der Stunde?",
           "options": [
-            "Dieselbe gelesene Stelle wie in der Stunde über die eigene Grenze sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer.",
-            "Ich behalte das für mich und sage niemandem etwas."
+            "Betroffene Kinder dürfen Unrecht benennen und Hilfe holen.",
+            "Betroffene Kinder sind selbst schuld."
           ],
           "correct": 0,
-          "hint": "Der erste Satz folgt der gelesenen Stelle.",
-          "explain": "Die deutsche Zeile ist eine Unterrichtshilfe zu Qurʾān 4:148, keine beglaubigte Übersetzung."
+          "hint": "Erinnere dich an unsere Stunde.",
+          "explain": "Qurʾān 4:148 behandelt Unrecht; unser Hilfesatz ist eine Übung."
         },
         {
           "type": "text",
-          "prompt": "Welche Übung gehört zu dieser Stunde?",
-          "sample": "Wir üben nur den Satz und den Weg zu einer bekannten erwachsenen Person. Wir spielen keine Berührung nach.",
-          "hint": "Die praktische Aufgabe.",
-          "explain": "Die Übung ist die genannte Handlung und nicht eine zusätzliche Formel."
+          "prompt": "Wen fragst du, wenn die erste erwachsene Person nicht hilft?",
+          "sample": "Eine andere vertrauenswürdige erwachsene Person.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Es darf mehr als eine Vertrauensperson geben."
         }
       ],
       "9-10": [
         {
           "type": "choice",
-          "prompt": "Welche Angabe wäre unehrlich?",
+          "prompt": "Welche Aussage trifft Qurʾān 4:148?",
           "options": [
-            "Ein Rechtsurteil oder eine Hadithnummer als gelesen auszugeben, obwohl die Seite sie nicht liefert.",
-            "Zu sagen, dass die deutsche Erklärung sinngemäß ist."
+            "Er berücksichtigt denjenigen, dem Unrecht geschehen ist.",
+            "Er beschreibt genau, wie man jede Berührung beurteilt."
           ],
           "correct": 0,
-          "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "hint": "Erinnere dich an unsere Stunde.",
+          "explain": "Die Details der Schutzregel sind pädagogische Anwendung."
         },
         {
           "type": "text",
-          "prompt": "Was darf diese Stunde nicht behaupten?",
-          "sample": "Der Vers beschreibt keine Körperstelle und keine Strafe.",
-          "hint": "Die Grenze steht im Text.",
-          "explain": "Die Grenze schützt davor, den Vers zu überdehnen."
+          "prompt": "Welche drei Schritte gehören zu persönlicher Sicherheit?",
+          "sample": "Nein sagen, wenn möglich weggehen und einem vertrauenswürdigen Erwachsenen berichten.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Kinder dürfen Hilfe suchen."
         },
         {
           "type": "text",
-          "prompt": "Wie lautet die Qurʾān-Stelle?",
-          "sample": "Qurʾān 4:148",
-          "hint": "Sure und Vers.",
-          "explain": "Die Stelle ist Qurʾān 4:148 auf der genannten Islamweb-Seite."
+          "prompt": "Warum dürfen Kinder belastende Erlebnisse nicht nachspielen müssen?",
+          "sample": "Weil Schutz, freiwillige Teilnahme und die Privatsphäre der Kinder wichtiger sind.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Niemand muss persönliche Erfahrungen offenlegen."
         }
       ]
     },
