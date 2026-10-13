@@ -10,7 +10,8 @@
     "arabicQuranRecitationIsSeparate": true,
     "reviewRequiredBeforePublicPlayback": true,
     "autoPublishUnreviewed": false,
-    "generateCreditsUsed": 0
+    "generateCreditsUsed": 0,
+    "quranArabicExcludedFromSyntheticNarration": true
   },
   "lessonCount": 4,
   "curriculumIds": [
@@ -19,7 +20,7 @@
     "dua-nach-aufwachen-dankbar",
     "family-streit-ohne-gewalt-loesen"
   ],
-  "phraseCount": 220,
+  "phraseCount": 219,
   "phrases": [
     {
       "text": "Al-Buḫārī 5017 überliefert, dass der Prophet ﷺ die Sūrah gemeinsam mit al-Ikhlāṣ und an-Nās vor dem Schlafen las.",
@@ -1328,21 +1329,6 @@
           "lessonId": "dua-nach-aufwachen-dankbar",
           "kind": "sample",
           "age": "9-10"
-        }
-      ]
-    },
-    {
-      "text": "قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ – Ich suche Schutz beim Herrn des Tagesanbruchs.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 1,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "quran-al-falaq-kennenlernen",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
