@@ -46,6 +46,30 @@ Diese Beispiele sind **als konkrete Quellen** verwendbar, aber jede Übertragung
 
 **Vorhandene 208 Quellendatensätze:** `kids/data/academy-source-register-208-v1.json` enthält pro Slot Titel, vorhandene Qurʾān-/Ḥadīṯ-Fundstelle, vorhandene Direkt-URL, fehlende Evidenz und Prüfstatus. Alle 118 offenen Themen besitzen bereits Titel/Lernsituation aus der Roadmap; ihnen werden **erst nach echter Recherche** exakte Verse und Authentizitätsangaben zugeordnet. Die 90 vorhandenen Lektionen dürfen ebenso wenig ungeprüft veröffentlicht werden.
 
+## 1A. KONKRETES QUELLEN-AUDIT — ORIGINALSEITEN AM 13.10.2026 GELESEN
+
+**Dies ist der überprüfte Ausgangsbestand, kein pauschaler Freigabenachweis für andere Lektionen.** Die nachfolgenden sieben Dorar-Seiten wurden auf das tatsächlich sichtbare arabische Matn, den Ṣaḥābī, die Sammlung und die genannte Nummer gegengeprüft. Beim Einsetzen in einen neuen Unterricht ist jedes Zitat samt Wortlaut, Kontext, eventuellen Varianten und Relevanz **erneut je Behauptung** zu prüfen. Die aktuelle Masterquelle für die strukturierte Ausgangsliste bleibt `kids/data/academy-source-bank-researched-v1.json`.
+
+| Fachliches Thema | Beleg / Überlieferer | Direktquelle | Prüfhürde vor Verwendung |
+| --- | --- | --- | --- |
+| Absicht / Niyyah | Ṣaḥīḥ al-Buḫārī 1, ʿUmar ibn al-Ḫaṭṭāb | https://dorar.net/hadith/sharh/3429 | Absicht der Handlungen, nicht automatisch Beleg für jede Schulroutine |
+| Wuḍūʾ nach Ḥadaṯ | Ṣaḥīḥ al-Buḫārī 135, Abū Hurayrah | https://dorar.net/hadith/sharh/6252 | Auf derselben Dorar-Seite stehen auch Ibn Ḥazm und al-Muḥallā; **den separaten al-Buḫārī-135-Eintrag** nachprüfen |
+| Mit Zunge und Hand niemanden schädigen | Ṣaḥīḥ al-Buḫārī 10, ʿAbdullāh ibn ʿAmr | https://dorar.net/hadith/sharh/7256 | Konkrete Formulierung und Belegkontext prüfen |
+| Gutes für den Bruder wünschen | Ṣaḥīḥ al-Buḫārī 13 / Muslim 45, Anas ibn Mālik | https://dorar.net/hadith/sharh/7319 | Die Muslim-Version enthält eine zusätzliche Variante »oder seinem Nachbarn«; den Wortlaut **nicht** unterschiedslos als al-Buḫārī 13 ausgeben |
+| Sich um das Nützliche bemühen | Ṣaḥīḥ Muslim 2664, Abū Hurayrah | https://dorar.net/hadith/sharh/135180 | Die Seite beginnt mit einer Einordnung durch Ibn Taymiyyah; der **eigenständige Ṣaḥīḥ-Muslim-2664-Eintrag** steht darunter |
+| Hilfe und Wissen | Ṣaḥīḥ Muslim 2699, Abū Hurayrah | https://dorar.net/hadith/sharh/62058 | Die Kurzfassung nennt al-Albānī / Ṣaḥīḥ al-Ǧāmiʿ; den **längeren Muslim-2699-Text** zur Kinderanwendung heranziehen |
+| Verantwortung für Anvertraute | Ṣaḥīḥ al-Buḫārī 893 / Muslim 1829, ʿAbdullāh ibn ʿUmar | https://dorar.net/hadith/sharh/6192 | Pflichten der Erwachsenen niemals als Verantwortung für das Schutzbedürfnis eines Kindes ausgeben |
+
+**Zwei wesentlich verschiedene Evidenzstände:**
+- Die **90 bereits programmierten Unterrichtsplätze** sind Code-Entwürfe. Das Quellenregister zeigt 90 bestehende, aber noch unabhängig zu prüfende Fälle; die Zahl der Altersfassungen, sourceAudit-Datensätze und externen Stichproben ist gesondert zu zählen. Kein Unterricht ist allein durch sein `verifiedDate` autorisiert.
+- Die **118 offenen Slots 91–208** haben Originalthemen, Altersziele, Szenarien und eine Liste möglicher Qurʾān-Verse in `kids/research/academy-118-quran-candidates-v1.json`. **Aktuell sind in dieser Kandidatendatei 0 Verse, 0 Ḥadīṯe und 0 Ḥadīṯ-Direktlinks individuell verifiziert.** Das sind Suchansätze, keine vorausrecherchierten Belegzitate. Die späteren Quellen müssen vollständig neu am Original überprüft werden.
+
+**Quellentypen für weitere systematische Suche:** Exakte arabische Qurʾān-Stellen, aṭ-Ṭabarī / Ibn Abī Ḥātim / al-Baġawī / Ibn Kaṯīr für Einordnung mit Fundstelle, al-Buḫārī und Muslim sowie authentisch geprüfte ergänzende Sunan, belegte Āṯār der Ṣaḥābah und Salaf; hanbalitischer Fiqh über Ibn Qudāmah (`al-Mughnī`, `al-Kāfī`), bei Bedarf al-Mardāwī (`al-Inṣāf`), jeweils tatsächlich geprüfte Ausgabe, Kapitel und Stelle. Nicht alle Bücher/Autoren gehören zu jeder Lektion. Fehlende direkte Quellen sind ein sichtbarer Rechercheauftrag, kein Anlass zur Erfindung.
+
+**Prüfprotokoll je Quelle:** Sucheingabe → genaue Originalfundstelle → arabisches Quellzitat/Teilauszug → tatsächlicher Sprecher/Erzähler → Werk/Nummer/Auflage/Band/Seite → Grad/Isnād (falls relevant) → überprüfte direkte URL → thematische Aussage und Kontext → deutsche sinngemäße Bedeutung → pädagogische Ableitung → Prüfer/Datum → Review-Gate. Bei HTTP-Fehler oder inhaltlichem Widerspruch = STOPP und als ungelöst markieren.
+
+---
+
 ## 2. ZIEL UND KANONISCHER UNTERRICHTSPLAN
 
 - **52 Wochen** × **4 neue Lektionen** = **208 eigenständige Themen**.
