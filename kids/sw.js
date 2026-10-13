@@ -1,8 +1,8 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1350";
+const CACHE_NAME="dar-al-tawhid-kids-v1351";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 // KIDS_V202_DOWNLOAD_TABS_RELEASE_TRIGGER_20261010: detail-only offline controls; manifest V202 synchronized.
-const KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306";
+const KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306-listen-gradient-v11";
 const DUA_AUDIO_RUNTIME="1244";
 // QUIZ_HOME_RESTORE_V1225: refresh installed PWAs with the restored Quiz entry.
 const CORE_PRECACHE=[
@@ -96,7 +96,7 @@ const CORE_PRECACHE=[
   "/kids/story-card-system.css?v=2",
   "/kids/mubashshirun-stories.js?v=33",
   "/kids/sahabiyyat-stories.js?v=25",
-  "/kids/story-follow-reader.css?v=10",
+  "/kids/story-follow-reader.css?v=11",
   "/kids/screen-awake.js?v=1",
   "/kids/story-follow-reader.js?v=17",
   "/kids/story-hub.css?v=12",
