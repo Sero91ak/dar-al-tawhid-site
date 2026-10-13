@@ -210,7 +210,7 @@ function installTopScrollBoundaryGuard(){
   const shell=document.querySelector(".shell");
   if(!shell||shell.dataset.kidsTopEdgeGuard)return;
   shell.dataset.kidsTopEdgeGuard="v1411";
-  const detailSelector=".shell > .view.active.kids-detail-page, #salafDetail:not([hidden]), .modal.open, .duahub-detail.open";
+  const detailSelector=".shell > .view.active.kids-detail-page, #salafDetail:not([hidden]), .modal.open, .duahub-detail.open, .ps-modal.open, .ms-modal.open, #ghPlayer.open";
   let previousX=null,previousY=null,startTarget=null;
   function scrollableAncestorAboveTop(target){
     for(let node=target;node&&node!==document.body;node=node.parentElement){
