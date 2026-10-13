@@ -77,7 +77,10 @@ assert.match(offline.getNode("sourceList").innerHTML, /href="\/q\/37\/"/);
   assert.match(royalCss, /body\.qsource-body \.qsource-page\{[\s\S]*?padding-top:var\(--ql-safe-header-offset\)/, "Q page must begin below iPhone status bar");
   assert.match(royalCss, /body\.qsource-body \.qsource-header\{[\s\S]*?position:sticky;[\s\S]*?top:var\(--ql-safe-header-offset\)/, "Q logo and theme control must remain at the same height when scrolling");
   assert.match(royalCss, /overflow-x:clip!important/, "iOS overflow must not break sticky positioning");
-  assert.match(html, /royal-v42-ios-safe-20261011/, "Refresh the mobile stylesheet cache");
+  assert.match(html, /qapp-toolbar-20261013-1/, "Refresh the mobile stylesheet cache");
+  assert.match(html, /q-source-app-view\.js/, "App-frame source navigation must load in owner library");
+  assert.match(royalJs, /Einzelner Quellenbeleg/, "Individual Q must remain standalone");
+  assert.doesNotMatch(royalJs, /renderNeighbors|back\.href\s*=\s*"\/quellen\//, "No previous/next Q or owner-index link for public readers");
 
   assert.match(html, /watermark-my-logo-full\.png/, "Original official logo required");
   assert.match(html, /PRIMARY_CATEGORIES/, "Editorial categories must be explicitly curated");
@@ -138,8 +141,6 @@ assert.match(offline.getNode("sourceList").innerHTML, /href="\/q\/37\/"/);
   for (const [path, target] of [
     ["/quellen", "/quellen/"],
     ["/quellen/index.html", "/quellen/"],
-    ["/q", "/quellen/"],
-    ["/q/", "/quellen/"],
     ["/q/40", "/q/40/"],
     ["/q/40/index.html", "/q/40/"]
   ]) {
@@ -147,6 +148,8 @@ assert.match(offline.getNode("sourceList").innerHTML, /href="\/q\/37\/"/);
     assert.equal(response.status, 308, path);
     assert.equal(response.headers.get("Location"), target, path);
   }
+  assert.equal((await checkRoute("/q")).status,404,"Bare Q route must not expose the private index");
+  assert.equal((await checkRoute("/q/")).status,404,"Bare Q route must not expose the private index");
   assert.deepEqual(requested, ["/quellen/", "/quellen/shortlinks.json", "/q/40/", "/q/37/"]);
   const sw = fs.readFileSync("service-worker.js", "utf8");
   new vm.Script(sw, { filename: "service-worker.js" });
