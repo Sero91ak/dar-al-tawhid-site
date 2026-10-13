@@ -1049,3 +1049,167 @@ html.dar-test-nav-rotating #bottomNav .nav-icon {
   html.dar-test-side-nav #bottomNav.bottom-nav,
   html.dar-test-nav-rotating #bottomNav.bottom-nav {transition:none!important}
 }
+
+
+/* FOLD8_VIEWPORT_RAIL_AUTHORITY_V1375
+   Actual Galaxy Z Fold8 Test screenshots: previous bottom-nav authorities
+   (test/assets/bottom-nav-global-v1120.css etc.) outranked low-specificity
+   Duos overrides, centering the "side" bar and stretching 5 tabs to ~400px.
+   This authority has TWO IDs and matches body/theme specificity. Preserve
+   the one original #bottomNav and all delegated navigation handlers. */
+html[data-theme].dar-test-side-nav body.has-bottom-nav #appChromeDock.app-chrome-dock{
+  display:contents!important;
+  transform:none!important;
+  -webkit-transform:none!important;
+  contain:none!important;
+}
+html[data-theme].dar-test-side-nav body.has-bottom-nav #appChromeDock.app-chrome-dock #bottomNav.bottom-nav,
+html.dar-test-side-nav body.has-bottom-nav #appChromeDock.app-chrome-dock #bottomNav.bottom-nav,
+html[data-theme].dar-test-side-nav body.has-bottom-nav #bottomNav.bottom-nav,
+html.dar-test-side-nav body.has-bottom-nav #bottomNav.bottom-nav {
+  position:fixed!important;
+  top:var(--dar-duos-rail-top,24px)!important;
+  bottom:auto!important;
+  margin:0!important;
+  width:68px!important;
+  min-width:68px!important;
+  max-width:68px!important;
+  height:var(--dar-duos-rail-height,268px)!important;
+  min-height:0!important;
+  max-height:var(--dar-duos-rail-height,268px)!important;
+  padding:8px!important;
+  gap:0!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:space-evenly!important;
+  border-radius:30px!important;
+  box-sizing:border-box!important;
+  -webkit-transform:none!important;
+  transform:none!important;
+  overflow:hidden!important;
+  opacity:1!important;
+  visibility:visible!important;
+  pointer-events:auto!important;
+  z-index:96!important;
+  transition:none!important;
+  /* Respect active theme palette rather than forcing royal blue or black. */
+  background:color-mix(in srgb,var(--card,var(--bg,#101412)) 91%,var(--bg,#080806))!important;
+  border:1px solid color-mix(in srgb,var(--text,#fff) 16%,transparent)!important;
+  -webkit-backdrop-filter:blur(15px) saturate(1.15)!important;
+  backdrop-filter:blur(15px) saturate(1.15)!important;
+}
+html[data-theme].dar-test-side-nav[data-dar-nav-position="right"] body.has-bottom-nav #appChromeDock.app-chrome-dock #bottomNav.bottom-nav,
+html.dar-test-side-nav[data-dar-nav-position="right"] body.has-bottom-nav #appChromeDock.app-chrome-dock #bottomNav.bottom-nav,
+html[data-theme].dar-test-side-nav[data-dar-nav-position="right"] body.has-bottom-nav #bottomNav.bottom-nav,
+html.dar-test-side-nav[data-dar-nav-position="right"] body.has-bottom-nav #bottomNav.bottom-nav {
+  left:auto!important;
+  right:max(12px,env(safe-area-inset-right,0px))!important;
+  margin:0!important;
+}
+html[data-theme].dar-test-side-nav[data-dar-nav-position="left"] body.has-bottom-nav #appChromeDock.app-chrome-dock #bottomNav.bottom-nav,
+html.dar-test-side-nav[data-dar-nav-position="left"] body.has-bottom-nav #appChromeDock.app-chrome-dock #bottomNav.bottom-nav,
+html[data-theme].dar-test-side-nav[data-dar-nav-position="left"] body.has-bottom-nav #bottomNav.bottom-nav,
+html.dar-test-side-nav[data-dar-nav-position="left"] body.has-bottom-nav #bottomNav.bottom-nav {
+  left:max(12px,env(safe-area-inset-left,0px))!important;
+  right:auto!important;
+  margin:0!important;
+}
+html[data-theme].dar-test-side-nav body.has-bottom-nav #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn,
+html[data-theme].dar-test-side-nav body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn,
+html.dar-test-side-nav body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn {
+  position:relative!important;
+  flex:0 0 48px!important;
+  display:grid!important;
+  place-items:center!important;
+  width:52px!important;
+  height:48px!important;
+  min-height:44px!important;
+  max-height:48px!important;
+  min-width:0!important;
+  max-width:52px!important;
+  padding:0!important;
+  margin:0!important;
+  gap:0!important;
+  border-radius:18px!important;
+  opacity:1!important;
+  pointer-events:auto!important;
+  touch-action:manipulation!important;
+}
+html[data-theme].dar-test-side-nav body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon,
+html.dar-test-side-nav body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon {
+  display:grid!important;
+  place-items:center!important;
+  width:46px!important;
+  height:46px!important;
+  min-width:46px!important;
+  min-height:46px!important;
+  max-width:46px!important;
+  max-height:46px!important;
+  padding:0!important;
+  margin:0!important;
+  opacity:1!important;
+  visibility:visible!important;
+  transform:none!important;
+}
+html[data-theme].dar-test-side-nav body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon img.dar3d-icon,
+html.dar-test-side-nav body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon img.dar3d-icon {
+  width:100%!important;
+  height:100%!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  display:block!important;
+  object-fit:contain!important;
+  opacity:1!important;
+  visibility:visible!important;
+}
+/* Fold8 Propheten: the grid, detail, scroll tabs and 3D cards must fit the
+   content lane, not the entire hardware viewport. The 120px rail reserve
+   already exists on BODY and is not added again within the detail pane. */
+html.dar-test-side-nav body.is-propheten-route #appView,
+html.dar-test-side-nav body.is-propheten-route .prophets-root,
+html.dar-test-side-nav body.is-propheten-route .prophets-shell,
+html.dar-test-side-nav body.is-propheten-route .prophets-layout,
+html.dar-test-side-nav body.is-propheten-route .prophets-pane,
+html.dar-test-side-nav body.is-propheten-route .prophets-rail,
+html.dar-test-side-nav body.is-propheten-route .prophets-detail {
+  box-sizing:border-box!important;
+  min-width:0!important;
+  max-width:100%!important;
+}
+html.dar-test-side-nav body.is-propheten-route #appView {
+  width:min(100%,calc(100vw - var(--dar-side-nav-reserve,120px) - env(safe-area-inset-right,0px) - env(safe-area-inset-left,0px)))!important;
+  margin-inline:0!important;
+}
+html.dar-test-side-nav body.is-propheten-route .prophets-root,
+html.dar-test-side-nav body.is-propheten-route .prophets-shell,
+html.dar-test-side-nav body.is-propheten-route .prophets-layout{
+  width:100%!important;
+}
+html.dar-test-side-nav body.is-propheten-route .prophets-layout--dual{
+  grid-template-columns:clamp(270px,34%,380px) minmax(0,1fr)!important;
+}
+html.dar-test-side-nav body.is-propheten-route .prophets-tabs,
+html.dar-test-side-nav body.is-propheten-route .prophets-filters {
+  min-width:0!important;
+  max-width:100%!important;
+  overflow-x:auto!important;
+  overscroll-behavior-inline:contain;
+}
+html.dar-test-side-nav body.is-propheten-route .prophets-pane{
+  overflow-x:clip!important;
+}
+/* Graceful single-pane fallback when less than 650px really remains AFTER
+   subtracting the side-rail. Do not squeeze the profile detail under a dock. */
+@container prophets (max-width:650px) {
+  html.dar-test-side-nav body.is-propheten-route .prophets-layout--dual {
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+  html.dar-test-side-nav body.is-propheten-route .prophets-layout--dual .prophets-rail,
+  html.dar-test-side-nav body.is-propheten-route .prophets-layout--dual .prophets-pane {
+    position:relative!important;
+    max-height:none!important;
+    overflow:visible!important;
+    padding:0 0 16px!important;
+  }
+}
