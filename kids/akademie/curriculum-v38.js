@@ -2897,7 +2897,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers spricht vom Wissen Allahs über das Verborgene der Brust. Wir machen daraus keine Behauptung, ein Mensch könne Gedanken lesen. Eine Hadithnummer wurde nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Vers spricht vom Wissen Allahs über das Verborgene der Brust. Wir machen daraus keine Behauptung, ein Mensch könne Gedanken lesen. Eine Hadithnummer wurde nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Allah kennt auch das, was kein Mensch lobt.",
@@ -2930,7 +2930,7 @@ const additions=
       },
       "6-8": {
         "goal": "Allah kennt auch das, was kein Mensch lobt.",
-        "intro": "Heute geht es um Allah kennt unser Handeln. Allah kennt auch das, was kein Mensch lobt. Wir lesen Qurʾān 67:13. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt: Ob ihr eure Rede verbergt oder sie laut sagt, Er weiß, was in den Brüsten ist. So kann das im Alltag aussehen: Ein Kind räumt einen Stift weg, den niemand gesehen hat, und erwartet dafür kein Lob. Die Aufgabe: Wir nennen eine kleine gute Tat, die man tun kann, ohne sie sofort zu erzählen. asrara bedeutet: verbergen. ṣudūr bedeutet: Brüste, hier der Ort der inneren Gedanken im Vers. Die Grenze der Stunde: Der Vers spricht vom Wissen Allahs über das Verborgene der Brust. Wir machen daraus keine Behauptung, ein Mensch könne Gedanken lesen. Eine Hadithnummer wurde nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Allah kennt unser Handeln. Allah kennt auch das, was kein Mensch lobt. Wir lesen Qurʾān 67:13. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt: Ob ihr eure Rede verbergt oder sie laut sagt, Er weiß, was in den Brüsten ist. So kann das im Alltag aussehen: Ein Kind räumt einen Stift weg, den niemand gesehen hat, und erwartet dafür kein Lob. Die Aufgabe: Wir nennen eine kleine gute Tat, die man tun kann, ohne sie sofort zu erzählen. asrara bedeutet: verbergen. ṣudūr bedeutet: Brüste, hier der Ort der inneren Gedanken im Vers. Die Grenze der Stunde: Der Vers spricht vom Wissen Allahs über das Verborgene der Brust. Wir machen daraus keine Behauptung, ein Mensch könne Gedanken lesen. Eine Hadithnummer wurde nicht ergänzt.",
         "lines": [
           "Qurʾān 67:13 ist die gelesene Stelle.",
           "Der Vers sagt: Ob ihr eure Rede verbergt oder sie laut sagt, Er weiß, was in den Brüsten ist.",
@@ -2956,7 +2956,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Allah kennt unser Handeln von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Allah kennt unser Handeln. Das Lernziel ist: Allah kennt auch das, was kein Mensch lobt. Die Seite https://www.islamweb.net/ar/library/content/49/1875 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 67:13. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt: Ob ihr eure Rede verbergt oder sie laut sagt, Er weiß, was in den Brüsten ist. Alltag: Ein Kind räumt einen Stift weg, den niemand gesehen hat, und erwartet dafür kein Lob. Aufgabe: Wir nennen eine kleine gute Tat, die man tun kann, ohne sie sofort zu erzählen. asrara bedeutet: verbergen. ṣudūr bedeutet: Brüste, hier der Ort der inneren Gedanken im Vers. Was nicht behauptet wird: Der Vers spricht vom Wissen Allahs über das Verborgene der Brust. Wir machen daraus keine Behauptung, ein Mensch könne Gedanken lesen. Eine Hadithnummer wurde nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Allah kennt unser Handeln. Das Lernziel ist: Allah kennt auch das, was kein Mensch lobt. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt: Ob ihr eure Rede verbergt oder sie laut sagt, Er weiß, was in den Brüsten ist. Alltag: Ein Kind räumt einen Stift weg, den niemand gesehen hat, und erwartet dafür kein Lob. Aufgabe: Wir nennen eine kleine gute Tat, die man tun kann, ohne sie sofort zu erzählen. asrara bedeutet: verbergen. ṣudūr bedeutet: Brüste, hier der Ort der inneren Gedanken im Vers. Was nicht behauptet wird: Der Vers spricht vom Wissen Allahs über das Verborgene der Brust. Wir machen daraus keine Behauptung, ein Mensch könne Gedanken lesen. Eine Hadithnummer wurde nicht ergänzt.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 67:13.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -2978,7 +2978,7 @@ const additions=
         "situation": "Ein Kind räumt einen Stift weg, den niemand gesehen hat, und erwartet dafür kein Lob.",
         "practice": "Wir nennen eine kleine gute Tat, die man tun kann, ohne sie sofort zu erzählen.",
         "summary": "Belegt ist Qurʾān 67:13. Ungeprüft bleibt: Der Vers spricht vom Wissen Allahs über das Verborgene der Brust.",
-        "audioScript": "Für die älteren Kinder. Allah kennt unser Handeln. Der Vers sagt: Ob ihr eure Rede verbergt oder sie laut sagt, Er weiß, was in den Brüsten ist. Nicht belegt und deshalb nicht behauptet: Der Vers spricht vom Wissen Allahs über das Verborgene der Brust."
+        "audioScript": "Allah kennt unser Handeln. Der Vers sagt: Ob ihr eure Rede verbergt oder sie laut sagt, Er weiß, was in den Brüsten ist. Nicht belegt und deshalb nicht behauptet: Der Vers spricht vom Wissen Allahs über das Verborgene der Brust."
       }
     },
     "questions": {
@@ -3114,7 +3114,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der gespeicherte Auszug ist lang und nennt mehrere Gesandte. Was nach dem gespeicherten Stück im Vers noch folgt, wird nicht aus dem Gedächtnis ergänzt. Eine Hadithnummer fehlt auf der verwendeten Stelle. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der gespeicherte Auszug ist lang und nennt mehrere Gesandte. Was nach dem gespeicherten Stück im Vers noch folgt, wird nicht aus dem Gedächtnis ergänzt. Eine Hadithnummer fehlt auf der verwendeten Stelle. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Wir erfinden keine zusätzliche Geschichte.",
     "sample": "Allah hat Gesandte geschickt.",
@@ -3147,7 +3147,7 @@ const additions=
       },
       "6-8": {
         "goal": "Allah hat Gesandte geschickt.",
-        "intro": "Heute geht es um Īmān an die Gesandten. Allah hat Gesandte geschickt. Wir lesen Qurʾān 2:136. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers fordert auf zu sagen: Wir glauben an Allah und an das, was zu uns und zu den genannten Propheten herabgesandt wurde, und wir machen zwischen keinem Seiner Gesandten einen Unterschied. So kann das im Alltag aussehen: Ein Kind hört mehrere Prophetnamen und sagt bei jedem: Friede sei mit ihm. Die Aufgabe: Wir nennen drei Namen nur so, wie sie im Vers stehen, und erfinden keine zusätzliche Geschichte. rusul bedeutet: Gesandte. lā nufarriqu bedeutet: wir machen keinen Unterschied. Die Grenze der Stunde: Der gespeicherte Auszug ist lang und nennt mehrere Gesandte. Was nach dem gespeicherten Stück im Vers noch folgt, wird nicht aus dem Gedächtnis ergänzt. Eine Hadithnummer fehlt auf der verwendeten Stelle. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Īmān an die Gesandten. Allah hat Gesandte geschickt. Wir lesen Qurʾān 2:136. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers fordert auf zu sagen: Wir glauben an Allah und an das, was zu uns und zu den genannten Propheten herabgesandt wurde, und wir machen zwischen keinem Seiner Gesandten einen Unterschied. So kann das im Alltag aussehen: Ein Kind hört mehrere Prophetnamen und sagt bei jedem: Friede sei mit ihm. Die Aufgabe: Wir nennen drei Namen nur so, wie sie im Vers stehen, und erfinden keine zusätzliche Geschichte. rusul bedeutet: Gesandte. lā nufarriqu bedeutet: wir machen keinen Unterschied. Die Grenze der Stunde: Der gespeicherte Auszug ist lang und nennt mehrere Gesandte. Was nach dem gespeicherten Stück im Vers noch folgt, wird nicht aus dem Gedächtnis ergänzt. Eine Hadithnummer fehlt auf der verwendeten Stelle.",
         "lines": [
           "Qurʾān 2:136 ist die gelesene Stelle.",
           "Der Vers fordert auf zu sagen: Wir glauben an Allah und an das, was zu uns und zu den genannten Propheten herabgesandt wurde, und wir machen zwischen keinem Seiner Gesandten einen.",
@@ -3173,7 +3173,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Īmān an die Gesandten von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Īmān an die Gesandten. Das Lernziel ist: Allah hat Gesandte geschickt. Die Seite https://www.islamweb.net/ar/library/content/49/140 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:136. Sinngemäß, keine beglaubigte Übersetzung: Der Vers fordert auf zu sagen: Wir glauben an Allah und an das, was zu uns und zu den genannten Propheten herabgesandt wurde, und wir machen zwischen keinem Seiner Gesandten einen Unterschied. Alltag: Ein Kind hört mehrere Prophetnamen und sagt bei jedem: Friede sei mit ihm. Aufgabe: Wir nennen drei Namen nur so, wie sie im Vers stehen, und erfinden keine zusätzliche Geschichte. rusul bedeutet: Gesandte. lā nufarriqu bedeutet: wir machen keinen Unterschied. Was nicht behauptet wird: Der gespeicherte Auszug ist lang und nennt mehrere Gesandte. Was nach dem gespeicherten Stück im Vers noch folgt, wird nicht aus dem Gedächtnis ergänzt. Eine Hadithnummer fehlt auf der verwendeten Stelle. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Īmān an die Gesandten. Das Lernziel ist: Allah hat Gesandte geschickt. Sinngemäß, keine beglaubigte Übersetzung: Der Vers fordert auf zu sagen: Wir glauben an Allah und an das, was zu uns und zu den genannten Propheten herabgesandt wurde, und wir machen zwischen keinem Seiner Gesandten einen Unterschied. Alltag: Ein Kind hört mehrere Prophetnamen und sagt bei jedem: Friede sei mit ihm. Aufgabe: Wir nennen drei Namen nur so, wie sie im Vers stehen, und erfinden keine zusätzliche Geschichte. rusul bedeutet: Gesandte. lā nufarriqu bedeutet: wir machen keinen Unterschied. Was nicht behauptet wird: Der gespeicherte Auszug ist lang und nennt mehrere Gesandte. Was nach dem gespeicherten Stück im Vers noch folgt, wird nicht aus dem Gedächtnis ergänzt. Eine Hadithnummer fehlt auf der verwendeten Stelle.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 2:136.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -3195,7 +3195,7 @@ const additions=
         "situation": "Ein Kind hört mehrere Prophetnamen und sagt bei jedem: Friede sei mit ihm.",
         "practice": "Wir nennen drei Namen nur so, wie sie im Vers stehen, und erfinden keine zusätzliche Geschichte.",
         "summary": "Belegt ist Qurʾān 2:136. Ungeprüft bleibt: Der gespeicherte Auszug ist lang und nennt mehrere Gesandte.",
-        "audioScript": "Für die älteren Kinder. Īmān an die Gesandten. Der Vers fordert auf zu sagen: Wir glauben an Allah und an das, was zu uns und zu den genannten Propheten herabgesandt wurde, und wir machen zwischen keinem Seiner Gesandten einen Unterschied. Nicht belegt und deshalb nicht behauptet: Der gespeicherte Auszug ist lang und nennt mehrere Gesandte."
+        "audioScript": "Īmān an die Gesandten. Der Vers fordert auf zu sagen: Wir glauben an Allah und an das, was zu uns und zu den genannten Propheten herabgesandt wurde, und wir machen zwischen keinem Seiner Gesandten einen Unterschied. Nicht belegt und deshalb nicht behauptet: Der gespeicherte Auszug ist lang und nennt mehrere Gesandte."
       }
     },
     "questions": {
@@ -3331,7 +3331,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der berühmte Hadith über die Absicht, der in der Quellenbank mit einer Buḫārī-Nummer steht, wurde auf Dorar nicht erneut geöffnet und wird hier nicht als neuer Beleg benutzt. Die Stunde bleibt beim Vers. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der berühmte Hadith über die Absicht, der in der Quellenbank mit einer Buḫārī-Nummer steht, wurde auf Dorar nicht erneut geöffnet und wird hier nicht als neuer Beleg benutzt. Die Stunde bleibt beim Vers. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel.",
@@ -3364,7 +3364,7 @@ const additions=
       },
       "6-8": {
         "goal": "Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel.",
-        "intro": "Heute geht es um Eine gute Absicht erneuern. Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel. Wir lesen Qurʾān 98:5. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass ihnen nur befohlen wurde, Allah aufzurichtig im Dīn zu dienen, als Ḥunafāʾ, das Gebet zu verrichten und die Zakāh zu geben. So kann das im Alltag aussehen: Ein Kind beginnt, der Mutter zu helfen, schaut dann weg und kehrt zur Hilfe zurück. Die Aufgabe: Wir sagen leise vor einer kleinen Tat: Ich mache das für Allah. muḫliṣīn bedeutet: aufrichtig, die Tat für Allah rein machend. dīn bedeutet: die Lebensweise des Dienens Allahs. Die Grenze der Stunde: Der berühmte Hadith über die Absicht, der in der Quellenbank mit einer Buḫārī-Nummer steht, wurde auf Dorar nicht erneut geöffnet und wird hier nicht als neuer Beleg benutzt. Die Stunde bleibt beim Vers. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Eine gute Absicht erneuern. Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel. Wir lesen Qurʾān 98:5. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass ihnen nur befohlen wurde, Allah aufzurichtig im Dīn zu dienen, als Ḥunafāʾ, das Gebet zu verrichten und die Zakāh zu geben. So kann das im Alltag aussehen: Ein Kind beginnt, der Mutter zu helfen, schaut dann weg und kehrt zur Hilfe zurück. Die Aufgabe: Wir sagen leise vor einer kleinen Tat: Ich mache das für Allah. muḫliṣīn bedeutet: aufrichtig, die Tat für Allah rein machend. dīn bedeutet: die Lebensweise des Dienens Allahs. Die Grenze der Stunde: Der berühmte Hadith über die Absicht, der in der Quellenbank mit einer Buḫārī-Nummer steht, wurde auf Dorar nicht erneut geöffnet und wird hier nicht als neuer Beleg benutzt. Die Stunde bleibt beim Vers.",
         "lines": [
           "Qurʾān 98:5 ist die gelesene Stelle.",
           "Der Vers sagt, dass ihnen nur befohlen wurde, Allah aufzurichtig im Dīn zu dienen, als Ḥunafāʾ, das Gebet zu verrichten und die Zakāh zu geben.",
@@ -3390,7 +3390,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Eine gute Absicht erneuern von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Eine gute Absicht erneuern. Das Lernziel ist: Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel. Die Seite https://www.islamweb.net/ar/library/content/49/1969 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 98:5. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass ihnen nur befohlen wurde, Allah aufzurichtig im Dīn zu dienen, als Ḥunafāʾ, das Gebet zu verrichten und die Zakāh zu geben. Alltag: Ein Kind beginnt, der Mutter zu helfen, schaut dann weg und kehrt zur Hilfe zurück. Aufgabe: Wir sagen leise vor einer kleinen Tat: Ich mache das für Allah. muḫliṣīn bedeutet: aufrichtig, die Tat für Allah rein machend. dīn bedeutet: die Lebensweise des Dienens Allahs. Was nicht behauptet wird: Der berühmte Hadith über die Absicht, der in der Quellenbank mit einer Buḫārī-Nummer steht, wurde auf Dorar nicht erneut geöffnet und wird hier nicht als neuer Beleg benutzt. Die Stunde bleibt beim Vers. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Eine gute Absicht erneuern. Das Lernziel ist: Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass ihnen nur befohlen wurde, Allah aufzurichtig im Dīn zu dienen, als Ḥunafāʾ, das Gebet zu verrichten und die Zakāh zu geben. Alltag: Ein Kind beginnt, der Mutter zu helfen, schaut dann weg und kehrt zur Hilfe zurück. Aufgabe: Wir sagen leise vor einer kleinen Tat: Ich mache das für Allah. muḫliṣīn bedeutet: aufrichtig, die Tat für Allah rein machend. dīn bedeutet: die Lebensweise des Dienens Allahs. Was nicht behauptet wird: Der berühmte Hadith über die Absicht, der in der Quellenbank mit einer Buḫārī-Nummer steht, wurde auf Dorar nicht erneut geöffnet und wird hier nicht als neuer Beleg benutzt. Die Stunde bleibt beim Vers.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 98:5.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -3412,7 +3412,7 @@ const additions=
         "situation": "Ein Kind beginnt, der Mutter zu helfen, schaut dann weg und kehrt zur Hilfe zurück.",
         "practice": "Wir sagen leise vor einer kleinen Tat: Ich mache das für Allah.",
         "summary": "Belegt ist Qurʾān 98:5. Ungeprüft bleibt: Der berühmte Hadith über die Absicht, der in der Quellenbank mit einer Buḫārī-Nummer steht, wurde auf Dorar nicht erneut geöffnet und wird hier nicht als neuer Beleg benutzt.",
-        "audioScript": "Für die älteren Kinder. Eine gute Absicht erneuern. Der Vers sagt, dass ihnen nur befohlen wurde, Allah aufzurichtig im Dīn zu dienen, als Ḥunafāʾ, das Gebet zu verrichten und die Zakāh zu geben. Nicht belegt und deshalb nicht behauptet: Der berühmte Hadith über die Absicht, der in der Quellenbank mit einer Buḫārī-Nummer steht, wurde auf Dorar nicht erneut geöffnet und wird hier nicht als neuer Beleg benutzt."
+        "audioScript": "Eine gute Absicht erneuern. Der Vers sagt, dass ihnen nur befohlen wurde, Allah aufzurichtig im Dīn zu dienen, als Ḥunafāʾ, das Gebet zu verrichten und die Zakāh zu geben. Nicht belegt und deshalb nicht behauptet: Der berühmte Hadith über die Absicht, der in der Quellenbank mit einer Buḫārī-Nummer steht, wurde auf Dorar nicht erneut geöffnet und wird hier nicht als neuer Beleg benutzt."
       }
     },
     "questions": {
@@ -3548,7 +3548,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Dieselbe Qurʾān-Stelle wurde schon für die Stunde über Dank und für die Stunde über Dank im Herzen gelesen. Hier ist das Lernziel das sichtbare Danken. Der Hadith über den Dank an die Menschen wird nicht erneut als neue Nummer eingeführt. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Dieselbe Qurʾān-Stelle wurde schon für die Stunde über Dank und für die Stunde über Dank im Herzen gelesen. Hier ist das Lernziel das sichtbare Danken. Der Hadith über den Dank an die Menschen wird nicht erneut als neue Nummer eingeführt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Wir sagen Danke, wenn uns jemand hilft.",
@@ -3581,7 +3581,7 @@ const additions=
       },
       "6-8": {
         "goal": "Wir sagen Danke, wenn uns jemand hilft.",
-        "intro": "Heute geht es um Dankbarkeit zeigen. Wir sagen Danke, wenn uns jemand hilft. Wir lesen Qurʾān 14:7. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers enthält die Zusage: Wenn ihr dankbar seid, werde Ich euch gewiss mehr geben. Der folgende Warnsatz der Seite wird in der Kinderstunde nicht als Drohbild verwendet. So kann das im Alltag aussehen: Jemand reicht ein Glas Wasser. Das Kind sagt Danke und blickt die Person an. Die Aufgabe: Wir üben Danke auf Deutsch und erinnern uns, dass Dank gegenüber Menschen den Dank gegenüber Allah nicht ersetzt. šukr bedeutet: Dankbarkeit. zīdah bedeutet: Mehrung; der Vers spricht davon, dass Allah mehrt. Die Grenze der Stunde: Dieselbe Qurʾān-Stelle wurde schon für die Stunde über Dank und für die Stunde über Dank im Herzen gelesen. Hier ist das Lernziel das sichtbare Danken. Der Hadith über den Dank an die Menschen wird nicht erneut als neue Nummer eingeführt. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Dankbarkeit zeigen. Wir sagen Danke, wenn uns jemand hilft. Wir lesen Qurʾān 14:7. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers enthält die Zusage: Wenn ihr dankbar seid, werde Ich euch gewiss mehr geben. Der folgende Warnsatz der Seite wird in der Kinderstunde nicht als Drohbild verwendet. So kann das im Alltag aussehen: Jemand reicht ein Glas Wasser. Das Kind sagt Danke und blickt die Person an. Die Aufgabe: Wir üben Danke auf Deutsch und erinnern uns, dass Dank gegenüber Menschen den Dank gegenüber Allah nicht ersetzt. šukr bedeutet: Dankbarkeit. zīdah bedeutet: Mehrung; der Vers spricht davon, dass Allah mehrt. Die Grenze der Stunde: Dieselbe Qurʾān-Stelle wurde schon für die Stunde über Dank und für die Stunde über Dank im Herzen gelesen. Hier ist das Lernziel das sichtbare Danken. Der Hadith über den Dank an die Menschen wird nicht erneut als neue Nummer eingeführt.",
         "lines": [
           "Qurʾān 14:7 ist die gelesene Stelle.",
           "Der Vers enthält die Zusage: Wenn ihr dankbar seid, werde Ich euch gewiss mehr geben.",
@@ -3607,7 +3607,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Dankbarkeit zeigen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Dankbarkeit zeigen. Das Lernziel ist: Wir sagen Danke, wenn uns jemand hilft. Die Seite https://www.islamweb.net/ar/library/content/49/891 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 14:7. Sinngemäß, keine beglaubigte Übersetzung: Der Vers enthält die Zusage: Wenn ihr dankbar seid, werde Ich euch gewiss mehr geben. Der folgende Warnsatz der Seite wird in der Kinderstunde nicht als Drohbild verwendet. Alltag: Jemand reicht ein Glas Wasser. Das Kind sagt Danke und blickt die Person an. Aufgabe: Wir üben Danke auf Deutsch und erinnern uns, dass Dank gegenüber Menschen den Dank gegenüber Allah nicht ersetzt. šukr bedeutet: Dankbarkeit. zīdah bedeutet: Mehrung; der Vers spricht davon, dass Allah mehrt. Was nicht behauptet wird: Dieselbe Qurʾān-Stelle wurde schon für die Stunde über Dank und für die Stunde über Dank im Herzen gelesen. Hier ist das Lernziel das sichtbare Danken. Der Hadith über den Dank an die Menschen wird nicht erneut als neue Nummer eingeführt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Dankbarkeit zeigen. Das Lernziel ist: Wir sagen Danke, wenn uns jemand hilft. Sinngemäß, keine beglaubigte Übersetzung: Der Vers enthält die Zusage: Wenn ihr dankbar seid, werde Ich euch gewiss mehr geben. Der folgende Warnsatz der Seite wird in der Kinderstunde nicht als Drohbild verwendet. Alltag: Jemand reicht ein Glas Wasser. Das Kind sagt Danke und blickt die Person an. Aufgabe: Wir üben Danke auf Deutsch und erinnern uns, dass Dank gegenüber Menschen den Dank gegenüber Allah nicht ersetzt. šukr bedeutet: Dankbarkeit. zīdah bedeutet: Mehrung; der Vers spricht davon, dass Allah mehrt. Was nicht behauptet wird: Dieselbe Qurʾān-Stelle wurde schon für die Stunde über Dank und für die Stunde über Dank im Herzen gelesen. Hier ist das Lernziel das sichtbare Danken. Der Hadith über den Dank an die Menschen wird nicht erneut als neue Nummer eingeführt.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 14:7.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -3629,7 +3629,7 @@ const additions=
         "situation": "Jemand reicht ein Glas Wasser. Das Kind sagt Danke und blickt die Person an.",
         "practice": "Wir üben Danke auf Deutsch und erinnern uns, dass Dank gegenüber Menschen den Dank gegenüber Allah nicht ersetzt.",
         "summary": "Belegt ist Qurʾān 14:7. Ungeprüft bleibt: Dieselbe Qurʾān-Stelle wurde schon für die Stunde über Dank und für die Stunde über Dank im Herzen gelesen.",
-        "audioScript": "Für die älteren Kinder. Dankbarkeit zeigen. Der Vers enthält die Zusage: Wenn ihr dankbar seid, werde Ich euch gewiss mehr geben. Nicht belegt und deshalb nicht behauptet: Dieselbe Qurʾān-Stelle wurde schon für die Stunde über Dank und für die Stunde über Dank im Herzen gelesen."
+        "audioScript": "Dankbarkeit zeigen. Der Vers enthält die Zusage: Wenn ihr dankbar seid, werde Ich euch gewiss mehr geben. Nicht belegt und deshalb nicht behauptet: Dieselbe Qurʾān-Stelle wurde schon für die Stunde über Dank und für die Stunde über Dank im Herzen gelesen."
       }
     },
     "questions": {
@@ -3765,7 +3765,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die Seite begründet damit nicht die Waschung vor jeder Berührung als gelesenes hanbalitisches Urteil. Diese Rechtsfrage bleibt ungeprüft. Wir erfinden die Menge der Waschung nicht. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Die Seite begründet damit nicht die Waschung vor jeder Berührung als gelesenes hanbalitisches Urteil. Diese Rechtsfrage bleibt ungeprüft. Wir erfinden die Menge der Waschung nicht. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Wir legen das Qurʾān-Buch sauber hin und blättern ruhig.",
@@ -3798,7 +3798,7 @@ const additions=
       },
       "6-8": {
         "goal": "Wir legen das Qurʾān-Buch sauber hin und blättern ruhig.",
-        "intro": "Heute geht es um Den Qurʾān sorgfältig behandeln. Wir legen das Qurʾān-Buch sauber hin und blättern ruhig. Wir lesen Qurʾān 56:79. Sinngemäß, ohne beglaubigte Übersetzung: Der gespeicherte Versteil lautet: Es berührt ihn niemand außer den Gereinigten. Die Tafsīr-Seite bezieht diese Worte in einer Erklärung auf das Buch im Himmel. So kann das im Alltag aussehen: Ein Kind hat schmutzige Hände vom Malen und wäscht sie, bevor es das Exemplar anfasst, weil die Familie das so hält. Die Aufgabe: Wir üben: Buch schließen, an einen hohen sauberen Platz legen, nicht darauf setzen. muṭahharūn bedeutet: Gereinigte; so das Wort im Vers. muṣḥaf bedeutet: das gebundene Qurʾān-Exemplar; das Wort selbst steht nicht in diesem Vers. Die Grenze der Stunde: Die Seite begründet damit nicht die Waschung vor jeder Berührung als gelesenes hanbalitisches Urteil. Diese Rechtsfrage bleibt ungeprüft. Wir erfinden die Menge der Waschung nicht. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Den Qurʾān sorgfältig behandeln. Wir legen das Qurʾān-Buch sauber hin und blättern ruhig. Wir lesen Qurʾān 56:79. Sinngemäß, ohne beglaubigte Übersetzung: Der gespeicherte Versteil lautet: Es berührt ihn niemand außer den Gereinigten. Die Tafsīr-Seite bezieht diese Worte in einer Erklärung auf das Buch im Himmel. So kann das im Alltag aussehen: Ein Kind hat schmutzige Hände vom Malen und wäscht sie, bevor es das Exemplar anfasst, weil die Familie das so hält. Die Aufgabe: Wir üben: Buch schließen, an einen hohen sauberen Platz legen, nicht darauf setzen. muṭahharūn bedeutet: Gereinigte; so das Wort im Vers. muṣḥaf bedeutet: das gebundene Qurʾān-Exemplar; das Wort selbst steht nicht in diesem Vers. Die Grenze der Stunde: Die Seite begründet damit nicht die Waschung vor jeder Berührung als gelesenes hanbalitisches Urteil. Diese Rechtsfrage bleibt ungeprüft. Wir erfinden die Menge der Waschung nicht.",
         "lines": [
           "Qurʾān 56:79 ist die gelesene Stelle.",
           "Wir legen das Qurʾān-Buch sauber hin und blättern ruhig.",
@@ -3824,7 +3824,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Den Qurʾān sorgfältig behandeln von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Den Qurʾān sorgfältig behandeln. Das Lernziel ist: Wir legen das Qurʾān-Buch sauber hin und blättern ruhig. Die Seite https://www.islamweb.net/ar/library/content/49/1811 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 56:79. Sinngemäß, keine beglaubigte Übersetzung: Der gespeicherte Versteil lautet: Es berührt ihn niemand außer den Gereinigten. Die Tafsīr-Seite bezieht diese Worte in einer Erklärung auf das Buch im Himmel. Alltag: Ein Kind hat schmutzige Hände vom Malen und wäscht sie, bevor es das Exemplar anfasst, weil die Familie das so hält. Aufgabe: Wir üben: Buch schließen, an einen hohen sauberen Platz legen, nicht darauf setzen. muṭahharūn bedeutet: Gereinigte; so das Wort im Vers. muṣḥaf bedeutet: das gebundene Qurʾān-Exemplar; das Wort selbst steht nicht in diesem Vers. Was nicht behauptet wird: Die Seite begründet damit nicht die Waschung vor jeder Berührung als gelesenes hanbalitisches Urteil. Diese Rechtsfrage bleibt ungeprüft. Wir erfinden die Menge der Waschung nicht. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Den Qurʾān sorgfältig behandeln. Das Lernziel ist: Wir legen das Qurʾān-Buch sauber hin und blättern ruhig. Sinngemäß, keine beglaubigte Übersetzung: Der gespeicherte Versteil lautet: Es berührt ihn niemand außer den Gereinigten. Die Tafsīr-Seite bezieht diese Worte in einer Erklärung auf das Buch im Himmel. Alltag: Ein Kind hat schmutzige Hände vom Malen und wäscht sie, bevor es das Exemplar anfasst, weil die Familie das so hält. Aufgabe: Wir üben: Buch schließen, an einen hohen sauberen Platz legen, nicht darauf setzen. muṭahharūn bedeutet: Gereinigte; so das Wort im Vers. muṣḥaf bedeutet: das gebundene Qurʾān-Exemplar; das Wort selbst steht nicht in diesem Vers. Was nicht behauptet wird: Die Seite begründet damit nicht die Waschung vor jeder Berührung als gelesenes hanbalitisches Urteil. Diese Rechtsfrage bleibt ungeprüft. Wir erfinden die Menge der Waschung nicht.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 56:79.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -3846,7 +3846,7 @@ const additions=
         "situation": "Ein Kind hat schmutzige Hände vom Malen und wäscht sie, bevor es das Exemplar anfasst, weil die Familie das so hält.",
         "practice": "Wir üben: Buch schließen, an einen hohen sauberen Platz legen, nicht darauf setzen.",
         "summary": "Belegt ist Qurʾān 56:79. Ungeprüft bleibt: Die Seite begründet damit nicht die Waschung vor jeder Berührung als gelesenes hanbalitisches Urteil.",
-        "audioScript": "Für die älteren Kinder. Den Qurʾān sorgfältig behandeln. Wir legen das Qurʾān-Buch sauber hin und blättern ruhig. Nicht belegt und deshalb nicht behauptet: Die Seite begründet damit nicht die Waschung vor jeder Berührung als gelesenes hanbalitisches Urteil."
+        "audioScript": "Den Qurʾān sorgfältig behandeln. Wir legen das Qurʾān-Buch sauber hin und blättern ruhig. Nicht belegt und deshalb nicht behauptet: Die Seite begründet damit nicht die Waschung vor jeder Berührung als gelesenes hanbalitisches Urteil."
       }
     },
     "questions": {
@@ -3982,7 +3982,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers ist kein Katalog von Haushaltsregeln und kein Feuerbild für kleine Kinder. Die konkrete Hausregel ist Unterricht der Familie, nicht ein zusätzlicher Qurʾān-Satz. Für die Jüngsten sprechen wir nur über das Nicht-Gefährden, nicht über den Spendenteil. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Vers ist kein Katalog von Haushaltsregeln und kein Feuerbild für kleine Kinder. Die konkrete Hausregel ist Unterricht der Familie, nicht ein zusätzlicher Qurʾān-Satz. Für die Jüngsten sprechen wir nur über das Nicht-Gefährden, nicht über den Spendenteil. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Wir erzählen keine Gruselgeschichte.",
     "sample": "Eine Familienregel kann uns vor einer Gefahr schützen.",
@@ -4015,7 +4015,7 @@ const additions=
       },
       "6-8": {
         "goal": "Eine Familienregel kann uns vor einer Gefahr schützen.",
-        "intro": "Heute geht es um Sichere Regeln zu Hause. Eine Familienregel kann uns vor einer Gefahr schützen. Wir lesen Qurʾān 2:195. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers befiehlt, auf Allahs Weg auszugeben, und sagt, man solle sich nicht mit eigenen Händen ins Verderben stürzen, und man solle Gutes tun. So kann das im Alltag aussehen: Die Familie sagt: Auf die heiße Herdplatte fassen wir nicht. Das Kind bleibt bei dieser Regel. Die Aufgabe: Wir nennen eine echte Regel aus dem eigenen Zuhause, die vor einer Gefahr schützt. tahluka bedeutet: Verderben, ins Unglück geraten. iḥsān bedeutet: Gutes tun. Die Grenze der Stunde: Der Vers ist kein Katalog von Haushaltsregeln und kein Feuerbild für kleine Kinder. Die konkrete Hausregel ist Unterricht der Familie, nicht ein zusätzlicher Qurʾān-Satz. Für die Jüngsten sprechen wir nur über das Nicht-Gefährden, nicht über den Spendenteil. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Sichere Regeln zu Hause. Eine Familienregel kann uns vor einer Gefahr schützen. Wir lesen Qurʾān 2:195. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers befiehlt, auf Allahs Weg auszugeben, und sagt, man solle sich nicht mit eigenen Händen ins Verderben stürzen, und man solle Gutes tun. So kann das im Alltag aussehen: Die Familie sagt: Auf die heiße Herdplatte fassen wir nicht. Das Kind bleibt bei dieser Regel. Die Aufgabe: Wir nennen eine echte Regel aus dem eigenen Zuhause, die vor einer Gefahr schützt. tahluka bedeutet: Verderben, ins Unglück geraten. iḥsān bedeutet: Gutes tun. Die Grenze der Stunde: Der Vers ist kein Katalog von Haushaltsregeln und kein Feuerbild für kleine Kinder. Die konkrete Hausregel ist Unterricht der Familie, nicht ein zusätzlicher Qurʾān-Satz. Für die Jüngsten sprechen wir nur über das Nicht-Gefährden, nicht über den Spendenteil.",
         "lines": [
           "Qurʾān 2:195 ist die gelesene Stelle.",
           "Eine Familienregel kann uns vor einer Gefahr schützen. Wir halten sie ein.",
@@ -4041,7 +4041,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Sichere Regeln zu Hause von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Sichere Regeln zu Hause. Das Lernziel ist: Eine Familienregel kann uns vor einer Gefahr schützen. Die Seite https://www.islamweb.net/ar/library/content/49/172 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:195. Sinngemäß, keine beglaubigte Übersetzung: Der Vers befiehlt, auf Allahs Weg auszugeben, und sagt, man solle sich nicht mit eigenen Händen ins Verderben stürzen, und man solle Gutes tun. Alltag: Die Familie sagt: Auf die heiße Herdplatte fassen wir nicht. Das Kind bleibt bei dieser Regel. Aufgabe: Wir nennen eine echte Regel aus dem eigenen Zuhause, die vor einer Gefahr schützt. tahluka bedeutet: Verderben, ins Unglück geraten. iḥsān bedeutet: Gutes tun. Was nicht behauptet wird: Der Vers ist kein Katalog von Haushaltsregeln und kein Feuerbild für kleine Kinder. Die konkrete Hausregel ist Unterricht der Familie, nicht ein zusätzlicher Qurʾān-Satz. Für die Jüngsten sprechen wir nur über das Nicht-Gefährden, nicht über den Spendenteil. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Sichere Regeln zu Hause. Das Lernziel ist: Eine Familienregel kann uns vor einer Gefahr schützen. Sinngemäß, keine beglaubigte Übersetzung: Der Vers befiehlt, auf Allahs Weg auszugeben, und sagt, man solle sich nicht mit eigenen Händen ins Verderben stürzen, und man solle Gutes tun. Alltag: Die Familie sagt: Auf die heiße Herdplatte fassen wir nicht. Das Kind bleibt bei dieser Regel. Aufgabe: Wir nennen eine echte Regel aus dem eigenen Zuhause, die vor einer Gefahr schützt. tahluka bedeutet: Verderben, ins Unglück geraten. iḥsān bedeutet: Gutes tun. Was nicht behauptet wird: Der Vers ist kein Katalog von Haushaltsregeln und kein Feuerbild für kleine Kinder. Die konkrete Hausregel ist Unterricht der Familie, nicht ein zusätzlicher Qurʾān-Satz. Für die Jüngsten sprechen wir nur über das Nicht-Gefährden, nicht über den Spendenteil.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 2:195.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -4063,7 +4063,7 @@ const additions=
         "situation": "Die Familie sagt: Auf die heiße Herdplatte fassen wir nicht. Das Kind bleibt bei dieser Regel.",
         "practice": "Wir nennen eine echte Regel aus dem eigenen Zuhause, die vor einer Gefahr schützt.",
         "summary": "Belegt ist Qurʾān 2:195. Ungeprüft bleibt: Der Vers ist kein Katalog von Haushaltsregeln und kein Feuerbild für kleine Kinder.",
-        "audioScript": "Für die älteren Kinder. Sichere Regeln zu Hause. Eine Familienregel kann uns vor einer Gefahr schützen. Wir halten sie ein. Nicht belegt und deshalb nicht behauptet: Der Vers ist kein Katalog von Haushaltsregeln und kein Feuerbild für kleine Kinder."
+        "audioScript": "Sichere Regeln zu Hause. Eine Familienregel kann uns vor einer Gefahr schützen. Wir halten sie ein. Nicht belegt und deshalb nicht behauptet: Der Vers ist kein Katalog von Haushaltsregeln und kein Feuerbild für kleine Kinder."
       }
     },
     "questions": {
@@ -4199,7 +4199,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers verspricht nicht, dass die Wartezeit verschwindet. Wir übertragen die Geduld nicht auf eine Gefahr, in der man Hilfe holen muss. Eine Hadithnummer wurde nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Vers verspricht nicht, dass die Wartezeit verschwindet. Wir übertragen die Geduld nicht auf eine Gefahr, in der man Hilfe holen muss. Eine Hadithnummer wurde nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Bei Gefahr holst du einen Menschen. Eine Bitte allein reicht dann nicht.",
     "sample": "Wenn wir warten müssen, merken wir die Eile und werden langsamer.",
@@ -4232,7 +4232,7 @@ const additions=
       },
       "6-8": {
         "goal": "Wenn wir warten müssen, merken wir die Eile und werden langsamer.",
-        "intro": "Heute geht es um Ungeduld bemerken. Wenn wir warten müssen, merken wir die Eile und werden langsamer. Wir lesen Qurʾān 70:5. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers lautet: So sei geduldig mit einem schönen Gedulden. Die Erklärung auf der Seite richtet diese Geduld an den Propheten gegenüber der Ablehnung seines Volkes. So kann das im Alltag aussehen: Die Reihe an der Tür dauert. Ein Kind will schubsen und hält stattdessen die Hände still. Die Aufgabe: Wir atmen einmal ruhig und sagen: Ich warte. ṣabr bedeutet: Geduld, bleiben können. ǧamīl bedeutet: schön; hier ein geduldiges Aushalten ohne böses Auftreten. Die Grenze der Stunde: Der Vers verspricht nicht, dass die Wartezeit verschwindet. Wir übertragen die Geduld nicht auf eine Gefahr, in der man Hilfe holen muss. Eine Hadithnummer wurde nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Ungeduld bemerken. Wenn wir warten müssen, merken wir die Eile und werden langsamer. Wir lesen Qurʾān 70:5. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers lautet: So sei geduldig mit einem schönen Gedulden. Die Erklärung auf der Seite richtet diese Geduld an den Propheten gegenüber der Ablehnung seines Volkes. So kann das im Alltag aussehen: Die Reihe an der Tür dauert. Ein Kind will schubsen und hält stattdessen die Hände still. Die Aufgabe: Wir atmen einmal ruhig und sagen: Ich warte. ṣabr bedeutet: Geduld, bleiben können. ǧamīl bedeutet: schön; hier ein geduldiges Aushalten ohne böses Auftreten. Die Grenze der Stunde: Der Vers verspricht nicht, dass die Wartezeit verschwindet. Wir übertragen die Geduld nicht auf eine Gefahr, in der man Hilfe holen muss. Eine Hadithnummer wurde nicht ergänzt.",
         "lines": [
           "Qurʾān 70:5 ist die gelesene Stelle.",
           "Der Vers lautet: So sei geduldig mit einem schönen Gedulden.",
@@ -4258,7 +4258,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Ungeduld bemerken von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Ungeduld bemerken. Das Lernziel ist: Wenn wir warten müssen, merken wir die Eile und werden langsamer. Die Seite https://www.islamweb.net/ar/library/content/49/1891 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 70:5. Sinngemäß, keine beglaubigte Übersetzung: Der Vers lautet: So sei geduldig mit einem schönen Gedulden. Die Erklärung auf der Seite richtet diese Geduld an den Propheten gegenüber der Ablehnung seines Volkes. Alltag: Die Reihe an der Tür dauert. Ein Kind will schubsen und hält stattdessen die Hände still. Aufgabe: Wir atmen einmal ruhig und sagen: Ich warte. ṣabr bedeutet: Geduld, bleiben können. ǧamīl bedeutet: schön; hier ein geduldiges Aushalten ohne böses Auftreten. Was nicht behauptet wird: Der Vers verspricht nicht, dass die Wartezeit verschwindet. Wir übertragen die Geduld nicht auf eine Gefahr, in der man Hilfe holen muss. Eine Hadithnummer wurde nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Ungeduld bemerken. Das Lernziel ist: Wenn wir warten müssen, merken wir die Eile und werden langsamer. Sinngemäß, keine beglaubigte Übersetzung: Der Vers lautet: So sei geduldig mit einem schönen Gedulden. Die Erklärung auf der Seite richtet diese Geduld an den Propheten gegenüber der Ablehnung seines Volkes. Alltag: Die Reihe an der Tür dauert. Ein Kind will schubsen und hält stattdessen die Hände still. Aufgabe: Wir atmen einmal ruhig und sagen: Ich warte. ṣabr bedeutet: Geduld, bleiben können. ǧamīl bedeutet: schön; hier ein geduldiges Aushalten ohne böses Auftreten. Was nicht behauptet wird: Der Vers verspricht nicht, dass die Wartezeit verschwindet. Wir übertragen die Geduld nicht auf eine Gefahr, in der man Hilfe holen muss. Eine Hadithnummer wurde nicht ergänzt.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 70:5.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -4280,7 +4280,7 @@ const additions=
         "situation": "Die Reihe an der Tür dauert. Ein Kind will schubsen und hält stattdessen die Hände still.",
         "practice": "Wir atmen einmal ruhig und sagen: Ich warte.",
         "summary": "Belegt ist Qurʾān 70:5. Ungeprüft bleibt: Der Vers verspricht nicht, dass die Wartezeit verschwindet.",
-        "audioScript": "Für die älteren Kinder. Ungeduld bemerken. Der Vers lautet: So sei geduldig mit einem schönen Gedulden. Nicht belegt und deshalb nicht behauptet: Der Vers verspricht nicht, dass die Wartezeit verschwindet."
+        "audioScript": "Ungeduld bemerken. Der Vers lautet: So sei geduldig mit einem schönen Gedulden. Nicht belegt und deshalb nicht behauptet: Der Vers verspricht nicht, dass die Wartezeit verschwindet."
       }
     },
     "questions": {
@@ -4416,7 +4416,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Welches Gebet das mittlere ist, entscheidet diese Stunde nicht, weil die Seite dafür kein abgeschlossenes hanbalitisches Urteil der Kinderstunde liefert. al-Mughnī wurde nicht gelesen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Welches Gebet das mittlere ist, entscheidet diese Stunde nicht, weil die Seite dafür kein abgeschlossenes hanbalitisches Urteil der Kinderstunde liefert. al-Mughnī wurde nicht gelesen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
     "sample": "Wir suchen einen ruhigen Platz, an dem wir das Gebet üben können.",
@@ -4449,7 +4449,7 @@ const additions=
       },
       "6-8": {
         "goal": "Wir suchen einen ruhigen Platz, an dem wir das Gebet üben können.",
-        "intro": "Heute geht es um Einen Gebetsplatz vorbereiten. Wir suchen einen ruhigen Platz, an dem wir das Gebet üben können. Wir lesen Qurʾān 2:238. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers fordert auf, die Gebete zu hüten und das mittlere Gebet, und vor Allah demütig zu stehen. So kann das im Alltag aussehen: Im Zimmer liegt Spielzeug auf dem Teppich. Das Kind räumt mit Erlaubnis eine kleine Fläche frei. Die Aufgabe: Wir legen eine saubere Unterlage gerade hin und stellen uns ruhig daneben, ohne das Gebet schon vollständig zu verrichten. ṣalawāt bedeutet: Gebete. qānitīn bedeutet: demütig Stehende. Die Grenze der Stunde: Welches Gebet das mittlere ist, entscheidet diese Stunde nicht, weil die Seite dafür kein abgeschlossenes hanbalitisches Urteil der Kinderstunde liefert. al-Mughnī wurde nicht gelesen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Einen Gebetsplatz vorbereiten. Wir suchen einen ruhigen Platz, an dem wir das Gebet üben können. Wir lesen Qurʾān 2:238. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers fordert auf, die Gebete zu hüten und das mittlere Gebet, und vor Allah demütig zu stehen. So kann das im Alltag aussehen: Im Zimmer liegt Spielzeug auf dem Teppich. Das Kind räumt mit Erlaubnis eine kleine Fläche frei. Die Aufgabe: Wir legen eine saubere Unterlage gerade hin und stellen uns ruhig daneben, ohne das Gebet schon vollständig zu verrichten. ṣalawāt bedeutet: Gebete. qānitīn bedeutet: demütig Stehende. Die Grenze der Stunde: Welches Gebet das mittlere ist, entscheidet diese Stunde nicht, weil die Seite dafür kein abgeschlossenes hanbalitisches Urteil der Kinderstunde liefert. al-Mughnī wurde nicht gelesen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
         "lines": [
           "Qurʾān 2:238 ist die gelesene Stelle.",
           "Der Vers fordert auf, die Gebete zu hüten und das mittlere Gebet, und vor Allah demütig zu stehen.",
@@ -4475,7 +4475,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Einen Gebetsplatz vorbereiten von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Einen Gebetsplatz vorbereiten. Das Lernziel ist: Wir suchen einen ruhigen Platz, an dem wir das Gebet üben können. Die Seite https://www.islamweb.net/ar/library/content/49/205 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:238. Sinngemäß, keine beglaubigte Übersetzung: Der Vers fordert auf, die Gebete zu hüten und das mittlere Gebet, und vor Allah demütig zu stehen. Alltag: Im Zimmer liegt Spielzeug auf dem Teppich. Das Kind räumt mit Erlaubnis eine kleine Fläche frei. Aufgabe: Wir legen eine saubere Unterlage gerade hin und stellen uns ruhig daneben, ohne das Gebet schon vollständig zu verrichten. ṣalawāt bedeutet: Gebete. qānitīn bedeutet: demütig Stehende. Was nicht behauptet wird: Welches Gebet das mittlere ist, entscheidet diese Stunde nicht, weil die Seite dafür kein abgeschlossenes hanbalitisches Urteil der Kinderstunde liefert. al-Mughnī wurde nicht gelesen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Einen Gebetsplatz vorbereiten. Das Lernziel ist: Wir suchen einen ruhigen Platz, an dem wir das Gebet üben können. Sinngemäß, keine beglaubigte Übersetzung: Der Vers fordert auf, die Gebete zu hüten und das mittlere Gebet, und vor Allah demütig zu stehen. Alltag: Im Zimmer liegt Spielzeug auf dem Teppich. Das Kind räumt mit Erlaubnis eine kleine Fläche frei. Aufgabe: Wir legen eine saubere Unterlage gerade hin und stellen uns ruhig daneben, ohne das Gebet schon vollständig zu verrichten. ṣalawāt bedeutet: Gebete. qānitīn bedeutet: demütig Stehende. Was nicht behauptet wird: Welches Gebet das mittlere ist, entscheidet diese Stunde nicht, weil die Seite dafür kein abgeschlossenes hanbalitisches Urteil der Kinderstunde liefert. al-Mughnī wurde nicht gelesen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 2:238.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -4497,7 +4497,7 @@ const additions=
         "situation": "Im Zimmer liegt Spielzeug auf dem Teppich. Das Kind räumt mit Erlaubnis eine kleine Fläche frei.",
         "practice": "Wir legen eine saubere Unterlage gerade hin und stellen uns ruhig daneben, ohne das Gebet schon vollständig zu verrichten.",
         "summary": "Belegt ist Qurʾān 2:238. Ungeprüft bleibt: Welches Gebet das mittlere ist, entscheidet diese Stunde nicht, weil die Seite dafür kein abgeschlossenes hanbalitisches Urteil der Kinderstunde liefert.",
-        "audioScript": "Für die älteren Kinder. Einen Gebetsplatz vorbereiten. Der Vers fordert auf, die Gebete zu hüten und das mittlere Gebet, und vor Allah demütig zu stehen. Nicht belegt und deshalb nicht behauptet: Welches Gebet das mittlere ist, entscheidet diese Stunde nicht, weil die Seite dafür kein abgeschlossenes hanbalitisches Urteil der Kinderstunde liefert."
+        "audioScript": "Einen Gebetsplatz vorbereiten. Der Vers fordert auf, die Gebete zu hüten und das mittlere Gebet, und vor Allah demütig zu stehen. Nicht belegt und deshalb nicht behauptet: Welches Gebet das mittlere ist, entscheidet diese Stunde nicht, weil die Seite dafür kein abgeschlossenes hanbalitisches Urteil der Kinderstunde liefert."
       }
     },
     "questions": {
@@ -4633,7 +4633,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Wir setzen die deutsche Erklärung nicht an die Stelle des arabischen Wortlauts. Eine künstliche Rezitation wird nicht erzeugt. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Wir setzen die deutsche Erklärung nicht an die Stelle des arabischen Wortlauts. Eine künstliche Rezitation wird nicht erzeugt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Die arabischen Worte und der deutsche Sinn sind nicht dasselbe.",
@@ -4666,7 +4666,7 @@ const additions=
       },
       "6-8": {
         "goal": "Die arabischen Worte und der deutsche Sinn sind nicht dasselbe.",
-        "intro": "Heute geht es um Arabischen Text und Übersetzung unterscheiden. Die arabischen Worte und der deutsche Sinn sind nicht dasselbe. Wir lesen Qurʾān 1:2. Sinngemäß, ohne beglaubigte Übersetzung: Der gespeicherte Vers lautet: Alles Lob gehört Allah, dem Herrn der Welten. Die deutsche Zeile erklärt den Sinn und ist keine beglaubigte Übersetzung. So kann das im Alltag aussehen: Ein Kind hört die arabischen Worte und sagt danach mit eigenen deutschen Worten, was es verstanden hat. Die Aufgabe: Wir zeigen auf die arabische Zeile und danach auf die deutsche Erklärung und sagen: Das eine ist der Vers, das andere ist unsere Hilfe zum Verstehen. ḥamd bedeutet: Lob. rabb al-ʿālamīn bedeutet: Herr der Welten. Die Grenze der Stunde: Wir setzen die deutsche Erklärung nicht an die Stelle des arabischen Wortlauts. Eine künstliche Rezitation wird nicht erzeugt. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Arabischen Text und Übersetzung unterscheiden. Die arabischen Worte und der deutsche Sinn sind nicht dasselbe. Wir lesen Qurʾān 1:2. Sinngemäß, ohne beglaubigte Übersetzung: Der gespeicherte Vers lautet: Alles Lob gehört Allah, dem Herrn der Welten. Die deutsche Zeile erklärt den Sinn und ist keine beglaubigte Übersetzung. So kann das im Alltag aussehen: Ein Kind hört die arabischen Worte und sagt danach mit eigenen deutschen Worten, was es verstanden hat. Die Aufgabe: Wir zeigen auf die arabische Zeile und danach auf die deutsche Erklärung und sagen: Das eine ist der Vers, das andere ist unsere Hilfe zum Verstehen. ḥamd bedeutet: Lob. rabb al-ʿālamīn bedeutet: Herr der Welten. Die Grenze der Stunde: Wir setzen die deutsche Erklärung nicht an die Stelle des arabischen Wortlauts. Eine künstliche Rezitation wird nicht erzeugt.",
         "lines": [
           "Qurʾān 1:2 ist die gelesene Stelle.",
           "Die deutsche Zeile erklärt den Sinn und ist keine beglaubigte Übersetzung.",
@@ -4692,7 +4692,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Arabischen Text und Übersetzung unterscheiden von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Arabischen Text und Übersetzung unterscheiden. Das Lernziel ist: Die arabischen Worte und der deutsche Sinn sind nicht dasselbe. Die Seite https://www.islamweb.net/ar/library/content/49/40 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 1:2. Sinngemäß, keine beglaubigte Übersetzung: Der gespeicherte Vers lautet: Alles Lob gehört Allah, dem Herrn der Welten. Die deutsche Zeile erklärt den Sinn und ist keine beglaubigte Übersetzung. Alltag: Ein Kind hört die arabischen Worte und sagt danach mit eigenen deutschen Worten, was es verstanden hat. Aufgabe: Wir zeigen auf die arabische Zeile und danach auf die deutsche Erklärung und sagen: Das eine ist der Vers, das andere ist unsere Hilfe zum Verstehen. ḥamd bedeutet: Lob. rabb al-ʿālamīn bedeutet: Herr der Welten. Was nicht behauptet wird: Wir setzen die deutsche Erklärung nicht an die Stelle des arabischen Wortlauts. Eine künstliche Rezitation wird nicht erzeugt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Arabischen Text und Übersetzung unterscheiden. Das Lernziel ist: Die arabischen Worte und der deutsche Sinn sind nicht dasselbe. Sinngemäß, keine beglaubigte Übersetzung: Der gespeicherte Vers lautet: Alles Lob gehört Allah, dem Herrn der Welten. Die deutsche Zeile erklärt den Sinn und ist keine beglaubigte Übersetzung. Alltag: Ein Kind hört die arabischen Worte und sagt danach mit eigenen deutschen Worten, was es verstanden hat. Aufgabe: Wir zeigen auf die arabische Zeile und danach auf die deutsche Erklärung und sagen: Das eine ist der Vers, das andere ist unsere Hilfe zum Verstehen. ḥamd bedeutet: Lob. rabb al-ʿālamīn bedeutet: Herr der Welten. Was nicht behauptet wird: Wir setzen die deutsche Erklärung nicht an die Stelle des arabischen Wortlauts. Eine künstliche Rezitation wird nicht erzeugt.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 1:2.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -4714,7 +4714,7 @@ const additions=
         "situation": "Ein Kind hört die arabischen Worte und sagt danach mit eigenen deutschen Worten, was es verstanden hat.",
         "practice": "Wir zeigen auf die arabische Zeile und danach auf die deutsche Erklärung und sagen: Das eine ist der Vers, das andere ist unsere Hilfe zum Verstehen.",
         "summary": "Belegt ist Qurʾān 1:2. Ungeprüft bleibt: Wir setzen die deutsche Erklärung nicht an die Stelle des arabischen Wortlauts.",
-        "audioScript": "Für die älteren Kinder. Arabischen Text und Übersetzung unterscheiden. Die deutsche Zeile erklärt den Sinn und ist keine beglaubigte Übersetzung. Nicht belegt und deshalb nicht behauptet: Wir setzen die deutsche Erklärung nicht an die Stelle des arabischen Wortlauts."
+        "audioScript": "Arabischen Text und Übersetzung unterscheiden. Die deutsche Zeile erklärt den Sinn und ist keine beglaubigte Übersetzung. Nicht belegt und deshalb nicht behauptet: Wir setzen die deutsche Erklärung nicht an die Stelle des arabischen Wortlauts."
       }
     },
     "questions": {
@@ -4850,7 +4850,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Eine bestimmte Unterrichtsszene mit einem Kind steht auf der gelesenen Seite nicht. Wir behaupten sie nicht. Die späteren Sätze des Verses über den Entschluss und das Vertrauen werden nicht als vollständige Sīrah-Erzählung ausgebaut. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Eine bestimmte Unterrichtsszene mit einem Kind steht auf der gelesenen Seite nicht. Wir behaupten sie nicht. Die späteren Sätze des Verses über den Entschluss und das Vertrauen werden nicht als vollständige Sīrah-Erzählung ausgebaut. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Der Vers beschreibt den Propheten, Friede sei mit ihm, als mild im Umgang.",
@@ -4883,7 +4883,7 @@ const additions=
       },
       "6-8": {
         "goal": "Der Vers beschreibt den Propheten, Friede sei mit ihm, als mild im Umgang.",
-        "intro": "Heute geht es um Muḥammad Friede sei mit ihm als barmherziger Lehrer. Der Vers beschreibt den Propheten, Friede sei mit ihm, als mild im Umgang. Wir lesen Qurʾān 3:159. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass es durch Barmherzigkeit von Allah war, dass er mild zu den Menschen war, und dass sie sich zerstreut hätten, wenn er hartherzig gewesen wäre. Er nennt auch Verzeihen, um Vergebung bitten und Beratung. So kann das im Alltag aussehen: Im Unterricht spricht die Lehrperson leise und lässt ein Kind ausreden. Die Aufgabe: Wir üben einen freundlichen Satz zu einem anderen Kind. Wir erzählen dazu keine erfundene Kinderszene aus dem Leben des Propheten. linta bedeutet: du warst mild. raḥmah bedeutet: Barmherzigkeit. Die Grenze der Stunde: Eine bestimmte Unterrichtsszene mit einem Kind steht auf der gelesenen Seite nicht. Wir behaupten sie nicht. Die späteren Sätze des Verses über den Entschluss und das Vertrauen werden nicht als vollständige Sīrah-Erzählung ausgebaut. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Muḥammad Friede sei mit ihm als barmherziger Lehrer. Der Vers beschreibt den Propheten, Friede sei mit ihm, als mild im Umgang. Wir lesen Qurʾān 3:159. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass es durch Barmherzigkeit von Allah war, dass er mild zu den Menschen war, und dass sie sich zerstreut hätten, wenn er hartherzig gewesen wäre. Er nennt auch Verzeihen, um Vergebung bitten und Beratung. So kann das im Alltag aussehen: Im Unterricht spricht die Lehrperson leise und lässt ein Kind ausreden. Die Aufgabe: Wir üben einen freundlichen Satz zu einem anderen Kind. Wir erzählen dazu keine erfundene Kinderszene aus dem Leben des Propheten. linta bedeutet: du warst mild. raḥmah bedeutet: Barmherzigkeit. Die Grenze der Stunde: Eine bestimmte Unterrichtsszene mit einem Kind steht auf der gelesenen Seite nicht. Wir behaupten sie nicht. Die späteren Sätze des Verses über den Entschluss und das Vertrauen werden nicht als vollständige Sīrah-Erzählung ausgebaut.",
         "lines": [
           "Qurʾān 3:159 ist die gelesene Stelle.",
           "Der Vers sagt, dass es durch Barmherzigkeit von Allah war, dass er mild zu den Menschen war, und dass sie sich zerstreut hätten, wenn er hartherzig gewesen wäre.",
@@ -4909,7 +4909,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Muḥammad Friede sei mit ihm als barmherziger Lehrer von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Muḥammad Friede sei mit ihm als barmherziger Lehrer. Das Lernziel ist: Der Vers beschreibt den Propheten, Friede sei mit ihm, als mild im Umgang. Die Seite https://www.islamweb.net/ar/library/content/49/286 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 3:159. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass es durch Barmherzigkeit von Allah war, dass er mild zu den Menschen war, und dass sie sich zerstreut hätten, wenn er hartherzig gewesen wäre. Er nennt auch Verzeihen, um Vergebung bitten und Beratung. Alltag: Im Unterricht spricht die Lehrperson leise und lässt ein Kind ausreden. Aufgabe: Wir üben einen freundlichen Satz zu einem anderen Kind. Wir erzählen dazu keine erfundene Kinderszene aus dem Leben des Propheten. linta bedeutet: du warst mild. raḥmah bedeutet: Barmherzigkeit. Was nicht behauptet wird: Eine bestimmte Unterrichtsszene mit einem Kind steht auf der gelesenen Seite nicht. Wir behaupten sie nicht. Die späteren Sätze des Verses über den Entschluss und das Vertrauen werden nicht als vollständige Sīrah-Erzählung ausgebaut. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Muḥammad Friede sei mit ihm als barmherziger Lehrer. Das Lernziel ist: Der Vers beschreibt den Propheten, Friede sei mit ihm, als mild im Umgang. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass es durch Barmherzigkeit von Allah war, dass er mild zu den Menschen war, und dass sie sich zerstreut hätten, wenn er hartherzig gewesen wäre. Er nennt auch Verzeihen, um Vergebung bitten und Beratung. Alltag: Im Unterricht spricht die Lehrperson leise und lässt ein Kind ausreden. Aufgabe: Wir üben einen freundlichen Satz zu einem anderen Kind. Wir erzählen dazu keine erfundene Kinderszene aus dem Leben des Propheten. linta bedeutet: du warst mild. raḥmah bedeutet: Barmherzigkeit. Was nicht behauptet wird: Eine bestimmte Unterrichtsszene mit einem Kind steht auf der gelesenen Seite nicht. Wir behaupten sie nicht. Die späteren Sätze des Verses über den Entschluss und das Vertrauen werden nicht als vollständige Sīrah-Erzählung ausgebaut.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 3:159.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -4931,7 +4931,7 @@ const additions=
         "situation": "Im Unterricht spricht die Lehrperson leise und lässt ein Kind ausreden.",
         "practice": "Wir üben einen freundlichen Satz zu einem anderen Kind. Wir erzählen dazu keine erfundene Kinderszene aus dem Leben des Propheten.",
         "summary": "Belegt ist Qurʾān 3:159. Ungeprüft bleibt: Eine bestimmte Unterrichtsszene mit einem Kind steht auf der gelesenen Seite nicht.",
-        "audioScript": "Für die älteren Kinder. Muḥammad Friede sei mit ihm als barmherziger Lehrer. Der Vers sagt, dass es durch Barmherzigkeit von Allah war, dass er mild zu den Menschen war, und dass sie sich zerstreut hätten, wenn er hartherzig gewesen wäre. Nicht belegt und deshalb nicht behauptet: Eine bestimmte Unterrichtsszene mit einem Kind steht auf der gelesenen Seite nicht."
+        "audioScript": "Muḥammad Friede sei mit ihm als barmherziger Lehrer. Der Vers sagt, dass es durch Barmherzigkeit von Allah war, dass er mild zu den Menschen war, und dass sie sich zerstreut hätten, wenn er hartherzig gewesen wäre. Nicht belegt und deshalb nicht behauptet: Eine bestimmte Unterrichtsszene mit einem Kind steht auf der gelesenen Seite nicht."
       }
     },
     "questions": {
@@ -5067,7 +5067,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die Seite liefert keine nummerierte Bittformel für den Notfall. Die menschliche Hilfe ist die Schutzregel und kein Hadith. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Die Seite liefert keine nummerierte Bittformel für den Notfall. Die menschliche Hilfe ist die Schutzregel und kein Hadith. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Wenn uns etwas schwer wird, bitten wir Allah und holen bei Gefahr einen Menschen.",
@@ -5100,7 +5100,7 @@ const additions=
       },
       "6-8": {
         "goal": "Wenn uns etwas schwer wird, bitten wir Allah und holen bei Gefahr einen Menschen.",
-        "intro": "Heute geht es um In schwierigen Momenten Duʿāʾ. Wenn uns etwas schwer wird, bitten wir Allah und holen bei Gefahr einen Menschen. Wir lesen Qurʾān 40:60. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers beginnt damit, dass Allah sagt: Ruft Mich an, so erhöre Ich euch. Der folgende Satz der Seite warnt die, die sich Seiner Anbetung gegenüber großtun. Diesen Satz machen wir nicht zu einem Angstbild. So kann das im Alltag aussehen: Ein Kind versteht eine Aufgabe nicht und bittet Allah leise um Hilfe, dann fragt es die Lehrperson. Die Aufgabe: Wir sprechen eine kurze eigene Bitte auf Deutsch und nennen danach die Person, die wir bei einer echten Not holen würden. udʿūnī bedeutet: ruft Mich an. astaǧib bedeutet: Ich erhöre. Die Grenze der Stunde: Die Seite liefert keine nummerierte Bittformel für den Notfall. Die menschliche Hilfe ist die Schutzregel und kein Hadith. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um In schwierigen Momenten Duʿāʾ. Wenn uns etwas schwer wird, bitten wir Allah und holen bei Gefahr einen Menschen. Wir lesen Qurʾān 40:60. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers beginnt damit, dass Allah sagt: Ruft Mich an, so erhöre Ich euch. Der folgende Satz der Seite warnt die, die sich Seiner Anbetung gegenüber großtun. Diesen Satz machen wir nicht zu einem Angstbild. So kann das im Alltag aussehen: Ein Kind versteht eine Aufgabe nicht und bittet Allah leise um Hilfe, dann fragt es die Lehrperson. Die Aufgabe: Wir sprechen eine kurze eigene Bitte auf Deutsch und nennen danach die Person, die wir bei einer echten Not holen würden. udʿūnī bedeutet: ruft Mich an. astaǧib bedeutet: Ich erhöre. Die Grenze der Stunde: Die Seite liefert keine nummerierte Bittformel für den Notfall. Die menschliche Hilfe ist die Schutzregel und kein Hadith.",
         "lines": [
           "Qurʾān 40:60 ist die gelesene Stelle.",
           "Der Vers beginnt damit, dass Allah sagt: Ruft Mich an, so erhöre Ich euch.",
@@ -5126,7 +5126,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann In schwierigen Momenten Duʿāʾ von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "In schwierigen Momenten Duʿāʾ. Das Lernziel ist: Wenn uns etwas schwer wird, bitten wir Allah und holen bei Gefahr einen Menschen. Die Seite https://www.islamweb.net/ar/library/content/49/1654 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 40:60. Sinngemäß, keine beglaubigte Übersetzung: Der Vers beginnt damit, dass Allah sagt: Ruft Mich an, so erhöre Ich euch. Der folgende Satz der Seite warnt die, die sich Seiner Anbetung gegenüber großtun. Diesen Satz machen wir nicht zu einem Angstbild. Alltag: Ein Kind versteht eine Aufgabe nicht und bittet Allah leise um Hilfe, dann fragt es die Lehrperson. Aufgabe: Wir sprechen eine kurze eigene Bitte auf Deutsch und nennen danach die Person, die wir bei einer echten Not holen würden. udʿūnī bedeutet: ruft Mich an. astaǧib bedeutet: Ich erhöre. Was nicht behauptet wird: Die Seite liefert keine nummerierte Bittformel für den Notfall. Die menschliche Hilfe ist die Schutzregel und kein Hadith. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "In schwierigen Momenten Duʿāʾ. Das Lernziel ist: Wenn uns etwas schwer wird, bitten wir Allah und holen bei Gefahr einen Menschen. Sinngemäß, keine beglaubigte Übersetzung: Der Vers beginnt damit, dass Allah sagt: Ruft Mich an, so erhöre Ich euch. Der folgende Satz der Seite warnt die, die sich Seiner Anbetung gegenüber großtun. Diesen Satz machen wir nicht zu einem Angstbild. Alltag: Ein Kind versteht eine Aufgabe nicht und bittet Allah leise um Hilfe, dann fragt es die Lehrperson. Aufgabe: Wir sprechen eine kurze eigene Bitte auf Deutsch und nennen danach die Person, die wir bei einer echten Not holen würden. udʿūnī bedeutet: ruft Mich an. astaǧib bedeutet: Ich erhöre. Was nicht behauptet wird: Die Seite liefert keine nummerierte Bittformel für den Notfall. Die menschliche Hilfe ist die Schutzregel und kein Hadith.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 40:60.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -5148,7 +5148,7 @@ const additions=
         "situation": "Ein Kind versteht eine Aufgabe nicht und bittet Allah leise um Hilfe, dann fragt es die Lehrperson.",
         "practice": "Wir sprechen eine kurze eigene Bitte auf Deutsch und nennen danach die Person, die wir bei einer echten Not holen würden.",
         "summary": "Belegt ist Qurʾān 40:60. Ungeprüft bleibt: Die Seite liefert keine nummerierte Bittformel für den Notfall.",
-        "audioScript": "Für die älteren Kinder. In schwierigen Momenten Duʿāʾ. Der Vers beginnt damit, dass Allah sagt: Ruft Mich an, so erhöre Ich euch. Nicht belegt und deshalb nicht behauptet: Die Seite liefert keine nummerierte Bittformel für den Notfall."
+        "audioScript": "In schwierigen Momenten Duʿāʾ. Der Vers beginnt damit, dass Allah sagt: Ruft Mich an, so erhöre Ich euch. Nicht belegt und deshalb nicht behauptet: Die Seite liefert keine nummerierte Bittformel für den Notfall."
       }
     },
     "questions": {
@@ -5284,7 +5284,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers beschreibt nicht die Hausordnung einer bestimmten Moschee. Unsere konkreten Regeln bleiben Familien- und Hausregeln. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Vers beschreibt nicht die Hausordnung einer bestimmten Moschee. Unsere konkreten Regeln bleiben Familien- und Hausregeln. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Im Gemeinschaftsraum nehmen wir auf andere Kinder Rücksicht.",
@@ -5317,7 +5317,7 @@ const additions=
       },
       "6-8": {
         "goal": "Im Gemeinschaftsraum nehmen wir auf andere Kinder Rücksicht.",
-        "intro": "Heute geht es um Gemeinsam in der Moschee lernen. Im Gemeinschaftsraum nehmen wir auf andere Kinder Rücksicht. Wir lesen Qurʾān 24:36. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers spricht von Häusern, die Allah erlaubt hat, dass sie erhoben werden und in denen Sein Name genannt wird, und in denen Er morgens und abends gepriesen wird. So kann das im Alltag aussehen: Zwei Kinder wollen denselben Platz. Sie rücken zusammen, statt zu schubsen. Die Aufgabe: Wir üben, leise Platz zu machen und den Raum so zu verlassen, dass niemand angestoßen wird. buyūt bedeutet: Häuser; hier die Orte, die der Vers nennt. tasbīḥ bedeutet: Allah preisen. Die Grenze der Stunde: Der Vers beschreibt nicht die Hausordnung einer bestimmten Moschee. Unsere konkreten Regeln bleiben Familien- und Hausregeln. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Gemeinsam in der Moschee lernen. Im Gemeinschaftsraum nehmen wir auf andere Kinder Rücksicht. Wir lesen Qurʾān 24:36. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers spricht von Häusern, die Allah erlaubt hat, dass sie erhoben werden und in denen Sein Name genannt wird, und in denen Er morgens und abends gepriesen wird. So kann das im Alltag aussehen: Zwei Kinder wollen denselben Platz. Sie rücken zusammen, statt zu schubsen. Die Aufgabe: Wir üben, leise Platz zu machen und den Raum so zu verlassen, dass niemand angestoßen wird. buyūt bedeutet: Häuser; hier die Orte, die der Vers nennt. tasbīḥ bedeutet: Allah preisen. Die Grenze der Stunde: Der Vers beschreibt nicht die Hausordnung einer bestimmten Moschee. Unsere konkreten Regeln bleiben Familien- und Hausregeln.",
         "lines": [
           "Qurʾān 24:36 ist die gelesene Stelle.",
           "Der Vers spricht von Häusern, die Allah erlaubt hat, dass sie erhoben werden und in denen Sein Name genannt wird, und in denen Er morgens und abends gepriesen wird.",
@@ -5343,7 +5343,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Gemeinsam in der Moschee lernen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Gemeinsam in der Moschee lernen. Das Lernziel ist: Im Gemeinschaftsraum nehmen wir auf andere Kinder Rücksicht. Die Seite https://www.islamweb.net/ar/library/content/49/1272 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 24:36. Sinngemäß, keine beglaubigte Übersetzung: Der Vers spricht von Häusern, die Allah erlaubt hat, dass sie erhoben werden und in denen Sein Name genannt wird, und in denen Er morgens und abends gepriesen wird. Alltag: Zwei Kinder wollen denselben Platz. Sie rücken zusammen, statt zu schubsen. Aufgabe: Wir üben, leise Platz zu machen und den Raum so zu verlassen, dass niemand angestoßen wird. buyūt bedeutet: Häuser; hier die Orte, die der Vers nennt. tasbīḥ bedeutet: Allah preisen. Was nicht behauptet wird: Der Vers beschreibt nicht die Hausordnung einer bestimmten Moschee. Unsere konkreten Regeln bleiben Familien- und Hausregeln. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Gemeinsam in der Moschee lernen. Das Lernziel ist: Im Gemeinschaftsraum nehmen wir auf andere Kinder Rücksicht. Sinngemäß, keine beglaubigte Übersetzung: Der Vers spricht von Häusern, die Allah erlaubt hat, dass sie erhoben werden und in denen Sein Name genannt wird, und in denen Er morgens und abends gepriesen wird. Alltag: Zwei Kinder wollen denselben Platz. Sie rücken zusammen, statt zu schubsen. Aufgabe: Wir üben, leise Platz zu machen und den Raum so zu verlassen, dass niemand angestoßen wird. buyūt bedeutet: Häuser; hier die Orte, die der Vers nennt. tasbīḥ bedeutet: Allah preisen. Was nicht behauptet wird: Der Vers beschreibt nicht die Hausordnung einer bestimmten Moschee. Unsere konkreten Regeln bleiben Familien- und Hausregeln.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 24:36.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -5365,7 +5365,7 @@ const additions=
         "situation": "Zwei Kinder wollen denselben Platz. Sie rücken zusammen, statt zu schubsen.",
         "practice": "Wir üben, leise Platz zu machen und den Raum so zu verlassen, dass niemand angestoßen wird.",
         "summary": "Belegt ist Qurʾān 24:36. Ungeprüft bleibt: Der Vers beschreibt nicht die Hausordnung einer bestimmten Moschee.",
-        "audioScript": "Für die älteren Kinder. Gemeinsam in der Moschee lernen. Der Vers spricht von Häusern, die Allah erlaubt hat, dass sie erhoben werden und in denen Sein Name genannt wird, und in denen Er morgens und abends gepriesen wird. Nicht belegt und deshalb nicht behauptet: Der Vers beschreibt nicht die Hausordnung einer bestimmten Moschee."
+        "audioScript": "Gemeinsam in der Moschee lernen. Der Vers spricht von Häusern, die Allah erlaubt hat, dass sie erhoben werden und in denen Sein Name genannt wird, und in denen Er morgens und abends gepriesen wird. Nicht belegt und deshalb nicht behauptet: Der Vers beschreibt nicht die Hausordnung einer bestimmten Moschee."
       }
     },
     "questions": {
@@ -5501,7 +5501,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die Seite enthält dazu einen Hinweis auf al-Buḫārī ohne dass wir seine Nummer in diese Stunde übernehmen. Wir zählen die Schlüssel nicht und erfinden keine Liste des Verborgenen. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Die Seite enthält dazu einen Hinweis auf al-Buḫārī ohne dass wir seine Nummer in diese Stunde übernehmen. Wir zählen die Schlüssel nicht und erfinden keine Liste des Verborgenen. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Wir erfinden keine zusätzliche Geschichte.",
     "sample": "Wir können etwas verstecken.",
@@ -5534,7 +5534,7 @@ const additions=
       },
       "6-8": {
         "goal": "Wir können etwas verstecken.",
-        "intro": "Heute geht es um Allahs Wissen verstehen. Wir können etwas verstecken. Wir lesen Qurʾān 6:59. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass bei Ihm die Schlüssel des Verborgenen sind und niemand sie kennt außer Ihm, und dass Ihm kein Blatt fällt, ohne dass Er es weiß. So kann das im Alltag aussehen: Ein Kind legt einen Stein hinter den Rücken. Die anderen sehen ihn nicht. Die Stunde sagt: Allahs Wissen ist damit nicht begrenzt. Die Aufgabe: Wir nennen ein kleines Ding, das Menschen gerade nicht sehen, und wiederholen: Allah weiß es. ġayb bedeutet: das Verborgene. mafātiḥ bedeutet: Schlüssel. Die Grenze der Stunde: Die Seite enthält dazu einen Hinweis auf al-Buḫārī ohne dass wir seine Nummer in diese Stunde übernehmen. Wir zählen die Schlüssel nicht und erfinden keine Liste des Verborgenen. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Allahs Wissen verstehen. Wir können etwas verstecken. Wir lesen Qurʾān 6:59. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass bei Ihm die Schlüssel des Verborgenen sind und niemand sie kennt außer Ihm, und dass Ihm kein Blatt fällt, ohne dass Er es weiß. So kann das im Alltag aussehen: Ein Kind legt einen Stein hinter den Rücken. Die anderen sehen ihn nicht. Die Stunde sagt: Allahs Wissen ist damit nicht begrenzt. Die Aufgabe: Wir nennen ein kleines Ding, das Menschen gerade nicht sehen, und wiederholen: Allah weiß es. ġayb bedeutet: das Verborgene. mafātiḥ bedeutet: Schlüssel. Die Grenze der Stunde: Die Seite enthält dazu einen Hinweis auf al-Buḫārī ohne dass wir seine Nummer in diese Stunde übernehmen. Wir zählen die Schlüssel nicht und erfinden keine Liste des Verborgenen.",
         "lines": [
           "Qurʾān 6:59 ist die gelesene Stelle.",
           "Der Vers sagt, dass bei Ihm die Schlüssel des Verborgenen sind und niemand sie kennt außer Ihm, und dass Ihm kein Blatt fällt, ohne dass Er es weiß.",
@@ -5560,7 +5560,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Allahs Wissen verstehen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Allahs Wissen verstehen. Das Lernziel ist: Wir können etwas verstecken. Die Seite https://www.islamweb.net/ar/library/content/49/434 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 6:59. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass bei Ihm die Schlüssel des Verborgenen sind und niemand sie kennt außer Ihm, und dass Ihm kein Blatt fällt, ohne dass Er es weiß. Alltag: Ein Kind legt einen Stein hinter den Rücken. Die anderen sehen ihn nicht. Die Stunde sagt: Allahs Wissen ist damit nicht begrenzt. Aufgabe: Wir nennen ein kleines Ding, das Menschen gerade nicht sehen, und wiederholen: Allah weiß es. ġayb bedeutet: das Verborgene. mafātiḥ bedeutet: Schlüssel. Was nicht behauptet wird: Die Seite enthält dazu einen Hinweis auf al-Buḫārī ohne dass wir seine Nummer in diese Stunde übernehmen. Wir zählen die Schlüssel nicht und erfinden keine Liste des Verborgenen. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Allahs Wissen verstehen. Das Lernziel ist: Wir können etwas verstecken. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass bei Ihm die Schlüssel des Verborgenen sind und niemand sie kennt außer Ihm, und dass Ihm kein Blatt fällt, ohne dass Er es weiß. Alltag: Ein Kind legt einen Stein hinter den Rücken. Die anderen sehen ihn nicht. Die Stunde sagt: Allahs Wissen ist damit nicht begrenzt. Aufgabe: Wir nennen ein kleines Ding, das Menschen gerade nicht sehen, und wiederholen: Allah weiß es. ġayb bedeutet: das Verborgene. mafātiḥ bedeutet: Schlüssel. Was nicht behauptet wird: Die Seite enthält dazu einen Hinweis auf al-Buḫārī ohne dass wir seine Nummer in diese Stunde übernehmen. Wir zählen die Schlüssel nicht und erfinden keine Liste des Verborgenen.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 6:59.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -5582,7 +5582,7 @@ const additions=
         "situation": "Ein Kind legt einen Stein hinter den Rücken. Die anderen sehen ihn nicht. Die Stunde sagt: Allahs Wissen ist damit nicht begrenzt.",
         "practice": "Wir nennen ein kleines Ding, das Menschen gerade nicht sehen, und wiederholen: Allah weiß es.",
         "summary": "Belegt ist Qurʾān 6:59. Ungeprüft bleibt: Die Seite enthält dazu einen Hinweis auf al-Buḫārī ohne dass wir seine Nummer in diese Stunde übernehmen.",
-        "audioScript": "Für die älteren Kinder. Allahs Wissen verstehen. Der Vers sagt, dass bei Ihm die Schlüssel des Verborgenen sind und niemand sie kennt außer Ihm, und dass Ihm kein Blatt fällt, ohne dass Er es weiß. Nicht belegt und deshalb nicht behauptet: Die Seite enthält dazu einen Hinweis auf al-Buḫārī ohne dass wir seine Nummer in diese Stunde übernehmen."
+        "audioScript": "Allahs Wissen verstehen. Der Vers sagt, dass bei Ihm die Schlüssel des Verborgenen sind und niemand sie kennt außer Ihm, und dass Ihm kein Blatt fällt, ohne dass Er es weiß. Nicht belegt und deshalb nicht behauptet: Die Seite enthält dazu einen Hinweis auf al-Buḫārī ohne dass wir seine Nummer in diese Stunde übernehmen."
       }
     },
     "questions": {
@@ -5718,7 +5718,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Wir fügen keine Rangfolge und keine erfundene Begegnung zwischen den Gesandten hinzu. Dieselbe Fundstelle trägt hier das Lernziel des respektvollen Aussprechens. Dieselbe gelesene Fundstelle wurde schon in Slot 112 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+      "note": "Wir fügen keine Rangfolge und keine erfundene Begegnung zwischen den Gesandten hinzu. Dieselbe Fundstelle trägt hier das Lernziel des respektvollen Aussprechens. Dieselbe gelesene Fundstelle wurde schon in Slot 112 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
       "sameLocusAsSlot": 112
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
@@ -5752,7 +5752,7 @@ const additions=
       },
       "6-8": {
         "goal": "Wir sprechen die Namen der Gesandten respektvoll aus, ohne einen gering zu machen.",
-        "intro": "Heute geht es um Allen Gesandten mit Respekt begegnen. Wir sprechen die Namen der Gesandten respektvoll aus, ohne einen gering zu machen. Wir lesen Qurʾān 2:136. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe gelesene Stelle wie in der Stunde über den Glauben an die Gesandten fordert, zwischen keinem Seiner Gesandten einen Unterschied zu machen. So kann das im Alltag aussehen: Jemand sagt einen Prophetnamen achtlos. Das Kind wiederholt den Namen ruhig und mit Respekt. Die Aufgabe: Wir sprechen drei im Vers genannte Namen langsam und ohne einen Witz. anbiyāʾ bedeutet: Propheten. salām bedeutet: Friede; der Gruß, den wir beim Namen sagen, steht nicht als Formel in diesem Vers. Die Grenze der Stunde: Wir fügen keine Rangfolge und keine erfundene Begegnung zwischen den Gesandten hinzu. Dieselbe Fundstelle trägt hier das Lernziel des respektvollen Aussprechens. Dieselbe gelesene Fundstelle wurde schon in Slot 112 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Allen Gesandten mit Respekt begegnen. Wir sprechen die Namen der Gesandten respektvoll aus, ohne einen gering zu machen. Wir lesen Qurʾān 2:136. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe gelesene Stelle wie in der Stunde über den Glauben an die Gesandten fordert, zwischen keinem Seiner Gesandten einen Unterschied zu machen. So kann das im Alltag aussehen: Jemand sagt einen Prophetnamen achtlos. Das Kind wiederholt den Namen ruhig und mit Respekt. Die Aufgabe: Wir sprechen drei im Vers genannte Namen langsam und ohne einen Witz. anbiyāʾ bedeutet: Propheten. salām bedeutet: Friede; der Gruß, den wir beim Namen sagen, steht nicht als Formel in diesem Vers. Die Grenze der Stunde: Wir fügen keine Rangfolge und keine erfundene Begegnung zwischen den Gesandten hinzu. Dieselbe Fundstelle trägt hier das Lernziel des respektvollen Aussprechens. Dieselbe gelesene Fundstelle wurde schon in Slot 112 mit einem anderen Lernziel verwendet.",
         "lines": [
           "Qurʾān 2:136 ist die gelesene Stelle.",
           "Dieselbe gelesene Stelle wie in der Stunde über den Glauben an die Gesandten fordert, zwischen keinem Seiner Gesandten einen Unterschied zu machen.",
@@ -5778,7 +5778,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Allen Gesandten mit Respekt begegnen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Allen Gesandten mit Respekt begegnen. Das Lernziel ist: Wir sprechen die Namen der Gesandten respektvoll aus, ohne einen gering zu machen. Die Seite https://www.islamweb.net/ar/library/content/49/140 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:136. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe gelesene Stelle wie in der Stunde über den Glauben an die Gesandten fordert, zwischen keinem Seiner Gesandten einen Unterschied zu machen. Alltag: Jemand sagt einen Prophetnamen achtlos. Das Kind wiederholt den Namen ruhig und mit Respekt. Aufgabe: Wir sprechen drei im Vers genannte Namen langsam und ohne einen Witz. anbiyāʾ bedeutet: Propheten. salām bedeutet: Friede; der Gruß, den wir beim Namen sagen, steht nicht als Formel in diesem Vers. Was nicht behauptet wird: Wir fügen keine Rangfolge und keine erfundene Begegnung zwischen den Gesandten hinzu. Dieselbe Fundstelle trägt hier das Lernziel des respektvollen Aussprechens. Dieselbe gelesene Fundstelle wurde schon in Slot 112 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Allen Gesandten mit Respekt begegnen. Das Lernziel ist: Wir sprechen die Namen der Gesandten respektvoll aus, ohne einen gering zu machen. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe gelesene Stelle wie in der Stunde über den Glauben an die Gesandten fordert, zwischen keinem Seiner Gesandten einen Unterschied zu machen. Alltag: Jemand sagt einen Prophetnamen achtlos. Das Kind wiederholt den Namen ruhig und mit Respekt. Aufgabe: Wir sprechen drei im Vers genannte Namen langsam und ohne einen Witz. anbiyāʾ bedeutet: Propheten. salām bedeutet: Friede; der Gruß, den wir beim Namen sagen, steht nicht als Formel in diesem Vers. Was nicht behauptet wird: Wir fügen keine Rangfolge und keine erfundene Begegnung zwischen den Gesandten hinzu. Dieselbe Fundstelle trägt hier das Lernziel des respektvollen Aussprechens. Dieselbe gelesene Fundstelle wurde schon in Slot 112 mit einem anderen Lernziel verwendet.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 2:136.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -5800,7 +5800,7 @@ const additions=
         "situation": "Jemand sagt einen Prophetnamen achtlos. Das Kind wiederholt den Namen ruhig und mit Respekt.",
         "practice": "Wir sprechen drei im Vers genannte Namen langsam und ohne einen Witz.",
         "summary": "Belegt ist Qurʾān 2:136. Ungeprüft bleibt: Wir fügen keine Rangfolge und keine erfundene Begegnung zwischen den Gesandten hinzu.",
-        "audioScript": "Für die älteren Kinder. Allen Gesandten mit Respekt begegnen. Dieselbe gelesene Stelle wie in der Stunde über den Glauben an die Gesandten fordert, zwischen keinem Seiner Gesandten einen Unterschied zu machen. Nicht belegt und deshalb nicht behauptet: Wir fügen keine Rangfolge und keine erfundene Begegnung zwischen den Gesandten hinzu."
+        "audioScript": "Allen Gesandten mit Respekt begegnen. Dieselbe gelesene Stelle wie in der Stunde über den Glauben an die Gesandten fordert, zwischen keinem Seiner Gesandten einen Unterschied zu machen. Nicht belegt und deshalb nicht behauptet: Wir fügen keine Rangfolge und keine erfundene Begegnung zwischen den Gesandten hinzu."
       }
     },
     "questions": {
@@ -5936,7 +5936,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Für die Jüngsten bleibt es beim guten Stäubchen. Der Satz über das Schlechte wird nicht als Strafszene ausgemalt. Eine Hadithnummer wurde nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Für die Jüngsten bleibt es beim guten Stäubchen. Der Satz über das Schlechte wird nicht als Strafszene ausgemalt. Eine Hadithnummer wurde nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Eine kleine Hilfe kann vor Allah Gewicht haben.",
@@ -5969,7 +5969,7 @@ const additions=
       },
       "6-8": {
         "goal": "Eine kleine Hilfe kann vor Allah Gewicht haben.",
-        "intro": "Heute geht es um Kleine Taten können wertvoll sein. Eine kleine Hilfe kann vor Allah Gewicht haben. Wir lesen Qurʾān 99:7. Sinngemäß, ohne beglaubigte Übersetzung: Der gespeicherte Text sagt: Wer das Gewicht eines Stäubchens an Gutem tut, wird es sehen. Im selben Ausdruck folgt der Satz über das Gewicht eines Stäubchens an Schlechtem. So kann das im Alltag aussehen: Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen. Die Aufgabe: Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war. miṯqāl bedeutet: Gewicht. ḏarrah bedeutet: ein sehr kleines Stäubchen. Die Grenze der Stunde: Für die Jüngsten bleibt es beim guten Stäubchen. Der Satz über das Schlechte wird nicht als Strafszene ausgemalt. Eine Hadithnummer wurde nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Kleine Taten können wertvoll sein. Eine kleine Hilfe kann vor Allah Gewicht haben. Wir lesen Qurʾān 99:7. Sinngemäß, ohne beglaubigte Übersetzung: Der gespeicherte Text sagt: Wer das Gewicht eines Stäubchens an Gutem tut, wird es sehen. Im selben Ausdruck folgt der Satz über das Gewicht eines Stäubchens an Schlechtem. So kann das im Alltag aussehen: Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen. Die Aufgabe: Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war. miṯqāl bedeutet: Gewicht. ḏarrah bedeutet: ein sehr kleines Stäubchen. Die Grenze der Stunde: Für die Jüngsten bleibt es beim guten Stäubchen. Der Satz über das Schlechte wird nicht als Strafszene ausgemalt. Eine Hadithnummer wurde nicht ergänzt.",
         "lines": [
           "Qurʾān 99:7 ist die gelesene Stelle.",
           "Im selben Ausdruck folgt der Satz über das Gewicht eines Stäubchens an Schlechtem.",
@@ -5995,7 +5995,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Kleine Taten können wertvoll sein von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Kleine Taten können wertvoll sein. Das Lernziel ist: Eine kleine Hilfe kann vor Allah Gewicht haben. Die Seite https://www.islamweb.net/ar/library/content/49/1971 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 99:7. Sinngemäß, keine beglaubigte Übersetzung: Der gespeicherte Text sagt: Wer das Gewicht eines Stäubchens an Gutem tut, wird es sehen. Im selben Ausdruck folgt der Satz über das Gewicht eines Stäubchens an Schlechtem. Alltag: Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen. Aufgabe: Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war. miṯqāl bedeutet: Gewicht. ḏarrah bedeutet: ein sehr kleines Stäubchen. Was nicht behauptet wird: Für die Jüngsten bleibt es beim guten Stäubchen. Der Satz über das Schlechte wird nicht als Strafszene ausgemalt. Eine Hadithnummer wurde nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Kleine Taten können wertvoll sein. Das Lernziel ist: Eine kleine Hilfe kann vor Allah Gewicht haben. Sinngemäß, keine beglaubigte Übersetzung: Der gespeicherte Text sagt: Wer das Gewicht eines Stäubchens an Gutem tut, wird es sehen. Im selben Ausdruck folgt der Satz über das Gewicht eines Stäubchens an Schlechtem. Alltag: Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen. Aufgabe: Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war. miṯqāl bedeutet: Gewicht. ḏarrah bedeutet: ein sehr kleines Stäubchen. Was nicht behauptet wird: Für die Jüngsten bleibt es beim guten Stäubchen. Der Satz über das Schlechte wird nicht als Strafszene ausgemalt. Eine Hadithnummer wurde nicht ergänzt.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 99:7.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -6017,7 +6017,7 @@ const additions=
         "situation": "Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen.",
         "practice": "Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war.",
         "summary": "Belegt ist Qurʾān 99:7. Ungeprüft bleibt: Für die Jüngsten bleibt es beim guten Stäubchen.",
-        "audioScript": "Für die älteren Kinder. Kleine Taten können wertvoll sein. Im selben Ausdruck folgt der Satz über das Gewicht eines Stäubchens an Schlechtem. Nicht belegt und deshalb nicht behauptet: Für die Jüngsten bleibt es beim guten Stäubchen."
+        "audioScript": "Kleine Taten können wertvoll sein. Im selben Ausdruck folgt der Satz über das Gewicht eines Stäubchens an Schlechtem. Nicht belegt und deshalb nicht behauptet: Für die Jüngsten bleibt es beim guten Stäubchen."
       }
     },
     "questions": {
@@ -6153,7 +6153,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers beschreibt ein Verhalten, keine Punkteliste. Wir erfinden keinen Anlass aus dem Leben eines bestimmten Gefährten. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Vers beschreibt ein Verhalten, keine Punkteliste. Wir erfinden keinen Anlass aus dem Leben eines bestimmten Gefährten. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Wir erfinden keine zusätzliche Geschichte.",
     "sample": "Wir können uns über etwas Gutes freuen, ohne andere kleiner zu machen.",
@@ -6186,7 +6186,7 @@ const additions=
       },
       "6-8": {
         "goal": "Wir können uns über etwas Gutes freuen, ohne andere kleiner zu machen.",
-        "intro": "Heute geht es um Bescheiden bleiben. Wir können uns über etwas Gutes freuen, ohne andere kleiner zu machen. Wir lesen Qurʾān 25:63. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers beschreibt die Diener des Allerbarmers als Menschen, die bescheiden auf der Erde gehen und den Unwissenden mit Frieden begegnen. So kann das im Alltag aussehen: Ein Kind hat ein Rätsel gelöst und sagt: Schön, dass es geklappt hat, statt: Ihr seid dumm. Die Aufgabe: Wir formulieren einen Satz über einen Erfolg ohne ein schlechtes Wort über ein anderes Kind. hawn bedeutet: Ruhe, Bescheidenheit im Gang. salām bedeutet: friedliche Antwort. Die Grenze der Stunde: Der Vers beschreibt ein Verhalten, keine Punkteliste. Wir erfinden keinen Anlass aus dem Leben eines bestimmten Gefährten. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Bescheiden bleiben. Wir können uns über etwas Gutes freuen, ohne andere kleiner zu machen. Wir lesen Qurʾān 25:63. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers beschreibt die Diener des Allerbarmers als Menschen, die bescheiden auf der Erde gehen und den Unwissenden mit Frieden begegnen. So kann das im Alltag aussehen: Ein Kind hat ein Rätsel gelöst und sagt: Schön, dass es geklappt hat, statt: Ihr seid dumm. Die Aufgabe: Wir formulieren einen Satz über einen Erfolg ohne ein schlechtes Wort über ein anderes Kind. hawn bedeutet: Ruhe, Bescheidenheit im Gang. salām bedeutet: friedliche Antwort. Die Grenze der Stunde: Der Vers beschreibt ein Verhalten, keine Punkteliste. Wir erfinden keinen Anlass aus dem Leben eines bestimmten Gefährten.",
         "lines": [
           "Qurʾān 25:63 ist die gelesene Stelle.",
           "Der Vers beschreibt die Diener des Allerbarmers als Menschen, die bescheiden auf der Erde gehen und den Unwissenden mit Frieden begegnen.",
@@ -6212,7 +6212,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Bescheiden bleiben von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Bescheiden bleiben. Das Lernziel ist: Wir können uns über etwas Gutes freuen, ohne andere kleiner zu machen. Die Seite https://www.islamweb.net/ar/library/content/49/1305 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 25:63. Sinngemäß, keine beglaubigte Übersetzung: Der Vers beschreibt die Diener des Allerbarmers als Menschen, die bescheiden auf der Erde gehen und den Unwissenden mit Frieden begegnen. Alltag: Ein Kind hat ein Rätsel gelöst und sagt: Schön, dass es geklappt hat, statt: Ihr seid dumm. Aufgabe: Wir formulieren einen Satz über einen Erfolg ohne ein schlechtes Wort über ein anderes Kind. hawn bedeutet: Ruhe, Bescheidenheit im Gang. salām bedeutet: friedliche Antwort. Was nicht behauptet wird: Der Vers beschreibt ein Verhalten, keine Punkteliste. Wir erfinden keinen Anlass aus dem Leben eines bestimmten Gefährten. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Bescheiden bleiben. Das Lernziel ist: Wir können uns über etwas Gutes freuen, ohne andere kleiner zu machen. Sinngemäß, keine beglaubigte Übersetzung: Der Vers beschreibt die Diener des Allerbarmers als Menschen, die bescheiden auf der Erde gehen und den Unwissenden mit Frieden begegnen. Alltag: Ein Kind hat ein Rätsel gelöst und sagt: Schön, dass es geklappt hat, statt: Ihr seid dumm. Aufgabe: Wir formulieren einen Satz über einen Erfolg ohne ein schlechtes Wort über ein anderes Kind. hawn bedeutet: Ruhe, Bescheidenheit im Gang. salām bedeutet: friedliche Antwort. Was nicht behauptet wird: Der Vers beschreibt ein Verhalten, keine Punkteliste. Wir erfinden keinen Anlass aus dem Leben eines bestimmten Gefährten.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 25:63.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -6234,7 +6234,7 @@ const additions=
         "situation": "Ein Kind hat ein Rätsel gelöst und sagt: Schön, dass es geklappt hat, statt: Ihr seid dumm.",
         "practice": "Wir formulieren einen Satz über einen Erfolg ohne ein schlechtes Wort über ein anderes Kind.",
         "summary": "Belegt ist Qurʾān 25:63. Ungeprüft bleibt: Der Vers beschreibt ein Verhalten, keine Punkteliste.",
-        "audioScript": "Für die älteren Kinder. Bescheiden bleiben. Der Vers beschreibt die Diener des Allerbarmers als Menschen, die bescheiden auf der Erde gehen und den Unwissenden mit Frieden begegnen. Nicht belegt und deshalb nicht behauptet: Der Vers beschreibt ein Verhalten, keine Punkteliste."
+        "audioScript": "Bescheiden bleiben. Der Vers beschreibt die Diener des Allerbarmers als Menschen, die bescheiden auf der Erde gehen und den Unwissenden mit Frieden begegnen. Nicht belegt und deshalb nicht behauptet: Der Vers beschreibt ein Verhalten, keine Punkteliste."
       }
     },
     "questions": {
@@ -6370,7 +6370,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die Namen der Gäste, das Kalb und die weiteren Sätze der Geschichte stehen nicht in diesem gespeicherten Versteil. Wir erzählen sie nicht als geprüften Zusatz. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Die Namen der Gäste, das Kalb und die weiteren Sätze der Geschichte stehen nicht in diesem gespeicherten Versteil. Wir erzählen sie nicht als geprüften Zusatz. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Wenn Gäste kommen, helfen wir den Eltern, freundlich zu sein.",
@@ -6403,7 +6403,7 @@ const additions=
       },
       "6-8": {
         "goal": "Wenn Gäste kommen, helfen wir den Eltern, freundlich zu sein.",
-        "intro": "Heute geht es um Mit Gästen freundlich umgehen. Wenn Gäste kommen, helfen wir den Eltern, freundlich zu sein. Wir lesen Qurʾān 51:24. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers fragt: Ist die Geschichte von den geehrten Gästen Ibrāhīms zu dir gekommen? Die Seite erklärt die Ehrung und verweist auf die ausführlichere Erzählung an anderer Stelle. So kann das im Alltag aussehen: Es klingelt. Das Kind holt mit Erlaubnis ein Glas Wasser und sagt einen freundlichen Gruß. Die Aufgabe: Wir üben, die Gäste anzusehen, leise zu grüßen und nicht in ihren Taschen zu stöbern. ḍayf bedeutet: Gast. Ibrāhīm bedeutet: ein Gesandter Allahs, den der Vers nennt. Die Grenze der Stunde: Die Namen der Gäste, das Kalb und die weiteren Sätze der Geschichte stehen nicht in diesem gespeicherten Versteil. Wir erzählen sie nicht als geprüften Zusatz. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Mit Gästen freundlich umgehen. Wenn Gäste kommen, helfen wir den Eltern, freundlich zu sein. Wir lesen Qurʾān 51:24. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers fragt: Ist die Geschichte von den geehrten Gästen Ibrāhīms zu dir gekommen? Die Seite erklärt die Ehrung und verweist auf die ausführlichere Erzählung an anderer Stelle. So kann das im Alltag aussehen: Es klingelt. Das Kind holt mit Erlaubnis ein Glas Wasser und sagt einen freundlichen Gruß. Die Aufgabe: Wir üben, die Gäste anzusehen, leise zu grüßen und nicht in ihren Taschen zu stöbern. ḍayf bedeutet: Gast. Ibrāhīm bedeutet: ein Gesandter Allahs, den der Vers nennt. Die Grenze der Stunde: Die Namen der Gäste, das Kalb und die weiteren Sätze der Geschichte stehen nicht in diesem gespeicherten Versteil. Wir erzählen sie nicht als geprüften Zusatz.",
         "lines": [
           "Qurʾān 51:24 ist die gelesene Stelle.",
           "Der Vers fragt: Ist die Geschichte von den geehrten Gästen Ibrāhīms zu dir gekommen?",
@@ -6429,7 +6429,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Mit Gästen freundlich umgehen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Mit Gästen freundlich umgehen. Das Lernziel ist: Wenn Gäste kommen, helfen wir den Eltern, freundlich zu sein. Die Seite https://www.islamweb.net/ar/library/content/49/1768 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 51:24. Sinngemäß, keine beglaubigte Übersetzung: Der Vers fragt: Ist die Geschichte von den geehrten Gästen Ibrāhīms zu dir gekommen? Die Seite erklärt die Ehrung und verweist auf die ausführlichere Erzählung an anderer Stelle. Alltag: Es klingelt. Das Kind holt mit Erlaubnis ein Glas Wasser und sagt einen freundlichen Gruß. Aufgabe: Wir üben, die Gäste anzusehen, leise zu grüßen und nicht in ihren Taschen zu stöbern. ḍayf bedeutet: Gast. Ibrāhīm bedeutet: ein Gesandter Allahs, den der Vers nennt. Was nicht behauptet wird: Die Namen der Gäste, das Kalb und die weiteren Sätze der Geschichte stehen nicht in diesem gespeicherten Versteil. Wir erzählen sie nicht als geprüften Zusatz. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Mit Gästen freundlich umgehen. Das Lernziel ist: Wenn Gäste kommen, helfen wir den Eltern, freundlich zu sein. Sinngemäß, keine beglaubigte Übersetzung: Der Vers fragt: Ist die Geschichte von den geehrten Gästen Ibrāhīms zu dir gekommen? Die Seite erklärt die Ehrung und verweist auf die ausführlichere Erzählung an anderer Stelle. Alltag: Es klingelt. Das Kind holt mit Erlaubnis ein Glas Wasser und sagt einen freundlichen Gruß. Aufgabe: Wir üben, die Gäste anzusehen, leise zu grüßen und nicht in ihren Taschen zu stöbern. ḍayf bedeutet: Gast. Ibrāhīm bedeutet: ein Gesandter Allahs, den der Vers nennt. Was nicht behauptet wird: Die Namen der Gäste, das Kalb und die weiteren Sätze der Geschichte stehen nicht in diesem gespeicherten Versteil. Wir erzählen sie nicht als geprüften Zusatz.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 51:24.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -6451,7 +6451,7 @@ const additions=
         "situation": "Es klingelt. Das Kind holt mit Erlaubnis ein Glas Wasser und sagt einen freundlichen Gruß.",
         "practice": "Wir üben, die Gäste anzusehen, leise zu grüßen und nicht in ihren Taschen zu stöbern.",
         "summary": "Belegt ist Qurʾān 51:24. Ungeprüft bleibt: Die Namen der Gäste, das Kalb und die weiteren Sätze der Geschichte stehen nicht in diesem gespeicherten Versteil.",
-        "audioScript": "Für die älteren Kinder. Mit Gästen freundlich umgehen. Der Vers fragt: Ist die Geschichte von den geehrten Gästen Ibrāhīms zu dir gekommen? Nicht belegt und deshalb nicht behauptet: Die Namen der Gäste, das Kalb und die weiteren Sätze der Geschichte stehen nicht in diesem gespeicherten Versteil."
+        "audioScript": "Mit Gästen freundlich umgehen. Der Vers fragt: Ist die Geschichte von den geehrten Gästen Ibrāhīms zu dir gekommen? Nicht belegt und deshalb nicht behauptet: Die Namen der Gäste, das Kalb und die weiteren Sätze der Geschichte stehen nicht in diesem gespeicherten Versteil."
       }
     },
     "questions": {
@@ -6587,7 +6587,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers ist keine Minutenregel für Hausaufgaben. Die konkrete Pausenlänge ist eine Familienvereinbarung. Die anschließende Bitte des Verses wird hier nicht als vollständiger Bitttext auswendig gesetzt. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Vers ist keine Minutenregel für Hausaufgaben. Die konkrete Pausenlänge ist eine Familienvereinbarung. Die anschließende Bitte des Verses wird hier nicht als vollständiger Bitttext auswendig gesetzt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Nach einer konzentrierten Zeit machen wir eine echte Pause.",
@@ -6620,7 +6620,7 @@ const additions=
       },
       "6-8": {
         "goal": "Nach einer konzentrierten Zeit machen wir eine echte Pause.",
-        "intro": "Heute geht es um Lernen und Pausen ausgleichen. Nach einer konzentrierten Zeit machen wir eine echte Pause. Wir lesen Qurʾān 2:286. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass Allah keiner Seele mehr auferlegt, als sie tragen kann. Sie hat, was sie erworben hat, und gegen sie ist, was sie erworben hat. Danach beginnt eine Bitte. So kann das im Alltag aussehen: Ein Kind hat eine Viertelstunde gelesen. Danach steht es auf, trinkt Wasser und setzt sich erst dann wieder. Die Aufgabe: Wir legen eine kurze Lernzeit und eine kurze Pause fest und halten beide ein. wusʿ bedeutet: das, was jemand tragen kann. kasb bedeutet: das, was der Mensch erwirbt. Die Grenze der Stunde: Der Vers ist keine Minutenregel für Hausaufgaben. Die konkrete Pausenlänge ist eine Familienvereinbarung. Die anschließende Bitte des Verses wird hier nicht als vollständiger Bitttext auswendig gesetzt. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Lernen und Pausen ausgleichen. Nach einer konzentrierten Zeit machen wir eine echte Pause. Wir lesen Qurʾān 2:286. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass Allah keiner Seele mehr auferlegt, als sie tragen kann. Sie hat, was sie erworben hat, und gegen sie ist, was sie erworben hat. Danach beginnt eine Bitte. So kann das im Alltag aussehen: Ein Kind hat eine Viertelstunde gelesen. Danach steht es auf, trinkt Wasser und setzt sich erst dann wieder. Die Aufgabe: Wir legen eine kurze Lernzeit und eine kurze Pause fest und halten beide ein. wusʿ bedeutet: das, was jemand tragen kann. kasb bedeutet: das, was der Mensch erwirbt. Die Grenze der Stunde: Der Vers ist keine Minutenregel für Hausaufgaben. Die konkrete Pausenlänge ist eine Familienvereinbarung. Die anschließende Bitte des Verses wird hier nicht als vollständiger Bitttext auswendig gesetzt.",
         "lines": [
           "Qurʾān 2:286 ist die gelesene Stelle.",
           "Der Vers sagt, dass Allah keiner Seele mehr auferlegt, als sie tragen kann.",
@@ -6646,7 +6646,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Lernen und Pausen ausgleichen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Lernen und Pausen ausgleichen. Das Lernziel ist: Nach einer konzentrierten Zeit machen wir eine echte Pause. Die Seite https://www.islamweb.net/ar/library/content/49/233 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:286. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass Allah keiner Seele mehr auferlegt, als sie tragen kann. Sie hat, was sie erworben hat, und gegen sie ist, was sie erworben hat. Danach beginnt eine Bitte. Alltag: Ein Kind hat eine Viertelstunde gelesen. Danach steht es auf, trinkt Wasser und setzt sich erst dann wieder. Aufgabe: Wir legen eine kurze Lernzeit und eine kurze Pause fest und halten beide ein. wusʿ bedeutet: das, was jemand tragen kann. kasb bedeutet: das, was der Mensch erwirbt. Was nicht behauptet wird: Der Vers ist keine Minutenregel für Hausaufgaben. Die konkrete Pausenlänge ist eine Familienvereinbarung. Die anschließende Bitte des Verses wird hier nicht als vollständiger Bitttext auswendig gesetzt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Lernen und Pausen ausgleichen. Das Lernziel ist: Nach einer konzentrierten Zeit machen wir eine echte Pause. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass Allah keiner Seele mehr auferlegt, als sie tragen kann. Sie hat, was sie erworben hat, und gegen sie ist, was sie erworben hat. Danach beginnt eine Bitte. Alltag: Ein Kind hat eine Viertelstunde gelesen. Danach steht es auf, trinkt Wasser und setzt sich erst dann wieder. Aufgabe: Wir legen eine kurze Lernzeit und eine kurze Pause fest und halten beide ein. wusʿ bedeutet: das, was jemand tragen kann. kasb bedeutet: das, was der Mensch erwirbt. Was nicht behauptet wird: Der Vers ist keine Minutenregel für Hausaufgaben. Die konkrete Pausenlänge ist eine Familienvereinbarung. Die anschließende Bitte des Verses wird hier nicht als vollständiger Bitttext auswendig gesetzt.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 2:286.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -6668,7 +6668,7 @@ const additions=
         "situation": "Ein Kind hat eine Viertelstunde gelesen. Danach steht es auf, trinkt Wasser und setzt sich erst dann wieder.",
         "practice": "Wir legen eine kurze Lernzeit und eine kurze Pause fest und halten beide ein.",
         "summary": "Belegt ist Qurʾān 2:286. Ungeprüft bleibt: Der Vers ist keine Minutenregel für Hausaufgaben.",
-        "audioScript": "Für die älteren Kinder. Lernen und Pausen ausgleichen. Der Vers sagt, dass Allah keiner Seele mehr auferlegt, als sie tragen kann. Nicht belegt und deshalb nicht behauptet: Der Vers ist keine Minutenregel für Hausaufgaben."
+        "audioScript": "Lernen und Pausen ausgleichen. Der Vers sagt, dass Allah keiner Seele mehr auferlegt, als sie tragen kann. Nicht belegt und deshalb nicht behauptet: Der Vers ist keine Minutenregel für Hausaufgaben."
       }
     },
     "questions": {
@@ -6804,7 +6804,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der gespeicherte Ausdruck geht am Ende in das erste Wort des nächsten Verses über. Wir bauen daraus keine Angst und kein Bild von Strafe. Verzeihung ersetzt nicht die Entschuldigung bei dem Menschen, den wir verletzt haben. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der gespeicherte Ausdruck geht am Ende in das erste Wort des nächsten Verses über. Wir bauen daraus keine Angst und kein Bild von Strafe. Verzeihung ersetzt nicht die Entschuldigung bei dem Menschen, den wir verletzt haben. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Bei Gefahr holst du einen Menschen. Eine Bitte allein reicht dann nicht.",
     "sample": "Nach einem Fehler dürfen wir um Verzeihung bitten und etwas besser machen.",
@@ -6837,7 +6837,7 @@ const additions=
       },
       "6-8": {
         "goal": "Nach einem Fehler dürfen wir um Verzeihung bitten und etwas besser machen.",
-        "intro": "Heute geht es um Fehler bereuen und verbessern. Nach einem Fehler dürfen wir um Verzeihung bitten und etwas besser machen. Wir lesen Qurʾān 39:53. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers ruft den Dienern zu, die gegen sich selbst maßlos waren: Verzweifelt nicht an Allahs Barmherzigkeit. Allah vergibt die Sünden allesamt. Er ist der Vergebende, der Barmherzige. So kann das im Alltag aussehen: Ein Kind hat ein hartes Wort gesagt. Es sagt Entschuldigung und räumt danach eine kleine Sache mit auf. Die Aufgabe: Wir üben: Es tut mir leid. Ich mache das wieder gut. raḥmah bedeutet: Barmherzigkeit. lā taqnaṭū bedeutet: verzweifelt nicht. Die Grenze der Stunde: Der gespeicherte Ausdruck geht am Ende in das erste Wort des nächsten Verses über. Wir bauen daraus keine Angst und kein Bild von Strafe. Verzeihung ersetzt nicht die Entschuldigung bei dem Menschen, den wir verletzt haben. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Fehler bereuen und verbessern. Nach einem Fehler dürfen wir um Verzeihung bitten und etwas besser machen. Wir lesen Qurʾān 39:53. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers ruft den Dienern zu, die gegen sich selbst maßlos waren: Verzweifelt nicht an Allahs Barmherzigkeit. Allah vergibt die Sünden allesamt. Er ist der Vergebende, der Barmherzige. So kann das im Alltag aussehen: Ein Kind hat ein hartes Wort gesagt. Es sagt Entschuldigung und räumt danach eine kleine Sache mit auf. Die Aufgabe: Wir üben: Es tut mir leid. Ich mache das wieder gut. raḥmah bedeutet: Barmherzigkeit. lā taqnaṭū bedeutet: verzweifelt nicht. Die Grenze der Stunde: Der gespeicherte Ausdruck geht am Ende in das erste Wort des nächsten Verses über. Wir bauen daraus keine Angst und kein Bild von Strafe. Verzeihung ersetzt nicht die Entschuldigung bei dem Menschen, den wir verletzt haben.",
         "lines": [
           "Qurʾān 39:53 ist die gelesene Stelle.",
           "Der Vers ruft den Dienern zu, die gegen sich selbst maßlos waren: Verzweifelt nicht an Allahs Barmherzigkeit.",
@@ -6863,7 +6863,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Fehler bereuen und verbessern von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Fehler bereuen und verbessern. Das Lernziel ist: Nach einem Fehler dürfen wir um Verzeihung bitten und etwas besser machen. Die Seite https://www.islamweb.net/ar/library/content/49/1629 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 39:53. Sinngemäß, keine beglaubigte Übersetzung: Der Vers ruft den Dienern zu, die gegen sich selbst maßlos waren: Verzweifelt nicht an Allahs Barmherzigkeit. Allah vergibt die Sünden allesamt. Er ist der Vergebende, der Barmherzige. Alltag: Ein Kind hat ein hartes Wort gesagt. Es sagt Entschuldigung und räumt danach eine kleine Sache mit auf. Aufgabe: Wir üben: Es tut mir leid. Ich mache das wieder gut. raḥmah bedeutet: Barmherzigkeit. lā taqnaṭū bedeutet: verzweifelt nicht. Was nicht behauptet wird: Der gespeicherte Ausdruck geht am Ende in das erste Wort des nächsten Verses über. Wir bauen daraus keine Angst und kein Bild von Strafe. Verzeihung ersetzt nicht die Entschuldigung bei dem Menschen, den wir verletzt haben. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Fehler bereuen und verbessern. Das Lernziel ist: Nach einem Fehler dürfen wir um Verzeihung bitten und etwas besser machen. Sinngemäß, keine beglaubigte Übersetzung: Der Vers ruft den Dienern zu, die gegen sich selbst maßlos waren: Verzweifelt nicht an Allahs Barmherzigkeit. Allah vergibt die Sünden allesamt. Er ist der Vergebende, der Barmherzige. Alltag: Ein Kind hat ein hartes Wort gesagt. Es sagt Entschuldigung und räumt danach eine kleine Sache mit auf. Aufgabe: Wir üben: Es tut mir leid. Ich mache das wieder gut. raḥmah bedeutet: Barmherzigkeit. lā taqnaṭū bedeutet: verzweifelt nicht. Was nicht behauptet wird: Der gespeicherte Ausdruck geht am Ende in das erste Wort des nächsten Verses über. Wir bauen daraus keine Angst und kein Bild von Strafe. Verzeihung ersetzt nicht die Entschuldigung bei dem Menschen, den wir verletzt haben.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 39:53.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -6885,7 +6885,7 @@ const additions=
         "situation": "Ein Kind hat ein hartes Wort gesagt. Es sagt Entschuldigung und räumt danach eine kleine Sache mit auf.",
         "practice": "Wir üben: Es tut mir leid. Ich mache das wieder gut.",
         "summary": "Belegt ist Qurʾān 39:53. Ungeprüft bleibt: Der gespeicherte Ausdruck geht am Ende in das erste Wort des nächsten Verses über.",
-        "audioScript": "Für die älteren Kinder. Fehler bereuen und verbessern. Der Vers ruft den Dienern zu, die gegen sich selbst maßlos waren: Verzweifelt nicht an Allahs Barmherzigkeit. Nicht belegt und deshalb nicht behauptet: Der gespeicherte Ausdruck geht am Ende in das erste Wort des nächsten Verses über."
+        "audioScript": "Fehler bereuen und verbessern. Der Vers ruft den Dienern zu, die gegen sich selbst maßlos waren: Verzweifelt nicht an Allahs Barmherzigkeit. Nicht belegt und deshalb nicht behauptet: Der gespeicherte Ausdruck geht am Ende in das erste Wort des nächsten Verses über."
       }
     },
     "questions": {
@@ -7021,7 +7021,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Die fünf Namen Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ stehen nicht in diesem Vers. Ein Stundenplan mit Uhrzeiten wurde auf der Seite nicht gelesen. Die Rechtsfrage der genauen Grenzen bleibt ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Die fünf Namen Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ stehen nicht in diesem Vers. Ein Stundenplan mit Uhrzeiten wurde auf der Seite nicht gelesen. Die Rechtsfrage der genauen Grenzen bleibt ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
     "sample": "Auf einem Plan erkennen wir, dass das Gebet Zeiten am Tag hat.",
@@ -7054,7 +7054,7 @@ const additions=
       },
       "6-8": {
         "goal": "Auf einem Plan erkennen wir, dass das Gebet Zeiten am Tag hat.",
-        "intro": "Heute geht es um Die Gebetszeiten kennenlernen. Auf einem Plan erkennen wir, dass das Gebet Zeiten am Tag hat. Wir lesen Qurʾān 17:78. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt: Verrichte das Gebet vom Neigen der Sonne bis zur Dunkelheit der Nacht, und die Lesung der Morgenfrühe. Die Lesung der Morgenfrühe ist bezeugt. So kann das im Alltag aussehen: Ein Kind sieht auf dem bekannten Gebetsplan der App die Namen der Tagesgebete und sucht den Morgen. Die Aufgabe: Wir ordnen nur, was der Vers selbst nennt: eine Zeit ab dem Neigen der Sonne, die Nacht und den Morgen. Die fünf Namen erklären wir als bekannte Bezeichnungen der App, nicht als. dulūk bedeutet: das Neigen der Sonne, so der Versanfang. faǧr bedeutet: Morgenfrühe; das Wort steht im Vers, die fünf Namen insgesamt nicht. Die Grenze der Stunde: Die fünf Namen Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ stehen nicht in diesem Vers. Ein Stundenplan mit Uhrzeiten wurde auf der Seite nicht gelesen. Die Rechtsfrage der genauen Grenzen bleibt ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Die Gebetszeiten kennenlernen. Auf einem Plan erkennen wir, dass das Gebet Zeiten am Tag hat. Wir lesen Qurʾān 17:78. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt: Verrichte das Gebet vom Neigen der Sonne bis zur Dunkelheit der Nacht, und die Lesung der Morgenfrühe. Die Lesung der Morgenfrühe ist bezeugt. So kann das im Alltag aussehen: Ein Kind sieht auf dem bekannten Gebetsplan der App die Namen der Tagesgebete und sucht den Morgen. Die Aufgabe: Wir ordnen nur, was der Vers selbst nennt: eine Zeit ab dem Neigen der Sonne, die Nacht und den Morgen. Die fünf Namen erklären wir als bekannte Bezeichnungen der App, nicht als. dulūk bedeutet: das Neigen der Sonne, so der Versanfang. faǧr bedeutet: Morgenfrühe; das Wort steht im Vers, die fünf Namen insgesamt nicht. Die Grenze der Stunde: Die fünf Namen Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ stehen nicht in diesem Vers. Ein Stundenplan mit Uhrzeiten wurde auf der Seite nicht gelesen. Die Rechtsfrage der genauen Grenzen bleibt ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
         "lines": [
           "Qurʾān 17:78 ist die gelesene Stelle.",
           "Der Vers sagt: Verrichte das Gebet vom Neigen der Sonne bis zur Dunkelheit der Nacht, und die Lesung der Morgenfrühe.",
@@ -7080,7 +7080,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Die Gebetszeiten kennenlernen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Die Gebetszeiten kennenlernen. Das Lernziel ist: Auf einem Plan erkennen wir, dass das Gebet Zeiten am Tag hat. Die Seite https://www.islamweb.net/ar/library/content/49/1039 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:78. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt: Verrichte das Gebet vom Neigen der Sonne bis zur Dunkelheit der Nacht, und die Lesung der Morgenfrühe. Die Lesung der Morgenfrühe ist bezeugt. Alltag: Ein Kind sieht auf dem bekannten Gebetsplan der App die Namen der Tagesgebete und sucht den Morgen. Aufgabe: Wir ordnen nur, was der Vers selbst nennt: eine Zeit ab dem Neigen der Sonne, die Nacht und den Morgen. Die fünf Namen erklären wir als bekannte Bezeichnungen der App, nicht als. dulūk bedeutet: das Neigen der Sonne, so der Versanfang. faǧr bedeutet: Morgenfrühe; das Wort steht im Vers, die fünf Namen insgesamt nicht. Was nicht behauptet wird: Die fünf Namen Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ stehen nicht in diesem Vers. Ein Stundenplan mit Uhrzeiten wurde auf der Seite nicht gelesen. Die Rechtsfrage der genauen Grenzen bleibt ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Die Gebetszeiten kennenlernen. Das Lernziel ist: Auf einem Plan erkennen wir, dass das Gebet Zeiten am Tag hat. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt: Verrichte das Gebet vom Neigen der Sonne bis zur Dunkelheit der Nacht, und die Lesung der Morgenfrühe. Die Lesung der Morgenfrühe ist bezeugt. Alltag: Ein Kind sieht auf dem bekannten Gebetsplan der App die Namen der Tagesgebete und sucht den Morgen. Aufgabe: Wir ordnen nur, was der Vers selbst nennt: eine Zeit ab dem Neigen der Sonne, die Nacht und den Morgen. Die fünf Namen erklären wir als bekannte Bezeichnungen der App, nicht als. dulūk bedeutet: das Neigen der Sonne, so der Versanfang. faǧr bedeutet: Morgenfrühe; das Wort steht im Vers, die fünf Namen insgesamt nicht. Was nicht behauptet wird: Die fünf Namen Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ stehen nicht in diesem Vers. Ein Stundenplan mit Uhrzeiten wurde auf der Seite nicht gelesen. Die Rechtsfrage der genauen Grenzen bleibt ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 17:78.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -7102,7 +7102,7 @@ const additions=
         "situation": "Ein Kind sieht auf dem bekannten Gebetsplan der App die Namen der Tagesgebete und sucht den Morgen.",
         "practice": "Wir ordnen nur, was der Vers selbst nennt: eine Zeit ab dem Neigen der Sonne, die Nacht und den Morgen. Die fünf Namen erklären wir als bekannte Bezeichnungen der App, nicht als Aufdruck dieser Seite.",
         "summary": "Belegt ist Qurʾān 17:78. Ungeprüft bleibt: Die fünf Namen Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ stehen nicht in diesem Vers.",
-        "audioScript": "Für die älteren Kinder. Die Gebetszeiten kennenlernen. Der Vers sagt: Verrichte das Gebet vom Neigen der Sonne bis zur Dunkelheit der Nacht, und die Lesung der Morgenfrühe. Nicht belegt und deshalb nicht behauptet: Die fünf Namen Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ stehen nicht in diesem Vers."
+        "audioScript": "Die Gebetszeiten kennenlernen. Der Vers sagt: Verrichte das Gebet vom Neigen der Sonne bis zur Dunkelheit der Nacht, und die Lesung der Morgenfrühe. Nicht belegt und deshalb nicht behauptet: Die fünf Namen Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ stehen nicht in diesem Vers."
       }
     },
     "questions": {
@@ -7238,7 +7238,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die Seite beschreibt das langsame Lesen des Propheten, ohne dass wir eine Buchnummer übernehmen. Wir erfinden keine Tajwīd-Regel wie einen bestimmten Laut, der auf der Seite nicht steht. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Die Seite beschreibt das langsame Lesen des Propheten, ohne dass wir eine Buchnummer übernehmen. Wir erfinden keine Tajwīd-Regel wie einen bestimmten Laut, der auf der Seite nicht steht. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Wir erfinden keine zusätzliche Geschichte.",
     "sample": "Wir hören einer richtigen Rezitation zu und wiederholen sie nicht mit einer Computerstimme.",
@@ -7271,7 +7271,7 @@ const additions=
       },
       "6-8": {
         "goal": "Wir hören einer richtigen Rezitation zu und wiederholen sie nicht mit einer Computerstimme.",
-        "intro": "Heute geht es um Einfaches Tajwīd-Hören. Wir hören einer richtigen Rezitation zu und wiederholen sie nicht mit einer Computerstimme. Wir lesen Qurʾān 73:4. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers lautet: Oder füge hinzu, und trag den Qurʾān deutlich vor. Die Seite erklärt das als langsames Lesen, das beim Verstehen hilft. So kann das im Alltag aussehen: Die Lehrperson liest einen kurzen deutschen Satz einmal schnell und einmal deutlich. Die Kinder sagen, welches Hören leichter war. Die Aufgabe: Wir hören nur zu, wenn ein Mensch wirklich rezitiert. In diesem Paket gibt es keine Aufnahme. tartīl bedeutet: deutliches, bedächtiges Vortragen. Qurʾān bedeutet: die Rezitation, die hier nicht künstlich erzeugt wird. Die Grenze der Stunde: Die Seite beschreibt das langsame Lesen des Propheten, ohne dass wir eine Buchnummer übernehmen. Wir erfinden keine Tajwīd-Regel wie einen bestimmten Laut, der auf der Seite nicht steht. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Einfaches Tajwīd-Hören. Wir hören einer richtigen Rezitation zu und wiederholen sie nicht mit einer Computerstimme. Wir lesen Qurʾān 73:4. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers lautet: Oder füge hinzu, und trag den Qurʾān deutlich vor. Die Seite erklärt das als langsames Lesen, das beim Verstehen hilft. So kann das im Alltag aussehen: Die Lehrperson liest einen kurzen deutschen Satz einmal schnell und einmal deutlich. Die Kinder sagen, welches Hören leichter war. Die Aufgabe: Wir hören nur zu, wenn ein Mensch wirklich rezitiert. In diesem Paket gibt es keine Aufnahme. tartīl bedeutet: deutliches, bedächtiges Vortragen. Qurʾān bedeutet: die Rezitation, die hier nicht künstlich erzeugt wird. Die Grenze der Stunde: Die Seite beschreibt das langsame Lesen des Propheten, ohne dass wir eine Buchnummer übernehmen. Wir erfinden keine Tajwīd-Regel wie einen bestimmten Laut, der auf der Seite nicht steht.",
         "lines": [
           "Qurʾān 73:4 ist die gelesene Stelle.",
           "Der Vers lautet: Oder füge hinzu, und trag den Qurʾān deutlich vor.",
@@ -7297,7 +7297,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Einfaches Tajwīd-Hören von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Einfaches Tajwīd-Hören. Das Lernziel ist: Wir hören einer richtigen Rezitation zu und wiederholen sie nicht mit einer Computerstimme. Die Seite https://www.islamweb.net/ar/library/content/49/1904 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 73:4. Sinngemäß, keine beglaubigte Übersetzung: Der Vers lautet: Oder füge hinzu, und trag den Qurʾān deutlich vor. Die Seite erklärt das als langsames Lesen, das beim Verstehen hilft. Alltag: Die Lehrperson liest einen kurzen deutschen Satz einmal schnell und einmal deutlich. Die Kinder sagen, welches Hören leichter war. Aufgabe: Wir hören nur zu, wenn ein Mensch wirklich rezitiert. In diesem Paket gibt es keine Aufnahme. tartīl bedeutet: deutliches, bedächtiges Vortragen. Qurʾān bedeutet: die Rezitation, die hier nicht künstlich erzeugt wird. Was nicht behauptet wird: Die Seite beschreibt das langsame Lesen des Propheten, ohne dass wir eine Buchnummer übernehmen. Wir erfinden keine Tajwīd-Regel wie einen bestimmten Laut, der auf der Seite nicht steht. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Einfaches Tajwīd-Hören. Das Lernziel ist: Wir hören einer richtigen Rezitation zu und wiederholen sie nicht mit einer Computerstimme. Sinngemäß, keine beglaubigte Übersetzung: Der Vers lautet: Oder füge hinzu, und trag den Qurʾān deutlich vor. Die Seite erklärt das als langsames Lesen, das beim Verstehen hilft. Alltag: Die Lehrperson liest einen kurzen deutschen Satz einmal schnell und einmal deutlich. Die Kinder sagen, welches Hören leichter war. Aufgabe: Wir hören nur zu, wenn ein Mensch wirklich rezitiert. In diesem Paket gibt es keine Aufnahme. tartīl bedeutet: deutliches, bedächtiges Vortragen. Qurʾān bedeutet: die Rezitation, die hier nicht künstlich erzeugt wird. Was nicht behauptet wird: Die Seite beschreibt das langsame Lesen des Propheten, ohne dass wir eine Buchnummer übernehmen. Wir erfinden keine Tajwīd-Regel wie einen bestimmten Laut, der auf der Seite nicht steht.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 73:4.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -7319,7 +7319,7 @@ const additions=
         "situation": "Die Lehrperson liest einen kurzen deutschen Satz einmal schnell und einmal deutlich. Die Kinder sagen, welches Hören leichter war.",
         "practice": "Wir hören nur zu, wenn ein Mensch wirklich rezitiert. In diesem Paket gibt es keine Aufnahme.",
         "summary": "Belegt ist Qurʾān 73:4. Ungeprüft bleibt: Die Seite beschreibt das langsame Lesen des Propheten, ohne dass wir eine Buchnummer übernehmen.",
-        "audioScript": "Für die älteren Kinder. Einfaches Tajwīd-Hören. Der Vers lautet: Oder füge hinzu, und trag den Qurʾān deutlich vor. Nicht belegt und deshalb nicht behauptet: Die Seite beschreibt das langsame Lesen des Propheten, ohne dass wir eine Buchnummer übernehmen."
+        "audioScript": "Einfaches Tajwīd-Hören. Der Vers lautet: Oder füge hinzu, und trag den Qurʾān deutlich vor. Nicht belegt und deshalb nicht behauptet: Die Seite beschreibt das langsame Lesen des Propheten, ohne dass wir eine Buchnummer übernehmen."
       }
     },
     "questions": {
@@ -7455,7 +7455,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die Höhle, Ḫadīǧa, ein Datum und die weiteren Verse der Sūrah stehen in diesem gespeicherten Auszug nicht. Wir fügen sie nicht hinzu. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Die Höhle, Ḫadīǧa, ein Datum und die weiteren Verse der Sūrah stehen in diesem gespeicherten Auszug nicht. Wir fügen sie nicht hinzu. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat.",
@@ -7488,7 +7488,7 @@ const additions=
       },
       "6-8": {
         "goal": "Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat.",
-        "intro": "Heute geht es um Muḥammad Friede sei mit ihm in Makkah. Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat. Wir lesen Qurʾān 96:1. Sinngemäß, ohne beglaubigte Übersetzung: Der gespeicherte Auszug ist der erste Vers: Lies im Namen deines Herrn, der erschaffen hat. Die Seite bricht den Ausdruck dort ab. So kann das im Alltag aussehen: Wir sagen: Dieser Vers gehört an den Anfang der Botschaft. Mehr erzählen wir heute nicht. Die Aufgabe: Wir wiederholen nur diesen deutschen Sinn und malen keine Höhle. iqraʾ bedeutet: lies. rabb bedeutet: Herr. Die Grenze der Stunde: Die Höhle, Ḫadīǧa, ein Datum und die weiteren Verse der Sūrah stehen in diesem gespeicherten Auszug nicht. Wir fügen sie nicht hinzu. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Muḥammad Friede sei mit ihm in Makkah. Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat. Wir lesen Qurʾān 96:1. Sinngemäß, ohne beglaubigte Übersetzung: Der gespeicherte Auszug ist der erste Vers: Lies im Namen deines Herrn, der erschaffen hat. Die Seite bricht den Ausdruck dort ab. So kann das im Alltag aussehen: Wir sagen: Dieser Vers gehört an den Anfang der Botschaft. Mehr erzählen wir heute nicht. Die Aufgabe: Wir wiederholen nur diesen deutschen Sinn und malen keine Höhle. iqraʾ bedeutet: lies. rabb bedeutet: Herr. Die Grenze der Stunde: Die Höhle, Ḫadīǧa, ein Datum und die weiteren Verse der Sūrah stehen in diesem gespeicherten Auszug nicht. Wir fügen sie nicht hinzu.",
         "lines": [
           "Qurʾān 96:1 ist die gelesene Stelle.",
           "Die Seite bricht den Ausdruck dort ab.",
@@ -7514,7 +7514,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Muḥammad Friede sei mit ihm in Makkah von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Muḥammad Friede sei mit ihm in Makkah. Das Lernziel ist: Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat. Die Seite https://www.islamweb.net/ar/library/content/49/1965 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 96:1. Sinngemäß, keine beglaubigte Übersetzung: Der gespeicherte Auszug ist der erste Vers: Lies im Namen deines Herrn, der erschaffen hat. Die Seite bricht den Ausdruck dort ab. Alltag: Wir sagen: Dieser Vers gehört an den Anfang der Botschaft. Mehr erzählen wir heute nicht. Aufgabe: Wir wiederholen nur diesen deutschen Sinn und malen keine Höhle. iqraʾ bedeutet: lies. rabb bedeutet: Herr. Was nicht behauptet wird: Die Höhle, Ḫadīǧa, ein Datum und die weiteren Verse der Sūrah stehen in diesem gespeicherten Auszug nicht. Wir fügen sie nicht hinzu. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Muḥammad Friede sei mit ihm in Makkah. Das Lernziel ist: Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat. Sinngemäß, keine beglaubigte Übersetzung: Der gespeicherte Auszug ist der erste Vers: Lies im Namen deines Herrn, der erschaffen hat. Die Seite bricht den Ausdruck dort ab. Alltag: Wir sagen: Dieser Vers gehört an den Anfang der Botschaft. Mehr erzählen wir heute nicht. Aufgabe: Wir wiederholen nur diesen deutschen Sinn und malen keine Höhle. iqraʾ bedeutet: lies. rabb bedeutet: Herr. Was nicht behauptet wird: Die Höhle, Ḫadīǧa, ein Datum und die weiteren Verse der Sūrah stehen in diesem gespeicherten Auszug nicht. Wir fügen sie nicht hinzu.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 96:1.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -7536,7 +7536,7 @@ const additions=
         "situation": "Wir sagen: Dieser Vers gehört an den Anfang der Botschaft. Mehr erzählen wir heute nicht.",
         "practice": "Wir wiederholen nur diesen deutschen Sinn und malen keine Höhle.",
         "summary": "Belegt ist Qurʾān 96:1. Ungeprüft bleibt: Die Höhle, Ḫadīǧa, ein Datum und die weiteren Verse der Sūrah stehen in diesem gespeicherten Auszug nicht.",
-        "audioScript": "Für die älteren Kinder. Muḥammad Friede sei mit ihm in Makkah. Die Seite bricht den Ausdruck dort ab. Nicht belegt und deshalb nicht behauptet: Die Höhle, Ḫadīǧa, ein Datum und die weiteren Verse der Sūrah stehen in diesem gespeicherten Auszug nicht."
+        "audioScript": "Muḥammad Friede sei mit ihm in Makkah. Die Seite bricht den Ausdruck dort ab. Nicht belegt und deshalb nicht behauptet: Die Höhle, Ḫadīǧa, ein Datum und die weiteren Verse der Sūrah stehen in diesem gespeicherten Auszug nicht."
       }
     },
     "questions": {
@@ -7672,7 +7672,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Eine bestimmte arabische Formel nach dem Essen steht auf dieser Seite nicht. Wir geben sie nicht als geprüfte Sunnah aus. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Eine bestimmte arabische Formel nach dem Essen steht auf dieser Seite nicht. Wir geben sie nicht als geprüfte Sunnah aus. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Nach dem Essen erinnern wir uns, Allah zu danken.",
@@ -7705,7 +7705,7 @@ const additions=
       },
       "6-8": {
         "goal": "Nach dem Essen erinnern wir uns, Allah zu danken.",
-        "intro": "Heute geht es um Nach dem Essen danken. Nach dem Essen erinnern wir uns, Allah zu danken. Wir lesen Qurʾān 2:172. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers fordert die Glaubenden auf, von den guten Dingen zu essen, die Allah ihnen gegeben hat, und Allah zu danken, wenn sie Ihn allein anbeten. So kann das im Alltag aussehen: Der Teller ist leer. Das Kind sagt: Dank gehört Allah, und dankt auch der Person, die gekocht hat. Die Aufgabe: Wir üben einen schlichten deutschen Dank nach dem Essen. ṭayyibāt bedeutet: gute, reine Gaben. uškurū bedeutet: seid dankbar. Die Grenze der Stunde: Eine bestimmte arabische Formel nach dem Essen steht auf dieser Seite nicht. Wir geben sie nicht als geprüfte Sunnah aus. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Nach dem Essen danken. Nach dem Essen erinnern wir uns, Allah zu danken. Wir lesen Qurʾān 2:172. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers fordert die Glaubenden auf, von den guten Dingen zu essen, die Allah ihnen gegeben hat, und Allah zu danken, wenn sie Ihn allein anbeten. So kann das im Alltag aussehen: Der Teller ist leer. Das Kind sagt: Dank gehört Allah, und dankt auch der Person, die gekocht hat. Die Aufgabe: Wir üben einen schlichten deutschen Dank nach dem Essen. ṭayyibāt bedeutet: gute, reine Gaben. uškurū bedeutet: seid dankbar. Die Grenze der Stunde: Eine bestimmte arabische Formel nach dem Essen steht auf dieser Seite nicht. Wir geben sie nicht als geprüfte Sunnah aus.",
         "lines": [
           "Qurʾān 2:172 ist die gelesene Stelle.",
           "Der Vers fordert die Glaubenden auf, von den guten Dingen zu essen, die Allah ihnen gegeben hat, und Allah zu danken, wenn sie Ihn allein anbeten.",
@@ -7731,7 +7731,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Nach dem Essen danken von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Nach dem Essen danken. Das Lernziel ist: Nach dem Essen erinnern wir uns, Allah zu danken. Die Seite https://www.islamweb.net/ar/library/content/49/159 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:172. Sinngemäß, keine beglaubigte Übersetzung: Der Vers fordert die Glaubenden auf, von den guten Dingen zu essen, die Allah ihnen gegeben hat, und Allah zu danken, wenn sie Ihn allein anbeten. Alltag: Der Teller ist leer. Das Kind sagt: Dank gehört Allah, und dankt auch der Person, die gekocht hat. Aufgabe: Wir üben einen schlichten deutschen Dank nach dem Essen. ṭayyibāt bedeutet: gute, reine Gaben. uškurū bedeutet: seid dankbar. Was nicht behauptet wird: Eine bestimmte arabische Formel nach dem Essen steht auf dieser Seite nicht. Wir geben sie nicht als geprüfte Sunnah aus. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Nach dem Essen danken. Das Lernziel ist: Nach dem Essen erinnern wir uns, Allah zu danken. Sinngemäß, keine beglaubigte Übersetzung: Der Vers fordert die Glaubenden auf, von den guten Dingen zu essen, die Allah ihnen gegeben hat, und Allah zu danken, wenn sie Ihn allein anbeten. Alltag: Der Teller ist leer. Das Kind sagt: Dank gehört Allah, und dankt auch der Person, die gekocht hat. Aufgabe: Wir üben einen schlichten deutschen Dank nach dem Essen. ṭayyibāt bedeutet: gute, reine Gaben. uškurū bedeutet: seid dankbar. Was nicht behauptet wird: Eine bestimmte arabische Formel nach dem Essen steht auf dieser Seite nicht. Wir geben sie nicht als geprüfte Sunnah aus.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 2:172.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -7753,7 +7753,7 @@ const additions=
         "situation": "Der Teller ist leer. Das Kind sagt: Dank gehört Allah, und dankt auch der Person, die gekocht hat.",
         "practice": "Wir üben einen schlichten deutschen Dank nach dem Essen.",
         "summary": "Belegt ist Qurʾān 2:172. Ungeprüft bleibt: Eine bestimmte arabische Formel nach dem Essen steht auf dieser Seite nicht.",
-        "audioScript": "Für die älteren Kinder. Nach dem Essen danken. Der Vers fordert die Glaubenden auf, von den guten Dingen zu essen, die Allah ihnen gegeben hat, und Allah zu danken, wenn sie Ihn allein anbeten. Nicht belegt und deshalb nicht behauptet: Eine bestimmte arabische Formel nach dem Essen steht auf dieser Seite nicht."
+        "audioScript": "Nach dem Essen danken. Der Vers fordert die Glaubenden auf, von den guten Dingen zu essen, die Allah ihnen gegeben hat, und Allah zu danken, wenn sie Ihn allein anbeten. Nicht belegt und deshalb nicht behauptet: Eine bestimmte arabische Formel nach dem Essen steht auf dieser Seite nicht."
       }
     },
     "questions": {
@@ -7889,7 +7889,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers ist keine Pflegeliste. Medizin und schwere Arbeit bleiben bei den Erwachsenen. Eine Hadithnummer wurde nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Vers ist keine Pflegeliste. Medizin und schwere Arbeit bleiben bei den Erwachsenen. Eine Hadithnummer wurde nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Mit Erlaubnis der Eltern helfen wir einem kranken oder älteren Menschen auf eine kleine, sichere Weise.",
@@ -7922,7 +7922,7 @@ const additions=
       },
       "6-8": {
         "goal": "Mit Erlaubnis der Eltern helfen wir einem kranken oder älteren Menschen auf eine kleine, sichere Weise.",
-        "intro": "Heute geht es um Kranken und älteren Menschen helfen. Mit Erlaubnis der Eltern helfen wir einem kranken oder älteren Menschen auf eine kleine, sichere Weise. Wir lesen Qurʾān 4:36. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers befiehlt, Allah allein zu dienen, den Eltern gut zu sein, und nennt die Verwandten, die Waisen, die Bedürftigen und den Nachbarn. So kann das im Alltag aussehen: Die Großmutter braucht ein Glas Wasser. Das Kind bringt es, nachdem es gefragt hat. Die Aufgabe: Wir nennen eine Hilfe, die ein Kind sicher tun kann, und eine Hilfe, die nur Erwachsene tun. iḥsān bedeutet: gutes, sorgfältiges Verhalten. ǧār bedeutet: Nachbar. Die Grenze der Stunde: Der Vers ist keine Pflegeliste. Medizin und schwere Arbeit bleiben bei den Erwachsenen. Eine Hadithnummer wurde nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Kranken und älteren Menschen helfen. Mit Erlaubnis der Eltern helfen wir einem kranken oder älteren Menschen auf eine kleine, sichere Weise. Wir lesen Qurʾān 4:36. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers befiehlt, Allah allein zu dienen, den Eltern gut zu sein, und nennt die Verwandten, die Waisen, die Bedürftigen und den Nachbarn. So kann das im Alltag aussehen: Die Großmutter braucht ein Glas Wasser. Das Kind bringt es, nachdem es gefragt hat. Die Aufgabe: Wir nennen eine Hilfe, die ein Kind sicher tun kann, und eine Hilfe, die nur Erwachsene tun. iḥsān bedeutet: gutes, sorgfältiges Verhalten. ǧār bedeutet: Nachbar. Die Grenze der Stunde: Der Vers ist keine Pflegeliste. Medizin und schwere Arbeit bleiben bei den Erwachsenen. Eine Hadithnummer wurde nicht ergänzt.",
         "lines": [
           "Qurʾān 4:36 ist die gelesene Stelle.",
           "Der Vers befiehlt, Allah allein zu dienen, den Eltern gut zu sein, und nennt die Verwandten, die Waisen, die Bedürftigen und den Nachbarn.",
@@ -7948,7 +7948,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Kranken und älteren Menschen helfen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Kranken und älteren Menschen helfen. Das Lernziel ist: Mit Erlaubnis der Eltern helfen wir einem kranken oder älteren Menschen auf eine kleine, sichere Weise. Die Seite https://www.islamweb.net/ar/library/content/49/314 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:36. Sinngemäß, keine beglaubigte Übersetzung: Der Vers befiehlt, Allah allein zu dienen, den Eltern gut zu sein, und nennt die Verwandten, die Waisen, die Bedürftigen und den Nachbarn. Alltag: Die Großmutter braucht ein Glas Wasser. Das Kind bringt es, nachdem es gefragt hat. Aufgabe: Wir nennen eine Hilfe, die ein Kind sicher tun kann, und eine Hilfe, die nur Erwachsene tun. iḥsān bedeutet: gutes, sorgfältiges Verhalten. ǧār bedeutet: Nachbar. Was nicht behauptet wird: Der Vers ist keine Pflegeliste. Medizin und schwere Arbeit bleiben bei den Erwachsenen. Eine Hadithnummer wurde nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Kranken und älteren Menschen helfen. Das Lernziel ist: Mit Erlaubnis der Eltern helfen wir einem kranken oder älteren Menschen auf eine kleine, sichere Weise. Sinngemäß, keine beglaubigte Übersetzung: Der Vers befiehlt, Allah allein zu dienen, den Eltern gut zu sein, und nennt die Verwandten, die Waisen, die Bedürftigen und den Nachbarn. Alltag: Die Großmutter braucht ein Glas Wasser. Das Kind bringt es, nachdem es gefragt hat. Aufgabe: Wir nennen eine Hilfe, die ein Kind sicher tun kann, und eine Hilfe, die nur Erwachsene tun. iḥsān bedeutet: gutes, sorgfältiges Verhalten. ǧār bedeutet: Nachbar. Was nicht behauptet wird: Der Vers ist keine Pflegeliste. Medizin und schwere Arbeit bleiben bei den Erwachsenen. Eine Hadithnummer wurde nicht ergänzt.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 4:36.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -7970,7 +7970,7 @@ const additions=
         "situation": "Die Großmutter braucht ein Glas Wasser. Das Kind bringt es, nachdem es gefragt hat.",
         "practice": "Wir nennen eine Hilfe, die ein Kind sicher tun kann, und eine Hilfe, die nur Erwachsene tun.",
         "summary": "Belegt ist Qurʾān 4:36. Ungeprüft bleibt: Der Vers ist keine Pflegeliste.",
-        "audioScript": "Für die älteren Kinder. Kranken und älteren Menschen helfen. Der Vers befiehlt, Allah allein zu dienen, den Eltern gut zu sein, und nennt die Verwandten, die Waisen, die Bedürftigen und den Nachbarn. Nicht belegt und deshalb nicht behauptet: Der Vers ist keine Pflegeliste."
+        "audioScript": "Kranken und älteren Menschen helfen. Der Vers befiehlt, Allah allein zu dienen, den Eltern gut zu sein, und nennt die Verwandten, die Waisen, die Bedürftigen und den Nachbarn. Nicht belegt und deshalb nicht behauptet: Der Vers ist keine Pflegeliste."
       }
     },
     "questions": {
@@ -8106,7 +8106,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die Seite erklärt das Abirren mit einem Beispiel über einen falschen Namen. Wir zählen nicht neunundneunzig Namen, weil diese Zahl auf der verwendeten Stelle nicht als geprüfte Liste steht. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Die Seite erklärt das Abirren mit einem Beispiel über einen falschen Namen. Wir zählen nicht neunundneunzig Namen, weil diese Zahl auf der verwendeten Stelle nicht als geprüfte Liste steht. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Allah hat schöne Namen.",
@@ -8139,7 +8139,7 @@ const additions=
       },
       "6-8": {
         "goal": "Allah hat schöne Namen.",
-        "intro": "Heute geht es um Die schönen Namen Allahs. Allah hat schöne Namen. Wir lesen Qurʾān 7:180. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt: Allah gehören die schönsten Namen, so ruft Ihn damit an, und lasst die, die bei Seinen Namen abirren. So kann das im Alltag aussehen: Ein Kind hört ar-Raḥmān und sagt: Damit rufen wir Allah an. Wir geben diesen Namen keinem Menschen. Die Aufgabe: Wir wiederholen einen Namen nur so, wie er im Unterricht schon aus einem Vers bekannt ist, und erfinden keine neue Namensliste. al-asmāʾ al-ḥusnā bedeutet: die schönsten Namen. udʿūhu bedeutet: ruft Ihn an. Die Grenze der Stunde: Die Seite erklärt das Abirren mit einem Beispiel über einen falschen Namen. Wir zählen nicht neunundneunzig Namen, weil diese Zahl auf der verwendeten Stelle nicht als geprüfte Liste steht. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Die schönen Namen Allahs. Allah hat schöne Namen. Wir lesen Qurʾān 7:180. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt: Allah gehören die schönsten Namen, so ruft Ihn damit an, und lasst die, die bei Seinen Namen abirren. So kann das im Alltag aussehen: Ein Kind hört ar-Raḥmān und sagt: Damit rufen wir Allah an. Wir geben diesen Namen keinem Menschen. Die Aufgabe: Wir wiederholen einen Namen nur so, wie er im Unterricht schon aus einem Vers bekannt ist, und erfinden keine neue Namensliste. al-asmāʾ al-ḥusnā bedeutet: die schönsten Namen. udʿūhu bedeutet: ruft Ihn an. Die Grenze der Stunde: Die Seite erklärt das Abirren mit einem Beispiel über einen falschen Namen. Wir zählen nicht neunundneunzig Namen, weil diese Zahl auf der verwendeten Stelle nicht als geprüfte Liste steht.",
         "lines": [
           "Qurʾān 7:180 ist die gelesene Stelle.",
           "Der Vers sagt: Allah gehören die schönsten Namen, so ruft Ihn damit an, und lasst die, die bei Seinen Namen abirren.",
@@ -8165,7 +8165,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Die schönen Namen Allahs von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Die schönen Namen Allahs. Das Lernziel ist: Allah hat schöne Namen. Die Seite https://www.islamweb.net/ar/library/content/49/576 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 7:180. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt: Allah gehören die schönsten Namen, so ruft Ihn damit an, und lasst die, die bei Seinen Namen abirren. Alltag: Ein Kind hört ar-Raḥmān und sagt: Damit rufen wir Allah an. Wir geben diesen Namen keinem Menschen. Aufgabe: Wir wiederholen einen Namen nur so, wie er im Unterricht schon aus einem Vers bekannt ist, und erfinden keine neue Namensliste. al-asmāʾ al-ḥusnā bedeutet: die schönsten Namen. udʿūhu bedeutet: ruft Ihn an. Was nicht behauptet wird: Die Seite erklärt das Abirren mit einem Beispiel über einen falschen Namen. Wir zählen nicht neunundneunzig Namen, weil diese Zahl auf der verwendeten Stelle nicht als geprüfte Liste steht. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Die schönen Namen Allahs. Das Lernziel ist: Allah hat schöne Namen. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt: Allah gehören die schönsten Namen, so ruft Ihn damit an, und lasst die, die bei Seinen Namen abirren. Alltag: Ein Kind hört ar-Raḥmān und sagt: Damit rufen wir Allah an. Wir geben diesen Namen keinem Menschen. Aufgabe: Wir wiederholen einen Namen nur so, wie er im Unterricht schon aus einem Vers bekannt ist, und erfinden keine neue Namensliste. al-asmāʾ al-ḥusnā bedeutet: die schönsten Namen. udʿūhu bedeutet: ruft Ihn an. Was nicht behauptet wird: Die Seite erklärt das Abirren mit einem Beispiel über einen falschen Namen. Wir zählen nicht neunundneunzig Namen, weil diese Zahl auf der verwendeten Stelle nicht als geprüfte Liste steht.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 7:180.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -8187,7 +8187,7 @@ const additions=
         "situation": "Ein Kind hört ar-Raḥmān und sagt: Damit rufen wir Allah an. Wir geben diesen Namen keinem Menschen.",
         "practice": "Wir wiederholen einen Namen nur so, wie er im Unterricht schon aus einem Vers bekannt ist, und erfinden keine neue Namensliste.",
         "summary": "Belegt ist Qurʾān 7:180. Ungeprüft bleibt: Die Seite erklärt das Abirren mit einem Beispiel über einen falschen Namen.",
-        "audioScript": "Für die älteren Kinder. Die schönen Namen Allahs. Der Vers sagt: Allah gehören die schönsten Namen, so ruft Ihn damit an, und lasst die, die bei Seinen Namen abirren. Nicht belegt und deshalb nicht behauptet: Die Seite erklärt das Abirren mit einem Beispiel über einen falschen Namen."
+        "audioScript": "Die schönen Namen Allahs. Der Vers sagt: Allah gehören die schönsten Namen, so ruft Ihn damit an, und lasst die, die bei Seinen Namen abirren. Nicht belegt und deshalb nicht behauptet: Die Seite erklärt das Abirren mit einem Beispiel über einen falschen Namen."
       }
     },
     "questions": {
@@ -8323,7 +8323,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die Seite legt damit nicht eine Erzählung über seine Kinder an, die wir ausbauen würden. Wir erfinden kein Datum und keine zusätzliche Amtsgeschichte. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Die Seite legt damit nicht eine Erzählung über seine Kinder an, die wir ausbauen würden. Wir erfinden kein Datum und keine zusätzliche Amtsgeschichte. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Muḥammad, Friede sei mit ihm, ist der Gesandte Allahs und das Siegel der Propheten.",
@@ -8356,7 +8356,7 @@ const additions=
       },
       "6-8": {
         "goal": "Muḥammad, Friede sei mit ihm, ist der Gesandte Allahs und das Siegel der Propheten.",
-        "intro": "Heute geht es um Der letzte Gesandte Muḥammad Friede sei mit ihm. Muḥammad, Friede sei mit ihm, ist der Gesandte Allahs und das Siegel der Propheten. Wir lesen Qurʾān 33:40. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass Muḥammad nicht der Vater von irgendjemandem unter euren Männern ist, sondern der Gesandte Allahs und das Siegel der Propheten. So kann das im Alltag aussehen: Ein Kind sagt den Namen langsam und fügt den Friedensgruß hinzu. Die Aufgabe: Wir wiederholen nur diese Bezeichnung und keine Jahreszahl. ḫātam bedeutet: Siegel, Abschluss. nabiyyīn bedeutet: der Propheten. Die Grenze der Stunde: Die Seite legt damit nicht eine Erzählung über seine Kinder an, die wir ausbauen würden. Wir erfinden kein Datum und keine zusätzliche Amtsgeschichte. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Der letzte Gesandte Muḥammad Friede sei mit ihm. Muḥammad, Friede sei mit ihm, ist der Gesandte Allahs und das Siegel der Propheten. Wir lesen Qurʾān 33:40. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass Muḥammad nicht der Vater von irgendjemandem unter euren Männern ist, sondern der Gesandte Allahs und das Siegel der Propheten. So kann das im Alltag aussehen: Ein Kind sagt den Namen langsam und fügt den Friedensgruß hinzu. Die Aufgabe: Wir wiederholen nur diese Bezeichnung und keine Jahreszahl. ḫātam bedeutet: Siegel, Abschluss. nabiyyīn bedeutet: der Propheten. Die Grenze der Stunde: Die Seite legt damit nicht eine Erzählung über seine Kinder an, die wir ausbauen würden. Wir erfinden kein Datum und keine zusätzliche Amtsgeschichte.",
         "lines": [
           "Qurʾān 33:40 ist die gelesene Stelle.",
           "Der Vers sagt, dass Muḥammad nicht der Vater von irgendjemandem unter euren Männern ist, sondern der Gesandte Allahs und das Siegel der Propheten.",
@@ -8382,7 +8382,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Der letzte Gesandte Muḥammad Friede sei mit ihm von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Der letzte Gesandte Muḥammad Friede sei mit ihm. Das Lernziel ist: Muḥammad, Friede sei mit ihm, ist der Gesandte Allahs und das Siegel der Propheten. Die Seite https://www.islamweb.net/ar/library/content/49/1472 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 33:40. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass Muḥammad nicht der Vater von irgendjemandem unter euren Männern ist, sondern der Gesandte Allahs und das Siegel der Propheten. Alltag: Ein Kind sagt den Namen langsam und fügt den Friedensgruß hinzu. Aufgabe: Wir wiederholen nur diese Bezeichnung und keine Jahreszahl. ḫātam bedeutet: Siegel, Abschluss. nabiyyīn bedeutet: der Propheten. Was nicht behauptet wird: Die Seite legt damit nicht eine Erzählung über seine Kinder an, die wir ausbauen würden. Wir erfinden kein Datum und keine zusätzliche Amtsgeschichte. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Der letzte Gesandte Muḥammad Friede sei mit ihm. Das Lernziel ist: Muḥammad, Friede sei mit ihm, ist der Gesandte Allahs und das Siegel der Propheten. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass Muḥammad nicht der Vater von irgendjemandem unter euren Männern ist, sondern der Gesandte Allahs und das Siegel der Propheten. Alltag: Ein Kind sagt den Namen langsam und fügt den Friedensgruß hinzu. Aufgabe: Wir wiederholen nur diese Bezeichnung und keine Jahreszahl. ḫātam bedeutet: Siegel, Abschluss. nabiyyīn bedeutet: der Propheten. Was nicht behauptet wird: Die Seite legt damit nicht eine Erzählung über seine Kinder an, die wir ausbauen würden. Wir erfinden kein Datum und keine zusätzliche Amtsgeschichte.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 33:40.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -8404,7 +8404,7 @@ const additions=
         "situation": "Ein Kind sagt den Namen langsam und fügt den Friedensgruß hinzu.",
         "practice": "Wir wiederholen nur diese Bezeichnung und keine Jahreszahl.",
         "summary": "Belegt ist Qurʾān 33:40. Ungeprüft bleibt: Die Seite legt damit nicht eine Erzählung über seine Kinder an, die wir ausbauen würden.",
-        "audioScript": "Für die älteren Kinder. Der letzte Gesandte Muḥammad Friede sei mit ihm. Der Vers sagt, dass Muḥammad nicht der Vater von irgendjemandem unter euren Männern ist, sondern der Gesandte Allahs und das Siegel der Propheten. Nicht belegt und deshalb nicht behauptet: Die Seite legt damit nicht eine Erzählung über seine Kinder an, die wir ausbauen würden."
+        "audioScript": "Der letzte Gesandte Muḥammad Friede sei mit ihm. Der Vers sagt, dass Muḥammad nicht der Vater von irgendjemandem unter euren Männern ist, sondern der Gesandte Allahs und das Siegel der Propheten. Nicht belegt und deshalb nicht behauptet: Die Seite legt damit nicht eine Erzählung über seine Kinder an, die wir ausbauen würden."
       }
     },
     "questions": {
@@ -8540,7 +8540,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Dieselbe Fundstelle trägt ein anderes Lernziel. Der Warnton am Ende des Verses wird wieder nicht als Angstgeschichte verwendet. Eine feste Wortformel außer dem Versanfang wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 121 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+      "note": "Dieselbe Fundstelle trägt ein anderes Lernziel. Der Warnton am Ende des Verses wird wieder nicht als Angstgeschichte verwendet. Eine feste Wortformel außer dem Versanfang wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 121 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
       "sameLocusAsSlot": 121
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
@@ -8574,7 +8574,7 @@ const additions=
       },
       "6-8": {
         "goal": "Wir sprechen eine Bitte ruhig und meinen sie ernst.",
-        "intro": "Heute geht es um Duʿāʾ mit aufrichtigem Herzen. Wir sprechen eine Bitte ruhig und meinen sie ernst. Wir lesen Qurʾān 40:60. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe Stelle wie in der Stunde über schwere Momente beginnt mit: Ruft Mich an, so erhöre Ich euch. Hier üben wir die Aufrichtigkeit, nicht den Notfall. So kann das im Alltag aussehen: Ein Kind sitzt einen Moment still und bittet um Hilfe beim ehrlich Lernen, nicht um eine Note ohne Lernen. Die Aufgabe: Wir sprechen eine kurze Bitte und sagen danach, was wir selbst dazu tun. iḫlāṣ bedeutet: Aufrichtigkeit. ʿibādah bedeutet: Anbetung, das Dienen Allahs. Die Grenze der Stunde: Dieselbe Fundstelle trägt ein anderes Lernziel. Der Warnton am Ende des Verses wird wieder nicht als Angstgeschichte verwendet. Eine feste Wortformel außer dem Versanfang wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 121 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Duʿāʾ mit aufrichtigem Herzen. Wir sprechen eine Bitte ruhig und meinen sie ernst. Wir lesen Qurʾān 40:60. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe Stelle wie in der Stunde über schwere Momente beginnt mit: Ruft Mich an, so erhöre Ich euch. Hier üben wir die Aufrichtigkeit, nicht den Notfall. So kann das im Alltag aussehen: Ein Kind sitzt einen Moment still und bittet um Hilfe beim ehrlich Lernen, nicht um eine Note ohne Lernen. Die Aufgabe: Wir sprechen eine kurze Bitte und sagen danach, was wir selbst dazu tun. iḫlāṣ bedeutet: Aufrichtigkeit. ʿibādah bedeutet: Anbetung, das Dienen Allahs. Die Grenze der Stunde: Dieselbe Fundstelle trägt ein anderes Lernziel. Der Warnton am Ende des Verses wird wieder nicht als Angstgeschichte verwendet. Eine feste Wortformel außer dem Versanfang wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 121 mit einem anderen Lernziel verwendet.",
         "lines": [
           "Qurʾān 40:60 ist die gelesene Stelle.",
           "Dieselbe Stelle wie in der Stunde über schwere Momente beginnt mit: Ruft Mich an, so erhöre Ich euch.",
@@ -8600,7 +8600,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Duʿāʾ mit aufrichtigem Herzen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Duʿāʾ mit aufrichtigem Herzen. Das Lernziel ist: Wir sprechen eine Bitte ruhig und meinen sie ernst. Die Seite https://www.islamweb.net/ar/library/content/49/1654 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 40:60. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe Stelle wie in der Stunde über schwere Momente beginnt mit: Ruft Mich an, so erhöre Ich euch. Hier üben wir die Aufrichtigkeit, nicht den Notfall. Alltag: Ein Kind sitzt einen Moment still und bittet um Hilfe beim ehrlich Lernen, nicht um eine Note ohne Lernen. Aufgabe: Wir sprechen eine kurze Bitte und sagen danach, was wir selbst dazu tun. iḫlāṣ bedeutet: Aufrichtigkeit. ʿibādah bedeutet: Anbetung, das Dienen Allahs. Was nicht behauptet wird: Dieselbe Fundstelle trägt ein anderes Lernziel. Der Warnton am Ende des Verses wird wieder nicht als Angstgeschichte verwendet. Eine feste Wortformel außer dem Versanfang wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 121 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Duʿāʾ mit aufrichtigem Herzen. Das Lernziel ist: Wir sprechen eine Bitte ruhig und meinen sie ernst. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe Stelle wie in der Stunde über schwere Momente beginnt mit: Ruft Mich an, so erhöre Ich euch. Hier üben wir die Aufrichtigkeit, nicht den Notfall. Alltag: Ein Kind sitzt einen Moment still und bittet um Hilfe beim ehrlich Lernen, nicht um eine Note ohne Lernen. Aufgabe: Wir sprechen eine kurze Bitte und sagen danach, was wir selbst dazu tun. iḫlāṣ bedeutet: Aufrichtigkeit. ʿibādah bedeutet: Anbetung, das Dienen Allahs. Was nicht behauptet wird: Dieselbe Fundstelle trägt ein anderes Lernziel. Der Warnton am Ende des Verses wird wieder nicht als Angstgeschichte verwendet. Eine feste Wortformel außer dem Versanfang wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 121 mit einem anderen Lernziel verwendet.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 40:60.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -8622,7 +8622,7 @@ const additions=
         "situation": "Ein Kind sitzt einen Moment still und bittet um Hilfe beim ehrlich Lernen, nicht um eine Note ohne Lernen.",
         "practice": "Wir sprechen eine kurze Bitte und sagen danach, was wir selbst dazu tun.",
         "summary": "Belegt ist Qurʾān 40:60. Ungeprüft bleibt: Dieselbe Fundstelle trägt ein anderes Lernziel.",
-        "audioScript": "Für die älteren Kinder. Duʿāʾ mit aufrichtigem Herzen. Dieselbe Stelle wie in der Stunde über schwere Momente beginnt mit: Ruft Mich an, so erhöre Ich euch. Nicht belegt und deshalb nicht behauptet: Dieselbe Fundstelle trägt ein anderes Lernziel."
+        "audioScript": "Duʿāʾ mit aufrichtigem Herzen. Dieselbe Stelle wie in der Stunde über schwere Momente beginnt mit: Ruft Mich an, so erhöre Ich euch. Nicht belegt und deshalb nicht behauptet: Dieselbe Fundstelle trägt ein anderes Lernziel."
       }
     },
     "questions": {
@@ -8758,7 +8758,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers beginnt mit Regeln über die heiligen Zeichen und die Pilgerfahrt. Diese Regeln werden hier nicht zu einer Kinderrechtslehre ausgebaut. Das Melden des Spielzeugs ist das Beispiel der Stunde, nicht der Wortlaut des Verses. Wir benutzen nicht den Vers über das Töten einer Seele. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Vers beginnt mit Regeln über die heiligen Zeichen und die Pilgerfahrt. Diese Regeln werden hier nicht zu einer Kinderrechtslehre ausgebaut. Das Melden des Spielzeugs ist das Beispiel der Stunde, nicht der Wortlaut des Verses. Wir benutzen nicht den Vers über das Töten einer Seele. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Wenn etwas gefährlich herumliegt, sagen wir Bescheid, statt wegzusehen.",
@@ -8791,7 +8791,7 @@ const additions=
       },
       "6-8": {
         "goal": "Wenn etwas gefährlich herumliegt, sagen wir Bescheid, statt wegzusehen.",
-        "intro": "Heute geht es um Schaden von anderen abwenden. Wenn etwas gefährlich herumliegt, sagen wir Bescheid, statt wegzusehen. Wir lesen Qurʾān 5:2. Sinngemäß, ohne beglaubigte Übersetzung: Der lange Vers enthält den Satz: Helft einander bei der Rechtschaffenheit und der Gottesfurcht und helft einander nicht bei Sünde und Übertretung. So kann das im Alltag aussehen: Ein Spielzeug mit einer spitzen Kante liegt auf der Treppe. Das Kind holt eine erwachsene Person. Die Aufgabe: Wir üben, auf eine Gefahr zu zeigen und sie nicht selbst wegzuräumen, wenn das unsicher wäre. taʿāwanū bedeutet: helft einander. birr bedeutet: Rechtschaffenheit, Güte. Die Grenze der Stunde: Der Vers beginnt mit Regeln über die heiligen Zeichen und die Pilgerfahrt. Diese Regeln werden hier nicht zu einer Kinderrechtslehre ausgebaut. Das Melden des Spielzeugs ist das Beispiel der Stunde, nicht der Wortlaut des Verses. Wir benutzen nicht den Vers über das Töten einer Seele. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Schaden von anderen abwenden. Wenn etwas gefährlich herumliegt, sagen wir Bescheid, statt wegzusehen. Wir lesen Qurʾān 5:2. Sinngemäß, ohne beglaubigte Übersetzung: Der lange Vers enthält den Satz: Helft einander bei der Rechtschaffenheit und der Gottesfurcht und helft einander nicht bei Sünde und Übertretung. So kann das im Alltag aussehen: Ein Spielzeug mit einer spitzen Kante liegt auf der Treppe. Das Kind holt eine erwachsene Person. Die Aufgabe: Wir üben, auf eine Gefahr zu zeigen und sie nicht selbst wegzuräumen, wenn das unsicher wäre. taʿāwanū bedeutet: helft einander. birr bedeutet: Rechtschaffenheit, Güte. Die Grenze der Stunde: Der Vers beginnt mit Regeln über die heiligen Zeichen und die Pilgerfahrt. Diese Regeln werden hier nicht zu einer Kinderrechtslehre ausgebaut. Das Melden des Spielzeugs ist das Beispiel der Stunde, nicht der Wortlaut des Verses. Wir benutzen nicht den Vers über das Töten einer Seele.",
         "lines": [
           "Qurʾān 5:2 ist die gelesene Stelle.",
           "Der lange Vers enthält den Satz: Helft einander bei der Rechtschaffenheit und der Gottesfurcht und helft einander nicht bei Sünde und Übertretung.",
@@ -8817,7 +8817,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Schaden von anderen abwenden von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Schaden von anderen abwenden. Das Lernziel ist: Wenn etwas gefährlich herumliegt, sagen wir Bescheid, statt wegzusehen. Die Seite https://www.islamweb.net/ar/library/content/49/372 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 5:2. Sinngemäß, keine beglaubigte Übersetzung: Der lange Vers enthält den Satz: Helft einander bei der Rechtschaffenheit und der Gottesfurcht und helft einander nicht bei Sünde und Übertretung. Alltag: Ein Spielzeug mit einer spitzen Kante liegt auf der Treppe. Das Kind holt eine erwachsene Person. Aufgabe: Wir üben, auf eine Gefahr zu zeigen und sie nicht selbst wegzuräumen, wenn das unsicher wäre. taʿāwanū bedeutet: helft einander. birr bedeutet: Rechtschaffenheit, Güte. Was nicht behauptet wird: Der Vers beginnt mit Regeln über die heiligen Zeichen und die Pilgerfahrt. Diese Regeln werden hier nicht zu einer Kinderrechtslehre ausgebaut. Das Melden des Spielzeugs ist das Beispiel der Stunde, nicht der Wortlaut des Verses. Wir benutzen nicht den Vers über das Töten einer Seele. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Schaden von anderen abwenden. Das Lernziel ist: Wenn etwas gefährlich herumliegt, sagen wir Bescheid, statt wegzusehen. Sinngemäß, keine beglaubigte Übersetzung: Der lange Vers enthält den Satz: Helft einander bei der Rechtschaffenheit und der Gottesfurcht und helft einander nicht bei Sünde und Übertretung. Alltag: Ein Spielzeug mit einer spitzen Kante liegt auf der Treppe. Das Kind holt eine erwachsene Person. Aufgabe: Wir üben, auf eine Gefahr zu zeigen und sie nicht selbst wegzuräumen, wenn das unsicher wäre. taʿāwanū bedeutet: helft einander. birr bedeutet: Rechtschaffenheit, Güte. Was nicht behauptet wird: Der Vers beginnt mit Regeln über die heiligen Zeichen und die Pilgerfahrt. Diese Regeln werden hier nicht zu einer Kinderrechtslehre ausgebaut. Das Melden des Spielzeugs ist das Beispiel der Stunde, nicht der Wortlaut des Verses. Wir benutzen nicht den Vers über das Töten einer Seele.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 5:2.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -8839,7 +8839,7 @@ const additions=
         "situation": "Ein Spielzeug mit einer spitzen Kante liegt auf der Treppe. Das Kind holt eine erwachsene Person.",
         "practice": "Wir üben, auf eine Gefahr zu zeigen und sie nicht selbst wegzuräumen, wenn das unsicher wäre.",
         "summary": "Belegt ist Qurʾān 5:2. Ungeprüft bleibt: Der Vers beginnt mit Regeln über die heiligen Zeichen und die Pilgerfahrt.",
-        "audioScript": "Für die älteren Kinder. Schaden von anderen abwenden. Der lange Vers enthält den Satz: Helft einander bei der Rechtschaffenheit und der Gottesfurcht und helft einander nicht bei Sünde und Übertretung. Nicht belegt und deshalb nicht behauptet: Der Vers beginnt mit Regeln über die heiligen Zeichen und die Pilgerfahrt."
+        "audioScript": "Schaden von anderen abwenden. Der lange Vers enthält den Satz: Helft einander bei der Rechtschaffenheit und der Gottesfurcht und helft einander nicht bei Sünde und Übertretung. Nicht belegt und deshalb nicht behauptet: Der Vers beginnt mit Regeln über die heiligen Zeichen und die Pilgerfahrt."
       }
     },
     "questions": {
@@ -8975,7 +8975,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die Seite spricht danach davon, dass ein Stück abrogiert und ausgenommen wurde. Diese Rechtsgeschichte wird nicht als Kinderregel ausgebaut. Wir erfinden keine Zahl von Klopfzeichen. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Die Seite spricht danach davon, dass ein Stück abrogiert und ausgenommen wurde. Diese Rechtsgeschichte wird nicht als Kinderregel ausgebaut. Wir erfinden keine Zahl von Klopfzeichen. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Wir erfinden keine zusätzliche Geschichte.",
     "sample": "Bevor wir ein Haus betreten, fragen wir und grüßen.",
@@ -9008,7 +9008,7 @@ const additions=
       },
       "6-8": {
         "goal": "Bevor wir ein Haus betreten, fragen wir und grüßen.",
-        "intro": "Heute geht es um Als Gast gute Sitten zeigen. Bevor wir ein Haus betreten, fragen wir und grüßen. Wir lesen Qurʾān 24:27. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers verbietet den Glaubenden, andere Häuser als ihre eigenen zu betreten, bis sie um Erlaubnis gebeten und die Bewohner gegrüßt haben. So kann das im Alltag aussehen: Ein Kind steht vor der Wohnungstür der Nachbarn und wartet, bis geöffnet wird. Die Aufgabe: Wir üben Anklopfen, Warten und einen friedlichen Gruß. istaʾnisū bedeutet: um Erlaubnis bitten, die Bewohner ansprechen. sallimū bedeutet: grüßt. Die Grenze der Stunde: Die Seite spricht danach davon, dass ein Stück abrogiert und ausgenommen wurde. Diese Rechtsgeschichte wird nicht als Kinderregel ausgebaut. Wir erfinden keine Zahl von Klopfzeichen. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Als Gast gute Sitten zeigen. Bevor wir ein Haus betreten, fragen wir und grüßen. Wir lesen Qurʾān 24:27. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers verbietet den Glaubenden, andere Häuser als ihre eigenen zu betreten, bis sie um Erlaubnis gebeten und die Bewohner gegrüßt haben. So kann das im Alltag aussehen: Ein Kind steht vor der Wohnungstür der Nachbarn und wartet, bis geöffnet wird. Die Aufgabe: Wir üben Anklopfen, Warten und einen friedlichen Gruß. istaʾnisū bedeutet: um Erlaubnis bitten, die Bewohner ansprechen. sallimū bedeutet: grüßt. Die Grenze der Stunde: Die Seite spricht danach davon, dass ein Stück abrogiert und ausgenommen wurde. Diese Rechtsgeschichte wird nicht als Kinderregel ausgebaut. Wir erfinden keine Zahl von Klopfzeichen.",
         "lines": [
           "Qurʾān 24:27 ist die gelesene Stelle.",
           "Der Vers verbietet den Glaubenden, andere Häuser als ihre eigenen zu betreten, bis sie um Erlaubnis gebeten und die Bewohner gegrüßt haben.",
@@ -9034,7 +9034,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Als Gast gute Sitten zeigen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Als Gast gute Sitten zeigen. Das Lernziel ist: Bevor wir ein Haus betreten, fragen wir und grüßen. Die Seite https://www.islamweb.net/ar/library/content/49/1267 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 24:27. Sinngemäß, keine beglaubigte Übersetzung: Der Vers verbietet den Glaubenden, andere Häuser als ihre eigenen zu betreten, bis sie um Erlaubnis gebeten und die Bewohner gegrüßt haben. Alltag: Ein Kind steht vor der Wohnungstür der Nachbarn und wartet, bis geöffnet wird. Aufgabe: Wir üben Anklopfen, Warten und einen friedlichen Gruß. istaʾnisū bedeutet: um Erlaubnis bitten, die Bewohner ansprechen. sallimū bedeutet: grüßt. Was nicht behauptet wird: Die Seite spricht danach davon, dass ein Stück abrogiert und ausgenommen wurde. Diese Rechtsgeschichte wird nicht als Kinderregel ausgebaut. Wir erfinden keine Zahl von Klopfzeichen. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Als Gast gute Sitten zeigen. Das Lernziel ist: Bevor wir ein Haus betreten, fragen wir und grüßen. Sinngemäß, keine beglaubigte Übersetzung: Der Vers verbietet den Glaubenden, andere Häuser als ihre eigenen zu betreten, bis sie um Erlaubnis gebeten und die Bewohner gegrüßt haben. Alltag: Ein Kind steht vor der Wohnungstür der Nachbarn und wartet, bis geöffnet wird. Aufgabe: Wir üben Anklopfen, Warten und einen friedlichen Gruß. istaʾnisū bedeutet: um Erlaubnis bitten, die Bewohner ansprechen. sallimū bedeutet: grüßt. Was nicht behauptet wird: Die Seite spricht danach davon, dass ein Stück abrogiert und ausgenommen wurde. Diese Rechtsgeschichte wird nicht als Kinderregel ausgebaut. Wir erfinden keine Zahl von Klopfzeichen.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 24:27.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -9056,7 +9056,7 @@ const additions=
         "situation": "Ein Kind steht vor der Wohnungstür der Nachbarn und wartet, bis geöffnet wird.",
         "practice": "Wir üben Anklopfen, Warten und einen friedlichen Gruß.",
         "summary": "Belegt ist Qurʾān 24:27. Ungeprüft bleibt: Die Seite spricht danach davon, dass ein Stück abrogiert und ausgenommen wurde.",
-        "audioScript": "Für die älteren Kinder. Als Gast gute Sitten zeigen. Der Vers verbietet den Glaubenden, andere Häuser als ihre eigenen zu betreten, bis sie um Erlaubnis gebeten und die Bewohner gegrüßt haben. Nicht belegt und deshalb nicht behauptet: Die Seite spricht danach davon, dass ein Stück abrogiert und ausgenommen wurde."
+        "audioScript": "Als Gast gute Sitten zeigen. Der Vers verbietet den Glaubenden, andere Häuser als ihre eigenen zu betreten, bis sie um Erlaubnis gebeten und die Bewohner gegrüßt haben. Nicht belegt und deshalb nicht behauptet: Die Seite spricht danach davon, dass ein Stück abrogiert und ausgenommen wurde."
       }
     },
     "questions": {
@@ -9192,7 +9192,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers nennt keine Minuten und kein Gerät. Die Zeitgrenze ist eine Familienvereinbarung. Wir behaupten nicht, der Vers habe Bildschirme erwähnt. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Vers nennt keine Minuten und kein Gerät. Die Zeitgrenze ist eine Familienvereinbarung. Wir behaupten nicht, der Vers habe Bildschirme erwähnt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Eine vereinbarte Bildschirmzeit halten wir ein.",
@@ -9225,7 +9225,7 @@ const additions=
       },
       "6-8": {
         "goal": "Eine vereinbarte Bildschirmzeit halten wir ein.",
-        "intro": "Heute geht es um Mit Bildschirmen bewusst umgehen. Eine vereinbarte Bildschirmzeit halten wir ein. Wir lesen Qurʾān 17:36. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt: Folge nicht dem, wovon du kein Wissen hast. Gehör, Augenlicht und Herz werden danach gefragt. So kann das im Alltag aussehen: Die vereinbarte Zeit ist um. Das Kind gibt das Gerät ab, auch wenn der Film noch weitergeht. Die Aufgabe: Wir nennen die vereinbarte Zeit und eine Beschäftigung danach, zum Beispiel ein Buch oder draußen sein. lā taqfu bedeutet: folge nicht. ʿilm bedeutet: Wissen. Die Grenze der Stunde: Der Vers nennt keine Minuten und kein Gerät. Die Zeitgrenze ist eine Familienvereinbarung. Wir behaupten nicht, der Vers habe Bildschirme erwähnt. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Mit Bildschirmen bewusst umgehen. Eine vereinbarte Bildschirmzeit halten wir ein. Wir lesen Qurʾān 17:36. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt: Folge nicht dem, wovon du kein Wissen hast. Gehör, Augenlicht und Herz werden danach gefragt. So kann das im Alltag aussehen: Die vereinbarte Zeit ist um. Das Kind gibt das Gerät ab, auch wenn der Film noch weitergeht. Die Aufgabe: Wir nennen die vereinbarte Zeit und eine Beschäftigung danach, zum Beispiel ein Buch oder draußen sein. lā taqfu bedeutet: folge nicht. ʿilm bedeutet: Wissen. Die Grenze der Stunde: Der Vers nennt keine Minuten und kein Gerät. Die Zeitgrenze ist eine Familienvereinbarung. Wir behaupten nicht, der Vers habe Bildschirme erwähnt.",
         "lines": [
           "Qurʾān 17:36 ist die gelesene Stelle.",
           "Der Vers sagt: Folge nicht dem, wovon du kein Wissen hast.",
@@ -9251,7 +9251,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Mit Bildschirmen bewusst umgehen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Mit Bildschirmen bewusst umgehen. Das Lernziel ist: Eine vereinbarte Bildschirmzeit halten wir ein. Die Seite https://www.islamweb.net/ar/library/content/49/1013 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:36. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt: Folge nicht dem, wovon du kein Wissen hast. Gehör, Augenlicht und Herz werden danach gefragt. Alltag: Die vereinbarte Zeit ist um. Das Kind gibt das Gerät ab, auch wenn der Film noch weitergeht. Aufgabe: Wir nennen die vereinbarte Zeit und eine Beschäftigung danach, zum Beispiel ein Buch oder draußen sein. lā taqfu bedeutet: folge nicht. ʿilm bedeutet: Wissen. Was nicht behauptet wird: Der Vers nennt keine Minuten und kein Gerät. Die Zeitgrenze ist eine Familienvereinbarung. Wir behaupten nicht, der Vers habe Bildschirme erwähnt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Mit Bildschirmen bewusst umgehen. Das Lernziel ist: Eine vereinbarte Bildschirmzeit halten wir ein. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt: Folge nicht dem, wovon du kein Wissen hast. Gehör, Augenlicht und Herz werden danach gefragt. Alltag: Die vereinbarte Zeit ist um. Das Kind gibt das Gerät ab, auch wenn der Film noch weitergeht. Aufgabe: Wir nennen die vereinbarte Zeit und eine Beschäftigung danach, zum Beispiel ein Buch oder draußen sein. lā taqfu bedeutet: folge nicht. ʿilm bedeutet: Wissen. Was nicht behauptet wird: Der Vers nennt keine Minuten und kein Gerät. Die Zeitgrenze ist eine Familienvereinbarung. Wir behaupten nicht, der Vers habe Bildschirme erwähnt.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 17:36.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -9273,7 +9273,7 @@ const additions=
         "situation": "Die vereinbarte Zeit ist um. Das Kind gibt das Gerät ab, auch wenn der Film noch weitergeht.",
         "practice": "Wir nennen die vereinbarte Zeit und eine Beschäftigung danach, zum Beispiel ein Buch oder draußen sein.",
         "summary": "Belegt ist Qurʾān 17:36. Ungeprüft bleibt: Der Vers nennt keine Minuten und kein Gerät.",
-        "audioScript": "Für die älteren Kinder. Mit Bildschirmen bewusst umgehen. Der Vers sagt: Folge nicht dem, wovon du kein Wissen hast. Nicht belegt und deshalb nicht behauptet: Der Vers nennt keine Minuten und kein Gerät."
+        "audioScript": "Mit Bildschirmen bewusst umgehen. Der Vers sagt: Folge nicht dem, wovon du kein Wissen hast. Nicht belegt und deshalb nicht behauptet: Der Vers nennt keine Minuten und kein Gerät."
       }
     },
     "questions": {
@@ -9409,7 +9409,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der letzte Satz des Verses spricht von Leuten, die an Allahs Erleichterung verzweifeln. Wir hängen dieses Wort keinem Kind an. Die Geschichte von Yūsuf wird nicht über den Vers hinaus erzählt. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der letzte Satz des Verses spricht von Leuten, die an Allahs Erleichterung verzweifeln. Wir hängen dieses Wort keinem Kind an. Die Geschichte von Yūsuf wird nicht über den Vers hinaus erzählt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Nach einem Fehler bleibt die Tür zur Besserung offen.",
@@ -9442,7 +9442,7 @@ const additions=
       },
       "6-8": {
         "goal": "Nach einem Fehler bleibt die Tür zur Besserung offen.",
-        "intro": "Heute geht es um Hoffnung auf Allahs Barmherzigkeit. Nach einem Fehler bleibt die Tür zur Besserung offen. Wir lesen Qurʾān 12:87. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers lässt Yaʿqūb zu seinen Söhnen sagen, sie sollen nach Yūsuf und seinem Bruder suchen und nicht an Allahs Erleichterung verzweifeln. So kann das im Alltag aussehen: Ein Kind hat eine Aufgabe falsch gemacht und darf sie noch einmal versuchen. Die Aufgabe: Wir sagen: Ich kann es besser machen, und nennen einen kleinen nächsten Schritt. lā tayʾasū bedeutet: verzweifelt nicht. rawḥ bedeutet: Erleichterung, Erbarmen. Die Grenze der Stunde: Der letzte Satz des Verses spricht von Leuten, die an Allahs Erleichterung verzweifeln. Wir hängen dieses Wort keinem Kind an. Die Geschichte von Yūsuf wird nicht über den Vers hinaus erzählt. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Hoffnung auf Allahs Barmherzigkeit. Nach einem Fehler bleibt die Tür zur Besserung offen. Wir lesen Qurʾān 12:87. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers lässt Yaʿqūb zu seinen Söhnen sagen, sie sollen nach Yūsuf und seinem Bruder suchen und nicht an Allahs Erleichterung verzweifeln. So kann das im Alltag aussehen: Ein Kind hat eine Aufgabe falsch gemacht und darf sie noch einmal versuchen. Die Aufgabe: Wir sagen: Ich kann es besser machen, und nennen einen kleinen nächsten Schritt. lā tayʾasū bedeutet: verzweifelt nicht. rawḥ bedeutet: Erleichterung, Erbarmen. Die Grenze der Stunde: Der letzte Satz des Verses spricht von Leuten, die an Allahs Erleichterung verzweifeln. Wir hängen dieses Wort keinem Kind an. Die Geschichte von Yūsuf wird nicht über den Vers hinaus erzählt.",
         "lines": [
           "Qurʾān 12:87 ist die gelesene Stelle.",
           "Der Vers lässt Yaʿqūb zu seinen Söhnen sagen, sie sollen nach Yūsuf und seinem Bruder suchen und nicht an Allahs Erleichterung verzweifeln.",
@@ -9468,7 +9468,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Hoffnung auf Allahs Barmherzigkeit von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Hoffnung auf Allahs Barmherzigkeit. Das Lernziel ist: Nach einem Fehler bleibt die Tür zur Besserung offen. Die Seite https://www.islamweb.net/ar/library/content/49/847 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 12:87. Sinngemäß, keine beglaubigte Übersetzung: Der Vers lässt Yaʿqūb zu seinen Söhnen sagen, sie sollen nach Yūsuf und seinem Bruder suchen und nicht an Allahs Erleichterung verzweifeln. Alltag: Ein Kind hat eine Aufgabe falsch gemacht und darf sie noch einmal versuchen. Aufgabe: Wir sagen: Ich kann es besser machen, und nennen einen kleinen nächsten Schritt. lā tayʾasū bedeutet: verzweifelt nicht. rawḥ bedeutet: Erleichterung, Erbarmen. Was nicht behauptet wird: Der letzte Satz des Verses spricht von Leuten, die an Allahs Erleichterung verzweifeln. Wir hängen dieses Wort keinem Kind an. Die Geschichte von Yūsuf wird nicht über den Vers hinaus erzählt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Hoffnung auf Allahs Barmherzigkeit. Das Lernziel ist: Nach einem Fehler bleibt die Tür zur Besserung offen. Sinngemäß, keine beglaubigte Übersetzung: Der Vers lässt Yaʿqūb zu seinen Söhnen sagen, sie sollen nach Yūsuf und seinem Bruder suchen und nicht an Allahs Erleichterung verzweifeln. Alltag: Ein Kind hat eine Aufgabe falsch gemacht und darf sie noch einmal versuchen. Aufgabe: Wir sagen: Ich kann es besser machen, und nennen einen kleinen nächsten Schritt. lā tayʾasū bedeutet: verzweifelt nicht. rawḥ bedeutet: Erleichterung, Erbarmen. Was nicht behauptet wird: Der letzte Satz des Verses spricht von Leuten, die an Allahs Erleichterung verzweifeln. Wir hängen dieses Wort keinem Kind an. Die Geschichte von Yūsuf wird nicht über den Vers hinaus erzählt.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 12:87.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -9490,7 +9490,7 @@ const additions=
         "situation": "Ein Kind hat eine Aufgabe falsch gemacht und darf sie noch einmal versuchen.",
         "practice": "Wir sagen: Ich kann es besser machen, und nennen einen kleinen nächsten Schritt.",
         "summary": "Belegt ist Qurʾān 12:87. Ungeprüft bleibt: Der letzte Satz des Verses spricht von Leuten, die an Allahs Erleichterung verzweifeln.",
-        "audioScript": "Für die älteren Kinder. Hoffnung auf Allahs Barmherzigkeit. Der Vers lässt Yaʿqūb zu seinen Söhnen sagen, sie sollen nach Yūsuf und seinem Bruder suchen und nicht an Allahs Erleichterung verzweifeln. Nicht belegt und deshalb nicht behauptet: Der letzte Satz des Verses spricht von Leuten, die an Allahs Erleichterung verzweifeln."
+        "audioScript": "Hoffnung auf Allahs Barmherzigkeit. Der Vers lässt Yaʿqūb zu seinen Söhnen sagen, sie sollen nach Yūsuf und seinem Bruder suchen und nicht an Allahs Erleichterung verzweifeln. Nicht belegt und deshalb nicht behauptet: Der letzte Satz des Verses spricht von Leuten, die an Allahs Erleichterung verzweifeln."
       }
     },
     "questions": {
@@ -9626,7 +9626,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ werden nicht als Wortlaut von 11:114 ausgegeben. Die genaue Zuordnung der Namen zu den Tagesenden bleibt ohne gelesenes Fiqh-Buch ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ werden nicht als Wortlaut von 11:114 ausgegeben. Die genaue Zuordnung der Namen zu den Tagesenden bleibt ohne gelesenes Fiqh-Buch ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
     "sample": "Wir kennen die fünf Namen als Bezeichnungen der App und trennen sie von dem, was der Vers selbst sagt.",
@@ -9659,7 +9659,7 @@ const additions=
       },
       "6-8": {
         "goal": "Wir kennen die fünf Namen als Bezeichnungen der App und trennen sie von dem, was der Vers selbst sagt.",
-        "intro": "Heute geht es um Die Namen der fünf Gebete. Wir kennen die fünf Namen als Bezeichnungen der App und trennen sie von dem, was der Vers selbst sagt. Wir lesen Qurʾān 11:114. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt: Verrichte das Gebet an den beiden Enden des Tages und in den Nahzeiten der Nacht. Die guten Taten nehmen die schlechten hinweg. So kann das im Alltag aussehen: Die Kinder legen fünf Karten mit den bekannten Namen in die Tagesfolge, die sie aus der App schon hören. Die Aufgabe: Wir sagen danach laut: Diese fünf Namen stehen so nicht in diesem einen Vers. ṭarafay an-nahār bedeutet: die beiden Enden des Tages. zulaf bedeutet: Nahzeiten der Nacht. Die Grenze der Stunde: Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ werden nicht als Wortlaut von 11:114 ausgegeben. Die genaue Zuordnung der Namen zu den Tagesenden bleibt ohne gelesenes Fiqh-Buch ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Die Namen der fünf Gebete. Wir kennen die fünf Namen als Bezeichnungen der App und trennen sie von dem, was der Vers selbst sagt. Wir lesen Qurʾān 11:114. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt: Verrichte das Gebet an den beiden Enden des Tages und in den Nahzeiten der Nacht. Die guten Taten nehmen die schlechten hinweg. So kann das im Alltag aussehen: Die Kinder legen fünf Karten mit den bekannten Namen in die Tagesfolge, die sie aus der App schon hören. Die Aufgabe: Wir sagen danach laut: Diese fünf Namen stehen so nicht in diesem einen Vers. ṭarafay an-nahār bedeutet: die beiden Enden des Tages. zulaf bedeutet: Nahzeiten der Nacht. Die Grenze der Stunde: Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ werden nicht als Wortlaut von 11:114 ausgegeben. Die genaue Zuordnung der Namen zu den Tagesenden bleibt ohne gelesenes Fiqh-Buch ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
         "lines": [
           "Qurʾān 11:114 ist die gelesene Stelle.",
           "Der Vers sagt: Verrichte das Gebet an den beiden Enden des Tages und in den Nahzeiten der Nacht.",
@@ -9685,7 +9685,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Die Namen der fünf Gebete von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Die Namen der fünf Gebete. Das Lernziel ist: Wir kennen die fünf Namen als Bezeichnungen der App und trennen sie von dem, was der Vers selbst sagt. Die Seite https://www.islamweb.net/ar/library/content/49/805 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 11:114. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt: Verrichte das Gebet an den beiden Enden des Tages und in den Nahzeiten der Nacht. Die guten Taten nehmen die schlechten hinweg. Alltag: Die Kinder legen fünf Karten mit den bekannten Namen in die Tagesfolge, die sie aus der App schon hören. Aufgabe: Wir sagen danach laut: Diese fünf Namen stehen so nicht in diesem einen Vers. ṭarafay an-nahār bedeutet: die beiden Enden des Tages. zulaf bedeutet: Nahzeiten der Nacht. Was nicht behauptet wird: Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ werden nicht als Wortlaut von 11:114 ausgegeben. Die genaue Zuordnung der Namen zu den Tagesenden bleibt ohne gelesenes Fiqh-Buch ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Die Namen der fünf Gebete. Das Lernziel ist: Wir kennen die fünf Namen als Bezeichnungen der App und trennen sie von dem, was der Vers selbst sagt. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt: Verrichte das Gebet an den beiden Enden des Tages und in den Nahzeiten der Nacht. Die guten Taten nehmen die schlechten hinweg. Alltag: Die Kinder legen fünf Karten mit den bekannten Namen in die Tagesfolge, die sie aus der App schon hören. Aufgabe: Wir sagen danach laut: Diese fünf Namen stehen so nicht in diesem einen Vers. ṭarafay an-nahār bedeutet: die beiden Enden des Tages. zulaf bedeutet: Nahzeiten der Nacht. Was nicht behauptet wird: Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ werden nicht als Wortlaut von 11:114 ausgegeben. Die genaue Zuordnung der Namen zu den Tagesenden bleibt ohne gelesenes Fiqh-Buch ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 11:114.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -9707,7 +9707,7 @@ const additions=
         "situation": "Die Kinder legen fünf Karten mit den bekannten Namen in die Tagesfolge, die sie aus der App schon hören.",
         "practice": "Wir sagen danach laut: Diese fünf Namen stehen so nicht in diesem einen Vers.",
         "summary": "Belegt ist Qurʾān 11:114. Ungeprüft bleibt: Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ werden nicht als Wortlaut von 11:114 ausgegeben.",
-        "audioScript": "Für die älteren Kinder. Die Namen der fünf Gebete. Der Vers sagt: Verrichte das Gebet an den beiden Enden des Tages und in den Nahzeiten der Nacht. Nicht belegt und deshalb nicht behauptet: Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ werden nicht als Wortlaut von 11:114 ausgegeben."
+        "audioScript": "Die Namen der fünf Gebete. Der Vers sagt: Verrichte das Gebet an den beiden Enden des Tages und in den Nahzeiten der Nacht. Nicht belegt und deshalb nicht behauptet: Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ werden nicht als Wortlaut von 11:114 ausgegeben."
       }
     },
     "questions": {
@@ -9843,7 +9843,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die Stunde vergibt keine Hadithnummer. Was später Sunnah als überlieferte Gewohnheit heißt, wird in der Stunde über die Herkunft eines Hadith genauer begrenzt. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Die Stunde vergibt keine Hadithnummer. Was später Sunnah als überlieferte Gewohnheit heißt, wird in der Stunde über die Herkunft eines Hadith genauer begrenzt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Sunnah meint hier zuerst das Vorbild des Propheten, Friede sei mit ihm, nicht eine erfundene Nummer.",
@@ -9876,7 +9876,7 @@ const additions=
       },
       "6-8": {
         "goal": "Sunnah meint hier zuerst das Vorbild des Propheten, Friede sei mit ihm, nicht eine erfundene Nummer.",
-        "intro": "Heute geht es um Was bedeutet Sunnah?. Sunnah meint hier zuerst das Vorbild des Propheten, Friede sei mit ihm, nicht eine erfundene Nummer. Wir lesen Qurʾān 33:21. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass im Gesandten Allahs ein schönes Vorbild liegt für den, der Allah und den Jüngsten Tag erhofft und Allahs viel gedenkt. So kann das im Alltag aussehen: Ein Kind erklärt mit eigenen Worten: Sein Verhalten ist ein Vorbild. Ein bestimmtes Beispiel nennen wir nur, wenn es auf der Seite steht. Die Aufgabe: Wir schreiben den deutschen Satz: Der Vers nennt ihn ein Vorbild. Eine einzelne Handlung ergänzen wir nicht. uswah bedeutet: Vorbild. sunnah bedeutet: Gewohnheit und Vorbild des Propheten; das Wort selbst steht in diesem Vers nicht. Die Grenze der Stunde: Die Stunde vergibt keine Hadithnummer. Was später Sunnah als überlieferte Gewohnheit heißt, wird in der Stunde über die Herkunft eines Hadith genauer begrenzt. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Was bedeutet Sunnah?. Sunnah meint hier zuerst das Vorbild des Propheten, Friede sei mit ihm, nicht eine erfundene Nummer. Wir lesen Qurʾān 33:21. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass im Gesandten Allahs ein schönes Vorbild liegt für den, der Allah und den Jüngsten Tag erhofft und Allahs viel gedenkt. So kann das im Alltag aussehen: Ein Kind erklärt mit eigenen Worten: Sein Verhalten ist ein Vorbild. Ein bestimmtes Beispiel nennen wir nur, wenn es auf der Seite steht. Die Aufgabe: Wir schreiben den deutschen Satz: Der Vers nennt ihn ein Vorbild. Eine einzelne Handlung ergänzen wir nicht. uswah bedeutet: Vorbild. sunnah bedeutet: Gewohnheit und Vorbild des Propheten; das Wort selbst steht in diesem Vers nicht. Die Grenze der Stunde: Die Stunde vergibt keine Hadithnummer. Was später Sunnah als überlieferte Gewohnheit heißt, wird in der Stunde über die Herkunft eines Hadith genauer begrenzt.",
         "lines": [
           "Qurʾān 33:21 ist die gelesene Stelle.",
           "Der Vers sagt, dass im Gesandten Allahs ein schönes Vorbild liegt für den, der Allah und den Jüngsten Tag erhofft und Allahs viel gedenkt.",
@@ -9902,7 +9902,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Was bedeutet Sunnah? von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Was bedeutet Sunnah?. Das Lernziel ist: Sunnah meint hier zuerst das Vorbild des Propheten, Friede sei mit ihm, nicht eine erfundene Nummer. Die Seite https://www.islamweb.net/ar/library/content/49/1480 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 33:21. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass im Gesandten Allahs ein schönes Vorbild liegt für den, der Allah und den Jüngsten Tag erhofft und Allahs viel gedenkt. Alltag: Ein Kind erklärt mit eigenen Worten: Sein Verhalten ist ein Vorbild. Ein bestimmtes Beispiel nennen wir nur, wenn es auf der Seite steht. Aufgabe: Wir schreiben den deutschen Satz: Der Vers nennt ihn ein Vorbild. Eine einzelne Handlung ergänzen wir nicht. uswah bedeutet: Vorbild. sunnah bedeutet: Gewohnheit und Vorbild des Propheten; das Wort selbst steht in diesem Vers nicht. Was nicht behauptet wird: Die Stunde vergibt keine Hadithnummer. Was später Sunnah als überlieferte Gewohnheit heißt, wird in der Stunde über die Herkunft eines Hadith genauer begrenzt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Was bedeutet Sunnah?. Das Lernziel ist: Sunnah meint hier zuerst das Vorbild des Propheten, Friede sei mit ihm, nicht eine erfundene Nummer. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass im Gesandten Allahs ein schönes Vorbild liegt für den, der Allah und den Jüngsten Tag erhofft und Allahs viel gedenkt. Alltag: Ein Kind erklärt mit eigenen Worten: Sein Verhalten ist ein Vorbild. Ein bestimmtes Beispiel nennen wir nur, wenn es auf der Seite steht. Aufgabe: Wir schreiben den deutschen Satz: Der Vers nennt ihn ein Vorbild. Eine einzelne Handlung ergänzen wir nicht. uswah bedeutet: Vorbild. sunnah bedeutet: Gewohnheit und Vorbild des Propheten; das Wort selbst steht in diesem Vers nicht. Was nicht behauptet wird: Die Stunde vergibt keine Hadithnummer. Was später Sunnah als überlieferte Gewohnheit heißt, wird in der Stunde über die Herkunft eines Hadith genauer begrenzt.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 33:21.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -9924,7 +9924,7 @@ const additions=
         "situation": "Ein Kind erklärt mit eigenen Worten: Sein Verhalten ist ein Vorbild. Ein bestimmtes Beispiel nennen wir nur, wenn es auf der Seite steht.",
         "practice": "Wir schreiben den deutschen Satz: Der Vers nennt ihn ein Vorbild. Eine einzelne Handlung ergänzen wir nicht.",
         "summary": "Belegt ist Qurʾān 33:21. Ungeprüft bleibt: Die Stunde vergibt keine Hadithnummer.",
-        "audioScript": "Für die älteren Kinder. Was bedeutet Sunnah?. Der Vers sagt, dass im Gesandten Allahs ein schönes Vorbild liegt für den, der Allah und den Jüngsten Tag erhofft und Allahs viel gedenkt. Nicht belegt und deshalb nicht behauptet: Die Stunde vergibt keine Hadithnummer."
+        "audioScript": "Was bedeutet Sunnah?. Der Vers sagt, dass im Gesandten Allahs ein schönes Vorbild liegt für den, der Allah und den Jüngsten Tag erhofft und Allahs viel gedenkt. Nicht belegt und deshalb nicht behauptet: Die Stunde vergibt keine Hadithnummer."
       }
     },
     "questions": {
@@ -10060,7 +10060,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Ein Datum, die Namen der Verfolger und die einzelnen Stationen stehen im gespeicherten Text nicht als Unterrichtsliste. Wir erfinden sie nicht. Der Name des Gefährten wird nicht über den Vers hinaus behauptet, wenn der Vers nur den Gefährten nennt. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Ein Datum, die Namen der Verfolger und die einzelnen Stationen stehen im gespeicherten Text nicht als Unterrichtsliste. Wir erfinden sie nicht. Der Name des Gefährten wird nicht über den Vers hinaus behauptet, wenn der Vers nur den Gefährten nennt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Der Prophet, Friede sei mit ihm, zog mit einem Gefährten aus.",
@@ -10093,7 +10093,7 @@ const additions=
       },
       "6-8": {
         "goal": "Der Prophet, Friede sei mit ihm, zog mit einem Gefährten aus.",
-        "intro": "Heute geht es um Die Hiǧrah nach Madīnah. Der Prophet, Friede sei mit ihm, zog mit einem Gefährten aus. Wir lesen Qurʾān 9:40. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass Allah ihm half, als die Ungläubigen ihn hinausdrängten, als er der zweite von zweien war und beide in der Höhle waren. So kann das im Alltag aussehen: Wir zeigen auf einer einfachen Karte nur zwei Worte: Makkah und Madīnah, und sagen, dass der Vers den Weg dazwischen nicht beschreibt. Die Aufgabe: Wir wiederholen den Trostsatz und fügen keine Route hinzu. hiǧrah bedeutet: Auszug; das Wort ist die Bezeichnung der Stunde, nicht ein Wort, das wir dem Vers unterschieben. ġār bedeutet: Höhle. Die Grenze der Stunde: Ein Datum, die Namen der Verfolger und die einzelnen Stationen stehen im gespeicherten Text nicht als Unterrichtsliste. Wir erfinden sie nicht. Der Name des Gefährten wird nicht über den Vers hinaus behauptet, wenn der Vers nur den Gefährten nennt. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Die Hiǧrah nach Madīnah. Der Prophet, Friede sei mit ihm, zog mit einem Gefährten aus. Wir lesen Qurʾān 9:40. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass Allah ihm half, als die Ungläubigen ihn hinausdrängten, als er der zweite von zweien war und beide in der Höhle waren. So kann das im Alltag aussehen: Wir zeigen auf einer einfachen Karte nur zwei Worte: Makkah und Madīnah, und sagen, dass der Vers den Weg dazwischen nicht beschreibt. Die Aufgabe: Wir wiederholen den Trostsatz und fügen keine Route hinzu. hiǧrah bedeutet: Auszug; das Wort ist die Bezeichnung der Stunde, nicht ein Wort, das wir dem Vers unterschieben. ġār bedeutet: Höhle. Die Grenze der Stunde: Ein Datum, die Namen der Verfolger und die einzelnen Stationen stehen im gespeicherten Text nicht als Unterrichtsliste. Wir erfinden sie nicht. Der Name des Gefährten wird nicht über den Vers hinaus behauptet, wenn der Vers nur den Gefährten nennt.",
         "lines": [
           "Qurʾān 9:40 ist die gelesene Stelle.",
           "Der Vers sagt, dass Allah ihm half, als die Ungläubigen ihn hinausdrängten, als er der zweite von zweien war und beide in der Höhle waren.",
@@ -10119,7 +10119,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Die Hiǧrah nach Madīnah von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Die Hiǧrah nach Madīnah. Das Lernziel ist: Der Prophet, Friede sei mit ihm, zog mit einem Gefährten aus. Die Seite https://www.islamweb.net/ar/library/content/49/649 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 9:40. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass Allah ihm half, als die Ungläubigen ihn hinausdrängten, als er der zweite von zweien war und beide in der Höhle waren. Alltag: Wir zeigen auf einer einfachen Karte nur zwei Worte: Makkah und Madīnah, und sagen, dass der Vers den Weg dazwischen nicht beschreibt. Aufgabe: Wir wiederholen den Trostsatz und fügen keine Route hinzu. hiǧrah bedeutet: Auszug; das Wort ist die Bezeichnung der Stunde, nicht ein Wort, das wir dem Vers unterschieben. ġār bedeutet: Höhle. Was nicht behauptet wird: Ein Datum, die Namen der Verfolger und die einzelnen Stationen stehen im gespeicherten Text nicht als Unterrichtsliste. Wir erfinden sie nicht. Der Name des Gefährten wird nicht über den Vers hinaus behauptet, wenn der Vers nur den Gefährten nennt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Die Hiǧrah nach Madīnah. Das Lernziel ist: Der Prophet, Friede sei mit ihm, zog mit einem Gefährten aus. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass Allah ihm half, als die Ungläubigen ihn hinausdrängten, als er der zweite von zweien war und beide in der Höhle waren. Alltag: Wir zeigen auf einer einfachen Karte nur zwei Worte: Makkah und Madīnah, und sagen, dass der Vers den Weg dazwischen nicht beschreibt. Aufgabe: Wir wiederholen den Trostsatz und fügen keine Route hinzu. hiǧrah bedeutet: Auszug; das Wort ist die Bezeichnung der Stunde, nicht ein Wort, das wir dem Vers unterschieben. ġār bedeutet: Höhle. Was nicht behauptet wird: Ein Datum, die Namen der Verfolger und die einzelnen Stationen stehen im gespeicherten Text nicht als Unterrichtsliste. Wir erfinden sie nicht. Der Name des Gefährten wird nicht über den Vers hinaus behauptet, wenn der Vers nur den Gefährten nennt.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 9:40.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -10141,7 +10141,7 @@ const additions=
         "situation": "Wir zeigen auf einer einfachen Karte nur zwei Worte: Makkah und Madīnah, und sagen, dass der Vers den Weg dazwischen nicht beschreibt.",
         "practice": "Wir wiederholen den Trostsatz und fügen keine Route hinzu.",
         "summary": "Belegt ist Qurʾān 9:40. Ungeprüft bleibt: Ein Datum, die Namen der Verfolger und die einzelnen Stationen stehen im gespeicherten Text nicht als Unterrichtsliste.",
-        "audioScript": "Für die älteren Kinder. Die Hiǧrah nach Madīnah. Der Vers sagt, dass Allah ihm half, als die Ungläubigen ihn hinausdrängten, als er der zweite von zweien war und beide in der Höhle waren. Nicht belegt und deshalb nicht behauptet: Ein Datum, die Namen der Verfolger und die einzelnen Stationen stehen im gespeicherten Text nicht als Unterrichtsliste."
+        "audioScript": "Die Hiǧrah nach Madīnah. Der Vers sagt, dass Allah ihm half, als die Ungläubigen ihn hinausdrängten, als er der zweite von zweien war und beide in der Höhle waren. Nicht belegt und deshalb nicht behauptet: Ein Datum, die Namen der Verfolger und die einzelnen Stationen stehen im gespeicherten Text nicht als Unterrichtsliste."
       }
     },
     "questions": {
@@ -10277,7 +10277,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die bekannte kurze Formel beim Verlassen des Hauses steht auf dieser Seite nicht. Wir geben sie nicht als gelesene Sunnah aus. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Die bekannte kurze Formel beim Verlassen des Hauses steht auf dieser Seite nicht. Wir geben sie nicht als gelesene Sunnah aus. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten.",
@@ -10310,7 +10310,7 @@ const additions=
       },
       "6-8": {
         "goal": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten.",
-        "intro": "Heute geht es um Duʿāʾ beim Verlassen des Hauses. Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Wir lesen Qurʾān 17:80. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht. So kann das im Alltag aussehen: An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn. Die Aufgabe: Wir üben diesen Sinn und nicht eine andere Formel. mudḫal bedeutet: Eingang. muḫraǧ bedeutet: Ausgang. Die Grenze der Stunde: Die bekannte kurze Formel beim Verlassen des Hauses steht auf dieser Seite nicht. Wir geben sie nicht als gelesene Sunnah aus. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Duʿāʾ beim Verlassen des Hauses. Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Wir lesen Qurʾān 17:80. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht. So kann das im Alltag aussehen: An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn. Die Aufgabe: Wir üben diesen Sinn und nicht eine andere Formel. mudḫal bedeutet: Eingang. muḫraǧ bedeutet: Ausgang. Die Grenze der Stunde: Die bekannte kurze Formel beim Verlassen des Hauses steht auf dieser Seite nicht. Wir geben sie nicht als gelesene Sunnah aus.",
         "lines": [
           "Qurʾān 17:80 ist die gelesene Stelle.",
           "Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
@@ -10336,7 +10336,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Duʿāʾ beim Verlassen des Hauses von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Duʿāʾ beim Verlassen des Hauses. Das Lernziel ist: Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Die Seite https://www.islamweb.net/ar/library/content/49/1040 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:80. Sinngemäß, keine beglaubigte Übersetzung: Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht. Alltag: An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn. Aufgabe: Wir üben diesen Sinn und nicht eine andere Formel. mudḫal bedeutet: Eingang. muḫraǧ bedeutet: Ausgang. Was nicht behauptet wird: Die bekannte kurze Formel beim Verlassen des Hauses steht auf dieser Seite nicht. Wir geben sie nicht als gelesene Sunnah aus. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Duʿāʾ beim Verlassen des Hauses. Das Lernziel ist: Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Sinngemäß, keine beglaubigte Übersetzung: Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht. Alltag: An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn. Aufgabe: Wir üben diesen Sinn und nicht eine andere Formel. mudḫal bedeutet: Eingang. muḫraǧ bedeutet: Ausgang. Was nicht behauptet wird: Die bekannte kurze Formel beim Verlassen des Hauses steht auf dieser Seite nicht. Wir geben sie nicht als gelesene Sunnah aus.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 17:80.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -10358,7 +10358,7 @@ const additions=
         "situation": "An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn.",
         "practice": "Wir üben diesen Sinn und nicht eine andere Formel.",
         "summary": "Belegt ist Qurʾān 17:80. Ungeprüft bleibt: Die bekannte kurze Formel beim Verlassen des Hauses steht auf dieser Seite nicht.",
-        "audioScript": "Für die älteren Kinder. Duʿāʾ beim Verlassen des Hauses. Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht. Nicht belegt und deshalb nicht behauptet: Die bekannte kurze Formel beim Verlassen des Hauses steht auf dieser Seite nicht."
+        "audioScript": "Duʿāʾ beim Verlassen des Hauses. Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht. Nicht belegt und deshalb nicht behauptet: Die bekannte kurze Formel beim Verlassen des Hauses steht auf dieser Seite nicht."
       }
     },
     "questions": {
@@ -10494,7 +10494,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers erlaubt keinen Witz über Herkunft, Kleidung oder Sprache. Wir erfinden keine Volksgruppe als Beispiel, das der Vers nicht nennt. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Vers erlaubt keinen Witz über Herkunft, Kleidung oder Sprache. Wir erfinden keine Volksgruppe als Beispiel, das der Vers nicht nennt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Wir erfinden keine zusätzliche Geschichte.",
     "sample": "Menschen haben verschiedene Familien und Sprachen.",
@@ -10527,7 +10527,7 @@ const additions=
       },
       "6-8": {
         "goal": "Menschen haben verschiedene Familien und Sprachen.",
-        "intro": "Heute geht es um Unterschiedliche Herkunft respektieren. Menschen haben verschiedene Familien und Sprachen. Wir lesen Qurʾān 49:13. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste. So kann das im Alltag aussehen: Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen. Die Aufgabe: Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt. šuʿūb bedeutet: Völker. qabāʾil bedeutet: Stämme. Die Grenze der Stunde: Der Vers erlaubt keinen Witz über Herkunft, Kleidung oder Sprache. Wir erfinden keine Volksgruppe als Beispiel, das der Vers nicht nennt. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Unterschiedliche Herkunft respektieren. Menschen haben verschiedene Familien und Sprachen. Wir lesen Qurʾān 49:13. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste. So kann das im Alltag aussehen: Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen. Die Aufgabe: Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt. šuʿūb bedeutet: Völker. qabāʾil bedeutet: Stämme. Die Grenze der Stunde: Der Vers erlaubt keinen Witz über Herkunft, Kleidung oder Sprache. Wir erfinden keine Volksgruppe als Beispiel, das der Vers nicht nennt.",
         "lines": [
           "Qurʾān 49:13 ist die gelesene Stelle.",
           "Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen.",
@@ -10553,7 +10553,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Unterschiedliche Herkunft respektieren von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Unterschiedliche Herkunft respektieren. Das Lernziel ist: Menschen haben verschiedene Familien und Sprachen. Die Seite https://www.islamweb.net/ar/library/content/49/1756 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 49:13. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste. Alltag: Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen. Aufgabe: Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt. šuʿūb bedeutet: Völker. qabāʾil bedeutet: Stämme. Was nicht behauptet wird: Der Vers erlaubt keinen Witz über Herkunft, Kleidung oder Sprache. Wir erfinden keine Volksgruppe als Beispiel, das der Vers nicht nennt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Unterschiedliche Herkunft respektieren. Das Lernziel ist: Menschen haben verschiedene Familien und Sprachen. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste. Alltag: Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen. Aufgabe: Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt. šuʿūb bedeutet: Völker. qabāʾil bedeutet: Stämme. Was nicht behauptet wird: Der Vers erlaubt keinen Witz über Herkunft, Kleidung oder Sprache. Wir erfinden keine Volksgruppe als Beispiel, das der Vers nicht nennt.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 49:13.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -10575,7 +10575,7 @@ const additions=
         "situation": "Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen.",
         "practice": "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
         "summary": "Belegt ist Qurʾān 49:13. Ungeprüft bleibt: Der Vers erlaubt keinen Witz über Herkunft, Kleidung oder Sprache.",
-        "audioScript": "Für die älteren Kinder. Unterschiedliche Herkunft respektieren. Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Nicht belegt und deshalb nicht behauptet: Der Vers erlaubt keinen Witz über Herkunft, Kleidung oder Sprache."
+        "audioScript": "Unterschiedliche Herkunft respektieren. Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Nicht belegt und deshalb nicht behauptet: Der Vers erlaubt keinen Witz über Herkunft, Kleidung oder Sprache."
       }
     },
     "questions": {
@@ -10711,7 +10711,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Eine ausführliche Unterschiedslehre der beiden Namen steht in diesem kurzen gespeicherten Vers nicht. Wir erfinden sie nicht. Eine künstliche Rezitation unterbleibt. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Eine ausführliche Unterschiedslehre der beiden Namen steht in diesem kurzen gespeicherten Vers nicht. Wir erfinden sie nicht. Eine künstliche Rezitation unterbleibt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Ar-Raḥmān und ar-Raḥīm sind Namen Allahs.",
@@ -10744,7 +10744,7 @@ const additions=
       },
       "6-8": {
         "goal": "Ar-Raḥmān und ar-Raḥīm sind Namen Allahs.",
-        "intro": "Heute geht es um Ar-Raḥmān und Ar-Raḥīm. Ar-Raḥmān und ar-Raḥīm sind Namen Allahs. Wir lesen Qurʾān 1:1. Sinngemäß, ohne beglaubigte Übersetzung: Der gespeicherte Vers ist die Eröffnung: Im Namen Allahs, des Allerbarmers, des Barmherzigen. So kann das im Alltag aussehen: Ein Kind hört die beiden Namen und sagt: Beide gehören Allah, nicht einem Menschen. Die Aufgabe: Wir erklären mit einfachen Worten: Allah ist barmherzig. Wir zählen nicht weitere Namen dazu. ar-Raḥmān bedeutet: der Allbarmer, ein Name Allahs. ar-Raḥīm bedeutet: der Barmherzige, ein Name Allahs. Die Grenze der Stunde: Eine ausführliche Unterschiedslehre der beiden Namen steht in diesem kurzen gespeicherten Vers nicht. Wir erfinden sie nicht. Eine künstliche Rezitation unterbleibt. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Ar-Raḥmān und Ar-Raḥīm. Ar-Raḥmān und ar-Raḥīm sind Namen Allahs. Wir lesen Qurʾān 1:1. Sinngemäß, ohne beglaubigte Übersetzung: Der gespeicherte Vers ist die Eröffnung: Im Namen Allahs, des Allerbarmers, des Barmherzigen. So kann das im Alltag aussehen: Ein Kind hört die beiden Namen und sagt: Beide gehören Allah, nicht einem Menschen. Die Aufgabe: Wir erklären mit einfachen Worten: Allah ist barmherzig. Wir zählen nicht weitere Namen dazu. ar-Raḥmān bedeutet: der Allbarmer, ein Name Allahs. ar-Raḥīm bedeutet: der Barmherzige, ein Name Allahs. Die Grenze der Stunde: Eine ausführliche Unterschiedslehre der beiden Namen steht in diesem kurzen gespeicherten Vers nicht. Wir erfinden sie nicht. Eine künstliche Rezitation unterbleibt.",
         "lines": [
           "Qurʾān 1:1 ist die gelesene Stelle.",
           "Ar-Raḥmān und ar-Raḥīm sind Namen Allahs. Wir hören sie am Anfang der Rezitation.",
@@ -10770,7 +10770,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Ar-Raḥmān und Ar-Raḥīm von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Ar-Raḥmān und Ar-Raḥīm. Das Lernziel ist: Ar-Raḥmān und ar-Raḥīm sind Namen Allahs. Die Seite https://www.islamweb.net/ar/library/content/49/40 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 1:1. Sinngemäß, keine beglaubigte Übersetzung: Der gespeicherte Vers ist die Eröffnung: Im Namen Allahs, des Allerbarmers, des Barmherzigen. Alltag: Ein Kind hört die beiden Namen und sagt: Beide gehören Allah, nicht einem Menschen. Aufgabe: Wir erklären mit einfachen Worten: Allah ist barmherzig. Wir zählen nicht weitere Namen dazu. ar-Raḥmān bedeutet: der Allbarmer, ein Name Allahs. ar-Raḥīm bedeutet: der Barmherzige, ein Name Allahs. Was nicht behauptet wird: Eine ausführliche Unterschiedslehre der beiden Namen steht in diesem kurzen gespeicherten Vers nicht. Wir erfinden sie nicht. Eine künstliche Rezitation unterbleibt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Ar-Raḥmān und Ar-Raḥīm. Das Lernziel ist: Ar-Raḥmān und ar-Raḥīm sind Namen Allahs. Sinngemäß, keine beglaubigte Übersetzung: Der gespeicherte Vers ist die Eröffnung: Im Namen Allahs, des Allerbarmers, des Barmherzigen. Alltag: Ein Kind hört die beiden Namen und sagt: Beide gehören Allah, nicht einem Menschen. Aufgabe: Wir erklären mit einfachen Worten: Allah ist barmherzig. Wir zählen nicht weitere Namen dazu. ar-Raḥmān bedeutet: der Allbarmer, ein Name Allahs. ar-Raḥīm bedeutet: der Barmherzige, ein Name Allahs. Was nicht behauptet wird: Eine ausführliche Unterschiedslehre der beiden Namen steht in diesem kurzen gespeicherten Vers nicht. Wir erfinden sie nicht. Eine künstliche Rezitation unterbleibt.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 1:1.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -10792,7 +10792,7 @@ const additions=
         "situation": "Ein Kind hört die beiden Namen und sagt: Beide gehören Allah, nicht einem Menschen.",
         "practice": "Wir erklären mit einfachen Worten: Allah ist barmherzig. Wir zählen nicht weitere Namen dazu.",
         "summary": "Belegt ist Qurʾān 1:1. Ungeprüft bleibt: Eine ausführliche Unterschiedslehre der beiden Namen steht in diesem kurzen gespeicherten Vers nicht.",
-        "audioScript": "Für die älteren Kinder. Ar-Raḥmān und Ar-Raḥīm. Ar-Raḥmān und ar-Raḥīm sind Namen Allahs. Wir hören sie am Anfang der Rezitation. Nicht belegt und deshalb nicht behauptet: Eine ausführliche Unterschiedslehre der beiden Namen steht in diesem kurzen gespeicherten Vers nicht."
+        "audioScript": "Ar-Raḥmān und Ar-Raḥīm. Ar-Raḥmān und ar-Raḥīm sind Namen Allahs. Wir hören sie am Anfang der Rezitation. Nicht belegt und deshalb nicht behauptet: Eine ausführliche Unterschiedslehre der beiden Namen steht in diesem kurzen gespeicherten Vers nicht."
       }
     },
     "questions": {
@@ -10928,7 +10928,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers zählt noch weitere Handlungen auf. Was im gespeicherten Auszug fehlt, ergänzen wir nicht als arabischen Text. Für die Jüngsten gibt es keine Beschreibung von Grab, Feuer oder Strafe. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Vers zählt noch weitere Handlungen auf. Was im gespeicherten Auszug fehlt, ergänzen wir nicht als arabischen Text. Für die Jüngsten gibt es keine Beschreibung von Grab, Feuer oder Strafe. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Wir erzählen keine Gruselgeschichte.",
     "sample": "Wir glauben, dass es einen Jüngsten Tag gibt.",
@@ -10961,7 +10961,7 @@ const additions=
       },
       "6-8": {
         "goal": "Wir glauben, dass es einen Jüngsten Tag gibt.",
-        "intro": "Heute geht es um Īmān an den Jüngsten Tag. Wir glauben, dass es einen Jüngsten Tag gibt. Wir lesen Qurʾān 2:177. Sinngemäß, ohne beglaubigte Übersetzung: Der lange Vers nennt zum Guten den Glauben an Allah, den Jüngsten Tag, die Engel, das Buch und die Propheten. Der gespeicherte Text ist ein Auszug aus diesem langen Vers. So kann das im Alltag aussehen: Ein Kind sagt: Allah ist gerecht. Mehr brauchen wir in dieser Stunde nicht. Die Aufgabe: Wir wiederholen nur die genannten Glaubensworte und keine Szene. al-yawm al-āḫir bedeutet: der Jüngste Tag. birr bedeutet: das Gute, von dem der Vers spricht. Die Grenze der Stunde: Der Vers zählt noch weitere Handlungen auf. Was im gespeicherten Auszug fehlt, ergänzen wir nicht als arabischen Text. Für die Jüngsten gibt es keine Beschreibung von Grab, Feuer oder Strafe. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Īmān an den Jüngsten Tag. Wir glauben, dass es einen Jüngsten Tag gibt. Wir lesen Qurʾān 2:177. Sinngemäß, ohne beglaubigte Übersetzung: Der lange Vers nennt zum Guten den Glauben an Allah, den Jüngsten Tag, die Engel, das Buch und die Propheten. Der gespeicherte Text ist ein Auszug aus diesem langen Vers. So kann das im Alltag aussehen: Ein Kind sagt: Allah ist gerecht. Mehr brauchen wir in dieser Stunde nicht. Die Aufgabe: Wir wiederholen nur die genannten Glaubensworte und keine Szene. al-yawm al-āḫir bedeutet: der Jüngste Tag. birr bedeutet: das Gute, von dem der Vers spricht. Die Grenze der Stunde: Der Vers zählt noch weitere Handlungen auf. Was im gespeicherten Auszug fehlt, ergänzen wir nicht als arabischen Text. Für die Jüngsten gibt es keine Beschreibung von Grab, Feuer oder Strafe.",
         "lines": [
           "Qurʾān 2:177 ist die gelesene Stelle.",
           "Der lange Vers nennt zum Guten den Glauben an Allah, den Jüngsten Tag, die Engel, das Buch und die Propheten.",
@@ -10987,7 +10987,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Īmān an den Jüngsten Tag von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Īmān an den Jüngsten Tag. Das Lernziel ist: Wir glauben, dass es einen Jüngsten Tag gibt. Die Seite https://www.islamweb.net/ar/library/content/49/161 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:177. Sinngemäß, keine beglaubigte Übersetzung: Der lange Vers nennt zum Guten den Glauben an Allah, den Jüngsten Tag, die Engel, das Buch und die Propheten. Der gespeicherte Text ist ein Auszug aus diesem langen Vers. Alltag: Ein Kind sagt: Allah ist gerecht. Mehr brauchen wir in dieser Stunde nicht. Aufgabe: Wir wiederholen nur die genannten Glaubensworte und keine Szene. al-yawm al-āḫir bedeutet: der Jüngste Tag. birr bedeutet: das Gute, von dem der Vers spricht. Was nicht behauptet wird: Der Vers zählt noch weitere Handlungen auf. Was im gespeicherten Auszug fehlt, ergänzen wir nicht als arabischen Text. Für die Jüngsten gibt es keine Beschreibung von Grab, Feuer oder Strafe. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Īmān an den Jüngsten Tag. Das Lernziel ist: Wir glauben, dass es einen Jüngsten Tag gibt. Sinngemäß, keine beglaubigte Übersetzung: Der lange Vers nennt zum Guten den Glauben an Allah, den Jüngsten Tag, die Engel, das Buch und die Propheten. Der gespeicherte Text ist ein Auszug aus diesem langen Vers. Alltag: Ein Kind sagt: Allah ist gerecht. Mehr brauchen wir in dieser Stunde nicht. Aufgabe: Wir wiederholen nur die genannten Glaubensworte und keine Szene. al-yawm al-āḫir bedeutet: der Jüngste Tag. birr bedeutet: das Gute, von dem der Vers spricht. Was nicht behauptet wird: Der Vers zählt noch weitere Handlungen auf. Was im gespeicherten Auszug fehlt, ergänzen wir nicht als arabischen Text. Für die Jüngsten gibt es keine Beschreibung von Grab, Feuer oder Strafe.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 2:177.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -11009,7 +11009,7 @@ const additions=
         "situation": "Ein Kind sagt: Allah ist gerecht. Mehr brauchen wir in dieser Stunde nicht.",
         "practice": "Wir wiederholen nur die genannten Glaubensworte und keine Szene.",
         "summary": "Belegt ist Qurʾān 2:177. Ungeprüft bleibt: Der Vers zählt noch weitere Handlungen auf.",
-        "audioScript": "Für die älteren Kinder. Īmān an den Jüngsten Tag. Der lange Vers nennt zum Guten den Glauben an Allah, den Jüngsten Tag, die Engel, das Buch und die Propheten. Nicht belegt und deshalb nicht behauptet: Der Vers zählt noch weitere Handlungen auf."
+        "audioScript": "Īmān an den Jüngsten Tag. Der lange Vers nennt zum Guten den Glauben an Allah, den Jüngsten Tag, die Engel, das Buch und die Propheten. Nicht belegt und deshalb nicht behauptet: Der Vers zählt noch weitere Handlungen auf."
       }
     },
     "questions": {
@@ -11145,7 +11145,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Dieselbe Fundstelle trägt hier das Lernziel der gemeinsamen Arbeit. Wir machen aus dem Vers keine Vereinsregel und keine Stimmenzählung. Dieselbe gelesene Fundstelle wurde schon in Slot 138 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+      "note": "Dieselbe Fundstelle trägt hier das Lernziel der gemeinsamen Arbeit. Wir machen aus dem Vers keine Vereinsregel und keine Stimmenzählung. Dieselbe gelesene Fundstelle wurde schon in Slot 138 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
       "sameLocusAsSlot": 138
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
@@ -11179,7 +11179,7 @@ const additions=
       },
       "6-8": {
         "goal": "Bei einer gemeinsamen Aufgabe sehen wir die Aufgabe, nicht nur uns selbst.",
-        "intro": "Heute geht es um Gemeinsame Aufgaben ohne Eitelkeit. Bei einer gemeinsamen Aufgabe sehen wir die Aufgabe, nicht nur uns selbst. Wir lesen Qurʾān 5:2. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe Stelle wie in der Stunde über das Abwenden von Schaden enthält den Satz, einander bei der Rechtschaffenheit zu helfen und nicht bei der Sünde. So kann das im Alltag aussehen: Vier Kinder bauen ein Bild auf. Eines will nur den eigenen Namen darunter setzen. Die Gruppe schreibt alle Namen oder keinen. Die Aufgabe: Wir verteilen eine kleine Aufgabe so, dass jedes Kind einen Teil hat. taʿāwun bedeutet: gegenseitige Hilfe. riyāʾ bedeutet: das Tun, damit andere es sehen; das Wort steht in diesem Vers nicht. Die Grenze der Stunde: Dieselbe Fundstelle trägt hier das Lernziel der gemeinsamen Arbeit. Wir machen aus dem Vers keine Vereinsregel und keine Stimmenzählung. Dieselbe gelesene Fundstelle wurde schon in Slot 138 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Gemeinsame Aufgaben ohne Eitelkeit. Bei einer gemeinsamen Aufgabe sehen wir die Aufgabe, nicht nur uns selbst. Wir lesen Qurʾān 5:2. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe Stelle wie in der Stunde über das Abwenden von Schaden enthält den Satz, einander bei der Rechtschaffenheit zu helfen und nicht bei der Sünde. So kann das im Alltag aussehen: Vier Kinder bauen ein Bild auf. Eines will nur den eigenen Namen darunter setzen. Die Gruppe schreibt alle Namen oder keinen. Die Aufgabe: Wir verteilen eine kleine Aufgabe so, dass jedes Kind einen Teil hat. taʿāwun bedeutet: gegenseitige Hilfe. riyāʾ bedeutet: das Tun, damit andere es sehen; das Wort steht in diesem Vers nicht. Die Grenze der Stunde: Dieselbe Fundstelle trägt hier das Lernziel der gemeinsamen Arbeit. Wir machen aus dem Vers keine Vereinsregel und keine Stimmenzählung. Dieselbe gelesene Fundstelle wurde schon in Slot 138 mit einem anderen Lernziel verwendet.",
         "lines": [
           "Qurʾān 5:2 ist die gelesene Stelle.",
           "Dieselbe Stelle wie in der Stunde über das Abwenden von Schaden enthält den Satz, einander bei der Rechtschaffenheit zu helfen und nicht bei der Sünde.",
@@ -11205,7 +11205,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Gemeinsame Aufgaben ohne Eitelkeit von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Gemeinsame Aufgaben ohne Eitelkeit. Das Lernziel ist: Bei einer gemeinsamen Aufgabe sehen wir die Aufgabe, nicht nur uns selbst. Die Seite https://www.islamweb.net/ar/library/content/49/372 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 5:2. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe Stelle wie in der Stunde über das Abwenden von Schaden enthält den Satz, einander bei der Rechtschaffenheit zu helfen und nicht bei der Sünde. Alltag: Vier Kinder bauen ein Bild auf. Eines will nur den eigenen Namen darunter setzen. Die Gruppe schreibt alle Namen oder keinen. Aufgabe: Wir verteilen eine kleine Aufgabe so, dass jedes Kind einen Teil hat. taʿāwun bedeutet: gegenseitige Hilfe. riyāʾ bedeutet: das Tun, damit andere es sehen; das Wort steht in diesem Vers nicht. Was nicht behauptet wird: Dieselbe Fundstelle trägt hier das Lernziel der gemeinsamen Arbeit. Wir machen aus dem Vers keine Vereinsregel und keine Stimmenzählung. Dieselbe gelesene Fundstelle wurde schon in Slot 138 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Gemeinsame Aufgaben ohne Eitelkeit. Das Lernziel ist: Bei einer gemeinsamen Aufgabe sehen wir die Aufgabe, nicht nur uns selbst. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe Stelle wie in der Stunde über das Abwenden von Schaden enthält den Satz, einander bei der Rechtschaffenheit zu helfen und nicht bei der Sünde. Alltag: Vier Kinder bauen ein Bild auf. Eines will nur den eigenen Namen darunter setzen. Die Gruppe schreibt alle Namen oder keinen. Aufgabe: Wir verteilen eine kleine Aufgabe so, dass jedes Kind einen Teil hat. taʿāwun bedeutet: gegenseitige Hilfe. riyāʾ bedeutet: das Tun, damit andere es sehen; das Wort steht in diesem Vers nicht. Was nicht behauptet wird: Dieselbe Fundstelle trägt hier das Lernziel der gemeinsamen Arbeit. Wir machen aus dem Vers keine Vereinsregel und keine Stimmenzählung. Dieselbe gelesene Fundstelle wurde schon in Slot 138 mit einem anderen Lernziel verwendet.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 5:2.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -11227,7 +11227,7 @@ const additions=
         "situation": "Vier Kinder bauen ein Bild auf. Eines will nur den eigenen Namen darunter setzen. Die Gruppe schreibt alle Namen oder keinen.",
         "practice": "Wir verteilen eine kleine Aufgabe so, dass jedes Kind einen Teil hat.",
         "summary": "Belegt ist Qurʾān 5:2. Ungeprüft bleibt: Dieselbe Fundstelle trägt hier das Lernziel der gemeinsamen Arbeit.",
-        "audioScript": "Für die älteren Kinder. Gemeinsame Aufgaben ohne Eitelkeit. Dieselbe Stelle wie in der Stunde über das Abwenden von Schaden enthält den Satz, einander bei der Rechtschaffenheit zu helfen und nicht bei der Sünde. Nicht belegt und deshalb nicht behauptet: Dieselbe Fundstelle trägt hier das Lernziel der gemeinsamen Arbeit."
+        "audioScript": "Gemeinsame Aufgaben ohne Eitelkeit. Dieselbe Stelle wie in der Stunde über das Abwenden von Schaden enthält den Satz, einander bei der Rechtschaffenheit zu helfen und nicht bei der Sünde. Nicht belegt und deshalb nicht behauptet: Dieselbe Fundstelle trägt hier das Lernziel der gemeinsamen Arbeit."
       }
     },
     "questions": {
@@ -11363,7 +11363,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Frieden stiften heißt nicht, ein Unrecht zu verstecken. Wenn jemand weiter wehtut, holen wir eine erwachsene Person. Der Vers beschreibt keine bestimmte Strafe. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Frieden stiften heißt nicht, ein Unrecht zu verstecken. Wenn jemand weiter wehtut, holen wir eine erwachsene Person. Der Vers beschreibt keine bestimmte Strafe. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Du sagst es einer erwachsenen Person, der du vertraust.",
     "sample": "Nach einem Streit können wir wieder miteinander reden.",
@@ -11396,7 +11396,7 @@ const additions=
       },
       "6-8": {
         "goal": "Nach einem Streit können wir wieder miteinander reden.",
-        "intro": "Heute geht es um Versöhnung nach Streit. Nach einem Streit können wir wieder miteinander reden. Wir lesen Qurʾān 49:10. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass die Glaubenden Geschwister sind, und fordert auf, zwischen den beiden Geschwistern Frieden zu stiften. So kann das im Alltag aussehen: Zwei Kinder wollen dasselbe Buch. Sie hören auf zu zerren und sagen, wer es zuerst hat und wann das andere drankommt. Die Aufgabe: Wir üben: Ich möchte wieder Frieden. Bitte hör mir zu. iḫwah bedeutet: Geschwister, hier die Glaubenden. aṣliḥū bedeutet: stiftet Frieden. Die Grenze der Stunde: Frieden stiften heißt nicht, ein Unrecht zu verstecken. Wenn jemand weiter wehtut, holen wir eine erwachsene Person. Der Vers beschreibt keine bestimmte Strafe. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Versöhnung nach Streit. Nach einem Streit können wir wieder miteinander reden. Wir lesen Qurʾān 49:10. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass die Glaubenden Geschwister sind, und fordert auf, zwischen den beiden Geschwistern Frieden zu stiften. So kann das im Alltag aussehen: Zwei Kinder wollen dasselbe Buch. Sie hören auf zu zerren und sagen, wer es zuerst hat und wann das andere drankommt. Die Aufgabe: Wir üben: Ich möchte wieder Frieden. Bitte hör mir zu. iḫwah bedeutet: Geschwister, hier die Glaubenden. aṣliḥū bedeutet: stiftet Frieden. Die Grenze der Stunde: Frieden stiften heißt nicht, ein Unrecht zu verstecken. Wenn jemand weiter wehtut, holen wir eine erwachsene Person. Der Vers beschreibt keine bestimmte Strafe.",
         "lines": [
           "Qurʾān 49:10 ist die gelesene Stelle.",
           "Der Vers sagt, dass die Glaubenden Geschwister sind, und fordert auf, zwischen den beiden Geschwistern Frieden zu stiften.",
@@ -11422,7 +11422,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Versöhnung nach Streit von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Versöhnung nach Streit. Das Lernziel ist: Nach einem Streit können wir wieder miteinander reden. Die Seite https://www.islamweb.net/ar/library/content/49/1753 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 49:10. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass die Glaubenden Geschwister sind, und fordert auf, zwischen den beiden Geschwistern Frieden zu stiften. Alltag: Zwei Kinder wollen dasselbe Buch. Sie hören auf zu zerren und sagen, wer es zuerst hat und wann das andere drankommt. Aufgabe: Wir üben: Ich möchte wieder Frieden. Bitte hör mir zu. iḫwah bedeutet: Geschwister, hier die Glaubenden. aṣliḥū bedeutet: stiftet Frieden. Was nicht behauptet wird: Frieden stiften heißt nicht, ein Unrecht zu verstecken. Wenn jemand weiter wehtut, holen wir eine erwachsene Person. Der Vers beschreibt keine bestimmte Strafe. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Versöhnung nach Streit. Das Lernziel ist: Nach einem Streit können wir wieder miteinander reden. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass die Glaubenden Geschwister sind, und fordert auf, zwischen den beiden Geschwistern Frieden zu stiften. Alltag: Zwei Kinder wollen dasselbe Buch. Sie hören auf zu zerren und sagen, wer es zuerst hat und wann das andere drankommt. Aufgabe: Wir üben: Ich möchte wieder Frieden. Bitte hör mir zu. iḫwah bedeutet: Geschwister, hier die Glaubenden. aṣliḥū bedeutet: stiftet Frieden. Was nicht behauptet wird: Frieden stiften heißt nicht, ein Unrecht zu verstecken. Wenn jemand weiter wehtut, holen wir eine erwachsene Person. Der Vers beschreibt keine bestimmte Strafe.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 49:10.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -11444,7 +11444,7 @@ const additions=
         "situation": "Zwei Kinder wollen dasselbe Buch. Sie hören auf zu zerren und sagen, wer es zuerst hat und wann das andere drankommt.",
         "practice": "Wir üben: Ich möchte wieder Frieden. Bitte hör mir zu.",
         "summary": "Belegt ist Qurʾān 49:10. Ungeprüft bleibt: Frieden stiften heißt nicht, ein Unrecht zu verstecken.",
-        "audioScript": "Für die älteren Kinder. Versöhnung nach Streit. Der Vers sagt, dass die Glaubenden Geschwister sind, und fordert auf, zwischen den beiden Geschwistern Frieden zu stiften. Nicht belegt und deshalb nicht behauptet: Frieden stiften heißt nicht, ein Unrecht zu verstecken."
+        "audioScript": "Versöhnung nach Streit. Der Vers sagt, dass die Glaubenden Geschwister sind, und fordert auf, zwischen den beiden Geschwistern Frieden zu stiften. Nicht belegt und deshalb nicht behauptet: Frieden stiften heißt nicht, ein Unrecht zu verstecken."
       }
     },
     "questions": {
@@ -11580,7 +11580,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers legt keinen Speiseplan fest und nennt keine Zahl von Bissen. Die Zakāh-Erwähnung im weiteren Vers, falls sie im Ausdruck steht, wird nicht als berechnete Abgabe der Kinderstunde gelehrt. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Vers legt keinen Speiseplan fest und nennt keine Zahl von Bissen. Die Zakāh-Erwähnung im weiteren Vers, falls sie im Ausdruck steht, wird nicht als berechnete Abgabe der Kinderstunde gelehrt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Wir nehmen so viel Essen, wie wir essen können.",
@@ -11613,7 +11613,7 @@ const additions=
       },
       "6-8": {
         "goal": "Wir nehmen so viel Essen, wie wir essen können.",
-        "intro": "Heute geht es um Weniger verschwenden beim Essen. Wir nehmen so viel Essen, wie wir essen können. Wir lesen Qurʾān 6:141. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers nennt Gärten, Palmen und Früchte und sagt: Esst von ihrer Frucht, wenn sie Frucht trägt, und seid nicht maßlos. Er liebt die Maßlosen nicht. So kann das im Alltag aussehen: Auf dem Teller liegt mehr, als das Kind essen mag. Es lässt den Rest liegen, statt damit zu spielen, und sagt Bescheid. Die Aufgabe: Wir üben, einmal nachzunehmen statt den Teller zu häufen. lā tusrifū bedeutet: seid nicht maßlos. israf bedeutet: Maßlosigkeit. Die Grenze der Stunde: Der Vers legt keinen Speiseplan fest und nennt keine Zahl von Bissen. Die Zakāh-Erwähnung im weiteren Vers, falls sie im Ausdruck steht, wird nicht als berechnete Abgabe der Kinderstunde gelehrt. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Weniger verschwenden beim Essen. Wir nehmen so viel Essen, wie wir essen können. Wir lesen Qurʾān 6:141. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers nennt Gärten, Palmen und Früchte und sagt: Esst von ihrer Frucht, wenn sie Frucht trägt, und seid nicht maßlos. Er liebt die Maßlosen nicht. So kann das im Alltag aussehen: Auf dem Teller liegt mehr, als das Kind essen mag. Es lässt den Rest liegen, statt damit zu spielen, und sagt Bescheid. Die Aufgabe: Wir üben, einmal nachzunehmen statt den Teller zu häufen. lā tusrifū bedeutet: seid nicht maßlos. israf bedeutet: Maßlosigkeit. Die Grenze der Stunde: Der Vers legt keinen Speiseplan fest und nennt keine Zahl von Bissen. Die Zakāh-Erwähnung im weiteren Vers, falls sie im Ausdruck steht, wird nicht als berechnete Abgabe der Kinderstunde gelehrt.",
         "lines": [
           "Qurʾān 6:141 ist die gelesene Stelle.",
           "Der Vers nennt Gärten, Palmen und Früchte und sagt: Esst von ihrer Frucht, wenn sie Frucht trägt, und seid nicht maßlos.",
@@ -11639,7 +11639,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Weniger verschwenden beim Essen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Weniger verschwenden beim Essen. Das Lernziel ist: Wir nehmen so viel Essen, wie wir essen können. Die Seite https://www.islamweb.net/ar/library/content/49/472 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 6:141. Sinngemäß, keine beglaubigte Übersetzung: Der Vers nennt Gärten, Palmen und Früchte und sagt: Esst von ihrer Frucht, wenn sie Frucht trägt, und seid nicht maßlos. Er liebt die Maßlosen nicht. Alltag: Auf dem Teller liegt mehr, als das Kind essen mag. Es lässt den Rest liegen, statt damit zu spielen, und sagt Bescheid. Aufgabe: Wir üben, einmal nachzunehmen statt den Teller zu häufen. lā tusrifū bedeutet: seid nicht maßlos. israf bedeutet: Maßlosigkeit. Was nicht behauptet wird: Der Vers legt keinen Speiseplan fest und nennt keine Zahl von Bissen. Die Zakāh-Erwähnung im weiteren Vers, falls sie im Ausdruck steht, wird nicht als berechnete Abgabe der Kinderstunde gelehrt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Weniger verschwenden beim Essen. Das Lernziel ist: Wir nehmen so viel Essen, wie wir essen können. Sinngemäß, keine beglaubigte Übersetzung: Der Vers nennt Gärten, Palmen und Früchte und sagt: Esst von ihrer Frucht, wenn sie Frucht trägt, und seid nicht maßlos. Er liebt die Maßlosen nicht. Alltag: Auf dem Teller liegt mehr, als das Kind essen mag. Es lässt den Rest liegen, statt damit zu spielen, und sagt Bescheid. Aufgabe: Wir üben, einmal nachzunehmen statt den Teller zu häufen. lā tusrifū bedeutet: seid nicht maßlos. israf bedeutet: Maßlosigkeit. Was nicht behauptet wird: Der Vers legt keinen Speiseplan fest und nennt keine Zahl von Bissen. Die Zakāh-Erwähnung im weiteren Vers, falls sie im Ausdruck steht, wird nicht als berechnete Abgabe der Kinderstunde gelehrt.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 6:141.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -11661,7 +11661,7 @@ const additions=
         "situation": "Auf dem Teller liegt mehr, als das Kind essen mag. Es lässt den Rest liegen, statt damit zu spielen, und sagt Bescheid.",
         "practice": "Wir üben, einmal nachzunehmen statt den Teller zu häufen.",
         "summary": "Belegt ist Qurʾān 6:141. Ungeprüft bleibt: Der Vers legt keinen Speiseplan fest und nennt keine Zahl von Bissen.",
-        "audioScript": "Für die älteren Kinder. Weniger verschwenden beim Essen. Der Vers nennt Gärten, Palmen und Früchte und sagt: Esst von ihrer Frucht, wenn sie Frucht trägt, und seid nicht maßlos. Nicht belegt und deshalb nicht behauptet: Der Vers legt keinen Speiseplan fest und nennt keine Zahl von Bissen."
+        "audioScript": "Weniger verschwenden beim Essen. Der Vers nennt Gärten, Palmen und Früchte und sagt: Esst von ihrer Frucht, wenn sie Frucht trägt, und seid nicht maßlos. Nicht belegt und deshalb nicht behauptet: Der Vers legt keinen Speiseplan fest und nennt keine Zahl von Bissen."
       }
     },
     "questions": {
@@ -11797,7 +11797,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers steht in einer Sūrah, deren andere Bilder wir hier nicht ausmalen. Wir benutzen keinen Vers über das Feuer als Motiv für Verantwortung. Die konkrete Aufgabe ist ein Familienbeispiel. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Vers steht in einer Sūrah, deren andere Bilder wir hier nicht ausmalen. Wir benutzen keinen Vers über das Feuer als Motiv für Verantwortung. Die konkrete Aufgabe ist ein Familienbeispiel. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Wir erzählen keine Gruselgeschichte.",
     "sample": "Wir übernehmen eine kleine Aufgabe für jemand anderen und führen sie zu Ende.",
@@ -11830,7 +11830,7 @@ const additions=
       },
       "6-8": {
         "goal": "Wir übernehmen eine kleine Aufgabe für jemand anderen und führen sie zu Ende.",
-        "intro": "Heute geht es um Für andere Verantwortung übernehmen. Wir übernehmen eine kleine Aufgabe für jemand anderen und führen sie zu Ende. Wir lesen Qurʾān 90:17. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt: Dann gehört er zu denen, die glauben, einander zur Geduld raten und einander zur Barmherzigkeit raten. So kann das im Alltag aussehen: Ein Kind hat versprochen, die Trinkbecher auf den Tisch zu stellen, und tut es wirklich. Die Aufgabe: Wir wählen eine kleine Aufgabe, sagen sie laut und haken sie ab, wenn sie fertig ist. tawāṣaw bedeutet: sie raten einander. marḥamah bedeutet: Barmherzigkeit. Die Grenze der Stunde: Der Vers steht in einer Sūrah, deren andere Bilder wir hier nicht ausmalen. Wir benutzen keinen Vers über das Feuer als Motiv für Verantwortung. Die konkrete Aufgabe ist ein Familienbeispiel. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Für andere Verantwortung übernehmen. Wir übernehmen eine kleine Aufgabe für jemand anderen und führen sie zu Ende. Wir lesen Qurʾān 90:17. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt: Dann gehört er zu denen, die glauben, einander zur Geduld raten und einander zur Barmherzigkeit raten. So kann das im Alltag aussehen: Ein Kind hat versprochen, die Trinkbecher auf den Tisch zu stellen, und tut es wirklich. Die Aufgabe: Wir wählen eine kleine Aufgabe, sagen sie laut und haken sie ab, wenn sie fertig ist. tawāṣaw bedeutet: sie raten einander. marḥamah bedeutet: Barmherzigkeit. Die Grenze der Stunde: Der Vers steht in einer Sūrah, deren andere Bilder wir hier nicht ausmalen. Wir benutzen keinen Vers über das Feuer als Motiv für Verantwortung. Die konkrete Aufgabe ist ein Familienbeispiel.",
         "lines": [
           "Qurʾān 90:17 ist die gelesene Stelle.",
           "Der Vers sagt: Dann gehört er zu denen, die glauben, einander zur Geduld raten und einander zur Barmherzigkeit raten.",
@@ -11856,7 +11856,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Für andere Verantwortung übernehmen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Für andere Verantwortung übernehmen. Das Lernziel ist: Wir übernehmen eine kleine Aufgabe für jemand anderen und führen sie zu Ende. Die Seite https://www.islamweb.net/ar/library/content/49/1957 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 90:17. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt: Dann gehört er zu denen, die glauben, einander zur Geduld raten und einander zur Barmherzigkeit raten. Alltag: Ein Kind hat versprochen, die Trinkbecher auf den Tisch zu stellen, und tut es wirklich. Aufgabe: Wir wählen eine kleine Aufgabe, sagen sie laut und haken sie ab, wenn sie fertig ist. tawāṣaw bedeutet: sie raten einander. marḥamah bedeutet: Barmherzigkeit. Was nicht behauptet wird: Der Vers steht in einer Sūrah, deren andere Bilder wir hier nicht ausmalen. Wir benutzen keinen Vers über das Feuer als Motiv für Verantwortung. Die konkrete Aufgabe ist ein Familienbeispiel. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Für andere Verantwortung übernehmen. Das Lernziel ist: Wir übernehmen eine kleine Aufgabe für jemand anderen und führen sie zu Ende. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt: Dann gehört er zu denen, die glauben, einander zur Geduld raten und einander zur Barmherzigkeit raten. Alltag: Ein Kind hat versprochen, die Trinkbecher auf den Tisch zu stellen, und tut es wirklich. Aufgabe: Wir wählen eine kleine Aufgabe, sagen sie laut und haken sie ab, wenn sie fertig ist. tawāṣaw bedeutet: sie raten einander. marḥamah bedeutet: Barmherzigkeit. Was nicht behauptet wird: Der Vers steht in einer Sūrah, deren andere Bilder wir hier nicht ausmalen. Wir benutzen keinen Vers über das Feuer als Motiv für Verantwortung. Die konkrete Aufgabe ist ein Familienbeispiel.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 90:17.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -11878,7 +11878,7 @@ const additions=
         "situation": "Ein Kind hat versprochen, die Trinkbecher auf den Tisch zu stellen, und tut es wirklich.",
         "practice": "Wir wählen eine kleine Aufgabe, sagen sie laut und haken sie ab, wenn sie fertig ist.",
         "summary": "Belegt ist Qurʾān 90:17. Ungeprüft bleibt: Der Vers steht in einer Sūrah, deren andere Bilder wir hier nicht ausmalen.",
-        "audioScript": "Für die älteren Kinder. Für andere Verantwortung übernehmen. Der Vers sagt: Dann gehört er zu denen, die glauben, einander zur Geduld raten und einander zur Barmherzigkeit raten. Nicht belegt und deshalb nicht behauptet: Der Vers steht in einer Sūrah, deren andere Bilder wir hier nicht ausmalen."
+        "audioScript": "Für andere Verantwortung übernehmen. Der Vers sagt: Dann gehört er zu denen, die glauben, einander zur Geduld raten und einander zur Barmherzigkeit raten. Nicht belegt und deshalb nicht behauptet: Der Vers steht in einer Sūrah, deren andere Bilder wir hier nicht ausmalen."
       }
     },
     "questions": {
@@ -12014,7 +12014,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Das Bild im Vers, das die üble Nachrede mit dem Essen vom Fleisch des Bruders vergleicht, wird nicht nachgespielt. Für die Jüngsten sagen wir nur: Wir reden nicht schlecht über jemanden, der nicht dabei ist. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Das Bild im Vers, das die üble Nachrede mit dem Essen vom Fleisch des Bruders vergleicht, wird nicht nachgespielt. Für die Jüngsten sagen wir nur: Wir reden nicht schlecht über jemanden, der nicht dabei ist. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Bevor wir etwas Schlechtes über jemand sagen, prüfen wir, ob wir es wissen.",
@@ -12047,7 +12047,7 @@ const additions=
       },
       "6-8": {
         "goal": "Bevor wir etwas Schlechtes über jemand sagen, prüfen wir, ob wir es wissen.",
-        "intro": "Heute geht es um Eigene Gedanken prüfen. Bevor wir etwas Schlechtes über jemand sagen, prüfen wir, ob wir es wissen. Wir lesen Qurʾān 49:12. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers fordert auf, viel Verdacht zu meiden, weil mancher Verdacht Sünde ist, nicht auszuspähen und nicht übereinander herzuziehen. So kann das im Alltag aussehen: Ein Kind denkt, ein anderes habe seinen Stift weggenommen. Es fragt, statt es laut zu behaupten. Die Aufgabe: Wir üben den Satz: Ich weiß es noch nicht. Ich frage. ẓann bedeutet: Verdacht, Mutmaßung. ġībah bedeutet: über einen Abwesenden schlecht reden; das Wort erklärt der Vers mit dem Bild, ohne dass wir es ausagieren. Die Grenze der Stunde: Das Bild im Vers, das die üble Nachrede mit dem Essen vom Fleisch des Bruders vergleicht, wird nicht nachgespielt. Für die Jüngsten sagen wir nur: Wir reden nicht schlecht über jemanden, der nicht dabei ist. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Eigene Gedanken prüfen. Bevor wir etwas Schlechtes über jemand sagen, prüfen wir, ob wir es wissen. Wir lesen Qurʾān 49:12. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers fordert auf, viel Verdacht zu meiden, weil mancher Verdacht Sünde ist, nicht auszuspähen und nicht übereinander herzuziehen. So kann das im Alltag aussehen: Ein Kind denkt, ein anderes habe seinen Stift weggenommen. Es fragt, statt es laut zu behaupten. Die Aufgabe: Wir üben den Satz: Ich weiß es noch nicht. Ich frage. ẓann bedeutet: Verdacht, Mutmaßung. ġībah bedeutet: über einen Abwesenden schlecht reden; das Wort erklärt der Vers mit dem Bild, ohne dass wir es ausagieren. Die Grenze der Stunde: Das Bild im Vers, das die üble Nachrede mit dem Essen vom Fleisch des Bruders vergleicht, wird nicht nachgespielt. Für die Jüngsten sagen wir nur: Wir reden nicht schlecht über jemanden, der nicht dabei ist.",
         "lines": [
           "Qurʾān 49:12 ist die gelesene Stelle.",
           "Der Vers fordert auf, viel Verdacht zu meiden, weil mancher Verdacht Sünde ist, nicht auszuspähen und nicht übereinander herzuziehen.",
@@ -12073,7 +12073,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Eigene Gedanken prüfen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Eigene Gedanken prüfen. Das Lernziel ist: Bevor wir etwas Schlechtes über jemand sagen, prüfen wir, ob wir es wissen. Die Seite https://www.islamweb.net/ar/library/content/49/1755 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 49:12. Sinngemäß, keine beglaubigte Übersetzung: Der Vers fordert auf, viel Verdacht zu meiden, weil mancher Verdacht Sünde ist, nicht auszuspähen und nicht übereinander herzuziehen. Alltag: Ein Kind denkt, ein anderes habe seinen Stift weggenommen. Es fragt, statt es laut zu behaupten. Aufgabe: Wir üben den Satz: Ich weiß es noch nicht. Ich frage. ẓann bedeutet: Verdacht, Mutmaßung. ġībah bedeutet: über einen Abwesenden schlecht reden; das Wort erklärt der Vers mit dem Bild, ohne dass wir es ausagieren. Was nicht behauptet wird: Das Bild im Vers, das die üble Nachrede mit dem Essen vom Fleisch des Bruders vergleicht, wird nicht nachgespielt. Für die Jüngsten sagen wir nur: Wir reden nicht schlecht über jemanden, der nicht dabei ist. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Eigene Gedanken prüfen. Das Lernziel ist: Bevor wir etwas Schlechtes über jemand sagen, prüfen wir, ob wir es wissen. Sinngemäß, keine beglaubigte Übersetzung: Der Vers fordert auf, viel Verdacht zu meiden, weil mancher Verdacht Sünde ist, nicht auszuspähen und nicht übereinander herzuziehen. Alltag: Ein Kind denkt, ein anderes habe seinen Stift weggenommen. Es fragt, statt es laut zu behaupten. Aufgabe: Wir üben den Satz: Ich weiß es noch nicht. Ich frage. ẓann bedeutet: Verdacht, Mutmaßung. ġībah bedeutet: über einen Abwesenden schlecht reden; das Wort erklärt der Vers mit dem Bild, ohne dass wir es ausagieren. Was nicht behauptet wird: Das Bild im Vers, das die üble Nachrede mit dem Essen vom Fleisch des Bruders vergleicht, wird nicht nachgespielt. Für die Jüngsten sagen wir nur: Wir reden nicht schlecht über jemanden, der nicht dabei ist.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 49:12.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -12095,7 +12095,7 @@ const additions=
         "situation": "Ein Kind denkt, ein anderes habe seinen Stift weggenommen. Es fragt, statt es laut zu behaupten.",
         "practice": "Wir üben den Satz: Ich weiß es noch nicht. Ich frage.",
         "summary": "Belegt ist Qurʾān 49:12. Ungeprüft bleibt: Das Bild im Vers, das die üble Nachrede mit dem Essen vom Fleisch des Bruders vergleicht, wird nicht nachgespielt.",
-        "audioScript": "Für die älteren Kinder. Eigene Gedanken prüfen. Der Vers fordert auf, viel Verdacht zu meiden, weil mancher Verdacht Sünde ist, nicht auszuspähen und nicht übereinander herzuziehen. Nicht belegt und deshalb nicht behauptet: Das Bild im Vers, das die üble Nachrede mit dem Essen vom Fleisch des Bruders vergleicht, wird nicht nachgespielt."
+        "audioScript": "Eigene Gedanken prüfen. Der Vers fordert auf, viel Verdacht zu meiden, weil mancher Verdacht Sünde ist, nicht auszuspähen und nicht übereinander herzuziehen. Nicht belegt und deshalb nicht behauptet: Das Bild im Vers, das die üble Nachrede mit dem Essen vom Fleisch des Bruders vergleicht, wird nicht nachgespielt."
       }
     },
     "questions": {
@@ -12231,7 +12231,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Der Hadith über die Absicht mit der Buḫārī-Nummer aus der Quellenbank wurde nicht erneut gelesen und wird nicht zitiert. Der Vers sagt, wem das Gebet gehört. Er druckt nicht die fünf Namen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Hadith über die Absicht mit der Buḫārī-Nummer aus der Quellenbank wurde nicht erneut gelesen und wird nicht zitiert. Der Vers sagt, wem das Gebet gehört. Er druckt nicht die fünf Namen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
     "sample": "Bevor wir ein Gebet üben, wissen wir, welches Gebet es sein soll.",
@@ -12264,7 +12264,7 @@ const additions=
       },
       "6-8": {
         "goal": "Bevor wir ein Gebet üben, wissen wir, welches Gebet es sein soll.",
-        "intro": "Heute geht es um Die Absicht zum Gebet. Bevor wir ein Gebet üben, wissen wir, welches Gebet es sein soll. Wir lesen Qurʾān 6:162. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt: Mein Gebet, mein Opferritus, mein Leben und mein Sterben gehören Allah, dem Herrn der Welten. Er hat keinen Teilhaber. So kann das im Alltag aussehen: Die Lehrperson fragt: Welches Gebet üben wir jetzt? Die Kinder nennen den Namen, den der Plan der App schon verwendet. Die Aufgabe: Wir sagen den Namen laut und beginnen nicht, während wir noch woanders hinschauen. niyyah bedeutet: Absicht; das Wort steht nicht in diesem Vers, die Stunde benutzt es als Unterrichtswort. ṣalāh bedeutet: Gebet. Die Grenze der Stunde: Der Hadith über die Absicht mit der Buḫārī-Nummer aus der Quellenbank wurde nicht erneut gelesen und wird nicht zitiert. Der Vers sagt, wem das Gebet gehört. Er druckt nicht die fünf Namen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Die Absicht zum Gebet. Bevor wir ein Gebet üben, wissen wir, welches Gebet es sein soll. Wir lesen Qurʾān 6:162. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt: Mein Gebet, mein Opferritus, mein Leben und mein Sterben gehören Allah, dem Herrn der Welten. Er hat keinen Teilhaber. So kann das im Alltag aussehen: Die Lehrperson fragt: Welches Gebet üben wir jetzt? Die Kinder nennen den Namen, den der Plan der App schon verwendet. Die Aufgabe: Wir sagen den Namen laut und beginnen nicht, während wir noch woanders hinschauen. niyyah bedeutet: Absicht; das Wort steht nicht in diesem Vers, die Stunde benutzt es als Unterrichtswort. ṣalāh bedeutet: Gebet. Die Grenze der Stunde: Der Hadith über die Absicht mit der Buḫārī-Nummer aus der Quellenbank wurde nicht erneut gelesen und wird nicht zitiert. Der Vers sagt, wem das Gebet gehört. Er druckt nicht die fünf Namen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
         "lines": [
           "Qurʾān 6:162 ist die gelesene Stelle.",
           "Der Vers sagt: Mein Gebet, mein Opferritus, mein Leben und mein Sterben gehören Allah, dem Herrn der Welten.",
@@ -12290,7 +12290,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Die Absicht zum Gebet von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Die Absicht zum Gebet. Das Lernziel ist: Bevor wir ein Gebet üben, wissen wir, welches Gebet es sein soll. Die Seite https://www.islamweb.net/ar/library/content/49/486 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 6:162. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt: Mein Gebet, mein Opferritus, mein Leben und mein Sterben gehören Allah, dem Herrn der Welten. Er hat keinen Teilhaber. Alltag: Die Lehrperson fragt: Welches Gebet üben wir jetzt? Die Kinder nennen den Namen, den der Plan der App schon verwendet. Aufgabe: Wir sagen den Namen laut und beginnen nicht, während wir noch woanders hinschauen. niyyah bedeutet: Absicht; das Wort steht nicht in diesem Vers, die Stunde benutzt es als Unterrichtswort. ṣalāh bedeutet: Gebet. Was nicht behauptet wird: Der Hadith über die Absicht mit der Buḫārī-Nummer aus der Quellenbank wurde nicht erneut gelesen und wird nicht zitiert. Der Vers sagt, wem das Gebet gehört. Er druckt nicht die fünf Namen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Die Absicht zum Gebet. Das Lernziel ist: Bevor wir ein Gebet üben, wissen wir, welches Gebet es sein soll. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt: Mein Gebet, mein Opferritus, mein Leben und mein Sterben gehören Allah, dem Herrn der Welten. Er hat keinen Teilhaber. Alltag: Die Lehrperson fragt: Welches Gebet üben wir jetzt? Die Kinder nennen den Namen, den der Plan der App schon verwendet. Aufgabe: Wir sagen den Namen laut und beginnen nicht, während wir noch woanders hinschauen. niyyah bedeutet: Absicht; das Wort steht nicht in diesem Vers, die Stunde benutzt es als Unterrichtswort. ṣalāh bedeutet: Gebet. Was nicht behauptet wird: Der Hadith über die Absicht mit der Buḫārī-Nummer aus der Quellenbank wurde nicht erneut gelesen und wird nicht zitiert. Der Vers sagt, wem das Gebet gehört. Er druckt nicht die fünf Namen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 6:162.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -12312,7 +12312,7 @@ const additions=
         "situation": "Die Lehrperson fragt: Welches Gebet üben wir jetzt? Die Kinder nennen den Namen, den der Plan der App schon verwendet.",
         "practice": "Wir sagen den Namen laut und beginnen nicht, während wir noch woanders hinschauen.",
         "summary": "Belegt ist Qurʾān 6:162. Ungeprüft bleibt: Der Hadith über die Absicht mit der Buḫārī-Nummer aus der Quellenbank wurde nicht erneut gelesen und wird nicht zitiert.",
-        "audioScript": "Für die älteren Kinder. Die Absicht zum Gebet. Der Vers sagt: Mein Gebet, mein Opferritus, mein Leben und mein Sterben gehören Allah, dem Herrn der Welten. Nicht belegt und deshalb nicht behauptet: Der Hadith über die Absicht mit der Buḫārī-Nummer aus der Quellenbank wurde nicht erneut gelesen und wird nicht zitiert."
+        "audioScript": "Die Absicht zum Gebet. Der Vers sagt: Mein Gebet, mein Opferritus, mein Leben und mein Sterben gehören Allah, dem Herrn der Welten. Nicht belegt und deshalb nicht behauptet: Der Hadith über die Absicht mit der Buḫārī-Nummer aus der Quellenbank wurde nicht erneut gelesen und wird nicht zitiert."
       }
     },
     "questions": {
@@ -12448,7 +12448,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Diese beiden Sätze beweisen nicht, dass jedes später gedruckte Buch automatisch richtig ist. Sie beschreiben die Rede des Propheten, nicht die Entstehungsgeschichte der Hadithbücher. Eine Buchnummer wird nicht vergeben. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Diese beiden Sätze beweisen nicht, dass jedes später gedruckte Buch automatisch richtig ist. Sie beschreiben die Rede des Propheten, nicht die Entstehungsgeschichte der Hadithbücher. Eine Buchnummer wird nicht vergeben. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Ein Qurʾān-Vers und ein Hadith sind zwei verschiedene Dinge.",
@@ -12481,7 +12481,7 @@ const additions=
       },
       "6-8": {
         "goal": "Ein Qurʾān-Vers und ein Hadith sind zwei verschiedene Dinge.",
-        "intro": "Heute geht es um Woher stammt ein Ḥadīṯ?. Ein Qurʾān-Vers und ein Hadith sind zwei verschiedene Dinge. Wir lesen Qurʾān 53:3–4. Sinngemäß, ohne beglaubigte Übersetzung: Die beiden gespeicherten Sätze lauten: Er spricht nicht aus Neigung. Es ist nichts als eine Offenbarung, die eingegeben wird. Das sagt die Stelle über die Rede des Propheten, Friede sei mit ihm. So kann das im Alltag aussehen: Wir legen ein Kärtchen Qurʾān und ein Kärtchen Hadith nebeneinander und sagen: Das zweite ist eine überlieferte Nachricht, kein Vers. Die Aufgabe: Wir erklären, dass ein Hadith einen Überliefererweg braucht und dass wir keine Nummer ergänzen, die wir nicht gelesen haben. waḥy bedeutet: Offenbarung. ḥadīṯ bedeutet: überlieferte Nachricht vom Propheten; das Wort steht in diesen beiden Versen nicht. Die Grenze der Stunde: Diese beiden Sätze beweisen nicht, dass jedes später gedruckte Buch automatisch richtig ist. Sie beschreiben die Rede des Propheten, nicht die Entstehungsgeschichte der Hadithbücher. Eine Buchnummer wird nicht vergeben. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Woher stammt ein Ḥadīṯ?. Ein Qurʾān-Vers und ein Hadith sind zwei verschiedene Dinge. Wir lesen Qurʾān 53:3–4. Sinngemäß, ohne beglaubigte Übersetzung: Die beiden gespeicherten Sätze lauten: Er spricht nicht aus Neigung. Es ist nichts als eine Offenbarung, die eingegeben wird. Das sagt die Stelle über die Rede des Propheten, Friede sei mit ihm. So kann das im Alltag aussehen: Wir legen ein Kärtchen Qurʾān und ein Kärtchen Hadith nebeneinander und sagen: Das zweite ist eine überlieferte Nachricht, kein Vers. Die Aufgabe: Wir erklären, dass ein Hadith einen Überliefererweg braucht und dass wir keine Nummer ergänzen, die wir nicht gelesen haben. waḥy bedeutet: Offenbarung. ḥadīṯ bedeutet: überlieferte Nachricht vom Propheten; das Wort steht in diesen beiden Versen nicht. Die Grenze der Stunde: Diese beiden Sätze beweisen nicht, dass jedes später gedruckte Buch automatisch richtig ist. Sie beschreiben die Rede des Propheten, nicht die Entstehungsgeschichte der Hadithbücher. Eine Buchnummer wird nicht vergeben.",
         "lines": [
           "Qurʾān 53:3–4 ist die gelesene Stelle.",
           "Es ist nichts als eine Offenbarung, die eingegeben wird.",
@@ -12507,7 +12507,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Woher stammt ein Ḥadīṯ? von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Woher stammt ein Ḥadīṯ?. Das Lernziel ist: Ein Qurʾān-Vers und ein Hadith sind zwei verschiedene Dinge. Die Seite https://www.islamweb.net/ar/library/content/49/1779 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 53:3–4. Sinngemäß, keine beglaubigte Übersetzung: Die beiden gespeicherten Sätze lauten: Er spricht nicht aus Neigung. Es ist nichts als eine Offenbarung, die eingegeben wird. Das sagt die Stelle über die Rede des Propheten, Friede sei mit ihm. Alltag: Wir legen ein Kärtchen Qurʾān und ein Kärtchen Hadith nebeneinander und sagen: Das zweite ist eine überlieferte Nachricht, kein Vers. Aufgabe: Wir erklären, dass ein Hadith einen Überliefererweg braucht und dass wir keine Nummer ergänzen, die wir nicht gelesen haben. waḥy bedeutet: Offenbarung. ḥadīṯ bedeutet: überlieferte Nachricht vom Propheten; das Wort steht in diesen beiden Versen nicht. Was nicht behauptet wird: Diese beiden Sätze beweisen nicht, dass jedes später gedruckte Buch automatisch richtig ist. Sie beschreiben die Rede des Propheten, nicht die Entstehungsgeschichte der Hadithbücher. Eine Buchnummer wird nicht vergeben. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Woher stammt ein Ḥadīṯ?. Das Lernziel ist: Ein Qurʾān-Vers und ein Hadith sind zwei verschiedene Dinge. Die Seite https://www.islamweb.net/ar/library/content/49/1779 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 53:3–4. Sinngemäß, keine beglaubigte Übersetzung: Die beiden gespeicherten Sätze lauten: Er spricht nicht aus Neigung. Es ist nichts als eine Offenbarung, die eingegeben wird. Das sagt die Stelle über die Rede des Propheten, Friede sei mit ihm. Alltag: Wir legen ein Kärtchen Qurʾān und ein Kärtchen Hadith nebeneinander und sagen: Das zweite ist eine überlieferte Nachricht, kein Vers. Aufgabe: Wir erklären, dass ein Hadith einen Überliefererweg braucht und dass wir keine Nummer ergänzen, die wir nicht gelesen haben. waḥy bedeutet: Offenbarung. ḥadīṯ bedeutet: überlieferte Nachricht vom Propheten; das Wort steht in diesen beiden Versen nicht. Was nicht behauptet wird: Diese beiden Sätze beweisen nicht, dass jedes später gedruckte Buch automatisch richtig ist. Sie beschreiben die Rede des Propheten, nicht die Entstehungsgeschichte der Hadithbücher. Eine Buchnummer wird nicht vergeben.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 53:3–4.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -12529,7 +12529,7 @@ const additions=
         "situation": "Wir legen ein Kärtchen Qurʾān und ein Kärtchen Hadith nebeneinander und sagen: Das zweite ist eine überlieferte Nachricht, kein Vers.",
         "practice": "Wir erklären, dass ein Hadith einen Überliefererweg braucht und dass wir keine Nummer ergänzen, die wir nicht gelesen haben.",
         "summary": "Belegt ist Qurʾān 53:3–4. Ungeprüft bleibt: Diese beiden Sätze beweisen nicht, dass jedes später gedruckte Buch automatisch richtig ist.",
-        "audioScript": "Für die älteren Kinder. Woher stammt ein Ḥadīṯ?. Es ist nichts als eine Offenbarung, die eingegeben wird. Nicht belegt und deshalb nicht behauptet: Diese beiden Sätze beweisen nicht, dass jedes später gedruckte Buch automatisch richtig ist."
+        "audioScript": "Woher stammt ein Ḥadīṯ?. Es ist nichts als eine Offenbarung, die eingegeben wird. Nicht belegt und deshalb nicht behauptet: Diese beiden Sätze beweisen nicht, dass jedes später gedruckte Buch automatisch richtig ist."
       }
     },
     "questions": {
@@ -12665,7 +12665,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Eine einzelne Anekdote, ein Name außer den Gruppen und eine Jahreszahl stehen nicht als Kindererzählung auf der verwendeten Stelle. Wir erfinden sie nicht. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Eine einzelne Anekdote, ein Name außer den Gruppen und eine Jahreszahl stehen nicht als Kindererzählung auf der verwendeten Stelle. Wir erfinden sie nicht. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Die ersten Gefährten, die ausgezogen sind und die geholfen haben, haben ein gutes Vorbild.",
@@ -12698,7 +12698,7 @@ const additions=
       },
       "6-8": {
         "goal": "Die ersten Gefährten, die ausgezogen sind und die geholfen haben, haben ein gutes Vorbild.",
-        "intro": "Heute geht es um Ṣaḥābah und gutes Vorbild. Die ersten Gefährten, die ausgezogen sind und die geholfen haben, haben ein gutes Vorbild. Wir lesen Qurʾān 9:100. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers nennt die ersten Vorangehenden aus den Auswanderern und den Helfern und die, die ihnen auf gute Weise gefolgt sind, und sagt, dass Allah mit ihnen zufrieden ist und sie mit Ihm. So kann das im Alltag aussehen: Ein Kind sagt: Sie haben dem Propheten, Friede sei mit ihm, geholfen. Ein bestimmtes Abenteuer nennen wir nicht. Die Aufgabe: Wir wiederholen die zwei Gruppennamen aus dem Vers: die Ausgewanderten und die Helfer. muhāǧirūn bedeutet: die Ausgewanderten. anṣār bedeutet: die Helfer in Madīnah. Die Grenze der Stunde: Eine einzelne Anekdote, ein Name außer den Gruppen und eine Jahreszahl stehen nicht als Kindererzählung auf der verwendeten Stelle. Wir erfinden sie nicht. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Ṣaḥābah und gutes Vorbild. Die ersten Gefährten, die ausgezogen sind und die geholfen haben, haben ein gutes Vorbild. Wir lesen Qurʾān 9:100. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers nennt die ersten Vorangehenden aus den Auswanderern und den Helfern und die, die ihnen auf gute Weise gefolgt sind, und sagt, dass Allah mit ihnen zufrieden ist und sie mit Ihm. So kann das im Alltag aussehen: Ein Kind sagt: Sie haben dem Propheten, Friede sei mit ihm, geholfen. Ein bestimmtes Abenteuer nennen wir nicht. Die Aufgabe: Wir wiederholen die zwei Gruppennamen aus dem Vers: die Ausgewanderten und die Helfer. muhāǧirūn bedeutet: die Ausgewanderten. anṣār bedeutet: die Helfer in Madīnah. Die Grenze der Stunde: Eine einzelne Anekdote, ein Name außer den Gruppen und eine Jahreszahl stehen nicht als Kindererzählung auf der verwendeten Stelle. Wir erfinden sie nicht.",
         "lines": [
           "Qurʾān 9:100 ist die gelesene Stelle.",
           "Der Vers nennt die ersten Vorangehenden aus den Auswanderern und den Helfern und die, die ihnen auf gute Weise gefolgt sind, und sagt, dass Allah mit ihnen zufrieden ist und sie.",
@@ -12724,7 +12724,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Ṣaḥābah und gutes Vorbild von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Ṣaḥābah und gutes Vorbild. Das Lernziel ist: Die ersten Gefährten, die ausgezogen sind und die geholfen haben, haben ein gutes Vorbild. Die Seite https://www.islamweb.net/ar/library/content/49/685 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 9:100. Sinngemäß, keine beglaubigte Übersetzung: Der Vers nennt die ersten Vorangehenden aus den Auswanderern und den Helfern und die, die ihnen auf gute Weise gefolgt sind, und sagt, dass Allah mit ihnen zufrieden ist und sie mit Ihm. Alltag: Ein Kind sagt: Sie haben dem Propheten, Friede sei mit ihm, geholfen. Ein bestimmtes Abenteuer nennen wir nicht. Aufgabe: Wir wiederholen die zwei Gruppennamen aus dem Vers: die Ausgewanderten und die Helfer. muhāǧirūn bedeutet: die Ausgewanderten. anṣār bedeutet: die Helfer in Madīnah. Was nicht behauptet wird: Eine einzelne Anekdote, ein Name außer den Gruppen und eine Jahreszahl stehen nicht als Kindererzählung auf der verwendeten Stelle. Wir erfinden sie nicht. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Ṣaḥābah und gutes Vorbild. Das Lernziel ist: Die ersten Gefährten, die ausgezogen sind und die geholfen haben, haben ein gutes Vorbild. Sinngemäß, keine beglaubigte Übersetzung: Der Vers nennt die ersten Vorangehenden aus den Auswanderern und den Helfern und die, die ihnen auf gute Weise gefolgt sind, und sagt, dass Allah mit ihnen zufrieden ist und sie mit Ihm. Alltag: Ein Kind sagt: Sie haben dem Propheten, Friede sei mit ihm, geholfen. Ein bestimmtes Abenteuer nennen wir nicht. Aufgabe: Wir wiederholen die zwei Gruppennamen aus dem Vers: die Ausgewanderten und die Helfer. muhāǧirūn bedeutet: die Ausgewanderten. anṣār bedeutet: die Helfer in Madīnah. Was nicht behauptet wird: Eine einzelne Anekdote, ein Name außer den Gruppen und eine Jahreszahl stehen nicht als Kindererzählung auf der verwendeten Stelle. Wir erfinden sie nicht.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 9:100.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -12746,7 +12746,7 @@ const additions=
         "situation": "Ein Kind sagt: Sie haben dem Propheten, Friede sei mit ihm, geholfen. Ein bestimmtes Abenteuer nennen wir nicht.",
         "practice": "Wir wiederholen die zwei Gruppennamen aus dem Vers: die Ausgewanderten und die Helfer.",
         "summary": "Belegt ist Qurʾān 9:100. Ungeprüft bleibt: Eine einzelne Anekdote, ein Name außer den Gruppen und eine Jahreszahl stehen nicht als Kindererzählung auf der verwendeten Stelle.",
-        "audioScript": "Für die älteren Kinder. Ṣaḥābah und gutes Vorbild. Der Vers nennt die ersten Vorangehenden aus den Auswanderern und den Helfern und die, die ihnen auf gute Weise gefolgt sind, und sagt, dass Allah mit ihnen zufrieden ist und sie mit Ihm. Nicht belegt und deshalb nicht behauptet: Eine einzelne Anekdote, ein Name außer den Gruppen und eine Jahreszahl stehen nicht als Kindererzählung auf der verwendeten Stelle."
+        "audioScript": "Ṣaḥābah und gutes Vorbild. Der Vers nennt die ersten Vorangehenden aus den Auswanderern und den Helfern und die, die ihnen auf gute Weise gefolgt sind, und sagt, dass Allah mit ihnen zufrieden ist und sie mit Ihm. Nicht belegt und deshalb nicht behauptet: Eine einzelne Anekdote, ein Name außer den Gruppen und eine Jahreszahl stehen nicht als Kindererzählung auf der verwendeten Stelle."
       }
     },
     "questions": {
@@ -12882,7 +12882,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Eine bestimmte Morgenformel mit fester Anzahl steht auf dieser Stelle nicht als übernommene Sunnah. Zwang gibt es nicht. Die weiteren Worte im gespeicherten Ausdruck werden nicht als zweite Pflicht der Stunde ausgegeben. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Eine bestimmte Morgenformel mit fester Anzahl steht auf dieser Stelle nicht als übernommene Sunnah. Zwang gibt es nicht. Die weiteren Worte im gespeicherten Ausdruck werden nicht als zweite Pflicht der Stunde ausgegeben. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Wir erinnern uns an Allah mit kurzen Worten, ohne dass jemand gedrängt wird.",
@@ -12915,7 +12915,7 @@ const additions=
       },
       "6-8": {
         "goal": "Wir erinnern uns an Allah mit kurzen Worten, ohne dass jemand gedrängt wird.",
-        "intro": "Heute geht es um Adhkār ohne Zwang wiederholen. Wir erinnern uns an Allah mit kurzen Worten, ohne dass jemand gedrängt wird. Wir lesen Qurʾān 33:41. Sinngemäß, ohne beglaubigte Übersetzung: Der gespeicherte Ausdruck fordert die Glaubenden auf, Allahs viel zu gedenken und Ihn morgens und abends zu preisen. Danach folgen weitere Worte der Seite. So kann das im Alltag aussehen: Am Morgen sagt ein Kind einmal: Alles Lob gehört Allah. Wer nicht möchte, hört nur zu. Die Aufgabe: Wir wiederholen einen kurzen deutschen Sinn und keine lange Liste. ḏikr bedeutet: Gedenken Allahs. adhkār bedeutet: kurze Erinnerungsworte; die einzelne Formel bleibt hier ungeprüft. Die Grenze der Stunde: Eine bestimmte Morgenformel mit fester Anzahl steht auf dieser Stelle nicht als übernommene Sunnah. Zwang gibt es nicht. Die weiteren Worte im gespeicherten Ausdruck werden nicht als zweite Pflicht der Stunde ausgegeben. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Adhkār ohne Zwang wiederholen. Wir erinnern uns an Allah mit kurzen Worten, ohne dass jemand gedrängt wird. Wir lesen Qurʾān 33:41. Sinngemäß, ohne beglaubigte Übersetzung: Der gespeicherte Ausdruck fordert die Glaubenden auf, Allahs viel zu gedenken und Ihn morgens und abends zu preisen. Danach folgen weitere Worte der Seite. So kann das im Alltag aussehen: Am Morgen sagt ein Kind einmal: Alles Lob gehört Allah. Wer nicht möchte, hört nur zu. Die Aufgabe: Wir wiederholen einen kurzen deutschen Sinn und keine lange Liste. ḏikr bedeutet: Gedenken Allahs. adhkār bedeutet: kurze Erinnerungsworte; die einzelne Formel bleibt hier ungeprüft. Die Grenze der Stunde: Eine bestimmte Morgenformel mit fester Anzahl steht auf dieser Stelle nicht als übernommene Sunnah. Zwang gibt es nicht. Die weiteren Worte im gespeicherten Ausdruck werden nicht als zweite Pflicht der Stunde ausgegeben.",
         "lines": [
           "Qurʾān 33:41 ist die gelesene Stelle.",
           "Danach folgen weitere Worte der Seite.",
@@ -12941,7 +12941,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Adhkār ohne Zwang wiederholen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Adhkār ohne Zwang wiederholen. Das Lernziel ist: Wir erinnern uns an Allah mit kurzen Worten, ohne dass jemand gedrängt wird. Die Seite https://www.islamweb.net/ar/library/content/49/1501 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 33:41. Sinngemäß, keine beglaubigte Übersetzung: Der gespeicherte Ausdruck fordert die Glaubenden auf, Allahs viel zu gedenken und Ihn morgens und abends zu preisen. Danach folgen weitere Worte der Seite. Alltag: Am Morgen sagt ein Kind einmal: Alles Lob gehört Allah. Wer nicht möchte, hört nur zu. Aufgabe: Wir wiederholen einen kurzen deutschen Sinn und keine lange Liste. ḏikr bedeutet: Gedenken Allahs. adhkār bedeutet: kurze Erinnerungsworte; die einzelne Formel bleibt hier ungeprüft. Was nicht behauptet wird: Eine bestimmte Morgenformel mit fester Anzahl steht auf dieser Stelle nicht als übernommene Sunnah. Zwang gibt es nicht. Die weiteren Worte im gespeicherten Ausdruck werden nicht als zweite Pflicht der Stunde ausgegeben. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Adhkār ohne Zwang wiederholen. Das Lernziel ist: Wir erinnern uns an Allah mit kurzen Worten, ohne dass jemand gedrängt wird. Sinngemäß, keine beglaubigte Übersetzung: Der gespeicherte Ausdruck fordert die Glaubenden auf, Allahs viel zu gedenken und Ihn morgens und abends zu preisen. Danach folgen weitere Worte der Seite. Alltag: Am Morgen sagt ein Kind einmal: Alles Lob gehört Allah. Wer nicht möchte, hört nur zu. Aufgabe: Wir wiederholen einen kurzen deutschen Sinn und keine lange Liste. ḏikr bedeutet: Gedenken Allahs. adhkār bedeutet: kurze Erinnerungsworte; die einzelne Formel bleibt hier ungeprüft. Was nicht behauptet wird: Eine bestimmte Morgenformel mit fester Anzahl steht auf dieser Stelle nicht als übernommene Sunnah. Zwang gibt es nicht. Die weiteren Worte im gespeicherten Ausdruck werden nicht als zweite Pflicht der Stunde ausgegeben.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 33:41.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -12963,7 +12963,7 @@ const additions=
         "situation": "Am Morgen sagt ein Kind einmal: Alles Lob gehört Allah. Wer nicht möchte, hört nur zu.",
         "practice": "Wir wiederholen einen kurzen deutschen Sinn und keine lange Liste.",
         "summary": "Belegt ist Qurʾān 33:41. Ungeprüft bleibt: Eine bestimmte Morgenformel mit fester Anzahl steht auf dieser Stelle nicht als übernommene Sunnah.",
-        "audioScript": "Für die älteren Kinder. Adhkār ohne Zwang wiederholen. Danach folgen weitere Worte der Seite. Nicht belegt und deshalb nicht behauptet: Eine bestimmte Morgenformel mit fester Anzahl steht auf dieser Stelle nicht als übernommene Sunnah."
+        "audioScript": "Adhkār ohne Zwang wiederholen. Danach folgen weitere Worte der Seite. Nicht belegt und deshalb nicht behauptet: Eine bestimmte Morgenformel mit fester Anzahl steht auf dieser Stelle nicht als übernommene Sunnah."
       }
     },
     "questions": {
@@ -13099,7 +13099,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers ist kein Auftrag, allein zu Fremden zu gehen. Die Nachbarschaftshilfe bleibt an der Hand der Eltern. Dieselbe Hilfe-Idee aus einem anderen Vers wird hier nicht noch einmal als zweite Quelle vermischt. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Vers ist kein Auftrag, allein zu Fremden zu gehen. Die Nachbarschaftshilfe bleibt an der Hand der Eltern. Dieselbe Hilfe-Idee aus einem anderen Vers wird hier nicht noch einmal als zweite Quelle vermischt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Zusammen können wir etwas Gutes tun, das sicher ist.",
@@ -13132,7 +13132,7 @@ const additions=
       },
       "6-8": {
         "goal": "Zusammen können wir etwas Gutes tun, das sicher ist.",
-        "intro": "Heute geht es um Für die Gemeinschaft etwas Gutes tun. Zusammen können wir etwas Gutes tun, das sicher ist. Wir lesen Qurʾān 16:90. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass Allah Gerechtigkeit, gutes Verhalten und das Geben an die Verwandten befiehlt und das Schändliche, das Verwerfliche und die Übertretung verbietet. So kann das im Alltag aussehen: Die Kinder sammeln mit den Eltern saubere Flaschen auf dem eigenen Hof und bringen sie weg. Die Aufgabe: Wir planen nur eine Hilfe, die Erwachsene erlauben und die niemand in Gefahr bringt. ʿadl bedeutet: Gerechtigkeit. iḥsān bedeutet: gutes Verhalten. Die Grenze der Stunde: Der Vers ist kein Auftrag, allein zu Fremden zu gehen. Die Nachbarschaftshilfe bleibt an der Hand der Eltern. Dieselbe Hilfe-Idee aus einem anderen Vers wird hier nicht noch einmal als zweite Quelle vermischt. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Für die Gemeinschaft etwas Gutes tun. Zusammen können wir etwas Gutes tun, das sicher ist. Wir lesen Qurʾān 16:90. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass Allah Gerechtigkeit, gutes Verhalten und das Geben an die Verwandten befiehlt und das Schändliche, das Verwerfliche und die Übertretung verbietet. So kann das im Alltag aussehen: Die Kinder sammeln mit den Eltern saubere Flaschen auf dem eigenen Hof und bringen sie weg. Die Aufgabe: Wir planen nur eine Hilfe, die Erwachsene erlauben und die niemand in Gefahr bringt. ʿadl bedeutet: Gerechtigkeit. iḥsān bedeutet: gutes Verhalten. Die Grenze der Stunde: Der Vers ist kein Auftrag, allein zu Fremden zu gehen. Die Nachbarschaftshilfe bleibt an der Hand der Eltern. Dieselbe Hilfe-Idee aus einem anderen Vers wird hier nicht noch einmal als zweite Quelle vermischt.",
         "lines": [
           "Qurʾān 16:90 ist die gelesene Stelle.",
           "Der Vers sagt, dass Allah Gerechtigkeit, gutes Verhalten und das Geben an die Verwandten befiehlt und das Schändliche, das Verwerfliche und die Übertretung verbietet.",
@@ -13158,7 +13158,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Für die Gemeinschaft etwas Gutes tun von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Für die Gemeinschaft etwas Gutes tun. Das Lernziel ist: Zusammen können wir etwas Gutes tun, das sicher ist. Die Seite https://www.islamweb.net/ar/library/content/49/974 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 16:90. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass Allah Gerechtigkeit, gutes Verhalten und das Geben an die Verwandten befiehlt und das Schändliche, das Verwerfliche und die Übertretung verbietet. Alltag: Die Kinder sammeln mit den Eltern saubere Flaschen auf dem eigenen Hof und bringen sie weg. Aufgabe: Wir planen nur eine Hilfe, die Erwachsene erlauben und die niemand in Gefahr bringt. ʿadl bedeutet: Gerechtigkeit. iḥsān bedeutet: gutes Verhalten. Was nicht behauptet wird: Der Vers ist kein Auftrag, allein zu Fremden zu gehen. Die Nachbarschaftshilfe bleibt an der Hand der Eltern. Dieselbe Hilfe-Idee aus einem anderen Vers wird hier nicht noch einmal als zweite Quelle vermischt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Für die Gemeinschaft etwas Gutes tun. Das Lernziel ist: Zusammen können wir etwas Gutes tun, das sicher ist. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass Allah Gerechtigkeit, gutes Verhalten und das Geben an die Verwandten befiehlt und das Schändliche, das Verwerfliche und die Übertretung verbietet. Alltag: Die Kinder sammeln mit den Eltern saubere Flaschen auf dem eigenen Hof und bringen sie weg. Aufgabe: Wir planen nur eine Hilfe, die Erwachsene erlauben und die niemand in Gefahr bringt. ʿadl bedeutet: Gerechtigkeit. iḥsān bedeutet: gutes Verhalten. Was nicht behauptet wird: Der Vers ist kein Auftrag, allein zu Fremden zu gehen. Die Nachbarschaftshilfe bleibt an der Hand der Eltern. Dieselbe Hilfe-Idee aus einem anderen Vers wird hier nicht noch einmal als zweite Quelle vermischt.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 16:90.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -13180,7 +13180,7 @@ const additions=
         "situation": "Die Kinder sammeln mit den Eltern saubere Flaschen auf dem eigenen Hof und bringen sie weg.",
         "practice": "Wir planen nur eine Hilfe, die Erwachsene erlauben und die niemand in Gefahr bringt.",
         "summary": "Belegt ist Qurʾān 16:90. Ungeprüft bleibt: Der Vers ist kein Auftrag, allein zu Fremden zu gehen.",
-        "audioScript": "Für die älteren Kinder. Für die Gemeinschaft etwas Gutes tun. Der Vers sagt, dass Allah Gerechtigkeit, gutes Verhalten und das Geben an die Verwandten befiehlt und das Schändliche, das Verwerfliche und die Übertretung verbietet. Nicht belegt und deshalb nicht behauptet: Der Vers ist kein Auftrag, allein zu Fremden zu gehen."
+        "audioScript": "Für die Gemeinschaft etwas Gutes tun. Der Vers sagt, dass Allah Gerechtigkeit, gutes Verhalten und das Geben an die Verwandten befiehlt und das Schändliche, das Verwerfliche und die Übertretung verbietet. Nicht belegt und deshalb nicht behauptet: Der Vers ist kein Auftrag, allein zu Fremden zu gehen."
       }
     },
     "questions": {
@@ -13316,7 +13316,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers macht die Hilfe eines Menschen nicht unsichtbar. Er sagt, woher die Gnade kommt. Eine feste Dankformel wurde nicht gelesen. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Vers macht die Hilfe eines Menschen nicht unsichtbar. Er sagt, woher die Gnade kommt. Eine feste Dankformel wurde nicht gelesen. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Nach einem schönen Ereignis danken wir Allah.",
@@ -13349,7 +13349,7 @@ const additions=
       },
       "6-8": {
         "goal": "Nach einem schönen Ereignis danken wir Allah.",
-        "intro": "Heute geht es um Allah allein danken. Nach einem schönen Ereignis danken wir Allah. Wir lesen Qurʾān 16:53. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt: Was immer ihr an Gnade habt, ist von Allah. Wenn euch dann ein Schaden trifft, ruft ihr zu Ihm. So kann das im Alltag aussehen: Ein Kind besteht eine kleine Aufgabe und sagt: Das war eine Gnade Allahs. Ich habe auch geübt. Die Aufgabe: Wir nennen eine schöne Sache aus dem Tag und sagen den Dank, ohne einen Menschen zu vergessen, der geholfen hat. niʿmah bedeutet: Gnade, Gabe. min Allāh bedeutet: von Allah. Die Grenze der Stunde: Der Vers macht die Hilfe eines Menschen nicht unsichtbar. Er sagt, woher die Gnade kommt. Eine feste Dankformel wurde nicht gelesen. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Allah allein danken. Nach einem schönen Ereignis danken wir Allah. Wir lesen Qurʾān 16:53. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt: Was immer ihr an Gnade habt, ist von Allah. Wenn euch dann ein Schaden trifft, ruft ihr zu Ihm. So kann das im Alltag aussehen: Ein Kind besteht eine kleine Aufgabe und sagt: Das war eine Gnade Allahs. Ich habe auch geübt. Die Aufgabe: Wir nennen eine schöne Sache aus dem Tag und sagen den Dank, ohne einen Menschen zu vergessen, der geholfen hat. niʿmah bedeutet: Gnade, Gabe. min Allāh bedeutet: von Allah. Die Grenze der Stunde: Der Vers macht die Hilfe eines Menschen nicht unsichtbar. Er sagt, woher die Gnade kommt. Eine feste Dankformel wurde nicht gelesen.",
         "lines": [
           "Qurʾān 16:53 ist die gelesene Stelle.",
           "Der Vers sagt: Was immer ihr an Gnade habt, ist von Allah.",
@@ -13375,7 +13375,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Allah allein danken von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Allah allein danken. Das Lernziel ist: Nach einem schönen Ereignis danken wir Allah. Die Seite https://www.islamweb.net/ar/library/content/49/958 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 16:53. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt: Was immer ihr an Gnade habt, ist von Allah. Wenn euch dann ein Schaden trifft, ruft ihr zu Ihm. Alltag: Ein Kind besteht eine kleine Aufgabe und sagt: Das war eine Gnade Allahs. Ich habe auch geübt. Aufgabe: Wir nennen eine schöne Sache aus dem Tag und sagen den Dank, ohne einen Menschen zu vergessen, der geholfen hat. niʿmah bedeutet: Gnade, Gabe. min Allāh bedeutet: von Allah. Was nicht behauptet wird: Der Vers macht die Hilfe eines Menschen nicht unsichtbar. Er sagt, woher die Gnade kommt. Eine feste Dankformel wurde nicht gelesen. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Allah allein danken. Das Lernziel ist: Nach einem schönen Ereignis danken wir Allah. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt: Was immer ihr an Gnade habt, ist von Allah. Wenn euch dann ein Schaden trifft, ruft ihr zu Ihm. Alltag: Ein Kind besteht eine kleine Aufgabe und sagt: Das war eine Gnade Allahs. Ich habe auch geübt. Aufgabe: Wir nennen eine schöne Sache aus dem Tag und sagen den Dank, ohne einen Menschen zu vergessen, der geholfen hat. niʿmah bedeutet: Gnade, Gabe. min Allāh bedeutet: von Allah. Was nicht behauptet wird: Der Vers macht die Hilfe eines Menschen nicht unsichtbar. Er sagt, woher die Gnade kommt. Eine feste Dankformel wurde nicht gelesen.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 16:53.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -13397,7 +13397,7 @@ const additions=
         "situation": "Ein Kind besteht eine kleine Aufgabe und sagt: Das war eine Gnade Allahs. Ich habe auch geübt.",
         "practice": "Wir nennen eine schöne Sache aus dem Tag und sagen den Dank, ohne einen Menschen zu vergessen, der geholfen hat.",
         "summary": "Belegt ist Qurʾān 16:53. Ungeprüft bleibt: Der Vers macht die Hilfe eines Menschen nicht unsichtbar.",
-        "audioScript": "Für die älteren Kinder. Allah allein danken. Der Vers sagt: Was immer ihr an Gnade habt, ist von Allah. Nicht belegt und deshalb nicht behauptet: Der Vers macht die Hilfe eines Menschen nicht unsichtbar."
+        "audioScript": "Allah allein danken. Der Vers sagt: Was immer ihr an Gnade habt, ist von Allah. Nicht belegt und deshalb nicht behauptet: Der Vers macht die Hilfe eines Menschen nicht unsichtbar."
       }
     },
     "questions": {
@@ -13533,7 +13533,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Wir behaupten nicht, der ganze Vers sei in einem kurzen Satz enthalten. Was im Auszug fehlt, bleibt ungeprüft als arabischer Zusatz. Keine Angstbilder. Dieselbe gelesene Fundstelle wurde schon in Slot 148 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+      "note": "Wir behaupten nicht, der ganze Vers sei in einem kurzen Satz enthalten. Was im Auszug fehlt, bleibt ungeprüft als arabischer Zusatz. Keine Angstbilder. Dieselbe gelesene Fundstelle wurde schon in Slot 148 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
       "sameLocusAsSlot": 148
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
@@ -13567,7 +13567,7 @@ const additions=
       },
       "6-8": {
         "goal": "Glauben und eine gute Entscheidung gehören zusammen.",
-        "intro": "Heute geht es um Gute Taten und Verantwortung. Glauben und eine gute Entscheidung gehören zusammen. Wir lesen Qurʾān 2:177. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe lange Stelle wie in der Stunde über den Jüngsten Tag nennt den Glauben und danach Handlungen. Die Stunde bleibt bei dem, was der gespeicherte Auszug wirklich trägt, und ergänzt keine fehlenden Satzteile als Arabisch. So kann das im Alltag aussehen: Ein Kind sagt, es werde sein Heft mit nach Hause nehmen, und legt es wirklich in die Tasche. Die Aufgabe: Wir wählen eine kleine Zusage und führen sie am selben Tag aus. birr bedeutet: das Gute. amānah bedeutet: anvertrautes Handeln; als Unterrichtswort, nicht als behauptetes Wort des Auszugs. Die Grenze der Stunde: Wir behaupten nicht, der ganze Vers sei in einem kurzen Satz enthalten. Was im Auszug fehlt, bleibt ungeprüft als arabischer Zusatz. Keine Angstbilder. Dieselbe gelesene Fundstelle wurde schon in Slot 148 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Gute Taten und Verantwortung. Glauben und eine gute Entscheidung gehören zusammen. Wir lesen Qurʾān 2:177. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe lange Stelle wie in der Stunde über den Jüngsten Tag nennt den Glauben und danach Handlungen. Die Stunde bleibt bei dem, was der gespeicherte Auszug wirklich trägt, und ergänzt keine fehlenden Satzteile als Arabisch. So kann das im Alltag aussehen: Ein Kind sagt, es werde sein Heft mit nach Hause nehmen, und legt es wirklich in die Tasche. Die Aufgabe: Wir wählen eine kleine Zusage und führen sie am selben Tag aus. birr bedeutet: das Gute. amānah bedeutet: anvertrautes Handeln; als Unterrichtswort, nicht als behauptetes Wort des Auszugs. Die Grenze der Stunde: Wir behaupten nicht, der ganze Vers sei in einem kurzen Satz enthalten. Was im Auszug fehlt, bleibt ungeprüft als arabischer Zusatz. Keine Angstbilder. Dieselbe gelesene Fundstelle wurde schon in Slot 148 mit einem anderen Lernziel verwendet.",
         "lines": [
           "Qurʾān 2:177 ist die gelesene Stelle.",
           "Dieselbe lange Stelle wie in der Stunde über den Jüngsten Tag nennt den Glauben und danach Handlungen.",
@@ -13593,7 +13593,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Gute Taten und Verantwortung von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Gute Taten und Verantwortung. Das Lernziel ist: Glauben und eine gute Entscheidung gehören zusammen. Die Seite https://www.islamweb.net/ar/library/content/49/161 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:177. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe lange Stelle wie in der Stunde über den Jüngsten Tag nennt den Glauben und danach Handlungen. Die Stunde bleibt bei dem, was der gespeicherte Auszug wirklich trägt, und ergänzt keine fehlenden Satzteile als Arabisch. Alltag: Ein Kind sagt, es werde sein Heft mit nach Hause nehmen, und legt es wirklich in die Tasche. Aufgabe: Wir wählen eine kleine Zusage und führen sie am selben Tag aus. birr bedeutet: das Gute. amānah bedeutet: anvertrautes Handeln; als Unterrichtswort, nicht als behauptetes Wort des Auszugs. Was nicht behauptet wird: Wir behaupten nicht, der ganze Vers sei in einem kurzen Satz enthalten. Was im Auszug fehlt, bleibt ungeprüft als arabischer Zusatz. Keine Angstbilder. Dieselbe gelesene Fundstelle wurde schon in Slot 148 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Gute Taten und Verantwortung. Das Lernziel ist: Glauben und eine gute Entscheidung gehören zusammen. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe lange Stelle wie in der Stunde über den Jüngsten Tag nennt den Glauben und danach Handlungen. Die Stunde bleibt bei dem, was der gespeicherte Auszug wirklich trägt, und ergänzt keine fehlenden Satzteile als Arabisch. Alltag: Ein Kind sagt, es werde sein Heft mit nach Hause nehmen, und legt es wirklich in die Tasche. Aufgabe: Wir wählen eine kleine Zusage und führen sie am selben Tag aus. birr bedeutet: das Gute. amānah bedeutet: anvertrautes Handeln; als Unterrichtswort, nicht als behauptetes Wort des Auszugs. Was nicht behauptet wird: Wir behaupten nicht, der ganze Vers sei in einem kurzen Satz enthalten. Was im Auszug fehlt, bleibt ungeprüft als arabischer Zusatz. Keine Angstbilder. Dieselbe gelesene Fundstelle wurde schon in Slot 148 mit einem anderen Lernziel verwendet.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 2:177.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -13615,7 +13615,7 @@ const additions=
         "situation": "Ein Kind sagt, es werde sein Heft mit nach Hause nehmen, und legt es wirklich in die Tasche.",
         "practice": "Wir wählen eine kleine Zusage und führen sie am selben Tag aus.",
         "summary": "Belegt ist Qurʾān 2:177. Ungeprüft bleibt: Wir behaupten nicht, der ganze Vers sei in einem kurzen Satz enthalten.",
-        "audioScript": "Für die älteren Kinder. Gute Taten und Verantwortung. Dieselbe lange Stelle wie in der Stunde über den Jüngsten Tag nennt den Glauben und danach Handlungen. Nicht belegt und deshalb nicht behauptet: Wir behaupten nicht, der ganze Vers sei in einem kurzen Satz enthalten."
+        "audioScript": "Gute Taten und Verantwortung. Dieselbe lange Stelle wie in der Stunde über den Jüngsten Tag nennt den Glauben und danach Handlungen. Nicht belegt und deshalb nicht behauptet: Wir behaupten nicht, der ganze Vers sei in einem kurzen Satz enthalten."
       }
     },
     "questions": {
@@ -13751,7 +13751,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers benutzt ein Bild für die verdorbene Gabe. Wir malen es nicht aus. Eine Hadithnummer wurde nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Vers benutzt ein Bild für die verdorbene Gabe. Wir malen es nicht aus. Eine Hadithnummer wurde nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Wir helfen, weil es richtig ist, nicht damit alle klatschen.",
@@ -13784,7 +13784,7 @@ const additions=
       },
       "6-8": {
         "goal": "Wir helfen, weil es richtig ist, nicht damit alle klatschen.",
-        "intro": "Heute geht es um Aufrichtigkeit von Außenwirkung unterscheiden. Wir helfen, weil es richtig ist, nicht damit alle klatschen. Wir lesen Qurʾān 2:264. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers verbietet, die Gaben durch Vorhaltung und Verletzung zu verderben, und vergleicht den, der seines Ansehens wegen ausgibt und nicht an Allah glaubt. So kann das im Alltag aussehen: Ein Kind räumt nur auf, solange die Lehrperson schaut, und hört auf, sobald sie weg ist. Wir sprechen darüber. Die Aufgabe: Wir tun eine kleine Hilfe und erzählen sie danach nicht herum. riyāʾ bedeutet: etwas tun, damit die Leute es sehen. mann bedeutet: Vorhaltung, mit der man eine Gabe schwer macht. Die Grenze der Stunde: Der Vers benutzt ein Bild für die verdorbene Gabe. Wir malen es nicht aus. Eine Hadithnummer wurde nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Aufrichtigkeit von Außenwirkung unterscheiden. Wir helfen, weil es richtig ist, nicht damit alle klatschen. Wir lesen Qurʾān 2:264. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers verbietet, die Gaben durch Vorhaltung und Verletzung zu verderben, und vergleicht den, der seines Ansehens wegen ausgibt und nicht an Allah glaubt. So kann das im Alltag aussehen: Ein Kind räumt nur auf, solange die Lehrperson schaut, und hört auf, sobald sie weg ist. Wir sprechen darüber. Die Aufgabe: Wir tun eine kleine Hilfe und erzählen sie danach nicht herum. riyāʾ bedeutet: etwas tun, damit die Leute es sehen. mann bedeutet: Vorhaltung, mit der man eine Gabe schwer macht. Die Grenze der Stunde: Der Vers benutzt ein Bild für die verdorbene Gabe. Wir malen es nicht aus. Eine Hadithnummer wurde nicht ergänzt.",
         "lines": [
           "Qurʾān 2:264 ist die gelesene Stelle.",
           "Der Vers verbietet, die Gaben durch Vorhaltung und Verletzung zu verderben, und vergleicht den, der seines Ansehens wegen ausgibt und nicht an Allah glaubt.",
@@ -13810,7 +13810,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Aufrichtigkeit von Außenwirkung unterscheiden von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Aufrichtigkeit von Außenwirkung unterscheiden. Das Lernziel ist: Wir helfen, weil es richtig ist, nicht damit alle klatschen. Die Seite https://www.islamweb.net/ar/library/content/49/222 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:264. Sinngemäß, keine beglaubigte Übersetzung: Der Vers verbietet, die Gaben durch Vorhaltung und Verletzung zu verderben, und vergleicht den, der seines Ansehens wegen ausgibt und nicht an Allah glaubt. Alltag: Ein Kind räumt nur auf, solange die Lehrperson schaut, und hört auf, sobald sie weg ist. Wir sprechen darüber. Aufgabe: Wir tun eine kleine Hilfe und erzählen sie danach nicht herum. riyāʾ bedeutet: etwas tun, damit die Leute es sehen. mann bedeutet: Vorhaltung, mit der man eine Gabe schwer macht. Was nicht behauptet wird: Der Vers benutzt ein Bild für die verdorbene Gabe. Wir malen es nicht aus. Eine Hadithnummer wurde nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Aufrichtigkeit von Außenwirkung unterscheiden. Das Lernziel ist: Wir helfen, weil es richtig ist, nicht damit alle klatschen. Sinngemäß, keine beglaubigte Übersetzung: Der Vers verbietet, die Gaben durch Vorhaltung und Verletzung zu verderben, und vergleicht den, der seines Ansehens wegen ausgibt und nicht an Allah glaubt. Alltag: Ein Kind räumt nur auf, solange die Lehrperson schaut, und hört auf, sobald sie weg ist. Wir sprechen darüber. Aufgabe: Wir tun eine kleine Hilfe und erzählen sie danach nicht herum. riyāʾ bedeutet: etwas tun, damit die Leute es sehen. mann bedeutet: Vorhaltung, mit der man eine Gabe schwer macht. Was nicht behauptet wird: Der Vers benutzt ein Bild für die verdorbene Gabe. Wir malen es nicht aus. Eine Hadithnummer wurde nicht ergänzt.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 2:264.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -13832,7 +13832,7 @@ const additions=
         "situation": "Ein Kind räumt nur auf, solange die Lehrperson schaut, und hört auf, sobald sie weg ist. Wir sprechen darüber.",
         "practice": "Wir tun eine kleine Hilfe und erzählen sie danach nicht herum.",
         "summary": "Belegt ist Qurʾān 2:264. Ungeprüft bleibt: Der Vers benutzt ein Bild für die verdorbene Gabe.",
-        "audioScript": "Für die älteren Kinder. Aufrichtigkeit von Außenwirkung unterscheiden. Der Vers verbietet, die Gaben durch Vorhaltung und Verletzung zu verderben, und vergleicht den, der seines Ansehens wegen ausgibt und nicht an Allah glaubt. Nicht belegt und deshalb nicht behauptet: Der Vers benutzt ein Bild für die verdorbene Gabe."
+        "audioScript": "Aufrichtigkeit von Außenwirkung unterscheiden. Der Vers verbietet, die Gaben durch Vorhaltung und Verletzung zu verderben, und vergleicht den, der seines Ansehens wegen ausgibt und nicht an Allah glaubt. Nicht belegt und deshalb nicht behauptet: Der Vers benutzt ein Bild für die verdorbene Gabe."
       }
     },
     "questions": {
@@ -13968,7 +13968,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers ist keine Spielregel. Zurückhaltener Zorn heißt nicht, ein Unrecht zu verschweigen. Wenn jemand haut, holen wir eine erwachsene Person. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Vers ist keine Spielregel. Zurückhaltener Zorn heißt nicht, ein Unrecht zu verschweigen. Wenn jemand haut, holen wir eine erwachsene Person. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Du sagst es einer erwachsenen Person, der du vertraust.",
     "sample": "Wenn wir verlieren, bleiben wir bei unseren Worten freundlich.",
@@ -14001,7 +14001,7 @@ const additions=
       },
       "6-8": {
         "goal": "Wenn wir verlieren, bleiben wir bei unseren Worten freundlich.",
-        "intro": "Heute geht es um Ruhig bleiben beim Verlieren. Wenn wir verlieren, bleiben wir bei unseren Worten freundlich. Wir lesen Qurʾān 3:134. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers nennt Menschen, die in der leichten und in der schweren Lage ausgeben, den Zorn zurückhalten und den Menschen verzeihen. So kann das im Alltag aussehen: Ein Spiel endet. Das Kind, das verloren hat, sagt: Gut gespielt, und wirft das Spiel nicht. Die Aufgabe: Wir üben den Satz und legen das Spielzeug ruhig hin. kaẓm al-ġayẓ bedeutet: den Zorn zurückhalten. ʿafw bedeutet: Verzeihen. Die Grenze der Stunde: Der Vers ist keine Spielregel. Zurückhaltener Zorn heißt nicht, ein Unrecht zu verschweigen. Wenn jemand haut, holen wir eine erwachsene Person. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Ruhig bleiben beim Verlieren. Wenn wir verlieren, bleiben wir bei unseren Worten freundlich. Wir lesen Qurʾān 3:134. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers nennt Menschen, die in der leichten und in der schweren Lage ausgeben, den Zorn zurückhalten und den Menschen verzeihen. So kann das im Alltag aussehen: Ein Spiel endet. Das Kind, das verloren hat, sagt: Gut gespielt, und wirft das Spiel nicht. Die Aufgabe: Wir üben den Satz und legen das Spielzeug ruhig hin. kaẓm al-ġayẓ bedeutet: den Zorn zurückhalten. ʿafw bedeutet: Verzeihen. Die Grenze der Stunde: Der Vers ist keine Spielregel. Zurückhaltener Zorn heißt nicht, ein Unrecht zu verschweigen. Wenn jemand haut, holen wir eine erwachsene Person.",
         "lines": [
           "Qurʾān 3:134 ist die gelesene Stelle.",
           "Der Vers nennt Menschen, die in der leichten und in der schweren Lage ausgeben, den Zorn zurückhalten und den Menschen verzeihen.",
@@ -14027,7 +14027,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Ruhig bleiben beim Verlieren von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Ruhig bleiben beim Verlieren. Das Lernziel ist: Wenn wir verlieren, bleiben wir bei unseren Worten freundlich. Die Seite https://www.islamweb.net/ar/library/content/49/280 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 3:134. Sinngemäß, keine beglaubigte Übersetzung: Der Vers nennt Menschen, die in der leichten und in der schweren Lage ausgeben, den Zorn zurückhalten und den Menschen verzeihen. Alltag: Ein Spiel endet. Das Kind, das verloren hat, sagt: Gut gespielt, und wirft das Spiel nicht. Aufgabe: Wir üben den Satz und legen das Spielzeug ruhig hin. kaẓm al-ġayẓ bedeutet: den Zorn zurückhalten. ʿafw bedeutet: Verzeihen. Was nicht behauptet wird: Der Vers ist keine Spielregel. Zurückhaltener Zorn heißt nicht, ein Unrecht zu verschweigen. Wenn jemand haut, holen wir eine erwachsene Person. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Ruhig bleiben beim Verlieren. Das Lernziel ist: Wenn wir verlieren, bleiben wir bei unseren Worten freundlich. Sinngemäß, keine beglaubigte Übersetzung: Der Vers nennt Menschen, die in der leichten und in der schweren Lage ausgeben, den Zorn zurückhalten und den Menschen verzeihen. Alltag: Ein Spiel endet. Das Kind, das verloren hat, sagt: Gut gespielt, und wirft das Spiel nicht. Aufgabe: Wir üben den Satz und legen das Spielzeug ruhig hin. kaẓm al-ġayẓ bedeutet: den Zorn zurückhalten. ʿafw bedeutet: Verzeihen. Was nicht behauptet wird: Der Vers ist keine Spielregel. Zurückhaltener Zorn heißt nicht, ein Unrecht zu verschweigen. Wenn jemand haut, holen wir eine erwachsene Person.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 3:134.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -14049,7 +14049,7 @@ const additions=
         "situation": "Ein Spiel endet. Das Kind, das verloren hat, sagt: Gut gespielt, und wirft das Spiel nicht.",
         "practice": "Wir üben den Satz und legen das Spielzeug ruhig hin.",
         "summary": "Belegt ist Qurʾān 3:134. Ungeprüft bleibt: Der Vers ist keine Spielregel.",
-        "audioScript": "Für die älteren Kinder. Ruhig bleiben beim Verlieren. Der Vers nennt Menschen, die in der leichten und in der schweren Lage ausgeben, den Zorn zurückhalten und den Menschen verzeihen. Nicht belegt und deshalb nicht behauptet: Der Vers ist keine Spielregel."
+        "audioScript": "Ruhig bleiben beim Verlieren. Der Vers nennt Menschen, die in der leichten und in der schweren Lage ausgeben, den Zorn zurückhalten und den Menschen verzeihen. Nicht belegt und deshalb nicht behauptet: Der Vers ist keine Spielregel."
       }
     },
     "questions": {
@@ -14185,7 +14185,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Eine feste arabische Schlussformel nach dem Essen steht hier nicht. Wir wiederholen nicht die andere Essensstelle, als wäre sie derselbe Vers. Diese Fundstelle ist 16:114. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Eine feste arabische Schlussformel nach dem Essen steht hier nicht. Wir wiederholen nicht die andere Essensstelle, als wäre sie derselbe Vers. Diese Fundstelle ist 16:114. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Nach dem Essen bleiben wir dankbar und stehen nicht sofort lärmend auf.",
@@ -14218,7 +14218,7 @@ const additions=
       },
       "6-8": {
         "goal": "Nach dem Essen bleiben wir dankbar und stehen nicht sofort lärmend auf.",
-        "intro": "Heute geht es um Nach dem Essen dankbar sein. Nach dem Essen bleiben wir dankbar und stehen nicht sofort lärmend auf. Wir lesen Qurʾān 16:114. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt: So esst von dem, was Allah euch gegeben hat, als etwas Erlaubtes und Gutes, und seid dankbar für die Gnade Allahs. So kann das im Alltag aussehen: Der Tisch wird abgeräumt. Das Kind sagt einen Dank und trägt einen leichten Teller, wenn die Eltern es erlauben. Die Aufgabe: Wir üben den Dank und das ruhige Aufstehen. ḥalāl bedeutet: erlaubt. ṭayyib bedeutet: gut, rein. Die Grenze der Stunde: Eine feste arabische Schlussformel nach dem Essen steht hier nicht. Wir wiederholen nicht die andere Essensstelle, als wäre sie derselbe Vers. Diese Fundstelle ist 16:114. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Nach dem Essen dankbar sein. Nach dem Essen bleiben wir dankbar und stehen nicht sofort lärmend auf. Wir lesen Qurʾān 16:114. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt: So esst von dem, was Allah euch gegeben hat, als etwas Erlaubtes und Gutes, und seid dankbar für die Gnade Allahs. So kann das im Alltag aussehen: Der Tisch wird abgeräumt. Das Kind sagt einen Dank und trägt einen leichten Teller, wenn die Eltern es erlauben. Die Aufgabe: Wir üben den Dank und das ruhige Aufstehen. ḥalāl bedeutet: erlaubt. ṭayyib bedeutet: gut, rein. Die Grenze der Stunde: Eine feste arabische Schlussformel nach dem Essen steht hier nicht. Wir wiederholen nicht die andere Essensstelle, als wäre sie derselbe Vers. Diese Fundstelle ist 16:114.",
         "lines": [
           "Qurʾān 16:114 ist die gelesene Stelle.",
           "Der Vers sagt: So esst von dem, was Allah euch gegeben hat, als etwas Erlaubtes und Gutes, und seid dankbar für die Gnade Allahs.",
@@ -14244,7 +14244,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Nach dem Essen dankbar sein von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Nach dem Essen dankbar sein. Das Lernziel ist: Nach dem Essen bleiben wir dankbar und stehen nicht sofort lärmend auf. Die Seite https://www.islamweb.net/ar/library/content/49/985 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 16:114. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt: So esst von dem, was Allah euch gegeben hat, als etwas Erlaubtes und Gutes, und seid dankbar für die Gnade Allahs. Alltag: Der Tisch wird abgeräumt. Das Kind sagt einen Dank und trägt einen leichten Teller, wenn die Eltern es erlauben. Aufgabe: Wir üben den Dank und das ruhige Aufstehen. ḥalāl bedeutet: erlaubt. ṭayyib bedeutet: gut, rein. Was nicht behauptet wird: Eine feste arabische Schlussformel nach dem Essen steht hier nicht. Wir wiederholen nicht die andere Essensstelle, als wäre sie derselbe Vers. Diese Fundstelle ist 16:114. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Nach dem Essen dankbar sein. Das Lernziel ist: Nach dem Essen bleiben wir dankbar und stehen nicht sofort lärmend auf. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt: So esst von dem, was Allah euch gegeben hat, als etwas Erlaubtes und Gutes, und seid dankbar für die Gnade Allahs. Alltag: Der Tisch wird abgeräumt. Das Kind sagt einen Dank und trägt einen leichten Teller, wenn die Eltern es erlauben. Aufgabe: Wir üben den Dank und das ruhige Aufstehen. ḥalāl bedeutet: erlaubt. ṭayyib bedeutet: gut, rein. Was nicht behauptet wird: Eine feste arabische Schlussformel nach dem Essen steht hier nicht. Wir wiederholen nicht die andere Essensstelle, als wäre sie derselbe Vers. Diese Fundstelle ist 16:114.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 16:114.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -14266,7 +14266,7 @@ const additions=
         "situation": "Der Tisch wird abgeräumt. Das Kind sagt einen Dank und trägt einen leichten Teller, wenn die Eltern es erlauben.",
         "practice": "Wir üben den Dank und das ruhige Aufstehen.",
         "summary": "Belegt ist Qurʾān 16:114. Ungeprüft bleibt: Eine feste arabische Schlussformel nach dem Essen steht hier nicht.",
-        "audioScript": "Für die älteren Kinder. Nach dem Essen dankbar sein. Der Vers sagt: So esst von dem, was Allah euch gegeben hat, als etwas Erlaubtes und Gutes, und seid dankbar für die Gnade Allahs. Nicht belegt und deshalb nicht behauptet: Eine feste arabische Schlussformel nach dem Essen steht hier nicht."
+        "audioScript": "Nach dem Essen dankbar sein. Der Vers sagt: So esst von dem, was Allah euch gegeben hat, als etwas Erlaubtes und Gutes, und seid dankbar für die Gnade Allahs. Nicht belegt und deshalb nicht behauptet: Eine feste arabische Schlussformel nach dem Essen steht hier nicht."
       }
     },
     "questions": {
@@ -14402,7 +14402,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers verspricht nicht, dass jede Schwierigkeit sofort weg ist. Wir erfinden keine Geschichte zur Offenbarung dieser Sūrah über den gespeicherten Wortlaut hinaus. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Vers verspricht nicht, dass jede Schwierigkeit sofort weg ist. Wir erfinden keine Geschichte zur Offenbarung dieser Sūrah über den gespeicherten Wortlaut hinaus. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Wir erfinden keine zusätzliche Geschichte.",
     "sample": "Wenn etwas schiefgeht, versuchen wir es noch einmal.",
@@ -14435,7 +14435,7 @@ const additions=
       },
       "6-8": {
         "goal": "Wenn etwas schiefgeht, versuchen wir es noch einmal.",
-        "intro": "Heute geht es um Nach Fehlern weiterlernen. Wenn etwas schiefgeht, versuchen wir es noch einmal. Wir lesen Qurʾān 94:5. Sinngemäß, ohne beglaubigte Übersetzung: Der gespeicherte Ausdruck sagt zweimal: Mit der Schwierigkeit ist Erleichterung. So kann das im Alltag aussehen: Ein Kind verschreibt ein Wort, radiert es aus und schreibt es noch einmal langsam. Die Aufgabe: Wir planen einen zweiten Versuch und eine kleine Hilfe, zum Beispiel leiser lesen. ʿusr bedeutet: Schwierigkeit. yusr bedeutet: Erleichterung. Die Grenze der Stunde: Der Vers verspricht nicht, dass jede Schwierigkeit sofort weg ist. Wir erfinden keine Geschichte zur Offenbarung dieser Sūrah über den gespeicherten Wortlaut hinaus. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Nach Fehlern weiterlernen. Wenn etwas schiefgeht, versuchen wir es noch einmal. Wir lesen Qurʾān 94:5. Sinngemäß, ohne beglaubigte Übersetzung: Der gespeicherte Ausdruck sagt zweimal: Mit der Schwierigkeit ist Erleichterung. So kann das im Alltag aussehen: Ein Kind verschreibt ein Wort, radiert es aus und schreibt es noch einmal langsam. Die Aufgabe: Wir planen einen zweiten Versuch und eine kleine Hilfe, zum Beispiel leiser lesen. ʿusr bedeutet: Schwierigkeit. yusr bedeutet: Erleichterung. Die Grenze der Stunde: Der Vers verspricht nicht, dass jede Schwierigkeit sofort weg ist. Wir erfinden keine Geschichte zur Offenbarung dieser Sūrah über den gespeicherten Wortlaut hinaus.",
         "lines": [
           "Qurʾān 94:5 ist die gelesene Stelle.",
           "Wenn etwas schiefgeht, versuchen wir es noch einmal.",
@@ -14461,7 +14461,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Nach Fehlern weiterlernen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Nach Fehlern weiterlernen. Das Lernziel ist: Wenn etwas schiefgeht, versuchen wir es noch einmal. Die Seite https://www.islamweb.net/ar/library/content/49/1963 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 94:5. Sinngemäß, keine beglaubigte Übersetzung: Der gespeicherte Ausdruck sagt zweimal: Mit der Schwierigkeit ist Erleichterung. Alltag: Ein Kind verschreibt ein Wort, radiert es aus und schreibt es noch einmal langsam. Aufgabe: Wir planen einen zweiten Versuch und eine kleine Hilfe, zum Beispiel leiser lesen. ʿusr bedeutet: Schwierigkeit. yusr bedeutet: Erleichterung. Was nicht behauptet wird: Der Vers verspricht nicht, dass jede Schwierigkeit sofort weg ist. Wir erfinden keine Geschichte zur Offenbarung dieser Sūrah über den gespeicherten Wortlaut hinaus. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Nach Fehlern weiterlernen. Das Lernziel ist: Wenn etwas schiefgeht, versuchen wir es noch einmal. Sinngemäß, keine beglaubigte Übersetzung: Der gespeicherte Ausdruck sagt zweimal: Mit der Schwierigkeit ist Erleichterung. Alltag: Ein Kind verschreibt ein Wort, radiert es aus und schreibt es noch einmal langsam. Aufgabe: Wir planen einen zweiten Versuch und eine kleine Hilfe, zum Beispiel leiser lesen. ʿusr bedeutet: Schwierigkeit. yusr bedeutet: Erleichterung. Was nicht behauptet wird: Der Vers verspricht nicht, dass jede Schwierigkeit sofort weg ist. Wir erfinden keine Geschichte zur Offenbarung dieser Sūrah über den gespeicherten Wortlaut hinaus.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 94:5.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -14483,7 +14483,7 @@ const additions=
         "situation": "Ein Kind verschreibt ein Wort, radiert es aus und schreibt es noch einmal langsam.",
         "practice": "Wir planen einen zweiten Versuch und eine kleine Hilfe, zum Beispiel leiser lesen.",
         "summary": "Belegt ist Qurʾān 94:5. Ungeprüft bleibt: Der Vers verspricht nicht, dass jede Schwierigkeit sofort weg ist.",
-        "audioScript": "Für die älteren Kinder. Nach Fehlern weiterlernen. Wenn etwas schiefgeht, versuchen wir es noch einmal. Nicht belegt und deshalb nicht behauptet: Der Vers verspricht nicht, dass jede Schwierigkeit sofort weg ist."
+        "audioScript": "Nach Fehlern weiterlernen. Wenn etwas schiefgeht, versuchen wir es noch einmal. Nicht belegt und deshalb nicht behauptet: Der Vers verspricht nicht, dass jede Schwierigkeit sofort weg ist."
       }
     },
     "questions": {
@@ -14619,7 +14619,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers ist kein Haushaltsplan und keine Zahl von Geld. Der gespeicherte Ausdruck endet mit einem Anschlusswort. Wir bauen darauf keine Wirtschaftsstunde. Kaufen bleibt bei den Eltern. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Vers ist kein Haushaltsplan und keine Zahl von Geld. Der gespeicherte Ausdruck endet mit einem Anschlusswort. Wir bauen darauf keine Wirtschaftsstunde. Kaufen bleibt bei den Eltern. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Nicht jeden Wunsch erfüllen wir sofort.",
@@ -14652,7 +14652,7 @@ const additions=
       },
       "6-8": {
         "goal": "Nicht jeden Wunsch erfüllen wir sofort.",
-        "intro": "Heute geht es um Nicht jeden Wunsch sofort erfüllen. Nicht jeden Wunsch erfüllen wir sofort. Wir lesen Qurʾān 17:29. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, die Hand nicht an den Hals gefesselt und sie nicht völlig geöffnet zu lassen, sonst sitzt man tadelnswert und bloß da. So kann das im Alltag aussehen: Ein Kind sieht ein Spielzeug im Regal und möchte es sofort. Es wartet und fragt zu Hause. Die Aufgabe: Wir üben den Satz: Ich warte und frage. yad bedeutet: Hand; hier das Bild für zu festes Festhalten oder zu weites Ausgeben. qaṣd bedeutet: das Maß; ein Unterrichtswort, kein zusätzlicher Vers. Die Grenze der Stunde: Der Vers ist kein Haushaltsplan und keine Zahl von Geld. Der gespeicherte Ausdruck endet mit einem Anschlusswort. Wir bauen darauf keine Wirtschaftsstunde. Kaufen bleibt bei den Eltern. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Nicht jeden Wunsch sofort erfüllen. Nicht jeden Wunsch erfüllen wir sofort. Wir lesen Qurʾān 17:29. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, die Hand nicht an den Hals gefesselt und sie nicht völlig geöffnet zu lassen, sonst sitzt man tadelnswert und bloß da. So kann das im Alltag aussehen: Ein Kind sieht ein Spielzeug im Regal und möchte es sofort. Es wartet und fragt zu Hause. Die Aufgabe: Wir üben den Satz: Ich warte und frage. yad bedeutet: Hand; hier das Bild für zu festes Festhalten oder zu weites Ausgeben. qaṣd bedeutet: das Maß; ein Unterrichtswort, kein zusätzlicher Vers. Die Grenze der Stunde: Der Vers ist kein Haushaltsplan und keine Zahl von Geld. Der gespeicherte Ausdruck endet mit einem Anschlusswort. Wir bauen darauf keine Wirtschaftsstunde. Kaufen bleibt bei den Eltern.",
         "lines": [
           "Qurʾān 17:29 ist die gelesene Stelle.",
           "Der Vers sagt, die Hand nicht an den Hals gefesselt und sie nicht völlig geöffnet zu lassen, sonst sitzt man tadelnswert und bloß da.",
@@ -14678,7 +14678,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Nicht jeden Wunsch sofort erfüllen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Nicht jeden Wunsch sofort erfüllen. Das Lernziel ist: Nicht jeden Wunsch erfüllen wir sofort. Die Seite https://www.islamweb.net/ar/library/content/49/1008 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:29. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, die Hand nicht an den Hals gefesselt und sie nicht völlig geöffnet zu lassen, sonst sitzt man tadelnswert und bloß da. Alltag: Ein Kind sieht ein Spielzeug im Regal und möchte es sofort. Es wartet und fragt zu Hause. Aufgabe: Wir üben den Satz: Ich warte und frage. yad bedeutet: Hand; hier das Bild für zu festes Festhalten oder zu weites Ausgeben. qaṣd bedeutet: das Maß; ein Unterrichtswort, kein zusätzlicher Vers. Was nicht behauptet wird: Der Vers ist kein Haushaltsplan und keine Zahl von Geld. Der gespeicherte Ausdruck endet mit einem Anschlusswort. Wir bauen darauf keine Wirtschaftsstunde. Kaufen bleibt bei den Eltern. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Nicht jeden Wunsch sofort erfüllen. Das Lernziel ist: Nicht jeden Wunsch erfüllen wir sofort. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, die Hand nicht an den Hals gefesselt und sie nicht völlig geöffnet zu lassen, sonst sitzt man tadelnswert und bloß da. Alltag: Ein Kind sieht ein Spielzeug im Regal und möchte es sofort. Es wartet und fragt zu Hause. Aufgabe: Wir üben den Satz: Ich warte und frage. yad bedeutet: Hand; hier das Bild für zu festes Festhalten oder zu weites Ausgeben. qaṣd bedeutet: das Maß; ein Unterrichtswort, kein zusätzlicher Vers. Was nicht behauptet wird: Der Vers ist kein Haushaltsplan und keine Zahl von Geld. Der gespeicherte Ausdruck endet mit einem Anschlusswort. Wir bauen darauf keine Wirtschaftsstunde. Kaufen bleibt bei den Eltern.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 17:29.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -14700,7 +14700,7 @@ const additions=
         "situation": "Ein Kind sieht ein Spielzeug im Regal und möchte es sofort. Es wartet und fragt zu Hause.",
         "practice": "Wir üben den Satz: Ich warte und frage.",
         "summary": "Belegt ist Qurʾān 17:29. Ungeprüft bleibt: Der Vers ist kein Haushaltsplan und keine Zahl von Geld.",
-        "audioScript": "Für die älteren Kinder. Nicht jeden Wunsch sofort erfüllen. Der Vers sagt, die Hand nicht an den Hals gefesselt und sie nicht völlig geöffnet zu lassen, sonst sitzt man tadelnswert und bloß da. Nicht belegt und deshalb nicht behauptet: Der Vers ist kein Haushaltsplan und keine Zahl von Geld."
+        "audioScript": "Nicht jeden Wunsch sofort erfüllen. Der Vers sagt, die Hand nicht an den Hals gefesselt und sie nicht völlig geöffnet zu lassen, sonst sitzt man tadelnswert und bloß da. Nicht belegt und deshalb nicht behauptet: Der Vers ist kein Haushaltsplan und keine Zahl von Geld."
       }
     },
     "questions": {
@@ -14836,7 +14836,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Dieselbe Fundstelle trägt hier das Stehen. Wie die Hände genau liegen, steht in diesem Vers nicht. Das bleibt ungeprüft und wird nicht erfunden. al-Mughnī wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 118 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+      "note": "Dieselbe Fundstelle trägt hier das Stehen. Wie die Hände genau liegen, steht in diesem Vers nicht. Das bleibt ungeprüft und wird nicht erfunden. al-Mughnī wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 118 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
       "sameLocusAsSlot": 118
     },
     "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
@@ -14870,7 +14870,7 @@ const additions=
       },
       "6-8": {
         "goal": "Wir stellen uns ruhig hin, wenn wir das Gebet üben.",
-        "intro": "Heute geht es um Zum Gebet stehen. Wir stellen uns ruhig hin, wenn wir das Gebet üben. Wir lesen Qurʾān 2:238. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe Stelle wie in der Stunde über den Gebetsplatz fordert, die Gebete zu hüten und vor Allah demütig zu stehen. So kann das im Alltag aussehen: Die Kinder stehen nebeneinander, die Füße ruhig, die Hände nicht in den Taschen, und schauen nicht wild umher. Die Aufgabe: Wir üben nur das ruhige Stehen. Die weiteren Bewegungen kommen in den späteren Stunden mit der Lehrperson. qawmah bedeutet: das Stehen; Unterrichtswort. qunūt bedeutet: Demut im Stehen, vom Wort des Verses. Die Grenze der Stunde: Dieselbe Fundstelle trägt hier das Stehen. Wie die Hände genau liegen, steht in diesem Vers nicht. Das bleibt ungeprüft und wird nicht erfunden. al-Mughnī wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 118 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Zum Gebet stehen. Wir stellen uns ruhig hin, wenn wir das Gebet üben. Wir lesen Qurʾān 2:238. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe Stelle wie in der Stunde über den Gebetsplatz fordert, die Gebete zu hüten und vor Allah demütig zu stehen. So kann das im Alltag aussehen: Die Kinder stehen nebeneinander, die Füße ruhig, die Hände nicht in den Taschen, und schauen nicht wild umher. Die Aufgabe: Wir üben nur das ruhige Stehen. Die weiteren Bewegungen kommen in den späteren Stunden mit der Lehrperson. qawmah bedeutet: das Stehen; Unterrichtswort. qunūt bedeutet: Demut im Stehen, vom Wort des Verses. Die Grenze der Stunde: Dieselbe Fundstelle trägt hier das Stehen. Wie die Hände genau liegen, steht in diesem Vers nicht. Das bleibt ungeprüft und wird nicht erfunden. al-Mughnī wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 118 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
         "lines": [
           "Qurʾān 2:238 ist die gelesene Stelle.",
           "Dieselbe Stelle wie in der Stunde über den Gebetsplatz fordert, die Gebete zu hüten und vor Allah demütig zu stehen.",
@@ -14896,7 +14896,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Zum Gebet stehen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Zum Gebet stehen. Das Lernziel ist: Wir stellen uns ruhig hin, wenn wir das Gebet üben. Die Seite https://www.islamweb.net/ar/library/content/49/205 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:238. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe Stelle wie in der Stunde über den Gebetsplatz fordert, die Gebete zu hüten und vor Allah demütig zu stehen. Alltag: Die Kinder stehen nebeneinander, die Füße ruhig, die Hände nicht in den Taschen, und schauen nicht wild umher. Aufgabe: Wir üben nur das ruhige Stehen. Die weiteren Bewegungen kommen in den späteren Stunden mit der Lehrperson. qawmah bedeutet: das Stehen; Unterrichtswort. qunūt bedeutet: Demut im Stehen, vom Wort des Verses. Was nicht behauptet wird: Dieselbe Fundstelle trägt hier das Stehen. Wie die Hände genau liegen, steht in diesem Vers nicht. Das bleibt ungeprüft und wird nicht erfunden. al-Mughnī wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 118 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Zum Gebet stehen. Das Lernziel ist: Wir stellen uns ruhig hin, wenn wir das Gebet üben. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe Stelle wie in der Stunde über den Gebetsplatz fordert, die Gebete zu hüten und vor Allah demütig zu stehen. Alltag: Die Kinder stehen nebeneinander, die Füße ruhig, die Hände nicht in den Taschen, und schauen nicht wild umher. Aufgabe: Wir üben nur das ruhige Stehen. Die weiteren Bewegungen kommen in den späteren Stunden mit der Lehrperson. qawmah bedeutet: das Stehen; Unterrichtswort. qunūt bedeutet: Demut im Stehen, vom Wort des Verses. Was nicht behauptet wird: Dieselbe Fundstelle trägt hier das Stehen. Wie die Hände genau liegen, steht in diesem Vers nicht. Das bleibt ungeprüft und wird nicht erfunden. al-Mughnī wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 118 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 2:238.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -14918,7 +14918,7 @@ const additions=
         "situation": "Die Kinder stehen nebeneinander, die Füße ruhig, die Hände nicht in den Taschen, und schauen nicht wild umher.",
         "practice": "Wir üben nur das ruhige Stehen. Die weiteren Bewegungen kommen in den späteren Stunden mit der Lehrperson.",
         "summary": "Belegt ist Qurʾān 2:238. Ungeprüft bleibt: Dieselbe Fundstelle trägt hier das Stehen.",
-        "audioScript": "Für die älteren Kinder. Zum Gebet stehen. Dieselbe Stelle wie in der Stunde über den Gebetsplatz fordert, die Gebete zu hüten und vor Allah demütig zu stehen. Nicht belegt und deshalb nicht behauptet: Dieselbe Fundstelle trägt hier das Stehen."
+        "audioScript": "Zum Gebet stehen. Dieselbe Stelle wie in der Stunde über den Gebetsplatz fordert, die Gebete zu hüten und vor Allah demütig zu stehen. Nicht belegt und deshalb nicht behauptet: Dieselbe Fundstelle trägt hier das Stehen."
       }
     },
     "questions": {
@@ -15054,7 +15054,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die Seite erklärt den Vers damit, dass Allah ihnen befohlen hat zu dienen und sie nicht aus Bedürftigkeit erschaffen hat. Wir übernehmen diese Richtung und erfinden keine weitere Geschichten über die Jinn. Für die Jüngsten sagen wir nur: Wir sind da, um Allah zu dienen. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Die Seite erklärt den Vers damit, dass Allah ihnen befohlen hat zu dienen und sie nicht aus Bedürftigkeit erschaffen hat. Wir übernehmen diese Richtung und erfinden keine weitere Geschichten über die Jinn. Für die Jüngsten sagen wir nur: Wir sind da, um Allah zu dienen. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Wir erfinden keine zusätzliche Geschichte.",
     "sample": "ʿIbādah bedeutet, Allah so zu dienen, wie Er es will.",
@@ -15087,7 +15087,7 @@ const additions=
       },
       "6-8": {
         "goal": "ʿIbādah bedeutet, Allah so zu dienen, wie Er es will.",
-        "intro": "Heute geht es um Die Bedeutung von ʿIbādah. ʿIbādah bedeutet, Allah so zu dienen, wie Er es will. Wir lesen Qurʾān 51:56. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt: Ich habe die Jinn und die Menschen nur erschaffen, damit sie Mir dienen. So kann das im Alltag aussehen: Ein Kind erklärt: Beten ist Dienen. Jemanden um ein Glas Wasser bitten ist gewöhnliche Hilfe. Die Aufgabe: Wir sortieren zwei Beispiele: Gebet zu Allah, und ein Mensch, der uns den Stift reicht. ʿibādah bedeutet: Anbetung, das Dienen Allahs. ḫalaqa bedeutet: erschaffen. Die Grenze der Stunde: Die Seite erklärt den Vers damit, dass Allah ihnen befohlen hat zu dienen und sie nicht aus Bedürftigkeit erschaffen hat. Wir übernehmen diese Richtung und erfinden keine weitere Geschichten über die Jinn. Für die Jüngsten sagen wir nur: Wir sind da, um Allah zu dienen. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Die Bedeutung von ʿIbādah. ʿIbādah bedeutet, Allah so zu dienen, wie Er es will. Wir lesen Qurʾān 51:56. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt: Ich habe die Jinn und die Menschen nur erschaffen, damit sie Mir dienen. So kann das im Alltag aussehen: Ein Kind erklärt: Beten ist Dienen. Jemanden um ein Glas Wasser bitten ist gewöhnliche Hilfe. Die Aufgabe: Wir sortieren zwei Beispiele: Gebet zu Allah, und ein Mensch, der uns den Stift reicht. ʿibādah bedeutet: Anbetung, das Dienen Allahs. ḫalaqa bedeutet: erschaffen. Die Grenze der Stunde: Die Seite erklärt den Vers damit, dass Allah ihnen befohlen hat zu dienen und sie nicht aus Bedürftigkeit erschaffen hat. Wir übernehmen diese Richtung und erfinden keine weitere Geschichten über die Jinn. Für die Jüngsten sagen wir nur: Wir sind da, um Allah zu dienen.",
         "lines": [
           "Qurʾān 51:56 ist die gelesene Stelle.",
           "Der Vers sagt: Ich habe die Jinn und die Menschen nur erschaffen, damit sie Mir dienen.",
@@ -15113,7 +15113,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Die Bedeutung von ʿIbādah von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Die Bedeutung von ʿIbādah. Das Lernziel ist: ʿIbādah bedeutet, Allah so zu dienen, wie Er es will. Die Seite https://www.islamweb.net/ar/library/content/49/1772 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 51:56. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt: Ich habe die Jinn und die Menschen nur erschaffen, damit sie Mir dienen. Alltag: Ein Kind erklärt: Beten ist Dienen. Jemanden um ein Glas Wasser bitten ist gewöhnliche Hilfe. Aufgabe: Wir sortieren zwei Beispiele: Gebet zu Allah, und ein Mensch, der uns den Stift reicht. ʿibādah bedeutet: Anbetung, das Dienen Allahs. ḫalaqa bedeutet: erschaffen. Was nicht behauptet wird: Die Seite erklärt den Vers damit, dass Allah ihnen befohlen hat zu dienen und sie nicht aus Bedürftigkeit erschaffen hat. Wir übernehmen diese Richtung und erfinden keine weitere Geschichten über die Jinn. Für die Jüngsten sagen wir nur: Wir sind da, um Allah zu dienen. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Die Bedeutung von ʿIbādah. Das Lernziel ist: ʿIbādah bedeutet, Allah so zu dienen, wie Er es will. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt: Ich habe die Jinn und die Menschen nur erschaffen, damit sie Mir dienen. Alltag: Ein Kind erklärt: Beten ist Dienen. Jemanden um ein Glas Wasser bitten ist gewöhnliche Hilfe. Aufgabe: Wir sortieren zwei Beispiele: Gebet zu Allah, und ein Mensch, der uns den Stift reicht. ʿibādah bedeutet: Anbetung, das Dienen Allahs. ḫalaqa bedeutet: erschaffen. Was nicht behauptet wird: Die Seite erklärt den Vers damit, dass Allah ihnen befohlen hat zu dienen und sie nicht aus Bedürftigkeit erschaffen hat. Wir übernehmen diese Richtung und erfinden keine weitere Geschichten über die Jinn. Für die Jüngsten sagen wir nur: Wir sind da, um Allah zu dienen.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 51:56.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -15135,7 +15135,7 @@ const additions=
         "situation": "Ein Kind erklärt: Beten ist Dienen. Jemanden um ein Glas Wasser bitten ist gewöhnliche Hilfe.",
         "practice": "Wir sortieren zwei Beispiele: Gebet zu Allah, und ein Mensch, der uns den Stift reicht.",
         "summary": "Belegt ist Qurʾān 51:56. Ungeprüft bleibt: Die Seite erklärt den Vers damit, dass Allah ihnen befohlen hat zu dienen und sie nicht aus Bedürftigkeit erschaffen hat.",
-        "audioScript": "Für die älteren Kinder. Die Bedeutung von ʿIbādah. Der Vers sagt: Ich habe die Jinn und die Menschen nur erschaffen, damit sie Mir dienen. Nicht belegt und deshalb nicht behauptet: Die Seite erklärt den Vers damit, dass Allah ihnen befohlen hat zu dienen und sie nicht aus Bedürftigkeit erschaffen hat."
+        "audioScript": "Die Bedeutung von ʿIbādah. Der Vers sagt: Ich habe die Jinn und die Menschen nur erschaffen, damit sie Mir dienen. Nicht belegt und deshalb nicht behauptet: Die Seite erklärt den Vers damit, dass Allah ihnen befohlen hat zu dienen und sie nicht aus Bedürftigkeit erschaffen hat."
       }
     },
     "questions": {
@@ -15271,7 +15271,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers steht nicht in einem Scheidungszusammenhang, den wir dafür heranziehen würden. Eine Unglückstheologie für kleine Kinder gibt es nicht. Die Seite setzt den Vers neben einen anderen Ausdruck; wir übernehmen keine zusätzliche Behauptung. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Vers steht nicht in einem Scheidungszusammenhang, den wir dafür heranziehen würden. Eine Unglückstheologie für kleine Kinder gibt es nicht. Die Seite setzt den Vers neben einen anderen Ausdruck; wir übernehmen keine zusätzliche Behauptung. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Allah weiß und bestimmt.",
@@ -15304,7 +15304,7 @@ const additions=
       },
       "6-8": {
         "goal": "Allah weiß und bestimmt.",
-        "intro": "Heute geht es um Īmān an al-Qadar. Allah weiß und bestimmt. Wir lesen Qurʾān 54:49. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers lautet: Wir haben jedes Ding in einem Maß erschaffen. So kann das im Alltag aussehen: Ein Kind fragt, warum der Ausflug ins Wasser fiel. Die Antwort bleibt: Allah weiß mehr als wir. Wir schimpfen niemanden mit diesem Vers. Die Aufgabe: Wir wiederholen den kurzen Sinn und stellen keine Warum-Kette an. qadar bedeutet: Maß, Bestimmung. ḫalaqnā bedeutet: Wir haben erschaffen. Die Grenze der Stunde: Der Vers steht nicht in einem Scheidungszusammenhang, den wir dafür heranziehen würden. Eine Unglückstheologie für kleine Kinder gibt es nicht. Die Seite setzt den Vers neben einen anderen Ausdruck; wir übernehmen keine zusätzliche Behauptung. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Īmān an al-Qadar. Allah weiß und bestimmt. Wir lesen Qurʾān 54:49. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers lautet: Wir haben jedes Ding in einem Maß erschaffen. So kann das im Alltag aussehen: Ein Kind fragt, warum der Ausflug ins Wasser fiel. Die Antwort bleibt: Allah weiß mehr als wir. Wir schimpfen niemanden mit diesem Vers. Die Aufgabe: Wir wiederholen den kurzen Sinn und stellen keine Warum-Kette an. qadar bedeutet: Maß, Bestimmung. ḫalaqnā bedeutet: Wir haben erschaffen. Die Grenze der Stunde: Der Vers steht nicht in einem Scheidungszusammenhang, den wir dafür heranziehen würden. Eine Unglückstheologie für kleine Kinder gibt es nicht. Die Seite setzt den Vers neben einen anderen Ausdruck; wir übernehmen keine zusätzliche Behauptung.",
         "lines": [
           "Qurʾān 54:49 ist die gelesene Stelle.",
           "Der Vers lautet: Wir haben jedes Ding in einem Maß erschaffen.",
@@ -15330,7 +15330,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Īmān an al-Qadar von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Īmān an al-Qadar. Das Lernziel ist: Allah weiß und bestimmt. Die Seite https://www.islamweb.net/ar/library/content/49/1794 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 54:49. Sinngemäß, keine beglaubigte Übersetzung: Der Vers lautet: Wir haben jedes Ding in einem Maß erschaffen. Alltag: Ein Kind fragt, warum der Ausflug ins Wasser fiel. Die Antwort bleibt: Allah weiß mehr als wir. Wir schimpfen niemanden mit diesem Vers. Aufgabe: Wir wiederholen den kurzen Sinn und stellen keine Warum-Kette an. qadar bedeutet: Maß, Bestimmung. ḫalaqnā bedeutet: Wir haben erschaffen. Was nicht behauptet wird: Der Vers steht nicht in einem Scheidungszusammenhang, den wir dafür heranziehen würden. Eine Unglückstheologie für kleine Kinder gibt es nicht. Die Seite setzt den Vers neben einen anderen Ausdruck; wir übernehmen keine zusätzliche Behauptung. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Īmān an al-Qadar. Das Lernziel ist: Allah weiß und bestimmt. Sinngemäß, keine beglaubigte Übersetzung: Der Vers lautet: Wir haben jedes Ding in einem Maß erschaffen. Alltag: Ein Kind fragt, warum der Ausflug ins Wasser fiel. Die Antwort bleibt: Allah weiß mehr als wir. Wir schimpfen niemanden mit diesem Vers. Aufgabe: Wir wiederholen den kurzen Sinn und stellen keine Warum-Kette an. qadar bedeutet: Maß, Bestimmung. ḫalaqnā bedeutet: Wir haben erschaffen. Was nicht behauptet wird: Der Vers steht nicht in einem Scheidungszusammenhang, den wir dafür heranziehen würden. Eine Unglückstheologie für kleine Kinder gibt es nicht. Die Seite setzt den Vers neben einen anderen Ausdruck; wir übernehmen keine zusätzliche Behauptung.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 54:49.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -15352,7 +15352,7 @@ const additions=
         "situation": "Ein Kind fragt, warum der Ausflug ins Wasser fiel. Die Antwort bleibt: Allah weiß mehr als wir. Wir schimpfen niemanden mit diesem Vers.",
         "practice": "Wir wiederholen den kurzen Sinn und stellen keine Warum-Kette an.",
         "summary": "Belegt ist Qurʾān 54:49. Ungeprüft bleibt: Der Vers steht nicht in einem Scheidungszusammenhang, den wir dafür heranziehen würden.",
-        "audioScript": "Für die älteren Kinder. Īmān an al-Qadar. Der Vers lautet: Wir haben jedes Ding in einem Maß erschaffen. Nicht belegt und deshalb nicht behauptet: Der Vers steht nicht in einem Scheidungszusammenhang, den wir dafür heranziehen würden."
+        "audioScript": "Īmān an al-Qadar. Der Vers lautet: Wir haben jedes Ding in einem Maß erschaffen. Nicht belegt und deshalb nicht behauptet: Der Vers steht nicht in einem Scheidungszusammenhang, den wir dafür heranziehen würden."
       }
     },
     "questions": {
@@ -15488,7 +15488,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Eine andere Stelle über die Aufrichtigkeit wurde schon benutzt. Hier ist die Fundstelle 39:2. Wir erfinden kein Punktsystem für die Woche. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Eine andere Stelle über die Aufrichtigkeit wurde schon benutzt. Hier ist die Fundstelle 39:2. Wir erfinden kein Punktsystem für die Woche. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Am Ende der Woche fragen wir: Für wen habe ich diese gute Tat getan?",
@@ -15521,7 +15521,7 @@ const additions=
       },
       "6-8": {
         "goal": "Am Ende der Woche fragen wir: Für wen habe ich diese gute Tat getan?",
-        "intro": "Heute geht es um Ikhlāṣ im Wochenrückblick. Am Ende der Woche fragen wir: Für wen habe ich diese gute Tat getan? Wir lesen Qurʾān 39:2. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass Allah das Buch mit der Wahrheit herabgesandt hat, und: Diene Allah, indem du Ihm gegenüber aufrichtig im Dīn bist. So kann das im Alltag aussehen: Ein Kind nennt eine Tat aus der Woche und sagt, ob es sie für Allah oder für das Lob getan hat. Es muss nichts Lautes erzählen. Die Aufgabe: Wir schreiben ein Wort auf einen Zettel oder sagen es leise. muḫliṣan bedeutet: aufrichtig. dīn bedeutet: das Dienen Allahs. Die Grenze der Stunde: Eine andere Stelle über die Aufrichtigkeit wurde schon benutzt. Hier ist die Fundstelle 39:2. Wir erfinden kein Punktsystem für die Woche. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Ikhlāṣ im Wochenrückblick. Am Ende der Woche fragen wir: Für wen habe ich diese gute Tat getan? Wir lesen Qurʾān 39:2. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass Allah das Buch mit der Wahrheit herabgesandt hat, und: Diene Allah, indem du Ihm gegenüber aufrichtig im Dīn bist. So kann das im Alltag aussehen: Ein Kind nennt eine Tat aus der Woche und sagt, ob es sie für Allah oder für das Lob getan hat. Es muss nichts Lautes erzählen. Die Aufgabe: Wir schreiben ein Wort auf einen Zettel oder sagen es leise. muḫliṣan bedeutet: aufrichtig. dīn bedeutet: das Dienen Allahs. Die Grenze der Stunde: Eine andere Stelle über die Aufrichtigkeit wurde schon benutzt. Hier ist die Fundstelle 39:2. Wir erfinden kein Punktsystem für die Woche.",
         "lines": [
           "Qurʾān 39:2 ist die gelesene Stelle.",
           "Der Vers sagt, dass Allah das Buch mit der Wahrheit herabgesandt hat, und: Diene Allah, indem du Ihm gegenüber aufrichtig im Dīn bist.",
@@ -15547,7 +15547,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Ikhlāṣ im Wochenrückblick von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Ikhlāṣ im Wochenrückblick. Das Lernziel ist: Am Ende der Woche fragen wir: Für wen habe ich diese gute Tat getan? Die Seite https://www.islamweb.net/ar/library/content/49/1611 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 39:2. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass Allah das Buch mit der Wahrheit herabgesandt hat, und: Diene Allah, indem du Ihm gegenüber aufrichtig im Dīn bist. Alltag: Ein Kind nennt eine Tat aus der Woche und sagt, ob es sie für Allah oder für das Lob getan hat. Es muss nichts Lautes erzählen. Aufgabe: Wir schreiben ein Wort auf einen Zettel oder sagen es leise. muḫliṣan bedeutet: aufrichtig. dīn bedeutet: das Dienen Allahs. Was nicht behauptet wird: Eine andere Stelle über die Aufrichtigkeit wurde schon benutzt. Hier ist die Fundstelle 39:2. Wir erfinden kein Punktsystem für die Woche. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Ikhlāṣ im Wochenrückblick. Das Lernziel ist: Am Ende der Woche fragen wir: Für wen habe ich diese gute Tat getan? Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass Allah das Buch mit der Wahrheit herabgesandt hat, und: Diene Allah, indem du Ihm gegenüber aufrichtig im Dīn bist. Alltag: Ein Kind nennt eine Tat aus der Woche und sagt, ob es sie für Allah oder für das Lob getan hat. Es muss nichts Lautes erzählen. Aufgabe: Wir schreiben ein Wort auf einen Zettel oder sagen es leise. muḫliṣan bedeutet: aufrichtig. dīn bedeutet: das Dienen Allahs. Was nicht behauptet wird: Eine andere Stelle über die Aufrichtigkeit wurde schon benutzt. Hier ist die Fundstelle 39:2. Wir erfinden kein Punktsystem für die Woche.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 39:2.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -15569,7 +15569,7 @@ const additions=
         "situation": "Ein Kind nennt eine Tat aus der Woche und sagt, ob es sie für Allah oder für das Lob getan hat. Es muss nichts Lautes erzählen.",
         "practice": "Wir schreiben ein Wort auf einen Zettel oder sagen es leise.",
         "summary": "Belegt ist Qurʾān 39:2. Ungeprüft bleibt: Eine andere Stelle über die Aufrichtigkeit wurde schon benutzt.",
-        "audioScript": "Für die älteren Kinder. Ikhlāṣ im Wochenrückblick. Der Vers sagt, dass Allah das Buch mit der Wahrheit herabgesandt hat, und: Diene Allah, indem du Ihm gegenüber aufrichtig im Dīn bist. Nicht belegt und deshalb nicht behauptet: Eine andere Stelle über die Aufrichtigkeit wurde schon benutzt."
+        "audioScript": "Ikhlāṣ im Wochenrückblick. Der Vers sagt, dass Allah das Buch mit der Wahrheit herabgesandt hat, und: Diene Allah, indem du Ihm gegenüber aufrichtig im Dīn bist. Nicht belegt und deshalb nicht behauptet: Eine andere Stelle über die Aufrichtigkeit wurde schon benutzt."
       }
     },
     "questions": {
@@ -15705,7 +15705,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers selbst spricht vom Friedenstiften zwischen Geschwistern. Den Glückwunsch nennen wir als gutes Verhalten dazu, nicht als Wortlaut. Dieselbe Fundstelle, anderes Lernziel. Dieselbe gelesene Fundstelle wurde schon in Slot 150 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+      "note": "Der Vers selbst spricht vom Friedenstiften zwischen Geschwistern. Den Glückwunsch nennen wir als gutes Verhalten dazu, nicht als Wortlaut. Dieselbe Fundstelle, anderes Lernziel. Dieselbe gelesene Fundstelle wurde schon in Slot 150 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
       "sameLocusAsSlot": 150
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
@@ -15739,7 +15739,7 @@ const additions=
       },
       "6-8": {
         "goal": "Wenn jemand etwas gut gemacht hat, freuen wir uns mit.",
-        "intro": "Heute geht es um Freude für andere empfinden. Wenn jemand etwas gut gemacht hat, freuen wir uns mit. Wir lesen Qurʾān 49:10. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe Stelle wie in der Versöhnungsstunde sagt, dass die Glaubenden Geschwister sind. Die Freude miteinander ist die Anwendung der Stunde, nicht ein extra Satz des Verses. So kann das im Alltag aussehen: Ein Kind zeigt eine Zeichnung. Das andere sagt: Die ist dir gelungen. Die Aufgabe: Wir üben einen Glückwunsch ohne einen Witz über das Bild. faraḥ bedeutet: Freude. aḫ bedeutet: Bruder, Geschwister im Glauben. Die Grenze der Stunde: Der Vers selbst spricht vom Friedenstiften zwischen Geschwistern. Den Glückwunsch nennen wir als gutes Verhalten dazu, nicht als Wortlaut. Dieselbe Fundstelle, anderes Lernziel. Dieselbe gelesene Fundstelle wurde schon in Slot 150 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Freude für andere empfinden. Wenn jemand etwas gut gemacht hat, freuen wir uns mit. Wir lesen Qurʾān 49:10. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe Stelle wie in der Versöhnungsstunde sagt, dass die Glaubenden Geschwister sind. Die Freude miteinander ist die Anwendung der Stunde, nicht ein extra Satz des Verses. So kann das im Alltag aussehen: Ein Kind zeigt eine Zeichnung. Das andere sagt: Die ist dir gelungen. Die Aufgabe: Wir üben einen Glückwunsch ohne einen Witz über das Bild. faraḥ bedeutet: Freude. aḫ bedeutet: Bruder, Geschwister im Glauben. Die Grenze der Stunde: Der Vers selbst spricht vom Friedenstiften zwischen Geschwistern. Den Glückwunsch nennen wir als gutes Verhalten dazu, nicht als Wortlaut. Dieselbe Fundstelle, anderes Lernziel. Dieselbe gelesene Fundstelle wurde schon in Slot 150 mit einem anderen Lernziel verwendet.",
         "lines": [
           "Qurʾān 49:10 ist die gelesene Stelle.",
           "Dieselbe Stelle wie in der Versöhnungsstunde sagt, dass die Glaubenden Geschwister sind.",
@@ -15765,7 +15765,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Freude für andere empfinden von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Freude für andere empfinden. Das Lernziel ist: Wenn jemand etwas gut gemacht hat, freuen wir uns mit. Die Seite https://www.islamweb.net/ar/library/content/49/1753 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 49:10. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe Stelle wie in der Versöhnungsstunde sagt, dass die Glaubenden Geschwister sind. Die Freude miteinander ist die Anwendung der Stunde, nicht ein extra Satz des Verses. Alltag: Ein Kind zeigt eine Zeichnung. Das andere sagt: Die ist dir gelungen. Aufgabe: Wir üben einen Glückwunsch ohne einen Witz über das Bild. faraḥ bedeutet: Freude. aḫ bedeutet: Bruder, Geschwister im Glauben. Was nicht behauptet wird: Der Vers selbst spricht vom Friedenstiften zwischen Geschwistern. Den Glückwunsch nennen wir als gutes Verhalten dazu, nicht als Wortlaut. Dieselbe Fundstelle, anderes Lernziel. Dieselbe gelesene Fundstelle wurde schon in Slot 150 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Freude für andere empfinden. Das Lernziel ist: Wenn jemand etwas gut gemacht hat, freuen wir uns mit. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe Stelle wie in der Versöhnungsstunde sagt, dass die Glaubenden Geschwister sind. Die Freude miteinander ist die Anwendung der Stunde, nicht ein extra Satz des Verses. Alltag: Ein Kind zeigt eine Zeichnung. Das andere sagt: Die ist dir gelungen. Aufgabe: Wir üben einen Glückwunsch ohne einen Witz über das Bild. faraḥ bedeutet: Freude. aḫ bedeutet: Bruder, Geschwister im Glauben. Was nicht behauptet wird: Der Vers selbst spricht vom Friedenstiften zwischen Geschwistern. Den Glückwunsch nennen wir als gutes Verhalten dazu, nicht als Wortlaut. Dieselbe Fundstelle, anderes Lernziel. Dieselbe gelesene Fundstelle wurde schon in Slot 150 mit einem anderen Lernziel verwendet.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 49:10.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -15787,7 +15787,7 @@ const additions=
         "situation": "Ein Kind zeigt eine Zeichnung. Das andere sagt: Die ist dir gelungen.",
         "practice": "Wir üben einen Glückwunsch ohne einen Witz über das Bild.",
         "summary": "Belegt ist Qurʾān 49:10. Ungeprüft bleibt: Der Vers selbst spricht vom Friedenstiften zwischen Geschwistern.",
-        "audioScript": "Für die älteren Kinder. Freude für andere empfinden. Dieselbe Stelle wie in der Versöhnungsstunde sagt, dass die Glaubenden Geschwister sind. Nicht belegt und deshalb nicht behauptet: Der Vers selbst spricht vom Friedenstiften zwischen Geschwistern."
+        "audioScript": "Freude für andere empfinden. Dieselbe Stelle wie in der Versöhnungsstunde sagt, dass die Glaubenden Geschwister sind. Nicht belegt und deshalb nicht behauptet: Der Vers selbst spricht vom Friedenstiften zwischen Geschwistern."
       }
     },
     "questions": {
@@ -15923,7 +15923,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Dieselbe Fundstelle trägt hier das Essen, nicht die Moscheeruhe. Eine Zahl von Bissen oder eine Sitzregel steht nicht im Vers. Dieselbe gelesene Fundstelle wurde schon in Slot 103 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+      "note": "Dieselbe Fundstelle trägt hier das Essen, nicht die Moscheeruhe. Eine Zahl von Bissen oder eine Sitzregel steht nicht im Vers. Dieselbe gelesene Fundstelle wurde schon in Slot 103 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
       "sameLocusAsSlot": 103
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
@@ -15957,7 +15957,7 @@ const additions=
       },
       "6-8": {
         "goal": "Mit Essen spielen wir nicht.",
-        "intro": "Heute geht es um Mit Essen nicht spielen. Mit Essen spielen wir nicht. Wir lesen Qurʾān 7:31. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe Stelle wie in der Moscheestunde sagt auch: Esst und trinkt und seid nicht maßlos. Er liebt die Maßlosen nicht. So kann das im Alltag aussehen: Ein Kind will das Brot zu einer Figur drücken. Es lässt es liegen und isst einen Bissen oder gibt es zurück. Die Aufgabe: Wir üben, das Essen auf dem Teller zu lassen und nicht damit zu werfen. kulū bedeutet: esst. lā tusrifū bedeutet: seid nicht maßlos. Die Grenze der Stunde: Dieselbe Fundstelle trägt hier das Essen, nicht die Moscheeruhe. Eine Zahl von Bissen oder eine Sitzregel steht nicht im Vers. Dieselbe gelesene Fundstelle wurde schon in Slot 103 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Mit Essen nicht spielen. Mit Essen spielen wir nicht. Wir lesen Qurʾān 7:31. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe Stelle wie in der Moscheestunde sagt auch: Esst und trinkt und seid nicht maßlos. Er liebt die Maßlosen nicht. So kann das im Alltag aussehen: Ein Kind will das Brot zu einer Figur drücken. Es lässt es liegen und isst einen Bissen oder gibt es zurück. Die Aufgabe: Wir üben, das Essen auf dem Teller zu lassen und nicht damit zu werfen. kulū bedeutet: esst. lā tusrifū bedeutet: seid nicht maßlos. Die Grenze der Stunde: Dieselbe Fundstelle trägt hier das Essen, nicht die Moscheeruhe. Eine Zahl von Bissen oder eine Sitzregel steht nicht im Vers. Dieselbe gelesene Fundstelle wurde schon in Slot 103 mit einem anderen Lernziel verwendet.",
         "lines": [
           "Qurʾān 7:31 ist die gelesene Stelle.",
           "Dieselbe Stelle wie in der Moscheestunde sagt auch: Esst und trinkt und seid nicht maßlos.",
@@ -15983,7 +15983,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Mit Essen nicht spielen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Mit Essen nicht spielen. Das Lernziel ist: Mit Essen spielen wir nicht. Die Seite https://www.islamweb.net/ar/library/content/49/504 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 7:31. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe Stelle wie in der Moscheestunde sagt auch: Esst und trinkt und seid nicht maßlos. Er liebt die Maßlosen nicht. Alltag: Ein Kind will das Brot zu einer Figur drücken. Es lässt es liegen und isst einen Bissen oder gibt es zurück. Aufgabe: Wir üben, das Essen auf dem Teller zu lassen und nicht damit zu werfen. kulū bedeutet: esst. lā tusrifū bedeutet: seid nicht maßlos. Was nicht behauptet wird: Dieselbe Fundstelle trägt hier das Essen, nicht die Moscheeruhe. Eine Zahl von Bissen oder eine Sitzregel steht nicht im Vers. Dieselbe gelesene Fundstelle wurde schon in Slot 103 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Mit Essen nicht spielen. Das Lernziel ist: Mit Essen spielen wir nicht. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe Stelle wie in der Moscheestunde sagt auch: Esst und trinkt und seid nicht maßlos. Er liebt die Maßlosen nicht. Alltag: Ein Kind will das Brot zu einer Figur drücken. Es lässt es liegen und isst einen Bissen oder gibt es zurück. Aufgabe: Wir üben, das Essen auf dem Teller zu lassen und nicht damit zu werfen. kulū bedeutet: esst. lā tusrifū bedeutet: seid nicht maßlos. Was nicht behauptet wird: Dieselbe Fundstelle trägt hier das Essen, nicht die Moscheeruhe. Eine Zahl von Bissen oder eine Sitzregel steht nicht im Vers. Dieselbe gelesene Fundstelle wurde schon in Slot 103 mit einem anderen Lernziel verwendet.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 7:31.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -16005,7 +16005,7 @@ const additions=
         "situation": "Ein Kind will das Brot zu einer Figur drücken. Es lässt es liegen und isst einen Bissen oder gibt es zurück.",
         "practice": "Wir üben, das Essen auf dem Teller zu lassen und nicht damit zu werfen.",
         "summary": "Belegt ist Qurʾān 7:31. Ungeprüft bleibt: Dieselbe Fundstelle trägt hier das Essen, nicht die Moscheeruhe.",
-        "audioScript": "Für die älteren Kinder. Mit Essen nicht spielen. Dieselbe Stelle wie in der Moscheestunde sagt auch: Esst und trinkt und seid nicht maßlos. Nicht belegt und deshalb nicht behauptet: Dieselbe Fundstelle trägt hier das Essen, nicht die Moscheeruhe."
+        "audioScript": "Mit Essen nicht spielen. Dieselbe Stelle wie in der Moscheestunde sagt auch: Esst und trinkt und seid nicht maßlos. Nicht belegt und deshalb nicht behauptet: Dieselbe Fundstelle trägt hier das Essen, nicht die Moscheeruhe."
       }
     },
     "questions": {
@@ -16141,7 +16141,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers ist an den Propheten gerichtet. Wir machen daraus keine Regel, dass ein Kind alles allein können muss. Was zu schwer oder gefährlich ist, bleibt bei den Erwachsenen. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Vers ist an den Propheten gerichtet. Wir machen daraus keine Regel, dass ein Kind alles allein können muss. Was zu schwer oder gefährlich ist, bleibt bei den Erwachsenen. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Eine Aufgabe, die zum Alter passt, führen wir Schritt für Schritt selbst aus.",
@@ -16174,7 +16174,7 @@ const additions=
       },
       "6-8": {
         "goal": "Eine Aufgabe, die zum Alter passt, führen wir Schritt für Schritt selbst aus.",
-        "intro": "Heute geht es um Selbstständigkeit Schritt für Schritt. Eine Aufgabe, die zum Alter passt, führen wir Schritt für Schritt selbst aus. Wir lesen Qurʾān 94:7. Sinngemäß, ohne beglaubigte Übersetzung: Der gespeicherte Ausdruck sagt: Wenn du fertig bist, dann mühe dich, und zu deinem Herrn hin wende dich begehrend. So kann das im Alltag aussehen: Ein Kind zieht die Schuhe selbst an und bittet nur, wenn der Knoten noch zu schwer ist. Die Aufgabe: Wir teilen eine Aufgabe in zwei Schritte und tun den ersten selbst. faraghta bedeutet: du bist frei, fertig geworden. fanṣab bedeutet: mühe dich, wende dich der nächsten Anstrengung zu. Die Grenze der Stunde: Der Vers ist an den Propheten gerichtet. Wir machen daraus keine Regel, dass ein Kind alles allein können muss. Was zu schwer oder gefährlich ist, bleibt bei den Erwachsenen. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Selbstständigkeit Schritt für Schritt. Eine Aufgabe, die zum Alter passt, führen wir Schritt für Schritt selbst aus. Wir lesen Qurʾān 94:7. Sinngemäß, ohne beglaubigte Übersetzung: Der gespeicherte Ausdruck sagt: Wenn du fertig bist, dann mühe dich, und zu deinem Herrn hin wende dich begehrend. So kann das im Alltag aussehen: Ein Kind zieht die Schuhe selbst an und bittet nur, wenn der Knoten noch zu schwer ist. Die Aufgabe: Wir teilen eine Aufgabe in zwei Schritte und tun den ersten selbst. faraghta bedeutet: du bist frei, fertig geworden. fanṣab bedeutet: mühe dich, wende dich der nächsten Anstrengung zu. Die Grenze der Stunde: Der Vers ist an den Propheten gerichtet. Wir machen daraus keine Regel, dass ein Kind alles allein können muss. Was zu schwer oder gefährlich ist, bleibt bei den Erwachsenen.",
         "lines": [
           "Qurʾān 94:7 ist die gelesene Stelle.",
           "Eine Aufgabe, die zum Alter passt, führen wir Schritt für Schritt selbst aus.",
@@ -16200,7 +16200,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Selbstständigkeit Schritt für Schritt von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Selbstständigkeit Schritt für Schritt. Das Lernziel ist: Eine Aufgabe, die zum Alter passt, führen wir Schritt für Schritt selbst aus. Die Seite https://www.islamweb.net/ar/library/content/49/1963 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 94:7. Sinngemäß, keine beglaubigte Übersetzung: Der gespeicherte Ausdruck sagt: Wenn du fertig bist, dann mühe dich, und zu deinem Herrn hin wende dich begehrend. Alltag: Ein Kind zieht die Schuhe selbst an und bittet nur, wenn der Knoten noch zu schwer ist. Aufgabe: Wir teilen eine Aufgabe in zwei Schritte und tun den ersten selbst. faraghta bedeutet: du bist frei, fertig geworden. fanṣab bedeutet: mühe dich, wende dich der nächsten Anstrengung zu. Was nicht behauptet wird: Der Vers ist an den Propheten gerichtet. Wir machen daraus keine Regel, dass ein Kind alles allein können muss. Was zu schwer oder gefährlich ist, bleibt bei den Erwachsenen. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Selbstständigkeit Schritt für Schritt. Das Lernziel ist: Eine Aufgabe, die zum Alter passt, führen wir Schritt für Schritt selbst aus. Sinngemäß, keine beglaubigte Übersetzung: Der gespeicherte Ausdruck sagt: Wenn du fertig bist, dann mühe dich, und zu deinem Herrn hin wende dich begehrend. Alltag: Ein Kind zieht die Schuhe selbst an und bittet nur, wenn der Knoten noch zu schwer ist. Aufgabe: Wir teilen eine Aufgabe in zwei Schritte und tun den ersten selbst. faraghta bedeutet: du bist frei, fertig geworden. fanṣab bedeutet: mühe dich, wende dich der nächsten Anstrengung zu. Was nicht behauptet wird: Der Vers ist an den Propheten gerichtet. Wir machen daraus keine Regel, dass ein Kind alles allein können muss. Was zu schwer oder gefährlich ist, bleibt bei den Erwachsenen.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 94:7.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -16222,7 +16222,7 @@ const additions=
         "situation": "Ein Kind zieht die Schuhe selbst an und bittet nur, wenn der Knoten noch zu schwer ist.",
         "practice": "Wir teilen eine Aufgabe in zwei Schritte und tun den ersten selbst.",
         "summary": "Belegt ist Qurʾān 94:7. Ungeprüft bleibt: Der Vers ist an den Propheten gerichtet.",
-        "audioScript": "Für die älteren Kinder. Selbstständigkeit Schritt für Schritt. Eine Aufgabe, die zum Alter passt, führen wir Schritt für Schritt selbst aus. Nicht belegt und deshalb nicht behauptet: Der Vers ist an den Propheten gerichtet."
+        "audioScript": "Selbstständigkeit Schritt für Schritt. Eine Aufgabe, die zum Alter passt, führen wir Schritt für Schritt selbst aus. Nicht belegt und deshalb nicht behauptet: Der Vers ist an den Propheten gerichtet."
       }
     },
     "questions": {
@@ -16358,7 +16358,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers legt keine Minutenzahl fest. Die Furcht im Vers malen wir nicht als Angstbild. Für die Jüngsten sagen wir: Wir denken leise an Allah und werden still. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Vers legt keine Minutenzahl fest. Die Furcht im Vers malen wir nicht als Angstbild. Für die Jüngsten sagen wir: Wir denken leise an Allah und werden still. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Bevor wir lesen, werden wir einen Moment ruhig.",
@@ -16391,7 +16391,7 @@ const additions=
       },
       "6-8": {
         "goal": "Bevor wir lesen, werden wir einen Moment ruhig.",
-        "intro": "Heute geht es um Stille und Sammlung üben. Bevor wir lesen, werden wir einen Moment ruhig. Wir lesen Qurʾān 7:205. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt: Gedenke deines Herrn in dir selbst, demütig bittend und in Ehrfurcht, ohne laute Rede, am Morgen und am Abend, und gehöre nicht zu den Achtlosen. So kann das im Alltag aussehen: Die Bücher liegen bereit. Alle sitzen einen kurzen Moment still, dann beginnt das Lesen. Die Aufgabe: Wir üben die kurze Stille und das leise Öffnen des Buches. ḏikr bedeutet: Gedenken. ḫauf bedeutet: Ehrfurcht; ohne ein Schreckbild. Die Grenze der Stunde: Der Vers legt keine Minutenzahl fest. Die Furcht im Vers malen wir nicht als Angstbild. Für die Jüngsten sagen wir: Wir denken leise an Allah und werden still. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Stille und Sammlung üben. Bevor wir lesen, werden wir einen Moment ruhig. Wir lesen Qurʾān 7:205. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt: Gedenke deines Herrn in dir selbst, demütig bittend und in Ehrfurcht, ohne laute Rede, am Morgen und am Abend, und gehöre nicht zu den Achtlosen. So kann das im Alltag aussehen: Die Bücher liegen bereit. Alle sitzen einen kurzen Moment still, dann beginnt das Lesen. Die Aufgabe: Wir üben die kurze Stille und das leise Öffnen des Buches. ḏikr bedeutet: Gedenken. ḫauf bedeutet: Ehrfurcht; ohne ein Schreckbild. Die Grenze der Stunde: Der Vers legt keine Minutenzahl fest. Die Furcht im Vers malen wir nicht als Angstbild. Für die Jüngsten sagen wir: Wir denken leise an Allah und werden still.",
         "lines": [
           "Qurʾān 7:205 ist die gelesene Stelle.",
           "Der Vers sagt: Gedenke deines Herrn in dir selbst, demütig bittend und in Ehrfurcht, ohne laute Rede, am Morgen und am Abend, und gehöre nicht zu den Achtlosen.",
@@ -16417,7 +16417,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Stille und Sammlung üben von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Stille und Sammlung üben. Das Lernziel ist: Bevor wir lesen, werden wir einen Moment ruhig. Die Seite https://www.islamweb.net/ar/library/content/49/590 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 7:205. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt: Gedenke deines Herrn in dir selbst, demütig bittend und in Ehrfurcht, ohne laute Rede, am Morgen und am Abend, und gehöre nicht zu den Achtlosen. Alltag: Die Bücher liegen bereit. Alle sitzen einen kurzen Moment still, dann beginnt das Lesen. Aufgabe: Wir üben die kurze Stille und das leise Öffnen des Buches. ḏikr bedeutet: Gedenken. ḫauf bedeutet: Ehrfurcht; ohne ein Schreckbild. Was nicht behauptet wird: Der Vers legt keine Minutenzahl fest. Die Furcht im Vers malen wir nicht als Angstbild. Für die Jüngsten sagen wir: Wir denken leise an Allah und werden still. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Stille und Sammlung üben. Das Lernziel ist: Bevor wir lesen, werden wir einen Moment ruhig. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt: Gedenke deines Herrn in dir selbst, demütig bittend und in Ehrfurcht, ohne laute Rede, am Morgen und am Abend, und gehöre nicht zu den Achtlosen. Alltag: Die Bücher liegen bereit. Alle sitzen einen kurzen Moment still, dann beginnt das Lesen. Aufgabe: Wir üben die kurze Stille und das leise Öffnen des Buches. ḏikr bedeutet: Gedenken. ḫauf bedeutet: Ehrfurcht; ohne ein Schreckbild. Was nicht behauptet wird: Der Vers legt keine Minutenzahl fest. Die Furcht im Vers malen wir nicht als Angstbild. Für die Jüngsten sagen wir: Wir denken leise an Allah und werden still.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 7:205.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -16439,7 +16439,7 @@ const additions=
         "situation": "Die Bücher liegen bereit. Alle sitzen einen kurzen Moment still, dann beginnt das Lesen.",
         "practice": "Wir üben die kurze Stille und das leise Öffnen des Buches.",
         "summary": "Belegt ist Qurʾān 7:205. Ungeprüft bleibt: Der Vers legt keine Minutenzahl fest.",
-        "audioScript": "Für die älteren Kinder. Stille und Sammlung üben. Der Vers sagt: Gedenke deines Herrn in dir selbst, demütig bittend und in Ehrfurcht, ohne laute Rede, am Morgen und am Abend, und gehöre nicht zu den Achtlosen. Nicht belegt und deshalb nicht behauptet: Der Vers legt keine Minutenzahl fest."
+        "audioScript": "Stille und Sammlung üben. Der Vers sagt: Gedenke deines Herrn in dir selbst, demütig bittend und in Ehrfurcht, ohne laute Rede, am Morgen und am Abend, und gehöre nicht zu den Achtlosen. Nicht belegt und deshalb nicht behauptet: Der Vers legt keine Minutenzahl fest."
       }
     },
     "questions": {
@@ -16575,7 +16575,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Der Vers beschreibt nicht die Handhaltung und nicht den Rechtsnamen Takbīrat al-Iḥrām. Diese Einzelheiten bleiben ohne gelesenes Fiqh-Buch ungeprüft. Wir erfinden den Winkel der Hände nicht. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Vers beschreibt nicht die Handhaltung und nicht den Rechtsnamen Takbīrat al-Iḥrām. Diese Einzelheiten bleiben ohne gelesenes Fiqh-Buch ungeprüft. Wir erfinden den Winkel der Hände nicht. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
     "sample": "Am Anfang des Gebets gibt es ein erstes Allāhu akbar.",
@@ -16608,7 +16608,7 @@ const additions=
       },
       "6-8": {
         "goal": "Am Anfang des Gebets gibt es ein erstes Allāhu akbar.",
-        "intro": "Heute geht es um Takbīrat al-Iḥrām kennenlernen. Am Anfang des Gebets gibt es ein erstes Allāhu akbar. Wir lesen Qurʾān 17:111. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers endet damit, Allah zu loben, Ihm keinen Sohn und keinen Teilhaber zuzuschreiben, und sagt: Und rühme Ihn mit einem großen Rühmen. So kann das im Alltag aussehen: Die Lehrperson hebt die Hände so, wie sie es kennt, und sagt das erste Allāhu akbar. Die Kinder sprechen es nur mit, wenn sie es schon sicher können. Die Aufgabe: Wir erkennen: Danach beginnt das Gebet. Vorher reden wir nicht weiter. kabbīrhu bedeutet: rühme Ihn groß. takbīr bedeutet: Allāhu akbar sagen; die Gebetseinzelheit ist hier Lehrerübung. Die Grenze der Stunde: Der Vers beschreibt nicht die Handhaltung und nicht den Rechtsnamen Takbīrat al-Iḥrām. Diese Einzelheiten bleiben ohne gelesenes Fiqh-Buch ungeprüft. Wir erfinden den Winkel der Hände nicht. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Takbīrat al-Iḥrām kennenlernen. Am Anfang des Gebets gibt es ein erstes Allāhu akbar. Wir lesen Qurʾān 17:111. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers endet damit, Allah zu loben, Ihm keinen Sohn und keinen Teilhaber zuzuschreiben, und sagt: Und rühme Ihn mit einem großen Rühmen. So kann das im Alltag aussehen: Die Lehrperson hebt die Hände so, wie sie es kennt, und sagt das erste Allāhu akbar. Die Kinder sprechen es nur mit, wenn sie es schon sicher können. Die Aufgabe: Wir erkennen: Danach beginnt das Gebet. Vorher reden wir nicht weiter. kabbīrhu bedeutet: rühme Ihn groß. takbīr bedeutet: Allāhu akbar sagen; die Gebetseinzelheit ist hier Lehrerübung. Die Grenze der Stunde: Der Vers beschreibt nicht die Handhaltung und nicht den Rechtsnamen Takbīrat al-Iḥrām. Diese Einzelheiten bleiben ohne gelesenes Fiqh-Buch ungeprüft. Wir erfinden den Winkel der Hände nicht. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
         "lines": [
           "Qurʾān 17:111 ist die gelesene Stelle.",
           "Der Vers endet damit, Allah zu loben, Ihm keinen Sohn und keinen Teilhaber zuzuschreiben, und sagt: Und rühme Ihn mit einem großen Rühmen.",
@@ -16634,7 +16634,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Takbīrat al-Iḥrām kennenlernen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Takbīrat al-Iḥrām kennenlernen. Das Lernziel ist: Am Anfang des Gebets gibt es ein erstes Allāhu akbar. Die Seite https://www.islamweb.net/ar/library/content/49/1054 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:111. Sinngemäß, keine beglaubigte Übersetzung: Der Vers endet damit, Allah zu loben, Ihm keinen Sohn und keinen Teilhaber zuzuschreiben, und sagt: Und rühme Ihn mit einem großen Rühmen. Alltag: Die Lehrperson hebt die Hände so, wie sie es kennt, und sagt das erste Allāhu akbar. Die Kinder sprechen es nur mit, wenn sie es schon sicher können. Aufgabe: Wir erkennen: Danach beginnt das Gebet. Vorher reden wir nicht weiter. kabbīrhu bedeutet: rühme Ihn groß. takbīr bedeutet: Allāhu akbar sagen; die Gebetseinzelheit ist hier Lehrerübung. Was nicht behauptet wird: Der Vers beschreibt nicht die Handhaltung und nicht den Rechtsnamen Takbīrat al-Iḥrām. Diese Einzelheiten bleiben ohne gelesenes Fiqh-Buch ungeprüft. Wir erfinden den Winkel der Hände nicht. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Takbīrat al-Iḥrām kennenlernen. Das Lernziel ist: Am Anfang des Gebets gibt es ein erstes Allāhu akbar. Sinngemäß, keine beglaubigte Übersetzung: Der Vers endet damit, Allah zu loben, Ihm keinen Sohn und keinen Teilhaber zuzuschreiben, und sagt: Und rühme Ihn mit einem großen Rühmen. Alltag: Die Lehrperson hebt die Hände so, wie sie es kennt, und sagt das erste Allāhu akbar. Die Kinder sprechen es nur mit, wenn sie es schon sicher können. Aufgabe: Wir erkennen: Danach beginnt das Gebet. Vorher reden wir nicht weiter. kabbīrhu bedeutet: rühme Ihn groß. takbīr bedeutet: Allāhu akbar sagen; die Gebetseinzelheit ist hier Lehrerübung. Was nicht behauptet wird: Der Vers beschreibt nicht die Handhaltung und nicht den Rechtsnamen Takbīrat al-Iḥrām. Diese Einzelheiten bleiben ohne gelesenes Fiqh-Buch ungeprüft. Wir erfinden den Winkel der Hände nicht. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 17:111.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -16656,7 +16656,7 @@ const additions=
         "situation": "Die Lehrperson hebt die Hände so, wie sie es kennt, und sagt das erste Allāhu akbar. Die Kinder sprechen es nur mit, wenn sie es schon sicher können.",
         "practice": "Wir erkennen: Danach beginnt das Gebet. Vorher reden wir nicht weiter.",
         "summary": "Belegt ist Qurʾān 17:111. Ungeprüft bleibt: Der Vers beschreibt nicht die Handhaltung und nicht den Rechtsnamen Takbīrat al-Iḥrām.",
-        "audioScript": "Für die älteren Kinder. Takbīrat al-Iḥrām kennenlernen. Der Vers endet damit, Allah zu loben, Ihm keinen Sohn und keinen Teilhaber zuzuschreiben, und sagt: Und rühme Ihn mit einem großen Rühmen. Nicht belegt und deshalb nicht behauptet: Der Vers beschreibt nicht die Handhaltung und nicht den Rechtsnamen Takbīrat al-Iḥrām."
+        "audioScript": "Takbīrat al-Iḥrām kennenlernen. Der Vers endet damit, Allah zu loben, Ihm keinen Sohn und keinen Teilhaber zuzuschreiben, und sagt: Und rühme Ihn mit einem großen Rühmen. Nicht belegt und deshalb nicht behauptet: Der Vers beschreibt nicht die Handhaltung und nicht den Rechtsnamen Takbīrat al-Iḥrām."
       }
     },
     "questions": {
@@ -16792,7 +16792,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers verbietet nicht, einen Menschen um ein Glas Wasser zu bitten. Er richtet die Anbetung und die eigentliche Hilfe im Gottesdienst an Allah. Wir vermischen das nicht. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Vers verbietet nicht, einen Menschen um ein Glas Wasser zu bitten. Er richtet die Anbetung und die eigentliche Hilfe im Gottesdienst an Allah. Wir vermischen das nicht. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Im Gebet sagen wir, dass wir Allah allein anbeten und Ihn um Hilfe bitten.",
@@ -16825,7 +16825,7 @@ const additions=
       },
       "6-8": {
         "goal": "Im Gebet sagen wir, dass wir Allah allein anbeten und Ihn um Hilfe bitten.",
-        "intro": "Heute geht es um Tawḥīd im Alltag. Im Gebet sagen wir, dass wir Allah allein anbeten und Ihn um Hilfe bitten. Wir lesen Qurʾān 1:5. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers lautet: Dich allein beten wir an, und Dich allein bitten wir um Hilfe. So kann das im Alltag aussehen: Ein Kind erklärt: Um einen Stift bitte ich den Nachbarn. Um Rechtleitung bitte ich Allah. Die Aufgabe: Wir sortieren drei kurze Beispiele in zwei Gruppen. iyyāka naʿbudu bedeutet: Dich allein beten wir an. iyyāka nastaʿīn bedeutet: Dich allein bitten wir um Hilfe. Die Grenze der Stunde: Der Vers verbietet nicht, einen Menschen um ein Glas Wasser zu bitten. Er richtet die Anbetung und die eigentliche Hilfe im Gottesdienst an Allah. Wir vermischen das nicht. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Tawḥīd im Alltag. Im Gebet sagen wir, dass wir Allah allein anbeten und Ihn um Hilfe bitten. Wir lesen Qurʾān 1:5. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers lautet: Dich allein beten wir an, und Dich allein bitten wir um Hilfe. So kann das im Alltag aussehen: Ein Kind erklärt: Um einen Stift bitte ich den Nachbarn. Um Rechtleitung bitte ich Allah. Die Aufgabe: Wir sortieren drei kurze Beispiele in zwei Gruppen. iyyāka naʿbudu bedeutet: Dich allein beten wir an. iyyāka nastaʿīn bedeutet: Dich allein bitten wir um Hilfe. Die Grenze der Stunde: Der Vers verbietet nicht, einen Menschen um ein Glas Wasser zu bitten. Er richtet die Anbetung und die eigentliche Hilfe im Gottesdienst an Allah. Wir vermischen das nicht.",
         "lines": [
           "Qurʾān 1:5 ist die gelesene Stelle.",
           "Der Vers lautet: Dich allein beten wir an, und Dich allein bitten wir um Hilfe.",
@@ -16851,7 +16851,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Tawḥīd im Alltag von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Tawḥīd im Alltag. Das Lernziel ist: Im Gebet sagen wir, dass wir Allah allein anbeten und Ihn um Hilfe bitten. Die Seite https://www.islamweb.net/ar/library/content/49/46 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 1:5. Sinngemäß, keine beglaubigte Übersetzung: Der Vers lautet: Dich allein beten wir an, und Dich allein bitten wir um Hilfe. Alltag: Ein Kind erklärt: Um einen Stift bitte ich den Nachbarn. Um Rechtleitung bitte ich Allah. Aufgabe: Wir sortieren drei kurze Beispiele in zwei Gruppen. iyyāka naʿbudu bedeutet: Dich allein beten wir an. iyyāka nastaʿīn bedeutet: Dich allein bitten wir um Hilfe. Was nicht behauptet wird: Der Vers verbietet nicht, einen Menschen um ein Glas Wasser zu bitten. Er richtet die Anbetung und die eigentliche Hilfe im Gottesdienst an Allah. Wir vermischen das nicht. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Tawḥīd im Alltag. Das Lernziel ist: Im Gebet sagen wir, dass wir Allah allein anbeten und Ihn um Hilfe bitten. Sinngemäß, keine beglaubigte Übersetzung: Der Vers lautet: Dich allein beten wir an, und Dich allein bitten wir um Hilfe. Alltag: Ein Kind erklärt: Um einen Stift bitte ich den Nachbarn. Um Rechtleitung bitte ich Allah. Aufgabe: Wir sortieren drei kurze Beispiele in zwei Gruppen. iyyāka naʿbudu bedeutet: Dich allein beten wir an. iyyāka nastaʿīn bedeutet: Dich allein bitten wir um Hilfe. Was nicht behauptet wird: Der Vers verbietet nicht, einen Menschen um ein Glas Wasser zu bitten. Er richtet die Anbetung und die eigentliche Hilfe im Gottesdienst an Allah. Wir vermischen das nicht.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 1:5.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -16873,7 +16873,7 @@ const additions=
         "situation": "Ein Kind erklärt: Um einen Stift bitte ich den Nachbarn. Um Rechtleitung bitte ich Allah.",
         "practice": "Wir sortieren drei kurze Beispiele in zwei Gruppen.",
         "summary": "Belegt ist Qurʾān 1:5. Ungeprüft bleibt: Der Vers verbietet nicht, einen Menschen um ein Glas Wasser zu bitten.",
-        "audioScript": "Für die älteren Kinder. Tawḥīd im Alltag. Der Vers lautet: Dich allein beten wir an, und Dich allein bitten wir um Hilfe. Nicht belegt und deshalb nicht behauptet: Der Vers verbietet nicht, einen Menschen um ein Glas Wasser zu bitten."
+        "audioScript": "Tawḥīd im Alltag. Der Vers lautet: Dich allein beten wir an, und Dich allein bitten wir um Hilfe. Nicht belegt und deshalb nicht behauptet: Der Vers verbietet nicht, einen Menschen um ein Glas Wasser zu bitten."
       }
     },
     "questions": {
@@ -17009,7 +17009,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Eine frühere Stunde hat einen anderen Vers über Geduld und Gebet. Hier ist die Fundstelle 2:45. Der Vers garantiert keine Note. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Eine frühere Stunde hat einen anderen Vers über Geduld und Gebet. Hier ist die Fundstelle 2:45. Der Vers garantiert keine Note. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Wir lernen für die Aufgabe und bitten Allah um Hilfe.",
@@ -17042,7 +17042,7 @@ const additions=
       },
       "6-8": {
         "goal": "Wir lernen für die Aufgabe und bitten Allah um Hilfe.",
-        "intro": "Heute geht es um Bemühen und Allah vertrauen. Wir lernen für die Aufgabe und bitten Allah um Hilfe. Wir lesen Qurʾān 2:45. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt: Sucht Hilfe in der Geduld und im Gebet. Es ist wahrlich schwer, außer für die Demütigen. So kann das im Alltag aussehen: Vor einer kleinen Übung liest das Kind noch einmal und spricht danach eine kurze Bitte. Die Aufgabe: Wir tun beides: einen echten Versuch und eine Bitte. Nicht nur eines von beiden. istiʿānah bedeutet: Hilfe suchen. ṣalāh bedeutet: Gebet. Die Grenze der Stunde: Eine frühere Stunde hat einen anderen Vers über Geduld und Gebet. Hier ist die Fundstelle 2:45. Der Vers garantiert keine Note. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Bemühen und Allah vertrauen. Wir lernen für die Aufgabe und bitten Allah um Hilfe. Wir lesen Qurʾān 2:45. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt: Sucht Hilfe in der Geduld und im Gebet. Es ist wahrlich schwer, außer für die Demütigen. So kann das im Alltag aussehen: Vor einer kleinen Übung liest das Kind noch einmal und spricht danach eine kurze Bitte. Die Aufgabe: Wir tun beides: einen echten Versuch und eine Bitte. Nicht nur eines von beiden. istiʿānah bedeutet: Hilfe suchen. ṣalāh bedeutet: Gebet. Die Grenze der Stunde: Eine frühere Stunde hat einen anderen Vers über Geduld und Gebet. Hier ist die Fundstelle 2:45. Der Vers garantiert keine Note.",
         "lines": [
           "Qurʾān 2:45 ist die gelesene Stelle.",
           "Der Vers sagt: Sucht Hilfe in der Geduld und im Gebet.",
@@ -17068,7 +17068,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Bemühen und Allah vertrauen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Bemühen und Allah vertrauen. Das Lernziel ist: Wir lernen für die Aufgabe und bitten Allah um Hilfe. Die Seite https://www.islamweb.net/ar/library/content/49/85 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:45. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt: Sucht Hilfe in der Geduld und im Gebet. Es ist wahrlich schwer, außer für die Demütigen. Alltag: Vor einer kleinen Übung liest das Kind noch einmal und spricht danach eine kurze Bitte. Aufgabe: Wir tun beides: einen echten Versuch und eine Bitte. Nicht nur eines von beiden. istiʿānah bedeutet: Hilfe suchen. ṣalāh bedeutet: Gebet. Was nicht behauptet wird: Eine frühere Stunde hat einen anderen Vers über Geduld und Gebet. Hier ist die Fundstelle 2:45. Der Vers garantiert keine Note. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Bemühen und Allah vertrauen. Das Lernziel ist: Wir lernen für die Aufgabe und bitten Allah um Hilfe. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt: Sucht Hilfe in der Geduld und im Gebet. Es ist wahrlich schwer, außer für die Demütigen. Alltag: Vor einer kleinen Übung liest das Kind noch einmal und spricht danach eine kurze Bitte. Aufgabe: Wir tun beides: einen echten Versuch und eine Bitte. Nicht nur eines von beiden. istiʿānah bedeutet: Hilfe suchen. ṣalāh bedeutet: Gebet. Was nicht behauptet wird: Eine frühere Stunde hat einen anderen Vers über Geduld und Gebet. Hier ist die Fundstelle 2:45. Der Vers garantiert keine Note.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 2:45.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -17090,7 +17090,7 @@ const additions=
         "situation": "Vor einer kleinen Übung liest das Kind noch einmal und spricht danach eine kurze Bitte.",
         "practice": "Wir tun beides: einen echten Versuch und eine Bitte. Nicht nur eines von beiden.",
         "summary": "Belegt ist Qurʾān 2:45. Ungeprüft bleibt: Eine frühere Stunde hat einen anderen Vers über Geduld und Gebet.",
-        "audioScript": "Für die älteren Kinder. Bemühen und Allah vertrauen. Der Vers sagt: Sucht Hilfe in der Geduld und im Gebet. Nicht belegt und deshalb nicht behauptet: Eine frühere Stunde hat einen anderen Vers über Geduld und Gebet."
+        "audioScript": "Bemühen und Allah vertrauen. Der Vers sagt: Sucht Hilfe in der Geduld und im Gebet. Nicht belegt und deshalb nicht behauptet: Eine frühere Stunde hat einen anderen Vers über Geduld und Gebet."
       }
     },
     "questions": {
@@ -17226,7 +17226,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers bewertet keine Farbe und keine Sprache als besser. Eine andere Stelle sagt, dass bei Allah die Gottesfurcht zählt. Wir ziehen sie nicht als zweiten arabischen Text heran, wenn wir sie hier nicht neu speichern. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Vers bewertet keine Farbe und keine Sprache als besser. Eine andere Stelle sagt, dass bei Allah die Gottesfurcht zählt. Wir ziehen sie nicht als zweiten arabischen Text heran, wenn wir sie hier nicht neu speichern. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Verschiedene Sprachen und Aussehen gehören zu Allahs Zeichen.",
@@ -17259,7 +17259,7 @@ const additions=
       },
       "6-8": {
         "goal": "Verschiedene Sprachen und Aussehen gehören zu Allahs Zeichen.",
-        "intro": "Heute geht es um Unterschiedliche Menschen respektieren. Verschiedene Sprachen und Aussehen gehören zu Allahs Zeichen. Wir lesen Qurʾān 30:22. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers nennt als Zeichen Allahs die Erschaffung der Himmel und der Erde und den Unterschied der Sprachen und Farben. So kann das im Alltag aussehen: Ein Kind grüßt ein anderes Kind, dessen Sprache es nicht versteht, mit einem Lächeln und einem Salam oder einem freundlichen deutschen Gruß. Die Aufgabe: Wir üben den Gruß und keine Frage, die den anderen vorführt. alsinah bedeutet: Sprachen. alwān bedeutet: Farben. Die Grenze der Stunde: Der Vers bewertet keine Farbe und keine Sprache als besser. Eine andere Stelle sagt, dass bei Allah die Gottesfurcht zählt. Wir ziehen sie nicht als zweiten arabischen Text heran, wenn wir sie hier nicht neu speichern. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Unterschiedliche Menschen respektieren. Verschiedene Sprachen und Aussehen gehören zu Allahs Zeichen. Wir lesen Qurʾān 30:22. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers nennt als Zeichen Allahs die Erschaffung der Himmel und der Erde und den Unterschied der Sprachen und Farben. So kann das im Alltag aussehen: Ein Kind grüßt ein anderes Kind, dessen Sprache es nicht versteht, mit einem Lächeln und einem Salam oder einem freundlichen deutschen Gruß. Die Aufgabe: Wir üben den Gruß und keine Frage, die den anderen vorführt. alsinah bedeutet: Sprachen. alwān bedeutet: Farben. Die Grenze der Stunde: Der Vers bewertet keine Farbe und keine Sprache als besser. Eine andere Stelle sagt, dass bei Allah die Gottesfurcht zählt. Wir ziehen sie nicht als zweiten arabischen Text heran, wenn wir sie hier nicht neu speichern.",
         "lines": [
           "Qurʾān 30:22 ist die gelesene Stelle.",
           "Der Vers nennt als Zeichen Allahs die Erschaffung der Himmel und der Erde und den Unterschied der Sprachen und Farben.",
@@ -17285,7 +17285,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Unterschiedliche Menschen respektieren von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Unterschiedliche Menschen respektieren. Das Lernziel ist: Verschiedene Sprachen und Aussehen gehören zu Allahs Zeichen. Die Seite https://www.islamweb.net/ar/library/content/49/1424 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 30:22. Sinngemäß, keine beglaubigte Übersetzung: Der Vers nennt als Zeichen Allahs die Erschaffung der Himmel und der Erde und den Unterschied der Sprachen und Farben. Alltag: Ein Kind grüßt ein anderes Kind, dessen Sprache es nicht versteht, mit einem Lächeln und einem Salam oder einem freundlichen deutschen Gruß. Aufgabe: Wir üben den Gruß und keine Frage, die den anderen vorführt. alsinah bedeutet: Sprachen. alwān bedeutet: Farben. Was nicht behauptet wird: Der Vers bewertet keine Farbe und keine Sprache als besser. Eine andere Stelle sagt, dass bei Allah die Gottesfurcht zählt. Wir ziehen sie nicht als zweiten arabischen Text heran, wenn wir sie hier nicht neu speichern. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Unterschiedliche Menschen respektieren. Das Lernziel ist: Verschiedene Sprachen und Aussehen gehören zu Allahs Zeichen. Sinngemäß, keine beglaubigte Übersetzung: Der Vers nennt als Zeichen Allahs die Erschaffung der Himmel und der Erde und den Unterschied der Sprachen und Farben. Alltag: Ein Kind grüßt ein anderes Kind, dessen Sprache es nicht versteht, mit einem Lächeln und einem Salam oder einem freundlichen deutschen Gruß. Aufgabe: Wir üben den Gruß und keine Frage, die den anderen vorführt. alsinah bedeutet: Sprachen. alwān bedeutet: Farben. Was nicht behauptet wird: Der Vers bewertet keine Farbe und keine Sprache als besser. Eine andere Stelle sagt, dass bei Allah die Gottesfurcht zählt. Wir ziehen sie nicht als zweiten arabischen Text heran, wenn wir sie hier nicht neu speichern.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 30:22.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -17307,7 +17307,7 @@ const additions=
         "situation": "Ein Kind grüßt ein anderes Kind, dessen Sprache es nicht versteht, mit einem Lächeln und einem Salam oder einem freundlichen deutschen Gruß.",
         "practice": "Wir üben den Gruß und keine Frage, die den anderen vorführt.",
         "summary": "Belegt ist Qurʾān 30:22. Ungeprüft bleibt: Der Vers bewertet keine Farbe und keine Sprache als besser.",
-        "audioScript": "Für die älteren Kinder. Unterschiedliche Menschen respektieren. Der Vers nennt als Zeichen Allahs die Erschaffung der Himmel und der Erde und den Unterschied der Sprachen und Farben. Nicht belegt und deshalb nicht behauptet: Der Vers bewertet keine Farbe und keine Sprache als besser."
+        "audioScript": "Unterschiedliche Menschen respektieren. Der Vers nennt als Zeichen Allahs die Erschaffung der Himmel und der Erde und den Unterschied der Sprachen und Farben. Nicht belegt und deshalb nicht behauptet: Der Vers bewertet keine Farbe und keine Sprache als besser."
       }
     },
     "questions": {
@@ -17443,7 +17443,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Drei Schlucke, das Sitzen oder eine andere Trinkgewohnheit stehen in diesem Vers nicht. Wir geben sie nicht als gelesene Sunnah aus. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Drei Schlucke, das Sitzen oder eine andere Trinkgewohnheit stehen in diesem Vers nicht. Wir geben sie nicht als gelesene Sunnah aus. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Wir trinken Wasser ruhig und verschütten es nicht absichtlich.",
@@ -17476,7 +17476,7 @@ const additions=
       },
       "6-8": {
         "goal": "Wir trinken Wasser ruhig und verschütten es nicht absichtlich.",
-        "intro": "Heute geht es um Trinken mit guten Sitten. Wir trinken Wasser ruhig und verschütten es nicht absichtlich. Wir lesen Qurʾān 16:10. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass Allah vom Himmel Wasser herabgesandt hat, von dem die Menschen trinken und von dem die Bäume kommen, in denen sie weiden lassen. So kann das im Alltag aussehen: Ein Kind hält das Glas mit beiden Händen und trinkt, ohne zu spritzen. Die Aufgabe: Wir üben ein ruhiges Trinken und das Absetzen des Glases. māʾ bedeutet: Wasser. šarāb bedeutet: Trunk. Die Grenze der Stunde: Drei Schlucke, das Sitzen oder eine andere Trinkgewohnheit stehen in diesem Vers nicht. Wir geben sie nicht als gelesene Sunnah aus. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Trinken mit guten Sitten. Wir trinken Wasser ruhig und verschütten es nicht absichtlich. Wir lesen Qurʾān 16:10. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass Allah vom Himmel Wasser herabgesandt hat, von dem die Menschen trinken und von dem die Bäume kommen, in denen sie weiden lassen. So kann das im Alltag aussehen: Ein Kind hält das Glas mit beiden Händen und trinkt, ohne zu spritzen. Die Aufgabe: Wir üben ein ruhiges Trinken und das Absetzen des Glases. māʾ bedeutet: Wasser. šarāb bedeutet: Trunk. Die Grenze der Stunde: Drei Schlucke, das Sitzen oder eine andere Trinkgewohnheit stehen in diesem Vers nicht. Wir geben sie nicht als gelesene Sunnah aus.",
         "lines": [
           "Qurʾān 16:10 ist die gelesene Stelle.",
           "Der Vers sagt, dass Allah vom Himmel Wasser herabgesandt hat, von dem die Menschen trinken und von dem die Bäume kommen, in denen sie weiden lassen.",
@@ -17502,7 +17502,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Trinken mit guten Sitten von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Trinken mit guten Sitten. Das Lernziel ist: Wir trinken Wasser ruhig und verschütten es nicht absichtlich. Die Seite https://www.islamweb.net/ar/library/content/49/942 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 16:10. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass Allah vom Himmel Wasser herabgesandt hat, von dem die Menschen trinken und von dem die Bäume kommen, in denen sie weiden lassen. Alltag: Ein Kind hält das Glas mit beiden Händen und trinkt, ohne zu spritzen. Aufgabe: Wir üben ein ruhiges Trinken und das Absetzen des Glases. māʾ bedeutet: Wasser. šarāb bedeutet: Trunk. Was nicht behauptet wird: Drei Schlucke, das Sitzen oder eine andere Trinkgewohnheit stehen in diesem Vers nicht. Wir geben sie nicht als gelesene Sunnah aus. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Trinken mit guten Sitten. Das Lernziel ist: Wir trinken Wasser ruhig und verschütten es nicht absichtlich. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass Allah vom Himmel Wasser herabgesandt hat, von dem die Menschen trinken und von dem die Bäume kommen, in denen sie weiden lassen. Alltag: Ein Kind hält das Glas mit beiden Händen und trinkt, ohne zu spritzen. Aufgabe: Wir üben ein ruhiges Trinken und das Absetzen des Glases. māʾ bedeutet: Wasser. šarāb bedeutet: Trunk. Was nicht behauptet wird: Drei Schlucke, das Sitzen oder eine andere Trinkgewohnheit stehen in diesem Vers nicht. Wir geben sie nicht als gelesene Sunnah aus.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 16:10.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -17524,7 +17524,7 @@ const additions=
         "situation": "Ein Kind hält das Glas mit beiden Händen und trinkt, ohne zu spritzen.",
         "practice": "Wir üben ein ruhiges Trinken und das Absetzen des Glases.",
         "summary": "Belegt ist Qurʾān 16:10. Ungeprüft bleibt: Drei Schlucke, das Sitzen oder eine andere Trinkgewohnheit stehen in diesem Vers nicht.",
-        "audioScript": "Für die älteren Kinder. Trinken mit guten Sitten. Der Vers sagt, dass Allah vom Himmel Wasser herabgesandt hat, von dem die Menschen trinken und von dem die Bäume kommen, in denen sie weiden lassen. Nicht belegt und deshalb nicht behauptet: Drei Schlucke, das Sitzen oder eine andere Trinkgewohnheit stehen in diesem Vers nicht."
+        "audioScript": "Trinken mit guten Sitten. Der Vers sagt, dass Allah vom Himmel Wasser herabgesandt hat, von dem die Menschen trinken und von dem die Bäume kommen, in denen sie weiden lassen. Nicht belegt und deshalb nicht behauptet: Drei Schlucke, das Sitzen oder eine andere Trinkgewohnheit stehen in diesem Vers nicht."
       }
     },
     "questions": {
@@ -17660,7 +17660,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers ist keine Erlaubnis, sich über andere zu stellen. Die Würdigung kommt von Allah. Wir erfinden keine Rangfolge unter den Kindern. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Vers ist keine Erlaubnis, sich über andere zu stellen. Die Würdigung kommt von Allah. Wir erfinden keine Rangfolge unter den Kindern. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Wir erfinden keine zusätzliche Geschichte.",
     "sample": "Allah hat den Menschen gewürdigt.",
@@ -17693,7 +17693,7 @@ const additions=
       },
       "6-8": {
         "goal": "Allah hat den Menschen gewürdigt.",
-        "intro": "Heute geht es um Wertschätzend mit sich selbst umgehen. Allah hat den Menschen gewürdigt. Wir lesen Qurʾān 17:70. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass Allah die Kinder Adams gewürdigt, sie an Land und Meer getragen, ihnen von den guten Dingen gegeben und sie vor vielen Seiner Geschöpfe ausgezeichnet hat. So kann das im Alltag aussehen: Ein Kind nennt etwas, das es kann, zum Beispiel freundlich grüßen, und fügt keinen Vergleich an. Die Aufgabe: Wir sagen einen Satz über uns ohne das Wort besser als. karramnā bedeutet: Wir haben gewürdigt. banī Ādam bedeutet: die Kinder Adams, die Menschen. Die Grenze der Stunde: Der Vers ist keine Erlaubnis, sich über andere zu stellen. Die Würdigung kommt von Allah. Wir erfinden keine Rangfolge unter den Kindern. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Wertschätzend mit sich selbst umgehen. Allah hat den Menschen gewürdigt. Wir lesen Qurʾān 17:70. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass Allah die Kinder Adams gewürdigt, sie an Land und Meer getragen, ihnen von den guten Dingen gegeben und sie vor vielen Seiner Geschöpfe ausgezeichnet hat. So kann das im Alltag aussehen: Ein Kind nennt etwas, das es kann, zum Beispiel freundlich grüßen, und fügt keinen Vergleich an. Die Aufgabe: Wir sagen einen Satz über uns ohne das Wort besser als. karramnā bedeutet: Wir haben gewürdigt. banī Ādam bedeutet: die Kinder Adams, die Menschen. Die Grenze der Stunde: Der Vers ist keine Erlaubnis, sich über andere zu stellen. Die Würdigung kommt von Allah. Wir erfinden keine Rangfolge unter den Kindern.",
         "lines": [
           "Qurʾān 17:70 ist die gelesene Stelle.",
           "Der Vers sagt, dass Allah die Kinder Adams gewürdigt, sie an Land und Meer getragen, ihnen von den guten Dingen gegeben und sie vor vielen Seiner Geschöpfe ausgezeichnet hat.",
@@ -17719,7 +17719,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Wertschätzend mit sich selbst umgehen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Wertschätzend mit sich selbst umgehen. Das Lernziel ist: Allah hat den Menschen gewürdigt. Die Seite https://www.islamweb.net/ar/library/content/49/1035 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:70. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass Allah die Kinder Adams gewürdigt, sie an Land und Meer getragen, ihnen von den guten Dingen gegeben und sie vor vielen Seiner Geschöpfe ausgezeichnet hat. Alltag: Ein Kind nennt etwas, das es kann, zum Beispiel freundlich grüßen, und fügt keinen Vergleich an. Aufgabe: Wir sagen einen Satz über uns ohne das Wort besser als. karramnā bedeutet: Wir haben gewürdigt. banī Ādam bedeutet: die Kinder Adams, die Menschen. Was nicht behauptet wird: Der Vers ist keine Erlaubnis, sich über andere zu stellen. Die Würdigung kommt von Allah. Wir erfinden keine Rangfolge unter den Kindern. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Wertschätzend mit sich selbst umgehen. Das Lernziel ist: Allah hat den Menschen gewürdigt. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass Allah die Kinder Adams gewürdigt, sie an Land und Meer getragen, ihnen von den guten Dingen gegeben und sie vor vielen Seiner Geschöpfe ausgezeichnet hat. Alltag: Ein Kind nennt etwas, das es kann, zum Beispiel freundlich grüßen, und fügt keinen Vergleich an. Aufgabe: Wir sagen einen Satz über uns ohne das Wort besser als. karramnā bedeutet: Wir haben gewürdigt. banī Ādam bedeutet: die Kinder Adams, die Menschen. Was nicht behauptet wird: Der Vers ist keine Erlaubnis, sich über andere zu stellen. Die Würdigung kommt von Allah. Wir erfinden keine Rangfolge unter den Kindern.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 17:70.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -17741,7 +17741,7 @@ const additions=
         "situation": "Ein Kind nennt etwas, das es kann, zum Beispiel freundlich grüßen, und fügt keinen Vergleich an.",
         "practice": "Wir sagen einen Satz über uns ohne das Wort besser als.",
         "summary": "Belegt ist Qurʾān 17:70. Ungeprüft bleibt: Der Vers ist keine Erlaubnis, sich über andere zu stellen.",
-        "audioScript": "Für die älteren Kinder. Wertschätzend mit sich selbst umgehen. Der Vers sagt, dass Allah die Kinder Adams gewürdigt, sie an Land und Meer getragen, ihnen von den guten Dingen gegeben und sie vor vielen Seiner Geschöpfe ausgezeichnet hat. Nicht belegt und deshalb nicht behauptet: Der Vers ist keine Erlaubnis, sich über andere zu stellen."
+        "audioScript": "Wertschätzend mit sich selbst umgehen. Der Vers sagt, dass Allah die Kinder Adams gewürdigt, sie an Land und Meer getragen, ihnen von den guten Dingen gegeben und sie vor vielen Seiner Geschöpfe ausgezeichnet hat. Nicht belegt und deshalb nicht behauptet: Der Vers ist keine Erlaubnis, sich über andere zu stellen."
       }
     },
     "questions": {
@@ -17877,7 +17877,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Dass die sieben die Fātiḥah sind, steht in dem gespeicherten Versauszug nicht als eigener Satz. Wir behaupten diese Gleichsetzung nicht als gelesen. Dass die Fātiḥah die einzige Säule des Gebets sei, steht hier ebenfalls nicht. al-Mughnī wurde nicht gelesen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Dass die sieben die Fātiḥah sind, steht in dem gespeicherten Versauszug nicht als eigener Satz. Wir behaupten diese Gleichsetzung nicht als gelesen. Dass die Fātiḥah die einzige Säule des Gebets sei, steht hier ebenfalls nicht. al-Mughnī wurde nicht gelesen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
     "sample": "Im Gebet wird der Qurʾān gelesen.",
@@ -17910,7 +17910,7 @@ const additions=
       },
       "6-8": {
         "goal": "Im Gebet wird der Qurʾān gelesen.",
-        "intro": "Heute geht es um Die Qurʾān-Rezitation im Gebet. Im Gebet wird der Qurʾān gelesen. Wir lesen Qurʾān 15:87. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass Allah sieben von den wiederholten und den gewaltigen Qurʾān gegeben hat. Der gespeicherte Ausdruck identifiziert diese sieben nicht mit einem zusätzlichen Satz. So kann das im Alltag aussehen: Die Lehrperson zeigt, dass im Gebet laut oder leise gelesen wird, je nach dem Gebet, das sie kennt. Die Kinder hören zu. Die Aufgabe: Wir wiederholen keine arabische Sūrah mit einer erzeugten Stimme. maṯānī bedeutet: wiederholte; so das Wort des Verses. qirāʾah bedeutet: Lesung; Unterrichtswort. Die Grenze der Stunde: Dass die sieben die Fātiḥah sind, steht in dem gespeicherten Versauszug nicht als eigener Satz. Wir behaupten diese Gleichsetzung nicht als gelesen. Dass die Fātiḥah die einzige Säule des Gebets sei, steht hier ebenfalls nicht. al-Mughnī wurde nicht gelesen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Die Qurʾān-Rezitation im Gebet. Im Gebet wird der Qurʾān gelesen. Wir lesen Qurʾān 15:87. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass Allah sieben von den wiederholten und den gewaltigen Qurʾān gegeben hat. Der gespeicherte Ausdruck identifiziert diese sieben nicht mit einem zusätzlichen Satz. So kann das im Alltag aussehen: Die Lehrperson zeigt, dass im Gebet laut oder leise gelesen wird, je nach dem Gebet, das sie kennt. Die Kinder hören zu. Die Aufgabe: Wir wiederholen keine arabische Sūrah mit einer erzeugten Stimme. maṯānī bedeutet: wiederholte; so das Wort des Verses. qirāʾah bedeutet: Lesung; Unterrichtswort. Die Grenze der Stunde: Dass die sieben die Fātiḥah sind, steht in dem gespeicherten Versauszug nicht als eigener Satz. Wir behaupten diese Gleichsetzung nicht als gelesen. Dass die Fātiḥah die einzige Säule des Gebets sei, steht hier ebenfalls nicht. al-Mughnī wurde nicht gelesen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
         "lines": [
           "Qurʾān 15:87 ist die gelesene Stelle.",
           "Der Vers sagt, dass Allah sieben von den wiederholten und den gewaltigen Qurʾān gegeben hat.",
@@ -17936,7 +17936,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Die Qurʾān-Rezitation im Gebet von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Die Qurʾān-Rezitation im Gebet. Das Lernziel ist: Im Gebet wird der Qurʾān gelesen. Die Seite https://www.islamweb.net/ar/library/content/49/933 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 15:87. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass Allah sieben von den wiederholten und den gewaltigen Qurʾān gegeben hat. Der gespeicherte Ausdruck identifiziert diese sieben nicht mit einem zusätzlichen Satz. Alltag: Die Lehrperson zeigt, dass im Gebet laut oder leise gelesen wird, je nach dem Gebet, das sie kennt. Die Kinder hören zu. Aufgabe: Wir wiederholen keine arabische Sūrah mit einer erzeugten Stimme. maṯānī bedeutet: wiederholte; so das Wort des Verses. qirāʾah bedeutet: Lesung; Unterrichtswort. Was nicht behauptet wird: Dass die sieben die Fātiḥah sind, steht in dem gespeicherten Versauszug nicht als eigener Satz. Wir behaupten diese Gleichsetzung nicht als gelesen. Dass die Fātiḥah die einzige Säule des Gebets sei, steht hier ebenfalls nicht. al-Mughnī wurde nicht gelesen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Die Qurʾān-Rezitation im Gebet. Das Lernziel ist: Im Gebet wird der Qurʾān gelesen. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass Allah sieben von den wiederholten und den gewaltigen Qurʾān gegeben hat. Der gespeicherte Ausdruck identifiziert diese sieben nicht mit einem zusätzlichen Satz. Alltag: Die Lehrperson zeigt, dass im Gebet laut oder leise gelesen wird, je nach dem Gebet, das sie kennt. Die Kinder hören zu. Aufgabe: Wir wiederholen keine arabische Sūrah mit einer erzeugten Stimme. maṯānī bedeutet: wiederholte; so das Wort des Verses. qirāʾah bedeutet: Lesung; Unterrichtswort. Was nicht behauptet wird: Dass die sieben die Fātiḥah sind, steht in dem gespeicherten Versauszug nicht als eigener Satz. Wir behaupten diese Gleichsetzung nicht als gelesen. Dass die Fātiḥah die einzige Säule des Gebets sei, steht hier ebenfalls nicht. al-Mughnī wurde nicht gelesen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 15:87.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -17958,7 +17958,7 @@ const additions=
         "situation": "Die Lehrperson zeigt, dass im Gebet laut oder leise gelesen wird, je nach dem Gebet, das sie kennt. Die Kinder hören zu.",
         "practice": "Wir wiederholen keine arabische Sūrah mit einer erzeugten Stimme.",
         "summary": "Belegt ist Qurʾān 15:87. Ungeprüft bleibt: Dass die sieben die Fātiḥah sind, steht in dem gespeicherten Versauszug nicht als eigener Satz.",
-        "audioScript": "Für die älteren Kinder. Die Qurʾān-Rezitation im Gebet. Der Vers sagt, dass Allah sieben von den wiederholten und den gewaltigen Qurʾān gegeben hat. Nicht belegt und deshalb nicht behauptet: Dass die sieben die Fātiḥah sind, steht in dem gespeicherten Versauszug nicht als eigener Satz."
+        "audioScript": "Die Qurʾān-Rezitation im Gebet. Der Vers sagt, dass Allah sieben von den wiederholten und den gewaltigen Qurʾān gegeben hat. Nicht belegt und deshalb nicht behauptet: Dass die sieben die Fātiḥah sind, steht in dem gespeicherten Versauszug nicht als eigener Satz."
       }
     },
     "questions": {
@@ -18094,7 +18094,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die ganze Sūrah steht im gespeicherten Ausdruck. Wir fügen keine Polemik und kein Bild hinzu. Eine Hadithnummer zum Vorzug der Sūrah wird nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Die ganze Sūrah steht im gespeicherten Ausdruck. Wir fügen keine Polemik und kein Bild hinzu. Eine Hadithnummer zum Vorzug der Sūrah wird nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Allah ist einzig.",
@@ -18127,7 +18127,7 @@ const additions=
       },
       "6-8": {
         "goal": "Allah ist einzig.",
-        "intro": "Heute geht es um Keinen geschaffenen Dingen göttliche Macht zuschreiben. Allah ist einzig. Wir lesen Qurʾān 112:1. Sinngemäß, ohne beglaubigte Übersetzung: Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich. So kann das im Alltag aussehen: Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Die Aufgabe: Wir wiederholen den deutschen Sinn und erzeugen keine Rezitation. aḥad bedeutet: Einer, einzig. kufuʾ bedeutet: gleich, ebenbürtig. Die Grenze der Stunde: Die ganze Sūrah steht im gespeicherten Ausdruck. Wir fügen keine Polemik und kein Bild hinzu. Eine Hadithnummer zum Vorzug der Sūrah wird nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Keinen geschaffenen Dingen göttliche Macht zuschreiben. Allah ist einzig. Wir lesen Qurʾān 112:1. Sinngemäß, ohne beglaubigte Übersetzung: Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich. So kann das im Alltag aussehen: Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Die Aufgabe: Wir wiederholen den deutschen Sinn und erzeugen keine Rezitation. aḥad bedeutet: Einer, einzig. kufuʾ bedeutet: gleich, ebenbürtig. Die Grenze der Stunde: Die ganze Sūrah steht im gespeicherten Ausdruck. Wir fügen keine Polemik und kein Bild hinzu. Eine Hadithnummer zum Vorzug der Sūrah wird nicht ergänzt.",
         "lines": [
           "Qurʾān 112:1 ist die gelesene Stelle.",
           "Allah ist der, auf den man angewiesen ist.",
@@ -18153,7 +18153,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Keinen geschaffenen Dingen göttliche Macht zuschreiben von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Keinen geschaffenen Dingen göttliche Macht zuschreiben. Das Lernziel ist: Allah ist einzig. Die Seite https://www.islamweb.net/ar/library/content/49/1984 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 112:1. Sinngemäß, keine beglaubigte Übersetzung: Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich. Alltag: Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Aufgabe: Wir wiederholen den deutschen Sinn und erzeugen keine Rezitation. aḥad bedeutet: Einer, einzig. kufuʾ bedeutet: gleich, ebenbürtig. Was nicht behauptet wird: Die ganze Sūrah steht im gespeicherten Ausdruck. Wir fügen keine Polemik und kein Bild hinzu. Eine Hadithnummer zum Vorzug der Sūrah wird nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Keinen geschaffenen Dingen göttliche Macht zuschreiben. Das Lernziel ist: Allah ist einzig. Sinngemäß, keine beglaubigte Übersetzung: Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich. Alltag: Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Aufgabe: Wir wiederholen den deutschen Sinn und erzeugen keine Rezitation. aḥad bedeutet: Einer, einzig. kufuʾ bedeutet: gleich, ebenbürtig. Was nicht behauptet wird: Die ganze Sūrah steht im gespeicherten Ausdruck. Wir fügen keine Polemik und kein Bild hinzu. Eine Hadithnummer zum Vorzug der Sūrah wird nicht ergänzt.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 112:1.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -18175,7 +18175,7 @@ const additions=
         "situation": "Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah.",
         "practice": "Wir wiederholen den deutschen Sinn und erzeugen keine Rezitation.",
         "summary": "Belegt ist Qurʾān 112:1. Ungeprüft bleibt: Die ganze Sūrah steht im gespeicherten Ausdruck.",
-        "audioScript": "Für die älteren Kinder. Keinen geschaffenen Dingen göttliche Macht zuschreiben. Allah ist der, auf den man angewiesen ist. Nicht belegt und deshalb nicht behauptet: Die ganze Sūrah steht im gespeicherten Ausdruck."
+        "audioScript": "Keinen geschaffenen Dingen göttliche Macht zuschreiben. Allah ist der, auf den man angewiesen ist. Nicht belegt und deshalb nicht behauptet: Die ganze Sūrah steht im gespeicherten Ausdruck."
       }
     },
     "questions": {
@@ -18311,7 +18311,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers spricht in seinem Anfang von einer Zusage der Kinder Israels. Wir machen daraus keine Aussage über heutige Mitschüler. Für die Stunde nehmen wir das gute Wort und das Gute zu den Eltern, so wie es der Ausdruck trägt. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Vers spricht in seinem Anfang von einer Zusage der Kinder Israels. Wir machen daraus keine Aussage über heutige Mitschüler. Für die Stunde nehmen wir das gute Wort und das Gute zu den Eltern, so wie es der Ausdruck trägt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Zum Glauben gehört auch ein gutes Wort zu den Menschen.",
@@ -18344,7 +18344,7 @@ const additions=
       },
       "6-8": {
         "goal": "Zum Glauben gehört auch ein gutes Wort zu den Menschen.",
-        "intro": "Heute geht es um Glaube und gute Worte. Zum Glauben gehört auch ein gutes Wort zu den Menschen. Wir lesen Qurʾān 2:83. Sinngemäß, ohne beglaubigte Übersetzung: Der lange Vers erinnert an eine Zusage, niemandem außer Allah zu dienen, den Eltern gut zu sein und zu den Menschen Gutes zu sagen. So kann das im Alltag aussehen: Ein Kind begegnet einer Person an der Tür und sagt einen freundlichen Gruß statt wegzuschauen. Die Aufgabe: Wir üben ein gutes Wort und eine kleine Hilfe. qawl ḥasan bedeutet: ein gutes Wort. wālidain bedeutet: Eltern. Die Grenze der Stunde: Der Vers spricht in seinem Anfang von einer Zusage der Kinder Israels. Wir machen daraus keine Aussage über heutige Mitschüler. Für die Stunde nehmen wir das gute Wort und das Gute zu den Eltern, so wie es der Ausdruck trägt. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Glaube und gute Worte. Zum Glauben gehört auch ein gutes Wort zu den Menschen. Wir lesen Qurʾān 2:83. Sinngemäß, ohne beglaubigte Übersetzung: Der lange Vers erinnert an eine Zusage, niemandem außer Allah zu dienen, den Eltern gut zu sein und zu den Menschen Gutes zu sagen. So kann das im Alltag aussehen: Ein Kind begegnet einer Person an der Tür und sagt einen freundlichen Gruß statt wegzuschauen. Die Aufgabe: Wir üben ein gutes Wort und eine kleine Hilfe. qawl ḥasan bedeutet: ein gutes Wort. wālidain bedeutet: Eltern. Die Grenze der Stunde: Der Vers spricht in seinem Anfang von einer Zusage der Kinder Israels. Wir machen daraus keine Aussage über heutige Mitschüler. Für die Stunde nehmen wir das gute Wort und das Gute zu den Eltern, so wie es der Ausdruck trägt.",
         "lines": [
           "Qurʾān 2:83 ist die gelesene Stelle.",
           "Der lange Vers erinnert an eine Zusage, niemandem außer Allah zu dienen, den Eltern gut zu sein und zu den Menschen Gutes zu sagen.",
@@ -18370,7 +18370,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Glaube und gute Worte von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Glaube und gute Worte. Das Lernziel ist: Zum Glauben gehört auch ein gutes Wort zu den Menschen. Die Seite https://www.islamweb.net/ar/library/content/49/107 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:83. Sinngemäß, keine beglaubigte Übersetzung: Der lange Vers erinnert an eine Zusage, niemandem außer Allah zu dienen, den Eltern gut zu sein und zu den Menschen Gutes zu sagen. Alltag: Ein Kind begegnet einer Person an der Tür und sagt einen freundlichen Gruß statt wegzuschauen. Aufgabe: Wir üben ein gutes Wort und eine kleine Hilfe. qawl ḥasan bedeutet: ein gutes Wort. wālidain bedeutet: Eltern. Was nicht behauptet wird: Der Vers spricht in seinem Anfang von einer Zusage der Kinder Israels. Wir machen daraus keine Aussage über heutige Mitschüler. Für die Stunde nehmen wir das gute Wort und das Gute zu den Eltern, so wie es der Ausdruck trägt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Glaube und gute Worte. Das Lernziel ist: Zum Glauben gehört auch ein gutes Wort zu den Menschen. Sinngemäß, keine beglaubigte Übersetzung: Der lange Vers erinnert an eine Zusage, niemandem außer Allah zu dienen, den Eltern gut zu sein und zu den Menschen Gutes zu sagen. Alltag: Ein Kind begegnet einer Person an der Tür und sagt einen freundlichen Gruß statt wegzuschauen. Aufgabe: Wir üben ein gutes Wort und eine kleine Hilfe. qawl ḥasan bedeutet: ein gutes Wort. wālidain bedeutet: Eltern. Was nicht behauptet wird: Der Vers spricht in seinem Anfang von einer Zusage der Kinder Israels. Wir machen daraus keine Aussage über heutige Mitschüler. Für die Stunde nehmen wir das gute Wort und das Gute zu den Eltern, so wie es der Ausdruck trägt.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 2:83.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -18392,7 +18392,7 @@ const additions=
         "situation": "Ein Kind begegnet einer Person an der Tür und sagt einen freundlichen Gruß statt wegzuschauen.",
         "practice": "Wir üben ein gutes Wort und eine kleine Hilfe.",
         "summary": "Belegt ist Qurʾān 2:83. Ungeprüft bleibt: Der Vers spricht in seinem Anfang von einer Zusage der Kinder Israels.",
-        "audioScript": "Für die älteren Kinder. Glaube und gute Worte. Der lange Vers erinnert an eine Zusage, niemandem außer Allah zu dienen, den Eltern gut zu sein und zu den Menschen Gutes zu sagen. Nicht belegt und deshalb nicht behauptet: Der Vers spricht in seinem Anfang von einer Zusage der Kinder Israels."
+        "audioScript": "Glaube und gute Worte. Der lange Vers erinnert an eine Zusage, niemandem außer Allah zu dienen, den Eltern gut zu sein und zu den Menschen Gutes zu sagen. Nicht belegt und deshalb nicht behauptet: Der Vers spricht in seinem Anfang von einer Zusage der Kinder Israels."
       }
     },
     "questions": {
@@ -18528,7 +18528,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Dieselbe Fundstelle wird zum dritten Mal verwendet, mit dem Lernziel der Grenze. Der Vers befiehlt nicht, jede Bitte zu erfüllen. Die Sicherheitsgrenze ist Unterricht und kein zusätzlicher Qurʾān-Satz. Dieselbe gelesene Fundstelle wurde schon in Slot 149 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+      "note": "Dieselbe Fundstelle wird zum dritten Mal verwendet, mit dem Lernziel der Grenze. Der Vers befiehlt nicht, jede Bitte zu erfüllen. Die Sicherheitsgrenze ist Unterricht und kein zusätzlicher Qurʾān-Satz. Dieselbe gelesene Fundstelle wurde schon in Slot 149 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
       "sameLocusAsSlot": 149
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
@@ -18562,7 +18562,7 @@ const additions=
       },
       "6-8": {
         "goal": "Wir helfen, aber nicht, wenn die Hilfe uns oder andere in Gefahr bringt.",
-        "intro": "Heute geht es um Hilfsbereitschaft ohne Druck. Wir helfen, aber nicht, wenn die Hilfe uns oder andere in Gefahr bringt. Wir lesen Qurʾān 5:2. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe Stelle über die gegenseitige Hilfe bei der Rechtschaffenheit gilt auch hier. Die Grenze ist das Lernziel. So kann das im Alltag aussehen: Jemand bittet ein Kind, auf eine hohe Mauer zu steigen, um einen Ball zu holen. Das Kind sagt Nein und holt einen Erwachsenen. Die Aufgabe: Wir üben: Ich helfe dir bei dem, was sicher ist. Bei dem anderen hole ich jemanden. birr bedeutet: Rechtschaffenheit. ḥudūd bedeutet: Grenzen; Unterrichtswort. Die Grenze der Stunde: Dieselbe Fundstelle wird zum dritten Mal verwendet, mit dem Lernziel der Grenze. Der Vers befiehlt nicht, jede Bitte zu erfüllen. Die Sicherheitsgrenze ist Unterricht und kein zusätzlicher Qurʾān-Satz. Dieselbe gelesene Fundstelle wurde schon in Slot 149 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Hilfsbereitschaft ohne Druck. Wir helfen, aber nicht, wenn die Hilfe uns oder andere in Gefahr bringt. Wir lesen Qurʾān 5:2. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe Stelle über die gegenseitige Hilfe bei der Rechtschaffenheit gilt auch hier. Die Grenze ist das Lernziel. So kann das im Alltag aussehen: Jemand bittet ein Kind, auf eine hohe Mauer zu steigen, um einen Ball zu holen. Das Kind sagt Nein und holt einen Erwachsenen. Die Aufgabe: Wir üben: Ich helfe dir bei dem, was sicher ist. Bei dem anderen hole ich jemanden. birr bedeutet: Rechtschaffenheit. ḥudūd bedeutet: Grenzen; Unterrichtswort. Die Grenze der Stunde: Dieselbe Fundstelle wird zum dritten Mal verwendet, mit dem Lernziel der Grenze. Der Vers befiehlt nicht, jede Bitte zu erfüllen. Die Sicherheitsgrenze ist Unterricht und kein zusätzlicher Qurʾān-Satz. Dieselbe gelesene Fundstelle wurde schon in Slot 149 mit einem anderen Lernziel verwendet.",
         "lines": [
           "Qurʾān 5:2 ist die gelesene Stelle.",
           "Dieselbe Stelle über die gegenseitige Hilfe bei der Rechtschaffenheit gilt auch hier.",
@@ -18588,7 +18588,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Hilfsbereitschaft ohne Druck von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Hilfsbereitschaft ohne Druck. Das Lernziel ist: Wir helfen, aber nicht, wenn die Hilfe uns oder andere in Gefahr bringt. Die Seite https://www.islamweb.net/ar/library/content/49/372 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 5:2. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe Stelle über die gegenseitige Hilfe bei der Rechtschaffenheit gilt auch hier. Die Grenze ist das Lernziel. Alltag: Jemand bittet ein Kind, auf eine hohe Mauer zu steigen, um einen Ball zu holen. Das Kind sagt Nein und holt einen Erwachsenen. Aufgabe: Wir üben: Ich helfe dir bei dem, was sicher ist. Bei dem anderen hole ich jemanden. birr bedeutet: Rechtschaffenheit. ḥudūd bedeutet: Grenzen; Unterrichtswort. Was nicht behauptet wird: Dieselbe Fundstelle wird zum dritten Mal verwendet, mit dem Lernziel der Grenze. Der Vers befiehlt nicht, jede Bitte zu erfüllen. Die Sicherheitsgrenze ist Unterricht und kein zusätzlicher Qurʾān-Satz. Dieselbe gelesene Fundstelle wurde schon in Slot 149 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Hilfsbereitschaft ohne Druck. Das Lernziel ist: Wir helfen, aber nicht, wenn die Hilfe uns oder andere in Gefahr bringt. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe Stelle über die gegenseitige Hilfe bei der Rechtschaffenheit gilt auch hier. Die Grenze ist das Lernziel. Alltag: Jemand bittet ein Kind, auf eine hohe Mauer zu steigen, um einen Ball zu holen. Das Kind sagt Nein und holt einen Erwachsenen. Aufgabe: Wir üben: Ich helfe dir bei dem, was sicher ist. Bei dem anderen hole ich jemanden. birr bedeutet: Rechtschaffenheit. ḥudūd bedeutet: Grenzen; Unterrichtswort. Was nicht behauptet wird: Dieselbe Fundstelle wird zum dritten Mal verwendet, mit dem Lernziel der Grenze. Der Vers befiehlt nicht, jede Bitte zu erfüllen. Die Sicherheitsgrenze ist Unterricht und kein zusätzlicher Qurʾān-Satz. Dieselbe gelesene Fundstelle wurde schon in Slot 149 mit einem anderen Lernziel verwendet.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 5:2.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -18610,7 +18610,7 @@ const additions=
         "situation": "Jemand bittet ein Kind, auf eine hohe Mauer zu steigen, um einen Ball zu holen. Das Kind sagt Nein und holt einen Erwachsenen.",
         "practice": "Wir üben: Ich helfe dir bei dem, was sicher ist. Bei dem anderen hole ich jemanden.",
         "summary": "Belegt ist Qurʾān 5:2. Ungeprüft bleibt: Dieselbe Fundstelle wird zum dritten Mal verwendet, mit dem Lernziel der Grenze.",
-        "audioScript": "Für die älteren Kinder. Hilfsbereitschaft ohne Druck. Dieselbe Stelle über die gegenseitige Hilfe bei der Rechtschaffenheit gilt auch hier. Nicht belegt und deshalb nicht behauptet: Dieselbe Fundstelle wird zum dritten Mal verwendet, mit dem Lernziel der Grenze."
+        "audioScript": "Hilfsbereitschaft ohne Druck. Dieselbe Stelle über die gegenseitige Hilfe bei der Rechtschaffenheit gilt auch hier. Nicht belegt und deshalb nicht behauptet: Dieselbe Fundstelle wird zum dritten Mal verwendet, mit dem Lernziel der Grenze."
       }
     },
     "questions": {
@@ -18746,7 +18746,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers spricht vom Vortrag des Qurʾān, nicht von jeder Schulstunde. Das ruhige Zuhören im Unterricht nennen wir eine passende Gewohnheit, nicht den Wortlaut des Verses. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Vers spricht vom Vortrag des Qurʾān, nicht von jeder Schulstunde. Das ruhige Zuhören im Unterricht nennen wir eine passende Gewohnheit, nicht den Wortlaut des Verses. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Wenn der Qurʾān gelesen wird, hören wir zu und schweigen.",
@@ -18779,7 +18779,7 @@ const additions=
       },
       "6-8": {
         "goal": "Wenn der Qurʾān gelesen wird, hören wir zu und schweigen.",
-        "intro": "Heute geht es um Beim Unterricht aufmerksam sein. Wenn der Qurʾān gelesen wird, hören wir zu und schweigen. Wir lesen Qurʾān 7:204. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt: Wenn der Qurʾān vorgetragen wird, hört ihm zu und seid still, auf dass ihr Barmherzigkeit erlangt. So kann das im Alltag aussehen: Jemand liest einen kurzen deutschen Satz. Die anderen unterbrechen nicht und heben danach die Hand. Die Aufgabe: Wir üben das Stillsitzen während des Satzes und das Fragen danach. istaǧibū bedeutet: hört zu. anṣitū bedeutet: seid still. Die Grenze der Stunde: Der Vers spricht vom Vortrag des Qurʾān, nicht von jeder Schulstunde. Das ruhige Zuhören im Unterricht nennen wir eine passende Gewohnheit, nicht den Wortlaut des Verses. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Beim Unterricht aufmerksam sein. Wenn der Qurʾān gelesen wird, hören wir zu und schweigen. Wir lesen Qurʾān 7:204. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt: Wenn der Qurʾān vorgetragen wird, hört ihm zu und seid still, auf dass ihr Barmherzigkeit erlangt. So kann das im Alltag aussehen: Jemand liest einen kurzen deutschen Satz. Die anderen unterbrechen nicht und heben danach die Hand. Die Aufgabe: Wir üben das Stillsitzen während des Satzes und das Fragen danach. istaǧibū bedeutet: hört zu. anṣitū bedeutet: seid still. Die Grenze der Stunde: Der Vers spricht vom Vortrag des Qurʾān, nicht von jeder Schulstunde. Das ruhige Zuhören im Unterricht nennen wir eine passende Gewohnheit, nicht den Wortlaut des Verses.",
         "lines": [
           "Qurʾān 7:204 ist die gelesene Stelle.",
           "Der Vers sagt: Wenn der Qurʾān vorgetragen wird, hört ihm zu und seid still, auf dass ihr Barmherzigkeit erlangt.",
@@ -18805,7 +18805,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Beim Unterricht aufmerksam sein von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Beim Unterricht aufmerksam sein. Das Lernziel ist: Wenn der Qurʾān gelesen wird, hören wir zu und schweigen. Die Seite https://www.islamweb.net/ar/library/content/49/589 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 7:204. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt: Wenn der Qurʾān vorgetragen wird, hört ihm zu und seid still, auf dass ihr Barmherzigkeit erlangt. Alltag: Jemand liest einen kurzen deutschen Satz. Die anderen unterbrechen nicht und heben danach die Hand. Aufgabe: Wir üben das Stillsitzen während des Satzes und das Fragen danach. istaǧibū bedeutet: hört zu. anṣitū bedeutet: seid still. Was nicht behauptet wird: Der Vers spricht vom Vortrag des Qurʾān, nicht von jeder Schulstunde. Das ruhige Zuhören im Unterricht nennen wir eine passende Gewohnheit, nicht den Wortlaut des Verses. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Beim Unterricht aufmerksam sein. Das Lernziel ist: Wenn der Qurʾān gelesen wird, hören wir zu und schweigen. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt: Wenn der Qurʾān vorgetragen wird, hört ihm zu und seid still, auf dass ihr Barmherzigkeit erlangt. Alltag: Jemand liest einen kurzen deutschen Satz. Die anderen unterbrechen nicht und heben danach die Hand. Aufgabe: Wir üben das Stillsitzen während des Satzes und das Fragen danach. istaǧibū bedeutet: hört zu. anṣitū bedeutet: seid still. Was nicht behauptet wird: Der Vers spricht vom Vortrag des Qurʾān, nicht von jeder Schulstunde. Das ruhige Zuhören im Unterricht nennen wir eine passende Gewohnheit, nicht den Wortlaut des Verses.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 7:204.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -18827,7 +18827,7 @@ const additions=
         "situation": "Jemand liest einen kurzen deutschen Satz. Die anderen unterbrechen nicht und heben danach die Hand.",
         "practice": "Wir üben das Stillsitzen während des Satzes und das Fragen danach.",
         "summary": "Belegt ist Qurʾān 7:204. Ungeprüft bleibt: Der Vers spricht vom Vortrag des Qurʾān, nicht von jeder Schulstunde.",
-        "audioScript": "Für die älteren Kinder. Beim Unterricht aufmerksam sein. Der Vers sagt: Wenn der Qurʾān vorgetragen wird, hört ihm zu und seid still, auf dass ihr Barmherzigkeit erlangt. Nicht belegt und deshalb nicht behauptet: Der Vers spricht vom Vortrag des Qurʾān, nicht von jeder Schulstunde."
+        "audioScript": "Beim Unterricht aufmerksam sein. Der Vers sagt: Wenn der Qurʾān vorgetragen wird, hört ihm zu und seid still, auf dass ihr Barmherzigkeit erlangt. Nicht belegt und deshalb nicht behauptet: Der Vers spricht vom Vortrag des Qurʾān, nicht von jeder Schulstunde."
       }
     },
     "questions": {
@@ -18963,7 +18963,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Dieselbe Fundstelle, anderes Lernziel: das schwere Gefühl. Wir malen keine Hölle und kein Gericht. Die vertraute Person ist die Schutzregel und kein Hadith. Dieselbe gelesene Fundstelle wurde schon in Slot 129 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+      "note": "Dieselbe Fundstelle, anderes Lernziel: das schwere Gefühl. Wir malen keine Hölle und kein Gericht. Die vertraute Person ist die Schutzregel und kein Hadith. Dieselbe gelesene Fundstelle wurde schon in Slot 129 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
       "sameLocusAsSlot": 129
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
@@ -18997,7 +18997,7 @@ const additions=
       },
       "6-8": {
         "goal": "Wenn uns ein Fehler bedrückt, sagen wir ihn einer vertrauten Person und verzweifeln nicht an Allahs Barmherzigkeit.",
-        "intro": "Heute geht es um Schuldgefühle ohne Angstbilder besprechen. Wenn uns ein Fehler bedrückt, sagen wir ihn einer vertrauten Person und verzweifeln nicht an Allahs Barmherzigkeit. Wir lesen Qurʾān 39:53. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe Stelle wie in der Reuestunde ruft dazu auf, nicht an Allahs Barmherzigkeit zu verzweifeln. So kann das im Alltag aussehen: Ein Kind hat gelogen und fühlt sich schwer. Es sagt es der Mutter oder dem Vater. Die Aufgabe: Wir üben, den Fehler mit einem Satz zu sagen, ohne eine Strafszene. qunūṭ bedeutet: Verzweiflung. maġfirah bedeutet: Vergebung. Die Grenze der Stunde: Dieselbe Fundstelle, anderes Lernziel: das schwere Gefühl. Wir malen keine Hölle und kein Gericht. Die vertraute Person ist die Schutzregel und kein Hadith. Dieselbe gelesene Fundstelle wurde schon in Slot 129 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Schuldgefühle ohne Angstbilder besprechen. Wenn uns ein Fehler bedrückt, sagen wir ihn einer vertrauten Person und verzweifeln nicht an Allahs Barmherzigkeit. Wir lesen Qurʾān 39:53. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe Stelle wie in der Reuestunde ruft dazu auf, nicht an Allahs Barmherzigkeit zu verzweifeln. So kann das im Alltag aussehen: Ein Kind hat gelogen und fühlt sich schwer. Es sagt es der Mutter oder dem Vater. Die Aufgabe: Wir üben, den Fehler mit einem Satz zu sagen, ohne eine Strafszene. qunūṭ bedeutet: Verzweiflung. maġfirah bedeutet: Vergebung. Die Grenze der Stunde: Dieselbe Fundstelle, anderes Lernziel: das schwere Gefühl. Wir malen keine Hölle und kein Gericht. Die vertraute Person ist die Schutzregel und kein Hadith. Dieselbe gelesene Fundstelle wurde schon in Slot 129 mit einem anderen Lernziel verwendet.",
         "lines": [
           "Qurʾān 39:53 ist die gelesene Stelle.",
           "Dieselbe Stelle wie in der Reuestunde ruft dazu auf, nicht an Allahs Barmherzigkeit zu verzweifeln.",
@@ -19023,7 +19023,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Schuldgefühle ohne Angstbilder besprechen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Schuldgefühle ohne Angstbilder besprechen. Das Lernziel ist: Wenn uns ein Fehler bedrückt, sagen wir ihn einer vertrauten Person und verzweifeln nicht an Allahs Barmherzigkeit. Die Seite https://www.islamweb.net/ar/library/content/49/1629 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 39:53. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe Stelle wie in der Reuestunde ruft dazu auf, nicht an Allahs Barmherzigkeit zu verzweifeln. Alltag: Ein Kind hat gelogen und fühlt sich schwer. Es sagt es der Mutter oder dem Vater. Aufgabe: Wir üben, den Fehler mit einem Satz zu sagen, ohne eine Strafszene. qunūṭ bedeutet: Verzweiflung. maġfirah bedeutet: Vergebung. Was nicht behauptet wird: Dieselbe Fundstelle, anderes Lernziel: das schwere Gefühl. Wir malen keine Hölle und kein Gericht. Die vertraute Person ist die Schutzregel und kein Hadith. Dieselbe gelesene Fundstelle wurde schon in Slot 129 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Schuldgefühle ohne Angstbilder besprechen. Das Lernziel ist: Wenn uns ein Fehler bedrückt, sagen wir ihn einer vertrauten Person und verzweifeln nicht an Allahs Barmherzigkeit. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe Stelle wie in der Reuestunde ruft dazu auf, nicht an Allahs Barmherzigkeit zu verzweifeln. Alltag: Ein Kind hat gelogen und fühlt sich schwer. Es sagt es der Mutter oder dem Vater. Aufgabe: Wir üben, den Fehler mit einem Satz zu sagen, ohne eine Strafszene. qunūṭ bedeutet: Verzweiflung. maġfirah bedeutet: Vergebung. Was nicht behauptet wird: Dieselbe Fundstelle, anderes Lernziel: das schwere Gefühl. Wir malen keine Hölle und kein Gericht. Die vertraute Person ist die Schutzregel und kein Hadith. Dieselbe gelesene Fundstelle wurde schon in Slot 129 mit einem anderen Lernziel verwendet.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 39:53.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -19045,7 +19045,7 @@ const additions=
         "situation": "Ein Kind hat gelogen und fühlt sich schwer. Es sagt es der Mutter oder dem Vater.",
         "practice": "Wir üben, den Fehler mit einem Satz zu sagen, ohne eine Strafszene.",
         "summary": "Belegt ist Qurʾān 39:53. Ungeprüft bleibt: Dieselbe Fundstelle, anderes Lernziel: das schwere Gefühl.",
-        "audioScript": "Für die älteren Kinder. Schuldgefühle ohne Angstbilder besprechen. Dieselbe Stelle wie in der Reuestunde ruft dazu auf, nicht an Allahs Barmherzigkeit zu verzweifeln. Nicht belegt und deshalb nicht behauptet: Dieselbe Fundstelle, anderes Lernziel: das schwere Gefühl."
+        "audioScript": "Schuldgefühle ohne Angstbilder besprechen. Dieselbe Stelle wie in der Reuestunde ruft dazu auf, nicht an Allahs Barmherzigkeit zu verzweifeln. Nicht belegt und deshalb nicht behauptet: Dieselbe Fundstelle, anderes Lernziel: das schwere Gefühl."
       }
     },
     "questions": {
@@ -19181,7 +19181,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Der Vers nennt die Verbeugung und die Niederwerfung, beschreibt aber nicht, wie weit der Rücken geneigt ist. al-Mughnī wurde nicht gelesen. Die Rechtsform bleibt ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Vers nennt die Verbeugung und die Niederwerfung, beschreibt aber nicht, wie weit der Rücken geneigt ist. al-Mughnī wurde nicht gelesen. Die Rechtsform bleibt ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
     "sample": "Die Verbeugung im Gebet üben wir mit einer Lehrperson.",
@@ -19214,7 +19214,7 @@ const additions=
       },
       "6-8": {
         "goal": "Die Verbeugung im Gebet üben wir mit einer Lehrperson.",
-        "intro": "Heute geht es um Rukūʿ kennenlernen. Die Verbeugung im Gebet üben wir mit einer Lehrperson. Wir lesen Qurʾān 22:77. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers fordert die Glaubenden auf: Verbeugt euch, werft euch nieder, dient eurem Herrn und tut das Gute. So kann das im Alltag aussehen: Die Lehrperson zeigt die Verbeugung. Die Kinder machen sie langsam mit und richten sich wieder auf, ohne ein Maß zu erfinden. Die Aufgabe: Wir nennen das Wort Rukūʿ und sagen, dass der Winkel nicht aus diesem Vers stammt. rukūʿ bedeutet: Verbeugung. suǧūd bedeutet: Niederwerfung. Die Grenze der Stunde: Der Vers nennt die Verbeugung und die Niederwerfung, beschreibt aber nicht, wie weit der Rücken geneigt ist. al-Mughnī wurde nicht gelesen. Die Rechtsform bleibt ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Rukūʿ kennenlernen. Die Verbeugung im Gebet üben wir mit einer Lehrperson. Wir lesen Qurʾān 22:77. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers fordert die Glaubenden auf: Verbeugt euch, werft euch nieder, dient eurem Herrn und tut das Gute. So kann das im Alltag aussehen: Die Lehrperson zeigt die Verbeugung. Die Kinder machen sie langsam mit und richten sich wieder auf, ohne ein Maß zu erfinden. Die Aufgabe: Wir nennen das Wort Rukūʿ und sagen, dass der Winkel nicht aus diesem Vers stammt. rukūʿ bedeutet: Verbeugung. suǧūd bedeutet: Niederwerfung. Die Grenze der Stunde: Der Vers nennt die Verbeugung und die Niederwerfung, beschreibt aber nicht, wie weit der Rücken geneigt ist. al-Mughnī wurde nicht gelesen. Die Rechtsform bleibt ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
         "lines": [
           "Qurʾān 22:77 ist die gelesene Stelle.",
           "Der Vers fordert die Glaubenden auf: Verbeugt euch, werft euch nieder, dient eurem Herrn und tut das Gute.",
@@ -19240,7 +19240,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Rukūʿ kennenlernen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Rukūʿ kennenlernen. Das Lernziel ist: Die Verbeugung im Gebet üben wir mit einer Lehrperson. Die Seite https://www.islamweb.net/ar/library/content/49/1229 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 22:77. Sinngemäß, keine beglaubigte Übersetzung: Der Vers fordert die Glaubenden auf: Verbeugt euch, werft euch nieder, dient eurem Herrn und tut das Gute. Alltag: Die Lehrperson zeigt die Verbeugung. Die Kinder machen sie langsam mit und richten sich wieder auf, ohne ein Maß zu erfinden. Aufgabe: Wir nennen das Wort Rukūʿ und sagen, dass der Winkel nicht aus diesem Vers stammt. rukūʿ bedeutet: Verbeugung. suǧūd bedeutet: Niederwerfung. Was nicht behauptet wird: Der Vers nennt die Verbeugung und die Niederwerfung, beschreibt aber nicht, wie weit der Rücken geneigt ist. al-Mughnī wurde nicht gelesen. Die Rechtsform bleibt ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Rukūʿ kennenlernen. Das Lernziel ist: Die Verbeugung im Gebet üben wir mit einer Lehrperson. Sinngemäß, keine beglaubigte Übersetzung: Der Vers fordert die Glaubenden auf: Verbeugt euch, werft euch nieder, dient eurem Herrn und tut das Gute. Alltag: Die Lehrperson zeigt die Verbeugung. Die Kinder machen sie langsam mit und richten sich wieder auf, ohne ein Maß zu erfinden. Aufgabe: Wir nennen das Wort Rukūʿ und sagen, dass der Winkel nicht aus diesem Vers stammt. rukūʿ bedeutet: Verbeugung. suǧūd bedeutet: Niederwerfung. Was nicht behauptet wird: Der Vers nennt die Verbeugung und die Niederwerfung, beschreibt aber nicht, wie weit der Rücken geneigt ist. al-Mughnī wurde nicht gelesen. Die Rechtsform bleibt ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 22:77.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -19262,7 +19262,7 @@ const additions=
         "situation": "Die Lehrperson zeigt die Verbeugung. Die Kinder machen sie langsam mit und richten sich wieder auf, ohne ein Maß zu erfinden.",
         "practice": "Wir nennen das Wort Rukūʿ und sagen, dass der Winkel nicht aus diesem Vers stammt.",
         "summary": "Belegt ist Qurʾān 22:77. Ungeprüft bleibt: Der Vers nennt die Verbeugung und die Niederwerfung, beschreibt aber nicht, wie weit der Rücken geneigt ist.",
-        "audioScript": "Für die älteren Kinder. Rukūʿ kennenlernen. Der Vers fordert die Glaubenden auf: Verbeugt euch, werft euch nieder, dient eurem Herrn und tut das Gute. Nicht belegt und deshalb nicht behauptet: Der Vers nennt die Verbeugung und die Niederwerfung, beschreibt aber nicht, wie weit der Rücken geneigt ist."
+        "audioScript": "Rukūʿ kennenlernen. Der Vers fordert die Glaubenden auf: Verbeugt euch, werft euch nieder, dient eurem Herrn und tut das Gute. Nicht belegt und deshalb nicht behauptet: Der Vers nennt die Verbeugung und die Niederwerfung, beschreibt aber nicht, wie weit der Rücken geneigt ist."
       }
     },
     "questions": {
@@ -19398,7 +19398,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Dieselbe Fundstelle trägt hier das Paar aus Tun und Vertrauen. Wir benutzen keinen Vers über eine Gruppe, die sich selbst ändert, weil wir ihn nicht neu gelesen haben. Dieselbe gelesene Fundstelle wurde schon in Slot 176 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+      "note": "Dieselbe Fundstelle trägt hier das Paar aus Tun und Vertrauen. Wir benutzen keinen Vers über eine Gruppe, die sich selbst ändert, weil wir ihn nicht neu gelesen haben. Dieselbe gelesene Fundstelle wurde schon in Slot 176 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
       "sameLocusAsSlot": 176
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
@@ -19432,7 +19432,7 @@ const additions=
       },
       "6-8": {
         "goal": "Wir strengen uns an und vertrauen dabei auf Allah.",
-        "intro": "Heute geht es um Allah vertrauen und sich bemühen. Wir strengen uns an und vertrauen dabei auf Allah. Wir lesen Qurʾān 2:45. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe Stelle wie in der Stunde über Bemühen und Vertrauen sagt, Hilfe in Geduld und Gebet zu suchen. So kann das im Alltag aussehen: Ein Kind übt ein Wort zehnmal langsam und bittet Allah danach um Segen, statt die Übung wegzulassen. Die Aufgabe: Wir tun die Übung wirklich und sprechen danach eine kurze Bitte. tawakkul bedeutet: Vertrauen; Unterrichtswort, der Vers spricht vom Hilfe-Suchen. ṣabr bedeutet: Geduld. Die Grenze der Stunde: Dieselbe Fundstelle trägt hier das Paar aus Tun und Vertrauen. Wir benutzen keinen Vers über eine Gruppe, die sich selbst ändert, weil wir ihn nicht neu gelesen haben. Dieselbe gelesene Fundstelle wurde schon in Slot 176 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Allah vertrauen und sich bemühen. Wir strengen uns an und vertrauen dabei auf Allah. Wir lesen Qurʾān 2:45. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe Stelle wie in der Stunde über Bemühen und Vertrauen sagt, Hilfe in Geduld und Gebet zu suchen. So kann das im Alltag aussehen: Ein Kind übt ein Wort zehnmal langsam und bittet Allah danach um Segen, statt die Übung wegzulassen. Die Aufgabe: Wir tun die Übung wirklich und sprechen danach eine kurze Bitte. tawakkul bedeutet: Vertrauen; Unterrichtswort, der Vers spricht vom Hilfe-Suchen. ṣabr bedeutet: Geduld. Die Grenze der Stunde: Dieselbe Fundstelle trägt hier das Paar aus Tun und Vertrauen. Wir benutzen keinen Vers über eine Gruppe, die sich selbst ändert, weil wir ihn nicht neu gelesen haben. Dieselbe gelesene Fundstelle wurde schon in Slot 176 mit einem anderen Lernziel verwendet.",
         "lines": [
           "Qurʾān 2:45 ist die gelesene Stelle.",
           "Dieselbe Stelle wie in der Stunde über Bemühen und Vertrauen sagt, Hilfe in Geduld und Gebet zu suchen.",
@@ -19458,7 +19458,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Allah vertrauen und sich bemühen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Allah vertrauen und sich bemühen. Das Lernziel ist: Wir strengen uns an und vertrauen dabei auf Allah. Die Seite https://www.islamweb.net/ar/library/content/49/85 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:45. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe Stelle wie in der Stunde über Bemühen und Vertrauen sagt, Hilfe in Geduld und Gebet zu suchen. Alltag: Ein Kind übt ein Wort zehnmal langsam und bittet Allah danach um Segen, statt die Übung wegzulassen. Aufgabe: Wir tun die Übung wirklich und sprechen danach eine kurze Bitte. tawakkul bedeutet: Vertrauen; Unterrichtswort, der Vers spricht vom Hilfe-Suchen. ṣabr bedeutet: Geduld. Was nicht behauptet wird: Dieselbe Fundstelle trägt hier das Paar aus Tun und Vertrauen. Wir benutzen keinen Vers über eine Gruppe, die sich selbst ändert, weil wir ihn nicht neu gelesen haben. Dieselbe gelesene Fundstelle wurde schon in Slot 176 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Allah vertrauen und sich bemühen. Das Lernziel ist: Wir strengen uns an und vertrauen dabei auf Allah. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe Stelle wie in der Stunde über Bemühen und Vertrauen sagt, Hilfe in Geduld und Gebet zu suchen. Alltag: Ein Kind übt ein Wort zehnmal langsam und bittet Allah danach um Segen, statt die Übung wegzulassen. Aufgabe: Wir tun die Übung wirklich und sprechen danach eine kurze Bitte. tawakkul bedeutet: Vertrauen; Unterrichtswort, der Vers spricht vom Hilfe-Suchen. ṣabr bedeutet: Geduld. Was nicht behauptet wird: Dieselbe Fundstelle trägt hier das Paar aus Tun und Vertrauen. Wir benutzen keinen Vers über eine Gruppe, die sich selbst ändert, weil wir ihn nicht neu gelesen haben. Dieselbe gelesene Fundstelle wurde schon in Slot 176 mit einem anderen Lernziel verwendet.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 2:45.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -19480,7 +19480,7 @@ const additions=
         "situation": "Ein Kind übt ein Wort zehnmal langsam und bittet Allah danach um Segen, statt die Übung wegzulassen.",
         "practice": "Wir tun die Übung wirklich und sprechen danach eine kurze Bitte.",
         "summary": "Belegt ist Qurʾān 2:45. Ungeprüft bleibt: Dieselbe Fundstelle trägt hier das Paar aus Tun und Vertrauen.",
-        "audioScript": "Für die älteren Kinder. Allah vertrauen und sich bemühen. Dieselbe Stelle wie in der Stunde über Bemühen und Vertrauen sagt, Hilfe in Geduld und Gebet zu suchen. Nicht belegt und deshalb nicht behauptet: Dieselbe Fundstelle trägt hier das Paar aus Tun und Vertrauen."
+        "audioScript": "Allah vertrauen und sich bemühen. Dieselbe Stelle wie in der Stunde über Bemühen und Vertrauen sagt, Hilfe in Geduld und Gebet zu suchen. Nicht belegt und deshalb nicht behauptet: Dieselbe Fundstelle trägt hier das Paar aus Tun und Vertrauen."
       }
     },
     "questions": {
@@ -19616,7 +19616,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers nennt die Leute der Erinnerung. Wen das heute im Einzelnen ist, legen wir nicht mit einem neuen Rechtsurteil fest. Für die Stunde ist es die Lehrperson und die Eltern. Wir erfinden keine Antwort, die der Vers nicht gibt. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Vers nennt die Leute der Erinnerung. Wen das heute im Einzelnen ist, legen wir nicht mit einem neuen Rechtsurteil fest. Für die Stunde ist es die Lehrperson und die Eltern. Wir erfinden keine Antwort, die der Vers nicht gibt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Wir erfinden keine zusätzliche Geschichte.",
     "sample": "Eine ehrliche Frage zum Glauben darf gestellt werden.",
@@ -19649,7 +19649,7 @@ const additions=
       },
       "6-8": {
         "goal": "Eine ehrliche Frage zum Glauben darf gestellt werden.",
-        "intro": "Heute geht es um Fragen zum Īmān stellen. Eine ehrliche Frage zum Glauben darf gestellt werden. Wir lesen Qurʾān 21:7. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass vor dem Propheten nur Männer gesandt wurden, denen eingegeben wird, und: Fragt die Leute der Erinnerung, wenn ihr nicht wisst. So kann das im Alltag aussehen: Ein Kind versteht ein Wort nicht und fragt die Lehrperson, statt eine eigene Bedeutung zu erfinden. Die Aufgabe: Wir üben eine höfliche Frage und das Warten auf die Antwort. ahl aḏ-ḏikr bedeutet: die Leute der Erinnerung, die Wissen haben. isʾalū bedeutet: fragt. Die Grenze der Stunde: Der Vers nennt die Leute der Erinnerung. Wen das heute im Einzelnen ist, legen wir nicht mit einem neuen Rechtsurteil fest. Für die Stunde ist es die Lehrperson und die Eltern. Wir erfinden keine Antwort, die der Vers nicht gibt. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Fragen zum Īmān stellen. Eine ehrliche Frage zum Glauben darf gestellt werden. Wir lesen Qurʾān 21:7. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass vor dem Propheten nur Männer gesandt wurden, denen eingegeben wird, und: Fragt die Leute der Erinnerung, wenn ihr nicht wisst. So kann das im Alltag aussehen: Ein Kind versteht ein Wort nicht und fragt die Lehrperson, statt eine eigene Bedeutung zu erfinden. Die Aufgabe: Wir üben eine höfliche Frage und das Warten auf die Antwort. ahl aḏ-ḏikr bedeutet: die Leute der Erinnerung, die Wissen haben. isʾalū bedeutet: fragt. Die Grenze der Stunde: Der Vers nennt die Leute der Erinnerung. Wen das heute im Einzelnen ist, legen wir nicht mit einem neuen Rechtsurteil fest. Für die Stunde ist es die Lehrperson und die Eltern. Wir erfinden keine Antwort, die der Vers nicht gibt.",
         "lines": [
           "Qurʾān 21:7 ist die gelesene Stelle.",
           "Der Vers sagt, dass vor dem Propheten nur Männer gesandt wurden, denen eingegeben wird, und: Fragt die Leute der Erinnerung, wenn ihr nicht wisst.",
@@ -19675,7 +19675,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Fragen zum Īmān stellen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Fragen zum Īmān stellen. Das Lernziel ist: Eine ehrliche Frage zum Glauben darf gestellt werden. Die Seite https://www.islamweb.net/ar/library/content/49/1163 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 21:7. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass vor dem Propheten nur Männer gesandt wurden, denen eingegeben wird, und: Fragt die Leute der Erinnerung, wenn ihr nicht wisst. Alltag: Ein Kind versteht ein Wort nicht und fragt die Lehrperson, statt eine eigene Bedeutung zu erfinden. Aufgabe: Wir üben eine höfliche Frage und das Warten auf die Antwort. ahl aḏ-ḏikr bedeutet: die Leute der Erinnerung, die Wissen haben. isʾalū bedeutet: fragt. Was nicht behauptet wird: Der Vers nennt die Leute der Erinnerung. Wen das heute im Einzelnen ist, legen wir nicht mit einem neuen Rechtsurteil fest. Für die Stunde ist es die Lehrperson und die Eltern. Wir erfinden keine Antwort, die der Vers nicht gibt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Fragen zum Īmān stellen. Das Lernziel ist: Eine ehrliche Frage zum Glauben darf gestellt werden. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass vor dem Propheten nur Männer gesandt wurden, denen eingegeben wird, und: Fragt die Leute der Erinnerung, wenn ihr nicht wisst. Alltag: Ein Kind versteht ein Wort nicht und fragt die Lehrperson, statt eine eigene Bedeutung zu erfinden. Aufgabe: Wir üben eine höfliche Frage und das Warten auf die Antwort. ahl aḏ-ḏikr bedeutet: die Leute der Erinnerung, die Wissen haben. isʾalū bedeutet: fragt. Was nicht behauptet wird: Der Vers nennt die Leute der Erinnerung. Wen das heute im Einzelnen ist, legen wir nicht mit einem neuen Rechtsurteil fest. Für die Stunde ist es die Lehrperson und die Eltern. Wir erfinden keine Antwort, die der Vers nicht gibt.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 21:7.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -19697,7 +19697,7 @@ const additions=
         "situation": "Ein Kind versteht ein Wort nicht und fragt die Lehrperson, statt eine eigene Bedeutung zu erfinden.",
         "practice": "Wir üben eine höfliche Frage und das Warten auf die Antwort.",
         "summary": "Belegt ist Qurʾān 21:7. Ungeprüft bleibt: Der Vers nennt die Leute der Erinnerung.",
-        "audioScript": "Für die älteren Kinder. Fragen zum Īmān stellen. Der Vers sagt, dass vor dem Propheten nur Männer gesandt wurden, denen eingegeben wird, und: Fragt die Leute der Erinnerung, wenn ihr nicht wisst. Nicht belegt und deshalb nicht behauptet: Der Vers nennt die Leute der Erinnerung."
+        "audioScript": "Fragen zum Īmān stellen. Der Vers sagt, dass vor dem Propheten nur Männer gesandt wurden, denen eingegeben wird, und: Fragt die Leute der Erinnerung, wenn ihr nicht wisst. Nicht belegt und deshalb nicht behauptet: Der Vers nennt die Leute der Erinnerung."
       }
     },
     "questions": {
@@ -19833,7 +19833,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Ein anderer Vers über das Bezeugen gegen die eigenen Leute wurde gelesen, aber diese Stunde bleibt bei 33:70. Mut heißt nicht, jemanden bloßzustellen. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Ein anderer Vers über das Bezeugen gegen die eigenen Leute wurde gelesen, aber diese Stunde bleibt bei 33:70. Mut heißt nicht, jemanden bloßzustellen. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Die Wahrheit sagen wir höflich, auch wenn sie unbequem ist.",
@@ -19866,7 +19866,7 @@ const additions=
       },
       "6-8": {
         "goal": "Die Wahrheit sagen wir höflich, auch wenn sie unbequem ist.",
-        "intro": "Heute geht es um Mut zur Wahrheit. Die Wahrheit sagen wir höflich, auch wenn sie unbequem ist. Wir lesen Qurʾān 33:70. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers fordert die Glaubenden auf, Allah zu fürchten und ein gerades, treffendes Wort zu sagen. So kann das im Alltag aussehen: Ein Kind hat den Stift genommen und sagt das, statt ein anderes Kind zu beschuldigen. Die Aufgabe: Wir üben einen wahren Satz ohne ein lautes Vorführen. qawl sadīd bedeutet: ein gerades, treffendes Wort. taqwā bedeutet: Gottesfurcht. Die Grenze der Stunde: Ein anderer Vers über das Bezeugen gegen die eigenen Leute wurde gelesen, aber diese Stunde bleibt bei 33:70. Mut heißt nicht, jemanden bloßzustellen. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Mut zur Wahrheit. Die Wahrheit sagen wir höflich, auch wenn sie unbequem ist. Wir lesen Qurʾān 33:70. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers fordert die Glaubenden auf, Allah zu fürchten und ein gerades, treffendes Wort zu sagen. So kann das im Alltag aussehen: Ein Kind hat den Stift genommen und sagt das, statt ein anderes Kind zu beschuldigen. Die Aufgabe: Wir üben einen wahren Satz ohne ein lautes Vorführen. qawl sadīd bedeutet: ein gerades, treffendes Wort. taqwā bedeutet: Gottesfurcht. Die Grenze der Stunde: Ein anderer Vers über das Bezeugen gegen die eigenen Leute wurde gelesen, aber diese Stunde bleibt bei 33:70. Mut heißt nicht, jemanden bloßzustellen.",
         "lines": [
           "Qurʾān 33:70 ist die gelesene Stelle.",
           "Der Vers fordert die Glaubenden auf, Allah zu fürchten und ein gerades, treffendes Wort zu sagen.",
@@ -19892,7 +19892,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Mut zur Wahrheit von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Mut zur Wahrheit. Das Lernziel ist: Die Wahrheit sagen wir höflich, auch wenn sie unbequem ist. Die Seite https://www.islamweb.net/ar/library/content/49/1508 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 33:70. Sinngemäß, keine beglaubigte Übersetzung: Der Vers fordert die Glaubenden auf, Allah zu fürchten und ein gerades, treffendes Wort zu sagen. Alltag: Ein Kind hat den Stift genommen und sagt das, statt ein anderes Kind zu beschuldigen. Aufgabe: Wir üben einen wahren Satz ohne ein lautes Vorführen. qawl sadīd bedeutet: ein gerades, treffendes Wort. taqwā bedeutet: Gottesfurcht. Was nicht behauptet wird: Ein anderer Vers über das Bezeugen gegen die eigenen Leute wurde gelesen, aber diese Stunde bleibt bei 33:70. Mut heißt nicht, jemanden bloßzustellen. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Mut zur Wahrheit. Das Lernziel ist: Die Wahrheit sagen wir höflich, auch wenn sie unbequem ist. Sinngemäß, keine beglaubigte Übersetzung: Der Vers fordert die Glaubenden auf, Allah zu fürchten und ein gerades, treffendes Wort zu sagen. Alltag: Ein Kind hat den Stift genommen und sagt das, statt ein anderes Kind zu beschuldigen. Aufgabe: Wir üben einen wahren Satz ohne ein lautes Vorführen. qawl sadīd bedeutet: ein gerades, treffendes Wort. taqwā bedeutet: Gottesfurcht. Was nicht behauptet wird: Ein anderer Vers über das Bezeugen gegen die eigenen Leute wurde gelesen, aber diese Stunde bleibt bei 33:70. Mut heißt nicht, jemanden bloßzustellen.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 33:70.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -19914,7 +19914,7 @@ const additions=
         "situation": "Ein Kind hat den Stift genommen und sagt das, statt ein anderes Kind zu beschuldigen.",
         "practice": "Wir üben einen wahren Satz ohne ein lautes Vorführen.",
         "summary": "Belegt ist Qurʾān 33:70. Ungeprüft bleibt: Ein anderer Vers über das Bezeugen gegen die eigenen Leute wurde gelesen, aber diese Stunde bleibt bei 33:70.",
-        "audioScript": "Für die älteren Kinder. Mut zur Wahrheit. Der Vers fordert die Glaubenden auf, Allah zu fürchten und ein gerades, treffendes Wort zu sagen. Nicht belegt und deshalb nicht behauptet: Ein anderer Vers über das Bezeugen gegen die eigenen Leute wurde gelesen, aber diese Stunde bleibt bei 33:70."
+        "audioScript": "Mut zur Wahrheit. Der Vers fordert die Glaubenden auf, Allah zu fürchten und ein gerades, treffendes Wort zu sagen. Nicht belegt und deshalb nicht behauptet: Ein anderer Vers über das Bezeugen gegen die eigenen Leute wurde gelesen, aber diese Stunde bleibt bei 33:70."
       }
     },
     "questions": {
@@ -20050,7 +20050,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers nennt die Eltern im Alter. Wir ziehen andere ältere Menschen als gute Gewohnheit mit ein und nennen das nicht den Wortlaut. Die Bittformel des nächsten Verses gehört in die andere Stunde. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Vers nennt die Eltern im Alter. Wir ziehen andere ältere Menschen als gute Gewohnheit mit ein und nennen das nicht den Wortlaut. Die Bittformel des nächsten Verses gehört in die andere Stunde. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Mit älteren Menschen sprechen wir ruhig und freundlich.",
@@ -20083,7 +20083,7 @@ const additions=
       },
       "6-8": {
         "goal": "Mit älteren Menschen sprechen wir ruhig und freundlich.",
-        "intro": "Heute geht es um Ältere respektvoll ansprechen. Mit älteren Menschen sprechen wir ruhig und freundlich. Wir lesen Qurʾān 17:23. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers befiehlt, nur Allah zu dienen und den Eltern gut zu sein. Wenn eines von ihnen oder beide bei dir das hohe Alter erreichen, sag ihnen nicht Uff und fahre sie nicht an. So kann das im Alltag aussehen: Die Großmutter fragt etwas. Das Kind antwortet leise und schaut sie an. Die Aufgabe: Wir üben einen freundlichen Satz und lassen das genervte Stöhnen weg. uff bedeutet: ein genervter Laut, den der Vers verbietet. iḥsān bedeutet: gutes Verhalten zu den Eltern. Die Grenze der Stunde: Der Vers nennt die Eltern im Alter. Wir ziehen andere ältere Menschen als gute Gewohnheit mit ein und nennen das nicht den Wortlaut. Die Bittformel des nächsten Verses gehört in die andere Stunde. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Ältere respektvoll ansprechen. Mit älteren Menschen sprechen wir ruhig und freundlich. Wir lesen Qurʾān 17:23. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers befiehlt, nur Allah zu dienen und den Eltern gut zu sein. Wenn eines von ihnen oder beide bei dir das hohe Alter erreichen, sag ihnen nicht Uff und fahre sie nicht an. So kann das im Alltag aussehen: Die Großmutter fragt etwas. Das Kind antwortet leise und schaut sie an. Die Aufgabe: Wir üben einen freundlichen Satz und lassen das genervte Stöhnen weg. uff bedeutet: ein genervter Laut, den der Vers verbietet. iḥsān bedeutet: gutes Verhalten zu den Eltern. Die Grenze der Stunde: Der Vers nennt die Eltern im Alter. Wir ziehen andere ältere Menschen als gute Gewohnheit mit ein und nennen das nicht den Wortlaut. Die Bittformel des nächsten Verses gehört in die andere Stunde.",
         "lines": [
           "Qurʾān 17:23 ist die gelesene Stelle.",
           "Der Vers befiehlt, nur Allah zu dienen und den Eltern gut zu sein.",
@@ -20109,7 +20109,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Ältere respektvoll ansprechen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Ältere respektvoll ansprechen. Das Lernziel ist: Mit älteren Menschen sprechen wir ruhig und freundlich. Die Seite https://www.islamweb.net/ar/library/content/49/1005 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:23. Sinngemäß, keine beglaubigte Übersetzung: Der Vers befiehlt, nur Allah zu dienen und den Eltern gut zu sein. Wenn eines von ihnen oder beide bei dir das hohe Alter erreichen, sag ihnen nicht Uff und fahre sie nicht an. Alltag: Die Großmutter fragt etwas. Das Kind antwortet leise und schaut sie an. Aufgabe: Wir üben einen freundlichen Satz und lassen das genervte Stöhnen weg. uff bedeutet: ein genervter Laut, den der Vers verbietet. iḥsān bedeutet: gutes Verhalten zu den Eltern. Was nicht behauptet wird: Der Vers nennt die Eltern im Alter. Wir ziehen andere ältere Menschen als gute Gewohnheit mit ein und nennen das nicht den Wortlaut. Die Bittformel des nächsten Verses gehört in die andere Stunde. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Ältere respektvoll ansprechen. Das Lernziel ist: Mit älteren Menschen sprechen wir ruhig und freundlich. Sinngemäß, keine beglaubigte Übersetzung: Der Vers befiehlt, nur Allah zu dienen und den Eltern gut zu sein. Wenn eines von ihnen oder beide bei dir das hohe Alter erreichen, sag ihnen nicht Uff und fahre sie nicht an. Alltag: Die Großmutter fragt etwas. Das Kind antwortet leise und schaut sie an. Aufgabe: Wir üben einen freundlichen Satz und lassen das genervte Stöhnen weg. uff bedeutet: ein genervter Laut, den der Vers verbietet. iḥsān bedeutet: gutes Verhalten zu den Eltern. Was nicht behauptet wird: Der Vers nennt die Eltern im Alter. Wir ziehen andere ältere Menschen als gute Gewohnheit mit ein und nennen das nicht den Wortlaut. Die Bittformel des nächsten Verses gehört in die andere Stunde.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 17:23.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -20131,7 +20131,7 @@ const additions=
         "situation": "Die Großmutter fragt etwas. Das Kind antwortet leise und schaut sie an.",
         "practice": "Wir üben einen freundlichen Satz und lassen das genervte Stöhnen weg.",
         "summary": "Belegt ist Qurʾān 17:23. Ungeprüft bleibt: Der Vers nennt die Eltern im Alter.",
-        "audioScript": "Für die älteren Kinder. Ältere respektvoll ansprechen. Der Vers befiehlt, nur Allah zu dienen und den Eltern gut zu sein. Nicht belegt und deshalb nicht behauptet: Der Vers nennt die Eltern im Alter."
+        "audioScript": "Ältere respektvoll ansprechen. Der Vers befiehlt, nur Allah zu dienen und den Eltern gut zu sein. Nicht belegt und deshalb nicht behauptet: Der Vers nennt die Eltern im Alter."
       }
     },
     "questions": {
@@ -20267,7 +20267,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Regensatz wird nicht als Versprechen für das Wetter der Kinderstunde gelehrt. Eine feste Anzahl von Bitten steht hier nicht. Wir ergänzen sie nicht. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Regensatz wird nicht als Versprechen für das Wetter der Kinderstunde gelehrt. Eine feste Anzahl von Bitten steht hier nicht. Wir ergänzen sie nicht. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Um Vergebung zu bitten heißt, Allah um Sein Vergeben zu bitten.",
@@ -20300,7 +20300,7 @@ const additions=
       },
       "6-8": {
         "goal": "Um Vergebung zu bitten heißt, Allah um Sein Vergeben zu bitten.",
-        "intro": "Heute geht es um Regelmäßig um Vergebung bitten. Um Vergebung zu bitten heißt, Allah um Sein Vergeben zu bitten. Wir lesen Qurʾān 71:10. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt: So habe ich gesagt: Bittet euren Herrn um Vergebung. Er ist gewiss vergebend. Danach spricht der Ausdruck vom Regen. So kann das im Alltag aussehen: Ein Kind sagt am Abend: Mein Herr, vergib mir. Es muss keine lange Liste aufsagen. Die Aufgabe: Wir üben den deutschen Sinn einmal, freiwillig. istiġfār bedeutet: um Vergebung bitten. ġaffār bedeutet: der sehr Vergebende, ein Name, den der Vers für Allah gebraucht. Die Grenze der Stunde: Der Regensatz wird nicht als Versprechen für das Wetter der Kinderstunde gelehrt. Eine feste Anzahl von Bitten steht hier nicht. Wir ergänzen sie nicht. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Regelmäßig um Vergebung bitten. Um Vergebung zu bitten heißt, Allah um Sein Vergeben zu bitten. Wir lesen Qurʾān 71:10. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt: So habe ich gesagt: Bittet euren Herrn um Vergebung. Er ist gewiss vergebend. Danach spricht der Ausdruck vom Regen. So kann das im Alltag aussehen: Ein Kind sagt am Abend: Mein Herr, vergib mir. Es muss keine lange Liste aufsagen. Die Aufgabe: Wir üben den deutschen Sinn einmal, freiwillig. istiġfār bedeutet: um Vergebung bitten. ġaffār bedeutet: der sehr Vergebende, ein Name, den der Vers für Allah gebraucht. Die Grenze der Stunde: Der Regensatz wird nicht als Versprechen für das Wetter der Kinderstunde gelehrt. Eine feste Anzahl von Bitten steht hier nicht. Wir ergänzen sie nicht.",
         "lines": [
           "Qurʾān 71:10 ist die gelesene Stelle.",
           "Der Vers sagt: So habe ich gesagt: Bittet euren Herrn um Vergebung.",
@@ -20326,7 +20326,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Regelmäßig um Vergebung bitten von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Regelmäßig um Vergebung bitten. Das Lernziel ist: Um Vergebung zu bitten heißt, Allah um Sein Vergeben zu bitten. Die Seite https://www.islamweb.net/ar/library/content/49/1896 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 71:10. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt: So habe ich gesagt: Bittet euren Herrn um Vergebung. Er ist gewiss vergebend. Danach spricht der Ausdruck vom Regen. Alltag: Ein Kind sagt am Abend: Mein Herr, vergib mir. Es muss keine lange Liste aufsagen. Aufgabe: Wir üben den deutschen Sinn einmal, freiwillig. istiġfār bedeutet: um Vergebung bitten. ġaffār bedeutet: der sehr Vergebende, ein Name, den der Vers für Allah gebraucht. Was nicht behauptet wird: Der Regensatz wird nicht als Versprechen für das Wetter der Kinderstunde gelehrt. Eine feste Anzahl von Bitten steht hier nicht. Wir ergänzen sie nicht. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Regelmäßig um Vergebung bitten. Das Lernziel ist: Um Vergebung zu bitten heißt, Allah um Sein Vergeben zu bitten. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt: So habe ich gesagt: Bittet euren Herrn um Vergebung. Er ist gewiss vergebend. Danach spricht der Ausdruck vom Regen. Alltag: Ein Kind sagt am Abend: Mein Herr, vergib mir. Es muss keine lange Liste aufsagen. Aufgabe: Wir üben den deutschen Sinn einmal, freiwillig. istiġfār bedeutet: um Vergebung bitten. ġaffār bedeutet: der sehr Vergebende, ein Name, den der Vers für Allah gebraucht. Was nicht behauptet wird: Der Regensatz wird nicht als Versprechen für das Wetter der Kinderstunde gelehrt. Eine feste Anzahl von Bitten steht hier nicht. Wir ergänzen sie nicht.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 71:10.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -20348,7 +20348,7 @@ const additions=
         "situation": "Ein Kind sagt am Abend: Mein Herr, vergib mir. Es muss keine lange Liste aufsagen.",
         "practice": "Wir üben den deutschen Sinn einmal, freiwillig.",
         "summary": "Belegt ist Qurʾān 71:10. Ungeprüft bleibt: Der Regensatz wird nicht als Versprechen für das Wetter der Kinderstunde gelehrt.",
-        "audioScript": "Für die älteren Kinder. Regelmäßig um Vergebung bitten. Der Vers sagt: So habe ich gesagt: Bittet euren Herrn um Vergebung. Nicht belegt und deshalb nicht behauptet: Der Regensatz wird nicht als Versprechen für das Wetter der Kinderstunde gelehrt."
+        "audioScript": "Regelmäßig um Vergebung bitten. Der Vers sagt: So habe ich gesagt: Bittet euren Herrn um Vergebung. Nicht belegt und deshalb nicht behauptet: Der Regensatz wird nicht als Versprechen für das Wetter der Kinderstunde gelehrt."
       }
     },
     "questions": {
@@ -20484,7 +20484,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Die Haltung der Hände nach dem Aufrichten steht nicht im Vers. Sie bleibt ungeprüft. Wir erfinden sie nicht und lesen al-Mughnī dafür nicht als schon geprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Die Haltung der Hände nach dem Aufrichten steht nicht im Vers. Sie bleibt ungeprüft. Wir erfinden sie nicht und lesen al-Mughnī dafür nicht als schon geprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
     "sample": "Nach der Verbeugung richten wir uns wieder auf.",
@@ -20517,7 +20517,7 @@ const additions=
       },
       "6-8": {
         "goal": "Nach der Verbeugung richten wir uns wieder auf.",
-        "intro": "Heute geht es um Aus dem Rukūʿ aufrichten. Nach der Verbeugung richten wir uns wieder auf. Wir lesen Qurʾān 2:43. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt: Verrichtet das Gebet, gebt die Zakāh und verbeugt euch mit den sich Verbeugenden. So kann das im Alltag aussehen: Die Kinder gehen mit der Lehrperson in die Verbeugung und kommen langsam wieder nach oben. Die Aufgabe: Wir sagen: Der Vers nennt die Verbeugung mit den anderen. Das Aufrichten danach beschreibt er nicht. rukūʿ bedeutet: Verbeugung. qawmah bedeutet: das aufrechte Stehen danach; Unterrichtswort, nicht ein Satz des Verses. Die Grenze der Stunde: Die Haltung der Hände nach dem Aufrichten steht nicht im Vers. Sie bleibt ungeprüft. Wir erfinden sie nicht und lesen al-Mughnī dafür nicht als schon geprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Aus dem Rukūʿ aufrichten. Nach der Verbeugung richten wir uns wieder auf. Wir lesen Qurʾān 2:43. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt: Verrichtet das Gebet, gebt die Zakāh und verbeugt euch mit den sich Verbeugenden. So kann das im Alltag aussehen: Die Kinder gehen mit der Lehrperson in die Verbeugung und kommen langsam wieder nach oben. Die Aufgabe: Wir sagen: Der Vers nennt die Verbeugung mit den anderen. Das Aufrichten danach beschreibt er nicht. rukūʿ bedeutet: Verbeugung. qawmah bedeutet: das aufrechte Stehen danach; Unterrichtswort, nicht ein Satz des Verses. Die Grenze der Stunde: Die Haltung der Hände nach dem Aufrichten steht nicht im Vers. Sie bleibt ungeprüft. Wir erfinden sie nicht und lesen al-Mughnī dafür nicht als schon geprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
         "lines": [
           "Qurʾān 2:43 ist die gelesene Stelle.",
           "Der Vers sagt: Verrichtet das Gebet, gebt die Zakāh und verbeugt euch mit den sich Verbeugenden.",
@@ -20543,7 +20543,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Aus dem Rukūʿ aufrichten von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Aus dem Rukūʿ aufrichten. Das Lernziel ist: Nach der Verbeugung richten wir uns wieder auf. Die Seite https://www.islamweb.net/ar/library/content/49/83 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:43. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt: Verrichtet das Gebet, gebt die Zakāh und verbeugt euch mit den sich Verbeugenden. Alltag: Die Kinder gehen mit der Lehrperson in die Verbeugung und kommen langsam wieder nach oben. Aufgabe: Wir sagen: Der Vers nennt die Verbeugung mit den anderen. Das Aufrichten danach beschreibt er nicht. rukūʿ bedeutet: Verbeugung. qawmah bedeutet: das aufrechte Stehen danach; Unterrichtswort, nicht ein Satz des Verses. Was nicht behauptet wird: Die Haltung der Hände nach dem Aufrichten steht nicht im Vers. Sie bleibt ungeprüft. Wir erfinden sie nicht und lesen al-Mughnī dafür nicht als schon geprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Aus dem Rukūʿ aufrichten. Das Lernziel ist: Nach der Verbeugung richten wir uns wieder auf. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt: Verrichtet das Gebet, gebt die Zakāh und verbeugt euch mit den sich Verbeugenden. Alltag: Die Kinder gehen mit der Lehrperson in die Verbeugung und kommen langsam wieder nach oben. Aufgabe: Wir sagen: Der Vers nennt die Verbeugung mit den anderen. Das Aufrichten danach beschreibt er nicht. rukūʿ bedeutet: Verbeugung. qawmah bedeutet: das aufrechte Stehen danach; Unterrichtswort, nicht ein Satz des Verses. Was nicht behauptet wird: Die Haltung der Hände nach dem Aufrichten steht nicht im Vers. Sie bleibt ungeprüft. Wir erfinden sie nicht und lesen al-Mughnī dafür nicht als schon geprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 2:43.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -20565,7 +20565,7 @@ const additions=
         "situation": "Die Kinder gehen mit der Lehrperson in die Verbeugung und kommen langsam wieder nach oben.",
         "practice": "Wir sagen: Der Vers nennt die Verbeugung mit den anderen. Das Aufrichten danach beschreibt er nicht.",
         "summary": "Belegt ist Qurʾān 2:43. Ungeprüft bleibt: Die Haltung der Hände nach dem Aufrichten steht nicht im Vers.",
-        "audioScript": "Für die älteren Kinder. Aus dem Rukūʿ aufrichten. Der Vers sagt: Verrichtet das Gebet, gebt die Zakāh und verbeugt euch mit den sich Verbeugenden. Nicht belegt und deshalb nicht behauptet: Die Haltung der Hände nach dem Aufrichten steht nicht im Vers."
+        "audioScript": "Aus dem Rukūʿ aufrichten. Der Vers sagt: Verrichtet das Gebet, gebt die Zakāh und verbeugt euch mit den sich Verbeugenden. Nicht belegt und deshalb nicht behauptet: Die Haltung der Hände nach dem Aufrichten steht nicht im Vers."
       }
     },
     "questions": {
@@ -20701,7 +20701,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Dieselbe Fundstelle, anderes Lernziel: das eigene Erklären. Wir erzeugen keine Rezitation und keine Zeichnung. Dieselbe gelesene Fundstelle wurde schon in Slot 181 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+      "note": "Dieselbe Fundstelle, anderes Lernziel: das eigene Erklären. Wir erzeugen keine Rezitation und keine Zeichnung. Dieselbe gelesene Fundstelle wurde schon in Slot 181 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
       "sameLocusAsSlot": 181
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
@@ -20735,7 +20735,7 @@ const additions=
       },
       "6-8": {
         "goal": "Wir erklären mit eigenen einfachen Worten, dass Allah einzig ist.",
-        "intro": "Heute geht es um Tawḥīd mit eigenen Worten erklären. Wir erklären mit eigenen einfachen Worten, dass Allah einzig ist. Wir lesen Qurʾān 112:1. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe gespeicherte Sūrah wie in der Stunde über die Geschöpfe sagt, dass Allah Einer ist, dass Er nicht gezeugt hat und nicht gezeugt wurde und dass niemand Ihm gleich ist. So kann das im Alltag aussehen: Ein Kind sagt den Sinn mit einem eigenen deutschen Satz, ohne ein Bild von Allah zu malen. Die Aufgabe: Wir hören zwei Sätze der Kinder und verbessern nur, wenn jemand ein Geschöpf zu Allah macht. tawḥīd bedeutet: Allah als den Einzigen bekennen. aḥad bedeutet: Einer. Die Grenze der Stunde: Dieselbe Fundstelle, anderes Lernziel: das eigene Erklären. Wir erzeugen keine Rezitation und keine Zeichnung. Dieselbe gelesene Fundstelle wurde schon in Slot 181 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Tawḥīd mit eigenen Worten erklären. Wir erklären mit eigenen einfachen Worten, dass Allah einzig ist. Wir lesen Qurʾān 112:1. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe gespeicherte Sūrah wie in der Stunde über die Geschöpfe sagt, dass Allah Einer ist, dass Er nicht gezeugt hat und nicht gezeugt wurde und dass niemand Ihm gleich ist. So kann das im Alltag aussehen: Ein Kind sagt den Sinn mit einem eigenen deutschen Satz, ohne ein Bild von Allah zu malen. Die Aufgabe: Wir hören zwei Sätze der Kinder und verbessern nur, wenn jemand ein Geschöpf zu Allah macht. tawḥīd bedeutet: Allah als den Einzigen bekennen. aḥad bedeutet: Einer. Die Grenze der Stunde: Dieselbe Fundstelle, anderes Lernziel: das eigene Erklären. Wir erzeugen keine Rezitation und keine Zeichnung. Dieselbe gelesene Fundstelle wurde schon in Slot 181 mit einem anderen Lernziel verwendet.",
         "lines": [
           "Qurʾān 112:1 ist die gelesene Stelle.",
           "Wir erklären mit eigenen einfachen Worten, dass Allah einzig ist.",
@@ -20761,7 +20761,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Tawḥīd mit eigenen Worten erklären von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Tawḥīd mit eigenen Worten erklären. Das Lernziel ist: Wir erklären mit eigenen einfachen Worten, dass Allah einzig ist. Die Seite https://www.islamweb.net/ar/library/content/49/1984 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 112:1. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe gespeicherte Sūrah wie in der Stunde über die Geschöpfe sagt, dass Allah Einer ist, dass Er nicht gezeugt hat und nicht gezeugt wurde und dass niemand Ihm gleich ist. Alltag: Ein Kind sagt den Sinn mit einem eigenen deutschen Satz, ohne ein Bild von Allah zu malen. Aufgabe: Wir hören zwei Sätze der Kinder und verbessern nur, wenn jemand ein Geschöpf zu Allah macht. tawḥīd bedeutet: Allah als den Einzigen bekennen. aḥad bedeutet: Einer. Was nicht behauptet wird: Dieselbe Fundstelle, anderes Lernziel: das eigene Erklären. Wir erzeugen keine Rezitation und keine Zeichnung. Dieselbe gelesene Fundstelle wurde schon in Slot 181 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Tawḥīd mit eigenen Worten erklären. Das Lernziel ist: Wir erklären mit eigenen einfachen Worten, dass Allah einzig ist. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe gespeicherte Sūrah wie in der Stunde über die Geschöpfe sagt, dass Allah Einer ist, dass Er nicht gezeugt hat und nicht gezeugt wurde und dass niemand Ihm gleich ist. Alltag: Ein Kind sagt den Sinn mit einem eigenen deutschen Satz, ohne ein Bild von Allah zu malen. Aufgabe: Wir hören zwei Sätze der Kinder und verbessern nur, wenn jemand ein Geschöpf zu Allah macht. tawḥīd bedeutet: Allah als den Einzigen bekennen. aḥad bedeutet: Einer. Was nicht behauptet wird: Dieselbe Fundstelle, anderes Lernziel: das eigene Erklären. Wir erzeugen keine Rezitation und keine Zeichnung. Dieselbe gelesene Fundstelle wurde schon in Slot 181 mit einem anderen Lernziel verwendet.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 112:1.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -20783,7 +20783,7 @@ const additions=
         "situation": "Ein Kind sagt den Sinn mit einem eigenen deutschen Satz, ohne ein Bild von Allah zu malen.",
         "practice": "Wir hören zwei Sätze der Kinder und verbessern nur, wenn jemand ein Geschöpf zu Allah macht.",
         "summary": "Belegt ist Qurʾān 112:1. Ungeprüft bleibt: Dieselbe Fundstelle, anderes Lernziel: das eigene Erklären.",
-        "audioScript": "Für die älteren Kinder. Tawḥīd mit eigenen Worten erklären. Wir erklären mit eigenen einfachen Worten, dass Allah einzig ist. Nicht belegt und deshalb nicht behauptet: Dieselbe Fundstelle, anderes Lernziel: das eigene Erklären."
+        "audioScript": "Tawḥīd mit eigenen Worten erklären. Wir erklären mit eigenen einfachen Worten, dass Allah einzig ist. Nicht belegt und deshalb nicht behauptet: Dieselbe Fundstelle, anderes Lernziel: das eigene Erklären."
       }
     },
     "questions": {
@@ -20919,7 +20919,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Hadith, in dem Ǧibrīl nach dem Glauben fragt, steht in der älteren Sammlung mit einer Nummer, die in diesem Lauf nicht erneut auf Dorar gelesen wurde. Wir geben die Nummer nicht als neue Prüfung aus. Der Jüngste Tag steht in einem anderen, schon gespeicherten Vers, nicht in diesem. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Hadith, in dem Ǧibrīl nach dem Glauben fragt, steht in der älteren Sammlung mit einer Nummer, die in diesem Lauf nicht erneut auf Dorar gelesen wurde. Wir geben die Nummer nicht als neue Prüfung aus. Der Jüngste Tag steht in einem anderen, schon gespeicherten Vers, nicht in diesem. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Der Vers nennt den Glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten.",
@@ -20952,7 +20952,7 @@ const additions=
       },
       "6-8": {
         "goal": "Der Vers nennt den Glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten.",
-        "intro": "Heute geht es um Die sechs Glaubenssäulen wiederholen. Der Vers nennt den Glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten. Wir lesen Qurʾān 2:285. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass der Gesandte glaubt, was zu ihm herabgesandt wurde, und die Glaubenden, und dass jeder an Allah, Seine Engel, Seine Bücher und Seine Gesandten glaubt und zwischen keinem Seiner Gesandten einen Unterschied macht. So kann das im Alltag aussehen: Wir legen vier Karten für die vier genannten Worte. Zwei weitere Karten, Jüngster Tag und Bestimmung, legen wir daneben und sagen: Die stehen in diesem Vers nicht. Die Aufgabe: Wir wiederholen nur die vier Worte des Verses als gelesen und nennen die Sechszahl als bekannte Unterrichtsreihe, die hier nicht neu belegt wurde. malāʾikah bedeutet: Engel. kutub bedeutet: Bücher, Schriften. Die Grenze der Stunde: Der Hadith, in dem Ǧibrīl nach dem Glauben fragt, steht in der älteren Sammlung mit einer Nummer, die in diesem Lauf nicht erneut auf Dorar gelesen wurde. Wir geben die Nummer nicht als neue Prüfung aus. Der Jüngste Tag steht in einem anderen, schon gespeicherten Vers, nicht in diesem. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Die sechs Glaubenssäulen wiederholen. Der Vers nennt den Glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten. Wir lesen Qurʾān 2:285. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass der Gesandte glaubt, was zu ihm herabgesandt wurde, und die Glaubenden, und dass jeder an Allah, Seine Engel, Seine Bücher und Seine Gesandten glaubt und zwischen keinem Seiner Gesandten einen Unterschied macht. So kann das im Alltag aussehen: Wir legen vier Karten für die vier genannten Worte. Zwei weitere Karten, Jüngster Tag und Bestimmung, legen wir daneben und sagen: Die stehen in diesem Vers nicht. Die Aufgabe: Wir wiederholen nur die vier Worte des Verses als gelesen und nennen die Sechszahl als bekannte Unterrichtsreihe, die hier nicht neu belegt wurde. malāʾikah bedeutet: Engel. kutub bedeutet: Bücher, Schriften. Die Grenze der Stunde: Der Hadith, in dem Ǧibrīl nach dem Glauben fragt, steht in der älteren Sammlung mit einer Nummer, die in diesem Lauf nicht erneut auf Dorar gelesen wurde. Wir geben die Nummer nicht als neue Prüfung aus. Der Jüngste Tag steht in einem anderen, schon gespeicherten Vers, nicht in diesem.",
         "lines": [
           "Qurʾān 2:285 ist die gelesene Stelle.",
           "Der Vers sagt, dass der Gesandte glaubt, was zu ihm herabgesandt wurde, und die Glaubenden, und dass jeder an Allah, Seine Engel, Seine Bücher und Seine Gesandten glaubt.",
@@ -20978,7 +20978,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Die sechs Glaubenssäulen wiederholen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Die sechs Glaubenssäulen wiederholen. Das Lernziel ist: Der Vers nennt den Glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten. Die Seite https://www.islamweb.net/ar/library/content/49/233 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:285. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass der Gesandte glaubt, was zu ihm herabgesandt wurde, und die Glaubenden, und dass jeder an Allah, Seine Engel, Seine Bücher und Seine Gesandten glaubt und zwischen keinem Seiner Gesandten einen Unterschied macht. Alltag: Wir legen vier Karten für die vier genannten Worte. Zwei weitere Karten, Jüngster Tag und Bestimmung, legen wir daneben und sagen: Die stehen in diesem Vers nicht. Aufgabe: Wir wiederholen nur die vier Worte des Verses als gelesen und nennen die Sechszahl als bekannte Unterrichtsreihe, die hier nicht neu belegt wurde. malāʾikah bedeutet: Engel. kutub bedeutet: Bücher, Schriften. Was nicht behauptet wird: Der Hadith, in dem Ǧibrīl nach dem Glauben fragt, steht in der älteren Sammlung mit einer Nummer, die in diesem Lauf nicht erneut auf Dorar gelesen wurde. Wir geben die Nummer nicht als neue Prüfung aus. Der Jüngste Tag steht in einem anderen, schon gespeicherten Vers, nicht in diesem. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Die sechs Glaubenssäulen wiederholen. Das Lernziel ist: Der Vers nennt den Glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass der Gesandte glaubt, was zu ihm herabgesandt wurde, und die Glaubenden, und dass jeder an Allah, Seine Engel, Seine Bücher und Seine Gesandten glaubt und zwischen keinem Seiner Gesandten einen Unterschied macht. Alltag: Wir legen vier Karten für die vier genannten Worte. Zwei weitere Karten, Jüngster Tag und Bestimmung, legen wir daneben und sagen: Die stehen in diesem Vers nicht. Aufgabe: Wir wiederholen nur die vier Worte des Verses als gelesen und nennen die Sechszahl als bekannte Unterrichtsreihe, die hier nicht neu belegt wurde. malāʾikah bedeutet: Engel. kutub bedeutet: Bücher, Schriften. Was nicht behauptet wird: Der Hadith, in dem Ǧibrīl nach dem Glauben fragt, steht in der älteren Sammlung mit einer Nummer, die in diesem Lauf nicht erneut auf Dorar gelesen wurde. Wir geben die Nummer nicht als neue Prüfung aus. Der Jüngste Tag steht in einem anderen, schon gespeicherten Vers, nicht in diesem.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 2:285.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -21000,7 +21000,7 @@ const additions=
         "situation": "Wir legen vier Karten für die vier genannten Worte. Zwei weitere Karten, Jüngster Tag und Bestimmung, legen wir daneben und sagen: Die stehen in diesem Vers nicht.",
         "practice": "Wir wiederholen nur die vier Worte des Verses als gelesen und nennen die Sechszahl als bekannte Unterrichtsreihe, die hier nicht neu belegt wurde.",
         "summary": "Belegt ist Qurʾān 2:285. Ungeprüft bleibt: Der Hadith, in dem Ǧibrīl nach dem Glauben fragt, steht in der älteren Sammlung mit einer Nummer, die in diesem Lauf nicht erneut auf Dorar gelesen wurde.",
-        "audioScript": "Für die älteren Kinder. Die sechs Glaubenssäulen wiederholen. Der Vers sagt, dass der Gesandte glaubt, was zu ihm herabgesandt wurde, und die Glaubenden, und dass jeder an Allah, Seine Engel, Seine Bücher und Seine Gesandten glaubt und zwischen keinem Seiner. Nicht belegt und deshalb nicht behauptet: Der Hadith, in dem Ǧibrīl nach dem Glauben fragt, steht in der älteren Sammlung mit einer Nummer, die in diesem Lauf nicht erneut auf Dorar gelesen wurde."
+        "audioScript": "Die sechs Glaubenssäulen wiederholen. Der Vers sagt, dass der Gesandte glaubt, was zu ihm herabgesandt wurde, und die Glaubenden, und dass jeder an Allah, Seine Engel, Seine Bücher und Seine Gesandten glaubt und zwischen keinem Seiner. Nicht belegt und deshalb nicht behauptet: Der Hadith, in dem Ǧibrīl nach dem Glauben fragt, steht in der älteren Sammlung mit einer Nummer, die in diesem Lauf nicht erneut auf Dorar gelesen wurde."
       }
     },
     "questions": {
@@ -21136,7 +21136,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Dieselbe Fundstelle, anderes Lernziel: die eigene Entschuldigung. Eine Vertrauensperson bleibt nötig, wenn der Spott weitergeht. Das Holen der Person ist Schutzregel, kein Hadith. Dieselbe gelesene Fundstelle wurde schon in Slot 98 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+      "note": "Dieselbe Fundstelle, anderes Lernziel: die eigene Entschuldigung. Eine Vertrauensperson bleibt nötig, wenn der Spott weitergeht. Das Holen der Person ist Schutzregel, kein Hadith. Dieselbe gelesene Fundstelle wurde schon in Slot 98 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
       "sameLocusAsSlot": 98
     },
     "hint": "Du sagst es einer erwachsenen Person, der du vertraust.",
@@ -21170,7 +21170,7 @@ const additions=
       },
       "6-8": {
         "goal": "Für ein unfreundliches Wort übernehmen wir die Verantwortung und entschuldigen uns.",
-        "intro": "Heute geht es um Verantwortung für Worte übernehmen. Für ein unfreundliches Wort übernehmen wir die Verantwortung und entschuldigen uns. Wir lesen Qurʾān 49:11. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe Stelle wie in der Stunde über Mobbing verbietet Spott, Herabsetzung und verletzende Spitznamen. So kann das im Alltag aussehen: Ein Kind hat einen bösen Spitznamen gesagt. Es sagt der anderen Person: Das war falsch. Es tut mir leid. Die Aufgabe: Wir üben die Entschuldigung und benutzen den Namen danach nicht wieder. lamz bedeutet: herabsetzen, tadeln. tawbah bedeutet: Umkehr; der Vers spricht am Ende von denen, die nicht umkehren. Die Grenze der Stunde: Dieselbe Fundstelle, anderes Lernziel: die eigene Entschuldigung. Eine Vertrauensperson bleibt nötig, wenn der Spott weitergeht. Das Holen der Person ist Schutzregel, kein Hadith. Dieselbe gelesene Fundstelle wurde schon in Slot 98 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Verantwortung für Worte übernehmen. Für ein unfreundliches Wort übernehmen wir die Verantwortung und entschuldigen uns. Wir lesen Qurʾān 49:11. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe Stelle wie in der Stunde über Mobbing verbietet Spott, Herabsetzung und verletzende Spitznamen. So kann das im Alltag aussehen: Ein Kind hat einen bösen Spitznamen gesagt. Es sagt der anderen Person: Das war falsch. Es tut mir leid. Die Aufgabe: Wir üben die Entschuldigung und benutzen den Namen danach nicht wieder. lamz bedeutet: herabsetzen, tadeln. tawbah bedeutet: Umkehr; der Vers spricht am Ende von denen, die nicht umkehren. Die Grenze der Stunde: Dieselbe Fundstelle, anderes Lernziel: die eigene Entschuldigung. Eine Vertrauensperson bleibt nötig, wenn der Spott weitergeht. Das Holen der Person ist Schutzregel, kein Hadith. Dieselbe gelesene Fundstelle wurde schon in Slot 98 mit einem anderen Lernziel verwendet.",
         "lines": [
           "Qurʾān 49:11 ist die gelesene Stelle.",
           "Dieselbe Stelle wie in der Stunde über Mobbing verbietet Spott, Herabsetzung und verletzende Spitznamen.",
@@ -21196,7 +21196,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Verantwortung für Worte übernehmen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Verantwortung für Worte übernehmen. Das Lernziel ist: Für ein unfreundliches Wort übernehmen wir die Verantwortung und entschuldigen uns. Die Seite https://www.islamweb.net/ar/library/content/49/1754 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 49:11. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe Stelle wie in der Stunde über Mobbing verbietet Spott, Herabsetzung und verletzende Spitznamen. Alltag: Ein Kind hat einen bösen Spitznamen gesagt. Es sagt der anderen Person: Das war falsch. Es tut mir leid. Aufgabe: Wir üben die Entschuldigung und benutzen den Namen danach nicht wieder. lamz bedeutet: herabsetzen, tadeln. tawbah bedeutet: Umkehr; der Vers spricht am Ende von denen, die nicht umkehren. Was nicht behauptet wird: Dieselbe Fundstelle, anderes Lernziel: die eigene Entschuldigung. Eine Vertrauensperson bleibt nötig, wenn der Spott weitergeht. Das Holen der Person ist Schutzregel, kein Hadith. Dieselbe gelesene Fundstelle wurde schon in Slot 98 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Verantwortung für Worte übernehmen. Das Lernziel ist: Für ein unfreundliches Wort übernehmen wir die Verantwortung und entschuldigen uns. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe Stelle wie in der Stunde über Mobbing verbietet Spott, Herabsetzung und verletzende Spitznamen. Alltag: Ein Kind hat einen bösen Spitznamen gesagt. Es sagt der anderen Person: Das war falsch. Es tut mir leid. Aufgabe: Wir üben die Entschuldigung und benutzen den Namen danach nicht wieder. lamz bedeutet: herabsetzen, tadeln. tawbah bedeutet: Umkehr; der Vers spricht am Ende von denen, die nicht umkehren. Was nicht behauptet wird: Dieselbe Fundstelle, anderes Lernziel: die eigene Entschuldigung. Eine Vertrauensperson bleibt nötig, wenn der Spott weitergeht. Das Holen der Person ist Schutzregel, kein Hadith. Dieselbe gelesene Fundstelle wurde schon in Slot 98 mit einem anderen Lernziel verwendet.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 49:11.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -21218,7 +21218,7 @@ const additions=
         "situation": "Ein Kind hat einen bösen Spitznamen gesagt. Es sagt der anderen Person: Das war falsch. Es tut mir leid.",
         "practice": "Wir üben die Entschuldigung und benutzen den Namen danach nicht wieder.",
         "summary": "Belegt ist Qurʾān 49:11. Ungeprüft bleibt: Dieselbe Fundstelle, anderes Lernziel: die eigene Entschuldigung.",
-        "audioScript": "Für die älteren Kinder. Verantwortung für Worte übernehmen. Dieselbe Stelle wie in der Stunde über Mobbing verbietet Spott, Herabsetzung und verletzende Spitznamen. Nicht belegt und deshalb nicht behauptet: Dieselbe Fundstelle, anderes Lernziel: die eigene Entschuldigung."
+        "audioScript": "Verantwortung für Worte übernehmen. Dieselbe Stelle wie in der Stunde über Mobbing verbietet Spott, Herabsetzung und verletzende Spitznamen. Nicht belegt und deshalb nicht behauptet: Dieselbe Fundstelle, anderes Lernziel: die eigene Entschuldigung."
       }
     },
     "questions": {
@@ -21354,7 +21354,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers beschreibt nicht ein Altersprogramm. Die behutsame Hilfe ist die Anwendung. Dieselbe Fundstelle wurde schon für Versöhnung und Mitfreude verwendet. Dieselbe gelesene Fundstelle wurde schon in Slot 170 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+      "note": "Der Vers beschreibt nicht ein Altersprogramm. Die behutsame Hilfe ist die Anwendung. Dieselbe Fundstelle wurde schon für Versöhnung und Mitfreude verwendet. Dieselbe gelesene Fundstelle wurde schon in Slot 170 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
       "sameLocusAsSlot": 170
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
@@ -21388,7 +21388,7 @@ const additions=
       },
       "6-8": {
         "goal": "Mit jüngeren Kindern sprechen wir freundlich und helfen behutsam.",
-        "intro": "Heute geht es um Jüngere freundlich behandeln. Mit jüngeren Kindern sprechen wir freundlich und helfen behutsam. Wir lesen Qurʾān 49:10. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe Stelle über die Geschwisterlichkeit der Glaubenden trägt hier das Lernziel, den Jüngeren nicht zu drängen. So kann das im Alltag aussehen: Ein kleineres Kind kommt die Treppe herauf. Das größere wartet und hält nicht den Arm fest. Die Aufgabe: Wir üben, den Weg freizumachen und leise zu erklären. rifq bedeutet: Behutsamkeit; Unterrichtswort. aḫ bedeutet: Geschwister im Glauben. Die Grenze der Stunde: Der Vers beschreibt nicht ein Altersprogramm. Die behutsame Hilfe ist die Anwendung. Dieselbe Fundstelle wurde schon für Versöhnung und Mitfreude verwendet. Dieselbe gelesene Fundstelle wurde schon in Slot 170 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Jüngere freundlich behandeln. Mit jüngeren Kindern sprechen wir freundlich und helfen behutsam. Wir lesen Qurʾān 49:10. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe Stelle über die Geschwisterlichkeit der Glaubenden trägt hier das Lernziel, den Jüngeren nicht zu drängen. So kann das im Alltag aussehen: Ein kleineres Kind kommt die Treppe herauf. Das größere wartet und hält nicht den Arm fest. Die Aufgabe: Wir üben, den Weg freizumachen und leise zu erklären. rifq bedeutet: Behutsamkeit; Unterrichtswort. aḫ bedeutet: Geschwister im Glauben. Die Grenze der Stunde: Der Vers beschreibt nicht ein Altersprogramm. Die behutsame Hilfe ist die Anwendung. Dieselbe Fundstelle wurde schon für Versöhnung und Mitfreude verwendet. Dieselbe gelesene Fundstelle wurde schon in Slot 170 mit einem anderen Lernziel verwendet.",
         "lines": [
           "Qurʾān 49:10 ist die gelesene Stelle.",
           "Dieselbe Stelle über die Geschwisterlichkeit der Glaubenden trägt hier das Lernziel, den Jüngeren nicht zu drängen.",
@@ -21414,7 +21414,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Jüngere freundlich behandeln von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Jüngere freundlich behandeln. Das Lernziel ist: Mit jüngeren Kindern sprechen wir freundlich und helfen behutsam. Die Seite https://www.islamweb.net/ar/library/content/49/1753 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 49:10. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe Stelle über die Geschwisterlichkeit der Glaubenden trägt hier das Lernziel, den Jüngeren nicht zu drängen. Alltag: Ein kleineres Kind kommt die Treppe herauf. Das größere wartet und hält nicht den Arm fest. Aufgabe: Wir üben, den Weg freizumachen und leise zu erklären. rifq bedeutet: Behutsamkeit; Unterrichtswort. aḫ bedeutet: Geschwister im Glauben. Was nicht behauptet wird: Der Vers beschreibt nicht ein Altersprogramm. Die behutsame Hilfe ist die Anwendung. Dieselbe Fundstelle wurde schon für Versöhnung und Mitfreude verwendet. Dieselbe gelesene Fundstelle wurde schon in Slot 170 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Jüngere freundlich behandeln. Das Lernziel ist: Mit jüngeren Kindern sprechen wir freundlich und helfen behutsam. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe Stelle über die Geschwisterlichkeit der Glaubenden trägt hier das Lernziel, den Jüngeren nicht zu drängen. Alltag: Ein kleineres Kind kommt die Treppe herauf. Das größere wartet und hält nicht den Arm fest. Aufgabe: Wir üben, den Weg freizumachen und leise zu erklären. rifq bedeutet: Behutsamkeit; Unterrichtswort. aḫ bedeutet: Geschwister im Glauben. Was nicht behauptet wird: Der Vers beschreibt nicht ein Altersprogramm. Die behutsame Hilfe ist die Anwendung. Dieselbe Fundstelle wurde schon für Versöhnung und Mitfreude verwendet. Dieselbe gelesene Fundstelle wurde schon in Slot 170 mit einem anderen Lernziel verwendet.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 49:10.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -21436,7 +21436,7 @@ const additions=
         "situation": "Ein kleineres Kind kommt die Treppe herauf. Das größere wartet und hält nicht den Arm fest.",
         "practice": "Wir üben, den Weg freizumachen und leise zu erklären.",
         "summary": "Belegt ist Qurʾān 49:10. Ungeprüft bleibt: Der Vers beschreibt nicht ein Altersprogramm.",
-        "audioScript": "Für die älteren Kinder. Jüngere freundlich behandeln. Dieselbe Stelle über die Geschwisterlichkeit der Glaubenden trägt hier das Lernziel, den Jüngeren nicht zu drängen. Nicht belegt und deshalb nicht behauptet: Der Vers beschreibt nicht ein Altersprogramm."
+        "audioScript": "Jüngere freundlich behandeln. Dieselbe Stelle über die Geschwisterlichkeit der Glaubenden trägt hier das Lernziel, den Jüngeren nicht zu drängen. Nicht belegt und deshalb nicht behauptet: Der Vers beschreibt nicht ein Altersprogramm."
       }
     },
     "questions": {
@@ -21572,7 +21572,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Dieselbe Fundstelle, anderes Lernziel: die Woche der kleinen Taten. Die Zakāh der Erwachsenen berechnen wir nicht. Der Hadith über die Absicht bleibt ungelesen in diesem Lauf. Dieselbe gelesene Fundstelle wurde schon in Slot 113 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+      "note": "Dieselbe Fundstelle, anderes Lernziel: die Woche der kleinen Taten. Die Zakāh der Erwachsenen berechnen wir nicht. Der Hadith über die Absicht bleibt ungelesen in diesem Lauf. Dieselbe gelesene Fundstelle wurde schon in Slot 113 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
       "sameLocusAsSlot": 113
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
@@ -21606,7 +21606,7 @@ const additions=
       },
       "6-8": {
         "goal": "Kleine gute Taten gehören zum Dienen Allahs.",
-        "intro": "Heute geht es um Das Herz mit guten Taten pflegen. Kleine gute Taten gehören zum Dienen Allahs. Wir lesen Qurʾān 98:5. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe Stelle wie in der Stunde über die erneuerte Absicht sagt, Allah aufrichtig zu dienen, das Gebet zu verrichten und die Zakāh zu geben. So kann das im Alltag aussehen: Jedes Kind merkt sich eine kleine Tat, die es schon tun kann, zum Beispiel einen Gruß oder eine Hilfe zu Hause. Die Aufgabe: Wir nennen die Tat leise und wiederholen sie an einem weiteren Tag. ʿamal bedeutet: Tat. iḫlāṣ bedeutet: Aufrichtigkeit. Die Grenze der Stunde: Dieselbe Fundstelle, anderes Lernziel: die Woche der kleinen Taten. Die Zakāh der Erwachsenen berechnen wir nicht. Der Hadith über die Absicht bleibt ungelesen in diesem Lauf. Dieselbe gelesene Fundstelle wurde schon in Slot 113 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Das Herz mit guten Taten pflegen. Kleine gute Taten gehören zum Dienen Allahs. Wir lesen Qurʾān 98:5. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe Stelle wie in der Stunde über die erneuerte Absicht sagt, Allah aufrichtig zu dienen, das Gebet zu verrichten und die Zakāh zu geben. So kann das im Alltag aussehen: Jedes Kind merkt sich eine kleine Tat, die es schon tun kann, zum Beispiel einen Gruß oder eine Hilfe zu Hause. Die Aufgabe: Wir nennen die Tat leise und wiederholen sie an einem weiteren Tag. ʿamal bedeutet: Tat. iḫlāṣ bedeutet: Aufrichtigkeit. Die Grenze der Stunde: Dieselbe Fundstelle, anderes Lernziel: die Woche der kleinen Taten. Die Zakāh der Erwachsenen berechnen wir nicht. Der Hadith über die Absicht bleibt ungelesen in diesem Lauf. Dieselbe gelesene Fundstelle wurde schon in Slot 113 mit einem anderen Lernziel verwendet.",
         "lines": [
           "Qurʾān 98:5 ist die gelesene Stelle.",
           "Dieselbe Stelle wie in der Stunde über die erneuerte Absicht sagt, Allah aufrichtig zu dienen, das Gebet zu verrichten und die Zakāh zu geben.",
@@ -21632,7 +21632,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Das Herz mit guten Taten pflegen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Das Herz mit guten Taten pflegen. Das Lernziel ist: Kleine gute Taten gehören zum Dienen Allahs. Die Seite https://www.islamweb.net/ar/library/content/49/1969 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 98:5. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe Stelle wie in der Stunde über die erneuerte Absicht sagt, Allah aufrichtig zu dienen, das Gebet zu verrichten und die Zakāh zu geben. Alltag: Jedes Kind merkt sich eine kleine Tat, die es schon tun kann, zum Beispiel einen Gruß oder eine Hilfe zu Hause. Aufgabe: Wir nennen die Tat leise und wiederholen sie an einem weiteren Tag. ʿamal bedeutet: Tat. iḫlāṣ bedeutet: Aufrichtigkeit. Was nicht behauptet wird: Dieselbe Fundstelle, anderes Lernziel: die Woche der kleinen Taten. Die Zakāh der Erwachsenen berechnen wir nicht. Der Hadith über die Absicht bleibt ungelesen in diesem Lauf. Dieselbe gelesene Fundstelle wurde schon in Slot 113 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Das Herz mit guten Taten pflegen. Das Lernziel ist: Kleine gute Taten gehören zum Dienen Allahs. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe Stelle wie in der Stunde über die erneuerte Absicht sagt, Allah aufrichtig zu dienen, das Gebet zu verrichten und die Zakāh zu geben. Alltag: Jedes Kind merkt sich eine kleine Tat, die es schon tun kann, zum Beispiel einen Gruß oder eine Hilfe zu Hause. Aufgabe: Wir nennen die Tat leise und wiederholen sie an einem weiteren Tag. ʿamal bedeutet: Tat. iḫlāṣ bedeutet: Aufrichtigkeit. Was nicht behauptet wird: Dieselbe Fundstelle, anderes Lernziel: die Woche der kleinen Taten. Die Zakāh der Erwachsenen berechnen wir nicht. Der Hadith über die Absicht bleibt ungelesen in diesem Lauf. Dieselbe gelesene Fundstelle wurde schon in Slot 113 mit einem anderen Lernziel verwendet.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 98:5.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -21654,7 +21654,7 @@ const additions=
         "situation": "Jedes Kind merkt sich eine kleine Tat, die es schon tun kann, zum Beispiel einen Gruß oder eine Hilfe zu Hause.",
         "practice": "Wir nennen die Tat leise und wiederholen sie an einem weiteren Tag.",
         "summary": "Belegt ist Qurʾān 98:5. Ungeprüft bleibt: Dieselbe Fundstelle, anderes Lernziel: die Woche der kleinen Taten.",
-        "audioScript": "Für die älteren Kinder. Das Herz mit guten Taten pflegen. Dieselbe Stelle wie in der Stunde über die erneuerte Absicht sagt, Allah aufrichtig zu dienen, das Gebet zu verrichten und die Zakāh zu geben. Nicht belegt und deshalb nicht behauptet: Dieselbe Fundstelle, anderes Lernziel: die Woche der kleinen Taten."
+        "audioScript": "Das Herz mit guten Taten pflegen. Dieselbe Stelle wie in der Stunde über die erneuerte Absicht sagt, Allah aufrichtig zu dienen, das Gebet zu verrichten und die Zakāh zu geben. Nicht belegt und deshalb nicht behauptet: Dieselbe Fundstelle, anderes Lernziel: die Woche der kleinen Taten."
       }
     },
     "questions": {
@@ -21790,7 +21790,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Welche Körperteile die Gebetsschule außerdem verlangt, steht in diesem Vers nicht. Die Sicherheit von Stirn und Nase ist die Übungsregel und kein Hadith. al-Mughnī wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 186 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+      "note": "Welche Körperteile die Gebetsschule außerdem verlangt, steht in diesem Vers nicht. Die Sicherheit von Stirn und Nase ist die Übungsregel und kein Hadith. al-Mughnī wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 186 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
       "sameLocusAsSlot": 186
     },
     "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
@@ -21824,7 +21824,7 @@ const additions=
       },
       "6-8": {
         "goal": "In der Niederwerfung kommen Stirn und Nase auf die Unterlage.",
-        "intro": "Heute geht es um Suǧūd kennenlernen. In der Niederwerfung kommen Stirn und Nase auf die Unterlage. Wir lesen Qurʾān 22:77. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe Stelle wie in der Verbeugungsstunde sagt: Verbeugt euch und werft euch nieder. So kann das im Alltag aussehen: Auf einer weichen Unterlage setzt die Lehrperson Stirn und Nase auf. Kinder mit Schmerzen machen es nicht nach. Die Aufgabe: Wir achten auf genügend Platz, damit niemand anstößt. suǧūd bedeutet: Niederwerfung. ǧabhah bedeutet: Stirn; Unterrichtswort. Die Grenze der Stunde: Welche Körperteile die Gebetsschule außerdem verlangt, steht in diesem Vers nicht. Die Sicherheit von Stirn und Nase ist die Übungsregel und kein Hadith. al-Mughnī wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 186 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Suǧūd kennenlernen. In der Niederwerfung kommen Stirn und Nase auf die Unterlage. Wir lesen Qurʾān 22:77. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe Stelle wie in der Verbeugungsstunde sagt: Verbeugt euch und werft euch nieder. So kann das im Alltag aussehen: Auf einer weichen Unterlage setzt die Lehrperson Stirn und Nase auf. Kinder mit Schmerzen machen es nicht nach. Die Aufgabe: Wir achten auf genügend Platz, damit niemand anstößt. suǧūd bedeutet: Niederwerfung. ǧabhah bedeutet: Stirn; Unterrichtswort. Die Grenze der Stunde: Welche Körperteile die Gebetsschule außerdem verlangt, steht in diesem Vers nicht. Die Sicherheit von Stirn und Nase ist die Übungsregel und kein Hadith. al-Mughnī wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 186 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
         "lines": [
           "Qurʾān 22:77 ist die gelesene Stelle.",
           "Dieselbe Stelle wie in der Verbeugungsstunde sagt: Verbeugt euch und werft euch nieder.",
@@ -21850,7 +21850,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Suǧūd kennenlernen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Suǧūd kennenlernen. Das Lernziel ist: In der Niederwerfung kommen Stirn und Nase auf die Unterlage. Die Seite https://www.islamweb.net/ar/library/content/49/1229 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 22:77. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe Stelle wie in der Verbeugungsstunde sagt: Verbeugt euch und werft euch nieder. Alltag: Auf einer weichen Unterlage setzt die Lehrperson Stirn und Nase auf. Kinder mit Schmerzen machen es nicht nach. Aufgabe: Wir achten auf genügend Platz, damit niemand anstößt. suǧūd bedeutet: Niederwerfung. ǧabhah bedeutet: Stirn; Unterrichtswort. Was nicht behauptet wird: Welche Körperteile die Gebetsschule außerdem verlangt, steht in diesem Vers nicht. Die Sicherheit von Stirn und Nase ist die Übungsregel und kein Hadith. al-Mughnī wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 186 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Suǧūd kennenlernen. Das Lernziel ist: In der Niederwerfung kommen Stirn und Nase auf die Unterlage. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe Stelle wie in der Verbeugungsstunde sagt: Verbeugt euch und werft euch nieder. Alltag: Auf einer weichen Unterlage setzt die Lehrperson Stirn und Nase auf. Kinder mit Schmerzen machen es nicht nach. Aufgabe: Wir achten auf genügend Platz, damit niemand anstößt. suǧūd bedeutet: Niederwerfung. ǧabhah bedeutet: Stirn; Unterrichtswort. Was nicht behauptet wird: Welche Körperteile die Gebetsschule außerdem verlangt, steht in diesem Vers nicht. Die Sicherheit von Stirn und Nase ist die Übungsregel und kein Hadith. al-Mughnī wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 186 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 22:77.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -21872,7 +21872,7 @@ const additions=
         "situation": "Auf einer weichen Unterlage setzt die Lehrperson Stirn und Nase auf. Kinder mit Schmerzen machen es nicht nach.",
         "practice": "Wir achten auf genügend Platz, damit niemand anstößt.",
         "summary": "Belegt ist Qurʾān 22:77. Ungeprüft bleibt: Welche Körperteile die Gebetsschule außerdem verlangt, steht in diesem Vers nicht.",
-        "audioScript": "Für die älteren Kinder. Suǧūd kennenlernen. Dieselbe Stelle wie in der Verbeugungsstunde sagt: Verbeugt euch und werft euch nieder. Nicht belegt und deshalb nicht behauptet: Welche Körperteile die Gebetsschule außerdem verlangt, steht in diesem Vers nicht."
+        "audioScript": "Suǧūd kennenlernen. Dieselbe Stelle wie in der Verbeugungsstunde sagt: Verbeugt euch und werft euch nieder. Nicht belegt und deshalb nicht behauptet: Welche Körperteile die Gebetsschule außerdem verlangt, steht in diesem Vers nicht."
       }
     },
     "questions": {
@@ -22008,7 +22008,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Dieselbe Fundstelle, hier mit dem Schwerpunkt Krankheit. Der Vers nennt die Kranken nicht als eigenes Wort in dem Satz, den wir als Anwendung nehmen. Wir sagen das ehrlich. Die Hilfe für die Genannten im Vers ist der Beleg, die Krankenszene ist das Beispiel. Dieselbe gelesene Fundstelle wurde schon in Slot 134 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+      "note": "Dieselbe Fundstelle, hier mit dem Schwerpunkt Krankheit. Der Vers nennt die Kranken nicht als eigenes Wort in dem Satz, den wir als Anwendung nehmen. Wir sagen das ehrlich. Die Hilfe für die Genannten im Vers ist der Beleg, die Krankenszene ist das Beispiel. Dieselbe gelesene Fundstelle wurde schon in Slot 134 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
       "sameLocusAsSlot": 134
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
@@ -22042,7 +22042,7 @@ const additions=
       },
       "6-8": {
         "goal": "Einem kranken Menschen bieten wir eine kleine Hilfe an, wenn die Eltern einverstanden sind.",
-        "intro": "Heute geht es um Fürsorge für Kranke. Einem kranken Menschen bieten wir eine kleine Hilfe an, wenn die Eltern einverstanden sind. Wir lesen Qurʾān 4:36. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe Stelle wie in der Stunde über Kranke und Ältere nennt das Gute zu den Eltern, den Verwandten, den Waisen, den Bedürftigen und den Nachbarn. So kann das im Alltag aussehen: Ein Geschwisterkind liegt und möchte ein Buch. Das Kind bringt es, nachdem es gefragt hat, und bleibt nicht lange, wenn Ruhe nötig ist. Die Aufgabe: Wir unterscheiden: ein Buch bringen dürfen wir. Medizin geben wir nicht. marīḍ bedeutet: krank; Unterrichtswort, nicht als behauptetes Wort dieses Verssatzes. iḥsān bedeutet: gutes Verhalten. Die Grenze der Stunde: Dieselbe Fundstelle, hier mit dem Schwerpunkt Krankheit. Der Vers nennt die Kranken nicht als eigenes Wort in dem Satz, den wir als Anwendung nehmen. Wir sagen das ehrlich. Die Hilfe für die Genannten im Vers ist der Beleg, die Krankenszene ist das Beispiel. Dieselbe gelesene Fundstelle wurde schon in Slot 134 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Fürsorge für Kranke. Einem kranken Menschen bieten wir eine kleine Hilfe an, wenn die Eltern einverstanden sind. Wir lesen Qurʾān 4:36. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe Stelle wie in der Stunde über Kranke und Ältere nennt das Gute zu den Eltern, den Verwandten, den Waisen, den Bedürftigen und den Nachbarn. So kann das im Alltag aussehen: Ein Geschwisterkind liegt und möchte ein Buch. Das Kind bringt es, nachdem es gefragt hat, und bleibt nicht lange, wenn Ruhe nötig ist. Die Aufgabe: Wir unterscheiden: ein Buch bringen dürfen wir. Medizin geben wir nicht. marīḍ bedeutet: krank; Unterrichtswort, nicht als behauptetes Wort dieses Verssatzes. iḥsān bedeutet: gutes Verhalten. Die Grenze der Stunde: Dieselbe Fundstelle, hier mit dem Schwerpunkt Krankheit. Der Vers nennt die Kranken nicht als eigenes Wort in dem Satz, den wir als Anwendung nehmen. Wir sagen das ehrlich. Die Hilfe für die Genannten im Vers ist der Beleg, die Krankenszene ist das Beispiel. Dieselbe gelesene Fundstelle wurde schon in Slot 134 mit einem anderen Lernziel verwendet.",
         "lines": [
           "Qurʾān 4:36 ist die gelesene Stelle.",
           "Dieselbe Stelle wie in der Stunde über Kranke und Ältere nennt das Gute zu den Eltern, den Verwandten, den Waisen, den Bedürftigen und den Nachbarn.",
@@ -22068,7 +22068,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Fürsorge für Kranke von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Fürsorge für Kranke. Das Lernziel ist: Einem kranken Menschen bieten wir eine kleine Hilfe an, wenn die Eltern einverstanden sind. Die Seite https://www.islamweb.net/ar/library/content/49/314 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:36. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe Stelle wie in der Stunde über Kranke und Ältere nennt das Gute zu den Eltern, den Verwandten, den Waisen, den Bedürftigen und den Nachbarn. Alltag: Ein Geschwisterkind liegt und möchte ein Buch. Das Kind bringt es, nachdem es gefragt hat, und bleibt nicht lange, wenn Ruhe nötig ist. Aufgabe: Wir unterscheiden: ein Buch bringen dürfen wir. Medizin geben wir nicht. marīḍ bedeutet: krank; Unterrichtswort, nicht als behauptetes Wort dieses Verssatzes. iḥsān bedeutet: gutes Verhalten. Was nicht behauptet wird: Dieselbe Fundstelle, hier mit dem Schwerpunkt Krankheit. Der Vers nennt die Kranken nicht als eigenes Wort in dem Satz, den wir als Anwendung nehmen. Wir sagen das ehrlich. Die Hilfe für die Genannten im Vers ist der Beleg, die Krankenszene ist das Beispiel. Dieselbe gelesene Fundstelle wurde schon in Slot 134 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Fürsorge für Kranke. Das Lernziel ist: Einem kranken Menschen bieten wir eine kleine Hilfe an, wenn die Eltern einverstanden sind. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe Stelle wie in der Stunde über Kranke und Ältere nennt das Gute zu den Eltern, den Verwandten, den Waisen, den Bedürftigen und den Nachbarn. Alltag: Ein Geschwisterkind liegt und möchte ein Buch. Das Kind bringt es, nachdem es gefragt hat, und bleibt nicht lange, wenn Ruhe nötig ist. Aufgabe: Wir unterscheiden: ein Buch bringen dürfen wir. Medizin geben wir nicht. marīḍ bedeutet: krank; Unterrichtswort, nicht als behauptetes Wort dieses Verssatzes. iḥsān bedeutet: gutes Verhalten. Was nicht behauptet wird: Dieselbe Fundstelle, hier mit dem Schwerpunkt Krankheit. Der Vers nennt die Kranken nicht als eigenes Wort in dem Satz, den wir als Anwendung nehmen. Wir sagen das ehrlich. Die Hilfe für die Genannten im Vers ist der Beleg, die Krankenszene ist das Beispiel. Dieselbe gelesene Fundstelle wurde schon in Slot 134 mit einem anderen Lernziel verwendet.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 4:36.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -22090,7 +22090,7 @@ const additions=
         "situation": "Ein Geschwisterkind liegt und möchte ein Buch. Das Kind bringt es, nachdem es gefragt hat, und bleibt nicht lange, wenn Ruhe nötig ist.",
         "practice": "Wir unterscheiden: ein Buch bringen dürfen wir. Medizin geben wir nicht.",
         "summary": "Belegt ist Qurʾān 4:36. Ungeprüft bleibt: Dieselbe Fundstelle, hier mit dem Schwerpunkt Krankheit.",
-        "audioScript": "Für die älteren Kinder. Fürsorge für Kranke. Dieselbe Stelle wie in der Stunde über Kranke und Ältere nennt das Gute zu den Eltern, den Verwandten, den Waisen, den Bedürftigen und den Nachbarn. Nicht belegt und deshalb nicht behauptet: Dieselbe Fundstelle, hier mit dem Schwerpunkt Krankheit."
+        "audioScript": "Fürsorge für Kranke. Dieselbe Stelle wie in der Stunde über Kranke und Ältere nennt das Gute zu den Eltern, den Verwandten, den Waisen, den Bedürftigen und den Nachbarn. Nicht belegt und deshalb nicht behauptet: Dieselbe Fundstelle, hier mit dem Schwerpunkt Krankheit."
       }
     },
     "questions": {
@@ -22226,7 +22226,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die Seite erwähnt eine Lesart, die von der Sitzrunde in der Einzahl spricht. Wir machen daraus keinen Streit. Eine Belohnung in Zahlen erfinden wir nicht. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Die Seite erwähnt eine Lesart, die von der Sitzrunde in der Einzahl spricht. Wir machen daraus keinen Streit. Eine Belohnung in Zahlen erfinden wir nicht. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Wenn jemand Platz braucht, rücken wir zusammen.",
@@ -22259,7 +22259,7 @@ const additions=
       },
       "6-8": {
         "goal": "Wenn jemand Platz braucht, rücken wir zusammen.",
-        "intro": "Heute geht es um Anderen Platz machen. Wenn jemand Platz braucht, rücken wir zusammen. Wir lesen Qurʾān 58:11. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt: Wenn zu euch gesagt wird, macht Raum in den Sitzrunden, dann macht Raum. Allah wird euch Raum machen. Wenn gesagt wird, erhebt euch, dann erhebt euch. So kann das im Alltag aussehen: Im Kreis ist es eng. Die Kinder rücken einen Handbreit und lassen ein weiteres Kind sitzen. Die Aufgabe: Wir üben das Aufrücken ohne Stoßen und das Aufstehen, wenn eine erwachsene Person darum bittet. tafassuḥ bedeutet: Raum machen. maǧālis bedeutet: Sitzrunden. Die Grenze der Stunde: Die Seite erwähnt eine Lesart, die von der Sitzrunde in der Einzahl spricht. Wir machen daraus keinen Streit. Eine Belohnung in Zahlen erfinden wir nicht. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Anderen Platz machen. Wenn jemand Platz braucht, rücken wir zusammen. Wir lesen Qurʾān 58:11. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt: Wenn zu euch gesagt wird, macht Raum in den Sitzrunden, dann macht Raum. Allah wird euch Raum machen. Wenn gesagt wird, erhebt euch, dann erhebt euch. So kann das im Alltag aussehen: Im Kreis ist es eng. Die Kinder rücken einen Handbreit und lassen ein weiteres Kind sitzen. Die Aufgabe: Wir üben das Aufrücken ohne Stoßen und das Aufstehen, wenn eine erwachsene Person darum bittet. tafassuḥ bedeutet: Raum machen. maǧālis bedeutet: Sitzrunden. Die Grenze der Stunde: Die Seite erwähnt eine Lesart, die von der Sitzrunde in der Einzahl spricht. Wir machen daraus keinen Streit. Eine Belohnung in Zahlen erfinden wir nicht.",
         "lines": [
           "Qurʾān 58:11 ist die gelesene Stelle.",
           "Der Vers sagt: Wenn zu euch gesagt wird, macht Raum in den Sitzrunden, dann macht Raum.",
@@ -22285,7 +22285,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Anderen Platz machen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Anderen Platz machen. Das Lernziel ist: Wenn jemand Platz braucht, rücken wir zusammen. Die Seite https://www.islamweb.net/ar/library/content/49/1829 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 58:11. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt: Wenn zu euch gesagt wird, macht Raum in den Sitzrunden, dann macht Raum. Allah wird euch Raum machen. Wenn gesagt wird, erhebt euch, dann erhebt euch. Alltag: Im Kreis ist es eng. Die Kinder rücken einen Handbreit und lassen ein weiteres Kind sitzen. Aufgabe: Wir üben das Aufrücken ohne Stoßen und das Aufstehen, wenn eine erwachsene Person darum bittet. tafassuḥ bedeutet: Raum machen. maǧālis bedeutet: Sitzrunden. Was nicht behauptet wird: Die Seite erwähnt eine Lesart, die von der Sitzrunde in der Einzahl spricht. Wir machen daraus keinen Streit. Eine Belohnung in Zahlen erfinden wir nicht. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Anderen Platz machen. Das Lernziel ist: Wenn jemand Platz braucht, rücken wir zusammen. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt: Wenn zu euch gesagt wird, macht Raum in den Sitzrunden, dann macht Raum. Allah wird euch Raum machen. Wenn gesagt wird, erhebt euch, dann erhebt euch. Alltag: Im Kreis ist es eng. Die Kinder rücken einen Handbreit und lassen ein weiteres Kind sitzen. Aufgabe: Wir üben das Aufrücken ohne Stoßen und das Aufstehen, wenn eine erwachsene Person darum bittet. tafassuḥ bedeutet: Raum machen. maǧālis bedeutet: Sitzrunden. Was nicht behauptet wird: Die Seite erwähnt eine Lesart, die von der Sitzrunde in der Einzahl spricht. Wir machen daraus keinen Streit. Eine Belohnung in Zahlen erfinden wir nicht.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 58:11.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -22307,7 +22307,7 @@ const additions=
         "situation": "Im Kreis ist es eng. Die Kinder rücken einen Handbreit und lassen ein weiteres Kind sitzen.",
         "practice": "Wir üben das Aufrücken ohne Stoßen und das Aufstehen, wenn eine erwachsene Person darum bittet.",
         "summary": "Belegt ist Qurʾān 58:11. Ungeprüft bleibt: Die Seite erwähnt eine Lesart, die von der Sitzrunde in der Einzahl spricht.",
-        "audioScript": "Für die älteren Kinder. Anderen Platz machen. Der Vers sagt: Wenn zu euch gesagt wird, macht Raum in den Sitzrunden, dann macht Raum. Nicht belegt und deshalb nicht behauptet: Die Seite erwähnt eine Lesart, die von der Sitzrunde in der Einzahl spricht."
+        "audioScript": "Anderen Platz machen. Der Vers sagt: Wenn zu euch gesagt wird, macht Raum in den Sitzrunden, dann macht Raum. Nicht belegt und deshalb nicht behauptet: Die Seite erwähnt eine Lesart, die von der Sitzrunde in der Einzahl spricht."
       }
     },
     "questions": {
@@ -22443,7 +22443,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Eine Bittformel zwischen den Niederwerfungen wird nicht erfunden. al-Mughnī wurde nicht gelesen. Dieselbe Gebetsstelle trägt hier nur dieses Lernziel. Dieselbe gelesene Fundstelle wurde schon in Slot 198 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+      "note": "Eine Bittformel zwischen den Niederwerfungen wird nicht erfunden. al-Mughnī wurde nicht gelesen. Dieselbe Gebetsstelle trägt hier nur dieses Lernziel. Dieselbe gelesene Fundstelle wurde schon in Slot 198 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
       "sameLocusAsSlot": 198
     },
     "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
@@ -22477,7 +22477,7 @@ const additions=
       },
       "6-8": {
         "goal": "Zwischen zwei Niederwerfungen gibt es ein kurzes Sitzen.",
-        "intro": "Heute geht es um Zwischen zwei Niederwerfungen sitzen. Zwischen zwei Niederwerfungen gibt es ein kurzes Sitzen. Wir lesen Qurʾān 22:77. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe Stelle nennt Verbeugung und Niederwerfung. Das Sitzen dazwischen steht dort nicht. So kann das im Alltag aussehen: Die Kinder sehen das kurze Sitzen und machen es nur so weit mit, wie es ohne Eile geht. Die Aufgabe: Wir sagen einen Satz: Das Sitzen zeigen wir. Die Worte dabei haben wir auf dieser Seite nicht gelesen. ǧalsah bedeutet: das Sitzen; Unterrichtswort. suǧūd bedeutet: Niederwerfung. Die Grenze der Stunde: Eine Bittformel zwischen den Niederwerfungen wird nicht erfunden. al-Mughnī wurde nicht gelesen. Dieselbe Gebetsstelle trägt hier nur dieses Lernziel. Dieselbe gelesene Fundstelle wurde schon in Slot 198 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Zwischen zwei Niederwerfungen sitzen. Zwischen zwei Niederwerfungen gibt es ein kurzes Sitzen. Wir lesen Qurʾān 22:77. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe Stelle nennt Verbeugung und Niederwerfung. Das Sitzen dazwischen steht dort nicht. So kann das im Alltag aussehen: Die Kinder sehen das kurze Sitzen und machen es nur so weit mit, wie es ohne Eile geht. Die Aufgabe: Wir sagen einen Satz: Das Sitzen zeigen wir. Die Worte dabei haben wir auf dieser Seite nicht gelesen. ǧalsah bedeutet: das Sitzen; Unterrichtswort. suǧūd bedeutet: Niederwerfung. Die Grenze der Stunde: Eine Bittformel zwischen den Niederwerfungen wird nicht erfunden. al-Mughnī wurde nicht gelesen. Dieselbe Gebetsstelle trägt hier nur dieses Lernziel. Dieselbe gelesene Fundstelle wurde schon in Slot 198 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
         "lines": [
           "Qurʾān 22:77 ist die gelesene Stelle.",
           "Dieselbe Stelle nennt Verbeugung und Niederwerfung.",
@@ -22503,7 +22503,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Zwischen zwei Niederwerfungen sitzen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Zwischen zwei Niederwerfungen sitzen. Das Lernziel ist: Zwischen zwei Niederwerfungen gibt es ein kurzes Sitzen. Die Seite https://www.islamweb.net/ar/library/content/49/1229 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 22:77. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe Stelle nennt Verbeugung und Niederwerfung. Das Sitzen dazwischen steht dort nicht. Alltag: Die Kinder sehen das kurze Sitzen und machen es nur so weit mit, wie es ohne Eile geht. Aufgabe: Wir sagen einen Satz: Das Sitzen zeigen wir. Die Worte dabei haben wir auf dieser Seite nicht gelesen. ǧalsah bedeutet: das Sitzen; Unterrichtswort. suǧūd bedeutet: Niederwerfung. Was nicht behauptet wird: Eine Bittformel zwischen den Niederwerfungen wird nicht erfunden. al-Mughnī wurde nicht gelesen. Dieselbe Gebetsstelle trägt hier nur dieses Lernziel. Dieselbe gelesene Fundstelle wurde schon in Slot 198 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Zwischen zwei Niederwerfungen sitzen. Das Lernziel ist: Zwischen zwei Niederwerfungen gibt es ein kurzes Sitzen. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe Stelle nennt Verbeugung und Niederwerfung. Das Sitzen dazwischen steht dort nicht. Alltag: Die Kinder sehen das kurze Sitzen und machen es nur so weit mit, wie es ohne Eile geht. Aufgabe: Wir sagen einen Satz: Das Sitzen zeigen wir. Die Worte dabei haben wir auf dieser Seite nicht gelesen. ǧalsah bedeutet: das Sitzen; Unterrichtswort. suǧūd bedeutet: Niederwerfung. Was nicht behauptet wird: Eine Bittformel zwischen den Niederwerfungen wird nicht erfunden. al-Mughnī wurde nicht gelesen. Dieselbe Gebetsstelle trägt hier nur dieses Lernziel. Dieselbe gelesene Fundstelle wurde schon in Slot 198 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 22:77.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -22525,7 +22525,7 @@ const additions=
         "situation": "Die Kinder sehen das kurze Sitzen und machen es nur so weit mit, wie es ohne Eile geht.",
         "practice": "Wir sagen einen Satz: Das Sitzen zeigen wir. Die Worte dabei haben wir auf dieser Seite nicht gelesen.",
         "summary": "Belegt ist Qurʾān 22:77. Ungeprüft bleibt: Eine Bittformel zwischen den Niederwerfungen wird nicht erfunden.",
-        "audioScript": "Für die älteren Kinder. Zwischen zwei Niederwerfungen sitzen. Dieselbe Stelle nennt Verbeugung und Niederwerfung. Nicht belegt und deshalb nicht behauptet: Eine Bittformel zwischen den Niederwerfungen wird nicht erfunden."
+        "audioScript": "Zwischen zwei Niederwerfungen sitzen. Dieselbe Stelle nennt Verbeugung und Niederwerfung. Nicht belegt und deshalb nicht behauptet: Eine Bittformel zwischen den Niederwerfungen wird nicht erfunden."
       }
     },
     "questions": {
@@ -22661,7 +22661,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers beschreibt den Propheten, nicht das Kind. Eine Liste seiner Charaktereigenschaften aus einem Hadith steht hier nicht. Wir ergänzen sie nicht. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Vers beschreibt den Propheten, nicht das Kind. Eine Liste seiner Charaktereigenschaften aus einem Hadith steht hier nicht. Wir ergänzen sie nicht. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Der Vers sagt dem Propheten, Friede sei mit ihm, dass er auf einem gewaltigen Charakter ist.",
@@ -22694,7 +22694,7 @@ const additions=
       },
       "6-8": {
         "goal": "Der Vers sagt dem Propheten, Friede sei mit ihm, dass er auf einem gewaltigen Charakter ist.",
-        "intro": "Heute geht es um Guter Charakter im Wochenrückblick. Der Vers sagt dem Propheten, Friede sei mit ihm, dass er auf einem gewaltigen Charakter ist. Wir lesen Qurʾān 68:4. Sinngemäß, ohne beglaubigte Übersetzung: Der gespeicherte Vers lautet: Und du bist wahrlich auf einem gewaltigen Charakter. Die Seite beginnt danach mit einer Erklärung. So kann das im Alltag aussehen: Ein Kind erzählt eine freundliche Entscheidung aus der Woche, zum Beispiel Nachgeben beim Spiel. Die Aufgabe: Wir sagen den Satz in der Ich-Form und ohne einen Hadith zu erfinden. ḫuluq bedeutet: Charakter. ʿaẓīm bedeutet: gewaltig, groß. Die Grenze der Stunde: Der Vers beschreibt den Propheten, nicht das Kind. Eine Liste seiner Charaktereigenschaften aus einem Hadith steht hier nicht. Wir ergänzen sie nicht. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Guter Charakter im Wochenrückblick. Der Vers sagt dem Propheten, Friede sei mit ihm, dass er auf einem gewaltigen Charakter ist. Wir lesen Qurʾān 68:4. Sinngemäß, ohne beglaubigte Übersetzung: Der gespeicherte Vers lautet: Und du bist wahrlich auf einem gewaltigen Charakter. Die Seite beginnt danach mit einer Erklärung. So kann das im Alltag aussehen: Ein Kind erzählt eine freundliche Entscheidung aus der Woche, zum Beispiel Nachgeben beim Spiel. Die Aufgabe: Wir sagen den Satz in der Ich-Form und ohne einen Hadith zu erfinden. ḫuluq bedeutet: Charakter. ʿaẓīm bedeutet: gewaltig, groß. Die Grenze der Stunde: Der Vers beschreibt den Propheten, nicht das Kind. Eine Liste seiner Charaktereigenschaften aus einem Hadith steht hier nicht. Wir ergänzen sie nicht.",
         "lines": [
           "Qurʾān 68:4 ist die gelesene Stelle.",
           "Die Seite beginnt danach mit einer Erklärung.",
@@ -22720,7 +22720,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Guter Charakter im Wochenrückblick von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Guter Charakter im Wochenrückblick. Das Lernziel ist: Der Vers sagt dem Propheten, Friede sei mit ihm, dass er auf einem gewaltigen Charakter ist. Die Seite https://www.islamweb.net/ar/library/content/49/1879 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 68:4. Sinngemäß, keine beglaubigte Übersetzung: Der gespeicherte Vers lautet: Und du bist wahrlich auf einem gewaltigen Charakter. Die Seite beginnt danach mit einer Erklärung. Alltag: Ein Kind erzählt eine freundliche Entscheidung aus der Woche, zum Beispiel Nachgeben beim Spiel. Aufgabe: Wir sagen den Satz in der Ich-Form und ohne einen Hadith zu erfinden. ḫuluq bedeutet: Charakter. ʿaẓīm bedeutet: gewaltig, groß. Was nicht behauptet wird: Der Vers beschreibt den Propheten, nicht das Kind. Eine Liste seiner Charaktereigenschaften aus einem Hadith steht hier nicht. Wir ergänzen sie nicht. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Guter Charakter im Wochenrückblick. Das Lernziel ist: Der Vers sagt dem Propheten, Friede sei mit ihm, dass er auf einem gewaltigen Charakter ist. Sinngemäß, keine beglaubigte Übersetzung: Der gespeicherte Vers lautet: Und du bist wahrlich auf einem gewaltigen Charakter. Die Seite beginnt danach mit einer Erklärung. Alltag: Ein Kind erzählt eine freundliche Entscheidung aus der Woche, zum Beispiel Nachgeben beim Spiel. Aufgabe: Wir sagen den Satz in der Ich-Form und ohne einen Hadith zu erfinden. ḫuluq bedeutet: Charakter. ʿaẓīm bedeutet: gewaltig, groß. Was nicht behauptet wird: Der Vers beschreibt den Propheten, nicht das Kind. Eine Liste seiner Charaktereigenschaften aus einem Hadith steht hier nicht. Wir ergänzen sie nicht.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 68:4.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -22742,7 +22742,7 @@ const additions=
         "situation": "Ein Kind erzählt eine freundliche Entscheidung aus der Woche, zum Beispiel Nachgeben beim Spiel.",
         "practice": "Wir sagen den Satz in der Ich-Form und ohne einen Hadith zu erfinden.",
         "summary": "Belegt ist Qurʾān 68:4. Ungeprüft bleibt: Der Vers beschreibt den Propheten, nicht das Kind.",
-        "audioScript": "Für die älteren Kinder. Guter Charakter im Wochenrückblick. Die Seite beginnt danach mit einer Erklärung. Nicht belegt und deshalb nicht behauptet: Der Vers beschreibt den Propheten, nicht das Kind."
+        "audioScript": "Guter Charakter im Wochenrückblick. Die Seite beginnt danach mit einer Erklärung. Nicht belegt und deshalb nicht behauptet: Der Vers beschreibt den Propheten, nicht das Kind."
       }
     },
     "questions": {
@@ -22878,7 +22878,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Das Prüfen der Nachricht ist die Übung der Stunde, nicht ein Satz des Verses. Dieselbe Fundstelle wurde schon für Mobbing und für die Entschuldigung verwendet. Eine technische Anleitung für ein bestimmtes Gerät geben wir nicht. Dieselbe gelesene Fundstelle wurde schon in Slot 195 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+      "note": "Das Prüfen der Nachricht ist die Übung der Stunde, nicht ein Satz des Verses. Dieselbe Fundstelle wurde schon für Mobbing und für die Entschuldigung verwendet. Eine technische Anleitung für ein bestimmtes Gerät geben wir nicht. Dieselbe gelesene Fundstelle wurde schon in Slot 195 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
       "sameLocusAsSlot": 195
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
@@ -22912,7 +22912,7 @@ const additions=
       },
       "6-8": {
         "goal": "Bevor wir eine Nachricht senden, lesen wir, ob sie freundlich ist.",
-        "intro": "Heute geht es um Digitalen Adab üben. Bevor wir eine Nachricht senden, lesen wir, ob sie freundlich ist. Wir lesen Qurʾān 49:11. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe Stelle gegen Spott und verletzende Namen gilt auch für Worte auf einem Bildschirm. Der Bildschirm selbst steht nicht im Vers. So kann das im Alltag aussehen: Ein Kind möchte einen ärgerlichen Satz senden. Es löscht ihn und schreibt einen ruhigen Satz oder sendet nichts. Die Aufgabe: Wir prüfen drei Beispielsätze und senden nur den freundlichen. qawl bedeutet: Wort, Rede. adab bedeutet: gutes Benehmen. Die Grenze der Stunde: Das Prüfen der Nachricht ist die Übung der Stunde, nicht ein Satz des Verses. Dieselbe Fundstelle wurde schon für Mobbing und für die Entschuldigung verwendet. Eine technische Anleitung für ein bestimmtes Gerät geben wir nicht. Dieselbe gelesene Fundstelle wurde schon in Slot 195 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Digitalen Adab üben. Bevor wir eine Nachricht senden, lesen wir, ob sie freundlich ist. Wir lesen Qurʾān 49:11. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe Stelle gegen Spott und verletzende Namen gilt auch für Worte auf einem Bildschirm. Der Bildschirm selbst steht nicht im Vers. So kann das im Alltag aussehen: Ein Kind möchte einen ärgerlichen Satz senden. Es löscht ihn und schreibt einen ruhigen Satz oder sendet nichts. Die Aufgabe: Wir prüfen drei Beispielsätze und senden nur den freundlichen. qawl bedeutet: Wort, Rede. adab bedeutet: gutes Benehmen. Die Grenze der Stunde: Das Prüfen der Nachricht ist die Übung der Stunde, nicht ein Satz des Verses. Dieselbe Fundstelle wurde schon für Mobbing und für die Entschuldigung verwendet. Eine technische Anleitung für ein bestimmtes Gerät geben wir nicht. Dieselbe gelesene Fundstelle wurde schon in Slot 195 mit einem anderen Lernziel verwendet.",
         "lines": [
           "Qurʾān 49:11 ist die gelesene Stelle.",
           "Dieselbe Stelle gegen Spott und verletzende Namen gilt auch für Worte auf einem Bildschirm.",
@@ -22938,7 +22938,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Digitalen Adab üben von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Digitalen Adab üben. Das Lernziel ist: Bevor wir eine Nachricht senden, lesen wir, ob sie freundlich ist. Die Seite https://www.islamweb.net/ar/library/content/49/1754 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 49:11. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe Stelle gegen Spott und verletzende Namen gilt auch für Worte auf einem Bildschirm. Der Bildschirm selbst steht nicht im Vers. Alltag: Ein Kind möchte einen ärgerlichen Satz senden. Es löscht ihn und schreibt einen ruhigen Satz oder sendet nichts. Aufgabe: Wir prüfen drei Beispielsätze und senden nur den freundlichen. qawl bedeutet: Wort, Rede. adab bedeutet: gutes Benehmen. Was nicht behauptet wird: Das Prüfen der Nachricht ist die Übung der Stunde, nicht ein Satz des Verses. Dieselbe Fundstelle wurde schon für Mobbing und für die Entschuldigung verwendet. Eine technische Anleitung für ein bestimmtes Gerät geben wir nicht. Dieselbe gelesene Fundstelle wurde schon in Slot 195 mit einem anderen Lernziel verwendet. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Digitalen Adab üben. Das Lernziel ist: Bevor wir eine Nachricht senden, lesen wir, ob sie freundlich ist. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe Stelle gegen Spott und verletzende Namen gilt auch für Worte auf einem Bildschirm. Der Bildschirm selbst steht nicht im Vers. Alltag: Ein Kind möchte einen ärgerlichen Satz senden. Es löscht ihn und schreibt einen ruhigen Satz oder sendet nichts. Aufgabe: Wir prüfen drei Beispielsätze und senden nur den freundlichen. qawl bedeutet: Wort, Rede. adab bedeutet: gutes Benehmen. Was nicht behauptet wird: Das Prüfen der Nachricht ist die Übung der Stunde, nicht ein Satz des Verses. Dieselbe Fundstelle wurde schon für Mobbing und für die Entschuldigung verwendet. Eine technische Anleitung für ein bestimmtes Gerät geben wir nicht. Dieselbe gelesene Fundstelle wurde schon in Slot 195 mit einem anderen Lernziel verwendet.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 49:11.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -22960,7 +22960,7 @@ const additions=
         "situation": "Ein Kind möchte einen ärgerlichen Satz senden. Es löscht ihn und schreibt einen ruhigen Satz oder sendet nichts.",
         "practice": "Wir prüfen drei Beispielsätze und senden nur den freundlichen.",
         "summary": "Belegt ist Qurʾān 49:11. Ungeprüft bleibt: Das Prüfen der Nachricht ist die Übung der Stunde, nicht ein Satz des Verses.",
-        "audioScript": "Für die älteren Kinder. Digitalen Adab üben. Dieselbe Stelle gegen Spott und verletzende Namen gilt auch für Worte auf einem Bildschirm. Nicht belegt und deshalb nicht behauptet: Das Prüfen der Nachricht ist die Übung der Stunde, nicht ein Satz des Verses."
+        "audioScript": "Digitalen Adab üben. Dieselbe Stelle gegen Spott und verletzende Namen gilt auch für Worte auf einem Bildschirm. Nicht belegt und deshalb nicht behauptet: Das Prüfen der Nachricht ist die Übung der Stunde, nicht ein Satz des Verses."
       }
     },
     "questions": {
@@ -23096,7 +23096,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Die At-taḥiyyāt-Formel wird nicht als Qurʾān ausgegeben und nicht aus dem Gedächtnis als geprüfter Hadith nachgetragen. al-Mughnī wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 166 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+      "note": "Die At-taḥiyyāt-Formel wird nicht als Qurʾān ausgegeben und nicht aus dem Gedächtnis als geprüfter Hadith nachgetragen. al-Mughnī wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 166 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
       "sameLocusAsSlot": 166
     },
     "hint": "Wir erfinden keine zusätzliche Geschichte.",
@@ -23130,7 +23130,7 @@ const additions=
       },
       "6-8": {
         "goal": "Im Gebet gibt es eine Sitzphase.",
-        "intro": "Heute geht es um Tashahhud als Gebetsbestandteil. Im Gebet gibt es eine Sitzphase. Wir lesen Qurʾān 2:238. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe Stelle über das Hüten der Gebete und das demütige Stehen trägt hier nur den Hinweis, dass das Gebet mehr enthält als das Stehen. Die Sitzworte selbst fehlen auf der Seite. So kann das im Alltag aussehen: Die Lehrperson setzt sich so, wie sie es kennt, und sagt: Die Worte lernen wir später bei einem Menschen. Heute erkennen wir nur, dass es dieses Sitzen gibt. Die Aufgabe: Wir wiederholen: Das sind keine Qurʾān-Worte aus dieser Stunde. tašahhud bedeutet: das Bezeugen im Sitzen; Unterrichtswort, hier nicht als gelesener Text. ǧulūs bedeutet: Sitzen. Die Grenze der Stunde: Die At-taḥiyyāt-Formel wird nicht als Qurʾān ausgegeben und nicht aus dem Gedächtnis als geprüfter Hadith nachgetragen. al-Mughnī wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 166 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Tashahhud als Gebetsbestandteil. Im Gebet gibt es eine Sitzphase. Wir lesen Qurʾān 2:238. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe Stelle über das Hüten der Gebete und das demütige Stehen trägt hier nur den Hinweis, dass das Gebet mehr enthält als das Stehen. Die Sitzworte selbst fehlen auf der Seite. So kann das im Alltag aussehen: Die Lehrperson setzt sich so, wie sie es kennt, und sagt: Die Worte lernen wir später bei einem Menschen. Heute erkennen wir nur, dass es dieses Sitzen gibt. Die Aufgabe: Wir wiederholen: Das sind keine Qurʾān-Worte aus dieser Stunde. tašahhud bedeutet: das Bezeugen im Sitzen; Unterrichtswort, hier nicht als gelesener Text. ǧulūs bedeutet: Sitzen. Die Grenze der Stunde: Die At-taḥiyyāt-Formel wird nicht als Qurʾān ausgegeben und nicht aus dem Gedächtnis als geprüfter Hadith nachgetragen. al-Mughnī wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 166 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
         "lines": [
           "Qurʾān 2:238 ist die gelesene Stelle.",
           "Dieselbe Stelle über das Hüten der Gebete und das demütige Stehen trägt hier nur den Hinweis, dass das Gebet mehr enthält als das Stehen.",
@@ -23156,7 +23156,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Tashahhud als Gebetsbestandteil von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Tashahhud als Gebetsbestandteil. Das Lernziel ist: Im Gebet gibt es eine Sitzphase. Die Seite https://www.islamweb.net/ar/library/content/49/205 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:238. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe Stelle über das Hüten der Gebete und das demütige Stehen trägt hier nur den Hinweis, dass das Gebet mehr enthält als das Stehen. Die Sitzworte selbst fehlen auf der Seite. Alltag: Die Lehrperson setzt sich so, wie sie es kennt, und sagt: Die Worte lernen wir später bei einem Menschen. Heute erkennen wir nur, dass es dieses Sitzen gibt. Aufgabe: Wir wiederholen: Das sind keine Qurʾān-Worte aus dieser Stunde. tašahhud bedeutet: das Bezeugen im Sitzen; Unterrichtswort, hier nicht als gelesener Text. ǧulūs bedeutet: Sitzen. Was nicht behauptet wird: Die At-taḥiyyāt-Formel wird nicht als Qurʾān ausgegeben und nicht aus dem Gedächtnis als geprüfter Hadith nachgetragen. al-Mughnī wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 166 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Tashahhud als Gebetsbestandteil. Das Lernziel ist: Im Gebet gibt es eine Sitzphase. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe Stelle über das Hüten der Gebete und das demütige Stehen trägt hier nur den Hinweis, dass das Gebet mehr enthält als das Stehen. Die Sitzworte selbst fehlen auf der Seite. Alltag: Die Lehrperson setzt sich so, wie sie es kennt, und sagt: Die Worte lernen wir später bei einem Menschen. Heute erkennen wir nur, dass es dieses Sitzen gibt. Aufgabe: Wir wiederholen: Das sind keine Qurʾān-Worte aus dieser Stunde. tašahhud bedeutet: das Bezeugen im Sitzen; Unterrichtswort, hier nicht als gelesener Text. ǧulūs bedeutet: Sitzen. Was nicht behauptet wird: Die At-taḥiyyāt-Formel wird nicht als Qurʾān ausgegeben und nicht aus dem Gedächtnis als geprüfter Hadith nachgetragen. al-Mughnī wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 166 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 2:238.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -23178,7 +23178,7 @@ const additions=
         "situation": "Die Lehrperson setzt sich so, wie sie es kennt, und sagt: Die Worte lernen wir später bei einem Menschen. Heute erkennen wir nur, dass es dieses Sitzen gibt.",
         "practice": "Wir wiederholen: Das sind keine Qurʾān-Worte aus dieser Stunde.",
         "summary": "Belegt ist Qurʾān 2:238. Ungeprüft bleibt: Die At-taḥiyyāt-Formel wird nicht als Qurʾān ausgegeben und nicht aus dem Gedächtnis als geprüfter Hadith nachgetragen.",
-        "audioScript": "Für die älteren Kinder. Tashahhud als Gebetsbestandteil. Dieselbe Stelle über das Hüten der Gebete und das demütige Stehen trägt hier nur den Hinweis, dass das Gebet mehr enthält als das Stehen. Nicht belegt und deshalb nicht behauptet: Die At-taḥiyyāt-Formel wird nicht als Qurʾān ausgegeben und nicht aus dem Gedächtnis als geprüfter Hadith nachgetragen."
+        "audioScript": "Tashahhud als Gebetsbestandteil. Dieselbe Stelle über das Hüten der Gebete und das demütige Stehen trägt hier nur den Hinweis, dass das Gebet mehr enthält als das Stehen. Nicht belegt und deshalb nicht behauptet: Die At-taḥiyyāt-Formel wird nicht als Qurʾān ausgegeben und nicht aus dem Gedächtnis als geprüfter Hadith nachgetragen."
       }
     },
     "questions": {
@@ -23314,7 +23314,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Den Gebetsabschluss nennen wir als Lehrerhinweis ungeprüft. Wir setzen den Vers nicht mit dem Ende des Gebets gleich. Eine andere Qurʾān-Stelle über den Frieden der Engel wird dafür nicht herangezogen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Den Gebetsabschluss nennen wir als Lehrerhinweis ungeprüft. Wir setzen den Vers nicht mit dem Ende des Gebets gleich. Eine andere Qurʾān-Stelle über den Frieden der Engel wird dafür nicht herangezogen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
     "sample": "Am Ende des Gebets gibt es einen Gruß nach rechts und links.",
@@ -23347,7 +23347,7 @@ const additions=
       },
       "6-8": {
         "goal": "Am Ende des Gebets gibt es einen Gruß nach rechts und links.",
-        "intro": "Heute geht es um Den Gebetsabschluss kennenlernen. Am Ende des Gebets gibt es einen Gruß nach rechts und links. Wir lesen Qurʾān 4:86. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt: Wenn ihr mit einem Gruß gegrüßt werdet, dann grüßt mit einem schöneren oder erwidert ihn. Allah ist über alles Rechnender. So kann das im Alltag aussehen: Die Kinder erwidern einen Salam im Raum. Danach sagt die Lehrperson: Der Abschluss des Gebets sieht ähnlich aus und ist doch eine andere Handlung. Wir haben ihn auf dieser Seite nicht als. Die Aufgabe: Wir üben nur den Gruß untereinander. taḥiyyah bedeutet: Gruß. taslīm bedeutet: der Abschlussgruß des Gebets; hier nicht als Wortlaut dieses Verses. Die Grenze der Stunde: Den Gebetsabschluss nennen wir als Lehrerhinweis ungeprüft. Wir setzen den Vers nicht mit dem Ende des Gebets gleich. Eine andere Qurʾān-Stelle über den Frieden der Engel wird dafür nicht herangezogen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Den Gebetsabschluss kennenlernen. Am Ende des Gebets gibt es einen Gruß nach rechts und links. Wir lesen Qurʾān 4:86. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt: Wenn ihr mit einem Gruß gegrüßt werdet, dann grüßt mit einem schöneren oder erwidert ihn. Allah ist über alles Rechnender. So kann das im Alltag aussehen: Die Kinder erwidern einen Salam im Raum. Danach sagt die Lehrperson: Der Abschluss des Gebets sieht ähnlich aus und ist doch eine andere Handlung. Wir haben ihn auf dieser Seite nicht als. Die Aufgabe: Wir üben nur den Gruß untereinander. taḥiyyah bedeutet: Gruß. taslīm bedeutet: der Abschlussgruß des Gebets; hier nicht als Wortlaut dieses Verses. Die Grenze der Stunde: Den Gebetsabschluss nennen wir als Lehrerhinweis ungeprüft. Wir setzen den Vers nicht mit dem Ende des Gebets gleich. Eine andere Qurʾān-Stelle über den Frieden der Engel wird dafür nicht herangezogen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
         "lines": [
           "Qurʾān 4:86 ist die gelesene Stelle.",
           "Der Vers sagt: Wenn ihr mit einem Gruß gegrüßt werdet, dann grüßt mit einem schöneren oder erwidert ihn.",
@@ -23373,7 +23373,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Den Gebetsabschluss kennenlernen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Den Gebetsabschluss kennenlernen. Das Lernziel ist: Am Ende des Gebets gibt es einen Gruß nach rechts und links. Die Seite https://www.islamweb.net/ar/library/content/49/334 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:86. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt: Wenn ihr mit einem Gruß gegrüßt werdet, dann grüßt mit einem schöneren oder erwidert ihn. Allah ist über alles Rechnender. Alltag: Die Kinder erwidern einen Salam im Raum. Danach sagt die Lehrperson: Der Abschluss des Gebets sieht ähnlich aus und ist doch eine andere Handlung. Wir haben ihn auf dieser Seite nicht als. Aufgabe: Wir üben nur den Gruß untereinander. taḥiyyah bedeutet: Gruß. taslīm bedeutet: der Abschlussgruß des Gebets; hier nicht als Wortlaut dieses Verses. Was nicht behauptet wird: Den Gebetsabschluss nennen wir als Lehrerhinweis ungeprüft. Wir setzen den Vers nicht mit dem Ende des Gebets gleich. Eine andere Qurʾān-Stelle über den Frieden der Engel wird dafür nicht herangezogen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Den Gebetsabschluss kennenlernen. Das Lernziel ist: Am Ende des Gebets gibt es einen Gruß nach rechts und links. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt: Wenn ihr mit einem Gruß gegrüßt werdet, dann grüßt mit einem schöneren oder erwidert ihn. Allah ist über alles Rechnender. Alltag: Die Kinder erwidern einen Salam im Raum. Danach sagt die Lehrperson: Der Abschluss des Gebets sieht ähnlich aus und ist doch eine andere Handlung. Wir haben ihn auf dieser Seite nicht als. Aufgabe: Wir üben nur den Gruß untereinander. taḥiyyah bedeutet: Gruß. taslīm bedeutet: der Abschlussgruß des Gebets; hier nicht als Wortlaut dieses Verses. Was nicht behauptet wird: Den Gebetsabschluss nennen wir als Lehrerhinweis ungeprüft. Wir setzen den Vers nicht mit dem Ende des Gebets gleich. Eine andere Qurʾān-Stelle über den Frieden der Engel wird dafür nicht herangezogen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 4:86.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -23395,7 +23395,7 @@ const additions=
         "situation": "Die Kinder erwidern einen Salam im Raum. Danach sagt die Lehrperson: Der Abschluss des Gebets sieht ähnlich aus und ist doch eine andere Handlung. Wir haben ihn auf dieser Seite nicht als Gebetsbeschreibung gelesen.",
         "practice": "Wir üben nur den Gruß untereinander.",
         "summary": "Belegt ist Qurʾān 4:86. Ungeprüft bleibt: Den Gebetsabschluss nennen wir als Lehrerhinweis ungeprüft.",
-        "audioScript": "Für die älteren Kinder. Den Gebetsabschluss kennenlernen. Der Vers sagt: Wenn ihr mit einem Gruß gegrüßt werdet, dann grüßt mit einem schöneren oder erwidert ihn. Nicht belegt und deshalb nicht behauptet: Den Gebetsabschluss nennen wir als Lehrerhinweis ungeprüft."
+        "audioScript": "Den Gebetsabschluss kennenlernen. Der Vers sagt: Wenn ihr mit einem Gruß gegrüßt werdet, dann grüßt mit einem schöneren oder erwidert ihn. Nicht belegt und deshalb nicht behauptet: Den Gebetsabschluss nennen wir als Lehrerhinweis ungeprüft."
       }
     },
     "questions": {
@@ -23531,7 +23531,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Die Niederwerfung des Vergessens steht auf dieser Seite nicht. Wir beschreiben sie nicht und geben sie nicht als Pflicht dieser Stunde aus. Dieselbe Fundstelle, anderes Lernziel. Dieselbe gelesene Fundstelle wurde schon in Slot 188 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+      "note": "Die Niederwerfung des Vergessens steht auf dieser Seite nicht. Wir beschreiben sie nicht und geben sie nicht als Pflicht dieser Stunde aus. Dieselbe Fundstelle, anderes Lernziel. Dieselbe gelesene Fundstelle wurde schon in Slot 188 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
       "sameLocusAsSlot": 188
     },
     "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
@@ -23565,7 +23565,7 @@ const additions=
       },
       "6-8": {
         "goal": "Wenn wir beim Üben des Gebets unsicher sind, fragen wir eine Lehrperson.",
-        "intro": "Heute geht es um Fehler beim Üben des Gebets. Wenn wir beim Üben des Gebets unsicher sind, fragen wir eine Lehrperson. Wir lesen Qurʾān 21:7. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe Stelle wie in der Fragestunde sagt: Fragt die Leute der Erinnerung, wenn ihr nicht wisst. So kann das im Alltag aussehen: Ein Kind hat vergessen, ob es schon in der Verbeugung war. Es stoppt und fragt, statt allein eine Extra-Bewegung zu machen. Die Aufgabe: Wir üben den Fragesatz: Ich bin unsicher. Bitte zeig es mir. saǧdat as-sahw bedeutet: die Niederwerfung des Vergessens; hier ausdrücklich nicht belegt. ahl aḏ-ḏikr bedeutet: Leute des Wissens. Die Grenze der Stunde: Die Niederwerfung des Vergessens steht auf dieser Seite nicht. Wir beschreiben sie nicht und geben sie nicht als Pflicht dieser Stunde aus. Dieselbe Fundstelle, anderes Lernziel. Dieselbe gelesene Fundstelle wurde schon in Slot 188 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Fehler beim Üben des Gebets. Wenn wir beim Üben des Gebets unsicher sind, fragen wir eine Lehrperson. Wir lesen Qurʾān 21:7. Sinngemäß, ohne beglaubigte Übersetzung: Dieselbe Stelle wie in der Fragestunde sagt: Fragt die Leute der Erinnerung, wenn ihr nicht wisst. So kann das im Alltag aussehen: Ein Kind hat vergessen, ob es schon in der Verbeugung war. Es stoppt und fragt, statt allein eine Extra-Bewegung zu machen. Die Aufgabe: Wir üben den Fragesatz: Ich bin unsicher. Bitte zeig es mir. saǧdat as-sahw bedeutet: die Niederwerfung des Vergessens; hier ausdrücklich nicht belegt. ahl aḏ-ḏikr bedeutet: Leute des Wissens. Die Grenze der Stunde: Die Niederwerfung des Vergessens steht auf dieser Seite nicht. Wir beschreiben sie nicht und geben sie nicht als Pflicht dieser Stunde aus. Dieselbe Fundstelle, anderes Lernziel. Dieselbe gelesene Fundstelle wurde schon in Slot 188 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
         "lines": [
           "Qurʾān 21:7 ist die gelesene Stelle.",
           "Dieselbe Stelle wie in der Fragestunde sagt: Fragt die Leute der Erinnerung, wenn ihr nicht wisst.",
@@ -23591,7 +23591,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Fehler beim Üben des Gebets von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Fehler beim Üben des Gebets. Das Lernziel ist: Wenn wir beim Üben des Gebets unsicher sind, fragen wir eine Lehrperson. Die Seite https://www.islamweb.net/ar/library/content/49/1163 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 21:7. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe Stelle wie in der Fragestunde sagt: Fragt die Leute der Erinnerung, wenn ihr nicht wisst. Alltag: Ein Kind hat vergessen, ob es schon in der Verbeugung war. Es stoppt und fragt, statt allein eine Extra-Bewegung zu machen. Aufgabe: Wir üben den Fragesatz: Ich bin unsicher. Bitte zeig es mir. saǧdat as-sahw bedeutet: die Niederwerfung des Vergessens; hier ausdrücklich nicht belegt. ahl aḏ-ḏikr bedeutet: Leute des Wissens. Was nicht behauptet wird: Die Niederwerfung des Vergessens steht auf dieser Seite nicht. Wir beschreiben sie nicht und geben sie nicht als Pflicht dieser Stunde aus. Dieselbe Fundstelle, anderes Lernziel. Dieselbe gelesene Fundstelle wurde schon in Slot 188 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Fehler beim Üben des Gebets. Das Lernziel ist: Wenn wir beim Üben des Gebets unsicher sind, fragen wir eine Lehrperson. Sinngemäß, keine beglaubigte Übersetzung: Dieselbe Stelle wie in der Fragestunde sagt: Fragt die Leute der Erinnerung, wenn ihr nicht wisst. Alltag: Ein Kind hat vergessen, ob es schon in der Verbeugung war. Es stoppt und fragt, statt allein eine Extra-Bewegung zu machen. Aufgabe: Wir üben den Fragesatz: Ich bin unsicher. Bitte zeig es mir. saǧdat as-sahw bedeutet: die Niederwerfung des Vergessens; hier ausdrücklich nicht belegt. ahl aḏ-ḏikr bedeutet: Leute des Wissens. Was nicht behauptet wird: Die Niederwerfung des Vergessens steht auf dieser Seite nicht. Wir beschreiben sie nicht und geben sie nicht als Pflicht dieser Stunde aus. Dieselbe Fundstelle, anderes Lernziel. Dieselbe gelesene Fundstelle wurde schon in Slot 188 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 21:7.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -23613,7 +23613,7 @@ const additions=
         "situation": "Ein Kind hat vergessen, ob es schon in der Verbeugung war. Es stoppt und fragt, statt allein eine Extra-Bewegung zu machen.",
         "practice": "Wir üben den Fragesatz: Ich bin unsicher. Bitte zeig es mir.",
         "summary": "Belegt ist Qurʾān 21:7. Ungeprüft bleibt: Die Niederwerfung des Vergessens steht auf dieser Seite nicht.",
-        "audioScript": "Für die älteren Kinder. Fehler beim Üben des Gebets. Dieselbe Stelle wie in der Fragestunde sagt: Fragt die Leute der Erinnerung, wenn ihr nicht wisst. Nicht belegt und deshalb nicht behauptet: Die Niederwerfung des Vergessens steht auf dieser Seite nicht."
+        "audioScript": "Fehler beim Üben des Gebets. Dieselbe Stelle wie in der Fragestunde sagt: Fragt die Leute der Erinnerung, wenn ihr nicht wisst. Nicht belegt und deshalb nicht behauptet: Die Niederwerfung des Vergessens steht auf dieser Seite nicht."
       }
     },
     "questions": {
@@ -23749,7 +23749,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Ein bestimmtes Alter, ab dem ein Kind fasten muss, steht in diesem Vers nicht und wurde in keinem Fiqh-Buch dieses Laufs gelesen. Krankheit und Reise bleiben so stehen, wie der Vers sie nennt, ohne eine eigene Rechtsgrenze. Kein Kind wird in der Stunde zum Fasten gedrängt. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Ein bestimmtes Alter, ab dem ein Kind fasten muss, steht in diesem Vers nicht und wurde in keinem Fiqh-Buch dieses Laufs gelesen. Krankheit und Reise bleiben so stehen, wie der Vers sie nennt, ohne eine eigene Rechtsgrenze. Kein Kind wird in der Stunde zum Fasten gedrängt. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe)."
     },
     "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
     "sample": "Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde.",
@@ -23782,7 +23782,7 @@ const additions=
       },
       "6-8": {
         "goal": "Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde.",
-        "intro": "Heute geht es um Ramaḍān und Fasten kennenlernen. Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde. Wir lesen Qurʾān 2:185. Sinngemäß, ohne beglaubigte Übersetzung: Der gespeicherte Vers nennt den Monat Ramaḍān, die Herabsendung des Qurʾān darin als Rechtleitung, und dass der, der den Monat erlebt, in ihm fasten soll. Er spricht auch von Krankheit und Reise. So kann das im Alltag aussehen: Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt. Die Aufgabe: Wir lernen das Wort Ramaḍān und erfinden keine Uhrzeit für das Essen. Ramaḍān bedeutet: der genannte Monat. ṣiyām bedeutet: Fasten. Die Grenze der Stunde: Ein bestimmtes Alter, ab dem ein Kind fasten muss, steht in diesem Vers nicht und wurde in keinem Fiqh-Buch dieses Laufs gelesen. Krankheit und Reise bleiben so stehen, wie der Vers sie nennt, ohne eine eigene Rechtsgrenze. Kein Kind wird in der Stunde zum Fasten gedrängt. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Ramaḍān und Fasten kennenlernen. Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde. Wir lesen Qurʾān 2:185. Sinngemäß, ohne beglaubigte Übersetzung: Der gespeicherte Vers nennt den Monat Ramaḍān, die Herabsendung des Qurʾān darin als Rechtleitung, und dass der, der den Monat erlebt, in ihm fasten soll. Er spricht auch von Krankheit und Reise. So kann das im Alltag aussehen: Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt. Die Aufgabe: Wir lernen das Wort Ramaḍān und erfinden keine Uhrzeit für das Essen. Ramaḍān bedeutet: der genannte Monat. ṣiyām bedeutet: Fasten. Die Grenze der Stunde: Ein bestimmtes Alter, ab dem ein Kind fasten muss, steht in diesem Vers nicht und wurde in keinem Fiqh-Buch dieses Laufs gelesen. Krankheit und Reise bleiben so stehen, wie der Vers sie nennt, ohne eine eigene Rechtsgrenze. Kein Kind wird in der Stunde zum Fasten gedrängt. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
         "lines": [
           "Qurʾān 2:185 ist die gelesene Stelle.",
           "Er spricht auch von Krankheit und Reise.",
@@ -23808,7 +23808,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Ramaḍān und Fasten kennenlernen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Ramaḍān und Fasten kennenlernen. Das Lernziel ist: Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde. Die Seite https://www.islamweb.net/ar/library/content/49/165 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:185. Sinngemäß, keine beglaubigte Übersetzung: Der gespeicherte Vers nennt den Monat Ramaḍān, die Herabsendung des Qurʾān darin als Rechtleitung, und dass der, der den Monat erlebt, in ihm fasten soll. Er spricht auch von Krankheit und Reise. Alltag: Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt. Aufgabe: Wir lernen das Wort Ramaḍān und erfinden keine Uhrzeit für das Essen. Ramaḍān bedeutet: der genannte Monat. ṣiyām bedeutet: Fasten. Was nicht behauptet wird: Ein bestimmtes Alter, ab dem ein Kind fasten muss, steht in diesem Vers nicht und wurde in keinem Fiqh-Buch dieses Laufs gelesen. Krankheit und Reise bleiben so stehen, wie der Vers sie nennt, ohne eine eigene Rechtsgrenze. Kein Kind wird in der Stunde zum Fasten gedrängt. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Ramaḍān und Fasten kennenlernen. Das Lernziel ist: Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde. Sinngemäß, keine beglaubigte Übersetzung: Der gespeicherte Vers nennt den Monat Ramaḍān, die Herabsendung des Qurʾān darin als Rechtleitung, und dass der, der den Monat erlebt, in ihm fasten soll. Er spricht auch von Krankheit und Reise. Alltag: Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt. Aufgabe: Wir lernen das Wort Ramaḍān und erfinden keine Uhrzeit für das Essen. Ramaḍān bedeutet: der genannte Monat. ṣiyām bedeutet: Fasten. Was nicht behauptet wird: Ein bestimmtes Alter, ab dem ein Kind fasten muss, steht in diesem Vers nicht und wurde in keinem Fiqh-Buch dieses Laufs gelesen. Krankheit und Reise bleiben so stehen, wie der Vers sie nennt, ohne eine eigene Rechtsgrenze. Kein Kind wird in der Stunde zum Fasten gedrängt. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 2:185.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -23830,7 +23830,7 @@ const additions=
         "situation": "Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt.",
         "practice": "Wir lernen das Wort Ramaḍān und erfinden keine Uhrzeit für das Essen.",
         "summary": "Belegt ist Qurʾān 2:185. Ungeprüft bleibt: Ein bestimmtes Alter, ab dem ein Kind fasten muss, steht in diesem Vers nicht und wurde in keinem Fiqh-Buch dieses Laufs gelesen.",
-        "audioScript": "Für die älteren Kinder. Ramaḍān und Fasten kennenlernen. Er spricht auch von Krankheit und Reise. Nicht belegt und deshalb nicht behauptet: Ein bestimmtes Alter, ab dem ein Kind fasten muss, steht in diesem Vers nicht und wurde in keinem Fiqh-Buch dieses Laufs gelesen."
+        "audioScript": "Ramaḍān und Fasten kennenlernen. Er spricht auch von Krankheit und Reise. Nicht belegt und deshalb nicht behauptet: Ein bestimmtes Alter, ab dem ein Kind fasten muss, steht in diesem Vers nicht und wurde in keinem Fiqh-Buch dieses Laufs gelesen."
       }
     },
     "questions": {
@@ -23966,7 +23966,7 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Die Nisab-Rechnung, die Empfängerlisten und die einzelnen Riten der Pilgerfahrt wurden nicht aus einem Fiqh-Buch gelesen. Der Ausdruck 3:97 beginnt auf der Seite mitten im Vers. Wir ergänzen den Anfang nicht aus dem Gedächtnis ins arabische Feld. al-Mughnī wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 192 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Zusätzlich gelesen: Qurʾān 3:97 auf https://www.islamweb.net/ar/library/content/49/271. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+      "note": "Die Nisab-Rechnung, die Empfängerlisten und die einzelnen Riten der Pilgerfahrt wurden nicht aus einem Fiqh-Buch gelesen. Der Ausdruck 3:97 beginnt auf der Seite mitten im Vers. Wir ergänzen den Anfang nicht aus dem Gedächtnis ins arabische Feld. al-Mughnī wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 192 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Zusätzlich gelesen: Qurʾān 3:97 auf https://www.islamweb.net/ar/library/content/49/271. Keine synthetische Rezitation. Keine Freigabe für Besucher. Sichtbare Entwickler- und Freigabeformeln mechanisch aus Sprech-/Einführungstexten entfernt (ohne inhaltliche Freigabe).",
       "additionalQuran": {
         "surah": 3,
         "ayah": 97,
@@ -24009,7 +24009,7 @@ const additions=
       },
       "6-8": {
         "goal": "Zakāh und die Pilgerfahrt sind große Pflichten der Erwachsenen.",
-        "intro": "Heute geht es um Zakāh und Ḥaǧǧ als Säulen. Zakāh und die Pilgerfahrt sind große Pflichten der Erwachsenen. Wir lesen Qurʾān 2:43. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers 2:43 sagt: Verrichtet das Gebet, gebt die Zakāh und verbeugt euch mit den sich Verbeugenden. Ein weiterer gelesener Ausdruck, 3:97, spricht vom Haus, zu dem die Menschen die Pilgerfahrt schulden, soweit sie den Weg vermögen. So kann das im Alltag aussehen: Wir zeigen zwei Karten: Geben und Reise zum Haus. Wir sammeln kein echtes Geld und laufen keine Runden. Die Aufgabe: Wir sagen die beiden Worte und erklären, dass die genaue Rechnung und die einzelnen Wege nicht in diesen zwei Auszügen stehen. zakāh bedeutet: die Pflichtabgabe. ḥaǧǧ bedeutet: Pilgerfahrt. Die Grenze der Stunde: Die Nisab-Rechnung, die Empfängerlisten und die einzelnen Riten der Pilgerfahrt wurden nicht aus einem Fiqh-Buch gelesen. Der Ausdruck 3:97 beginnt auf der Seite mitten im Vers. Wir ergänzen den Anfang nicht aus dem Gedächtnis ins arabische Feld. al-Mughnī wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 192 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Zusätzlich gelesen: Qurʾān 3:97 auf https://www.islamweb.net/ar/library/content/49/271. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "Heute geht es um Zakāh und Ḥaǧǧ als Säulen. Zakāh und die Pilgerfahrt sind große Pflichten der Erwachsenen. Wir lesen Qurʾān 2:43. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers 2:43 sagt: Verrichtet das Gebet, gebt die Zakāh und verbeugt euch mit den sich Verbeugenden. Ein weiterer gelesener Ausdruck, 3:97, spricht vom Haus, zu dem die Menschen die Pilgerfahrt schulden, soweit sie den Weg vermögen. So kann das im Alltag aussehen: Wir zeigen zwei Karten: Geben und Reise zum Haus. Wir sammeln kein echtes Geld und laufen keine Runden. Die Aufgabe: Wir sagen die beiden Worte und erklären, dass die genaue Rechnung und die einzelnen Wege nicht in diesen zwei Auszügen stehen. zakāh bedeutet: die Pflichtabgabe. ḥaǧǧ bedeutet: Pilgerfahrt. Die Grenze der Stunde: Die Nisab-Rechnung, die Empfängerlisten und die einzelnen Riten der Pilgerfahrt wurden nicht aus einem Fiqh-Buch gelesen. Der Ausdruck 3:97 beginnt auf der Seite mitten im Vers. Wir ergänzen den Anfang nicht aus dem Gedächtnis ins arabische Feld. al-Mughnī wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 192 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Zusätzlich gelesen: Qurʾān 3:97 auf https://www.islamweb.net/ar/library/content/49/271.",
         "lines": [
           "Qurʾān 2:43 ist die gelesene Stelle.",
           "Der Vers 2:43 sagt: Verrichtet das Gebet, gebt die Zakāh und verbeugt euch mit den sich Verbeugenden.",
@@ -24035,7 +24035,7 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann Zakāh und Ḥaǧǧ als Säulen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Zakāh und Ḥaǧǧ als Säulen. Das Lernziel ist: Zakāh und die Pilgerfahrt sind große Pflichten der Erwachsenen. Die Seite https://www.islamweb.net/ar/library/content/49/83 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:43. Sinngemäß, keine beglaubigte Übersetzung: Der Vers 2:43 sagt: Verrichtet das Gebet, gebt die Zakāh und verbeugt euch mit den sich Verbeugenden. Ein weiterer gelesener Ausdruck, 3:97, spricht vom Haus, zu dem die Menschen die Pilgerfahrt schulden, soweit sie den Weg vermögen. Alltag: Wir zeigen zwei Karten: Geben und Reise zum Haus. Wir sammeln kein echtes Geld und laufen keine Runden. Aufgabe: Wir sagen die beiden Worte und erklären, dass die genaue Rechnung und die einzelnen Wege nicht in diesen zwei Auszügen stehen. zakāh bedeutet: die Pflichtabgabe. ḥaǧǧ bedeutet: Pilgerfahrt. Was nicht behauptet wird: Die Nisab-Rechnung, die Empfängerlisten und die einzelnen Riten der Pilgerfahrt wurden nicht aus einem Fiqh-Buch gelesen. Der Ausdruck 3:97 beginnt auf der Seite mitten im Vers. Wir ergänzen den Anfang nicht aus dem Gedächtnis ins arabische Feld. al-Mughnī wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 192 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Zusätzlich gelesen: Qurʾān 3:97 auf https://www.islamweb.net/ar/library/content/49/271. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "Zakāh und Ḥaǧǧ als Säulen. Das Lernziel ist: Zakāh und die Pilgerfahrt sind große Pflichten der Erwachsenen. Sinngemäß, keine beglaubigte Übersetzung: Der Vers 2:43 sagt: Verrichtet das Gebet, gebt die Zakāh und verbeugt euch mit den sich Verbeugenden. Ein weiterer gelesener Ausdruck, 3:97, spricht vom Haus, zu dem die Menschen die Pilgerfahrt schulden, soweit sie den Weg vermögen. Alltag: Wir zeigen zwei Karten: Geben und Reise zum Haus. Wir sammeln kein echtes Geld und laufen keine Runden. Aufgabe: Wir sagen die beiden Worte und erklären, dass die genaue Rechnung und die einzelnen Wege nicht in diesen zwei Auszügen stehen. zakāh bedeutet: die Pflichtabgabe. ḥaǧǧ bedeutet: Pilgerfahrt. Was nicht behauptet wird: Die Nisab-Rechnung, die Empfängerlisten und die einzelnen Riten der Pilgerfahrt wurden nicht aus einem Fiqh-Buch gelesen. Der Ausdruck 3:97 beginnt auf der Seite mitten im Vers. Wir ergänzen den Anfang nicht aus dem Gedächtnis ins arabische Feld. al-Mughnī wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 192 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Zusätzlich gelesen: Qurʾān 3:97 auf https://www.islamweb.net/ar/library/content/49/271.",
         "lines": [
           "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 2:43.",
           "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
@@ -24057,7 +24057,7 @@ const additions=
         "situation": "Wir zeigen zwei Karten: Geben und Reise zum Haus. Wir sammeln kein echtes Geld und laufen keine Runden.",
         "practice": "Wir sagen die beiden Worte und erklären, dass die genaue Rechnung und die einzelnen Wege nicht in diesen zwei Auszügen stehen.",
         "summary": "Belegt ist Qurʾān 2:43. Ungeprüft bleibt: Die Nisab-Rechnung, die Empfängerlisten und die einzelnen Riten der Pilgerfahrt wurden nicht aus einem Fiqh-Buch gelesen.",
-        "audioScript": "Für die älteren Kinder. Zakāh und Ḥaǧǧ als Säulen. Der Vers 2:43 sagt: Verrichtet das Gebet, gebt die Zakāh und verbeugt euch mit den sich Verbeugenden. Nicht belegt und deshalb nicht behauptet: Die Nisab-Rechnung, die Empfängerlisten und die einzelnen Riten der Pilgerfahrt wurden nicht aus einem Fiqh-Buch gelesen."
+        "audioScript": "Zakāh und Ḥaǧǧ als Säulen. Der Vers 2:43 sagt: Verrichtet das Gebet, gebt die Zakāh und verbeugt euch mit den sich Verbeugenden. Nicht belegt und deshalb nicht behauptet: Die Nisab-Rechnung, die Empfängerlisten und die einzelnen Riten der Pilgerfahrt wurden nicht aus einem Fiqh-Buch gelesen."
       }
     },
     "questions": {
@@ -24159,6 +24159,7 @@ const additions=
     "audioScript": "Zakāh und Ḥaǧǧ als Säulen. Zakāh und die Pilgerfahrt sind große Pflichten der Erwachsenen. Der Vers 2:43 sagt: Verrichtet das Gebet, gebt die Zakāh und verbeugt euch mit den sich Verbeugenden. Wir zeigen zwei Karten: Geben und Reise zum Haus. Wir sammeln kein echtes Geld und laufen keine Runden. Wir sagen die beiden Worte und erklären, dass die genaue Rechnung und die einzelnen Wege nicht in diesen zwei Auszügen stehen.",
     "voiceApproved": false
   }
+
 };
 for(const [id,l] of Object.entries(additions)){
  if(prior[id]||!l.quran||!l.hadith||!l.sourceAudit?.hadithUrl?.startsWith("https://www.islamweb.net/")||l.voiceApproved!==false)throw Error("V38 invalid "+id);
