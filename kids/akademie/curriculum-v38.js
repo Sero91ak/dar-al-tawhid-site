@@ -6567,8 +6567,8 @@ const additions=
     "pillar": "tarbiyah",
     "topic": "Lernen und Pausen ausgleichen",
     "title": "Tarbiyah · Lernen und Pausen ausgleichen",
-    "lead": "Nach einer konzentrierten Zeit machen wir eine echte Pause.",
-    "goal": "Nach einer konzentrierten Zeit machen wir eine echte Pause.",
+    "lead": "Ich plane meine Lernzeit und achte auf Erholung.",
+    "goal": "Ich plane meine Lernzeit und achte auf Erholung.",
     "quran": {
       "surah": 2,
       "ayah": 286,
@@ -6597,17 +6597,17 @@ const additions=
       "scientificApproval": false,
       "note": "Der Vers ist keine Minutenregel für Hausaufgaben. Die konkrete Pausenlänge ist eine Familienvereinbarung. Die anschließende Bitte des Verses wird hier nicht als vollständiger Bitttext auswendig gesetzt."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
-    "sample": "Nach einer konzentrierten Zeit machen wir eine echte Pause.",
+    "hint": "Denke darüber nach, wie wir im Alltag gut handeln können.",
+    "sample": "Ich plane meine Lernzeit und achte auf Erholung.",
     "ageText": {
       "4-5": {
-        "goal": "Nach einer konzentrierten Zeit machen wir eine echte Pause.",
-        "intro": "Nach einer konzentrierten Zeit machen wir eine echte Pause. Der Vers sagt, dass Allah keiner Seele mehr auferlegt, als sie tragen kann. Stell dir vor: Ein Kind hat eine Viertelstunde gelesen. Danach steht es auf, trinkt Wasser und setzt sich erst dann wieder. Heute üben wir: Wir legen eine kurze Lernzeit und eine kurze Pause fest und halten beide ein. Die arabischen Worte spricht die Lehrperson.",
+        "goal": "Ich plane meine Lernzeit und achte auf Erholung.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! Qurʾān 2:286 erinnert uns sinngemäß daran, dass Allah keiner Seele mehr auferlegt, als sie tragen kann. Heute machen wir eine einfache Übung: Wir lernen in kleinen Schritten und gönnen uns eine Pause, wenn wir müde werden. Wenn dir etwas zu schwer ist, sag einer erwachsenen Person Bescheid. Möge Allah dir das Lernen erleichtern. As-salāmu ʿalaikum!",
         "lines": [
-          "Nach einer konzentrierten Zeit machen wir eine echte Pause.",
-          "Der Vers sagt, dass Allah keiner Seele mehr auferlegt, als sie tragen kann.",
-          "Ein Kind hat eine Viertelstunde gelesen. Danach steht es auf, trinkt Wasser und setzt sich erst dann wieder.",
-          "Wir legen eine kurze Lernzeit und eine kurze Pause fest und halten beide ein."
+          "Qurʾān 2:286 spricht vom Maß der Belastung.",
+          "Ich darf beim Lernen um Hilfe bitten.",
+          "Eine Pause kann mir guttun.",
+          "Wir planen gemeinsam den nächsten Lernschritt."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/233. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:286. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/233. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:286. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -6621,19 +6621,19 @@ const additions=
             "de": "das, was der Mensch erwirbt"
           }
         ],
-        "situation": "Ein Kind hat eine Viertelstunde gelesen. Danach steht es auf, trinkt Wasser und setzt sich erst dann wieder.",
-        "practice": "Wir legen eine kurze Lernzeit und eine kurze Pause fest und halten beide ein.",
-        "summary": "Nach einer konzentrierten Zeit machen wir eine echte Pause. Die arabischen Worte spricht die Lehrperson.",
-        "audioScript": "Lernen und Pausen ausgleichen. Nach einer konzentrierten Zeit machen wir eine echte Pause. Der Vers sagt, dass Allah keiner Seele mehr auferlegt, als sie tragen kann. Ein Kind hat eine Viertelstunde gelesen. Danach steht es auf, trinkt Wasser und setzt sich erst dann wieder. Wir legen eine kurze Lernzeit und eine kurze Pause fest und halten beide ein."
+        "situation": "Ein Kind merkt beim Lernen, dass es müde und unkonzentriert ist.",
+        "practice": "Plane mit deiner Lehrperson eine kleine Aufgabe und danach eine passende Pause.",
+        "summary": "Ich plane meine Lernzeit und achte auf Erholung. As-salāmu ʿalaikum wa raḥmatullāh!",
+        "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Qurʾān 2:286 erinnert uns sinngemäß daran, dass Allah keiner Seele mehr auferlegt, als sie tragen kann. Heute machen wir eine einfache Übung: Wir lernen in kleinen Schritten und gönnen uns eine Pause, wenn wir müde werden. Wenn dir etwas zu schwer ist, sag einer erwachsenen Person Bescheid. Möge Allah dir das Lernen erleichtern. As-salāmu ʿalaikum!"
       },
       "6-8": {
-        "goal": "Nach einer konzentrierten Zeit machen wir eine echte Pause.",
-        "intro": "Heute geht es um Lernen und Pausen ausgleichen. Nach einer konzentrierten Zeit machen wir eine echte Pause. Wir lesen Qurʾān 2:286. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass Allah keiner Seele mehr auferlegt, als sie tragen kann. Sie hat, was sie erworben hat, und gegen sie ist, was sie erworben hat. Danach beginnt eine Bitte. So kann das im Alltag aussehen: Ein Kind hat eine Viertelstunde gelesen. Danach steht es auf, trinkt Wasser und setzt sich erst dann wieder. Die Aufgabe: Wir legen eine kurze Lernzeit und eine kurze Pause fest und halten beide ein. wusʿ bedeutet: das, was jemand tragen kann. kasb bedeutet: das, was der Mensch erwirbt. Die Grenze der Stunde: Der Vers ist keine Minutenregel für Hausaufgaben. Die konkrete Pausenlänge ist eine Familienvereinbarung. Die anschließende Bitte des Verses wird hier nicht als vollständiger Bitttext auswendig gesetzt.",
+        "goal": "Ich plane meine Lernzeit und achte auf Erholung.",
+        "intro": "As-salāmu ʿalaikum, liebe Geschwister! In Qurʾān 2:286 lesen wir sinngemäß, dass Allah keiner Seele mehr auferlegt, als sie tragen kann. Die Stelle legt keine Minuten für Hausaufgaben oder Pausen fest. Das ist unsere Alltagsübung: Wähle mit einer erwachsenen Person eine überschaubare Aufgabe, arbeite konzentriert und mache danach eine passende Pause. Wenn du Hilfe brauchst, kannst du danach fragen. As-salāmu ʿalaikum wa raḥmatullāh!",
         "lines": [
-          "Qurʾān 2:286 ist die gelesene Stelle.",
-          "Der Vers sagt, dass Allah keiner Seele mehr auferlegt, als sie tragen kann.",
-          "Ein Kind hat eine Viertelstunde gelesen. Danach steht es auf, trinkt Wasser und setzt sich erst dann wieder.",
-          "Die arabischen Worte spricht die Lehrperson."
+          "Qurʾān 2:286 legt keine Pausenlänge fest.",
+          "Ich kann Müdigkeit wahrnehmen und besprechen.",
+          "Eine überschaubare Aufgabe hilft beim Lernen.",
+          "Die Pause ist unsere Alltagsübung."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/233. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:286. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/233. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:286. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -6647,19 +6647,19 @@ const additions=
             "de": "das, was der Mensch erwirbt"
           }
         ],
-        "situation": "Ein Kind hat eine Viertelstunde gelesen. Danach steht es auf, trinkt Wasser und setzt sich erst dann wieder.",
-        "practice": "Wir legen eine kurze Lernzeit und eine kurze Pause fest und halten beide ein.",
-        "summary": "Qurʾān 2:286 trägt diese Stunde. Der Vers sagt, dass Allah keiner Seele mehr auferlegt, als sie tragen kann.",
-        "audioScript": "Lernen und Pausen ausgleichen. Der Vers sagt, dass Allah keiner Seele mehr auferlegt, als sie tragen kann. Ein Kind hat eine Viertelstunde gelesen. Danach steht es auf, trinkt Wasser und setzt sich erst dann wieder. Wir legen eine kurze Lernzeit und eine kurze Pause fest und halten beide ein."
+        "situation": "Ein Kind merkt beim Lernen, dass es müde und unkonzentriert ist.",
+        "practice": "Plane mit deiner Lehrperson eine kleine Aufgabe und danach eine passende Pause.",
+        "summary": "Ich plane meine Lernzeit und achte auf Erholung. As-salāmu ʿalaikum wa raḥmatullāh!",
+        "audioScript": "As-salāmu ʿalaikum, liebe Geschwister! In Qurʾān 2:286 lesen wir sinngemäß, dass Allah keiner Seele mehr auferlegt, als sie tragen kann. Die Stelle legt keine Minuten für Hausaufgaben oder Pausen fest. Das ist unsere Alltagsübung: Wähle mit einer erwachsenen Person eine überschaubare Aufgabe, arbeite konzentriert und mache danach eine passende Pause. Wenn du Hilfe brauchst, kannst du danach fragen. As-salāmu ʿalaikum wa raḥmatullāh!"
       },
       "9-10": {
-        "goal": "Ich kann Lernen und Pausen ausgleichen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Lernen und Pausen ausgleichen. Das Lernziel ist: Nach einer konzentrierten Zeit machen wir eine echte Pause. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass Allah keiner Seele mehr auferlegt, als sie tragen kann. Sie hat, was sie erworben hat, und gegen sie ist, was sie erworben hat. Danach beginnt eine Bitte. Alltag: Ein Kind hat eine Viertelstunde gelesen. Danach steht es auf, trinkt Wasser und setzt sich erst dann wieder. Aufgabe: Wir legen eine kurze Lernzeit und eine kurze Pause fest und halten beide ein. wusʿ bedeutet: das, was jemand tragen kann. kasb bedeutet: das, was der Mensch erwirbt. Was nicht behauptet wird: Der Vers ist keine Minutenregel für Hausaufgaben. Die konkrete Pausenlänge ist eine Familienvereinbarung. Die anschließende Bitte des Verses wird hier nicht als vollständiger Bitttext auswendig gesetzt.",
+        "goal": "Ich plane meine Lernzeit und achte auf Erholung.",
+        "intro": "As-salāmu ʿalaikum, lieber Bruder, liebe Schwester! Qurʾān 2:286 spricht vom Maß dessen, was einer Seele auferlegt wird. Daraus entsteht keine feste Pausenregel. Wir besprechen stattdessen eine hilfreiche Lerngewohnheit: Wie erkennst du, dass deine Aufmerksamkeit nachlässt? Wie kannst du realistische Lernschritte und Erholung mit einer vertrauten Person planen? Prüfe, was dir hilft, ohne daraus eine religiöse Minutenpflicht zu machen. As-salāmu ʿalaikum wa raḥmatullāh!",
         "lines": [
-          "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 2:286.",
-          "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
-          "Der Vers ist keine Minutenregel für Hausaufgaben.",
-          "Eine Hadithnummer, die auf der Seite fehlt, wird nicht ergänzt."
+          "Qurʾān 2:286 nennt keine Minutenregel für Hausaufgaben.",
+          "Die Zeitplanung ist eine pädagogische Anwendung.",
+          "Ich kann Anzeichen von Überforderung wahrnehmen.",
+          "Bei Schwierigkeiten hole ich Hilfe und passe meinen Plan an."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/233. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:286. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/233. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:286. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -6673,93 +6673,97 @@ const additions=
             "de": "das, was der Mensch erwirbt"
           }
         ],
-        "situation": "Ein Kind hat eine Viertelstunde gelesen. Danach steht es auf, trinkt Wasser und setzt sich erst dann wieder.",
-        "practice": "Wir legen eine kurze Lernzeit und eine kurze Pause fest und halten beide ein.",
-        "summary": "Belegt ist Qurʾān 2:286. Ungeprüft bleibt: Der Vers ist keine Minutenregel für Hausaufgaben.",
-        "audioScript": "Lernen und Pausen ausgleichen. Der Vers sagt, dass Allah keiner Seele mehr auferlegt, als sie tragen kann. Nicht belegt und deshalb nicht behauptet: Der Vers ist keine Minutenregel für Hausaufgaben."
+        "situation": "Ein Kind merkt beim Lernen, dass es müde und unkonzentriert ist.",
+        "practice": "Plane mit deiner Lehrperson eine kleine Aufgabe und danach eine passende Pause.",
+        "summary": "Ich plane meine Lernzeit und achte auf Erholung. As-salāmu ʿalaikum wa raḥmatullāh!",
+        "audioScript": "As-salāmu ʿalaikum, lieber Bruder, liebe Schwester! Qurʾān 2:286 spricht vom Maß dessen, was einer Seele auferlegt wird. Daraus entsteht keine feste Pausenregel. Wir besprechen stattdessen eine hilfreiche Lerngewohnheit: Wie erkennst du, dass deine Aufmerksamkeit nachlässt? Wie kannst du realistische Lernschritte und Erholung mit einer vertrauten Person planen? Prüfe, was dir hilft, ohne daraus eine religiöse Minutenpflicht zu machen. As-salāmu ʿalaikum wa raḥmatullāh!"
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was passt zu dieser Stunde?",
+          "prompt": "Du wirst beim Üben sehr müde. Was tust du?",
           "options": [
-            "Wir legen eine kurze Lernzeit und eine kurze Pause fest und halten beide ein.",
-            "Ich tue so, als wäre nichts."
+            "Ich sage Bescheid und frage nach einer Pause.",
+            "Ich mache heimlich alles kaputt."
           ],
           "correct": 0,
-          "hint": "Schau auf die Übung.",
-          "explain": "Die Übung der Stunde ist der erste Satz. Der zweite Satz ist das Gegenteil von dem, was wir üben."
+          "hint": "Denke an unser Beispiel.",
+          "explain": "Wir dürfen um Unterstützung bitten."
         },
         {
           "type": "choice",
-          "prompt": "Woran hält sich diese Stunde?",
+          "prompt": "Nach einer Pause kannst du ...",
           "options": [
-            "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "in Ruhe wieder mit einer kleinen Aufgabe beginnen.",
+            "alles schon perfekt können müssen."
           ],
           "correct": 0,
-          "hint": "Nur Gelesenes.",
-          "explain": "Die Stunde nennt Qurʾān 2:286 und trennt die Übung davon. Eine Nummer wird nicht erfunden."
+          "hint": "Denke an unser Beispiel.",
+          "explain": "Lernen braucht Übung und Geduld."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Stelle trägt Lernen und Pausen ausgleichen?",
+          "prompt": "Wie lang muss eine Pause laut Qurʾān 2:286 sein?",
           "options": [
-            "Qurʾān 2:286",
-            "Eine Stelle ohne Suren- und Verszahl."
+            "Der Vers nennt keine feste Minutenanzahl.",
+            "Genau fünf Minuten sind Pflicht."
           ],
           "correct": 0,
-          "hint": "Die Fundstelle steht im Unterricht.",
-          "explain": "Die Stunde bleibt bei Qurʾān 2:286."
+          "hint": "Denke an unser Beispiel.",
+          "explain": "Die konkrete Zeit planen wir im Alltag."
         },
         {
           "type": "choice",
-          "prompt": "Was sagt der Vers sinngemäß für diese Stunde?",
+          "prompt": "Was hilft, wenn du überfordert bist?",
           "options": [
-            "Der Vers sagt, dass Allah keiner Seele mehr auferlegt, als sie tragen kann.",
-            "Ich tue so, als wäre nichts."
+            "Mit einer vertrauten Person sprechen.",
+            "Alles allein verstecken."
           ],
           "correct": 0,
-          "hint": "Der erste Satz folgt der gelesenen Stelle.",
-          "explain": "Die deutsche Zeile ist eine Unterrichtshilfe zu Qurʾān 2:286, keine beglaubigte Übersetzung."
+          "hint": "Denke an unser Beispiel.",
+          "explain": "Hilfe holen ist sinnvoll."
         },
         {
           "type": "text",
-          "prompt": "Welche Übung gehört zu dieser Stunde?",
-          "sample": "Wir legen eine kurze Lernzeit und eine kurze Pause fest und halten beide ein.",
-          "hint": "Die praktische Aufgabe.",
-          "explain": "Die Übung ist die genannte Handlung und nicht eine zusätzliche Formel."
+          "prompt": "Nenne eine passende Handlung im Alltag.",
+          "sample": "Plane mit deiner Lehrperson eine kleine Aufgabe und danach eine passende Pause.",
+          "hint": "Denke an die Lernübung.",
+          "explain": "Dies ist eine Anwendung im Alltag und kein wörtliches Verszitat."
         }
       ],
       "9-10": [
         {
           "type": "choice",
-          "prompt": "Welche Angabe wäre unehrlich?",
+          "prompt": "Welche Aussage unterscheidet Qurʾān und Übung richtig?",
           "options": [
-            "Ein Rechtsurteil oder eine Hadithnummer als gelesen auszugeben, obwohl die Seite sie nicht liefert.",
-            "Zu sagen, dass die deutsche Erklärung sinngemäß ist."
+            "Der Vers spricht von Belastung; die Pause vereinbaren wir selbst.",
+            "Der Vers ordnet genau zehn Minuten Pause an."
           ],
           "correct": 0,
-          "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "hint": "Denke an unser Beispiel.",
+          "explain": "Der gespeicherte Vers enthält keine Stundenplanregel."
+        },
+        {
+          "type": "choice",
+          "prompt": "Wie kannst du einen Lernplan verbessern?",
+          "options": [
+            "Kleine Schritte, Rückmeldung und Erholung einplanen.",
+            "Überforderung ignorieren."
+          ],
+          "correct": 0,
+          "hint": "Denke an unser Beispiel.",
+          "explain": "Ein Plan darf an die Bedürfnisse angepasst werden."
         },
         {
           "type": "text",
-          "prompt": "Was darf diese Stunde nicht behaupten?",
-          "sample": "Der Vers ist keine Minutenregel für Hausaufgaben.",
-          "hint": "Die Grenze steht im Text.",
-          "explain": "Die Grenze schützt davor, den Vers zu überdehnen."
-        },
-        {
-          "type": "text",
-          "prompt": "Wie lautet die Qurʾān-Stelle?",
-          "sample": "Qurʾān 2:286",
-          "hint": "Sure und Vers.",
-          "explain": "Die Stelle ist Qurʾān 2:286 auf der genannten Islamweb-Seite."
+          "prompt": "Nenne eine passende Handlung im Alltag.",
+          "sample": "Plane mit deiner Lehrperson eine kleine Aufgabe und danach eine passende Pause.",
+          "hint": "Denke an die Lernübung.",
+          "explain": "Dies ist eine Anwendung im Alltag und kein wörtliches Verszitat."
         }
       ]
     },
@@ -6773,9 +6777,9 @@ const additions=
         "de": "das, was der Mensch erwirbt"
       }
     ],
-    "practice": "Wir legen eine kurze Lernzeit und eine kurze Pause fest und halten beide ein.",
-    "summary": "Nach einer konzentrierten Zeit machen wir eine echte Pause. Der Vers sagt, dass Allah keiner Seele mehr auferlegt, als sie tragen kann.",
-    "audioScript": "Lernen und Pausen ausgleichen. Nach einer konzentrierten Zeit machen wir eine echte Pause. Der Vers sagt, dass Allah keiner Seele mehr auferlegt, als sie tragen kann. Ein Kind hat eine Viertelstunde gelesen. Danach steht es auf, trinkt Wasser und setzt sich erst dann wieder. Wir legen eine kurze Lernzeit und eine kurze Pause fest und halten beide ein.",
+    "practice": "Plane mit deiner Lehrperson eine kleine Aufgabe und danach eine passende Pause.",
+    "summary": "Ich plane meine Lernzeit und achte auf Erholung.",
+    "audioScript": "As-salāmu ʿalaikum, liebe Geschwister! In Qurʾān 2:286 lesen wir sinngemäß, dass Allah keiner Seele mehr auferlegt, als sie tragen kann. Die Stelle legt keine Minuten für Hausaufgaben oder Pausen fest. Das ist unsere Alltagsübung: Wähle mit einer erwachsenen Person eine überschaubare Aufgabe, arbeite konzentriert und mache danach eine passende Pause. Wenn du Hilfe brauchst, kannst du danach fragen. As-salāmu ʿalaikum wa raḥmatullāh!",
     "voiceApproved": false
   },
   "nafs-fehler-bereuen": {
@@ -6784,8 +6788,8 @@ const additions=
     "pillar": "nafs",
     "topic": "Fehler bereuen und verbessern",
     "title": "Nafs · Fehler bereuen und verbessern",
-    "lead": "Nach einem Fehler dürfen wir um Verzeihung bitten und etwas besser machen.",
-    "goal": "Nach einem Fehler dürfen wir um Verzeihung bitten und etwas besser machen.",
+    "lead": "Ich kann mich entschuldigen und nach einem Fehler etwas wiedergutmachen.",
+    "goal": "Ich kann mich entschuldigen und nach einem Fehler etwas wiedergutmachen.",
     "quran": {
       "surah": 39,
       "ayah": 53,
@@ -6814,17 +6818,17 @@ const additions=
       "scientificApproval": false,
       "note": "Der gespeicherte Ausdruck geht am Ende in das erste Wort des nächsten Verses über. Wir bauen daraus keine Angst und kein Bild von Strafe. Verzeihung ersetzt nicht die Entschuldigung bei dem Menschen, den wir verletzt haben."
     },
-    "hint": "Bei Gefahr holst du einen Menschen. Eine Bitte allein reicht dann nicht.",
-    "sample": "Nach einem Fehler dürfen wir um Verzeihung bitten und etwas besser machen.",
+    "hint": "Denke darüber nach, wie wir im Alltag gut handeln können.",
+    "sample": "Ich kann mich entschuldigen und nach einem Fehler etwas wiedergutmachen.",
     "ageText": {
       "4-5": {
-        "goal": "Nach einem Fehler dürfen wir um Verzeihung bitten und etwas besser machen.",
-        "intro": "Nach einem Fehler dürfen wir um Verzeihung bitten und etwas besser machen. Der Vers ruft den Dienern zu, die gegen sich selbst maßlos waren: Verzweifelt nicht an Allahs Barmherzigkeit. Stell dir vor: Ein Kind hat ein hartes Wort gesagt. Es sagt Entschuldigung und räumt danach eine kleine Sache mit auf. Heute üben wir: Wir üben: Es tut mir leid. Ich mache das wieder gut. Bei Gefahr holst du einen Menschen. Eine Bitte allein reicht dann nicht.",
+        "goal": "Ich kann mich entschuldigen und nach einem Fehler etwas wiedergutmachen.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! Manchmal machen wir Fehler. Qurʾān 39:53 erinnert uns sinngemäß daran, nicht an Allahs Barmherzigkeit zu verzweifeln. Wenn wir ein anderes Kind verletzt haben, dürfen wir uns entschuldigen und versuchen, es wiedergutzumachen. Sage liebevoll: Es tut mir leid. Wie kann ich dir helfen? Möge Allah uns verzeihen und unsere Herzen verbessern. As-salāmu ʿalaikum!",
         "lines": [
-          "Nach einem Fehler dürfen wir um Verzeihung bitten und etwas besser machen.",
-          "Der Vers ruft den Dienern zu, die gegen sich selbst maßlos waren: Verzweifelt nicht an Allahs Barmherzigkeit.",
-          "Ein Kind hat ein hartes Wort gesagt. Es sagt Entschuldigung und räumt danach eine kleine Sache mit auf.",
-          "Wir üben: Es tut mir leid. Ich mache das wieder gut."
+          "Qurʾān 39:53 erinnert an Allahs Barmherzigkeit.",
+          "Ich darf einen Fehler zugeben.",
+          "Ich kann mich entschuldigen.",
+          "Ich versuche, etwas wiedergutzumachen."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1629. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 39:53. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1629. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 39:53. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -6838,19 +6842,19 @@ const additions=
             "de": "verzweifelt nicht"
           }
         ],
-        "situation": "Ein Kind hat ein hartes Wort gesagt. Es sagt Entschuldigung und räumt danach eine kleine Sache mit auf.",
-        "practice": "Wir üben: Es tut mir leid. Ich mache das wieder gut.",
-        "summary": "Nach einem Fehler dürfen wir um Verzeihung bitten und etwas besser machen. Bei Gefahr holst du einen Menschen. Eine Bitte allein reicht dann nicht.",
-        "audioScript": "Fehler bereuen und verbessern. Nach einem Fehler dürfen wir um Verzeihung bitten und etwas besser machen. Der Vers ruft den Dienern zu, die gegen sich selbst maßlos waren: Verzweifelt nicht an Allahs Barmherzigkeit. Ein Kind hat ein hartes Wort gesagt. Es sagt Entschuldigung und räumt danach eine kleine Sache mit auf. Wir üben: Es tut mir leid. Ich mache das wieder gut."
+        "situation": "Ein Kind sagt im Streit etwas Verletzendes und möchte danach etwas besser machen.",
+        "practice": "Übe den Satz: Es tut mir leid. Wie kann ich das wieder gutmachen?",
+        "summary": "Ich kann mich entschuldigen und nach einem Fehler etwas wiedergutmachen. As-salāmu ʿalaikum wa raḥmatullāh!",
+        "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Manchmal machen wir Fehler. Qurʾān 39:53 erinnert uns sinngemäß daran, nicht an Allahs Barmherzigkeit zu verzweifeln. Wenn wir ein anderes Kind verletzt haben, dürfen wir uns entschuldigen und versuchen, es wiedergutzumachen. Sage liebevoll: Es tut mir leid. Wie kann ich dir helfen? Möge Allah uns verzeihen und unsere Herzen verbessern. As-salāmu ʿalaikum!"
       },
       "6-8": {
-        "goal": "Nach einem Fehler dürfen wir um Verzeihung bitten und etwas besser machen.",
-        "intro": "Heute geht es um Fehler bereuen und verbessern. Nach einem Fehler dürfen wir um Verzeihung bitten und etwas besser machen. Wir lesen Qurʾān 39:53. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers ruft den Dienern zu, die gegen sich selbst maßlos waren: Verzweifelt nicht an Allahs Barmherzigkeit. Allah vergibt die Sünden allesamt. Er ist der Vergebende, der Barmherzige. So kann das im Alltag aussehen: Ein Kind hat ein hartes Wort gesagt. Es sagt Entschuldigung und räumt danach eine kleine Sache mit auf. Die Aufgabe: Wir üben: Es tut mir leid. Ich mache das wieder gut. raḥmah bedeutet: Barmherzigkeit. lā taqnaṭū bedeutet: verzweifelt nicht. Die Grenze der Stunde: Der gespeicherte Ausdruck geht am Ende in das erste Wort des nächsten Verses über. Wir bauen daraus keine Angst und kein Bild von Strafe. Verzeihung ersetzt nicht die Entschuldigung bei dem Menschen, den wir verletzt haben.",
+        "goal": "Ich kann mich entschuldigen und nach einem Fehler etwas wiedergutmachen.",
+        "intro": "As-salāmu ʿalaikum, liebe Geschwister! Qurʾān 39:53 spricht sinngemäß von Allahs großer Barmherzigkeit und der Hoffnung auf Vergebung. Stell dir vor, du warst im Streit ungerecht. Reue bedeutet nicht nur ein schlechtes Gefühl: Du kannst den Fehler zugeben, um Vergebung bitten und versuchen, den Schaden wiedergutzumachen. Wenn du Hilfe brauchst, darfst du sie holen. So wachsen wir nach einem Fehler. As-salāmu ʿalaikum wa raḥmatullāh!",
         "lines": [
-          "Qurʾān 39:53 ist die gelesene Stelle.",
-          "Der Vers ruft den Dienern zu, die gegen sich selbst maßlos waren: Verzweifelt nicht an Allahs Barmherzigkeit.",
-          "Ein Kind hat ein hartes Wort gesagt. Es sagt Entschuldigung und räumt danach eine kleine Sache mit auf.",
-          "Bei Gefahr holst du einen Menschen. Eine Bitte allein reicht dann nicht."
+          "Qurʾān 39:53 ruft zur Hoffnung auf Allahs Barmherzigkeit auf.",
+          "Ein Fehler muss nicht das Ende sein.",
+          "Ich übernehme Verantwortung für verletzende Worte.",
+          "Ich bitte um Verzeihung und ändere mein Verhalten."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1629. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 39:53. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1629. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 39:53. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -6864,19 +6868,19 @@ const additions=
             "de": "verzweifelt nicht"
           }
         ],
-        "situation": "Ein Kind hat ein hartes Wort gesagt. Es sagt Entschuldigung und räumt danach eine kleine Sache mit auf.",
-        "practice": "Wir üben: Es tut mir leid. Ich mache das wieder gut.",
-        "summary": "Qurʾān 39:53 trägt diese Stunde. Der Vers ruft den Dienern zu, die gegen sich selbst maßlos waren: Verzweifelt nicht an Allahs Barmherzigkeit.",
-        "audioScript": "Fehler bereuen und verbessern. Der Vers ruft den Dienern zu, die gegen sich selbst maßlos waren: Verzweifelt nicht an Allahs Barmherzigkeit. Ein Kind hat ein hartes Wort gesagt. Es sagt Entschuldigung und räumt danach eine kleine Sache mit auf. Wir üben: Es tut mir leid. Ich mache das wieder gut."
+        "situation": "Ein Kind sagt im Streit etwas Verletzendes und möchte danach etwas besser machen.",
+        "practice": "Übe den Satz: Es tut mir leid. Wie kann ich das wieder gutmachen?",
+        "summary": "Ich kann mich entschuldigen und nach einem Fehler etwas wiedergutmachen. As-salāmu ʿalaikum wa raḥmatullāh!",
+        "audioScript": "As-salāmu ʿalaikum, liebe Geschwister! Qurʾān 39:53 spricht sinngemäß von Allahs großer Barmherzigkeit und der Hoffnung auf Vergebung. Stell dir vor, du warst im Streit ungerecht. Reue bedeutet nicht nur ein schlechtes Gefühl: Du kannst den Fehler zugeben, um Vergebung bitten und versuchen, den Schaden wiedergutzumachen. Wenn du Hilfe brauchst, darfst du sie holen. So wachsen wir nach einem Fehler. As-salāmu ʿalaikum wa raḥmatullāh!"
       },
       "9-10": {
-        "goal": "Ich kann Fehler bereuen und verbessern von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Fehler bereuen und verbessern. Das Lernziel ist: Nach einem Fehler dürfen wir um Verzeihung bitten und etwas besser machen. Sinngemäß, keine beglaubigte Übersetzung: Der Vers ruft den Dienern zu, die gegen sich selbst maßlos waren: Verzweifelt nicht an Allahs Barmherzigkeit. Allah vergibt die Sünden allesamt. Er ist der Vergebende, der Barmherzige. Alltag: Ein Kind hat ein hartes Wort gesagt. Es sagt Entschuldigung und räumt danach eine kleine Sache mit auf. Aufgabe: Wir üben: Es tut mir leid. Ich mache das wieder gut. raḥmah bedeutet: Barmherzigkeit. lā taqnaṭū bedeutet: verzweifelt nicht. Was nicht behauptet wird: Der gespeicherte Ausdruck geht am Ende in das erste Wort des nächsten Verses über. Wir bauen daraus keine Angst und kein Bild von Strafe. Verzeihung ersetzt nicht die Entschuldigung bei dem Menschen, den wir verletzt haben.",
+        "goal": "Ich kann mich entschuldigen und nach einem Fehler etwas wiedergutmachen.",
+        "intro": "As-salāmu ʿalaikum, lieber Bruder, liebe Schwester! In Qurʾān 39:53 werden Menschen angesprochen, die gegen sich selbst übertrieben haben, und zur Hoffnung auf Allahs Barmherzigkeit aufgerufen. Wir lernen daraus nicht, einen Fehler schönzureden, sondern Verantwortung zu übernehmen. Unterscheide Hoffnung, Reue und Wiedergutmachung: Was könntest du tun, wenn du jemanden verletzt hast? Auch in schwierigen Situationen darfst du einen vertrauenswürdigen Erwachsenen um Hilfe bitten. As-salāmu ʿalaikum wa raḥmatullāh!",
         "lines": [
-          "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 39:53.",
-          "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
-          "Der gespeicherte Ausdruck geht am Ende in das erste Wort des nächsten Verses über.",
-          "Eine Hadithnummer, die auf der Seite fehlt, wird nicht ergänzt."
+          "Qurʾān 39:53 warnt vor Verzweiflung an Allahs Barmherzigkeit.",
+          "Hoffnung bedeutet nicht, andere weiter zu verletzen.",
+          "Reue und Wiedergutmachung gehören zu unserem Alltagshandeln.",
+          "Wenn nötig, hole ich eine vertraute erwachsene Person hinzu."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1629. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 39:53. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1629. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 39:53. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -6890,93 +6894,97 @@ const additions=
             "de": "verzweifelt nicht"
           }
         ],
-        "situation": "Ein Kind hat ein hartes Wort gesagt. Es sagt Entschuldigung und räumt danach eine kleine Sache mit auf.",
-        "practice": "Wir üben: Es tut mir leid. Ich mache das wieder gut.",
-        "summary": "Belegt ist Qurʾān 39:53. Ungeprüft bleibt: Der gespeicherte Ausdruck geht am Ende in das erste Wort des nächsten Verses über.",
-        "audioScript": "Fehler bereuen und verbessern. Der Vers ruft den Dienern zu, die gegen sich selbst maßlos waren: Verzweifelt nicht an Allahs Barmherzigkeit. Nicht belegt und deshalb nicht behauptet: Der gespeicherte Ausdruck geht am Ende in das erste Wort des nächsten Verses über."
+        "situation": "Ein Kind sagt im Streit etwas Verletzendes und möchte danach etwas besser machen.",
+        "practice": "Übe den Satz: Es tut mir leid. Wie kann ich das wieder gutmachen?",
+        "summary": "Ich kann mich entschuldigen und nach einem Fehler etwas wiedergutmachen. As-salāmu ʿalaikum wa raḥmatullāh!",
+        "audioScript": "As-salāmu ʿalaikum, lieber Bruder, liebe Schwester! In Qurʾān 39:53 werden Menschen angesprochen, die gegen sich selbst übertrieben haben, und zur Hoffnung auf Allahs Barmherzigkeit aufgerufen. Wir lernen daraus nicht, einen Fehler schönzureden, sondern Verantwortung zu übernehmen. Unterscheide Hoffnung, Reue und Wiedergutmachung: Was könntest du tun, wenn du jemanden verletzt hast? Auch in schwierigen Situationen darfst du einen vertrauenswürdigen Erwachsenen um Hilfe bitten. As-salāmu ʿalaikum wa raḥmatullāh!"
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was passt zu dieser Stunde?",
+          "prompt": "Du hast etwas Gemeines gesagt. Was kannst du tun?",
           "options": [
-            "Wir üben: Es tut mir leid. Ich mache das wieder gut.",
-            "Ich schäme mich und denke, ich sei der Fehler."
+            "Mich entschuldigen und es besser machen.",
+            "Noch gemeiner werden."
           ],
           "correct": 0,
-          "hint": "Schau auf die Übung.",
-          "explain": "Die Übung der Stunde ist der erste Satz. Der zweite Satz ist das Gegenteil von dem, was wir üben."
+          "hint": "Denke an unser Beispiel.",
+          "explain": "Eine Entschuldigung ist ein guter erster Schritt."
         },
         {
           "type": "choice",
-          "prompt": "Woran hält sich diese Stunde?",
+          "prompt": "Woran erinnert Qurʾān 39:53?",
           "options": [
-            "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An Allahs Barmherzigkeit.",
+            "Daran, niemals um Verzeihung zu bitten."
           ],
           "correct": 0,
-          "hint": "Nur Gelesenes.",
-          "explain": "Die Stunde nennt Qurʾān 39:53 und trennt die Übung davon. Eine Nummer wird nicht erfunden."
+          "hint": "Denke an unser Beispiel.",
+          "explain": "Der Vers ruft zur Hoffnung auf Allahs Barmherzigkeit auf."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Stelle trägt Fehler bereuen und verbessern?",
+          "prompt": "Was bedeutet Verantwortung nach einem Fehler?",
           "options": [
-            "Qurʾān 39:53",
-            "Eine Stelle ohne Suren- und Verszahl."
+            "Den Fehler zugeben und Wiedergutmachung versuchen.",
+            "So tun, als wäre nie etwas geschehen."
           ],
           "correct": 0,
-          "hint": "Die Fundstelle steht im Unterricht.",
-          "explain": "Die Stunde bleibt bei Qurʾān 39:53."
+          "hint": "Denke an unser Beispiel.",
+          "explain": "Reue führt zu besserem Handeln."
         },
         {
           "type": "choice",
-          "prompt": "Was sagt der Vers sinngemäß für diese Stunde?",
+          "prompt": "Welche Haltung passt zu Qurʾān 39:53?",
           "options": [
-            "Der Vers ruft den Dienern zu, die gegen sich selbst maßlos waren: Verzweifelt nicht an Allahs Barmherzigkeit.",
-            "Ich schäme mich und denke, ich sei der Fehler."
+            "Auf Allahs Barmherzigkeit hoffen.",
+            "An Allahs Barmherzigkeit verzweifeln."
           ],
           "correct": 0,
-          "hint": "Der erste Satz folgt der gelesenen Stelle.",
-          "explain": "Die deutsche Zeile ist eine Unterrichtshilfe zu Qurʾān 39:53, keine beglaubigte Übersetzung."
+          "hint": "Denke an unser Beispiel.",
+          "explain": "Der Vers spricht von Hoffnung und Vergebung."
         },
         {
           "type": "text",
-          "prompt": "Welche Übung gehört zu dieser Stunde?",
-          "sample": "Wir üben: Es tut mir leid. Ich mache das wieder gut.",
-          "hint": "Die praktische Aufgabe.",
-          "explain": "Die Übung ist die genannte Handlung und nicht eine zusätzliche Formel."
+          "prompt": "Nenne eine passende Handlung im Alltag.",
+          "sample": "Übe den Satz: Es tut mir leid. Wie kann ich das wieder gutmachen?",
+          "hint": "Denke an die Lernübung.",
+          "explain": "Dies ist eine Anwendung im Alltag und kein wörtliches Verszitat."
         }
       ],
       "9-10": [
         {
           "type": "choice",
-          "prompt": "Welche Angabe wäre unehrlich?",
+          "prompt": "Was ist der Unterschied zwischen Hoffnung und Ausrede?",
           "options": [
-            "Ein Rechtsurteil oder eine Hadithnummer als gelesen auszugeben, obwohl die Seite sie nicht liefert.",
-            "Zu sagen, dass die deutsche Erklärung sinngemäß ist."
+            "Hoffnung begleitet ehrliche Reue und Änderung.",
+            "Hoffnung bedeutet, andere absichtlich weiter zu verletzen."
           ],
           "correct": 0,
-          "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "hint": "Denke an unser Beispiel.",
+          "explain": "Allahs Barmherzigkeit wird nicht als Vorwand für Unrecht benutzt."
+        },
+        {
+          "type": "choice",
+          "prompt": "Was ist nach verletzenden Worten sinnvoll?",
+          "options": [
+            "Entschuldigen, Verantwortung übernehmen, Schaden beheben.",
+            "Dem anderen die Schuld zuschieben."
+          ],
+          "correct": 0,
+          "hint": "Denke an unser Beispiel.",
+          "explain": "Wiedergutmachung gehört zum Handeln nach einem Fehler."
         },
         {
           "type": "text",
-          "prompt": "Was darf diese Stunde nicht behaupten?",
-          "sample": "Der gespeicherte Ausdruck geht am Ende in das erste Wort des nächsten Verses über.",
-          "hint": "Die Grenze steht im Text.",
-          "explain": "Die Grenze schützt davor, den Vers zu überdehnen."
-        },
-        {
-          "type": "text",
-          "prompt": "Wie lautet die Qurʾān-Stelle?",
-          "sample": "Qurʾān 39:53",
-          "hint": "Sure und Vers.",
-          "explain": "Die Stelle ist Qurʾān 39:53 auf der genannten Islamweb-Seite."
+          "prompt": "Nenne eine passende Handlung im Alltag.",
+          "sample": "Übe den Satz: Es tut mir leid. Wie kann ich das wieder gutmachen?",
+          "hint": "Denke an die Lernübung.",
+          "explain": "Dies ist eine Anwendung im Alltag und kein wörtliches Verszitat."
         }
       ]
     },
@@ -6990,9 +6998,9 @@ const additions=
         "de": "verzweifelt nicht"
       }
     ],
-    "practice": "Wir üben: Es tut mir leid. Ich mache das wieder gut.",
-    "summary": "Nach einem Fehler dürfen wir um Verzeihung bitten und etwas besser machen. Der Vers ruft den Dienern zu, die gegen sich selbst maßlos waren: Verzweifelt nicht an Allahs Barmherzigkeit.",
-    "audioScript": "Fehler bereuen und verbessern. Nach einem Fehler dürfen wir um Verzeihung bitten und etwas besser machen. Der Vers ruft den Dienern zu, die gegen sich selbst maßlos waren: Verzweifelt nicht an Allahs Barmherzigkeit. Ein Kind hat ein hartes Wort gesagt. Es sagt Entschuldigung und räumt danach eine kleine Sache mit auf. Wir üben: Es tut mir leid. Ich mache das wieder gut.",
+    "practice": "Übe den Satz: Es tut mir leid. Wie kann ich das wieder gutmachen?",
+    "summary": "Ich kann mich entschuldigen und nach einem Fehler etwas wiedergutmachen.",
+    "audioScript": "As-salāmu ʿalaikum, liebe Geschwister! Qurʾān 39:53 spricht sinngemäß von Allahs großer Barmherzigkeit und der Hoffnung auf Vergebung. Stell dir vor, du warst im Streit ungerecht. Reue bedeutet nicht nur ein schlechtes Gefühl: Du kannst den Fehler zugeben, um Vergebung bitten und versuchen, den Schaden wiedergutzumachen. Wenn du Hilfe brauchst, darfst du sie holen. So wachsen wir nach einem Fehler. As-salāmu ʿalaikum wa raḥmatullāh!",
     "voiceApproved": false
   },
   "fiqh-gebetszeiten-kennenlernen": {
