@@ -62,25 +62,25 @@ SUCCESS = {
 }
 RETRY = {
     "4-6": (
-        "Das war noch nicht richtig. Versuch es noch einmal in Ruhe.",
-        "Macht nichts, du darfst noch einmal nachdenken.",
-        "Schau dir die Antworten noch einmal an. Probiere es wieder.",
-        "Noch nicht ganz. Höre aufmerksam zu und versuche es erneut.",
-        "Nimm dir Zeit. Du kannst noch einmal wählen.",
+        "Noch nicht ganz. Bismi-llāh bedeutet: Im Namen Allahs. Versuch es noch einmal!",
+        "In schāʾ Allāh – wenn Allah will – klappt es beim nächsten Versuch. Denk in Ruhe nach!",
+        "Du lernst mit jedem Versuch. Hör noch einmal genau hin!",
+        "Das war noch nicht richtig. Nimm dir Zeit und versuche es wieder!",
+        "Noch einmal versuchen, in schāʾ Allāh. Du darfst dir Zeit lassen!",
     ),
     "7-8": (
-        "Noch nicht richtig. Schau dir die Antworten noch einmal an.",
-        "Überlege noch einmal. Du darfst es erneut versuchen.",
-        "Diese Antwort passt noch nicht. Nimm dir Zeit.",
-        "Versuche es noch einmal. Hör gut auf die Frage.",
-        "Denk noch einmal in Ruhe nach.",
+        "Kein Problem. Bismi-llāh! Schau dir die Antworten noch einmal genau an.",
+        "In schāʾ Allāh, beim nächsten Versuch klappt es. Höre gut auf die Frage.",
+        "Diese Antwort passt noch nicht. Überlege in Ruhe und versuche es erneut.",
+        "Nicht ganz richtig. Du lernst weiter und gibst nicht auf.",
+        "In schāʾ Allāh – wenn Allah will. Geh die Antworten noch einmal durch.",
     ),
     "9-10": (
-        "Diese Antwort passt noch nicht. Überlege noch einmal.",
-        "Vergleiche die Antworten erneut und versuche es noch einmal.",
-        "Das war noch nicht richtig. Denk in Ruhe darüber nach.",
-        "Lass dir einen Moment Zeit und wähle erneut.",
-        "Schau noch einmal genau auf die Fragestellung.",
+        "Das war noch nicht richtig. Bismi-llāh, überlege noch einmal.",
+        "In schāʾ Allāh, du kannst die passende Antwort durch Nachdenken finden.",
+        "Vergleiche die Möglichkeiten genau. Wissen braucht Geduld.",
+        "Schau noch einmal auf die Frage und prüfe deine Antwort.",
+        "Du lernst auch, wenn du einen Fehler erkennst. Versuche es erneut.",
     ),
 }
 
