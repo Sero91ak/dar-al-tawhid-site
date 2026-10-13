@@ -91,6 +91,19 @@ self.addEventListener('fetch',event=>{
   if(request.mode==='navigate'){
     if(u.pathname==='/pwa/install'||u.pathname.startsWith('/pwa/install/'))return;
     if(!u.pathname.startsWith('/pwa'))return;
+    // IOS_PWA_BLOCK_V1: old iPhone/iPad visitor PWA shortcuts may still have
+    // a cached Android shell. Never return that shell on Apple devices.
+    // Keep all Android caches and offline functionality unchanged.
+    var workerUA=String(self.navigator&&self.navigator.userAgent||'');
+    var workerPlatform=String(self.navigator&&self.navigator.platform||'');
+    var appleMobile=/iPhone|iPad|iPod/i.test(workerUA)||
+      (workerPlatform==='MacIntel'&&Number(self.navigator&&self.navigator.maxTouchPoints||0)>1);
+    var officialNative=/DarAlTawhid-iOS|DarAlTawhidOfficialIOS|DarAlTawhidAndroid/i.test(workerUA);
+    if(appleMobile&&!officialNative){
+      event.respondWith(Response.redirect(new URL('/',self.location.origin).href,307));
+      return;
+    }
+
     event.respondWith((async()=>{
       const cache=await caches.open(CACHE_VERSION);
       const stored=await cache.match(SHELL_URL);
