@@ -948,3 +948,66 @@ html body .shell #view-dua.view.active #duaHubDetail.open > .kids-detail-appbar:
    transition:none!important;
  }
 }
+
+/* KIDS_GLOBAL_DETAIL_PAGE_ARCHITECTURE_V1390
+   THE permanent contract for every NEW in-tab detail page.
+   Page root: .view.kids-detail-page[data-kids-detail-layout]
+   Direct FIRST CHILD: > .kids-detail-appbar (back button + title + subtitle)
+   Content hero: .kids-detail-hero; hero, text and other content are NOT a
+   second scroll region. Existing library modal detail heads remain untouched.
+   This opt-in supports all Kids modules and uses ONE scroll owner (.shell).
+   It NEVER changes the fixed floating bottom 3D navigation.
+*/
+html body .shell > .view.active.kids-detail-page {
+  overflow:visible!important;
+  transform:none!important;
+  animation:none!important;
+  contain:none!important;
+}
+html body .shell > .view.active.kids-detail-page > .kids-detail-appbar[hidden]{
+  display:none!important;
+}
+html body .shell > .view.active.kids-detail-page > .kids-detail-appbar{
+  position:-webkit-sticky!important;
+  position:sticky!important;
+  top:var(--safe-top,max(16px,env(safe-area-inset-top,0px)))!important;
+  inset-block-start:var(--safe-top,max(16px,env(safe-area-inset-top,0px)))!important;
+  box-sizing:border-box!important;
+  z-index:650!important;
+  isolation:isolate!important;
+  flex:0 0 auto!important;
+  transform:none!important;
+  translate:none!important;
+  will-change:auto!important;
+  width:100vw!important;max-width:none!important;
+  margin-inline:calc(50% - 50vw)!important;
+  margin-block:0!important;
+  padding:10px max(16px,env(safe-area-inset-right,0px))
+          10px max(16px,env(safe-area-inset-left,0px))!important;
+  height:auto!important;min-height:68px!important;
+  border-radius:0!important;
+  border-top:0!important;
+  border-bottom:1px solid var(--kids-detail-head-line,rgba(239,211,145,.2))!important;
+  background:var(--kids-detail-head-bg,#092b3b)!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+html body .shell > .view.active.kids-detail-page > .kids-detail-appbar:after{
+  content:none!important;
+}
+html body .shell > .view.active.kids-detail-page .kids-detail-hero{
+  box-sizing:border-box!important;
+  width:100vw!important;max-width:none!important;
+  margin-inline:calc(50% - 50vw)!important;
+  margin-block:0!important;
+  border:0!important;border-radius:0!important;
+  box-shadow:none!important;
+}
+html body .shell > .view.active.kids-detail-page .kids-detail-appbar
+ :is(.kids-detail-appbar-title,.kids-detail-appbar-subtitle){
+  max-width:100%!important;
+  overflow-wrap:anywhere!important;
+  text-overflow:clip!important;
+  white-space:normal!important;
+}

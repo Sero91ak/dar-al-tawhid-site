@@ -1,3 +1,56 @@
+
+## Verbindliche globale Detailseiten-Architektur — `KIDS_GLOBAL_DETAIL_PAGE_ARCHITECTURE_V1390`
+
+**Für ALLE zukünftigen KIDS-Details verpflichtend:** Propheten, Ṣaḥābah,
+Ṣaḥābiyyāt, Salaf, Geschichten, Duʿāʾ, Quiz, neue Unterrichte und spätere Module.
+
+1. Eine einzige obere Navigation mit bestehendem Chevron-Zurück-Button,
+   Seitentitel und dynamischem Untertitel. Kein doppelter Header,
+   kein improvisierter Zurück-Pill, kein separater Kapsel- oder Zwischenstreifen.
+   Den ORIGINALEN Zurück-Handler beibehalten.
+2. Bei Detailseiten innerhalb eines Haupt-Tabs steht `.kids-detail-appbar`
+   **als direktes erstes Kind** der aktiven `.view.kids-detail-page`,
+   niemals in einem dynamisch ersetzten `.pane`, verschachtelten
+   `.salaf-wrap` oder scrollenden Hero. `data-kids-detail-layout` setzen.
+   So greift global `kids/global-detail-dock-v1247.css`: ein festes/sticky
+   Appbar unabhängig von den nachfolgenden Inhalten. Die Safe Area wird
+   **einmal** berücksichtigt.
+3. Ein `.kids-detail-hero` folgt DIREKT unter diesem Kopf ohne Lücke,
+   zusätzliche Umrandung oder zweite Vollbild-Kapsel, `background-size:cover`,
+   sinnvolle Brennweite, echtes Edge-to-Edge über das Inhaltsgutter.
+   Motiv/Bildunterschrift nicht als Bild generieren: Titel bleibt echte
+   zugängliche, mehrzeilige HTML-Schrift. Responsive Höhe begrenzen;
+   nicht auf jedem Smartphone 100vh erzwingen.
+4. Der sichtbare Detailinhalt scrollt im **einen echten Scrollcontainer**
+   (gewöhnlich `.shell`). Header bleibt oben fest, die untere bestehende
+   **frei schwebende 3D-Hauptnavigation** bleibt absolut unverändert.
+   Kein zusätzliches `overflow-y:auto` für Hero/Absatz/Navigation, keine
+   transform/animation auf sticky-Eltern, keine Scroll-Listener als Ersatz
+   für CSS-sticky. Vollständig bedienbar im Hoch-/Querformat auf iPhone,
+   Android, Fold/Tablet/iPad und Desktop.
+5. Profilfarbe getrennt: Jungen Petrol/Nachtblau/Gold;
+   Mädchen Pflaume/Rosé/Champagner. Keine pauschale Farbpalette.
+   Bilder ohne Menschen, erkennbare Gesichter, Silhouetten oder Tiere;
+   keine ungewollte Schrift oder erfundene religiöse Darstellung.
+6. Vor Merge/Deploy: reale Layout-/Scrollprüfung und bestehende
+   `scripts/kids-design-guard.js`-Abnahme. V1390-CI prüft direktes
+   Header-Markup, Appbar/Stage-Semantik, globale CSS-Kontraktregeln,
+   Original-Bild-Hashes, zusammenpassende Service-Worker-/Build-IDs und
+   unveränderte drei HTML-Einstiege. Bildinhalte bleiben zusätzlich
+   **manuell** zu prüfen, die Tests sind keine Gesichtserkennung.
+7. Bei neuen Modulen direkt dasselbe globale Contract-Muster nutzen und
+   in den bestehenden Design-Guard aufnehmen. Keine projektspezifischen
+   Doppel-Header/CSS-Sonderarchitekturen und niemals die globale
+   `change-scope-lock.json` als Abkürzung lockern.
+
+**Korrekturfall Schätze der Salaf:** V1380 platzierte das Header-Element
+im per `innerHTML` erneuerten `#salafHome`. Dadurch scrollte der Kopf mit
+und das Hero wirkte vom Kopf abgesetzt. Seit V1390 ist das einzige
+`#salafTopicAppbar` ein dauerhaftes direktes Kind von `#view-salaf`,
+dessen Sichtbarkeit/Text beim Wechsel nur aktualisiert werden.
+
+---
+
 # DĀR AL TAWḤĪD Kids – Designregeln
 
 Verbindlich für `/kids/` und alle künftigen Kids-Erweiterungen.

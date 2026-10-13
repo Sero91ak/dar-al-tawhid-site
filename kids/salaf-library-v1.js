@@ -39,6 +39,10 @@
   function available(){return items.filter(function(i){return !!textFor(i)})}
   function prettyAge(){return age().replace("-","–")}
   var home=
+    '<nav id="salafTopicAppbar" class="salaf-topic-nav kids-detail-appbar kids-subpage-nav" aria-label="Seitennavigation" hidden>'+
+      '<button type="button" id="salafClear" class="kids-detail-dock-back" aria-label="Zurück zu allen Themen"></button>'+
+      '<div class="kids-detail-appbar-copy"><strong class="kids-detail-appbar-title">Schätze der Salaf</strong>'+
+      '<small class="kids-detail-appbar-subtitle" id="salafTopicLabel">Themen</small></div></nav>'+
     '<header class="salaf-hero">'+
       '<span class="salaf-hero-light" aria-hidden="true"></span>'+
       '<div class="salaf-hero-copy"><span class="salaf-eyebrow">DĀR AL TAWḤĪD KIDS · GESCHICHTENWELT</span>'+
@@ -99,7 +103,13 @@
   }
   function render(){
     root.dataset.profile=gender();
-    root.dataset.topicOpen=(tab==="all"&&!!topic)?"true":"false";
+    var detailOpen=tab==="all"&&!!topic;
+    root.dataset.topicOpen=detailOpen?"true":"false";
+    root.dataset.kidsDetailLayout=detailOpen?"v1390":"";
+    root.classList.toggle("kids-detail-page",detailOpen);
+    var appbar=q("#salafTopicAppbar");
+    appbar.hidden=!detailOpen;
+    if(detailOpen)q("#salafTopicLabel").textContent=CATEGORIES.find(function(c){return c.id===topic})?.short||"Themen";
     q("#salafAge").textContent="Für "+prettyAge()+" Jahre";
     root.querySelectorAll("[data-salaf-tab]").forEach(function(b){b.classList.toggle("selected",b.dataset.salafTab===tab);b.setAttribute("aria-pressed",String(b.dataset.salafTab===tab))});
     var vis=available();
@@ -109,11 +119,7 @@
         var matches=vis.filter(function(i){return i.category===topic});
         var insight=INSIGHTS[chosen.id]||INSIGHTS.rahma;
         var topicArt=safeAsset(chosen.img)||"";
-        pane.innerHTML='<nav class="salaf-topic-nav kids-detail-appbar" aria-label="Seitennavigation">'+
-          '<button type="button" id="salafClear" class="kids-detail-dock-back" aria-label="Zurück zu allen Themen"></button>'+
-          '<div class="kids-detail-appbar-copy"><strong class="kids-detail-appbar-title">Schätze der Salaf</strong>'+
-          '<small class="kids-detail-appbar-subtitle">'+esc(chosen.short)+'</small></div></nav>'+
-          '<header class="salaf-topic-stage" style="--salaf-stage-art:url(&quot;'+esc(topicArt)+'&quot;)">'+
+        pane.innerHTML='<header class="salaf-topic-stage kids-detail-hero" style="--salaf-stage-art:url(&quot;'+esc(topicArt)+'&quot;)">'+
           '<div class="salaf-topic-stage-copy"><span class="salaf-eyebrow">DEIN THEMA</span>'+
           '<h3>'+esc(chosen.short)+'</h3><p>'+esc(chosen.caption)+'</p></div></header>'+
           '<section class="salaf-topic-thought" aria-label="Über das Thema nachdenken">'+
@@ -129,7 +135,6 @@
         }else{
           list.innerHTML='<p class="salaf-upcoming salaf-topic-note">Hier sammeln wir sorgfältig geprüfte Geschichten. Bis dahin kannst du über die Frage oben nachdenken.</p>';
         }
-        q("#salafClear")?.addEventListener("click",function(){topic="";render();scrollSalafTop()});
       }else{
         pane.innerHTML='<div class="salaf-topic-grid">'+CATEGORIES.map(function(c){
           var count=vis.filter(function(i){return i.category===c.id}).length;
@@ -225,6 +230,9 @@
   q("#salafFollow").addEventListener("click",function(){reader?.openReadAlong?.()});
   q(".salaf-back").addEventListener("click",closeStory);
   root.addEventListener("click",function(e){
+    if(e.target.closest("#salafClear")){
+      e.preventDefault();topic="";tab="all";render();scrollSalafTop();return;
+    }
     var story=e.target.closest("[data-story-id]");if(story&&story.closest(".salaf-story")){
       var i=items.find(function(x){return x.id===story.dataset.storyId});if(i)showStory(i);return;
     }

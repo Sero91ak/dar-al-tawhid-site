@@ -561,3 +561,68 @@ html body .salaf-detail .salaf-detail-cover{
     min-height:clamp(350px,46svh,640px)!important;
   }
 }
+
+/* SALAF_STICKY_DETAIL_ROOT_V1390
+   Prior v1380 nested the top rail INSIDE .salaf-pane. It therefore scrolled
+   away with the hero despite global sticky CSS. One stable, DIRECT root child
+   now uses the shared global detail-page architecture, with zero duplicate
+   nav or gap. No modifications to .bottom-nav, 3D icon assets or other tabs. */
+#view-salaf[data-topic-open="true"]{
+ --kids-detail-head-bg:linear-gradient(110deg,#103141,#092636);
+ --kids-detail-head-line:rgba(246,213,142,.24);
+ overflow:visible!important;
+ transform:none!important;
+ animation:none!important;
+}
+.app[data-gender="girl"] #view-salaf[data-topic-open="true"],
+#view-salaf[data-profile="girl"][data-topic-open="true"]{
+ --kids-detail-head-bg:linear-gradient(110deg,#483147,#2b2035);
+ --kids-detail-head-line:rgba(255,207,228,.29);
+}
+html body #view-salaf[data-topic-open="true"] > .salaf-topic-nav.kids-detail-appbar{
+  /* Global contract supplies sticky position and correct iOS safe-area. */
+  position:-webkit-sticky!important;
+  position:sticky!important;
+  top:var(--safe-top,max(16px,env(safe-area-inset-top,0px)))!important;
+  inset-block-start:var(--safe-top,max(16px,env(safe-area-inset-top,0px)))!important;
+  z-index:650!important;
+  width:100vw!important;max-width:none!important;
+  margin:0 calc(50% - 50vw)!important;
+  min-height:68px!important;
+  padding:10px max(16px,env(safe-area-inset-right,0px))
+          10px max(16px,env(safe-area-inset-left,0px))!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  border:0!important;
+  border-bottom:1px solid var(--kids-detail-head-line)!important;
+  background:var(--kids-detail-head-bg)!important;
+  transform:none!important;animation:none!important;
+}
+html body #view-salaf > #salafTopicAppbar[hidden]{
+  display:none!important;
+}
+html body #view-salaf[data-topic-open="true"] .salaf-pane{
+  overflow:visible!important;
+}
+html body #view-salaf[data-topic-open="true"] .salaf-topic-stage.kids-detail-hero{
+  box-sizing:border-box!important;
+  position:relative!important;
+  width:100vw!important;max-width:none!important;
+  margin:0!important;
+  border:0!important;border-radius:0!important;
+  box-shadow:none!important;
+  min-height:clamp(310px,49svh,550px)!important;
+}
+html body #view-salaf[data-topic-open="true"] .salaf-topic-stage.kids-detail-hero::after{
+  background:linear-gradient(180deg,rgba(7,22,29,.04) 0%,
+    rgba(7,22,29,.04) 33%,rgba(8,30,38,.2) 52%,
+    rgba(9,39,56,.75) 85%,var(--salaf-color) 100%)!important;
+}
+html body .app[data-gender="girl"] #view-salaf[data-topic-open="true"]
+ .salaf-topic-stage.kids-detail-hero::after,
+html body #view-salaf[data-profile="girl"][data-topic-open="true"]
+ .salaf-topic-stage.kids-detail-hero::after{
+ background:linear-gradient(180deg,rgba(33,18,38,.04) 0%,
+    rgba(33,18,38,.03) 33%,rgba(36,24,43,.22) 52%,
+    rgba(43,32,53,.77) 85%,var(--salaf-color) 100%)!important;
+}
