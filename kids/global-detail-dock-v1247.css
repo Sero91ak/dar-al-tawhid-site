@@ -1160,3 +1160,17 @@ html body .shell > .view.active.kids-detail-page > .kids-detail-head-spacer{
 }
 /* The full-screen modal variant already owns the viewport surface; do not
    transplant its in-modal back navigation into the body-level portal. */
+
+/* KIDS_TOP_SCROLL_BOUNDARY_V1411 — the hero may scroll UP beneath its fixed
+ * rail, but never pull DOWN past the rail to expose the page background.
+ * iOS touch fallback is installed once by global-detail-dock-v1247.js. */
+html body .app > .shell {
+  overscroll-behavior-y:none!important;
+}
+html body #salafDetail.salaf-detail:not([hidden]) .salaf-detail-scroll,
+html body .modal.open .modal-shell,
+html body #psModal.ps-modal.open #psScroll,
+html body :is(#msModal,#syModal,#dlModal).ms-modal.open .ms-scroll,
+html body #ghPlayer.open .gh-player-scroll {
+  overscroll-behavior-y:none!important;
+}

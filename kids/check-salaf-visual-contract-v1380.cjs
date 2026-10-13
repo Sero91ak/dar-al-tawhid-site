@@ -78,6 +78,10 @@ assert.ok(v1410.includes("justify-content:flex-start!important"),"Back and title
 assert.ok(globalJs.includes('record.spacer.style.height=Math.max(68,Math.ceil(bar.getBoundingClientRect().height))'),"Content must start below measured full header");
 assert.ok(globalJs.includes('window.visualViewport?.addEventListener("resize",queue'),"Header must handle mobile viewport/safe-area changes");
 assert.ok(globalJs.includes('version:"1410"'),"Global controller version mismatch");
+assert.ok(globalJs.includes("KIDS_TOP_SCROLL_BOUNDARY_V1411"),"Global touch-boundary controller missing");
+assert.ok(globalCss.includes("KIDS_TOP_SCROLL_BOUNDARY_V1411"),"Global top-edge overscroll containment missing");
+assert.ok(globalJs.includes("touchmove")&&globalJs.includes("event.preventDefault()"),"Native iOS top rubber-band must be prevented");
+assert.ok(globalJs.includes(".ps-modal.open")&&globalJs.includes(".ms-modal.open"),"Story reader overlays must be covered");
 assert.ok(doc.includes("KIDS_GLOBAL_STATUS_SAFE_AREA_V1410"),"Canonical documentation for status area missing");
 
 assert.ok(css.includes("margin-inline:calc(50% - 50vw)!important"),"Full-bleed wrapper required");
@@ -85,8 +89,8 @@ assert.ok(css.includes("justify-content:flex-end!important"),"Stage heading must
 for(const p of ["kids/index.html","kids/shell.html","kids/start.html"]){
   assert.equal(read(p),html,"Kids HTML entrypoints must be identical");
   assert.ok(html.includes("salaf-library-v1.js?v=1410"),"JS cache bust missing");
-  assert.ok(html.includes("global-detail-dock-v1247.css?v=1410"),"Global style contract must be current");
-  assert.ok(html.includes("global-detail-dock-v1247.js?v=1410"),"Pinned global header runtime cache-bust missing");
+  assert.ok(html.includes("global-detail-dock-v1247.css?v=1411"),"Global style contract must be current");
+  assert.ok(html.includes("global-detail-dock-v1247.js?v=1411"),"Pinned global header runtime cache-bust missing");
   assert.ok(html.includes("navigation-v1182.js?v=1410"),"Navigation history refresh missing");
   assert.ok(html.includes("salaf-open-world-v1353.css?v=1410"),"CSS cache bust missing");
 }
@@ -96,8 +100,8 @@ for(const p of ["kids/version.json","kids/manifest.webmanifest",
  assert.ok(read(p).includes(id),`Build mismatch ${p}`);
 }
 assert.ok(sw.includes(id)&&sw.includes("dar-al-tawhid-kids-v1410"));
-assert.ok(sw.includes("/kids/global-detail-dock-v1247.css?v=1410"));
-assert.ok(sw.includes("/kids/global-detail-dock-v1247.js?v=1410"));
+assert.ok(sw.includes("/kids/global-detail-dock-v1247.css?v=1411"));
+assert.ok(sw.includes("/kids/global-detail-dock-v1247.js?v=1411"));
 assert.ok(sw.includes("/kids/navigation-v1182.js?v=1410"));
 assert.ok(sw.includes("/kids/salaf-library-v1.js?v=1410"));
 assert.ok(sw.includes("/kids/salaf-open-world-v1353.css?v=1410"));
