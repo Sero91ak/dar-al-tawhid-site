@@ -90,6 +90,18 @@ const findings={url:"https://dar-al-tawhid.de/test/?env=staging&source=pwa&v=137
   await tapTest(qidx,"quran");
   await tapTest(pidx,"posts");
   await page.waitForTimeout(18000);
+  findings.postsDiagnostic=await page.evaluate(async()=>{
+    const keys=["/content/posts/posts-index.json","/content/staging/posts/posts-index.json"];
+    const out=[];
+    for(const u of keys){
+      try{const r=await fetch(u+"?qa="+Date.now(),{cache:"no-store"});const j=await r.json();out.push({url:u,status:r.status,fileCount:j.files?.length||0})}
+      catch(e){out.push({url:u,error:String(e)})}
+    }
+    return {sourceDir:typeof POSTS_DIR==="undefined"?"unavailable":POSTS_DIR,
+      renderedPosts:typeof posts==="undefined"?null:posts.length,
+      testMarker:document.documentElement.outerHTML.includes("Read the published library"),
+      indexes:out}
+  });
   const pageText=await page.locator("#appView").innerText();
   findings.tap.posts.hasCategories=!/0\s+Bereiche|Noch keine Kategorien erkannt/i.test(pageText);
   await snapshot("posts-after-wait");
