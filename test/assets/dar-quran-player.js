@@ -2186,6 +2186,14 @@
     }
     paintMini();
   }
+  // The canonical V108-R renderer uses these in every Android media-session
+  // sync. Without local declarations each repaint throws ReferenceError,
+  // interrupting Qur'an navigation and triggering repeated error/repaint work.
+  var lastMediaMetaKey = "";
+  var lastNowPlayingKey = "";
+  var lastNowPlayingAt = 0;
+  var mediaHandlersBound = false;
+
   function isTestShell() {
     try {
       var p = String(location.pathname || "");
