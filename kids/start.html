@@ -3162,8 +3162,8 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
       <div class="big-choice-grid">
         <button class="choice story" data-go="stories">
           <span class="icon"></span>
-          <strong>Hörbücher</strong>
-          <small>Geschichten hören & mitlesen</small>
+          <strong>Hörgeschichten</strong>
+          <small>Entdecken, hören und mitlesen</small>
           
         </button>
 
@@ -3188,8 +3188,12 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
           
         </button>
       </div>
+      <button class="kids-salaf-feature kids-tap-card" type="button" data-go="salaf" aria-label="Schätze der Salaf entdecken">
+        <span class="kids-salaf-feature-art" aria-hidden="true"></span>
+        <span class="kids-salaf-feature-copy"><small>GESCHICHTEN · WERTVOLLE LEHREN</small><strong>Schätze der Salaf</strong><span>Gute Vorbilder entdecken und von ihnen lernen</span></span>
+      </button>
       <a href="/kids/akademie/index.html" class="academy-pilot-entry" aria-label="Meine Lernakademie öffnen">
-        <span class="academy-pilot-text"><small>LERNEN · MEINE AKADEMIE</small><strong>Meine Lernakademie</strong><span>Ṣidq · Wahrhaftigkeit · 5 Unterrichtsschritte</span></span>
+        <span class="academy-pilot-text"><small>LERNEN · MEINE AKADEMIE</small><strong>Meine Lernakademie</strong><span>Spannende Lektionen · Schritt für Schritt lernen</span></span>
         <span class="academy-pilot-arrow" aria-hidden="true">→</span>
       </a>
 
@@ -3209,9 +3213,9 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
     <section id="view-stories" class="view">
       <header class="stories-world-head stories-hero" aria-labelledby="storiesHeroTitle">
         <div class="stories-hero-copy">
-          <span class="stories-world-kicker">HÖRBÜCHER · WISSEN · ĪMĀN</span>
-          <h2 id="storiesHeroTitle">Hörbücher</h2>
-          <p>Wähle deine Hörwelt und entdecke ihre Inhalte – hören, lesen oder mitlesen, passend zur Altersstufe.</p>
+          <span class="stories-world-kicker">GESCHICHTEN · WISSEN · ĪMĀN</span>
+          <h2 id="storiesHeroTitle">Hören</h2>
+          <p>Propheten, Gefährtinnen, Gefährten und schöne Geschichten entdecken – zum Hören, Lesen und Mitlesen.</p>
         </div>
       </header>
 
@@ -3233,6 +3237,20 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
           <span>14 Ṣaḥābiyyāt · ihre Geschichten · lesen &amp; hören</span>
         </span>
       </button>
+
+      <div class="kids-listening-shortcuts" aria-label="Weitere Hörwelten">
+        <div class="kids-listening-shortcuts-title">Noch mehr zum Entdecken</div>
+        <div class="kids-listening-shortcuts-grid">
+          <button type="button" class="kids-listen-shortcut kids-tap-card" data-go="salaf" aria-label="Schätze der Salaf öffnen">
+            <span class="kids-listen-shortcut-art salaf" aria-hidden="true"></span>
+            <span class="kids-listen-shortcut-copy"><strong>Schätze der Salaf</strong><small>Schöne Geschichten und wertvolle Lehren</small></span>
+          </button>
+          <button type="button" class="kids-listen-shortcut kids-tap-card" id="kidsListenDuaEntry" aria-label="Meine Duʿāʾ öffnen">
+            <span class="kids-listen-shortcut-art dua" aria-hidden="true"></span>
+            <span class="kids-listen-shortcut-copy"><strong>Meine Duʿāʾ</strong><small>Hören, nachsprechen und verstehen</small></span>
+          </button>
+        </div>
+      </div>
 
     </section>
 
@@ -3327,7 +3345,7 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
 
   <nav class="bottom-nav" aria-label="Hauptnavigation">
     <button class="nav-btn active" data-target="today"><span class="ico"></span><span class="lab">Heute</span></button>
-    <button class="nav-btn" data-target="stories"><span class="ico"></span><span class="lab">Hörbücher</span></button>
+    <button class="nav-btn" data-target="stories"><span class="ico"></span><span class="lab">Hören</span></button>
     <button class="nav-btn" data-target="salaf" aria-label="Schätze der Salaf"><span class="ico"></span><span class="lab">Schätze</span></button>
     <button class="nav-btn" data-target="quran"><span class="ico"></span><span class="lab">Qurʾān</span></button>
     <button class="nav-btn" data-target="parents"><span class="ico"></span><span class="lab">Eltern</span></button>
@@ -11616,4 +11634,7 @@ html body .app:has(#view-parents.view.active) .shell{
 <script defer src="/kids/offline-library-v1.js?v=1"></script>
 <!-- KIDS_SALAH_STAGE_V1261: placed after hero, before continue-listening -->
 <script defer src="/kids/prayer-stage-v1261.js?v=1342" data-kids-salah-stage="1275"></script>
+<!-- KIDS_LISTENING_POLISH_V1350: sub-home & listening-only CSS; nav icons and geometry preserved -->
+<link rel="stylesheet" href="/kids/kids-listening-polish-v1350.css?v=1350">
+<script defer src="/kids/kids-listening-polish-v1350.js?v=1350"></script>
 </html>
