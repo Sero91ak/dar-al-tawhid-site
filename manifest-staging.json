@@ -1,7 +1,7 @@
 {
   "name": "Dar Test",
   "short_name": "Dar Test",
-  "start_url": "/test/?env=staging&source=pwa#home",
+  "start_url": "/test/?env=staging&source=pwa&v=1371#home",
   "scope": "/test/",
   "id": "/test/?env=staging",
   "display": "standalone",
@@ -11,20 +11,19 @@
   "orientation": "any",
   "icons": [
     {
-      "src": "/test-app-icon-192.png?v=dar-test-v3",
+      "src": "/test/assets/dar-test-apple-icon-192.png?v=ios-apple-exact-1371",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "/test-app-icon-512.png?v=dar-test-v3",
+      "src": "/test/assets/dar-test-apple-icon-512.png?v=ios-apple-exact-1371",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ],
   "display_override": [
-    "standalone",
-    "fullscreen"
+    "standalone"
   ]
 }
