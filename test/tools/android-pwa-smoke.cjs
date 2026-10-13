@@ -4,6 +4,7 @@
    Runs after test Worker deploy using a fresh Android/touch browser context. */
 const fs=require("node:fs");
 const path=require("node:path");
+const {execFileSync}=require("node:child_process");
 const {chromium}=require("playwright");
 const out=path.join(process.cwd(),"dar-test-android-pwa-evidence");
 fs.mkdirSync(out,{recursive:true});
@@ -22,6 +23,24 @@ const findings={url:"https://dar-al-tawhid.de/test/?env=staging&source=pwa&v=137
   page.on("console",msg=>{if(msg.type()==="error")findings.errors.push("console:"+msg.text().slice(0,300))});
   page.on("requestfailed",req=>{if(/\/test\//.test(req.url()))findings.errors.push("network:"+req.url().slice(0,180)+" "+req.failure()?.errorText)});
   findings.documentResponse=await page.goto(findings.url,{waitUntil:"domcontentloaded",timeout:50000}).then(r=>({status:r.status(),url:r.url()}));
+  // Verify the actual installation icon bytes match the iOS Apple icon,
+  // not just that a manifest URL exists. Only test /test assets.
+  execFileSync(process.execPath,["test/tools/build-apple-icons.cjs"],{stdio:"pipe"});
+  const mr=await context.request.get("https://dar-al-tawhid.de/test/manifest.json?v=ios-apple-exact-1371");
+  if(!mr.ok())throw Error("Dar Test PWA manifest HTTP "+mr.status());
+  const manifest=await mr.json();
+  findings.install={id:manifest.id,scope:manifest.scope,icons:[]};
+  if(manifest.id!=="/test/?env=staging"||manifest.scope!=="/test/")throw Error("Wrong Android Dar Test install identity");
+  for(const icon of manifest.icons||[]){
+   const p=new URL(icon.src,"https://dar-al-tawhid.de").pathname;
+   if(!/^\/test\/assets\/dar-test-apple-icon-(192|512)\.png$/.test(p))throw Error("Wrong icon source in Android Test manifest");
+   const res=await context.request.get(new URL(icon.src,"https://dar-al-tawhid.de").toString());
+   const actual=await res.body();
+   const expected=fs.readFileSync(p.slice(1));
+   findings.install.icons.push({path:p,http:res.status(),bytes:actual.length,match:actual.equals(expected)});
+   if(!res.ok()||!actual.equals(expected))throw Error("Android icon not deployed from iOS original "+p);
+  }
+  if(findings.install.icons.length!==2)throw Error("Missing Android install icons");
   await page.waitForTimeout(8500);
   // Dar Test has an explicit client-side owner gate. A fresh Android browser
   // has no prior iOS localStorage/cookie session. Exercise the EXISTING form,
@@ -70,6 +89,11 @@ const findings={url:"https://dar-al-tawhid.de/test/?env=staging&source=pwa&v=137
   }
   await tapTest(qidx,"quran");
   await tapTest(pidx,"posts");
+  await page.waitForTimeout(4600);
+  const pageText=await page.locator("#appView").innerText();
+  findings.tap.posts.hasCategories=!/0\s+Bereiche|Noch keine Kategorien erkannt/i.test(pageText);
+  await snapshot("posts-after-wait");
+  if(!findings.tap.posts.hasCategories)throw Error("Beiträge did not load categories after 4.6 sec on Android Chrome");
   await page.setViewportSize({width:915,height:412});
   await page.waitForTimeout(1400);
   await snapshot("landscape");
