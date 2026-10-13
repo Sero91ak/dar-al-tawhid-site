@@ -34,7 +34,29 @@
   var scrollFadeTimer = 0;
   var burstTimers = [];
   var observer = null;
+  var observedRail = null;
   var restoringBottom = false;
+
+  // Single-owner guard: other legacy SPA controllers may still write
+  // left:50% during navigation. Observe only the existing nav element,
+  // never the entire app/body; recover only when it is actually displaced.
+  function monitorRail(nav) {
+    if (observedRail === nav || typeof MutationObserver !== "function") return;
+    if (observer) observer.disconnect();
+    observedRail = nav;
+    observer = new MutationObserver(function () {
+      if (currentEffective !== "left" && currentEffective !== "right") return;
+      if (nav.parentNode !== document.documentElement ||
+          !nav.classList.contains("is-adaptive-rail") ||
+          nav.style.getPropertyValue("left") === "50%" ||
+          nav.style.getPropertyValue("top") === "auto" ||
+          nav.style.getPropertyValue("right") === "auto" && currentEffective === "right" ||
+          nav.style.getPropertyValue("left") === "auto" && currentEffective === "left") {
+        schedule();
+      }
+    });
+    observer.observe(nav, { attributes: true, attributeFilter: ["style", "class"] });
+  }
 
   var navProperties = [
     "position", "left", "right", "top", "bottom",
@@ -170,18 +192,19 @@
   }
 
   // Position relative to the physical viewport, not to a transformed split
-  // container. 92px wide rail with five 58px targets, separated by 9px.
+  // container. Spacious 100px rail, five 62px targets, 8px spacing.
   function applySidePosition(nav, side, metrics) {
     if (!document.body) return;
     ensureRailViewportParent(nav);
+    monitorRail(nav);
     var screenHeight = Math.max(0, Number(metrics && metrics.height) || global.innerHeight || 0);
-    var desiredHeight = 5 * 58 + 4 * 9 + 22;
+    var desiredHeight = 5 * 62 + 4 * 8 + 20;
     var dockHeight = Math.min(desiredHeight, Math.max(0, screenHeight - 24));
     var dockTop = Math.max(12, Math.min(screenHeight - dockHeight - 12,
       Math.round(screenHeight * 0.56 - dockHeight / 2)));
     root.style.setProperty("--dar-duos-rail-top", dockTop + "px");
     root.style.setProperty("--dar-duos-rail-height", dockHeight + "px");
-    root.style.setProperty("--dar-duos-rail-width", "92px");
+    root.style.setProperty("--dar-duos-rail-width", "100px");
     nav.classList.remove("is-adaptive-centered");
     nav.classList.add("is-adaptive-rail");
     // Always refresh the side properties after a route/layout event. The
@@ -192,11 +215,11 @@
       left:side === "left" ? "max(12px, env(safe-area-inset-left, 0px))" : "auto",
       right:side === "right" ? "max(12px, env(safe-area-inset-right, 0px))" : "auto",
       top:dockTop + "px", bottom:"auto",
-      width:"92px", "min-width":"92px", "max-width":"92px",
+      width:"100px", "min-width":"100px", "max-width":"100px",
       height:dockHeight + "px", "min-height":"0", "max-height":dockHeight + "px",
       margin:"0", "margin-left":"0", "margin-right":"0",
-      padding:"11px 12px", "flex-direction":"column",
-      "justify-content":"space-between", "align-items":"center", gap:"9px",
+      padding:"10px 12px", "flex-direction":"column",
+      "justify-content":"space-between", "align-items":"center", gap:"8px",
       "border-radius":"30px", transform:"none", "-webkit-transform":"none",
       "z-index":"96", "pointer-events":"auto", transition:"none"
     };
