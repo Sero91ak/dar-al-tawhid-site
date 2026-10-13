@@ -11,6 +11,7 @@
 2. Prüfe `main`, offene PR **#1089** (Kids-Katalog) und **#1090** (getrennte Test-App-Prüfungen) sowie den tatsächlichen Jahresstand. Am 13.10.2026: `main` **66/208**; Arbeitszweig `kids/lessons-67-70-20261012` **90/208**; **118 geplante Plätze** ohne vollständige Lektion. Zahlen **nie fest annehmen**; immer dynamisch neu berechnen.
 3. Lies zuerst diese vier Referenzen:
    - **`kids/data/academy-source-register-208-v1.json`** — kompletter Index aller 208 Themen, ursprüngliche belegte Quellenfelder, Recherche-/Freigabestatus. **Es ist die verbindliche Aufgabenliste.**
+   - **`kids/data/academy-source-bank-researched-v1.json`** — sieben im Web anhand konkreter Dorar-Direktseiten gegengeprüfte Ausgangsüberlieferungen mit Erzähler, Sammlung, Nummer und gesonderter Anwendung. Nur Ausgangsmaterial; kein automatischer Beweis für ein anderes Thema.
    - **`kids/data/academy-expansion-roadmap-v23.json`** — alle geplanten Titel, Rubriken, konkreten Lernsituationen und Altersziele.
    - **`kids/data/academy-year-52weeks-v1.json`** — Kalender, Unterrichtsplätze 1–208, vorhandene Lesson-IDs, Lernrhythmus.
    - **`kids/data/academy-voice-policy-v10.json`** — **nur zum Absichern, nicht zur Erzeugung von Audio**.
