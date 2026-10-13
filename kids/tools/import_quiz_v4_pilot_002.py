@@ -10,6 +10,8 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
+import shutil
 from pathlib import Path
 import subprocess
 import tempfile
@@ -30,16 +32,27 @@ def command(*args: str, tolerate_error: bool = False) -> subprocess.CompletedPro
 def details(path: Path) -> tuple[float, str]:
     if not path.is_file() or path.stat().st_size < 2000:
         raise ValueError(f"Audio missing or too small: {path}")
-    response = command(
-        "ffprobe", "-v", "error", "-show_entries",
-        "format=duration:stream=codec_name,codec_type", "-of", "json", str(path)
-    )
-    data = json.loads(response.stdout)
-    duration = float((data.get("format") or {}).get("duration") or 0)
-    streams = [s for s in data.get("streams") or [] if s.get("codec_type") == "audio"]
-    if not streams or not 0.4 <= duration <= 60:
+    if shutil.which("ffprobe"):
+        response = command(
+            "ffprobe", "-v", "error", "-show_entries",
+            "format=duration:stream=codec_name,codec_type", "-of", "json", str(path)
+        )
+        data = json.loads(response.stdout)
+        duration = float((data.get("format") or {}).get("duration") or 0)
+        streams = [s for s in data.get("streams") or [] if s.get("codec_type") == "audio"]
+        codec = str(streams[0].get("codec_name") or "") if streams else ""
+    else:
+        # GitHub's pinned static ffmpeg fallback does not bundle ffprobe.
+        result = command("ffmpeg", "-hide_banner", "-i", str(path), tolerate_error=True)
+        m = re.search(r"Duration:\s*(\d+):(\d+):(\d+(?:\.\d+)?)", result.stderr)
+        c = re.search(r"Audio:\s*([a-z0-9_]+)", result.stderr, re.I)
+        if m is None or c is None:
+            raise ValueError(f"Unreadable audio: {path}")
+        duration = int(m[1]) * 3600 + int(m[2]) * 60 + float(m[3])
+        codec = c[1].lower()
+    if not 0.4 <= duration <= 60:
         raise ValueError(f"Audio invalid or implausible duration: {path}")
-    return duration, str(streams[0].get("codec_name") or "")
+    return duration, codec
 
 
 def build(input_dir: Path, output: Path, validate_only: bool = False) -> dict:
