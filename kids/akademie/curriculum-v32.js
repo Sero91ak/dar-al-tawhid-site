@@ -323,7 +323,7 @@ const additions={
       "text": "Der Prophet ﷺ lehrte, dass die Taten nach den Absichten beurteilt werden. (Sinngemäße Bedeutung)"
     },
     "sourceAudit": {
-      "hadithUrl": "https://dorar.net/h/RZGdSuHO?osoul=1",
+      "hadithUrl": "https://dorar.net/hadith/sharh/3429",
       "hadithNumber": "1",
       "narrator": "ʿUmar ibn al-Ḫaṭṭāb",
       "authenticity": "Ṣaḥīḥ",
