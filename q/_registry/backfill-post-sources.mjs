@@ -15,7 +15,7 @@ if(args.has("--help")){
  console.log("node q/_registry/backfill-post-sources.mjs --audit | --prepare");
  process.exit(0);
 }
-if(args.has("--apply")||args.has("--publish")) throw Error("No automatic publishing. Use publish-reviewed-sources.mjs with approvals.");
+if(args.has("--apply")||args.has("--publish")) throw Error("No automatic publishing. Use backfill-approved.mjs with approvals.");
 
 function readJson(p){return JSON.parse(fs.readFileSync(p,"utf8"));}
 function plain(s){return String(s||"").replace(/^["']|["']$/g,"").replace(/^📝\s*/u,"").trim();}
@@ -60,6 +60,18 @@ const index=readJson(path.join(postRoot,"posts-index.json"));
 const registry=readJson(path.join(qRoot,"_registry","shortlinks.json"));
 if(!Array.isArray(index.files)||!Array.isArray(registry.links))throw Error("Invalid indexes");
 const numberToReg=new Map(),idToQ=new Map();
+const normalizeTitle=s=>String(s||"").normalize("NFKD").replace(/\p{Mark}/gu,"").toLowerCase().replace(/[^\p{Letter}\p{Number}]+/gu," ").trim();
+const registryByTitle=new Map();
+for(const q of registry.links){
+ const key=normalizeTitle(q.title);
+ if(key){
+  const matches=registryByTitle.get(key)||[];
+  matches.push(Number(q.number));registryByTitle.set(key,matches);
+ }
+}
+const indexedFilenames=new Set(index.files.map(item=>item?.name).filter(Boolean));
+const unindexedMarkdown=fs.readdirSync(postRoot).filter(n=>n.endsWith(".md")&&!indexedFilenames.has(n)).sort();
+const unsafeIndexRows=index.files.filter(f=>!f?.name?.endsWith(".md")||f.name.includes("/")||f.name.includes("..")).map(f=>f?.name||"");
 for(const entry of registry.links){
  const n=Number(entry.number);
  if(!Number.isSafeInteger(n)||n<1||numberToReg.has(n))throw Error("Duplicate or invalid Q registry number "+n);
@@ -79,10 +91,11 @@ for(const f of index.files){
  seenIds.add(data.id);
  const qs=[...new Set([...(data.qLinks||[]),...(idToQ.get(data.id)||[])])].sort((a,b)=>a-b);
  data.existingQ=qs;
+ data.suspectedExistingQ=qs.length?[]:(registryByTitle.get(normalizeTitle(data.title))||[]);
  if(qs.some(n=>!numberToReg.has(n)||!fs.existsSync(path.join(qRoot,String(n),"index.html"))))
   data.error="Q-Referenz fehlt im Register oder Q-Datei";
  if(qs.length>1)data.error="Mehrdeutige Q-Referenzen";
- data.state=data.error?"blocked":qs.length===1?"linked":data.directLinkCount>0?"review-direct-evidence":data.externalLinks?.length?"review-source-link":"research-required";
+ data.state=data.error?"blocked":qs.length===1?"linked":data.suspectedExistingQ.length?"possible-existing-q":data.directLinkCount>0?"review-direct-evidence":data.externalLinks?.length?"review-source-link":"research-required";
  records.push(data);
 }
 const duplicates=new Map();
@@ -95,7 +108,7 @@ for(const r of records)tallies[r.state]=(tallies[r.state]||0)+1;
 const output={
  schemaVersion:1,createdAt:new Date().toISOString(),source:"content/posts/posts-index.json",
  indexedCount:index.count??index.files.length,scanned:records.length,registeredQ:registry.links.length,
- nextRegisteredQ:registry.nextNumber,summary:tallies,
+ nextRegisteredQ:registry.nextNumber,summary:tallies,unindexedMarkdown,unsafeIndexRows,
  rules:{
   noInventedArabic:true,noUnverifiedPublicLinks:true,existingQImmutable:true,
   noVisitorWrites:true,noKidsWrites:true,needsEditorialApproval:true
@@ -109,13 +122,14 @@ if(args.has("--prepare")){
   const filepath=path.join(reviewRoot,r.id.replace(/[^a-zA-Z0-9._-]/g,"_")+".json");
   if(fs.existsSync(filepath))continue; // preserve manual editor work
   const draft={
-   postId:r.id,filename:r.filename,reviewState:"not-verified",approved:false,
+   postId:r.id,filename:r.filename,reviewState:r.state==="possible-existing-q"?"existing-Q-match-review":"not-verified",approved:false,
+   suspectedExistingQ:r.suspectedExistingQ,
    title:r.title,topic:r.topic,speaker:r.speaker,bibliography:r.bibliography,book:r.book,
    existingExcerpt:r.excerpt,arabicOriginal:"",checkedGermanTranslation:"",
    attributionGrade:"",sourceVolume:"",sourcePage:"",sourceNumber:"",
    sourceLinks:r.externalLinks.map(url=>({title:"Originalnachweis prüfen",url,reference:"",verified:false})),
    review:{originalChecked:false,translationChecked:false,bibliographyChecked:false,isnadChecked:false,linksChecked:false,approvedBy:"",checkedAt:""},
-   editorialNotes:"Alle übernommenen Altangaben sind Hinweise, KEINE geprüften Belege. Originalwortlaut, Fundstelle und Quellenlinks erst nach Verifikation freigeben."
+   editorialNotes:"Alle übernommenen Altangaben sind Hinweise, KEINE geprüften Belege. Originalwortlaut, Fundstelle und Quellenlinks erst nach Verifikation freigeben. Wenn suspectedExistingQ befüllt ist, vorhandenen Q-Link zuordnen und niemals eine neue Q-Nummer für dieselbe Aussage erzeugen."
   };
   fs.writeFileSync(filepath,JSON.stringify(draft,null,2)+"\n");
  }
