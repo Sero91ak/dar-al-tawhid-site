@@ -21158,7 +21158,7 @@ body.is-quran-reader-route .quran-ayah-action-btn--tafsir.is-loading::after{cont
 <script>
 
 /* PUBLISH ISOLATION GUARD FINAL: stale index, incremental sync, render caps */
-const REPO_OWNER="Sero91ak";const REPO_NAME="dar-al-tawhid-site";const IS_TEST_PATH=location.pathname.indexOf("/test/")===0||location.pathname==="/test";function isTestAppPath(){return IS_TEST_PATH}function isVisitorTestOnlyView(view){const v=String(view||"");return!isTestAppPath()&&(v==="ilm"||v==="quran-player")}const IS_STAGING_HOST=location.hostname.startsWith("staging.");const IS_STAGING_ENV=new URLSearchParams(location.search).get("env")==="staging";const CONTENT_ENV=IS_TEST_PATH||IS_STAGING_ENV||IS_STAGING_HOST?"staging":"production";const IS_STAGING_APP=IS_TEST_PATH||IS_STAGING_HOST;const POSTS_DIR=IS_STAGING_APP?"content/staging/posts":"content/posts";const BRANCH="main";const CACHE_KEY=IS_STAGING_APP?"darCachedPostsStagingV3":"darCachedPostsV12";const CACHE_KEY_LEGACY="darCachedPostsStableCalendarFix1";const POST_FILE_MAP_KEY=IS_STAGING_APP?"darPostFileMapStagingV3":"darPostFileMapV10";const POST_PARSE_VERSION=14;const FEED_MIN_POST_NUM=431;const POSTS_INDEX_RAW=`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${POSTS_DIR}/posts-index.json`;const POSTS_INDEX_PATH=`/${POSTS_DIR}/posts-index.json`;const DUA_CACHE_KEY="darCachedDuasV1";const OFFLINE_LIB_KEY="darOfflineLibraryV1";const SAVE_KEY="darSavedPostsV5DuaFinal";const REPORT_EMAIL="dar.al.tauhid91@gmail.com";const QURAN_INDEX_PATH="/content/quran/surahs.json";const QURAN_TOPICS_PATH="/data/quran-topics.json";const QURAN_TOPICS_CACHE_KEY="darQuranTopicsV2";const QURAN_CACHE_KEY="darCachedQuranIndexV1";const QURAN_PRECACHE_KEY="darQuranPrecachedV2";const TAFSIR_SHOW_KEY="darQuranTafsirShowV2";const TAFSIR_ACTIVE_KEY="darQuranTafsirActiveV1";const TAFSIR_SOURCE_LABEL="Deutscher Tafsīr-Bereich";const QURAN_ATHAR_SOURCE_LABEL="Āthār der Salaf zum Qurʾān";const QURAN_SCROLL_KEY="darQuranScrollV1";const QURAN_RETURN_KEY="darQuranFromSurahV1";const QURAN_TR_KEY="quranTransliterationMode";const QURAN_VIEW_SETTINGS_KEY="darQuranViewSettingsV1";const NAV_STACK_KEY="darNavStackV1";const NAV_SCROLL_KEY="darNavScrollV2";const POST_BROWSE_KEY="darPostBrowseV1";const ILM_CHAT_STORE_KEY=IS_STAGING_APP?"darIlmChatStoreStagingV1":"darIlmChatStoreV1";const ILM_ADMIN_STORE_KEY=IS_STAGING_APP?"darIlmAdminStoreStagingV1":"darIlmAdminStoreV1";const ILM_QUIZ_PATH="/data/quiz-questions.json";const ILM_KNOWLEDGE_INDEX_PATH="/data/ilm-knowledge-index.json";const ILM_QUIZ_CACHE_KEY=IS_STAGING_APP?"darIlmQuizStagingV1":"darIlmQuizV1";const ILM_KNOWLEDGE_CACHE_KEY=IS_STAGING_APP?"darIlmKnowledgeIndexStagingV1":"darIlmKnowledgeIndexV1";const ILM_MAX_CHAT_MESSAGES=120;const ILM_MAX_MATCHES=10;const ILM_MIN_SCORE=4;const ILM_STRONG_SCORE=12;const CONTENT_REFRESH_MS=60000;const POSTS_FETCH_BATCH=8;const FILTER_RENDER_LIMIT=80;const POSTS_CACHE_QUOTA_MAX=300;const POSTS_INDEX_STALE_KEY=IS_STAGING_APP?"darPostsIndexStaleStagingV2":"darPostsIndexStaleV2";const POSTS_FETCH_TIMEOUT_MS=12000;let postsSyncBusy=false;let postsSyncSilent=false;let postsSyncLabel="";let refreshContentPromise=null;let refreshContentQueued=false;let refreshContentDebTimer=null;let postsRenderTimer=null;
+const REPO_OWNER="Sero91ak";const REPO_NAME="dar-al-tawhid-site";const IS_TEST_PATH=location.pathname.indexOf("/test/")===0||location.pathname==="/test";function isTestAppPath(){return IS_TEST_PATH}function isVisitorTestOnlyView(view){const v=String(view||"");return!isTestAppPath()&&(v==="ilm"||v==="quran-player")}const IS_STAGING_HOST=location.hostname.startsWith("staging.");const IS_STAGING_ENV=new URLSearchParams(location.search).get("env")==="staging";const CONTENT_ENV=IS_TEST_PATH||IS_STAGING_ENV||IS_STAGING_HOST?"staging":"production";const IS_STAGING_APP=IS_TEST_PATH||IS_STAGING_HOST;const POSTS_DIR=IS_STAGING_APP?"content/staging/posts":"content/posts";const BRANCH="main";const CACHE_KEY=IS_STAGING_APP?"darCachedPostsFixtureV1":"darCachedPostsV12";const CACHE_KEY_LEGACY="darCachedPostsStableCalendarFix1";const POST_FILE_MAP_KEY=IS_STAGING_APP?"darPostFileMapFixtureV1":"darPostFileMapV10";const POST_PARSE_VERSION=14;const FEED_MIN_POST_NUM=431;const POSTS_INDEX_RAW=`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${POSTS_DIR}/posts-index.json`;const POSTS_INDEX_PATH=`/${POSTS_DIR}/posts-index.json`;const DUA_CACHE_KEY="darCachedDuasV1";const OFFLINE_LIB_KEY="darOfflineLibraryV1";const SAVE_KEY="darSavedPostsV5DuaFinal";const REPORT_EMAIL="dar.al.tauhid91@gmail.com";const QURAN_INDEX_PATH="/content/quran/surahs.json";const QURAN_TOPICS_PATH="/data/quran-topics.json";const QURAN_TOPICS_CACHE_KEY="darQuranTopicsV2";const QURAN_CACHE_KEY="darCachedQuranIndexV1";const QURAN_PRECACHE_KEY="darQuranPrecachedV2";const TAFSIR_SHOW_KEY="darQuranTafsirShowV2";const TAFSIR_ACTIVE_KEY="darQuranTafsirActiveV1";const TAFSIR_SOURCE_LABEL="Deutscher Tafsīr-Bereich";const QURAN_ATHAR_SOURCE_LABEL="Āthār der Salaf zum Qurʾān";const QURAN_SCROLL_KEY="darQuranScrollV1";const QURAN_RETURN_KEY="darQuranFromSurahV1";const QURAN_TR_KEY="quranTransliterationMode";const QURAN_VIEW_SETTINGS_KEY="darQuranViewSettingsV1";const NAV_STACK_KEY="darNavStackV1";const NAV_SCROLL_KEY="darNavScrollV2";const POST_BROWSE_KEY="darPostBrowseV1";const ILM_CHAT_STORE_KEY=IS_STAGING_APP?"darIlmChatStoreStagingV1":"darIlmChatStoreV1";const ILM_ADMIN_STORE_KEY=IS_STAGING_APP?"darIlmAdminStoreStagingV1":"darIlmAdminStoreV1";const ILM_QUIZ_PATH="/data/quiz-questions.json";const ILM_KNOWLEDGE_INDEX_PATH="/data/ilm-knowledge-index.json";const ILM_QUIZ_CACHE_KEY=IS_STAGING_APP?"darIlmQuizStagingV1":"darIlmQuizV1";const ILM_KNOWLEDGE_CACHE_KEY=IS_STAGING_APP?"darIlmKnowledgeIndexStagingV1":"darIlmKnowledgeIndexV1";const ILM_MAX_CHAT_MESSAGES=120;const ILM_MAX_MATCHES=10;const ILM_MIN_SCORE=4;const ILM_STRONG_SCORE=12;const CONTENT_REFRESH_MS=60000;const POSTS_FETCH_BATCH=8;const FILTER_RENDER_LIMIT=80;const POSTS_CACHE_QUOTA_MAX=300;const POSTS_INDEX_STALE_KEY=IS_STAGING_APP?"darPostsIndexFixtureV1":"darPostsIndexStaleV2";const POSTS_FETCH_TIMEOUT_MS=12000;let postsSyncBusy=false;let postsSyncSilent=false;let postsSyncLabel="";let refreshContentPromise=null;let refreshContentQueued=false;let refreshContentDebTimer=null;let postsRenderTimer=null;
 const CURRENT_UPDATES_PATH=IS_STAGING_APP?"/content/staging/updates/current.json":"/content/updates/current.json";const CURRENT_UPDATES_CACHE_KEY=IS_STAGING_APP?"darCurrentUpdatesStagingV2":"darCurrentUpdatesV2";let currentUpdates=[];
 const DAILY_CONTENT_PATH="/content/updates/daily.json";let darDailyContent=null;
 const HADITH_BOOKS_PATH="/test/data/hadith/books.json";const HADITH_SEARCH_PATH="/test/data/hadith/search-index.json";const HADITH_CACHE_KEY="darHadithLibraryV12Works";const HADITH_FILTER_KEY="darHadithFiltersV2";const HADITH_FAV_KEY="darHadithFavoritesV1";const HADITH_MACHINE_CACHE_KEY="darHadithMachineTranslationsV1";const HADITH_DAILY_KEY="darHadithDailySettingsV1";let hadithBooks=[];let hadithSearchIndex=[];let hadithCollections=new Map();let hadithLoading=null;let hadithLoadFailed=false;let hadithActiveBook="";let hadithActiveChapter="";let hadithActiveSection="";let hadithFilters={status:"",grade:"",language:"german"};
@@ -21281,6 +21281,8 @@ const DUAS=[
 {id:"sunnah-008",order:16,type:"Sunnah",cat:"Moschee",title:"Duʿāʾ beim Betreten der Moschee",occasion:"Eintritt in die Moschee",ar:"اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ",tr:"Allāhumma-ftaḥ lī abwāba raḥmatik.",de:"O Allah, öffne mir die Tore Deiner Barmherzigkeit.",src:"📝 Ṣaḥīḥ Muslim, Hadith Nr. 713."},
 {id:"sunnah-009",order:17,type:"Sunnah",cat:"Nach dem Gebet",title:"Istighfār nach dem Gebet",occasion:"Nach dem Pflichtgebet",ar:"أَسْتَغْفِرُ اللَّهَ، أَسْتَغْفِرُ اللَّهَ، أَسْتَغْفِرُ اللَّهَ",tr:"Astaghfirullāh, astaghfirullāh, astaghfirullāh.",de:"Ich bitte Allah um Vergebung, ich bitte Allah um Vergebung, ich bitte Allah um Vergebung.",src:"📝 Ṣaḥīḥ Muslim, Hadith Nr. 591."}
 ];
+// Test fixtures: five actual, sourced Duʿāʾ are sufficient for layout QA.
+if(IS_STAGING_APP)DUAS.splice(5);
 function parseDuaYaml(md){
   const fm={};
   const match=md.match(/^---\s*\n([\s\S]*?)\n---\s*\n?/);
@@ -21362,6 +21364,8 @@ function parseDuaMarkdown(md,filename){
 }
 function isBuiltinDua(d){return /^(quran|sunnah)-/.test(String(d&&d.id||""))}
 async function loadExternalDuas(){
+  // Test-only: avoid copying the entire published and cached duʿāʾ library.
+  if(IS_STAGING_APP){normalizeLoadedDuas();return DUAS.length}
   const existingIds=new Set(DUAS.map(d=>String(d.id)));
   const pushDuas=extraDuas=>{if(!Array.isArray(extraDuas))return;extraDuas.forEach(d=>{if(d&&d.id&&!existingIds.has(String(d.id))){DUAS.push(d);existingIds.add(String(d.id))}})};
   // Seed from local cache first so already-known Duʿāʾ are available instantly
@@ -21429,7 +21433,7 @@ function applyPostsList(list){posts=dedupePostsByContent((Array.isArray(list)?li
 function darAppContentContext(){return{posts:posts||[],duas:typeof DUAS!=="undefined"?DUAS:[],categoryLayout:CATEGORY_LAYOUT||null,quranMeta:quranMeta||null}}
 function darFocusFeedAppContext(){return darAppContentContext()}
 function darPremiumFeedAppContext(){return darAppContentContext()}
-function getCachedPosts(){const cur=getJson(CACHE_KEY,[]);if(Array.isArray(cur)&&cur.length)return cur;const legacy=getJson(CACHE_KEY_LEGACY,[]);return Array.isArray(legacy)?legacy:[]}
+function getCachedPosts(){const cur=getJson(CACHE_KEY,[]);if(Array.isArray(cur)&&cur.length)return cur;if(IS_STAGING_APP)return [];const legacy=getJson(CACHE_KEY_LEGACY,[]);return Array.isArray(legacy)?legacy:[]}
 function mergePostsLists(cached,loaded){const map=new Map();(Array.isArray(cached)?cached:[]).forEach(p=>{if(p&&p.id)map.set(String(p.id),p)});(Array.isArray(loaded)?loaded:[]).forEach(p=>{if(p&&p.id)map.set(String(p.id),p)});return [...map.values()]}
 function trimPostsCacheForQuota(list,max=POSTS_CACHE_QUOTA_MAX){return [...(Array.isArray(list)?list:[])].sort(comparePostsNewestFirst).slice(0,max)}
 function postFileSortRank(name){return postSeriesRank({id:name,_sourceFile:name,title:name})}
@@ -21443,7 +21447,7 @@ function postFileIsFresh(file,fileMap,cached){const e=fileMap[file.name];if(!e||
 function schedulePostsRender(immediate=false){const readerActive=()=>{try{return typeof readRoute==="function"&&readRoute().view==="bibliothek-reader"}catch(e){return false}};if(immediate){if(postsRenderTimer){clearTimeout(postsRenderTimer);postsRenderTimer=null}if(readerActive())return;try{if(document.getElementById("appView")&&typeof render==="function")render()}catch(e){}return}if(postsRenderTimer)return;postsRenderTimer=setTimeout(()=>{postsRenderTimer=null;if(readerActive())return;try{if(document.getElementById("appView")&&typeof render==="function")render()}catch(e){}},140)}
 function scheduleRefreshContent(opts={},delay=900){clearTimeout(refreshContentDebTimer);refreshContentDebTimer=setTimeout(()=>{refreshContentDebTimer=null;refreshContent(opts).catch(()=>{})},delay)}
 function renderPostsSyncBanner(){if(!postsSyncBusy||postsSyncSilent)return "";return `<div class="posts-sync-banner" role="status">${esc(postsSyncLabel||"Neue Beiträge werden synchronisiert…")}</div>`}
-function hydrateOfflineContent(){const cached=getCachedPosts();if(cached.length)applyPostsList(cached);const ids=new Set(DUAS.map(d=>String(d.id)));getJson(DUA_CACHE_KEY,[]).forEach(d=>{if(d&&d.id&&!ids.has(String(d.id))){DUAS.push(d);ids.add(String(d.id))}});normalizeLoadedDuas()}
+function hydrateOfflineContent(){const cached=getCachedPosts();if(cached.length)applyPostsList(cached);if(!IS_STAGING_APP){const ids=new Set(DUAS.map(d=>String(d.id)));getJson(DUA_CACHE_KEY,[]).forEach(d=>{if(d&&d.id&&!ids.has(String(d.id))){DUAS.push(d);ids.add(String(d.id))}})}normalizeLoadedDuas()}
 function persistOfflineLibrary(){try{setJson(OFFLINE_LIB_KEY,{posts:posts.length,duas:DUAS.length,updated:new Date().toISOString()})}catch(e){}syncOfflinePrecache()}
 async function syncOfflinePrecache(){if(!("serviceWorker" in navigator))return;try{const reg=await navigator.serviceWorker.ready;const urls=["/content/duas/duas.json","/content/quran/surahs.json","/content/quran-athar/de/001.json","/assets/site-analytics.js"];reg.active?.postMessage?.({type:"PRECACHE",urls})}catch(e){}}
 function quranSurahFile(id){return `/content/quran/${String(id).padStart(3,"0")}.json?v=laut-1`}
@@ -22472,41 +22476,38 @@ async function fetchPostFile(file){
 async function fetchWithTimeout(url,ms=POSTS_FETCH_TIMEOUT_MS){const ctrl=new AbortController();const timer=setTimeout(()=>ctrl.abort(),ms);try{return await fetch(url,{cache:"no-store",signal:ctrl.signal})}finally{clearTimeout(timer)}}
 async function fetchPostsIndexMeta(){
   const bust=Date.now();
-  // Android clean installs had no cached posts and staging contains only one.
-  // Read the published library for every test device, then layer unreleased
-  // staging entries on top by filename. This does not publish draft content.
-  const dirs=IS_STAGING_APP?["content/posts","content/staging/posts"]:[POSTS_DIR];
-  const results=await Promise.allSettled(dirs.map(async function(dir){
+  // Adult Test reads its five verified examples; visitors keep their index.
+  const dirs=IS_STAGING_APP?["content/staging/posts"]:[POSTS_DIR];
+  for(const dir of dirs){
     const urls=["/"+dir+"/posts-index.json?v="+bust,
       "https://raw.githubusercontent.com/"+REPO_OWNER+"/"+REPO_NAME+"/"+BRANCH+"/"+dir+"/posts-index.json?v="+bust];
-    const all=await Promise.allSettled(urls.map(async function(url){
+    for(const url of urls){
       try{
         const r=await fetchWithTimeout(url);
-        if(!r.ok)return [];
+        if(!r.ok)continue;
         const data=await r.json();
-        return data&&Array.isArray(data.files)?data.files:[]
-      }catch(e){return []}
-    }));
-    return mergePostFileLists(...all.map(r=>r.status==="fulfilled"?r.value:[]))
-      .map(file=>({...file,dir:dir}))
-  }));
-  const byName=new Map();
-  results.forEach(r=>{
-    if(r.status!=="fulfilled")return;
-    for(const f of r.value)if(f&&f.name)byName.set(f.name,f);
-  });
-  const merged=[...byName.values()].sort((a,b)=>a.name.localeCompare(b.name,"de"));
-  if(merged.length){
-    try{setJson(POSTS_INDEX_STALE_KEY,{files:merged,at:Date.now()})}catch(e){}
-    return merged
+        if(!data||!Array.isArray(data.files)||!data.files.length)continue;
+        const files=data.files.map(file=>({
+          name:file.name,sha:file.sha||"",
+          dir:IS_STAGING_APP&&file.dir==="content/posts"?"content/posts":dir
+        })).filter(file=>file.name&&file.name.endsWith(".md"))
+          .slice(0,IS_STAGING_APP?5:Infinity);
+        if(!files.length)continue;
+        try{setJson(POSTS_INDEX_STALE_KEY,{files:files,at:Date.now()})}catch(e){}
+        return files;
+      }catch(e){}
+    }
   }
   const stale=getJson(POSTS_INDEX_STALE_KEY,null);
-  if(stale&&Array.isArray(stale.files)&&stale.files.length)
-    return stale.files.map(f=>({...f,dir:f.dir||POSTS_DIR}));
+  if(stale&&Array.isArray(stale.files)&&stale.files.length &&
+     (!IS_STAGING_APP||stale.files.length<=5))
+    return stale.files.map(file=>({
+      name:file.name,sha:file.sha||"",dir:file.dir||POSTS_DIR
+    }));
   return null
 }
 async function fetchGithubPostFileList(){
- const dir=IS_STAGING_APP?"content/posts":POSTS_DIR;
+ const dir=POSTS_DIR;
  const response=await fetch("https://api.github.com/repos/"+REPO_OWNER+"/"+REPO_NAME+"/contents/"+dir+"?ref="+BRANCH,{cache:"no-store"});
  if(!response.ok)throw new Error("GitHub API "+response.status);
  const files=await response.json();
