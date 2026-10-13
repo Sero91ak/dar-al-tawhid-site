@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 "use strict";
-/* Android PWA browser smoke: the real Dar Test surface, never visitor/KIDS.
+/* Android PWA browser smoke: verifies restored post-unlock content hydration on the real test site.
    Runs after test Worker deploy using a fresh Android/touch browser context. */
 const fs=require("node:fs");
 const path=require("node:path");
