@@ -34,6 +34,18 @@ check(pwaSw.includes("CACHE_PREFIX='dar-al-tawhid-pwa-'"),"PWA uses dedicated ca
 check(pwaSw.includes("if(!u.pathname.startsWith('/pwa'))return"),"PWA worker rejects out-of-scope navigation");
 check(!pwaSw.includes("'/index.html'"),"PWA has no public website fallback");
 
+// iOS rule: browser links must render the WEBSITE, never the Android visitor PWA.
+// Do not disable the App Store WKWebView or Android PWA.
+check(router.includes("IOS_PUBLIC_WEBSITE_ONLY_V1"),"iOS visitor-PWA routing rule is installed");
+check(router.includes("isAppleMobileBrowserRequest(ua)"),"iOS browsers recognized independently of native shells");
+check(router.includes('appleMobileBrowser && (url.searchParams.get("pwa") === "1" || legacyPwaLaunch)'),"legacy iOS PWA root links are intercepted");
+check(router.includes('if (appleMobileBrowser) {')&&router.includes('"X-Dar-Surface": "ios-website-only"'),"iOS /pwa route redirects to website");
+check(router.includes("darIosWebsiteOnlyPwaGuardV1"),"desktop-class iPadOS fallback runs before PWA boot");
+check(pwaSw.includes("IOS_PWA_BLOCK_V1"),"legacy iOS cached visitor shell is bypassed");
+check(router.includes('if ((request.method === "GET" || request.method === "HEAD") && isRoot && nativeApp)'),"official App Store shell route preserved");
+check(router.includes('headers.set("X-Dar-Surface", "android-pwa-app")'),"Android PWA shell route preserved");
+
+
 check(router.includes('headers.set("X-Dar-Surface", "public-website")'),"public website has explicit surface header");
 check(router.includes('const target = new URL("/desktop-preview/", url.origin);'),"browser root resolves to public website shell");
 check(router.includes("isRoot && wantsPublicWebsite(request)"),"public root route remains active");
