@@ -104,3 +104,37 @@ body.qsource-body .qsource-page{
     :root{--ql-safe-header-offset:max(58px,env(safe-area-inset-top,0px))}
   }
 }
+
+/* Q_APP_CHROME_V1: identical fixed safe-area geometry on every numbered Q page.
+   Covers the toolbar and status band with an opaque background while scrolling. */
+@media (pointer:coarse), (max-width:699px) {
+  html:has(body.qsource-body),body.qsource-body{
+    max-width:100%;overscroll-behavior-x:none;
+  }
+  body.qsource-body .qsource-page{
+    padding-top:0!important;
+    min-width:0;
+  }
+  body.qsource-body .qsource-header{
+    position:sticky!important;
+    top:0!important;
+    z-index:90!important;
+    background:var(--rq-page)!important;
+    padding-top:calc(var(--ql-safe-header-offset) + 10px)!important;
+    padding-bottom:12px!important;
+    margin-top:0;
+    box-shadow:0 1px 0 var(--rq-line);
+  }
+  body.qsource-body::before{
+    content:"";position:fixed;inset:0 0 auto;
+    height:var(--ql-safe-header-offset);
+    background:var(--rq-page);z-index:89;pointer-events:none;
+  }
+  body.qsource-body .qsource-hero,body.qsource-body .qsource-section{min-width:0}
+  body.qsource-body .qsource-link{max-width:100%;min-width:0}
+  body.qsource-body .qsource-link-body{min-width:0;overflow-wrap:anywhere}
+}
+@media (min-width:700px) and (pointer:fine){
+  body.qsource-body .qsource-header{position:relative!important;top:auto!important}
+  body.qsource-body .qsource-page{padding-top:0!important}
+}
