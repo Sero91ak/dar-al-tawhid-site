@@ -2831,10 +2831,10 @@ html:not([data-view="today"]) .view.active{
  background:#173848!important;
 }
 #duaModal .dua-scene::before{background-image:var(--dua-art)!important;background-size:cover!important;background-position:center 52%!important;filter:saturate(1.03) brightness(.9)!important}
+/* Kids Quiz: age/topic local artwork instead of expiring preview URL. */
 #quizModal .quiz-scene{
- --quiz-art:url("https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/cbe2efa5-f245-41e4-9262-be656af8ffc7/c22155b0-3b92-4227-a372-cfdaf600c518/Single_standalone_cinematic_16_9_hero_illustration_for_a_pre.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiZDEzNTA0YmI5ZTBiNjNjMyIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTMzMDM2M30.RWZGx2UrVdXyvfYQRM-noI7t5EVNJPS9cvcn4fawl40")!important;
- background-image:linear-gradient(180deg,rgba(4,17,28,.01),rgba(4,17,28,.08) 45%,rgba(4,17,28,.56) 100%),var(--quiz-art)!important;
- background-size:cover!important;background-position:center 50%!important;background-repeat:no-repeat!important;
+ background-image:linear-gradient(180deg,rgba(4,17,28,.03),rgba(4,17,28,.12) 46%,rgba(4,17,28,.48) 100%),var(--quiz-art,url("/kids/assets/kids-art/quiz-courtyard-v11.jpg?v=18-clean"))!important;
+ background-size:cover!important;background-position:var(--quiz-art-position,center)!important;background-repeat:no-repeat!important;
 }
 
 /* Isolated KIDS Academy pilot entry: no change to the existing four home choices. */
