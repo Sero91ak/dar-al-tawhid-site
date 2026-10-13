@@ -13,6 +13,12 @@ Weiterarbeit: `kids-akademie/NEXT_TASKS.md`, `kids-akademie/QUALITY_AUDIT_V38.md
 
 DĀR AL TAWḤĪD KIDS AKADEMI. Stand vom 13. Oktober 2026. Alle 208 Slots haben auf diesem Zweig eine Lektion mit drei Altersfassungen. Die Meldung „97/208“ gehört zum Commit `3bd743a0b0`. Der Strukturentwurf 98–208 folgte in `21f1082990`. Danach wurden die Kindersätze der Slots 98–208 so geschrieben, dass die Gruppen 4–5 und 6–8 den Vers, den Alltag und die Übung lernen. Die Quellengrenzen bleiben im internen Quellenregister und in sourceAudit dokumentiert. Das ist keine wissenschaftliche Freigabe und kein Live-Deploy.
 
+## Neu: erste unabhängige Quellen-Teilabgleiche
+
+- **Lektion 98 (Mobbing):** Qurʾān 49:11, 16:90 und 49:10 anhand indexierter Islamweb-Ibn-Kaṯīr-Auszüge und Dorar-Tafsīr quellenübergreifend verglichen. Der direkte Öffnungskanal für die Islamweb-Seite war hier nicht zugänglich. Der vollständige Primärtext wurde daher nicht erneut gelesen. Die Grenze zwischen 49:10 und zusätzlicher Kinderschutzregel wurde präzisiert. Siehe `kids-akademie/research/INDEPENDENT_REVIEW_98.md`.
+- **Fiqh-Slot 106 (Gebetskleidung):** indexierter Ibn-Qudāmah-Text aus `al-Mughnī` (Bd. 1, S. 401, Islamweb Inhalt `15/783`) und Tafsīr Ibn Kaṯīr zu 74:4 verglichen. Kindgerecht klargestellt, dass gewöhnlicher Staub/Flecken nicht mit jeder rituellen `naǧāsah` gleichzusetzen sind. **`fiqhHumanReviewNeeded=true` bleibt**, keine Fiqh-Freigabe. Siehe `kids-akademie/research/INDEPENDENT_FIQH_REVIEW_106.md`.
+- **Strenger Daten-Audit:** Der exakte `.cjs`-Prüfcode wurde anhand der aktuellen GitHub-Dateien in einer JavaScript-Prüfumgebung mit schreibgeschütztem Dateizugriff ausgeführt: **111 Lektionen, 333 Altersfassungen, 1.407 Voice-Texte, 2.109 Textverwendungen, 0 beanstandete sichtbare QA-Formulierungen bzw. Verweisfehler.** Ein echter Node-Prozess im Projekt sowie Browser-Regressionen sind weiterhin durchzuführen. Keine religiöse Freigabe.
+
 ## Einstieg
 
 1. Arbeitszweig: `cursor/kids-akademie-208-fa8f`
