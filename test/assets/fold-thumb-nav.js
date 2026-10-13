@@ -100,19 +100,21 @@
     } catch (error) {}
   }
 
+  // iOS rotation: visualViewport can retain the previous orientation.
+  // Follow the layout viewport; only use visualViewport for keyboard detection.
   function measure() {
-    if (global.DarAdaptiveLayout && typeof global.DarAdaptiveLayout.measure === "function") {
-      try {
-        return global.DarAdaptiveLayout.measure();
-      } catch (error) {}
-    }
-    var viewport = global.visualViewport;
-    var clientWidth = document.documentElement ? document.documentElement.clientWidth : 0;
-    var clientHeight = document.documentElement ? document.documentElement.clientHeight : 0;
+    var el = document.documentElement;
+    var w = Math.round((el && el.clientWidth) || global.innerWidth || 0);
+    var h = Math.round((el && el.clientHeight) || global.innerHeight || 0);
+    var vv = global.visualViewport;
+    var input = document.activeElement;
+    var keyboard = !!(vv && h && vv.height && h - vv.height > 140 &&
+      input && (input.isContentEditable ||
+        /^(INPUT|TEXTAREA|SELECT)$/.test(input.tagName || "")));
     return {
-      width: Math.round((viewport && viewport.width) || clientWidth || global.innerWidth || 0),
-      height: Math.round((viewport && viewport.height) || clientHeight || global.innerHeight || 0),
-      offsetTop: Math.round((viewport && viewport.offsetTop) || 0)
+      width: w, height: h,
+      offsetTop: vv && typeof vv.offsetTop === "number" ? Math.round(vv.offsetTop) : 0,
+      keyboard: keyboard
     };
   }
 
@@ -122,7 +124,7 @@
     var width = Number(metrics && metrics.width) || 0;
     var height = Number(metrics && metrics.height) || 0;
     if (width < SIDE_MIN_WIDTH || height < SIDE_MIN_HEIGHT) return false;
-    if (root.classList.contains("adaptive-keyboard-open")) return false;
+    if (root.classList.contains("adaptive-keyboard-open") || !!(metrics && metrics.keyboard)) return false;
     if (document.body.classList.contains("is-ilm-chat-route")) return false;
     return true;
   }
@@ -358,11 +360,39 @@
     burstTimers = [];
   }
 
+  var settleTimer = 0;
+  var lastViewportShape = "";
+  function shape() {
+    var el = document.documentElement;
+    return ((el && el.clientWidth) || global.innerWidth || 0) + "x" +
+      ((el && el.clientHeight) || global.innerHeight || 0);
+  }
   function scheduleBurst() {
     clearBurst();
-    [0, 180, 520, 980].forEach(function (delay) {
+    if (settleTimer) global.clearTimeout(settleTimer);
+    root.classList.add("dar-test-nav-rotating");
+    schedule();
+    [80, 180, 360, 650, 960].forEach(function (delay) {
       burstTimers.push(global.setTimeout(schedule, delay));
     });
+    settleTimer = global.setTimeout(function () {
+      root.classList.remove("dar-test-nav-rotating");
+      settleTimer = 0;
+    }, 1040);
+  }
+  function onViewportResize() {
+    var next = shape();
+    if (next !== lastViewportShape) {
+      var oldShape = lastViewportShape.split("x").map(Number);
+      var newShape = next.split("x").map(Number);
+      lastViewportShape = next;
+      if (oldShape.length === 2 && oldShape[0] && oldShape[1] &&
+          (oldShape[0] >= oldShape[1]) !== (newShape[0] >= newShape[1])) {
+        scheduleBurst();
+        return;
+      }
+    }
+    schedule();
   }
 
   function start() {
@@ -372,14 +402,21 @@
     global.addEventListener("dar:layoutchange", schedule);
     global.addEventListener("dar:view-rendered", schedule);
     global.addEventListener("dar:navpositionchange", schedule);
-    global.addEventListener("resize", schedule, { passive: true });
+    lastViewportShape = shape();
+    global.addEventListener("resize", onViewportResize, { passive: true });
     global.addEventListener("orientationchange", scheduleBurst, { passive: true });
+    if (global.screen && global.screen.orientation && typeof global.screen.orientation.addEventListener === "function") {
+      global.screen.orientation.addEventListener("change", scheduleBurst, { passive: true });
+    }
     global.addEventListener("pageshow", scheduleBurst, { passive: true });
     global.addEventListener("popstate", schedule, { passive: true });
+    document.addEventListener("visibilitychange", function () {
+      if (!document.hidden) scheduleBurst();
+    });
     global.addEventListener("hashchange", schedule, { passive: true });
 
     if (global.visualViewport) {
-      global.visualViewport.addEventListener("resize", schedule, { passive: true });
+      global.visualViewport.addEventListener("resize", onViewportResize, { passive: true });
     }
 
     global.addEventListener("scroll", onScrollActivity, { passive: true });
