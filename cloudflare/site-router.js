@@ -1172,10 +1172,16 @@ export default {
           if (canonicalSourcePath && request.method === "GET" && asset.ok &&
               /text\/html/i.test(asset.headers.get("Content-Type") || "")) {
             let documentHtml = await asset.text();
+            // Set shell mode before styles load: third-party in-app browsers
+            // already render their own URL/status toolbar outside our document.
+            if (!documentHtml.includes('data-q-shell="v2"')) {
+              const shellMode = '<script data-q-shell="v2">(function(){var u=navigator.userAgent||"";var p=window.matchMedia&&window.matchMedia("(display-mode: standalone)").matches;var n=navigator.standalone===true;var a=/DarAlTawhid-iOS|DarAlTawhidOfficialIOS|DarAlTawhidAndroid/.test(u)||window.DAR_IOS_NATIVE_APP===true;document.documentElement.setAttribute("data-q-shell",p||n||a?"installed":"browser")})();</script>';
+              documentHtml = documentHtml.replace(/<head[^>]*>/i, function(tag){return tag+shellMode});
+            }
             if (!documentHtml.includes("q-royal-manuscript-v42.css") &&
                 /<\/head>/i.test(documentHtml)) {
               documentHtml = documentHtml.replace(/<\/head>/i,
-                '<link rel="stylesheet" href="/assets/q-royal-manuscript-v42.css?v=qapp-20261013-1" data-q-royal="v42">' +
+                '<link rel="stylesheet" href="/assets/q-royal-manuscript-v42.css?v=qapp-20261013-2" data-q-royal="v42">' +
                 '<script src="/assets/q-royal-manuscript-v42.js?v=qapp-20261013-1" defer><\\/script>'.replace('<\\/script>', '</script>') +
                 '<script src="/assets/q-source-app-view.js?v=20261013-1" defer></script>' +
                 '</head>');
