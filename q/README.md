@@ -70,3 +70,12 @@ Dieser Ordner ist die zentrale Ablage für alle nummerierten Quellenlinks.
 - `q/mawlid-bidah/` ist ein Themen-Hub und kein nummerierter Quellenlink.
 
 Neue nummerierte Quellenlinks gehören immer in `q/<nummer>/`.
+
+## Q-Einzelansicht und privates Quellenregister (13.10.2026)
+
+- Geteilte Belege `/q/41/`, `/q/42/` usw. sind **Einzelansichten**. Sie dürfen weder ein „Zur Quellenbibliothek“-Element noch „vorherige/nächste Q“-Links anzeigen.
+- Eine nackte URL `/q/` führt **nicht** zur vollständigen Übersicht.
+- Beim Öffnen aus der installierten App/PWA bleibt ein Q-Beleg im **gleichen WebView-/App-Fenster**. Im Desktop-Browser gelten normale Webnavigation und Browser-Zoom.
+- Mobile und Tablet: feste, opake Kopfzeile mit korrekter Safe-Area; der Inhalt darf nicht durch die Status-/Kopfzeile scheinen. Gestenzoom nur in der Quellenansicht eingeschränkt, nicht global für die Desktop-Webseite.
+- Die gesamte Sammlung unter `/quellen/` ist als **Eigentümer-Übersicht** vorgesehen. **Sicherheitsstatus:** `noindex` und fehlende Rücklinks sind kein Zugriffsschutz. Ein Cloudflare-Access-Pfadschutz mit Ersteller-Login sowie eine Prüfung öffentlich gespeicherter Registerdaten sind separat erforderlich. Nicht als privat/authentifiziert ausgeben, bevor beides eingerichtet und getestet ist.
+- Präzise Quellen, arabischer Originaltext, Primärnachweise und vorhandene Q-Nummern dürfen bei UI-Korrekturen nicht verändert werden.
