@@ -39,5 +39,18 @@
     "approvedBy": null,
     "checkedAt": "2026-10-13"
   },
-  "editorialNotes": "Isolierter Recherchefortschritt, keine Q-Nummer vergeben, keine Quelle veröffentlicht. Vor approved:true vollständige unabhängige Isnād-/Šarḥ- und Linkfragment-Prüfung, Staging/Client-QA und Kollisionstest erforderlich. Originalpost und Main bleiben unverändert."
+  "editorialNotes": "Isolierter Recherchefortschritt, keine Q-Nummer vergeben, keine Quelle veröffentlicht. Vor approved:true vollständige unabhängige Isnād-/Šarḥ- und Linkfragment-Prüfung, Staging/Client-QA und Kollisionstest erforderlich. Originalpost und Main bleiben unverändert. 14.10.2026: Strukturvergleich der drei auf Islamweb/Dorar offen angezeigten Isnād-Wege durchgeführt. Alle laufen über Ḏarr → Yusayʿ → an-Nuʿmān zusammen; at-Tirmiḏī sagt ausdrücklich 'ولا نعرفه إلا من حديث ذر'. Keine drei unabhängigen Gesamtketten behaupten. Keine Status-/Freigabeaufwertung.",
+  "primaryIsnadCrosscheck": {
+    "checkedAt": "2026-10-14",
+    "source1": "Islamweb, Sunan at-Tirmidhi, Kitab ad-Da'awat, 5/426, Nr. 3372: Ahmad ibn Mani' > Marwan ibn Mu'awiyah > al-A'mash > Dharr > Yusay' > al-Nu'man ibn Bashir > Prophet",
+    "source2": "Dorar, Usul al-Hadith, Abu Dawud 1479 (2/76): Hafs ibn Umar > Shu'bah > Mansur > Dharr > Yusay' al-Hadrami > al-Nu'man ibn Bashir > Prophet",
+    "source3": "Dorar, Usul al-Hadith, Ibn Majah 3828 (2/1258): Ali ibn Muhammad > Waki' > al-A'mash > Dharr ibn Abd Allah > Yusay' al-Kindi > al-Nu'man ibn Bashir > Prophet",
+    "observedConvergence": "The three listed chains converge at Dharr -> Yusay' -> al-Nu'man. At-Tirmidhi expressly says 'wa la na'rifuhu illa min hadith Dharr'; they must not be called three wholly independent companion routes.",
+    "sourceGrade": "At-Tirmidhi's own wording: hadha hadith hasan sahih. Dorar displays Ibn al-Mulaqqin's verdict sahih, Ma tamass ilayhi al-hajah p.95; this is attributed grading, not an independent grading by this reviewer.",
+    "referenceUrls": [
+      "https://www.islamweb.net/ar/library/content/2/3294/",
+      "https://dorar.net/h/tYcgoakK?osoul=1"
+    ],
+    "limitations": "Structural comparison of displayed isnad texts only. No full narrator-by-narrator jarh wa-ta'dil verification and no verified earliest direct sharh. Keep review.isnadChecked=false, approved=false."
+  }
 }
