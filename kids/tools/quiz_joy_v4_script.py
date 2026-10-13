@@ -15,7 +15,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 QUIZ = ROOT / "kids" / "data" / "quiz-kids.json"
-REVISION = "quiz-joy-serhat-v4-20261013"
+REVISION = "quiz-academy-praise-v4-20261013"
 AGE_BANDS = ("4-6", "7-8", "9-10")
 
 YES_NO_GUIDANCE = (
@@ -39,48 +39,48 @@ OLDER_OPEN = (
 )
 SUCCESS = {
     "4-6": (
-        "Sehr schön! Du hast gut aufgepasst.",
-        "Prima! Das hast du richtig erkannt.",
-        "Gut gemacht! Du lernst immer mehr.",
-        "Ja, das ist richtig. Schön überlegt!",
-        "Sehr gut! Du hast die passende Antwort gewählt.",
+        "Mā schāʾ Allāh! Das heißt: Was Allah gewollt hat. Sehr gut gemacht!",
+        "Allāhumma bārik! O Allah, schenke Segen. Du hast richtig geantwortet!",
+        "Mā schāʾ Allāh! Möge Allah dein Wissen segnen. Du lernst immer mehr!",
+        "Al-ḥamdu lillāh! Alles Lob gebührt Allah. Das hast du gut erkannt!",
+        "Mā schāʾ Allāh! Deine Antwort ist richtig. Schön, wie du dazulernst!",
     ),
     "7-8": (
-        "Das stimmt. Gut nachgedacht!",
-        "Richtig erkannt! Sehr gut.",
-        "Prima! Du hast aufmerksam zugehört.",
-        "Gut gemacht! Genau diese Antwort passt.",
-        "Sehr schön! Du hast die Frage verstanden.",
+        "Mā schāʾ Allāh! Das bedeutet: Was Allah gewollt hat. Dein Wissen wächst!",
+        "Allāhumma bārik! O Allah, schenke Segen. Du hast gut nachgedacht!",
+        "Mā schāʾ Allāh! Möge Allah dein Wissen segnen. Richtig geantwortet!",
+        "Al-ḥamdu lillāh! Alles Lob gebührt Allah. Du lernst mit jeder Frage mehr!",
+        "Mā schāʾ Allāh! Du hast aufmerksam überlegt. Mach weiter so!",
     ),
     "9-10": (
-        "Das ist richtig. Gut überlegt.",
-        "Sehr gut. Diese Antwort passt.",
-        "Richtig erkannt! Mach weiter so.",
-        "Gut durchdacht. Das stimmt.",
-        "Sehr schön. Du hast die passende Antwort gefunden.",
+        "Mā schāʾ Allāh! Du lernst den Dīn, deine Religion, immer besser kennen!",
+        "Allāhumma bārik! O Allah, schenke Segen. Du hast die passende Antwort gefunden!",
+        "Mā schāʾ Allāh! Möge Allah dein Wissen segnen. Gut durchdacht!",
+        "Al-ḥamdu lillāh! Alles Lob gebührt Allah. Du vertiefst dein Wissen!",
+        "Mā schāʾ Allāh! Du hast richtig entschieden. Vertiefe dein Wissen weiter!",
     ),
 }
 RETRY = {
     "4-6": (
-        "Das war noch nicht richtig. Versuch es noch einmal in Ruhe.",
-        "Macht nichts, du darfst noch einmal nachdenken.",
-        "Schau dir die Antworten noch einmal an. Probiere es wieder.",
-        "Noch nicht ganz. Höre aufmerksam zu und versuche es erneut.",
-        "Nimm dir Zeit. Du kannst noch einmal wählen.",
+        "Noch nicht ganz. Bismi-llāh bedeutet: Im Namen Allahs. Versuch es noch einmal!",
+        "In schāʾ Allāh – wenn Allah will – klappt es beim nächsten Versuch. Denk in Ruhe nach!",
+        "Du lernst mit jedem Versuch. Hör noch einmal genau hin!",
+        "Das war noch nicht richtig. Nimm dir Zeit und versuche es wieder!",
+        "Noch einmal versuchen, in schāʾ Allāh. Du darfst dir Zeit lassen!",
     ),
     "7-8": (
-        "Noch nicht richtig. Schau dir die Antworten noch einmal an.",
-        "Überlege noch einmal. Du darfst es erneut versuchen.",
-        "Diese Antwort passt noch nicht. Nimm dir Zeit.",
-        "Versuche es noch einmal. Hör gut auf die Frage.",
-        "Denk noch einmal in Ruhe nach.",
+        "Kein Problem. Bismi-llāh! Schau dir die Antworten noch einmal genau an.",
+        "In schāʾ Allāh, beim nächsten Versuch klappt es. Höre gut auf die Frage.",
+        "Diese Antwort passt noch nicht. Überlege in Ruhe und versuche es erneut.",
+        "Nicht ganz richtig. Du lernst weiter und gibst nicht auf.",
+        "In schāʾ Allāh – wenn Allah will. Geh die Antworten noch einmal durch.",
     ),
     "9-10": (
-        "Diese Antwort passt noch nicht. Überlege noch einmal.",
-        "Vergleiche die Antworten erneut und versuche es noch einmal.",
-        "Das war noch nicht richtig. Denk in Ruhe darüber nach.",
-        "Lass dir einen Moment Zeit und wähle erneut.",
-        "Schau noch einmal genau auf die Fragestellung.",
+        "Das war noch nicht richtig. Bismi-llāh, überlege noch einmal.",
+        "In schāʾ Allāh, du kannst die passende Antwort durch Nachdenken finden.",
+        "Vergleiche die Möglichkeiten genau. Wissen braucht Geduld.",
+        "Schau noch einmal auf die Frage und prüfe deine Antwort.",
+        "Du lernst auch, wenn du einen Fehler erkennst. Versuche es erneut.",
     ),
 }
 
