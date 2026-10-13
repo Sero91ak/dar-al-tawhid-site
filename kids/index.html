@@ -259,7 +259,7 @@ var(--quiz-art,linear-gradient(180deg,#315c78 0%,#5a8f8a 48%,#ba8b5f 100%));back
 .quiz-answer.correct{background:rgba(82,196,132,.15);border-color:rgba(82,196,132,.36);animation:quizCorrectPop .24s ease-out}
 .quiz-answer.wrong{background:rgba(235,83,83,.15);border-color:rgba(235,83,83,.36)}
 .quiz-answer.reveal{background:rgba(226,189,114,.13);border-color:rgba(226,189,114,.28)}
-.quiz-feedback{text-align:center;min-height:48px;margin:13px 0 2px;font-size:15px;font-weight:900}
+.quiz-feedback{text-align:center;min-height:48px;margin:13px auto 2px;font-size:clamp(14px,2.5vw,17px);line-height:1.48;font-weight:850;max-width:min(100%,680px);overflow-wrap:break-word;text-wrap:pretty}
 .quiz-feedback.good{color:#caffe0}.quiz-feedback.bad{color:#ffc3c3}
 .quiz-source{min-height:18px;text-align:center;color:var(--soft);font-size:10px;line-height:1.4;margin:2px 8px 9px}
 .quiz-source strong{color:var(--sage)}
@@ -6189,14 +6189,11 @@ function chooseQuizAnswer(index,button){
     var retryMessage=quizAcademyRetryText(q);
     document.getElementById("quizFeedback").textContent=retryMessage;
     quizSpeak(quizV4Text(q,"retryAudioText",q.retry));
-    setTimeout(function(){button.classList.remove("wrong");},1300);
-    // Keep the longer age-appropriate encouragement readable on small screens.
+    // Islamic academy encouragement stays visible until the next answer;
+    // do not silently erase teaching text while a child is still reading it.
     setTimeout(function(){
-      var feedback=document.getElementById("quizFeedback");
-      if(feedback&&feedback.classList.contains("bad")&&feedback.textContent===retryMessage){
-        feedback.textContent="";
-      }
-    },6500);
+      if(button&&button.isConnected)button.classList.remove("wrong");
+    },1100);
   }
 }
 function renderQuizFinish(){
