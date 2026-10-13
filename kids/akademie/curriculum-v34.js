@@ -175,7 +175,7 @@ const additions={
       "text": "Ibn ʿAbbās überlieferte die Geschichte, dass Ibrāhīm die Kaʿbah baute und Ismāʿīl ihm die Steine reichte, während beide Allah baten, das Werk anzunehmen. (Sinngemäßer Auszug aus einer längeren Überlieferung)"
     },
     "sourceAudit": {
-      "hadithUrl": "https://dorar.net/hadith/sharh/1884",
+      "hadithUrl": "https://dorar.net/h/RIbF20cQ?osoul=1",
       "hadithNumber": "3364",
       "narrator": "ʿAbdullāh ibn ʿAbbās",
       "authenticity": "Ṣaḥīḥ",
@@ -600,7 +600,7 @@ const additions={
   }
 };
 for(const [id,l] of Object.entries(additions)){
- if(prior[id]||!l.quran||!l.hadith||!l.sourceAudit?.hadithUrl?.startsWith("https://dorar.net/hadith/sharh/")||l.voiceApproved!==false)throw Error("V34 invalid "+id);
+ if(prior[id]||!l.quran||!l.hadith||!l.sourceAudit?.hadithUrl?.startsWith("https://dorar.net/")||l.voiceApproved!==false)throw Error("V34 invalid "+id);
  for(const a of ["4-5","6-8","9-10"])if(l.ageText?.[a]?.lines?.length!==4||l.questions?.[a]?.length<(a==="4-5"?2:3))throw Error("V34 age "+id+a);
 }
 window.DARKidsAcademyCurriculum=Object.freeze({...prior,...additions});
