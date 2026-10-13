@@ -39,3 +39,16 @@ Nicht erneut gelesen:
 - `https://al-maktaba.org/book/31874/32965` HTTP 403. Der frühere lokale Seitenfang mit vokalisiertem 14:7 wird deshalb nicht als neuer Nachweis verwendet. Die Lektion benutzt den unvokalisierten Ibn-Kaṯīr-Druck.
 
 Technische Tests dieses Pakets, ohne Audio und ohne Deploy: Ledger, Sequenzsperre, Roadmap, V22–V27, V9, Schulfortschritt, Begriffshelfer, Audio-Warteschlange, Creator, Stimm-Audit. Alle in diesem Lauf grün. Keine Freigabe.
+
+## 2026-10-13 · Paket V37, Slots 95–97
+
+Gezählt danach: 97 Lektions-IDs, 96 Archivmodule, `sidq` weiter außerhalb. Dieselbe Ausnahme wie 90 zu 89.
+
+Gelesen, HTTP 200, Islamweb, Tafsīr Ibn Kaṯīr:
+
+- Inhalt 49/1988: Sūrat an-Nās, sechs Verse, vokalisiert.
+- Inhalt 49/1986: ʿĀʾišah, der Prophet las die beiden Schutzsuren bei Beschwerden über sich. Al-Buḫārī und Muslim ohne Nummer. Hauchen und Streichen nicht unterrichtet.
+- Inhalt 49/1137: 20:45 und 20:46 im unvokalisierten Druck. Kein Hadith auf der Seite. 20:47 nicht nachgespielt.
+- Inhalt 49/1155: 20:114 vollständig, unvokalisiert. Kein Hadith übernommen. Der Satz über die Offenbarung ist keine Hausaufgabenregel.
+
+Nicht gelesen für Slot 98 und die folgenden Slots. Keine Audioerzeugung.

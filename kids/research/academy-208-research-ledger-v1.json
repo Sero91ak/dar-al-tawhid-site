@@ -39,10 +39,10 @@
   ],
   "counts": {
     "slots": 208,
-    "implemented": 94,
-    "remaining": 114,
-    "explicitAge": 60,
-    "sourceAuditMetadata": 60,
+    "implemented": 97,
+    "remaining": 111,
+    "explicitAge": 63,
+    "sourceAuditMetadata": 63,
     "externallyChecked": 6
   },
   "lessons": [
@@ -4187,127 +4187,157 @@
       "slot": 95,
       "week": 24,
       "weekday": "Donnerstag",
-      "lessonId": null,
+      "lessonId": "quran-surat-an-nas-kennenlernen",
       "topic": "Sūrat an-Nās kennenlernen",
       "pillar": "quran",
-      "status": "editorial-outline-locked",
-      "sourceAuditStatus": "not-reviewed",
-      "threeAgeStructured": false,
+      "status": "in-feature-branch-draft",
+      "sourceAuditStatus": "primary-page-read-islamweb-2026-10-13",
+      "threeAgeStructured": true,
       "childUnlocked": false,
       "voiceApproved": false,
-      "classroomScenario": "Einen Vers mit echter Rezitation langsam wiederholen",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: einen Vers mit echter Rezitation langsam wiederholen.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: einen Vers mit echter Rezitation langsam wiederholen.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: einen Vers mit echter Rezitation langsam wiederholen.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
+      "lessonTitle": "Qurʾān · Sūrat an-Nās",
+      "curriculumSource": "kids/akademie/curriculum-v37.js",
+      "quran": {
+        "surah": 114,
+        "ayah": 1,
+        "label": "Sūrat an-Nās · 114:1–6",
+        "arabic": "قُلْ أَعُوذُ بِرَبِّ النَّاسِ مَلِكِ النَّاسِ إِلَهِ النَّاسِ مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ مِنَ الْجِنَّةِ وَالنَّاسِ",
+        "meaning": "Sinngemäß nach dem vokalisierten Druck der Tafsīr-Seite: Sprich: Ich suche Schutz beim Herrn der Menschen, dem König der Menschen, dem Gott der Menschen, vor dem Übel des Einflüsterers, der sich zurückzieht, der in die Brüste der Menschen einflüstert, aus den Jinn und den Menschen.",
+        "excerpt": false
       },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "hadith": {
+        "source": "Tafsīr Ibn Kaṯīr, Abschnitt über den Vorzug der beiden Schutzsuren · ʿĀʾišah · al-Buḫārī und Muslim ohne gedruckte Nummer",
+        "meaning": "Die Seite berichtet, der Prophet ﷺ habe die beiden Schutzsuren über sich selbst gelesen, wenn es ihm schlecht ging. Al-Buḫārī und Muslim werden genannt, ohne Nummer."
+      },
+      "hadithUrl": "https://www.islamweb.net/ar/library/content/49/1986",
+      "sourceAudit": {
+        "hadithUrl": "https://www.islamweb.net/ar/library/content/49/1986",
+        "hadithNumber": null,
+        "narrator": "ʿĀʾišah",
+        "authenticity": "Die Seite nennt al-Buḫārī über ʿAbdullāh ibn Yūsuf und Muslim über Yaḥyā ibn Yaḥyā. Eine Nummer steht dort nicht.",
+        "quranReference": "114:1-6",
+        "quranUrl": "https://www.islamweb.net/ar/library/content/49/1988",
+        "quranTextType": "complete-surah-as-printed",
+        "hadithMeaningIsParaphrase": true,
+        "verifiedDate": "2026-10-13",
+        "dorarReRead": false,
+        "numberUnverified": true,
+        "note": "Die Klasse spricht die Bedeutung. Eine echte Rezitation wird nicht synthetisch erzeugt und in diesem Paket nicht abgespielt. Das leichte Hauchen und das Streichen mit der Hand aus dem Krankheitsbericht werden nicht als Kinderübung übernommen."
+      },
+      "ageGroupsWithExplicitScripts": [
+        "4-5",
+        "6-8",
+        "9-10"
+      ],
+      "quizGroups": [
+        "4-5",
+        "6-8",
+        "9-10"
+      ]
     },
     {
       "slot": 96,
       "week": 24,
       "weekday": "Freitag",
-      "lessonId": null,
+      "lessonId": "sirah-musa-und-mut",
       "topic": "Mūsā عليه السلام und Mut",
       "pillar": "sirah",
-      "status": "editorial-outline-locked",
-      "sourceAuditStatus": "not-reviewed",
-      "threeAgeStructured": false,
+      "status": "in-feature-branch-draft",
+      "sourceAuditStatus": "primary-page-read-islamweb-2026-10-13",
+      "threeAgeStructured": true,
       "childUnlocked": false,
       "voiceApproved": false,
-      "classroomScenario": "Von einer belegten Begebenheit über Mut lernen",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: von einer belegten Begebenheit über Mut lernen.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: von einer belegten Begebenheit über Mut lernen.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: von einer belegten Begebenheit über Mut lernen.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
+      "lessonTitle": "Sīrah · Mūsā und Mut",
+      "curriculumSource": "kids/akademie/curriculum-v37.js",
+      "quran": {
+        "surah": 20,
+        "ayah": 45,
+        "label": "Sūrat Ṭā-Hā · 20:45–46",
+        "arabic": "قالا ربنا إننا نخاف أن يفرط علينا أو أن يطغى قال لا تخافا إنني معكما أسمع وأرى",
+        "meaning": "Sinngemäß nach dem Druck der Seite: Sie sagten: Unser Herr, wir fürchten, dass er gegen uns übergreift oder übertritt. Er sagte: Fürchtet euch nicht. Ich bin mit euch beiden, Ich höre und sehe.",
+        "excerpt": false
       },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "hadith": {
+        "source": "Auf der gelesenen Ibn-Kaṯīr-Seite zu 20:45–46 steht kein Hadith",
+        "meaning": "Diese Stunde hat keinen Hadith. Mut wird nur aus den beiden Versen erklärt."
+      },
+      "hadithUrl": "https://www.islamweb.net/ar/library/content/49/1137",
+      "sourceAudit": {
+        "hadithUrl": "https://www.islamweb.net/ar/library/content/49/1137",
+        "hadithNumber": null,
+        "narrator": null,
+        "authenticity": "Kein Hadith auf dieser Seite gelesen.",
+        "quranReference": "20:45-46",
+        "quranUrl": "https://www.islamweb.net/ar/library/content/49/1137",
+        "quranTextType": "two-ayahs-as-printed-without-tashkeel",
+        "hadithMeaningIsParaphrase": true,
+        "verifiedDate": "2026-10-13",
+        "dorarReRead": false,
+        "numberUnverified": true,
+        "note": "Vers 20:47 steht auf derselben Seite und wird nicht nachgespielt. Keine Zusage, dass einem Kind nichts Böses geschehen kann. Angst darf gesagt werden."
+      },
+      "ageGroupsWithExplicitScripts": [
+        "4-5",
+        "6-8",
+        "9-10"
+      ],
+      "quizGroups": [
+        "4-5",
+        "6-8",
+        "9-10"
+      ]
     },
     {
       "slot": 97,
       "week": 25,
       "weekday": "Montag",
-      "lessonId": null,
+      "lessonId": "dua-vor-dem-lernen-um-hilfe-bitten",
       "topic": "Vor dem Lernen um Hilfe bitten",
       "pillar": "dua",
-      "status": "editorial-outline-locked",
-      "sourceAuditStatus": "not-reviewed",
-      "threeAgeStructured": false,
+      "status": "in-feature-branch-draft",
+      "sourceAuditStatus": "primary-page-read-islamweb-2026-10-13",
+      "threeAgeStructured": true,
       "childUnlocked": false,
       "voiceApproved": false,
-      "classroomScenario": "Eine religiös zulässige Bitte in eigenen Worten formulieren",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: eine religiös zulässige Bitte in eigenen Worten formulieren.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: eine religiös zulässige Bitte in eigenen Worten formulieren.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: eine religiös zulässige Bitte in eigenen Worten formulieren.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
+      "lessonTitle": "Duʿāʾ · Vor dem Lernen bitten",
+      "curriculumSource": "kids/akademie/curriculum-v37.js",
+      "quran": {
+        "surah": 20,
+        "ayah": 114,
+        "label": "Sūrat Ṭā-Hā · 20:114",
+        "arabic": "فتعالى الله الملك الحق ولا تعجل بالقرآن من قبل أن يقضى إليك وحيه وقل رب زدني علما",
+        "meaning": "Sinngemäß nach dem Druck: Erhaben ist Allah, der wahre König. Und übereile dich nicht mit dem Qurʾān, bevor seine Offenbarung zu dir abgeschlossen ist. Und sprich: Mein Herr, mehre mich an Wissen.",
+        "excerpt": false
       },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "hadith": {
+        "source": "Auf der gelesenen Ibn-Kaṯīr-Seite zu 20:114 steht kein eigener Hadith für diese Bitte",
+        "meaning": "Die Lernbitte ist der Schlussteil des Verses. Ein Hadith wurde auf dieser Seite nicht als Beleg übernommen."
+      },
+      "hadithUrl": "https://www.islamweb.net/ar/library/content/49/1155",
+      "sourceAudit": {
+        "hadithUrl": "https://www.islamweb.net/ar/library/content/49/1155",
+        "hadithNumber": null,
+        "narrator": null,
+        "authenticity": "Kein Hadith auf dieser Seite als Beleg gelesen.",
+        "quranReference": "20:114",
+        "quranUrl": "https://www.islamweb.net/ar/library/content/49/1155",
+        "quranTextType": "complete-ayah-as-printed-without-tashkeel",
+        "hadithMeaningIsParaphrase": true,
+        "verifiedDate": "2026-10-13",
+        "dorarReRead": false,
+        "numberUnverified": true,
+        "note": "Der Satz über das Nicht-Übereilen des Qurʾān vor Abschluss der Offenbarung wird nicht als Hausaufgabenregel an Kinder gerichtet. Die lernbare Bitte ist der Schlussteil."
+      },
+      "ageGroupsWithExplicitScripts": [
+        "4-5",
+        "6-8",
+        "9-10"
+      ],
+      "quizGroups": [
+        "4-5",
+        "6-8",
+        "9-10"
+      ]
     },
     {
       "slot": 98,

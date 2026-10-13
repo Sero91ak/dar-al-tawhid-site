@@ -17,19 +17,19 @@ DĀR AL TAWḤĪD KIDS AKADEMI. Stand vom 13. Oktober 2026. Diese Datei beschrei
 Gezählt mit `node kids/tools/build-akademie-handover-status-v1.cjs` gegen Jahresplan, Recherche-Ledger und `kids/unterrichtsarchiv.html`:
 
 - 208 Unterrichtsslots im Jahresplan `kids/data/academy-year-52weeks-v1.json`.
-- 94 Slots haben eine `lessonId` (Slots 1–94). Davon sind 12 Altersfassungen in `kids/akademie/curriculum-v36.js` neu geschrieben (Slots 91–94).
-- 114 Slots (95–208) haben Thema und Altersziel im Ledger, aber keine Lektions-ID und keinen Unterrichtstext.
-- 93 Module stehen im Archivkatalog und haben Fragen für 4–5, 6–8 und 9–10. Das ist keine religiöse Freigabe.
-- `sidq` ist ein separates Modul und fehlt im 93er-Katalog. 94 Lektions-IDs und 93 Katalogeinträge sind deshalb kein fehlender Unterricht: 93 plus das Sonderobjekt `sidq` ergeben 94.
+- 97 Slots haben eine `lessonId` (Slots 1–97). Neu in diesem Fortsetzungslauf: Slots 91–94 in `curriculum-v36.js` und Slots 95–97 in `curriculum-v37.js`, je drei Altersfassungen.
+- 111 Slots (98–208) haben Thema und Altersziel im Ledger, aber keine Lektions-ID und keinen Unterrichtstext.
+- 96 Module stehen im Archivkatalog und haben Fragen für 4–5, 6–8 und 9–10. Das ist keine religiöse Freigabe.
+- `sidq` ist ein separates Modul und fehlt im 96er-Katalog. 97 Lektions-IDs und 96 Katalogeinträge sind deshalb kein fehlender Unterricht: 96 plus das Sonderobjekt `sidq` ergeben 97. Vor diesen Paketen waren es 90 IDs und 89 Module, aus demselben Grund.
 - 6 Slots tragen `target-hadith-checked-online`: 79, 82, 83, 84, 85, 86. Das sind ältere Dorar-Stichproben, in diesem Lauf nicht erneut geöffnet.
 - 50 weitere Slots tragen nur geerbte Metadaten `metadata-in-repository-not-reverified`.
-- 4 Slots (91–94) tragen `primary-page-read-islamweb-2026-10-13`.
-- 148 Slots sind `not-reviewed`.
+- 7 Slots (91–97) tragen `primary-page-read-islamweb-2026-10-13`.
+- 145 Slots sind `not-reviewed`.
 - Freigegebene Altersfassungen: 0 von 624. `religiousSourcesVerified` von Paket V36 steht auf false.
 - Live-Deploy: nicht ausgeführt.
 - Audioerzeugung in diesem Lauf: nicht ausgeführt. `kids/data/academy-voice-plan-v36.json` enthält nur ungenerierte deutsche Sprechtexte.
 
-Die frühere Angabe „66 auf main, Arbeit bis 86“ ist damit nur teilweise bestätigt: Auf diesem Zweig sind 94 IDs vergeben. Die Slots 87–90 bleiben Entwürfe mit nicht erneut geprüfter Quellenmetadaten. Slots 91–94 sind Entwürfe mit gelesenen Islamweb-Seiten. Slot 95 ist der erste leere Slot.
+Die frühere Angabe „66 auf main, Arbeit bis 86“ ist damit nur teilweise bestätigt: Auf diesem Zweig sind 97 IDs vergeben. Die Slots 87–90 bleiben Entwürfe mit nicht erneut geprüfter Quellenmetadaten. Slots 91–97 sind Entwürfe mit gelesenen Islamweb-Seiten. Slot 98 ist der erste leere Slot.
 
 ## Pull Requests
 
@@ -47,14 +47,20 @@ Paket V36, Slots 91–94, drei Altersfassungen je Lektion, ohne Audio und ohne F
 
 Dorar `sharh/3429` und al-Maktaba lieferten HTTP 403. Diese Seiten sind nicht als erneut gelesen markiert.
 
+Paket V37, Slots 95–97:
+
+- 95 `quran-surat-an-nas-kennenlernen`: alle sechs Verse vokalisiert auf Ibn Kaṯīr, Inhalt 49/1988. Der Vorzugsabschnitt 49/1986 nennt al-Buḫārī und Muslim ohne Nummer. Keine synthetische Rezitation, kein Hauchen und kein Streichen als Übung.
+- 96 `sirah-musa-und-mut`: Qurʾān 20:45–46 auf Inhalt 49/1137. Kein Hadith auf dieser Seite. Vers 20:47 wird nicht nachgespielt.
+- 97 `dua-vor-dem-lernen-um-hilfe-bitten`: Qurʾān 20:114 auf Inhalt 49/1155. Die Lernbitte ist nur der Schlussteil. Kein Hadith auf dieser Seite.
+
 ## Bekannte Fehler
 
 - Ältere `sourceAudit`-Daten im Curriculum sind geerbt. Sie sind keine neue Prüfung.
-- Der Ledger-Test `kids/tools/test-academy-208-research-ledger-v1.cjs` zählt 94 implementierte Slots und 6 ältere Dorar-Stichproben. Er ist in diesem Lauf grün. Das ist keine Quellenfreigabe.
-- Abweichung 90 IDs zu 89 Archivmodulen: vor diesem Paket war `sidq` das eine Sonderobjekt außerhalb des Katalogs. Nach dem Paket gilt dieselbe Regel: 94 IDs, 93 Katalogmodule, `sidq` weiter separat. Nichts wurde gelöscht, um die Zahlen gleichzuziehen.
+- Der Ledger-Test `kids/tools/test-academy-208-research-ledger-v1.cjs` zählt 97 implementierte Slots und 6 ältere Dorar-Stichproben. Er ist in diesem Lauf grün. Das ist keine Quellenfreigabe.
+- Abweichung 90 IDs zu 89 Archivmodulen: `sidq` ist das Sonderobjekt außerhalb des Katalogs. Nach den Paketen V36 und V37 gilt dieselbe Regel: 97 IDs, 96 Katalogmodule, `sidq` weiter separat. Nichts wurde gelöscht, um die Zahlen gleichzuziehen.
 - CI von #1089 und #1090 war beim letzten festgehaltenen Status nicht vollständig grün. Dieser Lauf hat die Workflows nicht erneut ausgeführt.
 - `FINAL_REPORT.md` existiert absichtlich nicht. Der Produktionsabschluss ist nicht erreicht.
 
 ## Nächster Schritt
 
-Slot 95, Woche 24, Donnerstag, Säule `quran`, Thema „Sūrat an-Nās kennenlernen“. Den arabischen Surentext auf einer erreichbaren Primärseite lesen. Keine synthetische Rezitation. Danach die offenen Slots 96–208 einzeln nur mit gelesenen Stellen.
+Slot 98, Woche 25, Montag, Säule `family`, Thema „Mobbing erkennen und Hilfe holen“. Eine gelesene Stelle zu Schaden durch Wort oder Hand suchen. Keine erfundene Geschichte. Danach die offenen Slots 99–208 nur mit gelesenen Stellen.

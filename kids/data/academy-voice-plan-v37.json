@@ -1,0 +1,745 @@
+{
+  "schemaVersion": 1,
+  "version": "academy-voice-plan-v37-20261013",
+  "voiceProfileId": "serhat-owner-voice-2026",
+  "voiceName": "Serhat Abu Malik – Master",
+  "modelId": "eleven_v4",
+  "purpose": "Three planned source-backed age-level lessons 95–97. Human review required; no generated audio and no synthetic Quran recitation.",
+  "policy": {
+    "nativeTtsFallback": false,
+    "arabicQuranRecitationIsSeparate": true,
+    "reviewRequiredBeforePublicPlayback": true,
+    "autoPublishUnreviewed": false,
+    "generateCreditsUsed": 0,
+    "quranArabicExcludedFromSyntheticNarration": true
+  },
+  "lessonCount": 3,
+  "curriculumIds": [
+    "quran-surat-an-nas-kennenlernen",
+    "sirah-musa-und-mut",
+    "dua-vor-dem-lernen-um-hilfe-bitten"
+  ],
+  "phraseCount": 48,
+  "phrases": [
+    {
+      "text": "Sūrat an-Nās ist eine Bitte um Schutz bei Allah. Wir erzeugen dafür keine künstliche Rezitation.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-surat-an-nas-kennenlernen",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Wir lernen eine kurze Sūrah kennen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-surat-an-nas-kennenlernen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Sūrat an-Nās hat sechs kurze Verse.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-surat-an-nas-kennenlernen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Darin bitten wir Allah um Schutz.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-surat-an-nas-kennenlernen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Allah wird darin Herr, König und Gott der Menschen genannt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-surat-an-nas-kennenlernen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Eine echte Rezitation kommt später von einem Menschen. Der Computer spricht die Sūrah hier nicht.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-surat-an-nas-kennenlernen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Die Sūrah bittet um Schutz vor Einflüsterung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-surat-an-nas-kennenlernen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Die gelesene Seite druckt alle sechs Verse von Sūrat an-Nās.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-surat-an-nas-kennenlernen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Der Schutz wird bei Allah gesucht, nicht bei einem Geschöpf.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-surat-an-nas-kennenlernen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Der letzte Vers nennt Jinn und Menschen als möglichen Ausgang des Einflüsterns, ohne eine Gruselgeschichte.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-surat-an-nas-kennenlernen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ein Bericht auf der Vorzugsseite sagt, der Prophet ﷺ habe die beiden Schutzsuren bei Unwohlsein über sich gelesen. Eine Buchnummer fehlt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-surat-an-nas-kennenlernen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wir bleiben bei dem gedruckten Surentext und der offenen Hadithnummer.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-surat-an-nas-kennenlernen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Die vokalisierte Folge auf der Tafsīr-Seite umfasst die Verse 1 bis 6, vom Schutzsuchen bis zum letzten Vers über Jinn und Menschen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-surat-an-nas-kennenlernen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Dieselbe Bibliothek beschreibt im Vorzugsabschnitt, dass der Prophet ﷺ die beiden Schutzsuren bei Beschwerden über sich las.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-surat-an-nas-kennenlernen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Genannt werden al-Buḫārī und Muslim, aber keine Nummer. Wir setzen keine ein.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-surat-an-nas-kennenlernen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Hauchen, Streichen und Ruqyah aus dem Krankheitsbericht sind nicht die Übung dieser Stunde. Auch keine synthetische Rezitation.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-surat-an-nas-kennenlernen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Mūsā und Hārūn nannten Allah ihre Angst. Allah sagte ihnen, sie sollen sich nicht fürchten, Er sei mit ihnen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-musa-und-mut",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Mut heißt hier, Angst nicht zu verstecken.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-musa-und-mut",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Mūsā und Hārūn, Friede sei auf ihnen, sagten Allah, dass sie Angst hatten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-musa-und-mut",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Allah sagte: Fürchtet euch nicht.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-musa-und-mut",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Er sagte, Er sei mit ihnen, Er höre und sehe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-musa-und-mut",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wenn du Angst hast, darfst du das sagen und eine sichere erwachsene Person holen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-musa-und-mut",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Die beiden Verse sind der ganze Beleg dieser Stunde.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-musa-und-mut",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "In 20:45 nennen Mūsā und Hārūn die Furcht, der Herrscher könne übergreifen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-musa-und-mut",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "In 20:46 antwortet Allah, sie sollen sich nicht fürchten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-musa-und-mut",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Die Antwort sagt: Ich bin mit euch, Ich höre und sehe. Sie verspricht nicht, dass jede Gefahr verschwindet.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-musa-und-mut",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Auf dieser Tafsīr-Seite steht für die Kinderstunde kein Hadith. Wir erfinden keinen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-musa-und-mut",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wir grenzen den Vers von dem ab, was die Seite danach noch druckt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-musa-und-mut",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Der gedruckte Wortlaut von 20:45 ist die Bitte der beiden Gesandten wegen ihrer Furcht.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-musa-und-mut",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "20:46 ist die Antwort: keine Furcht, Allah ist mit ihnen, hört und sieht.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-musa-und-mut",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "20:47 auf derselben Seite, die Botschaft an den Herrscher, spielen wir nicht nach und machen daraus keine Szene.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-musa-und-mut",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Weil kein Hadith auf der Seite steht, bleibt die Quellenzeile beim Qurʾān.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-musa-und-mut",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Vor dem Lernen darf ich sagen: Mein Herr, mehre mein Wissen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-vor-dem-lernen-um-hilfe-bitten",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Vor dem Lernen dürfen wir Allah bitten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-vor-dem-lernen-um-hilfe-bitten",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wir bitten Allah um Wissen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-vor-dem-lernen-um-hilfe-bitten",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Die Bitte steht am Ende eines Qurʾān-Verses.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-vor-dem-lernen-um-hilfe-bitten",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Sie bedeutet: Mein Herr, mehre mein Wissen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-vor-dem-lernen-um-hilfe-bitten",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Der Computer spricht den arabischen Vers hier nicht nach.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-vor-dem-lernen-um-hilfe-bitten",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Nur der Schlussteil ist unsere Lernbitte.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-vor-dem-lernen-um-hilfe-bitten",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "20:114 endet mit der Bitte, Allah möge das Wissen mehren.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-vor-dem-lernen-um-hilfe-bitten",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Davor steht, den Qurʾān nicht zu übereilen, bevor die Offenbarung abgeschlossen ist.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-vor-dem-lernen-um-hilfe-bitten",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Dieser erste Teil richtet sich nicht als Verbot an Kinder, ihre Aufgaben zu lernen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-vor-dem-lernen-um-hilfe-bitten",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ein Hadith für diese Bitte steht auf der gelesenen Seite nicht.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-vor-dem-lernen-um-hilfe-bitten",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wir teilen den einen Vers in zwei Aussagen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-vor-dem-lernen-um-hilfe-bitten",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Der gedruckte Vers nennt Allah den wahren König und warnt davor, dem Qurʾān vor Abschluss der Offenbarung vorauszueilen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-vor-dem-lernen-um-hilfe-bitten",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Die Kinderbitte dieser Stunde ist nur der letzte Satz: Mein Herr, mehre mein Wissen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-vor-dem-lernen-um-hilfe-bitten",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wir machen aus dem Offenbarungssatz keine Regel gegen gewöhnliches Lernen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-vor-dem-lernen-um-hilfe-bitten",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Weil die Seite keinen Hadith für diese Bitte liefert, bleibt die Quellenzeile beim Vers.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-vor-dem-lernen-um-hilfe-bitten",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    }
+  ]
+}

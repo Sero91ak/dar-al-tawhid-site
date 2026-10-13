@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "generatedOn": "2026-10-13",
   "warning": "Sources are limited to pages read on 2026-10-13 plus the earlier unrefetched bank. Dorar and al-Maktaba returned HTTP 403 in this continuation and are not marked re-read. Missing hadith numbers stay unverified.",
-  "sourceCount": 17,
+  "sourceCount": 21,
   "sources": [
     {
       "sourceId": "SRC-BANK-001",
@@ -320,6 +320,70 @@
       ],
       "binding": "bound to slot 94; number unverified",
       "topic": "Gebet nach Hadath"
+    },
+    {
+      "sourceId": "SRC-095-NAS",
+      "work": "Tafsir Ibn Kathir, Islamweb, Surat an-Nas 114:1-6",
+      "arabic": "قل أعوذ برب الناس … من الجنة والناس",
+      "number": "114:1-6",
+      "directLink": "https://www.islamweb.net/ar/library/content/49/1988",
+      "authenticityNote": "All six verses printed with tashkeel on the page.",
+      "verificationStatus": "page-read-2026-10-13",
+      "checkedOn": "2026-10-13",
+      "checkedBy": "live Islamweb Ibn Kathir content/49/1988",
+      "lessonIds": [
+        "quran-surat-an-nas-kennenlernen"
+      ],
+      "binding": "bound to slot 95",
+      "topic": "Surat an-Nas"
+    },
+    {
+      "sourceId": "SRC-095-MUAWWIDHATAIN",
+      "work": "Tafsir Ibn Kathir, virtue of the two protective surahs",
+      "narrator": "Aishah",
+      "number": null,
+      "directLink": "https://www.islamweb.net/ar/library/content/49/1986",
+      "authenticityNote": "Bukhari and Muslim are named without a printed number. Blowing and wiping are not taught.",
+      "verificationStatus": "page-read-2026-10-13-number-not-printed",
+      "checkedOn": "2026-10-13",
+      "checkedBy": "live Islamweb Ibn Kathir content/49/1986",
+      "lessonIds": [
+        "quran-surat-an-nas-kennenlernen"
+      ],
+      "binding": "bound to slot 95; number unverified",
+      "topic": "Recitation of the two protective surahs when unwell"
+    },
+    {
+      "sourceId": "SRC-096-TAHA-45-46",
+      "work": "Tafsir Ibn Kathir, Islamweb, 20:45-46",
+      "arabic": "قالا ربنا إننا نخاف أن يفرط علينا أو أن يطغى قال لا تخافا إنني معكما أسمع وأرى",
+      "number": "20:45-46",
+      "directLink": "https://www.islamweb.net/ar/library/content/49/1137",
+      "authenticityNote": "No hadith on this page. Verse 20:47 is not role-played.",
+      "verificationStatus": "page-read-2026-10-13-no-hadith-on-page",
+      "checkedOn": "2026-10-13",
+      "checkedBy": "live Islamweb Ibn Kathir content/49/1137",
+      "lessonIds": [
+        "sirah-musa-und-mut"
+      ],
+      "binding": "bound to slot 96",
+      "topic": "Musa and Harun name their fear"
+    },
+    {
+      "sourceId": "SRC-097-TAHA-114",
+      "work": "Tafsir Ibn Kathir, Islamweb, 20:114",
+      "arabic": "وقل رب زدني علما",
+      "number": "20:114",
+      "directLink": "https://www.islamweb.net/ar/library/content/49/1155",
+      "authenticityNote": "Full ayah printed. No hadith taken from the page. The opening clause about revelation is not a homework ban.",
+      "verificationStatus": "page-read-2026-10-13-no-hadith-on-page",
+      "checkedOn": "2026-10-13",
+      "checkedBy": "live Islamweb Ibn Kathir content/49/1155",
+      "lessonIds": [
+        "dua-vor-dem-lernen-um-hilfe-bitten"
+      ],
+      "binding": "bound to slot 97",
+      "topic": "Ask Allah to increase knowledge"
     }
   ]
 }

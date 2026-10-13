@@ -3,8 +3,8 @@
   "purpose": "Editorial roadmap: 90 implemented lesson contents, 118 upcoming locked outlines. Human review/audio approval separate.",
   "curriculum": {
     "totalNewLessonSlots": 208,
-    "alreadyImplementedLessons": 94,
-    "proposedAdditionalLessons": 114,
+    "alreadyImplementedLessons": 97,
+    "proposedAdditionalLessons": 111,
     "weeks": 52,
     "newDaysPerWeek": 4,
     "reviewDaysPerWeek": 2,
@@ -91,19 +91,19 @@
     {
       "id": "quran",
       "label": "Qurʾān und Sunnah – Orientierung",
-      "plannedAdditions": 6,
+      "plannedAdditions": 5,
       "underlyingCurrentSubject": "quran"
     },
     {
       "id": "sirah",
       "label": "Sīrah und Propheten – kindgerechte Vorbilder",
-      "plannedAdditions": 6,
+      "plannedAdditions": 5,
       "underlyingCurrentSubject": "sirah"
     },
     {
       "id": "dua",
       "label": "Duʿāʾ und Adhkār – tägliche Praxis",
-      "plannedAdditions": 6,
+      "plannedAdditions": 5,
       "underlyingCurrentSubject": "dua"
     },
     {
@@ -584,120 +584,24 @@
       "editorialSlot": 94,
       "lessonId": "fiqh-wudu-waschen-und-streichen",
       "status": "currently-in-catalog"
-    }
-  ],
-  "plannedUnits": [
+    },
     {
       "editorialSlot": 95,
-      "topicId": "editorial-095",
-      "week": 24,
-      "weekday": "Donnerstag",
-      "pillar": "quran",
-      "title": "Sūrat an-Nās kennenlernen",
-      "classroomScenario": "Einen Vers mit echter Rezitation langsam wiederholen",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: einen Vers mit echter Rezitation langsam wiederholen.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: einen Vers mit echter Rezitation langsam wiederholen.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: einen Vers mit echter Rezitation langsam wiederholen.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "lessonId": "quran-surat-an-nas-kennenlernen",
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 96,
-      "topicId": "editorial-096",
-      "week": 24,
-      "weekday": "Freitag",
-      "pillar": "sirah",
-      "title": "Mūsā عليه السلام und Mut",
-      "classroomScenario": "Von einer belegten Begebenheit über Mut lernen",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: von einer belegten Begebenheit über Mut lernen.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: von einer belegten Begebenheit über Mut lernen.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: von einer belegten Begebenheit über Mut lernen.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "lessonId": "sirah-musa-und-mut",
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 97,
-      "topicId": "editorial-097",
-      "week": 25,
-      "weekday": "Montag",
-      "pillar": "dua",
-      "title": "Vor dem Lernen um Hilfe bitten",
-      "classroomScenario": "Eine religiös zulässige Bitte in eigenen Worten formulieren",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: eine religiös zulässige Bitte in eigenen Worten formulieren.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: eine religiös zulässige Bitte in eigenen Worten formulieren.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: eine religiös zulässige Bitte in eigenen Worten formulieren.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
-    },
+      "lessonId": "dua-vor-dem-lernen-um-hilfe-bitten",
+      "status": "currently-in-catalog"
+    }
+  ],
+  "plannedUnits": [
     {
       "editorialSlot": 98,
       "topicId": "editorial-098",
