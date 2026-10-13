@@ -5686,6 +5686,12 @@ function quizPrompt(q){
 function quizV4Text(q,part,old){
   return window.DARKidsQuizV4?window.DARKidsQuizV4.pick(q,part,old):String(old||"");
 }
+function quizAcademyPraiseText(q){
+  // Kind sees Islamic encouragement even while old audio is retained until
+  // its exact Serhat V4 clip exists in the manifest; never pretend new audio is available.
+  var voice=window.DARKidsQuizV4&&window.DARKidsQuizV4.speech(q);
+  return String(voice&&voice.correctAudioText||q&&q.success||"Sehr gut!");
+}
 function storyQuestionPrompt(q){
   if(!q)return"";
   if(age==="4–5"&&isYesNoAnswers(q.answers))return q.question+" Ja oder Nein?";
@@ -6119,7 +6125,7 @@ function chooseQuizAnswer(index,button){
     button.classList.add("correct");
     quizRewardBurst();
     document.getElementById("quizFeedback").className="quiz-feedback good";
-    document.getElementById("quizFeedback").textContent="✓ "+quizV4Text(q,"correctAudioText",q.success);
+    document.getElementById("quizFeedback").textContent="✓ "+quizAcademyPraiseText(q);
     var explanation=document.getElementById("quizExplanation");
     if(explanation&&q.explanation){
       explanation.textContent=String(q.explanation);
@@ -6138,9 +6144,9 @@ function chooseQuizAnswer(index,button){
     document.getElementById("quizNext").classList.add("show");
     var masteryResult=recordQuizAttempt(q.id,!quizQuestionHadError);
     if(masteryResult.entry&&masteryResult.entry.stage==="secure"){
-      document.getElementById("quizFeedback").textContent="✓ "+quizV4Text(q,"correctAudioText",q.success)+" · sicher";
+      document.getElementById("quizFeedback").textContent="✓ "+quizAcademyPraiseText(q)+" · sicher";
     }else if(!quizQuestionHadError&&!masteryResult.counted){
-      document.getElementById("quizFeedback").textContent="✓ "+quizV4Text(q,"correctAudioText",q.success)+" · Wiederholung später";
+      document.getElementById("quizFeedback").textContent="✓ "+quizAcademyPraiseText(q)+" · Wiederholung später";
     }
     // Nach einer richtigen Antwort wird die kindgerechte Erklärung vollständig
     // in der Serhat-Masterstimme vorgelesen, aber nur mit echtem freigegebenem Clip.
