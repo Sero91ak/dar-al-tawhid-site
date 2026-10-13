@@ -30,7 +30,10 @@ const results = {
     githubHasNoBroadAudienceFallback: noBroadAudience(action),
     githubSenderDoesNotUseRandomSendIdempotency: !action.includes("idempotency_key: crypto.randomUUID()"),
     iosRegistrationUsesExistingPrayerColumns: !native.includes('body["prayer_\\(key)_enabled"]'),
-    iosRegistrationChecksHttpResult: /private static func saveSupabaseRegistration[\s\S]*?HTTPURLResponse/.test(native),
+    iosRegistrationChecksHttpResult: (() => {
+      const method = native.split("private static func saveSupabaseRegistration")[1]?.split("#if !targetEnvironment(macCatalyst)")[0] || "";
+      return method.includes("HTTPURLResponse") && method.includes("200..<300");
+    })(),
     iosWorkerHasExplicitPostPreference: iosWorker.includes("post_notifications"),
     iosSdkUsesPostPreference: native.includes('"post_notifications": "true"'),
     androidSdkUsesPostPreference: android.includes('"post_notifications" to "true"'),
