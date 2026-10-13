@@ -1,0 +1,184 @@
+/* DĀR AL TAWḤĪD KIDS · Hören + Schätze · V1350
+   ONLY sub-hero Today discovery, Hören and Salaf. Keep home hero, salah, 
+   profile headers, existing transparent 3D nav icons and floating nav untouched. */
+#view-today{
+  --kh-palette:#f1d398;--kh-ink:#fff8ea;
+  --kh-line:rgba(245,216,160,.30);--kh-surface:rgba(14,47,65,.88);
+}
+.app[data-gender="girl"] #view-today{
+  --kh-palette:#ffd1e9;--kh-ink:#fff3fa;
+  --kh-line:rgba(255,206,234,.36);--kh-surface:rgba(72,38,72,.89);
+}
+/* This block starts only below the original home hero, prayer and resume. */
+#view-today > .section-title:has(+ .big-choice-grid){
+  color:var(--kh-ink)!important;
+  font-weight:900!important;letter-spacing:-.025em!important;
+  font-size:clamp(23px,5.7vw,33px)!important;
+  margin-block:clamp(21px,4vw,28px) 13px!important;
+}
+#view-today .big-choice-grid{
+  gap:clamp(10px,2.6vw,16px)!important;
+  align-items:stretch!important;
+}
+#view-today .big-choice-grid > .choice{
+  box-sizing:border-box!important;
+  border-radius:clamp(22px,5vw,30px)!important;
+  border:1px solid var(--kh-line)!important;
+  overflow:hidden!important;isolation:isolate!important;
+  box-shadow:0 13px 27px rgba(0,11,26,.15),inset 0 1px rgba(255,255,255,.10)!important;
+  min-width:0!important;min-height:clamp(164px,26vw,238px)!important;
+}
+#view-today .big-choice-grid > .choice strong{
+  color:var(--kh-ink)!important;text-wrap:balance!important;
+  overflow-wrap:break-word!important;
+}
+#view-today .big-choice-grid > .choice small{
+  line-height:1.34!important;overflow-wrap:break-word!important;
+}
+#view-today .big-choice-grid > .choice:focus-visible,
+#view-today .kids-salaf-feature:focus-visible,
+#view-stories .kids-listen-shortcut:focus-visible{
+  outline:3px solid var(--kh-palette,#f1d398)!important;
+  outline-offset:2px!important;
+}
+/* Keep every existing 3D image exactly as shipped: no filter, clip or new background image. */
+#view-today .big-choice-grid > .choice:active,
+#view-today .kids-salaf-feature:active,
+#view-stories .kids-listen-shortcut:active{
+  transform:none!important;filter:none!important;
+}
+#view-today .kids-salaf-feature{
+  box-sizing:border-box;position:relative;display:flex;align-items:center;
+  width:100%;min-height:110px;margin:clamp(12px,3vw,18px) 0 5px;
+  padding:14px clamp(15px,3.8vw,23px);gap:14px;
+  text-align:left;border-radius:25px;cursor:pointer;
+  background:linear-gradient(110deg,var(--kh-surface),rgba(27,62,76,.86));
+  border:1px solid var(--kh-line);color:var(--kh-ink);
+  box-shadow:0 12px 28px rgba(0,12,25,.12),inset 0 1px rgba(255,255,255,.07);
+  font-family:"Fredoka","SF Pro Rounded",system-ui,sans-serif;
+}
+.app[data-gender="girl"] #view-today .kids-salaf-feature{
+  background:linear-gradient(110deg,rgba(84,46,84,.94),rgba(62,39,70,.90));
+}
+#view-today .kids-salaf-feature-art{
+  flex:0 0 clamp(62px,15vw,83px);width:clamp(62px,15vw,83px);height:clamp(62px,15vw,83px);
+  background:url("/kids/assets/kids-icons/library-real-v12.png?v=cut1") center/contain no-repeat;
+  filter:drop-shadow(0 6px 8px rgba(0,0,0,.17));
+}
+#view-today .kids-salaf-feature-copy{display:grid;gap:3px;min-width:0;flex:1}
+#view-today .kids-salaf-feature-copy small{
+  color:var(--kh-palette);font-size:clamp(10px,2.6vw,12px);
+  letter-spacing:.065em;font-weight:900;
+}
+#view-today .kids-salaf-feature-copy strong{color:var(--kh-ink);font-size:clamp(19px,5vw,26px);line-height:1.12;font-weight:950}
+#view-today .kids-salaf-feature-copy span{color:rgba(255,250,244,.81);font-size:clamp(12px,3vw,15px);line-height:1.3}
+#view-today .academy-pilot-entry{
+  border-radius:25px!important;border-color:var(--kh-line)!important;
+  background:linear-gradient(108deg,var(--kh-surface),rgba(29,53,74,.87))!important;
+  box-shadow:0 12px 28px rgba(0,12,25,.10),inset 0 1px rgba(255,255,255,.06)!important;
+}
+.app[data-gender="girl"] #view-today .academy-pilot-entry{
+  background:linear-gradient(108deg,rgba(76,40,80,.95),rgba(73,42,79,.88))!important;
+}
+#view-today .academy-pilot-text strong{color:var(--kh-ink)!important;overflow-wrap:break-word}
+#view-today .academy-pilot-text small{color:var(--kh-palette)!important}
+#view-today .academy-pilot-text > span{line-height:1.35}
+
+/* Listening hub: keep the existing story stage and all category cards. */
+#view-stories{--kl-ink:#fff8ec;--kl-accent:#f1d398;--kl-line:rgba(242,211,152,.31);--kl-pane:rgba(14,46,62,.93)}
+.app[data-gender="girl"] #view-stories{
+  --kl-ink:#fff0fa;--kl-accent:#ffd0e8;
+  --kl-line:rgba(255,204,232,.36);--kl-pane:rgba(66,39,74,.96);
+}
+#view-stories .stories-world-head h2{color:var(--kl-ink)!important}
+#view-stories .stories-world-head p{color:rgba(255,248,245,.83)!important}
+#view-stories.ps-stories-home > .kids-listening-shortcuts{
+  order:7;box-sizing:border-box;
+  width:var(--story-shell,min(calc(100% - 24px),1060px));
+  margin:clamp(13px,3vw,23px) auto clamp(18px,3.5vw,27px)!important;
+}
+#view-stories .kids-listening-shortcuts-title{
+  font-size:clamp(19px,4.8vw,27px);font-weight:950;
+  line-height:1.2;color:var(--kl-ink);padding:0 2px 12px;
+  font-family:"Fredoka","SF Pro Rounded",system-ui,sans-serif;
+}
+#view-stories .kids-listening-shortcuts-grid{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(10px,2.4vw,15px);
+}
+#view-stories .kids-listen-shortcut{
+  box-sizing:border-box;display:flex;align-items:center;
+  gap:clamp(8px,2vw,14px);width:100%;min-width:0;
+  min-height:clamp(100px,18vw,132px);padding:13px clamp(11px,2.2vw,19px);
+  border-radius:25px;border:1px solid var(--kl-line);
+  background:linear-gradient(132deg,var(--kl-pane),rgba(28,59,73,.89));
+  text-align:left;cursor:pointer;color:var(--kl-ink);
+  font-family:"Fredoka","SF Pro Rounded",system-ui,sans-serif;
+  box-shadow:0 10px 25px rgba(0,0,0,.11),inset 0 1px rgba(255,255,255,.08);
+}
+.app[data-gender="girl"] #view-stories .kids-listen-shortcut{
+  background:linear-gradient(130deg,rgba(86,51,86,.94),rgba(65,39,74,.88));
+}
+#view-stories .kids-listen-shortcut-art{
+  flex:0 0 clamp(51px,12vw,80px);width:clamp(51px,12vw,80px);
+  height:clamp(61px,14vw,91px);
+  background-position:center;background-repeat:no-repeat;background-size:contain;
+  filter:drop-shadow(0 6px 9px rgba(0,0,0,.2));
+}
+#view-stories .kids-listen-shortcut-art.salaf{
+  background-image:url("/kids/assets/kids-icons/library-real-v12.png?v=cut1");
+}
+#view-stories .kids-listen-shortcut-art.dua{
+  background-image:url("/kids/assets/kids-icons/dua-real-v12.png?v=cut1");
+}
+#view-stories .kids-listen-shortcut-copy{display:grid;gap:5px;min-width:0}
+#view-stories .kids-listen-shortcut-copy strong{
+  color:var(--kl-ink);font-weight:950;font-size:clamp(15px,3.5vw,23px);
+  line-height:1.13;overflow-wrap:break-word;
+}
+#view-stories .kids-listen-shortcut-copy small{
+  color:rgba(255,246,239,.81);font-size:clamp(12px,2.8vw,15px);
+  line-height:1.3;overflow-wrap:break-word;
+}
+#view-stories .kids-listen-shortcut:focus-visible{
+  outline-color:var(--kl-accent)!important;
+}
+
+/* Salaf reading world: maintain both established backgrounds, improve legibility. */
+#view-salaf .salaf-wrap{width:100%!important;max-width:none!important;box-sizing:border-box;padding-inline:clamp(12px,3.2vw,28px)!important}
+#view-salaf .salaf-hero-copy{max-width:850px;margin-inline:auto}
+#view-salaf .salaf-hero{min-height:clamp(305px,59vw,520px)!important}
+#view-salaf .salaf-intro{flex-wrap:wrap;align-items:start}
+#view-salaf .salaf-intro h3{font-size:clamp(24px,5.9vw,36px)!important}
+#view-salaf .salaf-topic{
+  border-width:1px!important;border-radius:clamp(22px,4vw,29px)!important;
+  box-shadow:0 12px 28px rgba(0,0,0,.14)!important;
+}
+#view-salaf .salaf-topic-copy{gap:6px!important}
+#view-salaf .salaf-topic-copy strong{line-height:1.16!important;overflow-wrap:break-word}
+#view-salaf .salaf-topic-copy small{color:#fff6eb!important}
+#view-salaf .salaf-empty{
+  border:1px solid var(--sl-line)!important;
+  background:linear-gradient(143deg,rgba(255,255,255,.065),rgba(255,255,255,.018))!important;
+  padding:clamp(23px,5vw,44px) clamp(17px,4vw,35px)!important;
+}
+#view-salaf .salaf-empty-icon{
+  display:block;width:66px;height:66px;margin:0 auto 12px;
+  font-size:0!important;
+  background:url("/kids/assets/kids-icons/library-real-v12.png?v=cut1") center/contain no-repeat;
+  filter:drop-shadow(0 6px 10px rgba(0,0,0,.22));
+}
+#view-salaf .salaf-hero-note{display:none!important}
+#view-salaf .salaf-trust{display:none!important}
+@media(max-width:420px){
+  #view-stories .kids-listening-shortcuts-grid{grid-template-columns:1fr}
+  #view-stories .kids-listen-shortcut{min-height:90px}
+  #view-today .kids-salaf-feature{min-height:100px}
+  #view-salaf .salaf-topic-grid{gap:9px!important}
+}
+@media(min-width:760px){
+  #view-stories.ps-stories-home > .kids-listening-shortcuts{width:min(calc(100% - 36px),1100px)}
+  #view-salaf .salaf-topic-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+}
+@media(prefers-reduced-motion:reduce){
+  #view-stories .kids-listen-shortcut,#view-today .kids-salaf-feature{transition:none!important}
+}
