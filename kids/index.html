@@ -259,7 +259,7 @@ var(--quiz-art,linear-gradient(180deg,#315c78 0%,#5a8f8a 48%,#ba8b5f 100%));back
 .quiz-answer.correct{background:rgba(82,196,132,.15);border-color:rgba(82,196,132,.36);animation:quizCorrectPop .24s ease-out}
 .quiz-answer.wrong{background:rgba(235,83,83,.15);border-color:rgba(235,83,83,.36)}
 .quiz-answer.reveal{background:rgba(226,189,114,.13);border-color:rgba(226,189,114,.28)}
-.quiz-feedback{text-align:center;min-height:48px;margin:13px 0 2px;font-size:15px;font-weight:900}
+.quiz-feedback{text-align:center;min-height:48px;margin:13px auto 2px;font-size:clamp(14px,2.5vw,17px);line-height:1.48;font-weight:850;max-width:min(100%,680px);overflow-wrap:break-word;text-wrap:pretty}
 .quiz-feedback.good{color:#caffe0}.quiz-feedback.bad{color:#ffc3c3}
 .quiz-source{min-height:18px;text-align:center;color:var(--soft);font-size:10px;line-height:1.4;margin:2px 8px 9px}
 .quiz-source strong{color:var(--sage)}
@@ -5686,6 +5686,15 @@ function quizPrompt(q){
 function quizV4Text(q,part,old){
   return window.DARKidsQuizV4?window.DARKidsQuizV4.pick(q,part,old):String(old||"");
 }
+function quizAcademyPraiseText(q){
+  // New UI text appears immediately. The voice only switches after a real V4 asset exists.
+  var voice=window.DARKidsQuizV4&&window.DARKidsQuizV4.speech(q);
+  return String(voice&&voice.correctAudioText||q&&q.success||"Sehr gut!");
+}
+function quizAcademyRetryText(q){
+  var voice=window.DARKidsQuizV4&&window.DARKidsQuizV4.speech(q);
+  return String(voice&&voice.retryAudioText||q&&q.retry||"Versuch es noch einmal!");
+}
 function storyQuestionPrompt(q){
   if(!q)return"";
   if(age==="4–5"&&isYesNoAnswers(q.answers))return q.question+" Ja oder Nein?";
@@ -6119,7 +6128,7 @@ function chooseQuizAnswer(index,button){
     button.classList.add("correct");
     quizRewardBurst();
     document.getElementById("quizFeedback").className="quiz-feedback good";
-    document.getElementById("quizFeedback").textContent="✓ "+quizV4Text(q,"correctAudioText",q.success);
+    document.getElementById("quizFeedback").textContent="✓ "+quizAcademyPraiseText(q);
     var explanation=document.getElementById("quizExplanation");
     if(explanation&&q.explanation){
       explanation.textContent=String(q.explanation);
@@ -6136,12 +6145,9 @@ function chooseQuizAnswer(index,button){
     var src=document.getElementById("quizSource");
     if(src)src.innerHTML='<strong>Quelle:</strong> '+String(q.source||"");
     document.getElementById("quizNext").classList.add("show");
-    var masteryResult=recordQuizAttempt(q.id,!quizQuestionHadError);
-    if(masteryResult.entry&&masteryResult.entry.stage==="secure"){
-      document.getElementById("quizFeedback").textContent="✓ "+quizV4Text(q,"correctAudioText",q.success)+" · sicher";
-    }else if(!quizQuestionHadError&&!masteryResult.counted){
-      document.getElementById("quizFeedback").textContent="✓ "+quizV4Text(q,"correctAudioText",q.success)+" · Wiederholung später";
-    }
+    // Mastery still gets recorded, but technical learning states must not
+    // interrupt the age-appropriate Islamic congratulations.
+    recordQuizAttempt(q.id,!quizQuestionHadError);
     // Nach einer richtigen Antwort wird die kindgerechte Erklärung vollständig
     // in der Serhat-Masterstimme vorgelesen, aber nur mit echtem freigegebenem Clip.
     // Nicht auf System-TTS ausweichen und keine nächste Quizfrage übertönen.
@@ -6180,12 +6186,14 @@ function chooseQuizAnswer(index,button){
     recordQuizMistake(q.id);
     button.classList.add("wrong");
     document.getElementById("quizFeedback").className="quiz-feedback bad";
-    document.getElementById("quizFeedback").textContent=quizV4Text(q,"retryAudioText",q.retry);
+    var retryMessage=quizAcademyRetryText(q);
+    document.getElementById("quizFeedback").textContent=retryMessage;
     quizSpeak(quizV4Text(q,"retryAudioText",q.retry));
+    // Islamic academy encouragement stays visible until the next answer;
+    // do not silently erase teaching text while a child is still reading it.
     setTimeout(function(){
-      button.classList.remove("wrong");
-      document.getElementById("quizFeedback").textContent="";
-    },1300);
+      if(button&&button.isConnected)button.classList.remove("wrong");
+    },1100);
   }
 }
 function renderQuizFinish(){
@@ -6197,13 +6205,15 @@ function renderQuizFinish(){
   updateParentProgress();
   document.getElementById("quizProgress").innerHTML="";
   document.getElementById("quizBody").innerHTML=
-    '<div class="quiz-finish"><div class="star">★</div><h3>Quiz geschafft!</h3>'+
-    '<p>Du hast '+quizCorrectCount+' von '+currentQuiz.length+' Fragen richtig gelöst.</p>'+
+    '<div class="quiz-finish"><div class="star">★</div><h3>Mā schāʾ Allāh! Quiz geschafft!</h3>'+
+    '<p>Al-ḥamdu lillāh – alles Lob gebührt Allah! Du hast '+quizCorrectCount+' von '+currentQuiz.length+' Fragen richtig gelöst. Lerne weiter, Schritt für Schritt.</p>'+
     '<div class="quiz-finish-reward" aria-hidden="true">'+Array(Math.max(1,Math.min(5,quizCorrectCount))).fill("★").join(" ")+'</div>'+
     '<button id="quizAgain" class="primary">Noch einmal spielen</button></div>';
   document.getElementById("quizAgain").addEventListener("click",openQuiz);
   markDailyDone("quiz");
-  quizSpeak("Sehr gut. Du hast das Quiz geschafft.");
+  var kidsFinishPraise="Mā schāʾ Allāh! Du hast das Quiz geschafft. Möge Allah dein Wissen segnen!";
+  var kidsFinishVoice=(window.DARKidsOwnerVoice&&window.DARKidsOwnerVoice.has&&window.DARKidsOwnerVoice.has(kidsFinishPraise))?kidsFinishPraise:"Sehr gut. Du hast das Quiz geschafft.";
+  quizSpeak(kidsFinishVoice);
 }
 document.getElementById("openQuizButton").addEventListener("click",function(){
   if(window.openKidsQuizHub){window.openKidsQuizHub();return}
@@ -7990,7 +8000,7 @@ html[data-view="stories"] #view-stories > :last-child{
 <script src="/kids/dua-hub-v1219.js?v=1318" data-kids-dua-hub="1259"></script>
 <script src="/kids/story-hub.js?v=28"></script>
 <script src="/kids/kids-age-typography.js?v=3"></script>
-<script src="/kids/quiz-v4-bridge.js?v=20261013-v4bridge1"></script>
+<script src="/kids/quiz-v4-bridge.js?v=20261013-academy1"></script>
 <script src="/kids/quiz-library.js?v=9"></script>
 <link rel="stylesheet" href="/kids/section-heroes-v1095.css?v=1256-parent-hero-full" data-kids-section-heroes-late="1">
 <link rel="stylesheet" href="/kids/stories-home-v1133.css?v=1148" data-kids-stories-home-late="1">

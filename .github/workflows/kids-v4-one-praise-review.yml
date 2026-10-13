@@ -1,0 +1,69 @@
+name: KIDS One V4 Islamic Praise Pilot - Review Only
+# This is an archived one-shot review workflow.
+# Never trigger paid TTS from a git push or branch update.
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: kids-one-v4-praise-paid-review
+  cancel-in-progress: false
+jobs:
+  one-voice:
+    if: github.ref == 'refs/heads/review/kids-quiz-islamic-praise-v4-20261013'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+      ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-islamic-praise-v4-20261013
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Prepare FFmpeg
+        run: |
+          set -euo pipefail
+          if command -v ffmpeg >/dev/null 2>&1; then exit 0; fi
+          python3 -m pip install -q --disable-pip-version-check imageio-ffmpeg==0.6.0
+          mkdir -p "$HOME/.local/bin"
+          python3 - <<'PY'
+          import imageio_ffmpeg
+          from pathlib import Path
+          Path.home().joinpath(".local/bin/ffmpeg").symlink_to(imageio_ffmpeg.get_ffmpeg_exe())
+          PY
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - name: Validate one-shot generator Python without credits
+        run: |
+          python3 -m py_compile kids/tools/generate_one_v4_praise_review.py
+          python3 kids/tools/quiz_islamic_praise_guard.py
+      - name: Generate exactly one distinct Serhat ElevenLabs V4 phrase
+        run: |
+          set -euo pipefail
+          python3 kids/tools/generate_one_v4_praise_review.py
+      - name: Recover original MP3 even if validation or git push failed
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-one-v4-praise-review-${{ github.run_id }}
+          path: |
+            kids/assets/kids-quiz-audio/serhat-praise-v4-age4-6-index0-review.mp3
+            kids/assets/kids-quiz-audio/serhat-praise-v4-age4-6-index0-review.m4a
+            kids/data/quiz-v4-islamic-praise-second-review.json
+          retention-days: 14
+          if-no-files-found: warn
+      - name: Commit only on review branch, never publish
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add kids/assets/kids-quiz-audio/serhat-praise-v4-age4-6-index0-review.mp3
+          git add kids/assets/kids-quiz-audio/serhat-praise-v4-age4-6-index0-review.m4a
+          git add kids/data/quiz-v4-islamic-praise-second-review.json
+          git diff --cached --quiet && exit 0
+          git commit -m "review(kids): store newly generated Serhat V4 praise sample once"
+          git pull --rebase origin review/kids-quiz-islamic-praise-v4-20261013
+          git push origin HEAD:review/kids-quiz-islamic-praise-v4-20261013
