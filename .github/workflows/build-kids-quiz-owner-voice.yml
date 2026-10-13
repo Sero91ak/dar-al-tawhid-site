@@ -51,7 +51,7 @@ jobs:
       ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
       ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
       ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
-      VOICE_BUILD_SCOPE: ${{ github.event_name == 'workflow_dispatch' && inputs.scope || 'pause' }}
+      VOICE_BUILD_SCOPE: ${{ github.event_name == 'workflow_dispatch' && inputs.scope || (github.event_name == 'push' && contains(github.event.head_commit.message, '[quiz-v4-pilot-20261013]')) && 'quiz' || 'pause' }}
       QUIZ_BATCH_START: ${{ github.event_name == 'workflow_dispatch' && inputs.quiz_start || '' }}
       QUIZ_BATCH_COUNT: ${{ github.event_name == 'workflow_dispatch' && inputs.quiz_count || '' }}
       VOICE_AUTO_QUEUE: 'false' # paid serial rendering disabled
