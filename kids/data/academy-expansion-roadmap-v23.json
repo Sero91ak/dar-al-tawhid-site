@@ -1,10 +1,10 @@
 {
   "version": "academy-roadmap-v23-20261011",
-  "purpose": "Editorial roadmap: 86 complete curricular modules and 122 locked editorial outlines. Audio review is an independent release requirement.",
+  "purpose": "Editorial roadmap: 90 implemented lesson contents, 118 upcoming locked outlines. Human review/audio approval separate.",
   "curriculum": {
     "totalNewLessonSlots": 208,
-    "alreadyImplementedLessons": 86,
-    "proposedAdditionalLessons": 122,
+    "alreadyImplementedLessons": 90,
+    "proposedAdditionalLessons": 118,
     "weeks": 52,
     "newDaysPerWeek": 4,
     "reviewDaysPerWeek": 2,
@@ -43,25 +43,25 @@
     {
       "id": "tawhid",
       "label": "Tawḥīd – Allah allein",
-      "plannedAdditions": 12,
+      "plannedAdditions": 11,
       "underlyingCurrentSubject": "aqidah"
     },
     {
       "id": "iman",
       "label": "Īmān – Grundlagen des Glaubens",
-      "plannedAdditions": 12,
+      "plannedAdditions": 11,
       "underlyingCurrentSubject": "aqidah"
     },
     {
       "id": "ikhlas",
       "label": "Ikhlāṣ – Aufrichtigkeit",
-      "plannedAdditions": 8,
+      "plannedAdditions": 7,
       "underlyingCurrentSubject": "aqidah"
     },
     {
       "id": "akhlaq",
       "label": "Akhlāq – Charakter und Verhalten",
-      "plannedAdditions": 14,
+      "plannedAdditions": 13,
       "underlyingCurrentSubject": "akhlaq"
     },
     {
@@ -600,157 +600,29 @@
       "editorialSlot": 86,
       "lessonId": "family-streit-ohne-gewalt-loesen",
       "status": "currently-in-catalog"
-    }
-  ],
-  "plannedUnits": [
+    },
     {
       "editorialSlot": 87,
-      "topicId": "editorial-087",
-      "week": 22,
-      "weekday": "Donnerstag",
-      "pillar": "tawhid",
-      "title": "Allahs Barmherzigkeit kennenlernen",
-      "classroomScenario": "Nach einer schwierigen Situation auf Allahs Barmherzigkeit hoffen",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: nach einer schwierigen Situation auf Allahs Barmherzigkeit hoffen.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: nach einer schwierigen Situation auf Allahs Barmherzigkeit hoffen.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: nach einer schwierigen Situation auf Allahs Barmherzigkeit hoffen.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "lessonId": "aqidah-allahs-barmherzigkeit-hoffen",
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 88,
-      "topicId": "editorial-088",
-      "week": 22,
-      "weekday": "Freitag",
-      "pillar": "iman",
-      "title": "Īmān an Allahs Bücher",
-      "classroomScenario": "Wissen, dass Allah Offenbarungen herabsandte",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: wissen, dass Allah Offenbarungen herabsandte.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: wissen, dass Allah Offenbarungen herabsandte.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: wissen, dass Allah Offenbarungen herabsandte.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "lessonId": "aqidah-glauben-an-offenbarte-buecher",
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 89,
-      "topicId": "editorial-089",
-      "week": 23,
-      "weekday": "Montag",
-      "pillar": "ikhlas",
-      "title": "Lob freundlich annehmen",
-      "classroomScenario": "Lob hören, ohne sich über andere zu stellen",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: lob hören, ohne sich über andere zu stellen.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: lob hören, ohne sich über andere zu stellen.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: lob hören, ohne sich über andere zu stellen.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "lessonId": "ikhlas-lob-bescheiden-annehmen",
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 90,
-      "topicId": "editorial-090",
-      "week": 23,
-      "weekday": "Dienstag",
-      "pillar": "akhlaq",
-      "title": "Großzügig teilen",
-      "classroomScenario": "Etwas freiwillig mit einem anderen Kind teilen",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: etwas freiwillig mit einem anderen Kind teilen.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: etwas freiwillig mit einem anderen Kind teilen.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: etwas freiwillig mit einem anderen Kind teilen.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
-    },
+      "lessonId": "akhlaq-grosszuegig-freiwillig-teilen",
+      "status": "currently-in-catalog"
+    }
+  ],
+  "plannedUnits": [
     {
       "editorialSlot": 91,
       "topicId": "editorial-091",
