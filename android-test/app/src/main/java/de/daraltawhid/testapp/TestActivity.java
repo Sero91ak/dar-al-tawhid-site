@@ -86,6 +86,9 @@ public final class TestActivity extends Activity {
                 final int serial = pageSerial;
                 Log.i(SMOKE_TAG, "PAGE_FINISHED");
                 browser.postDelayed(() -> logAppReadiness(serial), 5500);
+                if (getIntent().getBooleanExtra("dar_test_smoke", false)) {
+                    browser.postDelayed(() -> logTouchReadiness(serial), 8500);
+                }
                 // After a reasonable render window, never leave a permanently
                 // blank/non-interactive WebView; present a native fallback.
                 browser.postDelayed(() -> checkAppReady(serial), 17000);
@@ -214,6 +217,26 @@ public final class TestActivity extends Activity {
             if (pageSerial == serial)
                 Log.i(SMOKE_TAG, "WEB_READY=" + result);
         });
+    }
+
+    // Emulator-only hit testing: prove that the actual bottom navigation
+    // receives touches instead of being covered by an invisible loader.
+    private void logTouchReadiness(int serial) {
+        if (view == null || loadFailed || pageSerial != serial) return;
+        view.evaluateJavascript(
+            "(function(){try{" +
+            "var bs=document.querySelectorAll('#bottomNav .bottom-nav-btn');" +
+            "if(!bs.length)return false;" +
+            "var b=bs[Math.min(1,bs.length-1)];" +
+            "var r=b.getBoundingClientRect();" +
+            "if(r.width<20||r.height<20)return false;" +
+            "var el=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);" +
+            "return !!(el&&(el===b||b.contains(el)));" +
+            "}catch(e){return false}})()",
+            result -> {
+                if (pageSerial == serial)
+                    Log.i(SMOKE_TAG, "TAP_TARGET_CLEAR=" + result);
+            });
     }
 
     private void checkAppReady(int serial) {
