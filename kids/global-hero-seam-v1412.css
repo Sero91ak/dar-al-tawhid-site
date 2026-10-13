@@ -1,0 +1,77 @@
+/* KIDS_GLOBAL_HEADER_HERO_SEAM_V1412
+ * One top edge for every Kids detail. Reference: Salaf topic screenshot 2.
+ * The shell's non-home safe-area padding is correct for OVERVIEW tabs, but
+ * wrongly adds ~70px before a detail's measured portal spacer. Set it to 0
+ * only while the active view owns a body-pinned detail header. This ensures
+ * the hero begins exactly at the opaque pinned header's bottom.
+ *
+ * Never remove the portal's measured spacer; it is the header's real slot.
+ * V1411 touch-boundary controller still prevents downward rubber-banding.
+ */
+html body .app:has(> .shell > .view.active.kids-detail-page) > .shell,
+html[data-view="salaf"] body .app:has(> .shell > #view-salaf.view.active.kids-detail-page) > .shell{
+  padding-top:0!important;
+  scroll-padding-top:0!important;
+}
+html body .app > .shell > .view.active.kids-detail-page{
+  padding-top:0!important;
+  margin-top:0!important;
+}
+html body .app > .shell > .view.active.kids-detail-page > .kids-detail-head-spacer{
+  display:block!important;
+  box-sizing:border-box!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  flex-shrink:0!important;
+}
+html body #view-salaf.view.active.kids-detail-page > .salaf-pane,
+html body #view-salaf.view.active.kids-detail-page > .salaf-pane > .salaf-topic-stage.kids-detail-hero,
+html body #view-salaf.view.active.kids-detail-page .salaf-topic-stage.kids-detail-hero{
+  margin-top:0!important;
+  padding-top:0!important;
+  border-top:0!important;
+}
+/* Modal reader appbars all share the reference header's flat, flush edge.
+ * The original back buttons, labels and iOS safe-area padding are retained.
+ * No fixed header is portalled here: these rails already sit OUTSIDE the
+ * inner scrolling region. */
+html body #psModal.ps-modal.open > .ps-sheet > .kids-detail-appbar,
+html body :is(#msModal,#syModal,#dlModal).ms-modal.open > .ms-sheet > .kids-detail-appbar,
+html body #ghPlayer.open > .kids-detail-appbar,
+html body #salafDetail.salaf-detail:not([hidden]) > .salaf-story-nav.kids-detail-appbar,
+html body > .kids-detail-appbar.kids-portal-appbar{
+  margin:0!important;
+  margin-block:0!important;
+  border-radius:0!important;
+  border-top:0!important;
+  border-bottom:1px solid rgba(242,213,156,.23)!important;
+  box-shadow:none!important;
+  background:linear-gradient(110deg,#103141,#092636)!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+/* Girls retain their own approved profile palette, with the SAME geometry. */
+html body:has(.app[data-gender="girl"]) #psModal.ps-modal.open > .ps-sheet > .kids-detail-appbar,
+html body:has(.app[data-gender="girl"]) :is(#msModal,#syModal,#dlModal).ms-modal.open > .ms-sheet > .kids-detail-appbar,
+html body:has(.app[data-gender="girl"]) #salafDetail.salaf-detail:not([hidden]) > .salaf-story-nav.kids-detail-appbar,
+html body:has(.app[data-gender="girl"]) > .kids-detail-appbar.kids-portal-appbar{
+  background:linear-gradient(110deg,#483147,#2b2035)!important;
+  border-bottom-color:rgba(255,207,228,.29)!important;
+}
+html body #psModal.ps-modal.open > .ps-sheet > .ps-scroll,
+html body :is(#msModal,#syModal,#dlModal).ms-modal.open > .ms-sheet > .ms-scroll,
+html body #salafDetail.salaf-detail:not([hidden]) > .salaf-detail-scroll{
+  margin-top:0!important;
+  padding-top:0!important;
+  overscroll-behavior-y:none!important;
+}
+html body #psModal.ps-modal.open .ps-scroll > .ps-hero,
+html body :is(#msModal,#syModal,#dlModal).ms-modal.open .ms-scroll > .ms-detail-hero,
+html body #salafDetail.salaf-detail:not([hidden]) .salaf-detail-scroll > .salaf-detail-cover{
+  margin-top:0!important;
+  border-top:0!important;
+}
+/* Visually seamless flat header; images remain scrollable and the dedicated
+ * bottom navigation, sound, reading and offline buttons remain untouched. */
