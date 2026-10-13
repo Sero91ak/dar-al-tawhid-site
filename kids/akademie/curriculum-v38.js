@@ -137,8 +137,8 @@ const additions=
         "sources": "Primär 49:11, https://www.islamweb.net/ar/library/content/49/1754. Dazu 16:90, Inhalt 49/974, und 49:10, Inhalt 49/1753. Dieselben Stellen werden in anderen Stunden mit anderem Lernziel verwendet.",
         "terms": [
           {
-            "say": "qist und adl",
-            "de": "Gerechtigkeit. 16:90 gebraucht adl, das Rechte und Ausgewogene."
+            "say": "adl",
+            "de": "Gerechtigkeit. Qurʾān 16:90 gebraucht adl; der Begriff wird hier nur als sinngemäße Erklärung verwendet."
           },
           {
             "say": "baghy",
