@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "title": "DĀR AL TAWḤĪD KIDS source bank: web-cross-checked starting proofs",
+  "asOf": "2026-10-13",
+  "status": "researched-seeds-not-blanket-religious-approval",
+  "scope": "These are seven specifically inspected hadith source records. They do not verify all 208 topics or bind arbitrarily to a future slot. Each new lesson requires explicit verse, narrator, collection number and context review. Fiqh needs separate classical Hanbali evidence.",
+  "allowedDomains": [
+    "islamweb.net",
+    "shamela.ws",
+    "dorar.net",
+    "al-maktaba.org",
+    "ketabonline.com",
+    "waqfeya.net",
+    "archive.org",
+    "app.turath.io"
+  ],
+  "sources": [
+    {
+      "key": "niyyah",
+      "pillar": [
+        "ikhlas",
+        "tarbiyah",
+        "quran"
+      ],
+      "topic": "Absicht der Taten",
+      "arabic": "إنما الأعمال بالنيات",
+      "source": "Ṣaḥīḥ al-Buḫārī 1",
+      "narrator": "ʿUmar ibn al-Ḫaṭṭāb",
+      "url": "https://dorar.net/hadith/sharh/3429",
+      "sourceComparison": "Checked: narrator, Ṣaḥīḥ al-Buḫārī 1, subject Niyyah",
+      "safeApplication": "Aufrichtigkeit; die Schulbeispiele klar als Didaktik markieren"
+    },
+    {
+      "key": "wudu-hadath",
+      "pillar": [
+        "fiqh"
+      ],
+      "topic": "Gebet und Zustand der Reinheit",
+      "arabic": "لا تقبل صلاة من أحدث حتى يتوضأ",
+      "source": "Ṣaḥīḥ al-Buḫārī 135",
+      "narrator": "Abū Hurayrah",
+      "url": "https://dorar.net/hadith/sharh/6252",
+      "sourceComparison": "Checked: Ṣaḥīḥ al-Buḫārī 135, Abū Hurayrah, ḥadaṯ/Wuḍūʾ",
+      "safeApplication": "Gültige Waschung vor Ṣalāh, keine Pflicht zu einer neuen Waschung bei jedem Gebetsbeginn"
+    },
+    {
+      "key": "gentle-speech-hands",
+      "pillar": [
+        "adab",
+        "akhlaq",
+        "family"
+      ],
+      "topic": "Niemandem mit Worten oder Händen schaden",
+      "arabic": "المسلم من سلم المسلمون من لسانه ويده",
+      "source": "Ṣaḥīḥ al-Buḫārī 10; Ṣaḥīḥ Muslim 40",
+      "narrator": "ʿAbdullāh ibn ʿAmr",
+      "url": "https://dorar.net/hadith/sharh/7256",
+      "sourceComparison": "Checked: Bukhārī 10 cited in Dorar primary Sahih-linked record",
+      "safeApplication": "Keine verletzenden Worte und keine Gewalt; Kinderschutz niemals unter Versöhnungsdruck unterordnen"
+    },
+    {
+      "key": "brotherly-goodwill",
+      "pillar": [
+        "iman",
+        "akhlaq",
+        "family"
+      ],
+      "topic": "Gutes für andere wünschen",
+      "arabic": "لا يؤمن أحدكم حتى يحب لأخيه ما يحب لنفسه",
+      "source": "Ṣaḥīḥ al-Buḫārī 13; Ṣaḥīḥ Muslim 45",
+      "narrator": "Anas ibn Mālik",
+      "url": "https://dorar.net/hadith/sharh/7319",
+      "sourceComparison": "Checked: Bukhārī 13 and Muslim 45; negative statement refers to completeness of faith",
+      "safeApplication": "Freundlich sein und mitfühlen; niemals behaupten, ein Kind sei aus dem Islam"
+    },
+    {
+      "key": "beneficial-effort",
+      "pillar": [
+        "tarbiyah",
+        "nafs"
+      ],
+      "topic": "Sich um Nützliches bemühen",
+      "arabic": "احرص على ما ينفعك واستعن بالله ولا تعجز",
+      "source": "Ṣaḥīḥ Muslim 2664",
+      "narrator": "Abū Hurayrah",
+      "url": "https://dorar.net/hadith/sharh/135180",
+      "sourceComparison": "Checked: Dorar prints Muslim 2664 as authentic original, distinguishes quoted secondary attestation",
+      "safeApplication": "Kleine freiwillige Lernziele, keine Schuldzuweisung an Kinder bei Misserfolg"
+    },
+    {
+      "key": "seek-knowledge-and-help",
+      "pillar": [
+        "quran",
+        "adab",
+        "family"
+      ],
+      "topic": "Wissen suchen und Hilfsbedürftigen beistehen",
+      "arabic": "من سلك طريقا يلتمس فيه علما سهل الله له به طريقا إلى الجنة",
+      "source": "Ṣaḥīḥ Muslim 2699",
+      "narrator": "Abū Hurayrah",
+      "url": "https://dorar.net/hadith/sharh/62058",
+      "sourceComparison": "Checked: full Muslim 2699 text visible in Dorar result, abbreviated entry separately graded; verify exact excerpt from Muslim original before quoting",
+      "safeApplication": "Lernfreude und gute Unterstützung, nicht als Alters- oder Leistungsdruck verwenden"
+    },
+    {
+      "key": "adult-responsibility",
+      "pillar": [
+        "family",
+        "tarbiyah"
+      ],
+      "topic": "Für andere Sorge tragen",
+      "arabic": "كلكم راع وكلكم مسؤول عن رعيته",
+      "source": "Ṣaḥīḥ al-Buḫārī 893; Ṣaḥīḥ Muslim 1829",
+      "narrator": "ʿAbdullāh ibn ʿUmar",
+      "url": "https://dorar.net/hadith/sharh/6192",
+      "sourceComparison": "Checked: Bukhārī 893, narrator and authenticity",
+      "safeApplication": "Erwachsene tragen Schutz- und Fürsorgepflicht; keine Erwachsenverantwortung kleinen Kindern übertragen"
+    }
+  ]
+}
