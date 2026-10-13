@@ -71,8 +71,10 @@
         '<section class="salaf-refs"><h3>Unsere Quellen</h3><div id="salafRefs"></div></section></div></div>'+
     '</section>';
   root.innerHTML=home;
-  var q=function(s){return root.querySelector(s)};
+  var q=function(s){return root.querySelector(s)||(details&&(details.matches(s)?details:details.querySelector(s)))||null};
   var pane=q("#salafHome"),list=q("#salafList"),details=q("#salafDetail");
+  /* Escape the shell stacking context so the full-screen player covers the bottom navigation. */
+  document.body.appendChild(details);
   function card(i){
     var img=safeAsset(i.image||"")||CATEGORIES.find(function(c){return c.id===i.category})?.img||"";
     return '<button class="salaf-story" type="button" data-story-id="'+esc(i.id)+'">'+
