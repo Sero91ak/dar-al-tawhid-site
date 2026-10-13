@@ -72,6 +72,11 @@ for(const q of registry.links){
 const indexedFilenames=new Set(index.files.map(item=>item?.name).filter(Boolean));
 const unindexedMarkdown=fs.readdirSync(postRoot).filter(n=>n.endsWith(".md")&&!indexedFilenames.has(n)).sort();
 const unsafeIndexRows=index.files.filter(f=>!f?.name?.endsWith(".md")||f.name.includes("/")||f.name.includes("..")).map(f=>f?.name||"");
+const unindexedProfiles=unindexedMarkdown.map(filename=>{
+ const p=parsePost(filename);
+ const qs=(p.qLinks||[]).filter(n=>registry.links.some(x=>Number(x.number)===n));
+ return {filename,id:p.id,title:p.title,existingQ:qs,needsIndexReview:!qs.length,error:p.error||null};
+});
 for(const entry of registry.links){
  const n=Number(entry.number);
  if(!Number.isSafeInteger(n)||n<1||numberToReg.has(n))throw Error("Duplicate or invalid Q registry number "+n);
@@ -108,7 +113,7 @@ for(const r of records)tallies[r.state]=(tallies[r.state]||0)+1;
 const output={
  schemaVersion:1,createdAt:new Date().toISOString(),source:"content/posts/posts-index.json",
  indexedCount:index.count??index.files.length,scanned:records.length,registeredQ:registry.links.length,
- nextRegisteredQ:registry.nextNumber,summary:tallies,unindexedMarkdown,unsafeIndexRows,
+ nextRegisteredQ:registry.nextNumber,summary:tallies,unindexedMarkdown,unindexedProfiles,unsafeIndexRows,
  rules:{
   noInventedArabic:true,noUnverifiedPublicLinks:true,existingQImmutable:true,
   noVisitorWrites:true,noKidsWrites:true,needsEditorialApproval:true
