@@ -5,6 +5,7 @@ on:
       - 'kids/quiz-v4-bridge.js'
       - 'kids/tools/quiz_joy_v4_script.py'
       - 'kids/tools/quiz_v4_contract_guard.py'
+      - 'kids/tools/quiz_speech_guard.py'
       - 'kids/data/quiz-kids.json'
       - '.github/workflows/build-kids-quiz-owner-voice.yml'
       - '.github/workflows/validate-kids-quiz-v4.yml'
@@ -14,6 +15,7 @@ on:
       - 'kids/quiz-v4-bridge.js'
       - 'kids/tools/quiz_joy_v4_script.py'
       - 'kids/tools/quiz_v4_contract_guard.py'
+      - 'kids/tools/quiz_speech_guard.py'
       - '.github/workflows/build-kids-quiz-owner-voice.yml'
 permissions:
   contents: read
@@ -31,6 +33,29 @@ jobs:
       - name: Verify 900 texts match frontend and V4 generator
         run: |
           python3 kids/tools/quiz_v4_contract_guard.py
+          python3 kids/tools/quiz_speech_guard.py --self-test
+          python3 - <<'PY'
+          import json,sys
+          from pathlib import Path
+          sys.path.insert(0,"kids/tools")
+          from quiz_joy_v4_script import prepare
+          from quiz_speech_guard import audit
+          qs=json.loads(Path("kids/data/quiz-kids.json").read_text(encoding="utf-8"))["items"]
+          entries={}
+          for q in qs[:2]:
+              row=prepare(q)
+              for k in ("questionAudioText","correctAudioText","retryAudioText","explanationAudioText"):
+                  entries[row[k]]={
+                      "url":"/kids/assets/kids-quiz-audio/fake-v4.m4a",
+                      "voiceProfileId":"serhat-owner-voice-2026",
+                      "modelId":"eleven_v4"
+                  }
+          entries["altbekannter Flash Text"]={"url":"/old.m4a","modelId":"eleven_flash_v2_5"}
+          p=Path("/tmp/quiz-v4-two-question-audit-fixture.json")
+          p.write_text(json.dumps({"entries":entries,"counts":{"readyQuestionPrompts":2,"remainingQuestionsWithMissingAudio":898}},ensure_ascii=False))
+          audit(p)
+          print("PASS: manifest audit counts exactly 2 V4 questions; ignores legacy Flash")
+          PY
           python3 kids/tools/quiz_joy_v4_script.py --pilot --output /tmp/kids-quiz-v4-pilot.json
           node --check kids/quiz-v4-bridge.js
       - name: Require credit-safe V4 policy
