@@ -1,10 +1,10 @@
 {
   "version": "academy-roadmap-v23-20261011",
-  "purpose": "Editorial roadmap: 74 source-checked lessons, 134 remaining editorial outlines; upcoming lessons retain sequential child locks.",
+  "purpose": "Editorial roadmap: 78 sourced lessons / 130 remaining locked plans. Human audio approval is separate.",
   "curriculum": {
     "totalNewLessonSlots": 208,
-    "alreadyImplementedLessons": 74,
-    "proposedAdditionalLessons": 134,
+    "alreadyImplementedLessons": 78,
+    "proposedAdditionalLessons": 130,
     "weeks": 52,
     "newDaysPerWeek": 4,
     "reviewDaysPerWeek": 2,
@@ -43,25 +43,25 @@
     {
       "id": "tawhid",
       "label": "Tawḥīd – Allah allein",
-      "plannedAdditions": 13,
+      "plannedAdditions": 12,
       "underlyingCurrentSubject": "aqidah"
     },
     {
       "id": "iman",
       "label": "Īmān – Grundlagen des Glaubens",
-      "plannedAdditions": 13,
+      "plannedAdditions": 12,
       "underlyingCurrentSubject": "aqidah"
     },
     {
       "id": "ikhlas",
       "label": "Ikhlāṣ – Aufrichtigkeit",
-      "plannedAdditions": 9,
+      "plannedAdditions": 8,
       "underlyingCurrentSubject": "aqidah"
     },
     {
       "id": "akhlaq",
       "label": "Akhlāq – Charakter und Verhalten",
-      "plannedAdditions": 15,
+      "plannedAdditions": 14,
       "underlyingCurrentSubject": "akhlaq"
     },
     {
@@ -540,157 +540,29 @@
       "editorialSlot": 74,
       "lessonId": "family-ehrliche-freundschaften-pflegen",
       "status": "currently-in-catalog"
-    }
-  ],
-  "plannedUnits": [
+    },
     {
       "editorialSlot": 75,
-      "topicId": "editorial-075",
-      "week": 19,
-      "weekday": "Donnerstag",
-      "pillar": "tawhid",
-      "title": "Allah versorgt uns",
-      "classroomScenario": "Beim Frühstück an die Gaben Allahs denken",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: beim Frühstück an die Gaben Allahs denken.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: beim Frühstück an die Gaben Allahs denken.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: beim Frühstück an die Gaben Allahs denken.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "lessonId": "aqidah-allah-versorgt-geschopfe",
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 76,
-      "topicId": "editorial-076",
-      "week": 19,
-      "weekday": "Freitag",
-      "pillar": "iman",
-      "title": "Aufgaben der Engel",
-      "classroomScenario": "Eine in Qurʾān und Sunnah belegte Aufgabe nennen",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: eine in Qurʾān und Sunnah belegte Aufgabe nennen.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: eine in Qurʾān und Sunnah belegte Aufgabe nennen.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: eine in Qurʾān und Sunnah belegte Aufgabe nennen.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "lessonId": "aqidah-engel-aufgaben-kennen",
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 77,
-      "topicId": "editorial-077",
-      "week": 20,
-      "weekday": "Montag",
-      "pillar": "ikhlas",
-      "title": "Gutes tun, wenn niemand zuschaut",
-      "classroomScenario": "Ohne Aufmerksamkeit den Lernplatz aufräumen",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: ohne Aufmerksamkeit den Lernplatz aufräumen.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: ohne Aufmerksamkeit den Lernplatz aufräumen.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: ohne Aufmerksamkeit den Lernplatz aufräumen.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "lessonId": "aqidah-ikhlas-gutes-ungesehen",
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 78,
-      "topicId": "editorial-078",
-      "week": 20,
-      "weekday": "Dienstag",
-      "pillar": "akhlaq",
-      "title": "Andere trösten",
-      "classroomScenario": "Ein trauriges Kind aufmerksam fragen, ob es Hilfe möchte",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: ein trauriges Kind aufmerksam fragen, ob es Hilfe möchte.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: ein trauriges Kind aufmerksam fragen, ob es Hilfe möchte.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: ein trauriges Kind aufmerksam fragen, ob es Hilfe möchte.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
-    },
+      "lessonId": "akhlaq-mitgefuehl-andere-troesten",
+      "status": "currently-in-catalog"
+    }
+  ],
+  "plannedUnits": [
     {
       "editorialSlot": 79,
       "topicId": "editorial-079",
