@@ -24281,7 +24281,6 @@ const additions=
     "audioScript": "Zakāh und Ḥaǧǧ als Säulen. Zakāh und die Pilgerfahrt sind große Pflichten der Erwachsenen. Der Vers 2:43 sagt: Verrichtet das Gebet, gebt die Zakāh und verbeugt euch mit den sich Verbeugenden. Wir zeigen zwei Karten: Geben und Reise zum Haus. Wir sammeln kein echtes Geld und laufen keine Runden. Wir sagen die beiden Worte und erklären, dass die genaue Rechnung und die einzelnen Wege nicht in diesen zwei Auszügen stehen.",
     "voiceApproved": false
   }
-}
 };
 for(const [id,l] of Object.entries(additions)){
  if(prior[id]||!l.quran||!l.hadith||!l.sourceAudit?.hadithUrl?.startsWith("https://www.islamweb.net/")||l.voiceApproved!==false)throw Error("V38 invalid "+id);
