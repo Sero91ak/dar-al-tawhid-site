@@ -1,6 +1,7 @@
 {
   "buildId": "kids-shell-v201-dua-v4-1306-listen-scroll-v18-salaf-visible-v1380",
   "label": "KIDS · V1.09.22",
+  "salafVisualPolicy": "V1380 · gesichtsfreie Motive · globale Zurückleiste · echter Edge-to-Edge-Hero · prüfsummenfixiert",
   "releasedAt": "2026-10-10T11:00:00Z",
   "note": "KIDS V1.09.21: Startbildschirm wird beim Öffnen anhand der realen Bildschirmhöhe und der festen unteren Tabnavigation ausgerichtet. Während manuellen Scrollens bleibt die berechnete Hero- und Gebetszeiten-Geometrie stabil; kein störendes Nachwachsen des Bildes. Auf iPhone, Android und iPad bleibt die bestehende flexible 1304-Geometrie, das freigegebene Moscheemotiv und alle fünf Gebetszeiten erhalten. Sehr kleine Geräte bleiben scrollbar.",
   "visualSystem": {
@@ -27,7 +28,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1381",
+    "serviceWorkerCache": "v1380",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -431,8 +432,7 @@
       "stickyNext": true,
       "audioScriptRevision": "quiz-joy-serhat-v4-20261013",
       "newAudioPolicy": "eleven-v4-only",
-      "audioProgress": "prefer-manifest-v4-gradual",
-      "feedbackPolicy": "Islamic Academy Praise V4 - age-specific with safe voice fallback"
+      "audioProgress": "prefer-manifest-v4-gradual"
     },
     "kidsQuizContentRevision": "001-900",
     "kidsQuizGenerationPaused": true,
