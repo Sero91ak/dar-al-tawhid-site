@@ -1,0 +1,64 @@
+name: KIDS Restore Paid ElevenLabs V4 Praise (No New TTS)
+on:
+  push:
+    branches:
+      - review/kids-quiz-islamic-praise-v4-20261013
+    paths:
+      - kids/tools/recover_paid_v4_islamic_praise.py
+      - .github/workflows/kids-v4-paid-history-recovery.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: kids-paid-v4-history-recovery
+  cancel-in-progress: false
+jobs:
+  recover:
+    if: github.ref_name == 'review/kids-quiz-islamic-praise-v4-20261013'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-islamic-praise-v4-20261013
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Ensure FFmpeg without new speech synthesis
+        shell: bash
+        run: |
+          set -euo pipefail
+          if command -v ffmpeg >/dev/null 2>&1; then
+            ffmpeg -version | head -1
+            exit 0
+          fi
+          python3 -m pip install -q --disable-pip-version-check imageio-ffmpeg==0.6.0
+          mkdir -p "$HOME/.local/bin"
+          python3 - <<'PY'
+          import imageio_ffmpeg
+          from pathlib import Path
+          path=Path.home()/".local/bin/ffmpeg"
+          path.symlink_to(imageio_ffmpeg.get_ffmpeg_exe())
+          print("FFmpeg:",path)
+          PY
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - name: READ ONLY - recover previously paid Serhat V4 history audio
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 kids/tools/recover_paid_v4_islamic_praise.py
+      - name: Commit recovered original in review branch only
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add kids/data/quiz-v4-islamic-praise-pilot.json
+          git add kids/assets/kids-quiz-audio/serhat-islamic-praise-v4-reviewed-pending.m4a
+          git diff --cached --quiet && exit 0
+          git commit -m "review(kids-quiz): recover paid Serhat V4 praise without generating again"
+          git pull --rebase origin review/kids-quiz-islamic-praise-v4-20261013
+          git push origin HEAD:review/kids-quiz-islamic-praise-v4-20261013
