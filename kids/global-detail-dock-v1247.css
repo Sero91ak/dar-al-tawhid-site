@@ -1079,3 +1079,84 @@ html body > .kids-detail-appbar.kids-portal-appbar:after {content:none!important
 @media (prefers-reduced-motion:reduce) {
  html body > .kids-detail-appbar.kids-portal-appbar {transition:none!important}
 }
+
+/* KIDS_GLOBAL_SAFE_AREA_HEADER_V1410
+   Fixed appbars must paint *the entire top viewport*, including the iOS
+   status/Dynamic Island safe area. v1400 used top:var(--safe-top) and exposed
+   moving hero artwork above the bar on iPhone. The header now starts at 0,
+   and safe-area space belongs INSIDE the same opaque surface. This is the
+   ONE canonical body-level detail appbar rule for all future KIDS pages.
+   Do not overlay a separate status bar or add a second navbar. */
+html body > .kids-detail-appbar.kids-portal-appbar {
+  position:fixed!important;
+  inset-block-start:0!important;
+  top:0!important;
+  inset-inline-start:0!important;
+  left:0!important;
+  right:0!important;
+  min-height:calc(68px + env(safe-area-inset-top,0px))!important;
+  height:auto!important;
+  padding-top:calc(10px + env(safe-area-inset-top,0px))!important;
+  padding-bottom:10px!important;
+  padding-inline-start:max(16px,env(safe-area-inset-left,0px))!important;
+  padding-inline-end:max(16px,env(safe-area-inset-right,0px))!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:12px!important;
+  box-sizing:border-box!important;
+  border-radius:0!important;
+  border-top:0!important;
+  border-bottom:1px solid var(--kids-detail-head-line,rgba(242,213,156,.23))!important;
+  background:var(--kids-detail-head-bg,#092b3b)!important;
+  background-clip:border-box!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  box-shadow:none!important;
+  isolation:isolate!important;
+  z-index:30010!important;
+}
+html body > .kids-detail-appbar.kids-portal-appbar .kids-detail-appbar-copy{
+  display:flex!important;
+  flex:1 1 auto!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  align-items:flex-start!important;
+  gap:3px!important;
+  min-width:0!important;
+  width:auto!important;
+  margin:0!important;
+  padding-inline-start:12px!important;
+  border-inline-start:1px solid var(--kids-detail-head-line,rgba(242,213,156,.23))!important;
+  text-align:start!important;
+}
+html body > .kids-detail-appbar.kids-portal-appbar .kids-detail-dock-back{
+  flex:0 0 50px!important;
+  width:50px!important;
+  min-width:50px!important;
+  max-width:50px!important;
+  height:50px!important;
+  margin:0!important;
+  transform:none!important;
+}
+html body > .kids-detail-appbar.kids-portal-appbar :is(
+  .kids-detail-appbar-title,.kids-detail-appbar-subtitle
+){
+  width:100%!important;
+  max-width:none!important;
+  text-align:start!important;
+  white-space:normal!important;
+  overflow-wrap:anywhere!important;
+}
+/* Layout spacer height is measured from the actual *full* rail including
+   safe area, so the first hero row starts below its bottom border. */
+html body .shell > .view.active.kids-detail-page > .kids-detail-head-spacer{
+  display:block!important;
+  flex:0 0 auto!important;
+  width:100%!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+}
+/* The full-screen modal variant already owns the viewport surface; do not
+   transplant its in-modal back navigation into the body-level portal. */
