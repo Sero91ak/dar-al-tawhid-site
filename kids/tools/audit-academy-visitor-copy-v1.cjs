@@ -23,8 +23,8 @@ const banned = [
   /diese stunde bleibt ein entwurf/i,
   /technische vollständigkeit ersetzt/i,
   /nicht belegt und deshalb nicht behauptet/i,
-  /(?:https?:\\/\\/|www\\.)\\S+/i,
-  /am 13\\. Oktober 2026/i
+  /(?:https?:\/\/|www\.)\S+/i,
+  /am 13\. Oktober 2026/i
 ];
 const violations = [];
 const issue = (where, what) => violations.push(where + ": " + what);
