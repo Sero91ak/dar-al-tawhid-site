@@ -138,3 +138,11 @@ body.qsource-body .qsource-page{
   body.qsource-body .qsource-header{position:relative!important;top:auto!important}
   body.qsource-body .qsource-page{padding-top:0!important}
 }
+
+/* iPad portrait/landscape: preserve space for the system bar without using
+   the taller iPhone Dynamic Island reservation. */
+@supports (-webkit-touch-callout:none){
+  @media (pointer:coarse) and (min-width:700px){
+    :root{--ql-safe-header-offset:max(28px,env(safe-area-inset-top,0px))}
+  }
+}
