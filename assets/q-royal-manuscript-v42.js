@@ -47,19 +47,22 @@
   header.appendChild(change);
   change.addEventListener("click", () => setTheme(root.getAttribute("data-q-theme") === "dark" ? "light" : "dark"));
   setTheme(readTheme());
-  const top = document.createElement("nav");
+  // Public deep links are isolated source cards, never an entry into the owner's index.
+  const top = document.createElement("div");
   top.className = "rq-topbar";
-  top.setAttribute("aria-label", "Quellen-Navigation");
-  const back = document.createElement("a");
-  back.href = "/quellen/";
-  back.textContent = "← Quellenbibliothek";
-  top.appendChild(back);
-  if (number) {
-    const badge = document.createElement("span");
-    badge.textContent = "Quelle Q" + number;
-    top.appendChild(badge);
-  }
+  top.setAttribute("aria-label", "Einzelner Quellenbeleg");
+  const badge = document.createElement("span");
+  badge.textContent = number ? "Quelle Q" + number : "Quellenbeleg";
+  top.appendChild(badge);
   header.insertAdjacentElement("afterend", top);
+  for (const anchor of page.querySelectorAll('a[href]')) {
+    try {
+      const target = new URL(anchor.getAttribute("href"), location.href);
+      if (target.origin === location.origin && /^\\/quellen(?:\\/|$)/.test(target.pathname)) {
+        anchor.remove();
+      }
+    } catch (_) {}
+  }
   // Mark broken placeholder links as unavailable, never masquerade as valid evidence.
   for (const a of page.querySelectorAll('a.qsource-link[href="#"]')) {
     a.addEventListener("click", event => event.preventDefault());
@@ -97,36 +100,6 @@
     const social = page.querySelector(".qsource-social");
     const footer = page.querySelector(".qsource-footer");
     page.insertBefore(actions, social || footer || null);
-    const nav = document.createElement("nav");
-    nav.className = "rq-nav";
-    nav.setAttribute("aria-label", "Vorherige und nächste Quelle");
-    const renderNeighbors = (nums) => {
-      nav.replaceChildren();
-      const current = nums.indexOf(number);
-      if (current < 0) return;
-      const prev = nums[current - 1], next = nums[current + 1];
-      if (prev) {
-        const a = document.createElement("a");
-        a.href = "/q/" + prev + "/";
-        a.textContent = "← Q" + prev + " · Vorherige";
-        nav.appendChild(a);
-      }
-      if (next) {
-        const a = document.createElement("a");
-        a.href = "/q/" + next + "/";
-        a.textContent = "Nächste · Q" + next + " →";
-        nav.appendChild(a);
-      }
-    };
-    page.insertBefore(nav, social || footer || null);
-    fetch("/quellen/shortlinks.json", { cache: "no-store" })
-      .then(r => r.ok ? r.json() : null)
-      .then(data => {
-        if (!data || !Array.isArray(data.links)) return;
-        const nums = data.links.filter(x => x && x.status !== "inactive").map(x => Number(x.number))
-          .filter(x => Number.isSafeInteger(x) && x > 0).sort((a,b) => a-b);
-        renderNeighbors(nums);
-      }).catch(() => {});
   }
   body.dataset.qRoyalVersion = version;
 })();
