@@ -1,6 +1,7 @@
 /* DAR AL TAWHID KIDS — Schätze der Salaf · isolated library shell V1
  * ONLY explicit editorially approved items enter the public library.
- * Age-specific masters never fall back to a different age.
+ * Exactly ONE complete master text and ONE master recording for all ages.
+ * Age-specific variation is presentation only; the narration is identical.
  */
 (function(){
   "use strict";
@@ -17,14 +18,15 @@
     {id:"shukr",title:"Dankbarkeit & Bescheidenheit",short:"Dankbarkeit",caption:"Das Gute erkennen",img:"/kids/assets/salaf/topics-v1380/shukr.jpg"}
   ];
   var INSIGHTS={"rahma":{"intro":{"4-5":"Barmherzig sein heißt: Du siehst, wenn jemand Hilfe braucht, und bist freundlich.","6-8":"Wer barmherzig ist, bemerkt, wenn andere Hilfe brauchen, und hilft mit einem guten Herzen.","9-10":"Barmherzigkeit zeigt sich darin, wie wir mit Menschen umgehen, besonders wenn sie unsere Hilfe brauchen."},"question":{"4-5":"Wem kannst du heute helfen?","6-8":"Welche kleine Hilfe könnte heute jemanden glücklich machen?","9-10":"Wie kannst du jemanden unterstützen, ohne dafür ein Lob zu erwarten?"}},"sidq":{"intro":{"4-5":"Ehrlich sein bedeutet: Du sagst die Wahrheit.","6-8":"Ehrlichkeit bedeutet, bei der Wahrheit zu bleiben – auch wenn es schwerfällt.","9-10":"Ehrlichkeit heißt, aufrichtig zu sprechen und zu handeln, selbst wenn wir einen Fehler zugeben müssen."},"question":{"4-5":"Was sagst du, wenn dir etwas kaputtgeht?","6-8":"Was hilft dir, einen Fehler ehrlich zuzugeben?","9-10":"Warum ist Vertrauen wichtig, wenn wir mit anderen umgehen?"}},"sabr":{"intro":{"4-5":"Geduld heißt: Du bleibst ruhig und gibst nicht gleich auf.","6-8":"Geduldig sein heißt, ruhig weiterzumachen, auch wenn etwas Zeit und Übung braucht.","9-10":"Geduld hilft uns, Schwierigkeiten mit Ruhe und Ausdauer zu begegnen, statt vorschnell aufzugeben."},"question":{"4-5":"Worauf kannst du geduldig warten?","6-8":"Wann hat dir Geduld schon einmal geholfen?","9-10":"Wie kannst du ruhig bleiben, wenn etwas nicht sofort gelingt?"}},"ilm":{"intro":{"4-5":"Lernen ist schön. Mit jeder neuen Sache weißt du ein bisschen mehr.","6-8":"Wissen hilft dir, deine Fragen zu verstehen, Gutes zu tun und Allah besser kennenzulernen.","9-10":"Wer Wissen sucht, lernt Fragen zu stellen, zuverlässig zu prüfen und das Gelernte gut anzuwenden."},"question":{"4-5":"Was willst du heute lernen?","6-8":"Welche Frage möchtest du heute jemandem stellen?","9-10":"Wie findest du heraus, ob eine Antwort zuverlässig ist?"}},"adab":{"intro":{"4-5":"Gute Freunde helfen sich und sprechen freundlich.","6-8":"Freundschaft wächst, wenn wir zuhören, freundlich reden und einander helfen.","9-10":"Guter Umgang zeigt sich durch Rücksicht, ehrliche Worte und Hilfe, auch wenn Freunde einmal verschiedener Meinung sind."},"question":{"4-5":"Wie machst du jemandem eine Freude?","6-8":"Was kannst du tun, wenn dein Freund traurig ist?","9-10":"Wie kannst du freundlich bleiben, wenn du anderer Meinung bist?"}},"family":{"intro":{"4-5":"In der Familie helfen wir einander und zeigen Liebe.","6-8":"Zu Hause zeigen wir Fürsorge, indem wir einander unterstützen und mit Respekt sprechen.","9-10":"Familie bedeutet Verantwortung füreinander: Wir achten aufeinander und helfen auch bei kleinen Alltagsaufgaben."},"question":{"4-5":"Wem hilfst du heute zu Hause?","6-8":"Welche Aufgabe könntest du heute für deine Familie übernehmen?","9-10":"Wie kannst du zu Hause Verantwortung übernehmen, ohne erst darum gebeten zu werden?"}},"hikma":{"intro":{"4-5":"Klug sein heißt: Erst denken, dann handeln.","6-8":"Eine kluge Entscheidung beginnt damit, dass du kurz nachdenkst, bevor du etwas tust.","9-10":"Verantwortung bedeutet, mögliche Folgen einer Entscheidung zu bedenken und das Gute bewusst zu wählen."},"question":{"4-5":"Was machst du, bevor du losrennst?","6-8":"Wer kann dir bei einer schweren Entscheidung helfen?","9-10":"Welche Fragen helfen dir, eine gute Entscheidung zu treffen?"}},"shukr":{"intro":{"4-5":"Dankbar sein heißt: Du freust dich über Gutes und sagst Danke.","6-8":"Dankbarkeit heißt, schöne Dinge und kleine Hilfen zu erkennen und dafür Danke zu sagen.","9-10":"Dankbarkeit zeigt sich nicht nur in Worten, sondern auch darin, wie sorgsam wir mit dem umgehen, was wir haben."},"question":{"4-5":"Wofür sagst du heute Danke?","6-8":"Für welche kleine Sache bist du heute dankbar?","9-10":"Wie kannst du deine Dankbarkeit durch eine gute Tat zeigen?"}}};
-  var MANIFEST="/kids/data/salaf-library-v1.json?v=1";
+  var MANIFEST="/kids/data/salaf-library-v1.json?v=2";
   var items=[],tab="all",topic="",active=null,reader=null,audio=new Audio(),playing=false;
   audio.preload="metadata";audio.setAttribute("playsinline","");
   var esc=function(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})};
   var age=function(){return String(document.querySelector(".app")?.getAttribute("data-age")||"6–8").replace("–","-")};
   var gender=function(){return document.querySelector(".app")?.getAttribute("data-gender")==="girl"?"girl":"boy"};
-  var textFor=function(i){return String(i?.texts?.[age()]||"").trim()};
-  var audioFor=function(i){var a=i?.audio?.[age()];return a&&typeof a==="object"&&a.url?a:null};
+  var textFor=function(i){return String(i?.masterStoryText||"").trim()};
+  /* Same master audio is heard in every age profile; no per-age tracks. */
+  var audioFor=function(i){var a=i?.audioMaster||i?.audio;return a&&typeof a==="object"&&typeof a.url==="string"&&a.url?a:null};
   function safeAsset(path){try{var u=new URL(path,location.origin);return u.origin===location.origin&&/^\/kids\/assets\/[\w\/.%+-]+\.(?:jpg|jpeg|png|webp|svg)$/i.test(u.pathname)?u.pathname:""}catch(_){return""}}
   function safeAudio(path){try{var u=new URL(path,location.origin);return u.origin===location.origin&&/^\/kids\/[\w\/.%+-]+\.(?:mp3|m4a)$/i.test(u.pathname)?u.pathname+u.search:""}catch(_){return""}}
   function soundFor(i){var a=audioFor(i);return a&&safeAudio(a.url)||""}
@@ -34,7 +36,11 @@
       typeof i.title==="string"&&i.title.trim()&&
       typeof i.person==="string"&&i.person.trim()&&
       Array.isArray(i.sources)&&i.sources.some(function(s){return s&&s.author&&s.work&&s.reference&&s.assessment==="verified"})&&
-      Boolean(i.texts&&Object.values(i.texts).some(function(t){return typeof t==="string"&&t.trim().length>80}));
+      /* Do not release a story without its shared, affectionate Salām frame. */
+      typeof i.masterStoryText==="string"&&i.masterStoryText.trim().length>80&&
+      i.masterStoryText.trim().startsWith("As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh")&&
+      /lieber Bruder/i.test(i.masterStoryText)&&/liebe Schwester/i.test(i.masterStoryText)&&
+      /As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh\.?\s*$/.test(i.masterStoryText);
   }
   function available(){return items.filter(function(i){return !!textFor(i)})}
   function prettyAge(){return age().replace("-","–")}
@@ -157,7 +163,7 @@
       var cards=node.querySelectorAll(".salaf-story");
       cards.forEach(function(b){
         var i=items.find(function(x){return x.id===b.dataset.storyId});
-        if(i)window.DARKidsItemDownloads?.story(b,{category:"salaf",item:i,sourceUrl:MANIFEST,artwork:i.image,hero:i.hero||i.image,audioMeta:audioFor(i),readerUrl:"/kids/salaf-library-v1.js?v=1"});
+        if(i)window.DARKidsItemDownloads?.story(b,{category:"salaf",item:i,sourceUrl:MANIFEST,artwork:i.image,hero:i.hero||i.image,audioMeta:audioFor(i),readerUrl:"/kids/salaf-library-v1.js?v=1390"});
       });
       q("#salafOpenParentsOffline")?.addEventListener("click",function(){
         q("#salafDetail")?.setAttribute("hidden","");
@@ -196,8 +202,8 @@
     q("#salafFollow").disabled=!url;updatePlay();updateTime();
     var act=q(".salaf-actions");act.querySelector(".kids-offline-inline")?.remove();
     if(url)window.DARKidsItemDownloads?.storyDetail(act,{category:"salaf",item:i,sourceUrl:MANIFEST,
-      artwork:i.image,hero:i.hero||i.image,audioMeta:audioFor(i),readerUrl:"/kids/salaf-library-v1.js?v=1"});
-    reader?.setContent?.({key:"salaf:"+i.id+":"+age(),title:i.title,subtitle:i.person+" · "+prettyAge()+" Jahre",
+      artwork:i.image,hero:i.hero||i.image,audioMeta:audioFor(i),readerUrl:"/kids/salaf-library-v1.js?v=1390"});
+    reader?.setContent?.({key:"salaf:"+i.id,title:i.title,subtitle:i.person,
       album:"DĀR AL TAWḤĪD KIDS · Schätze der Salaf",text:textFor(i),artwork:art,timings:audioFor(i)?.timings||[],audioOnly:false});
     details.hidden=false;details.setAttribute("aria-hidden","false");document.documentElement.classList.add("salaf-detail-open");details.dataset.open="yes";
     q(".salaf-detail-scroll").scrollTop=0;q(".salaf-back").focus({preventScroll:true});
@@ -210,7 +216,7 @@
   }
   reader=window.DARKidsFollowReader?.create({
     id:"salaf-library",audio:audio,
-    getContent:function(){var i=active;return {key:i?"salaf:"+i.id+":"+age():"salaf-library",title:i?.title||"Geschichte",
+    getContent:function(){var i=active;return {key:i?"salaf:"+i.id:"salaf-library",title:i?.title||"Geschichte",
       subtitle:i?.person||"Schätze der Salaf",text:textFor(i),artwork:safeAsset(i?.hero||i?.image||""),
       timings:audioFor(i)?.timings||[],audioOnly:false}},
     toggleAudio:toggleAudio,autoOpen:false,disabled:function(){return !soundFor(active)}
