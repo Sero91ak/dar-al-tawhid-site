@@ -726,19 +726,19 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers ist eine Mahnung Luqmāns an seinen Sohn auf dieser Tafsīr-Seite. Wir erfinden keine zusätzliche Geschichte über Luqmān. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Vers ist eine Mahnung Luqmāns an seinen Sohn auf dieser Tafsīr-Seite. Wir erfinden keine zusätzliche Geschichte über Luqmān. Keine synthetische Rezitation. Keine Freigabe für Besucher. Independenter didaktischer Review 2026-10-13: Kindertexte und Quizfragen umgeschrieben, Quellenstatus unverändert."
     },
     "hint": "Wir erfinden keine zusätzliche Geschichte.",
     "sample": "Wir erzählen von einer guten Tat, ohne uns wichtig zu machen.",
     "ageText": {
       "4-5": {
         "goal": "Wir erzählen von einer guten Tat, ohne uns wichtig zu machen.",
-        "intro": "Wir erzählen von einer guten Tat, ohne uns wichtig zu machen. Der Vers verbietet, die Wange hochmütig von den Menschen wegzudrehen und eingebildet über die Erde zu gehen. Stell dir vor: Ein Kind hat beim Aufräumen geholfen und sagt danach: Ich bin der Beste, ihr seid langsam. Heute üben wir: Wir formulieren denselben Satz neu: Ich habe mitgeholfen. Ohne einen Vergleich. Wir erfinden keine zusätzliche Geschichte.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! Etwas Gutes zu tun ist schön. Aber wir brauchen uns danach nicht besser als andere zu machen. Ein Kind hat beim Aufräumen geholfen. Statt „Ich bin der Beste!“ kann es sagen: „Ich habe mitgeholfen.“ Wir freuen uns über das Gute, ohne andere kleinzumachen. Im Qurʾān 31:18 wird vor Hochmut und Prahlerei gewarnt.",
         "lines": [
-          "Wir erzählen von einer guten Tat, ohne uns wichtig zu machen.",
-          "Der Vers verbietet, die Wange hochmütig von den Menschen wegzudrehen und eingebildet über die Erde zu gehen.",
-          "Ein Kind hat beim Aufräumen geholfen und sagt danach: Ich bin der Beste, ihr seid langsam.",
-          "Wir formulieren denselben Satz neu: Ich habe mitgeholfen. Ohne einen Vergleich."
+          "Gutes tun ist schön.",
+          "Qurʾān 31:18 warnt vor Hochmut und Prahlen.",
+          "Freude über eine Tat muss niemanden herabsetzen.",
+          "Wir sprechen bescheiden über unsere Hilfe."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1445. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 31:18. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1445. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 31:18. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -755,16 +755,16 @@ const additions=
         "situation": "Ein Kind hat beim Aufräumen geholfen und sagt danach: Ich bin der Beste, ihr seid langsam.",
         "practice": "Wir formulieren denselben Satz neu: Ich habe mitgeholfen. Ohne einen Vergleich.",
         "summary": "Wir erzählen von einer guten Tat, ohne uns wichtig zu machen. Wir erfinden keine zusätzliche Geschichte.",
-        "audioScript": "Nicht mit guten Taten prahlen. Wir erzählen von einer guten Tat, ohne uns wichtig zu machen. Der Vers verbietet, die Wange hochmütig von den Menschen wegzudrehen und eingebildet über die Erde zu gehen. Ein Kind hat beim Aufräumen geholfen und sagt danach: Ich bin der Beste, ihr seid langsam. Wir formulieren denselben Satz neu: Ich habe mitgeholfen. Ohne einen Vergleich."
+        "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Etwas Gutes zu tun ist schön. Aber wir brauchen uns danach nicht besser als andere zu machen. Ein Kind hat beim Aufräumen geholfen. Statt „Ich bin der Beste!“ kann es sagen: „Ich habe mitgeholfen.“ Wir freuen uns über das Gute, ohne andere kleinzumachen. Im Qurʾān 31:18 wird vor Hochmut und Prahlerei gewarnt."
       },
       "6-8": {
         "goal": "Wir erzählen von einer guten Tat, ohne uns wichtig zu machen.",
-        "intro": "Heute geht es um Nicht mit guten Taten prahlen. Wir erzählen von einer guten Tat, ohne uns wichtig zu machen. Wir lesen Qurʾān 31:18. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers verbietet, die Wange hochmütig von den Menschen wegzudrehen und eingebildet über die Erde zu gehen. Allah liebt nicht jeden Eingebildeten und Prahler. So kann das im Alltag aussehen: Ein Kind hat beim Aufräumen geholfen und sagt danach: Ich bin der Beste, ihr seid langsam. Die Aufgabe: Wir formulieren denselben Satz neu: Ich habe mitgeholfen. Ohne einen Vergleich. muḫtāl bedeutet: jemand, der eingebildet auftritt. fachūr bedeutet: jemand, der viel mit sich prahlt. Die Grenze der Stunde: Der Vers ist eine Mahnung Luqmāns an seinen Sohn auf dieser Tafsīr-Seite. Wir erfinden keine zusätzliche Geschichte über Luqmān. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "As-salāmu ʿalaikum! Qurʾān 31:18 warnt vor hochmütigem Verhalten und Prahlerei. Wir schauen, wie das im Alltag aussieht: Du hilfst beim Aufräumen und bist stolz darauf. Du darfst dich freuen, aber du musst niemanden abwerten. Sage lieber: „Wir haben es gemeinsam geschafft.“ Die arabischen Wörter muḫtāl und fachūr bezeichnen hochmütiges Auftreten und Prahlen.",
         "lines": [
-          "Qurʾān 31:18 ist die gelesene Stelle.",
-          "Der Vers verbietet, die Wange hochmütig von den Menschen wegzudrehen und eingebildet über die Erde zu gehen.",
-          "Ein Kind hat beim Aufräumen geholfen und sagt danach: Ich bin der Beste, ihr seid langsam.",
-          "Wir erfinden keine zusätzliche Geschichte."
+          "Gutes tun ist schön.",
+          "Qurʾān 31:18 warnt vor Hochmut und Prahlen.",
+          "Freude über eine Tat muss niemanden herabsetzen.",
+          "Wir sprechen bescheiden über unsere Hilfe."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1445. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 31:18. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1445. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 31:18. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -781,16 +781,16 @@ const additions=
         "situation": "Ein Kind hat beim Aufräumen geholfen und sagt danach: Ich bin der Beste, ihr seid langsam.",
         "practice": "Wir formulieren denselben Satz neu: Ich habe mitgeholfen. Ohne einen Vergleich.",
         "summary": "Qurʾān 31:18 trägt diese Stunde. Der Vers verbietet, die Wange hochmütig von den Menschen wegzudrehen und eingebildet über die Erde zu gehen.",
-        "audioScript": "Nicht mit guten Taten prahlen. Der Vers verbietet, die Wange hochmütig von den Menschen wegzudrehen und eingebildet über die Erde zu gehen. Ein Kind hat beim Aufräumen geholfen und sagt danach: Ich bin der Beste, ihr seid langsam. Wir formulieren denselben Satz neu: Ich habe mitgeholfen. Ohne einen Vergleich."
+        "audioScript": "As-salāmu ʿalaikum! Qurʾān 31:18 warnt vor hochmütigem Verhalten und Prahlerei. Wir schauen, wie das im Alltag aussieht: Du hilfst beim Aufräumen und bist stolz darauf. Du darfst dich freuen, aber du musst niemanden abwerten. Sage lieber: „Wir haben es gemeinsam geschafft.“ Die arabischen Wörter muḫtāl und fachūr bezeichnen hochmütiges Auftreten und Prahlen."
       },
       "9-10": {
         "goal": "Ich kann Nicht mit guten Taten prahlen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Nicht mit guten Taten prahlen. Das Lernziel ist: Wir erzählen von einer guten Tat, ohne uns wichtig zu machen. Die Seite https://www.islamweb.net/ar/library/content/49/1445 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 31:18. Sinngemäß, keine beglaubigte Übersetzung: Der Vers verbietet, die Wange hochmütig von den Menschen wegzudrehen und eingebildet über die Erde zu gehen. Allah liebt nicht jeden Eingebildeten und Prahler. Alltag: Ein Kind hat beim Aufräumen geholfen und sagt danach: Ich bin der Beste, ihr seid langsam. Aufgabe: Wir formulieren denselben Satz neu: Ich habe mitgeholfen. Ohne einen Vergleich. muḫtāl bedeutet: jemand, der eingebildet auftritt. fachūr bedeutet: jemand, der viel mit sich prahlt. Was nicht behauptet wird: Der Vers ist eine Mahnung Luqmāns an seinen Sohn auf dieser Tafsīr-Seite. Wir erfinden keine zusätzliche Geschichte über Luqmān. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "As-salāmu ʿalaikum! Was ist der Unterschied zwischen Freude über eine gute Tat und Prahlerei? In Qurʾān 31:18 wird davor gewarnt, Menschen hochmütig zu begegnen und eingebildet aufzutreten. Ein Kind darf sich über sein eigenes Bemühen freuen. Es soll seine Tat aber nicht benutzen, um andere als schlechter hinzustellen. Wir üben deshalb, von guten Taten ohne verletzenden Vergleich zu sprechen. Die Erklärung der Wörter muḫtāl und fachūr hilft uns, Hochmut im Alltag zu erkennen.",
         "lines": [
-          "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 31:18.",
-          "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
-          "Der Vers ist eine Mahnung Luqmāns an seinen Sohn auf dieser Tafsīr-Seite.",
-          "Eine Hadithnummer, die auf der Seite fehlt, wird nicht ergänzt."
+          "Gutes tun ist schön.",
+          "Qurʾān 31:18 warnt vor Hochmut und Prahlen.",
+          "Freude über eine Tat muss niemanden herabsetzen.",
+          "Wir sprechen bescheiden über unsere Hilfe."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1445. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 31:18. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1445. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 31:18. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -807,90 +807,90 @@ const additions=
         "situation": "Ein Kind hat beim Aufräumen geholfen und sagt danach: Ich bin der Beste, ihr seid langsam.",
         "practice": "Wir formulieren denselben Satz neu: Ich habe mitgeholfen. Ohne einen Vergleich.",
         "summary": "Belegt ist Qurʾān 31:18. Ungeprüft bleibt: Der Vers ist eine Mahnung Luqmāns an seinen Sohn auf dieser Tafsīr-Seite.",
-        "audioScript": "Für die älteren Kinder. Nicht mit guten Taten prahlen. Der Vers verbietet, die Wange hochmütig von den Menschen wegzudrehen und eingebildet über die Erde zu gehen. Nicht belegt und deshalb nicht behauptet: Der Vers ist eine Mahnung Luqmāns an seinen Sohn auf dieser Tafsīr-Seite."
+        "audioScript": "As-salāmu ʿalaikum! Was ist der Unterschied zwischen Freude über eine gute Tat und Prahlerei? In Qurʾān 31:18 wird davor gewarnt, Menschen hochmütig zu begegnen und eingebildet aufzutreten. Ein Kind darf sich über sein eigenes Bemühen freuen. Es soll seine Tat aber nicht benutzen, um andere als schlechter hinzustellen. Wir üben deshalb, von guten Taten ohne verletzenden Vergleich zu sprechen. Die Erklärung der Wörter muḫtāl und fachūr hilft uns, Hochmut im Alltag zu erkennen."
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was passt zu dieser Stunde?",
+          "prompt": "Du hast beim Aufräumen geholfen. Was sagst du?",
           "options": [
-            "Wir formulieren denselben Satz neu: Ich habe mitgeholfen. Ohne einen Vergleich.",
-            "Ich tue es, damit alle mich loben."
+            "Ich freue mich, dass ich helfen durfte.",
+            "Ich bin besser als alle anderen."
           ],
           "correct": 0,
-          "hint": "Schau auf die Übung.",
-          "explain": "Die Übung der Stunde ist der erste Satz. Der zweite Satz ist das Gegenteil von dem, was wir üben."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Bescheidenheit verletzt keine anderen Kinder."
         },
         {
           "type": "choice",
-          "prompt": "Woran hält sich diese Stunde?",
+          "prompt": "Was sollen wir vermeiden?",
           "options": [
-            "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "Andere mit unserem Lob kleinzumachen.",
+            "Gemeinsam zu helfen."
           ],
           "correct": 0,
-          "hint": "Nur Gelesenes.",
-          "explain": "Die Stunde nennt Qurʾān 31:18 und trennt die Übung davon. Eine Nummer wird nicht erfunden."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Wir lernen, Gutes ohne Prahlen zu tun."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Stelle trägt Nicht mit guten Taten prahlen?",
+          "prompt": "Wovor warnt Qurʾān 31:18?",
           "options": [
-            "Qurʾān 31:18",
-            "Eine Stelle ohne Suren- und Verszahl."
+            "Vor Hochmut und Prahlerei.",
+            "Vor dem freundlichen Helfen."
           ],
           "correct": 0,
-          "hint": "Die Fundstelle steht im Unterricht.",
-          "explain": "Die Stunde bleibt bei Qurʾān 31:18."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Der Vers mahnt zu Bescheidenheit."
         },
         {
           "type": "choice",
-          "prompt": "Was sagt der Vers sinngemäß für diese Stunde?",
+          "prompt": "Welcher Satz ist bescheiden?",
           "options": [
-            "Der Vers verbietet, die Wange hochmütig von den Menschen wegzudrehen und eingebildet über die Erde zu gehen.",
-            "Ich tue es, damit alle mich loben."
+            "Wir haben zusammen aufgeräumt.",
+            "Ich bin besser als ihr!"
           ],
           "correct": 0,
-          "hint": "Der erste Satz folgt der gelesenen Stelle.",
-          "explain": "Die deutsche Zeile ist eine Unterrichtshilfe zu Qurʾān 31:18, keine beglaubigte Übersetzung."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Der erste Satz stellt niemanden unter dich."
         },
         {
           "type": "text",
-          "prompt": "Welche Übung gehört zu dieser Stunde?",
-          "sample": "Wir formulieren denselben Satz neu: Ich habe mitgeholfen. Ohne einen Vergleich.",
-          "hint": "Die praktische Aufgabe.",
-          "explain": "Die Übung ist die genannte Handlung und nicht eine zusätzliche Formel."
+          "prompt": "Wie kannst du von einer guten Tat erzählen, ohne zu prahlen?",
+          "sample": "Ich habe mitgeholfen und freue mich darüber.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Du kannst dich freuen, ohne andere abzuwerten."
         }
       ],
       "9-10": [
         {
           "type": "choice",
-          "prompt": "Welche Angabe wäre unehrlich?",
+          "prompt": "Was verurteilt Qurʾān 31:18?",
           "options": [
-            "Ein Rechtsurteil oder eine Hadithnummer als gelesen auszugeben, obwohl die Seite sie nicht liefert.",
-            "Zu sagen, dass die deutsche Erklärung sinngemäß ist."
+            "Hochmütiges Auftreten und Prahlerei.",
+            "Gemeinsame Hilfe und Dankbarkeit."
           ],
           "correct": 0,
-          "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Der Vers warnt vor eingebildetem Verhalten."
         },
         {
           "type": "text",
-          "prompt": "Was darf diese Stunde nicht behaupten?",
-          "sample": "Der Vers ist eine Mahnung Luqmāns an seinen Sohn auf dieser Tafsīr-Seite.",
-          "hint": "Die Grenze steht im Text.",
-          "explain": "Die Grenze schützt davor, den Vers zu überdehnen."
+          "prompt": "Was ist der Unterschied zwischen Freude und Prahlerei?",
+          "sample": "Freude ist erlaubt; Prahlerei benutzt eine gute Tat, um sich über andere zu stellen.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Wir bewerten hier die Art, wie wir über Taten sprechen."
         },
         {
           "type": "text",
-          "prompt": "Wie lautet die Qurʾān-Stelle?",
-          "sample": "Qurʾān 31:18",
-          "hint": "Sure und Vers.",
-          "explain": "Die Stelle ist Qurʾān 31:18 auf der genannten Islamweb-Seite."
+          "prompt": "Formuliere „Ich bin der Beste, ihr seid langsam“ bescheiden um.",
+          "sample": "Ich habe gern mitgeholfen. Gemeinsam ging es gut.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Bescheidene Worte werten niemanden ab."
         }
       ]
     },
@@ -943,19 +943,19 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers erlaubt keine Rachegeschichte für Kinder. Die Grenze bei wiederholter Gemeinheit bleibt. Verzeihen heißt nicht, Gefahr zu verstecken. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Vers erlaubt keine Rachegeschichte für Kinder. Die Grenze bei wiederholter Gemeinheit bleibt. Verzeihen heißt nicht, Gefahr zu verstecken. Keine synthetische Rezitation. Keine Freigabe für Besucher. Independenter didaktischer Review 2026-10-13: Kindertexte und Quizfragen umgeschrieben, Quellenstatus unverändert."
     },
     "hint": "Bei Gefahr holst du einen Menschen. Eine Bitte allein reicht dann nicht.",
     "sample": "Wir können verzeihen.",
     "ageText": {
       "4-5": {
         "goal": "Wir können verzeihen.",
-        "intro": "Wir können verzeihen. Der Vers sagt, dass die Vergeltung eines Schlechten ein Gleiches sein kann, und dass der Lohn dessen, der vergibt und Frieden stiftet, bei Allah liegt. Stell dir vor: Jemand stößt aus Versehen ein Heft vom Tisch, sagt Entschuldigung, und das andere Kind entscheidet, ob es den Stoß ruhig beendet. Heute üben wir: Wir üben zwei Sätze: Ich verzeihe das. Und: Bitte hör damit auf. Bei Gefahr holst du einen Menschen. Eine Bitte allein reicht dann nicht.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! Wenn jemand aus Versehen dein Heft herunterstößt und sich entschuldigt, kannst du verzeihen. Das ist schön. Du darfst auch sagen: „Bitte pass besser auf.“ Wenn jemand dich verletzt oder weiter ärgert, darfst du eine erwachsene Person holen. Verzeihen heißt nicht, dass du Unrecht allein ertragen musst.",
         "lines": [
-          "Wir können verzeihen.",
-          "Der Vers sagt, dass die Vergeltung eines Schlechten ein Gleiches sein kann, und dass der Lohn dessen, der vergibt und Frieden stiftet, bei Allah liegt.",
-          "Jemand stößt aus Versehen ein Heft vom Tisch, sagt Entschuldigung, und das andere Kind entscheidet, ob es den Stoß ruhig beendet.",
-          "Wir üben zwei Sätze: Ich verzeihe das. Und: Bitte hör damit auf."
+          "Verzeihen kann gut sein.",
+          "Qurʾān 42:40 lobt Verzeihen und Friedenstiften.",
+          "Ich darf freundlich eine Grenze setzen.",
+          "Bei wiederholtem Unrecht hole ich Hilfe."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1686. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 42:40. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1686. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 42:40. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -972,16 +972,16 @@ const additions=
         "situation": "Jemand stößt aus Versehen ein Heft vom Tisch, sagt Entschuldigung, und das andere Kind entscheidet, ob es den Stoß ruhig beendet.",
         "practice": "Wir üben zwei Sätze: Ich verzeihe das. Und: Bitte hör damit auf.",
         "summary": "Wir können verzeihen. Bei Gefahr holst du einen Menschen. Eine Bitte allein reicht dann nicht.",
-        "audioScript": "Verzeihen und Grenzen achten. Wir können verzeihen. Der Vers sagt, dass die Vergeltung eines Schlechten ein Gleiches sein kann, und dass der Lohn dessen, der vergibt und Frieden stiftet, bei Allah liegt. Jemand stößt aus Versehen ein Heft vom Tisch, sagt Entschuldigung, und das andere Kind entscheidet, ob es den Stoß ruhig beendet. Wir üben zwei Sätze: Ich verzeihe das. Und: Bitte hör damit auf."
+        "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Wenn jemand aus Versehen dein Heft herunterstößt und sich entschuldigt, kannst du verzeihen. Das ist schön. Du darfst auch sagen: „Bitte pass besser auf.“ Wenn jemand dich verletzt oder weiter ärgert, darfst du eine erwachsene Person holen. Verzeihen heißt nicht, dass du Unrecht allein ertragen musst."
       },
       "6-8": {
         "goal": "Wir können verzeihen.",
-        "intro": "Heute geht es um Verzeihen und Grenzen achten. Wir können verzeihen. Wir lesen Qurʾān 42:40. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass die Vergeltung eines Schlechten ein Gleiches sein kann, und dass der Lohn dessen, der vergibt und Frieden stiftet, bei Allah liegt. So kann das im Alltag aussehen: Jemand stößt aus Versehen ein Heft vom Tisch, sagt Entschuldigung, und das andere Kind entscheidet, ob es den Stoß ruhig beendet. Die Aufgabe: Wir üben zwei Sätze: Ich verzeihe das. Und: Bitte hör damit auf. ʿafā bedeutet: verzeihen. aṣlaḥa bedeutet: in Ordnung bringen, Frieden stiften. Die Grenze der Stunde: Der Vers erlaubt keine Rachegeschichte für Kinder. Die Grenze bei wiederholter Gemeinheit bleibt. Verzeihen heißt nicht, Gefahr zu verstecken. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "As-salāmu ʿalaikum! In Qurʾān 42:40 wird die besondere Bedeutung von Vergebung und Friedenstiften erwähnt. Ein Kind stößt versehentlich ein Heft herunter und entschuldigt sich. Das andere Kind kann verzeihen und zugleich um mehr Rücksicht bitten. Wenn eine Person wiederholt gemein ist oder du dich unsicher fühlst, holst du Hilfe. Verzeihen darf niemand erzwingen.",
         "lines": [
-          "Qurʾān 42:40 ist die gelesene Stelle.",
-          "Der Vers sagt, dass die Vergeltung eines Schlechten ein Gleiches sein kann, und dass der Lohn dessen, der vergibt und Frieden stiftet, bei Allah liegt.",
-          "Jemand stößt aus Versehen ein Heft vom Tisch, sagt Entschuldigung, und das andere Kind entscheidet, ob es den Stoß ruhig beendet.",
-          "Bei Gefahr holst du einen Menschen. Eine Bitte allein reicht dann nicht."
+          "Verzeihen kann gut sein.",
+          "Qurʾān 42:40 lobt Verzeihen und Friedenstiften.",
+          "Ich darf freundlich eine Grenze setzen.",
+          "Bei wiederholtem Unrecht hole ich Hilfe."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1686. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 42:40. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1686. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 42:40. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -998,16 +998,16 @@ const additions=
         "situation": "Jemand stößt aus Versehen ein Heft vom Tisch, sagt Entschuldigung, und das andere Kind entscheidet, ob es den Stoß ruhig beendet.",
         "practice": "Wir üben zwei Sätze: Ich verzeihe das. Und: Bitte hör damit auf.",
         "summary": "Qurʾān 42:40 trägt diese Stunde. Der Vers sagt, dass die Vergeltung eines Schlechten ein Gleiches sein kann, und dass der Lohn dessen, der vergibt und Frieden stiftet, bei Allah liegt.",
-        "audioScript": "Verzeihen und Grenzen achten. Der Vers sagt, dass die Vergeltung eines Schlechten ein Gleiches sein kann, und dass der Lohn dessen, der vergibt und Frieden stiftet, bei Allah liegt. Jemand stößt aus Versehen ein Heft vom Tisch, sagt Entschuldigung, und das andere Kind entscheidet, ob es den Stoß ruhig beendet. Wir üben zwei Sätze: Ich verzeihe das. Und: Bitte hör damit auf."
+        "audioScript": "As-salāmu ʿalaikum! In Qurʾān 42:40 wird die besondere Bedeutung von Vergebung und Friedenstiften erwähnt. Ein Kind stößt versehentlich ein Heft herunter und entschuldigt sich. Das andere Kind kann verzeihen und zugleich um mehr Rücksicht bitten. Wenn eine Person wiederholt gemein ist oder du dich unsicher fühlst, holst du Hilfe. Verzeihen darf niemand erzwingen."
       },
       "9-10": {
         "goal": "Ich kann Verzeihen und Grenzen achten von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Verzeihen und Grenzen achten. Das Lernziel ist: Wir können verzeihen. Die Seite https://www.islamweb.net/ar/library/content/49/1686 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 42:40. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass die Vergeltung eines Schlechten ein Gleiches sein kann, und dass der Lohn dessen, der vergibt und Frieden stiftet, bei Allah liegt. Alltag: Jemand stößt aus Versehen ein Heft vom Tisch, sagt Entschuldigung, und das andere Kind entscheidet, ob es den Stoß ruhig beendet. Aufgabe: Wir üben zwei Sätze: Ich verzeihe das. Und: Bitte hör damit auf. ʿafā bedeutet: verzeihen. aṣlaḥa bedeutet: in Ordnung bringen, Frieden stiften. Was nicht behauptet wird: Der Vers erlaubt keine Rachegeschichte für Kinder. Die Grenze bei wiederholter Gemeinheit bleibt. Verzeihen heißt nicht, Gefahr zu verstecken. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "As-salāmu ʿalaikum! Qurʾān 42:40 spricht über die Reaktion auf Unrecht und lobt Vergebung, die mit dem Wiederherstellen des Guten verbunden ist. Wir übertragen keine Erwachsenenregel über Vergeltung auf Kinderspiele. Stattdessen unterscheiden wir eine Entschuldigung nach einem Versehen von wiederholten Übergriffen. Du kannst vergeben und dennoch Grenzen setzen. Eine Versöhnung setzt voraus, dass das Unrecht aufhört. Wenn du Schutz brauchst, holen Erwachsene Hilfe. Die Wörter ʿafā und aṣlaḥa bedeuten verzeihen und in Ordnung bringen.",
         "lines": [
-          "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 42:40.",
-          "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
-          "Der Vers erlaubt keine Rachegeschichte für Kinder.",
-          "Eine Hadithnummer, die auf der Seite fehlt, wird nicht ergänzt."
+          "Verzeihen kann gut sein.",
+          "Qurʾān 42:40 lobt Verzeihen und Friedenstiften.",
+          "Ich darf freundlich eine Grenze setzen.",
+          "Bei wiederholtem Unrecht hole ich Hilfe."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1686. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 42:40. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1686. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 42:40. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -1024,90 +1024,90 @@ const additions=
         "situation": "Jemand stößt aus Versehen ein Heft vom Tisch, sagt Entschuldigung, und das andere Kind entscheidet, ob es den Stoß ruhig beendet.",
         "practice": "Wir üben zwei Sätze: Ich verzeihe das. Und: Bitte hör damit auf.",
         "summary": "Belegt ist Qurʾān 42:40. Ungeprüft bleibt: Der Vers erlaubt keine Rachegeschichte für Kinder.",
-        "audioScript": "Für die älteren Kinder. Verzeihen und Grenzen achten. Der Vers sagt, dass die Vergeltung eines Schlechten ein Gleiches sein kann, und dass der Lohn dessen, der vergibt und Frieden stiftet, bei Allah liegt. Nicht belegt und deshalb nicht behauptet: Der Vers erlaubt keine Rachegeschichte für Kinder."
+        "audioScript": "As-salāmu ʿalaikum! Qurʾān 42:40 spricht über die Reaktion auf Unrecht und lobt Vergebung, die mit dem Wiederherstellen des Guten verbunden ist. Wir übertragen keine Erwachsenenregel über Vergeltung auf Kinderspiele. Stattdessen unterscheiden wir eine Entschuldigung nach einem Versehen von wiederholten Übergriffen. Du kannst vergeben und dennoch Grenzen setzen. Eine Versöhnung setzt voraus, dass das Unrecht aufhört. Wenn du Schutz brauchst, holen Erwachsene Hilfe. Die Wörter ʿafā und aṣlaḥa bedeuten verzeihen und in Ordnung bringen."
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was passt zu dieser Stunde?",
+          "prompt": "Jemand entschuldigt sich für ein Versehen. Was darfst du sagen?",
           "options": [
-            "Wir üben zwei Sätze: Ich verzeihe das. Und: Bitte hör damit auf.",
-            "Ich mache es noch einmal extra."
+            "Ich verzeihe dir. Bitte pass auf.",
+            "Jetzt muss ich dich bestrafen."
           ],
           "correct": 0,
-          "hint": "Schau auf die Übung.",
-          "explain": "Die Übung der Stunde ist der erste Satz. Der zweite Satz ist das Gegenteil von dem, was wir üben."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Verzeihen kann nach einem Versehen gut sein."
         },
         {
           "type": "choice",
-          "prompt": "Woran hält sich diese Stunde?",
+          "prompt": "Jemand verletzt dich immer wieder. Was ist richtig?",
           "options": [
-            "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "Eine vertraute erwachsene Person holen.",
+            "Alles geheim halten."
           ],
           "correct": 0,
-          "hint": "Nur Gelesenes.",
-          "explain": "Die Stunde nennt Qurʾān 42:40 und trennt die Übung davon. Eine Nummer wird nicht erfunden."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Du darfst Schutz und Hilfe bekommen."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Stelle trägt Verzeihen und Grenzen achten?",
+          "prompt": "Was wird in Qurʾān 42:40 gelobt?",
           "options": [
-            "Qurʾān 42:40",
-            "Eine Stelle ohne Suren- und Verszahl."
+            "Vergebung und das Wiederherstellen des Guten.",
+            "Das Fortsetzen eines Streits."
           ],
           "correct": 0,
-          "hint": "Die Fundstelle steht im Unterricht.",
-          "explain": "Die Stunde bleibt bei Qurʾān 42:40."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Der Vers spricht vom Vergeben und Friedenstiften."
         },
         {
           "type": "choice",
-          "prompt": "Was sagt der Vers sinngemäß für diese Stunde?",
+          "prompt": "Kannst du verzeihen und trotzdem Stopp sagen?",
           "options": [
-            "Der Vers sagt, dass die Vergeltung eines Schlechten ein Gleiches sein kann, und dass der Lohn dessen, der vergibt und Frieden stiftet, bei.",
-            "Ich mache es noch einmal extra."
+            "Ja, Grenzen bleiben wichtig.",
+            "Nein, ich muss alles aushalten."
           ],
           "correct": 0,
-          "hint": "Der erste Satz folgt der gelesenen Stelle.",
-          "explain": "Die deutsche Zeile ist eine Unterrichtshilfe zu Qurʾān 42:40, keine beglaubigte Übersetzung."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Verzeihen verlangt nicht, Unrecht zu dulden."
         },
         {
           "type": "text",
-          "prompt": "Welche Übung gehört zu dieser Stunde?",
-          "sample": "Wir üben zwei Sätze: Ich verzeihe das. Und: Bitte hör damit auf.",
-          "hint": "Die praktische Aufgabe.",
-          "explain": "Die Übung ist die genannte Handlung und nicht eine zusätzliche Formel."
+          "prompt": "Wie reagierst du, wenn jemand dich wiederholt verletzt?",
+          "sample": "Ich sage es einer erwachsenen Person, der ich vertraue.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Bei Gefahr steht Schutz vor einer Versöhnung."
         }
       ],
       "9-10": [
         {
           "type": "choice",
-          "prompt": "Welche Angabe wäre unehrlich?",
+          "prompt": "Welche Haltung wird in Qurʾān 42:40 gelobt?",
           "options": [
-            "Ein Rechtsurteil oder eine Hadithnummer als gelesen auszugeben, obwohl die Seite sie nicht liefert.",
-            "Zu sagen, dass die deutsche Erklärung sinngemäß ist."
+            "Verzeihen verbunden mit dem Wiederherstellen des Guten.",
+            "Sich an schwächeren Kindern zu rächen."
           ],
           "correct": 0,
-          "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Der Vers hebt Vergeben und Friedenstiften hervor."
         },
         {
           "type": "text",
-          "prompt": "Was darf diese Stunde nicht behaupten?",
-          "sample": "Der Vers erlaubt keine Rachegeschichte für Kinder.",
-          "hint": "Die Grenze steht im Text.",
-          "explain": "Die Grenze schützt davor, den Vers zu überdehnen."
+          "prompt": "Warum darf man Vergebung nicht erzwingen?",
+          "sample": "Vergebung ist nicht dasselbe wie Unrecht weiter zu ertragen; Schutz muss gewährleistet sein.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Bei wiederholten Übergriffen dürfen Kinder Hilfe holen."
         },
         {
           "type": "text",
-          "prompt": "Wie lautet die Qurʾān-Stelle?",
-          "sample": "Qurʾān 42:40",
-          "hint": "Sure und Vers.",
-          "explain": "Die Stelle ist Qurʾān 42:40 auf der genannten Islamweb-Seite."
+          "prompt": "Erkläre ʿafā und aṣlaḥa.",
+          "sample": "ʿafā heißt verzeihen; aṣlaḥa heißt wieder in Ordnung bringen.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Beide Begriffe gehören zur Stunde."
         }
       ]
     },
@@ -1160,19 +1160,19 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die Seite legt keine Kleiderordnung für Kinder fest, die wir hier ergänzen würden. Essen und Trinken aus demselben Vers gehören zur späteren Stunde über Essen. Hier üben wir die Ruhe im Gebetsraum. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Die Seite legt keine Kleiderordnung für Kinder fest, die wir hier ergänzen würden. Essen und Trinken aus demselben Vers gehören zur späteren Stunde über Essen. Hier üben wir die Ruhe im Gebetsraum. Keine synthetische Rezitation. Keine Freigabe für Besucher. Independenter didaktischer Review 2026-10-13: Kindertexte und Quizfragen umgeschrieben, Quellenstatus unverändert."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Im Gebetsraum bleiben wir ruhig und gehen achtsam mit den Dingen um.",
     "ageText": {
       "4-5": {
         "goal": "Im Gebetsraum bleiben wir ruhig und gehen achtsam mit den Dingen um.",
-        "intro": "Im Gebetsraum bleiben wir ruhig und gehen achtsam mit den Dingen um. Der Vers fordert die Kinder Adams auf, bei jeder Moschee ihre Zierde zu nehmen, zu essen und zu trinken und nicht maßlos zu sein. Stell dir vor: Während andere beten, rennt ein Kind nicht zwischen ihnen hindurch und ruft nicht laut. Heute üben wir: Wir zeigen leises Gehen, leises Stellen der Schuhe und ein ruhiges Sitzen. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! In der Moschee beten Menschen. Wir nehmen Rücksicht auf sie. Wir gehen ruhig, reden leise und stellen unsere Schuhe ordentlich hin. Im Qurʾān 7:31 spricht Allah von angemessener Zierde beim Moscheebesuch. Unsere Übung heute ist, anderen Raum zum Gebet zu lassen.",
         "lines": [
-          "Im Gebetsraum bleiben wir ruhig und gehen achtsam mit den Dingen um.",
-          "Der Vers fordert die Kinder Adams auf, bei jeder Moschee ihre Zierde zu nehmen, zu essen und zu trinken und nicht maßlos zu sein.",
-          "Während andere beten, rennt ein Kind nicht zwischen ihnen hindurch und ruft nicht laut.",
-          "Wir zeigen leises Gehen, leises Stellen der Schuhe und ein ruhiges Sitzen."
+          "Die Moschee ist ein Ort des Gebets.",
+          "Qurʾān 7:31 spricht von angemessenem Auftreten.",
+          "Wir gehen ruhig und nehmen Rücksicht.",
+          "Wir stören niemanden beim Gebet."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/504. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 7:31. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/504. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 7:31. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -1189,16 +1189,16 @@ const additions=
         "situation": "Während andere beten, rennt ein Kind nicht zwischen ihnen hindurch und ruft nicht laut.",
         "practice": "Wir zeigen leises Gehen, leises Stellen der Schuhe und ein ruhiges Sitzen.",
         "summary": "Im Gebetsraum bleiben wir ruhig und gehen achtsam mit den Dingen um. Die arabischen Worte spricht die Lehrperson.",
-        "audioScript": "Rücksicht in der Moschee. Im Gebetsraum bleiben wir ruhig und gehen achtsam mit den Dingen um. Der Vers fordert die Kinder Adams auf, bei jeder Moschee ihre Zierde zu nehmen, zu essen und zu trinken und nicht maßlos zu sein. Während andere beten, rennt ein Kind nicht zwischen ihnen hindurch und ruft nicht laut. Wir zeigen leises Gehen, leises Stellen der Schuhe und ein ruhiges Sitzen."
+        "audioScript": "As-salāmu ʿalaikum, liebe Kinder! In der Moschee beten Menschen. Wir nehmen Rücksicht auf sie. Wir gehen ruhig, reden leise und stellen unsere Schuhe ordentlich hin. Im Qurʾān 7:31 spricht Allah von angemessener Zierde beim Moscheebesuch. Unsere Übung heute ist, anderen Raum zum Gebet zu lassen."
       },
       "6-8": {
         "goal": "Im Gebetsraum bleiben wir ruhig und gehen achtsam mit den Dingen um.",
-        "intro": "Heute geht es um Rücksicht in der Moschee. Im Gebetsraum bleiben wir ruhig und gehen achtsam mit den Dingen um. Wir lesen Qurʾān 7:31. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers fordert die Kinder Adams auf, bei jeder Moschee ihre Zierde zu nehmen, zu essen und zu trinken und nicht maßlos zu sein. So kann das im Alltag aussehen: Während andere beten, rennt ein Kind nicht zwischen ihnen hindurch und ruft nicht laut. Die Aufgabe: Wir zeigen leises Gehen, leises Stellen der Schuhe und ein ruhiges Sitzen. masǧid bedeutet: Ort der Niederwerfung, Moschee. zīnah bedeutet: Zierde; der Vers nennt sie beim Moscheebesuch. Die Grenze der Stunde: Die Seite legt keine Kleiderordnung für Kinder fest, die wir hier ergänzen würden. Essen und Trinken aus demselben Vers gehören zur späteren Stunde über Essen. Hier üben wir die Ruhe im Gebetsraum. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "As-salāmu ʿalaikum! Qurʾān 7:31 spricht vom angemessenen Auftreten beim Moscheebesuch und warnt davor, maßlos zu sein. Wir üben heute Rücksicht: Wenn andere beten, gehen wir leise, rennen nicht zwischen ihnen und legen unsere Schuhe ordentlich ab. Das sind praktische Verhaltensbeispiele, nicht wörtliche Sätze aus diesem Vers. Masǧid heißt Moschee, zīnah heißt Zierde.",
         "lines": [
-          "Qurʾān 7:31 ist die gelesene Stelle.",
-          "Der Vers fordert die Kinder Adams auf, bei jeder Moschee ihre Zierde zu nehmen, zu essen und zu trinken und nicht maßlos zu sein.",
-          "Während andere beten, rennt ein Kind nicht zwischen ihnen hindurch und ruft nicht laut.",
-          "Die arabischen Worte spricht die Lehrperson."
+          "Die Moschee ist ein Ort des Gebets.",
+          "Qurʾān 7:31 spricht von angemessenem Auftreten.",
+          "Wir gehen ruhig und nehmen Rücksicht.",
+          "Wir stören niemanden beim Gebet."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/504. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 7:31. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/504. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 7:31. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -1215,16 +1215,16 @@ const additions=
         "situation": "Während andere beten, rennt ein Kind nicht zwischen ihnen hindurch und ruft nicht laut.",
         "practice": "Wir zeigen leises Gehen, leises Stellen der Schuhe und ein ruhiges Sitzen.",
         "summary": "Qurʾān 7:31 trägt diese Stunde. Der Vers fordert die Kinder Adams auf, bei jeder Moschee ihre Zierde zu nehmen, zu essen und zu trinken und nicht maßlos zu sein.",
-        "audioScript": "Rücksicht in der Moschee. Der Vers fordert die Kinder Adams auf, bei jeder Moschee ihre Zierde zu nehmen, zu essen und zu trinken und nicht maßlos zu sein. Während andere beten, rennt ein Kind nicht zwischen ihnen hindurch und ruft nicht laut. Wir zeigen leises Gehen, leises Stellen der Schuhe und ein ruhiges Sitzen."
+        "audioScript": "As-salāmu ʿalaikum! Qurʾān 7:31 spricht vom angemessenen Auftreten beim Moscheebesuch und warnt davor, maßlos zu sein. Wir üben heute Rücksicht: Wenn andere beten, gehen wir leise, rennen nicht zwischen ihnen und legen unsere Schuhe ordentlich ab. Das sind praktische Verhaltensbeispiele, nicht wörtliche Sätze aus diesem Vers. Masǧid heißt Moschee, zīnah heißt Zierde."
       },
       "9-10": {
         "goal": "Ich kann Rücksicht in der Moschee von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Rücksicht in der Moschee. Das Lernziel ist: Im Gebetsraum bleiben wir ruhig und gehen achtsam mit den Dingen um. Die Seite https://www.islamweb.net/ar/library/content/49/504 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 7:31. Sinngemäß, keine beglaubigte Übersetzung: Der Vers fordert die Kinder Adams auf, bei jeder Moschee ihre Zierde zu nehmen, zu essen und zu trinken und nicht maßlos zu sein. Alltag: Während andere beten, rennt ein Kind nicht zwischen ihnen hindurch und ruft nicht laut. Aufgabe: Wir zeigen leises Gehen, leises Stellen der Schuhe und ein ruhiges Sitzen. masǧid bedeutet: Ort der Niederwerfung, Moschee. zīnah bedeutet: Zierde; der Vers nennt sie beim Moscheebesuch. Was nicht behauptet wird: Die Seite legt keine Kleiderordnung für Kinder fest, die wir hier ergänzen würden. Essen und Trinken aus demselben Vers gehören zur späteren Stunde über Essen. Hier üben wir die Ruhe im Gebetsraum. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "As-salāmu ʿalaikum! Rücksicht in der Moschee zeigt sich durch achtsames Verhalten. Qurʾān 7:31 spricht davon, bei jeder Moschee die Zierde zu nehmen, und mahnt zur Mäßigung. Dieser Vers allein enthält nicht unsere gesamte Verhaltensliste. Wir nutzen ihn als Einstieg und überlegen dann, wie wir Betende nicht stören: leise gehen, Schuhe ordentlich abstellen und den Raum respektieren. Das sind unsere Übungen für den Alltag; wir geben sie nicht als wörtlichen Inhalt von 7:31 aus.",
         "lines": [
-          "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 7:31.",
-          "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
-          "Die Seite legt keine Kleiderordnung für Kinder fest, die wir hier ergänzen würden.",
-          "Eine Hadithnummer, die auf der Seite fehlt, wird nicht ergänzt."
+          "Die Moschee ist ein Ort des Gebets.",
+          "Qurʾān 7:31 spricht von angemessenem Auftreten.",
+          "Wir gehen ruhig und nehmen Rücksicht.",
+          "Wir stören niemanden beim Gebet."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/504. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 7:31. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/504. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 7:31. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -1241,90 +1241,90 @@ const additions=
         "situation": "Während andere beten, rennt ein Kind nicht zwischen ihnen hindurch und ruft nicht laut.",
         "practice": "Wir zeigen leises Gehen, leises Stellen der Schuhe und ein ruhiges Sitzen.",
         "summary": "Belegt ist Qurʾān 7:31. Ungeprüft bleibt: Die Seite legt keine Kleiderordnung für Kinder fest, die wir hier ergänzen würden.",
-        "audioScript": "Für die älteren Kinder. Rücksicht in der Moschee. Der Vers fordert die Kinder Adams auf, bei jeder Moschee ihre Zierde zu nehmen, zu essen und zu trinken und nicht maßlos zu sein. Nicht belegt und deshalb nicht behauptet: Die Seite legt keine Kleiderordnung für Kinder fest, die wir hier ergänzen würden."
+        "audioScript": "As-salāmu ʿalaikum! Rücksicht in der Moschee zeigt sich durch achtsames Verhalten. Qurʾān 7:31 spricht davon, bei jeder Moschee die Zierde zu nehmen, und mahnt zur Mäßigung. Dieser Vers allein enthält nicht unsere gesamte Verhaltensliste. Wir nutzen ihn als Einstieg und überlegen dann, wie wir Betende nicht stören: leise gehen, Schuhe ordentlich abstellen und den Raum respektieren. Das sind unsere Übungen für den Alltag; wir geben sie nicht als wörtlichen Inhalt von 7:31 aus."
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was passt zu dieser Stunde?",
+          "prompt": "Andere Menschen beten. Wie gehst du an ihnen vorbei?",
           "options": [
-            "Wir zeigen leises Gehen, leises Stellen der Schuhe und ein ruhiges Sitzen.",
-            "Ich störe absichtlich weiter."
+            "Ruhig und rücksichtsvoll.",
+            "Laut rennend."
           ],
           "correct": 0,
-          "hint": "Schau auf die Übung.",
-          "explain": "Die Übung der Stunde ist der erste Satz. Der zweite Satz ist das Gegenteil von dem, was wir üben."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Wir wollen Betende nicht stören."
         },
         {
           "type": "choice",
-          "prompt": "Woran hält sich diese Stunde?",
+          "prompt": "Wo legst du die Schuhe hin?",
           "options": [
-            "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "Ordentlich an den vorgesehenen Platz.",
+            "Mitten in den Durchgang."
           ],
           "correct": 0,
-          "hint": "Nur Gelesenes.",
-          "explain": "Die Stunde nennt Qurʾān 7:31 und trennt die Übung davon. Eine Nummer wird nicht erfunden."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Ordnung hilft anderen Besuchern."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Stelle trägt Rücksicht in der Moschee?",
+          "prompt": "Worum geht es unter anderem in Qurʾān 7:31?",
           "options": [
-            "Qurʾān 7:31",
-            "Eine Stelle ohne Suren- und Verszahl."
+            "Um angemessenes Auftreten bei der Moschee.",
+            "Um das Unterbrechen anderer Gebete."
           ],
           "correct": 0,
-          "hint": "Die Fundstelle steht im Unterricht.",
-          "explain": "Die Stunde bleibt bei Qurʾān 7:31."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Der Vers spricht von Zierde und Mäßigung."
         },
         {
           "type": "choice",
-          "prompt": "Was sagt der Vers sinngemäß für diese Stunde?",
+          "prompt": "Was ist unsere praktische Übung?",
           "options": [
-            "Der Vers fordert die Kinder Adams auf, bei jeder Moschee ihre Zierde zu nehmen, zu essen und zu trinken und nicht maßlos zu sein.",
-            "Ich störe absichtlich weiter."
+            "Leise gehen und Schuhe ordentlich abstellen.",
+            "Zwischen Betenden fangen spielen."
           ],
           "correct": 0,
-          "hint": "Der erste Satz folgt der gelesenen Stelle.",
-          "explain": "Die deutsche Zeile ist eine Unterrichtshilfe zu Qurʾān 7:31, keine beglaubigte Übersetzung."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Das sind Beispiele für Rücksicht."
         },
         {
           "type": "text",
-          "prompt": "Welche Übung gehört zu dieser Stunde?",
-          "sample": "Wir zeigen leises Gehen, leises Stellen der Schuhe und ein ruhiges Sitzen.",
-          "hint": "Die praktische Aufgabe.",
-          "explain": "Die Übung ist die genannte Handlung und nicht eine zusätzliche Formel."
+          "prompt": "Warum ist leises Verhalten in der Moschee hilfreich?",
+          "sample": "Damit wir Betende nicht stören und anderen Raum lassen.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Die praktische Übung achtet auf andere."
         }
       ],
       "9-10": [
         {
           "type": "choice",
-          "prompt": "Welche Angabe wäre unehrlich?",
+          "prompt": "Welche Aussage trifft Qurʾān 7:31?",
           "options": [
-            "Ein Rechtsurteil oder eine Hadithnummer als gelesen auszugeben, obwohl die Seite sie nicht liefert.",
-            "Zu sagen, dass die deutsche Erklärung sinngemäß ist."
+            "Er spricht von Zierde beim Moscheebesuch und Mäßigung.",
+            "Er enthält bereits unsere gesamte Liste mit Schuhregeln."
           ],
           "correct": 0,
-          "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Die konkrete Übung ist unsere Anwendung."
         },
         {
           "type": "text",
-          "prompt": "Was darf diese Stunde nicht behaupten?",
-          "sample": "Die Seite legt keine Kleiderordnung für Kinder fest, die wir hier ergänzen würden.",
-          "hint": "Die Grenze steht im Text.",
-          "explain": "Die Grenze schützt davor, den Vers zu überdehnen."
+          "prompt": "Unterscheide Vers und Unterrichtsübung.",
+          "sample": "7:31 nennt Zierde und Mäßigung; leises Gehen ist unsere Verhaltensübung.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Quellenwortlaut und Anwendung bleiben getrennt."
         },
         {
           "type": "text",
-          "prompt": "Wie lautet die Qurʾān-Stelle?",
-          "sample": "Qurʾān 7:31",
-          "hint": "Sure und Vers.",
-          "explain": "Die Stelle ist Qurʾān 7:31 auf der genannten Islamweb-Seite."
+          "prompt": "Nenne zwei Möglichkeiten, Rücksicht zu nehmen.",
+          "sample": "Leise gehen und die Schuhe ordentlich hinstellen.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Praktische Beispiele zeigen Rücksicht auf Betende."
         }
       ]
     },
@@ -1377,19 +1377,19 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Vers ist eine Regel über Rede, keine Beschreibung einer bestimmten Berührung. Das Nein-Sagen und das Holen einer Vertrauensperson sind die Schutzregel der Stunde und werden nicht als Hadith ausgegeben. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Vers ist eine Regel über Rede, keine Beschreibung einer bestimmten Berührung. Das Nein-Sagen und das Holen einer Vertrauensperson sind die Schutzregel der Stunde und werden nicht als Hadith ausgegeben. Keine synthetische Rezitation. Keine Freigabe für Besucher. Independenter didaktischer Review 2026-10-13: Kindertexte und Quizfragen umgeschrieben, Quellenstatus unverändert."
     },
     "hint": "Du sagst es einer erwachsenen Person, der du vertraust.",
     "sample": "Wenn sich etwas falsch anfühlt, sagen wir Nein und holen Hilfe.",
     "ageText": {
       "4-5": {
         "goal": "Wenn sich etwas falsch anfühlt, sagen wir Nein und holen Hilfe.",
-        "intro": "Wenn sich etwas falsch anfühlt, sagen wir Nein und holen Hilfe. Der Vers sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist, und dass Allah hörend und wissend ist. Stell dir vor: Jemand will ein Kind zu einem Spiel drängen, das es nicht möchte. Das Kind sagt Nein und geht zu einer bekannten erwachsenen Person. Heute üben wir: Wir üben den kurzen Satz: Nein. Ich sage es einer Person, der ich vertraue. Du sagst es einer erwachsenen Person, der du vertraust.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! Du darfst „Nein“ sagen, wenn dich jemand zu etwas drängt, das du nicht möchtest. Wenn dir jemand Unrecht tut oder du Angst bekommst, darfst du es einer erwachsenen Person sagen, der du vertraust. Auch wenn die erste Person nicht hilft, darfst du zu einer anderen gehen. Im Qurʾān 4:148 wird das Unrecht eines Menschen ausdrücklich berücksichtigt, der darüber spricht.",
         "lines": [
-          "Wenn sich etwas falsch anfühlt, sagen wir Nein und holen Hilfe.",
-          "Der Vers sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist, und dass Allah hörend und wissend ist.",
-          "Jemand will ein Kind zu einem Spiel drängen, das es nicht möchte. Das Kind sagt Nein und geht zu einer bekannten erwachsenen Person.",
-          "Wir üben den kurzen Satz: Nein. Ich sage es einer Person, der ich vertraue."
+          "Ich darf bei Unrecht Hilfe holen.",
+          "Qurʾān 4:148 nimmt den Menschen ernst, dem Unrecht geschieht.",
+          "Ich darf Nein sagen und Grenzen setzen.",
+          "Hilft mir eine Person nicht, suche ich eine andere."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/357. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:148. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/357. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:148. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -1406,16 +1406,16 @@ const additions=
         "situation": "Jemand will ein Kind zu einem Spiel drängen, das es nicht möchte. Das Kind sagt Nein und geht zu einer bekannten erwachsenen Person.",
         "practice": "Wir üben den kurzen Satz: Nein. Ich sage es einer Person, der ich vertraue.",
         "summary": "Wenn sich etwas falsch anfühlt, sagen wir Nein und holen Hilfe. Du sagst es einer erwachsenen Person, der du vertraust.",
-        "audioScript": "Eigene Grenzen respektieren. Wenn sich etwas falsch anfühlt, sagen wir Nein und holen Hilfe. Der Vers sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist, und dass Allah hörend und wissend ist. Jemand will ein Kind zu einem Spiel drängen, das es nicht möchte. Das Kind sagt Nein und geht zu einer bekannten erwachsenen Person. Wir üben den kurzen Satz: Nein. Ich sage es einer Person, der ich vertraue."
+        "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Du darfst „Nein“ sagen, wenn dich jemand zu etwas drängt, das du nicht möchtest. Wenn dir jemand Unrecht tut oder du Angst bekommst, darfst du es einer erwachsenen Person sagen, der du vertraust. Auch wenn die erste Person nicht hilft, darfst du zu einer anderen gehen. Im Qurʾān 4:148 wird das Unrecht eines Menschen ausdrücklich berücksichtigt, der darüber spricht."
       },
       "6-8": {
         "goal": "Wenn sich etwas falsch anfühlt, sagen wir Nein und holen Hilfe.",
-        "intro": "Heute geht es um Eigene Grenzen respektieren. Wenn sich etwas falsch anfühlt, sagen wir Nein und holen Hilfe. Wir lesen Qurʾān 4:148. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist, und dass Allah hörend und wissend ist. So kann das im Alltag aussehen: Jemand will ein Kind zu einem Spiel drängen, das es nicht möchte. Das Kind sagt Nein und geht zu einer bekannten erwachsenen Person. Die Aufgabe: Wir üben den kurzen Satz: Nein. Ich sage es einer Person, der ich vertraue. jahr bedeutet: laute, öffentliche Rede. ẓulm bedeutet: Unrecht. Die Grenze der Stunde: Der Vers ist eine Regel über Rede, keine Beschreibung einer bestimmten Berührung. Das Nein-Sagen und das Holen einer Vertrauensperson sind die Schutzregel der Stunde und werden nicht als Hadith ausgegeben. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "As-salāmu ʿalaikum! Qurʾān 4:148 spricht über schlechte öffentliche Rede und nennt eine Ausnahme für den Menschen, dem Unrecht geschieht. Wir lernen: Wer Hilfe wegen Unrecht sucht, muss nicht aus Scham schweigen. Wenn dich jemand zu etwas drängt, darfst du Nein sagen und eine erwachsene Vertrauensperson holen. Wenn du nicht ernst genommen wirst, wende dich an eine andere. Diese Schutzschritte sind unsere pädagogische Anwendung, keine wörtlichen Verse.",
         "lines": [
-          "Qurʾān 4:148 ist die gelesene Stelle.",
-          "Der Vers sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist, und dass Allah hörend und wissend ist.",
-          "Jemand will ein Kind zu einem Spiel drängen, das es nicht möchte. Das Kind sagt Nein und geht zu einer bekannten erwachsenen Person.",
-          "Du sagst es einer erwachsenen Person, der du vertraust."
+          "Ich darf bei Unrecht Hilfe holen.",
+          "Qurʾān 4:148 nimmt den Menschen ernst, dem Unrecht geschieht.",
+          "Ich darf Nein sagen und Grenzen setzen.",
+          "Hilft mir eine Person nicht, suche ich eine andere."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/357. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:148. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/357. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:148. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -1432,16 +1432,16 @@ const additions=
         "situation": "Jemand will ein Kind zu einem Spiel drängen, das es nicht möchte. Das Kind sagt Nein und geht zu einer bekannten erwachsenen Person.",
         "practice": "Wir üben den kurzen Satz: Nein. Ich sage es einer Person, der ich vertraue.",
         "summary": "Qurʾān 4:148 trägt diese Stunde. Der Vers sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist, und dass Allah hörend und wissend ist.",
-        "audioScript": "Eigene Grenzen respektieren. Der Vers sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist, und dass Allah hörend und wissend ist. Jemand will ein Kind zu einem Spiel drängen, das es nicht möchte. Das Kind sagt Nein und geht zu einer bekannten erwachsenen Person. Wir üben den kurzen Satz: Nein. Ich sage es einer Person, der ich vertraue."
+        "audioScript": "As-salāmu ʿalaikum! Qurʾān 4:148 spricht über schlechte öffentliche Rede und nennt eine Ausnahme für den Menschen, dem Unrecht geschieht. Wir lernen: Wer Hilfe wegen Unrecht sucht, muss nicht aus Scham schweigen. Wenn dich jemand zu etwas drängt, darfst du Nein sagen und eine erwachsene Vertrauensperson holen. Wenn du nicht ernst genommen wirst, wende dich an eine andere. Diese Schutzschritte sind unsere pädagogische Anwendung, keine wörtlichen Verse."
       },
       "9-10": {
         "goal": "Ich kann Eigene Grenzen respektieren von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Eigene Grenzen respektieren. Das Lernziel ist: Wenn sich etwas falsch anfühlt, sagen wir Nein und holen Hilfe. Die Seite https://www.islamweb.net/ar/library/content/49/357 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:148. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist, und dass Allah hörend und wissend ist. Alltag: Jemand will ein Kind zu einem Spiel drängen, das es nicht möchte. Das Kind sagt Nein und geht zu einer bekannten erwachsenen Person. Aufgabe: Wir üben den kurzen Satz: Nein. Ich sage es einer Person, der ich vertraue. jahr bedeutet: laute, öffentliche Rede. ẓulm bedeutet: Unrecht. Was nicht behauptet wird: Der Vers ist eine Regel über Rede, keine Beschreibung einer bestimmten Berührung. Das Nein-Sagen und das Holen einer Vertrauensperson sind die Schutzregel der Stunde und werden nicht als Hadith ausgegeben. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "As-salāmu ʿalaikum! Qurʾān 4:148 lehrt einen wichtigen Unterschied: Über andere schlecht zu reden ist nicht dasselbe, wie als betroffener Mensch Unrecht zu benennen und Hilfe zu suchen. Für unseren Alltag entwickeln wir daraus eine Schutzregel: Du darfst Grenzen setzen und bei einer vertrauenswürdigen erwachsenen Person erzählen, was geschehen ist. Erzwungenes Schweigen schützt nicht das Kind. Wenn die erste Person dich nicht ernst nimmt, suche weitere Hilfe. Das konkrete Nein-Sagen ist unsere Schutzübung, nicht der Wortlaut von 4:148.",
         "lines": [
-          "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 4:148.",
-          "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
-          "Der Vers ist eine Regel über Rede, keine Beschreibung einer bestimmten Berührung.",
-          "Eine Hadithnummer, die auf der Seite fehlt, wird nicht ergänzt."
+          "Ich darf bei Unrecht Hilfe holen.",
+          "Qurʾān 4:148 nimmt den Menschen ernst, dem Unrecht geschieht.",
+          "Ich darf Nein sagen und Grenzen setzen.",
+          "Hilft mir eine Person nicht, suche ich eine andere."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/357. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:148. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/357. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:148. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -1458,90 +1458,90 @@ const additions=
         "situation": "Jemand will ein Kind zu einem Spiel drängen, das es nicht möchte. Das Kind sagt Nein und geht zu einer bekannten erwachsenen Person.",
         "practice": "Wir üben den kurzen Satz: Nein. Ich sage es einer Person, der ich vertraue.",
         "summary": "Belegt ist Qurʾān 4:148. Ungeprüft bleibt: Der Vers ist eine Regel über Rede, keine Beschreibung einer bestimmten Berührung.",
-        "audioScript": "Für die älteren Kinder. Eigene Grenzen respektieren. Der Vers sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist, und dass Allah hörend und wissend ist. Nicht belegt und deshalb nicht behauptet: Der Vers ist eine Regel über Rede, keine Beschreibung einer bestimmten Berührung."
+        "audioScript": "As-salāmu ʿalaikum! Qurʾān 4:148 lehrt einen wichtigen Unterschied: Über andere schlecht zu reden ist nicht dasselbe, wie als betroffener Mensch Unrecht zu benennen und Hilfe zu suchen. Für unseren Alltag entwickeln wir daraus eine Schutzregel: Du darfst Grenzen setzen und bei einer vertrauenswürdigen erwachsenen Person erzählen, was geschehen ist. Erzwungenes Schweigen schützt nicht das Kind. Wenn die erste Person dich nicht ernst nimmt, suche weitere Hilfe. Das konkrete Nein-Sagen ist unsere Schutzübung, nicht der Wortlaut von 4:148."
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was passt zu dieser Stunde?",
+          "prompt": "Jemand drängt dich zu einem Spiel, das du nicht willst. Was sagst du?",
           "options": [
-            "Wir üben den kurzen Satz: Nein. Ich sage es einer Person, der ich vertraue.",
-            "Ich tue so, als wäre nichts."
+            "Nein, das möchte ich nicht.",
+            "Ich darf niemals Nein sagen."
           ],
           "correct": 0,
-          "hint": "Schau auf die Übung.",
-          "explain": "Die Übung der Stunde ist der erste Satz. Der zweite Satz ist das Gegenteil von dem, was wir üben."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Ein Kind darf seine Grenzen schützen."
         },
         {
           "type": "choice",
-          "prompt": "Woran hält sich diese Stunde?",
+          "prompt": "Wer kann dir helfen?",
           "options": [
-            "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "Eine erwachsene Person, der ich vertraue.",
+            "Niemand, ich muss schweigen."
           ],
           "correct": 0,
-          "hint": "Nur Gelesenes.",
-          "explain": "Die Stunde nennt Qurʾān 4:148 und trennt die Übung davon. Eine Nummer wird nicht erfunden."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Bei Unrecht darfst du Hilfe suchen."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Stelle trägt Eigene Grenzen respektieren?",
+          "prompt": "Was nimmt Qurʾān 4:148 ausdrücklich in den Blick?",
           "options": [
-            "Qurʾān 4:148",
-            "Eine Stelle ohne Suren- und Verszahl."
+            "Den Menschen, dem Unrecht geschehen ist.",
+            "Dass Betroffene immer schweigen müssen."
           ],
           "correct": 0,
-          "hint": "Die Fundstelle steht im Unterricht.",
-          "explain": "Die Stunde bleibt bei Qurʾān 4:148."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Der Vers nennt den Fall des Menschen, dem Unrecht geschah."
         },
         {
           "type": "choice",
-          "prompt": "Was sagt der Vers sinngemäß für diese Stunde?",
+          "prompt": "Was tust du, wenn du zu etwas gedrängt wirst?",
           "options": [
-            "Der Vers sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist, und dass Allah hörend.",
-            "Ich tue so, als wäre nichts."
+            "Nein sagen und eine Vertrauensperson holen.",
+            "Alles allein ertragen."
           ],
           "correct": 0,
-          "hint": "Der erste Satz folgt der gelesenen Stelle.",
-          "explain": "Die deutsche Zeile ist eine Unterrichtshilfe zu Qurʾān 4:148, keine beglaubigte Übersetzung."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Unsere Schutzregel erlaubt das Nein-Sagen."
         },
         {
           "type": "text",
-          "prompt": "Welche Übung gehört zu dieser Stunde?",
-          "sample": "Wir üben den kurzen Satz: Nein. Ich sage es einer Person, der ich vertraue.",
-          "hint": "Die praktische Aufgabe.",
-          "explain": "Die Übung ist die genannte Handlung und nicht eine zusätzliche Formel."
+          "prompt": "Was tust du, wenn dir die erste erwachsene Person nicht zuhört?",
+          "sample": "Ich suche eine andere erwachsene Person, der ich vertraue.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Du darfst weiter Hilfe suchen."
         }
       ],
       "9-10": [
         {
           "type": "choice",
-          "prompt": "Welche Angabe wäre unehrlich?",
+          "prompt": "Worin liegt der Unterschied zwischen verletzender Rede und Hilfeholen?",
           "options": [
-            "Ein Rechtsurteil oder eine Hadithnummer als gelesen auszugeben, obwohl die Seite sie nicht liefert.",
-            "Zu sagen, dass die deutsche Erklärung sinngemäß ist."
+            "Unrecht zu benennen, um Hilfe zu finden, ist nicht dasselbe wie andere grundlos herabzusetzen.",
+            "Bei Unrecht darf niemand Hilfe bekommen."
           ],
           "correct": 0,
-          "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "4:148 berücksichtigt Menschen, denen Unrecht widerfahren ist."
         },
         {
           "type": "text",
-          "prompt": "Was darf diese Stunde nicht behaupten?",
-          "sample": "Der Vers ist eine Regel über Rede, keine Beschreibung einer bestimmten Berührung.",
-          "hint": "Die Grenze steht im Text.",
-          "explain": "Die Grenze schützt davor, den Vers zu überdehnen."
+          "prompt": "Erkläre die Schutzregel der Stunde.",
+          "sample": "Ich darf Nein sagen und mich an vertrauenswürdige Erwachsene wenden.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Die Schutzregel ist eine pädagogische Anwendung."
         },
         {
           "type": "text",
-          "prompt": "Wie lautet die Qurʾān-Stelle?",
-          "sample": "Qurʾān 4:148",
-          "hint": "Sure und Vers.",
-          "explain": "Die Stelle ist Qurʾān 4:148 auf der genannten Islamweb-Seite."
+          "prompt": "Wie kann ein Kind sich Hilfe holen, wenn es nicht ernst genommen wird?",
+          "sample": "Es wendet sich an eine andere erwachsene Vertrauensperson.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Hilfeholen darf wiederholt werden."
         }
       ]
     },
@@ -1594,19 +1594,19 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die ganze Sūrat al-Falaq wurde in einer früheren Stunde nicht erneut als vollständiger Rezitationstext gesetzt. Hier ist nur der gelesene Versteil gespeichert. Eine Hadithnummer zum Schutz wurde nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Die ganze Sūrat al-Falaq wurde in einer früheren Stunde nicht erneut als vollständiger Rezitationstext gesetzt. Hier ist nur der gelesene Versteil gespeichert. Eine Hadithnummer zum Schutz wurde nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Independenter didaktischer Review 2026-10-13: Kindertexte und Quizfragen umgeschrieben, Quellenstatus unverändert."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Neid fühlt sich eng an.",
     "ageText": {
       "4-5": {
         "goal": "Neid fühlt sich eng an.",
-        "intro": "Neid fühlt sich eng an. Die Stunde benutzt nur diesen Versteil und keine Gruselgeschichte. Stell dir vor: Ein Kind sieht, dass ein anderes Kind ein neues Buch bekommt, und merkt einen engen Gedanken. Heute üben wir: Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz, ohne die Sūrah synthetisch zu rezitieren. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! Manchmal bekommt ein anderes Kind etwas Schönes, und du wünschst dir das auch. Das ist ein Gefühl, über das du sprechen darfst. Wir üben den freundlichen Satz: „Ich gönne dir das.“ In Qurʾān 113:5 suchen wir bei Allah Schutz vor dem Übel eines Neiders, wenn er neidet. Wir erschrecken niemanden mit Geschichten.",
         "lines": [
-          "Neid fühlt sich eng an.",
-          "Die Stunde benutzt nur diesen Versteil und keine Gruselgeschichte.",
-          "Ein Kind sieht, dass ein anderes Kind ein neues Buch bekommt, und merkt einen engen Gedanken.",
-          "Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz, ohne die Sūrah synthetisch zu rezitieren."
+          "Manchmal möchten wir haben, was andere haben.",
+          "Qurʾān 113:5 bittet um Schutz vor dem Übel des Neides.",
+          "Ich muss wegen eines Gefühls niemanden verletzen.",
+          "Ich kann sagen: „Ich gönne dir das.“"
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1987. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 113:5. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1987. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 113:5. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -1623,16 +1623,16 @@ const additions=
         "situation": "Ein Kind sieht, dass ein anderes Kind ein neues Buch bekommt, und merkt einen engen Gedanken.",
         "practice": "Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz, ohne die Sūrah synthetisch zu rezitieren.",
         "summary": "Neid fühlt sich eng an. Die arabischen Worte spricht die Lehrperson.",
-        "audioScript": "Neid erkennen ohne Beschämung. Neid fühlt sich eng an. Die Stunde benutzt nur diesen Versteil und keine Gruselgeschichte. Ein Kind sieht, dass ein anderes Kind ein neues Buch bekommt, und merkt einen engen Gedanken. Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz, ohne die Sūrah synthetisch zu rezitieren."
+        "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Manchmal bekommt ein anderes Kind etwas Schönes, und du wünschst dir das auch. Das ist ein Gefühl, über das du sprechen darfst. Wir üben den freundlichen Satz: „Ich gönne dir das.“ In Qurʾān 113:5 suchen wir bei Allah Schutz vor dem Übel eines Neiders, wenn er neidet. Wir erschrecken niemanden mit Geschichten."
       },
       "6-8": {
         "goal": "Neid fühlt sich eng an.",
-        "intro": "Heute geht es um Neid erkennen ohne Beschämung. Neid fühlt sich eng an. Wir lesen Qurʾān 113:5. Sinngemäß, ohne beglaubigte Übersetzung: Der gespeicherte Surenteil bittet um Schutz vor dem Übel eines Neiders, wenn er neidet. Die Stunde benutzt nur diesen Versteil und keine Gruselgeschichte. So kann das im Alltag aussehen: Ein Kind sieht, dass ein anderes Kind ein neues Buch bekommt, und merkt einen engen Gedanken. Die Aufgabe: Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz, ohne die Sūrah synthetisch zu rezitieren. ḥasad bedeutet: Neid, das Gute einer anderen Person nicht gönnen. aʿūḏu bedeutet: ich suche Schutz. Die Grenze der Stunde: Die ganze Sūrat al-Falaq wurde in einer früheren Stunde nicht erneut als vollständiger Rezitationstext gesetzt. Hier ist nur der gelesene Versteil gespeichert. Eine Hadithnummer zum Schutz wurde nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "As-salāmu ʿalaikum! Qurʾān 113:5 ist ein Bittvers um Schutz vor dem Übel des Neides. Das arabische Wort ḥasad bedeutet Neid. Wenn ein anderes Kind ein schönes Buch bekommt und du selbst auch gern eins hättest, musst du dich dafür nicht schämen. Entscheidend ist, was du daraus machst: Du kannst dich für das Kind freuen und Allah um Gutes bitten. Wir üben einen freundlichen Satz, keine gruseligen Geschichten.",
         "lines": [
-          "Qurʾān 113:5 ist die gelesene Stelle.",
-          "Die Stunde benutzt nur diesen Versteil und keine Gruselgeschichte.",
-          "Ein Kind sieht, dass ein anderes Kind ein neues Buch bekommt, und merkt einen engen Gedanken.",
-          "Die arabischen Worte spricht die Lehrperson."
+          "Manchmal möchten wir haben, was andere haben.",
+          "Qurʾān 113:5 bittet um Schutz vor dem Übel des Neides.",
+          "Ich muss wegen eines Gefühls niemanden verletzen.",
+          "Ich kann sagen: „Ich gönne dir das.“"
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1987. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 113:5. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1987. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 113:5. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -1649,16 +1649,16 @@ const additions=
         "situation": "Ein Kind sieht, dass ein anderes Kind ein neues Buch bekommt, und merkt einen engen Gedanken.",
         "practice": "Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz, ohne die Sūrah synthetisch zu rezitieren.",
         "summary": "Qurʾān 113:5 trägt diese Stunde. Die Stunde benutzt nur diesen Versteil und keine Gruselgeschichte.",
-        "audioScript": "Neid erkennen ohne Beschämung. Die Stunde benutzt nur diesen Versteil und keine Gruselgeschichte. Ein Kind sieht, dass ein anderes Kind ein neues Buch bekommt, und merkt einen engen Gedanken. Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz, ohne die Sūrah synthetisch zu rezitieren."
+        "audioScript": "As-salāmu ʿalaikum! Qurʾān 113:5 ist ein Bittvers um Schutz vor dem Übel des Neides. Das arabische Wort ḥasad bedeutet Neid. Wenn ein anderes Kind ein schönes Buch bekommt und du selbst auch gern eins hättest, musst du dich dafür nicht schämen. Entscheidend ist, was du daraus machst: Du kannst dich für das Kind freuen und Allah um Gutes bitten. Wir üben einen freundlichen Satz, keine gruseligen Geschichten."
       },
       "9-10": {
         "goal": "Ich kann Neid erkennen ohne Beschämung von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Neid erkennen ohne Beschämung. Das Lernziel ist: Neid fühlt sich eng an. Die Seite https://www.islamweb.net/ar/library/content/49/1987 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 113:5. Sinngemäß, keine beglaubigte Übersetzung: Der gespeicherte Surenteil bittet um Schutz vor dem Übel eines Neiders, wenn er neidet. Die Stunde benutzt nur diesen Versteil und keine Gruselgeschichte. Alltag: Ein Kind sieht, dass ein anderes Kind ein neues Buch bekommt, und merkt einen engen Gedanken. Aufgabe: Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz, ohne die Sūrah synthetisch zu rezitieren. ḥasad bedeutet: Neid, das Gute einer anderen Person nicht gönnen. aʿūḏu bedeutet: ich suche Schutz. Was nicht behauptet wird: Die ganze Sūrat al-Falaq wurde in einer früheren Stunde nicht erneut als vollständiger Rezitationstext gesetzt. Hier ist nur der gelesene Versteil gespeichert. Eine Hadithnummer zum Schutz wurde nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "As-salāmu ʿalaikum! Sūrat al-Falaq endet in Qurʾān 113:5 mit der Bitte um Schutz vor dem Übel eines Neiders, wenn er neidet. In der Stunde unterscheiden wir ein Gefühl von einem verletzenden Verhalten: Sich etwas ebenfalls zu wünschen, ist noch kein Grund, andere schlecht zu behandeln. Der arabische Ausdruck ḥasad bezeichnet Neid. Wir üben, das Gefühl wahrzunehmen, andere nicht abzuwerten und ihnen Gutes zu gönnen. Die Bittverse werden nicht von einer künstlichen Stimme rezitiert; heute geht es um ihren deutschen Sinn.",
         "lines": [
-          "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 113:5.",
-          "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
-          "Die ganze Sūrat al-Falaq wurde in einer früheren Stunde nicht erneut als vollständiger Rezitationstext gesetzt.",
-          "Eine Hadithnummer, die auf der Seite fehlt, wird nicht ergänzt."
+          "Manchmal möchten wir haben, was andere haben.",
+          "Qurʾān 113:5 bittet um Schutz vor dem Übel des Neides.",
+          "Ich muss wegen eines Gefühls niemanden verletzen.",
+          "Ich kann sagen: „Ich gönne dir das.“"
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1987. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 113:5. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1987. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 113:5. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -1675,90 +1675,90 @@ const additions=
         "situation": "Ein Kind sieht, dass ein anderes Kind ein neues Buch bekommt, und merkt einen engen Gedanken.",
         "practice": "Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz, ohne die Sūrah synthetisch zu rezitieren.",
         "summary": "Belegt ist Qurʾān 113:5. Ungeprüft bleibt: Die ganze Sūrat al-Falaq wurde in einer früheren Stunde nicht erneut als vollständiger Rezitationstext gesetzt.",
-        "audioScript": "Für die älteren Kinder. Neid erkennen ohne Beschämung. Die Stunde benutzt nur diesen Versteil und keine Gruselgeschichte. Nicht belegt und deshalb nicht behauptet: Die ganze Sūrat al-Falaq wurde in einer früheren Stunde nicht erneut als vollständiger Rezitationstext gesetzt."
+        "audioScript": "As-salāmu ʿalaikum! Sūrat al-Falaq endet in Qurʾān 113:5 mit der Bitte um Schutz vor dem Übel eines Neiders, wenn er neidet. In der Stunde unterscheiden wir ein Gefühl von einem verletzenden Verhalten: Sich etwas ebenfalls zu wünschen, ist noch kein Grund, andere schlecht zu behandeln. Der arabische Ausdruck ḥasad bezeichnet Neid. Wir üben, das Gefühl wahrzunehmen, andere nicht abzuwerten und ihnen Gutes zu gönnen. Die Bittverse werden nicht von einer künstlichen Stimme rezitiert; heute geht es um ihren deutschen Sinn."
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was passt zu dieser Stunde?",
+          "prompt": "Dein Freund bekommt ein Buch. Was kannst du freundlich sagen?",
           "options": [
-            "Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz, ohne die Sūrah synthetisch zu rezitieren.",
-            "Ich schäme mich und denke, ich sei der Fehler."
+            "Ich gönne dir das.",
+            "Gib es her, sonst bin ich gemein."
           ],
           "correct": 0,
-          "hint": "Schau auf die Übung.",
-          "explain": "Die Übung der Stunde ist der erste Satz. Der zweite Satz ist das Gegenteil von dem, was wir üben."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Wir freuen uns über das Gute anderer."
         },
         {
           "type": "choice",
-          "prompt": "Woran hält sich diese Stunde?",
+          "prompt": "Was machst du, wenn du Neid spürst?",
           "options": [
-            "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "Ruhig bleiben und um Gutes bitten.",
+            "Das andere Kind ärgern."
           ],
           "correct": 0,
-          "hint": "Nur Gelesenes.",
-          "explain": "Die Stunde nennt Qurʾān 113:5 und trennt die Übung davon. Eine Nummer wird nicht erfunden."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Gefühle dürfen da sein, aber wir verletzen niemanden."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Stelle trägt Neid erkennen ohne Beschämung?",
+          "prompt": "Worum bittet Qurʾān 113:5?",
           "options": [
-            "Qurʾān 113:5",
-            "Eine Stelle ohne Suren- und Verszahl."
+            "Um Schutz vor dem Übel eines Neiders.",
+            "Um ein Recht, andere zu beleidigen."
           ],
           "correct": 0,
-          "hint": "Die Fundstelle steht im Unterricht.",
-          "explain": "Die Stunde bleibt bei Qurʾān 113:5."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Der Vers enthält eine Schutzbitte."
         },
         {
           "type": "choice",
-          "prompt": "Was sagt der Vers sinngemäß für diese Stunde?",
+          "prompt": "Wie kannst du reagieren, wenn jemand etwas Schönes bekommt?",
           "options": [
-            "Die Stunde benutzt nur diesen Versteil und keine Gruselgeschichte.",
-            "Ich schäme mich und denke, ich sei der Fehler."
+            "Ich kann mich für die Person freuen.",
+            "Ich muss die Person auslachen."
           ],
           "correct": 0,
-          "hint": "Der erste Satz folgt der gelesenen Stelle.",
-          "explain": "Die deutsche Zeile ist eine Unterrichtshilfe zu Qurʾān 113:5, keine beglaubigte Übersetzung."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Wir üben, anderen Gutes zu gönnen."
         },
         {
           "type": "text",
-          "prompt": "Welche Übung gehört zu dieser Stunde?",
-          "sample": "Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz, ohne die Sūrah synthetisch zu rezitieren.",
-          "hint": "Die praktische Aufgabe.",
-          "explain": "Die Übung ist die genannte Handlung und nicht eine zusätzliche Formel."
+          "prompt": "Was bedeutet ḥasad?",
+          "sample": "Neid, das Gute eines anderen nicht gönnen.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Das Wort beschreibt Neid."
         }
       ],
       "9-10": [
         {
           "type": "choice",
-          "prompt": "Welche Angabe wäre unehrlich?",
+          "prompt": "Was steht sinngemäß in Qurʾān 113:5?",
           "options": [
-            "Ein Rechtsurteil oder eine Hadithnummer als gelesen auszugeben, obwohl die Seite sie nicht liefert.",
-            "Zu sagen, dass die deutsche Erklärung sinngemäß ist."
+            "Die Bitte um Schutz vor dem Übel eines Neiders.",
+            "Eine Geschichte über ein neidisches Kind."
           ],
           "correct": 0,
-          "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Der Vers ist eine Schutzbitte."
         },
         {
           "type": "text",
-          "prompt": "Was darf diese Stunde nicht behaupten?",
-          "sample": "Die ganze Sūrat al-Falaq wurde in einer früheren Stunde nicht erneut als vollständiger Rezitationstext gesetzt.",
-          "hint": "Die Grenze steht im Text.",
-          "explain": "Die Grenze schützt davor, den Vers zu überdehnen."
+          "prompt": "Warum sind Gefühl und verletzende Tat nicht dasselbe?",
+          "sample": "Ich kann neidisch sein und mich trotzdem freundlich verhalten.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Wir entscheiden, wie wir handeln."
         },
         {
           "type": "text",
-          "prompt": "Wie lautet die Qurʾān-Stelle?",
-          "sample": "Qurʾān 113:5",
-          "hint": "Sure und Vers.",
-          "explain": "Die Stelle ist Qurʾān 113:5 auf der genannten Islamweb-Seite."
+          "prompt": "Wie gehst du mit Neid um?",
+          "sample": "Ich gönne anderen Gutes und bitte Allah, mein Herz zu bessern.",
+          "hint": "Erkläre es mit eigenen Worten.",
+          "explain": "Wir üben einen guten Umgang mit Gefühlen."
         }
       ]
     },
