@@ -292,19 +292,19 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Die Seite erzählt zusätzlich Berichte darüber, wie der Vers herabkam. Diese Berichte werden nicht als nummerierter Hadith der Stunde übernommen. Eine Bitte ist kein Ersatz dafür, bei Gefahr einen Menschen zu holen. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Die Seite erzählt zusätzlich Berichte darüber, wie der Vers herabkam. Diese Berichte werden nicht als nummerierter Hadith der Stunde übernommen. Eine Bitte ist kein Ersatz dafür, bei Gefahr einen Menschen zu holen. Keine synthetische Rezitation. Keine Freigabe für Besucher. Pädagogische Bearbeitung ohne zusätzliche Quellenbehauptung: altersspezifische Wortwahl, Bittgebet im Alltag und sachbezogene Fragen. Wissenschaftlicher Prüfstatus unverändert."
     },
     "hint": "Bei Gefahr holst du einen Menschen. Eine Bitte allein reicht dann nicht.",
     "sample": "Allah ist nah.",
     "ageText": {
       "4-5": {
         "goal": "Allah ist nah.",
-        "intro": "Allah ist nah. Der Vers sagt, dass Allah nah ist und die Bitte des Bittenden erhört, wenn er Ihn bittet, und dass die Menschen Ihm antworten und an Ihn glauben sollen. Stell dir vor: Ein Kind hat Sorge vor einem Gespräch und spricht leise: Mein Herr, hilf mir. Heute üben wir: Jedes Kind nennt eine erlaubte Bitte, die es Allah sagen kann, ohne sie vorspielen zu müssen. Bei Gefahr holst du einen Menschen. Eine Bitte allein reicht dann nicht.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! Allah ist nah. Im Qurʾān 2:186 steht, dass Allah die Bitte des Bittenden erhört, wenn er Ihn bittet. Wenn du Sorgen hast oder dich freust, darfst du Allah um Gutes bitten. Das heißt Duʿāʾ. Du kannst leise sagen: „O Allah, hilf mir.“ Du darfst auch eigene Worte benutzen. Wenn du in Gefahr bist, holst du zusätzlich Hilfe bei einer erwachsenen Person, der du vertraust.",
         "lines": [
           "Allah ist nah.",
-          "Der Vers sagt, dass Allah nah ist und die Bitte des Bittenden erhört, wenn er Ihn bittet, und dass die Menschen Ihm antworten und an Ihn glauben sollen.",
-          "Ein Kind hat Sorge vor einem Gespräch und spricht leise: Mein Herr, hilf mir.",
-          "Jedes Kind nennt eine erlaubte Bitte, die es Allah sagen kann, ohne sie vorspielen zu müssen."
+          "Duʿāʾ bedeutet, Allah um etwas Gutes zu bitten.",
+          "Du darfst leise oder mit eigenen Worten bitten.",
+          "Bei einem Problem darfst du auch einen Erwachsenen um Hilfe bitten."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/166. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:186. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/166. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:186. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -319,18 +319,18 @@ const additions=
           }
         ],
         "situation": "Ein Kind hat Sorge vor einem Gespräch und spricht leise: Mein Herr, hilf mir.",
-        "practice": "Jedes Kind nennt eine erlaubte Bitte, die es Allah sagen kann, ohne sie vorspielen zu müssen.",
+        "practice": "Nenne eine gute Bitte an Allah, zum Beispiel um Gesundheit oder gutes Wissen. Du darfst leise sprechen.",
         "summary": "Allah ist nah. Bei Gefahr holst du einen Menschen. Eine Bitte allein reicht dann nicht.",
-        "audioScript": "Allah hört unsere Bittgebete. Allah ist nah. Der Vers sagt, dass Allah nah ist und die Bitte des Bittenden erhört, wenn er Ihn bittet, und dass die Menschen Ihm antworten und an Ihn glauben sollen. Ein Kind hat Sorge vor einem Gespräch und spricht leise: Mein Herr, hilf mir. Jedes Kind nennt eine erlaubte Bitte, die es Allah sagen kann, ohne sie vorspielen zu müssen."
+        "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Allah ist nah. Du darfst Ihn um Gutes bitten. Das heißt Duʿāʾ. Du darfst auch mit deinen eigenen Worten bitten. Wenn du Hilfe brauchst, sprich mit einem Erwachsenen."
       },
       "6-8": {
         "goal": "Allah ist nah.",
-        "intro": "Heute geht es um Allah hört unsere Bittgebete. Allah ist nah. Wir lesen Qurʾān 2:186. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers sagt, dass Allah nah ist und die Bitte des Bittenden erhört, wenn er Ihn bittet, und dass die Menschen Ihm antworten und an Ihn glauben sollen. So kann das im Alltag aussehen: Ein Kind hat Sorge vor einem Gespräch und spricht leise: Mein Herr, hilf mir. Die Aufgabe: Jedes Kind nennt eine erlaubte Bitte, die es Allah sagen kann, ohne sie vorspielen zu müssen. duʿāʾ bedeutet: Bittgebet, Allah um etwas bitten. qarīb bedeutet: nah; der Vers nennt Allah nah. Die Grenze der Stunde: Die Seite erzählt zusätzlich Berichte darüber, wie der Vers herabkam. Diese Berichte werden nicht als nummerierter Hadith der Stunde übernommen. Eine Bitte ist kein Ersatz dafür, bei Gefahr einen Menschen zu holen. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! Qurʾān 2:186 lehrt, dass Allah nah ist und das Bittgebet des Bittenden erhört. Darum dürfen wir Allah um Gutes bitten: zum Beispiel um Hilfe beim Lernen, Geduld oder Gesundheit. Duʿāʾ bedeutet Bittgebet. Qarīb bedeutet nah. Stell dir vor, du bist vor einem schwierigen Gespräch aufgeregt. Du kannst Allah mit deinen eigenen Worten bitten und gleichzeitig mit einer erwachsenen Person sprechen, die dir hilft. Ein Duʿāʾ ist kein Grund, bei Gefahr auf menschliche Hilfe zu verzichten.",
         "lines": [
-          "Qurʾān 2:186 ist die gelesene Stelle.",
-          "Der Vers sagt, dass Allah nah ist und die Bitte des Bittenden erhört, wenn er Ihn bittet, und dass die Menschen Ihm antworten und an Ihn glauben sollen.",
-          "Ein Kind hat Sorge vor einem Gespräch und spricht leise: Mein Herr, hilf mir.",
-          "Bei Gefahr holst du einen Menschen. Eine Bitte allein reicht dann nicht."
+          "Qurʾān 2:186 nennt Allah nah.",
+          "Duʿāʾ bedeutet Bittgebet.",
+          "Wir bitten Allah mit eigenen Worten um Gutes.",
+          "Bei Gefahr holen wir sofort auch menschliche Hilfe."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/166. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:186. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/166. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:186. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -347,16 +347,16 @@ const additions=
         "situation": "Ein Kind hat Sorge vor einem Gespräch und spricht leise: Mein Herr, hilf mir.",
         "practice": "Jedes Kind nennt eine erlaubte Bitte, die es Allah sagen kann, ohne sie vorspielen zu müssen.",
         "summary": "Qurʾān 2:186 trägt diese Stunde. Der Vers sagt, dass Allah nah ist und die Bitte des Bittenden erhört, wenn er Ihn bittet, und dass die Menschen Ihm antworten und an Ihn glauben sollen.",
-        "audioScript": "Allah hört unsere Bittgebete. Der Vers sagt, dass Allah nah ist und die Bitte des Bittenden erhört, wenn er Ihn bittet, und dass die Menschen Ihm antworten und an Ihn glauben sollen. Ein Kind hat Sorge vor einem Gespräch und spricht leise: Mein Herr, hilf mir. Jedes Kind nennt eine erlaubte Bitte, die es Allah sagen kann, ohne sie vorspielen zu müssen."
+        "audioScript": "As-salāmu ʿalaikum! Qurʾān 2:186 sagt, dass Allah nah ist und das Bittgebet des Bittenden erhört. Duʿāʾ bedeutet Bittgebet. Bitte Allah um Gutes. Wenn du Hilfe brauchst, wende dich auch an einen vertrauenswürdigen Erwachsenen."
       },
       "9-10": {
         "goal": "Ich kann Allah hört unsere Bittgebete von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Allah hört unsere Bittgebete. Das Lernziel ist: Allah ist nah. Die Seite https://www.islamweb.net/ar/library/content/49/166 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:186. Sinngemäß, keine beglaubigte Übersetzung: Der Vers sagt, dass Allah nah ist und die Bitte des Bittenden erhört, wenn er Ihn bittet, und dass die Menschen Ihm antworten und an Ihn glauben sollen. Alltag: Ein Kind hat Sorge vor einem Gespräch und spricht leise: Mein Herr, hilf mir. Aufgabe: Jedes Kind nennt eine erlaubte Bitte, die es Allah sagen kann, ohne sie vorspielen zu müssen. duʿāʾ bedeutet: Bittgebet, Allah um etwas bitten. qarīb bedeutet: nah; der Vers nennt Allah nah. Was nicht behauptet wird: Die Seite erzählt zusätzlich Berichte darüber, wie der Vers herabkam. Diese Berichte werden nicht als nummerierter Hadith der Stunde übernommen. Eine Bitte ist kein Ersatz dafür, bei Gefahr einen Menschen zu holen. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! In Qurʾān 2:186 spricht Allah davon, dass Er nah ist und die Bitte des Bittenden erhört. Der Vers ruft die Menschen zugleich dazu auf, Ihm zu antworten und an Ihn zu glauben. Duʿāʾ heißt Bittgebet; qarīb bedeutet nah. Wir lernen: Ein Bittgebet ist nicht auf auswendig gelernte Beispiele beschränkt. Du kannst Allah um Gutes bitten. Im Alltag verbinden wir die Bitte mit verantwortlichem Handeln: Wenn ein Problem zu groß ist, wenden wir uns an eine Person, die helfen kann. Unsere Aufgabe ist, eine eigene erlaubte Bitte zu formulieren und zu erklären, weshalb das Holen menschlicher Hilfe dem Bittgebet nicht widerspricht.",
         "lines": [
-          "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 2:186.",
-          "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
-          "Die Seite erzählt zusätzlich Berichte darüber, wie der Vers herabkam.",
-          "Eine Hadithnummer, die auf der Seite fehlt, wird nicht ergänzt."
+          "Qurʾān 2:186 nennt Allah nah und spricht vom Erhören des Bittgebets.",
+          "Duʿāʾ bedeutet, Allah zu bitten.",
+          "Der Vers ruft auch zum Glauben an Allah und zum Antworten auf Seinen Aufruf.",
+          "Bittgebet und verantwortliches Handeln gehören zum Alltag."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/166. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:186. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/166. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:186. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -373,90 +373,90 @@ const additions=
         "situation": "Ein Kind hat Sorge vor einem Gespräch und spricht leise: Mein Herr, hilf mir.",
         "practice": "Jedes Kind nennt eine erlaubte Bitte, die es Allah sagen kann, ohne sie vorspielen zu müssen.",
         "summary": "Belegt ist Qurʾān 2:186. Ungeprüft bleibt: Die Seite erzählt zusätzlich Berichte darüber, wie der Vers herabkam.",
-        "audioScript": "Für die älteren Kinder. Allah hört unsere Bittgebete. Der Vers sagt, dass Allah nah ist und die Bitte des Bittenden erhört, wenn er Ihn bittet, und dass die Menschen Ihm antworten und an Ihn glauben sollen. Nicht belegt und deshalb nicht behauptet: Die Seite erzählt zusätzlich Berichte darüber, wie der Vers herabkam."
+        "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Qurʾān 2:186 sagt, dass Allah nah ist und die Bitte des Bittenden erhört. Duʿāʾ ist ein Bittgebet an Allah. Du darfst Ihn um Gutes bitten. Wenn du Schutz oder Hilfe brauchst, suchst du auch die Unterstützung geeigneter Menschen."
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was passt zu dieser Stunde?",
+          "prompt": "Wie nennt man eine Bitte an Allah?",
           "options": [
-            "Jedes Kind nennt eine erlaubte Bitte, die es Allah sagen kann, ohne sie vorspielen zu müssen.",
-            "Ich sage, Allah wisse das nicht."
+            "Duʿāʾ.",
+            "Spott."
           ],
           "correct": 0,
-          "hint": "Schau auf die Übung.",
-          "explain": "Die Übung der Stunde ist der erste Satz. Der zweite Satz ist das Gegenteil von dem, was wir üben."
+          "hint": "Denke an unser neues Wort.",
+          "explain": "Duʿāʾ heißt Bittgebet."
         },
         {
           "type": "choice",
-          "prompt": "Woran hält sich diese Stunde?",
+          "prompt": "Du hast Sorgen. Was darfst du tun?",
           "options": [
-            "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "Allah bitten und mit einem Erwachsenen sprechen.",
+            "Alles für dich behalten."
           ],
           "correct": 0,
-          "hint": "Nur Gelesenes.",
-          "explain": "Die Stunde nennt Qurʾān 2:186 und trennt die Übung davon. Eine Nummer wird nicht erfunden."
+          "hint": "Beides kann helfen.",
+          "explain": "Duʿāʾ und das Hilfeholen bei Menschen passen zusammen."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Stelle trägt Allah hört unsere Bittgebete?",
+          "prompt": "Was sagt Qurʾān 2:186 über Allah?",
           "options": [
-            "Qurʾān 2:186",
-            "Eine Stelle ohne Suren- und Verszahl."
+            "Allah ist nah und erhört die Bitte des Bittenden.",
+            "Allah hört nur laute Bitten."
           ],
           "correct": 0,
-          "hint": "Die Fundstelle steht im Unterricht.",
-          "explain": "Die Stunde bleibt bei Qurʾān 2:186."
+          "hint": "Denke an Allahs Nähe und an das Bittgebet.",
+          "explain": "Der Vers sagt, dass Allah nah ist und die Bitte des Bittenden erhört."
         },
         {
           "type": "choice",
-          "prompt": "Was sagt der Vers sinngemäß für diese Stunde?",
+          "prompt": "Was tust du, wenn du in Gefahr bist?",
           "options": [
-            "Der Vers sagt, dass Allah nah ist und die Bitte des Bittenden erhört, wenn er Ihn bittet, und dass die Menschen Ihm antworten und an Ihn.",
-            "Ich sage, Allah wisse das nicht."
+            "Ich bitte Allah und hole sofort Hilfe bei Menschen.",
+            "Ich warte allein, ohne jemandem etwas zu sagen."
           ],
           "correct": 0,
-          "hint": "Der erste Satz folgt der gelesenen Stelle.",
-          "explain": "Die deutsche Zeile ist eine Unterrichtshilfe zu Qurʾān 2:186, keine beglaubigte Übersetzung."
+          "hint": "Suche Hilfe bei Erwachsenen.",
+          "explain": "Bittgebet und Schutzmaßnahmen schließen sich nicht aus."
         },
         {
           "type": "text",
-          "prompt": "Welche Übung gehört zu dieser Stunde?",
-          "sample": "Jedes Kind nennt eine erlaubte Bitte, die es Allah sagen kann, ohne sie vorspielen zu müssen.",
-          "hint": "Die praktische Aufgabe.",
-          "explain": "Die Übung ist die genannte Handlung und nicht eine zusätzliche Formel."
+          "prompt": "Nenne eine gute Bitte an Allah.",
+          "sample": "O Allah, hilf mir, Gutes zu lernen und freundlich zu anderen zu sein.",
+          "hint": "Die Bitte darf kurz sein.",
+          "explain": "Duʿāʾ ist die Bitte an Allah."
         }
       ],
       "9-10": [
         {
           "type": "choice",
-          "prompt": "Welche Angabe wäre unehrlich?",
+          "prompt": "Was lehrt Qurʾān 2:186?",
           "options": [
-            "Ein Rechtsurteil oder eine Hadithnummer als gelesen auszugeben, obwohl die Seite sie nicht liefert.",
-            "Zu sagen, dass die deutsche Erklärung sinngemäß ist."
+            "Allah ist nah und erhört den Bittenden.",
+            "Allah hört nur bestimmte Sprachen."
           ],
           "correct": 0,
-          "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "hint": "Denke an die zwei Aussagen im Vers.",
+          "explain": "Der Vers verbindet die Nähe Allahs mit dem Erhören der Bitte."
         },
         {
           "type": "text",
-          "prompt": "Was darf diese Stunde nicht behaupten?",
-          "sample": "Die Seite erzählt zusätzlich Berichte darüber, wie der Vers herabkam.",
-          "hint": "Die Grenze steht im Text.",
-          "explain": "Die Grenze schützt davor, den Vers zu überdehnen."
+          "prompt": "Wie gehören Duʿāʾ und verantwortliches Handeln zusammen?",
+          "sample": "Ich bitte Allah und suche zum Beispiel bei einem ernsten Problem Hilfe bei einer vertrauenswürdigen Person.",
+          "hint": "Nenne Bitte und konkrete Handlung.",
+          "explain": "Ein Duʿāʾ ersetzt notwendige Hilfe nicht."
         },
         {
           "type": "text",
-          "prompt": "Wie lautet die Qurʾān-Stelle?",
-          "sample": "Qurʾān 2:186",
-          "hint": "Sure und Vers.",
-          "explain": "Die Stelle ist Qurʾān 2:186 auf der genannten Islamweb-Seite."
+          "prompt": "Was bedeuten duʿāʾ und qarīb?",
+          "sample": "Duʿāʾ heißt Bittgebet, qarīb bedeutet nah.",
+          "hint": "Übersetze beide Begriffe.",
+          "explain": "Die Begriffe erklären wir zum Vers 2:186."
         }
       ]
     },
