@@ -511,7 +511,7 @@ const additions=
       "scientificApproval": false,
       "note": "Der Auszug ist unvollständig gegenüber dem ganzen Vers. Wir ergänzen den fehlenden Teil nicht aus dem Gedächtnis in das arabische Feld. Eine beglaubigte deutsche Übersetzung liegt nicht vor. Unabhängige didaktische Korrektur: Versauszug 2:2 als Teilzitat gekennzeichnet, Quellenprüfung und unfertige Produktionshinweise aus Kindertexten entfernt. Religionswissenschaftliche Freigabe bleibt false."
     },
-    "hint": "Wir erfinden keine zusätzliche Geschichte.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Der Qurʾān ist Allahs Buch.",
     "ageText": {
       "4-5": {
@@ -537,7 +537,7 @@ const additions=
         ],
         "situation": "Ein Kind sieht ein Qurʾān-Exemplar auf dem Boden liegen und hebt es mit den Eltern an einen sauberen Platz.",
         "practice": "Sage: „Der Qurʾān ist Allahs Buch.“ Besprich mit einem Erwachsenen, wo ein Qurʾān-Exemplar gut liegen kann.",
-        "summary": "Der Qurʾān ist Allahs Buch. Wir erfinden keine zusätzliche Geschichte.",
+        "summary": "Der Qurʾān ist Allahs Buch.",
         "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Der Qurʾān ist Allahs Buch. Wir können aus ihm lernen. Wir behandeln ein Qurʾān-Exemplar sorgfältig. Sag mit mir: Der Qurʾān ist Allahs Buch."
       },
       "6-8": {
@@ -728,7 +728,7 @@ const additions=
       "scientificApproval": false,
       "note": "Der Vers ist eine Mahnung Luqmāns an seinen Sohn auf dieser Tafsīr-Seite. Wir erfinden keine zusätzliche Geschichte über Luqmān. Independenter didaktischer Review 2026-10-13: Kindertexte und Quizfragen umgeschrieben, Quellenstatus unverändert."
     },
-    "hint": "Wir erfinden keine zusätzliche Geschichte.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Wir erzählen von einer guten Tat, ohne uns wichtig zu machen.",
     "ageText": {
       "4-5": {
@@ -754,7 +754,7 @@ const additions=
         ],
         "situation": "Ein Kind hat beim Aufräumen geholfen und sagt danach: Ich bin der Beste, ihr seid langsam.",
         "practice": "Wir formulieren denselben Satz neu: Ich habe mitgeholfen. Ohne einen Vergleich.",
-        "summary": "Wir erzählen von einer guten Tat, ohne uns wichtig zu machen. Wir erfinden keine zusätzliche Geschichte.",
+        "summary": "Wir erzählen von einer guten Tat, ohne uns wichtig zu machen.",
         "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Etwas Gutes zu tun ist schön. Aber wir brauchen uns danach nicht besser als andere zu machen. Ein Kind hat beim Aufräumen geholfen. Statt „Ich bin der Beste!“ kann es sagen: „Ich habe mitgeholfen.“ Wir freuen uns über das Gute, ohne andere kleinzumachen. Im Qurʾān 31:18 wird vor Hochmut und Prahlerei gewarnt."
       },
       "6-8": {
@@ -1162,7 +1162,7 @@ const additions=
       "scientificApproval": false,
       "note": "Die Seite legt keine Kleiderordnung für Kinder fest, die wir hier ergänzen würden. Essen und Trinken aus demselben Vers gehören zur späteren Stunde über Essen. Hier üben wir die Ruhe im Gebetsraum. Independenter didaktischer Review 2026-10-13: Kindertexte und Quizfragen umgeschrieben, Quellenstatus unverändert."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Im Gebetsraum bleiben wir ruhig und gehen achtsam mit den Dingen um.",
     "ageText": {
       "4-5": {
@@ -1188,7 +1188,7 @@ const additions=
         ],
         "situation": "Während andere beten, rennt ein Kind nicht zwischen ihnen hindurch und ruft nicht laut.",
         "practice": "Wir zeigen leises Gehen, leises Stellen der Schuhe und ein ruhiges Sitzen.",
-        "summary": "Im Gebetsraum bleiben wir ruhig und gehen achtsam mit den Dingen um. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Im Gebetsraum bleiben wir ruhig und gehen achtsam mit den Dingen um.",
         "audioScript": "As-salāmu ʿalaikum, liebe Kinder! In der Moschee beten Menschen. Wir nehmen Rücksicht auf sie. Wir gehen ruhig, reden leise und stellen unsere Schuhe ordentlich hin. Im Qurʾān 7:31 spricht Allah von angemessener Zierde beim Moscheebesuch. Unsere Übung heute ist, anderen Raum zum Gebet zu lassen."
       },
       "6-8": {
@@ -1596,7 +1596,7 @@ const additions=
       "scientificApproval": false,
       "note": "Die ganze Sūrat al-Falaq wurde in einer früheren Stunde nicht erneut als vollständiger Rezitationstext gesetzt. Hier ist nur der gelesene Versteil gespeichert. Eine Hadithnummer zum Schutz wurde nicht ergänzt. Independenter didaktischer Review 2026-10-13: Kindertexte und Quizfragen umgeschrieben, Quellenstatus unverändert."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Neid fühlt sich eng an.",
     "ageText": {
       "4-5": {
@@ -1621,8 +1621,8 @@ const additions=
           }
         ],
         "situation": "Ein Kind sieht, dass ein anderes Kind ein neues Buch bekommt, und merkt einen engen Gedanken.",
-        "practice": "Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz, ohne die Sūrah synthetisch zu rezitieren.",
-        "summary": "Neid fühlt sich eng an. Die arabischen Worte spricht die Lehrperson.",
+        "practice": "Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz.",
+        "summary": "Neid fühlt sich eng an.",
         "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Manchmal bekommt ein anderes Kind etwas Schönes, und du wünschst dir das auch. Das ist ein Gefühl, über das du sprechen darfst. Wir üben den freundlichen Satz: „Ich gönne dir das.“ In Qurʾān 113:5 suchen wir bei Allah Schutz vor dem Übel eines Neiders, wenn er neidet. Wir erschrecken niemanden mit Geschichten."
       },
       "6-8": {
@@ -1647,7 +1647,7 @@ const additions=
           }
         ],
         "situation": "Ein Kind sieht, dass ein anderes Kind ein neues Buch bekommt, und merkt einen engen Gedanken.",
-        "practice": "Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz, ohne die Sūrah synthetisch zu rezitieren.",
+        "practice": "Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz.",
         "summary": "Qurʾān 113:5 trägt diese Stunde. Die Stunde benutzt nur diesen Versteil und keine Gruselgeschichte.",
         "audioScript": "As-salāmu ʿalaikum! Qurʾān 113:5 ist ein Bittvers um Schutz vor dem Übel des Neides. Das arabische Wort ḥasad bedeutet Neid. Wenn ein anderes Kind ein schönes Buch bekommt und du selbst auch gern eins hättest, musst du dich dafür nicht schämen. Entscheidend ist, was du daraus machst: Du kannst dich für das Kind freuen und Allah um Gutes bitten. Wir üben einen freundlichen Satz, keine gruseligen Geschichten."
       },
@@ -1673,7 +1673,7 @@ const additions=
           }
         ],
         "situation": "Ein Kind sieht, dass ein anderes Kind ein neues Buch bekommt, und merkt einen engen Gedanken.",
-        "practice": "Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz, ohne die Sūrah synthetisch zu rezitieren.",
+        "practice": "Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz.",
         "summary": "Belegt ist Qurʾān 113:5. Ungeprüft bleibt: Die ganze Sūrat al-Falaq wurde in einer früheren Stunde nicht erneut als vollständiger Rezitationstext gesetzt.",
         "audioScript": "As-salāmu ʿalaikum! Sūrat al-Falaq endet in Qurʾān 113:5 mit der Bitte um Schutz vor dem Übel eines Neiders, wenn er neidet. In der Stunde unterscheiden wir ein Gefühl von einem verletzenden Verhalten: Sich etwas ebenfalls zu wünschen, ist noch kein Grund, andere schlecht zu behandeln. Der arabische Ausdruck ḥasad bezeichnet Neid. Wir üben, das Gefühl wahrzunehmen, andere nicht abzuwerten und ihnen Gutes zu gönnen. Die Bittverse werden nicht von einer künstlichen Stimme rezitiert; heute geht es um ihren deutschen Sinn."
       }
@@ -1772,9 +1772,9 @@ const additions=
         "de": "ich suche Schutz"
       }
     ],
-    "practice": "Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz, ohne die Sūrah synthetisch zu rezitieren.",
+    "practice": "Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz.",
     "summary": "Neid fühlt sich eng an. Die Stunde benutzt nur diesen Versteil und keine Gruselgeschichte.",
-    "audioScript": "Neid erkennen ohne Beschämung. Neid fühlt sich eng an. Die Stunde benutzt nur diesen Versteil und keine Gruselgeschichte. Ein Kind sieht, dass ein anderes Kind ein neues Buch bekommt, und merkt einen engen Gedanken. Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz, ohne die Sūrah synthetisch zu rezitieren.",
+    "audioScript": "Neid erkennen ohne Beschämung. Neid fühlt sich eng an. Die Stunde benutzt nur diesen Versteil und keine Gruselgeschichte. Ein Kind sieht, dass ein anderes Kind ein neues Buch bekommt, und merkt einen engen Gedanken. Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz.",
     "voiceApproved": false
   },
   "fiqh-reinheit-der-gebetskleidung": {
@@ -2030,7 +2030,7 @@ const additions=
       "scientificApproval": false,
       "note": "Der Vers spricht den Propheten beim Empfang der Offenbarung an. Wir machen daraus kein Verbot, Hausaufgaben zu lernen. Die anschließenden Worte gehören zum gespeicherten Ausdruck und werden nicht als zweite, eigene Prüfung ausgegeben. Pädagogische Überarbeitung 2026-10-13: Unterrichtssprache, Kinderschutz und Fragen. Quelle nicht neu geprüft. Wissenschaftliche Freigabe bleibt aus."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Wir wiederholen einen kurzen Vers ohne Hetze.",
     "ageText": {
       "4-5": {
@@ -2056,7 +2056,7 @@ const additions=
         ],
         "situation": "Ein Kind will einen Satz fünfmal sehr schnell hintereinander sagen und verhaspelt sich.",
         "practice": "Wir wiederholen einen kurzen deutschen Merksatz langsam zweimal. Eine arabische Rezitation wird nicht vom Computer erzeugt.",
-        "summary": "Wir wiederholen einen kurzen Vers ohne Hetze. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Wir wiederholen einen kurzen Vers ohne Hetze.",
         "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Manchmal will man einen Satz ganz schnell sagen und verhaspelt sich. Wir dürfen beim Lernen ruhig und geduldig sein. Im Qurʾān 75:16 wird der Prophet beim Empfang der Offenbarung angesprochen. Unsere heutige Übung ist ein langsamer deutscher Merksatz, den wir zweimal wiederholen, ohne Druck und ohne Eile."
       },
       "6-8": {
@@ -2247,7 +2247,7 @@ const additions=
       "scientificApproval": false,
       "note": "Die Seite enthält eine lange theologische Erklärung. Wir übernehmen für Kinder nur die Bezeichnung als Gesandter und Wort Allahs, so wie der Vers sie nennt. Wir erfinden keine Kindheitsgeschichte und kein Wunder. Pädagogische Überarbeitung 2026-10-13: Unterrichtssprache, Kinderschutz und Fragen. Quelle nicht neu geprüft. Wissenschaftliche Freigabe bleibt aus."
     },
-    "hint": "Wir erfinden keine zusätzliche Geschichte.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "ʿĪsā, Friede sei mit ihm, ist ein Gesandter Allahs.",
     "ageText": {
       "4-5": {
@@ -2273,7 +2273,7 @@ const additions=
         ],
         "situation": "Jemand fragt: Wer ist ʿĪsā? Das Kind antwortet: Ein Gesandter Allahs.",
         "practice": "Wir üben den respektvollen Namen und fügen keine weitere Geschichte hinzu.",
-        "summary": "ʿĪsā, Friede sei mit ihm, ist ein Gesandter Allahs. Wir erfinden keine zusätzliche Geschichte.",
+        "summary": "ʿĪsā, Friede sei mit ihm, ist ein Gesandter Allahs.",
         "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Heute lernen wir über ʿĪsā, Friede sei mit ihm. Er ist ein Gesandter Allahs und der Sohn Maryams. Das steht im Qurʾān 4:171. Wir sprechen seinen Namen mit Achtung und sagen: ʿĪsā, Friede sei mit ihm. Wir erzählen nur das, was zu dieser Stunde gehört."
       },
       "6-8": {
@@ -2464,7 +2464,7 @@ const additions=
       "scientificApproval": false,
       "note": "Der vorherige Vers über die Eltern ist eine andere Fundstelle. Hier ist nur 17:24 gespeichert. Eine zusätzliche Bittformel nach dem Essen oder vor dem Schlafen wird nicht als Sunnah dieser Seite ausgegeben. Pädagogische Überarbeitung 2026-10-13: Unterrichtssprache, Kinderschutz und Fragen. Quelle nicht neu geprüft. Wissenschaftliche Freigabe bleibt aus."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Wir bitten Allah, den Eltern Barmherzigkeit zu schenken.",
     "ageText": {
       "4-5": {
@@ -2490,7 +2490,7 @@ const additions=
         ],
         "situation": "Ein Kind denkt an eine konkrete Hilfe der Eltern, zum Beispiel das Abendessen, und spricht die Bitte.",
         "practice": "Wir lernen den deutschen Sinn der Bitte und sprechen sie ruhig. Wer die arabischen Worte noch nicht sicher kann, bleibt beim deutschen Sinn.",
-        "summary": "Wir bitten Allah, den Eltern Barmherzigkeit zu schenken. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Wir bitten Allah, den Eltern Barmherzigkeit zu schenken.",
         "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Wir dürfen Allah um Gutes für unsere Eltern bitten. In Qurʾān 17:24 steht eine Bitte um Barmherzigkeit für sie. Auf Deutsch können wir sagen: „O Allah, erbarme Dich meiner Eltern.“ Wenn du von anderen Menschen liebevoll versorgt wirst, darfst du auch für sie um Gutes bitten. Niemand muss beim Lernen über die eigene Familie sprechen, wenn er das nicht möchte."
       },
       "6-8": {
@@ -2899,7 +2899,7 @@ const additions=
       "scientificApproval": false,
       "note": "Der Vers spricht vom Wissen Allahs über das Verborgene der Brust. Wir machen daraus keine Behauptung, ein Mensch könne Gedanken lesen. Eine Hadithnummer wurde nicht ergänzt. Pädagogischer Review 2026-10-13 mit konkreten altersgerechten Fragen; vorhandene Qurʾān-Fundstellen beibehalten; keine unabhängige Vollverifikation. Fiqh-Urteile weiterhin offen."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Allah kennt auch das, was kein Mensch lobt.",
     "ageText": {
       "4-5": {
@@ -2925,7 +2925,7 @@ const additions=
         ],
         "situation": "Ein Kind räumt einen Stift weg, den niemand gesehen hat, und erwartet dafür kein Lob.",
         "practice": "Wir nennen eine kleine gute Tat, die man tun kann, ohne sie sofort zu erzählen.",
-        "summary": "Allah kennt auch das, was kein Mensch lobt. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Allah kennt auch das, was kein Mensch lobt.",
         "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Du kannst etwas Gutes tun, auch wenn niemand zuschaut. Vielleicht räumst du ganz still ein Spielzeug weg. Allah weiß auch davon. Im Qurʾān 67:13 steht, dass Allah sogar das Verborgene kennt. Das soll uns an das Gute erinnern, nicht uns Angst machen."
       },
       "6-8": {
@@ -3116,7 +3116,7 @@ const additions=
       "scientificApproval": false,
       "note": "Der gespeicherte Auszug ist lang und nennt mehrere Gesandte. Was nach dem gespeicherten Stück im Vers noch folgt, wird nicht aus dem Gedächtnis ergänzt. Eine Hadithnummer fehlt auf der verwendeten Stelle. Pädagogischer Review 2026-10-13 mit konkreten altersgerechten Fragen; vorhandene Qurʾān-Fundstellen beibehalten; keine unabhängige Vollverifikation. Fiqh-Urteile weiterhin offen."
     },
-    "hint": "Wir erfinden keine zusätzliche Geschichte.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Allah hat Gesandte geschickt.",
     "ageText": {
       "4-5": {
@@ -3142,7 +3142,7 @@ const additions=
         ],
         "situation": "Ein Kind hört mehrere Prophetnamen und sagt bei jedem: Friede sei mit ihm.",
         "practice": "Wir nennen drei Namen nur so, wie sie im Vers stehen, und erfinden keine zusätzliche Geschichte.",
-        "summary": "Allah hat Gesandte geschickt. Wir erfinden keine zusätzliche Geschichte.",
+        "summary": "Allah hat Gesandte geschickt.",
         "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Allah hat Gesandte geschickt. Zu ihnen gehören Ibrāhīm, Mūsā und ʿĪsā, Friede sei mit ihnen. Wir glauben an Allahs Gesandte und sprechen ihre Namen mit Respekt aus. Qurʾān 2:136 lehrt uns, keinen der Gesandten auszuschließen."
       },
       "6-8": {
@@ -3333,7 +3333,7 @@ const additions=
       "scientificApproval": false,
       "note": "Der berühmte Hadith über die Absicht, der in der Quellenbank mit einer Buḫārī-Nummer steht, wurde auf Dorar nicht erneut geöffnet und wird hier nicht als neuer Beleg benutzt. Die Stunde bleibt beim Vers. Pädagogischer Review 2026-10-13 mit konkreten altersgerechten Fragen; vorhandene Qurʾān-Fundstellen beibehalten; keine unabhängige Vollverifikation. Fiqh-Urteile weiterhin offen."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel.",
     "ageText": {
       "4-5": {
@@ -3359,7 +3359,7 @@ const additions=
         ],
         "situation": "Ein Kind beginnt, der Mutter zu helfen, schaut dann weg und kehrt zur Hilfe zurück.",
         "practice": "Wir sagen leise vor einer kleinen Tat: Ich mache das für Allah.",
-        "summary": "Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel.",
         "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Du möchtest jemandem helfen. Dann wirst du kurz abgelenkt. Das ist nicht schlimm: Du kannst wiederkommen und helfen. Eine gute Absicht bedeutet, dass du Allah zuliebe Gutes tun willst. Qurʾān 98:5 spricht davon, Allah aufrichtig zu dienen. Wir üben heute einen einfachen guten Vorsatz."
       },
       "6-8": {
@@ -3550,7 +3550,7 @@ const additions=
       "scientificApproval": false,
       "note": "Dieselbe Qurʾān-Stelle wurde schon für die Stunde über Dank und für die Stunde über Dank im Herzen gelesen. Hier ist das Lernziel das sichtbare Danken. Der Hadith über den Dank an die Menschen wird nicht erneut als neue Nummer eingeführt. Pädagogischer Review 2026-10-13 mit konkreten altersgerechten Fragen; vorhandene Qurʾān-Fundstellen beibehalten; keine unabhängige Vollverifikation. Fiqh-Urteile weiterhin offen."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Wir sagen Danke, wenn uns jemand hilft.",
     "ageText": {
       "4-5": {
@@ -3576,7 +3576,7 @@ const additions=
         ],
         "situation": "Jemand reicht ein Glas Wasser. Das Kind sagt Danke und blickt die Person an.",
         "practice": "Wir üben Danke auf Deutsch und erinnern uns, dass Dank gegenüber Menschen den Dank gegenüber Allah nicht ersetzt.",
-        "summary": "Wir sagen Danke, wenn uns jemand hilft. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Wir sagen Danke, wenn uns jemand hilft.",
         "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Wenn dir jemand Wasser reicht oder dir hilft, darfst du freundlich Danke sagen. Auch Allah danken wir für Seine Gaben. Qurʾān 14:7 spricht davon, dass Allah Dankbarkeit mit Mehrung verbindet. Wir machen daraus kein Versprechen auf ein bestimmtes Geschenk oder Spielzeug. Heute üben wir ein freundliches Dankeschön."
       },
       "6-8": {
@@ -3767,7 +3767,7 @@ const additions=
       "scientificApproval": false,
       "note": "Die Seite begründet damit nicht die Waschung vor jeder Berührung als gelesenes hanbalitisches Urteil. Diese Rechtsfrage bleibt ungeprüft. Wir erfinden die Menge der Waschung nicht. Pädagogischer Review 2026-10-13 mit konkreten altersgerechten Fragen; vorhandene Qurʾān-Fundstellen beibehalten; keine unabhängige Vollverifikation. Fiqh-Urteile weiterhin offen."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Wir legen das Qurʾān-Buch sauber hin und blättern ruhig.",
     "ageText": {
       "4-5": {
@@ -3793,7 +3793,7 @@ const additions=
         ],
         "situation": "Ein Kind hat schmutzige Hände vom Malen und wäscht sie, bevor es das Exemplar anfasst, weil die Familie das so hält.",
         "practice": "Wir üben: Buch schließen, an einen hohen sauberen Platz legen, nicht darauf setzen.",
-        "summary": "Wir legen das Qurʾān-Buch sauber hin und blättern ruhig. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Wir legen das Qurʾān-Buch sauber hin und blättern ruhig.",
         "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Der Qurʾān ist Allahs Buch. Wenn wir ein Qurʾān-Exemplar lesen, gehen wir sorgfältig damit um. Wir blättern ruhig und legen es an einen sauberen Ort. Qurʾān 56:79 spricht von den Gereinigten; dieser Vers wird von den Gelehrten erklärt. Wir üben heute den respektvollen Umgang mit dem Buch und machen daraus keine neue Vorschrift für Kinder."
       },
       "6-8": {
@@ -3945,7 +3945,7 @@ const additions=
     ],
     "practice": "Wir üben: Buch schließen, an einen hohen sauberen Platz legen, nicht darauf setzen.",
     "summary": "Wir legen das Qurʾān-Buch sauber hin und blättern ruhig. Wir legen das Qurʾān-Buch sauber hin und blättern ruhig.",
-    "audioScript": "Den Qurʾān sorgfältig behandeln. Wir legen das Qurʾān-Buch sauber hin und blättern ruhig. Ein Kind hat schmutzige Hände vom Malen und wäscht sie, bevor es das Exemplar anfasst, weil die Familie das so hält. Wir üben: Buch schließen, an einen hohen sauberen Platz legen, nicht darauf setzen. Die arabischen Worte spricht die Lehrperson.",
+    "audioScript": "Den Qurʾān sorgfältig behandeln. Wir legen das Qurʾān-Buch sauber hin und blättern ruhig. Ein Kind hat schmutzige Hände vom Malen und wäscht sie, bevor es das Exemplar anfasst, weil die Familie das so hält. Wir üben: Buch schließen, an einen hohen sauberen Platz legen, nicht darauf setzen.",
     "voiceApproved": false
   },
   "tarbiyah-sichere-regeln-zu-hause": {
@@ -4635,7 +4635,7 @@ const additions=
       "scientificApproval": false,
       "note": "Wir setzen die deutsche Erklärung nicht an die Stelle des arabischen Wortlauts. Eine künstliche Rezitation wird nicht erzeugt."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Die arabischen Worte und der deutsche Sinn sind nicht dasselbe.",
     "ageText": {
       "4-5": {
@@ -4661,7 +4661,7 @@ const additions=
         ],
         "situation": "Ein Kind hört die arabischen Worte und sagt danach mit eigenen deutschen Worten, was es verstanden hat.",
         "practice": "Wir zeigen auf die arabische Zeile und danach auf die deutsche Erklärung und sagen: Das eine ist der Vers, das andere ist unsere Hilfe zum Verstehen.",
-        "summary": "Die arabischen Worte und der deutsche Sinn sind nicht dasselbe. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Die arabischen Worte und der deutsche Sinn sind nicht dasselbe.",
         "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Der Qurʾān ist auf Arabisch offenbart. Heute hören wir den Sinn von Qurʾān 1:2 auf Deutsch: „Alles Lob gehört Allah, dem Herrn der Welten.“ Die deutschen Worte helfen uns beim Verstehen. Die arabischen Worte sind der Qurʾān-Vers. Wir zeigen auf beide Zeilen und lernen den Unterschied."
       },
       "6-8": {
@@ -4852,7 +4852,7 @@ const additions=
       "scientificApproval": false,
       "note": "Eine bestimmte Unterrichtsszene mit einem Kind steht auf der gelesenen Seite nicht. Wir behaupten sie nicht. Die späteren Sätze des Verses über den Entschluss und das Vertrauen werden nicht als vollständige Sīrah-Erzählung ausgebaut."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Der Vers beschreibt den Propheten, Friede sei mit ihm, als mild im Umgang.",
     "ageText": {
       "4-5": {
@@ -4878,7 +4878,7 @@ const additions=
         ],
         "situation": "Im Unterricht spricht die Lehrperson leise und lässt ein Kind ausreden.",
         "practice": "Wir üben einen freundlichen Satz zu einem anderen Kind. Wir erzählen dazu keine erfundene Kinderszene aus dem Leben des Propheten.",
-        "summary": "Der Vers beschreibt den Propheten, Friede sei mit ihm, als mild im Umgang. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Der Vers beschreibt den Propheten, Friede sei mit ihm, als mild im Umgang.",
         "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Unser Prophet Muḥammad ﷺ war mild und freundlich im Umgang. Im Qurʾān 3:159 spricht Allah von seiner Milde durch Allahs Barmherzigkeit. Wir üben, einander freundlich zu antworten und andere ausreden zu lassen. Wir müssen dafür keine Geschichte erfinden."
       },
       "6-8": {
@@ -5069,7 +5069,7 @@ const additions=
       "scientificApproval": false,
       "note": "Die Seite liefert keine nummerierte Bittformel für den Notfall. Die menschliche Hilfe ist die Schutzregel und kein Hadith."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Wenn uns etwas schwer wird, bitten wir Allah und holen bei Gefahr einen Menschen.",
     "ageText": {
       "4-5": {
@@ -5095,7 +5095,7 @@ const additions=
         ],
         "situation": "Ein Kind versteht eine Aufgabe nicht und bittet Allah leise um Hilfe, dann fragt es die Lehrperson.",
         "practice": "Wir sprechen eine kurze eigene Bitte auf Deutsch und nennen danach die Person, die wir bei einer echten Not holen würden.",
-        "summary": "Wenn uns etwas schwer wird, bitten wir Allah und holen bei Gefahr einen Menschen. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Wenn uns etwas schwer wird, bitten wir Allah und holen bei Gefahr einen Menschen.",
         "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Wenn dir etwas schwerfällt, darfst du Allah um Hilfe bitten. Im Qurʾān 40:60 steht sinngemäß: „Ruft Mich an, so erhöre Ich euch.“ Das ist eine Einladung zum Duʿāʾ. Du kannst Allah bitten und zugleich eine Lehrperson fragen, wenn du eine Aufgabe nicht verstehst. Bei Gefahr holst du immer sofort Hilfe von Menschen."
       },
       "6-8": {
@@ -5286,7 +5286,7 @@ const additions=
       "scientificApproval": false,
       "note": "Der Vers beschreibt nicht die Hausordnung einer bestimmten Moschee. Unsere konkreten Regeln bleiben Familien- und Hausregeln."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Im Gemeinschaftsraum nehmen wir auf andere Kinder Rücksicht.",
     "ageText": {
       "4-5": {
@@ -5312,7 +5312,7 @@ const additions=
         ],
         "situation": "Zwei Kinder wollen denselben Platz. Sie rücken zusammen, statt zu schubsen.",
         "practice": "Wir üben, leise Platz zu machen und den Raum so zu verlassen, dass niemand angestoßen wird.",
-        "summary": "Im Gemeinschaftsraum nehmen wir auf andere Kinder Rücksicht. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Im Gemeinschaftsraum nehmen wir auf andere Kinder Rücksicht.",
         "audioScript": "As-salāmu ʿalaikum, liebe Kinder! In der Moschee denken wir an Allah und nehmen Rücksicht auf andere. Wenn zwei Kinder denselben Platz möchten, können sie freundlich miteinander sprechen und Platz machen. Qurʾān 24:36 spricht von Häusern, in denen Allahs Name genannt wird. Wir üben, ruhig und freundlich miteinander umzugehen."
       },
       "6-8": {
@@ -5503,7 +5503,7 @@ const additions=
       "scientificApproval": false,
       "note": "Die Seite enthält dazu einen Hinweis auf al-Buḫārī ohne dass wir seine Nummer in diese Stunde übernehmen. Wir zählen die Schlüssel nicht und erfinden keine Liste des Verborgenen."
     },
-    "hint": "Wir erfinden keine zusätzliche Geschichte.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Wir können etwas verstecken.",
     "ageText": {
       "4-5": {
@@ -5529,7 +5529,7 @@ const additions=
         ],
         "situation": "Ein Kind legt einen Stein hinter den Rücken. Die anderen sehen ihn nicht. Die Stunde sagt: Allahs Wissen ist damit nicht begrenzt.",
         "practice": "Wir nennen ein kleines Ding, das Menschen gerade nicht sehen, und wiederholen: Allah weiß es.",
-        "summary": "Wir können etwas verstecken. Wir erfinden keine zusätzliche Geschichte.",
+        "summary": "Wir können etwas verstecken.",
         "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Wir Menschen sehen manchmal etwas nicht. Vielleicht liegt ein kleiner Stein hinter einem Kissen. Allahs Wissen ist viel größer als unseres. Im Qurʾān 6:59 steht, dass Allah das Verborgene kennt und sogar weiß, wenn ein Blatt fällt. Das ist eine Erinnerung an Seine Größe, nicht dazu da, dich zu erschrecken."
       },
       "6-8": {
@@ -5721,7 +5721,7 @@ const additions=
       "note": "Wir fügen keine Rangfolge und keine erfundene Begegnung zwischen den Gesandten hinzu. Dieselbe Fundstelle trägt hier das Lernziel des respektvollen Aussprechens. Dieselbe gelesene Fundstelle wurde schon in Slot 112 mit einem anderen Lernziel verwendet.",
       "sameLocusAsSlot": 112
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Wir sprechen die Namen der Gesandten respektvoll aus, ohne einen gering zu machen.",
     "ageText": {
       "4-5": {
@@ -5747,7 +5747,7 @@ const additions=
         ],
         "situation": "Jemand sagt einen Prophetnamen achtlos. Das Kind wiederholt den Namen ruhig und mit Respekt.",
         "practice": "Wir sprechen drei im Vers genannte Namen langsam und ohne einen Witz.",
-        "summary": "Wir sprechen die Namen der Gesandten respektvoll aus, ohne einen gering zu machen. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Wir sprechen die Namen der Gesandten respektvoll aus, ohne einen gering zu machen.",
         "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Wir lieben und respektieren die Gesandten Allahs. Wenn wir ihre Namen sagen, sprechen wir freundlich und ohne Spott. Qurʾān 2:136 lehrt den Glauben an die Gesandten. Heute üben wir, drei Namen ruhig und respektvoll auszusprechen."
       },
       "6-8": {
@@ -5938,7 +5938,7 @@ const additions=
       "scientificApproval": false,
       "note": "Für die Jüngsten bleibt es beim guten Stäubchen. Der Satz über das Schlechte wird nicht als Strafszene ausgemalt. Eine Hadithnummer wurde nicht ergänzt."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Eine kleine Hilfe kann vor Allah Gewicht haben.",
     "ageText": {
       "4-5": {
@@ -5964,7 +5964,7 @@ const additions=
         ],
         "situation": "Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen.",
         "practice": "Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war.",
-        "summary": "Eine kleine Hilfe kann vor Allah Gewicht haben. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Eine kleine Hilfe kann vor Allah Gewicht haben.",
         "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Manchmal hilft schon eine kleine Tat. Wenn ein Stift herunterfällt, kannst du ihn jemandem aufheben. Im Qurʾān 99:7 steht, dass man sogar das Gute im Gewicht eines winzigen Stäubchens sehen wird. Wir helfen gern, auch wenn niemand uns dafür lobt."
       },
       "6-8": {
@@ -7481,12 +7481,12 @@ const additions=
       "scientificApproval": false,
       "note": "Die Höhle, Ḫadīǧa, ein Datum und die weiteren Verse der Sūrah stehen in diesem gespeicherten Auszug nicht. Wir fügen sie nicht hinzu."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat.",
     "ageText": {
       "4-5": {
         "goal": "Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat.",
-        "intro": "Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat. Die Seite bricht den Ausdruck dort ab. Stell dir vor: Wir sagen: Dieser Vers gehört an den Anfang der Botschaft. Mehr erzählen wir heute nicht. Heute üben wir: Wir wiederholen nur diesen deutschen Sinn und malen keine Höhle. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat. Die Seite bricht den Ausdruck dort ab. Stell dir vor: Wir sagen: Dieser Vers gehört an den Anfang der Botschaft. Mehr erzählen wir heute nicht. Heute üben wir: Wir wiederholen nur diesen deutschen Sinn und malen keine Höhle.",
         "lines": [
           "Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat.",
           "Die Seite bricht den Ausdruck dort ab.",
@@ -7507,7 +7507,7 @@ const additions=
         ],
         "situation": "Wir sagen: Dieser Vers gehört an den Anfang der Botschaft. Mehr erzählen wir heute nicht.",
         "practice": "Wir wiederholen nur diesen deutschen Sinn und malen keine Höhle.",
-        "summary": "Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat.",
         "audioScript": "Muḥammad Friede sei mit ihm in Makkah. Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat. Die Seite bricht den Ausdruck dort ab. Wir sagen: Dieser Vers gehört an den Anfang der Botschaft. Mehr erzählen wir heute nicht. Wir wiederholen nur diesen deutschen Sinn und malen keine Höhle."
       },
       "6-8": {
@@ -7517,7 +7517,7 @@ const additions=
           "Qurʾān 96:1 ist die gelesene Stelle.",
           "Die Seite bricht den Ausdruck dort ab.",
           "Wir sagen: Dieser Vers gehört an den Anfang der Botschaft. Mehr erzählen wir heute nicht.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1965. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 96:1. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1965. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 96:1. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -7581,7 +7581,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -7629,7 +7629,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -7698,12 +7698,12 @@ const additions=
       "scientificApproval": false,
       "note": "Eine bestimmte arabische Formel nach dem Essen steht auf dieser Seite nicht. Wir geben sie nicht als geprüfte Sunnah aus."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Nach dem Essen erinnern wir uns, Allah zu danken.",
     "ageText": {
       "4-5": {
         "goal": "Nach dem Essen erinnern wir uns, Allah zu danken.",
-        "intro": "Nach dem Essen erinnern wir uns, Allah zu danken. Der Vers fordert die Glaubenden auf, von den guten Dingen zu essen, die Allah ihnen gegeben hat, und Allah zu danken, wenn sie Ihn allein anbeten. Stell dir vor: Der Teller ist leer. Das Kind sagt: Dank gehört Allah, und dankt auch der Person, die gekocht hat. Heute üben wir: Wir üben einen schlichten deutschen Dank nach dem Essen. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Nach dem Essen erinnern wir uns, Allah zu danken. Der Vers fordert die Glaubenden auf, von den guten Dingen zu essen, die Allah ihnen gegeben hat, und Allah zu danken, wenn sie Ihn allein anbeten. Stell dir vor: Der Teller ist leer. Das Kind sagt: Dank gehört Allah, und dankt auch der Person, die gekocht hat. Heute üben wir: Wir üben einen schlichten deutschen Dank nach dem Essen.",
         "lines": [
           "Nach dem Essen erinnern wir uns, Allah zu danken.",
           "Der Vers fordert die Glaubenden auf, von den guten Dingen zu essen, die Allah ihnen gegeben hat, und Allah zu danken, wenn sie Ihn allein anbeten.",
@@ -7724,7 +7724,7 @@ const additions=
         ],
         "situation": "Der Teller ist leer. Das Kind sagt: Dank gehört Allah, und dankt auch der Person, die gekocht hat.",
         "practice": "Wir üben einen schlichten deutschen Dank nach dem Essen.",
-        "summary": "Nach dem Essen erinnern wir uns, Allah zu danken. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Nach dem Essen erinnern wir uns, Allah zu danken.",
         "audioScript": "Nach dem Essen danken. Nach dem Essen erinnern wir uns, Allah zu danken. Der Vers fordert die Glaubenden auf, von den guten Dingen zu essen, die Allah ihnen gegeben hat, und Allah zu danken, wenn sie Ihn allein anbeten. Der Teller ist leer. Das Kind sagt: Dank gehört Allah, und dankt auch der Person, die gekocht hat. Wir üben einen schlichten deutschen Dank nach dem Essen."
       },
       "6-8": {
@@ -7734,7 +7734,7 @@ const additions=
           "Qurʾān 2:172 ist die gelesene Stelle.",
           "Der Vers fordert die Glaubenden auf, von den guten Dingen zu essen, die Allah ihnen gegeben hat, und Allah zu danken, wenn sie Ihn allein anbeten.",
           "Der Teller ist leer. Das Kind sagt: Dank gehört Allah, und dankt auch der Person, die gekocht hat.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/159. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:172. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/159. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:172. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -7798,7 +7798,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -7846,7 +7846,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -7915,12 +7915,12 @@ const additions=
       "scientificApproval": false,
       "note": "Der Vers ist keine Pflegeliste. Medizin und schwere Arbeit bleiben bei den Erwachsenen. Eine Hadithnummer wurde nicht ergänzt."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Mit Erlaubnis der Eltern helfen wir einem kranken oder älteren Menschen auf eine kleine, sichere Weise.",
     "ageText": {
       "4-5": {
         "goal": "Mit Erlaubnis der Eltern helfen wir einem kranken oder älteren Menschen auf eine kleine, sichere Weise.",
-        "intro": "Mit Erlaubnis der Eltern helfen wir einem kranken oder älteren Menschen auf eine kleine, sichere Weise. Der Vers befiehlt, Allah allein zu dienen, den Eltern gut zu sein, und nennt die Verwandten, die Waisen, die Bedürftigen und den Nachbarn. Stell dir vor: Die Großmutter braucht ein Glas Wasser. Das Kind bringt es, nachdem es gefragt hat. Heute üben wir: Wir nennen eine Hilfe, die ein Kind sicher tun kann, und eine Hilfe, die nur Erwachsene tun. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Mit Erlaubnis der Eltern helfen wir einem kranken oder älteren Menschen auf eine kleine, sichere Weise. Der Vers befiehlt, Allah allein zu dienen, den Eltern gut zu sein, und nennt die Verwandten, die Waisen, die Bedürftigen und den Nachbarn. Stell dir vor: Die Großmutter braucht ein Glas Wasser. Das Kind bringt es, nachdem es gefragt hat. Heute üben wir: Wir nennen eine Hilfe, die ein Kind sicher tun kann, und eine Hilfe, die nur Erwachsene tun.",
         "lines": [
           "Mit Erlaubnis der Eltern helfen wir einem kranken oder älteren Menschen auf eine kleine, sichere Weise.",
           "Der Vers befiehlt, Allah allein zu dienen, den Eltern gut zu sein, und nennt die Verwandten, die Waisen, die Bedürftigen und den Nachbarn.",
@@ -7941,7 +7941,7 @@ const additions=
         ],
         "situation": "Die Großmutter braucht ein Glas Wasser. Das Kind bringt es, nachdem es gefragt hat.",
         "practice": "Wir nennen eine Hilfe, die ein Kind sicher tun kann, und eine Hilfe, die nur Erwachsene tun.",
-        "summary": "Mit Erlaubnis der Eltern helfen wir einem kranken oder älteren Menschen auf eine kleine, sichere Weise. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Mit Erlaubnis der Eltern helfen wir einem kranken oder älteren Menschen auf eine kleine, sichere Weise.",
         "audioScript": "Kranken und älteren Menschen helfen. Mit Erlaubnis der Eltern helfen wir einem kranken oder älteren Menschen auf eine kleine, sichere Weise. Der Vers befiehlt, Allah allein zu dienen, den Eltern gut zu sein, und nennt die Verwandten, die Waisen, die Bedürftigen und den Nachbarn. Die Großmutter braucht ein Glas Wasser. Das Kind bringt es, nachdem es gefragt hat. Wir nennen eine Hilfe, die ein Kind sicher tun kann, und eine Hilfe, die nur Erwachsene tun."
       },
       "6-8": {
@@ -7951,7 +7951,7 @@ const additions=
           "Qurʾān 4:36 ist die gelesene Stelle.",
           "Der Vers befiehlt, Allah allein zu dienen, den Eltern gut zu sein, und nennt die Verwandten, die Waisen, die Bedürftigen und den Nachbarn.",
           "Die Großmutter braucht ein Glas Wasser. Das Kind bringt es, nachdem es gefragt hat.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/314. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:36. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/314. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:36. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -8015,7 +8015,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -8063,7 +8063,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -8132,12 +8132,12 @@ const additions=
       "scientificApproval": false,
       "note": "Die Seite erklärt das Abirren mit einem Beispiel über einen falschen Namen. Wir zählen nicht neunundneunzig Namen, weil diese Zahl auf der verwendeten Stelle nicht als geprüfte Liste steht."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Allah hat schöne Namen.",
     "ageText": {
       "4-5": {
         "goal": "Allah hat schöne Namen.",
-        "intro": "Allah hat schöne Namen. Der Vers sagt: Allah gehören die schönsten Namen, so ruft Ihn damit an, und lasst die, die bei Seinen Namen abirren. Stell dir vor: Ein Kind hört ar-Raḥmān und sagt: Damit rufen wir Allah an. Wir geben diesen Namen keinem Menschen. Heute üben wir: Wir wiederholen einen Namen nur so, wie er im Unterricht schon aus einem Vers bekannt ist, und erfinden keine neue Namensliste. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Allah hat schöne Namen. Der Vers sagt: Allah gehören die schönsten Namen, so ruft Ihn damit an, und lasst die, die bei Seinen Namen abirren. Stell dir vor: Ein Kind hört ar-Raḥmān und sagt: Damit rufen wir Allah an. Wir geben diesen Namen keinem Menschen. Heute üben wir: Wir wiederholen einen Namen nur so, wie er im Unterricht schon aus einem Vers bekannt ist, und erfinden keine neue Namensliste.",
         "lines": [
           "Allah hat schöne Namen.",
           "Der Vers sagt: Allah gehören die schönsten Namen, so ruft Ihn damit an, und lasst die, die bei Seinen Namen abirren.",
@@ -8158,7 +8158,7 @@ const additions=
         ],
         "situation": "Ein Kind hört ar-Raḥmān und sagt: Damit rufen wir Allah an. Wir geben diesen Namen keinem Menschen.",
         "practice": "Wir wiederholen einen Namen nur so, wie er im Unterricht schon aus einem Vers bekannt ist, und erfinden keine neue Namensliste.",
-        "summary": "Allah hat schöne Namen. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Allah hat schöne Namen.",
         "audioScript": "Die schönen Namen Allahs. Allah hat schöne Namen. Der Vers sagt: Allah gehören die schönsten Namen, so ruft Ihn damit an, und lasst die, die bei Seinen Namen abirren. Ein Kind hört ar-Raḥmān und sagt: Damit rufen wir Allah an. Wir geben diesen Namen keinem Menschen. Wir wiederholen einen Namen nur so, wie er im Unterricht schon aus einem Vers bekannt ist, und erfinden keine neue Namensliste."
       },
       "6-8": {
@@ -8168,7 +8168,7 @@ const additions=
           "Qurʾān 7:180 ist die gelesene Stelle.",
           "Der Vers sagt: Allah gehören die schönsten Namen, so ruft Ihn damit an, und lasst die, die bei Seinen Namen abirren.",
           "Ein Kind hört ar-Raḥmān und sagt: Damit rufen wir Allah an. Wir geben diesen Namen keinem Menschen.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/576. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 7:180. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/576. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 7:180. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -8232,7 +8232,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -8280,7 +8280,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -8349,12 +8349,12 @@ const additions=
       "scientificApproval": false,
       "note": "Die Seite legt damit nicht eine Erzählung über seine Kinder an, die wir ausbauen würden. Wir erfinden kein Datum und keine zusätzliche Amtsgeschichte."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Muḥammad, Friede sei mit ihm, ist der Gesandte Allahs und das Siegel der Propheten.",
     "ageText": {
       "4-5": {
         "goal": "Muḥammad, Friede sei mit ihm, ist der Gesandte Allahs und das Siegel der Propheten.",
-        "intro": "Muḥammad, Friede sei mit ihm, ist der Gesandte Allahs und das Siegel der Propheten. Der Vers sagt, dass Muḥammad nicht der Vater von irgendjemandem unter euren Männern ist, sondern der Gesandte Allahs und das Siegel der Propheten. Stell dir vor: Ein Kind sagt den Namen langsam und fügt den Friedensgruß hinzu. Heute üben wir: Wir wiederholen nur diese Bezeichnung und keine Jahreszahl. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Muḥammad, Friede sei mit ihm, ist der Gesandte Allahs und das Siegel der Propheten. Der Vers sagt, dass Muḥammad nicht der Vater von irgendjemandem unter euren Männern ist, sondern der Gesandte Allahs und das Siegel der Propheten. Stell dir vor: Ein Kind sagt den Namen langsam und fügt den Friedensgruß hinzu. Heute üben wir: Wir wiederholen nur diese Bezeichnung und keine Jahreszahl.",
         "lines": [
           "Muḥammad, Friede sei mit ihm, ist der Gesandte Allahs und das Siegel der Propheten.",
           "Der Vers sagt, dass Muḥammad nicht der Vater von irgendjemandem unter euren Männern ist, sondern der Gesandte Allahs und das Siegel der Propheten.",
@@ -8375,7 +8375,7 @@ const additions=
         ],
         "situation": "Ein Kind sagt den Namen langsam und fügt den Friedensgruß hinzu.",
         "practice": "Wir wiederholen nur diese Bezeichnung und keine Jahreszahl.",
-        "summary": "Muḥammad, Friede sei mit ihm, ist der Gesandte Allahs und das Siegel der Propheten. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Muḥammad, Friede sei mit ihm, ist der Gesandte Allahs und das Siegel der Propheten.",
         "audioScript": "Der letzte Gesandte Muḥammad Friede sei mit ihm. Muḥammad, Friede sei mit ihm, ist der Gesandte Allahs und das Siegel der Propheten. Der Vers sagt, dass Muḥammad nicht der Vater von irgendjemandem unter euren Männern ist, sondern der Gesandte Allahs und das Siegel der Propheten. Ein Kind sagt den Namen langsam und fügt den Friedensgruß hinzu. Wir wiederholen nur diese Bezeichnung und keine Jahreszahl."
       },
       "6-8": {
@@ -8385,7 +8385,7 @@ const additions=
           "Qurʾān 33:40 ist die gelesene Stelle.",
           "Der Vers sagt, dass Muḥammad nicht der Vater von irgendjemandem unter euren Männern ist, sondern der Gesandte Allahs und das Siegel der Propheten.",
           "Ein Kind sagt den Namen langsam und fügt den Friedensgruß hinzu.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1472. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 33:40. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1472. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 33:40. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -8449,7 +8449,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -8497,7 +8497,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -8567,12 +8567,12 @@ const additions=
       "note": "Dieselbe Fundstelle trägt ein anderes Lernziel. Der Warnton am Ende des Verses wird wieder nicht als Angstgeschichte verwendet. Eine feste Wortformel außer dem Versanfang wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 121 mit einem anderen Lernziel verwendet.",
       "sameLocusAsSlot": 121
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Wir sprechen eine Bitte ruhig und meinen sie ernst.",
     "ageText": {
       "4-5": {
         "goal": "Wir sprechen eine Bitte ruhig und meinen sie ernst.",
-        "intro": "Wir sprechen eine Bitte ruhig und meinen sie ernst. Dieselbe Stelle wie in der Stunde über schwere Momente beginnt mit: Ruft Mich an, so erhöre Ich euch. Stell dir vor: Ein Kind sitzt einen Moment still und bittet um Hilfe beim ehrlich Lernen, nicht um eine Note ohne Lernen. Heute üben wir: Wir sprechen eine kurze Bitte und sagen danach, was wir selbst dazu tun. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Wir sprechen eine Bitte ruhig und meinen sie ernst. Dieselbe Stelle wie in der Stunde über schwere Momente beginnt mit: Ruft Mich an, so erhöre Ich euch. Stell dir vor: Ein Kind sitzt einen Moment still und bittet um Hilfe beim ehrlich Lernen, nicht um eine Note ohne Lernen. Heute üben wir: Wir sprechen eine kurze Bitte und sagen danach, was wir selbst dazu tun.",
         "lines": [
           "Wir sprechen eine Bitte ruhig und meinen sie ernst.",
           "Dieselbe Stelle wie in der Stunde über schwere Momente beginnt mit: Ruft Mich an, so erhöre Ich euch.",
@@ -8593,7 +8593,7 @@ const additions=
         ],
         "situation": "Ein Kind sitzt einen Moment still und bittet um Hilfe beim ehrlich Lernen, nicht um eine Note ohne Lernen.",
         "practice": "Wir sprechen eine kurze Bitte und sagen danach, was wir selbst dazu tun.",
-        "summary": "Wir sprechen eine Bitte ruhig und meinen sie ernst. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Wir sprechen eine Bitte ruhig und meinen sie ernst.",
         "audioScript": "Duʿāʾ mit aufrichtigem Herzen. Wir sprechen eine Bitte ruhig und meinen sie ernst. Dieselbe Stelle wie in der Stunde über schwere Momente beginnt mit: Ruft Mich an, so erhöre Ich euch. Ein Kind sitzt einen Moment still und bittet um Hilfe beim ehrlich Lernen, nicht um eine Note ohne Lernen. Wir sprechen eine kurze Bitte und sagen danach, was wir selbst dazu tun."
       },
       "6-8": {
@@ -8603,7 +8603,7 @@ const additions=
           "Qurʾān 40:60 ist die gelesene Stelle.",
           "Dieselbe Stelle wie in der Stunde über schwere Momente beginnt mit: Ruft Mich an, so erhöre Ich euch.",
           "Ein Kind sitzt einen Moment still und bittet um Hilfe beim ehrlich Lernen, nicht um eine Note ohne Lernen.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1654. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 40:60. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1654. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 40:60. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -8667,7 +8667,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -8715,7 +8715,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -8784,12 +8784,12 @@ const additions=
       "scientificApproval": false,
       "note": "Der Vers beginnt mit Regeln über die heiligen Zeichen und die Pilgerfahrt. Diese Regeln werden hier nicht zu einer Kinderrechtslehre ausgebaut. Das Melden des Spielzeugs ist das Beispiel der Stunde, nicht der Wortlaut des Verses. Wir benutzen nicht den Vers über das Töten einer Seele."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Wenn etwas gefährlich herumliegt, sagen wir Bescheid, statt wegzusehen.",
     "ageText": {
       "4-5": {
         "goal": "Wenn etwas gefährlich herumliegt, sagen wir Bescheid, statt wegzusehen.",
-        "intro": "Wenn etwas gefährlich herumliegt, sagen wir Bescheid, statt wegzusehen. Der lange Vers enthält den Satz: Helft einander bei der Rechtschaffenheit und der Gottesfurcht und helft einander nicht bei Sünde und Übertretung. Stell dir vor: Ein Spielzeug mit einer spitzen Kante liegt auf der Treppe. Das Kind holt eine erwachsene Person. Heute üben wir: Wir üben, auf eine Gefahr zu zeigen und sie nicht selbst wegzuräumen, wenn das unsicher wäre. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Wenn etwas gefährlich herumliegt, sagen wir Bescheid, statt wegzusehen. Der lange Vers enthält den Satz: Helft einander bei der Rechtschaffenheit und der Gottesfurcht und helft einander nicht bei Sünde und Übertretung. Stell dir vor: Ein Spielzeug mit einer spitzen Kante liegt auf der Treppe. Das Kind holt eine erwachsene Person. Heute üben wir: Wir üben, auf eine Gefahr zu zeigen und sie nicht selbst wegzuräumen, wenn das unsicher wäre.",
         "lines": [
           "Wenn etwas gefährlich herumliegt, sagen wir Bescheid, statt wegzusehen.",
           "Der lange Vers enthält den Satz: Helft einander bei der Rechtschaffenheit und der Gottesfurcht und helft einander nicht bei Sünde und Übertretung.",
@@ -8810,7 +8810,7 @@ const additions=
         ],
         "situation": "Ein Spielzeug mit einer spitzen Kante liegt auf der Treppe. Das Kind holt eine erwachsene Person.",
         "practice": "Wir üben, auf eine Gefahr zu zeigen und sie nicht selbst wegzuräumen, wenn das unsicher wäre.",
-        "summary": "Wenn etwas gefährlich herumliegt, sagen wir Bescheid, statt wegzusehen. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Wenn etwas gefährlich herumliegt, sagen wir Bescheid, statt wegzusehen.",
         "audioScript": "Schaden von anderen abwenden. Wenn etwas gefährlich herumliegt, sagen wir Bescheid, statt wegzusehen. Der lange Vers enthält den Satz: Helft einander bei der Rechtschaffenheit und der Gottesfurcht und helft einander nicht bei Sünde und Übertretung. Ein Spielzeug mit einer spitzen Kante liegt auf der Treppe. Das Kind holt eine erwachsene Person. Wir üben, auf eine Gefahr zu zeigen und sie nicht selbst wegzuräumen, wenn das unsicher wäre."
       },
       "6-8": {
@@ -8820,7 +8820,7 @@ const additions=
           "Qurʾān 5:2 ist die gelesene Stelle.",
           "Der lange Vers enthält den Satz: Helft einander bei der Rechtschaffenheit und der Gottesfurcht und helft einander nicht bei Sünde und Übertretung.",
           "Ein Spielzeug mit einer spitzen Kante liegt auf der Treppe. Das Kind holt eine erwachsene Person.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/372. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 5:2. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/372. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 5:2. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -8884,7 +8884,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -8932,7 +8932,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -9001,12 +9001,12 @@ const additions=
       "scientificApproval": false,
       "note": "Die Seite spricht danach davon, dass ein Stück abrogiert und ausgenommen wurde. Diese Rechtsgeschichte wird nicht als Kinderregel ausgebaut. Wir erfinden keine Zahl von Klopfzeichen."
     },
-    "hint": "Wir erfinden keine zusätzliche Geschichte.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Bevor wir ein Haus betreten, fragen wir und grüßen.",
     "ageText": {
       "4-5": {
         "goal": "Bevor wir ein Haus betreten, fragen wir und grüßen.",
-        "intro": "Bevor wir ein Haus betreten, fragen wir und grüßen. Der Vers verbietet den Glaubenden, andere Häuser als ihre eigenen zu betreten, bis sie um Erlaubnis gebeten und die Bewohner gegrüßt haben. Stell dir vor: Ein Kind steht vor der Wohnungstür der Nachbarn und wartet, bis geöffnet wird. Heute üben wir: Wir üben Anklopfen, Warten und einen friedlichen Gruß. Wir erfinden keine zusätzliche Geschichte.",
+        "intro": "Bevor wir ein Haus betreten, fragen wir und grüßen. Der Vers verbietet den Glaubenden, andere Häuser als ihre eigenen zu betreten, bis sie um Erlaubnis gebeten und die Bewohner gegrüßt haben. Stell dir vor: Ein Kind steht vor der Wohnungstür der Nachbarn und wartet, bis geöffnet wird. Heute üben wir: Wir üben Anklopfen, Warten und einen friedlichen Gruß.",
         "lines": [
           "Bevor wir ein Haus betreten, fragen wir und grüßen.",
           "Der Vers verbietet den Glaubenden, andere Häuser als ihre eigenen zu betreten, bis sie um Erlaubnis gebeten und die Bewohner gegrüßt haben.",
@@ -9027,7 +9027,7 @@ const additions=
         ],
         "situation": "Ein Kind steht vor der Wohnungstür der Nachbarn und wartet, bis geöffnet wird.",
         "practice": "Wir üben Anklopfen, Warten und einen friedlichen Gruß.",
-        "summary": "Bevor wir ein Haus betreten, fragen wir und grüßen. Wir erfinden keine zusätzliche Geschichte.",
+        "summary": "Bevor wir ein Haus betreten, fragen wir und grüßen.",
         "audioScript": "Als Gast gute Sitten zeigen. Bevor wir ein Haus betreten, fragen wir und grüßen. Der Vers verbietet den Glaubenden, andere Häuser als ihre eigenen zu betreten, bis sie um Erlaubnis gebeten und die Bewohner gegrüßt haben. Ein Kind steht vor der Wohnungstür der Nachbarn und wartet, bis geöffnet wird. Wir üben Anklopfen, Warten und einen friedlichen Gruß."
       },
       "6-8": {
@@ -9037,7 +9037,7 @@ const additions=
           "Qurʾān 24:27 ist die gelesene Stelle.",
           "Der Vers verbietet den Glaubenden, andere Häuser als ihre eigenen zu betreten, bis sie um Erlaubnis gebeten und die Bewohner gegrüßt haben.",
           "Ein Kind steht vor der Wohnungstür der Nachbarn und wartet, bis geöffnet wird.",
-          "Wir erfinden keine zusätzliche Geschichte."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1267. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 24:27. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1267. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 24:27. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -9101,7 +9101,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -9149,7 +9149,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -9218,12 +9218,12 @@ const additions=
       "scientificApproval": false,
       "note": "Der Vers nennt keine Minuten und kein Gerät. Die Zeitgrenze ist eine Familienvereinbarung. Wir behaupten nicht, der Vers habe Bildschirme erwähnt."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Eine vereinbarte Bildschirmzeit halten wir ein.",
     "ageText": {
       "4-5": {
         "goal": "Eine vereinbarte Bildschirmzeit halten wir ein.",
-        "intro": "Eine vereinbarte Bildschirmzeit halten wir ein. Der Vers sagt: Folge nicht dem, wovon du kein Wissen hast. Stell dir vor: Die vereinbarte Zeit ist um. Das Kind gibt das Gerät ab, auch wenn der Film noch weitergeht. Heute üben wir: Wir nennen die vereinbarte Zeit und eine Beschäftigung danach, zum Beispiel ein Buch oder draußen sein. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Eine vereinbarte Bildschirmzeit halten wir ein. Der Vers sagt: Folge nicht dem, wovon du kein Wissen hast. Stell dir vor: Die vereinbarte Zeit ist um. Das Kind gibt das Gerät ab, auch wenn der Film noch weitergeht. Heute üben wir: Wir nennen die vereinbarte Zeit und eine Beschäftigung danach, zum Beispiel ein Buch oder draußen sein.",
         "lines": [
           "Eine vereinbarte Bildschirmzeit halten wir ein.",
           "Der Vers sagt: Folge nicht dem, wovon du kein Wissen hast.",
@@ -9244,7 +9244,7 @@ const additions=
         ],
         "situation": "Die vereinbarte Zeit ist um. Das Kind gibt das Gerät ab, auch wenn der Film noch weitergeht.",
         "practice": "Wir nennen die vereinbarte Zeit und eine Beschäftigung danach, zum Beispiel ein Buch oder draußen sein.",
-        "summary": "Eine vereinbarte Bildschirmzeit halten wir ein. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Eine vereinbarte Bildschirmzeit halten wir ein.",
         "audioScript": "Mit Bildschirmen bewusst umgehen. Eine vereinbarte Bildschirmzeit halten wir ein. Der Vers sagt: Folge nicht dem, wovon du kein Wissen hast. Die vereinbarte Zeit ist um. Das Kind gibt das Gerät ab, auch wenn der Film noch weitergeht. Wir nennen die vereinbarte Zeit und eine Beschäftigung danach, zum Beispiel ein Buch oder draußen sein."
       },
       "6-8": {
@@ -9254,7 +9254,7 @@ const additions=
           "Qurʾān 17:36 ist die gelesene Stelle.",
           "Der Vers sagt: Folge nicht dem, wovon du kein Wissen hast.",
           "Die vereinbarte Zeit ist um. Das Kind gibt das Gerät ab, auch wenn der Film noch weitergeht.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1013. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:36. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1013. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:36. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -9318,7 +9318,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -9366,7 +9366,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -9435,12 +9435,12 @@ const additions=
       "scientificApproval": false,
       "note": "Der letzte Satz des Verses spricht von Leuten, die an Allahs Erleichterung verzweifeln. Wir hängen dieses Wort keinem Kind an. Die Geschichte von Yūsuf wird nicht über den Vers hinaus erzählt."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Nach einem Fehler bleibt die Tür zur Besserung offen.",
     "ageText": {
       "4-5": {
         "goal": "Nach einem Fehler bleibt die Tür zur Besserung offen.",
-        "intro": "Nach einem Fehler bleibt die Tür zur Besserung offen. Der Vers lässt Yaʿqūb zu seinen Söhnen sagen, sie sollen nach Yūsuf und seinem Bruder suchen und nicht an Allahs Erleichterung verzweifeln. Stell dir vor: Ein Kind hat eine Aufgabe falsch gemacht und darf sie noch einmal versuchen. Heute üben wir: Wir sagen: Ich kann es besser machen, und nennen einen kleinen nächsten Schritt. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Nach einem Fehler bleibt die Tür zur Besserung offen. Der Vers lässt Yaʿqūb zu seinen Söhnen sagen, sie sollen nach Yūsuf und seinem Bruder suchen und nicht an Allahs Erleichterung verzweifeln. Stell dir vor: Ein Kind hat eine Aufgabe falsch gemacht und darf sie noch einmal versuchen. Heute üben wir: Wir sagen: Ich kann es besser machen, und nennen einen kleinen nächsten Schritt.",
         "lines": [
           "Nach einem Fehler bleibt die Tür zur Besserung offen.",
           "Der Vers lässt Yaʿqūb zu seinen Söhnen sagen, sie sollen nach Yūsuf und seinem Bruder suchen und nicht an Allahs Erleichterung verzweifeln.",
@@ -9461,7 +9461,7 @@ const additions=
         ],
         "situation": "Ein Kind hat eine Aufgabe falsch gemacht und darf sie noch einmal versuchen.",
         "practice": "Wir sagen: Ich kann es besser machen, und nennen einen kleinen nächsten Schritt.",
-        "summary": "Nach einem Fehler bleibt die Tür zur Besserung offen. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Nach einem Fehler bleibt die Tür zur Besserung offen.",
         "audioScript": "Hoffnung auf Allahs Barmherzigkeit. Nach einem Fehler bleibt die Tür zur Besserung offen. Der Vers lässt Yaʿqūb zu seinen Söhnen sagen, sie sollen nach Yūsuf und seinem Bruder suchen und nicht an Allahs Erleichterung verzweifeln. Ein Kind hat eine Aufgabe falsch gemacht und darf sie noch einmal versuchen. Wir sagen: Ich kann es besser machen, und nennen einen kleinen nächsten Schritt."
       },
       "6-8": {
@@ -9471,7 +9471,7 @@ const additions=
           "Qurʾān 12:87 ist die gelesene Stelle.",
           "Der Vers lässt Yaʿqūb zu seinen Söhnen sagen, sie sollen nach Yūsuf und seinem Bruder suchen und nicht an Allahs Erleichterung verzweifeln.",
           "Ein Kind hat eine Aufgabe falsch gemacht und darf sie noch einmal versuchen.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/847. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 12:87. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/847. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 12:87. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -9535,7 +9535,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -9583,7 +9583,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -9752,7 +9752,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -9800,7 +9800,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -9869,12 +9869,12 @@ const additions=
       "scientificApproval": false,
       "note": "Die Stunde vergibt keine Hadithnummer. Was später Sunnah als überlieferte Gewohnheit heißt, wird in der Stunde über die Herkunft eines Hadith genauer begrenzt."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Sunnah meint hier zuerst das Vorbild des Propheten, Friede sei mit ihm, nicht eine erfundene Nummer.",
     "ageText": {
       "4-5": {
         "goal": "Sunnah meint hier zuerst das Vorbild des Propheten, Friede sei mit ihm, nicht eine erfundene Nummer.",
-        "intro": "Sunnah meint hier zuerst das Vorbild des Propheten, Friede sei mit ihm, nicht eine erfundene Nummer. Der Vers sagt, dass im Gesandten Allahs ein schönes Vorbild liegt für den, der Allah und den Jüngsten Tag erhofft und Allahs viel gedenkt. Stell dir vor: Ein Kind erklärt mit eigenen Worten: Sein Verhalten ist ein Vorbild. Ein bestimmtes Beispiel nennen wir nur, wenn es auf der Seite steht. Heute üben wir: Wir schreiben den deutschen Satz: Der Vers nennt ihn ein Vorbild. Eine einzelne Handlung ergänzen wir nicht. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Sunnah meint hier zuerst das Vorbild des Propheten, Friede sei mit ihm, nicht eine erfundene Nummer. Der Vers sagt, dass im Gesandten Allahs ein schönes Vorbild liegt für den, der Allah und den Jüngsten Tag erhofft und Allahs viel gedenkt. Stell dir vor: Ein Kind erklärt mit eigenen Worten: Sein Verhalten ist ein Vorbild. Ein bestimmtes Beispiel nennen wir nur, wenn es auf der Seite steht. Heute üben wir: Wir schreiben den deutschen Satz: Der Vers nennt ihn ein Vorbild. Eine einzelne Handlung ergänzen wir nicht.",
         "lines": [
           "Sunnah meint hier zuerst das Vorbild des Propheten, Friede sei mit ihm, nicht eine erfundene Nummer.",
           "Der Vers sagt, dass im Gesandten Allahs ein schönes Vorbild liegt für den, der Allah und den Jüngsten Tag erhofft und Allahs viel gedenkt.",
@@ -9895,7 +9895,7 @@ const additions=
         ],
         "situation": "Ein Kind erklärt mit eigenen Worten: Sein Verhalten ist ein Vorbild. Ein bestimmtes Beispiel nennen wir nur, wenn es auf der Seite steht.",
         "practice": "Wir schreiben den deutschen Satz: Der Vers nennt ihn ein Vorbild. Eine einzelne Handlung ergänzen wir nicht.",
-        "summary": "Sunnah meint hier zuerst das Vorbild des Propheten, Friede sei mit ihm, nicht eine erfundene Nummer. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Sunnah meint hier zuerst das Vorbild des Propheten, Friede sei mit ihm, nicht eine erfundene Nummer.",
         "audioScript": "Was bedeutet Sunnah?. Sunnah meint hier zuerst das Vorbild des Propheten, Friede sei mit ihm, nicht eine erfundene Nummer. Der Vers sagt, dass im Gesandten Allahs ein schönes Vorbild liegt für den, der Allah und den Jüngsten Tag erhofft und Allahs viel gedenkt. Ein Kind erklärt mit eigenen Worten: Sein Verhalten ist ein Vorbild. Ein bestimmtes Beispiel nennen wir nur, wenn es auf der Seite steht. Wir schreiben den deutschen Satz: Der Vers nennt ihn ein Vorbild. Eine einzelne Handlung ergänzen wir nicht."
       },
       "6-8": {
@@ -9905,7 +9905,7 @@ const additions=
           "Qurʾān 33:21 ist die gelesene Stelle.",
           "Der Vers sagt, dass im Gesandten Allahs ein schönes Vorbild liegt für den, der Allah und den Jüngsten Tag erhofft und Allahs viel gedenkt.",
           "Ein Kind erklärt mit eigenen Worten: Sein Verhalten ist ein Vorbild. Ein bestimmtes Beispiel nennen wir nur, wenn es auf der Seite steht.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1480. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 33:21. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1480. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 33:21. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -9969,7 +9969,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -10017,7 +10017,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -10086,12 +10086,12 @@ const additions=
       "scientificApproval": false,
       "note": "Ein Datum, die Namen der Verfolger und die einzelnen Stationen stehen im gespeicherten Text nicht als Unterrichtsliste. Wir erfinden sie nicht. Der Name des Gefährten wird nicht über den Vers hinaus behauptet, wenn der Vers nur den Gefährten nennt."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Der Prophet, Friede sei mit ihm, zog mit einem Gefährten aus.",
     "ageText": {
       "4-5": {
         "goal": "Der Prophet, Friede sei mit ihm, zog mit einem Gefährten aus.",
-        "intro": "Der Prophet, Friede sei mit ihm, zog mit einem Gefährten aus. Der Vers sagt, dass Allah ihm half, als die Ungläubigen ihn hinausdrängten, als er der zweite von zweien war und beide in der Höhle waren. Stell dir vor: Wir zeigen auf einer einfachen Karte nur zwei Worte: Makkah und Madīnah, und sagen, dass der Vers den Weg dazwischen nicht beschreibt. Heute üben wir: Wir wiederholen den Trostsatz und fügen keine Route hinzu. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Der Prophet, Friede sei mit ihm, zog mit einem Gefährten aus. Der Vers sagt, dass Allah ihm half, als die Ungläubigen ihn hinausdrängten, als er der zweite von zweien war und beide in der Höhle waren. Stell dir vor: Wir zeigen auf einer einfachen Karte nur zwei Worte: Makkah und Madīnah, und sagen, dass der Vers den Weg dazwischen nicht beschreibt. Heute üben wir: Wir wiederholen den Trostsatz und fügen keine Route hinzu.",
         "lines": [
           "Der Prophet, Friede sei mit ihm, zog mit einem Gefährten aus.",
           "Der Vers sagt, dass Allah ihm half, als die Ungläubigen ihn hinausdrängten, als er der zweite von zweien war und beide in der Höhle waren.",
@@ -10112,7 +10112,7 @@ const additions=
         ],
         "situation": "Wir zeigen auf einer einfachen Karte nur zwei Worte: Makkah und Madīnah, und sagen, dass der Vers den Weg dazwischen nicht beschreibt.",
         "practice": "Wir wiederholen den Trostsatz und fügen keine Route hinzu.",
-        "summary": "Der Prophet, Friede sei mit ihm, zog mit einem Gefährten aus. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Der Prophet, Friede sei mit ihm, zog mit einem Gefährten aus.",
         "audioScript": "Die Hiǧrah nach Madīnah. Der Prophet, Friede sei mit ihm, zog mit einem Gefährten aus. Der Vers sagt, dass Allah ihm half, als die Ungläubigen ihn hinausdrängten, als er der zweite von zweien war und beide in der Höhle waren. Wir zeigen auf einer einfachen Karte nur zwei Worte: Makkah und Madīnah, und sagen, dass der Vers den Weg dazwischen nicht beschreibt. Wir wiederholen den Trostsatz und fügen keine Route hinzu."
       },
       "6-8": {
@@ -10122,7 +10122,7 @@ const additions=
           "Qurʾān 9:40 ist die gelesene Stelle.",
           "Der Vers sagt, dass Allah ihm half, als die Ungläubigen ihn hinausdrängten, als er der zweite von zweien war und beide in der Höhle waren.",
           "Wir zeigen auf einer einfachen Karte nur zwei Worte: Makkah und Madīnah, und sagen, dass der Vers den Weg dazwischen nicht beschreibt.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/649. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 9:40. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/649. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 9:40. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -10186,7 +10186,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -10234,7 +10234,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -10303,12 +10303,12 @@ const additions=
       "scientificApproval": false,
       "note": "Die bekannte kurze Formel beim Verlassen des Hauses steht auf dieser Seite nicht. Wir geben sie nicht als gelesene Sunnah aus."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten.",
     "ageText": {
       "4-5": {
         "goal": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten.",
-        "intro": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht. Stell dir vor: An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn. Heute üben wir: Wir üben diesen Sinn und nicht eine andere Formel. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht. Stell dir vor: An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn. Heute üben wir: Wir üben diesen Sinn und nicht eine andere Formel.",
         "lines": [
           "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten.",
           "Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
@@ -10329,7 +10329,7 @@ const additions=
         ],
         "situation": "An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn.",
         "practice": "Wir üben diesen Sinn und nicht eine andere Formel.",
-        "summary": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten.",
         "audioScript": "Duʿāʾ beim Verlassen des Hauses. Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht. An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn. Wir üben diesen Sinn und nicht eine andere Formel."
       },
       "6-8": {
@@ -10339,7 +10339,7 @@ const additions=
           "Qurʾān 17:80 ist die gelesene Stelle.",
           "Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
           "An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1040. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:80. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1040. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:80. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -10403,7 +10403,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -10451,7 +10451,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -10520,12 +10520,12 @@ const additions=
       "scientificApproval": false,
       "note": "Der Vers erlaubt keinen Witz über Herkunft, Kleidung oder Sprache. Wir erfinden keine Volksgruppe als Beispiel, das der Vers nicht nennt."
     },
-    "hint": "Wir erfinden keine zusätzliche Geschichte.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Menschen haben verschiedene Familien und Sprachen.",
     "ageText": {
       "4-5": {
         "goal": "Menschen haben verschiedene Familien und Sprachen.",
-        "intro": "Menschen haben verschiedene Familien und Sprachen. Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Stell dir vor: Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen. Heute üben wir: Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt. Wir erfinden keine zusätzliche Geschichte.",
+        "intro": "Menschen haben verschiedene Familien und Sprachen. Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Stell dir vor: Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen. Heute üben wir: Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
         "lines": [
           "Menschen haben verschiedene Familien und Sprachen.",
           "Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen.",
@@ -10546,7 +10546,7 @@ const additions=
         ],
         "situation": "Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen.",
         "practice": "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
-        "summary": "Menschen haben verschiedene Familien und Sprachen. Wir erfinden keine zusätzliche Geschichte.",
+        "summary": "Menschen haben verschiedene Familien und Sprachen.",
         "audioScript": "Unterschiedliche Herkunft respektieren. Menschen haben verschiedene Familien und Sprachen. Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen. Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt."
       },
       "6-8": {
@@ -10556,7 +10556,7 @@ const additions=
           "Qurʾān 49:13 ist die gelesene Stelle.",
           "Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen.",
           "Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen.",
-          "Wir erfinden keine zusätzliche Geschichte."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1756. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 49:13. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1756. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 49:13. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -10620,7 +10620,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -10668,7 +10668,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -10737,12 +10737,12 @@ const additions=
       "scientificApproval": false,
       "note": "Eine ausführliche Unterschiedslehre der beiden Namen steht in diesem kurzen gespeicherten Vers nicht. Wir erfinden sie nicht. Eine künstliche Rezitation unterbleibt."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Ar-Raḥmān und ar-Raḥīm sind Namen Allahs.",
     "ageText": {
       "4-5": {
         "goal": "Ar-Raḥmān und ar-Raḥīm sind Namen Allahs.",
-        "intro": "Ar-Raḥmān und ar-Raḥīm sind Namen Allahs. Ar-Raḥmān und ar-Raḥīm sind Namen Allahs. Wir hören sie am Anfang der Rezitation. Stell dir vor: Ein Kind hört die beiden Namen und sagt: Beide gehören Allah, nicht einem Menschen. Heute üben wir: Wir erklären mit einfachen Worten: Allah ist barmherzig. Wir zählen nicht weitere Namen dazu. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Ar-Raḥmān und ar-Raḥīm sind Namen Allahs. Ar-Raḥmān und ar-Raḥīm sind Namen Allahs. Wir hören sie am Anfang der Rezitation. Stell dir vor: Ein Kind hört die beiden Namen und sagt: Beide gehören Allah, nicht einem Menschen. Heute üben wir: Wir erklären mit einfachen Worten: Allah ist barmherzig. Wir zählen nicht weitere Namen dazu.",
         "lines": [
           "Ar-Raḥmān und ar-Raḥīm sind Namen Allahs.",
           "Ar-Raḥmān und ar-Raḥīm sind Namen Allahs. Wir hören sie am Anfang der Rezitation.",
@@ -10763,7 +10763,7 @@ const additions=
         ],
         "situation": "Ein Kind hört die beiden Namen und sagt: Beide gehören Allah, nicht einem Menschen.",
         "practice": "Wir erklären mit einfachen Worten: Allah ist barmherzig. Wir zählen nicht weitere Namen dazu.",
-        "summary": "Ar-Raḥmān und ar-Raḥīm sind Namen Allahs. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Ar-Raḥmān und ar-Raḥīm sind Namen Allahs.",
         "audioScript": "Ar-Raḥmān und Ar-Raḥīm. Ar-Raḥmān und ar-Raḥīm sind Namen Allahs. Ar-Raḥmān und ar-Raḥīm sind Namen Allahs. Wir hören sie am Anfang der Rezitation. Ein Kind hört die beiden Namen und sagt: Beide gehören Allah, nicht einem Menschen. Wir erklären mit einfachen Worten: Allah ist barmherzig. Wir zählen nicht weitere Namen dazu."
       },
       "6-8": {
@@ -10773,7 +10773,7 @@ const additions=
           "Qurʾān 1:1 ist die gelesene Stelle.",
           "Ar-Raḥmān und ar-Raḥīm sind Namen Allahs. Wir hören sie am Anfang der Rezitation.",
           "Ein Kind hört die beiden Namen und sagt: Beide gehören Allah, nicht einem Menschen.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/40. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 1:1. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/40. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 1:1. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -10837,7 +10837,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -10885,7 +10885,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -11054,7 +11054,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -11102,7 +11102,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -11172,12 +11172,12 @@ const additions=
       "note": "Dieselbe Fundstelle trägt hier das Lernziel der gemeinsamen Arbeit. Wir machen aus dem Vers keine Vereinsregel und keine Stimmenzählung. Dieselbe gelesene Fundstelle wurde schon in Slot 138 mit einem anderen Lernziel verwendet.",
       "sameLocusAsSlot": 138
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Bei einer gemeinsamen Aufgabe sehen wir die Aufgabe, nicht nur uns selbst.",
     "ageText": {
       "4-5": {
         "goal": "Bei einer gemeinsamen Aufgabe sehen wir die Aufgabe, nicht nur uns selbst.",
-        "intro": "Bei einer gemeinsamen Aufgabe sehen wir die Aufgabe, nicht nur uns selbst. Dieselbe Stelle wie in der Stunde über das Abwenden von Schaden enthält den Satz, einander bei der Rechtschaffenheit zu helfen und nicht bei der Sünde. Stell dir vor: Vier Kinder bauen ein Bild auf. Eines will nur den eigenen Namen darunter setzen. Die Gruppe schreibt alle Namen oder keinen. Heute üben wir: Wir verteilen eine kleine Aufgabe so, dass jedes Kind einen Teil hat. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Bei einer gemeinsamen Aufgabe sehen wir die Aufgabe, nicht nur uns selbst. Dieselbe Stelle wie in der Stunde über das Abwenden von Schaden enthält den Satz, einander bei der Rechtschaffenheit zu helfen und nicht bei der Sünde. Stell dir vor: Vier Kinder bauen ein Bild auf. Eines will nur den eigenen Namen darunter setzen. Die Gruppe schreibt alle Namen oder keinen. Heute üben wir: Wir verteilen eine kleine Aufgabe so, dass jedes Kind einen Teil hat.",
         "lines": [
           "Bei einer gemeinsamen Aufgabe sehen wir die Aufgabe, nicht nur uns selbst.",
           "Dieselbe Stelle wie in der Stunde über das Abwenden von Schaden enthält den Satz, einander bei der Rechtschaffenheit zu helfen und nicht bei der Sünde.",
@@ -11198,7 +11198,7 @@ const additions=
         ],
         "situation": "Vier Kinder bauen ein Bild auf. Eines will nur den eigenen Namen darunter setzen. Die Gruppe schreibt alle Namen oder keinen.",
         "practice": "Wir verteilen eine kleine Aufgabe so, dass jedes Kind einen Teil hat.",
-        "summary": "Bei einer gemeinsamen Aufgabe sehen wir die Aufgabe, nicht nur uns selbst. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Bei einer gemeinsamen Aufgabe sehen wir die Aufgabe, nicht nur uns selbst.",
         "audioScript": "Gemeinsame Aufgaben ohne Eitelkeit. Bei einer gemeinsamen Aufgabe sehen wir die Aufgabe, nicht nur uns selbst. Dieselbe Stelle wie in der Stunde über das Abwenden von Schaden enthält den Satz, einander bei der Rechtschaffenheit zu helfen und nicht bei der Sünde. Vier Kinder bauen ein Bild auf. Eines will nur den eigenen Namen darunter setzen. Die Gruppe schreibt alle Namen oder keinen. Wir verteilen eine kleine Aufgabe so, dass jedes Kind einen Teil hat."
       },
       "6-8": {
@@ -11208,7 +11208,7 @@ const additions=
           "Qurʾān 5:2 ist die gelesene Stelle.",
           "Dieselbe Stelle wie in der Stunde über das Abwenden von Schaden enthält den Satz, einander bei der Rechtschaffenheit zu helfen und nicht bei der Sünde.",
           "Vier Kinder bauen ein Bild auf. Eines will nur den eigenen Namen darunter setzen. Die Gruppe schreibt alle Namen oder keinen.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/372. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 5:2. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/372. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 5:2. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -11272,7 +11272,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -11320,7 +11320,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -11489,7 +11489,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -11537,7 +11537,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -11606,12 +11606,12 @@ const additions=
       "scientificApproval": false,
       "note": "Der Vers legt keinen Speiseplan fest und nennt keine Zahl von Bissen. Die Zakāh-Erwähnung im weiteren Vers, falls sie im Ausdruck steht, wird nicht als berechnete Abgabe der Kinderstunde gelehrt."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Wir nehmen so viel Essen, wie wir essen können.",
     "ageText": {
       "4-5": {
         "goal": "Wir nehmen so viel Essen, wie wir essen können.",
-        "intro": "Wir nehmen so viel Essen, wie wir essen können. Der Vers nennt Gärten, Palmen und Früchte und sagt: Esst von ihrer Frucht, wenn sie Frucht trägt, und seid nicht maßlos. Stell dir vor: Auf dem Teller liegt mehr, als das Kind essen mag. Es lässt den Rest liegen, statt damit zu spielen, und sagt Bescheid. Heute üben wir: Wir üben, einmal nachzunehmen statt den Teller zu häufen. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Wir nehmen so viel Essen, wie wir essen können. Der Vers nennt Gärten, Palmen und Früchte und sagt: Esst von ihrer Frucht, wenn sie Frucht trägt, und seid nicht maßlos. Stell dir vor: Auf dem Teller liegt mehr, als das Kind essen mag. Es lässt den Rest liegen, statt damit zu spielen, und sagt Bescheid. Heute üben wir: Wir üben, einmal nachzunehmen statt den Teller zu häufen.",
         "lines": [
           "Wir nehmen so viel Essen, wie wir essen können.",
           "Der Vers nennt Gärten, Palmen und Früchte und sagt: Esst von ihrer Frucht, wenn sie Frucht trägt, und seid nicht maßlos.",
@@ -11632,7 +11632,7 @@ const additions=
         ],
         "situation": "Auf dem Teller liegt mehr, als das Kind essen mag. Es lässt den Rest liegen, statt damit zu spielen, und sagt Bescheid.",
         "practice": "Wir üben, einmal nachzunehmen statt den Teller zu häufen.",
-        "summary": "Wir nehmen so viel Essen, wie wir essen können. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Wir nehmen so viel Essen, wie wir essen können.",
         "audioScript": "Weniger verschwenden beim Essen. Wir nehmen so viel Essen, wie wir essen können. Der Vers nennt Gärten, Palmen und Früchte und sagt: Esst von ihrer Frucht, wenn sie Frucht trägt, und seid nicht maßlos. Auf dem Teller liegt mehr, als das Kind essen mag. Es lässt den Rest liegen, statt damit zu spielen, und sagt Bescheid. Wir üben, einmal nachzunehmen statt den Teller zu häufen."
       },
       "6-8": {
@@ -11642,7 +11642,7 @@ const additions=
           "Qurʾān 6:141 ist die gelesene Stelle.",
           "Der Vers nennt Gärten, Palmen und Früchte und sagt: Esst von ihrer Frucht, wenn sie Frucht trägt, und seid nicht maßlos.",
           "Auf dem Teller liegt mehr, als das Kind essen mag. Es lässt den Rest liegen, statt damit zu spielen, und sagt Bescheid.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/472. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 6:141. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/472. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 6:141. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -11706,7 +11706,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -11754,7 +11754,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -11923,7 +11923,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -11971,7 +11971,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -12040,12 +12040,12 @@ const additions=
       "scientificApproval": false,
       "note": "Das Bild im Vers, das die üble Nachrede mit dem Essen vom Fleisch des Bruders vergleicht, wird nicht nachgespielt. Für die Jüngsten sagen wir nur: Wir reden nicht schlecht über jemanden, der nicht dabei ist."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Bevor wir etwas Schlechtes über jemand sagen, prüfen wir, ob wir es wissen.",
     "ageText": {
       "4-5": {
         "goal": "Bevor wir etwas Schlechtes über jemand sagen, prüfen wir, ob wir es wissen.",
-        "intro": "Bevor wir etwas Schlechtes über jemand sagen, prüfen wir, ob wir es wissen. Der Vers fordert auf, viel Verdacht zu meiden, weil mancher Verdacht Sünde ist, nicht auszuspähen und nicht übereinander herzuziehen. Stell dir vor: Ein Kind denkt, ein anderes habe seinen Stift weggenommen. Es fragt, statt es laut zu behaupten. Heute üben wir: Wir üben den Satz: Ich weiß es noch nicht. Ich frage. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Bevor wir etwas Schlechtes über jemand sagen, prüfen wir, ob wir es wissen. Der Vers fordert auf, viel Verdacht zu meiden, weil mancher Verdacht Sünde ist, nicht auszuspähen und nicht übereinander herzuziehen. Stell dir vor: Ein Kind denkt, ein anderes habe seinen Stift weggenommen. Es fragt, statt es laut zu behaupten. Heute üben wir: Wir üben den Satz: Ich weiß es noch nicht. Ich frage.",
         "lines": [
           "Bevor wir etwas Schlechtes über jemand sagen, prüfen wir, ob wir es wissen.",
           "Der Vers fordert auf, viel Verdacht zu meiden, weil mancher Verdacht Sünde ist, nicht auszuspähen und nicht übereinander herzuziehen.",
@@ -12066,7 +12066,7 @@ const additions=
         ],
         "situation": "Ein Kind denkt, ein anderes habe seinen Stift weggenommen. Es fragt, statt es laut zu behaupten.",
         "practice": "Wir üben den Satz: Ich weiß es noch nicht. Ich frage.",
-        "summary": "Bevor wir etwas Schlechtes über jemand sagen, prüfen wir, ob wir es wissen. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Bevor wir etwas Schlechtes über jemand sagen, prüfen wir, ob wir es wissen.",
         "audioScript": "Eigene Gedanken prüfen. Bevor wir etwas Schlechtes über jemand sagen, prüfen wir, ob wir es wissen. Der Vers fordert auf, viel Verdacht zu meiden, weil mancher Verdacht Sünde ist, nicht auszuspähen und nicht übereinander herzuziehen. Ein Kind denkt, ein anderes habe seinen Stift weggenommen. Es fragt, statt es laut zu behaupten. Wir üben den Satz: Ich weiß es noch nicht. Ich frage."
       },
       "6-8": {
@@ -12076,7 +12076,7 @@ const additions=
           "Qurʾān 49:12 ist die gelesene Stelle.",
           "Der Vers fordert auf, viel Verdacht zu meiden, weil mancher Verdacht Sünde ist, nicht auszuspähen und nicht übereinander herzuziehen.",
           "Ein Kind denkt, ein anderes habe seinen Stift weggenommen. Es fragt, statt es laut zu behaupten.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1755. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 49:12. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1755. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 49:12. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -12140,7 +12140,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -12188,7 +12188,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -12357,7 +12357,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -12405,7 +12405,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -12474,12 +12474,12 @@ const additions=
       "scientificApproval": false,
       "note": "Diese beiden Sätze beweisen nicht, dass jedes später gedruckte Buch automatisch richtig ist. Sie beschreiben die Rede des Propheten, nicht die Entstehungsgeschichte der Hadithbücher. Eine Buchnummer wird nicht vergeben."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Ein Qurʾān-Vers und ein Hadith sind zwei verschiedene Dinge.",
     "ageText": {
       "4-5": {
         "goal": "Ein Qurʾān-Vers und ein Hadith sind zwei verschiedene Dinge.",
-        "intro": "Ein Qurʾān-Vers und ein Hadith sind zwei verschiedene Dinge. Es ist nichts als eine Offenbarung, die eingegeben wird. Stell dir vor: Wir legen ein Kärtchen Qurʾān und ein Kärtchen Hadith nebeneinander und sagen: Das zweite ist eine überlieferte Nachricht, kein Vers. Heute üben wir: Wir erklären, dass ein Hadith einen Überliefererweg braucht und dass wir keine Nummer ergänzen, die wir nicht gelesen haben. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Ein Qurʾān-Vers und ein Hadith sind zwei verschiedene Dinge. Es ist nichts als eine Offenbarung, die eingegeben wird. Stell dir vor: Wir legen ein Kärtchen Qurʾān und ein Kärtchen Hadith nebeneinander und sagen: Das zweite ist eine überlieferte Nachricht, kein Vers. Heute üben wir: Wir erklären, dass ein Hadith einen Überliefererweg braucht und dass wir keine Nummer ergänzen, die wir nicht gelesen haben.",
         "lines": [
           "Ein Qurʾān-Vers und ein Hadith sind zwei verschiedene Dinge.",
           "Es ist nichts als eine Offenbarung, die eingegeben wird.",
@@ -12500,7 +12500,7 @@ const additions=
         ],
         "situation": "Wir legen ein Kärtchen Qurʾān und ein Kärtchen Hadith nebeneinander und sagen: Das zweite ist eine überlieferte Nachricht, kein Vers.",
         "practice": "Wir erklären, dass ein Hadith einen Überliefererweg braucht und dass wir keine Nummer ergänzen, die wir nicht gelesen haben.",
-        "summary": "Ein Qurʾān-Vers und ein Hadith sind zwei verschiedene Dinge. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Ein Qurʾān-Vers und ein Hadith sind zwei verschiedene Dinge.",
         "audioScript": "Woher stammt ein Ḥadīṯ?. Ein Qurʾān-Vers und ein Hadith sind zwei verschiedene Dinge. Es ist nichts als eine Offenbarung, die eingegeben wird. Wir legen ein Kärtchen Qurʾān und ein Kärtchen Hadith nebeneinander und sagen: Das zweite ist eine überlieferte Nachricht, kein Vers. Wir erklären, dass ein Hadith einen Überliefererweg braucht und dass wir keine Nummer ergänzen, die wir nicht gelesen haben."
       },
       "6-8": {
@@ -12510,7 +12510,7 @@ const additions=
           "Qurʾān 53:3–4 ist die gelesene Stelle.",
           "Es ist nichts als eine Offenbarung, die eingegeben wird.",
           "Wir legen ein Kärtchen Qurʾān und ein Kärtchen Hadith nebeneinander und sagen: Das zweite ist eine überlieferte Nachricht, kein Vers.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1779. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 53:3–4. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1779. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 53:3–4. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -12574,7 +12574,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -12622,7 +12622,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -12691,12 +12691,12 @@ const additions=
       "scientificApproval": false,
       "note": "Eine einzelne Anekdote, ein Name außer den Gruppen und eine Jahreszahl stehen nicht als Kindererzählung auf der verwendeten Stelle. Wir erfinden sie nicht."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Die ersten Gefährten, die ausgezogen sind und die geholfen haben, haben ein gutes Vorbild.",
     "ageText": {
       "4-5": {
         "goal": "Die ersten Gefährten, die ausgezogen sind und die geholfen haben, haben ein gutes Vorbild.",
-        "intro": "Die ersten Gefährten, die ausgezogen sind und die geholfen haben, haben ein gutes Vorbild. Der Vers nennt die ersten Vorangehenden aus den Auswanderern und den Helfern und die, die ihnen auf gute Weise gefolgt sind, und sagt, dass Allah mit ihnen zufrieden ist und sie mit Ihm. Stell dir vor: Ein Kind sagt: Sie haben dem Propheten, Friede sei mit ihm, geholfen. Ein bestimmtes Abenteuer nennen wir nicht. Heute üben wir: Wir wiederholen die zwei Gruppennamen aus dem Vers: die Ausgewanderten und die Helfer. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Die ersten Gefährten, die ausgezogen sind und die geholfen haben, haben ein gutes Vorbild. Der Vers nennt die ersten Vorangehenden aus den Auswanderern und den Helfern und die, die ihnen auf gute Weise gefolgt sind, und sagt, dass Allah mit ihnen zufrieden ist und sie mit Ihm. Stell dir vor: Ein Kind sagt: Sie haben dem Propheten, Friede sei mit ihm, geholfen. Ein bestimmtes Abenteuer nennen wir nicht. Heute üben wir: Wir wiederholen die zwei Gruppennamen aus dem Vers: die Ausgewanderten und die Helfer.",
         "lines": [
           "Die ersten Gefährten, die ausgezogen sind und die geholfen haben, haben ein gutes Vorbild.",
           "Der Vers nennt die ersten Vorangehenden aus den Auswanderern und den Helfern und die, die ihnen auf gute Weise gefolgt sind, und sagt, dass Allah mit ihnen zufrieden ist und sie.",
@@ -12717,7 +12717,7 @@ const additions=
         ],
         "situation": "Ein Kind sagt: Sie haben dem Propheten, Friede sei mit ihm, geholfen. Ein bestimmtes Abenteuer nennen wir nicht.",
         "practice": "Wir wiederholen die zwei Gruppennamen aus dem Vers: die Ausgewanderten und die Helfer.",
-        "summary": "Die ersten Gefährten, die ausgezogen sind und die geholfen haben, haben ein gutes Vorbild. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Die ersten Gefährten, die ausgezogen sind und die geholfen haben, haben ein gutes Vorbild.",
         "audioScript": "Ṣaḥābah und gutes Vorbild. Die ersten Gefährten, die ausgezogen sind und die geholfen haben, haben ein gutes Vorbild. Der Vers nennt die ersten Vorangehenden aus den Auswanderern und den Helfern und die, die ihnen auf gute Weise gefolgt sind, und sagt, dass Allah mit ihnen zufrieden ist und sie. Ein Kind sagt: Sie haben dem Propheten, Friede sei mit ihm, geholfen. Ein bestimmtes Abenteuer nennen wir nicht. Wir wiederholen die zwei Gruppennamen aus dem Vers: die Ausgewanderten und die Helfer."
       },
       "6-8": {
@@ -12727,7 +12727,7 @@ const additions=
           "Qurʾān 9:100 ist die gelesene Stelle.",
           "Der Vers nennt die ersten Vorangehenden aus den Auswanderern und den Helfern und die, die ihnen auf gute Weise gefolgt sind, und sagt, dass Allah mit ihnen zufrieden ist und sie.",
           "Ein Kind sagt: Sie haben dem Propheten, Friede sei mit ihm, geholfen. Ein bestimmtes Abenteuer nennen wir nicht.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/685. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 9:100. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/685. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 9:100. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -12791,7 +12791,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -12839,7 +12839,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -12908,12 +12908,12 @@ const additions=
       "scientificApproval": false,
       "note": "Eine bestimmte Morgenformel mit fester Anzahl steht auf dieser Stelle nicht als übernommene Sunnah. Zwang gibt es nicht. Die weiteren Worte im gespeicherten Ausdruck werden nicht als zweite Pflicht der Stunde ausgegeben."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Wir erinnern uns an Allah mit kurzen Worten, ohne dass jemand gedrängt wird.",
     "ageText": {
       "4-5": {
         "goal": "Wir erinnern uns an Allah mit kurzen Worten, ohne dass jemand gedrängt wird.",
-        "intro": "Wir erinnern uns an Allah mit kurzen Worten, ohne dass jemand gedrängt wird. Danach folgen weitere Worte der Seite. Stell dir vor: Am Morgen sagt ein Kind einmal: Alles Lob gehört Allah. Wer nicht möchte, hört nur zu. Heute üben wir: Wir wiederholen einen kurzen deutschen Sinn und keine lange Liste. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Wir erinnern uns an Allah mit kurzen Worten, ohne dass jemand gedrängt wird. Danach folgen weitere Worte der Seite. Stell dir vor: Am Morgen sagt ein Kind einmal: Alles Lob gehört Allah. Wer nicht möchte, hört nur zu. Heute üben wir: Wir wiederholen einen kurzen deutschen Sinn und keine lange Liste.",
         "lines": [
           "Wir erinnern uns an Allah mit kurzen Worten, ohne dass jemand gedrängt wird.",
           "Danach folgen weitere Worte der Seite.",
@@ -12934,7 +12934,7 @@ const additions=
         ],
         "situation": "Am Morgen sagt ein Kind einmal: Alles Lob gehört Allah. Wer nicht möchte, hört nur zu.",
         "practice": "Wir wiederholen einen kurzen deutschen Sinn und keine lange Liste.",
-        "summary": "Wir erinnern uns an Allah mit kurzen Worten, ohne dass jemand gedrängt wird. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Wir erinnern uns an Allah mit kurzen Worten, ohne dass jemand gedrängt wird.",
         "audioScript": "Adhkār ohne Zwang wiederholen. Wir erinnern uns an Allah mit kurzen Worten, ohne dass jemand gedrängt wird. Danach folgen weitere Worte der Seite. Am Morgen sagt ein Kind einmal: Alles Lob gehört Allah. Wer nicht möchte, hört nur zu. Wir wiederholen einen kurzen deutschen Sinn und keine lange Liste."
       },
       "6-8": {
@@ -12944,7 +12944,7 @@ const additions=
           "Qurʾān 33:41 ist die gelesene Stelle.",
           "Danach folgen weitere Worte der Seite.",
           "Am Morgen sagt ein Kind einmal: Alles Lob gehört Allah. Wer nicht möchte, hört nur zu.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1501. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 33:41. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1501. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 33:41. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -13008,7 +13008,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -13056,7 +13056,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -13125,12 +13125,12 @@ const additions=
       "scientificApproval": false,
       "note": "Der Vers ist kein Auftrag, allein zu Fremden zu gehen. Die Nachbarschaftshilfe bleibt an der Hand der Eltern. Dieselbe Hilfe-Idee aus einem anderen Vers wird hier nicht noch einmal als zweite Quelle vermischt."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Zusammen können wir etwas Gutes tun, das sicher ist.",
     "ageText": {
       "4-5": {
         "goal": "Zusammen können wir etwas Gutes tun, das sicher ist.",
-        "intro": "Zusammen können wir etwas Gutes tun, das sicher ist. Der Vers sagt, dass Allah Gerechtigkeit, gutes Verhalten und das Geben an die Verwandten befiehlt und das Schändliche, das Verwerfliche und die Übertretung verbietet. Stell dir vor: Die Kinder sammeln mit den Eltern saubere Flaschen auf dem eigenen Hof und bringen sie weg. Heute üben wir: Wir planen nur eine Hilfe, die Erwachsene erlauben und die niemand in Gefahr bringt. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Zusammen können wir etwas Gutes tun, das sicher ist. Der Vers sagt, dass Allah Gerechtigkeit, gutes Verhalten und das Geben an die Verwandten befiehlt und das Schändliche, das Verwerfliche und die Übertretung verbietet. Stell dir vor: Die Kinder sammeln mit den Eltern saubere Flaschen auf dem eigenen Hof und bringen sie weg. Heute üben wir: Wir planen nur eine Hilfe, die Erwachsene erlauben und die niemand in Gefahr bringt.",
         "lines": [
           "Zusammen können wir etwas Gutes tun, das sicher ist.",
           "Der Vers sagt, dass Allah Gerechtigkeit, gutes Verhalten und das Geben an die Verwandten befiehlt und das Schändliche, das Verwerfliche und die Übertretung verbietet.",
@@ -13151,7 +13151,7 @@ const additions=
         ],
         "situation": "Die Kinder sammeln mit den Eltern saubere Flaschen auf dem eigenen Hof und bringen sie weg.",
         "practice": "Wir planen nur eine Hilfe, die Erwachsene erlauben und die niemand in Gefahr bringt.",
-        "summary": "Zusammen können wir etwas Gutes tun, das sicher ist. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Zusammen können wir etwas Gutes tun, das sicher ist.",
         "audioScript": "Für die Gemeinschaft etwas Gutes tun. Zusammen können wir etwas Gutes tun, das sicher ist. Der Vers sagt, dass Allah Gerechtigkeit, gutes Verhalten und das Geben an die Verwandten befiehlt und das Schändliche, das Verwerfliche und die Übertretung verbietet. Die Kinder sammeln mit den Eltern saubere Flaschen auf dem eigenen Hof und bringen sie weg. Wir planen nur eine Hilfe, die Erwachsene erlauben und die niemand in Gefahr bringt."
       },
       "6-8": {
@@ -13161,7 +13161,7 @@ const additions=
           "Qurʾān 16:90 ist die gelesene Stelle.",
           "Der Vers sagt, dass Allah Gerechtigkeit, gutes Verhalten und das Geben an die Verwandten befiehlt und das Schändliche, das Verwerfliche und die Übertretung verbietet.",
           "Die Kinder sammeln mit den Eltern saubere Flaschen auf dem eigenen Hof und bringen sie weg.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/974. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 16:90. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/974. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 16:90. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -13225,7 +13225,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -13273,7 +13273,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -13342,12 +13342,12 @@ const additions=
       "scientificApproval": false,
       "note": "Der Vers macht die Hilfe eines Menschen nicht unsichtbar. Er sagt, woher die Gnade kommt. Eine feste Dankformel wurde nicht gelesen."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Nach einem schönen Ereignis danken wir Allah.",
     "ageText": {
       "4-5": {
         "goal": "Nach einem schönen Ereignis danken wir Allah.",
-        "intro": "Nach einem schönen Ereignis danken wir Allah. Der Vers sagt: Was immer ihr an Gnade habt, ist von Allah. Stell dir vor: Ein Kind besteht eine kleine Aufgabe und sagt: Das war eine Gnade Allahs. Ich habe auch geübt. Heute üben wir: Wir nennen eine schöne Sache aus dem Tag und sagen den Dank, ohne einen Menschen zu vergessen, der geholfen hat. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Nach einem schönen Ereignis danken wir Allah. Der Vers sagt: Was immer ihr an Gnade habt, ist von Allah. Stell dir vor: Ein Kind besteht eine kleine Aufgabe und sagt: Das war eine Gnade Allahs. Ich habe auch geübt. Heute üben wir: Wir nennen eine schöne Sache aus dem Tag und sagen den Dank, ohne einen Menschen zu vergessen, der geholfen hat.",
         "lines": [
           "Nach einem schönen Ereignis danken wir Allah.",
           "Der Vers sagt: Was immer ihr an Gnade habt, ist von Allah.",
@@ -13368,7 +13368,7 @@ const additions=
         ],
         "situation": "Ein Kind besteht eine kleine Aufgabe und sagt: Das war eine Gnade Allahs. Ich habe auch geübt.",
         "practice": "Wir nennen eine schöne Sache aus dem Tag und sagen den Dank, ohne einen Menschen zu vergessen, der geholfen hat.",
-        "summary": "Nach einem schönen Ereignis danken wir Allah. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Nach einem schönen Ereignis danken wir Allah.",
         "audioScript": "Allah allein danken. Nach einem schönen Ereignis danken wir Allah. Der Vers sagt: Was immer ihr an Gnade habt, ist von Allah. Ein Kind besteht eine kleine Aufgabe und sagt: Das war eine Gnade Allahs. Ich habe auch geübt. Wir nennen eine schöne Sache aus dem Tag und sagen den Dank, ohne einen Menschen zu vergessen, der geholfen hat."
       },
       "6-8": {
@@ -13378,7 +13378,7 @@ const additions=
           "Qurʾān 16:53 ist die gelesene Stelle.",
           "Der Vers sagt: Was immer ihr an Gnade habt, ist von Allah.",
           "Ein Kind besteht eine kleine Aufgabe und sagt: Das war eine Gnade Allahs. Ich habe auch geübt.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/958. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 16:53. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/958. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 16:53. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -13442,7 +13442,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -13490,7 +13490,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -13560,12 +13560,12 @@ const additions=
       "note": "Wir behaupten nicht, der ganze Vers sei in einem kurzen Satz enthalten. Was im Auszug fehlt, bleibt ungeprüft als arabischer Zusatz. Keine Angstbilder. Dieselbe gelesene Fundstelle wurde schon in Slot 148 mit einem anderen Lernziel verwendet.",
       "sameLocusAsSlot": 148
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Glauben und eine gute Entscheidung gehören zusammen.",
     "ageText": {
       "4-5": {
         "goal": "Glauben und eine gute Entscheidung gehören zusammen.",
-        "intro": "Glauben und eine gute Entscheidung gehören zusammen. Dieselbe lange Stelle wie in der Stunde über den Jüngsten Tag nennt den Glauben und danach Handlungen. Stell dir vor: Ein Kind sagt, es werde sein Heft mit nach Hause nehmen, und legt es wirklich in die Tasche. Heute üben wir: Wir wählen eine kleine Zusage und führen sie am selben Tag aus. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Glauben und eine gute Entscheidung gehören zusammen. Dieselbe lange Stelle wie in der Stunde über den Jüngsten Tag nennt den Glauben und danach Handlungen. Stell dir vor: Ein Kind sagt, es werde sein Heft mit nach Hause nehmen, und legt es wirklich in die Tasche. Heute üben wir: Wir wählen eine kleine Zusage und führen sie am selben Tag aus.",
         "lines": [
           "Glauben und eine gute Entscheidung gehören zusammen.",
           "Dieselbe lange Stelle wie in der Stunde über den Jüngsten Tag nennt den Glauben und danach Handlungen.",
@@ -13586,7 +13586,7 @@ const additions=
         ],
         "situation": "Ein Kind sagt, es werde sein Heft mit nach Hause nehmen, und legt es wirklich in die Tasche.",
         "practice": "Wir wählen eine kleine Zusage und führen sie am selben Tag aus.",
-        "summary": "Glauben und eine gute Entscheidung gehören zusammen. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Glauben und eine gute Entscheidung gehören zusammen.",
         "audioScript": "Gute Taten und Verantwortung. Glauben und eine gute Entscheidung gehören zusammen. Dieselbe lange Stelle wie in der Stunde über den Jüngsten Tag nennt den Glauben und danach Handlungen. Ein Kind sagt, es werde sein Heft mit nach Hause nehmen, und legt es wirklich in die Tasche. Wir wählen eine kleine Zusage und führen sie am selben Tag aus."
       },
       "6-8": {
@@ -13596,7 +13596,7 @@ const additions=
           "Qurʾān 2:177 ist die gelesene Stelle.",
           "Dieselbe lange Stelle wie in der Stunde über den Jüngsten Tag nennt den Glauben und danach Handlungen.",
           "Ein Kind sagt, es werde sein Heft mit nach Hause nehmen, und legt es wirklich in die Tasche.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/161. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:177. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/161. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:177. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -13660,7 +13660,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -13708,7 +13708,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -13777,12 +13777,12 @@ const additions=
       "scientificApproval": false,
       "note": "Der Vers benutzt ein Bild für die verdorbene Gabe. Wir malen es nicht aus. Eine Hadithnummer wurde nicht ergänzt."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Wir helfen, weil es richtig ist, nicht damit alle klatschen.",
     "ageText": {
       "4-5": {
         "goal": "Wir helfen, weil es richtig ist, nicht damit alle klatschen.",
-        "intro": "Wir helfen, weil es richtig ist, nicht damit alle klatschen. Der Vers verbietet, die Gaben durch Vorhaltung und Verletzung zu verderben, und vergleicht den, der seines Ansehens wegen ausgibt und nicht an Allah glaubt. Stell dir vor: Ein Kind räumt nur auf, solange die Lehrperson schaut, und hört auf, sobald sie weg ist. Wir sprechen darüber. Heute üben wir: Wir tun eine kleine Hilfe und erzählen sie danach nicht herum. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Wir helfen, weil es richtig ist, nicht damit alle klatschen. Der Vers verbietet, die Gaben durch Vorhaltung und Verletzung zu verderben, und vergleicht den, der seines Ansehens wegen ausgibt und nicht an Allah glaubt. Stell dir vor: Ein Kind räumt nur auf, solange die Lehrperson schaut, und hört auf, sobald sie weg ist. Wir sprechen darüber. Heute üben wir: Wir tun eine kleine Hilfe und erzählen sie danach nicht herum.",
         "lines": [
           "Wir helfen, weil es richtig ist, nicht damit alle klatschen.",
           "Der Vers verbietet, die Gaben durch Vorhaltung und Verletzung zu verderben, und vergleicht den, der seines Ansehens wegen ausgibt und nicht an Allah glaubt.",
@@ -13803,7 +13803,7 @@ const additions=
         ],
         "situation": "Ein Kind räumt nur auf, solange die Lehrperson schaut, und hört auf, sobald sie weg ist. Wir sprechen darüber.",
         "practice": "Wir tun eine kleine Hilfe und erzählen sie danach nicht herum.",
-        "summary": "Wir helfen, weil es richtig ist, nicht damit alle klatschen. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Wir helfen, weil es richtig ist, nicht damit alle klatschen.",
         "audioScript": "Aufrichtigkeit von Außenwirkung unterscheiden. Wir helfen, weil es richtig ist, nicht damit alle klatschen. Der Vers verbietet, die Gaben durch Vorhaltung und Verletzung zu verderben, und vergleicht den, der seines Ansehens wegen ausgibt und nicht an Allah glaubt. Ein Kind räumt nur auf, solange die Lehrperson schaut, und hört auf, sobald sie weg ist. Wir sprechen darüber. Wir tun eine kleine Hilfe und erzählen sie danach nicht herum."
       },
       "6-8": {
@@ -13813,7 +13813,7 @@ const additions=
           "Qurʾān 2:264 ist die gelesene Stelle.",
           "Der Vers verbietet, die Gaben durch Vorhaltung und Verletzung zu verderben, und vergleicht den, der seines Ansehens wegen ausgibt und nicht an Allah glaubt.",
           "Ein Kind räumt nur auf, solange die Lehrperson schaut, und hört auf, sobald sie weg ist. Wir sprechen darüber.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/222. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:264. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/222. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:264. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -13877,7 +13877,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -13925,7 +13925,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -14094,7 +14094,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -14142,7 +14142,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -14211,12 +14211,12 @@ const additions=
       "scientificApproval": false,
       "note": "Eine feste arabische Schlussformel nach dem Essen steht hier nicht. Wir wiederholen nicht die andere Essensstelle, als wäre sie derselbe Vers. Diese Fundstelle ist 16:114."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Nach dem Essen bleiben wir dankbar und stehen nicht sofort lärmend auf.",
     "ageText": {
       "4-5": {
         "goal": "Nach dem Essen bleiben wir dankbar und stehen nicht sofort lärmend auf.",
-        "intro": "Nach dem Essen bleiben wir dankbar und stehen nicht sofort lärmend auf. Der Vers sagt: So esst von dem, was Allah euch gegeben hat, als etwas Erlaubtes und Gutes, und seid dankbar für die Gnade Allahs. Stell dir vor: Der Tisch wird abgeräumt. Das Kind sagt einen Dank und trägt einen leichten Teller, wenn die Eltern es erlauben. Heute üben wir: Wir üben den Dank und das ruhige Aufstehen. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Nach dem Essen bleiben wir dankbar und stehen nicht sofort lärmend auf. Der Vers sagt: So esst von dem, was Allah euch gegeben hat, als etwas Erlaubtes und Gutes, und seid dankbar für die Gnade Allahs. Stell dir vor: Der Tisch wird abgeräumt. Das Kind sagt einen Dank und trägt einen leichten Teller, wenn die Eltern es erlauben. Heute üben wir: Wir üben den Dank und das ruhige Aufstehen.",
         "lines": [
           "Nach dem Essen bleiben wir dankbar und stehen nicht sofort lärmend auf.",
           "Der Vers sagt: So esst von dem, was Allah euch gegeben hat, als etwas Erlaubtes und Gutes, und seid dankbar für die Gnade Allahs.",
@@ -14237,7 +14237,7 @@ const additions=
         ],
         "situation": "Der Tisch wird abgeräumt. Das Kind sagt einen Dank und trägt einen leichten Teller, wenn die Eltern es erlauben.",
         "practice": "Wir üben den Dank und das ruhige Aufstehen.",
-        "summary": "Nach dem Essen bleiben wir dankbar und stehen nicht sofort lärmend auf. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Nach dem Essen bleiben wir dankbar und stehen nicht sofort lärmend auf.",
         "audioScript": "Nach dem Essen dankbar sein. Nach dem Essen bleiben wir dankbar und stehen nicht sofort lärmend auf. Der Vers sagt: So esst von dem, was Allah euch gegeben hat, als etwas Erlaubtes und Gutes, und seid dankbar für die Gnade Allahs. Der Tisch wird abgeräumt. Das Kind sagt einen Dank und trägt einen leichten Teller, wenn die Eltern es erlauben. Wir üben den Dank und das ruhige Aufstehen."
       },
       "6-8": {
@@ -14247,7 +14247,7 @@ const additions=
           "Qurʾān 16:114 ist die gelesene Stelle.",
           "Der Vers sagt: So esst von dem, was Allah euch gegeben hat, als etwas Erlaubtes und Gutes, und seid dankbar für die Gnade Allahs.",
           "Der Tisch wird abgeräumt. Das Kind sagt einen Dank und trägt einen leichten Teller, wenn die Eltern es erlauben.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/985. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 16:114. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/985. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 16:114. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -14311,7 +14311,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -14359,7 +14359,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -14428,17 +14428,17 @@ const additions=
       "scientificApproval": false,
       "note": "Der Vers verspricht nicht, dass jede Schwierigkeit sofort weg ist. Wir erfinden keine Geschichte zur Offenbarung dieser Sūrah über den gespeicherten Wortlaut hinaus."
     },
-    "hint": "Wir erfinden keine zusätzliche Geschichte.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Wenn etwas schiefgeht, versuchen wir es noch einmal.",
     "ageText": {
       "4-5": {
         "goal": "Wenn etwas schiefgeht, versuchen wir es noch einmal.",
-        "intro": "Wenn etwas schiefgeht, versuchen wir es noch einmal. Wenn etwas schiefgeht, versuchen wir es noch einmal. Stell dir vor: Ein Kind verschreibt ein Wort, radiert es aus und schreibt es noch einmal langsam. Heute üben wir: Wir planen einen zweiten Versuch und eine kleine Hilfe, zum Beispiel leiser lesen. Wir erfinden keine zusätzliche Geschichte.",
+        "intro": "Wenn etwas schiefgeht, versuchen wir es noch einmal. Wenn etwas schiefgeht, versuchen wir es noch einmal. Stell dir vor: Ein Kind verschreibt ein Wort, radiert es aus und schreibt es noch einmal langsam. Heute üben wir: Wir planen einen zweiten Versuch und eine kleine Hilfe, zum Beispiel leiser lesen.",
         "lines": [
           "Wenn etwas schiefgeht, versuchen wir es noch einmal.",
           "Ein Kind verschreibt ein Wort, radiert es aus und schreibt es noch einmal langsam.",
           "Wir planen einen zweiten Versuch und eine kleine Hilfe, zum Beispiel leiser lesen.",
-          "Wir erfinden keine zusätzliche Geschichte."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1963. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 94:5. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1963. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 94:5. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -14454,8 +14454,8 @@ const additions=
         ],
         "situation": "Ein Kind verschreibt ein Wort, radiert es aus und schreibt es noch einmal langsam.",
         "practice": "Wir planen einen zweiten Versuch und eine kleine Hilfe, zum Beispiel leiser lesen.",
-        "summary": "Wenn etwas schiefgeht, versuchen wir es noch einmal. Wir erfinden keine zusätzliche Geschichte.",
-        "audioScript": "Nach Fehlern weiterlernen. Wenn etwas schiefgeht, versuchen wir es noch einmal. Ein Kind verschreibt ein Wort, radiert es aus und schreibt es noch einmal langsam. Wir planen einen zweiten Versuch und eine kleine Hilfe, zum Beispiel leiser lesen. Wir erfinden keine zusätzliche Geschichte."
+        "summary": "Wenn etwas schiefgeht, versuchen wir es noch einmal.",
+        "audioScript": "Nach Fehlern weiterlernen. Wenn etwas schiefgeht, versuchen wir es noch einmal. Ein Kind verschreibt ein Wort, radiert es aus und schreibt es noch einmal langsam. Wir planen einen zweiten Versuch und eine kleine Hilfe, zum Beispiel leiser lesen."
       },
       "6-8": {
         "goal": "Wenn etwas schiefgeht, versuchen wir es noch einmal.",
@@ -14464,7 +14464,7 @@ const additions=
           "Qurʾān 94:5 ist die gelesene Stelle.",
           "Wenn etwas schiefgeht, versuchen wir es noch einmal.",
           "Ein Kind verschreibt ein Wort, radiert es aus und schreibt es noch einmal langsam.",
-          "Wir erfinden keine zusätzliche Geschichte."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1963. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 94:5. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1963. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 94:5. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -14528,7 +14528,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -14576,7 +14576,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -14606,7 +14606,7 @@ const additions=
     ],
     "practice": "Wir planen einen zweiten Versuch und eine kleine Hilfe, zum Beispiel leiser lesen.",
     "summary": "Wenn etwas schiefgeht, versuchen wir es noch einmal. Wenn etwas schiefgeht, versuchen wir es noch einmal.",
-    "audioScript": "Nach Fehlern weiterlernen. Wenn etwas schiefgeht, versuchen wir es noch einmal. Ein Kind verschreibt ein Wort, radiert es aus und schreibt es noch einmal langsam. Wir planen einen zweiten Versuch und eine kleine Hilfe, zum Beispiel leiser lesen. Wir erfinden keine zusätzliche Geschichte.",
+    "audioScript": "Nach Fehlern weiterlernen. Wenn etwas schiefgeht, versuchen wir es noch einmal. Ein Kind verschreibt ein Wort, radiert es aus und schreibt es noch einmal langsam. Wir planen einen zweiten Versuch und eine kleine Hilfe, zum Beispiel leiser lesen.",
     "voiceApproved": false
   },
   "nafs-nicht-jeden-wunsch-sofort": {
@@ -14645,12 +14645,12 @@ const additions=
       "scientificApproval": false,
       "note": "Der Vers ist kein Haushaltsplan und keine Zahl von Geld. Der gespeicherte Ausdruck endet mit einem Anschlusswort. Wir bauen darauf keine Wirtschaftsstunde. Kaufen bleibt bei den Eltern."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Nicht jeden Wunsch erfüllen wir sofort.",
     "ageText": {
       "4-5": {
         "goal": "Nicht jeden Wunsch erfüllen wir sofort.",
-        "intro": "Nicht jeden Wunsch erfüllen wir sofort. Der Vers sagt, die Hand nicht an den Hals gefesselt und sie nicht völlig geöffnet zu lassen, sonst sitzt man tadelnswert und bloß da. Stell dir vor: Ein Kind sieht ein Spielzeug im Regal und möchte es sofort. Es wartet und fragt zu Hause. Heute üben wir: Wir üben den Satz: Ich warte und frage. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Nicht jeden Wunsch erfüllen wir sofort. Der Vers sagt, die Hand nicht an den Hals gefesselt und sie nicht völlig geöffnet zu lassen, sonst sitzt man tadelnswert und bloß da. Stell dir vor: Ein Kind sieht ein Spielzeug im Regal und möchte es sofort. Es wartet und fragt zu Hause. Heute üben wir: Wir üben den Satz: Ich warte und frage.",
         "lines": [
           "Nicht jeden Wunsch erfüllen wir sofort.",
           "Der Vers sagt, die Hand nicht an den Hals gefesselt und sie nicht völlig geöffnet zu lassen, sonst sitzt man tadelnswert und bloß da.",
@@ -14671,7 +14671,7 @@ const additions=
         ],
         "situation": "Ein Kind sieht ein Spielzeug im Regal und möchte es sofort. Es wartet und fragt zu Hause.",
         "practice": "Wir üben den Satz: Ich warte und frage.",
-        "summary": "Nicht jeden Wunsch erfüllen wir sofort. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Nicht jeden Wunsch erfüllen wir sofort.",
         "audioScript": "Nicht jeden Wunsch sofort erfüllen. Nicht jeden Wunsch erfüllen wir sofort. Der Vers sagt, die Hand nicht an den Hals gefesselt und sie nicht völlig geöffnet zu lassen, sonst sitzt man tadelnswert und bloß da. Ein Kind sieht ein Spielzeug im Regal und möchte es sofort. Es wartet und fragt zu Hause. Wir üben den Satz: Ich warte und frage."
       },
       "6-8": {
@@ -14681,7 +14681,7 @@ const additions=
           "Qurʾān 17:29 ist die gelesene Stelle.",
           "Der Vers sagt, die Hand nicht an den Hals gefesselt und sie nicht völlig geöffnet zu lassen, sonst sitzt man tadelnswert und bloß da.",
           "Ein Kind sieht ein Spielzeug im Regal und möchte es sofort. Es wartet und fragt zu Hause.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1008. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:29. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1008. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:29. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -14745,7 +14745,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -14793,7 +14793,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -14963,7 +14963,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -15011,7 +15011,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -15080,12 +15080,12 @@ const additions=
       "scientificApproval": false,
       "note": "Die Seite erklärt den Vers damit, dass Allah ihnen befohlen hat zu dienen und sie nicht aus Bedürftigkeit erschaffen hat. Wir übernehmen diese Richtung und erfinden keine weitere Geschichten über die Jinn. Für die Jüngsten sagen wir nur: Wir sind da, um Allah zu dienen."
     },
-    "hint": "Wir erfinden keine zusätzliche Geschichte.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "ʿIbādah bedeutet, Allah so zu dienen, wie Er es will.",
     "ageText": {
       "4-5": {
         "goal": "ʿIbādah bedeutet, Allah so zu dienen, wie Er es will.",
-        "intro": "ʿIbādah bedeutet, Allah so zu dienen, wie Er es will. Der Vers sagt: Ich habe die Jinn und die Menschen nur erschaffen, damit sie Mir dienen. Stell dir vor: Ein Kind erklärt: Beten ist Dienen. Jemanden um ein Glas Wasser bitten ist gewöhnliche Hilfe. Heute üben wir: Wir sortieren zwei Beispiele: Gebet zu Allah, und ein Mensch, der uns den Stift reicht. Wir erfinden keine zusätzliche Geschichte.",
+        "intro": "ʿIbādah bedeutet, Allah so zu dienen, wie Er es will. Der Vers sagt: Ich habe die Jinn und die Menschen nur erschaffen, damit sie Mir dienen. Stell dir vor: Ein Kind erklärt: Beten ist Dienen. Jemanden um ein Glas Wasser bitten ist gewöhnliche Hilfe. Heute üben wir: Wir sortieren zwei Beispiele: Gebet zu Allah, und ein Mensch, der uns den Stift reicht.",
         "lines": [
           "ʿIbādah bedeutet, Allah so zu dienen, wie Er es will.",
           "Der Vers sagt: Ich habe die Jinn und die Menschen nur erschaffen, damit sie Mir dienen.",
@@ -15106,7 +15106,7 @@ const additions=
         ],
         "situation": "Ein Kind erklärt: Beten ist Dienen. Jemanden um ein Glas Wasser bitten ist gewöhnliche Hilfe.",
         "practice": "Wir sortieren zwei Beispiele: Gebet zu Allah, und ein Mensch, der uns den Stift reicht.",
-        "summary": "ʿIbādah bedeutet, Allah so zu dienen, wie Er es will. Wir erfinden keine zusätzliche Geschichte.",
+        "summary": "ʿIbādah bedeutet, Allah so zu dienen, wie Er es will.",
         "audioScript": "Die Bedeutung von ʿIbādah. ʿIbādah bedeutet, Allah so zu dienen, wie Er es will. Der Vers sagt: Ich habe die Jinn und die Menschen nur erschaffen, damit sie Mir dienen. Ein Kind erklärt: Beten ist Dienen. Jemanden um ein Glas Wasser bitten ist gewöhnliche Hilfe. Wir sortieren zwei Beispiele: Gebet zu Allah, und ein Mensch, der uns den Stift reicht."
       },
       "6-8": {
@@ -15116,7 +15116,7 @@ const additions=
           "Qurʾān 51:56 ist die gelesene Stelle.",
           "Der Vers sagt: Ich habe die Jinn und die Menschen nur erschaffen, damit sie Mir dienen.",
           "Ein Kind erklärt: Beten ist Dienen. Jemanden um ein Glas Wasser bitten ist gewöhnliche Hilfe.",
-          "Wir erfinden keine zusätzliche Geschichte."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1772. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 51:56. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1772. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 51:56. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -15180,7 +15180,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -15228,7 +15228,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -15297,12 +15297,12 @@ const additions=
       "scientificApproval": false,
       "note": "Der Vers steht nicht in einem Scheidungszusammenhang, den wir dafür heranziehen würden. Eine Unglückstheologie für kleine Kinder gibt es nicht. Die Seite setzt den Vers neben einen anderen Ausdruck; wir übernehmen keine zusätzliche Behauptung."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Allah weiß und bestimmt.",
     "ageText": {
       "4-5": {
         "goal": "Allah weiß und bestimmt.",
-        "intro": "Allah weiß und bestimmt. Der Vers lautet: Wir haben jedes Ding in einem Maß erschaffen. Stell dir vor: Ein Kind fragt, warum der Ausflug ins Wasser fiel. Die Antwort bleibt: Allah weiß mehr als wir. Wir schimpfen niemanden mit diesem Vers. Heute üben wir: Wir wiederholen den kurzen Sinn und stellen keine Warum-Kette an. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Allah weiß und bestimmt. Der Vers lautet: Wir haben jedes Ding in einem Maß erschaffen. Stell dir vor: Ein Kind fragt, warum der Ausflug ins Wasser fiel. Die Antwort bleibt: Allah weiß mehr als wir. Wir schimpfen niemanden mit diesem Vers. Heute üben wir: Wir wiederholen den kurzen Sinn und stellen keine Warum-Kette an.",
         "lines": [
           "Allah weiß und bestimmt.",
           "Der Vers lautet: Wir haben jedes Ding in einem Maß erschaffen.",
@@ -15323,7 +15323,7 @@ const additions=
         ],
         "situation": "Ein Kind fragt, warum der Ausflug ins Wasser fiel. Die Antwort bleibt: Allah weiß mehr als wir. Wir schimpfen niemanden mit diesem Vers.",
         "practice": "Wir wiederholen den kurzen Sinn und stellen keine Warum-Kette an.",
-        "summary": "Allah weiß und bestimmt. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Allah weiß und bestimmt.",
         "audioScript": "Īmān an al-Qadar. Allah weiß und bestimmt. Der Vers lautet: Wir haben jedes Ding in einem Maß erschaffen. Ein Kind fragt, warum der Ausflug ins Wasser fiel. Die Antwort bleibt: Allah weiß mehr als wir. Wir schimpfen niemanden mit diesem Vers. Wir wiederholen den kurzen Sinn und stellen keine Warum-Kette an."
       },
       "6-8": {
@@ -15333,7 +15333,7 @@ const additions=
           "Qurʾān 54:49 ist die gelesene Stelle.",
           "Der Vers lautet: Wir haben jedes Ding in einem Maß erschaffen.",
           "Ein Kind fragt, warum der Ausflug ins Wasser fiel. Die Antwort bleibt: Allah weiß mehr als wir. Wir schimpfen niemanden mit diesem Vers.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1794. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 54:49. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1794. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 54:49. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -15397,7 +15397,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -15445,7 +15445,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -15514,12 +15514,12 @@ const additions=
       "scientificApproval": false,
       "note": "Eine andere Stelle über die Aufrichtigkeit wurde schon benutzt. Hier ist die Fundstelle 39:2. Wir erfinden kein Punktsystem für die Woche."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Am Ende der Woche fragen wir: Für wen habe ich diese gute Tat getan?",
     "ageText": {
       "4-5": {
         "goal": "Am Ende der Woche fragen wir: Für wen habe ich diese gute Tat getan?",
-        "intro": "Am Ende der Woche fragen wir: Für wen habe ich diese gute Tat getan? Der Vers sagt, dass Allah das Buch mit der Wahrheit herabgesandt hat, und: Diene Allah, indem du Ihm gegenüber aufrichtig im Dīn bist. Stell dir vor: Ein Kind nennt eine Tat aus der Woche und sagt, ob es sie für Allah oder für das Lob getan hat. Es muss nichts Lautes erzählen. Heute üben wir: Wir schreiben ein Wort auf einen Zettel oder sagen es leise. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Am Ende der Woche fragen wir: Für wen habe ich diese gute Tat getan? Der Vers sagt, dass Allah das Buch mit der Wahrheit herabgesandt hat, und: Diene Allah, indem du Ihm gegenüber aufrichtig im Dīn bist. Stell dir vor: Ein Kind nennt eine Tat aus der Woche und sagt, ob es sie für Allah oder für das Lob getan hat. Es muss nichts Lautes erzählen. Heute üben wir: Wir schreiben ein Wort auf einen Zettel oder sagen es leise.",
         "lines": [
           "Am Ende der Woche fragen wir: Für wen habe ich diese gute Tat getan?",
           "Der Vers sagt, dass Allah das Buch mit der Wahrheit herabgesandt hat, und: Diene Allah, indem du Ihm gegenüber aufrichtig im Dīn bist.",
@@ -15540,7 +15540,7 @@ const additions=
         ],
         "situation": "Ein Kind nennt eine Tat aus der Woche und sagt, ob es sie für Allah oder für das Lob getan hat. Es muss nichts Lautes erzählen.",
         "practice": "Wir schreiben ein Wort auf einen Zettel oder sagen es leise.",
-        "summary": "Am Ende der Woche fragen wir: Für wen habe ich diese gute Tat getan? Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Am Ende der Woche fragen wir: Für wen habe ich diese gute Tat getan?",
         "audioScript": "Ikhlāṣ im Wochenrückblick. Am Ende der Woche fragen wir: Für wen habe ich diese gute Tat getan? Der Vers sagt, dass Allah das Buch mit der Wahrheit herabgesandt hat, und: Diene Allah, indem du Ihm gegenüber aufrichtig im Dīn bist. Ein Kind nennt eine Tat aus der Woche und sagt, ob es sie für Allah oder für das Lob getan hat. Es muss nichts Lautes erzählen. Wir schreiben ein Wort auf einen Zettel oder sagen es leise."
       },
       "6-8": {
@@ -15550,7 +15550,7 @@ const additions=
           "Qurʾān 39:2 ist die gelesene Stelle.",
           "Der Vers sagt, dass Allah das Buch mit der Wahrheit herabgesandt hat, und: Diene Allah, indem du Ihm gegenüber aufrichtig im Dīn bist.",
           "Ein Kind nennt eine Tat aus der Woche und sagt, ob es sie für Allah oder für das Lob getan hat. Es muss nichts Lautes erzählen.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1611. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 39:2. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1611. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 39:2. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -15614,7 +15614,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -15662,7 +15662,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -15732,12 +15732,12 @@ const additions=
       "note": "Der Vers selbst spricht vom Friedenstiften zwischen Geschwistern. Den Glückwunsch nennen wir als gutes Verhalten dazu, nicht als Wortlaut. Dieselbe Fundstelle, anderes Lernziel. Dieselbe gelesene Fundstelle wurde schon in Slot 150 mit einem anderen Lernziel verwendet.",
       "sameLocusAsSlot": 150
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Wenn jemand etwas gut gemacht hat, freuen wir uns mit.",
     "ageText": {
       "4-5": {
         "goal": "Wenn jemand etwas gut gemacht hat, freuen wir uns mit.",
-        "intro": "Wenn jemand etwas gut gemacht hat, freuen wir uns mit. Dieselbe Stelle wie in der Versöhnungsstunde sagt, dass die Glaubenden Geschwister sind. Stell dir vor: Ein Kind zeigt eine Zeichnung. Das andere sagt: Die ist dir gelungen. Heute üben wir: Wir üben einen Glückwunsch ohne einen Witz über das Bild. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Wenn jemand etwas gut gemacht hat, freuen wir uns mit. Dieselbe Stelle wie in der Versöhnungsstunde sagt, dass die Glaubenden Geschwister sind. Stell dir vor: Ein Kind zeigt eine Zeichnung. Das andere sagt: Die ist dir gelungen. Heute üben wir: Wir üben einen Glückwunsch ohne einen Witz über das Bild.",
         "lines": [
           "Wenn jemand etwas gut gemacht hat, freuen wir uns mit.",
           "Dieselbe Stelle wie in der Versöhnungsstunde sagt, dass die Glaubenden Geschwister sind.",
@@ -15758,7 +15758,7 @@ const additions=
         ],
         "situation": "Ein Kind zeigt eine Zeichnung. Das andere sagt: Die ist dir gelungen.",
         "practice": "Wir üben einen Glückwunsch ohne einen Witz über das Bild.",
-        "summary": "Wenn jemand etwas gut gemacht hat, freuen wir uns mit. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Wenn jemand etwas gut gemacht hat, freuen wir uns mit.",
         "audioScript": "Freude für andere empfinden. Wenn jemand etwas gut gemacht hat, freuen wir uns mit. Dieselbe Stelle wie in der Versöhnungsstunde sagt, dass die Glaubenden Geschwister sind. Ein Kind zeigt eine Zeichnung. Das andere sagt: Die ist dir gelungen. Wir üben einen Glückwunsch ohne einen Witz über das Bild."
       },
       "6-8": {
@@ -15768,7 +15768,7 @@ const additions=
           "Qurʾān 49:10 ist die gelesene Stelle.",
           "Dieselbe Stelle wie in der Versöhnungsstunde sagt, dass die Glaubenden Geschwister sind.",
           "Ein Kind zeigt eine Zeichnung. Das andere sagt: Die ist dir gelungen.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1753. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 49:10. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1753. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 49:10. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -15832,7 +15832,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -15880,7 +15880,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -15950,12 +15950,12 @@ const additions=
       "note": "Dieselbe Fundstelle trägt hier das Essen, nicht die Moscheeruhe. Eine Zahl von Bissen oder eine Sitzregel steht nicht im Vers. Dieselbe gelesene Fundstelle wurde schon in Slot 103 mit einem anderen Lernziel verwendet.",
       "sameLocusAsSlot": 103
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Mit Essen spielen wir nicht.",
     "ageText": {
       "4-5": {
         "goal": "Mit Essen spielen wir nicht.",
-        "intro": "Mit Essen spielen wir nicht. Dieselbe Stelle wie in der Moscheestunde sagt auch: Esst und trinkt und seid nicht maßlos. Stell dir vor: Ein Kind will das Brot zu einer Figur drücken. Es lässt es liegen und isst einen Bissen oder gibt es zurück. Heute üben wir: Wir üben, das Essen auf dem Teller zu lassen und nicht damit zu werfen. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Mit Essen spielen wir nicht. Dieselbe Stelle wie in der Moscheestunde sagt auch: Esst und trinkt und seid nicht maßlos. Stell dir vor: Ein Kind will das Brot zu einer Figur drücken. Es lässt es liegen und isst einen Bissen oder gibt es zurück. Heute üben wir: Wir üben, das Essen auf dem Teller zu lassen und nicht damit zu werfen.",
         "lines": [
           "Mit Essen spielen wir nicht.",
           "Dieselbe Stelle wie in der Moscheestunde sagt auch: Esst und trinkt und seid nicht maßlos.",
@@ -15976,7 +15976,7 @@ const additions=
         ],
         "situation": "Ein Kind will das Brot zu einer Figur drücken. Es lässt es liegen und isst einen Bissen oder gibt es zurück.",
         "practice": "Wir üben, das Essen auf dem Teller zu lassen und nicht damit zu werfen.",
-        "summary": "Mit Essen spielen wir nicht. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Mit Essen spielen wir nicht.",
         "audioScript": "Mit Essen nicht spielen. Mit Essen spielen wir nicht. Dieselbe Stelle wie in der Moscheestunde sagt auch: Esst und trinkt und seid nicht maßlos. Ein Kind will das Brot zu einer Figur drücken. Es lässt es liegen und isst einen Bissen oder gibt es zurück. Wir üben, das Essen auf dem Teller zu lassen und nicht damit zu werfen."
       },
       "6-8": {
@@ -15986,7 +15986,7 @@ const additions=
           "Qurʾān 7:31 ist die gelesene Stelle.",
           "Dieselbe Stelle wie in der Moscheestunde sagt auch: Esst und trinkt und seid nicht maßlos.",
           "Ein Kind will das Brot zu einer Figur drücken. Es lässt es liegen und isst einen Bissen oder gibt es zurück.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/504. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 7:31. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/504. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 7:31. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -16050,7 +16050,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -16098,7 +16098,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -16167,17 +16167,17 @@ const additions=
       "scientificApproval": false,
       "note": "Der Vers ist an den Propheten gerichtet. Wir machen daraus keine Regel, dass ein Kind alles allein können muss. Was zu schwer oder gefährlich ist, bleibt bei den Erwachsenen."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Eine Aufgabe, die zum Alter passt, führen wir Schritt für Schritt selbst aus.",
     "ageText": {
       "4-5": {
         "goal": "Eine Aufgabe, die zum Alter passt, führen wir Schritt für Schritt selbst aus.",
-        "intro": "Eine Aufgabe, die zum Alter passt, führen wir Schritt für Schritt selbst aus. Eine Aufgabe, die zum Alter passt, führen wir Schritt für Schritt selbst aus. Stell dir vor: Ein Kind zieht die Schuhe selbst an und bittet nur, wenn der Knoten noch zu schwer ist. Heute üben wir: Wir teilen eine Aufgabe in zwei Schritte und tun den ersten selbst. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Eine Aufgabe, die zum Alter passt, führen wir Schritt für Schritt selbst aus. Eine Aufgabe, die zum Alter passt, führen wir Schritt für Schritt selbst aus. Stell dir vor: Ein Kind zieht die Schuhe selbst an und bittet nur, wenn der Knoten noch zu schwer ist. Heute üben wir: Wir teilen eine Aufgabe in zwei Schritte und tun den ersten selbst.",
         "lines": [
           "Eine Aufgabe, die zum Alter passt, führen wir Schritt für Schritt selbst aus.",
           "Ein Kind zieht die Schuhe selbst an und bittet nur, wenn der Knoten noch zu schwer ist.",
           "Wir teilen eine Aufgabe in zwei Schritte und tun den ersten selbst.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1963. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 94:7. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1963. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 94:7. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -16193,8 +16193,8 @@ const additions=
         ],
         "situation": "Ein Kind zieht die Schuhe selbst an und bittet nur, wenn der Knoten noch zu schwer ist.",
         "practice": "Wir teilen eine Aufgabe in zwei Schritte und tun den ersten selbst.",
-        "summary": "Eine Aufgabe, die zum Alter passt, führen wir Schritt für Schritt selbst aus. Die arabischen Worte spricht die Lehrperson.",
-        "audioScript": "Selbstständigkeit Schritt für Schritt. Eine Aufgabe, die zum Alter passt, führen wir Schritt für Schritt selbst aus. Ein Kind zieht die Schuhe selbst an und bittet nur, wenn der Knoten noch zu schwer ist. Wir teilen eine Aufgabe in zwei Schritte und tun den ersten selbst. Die arabischen Worte spricht die Lehrperson."
+        "summary": "Eine Aufgabe, die zum Alter passt, führen wir Schritt für Schritt selbst aus.",
+        "audioScript": "Selbstständigkeit Schritt für Schritt. Eine Aufgabe, die zum Alter passt, führen wir Schritt für Schritt selbst aus. Ein Kind zieht die Schuhe selbst an und bittet nur, wenn der Knoten noch zu schwer ist. Wir teilen eine Aufgabe in zwei Schritte und tun den ersten selbst."
       },
       "6-8": {
         "goal": "Eine Aufgabe, die zum Alter passt, führen wir Schritt für Schritt selbst aus.",
@@ -16203,7 +16203,7 @@ const additions=
           "Qurʾān 94:7 ist die gelesene Stelle.",
           "Eine Aufgabe, die zum Alter passt, führen wir Schritt für Schritt selbst aus.",
           "Ein Kind zieht die Schuhe selbst an und bittet nur, wenn der Knoten noch zu schwer ist.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1963. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 94:7. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1963. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 94:7. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -16267,7 +16267,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -16315,7 +16315,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -16345,7 +16345,7 @@ const additions=
     ],
     "practice": "Wir teilen eine Aufgabe in zwei Schritte und tun den ersten selbst.",
     "summary": "Eine Aufgabe, die zum Alter passt, führen wir Schritt für Schritt selbst aus. Eine Aufgabe, die zum Alter passt, führen wir Schritt für Schritt selbst aus.",
-    "audioScript": "Selbstständigkeit Schritt für Schritt. Eine Aufgabe, die zum Alter passt, führen wir Schritt für Schritt selbst aus. Ein Kind zieht die Schuhe selbst an und bittet nur, wenn der Knoten noch zu schwer ist. Wir teilen eine Aufgabe in zwei Schritte und tun den ersten selbst. Die arabischen Worte spricht die Lehrperson.",
+    "audioScript": "Selbstständigkeit Schritt für Schritt. Eine Aufgabe, die zum Alter passt, führen wir Schritt für Schritt selbst aus. Ein Kind zieht die Schuhe selbst an und bittet nur, wenn der Knoten noch zu schwer ist. Wir teilen eine Aufgabe in zwei Schritte und tun den ersten selbst.",
     "voiceApproved": false
   },
   "nafs-stille-und-sammlung": {
@@ -16384,12 +16384,12 @@ const additions=
       "scientificApproval": false,
       "note": "Der Vers legt keine Minutenzahl fest. Die Furcht im Vers malen wir nicht als Angstbild. Für die Jüngsten sagen wir: Wir denken leise an Allah und werden still."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Bevor wir lesen, werden wir einen Moment ruhig.",
     "ageText": {
       "4-5": {
         "goal": "Bevor wir lesen, werden wir einen Moment ruhig.",
-        "intro": "Bevor wir lesen, werden wir einen Moment ruhig. Der Vers sagt: Gedenke deines Herrn in dir selbst, demütig bittend und in Ehrfurcht, ohne laute Rede, am Morgen und am Abend, und gehöre nicht zu den Achtlosen. Stell dir vor: Die Bücher liegen bereit. Alle sitzen einen kurzen Moment still, dann beginnt das Lesen. Heute üben wir: Wir üben die kurze Stille und das leise Öffnen des Buches. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Bevor wir lesen, werden wir einen Moment ruhig. Der Vers sagt: Gedenke deines Herrn in dir selbst, demütig bittend und in Ehrfurcht, ohne laute Rede, am Morgen und am Abend, und gehöre nicht zu den Achtlosen. Stell dir vor: Die Bücher liegen bereit. Alle sitzen einen kurzen Moment still, dann beginnt das Lesen. Heute üben wir: Wir üben die kurze Stille und das leise Öffnen des Buches.",
         "lines": [
           "Bevor wir lesen, werden wir einen Moment ruhig.",
           "Der Vers sagt: Gedenke deines Herrn in dir selbst, demütig bittend und in Ehrfurcht, ohne laute Rede, am Morgen und am Abend, und gehöre nicht zu den Achtlosen.",
@@ -16410,7 +16410,7 @@ const additions=
         ],
         "situation": "Die Bücher liegen bereit. Alle sitzen einen kurzen Moment still, dann beginnt das Lesen.",
         "practice": "Wir üben die kurze Stille und das leise Öffnen des Buches.",
-        "summary": "Bevor wir lesen, werden wir einen Moment ruhig. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Bevor wir lesen, werden wir einen Moment ruhig.",
         "audioScript": "Stille und Sammlung üben. Bevor wir lesen, werden wir einen Moment ruhig. Der Vers sagt: Gedenke deines Herrn in dir selbst, demütig bittend und in Ehrfurcht, ohne laute Rede, am Morgen und am Abend, und gehöre nicht zu den Achtlosen. Die Bücher liegen bereit. Alle sitzen einen kurzen Moment still, dann beginnt das Lesen. Wir üben die kurze Stille und das leise Öffnen des Buches."
       },
       "6-8": {
@@ -16420,7 +16420,7 @@ const additions=
           "Qurʾān 7:205 ist die gelesene Stelle.",
           "Der Vers sagt: Gedenke deines Herrn in dir selbst, demütig bittend und in Ehrfurcht, ohne laute Rede, am Morgen und am Abend, und gehöre nicht zu den Achtlosen.",
           "Die Bücher liegen bereit. Alle sitzen einen kurzen Moment still, dann beginnt das Lesen.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/590. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 7:205. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/590. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 7:205. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -16484,7 +16484,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -16532,7 +16532,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -16701,7 +16701,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -16749,7 +16749,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -16818,12 +16818,12 @@ const additions=
       "scientificApproval": false,
       "note": "Der Vers verbietet nicht, einen Menschen um ein Glas Wasser zu bitten. Er richtet die Anbetung und die eigentliche Hilfe im Gottesdienst an Allah. Wir vermischen das nicht."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Im Gebet sagen wir, dass wir Allah allein anbeten und Ihn um Hilfe bitten.",
     "ageText": {
       "4-5": {
         "goal": "Im Gebet sagen wir, dass wir Allah allein anbeten und Ihn um Hilfe bitten.",
-        "intro": "Im Gebet sagen wir, dass wir Allah allein anbeten und Ihn um Hilfe bitten. Der Vers lautet: Dich allein beten wir an, und Dich allein bitten wir um Hilfe. Stell dir vor: Ein Kind erklärt: Um einen Stift bitte ich den Nachbarn. Um Rechtleitung bitte ich Allah. Heute üben wir: Wir sortieren drei kurze Beispiele in zwei Gruppen. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Im Gebet sagen wir, dass wir Allah allein anbeten und Ihn um Hilfe bitten. Der Vers lautet: Dich allein beten wir an, und Dich allein bitten wir um Hilfe. Stell dir vor: Ein Kind erklärt: Um einen Stift bitte ich den Nachbarn. Um Rechtleitung bitte ich Allah. Heute üben wir: Wir sortieren drei kurze Beispiele in zwei Gruppen.",
         "lines": [
           "Im Gebet sagen wir, dass wir Allah allein anbeten und Ihn um Hilfe bitten.",
           "Der Vers lautet: Dich allein beten wir an, und Dich allein bitten wir um Hilfe.",
@@ -16844,7 +16844,7 @@ const additions=
         ],
         "situation": "Ein Kind erklärt: Um einen Stift bitte ich den Nachbarn. Um Rechtleitung bitte ich Allah.",
         "practice": "Wir sortieren drei kurze Beispiele in zwei Gruppen.",
-        "summary": "Im Gebet sagen wir, dass wir Allah allein anbeten und Ihn um Hilfe bitten. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Im Gebet sagen wir, dass wir Allah allein anbeten und Ihn um Hilfe bitten.",
         "audioScript": "Tawḥīd im Alltag. Im Gebet sagen wir, dass wir Allah allein anbeten und Ihn um Hilfe bitten. Der Vers lautet: Dich allein beten wir an, und Dich allein bitten wir um Hilfe. Ein Kind erklärt: Um einen Stift bitte ich den Nachbarn. Um Rechtleitung bitte ich Allah. Wir sortieren drei kurze Beispiele in zwei Gruppen."
       },
       "6-8": {
@@ -16854,7 +16854,7 @@ const additions=
           "Qurʾān 1:5 ist die gelesene Stelle.",
           "Der Vers lautet: Dich allein beten wir an, und Dich allein bitten wir um Hilfe.",
           "Ein Kind erklärt: Um einen Stift bitte ich den Nachbarn. Um Rechtleitung bitte ich Allah.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/46. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 1:5. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/46. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 1:5. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -16918,7 +16918,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -16966,7 +16966,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -17035,12 +17035,12 @@ const additions=
       "scientificApproval": false,
       "note": "Eine frühere Stunde hat einen anderen Vers über Geduld und Gebet. Hier ist die Fundstelle 2:45. Der Vers garantiert keine Note."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Wir lernen für die Aufgabe und bitten Allah um Hilfe.",
     "ageText": {
       "4-5": {
         "goal": "Wir lernen für die Aufgabe und bitten Allah um Hilfe.",
-        "intro": "Wir lernen für die Aufgabe und bitten Allah um Hilfe. Der Vers sagt: Sucht Hilfe in der Geduld und im Gebet. Stell dir vor: Vor einer kleinen Übung liest das Kind noch einmal und spricht danach eine kurze Bitte. Heute üben wir: Wir tun beides: einen echten Versuch und eine Bitte. Nicht nur eines von beiden. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Wir lernen für die Aufgabe und bitten Allah um Hilfe. Der Vers sagt: Sucht Hilfe in der Geduld und im Gebet. Stell dir vor: Vor einer kleinen Übung liest das Kind noch einmal und spricht danach eine kurze Bitte. Heute üben wir: Wir tun beides: einen echten Versuch und eine Bitte. Nicht nur eines von beiden.",
         "lines": [
           "Wir lernen für die Aufgabe und bitten Allah um Hilfe.",
           "Der Vers sagt: Sucht Hilfe in der Geduld und im Gebet.",
@@ -17061,7 +17061,7 @@ const additions=
         ],
         "situation": "Vor einer kleinen Übung liest das Kind noch einmal und spricht danach eine kurze Bitte.",
         "practice": "Wir tun beides: einen echten Versuch und eine Bitte. Nicht nur eines von beiden.",
-        "summary": "Wir lernen für die Aufgabe und bitten Allah um Hilfe. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Wir lernen für die Aufgabe und bitten Allah um Hilfe.",
         "audioScript": "Bemühen und Allah vertrauen. Wir lernen für die Aufgabe und bitten Allah um Hilfe. Der Vers sagt: Sucht Hilfe in der Geduld und im Gebet. Vor einer kleinen Übung liest das Kind noch einmal und spricht danach eine kurze Bitte. Wir tun beides: einen echten Versuch und eine Bitte. Nicht nur eines von beiden."
       },
       "6-8": {
@@ -17071,7 +17071,7 @@ const additions=
           "Qurʾān 2:45 ist die gelesene Stelle.",
           "Der Vers sagt: Sucht Hilfe in der Geduld und im Gebet.",
           "Vor einer kleinen Übung liest das Kind noch einmal und spricht danach eine kurze Bitte.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/85. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:45. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/85. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:45. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -17135,7 +17135,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -17183,7 +17183,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -17252,12 +17252,12 @@ const additions=
       "scientificApproval": false,
       "note": "Der Vers bewertet keine Farbe und keine Sprache als besser. Eine andere Stelle sagt, dass bei Allah die Gottesfurcht zählt. Wir ziehen sie nicht als zweiten arabischen Text heran, wenn wir sie hier nicht neu speichern."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Verschiedene Sprachen und Aussehen gehören zu Allahs Zeichen.",
     "ageText": {
       "4-5": {
         "goal": "Verschiedene Sprachen und Aussehen gehören zu Allahs Zeichen.",
-        "intro": "Verschiedene Sprachen und Aussehen gehören zu Allahs Zeichen. Der Vers nennt als Zeichen Allahs die Erschaffung der Himmel und der Erde und den Unterschied der Sprachen und Farben. Stell dir vor: Ein Kind grüßt ein anderes Kind, dessen Sprache es nicht versteht, mit einem Lächeln und einem Salam oder einem freundlichen deutschen Gruß. Heute üben wir: Wir üben den Gruß und keine Frage, die den anderen vorführt. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Verschiedene Sprachen und Aussehen gehören zu Allahs Zeichen. Der Vers nennt als Zeichen Allahs die Erschaffung der Himmel und der Erde und den Unterschied der Sprachen und Farben. Stell dir vor: Ein Kind grüßt ein anderes Kind, dessen Sprache es nicht versteht, mit einem Lächeln und einem Salam oder einem freundlichen deutschen Gruß. Heute üben wir: Wir üben den Gruß und keine Frage, die den anderen vorführt.",
         "lines": [
           "Verschiedene Sprachen und Aussehen gehören zu Allahs Zeichen.",
           "Der Vers nennt als Zeichen Allahs die Erschaffung der Himmel und der Erde und den Unterschied der Sprachen und Farben.",
@@ -17278,7 +17278,7 @@ const additions=
         ],
         "situation": "Ein Kind grüßt ein anderes Kind, dessen Sprache es nicht versteht, mit einem Lächeln und einem Salam oder einem freundlichen deutschen Gruß.",
         "practice": "Wir üben den Gruß und keine Frage, die den anderen vorführt.",
-        "summary": "Verschiedene Sprachen und Aussehen gehören zu Allahs Zeichen. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Verschiedene Sprachen und Aussehen gehören zu Allahs Zeichen.",
         "audioScript": "Unterschiedliche Menschen respektieren. Verschiedene Sprachen und Aussehen gehören zu Allahs Zeichen. Der Vers nennt als Zeichen Allahs die Erschaffung der Himmel und der Erde und den Unterschied der Sprachen und Farben. Ein Kind grüßt ein anderes Kind, dessen Sprache es nicht versteht, mit einem Lächeln und einem Salam oder einem freundlichen deutschen Gruß. Wir üben den Gruß und keine Frage, die den anderen vorführt."
       },
       "6-8": {
@@ -17288,7 +17288,7 @@ const additions=
           "Qurʾān 30:22 ist die gelesene Stelle.",
           "Der Vers nennt als Zeichen Allahs die Erschaffung der Himmel und der Erde und den Unterschied der Sprachen und Farben.",
           "Ein Kind grüßt ein anderes Kind, dessen Sprache es nicht versteht, mit einem Lächeln und einem Salam oder einem freundlichen deutschen Gruß.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1424. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 30:22. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1424. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 30:22. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -17352,7 +17352,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -17400,7 +17400,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -17469,12 +17469,12 @@ const additions=
       "scientificApproval": false,
       "note": "Drei Schlucke, das Sitzen oder eine andere Trinkgewohnheit stehen in diesem Vers nicht. Wir geben sie nicht als gelesene Sunnah aus."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Wir trinken Wasser ruhig und verschütten es nicht absichtlich.",
     "ageText": {
       "4-5": {
         "goal": "Wir trinken Wasser ruhig und verschütten es nicht absichtlich.",
-        "intro": "Wir trinken Wasser ruhig und verschütten es nicht absichtlich. Der Vers sagt, dass Allah vom Himmel Wasser herabgesandt hat, von dem die Menschen trinken und von dem die Bäume kommen, in denen sie weiden lassen. Stell dir vor: Ein Kind hält das Glas mit beiden Händen und trinkt, ohne zu spritzen. Heute üben wir: Wir üben ein ruhiges Trinken und das Absetzen des Glases. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Wir trinken Wasser ruhig und verschütten es nicht absichtlich. Der Vers sagt, dass Allah vom Himmel Wasser herabgesandt hat, von dem die Menschen trinken und von dem die Bäume kommen, in denen sie weiden lassen. Stell dir vor: Ein Kind hält das Glas mit beiden Händen und trinkt, ohne zu spritzen. Heute üben wir: Wir üben ein ruhiges Trinken und das Absetzen des Glases.",
         "lines": [
           "Wir trinken Wasser ruhig und verschütten es nicht absichtlich.",
           "Der Vers sagt, dass Allah vom Himmel Wasser herabgesandt hat, von dem die Menschen trinken und von dem die Bäume kommen, in denen sie weiden lassen.",
@@ -17495,7 +17495,7 @@ const additions=
         ],
         "situation": "Ein Kind hält das Glas mit beiden Händen und trinkt, ohne zu spritzen.",
         "practice": "Wir üben ein ruhiges Trinken und das Absetzen des Glases.",
-        "summary": "Wir trinken Wasser ruhig und verschütten es nicht absichtlich. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Wir trinken Wasser ruhig und verschütten es nicht absichtlich.",
         "audioScript": "Trinken mit guten Sitten. Wir trinken Wasser ruhig und verschütten es nicht absichtlich. Der Vers sagt, dass Allah vom Himmel Wasser herabgesandt hat, von dem die Menschen trinken und von dem die Bäume kommen, in denen sie weiden lassen. Ein Kind hält das Glas mit beiden Händen und trinkt, ohne zu spritzen. Wir üben ein ruhiges Trinken und das Absetzen des Glases."
       },
       "6-8": {
@@ -17505,7 +17505,7 @@ const additions=
           "Qurʾān 16:10 ist die gelesene Stelle.",
           "Der Vers sagt, dass Allah vom Himmel Wasser herabgesandt hat, von dem die Menschen trinken und von dem die Bäume kommen, in denen sie weiden lassen.",
           "Ein Kind hält das Glas mit beiden Händen und trinkt, ohne zu spritzen.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/942. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 16:10. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/942. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 16:10. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -17569,7 +17569,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -17617,7 +17617,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -17686,12 +17686,12 @@ const additions=
       "scientificApproval": false,
       "note": "Der Vers ist keine Erlaubnis, sich über andere zu stellen. Die Würdigung kommt von Allah. Wir erfinden keine Rangfolge unter den Kindern."
     },
-    "hint": "Wir erfinden keine zusätzliche Geschichte.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Allah hat den Menschen gewürdigt.",
     "ageText": {
       "4-5": {
         "goal": "Allah hat den Menschen gewürdigt.",
-        "intro": "Allah hat den Menschen gewürdigt. Der Vers sagt, dass Allah die Kinder Adams gewürdigt, sie an Land und Meer getragen, ihnen von den guten Dingen gegeben und sie vor vielen Seiner Geschöpfe ausgezeichnet hat. Stell dir vor: Ein Kind nennt etwas, das es kann, zum Beispiel freundlich grüßen, und fügt keinen Vergleich an. Heute üben wir: Wir sagen einen Satz über uns ohne das Wort besser als. Wir erfinden keine zusätzliche Geschichte.",
+        "intro": "Allah hat den Menschen gewürdigt. Der Vers sagt, dass Allah die Kinder Adams gewürdigt, sie an Land und Meer getragen, ihnen von den guten Dingen gegeben und sie vor vielen Seiner Geschöpfe ausgezeichnet hat. Stell dir vor: Ein Kind nennt etwas, das es kann, zum Beispiel freundlich grüßen, und fügt keinen Vergleich an. Heute üben wir: Wir sagen einen Satz über uns ohne das Wort besser als.",
         "lines": [
           "Allah hat den Menschen gewürdigt.",
           "Der Vers sagt, dass Allah die Kinder Adams gewürdigt, sie an Land und Meer getragen, ihnen von den guten Dingen gegeben und sie vor vielen Seiner Geschöpfe ausgezeichnet hat.",
@@ -17712,7 +17712,7 @@ const additions=
         ],
         "situation": "Ein Kind nennt etwas, das es kann, zum Beispiel freundlich grüßen, und fügt keinen Vergleich an.",
         "practice": "Wir sagen einen Satz über uns ohne das Wort besser als.",
-        "summary": "Allah hat den Menschen gewürdigt. Wir erfinden keine zusätzliche Geschichte.",
+        "summary": "Allah hat den Menschen gewürdigt.",
         "audioScript": "Wertschätzend mit sich selbst umgehen. Allah hat den Menschen gewürdigt. Der Vers sagt, dass Allah die Kinder Adams gewürdigt, sie an Land und Meer getragen, ihnen von den guten Dingen gegeben und sie vor vielen Seiner Geschöpfe ausgezeichnet hat. Ein Kind nennt etwas, das es kann, zum Beispiel freundlich grüßen, und fügt keinen Vergleich an. Wir sagen einen Satz über uns ohne das Wort besser als."
       },
       "6-8": {
@@ -17722,7 +17722,7 @@ const additions=
           "Qurʾān 17:70 ist die gelesene Stelle.",
           "Der Vers sagt, dass Allah die Kinder Adams gewürdigt, sie an Land und Meer getragen, ihnen von den guten Dingen gegeben und sie vor vielen Seiner Geschöpfe ausgezeichnet hat.",
           "Ein Kind nennt etwas, das es kann, zum Beispiel freundlich grüßen, und fügt keinen Vergleich an.",
-          "Wir erfinden keine zusätzliche Geschichte."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1035. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:70. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1035. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:70. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -17786,7 +17786,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -17834,7 +17834,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -18003,7 +18003,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -18051,7 +18051,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -18120,12 +18120,12 @@ const additions=
       "scientificApproval": false,
       "note": "Die ganze Sūrah steht im gespeicherten Ausdruck. Wir fügen keine Polemik und kein Bild hinzu. Eine Hadithnummer zum Vorzug der Sūrah wird nicht ergänzt."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Allah ist einzig.",
     "ageText": {
       "4-5": {
         "goal": "Allah ist einzig.",
-        "intro": "Allah ist einzig. Allah ist der, auf den man angewiesen ist. Stell dir vor: Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Heute üben wir: Wir wiederholen den deutschen Sinn und erzeugen keine Rezitation. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Allah ist einzig. Allah ist der, auf den man angewiesen ist. Stell dir vor: Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Heute üben wir: Wir wiederholen den deutschen Sinn und erzeugen keine Rezitation.",
         "lines": [
           "Allah ist einzig.",
           "Allah ist der, auf den man angewiesen ist.",
@@ -18146,7 +18146,7 @@ const additions=
         ],
         "situation": "Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah.",
         "practice": "Wir wiederholen den deutschen Sinn und erzeugen keine Rezitation.",
-        "summary": "Allah ist einzig. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Allah ist einzig.",
         "audioScript": "Keinen geschaffenen Dingen göttliche Macht zuschreiben. Allah ist einzig. Allah ist der, auf den man angewiesen ist. Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Wir wiederholen den deutschen Sinn und erzeugen keine Rezitation."
       },
       "6-8": {
@@ -18156,7 +18156,7 @@ const additions=
           "Qurʾān 112:1 ist die gelesene Stelle.",
           "Allah ist der, auf den man angewiesen ist.",
           "Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1984. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 112:1. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1984. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 112:1. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -18220,7 +18220,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -18268,7 +18268,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -18337,12 +18337,12 @@ const additions=
       "scientificApproval": false,
       "note": "Der Vers spricht in seinem Anfang von einer Zusage der Kinder Israels. Wir machen daraus keine Aussage über heutige Mitschüler. Für die Stunde nehmen wir das gute Wort und das Gute zu den Eltern, so wie es der Ausdruck trägt."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Zum Glauben gehört auch ein gutes Wort zu den Menschen.",
     "ageText": {
       "4-5": {
         "goal": "Zum Glauben gehört auch ein gutes Wort zu den Menschen.",
-        "intro": "Zum Glauben gehört auch ein gutes Wort zu den Menschen. Der lange Vers erinnert an eine Zusage, niemandem außer Allah zu dienen, den Eltern gut zu sein und zu den Menschen Gutes zu sagen. Stell dir vor: Ein Kind begegnet einer Person an der Tür und sagt einen freundlichen Gruß statt wegzuschauen. Heute üben wir: Wir üben ein gutes Wort und eine kleine Hilfe. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Zum Glauben gehört auch ein gutes Wort zu den Menschen. Der lange Vers erinnert an eine Zusage, niemandem außer Allah zu dienen, den Eltern gut zu sein und zu den Menschen Gutes zu sagen. Stell dir vor: Ein Kind begegnet einer Person an der Tür und sagt einen freundlichen Gruß statt wegzuschauen. Heute üben wir: Wir üben ein gutes Wort und eine kleine Hilfe.",
         "lines": [
           "Zum Glauben gehört auch ein gutes Wort zu den Menschen.",
           "Der lange Vers erinnert an eine Zusage, niemandem außer Allah zu dienen, den Eltern gut zu sein und zu den Menschen Gutes zu sagen.",
@@ -18363,7 +18363,7 @@ const additions=
         ],
         "situation": "Ein Kind begegnet einer Person an der Tür und sagt einen freundlichen Gruß statt wegzuschauen.",
         "practice": "Wir üben ein gutes Wort und eine kleine Hilfe.",
-        "summary": "Zum Glauben gehört auch ein gutes Wort zu den Menschen. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Zum Glauben gehört auch ein gutes Wort zu den Menschen.",
         "audioScript": "Glaube und gute Worte. Zum Glauben gehört auch ein gutes Wort zu den Menschen. Der lange Vers erinnert an eine Zusage, niemandem außer Allah zu dienen, den Eltern gut zu sein und zu den Menschen Gutes zu sagen. Ein Kind begegnet einer Person an der Tür und sagt einen freundlichen Gruß statt wegzuschauen. Wir üben ein gutes Wort und eine kleine Hilfe."
       },
       "6-8": {
@@ -18373,7 +18373,7 @@ const additions=
           "Qurʾān 2:83 ist die gelesene Stelle.",
           "Der lange Vers erinnert an eine Zusage, niemandem außer Allah zu dienen, den Eltern gut zu sein und zu den Menschen Gutes zu sagen.",
           "Ein Kind begegnet einer Person an der Tür und sagt einen freundlichen Gruß statt wegzuschauen.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/107. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:83. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/107. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:83. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -18437,7 +18437,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -18485,7 +18485,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -18555,12 +18555,12 @@ const additions=
       "note": "Dieselbe Fundstelle wird zum dritten Mal verwendet, mit dem Lernziel der Grenze. Der Vers befiehlt nicht, jede Bitte zu erfüllen. Die Sicherheitsgrenze ist Unterricht und kein zusätzlicher Qurʾān-Satz. Dieselbe gelesene Fundstelle wurde schon in Slot 149 mit einem anderen Lernziel verwendet.",
       "sameLocusAsSlot": 149
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Wir helfen, aber nicht, wenn die Hilfe uns oder andere in Gefahr bringt.",
     "ageText": {
       "4-5": {
         "goal": "Wir helfen, aber nicht, wenn die Hilfe uns oder andere in Gefahr bringt.",
-        "intro": "Wir helfen, aber nicht, wenn die Hilfe uns oder andere in Gefahr bringt. Dieselbe Stelle über die gegenseitige Hilfe bei der Rechtschaffenheit gilt auch hier. Stell dir vor: Jemand bittet ein Kind, auf eine hohe Mauer zu steigen, um einen Ball zu holen. Das Kind sagt Nein und holt einen Erwachsenen. Heute üben wir: Wir üben: Ich helfe dir bei dem, was sicher ist. Bei dem anderen hole ich jemanden. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Wir helfen, aber nicht, wenn die Hilfe uns oder andere in Gefahr bringt. Dieselbe Stelle über die gegenseitige Hilfe bei der Rechtschaffenheit gilt auch hier. Stell dir vor: Jemand bittet ein Kind, auf eine hohe Mauer zu steigen, um einen Ball zu holen. Das Kind sagt Nein und holt einen Erwachsenen. Heute üben wir: Wir üben: Ich helfe dir bei dem, was sicher ist. Bei dem anderen hole ich jemanden.",
         "lines": [
           "Wir helfen, aber nicht, wenn die Hilfe uns oder andere in Gefahr bringt.",
           "Dieselbe Stelle über die gegenseitige Hilfe bei der Rechtschaffenheit gilt auch hier.",
@@ -18581,7 +18581,7 @@ const additions=
         ],
         "situation": "Jemand bittet ein Kind, auf eine hohe Mauer zu steigen, um einen Ball zu holen. Das Kind sagt Nein und holt einen Erwachsenen.",
         "practice": "Wir üben: Ich helfe dir bei dem, was sicher ist. Bei dem anderen hole ich jemanden.",
-        "summary": "Wir helfen, aber nicht, wenn die Hilfe uns oder andere in Gefahr bringt. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Wir helfen, aber nicht, wenn die Hilfe uns oder andere in Gefahr bringt.",
         "audioScript": "Hilfsbereitschaft ohne Druck. Wir helfen, aber nicht, wenn die Hilfe uns oder andere in Gefahr bringt. Dieselbe Stelle über die gegenseitige Hilfe bei der Rechtschaffenheit gilt auch hier. Jemand bittet ein Kind, auf eine hohe Mauer zu steigen, um einen Ball zu holen. Das Kind sagt Nein und holt einen Erwachsenen. Wir üben: Ich helfe dir bei dem, was sicher ist. Bei dem anderen hole ich jemanden."
       },
       "6-8": {
@@ -18591,7 +18591,7 @@ const additions=
           "Qurʾān 5:2 ist die gelesene Stelle.",
           "Dieselbe Stelle über die gegenseitige Hilfe bei der Rechtschaffenheit gilt auch hier.",
           "Jemand bittet ein Kind, auf eine hohe Mauer zu steigen, um einen Ball zu holen. Das Kind sagt Nein und holt einen Erwachsenen.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/372. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 5:2. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/372. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 5:2. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -18655,7 +18655,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -18703,7 +18703,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -18772,12 +18772,12 @@ const additions=
       "scientificApproval": false,
       "note": "Der Vers spricht vom Vortrag des Qurʾān, nicht von jeder Schulstunde. Das ruhige Zuhören im Unterricht nennen wir eine passende Gewohnheit, nicht den Wortlaut des Verses."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Wenn der Qurʾān gelesen wird, hören wir zu und schweigen.",
     "ageText": {
       "4-5": {
         "goal": "Wenn der Qurʾān gelesen wird, hören wir zu und schweigen.",
-        "intro": "Wenn der Qurʾān gelesen wird, hören wir zu und schweigen. Der Vers sagt: Wenn der Qurʾān vorgetragen wird, hört ihm zu und seid still, auf dass ihr Barmherzigkeit erlangt. Stell dir vor: Jemand liest einen kurzen deutschen Satz. Die anderen unterbrechen nicht und heben danach die Hand. Heute üben wir: Wir üben das Stillsitzen während des Satzes und das Fragen danach. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Wenn der Qurʾān gelesen wird, hören wir zu und schweigen. Der Vers sagt: Wenn der Qurʾān vorgetragen wird, hört ihm zu und seid still, auf dass ihr Barmherzigkeit erlangt. Stell dir vor: Jemand liest einen kurzen deutschen Satz. Die anderen unterbrechen nicht und heben danach die Hand. Heute üben wir: Wir üben das Stillsitzen während des Satzes und das Fragen danach.",
         "lines": [
           "Wenn der Qurʾān gelesen wird, hören wir zu und schweigen.",
           "Der Vers sagt: Wenn der Qurʾān vorgetragen wird, hört ihm zu und seid still, auf dass ihr Barmherzigkeit erlangt.",
@@ -18798,7 +18798,7 @@ const additions=
         ],
         "situation": "Jemand liest einen kurzen deutschen Satz. Die anderen unterbrechen nicht und heben danach die Hand.",
         "practice": "Wir üben das Stillsitzen während des Satzes und das Fragen danach.",
-        "summary": "Wenn der Qurʾān gelesen wird, hören wir zu und schweigen. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Wenn der Qurʾān gelesen wird, hören wir zu und schweigen.",
         "audioScript": "Beim Unterricht aufmerksam sein. Wenn der Qurʾān gelesen wird, hören wir zu und schweigen. Der Vers sagt: Wenn der Qurʾān vorgetragen wird, hört ihm zu und seid still, auf dass ihr Barmherzigkeit erlangt. Jemand liest einen kurzen deutschen Satz. Die anderen unterbrechen nicht und heben danach die Hand. Wir üben das Stillsitzen während des Satzes und das Fragen danach."
       },
       "6-8": {
@@ -18808,7 +18808,7 @@ const additions=
           "Qurʾān 7:204 ist die gelesene Stelle.",
           "Der Vers sagt: Wenn der Qurʾān vorgetragen wird, hört ihm zu und seid still, auf dass ihr Barmherzigkeit erlangt.",
           "Jemand liest einen kurzen deutschen Satz. Die anderen unterbrechen nicht und heben danach die Hand.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/589. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 7:204. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/589. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 7:204. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -18872,7 +18872,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -18920,7 +18920,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -18990,12 +18990,12 @@ const additions=
       "note": "Dieselbe Fundstelle, anderes Lernziel: das schwere Gefühl. Wir malen keine Hölle und kein Gericht. Die vertraute Person ist die Schutzregel und kein Hadith. Dieselbe gelesene Fundstelle wurde schon in Slot 129 mit einem anderen Lernziel verwendet.",
       "sameLocusAsSlot": 129
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Wenn uns ein Fehler bedrückt, sagen wir ihn einer vertrauten Person und verzweifeln nicht an Allahs Barmherzigkeit.",
     "ageText": {
       "4-5": {
         "goal": "Wenn uns ein Fehler bedrückt, sagen wir ihn einer vertrauten Person und verzweifeln nicht an Allahs Barmherzigkeit.",
-        "intro": "Wenn uns ein Fehler bedrückt, sagen wir ihn einer vertrauten Person und verzweifeln nicht an Allahs Barmherzigkeit. Dieselbe Stelle wie in der Reuestunde ruft dazu auf, nicht an Allahs Barmherzigkeit zu verzweifeln. Stell dir vor: Ein Kind hat gelogen und fühlt sich schwer. Es sagt es der Mutter oder dem Vater. Heute üben wir: Wir üben, den Fehler mit einem Satz zu sagen, ohne eine Strafszene. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Wenn uns ein Fehler bedrückt, sagen wir ihn einer vertrauten Person und verzweifeln nicht an Allahs Barmherzigkeit. Dieselbe Stelle wie in der Reuestunde ruft dazu auf, nicht an Allahs Barmherzigkeit zu verzweifeln. Stell dir vor: Ein Kind hat gelogen und fühlt sich schwer. Es sagt es der Mutter oder dem Vater. Heute üben wir: Wir üben, den Fehler mit einem Satz zu sagen, ohne eine Strafszene.",
         "lines": [
           "Wenn uns ein Fehler bedrückt, sagen wir ihn einer vertrauten Person und verzweifeln nicht an Allahs Barmherzigkeit.",
           "Dieselbe Stelle wie in der Reuestunde ruft dazu auf, nicht an Allahs Barmherzigkeit zu verzweifeln.",
@@ -19016,7 +19016,7 @@ const additions=
         ],
         "situation": "Ein Kind hat gelogen und fühlt sich schwer. Es sagt es der Mutter oder dem Vater.",
         "practice": "Wir üben, den Fehler mit einem Satz zu sagen, ohne eine Strafszene.",
-        "summary": "Wenn uns ein Fehler bedrückt, sagen wir ihn einer vertrauten Person und verzweifeln nicht an Allahs Barmherzigkeit. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Wenn uns ein Fehler bedrückt, sagen wir ihn einer vertrauten Person und verzweifeln nicht an Allahs Barmherzigkeit.",
         "audioScript": "Schuldgefühle ohne Angstbilder besprechen. Wenn uns ein Fehler bedrückt, sagen wir ihn einer vertrauten Person und verzweifeln nicht an Allahs Barmherzigkeit. Dieselbe Stelle wie in der Reuestunde ruft dazu auf, nicht an Allahs Barmherzigkeit zu verzweifeln. Ein Kind hat gelogen und fühlt sich schwer. Es sagt es der Mutter oder dem Vater. Wir üben, den Fehler mit einem Satz zu sagen, ohne eine Strafszene."
       },
       "6-8": {
@@ -19026,7 +19026,7 @@ const additions=
           "Qurʾān 39:53 ist die gelesene Stelle.",
           "Dieselbe Stelle wie in der Reuestunde ruft dazu auf, nicht an Allahs Barmherzigkeit zu verzweifeln.",
           "Ein Kind hat gelogen und fühlt sich schwer. Es sagt es der Mutter oder dem Vater.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1629. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 39:53. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1629. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 39:53. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -19090,7 +19090,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -19138,7 +19138,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -19307,7 +19307,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -19355,7 +19355,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -19425,12 +19425,12 @@ const additions=
       "note": "Dieselbe Fundstelle trägt hier das Paar aus Tun und Vertrauen. Wir benutzen keinen Vers über eine Gruppe, die sich selbst ändert, weil wir ihn nicht neu gelesen haben. Dieselbe gelesene Fundstelle wurde schon in Slot 176 mit einem anderen Lernziel verwendet.",
       "sameLocusAsSlot": 176
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Wir strengen uns an und vertrauen dabei auf Allah.",
     "ageText": {
       "4-5": {
         "goal": "Wir strengen uns an und vertrauen dabei auf Allah.",
-        "intro": "Wir strengen uns an und vertrauen dabei auf Allah. Dieselbe Stelle wie in der Stunde über Bemühen und Vertrauen sagt, Hilfe in Geduld und Gebet zu suchen. Stell dir vor: Ein Kind übt ein Wort zehnmal langsam und bittet Allah danach um Segen, statt die Übung wegzulassen. Heute üben wir: Wir tun die Übung wirklich und sprechen danach eine kurze Bitte. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Wir strengen uns an und vertrauen dabei auf Allah. Dieselbe Stelle wie in der Stunde über Bemühen und Vertrauen sagt, Hilfe in Geduld und Gebet zu suchen. Stell dir vor: Ein Kind übt ein Wort zehnmal langsam und bittet Allah danach um Segen, statt die Übung wegzulassen. Heute üben wir: Wir tun die Übung wirklich und sprechen danach eine kurze Bitte.",
         "lines": [
           "Wir strengen uns an und vertrauen dabei auf Allah.",
           "Dieselbe Stelle wie in der Stunde über Bemühen und Vertrauen sagt, Hilfe in Geduld und Gebet zu suchen.",
@@ -19451,7 +19451,7 @@ const additions=
         ],
         "situation": "Ein Kind übt ein Wort zehnmal langsam und bittet Allah danach um Segen, statt die Übung wegzulassen.",
         "practice": "Wir tun die Übung wirklich und sprechen danach eine kurze Bitte.",
-        "summary": "Wir strengen uns an und vertrauen dabei auf Allah. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Wir strengen uns an und vertrauen dabei auf Allah.",
         "audioScript": "Allah vertrauen und sich bemühen. Wir strengen uns an und vertrauen dabei auf Allah. Dieselbe Stelle wie in der Stunde über Bemühen und Vertrauen sagt, Hilfe in Geduld und Gebet zu suchen. Ein Kind übt ein Wort zehnmal langsam und bittet Allah danach um Segen, statt die Übung wegzulassen. Wir tun die Übung wirklich und sprechen danach eine kurze Bitte."
       },
       "6-8": {
@@ -19461,7 +19461,7 @@ const additions=
           "Qurʾān 2:45 ist die gelesene Stelle.",
           "Dieselbe Stelle wie in der Stunde über Bemühen und Vertrauen sagt, Hilfe in Geduld und Gebet zu suchen.",
           "Ein Kind übt ein Wort zehnmal langsam und bittet Allah danach um Segen, statt die Übung wegzulassen.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/85. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:45. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/85. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:45. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -19525,7 +19525,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -19573,7 +19573,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -19642,12 +19642,12 @@ const additions=
       "scientificApproval": false,
       "note": "Der Vers nennt die Leute der Erinnerung. Wen das heute im Einzelnen ist, legen wir nicht mit einem neuen Rechtsurteil fest. Für die Stunde ist es die Lehrperson und die Eltern. Wir erfinden keine Antwort, die der Vers nicht gibt."
     },
-    "hint": "Wir erfinden keine zusätzliche Geschichte.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Eine ehrliche Frage zum Glauben darf gestellt werden.",
     "ageText": {
       "4-5": {
         "goal": "Eine ehrliche Frage zum Glauben darf gestellt werden.",
-        "intro": "Eine ehrliche Frage zum Glauben darf gestellt werden. Der Vers sagt, dass vor dem Propheten nur Männer gesandt wurden, denen eingegeben wird, und: Fragt die Leute der Erinnerung, wenn ihr nicht wisst. Stell dir vor: Ein Kind versteht ein Wort nicht und fragt die Lehrperson, statt eine eigene Bedeutung zu erfinden. Heute üben wir: Wir üben eine höfliche Frage und das Warten auf die Antwort. Wir erfinden keine zusätzliche Geschichte.",
+        "intro": "Eine ehrliche Frage zum Glauben darf gestellt werden. Der Vers sagt, dass vor dem Propheten nur Männer gesandt wurden, denen eingegeben wird, und: Fragt die Leute der Erinnerung, wenn ihr nicht wisst. Stell dir vor: Ein Kind versteht ein Wort nicht und fragt die Lehrperson, statt eine eigene Bedeutung zu erfinden. Heute üben wir: Wir üben eine höfliche Frage und das Warten auf die Antwort.",
         "lines": [
           "Eine ehrliche Frage zum Glauben darf gestellt werden.",
           "Der Vers sagt, dass vor dem Propheten nur Männer gesandt wurden, denen eingegeben wird, und: Fragt die Leute der Erinnerung, wenn ihr nicht wisst.",
@@ -19668,7 +19668,7 @@ const additions=
         ],
         "situation": "Ein Kind versteht ein Wort nicht und fragt die Lehrperson, statt eine eigene Bedeutung zu erfinden.",
         "practice": "Wir üben eine höfliche Frage und das Warten auf die Antwort.",
-        "summary": "Eine ehrliche Frage zum Glauben darf gestellt werden. Wir erfinden keine zusätzliche Geschichte.",
+        "summary": "Eine ehrliche Frage zum Glauben darf gestellt werden.",
         "audioScript": "Fragen zum Īmān stellen. Eine ehrliche Frage zum Glauben darf gestellt werden. Der Vers sagt, dass vor dem Propheten nur Männer gesandt wurden, denen eingegeben wird, und: Fragt die Leute der Erinnerung, wenn ihr nicht wisst. Ein Kind versteht ein Wort nicht und fragt die Lehrperson, statt eine eigene Bedeutung zu erfinden. Wir üben eine höfliche Frage und das Warten auf die Antwort."
       },
       "6-8": {
@@ -19678,7 +19678,7 @@ const additions=
           "Qurʾān 21:7 ist die gelesene Stelle.",
           "Der Vers sagt, dass vor dem Propheten nur Männer gesandt wurden, denen eingegeben wird, und: Fragt die Leute der Erinnerung, wenn ihr nicht wisst.",
           "Ein Kind versteht ein Wort nicht und fragt die Lehrperson, statt eine eigene Bedeutung zu erfinden.",
-          "Wir erfinden keine zusätzliche Geschichte."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1163. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 21:7. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1163. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 21:7. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -19742,7 +19742,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -19790,7 +19790,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -19859,12 +19859,12 @@ const additions=
       "scientificApproval": false,
       "note": "Ein anderer Vers über das Bezeugen gegen die eigenen Leute wurde gelesen, aber diese Stunde bleibt bei 33:70. Mut heißt nicht, jemanden bloßzustellen."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Die Wahrheit sagen wir höflich, auch wenn sie unbequem ist.",
     "ageText": {
       "4-5": {
         "goal": "Die Wahrheit sagen wir höflich, auch wenn sie unbequem ist.",
-        "intro": "Die Wahrheit sagen wir höflich, auch wenn sie unbequem ist. Der Vers fordert die Glaubenden auf, Allah zu fürchten und ein gerades, treffendes Wort zu sagen. Stell dir vor: Ein Kind hat den Stift genommen und sagt das, statt ein anderes Kind zu beschuldigen. Heute üben wir: Wir üben einen wahren Satz ohne ein lautes Vorführen. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Die Wahrheit sagen wir höflich, auch wenn sie unbequem ist. Der Vers fordert die Glaubenden auf, Allah zu fürchten und ein gerades, treffendes Wort zu sagen. Stell dir vor: Ein Kind hat den Stift genommen und sagt das, statt ein anderes Kind zu beschuldigen. Heute üben wir: Wir üben einen wahren Satz ohne ein lautes Vorführen.",
         "lines": [
           "Die Wahrheit sagen wir höflich, auch wenn sie unbequem ist.",
           "Der Vers fordert die Glaubenden auf, Allah zu fürchten und ein gerades, treffendes Wort zu sagen.",
@@ -19885,7 +19885,7 @@ const additions=
         ],
         "situation": "Ein Kind hat den Stift genommen und sagt das, statt ein anderes Kind zu beschuldigen.",
         "practice": "Wir üben einen wahren Satz ohne ein lautes Vorführen.",
-        "summary": "Die Wahrheit sagen wir höflich, auch wenn sie unbequem ist. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Die Wahrheit sagen wir höflich, auch wenn sie unbequem ist.",
         "audioScript": "Mut zur Wahrheit. Die Wahrheit sagen wir höflich, auch wenn sie unbequem ist. Der Vers fordert die Glaubenden auf, Allah zu fürchten und ein gerades, treffendes Wort zu sagen. Ein Kind hat den Stift genommen und sagt das, statt ein anderes Kind zu beschuldigen. Wir üben einen wahren Satz ohne ein lautes Vorführen."
       },
       "6-8": {
@@ -19895,7 +19895,7 @@ const additions=
           "Qurʾān 33:70 ist die gelesene Stelle.",
           "Der Vers fordert die Glaubenden auf, Allah zu fürchten und ein gerades, treffendes Wort zu sagen.",
           "Ein Kind hat den Stift genommen und sagt das, statt ein anderes Kind zu beschuldigen.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1508. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 33:70. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1508. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 33:70. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -19959,7 +19959,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -20007,7 +20007,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -20076,12 +20076,12 @@ const additions=
       "scientificApproval": false,
       "note": "Der Vers nennt die Eltern im Alter. Wir ziehen andere ältere Menschen als gute Gewohnheit mit ein und nennen das nicht den Wortlaut. Die Bittformel des nächsten Verses gehört in die andere Stunde."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Mit älteren Menschen sprechen wir ruhig und freundlich.",
     "ageText": {
       "4-5": {
         "goal": "Mit älteren Menschen sprechen wir ruhig und freundlich.",
-        "intro": "Mit älteren Menschen sprechen wir ruhig und freundlich. Der Vers befiehlt, nur Allah zu dienen und den Eltern gut zu sein. Stell dir vor: Die Großmutter fragt etwas. Das Kind antwortet leise und schaut sie an. Heute üben wir: Wir üben einen freundlichen Satz und lassen das genervte Stöhnen weg. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Mit älteren Menschen sprechen wir ruhig und freundlich. Der Vers befiehlt, nur Allah zu dienen und den Eltern gut zu sein. Stell dir vor: Die Großmutter fragt etwas. Das Kind antwortet leise und schaut sie an. Heute üben wir: Wir üben einen freundlichen Satz und lassen das genervte Stöhnen weg.",
         "lines": [
           "Mit älteren Menschen sprechen wir ruhig und freundlich.",
           "Der Vers befiehlt, nur Allah zu dienen und den Eltern gut zu sein.",
@@ -20102,7 +20102,7 @@ const additions=
         ],
         "situation": "Die Großmutter fragt etwas. Das Kind antwortet leise und schaut sie an.",
         "practice": "Wir üben einen freundlichen Satz und lassen das genervte Stöhnen weg.",
-        "summary": "Mit älteren Menschen sprechen wir ruhig und freundlich. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Mit älteren Menschen sprechen wir ruhig und freundlich.",
         "audioScript": "Ältere respektvoll ansprechen. Mit älteren Menschen sprechen wir ruhig und freundlich. Der Vers befiehlt, nur Allah zu dienen und den Eltern gut zu sein. Die Großmutter fragt etwas. Das Kind antwortet leise und schaut sie an. Wir üben einen freundlichen Satz und lassen das genervte Stöhnen weg."
       },
       "6-8": {
@@ -20112,7 +20112,7 @@ const additions=
           "Qurʾān 17:23 ist die gelesene Stelle.",
           "Der Vers befiehlt, nur Allah zu dienen und den Eltern gut zu sein.",
           "Die Großmutter fragt etwas. Das Kind antwortet leise und schaut sie an.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1005. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:23. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1005. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:23. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -20176,7 +20176,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -20224,7 +20224,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -20293,12 +20293,12 @@ const additions=
       "scientificApproval": false,
       "note": "Der Regensatz wird nicht als Versprechen für das Wetter der Kinderstunde gelehrt. Eine feste Anzahl von Bitten steht hier nicht. Wir ergänzen sie nicht."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Um Vergebung zu bitten heißt, Allah um Sein Vergeben zu bitten.",
     "ageText": {
       "4-5": {
         "goal": "Um Vergebung zu bitten heißt, Allah um Sein Vergeben zu bitten.",
-        "intro": "Um Vergebung zu bitten heißt, Allah um Sein Vergeben zu bitten. Der Vers sagt: So habe ich gesagt: Bittet euren Herrn um Vergebung. Stell dir vor: Ein Kind sagt am Abend: Mein Herr, vergib mir. Es muss keine lange Liste aufsagen. Heute üben wir: Wir üben den deutschen Sinn einmal, freiwillig. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Um Vergebung zu bitten heißt, Allah um Sein Vergeben zu bitten. Der Vers sagt: So habe ich gesagt: Bittet euren Herrn um Vergebung. Stell dir vor: Ein Kind sagt am Abend: Mein Herr, vergib mir. Es muss keine lange Liste aufsagen. Heute üben wir: Wir üben den deutschen Sinn einmal, freiwillig.",
         "lines": [
           "Um Vergebung zu bitten heißt, Allah um Sein Vergeben zu bitten.",
           "Der Vers sagt: So habe ich gesagt: Bittet euren Herrn um Vergebung.",
@@ -20319,7 +20319,7 @@ const additions=
         ],
         "situation": "Ein Kind sagt am Abend: Mein Herr, vergib mir. Es muss keine lange Liste aufsagen.",
         "practice": "Wir üben den deutschen Sinn einmal, freiwillig.",
-        "summary": "Um Vergebung zu bitten heißt, Allah um Sein Vergeben zu bitten. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Um Vergebung zu bitten heißt, Allah um Sein Vergeben zu bitten.",
         "audioScript": "Regelmäßig um Vergebung bitten. Um Vergebung zu bitten heißt, Allah um Sein Vergeben zu bitten. Der Vers sagt: So habe ich gesagt: Bittet euren Herrn um Vergebung. Ein Kind sagt am Abend: Mein Herr, vergib mir. Es muss keine lange Liste aufsagen. Wir üben den deutschen Sinn einmal, freiwillig."
       },
       "6-8": {
@@ -20329,7 +20329,7 @@ const additions=
           "Qurʾān 71:10 ist die gelesene Stelle.",
           "Der Vers sagt: So habe ich gesagt: Bittet euren Herrn um Vergebung.",
           "Ein Kind sagt am Abend: Mein Herr, vergib mir. Es muss keine lange Liste aufsagen.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1896. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 71:10. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1896. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 71:10. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -20393,7 +20393,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -20441,7 +20441,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -20610,7 +20610,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -20658,7 +20658,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -20728,17 +20728,17 @@ const additions=
       "note": "Dieselbe Fundstelle, anderes Lernziel: das eigene Erklären. Wir erzeugen keine Rezitation und keine Zeichnung. Dieselbe gelesene Fundstelle wurde schon in Slot 181 mit einem anderen Lernziel verwendet.",
       "sameLocusAsSlot": 181
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Wir erklären mit eigenen einfachen Worten, dass Allah einzig ist.",
     "ageText": {
       "4-5": {
         "goal": "Wir erklären mit eigenen einfachen Worten, dass Allah einzig ist.",
-        "intro": "Wir erklären mit eigenen einfachen Worten, dass Allah einzig ist. Wir erklären mit eigenen einfachen Worten, dass Allah einzig ist. Stell dir vor: Ein Kind sagt den Sinn mit einem eigenen deutschen Satz, ohne ein Bild von Allah zu malen. Heute üben wir: Wir hören zwei Sätze der Kinder und verbessern nur, wenn jemand ein Geschöpf zu Allah macht. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Wir erklären mit eigenen einfachen Worten, dass Allah einzig ist. Wir erklären mit eigenen einfachen Worten, dass Allah einzig ist. Stell dir vor: Ein Kind sagt den Sinn mit einem eigenen deutschen Satz, ohne ein Bild von Allah zu malen. Heute üben wir: Wir hören zwei Sätze der Kinder und verbessern nur, wenn jemand ein Geschöpf zu Allah macht.",
         "lines": [
           "Wir erklären mit eigenen einfachen Worten, dass Allah einzig ist.",
           "Ein Kind sagt den Sinn mit einem eigenen deutschen Satz, ohne ein Bild von Allah zu malen.",
           "Wir hören zwei Sätze der Kinder und verbessern nur, wenn jemand ein Geschöpf zu Allah macht.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1984. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 112:1. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1984. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 112:1. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -20754,8 +20754,8 @@ const additions=
         ],
         "situation": "Ein Kind sagt den Sinn mit einem eigenen deutschen Satz, ohne ein Bild von Allah zu malen.",
         "practice": "Wir hören zwei Sätze der Kinder und verbessern nur, wenn jemand ein Geschöpf zu Allah macht.",
-        "summary": "Wir erklären mit eigenen einfachen Worten, dass Allah einzig ist. Die arabischen Worte spricht die Lehrperson.",
-        "audioScript": "Tawḥīd mit eigenen Worten erklären. Wir erklären mit eigenen einfachen Worten, dass Allah einzig ist. Ein Kind sagt den Sinn mit einem eigenen deutschen Satz, ohne ein Bild von Allah zu malen. Wir hören zwei Sätze der Kinder und verbessern nur, wenn jemand ein Geschöpf zu Allah macht. Die arabischen Worte spricht die Lehrperson."
+        "summary": "Wir erklären mit eigenen einfachen Worten, dass Allah einzig ist.",
+        "audioScript": "Tawḥīd mit eigenen Worten erklären. Wir erklären mit eigenen einfachen Worten, dass Allah einzig ist. Ein Kind sagt den Sinn mit einem eigenen deutschen Satz, ohne ein Bild von Allah zu malen. Wir hören zwei Sätze der Kinder und verbessern nur, wenn jemand ein Geschöpf zu Allah macht."
       },
       "6-8": {
         "goal": "Wir erklären mit eigenen einfachen Worten, dass Allah einzig ist.",
@@ -20764,7 +20764,7 @@ const additions=
           "Qurʾān 112:1 ist die gelesene Stelle.",
           "Wir erklären mit eigenen einfachen Worten, dass Allah einzig ist.",
           "Ein Kind sagt den Sinn mit einem eigenen deutschen Satz, ohne ein Bild von Allah zu malen.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1984. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 112:1. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1984. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 112:1. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -20828,7 +20828,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -20876,7 +20876,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -20906,7 +20906,7 @@ const additions=
     ],
     "practice": "Wir hören zwei Sätze der Kinder und verbessern nur, wenn jemand ein Geschöpf zu Allah macht.",
     "summary": "Wir erklären mit eigenen einfachen Worten, dass Allah einzig ist. Wir erklären mit eigenen einfachen Worten, dass Allah einzig ist.",
-    "audioScript": "Tawḥīd mit eigenen Worten erklären. Wir erklären mit eigenen einfachen Worten, dass Allah einzig ist. Ein Kind sagt den Sinn mit einem eigenen deutschen Satz, ohne ein Bild von Allah zu malen. Wir hören zwei Sätze der Kinder und verbessern nur, wenn jemand ein Geschöpf zu Allah macht. Die arabischen Worte spricht die Lehrperson.",
+    "audioScript": "Tawḥīd mit eigenen Worten erklären. Wir erklären mit eigenen einfachen Worten, dass Allah einzig ist. Ein Kind sagt den Sinn mit einem eigenen deutschen Satz, ohne ein Bild von Allah zu malen. Wir hören zwei Sätze der Kinder und verbessern nur, wenn jemand ein Geschöpf zu Allah macht.",
     "voiceApproved": false
   },
   "iman-sechs-glaubenssaeulen": {
@@ -20945,12 +20945,12 @@ const additions=
       "scientificApproval": false,
       "note": "Der Hadith, in dem Ǧibrīl nach dem Glauben fragt, steht in der älteren Sammlung mit einer Nummer, die in diesem Lauf nicht erneut auf Dorar gelesen wurde. Wir geben die Nummer nicht als neue Prüfung aus. Der Jüngste Tag steht in einem anderen, schon gespeicherten Vers, nicht in diesem."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Der Vers nennt den Glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten.",
     "ageText": {
       "4-5": {
         "goal": "Der Vers nennt den Glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten.",
-        "intro": "Der Vers nennt den Glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten. Der Vers sagt, dass der Gesandte glaubt, was zu ihm herabgesandt wurde, und die Glaubenden, und dass jeder an Allah, Seine Engel, Seine Bücher und Seine Gesandten glaubt und zwischen keinem Seiner. Stell dir vor: Wir legen vier Karten für die vier genannten Worte. Zwei weitere Karten, Jüngster Tag und Bestimmung, legen wir daneben und sagen: Die stehen in diesem Vers nicht. Heute üben wir: Wir wiederholen nur die vier Worte des Verses als gelesen und nennen die Sechszahl als bekannte Unterrichtsreihe, die hier nicht neu belegt wurde. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Der Vers nennt den Glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten. Der Vers sagt, dass der Gesandte glaubt, was zu ihm herabgesandt wurde, und die Glaubenden, und dass jeder an Allah, Seine Engel, Seine Bücher und Seine Gesandten glaubt und zwischen keinem Seiner. Stell dir vor: Wir legen vier Karten für die vier genannten Worte. Zwei weitere Karten, Jüngster Tag und Bestimmung, legen wir daneben und sagen: Die stehen in diesem Vers nicht. Heute üben wir: Wir wiederholen nur die vier Worte des Verses als gelesen und nennen die Sechszahl als bekannte Unterrichtsreihe, die hier nicht neu belegt wurde.",
         "lines": [
           "Der Vers nennt den Glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten.",
           "Der Vers sagt, dass der Gesandte glaubt, was zu ihm herabgesandt wurde, und die Glaubenden, und dass jeder an Allah, Seine Engel, Seine Bücher und Seine Gesandten glaubt.",
@@ -20971,7 +20971,7 @@ const additions=
         ],
         "situation": "Wir legen vier Karten für die vier genannten Worte. Zwei weitere Karten, Jüngster Tag und Bestimmung, legen wir daneben und sagen: Die stehen in diesem Vers nicht.",
         "practice": "Wir wiederholen nur die vier Worte des Verses als gelesen und nennen die Sechszahl als bekannte Unterrichtsreihe, die hier nicht neu belegt wurde.",
-        "summary": "Der Vers nennt den Glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Der Vers nennt den Glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten.",
         "audioScript": "Die sechs Glaubenssäulen wiederholen. Der Vers nennt den Glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten. Der Vers sagt, dass der Gesandte glaubt, was zu ihm herabgesandt wurde, und die Glaubenden, und dass jeder an Allah, Seine Engel, Seine Bücher und Seine Gesandten glaubt. Wir legen vier Karten für die vier genannten Worte. Zwei weitere Karten, Jüngster Tag und Bestimmung, legen wir daneben und sagen: Die stehen in diesem Vers nicht. Wir wiederholen nur die vier Worte des Verses als gelesen und nennen die Sechszahl als bekannte Unterrichtsreihe, die hier nicht neu belegt wurde."
       },
       "6-8": {
@@ -20981,7 +20981,7 @@ const additions=
           "Qurʾān 2:285 ist die gelesene Stelle.",
           "Der Vers sagt, dass der Gesandte glaubt, was zu ihm herabgesandt wurde, und die Glaubenden, und dass jeder an Allah, Seine Engel, Seine Bücher und Seine Gesandten glaubt.",
           "Wir legen vier Karten für die vier genannten Worte. Zwei weitere Karten, Jüngster Tag und Bestimmung, legen wir daneben und sagen: Die stehen in diesem Vers nicht.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/233. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:285. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/233. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:285. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -21045,7 +21045,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -21093,7 +21093,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -21263,7 +21263,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -21311,7 +21311,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -21381,12 +21381,12 @@ const additions=
       "note": "Der Vers beschreibt nicht ein Altersprogramm. Die behutsame Hilfe ist die Anwendung. Dieselbe Fundstelle wurde schon für Versöhnung und Mitfreude verwendet. Dieselbe gelesene Fundstelle wurde schon in Slot 170 mit einem anderen Lernziel verwendet.",
       "sameLocusAsSlot": 170
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Mit jüngeren Kindern sprechen wir freundlich und helfen behutsam.",
     "ageText": {
       "4-5": {
         "goal": "Mit jüngeren Kindern sprechen wir freundlich und helfen behutsam.",
-        "intro": "Mit jüngeren Kindern sprechen wir freundlich und helfen behutsam. Dieselbe Stelle über die Geschwisterlichkeit der Glaubenden trägt hier das Lernziel, den Jüngeren nicht zu drängen. Stell dir vor: Ein kleineres Kind kommt die Treppe herauf. Das größere wartet und hält nicht den Arm fest. Heute üben wir: Wir üben, den Weg freizumachen und leise zu erklären. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Mit jüngeren Kindern sprechen wir freundlich und helfen behutsam. Dieselbe Stelle über die Geschwisterlichkeit der Glaubenden trägt hier das Lernziel, den Jüngeren nicht zu drängen. Stell dir vor: Ein kleineres Kind kommt die Treppe herauf. Das größere wartet und hält nicht den Arm fest. Heute üben wir: Wir üben, den Weg freizumachen und leise zu erklären.",
         "lines": [
           "Mit jüngeren Kindern sprechen wir freundlich und helfen behutsam.",
           "Dieselbe Stelle über die Geschwisterlichkeit der Glaubenden trägt hier das Lernziel, den Jüngeren nicht zu drängen.",
@@ -21407,7 +21407,7 @@ const additions=
         ],
         "situation": "Ein kleineres Kind kommt die Treppe herauf. Das größere wartet und hält nicht den Arm fest.",
         "practice": "Wir üben, den Weg freizumachen und leise zu erklären.",
-        "summary": "Mit jüngeren Kindern sprechen wir freundlich und helfen behutsam. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Mit jüngeren Kindern sprechen wir freundlich und helfen behutsam.",
         "audioScript": "Jüngere freundlich behandeln. Mit jüngeren Kindern sprechen wir freundlich und helfen behutsam. Dieselbe Stelle über die Geschwisterlichkeit der Glaubenden trägt hier das Lernziel, den Jüngeren nicht zu drängen. Ein kleineres Kind kommt die Treppe herauf. Das größere wartet und hält nicht den Arm fest. Wir üben, den Weg freizumachen und leise zu erklären."
       },
       "6-8": {
@@ -21417,7 +21417,7 @@ const additions=
           "Qurʾān 49:10 ist die gelesene Stelle.",
           "Dieselbe Stelle über die Geschwisterlichkeit der Glaubenden trägt hier das Lernziel, den Jüngeren nicht zu drängen.",
           "Ein kleineres Kind kommt die Treppe herauf. Das größere wartet und hält nicht den Arm fest.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1753. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 49:10. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1753. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 49:10. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -21481,7 +21481,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -21529,7 +21529,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -21599,12 +21599,12 @@ const additions=
       "note": "Dieselbe Fundstelle, anderes Lernziel: die Woche der kleinen Taten. Die Zakāh der Erwachsenen berechnen wir nicht. Der Hadith über die Absicht bleibt ungelesen in diesem Lauf. Dieselbe gelesene Fundstelle wurde schon in Slot 113 mit einem anderen Lernziel verwendet.",
       "sameLocusAsSlot": 113
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Kleine gute Taten gehören zum Dienen Allahs.",
     "ageText": {
       "4-5": {
         "goal": "Kleine gute Taten gehören zum Dienen Allahs.",
-        "intro": "Kleine gute Taten gehören zum Dienen Allahs. Dieselbe Stelle wie in der Stunde über die erneuerte Absicht sagt, Allah aufrichtig zu dienen, das Gebet zu verrichten und die Zakāh zu geben. Stell dir vor: Jedes Kind merkt sich eine kleine Tat, die es schon tun kann, zum Beispiel einen Gruß oder eine Hilfe zu Hause. Heute üben wir: Wir nennen die Tat leise und wiederholen sie an einem weiteren Tag. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Kleine gute Taten gehören zum Dienen Allahs. Dieselbe Stelle wie in der Stunde über die erneuerte Absicht sagt, Allah aufrichtig zu dienen, das Gebet zu verrichten und die Zakāh zu geben. Stell dir vor: Jedes Kind merkt sich eine kleine Tat, die es schon tun kann, zum Beispiel einen Gruß oder eine Hilfe zu Hause. Heute üben wir: Wir nennen die Tat leise und wiederholen sie an einem weiteren Tag.",
         "lines": [
           "Kleine gute Taten gehören zum Dienen Allahs.",
           "Dieselbe Stelle wie in der Stunde über die erneuerte Absicht sagt, Allah aufrichtig zu dienen, das Gebet zu verrichten und die Zakāh zu geben.",
@@ -21625,7 +21625,7 @@ const additions=
         ],
         "situation": "Jedes Kind merkt sich eine kleine Tat, die es schon tun kann, zum Beispiel einen Gruß oder eine Hilfe zu Hause.",
         "practice": "Wir nennen die Tat leise und wiederholen sie an einem weiteren Tag.",
-        "summary": "Kleine gute Taten gehören zum Dienen Allahs. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Kleine gute Taten gehören zum Dienen Allahs.",
         "audioScript": "Das Herz mit guten Taten pflegen. Kleine gute Taten gehören zum Dienen Allahs. Dieselbe Stelle wie in der Stunde über die erneuerte Absicht sagt, Allah aufrichtig zu dienen, das Gebet zu verrichten und die Zakāh zu geben. Jedes Kind merkt sich eine kleine Tat, die es schon tun kann, zum Beispiel einen Gruß oder eine Hilfe zu Hause. Wir nennen die Tat leise und wiederholen sie an einem weiteren Tag."
       },
       "6-8": {
@@ -21635,7 +21635,7 @@ const additions=
           "Qurʾān 98:5 ist die gelesene Stelle.",
           "Dieselbe Stelle wie in der Stunde über die erneuerte Absicht sagt, Allah aufrichtig zu dienen, das Gebet zu verrichten und die Zakāh zu geben.",
           "Jedes Kind merkt sich eine kleine Tat, die es schon tun kann, zum Beispiel einen Gruß oder eine Hilfe zu Hause.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1969. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 98:5. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1969. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 98:5. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -21699,7 +21699,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -21747,7 +21747,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -21917,7 +21917,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -21965,7 +21965,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -22035,12 +22035,12 @@ const additions=
       "note": "Dieselbe Fundstelle, hier mit dem Schwerpunkt Krankheit. Der Vers nennt die Kranken nicht als eigenes Wort in dem Satz, den wir als Anwendung nehmen. Wir sagen das ehrlich. Die Hilfe für die Genannten im Vers ist der Beleg, die Krankenszene ist das Beispiel. Dieselbe gelesene Fundstelle wurde schon in Slot 134 mit einem anderen Lernziel verwendet.",
       "sameLocusAsSlot": 134
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Einem kranken Menschen bieten wir eine kleine Hilfe an, wenn die Eltern einverstanden sind.",
     "ageText": {
       "4-5": {
         "goal": "Einem kranken Menschen bieten wir eine kleine Hilfe an, wenn die Eltern einverstanden sind.",
-        "intro": "Einem kranken Menschen bieten wir eine kleine Hilfe an, wenn die Eltern einverstanden sind. Dieselbe Stelle wie in der Stunde über Kranke und Ältere nennt das Gute zu den Eltern, den Verwandten, den Waisen, den Bedürftigen und den Nachbarn. Stell dir vor: Ein Geschwisterkind liegt und möchte ein Buch. Das Kind bringt es, nachdem es gefragt hat, und bleibt nicht lange, wenn Ruhe nötig ist. Heute üben wir: Wir unterscheiden: ein Buch bringen dürfen wir. Medizin geben wir nicht. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Einem kranken Menschen bieten wir eine kleine Hilfe an, wenn die Eltern einverstanden sind. Dieselbe Stelle wie in der Stunde über Kranke und Ältere nennt das Gute zu den Eltern, den Verwandten, den Waisen, den Bedürftigen und den Nachbarn. Stell dir vor: Ein Geschwisterkind liegt und möchte ein Buch. Das Kind bringt es, nachdem es gefragt hat, und bleibt nicht lange, wenn Ruhe nötig ist. Heute üben wir: Wir unterscheiden: ein Buch bringen dürfen wir. Medizin geben wir nicht.",
         "lines": [
           "Einem kranken Menschen bieten wir eine kleine Hilfe an, wenn die Eltern einverstanden sind.",
           "Dieselbe Stelle wie in der Stunde über Kranke und Ältere nennt das Gute zu den Eltern, den Verwandten, den Waisen, den Bedürftigen und den Nachbarn.",
@@ -22061,7 +22061,7 @@ const additions=
         ],
         "situation": "Ein Geschwisterkind liegt und möchte ein Buch. Das Kind bringt es, nachdem es gefragt hat, und bleibt nicht lange, wenn Ruhe nötig ist.",
         "practice": "Wir unterscheiden: ein Buch bringen dürfen wir. Medizin geben wir nicht.",
-        "summary": "Einem kranken Menschen bieten wir eine kleine Hilfe an, wenn die Eltern einverstanden sind. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Einem kranken Menschen bieten wir eine kleine Hilfe an, wenn die Eltern einverstanden sind.",
         "audioScript": "Fürsorge für Kranke. Einem kranken Menschen bieten wir eine kleine Hilfe an, wenn die Eltern einverstanden sind. Dieselbe Stelle wie in der Stunde über Kranke und Ältere nennt das Gute zu den Eltern, den Verwandten, den Waisen, den Bedürftigen und den Nachbarn. Ein Geschwisterkind liegt und möchte ein Buch. Das Kind bringt es, nachdem es gefragt hat, und bleibt nicht lange, wenn Ruhe nötig ist. Wir unterscheiden: ein Buch bringen dürfen wir. Medizin geben wir nicht."
       },
       "6-8": {
@@ -22071,7 +22071,7 @@ const additions=
           "Qurʾān 4:36 ist die gelesene Stelle.",
           "Dieselbe Stelle wie in der Stunde über Kranke und Ältere nennt das Gute zu den Eltern, den Verwandten, den Waisen, den Bedürftigen und den Nachbarn.",
           "Ein Geschwisterkind liegt und möchte ein Buch. Das Kind bringt es, nachdem es gefragt hat, und bleibt nicht lange, wenn Ruhe nötig ist.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/314. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:36. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/314. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:36. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -22135,7 +22135,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -22183,7 +22183,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -22252,12 +22252,12 @@ const additions=
       "scientificApproval": false,
       "note": "Die Seite erwähnt eine Lesart, die von der Sitzrunde in der Einzahl spricht. Wir machen daraus keinen Streit. Eine Belohnung in Zahlen erfinden wir nicht."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Wenn jemand Platz braucht, rücken wir zusammen.",
     "ageText": {
       "4-5": {
         "goal": "Wenn jemand Platz braucht, rücken wir zusammen.",
-        "intro": "Wenn jemand Platz braucht, rücken wir zusammen. Der Vers sagt: Wenn zu euch gesagt wird, macht Raum in den Sitzrunden, dann macht Raum. Stell dir vor: Im Kreis ist es eng. Die Kinder rücken einen Handbreit und lassen ein weiteres Kind sitzen. Heute üben wir: Wir üben das Aufrücken ohne Stoßen und das Aufstehen, wenn eine erwachsene Person darum bittet. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Wenn jemand Platz braucht, rücken wir zusammen. Der Vers sagt: Wenn zu euch gesagt wird, macht Raum in den Sitzrunden, dann macht Raum. Stell dir vor: Im Kreis ist es eng. Die Kinder rücken einen Handbreit und lassen ein weiteres Kind sitzen. Heute üben wir: Wir üben das Aufrücken ohne Stoßen und das Aufstehen, wenn eine erwachsene Person darum bittet.",
         "lines": [
           "Wenn jemand Platz braucht, rücken wir zusammen.",
           "Der Vers sagt: Wenn zu euch gesagt wird, macht Raum in den Sitzrunden, dann macht Raum.",
@@ -22278,7 +22278,7 @@ const additions=
         ],
         "situation": "Im Kreis ist es eng. Die Kinder rücken einen Handbreit und lassen ein weiteres Kind sitzen.",
         "practice": "Wir üben das Aufrücken ohne Stoßen und das Aufstehen, wenn eine erwachsene Person darum bittet.",
-        "summary": "Wenn jemand Platz braucht, rücken wir zusammen. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Wenn jemand Platz braucht, rücken wir zusammen.",
         "audioScript": "Anderen Platz machen. Wenn jemand Platz braucht, rücken wir zusammen. Der Vers sagt: Wenn zu euch gesagt wird, macht Raum in den Sitzrunden, dann macht Raum. Im Kreis ist es eng. Die Kinder rücken einen Handbreit und lassen ein weiteres Kind sitzen. Wir üben das Aufrücken ohne Stoßen und das Aufstehen, wenn eine erwachsene Person darum bittet."
       },
       "6-8": {
@@ -22288,7 +22288,7 @@ const additions=
           "Qurʾān 58:11 ist die gelesene Stelle.",
           "Der Vers sagt: Wenn zu euch gesagt wird, macht Raum in den Sitzrunden, dann macht Raum.",
           "Im Kreis ist es eng. Die Kinder rücken einen Handbreit und lassen ein weiteres Kind sitzen.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1829. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 58:11. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1829. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 58:11. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -22352,7 +22352,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -22400,7 +22400,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -22570,7 +22570,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -22618,7 +22618,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -22687,12 +22687,12 @@ const additions=
       "scientificApproval": false,
       "note": "Der Vers beschreibt den Propheten, nicht das Kind. Eine Liste seiner Charaktereigenschaften aus einem Hadith steht hier nicht. Wir ergänzen sie nicht."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Der Vers sagt dem Propheten, Friede sei mit ihm, dass er auf einem gewaltigen Charakter ist.",
     "ageText": {
       "4-5": {
         "goal": "Der Vers sagt dem Propheten, Friede sei mit ihm, dass er auf einem gewaltigen Charakter ist.",
-        "intro": "Der Vers sagt dem Propheten, Friede sei mit ihm, dass er auf einem gewaltigen Charakter ist. Die Seite beginnt danach mit einer Erklärung. Stell dir vor: Ein Kind erzählt eine freundliche Entscheidung aus der Woche, zum Beispiel Nachgeben beim Spiel. Heute üben wir: Wir sagen den Satz in der Ich-Form und ohne einen Hadith zu erfinden. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Der Vers sagt dem Propheten, Friede sei mit ihm, dass er auf einem gewaltigen Charakter ist. Die Seite beginnt danach mit einer Erklärung. Stell dir vor: Ein Kind erzählt eine freundliche Entscheidung aus der Woche, zum Beispiel Nachgeben beim Spiel. Heute üben wir: Wir sagen den Satz in der Ich-Form und ohne einen Hadith zu erfinden.",
         "lines": [
           "Der Vers sagt dem Propheten, Friede sei mit ihm, dass er auf einem gewaltigen Charakter ist.",
           "Die Seite beginnt danach mit einer Erklärung.",
@@ -22713,7 +22713,7 @@ const additions=
         ],
         "situation": "Ein Kind erzählt eine freundliche Entscheidung aus der Woche, zum Beispiel Nachgeben beim Spiel.",
         "practice": "Wir sagen den Satz in der Ich-Form und ohne einen Hadith zu erfinden.",
-        "summary": "Der Vers sagt dem Propheten, Friede sei mit ihm, dass er auf einem gewaltigen Charakter ist. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Der Vers sagt dem Propheten, Friede sei mit ihm, dass er auf einem gewaltigen Charakter ist.",
         "audioScript": "Guter Charakter im Wochenrückblick. Der Vers sagt dem Propheten, Friede sei mit ihm, dass er auf einem gewaltigen Charakter ist. Die Seite beginnt danach mit einer Erklärung. Ein Kind erzählt eine freundliche Entscheidung aus der Woche, zum Beispiel Nachgeben beim Spiel. Wir sagen den Satz in der Ich-Form und ohne einen Hadith zu erfinden."
       },
       "6-8": {
@@ -22723,7 +22723,7 @@ const additions=
           "Qurʾān 68:4 ist die gelesene Stelle.",
           "Die Seite beginnt danach mit einer Erklärung.",
           "Ein Kind erzählt eine freundliche Entscheidung aus der Woche, zum Beispiel Nachgeben beim Spiel.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1879. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 68:4. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1879. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 68:4. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -22787,7 +22787,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -22835,7 +22835,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -22905,12 +22905,12 @@ const additions=
       "note": "Das Prüfen der Nachricht ist die Übung der Stunde, nicht ein Satz des Verses. Dieselbe Fundstelle wurde schon für Mobbing und für die Entschuldigung verwendet. Eine technische Anleitung für ein bestimmtes Gerät geben wir nicht. Dieselbe gelesene Fundstelle wurde schon in Slot 195 mit einem anderen Lernziel verwendet.",
       "sameLocusAsSlot": 195
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Bevor wir eine Nachricht senden, lesen wir, ob sie freundlich ist.",
     "ageText": {
       "4-5": {
         "goal": "Bevor wir eine Nachricht senden, lesen wir, ob sie freundlich ist.",
-        "intro": "Bevor wir eine Nachricht senden, lesen wir, ob sie freundlich ist. Dieselbe Stelle gegen Spott und verletzende Namen gilt auch für Worte auf einem Bildschirm. Stell dir vor: Ein Kind möchte einen ärgerlichen Satz senden. Es löscht ihn und schreibt einen ruhigen Satz oder sendet nichts. Heute üben wir: Wir prüfen drei Beispielsätze und senden nur den freundlichen. Die arabischen Worte spricht die Lehrperson.",
+        "intro": "Bevor wir eine Nachricht senden, lesen wir, ob sie freundlich ist. Dieselbe Stelle gegen Spott und verletzende Namen gilt auch für Worte auf einem Bildschirm. Stell dir vor: Ein Kind möchte einen ärgerlichen Satz senden. Es löscht ihn und schreibt einen ruhigen Satz oder sendet nichts. Heute üben wir: Wir prüfen drei Beispielsätze und senden nur den freundlichen.",
         "lines": [
           "Bevor wir eine Nachricht senden, lesen wir, ob sie freundlich ist.",
           "Dieselbe Stelle gegen Spott und verletzende Namen gilt auch für Worte auf einem Bildschirm.",
@@ -22931,7 +22931,7 @@ const additions=
         ],
         "situation": "Ein Kind möchte einen ärgerlichen Satz senden. Es löscht ihn und schreibt einen ruhigen Satz oder sendet nichts.",
         "practice": "Wir prüfen drei Beispielsätze und senden nur den freundlichen.",
-        "summary": "Bevor wir eine Nachricht senden, lesen wir, ob sie freundlich ist. Die arabischen Worte spricht die Lehrperson.",
+        "summary": "Bevor wir eine Nachricht senden, lesen wir, ob sie freundlich ist.",
         "audioScript": "Digitalen Adab üben. Bevor wir eine Nachricht senden, lesen wir, ob sie freundlich ist. Dieselbe Stelle gegen Spott und verletzende Namen gilt auch für Worte auf einem Bildschirm. Ein Kind möchte einen ärgerlichen Satz senden. Es löscht ihn und schreibt einen ruhigen Satz oder sendet nichts. Wir prüfen drei Beispielsätze und senden nur den freundlichen."
       },
       "6-8": {
@@ -22941,7 +22941,7 @@ const additions=
           "Qurʾān 49:11 ist die gelesene Stelle.",
           "Dieselbe Stelle gegen Spott und verletzende Namen gilt auch für Worte auf einem Bildschirm.",
           "Ein Kind möchte einen ärgerlichen Satz senden. Es löscht ihn und schreibt einen ruhigen Satz oder sendet nichts.",
-          "Die arabischen Worte spricht die Lehrperson."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1754. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 49:11. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1754. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 49:11. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -23005,7 +23005,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -23053,7 +23053,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -23123,12 +23123,12 @@ const additions=
       "note": "Die At-taḥiyyāt-Formel wird nicht als Qurʾān ausgegeben und nicht aus dem Gedächtnis als geprüfter Hadith nachgetragen. al-Mughnī wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 166 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
       "sameLocusAsSlot": 166
     },
-    "hint": "Wir erfinden keine zusätzliche Geschichte.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Im Gebet gibt es eine Sitzphase.",
     "ageText": {
       "4-5": {
         "goal": "Im Gebet gibt es eine Sitzphase.",
-        "intro": "Im Gebet gibt es eine Sitzphase. Dieselbe Stelle über das Hüten der Gebete und das demütige Stehen trägt hier nur den Hinweis, dass das Gebet mehr enthält als das Stehen. Stell dir vor: Die Lehrperson setzt sich so, wie sie es kennt, und sagt: Die Worte lernen wir später bei einem Menschen. Heute erkennen wir nur, dass es dieses Sitzen gibt. Heute üben wir: Wir wiederholen: Das sind keine Qurʾān-Worte aus dieser Stunde. Wir erfinden keine zusätzliche Geschichte.",
+        "intro": "Im Gebet gibt es eine Sitzphase. Dieselbe Stelle über das Hüten der Gebete und das demütige Stehen trägt hier nur den Hinweis, dass das Gebet mehr enthält als das Stehen. Stell dir vor: Die Lehrperson setzt sich so, wie sie es kennt, und sagt: Die Worte lernen wir später bei einem Menschen. Heute erkennen wir nur, dass es dieses Sitzen gibt. Heute üben wir: Wir wiederholen: Das sind keine Qurʾān-Worte aus dieser Stunde.",
         "lines": [
           "Im Gebet gibt es eine Sitzphase.",
           "Dieselbe Stelle über das Hüten der Gebete und das demütige Stehen trägt hier nur den Hinweis, dass das Gebet mehr enthält als das Stehen.",
@@ -23149,7 +23149,7 @@ const additions=
         ],
         "situation": "Die Lehrperson setzt sich so, wie sie es kennt, und sagt: Die Worte lernen wir später bei einem Menschen. Heute erkennen wir nur, dass es dieses Sitzen gibt.",
         "practice": "Wir wiederholen: Das sind keine Qurʾān-Worte aus dieser Stunde.",
-        "summary": "Im Gebet gibt es eine Sitzphase. Wir erfinden keine zusätzliche Geschichte.",
+        "summary": "Im Gebet gibt es eine Sitzphase.",
         "audioScript": "Tashahhud als Gebetsbestandteil. Im Gebet gibt es eine Sitzphase. Dieselbe Stelle über das Hüten der Gebete und das demütige Stehen trägt hier nur den Hinweis, dass das Gebet mehr enthält als das Stehen. Die Lehrperson setzt sich so, wie sie es kennt, und sagt: Die Worte lernen wir später bei einem Menschen. Heute erkennen wir nur, dass es dieses Sitzen gibt. Wir wiederholen: Das sind keine Qurʾān-Worte aus dieser Stunde."
       },
       "6-8": {
@@ -23159,7 +23159,7 @@ const additions=
           "Qurʾān 2:238 ist die gelesene Stelle.",
           "Dieselbe Stelle über das Hüten der Gebete und das demütige Stehen trägt hier nur den Hinweis, dass das Gebet mehr enthält als das Stehen.",
           "Die Lehrperson setzt sich so, wie sie es kennt, und sagt: Die Worte lernen wir später bei einem Menschen. Heute erkennen wir nur, dass es dieses Sitzen gibt.",
-          "Wir erfinden keine zusätzliche Geschichte."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/205. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:238. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/205. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:238. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -23223,7 +23223,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -23271,7 +23271,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -23440,7 +23440,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -23488,7 +23488,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -23658,7 +23658,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -23706,7 +23706,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -23875,7 +23875,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -23923,7 +23923,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
@@ -24002,12 +24002,12 @@ const additions=
       },
       "sameLocusAsSlot": 192
     },
-    "hint": "Wir erfinden keine zusätzliche Geschichte.",
+    "hint": "Frage nach, wenn du etwas noch nicht verstehst.",
     "sample": "Zakāh und die Pilgerfahrt sind große Pflichten der Erwachsenen.",
     "ageText": {
       "4-5": {
         "goal": "Zakāh und die Pilgerfahrt sind große Pflichten der Erwachsenen.",
-        "intro": "Zakāh und die Pilgerfahrt sind große Pflichten der Erwachsenen. Der Vers 2:43 sagt: Verrichtet das Gebet, gebt die Zakāh und verbeugt euch mit den sich Verbeugenden. Stell dir vor: Wir zeigen zwei Karten: Geben und Reise zum Haus. Wir sammeln kein echtes Geld und laufen keine Runden. Heute üben wir: Wir sagen die beiden Worte und erklären, dass die genaue Rechnung und die einzelnen Wege nicht in diesen zwei Auszügen stehen. Wir erfinden keine zusätzliche Geschichte.",
+        "intro": "Zakāh und die Pilgerfahrt sind große Pflichten der Erwachsenen. Der Vers 2:43 sagt: Verrichtet das Gebet, gebt die Zakāh und verbeugt euch mit den sich Verbeugenden. Stell dir vor: Wir zeigen zwei Karten: Geben und Reise zum Haus. Wir sammeln kein echtes Geld und laufen keine Runden. Heute üben wir: Wir sagen die beiden Worte und erklären, dass die genaue Rechnung und die einzelnen Wege nicht in diesen zwei Auszügen stehen.",
         "lines": [
           "Zakāh und die Pilgerfahrt sind große Pflichten der Erwachsenen.",
           "Der Vers 2:43 sagt: Verrichtet das Gebet, gebt die Zakāh und verbeugt euch mit den sich Verbeugenden.",
@@ -24028,7 +24028,7 @@ const additions=
         ],
         "situation": "Wir zeigen zwei Karten: Geben und Reise zum Haus. Wir sammeln kein echtes Geld und laufen keine Runden.",
         "practice": "Wir sagen die beiden Worte und erklären, dass die genaue Rechnung und die einzelnen Wege nicht in diesen zwei Auszügen stehen.",
-        "summary": "Zakāh und die Pilgerfahrt sind große Pflichten der Erwachsenen. Wir erfinden keine zusätzliche Geschichte.",
+        "summary": "Zakāh und die Pilgerfahrt sind große Pflichten der Erwachsenen.",
         "audioScript": "Zakāh und Ḥaǧǧ als Säulen. Zakāh und die Pilgerfahrt sind große Pflichten der Erwachsenen. Der Vers 2:43 sagt: Verrichtet das Gebet, gebt die Zakāh und verbeugt euch mit den sich Verbeugenden. Wir zeigen zwei Karten: Geben und Reise zum Haus. Wir sammeln kein echtes Geld und laufen keine Runden. Wir sagen die beiden Worte und erklären, dass die genaue Rechnung und die einzelnen Wege nicht in diesen zwei Auszügen stehen."
       },
       "6-8": {
@@ -24038,7 +24038,7 @@ const additions=
           "Qurʾān 2:43 ist die gelesene Stelle.",
           "Der Vers 2:43 sagt: Verrichtet das Gebet, gebt die Zakāh und verbeugt euch mit den sich Verbeugenden.",
           "Wir zeigen zwei Karten: Geben und Reise zum Haus. Wir sammeln kein echtes Geld und laufen keine Runden.",
-          "Wir erfinden keine zusätzliche Geschichte."
+          ""
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/83. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:43. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/83. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:43. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -24102,7 +24102,7 @@ const additions=
           "prompt": "Woran hält sich diese Stunde?",
           "options": [
             "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "An einer Aussage, die gar nicht zum gelesenen Vers gehört."
           ],
           "correct": 0,
           "hint": "Nur Gelesenes.",
@@ -24150,7 +24150,7 @@ const additions=
           ],
           "correct": 0,
           "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "explain": "Wir unterscheiden sorgfältig zwischen dem Vers und unserer Alltagserklärung."
         },
         {
           "type": "text",
