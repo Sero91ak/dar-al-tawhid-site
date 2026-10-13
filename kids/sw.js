@@ -301,7 +301,7 @@ const KIDS_BOOT_PRECACHE=[
   "/kids/salaf-open-world-v1353.css?v=1390",
   "/kids/assets/salaf/salaf-cinema-hero-boy-v1353.jpg",
   "/kids/assets/salaf/salaf-cinema-hero-girl-v1353.jpg",
-  "/kids/data/salaf-library-v1.json?v=1",
+  "/kids/data/salaf-library-v1.json?v=2",
   "/kids/assets/salaf/salaf-library-hero-boys.jpg",
   "/kids/assets/salaf/salaf-library-hero-girls.jpg",
   "/kids/assets/salaf/topics-v1380/rahma.jpg",
