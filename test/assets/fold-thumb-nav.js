@@ -43,6 +43,14 @@
 
   function readPreference() {
     try {
+      // Emergency recovery for a broken side rail or stale stored position.
+      // Explicit navigation to /test/?navSafe=1 restores the original bottom bar.
+      // No automatic changes for regular users; affects only this Test URL.
+      var qs = new URLSearchParams((global.location && global.location.search) || "");
+      if (qs.get("navSafe") === "1") {
+        global.localStorage.setItem(STORAGE_KEY, "bottom");
+        return "bottom";
+      }
       var value = String(global.localStorage.getItem(STORAGE_KEY) || "bottom");
       return VALID[value] ? value : "bottom";
     } catch (error) {
