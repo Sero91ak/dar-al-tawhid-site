@@ -1831,14 +1831,27 @@ const additions=
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
       "note": "Wie viel Reinheit die Gebetsschule genau verlangt, steht auf dieser Seite nicht als gelesenes hanbalitisches Rechtsurteil. al-Mughnī wurde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
-      "editorialScopeNote": "Wie viel Reinheit die Gebetsschule genau verlangt, steht auf dieser Seite nicht als gelesenes hanbalitisches Rechtsurteil. al-Mughnī wurde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft."
+      "editorialScopeNote": "Wie viel Reinheit die Gebetsschule genau verlangt, steht auf dieser Seite nicht als gelesenes hanbalitisches Rechtsurteil. al-Mughnī wurde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
+      "hanbaliPrimaryCrossCheck": {
+        "status": "partial-indexed-primary-source-match-not-scholarly-approval",
+        "checkedOn": "2026-10-13",
+        "author": "Ibn Qudāmah",
+        "work": "al-Mughnī, Kitāb aṣ-Ṣalāh, Bāb aṣ-Ṣalāh bi-n-Naǧāsah",
+        "locus": "vol. 1, p. 401 (page shown in indexed Islamweb extract), library content/15/783",
+        "directLink": "https://gcp.islamweb.net/ar/library/content/15/783/",
+        "summary": "The text states purification from najāsah on body and clothes is a prayer condition in the position of most scholars and cites Qurʾān 74:4. This is not a legal determination about every ordinary stain.",
+        "tafsirOtherInterpretations": "Ibn Kathīr on 74:4 records several readings including clothes, deeds, and character; do not overstate a singular interpretation.",
+        "tafsirLink": "https://gcp.islamweb.net/ar/library/content/49/1907/",
+        "remaining": "Review full chapter, exceptions, translation, and pedagogy with a qualified person before approval.",
+        "scientificApproval": false
+      }
     },
     "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
     "sample": "Vor dem Gebet schauen wir, ob die Kleidung sauber ist.",
     "ageText": {
       "4-5": {
         "goal": "Vor dem Gebet schauen wir, ob die Kleidung sauber ist.",
-        "intro": "Vor dem Gebet schauen wir, ob die Kleidung sauber ist. Der Vers lautet: Und deine Kleider, reinige sie. Stell dir vor: Ein Kind sieht einen deutlichen Schmutzfleck am Ärmel und zieht vor dem Üben ein sauberes Oberteil an oder sagt Bescheid. Heute üben wir: Wir prüfen mit den Augen: Ist etwas deutlich schmutzig? Wir waschen nur, was die Eltern erlauben.",
+        "intro": "Vor dem Gebet schauen wir, ob die Kleidung sauber ist. Der Vers lautet: Und deine Kleider, reinige sie. Stell dir vor: Ein Kind sieht einen deutlichen Schmutzfleck am Ärmel und zieht vor dem Üben ein sauberes Oberteil an oder sagt Bescheid. Heute üben wir: Wir prüfen mit den Augen: Ist etwas deutlich schmutzig? Wir waschen nur, was die Eltern erlauben. Ein bisschen Staub ist noch kein Grund zur Sorge. Wenn du unsicher bist, helfen dir Mama, Papa oder eine Lehrperson.",
         "lines": [
           "Vor dem Gebet schauen wir, ob die Kleidung sauber ist.",
           "Der Vers lautet: Und deine Kleider, reinige sie.",
@@ -1860,11 +1873,11 @@ const additions=
         "situation": "Ein Kind sieht einen deutlichen Schmutzfleck am Ärmel und zieht vor dem Üben ein sauberes Oberteil an oder sagt Bescheid.",
         "practice": "Wir prüfen mit den Augen: Ist etwas deutlich schmutzig? Wir waschen nur, was die Eltern erlauben.",
         "summary": "Vor dem Gebet schauen wir, ob die Kleidung sauber ist.",
-        "audioScript": "Reinheit der Gebetskleidung. Vor dem Gebet schauen wir, ob die Kleidung sauber ist. Der Vers lautet: Und deine Kleider, reinige sie. Ein Kind sieht einen deutlichen Schmutzfleck am Ärmel und zieht vor dem Üben ein sauberes Oberteil an oder sagt Bescheid. Wir prüfen mit den Augen: Ist etwas deutlich schmutzig? Wir waschen nur, was die Eltern erlauben."
+        "audioScript": "Reinheit der Gebetskleidung. Vor dem Gebet schauen wir, ob die Kleidung sauber ist. Der Vers lautet: Und deine Kleider, reinige sie. Ein Kind sieht einen deutlichen Schmutzfleck am Ärmel und zieht vor dem Üben ein sauberes Oberteil an oder sagt Bescheid. Wir prüfen mit den Augen: Ist etwas deutlich schmutzig? Wir waschen nur, was die Eltern erlauben. Ein bisschen Staub ist noch kein Grund zur Sorge. Wenn du unsicher bist, helfen dir Mama, Papa oder eine Lehrperson."
       },
       "6-8": {
         "goal": "Vor dem Gebet schauen wir, ob die Kleidung sauber ist.",
-        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Vor dem Gebet schauen wir, ob die Kleidung sauber ist. Wir lesen Qurʾān 74:4. Der Vers bedeutet sinngemäß: Der Vers lautet: Und deine Kleider, reinige sie. Die Tafsīr-Seite erklärt ihn auch mit anderen Deutungen, darunter eine Absage an die Behauptung, der Prophet sei ein Wahrsager. So kann das im Alltag aussehen: Ein Kind sieht einen deutlichen Schmutzfleck am Ärmel und zieht vor dem Üben ein sauberes Oberteil an oder sagt Bescheid. Die Aufgabe: Wir prüfen mit den Augen: Ist etwas deutlich schmutzig? Wir waschen nur, was die Eltern erlauben. ṯiyāb bedeutet: Kleider. ṭahhir bedeutet: reinige.",
+        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Vor dem Gebet schauen wir, ob die Kleidung sauber ist. Wir lesen Qurʾān 74:4. Der Vers bedeutet sinngemäß: Der Vers lautet: Und deine Kleider, reinige sie. Die Tafsīr-Seite erklärt ihn auch mit anderen Deutungen, darunter eine Absage an die Behauptung, der Prophet sei ein Wahrsager. So kann das im Alltag aussehen: Ein Kind sieht einen deutlichen Schmutzfleck am Ärmel und zieht vor dem Üben ein sauberes Oberteil an oder sagt Bescheid. Die Aufgabe: Wir prüfen mit den Augen: Ist etwas deutlich schmutzig? Wir waschen nur, was die Eltern erlauben. ṯiyāb bedeutet: Kleider. ṭahhir bedeutet: reinige. Nicht jeder sichtbare Fleck ist rituelle Unreinheit. Wenn du nicht weißt, ob etwas für das Gebet wichtig ist, frage eine erwachsene Lehrperson.",
         "lines": [
           "Qurʾān 74:4 ist die gelesene Stelle.",
           "Der Vers lautet: Und deine Kleider, reinige sie.",
@@ -1885,12 +1898,12 @@ const additions=
         ],
         "situation": "Ein Kind sieht einen deutlichen Schmutzfleck am Ärmel und zieht vor dem Üben ein sauberes Oberteil an oder sagt Bescheid.",
         "practice": "Wir prüfen mit den Augen: Ist etwas deutlich schmutzig? Wir waschen nur, was die Eltern erlauben.",
-        "summary": "Qurʾān 74:4 trägt diese Stunde. Der Vers lautet: Und deine Kleider, reinige sie.",
-        "audioScript": "Reinheit der Gebetskleidung. Der Vers lautet: Und deine Kleider, reinige sie. Ein Kind sieht einen deutlichen Schmutzfleck am Ärmel und zieht vor dem Üben ein sauberes Oberteil an oder sagt Bescheid. Wir prüfen mit den Augen: Ist etwas deutlich schmutzig? Wir waschen nur, was die Eltern erlauben."
+        "summary": "Wir bereiten uns achtsam auf das Gebet vor. Ein Staubfleck ist nicht automatisch Naǧāsah; bei Unsicherheit fragen wir nach.",
+        "audioScript": "Reinheit der Gebetskleidung. Der Vers lautet: Und deine Kleider, reinige sie. Ein Kind sieht einen deutlichen Schmutzfleck am Ärmel und zieht vor dem Üben ein sauberes Oberteil an oder sagt Bescheid. Wir prüfen mit den Augen: Ist etwas deutlich schmutzig? Wir waschen nur, was die Eltern erlauben. Nicht jeder sichtbare Fleck ist rituelle Unreinheit. Wenn du nicht weißt, ob etwas für das Gebet wichtig ist, frage eine erwachsene Lehrperson."
       },
       "9-10": {
         "goal": "Ich kann das Thema „Reinheit der Gebetskleidung“ anhand von Qurʾān 74:4 erklären und ein Alltagsbeispiel beurteilen.",
-        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Reinheit der Gebetskleidung. Vor dem Gebet schauen wir, ob die Kleidung sauber ist. In Qurʾān 74:4 lernen wir sinngemäß: Der Vers lautet: Und deine Kleider, reinige sie. Die Tafsīr-Seite erklärt ihn auch mit anderen Deutungen, darunter eine Absage an die Behauptung, der Prophet sei ein Wahrsager. ṯiyāb bedeutet Kleider. ṭahhir bedeutet reinige. Stell dir diese Situation vor: Ein Kind sieht einen deutlichen Schmutzfleck am Ärmel und zieht vor dem Üben ein sauberes Oberteil an oder sagt Bescheid. Welcher nächste Schritt ist gut? Wir prüfen mit den Augen: Ist etwas deutlich schmutzig? Wir waschen nur, was die Eltern erlauben. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Reinheit der Gebetskleidung. Vor dem Gebet schauen wir, ob die Kleidung sauber ist. In Qurʾān 74:4 lernen wir sinngemäß: Der Vers lautet: Und deine Kleider, reinige sie. Die Tafsīr-Seite erklärt ihn auch mit anderen Deutungen, darunter eine Absage an die Behauptung, der Prophet sei ein Wahrsager. ṯiyāb bedeutet Kleider. ṭahhir bedeutet reinige. Stell dir diese Situation vor: Ein Kind sieht einen deutlichen Schmutzfleck am Ärmel und zieht vor dem Üben ein sauberes Oberteil an oder sagt Bescheid. Welcher nächste Schritt ist gut? Wir prüfen mit den Augen: Ist etwas deutlich schmutzig? Wir waschen nur, was die Eltern erlauben. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben. Im Fiqh unterscheiden wir gewöhnlichen Schmutz von Naǧāsah, einer rituell unreinen Verunreinigung. Nicht jeder Staubfleck ist Naǧāsah. Genaue Fragen zur Gültigkeit eines Gebets gehören zu einer qualifizierten Lehrperson.",
         "lines": [
           "Unsere Qurʾān-Stelle ist Qurʾān 74:4.",
           "Der Vers lautet: Und deine Kleider, reinige sie. Die Tafsīr-Seite erklärt ihn auch mit anderen Deutungen, darunter eine Absage an die Behauptung, der Prophet sei ein Wahrsager.",
@@ -1911,8 +1924,8 @@ const additions=
         ],
         "situation": "Ein Kind sieht einen deutlichen Schmutzfleck am Ärmel und zieht vor dem Üben ein sauberes Oberteil an oder sagt Bescheid.",
         "practice": "Wir prüfen mit den Augen: Ist etwas deutlich schmutzig? Wir waschen nur, was die Eltern erlauben.",
-        "summary": "Vor dem Gebet schauen wir, ob die Kleidung sauber ist. Wir prüfen mit den Augen: Ist etwas deutlich schmutzig? Wir waschen nur, was die Eltern erlauben.",
-        "audioScript": "Reinheit der Gebetskleidung. Vor dem Gebet schauen wir, ob die Kleidung sauber ist. Der Vers lautet: Und deine Kleider, reinige sie. Die Tafsīr-Seite erklärt ihn auch mit anderen Deutungen, darunter eine Absage an die Behauptung, der Prophet sei ein Wahrsager. Ein Kind sieht einen deutlichen Schmutzfleck am Ärmel und zieht vor dem Üben ein sauberes Oberteil an oder sagt Bescheid. Wir prüfen mit den Augen: Ist etwas deutlich schmutzig? Wir waschen nur, was die Eltern erlauben."
+        "summary": "Qurʾān 74:4 regt zur Reinheit an. Im Fiqh unterscheiden wir gewöhnlichen Schmutz von ritueller Unreinheit und klären Zweifelsfälle mit einer Lehrperson.",
+        "audioScript": "Reinheit der Gebetskleidung. Vor dem Gebet schauen wir, ob die Kleidung sauber ist. Der Vers lautet: Und deine Kleider, reinige sie. Die Tafsīr-Seite erklärt ihn auch mit anderen Deutungen, darunter eine Absage an die Behauptung, der Prophet sei ein Wahrsager. Ein Kind sieht einen deutlichen Schmutzfleck am Ärmel und zieht vor dem Üben ein sauberes Oberteil an oder sagt Bescheid. Wir prüfen mit den Augen: Ist etwas deutlich schmutzig? Wir waschen nur, was die Eltern erlauben. Im Fiqh unterscheiden wir gewöhnlichen Schmutz von Naǧāsah, einer rituell unreinen Verunreinigung. Nicht jeder Staubfleck ist Naǧāsah. Genaue Fragen zur Gültigkeit eines Gebets gehören zu einer qualifizierten Lehrperson."
       }
     },
     "questions": {
@@ -1964,11 +1977,15 @@ const additions=
           "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
         },
         {
-          "type": "text",
-          "prompt": "Was möchtest du dir aus Qurʾān 74:4 merken?",
-          "sample": "Der Vers lautet: Und deine Kleider, reinige sie. Die Tafsīr-Seite erklärt ihn auch mit anderen Deutungen, darunter eine Absage an die Behauptung, der Prophet sei ein Wahrsager.",
-          "hint": "Erkläre die Stelle in eigenen Worten.",
-          "explain": "Mā schāʾ Allāh! Wir bleiben bei dem, was wir aus dem Qurʾān lernen."
+          "type": "choice",
+          "prompt": "Ist jeder sichtbare Staubfleck automatisch rituelle Unreinheit?",
+          "options": [
+            "Nein. Bei Unsicherheit frage ich eine Lehrperson.",
+            "Ja. Jeder Fleck macht das Gebet ungültig."
+          ],
+          "correct": 0,
+          "hint": "Staub und Naǧāsah sind nicht dasselbe.",
+          "explain": "Mā schāʾ Allāh! Nicht jeder Fleck ist rituelle Unreinheit."
         }
       ],
       "9-10": [
@@ -1987,15 +2004,11 @@ const additions=
           "explain": "Allāhumma bārik! Du hast einen passenden Schritt überlegt."
         },
         {
-          "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
-          "options": [
-            "Vor dem Gebet schauen wir, ob die Kleidung sauber ist.",
-            "Nach einem Fehler bleibt die Tür zur Besserung offen."
-          ],
-          "correct": 0,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "type": "text",
+          "prompt": "Was ist der Unterschied zwischen gewöhnlichem Schmutz und Naǧāsah?",
+          "sample": "Nicht jeder Fleck ist Naǧāsah. Ob eine konkrete Verunreinigung das Gebet betrifft, klären wir anhand des Fiqh mit einer Lehrperson.",
+          "hint": "Denke an Staub und rituell unreine Stoffe.",
+          "explain": "Allāhumma bārik! Du unterscheidest die Begriffe, ohne eine neue Fiqh-Regel zu erfinden."
         }
       ]
     },
