@@ -1,5 +1,5 @@
-name: KIDS Quiz 002 - recover already paid V4 history (review only)
-# Strictly read-only API access: history GET, NEVER TTS generation.
+name: KIDS Quiz 002 - recover already paid V4 Flow originals (review only)
+# Strictly read-only Flow-generation GET, NEVER TTS generation.
 # Trigger only when this workflow/recovery script is updated on the isolated review branch.
 on:
   push:
@@ -7,7 +7,7 @@ on:
       - review/kids-v4-pilot-002-import-20261013
     paths:
       - .github/workflows/kids-v4-002-recover-paid-history.yml
-      - kids/tools/recover_v4_pilot_002_history.py
+      - kids/tools/recover_v4_pilot_002_flow_api.py
   workflow_dispatch:
 permissions:
   contents: write
@@ -32,14 +32,14 @@ jobs:
       - name: Verify zero-charge importer and recovery scripts
         run: |
           set -euo pipefail
-          python3 -m py_compile kids/tools/recover_v4_pilot_002_history.py kids/tools/import_quiz_v4_pilot_002.py
+          python3 -m py_compile kids/tools/recover_v4_pilot_002_flow_api.py kids/tools/import_quiz_v4_pilot_002.py
           python3 - <<'PY'
           from pathlib import Path
-          script=Path("kids/tools/recover_v4_pilot_002_history.py").read_text()
+          script=Path("kids/tools/recover_v4_pilot_002_flow_api.py").read_text()
           assert 'method="GET"' in script
           assert "creative_generate" not in script and 'method="POST"' not in script
-          assert "META.exists()" in script and "model_id" in script and "voice_id" in script
-          print("PASS: history GET only; refuses wrong voice/model or replacing originals")
+          assert "META.exists()" in script and "model_id" in script and "voiceId" in script
+          print("PASS: Flow GET only; refuses wrong voice/model or replacing originals")
           PY
       - name: Ensure FFmpeg is available without TTS
         run: |
@@ -57,7 +57,7 @@ jobs:
       - name: Restore original paid recordings or stop safely
         run: |
           set -euo pipefail
-          python3 kids/tools/recover_v4_pilot_002_history.py
+          python3 kids/tools/recover_v4_pilot_002_flow_api.py
       - name: Archive ORIGINALS for review only
         if: success()
         uses: actions/upload-artifact@v4
