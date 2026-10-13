@@ -39,25 +39,25 @@ OLDER_OPEN = (
 )
 SUCCESS = {
     "4-6": (
-        "Sehr schön! Du hast gut aufgepasst.",
-        "Prima! Das hast du richtig erkannt.",
-        "Gut gemacht! Du lernst immer mehr.",
-        "Ja, das ist richtig. Schön überlegt!",
-        "Sehr gut! Du hast die passende Antwort gewählt.",
+        "Mā schāʾ Allāh! Das heißt: Was Allah gewollt hat. Sehr gut gemacht!",
+        "Allāhumma bārik! O Allah, schenke Segen. Du hast richtig geantwortet!",
+        "Bārakallāhu fīk! Möge Allah dich segnen. Du lernst immer mehr!",
+        "Al-ḥamdu lillāh! Alles Lob gebührt Allah. Das hast du gut erkannt!",
+        "Mā schāʾ Allāh! Deine Antwort ist richtig. Schön, wie du dazulernst!",
     ),
     "7-8": (
-        "Das stimmt. Gut nachgedacht!",
-        "Richtig erkannt! Sehr gut.",
-        "Prima! Du hast aufmerksam zugehört.",
-        "Gut gemacht! Genau diese Antwort passt.",
-        "Sehr schön! Du hast die Frage verstanden.",
+        "Mā schāʾ Allāh! Das bedeutet: Was Allah gewollt hat. Dein Wissen wächst!",
+        "Allāhumma bārik! O Allah, schenke Segen. Du hast gut nachgedacht!",
+        "Bārakallāhu fīk! Möge Allah dich segnen. Du hast die richtige Antwort gefunden!",
+        "Al-ḥamdu lillāh! Alles Lob gebührt Allah. Du lernst mit jeder Frage mehr!",
+        "Mā schāʾ Allāh! Du hast aufmerksam überlegt. Mach weiter so!",
     ),
     "9-10": (
-        "Das ist richtig. Gut überlegt.",
-        "Sehr gut. Diese Antwort passt.",
-        "Richtig erkannt! Mach weiter so.",
-        "Gut durchdacht. Das stimmt.",
-        "Sehr schön. Du hast die passende Antwort gefunden.",
+        "Mā schāʾ Allāh! Dein Wissen über den Dīn wächst. Sehr gut erkannt!",
+        "Allāhumma bārik! O Allah, schenke Segen. Diese Antwort ist richtig begründet!",
+        "Bārakallāhu fīk! Möge Allah dich segnen. Du hast die Frage gut durchdacht!",
+        "Al-ḥamdu lillāh! Alles Lob gebührt Allah. Du vertiefst dein Wissen!",
+        "Mā schāʾ Allāh! Du hast richtig entschieden. Vertiefe dein Wissen weiter!",
     ),
 }
 RETRY = {
