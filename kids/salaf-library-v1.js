@@ -7,14 +7,14 @@
   var root=document.getElementById("view-salaf");
   if(!root)return;
   var CATEGORIES=[
-    {id:"rahma",title:"Barmherzigkeit & Helfen",caption:"Mitgefühl und Gutes tun",img:"/kids/assets/deen/adab-akhlaq.jpg"},
-    {id:"sidq",title:"Ehrlichkeit & Vertrauen",caption:"Die Wahrheit sagen",img:"/kids/assets/deen/iman.jpg"},
-    {id:"sabr",title:"Geduld & Sanftmut",caption:"Ruhig und freundlich bleiben",img:"/kids/assets/prophets-v2/ayyub-card.jpg"},
-    {id:"ilm",title:"Wissen & Lernen",caption:"Mit Freude Neues entdecken",img:"/kids/assets/deen/deen-entry.jpg"},
-    {id:"adab",title:"Freundschaft & Adab",caption:"Ein guter Umgang miteinander",img:"/kids/assets/deen/adab-akhlaq.jpg"},
-    {id:"family",title:"Familie & Eltern",caption:"Liebe und Fürsorge",img:"/kids/assets/prophets-v2/ismail-card.jpg"},
-    {id:"hikma",title:"Klugheit & Verantwortung",caption:"Gute Entscheidungen",img:"/kids/assets/deen/ibadah.jpg"},
-    {id:"shukr",title:"Dankbarkeit & Bescheidenheit",caption:"Das Gute wahrnehmen",img:"/kids/assets/deen/tawhid.jpg"}
+    {id:"rahma",title:"Barmherzigkeit & Helfen",short:"Barmherzigkeit",caption:"Helfen und Gutes tun",img:"/kids/assets/deen/adab-akhlaq.jpg"},
+    {id:"sidq",title:"Ehrlichkeit & Vertrauen",short:"Ehrlichkeit",caption:"Die Wahrheit sagen",img:"/kids/assets/deen/iman.jpg"},
+    {id:"sabr",title:"Geduld & Sanftmut",short:"Geduld",caption:"Ruhig und freundlich bleiben",img:"/kids/assets/prophets-v2/ayyub-card.jpg"},
+    {id:"ilm",title:"Wissen & Lernen",short:"Wissen",caption:"Mit Freude Neues lernen",img:"/kids/assets/deen/deen-entry.jpg"},
+    {id:"adab",title:"Freundschaft & Adab",short:"Freundschaft",caption:"Gut miteinander umgehen",img:"/kids/assets/kids-art/knowledge-courtyard-v11.jpg"},
+    {id:"family",title:"Familie & Eltern",short:"Familie",caption:"Liebe und Fürsorge",img:"/kids/assets/prophets-v2/ismail-card.jpg"},
+    {id:"hikma",title:"Klugheit & Verantwortung",short:"Klugheit",caption:"Gute Entscheidungen",img:"/kids/assets/deen/ibadah.jpg"},
+    {id:"shukr",title:"Dankbarkeit & Bescheidenheit",short:"Dankbarkeit",caption:"Das Gute erkennen",img:"/kids/assets/deen/tawhid.jpg"}
   ];
   var MANIFEST="/kids/data/salaf-library-v1.json?v=1";
   var items=[],tab="all",topic="",active=null,reader=null,audio=new Audio(),playing=false;
@@ -40,13 +40,13 @@
   var home=
     '<header class="salaf-hero">'+
       '<span class="salaf-hero-light" aria-hidden="true"></span>'+
-      '<div class="salaf-hero-copy"><span class="salaf-eyebrow">DĀR AL TAWḤĪD KIDS · WAHRE BEGEBENHEITEN</span>'+
-      '<h2>Schätze der Salaf</h2><p>Wahre Geschichten. Sanfte Worte. Wertvolle Lehren für dein Herz.</p>'+
+      '<div class="salaf-hero-copy"><span class="salaf-eyebrow">DĀR AL TAWḤĪD KIDS · GESCHICHTENWELT</span>'+
+      '<h2>Schätze der Salaf</h2><p>Geschichten zum Hören, Lesen und Staunen.</p>'+
       '</div>'+
     '</header>'+
     '<div class="salaf-wrap">'+
-      '<div class="salaf-intro"><div><span class="salaf-eyebrow">DEINE GESCHICHTENWELT</span><h3>Was möchtest du entdecken?</h3><p>Wähle eine Themenwelt oder stöbere nach Persönlichkeiten.</p></div>'+
-      '<span class="salaf-age" id="salafAge"></span></div>'+
+      '<div class="salaf-intro"><div class="salaf-intro-top"><span class="salaf-eyebrow">DEINE GESCHICHTENWELT</span>'+
+      '<span class="salaf-age" id="salafAge"></span></div><h3>Was möchtest du entdecken?</h3></div>'+
       '<div class="salaf-switch" role="group" aria-label="Bibliotheksansicht">'+
         '<button type="button" data-salaf-tab="all" class="selected">Themen</button>'+
         '<button type="button" data-salaf-tab="people">Personen</button>'+
@@ -85,8 +85,8 @@
   }
   function renderCards(target,arr){
     target.innerHTML=arr.length?'<div class="salaf-story-grid">'+arr.map(card).join("")+'</div>':
-      '<div class="salaf-empty"><span class="salaf-empty-icon" aria-hidden="true">✧</span><strong>Hier wachsen neue Geschichten</strong>'+
-      '<p>Schon bald warten hier schöne Erzählungen und wertvolle Lehren auf dich.</p></div>';
+      '<div class="salaf-empty"><span class="salaf-empty-icon" aria-hidden="true"></span><strong>Geschichten kommen bald dazu</strong>'+
+      '<p>Hier gibt es bald Neues zum Hören und Lesen.</p></div>';
   }
   function render(){
     root.dataset.profile=gender();
@@ -94,30 +94,40 @@
     root.querySelectorAll("[data-salaf-tab]").forEach(function(b){b.classList.toggle("selected",b.dataset.salafTab===tab);b.setAttribute("aria-pressed",String(b.dataset.salafTab===tab))});
     var vis=available();
     if(tab==="all"){
-      pane.innerHTML='<div class="salaf-topic-grid">'+CATEGORIES.map(function(c){
-        var count=vis.filter(function(i){return i.category===c.id}).length;
-        return '<button type="button" class="salaf-topic '+(topic===c.id?"selected":"")+'" data-topic="'+c.id+'" aria-pressed="'+String(topic===c.id)+'">'+
-          '<span class="salaf-topic-image" style="background-image:url(&quot;'+esc(c.img)+'&quot;)"></span>'+
-          '<span class="salaf-topic-copy"><strong>'+esc(c.title)+'</strong><small>'+esc(c.caption)+'</small>'+
-          '<em>'+(count?count+" Geschichten":"Bald neue Geschichten")+'</em></span></button>';
-      }).join("")+'</div>';
-      list.innerHTML='<div class="salaf-list-head"><h3>'+(topic?esc(CATEGORIES.find(function(c){return c.id===topic})?.title||"Themenwelt"):"Alle Geschichten")+'</h3>'+
-        (topic?'<button type="button" id="salafClear">Alle Themen zeigen</button>':"")+'</div>';
-      var node=document.createElement("div");list.appendChild(node);
-      renderCards(node,vis.filter(function(i){return !topic||i.category===topic}));
-      q("#salafClear")?.addEventListener("click",function(){topic="";render()});
+      if(topic){
+        var chosen=CATEGORIES.find(function(c){return c.id===topic});
+        var matches=vis.filter(function(i){return i.category===topic});
+        pane.innerHTML='<div class="salaf-topic-focus">'+
+          '<button type="button" id="salafClear" class="salaf-return">‹ Alle Themen</button>'+
+          '<h3>'+esc(chosen?.short||"Geschichten")+'</h3>'+
+          '<p>'+esc(chosen?.caption||"Entdecke eine neue Geschichtenwelt")+'</p></div>';
+        list.innerHTML="";
+        renderCards(list,matches);
+        q("#salafClear")?.addEventListener("click",function(){topic="";render()});
+      }else{
+        pane.innerHTML='<div class="salaf-topic-grid">'+CATEGORIES.map(function(c){
+          var count=vis.filter(function(i){return i.category===c.id}).length;
+          return '<button type="button" class="salaf-topic" data-topic="'+c.id+'" aria-label="'+esc(c.title)+' öffnen">'+
+            '<span class="salaf-topic-image" style="background-image:url(&quot;'+esc(c.img)+'&quot;)"></span>'+
+            '<span class="salaf-topic-copy"><strong>'+esc(c.short)+'</strong><small>'+esc(c.caption)+'</small></span>'+
+            (count?'<span class="salaf-card-count">'+count+' Geschichten</span>':"")+'</button>';
+        }).join("")+'</div>';
+        list.innerHTML=vis.length
+          ?'<div class="salaf-list-head"><h3>Alle Geschichten</h3></div><div class="salaf-story-grid">'+vis.map(card).join("")+'</div>'
+          :'<p class="salaf-upcoming">Hier erwarten dich bald wunderschöne Geschichten.</p>';
+      }
     }else if(tab==="people"){
       var people=[...new Set(vis.map(function(i){return i.person}))].sort(function(a,b){return a.localeCompare(b,"de")});
-      pane.innerHTML='<div class="salaf-section-title"><h3>Persönlichkeiten</h3><p>Entdecke die Menschen hinter den Überlieferungen.</p></div>';
+      pane.innerHTML='<div class="salaf-section-title"><h3>Persönlichkeiten</h3><p>Lerne besondere Menschen und ihre Geschichten kennen.</p></div>';
       list.innerHTML=people.length?people.map(function(person){
         return '<section class="salaf-person"><h4>'+esc(person)+'</h4><div class="salaf-story-grid">'+vis.filter(function(i){return i.person===person}).map(card).join("")+'</div></section>';
-      }).join(""):'<div class="salaf-empty"><strong>Hier lernst du besondere Menschen kennen</strong><p>Ihre schönen Geschichten kommen bald dazu.</p></div>';
+      }).join(""):'<div class="salaf-empty salaf-empty-compact"><span class="salaf-empty-icon" aria-hidden="true"></span><strong>Hier warten besondere Menschen auf dich</strong><p>Ihre Geschichten erzählen wir dir bald.</p></div>';
     }else{
-      pane.innerHTML='<div class="salaf-offline-hero"><strong>Deine Offline-Bibliothek</strong><p>Speichere fertige Erzählungen mit Text und deiner Altersaufnahme. Einmal herunterladen, danach auch ohne Internet hören.</p>'+
-        '<button type="button" id="salafOpenParentsOffline">Alle Offline-Inhalte verwalten ↗</button></div>';
-      list.innerHTML='<div class="salaf-section-title"><h3>Geschichten zum Speichern</h3></div>';
+      pane.innerHTML='<div class="salaf-offline-hero"><span class="salaf-offline-art" aria-hidden="true"></span><div class="salaf-offline-copy"><strong>Deine Geschichten für unterwegs</strong><p>Einmal speichern. Auch ohne Internet hören und lesen.</p>'+
+        '<button type="button" id="salafOpenParentsOffline">Meine Downloads ansehen</button></div></div>';
+      list.innerHTML=vis.some(function(i){return !!soundFor(i)})?'<div class="salaf-section-title"><h3>Zum Speichern</h3></div>':'<p class="salaf-upcoming">Hier findest du bald deine Hörgeschichten zum Speichern.</p>';
       var node=document.createElement("div");list.appendChild(node);
-      renderCards(node,vis.filter(function(i){return !!soundFor(i)}));
+      if(vis.some(function(i){return !!soundFor(i)}))renderCards(node,vis.filter(function(i){return !!soundFor(i)}));
       var cards=node.querySelectorAll(".salaf-story");
       cards.forEach(function(b){
         var i=items.find(function(x){return x.id===b.dataset.storyId});

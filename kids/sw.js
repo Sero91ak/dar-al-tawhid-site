@@ -298,6 +298,7 @@ const KIDS_BOOT_PRECACHE=[
   "/kids/assets/kids-icons/library-real-v12.png?v=cut1",
   "/kids/assets/kids-icons/dua-real-v12.png?v=cut1",
   "/kids/salaf-library-v1.css?v=1",
+  "/kids/salaf-open-world-v1353.css?v=1353",
   "/kids/data/salaf-library-v1.json?v=1",
   "/kids/assets/salaf/salaf-library-hero-boys.jpg",
   "/kids/assets/salaf/salaf-library-hero-girls.jpg",
