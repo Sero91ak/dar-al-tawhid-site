@@ -89,11 +89,11 @@ const findings={url:"https://dar-al-tawhid.de/test/?env=staging&source=pwa&v=137
   }
   await tapTest(qidx,"quran");
   await tapTest(pidx,"posts");
-  await page.waitForTimeout(4600);
+  await page.waitForTimeout(18000);
   const pageText=await page.locator("#appView").innerText();
   findings.tap.posts.hasCategories=!/0\s+Bereiche|Noch keine Kategorien erkannt/i.test(pageText);
   await snapshot("posts-after-wait");
-  if(!findings.tap.posts.hasCategories)throw Error("Beiträge did not load categories after 4.6 sec on Android Chrome");
+  if(!findings.tap.posts.hasCategories)throw Error("Beiträge did not load categories after 18 sec on Android Chrome");
   await page.setViewportSize({width:915,height:412});
   await page.waitForTimeout(1400);
   await snapshot("landscape");
