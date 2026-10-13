@@ -157,6 +157,32 @@
     var nav = document.getElementById("bottomNav");
     if (!nav) return;
     if (nav.classList.contains("is-tab-loupe")) return;
+    // DUOS_SINGLE_OWNER_V1381 (Dar Test only).
+    // The legacy bottom-bar controller must NEVER recenter a side rail,
+    // including during SPA view replacement, orientation races and before
+    // DarAdaptiveNavPlacement has published its next effective state.
+    // This is intentionally DOM/capacity based and independent of JS timing.
+    var testPath = String(global.location && global.location.pathname || "");
+    if (testPath === "/test" || testPath.indexOf("/test/") === 0) {
+      var rootForNav = document.documentElement;
+      var layoutW = Number(rootForNav && rootForNav.clientWidth) || Number(global.innerWidth) || 0;
+      var layoutH = Number(rootForNav && rootForNav.clientHeight) || Number(global.innerHeight) || 0;
+      var blockedSide = rootForNav && rootForNav.classList.contains("adaptive-keyboard-open");
+      var inChat = document.body && document.body.classList.contains("is-ilm-chat-route");
+      if (layoutW >= 640 && layoutH >= 340 && !blockedSide && !inChat) {
+        var prefSide = "bottom";
+        try {
+          prefSide = global.DarAdaptiveNavPlacement &&
+            typeof global.DarAdaptiveNavPlacement.getPreference === "function"
+            ? global.DarAdaptiveNavPlacement.getPreference()
+            : String(global.localStorage.getItem("darNavPositionV2") || "bottom");
+        } catch (_) {}
+        var domSide = rootForNav && rootForNav.getAttribute("data-dar-nav-position");
+        if (prefSide === "left" || prefSide === "right" ||
+            domSide === "left" || domSide === "right" ||
+            nav.classList.contains("is-adaptive-rail")) return;
+      }
+    }
     try {
       if (global.DarAdaptiveNavPlacement &&
           typeof global.DarAdaptiveNavPlacement.getEffectivePosition === "function") {
