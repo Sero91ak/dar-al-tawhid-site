@@ -1,5 +1,18 @@
 # Qualitätsprüfung KIDS AKADEMI – V38 (13.10.2026)
 
+## Umsetzung nach der ersten Befundaufnahme
+
+Der oben dokumentierte **Ausgangszustand** wurde auf dem Arbeitszweig nachgebessert:
+- V38: Altersbegrüßungen, sprechbare Erläuterungen und Fragen bereinigt; freigabe- und entwicklungsbezogene Prüfvermerke nicht mehr in den kinderseitig verwendeten Altersfeldern.
+- V38: 110 Quizpakete thematisch neu gebunden; insgesamt 888 Fragen in 333 Altersentwürfen. 33 durch Redaktion leer gewordene Textzeilen ergänzt.
+- Akademieansicht: der leere/ungeprüfte Hadith-Platzhalter wird bei Qurʾān-only-Lektionen versteckt, Quellenüberschrift und Schrittmarkierung angepasst.
+- Sprechplan: 1.407 unique Textbausteine mit 2.109 Kontexteinträgen synchronisiert, weiterhin `reviewStatus=not-generated` und `generateCreditsUsed=0`.
+- Reproduzierbarer Strict-Audit: `node kids/tools/audit-academy-visitor-copy-v1.cjs --strict`. Der Node-Lauf ist in dieser Sitzung **nicht ausgeführt** worden; die Datenstruktur wurde unabhängig anhand der GitHub-Dateien durchgerechnet.
+
+Dies ist **eine technische und redaktionelle Bereinigung, keine wissenschaftliche Freigabe**. Die Ausgangsmängel in diesem Bericht sind als dokumentierte Vorher-Situation zu verstehen. Ausführliche, individuelle Langform-Unterrichtstexte, eindeutige Quellenzuordnung und klassische Fiqh-Nachweise bleiben zu überprüfen.
+
+
+
 **Status:** Unabhängiger redaktioneller Repository-Audit; KEINE wissenschaftliche Freigabe, KEIN Live-Deploy, KEINE Audioerzeugung.
 
 ## Prüfgegenstand
