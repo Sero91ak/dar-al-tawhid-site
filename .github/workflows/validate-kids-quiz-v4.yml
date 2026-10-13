@@ -36,6 +36,20 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Provide FFmpeg for zero-credit audio stitching test
+        shell: bash
+        run: |
+          set -euo pipefail
+          if command -v ffmpeg >/dev/null 2>&1; then exit 0; fi
+          python3 -m pip install -q --disable-pip-version-check imageio-ffmpeg==0.6.0
+          mkdir -p "$HOME/.local/bin"
+          python3 - <<'PY'
+          import imageio_ffmpeg,pathlib,os
+          target=pathlib.Path.home()/".local/bin/ffmpeg"
+          target.symlink_to(imageio_ffmpeg.get_ffmpeg_exe())
+          print("Offline test FFmpeg:",target.resolve())
+          PY
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
       - name: Verify 900 texts match frontend and V4 generator
         run: |
           python3 kids/tools/quiz_v4_contract_guard.py
