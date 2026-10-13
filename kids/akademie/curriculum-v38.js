@@ -488,7 +488,7 @@ const additions=
       "ayah": 2,
       "label": "Qurʾān 2:2",
       "arabic": "ذَلِكَ الْكِتَابُ لَا رَيْبَ فِيهِ",
-      "meaning": "Sinngemäß für den Unterricht, keine beglaubigte Übersetzung: Der gespeicherte Auszug druckt: Das ist das Buch, an dem kein Zweifel ist. Die folgenden Worte des Verses stehen in diesem gespeicherten Auszug nicht.",
+      "meaning": "Sinngemäßer Auszug aus Qurʾān 2:2: Dies ist das Buch, an dem kein Zweifel ist. Der hier wiedergegebene arabische Text umfasst nur den Anfang des Verses.",
       "excerpt": true
     },
     "hadith": {
@@ -509,19 +509,19 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
-      "note": "Der Auszug ist unvollständig gegenüber dem ganzen Vers. Wir ergänzen den fehlenden Teil nicht aus dem Gedächtnis in das arabische Feld. Eine beglaubigte deutsche Übersetzung liegt nicht vor. Keine synthetische Rezitation. Keine Freigabe für Besucher."
+      "note": "Der Auszug ist unvollständig gegenüber dem ganzen Vers. Wir ergänzen den fehlenden Teil nicht aus dem Gedächtnis in das arabische Feld. Eine beglaubigte deutsche Übersetzung liegt nicht vor. Keine synthetische Rezitation. Keine Freigabe für Besucher. Unabhängige didaktische Korrektur: Versauszug 2:2 als Teilzitat gekennzeichnet, Quellenprüfung und unfertige Produktionshinweise aus Kindertexten entfernt. Religionswissenschaftliche Freigabe bleibt false."
     },
     "hint": "Wir erfinden keine zusätzliche Geschichte.",
     "sample": "Der Qurʾān ist Allahs Buch.",
     "ageText": {
       "4-5": {
         "goal": "Der Qurʾān ist Allahs Buch.",
-        "intro": "Der Qurʾān ist Allahs Buch. Der Qurʾān ist Allahs Buch. Wir gehen achtsam damit um. Stell dir vor: Ein Kind sieht ein Qurʾān-Exemplar auf dem Boden liegen und hebt es mit den Eltern an einen sauberen Platz. Heute üben wir: Wir sagen mit eigenen Worten: Dieses Buch kommt von Allah. Wir erfinden keinen zweiten Buchtitel. Wir erfinden keine zusätzliche Geschichte.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! Der Qurʾān ist Allahs Buch. Wir können aus ihm lernen. Wir hören aufmerksam zu, wenn daraus gelesen wird, und behandeln ein Qurʾān-Exemplar sorgfältig. Wenn du ein Exemplar auf dem Boden findest, kannst du eine erwachsene Person bitten, es mit dir an einen sauberen Platz zu legen. Heute sagen wir gemeinsam: „Der Qurʾān ist Allahs Buch.“",
         "lines": [
           "Der Qurʾān ist Allahs Buch.",
-          "Der Qurʾān ist Allahs Buch. Wir gehen achtsam damit um.",
-          "Ein Kind sieht ein Qurʾān-Exemplar auf dem Boden liegen und hebt es mit den Eltern an einen sauberen Platz.",
-          "Wir sagen mit eigenen Worten: Dieses Buch kommt von Allah. Wir erfinden keinen zweiten Buchtitel."
+          "Wir gehen sorgfältig mit einem Qurʾān-Exemplar um.",
+          "Wir hören aufmerksam zu, wenn daraus gelesen wird.",
+          "Ich kann sagen: „Der Qurʾān ist Allahs Buch.“"
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/55. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:2. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/55. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:2. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -536,18 +536,18 @@ const additions=
           }
         ],
         "situation": "Ein Kind sieht ein Qurʾān-Exemplar auf dem Boden liegen und hebt es mit den Eltern an einen sauberen Platz.",
-        "practice": "Wir sagen mit eigenen Worten: Dieses Buch kommt von Allah. Wir erfinden keinen zweiten Buchtitel.",
+        "practice": "Sage: „Der Qurʾān ist Allahs Buch.“ Besprich mit einem Erwachsenen, wo ein Qurʾān-Exemplar gut liegen kann.",
         "summary": "Der Qurʾān ist Allahs Buch. Wir erfinden keine zusätzliche Geschichte.",
-        "audioScript": "Der Qurʾān als Offenbarung. Der Qurʾān ist Allahs Buch. Der Qurʾān ist Allahs Buch. Wir gehen achtsam damit um. Ein Kind sieht ein Qurʾān-Exemplar auf dem Boden liegen und hebt es mit den Eltern an einen sauberen Platz. Wir sagen mit eigenen Worten: Dieses Buch kommt von Allah. Wir erfinden keinen zweiten Buchtitel."
+        "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Der Qurʾān ist Allahs Buch. Wir können aus ihm lernen. Wir behandeln ein Qurʾān-Exemplar sorgfältig. Sag mit mir: Der Qurʾān ist Allahs Buch."
       },
       "6-8": {
         "goal": "Der Qurʾān ist Allahs Buch.",
-        "intro": "Heute geht es um Der Qurʾān als Offenbarung. Der Qurʾān ist Allahs Buch. Wir lesen Qurʾān 2:2. Sinngemäß, ohne beglaubigte Übersetzung: Der gespeicherte Auszug druckt: Das ist das Buch, an dem kein Zweifel ist. Die folgenden Worte des Verses stehen in diesem gespeicherten Auszug nicht. So kann das im Alltag aussehen: Ein Kind sieht ein Qurʾān-Exemplar auf dem Boden liegen und hebt es mit den Eltern an einen sauberen Platz. Die Aufgabe: Wir sagen mit eigenen Worten: Dieses Buch kommt von Allah. Wir erfinden keinen zweiten Buchtitel. Qurʾān bedeutet: Allahs offenbartes Buch. Āyah bedeutet: ein Vers im Qurʾān. Die Grenze der Stunde: Der Auszug ist unvollständig gegenüber dem ganzen Vers. Wir ergänzen den fehlenden Teil nicht aus dem Gedächtnis in das arabische Feld. Eine beglaubigte deutsche Übersetzung liegt nicht vor. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! Der Qurʾān ist Allahs Offenbarung. Qurʾān 2:2 beginnt sinngemäß mit den Worten: „Dies ist das Buch, an dem kein Zweifel ist.“ Der heute gezeigte arabische Wortlaut ist nur der Beginn dieses Verses. Wir unterscheiden deshalb den Qurʾān-Auszug von unserem Alltagsbeispiel. Unser Beispiel lautet: Ein Qurʾān-Exemplar liegt auf dem Boden und wir legen es gemeinsam mit einem Erwachsenen sorgfältig an einen passenden Platz. Das ist die Übung der Stunde, keine wörtliche Aussage aus 2:2.",
         "lines": [
-          "Qurʾān 2:2 ist die gelesene Stelle.",
-          "Der Qurʾān ist Allahs Buch. Wir gehen achtsam damit um.",
-          "Ein Kind sieht ein Qurʾān-Exemplar auf dem Boden liegen und hebt es mit den Eltern an einen sauberen Platz.",
-          "Wir erfinden keine zusätzliche Geschichte."
+          "Der Qurʾān ist Allahs Offenbarung.",
+          "Qurʾān 2:2 beginnt mit einer Aussage über das Buch ohne Zweifel.",
+          "Unsere Übung erklärt, wie wir achtsam handeln können.",
+          "Der gezeigte arabische Text enthält nur einen Teil des Verses."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/55. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:2. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/55. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:2. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -562,18 +562,18 @@ const additions=
           }
         ],
         "situation": "Ein Kind sieht ein Qurʾān-Exemplar auf dem Boden liegen und hebt es mit den Eltern an einen sauberen Platz.",
-        "practice": "Wir sagen mit eigenen Worten: Dieses Buch kommt von Allah. Wir erfinden keinen zweiten Buchtitel.",
+        "practice": "Erkläre mit eigenen Worten: Was ist der Qurʾān? Nenne außerdem eine Möglichkeit, achtsam mit einem Qurʾān-Exemplar umzugehen.",
         "summary": "Qurʾān 2:2 trägt diese Stunde. Der Qurʾān ist Allahs Buch. Wir gehen achtsam damit um.",
-        "audioScript": "Der Qurʾān als Offenbarung. Der Qurʾān ist Allahs Buch. Wir gehen achtsam damit um. Ein Kind sieht ein Qurʾān-Exemplar auf dem Boden liegen und hebt es mit den Eltern an einen sauberen Platz. Wir sagen mit eigenen Worten: Dieses Buch kommt von Allah. Wir erfinden keinen zweiten Buchtitel."
+        "audioScript": "As-salāmu ʿalaikum! Der Qurʾān ist Allahs Buch. Qurʾān 2:2 spricht vom Buch ohne Zweifel. Heute sehen wir nur den Anfang dieses Verses. Als Übung sprechen wir darüber, wie wir ein Qurʾān-Exemplar sorgfältig behandeln."
       },
       "9-10": {
         "goal": "Ich kann Der Qurʾān als Offenbarung von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Der Qurʾān als Offenbarung. Das Lernziel ist: Der Qurʾān ist Allahs Buch. Die Seite https://www.islamweb.net/ar/library/content/49/55 wurde am 13. Oktober 2026 geöffnet. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:2. Sinngemäß, keine beglaubigte Übersetzung: Der gespeicherte Auszug druckt: Das ist das Buch, an dem kein Zweifel ist. Die folgenden Worte des Verses stehen in diesem gespeicherten Auszug nicht. Alltag: Ein Kind sieht ein Qurʾān-Exemplar auf dem Boden liegen und hebt es mit den Eltern an einen sauberen Platz. Aufgabe: Wir sagen mit eigenen Worten: Dieses Buch kommt von Allah. Wir erfinden keinen zweiten Buchtitel. Qurʾān bedeutet: Allahs offenbartes Buch. Āyah bedeutet: ein Vers im Qurʾān. Was nicht behauptet wird: Der Auszug ist unvollständig gegenüber dem ganzen Vers. Wir ergänzen den fehlenden Teil nicht aus dem Gedächtnis in das arabische Feld. Eine beglaubigte deutsche Übersetzung liegt nicht vor. Keine synthetische Rezitation. Keine Freigabe für Besucher. Eine wissenschaftliche Freigabe ist damit nicht ausgesprochen. Diese Stunde bleibt ein Entwurf.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! Wir lernen den Qurʾān als Allahs Offenbarung kennen. Qurʾān 2:2 beginnt sinngemäß: „Dies ist das Buch, an dem kein Zweifel ist.“ Der heute angezeigte arabische Wortlaut ist ausdrücklich nur der Anfang des Verses. Wir können sauber zwischen drei Dingen unterscheiden: dem arabischen Qurʾān-Auszug, seiner sinngemäßen deutschen Wiedergabe und einem Beispiel, das wir für den Unterricht verwenden. Ein Beispiel wäre der sorgfältige Umgang mit einem Qurʾān-Exemplar. Das Beispiel hilft uns beim Verstehen, ist aber nicht selbst ein Qurʾān-Vers. Wir erklären außerdem das Wort Āyah als Bezeichnung für einen Vers im Qurʾān und überlegen, wie Achtung vor dem Qurʾān im Alltag sichtbar werden kann.",
         "lines": [
-          "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 2:2.",
-          "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
-          "Der Auszug ist unvollständig gegenüber dem ganzen Vers.",
-          "Eine Hadithnummer, die auf der Seite fehlt, wird nicht ergänzt."
+          "Qurʾān 2:2 beginnt mit einer Aussage über das Buch ohne Zweifel.",
+          "Der hier gezeigte arabische Wortlaut ist nur ein Versauszug.",
+          "Āyah bedeutet Qurʾān-Vers.",
+          "Alltagshandlungen sind Unterrichtsbeispiele, nicht zusätzliche Verse."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/55. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:2. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/55. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:2. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -588,92 +588,92 @@ const additions=
           }
         ],
         "situation": "Ein Kind sieht ein Qurʾān-Exemplar auf dem Boden liegen und hebt es mit den Eltern an einen sauberen Platz.",
-        "practice": "Wir sagen mit eigenen Worten: Dieses Buch kommt von Allah. Wir erfinden keinen zweiten Buchtitel.",
+        "practice": "Erkläre den Unterschied zwischen Qurʾān-Auszug, deutscher sinngemäßer Erklärung und unserem Alltagsbeispiel. Gib ein eigenes Beispiel für sorgfältigen Umgang.",
         "summary": "Belegt ist Qurʾān 2:2. Ungeprüft bleibt: Der Auszug ist unvollständig gegenüber dem ganzen Vers.",
-        "audioScript": "Für die älteren Kinder. Der Qurʾān als Offenbarung. Der Qurʾān ist Allahs Buch. Wir gehen achtsam damit um. Nicht belegt und deshalb nicht behauptet: Der Auszug ist unvollständig gegenüber dem ganzen Vers."
+        "audioScript": "As-salāmu ʿalaikum! Der Qurʾān ist Allahs Offenbarung. Qurʾān 2:2 beginnt mit einer Aussage über das Buch ohne Zweifel. Heute wird nur ein Teil des Verses gezeigt. Eine Āyah ist ein Qurʾān-Vers. Wir lernen außerdem, ein Qurʾān-Exemplar sorgfältig zu behandeln."
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was passt zu dieser Stunde?",
+          "prompt": "Was ist der Qurʾān?",
           "options": [
-            "Wir sagen mit eigenen Worten: Dieses Buch kommt von Allah. Wir erfinden keinen zweiten Buchtitel.",
-            "Ich lasse einen Gesandten aus."
+            "Allahs Buch.",
+            "Ein Spielzeug."
           ],
           "correct": 0,
-          "hint": "Schau auf die Übung.",
-          "explain": "Die Übung der Stunde ist der erste Satz. Der zweite Satz ist das Gegenteil von dem, was wir üben."
+          "hint": "Denke an das Buch, aus dem wir lernen.",
+          "explain": "Der Qurʾān ist Allahs offenbartes Buch."
         },
         {
           "type": "choice",
-          "prompt": "Woran hält sich diese Stunde?",
+          "prompt": "Du findest ein Qurʾān-Exemplar auf dem Boden. Was ist gut?",
           "options": [
-            "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "Es mit Hilfe eines Erwachsenen sorgfältig aufbewahren.",
+            "Es herumwerfen."
           ],
           "correct": 0,
-          "hint": "Nur Gelesenes.",
-          "explain": "Die Stunde nennt Qurʾān 2:2 und trennt die Übung davon. Eine Nummer wird nicht erfunden."
+          "hint": "Wir behandeln es mit Achtung.",
+          "explain": "Sorgfältiger Umgang ist unsere praktische Übung."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Stelle trägt Der Qurʾān als Offenbarung?",
+          "prompt": "Was steht sinngemäß am Anfang von Qurʾān 2:2?",
           "options": [
-            "Qurʾān 2:2",
-            "Eine Stelle ohne Suren- und Verszahl."
+            "Dies ist das Buch, an dem kein Zweifel ist.",
+            "Der Qurʾān ist nur eine beliebige Geschichte."
           ],
           "correct": 0,
-          "hint": "Die Fundstelle steht im Unterricht.",
-          "explain": "Die Stunde bleibt bei Qurʾān 2:2."
+          "hint": "Denke an das Buch ohne Zweifel.",
+          "explain": "Der gespeicherte arabische Text ist der Versanfang."
         },
         {
           "type": "choice",
-          "prompt": "Was sagt der Vers sinngemäß für diese Stunde?",
+          "prompt": "Was bedeutet Āyah?",
           "options": [
-            "Der Qurʾān ist Allahs Buch. Wir gehen achtsam damit um.",
-            "Ich lasse einen Gesandten aus."
+            "Ein Vers im Qurʾān.",
+            "Eine Gebetsmatte."
           ],
           "correct": 0,
-          "hint": "Der erste Satz folgt der gelesenen Stelle.",
-          "explain": "Die deutsche Zeile ist eine Unterrichtshilfe zu Qurʾān 2:2, keine beglaubigte Übersetzung."
+          "hint": "Das Wort bezeichnet einen Teil des Qurʾān.",
+          "explain": "Āyah heißt in dieser Stunde Qurʾān-Vers."
         },
         {
           "type": "text",
-          "prompt": "Welche Übung gehört zu dieser Stunde?",
-          "sample": "Wir sagen mit eigenen Worten: Dieses Buch kommt von Allah. Wir erfinden keinen zweiten Buchtitel.",
-          "hint": "Die praktische Aufgabe.",
-          "explain": "Die Übung ist die genannte Handlung und nicht eine zusätzliche Formel."
+          "prompt": "Wie kannst du mit einem Qurʾān-Exemplar achtsam umgehen?",
+          "sample": "Ich bewahre es sorgfältig an einem sauberen Ort auf.",
+          "hint": "Denke an das Beispiel der Stunde.",
+          "explain": "Die Übung zeigt respektvollen Umgang."
         }
       ],
       "9-10": [
         {
           "type": "choice",
-          "prompt": "Welche Angabe wäre unehrlich?",
+          "prompt": "Welche Aussage gehört zum gezeigten Qurʾān-Auszug?",
           "options": [
-            "Ein Rechtsurteil oder eine Hadithnummer als gelesen auszugeben, obwohl die Seite sie nicht liefert.",
-            "Zu sagen, dass die deutsche Erklärung sinngemäß ist."
+            "Das Buch, an dem kein Zweifel ist.",
+            "Ein Beispiel zum Aufbewahren eines Buches."
           ],
           "correct": 0,
-          "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "hint": "Trenne Wortlaut und Beispiel.",
+          "explain": "Der zweite Satz ist unser Alltagsbeispiel, kein Vers."
         },
         {
           "type": "text",
-          "prompt": "Was darf diese Stunde nicht behaupten?",
-          "sample": "Der Auszug ist unvollständig gegenüber dem ganzen Vers.",
-          "hint": "Die Grenze steht im Text.",
-          "explain": "Die Grenze schützt davor, den Vers zu überdehnen."
+          "prompt": "Was bedeutet Āyah?",
+          "sample": "Eine Āyah ist ein Vers im Qurʾān.",
+          "hint": "Erkläre den arabischen Begriff.",
+          "explain": "In dieser Stunde bezeichnet Āyah einen Qurʾān-Vers."
         },
         {
           "type": "text",
-          "prompt": "Wie lautet die Qurʾān-Stelle?",
-          "sample": "Qurʾān 2:2",
-          "hint": "Sure und Vers.",
-          "explain": "Die Stelle ist Qurʾān 2:2 auf der genannten Islamweb-Seite."
+          "prompt": "Wie unterscheidest du Qurʾān-Text und Unterrichtsbeispiel?",
+          "sample": "Der Qurʾān-Text wird als Vers gekennzeichnet; unser Beispiel soll nur das sorgfältige Handeln erklären.",
+          "hint": "Beides ausdrücklich voneinander trennen.",
+          "explain": "Die Übung ist nicht selbst der Wortlaut von Qurʾān 2:2."
         }
       ]
     },
@@ -687,8 +687,8 @@ const additions=
         "de": "ein Vers im Qurʾān"
       }
     ],
-    "practice": "Wir sagen mit eigenen Worten: Dieses Buch kommt von Allah. Wir erfinden keinen zweiten Buchtitel.",
-    "summary": "Der Qurʾān ist Allahs Buch. Der Qurʾān ist Allahs Buch. Wir gehen achtsam damit um.",
+    "practice": "Erkläre mit eigenen Worten, dass der Qurʾān Allahs Buch ist, und nenne eine Möglichkeit, ein Qurʾān-Exemplar sorgfältig zu behandeln.",
+    "summary": "Der Qurʾān ist Allahs Buch. Wir lernen aus ihm und gehen sorgfältig mit einem Qurʾān-Exemplar um.",
     "audioScript": "Der Qurʾān als Offenbarung. Der Qurʾān ist Allahs Buch. Der Qurʾān ist Allahs Buch. Wir gehen achtsam damit um. Ein Kind sieht ein Qurʾān-Exemplar auf dem Boden liegen und hebt es mit den Eltern an einen sauberen Platz. Wir sagen mit eigenen Worten: Dieses Buch kommt von Allah. Wir erfinden keinen zweiten Buchtitel.",
     "voiceApproved": false
   },
