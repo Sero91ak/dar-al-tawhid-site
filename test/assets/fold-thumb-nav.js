@@ -368,6 +368,9 @@
       ((el && el.clientHeight) || global.innerHeight || 0);
   }
   function scheduleBurst() {
+    // Keep the orientation snapshot in sync with the event itself, so a late
+    // visualViewport resize does not restart a second rotation animation.
+    lastViewportShape = shape();
     clearBurst();
     if (settleTimer) global.clearTimeout(settleTimer);
     root.classList.add("dar-test-nav-rotating");
@@ -425,10 +428,10 @@
     global.addEventListener("touchstart", wakeNav, { passive: true });
     global.addEventListener("keydown", wakeNav);
 
-    // A body-wide MutationObserver caused redundant repaints on every render.
-    // Route + layout + viewport events above are sufficient; add one bounded
-    // orientation/start recovery burst in case the app mounts the tab bar late.
-    scheduleBurst();
+    // At startup the normal bar must be usable immediately. Delayed checks
+    // cover late SPA mounting without activating the rotation animation.
+    global.setTimeout(schedule, 140);
+    global.setTimeout(schedule, 480);
   }
 
   document.addEventListener("click", function (event) {
