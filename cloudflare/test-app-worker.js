@@ -3,6 +3,7 @@ import { composeIlmWithGemini } from "./ilm-gemini-bridge.js";
 import { researchIlmWithGemini } from "./ilm-gemini-open-research.js";
 import { composeIlmWithGroqFree } from "./ilm-groq-free-bridge.js";
 import { gateHiddenSurfaces, academyOwnerAccess, academyOwnerAssetPath } from "./preview-gate.js";
+import { DUOS_RAIL_JS, DUOS_RAIL_CSS } from "./test-duos-rail-v1361.js";
 const KIDS_VERSION_BODY = JSON.stringify({
   buildId: "kids-shell-v201-dua-v4-1306",
   label: "KIDS · V1.09.22"
@@ -340,7 +341,7 @@ async function finalizeDarTestHomeV1193(asset) {
       '<style id="darAdaptiveFoldAuthorityV1326">' +
       '@import url("/assets/adaptive-layout.css?v=1331-reader-safe");' +
       '@import url("/assets/fold-split.css?v=1331-reader-safe");' +
-      '@import url("/test/assets/fold-thumb-nav.css?v=duos-1357-quer");' +
+      '@import url("/test/assets/duos-rail-v1361.css?v=1361");' +
       '</style>';
     if (html.includes("</html>")) html = html.replace("</html>", adaptiveFoldStyle + "</html>");
     else html += adaptiveFoldStyle;
@@ -355,19 +356,19 @@ async function finalizeDarTestHomeV1193(asset) {
   }
 
   // DAR_ADAPTIVE_NAV_V1325
-  html = html.replace(/fold-thumb-nav\.css(?:\?v=[^"']*)?/g, "fold-thumb-nav.css?v=duos-1357-quer");
-  html = html.replace(/fold-thumb-nav\.js(?:\?v=[^"']*)?/g, "fold-thumb-nav.js?v=duos-1357-quer");
+  html = html.replace(/(?:\/test\/assets\/)?fold-thumb-nav\.css(?:\?v=[^"']*)?/g, "/test/assets/duos-rail-v1361.css?v=1361");
+  html = html.replace(/(?:\/test\/assets\/)?fold-thumb-nav\.js(?:\?v=[^"']*)?/g, "/test/assets/duos-rail-v1361.js?v=1361");
   // Test-only foundation for user-selectable bottom/left/right navigation.
   // Loaded as a final authority so legacy bottom-nav CSS cannot override side placement.
-  if (!html.includes("fold-thumb-nav.css?v=duos-1357-quer")) {
+  if (!html.includes("duos-rail-v1361.css?v=1361")) {
     const adaptiveNavStyle =
-      '<style id="darAdaptiveNavStyleV1325">@import url("/test/assets/fold-thumb-nav.css?v=duos-1357-quer");</style>';
+      '<style id="darAdaptiveNavStyleV1325">@import url("/test/assets/duos-rail-v1361.css?v=1361");</style>';
     if (html.includes("</html>")) html = html.replace("</html>", adaptiveNavStyle + "</html>");
     else html += adaptiveNavStyle;
   }
-  if (!html.includes("fold-thumb-nav.js?v=duos-1357-quer")) {
+  if (!html.includes("duos-rail-v1361.js?v=1361")) {
     const adaptiveNavScript =
-      '<script id="darAdaptiveNavScriptV1325" src="/test/assets/fold-thumb-nav.js?v=duos-1357-quer"><\/script>';
+      '<script id="darAdaptiveNavScriptV1325" src="/test/assets/duos-rail-v1361.js?v=1361"><\/script>';
     if (html.includes("</body>")) html = html.replace("</body>", adaptiveNavScript + "</body>");
     else if (html.includes("</html>")) html = html.replace("</html>", adaptiveNavScript + "</html>");
     else html += adaptiveNavScript;
@@ -432,6 +433,11 @@ async function finalizeDarTestHomeV1193(asset) {
     if (html.includes("</html>")) html = html.replace("</html>", block + "</html>");
     else html += block;
   }
+
+  // DUOS_GEOMETRY_V1361: testing only. Bundled navigation assets are
+  // served by this test Worker, not by the visitor or Kids app.
+  html = html.replace(/(?:\/test\/assets\/)?fold-thumb-nav\.(css|js)(?:\?v=[^"']*)?/g,
+    function (_, kind) { return "/test/assets/duos-rail-v1361." + kind + "?v=1361"; });
 
   const headers = new Headers(asset.headers);
   headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
@@ -556,6 +562,19 @@ async function ilmScienceCompose(request, env) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    // Duos geometry assets are isolated to /test; the five real tabs remain.
+    if (url.pathname === "/test/assets/duos-rail-v1361.js" ||
+        url.pathname === "/test/assets/duos-rail-v1361.css") {
+      const isJs = url.pathname.endsWith(".js");
+      return new Response(isJs ? DUOS_RAIL_JS : DUOS_RAIL_CSS, {
+        status: 200,
+        headers: {
+          "Content-Type": isJs ? "application/javascript; charset=utf-8" : "text/css; charset=utf-8",
+          "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
+          "X-Content-Type-Options": "nosniff"
+        }
+      });
+    }
     if (url.pathname === "/test/api/ilm/compose") return ilmScienceCompose(request, env);
     if (url.pathname === "/test/api/ilm/research") return ilmOpenResearch(request, env);
     // Owner Academy V19 is handled BEFORE generic Basic-Auth / Kids redirects.
