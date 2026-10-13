@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import pathlib
+import re
 import shutil
 import subprocess
 import tempfile
@@ -22,13 +23,20 @@ for q in items:
         phrase_texts.update(parts)
 assert len(phrase_texts) < 1660, f"Unexpected explosion of phrases: {len(phrase_texts)}"
 assert shutil.which("ffmpeg"),"ffmpeg required for joining test"
-assert shutil.which("ffprobe"),"ffprobe required for duration test"
 
 def duration(p:pathlib.Path)->float:
-    return float(subprocess.check_output([
-        "ffprobe","-v","error","-show_entries","format=duration",
-        "-of","default=noprint_wrappers=1:nokey=1",str(p)
-    ],text=True).strip())
+    if shutil.which("ffprobe"):
+        return float(subprocess.check_output([
+            "ffprobe","-v","error","-show_entries","format=duration",
+            "-of","default=noprint_wrappers=1:nokey=1",str(p)
+        ],text=True).strip())
+    # Static FFmpeg wheels do not include ffprobe. Parse input metadata.
+    result=subprocess.run(["ffmpeg","-hide_banner","-i",str(p)],
+        capture_output=True,text=True)
+    match=re.search(r"Duration:\s*(\d+):(\d+):(\d+(?:\.\d+)?)",result.stderr)
+    if not match:raise AssertionError("Could not read real audio duration")
+    h,m,sec=match.groups()
+    return 3600*int(h)+60*int(m)+float(sec)
 
 with tempfile.TemporaryDirectory(prefix="kids-v4-cost-zero-test-") as t:
     folder=pathlib.Path(t)
