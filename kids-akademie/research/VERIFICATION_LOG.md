@@ -60,3 +60,13 @@ Gezählt danach: 208 Lektions-IDs, 207 Archivmodule, `sidq` weiter außerhalb. L
 Gelesen wurden die Ibn-Kaṯīr-Seiten auf islamweb.net, Buch 49. Der arabische Text im Curriculum ist der markierte Versauszug dieser Seiten. Eine Hadithnummer wurde nicht ergänzt. Fiqh-Bücher wurden nicht gelesen. Dorar wurde nicht erneut geöffnet.
 
 Technische Tests danach grün: Übergabe, Ledger, Sequenzsperre, Roadmap, V22–V27, V9, Schulfortschritt, Begriffshelfer, Audio-Warteschlange, Stimm-Audit. Keine Audioerzeugung, kein Merge, kein Deploy, keine wissenschaftliche Freigabe.
+
+## 2026-10-13 · Kindersprache für Slots 98–208
+
+Die Zählung 97/208 ist der Stand von Commit `3bd743a0b0`. Der Strukturentwurf aller 208 IDs liegt seit `21f1082990` vor. In diesem Schritt wurden die gesprochenen Sätze neu gefasst.
+
+Lektion 98, `family-mobbing-erkennen-hilfe-holen`: Kinder lernen, wiederholtes Hänseln zu erkennen, sich nicht selbst die Schuld zu geben und eine vertraute erwachsene Person zu holen. Gelesene Stellen, keine neue Seite in diesem Schritt: Qurʾān 49:11, Inhalt 49/1754; Qurʾān 16:90, Inhalt 49/974; Qurʾān 49:10, Inhalt 49/1753. Die Schutzregel ist kein Verssatz. Die Gemeinheit wird nicht nachgespielt. Keine Hadithnummer.
+
+Lektionen 99–208: Lernziel, Verssinn, Alltag und Übung stehen in den Fassungen 4–5 und 6–8. Die Fassung 9–10 behält die Grenze der jeweiligen Ibn-Kaṯīr-Seite. Es wurde keine Hadithnummer, kein Fiqh-Urteil und keine Geschichte ergänzt.
+
+Gezählt danach unverändert: 208 IDs, 207 Archivmodule, `sidq` außerhalb, 0 von 624 freigegeben, 1521 ungenerierte Sprechtexte, 0 Credits. Tests: Übergabe, Ledger, Sequenzsperre, V22–V27, V9, Schulfortschritt, Begriffshelfer, Audio-Warteschlange, Stimm-Audit, Spur- und Integritätswächter. Keine wissenschaftliche Freigabe.

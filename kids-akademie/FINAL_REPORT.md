@@ -13,7 +13,8 @@ Gezählt mit `node kids/tools/build-akademie-handover-status-v1.cjs`:
 - Die neuen IDs hängen in `school-progress-v11.js` hinter den bisherigen Paketen. Alte Fortschrittspositionen wurden nicht verschoben. Die Freischaltregel, ein neues Thema erst am nächsten Schultag, ist unverändert.
 - Mädchen- und Jungenprofile, Navigation und Push-System wurden nicht geändert.
 - Regressionstests dieses Laufs sind grün: Ledger, Sequenzsperre, Roadmap, V22 bis V27, V9, Schulfortschritt, Begriffshelfer, Audio-Warteschlange und Stimm-Audit.
-- `kids/data/academy-voice-plan-v38.json` enthält 1513 ungenerierte deutsche Sprechtexte. `generateCreditsUsed` ist 0. Arabische Qurʾān-Worte stehen nicht in den Sprechtexten.
+- `kids/data/academy-voice-plan-v38.json` enthält 1521 ungenerierte deutsche Sprechtexte. `generateCreditsUsed` ist 0. Arabische Qurʾān-Worte stehen nicht in den Sprechtexten.
+- Die Kindersätze der Slots 98–208 wurden nach dem Strukturentwurf `21f1082990` neu gefasst. Die Gruppen 4–5 und 6–8 sehen den Unterricht, nicht den Prüfvermerk. Die Gruppe 9–10 behält den Vermerk, was nicht gelesen wurde. Lektion 98 ist dazu gesondert geschrieben.
 
 ## Quellenstatus, getrennt von der Technik
 

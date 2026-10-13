@@ -1,6 +1,6 @@
 # START HERE – CHATGPT HANDOVER
 
-DĀR AL TAWḤĪD KIDS AKADEMI. Stand vom 13. Oktober 2026. Technische Produktion der 208 Slots ist auf diesem Zweig vorhanden. Das ist keine wissenschaftliche Freigabe und kein Live-Deploy.
+DĀR AL TAWḤĪD KIDS AKADEMI. Stand vom 13. Oktober 2026. Alle 208 Slots haben auf diesem Zweig eine Lektion mit drei Altersfassungen. Die Meldung „97/208“ gehört zum Commit `3bd743a0b0`. Der Strukturentwurf 98–208 folgte in `21f1082990`. Danach wurden die Kindersätze der Slots 98–208 so geschrieben, dass die Gruppen 4–5 und 6–8 den Vers, den Alltag und die Übung lernen. Die Quellengrenze bleibt in der Quellenkarte und in der Fassung 9–10. Das ist keine wissenschaftliche Freigabe und kein Live-Deploy.
 
 ## Einstieg
 
@@ -19,16 +19,16 @@ Gezählt mit `node kids/tools/build-akademie-handover-status-v1.cjs` gegen Jahre
 - 208 Unterrichtsslots im Jahresplan `kids/data/academy-year-52weeks-v1.json`, alle mit `lessonId` und Status `currently-in-catalog`.
 - Slots 1–97 bleiben die früheren Pakete. Slots 98–208 stehen in `kids/akademie/curriculum-v38.js`, je drei Altersfassungen.
 - 207 Module stehen im Archivkatalog und haben Fragen für 4–5, 6–8 und 9–10. `sidq` bleibt das separate Modul. 208 IDs sind 207 Katalogmodule plus `sidq`.
-- Jede Altersfassung der Slots 98–208 enthält Lernziel, Unterrichtstext, Quellenhinweis, erklärte Begriffe, Alltag, Fragen mit Begründung, Übung, Zusammenfassung und deutschen Sprechtext.
+- Jede Altersfassung der Slots 98–208 enthält Lernziel, Unterrichtstext, Quellenhinweis, erklärte Begriffe, Alltag, Fragen mit Begründung, Übung, Zusammenfassung und deutschen Sprechtext. Lektion 98 ist gesondert ausformuliert. Die Lektionen 99–208 sprechen in den jüngeren Fassungen den gelesenen Sinn, die Situation und die Übung. Die Fassung 9–10 benennt, was die Seite nicht hergibt.
 - 6 Slots tragen `target-hadith-checked-online`: 79, 82, 83, 84, 85, 86. Das sind ältere Dorar-Stichproben, in diesem Lauf nicht erneut geöffnet.
 - 50 weitere Slots tragen nur geerbte Metadaten `metadata-in-repository-not-reverified`.
 - 34 ältere Slots bleiben `not-reviewed`.
 - Die Slots 91–208 tragen `primary-page-read-islamweb-2026-10-13`.
 - Freigegebene Altersfassungen: 0 von 624. `religiousSourcesVerified` von Paket V38 steht auf false.
 - Live-Deploy: nicht ausgeführt.
-- Audioerzeugung: nicht ausgeführt. `kids/data/academy-voice-plan-v38.json` enthält nur ungenerierte deutsche Sprechtexte.
+- Audioerzeugung: nicht ausgeführt. `kids/data/academy-voice-plan-v38.json` enthält 1521 ungenerierte deutsche Sprechtexte. `generateCreditsUsed` ist 0.
 
-Die Slots 87–90 bleiben Entwürfe mit nicht erneut geprüfter Quellenmetadaten. Slots 98–208 sind Entwürfe aus gelesenen Ibn-Kaṯīr-Seiten. Al-Mughnī wurde für die Fiqh-Stunden nicht gelesen.
+Die Slots 87–90 bleiben Entwürfe mit nicht erneut geprüfter Quellenmetadaten. Slots 98–208 bleiben Entwürfe aus gelesenen Ibn-Kaṯīr-Seiten, jetzt mit kindlicher Unterrichtssprache. Al-Mughnī wurde für die Fiqh-Stunden nicht gelesen. Lektion 98 verwendet zusätzlich die bereits gelesenen Stellen Qurʾān 16:90 und Qurʾān 49:10. „Du bist nicht schuld“ und der Weg zur vertrauten erwachsenen Person sind die Schutzregel der Stunde, kein eigener Verssatz.
 
 ## Pull Requests
 
@@ -62,4 +62,4 @@ Paket V37, Slots 95–97:
 
 ## Nächster Schritt
 
-Kein weiterer leerer Slot. Die offene Arbeit ist die menschliche Quellenfreigabe: Dorar erneut lesen, wo es 403 gab; al-Mughnī für die Fiqh-Stunden; die 34 `not-reviewed` und 50 nur geerbten Metadaten. Kein Audio, kein Merge, kein Live-Deploy, bis das ausdrücklich freigegeben wird.
+Kein leerer Slot. Wiederaufnahme für eine unabhängige Prüfung: Lektion 98 `family-mobbing-erkennen-hilfe-holen`, danach der Reihe nach bis 208. Freigegebene Altersfassungen: 0 von 624. Dorar erneut lesen, wo es 403 gab; al-Mughnī für die Fiqh-Stunden; die 34 `not-reviewed` und 50 nur geerbten Metadaten. Kein Audio, kein Merge, kein Live-Deploy, bis das ausdrücklich freigegeben wird.
