@@ -333,11 +333,10 @@
 #quizModal.quiz-round-mode[data-quiz-band="4-6"] .quiz-answers.quiz-yes-no .quiz-answer strong{
   font-size:clamp(23px,6vw,30px)!important;
 }
-#quizModal.quiz-round-mode[data-quiz-band="4-6"] .quiz-answers.quiz-yes-no .quiz-answer:first-child{
-  background:linear-gradient(145deg,rgba(92,176,160,.29),rgba(255,255,255,.015)),var(--qj-surface-2)!important;
-}
-#quizModal.quiz-round-mode[data-quiz-band="4-6"] .quiz-answers.quiz-yes-no .quiz-answer:last-child{
-  background:linear-gradient(145deg,rgba(219,177,116,.19),rgba(255,255,255,.015)),var(--qj-surface-2)!important;
+/* Both answers remain equally neutral before selection.
+   The colors of Ja/Nein must never hint at which answer is true. */
+#quizModal.quiz-round-mode[data-quiz-band="4-6"] .quiz-answers.quiz-yes-no .quiz-answer{
+  background:var(--qj-surface-2)!important;
 }
 #quizModal.quiz-round-mode[data-quiz-band="4-6"] .quiz-answers.quiz-yes-no .quiz-answer.correct{
   background:rgba(55,156,115,.27)!important;
