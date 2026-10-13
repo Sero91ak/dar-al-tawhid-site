@@ -73,6 +73,7 @@ const CORE_PRECACHE=[
   "/kids/deen-lessons.css?v=2",
   "/kids/deen-lessons.js?v=8",
   "/kids/global-detail-dock-v1247.css?v=1411",
+  "/kids/global-hero-seam-v1412.css?v=1412",
   "/kids/girls-profile-deep-fix-v1339.css?v=1339",
   "/kids/girls-profile-reader-v1340.css?v=1340",
   "/kids/global-detail-dock-v1247.js?v=1411",
