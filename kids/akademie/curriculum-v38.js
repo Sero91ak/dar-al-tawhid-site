@@ -6125,8 +6125,8 @@ const additions=
     "pillar": "akhlaq",
     "topic": "Bescheiden bleiben",
     "title": "Akhlāq · Bescheiden bleiben",
-    "lead": "Wir können uns über etwas Gutes freuen, ohne andere kleiner zu machen.",
-    "goal": "Wir können uns über etwas Gutes freuen, ohne andere kleiner zu machen.",
+    "lead": "Ich darf mich freuen und bleibe dabei bescheiden.",
+    "goal": "Ich darf mich freuen und bleibe dabei bescheiden.",
     "quran": {
       "surah": 25,
       "ayah": 63,
@@ -6155,17 +6155,17 @@ const additions=
       "scientificApproval": false,
       "note": "Der Vers beschreibt ein Verhalten, keine Punkteliste. Wir erfinden keinen Anlass aus dem Leben eines bestimmten Gefährten."
     },
-    "hint": "Wir erfinden keine zusätzliche Geschichte.",
-    "sample": "Wir können uns über etwas Gutes freuen, ohne andere kleiner zu machen.",
+    "hint": "Wir besprechen eine freundliche Handlung.",
+    "sample": "Ich darf mich freuen und bleibe dabei bescheiden.",
     "ageText": {
       "4-5": {
-        "goal": "Wir können uns über etwas Gutes freuen, ohne andere kleiner zu machen.",
-        "intro": "Wir können uns über etwas Gutes freuen, ohne andere kleiner zu machen. Der Vers beschreibt die Diener des Allerbarmers als Menschen, die bescheiden auf der Erde gehen und den Unwissenden mit Frieden begegnen. Stell dir vor: Ein Kind hat ein Rätsel gelöst und sagt: Schön, dass es geklappt hat, statt: Ihr seid dumm. Heute üben wir: Wir formulieren einen Satz über einen Erfolg ohne ein schlechtes Wort über ein anderes Kind. Wir erfinden keine zusätzliche Geschichte.",
+        "goal": "Ich darf mich freuen und bleibe dabei bescheiden.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! Heute geht es um Bescheidenheit. Qurʾān 25:63 beschreibt Menschen, die bescheiden und friedlich sind. Du hast ein Rätsel gelöst. Du darfst dich freuen und freundlich bleiben: Al-ḥamdu lillāh! Möchtest du mit mir üben? Allah möge uns gute Worte schenken. As-salāmu ʿalaikum!",
         "lines": [
-          "Wir können uns über etwas Gutes freuen, ohne andere kleiner zu machen.",
-          "Der Vers beschreibt die Diener des Allerbarmers als Menschen, die bescheiden auf der Erde gehen und den Unwissenden mit Frieden begegnen.",
-          "Ein Kind hat ein Rätsel gelöst und sagt: Schön, dass es geklappt hat, statt: Ihr seid dumm.",
-          "Wir formulieren einen Satz über einen Erfolg ohne ein schlechtes Wort über ein anderes Kind."
+          "Qurʾān 25:63 spricht von Bescheidenheit.",
+          "Ich darf mich über meinen Erfolg freuen.",
+          "Andere Kinder sind deshalb nicht weniger wert.",
+          "Ich spreche freundlich und biete Hilfe an."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1305. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 25:63. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1305. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 25:63. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -6179,19 +6179,19 @@ const additions=
             "de": "friedliche Antwort"
           }
         ],
-        "situation": "Ein Kind hat ein Rätsel gelöst und sagt: Schön, dass es geklappt hat, statt: Ihr seid dumm.",
-        "practice": "Wir formulieren einen Satz über einen Erfolg ohne ein schlechtes Wort über ein anderes Kind.",
-        "summary": "Wir können uns über etwas Gutes freuen, ohne andere kleiner zu machen. Wir erfinden keine zusätzliche Geschichte.",
-        "audioScript": "Bescheiden bleiben. Wir können uns über etwas Gutes freuen, ohne andere kleiner zu machen. Der Vers beschreibt die Diener des Allerbarmers als Menschen, die bescheiden auf der Erde gehen und den Unwissenden mit Frieden begegnen. Ein Kind hat ein Rätsel gelöst und sagt: Schön, dass es geklappt hat, statt: Ihr seid dumm. Wir formulieren einen Satz über einen Erfolg ohne ein schlechtes Wort über ein anderes Kind."
+        "situation": "Du hast ein schwieriges Rätsel gelöst, ein anderes Kind übt noch.",
+        "practice": "Nenne einen Satz, mit dem du dich über deinen Erfolg freust, ohne andere Kinder herabzusetzen.",
+        "summary": "Ich darf mich freuen und bleibe dabei bescheiden. As-salāmu ʿalaikum wa raḥmatullāh!",
+        "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Heute geht es um Bescheidenheit. Qurʾān 25:63 beschreibt Menschen, die bescheiden und friedlich sind. Du hast ein Rätsel gelöst. Du darfst dich freuen und freundlich bleiben: Al-ḥamdu lillāh! Möchtest du mit mir üben? Allah möge uns gute Worte schenken. As-salāmu ʿalaikum!"
       },
       "6-8": {
-        "goal": "Wir können uns über etwas Gutes freuen, ohne andere kleiner zu machen.",
-        "intro": "Heute geht es um Bescheiden bleiben. Wir können uns über etwas Gutes freuen, ohne andere kleiner zu machen. Wir lesen Qurʾān 25:63. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers beschreibt die Diener des Allerbarmers als Menschen, die bescheiden auf der Erde gehen und den Unwissenden mit Frieden begegnen. So kann das im Alltag aussehen: Ein Kind hat ein Rätsel gelöst und sagt: Schön, dass es geklappt hat, statt: Ihr seid dumm. Die Aufgabe: Wir formulieren einen Satz über einen Erfolg ohne ein schlechtes Wort über ein anderes Kind. hawn bedeutet: Ruhe, Bescheidenheit im Gang. salām bedeutet: friedliche Antwort. Die Grenze der Stunde: Der Vers beschreibt ein Verhalten, keine Punkteliste. Wir erfinden keinen Anlass aus dem Leben eines bestimmten Gefährten.",
+        "goal": "Ich darf mich freuen und bleibe dabei bescheiden.",
+        "intro": "As-salāmu ʿalaikum, liebe Geschwister! In Qurʾān 25:63 werden die Diener des Allerbarmers als bescheiden und friedlich beschrieben. Auch wenn dir etwas besser gelingt, musst du andere nicht verspotten. Stell dir vor, du hast gewonnen. Wie kannst du dich freuen und deinem Freund dennoch freundlich begegnen? Formuliere zwei gute Sätze. As-salāmu ʿalaikum wa raḥmatullāh!",
         "lines": [
-          "Qurʾān 25:63 ist die gelesene Stelle.",
-          "Der Vers beschreibt die Diener des Allerbarmers als Menschen, die bescheiden auf der Erde gehen und den Unwissenden mit Frieden begegnen.",
-          "Ein Kind hat ein Rätsel gelöst und sagt: Schön, dass es geklappt hat, statt: Ihr seid dumm.",
-          "Wir erfinden keine zusätzliche Geschichte."
+          "Qurʾān 25:63 beschreibt bescheidenes Verhalten.",
+          "Friedliche Worte passen zu unserem Glauben.",
+          "Ein Erfolg erlaubt Freude, aber keinen Spott.",
+          "Ich zeige Dankbarkeit ohne Hochmut."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1305. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 25:63. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1305. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 25:63. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -6205,19 +6205,19 @@ const additions=
             "de": "friedliche Antwort"
           }
         ],
-        "situation": "Ein Kind hat ein Rätsel gelöst und sagt: Schön, dass es geklappt hat, statt: Ihr seid dumm.",
-        "practice": "Wir formulieren einen Satz über einen Erfolg ohne ein schlechtes Wort über ein anderes Kind.",
-        "summary": "Qurʾān 25:63 trägt diese Stunde. Der Vers beschreibt die Diener des Allerbarmers als Menschen, die bescheiden auf der Erde gehen und den Unwissenden mit Frieden begegnen.",
-        "audioScript": "Bescheiden bleiben. Der Vers beschreibt die Diener des Allerbarmers als Menschen, die bescheiden auf der Erde gehen und den Unwissenden mit Frieden begegnen. Ein Kind hat ein Rätsel gelöst und sagt: Schön, dass es geklappt hat, statt: Ihr seid dumm. Wir formulieren einen Satz über einen Erfolg ohne ein schlechtes Wort über ein anderes Kind."
+        "situation": "Du hast ein schwieriges Rätsel gelöst, ein anderes Kind übt noch.",
+        "practice": "Nenne einen Satz, mit dem du dich über deinen Erfolg freust, ohne andere Kinder herabzusetzen.",
+        "summary": "Ich darf mich freuen und bleibe dabei bescheiden. As-salāmu ʿalaikum wa raḥmatullāh!",
+        "audioScript": "As-salāmu ʿalaikum, liebe Geschwister! In Qurʾān 25:63 werden die Diener des Allerbarmers als bescheiden und friedlich beschrieben. Auch wenn dir etwas besser gelingt, musst du andere nicht verspotten. Stell dir vor, du hast gewonnen. Wie kannst du dich freuen und deinem Freund dennoch freundlich begegnen? Formuliere zwei gute Sätze. As-salāmu ʿalaikum wa raḥmatullāh!"
       },
       "9-10": {
-        "goal": "Ich kann Bescheiden bleiben von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Bescheiden bleiben. Das Lernziel ist: Wir können uns über etwas Gutes freuen, ohne andere kleiner zu machen. Sinngemäß, keine beglaubigte Übersetzung: Der Vers beschreibt die Diener des Allerbarmers als Menschen, die bescheiden auf der Erde gehen und den Unwissenden mit Frieden begegnen. Alltag: Ein Kind hat ein Rätsel gelöst und sagt: Schön, dass es geklappt hat, statt: Ihr seid dumm. Aufgabe: Wir formulieren einen Satz über einen Erfolg ohne ein schlechtes Wort über ein anderes Kind. hawn bedeutet: Ruhe, Bescheidenheit im Gang. salām bedeutet: friedliche Antwort. Was nicht behauptet wird: Der Vers beschreibt ein Verhalten, keine Punkteliste. Wir erfinden keinen Anlass aus dem Leben eines bestimmten Gefährten.",
+        "goal": "Ich darf mich freuen und bleibe dabei bescheiden.",
+        "intro": "As-salāmu ʿalaikum, lieber Bruder, liebe Schwester! Qurʾān 25:63 beschreibt Bescheidenheit und eine friedliche Antwort auf unfreundliche Worte. Das gilt als Vorbild für unseren Umgang; unser Rätselbeispiel ist eine Alltagsübung, keine überlieferte Geschichte. Unterscheide Dankbarkeit über einen Erfolg vom Hochmut gegenüber anderen. Wie würdest du jemandem helfen, der noch übt? As-salāmu ʿalaikum wa raḥmatullāh!",
         "lines": [
-          "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 25:63.",
-          "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
-          "Der Vers beschreibt ein Verhalten, keine Punkteliste.",
-          "Eine Hadithnummer, die auf der Seite fehlt, wird nicht ergänzt."
+          "Qurʾān 25:63 verbindet bescheidenes Verhalten mit friedlicher Antwort.",
+          "Ein Erfolg macht keinen Menschen mehr wert als andere.",
+          "Unsere Alltagsszene ist eine pädagogische Übung.",
+          "Auch bei Meinungsverschiedenheiten können wir würdevoll sprechen."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1305. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 25:63. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1305. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 25:63. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -6231,93 +6231,97 @@ const additions=
             "de": "friedliche Antwort"
           }
         ],
-        "situation": "Ein Kind hat ein Rätsel gelöst und sagt: Schön, dass es geklappt hat, statt: Ihr seid dumm.",
-        "practice": "Wir formulieren einen Satz über einen Erfolg ohne ein schlechtes Wort über ein anderes Kind.",
-        "summary": "Belegt ist Qurʾān 25:63. Ungeprüft bleibt: Der Vers beschreibt ein Verhalten, keine Punkteliste.",
-        "audioScript": "Bescheiden bleiben. Der Vers beschreibt die Diener des Allerbarmers als Menschen, die bescheiden auf der Erde gehen und den Unwissenden mit Frieden begegnen. Nicht belegt und deshalb nicht behauptet: Der Vers beschreibt ein Verhalten, keine Punkteliste."
+        "situation": "Du hast ein schwieriges Rätsel gelöst, ein anderes Kind übt noch.",
+        "practice": "Nenne einen Satz, mit dem du dich über deinen Erfolg freust, ohne andere Kinder herabzusetzen.",
+        "summary": "Ich darf mich freuen und bleibe dabei bescheiden. As-salāmu ʿalaikum wa raḥmatullāh!",
+        "audioScript": "As-salāmu ʿalaikum, lieber Bruder, liebe Schwester! Qurʾān 25:63 beschreibt Bescheidenheit und eine friedliche Antwort auf unfreundliche Worte. Das gilt als Vorbild für unseren Umgang; unser Rätselbeispiel ist eine Alltagsübung, keine überlieferte Geschichte. Unterscheide Dankbarkeit über einen Erfolg vom Hochmut gegenüber anderen. Wie würdest du jemandem helfen, der noch übt? As-salāmu ʿalaikum wa raḥmatullāh!"
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was passt zu dieser Stunde?",
+          "prompt": "Du hast gewonnen. Was passt?",
           "options": [
-            "Wir formulieren einen Satz über einen Erfolg ohne ein schlechtes Wort über ein anderes Kind.",
-            "Ich mache es noch einmal extra."
+            "Al-ḥamdu lillāh! Wir können gemeinsam üben.",
+            "Ihr anderen könnt gar nichts!"
           ],
           "correct": 0,
-          "hint": "Schau auf die Übung.",
-          "explain": "Die Übung der Stunde ist der erste Satz. Der zweite Satz ist das Gegenteil von dem, was wir üben."
+          "hint": "Denke an die Geschichte und die Übung.",
+          "explain": "Freude und Freundlichkeit passen zusammen."
         },
         {
           "type": "choice",
-          "prompt": "Woran hält sich diese Stunde?",
+          "prompt": "Ein Kind braucht länger. Wie reagierst du?",
           "options": [
-            "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "Ich bleibe freundlich.",
+            "Ich verspotte es."
           ],
           "correct": 0,
-          "hint": "Nur Gelesenes.",
-          "explain": "Die Stunde nennt Qurʾān 25:63 und trennt die Übung davon. Eine Nummer wird nicht erfunden."
+          "hint": "Denke an die Geschichte und die Übung.",
+          "explain": "Bescheidenheit zeigt sich im Umgang mit anderen."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Stelle trägt Bescheiden bleiben?",
+          "prompt": "Was beschreibt Qurʾān 25:63?",
           "options": [
-            "Qurʾān 25:63",
-            "Eine Stelle ohne Suren- und Verszahl."
+            "Bescheidenheit und friedliche Antwort.",
+            "Spott über schwächere Menschen."
           ],
           "correct": 0,
-          "hint": "Die Fundstelle steht im Unterricht.",
-          "explain": "Die Stunde bleibt bei Qurʾān 25:63."
+          "hint": "Denke an die Geschichte und die Übung.",
+          "explain": "Der Vers beschreibt ein gutes Verhalten."
         },
         {
           "type": "choice",
-          "prompt": "Was sagt der Vers sinngemäß für diese Stunde?",
+          "prompt": "Was bedeutet es, nach einem Sieg bescheiden zu bleiben?",
           "options": [
-            "Der Vers beschreibt die Diener des Allerbarmers als Menschen, die bescheiden auf der Erde gehen und den Unwissenden mit Frieden begegnen.",
-            "Ich mache es noch einmal extra."
+            "Ich freue mich und achte die anderen.",
+            "Ich mache alle anderen schlecht."
           ],
           "correct": 0,
-          "hint": "Der erste Satz folgt der gelesenen Stelle.",
-          "explain": "Die deutsche Zeile ist eine Unterrichtshilfe zu Qurʾān 25:63, keine beglaubigte Übersetzung."
+          "hint": "Denke an die Geschichte und die Übung.",
+          "explain": "Ein Erfolg rechtfertigt keinen Hochmut."
         },
         {
           "type": "text",
-          "prompt": "Welche Übung gehört zu dieser Stunde?",
-          "sample": "Wir formulieren einen Satz über einen Erfolg ohne ein schlechtes Wort über ein anderes Kind.",
-          "hint": "Die praktische Aufgabe.",
-          "explain": "Die Übung ist die genannte Handlung und nicht eine zusätzliche Formel."
+          "prompt": "Beschreibe eine gute Handlung im Alltag.",
+          "sample": "Nenne einen Satz, mit dem du dich über deinen Erfolg freust, ohne andere Kinder herabzusetzen.",
+          "hint": "Denke an unser Beispiel.",
+          "explain": "Wir wenden die gelernte Aussage im Alltag an."
         }
       ],
       "9-10": [
         {
           "type": "choice",
-          "prompt": "Welche Angabe wäre unehrlich?",
+          "prompt": "Was passt zur Versbeschreibung?",
           "options": [
-            "Ein Rechtsurteil oder eine Hadithnummer als gelesen auszugeben, obwohl die Seite sie nicht liefert.",
-            "Zu sagen, dass die deutsche Erklärung sinngemäß ist."
+            "Ein Mensch bleibt bescheiden und antwortet friedlich.",
+            "Ein Mensch beleidigt andere, um stärker zu wirken."
           ],
           "correct": 0,
-          "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "hint": "Denke an die Geschichte und die Übung.",
+          "explain": "Qurʾān 25:63 nennt bescheidenen Umgang."
+        },
+        {
+          "type": "choice",
+          "prompt": "Welche Situation ist eine Anwendung, kein Verszitat?",
+          "options": [
+            "Ich biete einem Kind Hilfe beim Rätsel an.",
+            "Qurʾān 25:63 beschreibt bescheidenes Verhalten."
+          ],
+          "correct": 0,
+          "hint": "Denke an die Geschichte und die Übung.",
+          "explain": "Die Rätselszene zeigt unsere praktische Übung."
         },
         {
           "type": "text",
-          "prompt": "Was darf diese Stunde nicht behaupten?",
-          "sample": "Der Vers beschreibt ein Verhalten, keine Punkteliste.",
-          "hint": "Die Grenze steht im Text.",
-          "explain": "Die Grenze schützt davor, den Vers zu überdehnen."
-        },
-        {
-          "type": "text",
-          "prompt": "Wie lautet die Qurʾān-Stelle?",
-          "sample": "Qurʾān 25:63",
-          "hint": "Sure und Vers.",
-          "explain": "Die Stelle ist Qurʾān 25:63 auf der genannten Islamweb-Seite."
+          "prompt": "Beschreibe eine gute Handlung im Alltag.",
+          "sample": "Nenne einen Satz, mit dem du dich über deinen Erfolg freust, ohne andere Kinder herabzusetzen.",
+          "hint": "Denke an unser Beispiel.",
+          "explain": "Wir wenden die gelernte Aussage im Alltag an."
         }
       ]
     },
@@ -6331,9 +6335,9 @@ const additions=
         "de": "friedliche Antwort"
       }
     ],
-    "practice": "Wir formulieren einen Satz über einen Erfolg ohne ein schlechtes Wort über ein anderes Kind.",
-    "summary": "Wir können uns über etwas Gutes freuen, ohne andere kleiner zu machen. Der Vers beschreibt die Diener des Allerbarmers als Menschen, die bescheiden auf der Erde gehen und den Unwissenden mit Frieden begegnen.",
-    "audioScript": "Bescheiden bleiben. Wir können uns über etwas Gutes freuen, ohne andere kleiner zu machen. Der Vers beschreibt die Diener des Allerbarmers als Menschen, die bescheiden auf der Erde gehen und den Unwissenden mit Frieden begegnen. Ein Kind hat ein Rätsel gelöst und sagt: Schön, dass es geklappt hat, statt: Ihr seid dumm. Wir formulieren einen Satz über einen Erfolg ohne ein schlechtes Wort über ein anderes Kind.",
+    "practice": "Nenne einen Satz, mit dem du dich über deinen Erfolg freust, ohne andere Kinder herabzusetzen.",
+    "summary": "Ich darf mich freuen und bleibe dabei bescheiden.",
+    "audioScript": "As-salāmu ʿalaikum, liebe Geschwister! In Qurʾān 25:63 werden die Diener des Allerbarmers als bescheiden und friedlich beschrieben. Auch wenn dir etwas besser gelingt, musst du andere nicht verspotten. Stell dir vor, du hast gewonnen. Wie kannst du dich freuen und deinem Freund dennoch freundlich begegnen? Formuliere zwei gute Sätze. As-salāmu ʿalaikum wa raḥmatullāh!",
     "voiceApproved": false
   },
   "adab-mit-gaesten-freundlich": {
@@ -6342,8 +6346,8 @@ const additions=
     "pillar": "adab",
     "topic": "Mit Gästen freundlich umgehen",
     "title": "Adab · Mit Gästen freundlich umgehen",
-    "lead": "Wenn Gäste kommen, helfen wir den Eltern, freundlich zu sein.",
-    "goal": "Wenn Gäste kommen, helfen wir den Eltern, freundlich zu sein.",
+    "lead": "Ich kann Gäste respektvoll begrüßen und wahre ihre Grenzen.",
+    "goal": "Ich kann Gäste respektvoll begrüßen und wahre ihre Grenzen.",
     "quran": {
       "surah": 51,
       "ayah": 24,
@@ -6372,17 +6376,17 @@ const additions=
       "scientificApproval": false,
       "note": "Die Namen der Gäste, das Kalb und die weiteren Sätze der Geschichte stehen nicht in diesem gespeicherten Versteil. Wir erzählen sie nicht als geprüften Zusatz."
     },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
-    "sample": "Wenn Gäste kommen, helfen wir den Eltern, freundlich zu sein.",
+    "hint": "Wir besprechen eine freundliche Handlung.",
+    "sample": "Ich kann Gäste respektvoll begrüßen und wahre ihre Grenzen.",
     "ageText": {
       "4-5": {
-        "goal": "Wenn Gäste kommen, helfen wir den Eltern, freundlich zu sein.",
-        "intro": "Wenn Gäste kommen, helfen wir den Eltern, freundlich zu sein. Der Vers fragt: Ist die Geschichte von den geehrten Gästen Ibrāhīms zu dir gekommen? Stell dir vor: Es klingelt. Das Kind holt mit Erlaubnis ein Glas Wasser und sagt einen freundlichen Gruß. Heute üben wir: Wir üben, die Gäste anzusehen, leise zu grüßen und nicht in ihren Taschen zu stöbern. Die arabischen Worte spricht die Lehrperson.",
+        "goal": "Ich kann Gäste respektvoll begrüßen und wahre ihre Grenzen.",
+        "intro": "As-salāmu ʿalaikum, liebe Kinder! Qurʾān 51:24 erwähnt die geehrten Gäste Ibrāhīms. Wir üben heute, Gäste freundlich zu begrüßen. Wenn es klingelt, kannst du Salam sagen und fragen, ob du Wasser bringen darfst. Du lässt die Taschen und Sachen des Gastes in Ruhe. Möge Allah uns gute Umgangsformen schenken. As-salāmu ʿalaikum!",
         "lines": [
-          "Wenn Gäste kommen, helfen wir den Eltern, freundlich zu sein.",
-          "Der Vers fragt: Ist die Geschichte von den geehrten Gästen Ibrāhīms zu dir gekommen?",
-          "Es klingelt. Das Kind holt mit Erlaubnis ein Glas Wasser und sagt einen freundlichen Gruß.",
-          "Wir üben, die Gäste anzusehen, leise zu grüßen und nicht in ihren Taschen zu stöbern."
+          "Qurʾān 51:24 nennt die geehrten Gäste Ibrāhīms.",
+          "Ich grüße freundlich.",
+          "Ich frage, ob ich helfen darf.",
+          "Fremde Taschen und Sachen bleiben unberührt."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1768. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 51:24. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1768. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 51:24. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -6396,19 +6400,19 @@ const additions=
             "de": "ein Gesandter Allahs, den der Vers nennt"
           }
         ],
-        "situation": "Es klingelt. Das Kind holt mit Erlaubnis ein Glas Wasser und sagt einen freundlichen Gruß.",
-        "practice": "Wir üben, die Gäste anzusehen, leise zu grüßen und nicht in ihren Taschen zu stöbern.",
-        "summary": "Wenn Gäste kommen, helfen wir den Eltern, freundlich zu sein. Die arabischen Worte spricht die Lehrperson.",
-        "audioScript": "Mit Gästen freundlich umgehen. Wenn Gäste kommen, helfen wir den Eltern, freundlich zu sein. Der Vers fragt: Ist die Geschichte von den geehrten Gästen Ibrāhīms zu dir gekommen? Es klingelt. Das Kind holt mit Erlaubnis ein Glas Wasser und sagt einen freundlichen Gruß. Wir üben, die Gäste anzusehen, leise zu grüßen und nicht in ihren Taschen zu stöbern."
+        "situation": "Ein Gast kommt zur Tür, ein Erwachsener begleitet ihn herein.",
+        "practice": "Übe einen freundlichen Gruß. Frage zuerst, bevor du einem Gast etwas bringst.",
+        "summary": "Ich kann Gäste respektvoll begrüßen und wahre ihre Grenzen. As-salāmu ʿalaikum wa raḥmatullāh!",
+        "audioScript": "As-salāmu ʿalaikum, liebe Kinder! Qurʾān 51:24 erwähnt die geehrten Gäste Ibrāhīms. Wir üben heute, Gäste freundlich zu begrüßen. Wenn es klingelt, kannst du Salam sagen und fragen, ob du Wasser bringen darfst. Du lässt die Taschen und Sachen des Gastes in Ruhe. Möge Allah uns gute Umgangsformen schenken. As-salāmu ʿalaikum!"
       },
       "6-8": {
-        "goal": "Wenn Gäste kommen, helfen wir den Eltern, freundlich zu sein.",
-        "intro": "Heute geht es um Mit Gästen freundlich umgehen. Wenn Gäste kommen, helfen wir den Eltern, freundlich zu sein. Wir lesen Qurʾān 51:24. Sinngemäß, ohne beglaubigte Übersetzung: Der Vers fragt: Ist die Geschichte von den geehrten Gästen Ibrāhīms zu dir gekommen? Die Seite erklärt die Ehrung und verweist auf die ausführlichere Erzählung an anderer Stelle. So kann das im Alltag aussehen: Es klingelt. Das Kind holt mit Erlaubnis ein Glas Wasser und sagt einen freundlichen Gruß. Die Aufgabe: Wir üben, die Gäste anzusehen, leise zu grüßen und nicht in ihren Taschen zu stöbern. ḍayf bedeutet: Gast. Ibrāhīm bedeutet: ein Gesandter Allahs, den der Vers nennt. Die Grenze der Stunde: Die Namen der Gäste, das Kalb und die weiteren Sätze der Geschichte stehen nicht in diesem gespeicherten Versteil. Wir erzählen sie nicht als geprüften Zusatz.",
+        "goal": "Ich kann Gäste respektvoll begrüßen und wahre ihre Grenzen.",
+        "intro": "As-salāmu ʿalaikum, liebe Geschwister! Im Qurʾān 51:24 ist von den geehrten Gästen Ibrāhīms die Rede. Wir lernen daraus als Alltagsübung, Gäste respektvoll zu empfangen. Grüßen ist freundlich, aber niemand muss gedrückt oder angefasst werden. Du kannst Hilfe anbieten und ein Nein akzeptieren. Stelle dir vor, du begrüßt heute einen Gast: Welche Worte würdest du wählen? As-salāmu ʿalaikum wa raḥmatullāh!",
         "lines": [
-          "Qurʾān 51:24 ist die gelesene Stelle.",
-          "Der Vers fragt: Ist die Geschichte von den geehrten Gästen Ibrāhīms zu dir gekommen?",
-          "Es klingelt. Das Kind holt mit Erlaubnis ein Glas Wasser und sagt einen freundlichen Gruß.",
-          "Die arabischen Worte spricht die Lehrperson."
+          "Qurʾān 51:24 erwähnt geehrte Gäste.",
+          "Wir üben einen respektvollen Empfang.",
+          "Ich frage, bevor ich etwas bringe.",
+          "Ich akzeptiere persönliche Grenzen."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1768. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 51:24. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1768. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 51:24. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -6422,19 +6426,19 @@ const additions=
             "de": "ein Gesandter Allahs, den der Vers nennt"
           }
         ],
-        "situation": "Es klingelt. Das Kind holt mit Erlaubnis ein Glas Wasser und sagt einen freundlichen Gruß.",
-        "practice": "Wir üben, die Gäste anzusehen, leise zu grüßen und nicht in ihren Taschen zu stöbern.",
-        "summary": "Qurʾān 51:24 trägt diese Stunde. Der Vers fragt: Ist die Geschichte von den geehrten Gästen Ibrāhīms zu dir gekommen?",
-        "audioScript": "Mit Gästen freundlich umgehen. Der Vers fragt: Ist die Geschichte von den geehrten Gästen Ibrāhīms zu dir gekommen? Es klingelt. Das Kind holt mit Erlaubnis ein Glas Wasser und sagt einen freundlichen Gruß. Wir üben, die Gäste anzusehen, leise zu grüßen und nicht in ihren Taschen zu stöbern."
+        "situation": "Ein Gast kommt zur Tür, ein Erwachsener begleitet ihn herein.",
+        "practice": "Übe einen freundlichen Gruß. Frage zuerst, bevor du einem Gast etwas bringst.",
+        "summary": "Ich kann Gäste respektvoll begrüßen und wahre ihre Grenzen. As-salāmu ʿalaikum wa raḥmatullāh!",
+        "audioScript": "As-salāmu ʿalaikum, liebe Geschwister! Im Qurʾān 51:24 ist von den geehrten Gästen Ibrāhīms die Rede. Wir lernen daraus als Alltagsübung, Gäste respektvoll zu empfangen. Grüßen ist freundlich, aber niemand muss gedrückt oder angefasst werden. Du kannst Hilfe anbieten und ein Nein akzeptieren. Stelle dir vor, du begrüßt heute einen Gast: Welche Worte würdest du wählen? As-salāmu ʿalaikum wa raḥmatullāh!"
       },
       "9-10": {
-        "goal": "Ich kann Mit Gästen freundlich umgehen von der gelesenen Stelle her erklären und die Lücke benennen.",
-        "intro": "Mit Gästen freundlich umgehen. Das Lernziel ist: Wenn Gäste kommen, helfen wir den Eltern, freundlich zu sein. Sinngemäß, keine beglaubigte Übersetzung: Der Vers fragt: Ist die Geschichte von den geehrten Gästen Ibrāhīms zu dir gekommen? Die Seite erklärt die Ehrung und verweist auf die ausführlichere Erzählung an anderer Stelle. Alltag: Es klingelt. Das Kind holt mit Erlaubnis ein Glas Wasser und sagt einen freundlichen Gruß. Aufgabe: Wir üben, die Gäste anzusehen, leise zu grüßen und nicht in ihren Taschen zu stöbern. ḍayf bedeutet: Gast. Ibrāhīm bedeutet: ein Gesandter Allahs, den der Vers nennt. Was nicht behauptet wird: Die Namen der Gäste, das Kalb und die weiteren Sätze der Geschichte stehen nicht in diesem gespeicherten Versteil. Wir erzählen sie nicht als geprüften Zusatz.",
+        "goal": "Ich kann Gäste respektvoll begrüßen und wahre ihre Grenzen.",
+        "intro": "As-salāmu ʿalaikum, lieber Bruder, liebe Schwester! Qurʾān 51:24 erwähnt die geehrten Gäste Ibrāhīms, erzählt an dieser Stelle aber noch nicht die ganze Geschichte. Heute überlegen wir, was ein respektvoller Empfang im Alltag bedeutet: freundlich grüßen, mit Erlaubnis helfen und die Privatsphäre des Gastes achten. Unser Beispiel ist eine praktische Anwendung, kein zusätzlicher Bericht über Ibrāhīm. As-salāmu ʿalaikum wa raḥmatullāh!",
         "lines": [
-          "Gedruckt und gespeichert ist der Ausdruck zu Qurʾān 51:24.",
-          "Die deutsche Erklärung ist sinngemäß, keine beglaubigte Übersetzung.",
-          "Die Namen der Gäste, das Kalb und die weiteren Sätze der Geschichte stehen nicht in diesem gespeicherten Versteil.",
-          "Eine Hadithnummer, die auf der Seite fehlt, wird nicht ergänzt."
+          "Qurʾān 51:24 nennt geehrte Gäste Ibrāhīms.",
+          "Die gespeicherte Stelle ist nicht die gesamte Erzählung.",
+          "Der höfliche Empfang ist unsere Anwendung im Alltag.",
+          "Respekt beachtet auch Privatsphäre und persönliche Grenzen."
         ],
         "evidence": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1768. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 51:24. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1768. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 51:24. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -6448,93 +6452,97 @@ const additions=
             "de": "ein Gesandter Allahs, den der Vers nennt"
           }
         ],
-        "situation": "Es klingelt. Das Kind holt mit Erlaubnis ein Glas Wasser und sagt einen freundlichen Gruß.",
-        "practice": "Wir üben, die Gäste anzusehen, leise zu grüßen und nicht in ihren Taschen zu stöbern.",
-        "summary": "Belegt ist Qurʾān 51:24. Ungeprüft bleibt: Die Namen der Gäste, das Kalb und die weiteren Sätze der Geschichte stehen nicht in diesem gespeicherten Versteil.",
-        "audioScript": "Mit Gästen freundlich umgehen. Der Vers fragt: Ist die Geschichte von den geehrten Gästen Ibrāhīms zu dir gekommen? Nicht belegt und deshalb nicht behauptet: Die Namen der Gäste, das Kalb und die weiteren Sätze der Geschichte stehen nicht in diesem gespeicherten Versteil."
+        "situation": "Ein Gast kommt zur Tür, ein Erwachsener begleitet ihn herein.",
+        "practice": "Übe einen freundlichen Gruß. Frage zuerst, bevor du einem Gast etwas bringst.",
+        "summary": "Ich kann Gäste respektvoll begrüßen und wahre ihre Grenzen. As-salāmu ʿalaikum wa raḥmatullāh!",
+        "audioScript": "As-salāmu ʿalaikum, lieber Bruder, liebe Schwester! Qurʾān 51:24 erwähnt die geehrten Gäste Ibrāhīms, erzählt an dieser Stelle aber noch nicht die ganze Geschichte. Heute überlegen wir, was ein respektvoller Empfang im Alltag bedeutet: freundlich grüßen, mit Erlaubnis helfen und die Privatsphäre des Gastes achten. Unser Beispiel ist eine praktische Anwendung, kein zusätzlicher Bericht über Ibrāhīm. As-salāmu ʿalaikum wa raḥmatullāh!"
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was passt zu dieser Stunde?",
+          "prompt": "Ein Gast kommt herein. Was tust du?",
           "options": [
-            "Wir üben, die Gäste anzusehen, leise zu grüßen und nicht in ihren Taschen zu stöbern.",
-            "Ich störe absichtlich weiter."
+            "Ich grüße freundlich.",
+            "Ich greife in seine Tasche."
           ],
           "correct": 0,
-          "hint": "Schau auf die Übung.",
-          "explain": "Die Übung der Stunde ist der erste Satz. Der zweite Satz ist das Gegenteil von dem, was wir üben."
+          "hint": "Denke an die Geschichte und die Übung.",
+          "explain": "Ein freundlicher Gruß zeigt Respekt."
         },
         {
           "type": "choice",
-          "prompt": "Woran hält sich diese Stunde?",
+          "prompt": "Du möchtest Wasser bringen. Was machst du?",
           "options": [
-            "An dem gelesenen Qurʾān-Vers und an der Übung.",
-            "An einer Hadithnummer, die wir erfunden haben."
+            "Ich frage zuerst.",
+            "Ich zwinge dem Gast etwas auf."
           ],
           "correct": 0,
-          "hint": "Nur Gelesenes.",
-          "explain": "Die Stunde nennt Qurʾān 51:24 und trennt die Übung davon. Eine Nummer wird nicht erfunden."
+          "hint": "Denke an die Geschichte und die Übung.",
+          "explain": "Hilfe ist freundlich, wenn Grenzen geachtet werden."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Stelle trägt Mit Gästen freundlich umgehen?",
+          "prompt": "Wen nennt Qurʾān 51:24?",
           "options": [
-            "Qurʾān 51:24",
-            "Eine Stelle ohne Suren- und Verszahl."
+            "Die geehrten Gäste Ibrāhīms.",
+            "Eine Gruppe aus unserer erfundenen Schulklasse."
           ],
           "correct": 0,
-          "hint": "Die Fundstelle steht im Unterricht.",
-          "explain": "Die Stunde bleibt bei Qurʾān 51:24."
+          "hint": "Denke an die Geschichte und die Übung.",
+          "explain": "Der Vers erwähnt Gäste Ibrāhīms."
         },
         {
           "type": "choice",
-          "prompt": "Was sagt der Vers sinngemäß für diese Stunde?",
+          "prompt": "Was ist beim Begrüßen wichtig?",
           "options": [
-            "Der Vers fragt: Ist die Geschichte von den geehrten Gästen Ibrāhīms zu dir gekommen?",
-            "Ich störe absichtlich weiter."
+            "Freundlichkeit und Rücksicht.",
+            "Jeden Gast ungefragt umarmen."
           ],
           "correct": 0,
-          "hint": "Der erste Satz folgt der gelesenen Stelle.",
-          "explain": "Die deutsche Zeile ist eine Unterrichtshilfe zu Qurʾān 51:24, keine beglaubigte Übersetzung."
+          "hint": "Denke an die Geschichte und die Übung.",
+          "explain": "Respekt schließt persönliche Grenzen ein."
         },
         {
           "type": "text",
-          "prompt": "Welche Übung gehört zu dieser Stunde?",
-          "sample": "Wir üben, die Gäste anzusehen, leise zu grüßen und nicht in ihren Taschen zu stöbern.",
-          "hint": "Die praktische Aufgabe.",
-          "explain": "Die Übung ist die genannte Handlung und nicht eine zusätzliche Formel."
+          "prompt": "Beschreibe eine gute Handlung im Alltag.",
+          "sample": "Übe einen freundlichen Gruß. Frage zuerst, bevor du einem Gast etwas bringst.",
+          "hint": "Denke an unser Beispiel.",
+          "explain": "Wir wenden die gelernte Aussage im Alltag an."
         }
       ],
       "9-10": [
         {
           "type": "choice",
-          "prompt": "Welche Angabe wäre unehrlich?",
+          "prompt": "Welche Aussage hält sich an den gespeicherten Vers?",
           "options": [
-            "Ein Rechtsurteil oder eine Hadithnummer als gelesen auszugeben, obwohl die Seite sie nicht liefert.",
-            "Zu sagen, dass die deutsche Erklärung sinngemäß ist."
+            "Er erwähnt die geehrten Gäste Ibrāhīms.",
+            "Er beschreibt jede Einzelheit ihrer Reise."
           ],
           "correct": 0,
-          "hint": "Nur die gelesene Seite.",
-          "explain": "Technische Vollständigkeit ersetzt keine Quellenfreigabe. Fehlendes bleibt ungeprüft."
+          "hint": "Denke an die Geschichte und die Übung.",
+          "explain": "Der gespeicherte Ausschnitt nennt die Gäste, nicht die gesamte Erzählung."
+        },
+        {
+          "type": "choice",
+          "prompt": "Was passt zu Gastfreundschaft?",
+          "options": [
+            "Mit Erlaubnis helfen und ein Nein akzeptieren.",
+            "Die Privatsphäre eines Gastes ignorieren."
+          ],
+          "correct": 0,
+          "hint": "Denke an die Geschichte und die Übung.",
+          "explain": "Gäste dürfen eigene Grenzen haben."
         },
         {
           "type": "text",
-          "prompt": "Was darf diese Stunde nicht behaupten?",
-          "sample": "Die Namen der Gäste, das Kalb und die weiteren Sätze der Geschichte stehen nicht in diesem gespeicherten Versteil.",
-          "hint": "Die Grenze steht im Text.",
-          "explain": "Die Grenze schützt davor, den Vers zu überdehnen."
-        },
-        {
-          "type": "text",
-          "prompt": "Wie lautet die Qurʾān-Stelle?",
-          "sample": "Qurʾān 51:24",
-          "hint": "Sure und Vers.",
-          "explain": "Die Stelle ist Qurʾān 51:24 auf der genannten Islamweb-Seite."
+          "prompt": "Beschreibe eine gute Handlung im Alltag.",
+          "sample": "Übe einen freundlichen Gruß. Frage zuerst, bevor du einem Gast etwas bringst.",
+          "hint": "Denke an unser Beispiel.",
+          "explain": "Wir wenden die gelernte Aussage im Alltag an."
         }
       ]
     },
@@ -6548,9 +6556,9 @@ const additions=
         "de": "ein Gesandter Allahs, den der Vers nennt"
       }
     ],
-    "practice": "Wir üben, die Gäste anzusehen, leise zu grüßen und nicht in ihren Taschen zu stöbern.",
-    "summary": "Wenn Gäste kommen, helfen wir den Eltern, freundlich zu sein. Der Vers fragt: Ist die Geschichte von den geehrten Gästen Ibrāhīms zu dir gekommen?",
-    "audioScript": "Mit Gästen freundlich umgehen. Wenn Gäste kommen, helfen wir den Eltern, freundlich zu sein. Der Vers fragt: Ist die Geschichte von den geehrten Gästen Ibrāhīms zu dir gekommen? Es klingelt. Das Kind holt mit Erlaubnis ein Glas Wasser und sagt einen freundlichen Gruß. Wir üben, die Gäste anzusehen, leise zu grüßen und nicht in ihren Taschen zu stöbern.",
+    "practice": "Übe einen freundlichen Gruß. Frage zuerst, bevor du einem Gast etwas bringst.",
+    "summary": "Ich kann Gäste respektvoll begrüßen und wahre ihre Grenzen.",
+    "audioScript": "As-salāmu ʿalaikum, liebe Geschwister! Im Qurʾān 51:24 ist von den geehrten Gästen Ibrāhīms die Rede. Wir lernen daraus als Alltagsübung, Gäste respektvoll zu empfangen. Grüßen ist freundlich, aber niemand muss gedrückt oder angefasst werden. Du kannst Hilfe anbieten und ein Nein akzeptieren. Stelle dir vor, du begrüßt heute einen Gast: Welche Worte würdest du wählen? As-salāmu ʿalaikum wa raḥmatullāh!",
     "voiceApproved": false
   },
   "tarbiyah-lernen-und-pausen": {
