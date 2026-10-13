@@ -917,3 +917,17 @@ html.dar-test-side-nav[data-dar-nav-position="left"] body.is-quran-reader-route 
 @media(prefers-reduced-motion:reduce) {
   html.dar-test-side-nav #bottomNav.bottom-nav {transition:none!important}
 }
+
+
+/* DUOS_RAIL_PERSISTENT_VISIBILITY_V1368: the dock is navigation, not an
+ * auto-disappearing scroll ornament. Keep all five tabs available. */
+html.dar-test-side-nav.dar-nav-scrolling #bottomNav.bottom-nav,
+html.dar-test-side-nav.dar-nav-reader-idle #bottomNav.bottom-nav,
+html.dar-test-side-nav:not(.dar-nav-scrolling) #bottomNav.bottom-nav {
+  opacity:.96!important;
+  visibility:visible!important;
+  pointer-events:auto!important;
+}
+html.dar-test-side-nav #bottomNav.bottom-nav:is(:hover,:focus-within) {
+  opacity:1!important;
+}
