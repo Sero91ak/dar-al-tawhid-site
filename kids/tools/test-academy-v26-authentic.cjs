@@ -49,10 +49,10 @@ for(const [id] of expected)for(const age of ["4-5","6-8","9-10"]){
 }
 const year=JSON.parse(read("kids/data/academy-year-52weeks-v1.json"));
 const news=year.weeks.flatMap(w=>w.days).filter(x=>x.mode==="new");
-assert.equal(year.goals.currentlyInCatalog,97);assert.equal(year.goals.additionalAuthenticallyVerifiedLessonsNeeded,111);
+assert.equal(year.goals.currentlyInCatalog,208);assert.equal(year.goals.additionalAuthenticallyVerifiedLessonsNeeded,0);
 assert.deepEqual(news.slice(45,50).map(x=>x.lessonId),expected.map(x=>x[0]));
-assert.equal(news.filter(x=>!x.lessonId).length,111);
-assert.ok(news.slice(97).every(x=>x.lessonId===null&&x.status==="awaiting-authentic-source-and-content-review"));
+assert.equal(news.filter(x=>!x.lessonId).length,0);
+assert.ok(news.slice(208).every(x=>x.lessonId===null&&x.status==="awaiting-authentic-source-and-content-review"));
 const index=read("kids/akademie/index.html"),school=read("kids/akademie/school-progress-v11.js");
 assert.ok(index.includes('curriculum-v26.js?v=20261012-01'));
 assert.ok(school.includes("DARKidsAcademyCurriculumV26?.ids"));

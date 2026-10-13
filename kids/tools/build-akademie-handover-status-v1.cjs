@@ -71,7 +71,7 @@ const out = {
 const dest = path.join(root, "kids-akademie/LESSON_STATUS.json");
 fs.mkdirSync(path.dirname(dest), { recursive: true });
 fs.writeFileSync(dest, JSON.stringify(out, null, 2) + "\n");
-if (counts.slots !== 208 || counts.withLessonId !== 97 || counts.outlineWithoutLessonId !== 111) {
+if (counts.slots !== 208 || counts.withLessonId !== 208 || counts.outlineWithoutLessonId !== 0) {
   console.error(counts);
   process.exit(1);
 }

@@ -52,3 +52,11 @@ Gelesen, HTTP 200, Islamweb, Tafsīr Ibn Kaṯīr:
 - Inhalt 49/1155: 20:114 vollständig, unvokalisiert. Kein Hadith übernommen. Der Satz über die Offenbarung ist keine Hausaufgabenregel.
 
 Nicht gelesen für Slot 98 und die folgenden Slots. Keine Audioerzeugung.
+
+## 2026-10-13 · Paket V38, Slots 98–208
+
+Gezählt danach: 208 Lektions-IDs, 207 Archivmodule, `sidq` weiter außerhalb. Ledger 208 implementiert, 0 geplant, 174 explizite Altersvarianten, 6 Dorar-Stichproben unverändert.
+
+Gelesen wurden die Ibn-Kaṯīr-Seiten auf islamweb.net, Buch 49. Der arabische Text im Curriculum ist der markierte Versauszug dieser Seiten. Eine Hadithnummer wurde nicht ergänzt. Fiqh-Bücher wurden nicht gelesen. Dorar wurde nicht erneut geöffnet.
+
+Technische Tests danach grün: Übergabe, Ledger, Sequenzsperre, Roadmap, V22–V27, V9, Schulfortschritt, Begriffshelfer, Audio-Warteschlange, Stimm-Audit. Keine Audioerzeugung, kein Merge, kein Deploy, keine wissenschaftliche Freigabe.

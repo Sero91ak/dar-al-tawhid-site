@@ -9,17 +9,17 @@ Es gibt bereits eine Unterrichtsstruktur. Neue Lektionen gehören dort hinein, n
 - Quellenbank: `kids/data/academy-source-bank-researched-v1.json`.
 - Register der 208 Slots ohne neue Belege: `kids/data/academy-source-register-208-v1.json`.
 - Archiv-Schnappschuss: `kids/unterrichtsarchiv.html`, Objekt `ARCHIVE_SNAPSHOT.catalog`.
-- Curriculum-Module: `kids/akademie/curriculum-v1.js` und `curriculum-v22.js` bis `curriculum-v35.js`. Jedes spätere Paket hängt sich an `window.DARKidsAcademyCurriculum`, wenn die vorausgesetzte Lektion schon da ist.
+- Curriculum-Module: `kids/akademie/curriculum-v1.js`, `curriculum-v2.js`, `curriculum-v22.js` und `curriculum-v25.js` bis `curriculum-v38.js`. Jedes spätere Paket hängt sich an `window.DARKidsAcademyCurriculum`, wenn die vorausgesetzte Lektion schon da ist. V38 hängt an `dua-vor-dem-lernen-um-hilfe-bitten` und enthält die Slots 98–208.
 - Fortschritt: `kids/akademie/school-progress-v11.js`. Eine unfertige Lektion pro Profil und Alter. Neue geprüfte Pakete werden hinten angehängt, damit alte Fortschrittsnummern nicht verrutschen. Kein Cloud-Sync.
 
 ## Altersfassungen
 
-Im Archiv liegen bei 96 Modulen Fragen unter `questions["4-5"]`, `questions["6-8"]` und `questions["9-10"]`. Das Ledger zählt davon getrennt 63 ausdrücklichere Altersvarianten. Beides ist Entwurf, nicht Freigabe. 624 freigegebene Fassungen existieren nicht. Die Differenz zwischen Lektions-IDs und Katalogmodulen ist `sidq`: ein Sonderobjekt außerhalb des Katalogs. Vor den neuen Paketen waren das 90 IDs und 89 Module, danach 97 IDs und 96 Module.
+Im Archiv liegen bei 207 Modulen Fragen unter `questions["4-5"]`, `questions["6-8"]` und `questions["9-10"]`. Das Ledger zählt 174 ausdrücklich strukturierte Altersvarianten. Beides ist Entwurf, nicht Freigabe. 624 Altersfassungen sind im Jahresplan vorhanden; freigegeben ist keine. Die Differenz zwischen Lektions-IDs und Katalogmodulen ist `sidq`: ein Sonderobjekt außerhalb des Katalogs. Nach V38 sind das 208 IDs und 207 Module.
 
 ## Tests, die zu diesem Bestand gehören
 
 - `kids/tools/test-academy-208-research-ledger-v1.cjs`
-- `kids/tools/build-akademie-handover-status-v1.cjs` erzeugt `kids-akademie/LESSON_STATUS.json` und bricht ab, wenn nicht 208, 97 und 111 herauskommen. Diese Schwelle muss beim nächsten Paket mitgezogen werden.
+- `kids/tools/build-akademie-handover-status-v1.cjs` erzeugt `kids-akademie/LESSON_STATUS.json` und bricht ab, wenn nicht 208 Slots, 208 Lektions-IDs und 0 leere Umrisse herauskommen.
 - Weitere Akademie-Tests unter `kids/tools/test-academy-v2*.cjs` und `scripts/test-kids-academy-*.js`. Test-App-Dateien gehören in den eigenen Zweig von Pull Request #1090.
 
 ## Gesperrt
