@@ -37,7 +37,8 @@
    ...(Array.isArray(root.DARKidsAcademyCurriculumV32?.ids)?root.DARKidsAcademyCurriculumV32.ids:[]),
    ...(Array.isArray(root.DARKidsAcademyCurriculumV33?.ids)?root.DARKidsAcademyCurriculumV33.ids:[]),
    ...(Array.isArray(root.DARKidsAcademyCurriculumV34?.ids)?root.DARKidsAcademyCurriculumV34.ids:[]),
-   ...(Array.isArray(root.DARKidsAcademyCurriculumV35?.ids)?root.DARKidsAcademyCurriculumV35.ids:[])
+   ...(Array.isArray(root.DARKidsAcademyCurriculumV35?.ids)?root.DARKidsAcademyCurriculumV35.ids:[]),
+   ...(Array.isArray(root.DARKidsAcademyCurriculumV36?.ids)?root.DARKidsAcademyCurriculumV36.ids:[])
   ];
   const extra=new Set(extension);
   const lists=groups.map(g=>(topics[g]||[]).filter(id=>!extra.has(id)));

@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "generatedOn": "2026-10-13",
-  "warning": "Only sources already recorded in the repository. Not a verification of 208 lessons. Empty translation, edition or page fields were not established in this run.",
-  "sourceCount": 10,
+  "warning": "Sources are limited to pages read on 2026-10-13 plus the earlier unrefetched bank. Dorar and al-Maktaba returned HTTP 403 in this continuation and are not marked re-read. Missing hadith numbers stay unverified.",
+  "sourceCount": 17,
   "sources": [
     {
       "sourceId": "SRC-BANK-001",
@@ -201,6 +201,125 @@
       "verificationStatus": "cited-in-production-status-permalink-not-reconfirmed-2026-10-13",
       "lessonIds": [],
       "note": "One Hanbali purification pointer. Not a general fatwā."
+    },
+    {
+      "sourceId": "SRC-091-QURAN-14-7",
+      "work": "Tafsīr Ibn Kaṯīr, Islamweb, Sūrat Ibrāhīm 14:7",
+      "arabic": "وإذ تأذن ربكم لئن شكرتم لأزيدنكم ولئن كفرتم إن عذابي لشديد",
+      "number": "14:7",
+      "directLink": "https://www.islamweb.net/ar/library/content/49/891",
+      "authenticityNote": "Full ayah printed without tashkeel. Warning clause present and not used as fear content.",
+      "verificationStatus": "page-read-2026-10-13",
+      "checkedOn": "2026-10-13",
+      "checkedBy": "live Islamweb Ibn Kathir page content/49/891",
+      "lessonIds": [
+        "adab-danke-und-entschuldigung",
+        "nafs-dankbarkeit-im-herzen"
+      ],
+      "binding": "bound to slots 91 and 93",
+      "topic": "Dankbarkeit"
+    },
+    {
+      "sourceId": "SRC-091-ABUDAWUD-4811",
+      "work": "Sunan Abī Dāwūd, Kitāb al-Adab, Bāb fī shukr al-maʿrūf",
+      "narrator": "Abū Hurayrah",
+      "arabic": "لا يشكر الله من لا يشكر الناس",
+      "number": "4811",
+      "chapter": "باب في شكر المعروف",
+      "directLink": "https://www.islamweb.net/ar/library/content/4/4179/%D8%A8%D8%A7%D8%A8-%D9%81%D9%8A-%D8%B4%D9%83%D8%B1-%D8%A7%D9%84%D9%85%D8%B9%D8%B1%D9%88%D9%81",
+      "authenticityNote": "Isnad printed. No grade on this page.",
+      "verificationStatus": "page-read-2026-10-13",
+      "checkedOn": "2026-10-13",
+      "checkedBy": "live Islamweb Abu Dawud library page",
+      "lessonIds": [
+        "adab-danke-und-entschuldigung",
+        "nafs-dankbarkeit-im-herzen"
+      ],
+      "binding": "bound to slots 91 and 93; same locus, not a second hadith",
+      "topic": "Dank an Menschen"
+    },
+    {
+      "sourceId": "SRC-091-FATWA-34287",
+      "work": "Islamweb fatwa 34287",
+      "arabic": "لا يشكر الله من لا يشكر الناس",
+      "number": "34287",
+      "directLink": "https://www.islamweb.net/ar/fatwa/34287",
+      "authenticityNote": "Page says sahih according to al-Albani and lists Ahmad, Adab al-Mufrad, Abu Dawud, Ibn Hibban. It does not call the report Sahih al-Bukhari and does not print 4811.",
+      "verificationStatus": "page-read-2026-10-13-grading-only",
+      "checkedOn": "2026-10-13",
+      "checkedBy": "live Islamweb fatwa",
+      "lessonIds": [
+        "adab-danke-und-entschuldigung",
+        "nafs-dankbarkeit-im-herzen"
+      ],
+      "binding": "grading note only",
+      "topic": "Bewertung des Dank-Hadith"
+    },
+    {
+      "sourceId": "SRC-092-QURAN-2-153",
+      "work": "Tafsīr Ibn Kaṯīr, Islamweb, Sūrat al-Baqarah 2:153",
+      "arabic": "ياأيها الذين آمنوا استعينوا بالصبر والصلاة إن الله مع الصابرين",
+      "number": "2:153",
+      "directLink": "https://www.islamweb.net/ar/library/content/49/150",
+      "authenticityNote": "Ayah printed without tashkeel. Ayah 154 on the same page is excluded from the lesson.",
+      "verificationStatus": "page-read-2026-10-13",
+      "checkedOn": "2026-10-13",
+      "checkedBy": "live Islamweb Ibn Kathir page content/49/150",
+      "lessonIds": [
+        "tarbiyah-bei-problemen-hilfe-holen"
+      ],
+      "binding": "bound to slot 92",
+      "topic": "Hilfe durch Geduld und Gebet"
+    },
+    {
+      "sourceId": "SRC-092-MUSLIM-UNNUMBERED",
+      "work": "Islamweb article 76979, explanation of a hadith attributed to Muslim",
+      "narrator": "Abū Hurayrah",
+      "arabic": "والله في عون العبد ما كان العبد في عون أخيه",
+      "number": null,
+      "directLink": "https://www.islamweb.net/ar/article/76979",
+      "authenticityNote": "Page ends the quotation with rawa Muslim and prints no number. 2699 was not copied.",
+      "verificationStatus": "page-read-2026-10-13-number-not-printed",
+      "checkedOn": "2026-10-13",
+      "checkedBy": "live Islamweb article",
+      "lessonIds": [
+        "tarbiyah-bei-problemen-hilfe-holen"
+      ],
+      "binding": "bound to slot 92; number unverified",
+      "topic": "Allah hilft dem, der seinem Bruder hilft"
+    },
+    {
+      "sourceId": "SRC-094-MAIDAH-5-6",
+      "work": "Tafsīr al-Manār, Islamweb, excerpt of 5:6",
+      "arabic": "فاغسلوا وجوهكم وأيديكم إلى المرافق وامسحوا برءوسكم وأرجلكم إلى الكعبين",
+      "number": "5:6",
+      "directLink": "https://www.islamweb.net/ar/library/content/65/790",
+      "authenticityNote": "Excerpt only. Head-wiping amount not settled. Not al-Mughni.",
+      "verificationStatus": "page-read-2026-10-13-excerpt",
+      "checkedOn": "2026-10-13",
+      "checkedBy": "live Islamweb Manar page content/65/790",
+      "lessonIds": [
+        "fiqh-wudu-waschen-und-streichen"
+      ],
+      "binding": "bound to slot 94; fiqh review still open",
+      "topic": "Waschen und Streichen"
+    },
+    {
+      "sourceId": "SRC-094-HADATH-UNNUMBERED",
+      "work": "Same Manar page, hadith quotation attributed to Ahmad and the two Sahihs",
+      "narrator": "Abū Hurayrah",
+      "arabic": "لا يقبل الله صلاة أحدكم إذا أحدث حتى يتوضأ",
+      "number": null,
+      "directLink": "https://www.islamweb.net/ar/library/content/65/790",
+      "authenticityNote": "No hadith number on the page. Bukhari 135 was not re-read.",
+      "verificationStatus": "page-read-2026-10-13-number-not-printed",
+      "checkedOn": "2026-10-13",
+      "checkedBy": "live Islamweb Manar page",
+      "lessonIds": [
+        "fiqh-wudu-waschen-und-streichen"
+      ],
+      "binding": "bound to slot 94; number unverified",
+      "topic": "Gebet nach Hadath"
     }
   ]
 }

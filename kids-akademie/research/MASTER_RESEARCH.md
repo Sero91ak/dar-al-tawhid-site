@@ -25,3 +25,5 @@ islamweb.net, shamela.ws, dorar.net, al-maktaba.org, ketabonline.com, archive.or
 ## Was diese Runde geprüft hat
 
 Die sieben Einträge in `kids/data/academy-source-bank-researched-v1.json` und drei Hinweise aus `kids/docs/ACADEMY-208-PRODUKTIONSSTATUS.md` wurden ins Register übernommen. Dorar antwortete am 13. Oktober 2026 mit HTTP 403. Die Seiten wurden deshalb nicht erneut gelesen. Offene Fragen stehen in `kids-akademie/NEXT_TASKS.md`.
+
+Paket V36 hat zusätzlich die im Prüfprotokoll genannten Islamweb-Seiten gelesen und nur daraus die Slots 91–94 geschrieben. Fehlende Nummern bleiben `number: null`. Al-Maktaba antwortete beim erneuten Abruf ebenfalls mit HTTP 403.

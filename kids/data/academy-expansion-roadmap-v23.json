@@ -3,8 +3,8 @@
   "purpose": "Editorial roadmap: 90 implemented lesson contents, 118 upcoming locked outlines. Human review/audio approval separate.",
   "curriculum": {
     "totalNewLessonSlots": 208,
-    "alreadyImplementedLessons": 90,
-    "proposedAdditionalLessons": 118,
+    "alreadyImplementedLessons": 94,
+    "proposedAdditionalLessons": 114,
     "weeks": 52,
     "newDaysPerWeek": 4,
     "reviewDaysPerWeek": 2,
@@ -67,25 +67,25 @@
     {
       "id": "adab",
       "label": "Adab – islamisches Benehmen",
-      "plannedAdditions": 14,
+      "plannedAdditions": 13,
       "underlyingCurrentSubject": "adab"
     },
     {
       "id": "tarbiyah",
       "label": "Tarbiyah – Erziehung, Gewohnheiten, Verantwortung",
-      "plannedAdditions": 8,
+      "plannedAdditions": 7,
       "underlyingCurrentSubject": "tarbiyah"
     },
     {
       "id": "nafs",
       "label": "Tazkiyat an-Nafs – Herz und Selbststeuerung",
-      "plannedAdditions": 12,
+      "plannedAdditions": 11,
       "underlyingCurrentSubject": "nafs"
     },
     {
       "id": "fiqh",
       "label": "Fiqh und ʿIbādāt – gelebte Praxis",
-      "plannedAdditions": 18,
+      "plannedAdditions": 17,
       "underlyingCurrentSubject": "fiqh"
     },
     {
@@ -368,98 +368,42 @@
     {
       "editorialSlot": 51,
       "lessonId": "aqidah-allah-erschuf-tiere",
-      "status": "currently-in-catalog",
-      "sourceAudit": {
-        "quran": "16:5",
-        "hadith": "Ṣaḥīḥ al-Buḫārī, Nr. 2363; Ṣaḥīḥ Muslim, Nr. 2244 · Abū Hurayrah",
-        "directHadithUrl": "https://dorar.net/hadith/sharh/67134",
-        "originalHadithMeaningParaphrase": true,
-        "voiceApproved": false
-      }
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 52,
       "lessonId": "aqidah-iman-an-allah-vertiefen",
-      "status": "currently-in-catalog",
-      "sourceAudit": {
-        "quran": "2:285",
-        "hadith": "Ṣaḥīḥ Muslim, Nr. 8 · überliefert von ʿUmar ibn al-Khaṭṭāb",
-        "directHadithUrl": "https://dorar.net/hadith/sharh/1189",
-        "originalHadithMeaningParaphrase": true,
-        "voiceApproved": false
-      }
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 53,
       "lessonId": "aqidah-ikhlas-gute-lernabsicht",
-      "status": "currently-in-catalog",
-      "sourceAudit": {
-        "quran": "98:5",
-        "hadith": "Ṣaḥīḥ al-Buḫārī, Nr. 1 · ʿUmar ibn al-Khaṭṭāb",
-        "directHadithUrl": "https://dorar.net/hadith/sharh/3429",
-        "originalHadithMeaningParaphrase": true,
-        "voiceApproved": false
-      }
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 54,
       "lessonId": "akhlaq-geschwister-fair-teilen",
-      "status": "currently-in-catalog",
-      "sourceAudit": {
-        "quran": "16:90",
-        "hadith": "Ṣaḥīḥ al-Buḫārī, Nr. 2587; Ṣaḥīḥ Muslim, Nr. 1623 · an-Nuʿmān ibn Bašīr",
-        "directHadithUrl": "https://dorar.net/hadith/sharh/14634",
-        "originalHadithMeaningParaphrase": true,
-        "voiceApproved": false
-      }
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 55,
       "lessonId": "adab-privatsphaere-andere-achten",
-      "status": "currently-in-catalog",
-      "sourceAudit": {
-        "quran": "24:27",
-        "hadith": "Ṣaḥīḥ al-Buḫārī, Nr. 6241; Ṣaḥīḥ Muslim, Nr. 2156 · Sahl ibn Saʿd",
-        "directHadithUrl": "https://dorar.net/hadith/sharh/9448",
-        "originalHadithMeaningParaphrase": true,
-        "voiceApproved": false
-      }
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 56,
       "lessonId": "akhlaq-tarbiyah-sachen-pflegen",
-      "status": "currently-in-catalog",
-      "sourceAudit": {
-        "quran": "17:34",
-        "hadith": "Ṣaḥīḥ al-Buḫārī, Nr. 893; Ṣaḥīḥ Muslim, Nr. 1829 · ʿAbdullāh ibn ʿUmar",
-        "directHadithUrl": "https://dorar.net/hadith/sharh/6192",
-        "originalHadithMeaningParaphrase": true,
-        "voiceApproved": false
-      }
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 57,
       "lessonId": "akhlaq-nafs-wut-sicher-ausdruecken",
-      "status": "currently-in-catalog",
-      "sourceAudit": {
-        "quran": "3:134",
-        "hadith": "Ṣaḥīḥ al-Buḫārī, Nr. 6116 · Abū Hurayrah",
-        "directHadithUrl": "https://dorar.net/hadith/sharh/151063",
-        "originalHadithMeaningParaphrase": true,
-        "voiceApproved": false
-      }
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 58,
       "lessonId": "fiqh-wudu-schritte-reihenfolge",
-      "status": "currently-in-catalog",
-      "sourceAudit": {
-        "quran": "5:6",
-        "hadith": "Ṣaḥīḥ al-Buḫārī, Nr. 164; Ṣaḥīḥ Muslim, Nr. 226 · ʿUṯmān ibn ʿAffān",
-        "directHadithUrl": "https://dorar.net/hadith/sharh/3683",
-        "originalHadithMeaningParaphrase": true,
-        "voiceApproved": false
-      }
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 59,
@@ -620,157 +564,29 @@
       "editorialSlot": 90,
       "lessonId": "akhlaq-grosszuegig-freiwillig-teilen",
       "status": "currently-in-catalog"
-    }
-  ],
-  "plannedUnits": [
+    },
     {
       "editorialSlot": 91,
-      "topicId": "editorial-091",
-      "week": 23,
-      "weekday": "Donnerstag",
-      "pillar": "adab",
-      "title": "Danke und Entschuldigung sagen",
-      "classroomScenario": "Nach einer erhaltenen Hilfe Dank ausdrücken",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: nach einer erhaltenen Hilfe Dank ausdrücken.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: nach einer erhaltenen Hilfe Dank ausdrücken.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: nach einer erhaltenen Hilfe Dank ausdrücken.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "lessonId": "adab-danke-und-entschuldigung",
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 92,
-      "topicId": "editorial-092",
-      "week": 23,
-      "weekday": "Freitag",
-      "pillar": "tarbiyah",
-      "title": "Bei Problemen Hilfe holen",
-      "classroomScenario": "Einer vertrauten erwachsenen Person eine Schwierigkeit sagen",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: einer vertrauten erwachsenen Person eine Schwierigkeit sagen.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: einer vertrauten erwachsenen Person eine Schwierigkeit sagen.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: einer vertrauten erwachsenen Person eine Schwierigkeit sagen.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "lessonId": "tarbiyah-bei-problemen-hilfe-holen",
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 93,
-      "topicId": "editorial-093",
-      "week": 24,
-      "weekday": "Montag",
-      "pillar": "nafs",
-      "title": "Dankbarkeit im Herzen",
-      "classroomScenario": "Eine Sache nennen, für die man dankbar ist",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: eine Sache nennen, für die man dankbar ist.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: eine Sache nennen, für die man dankbar ist.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: eine Sache nennen, für die man dankbar ist.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "lessonId": "nafs-dankbarkeit-im-herzen",
+      "status": "currently-in-catalog"
     },
     {
       "editorialSlot": 94,
-      "topicId": "editorial-094",
-      "week": 24,
-      "weekday": "Dienstag",
-      "pillar": "fiqh",
-      "title": "Wuḍūʾ: Waschen und Streichen unterscheiden",
-      "classroomScenario": "Eine Waschbewegung und das Streichen über den Kopf auseinanderhalten",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: eine Waschbewegung und das Streichen über den Kopf auseinanderhalten.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: eine Waschbewegung und das Streichen über den Kopf auseinanderhalten.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: eine Waschbewegung und das Streichen über den Kopf auseinanderhalten.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
-      },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": true,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
-    },
+      "lessonId": "fiqh-wudu-waschen-und-streichen",
+      "status": "currently-in-catalog"
+    }
+  ],
+  "plannedUnits": [
     {
       "editorialSlot": 95,
       "topicId": "editorial-095",

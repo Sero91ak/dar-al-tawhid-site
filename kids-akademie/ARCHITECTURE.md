@@ -14,12 +14,12 @@ Es gibt bereits eine Unterrichtsstruktur. Neue Lektionen gehören dort hinein, n
 
 ## Altersfassungen
 
-Im Archiv liegen bei 89 Modulen Fragen unter `questions["4-5"]`, `questions["6-8"]` und `questions["9-10"]`. Das Ledger zählt davon getrennt 56 ausdrücklichere Altersvarianten. Beides ist Entwurf, nicht Freigabe. 624 freigegebene Fassungen existieren nicht.
+Im Archiv liegen bei 93 Modulen Fragen unter `questions["4-5"]`, `questions["6-8"]` und `questions["9-10"]`. Das Ledger zählt davon getrennt 60 ausdrücklichere Altersvarianten. Beides ist Entwurf, nicht Freigabe. 624 freigegebene Fassungen existieren nicht. Die Differenz zwischen Lektions-IDs und Katalogmodulen ist `sidq`: ein Sonderobjekt außerhalb des Katalogs. Vor Paket V36 waren das 90 IDs und 89 Module, danach 94 IDs und 93 Module.
 
 ## Tests, die zu diesem Bestand gehören
 
 - `kids/tools/test-academy-208-research-ledger-v1.cjs`
-- `kids/tools/build-akademie-handover-status-v1.cjs` erzeugt `kids-akademie/LESSON_STATUS.json` und bricht ab, wenn nicht 208, 90 und 118 herauskommen.
+- `kids/tools/build-akademie-handover-status-v1.cjs` erzeugt `kids-akademie/LESSON_STATUS.json` und bricht ab, wenn nicht 208, 94 und 114 herauskommen. Diese Schwelle muss beim nächsten Paket mitgezogen werden.
 - Weitere Akademie-Tests unter `kids/tools/test-academy-v2*.cjs` und `scripts/test-kids-academy-*.js`. Test-App-Dateien gehören in den eigenen Zweig von Pull Request #1090.
 
 ## Gesperrt

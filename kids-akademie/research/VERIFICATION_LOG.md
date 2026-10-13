@@ -19,3 +19,23 @@ Nicht gelesen, weil der Abruf scheiterte:
 - `https://dorar.net/hadith/sharh/3429` antwortete mit HTTP 403. Damit bleibt SRC-BANK-001 ungeprüft für diesen Lauf.
 
 Prüfung durch: Repository-Inventar in Cursor, 13. Oktober 2026. Keine Gelehrtenfreigabe.
+
+## 2026-10-13 · Paket V36, Slots 91–94, Islamweb gelesen
+
+Gezählt danach: 94 Lektions-IDs, 93 Archivmodule, `sidq` weiter außerhalb des Katalogs. Die frühere Differenz 90 zu 89 ist dieselbe Ausnahme und kein fehlender Unterricht.
+
+Gelesen, HTTP 200:
+
+- Abū Dāwūd, Bāb fī shukr al-maʿrūf, Nummer 4811, Wortlaut لا يشكر الله من لا يشكر الناس, Isnad Muslim ibn Ibrāhīm – ar-Rabīʿ ibn Muslim – Muḥammad ibn Ziyād – Abū Hurayrah. Keine Grade-Zeile auf dieser Seite. `https://www.islamweb.net/ar/library/content/4/4179/%D8%A8%D8%A7%D8%A8-%D9%81%D9%8A-%D8%B4%D9%83%D8%B1-%D8%A7%D9%84%D9%85%D8%B9%D8%B1%D9%88%D9%81`
+- Fatwa 34287: al-Albānī, ṣaḥīḥ; genannt werden Aḥmad, al-Adab al-Mufrad, Abū Dāwūd, Ibn Ḥibbān. Nicht Ṣaḥīḥ al-Buḫārī. Nummer 4811 steht auf der Fatwa nicht. `https://www.islamweb.net/ar/fatwa/34287`
+- Ibn Kaṯīr, Inhalt 49/891, 14:7 im unvokalisierten Druck: وإذ تأذن ربكم لئن شكرتم لأزيدنكم ولئن كفرتم إن عذابي لشديد
+- Ibn Kaṯīr, Inhalt 49/150, 2:153: ياأيها الذين آمنوا استعينوا بالصبر والصلاة إن الله مع الصابرين. Vers 154 auf derselben Seite nicht unterrichtet.
+- Artikel 76979: والله في عون العبد ما كان العبد في عون أخيه, Schluss رواه مسلم, keine Nummer. Anfang des Zitats mit مؤمن. 2699 nicht übernommen.
+- Tafsīr al-Manār, Inhalt 65/790: Auszug 5:6 mit وامسحوا برءوسكم und der Satz لا يقبل الله صلاة أحدكم إذا أحدث حتى يتوضأ, zugeschrieben Aḥmad und den beiden Ṣaḥīḥ-Werken, ohne Nummer. Al-Buḫārī 135 nicht erneut gelesen. Maß des Kopfstreichens offen. Al-Mughnī nicht gelesen.
+
+Nicht erneut gelesen:
+
+- `https://dorar.net/hadith/sharh/3429` HTTP 403.
+- `https://al-maktaba.org/book/31874/32965` HTTP 403. Der frühere lokale Seitenfang mit vokalisiertem 14:7 wird deshalb nicht als neuer Nachweis verwendet. Die Lektion benutzt den unvokalisierten Ibn-Kaṯīr-Druck.
+
+Technische Tests dieses Pakets, ohne Audio und ohne Deploy: Ledger, Sequenzsperre, Roadmap, V22–V27, V9, Schulfortschritt, Begriffshelfer, Audio-Warteschlange, Creator, Stimm-Audit. Alle in diesem Lauf grün. Keine Freigabe.

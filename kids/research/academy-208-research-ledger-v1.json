@@ -39,10 +39,10 @@
   ],
   "counts": {
     "slots": 208,
-    "implemented": 90,
-    "remaining": 118,
-    "explicitAge": 56,
-    "sourceAuditMetadata": 56,
+    "implemented": 94,
+    "remaining": 114,
+    "explicitAge": 60,
+    "sourceAuditMetadata": 60,
     "externallyChecked": 6
   },
   "lessons": [
@@ -3973,169 +3973,215 @@
       "slot": 91,
       "week": 23,
       "weekday": "Donnerstag",
-      "lessonId": null,
+      "lessonId": "adab-danke-und-entschuldigung",
       "topic": "Danke und Entschuldigung sagen",
       "pillar": "adab",
-      "status": "editorial-outline-locked",
-      "sourceAuditStatus": "not-reviewed",
-      "threeAgeStructured": false,
+      "status": "in-feature-branch-draft",
+      "sourceAuditStatus": "primary-page-read-islamweb-2026-10-13",
+      "threeAgeStructured": true,
       "childUnlocked": false,
       "voiceApproved": false,
-      "classroomScenario": "Nach einer erhaltenen Hilfe Dank ausdrücken",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: nach einer erhaltenen Hilfe Dank ausdrücken.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: nach einer erhaltenen Hilfe Dank ausdrücken.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: nach einer erhaltenen Hilfe Dank ausdrücken.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
+      "lessonTitle": "Adab · Danke und Entschuldigung",
+      "curriculumSource": "kids/akademie/curriculum-v36.js",
+      "quran": {
+        "surah": 14,
+        "ayah": 7,
+        "label": "Sūrat Ibrāhīm · 14:7",
+        "arabic": "وإذ تأذن ربكم لئن شكرتم لأزيدنكم ولئن كفرتم إن عذابي لشديد",
+        "meaning": "Sinngemäß nach dem auf der Tafsīr-Seite gedruckten Wortlaut: Wenn ihr dankbar seid, gebe Ich euch gewiss mehr. Der Vers enthält außerdem eine Warnung, die im Unterricht der Jüngeren nicht als Angstinhalt verwendet wird.",
+        "excerpt": false
       },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "hadith": {
+        "source": "Sunan Abī Dāwūd, Kitāb al-Adab, Bāb fī shukr al-maʿrūf, Nr. 4811 · Abū Hurayrah",
+        "meaning": "Der Prophet ﷺ sagte sinngemäß: Wer den Menschen nicht dankt, dankt Allah nicht. Auf der gelesenen Abū-Dāwūd-Seite steht keine eigene Bewertung. Eine Islamweb-Fatwa nennt die Einstufung ṣaḥīḥ durch al-Albānī."
+      },
+      "hadithUrl": "https://www.islamweb.net/ar/library/content/4/4179/%D8%A8%D8%A7%D8%A8-%D9%81%D9%8A-%D8%B4%D9%83%D8%B1-%D8%A7%D9%84%D9%85%D8%B9%D8%B1%D9%88%D9%81",
+      "sourceAudit": {
+        "hadithUrl": "https://www.islamweb.net/ar/library/content/4/4179/%D8%A8%D8%A7%D8%A8-%D9%81%D9%8A-%D8%B4%D9%83%D8%B1-%D8%A7%D9%84%D9%85%D8%B9%D8%B1%D9%88%D9%81",
+        "hadithNumber": "4811",
+        "narrator": "Abū Hurayrah",
+        "authenticity": "Auf der Abū-Dāwūd-Seite ohne Grad. Islamweb-Fatwa 34287: al-Albānī bewertete diesen Wortlaut als ṣaḥīḥ.",
+        "quranReference": "14:7",
+        "quranUrl": "https://www.islamweb.net/ar/library/content/49/891",
+        "quranTextType": "ayah-as-printed-without-tashkeel",
+        "hadithMeaningIsParaphrase": true,
+        "arabicText": "لا يشكر الله من لا يشكر الناس",
+        "isnadAsPrinted": "مسلم بن إبراهيم، عن الربيع بن مسلم، عن محمد بن زياد، عن أبي هريرة",
+        "gradingPage": "https://www.islamweb.net/ar/fatwa/34287",
+        "verifiedDate": "2026-10-13",
+        "dorarReRead": false,
+        "note": "Nummer 4811 und der Wortlaut stehen auf der Abū-Dāwūd-Seite. Die Fatwa nennt zusätzlich Aḥmad, al-Adab al-Mufrad, Abū Dāwūd und Ibn Ḥibbān und spricht nicht von Ṣaḥīḥ al-Buḫārī. Entschuldigung sagen ist eine Unterrichtsübung und kein Hadith dieser Lektion."
+      },
+      "ageGroupsWithExplicitScripts": [
+        "4-5",
+        "6-8",
+        "9-10"
+      ],
+      "quizGroups": [
+        "4-5",
+        "6-8",
+        "9-10"
+      ]
     },
     {
       "slot": 92,
       "week": 23,
       "weekday": "Freitag",
-      "lessonId": null,
+      "lessonId": "tarbiyah-bei-problemen-hilfe-holen",
       "topic": "Bei Problemen Hilfe holen",
       "pillar": "tarbiyah",
-      "status": "editorial-outline-locked",
-      "sourceAuditStatus": "not-reviewed",
-      "threeAgeStructured": false,
+      "status": "in-feature-branch-draft",
+      "sourceAuditStatus": "primary-page-read-islamweb-2026-10-13",
+      "threeAgeStructured": true,
       "childUnlocked": false,
       "voiceApproved": false,
-      "classroomScenario": "Einer vertrauten erwachsenen Person eine Schwierigkeit sagen",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: einer vertrauten erwachsenen Person eine Schwierigkeit sagen.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: einer vertrauten erwachsenen Person eine Schwierigkeit sagen.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: einer vertrauten erwachsenen Person eine Schwierigkeit sagen.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
+      "lessonTitle": "Tarbiyah · Bei Problemen Hilfe holen",
+      "curriculumSource": "kids/akademie/curriculum-v36.js",
+      "quran": {
+        "surah": 2,
+        "ayah": 153,
+        "label": "Sūrat al-Baqarah · 2:153",
+        "arabic": "ياأيها الذين آمنوا استعينوا بالصبر والصلاة إن الله مع الصابرين",
+        "meaning": "Sinngemäß nach dem gedruckten Wortlaut: Ihr, die ihr glaubt, sucht Hilfe durch Geduld und Gebet. Allah ist mit den Geduldigen.",
+        "excerpt": false
       },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "hadith": {
+        "source": "Islamweb, Erklärung zu einem Hadith, den die Seite Muslim zuschreibt, ohne Nummer · Abū Hurayrah",
+        "meaning": "Auf der gelesenen Seite sagt der Prophet ﷺ sinngemäß, dass Allah dem Menschen hilft, solange dieser seinem Bruder hilft. Die Seite druckt رواه مسلم und keine Nummer."
+      },
+      "hadithUrl": "https://www.islamweb.net/ar/article/76979",
+      "sourceAudit": {
+        "hadithUrl": "https://www.islamweb.net/ar/article/76979",
+        "hadithNumber": null,
+        "narrator": "Abū Hurayrah",
+        "authenticity": "Die Seite schreibt den Hadith Muslim zu und druckt keine Nummer. 2699 wurde deshalb nicht übernommen.",
+        "quranReference": "2:153",
+        "quranUrl": "https://www.islamweb.net/ar/library/content/49/150",
+        "quranTextType": "ayah-as-printed-without-tashkeel",
+        "hadithMeaningIsParaphrase": true,
+        "arabicText": "والله في عون العبد ما كان العبد في عون أخيه",
+        "wordingNote": "Die Artikelseite formuliert den Anfang mit مؤمن, nicht mit مسلم.",
+        "verifiedDate": "2026-10-13",
+        "dorarReRead": false,
+        "numberUnverified": true,
+        "note": "Der Hadith handelt davon, anderen zu helfen. Einer vertrauten erwachsenen Person eine eigene Schwierigkeit zu sagen, ist die Schutzübung dieser Stunde und steht so nicht im Hadith. Vers 2:154 auf derselben Tafsīr-Seite wird nicht unterrichtet."
+      },
+      "ageGroupsWithExplicitScripts": [
+        "4-5",
+        "6-8",
+        "9-10"
+      ],
+      "quizGroups": [
+        "4-5",
+        "6-8",
+        "9-10"
+      ]
     },
     {
       "slot": 93,
       "week": 24,
       "weekday": "Montag",
-      "lessonId": null,
+      "lessonId": "nafs-dankbarkeit-im-herzen",
       "topic": "Dankbarkeit im Herzen",
       "pillar": "nafs",
-      "status": "editorial-outline-locked",
-      "sourceAuditStatus": "not-reviewed",
-      "threeAgeStructured": false,
+      "status": "in-feature-branch-draft",
+      "sourceAuditStatus": "primary-page-read-islamweb-2026-10-13",
+      "threeAgeStructured": true,
       "childUnlocked": false,
       "voiceApproved": false,
-      "classroomScenario": "Eine Sache nennen, für die man dankbar ist",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: eine Sache nennen, für die man dankbar ist.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: eine Sache nennen, für die man dankbar ist.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: eine Sache nennen, für die man dankbar ist.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
+      "lessonTitle": "Nafs · Dankbarkeit im Herzen",
+      "curriculumSource": "kids/akademie/curriculum-v36.js",
+      "quran": {
+        "surah": 14,
+        "ayah": 7,
+        "label": "Sūrat Ibrāhīm · 14:7",
+        "arabic": "وإذ تأذن ربكم لئن شكرتم لأزيدنكم ولئن كفرتم إن عذابي لشديد",
+        "meaning": "Dieselbe auf Ibn Kaṯīr gelesene Stelle wie in der Dank-Lektion: Dankbarkeit wird genannt, und der Vers enthält eine Warnung, die hier nicht als Angstübung dient.",
+        "excerpt": false
       },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": false,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "hadith": {
+        "source": "Sunan Abī Dāwūd, Nr. 4811 · Abū Hurayrah · dieselbe gelesene Seite wie in der Lektion über den Dank an Menschen",
+        "meaning": "Sinngemäß: Wer den Menschen nicht dankt, dankt Allah nicht. Das Benennen einer persönlichen Gabe ist die Übung dieser Stunde und kein weiterer Hadith."
+      },
+      "hadithUrl": "https://www.islamweb.net/ar/library/content/4/4179/%D8%A8%D8%A7%D8%A8-%D9%81%D9%8A-%D8%B4%D9%83%D8%B1-%D8%A7%D9%84%D9%85%D8%B9%D8%B1%D9%88%D9%81",
+      "sourceAudit": {
+        "hadithUrl": "https://www.islamweb.net/ar/library/content/4/4179/%D8%A8%D8%A7%D8%A8-%D9%81%D9%8A-%D8%B4%D9%83%D8%B1-%D8%A7%D9%84%D9%85%D8%B9%D8%B1%D9%88%D9%81",
+        "hadithNumber": "4811",
+        "narrator": "Abū Hurayrah",
+        "authenticity": "Keine neue Grade-Zeile. Dieselbe Abū-Dāwūd-Seite und dieselbe Fatwa 34287 wie in der Lektion über den Dank an Menschen.",
+        "quranReference": "14:7",
+        "quranUrl": "https://www.islamweb.net/ar/library/content/49/891",
+        "quranTextType": "ayah-as-printed-without-tashkeel",
+        "hadithMeaningIsParaphrase": true,
+        "sameLocusAsLessonId": "adab-danke-und-entschuldigung",
+        "verifiedDate": "2026-10-13",
+        "dorarReRead": false,
+        "note": "Kein zweiter, unabhängiger Hadith. Die innere Übung, eine Gabe zu nennen, ist Didaktik. Die Warnhälfte von 14:7 wird nicht als Druck eingesetzt."
+      },
+      "ageGroupsWithExplicitScripts": [
+        "4-5",
+        "6-8",
+        "9-10"
+      ],
+      "quizGroups": [
+        "4-5",
+        "6-8",
+        "9-10"
+      ]
     },
     {
       "slot": 94,
       "week": 24,
       "weekday": "Dienstag",
-      "lessonId": null,
+      "lessonId": "fiqh-wudu-waschen-und-streichen",
       "topic": "Wuḍūʾ: Waschen und Streichen unterscheiden",
       "pillar": "fiqh",
-      "status": "editorial-outline-locked",
-      "sourceAuditStatus": "not-reviewed",
-      "threeAgeStructured": false,
+      "status": "in-feature-branch-draft",
+      "sourceAuditStatus": "primary-page-read-islamweb-2026-10-13",
+      "threeAgeStructured": true,
       "childUnlocked": false,
       "voiceApproved": false,
-      "classroomScenario": "Eine Waschbewegung und das Streichen über den Kopf auseinanderhalten",
-      "ageOutcomes": {
-        "4-5": {
-          "goal": "Eine einfache gute Handlung erkennen: eine Waschbewegung und das Streichen über den Kopf auseinanderhalten.",
-          "method": "Eine kurze Bild-/Hörgeschichte, maximal ein Kerngedanke, zwei deutlich unterscheidbare Auswahlantworten und eine sichere Praxisübung.",
-          "targetMinutes": "6–9"
-        },
-        "6-8": {
-          "goal": "Die Handlung im Beispiel erklären: eine Waschbewegung und das Streichen über den Kopf auseinanderhalten.",
-          "method": "Kurze Erzählung, alltagsbezogene Anwendung, mindestens drei Verständnisaufgaben und ein klar zugeordneter geprüfter Beleg.",
-          "targetMinutes": "10–14"
-        },
-        "9-10": {
-          "goal": "Die Handlung selbstständig und anhand authentischer Quellen begründen: eine Waschbewegung und das Streichen über den Kopf auseinanderhalten.",
-          "method": "Qurʾān-/Ṣaḥīḥ-Quelle mit exakter Stelle prüfen, über Beleg und Anwendung nachdenken; Originaltext, Übersetzung und Erklärung trennen.",
-          "targetMinutes": "14–18"
-        }
+      "lessonTitle": "Fiqh · Waschen und Streichen im Wuḍūʾ",
+      "curriculumSource": "kids/akademie/curriculum-v36.js",
+      "quran": {
+        "surah": 5,
+        "ayah": 6,
+        "label": "Sūrat al-Māʾidah · 5:6",
+        "arabic": "ياأيها الذين آمنوا إذا قمتم إلى الصلاة فاغسلوا وجوهكم وأيديكم إلى المرافق وامسحوا برءوسكم وأرجلكم إلى الكعبين",
+        "meaning": "Sinngemäß nach dem auf der Tafsīr-Seite gedruckten Auszug: Wenn ihr zum Gebet aufsteht, dann wascht euer Gesicht und eure Arme bis zu den Ellbogen und streicht über eure Köpfe und eure Füße bis zu den Knöcheln.",
+        "excerpt": true
       },
-      "releaseGate": {
-        "status": "editorial-outline-only",
-        "lessonCodePresent": false,
-        "quranSourceVerified": false,
-        "sunnahSourceVerified": false,
-        "ageTextsWritten": false,
-        "fiqhSchoolReviewRequired": true,
-        "voiceApproved": false,
-        "reviewerApproved": false,
-        "childAppUnlocked": false
-      }
+      "hadith": {
+        "source": "Tafsīr al-Manār auf Islamweb, Zuschreibung an Aḥmad und die beiden Ṣaḥīḥ-Werke, ohne Nummer · Abū Hurayrah",
+        "meaning": "Die Seite schreibt sinngemäß: Allah nimmt das Gebet eines von euch nicht an, wenn er den kleinen Hadath hat, bis er Wuḍūʾ macht. Eine Buchnummer steht dort nicht."
+      },
+      "hadithUrl": "https://www.islamweb.net/ar/library/content/65/790",
+      "sourceAudit": {
+        "hadithUrl": "https://www.islamweb.net/ar/library/content/65/790",
+        "hadithNumber": null,
+        "narrator": "Abū Hurayrah",
+        "authenticity": "Die Tafsīr-Seite nennt Aḥmad und die beiden Ṣaḥīḥ-Werke. Sie druckt keine Nummer. Al-Buḫārī 135 wird deshalb nicht als erneut gelesen ausgegeben.",
+        "quranReference": "5:6",
+        "quranUrl": "https://www.islamweb.net/ar/library/content/65/790",
+        "quranTextType": "excerpt",
+        "hadithMeaningIsParaphrase": true,
+        "arabicText": "لا يقبل الله صلاة أحدكم إذا أحدث حتى يتوضأ",
+        "fiqhHumanReviewNeeded": true,
+        "verifiedDate": "2026-10-13",
+        "dorarReRead": false,
+        "numberUnverified": true,
+        "note": "Unterricht nur: der Vers nennt Waschen von Gesicht und Armen und Streichen über den Kopf. Wie viel vom Kopf gestrichen wird, legt diese Lektion nicht fest. Die Seite ist Tafsīr al-Manār, nicht al-Mughnī. Die Füße stehen im gelesenen Auszug bei den Knöcheln; ein Rechtsstreit darüber wird hier nicht entschieden."
+      },
+      "ageGroupsWithExplicitScripts": [
+        "4-5",
+        "6-8",
+        "9-10"
+      ],
+      "quizGroups": [
+        "4-5",
+        "6-8",
+        "9-10"
+      ]
     },
     {
       "slot": 95,
