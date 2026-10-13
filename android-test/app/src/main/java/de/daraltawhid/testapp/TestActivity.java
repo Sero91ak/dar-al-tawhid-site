@@ -30,7 +30,7 @@ import android.widget.TextView;
  */
 public final class TestActivity extends Activity {
     private static final String TEST_URL =
-        "https://dar-al-tawhid.de/test/?env=staging&source=android-test-apk#home";
+        "https://dar-al-tawhid.de/test/?env=staging&source=pwa#home";
     private static final int FILE_CHOOSER_CODE = 3014;
     private WebView view;
     private ValueCallback<Uri[]> fileChooser;
