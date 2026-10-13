@@ -22,11 +22,13 @@
   var VALID = { bottom: true, left: true, right: true };
   // Use real available CSS space, not model names or hardware pixels.
   // The rail needs 68px + 36px gutter and leaves >=536px for content.
-  var SIDE_MIN_WIDTH = 640;
-  var SIDE_MIN_HEIGHT = 312;
+  var SIDE_MIN_WIDTH = 720;
+  var SIDE_MIN_HEIGHT = 340;
   var currentEffective = "bottom";
   var sideApplied = false;
   var lastRailSignature = "";
+  var originalDockParent = null;
+  var originalDockSibling = null;
   var rafId = 0;
   var idleTimer = 0;
   var scrollFadeTimer = 0;
@@ -38,7 +40,7 @@
     "position", "left", "right", "top", "bottom",
     "width", "min-width", "max-width",
     "height", "min-height", "max-height",
-    "margin", "padding", "flex-direction",
+    "margin", "margin-left", "margin-right", "padding", "flex-direction",
     "justify-content", "align-items", "gap",
     "border-radius", "transform", "-webkit-transform",
     "z-index", "transition"
@@ -143,51 +145,73 @@
   // Duos LayoutModel.kt: 68dp dock, 56–84dp supported, normalized 56%
   // vertical anchor; Dar uses its five genuine tabs (not launcher shortcuts).
   // A separate 36px lane/gutter prevents content from running under the dock.
+  function ensureRailViewportParent(nav) {
+    // The legacy #appChromeDock is a transformed/narrow layout container on
+    // master/detail routes. fixed descendants are then positioned against that
+    // container, not the real viewport. Keep the SAME original nav and events.
+    if (nav.parentNode === document.body) return;
+    if (!originalDockParent || !originalDockParent.isConnected) {
+      originalDockParent = nav.parentNode;
+      originalDockSibling = nav.nextSibling;
+    }
+    document.body.appendChild(nav);
+  }
+
+  function restoreOriginalDockParent(nav) {
+    if (!nav || nav.parentNode !== document.body) return;
+    if (!originalDockParent || !originalDockParent.isConnected) return;
+    if (originalDockSibling && originalDockSibling.parentNode === originalDockParent) {
+      originalDockParent.insertBefore(nav, originalDockSibling);
+    } else {
+      originalDockParent.appendChild(nav);
+    }
+  }
+
+  // Position relative to the physical viewport, not to a transformed split
+  // container. 82px width, five 54px targets, eight-pixel inter-target gaps.
   function applySidePosition(nav, side, metrics) {
-    var screenHeight = Math.max(0, Math.round(Number(metrics && metrics.height) || global.innerHeight || 0));
-    var dockHeight = Math.min(268, Math.max(240, screenHeight - 24));
+    if (!document.body) return;
+    ensureRailViewportParent(nav);
+    var screenHeight = Math.max(0, Number(metrics && metrics.height) || global.innerHeight || 0);
+    var desiredHeight = 5 * 54 + 4 * 8 + 18;
+    var dockHeight = Math.min(desiredHeight, Math.max(0, screenHeight - 24));
     var dockTop = Math.max(12, Math.min(screenHeight - dockHeight - 12,
       Math.round(screenHeight * 0.56 - dockHeight / 2)));
-    var signature = side + "|" + screenHeight + "|" + dockHeight + "|" + dockTop;
-    if (sideApplied && nav.classList.contains("is-adaptive-rail") &&
-        signature === lastRailSignature) return;
-    lastRailSignature = signature;
     root.style.setProperty("--dar-duos-rail-top", dockTop + "px");
     root.style.setProperty("--dar-duos-rail-height", dockHeight + "px");
+    root.style.setProperty("--dar-duos-rail-width", "82px");
     nav.classList.remove("is-adaptive-centered");
     nav.classList.add("is-adaptive-rail");
-    nav.style.setProperty("position", "fixed", "important");
-    nav.style.setProperty("left", side === "left" ? "max(12px, env(safe-area-inset-left, 0px))" : "auto", "important");
-    nav.style.setProperty("right", side === "right" ? "max(12px, env(safe-area-inset-right, 0px))" : "auto", "important");
-    nav.style.setProperty("top", dockTop + "px", "important");
-    nav.style.setProperty("bottom", "auto", "important");
-    nav.style.setProperty("width", "68px", "important");
-    nav.style.setProperty("min-width", "68px", "important");
-    nav.style.setProperty("max-width", "68px", "important");
-    nav.style.setProperty("height", dockHeight + "px", "important");
-    nav.style.setProperty("min-height", "0", "important");
-    nav.style.setProperty("max-height", dockHeight + "px", "important");
-    nav.style.setProperty("margin", "0", "important");
-    nav.style.setProperty("padding", "8px", "important");
-    nav.style.setProperty("flex-direction", "column", "important");
-    nav.style.setProperty("justify-content", "space-evenly", "important");
-    nav.style.setProperty("align-items", "center", "important");
-    nav.style.setProperty("gap", "0px", "important");
-    nav.style.setProperty("border-radius", "30px", "important");
-    nav.style.setProperty("transform", "none", "important");
-    nav.style.setProperty("-webkit-transform", "none", "important");
-    nav.style.setProperty("z-index", "96", "important");
-    nav.style.setProperty("pointer-events", "auto", "important");
-    nav.style.setProperty("transition", "opacity .18s ease, background-color .18s ease", "important");
+    // Always refresh the side properties after a route/layout event. The
+    // separate adaptive controller may have written 'left:50%' in between;
+    // caching only the height would leave the rail stuck in the middle.
+    var properties = {
+      position:"fixed",
+      left:side === "left" ? "max(12px, env(safe-area-inset-left, 0px))" : "auto",
+      right:side === "right" ? "max(12px, env(safe-area-inset-right, 0px))" : "auto",
+      top:dockTop + "px", bottom:"auto",
+      width:"82px", "min-width":"82px", "max-width":"82px",
+      height:dockHeight + "px", "min-height":"0", "max-height":dockHeight + "px",
+      margin:"0", "margin-left":"0", "margin-right":"0",
+      padding:"9px 10px", "flex-direction":"column",
+      "justify-content":"space-between", "align-items":"center", gap:"8px",
+      "border-radius":"30px", transform:"none", "-webkit-transform":"none",
+      "z-index":"96", "pointer-events":"auto", transition:"none"
+    };
+    Object.keys(properties).forEach(function (key) {
+      nav.style.setProperty(key, properties[key], "important");
+    });
+    lastRailSignature = side + "|" + screenHeight + "|" + dockTop;
     sideApplied = true;
   }
 
   function clearSidePosition(nav) {
-    if (!sideApplied) return;
+    if (!sideApplied && (!nav || !nav.classList.contains("is-adaptive-rail"))) return;
     navProperties.forEach(function (property) {
       nav.style.removeProperty(property);
     });
     nav.classList.remove("is-adaptive-rail");
+    restoreOriginalDockParent(nav);
     sideApplied = false;
     lastRailSignature = "";
 
@@ -416,7 +440,11 @@
     document.addEventListener("visibilitychange", function () {
       if (!document.hidden) scheduleBurst();
     });
-    global.addEventListener("hashchange", schedule, { passive: true });
+    global.addEventListener("hashchange", function () {
+      schedule();
+      global.setTimeout(schedule, 90);
+      global.setTimeout(schedule, 250);
+    }, { passive: true });
 
     if (global.visualViewport) {
       global.visualViewport.addEventListener("resize", onViewportResize, { passive: true });
@@ -435,6 +463,12 @@
   }
 
   document.addEventListener("click", function (event) {
+    // Reassert viewport anchoring after SPA replaces a master/detail view.
+    var clickedNav = event.target && event.target.closest && event.target.closest("#bottomNav .bottom-nav-btn");
+    if (clickedNav) {
+      global.setTimeout(schedule, 50);
+      global.setTimeout(schedule, 210);
+    }
     var button = event.target && event.target.closest && event.target.closest("[data-dar-nav-choice]");
     if (!button) return;
     event.preventDefault();
