@@ -184,3 +184,33 @@ html[data-theme="light"] .manuscript-reading{
     .mast{top:var(--ql-safe-header-offset)}
   }
 }
+
+/* Q_APP_CHROME_V1: solid app toolbar, no content bleeding behind iOS/iPad status area.
+   One sticky container owns the safe area; never double-offset the page and toolbar. */
+@media (pointer:coarse), (max-width:699px) {
+  html,body{max-width:100%;overscroll-behavior-x:none}
+  .shell{padding-top:0}
+  .mast{
+    position:sticky!important;
+    top:0!important;
+    z-index:90!important;
+    background:var(--page)!important;
+    padding-top:calc(var(--ql-safe-header-offset) + 10px)!important;
+    box-shadow:0 1px 0 var(--line);
+    isolation:isolate;
+  }
+  body::before{
+    content:"";position:fixed;top:0;left:0;right:0;
+    height:var(--ql-safe-header-offset);
+    background:var(--page);z-index:89;pointer-events:none;
+  }
+  .shell,.page,.cards,.ql-card{min-width:0}
+  .chips{touch-action:pan-x;overscroll-behavior-x:contain}
+  .ql-card .card-bottom{align-items:stretch}
+  .ql-card .work{flex:1 1 100%;font-size:12px;line-height:1.55}
+  .ql-card .card-actions{width:100%;display:flex;flex-wrap:wrap;gap:8px}
+  .ql-card .card-actions>*{flex:1 1 auto;text-align:center;min-height:42px;display:inline-flex;align-items:center;justify-content:center}
+  .searchbox input{font-size:16px}
+  .ql-card .desc{-webkit-line-clamp:unset;display:block}
+}
+@media (min-width:700px) and (pointer:fine){.mast{position:static!important}}
