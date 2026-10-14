@@ -12,7 +12,7 @@ const drafts={
       "goal": "Ich erkenne den Unterschied zwischen arabischem Qurʾān und einer deutschen Erklärung.",
       "lines": [
         "Assalāmu ʿalaikum, liebes Kind! Heute sehen wir zwei Zeilen. Eine ist auf Arabisch geschrieben, die andere auf Deutsch.",
-        "Allah sagt im Qurʾān: al-ḥamdu lillāhi rabbi l-ʿālamīn. Auf Deutsch erklären wir den Sinn: Alles Lob gehört Allah, dem Herrn der Welten.",
+        "Der arabische Qurʾān-Vers steht oben in seiner eigenen Zeile. Auf Deutsch erklären wir seinen Sinn: Alles Lob gehört Allah, dem Herrn der Welten.",
         "Maryam hört aufmerksam zu. Dann zeigt sie mit dem Finger auf die arabische Zeile und danach auf die deutschen Wörter. Sie erkennt: Das sind zwei verschiedene Sprachen.",
         "Jetzt bist du dran. Zeige auf beide Zeilen und sage: Das ist der arabische Qurʾān; das ist die deutsche Erklärung. Mā schāʾ Allāh!"
       ],
@@ -25,7 +25,7 @@ const drafts={
       "goal": "Ich kann Qurʾān-Wortlaut und deutsche Sinnwiedergabe auseinanderhalten.",
       "lines": [
         "Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Heute schauen wir genau hin: Was ist ein Qurʾān-Vers, und was hilft uns, ihn zu verstehen?",
-        "In al-Fātiḥah 1:2 stehen die arabischen Worte al-ḥamdu lillāhi rabbi l-ʿālamīn. Auf Deutsch bedeutet der Vers sinngemäß: Alles Lob gebührt Allah, dem Herrn der Welten. Ḥamd heißt Lob.",
+        "In al-Fātiḥah 1:2 steht oben der arabische Originalvers. Die deutsche Sinnwiedergabe lautet: Alles Lob gebührt Allah, dem Herrn der Welten. Ḥamd heißt Lob.",
         "Yūsuf zeigt seiner Schwester eine Karte mit arabischen Buchstaben und eine zweite Karte auf Deutsch. Sie ordnen die Karten: Der Qurʾān wurde auf Arabisch offenbart; die deutsche Karte gibt seinen Sinn wieder.",
         "Sortiere ebenfalls beide Karten. Nenne danach eine Sache, für die du Allah lobst, und sage deutlich: Mein Beispiel steht nicht wörtlich in diesem Vers. Allāhumma bārik!"
       ],
@@ -38,7 +38,7 @@ const drafts={
       "goal": "Ich unterscheide Wortlaut, Übersetzung und eigene Auslegung an Qurʾān 1:2.",
       "lines": [
         "Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Wer aus dem Qurʾān lernt, achtet darauf, nichts Eigenes als Allahs Wort auszugeben.",
-        "Der Originaltext in al-Fātiḥah 1:2 lautet: الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ. Sinngemäß: Alles Lob gebührt Allah, dem Herrn der Welten. Rabb heißt Herr; al-ʿālamīn meint die Welten beziehungsweise die Schöpfung.",
+        "Lies den arabischen Originaltext im Qurʾān-Feld von al-Fātiḥah 1:2. Sinngemäß bedeutet er: Alles Lob gebührt Allah, dem Herrn der Welten. Rabb heißt Herr; al-ʿālamīn bezeichnet die Welten.",
         "Auf dem Tisch liegen drei Karten: der arabische Vers, die deutsche Sinnwiedergabe und der Satz »Ich danke Allah für meinen heutigen Tag«. Die dritte Karte ist unsere eigene Anwendung, kein Qurʾān-Zitat.",
         "Ordne alle drei Karten begründet zu. Erkläre, warum eine hilfreiche Übersetzung nicht einfach mit dem arabischen Originaltext gleichgesetzt werden darf. Assalāmu ʿalaikum!"
       ],
