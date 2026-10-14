@@ -1,3 +1,11 @@
+## 14.10.2026 · Unterricht 127–129 fortgeführt
+
+- **Drei weitere Lektionen / neun eigenständige Altersfassungen** in `kids/akademie/curriculum-editorial-127-129-v1.js` eingebunden. Die drei Themen sind Gastfreundschaft, Lernen mit Pausen und Reue nach eigenen Fehlern. Vorhandene IDs und Fragen bleiben bestehen.
+- **Qurʾān-Korrekturen:** Slot 128 kennzeichnet den gespeicherten Versanfang zu **2:286** ausdrücklich als `excerpt:true`. Slot 129 verwendet ausschließlich den vollständigen Vers **39:53** einschließlich `قُلْ`; die zuvor fälschlich angehängten Sätze von **39:54/55** wurden entfernt.
+- Die **57** Text-Sprechkontexte in `kids/data/academy-voice-editorial-127-129-delta-v1.json` entsprechen den tatsächlich eingebundenen Altersfassungen. Sie sind **nicht generiert**; die kanonische Sprachplandatei wurde nicht überschrieben.
+- **Gesamtfortschritt in dieser Arbeitsrunde:** **11 Lektionen / 33 individuelle Altersfassungen (119–129)**; **209 neue oder synchronisierte Textkontexte** in drei getrennten Voice-Deltas; programmatische Konsistenzkontrolle: **0 Abweichungen** und korrekte Modulreihenfolge. Wissenschaftliche Freigabe weiterhin **0/624**; vollständiger Node-/Browser-Lauf noch nicht bestätigt.
+- Quellenakte `kids-akademie/research/EDITORIAL_REVIEW_127_129_20261014.md`. **Als Nächstes:** Fiqh-Lektion 130 gesondert anhand al-Mughnī prüfen und dann Unterricht 131 ff. Kein Merge, kein Live-Deploy, keine Audioerzeugung.
+
 ## 14.10.2026 · Unterricht 123–126 ebenfalls redaktionell überarbeitet
 
 - **Vier weitere Lektionen / zwölf Altersfassungen** auf dem PR-Arbeitszweig; Modul `kids/akademie/curriculum-editorial-123-126-v1.js` ist nach 119–122 in der Akademie-Vorschau eingebunden. Bestehende Lektions-IDs, Quizfragen, Lernfortschritt und Freigaben bleiben erhalten.
