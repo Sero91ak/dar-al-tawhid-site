@@ -1401,13 +1401,13 @@ const additions=
     "sample": "Wenn sich etwas falsch anfühlt, sagen wir Nein und holen Hilfe.",
     "ageText": {
       "4-5": {
-        "goal": "Wenn sich etwas falsch anfühlt, sagen wir Nein und holen Hilfe.",
-        "intro": "Wenn sich etwas falsch anfühlt, sagen wir Nein und holen Hilfe. Der Vers sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist, und dass Allah hörend und wissend ist. Stell dir vor: Jemand will ein Kind zu einem Spiel drängen, das es nicht möchte. Das Kind sagt Nein und geht zu einer bekannten erwachsenen Person. Heute üben wir: Wir üben den kurzen Satz: Nein. Ich sage es einer Person, der ich vertraue. Du sagst es einer erwachsenen Person, der du vertraust.",
+        "goal": "Ich darf Nein sagen und Hilfe holen.",
+        "intro": "As-salāmu ʿalaikum! Dein Nein ist wichtig. Stell dir vor, jemand möchte, dass du bei einem Spiel mitmachst, das dir unangenehm ist. Du darfst sagen: Nein, ich möchte nicht. Dann kannst du zu Mama, Papa oder einer anderen erwachsenen Person gehen, der du vertraust. In Qurʾān 4:148 lernen wir, dass jemand, dem Unrecht geschieht, darüber sprechen darf. Niemand muss Unrecht geheim halten. Wir üben heute nur den Hilfesatz, nicht die unangenehme Situation.",
         "lines": [
-          "Wenn sich etwas falsch anfühlt, sagen wir Nein und holen Hilfe.",
-          "Der Vers sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist, und dass Allah hörend und wissend ist.",
-          "Jemand will ein Kind zu einem Spiel drängen, das es nicht möchte. Das Kind sagt Nein und geht zu einer bekannten erwachsenen Person.",
-          "Wir üben den kurzen Satz: Nein. Ich sage es einer Person, der ich vertraue."
+          "Du darfst Nein sagen, wenn dir etwas unangenehm ist.",
+          "Qurʾān 4:148 spricht auch von Menschen, denen Unrecht widerfährt.",
+          "Du darfst einer vertrauenswürdigen erwachsenen Person davon erzählen.",
+          "Wir üben einen sicheren Satz, ohne Unrecht nachzuspielen."
         ],
         "evidence": "Wir lernen mit Qurʾān 4:148. Wenn sich etwas falsch anfühlt, sagen wir Nein und holen Hilfe.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/357. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:148. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -1423,17 +1423,17 @@ const additions=
         ],
         "situation": "Jemand will ein Kind zu einem Spiel drängen, das es nicht möchte. Das Kind sagt Nein und geht zu einer bekannten erwachsenen Person.",
         "practice": "Wir üben den kurzen Satz: Nein. Ich sage es einer Person, der ich vertraue.",
-        "summary": "Wenn sich etwas falsch anfühlt, sagen wir Nein und holen Hilfe. Du sagst es einer erwachsenen Person, der du vertraust.",
-        "audioScript": "Eigene Grenzen respektieren. Wenn sich etwas falsch anfühlt, sagen wir Nein und holen Hilfe. Der Vers sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist, und dass Allah hörend und wissend ist. Jemand will ein Kind zu einem Spiel drängen, das es nicht möchte. Das Kind sagt Nein und geht zu einer bekannten erwachsenen Person. Wir üben den kurzen Satz: Nein. Ich sage es einer Person, der ich vertraue."
+        "summary": "Du darfst Nein sagen und Hilfe holen. Du musst Unrecht nicht verheimlichen.",
+        "audioScript": "Eigene Grenzen respektieren. Du darfst Nein sagen und Hilfe holen. Du musst Unrecht nicht verheimlichen. Du darfst Nein sagen, wenn dir etwas unangenehm ist. Qurʾān 4:148 spricht auch von Menschen, denen Unrecht widerfährt. Du darfst einer vertrauenswürdigen erwachsenen Person davon erzählen."
       },
       "6-8": {
-        "goal": "Wenn sich etwas falsch anfühlt, sagen wir Nein und holen Hilfe.",
-        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Wenn sich etwas falsch anfühlt, sagen wir Nein und holen Hilfe. Wir lesen Qurʾān 4:148. Der Vers bedeutet sinngemäß: Der Vers sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist, und dass Allah hörend und wissend ist. So kann das im Alltag aussehen: Jemand will ein Kind zu einem Spiel drängen, das es nicht möchte. Das Kind sagt Nein und geht zu einer bekannten erwachsenen Person. Die Aufgabe: Wir üben den kurzen Satz: Nein. Ich sage es einer Person, der ich vertraue. jahr bedeutet: laute, öffentliche Rede. ẓulm bedeutet: Unrecht.",
+        "goal": "Ich erkenne meine Grenzen und kann mir sichere Hilfe holen.",
+        "intro": "As-salāmu ʿalaikum! Manchmal möchten andere Kinder, dass du etwas tust, was du nicht möchtest. Zum Beispiel sollen alle bei einem Spiel mitmachen, obwohl eines der Kinder sich dabei nicht wohlfühlt. Ein deutliches Nein darf gehört werden. Qurʾān 4:148 spricht darüber, dass Menschen, denen Unrecht geschehen ist, davon sprechen dürfen. Der Vers beschreibt kein bestimmtes Spiel und keine bestimmte Berührung. Unsere Schutzregel lautet: Bei Unrecht darfst du Hilfe holen, ohne dich selbst zu beschuldigen. Wenn dir ein Erwachsener nicht zuhört, sprich mit einer anderen vertrauenswürdigen erwachsenen Person. Wir üben nur den Satz: Bitte hilf mir. Ich möchte darüber sprechen. Niemand muss ein eigenes Erlebnis in der Gruppe erzählen.",
         "lines": [
-          "Qurʾān 4:148 ist die gelesene Stelle.",
-          "Der Vers sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist, und dass Allah hörend und wissend ist.",
-          "Jemand will ein Kind zu einem Spiel drängen, das es nicht möchte. Das Kind sagt Nein und geht zu einer bekannten erwachsenen Person.",
-          "Du sagst es einer erwachsenen Person, der du vertraust."
+          "Ein Nein ist eine wichtige Grenze.",
+          "Qurʾān 4:148 unterscheidet Menschen, denen Unrecht widerfährt.",
+          "Unsere Schutzregel ist, Hilfe von vertrauenswürdigen Erwachsenen zu holen.",
+          "Wenn dir eine Person nicht zuhört, darfst du eine weitere erwachsene Person ansprechen."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 4:148. Sinngemäß: Der Vers sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist, und dass Allah hörend und wissend ist.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/357. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:148. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -1449,17 +1449,17 @@ const additions=
         ],
         "situation": "Jemand will ein Kind zu einem Spiel drängen, das es nicht möchte. Das Kind sagt Nein und geht zu einer bekannten erwachsenen Person.",
         "practice": "Wir üben den kurzen Satz: Nein. Ich sage es einer Person, der ich vertraue.",
-        "summary": "Qurʾān 4:148 trägt diese Stunde. Der Vers sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist, und dass Allah hörend und wissend ist.",
-        "audioScript": "Eigene Grenzen respektieren. Der Vers sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist, und dass Allah hörend und wissend ist. Jemand will ein Kind zu einem Spiel drängen, das es nicht möchte. Das Kind sagt Nein und geht zu einer bekannten erwachsenen Person. Wir üben den kurzen Satz: Nein. Ich sage es einer Person, der ich vertraue."
+        "summary": "Grenzen zu achten bedeutet, Nein zu akzeptieren und Betroffenen sichere Hilfe zu ermöglichen.",
+        "audioScript": "Eigene Grenzen respektieren. Grenzen zu achten bedeutet, Nein zu akzeptieren und Betroffenen sichere Hilfe zu ermöglichen. Ein Nein ist eine wichtige Grenze. Qurʾān 4:148 unterscheidet Menschen, denen Unrecht widerfährt. Unsere Schutzregel ist, Hilfe von vertrauenswürdigen Erwachsenen zu holen."
       },
       "9-10": {
-        "goal": "Ich kann das Thema „Eigene Grenzen respektieren“ anhand von Qurʾān 4:148 erklären und ein Alltagsbeispiel beurteilen.",
-        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Eigene Grenzen respektieren. Wenn sich etwas falsch anfühlt, sagen wir Nein und holen Hilfe. In Qurʾān 4:148 lernen wir sinngemäß: Der Vers sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist, und dass Allah hörend und wissend ist. jahr bedeutet laute, öffentliche Rede. ẓulm bedeutet Unrecht. Stell dir diese Situation vor: Jemand will ein Kind zu einem Spiel drängen, das es nicht möchte. Das Kind sagt Nein und geht zu einer bekannten erwachsenen Person. Welcher nächste Schritt ist gut? Wir üben den kurzen Satz: Nein. Ich sage es einer Person, der ich vertraue. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+        "goal": "Ich kann die Schutzregel zu persönlichen Grenzen vom genauen Wortlaut von Qurʾān 4:148 unterscheiden.",
+        "intro": "As-salāmu ʿalaikum! Warum darf ein Kind von Unrecht erzählen, auch wenn andere sagen, es solle schweigen? In Qurʾān 4:148 geht es um lautes Sprechen über Schlechtes; der Vers nennt eine Ausnahme für denjenigen, dem Unrecht geschehen ist. Wir dürfen ihn nicht fälschlich als Beschreibung einer bestimmten körperlichen Situation wiedergeben. Für unseren Alltag formulieren wir daraus eine zusätzliche Schutzregel: Kinder dürfen Nein sagen und vertrauenswürdige Erwachsene um Hilfe bitten. Wenn eine Person eine Sorge abtut, darf man sich an eine weitere wenden. Stell dir eine Gruppe vor, in der ein Kind zu einer Aktivität gedrängt wird. Wie könntest du helfen, ohne selbst den Streit austragen zu müssen? Respektiere sein Nein, bleib an seiner Seite, wenn es das möchte, und hole erwachsene Unterstützung. Niemand muss private Erlebnisse öffentlich vortragen.",
         "lines": [
-          "Unsere Qurʾān-Stelle ist Qurʾān 4:148.",
-          "Der Vers sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist, und dass Allah hörend und wissend ist.",
-          "Jemand will ein Kind zu einem Spiel drängen, das es nicht möchte. Das Kind sagt Nein und geht zu einer bekannten erwachsenen Person.",
-          "Wir üben den kurzen Satz: Nein. Ich sage es einer Person, der ich vertraue."
+          "Qurʾān 4:148 spricht über das Äußern von Unrecht und die Ausnahme für Betroffene.",
+          "Persönliche Grenzen und der Weg zur Vertrauensperson sind Schutzregeln des Unterrichts.",
+          "Ein Nein darf respektiert werden, ohne dass jemand sich rechtfertigen muss.",
+          "Bei ausbleibender Hilfe darf man eine weitere vertrauenswürdige erwachsene Person ansprechen."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 4:148. Sinngemäß: Der Vers sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist, und dass Allah hörend und wissend ist.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/357. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:148. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -1475,8 +1475,8 @@ const additions=
         ],
         "situation": "Jemand will ein Kind zu einem Spiel drängen, das es nicht möchte. Das Kind sagt Nein und geht zu einer bekannten erwachsenen Person.",
         "practice": "Wir üben den kurzen Satz: Nein. Ich sage es einer Person, der ich vertraue.",
-        "summary": "Wenn sich etwas falsch anfühlt, sagen wir Nein und holen Hilfe. Wir üben den kurzen Satz: Nein. Ich sage es einer Person, der ich vertraue.",
-        "audioScript": "Eigene Grenzen respektieren. Wenn sich etwas falsch anfühlt, sagen wir Nein und holen Hilfe. Der Vers sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist, und dass Allah hörend und wissend ist. Jemand will ein Kind zu einem Spiel drängen, das es nicht möchte. Das Kind sagt Nein und geht zu einer bekannten erwachsenen Person. Wir üben den kurzen Satz: Nein. Ich sage es einer Person, der ich vertraue."
+        "summary": "Wir unterscheiden Qurʾān-Wortlaut und unsere Schutzregel, damit Kinder ihre Grenzen sicher vertreten können.",
+        "audioScript": "Eigene Grenzen respektieren. Wir unterscheiden Qurʾān-Wortlaut und unsere Schutzregel, damit Kinder ihre Grenzen sicher vertreten können. Qurʾān 4:148 spricht über das Äußern von Unrecht und die Ausnahme für Betroffene. Persönliche Grenzen und der Weg zur Vertrauensperson sind Schutzregeln des Unterrichts. Ein Nein darf respektiert werden, ohne dass jemand sich rechtfertigen muss."
       }
     },
     "questions": {
@@ -1575,7 +1575,7 @@ const additions=
     ],
     "practice": "Wir üben den kurzen Satz: Nein. Ich sage es einer Person, der ich vertraue.",
     "summary": "Wenn sich etwas falsch anfühlt, sagen wir Nein und holen Hilfe. Der Vers sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist, und dass Allah hörend und wissend ist.",
-    "audioScript": "Eigene Grenzen respektieren. Wenn sich etwas falsch anfühlt, sagen wir Nein und holen Hilfe. Der Vers sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist, und dass Allah hörend und wissend ist. Jemand will ein Kind zu einem Spiel drängen, das es nicht möchte. Das Kind sagt Nein und geht zu einer bekannten erwachsenen Person. Wir üben den kurzen Satz: Nein. Ich sage es einer Person, der ich vertraue.",
+    "audioScript": "Eigene Grenzen respektieren. Du darfst Nein sagen und Hilfe holen. Du musst Unrecht nicht verheimlichen. Du darfst Nein sagen, wenn dir etwas unangenehm ist. Qurʾān 4:148 spricht auch von Menschen, denen Unrecht widerfährt. Du darfst einer vertrauenswürdigen erwachsenen Person davon erzählen.",
     "voiceApproved": false
   },
   "nafs-neid-erkennen": {
@@ -1619,13 +1619,13 @@ const additions=
     "sample": "Neid fühlt sich eng an.",
     "ageText": {
       "4-5": {
-        "goal": "Neid fühlt sich eng an.",
-        "intro": "Neid fühlt sich eng an. Stell dir vor: Ein Kind sieht, dass ein anderes Kind ein neues Buch bekommt, und merkt einen engen Gedanken. Heute üben wir: Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz. Die arabischen Worte spricht die Lehrperson.",
+        "goal": "Ich kann mich für ein anderes Kind freuen.",
+        "intro": "As-salāmu ʿalaikum! Stell dir vor, ein anderes Kind bekommt ein schönes neues Buch. Vielleicht möchtest du auch eines haben. Das Gefühl darfst du bemerken, ohne dich zu schämen. Du kannst sagen: Ich freue mich für dich. In Qurʾān 113:5 lernen wir, Allah um Schutz vor dem Übel des Neides zu bitten. Wir üben heute, anderen Gutes zu gönnen. Wenn du neidisch wirst, kannst du tief durchatmen und dich an etwas erinnern, für das du Allah dankbar bist.",
         "lines": [
-          "Neid fühlt sich eng an.",
-          "Sinngemäß: Der gespeicherte Surenteil bittet um Schutz vor dem Übel eines Neiders, wenn er neidet.",
-          "Ein Kind sieht, dass ein anderes Kind ein neues Buch bekommt, und merkt einen engen Gedanken.",
-          "Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz."
+          "Manchmal wünschen wir uns, was ein anderes Kind hat.",
+          "Wir können dieses Gefühl bemerken, ohne andere schlechtzumachen.",
+          "Qurʾān 113:5 lehrt, Allah um Schutz vor dem Übel von Neid zu bitten.",
+          "Wir üben den Satz: Ich freue mich für dich."
         ],
         "evidence": "Wir lernen mit Qurʾān 113:5. Neid fühlt sich eng an.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1987. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 113:5. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -1641,17 +1641,17 @@ const additions=
         ],
         "situation": "Ein Kind sieht, dass ein anderes Kind ein neues Buch bekommt, und merkt einen engen Gedanken.",
         "practice": "Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz.",
-        "summary": "Neid fühlt sich eng an. Die arabischen Worte spricht die Lehrperson.",
-        "audioScript": "Neid erkennen ohne Beschämung. Neid fühlt sich eng an. Ein Kind sieht, dass ein anderes Kind ein neues Buch bekommt, und merkt einen engen Gedanken. Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz."
+        "summary": "Ich kann anderen Gutes gönnen und Allah um ein gutes Herz bitten.",
+        "audioScript": "Neid erkennen ohne Beschämung. Ich kann anderen Gutes gönnen und Allah um ein gutes Herz bitten. Manchmal wünschen wir uns, was ein anderes Kind hat. Wir können dieses Gefühl bemerken, ohne andere schlechtzumachen. Qurʾān 113:5 lehrt, Allah um Schutz vor dem Übel von Neid zu bitten."
       },
       "6-8": {
-        "goal": "Neid fühlt sich eng an.",
-        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Neid fühlt sich eng an. Wir lesen Qurʾān 113:5. Der Vers bedeutet sinngemäß: Der gespeicherte Surenteil bittet um Schutz vor dem Übel eines Neiders, wenn er neidet. So kann das im Alltag aussehen: Ein Kind sieht, dass ein anderes Kind ein neues Buch bekommt, und merkt einen engen Gedanken. Die Aufgabe: Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz. ḥasad bedeutet: Neid, das Gute einer anderen Person nicht gönnen. aʿūḏu bedeutet: ich suche Schutz.",
+        "goal": "Ich erkenne Neid, ohne mich oder andere dafür zu beschämen.",
+        "intro": "As-salāmu ʿalaikum! Ein Freund bekommt ein Geschenk, das du dir auch gewünscht hast. Vielleicht merkst du: Ich wäre auch gern an seiner Stelle. Ein solcher Gedanke macht dich nicht zu einem schlechten Kind. Entscheidend ist, was du daraus machst. Qurʾān 113:5 gehört zu den Worten, mit denen wir bei Allah Schutz vor dem Übel des Neiders suchen. Wir machen daraus keine Gruselgeschichte und beschuldigen auch niemanden, nur weil er sich einmal etwas wünscht. Wir üben zwei Schritte: zuerst das Gefühl ruhig benennen, dann dem anderen Kind etwas Gutes wünschen. Du darfst Allah in eigenen Worten um Hilfe bitten und dich für eine Gabe bedanken, die du selbst hast.",
         "lines": [
-          "Qurʾān 113:5 ist die gelesene Stelle.",
-          "Sinngemäß: Der gespeicherte Surenteil bittet um Schutz vor dem Übel eines Neiders, wenn er neidet.",
-          "Ein Kind sieht, dass ein anderes Kind ein neues Buch bekommt, und merkt einen engen Gedanken.",
-          "Die arabischen Worte spricht die Lehrperson."
+          "Qurʾān 113:5 nennt das Übel von Neid und das Suchen von Schutz bei Allah.",
+          "Ein neidischer Gedanke muss nicht zu einer gemeinen Tat werden.",
+          "Wir beschämen niemanden wegen eines Gefühls.",
+          "Wir üben Gönnen, Dankbarkeit und freundliche Worte."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 113:5. Sinngemäß: Der gespeicherte Surenteil bittet um Schutz vor dem Übel eines Neiders, wenn er neidet.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1987. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 113:5. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -1667,17 +1667,17 @@ const additions=
         ],
         "situation": "Ein Kind sieht, dass ein anderes Kind ein neues Buch bekommt, und merkt einen engen Gedanken.",
         "practice": "Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz.",
-        "summary": "Qurʾān 113:5 trägt diese Stunde.",
-        "audioScript": "Neid erkennen ohne Beschämung. Ein Kind sieht, dass ein anderes Kind ein neues Buch bekommt, und merkt einen engen Gedanken. Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz."
+        "summary": "Wir nehmen unsere Gefühle wahr und wählen gute Handlungen. Das Übel von Neid soll niemandem schaden.",
+        "audioScript": "Neid erkennen ohne Beschämung. Wir nehmen unsere Gefühle wahr und wählen gute Handlungen. Das Übel von Neid soll niemandem schaden. Qurʾān 113:5 nennt das Übel von Neid und das Suchen von Schutz bei Allah. Ein neidischer Gedanke muss nicht zu einer gemeinen Tat werden. Wir beschämen niemanden wegen eines Gefühls."
       },
       "9-10": {
-        "goal": "Ich kann das Thema „Neid erkennen ohne Beschämung“ anhand von Qurʾān 113:5 erklären und ein Alltagsbeispiel beurteilen.",
-        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Neid erkennen ohne Beschämung. Neid fühlt sich eng an. In Qurʾān 113:5 lernen wir sinngemäß: Der gespeicherte Surenteil bittet um Schutz vor dem Übel eines Neiders, wenn er neidet. ḥasad bedeutet Neid, das Gute einer anderen Person nicht gönnen. aʿūḏu bedeutet ich suche Schutz. Stell dir diese Situation vor: Ein Kind sieht, dass ein anderes Kind ein neues Buch bekommt, und merkt einen engen Gedanken. Welcher nächste Schritt ist gut? Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+        "goal": "Ich kann Neid von einem gewöhnlichen Wunsch unterscheiden und gute Reaktionen erklären.",
+        "intro": "As-salāmu ʿalaikum! Nicht jeder Wunsch, etwas Ähnliches wie ein anderer Mensch zu besitzen, ist schädlicher Neid. Problematisch wird es, wenn wir jemandem das Gute nicht gönnen oder ihm deshalb schaden möchten. Qurʾān 113:5 nennt das Übel des Neiders und das Bitten um Schutz bei Allah. Die Stelle ist kein Grund, andere Kinder zu verdächtigen oder Angstgeschichten zu erzählen. Stell dir vor, ein Mitschüler wird für eine gute Leistung gelobt und du wünschst dir dieselbe Anerkennung. Welche Reaktion wäre fair? Du kannst ehrlich gratulieren, dich selbst anstrengen und Allah um Gutes bitten. Wir besprechen, wie ein Gefühl in gute Motivation verwandelt werden kann. Gefühle sind kein Anlass für Beschämung; wichtig ist, dass niemand dadurch verletzt wird.",
         "lines": [
-          "Unsere Qurʾān-Stelle ist Qurʾān 113:5.",
-          "Der gespeicherte Surenteil bittet um Schutz vor dem Übel eines Neiders, wenn er neidet.",
-          "Ein Kind sieht, dass ein anderes Kind ein neues Buch bekommt, und merkt einen engen Gedanken.",
-          "Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz."
+          "Qurʾān 113:5 spricht vom Übel des Neiders und vom Schutz bei Allah.",
+          "Ein eigener Wunsch ist nicht automatisch eine Schädigung anderer.",
+          "Wir beurteilen Menschen nicht vorschnell wegen einzelner Gefühle.",
+          "Gratulieren, Lernen und Dankbarkeit sind mögliche gute Reaktionen."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 113:5. Sinngemäß: Der gespeicherte Surenteil bittet um Schutz vor dem Übel eines Neiders, wenn er neidet.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1987. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 113:5. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -1693,8 +1693,8 @@ const additions=
         ],
         "situation": "Ein Kind sieht, dass ein anderes Kind ein neues Buch bekommt, und merkt einen engen Gedanken.",
         "practice": "Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz.",
-        "summary": "Neid fühlt sich eng an. Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz.",
-        "audioScript": "Neid erkennen ohne Beschämung. Neid fühlt sich eng an. Der gespeicherte Surenteil bittet um Schutz vor dem Übel eines Neiders, wenn er neidet. Ein Kind sieht, dass ein anderes Kind ein neues Buch bekommt, und merkt einen engen Gedanken. Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz."
+        "summary": "Wir suchen bei Allah Schutz und handeln so, dass ein Gefühl von Neid niemandem schadet.",
+        "audioScript": "Neid erkennen ohne Beschämung. Wir suchen bei Allah Schutz und handeln so, dass ein Gefühl von Neid niemandem schadet. Qurʾān 113:5 spricht vom Übel des Neiders und vom Schutz bei Allah. Ein eigener Wunsch ist nicht automatisch eine Schädigung anderer. Wir beurteilen Menschen nicht vorschnell wegen einzelner Gefühle."
       }
     },
     "questions": {
@@ -1793,7 +1793,7 @@ const additions=
     ],
     "practice": "Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz, ohne die Sūrah synthetisch zu rezitieren.",
     "summary": "Neid fühlt sich eng an. Die Stunde benutzt nur diesen Versteil und keine Gruselgeschichte.",
-    "audioScript": "Neid erkennen ohne Beschämung. Neid fühlt sich eng an. Die Stunde benutzt nur diesen Versteil und keine Gruselgeschichte. Ein Kind sieht, dass ein anderes Kind ein neues Buch bekommt, und merkt einen engen Gedanken. Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz, ohne die Sūrah synthetisch zu rezitieren.",
+    "audioScript": "Neid erkennen ohne Beschämung. Ich kann anderen Gutes gönnen und Allah um ein gutes Herz bitten. Manchmal wünschen wir uns, was ein anderes Kind hat. Wir können dieses Gefühl bemerken, ohne andere schlechtzumachen. Qurʾān 113:5 lehrt, Allah um Schutz vor dem Übel von Neid zu bitten.",
     "voiceApproved": false
   },
   "fiqh-reinheit-der-gebetskleidung": {
