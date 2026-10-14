@@ -14,7 +14,7 @@ Der bestehende V1-Lehrplan zeigt **Qurʾān 2:153** und führt **Ṣaḥīḥ al
 
 - **Direkt geprüfter klassischer Primärbeleg:** **aṭ-Ṭabarī**, *Ǧāmiʿ al-Bayān*, **Bd. 17, S. 468–469**, Qurʾān **17:53**. [Islamweb 50/3021 mit Originaltext](https://www.islamweb.net/ar/library/content/50/3021#:~:text=%D9%88%D9%82%D9%84%20%D9%84%D8%B9%D8%A8%D8%A7%D8%AF%D9%8A%20%D9%8A%D9%82%D9%88%D9%84%D9%88%D8%A7).
 - Zitatfragment: `وَقُلْ لِعِبَادِي يَقُولُوا الَّتِي هِيَ أَحْسَنُ`. Der Kommentar fordert nach aṭ-Ṭabarī die bessere Gesprächsweise und behandelt Streitanstöße.
-- **Registrierung:** `SRC-CORE6-TABARI-3021`, Quellenstatus `primary-page-direct-read-2026-10-14`. Der alte Verweis auf **Buḫārī 6018** im V1-Lehrplan bleibt **von dieser Tafsīrprüfung unbestätigt**.
+- **Registrierung:** `SRC-CORE6-TABARI-3021`, Quellenstatus `primary-page-direct-read-2026-10-14`. **Nachtrag, eigenständiger Sunnah-Abgleich:** Ṣaḥīḥ al-Buḫārī **6018** von **Abū Hurayrah**, auch bei Muslim **47**, am 14.10.2026 im arabischen Wortlaut und mit Authentizitätskennzeichnung direkt über [Dorar 4361](https://dorar.net/hadith/sharh/4361#:~:text=%D9%81%D9%84%D9%8A%D9%82%D9%84%20%D8%AE%D9%8A%D8%B1%D8%A7%20%D8%A3%D9%88%20%D9%84%D9%8A%D8%B5%D9%85%D8%AA) geprüft. Aussage: \`فَلْيَقُلْ خَيْرًا أَوْ لِيَصْمُتْ\`. Als zweite, **getrennte** Quelle \`SRC-CORE6-BUKHARI-6018\` registriert. Der Originaltext umfasst auch gute Behandlung von Nachbarn und Gästen; die deutsche Kinderfassung ist nur eine Paraphrase.
 - **Abgrenzung:** Gute Rede ist keine Verpflichtung, über Gefährdung, Missbrauch oder Ungerechtigkeit zu schweigen.
 
 ## 7 · Wuḍūʾ · `fiqh-wudu`
@@ -50,6 +50,11 @@ Bereits vorhandene eigenständige Fiqh-Redaktion für Slot 11 mit Qurʾān 20:14
 
 ## Integrität, Prüfgrenzen und Weiterarbeit
 
-- Vier neue Quellenregistereinträge 6/9/10/12, ursprünglicher Stand **141**, anschließend **145**. Test `kids/tools/test-academy-primary-source-registry-v1.cjs` prüft Eindeutigkeit, Lektions-ID-Bindung, zugelassene Domäne, Originaltext und ehrlichen Prüfstatus.
-- **Noch nicht vollständig geprüft:** frühe Lektion 1 (`sidq`, Zuordnung vom Lektionsstatus zu tatsächlich geladenem Unterricht separat abgleichen), Muslim 8a, Buḫārī 1/33/6018/5971, die ursprünglichen Ṣabr-Sunnahbelege im Wortlaut, sowie Fiqh-Ausnahmen. Keine Umdeutung einer Sekundärquelle zu einer direkt gelesenen Primärquelle.
+- Fünf neue Quellenregistereinträge (vier klassische Tafsīr-Texte plus Buḫārī 6018 auf Dorar) für 6/9/10/12; ursprünglicher Stand **141**, anschließend **146**. Test `kids/tools/test-academy-primary-source-registry-v1.cjs` prüft Eindeutigkeit, Lektions-ID-Bindung, zugelassene Domäne, Originaltext und ehrlichen Prüfstatus.
+- **Noch nicht vollständig geprüft:** frühe Lektion 1 (`sidq`, Zuordnung vom Lektionsstatus zu tatsächlich geladenem Unterricht separat abgleichen), Muslim 8a, Buḫārī 1/33/5971, die ursprünglichen Ṣabr-Sunnahbelege im Wortlaut, sowie Fiqh-Ausnahmen. Keine Umdeutung einer Sekundärquelle zu einer direkt gelesenen Primärquelle.
 - Keine Änderung an Unterrichtstexten, Quest-Daten, Benutzerprofilen, Freischaltung, Fortschrittsdaten oder Spracheinstellungen. **0/624 wissenschaftliche Endfreigaben**; kein Merge und kein Live-Deploy.
+
+## Technischer Nachtrag · erfolgreiche KIDS-QA
+
+- Quellenregister-Test mit fünf neuen Einträgen über `kids/tools/test-academy-primary-source-registry-v1.cjs` erweitert. [GitHub Actions, KIDS Akademie Editorial Draft QA, Run 38546617919](https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38546617919): **completed / success**. Nur technische Konsistenz, **keine wissenschaftliche Freigabe**.
+- Die zusätzliche Workflow-Prüfung `Voice Studio 2 Validate` ist unabhängig; ältere Runs scheiterten am **Strict Alif-Ba audio workflow** (u. a. Marker `alphabet-audio.json?v=6`, `audioEvidenceComplete`, `PROGRESS_KEY`, `reviewBucket`, `reviewQueueMode`). **Dieser Auditauftrag verändert keine Audio- oder Native-App-Dateien.** Ein aktueller Voice-Workflow-Erfolg wird nicht behauptet.
