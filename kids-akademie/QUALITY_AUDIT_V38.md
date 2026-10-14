@@ -3,9 +3,9 @@
 ## Redaktioneller Fortschritt · 14. Oktober 2026
 
 **Neue Quiz-Revisionen auf demselben Arbeitszweig:**
-- `kids/akademie/curriculum-v39.js`: Slots **99–110**; zwölf vorbereitete Lektionen; **elf aktiv ergänzte Lektionen mit 88 Quizfragen** für die drei Altersgruppen. Die quellenbezogene Fiqh-Lektion 106 bleibt unverändert aus dem geprüften V38-Stand.
-- `kids/akademie/curriculum-v40.js`: Slots **111–122**; ebenfalls elf aktive Lektionen und **88 Quizfragen**; Fiqh-Lektion 118 bleibt aus dem quellenbezogenen V38-Stand.
-- `kids/akademie/curriculum-v41.js`: Slots **123–134**; elf aktive Lektionen mit weiteren **88 Quizfragen**; Fiqh-Lektion 130 bleibt aus dem quellenbezogenen V38-Stand.
+- `kids/akademie/curriculum-v39.js`: Slots **99–110**; zwölf vorbereitete Lektionen; **elf aktiv ergänzte Lektionen mit 88 Quizfragen** für die drei Altersgruppen. Die quellenbezogen nachgearbeitete, aber noch nicht wissenschaftlich freigegebene Fiqh-Lektion 106 bleibt aus V38 erhalten.
+- `kids/akademie/curriculum-v40.js`: Slots **111–122**; ebenfalls elf aktive Lektionen und **88 Quizfragen**; Fiqh-Lektion 118 behält ihre gesondert mit klassischen Quellen nachgearbeiteten, weiterhin ungeprüft freigegebenen V38-Fragen.
+- `kids/akademie/curriculum-v41.js`: Slots **123–134**; elf aktive Lektionen mit weiteren **88 Quizfragen**; Fiqh-Lektion 130 behält ihre gesondert mit klassischen Quellen nachgearbeiteten, weiterhin nicht freigegebenen V38-Fragen.
 - Alle drei Revisionen werden in `kids/akademie/index.html` nach V38 geladen. `curriculum-v38.js`, Qurʾān-Wortlaute, `sourceAudit`, bisherige Fortschrittspositionen und die Audio-Textpläne bleiben dabei unangetastet. Keine Audioerzeugung.
 - Ergänzte Regressionstests: `kids/tools/test-academy-v39-quiz-v1.cjs`, `kids/tools/test-academy-v40-quiz-v1.cjs`, `kids/tools/test-academy-v41-quiz-v1.cjs`. Die Quiz-Überschreibungen wurden unabhängig in einer simulierten JavaScript-Laufzeit auf korrekte Lektions-IDs, alle drei Altersfassungen, Vollständigkeit der Fragen, korrekte Antwortindizes und unveränderte Freigabe-Metadaten geprüft. **CLI-/Browser-Tests wurden nicht ausgeführt**, da das GitHub-Repository hier nur über den Connector verfügbar war.
 - **Nächster Quiz-Block:** Slots **135–146**. Danach 147–158 usw. Die 74 Slots **135–208** bleiben für die individuelle Quiz-Redaktion offen; Lektion 98 war ein Sonderfall, und ältere Slots 1–97 benötigen ebenfalls wissenschaftliche/fachliche Prüfung.
