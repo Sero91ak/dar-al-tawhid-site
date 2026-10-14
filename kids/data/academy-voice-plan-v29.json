@@ -1,0 +1,1478 @@
+{
+  "schemaVersion": 1,
+  "version": "academy-voice-plan-v29-20261012",
+  "voiceProfileId": "serhat-owner-voice-2026",
+  "voiceName": "Serhat Abu Malik – Master",
+  "modelId": "eleven_v4",
+  "purpose": "Only exact text queue; no generated or approved V4 master recordings.",
+  "policy": {
+    "nativeTtsFallback": false,
+    "arabicQuranRecitationIsSeparate": true,
+    "reviewRequiredBeforePublicPlayback": true,
+    "autoPublishUnreviewed": false,
+    "generateCreditsUsed": 0
+  },
+  "lessonCount": 4,
+  "curriculumIds": [
+    "aqidah-allah-pflanzen-wachsen",
+    "aqidah-iman-an-engel",
+    "akhlaq-helfen-ohne-gegenleistung",
+    "akhlaq-fehler-ehrlich-zugeben"
+  ],
+  "lessonIds": [
+    "aqidah-allah-pflanzen-wachsen",
+    "aqidah-iman-an-engel",
+    "akhlaq-helfen-ohne-gegenleistung",
+    "akhlaq-fehler-ehrlich-zugeben"
+  ],
+  "ageGroups": [
+    "4-5",
+    "6-8",
+    "9-10"
+  ],
+  "phraseCount": 72,
+  "approvalRequiredBeforePlayback": true,
+  "creditsUsed": 0,
+  "phrases": [
+    {
+      "text": "Schau dir einen kleinen Samen an. Daraus kann eine Pflanze werden.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "aqidah-allah-pflanzen-wachsen",
+      "kind": "intro",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "aqidah-allah-pflanzen-wachsen",
+          "kind": "intro",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Allah hat die Pflanzen erschaffen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "aqidah-allah-pflanzen-wachsen",
+      "kind": "line-1",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "aqidah-allah-pflanzen-wachsen",
+          "kind": "line-1",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Ein Samenkorn kann zu einer Pflanze wachsen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "aqidah-allah-pflanzen-wachsen",
+      "kind": "line-2",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "aqidah-allah-pflanzen-wachsen",
+          "kind": "line-2",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Mit einem Erwachsenen darf ich es einpflanzen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "aqidah-allah-pflanzen-wachsen",
+      "kind": "line-3",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "aqidah-allah-pflanzen-wachsen",
+          "kind": "line-3",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Ich gieße vorsichtig und beobachte, wie es wächst.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "aqidah-allah-pflanzen-wachsen",
+      "kind": "line-4",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "aqidah-allah-pflanzen-wachsen",
+          "kind": "line-4",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Qurʾān 6:99 erzählt vom Regen und von Pflanzen. Der Prophet ﷺ lehrte, dass Pflanzen für andere nützlich sein kann.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "aqidah-allah-pflanzen-wachsen",
+      "kind": "evidence",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "aqidah-allah-pflanzen-wachsen",
+          "kind": "evidence",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Warum kommen nach Regen und Wärme neue Pflanzen aus der Erde?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "aqidah-allah-pflanzen-wachsen",
+      "kind": "intro",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "aqidah-allah-pflanzen-wachsen",
+          "kind": "intro",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Der Qurʾān nennt den Regen und das Hervorbringen der Pflanzen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "aqidah-allah-pflanzen-wachsen",
+      "kind": "line-1",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "aqidah-allah-pflanzen-wachsen",
+          "kind": "line-1",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Allah ist ihr Schöpfer; wir können die Entwicklung Schritt für Schritt beobachten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "aqidah-allah-pflanzen-wachsen",
+      "kind": "line-2",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "aqidah-allah-pflanzen-wachsen",
+          "kind": "line-2",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Im authentischen Ḥadīṯ wird hilfreiches Pflanzen als gute Tat beschrieben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "aqidah-allah-pflanzen-wachsen",
+      "kind": "line-3",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "aqidah-allah-pflanzen-wachsen",
+          "kind": "line-3",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Ich kann einen Samen mit Erlaubnis pflanzen und regelmäßig, aber nicht zu viel gießen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "aqidah-allah-pflanzen-wachsen",
+      "kind": "line-4",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "aqidah-allah-pflanzen-wachsen",
+          "kind": "line-4",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Qurʾān 6:99 behandelt Allahs Schöpfung; al-Buḫārī 2320 den Nutzen von Pflanzen für Menschen und Tiere.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "aqidah-allah-pflanzen-wachsen",
+      "kind": "evidence",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "aqidah-allah-pflanzen-wachsen",
+          "kind": "evidence",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Wir betrachten die religiöse Aussage über den Schöpfer und ein beobachtbares Naturbeispiel.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "aqidah-allah-pflanzen-wachsen",
+      "kind": "intro",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "aqidah-allah-pflanzen-wachsen",
+          "kind": "intro",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Qurʾān 6:99 spricht von Wasser, das Allah herabkommen lässt, und davon, dass Pflanzen hervorgebracht werden.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "aqidah-allah-pflanzen-wachsen",
+      "kind": "line-1",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "aqidah-allah-pflanzen-wachsen",
+          "kind": "line-1",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Anas ibn Mālik überlieferte den Ṣaḥīḥ-Ḥadīṯ über das Pflanzen, dessen Ertrag anderen zugutekommt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "aqidah-allah-pflanzen-wachsen",
+      "kind": "line-2",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "aqidah-allah-pflanzen-wachsen",
+          "kind": "line-2",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Das Keimen eines Samens können wir durch Beobachtung nachvollziehen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "aqidah-allah-pflanzen-wachsen",
+      "kind": "line-3",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "aqidah-allah-pflanzen-wachsen",
+          "kind": "line-3",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Die Aussage über den Schöpfer ist Qurʾān; unsere Pflanzaufgabe ist ein heutiges Lernexperiment.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "aqidah-allah-pflanzen-wachsen",
+      "kind": "line-4",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "aqidah-allah-pflanzen-wachsen",
+          "kind": "line-4",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Die Quelle ist ein Versauszug; der Ḥadīṯ handelt vom Nutzen und Lohn guter Bepflanzung, nicht vom genauen biologischen Wachstum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "aqidah-allah-pflanzen-wachsen",
+      "kind": "evidence",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "aqidah-allah-pflanzen-wachsen",
+          "kind": "evidence",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Zum Īmān gehört auch, an Allahs Engel zu glauben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "aqidah-iman-an-engel",
+      "kind": "intro",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-an-engel",
+          "kind": "intro",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Īmān bedeutet: Glaube.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "aqidah-iman-an-engel",
+      "kind": "line-1",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-an-engel",
+          "kind": "line-1",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Allah berichtet uns von Engeln.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "aqidah-iman-an-engel",
+      "kind": "line-2",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-an-engel",
+          "kind": "line-2",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Die Engel gehören zu Allahs Schöpfung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "aqidah-iman-an-engel",
+      "kind": "line-3",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-an-engel",
+          "kind": "line-3",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Ich muss mir ihr Aussehen nicht ausdenken.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "aqidah-iman-an-engel",
+      "kind": "line-4",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-an-engel",
+          "kind": "line-4",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "In Qurʾān 2:285 werden Engel genannt; der Prophet ﷺ erklärte den Glauben an sie.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "aqidah-iman-an-engel",
+      "kind": "evidence",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-an-engel",
+          "kind": "evidence",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Manche Dinge kennen wir aus authentischer Offenbarung, auch wenn wir sie nicht selbst sehen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "aqidah-iman-an-engel",
+      "kind": "intro",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-an-engel",
+          "kind": "intro",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Qurʾān 2:285 nennt den Glauben an die Engel.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "aqidah-iman-an-engel",
+      "kind": "line-1",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-an-engel",
+          "kind": "line-1",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Der Ḥadīṯ von Ǧibrīl zählt den Glauben an die Engel zu den Glaubensgrundlagen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "aqidah-iman-an-engel",
+      "kind": "line-2",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-an-engel",
+          "kind": "line-2",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Wir sprechen darüber nur so, wie Qurʾān und Sunnah sie beschreiben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "aqidah-iman-an-engel",
+      "kind": "line-3",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-an-engel",
+          "kind": "line-3",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Wir erfinden keine Geschichten und keine Bilder von Engeln.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "aqidah-iman-an-engel",
+      "kind": "line-4",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-an-engel",
+          "kind": "line-4",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Muslim 8 beschreibt die Grundlagen des Īmān; diese Stunde vertieft nur den Glauben an Engel.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "aqidah-iman-an-engel",
+      "kind": "evidence",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-an-engel",
+          "kind": "evidence",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Wir lernen die Engel als Teil des Īmān und halten die Grenzen unseres Wissens ein.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "aqidah-iman-an-engel",
+      "kind": "intro",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-an-engel",
+          "kind": "intro",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Im Vers 2:285 wird neben dem Glauben an Allah auch der Glaube an Engel genannt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "aqidah-iman-an-engel",
+      "kind": "line-1",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-an-engel",
+          "kind": "line-1",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Im authentischen Ḥadīṯ von Ǧibrīl wird der Īmān ausdrücklich erklärt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "aqidah-iman-an-engel",
+      "kind": "line-2",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-an-engel",
+          "kind": "line-2",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Wir wissen nicht alles über die Engel und vermeiden ausgedachte Einzelheiten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "aqidah-iman-an-engel",
+      "kind": "line-3",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-an-engel",
+          "kind": "line-3",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Wir unterscheiden Offenbarungsaussagen von Bildern, Gerüchten oder eigenen Vermutungen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "aqidah-iman-an-engel",
+      "kind": "line-4",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-an-engel",
+          "kind": "line-4",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Die Unterrichtsübung ist, echte Quellen zu unterscheiden; das Erfinden von Details ist kein religiöses Wissen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "aqidah-iman-an-engel",
+      "kind": "evidence",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-an-engel",
+          "kind": "evidence",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Manchmal kann ich etwas Gutes tun, ohne dafür ein Geschenk zu bekommen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-helfen-ohne-gegenleistung",
+      "kind": "intro",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-helfen-ohne-gegenleistung",
+          "kind": "intro",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Ein Freund lässt seine Stifte fallen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-helfen-ohne-gegenleistung",
+      "kind": "line-1",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-helfen-ohne-gegenleistung",
+          "kind": "line-1",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Ich darf freundlich einen Stift aufheben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-helfen-ohne-gegenleistung",
+      "kind": "line-2",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-helfen-ohne-gegenleistung",
+          "kind": "line-2",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Ich muss dafür keine Süßigkeit bekommen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-helfen-ohne-gegenleistung",
+      "kind": "line-3",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-helfen-ohne-gegenleistung",
+          "kind": "line-3",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Wenn ich nicht helfen kann, darf ich freundlich Nein sagen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-helfen-ohne-gegenleistung",
+      "kind": "line-4",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-helfen-ohne-gegenleistung",
+          "kind": "line-4",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Qurʾān 76:9 spricht von Gutes-Tun um Allahs willen. Der Prophet ﷺ lehrte gegenseitige Hilfe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-helfen-ohne-gegenleistung",
+      "kind": "evidence",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-helfen-ohne-gegenleistung",
+          "kind": "evidence",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Eine gute Tat bleibt gut, auch wenn niemand dafür klatscht.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-helfen-ohne-gegenleistung",
+      "kind": "intro",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-helfen-ohne-gegenleistung",
+          "kind": "intro",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Der Qurʾān nennt Menschen, die Gutes um Allahs willen tun.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-helfen-ohne-gegenleistung",
+      "kind": "line-1",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-helfen-ohne-gegenleistung",
+          "kind": "line-1",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Im Ḥadīṯ bei Muslim 2699 wird gegenseitige Hilfe gelobt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-helfen-ohne-gegenleistung",
+      "kind": "line-2",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-helfen-ohne-gegenleistung",
+          "kind": "line-2",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Ich kann jemandem freiwillig eine kleine Unterstützung anbieten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-helfen-ohne-gegenleistung",
+      "kind": "line-3",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-helfen-ohne-gegenleistung",
+          "kind": "line-3",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Ich muss nicht für jeden guten Schritt Lob, Punkte oder ein Geschenk erwarten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-helfen-ohne-gegenleistung",
+      "kind": "line-4",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-helfen-ohne-gegenleistung",
+          "kind": "line-4",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Der Vers beschreibt aufrichtiges Geben; der Ḥadīṯ die Hilfe unter Menschen. Unsere Schulbeispiele sind eigene Anwendungen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-helfen-ohne-gegenleistung",
+      "kind": "evidence",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-helfen-ohne-gegenleistung",
+          "kind": "evidence",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Wir betrachten den Unterschied zwischen Hilfsbereitschaft und der Erwartung einer Belohnung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-helfen-ohne-gegenleistung",
+      "kind": "intro",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-helfen-ohne-gegenleistung",
+          "kind": "intro",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Qurʾān 76:9 nennt eine aufrichtige Hilfe, für die kein Dank verlangt wird.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-helfen-ohne-gegenleistung",
+      "kind": "line-1",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-helfen-ohne-gegenleistung",
+          "kind": "line-1",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "In Muslim 2699 lehrt der Prophet ﷺ über den Wert, anderen Menschen zu helfen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-helfen-ohne-gegenleistung",
+      "kind": "line-2",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-helfen-ohne-gegenleistung",
+          "kind": "line-2",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Ikhlāṣ bezieht sich auf die Absicht; über die Absicht anderer urteilen wir nicht.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-helfen-ohne-gegenleistung",
+      "kind": "line-3",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-helfen-ohne-gegenleistung",
+          "kind": "line-3",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Aufrichtig helfen darf freiwillig und begrenzt sein: Kinder müssen sich nicht überfordern oder ihre Sicherheit gefährden.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-helfen-ohne-gegenleistung",
+      "kind": "line-4",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-helfen-ohne-gegenleistung",
+          "kind": "line-4",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Dass Hilfe gut ist, ist belegt; eine konkrete Schulaufgabe ist ein modernes Unterrichtsbeispiel.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-helfen-ohne-gegenleistung",
+      "kind": "evidence",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-helfen-ohne-gegenleistung",
+          "kind": "evidence",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Manchmal fällt mir etwas herunter oder ich mache einen Fehler.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-fehler-ehrlich-zugeben",
+      "kind": "intro",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-fehler-ehrlich-zugeben",
+          "kind": "intro",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Ein Becher kippt um.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-fehler-ehrlich-zugeben",
+      "kind": "line-1",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-fehler-ehrlich-zugeben",
+          "kind": "line-1",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Ich darf sagen: Das ist mir passiert.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-fehler-ehrlich-zugeben",
+      "kind": "line-2",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-fehler-ehrlich-zugeben",
+          "kind": "line-2",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Ich bitte ruhig um Hilfe beim Aufwischen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-fehler-ehrlich-zugeben",
+      "kind": "line-3",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-fehler-ehrlich-zugeben",
+          "kind": "line-3",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Wir lernen daraus, ohne andere auszulachen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-fehler-ehrlich-zugeben",
+      "kind": "line-4",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-fehler-ehrlich-zugeben",
+          "kind": "line-4",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Der Qurʾān lehrt, aufrichtig zu sprechen. Der Prophet ﷺ lehrte die Bedeutung der Wahrheit.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-fehler-ehrlich-zugeben",
+      "kind": "evidence",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-fehler-ehrlich-zugeben",
+          "kind": "evidence",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Fehler zuzugeben kann Mut brauchen. Es ist ein guter erster Schritt zum Bessermachen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-fehler-ehrlich-zugeben",
+      "kind": "intro",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-fehler-ehrlich-zugeben",
+          "kind": "intro",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Qurʾān 33:70 lehrt gute, aufrichtige Worte.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-fehler-ehrlich-zugeben",
+      "kind": "line-1",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-fehler-ehrlich-zugeben",
+          "kind": "line-1",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Die Sunnah lehrt, dass Wahrhaftigkeit zu Gutem führt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-fehler-ehrlich-zugeben",
+      "kind": "line-2",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-fehler-ehrlich-zugeben",
+          "kind": "line-2",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Wenn ich etwas falsch gemacht habe, darf ich es ehrlich erklären.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-fehler-ehrlich-zugeben",
+      "kind": "line-3",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-fehler-ehrlich-zugeben",
+          "kind": "line-3",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Ich kann mich entschuldigen und helfen, einen entstandenen Schaden zu beheben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-fehler-ehrlich-zugeben",
+      "kind": "line-4",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-fehler-ehrlich-zugeben",
+          "kind": "line-4",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Die Szene mit dem umgekippten Becher ist eine pädagogische Geschichte; kein historischer Ḥadīṯ.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-fehler-ehrlich-zugeben",
+      "kind": "evidence",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-fehler-ehrlich-zugeben",
+          "kind": "evidence",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Wir verbinden eine wahrhaftige Aussage mit Verantwortung für das eigene Verhalten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-fehler-ehrlich-zugeben",
+      "kind": "intro",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-fehler-ehrlich-zugeben",
+          "kind": "intro",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Im Qurʾān 33:70 werden die Gläubigen zu treffenden und aufrichtigen Worten aufgefordert.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-fehler-ehrlich-zugeben",
+      "kind": "line-1",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-fehler-ehrlich-zugeben",
+          "kind": "line-1",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Ibn Masʿūd überlieferte einen Ṣaḥīḥ-Ḥadīṯ über die Bedeutung von Wahrhaftigkeit.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-fehler-ehrlich-zugeben",
+      "kind": "line-2",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-fehler-ehrlich-zugeben",
+          "kind": "line-2",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Einen Fehler zuzugeben ist nicht das Ende; man kann Wiedergutmachung anbieten und Hilfe suchen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-fehler-ehrlich-zugeben",
+      "kind": "line-3",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-fehler-ehrlich-zugeben",
+          "kind": "line-3",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Ehrlichkeit bedeutet nicht, sich in einer gefährlichen Situation zu exponieren; bei Bedrohung wendet man sich an eine Vertrauensperson.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-fehler-ehrlich-zugeben",
+      "kind": "line-4",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-fehler-ehrlich-zugeben",
+          "kind": "line-4",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Die Aussage über Wahrhaftigkeit stammt aus al-Buḫārī 6094, das Schulbeispiel ist unsere Anwendung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "akhlaq-fehler-ehrlich-zugeben",
+      "kind": "evidence",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-fehler-ehrlich-zugeben",
+          "kind": "evidence",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    }
+  ]
+}

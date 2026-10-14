@@ -98,7 +98,7 @@ for(const [index,html] of htmls.entries()){
 // The V9 daily-choice checks were advisory and are superseded by
 // the strict school-mode checks in test-kids-academy-school-v11.js.
 const main=htmls[0];
-assert.ok(main.includes('school-progress-v11.js?v=20261010-11'));
+assert.ok(main.includes('school-progress-v11.js?v=20261012-31'));
 assert.ok(main.includes('function academySchoolState(){'));
 assert.ok(main.includes('academySchoolState().access(chosen)'));
 const pilot=JSON.parse(read("kids/data/academy-v12-audio-pilot-request.json"));
@@ -142,17 +142,17 @@ assert.ok(ownerScript.includes('entry.approvedForPlayback===false'));
 const annual=JSON.parse(read("kids/data/academy-year-52weeks-v1.json"));
 assert.equal(annual.weeks.length,52);
 assert.equal(annual.goals.newLessonSlots,208);
-assert.equal(annual.goals.currentlyInCatalog,58);
-assert.equal(annual.goals.additionalAuthenticallyVerifiedLessonsNeeded,150);
+assert.equal(annual.goals.currentlyInCatalog,70);
+assert.equal(annual.goals.additionalAuthenticallyVerifiedLessonsNeeded,138);
 const allSlots=annual.weeks.flatMap(week=>week.days);
 assert.equal(allSlots.length,364);
 assert.equal(allSlots.filter(x=>x.mode==="new").length,208);
 assert.equal(allSlots.filter(x=>x.mode==="review").length,104);
 assert.equal(allSlots.filter(x=>x.mode==="flexible").length,52);
-assert.equal(allSlots.filter(x=>x.mode==="new"&&x.lessonId).length,58);
-assert.equal(allSlots.filter(x=>x.mode==="new"&&!x.lessonId).length,150);
+assert.equal(allSlots.filter(x=>x.mode==="new"&&x.lessonId).length,70);
+assert.equal(allSlots.filter(x=>x.mode==="new"&&!x.lessonId).length,138);
 assert.ok(allSlots.filter(x=>x.mode==="new"&&!x.lessonId).every(x=>x.status==="awaiting-authentic-source-and-content-review"));
-console.log("KIDS ACADEMY V9.1+V22 VERIFIED: 58 catalog lessons, 208 yearly new-lesson slots, 150 gated pending sources, weekly 4/2/1, legacy V9 voice plan preserved.");
+console.log("KIDS ACADEMY V9.1+V22 VERIFIED: 70 catalog lessons, 208 yearly new-lesson slots, 138 gated pending sources, weekly 4/2/1, legacy V9 voice plan preserved.");
 
 // Creator voice preview must never overwrite or impersonate a real child account.
 require("./test-kids-academy-creator-voice-sandbox-v17.js");

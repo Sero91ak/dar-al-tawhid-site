@@ -1,0 +1,1478 @@
+{
+  "schemaVersion": 1,
+  "version": "academy-voice-plan-v28-20261012",
+  "voiceProfileId": "serhat-owner-voice-2026",
+  "voiceName": "Serhat Abu Malik – Master",
+  "modelId": "eleven_v4",
+  "purpose": "Only exact text queue; no generated or approved V4 master recordings.",
+  "policy": {
+    "nativeTtsFallback": false,
+    "arabicQuranRecitationIsSeparate": true,
+    "reviewRequiredBeforePublicPlayback": true,
+    "autoPublishUnreviewed": false,
+    "generateCreditsUsed": 0
+  },
+  "lessonCount": 4,
+  "curriculumIds": [
+    "quran-al-fatihah-kennenlernen",
+    "sirah-nuh-geduldig-einladen",
+    "dua-abend-dhikr-lernen",
+    "family-geschwister-unterstuetzen"
+  ],
+  "lessonIds": [
+    "quran-al-fatihah-kennenlernen",
+    "sirah-nuh-geduldig-einladen",
+    "dua-abend-dhikr-lernen",
+    "family-geschwister-unterstuetzen"
+  ],
+  "ageGroups": [
+    "4-5",
+    "6-8",
+    "9-10"
+  ],
+  "phraseCount": 72,
+  "approvalRequiredBeforePlayback": true,
+  "creditsUsed": 0,
+  "phrases": [
+    {
+      "text": "Die erste Sūrah im Qurʾān heißt al-Fātiḥah. Wir hören aufmerksam zu.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "quran-al-fatihah-kennenlernen",
+      "kind": "intro",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "quran-al-fatihah-kennenlernen",
+          "kind": "intro",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Al-Fātiḥah steht am Anfang des Qurʾān.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "quran-al-fatihah-kennenlernen",
+      "kind": "line-1",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "quran-al-fatihah-kennenlernen",
+          "kind": "line-1",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Ich höre eine richtige Qurʾān-Rezitation.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "quran-al-fatihah-kennenlernen",
+      "kind": "line-2",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "quran-al-fatihah-kennenlernen",
+          "kind": "line-2",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Al-ḥamdu lillāh bedeutet: Alles Lob gehört Allah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "quran-al-fatihah-kennenlernen",
+      "kind": "line-3",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "quran-al-fatihah-kennenlernen",
+          "kind": "line-3",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Ich darf langsam lernen und nachfragen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "quran-al-fatihah-kennenlernen",
+      "kind": "line-4",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "quran-al-fatihah-kennenlernen",
+          "kind": "line-4",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Im Qurʾān steht: Alles Lob gehört Allah. Der Prophet ﷺ erklärte die große Bedeutung dieser Sūrah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "quran-al-fatihah-kennenlernen",
+      "kind": "evidence",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "quran-al-fatihah-kennenlernen",
+          "kind": "evidence",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Wir lernen den Namen al-Fātiḥah und den Sinn ihrer ersten Lobpreisung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "quran-al-fatihah-kennenlernen",
+      "kind": "intro",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "quran-al-fatihah-kennenlernen",
+          "kind": "intro",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Al-Fātiḥah bedeutet: die Eröffnende.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "quran-al-fatihah-kennenlernen",
+      "kind": "line-1",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "quran-al-fatihah-kennenlernen",
+          "kind": "line-1",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Sie ist die erste Sūrah im Qurʾān.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "quran-al-fatihah-kennenlernen",
+      "kind": "line-2",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "quran-al-fatihah-kennenlernen",
+          "kind": "line-2",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "'Al-ḥamdu lillāhi rabbi l-ʿālamīn' lobt Allah als Herrn der Welten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "quran-al-fatihah-kennenlernen",
+      "kind": "line-3",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "quran-al-fatihah-kennenlernen",
+          "kind": "line-3",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Wir lernen die richtige Aussprache durch eine echte Rezitation und einen geeigneten Lehrer.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "quran-al-fatihah-kennenlernen",
+      "kind": "line-4",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "quran-al-fatihah-kennenlernen",
+          "kind": "line-4",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Ṣaḥīḥ al-Buḫārī Nr. 4474 benennt die herausragende Bedeutung der Sūrah; das Unterrichtsbeispiel erklärt Āyah 1:2.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "quran-al-fatihah-kennenlernen",
+      "kind": "evidence",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "quran-al-fatihah-kennenlernen",
+          "kind": "evidence",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Wir trennen den arabischen Offenbarungstext von seiner deutschen Bedeutungsübersetzung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "quran-al-fatihah-kennenlernen",
+      "kind": "intro",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "quran-al-fatihah-kennenlernen",
+          "kind": "intro",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Die gezeigte Āyah 1:2 gehört zu Sūrat al-Fātiḥah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "quran-al-fatihah-kennenlernen",
+      "kind": "line-1",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "quran-al-fatihah-kennenlernen",
+          "kind": "line-1",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Al-ḥamd bezeichnet das Lob, das Allah gebührt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "quran-al-fatihah-kennenlernen",
+      "kind": "line-2",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "quran-al-fatihah-kennenlernen",
+          "kind": "line-2",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Abū Saʿīd ibn al-Muʿallā überlieferte die prophetische Erklärung über die Bedeutung dieser Sūrah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "quran-al-fatihah-kennenlernen",
+      "kind": "line-3",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "quran-al-fatihah-kennenlernen",
+          "kind": "line-3",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Wir lesen den Vers, verstehen seine Grundbedeutung und hören die vollständige Sūrah nur als authentische Rezitation.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "quran-al-fatihah-kennenlernen",
+      "kind": "line-4",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "quran-al-fatihah-kennenlernen",
+          "kind": "line-4",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Der Ḥadīṯ spricht über die gesamte Sūrah, während die arabische Zeile hier nur Āyah 1:2 zeigt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "quran-al-fatihah-kennenlernen",
+      "kind": "evidence",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "quran-al-fatihah-kennenlernen",
+          "kind": "evidence",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Nūḥ war ein Prophet und Gesandter Allahs. Er erinnerte die Menschen an Allah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "sirah-nuh-geduldig-einladen",
+      "kind": "intro",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "sirah-nuh-geduldig-einladen",
+          "kind": "intro",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Allah schickte Nūḥ zu den Menschen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "sirah-nuh-geduldig-einladen",
+      "kind": "line-1",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "sirah-nuh-geduldig-einladen",
+          "kind": "line-1",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Nūḥ rief seine Menschen bei Tag und bei Nacht.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "sirah-nuh-geduldig-einladen",
+      "kind": "line-2",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "sirah-nuh-geduldig-einladen",
+          "kind": "line-2",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Das lesen wir im Qurʾān.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "sirah-nuh-geduldig-einladen",
+      "kind": "line-3",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "sirah-nuh-geduldig-einladen",
+          "kind": "line-3",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Wenn ich etwas Schwieriges lerne, darf ich Pausen machen und Hilfe holen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "sirah-nuh-geduldig-einladen",
+      "kind": "line-4",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "sirah-nuh-geduldig-einladen",
+          "kind": "line-4",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Der Qurʾān erzählt, wie Nūḥ sein Volk rief. Der Ṣaḥīḥ-Ḥadīṯ erwähnt Nūḥ als Gesandten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "sirah-nuh-geduldig-einladen",
+      "kind": "evidence",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "sirah-nuh-geduldig-einladen",
+          "kind": "evidence",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Nūḥ عليه السلام blieb beharrlich, obwohl nicht jeder auf ihn hörte.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "sirah-nuh-geduldig-einladen",
+      "kind": "intro",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "sirah-nuh-geduldig-einladen",
+          "kind": "intro",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Sūrat Nūḥ 71:5 nennt sein Rufen bei Nacht und bei Tag.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "sirah-nuh-geduldig-einladen",
+      "kind": "line-1",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "sirah-nuh-geduldig-einladen",
+          "kind": "line-1",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Er rief seine Menschen zum Glauben an Allah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "sirah-nuh-geduldig-einladen",
+      "kind": "line-2",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "sirah-nuh-geduldig-einladen",
+          "kind": "line-2",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Ein authentischer Ḥadīṯ nennt Nūḥ einen frühen Gesandten zu den Menschen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "sirah-nuh-geduldig-einladen",
+      "kind": "line-3",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "sirah-nuh-geduldig-einladen",
+          "kind": "line-3",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Wir lernen daraus, beim Guten Geduld zu üben, ohne uns in Gefahr zu bringen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "sirah-nuh-geduldig-einladen",
+      "kind": "line-4",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "sirah-nuh-geduldig-einladen",
+          "kind": "line-4",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Der Qurʾān belegt das beharrliche Rufen; der Ḥadīṯ belegt Nūḥs Stellung als Gesandter.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "sirah-nuh-geduldig-einladen",
+      "kind": "evidence",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "sirah-nuh-geduldig-einladen",
+          "kind": "evidence",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Wir vergleichen Qurʾān 71:5 und einen Teil des authentischen Schafāʿah-Berichts.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "sirah-nuh-geduldig-einladen",
+      "kind": "intro",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "sirah-nuh-geduldig-einladen",
+          "kind": "intro",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Der Qurʾān zitiert die Worte Nūḥs über sein andauerndes Rufen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "sirah-nuh-geduldig-einladen",
+      "kind": "line-1",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "sirah-nuh-geduldig-einladen",
+          "kind": "line-1",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Der Überlieferung bei al-Buḫārī Nr. 7410 entnehmen wir eine Aussage über seine Sendung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "sirah-nuh-geduldig-einladen",
+      "kind": "line-2",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "sirah-nuh-geduldig-einladen",
+          "kind": "line-2",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Der Ḥadīṯ liefert hier keinen neuen Bericht über eine Unterrichtsszene oder die Arche.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "sirah-nuh-geduldig-einladen",
+      "kind": "line-3",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "sirah-nuh-geduldig-einladen",
+          "kind": "line-3",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Das Alltagsbeispiel 'bei einer schwierigen Aufgabe ruhig bleiben' ist eine pädagogische Anwendung, keine Nūḥ-Erzählung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "sirah-nuh-geduldig-einladen",
+      "kind": "line-4",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "sirah-nuh-geduldig-einladen",
+          "kind": "line-4",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Die Geduld Nūḥs wird auf Qurʾān 71:5 gegründet; wir erfinden keine zusätzlichen Ereignisse.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "sirah-nuh-geduldig-einladen",
+      "kind": "evidence",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "sirah-nuh-geduldig-einladen",
+          "kind": "evidence",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Wenn es Abend wird, dürfen wir an Allah denken und Ihm danken.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "dua-abend-dhikr-lernen",
+      "kind": "intro",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "dua-abend-dhikr-lernen",
+          "kind": "intro",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Am Abend wird es ruhiger.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "dua-abend-dhikr-lernen",
+      "kind": "line-1",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "dua-abend-dhikr-lernen",
+          "kind": "line-1",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Ich darf Allah danken.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "dua-abend-dhikr-lernen",
+      "kind": "line-2",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "dua-abend-dhikr-lernen",
+          "kind": "line-2",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Der Prophet ﷺ gedachte Allahs auch am Abend.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "dua-abend-dhikr-lernen",
+      "kind": "line-3",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "dua-abend-dhikr-lernen",
+          "kind": "line-3",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Ein Erwachsener kann mir ein richtiges Abend-Duʿāʾ zeigen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "dua-abend-dhikr-lernen",
+      "kind": "line-4",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "dua-abend-dhikr-lernen",
+          "kind": "line-4",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Allah befiehlt im Qurʾān, Seiner oft zu gedenken. Der Prophet ﷺ hatte authentische Worte für den Abend.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "dua-abend-dhikr-lernen",
+      "kind": "evidence",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "dua-abend-dhikr-lernen",
+          "kind": "evidence",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Ḏikr ist das arabische Wort für Gedenken Allahs.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "dua-abend-dhikr-lernen",
+      "kind": "intro",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "dua-abend-dhikr-lernen",
+          "kind": "intro",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Qurʾān 33:41 fordert zum Gedenken Allahs auf.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "dua-abend-dhikr-lernen",
+      "kind": "line-1",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "dua-abend-dhikr-lernen",
+          "kind": "line-1",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Der Prophet ﷺ sagte am Abend überlieferte Worte.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "dua-abend-dhikr-lernen",
+      "kind": "line-2",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "dua-abend-dhikr-lernen",
+          "kind": "line-2",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Ein Gedenkspruch beginnt mit 'Amsaynā wa-amsā l-mulku lillāh'.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "dua-abend-dhikr-lernen",
+      "kind": "line-3",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "dua-abend-dhikr-lernen",
+          "kind": "line-3",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Wir lernen die Bedeutung Schritt für Schritt und hören für die vollständige Formel nur eine überprüfte Aufnahme.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "dua-abend-dhikr-lernen",
+      "kind": "line-4",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "dua-abend-dhikr-lernen",
+          "kind": "line-4",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Muslim 2723 enthält mehr Worte als diesen Anfang. Der Unterricht ersetzt keine vollständige Rezitation.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "dua-abend-dhikr-lernen",
+      "kind": "evidence",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "dua-abend-dhikr-lernen",
+          "kind": "evidence",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Wir unterscheiden Qurʾān, authentische Abend-Adhkār und eine Unterrichtserklärung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "dua-abend-dhikr-lernen",
+      "kind": "intro",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "dua-abend-dhikr-lernen",
+          "kind": "intro",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Der Qurʾān gebietet häufiges Gedenken Allahs.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "dua-abend-dhikr-lernen",
+      "kind": "line-1",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "dua-abend-dhikr-lernen",
+          "kind": "line-1",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Ibn Masʿūd überlieferte die Abendformel aus Muslim Nr. 2723.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "dua-abend-dhikr-lernen",
+      "kind": "line-2",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "dua-abend-dhikr-lernen",
+          "kind": "line-2",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Die hier erklärte Einleitung verweist auf Allahs Herrschaft und das Eintreten des Abends.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "dua-abend-dhikr-lernen",
+      "kind": "line-3",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "dua-abend-dhikr-lernen",
+          "kind": "line-3",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Den vollständigen Ḏikr lernen wir aus dem Original; die deutsche Bedeutung ist eine Erklärung und keine arabische Rezitation.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "dua-abend-dhikr-lernen",
+      "kind": "line-4",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "dua-abend-dhikr-lernen",
+          "kind": "line-4",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Die anfänglichen arabischen Worte allein sind ausdrücklich kein Nachweis für eine vollständige feste Duʿāʾ-Formel.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "dua-abend-dhikr-lernen",
+      "kind": "evidence",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "dua-abend-dhikr-lernen",
+          "kind": "evidence",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Manchmal braucht dein Bruder oder deine Schwester Hilfe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "family-geschwister-unterstuetzen",
+      "kind": "intro",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "family-geschwister-unterstuetzen",
+          "kind": "intro",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Ich sehe: Jemand ist traurig.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "family-geschwister-unterstuetzen",
+      "kind": "line-1",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "family-geschwister-unterstuetzen",
+          "kind": "line-1",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Ich frage freundlich: Kann ich dir helfen?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "family-geschwister-unterstuetzen",
+      "kind": "line-2",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "family-geschwister-unterstuetzen",
+          "kind": "line-2",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Ich darf einen Erwachsenen holen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "family-geschwister-unterstuetzen",
+      "kind": "line-3",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "family-geschwister-unterstuetzen",
+          "kind": "line-3",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Wir helfen, ohne zu schubsen oder auszulachen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "family-geschwister-unterstuetzen",
+      "kind": "line-4",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "family-geschwister-unterstuetzen",
+          "kind": "line-4",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Allah lehrt gegenseitige Hilfe beim Guten. Der Prophet ﷺ erklärte, dass Gläubige einander stärken.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "family-geschwister-unterstuetzen",
+      "kind": "evidence",
+      "age": "4-5",
+      "contexts": [
+        {
+          "lessonId": "family-geschwister-unterstuetzen",
+          "kind": "evidence",
+          "age": "4-5"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Wir lernen heute nicht das Teilen, sondern das Unterstützen bei Bedarf.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "family-geschwister-unterstuetzen",
+      "kind": "intro",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "family-geschwister-unterstuetzen",
+          "kind": "intro",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Qurʾān 5:2 ruft zur gegenseitigen Hilfe beim Guten auf.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "family-geschwister-unterstuetzen",
+      "kind": "line-1",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "family-geschwister-unterstuetzen",
+          "kind": "line-1",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Der Prophet ﷺ erklärte gegenseitige Unterstützung mit einem festen Gebäude.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "family-geschwister-unterstuetzen",
+      "kind": "line-2",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "family-geschwister-unterstuetzen",
+          "kind": "line-2",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Ich kann zuhören oder bei einer kleinen Aufgabe helfen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "family-geschwister-unterstuetzen",
+      "kind": "line-3",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "family-geschwister-unterstuetzen",
+          "kind": "line-3",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Wenn ein Problem zu groß ist, bitte ich Erwachsene um Hilfe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "family-geschwister-unterstuetzen",
+      "kind": "line-4",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "family-geschwister-unterstuetzen",
+          "kind": "line-4",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Das Bild vom Gebäude stammt aus dem Ḥadīṯ; die Familiensituation ist eine Anwendung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "family-geschwister-unterstuetzen",
+      "kind": "evidence",
+      "age": "6-8",
+      "contexts": [
+        {
+          "lessonId": "family-geschwister-unterstuetzen",
+          "kind": "evidence",
+          "age": "6-8"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Gute Zusammenarbeit bedeutet, anderen zu helfen, ohne ihre Aufgaben vollständig übernehmen zu müssen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "family-geschwister-unterstuetzen",
+      "kind": "intro",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "family-geschwister-unterstuetzen",
+          "kind": "intro",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Der Qurʾān spricht vom Zusammenwirken im Guten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "family-geschwister-unterstuetzen",
+      "kind": "line-1",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "family-geschwister-unterstuetzen",
+          "kind": "line-1",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Der Ḥadīṯ bei al-Buḫārī 6026 und Muslim 2585 vergleicht gegenseitige Hilfe mit einem tragfähigen Gebäude.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "family-geschwister-unterstuetzen",
+      "kind": "line-2",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "family-geschwister-unterstuetzen",
+          "kind": "line-2",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Wir unterscheiden das allgemeine religiöse Prinzip von einer konkreten Familiensituation.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "family-geschwister-unterstuetzen",
+      "kind": "line-3",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "family-geschwister-unterstuetzen",
+          "kind": "line-3",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Bei Gefahr, Krankheit oder belastenden Problemen haben Erwachsene die Verantwortung; Kinder dürfen Unterstützung anfordern.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "family-geschwister-unterstuetzen",
+      "kind": "line-4",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "family-geschwister-unterstuetzen",
+          "kind": "line-4",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    },
+    {
+      "text": "Unterstützung heißt nicht, sich selbst zu überlasten oder gefährliche Geheimnisse zu bewahren.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "lessonId": "family-geschwister-unterstuetzen",
+      "kind": "evidence",
+      "age": "9-10",
+      "contexts": [
+        {
+          "lessonId": "family-geschwister-unterstuetzen",
+          "kind": "evidence",
+          "age": "9-10"
+        }
+      ],
+      "reviewStatus": "not-generated",
+      "url": null,
+      "voiceApproved": false
+    }
+  ]
+}

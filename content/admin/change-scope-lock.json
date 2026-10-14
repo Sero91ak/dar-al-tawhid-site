@@ -7662,6 +7662,43 @@
         "scripts/test-kids-account-registration-v1.js"
       ],
       "expiresAt": "2026-11-30T23:59:00.000Z"
+    },
+    {
+      "id": "kids-academy-v30-67-70-sourced-20261012",
+      "at": "2026-10-12T20:01:00+02:00",
+      "approvedBy": "user-explicit-continue-kids-year-teaching-from-lesson-63",
+      "reason": "Only continue existing KIDS year plan at lessons 67–70, after finding 63–66 already present; 3 age-specific texts, Qurʾān and Ṣaḥīḥ sources, linked year plan, source archive, source/CI regression and pending original voice text queue. Protect existing account/progress, 208-slot sequencing and all other apps. No paid audio generation or audio approval.",
+      "paths": [
+        "kids/akademie/curriculum-v30.js",
+        "kids/akademie/index.html",
+        "kids/akademie/school-progress-v11.js",
+        "kids/item-offline-v1.js",
+        "kids/data/academy-year-52weeks-v1.json",
+        "kids/data/academy-expansion-roadmap-v23.json",
+        "kids/unterrichtsarchiv.html",
+        "kids/data/academy-voice-plan-v30.json",
+        "kids/tools/test-academy-v30-authentic.cjs",
+        "kids/tools/test-academy-sequential-lock-v27.cjs",
+        "scripts/test-kids-academy-v9.js",
+        "scripts/test-kids-academy-school-v11.js",
+        "kids/tools/test-academy-v22-authentic.cjs",
+        "kids/tools/test-academy-v23-roadmap.cjs",
+        "test/kids/akademie/test-v23-roadmap-preview.cjs",
+        "kids/tools/test-academy-v25-authentic.cjs",
+        "kids/tools/test-academy-v26-authentic.cjs",
+        "kids/tools/test-academy-v27-authentic.cjs",
+        "test/kids/akademie/test-archive-v27.cjs",
+        ".github/workflows/check-kids-academy-v9.yml",
+        "content/admin/change-scope-lock.json",
+        "kids/data/academy-voice-plan-v28.json",
+        "kids/data/academy-voice-plan-v29.json",
+        "kids/tools/audit-academy-voice-coverage-v18.js",
+        "scripts/test-kids-academy-audio-queue-v18.js",
+        "test/kids/akademie/test-voice-audit-v20.cjs",
+        "test/kids/akademie/audio-audit.html",
+        "kids/tools/test-academy-term-coach-v24.cjs"
+      ],
+      "expiresAt": "2026-10-19T23:59:00.000Z"
     }
   ],
   "enabled": true

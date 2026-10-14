@@ -3,8 +3,8 @@
 const assert=require("node:assert/strict");
 const {audit,validV4,normalize}=require("../kids/tools/audit-academy-voice-coverage-v18.js");
 const r=audit();
-assert.equal(r.catalogLessonCount,50);
-assert.deepEqual(r.uncoveredLessons,[]);
+assert.equal(r.catalogLessonCount,70);
+assert.deepEqual(r.uncoveredLessons,[],"Every lesson must have traceable pending audio scripts");
 assert.ok(r.uniquePhrases>=600);
 assert.equal(Object.values(r.totals).reduce((a,b)=>a+b,0),r.uniquePhrases);
 assert.equal(r.totals.approved,0,"Old Flash clip is NOT an approved V4 story voice");
@@ -14,4 +14,4 @@ assert.equal(validV4({voiceId:"different",url:"/fake",voiceProfileId:"serhat-own
  voiceSettingsProfile:"kids_story",sourceVoice:"authorized-owner-voice",sourceSpeaker:"Serhat Abu Malik",
  sameAsApprovedKidsStoryProfile:true}),false);
 assert.equal(normalize("A  B\nC"),"A B C");
-console.log("ACADEMY VOICE V18 PASS: exact Serhat-only matching, staged four, zero synthetic fallback, no credits.");
+console.log("ACADEMY VOICE V18 PASS: 70 lessons with ungenerated V28–V30 scripts; exact Serhat-only matching, staged four, zero synthetic fallback, no credits.");
