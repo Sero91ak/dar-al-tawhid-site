@@ -68,16 +68,35 @@ jobs:
           python3 kids/tools/quiz_v4_all900_audio_assembler.py --self-test
           python3 kids/tools/quiz_v4_all900_release_gate.py
 
-      - name: Save versioned planning artifact on review branch
+      - name: Save plans without losing concurrent test-branch changes
+        shell: bash
         run: |
           set -euo pipefail
           git config user.name dar-kids-review-bot
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add kids/data/quiz-v4-all900-segmented-review.json kids/data/quiz-v4-all900-production-packets.json kids/data/quiz-v4-all900-production-summary.json
-          if ! git diff --cached --quiet; then
-            git commit -m 'review(kids quiz): complete 900 V4 age-banded segmented narration plans, zero credits'
-            git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014
-          fi
+          branch=review/kids-quiz-v4-batch-001-020-20261014
+          # Runners may start from stale PR snapshots. Rebase-by-regeneration
+          # keeps all other branch commits intact, never force-pushes main.
+          for attempt in 1 2 3 4; do
+            git fetch origin "$branch"
+            git reset --hard FETCH_HEAD
+            python3 kids/tools/prepare_quiz_v4_all900_segmented.py
+            python3 kids/tools/split_quiz_v4_all900_packets.py
+            python3 kids/tools/quiz_v4_all900_audio_assembler.py --audit
+            git add kids/data/quiz-v4-all900-segmented-review.json kids/data/quiz-v4-all900-production-packets.json kids/data/quiz-v4-all900-production-summary.json
+            if git diff --cached --quiet; then
+              echo "All 900 review plan/packet files already present and current."
+              exit 0
+            fi
+            git commit -m "review(kids quiz): 900 verified V4 speech recipes and 18 age-aligned packets (no credits)"
+            if git push origin HEAD:"$branch"; then
+              echo "Review branch safely updated with all 900 plans."
+              exit 0
+            fi
+            echo "Concurrent branch change on attempt $attempt; regenerating on newest revision."
+          done
+          echo "::error::Could not save reviewed 900-plan files after four safe retries."
+          exit 1
 
       - name: Archive full 900-question narration plan
         if: always()
