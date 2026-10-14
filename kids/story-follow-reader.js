@@ -408,7 +408,8 @@ function create(options){
   function focusListeningArtwork(ready){
     const scroller=document.querySelector(
       "#psModal.open #psScroll, #syModal.open #syScroll, "+
-      "#msModal.open #msScroll, #ghPlayer.open #ghPlayerScroll"
+      "#msModal.open #msScroll, #ghPlayer.open #ghPlayerScroll, "+
+      "#salafDetail:not([hidden]) > .salaf-detail-scroll"
     );
     if(!scroller||scroller.scrollTop<=2){
       if(scroller)scroller.scrollTop=0;
