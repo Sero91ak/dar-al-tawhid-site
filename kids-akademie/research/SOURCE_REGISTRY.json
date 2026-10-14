@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "generatedOn": "2026-10-14",
   "warning": "V38 verse spans were read on Islamweb Ibn Kathir pages on 2026-10-13. Hadith numbers were not added. Dorar was not re-read. Scientific approval is not claimed.",
-  "sourceCount": 157,
+  "sourceCount": 159,
   "sources": [
     {
       "sourceId": "SRC-BANK-001",
@@ -3562,7 +3562,8 @@
       "checkedOn": "2026-10-14",
       "checkedBy": "Islamweb Tafsīr aṭ-Ṭabarī 50/3021, arabischer Wortlaut zu 17:53 überprüft",
       "lessonIds": [
-        "adab-worte"
+        "adab-worte",
+        "adab-worte-bei-streit-sprechen"
       ],
       "binding": "primary classical Qurʾān tafsīr; separate Sunnah check pending",
       "topic": "Freundlich sprechen"
@@ -3588,7 +3589,8 @@
       "checkedOn": "2026-10-14",
       "checkedBy": "Islamweb Zād al-Masīr, 23:8 auf Seite 461 direkt gelesen",
       "lessonIds": [
-        "akhlaq-amanah"
+        "akhlaq-amanah",
+        "akhlaq-amanah-geliehene-dinge"
       ],
       "binding": "primary classical Qurʾān tafsīr; hadith check pending",
       "topic": "Amānah – Vertrauen"
@@ -3666,7 +3668,8 @@
       "checkedOn": "2026-10-14",
       "checkedBy": "Dorar Ḥadīṯ-Enzyklopädie Sharḥ 4361, arabischer Bericht / Erzähler / Buḫārī 6018 / Muslim 47 / Authentizität direkt kontrolliert",
       "lessonIds": [
-        "adab-worte"
+        "adab-worte",
+        "adab-worte-bei-streit-sprechen"
       ],
       "binding": "authentic Sunnah for early lesson 6; classical Quran Tafsir independent",
       "topic": "Gutes sprechen oder schweigen"
@@ -3796,7 +3799,8 @@
       "checkedOn": "2026-10-14",
       "checkedBy": "Dorar Sharḥ 63778, arabischer Bericht ʿUmar, Ṣaḥīḥ Muslim 8, sechs Glaubenssäulen und ṣaḥīḥ-Status unmittelbar gelesen",
       "lessonIds": [
-        "aqidah-iman"
+        "aqidah-iman",
+        "aqidah-iman-die-engel"
       ],
       "binding": "authentic Sunni Hadith Jibril for six pillars, separate from Quran 2:3",
       "topic": "Sechs Glaubenssäulen"
@@ -3903,7 +3907,8 @@
       "verificationStatus": "primary-report-direct-read-2026-10-14",
       "checkedBy": "Dorar Hadith-Sharḥ 5952, Abū Hurayrah, Buḫārī 33, Muslim 59",
       "lessonIds": [
-        "akhlaq-amanah"
+        "akhlaq-amanah",
+        "akhlaq-amanah-geliehene-dinge"
       ],
       "binding": "authentic Sunnah source distinct from Tafsīr of 23:8",
       "topic": "Amānah – Anvertrautes bewahren"
@@ -3959,6 +3964,58 @@
       ],
       "binding": "verified authentic Sunnah example for safe public-space tidying; analogical classroom application only; separate from Ṭahārah of ritual prayer",
       "topic": "Sicher anderen helfen und unnötige Hindernisse beseitigen"
+    },
+    {
+      "sourceId": "SRC-FIQH23-MUGHNI-132",
+      "key": "fiqh23-mughni-face-mouth-nose",
+      "author": "Ibn Qudāmah",
+      "work": "al-Mughnī",
+      "narrator": null,
+      "arabic": "وَالْفَمُ وَالْأَنْفُ مِنَ الْوَجْهِ",
+      "germanTranslation": null,
+      "locus": "Kitāb aṭ-Ṭahārah, Bāb Farḍ aṭ-Ṭahārah, Masʾalah 156 (al-fam wa-l-anf min al-waǧh)",
+      "volume": "1",
+      "page": "83",
+      "chapter": "Gesichtswaschung und Abgrenzung der Mund-/Nasenpflicht",
+      "number": "156",
+      "edition": "Islamweb al-Mughnī 15/132",
+      "directLink": "https://www.islamweb.net/ar/library/content/15/132#:~:text=%D9%88%D8%A7%D9%84%D9%81%D9%85%20%D9%88%D8%A7%D9%84%D8%A3%D9%86%D9%81%20%D9%85%D9%86%20%D8%A7%D9%84%D9%88%D8%AC%D9%87",
+      "authenticityNote": "Am 14.10.2026 unmittelbar nachgelesener klassischer hanbalitischer Originaltext auf Islamweb. Ibn Qudāmah stellt die Waschung des Gesichts und die in der hanbalitischen Schule vertretene Einordnung des Mund-/Nasenbereichs dar und nennt abweichende Auffassungen. Keiner der unterschiedlichen Berichte innerhalb dieses Kapitels wurde separat als eigenständig authentischer neuer Hadith geprüft.",
+      "safeApplication": "Kinder lernen zuerst Gesicht und Arme als in Qurʾān 5:6 benannte Teile. Beim Wuḍūʾ sanft mit fachkundiger Lehrperson üben, niemandem Wasser erzwingen; Details zu Mund, Nase, Verletzungen und Krankheit nicht als ausnahmsloses Kindergebot vorwegnehmen.",
+      "verificationStatus": "primary-page-direct-read-2026-10-14",
+      "checkedOn": "2026-10-14",
+      "checkedBy": "Islamweb direkt, Ibn Qudāmah al-Mughnī 15/132, Bd. 1 S. 83",
+      "lessonIds": [
+        "fiqh-wudu-gesicht-und-arme"
+      ],
+      "binding": "classical Hanbali primary Fiqh source for the face; nuance about mouth/nose retained; final scholarly approval pending",
+      "topic": "Gesicht bei der Gebetswaschung"
+    },
+    {
+      "sourceId": "SRC-FIQH23-MUGHNI-135",
+      "key": "fiqh23-mughni-hands-elbows",
+      "author": "Ibn Qudāmah",
+      "work": "al-Mughnī",
+      "narrator": null,
+      "arabic": "وَغَسْلُ الْيَدَيْنِ إِلَى الْمِرْفَقَيْنِ وَيَدْخُلُ الْمِرْفَقَيْنِ فِي الْغَسْلِ",
+      "germanTranslation": null,
+      "locus": "Kitāb aṭ-Ṭahārah, Bāb Farḍ aṭ-Ṭahārah, Masʾalah 160 (ġasl al-yadayn ilā al-mirfaqayn)",
+      "volume": "1",
+      "page": "85",
+      "chapter": "Waschen der Arme bis zu den Ellenbogen",
+      "number": "160",
+      "edition": "Islamweb al-Mughnī 15/135",
+      "directLink": "https://www.islamweb.net/ar/library/content/15/135#:~:text=%D9%88%D8%BA%D8%B3%D9%84%20%D8%A7%D9%84%D9%8A%D8%AF%D9%8A%D9%86%20%D8%A5%D9%84%D9%89%20%D8%A7%D9%84%D9%85%D8%B1%D9%81%D9%82%D9%8A%D9%86",
+      "authenticityNote": "Am 14.10.2026 unmittelbar gelesener klassischer al-Mughnī Originaltext. Ibn Qudāmah verweist für Arme und Ellenbogen ausdrücklich auf den Wortlaut von Qurʾān 5:6, erwähnt die Mehrheitsauffassung und auch abweichende Detailmeinungen. Nicht jede im Kapitel angeführte Einzelüberlieferung separat auf Isnād geprüft.",
+      "safeApplication": "Kinder dürfen zunächst Gesicht und Arme mit einfachen sicheren Bildern kennenlernen; keine erzwungene Wasseranwendung, keine Beschämung bei Behinderung oder Krankheit. Exakte Fiqh-Folgen für Verletzungen oder ausgelassene Waschung bleiben zur qualifizierten Beurteilung offen.",
+      "verificationStatus": "primary-page-direct-read-2026-10-14",
+      "checkedOn": "2026-10-14",
+      "checkedBy": "Islamweb direkt, Ibn Qudāmah al-Mughnī 15/135, Bd. 1 S. 85",
+      "lessonIds": [
+        "fiqh-wudu-gesicht-und-arme"
+      ],
+      "binding": "classical Hanbali primary Fiqh source for washing arms including elbows; final human review pending",
+      "topic": "Arme bis zu den Ellenbogen im Wuḍūʾ"
     }
   ]
 }
