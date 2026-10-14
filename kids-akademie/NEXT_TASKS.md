@@ -1,6 +1,6 @@
 ## 14.10.2026 · Quizredaktion V39–V41 und zusätzliche Quellenprüfung
 
-- **Slots 99–134:** 36 Lektionen mit insgesamt **288 eigens formulierten altersbezogenen Quizfragen** auf V39, V40 und V41; korrekt nach V38 in `kids/akademie/index.html` eingebunden. Lernziele, Qurʾān-Originaltexte, IDs und Freigabestatus beibehalten. **Nächste offene Quizredaktion: Slots 135–208 (74 Lektionen).**
+- **Slots 99–134:** 33 Lektionen mit **264 neu formulierten altersbezogenen Quizfragen** auf V39, V40 und V41; zusätzlich behalten Fiqh 106, 118 und 130 ihre 24 quellenbezogenen Fragen aus V38; korrekt nach V38 in `kids/akademie/index.html` eingebunden. Lernziele, Qurʾān-Originaltexte, IDs und Freigabestatus beibehalten. **Nächste offene Quizredaktion: Slots 135–208 (74 Lektionen).**
 - **Spezifische Prüfskripte** `kids/tools/test-academy-v39-quiz-v1.cjs`, `test-academy-v40-quiz-v1.cjs` und `test-academy-v41-quiz-v1.cjs` hinterlegt. Simulierte JavaScript-Ladung der drei Module war erfolgreich, voller Node-/Browser-Lauf noch nicht ausgeführt.
 - **Zusätzliche Quellenakte 106:** `kids-akademie/research/FIQH-106-REVIEW.md` mit direkt gelesenen Ibn-Kaṯīr- und al-Mughnī-Fundstellen; drei neue Registereinträge (`SRC-FIQH106-*`). Keine vollständige Fiqh- oder Kinderfreigabe.
 - **Unverändert:** 0/624 wissenschaftlich freigegebene Altersfassungen, keine Audioerzeugung, kein Merge auf `main`, kein Live-Deploy.
