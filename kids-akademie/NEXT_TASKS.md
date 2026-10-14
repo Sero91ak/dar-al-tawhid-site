@@ -1,3 +1,17 @@
+## 14.10.2026 · ChatGPT-Unterricht fortgesetzt bis 170/208
+
+**Neue Inhalte 167–170:** `curriculum-editorial-167-170-v1.js`, vier Lektionen mit zwölf eigenständigen Altersfassungen. Themen: ʿIbādah, al-Qadar, Aufrichtigkeit, Freude für andere. Je Fassung vier zusammenhängende Kinder-Unterrichtsabschnitte, Lernziel, Beispiel, Übung, Quellengrenze und Zusammenfassung.
+
+**Rechercheakte:** `kids-akademie/research/EDITORIAL_REVIEW_167_170_20261014.md`. Quellen: Qurʾān 51:56, 54:49, 39:2 und 49:10. Ibn-Kaṯīr-Primärstelle Islamweb 49/1753 verifiziert; die anderen drei direkt benannten Islamweb-Seiten waren bei erneutem Abruf nicht zugänglich, deshalb als **Altreferenzen mit Hilfstextabgleich** markiert, nicht als neu gelesene Primärseite. Keine Scheinfreigabe.
+
+**Technik:** Einmalige Einbindung in `kids/akademie/index.html` nach 163–166. `kids/data/academy-voice-editorial-167-170-delta-v1.json` enthält 76 **ungenerierte** Texte (`generateCreditsUsed:0`). Separater Regressionstest `kids/tools/test-academy-editorial-167-170-v1.cjs` hinterlegt. **129/129 strukturierte Daten-/Ladereihenfolge-/Textabgleiche bestanden**, echter Node-/Browser-/CI-Lauf konnte aufgrund nicht erreichbaren externen Repository-Checkouts noch nicht durchgeführt werden.
+
+**Rückblick 163–166:** Die vorhandenen Dateien für 163–166 und ihre 76 Sprechkontexte wurden zusätzlich kontrolliert: **19/19 strukturierte Abgleiche erfolgreich**. Fiqh 166 bleibt `fiqhHumanReviewNeeded=true`. Quellenakte `research/EDITORIAL_REVIEW_163_166_20261014.md`.
+
+**Gesamtstatus:** Bis Lektion **170/208** individuell redaktionell überarbeitet; **38 weitere Lektionen 171–208** offen. Alle 624 Altersversionen weiterhin wissenschaftlich unfreigegeben. Keine Audioerzeugung, kein Merge auf main, keine Live-Veröffentlichung. Der unvertonte Sprachplan muss vor späterer Audioaufnahme mit allen Deltas abgeglichen werden.
+
+**Nächster Block:** **171–174**, Lektion 174 (Fiqh) nur nach klassisch-hanbalitischer Quellenprüfung. Arbeitszweig `chatgpt/kids-akademie-155-158-20261014`, Entwurfs-PR #1142.
+
 ## 14.10.2026 · Einzelredaktion durchgehend bis Lektion 166
 
 - **Zusätzlich Lektionen 163–166** in `kids/akademie/curriculum-editorial-163-166-v1.js` individuell pädagogisch formuliert: Dank für Essen (16:114), nach Lernfehlern weitermachen (94:5–6), Wünsche/maßvoller Umgang (17:29), Stehen im Gebet mit krankheitsbedingter Erleichterung (2:238; **Ibn Qudāmah, al-Mughnī 15/861**). Zwölf weitere eigenständige Altersfassungen 4–5, 6–8 und 9–10 Jahre, mit je vier Lehrabschnitten, eigener Situation, Übung und Quellenabgrenzung.
