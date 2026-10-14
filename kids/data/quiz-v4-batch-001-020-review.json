@@ -28,7 +28,7 @@
     "catalogQuestionsVerified": 20,
     "correctAnswersVerified": 20,
     "sourceReferencesPresent": 20,
-    "audioRenderedForAllQuestionStates": 14,
+    "audioRenderedForAllQuestionStates": 15,
     "humanAudioApproved": 0,
     "audioOriginalGenerationCount": 10,
     "audioHumanApproved": 0,
@@ -1106,9 +1106,51 @@
       "originalExplanation": "Allah nennt Seine Anbetung als Zweck der Erschaffung von Jinn und Menschen.",
       "source": "Qurʾān 51:56",
       "pronunciationQA": "pending-human-approval",
-      "audioQA": "not-generated",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
       "published": false,
-      "recordingStatus": "awaiting-v4-recording"
+      "recordingStatus": "awaiting-v4-recording",
+      "recordings": [
+        {
+          "part": "question",
+          "modelId": "eleven_v4",
+          "flowId": "tk2FQtwb4kogCVfE0A2a",
+          "sessionId": "str48DQCsqlZwwmVueo9",
+          "status": "completed",
+          "generationId": "yg3OZMyPDghXCNp1oAVe",
+          "credits": 208.34920704845817,
+          "durationSeconds": 15.36
+        },
+        {
+          "part": "correct",
+          "modelId": "eleven_v4",
+          "flowId": "tk2FQtwb4kogCVfE0A2a",
+          "sessionId": "5Mlwu2SNJbuYcq9BOg9t",
+          "status": "completed",
+          "generationId": "MXJIQELO8kt4unfk2wy2",
+          "credits": 58.14396475770925,
+          "durationSeconds": 4.56
+        },
+        {
+          "part": "retry",
+          "modelId": "eleven_v4",
+          "flowId": "tk2FQtwb4kogCVfE0A2a",
+          "sessionId": "FkuKzr9ARiMbcEwXNFVg",
+          "status": "completed",
+          "generationId": "53nlCj9DCu1JkXZFBEZI",
+          "credits": 67.8346255506608,
+          "durationSeconds": 5.28
+        },
+        {
+          "part": "explanation",
+          "modelId": "eleven_v4",
+          "flowId": "tk2FQtwb4kogCVfE0A2a",
+          "sessionId": "GnsO2gSNJ4qt89xe90lT",
+          "status": "completed",
+          "generationId": "Q9bbw0iwMakXG90uNolq",
+          "credits": 92.06127753303966,
+          "durationSeconds": 6.08
+        }
+      ]
     },
     {
       "questionId": "kids-quiz-020",
@@ -1127,9 +1169,50 @@
       "originalExplanation": "Sūrat al-Iḫlāṣ lehrt Allahs Einzigkeit und dass Er weder zeugt noch gezeugt wurde.",
       "source": "Qurʾān 112:1–4",
       "pronunciationQA": "pending-human-approval",
-      "audioQA": "not-generated",
+      "audioQA": "generation-started-review-status",
       "published": false,
-      "recordingStatus": "prior-surah-pilot-not-full-quiz"
+      "recordingStatus": "prior-surah-pilot-not-full-quiz",
+      "recordings": [
+        {
+          "part": "question",
+          "modelId": "eleven_v4",
+          "flowId": "tk2FQtwb4kogCVfE0A2a",
+          "sessionId": "Hk91GaxJWgT7BM0UD36K",
+          "status": "completed",
+          "generationId": "jdsRsYyahoMQrcQ6xEYV",
+          "credits": 214.16360352422907,
+          "durationSeconds": 17.6
+        },
+        {
+          "part": "correct",
+          "modelId": "eleven_v4",
+          "flowId": "tk2FQtwb4kogCVfE0A2a",
+          "sessionId": "saMsakJf36tYx1xZ0ZKy",
+          "status": "completed",
+          "generationId": "N6KUNJZuktlS1uTmRNPI",
+          "credits": 69.7727577092511,
+          "durationSeconds": 6
+        },
+        {
+          "part": "retry",
+          "modelId": "eleven_v4",
+          "flowId": "tk2FQtwb4kogCVfE0A2a",
+          "sessionId": "7wSwD5haHnl1dqo7RUjg",
+          "status": "completed",
+          "generationId": "vTRh2ZkXhF0R0jOplwKS",
+          "credits": 68.80369162995594,
+          "durationSeconds": 4.8
+        },
+        {
+          "part": "explanation",
+          "modelId": "eleven_v4",
+          "flowId": "tk2FQtwb4kogCVfE0A2a",
+          "sessionId": "zSXOEDtkn8j2HC44UmLQ",
+          "status": "pending",
+          "generationId": "Y06izGfW3lzAWMoW79EG",
+          "credits": 98.84474008810572
+        }
+      ]
     }
   ],
   "notes": [
@@ -1143,6 +1226,6 @@
     "Nach genau 2 Fragen ist der kostenpflichtige Mini-Durchlauf gestoppt. Weitere 18 sind Textplanung, noch keine neuen Audios.",
     "Fehlversuchssatz #006/#011/#016 an synchronisierten JS/Python Vertrag angeglichen; keine Erfolgsgarantie."
   ],
-  "actualPaidCreditsThisBatch": 4308.467788546255,
+  "actualPaidCreditsThisBatch": 5186.441656387665,
   "previouslyPaidCreditsReusedForQuestion002": 122.102325991
 }
