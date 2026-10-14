@@ -27,7 +27,8 @@ assert.ok(html.includes('id="release-info-adult"') && html.includes('id="release
 assert.ok(html.includes('id="release-sha-adult"') && html.includes('id="release-sha-tv"'), "SHA256 links must be visible");
 assert.ok(html.includes('id="installation"') && html.includes('id="sicherheit"'), "Safe install and security help missing");
 assert.ok(html.includes('/download/official-release-links.js'), "Official release switchboard missing");
-assert.ok(links.includes('id="native-downloads-title"') && links.includes('id="direct-android-meta"') && links.includes('id="direct-android-tv-meta"'), "Apple-adjacent Android version and release date cards missing");
+assert.ok(links.includes('id="native-downloads-title"') && links.includes('ANDROID · WEB-APP') && links.includes('Web-App öffnen'), "Public links page must show the available Android Web-App");
+assert.ok(!links.includes('id="direct-android-tv-apk"') && !links.includes("Release wird vorbereitet") && !links.includes("Signierte APKs"), "Public links page must not advertise Android TV or unapproved APKs");
 
 const publicRouterPath = path.join(root, "cloudflare/site-router.js");
 let router = "";
@@ -85,11 +86,12 @@ assert.ok(pwaManifest.icons.some((icon) => icon.sizes === "192x192" && /assets\/
 assert.ok(pwaManifest.icons.some((icon) => icon.sizes === "512x512" && /assets\/app-icons\/type-creme-ar\/icon-512\.png/.test(icon.src)), "Native iOS-equivalent 512px PWA icon missing");
 assert.ok(pwaManifest.icons.some((icon) => String(icon.purpose || "").includes("maskable")), "Maskable Android launcher icon missing");
 
-assert.ok(links.includes('href="/download/"'), "Website links page must offer official Android downloads");
+assert.ok(links.includes('id6805988753') && links.includes('/assets/app-store-brand.svg'), "Published iOS App Store entry and icon must remain visible");
+assert.ok(links.includes('href="https://dar-al-tawhid.de/"'), "Public Android Web-App must link to the existing installable website");
 assert.ok(!html.includes("apk-kids"), "Kids must not have a public download button");
 assert.ok(!html.includes("de.daraltawhid.kids"), "Kids app must not be advertised publicly here");
 assert.equal(manifest.apps.kids.public, false, "Kids is private-testing only");
-assert.ok(links.includes('src="/download/icons/android-tv-icon.jpg"'), "Website must show official TV icon");
+assert.ok(!links.includes('src="/download/icons/android-tv-icon.jpg"'), "Unpublished Android TV offer must not appear on public links page");
 assert.ok(links.includes('src="/download/icons/android-phone-default.jpg"'), "Website must use provided Android phone icon");
 assert.ok(html.includes('src="/download/icons/android-phone-default.jpg"'), "Download page must use provided Android phone icon");
 assert.ok(html.includes('src="/download/icons/android-tv-official.jpg"'), "TV download card must show supplied official banner");
