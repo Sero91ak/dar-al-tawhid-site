@@ -36,7 +36,7 @@ Die Bibliotheksseite wurde am **14.10.2026 direkt geöffnet**. Der dortige Hadit
 
 Damit liegt neben Ibn Qudāmahs *al-Mughnī* ein **unmittelbarer, nummerierter Ṣaḥīḥ-Beleg** für die fünf Namen vor. Sein Thema sind die Gebetszeiten, nicht ein alltagsübergreifendes starres Uhrzeitschema. Für Kinder genügt hier die Namens- und Tagesfolge; minutengenaue lokale Gebetszeiten erfordern gesonderte Berechnung.
 
-**Freigabegrenze:** Dieser externe Nachweis ergänzt die Recherche. Er wurde bei dieser Ergänzung nicht in eine schon vertonte Audiodatei übernommen, und `fiqhHumanReviewNeeded=true` / `scientificApproval=false` bleiben bestehen. Bei späterer Curriculum-Quellenintegration müssen Hadithnummer, Wortlaut und Unterrichtsformulierung kontrolliert werden.
+**Freigabegrenze:** Dieser externe Nachweis ergänzt die Recherche. Die Quelle ist inzwischen in V38 als eigener Hadithbeleg mit **ausdrücklich sinngemäßer deutscher Wiedergabe** hinterlegt. Die unvertonten Alters-Sprechtexte wurden dadurch nicht verändert. `fiqhHumanReviewNeeded=true` und `scientificApproval=false` bleiben bestehen. Eine abschließende Kontrolle von Wortlaut und Unterrichtsdidaktik ist weiterhin erforderlich.
 
 ## Redaktionelle Korrektur
 
