@@ -14,6 +14,10 @@ for(const src of file.sources){
  ids.add(src.sourceId);
 }
 const required={
+"adab-respekt-eltern-zuhoren":{"SRC-CORE10-IBNKATHIR-1005":["islamweb.net","49/1005"],"SRC-CORE10-BUKHARI-5971":["dorar.net","151125"]},
+"fiqh-salah-allah-gedenken":{"SRC-CORE30-ZAJJAJ-1714":["islamweb.net","233/1714"]},
+"aqidah-ikhlas-gutes-ohne-lob":{"SRC-CORE12-TABARI-4233":["islamweb.net","50/4233"],"SRC-BANK-001":["dorar.net","3429"]},
+"adab-respekt-hilfsbereit-sein":{"SRC-CORE10-IBNKATHIR-1005":["islamweb.net","49/1005"],"SRC-CORE10-BUKHARI-5971":["dorar.net","151125"]},
 "akhlaq-amanah-mein-versprechen":{"SRC-CORE9-IBNALJAWZI-1676":["islamweb.net","ID=1676"],"SRC-CORE9-BUKHARI-33":["dorar.net","5952"]},
 "adab-worte-erst-nachdenken":{"SRC-CORE6-TABARI-3021":["islamweb.net","50/3021"],"SRC-CORE6-BUKHARI-6018":["dorar.net","4361"]},
 "fiqh-wudu-kopf-und-fu-e":{"SRC-FIQH27-MUGHNI-141":["islamweb.net","15/141"],"SRC-FIQH27-MUGHNI-149":["islamweb.net","15/149"]},
@@ -93,6 +97,24 @@ const required={
  "SRC-FIQH206-MUGHNI-729":["islamweb.net","15/729"]
 }};
 assert.equal(file.sourceCount,file.sources.length,"sourceCount metadata must match actual source IDs");
+
+// The purpose of ṣalāh in 20:14 requires its own classical interpretation; it is not a full Fiqh chapter.
+const prayerRemembrance=file.sources.find(x=>x.sourceId==="SRC-CORE30-ZAJJAJ-1714");
+assert.ok(prayerRemembrance,"Missing original az-Zajjāj source for slot 30");
+assert.equal(prayerRemembrance.work,"Maʿānī al-Qurʾān wa-Iʿrābuh");
+assert.equal(prayerRemembrance.volume,"3");
+assert.equal(prayerRemembrance.page,"352");
+assert.match(prayerRemembrance.locus,/20:14/);
+assert.match(prayerRemembrance.arabic,/وَأَقِمِ الصَّلَاةَ لِذِكْرِي/);
+assert.match(prayerRemembrance.authenticityNote,/kein vollständiges hanbalitisches Gebetsrecht/);
+assert.equal(prayerRemembrance.verificationStatus,"primary-page-direct-read-2026-10-14");
+assert.ok(prayerRemembrance.lessonIds.includes("fiqh-salah-allah-gedenken"));
+assert.notEqual(prayerRemembrance.verificationStatus,"scientifically-approved");
+const supplementalCurriculum=fs.readFileSync(path.join(root,"kids/akademie/curriculum-v2.js"),"utf8");
+for(const id of ["adab-respekt-eltern-zuhoren","fiqh-salah-allah-gedenken","aqidah-ikhlas-gutes-ohne-lob","adab-respekt-hilfsbereit-sein"]){
+ assert.ok(supplementalCurriculum.includes('"'+id+'"'),"Missing existing lesson; must not create a duplicate: "+id);
+}
+
 
 // Early-curriculum source-bindings 25–28: quellentreue Hanbali Wuḍūʾ distinction.
 const headSource=file.sources.find(x=>x.sourceId==="SRC-FIQH27-MUGHNI-141");
