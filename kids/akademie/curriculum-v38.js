@@ -13711,14 +13711,14 @@ const additions=
       },
       "6-8": {
         "goal": "Glauben und eine gute Entscheidung gehören zusammen.",
-        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Glauben und eine gute Entscheidung gehören zusammen. Wir lesen Qurʾān 2:177. Der Vers bedeutet sinngemäß: Dieselbe lange Stelle wie in der Stunde über den Jüngsten Tag nennt den Glauben und danach Handlungen. Die Stunde bleibt bei dem, was der gespeicherte Auszug wirklich trägt, und ergänzt keine fehlenden Satzteile als Arabisch. So kann das im Alltag aussehen: Ein Kind sagt, es werde sein Heft mit nach Hause nehmen, und legt es wirklich in die Tasche. Die Aufgabe: Wir wählen eine kleine Zusage und führen sie am selben Tag aus. birr bedeutet: das Gute. amānah bedeutet: anvertrautes Handeln; als Unterrichtswort, nicht als behauptetes Wort des Auszugs.",
+        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Glauben und eine gute Entscheidung gehören zusammen. Wir lesen Qurʾān 2:177. Der Vers bedeutet sinngemäß: Qurʾān 2:177 verbindet den Glauben an Allah mit guten Taten und dem Einhalten von Versprechen. Ein Kind kann das mit einer kleinen, ehrlichen Zusage üben. So kann das im Alltag aussehen: Ein Kind sagt, es werde sein Heft mit nach Hause nehmen, und legt es wirklich in die Tasche. Die Aufgabe: Wir wählen eine kleine Zusage und führen sie am selben Tag aus. birr bedeutet: das Gute. amānah bedeutet: anvertrautes Handeln; als Unterrichtswort, nicht als behauptetes Wort des Auszugs.",
         "lines": [
           "Qurʾān 2:177 ist die gelesene Stelle.",
           "Dieselbe lange Stelle wie in der Stunde über den Jüngsten Tag nennt den Glauben und danach Handlungen.",
           "Ein Kind sagt, es werde sein Heft mit nach Hause nehmen, und legt es wirklich in die Tasche.",
           "Die arabischen Worte spricht die Lehrperson."
         ],
-        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 2:177. Sinngemäß: Dieselbe lange Stelle wie in der Stunde über den Jüngsten Tag nennt den Glauben und danach Handlungen. Die Stunde bleibt bei dem, was der gespeicherte Auszug wirklich trägt, und ergänzt keine fehlenden Satzteile als Arabisch.",
+        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 2:177. Sinngemäß: Qurʾān 2:177 verbindet den Glauben an Allah mit guten Taten und dem Einhalten von Versprechen. Ein Kind kann das mit einer kleinen, ehrlichen Zusage üben.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/161. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:177. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "terms": [
           {
@@ -13737,14 +13737,14 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann das Thema „Gute Taten und Verantwortung“ anhand von Qurʾān 2:177 erklären und ein Alltagsbeispiel beurteilen.",
-        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Gute Taten und Verantwortung. Glauben und eine gute Entscheidung gehören zusammen. In Qurʾān 2:177 lernen wir sinngemäß: Dieselbe lange Stelle wie in der Stunde über den Jüngsten Tag nennt den Glauben und danach Handlungen. Die Stunde bleibt bei dem, was der gespeicherte Auszug wirklich trägt, und ergänzt keine fehlenden Satzteile als Arabisch. birr bedeutet das Gute. amānah bedeutet anvertrautes Handeln; als Unterrichtswort, nicht als behauptetes Wort des Auszugs. Stell dir diese Situation vor: Ein Kind sagt, es werde sein Heft mit nach Hause nehmen, und legt es wirklich in die Tasche. Welcher nächste Schritt ist gut? Wir wählen eine kleine Zusage und führen sie am selben Tag aus. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Gute Taten und Verantwortung. Glauben und eine gute Entscheidung gehören zusammen. In Qurʾān 2:177 lernen wir sinngemäß: Qurʾān 2:177 verbindet den Glauben an Allah mit guten Taten und dem Einhalten von Versprechen. Ein Kind kann das mit einer kleinen, ehrlichen Zusage üben. birr bedeutet das Gute. amānah bedeutet anvertrautes Handeln; als Unterrichtswort, nicht als behauptetes Wort des Auszugs. Stell dir diese Situation vor: Ein Kind sagt, es werde sein Heft mit nach Hause nehmen, und legt es wirklich in die Tasche. Welcher nächste Schritt ist gut? Wir wählen eine kleine Zusage und führen sie am selben Tag aus. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
         "lines": [
           "Unsere Qurʾān-Stelle ist Qurʾān 2:177.",
-          "Dieselbe lange Stelle wie in der Stunde über den Jüngsten Tag nennt den Glauben und danach Handlungen. Die Stunde bleibt bei dem, was der gespeicherte Auszug wirklich trägt, und ergänzt keine fehlenden Satzteile als Arabisch.",
+          "Qurʾān 2:177 verbindet den Glauben an Allah mit guten Taten und dem Einhalten von Versprechen. Ein Kind kann das mit einer kleinen, ehrlichen Zusage üben.",
           "Ein Kind sagt, es werde sein Heft mit nach Hause nehmen, und legt es wirklich in die Tasche.",
           "Wir wählen eine kleine Zusage und führen sie am selben Tag aus."
         ],
-        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 2:177. Sinngemäß: Dieselbe lange Stelle wie in der Stunde über den Jüngsten Tag nennt den Glauben und danach Handlungen. Die Stunde bleibt bei dem, was der gespeicherte Auszug wirklich trägt, und ergänzt keine fehlenden Satzteile als Arabisch.",
+        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 2:177. Sinngemäß: Qurʾān 2:177 verbindet den Glauben an Allah mit guten Taten und dem Einhalten von Versprechen. Ein Kind kann das mit einer kleinen, ehrlichen Zusage üben.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/161. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:177. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "terms": [
           {
@@ -13759,7 +13759,7 @@ const additions=
         "situation": "Ein Kind sagt, es werde sein Heft mit nach Hause nehmen, und legt es wirklich in die Tasche.",
         "practice": "Wir wählen eine kleine Zusage und führen sie am selben Tag aus.",
         "summary": "Glauben und eine gute Entscheidung gehören zusammen. Wir wählen eine kleine Zusage und führen sie am selben Tag aus.",
-        "audioScript": "Gute Taten und Verantwortung. Glauben und eine gute Entscheidung gehören zusammen. Dieselbe lange Stelle wie in der Stunde über den Jüngsten Tag nennt den Glauben und danach Handlungen. Die Stunde bleibt bei dem, was der gespeicherte Auszug wirklich trägt, und ergänzt keine fehlenden Satzteile als Arabisch. Ein Kind sagt, es werde sein Heft mit nach Hause nehmen, und legt es wirklich in die Tasche. Wir wählen eine kleine Zusage und führen sie am selben Tag aus."
+        "audioScript": "Gute Taten und Verantwortung. Glauben und eine gute Entscheidung gehören zusammen. Qurʾān 2:177 verbindet den Glauben an Allah mit guten Taten und dem Einhalten von Versprechen. Ein Kind kann das mit einer kleinen, ehrlichen Zusage üben. Ein Kind sagt, es werde sein Heft mit nach Hause nehmen, und legt es wirklich in die Tasche. Wir wählen eine kleine Zusage und führen sie am selben Tag aus."
       }
     },
     "questions": {
@@ -13813,7 +13813,7 @@ const additions=
         {
           "type": "text",
           "prompt": "Was möchtest du dir aus Qurʾān 2:177 merken?",
-          "sample": "Dieselbe lange Stelle wie in der Stunde über den Jüngsten Tag nennt den Glauben und danach Handlungen. Die Stunde bleibt bei dem, was der gespeicherte Auszug wirklich trägt, und ergänzt keine fehlenden Satzteile als Arabisch.",
+          "sample": "Qurʾān 2:177 verbindet den Glauben an Allah mit guten Taten und dem Einhalten von Versprechen. Ein Kind kann das mit einer kleinen, ehrlichen Zusage üben.",
           "hint": "Erkläre die Stelle in eigenen Worten.",
           "explain": "Mā schāʾ Allāh! Wir bleiben bei dem, was wir aus dem Qurʾān lernen."
         }
@@ -13822,7 +13822,7 @@ const additions=
         {
           "type": "text",
           "prompt": "Erkläre in eigenen Worten, was wir aus Qurʾān 2:177 lernen.",
-          "sample": "Dieselbe lange Stelle wie in der Stunde über den Jüngsten Tag nennt den Glauben und danach Handlungen. Die Stunde bleibt bei dem, was der gespeicherte Auszug wirklich trägt, und ergänzt keine fehlenden Satzteile als Arabisch.",
+          "sample": "Qurʾān 2:177 verbindet den Glauben an Allah mit guten Taten und dem Einhalten von Versprechen. Ein Kind kann das mit einer kleinen, ehrlichen Zusage üben.",
           "hint": "Denke an die Bedeutung der Stelle.",
           "explain": "Mā schāʾ Allāh! Du hast den Vers aufmerksam erklärt."
         },
