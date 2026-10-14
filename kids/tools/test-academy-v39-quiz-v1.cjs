@@ -19,7 +19,7 @@ vm.runInNewContext(v39,context,{timeout:1200,filename:"curriculum-v39.js"});
 const current=context.window.DARKidsAcademyCurriculum;
 const meta=context.window.DARKidsAcademyCurriculumV39;
 assert.equal(Object.keys(current).length,111,"all 111 V38 lessons retained");
-assert.equal(meta.ids.length,12,"twelve revised lessons");
+assert.equal(meta.ids.length,11,"eleven active revisions; source-reviewed Fiqh 106 is preserved");
 assert.equal(meta.approvedAgeVersions,0,"must not auto-approve age drafts");
 assert.equal(meta.religiousSourcesVerified,false,"must not invent religious approval");
 const banned=/keine freigabe für besucher|keine synthetische rezitation|wissenschaftliche freigabe|diese stunde bleibt ein entwurf|https?:\/\/|technische vollständigkeit ersetzt/i;
@@ -51,4 +51,4 @@ for(const [id,lesson] of Object.entries(originals))
 const html=fs.readFileSync(path.join(root,"kids/akademie/index.html"),"utf8");
 const i38=html.indexOf('curriculum-v38.js?v='),i39=html.indexOf('curriculum-v39.js?v=');
 assert.ok(i38>0 && i39>i38,"V39 must load after V38");
-console.log("PASS V39: 111/111 V38 IDs retained; 12 revised lessons; "+checked+" individual questions; 0 releases/audio changes.");
+console.log("PASS V39: 111/111 V38 IDs retained; 11 active revisions; "+checked+" individual questions; 0 releases/audio changes.");
