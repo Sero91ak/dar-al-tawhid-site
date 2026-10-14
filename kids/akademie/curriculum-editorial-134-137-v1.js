@@ -4,7 +4,7 @@
 (function(){
 "use strict";
 const prior=window.DARKidsAcademyCurriculum;
-if(!prior||!window.DARKidsAcademyCurriculumEditorial130133)throw Error("Editorial 134–137 requires 130–133");
+if(!prior||!window.DARKidsAcademyCurriculumEditorial130||!window.DARKidsAcademyCurriculumEditorial131133)throw Error("Editorial 134–137 requires Fiqh 130 and editorial 131–133");
 const drafts={
   "family-kranken-und-aelteren-helfen": {
     "4-5": {
