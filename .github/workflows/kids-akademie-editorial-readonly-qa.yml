@@ -13,6 +13,8 @@ on:
       - 'kids/data/academy-voice-editorial-*-delta-v1.json'
       - 'kids/data/academy-voice-foundation-fiqh-*-delta-v1.json'
       - 'kids-akademie/LESSON_STATUS.json'
+      - 'kids-akademie/research/SOURCE_REGISTRY.json'
+      - 'kids/tools/test-academy-primary-source-registry-v1.cjs'
       - 'kids/tools/audit-academy-editorial-155-208-v1.cjs'
       - 'kids/tools/audit-academy-visitor-copy-155-208-v1.cjs'
       - 'kids/tools/test-academy-editorial-*.cjs'
@@ -68,6 +70,8 @@ jobs:
         run: |
           node --check kids/akademie/curriculum-foundation-fiqh-118-v1.js
           node kids/tools/test-academy-foundation-fiqh-118-v1.cjs
+      - name: Check primary Fiqh source registry
+        run: node kids/tools/test-academy-primary-source-registry-v1.cjs
       - name: Run all 14 small-batch unit tests
         shell: bash
         run: |
