@@ -47,25 +47,40 @@ jobs:
           npx wrangler deploy -c kids/test-android/wrangler.toml
       - name: Verify Android install and staged Kids entry
         run: |
-          set -euo pipefail
-          BASE="https://dar-al-tawhid-kids-test.sero91ak.workers.dev"
-          for n in 1 2 3 4 5 6; do
-            CODE="$(curl -sSL -o /tmp/kids-test-pwa -w '%{http_code}' "$BASE/kids/manifest.webmanifest" || true)"
-            if [ "$CODE" = 200 ] && grep -q 'KIDS TEST' /tmp/kids-test-pwa; then break; fi
-            sleep 5
-          done
-          test "$CODE" = 200
-          grep -q '"id":"/kids/test-android-app"' /tmp/kids-test-pwa
-          for PATH in /kids/test-install.html /kids/start.html /kids/icons/icon-192.png /kids/sw.js; do
-            CODE="$(curl -sSL -o /tmp/kids-test-route -w '%{http_code}' "$BASE$PATH")"
-            if [ "$CODE" != 200 ] || [ ! -s /tmp/kids-test-route ]; then
-              echo "::error::Kids TEST preview failed for $PATH ($CODE)"
-              exit 1
-            fi
-            echo "Kids TEST OK: $PATH"
-          done
-          CODE="$(curl -sSL -o /tmp/kids-test-forbidden -w '%{http_code}' "$BASE/test/")"
-          test "$CODE" = 404
-          CODE="$(curl -sSL -o /tmp/kids-test-forbidden -w '%{http_code}' "$BASE/kids/test-android/worker.js")"
-          test "$CODE" = 404
-          echo "Android KIDS TEST worker isolated and verified; no production domain deployment"
+          node <<'NODE'
+          const assert=require("node:assert/strict");
+          const base="https://dar-al-tawhid-kids-test.sero91ak.workers.dev";
+          async function get(path){
+            const res=await fetch(base+path,{headers:{"Cache-Control":"no-cache"},signal:AbortSignal.timeout(20000)});
+            return {status:res.status,headers:res.headers,body:await res.text()};
+          }
+          const sleep=ms=>new Promise(ok=>setTimeout(ok,ms));
+          (async()=>{
+            let m;
+            for(let i=0;i<8;i++){
+              try{
+                m=await get("/kids/manifest.webmanifest");
+                if(m.status===200&&m.body.includes("KIDS TEST"))break;
+              }catch(e){console.log("Retry manifest:",e.message)}
+              await sleep(5000);
+            }
+            assert.equal(m?.status,200,"Kids TEST PWA manifest not reachable");
+            const manifest=JSON.parse(m.body);
+            assert.equal(manifest.id,"/kids/test-android-app");
+            assert.equal(manifest.start_url,"/kids/start.html?env=kids-test");
+            assert.equal(manifest.scope,"/kids/");
+            console.log("KIDS TEST manifest verified on isolated domain");
+            for(const path of ["/kids/test-install.html","/kids/start.html","/kids/icons/icon-192.png","/kids/sw.js"]){
+              const resp=await get(path);
+              assert.equal(resp.status,200,path+" missing");
+              assert.ok(resp.body.length>0,path+" empty");
+              assert.equal(resp.headers.get("X-Kids-Environment"),"test");
+              console.log("Kids TEST route OK:",path);
+            }
+            for(const path of ["/test/","/kids/test-android/worker.js"]){
+              const resp=await get(path);
+              assert.equal(resp.status,404,path+" must be blocked");
+            }
+            console.log("PASS: isolated Android Kids Test PWA is online; visitor app unchanged");
+          })().catch(e=>{console.error(e);process.exit(1)});
+          NODE
