@@ -176,9 +176,55 @@
       "originalExplanation": "Allah hat die Bewahrung des Qurʾān versprochen.",
       "source": "Qurʾān 15:9",
       "pronunciationQA": "pending-human-approval",
-      "audioQA": "not-generated",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
       "published": false,
-      "recordingStatus": "awaiting-v4-recording"
+      "recordingStatus": "generated-pending-asset-import-and-human-listening",
+      "recordings": [
+        {
+          "part": "question",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "flowId": "YxIsLipxIKTZthjZCKUo",
+          "sessionId": "L8D7LLsDUvHmN7RGPBsF",
+          "status": "completed",
+          "generationId": "QdjkO1mvizCsjpZ4GVZH",
+          "credits": 119.19512775330395,
+          "durationSeconds": 8.88
+        },
+        {
+          "part": "correct",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "flowId": "YxIsLipxIKTZthjZCKUo",
+          "sessionId": "1Ox6R4ev0Ne7tkLx1kEZ",
+          "status": "completed",
+          "generationId": "oTZw9J8BXouAWeocufYC",
+          "credits": 63.95836123348018,
+          "durationSeconds": 4.8
+        },
+        {
+          "part": "retry",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "flowId": "YxIsLipxIKTZthjZCKUo",
+          "sessionId": "zUmVnKL6l53qYYcOtPrC",
+          "status": "completed",
+          "generationId": "zz0jZ6ybshrDKTqeYHh7",
+          "credits": 62.98929515418502,
+          "durationSeconds": 4.08
+        },
+        {
+          "part": "explanation",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "flowId": "YxIsLipxIKTZthjZCKUo",
+          "sessionId": "4CoAv0D6Qvvv3sdJQH4g",
+          "status": "completed",
+          "generationId": "dUcKqsLbtPgtK0Oebtjx",
+          "credits": 64.92742731277534,
+          "durationSeconds": 4.08
+        }
+      ]
     },
     {
       "questionId": "kids-quiz-004",
@@ -197,9 +243,53 @@
       "originalExplanation": "Der Qurʾān wurde im Monat Ramaḍān herabgesandt.",
       "source": "Qurʾān 2:185",
       "pronunciationQA": "pending-human-approval",
-      "audioQA": "not-generated",
+      "audioQA": "generation-started-review-status",
       "published": false,
-      "recordingStatus": "awaiting-v4-recording"
+      "recordingStatus": "generation-started-review-status",
+      "recordings": [
+        {
+          "part": "question",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "flowId": "YxIsLipxIKTZthjZCKUo",
+          "sessionId": "6KX9YWZujhQZgLeU7kQh",
+          "status": "completed",
+          "generationId": "TWV0NVT7wCnPytDAd1DZ",
+          "credits": 163.77216740088107,
+          "durationSeconds": 12
+        },
+        {
+          "part": "correct",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "flowId": "YxIsLipxIKTZthjZCKUo",
+          "sessionId": "XkiESKsvH4z92IKJLzIO",
+          "status": "completed",
+          "generationId": "fZ1VIkCQEsdIxFQ2hwjF",
+          "credits": 65.89649339207048,
+          "durationSeconds": 5.12
+        },
+        {
+          "part": "retry",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "flowId": "YxIsLipxIKTZthjZCKUo",
+          "sessionId": "91omlUwyTQSnxBDmRCCE",
+          "status": "generating",
+          "generationId": "ddgJqQDhBo32kbRKEMe2",
+          "credits": 62.98929515418502
+        },
+        {
+          "part": "explanation",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "flowId": "YxIsLipxIKTZthjZCKUo",
+          "sessionId": "ELoCsR1DUDRug0DcBcKn",
+          "status": "pending",
+          "generationId": "QMPZdFK2UcLnTQzAeNmI",
+          "credits": 64.92742731277534
+        }
+      ]
     },
     {
       "questionId": "kids-quiz-005",
@@ -549,6 +639,6 @@
     "Nach genau 2 Fragen ist der kostenpflichtige Mini-Durchlauf gestoppt. Weitere 18 sind Textplanung, noch keine neuen Audios.",
     "Fehlversuchssatz #006/#011/#016 an synchronisierten JS/Python Vertrag angeglichen; keine Erfolgsgarantie."
   ],
-  "actualPaidCreditsThisBatch": 487.4402378854625,
+  "actualPaidCreditsThisBatch": 1156.095832599119,
   "previouslyPaidCreditsReusedForQuestion002": 122.102325991
 }
