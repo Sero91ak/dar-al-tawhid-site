@@ -1,3 +1,13 @@
+## 14.10.2026 · Unterricht 155–158 individuell erweitert (separater ChatGPT-Arbeitszweig)
+
+- **Vier Unterrichtslektionen 155–158** (`quran-woher-stammt-ein-hadith`, `sirah-sahabah-vorbild`, `dua-adhkar-ohne-zwang`, `family-gemeinschaft-gutes`) mit **zwölf unterschiedlichen Altersfassungen** für 4–5, 6–8 und 9–10 Jahre. Durchgehend vier Kinder-Lehrabschnitte je Altersfassung samt Alltag, Praxis, Lernziel, Quellenabgrenzung und Zusammenfassung.
+- **Testloader:** `kids/akademie/curriculum-editorial-155-158-v1.js` nach Lektion 154 im Akademie-`index.html` eingebunden. Die bestehenden IDs, früheren Quizfragen, Profile und Fortschrittsdaten bleiben unverändert.
+- **Quellengrundlagen:** Qurʾān 53:3–4 (Ibn Kaṯīr/Islamweb 49/1779; aṭ-Ṭabarī/Islamweb 50/4658), 9:100 (Ibn Kaṯīr 49/685), 33:41–42 (Ibn Kaṯīr 49/1493), 16:90 (Ibn Kaṯīr 49/974). Kinderbildschirm korrigiert Bezeichnungen der Versbereiche **53:3–4 und 33:41–42**, ohne alte Quellenregistereinträge still zu überschreiben. Voller Prüfbericht: `kids-akademie/research/EDITORIAL_REVIEW_155_158_20261014.md`.
+- **Voice-Delta:** `kids/data/academy-voice-editorial-155-158-delta-v1.json` mit **76 Textkontexten**. Alle kontextbezogenen Texte anhand des gespeicherten JS-Drafts verglichen: **0 Abweichungen**, **0 generierte Audios, 0 Credits**. Vor irgendwann möglicher Sprachproduktion zuerst Zusammenführung mit dem kanonischen Sprechplan und weitere Freigabe.
+- **Prüfskript** `kids/tools/test-academy-editorial-155-158-v1.cjs` neu hinterlegt. **30 schreibgeschützte JSON-/Daten-/Text-/Loader-Kontrollen erfolgreich**, ein tatsächlicher Node-/Browser-/CI-Lauf konnte hier nicht erfolgen und bleibt zwingend offen.
+- **Stand:** 158 von 208 Lektionsslots haben nach dem vorhandenen Stand nun individuelle Redaktion. **Noch 50 Slots (159–208)** benötigen individuelle Ausarbeitung; alle 624 Altersfassungen bedürfen weiter der wissenschaftlichen Gesamtprüfung. **0/624 freigegeben.**
+- **Wiederaufnahme:** Lektionen **159–162**, dann 163 ff. Kein Merge auf `main`, keine Audioerzeugung, kein Live-Deploy. Diese Änderungen liegen bis zur PR-Übernahme auf `chatgpt/kids-akademie-155-158-20261014` und sind noch nicht Bestandteil von PR #1113.
+
 ## 14.10.2026 · Slot 154 · Fiqh-Niyyah korrigiert
 
 - **Lektion 154** (`fiqh-absicht-zum-gebet`) mit **drei eigenständigen Altersfassungen** und hinreichend getrenntem Qurʾān-Beleg, klassischem Fiqh und kindlicher Übung als Overlay `kids/akademie/curriculum-editorial-154-v1.js` im PR #1113 eingebunden.
