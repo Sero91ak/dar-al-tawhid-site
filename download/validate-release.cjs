@@ -27,13 +27,14 @@ assert.ok(html.includes('id="release-info-adult"') && html.includes('id="release
 assert.ok(html.includes('id="release-sha-adult"') && html.includes('id="release-sha-tv"'), "SHA256 links must be visible");
 assert.ok(html.includes('id="installation"') && html.includes('id="sicherheit"'), "Safe install and security help missing");
 assert.ok(html.includes('/download/official-release-links.js'), "Official release switchboard missing");
-assert.ok(links.includes('id="native-downloads-title"') && links.includes('id="direct-android-meta"') && links.includes('id="direct-android-tv-meta"'), "Apple-adjacent Android version and release date cards missing");
+assert.ok(links.includes('id="native-downloads-title"') && links.includes('ANDROID · WEB-APP') && links.includes('Web-App öffnen'), "Public links page must show the available Android Web-App");
+assert.ok(!links.includes('id="direct-android-tv-apk"') && !links.includes("Release wird vorbereitet") && !links.includes("Signierte APKs"), "Public links page must not advertise Android TV or unapproved APKs");
 
 const publicRouterPath = path.join(root, "cloudflare/site-router.js");
 let router = "";
 if (fs.existsSync(publicRouterPath)) {
   router = fs.readFileSync(publicRouterPath, "utf8");
-  assert.ok(router.includes('id="darIosAppStorePromo"'), "Existing iOS promotion must remain");
+  assert.ok(router.includes("https://apps.apple.com/de/app/") && router.includes("APPLE · IPHONE & IPAD"), "Existing iOS App Store fallback must remain");
   assert.ok(router.includes("window.darInstallAndroidPwa=async function"), "Main website Android PWA installer missing");
   assert.ok(router.includes("__darEarlyInstallPrompt"), "Early Android beforeinstallprompt capture missing");
   assert.ok(router.includes("var installEvent=window.__darEarlyInstallPrompt||deferredInstall;"), "Android install prompt must use the earliest captured native prompt directly inside the user gesture");
@@ -85,11 +86,12 @@ assert.ok(pwaManifest.icons.some((icon) => icon.sizes === "192x192" && /assets\/
 assert.ok(pwaManifest.icons.some((icon) => icon.sizes === "512x512" && /assets\/app-icons\/type-creme-ar\/icon-512\.png/.test(icon.src)), "Native iOS-equivalent 512px PWA icon missing");
 assert.ok(pwaManifest.icons.some((icon) => String(icon.purpose || "").includes("maskable")), "Maskable Android launcher icon missing");
 
-assert.ok(links.includes('href="/download/"'), "Website links page must offer official Android downloads");
+assert.ok(links.includes('id6805988753') && links.includes('/assets/app-store-brand.svg'), "Published iOS App Store entry and icon must remain visible");
+assert.ok(links.includes('href="https://dar-al-tawhid.de/"'), "Public Android Web-App must link to the existing installable website");
 assert.ok(!html.includes("apk-kids"), "Kids must not have a public download button");
 assert.ok(!html.includes("de.daraltawhid.kids"), "Kids app must not be advertised publicly here");
 assert.equal(manifest.apps.kids.public, false, "Kids is private-testing only");
-assert.ok(links.includes('src="/download/icons/android-tv-icon.jpg"'), "Website must show official TV icon");
+assert.ok(!links.includes('src="/download/icons/android-tv-icon.jpg"'), "Unpublished Android TV offer must not appear on public links page");
 assert.ok(links.includes('src="/download/icons/android-phone-default.jpg"'), "Website must use provided Android phone icon");
 assert.ok(html.includes('src="/download/icons/android-phone-default.jpg"'), "Download page must use provided Android phone icon");
 assert.ok(html.includes('src="/download/icons/android-tv-official.jpg"'), "TV download card must show supplied official banner");
@@ -138,8 +140,8 @@ console.log("ANDROID_SITE_RELEASE_GUARD OK | public=" + published + " | Kids=pri
 // Direct install UI contract
 assert.ok(router.includes("syncRouterInstallButtons"), "Direct Android PWA install readiness gate missing");
 assert.ok(router.includes("beforeinstallprompt"), "beforeinstallprompt capture missing");
-assert.ok(router.includes("btn.disabled=installed||preparing"), "Android install button must stay disabled until beforeinstallprompt is ready");
-assert.ok(router.includes('btn.setAttribute("aria-disabled",(installed||preparing)?"true":"false")'), "Android install accessibility state must match native-prompt readiness");
+assert.ok(router.includes("btn.disabled=installed;"), "Android PWA install button must remain operable before prompt readiness while disabling already-installed state");
+assert.ok(router.includes('btn.setAttribute("aria-disabled",installed?"true":"false")') && router.includes('btn.setAttribute("data-dar-pwa-install-state",installed?"installed":(ready?"ready":"preparing"))'), "Android install accessibility state and readiness indication must match the current direct-tap flow");
 assert.ok(router.includes("DAR_ANDROID_PWA_INSTALL_READY_GATE_V6_20261009"), "Android install readiness gate marker missing");
 assert.ok(router.includes("darPublicTouchRectangleHardStopV6"), "Mobile tap rectangle hard-stop missing");
 assert.ok(router.includes("darRouterTapFlashKillV9"), "Final mobile tap visual hard-stop missing");
