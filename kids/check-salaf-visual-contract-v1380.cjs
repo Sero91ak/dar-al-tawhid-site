@@ -111,6 +111,39 @@ assert.ok( sw.includes("/kids/global-hero-seam-v1412.css?v=1412"),"Hero seam off
 assert.ok(sw.includes("/kids/navigation-v1182.js?v=1410"));
 assert.ok(sw.includes("/kids/salaf-library-v1.js?v=1410"));
 assert.ok(sw.includes("/kids/salaf-open-world-v1353.css?v=1410"));
+/* KIDS_STORY_MODES_V1: keep all three real modes for every approved
+ * Salaf narrative, even before its first paid master audio arrives. */
+const modesCss=read("kids/salaf-master-v2.css");
+const sharedReader=read("kids/story-follow-reader.js");
+const storyLibraries=[
+  ["Propheten","kids/prophet-stories.js","data-ps-mode"],
+  ["Ṣaḥābah","kids/mubashshirun-stories.js","data-ms-mode"],
+  ["Ṣaḥābiyyāt","kids/sahabiyyat-stories.js","data-sy-mode"],
+  ["Salaf","kids/salaf-library-v1.js","data-salaf-mode"]
+];
+for(const [name,file,attribute] of storyLibraries){
+  const body=read(file);
+  for(const value of ["both","listen","read"]){
+    assert.ok(body.includes(attribute+'="'+value+'"'),name+" missing "+value+" control");
+  }
+}
+for(const method of ["openReadAlong","openListening","openReading"]){
+  assert.ok(js.includes("reader."+method+"()"),"Salaf must use shared reader "+method);
+}
+assert.ok(js.includes("KIDS_STORY_MODES_V1"),"Missing canonical Salaf mode marker");
+assert.ok(js.includes('MODE_KEY="kids.contentMode.v19"'),"Modes must reuse common story preference");
+assert.ok(js.includes("btn.disabled=unavailable"),"No dead audio buttons before recording exists");
+assert.ok(!js.includes('id="salafPlay"'),"Do not restore separate embedded audio player");
+assert.ok(modesCss.includes("KIDS_STORY_MODES_V1"),"Shared mode CSS contract missing");
+assert.ok(modesCss.includes('data-salaf-mode="both"'),"Wide primary action CSS missing");
+assert.ok(sharedReader.includes('#salafDetail:not([hidden]) > .salaf-detail-scroll'),"Salaf Hören must scroll to the hero first");
+assert.ok(doc.includes("KIDS_STORY_MODES_V1"),"Future story-mode contract must be documented");
+assert.ok(html.includes("/kids/story-follow-reader.js?v=18-salaf1"),"Reader cache-bust missing");
+assert.ok(html.includes("/kids/salaf-library-v1.js?v=1410-modes1"),"Salaf mode cache-bust missing");
+assert.ok(sw.includes("/kids/story-follow-reader.js?v=18-salaf1"),"Reader offline precache missing");
+assert.ok(sw.includes("/kids/salaf-library-v1.js?v=1410-modes1"),"Salaf mode offline precache missing");
+assert.ok(sw.includes("/kids/salaf-master-v2.css?v=4"),"Shared three-mode stylesheet must be precached");
+
 const content=JSON.parse(read("kids/data/salaf-library-v1.json"));
 assert.ok(Array.isArray(content.items));
 assert.equal(content.version,2,"Salaf one-master manifest version must be 2");
