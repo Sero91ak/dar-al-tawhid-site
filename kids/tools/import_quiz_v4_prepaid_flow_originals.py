@@ -64,8 +64,16 @@ def original_metadata():
             entry={"questionId":question["questionId"],"kind":part,"text":text,
                    "generationId":gid,"durationExpected":take.get("durationSeconds"),
                    "voiceId":VOICE,"modelId":MODEL}
-            if gid in takes and takes[gid]!=entry:
-                raise RuntimeError("A paid Flow generation ID was mapped to two different texts")
+            if gid in takes:
+                # 82 old question-part assignments intentionally share only
+                # 56 paid original takes: praise and retries were reused.
+                # Different question IDs are fine; different texts are NOT.
+                previous=takes[gid]
+                if (previous["text"],previous["kind"],previous["modelId"],previous["voiceId"])!=(
+                    entry["text"],entry["kind"],entry["modelId"],entry["voiceId"]):
+                    raise RuntimeError("A paid Flow generation ID was mapped to conflicting text/voice")
+                previous.setdefault("usedByQuestionIds",[previous["questionId"]]).append(question["questionId"])
+                continue
             takes[gid]=entry
     if len(takes)!=56:raise RuntimeError("The 56 old paid Flow generation IDs were not preserved")
     joined=" ".join(Q002.values())
