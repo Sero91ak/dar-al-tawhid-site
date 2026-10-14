@@ -82,8 +82,11 @@ def validate():
                     raise RuntimeError("Concatenation would change the educational text")
                 for phrase in slot["segments"]:
                     if phrase not in pending_map:
-                        raise RuntimeError("Some original clips are not in the 450 paid queue")
-                    required.add(phrase)
+                        # This exact fragment was already PAID in an earlier
+                        # ElevenLabs Flow. Export it later, NEVER re-synthesize.
+                        old_paid.add("paid-flow-fragment:"+hexsha(phrase))
+                    else:
+                        required.add(phrase)
             else:raise RuntimeError("Unknown exact V4 contract mode")
     # No old paid Flow-only takes appear in this new direct-MP3 purchase list.
     unrecorded=required-set(clips)
