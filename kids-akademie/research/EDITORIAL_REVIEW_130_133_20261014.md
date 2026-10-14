@@ -1,5 +1,7 @@
 # KIDS AKADEMI · Fachliche Einzelredaktion 130–133 (14.10.2026)
 
+> **Konsolidierung:** Ursprünglich wurden Lektionen 130–133 in einer Datei parallel zur eigenständigen Redaktion 131–133 angelegt. Die überlappende Ausführung wurde entfernt. **Verbindlich geladen:** `curriculum-editorial-130-v1.js` sowie `curriculum-editorial-131-133-v1.js` (mit den gesondert erfassten Ḥadīṯ-Nachweisen bei 132 und 133). Verbindliche Voice-Deltas: `academy-voice-editorial-130-delta-v1.json` und `academy-voice-editorial-131-133-delta-v1.json`. Dieser Bericht dokumentiert den ersten Quellenabgleich; bei Abweichungen hat die aktuelle Einzelredaktion 131–133 Vorrang. Keine Freigabe.
+
 **PR #1113 · Entwurf, keine Kinder- oder wissenschaftliche Freigabe.** Je drei eigenständig geschriebene Altersfassungen (4–5, 6–8, 9–10), jeweils vier inhaltliche Abschnitte, eine Praxisaufgabe, Quellenabgrenzung und Abschluss.
 
 ## 130 · Fiqh – Die Gebetszeiten
