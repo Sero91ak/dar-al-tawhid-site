@@ -9,7 +9,7 @@ for(const [id,versions] of Object.entries(drafts)){
  const ageText={...old.ageText};
  for(const age of ["4-5","6-8","9-10"]){const v=versions[age];if(v.lines.length!==4||v.lines.some(l=>l.length<40))throw Error("Incomplete "+id+"/"+age);
  ageText[age]={...old.ageText?.[age],goal:v.goal,intro:v.lines.join(" "),lines:v.lines,situation:v.situation,practice:v.practice,evidence:v.evidence,summary:v.summary,audioScript:old.topic+". "+v.lines.join(" ")};}
- next[id]={...old,ageText,sourceAudit:{...old.sourceAudit,scientificApproval:false,editorialScopeNote:"Legacy V1 age-specific drafts 002–005. Preserve original Qurʾān, Hadith and quiz; full independent sources and scholarly approval still pending."}};
+ next[id]={...old,ageText,sourceAudit:{...old.sourceAudit,scientificApproval:false,fiqhHumanReviewNeeded:id==="fiqh-taharah",editorialScopeNote:"Legacy V1 age-specific drafts 002–005. Preserve original Qurʾān, Hadith and quiz; full independent sources and scholarly approval still pending."}};
 }
 window.DARKidsAcademyCurriculum=Object.freeze(next);
 window.DARKidsAcademyCurriculumEditorialCore002005=Object.freeze({version:"20261014-core-002-005",ids:Object.keys(drafts),ageVersionCount:12,scientificApproval:false,audioGenerated:false,liveApproved:false});
