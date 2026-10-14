@@ -430,9 +430,45 @@
       "originalExplanation": "Muḥammad ﷺ ist Allahs Gesandter und der letzte Prophet.",
       "source": "Qurʾān 33:40",
       "pronunciationQA": "pending-human-approval",
-      "audioQA": "not-generated",
+      "audioQA": "generation-started-review-status",
       "published": false,
-      "recordingStatus": "awaiting-v4-recording"
+      "recordingStatus": "awaiting-v4-recording",
+      "recordings": [
+        {
+          "part": "question",
+          "modelId": "eleven_v4",
+          "flowId": "kSPIA3o52jTsdHAONnga",
+          "sessionId": "he15KuPBs5Qp9H1foH8Z",
+          "status": "completed",
+          "generationId": "YAslUEbjd77bp027Uo1o",
+          "credits": 134.70018502202646,
+          "durationSeconds": 12.24
+        },
+        {
+          "part": "correct",
+          "generationId": "aoKJuahenrKHfUE5OD9j",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "retry",
+          "generationId": "2xy9ZLej1wPTrnvAr9p7",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "explanation",
+          "modelId": "eleven_v4",
+          "flowId": "kSPIA3o52jTsdHAONnga",
+          "sessionId": "gt3yprxJlPV6BvZqtiow",
+          "status": "generating",
+          "generationId": "I8esecexVR1VUmiiStEe",
+          "credits": 72.67995594713656,
+          "durationSeconds": null
+        }
+      ]
     },
     {
       "questionId": "kids-quiz-008",
@@ -451,9 +487,45 @@
       "originalExplanation": "Allah befiehlt, dem Gesandten ﷺ zu gehorchen.",
       "source": "Qurʾān 4:59",
       "pronunciationQA": "pending-human-approval",
-      "audioQA": "not-generated",
+      "audioQA": "generation-started-review-status",
       "published": false,
-      "recordingStatus": "awaiting-v4-recording"
+      "recordingStatus": "awaiting-v4-recording",
+      "recordings": [
+        {
+          "part": "question",
+          "modelId": "eleven_v4",
+          "flowId": "kSPIA3o52jTsdHAONnga",
+          "sessionId": "RvNq4sTgYlWSD94dMy1Z",
+          "status": "pending",
+          "generationId": "clyVrISrx5ErjuiG7NFe",
+          "credits": 145.35991189427313,
+          "durationSeconds": null
+        },
+        {
+          "part": "correct",
+          "generationId": "oTZw9J8BXouAWeocufYC",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "retry",
+          "generationId": "zz0jZ6ybshrDKTqeYHh7",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "explanation",
+          "modelId": "eleven_v4",
+          "flowId": "kSPIA3o52jTsdHAONnga",
+          "sessionId": "m97d2aPecKZGGr0ekaBe",
+          "status": "pending",
+          "generationId": "dJgyn0ueCkR91dnd7cDS",
+          "credits": 62.98929515418502,
+          "durationSeconds": null
+        }
+      ]
     },
     {
       "questionId": "kids-quiz-009",
@@ -719,6 +791,6 @@
     "Nach genau 2 Fragen ist der kostenpflichtige Mini-Durchlauf gestoppt. Weitere 18 sind Textplanung, noch keine neuen Audios.",
     "Fehlversuchssatz #006/#011/#016 an synchronisierten JS/Python Vertrag angeglichen; keine Erfolgsgarantie."
   ],
-  "actualPaidCreditsThisBatch": 1749.1642731277534,
+  "actualPaidCreditsThisBatch": 2164.8936211453747,
   "previouslyPaidCreditsReusedForQuestion002": 122.102325991
 }
