@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "generatedOn": "2026-10-14",
   "warning": "V38 verse spans were read on Islamweb Ibn Kathir pages on 2026-10-13. Hadith numbers were not added. Dorar was not re-read. Scientific approval is not claimed.",
-  "sourceCount": 138,
+  "sourceCount": 141,
   "sources": [
     {
       "sourceId": "SRC-BANK-001",
@@ -2302,7 +2302,8 @@
       "checkedBy": "page fetched from islamweb.net library content 49",
       "lessonIds": [
         "tawhid-keine-goettliche-macht-fuer-geschoepfe",
-        "tawhid-mit-eigenen-worten"
+        "tawhid-mit-eigenen-worten",
+        "aqidah-tawhid"
       ],
       "binding": "verse span for kids academy draft",
       "topic": "Keinen geschaffenen Dingen göttliche Macht zuschreiben"
@@ -3454,6 +3455,84 @@
       ],
       "binding": "classical Hanbali Fiqh source for existing lesson; human scholarly final approval pending",
       "topic": "Suǧūd – die sieben Körperstellen"
+    },
+    {
+      "sourceId": "SRC-CORE2-QURTUBI-1095",
+      "key": "core2-quran-4-86-greeting-response",
+      "author": "al-Qurṭubī",
+      "work": "al-Ǧāmiʿ li-Aḥkām al-Qurʾān",
+      "narrator": null,
+      "arabic": "وَإِذَا حُيِّيتُمْ بِتَحِيَّةٍ فَحَيُّوا بِأَحْسَنَ مِنْهَا أَوْ رُدُّوهَا",
+      "germanTranslation": null,
+      "locus": "Qurʾān 4:86, Tafsīr Sūrat an-Nisāʾ",
+      "volume": "5",
+      "page": "256",
+      "chapter": "Bei einem Gruß besser oder gleichwertig antworten",
+      "number": null,
+      "edition": "Islamweb digitale Bibliothek, al-Qurṭubī",
+      "directLink": "https://islamweb.net/ar/library/content/48/1095#:~:text=%D9%88%D8%A5%D8%B0%D8%A7%20%D8%AD%D9%8A%D9%8A%D8%AA%D9%85%20%D8%A8%D8%AA%D8%AD%D9%8A%D8%A9%20%D9%81%D8%AD%D9%8A%D9%88%D8%A7%20%D8%A8%D8%A3%D8%AD%D8%B3%D9%86%20%D9%85%D9%86%D9%87%D8%A7%20%D8%A3%D9%88%20%D8%B1%D8%AF%D9%88%D9%87%D8%A7",
+      "authenticityNote": "Arabischer Primär-Tafsīr am 14.10.2026 direkt eingesehen. Der Vers regelt die Erwiderung, nicht alle Einzelheiten der Salām-Verbreitung; hierfür ist ein eigenständiger authentischer Ḥadīṯ notwendig.",
+      "safeApplication": "Salām und Grußerwiderung kindgerecht üben; ein deutscher Unterrichtssatz ist kein wörtliches Qurʾān-Zitat. Keine Beschämung bei Aussprachefehlern.",
+      "verificationStatus": "primary-page-direct-read-2026-10-14",
+      "checkedOn": "2026-10-14",
+      "checkedBy": "Islamweb Primärtext 48/1095 direkt geöffnet",
+      "lessonIds": [
+        "adab-salam"
+      ],
+      "binding": "classical primary Tafsīr linked to existing early lesson 2; final scholarly approval pending",
+      "topic": "Salām erwidern"
+    },
+    {
+      "sourceId": "SRC-CORE2-MUSLIM-54",
+      "key": "core2-muslim54-spread-salam",
+      "author": "Muslim ibn al-Ḥaǧǧāǧ",
+      "work": "Ṣaḥīḥ Muslim",
+      "narrator": "Abū Hurayrah",
+      "arabic": "أفشوا السلام بينكم",
+      "germanTranslation": null,
+      "locus": "Kitāb al-Īmān, Kapitel über das Verbreiten des Salām",
+      "volume": "1",
+      "page": "74",
+      "chapter": "Bāb bayān annahu lā yadḫul al-ǧannah illā al-muʾminūn",
+      "number": "54",
+      "edition": "Islamweb Ṣaḥīḥ Muslim, Buch 1/152",
+      "directLink": "https://www.islamweb.net/ar/library/content/1/152#:~:text=%D8%A3%D9%81%D8%B4%D9%88%D8%A7%20%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%A8%D9%8A%D9%86%D9%83%D9%85",
+      "authenticityNote": "Direkt gelesener authentischer Muslim-Bericht Nr. 54 von Abū Hurayrah. Die Aufforderung, Salām zu verbreiten, ist vom Qurʾāngebot der Grußerwiderung in 4:86 zu unterscheiden.",
+      "safeApplication": "Die Kinder dürfen freundlich den Salām üben und auf die Antwort achten. Keine unüberprüften zusätzlichen Hadithtexte, keine Beschämung oder Zwangsrezitation.",
+      "verificationStatus": "primary-page-direct-read-2026-10-14",
+      "checkedOn": "2026-10-14",
+      "checkedBy": "Islamweb Ṣaḥīḥ Muslim 1/152, Nr. 54, arabischer Originaltext direkt geöffnet; Dorar 37272 ergänzend kontrolliert",
+      "lessonIds": [
+        "adab-salam"
+      ],
+      "binding": "authentic Sunnah source for greeting lesson 2; final scholarly approval pending",
+      "topic": "Den Salām verbreiten"
+    },
+    {
+      "sourceId": "SRC-CORE4-BUKHARI-2856",
+      "key": "core4-bukhari2856-muadh-tawhid",
+      "author": "Muḥammad ibn Ismāʿīl al-Buḫārī",
+      "work": "Ṣaḥīḥ al-Buḫārī",
+      "narrator": "Muʿāḏ ibn Ǧabal",
+      "arabic": "فإن حق الله على العباد أن يعبدوه ولا يشركوا به شيئا",
+      "germanTranslation": null,
+      "locus": "Kitāb al-Ǧihād wa-s-Siyar, Kapitel über die Benennung eines Pferdes und eines Esels; Ḥadīṯ Muʿāḏ",
+      "volume": null,
+      "page": null,
+      "chapter": "Ḥaqq Allāh ʿalā al-ʿibād",
+      "number": "2856",
+      "edition": "Ṣaḥīḥ al-Buḫārī; Dorar-Beglaubigung mit Originalwortlaut",
+      "directLink": "https://dorar.net/hadith/sharh/11568#:~:text=%D8%AD%D9%82%20%D8%A7%D9%84%D9%84%D9%87%20%D8%B9%D9%84%D9%89%20%D8%A7%D9%84%D8%B9%D8%A8%D8%A7%D8%AF%20%D8%A3%D9%86%20%D9%8A%D8%B9%D8%A8%D8%AF%D9%88%D9%87",
+      "authenticityNote": "Bei Dorar direkt überprüft: al-Buḫārī 2856, Erzähler Muʿāḏ ibn Ǧabal; ebenfalls Muslim 30. Der Bericht behandelt Allahs Recht, allein angebetet zu werden, und ist kein erfundenes Gespräch der Unterrichtskinder.",
+      "safeApplication": "Allahs ausschließliche Anbetung altersgerecht erklären. Keine drohende oder polemische Anwendung auf einzelne Kinder; Qurʾān 112:1–4 und dieser Bericht als getrennte Textarten führen.",
+      "verificationStatus": "primary-report-direct-read-2026-10-14",
+      "checkedOn": "2026-10-14",
+      "checkedBy": "Dorar original sharh/11568 direkt gelesen und authentisch von al-Buḫārī 2856 ausgewiesen",
+      "lessonIds": [
+        "aqidah-tawhid"
+      ],
+      "binding": "authentic companion-narrated Sunnah for existing early lesson 4; final scholarly approval pending",
+      "topic": "Tawḥīd – allein Allah anbeten"
     }
   ]
 }
