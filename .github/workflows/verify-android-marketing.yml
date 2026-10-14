@@ -61,7 +61,8 @@ jobs:
           if (manifest.apps.kids.public!==false || manifest.apps.kids.status!=='private-testing')
             process.exit(1);
           const c=f.readFileSync('links/index.html','utf8');
-          if(!c.includes('ANDROID · WEB-APP') || !c.includes('href="https://dar-al-tawhid.de/"')) throw Error('Android Web-App Link fehlt');
+          if(!c.includes('id="installAndroidPwa"') || !c.includes('href="/install-manifest.json"')) throw Error('Direkter Android Web-App Installer fehlt');
+          if(c.includes('id="openApp"') || c.includes('native-downloads')) throw Error('Doppelter oder iOS-Web-App Eintrag vorhanden');
           if(c.includes('id="direct-android-apk"') || c.includes('id="direct-android-tv-apk"')) throw Error('Alte Android APK-Karten unerwartet veröffentlicht');
           if(!c.includes('apps.apple.com/de/app/'))throw Error('Bestehender Apple App Store Link fehlt');
           console.log('Apple Store erhalten, Android-PWA öffentlich, keine APK/TV-Werbung auf Links-Seite, Kids privat');
