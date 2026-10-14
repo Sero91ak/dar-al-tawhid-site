@@ -31,7 +31,30 @@ const required={
 },
 "fiqh-absicht-zum-gebet":{
  "SRC-FIQH154-MUGHNI-542":["islamweb.net","15/542"]
+},
+"fiqh-zwischen-niederwerfungen-sitzen":{
+ "SRC-FIQH201-MUGHNI-599":["islamweb.net","15/599"],
+ "SRC-FIQH201-MUGHNI-602":["islamweb.net","15/602"]
+},
+"fiqh-taslim":{
+ "SRC-FIQH205-MUGHNI-621":["islamweb.net","15/621"]
+},
+"fiqh-ramadan-fasten":{
+ "SRC-FIQH207-MUGHNI-1713":["islamweb.net","15/1713"]
+},
+"fiqh-zakah-und-hajj":{
+ "SRC-FIQH208-MUGHNI-1386":["islamweb.net","15/1386"]
 }};
+assert.equal(file.sourceCount,file.sources.length,"sourceCount metadata must match actual source IDs");
+const indexedOnly=["SRC-FIQH201-MUGHNI-599","SRC-FIQH201-MUGHNI-602","SRC-FIQH205-MUGHNI-621","SRC-FIQH207-MUGHNI-1713","SRC-FIQH208-MUGHNI-1386"];
+for(const id of indexedOnly){
+ const e=file.sources.find(x=>x.sourceId===id);
+ assert.ok(e,"Indexed primary-source gap missing: "+id);
+ assert.equal(e.verificationStatus,"primary-index-excerpt-cross-checked-2026-10-14-direct-fetch-unavailable");
+ assert.match(e.checkedBy,/nicht möglich|nicht verfügbar/,"source access limitation must not be concealed");
+ assert.ok(e.safeApplication&&e.authenticityNote&&e.arabic,"record must give original fragment and child-safe scope");
+ assert.notEqual(e.verificationStatus,"scientifically-approved");
+}
 let count=0;
 for(const [lessonId,expected] of Object.entries(required)){
  for(const [id,[host,fragment]] of Object.entries(expected)){
