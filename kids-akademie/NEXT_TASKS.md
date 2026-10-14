@@ -1,3 +1,13 @@
+## 14.10.2026 · Unterricht 159–162 individuell redigiert (getrennter ChatGPT-Entwurfszweig)
+
+- **159–162:** Allah allein danken, gute Taten und Verantwortung, Aufrichtigkeit und Außenwirkung, fair verlieren. Vier Lektionen mit **12 unterschiedlichen Altersfassungen**, je vier Unterrichtsabschnitten, Lernziel, Alltag, Übung, Quellenabgrenzung und Schluss.
+- **Datei:** `kids/akademie/curriculum-editorial-159-162-v1.js`; Loader nach 155–158 in `kids/akademie/index.html` – nur im Arbeitszweig `chatgpt/kids-akademie-159-162-20261014`.
+- **Quellen:** Qurʾān 16:53, 2:177, 2:264, 3:134. Unabhängige Ibn-Kaṯīr-/Tafsīr-Sichtung für 2:177 und 3:134, bei 16:53 und 2:264 stehen die vollständigen direkten Originalseiten im aktuellen Lauf noch aus. Einzelheiten: `kids-akademie/research/EDITORIAL_REVIEW_159_162_20261014.md`.
+- **Sprachplan:** `kids/data/academy-voice-editorial-159-162-delta-v1.json` mit **76 ungenerierten deutschen Sprechtextkontexten**, `generateCreditsUsed=0`. Textprüfung: **72 direkte Zeilen-/Kontextvergleiche plus Summary-/Loader-/Sicherheitskontrollen, 0 festgestellte Abweichungen**. Es wurde **kein Audio generiert**.
+- **Technik:** `kids/tools/test-academy-editorial-159-162-v1.cjs` dokumentiert; ein vollständiger Node-/Browser-/CI-Lauf ist in diesem Durchgang **nicht durchgeführt** worden. Die in-situ-Strukturprüfung ist keine wissenschaftliche Freigabe.
+- **Gesamt:** individuell redaktionell bis **162/208** aufeinander aufbauenden Entwurfszweigen; noch **46 Lektionen (163–208)** für die persönliche Ausarbeitung. Alle **624 Altersfassungen wissenschaftlich unfreigegeben**, Fiqh-Lektion 166 benötigt besonders sorgfältige klassisch-hanbalitische Prüfung.
+- **Strenge Grenzen:** Kein Merge auf `main`, keine Live-Veröffentlichung, keine Audioerzeugung; bestehende IDs, Quizfragen, Kinderprofile, Lernfortschritt und Freischaltlogik nicht verändern. Für Übernahme muss zuerst der vorausgehende 155–158-Zweig integriert werden.
+
 ## 14.10.2026 · Unterricht 155–158 individuell erweitert (separater ChatGPT-Arbeitszweig)
 
 - **Vier Unterrichtslektionen 155–158** (`quran-woher-stammt-ein-hadith`, `sirah-sahabah-vorbild`, `dua-adhkar-ohne-zwang`, `family-gemeinschaft-gutes`) mit **zwölf unterschiedlichen Altersfassungen** für 4–5, 6–8 und 9–10 Jahre. Durchgehend vier Kinder-Lehrabschnitte je Altersfassung samt Alltag, Praxis, Lernziel, Quellenabgrenzung und Zusammenfassung.
