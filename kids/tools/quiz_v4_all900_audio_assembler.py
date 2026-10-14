@@ -118,13 +118,39 @@ def compose(paths,pauses,target):
         target.write_bytes(audio.read_bytes())
     return target
 
+def self_test():
+    """Audio-pipeline probe with temporary test tones ONLY; never published."""
+    with tempfile.TemporaryDirectory(prefix="kids-quiz-v4-private-audio-test-") as base:
+        path=Path(base)
+        inputs=[]
+        for i,hz in enumerate((440,660)):
+            file=path/f"input{i}.mp3"
+            subprocess.run(["ffmpeg","-hide_banner","-loglevel","error","-y",
+                "-f","lavfi","-i",f"sine=frequency={hz}:sample_rate=48000",
+                "-t","0.8","-c:a","libmp3lame","-b:a","96k",str(file)],check=True)
+            inputs.append(file)
+        original_duration=[probe(x) for x in inputs]
+        target=path/"joined.mp3"
+        compose(inputs,[180],target)
+        observed=probe(target)
+        target_duration=sum(original_duration)+0.18
+        if not 1.2<observed<2.5 or abs(observed-target_duration)>0.35:
+            raise RuntimeError(f"Failed private FFmpeg joining QA: {observed} expected {target_duration}")
+        if len(sha(target))!=64 or target.stat().st_size<2000:
+            raise RuntimeError("Missing hash or broken synthesized test tone output")
+    print("PASS_PRIVATE_AUDIO_PIPELINE: two synthetic NON-SPEECH test tones, 180ms pause, verified playable output; no stored media",flush=True)
+
 def main():
     p=argparse.ArgumentParser()
     mode=p.add_mutually_exclusive_group()
     mode.add_argument("--audit",action="store_true")
+    mode.add_argument("--self-test",action="store_true")
     mode.add_argument("--strict",action="store_true")
     mode.add_argument("--assemble",action="store_true")
     args=p.parse_args()
+    if args.self_test:
+        self_test()
+        return
     plan=load(PLAN)
     entries=plan.get("recipes") or []
     if len(entries)!=900 or Counter(x["ageBand"] for x in entries)!=Counter({"4-6":300,"7-8":300,"9-10":300}):
