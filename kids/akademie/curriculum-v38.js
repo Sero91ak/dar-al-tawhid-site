@@ -4332,13 +4332,13 @@ const additions=
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Ungeduld bemerken?",
+          "prompt": "Was hilft, wenn du warten musst?",
           "options": [
-            "Bevor wir ein Gebet üben, wissen wir, welches Gebet es sein soll.",
+            "Ich schubse andere, damit ich zuerst drankomme.",
             "Wenn wir warten müssen, merken wir die Eile und werden langsamer."
           ],
           "correct": 1,
-          "hint": "Denke an unsere heutige Stunde.",
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
           "explain": "Mā schāʾ Allāh! Wenn wir warten müssen, merken wir die Eile und werden langsamer."
         },
         {
@@ -4346,35 +4346,35 @@ const additions=
           "prompt": "Was können wir heute üben?",
           "options": [
             "Wir atmen einmal ruhig und sagen: Ich warte.",
-            "Wir sagen den Namen laut und beginnen nicht, während wir noch woanders hinschauen."
+            "Ich drängle mich absichtlich vor."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
+          "explain": "Mā schāʾ Allāh! Wir atmen einmal ruhig und sagen: Ich warte."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Ungeduld bemerken?",
+          "prompt": "Was hilft, wenn du warten musst?",
           "options": [
             "Wenn wir warten müssen, merken wir die Eile und werden langsamer.",
-            "Bevor wir ein Gebet üben, wissen wir, welches Gebet es sein soll."
+            "Ich schubse andere, damit ich zuerst drankomme."
           ],
           "correct": 0,
-          "hint": "Worum ging es in der Stunde?",
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
           "explain": "Mā schāʾ Allāh! Wenn wir warten müssen, merken wir die Eile und werden langsamer."
         },
         {
           "type": "choice",
           "prompt": "Welche Handlung gehört zu unserer Übung?",
           "options": [
-            "Wir sagen den Namen laut und beginnen nicht, während wir noch woanders hinschauen.",
+            "Ich drängle mich absichtlich vor.",
             "Wir atmen einmal ruhig und sagen: Ich warte."
           ],
           "correct": 1,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
+          "explain": "Mā schāʾ Allāh! Wir atmen einmal ruhig und sagen: Ich warte."
         },
         {
           "type": "text",
@@ -4401,14 +4401,14 @@ const additions=
         },
         {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Wie übst du Geduld beim Warten?",
           "options": [
-            "Bevor wir ein Gebet üben, wissen wir, welches Gebet es sein soll.",
+            "Ich schubse andere, damit ich zuerst drankomme.",
             "Wenn wir warten müssen, merken wir die Eile und werden langsamer."
           ],
           "correct": 1,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
+          "explain": "Mā schāʾ Allāh! Wenn wir warten müssen, merken wir die Eile und werden langsamer."
         }
       ]
     },
@@ -4772,37 +4772,37 @@ const additions=
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Arabischen Text und Übersetzung unterscheiden?",
+          "prompt": "Was unterscheiden wir beim Qurʾān?",
           "options": [
-            "Bevor wir ein Gebet üben, wissen wir, welches Gebet es sein soll.",
+            "Der deutsche Beispielsatz ist der originale arabische Vers.",
             "Die arabischen Worte und der deutsche Sinn sind nicht dasselbe."
           ],
           "correct": 1,
-          "hint": "Denke an unsere heutige Stunde.",
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
           "explain": "Mā schāʾ Allāh! Die arabischen Worte und der deutsche Sinn sind nicht dasselbe."
         },
         {
           "type": "choice",
           "prompt": "Was können wir heute üben?",
           "options": [
-            "Wir sagen den Namen laut und beginnen nicht, während wir noch woanders hinschauen.",
+            "Wir erfinden einen deutschen Satz und behaupten, er sei die Offenbarung.",
             "Wir zeigen auf die arabische Zeile und danach auf die deutsche Erklärung und sagen: Das eine ist der Vers, das andere ist unsere Hilfe zum Verstehen."
           ],
           "correct": 1,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
+          "explain": "Mā schāʾ Allāh! Wir zeigen auf die arabische Zeile und danach auf die deutsche Erklärung und sagen: Das eine ist der Vers, das andere ist unsere Hilfe zum Verstehen."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Arabischen Text und Übersetzung unterscheiden?",
+          "prompt": "Was unterscheiden wir beim Qurʾān?",
           "options": [
             "Die arabischen Worte und der deutsche Sinn sind nicht dasselbe.",
-            "Bevor wir ein Gebet üben, wissen wir, welches Gebet es sein soll."
+            "Der deutsche Beispielsatz ist der originale arabische Vers."
           ],
           "correct": 0,
-          "hint": "Worum ging es in der Stunde?",
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
           "explain": "Mā schāʾ Allāh! Die arabischen Worte und der deutsche Sinn sind nicht dasselbe."
         },
         {
@@ -4810,11 +4810,11 @@ const additions=
           "prompt": "Welche Handlung gehört zu unserer Übung?",
           "options": [
             "Wir zeigen auf die arabische Zeile und danach auf die deutsche Erklärung und sagen: Das eine ist der Vers, das andere ist unsere Hilfe zum Verstehen.",
-            "Wir sagen den Namen laut und beginnen nicht, während wir noch woanders hinschauen."
+            "Wir erfinden einen deutschen Satz und behaupten, er sei die Offenbarung."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
+          "explain": "Mā schāʾ Allāh! Wir zeigen auf die arabische Zeile und danach auf die deutsche Erklärung und sagen: Das eine ist der Vers, das andere ist unsere Hilfe zum Verstehen."
         },
         {
           "type": "text",
@@ -4841,14 +4841,14 @@ const additions=
         },
         {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Was ist der Unterschied zwischen Qurʾān-Wortlaut und deutscher Erklärung?",
           "options": [
-            "Bevor wir ein Gebet üben, wissen wir, welches Gebet es sein soll.",
+            "Der deutsche Beispielsatz ist der originale arabische Vers.",
             "Die arabischen Worte und der deutsche Sinn sind nicht dasselbe."
           ],
           "correct": 1,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
+          "explain": "Mā schāʾ Allāh! Die arabischen Worte und der deutsche Sinn sind nicht dasselbe."
         }
       ]
     },
@@ -4990,13 +4990,13 @@ const additions=
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Muḥammad ﷺ als barmherziger Lehrer?",
+          "prompt": "Wie beschreibt Qurʾān 3:159 den Umgang des Propheten ﷺ?",
           "options": [
             "Der Vers beschreibt den Propheten, Friede sei mit ihm, als mild im Umgang.",
-            "Wir erinnern uns an Allah mit kurzen Worten, ohne dass jemand gedrängt wird."
+            "Der Prophet ﷺ wird im Vers als absichtlich grob beschrieben."
           ],
           "correct": 0,
-          "hint": "Denke an unsere heutige Stunde.",
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
           "explain": "Mā schāʾ Allāh! Der Vers beschreibt den Propheten, Friede sei mit ihm, als mild im Umgang."
         },
         {
@@ -5004,35 +5004,35 @@ const additions=
           "prompt": "Was können wir heute üben?",
           "options": [
             "Wir üben einen freundlichen Satz zu einem anderen Kind. Wir erzählen dazu keine erfundene Kinderszene aus dem Leben des Propheten.",
-            "Wir wiederholen einen kurzen deutschen Sinn und keine lange Liste."
+            "Wir beschämen ein Kind beim Lernen."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
+          "explain": "Mā schāʾ Allāh! Wir üben einen freundlichen Satz zu einem anderen Kind. Wir erzählen dazu keine erfundene Kinderszene aus dem Leben des Propheten."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Muḥammad ﷺ als barmherziger Lehrer?",
+          "prompt": "Wie beschreibt Qurʾān 3:159 den Umgang des Propheten ﷺ?",
           "options": [
-            "Wir erinnern uns an Allah mit kurzen Worten, ohne dass jemand gedrängt wird.",
+            "Der Prophet ﷺ wird im Vers als absichtlich grob beschrieben.",
             "Der Vers beschreibt den Propheten, Friede sei mit ihm, als mild im Umgang."
           ],
           "correct": 1,
-          "hint": "Worum ging es in der Stunde?",
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
           "explain": "Mā schāʾ Allāh! Der Vers beschreibt den Propheten, Friede sei mit ihm, als mild im Umgang."
         },
         {
           "type": "choice",
           "prompt": "Welche Handlung gehört zu unserer Übung?",
           "options": [
-            "Wir wiederholen einen kurzen deutschen Sinn und keine lange Liste.",
+            "Wir beschämen ein Kind beim Lernen.",
             "Wir üben einen freundlichen Satz zu einem anderen Kind. Wir erzählen dazu keine erfundene Kinderszene aus dem Leben des Propheten."
           ],
           "correct": 1,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
+          "explain": "Mā schāʾ Allāh! Wir üben einen freundlichen Satz zu einem anderen Kind. Wir erzählen dazu keine erfundene Kinderszene aus dem Leben des Propheten."
         },
         {
           "type": "text",
@@ -5059,14 +5059,14 @@ const additions=
         },
         {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Was lernen wir über Barmherzigkeit beim Erklären?",
           "options": [
             "Der Vers beschreibt den Propheten, Friede sei mit ihm, als mild im Umgang.",
-            "Wir erinnern uns an Allah mit kurzen Worten, ohne dass jemand gedrängt wird."
+            "Der Prophet ﷺ wird im Vers als absichtlich grob beschrieben."
           ],
           "correct": 0,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
+          "explain": "Mā schāʾ Allāh! Der Vers beschreibt den Propheten, Friede sei mit ihm, als mild im Umgang."
         }
       ]
     },
@@ -5208,13 +5208,13 @@ const additions=
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über In schwierigen Momenten Duʿāʾ?",
+          "prompt": "Was hilft in einem schwierigen Moment?",
           "options": [
-            "Die ersten Gefährten, die ausgezogen sind und die geholfen haben, haben ein gutes Vorbild.",
+            "Wir müssen auch bei Gefahr alles allein schaffen.",
             "Wenn uns etwas schwer wird, bitten wir Allah und holen bei Gefahr einen Menschen."
           ],
           "correct": 1,
-          "hint": "Denke an unsere heutige Stunde.",
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
           "explain": "Mā schāʾ Allāh! Wenn uns etwas schwer wird, bitten wir Allah und holen bei Gefahr einen Menschen."
         },
         {
@@ -5222,23 +5222,23 @@ const additions=
           "prompt": "Was können wir heute üben?",
           "options": [
             "Wir sprechen eine kurze eigene Bitte auf Deutsch und nennen danach die Person, die wir bei einer echten Not holen würden.",
-            "Wir wiederholen die zwei Gruppennamen aus dem Vers: die Ausgewanderten und die Helfer."
+            "Wir bitten bei Gefahr niemals Erwachsene um Hilfe."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
+          "explain": "Mā schāʾ Allāh! Wir sprechen eine kurze eigene Bitte auf Deutsch und nennen danach die Person, die wir bei einer echten Not holen würden."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema In schwierigen Momenten Duʿāʾ?",
+          "prompt": "Was hilft in einem schwierigen Moment?",
           "options": [
             "Wenn uns etwas schwer wird, bitten wir Allah und holen bei Gefahr einen Menschen.",
-            "Die ersten Gefährten, die ausgezogen sind und die geholfen haben, haben ein gutes Vorbild."
+            "Wir müssen auch bei Gefahr alles allein schaffen."
           ],
           "correct": 0,
-          "hint": "Worum ging es in der Stunde?",
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
           "explain": "Mā schāʾ Allāh! Wenn uns etwas schwer wird, bitten wir Allah und holen bei Gefahr einen Menschen."
         },
         {
@@ -5246,11 +5246,11 @@ const additions=
           "prompt": "Welche Handlung gehört zu unserer Übung?",
           "options": [
             "Wir sprechen eine kurze eigene Bitte auf Deutsch und nennen danach die Person, die wir bei einer echten Not holen würden.",
-            "Wir wiederholen die zwei Gruppennamen aus dem Vers: die Ausgewanderten und die Helfer."
+            "Wir bitten bei Gefahr niemals Erwachsene um Hilfe."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
+          "explain": "Mā schāʾ Allāh! Wir sprechen eine kurze eigene Bitte auf Deutsch und nennen danach die Person, die wir bei einer echten Not holen würden."
         },
         {
           "type": "text",
@@ -5277,14 +5277,14 @@ const additions=
         },
         {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Wie gehören Duʿāʾ und Sicherheit zusammen?",
           "options": [
-            "Die ersten Gefährten, die ausgezogen sind und die geholfen haben, haben ein gutes Vorbild.",
+            "Wir müssen auch bei Gefahr alles allein schaffen.",
             "Wenn uns etwas schwer wird, bitten wir Allah und holen bei Gefahr einen Menschen."
           ],
           "correct": 1,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
+          "explain": "Mā schāʾ Allāh! Wenn uns etwas schwer wird, bitten wir Allah und holen bei Gefahr einen Menschen."
         }
       ]
     },
@@ -5426,37 +5426,37 @@ const additions=
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Gemeinsam in der Moschee lernen?",
+          "prompt": "Wie lernen wir gemeinsam Rücksicht?",
           "options": [
             "Im Gemeinschaftsraum nehmen wir auf andere Kinder Rücksicht.",
-            "Wir erinnern uns an Allah mit kurzen Worten, ohne dass jemand gedrängt wird."
+            "Wir schubsen andere Kinder aus dem Weg."
           ],
           "correct": 0,
-          "hint": "Denke an unsere heutige Stunde.",
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
           "explain": "Mā schāʾ Allāh! Im Gemeinschaftsraum nehmen wir auf andere Kinder Rücksicht."
         },
         {
           "type": "choice",
           "prompt": "Was können wir heute üben?",
           "options": [
-            "Wir wiederholen einen kurzen deutschen Sinn und keine lange Liste.",
+            "Wir rennen absichtlich gegen andere Kinder.",
             "Wir üben, leise Platz zu machen und den Raum so zu verlassen, dass niemand angestoßen wird."
           ],
           "correct": 1,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
+          "explain": "Mā schāʾ Allāh! Wir üben, leise Platz zu machen und den Raum so zu verlassen, dass niemand angestoßen wird."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Gemeinsam in der Moschee lernen?",
+          "prompt": "Wie lernen wir gemeinsam Rücksicht?",
           "options": [
-            "Wir erinnern uns an Allah mit kurzen Worten, ohne dass jemand gedrängt wird.",
+            "Wir schubsen andere Kinder aus dem Weg.",
             "Im Gemeinschaftsraum nehmen wir auf andere Kinder Rücksicht."
           ],
           "correct": 1,
-          "hint": "Worum ging es in der Stunde?",
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
           "explain": "Mā schāʾ Allāh! Im Gemeinschaftsraum nehmen wir auf andere Kinder Rücksicht."
         },
         {
@@ -5464,11 +5464,11 @@ const additions=
           "prompt": "Welche Handlung gehört zu unserer Übung?",
           "options": [
             "Wir üben, leise Platz zu machen und den Raum so zu verlassen, dass niemand angestoßen wird.",
-            "Wir wiederholen einen kurzen deutschen Sinn und keine lange Liste."
+            "Wir rennen absichtlich gegen andere Kinder."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
+          "explain": "Mā schāʾ Allāh! Wir üben, leise Platz zu machen und den Raum so zu verlassen, dass niemand angestoßen wird."
         },
         {
           "type": "text",
@@ -5495,14 +5495,14 @@ const additions=
         },
         {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Was hilft allen beim gemeinsamen Lernen in der Moschee?",
           "options": [
             "Im Gemeinschaftsraum nehmen wir auf andere Kinder Rücksicht.",
-            "Wir erinnern uns an Allah mit kurzen Worten, ohne dass jemand gedrängt wird."
+            "Wir schubsen andere Kinder aus dem Weg."
           ],
           "correct": 0,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
+          "explain": "Mā schāʾ Allāh! Im Gemeinschaftsraum nehmen wir auf andere Kinder Rücksicht."
         }
       ]
     },
@@ -5644,49 +5644,49 @@ const additions=
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Allahs Wissen verstehen?",
+          "prompt": "Was lernen wir über Allahs Wissen?",
           "options": [
-            "Zusammen können wir etwas Gutes tun, das sicher ist.",
-            "Wir können etwas verstecken."
+            "Allah weiß nur, was Menschen sehen.",
+            "Allah kennt auch das, was Menschen nicht sehen."
           ],
           "correct": 1,
-          "hint": "Denke an unsere heutige Stunde.",
-          "explain": "Mā schāʾ Allāh! Wir können etwas verstecken."
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
+          "explain": "Mā schāʾ Allāh! Allah kennt auch das, was Menschen nicht sehen."
         },
         {
           "type": "choice",
           "prompt": "Was können wir heute üben?",
           "options": [
             "Wir nennen ein kleines Ding, das Menschen gerade nicht sehen, und wiederholen: Allah weiß es.",
-            "Wir planen nur eine Hilfe, die Erwachsene erlauben und die niemand in Gefahr bringt."
+            "Wir sagen: Verstecktes bleibt Allah immer unbekannt."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
+          "explain": "Mā schāʾ Allāh! Wir nennen ein kleines Ding, das Menschen gerade nicht sehen, und wiederholen: Allah weiß es."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Allahs Wissen verstehen?",
+          "prompt": "Was lernen wir über Allahs Wissen?",
           "options": [
-            "Wir können etwas verstecken.",
-            "Zusammen können wir etwas Gutes tun, das sicher ist."
+            "Allah kennt auch das, was Menschen nicht sehen.",
+            "Allah weiß nur, was Menschen sehen."
           ],
           "correct": 0,
-          "hint": "Worum ging es in der Stunde?",
-          "explain": "Mā schāʾ Allāh! Wir können etwas verstecken."
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
+          "explain": "Mā schāʾ Allāh! Allah kennt auch das, was Menschen nicht sehen."
         },
         {
           "type": "choice",
           "prompt": "Welche Handlung gehört zu unserer Übung?",
           "options": [
-            "Wir planen nur eine Hilfe, die Erwachsene erlauben und die niemand in Gefahr bringt.",
+            "Wir sagen: Verstecktes bleibt Allah immer unbekannt.",
             "Wir nennen ein kleines Ding, das Menschen gerade nicht sehen, und wiederholen: Allah weiß es."
           ],
           "correct": 1,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
+          "explain": "Mā schāʾ Allāh! Wir nennen ein kleines Ding, das Menschen gerade nicht sehen, und wiederholen: Allah weiß es."
         },
         {
           "type": "text",
@@ -5713,14 +5713,14 @@ const additions=
         },
         {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Was bedeutet es, dass Allah das Verborgene kennt?",
           "options": [
-            "Zusammen können wir etwas Gutes tun, das sicher ist.",
-            "Wir können etwas verstecken."
+            "Allah weiß nur, was Menschen sehen.",
+            "Allah kennt auch das, was Menschen nicht sehen."
           ],
           "correct": 1,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
+          "explain": "Mā schāʾ Allāh! Allah kennt auch das, was Menschen nicht sehen."
         }
       ]
     },
@@ -5863,13 +5863,13 @@ const additions=
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Allen Gesandten mit Respekt begegnen?",
+          "prompt": "Wie sprechen wir über Allahs Gesandte?",
           "options": [
             "Wir sprechen die Namen der Gesandten respektvoll aus, ohne einen gering zu machen.",
-            "Wenn wir verlieren, bleiben wir bei unseren Worten freundlich."
+            "Wir machen einen Gesandten absichtlich lächerlich."
           ],
           "correct": 0,
-          "hint": "Denke an unsere heutige Stunde.",
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
           "explain": "Mā schāʾ Allāh! Wir sprechen die Namen der Gesandten respektvoll aus, ohne einen gering zu machen."
         },
         {
@@ -5877,23 +5877,23 @@ const additions=
           "prompt": "Was können wir heute üben?",
           "options": [
             "Wir sprechen drei im Vers genannte Namen langsam und ohne einen Witz.",
-            "Wir üben den Satz und legen das Spielzeug ruhig hin."
+            "Wir verwenden Gesandtennamen für Spott."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
+          "explain": "Mā schāʾ Allāh! Wir sprechen drei im Vers genannte Namen langsam und ohne einen Witz."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Allen Gesandten mit Respekt begegnen?",
+          "prompt": "Wie sprechen wir über Allahs Gesandte?",
           "options": [
-            "Wenn wir verlieren, bleiben wir bei unseren Worten freundlich.",
+            "Wir machen einen Gesandten absichtlich lächerlich.",
             "Wir sprechen die Namen der Gesandten respektvoll aus, ohne einen gering zu machen."
           ],
           "correct": 1,
-          "hint": "Worum ging es in der Stunde?",
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
           "explain": "Mā schāʾ Allāh! Wir sprechen die Namen der Gesandten respektvoll aus, ohne einen gering zu machen."
         },
         {
@@ -5901,11 +5901,11 @@ const additions=
           "prompt": "Welche Handlung gehört zu unserer Übung?",
           "options": [
             "Wir sprechen drei im Vers genannte Namen langsam und ohne einen Witz.",
-            "Wir üben den Satz und legen das Spielzeug ruhig hin."
+            "Wir verwenden Gesandtennamen für Spott."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
+          "explain": "Mā schāʾ Allāh! Wir sprechen drei im Vers genannte Namen langsam und ohne einen Witz."
         },
         {
           "type": "text",
@@ -5932,14 +5932,14 @@ const additions=
         },
         {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Was gehört zum respektvollen Glauben an die Gesandten?",
           "options": [
             "Wir sprechen die Namen der Gesandten respektvoll aus, ohne einen gering zu machen.",
-            "Wenn wir verlieren, bleiben wir bei unseren Worten freundlich."
+            "Wir machen einen Gesandten absichtlich lächerlich."
           ],
           "correct": 0,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
+          "explain": "Mā schāʾ Allāh! Wir sprechen die Namen der Gesandten respektvoll aus, ohne einen gering zu machen."
         }
       ]
     },
@@ -6081,37 +6081,37 @@ const additions=
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Kleine Taten können wertvoll sein?",
+          "prompt": "Können auch kleine gute Taten wertvoll sein?",
           "options": [
-            "Wenn wir verlieren, bleiben wir bei unseren Worten freundlich.",
+            "Kleine gute Taten sind grundsätzlich wertlos.",
             "Eine kleine Hilfe kann vor Allah Gewicht haben."
           ],
           "correct": 1,
-          "hint": "Denke an unsere heutige Stunde.",
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
           "explain": "Mā schāʾ Allāh! Eine kleine Hilfe kann vor Allah Gewicht haben."
         },
         {
           "type": "choice",
           "prompt": "Was können wir heute üben?",
           "options": [
-            "Wir üben den Satz und legen das Spielzeug ruhig hin.",
+            "Eine kleine Hilfe zählt nur, wenn alle sie sehen.",
             "Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war."
           ],
           "correct": 1,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
+          "explain": "Mā schāʾ Allāh! Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Kleine Taten können wertvoll sein?",
+          "prompt": "Können auch kleine gute Taten wertvoll sein?",
           "options": [
             "Eine kleine Hilfe kann vor Allah Gewicht haben.",
-            "Wenn wir verlieren, bleiben wir bei unseren Worten freundlich."
+            "Kleine gute Taten sind grundsätzlich wertlos."
           ],
           "correct": 0,
-          "hint": "Worum ging es in der Stunde?",
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
           "explain": "Mā schāʾ Allāh! Eine kleine Hilfe kann vor Allah Gewicht haben."
         },
         {
@@ -6119,11 +6119,11 @@ const additions=
           "prompt": "Welche Handlung gehört zu unserer Übung?",
           "options": [
             "Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war.",
-            "Wir üben den Satz und legen das Spielzeug ruhig hin."
+            "Eine kleine Hilfe zählt nur, wenn alle sie sehen."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
+          "explain": "Mā schāʾ Allāh! Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war."
         },
         {
           "type": "text",
@@ -6150,14 +6150,14 @@ const additions=
         },
         {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Was zeigt Qurʾān 99:7 über gute Taten?",
           "options": [
-            "Wenn wir verlieren, bleiben wir bei unseren Worten freundlich.",
+            "Kleine gute Taten sind grundsätzlich wertlos.",
             "Eine kleine Hilfe kann vor Allah Gewicht haben."
           ],
           "correct": 1,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
+          "explain": "Mā schāʾ Allāh! Eine kleine Hilfe kann vor Allah Gewicht haben."
         }
       ]
     },
@@ -6299,13 +6299,13 @@ const additions=
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Bescheiden bleiben?",
+          "prompt": "Wie freuen wir uns über Erfolge?",
           "options": [
             "Wir können uns über etwas Gutes freuen, ohne andere kleiner zu machen.",
-            "Wir helfen, weil es richtig ist, nicht damit alle klatschen."
+            "Wir machen andere absichtlich klein."
           ],
           "correct": 0,
-          "hint": "Denke an unsere heutige Stunde.",
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
           "explain": "Mā schāʾ Allāh! Wir können uns über etwas Gutes freuen, ohne andere kleiner zu machen."
         },
         {
@@ -6313,35 +6313,35 @@ const additions=
           "prompt": "Was können wir heute üben?",
           "options": [
             "Wir formulieren einen Satz über einen Erfolg ohne ein schlechtes Wort über ein anderes Kind.",
-            "Wir tun eine kleine Hilfe und erzählen sie danach nicht herum."
+            "Wir reden schlecht über andere Kinder, um besser zu wirken."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
+          "explain": "Mā schāʾ Allāh! Wir formulieren einen Satz über einen Erfolg ohne ein schlechtes Wort über ein anderes Kind."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Bescheiden bleiben?",
+          "prompt": "Wie freuen wir uns über Erfolge?",
           "options": [
-            "Wir helfen, weil es richtig ist, nicht damit alle klatschen.",
+            "Wir machen andere absichtlich klein.",
             "Wir können uns über etwas Gutes freuen, ohne andere kleiner zu machen."
           ],
           "correct": 1,
-          "hint": "Worum ging es in der Stunde?",
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
           "explain": "Mā schāʾ Allāh! Wir können uns über etwas Gutes freuen, ohne andere kleiner zu machen."
         },
         {
           "type": "choice",
           "prompt": "Welche Handlung gehört zu unserer Übung?",
           "options": [
-            "Wir tun eine kleine Hilfe und erzählen sie danach nicht herum.",
+            "Wir reden schlecht über andere Kinder, um besser zu wirken.",
             "Wir formulieren einen Satz über einen Erfolg ohne ein schlechtes Wort über ein anderes Kind."
           ],
           "correct": 1,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
+          "explain": "Mā schāʾ Allāh! Wir formulieren einen Satz über einen Erfolg ohne ein schlechtes Wort über ein anderes Kind."
         },
         {
           "type": "text",
@@ -6368,14 +6368,14 @@ const additions=
         },
         {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Wie zeigt sich Bescheidenheit im Alltag?",
           "options": [
             "Wir können uns über etwas Gutes freuen, ohne andere kleiner zu machen.",
-            "Wir helfen, weil es richtig ist, nicht damit alle klatschen."
+            "Wir machen andere absichtlich klein."
           ],
           "correct": 0,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "hint": "Denke an unsere heutige Stunde und das Alltagsbeispiel.",
+          "explain": "Mā schāʾ Allāh! Wir können uns über etwas Gutes freuen, ohne andere kleiner zu machen."
         }
       ]
     },
