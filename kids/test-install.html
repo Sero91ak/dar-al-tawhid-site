@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#092736">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="description" content="DĀR AL TAWḤĪD KIDS TEST – eigenständige Android-PWA zum Prüfen vor der Besucherfreigabe.">
+<link rel="manifest" href="/kids/manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="/kids/icons/icon-192.png">
+<link rel="apple-touch-icon" href="/kids/icons/apple-touch-icon.png">
+<title>DĀR AL TAWḤĪD KIDS TEST – Android</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,-apple-system,Roboto,sans-serif;background:#061825;color:#fff5e2}
+*{box-sizing:border-box}
+body{margin:0;min-height:100dvh;padding:calc(24px + env(safe-area-inset-top,0px)) max(18px,env(safe-area-inset-right,0px)) calc(28px + env(safe-area-inset-bottom,0px));background:radial-gradient(ellipse at 50% 0,#174052,#061825 75%)}
+main{max-width:530px;margin:0 auto;padding:clamp(19px,5vw,32px);border:1px solid #63797766;border-radius:26px;background:#092936;box-shadow:0 18px 60px #0006}
+header{display:flex;gap:18px;align-items:center}header img{width:79px;height:79px;border-radius:20px;background:#07202c;object-fit:contain}
+strong{display:block;color:#eacf92;font-size:12px;letter-spacing:.12em}h1{font-size:clamp(25px,6vw,36px);line-height:1.1;margin:7px 0 0}p{line-height:1.58;color:#d7e5e4}
+span.label{display:inline-flex;margin:19px 0 0;border-radius:999px;border:1px solid #e2c48b70;color:#efd393;padding:6px 12px;font-size:12px;font-weight:750;letter-spacing:.06em}
+a,button{display:flex;justify-content:center;align-items:center;text-align:center;width:100%;min-height:52px;border:0;border-radius:15px;font:inherit;font-weight:850;padding:12px 18px;text-decoration:none;cursor:pointer}
+.primary{background:#e6ca92;color:#0c2636;margin-top:17px}
+.secondary{background:#173e4d;color:#fff0d2;border:1px solid #bbcaad70;margin-top:11px}
+section{margin-top:25px;border-top:1px solid #ffffff24;padding-top:14px}h2{font-size:20px;margin:5px 0}
+ol{line-height:1.65;color:#e2e9e7;padding-left:24px}li{margin-bottom:8px}
+small{display:block;font-size:12px;color:#a8c3c5;line-height:1.6}
+#status{min-height:18px;font-size:13px;color:#f2d9a3}
+a:focus-visible,button:focus-visible{outline:3px solid #fff;outline-offset:3px}
+</style>
+</head>
+<body>
+<main>
+<header>
+<img src="/kids/icons/icon-192.png" width="79" height="79" alt="Offizielles Tawḥīd-Kids-App-Symbol">
+<div><strong>ANDROID · EIGENE TEST-APP</strong><h1>TAWḤĪD KIDS TEST</h1></div>
+</header>
+<span class="label">VORSCHAU · NICHT BESUCHER-LIVE</span>
+<p>Hier installierst du die echte Kinder-Test-Web-App für Android. Die Oberfläche ist die Kids-App – nicht die Erwachsenen-App. Änderungen werden auf diesem getrennten Teststand geprüft, bevor die öffentliche Kinder-App aktualisiert wird.</p>
+<button id="install" class="primary" type="button" hidden>TAWḤĪD KIDS TEST installieren</button>
+<a href="/kids/start.html?env=kids-test" class="secondary">Kinder-Test-App öffnen</a>
+<section>
+<h2>Auf Android installieren</h2>
+<ol>
+<li>Öffne diesen Link auf deinem Android-Gerät in <b>Google Chrome</b>.</li>
+<li>Tippe auf das Menü <b>⋮</b> oben rechts.</li>
+<li>Wähle <b>„App installieren“</b> oder <b>„Zum Startbildschirm hinzufügen“</b>.</li>
+<li>Auf deinem Startbildschirm erscheint <b>KIDS TEST</b> mit unserem Kinder-App-Symbol.</li>
+</ol>
+<p id="status" aria-live="polite"></p>
+</section>
+<small>Diese Vorschau ist über eine eigene Test-Internetadresse erreichbar. Sie veröffentlicht keine Änderungen an der iOS-App oder der regulären Kinder-Besucher-App. Funktionen, die Schreibzugriffe auf den Server benötigen, sind in dieser Vorschau sicherheitshalber gesperrt.</small>
+</main>
+<script>
+(function(){
+"use strict";
+var installEvent=null,button=document.getElementById("install"),status=document.getElementById("status");
+window.addEventListener("beforeinstallprompt",function(event){
+  event.preventDefault();installEvent=event;button.hidden=false;
+});
+button.addEventListener("click",async function(){
+  if(!installEvent)return;
+  var event=installEvent;installEvent=null;button.hidden=true;
+  try{await event.prompt();var result=await event.userChoice;
+    status.textContent=result&&result.outcome==="accepted"?"Installation bestätigt. Öffne KIDS TEST über das App-Symbol.":"Installation nicht bestätigt. Nutze alternativ das Chrome-Menü.";
+  }catch(_){status.textContent="Bitte nutze das Chrome-Menü ⋮ → App installieren.";}
+});
+window.addEventListener("appinstalled",function(){status.textContent="KIDS TEST wurde auf dem Gerät installiert.";button.hidden=true;});
+if("serviceWorker" in navigator)window.addEventListener("load",function(){
+  navigator.serviceWorker.register("/kids/sw.js",{scope:"/kids/",updateViaCache:"none"}).catch(function(){});
+},{once:true});
+})();
+</script>
+</body>
+</html>
