@@ -14,7 +14,7 @@ for(const src of file.sources){
  ids.add(src.sourceId);
 }
 const required={
-"adab-worte":{"SRC-CORE6-TABARI-3021":["islamweb.net","50/3021"]},
+"adab-worte":{"SRC-CORE6-TABARI-3021":["islamweb.net","50/3021"],"SRC-CORE6-BUKHARI-6018":["dorar.net","4361"]},
 "akhlaq-amanah":{"SRC-CORE9-IBNALJAWZI-1676":["islamweb.net","ID=1676"]},
 "adab-respekt":{"SRC-CORE10-IBNKATHIR-1005":["islamweb.net","49/1005"]},
 "aqidah-ikhlas":{"SRC-CORE12-TABARI-4233":["islamweb.net","50/4233"]},
@@ -110,6 +110,13 @@ for(const [id,status] of earlyPrimary){const src=file.sources.find(x=>x.sourceId
  assert.ok(src.checkedBy&&src.authenticityNote&&src.safeApplication&&src.arabic,"Source evidence metadata incomplete: "+id);
  assert.notEqual(src.verificationStatus,"scientifically-approved");
 }
+const goodSpeechHadith=file.sources.find(x=>x.sourceId==="SRC-CORE6-BUKHARI-6018");
+assert.ok(goodSpeechHadith,"Directly checked Sunni hadith 6018 missing");
+assert.equal(goodSpeechHadith.number,"6018");
+assert.equal(goodSpeechHadith.narrator,"Abū Hurayrah");
+assert.equal(goodSpeechHadith.verificationStatus,"primary-report-direct-read-2026-10-14");
+assert.match(goodSpeechHadith.arabic,/فَلْيَقُلْ خَيْرًا أَوْ لِيَصْمُتْ/);
+assert.match(goodSpeechHadith.safeApplication,/Kind/);
 const newlyReadEarly=["SRC-CORE6-TABARI-3021","SRC-CORE9-IBNALJAWZI-1676","SRC-CORE10-IBNKATHIR-1005","SRC-CORE12-TABARI-4233"];
 for(const id of newlyReadEarly){
  const src=file.sources.find(x=>x.sourceId===id);
