@@ -1,3 +1,13 @@
+## 14.10.2026 · Einzelredaktion durchgehend bis Lektion 166
+
+- **Zusätzlich Lektionen 163–166** in `kids/akademie/curriculum-editorial-163-166-v1.js` individuell pädagogisch formuliert: Dank für Essen (16:114), nach Lernfehlern weitermachen (94:5–6), Wünsche/maßvoller Umgang (17:29), Stehen im Gebet mit krankheitsbedingter Erleichterung (2:238; **Ibn Qudāmah, al-Mughnī 15/861**). Zwölf weitere eigenständige Altersfassungen 4–5, 6–8 und 9–10 Jahre, mit je vier Lehrabschnitten, eigener Situation, Übung und Quellenabgrenzung.
+- **Wortlautgrenzen korrigiert:** Alte V38-Eintragung `94:5` enthielt 94:5–6; neuer Overlay präzisiert auf 94:5–6. Das an Qurʾān 17:29 in älteren Daten irrtümlich angehängte `إِنَّ` (Anschlusswort aus Vers 17:30) wurde in der Kinderanzeige entfernt. Das alte Quellenregister bleibt als Audit-Historie unangetastet. Forschungsakte: `kids-akademie/research/EDITORIAL_REVIEW_163_166_20261014.md`.
+- **Fiqh-Slot 166:** al-Mughnī, Islamweb 15/861, zusätzlich Qurʾān 2:238 / Ibn Kaṯīr 49/205; `fiqhHumanReviewNeeded=true` und `scientificApproval=false` bleiben. Keine abschließende Rechtsfreigabe.
+- **Voice-Delta:** `kids/data/academy-voice-editorial-163-166-delta-v1.json`: 76 Textkontexte, 0 MP3s/0 Credits, noch nicht im kanonischen Plan. `kids/tools/test-academy-editorial-163-166-v1.cjs` ergänzt; vollständiger Node-/Browser-/CI-Lauf weiter offen.
+- **84/84 statische Struktur-/Text-/Ladereihenfolgetests bestanden** in diesem Teilblock; mit den zuvor geprüften Blöcken 155–162 sind das insgesamt **227/227** solcher schreibgeschützten Abgleiche. Nicht als ausgeführte lokale Node- oder Browser-Tests ausgeben.
+- **Redaktioneller Stand: 166/208**, also **42 individuelle Lektionsentwürfe (167–208)** verbleiben. Die vollständige Quellenprüfung und wissenschaftliche Freigabe aller 624 Altersfassungen bleibt weiterhin offen, momentan **0/624 Freigaben**. Kein Merge, kein Live-Deploy, keine Audioerzeugung.
+- **Nächster Schritt:** Lektionen **167–170**, mit besonderer Vorsicht bei 168 (al-Qadar); Quellen und kindgerechte, nicht deterministisch missverstandene Erklärung überprüfen. Der gesamte neue Block 155–166 liegt im geschützten **Draft-PR #1142** und ist nicht in main oder Besucher-KIDS live.
+
 ## 14.10.2026 · Fortsetzung 159–162, individuelle Kindertexte bis Slot 162
 
 - **Slots 159–162** sind zusätzlich zu 155–158 in `kids/akademie/curriculum-editorial-159-162-v1.js` mit **12 eigenständigen Altersfassungen** eingebunden: Allah danken, Īmān/gute Taten, Aufrichtigkeit, ruhig mit Niederlagen umgehen. Der Script-Loader steht einmalig direkt nach 155–158. Quizfragen, Alters-IDs, Quelle `quran` und Lernfortschritt bleiben unverändert.
