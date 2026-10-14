@@ -258,8 +258,12 @@ def make_book(filename,kind,by_id,ids):
     elements.append(t)
     elements.append(Spacer(1,11*mm))
     elements.append(Paragraph("Originalnummern bleiben unverändert: So lassen sich die Fragen später exakt den Audiodateien zuordnen, ohne den Lernfortschritt zu verlieren.",STYLES["notice"]))
-    for age in AGES:
-        elements.append(PageBreak())
+    for age_idx,age in enumerate(AGES):
+        if age_idx:
+            elements.append(PageBreak())
+        else:
+            elements.append(Spacer(1,8*mm))
+            elements.append(CondPageBreak(82*mm))
         group=groups[age]
         elements.append(Paragraph("Quizfragen  ·  "+AGE_LABEL[age],STYLES["age_head"]))
         elements.append(Paragraph("150 Fragen · nach Themen geordnet · mit Antworten, Erklärungen und Quellen",STYLES["notice"]))
@@ -268,11 +272,12 @@ def make_book(filename,kind,by_id,ids):
         for q in group:
             cat=q["category"]
             if cat!=current:
-                elements.append(CondPageBreak(44*mm))
+                elements.append(CondPageBreak(72*mm))
                 elements.append(Paragraph(clean(cat),STYLES["category"]))
                 current=cat
-            elements.append(question_card(q,age))
-            elements.append(Spacer(1,3.2*mm))
+            # One question + all options + explanation + source must never be
+            # split across pages. KeepTogether prevents ReportLab table-row splits.
+            elements.append(KeepTogether([question_card(q,age), Spacer(1,3.2*mm)]))
     doc.build(elements,
       onFirstPage=lambda canvas,doc:draw_page(canvas,doc,mode),
       onLaterPages=lambda canvas,doc:draw_page(canvas,doc,mode))
