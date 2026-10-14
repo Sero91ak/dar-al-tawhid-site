@@ -18266,223 +18266,223 @@ const additions=
     "voiceApproved": false
   },
   "tawhid-keine-goettliche-macht-fuer-geschoepfe": {
-    "id": "tawhid-keine-goettliche-macht-fuer-geschoepfe",
-    "subject": "aqidah",
-    "pillar": "tawhid",
-    "topic": "Keinen geschaffenen Dingen göttliche Macht zuschreiben",
-    "title": "Tawḥīd · Keinen geschaffenen Dingen göttliche Macht zuschreiben",
-    "lead": "Allah ist einzig.",
-    "goal": "Allah ist einzig. Kein Geschöpf ist ein zweiter Gott.",
-    "quran": {
-      "surah": 112,
-      "ayah": 1,
-      "label": "Qurʾān 112:1",
-      "arabic": "قُلْ هُوَ اللَّهُ أَحَدٌ اللَّهُ الصَّمَدُ لَمْ يَلِدْ وَلَمْ يُولَدْ وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ",
-      "meaning": "Sinngemäß: Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich.",
-      "excerpt": false
-    },
-    "hadith": {
-      "source": "Auf der gelesenen Ibn-Kaṯīr-Seite zu Qurʾān 112:1 wurde kein nummerierter Hadith als Beleg der Stunde übernommen",
-      "text": "Die Stunde bleibt beim Vers. Die ganze Sūrah steht im gespeicherten Ausdruck."
-    },
-    "sourceAudit": {
-      "hadithUrl": "https://www.islamweb.net/ar/library/content/49/1984",
-      "hadithNumber": null,
-      "narrator": null,
-      "authenticity": "Kein nummerierter Hadith als Beleg dieser Stunde übernommen. Weitere Berichte auf der Tafsīr-Seite wurden nicht als Kinderbeleg verwendet.",
-      "quranReference": "112:1",
-      "quranUrl": "https://www.islamweb.net/ar/library/content/49/1984",
-      "quranTextType": "ayah-span-as-printed-on-ibn-kathir-islamweb",
-      "hadithMeaningIsParaphrase": true,
-      "verifiedDate": "2026-10-13",
-      "dorarReRead": false,
-      "numberUnverified": true,
-      "fiqhHumanReviewNeeded": false,
-      "scientificApproval": false,
-      "note": "Die ganze Sūrah steht im gespeicherten Ausdruck. Wir fügen keine Polemik und kein Bild hinzu. Eine Hadithnummer zum Vorzug der Sūrah wird nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
-      "editorialScopeNote": "Die ganze Sūrah steht im gespeicherten Ausdruck. Wir fügen keine Polemik und kein Bild hinzu. Eine Hadithnummer zum Vorzug der Sūrah wird nicht ergänzt."
-    },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
-    "sample": "Allah ist einzig.",
-    "ageText": {
-      "4-5": {
-        "goal": "Allah ist einzig.",
-        "intro": "Allah ist einzig. Allah ist der, auf den man angewiesen ist. Stell dir vor: Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Heute üben wir: Wir wiederholen den deutschen Sinn und erzeugen keine Rezitation. Die arabischen Worte spricht die Lehrperson.",
-        "lines": [
-          "Allah ist einzig.",
-          "Allah ist der, auf den man angewiesen ist.",
-          "Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah.",
-          "Wir wiederholen den deutschen Sinn und erzeugen keine Rezitation."
-        ],
-        "evidence": "Wir lernen mit Qurʾān 112:1. Allah ist einzig.",
-        "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1984. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 112:1. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
-        "terms": [
-          {
-            "say": "aḥad",
-            "de": "Einer, einzig"
-          },
-          {
-            "say": "kufuʾ",
-            "de": "gleich, ebenbürtig"
-          }
-        ],
-        "situation": "Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah.",
-        "practice": "Wir wiederholen den deutschen Sinn und erzeugen keine Rezitation.",
-        "summary": "Allah ist einzig. Die arabischen Worte spricht die Lehrperson.",
-        "audioScript": "Keinen geschaffenen Dingen göttliche Macht zuschreiben. Allah ist einzig. Allah ist der, auf den man angewiesen ist. Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Wir wiederholen den deutschen Sinn und erzeugen keine Rezitation."
-      },
-      "6-8": {
-        "goal": "Allah ist einzig.",
-        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Allah ist einzig. Wir lesen Qurʾān 112:1. Der Vers bedeutet sinngemäß: Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich. So kann das im Alltag aussehen: Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Die Aufgabe: Wir wiederholen den deutschen Sinn und erzeugen keine Rezitation. aḥad bedeutet: Einer, einzig. kufuʾ bedeutet: gleich, ebenbürtig.",
-        "lines": [
-          "Qurʾān 112:1 ist die gelesene Stelle.",
-          "Allah ist der, auf den man angewiesen ist.",
-          "Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah.",
-          "Die arabischen Worte spricht die Lehrperson."
-        ],
-        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 112:1. Sinngemäß: Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich.",
-        "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1984. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 112:1. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
-        "terms": [
-          {
-            "say": "aḥad",
-            "de": "Einer, einzig"
-          },
-          {
-            "say": "kufuʾ",
-            "de": "gleich, ebenbürtig"
-          }
-        ],
-        "situation": "Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah.",
-        "practice": "Wir wiederholen den deutschen Sinn und erzeugen keine Rezitation.",
-        "summary": "Qurʾān 112:1 trägt diese Stunde. Allah ist der, auf den man angewiesen ist.",
-        "audioScript": "Keinen geschaffenen Dingen göttliche Macht zuschreiben. Allah ist der, auf den man angewiesen ist. Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Wir wiederholen den deutschen Sinn und erzeugen keine Rezitation."
-      },
-      "9-10": {
-        "goal": "Ich kann das Thema „Keinen geschaffenen Dingen göttliche Macht zuschreiben“ anhand von Qurʾān 112:1 erklären und ein Alltagsbeispiel beurteilen.",
-        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Keinen geschaffenen Dingen göttliche Macht zuschreiben. Allah ist einzig. In Qurʾān 112:1 lernen wir sinngemäß: Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich. aḥad bedeutet Einer, einzig. kufuʾ bedeutet gleich, ebenbürtig. Stell dir diese Situation vor: Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Welcher nächste Schritt ist gut? Wir wiederholen den deutschen Sinn und erzeugen keine Rezitation. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
-        "lines": [
-          "Unsere Qurʾān-Stelle ist Qurʾān 112:1.",
-          "Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich.",
-          "Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah.",
-          "Wir wiederholen den deutschen Sinn und erzeugen keine Rezitation."
-        ],
-        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 112:1. Sinngemäß: Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich.",
-        "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1984. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 112:1. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
-        "terms": [
-          {
-            "say": "aḥad",
-            "de": "Einer, einzig"
-          },
-          {
-            "say": "kufuʾ",
-            "de": "gleich, ebenbürtig"
-          }
-        ],
-        "situation": "Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah.",
-        "practice": "Wir wiederholen den deutschen Sinn und erzeugen keine Rezitation.",
-        "summary": "Allah ist einzig. Wir wiederholen den deutschen Sinn und erzeugen keine Rezitation.",
-        "audioScript": "Keinen geschaffenen Dingen göttliche Macht zuschreiben. Allah ist einzig. Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich. Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Wir wiederholen den deutschen Sinn und erzeugen keine Rezitation."
-      }
-    },
-    "questions": {
-      "4-5": [
+  "id": "tawhid-keine-goettliche-macht-fuer-geschoepfe",
+  "subject": "aqidah",
+  "pillar": "tawhid",
+  "topic": "Keinen geschaffenen Dingen göttliche Macht zuschreiben",
+  "title": "Tawḥīd · Keinen geschaffenen Dingen göttliche Macht zuschreiben",
+  "lead": "Allah ist einzig.",
+  "goal": "Allah ist einzig. Kein Geschöpf ist ein zweiter Gott.",
+  "quran": {
+    "surah": 112,
+    "ayah": 1,
+    "label": "Qurʾān 112:1",
+    "arabic": "قُلْ هُوَ اللَّهُ أَحَدٌ اللَّهُ الصَّمَدُ لَمْ يَلِدْ وَلَمْ يُولَدْ وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ",
+    "meaning": "Sinngemäß: Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich.",
+    "excerpt": false
+  },
+  "hadith": {
+    "source": "Auf der gelesenen Ibn-Kaṯīr-Seite zu Qurʾān 112:1 wurde kein nummerierter Hadith als Beleg der Stunde übernommen",
+    "text": "Die Stunde bleibt beim Vers. Die ganze Sūrah steht im gespeicherten Ausdruck."
+  },
+  "sourceAudit": {
+    "hadithUrl": "https://www.islamweb.net/ar/library/content/49/1984",
+    "hadithNumber": null,
+    "narrator": null,
+    "authenticity": "Kein nummerierter Hadith als Beleg dieser Stunde übernommen. Weitere Berichte auf der Tafsīr-Seite wurden nicht als Kinderbeleg verwendet.",
+    "quranReference": "112:1",
+    "quranUrl": "https://www.islamweb.net/ar/library/content/49/1984",
+    "quranTextType": "ayah-span-as-printed-on-ibn-kathir-islamweb",
+    "hadithMeaningIsParaphrase": true,
+    "verifiedDate": "2026-10-13",
+    "dorarReRead": false,
+    "numberUnverified": true,
+    "fiqhHumanReviewNeeded": false,
+    "scientificApproval": false,
+    "note": "Die ganze Sūrah steht im gespeicherten Ausdruck. Wir fügen keine Polemik und kein Bild hinzu. Eine Hadithnummer zum Vorzug der Sūrah wird nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+    "editorialScopeNote": "Die ganze Sūrah steht im gespeicherten Ausdruck. Wir fügen keine Polemik und kein Bild hinzu. Eine Hadithnummer zum Vorzug der Sūrah wird nicht ergänzt."
+  },
+  "hint": "Die arabischen Worte spricht die Lehrperson.",
+  "sample": "Allah ist einzig.",
+  "ageText": {
+    "4-5": {
+      "goal": "Allah ist einzig.",
+      "intro": "Allah ist einzig. Allah ist der, auf den man angewiesen ist. Stell dir vor: Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Heute üben wir: Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich. Die arabischen Worte spricht die Lehrperson.",
+      "lines": [
+        "Allah ist einzig.",
+        "Allah ist der, auf den man angewiesen ist.",
+        "Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah.",
+        "Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich."
+      ],
+      "evidence": "Wir lernen mit Qurʾān 112:1. Allah ist einzig.",
+      "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1984. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 112:1. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
+      "terms": [
         {
-          "type": "choice",
-          "prompt": "Was lernen wir heute über Keinen geschaffenen Dingen göttliche Macht zuschreiben?",
-          "options": [
-            "Neid fühlt sich eng an.",
-            "Allah ist einzig."
-          ],
-          "correct": 1,
-          "hint": "Denke an unsere heutige Stunde.",
-          "explain": "Mā schāʾ Allāh! Allah ist einzig."
+          "say": "aḥad",
+          "de": "Einer, einzig"
         },
         {
-          "type": "choice",
-          "prompt": "Was können wir heute üben?",
-          "options": [
-            "Wir wiederholen den deutschen Sinn und erzeugen keine Rezitation.",
-            "Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz."
-          ],
-          "correct": 0,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "say": "kufuʾ",
+          "de": "gleich, ebenbürtig"
         }
       ],
-      "6-8": [
+      "situation": "Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah.",
+      "practice": "Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich.",
+      "summary": "Allah ist einzig. Die arabischen Worte spricht die Lehrperson.",
+      "audioScript": "Keinen geschaffenen Dingen göttliche Macht zuschreiben. Allah ist einzig. Allah ist der, auf den man angewiesen ist. Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich."
+    },
+    "6-8": {
+      "goal": "Allah ist einzig.",
+      "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Allah ist einzig. Wir lesen Qurʾān 112:1. Der Vers bedeutet sinngemäß: Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich. So kann das im Alltag aussehen: Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Die Aufgabe: Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich. aḥad bedeutet: Einer, einzig. kufuʾ bedeutet: gleich, ebenbürtig.",
+      "lines": [
+        "Qurʾān 112:1 ist die gelesene Stelle.",
+        "Allah ist der, auf den man angewiesen ist.",
+        "Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah.",
+        "Die arabischen Worte spricht die Lehrperson."
+      ],
+      "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 112:1. Sinngemäß: Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich.",
+      "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1984. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 112:1. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
+      "terms": [
         {
-          "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Keinen geschaffenen Dingen göttliche Macht zuschreiben?",
-          "options": [
-            "Allah ist einzig.",
-            "Neid fühlt sich eng an."
-          ],
-          "correct": 0,
-          "hint": "Worum ging es in der Stunde?",
-          "explain": "Mā schāʾ Allāh! Allah ist einzig."
+          "say": "aḥad",
+          "de": "Einer, einzig"
         },
         {
-          "type": "choice",
-          "prompt": "Welche Handlung gehört zu unserer Übung?",
-          "options": [
-            "Wir wiederholen den deutschen Sinn und erzeugen keine Rezitation.",
-            "Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz."
-          ],
-          "correct": 0,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
-        },
-        {
-          "type": "text",
-          "prompt": "Was möchtest du dir aus Qurʾān 112:1 merken?",
-          "sample": "Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich.",
-          "hint": "Erkläre die Stelle in eigenen Worten.",
-          "explain": "Mā schāʾ Allāh! Wir bleiben bei dem, was wir aus dem Qurʾān lernen."
+          "say": "kufuʾ",
+          "de": "gleich, ebenbürtig"
         }
       ],
-      "9-10": [
-        {
-          "type": "text",
-          "prompt": "Erkläre in eigenen Worten, was wir aus Qurʾān 112:1 lernen.",
-          "sample": "Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich.",
-          "hint": "Denke an die Bedeutung der Stelle.",
-          "explain": "Mā schāʾ Allāh! Du hast den Vers aufmerksam erklärt."
-        },
-        {
-          "type": "text",
-          "prompt": "Was wäre in dieser Situation ein guter Schritt? Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah.",
-          "sample": "Wir wiederholen den deutschen Sinn und erzeugen keine Rezitation.",
-          "hint": "Denke an unsere Übung.",
-          "explain": "Allāhumma bārik! Du hast einen passenden Schritt überlegt."
-        },
-        {
-          "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
-          "options": [
-            "Neid fühlt sich eng an.",
-            "Allah ist einzig."
-          ],
-          "correct": 1,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
-        }
-      ]
+      "situation": "Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah.",
+      "practice": "Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich.",
+      "summary": "Qurʾān 112:1 trägt diese Stunde. Allah ist der, auf den man angewiesen ist.",
+      "audioScript": "Keinen geschaffenen Dingen göttliche Macht zuschreiben. Allah ist der, auf den man angewiesen ist. Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich."
     },
-    "terms": [
+    "9-10": {
+      "goal": "Ich kann das Thema „Keinen geschaffenen Dingen göttliche Macht zuschreiben“ anhand von Qurʾān 112:1 erklären und ein Alltagsbeispiel beurteilen.",
+      "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Keinen geschaffenen Dingen göttliche Macht zuschreiben. Allah ist einzig. In Qurʾān 112:1 lernen wir sinngemäß: Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich. aḥad bedeutet Einer, einzig. kufuʾ bedeutet gleich, ebenbürtig. Stell dir diese Situation vor: Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Welcher nächste Schritt ist gut? Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+      "lines": [
+        "Unsere Qurʾān-Stelle ist Qurʾān 112:1.",
+        "Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich.",
+        "Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah.",
+        "Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich."
+      ],
+      "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 112:1. Sinngemäß: Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich.",
+      "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1984. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 112:1. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
+      "terms": [
+        {
+          "say": "aḥad",
+          "de": "Einer, einzig"
+        },
+        {
+          "say": "kufuʾ",
+          "de": "gleich, ebenbürtig"
+        }
+      ],
+      "situation": "Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah.",
+      "practice": "Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich.",
+      "summary": "Allah ist einzig. Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich.",
+      "audioScript": "Keinen geschaffenen Dingen göttliche Macht zuschreiben. Allah ist einzig. Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich. Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich."
+    }
+  },
+  "questions": {
+    "4-5": [
       {
-        "say": "aḥad",
-        "de": "Einer, einzig"
+        "type": "choice",
+        "prompt": "Was lernen wir heute über Keinen geschaffenen Dingen göttliche Macht zuschreiben?",
+        "options": [
+          "Neid fühlt sich eng an.",
+          "Allah ist einzig."
+        ],
+        "correct": 1,
+        "hint": "Denke an unsere heutige Stunde.",
+        "explain": "Mā schāʾ Allāh! Allah ist einzig."
       },
       {
-        "say": "kufuʾ",
-        "de": "gleich, ebenbürtig"
+        "type": "choice",
+        "prompt": "Was können wir heute üben?",
+        "options": [
+          "Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich.",
+          "Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz."
+        ],
+        "correct": 0,
+        "hint": "Erinnere dich an unsere Übung.",
+        "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
       }
     ],
-    "practice": "Wir wiederholen den deutschen Sinn und erzeugen keine Rezitation.",
-    "summary": "Allah ist einzig. Allah ist der, auf den man angewiesen ist.",
-    "audioScript": "Keinen geschaffenen Dingen göttliche Macht zuschreiben. Allah ist einzig. Allah ist der, auf den man angewiesen ist. Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Wir wiederholen den deutschen Sinn und erzeugen keine Rezitation.",
-    "voiceApproved": false
+    "6-8": [
+      {
+        "type": "choice",
+        "prompt": "Welche Aussage passt zu unserem Thema Keinen geschaffenen Dingen göttliche Macht zuschreiben?",
+        "options": [
+          "Allah ist einzig.",
+          "Neid fühlt sich eng an."
+        ],
+        "correct": 0,
+        "hint": "Worum ging es in der Stunde?",
+        "explain": "Mā schāʾ Allāh! Allah ist einzig."
+      },
+      {
+        "type": "choice",
+        "prompt": "Welche Handlung gehört zu unserer Übung?",
+        "options": [
+          "Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich.",
+          "Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz."
+        ],
+        "correct": 0,
+        "hint": "Erinnere dich an das Beispiel.",
+        "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+      },
+      {
+        "type": "text",
+        "prompt": "Was möchtest du dir aus Qurʾān 112:1 merken?",
+        "sample": "Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich.",
+        "hint": "Erkläre die Stelle in eigenen Worten.",
+        "explain": "Mā schāʾ Allāh! Wir bleiben bei dem, was wir aus dem Qurʾān lernen."
+      }
+    ],
+    "9-10": [
+      {
+        "type": "text",
+        "prompt": "Erkläre in eigenen Worten, was wir aus Qurʾān 112:1 lernen.",
+        "sample": "Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich.",
+        "hint": "Denke an die Bedeutung der Stelle.",
+        "explain": "Mā schāʾ Allāh! Du hast den Vers aufmerksam erklärt."
+      },
+      {
+        "type": "text",
+        "prompt": "Was wäre in dieser Situation ein guter Schritt? Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah.",
+        "sample": "Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich.",
+        "hint": "Denke an unsere Übung.",
+        "explain": "Allāhumma bārik! Du hast einen passenden Schritt überlegt."
+      },
+      {
+        "type": "choice",
+        "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+        "options": [
+          "Neid fühlt sich eng an.",
+          "Allah ist einzig."
+        ],
+        "correct": 1,
+        "hint": "Was ist das Thema dieser Lektion?",
+        "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+      }
+    ]
   },
+  "terms": [
+    {
+      "say": "aḥad",
+      "de": "Einer, einzig"
+    },
+    {
+      "say": "kufuʾ",
+      "de": "gleich, ebenbürtig"
+    }
+  ],
+  "practice": "Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich.",
+  "summary": "Allah ist einzig. Allah ist der, auf den man angewiesen ist.",
+  "audioScript": "Keinen geschaffenen Dingen göttliche Macht zuschreiben. Allah ist einzig. Allah ist der, auf den man angewiesen ist. Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich.",
+  "voiceApproved": false
+},
   "iman-glaube-und-gute-worte": {
     "id": "iman-glaube-und-gute-worte",
     "subject": "aqidah",
