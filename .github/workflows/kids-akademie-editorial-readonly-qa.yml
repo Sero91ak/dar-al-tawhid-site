@@ -74,6 +74,8 @@ jobs:
         run: |
           node --check kids/akademie/curriculum-foundation-fiqh-142-v1.js
           node kids/tools/test-academy-foundation-fiqh-142-v1.cjs
+      - name: Check Fiqh 166 source and voice consistency
+        run: node kids/tools/test-academy-fiqh-166-sources-v1.cjs
       - name: Check primary Fiqh source registry
         run: node kids/tools/test-academy-primary-source-registry-v1.cjs
       - name: Run all 14 small-batch unit tests
