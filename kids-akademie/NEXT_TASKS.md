@@ -1,3 +1,10 @@
+## 14.10.2026 · Fiqh-Lektion 142 nachgearbeitet
+
+- **Slot 142 – fünf Gebetsnamen:** Statt einer Übung über fehlende Quellenangaben lernen die Kinder jetzt tatsächlich **Faǧr, Ẓuhr, ʿAṣr, Maġrib, ʿIšāʾ**. Drei Altersfassungen, acht Quizfragen, sprechbare Texte und Text-Audioplan aktualisiert. Klassische Quelle `al-Mughnī`, Bd. 1, S. 224 ff. (Islamweb 15/425, 15/428, 15/429).
+- Prüfakte: `kids-akademie/research/INDEPENDENT_FIQH_REVIEW_142.md`.
+- Die Quellenabgleiche **106, 118, 130, 142 und 154** bleiben jeweils **ohne abschließende menschliche Freigabe**; `fiqhHumanReviewNeeded=true` bleibt an allen 17 vorgeschriebenen Fiqh-Lektionen gesetzt. Kein Audio generiert.
+- Als Nächstes die Gebetsabfolge **166, 174, 180, 186, 192, 198, 201, 204, 205** quellenkritisch und altersgerecht bearbeiten. Zusätzlich werden die älteren 34 ungeprüften und 50 lediglich mit Metadaten belegten Lektionen geprüft.
+
 ## 14.10.2026 · Fiqh-Lektion 154 nachgearbeitet
 
 - **Niyyah (Slot 154):** Kindertext enthielt unklare Übung „Wir sagen den Namen laut“. Anhand Ibn Qudāmah, `al-Mughnī`, Bd. 1, S. 278 (Islamweb 15/542) durch drei Altersfassungen, acht Quizfragen und alle zugehörigen ungenerierten Voice-Texte ersetzt. **Die Absicht ist im Herzen; die Lernkarte ist keine Gebetsformel.**
