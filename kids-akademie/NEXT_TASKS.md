@@ -1,3 +1,14 @@
+## 14.10.2026 · Quellenbindung 25–28 · Registry 161
+
+- **Tatsächlich auf dem geschützten GitHub-Branch committed:** vier bestehende Lektions-IDs **25–28** erhielten sieben direkte Quellenverknüpfungen und zwei neue klassische Quellenobjekte, ohne Lektions-IDs, Kindertexte, Quizfragen, Fortschritt oder Audio zu verändern. `SOURCE_REGISTRY.json` enthält nach der Änderung **161 eindeutige Source-IDs**, exakt passend zu `sourceCount`.
+- **25 Mein Versprechen:** Qurʾān 23:8, Ibn al-Ǧawzī `SRC-CORE9-IBNALJAWZI-1676`, und authentischer Buḫārī 33 / Muslim 59 `SRC-CORE9-BUKHARI-33`, beides **zuvor** für Lektion 9 gelesen und jetzt wiederverwendet.
+- **26 Erst nachdenken:** aṭ-Ṭabarī zu Qurʾān 17:53 `SRC-CORE6-TABARI-3021` sowie Buḫārī 6018 / Muslim 47 `SRC-CORE6-BUKHARI-6018`, bereits für Lektion 6 überprüft. Gutes Reden nicht als Schweigezwang bei Gefahr oder Mobbing lehren.
+- **27 Wuḍūʾ Kopf und Füße:** **neu und tatsächlich in digitalem Primärtext geprüft**, Ibn Qudāmah `al-Mughnī`, Bd. 1 S. **87**, Islamweb **15/141** zum Streichen über den Kopf und **S. 90–92**, Islamweb **15/149** zur Waschung der Füße bis zu den Knöcheln; IDs `SRC-FIQH27-MUGHNI-141` und `SRC-FIQH27-MUGHNI-149`. Verschiedene Ausführungen zu Umfang und Sonderfällen **nicht** als einheitliche Kinderpflicht ausgeben.
+- **28 Die Gesandten:** zuvor authentisch geprüfter Ḥadīṯ Ǧibrīl aus Muslim 8, `SRC-CORE8-MUSLIM-8`, wiederverwendet.
+- **Forschungsakte:** `kids-akademie/research/SCIENTIFIC_CORE_025_028_SOURCE_BINDINGS_20261014.md`. **Regression ergänzt:** `kids/tools/test-academy-primary-source-registry-v1.cjs` prüft alle sieben Bindungen, direkte Seitenlinks, die zwei hanbalitischen Originalfragmente, exakte Seiten/Nummern, unveränderte Unterrichts-IDs und Sperrstatus.
+- **Wissenschaftliche Grenze:** Quellenindexierung ist **keine** endgültige Prüfung der vier Kindertexte, noch keine Quellenkorrektur jeder Besucheranzeige. `LESSON_STATUS.json` bleibt unfreigegeben. **208/208 Entwurfsslots, 624/624 Altersentwürfe, 0/624 wissenschaftlich freigegeben.** Kein Merge auf `main`, kein Live-Deploy, kein Copilot, keine Audioerzeugung. Ein tatsächlicher Node-/CI-Erfolg ist separat zu überprüfen.
+- **Nächster Arbeitsblock:** Quellentreue Zuordnung **29–32**, danach 33–36; bei Fiqh 30 nur eine echte klassische Belegstelle und nicht bloß allgemeines, unbelegtes Gebetswissen verwenden.
+
 ## 14.10.2026 · Quellenbindung der Lektionen 13–16 abgeschlossen · Registry 156
 
 - **Echte Änderung auf geschütztem Branch:** Vier vorhandene Unterrichts-IDs erhielten direkte, nachvollziehbare Quellenbindungen: **13** Geduldig warten → `SRC-CORE5-IBNKATHIR-184` (Ibn Kaṯīr, Qurʾān 2:153); **14** Salām erwidern → `SRC-CORE2-QURTUBI-1095` (al-Qurṭubī, Qurʾān 4:86); **15** Saubere Kleidung → **neu** `SRC-FIQH15-MUGHNI-783` (Ibn Qudāmah, `al-Mughnī`, Bd. 1 S. 401, Islamweb 15/783); **16** Allah ist Einer → `SRC-V38-112-1` (Ibn Kaṯīr, vollständige Sūrah 112:1–4).
