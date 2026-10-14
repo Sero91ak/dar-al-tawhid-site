@@ -36,6 +36,10 @@ const required={
  "SRC-FIQH201-MUGHNI-599":["islamweb.net","15/599"],
  "SRC-FIQH201-MUGHNI-602":["islamweb.net","15/602"]
 },
+"fiqh-tashahhud":{
+ "SRC-FIQH204-MUGHNI-611":["islamweb.net","15/611"],
+ "SRC-FIQH204-MUGHNI-618":["islamweb.net","15/618"]
+},
 "fiqh-taslim":{
  "SRC-FIQH205-MUGHNI-621":["islamweb.net","15/621"]
 },
@@ -51,7 +55,7 @@ const required={
  "SRC-FIQH206-MUGHNI-729":["islamweb.net","15/729"]
 }};
 assert.equal(file.sourceCount,file.sources.length,"sourceCount metadata must match actual source IDs");
-const indexedOnly=["SRC-FIQH201-MUGHNI-599","SRC-FIQH201-MUGHNI-602","SRC-FIQH205-MUGHNI-621","SRC-FIQH207-MUGHNI-1713","SRC-FIQH208-MUGHNI-1386","SRC-FIQH206-MUGHNI-729","SRC-FIQH208-MUGHNI-1754","SRC-FIQH208-MUGHNI-1800"];
+const indexedOnly=["SRC-FIQH201-MUGHNI-599","SRC-FIQH201-MUGHNI-602","SRC-FIQH205-MUGHNI-621","SRC-FIQH207-MUGHNI-1713","SRC-FIQH208-MUGHNI-1386","SRC-FIQH206-MUGHNI-729","SRC-FIQH208-MUGHNI-1754","SRC-FIQH208-MUGHNI-1800","SRC-FIQH204-MUGHNI-611","SRC-FIQH204-MUGHNI-618"];
 for(const id of indexedOnly){
  const e=file.sources.find(x=>x.sourceId===id);
  assert.ok(e,"Indexed primary-source gap missing: "+id);
