@@ -29,7 +29,13 @@ for(const id of ids){
  assert.equal(l.sourceAudit.scientificApproval,false);
  assert.equal(l.sourceAudit.fiqhHumanReviewNeeded,true);
  assert.deepEqual(l.questions,base[id].questions);
- assert.deepEqual(l.quran,base[id].quran);
+ if(id==="fiqh-fehler-beim-ueben"){
+  assert.equal(l.quran.surah,2);
+  assert.equal(l.quran.ayah,43);
+  assert.equal(l.quran.label,"Qurʾān 2:43");
+  assert.match(l.quran.arabic,/وَارْكَعُوا/);
+  assert.doesNotMatch(l.quran.meaning,/Suǧūd as-Sahw|Vergessenheitsniederwerfung/);
+ }else assert.equal(l.quran,base[id].quran);
  for(const age of ["4-5","6-8","9-10"]){
   const d=l.ageText[age],intro=d.lines.join(" ");
   assert.equal(d.lines.length,4);
