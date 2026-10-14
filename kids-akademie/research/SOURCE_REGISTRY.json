@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "generatedOn": "2026-10-14",
   "warning": "V38 verse spans were read on Islamweb Ibn Kathir pages on 2026-10-13. Hadith numbers were not added. Dorar was not re-read. Scientific approval is not claimed.",
-  "sourceCount": 177,
+  "sourceCount": 180,
   "sources": [
     {
       "sourceId": "SRC-BANK-001",
@@ -466,7 +466,8 @@
       "checkedOn": "2026-10-13",
       "checkedBy": "page fetched from islamweb.net library content 49",
       "lessonIds": [
-        "iman-quran-als-offenbarung"
+        "iman-quran-als-offenbarung",
+        "aqidah-quran-allahs-wort"
       ],
       "binding": "verse span for kids academy draft",
       "topic": "Der Qurʾān als Offenbarung"
@@ -4511,6 +4512,84 @@
       ],
       "binding": "authentic Sunnah for ritual Taharah distinguished from ordinary tidiness",
       "topic": "Ṭahārah und Glauben"
+    },
+    {
+      "sourceId": "SRC-CORE47-BUKHARI-5027",
+      "key": "learn-and-teach-quran",
+      "author": "al-Buḫārī",
+      "work": "Ṣaḥīḥ al-Buḫārī",
+      "narrator": "ʿUṯmān ibn ʿAffān",
+      "arabic": "خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ",
+      "germanTranslation": null,
+      "locus": "Der Nutzen des Lernens und Lehrens des Qurʾān; kein synthetisch erzeugtes Rezitationsbeispiel",
+      "volume": null,
+      "page": null,
+      "chapter": "Faḍāʾil al-Qurʾān",
+      "number": "5027",
+      "edition": "Dorar 151215, authentische Bukhari-Wiedergabe",
+      "directLink": "https://dorar.net/hadith/sharh/151215#:~:text=%D8%AE%D9%8A%D8%B1%D9%83%D9%85%20%D9%85%D9%86%20%D8%AA%D8%B9%D9%84%D9%85%20%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86",
+      "authenticityNote": "Am 14.10.2026 den authentischen al-Buḫārī-Bericht 5027 von ʿUṯmān ibn ʿAffān direkt aus Dorar 151215 gelesen. Keine gesondert geprüfte gedruckte Edition; kein selbst erfundenes besonderes Vorzugsversprechen für eine bestimmte Lektion.",
+      "safeApplication": "Qurʾān mit echten menschlichen Rezitationen und sachkundiger Lehrperson lernen, Kinder nicht für Schwierigkeiten, Sprachfehler oder Behinderung bloßstellen und keine generierte künstliche Qurʾān-Rezitation anbieten.",
+      "verificationStatus": "primary-report-direct-read-2026-10-14",
+      "checkedOn": "2026-10-14",
+      "checkedBy": "Dorar 151215 Bukhari 5027 unmittelbar eingesehen",
+      "lessonIds": [
+        "aqidah-quran-allahs-wort"
+      ],
+      "binding": "authenticated Sunnah for Quran learning, separated from Quran 2:2",
+      "topic": "Qurʾān lernen und lehren"
+    },
+    {
+      "sourceId": "SRC-CORE48-IBNABIHATIM-353",
+      "key": "tafsir-3-59-adam-creation",
+      "author": "Ibn Abī Ḥātim",
+      "work": "Tafsīr al-Qurʾān al-ʿAẓīm",
+      "narrator": null,
+      "arabic": "إِنَّ مَثَلَ عِيسَى عِنْدَ اللَّهِ كَمَثَلِ آدَمَ خَلَقَهُ مِنْ تُرَابٍ ثُمَّ قَالَ لَهُ كُنْ فَيَكُونُ",
+      "germanTranslation": null,
+      "locus": "Tafsīr Sūrat Āl ʿImrān 3:59; Vergleich von Allahs Erschaffung Ādams und ʿĪsās",
+      "volume": "2",
+      "page": "665–666",
+      "chapter": "Qurʾān 3:59 und Allahs Schöpfungsmacht",
+      "number": null,
+      "edition": "Islamweb Tafsīr Ibn Abī Ḥātim 218/353",
+      "directLink": "https://islamweb.net/ar/library/content/218/353#:~:text=%D8%A5%D9%86%20%D9%85%D8%AB%D9%84%20%D8%B9%D9%8A%D8%B3%D9%89%20%D8%B9%D9%86%D8%AF%20%D8%A7%D9%84%D9%84%D9%87",
+      "authenticityNote": "Am 14.10.2026 arabischen Tafsīr Ibn Abī Ḥātim zu Qurʾān 3:59 auf Islamweb direkt gelesen. Hier sind historische Deutungen und Überlieferungen enthalten; deren Isnād wird nicht pauschal als authentisch zertifiziert. Der Qurʾān-Wortlaut ist klar vom Tafsīr zu unterscheiden.",
+      "safeApplication": "Die Geschichte Ādams nur anhand Qurʾān und gesicherter Sunnah erzählen, keine ungesicherten Details über das Verborgene, kein Bild von Ādam oder spekulative Rekonstruktion der Schöpfung erfinden. Der Vers betrifft einen Vergleich mit ʿĪsā; diesen Kontext nicht auslassen.",
+      "verificationStatus": "primary-page-direct-read-2026-10-14",
+      "checkedOn": "2026-10-14",
+      "checkedBy": "Islamweb Ibn Abī Ḥātim 218/353 direkt eingesehen",
+      "lessonIds": [
+        "aqidah-sirah-adam-erschoepfung"
+      ],
+      "binding": "classical tafsir for Quran 3:59, separate from authentic Adam greeting hadith",
+      "topic": "Ādams Erschaffung"
+    },
+    {
+      "sourceId": "SRC-CORE48-BUKHARI-3326",
+      "key": "adam-greeting-angels",
+      "author": "al-Buḫārī",
+      "work": "Ṣaḥīḥ al-Buḫārī",
+      "narrator": "Abū Hurayrah",
+      "arabic": "فَقَالَ السَّلَامُ عَلَيْكُمْ فَقَالُوا السَّلَامُ عَلَيْكَ وَرَحْمَةُ اللَّهِ",
+      "germanTranslation": null,
+      "locus": "Bericht über Ādam und den Friedensgruß gegenüber Engeln",
+      "volume": null,
+      "page": null,
+      "chapter": "Allah erschuf Ādam und lehrte den Salām",
+      "number": "3326; auch Muslim 2841",
+      "edition": "Dorar 12842, al-Buḫārī 3326 authentischer Bericht",
+      "directLink": "https://dorar.net/hadith/sharh/12842#:~:text=%D9%81%D9%8E%D9%82%D9%8E%D8%A7%D9%84%D9%8E%20%D8%A7%D9%84%D8%B3%D9%8E%D9%91%D9%84%D9%8E%D8%A7%D9%85%D9%8F",
+      "authenticityNote": "Am 14.10.2026 authentischen Bukhari 3326 digital bei Dorar 12842 direkt abgeglichen. Die Daror-Seite gibt eine andere Bukhari-Wiedergabe mit Editionsnummer 6227 wieder; hier ist ausdrücklich die als 3326 bezeichnete al-Buḫārī-Fassung und ihr Sinn zum Gruß erfasst. Details zur Gestalt Ādams und zur unsichtbaren Welt für kleine Kinder nicht frei ausschmücken.",
+      "safeApplication": "Liebevolle Einführung in Allahs Erschaffung Ādams und den Salām. Keine visuellen Abbilder von Propheten, Engeln oder Allah und keine spekulativen Details über die Welt des Verborgenen. Der Bericht ist vom Qurʾān 3:59 getrennt.",
+      "verificationStatus": "primary-report-direct-read-2026-10-14",
+      "checkedOn": "2026-10-14",
+      "checkedBy": "Dorar 12842 Bukhari 3326 Eintrag unmittelbar überprüft",
+      "lessonIds": [
+        "aqidah-sirah-adam-erschoepfung"
+      ],
+      "binding": "authenticated Adam greeting Sunnah distinct from Qurʾān 3:59",
+      "topic": "Ādam und die Begrüßung der Engel"
     }
   ]
 }
