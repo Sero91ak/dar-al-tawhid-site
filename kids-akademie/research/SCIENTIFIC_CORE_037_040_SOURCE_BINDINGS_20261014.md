@@ -22,6 +22,6 @@
 - **Grenze:** Die im Basisinhalt angezeigte Qurʾān-Stelle 2:3 bezieht sich ausdrücklich auf das Verborgene, nennt aber **nicht vollständig die sechs Glaubenssäulen**. Das ist der Grund, den Ḥadīṯ separat als direkten Beleg zu führen. Keine frei erfundenen Engel- oder Prophetenbilder.
 
 ## Technische Bilanz
-- Register `kids-akademie/research/SOURCE_REGISTRY.json`: **170 eindeutige Source-IDs** (168 davor), fünf reuse-Bindungen und zwei neue authentisch digital nachgelesene Ḥadīṯ-Referenzen. Quellenmetadaten zur Engel-/Prophetenverehrung respektvoll geprüft; Abkürzung eines Ehrentitels beim Engel in 37 korrigiert.
+- Register `kids-akademie/research/SOURCE_REGISTRY.json`: **170 eindeutige Source-IDs** (168 davor), fünf reuse-Bindungen und zwei neue authentisch digital nachgelesene Ḥadīṯ-Referenzen. Quellenmetadaten zur Ǧibrīl-Nachbarschaftsüberlieferung korrigiert; Abkürzung eines Ehrentitels beim Engel in 37 korrigiert.
 - Keine erfundenen neuen Lektionen. Alle alten IDs und Quizfelder erhalten, `sourceAudit.scientificApproval=false`. Die Verknüpfung ersetzt **nicht** die unabhängige Komplettprüfung von Originaltext, Altersdidaktik, Quiz und Fiqh-Ausnahmen.
 - Nächste Quellenrunde 41–44, danach 45–48. **208 Lektionsentwürfe, 624 Altersfassungen, wissenschaftlich 0/624 abschließend freigegeben**. Kein Copilot, kein Merge nach `main`, keine Audioerzeugung, keine TTS-Credits.
