@@ -32,6 +32,18 @@ const required={
 "fiqh-absicht-zum-gebet":{
  "SRC-FIQH154-MUGHNI-542":["islamweb.net","15/542"]
 },
+"fiqh-takbirat-al-ihram":{
+ "SRC-FIQH174-MUGHNI-533":["islamweb.net","15/533"]
+},
+"fiqh-quran-rezitation-im-gebet":{
+ "SRC-FIQH180-MUGHNI-553":["islamweb.net","15/553"]
+},
+"fiqh-ruku-kennenlernen":{
+ "SRC-FIQH186-MUGHNI-570":["islamweb.net","15/570"]
+},
+"fiqh-aus-dem-ruku-aufrichten":{
+ "SRC-FIQH192-MUGHNI-574":["islamweb.net","15/574"]
+},
 "fiqh-zwischen-niederwerfungen-sitzen":{
  "SRC-FIQH201-MUGHNI-599":["islamweb.net","15/599"],
  "SRC-FIQH201-MUGHNI-602":["islamweb.net","15/602"]
@@ -55,7 +67,7 @@ const required={
  "SRC-FIQH206-MUGHNI-729":["islamweb.net","15/729"]
 }};
 assert.equal(file.sourceCount,file.sources.length,"sourceCount metadata must match actual source IDs");
-const indexedOnly=["SRC-FIQH201-MUGHNI-599","SRC-FIQH201-MUGHNI-602","SRC-FIQH205-MUGHNI-621","SRC-FIQH207-MUGHNI-1713","SRC-FIQH208-MUGHNI-1386","SRC-FIQH206-MUGHNI-729","SRC-FIQH208-MUGHNI-1754","SRC-FIQH208-MUGHNI-1800","SRC-FIQH204-MUGHNI-611","SRC-FIQH204-MUGHNI-618"];
+const indexedOnly=["SRC-FIQH201-MUGHNI-599","SRC-FIQH201-MUGHNI-602","SRC-FIQH205-MUGHNI-621","SRC-FIQH207-MUGHNI-1713","SRC-FIQH208-MUGHNI-1386","SRC-FIQH206-MUGHNI-729","SRC-FIQH208-MUGHNI-1754","SRC-FIQH208-MUGHNI-1800","SRC-FIQH204-MUGHNI-611","SRC-FIQH204-MUGHNI-618","SRC-FIQH174-MUGHNI-533","SRC-FIQH186-MUGHNI-570","SRC-FIQH192-MUGHNI-574"];
 for(const id of indexedOnly){
  const e=file.sources.find(x=>x.sourceId===id);
  assert.ok(e,"Indexed primary-source gap missing: "+id);
@@ -78,4 +90,4 @@ for(const [lessonId,expected] of Object.entries(required)){
   count++;
  }
 }
-process.stdout.write("PASS source registry: "+file.sources.length+" unique source IDs; "+count+" referenced evidence items / 4 Fiqh lessons; no scientific approval implied\n");
+process.stdout.write("PASS source registry: "+file.sources.length+" unique source IDs; "+count+" referenced evidence items / "+Object.keys(required).length+" Fiqh lessons; no scientific approval implied\n");
