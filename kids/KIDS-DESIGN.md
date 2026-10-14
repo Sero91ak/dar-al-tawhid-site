@@ -1,3 +1,48 @@
+## KIDS_GLOBAL_NO_PUBLIC_SOURCE_LINKS_V1414 – verbindlich für alle Kinderbereiche
+
+- **Keine anklickbaren Originalquellen-/Nachweislinks in TAWḤĪD KIDS**, auch nicht in dynamischen Geschichten, Leseransichten, Quiz, Qurʾān, Duʿāʾ und Akademie.
+- Präzise Fundstellen dürfen als **reiner, nicht anklickbarer Text** angezeigt werden. Original-URLs, Werk, Band, Seite, Authentizitätsprüfung bleiben intern gespeichert und sind weiterhin redaktionell zu prüfen.
+- Quellen-Buttons oder Linkkarten („Originalquelle öffnen“, „Nachweis öffnen“ usw.) sind in sämtlichen neuen und bestehenden Kinderansichten ausgeschlossen.
+- Schutz: kids/global-detail-dock-v1247.js entfernt solche Links auch nach dynamischem Rendering; scripts/kids-design-guard.js verbietet deren Einführung beim Release.
+- Erwachsenen-Website, Quellenbibliothek und die Links in Erwachsenen-Apps sind von dieser Regel nicht betroffen.
+
+## Verbindlicher Geschichtenmodus — `KIDS_STORY_MODES_V1` (14.10.2026)
+
+Für **alle bestehenden und künftig hinzukommenden Erzählbereiche** der
+TAWḤĪD KIDS App: Propheten, Ṣaḥābah, Ṣaḥābiyyāt, **Schätze der Salaf**
+und jede neue Bibliothek / historische Geschichte.
+
+- Die Detailansicht hat **dieselben drei auswählbaren Möglichkeiten**:
+  **Hören & Mitlesen · Hören · Lesen**, in dieser Reihenfolge.
+  Ein gemeinsamer Modus-Speicherschlüssel (`kids.contentMode.v19`)
+  ermöglicht konsistente Auswahl beim Wechsel zwischen den Geschichten.
+- Alle drei Möglichkeiten bedienen `DARKidsFollowReader`, nicht
+  mehrere konkurrierende Audio-Player. `openReadAlong()` liest mit
+  Textverfolgung, `openListening()` hört bei sichtbarem Bild,
+  `openReading()` zeigt den vollständigen Text ohne Audio-Steuerung.
+  Beim Hören aus einer tief gescrollten Seite zuerst zum Hero-Bild
+  zurückkehren; die obere Navigation bleibt fest und undurchsichtig.
+- Eine Geschichte besitzt **einen vollständigen Master-Text und genau eine
+  zugehörige Masteraufnahme** für Jungen/Mädchen und 4–5, 6–8, 9–10.
+  Kein Kürzen, Austauschen oder Nachsprechen per unbekanntem TTS.
+  Altersprofile ändern nur Lernhilfen und Gestaltung.
+- **Audio noch nicht vorhanden:** Lesen muss sofort vollständig funktionieren;
+  die zwei Hörmodi bleiben sichtbar, aber deaktiviert. Keine leeren
+  Player, stummen Platzhalter oder angeblich vorhandenen Stimmen.
+  Quellen bleiben separat lesbar, nicht als Teil der Audioerzählung.
+- Touch-Flächen mindestens 56px hoch; lange Beschriftungen umbrechen;
+  Farben getrennt nach Jungen-/Mädchenprofil; oben eine einzige feste
+  Detailleiste mit korrekter iOS-Statusleiste; Bilder ohne Menschen/Tiere.
+  Bedienelemente dürfen bei langem Drücken keine Textauswahl anbieten.
+- **Beim Hinzufügen jeder weiteren Bibliothek** zuerst diesen Vertrag
+  anwenden, dann den strukturellen Design-Guard erweitern und auf
+  iPhone-PWA, Android, Tablet und Desktop testen. Tests alleine
+  ersetzen nicht die visuelle Abnahme.
+- Änderungen an diesen Modi zuerst auf dem Testzweig prüfen;
+  kein unkontrollierter Live-Push.
+
+---
+
 ## Globale, undurchsichtige Detailkopfzeile inklusive iOS-Statusleiste — `KIDS_GLOBAL_STATUS_SAFE_AREA_V1410`
 
 Für **alle** gegenwärtigen und künftigen KIDS-Unterseiten verpflichtend. Die
