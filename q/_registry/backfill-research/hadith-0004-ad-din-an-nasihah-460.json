@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "postId": "hadith-0004-ad-din-an-nasihah-460",
+  "postFile": "content/posts/hadith-460-der-din-ist-nasihah.md",
+  "reviewDate": "2026-10-14",
+  "reviewState": "existing-Q-reuse-research",
+  "approved": false,
+  "reuseExistingQ": 4,
+  "newQNumber": null,
+  "arabicOriginal": "الدِّينُ النَّصيحةُ. قُلنا: لمَن؟ قال: للَّهِ ولكِتابِه ولرَسولِه، ولأئِمَّةِ المُسلِمينَ وعامَّتِهم.",
+  "germanTranslation": "Der Dīn ist aufrichtige Naṣīḥah. Wir fragten: Für wen? Er sagte: Für Allah, Sein Buch, Seinen Gesandten, die Verantwortlichen der Muslime und ihre Allgemeinheit.",
+  "narrator": "Tamīm ad-Dārī",
+  "attribution": "Prophet Muhammad ﷺ",
+  "primarySource": "Ṣaḥīḥ Muslim, Kitāb al-Īmān, Bāb Bayān anna ad-Dīn an-Naṣīḥah, Nr. 55",
+  "grade": "Ṣaḥīḥ according to Muslim; Dorar records صحيح",
+  "directEvidence": {
+    "url": "https://dorar.net/h/EsvPuuoh#:~:text=%D8%A7%D9%84%D8%AF%D9%91%D9%90%D9%8A%D9%86%D9%8F%20%D8%A7%D9%84%D9%86%D9%91%D9%8E%D8%B5%D9%8A%D8%AD%D8%A9%D9%8F",
+    "retrieved": "2026-10-14",
+    "arabicTextAndNarratorVerified": true,
+    "gradeAndNumberVerified": true,
+    "fragmentTextPresent": true,
+    "visualBrowserHighlightVerified": false,
+    "notes": "Dorar public hadith page directly displays text, Tamīm ad-Dārī, Muslim 55 and صحيح; fragment target appears in page, independent browser highlight untested."
+  },
+  "existingQ4Audit": {
+    "source": "GitHub q/4/index.html on isolated feature/q-source-backfill-20261013 branch, blob a01be9482420cab599badc2d2c53428b8474b736",
+    "reusableSameHadith": true,
+    "originalArabicDisplayedInCard": false,
+    "existingLinks": [
+      "ar.wikisource.org (outside permitted portals)",
+      "hadeethenc.com (outside permitted portals)",
+      "archive.org/download/IslamSpirit-Mawsoaat-Hadith-PDF-01/sahih_muslm.pdf (no verified #page anchor)"
+    ],
+    "pageVolumeClaim": "1/74 edition-specific, not independently verified from scanned print",
+    "publicLiveQ4": "Not verified: direct public URL could not be fetched by this run",
+    "technicalDecision": "Do not mint a second Q number. Update existing Q4 only after verified allowed source replacement, full Arabic text, earliest direct sharh research, PDF page verification, staging QA and independent review."
+  },
+  "pendingChecks": [
+    "Verify earliest directly commenting classical sharh on this exact narration, not mere quotation",
+    "Verify original edition volume/page and if PDF page is used, exact PDF page anchor",
+    "Independently test text-fragment highlighting",
+    "Perform final semantic duplicate and client/index/registry QA",
+    "Require human editorial approval before release"
+  ],
+  "safety": {
+    "mainUnchanged": true,
+    "publicPostUnchanged": true,
+    "q4Unchanged": true,
+    "pushSent": false,
+    "sourceCardReleased": false
+  }
+}
