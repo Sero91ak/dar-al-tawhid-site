@@ -3242,49 +3242,49 @@ const additions=
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Īmān an die Gesandten?",
+          "prompt": "Wen hat Allah zu den Menschen gesandt?",
           "options": [
-            "Allah hat Gesandte geschickt.",
-            "Nach einem Streit können wir wieder miteinander reden."
+            "Menschen, die unabhängig von Allah eine neue Religion erfanden.",
+            "Gesandte, die Seine Botschaft überbrachten."
           ],
-          "correct": 0,
-          "hint": "Denke an unsere heutige Stunde.",
-          "explain": "Mā schāʾ Allāh! Allah hat Gesandte geschickt."
+          "correct": 1,
+          "hint": "Erinnere dich an den Unterricht und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Gesandte, die Seine Botschaft überbrachten."
         },
         {
           "type": "choice",
-          "prompt": "Was können wir heute üben?",
+          "prompt": "Wie sprechen wir über die Gesandten?",
           "options": [
-            "Wir nennen drei Namen nur so, wie sie im Vers stehen, und erfinden keine zusätzliche Geschichte.",
-            "Wir üben: Ich möchte wieder Frieden. Bitte hör mir zu."
+            "Wir nennen ihre Namen respektvoll und glauben an sie.",
+            "Wir verspotten die Gesandten."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "hint": "Erinnere dich an den Unterricht und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Wir nennen ihre Namen respektvoll und glauben an sie."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Īmān an die Gesandten?",
+          "prompt": "Wen hat Allah zu den Menschen gesandt?",
           "options": [
-            "Nach einem Streit können wir wieder miteinander reden.",
-            "Allah hat Gesandte geschickt."
+            "Menschen, die unabhängig von Allah eine neue Religion erfanden.",
+            "Gesandte, die Seine Botschaft überbrachten."
           ],
           "correct": 1,
-          "hint": "Worum ging es in der Stunde?",
-          "explain": "Mā schāʾ Allāh! Allah hat Gesandte geschickt."
+          "hint": "Erinnere dich an den Unterricht und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Gesandte, die Seine Botschaft überbrachten."
         },
         {
           "type": "choice",
-          "prompt": "Welche Handlung gehört zu unserer Übung?",
+          "prompt": "Wie sprechen wir über die Gesandten?",
           "options": [
-            "Wir nennen drei Namen nur so, wie sie im Vers stehen, und erfinden keine zusätzliche Geschichte.",
-            "Wir üben: Ich möchte wieder Frieden. Bitte hör mir zu."
+            "Wir nennen ihre Namen respektvoll und glauben an sie.",
+            "Wir verspotten die Gesandten."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "hint": "Erinnere dich an den Unterricht und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Wir nennen ihre Namen respektvoll und glauben an sie."
         },
         {
           "type": "text",
@@ -3311,14 +3311,14 @@ const additions=
         },
         {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Was gehört zum Īmān an die Gesandten?",
           "options": [
-            "Allah hat Gesandte geschickt.",
-            "Nach einem Streit können wir wieder miteinander reden."
+            "Wir glauben nur an die Gesandten, deren Namen wir zuerst gelernt haben.",
+            "Wir glauben an die Gesandten Allahs und schließen keinen von ihnen aus."
           ],
-          "correct": 0,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "correct": 1,
+          "hint": "Erinnere dich an den Unterricht und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Wir glauben an die Gesandten Allahs und schließen keinen von ihnen aus."
         }
       ]
     },
@@ -3460,49 +3460,49 @@ const additions=
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Eine gute Absicht erneuern?",
+          "prompt": "Was tun wir, wenn wir bei einer guten Tat abgelenkt werden?",
           "options": [
-            "Nach einem Streit können wir wieder miteinander reden.",
-            "Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel."
+            "Wir erinnern uns an unsere gute Absicht.",
+            "Wir hören mit dem Helfen auf, nur weil niemand zusieht."
           ],
-          "correct": 1,
-          "hint": "Denke an unsere heutige Stunde.",
-          "explain": "Mā schāʾ Allāh! Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel."
+          "correct": 0,
+          "hint": "Erinnere dich an den Unterricht und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Wir erinnern uns an unsere gute Absicht."
         },
         {
           "type": "choice",
-          "prompt": "Was können wir heute üben?",
+          "prompt": "Welcher Satz kann beim Helfen passen?",
           "options": [
-            "Wir üben: Ich möchte wieder Frieden. Bitte hör mir zu.",
-            "Wir sagen leise vor einer kleinen Tat: Ich mache das für Allah."
+            "Alle müssen sehen, wie gut ich bin.",
+            "Ich möchte diese gute Tat für Allah tun."
           ],
           "correct": 1,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "hint": "Erinnere dich an den Unterricht und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Ich möchte diese gute Tat für Allah tun."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Eine gute Absicht erneuern?",
+          "prompt": "Was tun wir, wenn wir bei einer guten Tat abgelenkt werden?",
           "options": [
-            "Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel.",
-            "Nach einem Streit können wir wieder miteinander reden."
+            "Wir erinnern uns an unsere gute Absicht.",
+            "Wir hören mit dem Helfen auf, nur weil niemand zusieht."
           ],
           "correct": 0,
-          "hint": "Worum ging es in der Stunde?",
-          "explain": "Mā schāʾ Allāh! Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel."
+          "hint": "Erinnere dich an den Unterricht und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Wir erinnern uns an unsere gute Absicht."
         },
         {
           "type": "choice",
-          "prompt": "Welche Handlung gehört zu unserer Übung?",
+          "prompt": "Welcher Satz kann beim Helfen passen?",
           "options": [
-            "Wir sagen leise vor einer kleinen Tat: Ich mache das für Allah.",
-            "Wir üben: Ich möchte wieder Frieden. Bitte hör mir zu."
+            "Alle müssen sehen, wie gut ich bin.",
+            "Ich möchte diese gute Tat für Allah tun."
           ],
-          "correct": 0,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "correct": 1,
+          "hint": "Erinnere dich an den Unterricht und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Ich möchte diese gute Tat für Allah tun."
         },
         {
           "type": "text",
@@ -3529,14 +3529,14 @@ const additions=
         },
         {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Was zeigt Aufrichtigkeit in unserem Beispiel?",
           "options": [
-            "Nach einem Streit können wir wieder miteinander reden.",
-            "Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel."
+            "Wir kehren nach einer Ablenkung zu unserer guten Absicht zurück.",
+            "Eine gute Tat lohnt sich nur, wenn andere uns loben."
           ],
-          "correct": 1,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "correct": 0,
+          "hint": "Erinnere dich an den Unterricht und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Wir kehren nach einer Ablenkung zu unserer guten Absicht zurück."
         }
       ]
     },
@@ -3678,49 +3678,49 @@ const additions=
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Dankbarkeit zeigen?",
+          "prompt": "Was sagen wir, wenn uns jemand freundlich hilft?",
           "options": [
-            "Wir sagen Danke, wenn uns jemand hilft.",
-            "Bei einer gemeinsamen Aufgabe sehen wir die Aufgabe, nicht nur uns selbst."
+            "Du musst mir immer helfen.",
+            "Danke."
           ],
-          "correct": 0,
-          "hint": "Denke an unsere heutige Stunde.",
-          "explain": "Mā schāʾ Allāh! Wir sagen Danke, wenn uns jemand hilft."
+          "correct": 1,
+          "hint": "Erinnere dich an den Unterricht und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Danke."
         },
         {
           "type": "choice",
-          "prompt": "Was können wir heute üben?",
+          "prompt": "Wie zeigen wir Dankbarkeit im Alltag?",
           "options": [
-            "Wir üben Danke auf Deutsch und erinnern uns, dass Dank gegenüber Menschen den Dank gegenüber Allah nicht ersetzt.",
-            "Wir verteilen eine kleine Aufgabe so, dass jedes Kind einen Teil hat."
+            "Wir bedanken uns freundlich für die Hilfe.",
+            "Wir tun so, als hätte niemand geholfen."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "hint": "Erinnere dich an den Unterricht und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Wir bedanken uns freundlich für die Hilfe."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Dankbarkeit zeigen?",
+          "prompt": "Was sagen wir, wenn uns jemand freundlich hilft?",
           "options": [
-            "Bei einer gemeinsamen Aufgabe sehen wir die Aufgabe, nicht nur uns selbst.",
-            "Wir sagen Danke, wenn uns jemand hilft."
+            "Du musst mir immer helfen.",
+            "Danke."
           ],
           "correct": 1,
-          "hint": "Worum ging es in der Stunde?",
-          "explain": "Mā schāʾ Allāh! Wir sagen Danke, wenn uns jemand hilft."
+          "hint": "Erinnere dich an den Unterricht und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Danke."
         },
         {
           "type": "choice",
-          "prompt": "Welche Handlung gehört zu unserer Übung?",
+          "prompt": "Wie zeigen wir Dankbarkeit im Alltag?",
           "options": [
-            "Wir verteilen eine kleine Aufgabe so, dass jedes Kind einen Teil hat.",
-            "Wir üben Danke auf Deutsch und erinnern uns, dass Dank gegenüber Menschen den Dank gegenüber Allah nicht ersetzt."
+            "Wir bedanken uns freundlich für die Hilfe.",
+            "Wir tun so, als hätte niemand geholfen."
           ],
-          "correct": 1,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "correct": 0,
+          "hint": "Erinnere dich an den Unterricht und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Wir bedanken uns freundlich für die Hilfe."
         },
         {
           "type": "text",
@@ -3747,14 +3747,14 @@ const additions=
         },
         {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Wie gehören Dank gegenüber Allah und gegenüber Menschen zusammen?",
           "options": [
-            "Wir sagen Danke, wenn uns jemand hilft.",
-            "Bei einer gemeinsamen Aufgabe sehen wir die Aufgabe, nicht nur uns selbst."
+            "Dankbarkeit gegenüber Allah verbietet es, einem Menschen Danke zu sagen.",
+            "Wir danken Allah und erkennen auch die Hilfe von Menschen an."
           ],
-          "correct": 0,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "correct": 1,
+          "hint": "Erinnere dich an den Unterricht und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Wir danken Allah und erkennen auch die Hilfe von Menschen an."
         }
       ]
     },
@@ -3896,49 +3896,49 @@ const additions=
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Den Qurʾān sorgfältig behandeln?",
+          "prompt": "Wie gehen wir mit einem Qurʾān-Exemplar um?",
           "options": [
-            "Nach einem Streit können wir wieder miteinander reden.",
-            "Wir legen das Qurʾān-Buch sauber hin und blättern ruhig."
+            "Sorgfältig und mit Respekt.",
+            "Wir werfen es absichtlich herum."
           ],
-          "correct": 1,
-          "hint": "Denke an unsere heutige Stunde.",
-          "explain": "Mā schāʾ Allāh! Wir legen das Qurʾān-Buch sauber hin und blättern ruhig."
+          "correct": 0,
+          "hint": "Erinnere dich an den Unterricht und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Sorgfältig und mit Respekt."
         },
         {
           "type": "choice",
-          "prompt": "Was können wir heute üben?",
+          "prompt": "Was können wir dabei üben?",
           "options": [
-            "Wir üben: Buch schließen, an einen hohen sauberen Platz legen, nicht darauf setzen.",
-            "Wir üben: Ich möchte wieder Frieden. Bitte hör mir zu."
+            "Wir setzen uns absichtlich auf das Buch.",
+            "Wir schließen das Buch vorsichtig und legen es sauber ab."
           ],
-          "correct": 0,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "correct": 1,
+          "hint": "Erinnere dich an den Unterricht und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Wir schließen das Buch vorsichtig und legen es sauber ab."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Den Qurʾān sorgfältig behandeln?",
+          "prompt": "Wie gehen wir mit einem Qurʾān-Exemplar um?",
           "options": [
-            "Wir legen das Qurʾān-Buch sauber hin und blättern ruhig.",
-            "Nach einem Streit können wir wieder miteinander reden."
+            "Sorgfältig und mit Respekt.",
+            "Wir werfen es absichtlich herum."
           ],
           "correct": 0,
-          "hint": "Worum ging es in der Stunde?",
-          "explain": "Mā schāʾ Allāh! Wir legen das Qurʾān-Buch sauber hin und blättern ruhig."
+          "hint": "Erinnere dich an den Unterricht und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Sorgfältig und mit Respekt."
         },
         {
           "type": "choice",
-          "prompt": "Welche Handlung gehört zu unserer Übung?",
+          "prompt": "Was können wir dabei üben?",
           "options": [
-            "Wir üben: Buch schließen, an einen hohen sauberen Platz legen, nicht darauf setzen.",
-            "Wir üben: Ich möchte wieder Frieden. Bitte hör mir zu."
+            "Wir setzen uns absichtlich auf das Buch.",
+            "Wir schließen das Buch vorsichtig und legen es sauber ab."
           ],
-          "correct": 0,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "correct": 1,
+          "hint": "Erinnere dich an den Unterricht und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Wir schließen das Buch vorsichtig und legen es sauber ab."
         },
         {
           "type": "text",
@@ -3965,14 +3965,14 @@ const additions=
         },
         {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Warum gehen wir mit einem Qurʾān-Exemplar sorgsam um?",
           "options": [
-            "Nach einem Streit können wir wieder miteinander reden.",
-            "Wir legen das Qurʾān-Buch sauber hin und blättern ruhig."
+            "Weil wir Allahs Buch achten und Bücher respektvoll behandeln.",
+            "Weil wir nur vor anderen so tun wollen, als wären wir achtsam."
           ],
-          "correct": 1,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "correct": 0,
+          "hint": "Erinnere dich an den Unterricht und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Weil wir Allahs Buch achten und Bücher respektvoll behandeln."
         }
       ]
     },
@@ -4114,49 +4114,49 @@ const additions=
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Sichere Regeln zu Hause?",
+          "prompt": "Warum gibt es zu Hause manche Sicherheitsregeln?",
           "options": [
-            "Eine Familienregel kann uns vor einer Gefahr schützen.",
-            "Wir nehmen so viel Essen, wie wir essen können."
+            "Damit Kinder bei gefährlichen Dingen allein experimentieren.",
+            "Damit wir Gefahren vermeiden und geschützt bleiben."
           ],
-          "correct": 0,
-          "hint": "Denke an unsere heutige Stunde.",
-          "explain": "Mā schāʾ Allāh! Eine Familienregel kann uns vor einer Gefahr schützen."
+          "correct": 1,
+          "hint": "Erinnere dich an den Unterricht und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Damit wir Gefahren vermeiden und geschützt bleiben."
         },
         {
           "type": "choice",
-          "prompt": "Was können wir heute üben?",
+          "prompt": "Was machen wir bei einer heißen Herdplatte?",
           "options": [
-            "Wir üben, einmal nachzunehmen statt den Teller zu häufen.",
-            "Wir nennen eine echte Regel aus dem eigenen Zuhause, die vor einer Gefahr schützt."
+            "Wir halten Abstand und fragen bei Bedarf Erwachsene.",
+            "Wir fassen sie an, um zu prüfen, ob sie heiß ist."
           ],
-          "correct": 1,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "correct": 0,
+          "hint": "Erinnere dich an den Unterricht und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Wir halten Abstand und fragen bei Bedarf Erwachsene."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Sichere Regeln zu Hause?",
+          "prompt": "Warum gibt es zu Hause manche Sicherheitsregeln?",
           "options": [
-            "Wir nehmen so viel Essen, wie wir essen können.",
-            "Eine Familienregel kann uns vor einer Gefahr schützen."
+            "Damit Kinder bei gefährlichen Dingen allein experimentieren.",
+            "Damit wir Gefahren vermeiden und geschützt bleiben."
           ],
           "correct": 1,
-          "hint": "Worum ging es in der Stunde?",
-          "explain": "Mā schāʾ Allāh! Eine Familienregel kann uns vor einer Gefahr schützen."
+          "hint": "Erinnere dich an den Unterricht und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Damit wir Gefahren vermeiden und geschützt bleiben."
         },
         {
           "type": "choice",
-          "prompt": "Welche Handlung gehört zu unserer Übung?",
+          "prompt": "Was machen wir bei einer heißen Herdplatte?",
           "options": [
-            "Wir nennen eine echte Regel aus dem eigenen Zuhause, die vor einer Gefahr schützt.",
-            "Wir üben, einmal nachzunehmen statt den Teller zu häufen."
+            "Wir halten Abstand und fragen bei Bedarf Erwachsene.",
+            "Wir fassen sie an, um zu prüfen, ob sie heiß ist."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "hint": "Erinnere dich an den Unterricht und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Wir halten Abstand und fragen bei Bedarf Erwachsene."
         },
         {
           "type": "text",
@@ -4183,14 +4183,14 @@ const additions=
         },
         {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Was gehört zu einer sicheren Familienregel?",
           "options": [
-            "Eine Familienregel kann uns vor einer Gefahr schützen.",
-            "Wir nehmen so viel Essen, wie wir essen können."
+            "Wir ignorieren sie bei Gefahr und sagen niemandem Bescheid.",
+            "Wir verstehen ihren Schutzzweck und holen bei Gefahr Hilfe."
           ],
-          "correct": 0,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "correct": 1,
+          "hint": "Erinnere dich an den Unterricht und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Wir verstehen ihren Schutzzweck und holen bei Gefahr Hilfe."
         }
       ]
     },
