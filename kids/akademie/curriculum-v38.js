@@ -9673,252 +9673,252 @@ const additions=
     "voiceApproved": false
   },
   "fiqh-namen-der-fuenf-gebete": {
-  "id": "fiqh-namen-der-fuenf-gebete",
-  "subject": "fiqh",
-  "pillar": "fiqh",
-  "topic": "Die Namen der fünf Gebete",
-  "title": "Fiqh · Die Namen der fünf Gebete",
-  "lead": "Unser Tag hat fünf Pflichtgebete. Ihre Namen lernen wir Schritt für Schritt.",
-  "goal": "Wir kennen die fünf Gebetsnamen in ihrer Reihenfolge: Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ.",
-  "quran": {
-    "surah": 11,
-    "ayah": 114,
-    "label": "Qurʾān 11:114",
-    "arabic": "وَأَقِمِ الصَّلَاةَ طَرَفَيِ النَّهَارِ وَزُلَفًا مِنَ اللَّيْلِ إِنَّ الْحَسَنَاتِ يُذْهِبْنَ السَّيِّئَاتِ ذَلِكَ ذِكْرَى لِلذَّاكِرِينَ",
-    "meaning": "Sinngemäß: Der Vers sagt: Verrichte das Gebet an den beiden Enden des Tages und in den Nahzeiten der Nacht. Die guten Taten nehmen die schlechten hinweg.",
-    "excerpt": false
-  },
-  "hadith": {
-    "source": "Ṣaḥīḥ Muslim, Nr. 612 · ʿAbdullāh ibn ʿAmr",
-    "text": "Sinngemäß: Der Prophet ﷺ nannte bei der Erklärung der Gebetszeiten Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ. Jedes Gebet hat eine bestimmte Zeit."
-  },
-  "sourceAudit": {
-    "hadithUrl": "https://www.islamweb.net/ar/library/content/1/1036",
-    "hadithNumber": "Ṣaḥīḥ Muslim 612",
-    "narrator": "ʿAbdullāh ibn ʿAmr",
-    "authenticity": "Ṣaḥīḥ Muslim 612; Original auf Islamweb Inhalt 1/1036 am 14. Oktober 2026 gelesen. Unterrichtswiedergabe klar sinngemäß; kein vollständiges wörtliches Zitat.",
-    "quranReference": "11:114",
-    "quranUrl": "https://www.islamweb.net/ar/library/content/49/805",
-    "quranTextType": "ayah-span-as-printed-on-ibn-kathir-islamweb",
-    "hadithMeaningIsParaphrase": true,
-    "verifiedDate": "2026-10-13",
-    "dorarReRead": false,
-    "numberUnverified": false,
-    "fiqhHumanReviewNeeded": true,
-    "scientificApproval": false,
-    "note": "Klassisches hanbalitisches Werk nun eingesehen: al-Mughnī, Bd. 1, S. 224–227 (Islamweb 15/425, 15/428, 15/429). Fünf Gebetsnamen aus dem Kapitel über die Gebetszeiten, nicht als wörtliche Liste aus Qurʾān 11:114 behauptet. Keine isolierte Hadithnummer neu verifiziert. Keine Fiqh-Freigabe.",
-    "editorialScopeNote": "Fünf Gebetsnamen werden anhand des klassischen Kapitels al-Mawāqīt gelehrt. Der Qurʾān-Vers 11:114 wird nur für seine tatsächliche Aussage über Gebete an Tagesabschnitten zitiert.",
-    "classicalFiqhCrosscheck": {
-      "status": "primary-hanbali-text-read-not-approved",
-      "reviewDate": "2026-10-14",
-      "author": "Ibn Qudāmah",
-      "work": "al-Mughnī",
-      "chapter": "Kitāb aṣ-Ṣalāh, Bāb al-Mawāqīt",
-      "volume": "1",
-      "page": "224–227",
-      "directLink": "https://www.islamweb.net/ar/library/content/15/425",
-      "additionalLinks": [
-        "https://www.islamweb.net/ar/library/content/15/428",
-        "https://www.islamweb.net/ar/library/content/15/429"
-      ],
-      "scope": "Classical prayer time chapter cites narrations describing five daily prayers and their times. Qurʾān 11:114 alone does not give the five names as a direct verbatim list.",
-      "humanFiqhApproval": false,
-      "directHadith": {
-        "work": "Ṣaḥīḥ Muslim",
-        "number": "612",
-        "narrator": "ʿAbdullāh ibn ʿAmr",
-        "chapter": "Bāb Awqāt aṣ-Ṣalawāt al-Ḫams",
+    "id": "fiqh-namen-der-fuenf-gebete",
+    "subject": "fiqh",
+    "pillar": "fiqh",
+    "topic": "Die Namen der fünf Gebete",
+    "title": "Fiqh · Die Namen der fünf Gebete",
+    "lead": "Unser Tag hat fünf Pflichtgebete. Ihre Namen lernen wir Schritt für Schritt.",
+    "goal": "Wir kennen die fünf Gebetsnamen in ihrer Reihenfolge: Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ.",
+    "quran": {
+      "surah": 11,
+      "ayah": 114,
+      "label": "Qurʾān 11:114",
+      "arabic": "وَأَقِمِ الصَّلَاةَ طَرَفَيِ النَّهَارِ وَزُلَفًا مِنَ اللَّيْلِ إِنَّ الْحَسَنَاتِ يُذْهِبْنَ السَّيِّئَاتِ ذَلِكَ ذِكْرَى لِلذَّاكِرِينَ",
+      "meaning": "Sinngemäß: Der Vers sagt: Verrichte das Gebet an den beiden Enden des Tages und in den Nahzeiten der Nacht. Die guten Taten nehmen die schlechten hinweg.",
+      "excerpt": false
+    },
+    "hadith": {
+      "source": "Ṣaḥīḥ Muslim, Nr. 612 · ʿAbdullāh ibn ʿAmr",
+      "text": "Sinngemäß: Der Prophet ﷺ nannte bei der Erklärung der Gebetszeiten Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ. Jedes Gebet hat eine bestimmte Zeit."
+    },
+    "sourceAudit": {
+      "hadithUrl": "https://www.islamweb.net/ar/library/content/1/1036",
+      "hadithNumber": "Ṣaḥīḥ Muslim 612",
+      "narrator": "ʿAbdullāh ibn ʿAmr",
+      "authenticity": "Ṣaḥīḥ Muslim 612; Original auf Islamweb Inhalt 1/1036 am 14. Oktober 2026 gelesen. Unterrichtswiedergabe klar sinngemäß; kein vollständiges wörtliches Zitat.",
+      "quranReference": "11:114",
+      "quranUrl": "https://www.islamweb.net/ar/library/content/49/805",
+      "quranTextType": "ayah-span-as-printed-on-ibn-kathir-islamweb",
+      "hadithMeaningIsParaphrase": true,
+      "verifiedDate": "2026-10-13",
+      "dorarReRead": false,
+      "numberUnverified": false,
+      "fiqhHumanReviewNeeded": true,
+      "scientificApproval": false,
+      "note": "Klassisches hanbalitisches Werk nun eingesehen: al-Mughnī, Bd. 1, S. 224–227 (Islamweb 15/425, 15/428, 15/429). Fünf Gebetsnamen aus dem Kapitel über die Gebetszeiten, nicht als wörtliche Liste aus Qurʾān 11:114 behauptet. Keine isolierte Hadithnummer neu verifiziert. Keine Fiqh-Freigabe.",
+      "editorialScopeNote": "Fünf Gebetsnamen werden anhand des klassischen Kapitels al-Mawāqīt gelehrt. Der Qurʾān-Vers 11:114 wird nur für seine tatsächliche Aussage über Gebete an Tagesabschnitten zitiert.",
+      "classicalFiqhCrosscheck": {
+        "status": "primary-hanbali-text-read-not-approved",
+        "reviewDate": "2026-10-14",
+        "author": "Ibn Qudāmah",
+        "work": "al-Mughnī",
+        "chapter": "Kitāb aṣ-Ṣalāh, Bāb al-Mawāqīt",
         "volume": "1",
-        "page": "426",
-        "directLink": "https://www.islamweb.net/ar/library/content/1/1036",
-        "checkedOn": "2026-10-14",
-        "verificationStatus": "primary-page-directly-read-no-final-approval",
-        "scope": "Names Faǧr, Ẓuhr, ʿAṣr, Maġrib, ʿIšāʾ printed in hadith describing times; not a verbatim list in Qurʾān 11:114."
+        "page": "224–227",
+        "directLink": "https://www.islamweb.net/ar/library/content/15/425",
+        "additionalLinks": [
+          "https://www.islamweb.net/ar/library/content/15/428",
+          "https://www.islamweb.net/ar/library/content/15/429"
+        ],
+        "scope": "Classical prayer time chapter cites narrations describing five daily prayers and their times. Qurʾān 11:114 alone does not give the five names as a direct verbatim list.",
+        "humanFiqhApproval": false,
+        "directHadith": {
+          "work": "Ṣaḥīḥ Muslim",
+          "number": "612",
+          "narrator": "ʿAbdullāh ibn ʿAmr",
+          "chapter": "Bāb Awqāt aṣ-Ṣalawāt al-Ḫams",
+          "volume": "1",
+          "page": "426",
+          "directLink": "https://www.islamweb.net/ar/library/content/1/1036",
+          "checkedOn": "2026-10-14",
+          "verificationStatus": "primary-page-directly-read-no-final-approval",
+          "scope": "Names Faǧr, Ẓuhr, ʿAṣr, Maġrib, ʿIšāʾ printed in hadith describing times; not a verbatim list in Qurʾān 11:114."
+        }
+      },
+      "verifiedHadithOn": "2026-10-14"
+    },
+    "hint": "Lerne die Gebetsnamen von morgens bis abends, ohne die App-Tafel als Qurʾān-Wortlaut auszugeben.",
+    "sample": "Wir kennen die fünf Gebetsnamen in ihrer Reihenfolge: Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ.",
+    "ageText": {
+      "4-5": {
+        "goal": "Wir kennen die fünf Gebetsnamen in ihrer Reihenfolge: Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ.",
+        "intro": "Assalāmu ʿalaikum, liebe Kinder! Kennst du die Namen der fünf Gebete? Am Morgen heißt das Gebet Faǧr. Dann kommen Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ. Jedes Gebet hat seinen Platz im Tagesablauf. Wir legen heute fünf Karten hin und ordnen sie gemeinsam, von morgens bis nachts. Im Qurʾān erinnert Allah uns daran, das Gebet an den Tagesabschnitten zu verrichten. Die fünf Namen lernen wir auch aus der Sunnah und den Erklärungen der Gelehrten. Sehr gut, wenn du dir heute schon zwei Namen merken kannst!",
+        "lines": [
+          "Am Morgen heißt das Gebet Faǧr.",
+          "Danach kommt Ẓuhr, das Mittagsgebet.",
+          "Später folgen ʿAṣr und Maġrib.",
+          "In der Nacht heißt das fünfte Gebet ʿIšāʾ."
+        ],
+        "evidence": "Qurʾān 11:114 erinnert uns an das Gebet am Tag und in der Nacht. Die fünf Namen lernen wir mit einer Lehrperson und aus weiteren zuverlässig überlieferten Quellen.",
+        "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/805. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 11:114. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
+        "terms": [
+          {
+            "say": "ṭarafay an-nahār",
+            "de": "die beiden Enden des Tages"
+          },
+          {
+            "say": "zulaf",
+            "de": "Nahzeiten der Nacht"
+          }
+        ],
+        "situation": "Fünf Karten liegen durcheinander. Wir helfen der Lehrperson, die Namen der Gebete von morgens bis nachts zu sortieren.",
+        "practice": "Wir legen fünf Namenskarten in die Reihenfolge von morgens bis nachts: Faǧr, Ẓuhr, ʿAṣr, Maġrib, ʿIšāʾ.",
+        "summary": "Wir lernen die fünf Gebetsnamen in ihrer Tagesfolge. Qurʾān 11:114 erinnert an Gebete am Tag und in der Nacht. Die Namen und Zeitregeln sind auch in der Sunnah und in klassischen Fiqh-Werken überliefert.",
+        "audioScript": "Die Namen der fünf Gebete. Assalāmu ʿalaikum! Am Morgen beten wir Faǧr. Danach kommt Ẓuhr, dann ʿAṣr, danach Maġrib und in der Nacht ʿIšāʾ. Sprich die Namen ruhig mit und ordne die fünf Lernkarten."
+      },
+      "6-8": {
+        "goal": "Wir kennen die fünf Gebetsnamen in ihrer Reihenfolge: Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ.",
+        "intro": "Assalāmu ʿalaikum! Heute lernen wir die fünf täglichen Pflichtgebete kennen: Faǧr ist das Morgengebet, Ẓuhr das Mittagsgebet, ʿAṣr das Nachmittagsgebet, Maġrib folgt auf den Sonnenuntergang und ʿIšāʾ gehört zur Nacht. Qurʾān 11:114 erinnert an das Gebet an den Tagesenden und nahe der Nacht. Er druckt die fünf Namen nicht als vollständige Liste. Der klassische Gelehrte Ibn Qudāmah bespricht die fünf Gebete und ihre Zeiten in al-Mughnī. Stell dir vor, du findest morgens Faǧr in einem Gebetsplan. Welche Namen stehen danach? Mit fünf Karten ordnen wir den Tag und sprechen die Namen ruhig aus. Die Karten sind eine Gedächtnishilfe.",
+        "lines": [
+          "Unsere fünf Gebete heißen Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ.",
+          "Faǧr ist am Morgen, Ẓuhr um die Mittagszeit und ʿAṣr am Nachmittag.",
+          "Maġrib folgt nach Sonnenuntergang, ʿIšāʾ gehört zur Nacht.",
+          "Qurʾān 11:114 nennt Tagesabschnitte; die vollständige Namensliste lernen wir aus weiteren Quellen."
+        ],
+        "evidence": "Qurʾān 11:114 nennt Gebete zu Tagesabschnitten. Ibn Qudāmah erläutert die fünf Gebete in al-Mughnī, Bd. 1, S. 224 ff. Wir unterscheiden einen Qurʾān-Vers von der erklärenden Fiqh-Quelle.",
+        "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/805. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 11:114. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
+        "terms": [
+          {
+            "say": "ṭarafay an-nahār",
+            "de": "die beiden Enden des Tages"
+          },
+          {
+            "say": "zulaf",
+            "de": "Nahzeiten der Nacht"
+          }
+        ],
+        "situation": "Ein Kind sieht morgens das erste Gebet im Gebetsplan. Es will wissen, welche vier Namen bis in die Nacht folgen.",
+        "practice": "Wir legen fünf Namenskarten in die Reihenfolge von morgens bis nachts: Faǧr, Ẓuhr, ʿAṣr, Maġrib, ʿIšāʾ.",
+        "summary": "Wir lernen die fünf Gebetsnamen in ihrer Tagesfolge. Qurʾān 11:114 erinnert an Gebete am Tag und in der Nacht. Die Namen und Zeitregeln sind auch in der Sunnah und in klassischen Fiqh-Werken überliefert.",
+        "audioScript": "Die Namen der fünf Gebete. Faǧr gehört zum Morgen, Ẓuhr zum Mittag, ʿAṣr zum Nachmittag, Maġrib zum Sonnenuntergang und ʿIšāʾ zur Nacht. In Qurʾān 11:114 werden Gebete an Tagesabschnitten genannt. Mit fünf Lernkarten üben wir die Namen und die Reihenfolge."
+      },
+      "9-10": {
+        "goal": "Wir kennen die fünf Gebetsnamen in ihrer Reihenfolge: Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ.",
+        "intro": "Assalāmu ʿalaikum! Heute verbinden wir die Namen der fünf Pflichtgebete mit ihren Tagesabschnitten. Faǧr gehört zum Morgen, Ẓuhr zur Zeit nach dem Sonnenhöchststand, ʿAṣr zum Nachmittag, Maġrib zum Sonnenuntergang und ʿIšāʾ zur Nacht. Qurʾān 11:114 fordert zu Gebeten an beiden Enden des Tages und in den Nahzeiten der Nacht auf. Diese Stelle nennt nicht alle fünf Namen in einer einzigen Aufzählung. Ibn Qudāmah behandelt in al-Mughnī, Bd. 1, S. 224 ff., das Kapitel Bāb al-Mawāqīt und führt Berichte über die Gebetszeiten an. Wir ordnen die fünf Namen als Lernkarten. Nenne die Namen und erkläre, warum du eine Liste aus der Sunnah und dem Fiqh nicht fälschlich als wörtliche Liste dieses einzelnen Verses ausgeben solltest. Für die exakten Uhrzeiten benötigen wir einen zuverlässigen Gebetsplan für unseren Ort.",
+        "lines": [
+          "Die fünf Gebetsnamen sind Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ.",
+          "Qurʾān 11:114 erwähnt Gebete an Tagesabschnitten, keine Liste aller fünf Namen.",
+          "Ibn Qudāmah behandelt die Gebete und ihre Zeiten im Kapitel al-Mawāqīt.",
+          "Ein Gebetsplan übersetzt diese Regeln in praktische Uhrzeiten für den jeweiligen Ort."
+        ],
+        "evidence": "Qurʾān 11:114 spricht über Gebete an den Tagesenden und in der Nacht. Al-Mughnī, Kitāb aṣ-Ṣalāh, Bāb al-Mawāqīt, Bd. 1, S. 224–227, behandelt die einzelnen Gebetszeiten und die überlieferten Namen. Die minutengenaue heutige Berechnung ist keine direkte Aussage dieses Verses.",
+        "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/805. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 11:114. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
+        "terms": [
+          {
+            "say": "ṭarafay an-nahār",
+            "de": "die beiden Enden des Tages"
+          },
+          {
+            "say": "zulaf",
+            "de": "Nahzeiten der Nacht"
+          }
+        ],
+        "situation": "Im Jahresplan stehen fünf Gebete. Ein Kind fragt, ob ihre Namen als vollständige Liste wörtlich in Qurʾān 11:114 stehen.",
+        "practice": "Wir legen fünf Namenskarten in die Reihenfolge von morgens bis nachts: Faǧr, Ẓuhr, ʿAṣr, Maġrib, ʿIšāʾ.",
+        "summary": "Wir lernen die fünf Gebetsnamen in ihrer Tagesfolge. Qurʾān 11:114 erinnert an Gebete am Tag und in der Nacht. Die Namen und Zeitregeln sind auch in der Sunnah und in klassischen Fiqh-Werken überliefert.",
+        "audioScript": "Die Namen der fünf Gebete. Assalāmu ʿalaikum! Wir lernen Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ. Qurʾān 11:114 nennt das Gebet an Tagesabschnitten. Die vollständige Namensliste und die Einteilung der Zeiten erschließen wir mit weiteren Überlieferungen und dem klassischen Werk al-Mughnī. Ordne die Gebete von morgens bis nachts."
       }
     },
-    "verifiedHadithOn": "2026-10-14"
-  },
-  "hint": "Lerne die Gebetsnamen von morgens bis abends, ohne die App-Tafel als Qurʾān-Wortlaut auszugeben.",
-  "sample": "Wir kennen die fünf Gebetsnamen in ihrer Reihenfolge: Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ.",
-  "ageText": {
-    "4-5": {
-      "goal": "Wir kennen die fünf Gebetsnamen in ihrer Reihenfolge: Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ.",
-      "intro": "Assalāmu ʿalaikum, liebe Kinder! Kennst du die Namen der fünf Gebete? Am Morgen heißt das Gebet Faǧr. Dann kommen Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ. Jedes Gebet hat seinen Platz im Tagesablauf. Wir legen heute fünf Karten hin und ordnen sie gemeinsam, von morgens bis nachts. Im Qurʾān erinnert Allah uns daran, das Gebet an den Tagesabschnitten zu verrichten. Die fünf Namen lernen wir auch aus der Sunnah und den Erklärungen der Gelehrten. Sehr gut, wenn du dir heute schon zwei Namen merken kannst!",
-      "lines": [
-        "Am Morgen heißt das Gebet Faǧr.",
-        "Danach kommt Ẓuhr, das Mittagsgebet.",
-        "Später folgen ʿAṣr und Maġrib.",
-        "In der Nacht heißt das fünfte Gebet ʿIšāʾ."
-      ],
-      "evidence": "Qurʾān 11:114 erinnert uns an das Gebet am Tag und in der Nacht. Die fünf Namen lernen wir mit einer Lehrperson und aus weiteren zuverlässig überlieferten Quellen.",
-      "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/805. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 11:114. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
-      "terms": [
+    "questions": {
+      "4-5": [
         {
-          "say": "ṭarafay an-nahār",
-          "de": "die beiden Enden des Tages"
+          "type": "choice",
+          "prompt": "Welches Gebet gehört zum Morgen?",
+          "options": [
+            "Faǧr.",
+            "ʿIšāʾ."
+          ],
+          "correct": 0,
+          "hint": "Wir beginnen den Tag.",
+          "explain": "Mā schāʾ Allāh! Faǧr ist das Morgengebet."
         },
         {
-          "say": "zulaf",
-          "de": "Nahzeiten der Nacht"
+          "type": "choice",
+          "prompt": "Welches Gebet gehört zur Nacht?",
+          "options": [
+            "ʿIšāʾ.",
+            "Ẓuhr."
+          ],
+          "correct": 0,
+          "hint": "Es ist das fünfte Gebet.",
+          "explain": "Allāhumma bārik! ʿIšāʾ gehört zur Nacht."
         }
       ],
-      "situation": "Fünf Karten liegen durcheinander. Wir helfen der Lehrperson, die Namen der Gebete von morgens bis nachts zu sortieren.",
-      "practice": "Wir legen fünf Namenskarten in die Reihenfolge von morgens bis nachts: Faǧr, Ẓuhr, ʿAṣr, Maġrib, ʿIšāʾ.",
-      "summary": "Wir lernen die fünf Gebetsnamen in ihrer Tagesfolge. Qurʾān 11:114 erinnert an Gebete am Tag und in der Nacht. Die Namen und Zeitregeln sind auch in der Sunnah und in klassischen Fiqh-Werken überliefert.",
-      "audioScript": "Die Namen der fünf Gebete. Assalāmu ʿalaikum! Am Morgen beten wir Faǧr. Danach kommt Ẓuhr, dann ʿAṣr, danach Maġrib und in der Nacht ʿIšāʾ. Sprich die Namen ruhig mit und ordne die fünf Lernkarten."
+      "6-8": [
+        {
+          "type": "choice",
+          "prompt": "Welche Reihenfolge ist richtig?",
+          "options": [
+            "Faǧr – Ẓuhr – ʿAṣr – Maġrib – ʿIšāʾ.",
+            "Ẓuhr – Faǧr – Maġrib – ʿIšāʾ – ʿAṣr."
+          ],
+          "correct": 0,
+          "hint": "Beginne mit dem Morgengebet.",
+          "explain": "Sehr gut! Wir ordnen die fünf Pflichtgebete von morgens bis nachts."
+        },
+        {
+          "type": "choice",
+          "prompt": "Welches Gebet folgt auf ʿAṣr?",
+          "options": [
+            "Maġrib.",
+            "Faǧr."
+          ],
+          "correct": 0,
+          "hint": "Denke an den Sonnenuntergang.",
+          "explain": "Maġrib folgt auf ʿAṣr."
+        },
+        {
+          "type": "text",
+          "prompt": "Wie heißen die Gebete, die du am Morgen und in der Nacht lernst?",
+          "sample": "Faǧr am Morgen und ʿIšāʾ in der Nacht.",
+          "hint": "Das erste und das fünfte Gebet.",
+          "explain": "Mā schāʾ Allāh! Diese beiden Namen hast du dir gemerkt."
+        }
+      ],
+      "9-10": [
+        {
+          "type": "choice",
+          "prompt": "Welche Aussage über Qurʾān 11:114 ist richtig?",
+          "options": [
+            "Der Vers nennt Gebete an Tagesabschnitten, nicht alle fünf Namen als vollständige Liste.",
+            "Der Vers nennt alle fünf Gebete mit einer festen Uhrzeit in Minuten."
+          ],
+          "correct": 0,
+          "hint": "Vergleiche die genaue Bedeutung des Verses.",
+          "explain": "Eine minutengenaue Fünferliste steht nicht wörtlich in 11:114."
+        },
+        {
+          "type": "text",
+          "prompt": "Nenne die fünf Pflichtgebete in der üblichen Tagesreihenfolge.",
+          "sample": "Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ.",
+          "hint": "Vom Morgen bis zur Nacht.",
+          "explain": "Allāhumma bārik! Du kennst die fünf Namen."
+        },
+        {
+          "type": "text",
+          "prompt": "Welche klassische Quelle ergänzt unseren Vers um genauere Gebetszeiten?",
+          "sample": "Ibn Qudāmah, al-Mughnī, Bd. 1, Kapitel Bāb al-Mawāqīt über die Gebetszeiten.",
+          "hint": "Ein hanbalitisches Fiqh-Werk.",
+          "explain": "Der Qurʾān-Vers und die klassische Erläuterung sind unterschiedliche Quellengattungen."
+        }
+      ]
     },
-    "6-8": {
-      "goal": "Wir kennen die fünf Gebetsnamen in ihrer Reihenfolge: Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ.",
-      "intro": "Assalāmu ʿalaikum! Heute lernen wir die fünf täglichen Pflichtgebete kennen: Faǧr ist das Morgengebet, Ẓuhr das Mittagsgebet, ʿAṣr das Nachmittagsgebet, Maġrib folgt auf den Sonnenuntergang und ʿIšāʾ gehört zur Nacht. Qurʾān 11:114 erinnert an das Gebet an den Tagesenden und nahe der Nacht. Er druckt die fünf Namen nicht als vollständige Liste. Der klassische Gelehrte Ibn Qudāmah bespricht die fünf Gebete und ihre Zeiten in al-Mughnī. Stell dir vor, du findest morgens Faǧr in einem Gebetsplan. Welche Namen stehen danach? Mit fünf Karten ordnen wir den Tag und sprechen die Namen ruhig aus. Die Karten sind eine Gedächtnishilfe.",
-      "lines": [
-        "Unsere fünf Gebete heißen Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ.",
-        "Faǧr ist am Morgen, Ẓuhr um die Mittagszeit und ʿAṣr am Nachmittag.",
-        "Maġrib folgt nach Sonnenuntergang, ʿIšāʾ gehört zur Nacht.",
-        "Qurʾān 11:114 nennt Tagesabschnitte; die vollständige Namensliste lernen wir aus weiteren Quellen."
-      ],
-      "evidence": "Qurʾān 11:114 nennt Gebete zu Tagesabschnitten. Ibn Qudāmah erläutert die fünf Gebete in al-Mughnī, Bd. 1, S. 224 ff. Wir unterscheiden einen Qurʾān-Vers von der erklärenden Fiqh-Quelle.",
-      "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/805. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 11:114. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
-      "terms": [
-        {
-          "say": "ṭarafay an-nahār",
-          "de": "die beiden Enden des Tages"
-        },
-        {
-          "say": "zulaf",
-          "de": "Nahzeiten der Nacht"
-        }
-      ],
-      "situation": "Ein Kind sieht morgens das erste Gebet im Gebetsplan. Es will wissen, welche vier Namen bis in die Nacht folgen.",
-      "practice": "Wir legen fünf Namenskarten in die Reihenfolge von morgens bis nachts: Faǧr, Ẓuhr, ʿAṣr, Maġrib, ʿIšāʾ.",
-      "summary": "Wir lernen die fünf Gebetsnamen in ihrer Tagesfolge. Qurʾān 11:114 erinnert an Gebete am Tag und in der Nacht. Die Namen und Zeitregeln sind auch in der Sunnah und in klassischen Fiqh-Werken überliefert.",
-      "audioScript": "Die Namen der fünf Gebete. Faǧr gehört zum Morgen, Ẓuhr zum Mittag, ʿAṣr zum Nachmittag, Maġrib zum Sonnenuntergang und ʿIšāʾ zur Nacht. In Qurʾān 11:114 werden Gebete an Tagesabschnitten genannt. Mit fünf Lernkarten üben wir die Namen und die Reihenfolge."
-    },
-    "9-10": {
-      "goal": "Wir kennen die fünf Gebetsnamen in ihrer Reihenfolge: Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ.",
-      "intro": "Assalāmu ʿalaikum! Heute verbinden wir die Namen der fünf Pflichtgebete mit ihren Tagesabschnitten. Faǧr gehört zum Morgen, Ẓuhr zur Zeit nach dem Sonnenhöchststand, ʿAṣr zum Nachmittag, Maġrib zum Sonnenuntergang und ʿIšāʾ zur Nacht. Qurʾān 11:114 fordert zu Gebeten an beiden Enden des Tages und in den Nahzeiten der Nacht auf. Diese Stelle nennt nicht alle fünf Namen in einer einzigen Aufzählung. Ibn Qudāmah behandelt in al-Mughnī, Bd. 1, S. 224 ff., das Kapitel Bāb al-Mawāqīt und führt Berichte über die Gebetszeiten an. Wir ordnen die fünf Namen als Lernkarten. Nenne die Namen und erkläre, warum du eine Liste aus der Sunnah und dem Fiqh nicht fälschlich als wörtliche Liste dieses einzelnen Verses ausgeben solltest. Für die exakten Uhrzeiten benötigen wir einen zuverlässigen Gebetsplan für unseren Ort.",
-      "lines": [
-        "Die fünf Gebetsnamen sind Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ.",
-        "Qurʾān 11:114 erwähnt Gebete an Tagesabschnitten, keine Liste aller fünf Namen.",
-        "Ibn Qudāmah behandelt die Gebete und ihre Zeiten im Kapitel al-Mawāqīt.",
-        "Ein Gebetsplan übersetzt diese Regeln in praktische Uhrzeiten für den jeweiligen Ort."
-      ],
-      "evidence": "Qurʾān 11:114 spricht über Gebete an den Tagesenden und in der Nacht. Al-Mughnī, Kitāb aṣ-Ṣalāh, Bāb al-Mawāqīt, Bd. 1, S. 224–227, behandelt die einzelnen Gebetszeiten und die überlieferten Namen. Die minutengenaue heutige Berechnung ist keine direkte Aussage dieses Verses.",
-      "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/805. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 11:114. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
-      "terms": [
-        {
-          "say": "ṭarafay an-nahār",
-          "de": "die beiden Enden des Tages"
-        },
-        {
-          "say": "zulaf",
-          "de": "Nahzeiten der Nacht"
-        }
-      ],
-      "situation": "Im Jahresplan stehen fünf Gebete. Ein Kind fragt, ob ihre Namen als vollständige Liste wörtlich in Qurʾān 11:114 stehen.",
-      "practice": "Wir legen fünf Namenskarten in die Reihenfolge von morgens bis nachts: Faǧr, Ẓuhr, ʿAṣr, Maġrib, ʿIšāʾ.",
-      "summary": "Wir lernen die fünf Gebetsnamen in ihrer Tagesfolge. Qurʾān 11:114 erinnert an Gebete am Tag und in der Nacht. Die Namen und Zeitregeln sind auch in der Sunnah und in klassischen Fiqh-Werken überliefert.",
-      "audioScript": "Die Namen der fünf Gebete. Assalāmu ʿalaikum! Wir lernen Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ. Qurʾān 11:114 nennt das Gebet an Tagesabschnitten. Die vollständige Namensliste und die Einteilung der Zeiten erschließen wir mit weiteren Überlieferungen und dem klassischen Werk al-Mughnī. Ordne die Gebete von morgens bis nachts."
-    }
-  },
-  "questions": {
-    "4-5": [
+    "terms": [
       {
-        "type": "choice",
-        "prompt": "Welches Gebet gehört zum Morgen?",
-        "options": [
-          "Faǧr.",
-          "ʿIšāʾ."
-        ],
-        "correct": 0,
-        "hint": "Wir beginnen den Tag.",
-        "explain": "Mā schāʾ Allāh! Faǧr ist das Morgengebet."
+        "say": "ṭarafay an-nahār",
+        "de": "die beiden Enden des Tages"
       },
       {
-        "type": "choice",
-        "prompt": "Welches Gebet gehört zur Nacht?",
-        "options": [
-          "ʿIšāʾ.",
-          "Ẓuhr."
-        ],
-        "correct": 0,
-        "hint": "Es ist das fünfte Gebet.",
-        "explain": "Allāhumma bārik! ʿIšāʾ gehört zur Nacht."
+        "say": "zulaf",
+        "de": "Nahzeiten der Nacht"
       }
     ],
-    "6-8": [
-      {
-        "type": "choice",
-        "prompt": "Welche Reihenfolge ist richtig?",
-        "options": [
-          "Faǧr – Ẓuhr – ʿAṣr – Maġrib – ʿIšāʾ.",
-          "Ẓuhr – Faǧr – Maġrib – ʿIšāʾ – ʿAṣr."
-        ],
-        "correct": 0,
-        "hint": "Beginne mit dem Morgengebet.",
-        "explain": "Sehr gut! Wir ordnen die fünf Pflichtgebete von morgens bis nachts."
-      },
-      {
-        "type": "choice",
-        "prompt": "Welches Gebet folgt auf ʿAṣr?",
-        "options": [
-          "Maġrib.",
-          "Faǧr."
-        ],
-        "correct": 0,
-        "hint": "Denke an den Sonnenuntergang.",
-        "explain": "Maġrib folgt auf ʿAṣr."
-      },
-      {
-        "type": "text",
-        "prompt": "Wie heißen die Gebete, die du am Morgen und in der Nacht lernst?",
-        "sample": "Faǧr am Morgen und ʿIšāʾ in der Nacht.",
-        "hint": "Das erste und das fünfte Gebet.",
-        "explain": "Mā schāʾ Allāh! Diese beiden Namen hast du dir gemerkt."
-      }
-    ],
-    "9-10": [
-      {
-        "type": "choice",
-        "prompt": "Welche Aussage über Qurʾān 11:114 ist richtig?",
-        "options": [
-          "Der Vers nennt Gebete an Tagesabschnitten, nicht alle fünf Namen als vollständige Liste.",
-          "Der Vers nennt alle fünf Gebete mit einer festen Uhrzeit in Minuten."
-        ],
-        "correct": 0,
-        "hint": "Vergleiche die genaue Bedeutung des Verses.",
-        "explain": "Eine minutengenaue Fünferliste steht nicht wörtlich in 11:114."
-      },
-      {
-        "type": "text",
-        "prompt": "Nenne die fünf Pflichtgebete in der üblichen Tagesreihenfolge.",
-        "sample": "Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ.",
-        "hint": "Vom Morgen bis zur Nacht.",
-        "explain": "Allāhumma bārik! Du kennst die fünf Namen."
-      },
-      {
-        "type": "text",
-        "prompt": "Welche klassische Quelle ergänzt unseren Vers um genauere Gebetszeiten?",
-        "sample": "Ibn Qudāmah, al-Mughnī, Bd. 1, Kapitel Bāb al-Mawāqīt über die Gebetszeiten.",
-        "hint": "Ein hanbalitisches Fiqh-Werk.",
-        "explain": "Der Qurʾān-Vers und die klassische Erläuterung sind unterschiedliche Quellengattungen."
-      }
-    ]
+    "practice": "Wir legen fünf Namenskarten in die Reihenfolge von morgens bis nachts: Faǧr, Ẓuhr, ʿAṣr, Maġrib, ʿIšāʾ.",
+    "summary": "Wir lernen die fünf Gebetsnamen in ihrer Tagesfolge. Qurʾān 11:114 erinnert an Gebete am Tag und in der Nacht. Die Namen und Zeitregeln sind auch in der Sunnah und in klassischen Fiqh-Werken überliefert.",
+    "audioScript": "Die Namen der fünf Gebete. Wir lernen: Faǧr am Morgen, Ẓuhr um die Mittagszeit, ʿAṣr am Nachmittag, Maġrib nach Sonnenuntergang und ʿIšāʾ in der Nacht. Wir legen die Namen als Karten in die richtige Reihenfolge.",
+    "voiceApproved": false
   },
-  "terms": [
-    {
-      "say": "ṭarafay an-nahār",
-      "de": "die beiden Enden des Tages"
-    },
-    {
-      "say": "zulaf",
-      "de": "Nahzeiten der Nacht"
-    }
-  ],
-  "practice": "Wir legen fünf Namenskarten in die Reihenfolge von morgens bis nachts: Faǧr, Ẓuhr, ʿAṣr, Maġrib, ʿIšāʾ.",
-  "summary": "Wir lernen die fünf Gebetsnamen in ihrer Tagesfolge. Qurʾān 11:114 erinnert an Gebete am Tag und in der Nacht. Die Namen und Zeitregeln sind auch in der Sunnah und in klassischen Fiqh-Werken überliefert.",
-  "audioScript": "Die Namen der fünf Gebete. Wir lernen: Faǧr am Morgen, Ẓuhr um die Mittagszeit, ʿAṣr am Nachmittag, Maġrib nach Sonnenuntergang und ʿIšāʾ in der Nacht. Wir legen die Namen als Karten in die richtige Reihenfolge.",
-  "voiceApproved": false
-},
   "quran-was-bedeutet-sunnah": {
     "id": "quran-was-bedeutet-sunnah",
     "subject": "aqidah",
@@ -14954,8 +14954,8 @@ const additions=
     "pillar": "fiqh",
     "topic": "Zum Gebet stehen",
     "title": "Fiqh · Zum Gebet stehen",
-    "lead": "Wir stellen uns ruhig hin, wenn wir das Gebet üben.",
-    "goal": "Wir stellen uns ruhig hin, wenn wir das Gebet üben.",
+    "lead": "Wir lernen das Stehen zu Beginn des Gebets und nehmen Rücksicht auf Menschen, die nicht stehen können.",
+    "goal": "Beim Pflichtgebet stehen Menschen, die dazu in der Lage sind, zu Beginn aufrecht vor Allah. Wer gesundheitlich nicht stehen kann, braucht eine passende Erleichterung.",
     "quran": {
       "surah": 2,
       "ayah": 238,
@@ -14982,23 +14982,36 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Dieselbe Fundstelle trägt hier das Stehen. Wie die Hände genau liegen, steht in diesem Vers nicht. Das bleibt ungeprüft und wird nicht erfunden. al-Mughnī wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 118 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+      "note": "Ibn Qudāmah, al-Mughnī Bd. 1, S. 277 (15/539), zum Takbīr im Stehen und Ausnahmen; S. 277 (15/538) zu Unfähigkeit beim Takbīr. Qurʾān 2:238 fordert Gebetstreue und demütiges Stehen, liefert keine Detailhaltung der Hände. Keine abschließende Fiqh-Freigabe.",
       "sameLocusAsSlot": 118,
-      "editorialScopeNote": "Dieselbe Fundstelle trägt hier das Stehen. Wie die Hände genau liegen, steht in diesem Vers nicht. Das bleibt ungeprüft und wird nicht erfunden. al-Mughnī wurde nicht gelesen. Dieselbe gelesene Fundstelle wurde schon in Slot 118 mit einem anderen Lernziel verwendet. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft."
+      "editorialScopeNote": "Unterschied zwischen Qiyām als Gebetselement im Pflichtgebet und Lernübung eines Kindes; kein Zwang bei gesundheitlichen Einschränkungen, keine undokumentierte Anleitung zu Arm- oder Handstellungen.",
+      "classicalFiqhCrosscheck": {
+        "status": "primary-hanbali-text-read-not-approved",
+        "reviewDate": "2026-10-14",
+        "author": "Ibn Qudāmah",
+        "work": "al-Mughnī",
+        "chapter": "Kitāb aṣ-Ṣalāh, Bāb Ṣifat aṣ-Ṣalāh, Faṣl yaʾtī bi-t-takbīr qāʾiman",
+        "volume": "1",
+        "page": "277",
+        "directLink": "https://www.islamweb.net/ar/library/content/15/539",
+        "related": "https://www.islamweb.net/ar/library/content/15/538",
+        "scope": "In obligatory prayer with ability, the opening takbir is said standing; seated allowances depend on legal conditions. The text is not an instruction to force children or persons unable to stand.",
+        "humanFiqhApproval": false
+      }
     },
-    "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
-    "sample": "Wir stellen uns ruhig hin, wenn wir das Gebet üben.",
+    "hint": "Qiyām bedeutet Stehen. Gesundheitliche Möglichkeiten müssen respektiert werden.",
+    "sample": "Wir wenden uns beim Gebet Allah zu. Wer stehen kann, lernt das Stehen; wer es nicht kann, wird nicht beschämt oder zum Aufstehen gedrängt.",
     "ageText": {
       "4-5": {
-        "goal": "Wir stellen uns ruhig hin, wenn wir das Gebet üben.",
-        "intro": "Wir stellen uns ruhig hin, wenn wir das Gebet üben. Dieselbe Stelle wie in der Stunde über den Gebetsplatz fordert, die Gebete zu hüten und vor Allah demütig zu stehen. Stell dir vor: Die Kinder stehen nebeneinander, die Füße ruhig, die Hände nicht in den Taschen, und schauen nicht wild umher. Heute üben wir: Wir üben nur das ruhige Stehen. Die weiteren Bewegungen kommen in den späteren Stunden mit der Lehrperson.",
+        "goal": "Ich lerne ruhig zu stehen, soweit ich das gut kann.",
+        "intro": "Assalāmu ʿalaikum, liebe Kinder! Heute üben wir das ruhige Stehen beim Gebet. Das heißt Qiyām. Wenn es deinem Körper gut geht und du stehen kannst, stellst du dich mit der Lehrperson ruhig und aufrecht hin. Allah erinnert uns im Qurʾān daran, auf die Gebete zu achten. Manche Kinder können nicht gut stehen oder haben Schmerzen. Dann helfen wir ihnen und lassen sie im Sitzen üben. Niemand muss eine schmerzhafte Bewegung machen. Sag freundlich Bescheid, wenn du Hilfe brauchst.",
         "lines": [
-          "Wir stellen uns ruhig hin, wenn wir das Gebet üben.",
-          "Dieselbe Stelle wie in der Stunde über den Gebetsplatz fordert, die Gebete zu hüten und vor Allah demütig zu stehen.",
-          "Die Kinder stehen nebeneinander, die Füße ruhig, die Hände nicht in den Taschen, und schauen nicht wild umher.",
-          "Wir üben nur das ruhige Stehen. Die weiteren Bewegungen kommen in den späteren Stunden mit der Lehrperson."
+          "Qiyām bedeutet: Stehen beim Gebet.",
+          "Ich stelle mich ruhig hin, wenn ich gut stehen kann.",
+          "Wir achten freundlich aufeinander.",
+          "Wer nicht stehen kann, darf im Unterricht im Sitzen üben."
         ],
-        "evidence": "Wir lernen mit Qurʾān 2:238. Wir stellen uns ruhig hin, wenn wir das Gebet üben.",
+        "evidence": "Qurʾān 2:238 erinnert an die Gebete und das demütige Stehen. Ibn Qudāmah erklärt in al-Mughnī die Gebetsregeln zum Stehen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/205. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:238. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "terms": [
           {
@@ -15010,21 +15023,21 @@ const additions=
             "de": "Demut im Stehen, vom Wort des Verses"
           }
         ],
-        "situation": "Die Kinder stehen nebeneinander, die Füße ruhig, die Hände nicht in den Taschen, und schauen nicht wild umher.",
-        "practice": "Wir üben nur das ruhige Stehen. Die weiteren Bewegungen kommen in den späteren Stunden mit der Lehrperson.",
-        "summary": "Wir stellen uns ruhig hin, wenn wir das Gebet üben.",
-        "audioScript": "Zum Gebet stehen. Wir stellen uns ruhig hin, wenn wir das Gebet üben. Dieselbe Stelle wie in der Stunde über den Gebetsplatz fordert, die Gebete zu hüten und vor Allah demütig zu stehen. Die Kinder stehen nebeneinander, die Füße ruhig, die Hände nicht in den Taschen, und schauen nicht wild umher. Wir üben nur das ruhige Stehen. Die weiteren Bewegungen kommen in den späteren Stunden mit der Lehrperson."
+        "situation": "Ein Kind möchte üben, sein Bein tut aber weh. Die Lehrperson zeigt ihm eine Übung im Sitzen.",
+        "practice": "Wir stellen uns, wenn es uns möglich ist, ruhig und aufrecht hin. Wer Schmerzen hat oder nicht stehen kann, übt im Sitzen mit der Lehrperson. Niemand wird gedrängt.",
+        "summary": "Wir üben Qiyām ohne Eile und ohne Schmerzen.",
+        "audioScript": "Zum Gebet stehen. Assalāmu ʿalaikum! Qiyām heißt Stehen. Wir stellen uns ruhig hin, wenn wir stehen können. Wer Schmerzen hat, darf beim Lernen sitzen. Wir nehmen freundlich Rücksicht aufeinander."
       },
       "6-8": {
-        "goal": "Wir stellen uns ruhig hin, wenn wir das Gebet üben.",
-        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Wir stellen uns ruhig hin, wenn wir das Gebet üben. Wir lesen Qurʾān 2:238. Der Vers bedeutet sinngemäß: Dieselbe Stelle wie in der Stunde über den Gebetsplatz fordert, die Gebete zu hüten und vor Allah demütig zu stehen. So kann das im Alltag aussehen: Die Kinder stehen nebeneinander, die Füße ruhig, die Hände nicht in den Taschen, und schauen nicht wild umher. Die Aufgabe: Wir üben nur das ruhige Stehen. Die weiteren Bewegungen kommen in den späteren Stunden mit der Lehrperson. qawmah bedeutet: das Stehen; Unterrichtswort. qunūt bedeutet: Demut im Stehen, vom Wort des Verses.",
+        "goal": "Ich kann erklären, was Qiyām ist und warum Rücksicht auf die Fähigkeit zum Stehen wichtig ist.",
+        "intro": "Assalāmu ʿalaikum! Beim Pflichtgebet ist das Stehen für Menschen, die dazu in der Lage sind, ein wichtiges Gebetselement. Es heißt Qiyām. Qurʾān 2:238 ruft uns dazu auf, auf die Gebete zu achten und demütig vor Allah zu stehen. Ibn Qudāmah beschreibt in al-Mughnī, dass der eröffnende Takbīr im Pflichtgebet im Stehen gesprochen wird, wenn man dazu in der Lage ist. Er behandelt auch besondere Fälle. Wir erfinden daraus keine Regel, dass jedes Kind trotz Schmerzen stehen müsse. Heute üben wir, ruhig zu stehen, und achten darauf, dass niemand gedrängt wird. Vielleicht braucht ein Kind einen Stuhl: Dann helfen wir freundlich.",
         "lines": [
-          "Qurʾān 2:238 ist die gelesene Stelle.",
-          "Dieselbe Stelle wie in der Stunde über den Gebetsplatz fordert, die Gebete zu hüten und vor Allah demütig zu stehen.",
-          "Die Kinder stehen nebeneinander, die Füße ruhig, die Hände nicht in den Taschen, und schauen nicht wild umher.",
-          "Wir üben nur das ruhige Stehen. Die weiteren Bewegungen kommen in den späteren Stunden mit der Lehrperson."
+          "Qiyām heißt das Stehen im Gebet.",
+          "Qurʾān 2:238 spricht vom Gebet und demütigen Stehen.",
+          "Al-Mughnī erläutert den eröffnenden Takbīr im Stehen und besondere Ausnahmen.",
+          "Wir zwingen kein Kind, trotz Schmerzen aufzustehen."
         ],
-        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 2:238. Sinngemäß: Dieselbe Stelle wie in der Stunde über den Gebetsplatz fordert, die Gebete zu hüten und vor Allah demütig zu stehen.",
+        "evidence": "Qurʾān 2:238 spricht vom demütigen Stehen. Ibn Qudāmah, al-Mughnī Bd. 1, S. 277, erläutert den Takbīr im Stehen beim Pflichtgebet und unterscheidet Ausnahmen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/205. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:238. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "terms": [
           {
@@ -15036,21 +15049,21 @@ const additions=
             "de": "Demut im Stehen, vom Wort des Verses"
           }
         ],
-        "situation": "Die Kinder stehen nebeneinander, die Füße ruhig, die Hände nicht in den Taschen, und schauen nicht wild umher.",
-        "practice": "Wir üben nur das ruhige Stehen. Die weiteren Bewegungen kommen in den späteren Stunden mit der Lehrperson.",
-        "summary": "Qurʾān 2:238 trägt diese Stunde. Dieselbe Stelle wie in der Stunde über den Gebetsplatz fordert, die Gebete zu hüten und vor Allah demütig zu stehen.",
-        "audioScript": "Zum Gebet stehen. Dieselbe Stelle wie in der Stunde über den Gebetsplatz fordert, die Gebete zu hüten und vor Allah demütig zu stehen. Die Kinder stehen nebeneinander, die Füße ruhig, die Hände nicht in den Taschen, und schauen nicht wild umher. Wir üben nur das ruhige Stehen. Die weiteren Bewegungen kommen in den späteren Stunden mit der Lehrperson."
+        "situation": "Die Gruppe übt das Stehen. Ein Kind nutzt wegen Schmerzen einen Stuhl und wird freundlich einbezogen.",
+        "practice": "Wir stellen uns, wenn es uns möglich ist, ruhig und aufrecht hin. Wer Schmerzen hat oder nicht stehen kann, übt im Sitzen mit der Lehrperson. Niemand wird gedrängt.",
+        "summary": "Wir lernen Qiyām, achten auf unsere körperlichen Möglichkeiten und lassen niemanden mit Schmerzen allein.",
+        "audioScript": "Zum Gebet stehen. Assalāmu ʿalaikum! Qiyām bedeutet Stehen. Im Pflichtgebet stehen Menschen, die es können, zu Beginn aufrecht. Ibn Qudāmah erläutert auch Ausnahmen. Wenn jemand Schmerzen hat, helfen wir und üben ohne Zwang."
       },
       "9-10": {
-        "goal": "Ich kann das Thema „Zum Gebet stehen“ anhand von Qurʾān 2:238 erklären und ein Alltagsbeispiel beurteilen.",
-        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Zum Gebet stehen. Wir stellen uns ruhig hin, wenn wir das Gebet üben. In Qurʾān 2:238 lernen wir sinngemäß: Dieselbe Stelle wie in der Stunde über den Gebetsplatz fordert, die Gebete zu hüten und vor Allah demütig zu stehen. qawmah bedeutet das Stehen; Unterrichtswort. qunūt bedeutet Demut im Stehen, vom Wort des Verses. Stell dir diese Situation vor: Die Kinder stehen nebeneinander, die Füße ruhig, die Hände nicht in den Taschen, und schauen nicht wild umher. Welcher nächste Schritt ist gut? Wir üben nur das ruhige Stehen. Die weiteren Bewegungen kommen in den späteren Stunden mit der Lehrperson. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+        "goal": "Ich unterscheide Qurʾān 2:238, Qiyām beim Pflichtgebet und gesundheitliche Erleichterungen.",
+        "intro": "Assalāmu ʿalaikum! Beim Gebet stehen wir ehrfürchtig vor Allah, soweit wir dazu in der Lage sind. Qurʾān 2:238 fordert zum Bewahren der Gebete und zum demütigen Stehen auf. Das ist jedoch keine vollständige Anleitung zu allen Gebetshaltungen. Ibn Qudāmah erklärt in al-Mughnī, Bd. 1, S. 277 (Abschnitt über den Takbīr im Stehen), dass die Eröffnung des Pflichtgebets mit dem Takbīr im Stehen geschieht, sofern die gesetzlichen Voraussetzungen erfüllt sind. Er bespricht auch Ausnahmen und andere Gebetsarten. Für uns gilt im Unterricht: Wir üben, ruhig und aufrecht zu stehen, ohne Arme, Fußabstände oder komplizierte Rechtsdetails zu erfinden. Kinder mit gesundheitlichen Einschränkungen lernen mit einer geeigneten Hilfe. Erkläre, weshalb Rücksichtnahme Teil unseres guten Umgangs ist.",
         "lines": [
-          "Unsere Qurʾān-Stelle ist Qurʾān 2:238.",
-          "Dieselbe Stelle wie in der Stunde über den Gebetsplatz fordert, die Gebete zu hüten und vor Allah demütig zu stehen.",
-          "Die Kinder stehen nebeneinander, die Füße ruhig, die Hände nicht in den Taschen, und schauen nicht wild umher.",
-          "Wir üben nur das ruhige Stehen. Die weiteren Bewegungen kommen in den späteren Stunden mit der Lehrperson."
+          "Qurʾān 2:238 ruft zum Bewahren der Gebete und zum demütigen Stehen auf.",
+          "Qiyām ist das Stehen im Gebet.",
+          "Al-Mughnī behandelt den eröffnenden Takbīr im Stehen und unterscheidet Ausnahmen.",
+          "Ein Kind mit Einschränkungen wird respektvoll unterstützt, nicht zur Bewegung gezwungen."
         ],
-        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 2:238. Sinngemäß: Dieselbe Stelle wie in der Stunde über den Gebetsplatz fordert, die Gebete zu hüten und vor Allah demütig zu stehen.",
+        "evidence": "Belege getrennt: Qurʾān 2:238 nennt die Gebete und das demütige Stehen. Ibn Qudāmah, al-Mughnī Bd. 1, S. 277 (Islamweb 15/539), beschreibt die Eröffnung des Pflichtgebets im Stehen und diskutiert Ausnahmen. Nicht alle Einzelvoraussetzungen sind in dieser Kinderstunde ausgearbeitet.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/205. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:238. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "terms": [
           {
@@ -15062,93 +15075,93 @@ const additions=
             "de": "Demut im Stehen, vom Wort des Verses"
           }
         ],
-        "situation": "Die Kinder stehen nebeneinander, die Füße ruhig, die Hände nicht in den Taschen, und schauen nicht wild umher.",
-        "practice": "Wir üben nur das ruhige Stehen. Die weiteren Bewegungen kommen in den späteren Stunden mit der Lehrperson.",
-        "summary": "Wir stellen uns ruhig hin, wenn wir das Gebet üben. Wir üben nur das ruhige Stehen. Die weiteren Bewegungen kommen in den späteren Stunden mit der Lehrperson.",
-        "audioScript": "Zum Gebet stehen. Wir stellen uns ruhig hin, wenn wir das Gebet üben. Dieselbe Stelle wie in der Stunde über den Gebetsplatz fordert, die Gebete zu hüten und vor Allah demütig zu stehen. Die Kinder stehen nebeneinander, die Füße ruhig, die Hände nicht in den Taschen, und schauen nicht wild umher. Wir üben nur das ruhige Stehen. Die weiteren Bewegungen kommen in den späteren Stunden mit der Lehrperson."
+        "situation": "Ein Kind kann wegen einer Verletzung nicht lange stehen. Die Gruppe möchte das Gebet üben, ohne das Kind auszuschließen.",
+        "practice": "Wir stellen uns, wenn es uns möglich ist, ruhig und aufrecht hin. Wer Schmerzen hat oder nicht stehen kann, übt im Sitzen mit der Lehrperson. Niemand wird gedrängt.",
+        "summary": "Wir wenden uns beim Gebet Allah zu. Wer stehen kann, lernt das Stehen; wer es nicht kann, wird nicht beschämt oder zum Aufstehen gedrängt.",
+        "audioScript": "Zum Gebet stehen. Assalāmu ʿalaikum! Qurʾān 2:238 erinnert an das demütige Stehen. Ibn Qudāmah erklärt den Takbīr im Stehen beim Pflichtgebet und auch Ausnahmen. Wir stehen ruhig, soweit es uns möglich ist, und nehmen Rücksicht auf Menschen mit Einschränkungen."
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Zum Gebet stehen?",
+          "prompt": "Was üben wir heute?",
           "options": [
-            "Wir stellen uns ruhig hin, wenn wir das Gebet üben.",
-            "Der Vers sagt dem Propheten, Friede sei mit ihm, dass er auf einem gewaltigen Charakter ist."
+            "Wir stehen ruhig, wenn wir es gut können.",
+            "Wir schubsen ein anderes Kind beim Stehen."
           ],
           "correct": 0,
-          "hint": "Denke an unsere heutige Stunde.",
-          "explain": "Mā schāʾ Allāh! Wir stellen uns ruhig hin, wenn wir das Gebet üben."
+          "hint": "Wir bewegen uns ruhig.",
+          "explain": "Mā schāʾ Allāh! Beim Üben achten wir aufeinander."
         },
         {
           "type": "choice",
-          "prompt": "Was können wir heute üben?",
+          "prompt": "Ein Kind hat Schmerzen beim Stehen. Was tun wir?",
           "options": [
-            "Wir üben nur das ruhige Stehen. Die weiteren Bewegungen kommen in den späteren Stunden mit der Lehrperson.",
-            "Wir sagen den Satz in der Ich-Form und ohne einen Hadith zu erfinden."
+            "Wir lassen es mit Hilfe im Sitzen üben.",
+            "Wir sagen, es muss trotz Schmerzen stehen."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "hint": "Wir helfen freundlich.",
+          "explain": "Allāhumma bārik! Wir nehmen Rücksicht."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Zum Gebet stehen?",
+          "prompt": "Was bedeutet Qiyām?",
           "options": [
-            "Der Vers sagt dem Propheten, Friede sei mit ihm, dass er auf einem gewaltigen Charakter ist.",
-            "Wir stellen uns ruhig hin, wenn wir das Gebet üben."
+            "Stehen im Gebet.",
+            "Den Raum laut zu verlassen."
           ],
-          "correct": 1,
-          "hint": "Worum ging es in der Stunde?",
-          "explain": "Mā schāʾ Allāh! Wir stellen uns ruhig hin, wenn wir das Gebet üben."
+          "correct": 0,
+          "hint": "Denke an unsere heutige Bewegung.",
+          "explain": "Sehr gut! Qiyām heißt Stehen."
         },
         {
           "type": "choice",
-          "prompt": "Welche Handlung gehört zu unserer Übung?",
+          "prompt": "Was sagt Qurʾān 2:238 sinngemäß?",
           "options": [
-            "Wir üben nur das ruhige Stehen. Die weiteren Bewegungen kommen in den späteren Stunden mit der Lehrperson.",
-            "Wir sagen den Satz in der Ich-Form und ohne einen Hadith zu erfinden."
+            "Bewahrt die Gebete und steht demütig vor Allah.",
+            "Kauft unbedingt einen Teppich in einer bestimmten Farbe."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "hint": "Es geht um das Gebet.",
+          "explain": "Der Vers erinnert an die Gebete und demütiges Stehen."
         },
         {
           "type": "text",
-          "prompt": "Was möchtest du dir aus Qurʾān 2:238 merken?",
-          "sample": "Dieselbe Stelle wie in der Stunde über den Gebetsplatz fordert, die Gebete zu hüten und vor Allah demütig zu stehen.",
-          "hint": "Erkläre die Stelle in eigenen Worten.",
-          "explain": "Mā schāʾ Allāh! Wir bleiben bei dem, was wir aus dem Qurʾān lernen."
+          "prompt": "Wie helfen wir einem Kind, das wegen Schmerzen nicht stehen kann?",
+          "sample": "Wir drängen es nicht und lassen es mit der Lehrperson passend im Sitzen üben.",
+          "hint": "Freundliche Rücksicht.",
+          "explain": "Mā schāʾ Allāh! Gesundheit und Würde zählen."
         }
       ],
       "9-10": [
         {
-          "type": "text",
-          "prompt": "Erkläre in eigenen Worten, was wir aus Qurʾān 2:238 lernen.",
-          "sample": "Dieselbe Stelle wie in der Stunde über den Gebetsplatz fordert, die Gebete zu hüten und vor Allah demütig zu stehen.",
-          "hint": "Denke an die Bedeutung der Stelle.",
-          "explain": "Mā schāʾ Allāh! Du hast den Vers aufmerksam erklärt."
-        },
-        {
-          "type": "text",
-          "prompt": "Was wäre in dieser Situation ein guter Schritt? Die Kinder stehen nebeneinander, die Füße ruhig, die Hände nicht in den Taschen, und schauen nicht wild umher.",
-          "sample": "Wir üben nur das ruhige Stehen. Die weiteren Bewegungen kommen in den späteren Stunden mit der Lehrperson.",
-          "hint": "Denke an unsere Übung.",
-          "explain": "Allāhumma bārik! Du hast einen passenden Schritt überlegt."
-        },
-        {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Welche Quelle erläutert weitere Bedingungen des Gebetsbeginns im Stehen?",
           "options": [
-            "Wir stellen uns ruhig hin, wenn wir das Gebet üben.",
-            "Der Vers sagt dem Propheten, Friede sei mit ihm, dass er auf einem gewaltigen Charakter ist."
+            "Ibn Qudāmah, al-Mughnī, Bd. 1, S. 277.",
+            "Qurʾān 2:238 enthält alle Arm- und Fußstellungen."
           ],
           "correct": 0,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "hint": "Ein klassisches Fiqh-Werk.",
+          "explain": "Al-Mughnī behandelt Einzelheiten, die nicht wörtlich in diesem Vers stehen."
+        },
+        {
+          "type": "text",
+          "prompt": "Welchen Unterschied gibt es zwischen dem Qurʾān-Vers und der Fiqh-Erläuterung?",
+          "sample": "Qurʾān 2:238 spricht vom Gebet und demütigen Stehen. Al-Mughnī erläutert das Stehen beim Eröffnungstakbīr und Ausnahmen.",
+          "hint": "Unterscheide allgemeine Mahnung und rechtliche Einzelregel.",
+          "explain": "Allāhumma bārik! Du trennst die Quellen sauber."
+        },
+        {
+          "type": "text",
+          "prompt": "Wie können wir ein verletztes Kind am Gebetsunterricht beteiligen?",
+          "sample": "Ohne Zwang, mit einer passenden Übung im Sitzen und freundlicher Unterstützung.",
+          "hint": "Niemand soll Schmerzen für eine Übung ertragen müssen.",
+          "explain": "Rücksicht und Hilfe gehören zu gutem Verhalten."
         }
       ]
     },
@@ -15162,9 +15175,9 @@ const additions=
         "de": "Demut im Stehen, vom Wort des Verses"
       }
     ],
-    "practice": "Wir üben nur das ruhige Stehen. Die weiteren Bewegungen kommen in den späteren Stunden mit der Lehrperson.",
-    "summary": "Wir stellen uns ruhig hin, wenn wir das Gebet üben. Dieselbe Stelle wie in der Stunde über den Gebetsplatz fordert, die Gebete zu hüten und vor Allah demütig zu stehen.",
-    "audioScript": "Zum Gebet stehen. Wir stellen uns ruhig hin, wenn wir das Gebet üben. Dieselbe Stelle wie in der Stunde über den Gebetsplatz fordert, die Gebete zu hüten und vor Allah demütig zu stehen. Die Kinder stehen nebeneinander, die Füße ruhig, die Hände nicht in den Taschen, und schauen nicht wild umher. Wir üben nur das ruhige Stehen. Die weiteren Bewegungen kommen in den späteren Stunden mit der Lehrperson.",
+    "practice": "Wir stellen uns, wenn es uns möglich ist, ruhig und aufrecht hin. Wer Schmerzen hat oder nicht stehen kann, übt im Sitzen mit der Lehrperson. Niemand wird gedrängt.",
+    "summary": "Wir wenden uns beim Gebet Allah zu. Wer stehen kann, lernt das Stehen; wer es nicht kann, wird nicht beschämt oder zum Aufstehen gedrängt.",
+    "audioScript": "Zum Gebet stehen. Assalāmu ʿalaikum! Wer stehen kann, stellt sich zum Beginn des Pflichtgebets ruhig hin. Wer nicht stehen kann, braucht eine passende Erleichterung. Wir helfen einander und üben ohne Schmerzen.",
     "voiceApproved": false
   },
   "tawhid-bedeutung-ibadah": {
@@ -16701,8 +16714,8 @@ const additions=
     "pillar": "fiqh",
     "topic": "Takbīrat al-Iḥrām kennenlernen",
     "title": "Fiqh · Takbīrat al-Iḥrām kennenlernen",
-    "lead": "Am Anfang des Gebets gibt es ein erstes Allāhu akbar.",
-    "goal": "Am Anfang des Gebets gibt es ein erstes Allāhu akbar. Wir schauen es bei der Lehrperson an.",
+    "lead": "Wir lernen die Worte, mit denen das Gebet eröffnet wird: Allāhu akbar.",
+    "goal": "Takbīrat al-Iḥrām ist der eröffnende Takbīr des Gebets: Wir beginnen mit Allāhu akbar.",
     "quran": {
       "surah": 17,
       "ayah": 111,
@@ -16729,22 +16742,39 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Der Vers beschreibt nicht die Handhaltung und nicht den Rechtsnamen Takbīrat al-Iḥrām. Diese Einzelheiten bleiben ohne gelesenes Fiqh-Buch ungeprüft. Wir erfinden den Winkel der Hände nicht. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
-      "editorialScopeNote": "Der Vers beschreibt nicht die Handhaltung und nicht den Rechtsnamen Takbīrat al-Iḥrām. Diese Einzelheiten bleiben ohne gelesenes Fiqh-Buch ungeprüft. Wir erfinden den Winkel der Hände nicht. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft."
+      "note": "Al-Mughnī Bd. 1 S. 276–277 (Islamweb 15/532, 15/533, 15/539) nun abgeglichen: Takbīrat al-Iḥrām mit Allāhu akbar zum Gebetsbeginn. Qurʾān 17:111 ist allgemeine Anordnung, Allah groß zu preisen, kein isolierter Beleg für die Rechtsformel. Hadithnummern wurden nicht separat verifiziert; keine Endfreigabe.",
+      "editorialScopeNote": "Allāhu akbar als Gebetseröffnung aus klassischer hanbalitischer Fiqh-Quelle, nicht als angebliches direktes Wortgebot des Verses 17:111. Weitere Unterschiede anderer Rechtsschulen und Detailregeln nicht als Kinderpflicht lehren.",
+      "classicalFiqhCrosscheck": {
+        "status": "primary-hanbali-text-read-not-approved",
+        "reviewDate": "2026-10-14",
+        "author": "Ibn Qudāmah",
+        "work": "al-Mughnī",
+        "chapter": "Kitāb aṣ-Ṣalāh, Bāb Ṣifat aṣ-Ṣalāh, Masʾalat aṣ-Ṣalāh lā tanʿaqid illā bi-qawl Allāhu akbar",
+        "volume": "1",
+        "page": "276–277",
+        "directLink": "https://www.islamweb.net/ar/library/content/15/532",
+        "additionalLinks": [
+          "https://www.islamweb.net/ar/library/content/15/533",
+          "https://www.islamweb.net/ar/library/content/15/539"
+        ],
+        "preciseExcerpt": "الصلاة لا تنعقد إلا بقول : الله أكبر",
+        "scope": "al-Mughni reports opening the prayer with Allahu akbar in Imam Ahmad's view and cites Sunnah. Quran 17:111 commands glorification of Allah but does not itself specify this ritual opening. Legal details and exceptions still require full review.",
+        "humanFiqhApproval": false
+      }
     },
-    "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
-    "sample": "Am Anfang des Gebets gibt es ein erstes Allāhu akbar.",
+    "hint": "Allāhu akbar bedeutet: Allah ist größer. Der Qurʾān-Vers 17:111 lobt Allah, aber die konkrete Gebetseröffnung stammt aus der Sunnah und Fiqh-Erklärung.",
+    "sample": "Mit Allāhu akbar beginnen wir das Gebet.",
     "ageText": {
       "4-5": {
-        "goal": "Am Anfang des Gebets gibt es ein erstes Allāhu akbar.",
-        "intro": "Am Anfang des Gebets gibt es ein erstes Allāhu akbar. Der Vers endet damit, Allah zu loben, Ihm keinen Sohn und keinen Teilhaber zuzuschreiben, und sagt: Und rühme Ihn mit einem großen Rühmen. Stell dir vor: Die Lehrperson hebt die Hände so, wie sie es kennt, und sagt das erste Allāhu akbar. Die Kinder sprechen es nur mit, wenn sie es schon sicher können. Heute üben wir: Wir erkennen: Danach beginnt das Gebet. Vorher reden wir nicht weiter.",
+        "goal": "Ich lerne die Worte Allāhu akbar am Anfang des Gebets.",
+        "intro": "Assalāmu ʿalaikum, liebe Kinder! Heute lernen wir den Beginn des Gebets kennen. Wir sagen dabei: Allāhu akbar. Das bedeutet, Allah ist größer. Dieser erste Takbīr heißt Takbīrat al-Iḥrām. Die Lehrperson spricht die Worte ruhig vor, und wir sprechen sie gemeinsam nach, wenn wir sie schon gut können. Im Qurʾān lernen wir, Allah zu loben und groß zu preisen. Wie genau das Gebet beginnt, erklärt uns auch die Sunnah. Wir üben heute nur die Worte, ohne Eile.",
         "lines": [
-          "Am Anfang des Gebets gibt es ein erstes Allāhu akbar.",
-          "Der Vers endet damit, Allah zu loben, Ihm keinen Sohn und keinen Teilhaber zuzuschreiben, und sagt: Und rühme Ihn mit einem großen Rühmen.",
-          "Die Lehrperson hebt die Hände so, wie sie es kennt, und sagt das erste Allāhu akbar. Die Kinder sprechen es nur mit, wenn sie es schon sicher können.",
-          "Wir erkennen: Danach beginnt das Gebet. Vorher reden wir nicht weiter."
+          "Am Anfang des Gebets sagen wir Allāhu akbar.",
+          "Das bedeutet: Allah ist größer.",
+          "Der erste Takbīr heißt Takbīrat al-Iḥrām.",
+          "Wir üben die Worte ruhig mit der Lehrperson."
         ],
-        "evidence": "Wir lernen mit Qurʾān 17:111. Am Anfang des Gebets gibt es ein erstes Allāhu akbar.",
+        "evidence": "Qurʾān 17:111 lehrt, Allah groß zu preisen. Ibn Qudāmah beschreibt in al-Mughnī, dass das Gebet mit Allāhu akbar eröffnet wird.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1054. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:111. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "terms": [
           {
@@ -16756,21 +16786,21 @@ const additions=
             "de": "Allāhu akbar sagen; die Gebetseinzelheit ist hier Lehrerübung"
           }
         ],
-        "situation": "Die Lehrperson hebt die Hände so, wie sie es kennt, und sagt das erste Allāhu akbar. Die Kinder sprechen es nur mit, wenn sie es schon sicher können.",
-        "practice": "Wir erkennen: Danach beginnt das Gebet. Vorher reden wir nicht weiter.",
-        "summary": "Am Anfang des Gebets gibt es ein erstes Allāhu akbar.",
-        "audioScript": "Takbīrat al-Iḥrām kennenlernen. Am Anfang des Gebets gibt es ein erstes Allāhu akbar. Der Vers endet damit, Allah zu loben, Ihm keinen Sohn und keinen Teilhaber zuzuschreiben, und sagt: Und rühme Ihn mit einem großen Rühmen. Die Lehrperson hebt die Hände so, wie sie es kennt, und sagt das erste Allāhu akbar. Die Kinder sprechen es nur mit, wenn sie es schon sicher können. Wir erkennen: Danach beginnt das Gebet. Vorher reden wir nicht weiter."
+        "situation": "Die Lehrperson zeigt den Beginn des Gebets und spricht Allāhu akbar ruhig vor.",
+        "practice": "Wir üben mit der Lehrperson, die Worte Allāhu akbar ruhig und verständlich zu sprechen. Wir erfinden keine zusätzlichen Formeln und führen keine genaue Handhöhe ohne eigenen Beleg als Pflicht vor.",
+        "summary": "Der Gebetsbeginn heißt Takbīrat al-Iḥrām. Seine Worte sind Allāhu akbar.",
+        "audioScript": "Takbīrat al-Iḥrām. Assalāmu ʿalaikum! Am Anfang des Gebets sagen wir Allāhu akbar. Das bedeutet: Allah ist größer. Die Worte sprechen wir mit unserer Lehrperson ruhig und deutlich."
       },
       "6-8": {
-        "goal": "Am Anfang des Gebets gibt es ein erstes Allāhu akbar.",
-        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Am Anfang des Gebets gibt es ein erstes Allāhu akbar. Wir lesen Qurʾān 17:111. Der Vers bedeutet sinngemäß: Der Vers endet damit, Allah zu loben, Ihm keinen Sohn und keinen Teilhaber zuzuschreiben, und sagt: Und rühme Ihn mit einem großen Rühmen. So kann das im Alltag aussehen: Die Lehrperson hebt die Hände so, wie sie es kennt, und sagt das erste Allāhu akbar. Die Kinder sprechen es nur mit, wenn sie es schon sicher können. Die Aufgabe: Wir erkennen: Danach beginnt das Gebet. Vorher reden wir nicht weiter. kabbīrhu bedeutet: rühme Ihn groß. takbīr bedeutet: Allāhu akbar sagen; die Gebetseinzelheit ist hier Lehrerübung.",
+        "goal": "Ich kann Takbīrat al-Iḥrām erklären und die Worte Allāhu akbar wiedergeben.",
+        "intro": "Assalāmu ʿalaikum! Jedes Gebet hat einen Anfang. Die Worte dazu lauten Allāhu akbar, Allah ist größer. Diesen eröffnenden Takbīr nennen wir Takbīrat al-Iḥrām. Qurʾān 17:111 fordert dazu auf, Allah groß zu preisen. Der Vers schreibt aber nicht allein die gesamte Gebetsabfolge vor. In al-Mughnī erklärt Ibn Qudāmah mithilfe der Sunnah, dass der eröffnende Takbīr das Gebet beginnt. Wir sprechen die Worte heute ruhig nach. Wenn ein Kind die arabische Aussprache noch lernt, helfen wir freundlich und ohne Beschämung.",
         "lines": [
-          "Qurʾān 17:111 ist die gelesene Stelle.",
-          "Der Vers endet damit, Allah zu loben, Ihm keinen Sohn und keinen Teilhaber zuzuschreiben, und sagt: Und rühme Ihn mit einem großen Rühmen.",
-          "Die Lehrperson hebt die Hände so, wie sie es kennt, und sagt das erste Allāhu akbar. Die Kinder sprechen es nur mit, wenn sie es schon sicher können.",
-          "Wir erkennen: Danach beginnt das Gebet. Vorher reden wir nicht weiter."
+          "Takbīrat al-Iḥrām ist der erste Takbīr des Gebets.",
+          "Seine Worte sind Allāhu akbar.",
+          "Qurʾān 17:111 fordert dazu auf, Allah groß zu preisen.",
+          "Al-Mughnī erläutert das Allāhu akbar zum Gebetsbeginn."
         ],
-        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 17:111. Sinngemäß: Der Vers endet damit, Allah zu loben, Ihm keinen Sohn und keinen Teilhaber zuzuschreiben, und sagt: Und rühme Ihn mit einem großen Rühmen.",
+        "evidence": "Der Vers 17:111 fordert dazu auf, Allah groß zu preisen. Ibn Qudāmah, al-Mughnī Bd. 1 S. 276, erklärt aus den Gebetsüberlieferungen die Formulierung Allāhu akbar zur Eröffnung des Gebets.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1054. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:111. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "terms": [
           {
@@ -16782,21 +16812,21 @@ const additions=
             "de": "Allāhu akbar sagen; die Gebetseinzelheit ist hier Lehrerübung"
           }
         ],
-        "situation": "Die Lehrperson hebt die Hände so, wie sie es kennt, und sagt das erste Allāhu akbar. Die Kinder sprechen es nur mit, wenn sie es schon sicher können.",
-        "practice": "Wir erkennen: Danach beginnt das Gebet. Vorher reden wir nicht weiter.",
-        "summary": "Qurʾān 17:111 trägt diese Stunde. Der Vers endet damit, Allah zu loben, Ihm keinen Sohn und keinen Teilhaber zuzuschreiben, und sagt: Und rühme Ihn mit einem großen Rühmen.",
-        "audioScript": "Takbīrat al-Iḥrām kennenlernen. Der Vers endet damit, Allah zu loben, Ihm keinen Sohn und keinen Teilhaber zuzuschreiben, und sagt: Und rühme Ihn mit einem großen Rühmen. Die Lehrperson hebt die Hände so, wie sie es kennt, und sagt das erste Allāhu akbar. Die Kinder sprechen es nur mit, wenn sie es schon sicher können. Wir erkennen: Danach beginnt das Gebet. Vorher reden wir nicht weiter."
+        "situation": "Ein Kind sagt Allāhu akbar noch langsam und fragt, ob es üben darf. Die Lehrperson ermutigt es ohne Druck.",
+        "practice": "Wir üben mit der Lehrperson, die Worte Allāhu akbar ruhig und verständlich zu sprechen. Wir erfinden keine zusätzlichen Formeln und führen keine genaue Handhöhe ohne eigenen Beleg als Pflicht vor.",
+        "summary": "Mit Allāhu akbar beginnt das Gebet; der eröffnende Takbīr heißt Takbīrat al-Iḥrām.",
+        "audioScript": "Takbīrat al-Iḥrām. Assalāmu ʿalaikum! Mit Allāhu akbar beginnt das Gebet. Es bedeutet: Allah ist größer. Qurʾān 17:111 fordert dazu auf, Allah groß zu preisen. Die genaue Eröffnung erklären die Sunnah und klassische Fiqh-Werke. Wir lernen sie gemeinsam."
       },
       "9-10": {
-        "goal": "Ich kann das Thema „Takbīrat al-Iḥrām kennenlernen“ anhand von Qurʾān 17:111 erklären und ein Alltagsbeispiel beurteilen.",
-        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Takbīrat al-Iḥrām kennenlernen. Am Anfang des Gebets gibt es ein erstes Allāhu akbar. In Qurʾān 17:111 lernen wir sinngemäß: Der Vers endet damit, Allah zu loben, Ihm keinen Sohn und keinen Teilhaber zuzuschreiben, und sagt: Und rühme Ihn mit einem großen Rühmen. kabbīrhu bedeutet rühme Ihn groß. takbīr bedeutet Allāhu akbar sagen; die Gebetseinzelheit ist hier Lehrerübung. Stell dir diese Situation vor: Die Lehrperson hebt die Hände so, wie sie es kennt, und sagt das erste Allāhu akbar. Die Kinder sprechen es nur mit, wenn sie es schon sicher können. Welcher nächste Schritt ist gut? Wir erkennen: Danach beginnt das Gebet. Vorher reden wir nicht weiter. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+        "goal": "Ich unterscheide Qurʾān 17:111 von der aus der Sunnah erklärten Takbīrat al-Iḥrām.",
+        "intro": "Assalāmu ʿalaikum! Heute geht es um den eröffneten Beginn der Ṣalāh, die Takbīrat al-Iḥrām. Wir sagen dazu Allāhu akbar. Qurʾān 17:111 fordert uns auf, Allah groß zu preisen, benennt aber nicht allein alle Einzelregeln der Gebetseröffnung. Ibn Qudāmah erläutert in al-Mughnī, Bd. 1, S. 276, die Formulierung Allāhu akbar als Beginn des Gebets und führt überlieferte Belege an. Dabei unterscheidet er auch die Auffassungen der Rechtsschulen. Im Unterricht bleiben wir bei einer einfachen, belegten Einführung: Die Worte des ersten Takbīr lernen wir sorgfältig. Die Lehrperson kann die Bewegung zeigen; eine bestimmte Handhöhe wird hier nicht aus dem Qurʾān-Vers erfunden. Kannst du erklären, warum Qurʾān und Sunnah gemeinsam für die Kenntnis des Gebets wichtig sind?",
         "lines": [
-          "Unsere Qurʾān-Stelle ist Qurʾān 17:111.",
-          "Der Vers endet damit, Allah zu loben, Ihm keinen Sohn und keinen Teilhaber zuzuschreiben, und sagt: Und rühme Ihn mit einem großen Rühmen.",
-          "Die Lehrperson hebt die Hände so, wie sie es kennt, und sagt das erste Allāhu akbar. Die Kinder sprechen es nur mit, wenn sie es schon sicher können.",
-          "Wir erkennen: Danach beginnt das Gebet. Vorher reden wir nicht weiter."
+          "Qurʾān 17:111 fordert zum großen Lob Allahs auf.",
+          "Die Eröffnung des Gebets heißt Takbīrat al-Iḥrām.",
+          "Ibn Qudāmah erläutert Allāhu akbar als ihre Worte.",
+          "Die Einzelheiten der Gebetseröffnung werden mit der Sunnah erläutert."
         ],
-        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 17:111. Sinngemäß: Der Vers endet damit, Allah zu loben, Ihm keinen Sohn und keinen Teilhaber zuzuschreiben, und sagt: Und rühme Ihn mit einem großen Rühmen.",
+        "evidence": "Qurʾān 17:111 ist ein Beleg für das große Lob Allahs, nicht die vollständige Handlungsbeschreibung des Eröffnungstakbīr. Ibn Qudāmah, al-Mughnī Bd. 1, S. 276 (Islamweb 15/532), erklärt Allāhu akbar als eröffnenden Takbīr und führt Sunnah-Nachweise an.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1054. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:111. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "terms": [
           {
@@ -16808,93 +16838,93 @@ const additions=
             "de": "Allāhu akbar sagen; die Gebetseinzelheit ist hier Lehrerübung"
           }
         ],
-        "situation": "Die Lehrperson hebt die Hände so, wie sie es kennt, und sagt das erste Allāhu akbar. Die Kinder sprechen es nur mit, wenn sie es schon sicher können.",
-        "practice": "Wir erkennen: Danach beginnt das Gebet. Vorher reden wir nicht weiter.",
-        "summary": "Am Anfang des Gebets gibt es ein erstes Allāhu akbar. Wir erkennen: Danach beginnt das Gebet. Vorher reden wir nicht weiter.",
-        "audioScript": "Takbīrat al-Iḥrām kennenlernen. Am Anfang des Gebets gibt es ein erstes Allāhu akbar. Der Vers endet damit, Allah zu loben, Ihm keinen Sohn und keinen Teilhaber zuzuschreiben, und sagt: Und rühme Ihn mit einem großen Rühmen. Die Lehrperson hebt die Hände so, wie sie es kennt, und sagt das erste Allāhu akbar. Die Kinder sprechen es nur mit, wenn sie es schon sicher können. Wir erkennen: Danach beginnt das Gebet. Vorher reden wir nicht weiter."
+        "situation": "Eine Schülerin fragt, ob in Qurʾān 17:111 schon alle Gebetshaltungen beschrieben werden. Die Lehrperson erklärt den Unterschied zwischen Vers und Sunnah.",
+        "practice": "Wir üben mit der Lehrperson, die Worte Allāhu akbar ruhig und verständlich zu sprechen. Wir erfinden keine zusätzlichen Formeln und führen keine genaue Handhöhe ohne eigenen Beleg als Pflicht vor.",
+        "summary": "Die Takbīrat al-Iḥrām wird mit Allāhu akbar gesprochen. Ein allgemeiner Qurʾān-Vers darf nicht als Quelle für jedes Gebetsdetail ausgegeben werden.",
+        "audioScript": "Takbīrat al-Iḥrām. Assalāmu ʿalaikum! Das Gebet wird mit Allāhu akbar eröffnet. Qurʾān 17:111 fordert das große Lob Allahs. Die konkreten Worte des Eröffnungstakbīr erläutert Ibn Qudāmah aus der Sunnah in al-Mughnī. Wir unterscheiden diese Quellen sorgfältig."
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Takbīrat al-Iḥrām kennenlernen?",
+          "prompt": "Was sagen wir am Anfang des Gebets?",
           "options": [
-            "Am Anfang des Gebets gibt es ein erstes Allāhu akbar.",
-            "Ich merke, wenn jemand immer wieder gemein ist, und sage es einer erwachsenen Person, der ich vertraue."
+            "Allāhu akbar.",
+            "Gute Nacht."
           ],
           "correct": 0,
-          "hint": "Denke an unsere heutige Stunde.",
-          "explain": "Mā schāʾ Allāh! Am Anfang des Gebets gibt es ein erstes Allāhu akbar."
+          "hint": "Wir preisen Allah.",
+          "explain": "Mā schāʾ Allāh! Allāhu akbar."
         },
         {
           "type": "choice",
-          "prompt": "Was können wir heute üben?",
+          "prompt": "Wie heißen die ersten Worte des Gebets als Gebetseröffnung?",
           "options": [
-            "Wir erkennen: Danach beginnt das Gebet. Vorher reden wir nicht weiter.",
-            "Wir üben den Satz: Das ist nicht in Ordnung. Ich bin nicht schuld. Ich sage es einer Lehrperson."
+            "Takbīrat al-Iḥrām.",
+            "Ein erfundener Spielname."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "hint": "Denk an den ersten Takbīr.",
+          "explain": "Allāhumma bārik! Takbīrat al-Iḥrām."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Takbīrat al-Iḥrām kennenlernen?",
+          "prompt": "Was bedeutet Allāhu akbar?",
           "options": [
-            "Ich kann Mobbing von einem einmaligen Versehen unterscheiden, den Vers über Spott wiedergeben und Hilfe holen, ohne mir die Schuld zu geben.",
-            "Am Anfang des Gebets gibt es ein erstes Allāhu akbar."
+            "Allah ist größer.",
+            "Wir beginnen ein Wettspiel."
           ],
-          "correct": 1,
-          "hint": "Worum ging es in der Stunde?",
-          "explain": "Mā schāʾ Allāh! Am Anfang des Gebets gibt es ein erstes Allāhu akbar."
+          "correct": 0,
+          "hint": "Allah wird groß gepriesen.",
+          "explain": "Mā schāʾ Allāh! Wir preisen Allah."
         },
         {
           "type": "choice",
-          "prompt": "Welche Handlung gehört zu unserer Übung?",
+          "prompt": "Was ist Takbīrat al-Iḥrām?",
           "options": [
-            "Wir sagen den Hilfesatz laut und nennen zwei erwachsene Personen, die wir wirklich erreichen können. Danach sagen wir, woran man merkt, dass es immer wieder passiert.",
-            "Wir erkennen: Danach beginnt das Gebet. Vorher reden wir nicht weiter."
+            "Der eröffnende Takbīr des Gebets.",
+            "Ein Gebetsname für die Nacht."
           ],
-          "correct": 1,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "correct": 0,
+          "hint": "Am Anfang des Gebets.",
+          "explain": "Sehr gut! Das ist die Gebetseröffnung."
         },
         {
           "type": "text",
-          "prompt": "Was möchtest du dir aus Qurʾān 17:111 merken?",
-          "sample": "Der Vers endet damit, Allah zu loben, Ihm keinen Sohn und keinen Teilhaber zuzuschreiben, und sagt: Und rühme Ihn mit einem großen Rühmen.",
-          "hint": "Erkläre die Stelle in eigenen Worten.",
-          "explain": "Mā schāʾ Allāh! Wir bleiben bei dem, was wir aus dem Qurʾān lernen."
+          "prompt": "Welche Worte lernen wir für den Beginn des Gebets?",
+          "sample": "Allāhu akbar.",
+          "hint": "Zwei arabische Wörter.",
+          "explain": "Allāhumma bārik! Du hast die Worte gelernt."
         }
       ],
       "9-10": [
         {
-          "type": "text",
-          "prompt": "Erkläre in eigenen Worten, was wir aus Qurʾān 17:111 lernen.",
-          "sample": "Der Vers endet damit, Allah zu loben, Ihm keinen Sohn und keinen Teilhaber zuzuschreiben, und sagt: Und rühme Ihn mit einem großen Rühmen.",
-          "hint": "Denke an die Bedeutung der Stelle.",
-          "explain": "Mā schāʾ Allāh! Du hast den Vers aufmerksam erklärt."
-        },
-        {
-          "type": "text",
-          "prompt": "Was wäre in dieser Situation ein guter Schritt? Die Lehrperson hebt die Hände so, wie sie es kennt, und sagt das erste Allāhu akbar. Die Kinder sprechen es nur mit, wenn sie es schon sicher können.",
-          "sample": "Wir erkennen: Danach beginnt das Gebet. Vorher reden wir nicht weiter.",
-          "hint": "Denke an unsere Übung.",
-          "explain": "Allāhumma bārik! Du hast einen passenden Schritt überlegt."
-        },
-        {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Welche Quelle erläutert die Formel des Gebetsbeginns über Qurʾān 17:111 hinaus?",
           "options": [
-            "Am Anfang des Gebets gibt es ein erstes Allāhu akbar.",
-            "Ich kann Mobbing von einem einmaligen Versehen unterscheiden, den Vers über Spott wiedergeben und Hilfe holen, ohne mir die Schuld zu geben."
+            "Ibn Qudāmah, al-Mughnī, unter Berufung auf die Sunnah.",
+            "Die Behauptung, 17:111 erkläre alle Handstellungen."
           ],
           "correct": 0,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "hint": "Klassische Fiqh-Erklärung.",
+          "explain": "Al-Mughnī bespricht die aus der Sunnah bekannte Gebetseröffnung."
+        },
+        {
+          "type": "text",
+          "prompt": "Warum nennen wir Qurʾān 17:111 nicht als alleinigen Beleg für die Takbīrat al-Iḥrām?",
+          "sample": "Weil der Vers Allahs großes Lob erwähnt, aber nicht selbst alle Einzelheiten des Gebetseröffnens beschreibt.",
+          "hint": "Trenne allgemeines Lob von Gebetshandlung.",
+          "explain": "Mā schāʾ Allāh! Die Unterscheidung schützt vor falschen Quellenangaben."
+        },
+        {
+          "type": "text",
+          "prompt": "Wie lautet die Eröffnungsformel und was bedeutet sie?",
+          "sample": "Allāhu akbar bedeutet: Allah ist größer.",
+          "hint": "Zwei arabische Wörter.",
+          "explain": "Allāhumma bārik! Du kennst die Eröffnung."
         }
       ]
     },
@@ -16908,9 +16938,9 @@ const additions=
         "de": "Allāhu akbar sagen; die Gebetseinzelheit ist hier Lehrerübung"
       }
     ],
-    "practice": "Wir erkennen: Danach beginnt das Gebet. Vorher reden wir nicht weiter.",
-    "summary": "Am Anfang des Gebets gibt es ein erstes Allāhu akbar. Der Vers endet damit, Allah zu loben, Ihm keinen Sohn und keinen Teilhaber zuzuschreiben, und sagt: Und rühme Ihn mit einem großen Rühmen.",
-    "audioScript": "Takbīrat al-Iḥrām kennenlernen. Am Anfang des Gebets gibt es ein erstes Allāhu akbar. Der Vers endet damit, Allah zu loben, Ihm keinen Sohn und keinen Teilhaber zuzuschreiben, und sagt: Und rühme Ihn mit einem großen Rühmen. Die Lehrperson hebt die Hände so, wie sie es kennt, und sagt das erste Allāhu akbar. Die Kinder sprechen es nur mit, wenn sie es schon sicher können. Wir erkennen: Danach beginnt das Gebet. Vorher reden wir nicht weiter.",
+    "practice": "Wir üben mit der Lehrperson, die Worte Allāhu akbar ruhig und verständlich zu sprechen. Wir erfinden keine zusätzlichen Formeln und führen keine genaue Handhöhe ohne eigenen Beleg als Pflicht vor.",
+    "summary": "Mit Allāhu akbar beginnt die Eröffnung des Gebets. Das nennt man Takbīrat al-Iḥrām.",
+    "audioScript": "Takbīrat al-Iḥrām. Assalāmu ʿalaikum! Mit den Worten Allāhu akbar beginnen wir das Gebet. Das heißt Takbīrat al-Iḥrām. Die genauen Regeln dazu erläutern die Sunnah und die Gelehrten. Wir sprechen die Worte ruhig mit der Lehrperson.",
     "voiceApproved": false
   },
   "tawhid-im-alltag": {
