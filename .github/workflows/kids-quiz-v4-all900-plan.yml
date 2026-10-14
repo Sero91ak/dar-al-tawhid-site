@@ -65,6 +65,7 @@ jobs:
         run: |
           python3 -m py_compile kids/tools/quiz_v4_all900_audio_assembler.py kids/tools/quiz_v4_all900_release_gate.py
           python3 kids/tools/quiz_v4_all900_audio_assembler.py --audit
+          python3 kids/tools/quiz_v4_all900_audio_assembler.py --self-test
           python3 kids/tools/quiz_v4_all900_release_gate.py
 
       - name: Save versioned planning artifact on review branch
