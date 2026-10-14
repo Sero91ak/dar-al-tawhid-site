@@ -19397,8 +19397,20 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Der Vers nennt die Verbeugung und die Niederwerfung, beschreibt aber nicht, wie weit der Rücken geneigt ist. al-Mughnī wurde nicht gelesen. Die Rechtsform bleibt ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
-      "editorialScopeNote": "Der Vers nennt die Verbeugung und die Niederwerfung, beschreibt aber nicht, wie weit der Rücken geneigt ist. al-Mughnī wurde nicht gelesen. Die Rechtsform bleibt ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft."
+      "note": "Qurʾān 22:77 fordert Rukūʿ und Suǧūd, beschreibt aber keine detaillierte Körperhaltung. Klassischer Teilabgleich: Ibn Qudāmah, al-Mughnī 15/570 (Bd. 1, S. 295–296), unterscheidet Verbeugung und empfohlene Handhaltung auf den Knien und erwähnt körperliche Einschränkungen. Hadithnummern und weitere Detailfragen bleiben zur separaten Prüfung offen.",
+      "editorialScopeNote": "Qurʾān 22:77 fordert Rukūʿ und Suǧūd, beschreibt aber keine detaillierte Körperhaltung. Klassischer Teilabgleich: Ibn Qudāmah, al-Mughnī 15/570 (Bd. 1, S. 295–296), unterscheidet Verbeugung und empfohlene Handhaltung auf den Knien und erwähnt körperliche Einschränkungen. Hadithnummern und weitere Detailfragen bleiben zur separaten Prüfung offen.",
+      "hanbaliPrimaryCrossCheck": {
+        "status": "primary-passage-read-partial-not-approved",
+        "checkedOn": "2026-10-14",
+        "author": "Ibn Qudāmah",
+        "work": "al-Mughnī",
+        "locus": "Kitāb aṣ-Ṣalāh, Ṣifat aṣ-Ṣalāh, Masʾalah 691, Bd. 1, S. 295–296",
+        "directLink": "https://islamweb.net/ar/library/content/15/570",
+        "arabicKeywords": "يستحب للراكع أن يضع يديه على ركبتيه; والواجب من ذلك الانحناء",
+        "summary": "Hände auf Knien empfohlen; Verbeugung davon unterschieden; Einschränkungen berücksichtigt.",
+        "limitations": "Hadithnummern nicht unabhängig aus den Sammlungen abgeglichen; keine wissenschaftliche Endfreigabe.",
+        "scientificApproval": false
+      }
     },
     "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
     "sample": "Die Verbeugung im Gebet üben wir mit einer Lehrperson.",
@@ -19486,83 +19498,83 @@ const additions=
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Rukūʿ kennenlernen?",
+          "prompt": "Wie nennen wir die Verbeugung im Gebet?",
           "options": [
-            "Die Verbeugung im Gebet üben wir mit einer Lehrperson.",
-            "Bei einer Berührung, die sich falsch anfühlt, sagen wir Nein und holen eine Vertrauensperson."
+            "Rukūʿ.",
+            "Suǧūd."
           ],
           "correct": 0,
-          "hint": "Denke an unsere heutige Stunde.",
-          "explain": "Mā schāʾ Allāh! Die Verbeugung im Gebet üben wir mit einer Lehrperson."
+          "hint": "Rukūʿ bedeutet Verbeugung.",
+          "explain": "Mā schāʾ Allāh! Rukūʿ ist die Verbeugung, Suǧūd die Niederwerfung."
         },
         {
           "type": "choice",
-          "prompt": "Was können wir heute üben?",
+          "prompt": "Wie üben wir Rukūʿ?",
           "options": [
-            "Wir nennen das Wort Rukūʿ und sagen, dass der Winkel nicht aus diesem Vers stammt.",
-            "Wir üben nur den Satz und den Weg zu einer bekannten erwachsenen Person. Wir spielen keine Berührung nach."
+            "Langsam und ohne Schmerzen, mit guter Anleitung.",
+            "Wir drücken ein anderes Kind in die Haltung."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "hint": "Achte auf deinen Körper.",
+          "explain": "Allāhumma bārik! Eine gute Lehrperson hilft beim sicheren Üben."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Rukūʿ kennenlernen?",
+          "prompt": "Welche Gebetsbewegungen nennt Qurʾān 22:77?",
           "options": [
-            "Bei einer Berührung, die sich falsch anfühlt, sagen wir Nein und holen eine Vertrauensperson.",
-            "Die Verbeugung im Gebet üben wir mit einer Lehrperson."
+            "Rukūʿ und Suǧūd.",
+            "Nur das Sitzen nach dem Gebet."
           ],
-          "correct": 1,
-          "hint": "Worum ging es in der Stunde?",
-          "explain": "Mā schāʾ Allāh! Die Verbeugung im Gebet üben wir mit einer Lehrperson."
+          "correct": 0,
+          "hint": "Denke an Verbeugung und Niederwerfung.",
+          "explain": "Mā schāʾ Allāh! Der Vers nennt die Verbeugung und die Niederwerfung."
         },
         {
           "type": "choice",
-          "prompt": "Welche Handlung gehört zu unserer Übung?",
+          "prompt": "Welche Handhaltung beschreibt Ibn Qudāmah als empfohlen?",
           "options": [
-            "Wir üben nur den Satz und den Weg zu einer bekannten erwachsenen Person. Wir spielen keine Berührung nach.",
-            "Wir nennen das Wort Rukūʿ und sagen, dass der Winkel nicht aus diesem Vers stammt."
+            "Die Hände beim Rukūʿ auf die Knie legen.",
+            "Die Hände unbedingt hinter dem Rücken halten."
           ],
-          "correct": 1,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "correct": 0,
+          "hint": "Denke an die Knie.",
+          "explain": "Sehr gut! Das Auflegen auf die Knie wird als empfohlen beschrieben, nicht als eigene Pflicht."
         },
         {
           "type": "text",
-          "prompt": "Was möchtest du dir aus Qurʾān 22:77 merken?",
-          "sample": "Der Vers fordert die Glaubenden auf: Verbeugt euch, werft euch nieder, dient eurem Herrn und tut das Gute.",
-          "hint": "Erkläre die Stelle in eigenen Worten.",
-          "explain": "Mā schāʾ Allāh! Wir bleiben bei dem, was wir aus dem Qurʾān lernen."
+          "prompt": "Was tust du, wenn die Verbeugung beim Üben weh tut?",
+          "sample": "Ich erzwinge keine schmerzhafte Bewegung und bitte eine fachkundige erwachsene Person um Hilfe.",
+          "hint": "Sicheres Üben ist wichtiger als eine erzwungene Haltung.",
+          "explain": "Allāhumma bārik! Wir lernen ohne Druck oder Schmerzen."
         }
       ],
       "9-10": [
         {
           "type": "text",
-          "prompt": "Erkläre in eigenen Worten, was wir aus Qurʾān 22:77 lernen.",
-          "sample": "Der Vers fordert die Glaubenden auf: Verbeugt euch, werft euch nieder, dient eurem Herrn und tut das Gute.",
-          "hint": "Denke an die Bedeutung der Stelle.",
-          "explain": "Mā schāʾ Allāh! Du hast den Vers aufmerksam erklärt."
-        },
-        {
-          "type": "text",
-          "prompt": "Was wäre in dieser Situation ein guter Schritt? Die Lehrperson zeigt die Verbeugung. Die Kinder machen sie langsam mit und richten sich wieder auf, ohne ein Maß zu erfinden.",
-          "sample": "Wir nennen das Wort Rukūʿ und sagen, dass der Winkel nicht aus diesem Vers stammt.",
-          "hint": "Denke an unsere Übung.",
-          "explain": "Allāhumma bārik! Du hast einen passenden Schritt überlegt."
+          "prompt": "Was sagt Qurʾān 22:77 über Rukūʿ – und was beschreibt der Vers nicht?",
+          "sample": "Der Vers fordert zur Verbeugung und Niederwerfung auf. Die genaue Handhaltung wird dort nicht erläutert.",
+          "hint": "Trenne Versbedeutung von der praktischen Ausführung.",
+          "explain": "Mā schāʾ Allāh! Du trennst den Qurʾān-Wortlaut von Fiqh-Einzelheiten."
         },
         {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Welche Unterscheidung trifft Ibn Qudāmah in al-Mughnī?",
           "options": [
-            "Die Verbeugung im Gebet üben wir mit einer Lehrperson.",
-            "Bei einer Berührung, die sich falsch anfühlt, sagen wir Nein und holen eine Vertrauensperson."
+            "Die Verbeugung ist erforderlich, die besprochene Handhaltung auf den Knien empfohlen.",
+            "Das Auflegen beider Hände ist eine zusätzliche Gebetsformel."
           ],
           "correct": 0,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "hint": "Nicht jede Einzelheit hat denselben rechtlichen Rang.",
+          "explain": "Allāhumma bārik! Ibn Qudāmah unterscheidet die Verbeugung und die empfohlene Handhaltung."
+        },
+        {
+          "type": "text",
+          "prompt": "Wie gehen wir bei Schmerzen oder eingeschränkter Beweglichkeit mit Rukūʿ-Übungen um?",
+          "sample": "Wir erzwingen keine Haltung und lassen die Übung fachkundig an die Möglichkeiten des Kindes anpassen.",
+          "hint": "Denke an Rücksicht und die im Fiqh erwähnten körperlichen Einschränkungen.",
+          "explain": "Sehr gut! Lernen muss sicher und rücksichtsvoll bleiben."
         }
       ]
     },
