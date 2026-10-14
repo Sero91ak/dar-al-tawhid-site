@@ -1,3 +1,11 @@
+## 14.10.2026 · Quizredaktion V39–V41 und zusätzliche Quellenprüfung
+
+- **Slots 99–134:** 36 Lektionen mit insgesamt **288 eigens formulierten altersbezogenen Quizfragen** auf V39, V40 und V41; korrekt nach V38 in `kids/akademie/index.html` eingebunden. Lernziele, Qurʾān-Originaltexte, IDs und Freigabestatus beibehalten. **Nächste offene Quizredaktion: Slots 135–208 (74 Lektionen).**
+- **Spezifische Prüfskripte** `kids/tools/test-academy-v39-quiz-v1.cjs`, `test-academy-v40-quiz-v1.cjs` und `test-academy-v41-quiz-v1.cjs` hinterlegt. Simulierte JavaScript-Ladung der drei Module war erfolgreich, voller Node-/Browser-Lauf noch nicht ausgeführt.
+- **Zusätzliche Quellenakte 106:** `kids-akademie/research/FIQH-106-REVIEW.md` mit direkt gelesenen Ibn-Kaṯīr- und al-Mughnī-Fundstellen; drei neue Registereinträge (`SRC-FIQH106-*`). Keine vollständige Fiqh- oder Kinderfreigabe.
+- **Unverändert:** 0/624 wissenschaftlich freigegebene Altersfassungen, keine Audioerzeugung, kein Merge auf `main`, kein Live-Deploy.
+- Achtung: Es existieren weitere **unabhängige Fiqh-Überarbeitungen** im selben Arbeitszweig (siehe darunter); bei Fortsetzung jeweils den aktuellen GitHub-Kopf prüfen, nicht blind überschreiben.
+
 ## 14.10.2026 · Fiqh-Lektion 142 nachgearbeitet
 
 - **Slot 142 – fünf Gebetsnamen:** Statt einer Übung über fehlende Quellenangaben lernen die Kinder jetzt tatsächlich **Faǧr, Ẓuhr, ʿAṣr, Maġrib, ʿIšāʾ**. Drei Altersfassungen, acht Quizfragen, sprechbare Texte und Text-Audioplan aktualisiert. Klassische Quelle `al-Mughnī`, Bd. 1, S. 224 ff. (Islamweb 15/425, 15/428, 15/429).
