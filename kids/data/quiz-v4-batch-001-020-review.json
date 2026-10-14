@@ -28,7 +28,7 @@
     "catalogQuestionsVerified": 20,
     "correctAnswersVerified": 20,
     "sourceReferencesPresent": 20,
-    "audioRenderedForAllQuestionStates": 5,
+    "audioRenderedForAllQuestionStates": 6,
     "humanAudioApproved": 0,
     "audioOriginalGenerationCount": 10,
     "audioHumanApproved": 0,
@@ -544,9 +544,45 @@
       "originalExplanation": "Allah lehrt uns, zu den Menschen gute Worte zu sprechen.",
       "source": "Qurʾān 2:83",
       "pronunciationQA": "pending-human-approval",
-      "audioQA": "not-generated",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
       "published": false,
-      "recordingStatus": "awaiting-v4-recording"
+      "recordingStatus": "awaiting-v4-recording",
+      "recordings": [
+        {
+          "part": "question",
+          "modelId": "eleven_v4",
+          "flowId": "Ry0G0TTcsD3ol3EQyzYT",
+          "sessionId": "4sck2m7FR12tgKQjU05W",
+          "status": "completed",
+          "generationId": "J10ZSClRpcQ6InUW8BY3",
+          "credits": 126.9476563876652,
+          "durationSeconds": 9.36
+        },
+        {
+          "part": "correct",
+          "generationId": "fZ1VIkCQEsdIxFQ2hwjF",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "retry",
+          "generationId": "ddgJqQDhBo32kbRKEMe2",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "explanation",
+          "modelId": "eleven_v4",
+          "flowId": "Ry0G0TTcsD3ol3EQyzYT",
+          "sessionId": "KTRvdAdLgZzZPp5whHoH",
+          "status": "completed",
+          "generationId": "aLorgiuSCXCfhUqt5dNf",
+          "credits": 73.64902202643172,
+          "durationSeconds": 5.04
+        }
+      ]
     },
     {
       "questionId": "kids-quiz-010",
@@ -565,9 +601,45 @@
       "originalExplanation": "Allah verbietet sogar ein verächtliches Wort gegenüber den Eltern.",
       "source": "Qurʾān 17:23",
       "pronunciationQA": "pending-human-approval",
-      "audioQA": "not-generated",
+      "audioQA": "generation-started-review-status",
       "published": false,
-      "recordingStatus": "awaiting-v4-recording"
+      "recordingStatus": "awaiting-v4-recording",
+      "recordings": [
+        {
+          "part": "question",
+          "modelId": "eleven_v4",
+          "flowId": "Ry0G0TTcsD3ol3EQyzYT",
+          "sessionId": "48Ym51iG3udtZILNKQsy",
+          "status": "pending",
+          "generationId": "Vy04Al9JHiGHpCxJ71Tw",
+          "credits": 156.988704845815,
+          "durationSeconds": null
+        },
+        {
+          "part": "correct",
+          "generationId": "WxoYkACzIX3S8abYxVUj",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "retry",
+          "generationId": "gDb5M7BuACNw47ZwudZ3",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "explanation",
+          "modelId": "eleven_v4",
+          "flowId": "Ry0G0TTcsD3ol3EQyzYT",
+          "sessionId": "mcpNp9vyLGxRSBbLMGF5",
+          "status": "pending",
+          "generationId": "yMPtDThKOpR6IKPHbcj1",
+          "credits": 83.33968281938324,
+          "durationSeconds": null
+        }
+      ]
     },
     {
       "questionId": "kids-quiz-011",
@@ -791,6 +863,6 @@
     "Nach genau 2 Fragen ist der kostenpflichtige Mini-Durchlauf gestoppt. Weitere 18 sind Textplanung, noch keine neuen Audios.",
     "Fehlversuchssatz #006/#011/#016 an synchronisierten JS/Python Vertrag angeglichen; keine Erfolgsgarantie."
   ],
-  "actualPaidCreditsThisBatch": 2164.8936211453747,
+  "actualPaidCreditsThisBatch": 2605.8186872246697,
   "previouslyPaidCreditsReusedForQuestion002": 122.102325991
 }
