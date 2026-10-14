@@ -1,3 +1,11 @@
+## 14.10.2026 · Unterricht 123–126 ebenfalls redaktionell überarbeitet
+
+- **Vier weitere Lektionen / zwölf Altersfassungen** auf dem PR-Arbeitszweig; Modul `kids/akademie/curriculum-editorial-123-126-v1.js` ist nach 119–122 in der Akademie-Vorschau eingebunden. Bestehende Lektions-IDs, Quizfragen, Lernfortschritt und Freigaben bleiben erhalten.
+- **Wichtige Quellenkorrektur bei Slot 125:** Qurʾān 99:7 wird arabisch nur bis `خَيْرًا يَرَهُ` dargestellt; der zuvor versehentlich mitgespeicherte Satz zu Schlechtem gehört zu **99:8**. Kein automatisches wissenschaftliches Freigabeprädikat.
+- Unvertonte deutsche Texte: `kids/data/academy-voice-editorial-123-126-delta-v1.json` mit **76** Kontexten und **0 Credits**, noch nicht kanonisch in `academy-voice-plan-v38.json` übernommen. Arabische Verslautschrift wurde aus den gesprochenen Kinderzeilen 124 und 125 entfernt, ohne die Qurʾān-Anzeige zu verlieren.
+- Gesonderter Quellenbericht `kids-akademie/research/EDITORIAL_REVIEW_123_126_20261014.md`; Regressionstest `kids/tools/test-academy-editorial-123-126-v1.cjs` hinterlegt. Vollständige Node-/Browser-Regression und endgültige wissenschaftliche Einzelprüfung bleiben ausstehend.
+- **Nächste pädagogische Lektionen: 127–129**, Fiqh 130 weiterhin gesonderter Prüffall. **0/624 Freigaben, kein Audio, kein Merge, kein Live-Deploy.**
+
 ## 14.10.2026 · Unterricht 119–122 einzeln redigiert
 
 - **Jetzt tatsächlich im PR-Draft umgesetzt:** vier Stunden (119–122), **zwölf altersbezogene Unterrichtsfassungen** mit eigenständigem Lernziel, vier inhaltlichen Lerneinheiten, Alltagsbeispiel, Übung, Quellenabgrenzung und Abschluss. Die neue Datei `kids/akademie/curriculum-editorial-119-122-v1.js` wird nach den V44-Fragerevisionen und vor dem Term-Coach geladen. Originale Lektions-IDs, Qurʾān-Texte, Quizfragen und Freigabeattribute bleiben erhalten.
